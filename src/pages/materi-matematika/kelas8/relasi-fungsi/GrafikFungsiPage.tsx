@@ -321,70 +321,88 @@ const GrafikFungsiPage = () => {
                   <p className="font-body text-sm text-white/85 leading-relaxed mb-4">
                     Suatu perusahaan taksi memasang tarif seperti grafik berikut (sumbu-x = jarak tempuh dalam km, sumbu-y = tarif dalam ribuan rupiah).
                   </p>
-                  {/* GRAFIK TARIF TAKSI */}
-                  <div className="bg-slate-900/70 border border-yellow-500/20 rounded-xl p-4">
-                    <svg viewBox="0 0 310 230" className="w-full max-w-sm mx-auto">
-                      {/* Grid */}
-                      {[1,2,3,4,5,6].map(i => (
-                        <g key={i}>
-                          <line x1={55+i*35} y1={15} x2={55+i*35} y2={180} stroke="#1e293b" strokeWidth="1" />
-                          <line x1={55} y1={180-i*25} x2={270} y2={180-i*25} stroke="#1e293b" strokeWidth="1" />
+                  {/* GRAFIK TARIF TAKSI — rekonstruksi dari gambar asli */}
+                  <div className="bg-white border border-yellow-500/20 rounded-xl p-4">
+                    <svg viewBox="0 0 320 240" className="w-full max-w-sm mx-auto">
+                      {/* White background */}
+                      <rect x={0} y={0} width={320} height={240} fill="white" />
+                      {/* Chart area: x 70–260, y 20–195 */}
+                      {/* Y scale: 0 at y=195, 30 at y=25 → 170px/30 = 5.667px per unit */}
+                      {/* X scale: 0 at x=70, 6 at x=220 (then extend axis) → 150px/6 = 25px per unit */}
+                      {/* Grid lines — horizontal, every 5 units */}
+                      {[0,5,10,15,20,25,30].map((v) => {
+                        const yPx = 195 - v * (170/30);
+                        return <line key={v} x1={70} y1={yPx} x2={250} y2={yPx} stroke="#d1d5db" strokeWidth="0.8" />;
+                      })}
+                      {/* Axes */}
+                      <line x1={70} y1={20} x2={70} y2={198} stroke="#374151" strokeWidth="1.5" />
+                      <line x1={67} y1={195} x2={260} y2={195} stroke="#374151" strokeWidth="1.5" />
+                      {/* Y labels: 0, 5, 10, 15, 20, 25, 30 */}
+                      {[0,5,10,15,20,25,30].map((v) => {
+                        const yPx = 195 - v * (170/30);
+                        return (
+                          <text key={v} x={58} y={yPx + 3} fill="#374151" fontSize="9" textAnchor="end">{v}</text>
+                        );
+                      })}
+                      {/* "30 Ribuan" label at top-left of y-axis */}
+                      <text x={72} y={16} fill="#374151" fontSize="8.5" fontWeight="bold">30 Ribuan</text>
+                      {/* X labels: 2, 4, 6 */}
+                      {[2,4,6].map((v) => {
+                        const xPx = 70 + v * 25;
+                        return (
+                          <text key={v} x={xPx} y={210} fill="#374151" fontSize="9" textAnchor="middle">{v}</text>
+                        );
+                      })}
+                      {/* X tick marks */}
+                      {[2,4,6].map((v) => {
+                        const xPx = 70 + v * 25;
+                        return <line key={v} x1={xPx} y1={195} x2={xPx} y2={200} stroke="#374151" strokeWidth="1" />;
+                      })}
+                      {/* Data line f(x)=3x+7: (2,13),(4,19),(6,25) */}
+                      {/* x=2 → xPx=120, y=13 → yPx=195-13*(170/30)=195-73.67=121.3 */}
+                      {/* x=4 → xPx=170, y=19 → yPx=195-19*(170/30)=195-107.67=87.3 */}
+                      {/* x=6 → xPx=220, y=25 → yPx=195-25*(170/30)=195-141.67=53.3 */}
+                      <polyline
+                        points="120,121 170,87 220,53"
+                        fill="none" stroke="#3b82f6" strokeWidth="2"
+                      />
+                      {/* Diamond markers */}
+                      {[[120,121,13],[170,87,19],[220,53,25]].map(([cx,cy,label]) => (
+                        <g key={cx}>
+                          <polygon
+                            points={`${cx},${cy-6} ${cx+6},${cy} ${cx},${cy+6} ${cx-6},${cy}`}
+                            fill="#3b82f6" stroke="white" strokeWidth="1"
+                          />
+                          <text x={cx+8} y={cy-4} fill="#1e3a5f" fontSize="9" fontWeight="bold">{label}</text>
                         </g>
                       ))}
-                      {/* Axes */}
-                      <line x1={55} y1={15} x2={55} y2={185} stroke="#475569" strokeWidth="1.5" />
-                      <line x1={50} y1={180} x2={275} y2={180} stroke="#475569" strokeWidth="1.5" />
-                      <polygon points="275,177 275,183 282,180" fill="#475569" />
-                      <polygon points="52,15 58,15 55,8" fill="#475569" />
-                      {/* Axis titles */}
-                      <text x={280} y={184} fill="#94a3b8" fontSize="8">km</text>
-                      <text x={5} y={18} fill="#94a3b8" fontSize="8">Tarif</text>
-                      <text x={3} y={27} fill="#94a3b8" fontSize="8">(ribu Rp)</text>
-                      {/* X axis: 0, 5, 10, 15, 20, 25, 30 */}
-                      {[5,10,15,20,25,30].map((v,i) => (
-                        <text key={v} x={55+(i+1)*35-5} y={195} fill="#64748b" fontSize="8">{v}</text>
-                      ))}
-                      {/* Y axis: 10,20,30,40,50,60,70,80 → scale 25px each = 8 */}
-                      {/* f(x) = 8 + 2.6x; f(0)=8, f(5)=21, f(10)=34, f(15)=47, f(20)=60, f(25)=73, f(30)=86 */}
-                      {/* y_px = 180 - (y_val - 0) * (180-15) / 90 = 180 - y_val * 1.833 */}
-                      {/* x_px = 55 + x_val * 35/5 = 55 + x_val*7 */}
-                      {[10,20,30,40,50,60,70,80].map((v,i) => (
-                        <text key={v} x={32} y={180-(i+1)*20+3} fill="#64748b" fontSize="8">{v}</text>
-                      ))}
-                      <text x={42} y={184} fill="#64748b" fontSize="8">0</text>
-                      <text x={130} y={215} fill="#94a3b8" fontSize="8">Jarak (km)</text>
-                      {/* Line: f(x) = 8 + 2.6x */}
-                      {/* Scale: x_px = 55 + x*7; y_px = 180 - y*2 */}
-                      {/* f(0)=8: (55, 180-16=164); f(30)=86: (265, 180-172=8) */}
-                      <line x1={55} y1={164} x2={265} y2={8} stroke="#fbbf24" strokeWidth="2.5" />
-                      {/* Points at multiples of 5 */}
-                      {[[0,8],[5,21],[10,34],[15,47],[20,60],[25,73],[30,86]].map(([x,y]) => (
-                        <circle key={x} cx={55+x*7} cy={180-y*2} r="3.5" fill="#fbbf24" stroke="#fde68a" strokeWidth="1.5" />
-                      ))}
-                      {/* Highlight x=25, y=73 */}
-                      <line x1={230} y1={180} x2={230} y2={34} stroke="#f97316" strokeWidth="1.5" strokeDasharray="5,3" />
-                      <line x1={55} y1={34} x2={230} y2={34} stroke="#f97316" strokeWidth="1.5" strokeDasharray="5,3" />
-                      <circle cx={230} cy={34} r="5.5" fill="#f97316" stroke="#fdba74" strokeWidth="1.5" />
-                      <text x={235} y={31} fill="#f97316" fontSize="9" fontWeight="bold">(25, 73)</text>
-                      <text x={222} y={196} fill="#f97316" fontSize="9" fontWeight="bold">25</text>
-                      <text x={10} y={37} fill="#f97316" fontSize="9" fontWeight="bold">73</text>
+                      {/* Legend */}
+                      <polygon points="270,60 276,66 270,72 264,66" fill="#3b82f6" stroke="white" strokeWidth="1" />
+                      <line x1={258} y1={66} x2={282} y2={66} stroke="#3b82f6" strokeWidth="1.5" />
+                      <text x={285} y={70} fill="#374151" fontSize="9">jarak</text>
+                      {/* Highlight x=5 */}
+                      <line x1={195} y1={195} x2={195} y2={70} stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" />
+                      <line x1={70} y1={70} x2={195} y2={70} stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" />
+                      <circle cx={195} cy={70} r="5" fill="#f97316" stroke="#fdba74" strokeWidth="1.5" />
+                      <text x={192} y={210} fill="#f97316" fontSize="9" fontWeight="bold" textAnchor="middle">5</text>
+                      <text x={60} y={73} fill="#f97316" fontSize="9" fontWeight="bold" textAnchor="end">22</text>
                     </svg>
-                    <p className="text-xs text-center text-white/40 mt-1 font-body">Grafik tarif taksi berdasarkan jarak tempuh</p>
+                    <p className="text-xs text-center text-slate-400 mt-1 font-body">Grafik tarif taksi berdasarkan jarak tempuh</p>
                   </div>
                   <p className="font-body text-sm text-white/85 mt-4">
-                    Una pergi ke rumah nenek yang berjarak <strong className="text-orange-300">25 kilometer</strong>. Berapa tarif taksi yang harus dibayar Una?
+                    Rudi akan menumpang taksi sejauh <strong className="text-orange-300">5 kilometer</strong>. Berapa tarif taksi yang harus dibayar Rudi?
                   </p>
                 </div>
                 <PilihanGanda
                   soal="c2"
                   opsi={[
-                    { kode: "A", teks: "Rp 66.000,00" },
-                    { kode: "B", teks: "Rp 73.000,00" },
-                    { kode: "C", teks: "Rp 82.000,00" },
-                    { kode: "D", teks: "Rp 143.000,00" },
+                    { kode: "A", teks: "Rp 18.000,00" },
+                    { kode: "B", teks: "Rp 20.000,00" },
+                    { kode: "C", teks: "Rp 22.000,00" },
+                    { kode: "D", teks: "Rp 25.000,00" },
                   ]}
-                  kunci="B"
-                  pembahasan="Dari grafik, fungsi tarif adalah f(x) = 8 + 2,6x (dalam ribuan rupiah), di mana 8 = tarif dasar dan 2,6 = tarif per km. Untuk jarak x = 25 km: f(25) = 8 + 2,6 × 25 = 8 + 65 = 73 (ribu) = Rp 73.000,00. Bisa dibaca langsung dari titik (25, 73) pada grafik."
+                  kunci="C"
+                  pembahasan="Dari grafik, pola tarif mengikuti fungsi f(x) = 3x + 7 (dalam ribuan rupiah), dengan 7 = tarif dasar dan 3 = tarif per km. Untuk jarak x = 5 km: f(5) = 3 × 5 + 7 = 15 + 7 = 22 (ribu) = Rp 22.000,00. Nilai ini juga dapat dibaca dari grafik dengan menarik garis dari x = 5 ke atas sampai mengenai garis, lalu ke kiri menuju sumbu-y."
                 />
               </div>
             )}
