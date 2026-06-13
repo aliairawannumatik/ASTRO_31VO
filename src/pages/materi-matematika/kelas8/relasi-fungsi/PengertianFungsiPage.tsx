@@ -112,53 +112,96 @@ const PengertianFungsiPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Fungsi */}
+                  {/* FUNGSI — diagram panah oval */}
                   <div className="bg-green-900/20 border border-green-500/40 rounded-xl p-4">
-                    <p className="font-body text-sm font-bold text-green-300 mb-3 text-center">✅ INI FUNGSI</p>
-                    <div className="flex gap-3 justify-center items-start">
-                      <div className="bg-slate-800/60 rounded-xl px-3 py-2 text-center">
-                        <p className="text-xs text-cyan-400 font-bold mb-1">A</p>
-                        {["a", "b", "c"].map(x => (
-                          <div key={x} className="bg-cyan-800/40 rounded px-2 py-0.5 mb-1 text-cyan-200 text-xs font-bold">{x}</div>
+                    <p className="font-body text-sm font-bold text-green-300 mb-2 text-center">✅ INI FUNGSI</p>
+                    <div className="flex justify-center">
+                      <svg width="230" height="195" viewBox="0 0 230 195">
+                        <defs>
+                          <marker id="fv-ok" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+                            <polygon points="0,0 7,2.5 0,5" fill="#22c55e"/>
+                          </marker>
+                        </defs>
+                        {/* Domain oval A */}
+                        <ellipse cx="57" cy="100" rx="50" ry="85" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
+                        <text x="57" y="13" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
+                        <text x="57" y="188" textAnchor="middle" fill="#06b6d4" fontSize="8" opacity="0.55">Domain</text>
+                        {/* A elements */}
+                        {([["a",48],["b",100],["c",152]] as [string,number][]).map(([el,y]) => (
+                          <g key={el}>
+                            <ellipse cx={57} cy={y} rx={16} ry={11} fill="rgba(6,182,212,0.18)" stroke="#06b6d4" strokeWidth="1.2"/>
+                            <text x={57} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="12" fontWeight="bold">{el}</text>
+                          </g>
                         ))}
-                      </div>
-                      <div className="flex flex-col gap-1 pt-5">
-                        <span className="text-green-400 text-sm">→</span>
-                        <span className="text-green-400 text-sm">→</span>
-                        <span className="text-green-400 text-sm">→</span>
-                      </div>
-                      <div className="bg-slate-800/60 rounded-xl px-3 py-2 text-center">
-                        <p className="text-xs text-violet-400 font-bold mb-1">B</p>
-                        {["1", "2", "3", "4"].map(x => (
-                          <div key={x} className="bg-violet-800/40 rounded px-2 py-0.5 mb-1 text-violet-200 text-xs font-bold">{x}</div>
+                        {/* Kodomain oval B */}
+                        <ellipse cx="175" cy="103" rx="50" ry="88" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
+                        <text x="175" y="13" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
+                        <text x="175" y="192" textAnchor="middle" fill="#8b5cf6" fontSize="8" opacity="0.55">Kodomain</text>
+                        {/* B elements */}
+                        {([["1",44],["2",82],["3",120],["4",158]] as [string,number][]).map(([el,y]) => (
+                          <g key={el}>
+                            <ellipse cx={175} cy={y} rx={16} ry={11} fill="rgba(139,92,246,0.18)" stroke="#8b5cf6" strokeWidth="1.2"/>
+                            <text x={175} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
+                          </g>
                         ))}
-                      </div>
+                        {/* Arrows: a→1, b→1, c→3 */}
+                        <path d="M73,48 C110,48 138,44 159,44" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fv-ok)"/>
+                        <path d="M73,100 C100,92 138,62 159,44" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fv-ok)"/>
+                        <path d="M73,152 C105,152 138,128 159,120" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fv-ok)"/>
+                      </svg>
                     </div>
-                    <p className="text-xs text-white/50 text-center mt-2">a→1, b→1, c→3<br/>Tiap anggota A tepat 1 pasangan</p>
+                    <p className="text-xs text-white/50 text-center mt-1">a→1, b→1, c→3 · Tiap anggota A tepat 1 panah ✓</p>
                   </div>
-                  {/* Bukan Fungsi */}
+
+                  {/* BUKAN FUNGSI — diagram panah oval */}
                   <div className="bg-red-900/20 border border-red-500/40 rounded-xl p-4">
-                    <p className="font-body text-sm font-bold text-red-300 mb-3 text-center">❌ BUKAN FUNGSI</p>
-                    <div className="flex gap-3 justify-center items-start">
-                      <div className="bg-slate-800/60 rounded-xl px-3 py-2 text-center">
-                        <p className="text-xs text-cyan-400 font-bold mb-1">A</p>
-                        {["a", "b", "c"].map(x => (
-                          <div key={x} className="bg-cyan-800/40 rounded px-2 py-0.5 mb-1 text-cyan-200 text-xs font-bold">{x}</div>
+                    <p className="font-body text-sm font-bold text-red-300 mb-2 text-center">❌ BUKAN FUNGSI</p>
+                    <div className="flex justify-center">
+                      <svg width="230" height="185" viewBox="0 0 230 185">
+                        <defs>
+                          <marker id="bfv-ok" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+                            <polygon points="0,0 7,2.5 0,5" fill="#22c55e"/>
+                          </marker>
+                          <marker id="bfv-err" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+                            <polygon points="0,0 7,2.5 0,5" fill="#ef4444"/>
+                          </marker>
+                        </defs>
+                        {/* Domain oval A */}
+                        <ellipse cx="57" cy="93" rx="50" ry="80" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
+                        <text x="57" y="11" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
+                        {/* A elements — b highlighted red */}
+                        {([["a",48],["b",93],["c",138]] as [string,number][]).map(([el,y]) => (
+                          <g key={el}>
+                            <ellipse cx={57} cy={y} rx={16} ry={11}
+                              fill={el==="b" ? "rgba(239,68,68,0.22)" : "rgba(6,182,212,0.18)"}
+                              stroke={el==="b" ? "#ef4444" : "#06b6d4"} strokeWidth="1.2"/>
+                            <text x={57} y={y+4} textAnchor="middle"
+                              fill={el==="b" ? "#fca5a5" : "#cffafe"} fontSize="12" fontWeight="bold">{el}</text>
+                          </g>
                         ))}
-                      </div>
-                      <div className="flex flex-col gap-1 pt-3">
-                        <span className="text-red-400 text-sm">→</span>
-                        <span className="text-red-400 text-sm">⇉</span>
-                        <span className="text-red-400 text-xs">(2 arah!)</span>
-                      </div>
-                      <div className="bg-slate-800/60 rounded-xl px-3 py-2 text-center">
-                        <p className="text-xs text-violet-400 font-bold mb-1">B</p>
-                        {["1", "2", "3"].map(x => (
-                          <div key={x} className="bg-violet-800/40 rounded px-2 py-0.5 mb-1 text-violet-200 text-xs font-bold">{x}</div>
+                        {/* Kodomain oval B */}
+                        <ellipse cx="175" cy="93" rx="50" ry="80" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
+                        <text x="175" y="11" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
+                        {/* B elements */}
+                        {([["1",48],["2",93],["3",138]] as [string,number][]).map(([el,y]) => (
+                          <g key={el}>
+                            <ellipse cx={175} cy={y} rx={16} ry={11} fill="rgba(139,92,246,0.18)" stroke="#8b5cf6" strokeWidth="1.2"/>
+                            <text x={175} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
+                          </g>
                         ))}
-                      </div>
+                        {/* Arrows: a→1 ok, b→1 err, b→3 err, c→2 ok */}
+                        <path d="M73,48 C108,48 140,48 159,48" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#bfv-ok)"/>
+                        <path d="M73,93 C98,78 138,60 159,48" fill="none" stroke="#ef4444" strokeWidth="2" strokeDasharray="6,3" markerEnd="url(#bfv-err)"/>
+                        <path d="M73,93 C98,108 138,128 159,138" fill="none" stroke="#ef4444" strokeWidth="2" strokeDasharray="6,3" markerEnd="url(#bfv-err)"/>
+                        <path d="M73,138 C105,138 140,100 159,93" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#bfv-ok)"/>
+                        {/* "2 panah!" label */}
+                        <text x="116" y="78" textAnchor="middle" fill="#ef4444" fontSize="8.5" fontWeight="bold">2 panah!</text>
+                        <text x="116" y="88" textAnchor="middle" fill="#ef4444" fontSize="7.5" opacity="0.8">↑ tidak boleh</text>
+                      </svg>
                     </div>
-                    <p className="text-xs text-white/50 text-center mt-2">a→1, b→1, b→3<br/><span className="text-red-400">b punya 2 pasangan!</span></p>
+                    <p className="text-xs text-white/50 text-center mt-1">
+                      <span className="text-red-400">b → 1 dan b → 3 ✗ · b punya 2 panah!</span>
+                    </p>
                   </div>
                 </div>
 
