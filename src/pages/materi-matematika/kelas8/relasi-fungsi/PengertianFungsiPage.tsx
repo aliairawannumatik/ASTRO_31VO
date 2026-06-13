@@ -15,7 +15,7 @@ const PengertianFungsiPage = () => {
   ]);
   const [soal4Answers, setSoal4Answers] = useState<Record<number,"fungsi"|"bukan">>({});
   const [soal4Checked, setSoal4Checked] = useState(false);
-  const soal4Correct: Record<number,"fungsi"|"bukan"> = {1:"fungsi",2:"fungsi",3:"bukan",4:"fungsi",5:"bukan"};
+  const soal4Correct: Record<number,"fungsi"|"bukan"> = {1:"fungsi",2:"fungsi",3:"bukan",4:"fungsi",5:"bukan",6:"fungsi"};
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -671,8 +671,8 @@ const PengertianFungsiPage = () => {
                           <text x="129" y="82" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
                           <text x="129" y="121" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
                           <path d="M61,39 C88,39 97,39 113,39" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d3g)"/>
-                          <path d="M61,78 C84,65 100,50 113,39" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeDasharray="5,3" markerEnd="url(#arr-d3r)"/>
-                          <path d="M61,78 C84,92 100,108 113,117" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeDasharray="5,3" markerEnd="url(#arr-d3r)"/>
+                          <path d="M61,78 C84,65 100,50 113,39" fill="none" stroke="#ef4444" strokeWidth="1.8" markerEnd="url(#arr-d3r)"/>
+                          <path d="M61,78 C84,92 100,108 113,117" fill="none" stroke="#ef4444" strokeWidth="1.8" markerEnd="url(#arr-d3r)"/>
                           <path d="M61,117 C85,117 97,88 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d3g)"/>
                           <text x="87" y="72" textAnchor="middle" fill="#ef4444" fontSize="7.5" fontWeight="bold">2 panah!</text>
                         </svg>
@@ -721,9 +721,29 @@ const PengertianFungsiPage = () => {
                           <path d="M61,27 C86,27 100,80 113,86" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
                           <path d="M61,62 C86,55 100,50 113,44" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
                           <path d="M61,136 C86,136 100,132 113,130" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
-                          <path d="M61,99 C78,99 96,99 104,99" fill="none" stroke="#f97316" strokeWidth="1.4" strokeDasharray="4,3" opacity="0.8"/>
-                          <text x="108" y="96" fill="#f97316" fontSize="9" fontWeight="bold">?</text>
                           <text x="46" y="160" textAnchor="middle" fill="#f97316" fontSize="7" fontWeight="bold">tak berpasangan!</text>
+                        </svg>
+                      ),
+                    },
+                    {
+                      n: 6,
+                      title: "Diagram 6",
+                      svg: (
+                        <svg width="100%" viewBox="0 0 175 158">
+                          <defs><marker id="arr-d6" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
+                          <ellipse cx="46" cy="79" rx="36" ry="62" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
+                          <text x="46" y="12" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
+                          <text x="46" y="43" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">x</text>
+                          <text x="46" y="79" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">y</text>
+                          <text x="46" y="117" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">z</text>
+                          <ellipse cx="129" cy="79" rx="36" ry="62" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
+                          <text x="129" y="12" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
+                          <text x="129" y="43" textAnchor="middle" fill="#64748b" fontSize="11" fontWeight="bold">1</text>
+                          <text x="129" y="79" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
+                          <text x="129" y="117" textAnchor="middle" fill="#64748b" fontSize="11" fontWeight="bold">3</text>
+                          <path d="M61,39 C88,39 100,60 113,75" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d6)"/>
+                          <path d="M61,75 C88,75 97,75 113,75" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d6)"/>
+                          <path d="M61,113 C88,113 100,95 113,75" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d6)"/>
                         </svg>
                       ),
                     },
@@ -736,7 +756,7 @@ const PengertianFungsiPage = () => {
                       ? (studentCorrect ? "border-green-500/60 bg-green-900/15" : "border-red-500/60 bg-red-900/15")
                       : (chosen ? "border-purple-500/50 bg-purple-900/10" : "border-white/10 bg-slate-800/40");
                     return (
-                      <div key={n} className={`border rounded-xl p-2.5 transition-all ${borderCls} ${n === 5 ? "col-span-2" : ""}`}>
+                      <div key={n} className={`border rounded-xl p-2.5 transition-all ${borderCls}`}>
                         <p className="font-body text-[11px] font-bold text-white/60 text-center mb-1">{title}</p>
                         <div className="flex justify-center">{svg}</div>
                         {!soal4Checked && (
@@ -764,12 +784,12 @@ const PengertianFungsiPage = () => {
                 {/* Cek Jawaban button */}
                 {!soal4Checked && (
                   <button
-                    disabled={Object.keys(soal4Answers).length < 5}
+                    disabled={Object.keys(soal4Answers).length < 6}
                     onClick={() => setSoal4Checked(true)}
                     className="w-full py-2.5 rounded-xl font-body font-bold text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-purple-600/70 hover:bg-purple-500/80 border border-purple-400/50 text-white"
                   >
-                    {Object.keys(soal4Answers).length < 5
-                      ? `Pilih semua jawaban dulu (${Object.keys(soal4Answers).length}/5)`
+                    {Object.keys(soal4Answers).length < 6
+                      ? `Pilih semua jawaban dulu (${Object.keys(soal4Answers).length}/6)`
                       : "🔍 Cek Jawaban"}
                   </button>
                 )}
@@ -778,15 +798,15 @@ const PengertianFungsiPage = () => {
                 {soal4Checked && (
                   <div className="space-y-3">
                     {/* Score */}
-                    <div className={`rounded-xl p-4 border text-center ${[1,2,3,4,5].filter(n => soal4Answers[n] === soal4Correct[n]).length === 5 ? "bg-green-900/20 border-green-500/40" : "bg-yellow-900/20 border-yellow-500/40"}`}>
+                    <div className={`rounded-xl p-4 border text-center ${[1,2,3,4,5,6].filter(n => soal4Answers[n] === soal4Correct[n]).length === 6 ? "bg-green-900/20 border-green-500/40" : "bg-yellow-900/20 border-yellow-500/40"}`}>
                       <p className="font-body text-lg font-bold text-white">
-                        Nilai: <span className="text-green-300">{[1,2,3,4,5].filter(n => soal4Answers[n] === soal4Correct[n]).length}</span>
-                        <span className="text-white/40">/5</span>
+                        Nilai: <span className="text-green-300">{[1,2,3,4,5,6].filter(n => soal4Answers[n] === soal4Correct[n]).length}</span>
+                        <span className="text-white/40">/6</span>
                       </p>
                       <p className="font-body text-xs text-white/50 mt-1">
-                        {[1,2,3,4,5].filter(n => soal4Answers[n] === soal4Correct[n]).length === 5
+                        {[1,2,3,4,5,6].filter(n => soal4Answers[n] === soal4Correct[n]).length === 6
                           ? "🎉 Sempurna! Kamu paham syarat fungsi dengan baik."
-                          : [1,2,3,4,5].filter(n => soal4Answers[n] === soal4Correct[n]).length >= 3
+                          : [1,2,3,4,5,6].filter(n => soal4Answers[n] === soal4Correct[n]).length >= 4
                           ? "👍 Bagus! Review kembali diagram yang salah."
                           : "📖 Coba pelajari lagi syarat fungsi ya!"}
                       </p>
@@ -801,6 +821,7 @@ const PengertianFungsiPage = () => {
                         { n: 3, status: "BUKAN FUNGSI ❌", color: "text-red-300", penj: "Anggota b memiliki DUA panah: b→1 dan b→3. Ini melanggar syarat fungsi — setiap domain hanya boleh punya satu pasangan!" },
                         { n: 4, status: "FUNGSI ✅", color: "text-green-300", penj: "p→2, q→1, r→3. Setiap domain (p,q,r) memiliki tepat satu pasangan di kodomain. Kodomain boleh punya anggota yang tidak berpasangan (elemen 4 tidak dipetakan). Tetap fungsi ✓" },
                         { n: 5, status: "BUKAN FUNGSI ❌", color: "text-red-300", penj: "Anggota c tidak memiliki panah ke kodomain (tidak berpasangan). Ini melanggar syarat fungsi — semua anggota domain wajib punya pasangan!" },
+                        { n: 6, status: "FUNGSI ✅", color: "text-green-300", penj: "x→2, y→2, z→2. Semua anggota domain menunjuk ke satu elemen kodomain yang sama (2). Ini disebut fungsi konstan — tetap sah sebagai fungsi karena setiap domain punya tepat satu pasangan ✓" },
                       ].map(({ n, status, color, penj }) => (
                         <div key={n} className="flex gap-2">
                           <span className="bg-white/10 rounded px-2 py-0.5 text-xs font-bold text-white shrink-0 self-start mt-0.5">D{n}</span>
