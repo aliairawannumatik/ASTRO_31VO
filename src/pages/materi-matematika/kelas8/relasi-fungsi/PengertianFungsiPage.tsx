@@ -462,14 +462,11 @@ const PengertianFungsiPage = () => {
                     {/* Oval B (kodomain) */}
                     <ellipse cx="198" cy="115" rx="52" ry="100" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
                     <text x="198" y="14" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
-                    {/* Kodomain elements: a,b,c,d,e — b,d,e bright (range), a,c dim */}
-                    {([["a",30],["b",66],["c",102],["d",138],["e",174]] as [string,number][]).map(([el,y])=>{
-                      const inRange = el==="b"||el==="d"||el==="e";
-                      return (
-                        <text key={el} x={198} y={y+4} textAnchor="middle"
-                          fill={inRange ? "#e9d5ff" : "#4b5563"} fontSize="13" fontWeight="bold">{el}</text>
-                      );
-                    })}
+                    {/* Kodomain elements: a,b,c,d,e */}
+                    {([["a",30],["b",66],["c",102],["d",138],["e",174]] as [string,number][]).map(([el,y])=>(
+                      <text key={el} x={198} y={y+4} textAnchor="middle"
+                        fill="#e9d5ff" fontSize="13" fontWeight="bold">{el}</text>
+                    ))}
                     {/* Arrows: 1→b, 2→d, 3→b, 4→e */}
                     <path d="M80,50 C118,50 158,60 180,66" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
                     <path d="M80,88 C112,100 148,128 180,138" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
