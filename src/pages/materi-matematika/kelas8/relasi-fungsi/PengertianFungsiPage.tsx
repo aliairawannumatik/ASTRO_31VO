@@ -169,10 +169,7 @@ const PengertianFungsiPage = () => {
                         <text x="57" y="188" textAnchor="middle" fill="#06b6d4" fontSize="8" opacity="0.55">Domain</text>
                         {/* A elements */}
                         {([["a",48],["b",100],["c",152]] as [string,number][]).map(([el,y]) => (
-                          <g key={el}>
-                            <ellipse cx={57} cy={y} rx={16} ry={11} fill="rgba(6,182,212,0.18)" stroke="#06b6d4" strokeWidth="1.2"/>
-                            <text x={57} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="12" fontWeight="bold">{el}</text>
-                          </g>
+                          <text key={el} x={57} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         {/* Kodomain oval B */}
                         <ellipse cx="175" cy="103" rx="50" ry="88" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
@@ -180,10 +177,7 @@ const PengertianFungsiPage = () => {
                         <text x="175" y="192" textAnchor="middle" fill="#8b5cf6" fontSize="8" opacity="0.55">Kodomain</text>
                         {/* B elements */}
                         {([["1",44],["2",82],["3",120],["4",158]] as [string,number][]).map(([el,y]) => (
-                          <g key={el}>
-                            <ellipse cx={175} cy={y} rx={16} ry={11} fill="rgba(139,92,246,0.18)" stroke="#8b5cf6" strokeWidth="1.2"/>
-                            <text x={175} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
-                          </g>
+                          <text key={el} x={175} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         {/* Arrows: a→1, b→1, c→3 */}
                         <path d="M73,48 C110,48 138,44 159,44" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fv-ok)"/>
@@ -211,21 +205,13 @@ const PengertianFungsiPage = () => {
                         <ellipse cx="57" cy="93" rx="50" ry="80" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
                         <text x="57" y="11" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
                         {([["a",48],["b",93],["c",138]] as [string,number][]).map(([el,y]) => (
-                          <g key={el}>
-                            <ellipse cx={57} cy={y} rx={16} ry={11}
-                              fill={el==="b" ? "rgba(239,68,68,0.22)" : "rgba(6,182,212,0.18)"}
-                              stroke={el==="b" ? "#ef4444" : "#06b6d4"} strokeWidth="1.2"/>
-                            <text x={57} y={y+4} textAnchor="middle"
-                              fill={el==="b" ? "#fca5a5" : "#cffafe"} fontSize="12" fontWeight="bold">{el}</text>
-                          </g>
+                          <text key={el} x={57} y={y+4} textAnchor="middle"
+                            fill={el==="b" ? "#fca5a5" : "#cffafe"} fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         <ellipse cx="175" cy="93" rx="50" ry="80" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
                         <text x="175" y="11" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
                         {([["1",48],["2",93],["3",138]] as [string,number][]).map(([el,y]) => (
-                          <g key={el}>
-                            <ellipse cx={175} cy={y} rx={16} ry={11} fill="rgba(139,92,246,0.18)" stroke="#8b5cf6" strokeWidth="1.2"/>
-                            <text x={175} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
-                          </g>
+                          <text key={el} x={175} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         <path d="M73,48 C108,48 140,48 159,48" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#bfv-ok)"/>
                         <path d="M73,93 C98,78 138,60 159,48" fill="none" stroke="#ef4444" strokeWidth="2" strokeDasharray="6,3" markerEnd="url(#bfv-err)"/>
@@ -256,25 +242,18 @@ const PengertianFungsiPage = () => {
                         <text x="57" y="10" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
                         {/* a, b, c = cyan; d = orange (no arrow) */}
                         {([["a",38],["b",78],["c",118]] as [string,number][]).map(([el,y]) => (
-                          <g key={el}>
-                            <ellipse cx={57} cy={y} rx={16} ry={11} fill="rgba(6,182,212,0.18)" stroke="#06b6d4" strokeWidth="1.2"/>
-                            <text x={57} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="12" fontWeight="bold">{el}</text>
-                          </g>
+                          <text key={el} x={57} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         {/* d — highlighted orange, no arrow */}
-                        <ellipse cx="57" cy="168" rx="18" ry="12" fill="rgba(249,115,22,0.18)" stroke="#f97316" strokeWidth="1.5" strokeDasharray="5,3"/>
                         <text x="57" y="172" textAnchor="middle" fill="#fed7aa" fontSize="12" fontWeight="bold">d</text>
                         {/* "tidak ada panah" label from d */}
-                        <path d="M75,168 C92,168 108,168 118,168" fill="none" stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" opacity="0.7"/>
+                        <path d="M68,168 C85,168 105,168 118,168" fill="none" stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" opacity="0.7"/>
                         <text x="122" y="164" fill="#f97316" fontSize="9" fontWeight="bold">?</text>
                         {/* Kodomain oval B */}
                         <ellipse cx="178" cy="100" rx="48" ry="80" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
                         <text x="178" y="18" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
                         {([["1",50],["2",100],["3",152]] as [string,number][]).map(([el,y]) => (
-                          <g key={el}>
-                            <ellipse cx={178} cy={y} rx={16} ry={11} fill="rgba(139,92,246,0.18)" stroke="#8b5cf6" strokeWidth="1.2"/>
-                            <text x={178} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
-                          </g>
+                          <text key={el} x={178} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         {/* Arrows: a→2, b→1, c→3 */}
                         <path d="M73,38 C108,38 145,85 162,100" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#bf2-ok)"/>
@@ -317,10 +296,7 @@ const PengertianFungsiPage = () => {
                         {([
                           ["-2",32],["-1",72],["0",112],["1",152],["2",195]
                         ] as [string,number][]).map(([el,y]) => (
-                          <g key={el}>
-                            <ellipse cx={62} cy={y} rx={18} ry={11} fill="rgba(6,182,212,0.18)" stroke="#06b6d4" strokeWidth="1.2"/>
-                            <text x={62} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">{el}</text>
-                          </g>
+                          <text key={el} x={62} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">{el}</text>
                         ))}
                         {/* Kodomain oval B */}
                         <ellipse cx="208" cy="122" rx="54" ry="110" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
@@ -331,13 +307,8 @@ const PengertianFungsiPage = () => {
                         ] as [string,number][]).map(([el,y]) => {
                           const inRange = el==="1"||el==="2"||el==="5";
                           return (
-                            <g key={el}>
-                              <ellipse cx={208} cy={y} rx={18} ry={11}
-                                fill={inRange ? "rgba(139,92,246,0.25)" : "rgba(100,116,139,0.15)"}
-                                stroke={inRange ? "#8b5cf6" : "#475569"} strokeWidth="1.2"/>
-                              <text x={208} y={y+4} textAnchor="middle"
-                                fill={inRange ? "#e9d5ff" : "#64748b"} fontSize="11" fontWeight="bold">{el}</text>
-                            </g>
+                            <text key={el} x={208} y={y+4} textAnchor="middle"
+                              fill={inRange ? "#e9d5ff" : "#64748b"} fontSize="11" fontWeight="bold">{el}</text>
                           );
                         })}
                         {/* Range bracket — ticks exactly at elements 1(y=32), 2(y=72), 5(y=195) */}
