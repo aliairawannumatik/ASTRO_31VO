@@ -189,6 +189,17 @@ const JarakTitikGarisPage = () => {
                       </div>
                     ))}
                   </div>
+
+                  <div className="flex flex-col items-center gap-2 pt-1">
+                    <img
+                      src="/images/penerapan-jarak-titik-garis.png"
+                      alt="Infografis penerapan penghitungan jarak titik ke garis (point-to-line) dalam 8 bidang nyata"
+                      className="rounded-xl border border-emerald-500/20 shadow-lg w-full object-cover"
+                    />
+                    <p className="text-white/35 text-xs font-body italic text-center">
+                      Infografis: 8 penerapan nyata konsep jarak titik ke garis dalam kehidupan sehari-hari
+                    </p>
+                  </div>
                 </div>
 
                 {/* Kasus garis tegak/datar */}
