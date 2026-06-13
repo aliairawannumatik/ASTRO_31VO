@@ -346,9 +346,6 @@ const PengertianFungsiPage = () => {
                         <line x1="238" y1="32"  x2="247" y2="32"  stroke="#4ade80" strokeWidth="1.8"/>
                         <line x1="238" y1="72"  x2="247" y2="72"  stroke="#4ade80" strokeWidth="1.8"/>
                         <line x1="238" y1="195" x2="247" y2="195" stroke="#4ade80" strokeWidth="1.8"/>
-                        <circle cx="248" cy="32"  r="2.2" fill="#4ade80"/>
-                        <circle cx="248" cy="72"  r="2.2" fill="#4ade80"/>
-                        <circle cx="248" cy="195" r="2.2" fill="#4ade80"/>
                         {/* Arrows: -2→5, -1→2, 0→1, 1→2, 2→5 */}
                         <path d="M80,32 C125,32 165,182 190,195" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fp-ok)"/>
                         <path d="M80,72 C118,72 155,72 190,72" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fp-ok)"/>
