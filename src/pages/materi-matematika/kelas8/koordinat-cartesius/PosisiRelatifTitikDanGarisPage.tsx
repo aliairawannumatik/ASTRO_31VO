@@ -251,22 +251,6 @@ const PosisiRelatifTitikDanGarisPage = () => {
                   </div>
                 </div>
 
-                <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4 space-y-2 text-xs font-body">
-                  <p className="font-bold text-white mb-2">🧭 Cara Membaca Hasil (Δx, Δy):</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      { kondisi: "Δx > 0", arti: "B ada di KANAN A", color: "text-cyan-300" },
-                      { kondisi: "Δx < 0", arti: "B ada di KIRI A", color: "text-cyan-300" },
-                      { kondisi: "Δy > 0", arti: "B ada di ATAS A", color: "text-green-300" },
-                      { kondisi: "Δy < 0", arti: "B ada di BAWAH A", color: "text-green-300" },
-                    ].map(({ kondisi, arti, color }) => (
-                      <div key={kondisi} className="bg-slate-700/40 border border-white/10 rounded-lg p-2">
-                        <p className={`font-mono font-bold ${color}`}>{kondisi}</p>
-                        <p className="text-white/60 mt-0.5">{arti}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             )}
           </div>
@@ -280,8 +264,24 @@ const PosisiRelatifTitikDanGarisPage = () => {
                 <p className="text-white/50 text-xs font-body mt-0.5">Geser titik A (acuan), P, dan Q — posisi relatif otomatis dihitung!</p>
               </div>
             </div>
-            <div className="px-5 py-5">
+            <div className="px-5 py-5 space-y-4">
               <InteraktifTitikAcuan />
+              <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4 space-y-2 text-xs font-body">
+                <p className="font-bold text-white mb-2">🧭 Cara Membaca Hasil (Δx, Δy):</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { kondisi: "Δx > 0", arti: "B ada di KANAN A", color: "text-cyan-300" },
+                    { kondisi: "Δx < 0", arti: "B ada di KIRI A", color: "text-cyan-300" },
+                    { kondisi: "Δy > 0", arti: "B ada di ATAS A", color: "text-green-300" },
+                    { kondisi: "Δy < 0", arti: "B ada di BAWAH A", color: "text-green-300" },
+                  ].map(({ kondisi, arti, color }) => (
+                    <div key={kondisi} className="bg-slate-700/40 border border-white/10 rounded-lg p-2">
+                      <p className={`font-mono font-bold ${color}`}>{kondisi}</p>
+                      <p className="text-white/60 mt-0.5">{arti}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
