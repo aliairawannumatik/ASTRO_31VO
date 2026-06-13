@@ -304,7 +304,7 @@ const PengertianFungsiPage = () => {
                     <p className="font-body text-xs font-bold text-cyan-400">1️⃣ Diagram Panah</p>
                     <p className="font-body text-[10px] text-white/45">Elemen 3 dan 4 di B berwarna redup karena tidak termasuk Range.</p>
                     <div className="flex justify-center">
-                      <svg width="270" height="245" viewBox="0 0 270 245">
+                      <svg width="270" height="262" viewBox="0 0 270 262">
                         <defs>
                           <marker id="fp-ok" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
                             <polygon points="0,0 7,2.5 0,5" fill="#22c55e"/>
@@ -313,7 +313,7 @@ const PengertianFungsiPage = () => {
                         {/* Domain oval A */}
                         <ellipse cx="62" cy="122" rx="54" ry="110" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
                         <text x="62" y="11" textAnchor="middle" fill="#06b6d4" fontSize="12" fontWeight="bold">A</text>
-                        <text x="62" y="237" textAnchor="middle" fill="#06b6d4" fontSize="7.5" opacity="0.5">Domain</text>
+                        <text x="62" y="252" textAnchor="middle" fill="#06b6d4" fontSize="7.5" opacity="0.6">Domain</text>
                         {([
                           ["-2",32],["-1",72],["0",112],["1",152],["2",195]
                         ] as [string,number][]).map(([el,y]) => (
@@ -325,7 +325,7 @@ const PengertianFungsiPage = () => {
                         {/* Kodomain oval B */}
                         <ellipse cx="208" cy="122" rx="54" ry="110" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
                         <text x="208" y="11" textAnchor="middle" fill="#8b5cf6" fontSize="12" fontWeight="bold">B</text>
-                        <text x="208" y="237" textAnchor="middle" fill="#8b5cf6" fontSize="7.5" opacity="0.5">Kodomain</text>
+                        <text x="208" y="252" textAnchor="middle" fill="#8b5cf6" fontSize="7.5" opacity="0.6">Kodomain</text>
                         {([
                           ["1",32],["2",72],["3",112],["4",152],["5",195]
                         ] as [string,number][]).map(([el,y]) => {
@@ -340,12 +340,15 @@ const PengertianFungsiPage = () => {
                             </g>
                           );
                         })}
-                        {/* Range bracket label */}
-                        <text x="240" y="70" fill="#4ade80" fontSize="7.5" fontWeight="bold">Range</text>
-                        <path d="M237,77 L237,200" fill="none" stroke="#4ade80" strokeWidth="1" opacity="0.5"/>
-                        <path d="M237,77 L243,77" fill="none" stroke="#4ade80" strokeWidth="1" opacity="0.5"/>
-                        <path d="M237,135 L243,135" fill="none" stroke="#4ade80" strokeWidth="1" opacity="0.5"/>
-                        <path d="M237,200 L243,200" fill="none" stroke="#4ade80" strokeWidth="1" opacity="0.5"/>
+                        {/* Range bracket — ticks exactly at elements 1(y=32), 2(y=72), 5(y=195) */}
+                        <text x="253" y="29" textAnchor="middle" fill="#4ade80" fontSize="7.5" fontWeight="bold">Range</text>
+                        <line x1="238" y1="32"  x2="238" y2="195" stroke="#4ade80" strokeWidth="1.2" opacity="0.5"/>
+                        <line x1="238" y1="32"  x2="247" y2="32"  stroke="#4ade80" strokeWidth="1.8"/>
+                        <line x1="238" y1="72"  x2="247" y2="72"  stroke="#4ade80" strokeWidth="1.8"/>
+                        <line x1="238" y1="195" x2="247" y2="195" stroke="#4ade80" strokeWidth="1.8"/>
+                        <circle cx="248" cy="32"  r="2.2" fill="#4ade80"/>
+                        <circle cx="248" cy="72"  r="2.2" fill="#4ade80"/>
+                        <circle cx="248" cy="195" r="2.2" fill="#4ade80"/>
                         {/* Arrows: -2→5, -1→2, 0→1, 1→2, 2→5 */}
                         <path d="M80,32 C125,32 165,182 190,195" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fp-ok)"/>
                         <path d="M80,72 C118,72 155,72 190,72" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fp-ok)"/>
