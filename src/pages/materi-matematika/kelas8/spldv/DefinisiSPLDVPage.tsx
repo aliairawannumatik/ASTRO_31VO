@@ -270,25 +270,25 @@ const DefinisiSPLDVPage = () => {
                         {/* Line 1: y = x  (cyan) */}
                         <line x1="15" y1="220" x2="235" y2="-30" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow1)" strokeOpacity="0.9"/>
                         <line x1="15" y1="220" x2="235" y2="-30" stroke="#67e8f9" strokeWidth="1.5" strokeLinecap="round"/>
-                        {/* Line 2: y = -x + 3  (rose) */}
-                        <line x1="15" y1="-5" x2="265" y2="170" stroke="#fb7185" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow1)" strokeOpacity="0.9"/>
-                        <line x1="15" y1="-5" x2="265" y2="170" stroke="#fda4af" strokeWidth="1.5" strokeLinecap="round"/>
-                        {/* Intersection: x=1.5, y=1.5  → svg=(177.5, 57.5) */}
-                        <circle cx="177.5" cy="57.5" r="10" fill="url(#dot1)" opacity="0.6"/>
-                        <circle cx="177.5" cy="57.5" r="5" fill="#fef08a" filter="url(#glow1)"/>
-                        <circle cx="177.5" cy="57.5" r="3.5" fill="#ffffff"/>
+                        {/* Line 2: y = -x + 4  (rose) */}
+                        <line x1="120" y1="-25" x2="275" y2="130" stroke="#fb7185" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow1)" strokeOpacity="0.9"/>
+                        <line x1="120" y1="-25" x2="275" y2="130" stroke="#fda4af" strokeWidth="1.5" strokeLinecap="round"/>
+                        {/* Intersection: x=2, y=2  → svg=(190, 45) */}
+                        <circle cx="190" cy="45" r="10" fill="url(#dot1)" opacity="0.6"/>
+                        <circle cx="190" cy="45" r="5" fill="#fef08a" filter="url(#glow1)"/>
+                        <circle cx="190" cy="45" r="3.5" fill="#ffffff"/>
                         {/* Dashed guide lines to intersection */}
-                        <line x1="177.5" y1="57.5" x2="177.5" y2="95" stroke="#fef08a" strokeWidth="1" strokeDasharray="3,3" strokeOpacity="0.6"/>
-                        <line x1="140" y1="57.5" x2="177.5" y2="57.5" stroke="#fef08a" strokeWidth="1" strokeDasharray="3,3" strokeOpacity="0.6"/>
+                        <line x1="190" y1="45" x2="190" y2="95" stroke="#fef08a" strokeWidth="1" strokeDasharray="3,3" strokeOpacity="0.6"/>
+                        <line x1="140" y1="45" x2="190" y2="45" stroke="#fef08a" strokeWidth="1" strokeDasharray="3,3" strokeOpacity="0.6"/>
                         {/* Intersection label */}
-                        <rect x="185" y="42" width="75" height="22" rx="5" fill="#1a2e1a" fillOpacity="0.85"/>
-                        <text x="222" y="57" textAnchor="middle" fill="#fef08a" fontSize="11" fontFamily="monospace" fontWeight="bold">Titik Potong</text>
+                        <rect x="198" y="28" width="72" height="22" rx="5" fill="#1a2e1a" fillOpacity="0.85"/>
+                        <text x="234" y="43" textAnchor="middle" fill="#fef08a" fontSize="11" fontFamily="monospace" fontWeight="bold">(2 , 2)</text>
                         {/* Axis labels */}
                         <text x="269" y="109" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">x</text>
                         <text x="144" y="14" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">y</text>
                         {/* Line labels */}
-                        <text x="220" y="28" fill="#67e8f9" fontSize="10" fontFamily="monospace">y = x</text>
-                        <text x="20" y="22" fill="#fda4af" fontSize="10" fontFamily="monospace">y = -x+3</text>
+                        <text x="103" y="129" fill="#67e8f9" fontSize="10" fontFamily="monospace">y = x</text>
+                        <text x="148" y="14" fill="#fda4af" fontSize="10" fontFamily="monospace">y = -x+4</text>
                       </svg>
                     </div>
                     <div className="px-4 pb-3 pt-1 space-y-1">
@@ -297,10 +297,10 @@ const DefinisiSPLDVPage = () => {
                           <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block"/>y = x
                         </span>
                         <span className="inline-flex items-center gap-1 text-[11px] font-body bg-rose-500/15 border border-rose-500/30 text-rose-300 rounded-full px-2.5 py-0.5">
-                          <span className="w-2 h-2 rounded-full bg-rose-400 inline-block"/>y = −x + 3
+                          <span className="w-2 h-2 rounded-full bg-rose-400 inline-block"/>y = −x + 4
                         </span>
                         <span className="inline-flex items-center gap-1 text-[11px] font-body bg-yellow-500/15 border border-yellow-500/30 text-yellow-300 rounded-full px-2.5 py-0.5">
-                          <span className="w-2 h-2 rounded-full bg-yellow-300 inline-block"/>Titik potong (1,5 ; 1,5)
+                          <span className="w-2 h-2 rounded-full bg-yellow-300 inline-block"/>Titik potong (2 ; 2)
                         </span>
                       </div>
                       <p className="font-body text-[11px] text-white/55">Gradien berbeda → garis pasti berpotongan → ada <strong className="text-emerald-300">tepat satu solusi</strong> (x, y).</p>
