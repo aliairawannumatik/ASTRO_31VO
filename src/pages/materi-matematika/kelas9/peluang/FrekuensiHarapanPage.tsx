@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, TrendingUp } from 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const FrekuensiHarapanPage = () => {
   const navigate = useNavigate();
@@ -324,6 +325,77 @@ const FrekuensiHarapanPage = () => {
               </div>
             )}
           </div>
+
+          <RangkumanSection
+            gradientFrom="from-orange-900"
+            gradientVia="via-amber-900"
+            gradientTo="to-yellow-900"
+            borderColor="border-orange-500/40"
+            accentColor="text-orange-300"
+            headerIcon="📊"
+            judul="Rangkuman — Frekuensi Harapan"
+            subjudul="Berapa kali suatu kejadian diharapkan muncul? Peluang bertemu jumlah percobaan!"
+            ringkasan={[
+              {
+                emoji: "🎯",
+                judul: "Apa Itu Frekuensi Harapan?",
+                isi: "Frekuensi harapan (Fh) adalah perkiraan berapa kali suatu kejadian A diharapkan muncul jika percobaan dilakukan sebanyak n kali. Ini adalah nilai ekspektasi, bukan hasil pasti.",
+                bg: "bg-orange-900/50",
+                border: "border-orange-500/40",
+                textColor: "text-orange-200",
+              },
+              {
+                emoji: "🔢",
+                judul: "Rumus & Komponen",
+                isi: "Fh = P(A) x n. Tiga komponen: P(A) = peluang kejadian A, n = jumlah percobaan, Fh = hasil yang diharapkan. Fh bisa berupa bilangan desimal!",
+                bg: "bg-amber-900/50",
+                border: "border-amber-500/40",
+                textColor: "text-amber-200",
+              },
+              {
+                emoji: "📈",
+                judul: "Sifat Frekuensi Harapan",
+                isi: "Fh adalah perkiraan teoritis, bukan jaminan. Semakin besar n, hasil percobaan nyata semakin mendekati Fh. Jumlah semua Fh dalam satu percobaan = n.",
+                bg: "bg-yellow-900/50",
+                border: "border-yellow-700/40",
+                textColor: "text-yellow-200",
+              },
+              {
+                emoji: "🌍",
+                judul: "Aplikasi Nyata",
+                isi: "Digunakan di industri: prediksi kerusakan mesin (1000 produk, P(cacat)=0.02, Fh=20 produk cacat). Di kesehatan: prediksi efek samping obat dari 500 pasien.",
+                bg: "bg-red-900/50",
+                border: "border-red-500/40",
+                textColor: "text-red-200",
+              },
+            ]}
+            rumus={[
+              {
+                label: "Frekuensi Harapan",
+                rumus: "F_h = P(A) \\times n",
+                bg: "bg-orange-900/60",
+                border: "border-orange-400/40",
+                labelColor: "text-orange-300",
+              },
+              {
+                label: "Jumlah semua Fh = n",
+                rumus: "\\sum F_h = P(A_1)n + P(A_2)n + \\cdots = n",
+                bg: "bg-amber-900/60",
+                border: "border-amber-400/40",
+                labelColor: "text-amber-300",
+              },
+            ]}
+            tips={[
+              { emoji: "💡", teks: "Fh bisa berupa bilangan desimal dan itu wajar! Misal: dari 50 lemparan dadu, Fh(angka 1) = 1/6 x 50 = 8,33. Ini bukan berarti 8,33 kali secara fisik." },
+              { emoji: "✅", teks: "Cara cek: jumlahkan semua Fh untuk seluruh kemungkinan — hasilnya harus sama dengan n. Ini bisa jadi alat verifikasi jawaban yang mudah." },
+              { emoji: "🎯", teks: "Perbedaan Fh dan hasil nyata disebut deviasi. Makin kecil deviasi, makin akurat prediksi. Fh adalah titik tengah distribusi hasil percobaan." },
+              { emoji: "📊", teks: "Frekuensi harapan digunakan di industri asuransi (expected claims), kontrol kualitas pabrik, dan riset medis untuk merencanakan jumlah sampel." },
+            ]}
+            kesimpulan="Frekuensi harapan adalah jembatan antara peluang dan kenyataan. Satu rumus sederhana Fh = P(A) x n memungkinkan kita merencanakan segala sesuatu — dari produksi pabrik, stok obat di rumah sakit, hingga strategi bisnis. Matematika bukan sekadar angka, tapi alat merencanakan masa depan!"
+            kesimpulanBg="bg-gradient-to-r from-orange-900/80 to-amber-900/80"
+            kesimpulanBorder="border-orange-400/50"
+            kesimpulanTextColor="text-orange-100"
+          />
 
           <div className="mt-4 text-center">
             <button

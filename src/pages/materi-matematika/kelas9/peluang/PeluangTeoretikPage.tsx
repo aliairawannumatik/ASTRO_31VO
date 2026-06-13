@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Calculator } from 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const PeluangTeoretikPage = () => {
   const navigate = useNavigate();
@@ -346,6 +347,77 @@ const PeluangTeoretikPage = () => {
               </div>
             )}
           </div>
+
+          <RangkumanSection
+            gradientFrom="from-blue-900"
+            gradientVia="via-indigo-900"
+            gradientTo="to-violet-900"
+            borderColor="border-blue-500/40"
+            accentColor="text-blue-300"
+            headerIcon="⚖️"
+            judul="Rangkuman — Peluang Teoretik"
+            subjudul="Peluang berdasarkan logika murni — tanpa perlu satu pun percobaan nyata!"
+            ringkasan={[
+              {
+                emoji: "🧠",
+                judul: "Apa Itu Peluang Teoretik?",
+                isi: "Peluang yang dihitung menggunakan logika matematika dengan asumsi semua kemungkinan memiliki kesempatan sama besar (equally likely). Tidak perlu melakukan percobaan nyata.",
+                bg: "bg-blue-900/50",
+                border: "border-blue-500/40",
+                textColor: "text-blue-200",
+              },
+              {
+                emoji: "📐",
+                judul: "Rumus Dasar",
+                isi: "P(A) = n(A)/n(S). n(A) = banyak hasil yang diinginkan (anggota kejadian A). n(S) = banyak semua kemungkinan (anggota ruang sampel).",
+                bg: "bg-indigo-900/50",
+                border: "border-indigo-500/40",
+                textColor: "text-indigo-200",
+              },
+              {
+                emoji: "✅",
+                judul: "Kejadian Pasti & Mustahil",
+                isi: "Kejadian pasti: P(A) = 1 (pasti terjadi). Kejadian mustahil: P(A) = 0 (tidak mungkin terjadi). Semua peluang lain berada di antara 0 dan 1.",
+                bg: "bg-violet-900/50",
+                border: "border-violet-500/40",
+                textColor: "text-violet-200",
+              },
+              {
+                emoji: "🎯",
+                judul: "Hubungan dengan Empirik",
+                isi: "Peluang empirik mendekati peluang teoretik seiring bertambahnya percobaan. Keduanya saling melengkapi — teoretik memberi prediksi, empirik memberi verifikasi.",
+                bg: "bg-purple-900/50",
+                border: "border-purple-500/40",
+                textColor: "text-purple-200",
+              },
+            ]}
+            rumus={[
+              {
+                label: "Peluang Teoretik",
+                rumus: "P(A) = \\frac{n(A)}{n(S)}",
+                bg: "bg-blue-900/60",
+                border: "border-blue-400/40",
+                labelColor: "text-blue-300",
+              },
+              {
+                label: "Rentang Nilai Peluang",
+                rumus: "0 \\leq P(A) \\leq 1",
+                bg: "bg-indigo-900/60",
+                border: "border-indigo-400/40",
+                labelColor: "text-indigo-300",
+              },
+            ]}
+            tips={[
+              { emoji: "🔢", teks: "Langkah sistematis: (1) Tentukan ruang sampel S, (2) Tentukan kejadian A yang diinginkan, (3) Hitung n(A) dan n(S), (4) Bagi n(A)/n(S)." },
+              { emoji: "💡", teks: "Peluang selalu antara 0 dan 1. Jika hasilmu lebih dari 1 atau negatif, pasti ada kesalahan! Jadikan ini cek wajib setelah menghitung." },
+              { emoji: "🎲", teks: "Dadu seimbang: P(tiap angka) = 1/6. Koin seimbang: P(G) = P(A) = 1/2. Kartu bridge: P(tiap kartu) = 1/52. Hafal fakta dasar ini!" },
+              { emoji: "🃏", teks: "Trik cepat: untuk kartu bridge, ada 4 As, 13 kartu hati, 12 kartu gambar (J+Q+K x4), dan 26 kartu merah (hati+wajik). Sangat sering muncul di soal!" },
+            ]}
+            kesimpulan="Peluang teoretik adalah kekuatan matematika untuk memprediksi masa depan tanpa harus mengalaminya. Dari menghitung peluang jackpot lotere hingga memperkirakan efektivitas vaksin — semuanya bermula dari rumus sederhana P(A) = n(A)/n(S)!"
+            kesimpulanBg="bg-gradient-to-r from-blue-900/80 to-indigo-900/80"
+            kesimpulanBorder="border-blue-400/50"
+            kesimpulanTextColor="text-blue-100"
+          />
 
           <div className="mt-4 text-center">
             <button

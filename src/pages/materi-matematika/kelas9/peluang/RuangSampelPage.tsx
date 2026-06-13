@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers } from "luc
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const RuangSampelPage = () => {
   const navigate = useNavigate();
@@ -731,6 +732,77 @@ const RuangSampelPage = () => {
           </div>
 
         </div>
+
+        <RangkumanSection
+          gradientFrom="from-cyan-900"
+          gradientVia="via-teal-900"
+          gradientTo="to-emerald-900"
+          borderColor="border-cyan-500/40"
+          accentColor="text-cyan-300"
+          headerIcon="🎲"
+          judul="Rangkuman — Ruang Sampel & Kejadian"
+          subjudul="Fondasi peluang — pahami dulu semua kemungkinan sebelum menghitung peluang!"
+          ringkasan={[
+            {
+              emoji: "🌐",
+              judul: "Ruang Sampel (S)",
+              isi: "Himpunan semua kemungkinan hasil yang dapat terjadi dalam suatu percobaan. Ditulis dalam kurung kurawal {}. n(S) = banyaknya anggota ruang sampel.",
+              bg: "bg-cyan-900/50",
+              border: "border-cyan-500/40",
+              textColor: "text-cyan-200",
+            },
+            {
+              emoji: "📍",
+              judul: "Titik Sampel",
+              isi: "Setiap anggota dari ruang sampel disebut titik sampel. Contoh: pada pelemparan dadu, setiap angka (1,2,3,4,5,6) adalah satu titik sampel.",
+              bg: "bg-teal-900/50",
+              border: "border-teal-500/40",
+              textColor: "text-teal-200",
+            },
+            {
+              emoji: "🎯",
+              judul: "Kejadian (K)",
+              isi: "Himpunan bagian dari ruang sampel yang memenuhi syarat tertentu. n(K) = banyak titik sampel yang memenuhi kejadian tersebut.",
+              bg: "bg-emerald-900/50",
+              border: "border-emerald-500/40",
+              textColor: "text-emerald-200",
+            },
+            {
+              emoji: "🗂️",
+              judul: "Tabel & Diagram Pohon",
+              isi: "Untuk percobaan majemuk (dua atau lebih), gunakan tabel silang atau diagram pohon agar semua kemungkinan tercatat dengan sistematis dan tidak ada yang terlewat.",
+              bg: "bg-green-900/50",
+              border: "border-green-500/40",
+              textColor: "text-green-200",
+            },
+          ]}
+          rumus={[
+            {
+              label: "Ruang Sampel Pelemparan n Dadu",
+              rumus: "n(S) = 6^n",
+              bg: "bg-cyan-900/60",
+              border: "border-cyan-400/40",
+              labelColor: "text-cyan-300",
+            },
+            {
+              label: "Ruang Sampel Pelemparan n Koin",
+              rumus: "n(S) = 2^n",
+              bg: "bg-teal-900/60",
+              border: "border-teal-400/40",
+              labelColor: "text-teal-300",
+            },
+          ]}
+          tips={[
+            { emoji: "💡", teks: "Ruang sampel selalu ditulis dalam kurung kurawal {}, sama seperti himpunan. Pastikan semua kemungkinan tercantum dan tidak ada yang berulang!" },
+            { emoji: "🎯", teks: "Untuk dua percobaan sekaligus (misal 2 dadu), gunakan tabel silang — baris = dadu 1, kolom = dadu 2. Total kotak = n(S)." },
+            { emoji: "🌳", teks: "Diagram pohon sangat membantu untuk percobaan berantai (koin+dadu, ambil 2 bola, dll). Hitung semua cabang ujung untuk mendapat n(S)." },
+            { emoji: "🃏", teks: "Kartu bridge: n(S) = 52. Terdiri dari 4 jenis (hati, wajik, keriting, sekop) masing-masing 13 kartu (As, 2-10, J, Q, K)." },
+          ]}
+          kesimpulan="Ruang sampel adalah peta lengkap semua kemungkinan — tanpa memahami ruang sampel, tidak mungkin menghitung peluang dengan benar. Pahami dulu seluruh kemungkinan, baru tentukan kejadian yang diinginkan. Inilah dasar logika peluang yang digunakan di kriptografi, AI, dan analisis risiko!"
+          kesimpulanBg="bg-gradient-to-r from-cyan-900/80 to-teal-900/80"
+          kesimpulanBorder="border-cyan-400/50"
+          kesimpulanTextColor="text-cyan-100"
+        />
 
         <div className="mt-8 text-center">
           <button

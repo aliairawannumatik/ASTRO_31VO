@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, GitMerge, GitBranc
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const PeluangKejadianMajemukPage = () => {
   const navigate = useNavigate();
@@ -521,6 +522,77 @@ const PeluangKejadianMajemukPage = () => {
               </div>
             )}
           </div>
+
+          <RangkumanSection
+            gradientFrom="from-rose-900"
+            gradientVia="via-pink-900"
+            gradientTo="to-red-900"
+            borderColor="border-rose-500/40"
+            accentColor="text-rose-300"
+            headerIcon="🔗"
+            judul="Rangkuman — Peluang Kejadian Majemuk"
+            subjudul="Menggabungkan dua kejadian atau lebih — tiga jenis hubungan yang wajib dikuasai!"
+            ringkasan={[
+              {
+                emoji: "🔵",
+                judul: "Saling Lepas (Mutually Exclusive)",
+                isi: "A dan B tidak bisa terjadi bersamaan. A irisan B = kosong. Rumus gabungan: P(A U B) = P(A) + P(B). Contoh: muncul angka genap ATAU ganjil pada satu dadu.",
+                bg: "bg-rose-900/50",
+                border: "border-rose-500/40",
+                textColor: "text-rose-200",
+              },
+              {
+                emoji: "🟣",
+                judul: "Tidak Saling Lepas",
+                isi: "A dan B bisa terjadi bersamaan (ada irisan). Rumus: P(A U B) = P(A) + P(B) - P(A irisan B). Harus dikurangi P(irisan) agar tidak dihitung dua kali!",
+                bg: "bg-pink-900/50",
+                border: "border-pink-500/40",
+                textColor: "text-pink-200",
+              },
+              {
+                emoji: "🟢",
+                judul: "Saling Bebas (Independent)",
+                isi: "Kejadian A tidak mempengaruhi kejadian B sama sekali. Rumus irisan: P(A irisan B) = P(A) x P(B). Contoh: melempar dadu dan koin secara bersamaan.",
+                bg: "bg-red-900/50",
+                border: "border-red-500/40",
+                textColor: "text-red-200",
+              },
+              {
+                emoji: "📊",
+                judul: "Cara Identifikasi Jenisnya",
+                isi: "Saling lepas: apakah bisa terjadi bersamaan? Saling bebas: apakah hasil A mempengaruhi B? Cek keduanya sebelum memilih rumus yang tepat.",
+                bg: "bg-orange-900/50",
+                border: "border-orange-500/40",
+                textColor: "text-orange-200",
+              },
+            ]}
+            rumus={[
+              {
+                label: "Saling Lepas: P(A atau B)",
+                rumus: "P(A \\cup B) = P(A) + P(B)",
+                bg: "bg-rose-900/60",
+                border: "border-rose-400/40",
+                labelColor: "text-rose-300",
+              },
+              {
+                label: "Tidak Saling Lepas: P(A atau B)",
+                rumus: "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)",
+                bg: "bg-pink-900/60",
+                border: "border-pink-400/40",
+                labelColor: "text-pink-300",
+              },
+            ]}
+            tips={[
+              { emoji: "🔑", teks: "Kunci identifikasi: (1) Saling lepas: A irisan B = kosong. (2) Tidak saling lepas: A irisan B tidak kosong. (3) Saling bebas: P(A|B) = P(A), artinya B tidak mengubah peluang A." },
+              { emoji: "⚠️", teks: "Kesalahan paling umum: lupa mengurangi P(A irisan B) pada kejadian tidak saling lepas. Selalu gambar diagram Venn untuk membantu visualisasi!" },
+              { emoji: "🎲", teks: "Saling bebas =/= saling lepas! Saling bebas berarti tidak saling mempengaruhi. Saling lepas berarti tidak bisa terjadi bersamaan. Dua konsep yang berbeda!" },
+              { emoji: "💡", teks: "Untuk dua dadu atau dua lemparan koin yang terpisah, selalu gunakan rumus saling bebas: P(A dan B) = P(A) x P(B) karena hasilnya tidak saling mempengaruhi." },
+            ]}
+            kesimpulan="Kejadian majemuk adalah inti dari statistika modern — setiap keputusan di dunia nyata melibatkan kombinasi beberapa kejadian sekaligus. Dari analisis cuaca (hujan DAN angin kencang), prediksi saham (naik ATAU turun), hingga diagnosis medis — semuanya menggunakan prinsip peluang kejadian majemuk!"
+            kesimpulanBg="bg-gradient-to-r from-rose-900/80 to-pink-900/80"
+            kesimpulanBorder="border-rose-400/50"
+            kesimpulanTextColor="text-rose-100"
+          />
 
           <div className="mt-4 text-center">
             <button

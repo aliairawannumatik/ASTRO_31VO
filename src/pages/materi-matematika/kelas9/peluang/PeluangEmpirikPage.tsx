@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical } fro
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 import LabPercobaanEmpirik from "@/components/LabPercobaanEmpirik";
 
 const PeluangEmpirikPage = () => {
@@ -354,6 +355,77 @@ const PeluangEmpirikPage = () => {
               </div>
             )}
           </div>
+
+          <RangkumanSection
+            gradientFrom="from-green-900"
+            gradientVia="via-emerald-900"
+            gradientTo="to-lime-900"
+            borderColor="border-green-500/40"
+            accentColor="text-green-300"
+            headerIcon="🧪"
+            judul="Rangkuman — Peluang Empirik"
+            subjudul="Peluang berdasarkan hasil percobaan nyata — semakin banyak percobaan, semakin akurat!"
+            ringkasan={[
+              {
+                emoji: "🔬",
+                judul: "Apa Itu Peluang Empirik?",
+                isi: "Peluang yang dihitung berdasarkan hasil percobaan/observasi nyata, bukan teori. Nilainya diperoleh dari frekuensi relatif kemunculan suatu kejadian.",
+                bg: "bg-green-900/50",
+                border: "border-green-500/40",
+                textColor: "text-green-200",
+              },
+              {
+                emoji: "📊",
+                judul: "Frekuensi Relatif",
+                isi: "P(A) = fA/n, di mana fA = frekuensi kemunculan kejadian A, dan n = total percobaan. Nilai selalu 0 hingga 1 (bisa dinyatakan dalam desimal atau persen).",
+                bg: "bg-emerald-900/50",
+                border: "border-emerald-500/40",
+                textColor: "text-emerald-200",
+              },
+              {
+                emoji: "📈",
+                judul: "Hukum Bilangan Besar",
+                isi: "Semakin banyak percobaan dilakukan, nilai peluang empirik akan semakin mendekati peluang teoretik. Inilah mengapa survei dengan sampel besar lebih akurat.",
+                bg: "bg-teal-900/50",
+                border: "border-teal-500/40",
+                textColor: "text-teal-200",
+              },
+              {
+                emoji: "🌍",
+                judul: "Kapan Digunakan?",
+                isi: "Digunakan ketika percobaan tidak bisa diasumsikan seimbang sempurna, atau ketika kondisi tidak diketahui secara pasti (dadu tidak seimbang, kondisi cuaca, dll).",
+                bg: "bg-lime-900/50",
+                border: "border-lime-700/40",
+                textColor: "text-lime-200",
+              },
+            ]}
+            rumus={[
+              {
+                label: "Peluang Empirik",
+                rumus: "P(A) = \\frac{f_A}{n}",
+                bg: "bg-green-900/60",
+                border: "border-green-400/40",
+                labelColor: "text-green-300",
+              },
+              {
+                label: "Rentang Nilai Peluang",
+                rumus: "0 \\leq P(A) \\leq 1",
+                bg: "bg-emerald-900/60",
+                border: "border-emerald-400/40",
+                labelColor: "text-emerald-300",
+              },
+            ]}
+            tips={[
+              { emoji: "⚗️", teks: "Semakin besar n (banyak percobaan), semakin stabil dan akurat nilai peluang empirik. Jangan ambil kesimpulan dari percobaan yang terlalu sedikit!" },
+              { emoji: "🎯", teks: "Peluang empirik bisa berbeda antar kelompok yang melakukan percobaan yang sama karena faktor keacakan. Ini normal — gunakan rata-rata beberapa percobaan." },
+              { emoji: "📉", teks: "P(A) = 0 berarti kejadian A tidak pernah muncul dalam percobaan. P(A) = 1 berarti selalu muncul. Nilai di luar 0-1 berarti ada kesalahan hitung!" },
+              { emoji: "💡", teks: "Peluang empirik digunakan di asuransi (menghitung risiko klaim), meteorologi (prakiraan hujan), dan quality control di pabrik." },
+            ]}
+            kesimpulan="Peluang empirik mengajarkan bahwa matematika bisa langsung diuji dengan dunia nyata. Setiap percobaan adalah satu langkah menuju kebenaran statistik. Inilah cara ilmuwan, dokter, dan insinyur membuat keputusan berbasis data — bukan sekadar teori!"
+            kesimpulanBg="bg-gradient-to-r from-green-900/80 to-emerald-900/80"
+            kesimpulanBorder="border-green-400/50"
+            kesimpulanTextColor="text-green-100"
+          />
 
           <div className="mt-4 text-center">
             <button

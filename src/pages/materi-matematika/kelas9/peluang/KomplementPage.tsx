@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Shuffle } from "lu
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const KomplementPage = () => {
   const navigate = useNavigate();
@@ -348,6 +349,77 @@ const KomplementPage = () => {
               </div>
             )}
           </div>
+
+          <RangkumanSection
+            gradientFrom="from-purple-900"
+            gradientVia="via-violet-900"
+            gradientTo="to-fuchsia-900"
+            borderColor="border-purple-500/40"
+            accentColor="text-purple-300"
+            headerIcon="🔄"
+            judul="Rangkuman — Komplemen Kejadian"
+            subjudul="Jika bukan A, maka A' — dua sisi yang selalu melengkapi hingga sempurna!"
+            ringkasan={[
+              {
+                emoji: "🔀",
+                judul: "Apa Itu Komplemen?",
+                isi: "Komplemen kejadian A (ditulis A' atau A-bar) adalah himpunan semua titik sampel dalam S yang BUKAN anggota A. A dan A' bersama-sama membentuk seluruh ruang sampel.",
+                bg: "bg-purple-900/50",
+                border: "border-purple-500/40",
+                textColor: "text-purple-200",
+              },
+              {
+                emoji: "⚖️",
+                judul: "Sifat Utama Komplemen",
+                isi: "P(A) + P(A') = 1 selalu berlaku. Artinya: peluang A terjadi + peluang A tidak terjadi = 1 (pasti). Ini adalah hukum mutlak dalam peluang!",
+                bg: "bg-violet-900/50",
+                border: "border-violet-500/40",
+                textColor: "text-violet-200",
+              },
+              {
+                emoji: "🔢",
+                judul: "Anggota Komplemen",
+                isi: "n(A') = n(S) - n(A). Banyak anggota komplemen = total ruang sampel dikurangi banyak anggota kejadian A. Selalu cek: n(A) + n(A') = n(S).",
+                bg: "bg-fuchsia-900/50",
+                border: "border-fuchsia-500/40",
+                textColor: "text-fuchsia-200",
+              },
+              {
+                emoji: "🛠️",
+                judul: "Strategi Penggunaan",
+                isi: "Jika menghitung P(A) langsung terasa rumit, coba hitung P(A') dulu lalu gunakan P(A) = 1 - P(A'). Sering kali jauh lebih mudah!",
+                bg: "bg-pink-900/50",
+                border: "border-pink-500/40",
+                textColor: "text-pink-200",
+              },
+            ]}
+            rumus={[
+              {
+                label: "Sifat Komplemen (peluang)",
+                rumus: "P(A) + P(A') = 1 \\quad \\Rightarrow \\quad P(A') = 1 - P(A)",
+                bg: "bg-purple-900/60",
+                border: "border-purple-400/40",
+                labelColor: "text-purple-300",
+              },
+              {
+                label: "Sifat Komplemen (anggota)",
+                rumus: "n(A') = n(S) - n(A)",
+                bg: "bg-violet-900/60",
+                border: "border-violet-400/40",
+                labelColor: "text-violet-300",
+              },
+            ]}
+            tips={[
+              { emoji: "🚀", teks: "Trik komplemen: soal bertipe 'minimal satu...' atau 'paling sedikit satu...' selalu lebih mudah diselesaikan dengan komplemen. Hitung P(tidak satupun) lalu kurangi dari 1!" },
+              { emoji: "✅", teks: "Cek wajib: P(A) + P(A') harus selalu = 1. Jika tidak, ada kesalahan dalam perhitungan. Gunakan ini sebagai verifikasi jawaban." },
+              { emoji: "💡", teks: "Notasi: komplemen A bisa ditulis sebagai A', A-bar, atau Ac. Semua simbol tersebut bermakna sama: kejadian yang bukan A." },
+              { emoji: "🎯", teks: "Jika P(A) = 0,3 maka P(A') = 0,7. Jika P(A) = 3/8 maka P(A') = 5/8. Selalu jumlahnya = 1. Ingat ini dan soal komplemen tidak akan pernah sulit!" },
+            ]}
+            kesimpulan="Komplemen adalah salah satu konsep paling elegan dalam matematika — setiap kejadian punya pasangan yang melengkapinya menjadi sempurna (total = 1). Dalam kehidupan nyata, komplemen digunakan di asuransi (P(klaim) = 1 - P(tidak klaim)), quality control, dan pemrograman logika AI!"
+            kesimpulanBg="bg-gradient-to-r from-purple-900/80 to-violet-900/80"
+            kesimpulanBorder="border-purple-400/50"
+            kesimpulanTextColor="text-purple-100"
+          />
 
           <div className="mt-4 text-center">
             <button
