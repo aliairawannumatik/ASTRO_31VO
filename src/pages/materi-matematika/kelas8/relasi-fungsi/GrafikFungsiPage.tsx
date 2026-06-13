@@ -519,27 +519,6 @@ const GrafikFungsiPage = () => {
                     "Verifikasi: f(1) = 3(1) − 1 = 2 ✓",
                   ]}
                 />
-                {/* Cara menentukan rumus */}
-                <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-purple-300">🔑 Cara Menentukan Rumus dari Tabel/Diagram</p>
-                  <div className="space-y-2 text-xs font-body text-white/70">
-                    <div className="bg-slate-700/40 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-1">Langkah 1 — Cari selisih nilai f(x):</p>
-                      <BlockMath math="5-2=3,\quad 8-5=3,\quad 11-8=3" />
-                      <p>Selisih tetap = 3 → koefisien x adalah <strong className="text-cyan-300">3</strong></p>
-                    </div>
-                    <div className="bg-slate-700/40 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Cari konstanta (c):</p>
-                      <p>Anggap f(x) = 3x + c, substitusi satu titik, misal (1, 2):</p>
-                      <BlockMath math="2 = 3(1) + c \implies c = 2 - 3 = -1" />
-                    </div>
-                    <div className="bg-slate-700/40 rounded-lg p-3">
-                      <p className="text-green-300 font-semibold mb-1">Langkah 3 — Tulis rumus & verifikasi:</p>
-                      <BlockMath math="f(x) = 3x - 1" />
-                      <p>Cek semua titik → semuanya cocok ✓</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             )}
           </div>
