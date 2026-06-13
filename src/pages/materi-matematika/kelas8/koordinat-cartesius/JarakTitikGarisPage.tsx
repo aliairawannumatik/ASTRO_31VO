@@ -111,7 +111,15 @@ const JarakTitikGarisPage = () => {
                     className="rounded-xl border border-white/10 shadow-lg w-full max-w-sm object-cover"
                   />
                   <p className="text-white/40 text-xs font-body italic text-center">
-                    Garis hitam menunjukkan jarak lurus (garis lurus) antara dua titik di peta — konsep yang sama dengan rumus jarak koordinat Kartesius
+                    Garis hitam menunjukkan jarak lurus antara dua titik di peta — konsep yang sama dengan rumus jarak koordinat Kartesius.{" "}
+                    <a
+                      href="https://terralogiq.com/cara-menghitung-jarak-antar-titik-dengan-maps-javascript-api/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-cyan-400/70 hover:text-cyan-300 underline underline-offset-2 transition-colors"
+                    >
+                      Sumber: terralogiq.com
+                    </a>
                   </p>
                 </div>
               </div>
