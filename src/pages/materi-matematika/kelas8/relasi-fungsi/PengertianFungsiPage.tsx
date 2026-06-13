@@ -674,7 +674,6 @@ const PengertianFungsiPage = () => {
                           <path d="M61,78 C84,65 100,50 113,39" fill="none" stroke="#ef4444" strokeWidth="1.8" markerEnd="url(#arr-d3r)"/>
                           <path d="M61,78 C84,92 100,108 113,117" fill="none" stroke="#ef4444" strokeWidth="1.8" markerEnd="url(#arr-d3r)"/>
                           <path d="M61,117 C85,117 97,88 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d3g)"/>
-                          <text x="87" y="72" textAnchor="middle" fill="#ef4444" fontSize="7.5" fontWeight="bold">2 panah!</text>
                         </svg>
                       ),
                     },
@@ -721,7 +720,6 @@ const PengertianFungsiPage = () => {
                           <path d="M61,27 C86,27 100,80 113,86" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
                           <path d="M61,62 C86,55 100,50 113,44" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
                           <path d="M61,136 C86,136 100,132 113,130" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
-                          <text x="46" y="160" textAnchor="middle" fill="#f97316" fontSize="7" fontWeight="bold">tak berpasangan!</text>
                         </svg>
                       ),
                     },
