@@ -139,11 +139,6 @@ const JarakTitikGarisPage = () => {
                   </p>
                 </div>
 
-                <div className="bg-slate-800/70 border border-cyan-500/20 rounded-xl p-4 flex flex-col items-center gap-3">
-                  <p className="font-body text-xs font-bold text-cyan-300 uppercase">📐 Visualisasi Jarak Dua Titik</p>
-                  <TwoPointGrid />
-                </div>
-
                 <div className="bg-slate-800/50 border border-cyan-500/30 rounded-xl p-4 text-center space-y-2">
                   <p className="font-body text-xs text-white/60">Rumus Jarak Dua Titik A(x₁, y₁) dan B(x₂, y₂):</p>
                   <BlockMath math="\boxed{d(AB) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}" />
