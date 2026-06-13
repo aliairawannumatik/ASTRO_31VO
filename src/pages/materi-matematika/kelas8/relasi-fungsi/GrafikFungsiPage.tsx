@@ -141,10 +141,10 @@ const GrafikFungsiPage = () => {
                     </div>
                   </div>
                 </div>
-                {/* Ilustrasi 1: f(x) = x + 2 */}
+                {/* Ilustrasi 1: f(x) = x + 1 */}
                 <div className="bg-slate-900/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="font-body text-xs font-bold text-cyan-300 mb-1 text-center">Ilustrasi 1: Grafik f(x) = x + 2</p>
-                  <p className="font-body text-xs text-white/40 mb-3 text-center">Dari x = 3 → f(3) = 3 + 2 = 5</p>
+                  <p className="font-body text-xs font-bold text-cyan-300 mb-1 text-center">Ilustrasi 1: Grafik f(x) = x + 1</p>
+                  <p className="font-body text-xs text-white/40 mb-3 text-center">Dari x = 3 → f(3) = 3 + 1 = 4</p>
                   <svg viewBox="0 0 260 200" className="w-full max-w-xs mx-auto">
                     {/* Grid: x 0-4 (45px/unit), y 0-6 (25.83px/unit) */}
                     {[1,2,3,4].map(v => (
@@ -169,18 +169,18 @@ const GrafikFungsiPage = () => {
                     {[1,2,3,4,5,6].map(v => (
                       <text key={v} x={28} y={175-v*25.83+3} fill="#64748b" fontSize="8">{v}</text>
                     ))}
-                    {/* Line: f(0)=2 → (40,123), f(4)=6 → (220,20) */}
-                    <line x1={40} y1={123} x2={220} y2={20} stroke="#22d3ee" strokeWidth="2.5" />
-                    {/* Guide: x=3, f(3)=5 → x_px=175, y_px=46 */}
-                    <line x1={175} y1={175} x2={175} y2={46} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
-                    <line x1={40} y1={46} x2={175} y2={46} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
-                    <circle cx={175} cy={46} r="5" fill="#fb923c" stroke="#fdba74" strokeWidth="1.5" />
-                    <text x={179} y={43} fill="#fb923c" fontSize="9" fontWeight="bold">(3, 5)</text>
+                    {/* Line: f(0)=1 → (40,149), f(4)=5 → (220,46) */}
+                    <line x1={40} y1={149} x2={220} y2={46} stroke="#22d3ee" strokeWidth="2.5" />
+                    {/* Guide: x=3, f(3)=4 → x_px=175, y_px=72 */}
+                    <line x1={175} y1={175} x2={175} y2={72} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
+                    <line x1={40} y1={72} x2={175} y2={72} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
+                    <circle cx={175} cy={72} r="5" fill="#fb923c" stroke="#fdba74" strokeWidth="1.5" />
+                    <text x={179} y={69} fill="#fb923c" fontSize="9" fontWeight="bold">(3, 4)</text>
                     <text x={170} y={189} fill="#fb923c" fontSize="8" fontWeight="bold">3</text>
-                    <text x={20} y={49} fill="#fb923c" fontSize="8" fontWeight="bold">5</text>
+                    <text x={20} y={75} fill="#fb923c" fontSize="8" fontWeight="bold">4</text>
                     {/* y-intercept dot */}
-                    <circle cx={40} cy={123} r="4" fill="#22d3ee" opacity="0.7" />
-                    <text x={44} y={120} fill="#94a3b8" fontSize="8">(0,2)</text>
+                    <circle cx={40} cy={149} r="4" fill="#22d3ee" opacity="0.7" />
+                    <text x={44} y={146} fill="#94a3b8" fontSize="8">(0,1)</text>
                   </svg>
                 </div>
 
@@ -208,8 +208,8 @@ const GrafikFungsiPage = () => {
                       <text key={v} x={40+v*60-3} y={189} fill="#64748b" fontSize="8">{v}</text>
                     ))}
                     <text x={33} y={189} fill="#64748b" fontSize="8">0</text>
-                    {/* Y ticks: 2,4,6 */}
-                    {[2,4,6].map(v => (
+                    {/* Y ticks: 1–6 */}
+                    {[1,2,3,4,5,6].map(v => (
                       <text key={v} x={28} y={175-v*25.83+3} fill="#64748b" fontSize="8">{v}</text>
                     ))}
                     {/* Line: f(0)=0 → (40,175), f(3)=6 → (220,20) */}
