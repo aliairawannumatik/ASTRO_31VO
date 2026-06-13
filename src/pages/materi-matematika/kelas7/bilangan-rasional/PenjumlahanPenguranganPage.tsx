@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Plus, Minus, RefreshCw } from "lucide-react";
+import { BookOpen, Lightbulb, Calculator, Target, Plus, Minus, RefreshCw } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -38,21 +38,13 @@ const PenjumlahanPenguranganPage = () => {
 
           {/* Section 1: Penjumlahan Pecahan */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("penjumlahan")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <Plus className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Penjumlahan Pecahan</span>
               </div>
-              {expandedSections.includes("penjumlahan") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("penjumlahan") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -196,21 +188,13 @@ const PenjumlahanPenguranganPage = () => {
 
           {/* Section 2: Sifat-Sifat Penjumlahan */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("sifat-penjumlahan")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <RefreshCw className="w-5 h-5 text-cyan-400" />
                 <span className="font-body font-semibold text-white">Sifat-Sifat Penjumlahan Pecahan</span>
               </div>
-              {expandedSections.includes("sifat-penjumlahan") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("sifat-penjumlahan") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -358,21 +342,13 @@ const PenjumlahanPenguranganPage = () => {
 
           {/* Section 3: Pengurangan Pecahan */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("pengurangan")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <Minus className="w-5 h-5 text-red-400" />
                 <span className="font-body font-semibold text-white">Pengurangan Pecahan</span>
               </div>
-              {expandedSections.includes("pengurangan") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("pengurangan") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -509,21 +485,13 @@ const PenjumlahanPenguranganPage = () => {
 
           {/* Section 4: Penjumlahan dan Pengurangan Pecahan Negatif */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("pecahan-negatif")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Penjumlahan dan Pengurangan Pecahan Negatif</span>
               </div>
-              {expandedSections.includes("pecahan-negatif") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("pecahan-negatif") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">

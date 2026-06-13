@@ -25,14 +25,14 @@ const BentukDesimalPage = () => {
         </div>
 
         <div className="bg-slate-800/50 rounded-xl mb-4 overflow-hidden border border-slate-700">
-          <button onClick={() => toggleSection(0)} className="w-full flex items-center justify-between p-4 hover:bg-slate-700/50">
+          <div className="w-full flex items-center p-4">
             <div className="flex items-center gap-3">
               <BookOpen className="text-cyan-400" size={24} />
               <span className="font-semibold text-lg">1. Memahami Bilangan Desimal</span>
             </div>
-            <ChevronRight className={`transform transition-transform ${activeSection === 0 ? "rotate-90" : ""}`} size={20} />
-          </button>
-          {activeSection === 0 && (
+            
+          </div>
+          {true && (
             <div className="p-4 border-t border-slate-700 space-y-4">
               <div className="bg-cyan-900/30 border-l-4 border-cyan-400 p-4 rounded-r-lg">
                 <p className="font-medium text-cyan-300">Ringkasan Intisari</p>
@@ -84,14 +84,14 @@ const BentukDesimalPage = () => {
         </div>
 
         <div className="bg-slate-800/50 rounded-xl mb-4 overflow-hidden border border-slate-700">
-          <button onClick={() => toggleSection(1)} className="w-full flex items-center justify-between p-4 hover:bg-slate-700/50">
+          <div className="w-full flex items-center p-4">
             <div className="flex items-center gap-3">
               <Calculator className="text-cyan-400" size={24} />
               <span className="font-semibold text-lg">2. Mengubah Pecahan ke Desimal</span>
             </div>
-            <ChevronRight className={`transform transition-transform ${activeSection === 1 ? "rotate-90" : ""}`} size={20} />
-          </button>
-          {activeSection === 1 && (
+            
+          </div>
+          {true && (
             <div className="p-4 border-t border-slate-700 space-y-4">
               <div className="bg-cyan-900/30 border-l-4 border-cyan-400 p-4 rounded-r-lg">
                 <p className="font-medium text-cyan-300">Ringkasan Intisari</p>
@@ -134,14 +134,14 @@ const BentukDesimalPage = () => {
         </div>
 
         <div className="bg-slate-800/50 rounded-xl mb-4 overflow-hidden border border-slate-700">
-          <button onClick={() => toggleSection(2)} className="w-full flex items-center justify-between p-4 hover:bg-slate-700/50">
+          <div className="w-full flex items-center p-4">
             <div className="flex items-center gap-3">
               <RefreshCw className="text-cyan-400" size={24} />
               <span className="font-semibold text-lg">3. Mengubah Desimal ke Pecahan</span>
             </div>
-            <ChevronRight className={`transform transition-transform ${activeSection === 2 ? "rotate-90" : ""}`} size={20} />
-          </button>
-          {activeSection === 2 && (
+            
+          </div>
+          {true && (
             <div className="p-4 border-t border-slate-700 space-y-4">
               <div className="bg-cyan-900/30 border-l-4 border-cyan-400 p-4 rounded-r-lg">
                 <p className="font-medium text-cyan-300">Ringkasan Intisari</p>

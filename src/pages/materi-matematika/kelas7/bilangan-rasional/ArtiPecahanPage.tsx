@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Scale, Equal } from "lucide-react";
+import { BookOpen, Lightbulb, Calculator, Target, Scale, Equal } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -34,21 +34,13 @@ const ArtiPecahanPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {/* Section 1: Arti Pecahan */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("arti-pecahan")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Arti Pecahan</span>
               </div>
-              {expandedSections.includes("arti-pecahan") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("arti-pecahan") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -225,21 +217,13 @@ const ArtiPecahanPage = () => {
 
           {/* Section 2: Pecahan Senilai */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("pecahan-senilai")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <Equal className="w-5 h-5 text-cyan-400" />
                 <span className="font-body font-semibold text-white">Pecahan Senilai</span>
               </div>
-              {expandedSections.includes("pecahan-senilai") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("pecahan-senilai") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -388,21 +372,13 @@ const ArtiPecahanPage = () => {
 
           {/* Section 3: Membandingkan Dua Pecahan */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("membandingkan")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <Scale className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">Membandingkan Dua Pecahan</span>
               </div>
-              {expandedSections.includes("membandingkan") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("membandingkan") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">

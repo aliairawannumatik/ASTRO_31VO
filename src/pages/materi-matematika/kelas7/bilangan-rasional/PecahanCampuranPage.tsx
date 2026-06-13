@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Layers, Percent, ArrowRightLeft } from "lucide-react";
+import { BookOpen, Lightbulb, Calculator, Target, Layers, Percent, ArrowRightLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -34,21 +34,13 @@ const PecahanCampuranPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {/* Section 1: Pecahan Campuran */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("pecahan-campuran")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <Layers className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Pecahan Campuran</span>
               </div>
-              {expandedSections.includes("pecahan-campuran") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("pecahan-campuran") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -196,21 +188,13 @@ const PecahanCampuranPage = () => {
 
           {/* Section 2: Konversi Pecahan Campuran dan Pecahan Biasa */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("konversi")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <ArrowRightLeft className="w-5 h-5 text-cyan-400" />
                 <span className="font-body font-semibold text-white">Konversi Pecahan Campuran dan Pecahan Biasa</span>
               </div>
-              {expandedSections.includes("konversi") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("konversi") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -343,21 +327,13 @@ const PecahanCampuranPage = () => {
 
           {/* Section 3: Persen */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <button
-              onClick={() => toggleSection("persen")}
-              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-            >
+            <div className="w-full flex items-center px-5 py-4 text-left">
               <div className="flex items-center gap-3">
                 <Percent className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Persen</span>
               </div>
-              {expandedSections.includes("persen") ? (
-                <ChevronUp className="w-5 h-5 text-primary" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary" />
-              )}
-            </button>
-            {expandedSections.includes("persen") && (
+            </div>
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -616,7 +592,7 @@ const PecahanCampuranPage = () => {
 
           <div className="mt-8 text-center">
             <button
-              onClick={() => navigate("/materi-matematika/kelas-7/bilangan-rasional")}
+              onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-7/bilangan-rasional"); }}
               className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
             >
               Kembali ke Bilangan Rasional

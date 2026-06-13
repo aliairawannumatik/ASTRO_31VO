@@ -29,17 +29,13 @@ const PembagianBentukDesimalPage = () => {
 
         {/* Sub-bab 1: Pembagian Desimal dengan 10, 100, 1000 */}
         <div className="mb-6 animate-slide-up">
-          <button
-            onClick={() => toggleSection(0)}
-            className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4
-              hover:border-primary/60 transition-all duration-300 cursor-pointer text-left"
-          >
+          <div className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4 transition-all duration-300 text-left">
             <Zap className="w-5 h-5 text-cyan-400 shrink-0" />
             <span className="font-body text-base text-white font-semibold">Pembagian Desimal dengan 10, 100, 1000</span>
-            <ChevronRight className={`w-4 h-4 text-primary ml-auto transition-transform ${activeSection === 0 ? 'rotate-90' : ''}`} />
-          </button>
+            
+          </div>
           
-          {activeSection === 0 && (
+          {true && (
             <div className="mt-3 bg-card/70 backdrop-blur border border-border rounded-xl px-5 py-6 space-y-5 animate-slide-up">
               {/* Ringkasan Intisari */}
               <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-lg p-4">
@@ -160,17 +156,13 @@ const PembagianBentukDesimalPage = () => {
 
         {/* Sub-bab 2: Pembagian Desimal dengan Desimal */}
         <div className="mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <button
-            onClick={() => toggleSection(1)}
-            className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4
-              hover:border-primary/60 transition-all duration-300 cursor-pointer text-left"
-          >
+          <div className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4 transition-all duration-300 text-left">
             <Calculator className="w-5 h-5 text-green-400 shrink-0" />
             <span className="font-body text-base text-white font-semibold">Pembagian Desimal dengan Desimal</span>
-            <ChevronRight className={`w-4 h-4 text-primary ml-auto transition-transform ${activeSection === 1 ? 'rotate-90' : ''}`} />
-          </button>
+            
+          </div>
           
-          {activeSection === 1 && (
+          {true && (
             <div className="mt-3 bg-card/70 backdrop-blur border border-border rounded-xl px-5 py-6 space-y-5 animate-slide-up">
               {/* Ringkasan Intisari */}
               <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-lg p-4">
@@ -318,17 +310,13 @@ const PembagianBentukDesimalPage = () => {
 
         {/* Sub-bab 3: Aplikasi Pembagian Desimal dalam Kehidupan */}
         <div className="mb-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <button
-            onClick={() => toggleSection(2)}
-            className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4
-              hover:border-primary/60 transition-all duration-300 cursor-pointer text-left"
-          >
+          <div className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4 transition-all duration-300 text-left">
             <Hash className="w-5 h-5 text-orange-400 shrink-0" />
             <span className="font-body text-base text-white font-semibold">Aplikasi dalam Kehidupan Sehari-hari</span>
-            <ChevronRight className={`w-4 h-4 text-primary ml-auto transition-transform ${activeSection === 2 ? 'rotate-90' : ''}`} />
-          </button>
+            
+          </div>
           
-          {activeSection === 2 && (
+          {true && (
             <div className="mt-3 bg-card/70 backdrop-blur border border-border rounded-xl px-5 py-6 space-y-5 animate-slide-up">
               {/* Ringkasan Intisari */}
               <div className="bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-500/30 rounded-lg p-4">

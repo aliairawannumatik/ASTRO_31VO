@@ -213,17 +213,13 @@ const PenjumlahanPenguranganBentukDesimalPage = () => {
 
         {/* ===================== SUB-BAB 1: PENJUMLAHAN ===================== */}
         <div className="mb-6 animate-slide-up">
-          <button
-            onClick={() => toggleSection(0)}
-            className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4
-              hover:border-green-500/60 transition-all duration-300 cursor-pointer text-left"
-          >
+          <div className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4 transition-all duration-300 text-left">
             <Plus className="w-5 h-5 text-green-400 shrink-0" />
             <span className="font-body text-base text-white font-semibold">Penjumlahan Bentuk Desimal</span>
-            <ChevronRight className={`w-4 h-4 text-green-400 ml-auto transition-transform duration-300 ${activeSection === 0 ? 'rotate-90' : ''}`} />
-          </button>
+            
+          </div>
 
-          {activeSection === 0 && (
+          {true && (
             <div className="mt-3 bg-card/70 backdrop-blur border border-green-500/20 rounded-xl px-5 py-6 space-y-5 animate-slide-up">
 
               {/* Ringkasan Intisari */}
@@ -501,17 +497,13 @@ const PenjumlahanPenguranganBentukDesimalPage = () => {
 
         {/* ===================== SUB-BAB 2: PENGURANGAN ===================== */}
         <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.05s" }}>
-          <button
-            onClick={() => toggleSection(1)}
-            className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4
-              hover:border-red-500/60 transition-all duration-300 cursor-pointer text-left"
-          >
+          <div className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4 transition-all duration-300 text-left">
             <Minus className="w-5 h-5 text-red-400 shrink-0" />
             <span className="font-body text-base text-white font-semibold">Pengurangan Bentuk Desimal</span>
-            <ChevronRight className={`w-4 h-4 text-red-400 ml-auto transition-transform duration-300 ${activeSection === 1 ? 'rotate-90' : ''}`} />
-          </button>
+            
+          </div>
 
-          {activeSection === 1 && (
+          {true && (
             <div className="mt-3 bg-card/70 backdrop-blur border border-red-500/20 rounded-xl px-5 py-6 space-y-5 animate-slide-up">
 
               {/* Ringkasan Intisari */}
@@ -826,17 +818,13 @@ const PenjumlahanPenguranganBentukDesimalPage = () => {
 
         {/* ===================== SUB-BAB 3: GABUNGAN ===================== */}
         <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-          <button
-            onClick={() => toggleSection(2)}
-            className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4
-              hover:border-cyan-500/60 transition-all duration-300 cursor-pointer text-left"
-          >
+          <div className="w-full group flex items-center gap-4 bg-card/90 backdrop-blur border border-border rounded-xl px-5 py-4 transition-all duration-300 text-left">
             <Calculator className="w-5 h-5 text-cyan-400 shrink-0" />
             <span className="font-body text-base text-white font-semibold">Gabungan Penjumlahan dan Pengurangan</span>
-            <ChevronRight className={`w-4 h-4 text-cyan-400 ml-auto transition-transform duration-300 ${activeSection === 2 ? 'rotate-90' : ''}`} />
-          </button>
+            
+          </div>
 
-          {activeSection === 2 && (
+          {true && (
             <div className="mt-3 bg-card/70 backdrop-blur border border-cyan-500/20 rounded-xl px-5 py-6 space-y-5 animate-slide-up">
 
               {/* Ringkasan Intisari */}
