@@ -416,80 +416,65 @@ const GrafikFungsiPage = () => {
                   <p className="font-body text-sm text-white/85 leading-relaxed mb-4">
                     Perhatikan gambar diagram panah berikut. Rumus fungsi diagram tersebut adalah …
                   </p>
-                  {/* DIAGRAM PANAH */}
+                  {/* BIDANG KOORDINAT — rekonstruksi gambar upload */}
                   <div className="bg-slate-900/70 border border-purple-500/20 rounded-xl p-4">
-                    <svg viewBox="0 0 280 180" className="w-full max-w-xs mx-auto">
-                      {/* Domain circle */}
-                      <ellipse cx={70} cy={90} rx={50} ry={75} fill="none" stroke="#8b5cf6" strokeWidth="1.5" />
-                      <text x={55} y={22} fill="#a78bfa" fontSize="10" fontWeight="bold">Domain</text>
-                      {/* Range circle */}
-                      <ellipse cx={210} cy={90} rx={50} ry={75} fill="none" stroke="#06b6d4" strokeWidth="1.5" />
-                      <text x={196} y={22} fill="#67e8f9" fontSize="10" fontWeight="bold">Range</text>
-                      {/* Domain values */}
-                      {[["1",45],["2",70],["3",95],["4",120]].map(([v,y]) => (
-                        <text key={v} x={62} y={Number(y)+4} fill="#c4b5fd" fontSize="13" fontWeight="bold">{v}</text>
-                      ))}
-                      {/* Range values */}
-                      {[["2",45],["5",70],["8",95],["11",120]].map(([v,y]) => (
-                        <text key={v} x={202} y={Number(y)+4} fill="#67e8f9" fontSize="13" fontWeight="bold">{v}</text>
-                      ))}
-                      {/* Arrows */}
-                      {[[45,45],[70,70],[95,95],[120,120]].map(([y1,y2]) => (
-                        <g key={y1}>
-                          <line x1={82} y1={y1} x2={190} y2={y2} stroke="#94a3b8" strokeWidth="1.2" markerEnd="url(#arr)" />
-                        </g>
-                      ))}
+                    <svg viewBox="0 0 180 200" className="w-full max-w-[200px] mx-auto">
                       <defs>
-                        <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                        <marker id="axArr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
                           <polygon points="0,0 6,3 0,6" fill="#94a3b8" />
                         </marker>
+                        <marker id="axArrRev" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+                          <polygon points="0,0 6,3 0,6" fill="#94a3b8" />
+                        </marker>
+                        <marker id="lineArr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                          <polygon points="0,0 6,3 0,6" fill="#e2e8f0" />
+                        </marker>
+                        <marker id="lineArrRev" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+                          <polygon points="0,0 6,3 0,6" fill="#e2e8f0" />
+                        </marker>
                       </defs>
-                      {/* Labels inside */}
-                      <text x={52} y={160} fill="#7c3aed" fontSize="8">A</text>
-                      <text x={196} y={160} fill="#0e7490" fontSize="8">B</text>
+                      {/* Origin: (80, 125). Scale: 38px/unit. y inverted. */}
+                      {/* x-axis */}
+                      <line x1={15} y1={125} x2={163} y2={125}
+                        stroke="#94a3b8" strokeWidth="1.5"
+                        markerEnd="url(#axArr)" markerStart="url(#axArrRev)" />
+                      {/* y-axis */}
+                      <line x1={80} y1={190} x2={80} y2={12}
+                        stroke="#94a3b8" strokeWidth="1.5"
+                        markerEnd="url(#axArr)" markerStart="url(#axArrRev)" />
+                      {/* Tick: x=1 at xPx=80+38=118 */}
+                      <line x1={118} y1={121} x2={118} y2={129} stroke="#94a3b8" strokeWidth="1.2" />
+                      <text x={114} y={141} fill="#e2e8f0" fontSize="13" fontWeight="bold">1</text>
+                      {/* Tick: y=2 at yPx=125-76=49 */}
+                      <line x1={76} y1={49} x2={84} y2={49} stroke="#94a3b8" strokeWidth="1.2" />
+                      <text x={60} y={53} fill="#e2e8f0" fontSize="13" fontWeight="bold">2</text>
+                      {/* Tick: y=-1 at yPx=125+38=163 */}
+                      <line x1={76} y1={163} x2={84} y2={163} stroke="#94a3b8" strokeWidth="1.2" />
+                      <text x={44} y={167} fill="#e2e8f0" fontSize="12" fontWeight="bold">-1</text>
+                      {/* Dashed blue lines to point (1,2) */}
+                      <line x1={118} y1={125} x2={118} y2={49}
+                        stroke="#60a5fa" strokeWidth="1.2" strokeDasharray="4,3" />
+                      <line x1={80} y1={49} x2={118} y2={49}
+                        stroke="#60a5fa" strokeWidth="1.2" strokeDasharray="4,3" />
+                      {/* Line f(x)=3x-1 with arrows at both ends */}
+                      {/* At yPx=188: y=(125-188)/38=-1.66, x=(-1.66+1)/3=-0.22, xPx=80-8.3=71.7≈72 */}
+                      {/* At yPx=14: y=(125-14)/38=2.92, x=(2.92+1)/3=1.31, xPx=80+49.6≈130 */}
+                      <line x1={72} y1={188} x2={130} y2={14}
+                        stroke="#e2e8f0" strokeWidth="2"
+                        markerEnd="url(#lineArr)" markerStart="url(#lineArrRev)" />
                     </svg>
-                    <div className="flex justify-center gap-8 mt-2 text-xs font-body">
-                      <div className="text-center">
-                        <p className="text-purple-300 font-bold">Domain (A)</p>
-                        <p className="text-white/60">&#123; 1, 2, 3, 4 &#125;</p>
-                      </div>
-                      <div className="text-center text-white/40">→</div>
-                      <div className="text-center">
-                        <p className="text-cyan-300 font-bold">Range (B)</p>
-                        <p className="text-white/60">&#123; 2, 5, 8, 11 &#125;</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-slate-700/40 rounded-lg p-3 mt-3">
-                    <p className="text-xs font-body text-white/60 mb-2">📋 Tabel pasangan nilai dari diagram panah:</p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body border-collapse text-center">
-                        <thead>
-                          <tr className="bg-purple-900/40">
-                            <th className="border border-purple-500/30 px-3 py-1.5 text-purple-200">x (Domain)</th>
-                            {[1,2,3,4].map(v => <td key={v} className="border border-purple-500/30 px-3 py-1.5 text-white">{v}</td>)}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th className="border border-purple-500/30 px-3 py-1.5 text-cyan-200">f(x) (Range)</th>
-                            {[2,5,8,11].map(v => <td key={v} className="border border-purple-500/30 px-3 py-1.5 text-cyan-300 font-bold">{v}</td>)}
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
                   </div>
                 </div>
                 <PilihanGanda
                   soal="c3"
                   opsi={[
                     { kode: "A", teks: "f(x) = x + 1" },
-                    { kode: "B", teks: "f(x) = 2x − 1" },
-                    { kode: "C", teks: "f(x) = 3x − 1" },
-                    { kode: "D", teks: "f(x) = 4x − 2" },
+                    { kode: "B", teks: "f(x) = 2x – 1" },
+                    { kode: "C", teks: "f(x) = 3x – 1" },
+                    { kode: "D", teks: "f(x) = 4x – 2" },
                   ]}
                   kunci="C"
-                  pembahasan="Perhatikan pola: setiap x bertambah 1, nilai f(x) bertambah 3. Jadi koefisien x adalah 3. Cek: f(1)=3(1)−1=2 ✓, f(2)=3(2)−1=5 ✓, f(3)=3(3)−1=8 ✓, f(4)=3(4)−1=11 ✓. Rumus fungsinya adalah f(x) = 3x − 1."
+                  pembahasan="Dari grafik, garis memotong sumbu-y di titik (0, −1) sehingga konstanta c = −1. Garis juga melalui titik (1, 2). Gradien = (2 − (−1)) / (1 − 0) = 3/1 = 3. Jadi rumus fungsinya f(x) = 3x − 1. Verifikasi: f(1) = 3(1) − 1 = 2 ✓."
                 />
                 {/* Cara menentukan rumus */}
                 <div className="bg-slate-800/50 border border-purple-500/20 rounded-xl p-4 space-y-3">
