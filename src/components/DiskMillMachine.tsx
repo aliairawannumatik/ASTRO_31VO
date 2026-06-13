@@ -42,8 +42,8 @@ const BAHAN = [
 ];
 
 /* ─── SVG GRAIN DRAWINGS ─── */
-function GrainSVG({ id, w, dark, shine, sz = 110 }: { id: string; w: string; dark: string; shine: string; sz?: number }) {
-  const gid = `g-${id}`;
+function GrainSVG({ id, w, dark, shine, sz = 110, uid = "x" }: { id: string; w: string; dark: string; shine: string; sz?: number; uid?: string }) {
+  const gid = `${uid}-g-${id}`;
   if (id === "beras") {
     const grains = [
       [50,52,18],[38,60,-12],[62,58,22],[47,42,6],[63,43,-25],[36,48,32],[52,70,8],[42,72,-5],[64,68,15],
@@ -187,8 +187,8 @@ function GrainSVG({ id, w, dark, shine, sz = 110 }: { id: string; w: string; dar
 }
 
 /* ─── SVG FLOUR BAG ─── */
-function TepungSVG({ nama, warna, warnaGelap, visible, sz = 110 }: { nama: string; warna: string; warnaGelap: string; visible: boolean; sz?: number }) {
-  const gid = `tf-${nama.replace(/\s/g,"")}`;
+function TepungSVG({ nama, warna, warnaGelap, visible, sz = 110, uid = "x" }: { nama: string; warna: string; warnaGelap: string; visible: boolean; sz?: number; uid?: string }) {
+  const gid = `${uid}-tf-${nama.replace(/\s/g,"")}`;
   return (
     <svg width={sz} height={Math.round(sz*120/110)} viewBox="0 0 110 120">
       <defs>
@@ -235,60 +235,60 @@ function TepungSVG({ nama, warna, warnaGelap, visible, sz = 110 }: { nama: strin
 }
 
 /* ─── DISK MILL MACHINE SVG ─── */
-function MesinSVG({ spinning, phase, warnaAktif, size = "lg" }: { spinning: boolean; phase: Phase; warnaAktif: string; size?: "xs" | "sm" | "lg" }) {
+function MesinSVG({ spinning, phase, warnaAktif, size = "lg", uid = "x" }: { spinning: boolean; phase: Phase; warnaAktif: string; size?: "xs" | "sm" | "lg"; uid?: string }) {
   const W = size === "xs" ? 130 : size === "sm" ? 150 : 200;
   const H = size === "xs" ? 143 : size === "sm" ? 165 : 220;
   const isOn = phase !== "idle";
+  const dg = `${uid}-disc-grad`;
+  const bg = `${uid}-body-grad`;
+  const hg = `${uid}-hopper-grad`;
+  const mg = `${uid}-motor-grad`;
+  const ag = `${uid}-base-grad`;
+  const cg = `${uid}-chute-grad`;
+  const gw = `${uid}-glow`;
+  const ms = `${uid}-metalsheen`;
   return (
     <svg width={W} height={H} viewBox="0 0 200 220" className="overflow-visible">
       <defs>
-        {/* Cast-iron flywheel disc — dark grey with metallic sheen */}
-        <radialGradient id="disc-grad" cx="38%" cy="30%" r="65%">
+        <radialGradient id={dg} cx="38%" cy="30%" r="65%">
           <stop offset="0%" stopColor="#a0aab8"/>
           <stop offset="50%" stopColor="#606878"/>
           <stop offset="100%" stopColor="#2e343e"/>
         </radialGradient>
-        {/* Industrial green body — like real disk mills in Indonesia */}
-        <linearGradient id="body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={bg} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#4a7a3a"/>
           <stop offset="50%" stopColor="#2e5a22"/>
           <stop offset="100%" stopColor="#1c3a14"/>
         </linearGradient>
-        {/* Galvanized steel hopper */}
-        <linearGradient id="hopper-grad" x1="0%" y1="0%" x2="10%" y2="100%">
+        <linearGradient id={hg} x1="0%" y1="0%" x2="10%" y2="100%">
           <stop offset="0%" stopColor="#c8d0d0"/>
           <stop offset="40%" stopColor="#909898"/>
           <stop offset="100%" stopColor="#606868"/>
         </linearGradient>
-        {/* Red motor casing */}
-        <linearGradient id="motor-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={mg} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#d04030"/>
           <stop offset="100%" stopColor="#801818"/>
         </linearGradient>
-        {/* Base frame — dark painted steel */}
-        <linearGradient id="base-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id={ag} x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stopColor="#3a4030"/>
           <stop offset="100%" stopColor="#1e2418"/>
         </linearGradient>
-        {/* Output chute — galvanized */}
-        <linearGradient id="chute-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={cg} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#a0a8a0"/>
           <stop offset="100%" stopColor="#606860"/>
         </linearGradient>
-        <filter id="glow">
+        <filter id={gw}>
           <feGaussianBlur stdDeviation="3" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-        <filter id="metalsheen">
+        <filter id={ms}>
           <feGaussianBlur stdDeviation="1" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
 
-      {/* ── BASE PLATE ── dark painted steel */}
-      <rect x="25" y="175" width="150" height="9" rx="3" fill="url(#base-grad)" stroke="#0e1408" strokeWidth="1"/>
-      {/* ── FRAME CROSS-RAIL ── */}
-      <rect x="30" y="148" width="140" height="11" rx="3" fill="url(#base-grad)" stroke="#0e1408" strokeWidth="1"/>
+      <rect x="25" y="175" width="150" height="9" rx="3" fill={`url(#${ag})`} stroke="#0e1408" strokeWidth="1"/>
+      <rect x="30" y="148" width="140" height="11" rx="3" fill={`url(#${ag})`} stroke="#0e1408" strokeWidth="1"/>
       {/* legs */}
       {[42,82,108,148].map(x => (
         <g key={x}>
@@ -299,7 +299,7 @@ function MesinSVG({ spinning, phase, warnaAktif, size = "lg" }: { spinning: bool
       ))}
 
       {/* ── MOTOR (bottom-right) — red electric motor ── */}
-      <rect x="118" y="128" width="54" height="30" rx="5" fill="url(#motor-grad)" stroke="#580808" strokeWidth="1.2"/>
+      <rect x="118" y="128" width="54" height="30" rx="5" fill={`url(#${mg})`} stroke="#580808" strokeWidth="1.2"/>
       {/* motor cooling fins */}
       {[124,129,134,139,144,149,154,159].map(x => (
         <line key={x} x1={x} y1="128" x2={x} y2="158" stroke="#600a0a" strokeWidth="1" opacity="0.5"/>
@@ -324,7 +324,7 @@ function MesinSVG({ spinning, phase, warnaAktif, size = "lg" }: { spinning: bool
       <line x1="118" y1="151" x2="30" y2="106" stroke="#383838" strokeWidth="1.5" opacity="0.4"/>
 
       {/* ── MAIN BODY — industrial green ── */}
-      <rect x="55" y="60" width="95" height="90" rx="7" fill="url(#body-grad)" stroke="#0e2208" strokeWidth="2"/>
+      <rect x="55" y="60" width="95" height="90" rx="7" fill={`url(#${bg})`} stroke="#0e2208" strokeWidth="2"/>
       {/* body highlight edge (top-left light catch) */}
       <path d="M57,67 Q57,62 62,62 L148,62" fill="none" stroke="#6aaa50" strokeWidth="1" opacity="0.4"/>
       {/* body panel inset line */}
@@ -352,7 +352,7 @@ function MesinSVG({ spinning, phase, warnaAktif, size = "lg" }: { spinning: bool
       <rect x="53" y="84" width="5" height="34" rx="1" fill="#3a6a28" stroke="#1e4010" strokeWidth="0.8"/>
 
       {/* ── OUTPUT CHUTE (bottom) — galvanized ── */}
-      <path d="M80,150 L94,150 L100,177 L74,177 Z" fill="url(#chute-grad)" stroke="#505850" strokeWidth="1.2"/>
+      <path d="M80,150 L94,150 L100,177 L74,177 Z" fill={`url(#${cg})`} stroke="#505850" strokeWidth="1.2"/>
       {/* chute highlight */}
       <line x1="82" y1="152" x2="76" y2="175" stroke="#d0d8d0" strokeWidth="0.8" opacity="0.5"/>
       {/* output opening */}
@@ -365,7 +365,7 @@ function MesinSVG({ spinning, phase, warnaAktif, size = "lg" }: { spinning: bool
         {/* outer rim — cast iron dark */}
         <circle r="42" fill="#3a3e48" stroke="#585e68" strokeWidth="2.5"/>
         {/* disc face — radial gradient metallic */}
-        <circle r="39" fill="url(#disc-grad)"/>
+        <circle r="39" fill={`url(#${dg})`}/>
         {/* spinning group */}
         <g>
           {spinning && (
@@ -413,7 +413,7 @@ function MesinSVG({ spinning, phase, warnaAktif, size = "lg" }: { spinning: bool
 
       {/* ── HOPPER (funnel on top) — galvanized steel ── */}
       {/* outer walls */}
-      <path d="M72,15 L50,60 L120,60 L98,15 Z" fill="url(#hopper-grad)" stroke="#484e4e" strokeWidth="1.5"/>
+      <path d="M72,15 L50,60 L120,60 L98,15 Z" fill={`url(#${hg})`} stroke="#484e4e" strokeWidth="1.5"/>
       {/* hopper opening rim at top */}
       <rect x="69" y="9" width="32" height="9" rx="2" fill="#b0b8b8" stroke="#484e4e" strokeWidth="1.2"/>
       <rect x="71" y="10" width="28" height="6" rx="1" fill="#d0d8d8"/>
@@ -438,7 +438,7 @@ function MesinSVG({ spinning, phase, warnaAktif, size = "lg" }: { spinning: bool
         stroke={isOn ? warnaAktif : "#2a4018"}
         strokeWidth="1"
         opacity={isOn ? 1 : 0.3}
-        filter={isOn ? "url(#glow)" : "none"}
+        filter={isOn ? `url(#${gw})` : "none"}
       />
       {isOn && (
         <circle cx="130" cy="70" r="5.5" fill={warnaAktif} opacity="0.45">
@@ -593,10 +593,10 @@ export default function DiskMillMachine() {
           <div className="flex flex-col items-center gap-1 w-full max-w-[260px]">
             <span className="text-[9px] font-body uppercase tracking-widest font-bold" style={{ color: selected.warnaShine }}>Domain</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-0.5 w-full"
-              style={{ borderColor: selected.warnaShine, background: `${selected.warnaGelap}cc`, boxShadow: `0 0 20px ${selected.warna}80` }}>
-              <div className="relative" style={{ filter: `drop-shadow(0 0 8px ${selected.warnaShine}80)` }}>
+              style={{ borderColor: selected.warna, background: `linear-gradient(135deg,${selected.bgFrom},${selected.bgTo})`, boxShadow: `0 0 20px ${selected.warna}60` }}>
+              <div className="relative" style={{ filter: `drop-shadow(0 0 6px ${selected.warna}80)` }}>
                 <div className={spinning ? "dmm-shake" : ""}>
-                  <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine} sz={90}/>
+                  <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine} sz={90} uid="p"/>
                 </div>
                 <GrainFalling color={selected.warna} active={feeding}/>
               </div>
@@ -618,7 +618,7 @@ export default function DiskMillMachine() {
           <div className="flex flex-col items-center gap-0.5">
             <span className="text-[9px] text-white/40 font-body uppercase tracking-widest">Mesin Penepung</span>
             <div className={spinning ? "dmm-shine" : ""}>
-              <MesinSVG spinning={spinning} phase={phase} warnaAktif={selected.warna} size="sm"/>
+              <MesinSVG spinning={spinning} phase={phase} warnaAktif={selected.warna} size="sm" uid="p"/>
             </div>
             <div className={`h-5 flex items-center transition-opacity duration-300 ${isRunning ? "opacity-100" : "opacity-0"}`}>
               <span className="text-[9px] font-body font-bold" style={{ color: selected.warnaShine }}>
@@ -642,13 +642,13 @@ export default function DiskMillMachine() {
               style={{ color: done ? selected.warnaTepung : `${selected.warnaTepung}80` }}>Range</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-0.5 w-full transition-all duration-500"
               style={{
-                borderColor: done ? selected.warnaShine : `${selected.warnaGelap}99`,
-                background: done ? `${selected.warnaGelap}cc` : `${selected.warnaGelap}55`,
-                boxShadow: done ? `0 0 22px ${selected.warnaTepung}80` : `0 0 12px ${selected.warna}40`,
+                borderColor: done ? selected.warnaTepung : `${selected.warna}50`,
+                background: `linear-gradient(135deg,${selected.bgFrom},${selected.bgTo})`,
+                boxShadow: done ? `0 0 22px ${selected.warnaTepung}70` : `0 0 10px ${selected.warna}30`,
               }}>
-              <div className="relative" style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaShine}80)` : "none" }}>
-                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.3 }}>
-                  <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done} sz={90}/>
+              <div className="relative" style={{ filter: done ? `drop-shadow(0 0 8px ${selected.warnaTepung}80)` : "none" }}>
+                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.35 }}>
+                  <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done} sz={90} uid="p"/>
                 </div>
                 <TepungJatuh color={selected.warnaTepung} active={spinning}/>
               </div>
@@ -669,11 +669,11 @@ export default function DiskMillMachine() {
           <div className="flex flex-col items-center gap-1 min-w-[130px]">
             <span className="text-[10px] font-body uppercase tracking-widest font-bold" style={{ color: selected.warnaShine }}>Domain</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-1 w-full"
-              style={{ borderColor: selected.warnaShine, background: `${selected.warnaGelap}cc`, boxShadow: `0 0 20px ${selected.warna}80` }}>
+              style={{ borderColor: selected.warna, background: `linear-gradient(135deg,${selected.bgFrom},${selected.bgTo})`, boxShadow: `0 0 20px ${selected.warna}60` }}>
               <div className="relative flex items-center justify-center"
-                style={{ filter: `drop-shadow(0 0 8px ${selected.warnaShine}80)` }}>
+                style={{ filter: `drop-shadow(0 0 6px ${selected.warna}80)` }}>
                 <div className={spinning ? "dmm-shake" : ""}>
-                  <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine}/>
+                  <GrainSVG id={selected.id} w={selected.warna} dark={selected.warnaGelap} shine={selected.warnaShine} uid="l"/>
                 </div>
                 <GrainFalling color={selected.warna} active={feeding}/>
               </div>
@@ -697,7 +697,7 @@ export default function DiskMillMachine() {
           <div className="flex flex-col items-center gap-1 relative">
             <span className="text-[10px] text-white/40 font-body uppercase tracking-widest">Mesin Penepung</span>
             <div className={spinning ? "dmm-shine" : ""}>
-              <MesinSVG spinning={spinning} phase={phase} warnaAktif={selected.warna}/>
+              <MesinSVG spinning={spinning} phase={phase} warnaAktif={selected.warna} uid="l"/>
             </div>
             <div className={`h-6 transition-all duration-300 ${isRunning ? "opacity-100" : "opacity-0"}`}>
               <span className="text-xs font-body font-bold" style={{ color: selected.warnaShine }}>
@@ -723,14 +723,14 @@ export default function DiskMillMachine() {
               style={{ color: done ? selected.warnaTepung : `${selected.warnaTepung}80` }}>Range</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-1 w-full transition-all duration-500"
               style={{
-                borderColor: done ? selected.warnaShine : `${selected.warnaGelap}99`,
-                background: done ? `${selected.warnaGelap}cc` : `${selected.warnaGelap}55`,
-                boxShadow: done ? `0 0 22px ${selected.warnaTepung}80` : `0 0 12px ${selected.warna}40`,
+                borderColor: done ? selected.warnaTepung : `${selected.warna}50`,
+                background: `linear-gradient(135deg,${selected.bgFrom},${selected.bgTo})`,
+                boxShadow: done ? `0 0 22px ${selected.warnaTepung}70` : `0 0 10px ${selected.warna}30`,
               }}>
               <div className="relative flex items-center justify-center"
-                style={{ filter: done ? `drop-shadow(0 0 10px ${selected.warnaShine}80)` : "none" }}>
-                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.3 }}>
-                  <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done}/>
+                style={{ filter: done ? `drop-shadow(0 0 8px ${selected.warnaTepung}80)` : "none" }}>
+                <div className={done ? "dmm-appear" : ""} style={{ opacity: done ? 1 : 0.35 }}>
+                  <TepungSVG nama={selected.produk} warna={selected.warnaTepung} warnaGelap={selected.warnaGelap} visible={done} uid="l"/>
                 </div>
                 <TepungJatuh color={selected.warnaTepung} active={spinning}/>
               </div>
