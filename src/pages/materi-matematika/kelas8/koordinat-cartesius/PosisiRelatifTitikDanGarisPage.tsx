@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import { InteraktifTitikAcuan, InteraktifGaris } from "@/components/PosisiRelatifInteraktif";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const PosisiRelatifTitikDanGarisPage = () => {
   const navigate = useNavigate();
@@ -643,6 +644,38 @@ const PosisiRelatifTitikDanGarisPage = () => {
               </div>
             )}
           </div>
+
+          {/* ═══ RANGKUMAN ═══ */}
+          <RangkumanSection
+            gradientFrom="from-orange-600" gradientVia="via-amber-600" gradientTo="to-yellow-600"
+            borderColor="border-amber-500/30" accentColor="text-amber-200"
+            headerIcon="📋" judul="Rangkuman — Posisi Relatif Titik dan Garis"
+            subjudul="Gabungan dua teknik: posisi terhadap titik acuan dan posisi terhadap garis"
+            ringkasan={[
+              { emoji:"🎯", judul:"Posisi vs Titik Acuan (Δx, Δy)", bg:"bg-orange-900/40", border:"border-orange-500/30", textColor:"text-orange-300",
+                isi:"Δx = xB − xA (arah mendatar), Δy = yB − yA (arah tegak). Positif = kanan/atas, negatif = kiri/bawah." },
+              { emoji:"📐", judul:"Posisi vs Garis f(P)", bg:"bg-amber-900/40", border:"border-amber-500/30", textColor:"text-amber-300",
+                isi:"Substitusikan P ke f(x,y)=ax+by+c. Hasilnya: f(P)>0 sisi positif, f(P)=0 di garis, f(P)<0 sisi negatif." },
+              { emoji:"🔗", judul:"Dua Teknik Saling Melengkapi", bg:"bg-yellow-900/40", border:"border-yellow-500/30", textColor:"text-yellow-300",
+                isi:"Titik acuan: analisis vektor arah (Δx,Δy). Garis: analisis fungsi substitusi. Keduanya menjawab pertanyaan berbeda tentang posisi." },
+              { emoji:"🌐", judul:"Aplikasi Gabungan", bg:"bg-lime-900/40", border:"border-lime-500/30", textColor:"text-lime-300",
+                isi:"Di pemetaan & CAD: tentukan posisi gedung (titik) relatif terhadap jalan (garis acuan) dan batas wilayah (garis fungsi)." },
+            ]}
+            rumus={[
+              { label:"Posisi relatif terhadap titik acuan A:", rumus:"\\Delta x = x_B - x_A \\qquad \\Delta y = y_B - y_A", bg:"bg-orange-900/30", border:"border-orange-500/25", labelColor:"text-orange-300" },
+              { label:"Posisi relatif terhadap garis ax+by+c=0:", rumus:"f(P) = ax_P + by_P + c \\quad (> 0,\\, = 0,\\, < 0)", bg:"bg-amber-900/30", border:"border-amber-500/25", labelColor:"text-amber-300" },
+            ]}
+            tips={[
+              { emoji:"🧠", teks:<>Dua rumus satu langkah: <strong>Titik acuan → TUJUAN − ACUAN</strong>. <strong>Garis → substitusi → cek tanda</strong>. Hafal keduanya!</> },
+              { emoji:"↔️", teks:<>Δx &gt; 0 (kanan) | Δx &lt; 0 (kiri) | Δy &gt; 0 (atas) | Δy &lt; 0 (bawah). f(P) &gt; 0 (sisi +) | f(P)=0 (di garis) | f(P) &lt; 0 (sisi −).</> },
+              { emoji:"🗺️", teks:"Gabungkan keduanya: tentukan arah titik dari titik acuan (Δx,Δy), lalu cek apakah titik itu di atas/bawah garis batas dengan f(P). Teknik double-check!" },
+              { emoji:"✅", teks:"Untuk soal ujian: baca soal dua kali. Jika pertanyaan 'posisi dari titik' → gunakan Δx,Δy. Jika 'di sisi mana terhadap garis' → gunakan f(P)." },
+            ]}
+            kesimpulan="Dua teknik posisi relatif ini adalah fondasi sistem koordinat di robotika, drone navigation, dan GIS (Geographic Information System). Titik dan garis — dua konsep sederhana yang menggambarkan seluruh tata ruang dua dimensi!"
+            kesimpulanBg="bg-gradient-to-r from-orange-600/20 to-yellow-600/20"
+            kesimpulanBorder="border-amber-400/40"
+            kesimpulanTextColor="text-amber-100/90"
+          />
 
         </div>
 

@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Navigation } from 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const PosisiRelatifGarisPage = () => {
   const navigate = useNavigate();
@@ -336,6 +337,38 @@ const PosisiRelatifGarisPage = () => {
               </div>
             )}
           </div>
+
+          {/* ═══ RANGKUMAN ═══ */}
+          <RangkumanSection
+            gradientFrom="from-violet-600" gradientVia="via-purple-600" gradientTo="to-fuchsia-700"
+            borderColor="border-violet-500/30" accentColor="text-violet-200"
+            headerIcon="📋" judul="Rangkuman — Posisi Relatif Titik terhadap Garis"
+            subjudul="Cara menentukan di sisi mana sebuah titik berada terhadap suatu garis"
+            ringkasan={[
+              { emoji:"📝", judul:"Fungsi Penentu f(P)", bg:"bg-violet-900/40", border:"border-violet-500/30", textColor:"text-violet-300",
+                isi:"Substitusikan koordinat titik P(xₚ,yₚ) ke persamaan garis ax+by+c=0 → hasilkan nilai f(P) = axₚ + byₚ + c." },
+              { emoji:"✅", judul:"f(P) = 0 → Di Garis", bg:"bg-green-900/40", border:"border-green-500/30", textColor:"text-green-300",
+                isi:"Jika nilai f(P) tepat nol, titik P memenuhi persamaan garis sehingga P berada tepat pada garis tersebut." },
+              { emoji:"➕", judul:"f(P) > 0 → Sisi Positif", bg:"bg-sky-900/40", border:"border-sky-500/30", textColor:"text-sky-300",
+                isi:"Nilai f(P) positif berarti titik P berada di sisi positif garis (umumnya di atas atau di kiri, tergantung koefisien)." },
+              { emoji:"➖", judul:"f(P) < 0 → Sisi Negatif", bg:"bg-pink-900/40", border:"border-pink-500/30", textColor:"text-pink-300",
+                isi:"Nilai f(P) negatif berarti titik P berada di sisi negatif garis (umumnya di bawah atau di kanan garis)." },
+            ]}
+            rumus={[
+              { label:"Nilai fungsi garis di titik P:", rumus:"f(P) = ax_P + by_P + c", bg:"bg-violet-900/30", border:"border-violet-500/25", labelColor:"text-violet-300" },
+              { label:"Khusus garis y = mx + c:", rumus:"f(P) = y_P - (mx_P + c)", bg:"bg-purple-900/30", border:"border-purple-500/25", labelColor:"text-purple-300" },
+            ]}
+            tips={[
+              { emoji:"🧠", teks:<>Cara cepat: ubah garis ke bentuk baku <strong>ax + by + c = 0</strong>, substitusikan titik, lalu <strong>cukup lihat tandanya</strong> saja. Tidak perlu nilai pasti!</> },
+              { emoji:"🎯", teks:<>Trik origin: untuk garis y = mx + c, hitung f(O) = c. Jika c &gt; 0, origin berada di sisi positif. Gunakan ini untuk mengecek orientasi cepat.</> },
+              { emoji:"✅", teks:"Dua titik berada di sisi SAMA jika f(P₁) dan f(P₂) bertanda SAMA (keduanya positif atau keduanya negatif). Berbeda tanda = berbeda sisi." },
+              { emoji:"📐", teks:"Jika ragu, plot titik dan garis di kertas petak. Lalu substitusikan angka — tandanya akan konfirmasi posisi yang terlihat di gambar." },
+            ]}
+            kesimpulan="Menentukan sisi garis menggunakan f(P) adalah teknik yang dipakai dalam grafis komputer (rendering & clipping), game development (collision detection), dan pemrograman AI. Satu substitusi, tanda hasilnya menentukan segalanya!"
+            kesimpulanBg="bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20"
+            kesimpulanBorder="border-violet-400/40"
+            kesimpulanTextColor="text-violet-100/90"
+          />
 
         </div>
         <div className="mt-8 text-center">

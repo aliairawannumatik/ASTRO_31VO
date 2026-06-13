@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import JarakDuaTitikInteraktif from "@/components/JarakDuaTitikInteraktif";
 import { JarakGarisHorizontal, JarakGarisVertikal, JarakGarisMiring } from "@/components/JarakTitikKeGarisInteraktif";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const JarakTitikGarisPage = () => {
   const navigate = useNavigate();
@@ -358,6 +359,38 @@ const JarakTitikGarisPage = () => {
               </div>
             )}
           </div>
+
+          {/* ═══ RANGKUMAN ═══ */}
+          <RangkumanSection
+            gradientFrom="from-rose-600" gradientVia="via-pink-600" gradientTo="to-red-700"
+            borderColor="border-rose-500/30" accentColor="text-rose-200"
+            headerIcon="📋" judul="Rangkuman — Jarak Dua Titik & Jarak Titik ke Garis"
+            subjudul="Empat rumus jarak yang wajib dikuasai dalam koordinat Kartesius"
+            ringkasan={[
+              { emoji:"📏", judul:"Jarak Dua Titik P dan Q", bg:"bg-rose-900/40", border:"border-rose-500/30", textColor:"text-rose-300",
+                isi:"Gunakan Teorema Pythagoras: d = √((x₂−x₁)²+(y₂−y₁)²). Selisih absis dan ordinat dikuadratkan lalu dijumlahkan, kemudian diakarkan." },
+              { emoji:"↔️", judul:"Ke Garis Horizontal y = k", bg:"bg-cyan-900/40", border:"border-cyan-500/30", textColor:"text-cyan-300",
+                isi:"Jarak titik P(xₚ,yₚ) ke garis y=k hanya perlu d = |yₚ − k|. Cukup selisih ordinat saja, tanpa akar!" },
+              { emoji:"↕️", judul:"Ke Garis Vertikal x = k", bg:"bg-green-900/40", border:"border-green-500/30", textColor:"text-green-300",
+                isi:"Jarak titik P(xₚ,yₚ) ke garis x=k adalah d = |xₚ − k|. Cukup selisih absis saja, tanpa akar!" },
+              { emoji:"📐", judul:"Ke Garis Miring ax+by+c=0", bg:"bg-violet-900/40", border:"border-violet-500/30", textColor:"text-violet-300",
+                isi:"Rumus umum: d = |axₚ+byₚ+c|/√(a²+b²). Penyebut √(a²+b²) adalah panjang vektor normal garis — inilah yang menormalisasi jaraknya." },
+            ]}
+            rumus={[
+              { label:"Jarak dua titik P(x₁,y₁) dan Q(x₂,y₂):", rumus:"d(PQ) = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}", bg:"bg-rose-900/30", border:"border-rose-500/25", labelColor:"text-rose-300" },
+              { label:"Jarak titik P ke garis ax+by+c=0:", rumus:"d = \\frac{|ax_P + by_P + c|}{\\sqrt{a^2+b^2}}", bg:"bg-violet-900/30", border:"border-violet-500/25", labelColor:"text-violet-300" },
+            ]}
+            tips={[
+              { emoji:"🧠", teks:<>Tripel Pythagoras hafalan: <strong>3-4-5</strong>, <strong>5-12-13</strong>, <strong>8-15-17</strong>, <strong>7-24-25</strong>. Jika muncul pasangan ini dalam soal, hasilnya pasti bilangan bulat — tidak perlu kalkulator!</> },
+              { emoji:"📐", teks:<>Jarak selalu ≥ 0 (nilai mutlak menjamin ini). Jika d = 0, titik <strong>tepat berada pada garis</strong> atau <strong>bertumpuk</strong> dengan titik lain.</> },
+              { emoji:"✅", teks:"Untuk soal jarak ke garis miring: ubah persamaan garis ke bentuk baku ax+by+c=0 terlebih dahulu. Pastikan tidak semua koefisien nol!" },
+              { emoji:"🎯", teks:"Ingat: penyebut √(a²+b²) adalah panjang vektor normal (a,b). Konsep ini identik dengan normalisasi vektor dalam fisika — bekal untuk SMA!" },
+            ]}
+            kesimpulan="Rumus jarak adalah fondasi trigonometri, kalkulus analitik, statistika (regresi linier), dan machine learning (k-NN, SVM). Dari Pythagoras kuno hingga algoritma AI modern — rumus sederhana ini tidak pernah lapuk!"
+            kesimpulanBg="bg-gradient-to-r from-rose-600/20 to-pink-600/20"
+            kesimpulanBorder="border-rose-400/40"
+            kesimpulanTextColor="text-rose-100/90"
+          />
 
         </div>
         <div className="mt-8 text-center">

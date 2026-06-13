@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import CartesianDragAnimation from "@/components/CartesianDragAnimation";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const UnsurUnsurCartesiusPage = () => {
   const navigate = useNavigate();
@@ -373,6 +374,38 @@ const UnsurUnsurCartesiusPage = () => {
               </div>
             )}
           </div>
+
+          {/* ═══ RANGKUMAN ═══ */}
+          <RangkumanSection
+            gradientFrom="from-cyan-600" gradientVia="via-sky-600" gradientTo="to-blue-700"
+            borderColor="border-cyan-500/30" accentColor="text-cyan-200"
+            headerIcon="📋" judul="Rangkuman — Unsur-Unsur Diagram Kartesius"
+            subjudul="Semua yang perlu kamu kuasai tentang bidang koordinat Kartesius"
+            ringkasan={[
+              { emoji:"📍", judul:"Sumbu X & Sumbu Y", bg:"bg-cyan-900/40", border:"border-cyan-500/30", textColor:"text-cyan-300",
+                isi:"Sumbu X adalah garis mendatar (horizontal), Sumbu Y adalah garis tegak (vertikal). Keduanya berpotongan tegak lurus di titik asal O(0,0)." },
+              { emoji:"🗺️", judul:"Empat Kuadran", bg:"bg-sky-900/40", border:"border-sky-500/30", textColor:"text-sky-300",
+                isi:"Kuadran I(+,+) → II(−,+) → III(−,−) → IV(+,−). Urutan berlawanan jarum jam mulai dari kanan atas." },
+              { emoji:"📌", judul:"Koordinat (x, y)", bg:"bg-indigo-900/40", border:"border-indigo-500/30", textColor:"text-indigo-300",
+                isi:"Absis (x) adalah jarak ke sumbu Y, dibaca pertama. Ordinat (y) adalah jarak ke sumbu X, dibaca kedua. Penulisan: P(absis, ordinat)." },
+              { emoji:"📏", judul:"Jarak ke Sumbu", bg:"bg-blue-900/40", border:"border-blue-500/30", textColor:"text-blue-300",
+                isi:"Jarak titik P(x,y) ke sumbu X = |y|. Jarak ke sumbu Y = |x|. Titik di sumbu X → y=0. Titik di sumbu Y → x=0." },
+            ]}
+            rumus={[
+              { label:"Jarak ke Sumbu X:", rumus:"d = |y_P|", bg:"bg-cyan-900/30", border:"border-cyan-500/25", labelColor:"text-cyan-300" },
+              { label:"Jarak ke Sumbu Y:", rumus:"d = |x_P|", bg:"bg-sky-900/30", border:"border-sky-500/25", labelColor:"text-sky-300" },
+            ]}
+            tips={[
+              { emoji:"🧠", teks:<>"Datar = X, Tegak = Y" — Sumbu X seperti <strong>hor</strong>izon (mendatar), Sumbu Y seperti tiang yang <strong>tegak</strong> lurus ke atas.</> },
+              { emoji:"⭐", teks:"Hafal tanda kuadran dengan putaran berlawanan jarum jam: I(+,+) → II(−,+) → III(−,−) → IV(+,−). Mulai selalu dari kanan atas!" },
+              { emoji:"✅", teks:"Titik di sumbu X selalu y = 0. Titik di sumbu Y selalu x = 0. Titik di origin O: x = 0 dan y = 0 sekaligus." },
+              { emoji:"📐", teks:<>Urutan penulisan: <strong>P(absis, ordinat)</strong> = P(x, y). Absis (mendatar) SELALU ditulis pertama sebelum ordinat (tegak).</> },
+            ]}
+            kesimpulan="Diagram Kartesius adalah sistem peta universal yang menghubungkan aljabar dengan geometri — digunakan dari GPS, animasi komputer, hingga game modern. Menguasai koordinat Kartesius berarti menguasai bahasa matematika abad ke-21!"
+            kesimpulanBg="bg-gradient-to-r from-cyan-600/20 to-blue-600/20"
+            kesimpulanBorder="border-cyan-400/40"
+            kesimpulanTextColor="text-cyan-100/90"
+          />
 
         </div>
         <div className="mt-8 text-center">

@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, MapPin } from "luc
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { RangkumanSection } from "@/components/RangkumanSection";
 
 const PosisiRelatifTitikAcuanPage = () => {
   const navigate = useNavigate();
@@ -332,6 +333,37 @@ const PosisiRelatifTitikAcuanPage = () => {
               </div>
             )}
           </div>
+
+          {/* ═══ RANGKUMAN ═══ */}
+          <RangkumanSection
+            gradientFrom="from-emerald-600" gradientVia="via-teal-600" gradientTo="to-cyan-700"
+            borderColor="border-emerald-500/30" accentColor="text-emerald-200"
+            headerIcon="📋" judul="Rangkuman — Posisi Relatif terhadap Titik Acuan"
+            subjudul="Cara menentukan arah dan letak suatu titik dari titik referensi manapun"
+            ringkasan={[
+              { emoji:"🎯", judul:"Titik Acuan sebagai Pusat Lokal", bg:"bg-emerald-900/40", border:"border-emerald-500/30", textColor:"text-emerald-300",
+                isi:"Titik acuan berperan sebagai 'origin baru'. Semua posisi dihitung relatif terhadap titik ini, bukan terhadap O(0,0) asli." },
+              { emoji:"↔️", judul:"Selisih Absis (Δx)", bg:"bg-teal-900/40", border:"border-teal-500/30", textColor:"text-teal-300",
+                isi:"Δx = xB − xA. Jika Δx > 0 → B di kanan A. Jika Δx < 0 → B di kiri A. Jika Δx = 0 → segaris vertikal." },
+              { emoji:"↕️", judul:"Selisih Ordinat (Δy)", bg:"bg-cyan-900/40", border:"border-cyan-500/30", textColor:"text-cyan-300",
+                isi:"Δy = yB − yA. Jika Δy > 0 → B di atas A. Jika Δy < 0 → B di bawah A. Jika Δy = 0 → segaris horizontal." },
+              { emoji:"🔄", judul:"Posisi Relatif Berbalik", bg:"bg-green-900/40", border:"border-green-500/30", textColor:"text-green-300",
+                isi:"Posisi B terhadap A ≠ posisi A terhadap B. Keduanya selalu berlawanan: jika B di kanan A, maka A di kiri B." },
+            ]}
+            rumus={[
+              { label:"Selisih koordinat (posisi B terhadap A):", rumus:"\\Delta x = x_B - x_A \\qquad \\Delta y = y_B - y_A", bg:"bg-emerald-900/30", border:"border-emerald-500/25", labelColor:"text-emerald-300" },
+            ]}
+            tips={[
+              { emoji:"🧠", teks:<>Rumus mudah: <strong>TUJUAN − ACUAN</strong>. Koordinat titik yang dicari posisinya (tujuan) dikurangi koordinat titik acuan. Jangan sampai terbalik!</> },
+              { emoji:"🗺️", teks:"Bayangkan titik acuan sebagai 'rumahmu' yang menjadi titik (0,0) di peta barumu. Semua jarak diukur dari sana ke segala arah." },
+              { emoji:"📐", teks:<>Δx = 0 → kedua titik pada garis vertikal yang sama. Δy = 0 → kedua titik pada garis horizontal yang sama. Keduanya nol → titik berimpit.</> },
+              { emoji:"✅", teks:"Cek jawaban: jika B(5,3) dan A(2,1), maka Δx=3 (kanan 3 satuan), Δy=2 (atas 2 satuan). Bayangkan panah dari A ke B — masuk akal?" },
+            ]}
+            kesimpulan="Posisi relatif digunakan di mana-mana — arahan GPS ('belok kiri 200 m'), sistem koordinat robot, peta militer, hingga spreadsheet. Konsep Δx dan Δy adalah dasar dari semua sistem navigasi modern di bumi!"
+            kesimpulanBg="bg-gradient-to-r from-emerald-600/20 to-cyan-600/20"
+            kesimpulanBorder="border-emerald-400/40"
+            kesimpulanTextColor="text-emerald-100/90"
+          />
 
         </div>
         <div className="mt-8 text-center">
