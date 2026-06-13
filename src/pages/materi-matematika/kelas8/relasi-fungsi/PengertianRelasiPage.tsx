@@ -378,55 +378,171 @@ const PengertianRelasiPage = () => {
             )}
           </div>
 
-          {/* CONTOH 3 - SULIT */}
+          {/* CONTOH SOAL */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
+            <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="✏️ Contoh Soal" />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
-                <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
+                <div className="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-cyan-300 mb-2">📝 Soal</p>
                   <p className="font-body text-sm text-white/85 leading-relaxed">
                     Diketahui <InlineMath math="P = \{1, 2, 3, 4, 5\}" /> dan <InlineMath math="Q = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />. Relasi dari P ke Q didefinisikan sebagai "faktor dari". Tentukan:
-                    <br />a) Himpunan pasangan berurutan dari relasi ini
-                    <br />b) Range dari relasi tersebut
-                    <br />c) Apakah setiap anggota P pasti memiliki pasangan di Q?
+                    <br />a) Sajikan relasi tersebut dalam diagram panah, himpunan pasangan berurutan, dan diagram kartesius!
+                    <br />b) Tentukan Domain, Kodomain, dan Range dari relasi tersebut!
                   </p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-4">
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
-                  <div className="space-y-3 text-sm font-body">
+                  <div className="space-y-4 text-sm font-body">
+
+                    {/* Langkah awal */}
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-2">Langkah 1 — Tentukan aturan "faktor dari":</p>
+                      <p className="text-cyan-300 font-semibold mb-2">Langkah awal — Tentukan pasangan berdasarkan aturan "faktor dari":</p>
                       <p className="text-white/60 text-xs mb-2">a adalah faktor dari b jika b habis dibagi a (b ÷ a tidak bersisa).</p>
                       <div className="space-y-1 text-xs text-white/70">
-                        <p><strong className="text-cyan-200">1</strong> adalah faktor dari: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</p>
-                        <p><strong className="text-cyan-200">2</strong> adalah faktor dari: 2, 4, 6, 8, 10</p>
-                        <p><strong className="text-cyan-200">3</strong> adalah faktor dari: 3, 6, 9</p>
-                        <p><strong className="text-cyan-200">4</strong> adalah faktor dari: 4, 8</p>
-                        <p><strong className="text-cyan-200">5</strong> adalah faktor dari: 5, 10</p>
+                        <p><strong className="text-cyan-300">1</strong> adalah faktor dari: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</p>
+                        <p><strong className="text-green-300">2</strong> adalah faktor dari: 2, 4, 6, 8, 10</p>
+                        <p><strong className="text-orange-300">3</strong> adalah faktor dari: 3, 6, 9</p>
+                        <p><strong className="text-violet-300">4</strong> adalah faktor dari: 4, 8</p>
+                        <p><strong className="text-yellow-300">5</strong> adalah faktor dari: 5, 10</p>
                       </div>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-2">a) Himpunan Pasangan Berurutan:</p>
-                      <div className="text-xs text-white/70 leading-relaxed">
-                        <BlockMath math="\{(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10)," />
-                        <BlockMath math="(2,2),(2,4),(2,6),(2,8),(2,10),(3,3),(3,6),(3,9)," />
-                        <BlockMath math="(4,4),(4,8),(5,5),(5,10)\}" />
+
+                    {/* a) Tiga cara penyajian */}
+                    <div className="bg-slate-800/50 rounded-lg p-3 space-y-5">
+                      <p className="text-violet-300 font-semibold">a) Tiga Cara Penyajian Relasi:</p>
+
+                      {/* ① Diagram Panah */}
+                      <div className="space-y-2">
+                        <p className="text-cyan-300 text-xs font-semibold">① Diagram Panah</p>
+                        <div className="flex justify-center">
+                          <svg viewBox="0 0 360 300" className="w-full max-w-sm" aria-label="Diagram panah faktor dari">
+                            <defs>
+                              <marker id="ep1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#22d3ee"/></marker>
+                              <marker id="ep2" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#4ade80"/></marker>
+                              <marker id="ep3" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#fb923c"/></marker>
+                              <marker id="ep4" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#c084fc"/></marker>
+                              <marker id="ep5" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#facc15"/></marker>
+                            </defs>
+                            <ellipse cx="75"  cy="152" rx="60" ry="120" fill="rgba(8,145,178,0.10)"   stroke="#22d3ee" strokeWidth="1.8"/>
+                            <ellipse cx="285" cy="152" rx="60" ry="140" fill="rgba(124,58,237,0.10)" stroke="#a78bfa" strokeWidth="1.8"/>
+                            <text x="75"  y="22" textAnchor="middle" fill="#22d3ee" fontSize="9" fontWeight="bold">P (Domain)</text>
+                            <text x="285" y="8"  textAnchor="middle" fill="#a78bfa" fontSize="9" fontWeight="bold">Q (Kodomain)</text>
+                            {/* P items */}
+                            {[["1","#22d3ee",59],["2","#4ade80",91],["3","#fb923c",123],["4","#c084fc",155],["5","#facc15",187]].map(([n,c,y]) => (
+                              <text key={n} x="75" y={y} textAnchor="middle" fill={c} fontSize="13" fontWeight="bold">{n}</text>
+                            ))}
+                            {/* Q items */}
+                            {[1,2,3,4,5,6,7,8,9,10].map((q,i) => (
+                              <text key={q} x="285" y={30+i*27} textAnchor="middle" fill="#c4b5fd" fontSize="11" fontWeight="bold">{q}</text>
+                            ))}
+                            {/* Arrows — [x1,y1, x2,y2, markerName] */}
+                            {/* src: P right-oval-edge; dst: Q left-oval-edge−8 */}
+                            {/* P=1(y=54,x1=115) P=2(y=86,x1=128) P=3(y=118,x1=134) P=4(y=150,x1=135) P=5(y=182,x1=132) */}
+                            {/* Q y-centers: 25,52,79,106,133,160,187,214,241,268  x2: 245,232,224,219,217,217,220,225,234,249 */}
+                            {[
+                              // P=1 → Q=1..10
+                              [115,54, 245,25, "ep1"],[115,54, 232,52, "ep1"],[115,54, 224,79, "ep1"],
+                              [115,54, 219,106,"ep1"],[115,54, 217,133,"ep1"],[115,54, 217,160,"ep1"],
+                              [115,54, 220,187,"ep1"],[115,54, 225,214,"ep1"],[115,54, 234,241,"ep1"],[115,54, 249,268,"ep1"],
+                              // P=2 → Q=2,4,6,8,10
+                              [128,86, 232,52, "ep2"],[128,86, 219,106,"ep2"],[128,86, 217,160,"ep2"],[128,86, 225,214,"ep2"],[128,86, 249,268,"ep2"],
+                              // P=3 → Q=3,6,9
+                              [134,118,224,79, "ep3"],[134,118,217,160,"ep3"],[134,118,234,241,"ep3"],
+                              // P=4 → Q=4,8
+                              [135,150,219,106,"ep4"],[135,150,225,214,"ep4"],
+                              // P=5 → Q=5,10
+                              [132,182,217,133,"ep5"],[132,182,249,268,"ep5"],
+                            ].map(([x1,y1,x2,y2,mk],i) => (
+                              <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={{"ep1":"#22d3ee","ep2":"#4ade80","ep3":"#fb923c","ep4":"#c084fc","ep5":"#facc15"}[mk]} strokeWidth="1.1" markerEnd={`url(#${mk})`} opacity="0.8"/>
+                            ))}
+                          </svg>
+                        </div>
+                        <div className="flex flex-wrap gap-2 justify-center text-xs font-body text-white/50">
+                          {[["bg-cyan-400","1"],["bg-green-400","2"],["bg-orange-400","3"],["bg-violet-400","4"],["bg-yellow-400","5"]].map(([c,n]) => (
+                            <span key={n} className="flex items-center gap-1"><span className={`w-2.5 h-0.5 ${c} inline-block`}/>{n}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* ② Himpunan Pasangan Berurutan */}
+                      <div className="space-y-1">
+                        <p className="text-green-300 text-xs font-semibold">② Himpunan Pasangan Berurutan</p>
+                        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3 font-body text-xs leading-relaxed text-white/80">
+                          <span className="text-green-300 font-bold">{"{"}</span>{" "}
+                          (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (1,8), (1,9), (1,10),{" "}
+                          (2,2), (2,4), (2,6), (2,8), (2,10), (3,3), (3,6), (3,9),{" "}
+                          (4,4), (4,8), (5,5), (5,10){" "}
+                          <span className="text-green-300 font-bold">{"}"}</span>
+                        </div>
+                        <p className="text-white/40 text-xs text-center">Total: 22 pasangan berurutan</p>
+                      </div>
+
+                      {/* ③ Diagram Kartesius */}
+                      <div className="space-y-1">
+                        <p className="text-violet-300 text-xs font-semibold">③ Diagram Kartesius</p>
+                        <div className="flex justify-center">
+                          <svg viewBox="0 0 210 250" className="w-full max-w-xs" aria-label="Diagram kartesius faktor dari">
+                            {/* Grid */}
+                            {[1,2,3,4,5].map(p => <line key={p} x1={30+p*30} y1={25} x2={30+p*30} y2={215} stroke="rgba(148,163,184,0.15)" strokeWidth="1" strokeDasharray="3,3"/>)}
+                            {[1,2,3,4,5,6,7,8,9,10].map(q => <line key={q} x1={30} y1={215-q*18} x2={195} y2={215-q*18} stroke="rgba(148,163,184,0.15)" strokeWidth="1" strokeDasharray="3,3"/>)}
+                            {/* Axes */}
+                            <line x1="30" y1="215" x2="197" y2="215" stroke="#94a3b8" strokeWidth="1.8"/>
+                            <line x1="30" y1="215" x2="30"  y2="18"  stroke="#94a3b8" strokeWidth="1.8"/>
+                            <polygon points="194,212 201,215 194,218" fill="#94a3b8"/>
+                            <polygon points="27,18 30,11 33,18"       fill="#94a3b8"/>
+                            {/* X labels */}
+                            {[["1","#22d3ee"],["2","#4ade80"],["3","#fb923c"],["4","#c084fc"],["5","#facc15"]].map(([p,c],i) => (
+                              <g key={p}>
+                                <line x1={60+i*30} y1="215" x2={60+i*30} y2="219" stroke="#94a3b8" strokeWidth="1.2"/>
+                                <text x={60+i*30} y="229" textAnchor="middle" fill={c} fontSize="8" fontWeight="bold">{p}</text>
+                              </g>
+                            ))}
+                            {/* Y labels */}
+                            {[1,2,3,4,5,6,7,8,9,10].map(q => (
+                              <g key={q}>
+                                <line x1="26" y1={215-q*18} x2="30" y2={215-q*18} stroke="#94a3b8" strokeWidth="1.2"/>
+                                <text x="23" y={215-q*18+3} textAnchor="end" fill="#a78bfa" fontSize="7.5" fontWeight="bold">{q}</text>
+                              </g>
+                            ))}
+                            <text x="113" y="243" textAnchor="middle" fill="#64748b" fontSize="7">P (Domain)</text>
+                            <text x="10"  y="115" textAnchor="middle" fill="#64748b" fontSize="7" transform="rotate(-90 10 115)">Q (Range)</text>
+                            {/* Data points */}
+                            {([
+                              [1,1],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9],[1,10],
+                              [2,2],[2,4],[2,6],[2,8],[2,10],
+                              [3,3],[3,6],[3,9],
+                              [4,4],[4,8],
+                              [5,5],[5,10],
+                            ] as [number,number][]).map(([p,q]) => {
+                              const colors: Record<number,string> = {1:"#22d3ee",2:"#4ade80",3:"#fb923c",4:"#c084fc",5:"#facc15"};
+                              return <circle key={`${p}-${q}`} cx={30+p*30} cy={215-q*18} r="4" fill={colors[p]} stroke="white" strokeWidth="1"/>;
+                            })}
+                          </svg>
+                        </div>
                       </div>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-orange-300 font-semibold mb-1">b) Range:</p>
-                      <p className="text-white/60 text-xs mb-1">Anggota Q yang benar-benar dipasangkan:</p>
-                      <BlockMath math="\text{Range} = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\} = Q" />
-                      <p className="text-white/50 text-xs">Seluruh anggota Q menjadi range karena 1 adalah faktor dari semua bilangan!</p>
+
+                    {/* b) Domain, Kodomain, Range */}
+                    <div className="bg-slate-800/50 rounded-lg p-3 space-y-2">
+                      <p className="text-orange-300 font-semibold mb-2">b) Domain, Kodomain, dan Range:</p>
+                      <div className="flex items-start gap-3 bg-cyan-900/20 border border-cyan-500/20 rounded-lg px-3 py-2">
+                        <span className="font-body text-xs font-bold text-cyan-400 min-w-[90px]">Domain (P)</span>
+                        <span className="font-body text-xs text-white/80">= {"{"} 1, 2, 3, 4, 5 {"}"}</span>
+                      </div>
+                      <div className="flex items-start gap-3 bg-violet-900/20 border border-violet-500/20 rounded-lg px-3 py-2">
+                        <span className="font-body text-xs font-bold text-violet-400 min-w-[90px]">Kodomain (Q)</span>
+                        <span className="font-body text-xs text-white/80">= {"{"} 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 {"}"}</span>
+                      </div>
+                      <div className="flex items-start gap-3 bg-green-900/20 border border-green-500/20 rounded-lg px-3 py-2">
+                        <span className="font-body text-xs font-bold text-green-400 min-w-[90px]">Range</span>
+                        <span className="font-body text-xs text-white/80">= {"{"} 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 {"}"} = Q</span>
+                      </div>
+                      <p className="font-body text-xs text-white/50 pt-1">Range = Kodomain karena angka 1 adalah faktor dari semua bilangan di Q, sehingga setiap anggota Q punya pasangan.</p>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-green-300 font-semibold mb-1">c) Apakah setiap anggota P memiliki pasangan di Q?</p>
-                      <p className="text-white/70 text-xs">Ya! Setiap bilangan <InlineMath math="a \in P" /> minimal merupakan faktor dari dirinya sendiri (karena <InlineMath math="a \in Q" /> untuk semua <InlineMath math="a \in P" />). Jadi setiap anggota P pasti punya pasangan di Q.</p>
-                    </div>
-                    <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-red-300">✅ Total pasangan: 22 pasangan berurutan. Range = Q (seluruh kodomain).</p>
+
+                    <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
+                      <p className="font-body text-sm font-bold text-cyan-300">✅ Total: 22 pasangan berurutan. Range = Kodomain = Q.</p>
                     </div>
                   </div>
                 </div>
