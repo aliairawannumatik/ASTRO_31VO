@@ -451,42 +451,6 @@ const PosisiRelatifTitikDanGarisPage = () => {
                   </div>
                 </div>
 
-                <div className="bg-slate-800/70 border border-violet-500/20 rounded-xl p-4 flex flex-col items-center gap-3">
-                  <p className="font-body text-xs font-bold text-violet-300 uppercase">📐 Contoh: Garis y = x (atau x − y = 0)</p>
-                  <LinePointGrid
-                    slope={1}
-                    intercept={0}
-                    points={[
-                      { x: -3, y: 2, label: "A(−3,2)", side: "atas" },
-                      { x: 3, y: -1, label: "B(3,−1)", side: "bawah" },
-                      { x: 2, y: 2, label: "C(2,2)", side: "pada" },
-                    ]}
-                  />
-                  <div className="grid grid-cols-3 gap-2 w-full text-xs font-body">
-                    <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-lg p-2 text-center">
-                      <p className="text-cyan-300 font-bold">A(−3, 2)</p>
-                      <p className="text-white/60">f(A) = −3−2 = −5</p>
-                      <p className="text-cyan-300">Sisi negatif</p>
-                      <p className="text-white/40 text-xs">(di atas garis y=x)</p>
-                    </div>
-                    <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-2 text-center">
-                      <p className="text-green-300 font-bold">C(2, 2)</p>
-                      <p className="text-white/60">f(C) = 2−2 = 0</p>
-                      <p className="text-green-300">Pada garis</p>
-                    </div>
-                    <div className="bg-pink-900/30 border border-pink-500/30 rounded-lg p-2 text-center">
-                      <p className="text-pink-300 font-bold">B(3, −1)</p>
-                      <p className="text-white/60">f(B) = 3−(−1) = 4</p>
-                      <p className="text-pink-300">Sisi positif</p>
-                      <p className="text-white/40 text-xs">(di bawah garis y=x)</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-xs font-body">
-                  <p className="text-yellow-200 font-bold mb-1">⚠️ Catatan Penting:</p>
-                  <p className="text-yellow-100/80">"Sisi positif" dan "sisi negatif" bergantung pada cara penulisan persamaan garis. Selalu pastikan garis ditulis dalam bentuk baku <InlineMath math="ax + by + c = 0" /> sebelum mensubstitusi.</p>
-                </div>
               </div>
             )}
           </div>
@@ -500,8 +464,42 @@ const PosisiRelatifTitikDanGarisPage = () => {
                 <p className="text-white/50 text-xs font-body mt-0.5">Geser L₁, L₂ untuk mengubah garis, dan titik P — posisi P otomatis ditentukan!</p>
               </div>
             </div>
-            <div className="px-5 py-5">
+            <div className="px-5 py-5 space-y-4">
               <InteraktifGaris />
+
+              {/* Keterangan nilai f(P) */}
+              <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4 space-y-2 text-xs font-body">
+                <p className="font-bold text-white mb-2">🧭 Cara Membaca Nilai f(P):</p>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-3 bg-pink-900/30 border border-pink-500/30 rounded-lg p-3">
+                    <span className="w-4 h-4 rounded-full bg-pink-400 shrink-0" />
+                    <div>
+                      <p className="font-mono font-bold text-pink-300">f(P) &gt; 0 → Sisi POSITIF</p>
+                      <p className="text-white/60 mt-0.5">Titik P berada di sisi positif garis (di atas atau di bawah bergantung penulisan persamaan)</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 bg-green-900/30 border border-green-500/30 rounded-lg p-3">
+                    <span className="w-4 h-4 rounded-full bg-green-400 shrink-0" />
+                    <div>
+                      <p className="font-mono font-bold text-green-300">f(P) = 0 → TEPAT PADA garis</p>
+                      <p className="text-white/60 mt-0.5">Koordinat titik P memenuhi persamaan garis — titik P tepat berada di atasnya</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 bg-cyan-900/30 border border-cyan-500/30 rounded-lg p-3">
+                    <span className="w-4 h-4 rounded-full bg-cyan-400 shrink-0" />
+                    <div>
+                      <p className="font-mono font-bold text-cyan-300">f(P) &lt; 0 → Sisi NEGATIF</p>
+                      <p className="text-white/60 mt-0.5">Titik P berada di sisi negatif garis (berlawanan dengan sisi positif)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Catatan penting */}
+              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-xs font-body">
+                <p className="text-yellow-200 font-bold mb-1">⚠️ Catatan Penting:</p>
+                <p className="text-yellow-100/80">"Sisi positif" dan "sisi negatif" bergantung pada cara penulisan persamaan garis. Selalu pastikan garis ditulis dalam bentuk baku <InlineMath math="ax + by + c = 0" /> sebelum mensubstitusi.</p>
+              </div>
             </div>
           </div>
 
