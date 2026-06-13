@@ -469,6 +469,70 @@ const PembagianBentukDesimalPage = () => {
           )}
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-green-500 via-teal-500 to-emerald-600 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">➗ RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Pembagian Bentuk Desimal — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-green-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-green-500/30 border border-green-500 flex items-center justify-center text-[10px]">1</span>
+                Aturan Pembagian Desimal
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { label: "Kalikan keduanya agar pembagi jadi bilangan bulat", desc: "4,8 ÷ 0,12 → kalikan ×100 → 480 ÷ 12 = 40. Selalu kalikan pembagi dan yang dibagi dengan 10ⁿ yang sama!", color: "from-green-900/70 to-green-800/30 border-green-500/50 text-green-200" },
+                  { label: "Jumlah desimal menentukan pengali", desc: "Pembagi 0,12 punya 2 desimal → kalikan ×100. Pembagi 0,5 punya 1 desimal → kalikan ×10.", color: "from-teal-900/70 to-teal-800/30 border-teal-500/50 text-teal-200" },
+                  { label: "Pembagian dengan 10, 100, 1000", desc: "Geser koma ke kiri! 56,4 ÷ 10 = 5,64. 56,4 ÷ 100 = 0,564. 56,4 ÷ 1000 = 0,0564", color: "from-emerald-900/70 to-emerald-800/30 border-emerald-500/50 text-emerald-200" },
+                  { label: "Hasilnya bisa pecahan tak berulang atau berulang", desc: "1 ÷ 3 = 0,333... (berulang). 1 ÷ 4 = 0,25 (berhenti). Kenali keduanya!", color: "from-cyan-900/70 to-cyan-800/30 border-cyan-500/50 text-cyan-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                Tips &amp; Trik Jitu
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "🎯", tip: "Jadikan pembagi bilangan bulat SELALU!", detail: "Aturan emas pembagian desimal: buat pembagi jadi bilangan bulat dengan kalikan ×10ⁿ. Setelah itu, hitung biasa.", color: "bg-green-900/30 border-green-500/30" },
+                  { icon: "⬅️", tip: "÷10ⁿ = geser koma ke kiri n langkah", detail: "123,4 ÷ 100 = 1,234. Hanya perlu menggeser koma — tidak perlu menghitung panjang!", color: "bg-teal-900/30 border-teal-500/30" },
+                  { icon: "✅", tip: "Verifikasi dengan perkalian balik", detail: "Jika 4,8 ÷ 0,12 = 40, cek: 40 × 0,12 = 4,8 ✓. Sangat mudah untuk mengecek jawaban!", color: "bg-emerald-900/30 border-emerald-500/30" },
+                  { icon: "🎲", tip: "Estimasi kewajaran hasil", detail: "4,8 ÷ 0,12 ≈ 5 ÷ 0,1 = 50. Hasil 40 dekat dari estimasi 50 → wajar! Jika dapat 4 atau 400, ada yang salah.", color: "bg-cyan-900/30 border-cyan-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-500/20 via-teal-500/15 to-emerald-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">🌿</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Pembagian desimal memiliki <strong className="text-green-300">satu strategi utama: ubah pembagi menjadi bilangan bulat</strong> dengan mengalikan keduanya dengan 10ⁿ. Setelah pembagi menjadi bilangan bulat, lakukan pembagian biasa. Dan untuk pembagian dengan 10ⁿ, cukup <strong className="text-yellow-300">geser koma ke kiri</strong> — tidak perlu menghitung!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["Kalikan ×10ⁿ dulu", "Pembagi jadi bulat", "÷10ⁿ = geser kiri", "Verifikasi ×balik", "Estimasi kewajaran"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke Pembulatan Bilangan Desimal!</p>
+            </div>
+          </div>
+        </div>
+
         {/* Tombol Kembali */}
         <div className="mt-8 text-center">
           <button

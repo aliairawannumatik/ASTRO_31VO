@@ -656,6 +656,70 @@ const PenjumlahanPenguranganPage = () => {
           </div>
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-yellow-500 via-lime-500 to-green-500 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">➕➖ RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Penjumlahan &amp; Pengurangan Pecahan — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">1</span>
+                Aturan Penjumlahan &amp; Pengurangan Pecahan
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { label: "Penyebut SAMA → Langsung operasikan", desc: "a/b + c/b = (a+c)/b dan a/b − c/b = (a−c)/b. Hanya pembilang yang dijumlahkan/dikurangi, penyebut tetap!", color: "from-yellow-900/70 to-yellow-800/30 border-yellow-500/50 text-yellow-200" },
+                  { label: "Penyebut BEDA → Samakan dulu dengan KPK", desc: "Cari KPK penyebut. Ubah semua pecahan ke penyebut KPK. Baru jumlah/kurangi pembilangnya.", color: "from-lime-900/70 to-lime-800/30 border-lime-500/50 text-lime-200" },
+                  { label: "Pecahan Campuran → Ubah ke biasa dulu", desc: "2 3/4 = (2×4+3)/4 = 11/4. Ubah semua pecahan campuran ke bentuk biasa sebelum dioperasikan.", color: "from-green-900/70 to-green-800/30 border-green-500/50 text-green-200" },
+                  { label: "Sederhanakan hasil akhir!", desc: "Setelah menjumlah/mengurangi, selalu cek apakah hasilnya bisa disederhanakan dengan FPB.", color: "from-teal-900/70 to-teal-800/30 border-teal-500/50 text-teal-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-lime-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-lime-500/30 border border-lime-500 flex items-center justify-center text-[10px]">2</span>
+                Tips &amp; Trik Jitu
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "🎯", tip: "Jangan pernah langsung menjumlah penyebut!", detail: "3/4 + 1/2 ≠ 4/6. Ini kesalahan paling umum! Selalu samakan penyebut dulu dengan KPK: 3/4 + 2/4 = 5/4.", color: "bg-red-900/30 border-red-500/30" },
+                  { icon: "⚡", tip: "Gunakan KPK, bukan perkalian langsung", detail: "Untuk 1/6 + 1/4, KPK = 12 (bukan 24). Menggunakan KPK membuat pecahan lebih kecil dan mudah disederhanakan.", color: "bg-yellow-900/30 border-yellow-500/30" },
+                  { icon: "🔄", tip: "Tiga pecahan sekaligus? Tetap samakan semua dulu", detail: "Cari KPK dari ketiga penyebut sekaligus, ubah semua ke penyebut yang sama, baru kerjakan dari kiri ke kanan.", color: "bg-lime-900/30 border-lime-500/30" },
+                  { icon: "✅", tip: "Verifikasi dengan desimal", detail: "Ubah pecahanmu ke desimal dan hitung. Contoh: 1/4 + 1/2 = 0,25 + 0,50 = 0,75 = 3/4. Cocokkan hasilmu!", color: "bg-green-900/30 border-green-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-yellow-500/20 via-lime-500/15 to-green-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">🌻</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Kunci penjumlahan dan pengurangan pecahan hanya satu: <strong className="text-yellow-300">penyebut harus sama sebelum dioperasikan</strong>. Gunakan <strong className="text-lime-300">KPK untuk menyamakan penyebut</strong>, operasikan hanya pembilangnya, lalu sederhanakan hasilnya dengan FPB. Sederhana, sistematis, dan tidak bisa salah!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["Penyebut Sama = Langsung", "KPK untuk Samakan", "Ubah Campuran dulu", "Sederhanakan Akhir"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke Perkalian Pecahan!</p>
+            </div>
+          </div>
+        </div>
+
         <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-7/bilangan-rasional"); }}

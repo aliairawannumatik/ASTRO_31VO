@@ -556,6 +556,71 @@ const ArtiPecahanPage = () => {
               <li>Saat membandingkan pecahan dengan penyebut berbeda, gunakan KPK untuk menyamakan penyebutnya.</li>
             </ul>
           </div>
+
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">🍕 RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Arti Pecahan &amp; Bilangan Rasional — Kelas 7</p>
+            </div>
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-emerald-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/30 border border-emerald-500 flex items-center justify-center text-[10px]">1</span>
+                  Konsep Dasar Pecahan
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { label: "Pecahan = a/b", desc: "a = pembilang (bagian yang diambil), b = penyebut (jumlah bagian keseluruhan). Penyebut TIDAK boleh nol!", color: "from-emerald-900/70 to-emerald-800/30 border-emerald-500/50 text-emerald-200" },
+                    { label: "Pecahan Senilai", desc: "a/b = (a×k)/(b×k) dan a/b = (a÷k)/(b÷k). Kalikan atau bagi pembilang dan penyebut dengan bilangan yang sama.", color: "from-teal-900/70 to-teal-800/30 border-teal-500/50 text-teal-200" },
+                    { label: "Menyederhanakan Pecahan", desc: "Bagi pembilang dan penyebut dengan FPB-nya. Contoh: 12/18 = 12÷6 / 18÷6 = 2/3", color: "from-cyan-900/70 to-cyan-800/30 border-cyan-500/50 text-cyan-200" },
+                    { label: "Membandingkan Pecahan", desc: "Samakan penyebut dengan KPK terlebih dahulu. Setelah penyebut sama, bandingkan pembilangnya langsung.", color: "from-blue-900/70 to-blue-800/30 border-blue-500/50 text-blue-200" },
+                    { label: "Jenis Pecahan", desc: "Biasa (a/b), Campuran (c a/b), Desimal (0,75), Persen (75%). Semuanya bisa dikonversi satu sama lain!", color: "from-violet-900/70 to-violet-800/30 border-violet-500/50 text-violet-200" },
+                  ].map(({ label, desc, color }) => (
+                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                      <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                  Tips &amp; Trik Jitu
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "🔑", tip: "FPB untuk menyederhanakan, KPK untuk menyamakan", detail: "Ini dua alat utama dalam semua operasi pecahan. Kuasai FPB dan KPK, dan pecahan tidak akan pernah sulit lagi!", color: "bg-emerald-900/30 border-emerald-500/30" },
+                    { icon: "👁️", tip: "Visualisasikan pecahan sebagai bagian kue/pizza", detail: "3/4 berarti 3 dari 4 potongan. Visualisasi ini membantu kamu mengerti operasi pecahan secara intuitif.", color: "bg-teal-900/30 border-teal-500/30" },
+                    { icon: "⚡", tip: "Kalikan silang untuk membandingkan dua pecahan", detail: "Untuk a/b dan c/d: kalikan silang a×d dan b×c. Jika a×d > b×c, maka a/b > c/d. Tidak perlu cari KPK!", color: "bg-cyan-900/30 border-cyan-500/30" },
+                    { icon: "✅", tip: "Selalu sederhanakan hasil akhirmu", detail: "Jawaban pecahan yang belum disederhanakan sering dianggap salah dalam ujian. Biasakan cari FPB di akhir!", color: "bg-blue-900/30 border-blue-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-emerald-500/20 via-teal-500/15 to-cyan-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🌍</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Pecahan adalah <strong className="text-emerald-300">bahasa matematika untuk menyatakan bagian dari keseluruhan</strong>. Dari belahan pizza hingga nilai ujian, dari takaran resep masakan hingga persentase diskon — pecahan ada di mana-mana! Dengan memahami arti, jenis, dan cara menyederhanakan pecahan, kamu siap untuk <strong className="text-yellow-300">menguasai semua operasi pecahan</strong> berikutnya!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Pembilang/Penyebut", "Pecahan Senilai", "FPB untuk Sederhanakan", "KPK untuk Samakan", "Empat Jenis Pecahan"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke operasi-operasi pecahan!</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="mt-8 text-center">

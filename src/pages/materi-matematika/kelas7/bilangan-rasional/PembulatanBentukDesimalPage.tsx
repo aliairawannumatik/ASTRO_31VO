@@ -518,6 +518,82 @@ const PembulatanBentukDesimalPage = () => {
           )}
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">🔢 RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Pembulatan Bilangan Desimal — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-rose-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-rose-500/30 border border-rose-500 flex items-center justify-center text-[10px]">1</span>
+                Aturan Pembulatan Desimal
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { label: "Digit ≥ 5", aksi: "Bulatkan ke ATAS (+1)", contoh: "3,47 → 3,5 (ke 1 des.)", color: "bg-green-900/50 border-green-500/40 text-green-200" },
+                  { label: "Digit < 5", aksi: "Bulatkan ke BAWAH (tetap)", contoh: "3,43 → 3,4 (ke 1 des.)", color: "bg-red-900/50 border-red-500/40 text-red-200" },
+                ].map(({ label, aksi, contoh, color }) => (
+                  <div key={label} className={`${color} border rounded-xl px-3 py-2.5`}>
+                    <p className="font-body text-xs font-bold">{label}</p>
+                    <p className="font-mono text-[11px] text-white/70 mt-0.5">{aksi}</p>
+                    <p className="font-body text-[11px] text-white/45 mt-0.5">{contoh}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-1 gap-2 mt-1">
+                {[
+                  { label: "Pembulatan ke satuan", desc: "Perhatikan digit di belakang koma pertama (persepuluhan). ≥5 → satuan +1, <5 → satuan tetap. Contoh: 7,6 → 8; 7,3 → 7", color: "from-rose-900/60 to-rose-800/20 border-rose-500/40 text-rose-200" },
+                  { label: "Pembulatan ke satu desimal", desc: "Perhatikan digit ke-2 di belakang koma. Contoh: 3,47 → 3,5 (digit ke-2 = 7 ≥ 5, bulatkan atas)", color: "from-pink-900/60 to-pink-800/20 border-pink-500/40 text-pink-200" },
+                  { label: "Pembulatan ke dua desimal", desc: "Perhatikan digit ke-3 di belakang koma. Contoh: 2,345 → 2,35 (digit ke-3 = 5 ≥ 5, bulatkan atas)", color: "from-fuchsia-900/60 to-fuchsia-800/20 border-fuchsia-500/40 text-fuchsia-200" },
+                  { label: "Pembulatan ke puluhan/ratusan", desc: "Perhatikan digit di posisi yang dikurangi. Contoh: 3.748 → 3.700 ke ratusan (perhatikan digit puluhan = 4 < 5)", color: "from-purple-900/60 to-purple-800/20 border-purple-500/40 text-purple-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                Tips &amp; Trik Jitu
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "👆", tip: "Selalu lihat satu digit SETELAH posisi yang dibulatkan", detail: "Jika membulatkan ke 1 desimal, lihat digit ke-2. Jika membulatkan ke satuan, lihat digit ke-1. Bukan digit di posisi itu sendiri!", color: "bg-rose-900/30 border-rose-500/30" },
+                  { icon: "⚠️", tip: "Waspada pembulatan berantai (cascading)", detail: "2,995 dibulatkan ke 2 desimal → lihat digit ke-3 = 5 → bulatkan ke atas → 2,996 (bukan 3,00!). Hanya bulatkan satu kali!", color: "bg-pink-900/30 border-pink-500/30" },
+                  { icon: "🎯", tip: "Tanda ≥5 naik, <5 tetap — tidak ada pengecualian", detail: "Angka 5 selalu dibulatkan ke atas, bukan ke bawah. Ini aturan internasional (half-up rounding).", color: "bg-fuchsia-900/30 border-fuchsia-500/30" },
+                  { icon: "💡", tip: "Pembulatan berguna untuk estimasi cepat", detail: "Menghitung 34,7 × 18,3 sulit. Tapi perkiraan 35 × 18 = 630 jauh lebih mudah dan cukup akurat untuk banyak keperluan!", color: "bg-purple-900/30 border-purple-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-rose-500/20 via-pink-500/15 to-fuchsia-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">🌹</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Pembulatan adalah <strong className="text-rose-300">seni menyederhanakan angka</strong> tanpa kehilangan terlalu banyak akurasi. Aturannya sederhana: <strong className="text-yellow-300">lihat digit berikutnya — ≥5 naik, &lt;5 tetap</strong>. Pembulatan digunakan setiap hari — dari harga supermarket hingga laporan ilmiah — karena angka yang terlalu panjang tidak praktis!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["≥5 Naik", "<5 Tetap", "Lihat Digit Berikutnya", "Satuan/Desimal/Ratusan", "Estimasi Cepat"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🎓 Kamu telah menguasai seluruh materi Bilangan Rasional Kelas 7!</p>
+            </div>
+          </div>
+        </div>
+
         {/* Tombol Kembali */}
         <div className="mt-8 text-center">
           <button

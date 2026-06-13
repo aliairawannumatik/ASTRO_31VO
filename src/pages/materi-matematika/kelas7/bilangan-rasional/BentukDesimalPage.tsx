@@ -186,6 +186,79 @@ const BentukDesimalPage = () => {
             </div>
           )}
         </div>
+
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">🔢 RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Bentuk Desimal — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-sky-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-sky-500/30 border border-sky-500 flex items-center justify-center text-[10px]">1</span>
+                Konsep Bentuk Desimal
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { label: "Desimal = Pecahan dengan penyebut 10ⁿ", desc: "0,3 = 3/10 | 0,45 = 45/100 | 0,125 = 125/1000. Hitung angka di belakang koma untuk tahu penyebutnya!", color: "from-sky-900/70 to-sky-800/30 border-sky-500/50 text-sky-200" },
+                  { label: "Konversi Pecahan → Desimal", desc: "Cara 1: bagi pembilang ÷ penyebut. 3/4 = 3÷4 = 0,75. Cara 2: jadikan penyebut 10ⁿ. 3/4 = 75/100 = 0,75", color: "from-blue-900/70 to-blue-800/30 border-blue-500/50 text-blue-200" },
+                  { label: "Konversi Desimal → Pecahan", desc: "Tuliskan angkanya sebagai pembilang dengan penyebut 10ⁿ sesuai jumlah desimal, lalu sederhanakan dengan FPB.", color: "from-indigo-900/70 to-indigo-800/30 border-indigo-500/50 text-indigo-200" },
+                  { label: "Desimal berulang dan berhenti", desc: "1/3 = 0,333... (berulang). 1/4 = 0,25 (berhenti). Penyebut hanya faktor 2 dan 5 → desimal berhenti!", color: "from-violet-900/70 to-violet-800/30 border-violet-500/50 text-violet-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                Tips &amp; Trik Jitu
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "🔑", tip: "Hitung angka di belakang koma → tentukan penyebut", detail: "0,7 punya 1 angka → penyebut 10. 0,75 punya 2 angka → penyebut 100. 0,125 punya 3 angka → penyebut 1000. Sesederhana itu!", color: "bg-sky-900/30 border-sky-500/30" },
+                  { icon: "⚡", tip: "Pecahan dengan penyebut 2, 4, 5, 8, 10, 25 → desimal berhenti", detail: "1/8 = 0,125 (berhenti). 1/7 = 0,142857... (berulang). Bila penyebut setelah disederhanakan hanya faktor 2 dan 5, desimalnya pasti berhenti!", color: "bg-blue-900/30 border-blue-500/30" },
+                  { icon: "🎯", tip: "Hafal konversi pecahan umum", detail: "1/2=0,5 | 1/4=0,25 | 3/4=0,75 | 1/5=0,2 | 1/8=0,125 | 1/10=0,1. Hafal ini dan konversi jadi super cepat!", color: "bg-indigo-900/30 border-indigo-500/30" },
+                  { icon: "✅", tip: "Sederhanakan setelah konversi", detail: "0,25 = 25/100 = 1/4 (bagi dengan FPB=25). Selalu cari FPB akhir agar jawabannya dalam bentuk paling sederhana!", color: "bg-violet-900/30 border-violet-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-sky-500/20 via-blue-500/15 to-indigo-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">💙</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Bentuk desimal dan pecahan adalah <strong className="text-sky-300">dua cara berbeda untuk menyatakan hal yang sama</strong>. Kunci konversinya: jumlah angka di belakang koma menentukan penyebut (10, 100, 1000). Hafalkan pecahan-desimal umum, dan kamu akan bisa bergerak bebas antara kedua bentuk ini dengan cepat!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["Desimal = Pecahan /10ⁿ", "Pecahan → Bagi", "Desimal → Penyebut 10ⁿ", "Sederhanakan FPB", "Hafal Konversi Umum"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke operasi-operasi bentuk desimal!</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 text-center">
+          <button
+            onClick={() => navigate("/materi-matematika/kelas-7/bilangan-rasional")}
+            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
+          >
+            Kembali ke Bilangan Rasional
+          </button>
+        </div>
       </div>
     </div>
   );

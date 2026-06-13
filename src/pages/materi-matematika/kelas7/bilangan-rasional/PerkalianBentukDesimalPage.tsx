@@ -469,6 +469,70 @@ const PerkalianBentukDesimalPage = () => {
           )}
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-purple-600 via-violet-500 to-indigo-500 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">✖️ RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Perkalian Bentuk Desimal — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-purple-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-purple-500/30 border border-purple-500 flex items-center justify-center text-[10px]">1</span>
+                Aturan Perkalian Desimal
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { label: "Abaikan koma, kalikan seperti bilangan bulat", desc: "1,5 × 2,4 → kalikan 15 × 24 = 360. Letakkan koma setelahnya berdasarkan jumlah angka di belakang koma.", color: "from-purple-900/70 to-purple-800/30 border-purple-500/50 text-purple-200" },
+                  { label: "Hitung total angka di belakang koma", desc: "1,5 (1 desimal) × 2,4 (1 desimal) = 2 desimal di hasil. Jadi 360 → 3,60 = 3,6", color: "from-violet-900/70 to-violet-800/30 border-violet-500/50 text-violet-200" },
+                  { label: "Perkalian desimal dengan 10, 100, 1000", desc: "Geser koma ke kanan sebanyak jumlah angka 0! 2,34 × 100 = 234 (geser 2 kali ke kanan).", color: "from-indigo-900/70 to-indigo-800/30 border-indigo-500/50 text-indigo-200" },
+                  { label: "Desimal × Pecahan biasa", desc: "Ubah desimal ke pecahan dulu (atau sebaliknya), lalu kalikan. Pilih cara yang lebih mudah.", color: "from-blue-900/70 to-blue-800/30 border-blue-500/50 text-blue-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                Tips &amp; Trik Jitu
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "🔢", tip: "Hitung total digit desimal kedua faktor", detail: "Jumlah angka di belakang koma A + jumlah angka di belakang koma B = jumlah angka di belakang koma hasil. Selalu!", color: "bg-purple-900/30 border-purple-500/30" },
+                  { icon: "⚡", tip: "Perkalian ×10ⁿ = geser koma kanan n langkah", detail: "0,0056 × 1000 = 5,6. Cukup geser koma 3 langkah ke kanan. Mudah dan cepat!", color: "bg-violet-900/30 border-violet-500/30" },
+                  { icon: "🎯", tip: "Estimasi dulu untuk cek kewajaran", detail: "1,8 × 3,2 ≈ 2 × 3 = 6. Jika hasilmu 5,76 — wajar! Jika 57,6 atau 0,576 — kamu salah meletakkan koma.", color: "bg-indigo-900/30 border-indigo-500/30" },
+                  { icon: "✅", tip: "Cek dengan pembagian balik", detail: "Jika 1,5 × 2,4 = 3,6, maka 3,6 ÷ 1,5 harus = 2,4. Gunakan kalkulator untuk verifikasi!", color: "bg-blue-900/30 border-blue-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-500/20 via-violet-500/15 to-indigo-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">🔮</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Perkalian desimal mudah bila kamu tahu rahasianya: <strong className="text-purple-300">abaikan koma dulu, kalikan seperti bilangan bulat</strong>, lalu letakkan koma di posisi yang tepat berdasarkan <strong className="text-yellow-300">jumlah total angka desimal</strong>. Teknik estimasi membantu kamu memastikan koma di tempat yang benar!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["Abaikan Koma dulu", "Hitung Total Desimal", "×10ⁿ = Geser Koma", "Estimasi untuk Cek"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke Pembagian Bentuk Desimal!</p>
+            </div>
+          </div>
+        </div>
+
         {/* Tombol Kembali */}
         <div className="mt-8 text-center">
           <button

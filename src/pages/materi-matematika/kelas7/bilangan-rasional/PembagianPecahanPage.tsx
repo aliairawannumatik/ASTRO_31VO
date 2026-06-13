@@ -420,6 +420,70 @@ const PembagianPecahanPage = () => {
           )}
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">➗ RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Pembagian Pecahan — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-orange-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-orange-500/30 border border-orange-500 flex items-center justify-center text-[10px]">1</span>
+                Aturan Pembagian Pecahan
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { label: "Rumus: a/b ÷ c/d = a/b × d/c", desc: "Kalikan dengan kebalikan (resiprokal) pembagi! Balik pecahan kedua lalu kalikan. Ini satu-satunya aturan yang perlu diingat.", color: "from-orange-900/70 to-orange-800/30 border-orange-500/50 text-orange-200" },
+                  { label: "KCF — Keep, Change, Flip", desc: "Keep (jaga pecahan pertama) → Change (ubah ÷ menjadi ×) → Flip (balik pecahan kedua). Tiga langkah mudah!", color: "from-amber-900/70 to-amber-800/30 border-amber-500/50 text-amber-200" },
+                  { label: "Pembagian Pecahan Campuran", desc: "Ubah ke bentuk biasa dulu! 2½ ÷ 1¼ = 5/2 ÷ 5/4 = 5/2 × 4/5 = 20/10 = 2", color: "from-yellow-900/70 to-yellow-800/30 border-yellow-500/50 text-yellow-200" },
+                  { label: "Pembagian bilangan bulat ÷ pecahan", desc: "n ÷ a/b = n × b/a. Contoh: 6 ÷ 2/3 = 6 × 3/2 = 18/2 = 9. Hasilnya lebih besar dari 6!", color: "from-red-900/70 to-red-800/30 border-red-500/50 text-red-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                Tips &amp; Trik Jitu
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "🔄", tip: "Hafal KCF: Keep-Change-Flip", detail: "Rumus ini tidak pernah salah: Jaga pecahan pertama, Ubah ÷ jadi ×, Balik pecahan kedua. Praktikkan sampai otomatis!", color: "bg-orange-900/30 border-orange-500/30" },
+                  { icon: "🎯", tip: "Hasil membagi pecahan < 1 akan lebih besar", detail: "6 ÷ 1/2 = 12. Membagi dengan pecahan menghasilkan angka yang lebih besar! Ini berlawanan dengan intuisi tapi selalu benar.", color: "bg-amber-900/30 border-amber-500/30" },
+                  { icon: "⚡", tip: "Cross-cancelling berlaku juga di pembagian", detail: "Setelah flip menjadi perkalian, kamu bisa melakukan cross-cancelling untuk menyederhanakan sebelum mengalikan.", color: "bg-yellow-900/30 border-yellow-500/30" },
+                  { icon: "✅", tip: "Cek dengan perkalian balik", detail: "Jika a/b ÷ c/d = e/f, maka e/f × c/d harus = a/b. Gunakan ini untuk verifikasi jawabanmu!", color: "bg-green-900/30 border-green-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-orange-500/20 via-amber-500/15 to-yellow-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">🍊</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Pembagian pecahan adalah <strong className="text-orange-300">perkalian yang tersamarkan</strong>! Cukup ingat <strong className="text-yellow-300">KCF: Keep, Change, Flip</strong> — jaga pecahan pertama, ubah operasi menjadi kali, balik pecahan kedua. Dengan trik ini, tidak ada soal pembagian pecahan yang tidak bisa kamu selesaikan!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["KCF: Keep-Change-Flip", "a/b ÷ c/d = a/b × d/c", "Campuran → Biasa dulu", "Cross-Cancelling", "Verifikasi balik"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🏆 Kamu sudah kuasai semua operasi pecahan biasa!</p>
+            </div>
+          </div>
+        </div>
+
         {/* Tombol Kembali */}
         <div className="mt-8 text-center">
           <button

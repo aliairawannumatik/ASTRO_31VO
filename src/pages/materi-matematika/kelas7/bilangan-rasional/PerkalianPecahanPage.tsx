@@ -535,6 +535,70 @@ const PerkalianPecahanPage = () => {
           )}
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">✖️ RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Perkalian Pecahan — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-pink-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-pink-500/30 border border-pink-500 flex items-center justify-center text-[10px]">1</span>
+                Aturan Perkalian Pecahan
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { label: "Rumus Dasar: a/b × c/d = ac/bd", desc: "Kalikan pembilang dengan pembilang, dan penyebut dengan penyebut. Tidak perlu menyamakan penyebut!", color: "from-pink-900/70 to-pink-800/30 border-pink-500/50 text-pink-200" },
+                  { label: "Perkalian Pecahan Campuran", desc: "Ubah pecahan campuran ke bentuk biasa dulu. Contoh: 1½ × 2/3 = 3/2 × 2/3 = 6/6 = 1", color: "from-rose-900/70 to-rose-800/30 border-rose-500/50 text-rose-200" },
+                  { label: "Perkalian Bilangan Bulat dengan Pecahan", desc: "Anggap bilangan bulat n = n/1. Contoh: 4 × 3/5 = 4/1 × 3/5 = 12/5 = 2 2/5", color: "from-red-900/70 to-red-800/30 border-red-500/50 text-red-200" },
+                  { label: "Sederhanakan sebelum mengalikan!", desc: "Cross-cancelling: 4/9 × 3/8 = (4÷4)/(8÷4) × (3÷3)/(9÷3) = 1/2 × 1/3 = 1/6. Lebih mudah!", color: "from-orange-900/70 to-orange-800/30 border-orange-500/50 text-orange-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                Tips &amp; Trik Jitu
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "✂️", tip: "Cross-cancelling sebelum mengalikan", detail: "Sederhanakan pembilang satu pecahan dengan penyebut pecahan lain sebelum dikalikan. Ini membuat angkanya lebih kecil dan lebih mudah dihitung!", color: "bg-pink-900/30 border-pink-500/30" },
+                  { icon: "🔄", tip: "Perkalian pecahan LEBIH mudah dari penjumlahan", detail: "Tidak perlu menyamakan penyebut! Langsung kalikan saja. Ini justru operasi yang paling sederhana di antara operasi pecahan.", color: "bg-rose-900/30 border-rose-500/30" },
+                  { icon: "🎯", tip: "Hasil perkalian dua pecahan < 1 selalu lebih kecil", detail: "1/2 × 3/4 = 3/8 < 1/2. Mengalikan pecahan membuatnya lebih kecil — kebalikan dari intuisi perkalian bilangan bulat!", color: "bg-orange-900/30 border-orange-500/30" },
+                  { icon: "✅", tip: "Ubah pecahan campuran ke biasa SEBELUM mengalikan", detail: "2 1/3 × 1 1/2 → 7/3 × 3/2 = 21/6 = 7/2 = 3 1/2. Jangan kalikan bagian bulat dan pecahannya secara terpisah!", color: "bg-red-900/30 border-red-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-pink-500/20 via-rose-500/15 to-red-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">🌸</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Perkalian pecahan adalah operasi paling elegan dalam matematika — <strong className="text-pink-300">cukup kalikan pembilang dengan pembilang dan penyebut dengan penyebut</strong>. Gunakan teknik <strong className="text-yellow-300">cross-cancelling</strong> untuk menyederhanakan sebelum mengalikan, dan kamu akan mendapat jawaban dalam hitungan detik!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["a/b × c/d = ac/bd", "Cross-Cancelling", "Campuran → Biasa dulu", "Tidak perlu samakan penyebut"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke Pembagian Pecahan!</p>
+            </div>
+          </div>
+        </div>
+
         {/* Navigasi */}
         <div className="mt-8 text-center">
           <button

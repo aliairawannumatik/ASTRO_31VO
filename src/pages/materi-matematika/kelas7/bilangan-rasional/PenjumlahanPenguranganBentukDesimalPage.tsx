@@ -1022,6 +1022,70 @@ const PenjumlahanPenguranganBentukDesimalPage = () => {
           )}
         </div>
 
+        {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+        <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-500 px-5 py-4 text-center">
+            <p className="font-display text-lg font-bold text-white tracking-wide">➕➖ RANGKUMAN LENGKAP</p>
+            <p className="font-body text-xs text-white/80 mt-0.5">Penjumlahan &amp; Pengurangan Bentuk Desimal — Kelas 7</p>
+          </div>
+          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-cyan-500/30 border border-cyan-500 flex items-center justify-center text-[10px]">1</span>
+                Aturan Penjumlahan &amp; Pengurangan Desimal
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { label: "⭐ Aturan #1: SEJAJARKAN TANDA KOMA!", desc: "Ini adalah aturan paling penting! Kolom satuan sejajar, persepuluhan sejajar, perseratusan sejajar, dan seterusnya.", color: "from-cyan-900/70 to-cyan-800/30 border-cyan-500/50 text-cyan-200" },
+                  { label: "Tambahkan nol jika panjang desimal berbeda", desc: "5,3 + 2,45: ubah menjadi 5,30 + 2,45 agar kolom sejajar. Menambah nol di akhir tidak mengubah nilai!", color: "from-sky-900/70 to-sky-800/30 border-sky-500/50 text-sky-200" },
+                  { label: "Kerjakan kolom per kolom dari kanan ke kiri", desc: "Sama seperti bilangan bulat! Mulai dari kolom paling kanan (nilai paling kecil), lalu ke kiri. Ingat simpan angka bila ≥ 10.", color: "from-blue-900/70 to-blue-800/30 border-blue-500/50 text-blue-200" },
+                  { label: "Tanda koma di hasil sejajar dengan yang di soal", desc: "Setelah menghitung, letakkan koma tepat di bawah koma-koma yang disejajarkan di langkah pertama.", color: "from-indigo-900/70 to-indigo-800/30 border-indigo-500/50 text-indigo-200" },
+                ].map(({ label, desc, color }) => (
+                  <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                    <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                    <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                Tips &amp; Trik Jitu
+              </p>
+              <div className="space-y-2">
+                {[
+                  { icon: "📐", tip: "Selalu tulis dalam bentuk kolom sejajar", detail: "Menulis 3,14 + 2,5 dalam satu baris sering menyebabkan kesalahan. Tulis dalam kolom bersusun — koma di bawah koma!", color: "bg-cyan-900/30 border-cyan-500/30" },
+                  { icon: "0️⃣", tip: "Tambahkan nol sebagai placeholder", detail: "3,1 − 1,25 → ubah 3,1 menjadi 3,10 dulu. Nol di akhir tidak mengubah nilai tapi membantu perhitungan!", color: "bg-sky-900/30 border-sky-500/30" },
+                  { icon: "🎯", tip: "Estimasi dulu: berapa angka sebelum koma?", detail: "12,5 + 7,3 harus sekitar 19 atau 20. Jika dapatmu 192 atau 1,92 → koma di posisi yang salah!", color: "bg-blue-900/30 border-blue-500/30" },
+                  { icon: "✅", tip: "Cek dengan membalik urutan (komutatif)", detail: "3,14 + 2,5 = 5,64. Cek: 2,5 + 3,14 juga harus 5,64. Untuk pengurangan, ubah ke penjumlahan: a − b + b = a.", color: "bg-indigo-900/30 border-indigo-500/30" },
+                ].map(({ icon, tip, detail, color }) => (
+                  <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                    <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                    <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-cyan-500/20 via-sky-500/15 to-blue-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className="text-3xl">💧</div>
+              <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Penjumlahan dan pengurangan desimal sangat mirip dengan bilangan bulat — bedanya hanya pada <strong className="text-cyan-300">posisi koma yang harus disejajarkan</strong>. Ingat satu aturan emas: <strong className="text-yellow-300">koma di bawah koma, kolom per kolom, nol sebagai placeholder</strong>. Dengan disiplin dalam menyejajarkan koma, kamu tidak akan pernah salah!
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 mt-1">
+                {["Sejajarkan Koma!", "Tambah Nol Placeholder", "Kolom Kanan ke Kiri", "Koma Hasil Sejajar", "Estimasi Kewajaran"].map(tag => (
+                  <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🚀 Lanjut ke Perkalian dan Pembagian Desimal!</p>
+            </div>
+          </div>
+        </div>
+
         <div className="mt-10 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-7/bilangan-rasional"); }}

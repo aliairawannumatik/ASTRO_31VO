@@ -548,6 +548,80 @@ const PecahanCampuranPage = () => {
               </div>
             )}
           </div>
+
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-violet-600 via-indigo-500 to-blue-500 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">🔀 RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Pecahan Campuran, Persen &amp; Konversi — Kelas 7</p>
+            </div>
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-violet-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-violet-500/30 border border-violet-500 flex items-center justify-center text-[10px]">1</span>
+                  Pecahan Campuran &amp; Persen — Konsep Utama
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { label: "Pecahan Campuran: a b/c", desc: "Terdiri dari bagian bulat (a) dan bagian pecahan (b/c). Contoh: 2¾ = 2 + 3/4. Selalu ubah ke biasa untuk operasi!", color: "from-violet-900/70 to-violet-800/30 border-violet-500/50 text-violet-200" },
+                    { label: "Campuran → Biasa: (a×c + b)/c", desc: "2¾ = (2×4 + 3)/4 = 11/4. Kalikan bagian bulat dengan penyebut, tambahkan pembilang, letakkan di atas penyebut.", color: "from-indigo-900/70 to-indigo-800/30 border-indigo-500/50 text-indigo-200" },
+                    { label: "Biasa → Campuran: bagi dan sisa", desc: "11 ÷ 4 = 2 sisa 3 → 2¾. Hasil bagi = bagian bulat, sisa = pembilang, penyebut tetap.", color: "from-blue-900/70 to-blue-800/30 border-blue-500/50 text-blue-200" },
+                    { label: "Persen (%) = per seratus", desc: "75% = 75/100 = 3/4 = 0,75. Konversi: % → desimal (÷100), % → pecahan (/100 lalu sederhanakan).", color: "from-cyan-900/70 to-cyan-800/30 border-cyan-500/50 text-cyan-200" },
+                    { label: "Menghitung Persen dari Suatu Nilai", desc: "p% dari n = (p/100) × n. Contoh: 25% dari 80 = (25/100) × 80 = 20.", color: "from-teal-900/70 to-teal-800/30 border-teal-500/50 text-teal-200" },
+                  ].map(({ label, desc, color }) => (
+                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                      <div><p className="font-body text-xs font-bold">{label}</p><p className="font-body text-xs text-white/65 mt-0.5">{desc}</p></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                  Tips &amp; Trik Jitu
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "🔄", tip: "Selalu ubah campuran ke biasa sebelum operasi", detail: "2¾ + 1½ → ubah ke 11/4 + 3/2 terlebih dahulu, baru jumlahkan. Jangan operasikan bagian bulat dan pecahan secara terpisah!", color: "bg-violet-900/30 border-violet-500/30" },
+                    { icon: "💯", tip: "Hafal konversi persen-pecahan umum", detail: "10%=1/10 | 20%=1/5 | 25%=1/4 | 33%≈1/3 | 50%=1/2 | 75%=3/4 | 100%=1. Hafal ini untuk perhitungan cepat!", color: "bg-indigo-900/30 border-indigo-500/30" },
+                    { icon: "🎯", tip: "Persen dari n: kalikan n dengan persen/100", detail: "30% dari 150 = 150 × 30/100 = 150 × 3/10 = 45. Atau cepat: 10% dari 150 = 15, jadi 30% = 15 × 3 = 45!", color: "bg-blue-900/30 border-blue-500/30" },
+                    { icon: "📊", tip: "Diskon, pajak, bunga semuanya pakai persen", detail: "Diskon 20% dari Rp 150.000 = 150.000 × 20/100 = Rp 30.000. Harga bayar = 150.000 − 30.000 = Rp 120.000.", color: "bg-cyan-900/30 border-cyan-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div><p className="font-body text-xs font-bold text-white">{tip}</p><p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-violet-500/20 via-indigo-500/15 to-blue-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🌌</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Pecahan campuran, desimal, dan persen adalah <strong className="text-violet-300">tiga wajah dari satu konsep yang sama</strong>. Ketiganya bisa saling dikonversi! Kuasai cara mengubah antar bentuk ini, dan kamu akan siap menghadapi soal matematika maupun situasi kehidupan nyata — dari menghitung diskon belanja hingga memahami statistik dan grafik!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Campuran ↔ Biasa", "% = /100", "Sederhanakan FPB", "p% dari n = n×p/100", "Diskon & Pajak"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">🏆 Selesai! Kamu sudah menguasai semua bentuk pecahan!</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <button
+              onClick={() => navigate("/materi-matematika/kelas-7/bilangan-rasional")}
+              className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
+            >
+              Kembali ke Bilangan Rasional
+            </button>
+          </div>
         </div>
       </div>
     </div>
