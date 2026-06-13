@@ -219,16 +219,16 @@ const PengertianRelasiPage = () => {
                       <text x="265" y="130" textAnchor="middle" fill="#c4b5fd" fontSize="10" fontWeight="bold">Futsal</text>
                       <text x="265" y="163" textAnchor="middle" fill="#c4b5fd" fontSize="10" fontWeight="bold">Renang</text>
                       <text x="265" y="196" textAnchor="middle" fill="#c4b5fd" fontSize="10" fontWeight="bold">Voly</text>
-                      {/* Enzo arrows (cyan) → Badminton, Basket, Futsal */}
-                      <line x1="147" y1="71"  x2="193" y2="59"  stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
-                      <line x1="147" y1="71"  x2="190" y2="92"  stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
-                      <line x1="147" y1="71"  x2="188" y2="125" stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
-                      {/* Justin arrows (green) → Basket, Renang */}
-                      <line x1="154" y1="106" x2="190" y2="92"  stroke="#4ade80" strokeWidth="1.5" markerEnd="url(#arGreen)"/>
-                      <line x1="154" y1="106" x2="190" y2="158" stroke="#4ade80" strokeWidth="1.5" markerEnd="url(#arGreen)"/>
-                      {/* Arham arrows (orange) → Voly, Futsal */}
-                      <line x1="155" y1="141" x2="192" y2="191" stroke="#fb923c" strokeWidth="1.5" markerEnd="url(#arOrange)"/>
-                      <line x1="155" y1="141" x2="188" y2="125" stroke="#fb923c" strokeWidth="1.5" markerEnd="url(#arOrange)"/>
+                      {/* Enzo (right edge of "Enzo" text ≈ x=99, y center=72) → Badminton left≈238, Basket left≈247, Futsal left≈247 */}
+                      <line x1="99" y1="72"  x2="237" y2="60"  stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
+                      <line x1="99" y1="72"  x2="246" y2="93"  stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
+                      <line x1="99" y1="72"  x2="246" y2="126" stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
+                      {/* Justin (right edge of "Justin" text ≈ x=106, y center=107) → Basket left≈247, Renang left≈247 */}
+                      <line x1="106" y1="107" x2="246" y2="93"  stroke="#4ade80" strokeWidth="1.5" markerEnd="url(#arGreen)"/>
+                      <line x1="106" y1="107" x2="246" y2="159" stroke="#4ade80" strokeWidth="1.5" markerEnd="url(#arGreen)"/>
+                      {/* Arham (right edge of "Arham" text ≈ x=103, y center=142) → Voly left≈253, Futsal left≈247 */}
+                      <line x1="103" y1="142" x2="252" y2="192" stroke="#fb923c" strokeWidth="1.5" markerEnd="url(#arOrange)"/>
+                      <line x1="103" y1="142" x2="246" y2="126" stroke="#fb923c" strokeWidth="1.5" markerEnd="url(#arOrange)"/>
                       {/* Faiz — tidak ada panah */}
                       <text x="85" y="248" textAnchor="middle" fill="rgba(148,163,184,0.4)" fontSize="8">Faiz tidak memiliki pasangan</text>
                     </svg>
@@ -289,21 +289,21 @@ const PengertianRelasiPage = () => {
                       {/* Arrow tips */}
                       <polygon points="260,197 267,200 260,203" fill="#94a3b8"/>
                       <polygon points="82,12 85,5 88,12"         fill="#94a3b8"/>
-                      {/* Y-axis labels (ekskul) */}
-                      <text x="81" y="51"  textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Voly</text>
-                      <text x="81" y="86"  textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Renang</text>
-                      <text x="81" y="121" textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Futsal</text>
-                      <text x="81" y="156" textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Basket</text>
-                      <text x="81" y="191" textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Badminton</text>
+                      {/* Y-axis labels (ekskul) — font-size 8.5 */}
+                      <text x="81" y="51"  textAnchor="end" fill="#a78bfa" fontSize="8.5" fontWeight="bold">Voly</text>
+                      <text x="81" y="86"  textAnchor="end" fill="#a78bfa" fontSize="8.5" fontWeight="bold">Renang</text>
+                      <text x="81" y="121" textAnchor="end" fill="#a78bfa" fontSize="8.5" fontWeight="bold">Futsal</text>
+                      <text x="81" y="156" textAnchor="end" fill="#a78bfa" fontSize="8.5" fontWeight="bold">Basket</text>
+                      <text x="81" y="191" textAnchor="end" fill="#a78bfa" fontSize="8.5" fontWeight="bold">Badminton</text>
                       {/* Y-axis ticks */}
                       {[48,83,118,153,188].map(gy => (
                         <line key={gy} x1="81" y1={gy} x2="85" y2={gy} stroke="#94a3b8" strokeWidth="1.2"/>
                       ))}
                       {/* X-axis labels (siswa) */}
-                      <text x="125" y="214" textAnchor="middle" fill="#22d3ee" fontSize="7" fontWeight="bold">Enzo</text>
-                      <text x="165" y="214" textAnchor="middle" fill="#4ade80" fontSize="7" fontWeight="bold">Justin</text>
-                      <text x="205" y="214" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">Arham</text>
-                      <text x="245" y="214" textAnchor="middle" fill="#94a3b8" fontSize="7" fontWeight="bold">Faiz</text>
+                      <text x="125" y="214" textAnchor="middle" fill="#22d3ee" fontSize="8.5" fontWeight="bold">Enzo</text>
+                      <text x="165" y="214" textAnchor="middle" fill="#4ade80" fontSize="8.5" fontWeight="bold">Justin</text>
+                      <text x="205" y="214" textAnchor="middle" fill="#fb923c" fontSize="8.5" fontWeight="bold">Arham</text>
+                      <text x="245" y="214" textAnchor="middle" fill="#94a3b8" fontSize="8.5" fontWeight="bold">Faiz</text>
                       {/* X-axis ticks */}
                       {[125,165,205,245].map(gx => (
                         <line key={gx} x1={gx} y1="200" x2={gx} y2="204" stroke="#94a3b8" strokeWidth="1.2"/>
