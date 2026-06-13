@@ -11,7 +11,7 @@ import DiskMillMachine from "@/components/DiskMillMachine";
 const PengertianFungsiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh1", "contoh2", "contoh3", "contoh4", "contoh5", "rangkuman",
+    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh1", "contoh2", "contoh3", "contoh4", "contoh5", "contoh6", "rangkuman",
   ]);
   const [soal4Answers, setSoal4Answers] = useState<Record<number,"fungsi"|"bukan">>({});
   const [soal4Checked, setSoal4Checked] = useState(false);
@@ -949,6 +949,206 @@ const PengertianFungsiPage = () => {
                       <br />Yang bukan fungsi: <strong className="text-red-300">a</strong> (Maret duplikat), <strong className="text-red-300">b</strong> (Ani & Beti duplikat), <strong className="text-red-300">d</strong> (Selasa duplikat).
                     </p>
                   </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* CONTOH 6 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="contoh6" icon={<Target className="w-5 h-5" />} iconColor="text-pink-400" title="✏️ Contoh 6 — Identifikasi Fungsi dari Grafik" />
+            {expandedSections.includes("contoh6") && (
+              <div className="px-5 pb-5 space-y-4">
+                <Badge label="SEDANG" color="bg-pink-700/60 text-pink-200" />
+                <div className="bg-slate-800/60 border border-pink-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-pink-300 mb-2">📝 Soal</p>
+                  <p className="font-body text-sm text-white/85 leading-relaxed">
+                    Di antara grafik berikut, manakah yang merupakan grafik fungsi dalam <strong className="text-cyan-300">x</strong>? Jelaskan!
+                  </p>
+                </div>
+
+                {/* Uji Garis Vertikal hint */}
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                  <p className="font-body text-xs text-yellow-200">
+                    <strong>💡 Uji Garis Vertikal:</strong> Suatu grafik merupakan fungsi jika setiap garis vertikal <em>x = c</em> hanya memotong grafik di <strong>tepat satu titik</strong>.
+                  </p>
+                </div>
+
+                {/* Grid 6 grafik */}
+                <div className="grid grid-cols-2 gap-3">
+                  {([
+                    {
+                      label: "a",
+                      fungsi: true,
+                      alasan: "Setiap garis vertikal hanya memotong garis di tepat satu titik. Garis lurus naik = fungsi linear.",
+                      svg: (
+                        <svg viewBox="0 0 160 130" width="100%">
+                          {/* grid */}
+                          {[32,64,96,128].map(x=><line key={x} x1={x} y1="10" x2={x} y2="110" stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          {[30,50,70,90,110].map(y=><line key={y} x1="10" y1={y} x2="150" y2={y} stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          {/* axes */}
+                          <line x1="10" y1="110" x2="150" y2="110" stroke="#64748b" strokeWidth="1.5"/>
+                          <line x1="10" y1="110" x2="10" y2="10" stroke="#64748b" strokeWidth="1.5"/>
+                          <polygon points="147,107 154,110 147,113" fill="#64748b"/>
+                          <polygon points="7,13 10,6 13,13" fill="#64748b"/>
+                          {/* labels */}
+                          <text x="155" y="114" fill="#64748b" fontSize="8">x</text>
+                          <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
+                          <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
+                          <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
+                          {/* straight line: y = x, from (0,0) to (5,5) in grid coords */}
+                          {/* grid: x from 10 to 135 maps to 0..5, y from 110 to 15 maps to 0..5 */}
+                          <line x1="10" y1="110" x2="135" y2="15" stroke="#22c55e" strokeWidth="2.2"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      label: "b",
+                      fungsi: false,
+                      alasan: "Kurva melengkung balik — ada nilai x yang dipotong garis vertikal di DUA titik. Gagal uji garis vertikal.",
+                      svg: (
+                        <svg viewBox="0 0 160 130" width="100%">
+                          {[32,64,96,128].map(x=><line key={x} x1={x} y1="10" x2={x} y2="110" stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          {[30,50,70,90,110].map(y=><line key={y} x1="10" y1={y} x2="150" y2={y} stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          <line x1="10" y1="110" x2="150" y2="110" stroke="#64748b" strokeWidth="1.5"/>
+                          <line x1="10" y1="110" x2="10" y2="10" stroke="#64748b" strokeWidth="1.5"/>
+                          <polygon points="147,107 154,110 147,113" fill="#64748b"/>
+                          <polygon points="7,13 10,6 13,13" fill="#64748b"/>
+                          <text x="155" y="114" fill="#64748b" fontSize="8">x</text>
+                          <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
+                          <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
+                          <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
+                          {/* sideways parabola-like curve that loops back: starts at (0,60) goes right-up then curves back */}
+                          <path d="M10,75 C30,30 80,15 110,35 C130,48 125,75 110,88 C90,105 40,108 10,100" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
+                          {/* vertical line showing the double intersection */}
+                          <line x1="95" y1="10" x2="95" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
+                          <circle cx="95" cy="26" r="3" fill="#fbbf24"/>
+                          <circle cx="95" cy="95" r="3" fill="#fbbf24"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      label: "c",
+                      fungsi: true,
+                      alasan: "Kurva berbentuk gunung (naik lalu turun). Setiap garis vertikal hanya memotong kurva di satu titik.",
+                      svg: (
+                        <svg viewBox="0 0 160 130" width="100%">
+                          {[32,64,96,128].map(x=><line key={x} x1={x} y1="10" x2={x} y2="110" stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          {[30,50,70,90,110].map(y=><line key={y} x1="10" y1={y} x2="150" y2={y} stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          <line x1="10" y1="110" x2="150" y2="110" stroke="#64748b" strokeWidth="1.5"/>
+                          <line x1="10" y1="110" x2="10" y2="10" stroke="#64748b" strokeWidth="1.5"/>
+                          <polygon points="147,107 154,110 147,113" fill="#64748b"/>
+                          <polygon points="7,13 10,6 13,13" fill="#64748b"/>
+                          <text x="155" y="114" fill="#64748b" fontSize="8">x</text>
+                          <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
+                          <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
+                          <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
+                          {/* bell curve */}
+                          <path d="M10,110 C25,110 38,108 55,75 C68,48 80,20 90,18 C100,16 112,42 118,68 C126,100 132,110 148,110" fill="none" stroke="#22c55e" strokeWidth="2.2"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      label: "d",
+                      fungsi: true,
+                      alasan: "Garis lurus menurun. Setiap garis vertikal hanya memotong garis di tepat satu titik. Fungsi linear dengan gradien negatif.",
+                      svg: (
+                        <svg viewBox="0 0 160 130" width="100%">
+                          {[32,64,96,128].map(x=><line key={x} x1={x} y1="10" x2={x} y2="110" stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          {[30,50,70,90,110].map(y=><line key={y} x1="10" y1={y} x2="150" y2={y} stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          <line x1="10" y1="110" x2="150" y2="110" stroke="#64748b" strokeWidth="1.5"/>
+                          <line x1="10" y1="110" x2="10" y2="10" stroke="#64748b" strokeWidth="1.5"/>
+                          <polygon points="147,107 154,110 147,113" fill="#64748b"/>
+                          <polygon points="7,13 10,6 13,13" fill="#64748b"/>
+                          <text x="155" y="114" fill="#64748b" fontSize="8">x</text>
+                          <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
+                          <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
+                          <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
+                          {/* decreasing line from top-left to bottom-right */}
+                          <line x1="10" y1="20" x2="148" y2="108" stroke="#22c55e" strokeWidth="2.2"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      label: "e",
+                      fungsi: true,
+                      alasan: "Gelombang sinusoidal. Meski naik-turun berulang, setiap nilai x tetap memiliki tepat satu nilai y. Fungsi.",
+                      svg: (
+                        <svg viewBox="0 0 160 130" width="100%">
+                          {[32,64,96,128].map(x=><line key={x} x1={x} y1="10" x2={x} y2="110" stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          {[30,50,70,90,110].map(y=><line key={y} x1="10" y1={y} x2="150" y2={y} stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          <line x1="10" y1="110" x2="150" y2="110" stroke="#64748b" strokeWidth="1.5"/>
+                          <line x1="10" y1="110" x2="10" y2="10" stroke="#64748b" strokeWidth="1.5"/>
+                          <polygon points="147,107 154,110 147,113" fill="#64748b"/>
+                          <polygon points="7,13 10,6 13,13" fill="#64748b"/>
+                          <text x="155" y="114" fill="#64748b" fontSize="8">x</text>
+                          <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
+                          <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
+                          <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
+                          {/* sine-like wave */}
+                          <path d="M10,60 C25,60 30,25 50,25 C70,25 75,90 95,90 C115,90 120,40 140,40 C145,40 148,42 150,44" fill="none" stroke="#22c55e" strokeWidth="2.2"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      label: "f",
+                      fungsi: false,
+                      alasan: "Kurva melipat secara vertikal — ada nilai x yang dipotong garis vertikal di DUA titik berbeda. Gagal uji garis vertikal.",
+                      svg: (
+                        <svg viewBox="0 0 160 130" width="100%">
+                          {[32,64,96,128].map(x=><line key={x} x1={x} y1="10" x2={x} y2="110" stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          {[30,50,70,90,110].map(y=><line key={y} x1="10" y1={y} x2="150" y2={y} stroke="rgba(148,163,184,0.13)" strokeWidth="1"/>)}
+                          <line x1="10" y1="110" x2="150" y2="110" stroke="#64748b" strokeWidth="1.5"/>
+                          <line x1="10" y1="110" x2="10" y2="10" stroke="#64748b" strokeWidth="1.5"/>
+                          <polygon points="147,107 154,110 147,113" fill="#64748b"/>
+                          <polygon points="7,13 10,6 13,13" fill="#64748b"/>
+                          <text x="155" y="114" fill="#64748b" fontSize="8">x</text>
+                          <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
+                          <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
+                          <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
+                          {/* S-curve that folds back vertically */}
+                          <path d="M10,108 C30,108 45,100 60,75 C75,50 80,25 95,20 C110,15 120,35 118,60 C116,85 105,100 100,108" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
+                          {/* vertical line showing double intersection */}
+                          <line x1="90" y1="10" x2="90" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
+                          <circle cx="90" cy="30" r="3" fill="#fbbf24"/>
+                          <circle cx="90" cy="95" r="3" fill="#fbbf24"/>
+                        </svg>
+                      ),
+                    },
+                  ] as {label:string; fungsi:boolean; alasan:string; svg:React.ReactNode}[]).map(({ label, fungsi, alasan, svg }) => (
+                    <div key={label} className={`border rounded-xl p-2.5 ${fungsi ? "border-green-500/40 bg-green-900/10" : "border-red-500/40 bg-red-900/10"}`}>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="font-body text-[11px] font-bold text-white/60">Grafik {label}</span>
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${fungsi ? "bg-green-700/50 text-green-200" : "bg-red-700/50 text-red-200"}`}>
+                          {fungsi ? "✅ FUNGSI" : "❌ BUKAN"}
+                        </span>
+                      </div>
+                      <div className="flex justify-center bg-slate-900/60 rounded-lg p-1">
+                        {svg}
+                      </div>
+                      <p className="text-[10px] text-white/55 mt-1.5 leading-relaxed font-body">{alasan}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Pembahasan ringkas */}
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Kesimpulan</p>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { lbl: "a", ok: true }, { lbl: "b", ok: false },
+                      { lbl: "c", ok: true }, { lbl: "d", ok: true },
+                      { lbl: "e", ok: true }, { lbl: "f", ok: false },
+                    ].map(({ lbl, ok }) => (
+                      <div key={lbl} className={`flex items-center gap-1 px-2.5 py-1 rounded-lg border text-xs font-bold font-body ${ok ? "bg-green-900/30 border-green-500/40 text-green-200" : "bg-red-900/30 border-red-500/40 text-red-200"}`}>
+                        <span>Grafik {lbl}</span>
+                        <span>{ok ? "✅" : "❌"}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-white/50 font-body">
+                    Grafik <strong className="text-green-300">a, c, d, e</strong> adalah fungsi. Grafik <strong className="text-red-300">b</strong> dan <strong className="text-red-300">f</strong> bukan fungsi karena ada garis vertikal yang memotong grafik di lebih dari satu titik.
+                  </p>
                 </div>
               </div>
             )}
