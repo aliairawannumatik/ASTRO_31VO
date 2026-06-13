@@ -313,7 +313,8 @@ export default function FunctionMachineAnimation() {
   );
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-violet-500/30 bg-gradient-to-br from-slate-900/90 to-violet-950/30 backdrop-blur">
+    <div className="rounded-2xl overflow-hidden p-[2px]" style={{ background: "linear-gradient(135deg, #7c3aed 0%, #06b6d4 30%, #ec4899 60%, #f59e0b 100%)" }}>
+    <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#0a0515] via-[#0d1220] to-[#050c1a] backdrop-blur">
       <style>{`
         @keyframes fma-ball-enter {
           from { transform: scale(0.5); opacity: 0; }
@@ -332,40 +333,50 @@ export default function FunctionMachineAnimation() {
           0%, 100% { opacity: 0.6; }
           50%       { opacity: 1; }
         }
+        @keyframes fma-shimmer {
+          0%   { background-position: -200% center; }
+          100% { background-position:  200% center; }
+        }
         .fma-ball-enter      { animation: fma-ball-enter 0.45s ease forwards; }
         .fma-bounce-result   { animation: fma-bounce-result 0.5s ease forwards; }
         .fma-step-in         { animation: fma-step-in 0.35s ease forwards; }
         .fma-glow            { animation: fma-machine-glow 0.7s ease-in-out infinite; }
+        .fma-shimmer-btn     { background-size: 200% auto; animation: fma-shimmer 2.5s linear infinite; }
       `}</style>
 
-      {/* Header */}
-      <div className="px-4 pt-4 pb-2 text-center">
-        <p className="font-display text-sm font-bold text-violet-300 mb-0.5">⚙️ Mesin Fungsi Interaktif</p>
-        <p className="text-xs text-white/50 font-body">Masukkan nilai domain, lihat mesin memproses dan menghasilkan f(x)!</p>
+      {/* Header strip */}
+      <div className="px-4 pt-4 pb-3 text-center" style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.25) 0%, rgba(6,182,212,0.15) 50%, rgba(236,72,153,0.20) 100%)" }}>
+        <div className="flex items-center justify-center gap-2 mb-1">
+          <span className="text-xl">⚙️</span>
+          <p className="font-display text-base font-bold" style={{ background: "linear-gradient(90deg, #a78bfa, #22d3ee, #f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            Mesin Fungsi Interaktif
+          </p>
+          <span className="text-xl">🎯</span>
+        </div>
+        <p className="text-xs text-white/60 font-body">Masukkan nilai domain → mesin memproses → lihat f(x) keluar!</p>
       </div>
 
       {/* Function Selector */}
-      <div className="flex flex-wrap gap-1.5 justify-center px-4 pb-3">
+      <div className="flex flex-wrap gap-2 justify-center px-4 py-3 bg-white/[0.02] border-y border-white/[0.06]">
         {FUNCTIONS.map(f => (
           <button
             key={f.id}
             onClick={() => handleFnChange(f)}
-            className="text-xs px-2.5 py-1.5 rounded-full border font-mono font-semibold transition-all cursor-pointer"
+            className="text-xs px-3 py-1.5 rounded-full font-mono font-bold transition-all cursor-pointer active:scale-95"
             style={!isCustom && fn.id === f.id
-              ? { borderColor: f.color, color: f.color, background: `${f.color}18`, borderWidth: 2 }
-              : { background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.45)" }
+              ? { borderWidth: 2, borderStyle: "solid", borderColor: f.color, color: f.color, background: `${f.color}22`, boxShadow: `0 0 12px ${f.color}50` }
+              : { border: "1.5px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.5)" }
             }
           >
             {f.label}
           </button>
         ))}
-        {/* Custom button */}
         <button
           onClick={handleCustomSelect}
-          className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-full border font-semibold transition-all cursor-pointer"
+          className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-full font-bold transition-all cursor-pointer active:scale-95"
           style={isCustom
-            ? { borderColor: CUSTOM_COLOR, color: CUSTOM_COLOR, background: `${CUSTOM_COLOR}18`, borderWidth: 2 }
-            : { background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.45)" }
+            ? { borderWidth: 2, borderStyle: "solid", borderColor: CUSTOM_COLOR, color: CUSTOM_COLOR, background: `${CUSTOM_COLOR}22`, boxShadow: `0 0 12px ${CUSTOM_COLOR}50` }
+            : { border: "1.5px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.5)" }
           }
         >
           <Pencil className="w-3 h-3" /> Buat Sendiri
@@ -471,8 +482,15 @@ export default function FunctionMachineAnimation() {
 
       {/* Step-by-step */}
       <div className="px-4 pb-3">
-        <div className={`rounded-xl border px-4 py-3 transition-all min-h-[72px] ${activeBg}`}>
-          <p className="text-[10px] font-semibold text-white/50 uppercase tracking-wider mb-2 font-body">Langkah Pengerjaan</p>
+        <div className="rounded-xl px-4 py-3 transition-all min-h-[80px]" style={{
+          background: `linear-gradient(135deg, ${activeColor}12 0%, rgba(15,23,42,0.9) 100%)`,
+          border: `1.5px solid ${activeColor}40`,
+          boxShadow: phase !== "idle" ? `0 0 16px ${activeColor}20` : "none",
+        }}>
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: activeColor, boxShadow: `0 0 6px ${activeColor}` }} />
+            <p className="text-[10px] font-bold uppercase tracking-wider font-body" style={{ color: activeColor }}>Langkah Pengerjaan</p>
+          </div>
           {visibleSteps === 0 && phase === "idle" && (
             <p className="text-white/30 text-xs font-body italic">
               {isCustom && !customFormulaValid
@@ -481,20 +499,20 @@ export default function FunctionMachineAnimation() {
             </p>
           )}
           {steps.slice(0, visibleSteps).map((step, i) => (
-            <div key={i} className="fma-step-in flex items-center gap-3 mb-1.5" style={{ animationDelay: `${i * 0.05}s` }}>
-              <span
-                className="text-[10px] font-bold px-2 py-0.5 rounded-full font-body flex-shrink-0"
-                style={{ background: `${activeColor}25`, color: activeColor }}
-              >
-                {step.desc}
+            <div key={i} className="fma-step-in flex items-center gap-3 mb-2" style={{ animationDelay: `${i * 0.05}s` }}>
+              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full font-body flex-shrink-0 text-white"
+                style={{ background: activeColor, boxShadow: `0 0 8px ${activeColor}60` }}>
+                {i + 1}
               </span>
-              <span className="font-mono text-sm text-white/90">{step.expr}</span>
+              <span className="text-[10px] font-semibold font-body shrink-0" style={{ color: activeColor }}>{step.desc}</span>
+              <span className="font-mono text-sm text-white/90 ml-auto">{step.expr}</span>
             </div>
           ))}
           {phase === "done" && result !== null && (
-            <div className="fma-bounce-result mt-2 flex items-center gap-2">
-              <span className="text-lg">🎯</span>
-              <span className="font-mono font-bold text-base" style={{ color: activeColor }}>
+            <div className="fma-bounce-result mt-2 flex items-center gap-3 px-3 py-2 rounded-lg"
+              style={{ background: `${activeColor}20`, border: `1px solid ${activeColor}50` }}>
+              <span className="text-xl">🎯</span>
+              <span className="font-mono font-bold text-lg" style={{ color: activeColor }}>
                 f({x}) = {result}
               </span>
             </div>
@@ -505,29 +523,32 @@ export default function FunctionMachineAnimation() {
       {/* Controls */}
       <div className="px-4 pb-3">
         <div className="flex gap-2 items-center flex-wrap">
-          <div className="flex items-center gap-2 bg-slate-800 rounded-xl border border-slate-600 px-3 py-2">
-            <span className="text-white/60 text-sm font-mono">x =</span>
+          <div className="flex items-center gap-2 rounded-xl border px-3 py-2"
+            style={{ background: `${activeColor}10`, borderColor: `${activeColor}40` }}>
+            <span className="font-mono text-sm font-bold" style={{ color: activeColor }}>x =</span>
             <input
               type="number"
               value={inputVal}
               onChange={e => { setInputVal(e.target.value); reset(); }}
-              className="w-14 bg-transparent text-white font-mono text-sm font-bold outline-none text-center"
+              className="w-14 bg-transparent font-mono text-sm font-bold outline-none text-center text-white"
               disabled={isRunning}
             />
           </div>
           <button
             onClick={run}
             disabled={!xValid || isRunning || (isCustom && !customFormulaValid)}
-            className="flex-1 min-w-[120px] py-2 rounded-xl font-display font-bold text-sm transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
-            style={{ background: `${activeColor}30`, border: `1px solid ${activeColor}60`, color: activeColor }}
+            className="flex-1 min-w-[130px] py-2.5 rounded-xl font-display font-bold text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95 text-white"
+            style={!xValid || isRunning || (isCustom && !customFormulaValid)
+              ? { background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.4)" }
+              : { background: `linear-gradient(135deg, ${activeColor} 0%, ${activeColor}cc 100%)`, border: "none", boxShadow: `0 4px 16px ${activeColor}50` }
+            }
           >
             {isRunning ? "⚙️ Memproses..." : "▶ Jalankan Mesin"}
           </button>
           {phase === "done" && (
-            <button
-              onClick={reset}
-              className="px-3 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white/60 hover:text-white text-xs font-body transition-all cursor-pointer"
-            >
+            <button onClick={reset}
+              className="px-3 py-2 rounded-xl text-xs font-body transition-all cursor-pointer text-white/60 hover:text-white active:scale-95"
+              style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)" }}>
               🔄
             </button>
           )}
@@ -535,26 +556,31 @@ export default function FunctionMachineAnimation() {
       </div>
 
       {/* Preset values */}
-      <div className="px-4 pb-4">
-        <p className="text-[10px] text-white/30 font-body mb-2 uppercase tracking-wider">Coba nilai domain:</p>
-        <div className="flex flex-wrap gap-1.5">
-          {PRESETS.map(v => (
-            <button
-              key={v}
-              onClick={() => { setInputVal(String(v)); reset(); }}
-              className="w-9 h-9 rounded-lg font-mono text-xs font-bold border transition-all cursor-pointer hover:scale-110 active:scale-95"
-              style={{
-                background: inputVal === String(v) ? `${activeColor}25` : "rgba(255,255,255,0.05)",
-                borderColor: inputVal === String(v) ? activeColor : "rgba(255,255,255,0.1)",
-                color: inputVal === String(v) ? activeColor : "rgba(255,255,255,0.5)",
-                boxShadow: inputVal === String(v) ? `0 0 8px ${activeColor}40` : "none",
-              }}
-            >
-              {v}
-            </button>
-          ))}
+      <div className="px-4 pb-5">
+        <p className="text-[10px] font-bold uppercase tracking-wider font-body mb-2" style={{ color: `${activeColor}90` }}>
+          Coba nilai domain:
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {PRESETS.map((v, idx) => {
+            const presetColors = ["#a78bfa","#22d3ee","#f472b6","#fbbf24","#4ade80","#fb923c","#60a5fa","#e879f9"];
+            const pColor = presetColors[idx % presetColors.length];
+            const isSelected = inputVal === String(v);
+            return (
+              <button key={v}
+                onClick={() => { setInputVal(String(v)); reset(); }}
+                className="w-10 h-10 rounded-xl font-mono text-sm font-bold transition-all cursor-pointer hover:scale-110 active:scale-95"
+                style={isSelected
+                  ? { background: pColor, color: "#0f172a", boxShadow: `0 0 12px ${pColor}80`, border: "none" }
+                  : { background: `${pColor}15`, borderWidth: 1.5, borderStyle: "solid", borderColor: `${pColor}50`, color: pColor }
+                }
+              >
+                {v}
+              </button>
+            );
+          })}
         </div>
       </div>
+    </div>
     </div>
   );
 }

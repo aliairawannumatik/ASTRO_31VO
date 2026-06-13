@@ -53,9 +53,6 @@ const NotasiFungsiPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* Function Machine Animation */}
-          <FunctionMachineAnimation />
-
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Notasi Fungsi — Bahasa Singkat yang Powerful" />
@@ -134,6 +131,10 @@ const NotasiFungsiPage = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Mesin Fungsi Interaktif */}
+                <FunctionMachineAnimation />
+
               </div>
             )}
           </div>
