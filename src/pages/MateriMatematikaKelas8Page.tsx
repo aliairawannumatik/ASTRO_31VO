@@ -12,7 +12,7 @@ const topics = [
   { label: "PERSAMAAN GARIS LURUS", path: "/materi-matematika/kelas-8/persamaan-garis-lurus" },
   { label: "TEOREMA PYTHAGORAS", path: "/materi-matematika/kelas-8/teorema-pythagoras" },
   { label: "LINGKARAN", path: "/materi-matematika/kelas-8/lingkaran" },
-  { label: "GARIS SINGGUNG LINGKARAN", path: "/materi-matematika/kelas-8/garis-singgung-lingkaran" },
+  { label: "GARIS SINGGUNG LINGKARAN (PENGAYAAN)", path: "/materi-matematika/kelas-8/garis-singgung-lingkaran" },
   { label: "BANGUN RUANG SISI DATAR", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar" },
 ];
 

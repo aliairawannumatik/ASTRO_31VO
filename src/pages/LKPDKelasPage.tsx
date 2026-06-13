@@ -29,7 +29,7 @@ const kelas8Topics: Topic[] = [
   { label: "PERSAMAAN GARIS LURUS", path: "/lkpd/kelas-8/persamaan-garis-lurus" },
   { label: "TEOREMA PYTHAGORAS", path: "/lkpd/kelas-8/teorema-pythagoras" },
   { label: "LINGKARAN", path: "/lkpd/kelas-8/lingkaran" },
-  { label: "GARIS SINGGUNG LINGKARAN", path: "/lkpd/kelas-8/garis-singgung-lingkaran" },
+  { label: "GARIS SINGGUNG LINGKARAN (PENGAYAAN)", path: "/lkpd/kelas-8/garis-singgung-lingkaran" },
   { label: "BANGUN RUANG SISI DATAR", path: "/lkpd/kelas-8/bangun-ruang-sisi-datar" },
 ];
 

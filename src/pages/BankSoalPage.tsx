@@ -47,7 +47,7 @@ const bankSoalTopics = [
   { label: "PERSAMAAN GARIS LURUS", icon: LineChart, path: "/bank-soal/persamaan-garis-lurus", ready: true },
   { label: "TEOREMA PYTHAGORAS", icon: Triangle, path: "/bank-soal/teorema-pythagoras", ready: true },
   { label: "LINGKARAN", icon: Circle, path: "/bank-soal/lingkaran", ready: true },
-  { label: "GARIS SINGGUNG LINGKARAN", icon: Circle, path: "/bank-soal/garis-singgung-lingkaran", ready: true },
+  { label: "GARIS SINGGUNG LINGKARAN (PENGAYAAN)", icon: Circle, path: "/bank-soal/garis-singgung-lingkaran", ready: true },
   { label: "BANGUN RUANG SISI DATAR", icon: Box, path: "/bank-soal/bangun-ruang-sisi-datar", ready: true },
   { label: "BILANGAN BERPANGKAT", icon: Zap, path: "/bank-soal/bilangan-berpangkat", ready: true },
   { label: "KESEBANGUNAN DAN KEKONGRUENAN", icon: Shapes, path: "/bank-soal/kesebangunan-kekongruenan", ready: true },

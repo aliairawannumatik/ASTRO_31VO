@@ -14,7 +14,7 @@ const topics = [
   { label: "PERSAMAAN GARIS LURUS", path: "/math-game-arena/kelas-8/persamaan-garis-lurus" },
   { label: "TEOREMA PYTHAGORAS", path: "/math-game-arena/kelas-8/teorema-pythagoras" },
   { label: "LINGKARAN", path: "/math-game-arena/kelas-8/lingkaran" },
-  { label: "GARIS SINGGUNG LINGKARAN", path: "/math-game-arena/kelas-8/garis-singgung-lingkaran" },
+  { label: "GARIS SINGGUNG LINGKARAN (PENGAYAAN)", path: "/math-game-arena/kelas-8/garis-singgung-lingkaran" },
   { label: "BANGUN RUANG SISI DATAR", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar" },
 ];
 

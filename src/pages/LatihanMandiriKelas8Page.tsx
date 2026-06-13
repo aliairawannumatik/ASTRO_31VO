@@ -12,7 +12,7 @@ const topicsKelas8 = [
   { label: "PERSAMAAN GARIS LURUS", path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus", soal: 200 },
   { label: "TEOREMA PYTHAGORAS", path: "/latihan-mandiri/kelas-8/teorema-pythagoras", soal: 240 },
   { label: "LINGKARAN", path: "/latihan-mandiri/kelas-8/lingkaran", soal: 240 },
-  { label: "GARIS SINGGUNG LINGKARAN", path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran", soal: 200 },
+  { label: "GARIS SINGGUNG LINGKARAN (PENGAYAAN)", path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran", soal: 200 },
   { label: "BANGUN RUANG SISI DATAR", path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar", soal: 80 },
 ];
 
