@@ -103,6 +103,17 @@ const JarakTitikGarisPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Di peta digital, berapa jarak lurus dari rumahmu ke sekolah? Di game, berapa jarak karakter dari musuh? Semua pertanyaan ini dijawab dengan rumus yang sama: gabungan <strong className="text-cyan-300">koordinat Kartesius</strong> dan <strong className="text-cyan-300">Teorema Pythagoras</strong>. Konsep ini juga fundamental untuk menghitung jarak terdekat sebuah titik ke sebuah garis — dipakai dalam grafis komputer, engineering, dan GPS!
                 </p>
+
+                <div className="flex flex-col items-center gap-2">
+                  <img
+                    src="/images/peta-jarak-dua-titik.png"
+                    alt="Contoh jarak dua titik pada peta Google Maps — Central Park New York, 0.60 miles"
+                    className="rounded-xl border border-white/10 shadow-lg w-full max-w-sm object-cover"
+                  />
+                  <p className="text-white/40 text-xs font-body italic text-center">
+                    Garis hitam menunjukkan jarak lurus (garis lurus) antara dua titik di peta — konsep yang sama dengan rumus jarak koordinat Kartesius
+                  </p>
+                </div>
               </div>
             )}
           </div>
