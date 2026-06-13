@@ -11,7 +11,7 @@ import DiskMillMachine from "@/components/DiskMillMachine";
 const PengertianFungsiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh1", "contoh2", "contoh3", "contoh4", "rangkuman",
+    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh1", "contoh2", "contoh3", "contoh4", "contoh5", "rangkuman",
   ]);
   const [soal4Answers, setSoal4Answers] = useState<Record<number,"fungsi"|"bukan">>({});
   const [soal4Checked, setSoal4Checked] = useState(false);
@@ -837,6 +837,119 @@ const PengertianFungsiPage = () => {
                     >↺ Ulangi Soal</button>
                   </div>
                 )}
+              </div>
+            )}
+          </div>
+
+          {/* CONTOH 5 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="contoh5" icon={<Target className="w-5 h-5" />} iconColor="text-teal-400" title="✏️ Contoh 5 — Identifikasi Fungsi dari Pasangan Berurutan" />
+            {expandedSections.includes("contoh5") && (
+              <div className="px-5 pb-5 space-y-4">
+                <Badge label="SEDANG" color="bg-teal-700/60 text-teal-200" />
+                <div className="bg-slate-800/60 border border-teal-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-teal-300 mb-2">📝 Soal</p>
+                  <p className="font-body text-sm text-white/85 leading-relaxed mb-3">
+                    Tentukan di antara relasi-relasi berikut yang merupakan fungsi!
+                  </p>
+                  <div className="space-y-2 text-sm font-body">
+                    {[
+                      { label: "a", data: "{(Januari, Senin), (Februari, Selasa), (Maret, Senin), (April, Selasa), (Maret, Rabu)}" },
+                      { label: "b", data: "{(Ani, Beti), (Beti, Dita), (Cici, Eni), (Beti, Fani), (Ani, Ganis)}" },
+                      { label: "c", data: "{(Ali, Senin), (Budi, Senin), (Cahya, Rabu), (Doni, Sabtu), (Edi, Rabu), (Feri, Kamis)}" },
+                      { label: "d", data: "{(Senin, 2001), (Selasa, 2004), (Rabu, 2007), (Selasa, 2007), (Sabtu, 2006)}" },
+                      { label: "e", data: "{(Adit, 2001), (Bana, 2002), (Cakra, 2002), (Eni, 2003), (Fitri, 2001), (Ganis, 2002)}" },
+                    ].map(({ label, data }) => (
+                      <div key={label} className="flex gap-2 items-start">
+                        <span className="font-bold text-teal-300 shrink-0 w-4">{label}.</span>
+                        <span className="text-white/75 font-mono text-xs leading-relaxed">{data}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-4">
+                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
+                  <p className="font-body text-xs text-white/50">Ingat: suatu relasi adalah <strong className="text-yellow-300">fungsi</strong> jika setiap anggota domain dipasangkan dengan <strong className="text-yellow-300">tepat satu</strong> anggota kodomain.</p>
+
+                  <div className="space-y-3">
+                    {[
+                      {
+                        label: "a",
+                        status: "BUKAN FUNGSI",
+                        statusColor: "text-red-300",
+                        borderColor: "border-red-500/40 bg-red-900/10",
+                        duplikat: "Maret",
+                        penj: "Anggota domain \"Maret\" muncul DUA kali dengan pasangan berbeda: (Maret, Senin) dan (Maret, Rabu). Ini melanggar syarat fungsi!",
+                        pasangan: [["Januari","Senin"],["Februari","Selasa"],["Maret","Senin ✗"],["April","Selasa"],["Maret","Rabu ✗"]],
+                      },
+                      {
+                        label: "b",
+                        status: "BUKAN FUNGSI",
+                        statusColor: "text-red-300",
+                        borderColor: "border-red-500/40 bg-red-900/10",
+                        duplikat: "Ani & Beti",
+                        penj: "\"Ani\" punya dua pasangan: (Ani, Beti) dan (Ani, Ganis). \"Beti\" juga punya dua pasangan: (Beti, Dita) dan (Beti, Fani). Keduanya melanggar syarat fungsi!",
+                        pasangan: [["Ani","Beti ✗"],["Beti","Dita ✗"],["Cici","Eni"],["Beti","Fani ✗"],["Ani","Ganis ✗"]],
+                      },
+                      {
+                        label: "c",
+                        status: "FUNGSI ✅",
+                        statusColor: "text-green-300",
+                        borderColor: "border-green-500/40 bg-green-900/10",
+                        duplikat: "",
+                        penj: "Setiap domain (Ali, Budi, Cahya, Doni, Edi, Feri) masing-masing muncul tepat sekali. Boleh saja dua domain berbeda (misal Budi & Ali) menunjuk ke Senin yang sama — itu tetap fungsi!",
+                        pasangan: [["Ali","Senin"],["Budi","Senin"],["Cahya","Rabu"],["Doni","Sabtu"],["Edi","Rabu"],["Feri","Kamis"]],
+                      },
+                      {
+                        label: "d",
+                        status: "BUKAN FUNGSI",
+                        statusColor: "text-red-300",
+                        borderColor: "border-red-500/40 bg-red-900/10",
+                        duplikat: "Selasa",
+                        penj: "\"Selasa\" muncul dua kali dengan pasangan berbeda: (Selasa, 2004) dan (Selasa, 2007). Ini melanggar syarat fungsi!",
+                        pasangan: [["Senin","2001"],["Selasa","2004 ✗"],["Rabu","2007"],["Selasa","2007 ✗"],["Sabtu","2006"]],
+                      },
+                      {
+                        label: "e",
+                        status: "FUNGSI ✅",
+                        statusColor: "text-green-300",
+                        borderColor: "border-green-500/40 bg-green-900/10",
+                        duplikat: "",
+                        penj: "Setiap domain (Adit, Bana, Cakra, Eni, Fitri, Ganis) masing-masing muncul tepat sekali. Nilai kodomain boleh sama (2002 muncul 3 kali, 2001 muncul 2 kali) — itu tidak masalah. Ini adalah fungsi!",
+                        pasangan: [["Adit","2001"],["Bana","2002"],["Cakra","2002"],["Eni","2003"],["Fitri","2001"],["Ganis","2002"]],
+                      },
+                    ].map(({ label, status, statusColor, borderColor, duplikat, penj, pasangan }) => (
+                      <div key={label} className={`border ${borderColor} rounded-xl p-3 space-y-2`}>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="bg-white/10 rounded px-2 py-0.5 text-xs font-bold text-white shrink-0">{label}</span>
+                          <span className={`text-xs font-bold ${statusColor}`}>{status}</span>
+                          {duplikat && (
+                            <span className="text-[10px] bg-red-900/40 border border-red-500/30 text-red-300 rounded px-2 py-0.5">
+                              Domain duplikat: {duplikat}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {pasangan.map(([d, k], i) => (
+                            <span key={i} className={`text-[10px] font-mono px-2 py-0.5 rounded border ${k.includes("✗") ? "bg-red-900/30 border-red-500/40 text-red-200" : "bg-slate-700/60 border-white/10 text-white/60"}`}>
+                              {d} → {k}
+                            </span>
+                          ))}
+                        </div>
+                        <p className="text-xs text-white/60 leading-relaxed">{penj}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="bg-teal-500/10 border border-teal-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-bold text-teal-300 mb-1">✅ Kesimpulan:</p>
+                    <p className="font-body text-xs text-white/75">
+                      Yang merupakan fungsi: <strong className="text-green-300">c</strong> dan <strong className="text-green-300">e</strong>.
+                      <br />Yang bukan fungsi: <strong className="text-red-300">a</strong> (Maret duplikat), <strong className="text-red-300">b</strong> (Ani & Beti duplikat), <strong className="text-red-300">d</strong> (Selasa duplikat).
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
           </div>
