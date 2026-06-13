@@ -95,31 +95,6 @@ const PengertianRelasiPage = () => {
                     Diberikan dua himpunan <InlineMath math="A" /> dan <InlineMath math="B" />, <strong className="text-cyan-300">relasi dari A ke B</strong> adalah aturan yang memasangkan <strong className="text-green-300">sebagian atau seluruh</strong> anggota himpunan <InlineMath math="A" /> dengan anggota himpunan <InlineMath math="B" />. Anggota himpunan <InlineMath math="A" /> disebut <strong className="text-yellow-300">domain (daerah asal)</strong> dan anggota himpunan <InlineMath math="B" /> disebut <strong className="text-orange-300">kodomain (daerah kawan)</strong>.
                   </p>
                 </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs font-body border-collapse">
-                    <thead>
-                      <tr className="bg-violet-900/40">
-                        <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">Istilah</th>
-                        <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">Penjelasan</th>
-                        <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">Notasi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {[
-                        ["Domain", "Himpunan asal / himpunan yang anggotanya dipasangkan", "A"],
-                        ["Kodomain", "Himpunan kawan / himpunan tujuan pasangan", "B"],
-                        ["Range", "Himpunan dari anggota B yang benar-benar dipasangkan", "R ⊆ B"],
-                        ["Pasangan Berurutan", "Cara menyatakan hasil pasangan (a, b)", "(a, b)"],
-                      ].map(([istilah, penj, notasi], i) => (
-                        <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
-                          <td className="border border-white/10 px-3 py-2 text-cyan-300 font-semibold">{istilah}</td>
-                          <td className="border border-white/10 px-3 py-2 text-white/70">{penj}</td>
-                          <td className="border border-white/10 px-3 py-2 text-green-300 font-mono">{notasi}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-orange-200">
                     <strong>⚠️ Ingat:</strong> Range <InlineMath math="\subseteq" /> Kodomain, artinya range adalah bagian dari kodomain. Tidak semua anggota kodomain harus dipasangkan!
@@ -165,19 +140,20 @@ const PengertianRelasiPage = () => {
                       <text x="210" y="100" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">9</text>
                       <text x="210" y="124" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">16</text>
                       <text x="210" y="148" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">25</text>
-                      {/* Arrows — from right edge of oval A to left edge of oval B, touching elements */}
+                      {/* Arrows — start at right edge of domain number, end at left edge of kodomain number */}
                       {/* 1 → 1 */}
-                      <line x1="114" y1="60"  x2="162" y2="49"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
+                      <line x1="77" y1="57"  x2="200" y2="45"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
                       {/* 2 → 4 */}
-                      <line x1="121" y1="88"  x2="163" y2="73"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
+                      <line x1="77" y1="85"  x2="200" y2="69"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
                       {/* 3 → 9 */}
-                      <line x1="122" y1="116" x2="160" y2="97"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
+                      <line x1="77" y1="113" x2="200" y2="93"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
                       {/* 4 → 16 */}
-                      <line x1="119" y1="144" x2="160" y2="121" stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
-                      {/* Relation label */}
-                      <text x="140" y="198" textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="8">"kuadrat dari" — 1→1, 2→4, 3→9, 4→16</text>
+                      <line x1="77" y1="141" x2="196" y2="117" stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
                     </svg>
                   </div>
+                  <p className="text-center text-xs text-white/40 mt-2">
+                    Relasi "kuadrat dari"<br />1→1, 2→4, 3→9, 4→16
+                  </p>
                 </div>
 
                 {/* Himpunan Pasangan Berurutan */}
@@ -186,34 +162,6 @@ const PengertianRelasiPage = () => {
                   <p className="font-body text-xs text-white/60 mb-2">Ditulis sebagai kumpulan pasangan <InlineMath math="(a, b)" /> di mana <InlineMath math="a \in A" /> dan <InlineMath math="b \in B" />.</p>
                   <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3">
                     <BlockMath math="\{(1,1),\ (2,4),\ (3,9),\ (4,16)\}" />
-                  </div>
-                </div>
-
-                {/* Tabel */}
-                <div className="bg-slate-800/50 border border-orange-500/20 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-bold text-orange-300">3️⃣ Tabel</p>
-                  <p className="font-body text-xs text-white/60 mb-2">Baris pertama berisi anggota domain, baris kedua berisi anggota range yang bersesuaian.</p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs font-body border-collapse">
-                      <thead>
-                        <tr className="bg-orange-900/40">
-                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200 text-left">x (Domain)</th>
-                          <td className="border border-orange-500/30 px-3 py-2 text-white text-center">1</td>
-                          <td className="border border-orange-500/30 px-3 py-2 text-white text-center">2</td>
-                          <td className="border border-orange-500/30 px-3 py-2 text-white text-center">3</td>
-                          <td className="border border-orange-500/30 px-3 py-2 text-white text-center">4</td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200 text-left">y = x²</th>
-                          <td className="border border-orange-500/30 px-3 py-2 text-green-300 text-center font-bold">1</td>
-                          <td className="border border-orange-500/30 px-3 py-2 text-green-300 text-center font-bold">4</td>
-                          <td className="border border-orange-500/30 px-3 py-2 text-green-300 text-center font-bold">9</td>
-                          <td className="border border-orange-500/30 px-3 py-2 text-green-300 text-center font-bold">16</td>
-                        </tr>
-                      </tbody>
-                    </table>
                   </div>
                 </div>
 
@@ -351,7 +299,6 @@ const PengertianRelasiPage = () => {
                     Dari himpunan pasangan berurutan berikut: <InlineMath math="\{(2,5),\ (3,7),\ (4,9),\ (5,11)\}" />, tentukan:
                     <br />a) Domain, Kodomain, dan Range
                     <br />b) Aturan relasinya
-                    <br />c) Sajikan dalam bentuk tabel!
                   </p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
@@ -376,31 +323,6 @@ const PengertianRelasiPage = () => {
                       </div>
                       <BlockMath math="y = 2x + 1" />
                       <p className="text-white/60 text-xs">Aturan: "dua kali lebih satu dari"</p>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-orange-300 font-semibold mb-2">c) Bentuk Tabel:</p>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-xs border-collapse">
-                          <thead>
-                            <tr className="bg-orange-900/40">
-                              <th className="border border-orange-500/30 px-3 py-1.5 text-orange-200">x</th>
-                              <td className="border border-orange-500/30 px-3 py-1.5 text-white text-center">2</td>
-                              <td className="border border-orange-500/30 px-3 py-1.5 text-white text-center">3</td>
-                              <td className="border border-orange-500/30 px-3 py-1.5 text-white text-center">4</td>
-                              <td className="border border-orange-500/30 px-3 py-1.5 text-white text-center">5</td>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th className="border border-orange-500/30 px-3 py-1.5 text-orange-200">y = 2x+1</th>
-                              <td className="border border-orange-500/30 px-3 py-1.5 text-green-300 text-center font-bold">5</td>
-                              <td className="border border-orange-500/30 px-3 py-1.5 text-green-300 text-center font-bold">7</td>
-                              <td className="border border-orange-500/30 px-3 py-1.5 text-green-300 text-center font-bold">9</td>
-                              <td className="border border-orange-500/30 px-3 py-1.5 text-green-300 text-center font-bold">11</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                     </div>
                     <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-lg p-3">
                       <p className="font-body text-sm font-bold text-yellow-300">✅ Aturan relasi: <InlineMath math="y = 2x + 1" /> ("dua kali lebih satu dari")</p>
