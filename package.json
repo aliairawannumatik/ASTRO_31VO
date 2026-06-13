@@ -8,7 +8,7 @@
     "*.scss"
   ],
   "scripts": {
-    "dev": "./node_modules/.bin/tsx watch server.ts & ./node_modules/.bin/vite --port 5000",
+    "dev": "npx tsx watch server.ts & npx vite --port 5000",
     "server": "npx tsx watch server.ts",
     "build": "NODE_ENV=production npx vite build",
     "build:dev": "npx vite build --mode development",
