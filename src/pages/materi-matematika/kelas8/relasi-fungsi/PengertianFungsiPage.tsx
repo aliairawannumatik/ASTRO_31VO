@@ -11,7 +11,7 @@ import DiskMillMachine from "@/components/DiskMillMachine";
 const PengertianFungsiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh4", "contoh5", "contoh6", "rangkuman",
+    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh3", "contoh4", "contoh5", "contoh6", "rangkuman",
   ]);
   const [soal4Answers, setSoal4Answers] = useState<Record<number,"fungsi"|"bukan">>({});
   const [soal4Checked, setSoal4Checked] = useState(false);
@@ -425,6 +425,121 @@ const PengertianFungsiPage = () => {
                     <p className="text-[10px] font-body text-white/40 text-center">
                       Kurva parabola <span className="font-mono text-violet-400">y = x² + 1</span> · Setiap x tepat 1 titik → fungsi ✓
                     </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* CONTOH 3 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Domain, Kodomain, dan Range" />
+            {expandedSections.includes("contoh3") && (
+              <div className="px-5 pb-5 space-y-4">
+                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+                <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
+                  <p className="font-body text-sm text-white/85 leading-relaxed">
+                    Perhatikan diagram panah berikut. Tentukan <strong className="text-cyan-300">domain</strong>, <strong className="text-violet-300">kodomain</strong>, dan <strong className="text-green-300">range</strong> dari fungsi tersebut!
+                  </p>
+                </div>
+
+                {/* Diagram Panah SVG */}
+                <div className="flex justify-center">
+                  <svg width="260" height="230" viewBox="0 0 260 230">
+                    <defs>
+                      <marker id="c3-arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+                        <polygon points="0,0 7,2.5 0,5" fill="#22c55e"/>
+                      </marker>
+                    </defs>
+                    {/* Oval A (domain) */}
+                    <ellipse cx="62" cy="115" rx="52" ry="100" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
+                    <text x="62" y="14" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
+                    {/* Domain elements: 1,2,3,4 */}
+                    {([["1",50],["2",88],["3",126],["4",164]] as [string,number][]).map(([el,y])=>(
+                      <text key={el} x={62} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="13" fontWeight="bold">{el}</text>
+                    ))}
+                    {/* Oval B (kodomain) */}
+                    <ellipse cx="198" cy="115" rx="52" ry="100" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
+                    <text x="198" y="14" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
+                    {/* Kodomain elements: a,b,c,d,e — b,d,e bright (range), a,c dim */}
+                    {([["a",30],["b",66],["c",102],["d",138],["e",174]] as [string,number][]).map(([el,y])=>{
+                      const inRange = el==="b"||el==="d"||el==="e";
+                      return (
+                        <text key={el} x={198} y={y+4} textAnchor="middle"
+                          fill={inRange ? "#e9d5ff" : "#4b5563"} fontSize="13" fontWeight="bold">{el}</text>
+                      );
+                    })}
+                    {/* Arrows: 1→b, 2→d, 3→b, 4→e */}
+                    <path d="M80,50 C118,50 158,60 180,66" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
+                    <path d="M80,88 C112,100 148,128 180,138" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
+                    <path d="M80,126 C112,112 148,78 180,66" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
+                    <path d="M80,164 C112,164 148,168 180,174" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
+                    {/* Labels */}
+                    <text x="62" y="220" textAnchor="middle" fill="#06b6d4" fontSize="8" opacity="0.6">Domain</text>
+                    <text x="198" y="220" textAnchor="middle" fill="#8b5cf6" fontSize="8" opacity="0.6">Kodomain</text>
+                  </svg>
+                </div>
+
+                {/* Pembahasan */}
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
+                  <div className="space-y-3 font-body text-sm">
+
+                    {/* Domain */}
+                    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-3">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="bg-cyan-700/60 text-cyan-200 text-[11px] font-bold px-2 py-0.5 rounded">DOMAIN</span>
+                        <span className="text-white/50 text-xs">= semua anggota himpunan A</span>
+                      </div>
+                      <p className="text-white/80 text-sm">
+                        Domain = <strong className="text-cyan-300">{"{"} 1, 2, 3, 4 {"}"}</strong>
+                      </p>
+                      <p className="text-white/45 text-xs mt-1">Semua elemen di himpunan A adalah domain, karena setiap elemen memiliki pasangan di B.</p>
+                    </div>
+
+                    {/* Kodomain */}
+                    <div className="bg-violet-900/20 border border-violet-500/30 rounded-xl p-3">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="bg-violet-700/60 text-violet-200 text-[11px] font-bold px-2 py-0.5 rounded">KODOMAIN</span>
+                        <span className="text-white/50 text-xs">= semua anggota himpunan B</span>
+                      </div>
+                      <p className="text-white/80 text-sm">
+                        Kodomain = <strong className="text-violet-300">{"{"} a, b, c, d, e {"}"}</strong>
+                      </p>
+                      <p className="text-white/45 text-xs mt-1">Semua elemen di himpunan B adalah kodomain, meskipun ada yang tidak mendapat panah (a dan c).</p>
+                    </div>
+
+                    {/* Range */}
+                    <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-3">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="bg-green-700/60 text-green-200 text-[11px] font-bold px-2 py-0.5 rounded">RANGE</span>
+                        <span className="text-white/50 text-xs">= anggota B yang benar-benar dipasangkan</span>
+                      </div>
+                      <div className="space-y-1 text-xs text-white/60 mb-2">
+                        {[["1","b"],["2","d"],["3","b"],["4","e"]].map(([x,y])=>(
+                          <div key={x} className="flex items-center gap-1.5">
+                            <span className="text-cyan-300 font-bold">{x}</span>
+                            <span className="text-white/30">→</span>
+                            <span className="text-green-300 font-bold">{y}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-white/80 text-sm">
+                        Range = <strong className="text-green-300">{"{"} b, d, e {"}"}</strong>
+                      </p>
+                      <p className="text-white/45 text-xs mt-1">
+                        Elemen <strong className="text-slate-400">a</strong> dan <strong className="text-slate-400">c</strong> tidak masuk range karena tidak ada panah yang menuju ke sana.
+                      </p>
+                    </div>
+
+                    {/* Ringkasan */}
+                    <div className="bg-slate-800/60 border border-white/10 rounded-lg p-3 flex flex-col gap-1.5">
+                      <p className="text-xs text-white/40 font-semibold mb-0.5">📌 Ringkasan Jawaban</p>
+                      <p className="text-sm text-white/80">Domain &nbsp;&nbsp;&nbsp;= <strong className="text-cyan-300">{"{"} 1, 2, 3, 4 {"}"}</strong></p>
+                      <p className="text-sm text-white/80">Kodomain = <strong className="text-violet-300">{"{"} a, b, c, d, e {"}"}</strong></p>
+                      <p className="text-sm text-white/80">Range &nbsp;&nbsp;&nbsp;= <strong className="text-green-300">{"{"} b, d, e {"}"}</strong></p>
+                    </div>
                   </div>
                 </div>
               </div>
