@@ -43,28 +43,26 @@ const GrafikFungsiPage = () => {
   );
 
   const PilihanGanda = ({
-    soal, opsi, kunci, pembahasan
-  }: { soal: string; opsi: { kode: string; teks: string }[]; kunci: string; pembahasan: string }) => {
-    const dipilih = jawaban[soal];
-    const sudahJawab = !!dipilih;
+    soal, opsi, kunci, pembahasan, autoShow = false
+  }: { soal: string; opsi: { kode: string; teks: string }[]; kunci: string; pembahasan: string; autoShow?: boolean }) => {
+    const dipilih = autoShow ? kunci : jawaban[soal];
+    const sudahJawab = autoShow || !!dipilih;
     return (
       <div className="space-y-2">
         {opsi.map(({ kode, teks }) => {
           const benar = kode === kunci;
           const dipilihIni = dipilih === kode;
-          let cls = "border rounded-lg px-4 py-2.5 text-sm font-body cursor-pointer transition-all flex items-center gap-3 ";
+          let cls = "border rounded-lg px-4 py-2.5 text-sm font-body transition-all flex items-center gap-3 ";
           if (!sudahJawab) {
-            cls += "border-white/20 text-white/80 hover:border-cyan-400/60 hover:bg-cyan-900/20";
+            cls += "cursor-pointer border-white/20 text-white/80 hover:border-cyan-400/60 hover:bg-cyan-900/20";
           } else if (benar) {
-            cls += "border-green-500 bg-green-900/30 text-green-300 font-semibold";
-          } else if (dipilihIni) {
-            cls += "border-red-500 bg-red-900/20 text-red-300 line-through";
+            cls += "border-green-500 bg-green-900/30 text-green-300 font-semibold cursor-default";
           } else {
-            cls += "border-white/10 text-white/40";
+            cls += "border-white/10 text-white/40 cursor-default";
           }
           return (
             <button key={kode} onClick={() => !sudahJawab && pilihJawaban(soal, kode)} className={cls} disabled={sudahJawab}>
-              <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${sudahJawab && benar ? "border-green-400 bg-green-500/30 text-green-300" : sudahJawab && dipilihIni ? "border-red-400 bg-red-500/20 text-red-300" : "border-white/30 text-white/50"}`}>{kode}</span>
+              <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${benar && sudahJawab ? "border-green-400 bg-green-500/30 text-green-300" : sudahJawab && dipilihIni ? "border-red-400 bg-red-500/20 text-red-300" : "border-white/30 text-white/50"}`}>{kode}</span>
               {teks}
               {sudahJawab && benar && <span className="ml-auto text-green-400 text-xs font-bold">✓ BENAR</span>}
               {sudahJawab && dipilihIni && !benar && <span className="ml-auto text-red-400 text-xs font-bold">✗ SALAH</span>}
@@ -72,7 +70,7 @@ const GrafikFungsiPage = () => {
           );
         })}
         {sudahJawab && (
-          <div className={`rounded-lg p-3 text-xs font-body mt-1 ${jawaban[soal] === kunci ? "bg-green-900/20 border border-green-500/40 text-green-200" : "bg-orange-900/20 border border-orange-500/40 text-orange-200"}`}>
+          <div className="rounded-lg p-3 text-xs font-body mt-1 bg-green-900/20 border border-green-500/40 text-green-200">
             <strong>💡 Pembahasan:</strong> {pembahasan}
           </div>
         )}
@@ -296,6 +294,7 @@ const GrafikFungsiPage = () => {
                   </p>
                 </div>
                 <PilihanGanda
+                  autoShow
                   soal="c1"
                   opsi={[
                     { kode: "A", teks: "Rp 1.250,00" },
@@ -391,6 +390,7 @@ const GrafikFungsiPage = () => {
                   </p>
                 </div>
                 <PilihanGanda
+                  autoShow
                   soal="c2"
                   opsi={[
                     { kode: "A", teks: "Rp 18.000,00" },
@@ -466,6 +466,7 @@ const GrafikFungsiPage = () => {
                   </div>
                 </div>
                 <PilihanGanda
+                  autoShow
                   soal="c3"
                   opsi={[
                     { kode: "A", teks: "f(x) = x + 1" },
