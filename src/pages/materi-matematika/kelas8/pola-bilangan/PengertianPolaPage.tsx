@@ -260,27 +260,6 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-cyan-300">Pola Bilangan Genap</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Bilangan yang habis dibagi 2.</p>
-                <svg viewBox="0 0 248 58" className="w-full mb-2">
-                  {[2,4,6,8,10].map((n, i) => {
-                    const x = 24 + i * 48;
-                    return (
-                      <g key={i}>
-                        <rect x={x-14} y={32} width={28} height={18} rx="4" fill="rgba(8,145,178,0.3)" stroke="#22d3ee" strokeWidth="1"/>
-                        <text x={x} y={45} textAnchor="middle" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
-                      </g>
-                    );
-                  })}
-                  <text x={236} y={45} fill="rgba(255,255,255,0.35)" fontSize="13" fontFamily="monospace">…</text>
-                  {[0,1,2,3].map(i => {
-                    const x1 = 24 + i * 48 + 14; const x2 = 24 + (i+1)*48 - 14; const mx = (x1+x2)/2;
-                    return (
-                      <g key={i}>
-                        <path d={`M ${x1},32 Q ${mx},12 ${x2},32`} fill="none" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="3,2"/>
-                        <text x={mx} y={9} textAnchor="middle" fill="#22d3ee" fontSize="10" fontFamily="monospace" fontWeight="bold">+2</text>
-                      </g>
-                    );
-                  })}
-                </svg>
                 <ArcPatternPanel
                   terms={[2, 4, 6, 8, 10, 12]}
                   arcColor="#22d3ee"
@@ -298,27 +277,6 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-orange-300">Pola Bilangan Ganjil</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Bilangan yang tidak habis dibagi 2.</p>
-                <svg viewBox="0 0 248 58" className="w-full mb-2">
-                  {[1,3,5,7,9].map((n, i) => {
-                    const x = 24 + i * 48;
-                    return (
-                      <g key={i}>
-                        <rect x={x-14} y={32} width={28} height={18} rx="4" fill="rgba(194,65,12,0.3)" stroke="#f97316" strokeWidth="1"/>
-                        <text x={x} y={45} textAnchor="middle" fill="#fed7aa" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text>
-                      </g>
-                    );
-                  })}
-                  <text x={236} y={45} fill="rgba(255,255,255,0.35)" fontSize="13" fontFamily="monospace">…</text>
-                  {[0,1,2,3].map(i => {
-                    const x1 = 24 + i * 48 + 14; const x2 = 24 + (i+1)*48 - 14; const mx = (x1+x2)/2;
-                    return (
-                      <g key={i}>
-                        <path d={`M ${x1},32 Q ${mx},12 ${x2},32`} fill="none" stroke="#f97316" strokeWidth="1.5" strokeDasharray="3,2"/>
-                        <text x={mx} y={9} textAnchor="middle" fill="#f97316" fontSize="10" fontFamily="monospace" fontWeight="bold">+2</text>
-                      </g>
-                    );
-                  })}
-                </svg>
                 <ArcPatternPanel
                   terms={[1, 3, 5, 7, 9, 11]}
                   arcColor="#fb923c"
@@ -336,27 +294,6 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-violet-300">Pola Bilangan Persegi</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Bilangan kuadrat — bisa disusun membentuk persegi.</p>
-                <div className="flex gap-3 flex-wrap mb-2 items-end">
-                  {[
-                    { n: 1,  label: "1²", dots: [[1]] },
-                    { n: 4,  label: "2²", dots: [[1,1],[1,1]] },
-                    { n: 9,  label: "3²", dots: [[1,1,1],[1,1,1],[1,1,1]] },
-                    { n: 16, label: "4²", dots: [[1,1,1,1],[1,1,1,1],[1,1,1,1],[1,1,1,1]] },
-                  ].map(({ n, label, dots }) => (
-                    <div key={n} className="text-center">
-                      <div className="inline-flex flex-col gap-0.5 mb-1">
-                        {dots.map((row, ri) => (
-                          <div key={ri} className="flex gap-0.5">
-                            {row.map((_, ci) => <div key={ci} className="w-2.5 h-2.5 rounded-sm bg-violet-400" />)}
-                          </div>
-                        ))}
-                      </div>
-                      <p className="text-violet-200 text-xs font-bold">{n}</p>
-                      <p className="text-violet-400 text-[10px] font-mono">{label}</p>
-                    </div>
-                  ))}
-                  <span className="text-white/40 self-center text-lg">...</span>
-                </div>
                 <ArcPatternPanel
                   terms={[1, 4, 9, 16, 25, 36]}
                   arcColor="#a78bfa"
@@ -375,27 +312,6 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-green-300">Pola Bilangan Persegi Panjang</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Titik-titik yang membentuk persegi panjang dengan sisi <InlineMath math="n" /> dan <InlineMath math="n+1" />.</p>
-                <div className="flex gap-3 flex-wrap mb-2 items-end">
-                  {[
-                    { n: 2,  label: "1×2", rows: 1, cols: 2 },
-                    { n: 6,  label: "2×3", rows: 2, cols: 3 },
-                    { n: 12, label: "3×4", rows: 3, cols: 4 },
-                    { n: 20, label: "4×5", rows: 4, cols: 5 },
-                  ].map(({ n, label, rows, cols }) => (
-                    <div key={n} className="text-center">
-                      <div className="inline-flex flex-col gap-0.5 mb-1">
-                        {Array.from({ length: rows }).map((_, ri) => (
-                          <div key={ri} className="flex gap-0.5">
-                            {Array.from({ length: cols }).map((_, ci) => <div key={ci} className="w-3 h-3 rounded-sm bg-green-400" />)}
-                          </div>
-                        ))}
-                      </div>
-                      <p className="text-green-200 text-xs font-bold">{n}</p>
-                      <p className="text-green-400 text-[10px] font-mono">{label}</p>
-                    </div>
-                  ))}
-                  <span className="text-white/40 self-center text-lg">...</span>
-                </div>
                 <ArcPatternPanel
                   terms={[2, 6, 12, 20, 30, 42]}
                   arcColor="#4ade80"
@@ -414,27 +330,6 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-yellow-300">Pola Bilangan Segitiga</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Titik-titik yang disusun membentuk segitiga sama sisi.</p>
-                <div className="flex gap-4 flex-wrap mb-2 items-end">
-                  {[
-                    { n: 1,  label: "1×2÷2", rows: [1] },
-                    { n: 3,  label: "2×3÷2", rows: [1, 2] },
-                    { n: 6,  label: "3×4÷2", rows: [1, 2, 3] },
-                    { n: 10, label: "4×5÷2", rows: [1, 2, 3, 4] },
-                  ].map(({ n, label, rows }) => (
-                    <div key={n} className="text-center">
-                      <div className="inline-flex flex-col items-center gap-0.5 mb-1">
-                        {rows.map((count, ri) => (
-                          <div key={ri} className="flex gap-0.5">
-                            {Array.from({ length: count }).map((_, ci) => <div key={ci} className="w-3 h-3 rounded-full bg-yellow-400" />)}
-                          </div>
-                        ))}
-                      </div>
-                      <p className="text-yellow-200 text-xs font-bold">{n}</p>
-                      <p className="text-yellow-500 text-[10px] font-mono">{label}</p>
-                    </div>
-                  ))}
-                  <span className="text-white/40 self-center text-lg">...</span>
-                </div>
                 <ArcPatternPanel
                   terms={[1, 3, 6, 10, 15, 21]}
                   arcColor="#facc15"
@@ -453,38 +348,6 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-pink-300">Pola Segitiga Pascal</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Setiap bilangan = jumlah dua bilangan di atasnya. Baris dimulai dan diakhiri angka 1.</p>
-                <div className="flex flex-col items-center gap-1.5 my-3 font-mono text-xs">
-                  {[
-                    { row: [1],                  sum: 1,  expanded: "1",               power: "2⁰" },
-                    { row: [1, 1],               sum: 2,  expanded: "1+1",             power: "2¹" },
-                    { row: [1, 2, 1],            sum: 4,  expanded: "1+2+1",           power: "2²" },
-                    { row: [1, 3, 3, 1],         sum: 8,  expanded: "1+3+3+1",         power: "2³" },
-                    { row: [1, 4, 6, 4, 1],      sum: 16, expanded: "1+4+6+4+1",       power: "2⁴" },
-                    { row: [1, 5, 10, 10, 5, 1], sum: 32, expanded: "1+5+10+10+5+1",   power: "2⁵" },
-                  ].map(({ row, sum, expanded, power }, ri) => (
-                    <div key={ri} className="flex flex-col items-center gap-0.5">
-                      <div className="flex items-center gap-2">
-                        <div className="flex gap-1">
-                          {row.map((val, ci) => (
-                            <span key={ci} className="bg-pink-700/50 border border-pink-400/40 text-pink-200 font-bold rounded px-1.5 py-0.5 min-w-[22px] text-center text-xs">{val}</span>
-                          ))}
-                        </div>
-                        <span className="text-white/30 text-[10px]">→</span>
-                        <span className="text-pink-100 font-bold text-xs">{sum}</span>
-                        <span className="text-white/30 text-[10px]">=</span>
-                        <span className="text-amber-300 font-mono text-xs font-bold">{power}</span>
-                      </div>
-                      <p className="font-mono text-[10px] text-pink-300/55">= {expanded}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-2 space-y-1">
-                  <p className="font-body text-xs text-white/70">Jumlah bilangan pada setiap baris: <strong className="text-pink-300">1, 2, 4, 8, 16, 32, ...</strong></p>
-                  <p className="font-body text-xs text-white/70">Setiap baris, jumlahnya <strong className="text-pink-300">berlipat ganda (×2)</strong> dari baris sebelumnya.</p>
-                  <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-2 mt-2">
-                    <BlockMath math="\text{Jumlah baris ke-}n = 2^{n-1}" />
-                  </div>
-                </div>
                 <ArcPatternPanel
                   terms={[1, 2, 4, 8, 16, 32]}
                   arcColor="#f472b6"
@@ -502,12 +365,6 @@ const PengertianPolaPage = () => {
                   <p className="font-body text-sm font-bold text-teal-300">Pola Fibonacci</p>
                 </div>
                 <p className="font-body text-xs text-white/70 mb-2">Setiap suku = jumlah dua suku sebelumnya. Dimulai dari 1, 1.</p>
-                <div className="flex gap-1 flex-wrap mb-2">
-                  {[1,1,2,3,5,8,13,21,34,55].map((n, i) => (
-                    <span key={i} className="bg-teal-700/50 border border-teal-400/40 text-teal-200 text-xs font-bold px-2 py-1 rounded-lg">{n}</span>
-                  ))}
-                  <span className="text-white/40 self-center">...</span>
-                </div>
                 <BlockMath math="U_n = U_{n-1} + U_{n-2} \quad (U_1 = U_2 = 1)" />
                 <p className="font-body text-xs text-white/60 mt-1">🌿 Muncul di alam: kelopak bunga, cangkang nautilus, susunan biji bunga matahari!</p>
                 <ArcPatternPanel
