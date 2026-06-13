@@ -11,7 +11,7 @@ import DiskMillMachine from "@/components/DiskMillMachine";
 const PengertianFungsiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh3", "contoh4", "contoh5", "contoh6", "rangkuman",
+    "intro", "konsep", "penyajian", "bukan-fungsi", "contoh1", "contoh2", "contoh3", "contoh4", "rangkuman",
   ]);
   const [soal4Answers, setSoal4Answers] = useState<Record<number,"fungsi"|"bukan">>({});
   const [soal4Checked, setSoal4Checked] = useState(false);
@@ -433,8 +433,8 @@ const PengertianFungsiPage = () => {
 
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Domain, Kodomain, dan Range" />
-            {expandedSections.includes("contoh3") && (
+            <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 1 — Domain, Kodomain, dan Range" />
+            {expandedSections.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -545,8 +545,8 @@ const PengertianFungsiPage = () => {
 
           {/* SOAL 4 — Diagram Panah Interaktif */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh4" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="✏️ Contoh 4 — Identifikasi dari Diagram Panah" />
-            {expandedSections.includes("contoh4") && (
+            <SectionHeader id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="✏️ Contoh 2 — Identifikasi dari Diagram Panah" />
+            {expandedSections.includes("contoh2") && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-purple-700/60 text-purple-200" />
                 <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
@@ -795,8 +795,8 @@ const PengertianFungsiPage = () => {
 
           {/* CONTOH 5 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh5" icon={<Target className="w-5 h-5" />} iconColor="text-teal-400" title="✏️ Contoh 5 — Identifikasi Fungsi dari Pasangan Berurutan" />
-            {expandedSections.includes("contoh5") && (
+            <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-teal-400" title="✏️ Contoh 3 — Identifikasi Fungsi dari Pasangan Berurutan" />
+            {expandedSections.includes("contoh3") && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-teal-700/60 text-teal-200" />
                 <div className="bg-slate-800/60 border border-teal-500/30 rounded-xl p-4">
@@ -908,8 +908,8 @@ const PengertianFungsiPage = () => {
 
           {/* CONTOH 6 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh6" icon={<Target className="w-5 h-5" />} iconColor="text-pink-400" title="✏️ Contoh 6 — Identifikasi Fungsi dari Grafik" />
-            {expandedSections.includes("contoh6") && (
+            <SectionHeader id="contoh4" icon={<Target className="w-5 h-5" />} iconColor="text-pink-400" title="✏️ Contoh 4 — Identifikasi Fungsi dari Grafik" />
+            {expandedSections.includes("contoh4") && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-pink-700/60 text-pink-200" />
                 <div className="bg-slate-800/60 border border-pink-500/30 rounded-xl p-4">
