@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronUp, Lightbulb, Target, MapPin, Navigation } from "lucide-react";
+import { BookOpen, ChevronUp, Lightbulb, Target, MapPin, Navigation, MousePointerClick } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import { InteraktifTitikAcuan, InteraktifGaris } from "@/components/PosisiRelatifInteraktif";
 
 const PosisiRelatifTitikDanGarisPage = () => {
   const navigate = useNavigate();
@@ -270,6 +271,20 @@ const PosisiRelatifTitikDanGarisPage = () => {
             )}
           </div>
 
+          {/* ANIMASI INTERAKTIF 1 */}
+          <div className="bg-card/80 backdrop-blur border border-orange-500/30 rounded-xl overflow-hidden">
+            <div className="px-5 py-4 flex items-center gap-3 border-b border-orange-500/20">
+              <MousePointerClick className="w-5 h-5 text-orange-400 shrink-0" />
+              <div>
+                <p className="font-body font-semibold text-white">🎮 Animasi Interaktif — Seret Titik Acuan & Dua Titik</p>
+                <p className="text-white/50 text-xs font-body mt-0.5">Geser titik A (acuan), P, dan Q — posisi relatif otomatis dihitung!</p>
+              </div>
+            </div>
+            <div className="px-5 py-5">
+              <InteraktifTitikAcuan />
+            </div>
+          </div>
+
           {/* CONTOH 1A */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1a" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah (Titik Acuan)" />
@@ -495,6 +510,20 @@ const PosisiRelatifTitikDanGarisPage = () => {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* ANIMASI INTERAKTIF 2 */}
+          <div className="bg-card/80 backdrop-blur border border-violet-500/30 rounded-xl overflow-hidden">
+            <div className="px-5 py-4 flex items-center gap-3 border-b border-violet-500/20">
+              <MousePointerClick className="w-5 h-5 text-violet-400 shrink-0" />
+              <div>
+                <p className="font-body font-semibold text-white">🎮 Animasi Interaktif — Seret Garis & Titik P</p>
+                <p className="text-white/50 text-xs font-body mt-0.5">Geser L₁, L₂ untuk mengubah garis, dan titik P — posisi P otomatis ditentukan!</p>
+              </div>
+            </div>
+            <div className="px-5 py-5">
+              <InteraktifGaris />
+            </div>
           </div>
 
           {/* CONTOH 1B */}
