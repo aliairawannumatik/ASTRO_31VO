@@ -244,52 +244,50 @@ const GrafikFungsiPage = () => {
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-green-300 mb-3">📝 Soal</p>
                   <p className="font-body text-sm text-white/85 leading-relaxed mb-4">
-                    Perhatikan grafik berikut yang menunjukkan hubungan antara <strong className="text-cyan-300">modal</strong> (sumbu-x, dalam ribuan rupiah) dan <strong className="text-orange-300">keuntungan</strong> (sumbu-y, dalam ribuan rupiah) suatu usaha!
+                    Perhatikan grafik berikut yang menunjukkan hubungan antara <strong className="text-cyan-300">modal</strong> (sumbu-x, dalam ribuan rupiah) dan <strong className="text-orange-300">keuntungan</strong> (sumbu-y, dalam rupiah) suatu usaha!
                   </p>
                   {/* GRAFIK MODAL VS UNTUNG */}
                   <div className="bg-slate-900/70 border border-green-500/20 rounded-xl p-4">
-                    <svg viewBox="0 0 300 220" className="w-full max-w-sm mx-auto">
+                    <svg viewBox="0 0 310 220" className="w-full max-w-sm mx-auto">
                       {/* Grid lines */}
                       {[1,2,3,4,5].map(i => (
                         <g key={i}>
-                          <line x1={50+i*40} y1={15} x2={50+i*40} y2={175} stroke="#1e293b" strokeWidth="1" />
-                          <line x1={50} y1={175-i*30} x2={255} y2={175-i*30} stroke="#1e293b" strokeWidth="1" />
+                          <line x1={65+i*40} y1={15} x2={65+i*40} y2={175} stroke="#1e293b" strokeWidth="1" />
+                          <line x1={65} y1={175-i*30} x2={270} y2={175-i*30} stroke="#1e293b" strokeWidth="1" />
                         </g>
                       ))}
                       {/* Axes */}
-                      <line x1={50} y1={15} x2={50} y2={180} stroke="#475569" strokeWidth="1.5" />
-                      <line x1={45} y1={175} x2={260} y2={175} stroke="#475569" strokeWidth="1.5" />
+                      <line x1={65} y1={15} x2={65} y2={180} stroke="#475569" strokeWidth="1.5" />
+                      <line x1={60} y1={175} x2={275} y2={175} stroke="#475569" strokeWidth="1.5" />
                       {/* Axis arrows */}
-                      <polygon points="260,172 260,178 267,175" fill="#475569" />
-                      <polygon points="47,15 53,15 50,8" fill="#475569" />
+                      <polygon points="275,172 275,178 282,175" fill="#475569" />
+                      <polygon points="62,15 68,15 65,8" fill="#475569" />
                       {/* Axis titles */}
-                      <text x={265} y={179} fill="#94a3b8" fontSize="9">Modal</text>
-                      <text x={7} y={18} fill="#94a3b8" fontSize="8">Untung</text>
-                      <text x={9} y={27} fill="#94a3b8" fontSize="8">(ribu Rp)</text>
+                      <text x={283} y={179} fill="#94a3b8" fontSize="9">Modal</text>
+                      <text x={2} y={18} fill="#94a3b8" fontSize="8">Untung</text>
+                      <text x={9} y={27} fill="#94a3b8" fontSize="8">(Rp)</text>
                       {/* X labels: 10,20,30,40,50 (in thousands) */}
                       {[10,20,30,40,50].map((v,i) => (
-                        <text key={v} x={50+(i+1)*40-7} y={190} fill="#64748b" fontSize="8">{v}</text>
+                        <text key={v} x={65+(i+1)*40-7} y={190} fill="#64748b" fontSize="8">{v}</text>
                       ))}
-                      {/* Y labels: 0.5, 1.0, 1.5, 2.0, 2.5 (in thousands) */}
-                      {[0.5,1.0,1.5,2.0,2.5].map((v,i) => (
-                        <text key={v} x={18} y={175-(i+1)*30+3} fill="#64748b" fontSize="8">{v}</text>
+                      {/* Y labels: actual rupiah 500, 1.000, 1.500, 2.000, 2.500 */}
+                      {["500","1.000","1.500","2.000","2.500"].map((v,i) => (
+                        <text key={v} x={2} y={175-(i+1)*30+3} fill="#64748b" fontSize="7.5">{v}</text>
                       ))}
-                      <text x={34} y={179} fill="#64748b" fontSize="8">0</text>
+                      <text x={49} y={179} fill="#64748b" fontSize="8">0</text>
                       {/* (ribuan Rp) label on x axis */}
-                      <text x={135} y={205} fill="#94a3b8" fontSize="8">(ribuan Rp)</text>
-                      {/* Line: y = 0.05x → at x=10, y=0.5; at x=50, y=2.5 */}
-                      {/* Scale: x px = 50 + x_val*4 (10→90, 50→250); y px = 175 - y_val*60 (0.5→145, 2.5→25) */}
-                      <line x1={50} y1={175} x2={250} y2={25} stroke="#4ade80" strokeWidth="2.5" />
+                      <text x={150} y={207} fill="#94a3b8" fontSize="8">(ribuan Rp)</text>
+                      {/* Line: x px = 65 + x_val*4; y px = 175 - y_val*60 (y in 0–2.5 units) */}
+                      <line x1={65} y1={175} x2={265} y2={25} stroke="#4ade80" strokeWidth="2.5" />
                       {/* Points */}
                       {[[10,0.5],[20,1.0],[30,1.5],[40,2.0],[50,2.5]].map(([x,y]) => (
-                        <circle key={x} cx={50+x*4} cy={175-y*60} r="4" fill="#4ade80" stroke="#86efac" strokeWidth="1.5" />
+                        <circle key={x} cx={65+x*4} cy={175-y*60} r="4" fill="#4ade80" stroke="#86efac" strokeWidth="1.5" />
                       ))}
-                      {/* Highlight x=25, y=1.25 */}
-                      <line x1={150} y1={175} x2={150} y2={100} stroke="#f97316" strokeWidth="1.5" strokeDasharray="5,3" />
-                      <line x1={50} y1={100} x2={150} y2={100} stroke="#f97316" strokeWidth="1.5" strokeDasharray="5,3" />
-                      <circle cx={150} cy={100} r="5" fill="#f97316" stroke="#fdba74" strokeWidth="1.5" />
-                      <text x={155} y={97} fill="#f97316" fontSize="9" fontWeight="bold">(25, ?)</text>
-                      <text x={142} y={191} fill="#f97316" fontSize="9" fontWeight="bold">25</text>
+                      {/* Highlight x=25 */}
+                      <line x1={165} y1={175} x2={165} y2={100} stroke="#f97316" strokeWidth="1.5" strokeDasharray="5,3" />
+                      <line x1={65} y1={100} x2={165} y2={100} stroke="#f97316" strokeWidth="1.5" strokeDasharray="5,3" />
+                      <circle cx={165} cy={100} r="5" fill="#f97316" stroke="#fdba74" strokeWidth="1.5" />
+                      <text x={155} y={191} fill="#f97316" fontSize="9" fontWeight="bold">25</text>
                     </svg>
                     <p className="text-xs text-center text-white/40 mt-1 font-body">Grafik hubungan modal dan untung suatu usaha</p>
                   </div>
