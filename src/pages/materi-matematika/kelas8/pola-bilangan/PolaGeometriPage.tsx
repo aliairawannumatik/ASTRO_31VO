@@ -622,38 +622,120 @@ const PolaGeometriPage = () => {
             )}
           </div>
 
-          {/* RANGKUMAN */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Barisan dan Deret Geometri" />
-            {expandedSections.includes("rangkuman") && (
-              <div className="px-5 pb-5 space-y-3">
-                <div className="bg-slate-800/50 border border-violet-500/20 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="grid grid-cols-1 gap-3">
-                    <div className="bg-violet-900/30 border border-violet-500/30 rounded-lg p-3 text-center">
-                      <p className="text-xs text-white/60 mb-1">Suku ke-n</p>
-                      <BlockMath math="U_n = a \cdot r^{n-1}" />
-                    </div>
-                    <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
-                      <p className="text-xs text-white/60 mb-1">Jumlah n suku pertama (<InlineMath math="r \neq 1" />)</p>
-                      <BlockMath math="S_n = \frac{a(r^n - 1)}{r - 1}" />
-                    </div>
-                    <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-lg p-3 text-center">
-                      <p className="text-xs text-white/60 mb-1">Hubungan Uₙ dan Sₙ</p>
-                      <BlockMath math="U_n = S_n - S_{n-1} \quad (n \geq 2)" />
-                    </div>
-                    <div className="bg-orange-900/30 border border-orange-500/30 rounded-lg p-3">
-                      <p className="text-xs text-orange-300 font-bold mb-1">Cara Cari Rasio:</p>
-                      <BlockMath math="r = \frac{U_2}{U_1} = \frac{U_3}{U_2} = \ldots = \frac{U_n}{U_{n-1}}" />
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-violet-600 via-pink-500 to-orange-500 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">🔢 RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Barisan dan Deret Geometri — Kelas 8</p>
+            </div>
+
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              {/* Rumus Utama */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-violet-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-violet-500/30 border border-violet-500 flex items-center justify-center text-[10px]">1</span>
+                  Rumus-Rumus Utama
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  <div className="bg-gradient-to-r from-violet-900/70 to-violet-800/30 border border-violet-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-violet-300 font-bold mb-1">🔢 Suku ke-n Barisan Geometri</p>
+                    <BlockMath math="U_n = a \cdot r^{n-1}" />
+                    <div className="flex justify-center gap-3 text-xs font-body flex-wrap mt-1">
+                      <span className="text-violet-300">a = suku pertama</span>
+                      <span className="text-pink-300">r = rasio tetap</span>
+                      <span className="text-cyan-300">n = nomor suku</span>
                     </div>
                   </div>
-                </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="font-body text-xs text-yellow-200">
-                    <strong>🚀 Tip Terakhir:</strong> Barisan geometri tumbuh jauh lebih cepat dari aritmetika. Dengan <InlineMath math="r = 2" />, suku ke-30 sudah mencapai <InlineMath math="a \times 2^{29}" /> yang nilainya lebih dari 500 juta kali suku pertama! Inilah mengapa "kekuatan bunga berbunga" di dunia keuangan sangat dahsyat.
-                  </p>
+                  <div className="bg-gradient-to-r from-green-900/70 to-green-800/30 border border-green-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-green-300 font-bold mb-1">∑ Jumlah n Suku Pertama (r ≠ 1)</p>
+                    <BlockMath math="S_n = \frac{a(r^n - 1)}{r - 1} \quad (r > 1)" />
+                    <BlockMath math="S_n = \frac{a(1 - r^n)}{1 - r} \quad (r < 1)" />
+                    <p className="font-body text-xs text-white/50">Pilih rumus sesuai nilai r agar pembagi selalu positif</p>
+                  </div>
+                  <div className="bg-gradient-to-r from-cyan-900/70 to-cyan-800/30 border border-cyan-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-cyan-300 font-bold mb-1">🔗 Hubungan Uₙ dan Sₙ</p>
+                    <BlockMath math="U_n = S_n - S_{n-1} \quad (n \geq 2)" />
+                  </div>
+                  <div className="bg-gradient-to-r from-orange-900/70 to-orange-800/30 border border-orange-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-orange-300 font-bold mb-1">📏 Cara Mencari Rasio (r)</p>
+                    <BlockMath math="r = \frac{U_2}{U_1} = \frac{U_3}{U_2} = \frac{U_n}{U_{n-1}}" />
+                  </div>
+                  <div className="bg-gradient-to-r from-pink-900/70 to-pink-800/30 border border-pink-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-pink-300 font-bold mb-1">∞ Deret Geometri Tak Hingga (−1 &lt; r &lt; 1)</p>
+                    <BlockMath math="S_\infty = \frac{a}{1 - r}" />
+                    <p className="font-body text-xs text-white/50">Berlaku hanya jika nilai mutlak r kurang dari 1</p>
+                  </div>
                 </div>
               </div>
-            )}
+
+              {/* Sifat Rasio */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-pink-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-pink-500/30 border border-pink-500 flex items-center justify-center text-[10px]">2</span>
+                  Sifat-Sifat Rasio (r)
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { cond: "r > 1", efek: "Barisan naik (bertumbuh)", color: "bg-green-900/40 border-green-500/40 text-green-200" },
+                    { cond: "0 < r < 1", efek: "Barisan turun mendekati 0", color: "bg-cyan-900/40 border-cyan-500/40 text-cyan-200" },
+                    { cond: "r < 0", efek: "Berganti tanda (+−+−...)", color: "bg-orange-900/40 border-orange-500/40 text-orange-200" },
+                    { cond: "r = 1", efek: "Semua suku sama (konstan)", color: "bg-slate-700/60 border-slate-500/40 text-slate-200" },
+                  ].map(({ cond, efek, color }) => (
+                    <div key={cond} className={`${color} border rounded-xl px-3 py-2`}>
+                      <p className="font-mono text-xs font-bold">{cond}</p>
+                      <p className="font-body text-xs text-white/60 mt-0.5">{efek}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tips & Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">3</span>
+                  Tips &amp; Trik Jitu Geometri
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "⚡", tip: "Bagi suku berurutan untuk dapat r", detail: "r = U₂/U₁ = U₃/U₂. Jika hasilnya sama, barisan pasti geometri!", color: "bg-yellow-900/30 border-yellow-500/30" },
+                    { icon: "🔑", tip: "Trik dua persamaan untuk cari a dan r", detail: "Jika diketahui Uₘ dan Uₙ, bagi: Uₙ/Uₘ = rⁿ⁻ᵐ. Dari sini temukan r, lalu substitusi untuk cari a.", color: "bg-violet-900/30 border-violet-500/30" },
+                    { icon: "📐", tip: "Konversi waktu ke nomor suku", detail: "Pada soal pertumbuhan/peluruhan, ubah waktu menjadi nomor suku n. Misalnya setiap 15 menit → 2 jam = 8 kali pembelahan → n = 9.", color: "bg-green-900/30 border-green-500/30" },
+                    { icon: "🧮", tip: "Logaritma untuk mencari n", detail: "Jika Uₙ diketahui dan kamu butuh n: ambil log kedua ruas dari Uₙ = a·rⁿ⁻¹ untuk mengisolasi n.", color: "bg-cyan-900/30 border-cyan-500/30" },
+                    { icon: "🌀", tip: "Suku tengah barisan geometri", detail: "Jika U₁, U₂, U₃ geometri, maka U₂² = U₁ × U₃. Sifat ini berguna untuk soal tiga suku berurutan.", color: "bg-pink-900/30 border-pink-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{tip}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-br from-violet-500/20 via-pink-500/15 to-orange-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🚀</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Barisan geometri adalah barisan dengan{" "}
+                  <strong className="text-violet-300">rasio tetap (r)</strong>. Pertumbuhannya bersifat{" "}
+                  <strong className="text-yellow-300">eksponensial</strong> — jauh lebih dahsyat daripada pertumbuhan linear aritmetika. Inilah yang menjelaskan ledakan bakteri, kekuatan bunga majemuk, dan bahkan penyebaran informasi viral di media sosial. Rumus{" "}
+                  <strong className="text-pink-300">Uₙ = a · rⁿ⁻¹</strong> memberi kamu kekuatan untuk menghitung pertumbuhan apapun dalam sekejap!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Rasio Tetap (r)", "Uₙ = a·rⁿ⁻¹", "Sₙ = a(rⁿ−1)/(r−1)", "Eksponensial", "Bunga Majemuk"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">
+                  🌟 Matematika adalah kunci memahami pertumbuhan alam semesta!
+                </p>
+              </div>
+
+            </div>
           </div>
 
         </div>

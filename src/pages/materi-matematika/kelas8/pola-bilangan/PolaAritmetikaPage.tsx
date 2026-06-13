@@ -604,27 +604,94 @@ const PolaAritmetikaPage = () => {
               </div>
           </div>
 
-          {/* RANGKUMAN */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Barisan dan Deret Aritmetika" />
-              <div className="px-5 pb-5 space-y-3">
-                <div className="bg-slate-800/50 border border-cyan-500/20 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="grid grid-cols-1 gap-3">
-                    <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-lg p-3 text-center">
-                      <p className="text-xs text-white/60 mb-1">Suku ke-n</p>
-                      <BlockMath math="U_n = a + (n-1)b" />
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-cyan-600 via-green-500 to-teal-500 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">📐 RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Barisan dan Deret Aritmetika — Kelas 8</p>
+            </div>
+
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              {/* Rumus Utama */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-cyan-500/30 border border-cyan-500 flex items-center justify-center text-[10px]">1</span>
+                  Rumus-Rumus Utama
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  <div className="bg-gradient-to-r from-cyan-900/70 to-cyan-800/30 border border-cyan-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-cyan-300 font-bold mb-1">🔢 Suku ke-n Barisan Aritmetika</p>
+                    <BlockMath math="U_n = a + (n-1) \cdot b" />
+                    <div className="flex justify-center gap-3 text-xs font-body flex-wrap mt-1">
+                      <span className="text-cyan-300">a = suku pertama</span>
+                      <span className="text-green-300">b = beda (selisih tetap)</span>
+                      <span className="text-violet-300">n = nomor suku</span>
                     </div>
-                    <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
-                      <p className="text-xs text-white/60 mb-1">Jumlah n suku pertama</p>
-                      <BlockMath math="S_n = \frac{n}{2}[2a + (n-1)b] = \frac{n}{2}(a + U_n)" />
-                    </div>
-                    <div className="bg-violet-900/30 border border-violet-500/30 rounded-lg p-3 text-center">
-                      <p className="text-xs text-white/60 mb-1">Hubungan Uₙ dan Sₙ</p>
-                      <BlockMath math="U_n = S_n - S_{n-1}" />
-                    </div>
+                  </div>
+                  <div className="bg-gradient-to-r from-green-900/70 to-green-800/30 border border-green-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-green-300 font-bold mb-1">∑ Jumlah n Suku Pertama (Deret Aritmetika)</p>
+                    <BlockMath math="S_n = \frac{n}{2}[2a + (n-1)b] = \frac{n}{2}(a + U_n)" />
+                    <p className="font-body text-xs text-white/50">Gunakan rumus kiri jika Uₙ belum diketahui, gunakan rumus kanan jika Uₙ sudah diketahui</p>
+                  </div>
+                  <div className="bg-gradient-to-r from-violet-900/70 to-violet-800/30 border border-violet-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-violet-300 font-bold mb-1">🔗 Hubungan Uₙ dan Sₙ</p>
+                    <BlockMath math="U_n = S_n - S_{n-1} \quad (n \geq 2)" />
+                    <p className="font-body text-xs text-white/50">Berguna saat hanya Sₙ yang diketahui, bukan Uₙ-nya</p>
+                  </div>
+                  <div className="bg-gradient-to-r from-orange-900/70 to-orange-800/30 border border-orange-500/50 rounded-xl p-3 text-center">
+                    <p className="font-body text-xs text-orange-300 font-bold mb-1">📏 Cara Mencari Beda (b)</p>
+                    <BlockMath math="b = U_2 - U_1 = U_3 - U_2 = U_n - U_{n-1}" />
                   </div>
                 </div>
               </div>
+
+              {/* Tips & Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                  Tips &amp; Trik Jitu Aritmetika
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "⚡", tip: "Langsung identifikasi a dan b dari soal", detail: "Tuliskan suku pertama (a) dan hitung selisih dua suku berurutan (b = U₂ − U₁) sebelum menggunakan rumus apapun.", color: "bg-yellow-900/30 border-yellow-500/30" },
+                    { icon: "🔄", tip: "Sistem persamaan untuk dua kondisi", detail: "Jika diketahui Uₘ dan Uₙ, buat dua persamaan: Uₘ = a + (m−1)b dan Uₙ = a + (n−1)b, lalu eliminasi.", color: "bg-cyan-900/30 border-cyan-500/30" },
+                    { icon: "📊", tip: "Pilih rumus Sₙ yang tepat", detail: "Jika Uₙ diketahui → pakai Sₙ = n/2 (a + Uₙ). Jika hanya a dan b → pakai Sₙ = n/2 [2a + (n−1)b].", color: "bg-green-900/30 border-green-500/30" },
+                    { icon: "🧮", tip: "Cari banyak suku (n) dari soal cerita", detail: "Konversi satuan dulu (jam → menit, km → m, dll), lalu tentukan n dari barisan yang terbentuk.", color: "bg-violet-900/30 border-violet-500/30" },
+                    { icon: "🎯", tip: "Trik suku tengah barisan aritmetika", detail: "Suku tengah barisan aritmetika = (a + Uₙ) / 2. Jika n gasal, suku tengah tepat di posisi (n+1)/2.", color: "bg-pink-900/30 border-pink-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{tip}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-br from-cyan-500/20 via-green-500/15 to-teal-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🏆</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Barisan aritmetika adalah barisan dengan{" "}
+                  <strong className="text-cyan-300">beda tetap (b)</strong>. Dengan rumus{" "}
+                  <strong className="text-yellow-300">Uₙ = a + (n−1)b</strong> kamu bisa menemukan suku manapun secara instan, dan dengan{" "}
+                  <strong className="text-green-300">Sₙ = n/2(a + Uₙ)</strong> kamu bisa menjumlahkan ribuan suku hanya dalam hitungan detik — seperti trik jenius Gauss!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Beda Tetap (b)", "Uₙ = a+(n−1)b", "Sₙ = n/2[2a+(n−1)b]", "Sistem Persamaan", "Ide Gauss"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">
+                  🚀 Lanjutkan ke Barisan Geometri untuk mempelajari pertumbuhan eksponensial!
+                </p>
+              </div>
+
+            </div>
           </div>
 
         </div>

@@ -665,6 +665,109 @@ const PengertianPolaPage = () => {
             </div>
           </div>
 
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-4 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">📖 RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">Pengertian Pola, Barisan Bilangan &amp; Pola Khusus</p>
+            </div>
+
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              {/* Rangkuman Konsep */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-cyan-500/30 border border-cyan-500 flex items-center justify-center text-[10px]">1</span>
+                  Konsep Dasar
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { label: "Pola Bilangan", desc: "Susunan angka yang mengikuti aturan tertentu yang dapat diprediksi", color: "from-cyan-900/60 to-cyan-800/30 border-cyan-500/40 text-cyan-200" },
+                    { label: "Barisan Bilangan", desc: "Suku-suku pola yang disusun secara berurutan: U₁, U₂, U₃, ..., Uₙ", color: "from-violet-900/60 to-violet-800/30 border-violet-500/40 text-violet-200" },
+                    { label: "Deret Bilangan", desc: "Jumlah semua suku dalam barisan: Sₙ = U₁ + U₂ + ... + Uₙ", color: "from-pink-900/60 to-pink-800/30 border-pink-500/40 text-pink-200" },
+                    { label: "Suku ke-n (Uₙ)", desc: "Rumus umum untuk menentukan nilai suku pada posisi ke-n", color: "from-green-900/60 to-green-800/30 border-green-500/40 text-green-200" },
+                  ].map(({ label, desc, color }) => (
+                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
+                      <div>
+                        <p className="font-body text-xs font-bold">{label}</p>
+                        <p className="font-body text-xs text-white/65 mt-0.5">{desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pola Khusus */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-violet-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-violet-500/30 border border-violet-500 flex items-center justify-center text-[10px]">2</span>
+                  7 Pola Khusus — Hafal Rumusnya!
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { nama: "Genap", rumus: "Uₙ = 2n", warna: "bg-cyan-900/50 border-cyan-500/40 text-cyan-200" },
+                    { nama: "Ganjil", rumus: "Uₙ = 2n − 1", warna: "bg-orange-900/50 border-orange-500/40 text-orange-200" },
+                    { nama: "Persegi", rumus: "Uₙ = n²", warna: "bg-violet-900/50 border-violet-500/40 text-violet-200" },
+                    { nama: "Persegi Panjang", rumus: "Uₙ = n(n+1)", warna: "bg-green-900/50 border-green-500/40 text-green-200" },
+                    { nama: "Segitiga", rumus: "Uₙ = n(n+1)/2", warna: "bg-yellow-900/50 border-yellow-500/40 text-yellow-200" },
+                    { nama: "Pascal (baris n)", rumus: "Jumlah = 2ⁿ⁻¹", warna: "bg-pink-900/50 border-pink-500/40 text-pink-200" },
+                    { nama: "Fibonacci", rumus: "Uₙ = Uₙ₋₁ + Uₙ₋₂", warna: "bg-teal-900/50 border-teal-500/40 text-teal-200" },
+                  ].map(({ nama, rumus, warna }) => (
+                    <div key={nama} className={`border ${warna} rounded-xl px-3 py-2 text-center`}>
+                      <p className="font-body text-xs font-bold">{nama}</p>
+                      <p className="font-mono text-[11px] text-white/70 mt-0.5">{rumus}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tips & Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">3</span>
+                  Tips &amp; Trik Jitu
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { tip: "Cek selisih antar suku terlebih dahulu", detail: "Jika selisihnya tetap → aritmetika. Jika rasionya tetap → geometri. Jika selisih 2× → bertingkat.", icon: "⚡", color: "bg-yellow-900/30 border-yellow-500/30" },
+                    { tip: "Cocokkan suku dengan posisinya", detail: "Coba hubungkan nilai suku dengan n. Apakah suku ke-n = n², n(n+1), atau 2ⁿ? Uji dengan n=1, 2, 3.", icon: "🔍", color: "bg-blue-900/30 border-blue-500/30" },
+                    { tip: "Hafal 7 pola khusus di atas", detail: "Soal ujian sering menyamarkan pola khusus. Kenali polanya dulu sebelum mencari rumus.", icon: "🧠", color: "bg-green-900/30 border-green-500/30" },
+                    { tip: "Verifikasi dengan minimal 3 suku", detail: "Rumus yang benar harus cocok untuk semua suku, bukan hanya 1 atau 2 suku.", icon: "✅", color: "bg-violet-900/30 border-violet-500/30" },
+                  ].map(({ tip, detail, icon, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{tip}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-br from-cyan-500/20 via-violet-500/15 to-pink-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🌟</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Pola bilangan bukan sekadar deretan angka — ia adalah{" "}
+                  <strong className="text-cyan-300">bahasa tersembunyi alam semesta</strong>. Dari motif batik hingga galaksi spiral, dari petikan gitar hingga tumbuhan, matematika mengungkapkan keteraturan di balik segala sesuatu. Dengan menguasai pola bilangan, kamu memiliki <strong className="text-yellow-300">kunci untuk membaca dunia secara matematis</strong>.
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Pola", "Barisan", "Deret", "Rumus Uₙ", "7 Pola Khusus"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">
+                  🚀 Kamu sudah siap ke materi berikutnya!
+                </p>
+              </div>
+
+            </div>
+          </div>
+
         </div>
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/pola-bilangan"); }}

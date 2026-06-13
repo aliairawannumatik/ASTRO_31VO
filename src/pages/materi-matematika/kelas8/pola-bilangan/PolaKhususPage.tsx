@@ -438,41 +438,114 @@ const PolaKhususPage = () => {
             )}
           </div>
 
-          {/* RANGKUMAN */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Pola-Pola Khusus" />
-            {expandedSections.includes("rangkuman") && (
-              <div className="px-5 pb-5 space-y-3">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs font-body border-collapse">
-                    <thead>
-                      <tr className="bg-cyan-900/40">
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Nama Pola</th>
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Contoh</th>
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Rumus Uₙ</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {[
-                        ["Genap", "2, 4, 6, 8, ...", "2n"],
-                        ["Ganjil", "1, 3, 5, 7, ...", "2n − 1"],
-                        ["Persegi", "1, 4, 9, 16, ...", "n²"],
-                        ["Persegi Panjang", "2, 6, 12, 20, ...", "n(n+1)"],
-                        ["Segitiga", "1, 3, 6, 10, ...", "n(n+1)/2"],
-                        ["Pascal (jumlah baris n)", "1, 2, 4, 8, 16, 32, ...", "2ⁿ⁻¹"],
-                        ["Fibonacci", "1, 1, 2, 3, 5, ...", "Uₙ = Uₙ₋₁ + Uₙ₋₂"],
-                      ].map(([nama, contoh, rumus], i) => (
-                        <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
-                          <td className="border border-white/10 px-3 py-2 text-cyan-300 font-semibold">{nama}</td>
-                          <td className="border border-white/10 px-3 py-2 text-white/60 font-mono">{contoh}</td>
-                          <td className="border border-white/10 px-3 py-2 text-green-300 font-mono">{rumus}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+          {/* ══ RANGKUMAN AKHIR HALAMAN ══ */}
+          <div className="mt-2 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-600 px-5 py-4 text-center">
+              <p className="font-display text-lg font-bold text-white tracking-wide">⭐ RANGKUMAN LENGKAP</p>
+              <p className="font-body text-xs text-white/80 mt-0.5">7 Pola-Pola Khusus — Kelas 8</p>
+            </div>
+
+            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+
+              {/* Tabel Pola Khusus */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">1</span>
+                  Katalog 7 Pola Khusus — Hafal Semua!
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { nama: "Pola Genap", contoh: "2, 4, 6, 8, 10, ...", rumus: "Uₙ = 2n", beda: "Beda tetap +2", color: "from-cyan-900/70 to-cyan-800/30 border-cyan-500/50 text-cyan-200", badge: "bg-cyan-500" },
+                    { nama: "Pola Ganjil", contoh: "1, 3, 5, 7, 9, ...", rumus: "Uₙ = 2n − 1", beda: "Beda tetap +2", color: "from-orange-900/70 to-orange-800/30 border-orange-500/50 text-orange-200", badge: "bg-orange-500" },
+                    { nama: "Pola Persegi", contoh: "1, 4, 9, 16, 25, ...", rumus: "Uₙ = n²", beda: "Beda: +3, +5, +7, +9, ...", color: "from-violet-900/70 to-violet-800/30 border-violet-500/50 text-violet-200", badge: "bg-violet-500" },
+                    { nama: "Pola Persegi Panjang", contoh: "2, 6, 12, 20, 30, ...", rumus: "Uₙ = n(n+1)", beda: "Beda: +4, +6, +8, +10, ...", color: "from-green-900/70 to-green-800/30 border-green-500/50 text-green-200", badge: "bg-green-500" },
+                    { nama: "Pola Segitiga", contoh: "1, 3, 6, 10, 15, ...", rumus: "Uₙ = n(n+1)/2", beda: "Beda: +2, +3, +4, +5, ...", color: "from-yellow-900/70 to-yellow-800/30 border-yellow-500/50 text-yellow-200", badge: "bg-yellow-500" },
+                    { nama: "Segitiga Pascal (jumlah baris ke-n)", contoh: "1, 2, 4, 8, 16, 32, ...", rumus: "Jumlah = 2ⁿ⁻¹", beda: "Setiap baris ×2 dari sebelumnya", color: "from-pink-900/70 to-pink-800/30 border-pink-500/50 text-pink-200", badge: "bg-pink-500" },
+                    { nama: "Pola Fibonacci", contoh: "1, 1, 2, 3, 5, 8, 13, ...", rumus: "Uₙ = Uₙ₋₁ + Uₙ₋₂", beda: "Setiap suku = jumlah 2 suku sebelumnya", color: "from-teal-900/70 to-teal-800/30 border-teal-500/50 text-teal-200", badge: "bg-teal-500" },
+                  ].map(({ nama, contoh, rumus, beda, color, badge }, i) => (
+                    <div key={nama} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <span className={`${badge} text-white text-xs font-bold px-1.5 py-0.5 rounded shrink-0 mt-0.5`}>{i + 1}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center justify-between gap-1">
+                          <p className="font-body text-xs font-bold">{nama}</p>
+                          <p className="font-mono text-xs font-bold text-white/90">{rumus}</p>
+                        </div>
+                        <p className="font-mono text-[11px] text-white/50 mt-0.5">{contoh}</p>
+                        <p className="font-body text-[11px] text-white/40 mt-0.5 italic">{beda}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            )}
+
+              {/* Fakta Menarik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-pink-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-pink-500/30 border border-pink-500 flex items-center justify-center text-[10px]">2</span>
+                  Fakta Mengagumkan dari Tiap Pola
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { icon: "🔢", fact: "Persegi = jumlah bilangan ganjil", detail: "1 = 1, 1+3 = 4, 1+3+5 = 9, 1+3+5+7 = 16 → Uₙ = 1+3+5+...+(2n−1) = n²", color: "bg-violet-900/30 border-violet-500/30" },
+                    { icon: "🌀", fact: "Fibonacci hasilkan Rasio Emas (φ ≈ 1,618)", detail: "Semakin besar suku Fibonacci, rasio Uₙ/Uₙ₋₁ semakin mendekati φ = (1+√5)/2. Inilah proporsi terindah di alam semesta!", color: "bg-teal-900/30 border-teal-500/30" },
+                    { icon: "🔺", fact: "Segitiga Pascal menyimpan banyak pola", detail: "Diagonal 1 = semua 1, diagonal 2 = bilangan asli, diagonal 3 = pola segitiga. Dan jumlah tiap baris = 2ⁿ⁻¹!", color: "bg-pink-900/30 border-pink-500/30" },
+                    { icon: "🌿", fact: "Fibonacci di alam nyata", detail: "Kelopak bunga hampir selalu bilangan Fibonacci (3, 5, 8, 13 kelopak). Cangkang siput, biji bunga matahari, daun paku — semuanya Fibonacci!", color: "bg-green-900/30 border-green-500/30" },
+                  ].map(({ icon, fact, detail, color }) => (
+                    <div key={fact} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{fact}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tips & Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-cyan-500/30 border border-cyan-500 flex items-center justify-center text-[10px]">3</span>
+                  Tips &amp; Trik Mengidentifikasi Pola Khusus
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { icon: "👁️", tip: "Kenali bentuk barisan secara visual", detail: "Barisan persegi selalu naik cepat (1,4,9,16). Barisan segitiga naik sedang (1,3,6,10). Fibonacci naik makin cepat (1,1,2,3,5,8,13).", color: "bg-cyan-900/30 border-cyan-500/30" },
+                    { icon: "🔍", tip: "Hitung beda tingkat pertama dan kedua", detail: "Beda tetap = aritmetika. Beda dari beda tetap (beda ke-2 tetap) = pola persegi/segitiga/persegi panjang. Rasio tetap = geometri.", color: "bg-yellow-900/30 border-yellow-500/30" },
+                    { icon: "🎯", tip: "Cocokkan angka pertama dengan rumus", detail: "Uji n=1,2,3 di setiap rumus. Jika suku ke-2 = 4 dan ke-3 = 9 → ini pola persegi. Jika ke-2 = 6, ke-3 = 12 → persegi panjang.", color: "bg-orange-900/30 border-orange-500/30" },
+                    { icon: "🧩", tip: "Pola Pascal: baris 1 = baris ke-1", detail: "Ingat: baris ke-1 = {1}, baris ke-2 = {1,1}. Jumlah baris ke-n = 2ⁿ⁻¹, bukan 2ⁿ. Jangan terbalik!", color: "bg-pink-900/30 border-pink-500/30" },
+                  ].map(({ icon, tip, detail, color }) => (
+                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                      <span className="text-xl shrink-0 mt-0.5">{icon}</span>
+                      <div>
+                        <p className="font-body text-xs font-bold text-white">{tip}</p>
+                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-br from-yellow-500/20 via-orange-500/15 to-pink-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+                <div className="text-3xl">🌌</div>
+                <p className="font-display text-base font-bold text-white">KESIMPULAN</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Tujuh pola khusus ini adalah{" "}
+                  <strong className="text-yellow-300">harta karun matematika</strong> yang tersembunyi di seluruh penjuru alam — dari cangkang siput hingga galaksi spiral, dari kelopak bunga hingga arsitektur bangunan megah. Dengan mengenali dan menghafal pola-pola ini, kamu memiliki{" "}
+                  <strong className="text-pink-300">kekuatan untuk membaca pola alam semesta</strong> dan menjawab soal ujian dengan lebih cepat dan tepat!
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mt-1">
+                  {["Genap", "Ganjil", "Persegi", "Persegi Panjang", "Segitiga", "Pascal", "Fibonacci"].map(tag => (
+                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                  ))}
+                </div>
+                <p className="font-display text-sm font-semibold text-yellow-300 mt-2">
+                  🏆 Kamu telah menguasai semua pola khusus di Kelas 8!
+                </p>
+              </div>
+
+            </div>
           </div>
 
         </div>
