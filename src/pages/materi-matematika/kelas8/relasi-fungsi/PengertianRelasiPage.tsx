@@ -139,28 +139,45 @@ const PengertianRelasiPage = () => {
                 {/* Diagram Panah */}
                 <div className="bg-slate-800/50 border border-cyan-500/20 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm font-bold text-cyan-300">1️⃣ Diagram Panah</p>
-                  <p className="font-body text-xs text-white/60 mb-2">Dua lingkaran/oval mewakili himpunan A dan B, dihubungkan dengan anak panah sesuai relasinya.</p>
-                  {/* Visual diagram panah */}
-                  <div className="flex gap-4 justify-center items-start mt-3">
-                    <div className="bg-cyan-900/40 border border-cyan-500/40 rounded-xl px-4 py-3 text-center min-w-[90px]">
-                      <p className="text-xs text-cyan-400 font-bold mb-2">A (Domain)</p>
-                      {["1", "2", "3", "4"].map(n => (
-                        <div key={n} className="bg-cyan-800/50 rounded-lg px-3 py-1 mb-1 text-cyan-200 text-sm font-bold">{n}</div>
-                      ))}
-                    </div>
-                    <div className="flex flex-col justify-center items-center gap-3 pt-8">
-                      {["→", "→", "→", "→"].map((a, i) => (
-                        <span key={i} className="text-yellow-400 text-xl font-bold">{a}</span>
-                      ))}
-                    </div>
-                    <div className="bg-violet-900/40 border border-violet-500/40 rounded-xl px-4 py-3 text-center min-w-[90px]">
-                      <p className="text-xs text-violet-400 font-bold mb-2">B (Kodomain)</p>
-                      {["1", "4", "9", "16", "25"].map(n => (
-                        <div key={n} className="bg-violet-800/50 rounded-lg px-3 py-1 mb-1 text-violet-200 text-sm font-bold">{n}</div>
-                      ))}
-                    </div>
+                  <p className="font-body text-xs text-white/60 mb-2">Dua oval mewakili himpunan A dan B, dihubungkan dengan anak panah sesuai relasinya.</p>
+                  <div className="flex justify-center">
+                    <svg viewBox="0 0 280 210" className="w-full max-w-xs" aria-label="Diagram panah relasi kuadrat dari">
+                      <defs>
+                        <marker id="arrowDP" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+                          <polygon points="0 0, 7 2.5, 0 5" fill="#facc15" />
+                        </marker>
+                      </defs>
+                      {/* Oval A (Domain) */}
+                      <ellipse cx="70" cy="108" rx="52" ry="88" fill="rgba(8,145,178,0.12)" stroke="#22d3ee" strokeWidth="1.8" />
+                      {/* Oval B (Kodomain) */}
+                      <ellipse cx="210" cy="108" rx="52" ry="88" fill="rgba(124,58,237,0.12)" stroke="#a78bfa" strokeWidth="1.8" />
+                      {/* Labels */}
+                      <text x="70" y="17" textAnchor="middle" fill="#22d3ee" fontSize="9" fontWeight="bold">A (Domain)</text>
+                      <text x="210" y="17" textAnchor="middle" fill="#a78bfa" fontSize="9" fontWeight="bold">B (Kodomain)</text>
+                      {/* Domain elements — no boxes, plain text */}
+                      <text x="70" y="64"  textAnchor="middle" fill="#67e8f9" fontSize="13" fontWeight="bold">1</text>
+                      <text x="70" y="92"  textAnchor="middle" fill="#67e8f9" fontSize="13" fontWeight="bold">2</text>
+                      <text x="70" y="120" textAnchor="middle" fill="#67e8f9" fontSize="13" fontWeight="bold">3</text>
+                      <text x="70" y="148" textAnchor="middle" fill="#67e8f9" fontSize="13" fontWeight="bold">4</text>
+                      {/* Kodomain elements */}
+                      <text x="210" y="52"  textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">1</text>
+                      <text x="210" y="76"  textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">4</text>
+                      <text x="210" y="100" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">9</text>
+                      <text x="210" y="124" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">16</text>
+                      <text x="210" y="148" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">25</text>
+                      {/* Arrows — from right edge of oval A to left edge of oval B, touching elements */}
+                      {/* 1 → 1 */}
+                      <line x1="114" y1="60"  x2="162" y2="49"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
+                      {/* 2 → 4 */}
+                      <line x1="121" y1="88"  x2="163" y2="73"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
+                      {/* 3 → 9 */}
+                      <line x1="122" y1="116" x2="160" y2="97"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
+                      {/* 4 → 16 */}
+                      <line x1="119" y1="144" x2="160" y2="121" stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
+                      {/* Relation label */}
+                      <text x="140" y="198" textAnchor="middle" fill="rgba(255,255,255,0.35)" fontSize="8">"kuadrat dari" — 1→1, 2→4, 3→9, 4→16</text>
+                    </svg>
                   </div>
-                  <p className="text-center text-xs text-white/40 mt-1">Relasi "kuadrat dari" — 1→1, 2→4, 3→9, 4→16</p>
                 </div>
 
                 {/* Himpunan Pasangan Berurutan */}
@@ -204,31 +221,57 @@ const PengertianRelasiPage = () => {
                 <div className="bg-slate-800/50 border border-violet-500/20 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm font-bold text-violet-300">4️⃣ Grafik Kartesius</p>
                   <p className="font-body text-xs text-white/60">Pasangan <InlineMath math="(x, y)" /> digambarkan sebagai titik pada bidang koordinat Kartesius. Sumbu-x untuk domain, sumbu-y untuk range.</p>
-                  {/* Simple dot plot visual */}
                   <div className="bg-slate-900/60 border border-violet-500/20 rounded-xl p-4 flex justify-center">
-                    <svg viewBox="0 0 160 160" className="w-40 h-40" aria-label="Grafik relasi x kuadrat">
-                      <line x1="20" y1="140" x2="150" y2="140" stroke="#94a3b8" strokeWidth="1.5" />
-                      <line x1="20" y1="10" x2="20" y2="140" stroke="#94a3b8" strokeWidth="1.5" />
-                      <text x="153" y="143" fill="#94a3b8" fontSize="8">x</text>
-                      <text x="13" y="9" fill="#94a3b8" fontSize="8">y</text>
-                      {[
-                        { x: 1, y: 1 }, { x: 2, y: 4 }, { x: 3, y: 9 }, { x: 4, y: 16 },
-                      ].map(({ x, y }) => {
-                        const cx = 20 + x * 28;
-                        const cy = 140 - y * 7;
+                    {/* 
+                      Grid: x ∈ {0..5}, y ∈ {0..16} 
+                      Origin: (40, 178)
+                      x-scale: 30px per unit  →  x=1→70, x=2→100, x=3→130, x=4→160
+                      y-scale: 10px per unit  →  y=1→168, y=4→138, y=9→88, y=16→18
+                    */}
+                    <svg viewBox="0 0 210 210" className="w-full max-w-xs" aria-label="Grafik kartesius relasi kuadrat dari">
+                      {/* Grid lines */}
+                      {[1,2,3,4,5].map(gx => (
+                        <line key={`gx${gx}`} x1={40+gx*30} y1={18} x2={40+gx*30} y2={178} stroke="rgba(148,163,184,0.18)" strokeWidth="1" strokeDasharray="3,3" />
+                      ))}
+                      {[2,4,6,8,10,12,14,16].map(gy => (
+                        <line key={`gy${gy}`} x1={40} y1={178-gy*10} x2={190} y2={178-gy*10} stroke="rgba(148,163,184,0.18)" strokeWidth="1" strokeDasharray="3,3" />
+                      ))}
+                      {/* Axes */}
+                      <line x1="40" y1="178" x2="193" y2="178" stroke="#94a3b8" strokeWidth="1.8" />
+                      <line x1="40" y1="178" x2="40"  y2="12"  stroke="#94a3b8" strokeWidth="1.8" />
+                      {/* Arrow tips */}
+                      <polygon points="193,175 200,178 193,181" fill="#94a3b8" />
+                      <polygon points="37,12 40,5 43,12" fill="#94a3b8" />
+                      {/* Axis labels */}
+                      <text x="202" y="181" fill="#94a3b8" fontSize="9" fontWeight="bold">x</text>
+                      <text x="34"  y="9"   fill="#94a3b8" fontSize="9" fontWeight="bold">y</text>
+                      {/* X-axis tick labels */}
+                      {[1,2,3,4,5].map(v => (
+                        <g key={`xl${v}`}>
+                          <line x1={40+v*30} y1="178" x2={40+v*30} y2="182" stroke="#94a3b8" strokeWidth="1.2" />
+                          <text x={40+v*30} y="191" textAnchor="middle" fill="#94a3b8" fontSize="8">{v}</text>
+                        </g>
+                      ))}
+                      {/* Y-axis tick labels */}
+                      {[2,4,6,8,10,12,14,16].map(v => (
+                        <g key={`yl${v}`}>
+                          <line x1="36" y1={178-v*10} x2="40" y2={178-v*10} stroke="#94a3b8" strokeWidth="1.2" />
+                          <text x="32" y={178-v*10+3} textAnchor="end" fill="#94a3b8" fontSize="7">{v}</text>
+                        </g>
+                      ))}
+                      {/* Origin label */}
+                      <text x="33" y="191" textAnchor="middle" fill="#64748b" fontSize="7">0</text>
+                      {/* Data points (1,1), (2,4), (3,9), (4,16) */}
+                      {[{x:1,y:1},{x:2,y:4},{x:3,y:9},{x:4,y:16}].map(({x,y}) => {
+                        const cx = 40 + x * 30;
+                        const cy = 178 - y * 10;
                         return (
                           <g key={x}>
-                            <circle cx={cx} cy={cy} r="5" fill="#818cf8" stroke="#c4b5fd" strokeWidth="1.5" />
-                            <text x={cx - 4} y={cy - 8} fill="#c4b5fd" fontSize="7">({x},{y})</text>
+                            <circle cx={cx} cy={cy} r="5" fill="#818cf8" stroke="#c4b5fd" strokeWidth="1.8" />
+                            <text x={cx+7} y={cy+3} fill="#c4b5fd" fontSize="7.5">({x},{y})</text>
                           </g>
                         );
                       })}
-                      {[1, 2, 3, 4].map((v) => (
-                        <g key={v}>
-                          <text x={20 + v * 28 - 3} y="150" fill="#64748b" fontSize="7">{v}</text>
-                          <text x="5" y={140 - v * 7 + 3} fill="#64748b" fontSize="6">{(v * 7)}</text>
-                        </g>
-                      ))}
                     </svg>
                   </div>
                 </div>
