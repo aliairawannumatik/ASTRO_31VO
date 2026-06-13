@@ -244,7 +244,7 @@ const GrafikFungsiPage = () => {
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-green-300 mb-3">📝 Soal</p>
                   <p className="font-body text-sm text-white/85 leading-relaxed mb-4">
-                    Perhatikan grafik berikut yang menunjukkan hubungan antara <strong className="text-cyan-300">modal</strong> (sumbu-x, dalam ribuan rupiah) dan <strong className="text-orange-300">keuntungan</strong> (sumbu-y, dalam rupiah) suatu usaha!
+                    Perhatikan grafik berikut yang menunjukkan hubungan antara <strong className="text-cyan-300">modal</strong> (sumbu-x, dalam ribuan rupiah) dan <strong className="text-orange-300">keuntungan</strong> (sumbu-y, dalam ribuan rupiah) suatu usaha!
                   </p>
                   {/* GRAFIK MODAL VS UNTUNG */}
                   <div className="bg-slate-900/70 border border-green-500/20 rounded-xl p-4">
@@ -265,14 +265,14 @@ const GrafikFungsiPage = () => {
                       {/* Axis titles */}
                       <text x={283} y={179} fill="#94a3b8" fontSize="9">Modal</text>
                       <text x={2} y={9} fill="#94a3b8" fontSize="8">Untung</text>
-                      <text x={9} y={17} fill="#94a3b8" fontSize="8">(Rp)</text>
+                      <text x={2} y={17} fill="#94a3b8" fontSize="8">(ribu Rp)</text>
                       {/* X labels: 10,20,30,40,50 (in thousands) */}
                       {[10,20,30,40,50].map((v,i) => (
                         <text key={v} x={65+(i+1)*40-7} y={190} fill="#64748b" fontSize="8">{v}</text>
                       ))}
-                      {/* Y labels: actual rupiah 500, 1.000, 1.500, 2.000, 2.500 */}
-                      {["500","1.000","1.500","2.000","2.500"].map((v,i) => (
-                        <text key={v} x={2} y={175-(i+1)*30+3} fill="#64748b" fontSize="7.5">{v}</text>
+                      {/* Y labels: ribuan Rp 0.5, 1.0, 1.5, 2.0, 2.5 */}
+                      {[0.5,1.0,1.5,2.0,2.5].map((v,i) => (
+                        <text key={v} x={18} y={175-(i+1)*30+3} fill="#64748b" fontSize="8">{v}</text>
                       ))}
                       <text x={49} y={179} fill="#64748b" fontSize="8">0</text>
                       {/* (ribuan Rp) label on x axis */}
