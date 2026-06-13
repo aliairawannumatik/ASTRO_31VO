@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Zap } from
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import DiskMillMachine from "@/components/DiskMillMachine";
 
 const PengertianFungsiPage = () => {
   const navigate = useNavigate();
@@ -60,28 +61,7 @@ const PengertianFungsiPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan sebuah mesin pencetak nama: kamu masukkan satu nama, mesin mencetak satu label. Tidak mungkin mesin mencetak dua label berbeda dari satu nama yang sama. Itulah inti dari <strong className="text-cyan-300">fungsi</strong> — setiap masukan hanya punya <strong className="text-cyan-300">tepat satu keluaran</strong>.
                 </p>
-                <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">⚡ Analogi Mesin Fungsi</p>
-                  <div className="flex items-center justify-center gap-3 flex-wrap">
-                    <div className="bg-cyan-900/50 border border-cyan-500/40 rounded-xl px-4 py-3 text-center">
-                      <p className="text-xs text-cyan-400 font-bold">INPUT (x)</p>
-                      <p className="text-2xl font-bold text-cyan-200 my-1">3</p>
-                      <p className="text-xs text-white/40">Domain</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="bg-violet-800/60 border border-violet-500/40 rounded-xl px-4 py-3">
-                        <p className="text-xs text-violet-300 font-bold">MESIN FUNGSI</p>
-                        <p className="text-sm font-bold text-white my-1">f(x) = 2x + 1</p>
-                        <p className="text-xs text-white/40">Aturan</p>
-                      </div>
-                    </div>
-                    <div className="bg-green-900/50 border border-green-500/40 rounded-xl px-4 py-3 text-center">
-                      <p className="text-xs text-green-400 font-bold">OUTPUT f(x)</p>
-                      <p className="text-2xl font-bold text-green-200 my-1">7</p>
-                      <p className="text-xs text-white/40">Range</p>
-                    </div>
-                  </div>
-                </div>
+                <DiskMillMachine />
               </div>
             )}
           </div>
