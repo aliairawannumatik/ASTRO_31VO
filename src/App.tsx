@@ -776,9 +776,10 @@ const PolaAritmetikaMMK8Page = lazy(() => import("./pages/materi-matematika/kela
 const PolaGeometriMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PolaGeometriPage"));
 const KoordinatCartesiusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/KoordinatCartesiusPage"));
 const UnsurUnsurCartesiusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/UnsurUnsurCartesiusPage"));
-const PosisiRelatifTitikAcuanMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage"));
+const PosisiRelatifTitikAcuanMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikDanGarisPage"));
 const JarakTitikGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/JarakTitikGarisPage"));
-const PosisiRelatifGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifGarisPage"));
+const PosisiRelatifGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikDanGarisPage"));
+const PosisiRelatifTitikDanGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikDanGarisPage"));
 const RelasiFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/RelasiFungsiPage"));
 const PengertianRelasiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/PengertianRelasiPage"));
 const PengertianFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/PengertianFungsiPage"));
@@ -1603,6 +1604,7 @@ const AppInner = () => {
           <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-titik-dan-garis" element={<PosisiRelatifTitikDanGarisMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" element={<PosisiRelatifTitikAcuanMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-garis" element={<PosisiRelatifGarisMMK8Page />} />
