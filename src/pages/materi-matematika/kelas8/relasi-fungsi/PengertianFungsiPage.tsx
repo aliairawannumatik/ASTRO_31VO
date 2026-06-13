@@ -1106,12 +1106,12 @@ const PengertianFungsiPage = () => {
                           <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
                           <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
                           <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
-                          {/* fishhook / backwards-J: rises from bottom-left, arcs right at top, folds back to bottom-right */}
-                          <path d="M 14,108 C 16,85 18,62 22,44 C 28,24 46,12 68,12 C 94,12 118,34 124,62 C 130,92 114,108 88,108" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
-                          {/* vertical line at x=105 showing double intersection */}
-                          <line x1="105" y1="10" x2="105" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
-                          <circle cx="105" cy="32" r="3" fill="#fbbf24"/>
-                          <circle cx="105" cy="88" r="3" fill="#fbbf24"/>
+                          {/* double-S wave: starts top of y-axis, bumps right twice, ends at origin — like x=sin(y) */}
+                          <path d="M 10,10 C 10,14 55,14 98,28 C 130,38 12,52 10,60 C 8,68 55,68 98,82 C 128,92 12,106 10,110" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
+                          {/* vertical line at x=72 showing double intersection */}
+                          <line x1="72" y1="10" x2="72" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
+                          <circle cx="72" cy="22" r="3" fill="#fbbf24"/>
+                          <circle cx="72" cy="74" r="3" fill="#fbbf24"/>
                         </svg>
                       ),
                     },
