@@ -31,7 +31,7 @@ const MetodeEliminasiPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -74,7 +74,7 @@ const MetodeEliminasiPage = () => {
           {/* ── PENGANTAR ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Ide Dasar Metode Eliminasi" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Kata "eliminasi" berasal dari bahasa Latin yang berarti <strong className="text-cyan-300">menghilangkan</strong> atau <strong className="text-cyan-300">mengeliminasi</strong>. Ide utama metode ini: kita <em>menghapus</em> salah satu variabel dari sistem persamaan dengan cara menjumlahkan atau mengurangkan kedua persamaan, sehingga tersisa hanya satu variabel yang bisa langsung diselesaikan.
@@ -120,7 +120,7 @@ const MetodeEliminasiPage = () => {
           {/* ── LANGKAH-LANGKAH ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="langkah" icon={<Minus className="w-5 h-5" />} iconColor="text-red-400" title="📘 Langkah-Langkah Metode Eliminasi" />
-            {expandedSections.includes("langkah") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
@@ -198,7 +198,7 @@ const MetodeEliminasiPage = () => {
           {/* ── CONTOH SOAL ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="📝 Contoh Soal & Pembahasan" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* SOAL 1 — MUDAH */}
@@ -435,7 +435,7 @@ const MetodeEliminasiPage = () => {
           {/* ── PERBANDINGAN 3 METODE ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="perbandingan" icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title="🔍 Perbandingan Tiga Metode SPLDV" />
-            {expandedSections.includes("perbandingan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-body border-collapse">
@@ -477,7 +477,7 @@ const MetodeEliminasiPage = () => {
           {/* ── RANGKUMAN ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-primary" title="📋 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="grid grid-cols-1 gap-2 font-body text-sm">
                   {[

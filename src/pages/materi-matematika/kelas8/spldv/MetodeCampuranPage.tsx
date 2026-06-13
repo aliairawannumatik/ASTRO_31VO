@@ -31,7 +31,7 @@ const MetodeCampuranPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -74,7 +74,7 @@ const MetodeCampuranPage = () => {
           {/* ── PENGANTAR ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Metode Campuran?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Metode campuran, atau sering disebut <strong className="text-cyan-300">metode gabungan</strong>, adalah cara menyelesaikan SPLDV dengan memadukan dua metode sekaligus: <strong className="text-violet-300">eliminasi</strong> dipakai lebih dahulu untuk mendapatkan nilai salah satu variabel, kemudian <strong className="text-green-300">substitusi</strong> dipakai untuk menemukan variabel yang tersisa. Hasilnya? Proses yang lebih cepat dan rapi!
@@ -130,7 +130,7 @@ const MetodeCampuranPage = () => {
           {/* ── LANGKAH-LANGKAH ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="langkah" icon={<Zap className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Langkah-Langkah Metode Campuran" />
-            {expandedSections.includes("langkah") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
@@ -178,7 +178,7 @@ const MetodeCampuranPage = () => {
           {/* ── CONTOH 1 (MUDAH) ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
 
@@ -240,7 +240,7 @@ const MetodeCampuranPage = () => {
           {/* ── CONTOH 2 (SEDANG) ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
 
@@ -315,7 +315,7 @@ const MetodeCampuranPage = () => {
           {/* ── CONTOH 3 (SULIT) ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
 
@@ -408,7 +408,7 @@ const MetodeCampuranPage = () => {
           {/* ── RANGKUMAN ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Metode Campuran" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-body border-collapse">

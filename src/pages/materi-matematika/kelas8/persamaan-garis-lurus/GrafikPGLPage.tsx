@@ -52,7 +52,7 @@ const GrafikPGLPage = () => {
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <button onClick={() => toggleSection(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
   const Badge = ({ label, color }: { label: string; color: string }) => (
@@ -73,7 +73,7 @@ const GrafikPGLPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Garis Lurus — Ada di Mana-mana!" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Rel kereta api, pinggir buku, garis horizon pantai — semuanya membentuk <strong className="text-cyan-300">garis lurus</strong>. Dalam matematika, persamaan garis lurus mendeskripsikan semua garis tersebut dengan sebuah persamaan sederhana yang melibatkan variabel <InlineMath math="x" /> dan <InlineMath math="y" />.
@@ -105,7 +105,7 @@ const GrafikPGLPage = () => {
           {/* KONSEP */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="konsep" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Bentuk Umum Persamaan Garis Lurus" />
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-violet-300 mb-3">🎯 Ringkasan Intisari</p>
@@ -195,7 +195,7 @@ const GrafikPGLPage = () => {
           {/* TITIK POTONG */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="titik-potong" icon={<BookOpen className="w-5 h-5" />} iconColor="text-orange-400" title="📌 Titik Potong Sumbu dan Cara Menggambar" />
-            {expandedSections.includes("titik-potong") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4">
@@ -242,7 +242,7 @@ const GrafikPGLPage = () => {
           {/* GALERI VISUAL GARIS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="visual-lines" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-green-400" title="🎨 Galeri Visual: Berbagai Jenis Garis" />
-            {expandedSections.includes("visual-lines") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {[
@@ -275,7 +275,7 @@ const GrafikPGLPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -323,7 +323,7 @@ const GrafikPGLPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -378,7 +378,7 @@ const GrafikPGLPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -424,7 +424,7 @@ const GrafikPGLPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {[

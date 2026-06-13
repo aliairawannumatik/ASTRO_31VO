@@ -874,7 +874,7 @@ const KekongruenBangunDatarPage = () => {
         <span style={{ color }}>{icon}</span>
         <span className="font-body font-semibold text-white">{label}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -898,7 +898,7 @@ const KekongruenBangunDatarPage = () => {
           {/* ── INTRO ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" label="🧱 Apa Itu Kekongruenan?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dua bangun datar dikatakan <strong className="text-cyan-300">kongruen</strong> jika salah satunya dapat
@@ -926,7 +926,7 @@ const KekongruenBangunDatarPage = () => {
           {/* ── SIFAT SEGITIGA ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep1" icon={<Target className="w-5 h-5" />} color="#4ade80" label="📘 Sub-Bab 1 — Sifat Dua Segitiga Kongruen" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
@@ -967,7 +967,7 @@ const KekongruenBangunDatarPage = () => {
           {/* ── SYARAT SEGITIGA ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep2" icon={<Target className="w-5 h-5" />} color="#c084fc" label="📘 Sub-Bab 2 — Syarat Dua Segitiga Kongruen" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-2">
                   <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
@@ -1054,7 +1054,7 @@ const KekongruenBangunDatarPage = () => {
           {/* ── KEKONGRUENAN BANGUN SELAIN SEGITIGA ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="bangunLain" icon={<Shapes className="w-5 h-5" />} color="#38bdf8" label="📘 Sub-Bab 3 — Kekongruenan Bangun Datar Lainnya" />
-            {expandedSections.includes("bangunLain") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
                 <div className="bg-sky-500/10 border border-sky-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-sky-200">
@@ -1278,7 +1278,7 @@ const KekongruenBangunDatarPage = () => {
           {/* ── CONTOH SOAL ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="contoh1" icon={<Calculator className="w-5 h-5" />} color="#60a5fa" label="📝 Contoh Soal — Kekongruenan Segitiga & Bangun Lain" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* MUDAH */}

@@ -37,7 +37,7 @@ const BentukAkarPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -61,7 +61,7 @@ const BentukAkarPage = () => {
           {/* ===== PENGANTAR ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Kenapa Kita Perlu Belajar Bentuk Akar?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pernahkah kamu mencoba menghitung panjang sisi persegi yang luasnya 5 cm²?
@@ -85,7 +85,7 @@ const BentukAkarPage = () => {
           {/* ===================== SUB-BAB 1: PENGERTIAN BENTUK AKAR ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: Pengertian Bentuk Akar" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 {/* Ringkasan Intisari */}
@@ -152,7 +152,7 @@ const BentukAkarPage = () => {
           {/* Contoh Soal Sub-Bab 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400" title="📝 Contoh Soal — Pengertian Bentuk Akar" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -238,7 +238,7 @@ const BentukAkarPage = () => {
           {/* ===================== SUB-BAB 2: HUBUNGAN BENTUK AKAR & PANGKAT PECAHAN ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep2" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="📘 Sub-Bab 2: Hubungan Bentuk Akar dengan Pangkat Pecahan" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
@@ -291,7 +291,7 @@ const BentukAkarPage = () => {
           {/* Contoh Soal Sub-Bab 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400" title="📝 Contoh Soal — Hubungan Akar & Pangkat Pecahan" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -380,7 +380,7 @@ const BentukAkarPage = () => {
           {/* ===================== SUB-BAB 3: PENYEDERHANAAN BENTUK AKAR ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep3" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Sub-Bab 3: Penyederhanaan Bentuk Akar" />
-            {expandedSections.includes("konsep3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
@@ -433,7 +433,7 @@ const BentukAkarPage = () => {
           {/* Contoh Soal Sub-Bab 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal — Penyederhanaan Bentuk Akar" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -519,7 +519,7 @@ const BentukAkarPage = () => {
           {/* ===================== SUB-BAB 4: SIFAT-SIFAT OPERASI BENTUK AKAR ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep4" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="📘 Sub-Bab 4: Sifat-Sifat Operasi pada Bentuk Akar" />
-            {expandedSections.includes("konsep4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
@@ -560,7 +560,7 @@ const BentukAkarPage = () => {
           {/* Contoh Soal Sub-Bab 4 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh4" icon={<Calculator className="w-5 h-5" />} iconColor="text-orange-400" title="📝 Contoh Soal — Sifat-Sifat Operasi Bentuk Akar" />
-            {expandedSections.includes("contoh4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -642,7 +642,7 @@ const BentukAkarPage = () => {
           {/* ===================== SUB-BAB 5: MERASIONALKAN BENTUK AKAR ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep5" icon={<Target className="w-5 h-5" />} iconColor="text-pink-400" title="📘 Sub-Bab 5: Merasionalkan Bentuk Akar" />
-            {expandedSections.includes("konsep5") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-4 space-y-3">
@@ -680,7 +680,7 @@ const BentukAkarPage = () => {
           {/* Contoh Soal Sub-Bab 5 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh5" icon={<Calculator className="w-5 h-5" />} iconColor="text-pink-400" title="📝 Contoh Soal — Merasionalkan Bentuk Akar" />
-            {expandedSections.includes("contoh5") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -758,7 +758,7 @@ const BentukAkarPage = () => {
           {/* ===================== SUB-BAB 6: MENYEDERHANAKAN √(a+b)±2ab ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep6" icon={<Target className="w-5 h-5" />} iconColor="text-teal-400" title="📘 Sub-Bab 6: Menyederhanakan Bentuk √(a+b) ± 2√(ab)" />
-            {expandedSections.includes("konsep6") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-teal-500/10 border border-teal-500/30 rounded-lg p-4 space-y-3">
@@ -805,7 +805,7 @@ const BentukAkarPage = () => {
           {/* Contoh Soal Sub-Bab 6 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh6" icon={<Calculator className="w-5 h-5" />} iconColor="text-teal-400" title="📝 Contoh Soal — Menyederhanakan √(a+b) ± 2√(ab)" />
-            {expandedSections.includes("contoh6") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">

@@ -41,7 +41,7 @@ const KuartilPage = () => {
           {/* ── PENGANTAR ──────────────────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Kuartil?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Kamu sudah kenal dengan <strong className="text-cyan-300">rata-rata, median, dan modus</strong> sebagai ukuran pemusatan data. Sekarang, kita naik level ke <strong className="text-cyan-300">ukuran letak data</strong> — yaitu nilai-nilai yang membagi data menjadi bagian-bagian yang sama besar setelah data diurutkan.
@@ -93,7 +93,7 @@ const KuartilPage = () => {
           {/* ── SUB-BAB 1: KUARTIL DATA TUNGGAL ────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: Kuartil Data Tunggal" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
@@ -224,7 +224,7 @@ const KuartilPage = () => {
           {/* ── CONTOH SOAL SUB-BAB 1 ───────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-green-400" title="📝 Contoh Soal — Kuartil Data Tunggal" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* MUDAH */}
@@ -438,7 +438,7 @@ const KuartilPage = () => {
           {/* ── SUB-BAB 2: KUARTIL TABEL DISTRIBUSI FREKUENSI TUNGGAL ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep2" icon={<Target className="w-5 h-5" />} iconColor="text-blue-400" title="📘 Sub-Bab 2: Kuartil pada Tabel Distribusi Frekuensi Tunggal" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
@@ -527,7 +527,7 @@ const KuartilPage = () => {
           {/* ── CONTOH SOAL SUB-BAB 2 ───────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400" title="📝 Contoh Soal — Kuartil Tabel Distribusi Frekuensi Tunggal" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* MUDAH */}
@@ -761,7 +761,7 @@ const KuartilPage = () => {
           {/* ── RANGKUMAN ──────────────────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BarChart2 className="w-5 h-5" />} iconColor="text-violet-400" title="📋 Rangkuman — Kuartil" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 gap-3">
                   {[

@@ -697,7 +697,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" label="📐 Setup: Segitiga Siku-siku dengan Garis Tinggi" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pada segitiga siku-siku, jika dari titik sudut siku-siku kita tarik <strong className="text-cyan-300">garis tinggi ke sisi miring</strong>, maka segitiga besar terbagi menjadi dua segitiga kecil yang <strong>sebangun satu sama lain</strong> dan sebangun dengan segitiga besarnya!
@@ -719,7 +719,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* a: PROYEKSI RUSUK ALAS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep1" icon={<Target className="w-5 h-5" />} color="#4ade80" label="📘 (a) Proyeksi Rusuk Alas pada Rusuk Miring" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
@@ -741,7 +741,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* WATERFALL (a) — AB² = BD × BC */}
           <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
             <Header id="waterfall" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (a) — AB² = BD × BC" />
-            {expandedSections.includes("waterfall") && (
+            {true && (
               <div className="px-5 pb-5 pt-2">
                 <WaterfallAnimasiAlas />
               </div>
@@ -751,7 +751,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* b: PROYEKSI RUSUK TEGAK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep2" icon={<Target className="w-5 h-5" />} color="#c084fc" label="📘 (b) Proyeksi Rusuk Tegak pada Rusuk Miring" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
@@ -773,7 +773,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* WATERFALL (b) — AC² = CD × CB */}
           <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
             <Header id="waterfall2" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (b) — AC² = CD × CB" />
-            {expandedSections.includes("waterfall2") && (
+            {true && (
               <div className="px-5 pb-5 pt-2">
                 <WaterfallAnimasiTegak />
               </div>
@@ -783,7 +783,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* c: GARIS TINGGI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep3" icon={<Target className="w-5 h-5" />} color="#22c55e" label="📘 (c) Rumus Garis Tinggi △ABC Siku-siku di A" />
-            {expandedSections.includes("konsep3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
@@ -805,7 +805,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* WATERFALL (c) — AD² = DB × DC */}
           <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-xl overflow-hidden">
             <Header id="waterfall3" icon={<span className="text-base">💧</span>} color="#38bdf8" label="💧 Teknik Air Terjun (c) — AD² = DB × DC" />
-            {expandedSections.includes("waterfall3") && (
+            {true && (
               <div className="px-5 pb-5 pt-2">
                 <WaterfallAnimasiTinggi />
               </div>
@@ -815,7 +815,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* d: HUBUNGAN RUSUK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="konsep4" icon={<Target className="w-5 h-5" />} color="#f97316" label="📘 (d) Hubungan Rusuk-rusuk dan Garis Tinggi" />
-            {expandedSections.includes("konsep4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-orange-300">🎯 Ringkasan Intisari</p>
@@ -860,7 +860,7 @@ const PerbandinganRusukSikuSikuPage = () => {
           {/* CONTOH SOAL */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <Header id="contoh1" icon={<Calculator className="w-5 h-5" />} color="#60a5fa" label="📝 Contoh Soal — Perbandingan Rusuk Siku-siku" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 {/* MUDAH */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">

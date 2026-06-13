@@ -51,9 +51,9 @@ const SkalaPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Kenapa Kita Butuh Skala?</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Coba bayangkan kamu diminta menggambar peta Indonesia di selembar kertas A4. Mustahil menggambar sesuai ukuran aslinya, kan? Di sinilah <strong className="text-primary">skala</strong> berperan — ia memungkinkan kita merepresentasikan benda besar dalam ukuran yang jauh lebih kecil, atau benda kecil dalam ukuran yang lebih besar, tanpa mengubah proporsinya.
@@ -94,9 +94,9 @@ const SkalaPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Rumus Skala</span>
               </div>
-              {expandedSections.includes("konsep") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   <strong className="text-primary">Skala</strong> adalah perbandingan antara ukuran pada gambar/peta dengan ukuran aslinya di dunia nyata. Secara matematis:
@@ -145,9 +145,9 @@ const SkalaPage = () => {
                 <Map className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Konsep Khusus: Skala pada Luas</span>
               </div>
-              {expandedSections.includes("luas") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("luas") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Ketika berurusan dengan <strong className="text-orange-300">luas</strong> (bukan panjang), skala harus <strong className="text-primary">dikuadratkan</strong> terlebih dahulu karena luas adalah hasil kali dua dimensi panjang.
@@ -186,9 +186,9 @@ const SkalaPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal dan Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - MUDAH */}

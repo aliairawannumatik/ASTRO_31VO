@@ -30,7 +30,7 @@ const PolaGeometriPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
 
@@ -62,7 +62,7 @@ const PolaGeometriPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Barisan Geometri?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* BAKTERI */}
                 <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-4 space-y-3">
@@ -170,7 +170,7 @@ const PolaGeometriPage = () => {
           {/* RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rumus" icon={<Zap className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Rumus Suku Ke-n Geometri" />
-            {expandedSections.includes("rumus") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-violet-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -276,7 +276,7 @@ const PolaGeometriPage = () => {
           {/* CONTOH 1A */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1a" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah (Suku ke-n)" />
-            {expandedSections.includes("contoh1a") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -302,7 +302,7 @@ const PolaGeometriPage = () => {
           {/* CONTOH 2A */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2a" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Sedang (Suku ke-n)" />
-            {expandedSections.includes("contoh2a") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -337,7 +337,7 @@ const PolaGeometriPage = () => {
           {/* CONTOH 3A */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3a" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Sulit (Suku ke-n)" />
-            {expandedSections.includes("contoh3a") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -382,7 +382,7 @@ const PolaGeometriPage = () => {
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="jumlah" icon={<Zap className="w-5 h-5" />} iconColor="text-green-400" title="📘 Rumus Jumlah Suku Geometri" />
-            {expandedSections.includes("jumlah") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-green-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -508,7 +508,7 @@ const PolaGeometriPage = () => {
           {/* CONTOH 1B */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1b" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah (Jumlah Suku)" />
-            {expandedSections.includes("contoh1b") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -543,7 +543,7 @@ const PolaGeometriPage = () => {
           {/* CONTOH 2B */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2b" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Sedang (Jumlah Suku)" />
-            {expandedSections.includes("contoh2b") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -583,7 +583,7 @@ const PolaGeometriPage = () => {
           {/* CONTOH 3B */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3b" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Sulit (Jumlah Suku)" />
-            {expandedSections.includes("contoh3b") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">

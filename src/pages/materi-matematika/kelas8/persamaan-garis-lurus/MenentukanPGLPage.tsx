@@ -38,7 +38,7 @@ const MenentukanPGLPage = () => {
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
   const Badge = ({ label, color }: { label: string; color: string }) => (
@@ -59,7 +59,7 @@ const MenentukanPGLPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Tiga Skenario Menentukan Persamaan Garis" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">Bergantung pada informasi yang diberikan, ada tiga skenario utama untuk menentukan persamaan garis lurus. Pilih rumus yang sesuai dengan data yang tersedia!</p>
                 {/* Peta skenario */}
@@ -88,7 +88,7 @@ const MenentukanPGLPage = () => {
           {/* SKENARIO 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rumus1" icon={<Layers className="w-5 h-5" />} iconColor="text-cyan-400" title="📐 Skenario 1: Diketahui m dan c (Titik Potong sb-y)" />
-            {expandedSections.includes("rumus1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4 text-center">
                   <BlockMath math="y = mx + c" />
@@ -113,7 +113,7 @@ const MenentukanPGLPage = () => {
           {/* SKENARIO 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rumus2" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📐 Skenario 2: Diketahui m dan Satu Titik (x₁, y₁)" />
-            {expandedSections.includes("rumus2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-900/20 border border-violet-500/40 rounded-xl p-4 text-center">
                   <BlockMath math="y - y_1 = m(x - x_1)" />
@@ -151,7 +151,7 @@ const MenentukanPGLPage = () => {
           {/* SKENARIO 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rumus3" icon={<Layers className="w-5 h-5" />} iconColor="text-orange-400" title="📐 Skenario 3: Diketahui Dua Titik" />
-            {expandedSections.includes("rumus3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-900/20 border border-orange-500/40 rounded-xl p-4 text-center">
                   <BlockMath math="\frac{y - y_1}{y_2 - y_1} = \frac{x - x_1}{x_2 - x_1}" />
@@ -185,7 +185,7 @@ const MenentukanPGLPage = () => {
           {/* PETA RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="peta-rumus" icon={<BookOpen className="w-5 h-5" />} iconColor="text-yellow-400" title="🗺️ Peta Lengkap: Pilih Rumus yang Tepat!" />
-            {expandedSections.includes("peta-rumus") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-slate-800/60 border border-yellow-500/20 rounded-xl p-4">
                   <svg viewBox="0 0 320 200" className="w-full" style={{ maxHeight: 200 }}>
@@ -233,7 +233,7 @@ const MenentukanPGLPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -264,7 +264,7 @@ const MenentukanPGLPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -301,7 +301,7 @@ const MenentukanPGLPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -346,7 +346,7 @@ const MenentukanPGLPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {[

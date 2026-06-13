@@ -40,9 +40,9 @@ const FaktorisasiPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Faktorisasi: Kebalikan dari Menjabarkan</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Kalau menjabarkan mengubah perkalian menjadi penjumlahan, maka <strong className="text-primary">faktorisasi</strong> adalah kebalikannya — mengubah penjumlahan kembali menjadi perkalian faktor-faktor.
@@ -64,9 +64,9 @@ const FaktorisasiPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Teknik-Teknik Faktorisasi</span>
               </div>
-              {expandedSections.includes("konsep") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -110,9 +110,9 @@ const FaktorisasiPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal dan Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}

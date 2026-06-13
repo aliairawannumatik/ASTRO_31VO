@@ -27,7 +27,7 @@ const PemfaktoranPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
 
@@ -84,7 +84,7 @@ const PemfaktoranPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400"
               title="🔧 Kenapa Pakai Pemfaktoran?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="cyan">
                   <p className="font-body text-sm leading-relaxed">
@@ -106,7 +106,7 @@ const PemfaktoranPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="teori" icon={<Target className="w-5 h-5" />} iconColor="text-green-400"
               title="📘 Strategi Pemfaktoran — 3 Pola Utama" />
-            {expandedSections.includes("teori") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <Box color="purple">
@@ -139,7 +139,7 @@ const PemfaktoranPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400"
               title="📝 Contoh Soal — Pemfaktoran" />
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-7">
 
                 <ExampleBlock level="MUDAH" no={1}

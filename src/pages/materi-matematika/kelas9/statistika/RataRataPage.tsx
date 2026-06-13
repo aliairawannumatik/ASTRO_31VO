@@ -302,7 +302,7 @@ const RataRataPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Ukuran Pemusatan Data?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Setelah kamu bisa menyajikan data dalam berbagai bentuk diagram, saatnya kamu belajar <strong className="text-cyan-300">mengolah dan menganalisis</strong> data tersebut. Salah satu cara paling dasar adalah mencari <strong className="text-cyan-300">ukuran pemusatan data</strong> — nilai tunggal yang mewakili keseluruhan data.
@@ -332,7 +332,7 @@ const RataRataPage = () => {
           {/* SUB-BAB 1: RATA-RATA DATA TUNGGAL */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: Rata-Rata Data Tunggal" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
@@ -392,7 +392,7 @@ const RataRataPage = () => {
           {/* Contoh Soal Sub-Bab 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-green-400" title="📝 Contoh Soal — Rata-Rata Data Tunggal" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -473,7 +473,7 @@ const RataRataPage = () => {
           {/* SUB-BAB 2: RATA-RATA PADA TABEL DISTRIBUSI FREKUENSI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep2" icon={<Target className="w-5 h-5" />} iconColor="text-blue-400" title="📘 Sub-Bab 2: Rata-Rata pada Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-blue-300">🎯 Ringkasan Intisari</p>
@@ -555,7 +555,7 @@ const RataRataPage = () => {
           {/* Contoh Soal Sub-Bab 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400" title="📝 Contoh Soal — Rata-Rata Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* CONTOH 1 — Diagram Batang */}
@@ -794,7 +794,7 @@ const RataRataPage = () => {
           {/* SUB-BAB 3: RATA-RATA PADA DIAGRAM BATANG */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep3" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="📘 Sub-Bab 3: Rata-Rata pada Diagram Batang" />
-            {expandedSections.includes("konsep3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
@@ -858,7 +858,7 @@ const RataRataPage = () => {
           {/* Contoh Soal Sub-Bab 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400" title="📝 Contoh Soal — Rata-Rata dari Diagram Batang" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -950,7 +950,7 @@ const RataRataPage = () => {
           {/* SUB-BAB 4: RATA-RATA GABUNGAN DATA BARU MASUK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep4" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Sub-Bab 4: Rata-Rata Gabungan — Data Baru Masuk" />
-            {expandedSections.includes("konsep4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-cyan-300">🎯 Ringkasan Intisari</p>
@@ -1008,7 +1008,7 @@ const RataRataPage = () => {
           {/* Contoh Soal Sub-Bab 4 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh4" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal — Rata-Rata Gabungan Data Baru Masuk" />
-            {expandedSections.includes("contoh4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -1090,7 +1090,7 @@ const RataRataPage = () => {
           {/* SUB-BAB 5: RATA-RATA GABUNGAN DATA LAMA KELUAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep5" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="📘 Sub-Bab 5: Rata-Rata Gabungan — Data Lama Keluar" />
-            {expandedSections.includes("konsep5") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-orange-300">🎯 Ringkasan Intisari</p>
@@ -1138,7 +1138,7 @@ const RataRataPage = () => {
           {/* Contoh Soal Sub-Bab 5 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh5" icon={<Calculator className="w-5 h-5" />} iconColor="text-orange-400" title="📝 Contoh Soal — Rata-Rata Gabungan Data Lama Keluar" />
-            {expandedSections.includes("contoh5") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -1223,7 +1223,7 @@ const RataRataPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-yellow-400" title="🏁 Rangkuman Rata-Rata" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4 space-y-3">
                   <p className="font-body text-sm font-bold text-cyan-300 text-center mb-3">⭐ Rumus-Rumus Kunci</p>

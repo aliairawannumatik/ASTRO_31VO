@@ -42,7 +42,7 @@ const PenyebaranDataPage = () => {
           {/* ── PENGANTAR ──────────────────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Ukuran Penyebaran Data?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dua kelompok data bisa punya rata-rata yang sama, tapi karakter data-nya sangat berbeda. Nah, di sinilah <strong className="text-cyan-300">ukuran penyebaran data</strong> berperan — ia mengukur seberapa "menyebar" atau "rapat" data di sekitar pusatnya.
@@ -97,7 +97,7 @@ const PenyebaranDataPage = () => {
           {/* ── SUB-BAB 1: DATA TUNGGAL ────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-emerald-400" title="📘 Sub-Bab 1: Ukuran Penyebaran Data Tunggal" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 space-y-4">
@@ -247,7 +247,7 @@ const PenyebaranDataPage = () => {
           {/* ── CONTOH SOAL SUB-BAB 1 ───────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-emerald-400" title="📝 Contoh Soal — Penyebaran Data Tunggal" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* MUDAH */}
@@ -373,7 +373,7 @@ const PenyebaranDataPage = () => {
           {/* ── SUB-BAB 2: TABEL DISTRIBUSI FREKUENSI TUNGGAL ───────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep2" icon={<Target className="w-5 h-5" />} iconColor="text-blue-400" title="📘 Sub-Bab 2: Penyebaran Data pada Tabel Distribusi Frekuensi Tunggal" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
@@ -465,7 +465,7 @@ const PenyebaranDataPage = () => {
           {/* ── CONTOH SOAL SUB-BAB 2 ───────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400" title="📝 Contoh Soal — Penyebaran Data Tabel Frekuensi Tunggal" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* MUDAH */}
@@ -656,7 +656,7 @@ const PenyebaranDataPage = () => {
           {/* ── RANGKUMAN ──────────────────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-emerald-400" title="📋 Rangkuman — Ukuran Penyebaran Data" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-body">

@@ -274,9 +274,9 @@ const PengertianNotasiPangkatPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">🚀 Perkalian Berulang? Ada Cara Lebih Cepatnya!</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Tadi kamu sudah melihat animasi kuman yang membelah diri — dari <strong className="text-emerald-300">1 kuman</strong> menjadi <strong className="text-cyan-300">2</strong>, lalu <strong className="text-violet-300">4</strong>, <strong className="text-orange-300">8</strong>, <strong className="text-pink-300">16</strong>, hingga <strong className="text-yellow-300">32</strong> hanya dalam beberapa langkah.
@@ -305,9 +305,9 @@ const PengertianNotasiPangkatPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">📘 Sub-Bab 1: Pengertian Bilangan Berpangkat</span>
               </div>
-              {expandedSections.includes("konsep1") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
@@ -383,9 +383,9 @@ const PengertianNotasiPangkatPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">📝 Contoh Soal — Pengertian Bilangan Berpangkat</span>
               </div>
-              {expandedSections.includes("contoh1") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - Mudah */}
@@ -487,9 +487,9 @@ const PengertianNotasiPangkatPage = () => {
                 <Target className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">📘 Sub-Bab 2: Bilangan Bulat dan Pecahan Berpangkat</span>
               </div>
-              {expandedSections.includes("konsep2") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
@@ -525,9 +525,9 @@ const PengertianNotasiPangkatPage = () => {
                 <Calculator className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">📝 Contoh Soal — Bilangan Bulat & Pecahan Berpangkat</span>
               </div>
-              {expandedSections.includes("contoh2") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - Mudah */}
@@ -617,9 +617,9 @@ const PengertianNotasiPangkatPage = () => {
                 <Target className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">📘 Sub-Bab 3: Bilangan Negatif Berpangkat</span>
               </div>
-              {expandedSections.includes("konsep3") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-orange-300">🎯 Ringkasan Intisari</p>
@@ -708,9 +708,9 @@ const PengertianNotasiPangkatPage = () => {
                 <Calculator className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">📝 Contoh Soal — Bilangan Negatif Berpangkat</span>
               </div>
-              {expandedSections.includes("contoh3") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - Mudah */}
@@ -803,9 +803,9 @@ const PengertianNotasiPangkatPage = () => {
                 <AlertTriangle className="w-5 h-5 text-red-400" />
                 <span className="font-body font-semibold text-white">📘 Sub-Bab 4: Perbedaan <InlineMath math="(-a)^n" /> dan <InlineMath math="-a^n" /></span>
               </div>
-              {expandedSections.includes("konsep4") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-red-300">🎯 Ringkasan Intisari</p>
@@ -866,9 +866,9 @@ const PengertianNotasiPangkatPage = () => {
                 <Calculator className="w-5 h-5 text-red-400" />
                 <span className="font-body font-semibold text-white">📝 Contoh Soal — Perbedaan <InlineMath math="(-a)^n" /> dan <InlineMath math="-a^n" /></span>
               </div>
-              {expandedSections.includes("contoh4") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - Mudah */}

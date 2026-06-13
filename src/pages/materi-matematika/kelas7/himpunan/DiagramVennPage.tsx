@@ -152,7 +152,7 @@ const DiagramVennPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{label}</span>
       </div>
-      {expandedSections.includes(id) ? (
+      {true ? (
         <ChevronUp className="w-5 h-5 text-primary" />
       ) : (
         <ChevronDown className="w-5 h-5 text-primary" />
@@ -188,7 +188,7 @@ const DiagramVennPage = () => {
               label="Sub-Bab 1: Masalah Kontekstual Banyak Anggota Himpunan"
               iconColor="text-cyan-400"
             />
-            {expandedSections.includes("kontekstual") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}
@@ -362,7 +362,7 @@ const DiagramVennPage = () => {
               label="Sub-Bab 2: Operasi Biner pada Himpunan"
               iconColor="text-purple-400"
             />
-            {expandedSections.includes("biner") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}
@@ -540,7 +540,7 @@ const DiagramVennPage = () => {
               label="Sub-Bab 3: Operasi Uner pada Himpunan (Komplemen)"
               iconColor="text-sky-400"
             />
-            {expandedSections.includes("uner") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}

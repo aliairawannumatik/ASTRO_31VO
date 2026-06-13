@@ -40,9 +40,9 @@ const PembagianAljabarPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Kunci Pembagian: Cari Faktor yang Sama!</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pembagian bentuk aljabar bekerja mirip seperti penyederhanaan pecahan biasa. Jika dua bentuk aljabar punya faktor yang sama, kita bisa saling mencoret faktor tersebut untuk menyederhanakan hasilnya.
@@ -63,9 +63,9 @@ const PembagianAljabarPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Cara Membagi Aljabar</span>
               </div>
-              {expandedSections.includes("konsep") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -100,9 +100,9 @@ const PembagianAljabarPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal dan Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}

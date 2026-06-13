@@ -34,7 +34,7 @@ const SifatSifatOperasiPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -43,7 +43,7 @@ const SifatSifatOperasiPage = () => {
   const Card = ({ id, children }: { id: string; children: React.ReactNode }) => (
     <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
       {children}
-      {expandedSections.includes(id) && null}
+      {true && null}
     </div>
   );
 
@@ -122,7 +122,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400"
               title="Kenapa Kita Butuh Sifat-Sifat Pangkat?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu harus menghitung <InlineMath math="2^{10} \times 2^{15}" />. Kalau ditulis penuh, itu <strong>25 kali perkalian</strong>! Tapi dengan sifat-sifat pangkat, kamu bisa selesaikan dalam hitungan detik. Sifat-sifat ini bukan sulap — semuanya punya logika yang bisa kamu turunkan sendiri.
@@ -145,7 +145,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400"
               title={<span>📘 Sifat 1: <InlineMath math="a^m \times a^n = a^{m+n}" /></span>} />
-            {expandedSections.includes("k1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="green">
                   <p className="font-body text-sm font-semibold text-green-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -169,7 +169,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c1" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400"
               title={<span>📝 Contoh Soal — Sifat 1: <InlineMath math="a^m \times a^n" /></span>} />
-            {expandedSections.includes("c1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Sederhanakan: <InlineMath math="5^3 \times 5^6" /></>}
@@ -205,7 +205,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k2" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400"
               title={<span>📘 Sifat 2: <InlineMath math="a^m \div a^n = a^{m-n}" /></span>} />
-            {expandedSections.includes("k2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="cyan">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -229,7 +229,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c2" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400"
               title={<span>📝 Contoh Soal — Sifat 2: <InlineMath math="a^m \div a^n" /></span>} />
-            {expandedSections.includes("c2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Sederhanakan: <InlineMath math="\dfrac{7^8}{7^5}" /></>}
@@ -266,7 +266,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k3" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400"
               title={<span>📘 Sifat 3: <InlineMath math="(a^m)^n = a^{mn}" /></span>} />
-            {expandedSections.includes("k3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="purple">
                   <p className="font-body text-sm font-semibold text-purple-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -290,7 +290,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c3" icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400"
               title={<span>📝 Contoh Soal — Sifat 3: <InlineMath math="(a^m)^n" /></span>} />
-            {expandedSections.includes("c3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Sederhanakan: <InlineMath math="(3^4)^5" /></>}
@@ -329,7 +329,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k4" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400"
               title={<span>📘 Sifat 4: <InlineMath math="(a \cdot b)^n = a^n \cdot b^n" /></span>} />
-            {expandedSections.includes("k4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="orange">
                   <p className="font-body text-sm font-semibold text-orange-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -352,7 +352,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c4" icon={<Calculator className="w-5 h-5" />} iconColor="text-orange-400"
               title={<span>📝 Contoh Soal — Sifat 4: <InlineMath math="(a \cdot b)^n" /></span>} />
-            {expandedSections.includes("c4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Hitunglah: <InlineMath math="(2 \cdot 5)^3" /></>}
@@ -391,7 +391,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k5" icon={<Target className="w-5 h-5" />} iconColor="text-pink-400"
               title={<span>📘 Sifat 5: <InlineMath math="\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}" /></span>} />
-            {expandedSections.includes("k5") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="pink">
                   <p className="font-body text-sm font-semibold text-pink-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -414,7 +414,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c5" icon={<Calculator className="w-5 h-5" />} iconColor="text-pink-400"
               title={<span>📝 Contoh Soal — Sifat 5: <InlineMath math="(a/b)^n" /></span>} />
-            {expandedSections.includes("c5") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Hitunglah: <InlineMath math="\left(\dfrac{2}{3}\right)^5" /></>}
@@ -447,7 +447,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k6" icon={<Target className="w-5 h-5" />} iconColor="text-blue-400"
               title={<span>📘 Sifat 6: <InlineMath math="a^0 = 1" /> <InlineMath math="(a \neq 0)" /></span>} />
-            {expandedSections.includes("k6") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="blue">
                   <p className="font-body text-sm font-semibold text-blue-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -475,7 +475,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c6" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400"
               title={<span>📝 Contoh Soal — Sifat 6: <InlineMath math="a^0 = 1" /></span>} />
-            {expandedSections.includes("c6") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Hitunglah: <InlineMath math="7^0 + 100^0 + (0{,}5)^0" /></>}
@@ -511,7 +511,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k7" icon={<Target className="w-5 h-5" />} iconColor="text-red-400"
               title={<span>📘 Sifat 7: <InlineMath math="a^{-n} = \dfrac{1}{a^n}" /></span>} />
-            {expandedSections.includes("k7") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="slate">
                   <p className="font-body text-sm font-semibold text-slate-200 mb-2">🎯 Ringkasan Intisari</p>
@@ -535,7 +535,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c7" icon={<Calculator className="w-5 h-5" />} iconColor="text-red-400"
               title={<span>📝 Contoh Soal — Sifat 7: <InlineMath math="a^{-n}" /></span>} />
-            {expandedSections.includes("c7") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Nyatakan dalam bentuk pecahan positif: <InlineMath math="4^{-3}" /></>}
@@ -569,7 +569,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k8" icon={<Target className="w-5 h-5" />} iconColor="text-teal-400"
               title={<span>📘 Sifat 8: <InlineMath math="a^{1/n} = \sqrt[n]{a}" /></span>} />
-            {expandedSections.includes("k8") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="cyan">
                   <p className="font-body text-sm font-semibold text-teal-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -594,7 +594,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c8" icon={<Calculator className="w-5 h-5" />} iconColor="text-teal-400"
               title={<span>📝 Contoh Soal — Sifat 8: <InlineMath math="a^{1/n}" /></span>} />
-            {expandedSections.includes("c8") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Hitunglah: <InlineMath math="64^{1/2}" /> dan <InlineMath math="27^{1/3}" /></>}
@@ -633,7 +633,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="k9" icon={<Target className="w-5 h-5" />} iconColor="text-violet-400"
               title={<span>📘 Sifat 9: <InlineMath math="a^{m/n} = \sqrt[n]{a^m}" /></span>} />
-            {expandedSections.includes("k9") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="purple">
                   <p className="font-body text-sm font-semibold text-violet-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -659,7 +659,7 @@ const SifatSifatOperasiPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="c9" icon={<Calculator className="w-5 h-5" />} iconColor="text-violet-400"
               title={<span>📝 Contoh Soal — Sifat 9: <InlineMath math="a^{m/n}" /></span>} />
-            {expandedSections.includes("c9") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 <ExampleBlock level="MUDAH" title="Contoh 1"
                   soal={<>Hitunglah: <InlineMath math="32^{3/5}" /></>}

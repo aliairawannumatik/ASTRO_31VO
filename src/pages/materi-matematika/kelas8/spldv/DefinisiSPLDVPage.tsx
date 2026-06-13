@@ -31,7 +31,7 @@ const DefinisiSPLDVPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -62,7 +62,7 @@ const DefinisiSPLDVPage = () => {
           {/* ── PENGANTAR ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Mengapa Kita Butuh SPLDV?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu pergi ke kantin dan membeli 2 nasi goreng dan 1 mie goreng seharga Rp25.000. Temanmu membeli 1 nasi goreng dan 2 mie goreng seharga Rp23.000. Dari dua informasi ini, bisa tidak kita tahu harga masing-masing makanan? Nah, inilah kegunaan <strong className="text-cyan-300">SPLDV</strong> — alat matematika untuk memecahkan masalah yang punya <em>dua ketidaktahuan</em> sekaligus!
@@ -95,7 +95,7 @@ const DefinisiSPLDVPage = () => {
           {/* ── SUB-BAB 1: PLDV ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="pldv" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: PLDV — Satu Persamaan, Dua Variabel" />
-            {expandedSections.includes("pldv") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -195,7 +195,7 @@ const DefinisiSPLDVPage = () => {
           {/* ── SUB-BAB 2: SPLDV ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="spldv" icon={<Layers className="w-5 h-5" />} iconColor="text-cyan-400" title="📗 Sub-Bab 2: SPLDV — Sistem Dua Persamaan" />
-            {expandedSections.includes("spldv") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
@@ -275,7 +275,7 @@ const DefinisiSPLDVPage = () => {
           {/* ── CONTOH SOAL ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="📝 Contoh Soal & Pembahasan" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* SOAL 1 — MUDAH */}
@@ -416,7 +416,7 @@ const DefinisiSPLDVPage = () => {
           {/* ── RANGKUMAN ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-primary" title="📋 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="grid grid-cols-1 gap-2 font-body text-sm">
                   {[

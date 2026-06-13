@@ -43,9 +43,9 @@ const PerbandinganUmumPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Apa Itu Perbandingan?</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Setiap hari tanpa sadar kita sering membandingkan sesuatu — harga yang lebih murah, jarak yang lebih dekat, atau porsi yang lebih besar.
@@ -99,9 +99,9 @@ const PerbandinganUmumPage = () => {
                 <Star className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Perbandingan Umum: Definisi, Contoh & Kaitannya</span>
               </div>
-              {expandedSections.includes("umum") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("umum") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Definisi */}
@@ -243,9 +243,9 @@ const PerbandinganUmumPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Rasio & Satuan Pembanding</span>
               </div>
-              {expandedSections.includes("konsep") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   <strong className="text-primary">Rasio</strong> adalah cara menyatakan perbandingan dua atau lebih besaran menggunakan tanda titik dua (<InlineMath math=":" />).
@@ -289,9 +289,9 @@ const PerbandinganUmumPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal dan Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - MUDAH */}

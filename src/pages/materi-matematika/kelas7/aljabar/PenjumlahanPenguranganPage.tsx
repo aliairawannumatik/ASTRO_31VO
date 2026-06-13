@@ -40,9 +40,9 @@ const PenjumlahanPenguranganPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Aturan Dasar: Hanya Suku Sejenis yang Bisa Digabung</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Menjumlahkan atau mengurangkan bentuk aljabar itu seperti menghitung buah. Kamu bisa menjumlahkan apel dengan apel, tapi tidak bisa langsung menjumlahkan apel dengan jeruk!
@@ -63,9 +63,9 @@ const PenjumlahanPenguranganPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Cara Menyederhanakan</span>
               </div>
-              {expandedSections.includes("konsep") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Untuk menyederhanakan bentuk aljabar melalui penjumlahan/pengurangan, ikuti dua langkah berikut:
@@ -108,9 +108,9 @@ const PenjumlahanPenguranganPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal dan Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}

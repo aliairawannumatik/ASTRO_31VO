@@ -45,7 +45,7 @@ const AplikasiKontekstualPage = () => {
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
   const Badge = ({ label, color }: { label: string; color: string }) => (
@@ -66,7 +66,7 @@ const AplikasiKontekstualPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Garis Lurus Ada di Sekeliling Kita!" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">Persamaan garis lurus bukan hanya soal di buku pelajaran — ia hadir dalam banyak situasi nyata: tarif taksi, pertumbuhan tanaman, pemakaian listrik, hingga harga jual-beli. Memahami aplikasinya membantu kita membuat prediksi dan keputusan yang lebih baik!</p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -90,7 +90,7 @@ const AplikasiKontekstualPage = () => {
           {/* LANGKAH PEMECAHAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="langkah" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Langkah Menyelesaikan Soal Kontekstual" />
-            {expandedSections.includes("langkah") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
                   <p className="text-sm font-semibold text-violet-300 mb-2 font-body">🎯 Ringkasan Intisari</p>
@@ -117,7 +117,7 @@ const AplikasiKontekstualPage = () => {
           {/* KONTEKS DAN INTERPRETASI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="konteks-list" icon={<BookOpen className="w-5 h-5" />} iconColor="text-orange-400" title="🔍 Memahami Makna m dan c dalam Konteks" />
-            {expandedSections.includes("konteks-list") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-body border-collapse">
@@ -157,7 +157,7 @@ const AplikasiKontekstualPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah (Tarif Taksi)" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -232,7 +232,7 @@ const AplikasiKontekstualPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang (Pertumbuhan Tanaman)" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -308,7 +308,7 @@ const AplikasiKontekstualPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit (Analisis Biaya Produksi)" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -393,7 +393,7 @@ const AplikasiKontekstualPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {[

@@ -537,7 +537,7 @@ const DiskonPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* 1. PENGANTAR */}
-          <Section id="intro" expanded={expandedSections.includes("intro")} onToggle={toggleSection}
+          <Section id="intro" expanded={true} onToggle={toggleSection}
             icon={<Lightbulb className="w-5 h-5 text-yellow-400" />}
             title="Apa itu Diskon?"
           >
@@ -599,7 +599,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 2. RUMUS */}
-          <Section id="rumus" expanded={expandedSections.includes("rumus")} onToggle={toggleSection}
+          <Section id="rumus" expanded={true} onToggle={toggleSection}
             icon={<Target className="w-5 h-5 text-green-400" />}
             title="Semua Rumus Diskon"
           >
@@ -650,7 +650,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 3. VISUALISASI */}
-          <Section id="visual" expanded={expandedSections.includes("visual")} onToggle={toggleSection}
+          <Section id="visual" expanded={true} onToggle={toggleSection}
             icon={<Percent className="w-5 h-5 text-blue-400" />}
             title="Visualisasi: Memahami Diskon Secara Visual"
           >
@@ -674,7 +674,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 4. KALKULATOR INTERAKTIF */}
-          <Section id="kalkulator" expanded={expandedSections.includes("kalkulator")} onToggle={toggleSection}
+          <Section id="kalkulator" expanded={true} onToggle={toggleSection}
             icon={<Calculator className="w-5 h-5 text-primary" />}
             title="Kalkulator Diskon Interaktif"
           >
@@ -685,7 +685,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 5. DISKON GANDA */}
-          <Section id="ganda" expanded={expandedSections.includes("ganda")} onToggle={toggleSection}
+          <Section id="ganda" expanded={true} onToggle={toggleSection}
             icon={<Tag className="w-5 h-5 text-orange-400" />}
             title="Diskon Ganda (Double Discount)"
           >
@@ -754,7 +754,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 6. MENCARI PERSEN DISKON */}
-          <Section id="persenDiskon" expanded={expandedSections.includes("persenDiskon")} onToggle={toggleSection}
+          <Section id="persenDiskon" expanded={true} onToggle={toggleSection}
             icon={<Percent className="w-5 h-5 text-purple-400" />}
             title="Mencari Persen Diskon dari Dua Harga"
           >
@@ -781,7 +781,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 7. CONTOH SOAL */}
-          <Section id="contoh" expanded={expandedSections.includes("contoh")} onToggle={toggleSection}
+          <Section id="contoh" expanded={true} onToggle={toggleSection}
             icon={<BookOpen className="w-5 h-5 text-blue-400" />}
             title="Contoh Soal dan Pembahasan Lengkap"
           >
@@ -878,7 +878,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 8. KESALAHAN UMUM */}
-          <Section id="kesalahan" expanded={expandedSections.includes("kesalahan")} onToggle={toggleSection}
+          <Section id="kesalahan" expanded={true} onToggle={toggleSection}
             icon={<AlertCircle className="w-5 h-5 text-red-400" />}
             title="Kesalahan Umum yang Sering Terjadi"
           >
@@ -916,7 +916,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 9. MINI KUIS */}
-          <Section id="kuis" expanded={expandedSections.includes("kuis")} onToggle={toggleSection}
+          <Section id="kuis" expanded={true} onToggle={toggleSection}
             icon={<HelpCircle className="w-5 h-5 text-pink-400" />}
             title="Uji Pemahamanmu — Mini Kuis (5 Soal)"
           >
@@ -927,7 +927,7 @@ const DiskonPage = () => {
           </Section>
 
           {/* 10. RANGKUMAN */}
-          <Section id="rangkuman" expanded={expandedSections.includes("rangkuman")} onToggle={toggleSection}
+          <Section id="rangkuman" expanded={true} onToggle={toggleSection}
             icon={<Star className="w-5 h-5 text-yellow-400" />}
             title="Rangkuman Materi Diskon"
           >

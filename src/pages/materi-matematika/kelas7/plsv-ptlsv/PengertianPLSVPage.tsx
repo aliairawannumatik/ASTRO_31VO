@@ -40,9 +40,9 @@ const PengertianPLSVPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Membongkar Rahasia di Balik Tanda "="</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pernahkah kamu berpikir: <em>"Berapakah nilai <InlineMath math="x" /> sehingga <InlineMath math="2x + 3 = 11" />?"</em> Inilah inti dari <strong className="text-primary">Persamaan Linear Satu Variabel (PLSV)</strong>. Kita akan belajar mengenali, memahami, dan membedakan beberapa konsep penting seputar PLSV.
@@ -63,9 +63,9 @@ const PengertianPLSVPage = () => {
                 <Target className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Persamaan Linear Satu Variabel (PLSV)</span>
               </div>
-              {expandedSections.includes("plsv") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("plsv") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-blue-300 mb-2">Definisi PLSV:</p>
@@ -106,9 +106,9 @@ const PengertianPLSVPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Akar atau Penyelesaian PLSV</span>
               </div>
-              {expandedSections.includes("akar") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("akar") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -136,9 +136,9 @@ const PengertianPLSVPage = () => {
                 <Target className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Kesamaan</span>
               </div>
-              {expandedSections.includes("kesamaan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("kesamaan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -170,9 +170,9 @@ const PengertianPLSVPage = () => {
                 <Star className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">Persamaan yang Ekuivalen</span>
               </div>
-              {expandedSections.includes("ekuivalen") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("ekuivalen") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -207,9 +207,9 @@ const PengertianPLSVPage = () => {
                   Contoh Soal 1
                 </span>
               </div>
-              {expandedSections.includes("contoh1") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
@@ -245,9 +245,9 @@ const PengertianPLSVPage = () => {
                   Contoh Soal 2
                 </span>
               </div>
-              {expandedSections.includes("contoh2") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
@@ -288,9 +288,9 @@ const PengertianPLSVPage = () => {
                   Contoh Soal 3
                 </span>
               </div>
-              {expandedSections.includes("contoh3") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">

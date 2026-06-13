@@ -151,7 +151,7 @@ const PemecahanMasalahHimpunanPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{label}</span>
       </div>
-      {expandedSections.includes(id) ? (
+      {true ? (
         <ChevronUp className="w-5 h-5 text-primary" />
       ) : (
         <ChevronDown className="w-5 h-5 text-primary" />
@@ -187,7 +187,7 @@ const PemecahanMasalahHimpunanPage = () => {
               label="Sub-Bab 1: Prinsip Dasar Kardinalitas Himpunan"
               iconColor="text-cyan-400"
             />
-            {expandedSections.includes("kardinalitas") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}
@@ -369,7 +369,7 @@ const PemecahanMasalahHimpunanPage = () => {
               label="Sub-Bab 2: Langkah-Langkah Penyelesaian Masalah"
               iconColor="text-orange-400"
             />
-            {expandedSections.includes("langkah") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}
@@ -569,7 +569,7 @@ const PemecahanMasalahHimpunanPage = () => {
               label='Sub-Bab 3: Strategi Cepat — "Tips Jitu"'
               iconColor="text-yellow-400"
             />
-            {expandedSections.includes("tips") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}

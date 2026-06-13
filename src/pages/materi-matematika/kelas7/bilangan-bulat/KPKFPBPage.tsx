@@ -43,13 +43,13 @@ const KPKFPBPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Kelipatan dan Kelipatan Persekutuan</span>
               </div>
-              {expandedSections.includes("kelipatan") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("kelipatan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
@@ -108,13 +108,13 @@ const KPKFPBPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Faktor dan Faktor Persekutuan</span>
               </div>
-              {expandedSections.includes("faktor") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("faktor") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
@@ -176,13 +176,13 @@ const KPKFPBPage = () => {
                 <Layers className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Metode Faktorisasi Prima</span>
               </div>
-              {expandedSections.includes("faktorisasi") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("faktorisasi") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
@@ -253,13 +253,13 @@ const KPKFPBPage = () => {
                 <Calculator className="w-5 h-5 text-cyan-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal KPK (Bertingkat)</span>
               </div>
-              {expandedSections.includes("contoh-kpk") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("contoh-kpk") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 {/* Soal Mudah */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -377,13 +377,13 @@ const KPKFPBPage = () => {
                 <Calculator className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal FPB (Bertingkat)</span>
               </div>
-              {expandedSections.includes("contoh-fpb") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("contoh-fpb") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 {/* Soal Mudah */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -497,13 +497,13 @@ const KPKFPBPage = () => {
                 <Zap className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">Aplikasi KPK dan FPB dalam Kehidupan</span>
               </div>
-              {expandedSections.includes("aplikasi") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("aplikasi") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 {/* Aplikasi KPK */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">

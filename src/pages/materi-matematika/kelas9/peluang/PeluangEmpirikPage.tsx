@@ -32,7 +32,7 @@ const PeluangEmpirikPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -67,7 +67,7 @@ const PeluangEmpirikPage = () => {
           {/* ── PENGANTAR ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Peluang Empirik?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pernah iseng melempar koin 100 kali dan mencatat hasilnya? Dari percobaan nyata itulah lahir konsep <strong className="text-cyan-300">Peluang Empirik</strong>. Berbeda dengan peluang yang dihitung dari teori, peluang empirik berangkat dari <em>data hasil percobaan sungguhan</em>. Semakin banyak percobaan yang dilakukan, semakin dekat nilai peluang empirik mendekati nilai sebenarnya!
@@ -119,7 +119,7 @@ const PeluangEmpirikPage = () => {
           {/* ── SUB-BAB KONSEP ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400" title="📘 Rumus & Konsep Peluang Empirik" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -218,7 +218,7 @@ const PeluangEmpirikPage = () => {
           {/* ── CONTOH SOAL ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="📝 Contoh Soal & Pembahasan" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* SOAL 1 — MUDAH */}
@@ -332,7 +332,7 @@ const PeluangEmpirikPage = () => {
           {/* ── RANGKUMAN ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-primary" title="📋 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="grid grid-cols-1 gap-2 font-body text-sm">
                   {[

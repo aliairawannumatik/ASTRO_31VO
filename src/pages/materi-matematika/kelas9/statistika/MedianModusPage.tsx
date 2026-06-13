@@ -756,7 +756,7 @@ const MedianModusPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Median & Modus — Dua Saudara Rata-Rata" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Selain rata-rata, ada dua ukuran pemusatan data lain yang sering digunakan:
@@ -787,7 +787,7 @@ const MedianModusPage = () => {
           {/* SUB-BAB 1: MEDIAN DATA TUNGGAL (JUMLAH GANJIL) */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="📘 Sub-Bab 1: Median Data Tunggal (Jumlah Data Ganjil)" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
@@ -842,7 +842,7 @@ const MedianModusPage = () => {
           {/* Contoh Soal Sub-Bab 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400" title="📝 Contoh Soal — Median Data Ganjil" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -1018,7 +1018,7 @@ const MedianModusPage = () => {
           {/* SUB-BAB 2: MEDIAN DATA TUNGGAL (JUMLAH GENAP) */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep2" icon={<Target className="w-5 h-5" />} iconColor="text-indigo-400" title="📘 Sub-Bab 2: Median Data Tunggal (Jumlah Data Genap)" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-indigo-300">🎯 Ringkasan Intisari</p>
@@ -1086,7 +1086,7 @@ const MedianModusPage = () => {
           {/* Contoh Soal Sub-Bab 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Calculator className="w-5 h-5" />} iconColor="text-indigo-400" title="📝 Contoh Soal — Median Data Tunggal (Genap)" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -1276,7 +1276,7 @@ const MedianModusPage = () => {
           {/* SUB-BAB 4: MODUS DATA TUNGGAL */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep4" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="📘 Sub-Bab 4: Modus Data Tunggal" />
-            {expandedSections.includes("konsep4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-orange-300">🎯 Ringkasan Intisari</p>
@@ -1344,7 +1344,7 @@ const MedianModusPage = () => {
           {/* Contoh Soal Sub-Bab 4 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh4" icon={<Calculator className="w-5 h-5" />} iconColor="text-orange-400" title="📝 Contoh Soal — Modus Data Tunggal" />
-            {expandedSections.includes("contoh4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -1544,7 +1544,7 @@ const MedianModusPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BarChart2 className="w-5 h-5" />} iconColor="text-yellow-400" title="🏁 Rangkuman Median & Modus" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/60 border border-purple-500/20 rounded-xl p-4 space-y-4">
                   <p className="font-body text-sm font-bold text-purple-300 text-center mb-2">⭐ Rumus-Rumus Kunci Median & Modus</p>

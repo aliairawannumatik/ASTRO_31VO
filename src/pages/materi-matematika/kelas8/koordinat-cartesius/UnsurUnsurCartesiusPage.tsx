@@ -29,7 +29,7 @@ const UnsurUnsurCartesiusPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
 
@@ -116,7 +116,7 @@ const UnsurUnsurCartesiusPage = () => {
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Dari GPS ke Matematika — Koordinat Ada di Mana-mana!" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Saat kamu share lokasi ke teman lewat Google Maps, kamu sebenarnya sedang berbagi dua angka: garis lintang dan garis bujur. Itulah konsep <strong className="text-cyan-300">koordinat</strong>! Dalam matematika, kita menggunakan <strong className="text-cyan-300">Diagram Kartesius</strong> — sebuah sistem peta angka yang diciptakan filsuf Prancis René Descartes — untuk menentukan posisi setiap titik di bidang datar secara tepat dan jelas.
@@ -146,7 +146,7 @@ const UnsurUnsurCartesiusPage = () => {
           {/* UNSUR-UNSUR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="unsur" icon={<Grid className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Komponen Utama Diagram Kartesius" />
-            {expandedSections.includes("unsur") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -189,7 +189,7 @@ const UnsurUnsurCartesiusPage = () => {
           {/* KUADRAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="kuadran" icon={<Grid className="w-5 h-5" />} iconColor="text-violet-400" title="🧭 Empat Kuadran — Wilayah di Bidang Kartesius" />
-            {expandedSections.includes("kuadran") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/80">Sumbu-x dan sumbu-y membagi bidang Kartesius menjadi <strong className="text-violet-300">4 daerah</strong> yang disebut kuadran, diberi nomor romawi I, II, III, IV berlawanan arah jarum jam:</p>
 
@@ -225,7 +225,7 @@ const UnsurUnsurCartesiusPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -275,7 +275,7 @@ const UnsurUnsurCartesiusPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Sedang" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -307,7 +307,7 @@ const UnsurUnsurCartesiusPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Sulit" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -343,7 +343,7 @@ const UnsurUnsurCartesiusPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3 text-sm font-body">
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs border-collapse">

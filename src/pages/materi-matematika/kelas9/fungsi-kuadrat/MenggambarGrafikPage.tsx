@@ -27,7 +27,7 @@ const MenggambarGrafikPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
 
@@ -101,7 +101,7 @@ const MenggambarGrafikPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400"
               title="🎨 Melukis Parabola Langkah demi Langkah!" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="cyan">
                   <p className="font-body text-sm leading-relaxed">
@@ -124,7 +124,7 @@ const MenggambarGrafikPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="teori" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400"
               title="📘 Langkah-Langkah Menggambar Grafik" />
-            {expandedSections.includes("teori") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Box color="purple">
                   <p className="font-body text-sm font-semibold text-purple-300 mb-3">🎯 Ringkasan Intisari — 5 Langkah Utama</p>
@@ -193,7 +193,7 @@ const MenggambarGrafikPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400"
               title="📝 Contoh Soal — Menggambar Grafik" />
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-7">
 
                 <ExampleBlock level="MUDAH" no={1}

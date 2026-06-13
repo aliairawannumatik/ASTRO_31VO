@@ -28,7 +28,7 @@ const JarakTitikGarisPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
 
@@ -98,7 +98,7 @@ const JarakTitikGarisPage = () => {
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Mengapa Kita Perlu Mengukur Jarak di Koordinat?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Di peta digital, berapa jarak lurus dari rumahmu ke sekolah? Di game, berapa jarak karakter dari musuh? Semua pertanyaan ini dijawab dengan rumus yang sama: gabungan <strong className="text-cyan-300">koordinat Kartesius</strong> dan <strong className="text-cyan-300">Teorema Pythagoras</strong>. Konsep ini juga fundamental untuk menghitung jarak terdekat sebuah titik ke sebuah garis — dipakai dalam grafis komputer, engineering, dan GPS!
@@ -110,7 +110,7 @@ const JarakTitikGarisPage = () => {
           {/* JARAK DUA TITIK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="jarakdua" icon={<Ruler className="w-5 h-5" />} iconColor="text-cyan-400" title="📏 Bagian 1 — Jarak Antar Dua Titik" />
-            {expandedSections.includes("jarakdua") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -142,7 +142,7 @@ const JarakTitikGarisPage = () => {
           {/* JARAK TITIK KE GARIS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="jarakgaris" icon={<Ruler className="w-5 h-5" />} iconColor="text-green-400" title="📏 Bagian 2 — Jarak Titik ke Garis" />
-            {expandedSections.includes("jarakgaris") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-green-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -179,7 +179,7 @@ const JarakTitikGarisPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Mudah (Jarak Dua Titik)" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -206,7 +206,7 @@ const JarakTitikGarisPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Sedang (Jarak Titik ke Garis)" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -241,7 +241,7 @@ const JarakTitikGarisPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Sulit (Jarak ke Garis Miring)" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -275,7 +275,7 @@ const JarakTitikGarisPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman Rumus Jarak" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3 text-sm font-body">
                 <div className="grid grid-cols-1 gap-3">
                   {[

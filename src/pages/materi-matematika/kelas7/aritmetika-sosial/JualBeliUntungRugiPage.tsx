@@ -554,7 +554,7 @@ const JualBeliUntungRugiPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* ── PENGANTAR ─────────────────────────────────────────── */}
-          <Section id="intro" expanded={expandedSections.includes("intro")} onToggle={toggleSection}
+          <Section id="intro" expanded={true} onToggle={toggleSection}
             icon={<Lightbulb className="w-5 h-5 text-yellow-400" />}
             title="Kenapa Harus Paham Untung & Rugi?">
             <div className="space-y-4">
@@ -592,7 +592,7 @@ const JualBeliUntungRugiPage = () => {
           </Section>
 
           {/* ── RUMUS UNTUNG & RUGI ────────────────────────────────── */}
-          <Section id="konsep" expanded={expandedSections.includes("konsep")} onToggle={toggleSection}
+          <Section id="konsep" expanded={true} onToggle={toggleSection}
             icon={<Target className="w-5 h-5 text-green-400" />}
             title="Rumus Untung & Rugi">
             <div className="space-y-5">
@@ -653,7 +653,7 @@ const JualBeliUntungRugiPage = () => {
           </Section>
 
           {/* ── IMPAS ─────────────────────────────────────────────── */}
-          <Section id="impas" expanded={expandedSections.includes("impas")} onToggle={toggleSection}
+          <Section id="impas" expanded={true} onToggle={toggleSection}
             icon={<Minus className="w-5 h-5 text-yellow-300" />}
             title="Kondisi Impas (Break Even)">
             <div className="space-y-4">
@@ -691,7 +691,7 @@ const JualBeliUntungRugiPage = () => {
           </Section>
 
           {/* ── PERSENTASE & MENCARI HB ───────────────────────────── */}
-          <Section id="persen" expanded={expandedSections.includes("persen")} onToggle={toggleSection}
+          <Section id="persen" expanded={true} onToggle={toggleSection}
             icon={<Target className="w-5 h-5 text-purple-400" />}
             title="Persentase Untung/Rugi & Mencari Harga Beli">
             <div className="space-y-5">
@@ -750,7 +750,7 @@ const JualBeliUntungRugiPage = () => {
           </Section>
 
           {/* ── TIPS & STRATEGI ───────────────────────────────────── */}
-          <Section id="tips" expanded={expandedSections.includes("tips")} onToggle={toggleSection}
+          <Section id="tips" expanded={true} onToggle={toggleSection}
             icon={<Star className="w-5 h-5 text-yellow-400" />}
             title="Tips & Strategi Mengerjakan Soal">
             <div className="grid grid-cols-1 gap-3">
@@ -772,7 +772,7 @@ const JualBeliUntungRugiPage = () => {
           </Section>
 
           {/* ── KALKULATOR INTERAKTIF ─────────────────────────────── */}
-          <Section id="kalkulator" expanded={expandedSections.includes("kalkulator")} onToggle={toggleSection}
+          <Section id="kalkulator" expanded={true} onToggle={toggleSection}
             icon={<Calculator className="w-5 h-5 text-emerald-400" />}
             title="Kalkulator Jual Beli Interaktif">
             <div className="space-y-3">
@@ -784,14 +784,14 @@ const JualBeliUntungRugiPage = () => {
           </Section>
 
           {/* ── MINI KUIS ─────────────────────────────────────────── */}
-          <Section id="kuis" expanded={expandedSections.includes("kuis")} onToggle={toggleSection}
+          <Section id="kuis" expanded={true} onToggle={toggleSection}
             icon={<Star className="w-5 h-5 text-emerald-400" />}
             title="Mini Kuis — Uji Pemahamanmu!">
             <MiniKuis />
           </Section>
 
           {/* ── CONTOH SOAL ───────────────────────────────────────── */}
-          <Section id="contoh" expanded={expandedSections.includes("contoh")} onToggle={toggleSection}
+          <Section id="contoh" expanded={true} onToggle={toggleSection}
             icon={<Calculator className="w-5 h-5 text-blue-400" />}
             title="Contoh Soal dan Pembahasan">
             <div className="space-y-6">

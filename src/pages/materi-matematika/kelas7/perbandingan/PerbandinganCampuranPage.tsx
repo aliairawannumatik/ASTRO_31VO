@@ -43,9 +43,9 @@ const PerbandinganCampuranPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Apa Itu Perbandingan Campuran?</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Perbandingan campuran muncul ketika <strong className="text-primary">tiga variabel atau lebih</strong> saling terkait secara bersamaan — melibatkan gabungan antara hubungan senilai dan berbalik nilai dalam satu soal.
@@ -87,9 +87,9 @@ const PerbandinganCampuranPage = () => {
                 <Target className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Rumus Campuran</span>
               </div>
-              {expandedSections.includes("konsep") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Cara paling efisien menyelesaikan perbandingan campuran adalah dengan <strong className="text-primary">Rumus Kerja</strong> berikut. Rumus ini menggabungkan ketiga variabel sekaligus:
@@ -147,9 +147,9 @@ const PerbandinganCampuranPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal dan Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - MUDAH */}

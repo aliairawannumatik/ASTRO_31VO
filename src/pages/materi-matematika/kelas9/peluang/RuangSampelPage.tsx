@@ -34,7 +34,7 @@ const RuangSampelPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -73,7 +73,7 @@ const RuangSampelPage = () => {
           {/* ── PENGANTAR ──────────────────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Memahami Ruang Sampel" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu sedang melempar sebuah koin ke udara. Koin itu bisa jatuh menunjukkan sisi <strong className="text-cyan-300">Angka</strong> atau sisi <strong className="text-cyan-300">Gambar</strong>. Nah, himpunan semua hasil yang <em>mungkin</em> terjadi itulah yang disebut <strong className="text-cyan-300">Ruang Sampel</strong>!
@@ -135,7 +135,7 @@ const RuangSampelPage = () => {
           ════════════════════════════════════════════════════════════ */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: Ruang Sampel Kejadian Tunggal" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -262,7 +262,7 @@ const RuangSampelPage = () => {
           {/* ── CONTOH SOAL SUB-BAB 1 ──────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1a" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📝 Contoh Soal Sub-Bab 1" />
-            {expandedSections.includes("contoh1a") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* SOAL 1 — MUDAH */}
@@ -377,7 +377,7 @@ const RuangSampelPage = () => {
           ════════════════════════════════════════════════════════════ */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep2" icon={<Layers className="w-5 h-5" />} iconColor="text-cyan-400" title="📗 Sub-Bab 2: Ruang Sampel Kejadian Majemuk" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
@@ -550,7 +550,7 @@ const RuangSampelPage = () => {
           {/* ── CONTOH SOAL SUB-BAB 2 ──────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2a" icon={<Layers className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal Sub-Bab 2" />
-            {expandedSections.includes("contoh2a") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* SOAL 1 — MUDAH */}
@@ -671,7 +671,7 @@ const RuangSampelPage = () => {
           {/* ── RANGKUMAN ──────────────────────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="📋 Rangkuman & Tabel Ruang Sampel" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-body border-collapse">

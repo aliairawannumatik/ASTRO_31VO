@@ -34,7 +34,7 @@ const NotasiIlmiahPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -58,7 +58,7 @@ const NotasiIlmiahPage = () => {
           {/* ===== PENGANTAR ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🔭 Ketika Angka Terlalu Besar atau Terlalu Kecil..." />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Jarak dari Bumi ke Matahari sekitar <strong className="text-white">150.000.000.000 meter</strong>.
@@ -109,7 +109,7 @@ const NotasiIlmiahPage = () => {
           {/* ===================== SUB-BAB 1: BENTUK UMUM ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 1: Bentuk Umum Notasi Ilmiah" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
@@ -217,7 +217,7 @@ const NotasiIlmiahPage = () => {
           {/* Contoh Soal Sub-Bab 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400" title="📝 Contoh Soal — Bentuk Umum Notasi Ilmiah" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -312,7 +312,7 @@ const NotasiIlmiahPage = () => {
           {/* ===================== SUB-BAB 2: ATURAN PENULISAN ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep2" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="📘 Sub-Bab 2: Aturan Penulisan Notasi Ilmiah" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
@@ -387,7 +387,7 @@ const NotasiIlmiahPage = () => {
           {/* Contoh Soal Sub-Bab 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400" title="📝 Contoh Soal — Aturan Penulisan Notasi Ilmiah" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
@@ -484,7 +484,7 @@ const NotasiIlmiahPage = () => {
           {/* ===================== SUB-BAB 3: OPERASI MATEMATIKA ===================== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep3" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="📘 Sub-Bab 3: Operasi Matematika pada Notasi Ilmiah" />
-            {expandedSections.includes("konsep3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
@@ -571,7 +571,7 @@ const NotasiIlmiahPage = () => {
           {/* Contoh Soal Sub-Bab 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<Calculator className="w-5 h-5" />} iconColor="text-orange-400" title="📝 Contoh Soal — Operasi pada Notasi Ilmiah" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">

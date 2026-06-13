@@ -177,9 +177,9 @@ const PerbandinganSenilaiPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Kunci: Bagaimana Dua Besaran Bergerak Bersama?</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan dua skenario berbeda. Pertama, semakin banyak bensin yang kamu isi, semakin jauh kamu bisa berkendara — keduanya naik bersama. Kedua, semakin banyak pekerja yang menggarap sawah, semakin cepat sawah itu selesai — satu naik, yang lain turun.
@@ -265,9 +265,9 @@ const PerbandinganSenilaiPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Perbandingan Senilai</span>
               </div>
-              {expandedSections.includes("senilai") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("senilai") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pada perbandingan senilai, <strong className="text-primary">rasio antara dua besaran selalu konstan</strong> (tetap). Sehingga ketika salah satu berubah, yang lain berubah secara proporsional.
@@ -401,9 +401,9 @@ const PerbandinganSenilaiPage = () => {
                 <Target className="w-5 h-5 text-red-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Perbandingan Berbalik Nilai</span>
               </div>
-              {expandedSections.includes("berbalik") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("berbalik") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pada perbandingan berbalik nilai, <strong className="text-primary">hasil kali kedua besaran selalu konstan</strong>. Artinya, saat satu naik dua kali lipat, yang lain turun menjadi setengahnya.
@@ -513,9 +513,9 @@ const PerbandinganSenilaiPage = () => {
                 <AlertTriangle className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Kasus Khusus: Proyek yang Terhenti</span>
               </div>
-              {expandedSections.includes("kasus") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("kasus") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Soal tingkat lanjut sering menggabungkan berbalik nilai dengan konsep <strong className="text-orange-300">sisa pekerjaan</strong>. Strategi penyelesaiannya adalah menghitung "satuan kerja" total lalu menggunakan sisanya.
@@ -554,9 +554,9 @@ const PerbandinganSenilaiPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal dan Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - MUDAH */}

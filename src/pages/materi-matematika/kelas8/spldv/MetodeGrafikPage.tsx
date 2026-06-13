@@ -32,7 +32,7 @@ const MetodeGrafikPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -128,7 +128,7 @@ const MetodeGrafikPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="lab" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400"
               title="🖊️ Lab Interaktif: Gambar Garis & Temukan Solusi SPLDV" />
-            {expandedSections.includes("lab") && (
+            {true && (
               <div className="px-4 pb-5 space-y-3">
                 <p className="font-body text-xs text-white/55 leading-relaxed">
                   Seret titik-titik ke posisi yang kamu inginkan untuk menentukan dua garis, lalu gambar kedua garis tersebut.
@@ -142,7 +142,7 @@ const MetodeGrafikPage = () => {
           {/* ── PENGANTAR ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Ide Dasar Metode Grafik" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Setiap PLDV bisa digambar sebagai sebuah <strong className="text-cyan-300">garis lurus</strong> di bidang koordinat Kartesius. Karena SPLDV memiliki dua PLDV, kita akan menggambar <em>dua garis</em>. Solusi SPLDV adalah <strong className="text-cyan-300">titik potong</strong> kedua garis tersebut — koordinat titik itulah nilai <InlineMath math="x" /> dan <InlineMath math="y" /> yang memenuhi kedua persamaan!
@@ -174,7 +174,7 @@ const MetodeGrafikPage = () => {
           {/* ── LANGKAH-LANGKAH ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="langkah" icon={<BarChart2 className="w-5 h-5" />} iconColor="text-blue-400" title="📘 Langkah-Langkah Metode Grafik" />
-            {expandedSections.includes("langkah") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
@@ -246,7 +246,7 @@ const MetodeGrafikPage = () => {
           {/* ── CONTOH SOAL ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="📝 Contoh Soal & Pembahasan" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* SOAL 1 — MUDAH */}
@@ -464,7 +464,7 @@ const MetodeGrafikPage = () => {
           {/* ── RANGKUMAN ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-primary" title="📋 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="grid grid-cols-1 gap-2 font-body text-sm">
                   {[

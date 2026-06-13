@@ -43,7 +43,7 @@ const JenisHimpunanPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{label}</span>
       </div>
-      {expandedSections.includes(id) ? (
+      {true ? (
         <ChevronUp className="w-5 h-5 text-primary" />
       ) : (
         <ChevronDown className="w-5 h-5 text-primary" />
@@ -79,7 +79,7 @@ const JenisHimpunanPage = () => {
               label="Sub-Bab 1: Himpunan Berhingga"
               iconColor="text-green-400"
             />
-            {expandedSections.includes("berhingga") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
@@ -215,7 +215,7 @@ const JenisHimpunanPage = () => {
               label="Sub-Bab 2: Himpunan Kosong"
               iconColor="text-slate-300"
             />
-            {expandedSections.includes("kosong") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-slate-500/10 border border-slate-500/30 rounded-lg p-4 space-y-3">
@@ -354,7 +354,7 @@ const JenisHimpunanPage = () => {
               label="Sub-Bab 3: Himpunan Tak Hingga"
               iconColor="text-blue-400"
             />
-            {expandedSections.includes("takhingga") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
@@ -490,7 +490,7 @@ const JenisHimpunanPage = () => {
               label="Sub-Bab 4: Himpunan Bagian"
               iconColor="text-purple-400"
             />
-            {expandedSections.includes("bagian") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-4">
@@ -724,7 +724,7 @@ const JenisHimpunanPage = () => {
               label="Sub-Bab 5: Himpunan Semesta"
               iconColor="text-yellow-400"
             />
-            {expandedSections.includes("semesta") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 space-y-3">
@@ -871,7 +871,7 @@ const JenisHimpunanPage = () => {
               label="Sub-Bab 6: Himpunan Kuasa"
               iconColor="text-orange-400"
             />
-            {expandedSections.includes("kuasa") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">

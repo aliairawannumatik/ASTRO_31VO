@@ -31,7 +31,7 @@ const PeluangKejadianMajemukPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id)
+      {true
         ? <ChevronUp className="w-5 h-5 text-primary" />
         : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -94,7 +94,7 @@ const PeluangKejadianMajemukPage = () => {
           {/* ── PENGANTAR ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Apa Itu Kejadian Majemuk?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   <strong className="text-cyan-300">Kejadian majemuk</strong> adalah gabungan dari dua kejadian atau lebih. Misalnya, saat melempar dadu, kita bisa menanyakan: "Berapa peluang muncul angka genap <em>atau</em> angka lebih dari 4?" — ini melibatkan dua kejadian sekaligus.
@@ -143,7 +143,7 @@ const PeluangKejadianMajemukPage = () => {
           {/* ── SALING LEPAS ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="saling-lepas" icon={<GitBranch className="w-5 h-5" />} iconColor="text-blue-400" title="🔵 Kejadian Saling Lepas (Mutually Exclusive)" />
-            {expandedSections.includes("saling-lepas") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dua kejadian disebut <strong className="text-blue-300">saling lepas</strong> jika tidak mungkin keduanya terjadi pada saat yang sama. Artinya irisan keduanya kosong: <InlineMath math="A \cap B = \emptyset" />.
@@ -190,7 +190,7 @@ const PeluangKejadianMajemukPage = () => {
           {/* ── TIDAK SALING LEPAS ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="tidak-saling-lepas" icon={<GitMerge className="w-5 h-5" />} iconColor="text-purple-400" title="🟣 Kejadian Tidak Saling Lepas (Non-Mutually Exclusive)" />
-            {expandedSections.includes("tidak-saling-lepas") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dua kejadian disebut <strong className="text-purple-300">tidak saling lepas</strong> jika bisa terjadi bersamaan. Ada anggota yang merupakan bagian dari kedua kejadian sekaligus: <InlineMath math="A \cap B \neq \emptyset" />.
@@ -242,7 +242,7 @@ const PeluangKejadianMajemukPage = () => {
           {/* ── SALING BEBAS ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="saling-bebas" icon={<Layers className="w-5 h-5" />} iconColor="text-green-400" title="🟢 Kejadian Saling Bebas (Independent Events)" />
-            {expandedSections.includes("saling-bebas") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dua kejadian disebut <strong className="text-green-300">saling bebas</strong> jika terjadinya salah satu kejadian tidak mempengaruhi peluang kejadian lainnya. Contoh klasik: melempar dua koin secara terpisah.
@@ -311,7 +311,7 @@ const PeluangKejadianMajemukPage = () => {
           {/* ── KEJADIAN BERSYARAT ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="bersyarat" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="🟠 Peluang Kejadian Bersyarat (Conditional Probability)" />
-            {expandedSections.includes("bersyarat") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   <strong className="text-orange-300">Peluang bersyarat</strong> adalah peluang terjadinya kejadian A dengan syarat bahwa kejadian B sudah terjadi. Ditulis <InlineMath math="P(A|B)" /> (dibaca: "peluang A diketahui B").
@@ -354,7 +354,7 @@ const PeluangKejadianMajemukPage = () => {
           {/* ── CONTOH SOAL ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh" icon={<BookOpen className="w-5 h-5" />} iconColor="text-yellow-400" title="📝 Contoh Soal & Pembahasan" />
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* SOAL 1 — MUDAH */}
@@ -474,7 +474,7 @@ const PeluangKejadianMajemukPage = () => {
           {/* ── RANGKUMAN ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-primary" title="📋 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 gap-2 font-body text-sm">
                   {[

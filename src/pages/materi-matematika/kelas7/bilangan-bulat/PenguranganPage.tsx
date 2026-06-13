@@ -389,13 +389,13 @@ const PenguranganBilanganBulatPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Kunci Rahasia Pengurangan Bilangan Bulat</span>
               </div>
-              {expandedSections.includes("intro") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pernah bingung saat menghitung <InlineMath math="5 - (-3)" />? Tenang, kamu tidak sendirian! Pengurangan bilangan bulat memang terlihat tricky, tapi sebenarnya ada <strong className="text-primary">satu trik sederhana</strong> yang akan membuatmu jago menyelesaikan soal apapun.
@@ -439,13 +439,13 @@ const PenguranganBilanganBulatPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Ringkasan Intisari: Konsep Pengurangan</span>
               </div>
-              {expandedSections.includes("konsep") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Cara paling mudah memahami pengurangan bilangan bulat adalah dengan <strong className="text-primary">garis bilangan</strong>. Di garis bilangan, pengurangan artinya bergerak ke <strong className="text-red-400">KIRI</strong>.
@@ -513,13 +513,13 @@ const PenguranganBilanganBulatPage = () => {
                 <Calculator className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal dan Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 - Mudah */}
@@ -686,13 +686,13 @@ const PenguranganBilanganBulatPage = () => {
                 <List className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Sifat-sifat Pengurangan Bilangan Bulat</span>
               </div>
-              {expandedSections.includes("sifat") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("sifat") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/70 leading-relaxed">
                   Pengurangan bilangan bulat memiliki sifat-sifat penting yang berbeda dari penjumlahan. Mari kita pelajari satu per satu:
@@ -817,13 +817,13 @@ const PenguranganBilanganBulatPage = () => {
                 <Sparkles className="w-5 h-5 text-yellow-300" />
                 <span className="font-body font-semibold text-white">Kesimpulan dan Tips</span>
               </div>
-              {expandedSections.includes("kesimpulan") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("kesimpulan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 {/* Cara 1: Garis Bilangan */}

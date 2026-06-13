@@ -74,9 +74,9 @@ const PPhPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">PPh: Pajak dari Penghasilan yang Kamu Terima</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="grid grid-cols-2 gap-3 items-start">
@@ -202,9 +202,9 @@ const PPhPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Rumus-Rumus PPh</span>
               </div>
-              {expandedSections.includes("konsep") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 space-y-4">
@@ -291,9 +291,9 @@ const PPhPage = () => {
                 <FileText className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">Cara Membaca Soal PPh</span>
               </div>
-              {expandedSections.includes("cara") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("cara") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80">Dalam soal PPh, ada tiga tipe pertanyaan utama. Kenali kalimat kuncinya:</p>
                 <div className="grid grid-cols-1 gap-3">
@@ -364,9 +364,9 @@ const PPhPage = () => {
                 </div>
                 <span className="ml-1 bg-emerald-400 text-black text-[10px] font-black px-2 py-0.5 rounded-full tracking-wide">COBA!</span>
               </div>
-              {expandedSections.includes("kalkulator") ? <ChevronUp className="w-5 h-5 text-emerald-400" /> : <ChevronDown className="w-5 h-5 text-emerald-400" />}
+              {true ? <ChevronUp className="w-5 h-5 text-emerald-400" /> : <ChevronDown className="w-5 h-5 text-emerald-400" />}
             </button>
-            {expandedSections.includes("kalkulator") && (
+            {true && (
               <div className="px-5 pb-5 pt-2 space-y-4">
                 <div className="flex gap-2">
                   {([
@@ -495,9 +495,9 @@ const PPhPage = () => {
                 <AlertCircle className="w-5 h-5 text-red-400" />
                 <span className="font-body font-semibold text-white">Kesalahan Umum & Tips Penting</span>
               </div>
-              {expandedSections.includes("kesalahan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("kesalahan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 {[
                   {
@@ -539,9 +539,9 @@ const PPhPage = () => {
                 <BookOpen className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal & Pembahasan Lengkap</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 */}
@@ -656,9 +656,9 @@ const PPhPage = () => {
                 <Star className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Rangkuman Materi PPh</span>
               </div>
-              {expandedSections.includes("rangkuman") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/60 border border-border rounded-xl p-4 space-y-3">
                   {[

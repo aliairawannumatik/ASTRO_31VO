@@ -29,7 +29,7 @@ const PolaKhususPage = () => {
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
 
@@ -64,7 +64,7 @@ const PolaKhususPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Pola Khusus — Keindahan Matematika" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dalam dunia matematika, ada pola-pola yang begitu terkenal dan muncul berulang kali di berbagai bidang — dari arsitektur hingga alam. Kita menyebutnya <strong className="text-cyan-300">pola khusus</strong>. Mengenalinya akan membuat kamu jauh lebih cepat menjawab soal dan memahami dunia!
@@ -81,7 +81,7 @@ const PolaKhususPage = () => {
           {/* KATALOG POLA KHUSUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="katalog" icon={<Sparkles className="w-5 h-5" />} iconColor="text-violet-400" title="📚 Katalog 7 Pola Khusus" />
-            {expandedSections.includes("katalog") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 {/* 1. Pola Genap */}
@@ -264,7 +264,7 @@ const PolaKhususPage = () => {
           {/* ANIMASI BUSUR BEDA */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="animasi" icon={<Activity className="w-5 h-5" />} iconColor="text-cyan-400" title="🌀 Animasi Busur Beda — Visualisasi Selisih Setiap Pola" />
-            {expandedSections.includes("animasi") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/70 leading-relaxed">
                   Pilih sebuah pola di bawah lalu perhatikan <strong className="text-cyan-300">busur melengkung</strong> yang menunjukkan <strong className="text-cyan-300">beda (selisih)</strong> antara dua suku yang berurutan. Busur muncul satu per satu dari kiri ke kanan — amati polanya!
@@ -277,7 +277,7 @@ const PolaKhususPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah (Pola Persegi)" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -327,7 +327,7 @@ const PolaKhususPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang (Fibonacci)" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -371,7 +371,7 @@ const PolaKhususPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit (Segitiga Pascal)" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">

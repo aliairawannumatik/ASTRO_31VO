@@ -1741,7 +1741,7 @@ const DilatasisPage = () => {
               iconColor="#facc15"
               label="🚀 Apa Itu Dilatasi? Kenalan Dulu, Yuk!"
             />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pernah melihat foto yang diperbesar atau diperkecil di HP kamu? Atau mungkin kamu pernah memakai
@@ -1776,7 +1776,7 @@ const DilatasisPage = () => {
               iconColor="#4ade80"
               label="📘 Sub-Bab 1: Pengertian Dilatasi"
             />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {/* Ringkasan Intisari */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
@@ -1873,7 +1873,7 @@ const DilatasisPage = () => {
               iconColor="#facc15"
               label="Animasi Interaktif — Dilatasi Titik"
             />
-            {expandedSections.includes("animasi-titik") && (
+            {true && (
               <div className="px-5 pb-5">
                 <AnimasiDilatasiTitik />
               </div>
@@ -1888,7 +1888,7 @@ const DilatasisPage = () => {
               iconColor="#34d399"
               label="Animasi Interaktif — Dilatasi Bangun Datar"
             />
-            {expandedSections.includes("animasi") && (
+            {true && (
               <div className="px-5 pb-5">
                 <AnimasiDilatasi />
               </div>
@@ -1905,7 +1905,7 @@ const DilatasisPage = () => {
               iconColor="#60a5fa"
               label="📘 Sub-Bab 2: Dilatasi Pusat O(0,0) dengan Faktor Skala k"
             />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-blue-300">🎯 Ringkasan Intisari</p>
@@ -1960,7 +1960,7 @@ const DilatasisPage = () => {
               iconColor="#60a5fa"
               label="📝 Contoh Soal — Dilatasi Pusat O(0,0)"
             />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -2134,7 +2134,7 @@ const DilatasisPage = () => {
               iconColor="#c084fc"
               label="📘 Sub-Bab 3: Dilatasi Pusat P(a,b) dengan Faktor Skala k"
             />
-            {expandedSections.includes("konsep3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
@@ -2195,7 +2195,7 @@ const DilatasisPage = () => {
               iconColor="#c084fc"
               label="📝 Contoh Soal — Dilatasi Pusat P(a,b)"
             />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -2368,7 +2368,7 @@ const DilatasisPage = () => {
               iconColor="#fb923c"
               label="📈 [Tambahan] Dilatasi pada Kurva (Linear)"
             />
-            {expandedSections.includes("konsep-kurva") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-orange-300">🎯 Konsep Utama</p>
@@ -2454,7 +2454,7 @@ const DilatasisPage = () => {
               iconColor="#fb923c"
               label="Animasi Interaktif — Dilatasi Kurva Linear"
             />
-            {expandedSections.includes("animasi-kurva") && (
+            {true && (
               <div className="px-5 pb-5">
                 <AnimasiDilatasiKurvaLinear />
               </div>
@@ -2469,7 +2469,7 @@ const DilatasisPage = () => {
               iconColor="#fb923c"
               label="📝 Contoh Soal — Dilatasi Kurva Linear"
             />
-            {expandedSections.includes("contoh-kurva") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* ── MUDAH ── */}

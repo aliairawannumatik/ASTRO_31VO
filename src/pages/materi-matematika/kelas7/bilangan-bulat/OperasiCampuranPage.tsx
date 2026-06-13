@@ -42,13 +42,13 @@ const OperasiCampuranBilanganBulatPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Apa itu Operasi Campuran?</span>
               </div>
-              {expandedSections.includes("intro") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Operasi campuran adalah perhitungan yang melibatkan <strong className="text-primary">lebih dari satu jenis operasi</strong> dalam satu ekspresi matematika. Bayangkan kamu sedang memasak: tidak hanya mencampurkan satu bahan, tapi beberapa bahan sekaligus dengan urutan tertentu agar hasilnya pas!
@@ -87,13 +87,13 @@ const OperasiCampuranBilanganBulatPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Aturan Prioritas: KaKuKaBaKu</span>
               </div>
-              {expandedSections.includes("prioritas") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("prioritas") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Untuk menyelesaikan operasi campuran, kita punya jurus sakti bernama <strong className="text-green-400">KaKuKaBaKu</strong>! Ini adalah singkatan yang membantu mengingat urutan pengerjaan:
@@ -165,13 +165,13 @@ const OperasiCampuranBilanganBulatPage = () => {
                 <Zap className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Jenis-Jenis Kurung</span>
               </div>
-              {expandedSections.includes("kurung") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("kurung") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dalam matematika, ada <strong className="text-orange-400">3 jenis kurung</strong> yang perlu kamu kenal. Masing-masing punya tingkat prioritas berbeda!
@@ -233,13 +233,13 @@ const OperasiCampuranBilanganBulatPage = () => {
                 <Calculator className="w-5 h-5 text-cyan-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal Bertingkat</span>
               </div>
-              {expandedSections.includes("contoh") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 {/* Soal Mudah */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -407,13 +407,13 @@ const OperasiCampuranBilanganBulatPage = () => {
                 <AlertTriangle className="w-5 h-5 text-red-400" />
                 <span className="font-body font-semibold text-white">Kesalahan Umum yang Harus Dihindari</span>
               </div>
-              {expandedSections.includes("kesalahan") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("kesalahan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-bold text-red-300 mb-3">Kesalahan #1: Mengerjakan dari Kiri ke Kanan Tanpa Melihat Prioritas</p>
@@ -478,13 +478,13 @@ const OperasiCampuranBilanganBulatPage = () => {
                 <Target className="w-5 h-5 text-primary" />
                 <span className="font-body font-semibold text-white">Kesimpulan & Tips Operasi Campuran</span>
               </div>
-              {expandedSections.includes("kesimpulan") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("kesimpulan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 {/* Urutan Prioritas */}

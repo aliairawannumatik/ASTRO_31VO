@@ -144,9 +144,9 @@ const BungaTunggalPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Apa Itu Bunga Tunggal?</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="rounded-xl overflow-hidden border border-border/60">
                   <img
@@ -222,9 +222,9 @@ const BungaTunggalPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Rumus-Rumus Bunga Tunggal</span>
               </div>
-              {expandedSections.includes("konsep") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("konsep") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 space-y-4">
@@ -288,9 +288,9 @@ const BungaTunggalPage = () => {
                 <Clock className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Kunci Sukses: Konsistensi Satuan Waktu</span>
               </div>
-              {expandedSections.includes("satuan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("satuan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-red-300 font-semibold">⚠️ Ini adalah jebakan paling umum dalam soal bunga tunggal!</p>
@@ -349,9 +349,9 @@ const BungaTunggalPage = () => {
                 </div>
                 <span className="ml-1 bg-amber-400 text-black text-[10px] font-black px-2 py-0.5 rounded-full tracking-wide">COBA!</span>
               </div>
-              {expandedSections.includes("kalkulator") ? <ChevronUp className="w-5 h-5 text-amber-400" /> : <ChevronDown className="w-5 h-5 text-amber-400" />}
+              {true ? <ChevronUp className="w-5 h-5 text-amber-400" /> : <ChevronDown className="w-5 h-5 text-amber-400" />}
             </button>
-            {expandedSections.includes("kalkulator") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4 pt-2">
                 <p className="font-body text-xs text-amber-200/60">Isi kolom di bawah ini, lalu tekan tombol hitung untuk mendapat hasil secara langsung.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -464,9 +464,9 @@ const BungaTunggalPage = () => {
                 <TrendingUp className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Visualisasi Pertumbuhan Uang</span>
               </div>
-              {expandedSections.includes("visual") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("visual") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-xs text-white/60">
                   Ilustrasi di bawah ini menunjukkan bagaimana uang <strong className="text-white">Rp1.000.000</strong> dengan bunga tunggal <strong className="text-white">20% per tahun</strong> tumbuh selama 5 tahun.
@@ -533,9 +533,9 @@ const BungaTunggalPage = () => {
                 <AlertCircle className="w-5 h-5 text-red-400" />
                 <span className="font-body font-semibold text-white">Kesalahan Umum & Tips Penting</span>
               </div>
-              {expandedSections.includes("kesalahan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("kesalahan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 {[
                   {
@@ -577,9 +577,9 @@ const BungaTunggalPage = () => {
                 <BookOpen className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal & Pembahasan Lengkap</span>
               </div>
-              {expandedSections.includes("contoh") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Contoh 1 */}
@@ -710,9 +710,9 @@ const BungaTunggalPage = () => {
                 <span className="font-body font-semibold text-white">Uji Pemahamanmu — Mini Quiz</span>
                 <span className="bg-purple-500/20 text-purple-300 text-[10px] font-bold px-2 py-0.5 rounded-full">{quizData.length} SOAL</span>
               </div>
-              {expandedSections.includes("quiz") ? <ChevronUp className="w-5 h-5 text-purple-400" /> : <ChevronDown className="w-5 h-5 text-purple-400" />}
+              {true ? <ChevronUp className="w-5 h-5 text-purple-400" /> : <ChevronDown className="w-5 h-5 text-purple-400" />}
             </button>
-            {expandedSections.includes("quiz") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 {!quizSelesai ? (
                   <>
@@ -807,9 +807,9 @@ const BungaTunggalPage = () => {
                 <Star className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Rangkuman Materi Bunga Tunggal</span>
               </div>
-              {expandedSections.includes("rangkuman") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/60 border border-border rounded-xl p-4 space-y-3">
                   {[

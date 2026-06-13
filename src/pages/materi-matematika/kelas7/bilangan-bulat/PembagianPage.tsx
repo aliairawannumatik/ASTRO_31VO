@@ -42,13 +42,13 @@ const PembagianBilanganBulatPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Kunci Rahasia: Pembagian = Kebalikan Perkalian</span>
               </div>
-              {expandedSections.includes("intro") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Mau tahu rahasia memahami pembagian dengan mudah? <strong className="text-primary">Pembagian adalah operasi kebalikan dari perkalian!</strong> Ini adalah kunci yang akan membantumu menyelesaikan semua soal pembagian bilangan bulat.
@@ -97,13 +97,13 @@ const PembagianBilanganBulatPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Positif : Positif = Positif</span>
               </div>
-              {expandedSections.includes("positifPositif") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("positifPositif") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Pembagian dua bilangan positif menghasilkan bilangan positif. Mari kita buktikan dengan konsep kebalikan perkalian!
@@ -146,13 +146,13 @@ const PembagianBilanganBulatPage = () => {
                 <Target className="w-5 h-5 text-red-400" />
                 <span className="font-body font-semibold text-white">Negatif : Positif = Negatif</span>
               </div>
-              {expandedSections.includes("negatifPositif") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("negatifPositif") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Yuk kita buktikan dengan konsep kebalikan perkalian! Cari bilangan yang jika dikalikan dengan pembagi menghasilkan bilangan yang dibagi.
@@ -195,13 +195,13 @@ const PembagianBilanganBulatPage = () => {
                 <Target className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Positif : Negatif = Negatif</span>
               </div>
-              {expandedSections.includes("positifNegatif") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("positifNegatif") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Dengan cara yang sama, mari kita buktikan pembagian bilangan positif dengan negatif:
@@ -244,13 +244,13 @@ const PembagianBilanganBulatPage = () => {
                 <Zap className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Negatif : Negatif = Positif</span>
               </div>
-              {expandedSections.includes("negatifNegatif") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("negatifNegatif") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Nah, sama seperti perkalian, dua bilangan negatif dibagi menghasilkan bilangan positif! Mari kita buktikan:
@@ -347,13 +347,13 @@ const PembagianBilanganBulatPage = () => {
                 <AlertCircle className="w-5 h-5 text-red-500" />
                 <span className="font-body font-semibold text-white">Pembagian dengan Nol (AWAS!)</span>
               </div>
-              {expandedSections.includes("pembagianNol") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("pembagianNol") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Ada satu hal yang WAJIB kamu ingat dalam pembagian: <strong className="text-red-400">TIDAK BOLEH membagi dengan nol!</strong>
@@ -416,13 +416,13 @@ const PembagianBilanganBulatPage = () => {
                 <Calculator className="w-5 h-5 text-cyan-400" />
                 <span className="font-body font-semibold text-white">Contoh Soal & Pembahasan</span>
               </div>
-              {expandedSections.includes("contoh") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("contoh") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
                 {/* Contoh Mudah */}
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
@@ -574,13 +574,13 @@ const PembagianBilanganBulatPage = () => {
                 <Target className="w-5 h-5 text-primary" />
                 <span className="font-body font-semibold text-white">Kesimpulan & Tips Pembagian Bilangan Bulat</span>
               </div>
-              {expandedSections.includes("kesimpulan") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("kesimpulan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 {/* Kesimpulan Aturan Tanda */}

@@ -518,7 +518,7 @@ const BrutoNettoTaraPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* 1. PENGANTAR */}
-          <Section id="intro" expanded={expandedSections.includes("intro")} onToggle={toggleSection}
+          <Section id="intro" expanded={true} onToggle={toggleSection}
             icon={<Lightbulb className="w-5 h-5 text-yellow-400" />}
             title="Berat Kotor vs Berat Bersih — Apa Bedanya?"
           >
@@ -562,7 +562,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 2. SEMUA RUMUS */}
-          <Section id="konsep" expanded={expandedSections.includes("konsep")} onToggle={toggleSection}
+          <Section id="konsep" expanded={true} onToggle={toggleSection}
             icon={<Target className="w-5 h-5 text-green-400" />}
             title="Semua Rumus Bruto, Netto, dan Tara"
           >
@@ -606,7 +606,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 4. KALKULATOR */}
-          <Section id="kalkulator" expanded={expandedSections.includes("kalkulator")} onToggle={toggleSection}
+          <Section id="kalkulator" expanded={true} onToggle={toggleSection}
             icon={<Calculator className="w-5 h-5 text-primary" />}
             title="Kalkulator Bruto, Netto, Tara Interaktif"
           >
@@ -617,7 +617,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 5. PERSEN TARA */}
-          <Section id="persen" expanded={expandedSections.includes("persen")} onToggle={toggleSection}
+          <Section id="persen" expanded={true} onToggle={toggleSection}
             icon={<Target className="w-5 h-5 text-cyan-400" />}
             title="Tara dalam Persentase — Mengapa Penting?"
           >
@@ -657,7 +657,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 6. KONTEKS KEHIDUPAN NYATA */}
-          <Section id="konteks" expanded={expandedSections.includes("konteks")} onToggle={toggleSection}
+          <Section id="konteks" expanded={true} onToggle={toggleSection}
             icon={<ShoppingCart className="w-5 h-5 text-pink-400" />}
             title="Bruto, Netto, Tara di Kehidupan Nyata"
           >
@@ -709,7 +709,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 7. MULTI-KEMASAN */}
-          <Section id="multikemasan" expanded={expandedSections.includes("multikemasan")} onToggle={toggleSection}
+          <Section id="multikemasan" expanded={true} onToggle={toggleSection}
             icon={<Truck className="w-5 h-5 text-indigo-400" />}
             title="Simulasi: Menghitung Banyak Kemasan Sekaligus"
           >
@@ -719,7 +719,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 8. CONTOH SOAL */}
-          <Section id="contoh" expanded={expandedSections.includes("contoh")} onToggle={toggleSection}
+          <Section id="contoh" expanded={true} onToggle={toggleSection}
             icon={<BookOpen className="w-5 h-5 text-blue-400" />}
             title="Contoh Soal dan Pembahasan Lengkap"
           >
@@ -814,7 +814,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 9. KESALAHAN UMUM */}
-          <Section id="kesalahan" expanded={expandedSections.includes("kesalahan")} onToggle={toggleSection}
+          <Section id="kesalahan" expanded={true} onToggle={toggleSection}
             icon={<AlertCircle className="w-5 h-5 text-red-400" />}
             title="Kesalahan Umum yang Sering Terjadi"
           >
@@ -852,7 +852,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 10. KUIS */}
-          <Section id="kuis" expanded={expandedSections.includes("kuis")} onToggle={toggleSection}
+          <Section id="kuis" expanded={true} onToggle={toggleSection}
             icon={<HelpCircle className="w-5 h-5 text-pink-400" />}
             title="Uji Pemahamanmu — Mini Kuis (5 Soal)"
           >
@@ -863,7 +863,7 @@ const BrutoNettoTaraPage = () => {
           </Section>
 
           {/* 11. RANGKUMAN */}
-          <Section id="rangkuman" expanded={expandedSections.includes("rangkuman")} onToggle={toggleSection}
+          <Section id="rangkuman" expanded={true} onToggle={toggleSection}
             icon={<Star className="w-5 h-5 text-yellow-400" />}
             title="Rangkuman Materi Bruto, Netto, dan Tara"
           >

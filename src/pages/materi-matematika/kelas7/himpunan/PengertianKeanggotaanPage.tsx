@@ -58,13 +58,13 @@ const PengertianKeanggotaanPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Apa Itu Himpunan? Kenapa Penting?</span>
               </div>
-              {expandedSections.includes("intro") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu sedang merapikan kamar dan mengelompokkan benda-benda: semua buku di rak,
@@ -95,13 +95,13 @@ const PengertianKeanggotaanPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">Sub-Bab 1: Pengertian Himpunan</span>
               </div>
-              {expandedSections.includes("pengertian") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("pengertian") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}
@@ -280,13 +280,13 @@ const PengertianKeanggotaanPage = () => {
                 <Layers className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">Sub-Bab 2: Notasi & Cara Penyajian Himpunan</span>
               </div>
-              {expandedSections.includes("notasi") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("notasi") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}
@@ -479,13 +479,13 @@ const PengertianKeanggotaanPage = () => {
                 <Star className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">Sub-Bab 3: Kesamaan Himpunan</span>
               </div>
-              {expandedSections.includes("kesamaan") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("kesamaan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}
@@ -666,13 +666,13 @@ const PengertianKeanggotaanPage = () => {
                 <Calculator className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">Sub-Bab 4: Himpunan Berhingga, Kosong & Tak Hingga</span>
               </div>
-              {expandedSections.includes("jenis") ? (
+              {true ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
               ) : (
                 <ChevronDown className="w-5 h-5 text-primary" />
               )}
             </button>
-            {expandedSections.includes("jenis") && (
+            {true && (
               <div className="px-5 pb-5 space-y-5">
 
                 {/* Ringkasan Intisari */}

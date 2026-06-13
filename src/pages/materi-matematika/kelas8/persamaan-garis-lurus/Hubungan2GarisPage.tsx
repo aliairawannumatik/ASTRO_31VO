@@ -38,7 +38,7 @@ const Hubungan2GarisPage = () => {
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
   const Badge = ({ label, color }: { label: string; color: string }) => (
@@ -59,7 +59,7 @@ const Hubungan2GarisPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Tiga Kemungkinan Hubungan Dua Garis" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">Ketika dua garis lurus ada di bidang yang sama, hanya ada tiga kemungkinan hubungan di antara mereka. Hubungan ini ditentukan oleh nilai gradien masing-masing garis.</p>
                 {/* 3-panel overview */}
@@ -92,7 +92,7 @@ const Hubungan2GarisPage = () => {
           {/* SEJAJAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="sejajar" icon={<Layers className="w-5 h-5" />} iconColor="text-cyan-400" title="∥ Garis Sejajar" />
-            {expandedSections.includes("sejajar") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4">
                   <p className="text-sm font-semibold text-cyan-300 mb-2 font-body">🎯 Syarat Garis Sejajar</p>
@@ -137,7 +137,7 @@ const Hubungan2GarisPage = () => {
           {/* TEGAK LURUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="tegaklurus" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="⊥ Garis Tegak Lurus (Saling Berpotongan 90°)" />
-            {expandedSections.includes("tegaklurus") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-900/20 border border-violet-500/40 rounded-xl p-4">
                   <p className="text-sm font-semibold text-violet-300 mb-2 font-body">🎯 Syarat Garis Tegak Lurus</p>
@@ -189,7 +189,7 @@ const Hubungan2GarisPage = () => {
           {/* BERPOTONGAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="berpotongan" icon={<Layers className="w-5 h-5" />} iconColor="text-green-400" title="✕ Garis Berpotongan (Tidak Sejajar, Tidak Tegak Lurus)" />
-            {expandedSections.includes("berpotongan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/20 border border-green-500/40 rounded-xl p-4">
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">🎯 Syarat Garis Berpotongan</p>
@@ -215,7 +215,7 @@ const Hubungan2GarisPage = () => {
           {/* GALERI VISUAL TIGA JENIS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="visual-trio" icon={<GitBranch className="w-5 h-5" />} iconColor="text-yellow-400" title="🎨 Galeri Visual: Perbandingan Tiga Hubungan Garis" />
-            {expandedSections.includes("visual-trio") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {/* Sejajar */}
@@ -292,7 +292,7 @@ const Hubungan2GarisPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -325,7 +325,7 @@ const Hubungan2GarisPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -364,7 +364,7 @@ const Hubungan2GarisPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -417,7 +417,7 @@ const Hubungan2GarisPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {[

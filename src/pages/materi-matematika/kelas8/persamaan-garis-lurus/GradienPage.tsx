@@ -42,7 +42,7 @@ const GradienPage = () => {
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
-      {expandedSections.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
   const Badge = ({ label, color }: { label: string; color: string }) => (
@@ -63,7 +63,7 @@ const GradienPage = () => {
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Gradien — Ukuran Kemiringan Garis" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Tanjakan jalan yang curam vs landai, lereng gunung yang terjal vs miring perlahan — semua punya tingkat kemiringan yang berbeda. Dalam matematika, tingkat kemiringan ini disebut <strong className="text-cyan-300">gradien</strong> (atau slope).
@@ -93,7 +93,7 @@ const GradienPage = () => {
           {/* DEFINISI & RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="definisi" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Definisi dan Rumus Gradien" />
-            {expandedSections.includes("definisi") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
                   <p className="text-sm font-semibold text-violet-300 mb-2 font-body">🎯 Ringkasan Intisari</p>
@@ -150,7 +150,7 @@ const GradienPage = () => {
           {/* ANIMASI INVARIANSI GRADIEN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="animasi" icon={<PlayCircle className="w-5 h-5" />} iconColor="text-cyan-400" title="🎬 Animasi: Gradien Tidak Bergantung Panjang Garis" />
-            {expandedSections.includes("animasi") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/70 leading-relaxed">
                   Kamu bisa menggambar segitiga siku-siku di <strong className="text-cyan-300">bagian mana pun</strong> dari sebuah garis —
@@ -165,7 +165,7 @@ const GradienPage = () => {
           {/* CARA MENENTUKAN GRADIEN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rumus" icon={<BookOpen className="w-5 h-5" />} iconColor="text-green-400" title="🔢 3 Cara Menentukan Gradien" />
-            {expandedSections.includes("rumus") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="space-y-3">
                   {[
@@ -205,7 +205,7 @@ const GradienPage = () => {
           {/* GALERI VISUAL GRADIEN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="visualgradien" icon={<Sliders className="w-5 h-5" />} iconColor="text-orange-400" title="🎨 Galeri Visual: Efek Berbagai Nilai Gradien" />
-            {expandedSections.includes("visualgradien") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {[
@@ -266,7 +266,7 @@ const GradienPage = () => {
           {/* JENIS GARIS KHUSUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="jenis" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-cyan-400" title="⚡ Garis Horizontal, Vertikal & Melalui Titik Asal" />
-            {expandedSections.includes("jenis") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
@@ -309,7 +309,7 @@ const GradienPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
@@ -339,7 +339,7 @@ const GradienPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
@@ -379,7 +379,7 @@ const GradienPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
@@ -418,7 +418,7 @@ const GradienPage = () => {
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {[

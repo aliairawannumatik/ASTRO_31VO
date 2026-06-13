@@ -249,7 +249,7 @@ const PenyajianDataPage = () => {
           {/* ===== PENGANTAR ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Mengapa Penyajian Data Penting?" />
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu punya ratusan nilai ujian dalam satu lembar kertas berisi angka-angka acak. Susah dibaca, kan? Nah, di sinilah penyajian data berperan — mengubah kumpulan angka mentah menjadi tampilan yang <strong className="text-cyan-300">informatif, rapi, dan mudah dipahami</strong>.
@@ -271,7 +271,7 @@ const PenyajianDataPage = () => {
           {/* ===== SUB-BAB 1: TABEL DISTRIBUSI FREKUENSI ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep5" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📘 Sub-Bab 1: Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("konsep5") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
@@ -511,7 +511,7 @@ const PenyajianDataPage = () => {
           {/* Contoh Soal Sub-Bab 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh5" icon={<Calculator className="w-5 h-5" />} iconColor="text-cyan-400" title="📝 Contoh Soal — Tabel Distribusi Frekuensi" />
-            {expandedSections.includes("contoh5") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -720,7 +720,7 @@ const PenyajianDataPage = () => {
           {/* ===== SUB-BAB 2: DIAGRAM BATANG ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep2" icon={<Target className="w-5 h-5" />} iconColor="text-blue-400" title="📘 Sub-Bab 2: Diagram Batang" />
-            {expandedSections.includes("konsep2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
@@ -975,7 +975,7 @@ const PenyajianDataPage = () => {
           {/* Contoh Soal Sub-Bab 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<Calculator className="w-5 h-5" />} iconColor="text-blue-400" title="📝 Contoh Soal — Diagram Batang" />
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -1216,7 +1216,7 @@ const PenyajianDataPage = () => {
           {/* ===== SUB-BAB 3: DIAGRAM GARIS ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep3" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="📘 Sub-Bab 3: Diagram Garis" />
-            {expandedSections.includes("konsep3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
@@ -1524,7 +1524,7 @@ const PenyajianDataPage = () => {
           {/* Contoh Soal Sub-Bab 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<Calculator className="w-5 h-5" />} iconColor="text-purple-400" title="📝 Contoh Soal — Diagram Garis" />
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -1782,7 +1782,7 @@ const PenyajianDataPage = () => {
           {/* ===== SUB-BAB 4: DIAGRAM LINGKARAN ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep4" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400" title="📘 Sub-Bab 4: Diagram Lingkaran (Pie Chart)" />
-            {expandedSections.includes("konsep4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
@@ -2138,7 +2138,7 @@ const PenyajianDataPage = () => {
           {/* Contoh Soal Sub-Bab 4 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh4" icon={<Calculator className="w-5 h-5" />} iconColor="text-orange-400" title="📝 Contoh Soal — Diagram Lingkaran" />
-            {expandedSections.includes("contoh4") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -2414,7 +2414,7 @@ const PenyajianDataPage = () => {
           {/* ===== SUB-BAB 5: DIAGRAM BATANG DAUN ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="konsep1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="📘 Sub-Bab 5: Diagram Batang Daun (Stem-and-Leaf)" />
-            {expandedSections.includes("konsep1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
@@ -2671,7 +2671,7 @@ const PenyajianDataPage = () => {
           {/* Contoh Soal Sub-Bab 5 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<Calculator className="w-5 h-5" />} iconColor="text-green-400" title="📝 Contoh Soal — Diagram Batang Daun" />
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* Mudah */}
@@ -2801,7 +2801,7 @@ const PenyajianDataPage = () => {
           {/* ===== RANGKUMAN ===== */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BarChart2 className="w-5 h-5" />} iconColor="text-yellow-400" title="🏁 Rangkuman Penyajian Data" />
-            {expandedSections.includes("rangkuman") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[

@@ -41,9 +41,9 @@ const PenyelesaianPLSVPage = () => {
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 <span className="font-body font-semibold text-white">Lima Metode Menyelesaikan PLSV</span>
               </div>
-              {expandedSections.includes("intro") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("intro") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Ada beberapa cara untuk menemukan nilai variabel dalam PLSV. Setiap metode punya keunggulannya masing-masing. Kita akan pelajari semuanya!
@@ -68,9 +68,9 @@ const PenyelesaianPLSVPage = () => {
                 <Target className="w-5 h-5 text-blue-400" />
                 <span className="font-body font-semibold text-white">1. Metode Substitusi</span>
               </div>
-              {expandedSections.includes("substitusi") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("substitusi") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -101,9 +101,9 @@ const PenyelesaianPLSVPage = () => {
                 <Target className="w-5 h-5 text-green-400" />
                 <span className="font-body font-semibold text-white">2. Menambah / Mengurang Kedua Ruas</span>
               </div>
-              {expandedSections.includes("tamkur") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("tamkur") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -147,9 +147,9 @@ const PenyelesaianPLSVPage = () => {
                 <Target className="w-5 h-5 text-orange-400" />
                 <span className="font-body font-semibold text-white">3. Mengali / Membagi Kedua Ruas</span>
               </div>
-              {expandedSections.includes("kaibagi") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("kaibagi") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -189,9 +189,9 @@ const PenyelesaianPLSVPage = () => {
                 <Target className="w-5 h-5 text-purple-400" />
                 <span className="font-body font-semibold text-white">4. Metode Pindah Ruas</span>
               </div>
-              {expandedSections.includes("pindahruas") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("pindahruas") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -229,9 +229,9 @@ const PenyelesaianPLSVPage = () => {
                 <Target className="w-5 h-5 text-pink-400" />
                 <span className="font-body font-semibold text-white">5. Persamaan Bentuk Pecahan</span>
               </div>
-              {expandedSections.includes("pecahan") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("pecahan") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -263,9 +263,9 @@ const PenyelesaianPLSVPage = () => {
                   Contoh Soal 1
                 </span>
               </div>
-              {expandedSections.includes("contoh1") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh1") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
@@ -297,9 +297,9 @@ const PenyelesaianPLSVPage = () => {
                   Contoh Soal 2
                 </span>
               </div>
-              {expandedSections.includes("contoh2") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh2") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
@@ -333,9 +333,9 @@ const PenyelesaianPLSVPage = () => {
                   Contoh Soal 3
                 </span>
               </div>
-              {expandedSections.includes("contoh3") ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+              <ChevronUp className="w-5 h-5 text-primary" />
             </button>
-            {expandedSections.includes("contoh3") && (
+            {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-slate-800/50 rounded-lg p-4">
                   <p className="font-body text-sm text-white">
