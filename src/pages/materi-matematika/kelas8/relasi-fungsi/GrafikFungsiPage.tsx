@@ -427,10 +427,10 @@ const GrafikFungsiPage = () => {
                           <polygon points="0,0 6,3 0,6" fill="#94a3b8" />
                         </marker>
                         <marker id="lineArr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                          <polygon points="0,0 6,3 0,6" fill="#e2e8f0" />
+                          <polygon points="0,0 6,3 0,6" fill="#a78bfa" />
                         </marker>
                         <marker id="lineArrRev" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
-                          <polygon points="0,0 6,3 0,6" fill="#e2e8f0" />
+                          <polygon points="0,0 6,3 0,6" fill="#a78bfa" />
                         </marker>
                       </defs>
                       {/* Origin: (80, 125). Scale: 38px/unit. y inverted. */}
@@ -460,7 +460,7 @@ const GrafikFungsiPage = () => {
                       {/* At yPx=188: y=(125-188)/38=-1.66, x=(-1.66+1)/3=-0.22, xPx=80-8.3=71.7≈72 */}
                       {/* At yPx=14: y=(125-14)/38=2.92, x=(2.92+1)/3=1.31, xPx=80+49.6≈130 */}
                       <line x1={72} y1={188} x2={130} y2={14}
-                        stroke="#e2e8f0" strokeWidth="2"
+                        stroke="#a78bfa" strokeWidth="2"
                         markerEnd="url(#lineArr)" markerStart="url(#lineArrRev)" />
                     </svg>
                   </div>
