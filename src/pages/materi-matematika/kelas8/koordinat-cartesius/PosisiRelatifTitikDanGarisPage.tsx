@@ -230,27 +230,6 @@ const PosisiRelatifTitikDanGarisPage = () => {
                   </div>
                 </div>
 
-                <div className="bg-slate-800/70 border border-orange-500/20 rounded-xl p-4 flex flex-col items-center gap-3">
-                  <p className="font-body text-xs font-bold text-orange-300 uppercase">🗺️ Contoh Visual: A(2,1) sebagai Acuan</p>
-                  <RelativeGrid
-                    acuan={[2, 1]}
-                    titik={[[-1, 4], [4, -2]]}
-                    label={["P(−1,4)", "Q(4,−2)"]}
-                  />
-                  <div className="grid grid-cols-2 gap-2 w-full text-xs font-body">
-                    <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-lg p-2">
-                      <p className="text-cyan-300 font-semibold">P relatif terhadap A:</p>
-                      <p className="text-white/70 mt-1"><InlineMath math="(-1-2,\ 4-1) = (-3, 3)" /></p>
-                      <p className="text-white/50 text-xs">→ 3 ke kiri, 3 ke atas dari A</p>
-                    </div>
-                    <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-2">
-                      <p className="text-green-300 font-semibold">Q relatif terhadap A:</p>
-                      <p className="text-white/70 mt-1"><InlineMath math="(4-2,\ -2-1) = (2, -3)" /></p>
-                      <p className="text-white/50 text-xs">→ 2 ke kanan, 3 ke bawah dari A</p>
-                    </div>
-                  </div>
-                </div>
-
               </div>
             )}
           </div>
