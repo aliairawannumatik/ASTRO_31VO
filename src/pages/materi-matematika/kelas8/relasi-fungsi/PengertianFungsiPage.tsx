@@ -1018,12 +1018,12 @@ const PengertianFungsiPage = () => {
                           <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
                           <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
                           <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
-                          {/* sideways parabola-like curve that loops back: starts at (0,60) goes right-up then curves back */}
-                          <path d="M10,75 C30,30 80,15 110,35 C130,48 125,75 110,88 C90,105 40,108 10,100" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
-                          {/* vertical line showing the double intersection */}
-                          <line x1="95" y1="10" x2="95" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
-                          <circle cx="95" cy="26" r="3" fill="#fbbf24"/>
-                          <circle cx="95" cy="95" r="3" fill="#fbbf24"/>
+                          {/* D-shape: half-ellipse opening to the right — x = y(5-y) style */}
+                          <path d="M 12,108 C 38,108 118,93 140,60 C 156,32 120,12 12,12" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
+                          {/* vertical line showing double intersection */}
+                          <line x1="100" y1="10" x2="100" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
+                          <circle cx="100" cy="30" r="3" fill="#fbbf24"/>
+                          <circle cx="100" cy="90" r="3" fill="#fbbf24"/>
                         </svg>
                       ),
                     },
@@ -1106,12 +1106,12 @@ const PengertianFungsiPage = () => {
                           <text x="13" y="8" fill="#64748b" fontSize="8">y</text>
                           <text x="128" y="123" fill="#94a3b8" fontSize="8">5</text>
                           <text x="5" y="34" fill="#94a3b8" fontSize="8" textAnchor="end">5</text>
-                          {/* S-curve that folds back vertically */}
-                          <path d="M10,108 C30,108 45,100 60,75 C75,50 80,25 95,20 C110,15 120,35 118,60 C116,85 105,100 100,108" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
-                          {/* vertical line showing double intersection */}
-                          <line x1="90" y1="10" x2="90" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
-                          <circle cx="90" cy="30" r="3" fill="#fbbf24"/>
-                          <circle cx="90" cy="95" r="3" fill="#fbbf24"/>
+                          {/* fishhook / backwards-J: rises from bottom-left, arcs right at top, folds back to bottom-right */}
+                          <path d="M 14,108 C 16,85 18,62 22,44 C 28,24 46,12 68,12 C 94,12 118,34 124,62 C 130,92 114,108 88,108" fill="none" stroke="#ef4444" strokeWidth="2.2"/>
+                          {/* vertical line at x=105 showing double intersection */}
+                          <line x1="105" y1="10" x2="105" y2="110" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4,2" opacity="0.7"/>
+                          <circle cx="105" cy="32" r="3" fill="#fbbf24"/>
+                          <circle cx="105" cy="88" r="3" fill="#fbbf24"/>
                         </svg>
                       ),
                     },
