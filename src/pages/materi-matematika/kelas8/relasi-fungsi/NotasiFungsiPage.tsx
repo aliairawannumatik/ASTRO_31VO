@@ -375,28 +375,55 @@ const NotasiFungsiPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
+            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman & Kesimpulan" />
             {true && (
-              <div className="px-5 pb-5 space-y-3">
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
+              <div className="px-5 pb-6 space-y-4">
+
+                {/* RANGKUMAN */}
+                <p className="font-display text-xs font-bold text-orange-300 uppercase tracking-wider pt-1">📚 Rangkuman Materi</p>
+                <div className="grid grid-cols-1 gap-2">
                   {[
-                    ["Notasi Fungsi", "f : A → B atau f(x) = ... "],
-                    ["f(x)", "Nilai fungsi f saat input adalah x (bayangan dari x)"],
-                    ["Cara Hitung", "Ganti variabel x dengan nilai yang diberikan"],
-                    ["Operasi Fungsi", "(f±g)(x) = f(x) ± g(x), (f·g)(x) = f(x)·g(x)"],
-                    ["Mencari x", "Jika f(x) = k diketahui, selesaikan persamaan untuk x"],
-                  ].map(([term, def]) => (
-                    <div key={term} className="flex gap-2">
-                      <span className="text-cyan-400 shrink-0">▸</span>
-                      <p className="text-white/80"><strong className="text-cyan-300">{term}:</strong> {def}</p>
+                    { icon: "📐", label: "Notasi Fungsi", desc: "Ditulis f : A → B atau f(x) = ... Cara ringkas menyatakan aturan fungsi.", color: "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300" },
+                    { icon: "🔢", label: "f(x)", desc: "Nilai fungsi f saat input adalah x. Disebut juga 'bayangan dari x'.", color: "from-amber-900/60 to-yellow-900/60 border-amber-500/40 text-amber-300" },
+                    { icon: "🧮", label: "Cara Menghitung", desc: "Ganti semua variabel x dengan nilai yang diminta, lalu hitung hasilnya.", color: "from-yellow-900/60 to-lime-900/60 border-yellow-500/40 text-yellow-300" },
+                    { icon: "➕", label: "Operasi Fungsi", desc: "(f ± g)(x) = f(x) ± g(x)  dan  (f · g)(x) = f(x) · g(x).", color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
+                    { icon: "🔍", label: "Mencari Nilai x", desc: "Jika diketahui f(x) = k, jadikan seperti persamaan dan isolasi x.", color: "from-blue-900/60 to-indigo-900/60 border-blue-500/40 text-blue-300" },
+                  ].map(({ icon, label, desc, color }) => (
+                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <span className="text-xl shrink-0">{icon}</span>
+                      <div>
+                        <p className="font-display text-xs font-bold mb-0.5">{label}</p>
+                        <p className="font-body text-xs text-white/80 leading-relaxed">{desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="font-body text-xs text-yellow-200">
-                    <strong>💡 Tip:</strong> Ketika diminta mencari nilai x dari f(x) = k, anggap saja seperti menyelesaikan persamaan biasa — isolasi x di satu sisi!
+
+                {/* TIPS & TRIK */}
+                <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
+                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">💡 Tips &amp; Trik</p>
+                  <div className="space-y-2">
+                    {[
+                      "f(2) artinya ganti x dengan 2 — bukan f × 2! Jangan tertukar.",
+                      "Untuk mencari x dari f(x) = k: pindahkan semua angka ke satu sisi, x ke sisi lain.",
+                      "Operasi fungsi: hitung f(x) dan g(x) masing-masing dulu, baru gabungkan hasilnya.",
+                    ].map((tip, i) => (
+                      <div key={i} className="flex gap-2 items-start">
+                        <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
+                        <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* KESIMPULAN */}
+                <div className="bg-gradient-to-r from-orange-900/60 to-amber-900/60 border border-orange-400/40 rounded-xl p-4">
+                  <p className="font-display text-xs font-bold text-orange-300 uppercase tracking-wider mb-2">🎯 Kesimpulan</p>
+                  <p className="font-body text-sm text-white/90 leading-relaxed">
+                    Notasi fungsi adalah <strong className="text-orange-300">bahasa matematika yang efisien</strong>. f(x) berarti <strong className="text-amber-300">"masukkan x, keluarkan hasilnya"</strong> — seperti kalkulator pribadi yang siap dipakai kapan saja!
                   </p>
                 </div>
+
               </div>
             )}
           </div>

@@ -1100,28 +1100,55 @@ const PengertianFungsiPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
+            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman & Kesimpulan" />
             {true && (
-              <div className="px-5 pb-5 space-y-3">
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
+              <div className="px-5 pb-6 space-y-4">
+
+                {/* RANGKUMAN */}
+                <p className="font-display text-xs font-bold text-violet-300 uppercase tracking-wider pt-1">📚 Rangkuman Materi</p>
+                <div className="grid grid-cols-1 gap-2">
                   {[
-                    ["Fungsi", "Relasi khusus di mana setiap anggota domain dipasangkan dengan TEPAT SATU anggota kodomain"],
-                    ["Syarat 1", "Semua anggota domain harus punya pasangan"],
-                    ["Syarat 2", "Setiap anggota domain hanya boleh punya satu pasangan"],
-                    ["Notasi Fungsi", "f : A → B, dibaca 'f adalah fungsi dari A ke B'"],
-                    ["Nilai Fungsi", "f(x) dibaca 'f dari x' — nilai output saat input adalah x"],
-                  ].map(([term, def]) => (
-                    <div key={term} className="flex gap-2">
-                      <span className="text-cyan-400 shrink-0">▸</span>
-                      <p className="text-white/80"><strong className="text-cyan-300">{term}:</strong> {def}</p>
+                    { icon: "⚙️", label: "Fungsi", desc: "Relasi khusus: setiap anggota domain dipasangkan dengan TEPAT SATU anggota kodomain.", color: "from-violet-900/60 to-purple-900/60 border-violet-500/40 text-violet-300" },
+                    { icon: "✅", label: "Syarat 1", desc: "Semua anggota domain HARUS punya pasangan — tidak boleh ada yang kosong.", color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
+                    { icon: "☑️", label: "Syarat 2", desc: "Setiap anggota domain hanya boleh punya SATU pasangan — tidak boleh bercabang.", color: "from-blue-900/60 to-cyan-900/60 border-blue-500/40 text-blue-300" },
+                    { icon: "📝", label: "Notasi Fungsi", desc: "f : A → B, dibaca 'f adalah fungsi dari A ke B'.", color: "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300" },
+                    { icon: "🎯", label: "Nilai Fungsi", desc: "f(x) = nilai output saat input adalah x. Dibaca: 'f dari x'.", color: "from-pink-900/60 to-rose-900/60 border-pink-500/40 text-pink-300" },
+                  ].map(({ icon, label, desc, color }) => (
+                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <span className="text-xl shrink-0">{icon}</span>
+                      <div>
+                        <p className="font-display text-xs font-bold mb-0.5">{label}</p>
+                        <p className="font-body text-xs text-white/80 leading-relaxed">{desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="font-body text-xs text-yellow-200">
-                    <strong>💡 Ingat:</strong> Setiap fungsi adalah relasi, tapi tidak setiap relasi adalah fungsi! Fungsi adalah relasi yang "lebih ketat".
+
+                {/* TIPS & TRIK */}
+                <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
+                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">💡 Tips &amp; Trik</p>
+                  <div className="space-y-2">
+                    {[
+                      "Cek diagram panah: setiap titik di domain WAJIB punya tepat satu anak panah keluar.",
+                      "Boleh: banyak anggota domain menuju satu anggota kodomain. Tidak boleh: satu domain ke dua kodomain.",
+                      "Gunakan tabel nilai — jika ada nilai x yang menghasilkan dua f(x) berbeda, itu bukan fungsi!",
+                    ].map((tip, i) => (
+                      <div key={i} className="flex gap-2 items-start">
+                        <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
+                        <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* KESIMPULAN */}
+                <div className="bg-gradient-to-r from-violet-900/60 to-purple-900/60 border border-violet-400/40 rounded-xl p-4">
+                  <p className="font-display text-xs font-bold text-violet-300 uppercase tracking-wider mb-2">🎯 Kesimpulan</p>
+                  <p className="font-body text-sm text-white/90 leading-relaxed">
+                    Fungsi adalah <strong className="text-violet-300">relasi dengan aturan ketat</strong>. Setiap input menghasilkan <strong className="text-green-300">tepat satu output</strong> — seperti mesin yang selalu konsisten dan dapat diprediksi!
                   </p>
                 </div>
+
               </div>
             )}
           </div>

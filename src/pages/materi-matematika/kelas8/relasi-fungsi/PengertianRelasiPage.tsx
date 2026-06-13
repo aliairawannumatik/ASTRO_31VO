@@ -552,28 +552,55 @@ const PengertianRelasiPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
+            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman & Kesimpulan" />
             {true && (
-              <div className="px-5 pb-5 space-y-3">
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
+              <div className="px-5 pb-6 space-y-4">
+
+                {/* RANGKUMAN */}
+                <p className="font-display text-xs font-bold text-cyan-300 uppercase tracking-wider pt-1">📚 Rangkuman Materi</p>
+                <div className="grid grid-cols-1 gap-2">
                   {[
-                    ["Relasi", "Aturan yang menghubungkan sebagian/seluruh anggota himpunan A ke B"],
-                    ["Domain", "Himpunan asal (himpunan A)"],
-                    ["Kodomain", "Himpunan kawan (himpunan B)"],
-                    ["Range", "Bagian dari kodomain yang benar-benar dipasangkan"],
-                    ["4 Cara Penyajian", "Diagram panah, pasangan berurutan, tabel, grafik Kartesius"],
-                  ].map(([term, def]) => (
-                    <div key={term} className="flex gap-2">
-                      <span className="text-cyan-400 shrink-0">▸</span>
-                      <p className="text-white/80"><strong className="text-cyan-300">{term}:</strong> {def}</p>
+                    { icon: "🔗", label: "Relasi", desc: "Aturan yang menghubungkan sebagian atau seluruh anggota himpunan A ke himpunan B.", color: "from-cyan-900/60 to-teal-900/60 border-cyan-500/40 text-cyan-300" },
+                    { icon: "📥", label: "Domain", desc: "Himpunan asal (himpunan A) — semua nilai yang boleh menjadi input.", color: "from-blue-900/60 to-cyan-900/60 border-blue-500/40 text-blue-300" },
+                    { icon: "📤", label: "Kodomain", desc: "Himpunan kawan (himpunan B) — semua nilai yang mungkin menjadi output.", color: "from-violet-900/60 to-purple-900/60 border-violet-500/40 text-violet-300" },
+                    { icon: "🎯", label: "Range", desc: "Bagian dari kodomain yang benar-benar dipasangkan. Range ⊆ Kodomain selalu!", color: "from-pink-900/60 to-rose-900/60 border-pink-500/40 text-pink-300" },
+                    { icon: "📊", label: "4 Cara Penyajian", desc: "Diagram panah, pasangan berurutan, tabel, dan grafik Kartesius.", color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
+                  ].map(({ icon, label, desc, color }) => (
+                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                      <span className="text-xl shrink-0">{icon}</span>
+                      <div>
+                        <p className={`font-display text-xs font-bold mb-0.5`}>{label}</p>
+                        <p className="font-body text-xs text-white/80 leading-relaxed">{desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="font-body text-xs text-yellow-200">
-                    <strong>💡 Kunci:</strong> Range ⊆ Kodomain — range selalu merupakan bagian dari kodomain, tidak harus sama!
+
+                {/* TIPS & TRIK */}
+                <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
+                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">💡 Tips &amp; Trik</p>
+                  <div className="space-y-2">
+                    {[
+                      "Range ⊆ Kodomain SELALU benar — range tidak pernah lebih besar dari kodomain.",
+                      "Diagram panah adalah cara termudah untuk memeriksa apakah suatu relasi adalah fungsi.",
+                      "Jika soal meminta 'himpunan range', cari hanya anggota B yang punya anak panah masuk kepadanya.",
+                    ].map((tip, i) => (
+                      <div key={i} className="flex gap-2 items-start">
+                        <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
+                        <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* KESIMPULAN */}
+                <div className="bg-gradient-to-r from-teal-900/60 to-cyan-900/60 border border-teal-400/40 rounded-xl p-4">
+                  <p className="font-display text-xs font-bold text-teal-300 uppercase tracking-wider mb-2">🎯 Kesimpulan</p>
+                  <p className="font-body text-sm text-white/90 leading-relaxed">
+                    Relasi adalah <strong className="text-teal-300">"jembatan"</strong> antara dua himpunan. Kuasai perbedaan antara <strong className="text-cyan-300">domain</strong>, <strong className="text-violet-300">kodomain</strong>, dan <strong className="text-pink-300">range</strong> — itulah fondasi untuk memahami fungsi!
                   </p>
                 </div>
+
               </div>
             )}
           </div>
