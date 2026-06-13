@@ -69,6 +69,11 @@ const DefinisiSPLDVPage = () => {
                 </p>
                 <div className="rounded-xl overflow-hidden border border-white/10">
                   <img src="/images/spldv-konteks-warung.png" alt="Konteks warung nasi goreng dan mie goreng SPLDV" className="w-full object-cover max-h-64" />
+                  <div className="bg-black/40 px-3 py-1.5 flex items-center gap-1.5">
+                    <span className="text-white/40 text-[10px]">🖼️</span>
+                    <p className="font-body text-[10px] text-white/40">Sumber gambar:</p>
+                    <a href="https://www.bing.com/images/create" target="_blank" rel="noopener noreferrer" className="font-body text-[10px] text-cyan-400/60 hover:text-cyan-400 transition-colors underline underline-offset-2">bing.com/images/create</a>
+                  </div>
                 </div>
                 <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4 text-sm font-body space-y-2">
                   <p className="text-cyan-300 font-semibold">🛸 Peta Konsep</p>
