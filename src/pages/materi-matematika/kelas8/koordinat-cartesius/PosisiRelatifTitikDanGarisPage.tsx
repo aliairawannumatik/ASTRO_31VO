@@ -192,6 +192,13 @@ const PosisiRelatifTitikDanGarisPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Kamu berdiri di alun-alun kota (titik acuan). Temanmu ada di 3 meter ke kananmu dan 5 meter di depanmu. Ini bukan koordinat mutlak terhadap "nol" — ini adalah <strong className="text-cyan-300">posisi relatif</strong> terhadap dirimu sebagai titik acuan. Konsep yang sama digunakan dalam matematika: menentukan letak suatu titik bukan terhadap O(0,0), tapi terhadap <strong className="text-cyan-300">sembarang titik acuan</strong> yang kita pilih!
                 </p>
+                <div className="rounded-xl overflow-hidden border border-orange-500/20">
+                  <img
+                    src="/images/posisi-relatif-alunalun.png"
+                    alt="Ilustrasi posisi relatif di alun-alun kota"
+                    className="w-full object-cover"
+                  />
+                </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-xs text-yellow-200">
                     <strong>Aplikasi nyata:</strong> Sistem navigasi kapal, peta militer, permainan strategi, hingga robotika menggunakan konsep posisi relatif. Robot tahu "bergerak 3 langkah ke kanan dari posisi saat ini" — bukan dari titik nol mutlak!
