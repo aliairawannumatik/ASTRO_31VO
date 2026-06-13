@@ -193,113 +193,155 @@ const PengertianRelasiPage = () => {
                 {/* Diagram Panah */}
                 <div className="bg-slate-800/50 border border-cyan-500/20 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm font-bold text-cyan-300">1️⃣ Diagram Panah</p>
-                  <p className="font-body text-xs text-white/60 mb-2">Dua oval mewakili himpunan A dan B, dihubungkan dengan anak panah sesuai relasinya.</p>
+                  <p className="font-body text-xs text-white/60 mb-2">Dua oval mewakili himpunan A (siswa) dan B (ekskul), dihubungkan dengan anak panah relasi "mengikuti".</p>
                   <div className="flex justify-center">
-                    <svg viewBox="0 0 280 210" className="w-full max-w-xs" aria-label="Diagram panah relasi kuadrat dari">
+                    <svg viewBox="0 0 340 260" className="w-full max-w-sm" aria-label="Diagram panah relasi mengikuti ekstrakulikuler">
                       <defs>
-                        <marker id="arrowDP" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
-                          <polygon points="0 0, 7 2.5, 0 5" fill="#facc15" />
-                        </marker>
+                        <marker id="arCyan"   markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#22d3ee"/></marker>
+                        <marker id="arGreen"  markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#4ade80"/></marker>
+                        <marker id="arOrange" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#fb923c"/></marker>
                       </defs>
-                      {/* Oval A (Domain) */}
-                      <ellipse cx="70" cy="108" rx="52" ry="88" fill="rgba(8,145,178,0.12)" stroke="#22d3ee" strokeWidth="1.8" />
-                      {/* Oval B (Kodomain) */}
-                      <ellipse cx="210" cy="108" rx="52" ry="88" fill="rgba(124,58,237,0.12)" stroke="#a78bfa" strokeWidth="1.8" />
-                      {/* Labels */}
-                      <text x="70" y="17" textAnchor="middle" fill="#22d3ee" fontSize="9" fontWeight="bold">A (Domain)</text>
-                      <text x="210" y="17" textAnchor="middle" fill="#a78bfa" fontSize="9" fontWeight="bold">B (Kodomain)</text>
-                      {/* Domain elements — no boxes, plain text */}
-                      <text x="70" y="64"  textAnchor="middle" fill="#67e8f9" fontSize="13" fontWeight="bold">1</text>
-                      <text x="70" y="92"  textAnchor="middle" fill="#67e8f9" fontSize="13" fontWeight="bold">2</text>
-                      <text x="70" y="120" textAnchor="middle" fill="#67e8f9" fontSize="13" fontWeight="bold">3</text>
-                      <text x="70" y="148" textAnchor="middle" fill="#67e8f9" fontSize="13" fontWeight="bold">4</text>
-                      {/* Kodomain elements */}
-                      <text x="210" y="52"  textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">1</text>
-                      <text x="210" y="76"  textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">4</text>
-                      <text x="210" y="100" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">9</text>
-                      <text x="210" y="124" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">16</text>
-                      <text x="210" y="148" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">25</text>
-                      {/* Arrows — start at right edge of domain number, end at left edge of kodomain number */}
-                      {/* 1 → 1 */}
-                      <line x1="77" y1="57"  x2="200" y2="45"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
-                      {/* 2 → 4 */}
-                      <line x1="77" y1="85"  x2="200" y2="69"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
-                      {/* 3 → 9 */}
-                      <line x1="77" y1="113" x2="200" y2="93"  stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
-                      {/* 4 → 16 */}
-                      <line x1="77" y1="141" x2="196" y2="117" stroke="#facc15" strokeWidth="1.6" markerEnd="url(#arrowDP)" />
+                      {/* Oval A */}
+                      <ellipse cx="85" cy="133" rx="72" ry="108" fill="rgba(8,145,178,0.10)" stroke="#22d3ee" strokeWidth="1.8"/>
+                      {/* Oval B */}
+                      <ellipse cx="265" cy="133" rx="72" ry="108" fill="rgba(124,58,237,0.10)" stroke="#a78bfa" strokeWidth="1.8"/>
+                      {/* Oval labels */}
+                      <text x="85"  y="18" textAnchor="middle" fill="#22d3ee" fontSize="9" fontWeight="bold">A (Siswa)</text>
+                      <text x="265" y="18" textAnchor="middle" fill="#a78bfa" fontSize="9" fontWeight="bold">B (Ekskul)</text>
+                      {/* Domain items */}
+                      <text x="85" y="76"  textAnchor="middle" fill="#22d3ee" fontSize="11" fontWeight="bold">Enzo</text>
+                      <text x="85" y="111" textAnchor="middle" fill="#4ade80" fontSize="11" fontWeight="bold">Justin</text>
+                      <text x="85" y="146" textAnchor="middle" fill="#fb923c" fontSize="11" fontWeight="bold">Arham</text>
+                      <text x="85" y="181" textAnchor="middle" fill="#94a3b8" fontSize="11" fontWeight="bold">Faiz</text>
+                      {/* Kodomain items */}
+                      <text x="265" y="64"  textAnchor="middle" fill="#c4b5fd" fontSize="10" fontWeight="bold">Badminton</text>
+                      <text x="265" y="97"  textAnchor="middle" fill="#c4b5fd" fontSize="10" fontWeight="bold">Basket</text>
+                      <text x="265" y="130" textAnchor="middle" fill="#c4b5fd" fontSize="10" fontWeight="bold">Futsal</text>
+                      <text x="265" y="163" textAnchor="middle" fill="#c4b5fd" fontSize="10" fontWeight="bold">Renang</text>
+                      <text x="265" y="196" textAnchor="middle" fill="#c4b5fd" fontSize="10" fontWeight="bold">Voly</text>
+                      {/* Enzo arrows (cyan) → Badminton, Basket, Futsal */}
+                      <line x1="147" y1="71"  x2="193" y2="59"  stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
+                      <line x1="147" y1="71"  x2="190" y2="92"  stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
+                      <line x1="147" y1="71"  x2="188" y2="125" stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
+                      {/* Justin arrows (green) → Basket, Renang */}
+                      <line x1="154" y1="106" x2="190" y2="92"  stroke="#4ade80" strokeWidth="1.5" markerEnd="url(#arGreen)"/>
+                      <line x1="154" y1="106" x2="190" y2="158" stroke="#4ade80" strokeWidth="1.5" markerEnd="url(#arGreen)"/>
+                      {/* Arham arrows (orange) → Voly, Futsal */}
+                      <line x1="155" y1="141" x2="192" y2="191" stroke="#fb923c" strokeWidth="1.5" markerEnd="url(#arOrange)"/>
+                      <line x1="155" y1="141" x2="188" y2="125" stroke="#fb923c" strokeWidth="1.5" markerEnd="url(#arOrange)"/>
+                      {/* Faiz — tidak ada panah */}
+                      <text x="85" y="248" textAnchor="middle" fill="rgba(148,163,184,0.4)" fontSize="8">Faiz tidak memiliki pasangan</text>
                     </svg>
                   </div>
-                  <p className="text-center text-xs text-white/40 mt-2">
-                    Relasi "kuadrat dari"<br />1→1, 2→4, 3→9, 4→16
-                  </p>
+                  {/* Legend */}
+                  <div className="flex flex-wrap gap-3 justify-center mt-1">
+                    {[
+                      { color: "bg-cyan-400",   label: "Enzo" },
+                      { color: "bg-green-400",  label: "Justin" },
+                      { color: "bg-orange-400", label: "Arham" },
+                      { color: "bg-slate-500",  label: "Faiz (∅)" },
+                    ].map(({ color, label }) => (
+                      <div key={label} className="flex items-center gap-1.5 text-xs font-body text-white/60">
+                        <span className={`w-3 h-0.5 ${color} inline-block`} />
+                        {label}
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Himpunan Pasangan Berurutan */}
                 <div className="bg-slate-800/50 border border-green-500/20 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm font-bold text-green-300">2️⃣ Himpunan Pasangan Berurutan</p>
                   <p className="font-body text-xs text-white/60 mb-2">Ditulis sebagai kumpulan pasangan <InlineMath math="(a, b)" /> di mana <InlineMath math="a \in A" /> dan <InlineMath math="b \in B" />.</p>
-                  <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3">
-                    <BlockMath math="\{(1,1),\ (2,4),\ (3,9),\ (4,16)\}" />
+                  <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3 font-body text-xs leading-relaxed text-white/80">
+                    <span className="text-green-300 font-bold text-sm">{"{"}</span>
+                    {" "}
+                    <span className="text-cyan-300">(Enzo, Badminton)</span>,{" "}
+                    <span className="text-cyan-300">(Enzo, Basket)</span>,{" "}
+                    <span className="text-cyan-300">(Enzo, Futsal)</span>,{" "}
+                    <span className="text-green-200">(Justin, Basket)</span>,{" "}
+                    <span className="text-green-200">(Justin, Renang)</span>,{" "}
+                    <span className="text-orange-300">(Arham, Voly)</span>,{" "}
+                    <span className="text-orange-300">(Arham, Futsal)</span>
+                    {" "}
+                    <span className="text-green-300 font-bold text-sm">{"}"}</span>
                   </div>
+                  <p className="font-body text-xs text-white/40 text-center">Total: 7 pasangan berurutan · Faiz tidak memiliki pasangan</p>
                 </div>
 
                 {/* Grafik/Koordinat */}
                 <div className="bg-slate-800/50 border border-violet-500/20 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-bold text-violet-300">4️⃣ Grafik Kartesius</p>
-                  <p className="font-body text-xs text-white/60">Pasangan <InlineMath math="(x, y)" /> digambarkan sebagai titik pada bidang koordinat Kartesius. Sumbu-x untuk domain, sumbu-y untuk range.</p>
+                  <p className="font-body text-sm font-bold text-violet-300">3️⃣ Diagram Kartesius</p>
+                  <p className="font-body text-xs text-white/60">Setiap pasangan digambar sebagai titik. Sumbu-x untuk siswa (domain), sumbu-y untuk ekskul (range).</p>
                   <div className="bg-slate-900/60 border border-violet-500/20 rounded-xl p-4 flex justify-center">
-                    {/* 
-                      Grid: x ∈ {0..5}, y ∈ {0..16} 
-                      Origin: (40, 178)
-                      x-scale: 30px per unit  →  x=1→70, x=2→100, x=3→130, x=4→160
-                      y-scale: 10px per unit  →  y=1→168, y=4→138, y=9→88, y=16→18
-                    */}
-                    <svg viewBox="0 0 210 210" className="w-full max-w-xs" aria-label="Grafik kartesius relasi kuadrat dari">
-                      {/* Grid lines */}
-                      {[1,2,3,4,5].map(gx => (
-                        <line key={`gx${gx}`} x1={40+gx*30} y1={18} x2={40+gx*30} y2={178} stroke="rgba(148,163,184,0.18)" strokeWidth="1" strokeDasharray="3,3" />
+                    <svg viewBox="0 0 290 240" className="w-full max-w-xs" aria-label="Diagram kartesius relasi mengikuti">
+                      {/* Grid — vertical per siswa */}
+                      {[125,165,205,245].map(gx => (
+                        <line key={gx} x1={gx} y1={20} x2={gx} y2={200} stroke="rgba(148,163,184,0.15)" strokeWidth="1" strokeDasharray="3,3"/>
                       ))}
-                      {[2,4,6,8,10,12,14,16].map(gy => (
-                        <line key={`gy${gy}`} x1={40} y1={178-gy*10} x2={190} y2={178-gy*10} stroke="rgba(148,163,184,0.18)" strokeWidth="1" strokeDasharray="3,3" />
+                      {/* Grid — horizontal per ekskul */}
+                      {[48,83,118,153,188].map(gy => (
+                        <line key={gy} x1={85} y1={gy} x2={260} y2={gy} stroke="rgba(148,163,184,0.15)" strokeWidth="1" strokeDasharray="3,3"/>
                       ))}
                       {/* Axes */}
-                      <line x1="40" y1="178" x2="193" y2="178" stroke="#94a3b8" strokeWidth="1.8" />
-                      <line x1="40" y1="178" x2="40"  y2="12"  stroke="#94a3b8" strokeWidth="1.8" />
+                      <line x1="85" y1="200" x2="263" y2="200" stroke="#94a3b8" strokeWidth="1.8"/>
+                      <line x1="85" y1="200" x2="85"  y2="12"  stroke="#94a3b8" strokeWidth="1.8"/>
                       {/* Arrow tips */}
-                      <polygon points="193,175 200,178 193,181" fill="#94a3b8" />
-                      <polygon points="37,12 40,5 43,12" fill="#94a3b8" />
-                      {/* Axis labels */}
-                      <text x="202" y="181" fill="#94a3b8" fontSize="9" fontWeight="bold">x</text>
-                      <text x="34"  y="9"   fill="#94a3b8" fontSize="9" fontWeight="bold">y</text>
-                      {/* X-axis tick labels */}
-                      {[1,2,3,4,5].map(v => (
-                        <g key={`xl${v}`}>
-                          <line x1={40+v*30} y1="178" x2={40+v*30} y2="182" stroke="#94a3b8" strokeWidth="1.2" />
-                          <text x={40+v*30} y="191" textAnchor="middle" fill="#94a3b8" fontSize="8">{v}</text>
+                      <polygon points="260,197 267,200 260,203" fill="#94a3b8"/>
+                      <polygon points="82,12 85,5 88,12"         fill="#94a3b8"/>
+                      {/* Y-axis labels (ekskul) */}
+                      <text x="81" y="51"  textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Voly</text>
+                      <text x="81" y="86"  textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Renang</text>
+                      <text x="81" y="121" textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Futsal</text>
+                      <text x="81" y="156" textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Basket</text>
+                      <text x="81" y="191" textAnchor="end" fill="#a78bfa" fontSize="6.5" fontWeight="bold">Badminton</text>
+                      {/* Y-axis ticks */}
+                      {[48,83,118,153,188].map(gy => (
+                        <line key={gy} x1="81" y1={gy} x2="85" y2={gy} stroke="#94a3b8" strokeWidth="1.2"/>
+                      ))}
+                      {/* X-axis labels (siswa) */}
+                      <text x="125" y="214" textAnchor="middle" fill="#22d3ee" fontSize="7" fontWeight="bold">Enzo</text>
+                      <text x="165" y="214" textAnchor="middle" fill="#4ade80" fontSize="7" fontWeight="bold">Justin</text>
+                      <text x="205" y="214" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">Arham</text>
+                      <text x="245" y="214" textAnchor="middle" fill="#94a3b8" fontSize="7" fontWeight="bold">Faiz</text>
+                      {/* X-axis ticks */}
+                      {[125,165,205,245].map(gx => (
+                        <line key={gx} x1={gx} y1="200" x2={gx} y2="204" stroke="#94a3b8" strokeWidth="1.2"/>
+                      ))}
+                      {/* Axis titles */}
+                      <text x="175" y="228" textAnchor="middle" fill="#64748b" fontSize="7">Siswa (Domain)</text>
+                      <text x="14"  y="110" textAnchor="middle" fill="#64748b" fontSize="7" transform="rotate(-90 14 110)">Ekskul (Range)</text>
+                      {/* Data points
+                          x: Enzo=125, Justin=165, Arham=205, Faiz=245
+                          y: Voly=48, Renang=83, Futsal=118, Basket=153, Badminton=188
+                      */}
+                      {[
+                        {cx:125, cy:188, c:"#22d3ee", label:"(Enzo,Bdm)"},
+                        {cx:125, cy:153, c:"#22d3ee", label:"(Enzo,Bsk)"},
+                        {cx:125, cy:118, c:"#22d3ee", label:"(Enzo,Ftsl)"},
+                        {cx:165, cy:153, c:"#4ade80", label:"(Justin,Bsk)"},
+                        {cx:165, cy:83,  c:"#4ade80", label:"(Justin,Rng)"},
+                        {cx:205, cy:48,  c:"#fb923c", label:"(Arham,Vly)"},
+                        {cx:205, cy:118, c:"#fb923c", label:"(Arham,Ftsl)"},
+                      ].map(({cx,cy,c,label}) => (
+                        <g key={label}>
+                          <circle cx={cx} cy={cy} r="5" fill={c} stroke="white" strokeWidth="1.2"/>
                         </g>
                       ))}
-                      {/* Y-axis tick labels */}
-                      {[2,4,6,8,10,12,14,16].map(v => (
-                        <g key={`yl${v}`}>
-                          <line x1="36" y1={178-v*10} x2="40" y2={178-v*10} stroke="#94a3b8" strokeWidth="1.2" />
-                          <text x="32" y={178-v*10+3} textAnchor="end" fill="#94a3b8" fontSize="7">{v}</text>
-                        </g>
-                      ))}
-                      {/* Origin label */}
-                      <text x="33" y="191" textAnchor="middle" fill="#64748b" fontSize="7">0</text>
-                      {/* Data points (1,1), (2,4), (3,9), (4,16) */}
-                      {[{x:1,y:1},{x:2,y:4},{x:3,y:9},{x:4,y:16}].map(({x,y}) => {
-                        const cx = 40 + x * 30;
-                        const cy = 178 - y * 10;
-                        return (
-                          <g key={x}>
-                            <circle cx={cx} cy={cy} r="5" fill="#818cf8" stroke="#c4b5fd" strokeWidth="1.8" />
-                            <text x={cx+7} y={cy+3} fill="#c4b5fd" fontSize="7.5">({x},{y})</text>
-                          </g>
-                        );
-                      })}
                     </svg>
+                  </div>
+                  {/* Dot legend */}
+                  <div className="flex flex-wrap gap-3 justify-center mt-1">
+                    {[
+                      {color:"bg-cyan-400",   label:"Enzo"},
+                      {color:"bg-green-400",  label:"Justin"},
+                      {color:"bg-orange-400", label:"Arham"},
+                    ].map(({color,label}) => (
+                      <div key={label} className="flex items-center gap-1.5 text-xs font-body text-white/60">
+                        <span className={`w-2.5 h-2.5 rounded-full ${color} inline-block`}/>
+                        {label}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
