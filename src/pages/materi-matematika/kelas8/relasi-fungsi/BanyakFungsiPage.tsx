@@ -364,6 +364,289 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
   );
 };
 
+/* ══════════════════════════════════════════════════════
+   DIAGRAM INTERAKTIF BIJEKSI — komponen tertanam
+══════════════════════════════════════════════════════ */
+function factorial(x: number): number { return x <= 1 ? 1 : x * factorial(x - 1); }
+
+const DiagramInteraktifBijeksi: React.FC = () => {
+  const [n, setN]       = useState(2);
+  const [cur, setCur]   = useState<Mapping>({});
+  const [list, setList] = useState<Mapping[]>([]);
+  const [drag, setDrag] = useState<{ from: string } | null>(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [msg, setMsg]   = useState<{ t: string; ok: boolean } | null>(null);
+  const [done, setDone] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  const domain   = ALL_DOM_LABELS.slice(0, n);
+  const codomain = ALL_COD_LABELS.slice(0, n);
+  const maxF = factorial(n);
+  const H = svgH(n, n);
+
+  const domPos = Object.fromEntries(domain.map((el, i)   => [el, nodePos(i, n, DOM_X, H)]));
+  const codPos = Object.fromEntries(codomain.map((el, i) => [el, nodePos(i, n, COD_X, H)]));
+
+  const usedTargets  = Object.values(cur);
+  const isComplete   = domain.every(el => cur[el] !== undefined);
+  const isInjective  = new Set(usedTargets).size === usedTargets.length;
+  const isBijective  = isComplete && isInjective;
+  const isDup        = isBijective && list.some(d => mappingsEqual(d, cur));
+
+  const resetAll  = () => { setCur({}); setList([]); setDone(false); setMsg(null); };
+  const changeN   = (v: number) => { setN(v); resetAll(); };
+
+  useEffect(() => {
+    if (!msg) return;
+    const t = setTimeout(() => setMsg(null), 2500);
+    return () => clearTimeout(t);
+  }, [msg]);
+
+  const findCod = useCallback((x: number, y: number) => {
+    for (const el of codomain) { if (Math.hypot(x - codPos[el].x, y - codPos[el].y) < NODE_R + 8) return el; }
+    return null;
+  }, [codomain, codPos]);
+
+  const startDrag = useCallback((el: string, e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault(); setDrag({ from: el });
+    if (svgRef.current) setMouse(getSVGCoords(e, svgRef.current, H));
+  }, [H]);
+
+  const onMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    if (!drag || !svgRef.current) return;
+    e.preventDefault(); setMouse(getSVGCoords(e, svgRef.current, H));
+  }, [drag, H]);
+
+  const onUp = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    if (!drag || !svgRef.current) return;
+    const pos = getSVGCoords(e, svgRef.current, H);
+    const target = findCod(pos.x, pos.y);
+    if (target) { playPopSound(); setCur(p => ({ ...p, [drag.from]: target })); }
+    setDrag(null);
+  }, [drag, findCod, H]);
+
+  const removeArrow = (el: string) => {
+    playPopSound();
+    setCur(p => { const n2 = { ...p }; delete n2[el]; return n2; });
+  };
+
+  const addBijection = () => {
+    if (!isComplete)  { setMsg({ t: "Belum semua elemen domain dipasangkan!", ok: false }); return; }
+    if (!isInjective) { setMsg({ t: "Bukan bijeksi! Ada dua elemen menuju target yang sama.", ok: false }); return; }
+    if (isDup)        { setMsg({ t: "Korespondensi ini sudah ada! Coba kombinasi lain.", ok: false }); return; }
+    playPopSound();
+    const next = [...list, { ...cur }];
+    setList(next); setCur({});
+    if (next.length === maxF) { setDone(true); setMsg({ t: `🎉 Semua ${maxF} korespondensi ditemukan!`, ok: true }); }
+    else setMsg({ t: `✅ Korespondensi ke-${next.length} disimpan!`, ok: true });
+  };
+
+  const dragFromPos = drag ? domPos[drag.from] : null;
+
+  const dupStatusMsg = (() => {
+    if (!isComplete || isInjective) return null;
+    const seen: Record<string, string[]> = {};
+    for (const [k, v] of Object.entries(cur)) { (seen[v] = seen[v] ?? []).push(k); }
+    const dup = Object.entries(seen).find(([, ks]) => ks.length > 1);
+    return dup ? `${dup[1].join(" & ")} → "${dup[0]}" sama` : null;
+  })();
+
+  return (
+    <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-4 space-y-3">
+
+      {/* Header */}
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <p className="font-body text-sm font-bold text-green-300">🎮 Buktikan Sendiri — Seret Panah Bijeksi!</p>
+        <span className="text-[11px] font-mono bg-green-800/40 text-green-200 px-2 py-0.5 rounded border border-green-500/30">
+          {n}! = {maxF} korespondensi
+        </span>
+      </div>
+
+      {/* Size selector */}
+      <div className="bg-slate-800/60 border border-white/10 rounded-xl p-3 space-y-2">
+        <p className="text-[10px] text-green-300/70 font-bold font-body mb-1">⚙️ Pilih ukuran n(A) = n(B):</p>
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="text-[10px] font-bold font-mono w-8 shrink-0 text-green-400">n =</span>
+          {[1, 2, 3, 4, 5].map(v => (
+            <button key={v} onClick={() => changeN(v)}
+              className={`w-7 h-7 rounded-lg text-[12px] font-bold font-mono transition-all active:scale-95 border ${
+                n === v
+                  ? "bg-green-600/80 border-green-400/70 text-white ring-1 ring-green-400"
+                  : "bg-slate-700/50 border-white/10 text-white/40 hover:bg-slate-600/60 hover:text-white/80"
+              }`}>{v}</button>
+          ))}
+          <span className="text-[10px] text-white/30 font-mono">anggota</span>
+        </div>
+        <div className="pt-2 border-t border-white/5 flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] text-white/40 font-body">Banyak korespondensi =</span>
+          <span className="text-[11px] font-mono text-white/50">n! =</span>
+          <span className="text-[13px] font-bold font-mono text-yellow-300">
+            {n}! = {maxF}
+          </span>
+        </div>
+      </div>
+
+      {/* Progress bar */}
+      <div className="flex items-center gap-2">
+        <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-green-500 to-emerald-400 rounded-full transition-all duration-500"
+            style={{ width: `${maxF > 0 ? (list.length / maxF) * 100 : 0}%` }} />
+        </div>
+        <span className="text-[11px] text-white/50 font-mono shrink-0">{list.length}/{maxF}</span>
+        {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">🎉 Lengkap!</span>}
+      </div>
+
+      {/* SVG Diagram */}
+      <div className="flex justify-center">
+        <div className="bg-slate-900/60 rounded-xl border border-white/10 p-2 select-none w-full" style={{ maxWidth: SVG_W + 16 }}>
+          <div className="flex justify-between px-4 mb-1 text-[10px] font-bold font-mono">
+            <span className="text-cyan-400">Domain (A)</span>
+            <span className="text-violet-400">Kodomain (B)</span>
+          </div>
+          <svg ref={svgRef} viewBox={`0 0 ${SVG_W} ${H}`} width="100%"
+            style={{ cursor: drag ? "crosshair" : "default", touchAction: "none" }}
+            onMouseMove={onMove} onMouseUp={onUp} onMouseLeave={() => setDrag(null)}
+            onTouchMove={onMove} onTouchEnd={onUp}>
+            <defs>
+              <marker id="ah-bij"     markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#6ee7b7" /></marker>
+              <marker id="ah-bij-dup" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#f87171" /></marker>
+              <marker id="ahd-bij"    markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#fbbf24" /></marker>
+            </defs>
+            <line x1={SVG_W/2} y1={8} x2={SVG_W/2} y2={H-8} stroke="rgba(255,255,255,0.05)" strokeWidth={1} strokeDasharray="4 3" />
+
+            {/* Existing arrows */}
+            {domain.map(el => {
+              const tgt = cur[el]; if (!tgt) return null;
+              const isDupArrow = usedTargets.filter(t => t === tgt).length > 1;
+              return <path key={el} d={bezierPath(domPos[el], codPos[tgt])} fill="none"
+                stroke={isDupArrow ? "#f87171" : "#6ee7b7"} strokeWidth={2.5}
+                markerEnd={isDupArrow ? "url(#ah-bij-dup)" : "url(#ah-bij)"} />;
+            })}
+
+            {/* Dragging arrow */}
+            {drag && dragFromPos && (
+              <path d={bezierPath(dragFromPos, mouse, NODE_R, 0)} fill="none" stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 3" markerEnd="url(#ahd-bij)" />
+            )}
+
+            {/* Codomain nodes */}
+            {codomain.map(el => {
+              const p = codPos[el];
+              const hover    = drag !== null && Math.hypot(mouse.x - p.x, mouse.y - p.y) < NODE_R + 10;
+              const isDupTgt = usedTargets.filter(t => t === el).length > 1;
+              const isHit    = usedTargets.includes(el);
+              return (
+                <g key={el}>
+                  <circle cx={p.x} cy={p.y} r={NODE_R}
+                    fill={hover ? "#5b21b6" : isDupTgt ? "#7f1d1d" : "#3b1f7a"}
+                    stroke={hover ? "#c4b5fd" : isDupTgt ? "#f87171" : isHit ? "#6ee7b7" : "#a78bfa"}
+                    strokeWidth={hover || isDupTgt ? 2.5 : 1.5} />
+                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill="#ede9fe" fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
+                  {isDupTgt && <text x={p.x} y={p.y+17} textAnchor="middle" fill="#f87171" fontSize={8} fontWeight="bold">×2!</text>}
+                </g>
+              );
+            })}
+
+            {/* Domain nodes */}
+            {domain.map(el => {
+              const p = domPos[el];
+              const hasArr    = cur[el] !== undefined;
+              const isDragging = drag?.from === el;
+              const isDupArrow = hasArr && usedTargets.filter(t => t === cur[el]).length > 1;
+              return (
+                <g key={el} style={{ cursor: "grab" }}
+                  onMouseDown={e => startDrag(el, e)} onTouchStart={e => startDrag(el, e)}
+                  onDoubleClick={() => hasArr && removeArrow(el)}>
+                  <circle cx={p.x} cy={p.y} r={NODE_R}
+                    fill={isDragging ? "#164e63" : hasArr ? "#0c4a6e" : "#0e4f6e"}
+                    stroke={isDragging ? "#fbbf24" : isDupArrow ? "#f87171" : hasArr ? "#6ee7b7" : "#22d3ee"}
+                    strokeWidth={isDragging ? 2.5 : 1.5} />
+                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill="#e0f2fe" fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
+                  {hasArr && (
+                    <>
+                      <circle cx={p.x+15} cy={p.y-15} r={7} fill={isDupArrow ? "#dc2626" : "#10b981"} stroke={isDupArrow ? "#f87171" : "#6ee7b7"} strokeWidth={1} />
+                      <text x={p.x+15} y={p.y-14} textAnchor="middle" dominantBaseline="middle" fill="white" fontSize={8} fontWeight="bold">{isDupArrow ? "!" : "✓"}</text>
+                    </>
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+          <p className="text-center text-[10px] text-white/25 mt-1">👆 Seret dari kiri ke kanan · Double-tap untuk hapus panah</p>
+        </div>
+      </div>
+
+      {/* Status */}
+      <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-body ${
+        isBijective && !isDup ? "bg-green-900/30 border border-green-500/30 text-green-300"
+        : isComplete && !isInjective ? "bg-red-900/30 border border-red-500/30 text-red-300"
+        : isDup ? "bg-orange-900/30 border border-orange-500/30 text-orange-300"
+        : "bg-slate-800/50 border border-white/10 text-white/40"
+      }`}>
+        {isBijective && !isDup  && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />}
+        {(isComplete && !isInjective || isDup) && <XCircle className="w-3.5 h-3.5 shrink-0" />}
+        {!isComplete && !isDup  && <div className="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0" />}
+        {isBijective && !isDup
+          ? "✅ Bijeksi valid! Setiap elemen berpasangan tepat satu-satu."
+          : isComplete && !isInjective
+          ? `❌ Bukan bijeksi! ${dupStatusMsg ?? "Ada target yang dipakai dua kali."}`
+          : isDup
+          ? "⚠️ Korespondensi ini sudah ada! Coba kombinasi lain."
+          : `Hubungkan ${domain.filter(el => !cur[el]).length} elemen domain yang tersisa.`}
+      </div>
+
+      {msg && (
+        <div className={`text-center text-xs font-bold py-1.5 px-3 rounded-lg ${msg.ok ? "bg-green-900/40 text-green-300 border border-green-500/30" : "bg-red-900/40 text-red-300 border border-red-500/30"}`}>
+          {msg.t}
+        </div>
+      )}
+
+      {/* Action buttons */}
+      <div className="flex gap-2">
+        <button onClick={() => { playPopSound(); setCur({}); }}
+          className="flex items-center gap-1 bg-slate-700/50 hover:bg-slate-600/60 border border-white/15 text-white/60 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
+          <RotateCcw className="w-3 h-3" /> Reset
+        </button>
+        <button onClick={() => { playPopSound(); resetAll(); }}
+          className="flex items-center gap-1 bg-slate-700/50 hover:bg-red-900/40 border border-white/15 hover:border-red-500/40 text-white/60 hover:text-red-300 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
+          <RotateCcw className="w-3 h-3" /> Reset Semua
+        </button>
+        <button onClick={addBijection} disabled={!isBijective || isDup}
+          className={`flex-1 flex items-center justify-center gap-1.5 text-xs font-bold py-2 rounded-lg border transition-all active:scale-95 ${
+            isBijective && !isDup
+              ? "bg-green-600/80 hover:bg-green-500/90 border-green-400/60 text-white cursor-pointer"
+              : "bg-slate-800/40 border-white/10 text-white/20 cursor-not-allowed"
+          }`}>
+          <Trophy className="w-3.5 h-3.5" /> Simpan ke Koleksi
+        </button>
+      </div>
+
+      {/* Gallery */}
+      {list.length > 0 && (
+        <div>
+          <p className="text-[11px] font-bold text-yellow-300 mb-2 flex items-center gap-1">
+            <Trophy className="w-3 h-3" /> Korespondensi yang ditemukan ({list.length}/{maxF}):
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {list.map((m, i) => <MiniDiag key={i} mapping={m} domain={domain} codomain={codomain} idx={i} />)}
+            {Array.from({ length: maxF - list.length }).map((_, i) => (
+              <div key={i} className="w-[110px] h-[100px] rounded-lg border border-dashed border-white/10 bg-slate-900/30 flex items-center justify-center">
+                <span className="text-white/10 text-lg">?</span>
+              </div>
+            ))}
+          </div>
+          {done && (
+            <div className="mt-3 bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
+              <p className="text-green-300 font-bold text-xs">
+                🎉 Terbukti! Banyak korespondensi satu-satu = {n}! = {maxF}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const BanyakFungsiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -598,6 +881,10 @@ const BanyakFungsiPage = () => {
                     <p className="text-xs text-red-400 text-center mt-2">n(A)≠n(B), elemen d tidak punya pasangan</p>
                   </div>
                 </div>
+
+                {/* Animasi Interaktif Bijeksi */}
+                <DiagramInteraktifBijeksi />
+
               </div>
             )}
           </div>
