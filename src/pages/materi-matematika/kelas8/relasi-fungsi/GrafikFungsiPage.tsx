@@ -322,41 +322,39 @@ const GrafikFungsiPage = () => {
                     Suatu perusahaan taksi memasang tarif seperti grafik berikut (sumbu-x = jarak tempuh dalam km, sumbu-y = tarif dalam ribuan rupiah).
                   </p>
                   {/* GRAFIK TARIF TAKSI — rekonstruksi dari gambar asli */}
-                  <div className="bg-white border border-yellow-500/20 rounded-xl p-4">
+                  <div className="bg-transparent border border-yellow-500/20 rounded-xl p-4">
                     <svg viewBox="0 0 320 240" className="w-full max-w-sm mx-auto">
-                      {/* White background */}
-                      <rect x={0} y={0} width={320} height={240} fill="white" />
                       {/* Chart area: x 70–260, y 20–195 */}
                       {/* Y scale: 0 at y=195, 30 at y=25 → 170px/30 = 5.667px per unit */}
                       {/* X scale: 0 at x=70, 6 at x=220 (then extend axis) → 150px/6 = 25px per unit */}
                       {/* Grid lines — horizontal, every 5 units */}
                       {[0,5,10,15,20,25,30].map((v) => {
                         const yPx = 195 - v * (170/30);
-                        return <line key={v} x1={70} y1={yPx} x2={250} y2={yPx} stroke="#d1d5db" strokeWidth="0.8" />;
+                        return <line key={v} x1={70} y1={yPx} x2={250} y2={yPx} stroke="#334155" strokeWidth="0.8" />;
                       })}
                       {/* Axes */}
-                      <line x1={70} y1={20} x2={70} y2={198} stroke="#374151" strokeWidth="1.5" />
-                      <line x1={67} y1={195} x2={260} y2={195} stroke="#374151" strokeWidth="1.5" />
+                      <line x1={70} y1={20} x2={70} y2={198} stroke="#94a3b8" strokeWidth="1.5" />
+                      <line x1={67} y1={195} x2={260} y2={195} stroke="#94a3b8" strokeWidth="1.5" />
                       {/* Y labels: 0, 5, 10, 15, 20, 25, 30 */}
                       {[0,5,10,15,20,25,30].map((v) => {
                         const yPx = 195 - v * (170/30);
                         return (
-                          <text key={v} x={58} y={yPx + 3} fill="#374151" fontSize="9" textAnchor="end">{v}</text>
+                          <text key={v} x={58} y={yPx + 3} fill="#94a3b8" fontSize="9" textAnchor="end">{v}</text>
                         );
                       })}
                       {/* "30 Ribuan" label at top-left of y-axis */}
-                      <text x={72} y={16} fill="#374151" fontSize="8.5" fontWeight="bold">30 Ribuan</text>
+                      <text x={72} y={16} fill="#cbd5e1" fontSize="8.5" fontWeight="bold">30 Ribuan</text>
                       {/* X labels: 2, 4, 6 */}
                       {[2,4,6].map((v) => {
                         const xPx = 70 + v * 25;
                         return (
-                          <text key={v} x={xPx} y={210} fill="#374151" fontSize="9" textAnchor="middle">{v}</text>
+                          <text key={v} x={xPx} y={210} fill="#94a3b8" fontSize="9" textAnchor="middle">{v}</text>
                         );
                       })}
                       {/* X tick marks */}
                       {[2,4,6].map((v) => {
                         const xPx = 70 + v * 25;
-                        return <line key={v} x1={xPx} y1={195} x2={xPx} y2={200} stroke="#374151" strokeWidth="1" />;
+                        return <line key={v} x1={xPx} y1={195} x2={xPx} y2={200} stroke="#94a3b8" strokeWidth="1" />;
                       })}
                       {/* Data line f(x)=3x+7: (2,13),(4,19),(6,25) */}
                       {/* x=2 → xPx=120, y=13 → yPx=195-13*(170/30)=195-73.67=121.3 */}
@@ -379,7 +377,7 @@ const GrafikFungsiPage = () => {
                       {/* Legend */}
                       <polygon points="270,60 276,66 270,72 264,66" fill="#3b82f6" stroke="white" strokeWidth="1" />
                       <line x1={258} y1={66} x2={282} y2={66} stroke="#3b82f6" strokeWidth="1.5" />
-                      <text x={285} y={70} fill="#374151" fontSize="9">jarak</text>
+                      <text x={285} y={70} fill="#94a3b8" fontSize="9">jarak</text>
                       {/* Highlight x=5 */}
                       <line x1={195} y1={195} x2={195} y2={70} stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" />
                       <line x1={70} y1={70} x2={195} y2={70} stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" />
