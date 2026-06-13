@@ -108,16 +108,23 @@ export function JarakGarisHorizontal() {
             style={{ pointerEvents: "none" }}>y = {k}</text>
 
           {/* perpendicular + foot */}
-          {dist > 0 && <>
-            <line x1={toSX(ptP[0])} y1={toSY(ptP[1])} x2={toSX(ptP[0])} y2={toSY(k)}
-              stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9}
-              style={{ pointerEvents: "none" }} />
-            <circle cx={toSX(ptP[0])} cy={toSY(k)} r={4}
-              fill="#22d3ee" stroke="white" strokeWidth={1.5} style={{ pointerEvents: "none" }} />
-            <text x={toSX(ptP[0]) + 7} y={(toSY(ptP[1]) + toSY(k)) / 2 + 4}
-              fill="#fbbf24" fontSize={10} fontFamily="monospace" fontWeight="bold"
-              style={{ pointerEvents: "none" }}>d={dist}</text>
-          </>}
+          {dist > 0 && (() => {
+            const S = 9;
+            const Fx = toSX(ptP[0]), Fy = toSY(k);
+            const ny = ptP[1] > k ? -1 : 1;
+            return (<>
+              <line x1={toSX(ptP[0])} y1={toSY(ptP[1])} x2={Fx} y2={Fy}
+                stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9}
+                style={{ pointerEvents: "none" }} />
+              {/* right-angle square */}
+              <polyline points={`${Fx+S},${Fy} ${Fx+S},${Fy+ny*S} ${Fx},${Fy+ny*S}`}
+                fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth={1.5}
+                style={{ pointerEvents: "none" }} />
+              <text x={Fx + 7} y={(toSY(ptP[1]) + Fy) / 2 + 4}
+                fill="#fbbf24" fontSize={10} fontFamily="monospace" fontWeight="bold"
+                style={{ pointerEvents: "none" }}>d={dist}</text>
+            </>);
+          })()}
 
           {/* Point P */}
           <g onPointerDown={onPDown} style={{ cursor: "grab" }}>
@@ -209,16 +216,23 @@ export function JarakGarisVertikal() {
           <text x={toSX(k) + 6} y={14} fill="#86efac" fontSize={10} fontFamily="monospace" fontWeight="bold"
             style={{ pointerEvents: "none" }}>x = {k}</text>
 
-          {dist > 0 && <>
-            <line x1={toSX(ptP[0])} y1={toSY(ptP[1])} x2={toSX(k)} y2={toSY(ptP[1])}
-              stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9}
-              style={{ pointerEvents: "none" }} />
-            <circle cx={toSX(k)} cy={toSY(ptP[1])} r={4}
-              fill="#4ade80" stroke="white" strokeWidth={1.5} style={{ pointerEvents: "none" }} />
-            <text x={(toSX(ptP[0]) + toSX(k)) / 2} y={toSY(ptP[1]) - 7}
-              textAnchor="middle" fill="#fbbf24" fontSize={10} fontFamily="monospace" fontWeight="bold"
-              style={{ pointerEvents: "none" }}>d={dist}</text>
-          </>}
+          {dist > 0 && (() => {
+            const S = 9;
+            const Fx = toSX(k), Fy = toSY(ptP[1]);
+            const nx = ptP[0] > k ? -1 : 1;
+            return (<>
+              <line x1={toSX(ptP[0])} y1={Fy} x2={Fx} y2={Fy}
+                stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9}
+                style={{ pointerEvents: "none" }} />
+              {/* right-angle square */}
+              <polyline points={`${Fx},${Fy+S} ${Fx+nx*S},${Fy+S} ${Fx+nx*S},${Fy}`}
+                fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth={1.5}
+                style={{ pointerEvents: "none" }} />
+              <text x={(toSX(ptP[0]) + Fx) / 2} y={Fy - 7}
+                textAnchor="middle" fill="#fbbf24" fontSize={10} fontFamily="monospace" fontWeight="bold"
+                style={{ pointerEvents: "none" }}>d={dist}</text>
+            </>);
+          })()}
 
           <g onPointerDown={onPDown} style={{ cursor: "grab" }}>
             <circle cx={toSX(ptP[0])} cy={toSY(ptP[1])} r={18} fill="transparent" />
@@ -365,14 +379,31 @@ export function JarakGarisMiring() {
             <line x1={toSX(lS[0])} y1={toSY(lS[1])} x2={toSX(lE[0])} y2={toSY(lE[1])}
               stroke="#a78bfa" strokeWidth={2.5} opacity={0.9} style={{ pointerEvents:"none" }} />
             {/* perpendicular */}
-            {dist > 0.005 && <>
-              <line x1={toSX(ptP[0])} y1={toSY(ptP[1])} x2={toSX(footX)} y2={toSY(footY)}
-                stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9} style={{ pointerEvents:"none" }} />
-              <circle cx={toSX(footX)} cy={toSY(footY)} r={4}
-                fill="#a78bfa" stroke="white" strokeWidth={1.5} style={{ pointerEvents:"none" }} />
-              <text x={(toSX(ptP[0])+toSX(footX))/2+8} y={(toSY(ptP[1])+toSY(footY))/2}
-                fill="#fbbf24" fontSize={9} fontFamily="monospace" fontWeight="bold" style={{ pointerEvents:"none" }}>d≈{distStr}</text>
-            </>}
+            {dist > 0.005 && (() => {
+              const dx = L2[0]-L1[0], dy = L2[1]-L1[1];
+              const lineLen = Math.sqrt(dx*dx+dy*dy);
+              const S = 9;
+              const ulx = lineLen>0 ? dx/lineLen : 1, uly = lineLen>0 ? -dy/lineLen : 0;
+              const sqDenom = Math.sqrt(denom);
+              const sign = num >= 0 ? 1 : -1;
+              const unx = sign*a/sqDenom, uny = -sign*b/sqDenom;
+              const Fx = toSX(footX), Fy = toSY(footY);
+              const Ax = Fx+S*ulx, Ay = Fy+S*uly;
+              const Bx = Ax+S*unx, By = Ay+S*uny;
+              const Cx = Fx+S*unx, Cy = Fy+S*uny;
+              return (<>
+                <line x1={toSX(ptP[0])} y1={toSY(ptP[1])} x2={Fx} y2={Fy}
+                  stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9} style={{ pointerEvents:"none" }} />
+                {/* right-angle square */}
+                <polyline points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`}
+                  fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth={1.5}
+                  style={{ pointerEvents:"none" }} />
+                <circle cx={Fx} cy={Fy} r={4}
+                  fill="#a78bfa" stroke="white" strokeWidth={1.5} style={{ pointerEvents:"none" }} />
+                <text x={(toSX(ptP[0])+Fx)/2+8} y={(toSY(ptP[1])+Fy)/2}
+                  fill="#fbbf24" fontSize={9} fontFamily="monospace" fontWeight="bold" style={{ pointerEvents:"none" }}>d≈{distStr}</text>
+              </>);
+            })()}
           </>}
 
           {/* L1 */}
