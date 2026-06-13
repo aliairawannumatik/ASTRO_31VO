@@ -69,12 +69,12 @@ export default function JarakDuaTitikInteraktif() {
         stroke={axis ? "rgba(99,102,241,0.6)" : "rgba(99,102,241,0.12)"}
         strokeWidth={axis ? 1.5 : 1} />
     );
-    if (i !== 0 && i % 2 === 0) {
+    if (i !== 0) {
       grid.push(
         <text key={`lx${i}`} x={toSX(i)} y={toSY(0) + 14} textAnchor="middle"
-          fill="rgba(167,139,250,0.5)" fontSize={9} fontFamily="monospace">{i}</text>,
-        <text key={`ly${i}`} x={toSX(0) - 7} y={toSY(i) + 3} textAnchor="end"
-          fill="rgba(167,139,250,0.5)" fontSize={9} fontFamily="monospace">{i}</text>
+          fill="rgba(167,139,250,0.5)" fontSize={8} fontFamily="monospace">{i}</text>,
+        <text key={`ly${i}`} x={toSX(0) - 5} y={toSY(i) + 3} textAnchor="end"
+          fill="rgba(167,139,250,0.5)" fontSize={8} fontFamily="monospace">{i}</text>
       );
     }
   }

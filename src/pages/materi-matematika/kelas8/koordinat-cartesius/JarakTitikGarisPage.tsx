@@ -144,13 +144,6 @@ const JarakTitikGarisPage = () => {
                   <BlockMath math="\boxed{d(AB) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}" />
                 </div>
 
-                <div className="bg-slate-800/40 border border-white/10 rounded-lg p-3 text-xs font-body">
-                  <p className="text-white/70 font-semibold mb-1">🔎 Koneksi ke Teorema Pythagoras:</p>
-                  <p className="text-white/60">Selisih x (<InlineMath math="\Delta x = x_2 - x_1" />) = sisi horizontal segitiga</p>
-                  <p className="text-white/60">Selisih y (<InlineMath math="\Delta y = y_2 - y_1" />) = sisi vertikal segitiga</p>
-                  <p className="text-white/60">Jarak AB = hipotenusa = <InlineMath math="\sqrt{(\Delta x)^2 + (\Delta y)^2}" /></p>
-                </div>
-
                 {/* ANIMASI INTERAKTIF JARAK DUA TITIK */}
                 <div className="bg-slate-800/60 border border-cyan-500/25 rounded-xl p-4 space-y-3">
                   <p className="text-cyan-300 font-mono font-bold text-sm">🎮 Animasi Interaktif — Seret Titik A dan B</p>
