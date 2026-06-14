@@ -331,11 +331,11 @@ function generateSteps(
 // ── Color map ─────────────────────────────────────────────────────────────────
 
 const COLORS: Record<string, { border: string; bg: string; badge: string }> = {
-  "border-slate-500/40 bg-slate-800/40":   { border: "border-slate-500/40",   bg: "bg-slate-800/40",   badge: "bg-slate-600 text-white" },
-  "border-cyan-500/40 bg-cyan-900/20":     { border: "border-cyan-500/40",     bg: "bg-cyan-900/20",     badge: "bg-cyan-600 text-white" },
-  "border-violet-500/40 bg-violet-900/20": { border: "border-violet-500/40",   bg: "bg-violet-900/20",   badge: "bg-violet-600 text-white" },
-  "border-green-500/40 bg-green-900/20":   { border: "border-green-500/40",    bg: "bg-green-900/20",    badge: "bg-green-600 text-white" },
-  "border-yellow-500/40 bg-yellow-900/20": { border: "border-yellow-500/40",   bg: "bg-yellow-900/20",   badge: "bg-yellow-500 text-black" },
+  "border-slate-500/40 bg-slate-800/40":   { border: "border-slate-400/60",   bg: "bg-slate-800/50",   badge: "bg-slate-600 text-white" },
+  "border-cyan-500/40 bg-cyan-900/20":     { border: "border-cyan-400/60",     bg: "bg-cyan-900/30",     badge: "bg-cyan-600 text-white" },
+  "border-violet-500/40 bg-violet-900/20": { border: "border-violet-400/60",   bg: "bg-violet-900/30",   badge: "bg-violet-600 text-white" },
+  "border-green-500/40 bg-green-900/20":   { border: "border-green-400/60",    bg: "bg-green-900/30",    badge: "bg-green-600 text-white" },
+  "border-yellow-500/40 bg-yellow-900/20": { border: "border-yellow-400/60",   bg: "bg-yellow-900/30",   badge: "bg-yellow-500 text-black" },
 };
 
 // ── Main component ────────────────────────────────────────────────────────────
@@ -489,9 +489,9 @@ const EliminasiInteraktif: React.FC = () => {
 
             if (step.kind === "elim") {
               const isElimFirst = i === 1; // blockA
-              const borderColor = isElimFirst ? "border-cyan-500/40" : "border-violet-500/40";
-              const bgColor     = isElimFirst ? "bg-cyan-900/15"      : "bg-violet-900/15";
-              const badgeColor  = isElimFirst ? "bg-cyan-600"         : "bg-violet-600";
+              const borderColor = isElimFirst ? "border-cyan-400/60" : "border-violet-400/60";
+              const bgColor     = isElimFirst ? "bg-cyan-900/30"     : "bg-violet-900/30";
+              const badgeColor  = isElimFirst ? "bg-cyan-600"        : "bg-violet-600";
               const stepNum     = i + 1;
               return (
                 <div key={i} className={`border ${borderColor} ${bgColor} rounded-2xl overflow-hidden ${transBase} ${transVis}`}>
