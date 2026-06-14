@@ -367,6 +367,24 @@ const MetodeEliminasiPage = () => {
                     <div>
                       <p className="font-body text-sm text-white/80 mb-1"><strong>Eliminasi <InlineMath math="y" /> untuk mencari <InlineMath math="x" />:</strong></p>
                       <p className="font-body text-xs text-white/60 mb-2">KPK dari 3 dan 2 adalah 6. Kalikan P1 × 2 dan P2 × 3.</p>
+
+                      {/* Samakan koefisien y */}
+                      <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 text-sm font-body mb-2">
+                        <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Samakan koefisien y → kalikan kedua persamaan</p>
+                        <div className="flex items-center gap-2 font-mono text-sm">
+                          <span className="text-white/50 w-5 shrink-0">P1</span>
+                          <span className="text-white/80">2x + 3y = 16</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×2|</span>
+                          <span className="text-cyan-300 font-bold">4x + 6y = 32</span>
+                        </div>
+                        <div className="flex items-center gap-2 font-mono text-sm">
+                          <span className="text-white/50 w-5 shrink-0">P2</span>
+                          <span className="text-white/80">5x − 2y = 2</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×3|</span>
+                          <span className="text-cyan-300 font-bold">15x − 6y = 6</span>
+                        </div>
+                      </div>
+
                       <div className="bg-slate-800/50 rounded-lg px-4 py-3 space-y-1 text-sm font-body">
                         <div className="flex items-center gap-2">
                           <span className="text-white/40 w-8 shrink-0">P1×2</span>
@@ -375,7 +393,7 @@ const MetodeEliminasiPage = () => {
                         <div className="flex items-center gap-2 border-b border-white/20 pb-1">
                           <span className="text-white/40 w-8 shrink-0">P2×3</span>
                           <span className="text-white font-mono">15x − 6y = 6</span>
-                          <span className="text-green-400 ml-auto text-xs">(dijumlahkan)</span>
+                          <span className="text-green-300 ml-auto text-xs font-bold px-1.5 py-0.5 rounded bg-green-900/50 border border-green-500/30">dijumlahkan</span>
                         </div>
                         <div className="flex items-center gap-2 pt-1">
                           <span className="text-white/40 w-8 shrink-0"></span>
@@ -389,6 +407,24 @@ const MetodeEliminasiPage = () => {
                     <div>
                       <p className="font-body text-sm text-white/80 mb-1"><strong>Eliminasi <InlineMath math="x" /> untuk mencari <InlineMath math="y" />:</strong></p>
                       <p className="font-body text-xs text-white/60 mb-2">KPK dari 2 dan 5 adalah 10. Kalikan P1 × 5 dan P2 × 2.</p>
+
+                      {/* Samakan koefisien x */}
+                      <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 text-sm font-body mb-2">
+                        <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Samakan koefisien x → kalikan kedua persamaan</p>
+                        <div className="flex items-center gap-2 font-mono text-sm">
+                          <span className="text-white/50 w-5 shrink-0">P1</span>
+                          <span className="text-white/80">2x + 3y = 16</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×5|</span>
+                          <span className="text-cyan-300 font-bold">10x + 15y = 80</span>
+                        </div>
+                        <div className="flex items-center gap-2 font-mono text-sm">
+                          <span className="text-white/50 w-5 shrink-0">P2</span>
+                          <span className="text-white/80">5x − 2y = 2</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×2|</span>
+                          <span className="text-cyan-300 font-bold">10x − 4y = 4</span>
+                        </div>
+                      </div>
+
                       <div className="bg-slate-800/50 rounded-lg px-4 py-3 space-y-1 text-sm font-body">
                         <div className="flex items-center gap-2">
                           <span className="text-white/40 w-8 shrink-0">P1×5</span>
@@ -397,7 +433,7 @@ const MetodeEliminasiPage = () => {
                         <div className="flex items-center gap-2 border-b border-white/20 pb-1">
                           <span className="text-white/40 w-8 shrink-0">P2×2</span>
                           <span className="text-white font-mono">10x − 4y = 4</span>
-                          <span className="text-red-400 ml-auto text-xs">(dikurangkan)</span>
+                          <span className="text-red-300 ml-auto text-xs font-bold px-1.5 py-0.5 rounded bg-red-900/50 border border-red-500/30">dikurangkan</span>
                         </div>
                         <div className="flex items-center gap-2 pt-1">
                           <span className="text-white/40 w-8 shrink-0"></span>
