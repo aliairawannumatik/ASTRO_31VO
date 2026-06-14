@@ -150,10 +150,10 @@ const ElimTable: React.FC<{ block: ElimBlock; visible: boolean }> = ({ block, vi
   const { row1, row2, op, elimVar, resultA, resultC, solveFrac, solveVar } = block;
 
   const cellBase = "px-2 py-1.5 text-center font-mono text-sm tabular-nums";
-  const deadCell = `${cellBase} line-through text-red-400/60`; // eliminated column
+  const deadCell = `${cellBase} line-through text-red-400/80`; // eliminated column
   const liveCell = `${cellBase} text-emerald-300 font-bold`;
-  const dimCell  = `${cellBase} text-white/40`;
-  const resultElim = `${cellBase} text-slate-600 font-bold`; // "0" for eliminated
+  const dimCell  = `${cellBase} text-white/60`;
+  const resultElim = `${cellBase} text-red-400/60 line-through font-bold`; // "0" for eliminated
   const resultLive = `${cellBase} text-yellow-300 font-bold text-base`; // solved value
 
   // Row data
@@ -162,7 +162,7 @@ const ElimTable: React.FC<{ block: ElimBlock; visible: boolean }> = ({ block, vi
   const renderRow = (row: ERow, isRow2: boolean) => (
     <div className={`flex items-center gap-1 ${isRow2 ? "border-b border-white/20 pb-1" : ""}`}>
       <div className="w-14 shrink-0 text-right pr-2">
-        <span className="text-white/30 text-[11px] font-body">{isRow2 ? `${op === "-" ? "−" : "+"} ${row.label}` : row.label}</span>
+        <span className="text-white/60 text-[11px] font-body">{isRow2 ? `${op === "-" ? "−" : "+"} ${row.label}` : row.label}</span>
       </div>
       <span className={xDead ? deadCell : liveCell}>{termStr(row.a, "x")}</span>
       <span className={dimCell}>+</span>
@@ -200,11 +200,11 @@ const ElimTable: React.FC<{ block: ElimBlock; visible: boolean }> = ({ block, vi
         {/* Header */}
         <div className="flex items-center gap-1 mb-1">
           <div className="w-14" />
-          <span className={`${cellBase} text-[10px] uppercase ${xDead ? "text-red-400/50" : "text-white/30"}`}>x</span>
+          <span className={`${cellBase} text-[10px] uppercase ${xDead ? "text-red-400/80" : "text-white/50"}`}>x</span>
           <span className="w-3" />
-          <span className={`${cellBase} text-[10px] uppercase ${!xDead ? "text-red-400/50" : "text-white/30"}`}>y</span>
+          <span className={`${cellBase} text-[10px] uppercase ${!xDead ? "text-red-400/80" : "text-white/50"}`}>y</span>
           <span className="w-3" />
-          <span className={`${cellBase} text-[10px] uppercase text-white/30`}>rhs</span>
+          <span className={`${cellBase} text-[10px] uppercase text-white/50`}>rhs</span>
         </div>
 
         {/* Row 1 */}
@@ -216,7 +216,7 @@ const ElimTable: React.FC<{ block: ElimBlock; visible: boolean }> = ({ block, vi
         {/* Result row */}
         <div className="flex items-center gap-1 pt-1">
           <div className="w-14 shrink-0 text-right pr-2">
-            <span className="text-white/30 text-[11px] font-body">Hasil</span>
+            <span className="text-white/60 text-[11px] font-body">Hasil</span>
           </div>
           <span className={xDead ? resultElim : resultLive}>
             {xDead ? "0" : termStr(resultA, "x")}
