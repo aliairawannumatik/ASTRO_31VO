@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Replace } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Replace, FlaskConical } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import SubstitusiInteraktif from "@/components/SubstitusiInteraktif";
 
 const MetodeSubstitusiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "langkah", "contoh1", "rangkuman",
+    "intro", "langkah", "lab", "contoh1", "rangkuman",
   ]);
 
   const toggleSection = (section: string) => {
@@ -175,6 +176,21 @@ const MetodeSubstitusiPage = () => {
                   </div>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* ── LAB INTERAKTIF ── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="lab" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400" title="🧪 Lab Interaktif — Coba Soalmu Sendiri!" />
+            {expandedSections.includes("lab") && (
+              <div className="px-5 pb-5 space-y-3">
+                <div className="bg-violet-900/20 border border-violet-500/20 rounded-xl p-3">
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Masukkan <strong className="text-violet-300">sistem persamaan linear dua variabel</strong> milikmu, pilih persamaan & variabel yang ingin diisolasi, lalu tekan <strong className="text-cyan-300">▶ Selesaikan</strong> — setiap langkah akan muncul satu per satu secara otomatis!
+                  </p>
+                </div>
+                <SubstitusiInteraktif />
               </div>
             )}
           </div>
