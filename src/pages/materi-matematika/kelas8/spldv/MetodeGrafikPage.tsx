@@ -124,21 +124,6 @@ const MetodeGrafikPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* ── LAB INTERAKTIF ── */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="lab" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400"
-              title="🖊️ Lab Interaktif: Gambar Garis & Temukan Solusi SPLDV" />
-            {true && (
-              <div className="px-4 pb-5 space-y-3">
-                <p className="font-body text-xs text-white/55 leading-relaxed">
-                  Seret titik-titik ke posisi yang kamu inginkan untuk menentukan dua garis, lalu gambar kedua garis tersebut.
-                  <strong className="text-yellow-300"> Titik potong</strong> kedua garis adalah penyelesaian SPLDV!
-                </p>
-                <GrafikSPLDVInteraktif />
-              </div>
-            )}
-          </div>
-
           {/* ── PENGANTAR ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Ide Dasar Metode Grafik" />
@@ -239,6 +224,21 @@ const MetodeGrafikPage = () => {
                   </div>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* ── LAB INTERAKTIF ── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="lab" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400"
+              title="🖊️ Lab Interaktif: Gambar Garis & Temukan Solusi SPLDV" />
+            {true && (
+              <div className="px-4 pb-5 space-y-3">
+                <p className="font-body text-xs text-white/55 leading-relaxed">
+                  Ketik langsung persamaan SPLDV di kotak Garis 1 dan Garis 2, atau seret titik-titik secara manual, lalu gambar kedua garis untuk menemukan solusinya.
+                  <strong className="text-yellow-300"> Titik potong</strong> kedua garis adalah penyelesaian SPLDV!
+                </p>
+                <GrafikSPLDVInteraktif />
               </div>
             )}
           </div>

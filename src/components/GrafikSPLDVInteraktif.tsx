@@ -62,6 +62,75 @@ function intersectLines(A: Pt, B: Pt, C: Pt, D: Pt): Pt | null {
   return { x: (c1 * b2 - c2 * b1) / det, y: (a1 * c2 - a2 * c1) / det };
 }
 
+/* ─── Equation parser: accepts "ax + by = c" form ─── */
+function parseEquation(raw: string): { a: number; b: number; c: number } | null {
+  try {
+    const s = raw.replace(/\s/g, '').toLowerCase();
+    const ei = s.indexOf('=');
+    if (ei < 1) return null;
+    const c = parseFloat(s.slice(ei + 1));
+    if (isNaN(c)) return null;
+
+    const lhs = s.slice(0, ei);
+    // Ensure the first term has an explicit sign so we can split cleanly
+    const norm = /^[xy]/.test(lhs) ? '+' + lhs : lhs;
+    // Split into signed tokens: each starts with + or -
+    const terms = norm.match(/[+\-][^+\-]*/g) ?? [];
+
+    let a = 0, b = 0;
+    for (const term of terms) {
+      const sign = term[0] === '-' ? -1 : 1;
+      const body = term.slice(1); // strip leading sign
+      if (body.includes('x')) {
+        const n = body.replace('x', '');
+        a = n === '' ? sign : sign * (parseFloat(n) || 0);
+      } else if (body.includes('y')) {
+        const n = body.replace('y', '');
+        b = n === '' ? sign : sign * (parseFloat(n) || 0);
+      }
+    }
+    if ((a === 0 && b === 0) || isNaN(a) || isNaN(b)) return null;
+    return { a, b, c };
+  } catch { return null; }
+}
+
+/* ─── Find two integer grid points on ax + by = c ─── */
+function findTwoPointsOnLine(a: number, b: number, c: number): [Pt, Pt] | null {
+  const candidates: Pt[] = [];
+
+  if (b !== 0) {
+    for (let x = 0; x <= GMAX; x++) {
+      const y = (c - a * x) / b;
+      if (y >= -0.001 && y <= GMAX + 0.001 && Math.abs(y - Math.round(y)) < 1e-6) {
+        const pt = { x, y: Math.round(y) };
+        if (!candidates.some(p => p.x === pt.x && p.y === pt.y)) candidates.push(pt);
+      }
+    }
+  } else if (a !== 0) {
+    // Vertical line x = c/a
+    const x = c / a;
+    if (x >= 0 && x <= GMAX && Math.abs(x - Math.round(x)) < 1e-6) {
+      const xi = Math.round(x);
+      candidates.push({ x: xi, y: 0 });
+      candidates.push({ x: xi, y: Math.round(GMAX / 2) });
+    }
+  }
+
+  if (candidates.length >= 2) {
+    // pick widest spread
+    return [candidates[0], candidates[candidates.length - 1]];
+  }
+
+  // Fallback: use intercepts rounded to grid
+  const fallback: Pt[] = [];
+  if (b !== 0) fallback.push({ x: 0, y: Math.max(0, Math.min(GMAX, Math.round(c / b))) });
+  if (a !== 0) fallback.push({ x: Math.max(0, Math.min(GMAX, Math.round(c / a))), y: 0 });
+  if (fallback.length >= 2 && !(fallback[0].x === fallback[1].x && fallback[0].y === fallback[1].y))
+    return [fallback[0], fallback[1]];
+
+  return null;
+}
+
 /* Extend line through P1→P2 to grid boundaries → SVG endpoints */
 function extendedLine(p1: Pt, p2: Pt) {
   if (p1.x === p2.x && p1.y === p2.y) return null;
@@ -97,7 +166,12 @@ const GrafikSPLDVInteraktif: React.FC = () => {
 
   const [line1Drawn, setLine1Drawn] = useState(false);
   const [line2Drawn, setLine2Drawn] = useState(false);
-  const [hint,       setHint]       = useState("Seret titik-titik ke posisi yang diinginkan, lalu tekan 'Mulai Menggambar!'");
+  const [hint,       setHint]       = useState("Ketik persamaan di bawah lalu tekan Terapkan, atau seret titik secara manual, kemudian klik 'Mulai Menggambar!'");
+
+  const [eq1Input, setEq1Input] = useState("x + y = 6");
+  const [eq2Input, setEq2Input] = useState("x - y = 2");
+  const [eq1Error, setEq1Error] = useState(false);
+  const [eq2Error, setEq2Error] = useState(false);
   const [drawFlash,  setDrawFlash]  = useState<1|2|null>(null);
 
   /* Dragging state (ref = no stale closure) */
@@ -224,12 +298,41 @@ const GrafikSPLDVInteraktif: React.FC = () => {
 
   const reset = () => {
     playPopSound();
-    posRef.current = { A1:{x:0,y:6}, B1:{x:6,y:0}, A2:{x:0,y:2}, B2:{x:3,y:5} };
+    posRef.current = { A1:{x:0,y:6}, B1:{x:6,y:0}, A2:{x:0,y:4}, B2:{x:4,y:0} };
     setPos({ ...posRef.current });
     setPhase("arrange");
     setLine1Drawn(false); setLine2Drawn(false);
     setDrawCursor(null); drawDragRef.current = null;
-    setHint("Seret titik-titik ke posisi yang diinginkan, lalu tekan 'Mulai Menggambar!'");
+    setEq1Input("x + y = 6"); setEq2Input("x - y = 2");
+    setEq1Error(false); setEq2Error(false);
+    setHint("Ketik persamaan di bawah lalu tekan Terapkan, atau seret titik secara manual, kemudian klik 'Mulai Menggambar!'");
+  };
+
+  const applyEq = (which: 1 | 2) => {
+    const raw = which === 1 ? eq1Input : eq2Input;
+    const parsed = parseEquation(raw);
+    if (!parsed) {
+      if (which === 1) setEq1Error(true); else setEq2Error(true);
+      return;
+    }
+    const pts = findTwoPointsOnLine(parsed.a, parsed.b, parsed.c);
+    if (!pts) {
+      if (which === 1) setEq1Error(true); else setEq2Error(true);
+      return;
+    }
+    playPopSound();
+    if (which === 1) {
+      setEq1Error(false);
+      updatePos("A1", pts[0]);
+      updatePos("B1", pts[1]);
+    } else {
+      setEq2Error(false);
+      updatePos("A2", pts[0]);
+      updatePos("B2", pts[1]);
+    }
+    setLine1Drawn(false); setLine2Drawn(false);
+    setPhase("arrange");
+    setHint(`✅ Persamaan ${which === 1 ? "Garis 1" : "Garis 2"} diterapkan! Sesuaikan titik jika perlu, lalu klik 'Mulai Menggambar!'`);
   };
 
   /* ── Derived ── */
@@ -457,38 +560,86 @@ const GrafikSPLDVInteraktif: React.FC = () => {
           <p className="font-body text-xs leading-relaxed text-white/80">{hint}</p>
         </div>
 
-        {/* Equation panels */}
-        <div className="grid grid-cols-2 gap-2">
+        {/* Equation panels — editable */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {/* Garis 1 */}
-          <div className={`border rounded-xl p-3 transition-all
+          <div className={`border rounded-xl p-3 transition-all space-y-2
             ${(phase==="draw1"||phase==="arrange") ? "border-cyan-500/50 bg-cyan-900/25" : "border-cyan-500/15 bg-cyan-900/10"}`}>
-            <div className="flex items-center gap-1 mb-1">
+            <div className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0" />
               <p className="font-body text-[10px] text-cyan-400 uppercase font-bold">Garis 1</p>
               {line1Drawn && <CheckCircle2 className="w-3 h-3 text-green-400 ml-auto" />}
             </div>
-            <p className="font-body text-[10px] text-white/50">A₁({A1.x},{A1.y}) · B₁({B1.x},{B1.y})</p>
-            {eq1 && (
-              <div className="mt-1 text-center">
-                <InlineMath math={stdFormLatex(eq1)} />
-              </div>
+            {/* Input row */}
+            <div className="flex gap-1">
+              <input
+                type="text"
+                value={eq1Input}
+                onChange={e => { setEq1Input(e.target.value); setEq1Error(false); }}
+                onKeyDown={e => e.key === "Enter" && applyEq(1)}
+                placeholder="cth: 2x + 3y = 6"
+                className={`flex-1 min-w-0 bg-slate-900/70 border rounded-lg px-2 py-1.5 text-xs font-mono text-white/90 placeholder-white/25 outline-none focus:ring-1 transition-all
+                  ${eq1Error ? "border-red-500/60 focus:ring-red-500/40" : "border-cyan-500/30 focus:ring-cyan-500/40"}`}
+              />
+              <button
+                onClick={() => applyEq(1)}
+                className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-[10px] font-bold font-body px-2 py-1.5 rounded-lg transition-all"
+              >
+                Terapkan
+              </button>
+            </div>
+            {eq1Error && (
+              <p className="text-[10px] text-red-400 font-body">⚠️ Format tidak valid. Coba: 2x + 3y = 6</p>
             )}
+            {/* Derived equation display */}
+            <div className="flex items-center justify-between">
+              <p className="font-body text-[10px] text-white/40">A₁({A1.x},{A1.y}) · B₁({B1.x},{B1.y})</p>
+              {eq1 && (
+                <span className="text-cyan-300 text-xs">
+                  <InlineMath math={stdFormLatex(eq1)} />
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Garis 2 */}
-          <div className={`border rounded-xl p-3 transition-all
+          <div className={`border rounded-xl p-3 transition-all space-y-2
             ${phase==="draw2" ? "border-violet-500/50 bg-violet-900/25" : "border-violet-500/15 bg-violet-900/10"}`}>
-            <div className="flex items-center gap-1 mb-1">
+            <div className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-violet-400 shrink-0" />
               <p className="font-body text-[10px] text-violet-400 uppercase font-bold">Garis 2</p>
               {line2Drawn && <CheckCircle2 className="w-3 h-3 text-green-400 ml-auto" />}
             </div>
-            <p className="font-body text-[10px] text-white/50">A₂({A2.x},{A2.y}) · B₂({B2.x},{B2.y})</p>
-            {eq2 && (
-              <div className="mt-1 text-center">
-                <InlineMath math={stdFormLatex(eq2)} />
-              </div>
+            {/* Input row */}
+            <div className="flex gap-1">
+              <input
+                type="text"
+                value={eq2Input}
+                onChange={e => { setEq2Input(e.target.value); setEq2Error(false); }}
+                onKeyDown={e => e.key === "Enter" && applyEq(2)}
+                placeholder="cth: x - 2y = 4"
+                className={`flex-1 min-w-0 bg-slate-900/70 border rounded-lg px-2 py-1.5 text-xs font-mono text-white/90 placeholder-white/25 outline-none focus:ring-1 transition-all
+                  ${eq2Error ? "border-red-500/60 focus:ring-red-500/40" : "border-violet-500/30 focus:ring-violet-500/40"}`}
+              />
+              <button
+                onClick={() => applyEq(2)}
+                className="shrink-0 bg-violet-600 hover:bg-violet-500 text-white text-[10px] font-bold font-body px-2 py-1.5 rounded-lg transition-all"
+              >
+                Terapkan
+              </button>
+            </div>
+            {eq2Error && (
+              <p className="text-[10px] text-red-400 font-body">⚠️ Format tidak valid. Coba: x - 2y = 4</p>
             )}
+            {/* Derived equation display */}
+            <div className="flex items-center justify-between">
+              <p className="font-body text-[10px] text-white/40">A₂({A2.x},{A2.y}) · B₂({B2.x},{B2.y})</p>
+              {eq2 && (
+                <span className="text-violet-300 text-xs">
+                  <InlineMath math={stdFormLatex(eq2)} />
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
