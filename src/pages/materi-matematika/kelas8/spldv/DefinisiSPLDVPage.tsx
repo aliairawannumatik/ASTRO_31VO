@@ -352,17 +352,17 @@ const DefinisiSPLDVPage = () => {
                         })}
                         <text x="269" y="109" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">x</text>
                         <text x="144" y="14" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">y</text>
-                        <text x="15" y="170" fill="#fcd34d" fontSize="10" fontFamily="monospace">y = 0,5x+1</text>
-                        <text x="155" y="42" fill="#c084fc" fontSize="10" fontFamily="monospace">y = 0,5x+1</text>
+                        <text x="15" y="170" fill="#fcd34d" fontSize="10" fontFamily="monospace">2y = x+2</text>
+                        <text x="148" y="42" fill="#c084fc" fontSize="10" fontFamily="monospace">y = 1/2 x+1</text>
                       </svg>
                     </div>
                     <div className="px-4 pb-3 pt-1 space-y-1">
                       <div className="flex flex-wrap gap-2">
                         <span className="inline-flex items-center gap-1 text-[11px] font-body bg-amber-500/15 border border-amber-500/30 text-amber-300 rounded-full px-2.5 py-0.5">
-                          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block"/>y = 0,5x + 1
+                          <span className="w-2 h-2 rounded-full bg-amber-400 inline-block"/>2y = x + 2
                         </span>
                         <span className="inline-flex items-center gap-1 text-[11px] font-body bg-violet-500/15 border border-violet-500/30 text-violet-300 rounded-full px-2.5 py-0.5">
-                          <span className="w-2 h-2 rounded-full bg-violet-400 inline-block"/>y = 0,5x + 1 (sama!)
+                          <span className="w-2 h-2 rounded-full bg-violet-400 inline-block"/>y = ½x + 1 (sama!)
                         </span>
                       </div>
                       <p className="font-body text-[11px] text-white/55">Kedua persamaan setara → garis berimpit → <strong className="text-yellow-300">semua titik di garis adalah solusi</strong>.</p>
