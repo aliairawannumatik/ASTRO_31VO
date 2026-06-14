@@ -201,7 +201,8 @@ const MetodeEliminasiPage = () => {
                         <span className="text-cyan-300 font-bold">5y = 14</span>
                       </div>
                       <div className="flex items-center gap-3 pr-6">
-                        <span className="text-yellow-300 font-bold">&nbsp;y = 14/5</span>
+                        <span className="text-yellow-300 font-bold font-mono">&nbsp;y =&nbsp;</span>
+                        <span className="text-yellow-300 font-bold"><InlineMath math="\dfrac{14}{5}" /></span>
                       </div>
                     </div>
                   </Step>
