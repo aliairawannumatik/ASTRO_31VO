@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Minus, FlaskConical } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Minus, FlaskConical, Sparkles } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -66,9 +66,21 @@ const MetodeEliminasiPage = () => {
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
           Selesaikan SPLDV dengan Teknik "Menghapus" Salah Satu Variabel
         </p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">
+        <p className="text-white/50 text-xs text-center mb-4 font-body">
           Kelas 8 · SPLDV · Materi Matematika
         </p>
+
+        {/* ── BUKU ANIMASI CTA ── */}
+        <div className="mb-6 flex justify-center">
+          <button
+            onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/spldv/buku-animasi-eliminasi"); }}
+            className="flex items-center gap-2.5 bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white text-sm font-bold font-body px-6 py-3 rounded-2xl transition-all shadow-lg shadow-violet-900/30 ring-1 ring-white/10"
+          >
+            <Sparkles className="w-4 h-4 text-yellow-300" />
+            Buka Buku Animasi — Metode Eliminasi
+            <BookOpen className="w-4 h-4" />
+          </button>
+        </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
