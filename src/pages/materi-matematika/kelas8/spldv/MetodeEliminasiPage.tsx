@@ -258,14 +258,6 @@ const MetodeEliminasiPage = () => {
             )}
           </div>
 
-          {/* ── PENJELASAN & PEMBAHASAN ANIMASI ── */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="animasi" icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title="✨ Penjelasan & Pembahasan — Format Eliminasi" />
-            <div className="px-5 pb-5 pt-1">
-              <EliminasiAnimasiPembahasan />
-            </div>
-          </div>
-
           {/* ── LAB INTERAKTIF ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="lab" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title="🧪 Lab Interaktif — Lihat Eliminasi Beraksi!" />
