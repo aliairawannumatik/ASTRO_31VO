@@ -353,7 +353,12 @@ const DefinisiSPLDVPage = () => {
                         <text x="269" y="109" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">x</text>
                         <text x="144" y="14" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">y</text>
                         <text x="15" y="170" fill="#fcd34d" fontSize="10" fontFamily="monospace">2y = x+2</text>
-                        <text x="148" y="42" fill="#c084fc" fontSize="10" fontFamily="monospace">y = 1/2 x+1</text>
+                        {/* y = ½x+1 dengan pecahan gaya LaTeX */}
+                        <text x="148" y="42" fill="#c084fc" fontSize="10" fontFamily="monospace">y = </text>
+                        <text x="176" y="37" fill="#c084fc" fontSize="7" fontFamily="monospace" textAnchor="middle">1</text>
+                        <line x1="170" y1="39" x2="182" y2="39" stroke="#c084fc" strokeWidth="0.9"/>
+                        <text x="176" y="47" fill="#c084fc" fontSize="7" fontFamily="monospace" textAnchor="middle">2</text>
+                        <text x="184" y="42" fill="#c084fc" fontSize="10" fontFamily="monospace">x+1</text>
                       </svg>
                     </div>
                     <div className="px-4 pb-3 pt-1 space-y-1">
