@@ -73,20 +73,18 @@ const MetodeEliminasiPage = () => {
                     </p>
                     <div className="font-mono text-sm inline-block min-w-0">
                       {/* Baris 1 */}
-                      <div className="flex items-center gap-2">
-                        <span className="w-4 shrink-0"> </span>
+                      <div className="flex items-center gap-3 pr-6">
                         <span className="text-white/80">ax + by = d</span>
                       </div>
                       {/* Baris 2 */}
-                      <div className="flex items-center gap-2">
-                        <span className="text-red-400 font-bold w-4 shrink-0">−</span>
+                      <div className="flex items-center gap-3">
                         <span className="text-white/80">ax + cy = e</span>
+                        <span className="text-red-400 font-bold">−</span>
                       </div>
                       {/* Garis */}
                       <div className="border-t-2 border-white/30 my-1.5" />
                       {/* Hasil */}
-                      <div className="flex items-center gap-2">
-                        <span className="w-4 shrink-0"> </span>
+                      <div className="flex items-center gap-3 pr-6">
                         <span className="text-yellow-300 font-semibold">(b − c)y = d − e</span>
                       </div>
                     </div>
@@ -102,20 +100,18 @@ const MetodeEliminasiPage = () => {
                     </p>
                     <div className="font-mono text-sm inline-block min-w-0">
                       {/* Baris 1 */}
-                      <div className="flex items-center gap-2">
-                        <span className="w-4 shrink-0"> </span>
+                      <div className="flex items-center gap-3 pr-6">
                         <span className="text-white/80">ax + by = d</span>
                       </div>
                       {/* Baris 2 */}
-                      <div className="flex items-center gap-2">
-                        <span className="text-green-400 font-bold w-4 shrink-0">+</span>
+                      <div className="flex items-center gap-3">
                         <span className="text-white/80">ax − by = e</span>
+                        <span className="text-green-400 font-bold">+</span>
                       </div>
                       {/* Garis */}
                       <div className="border-t-2 border-white/30 my-1.5" />
                       {/* Hasil */}
-                      <div className="flex items-center gap-2">
-                        <span className="w-4 shrink-0"> </span>
+                      <div className="flex items-center gap-3 pr-6">
                         <span className="text-yellow-300 font-semibold">2ax = d + e</span>
                       </div>
                     </div>
