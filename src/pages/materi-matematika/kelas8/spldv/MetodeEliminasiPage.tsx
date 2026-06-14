@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Minus, FlaskConical } from "lucide-react";
+import { BookOpen, Lightbulb, Target, Minus, FlaskConical } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -9,32 +9,15 @@ import EliminasiInteraktif from "@/components/EliminasiInteraktif";
 import EliminasiAnimasiPembahasan from "@/components/EliminasiAnimasiPembahasan";
 
 const MetodeEliminasiPage = () => {
-  const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "langkah", "lab", "contoh1", "rangkuman",
-  ]);
-
-  const toggleSection = (section: string) => {
-    playPopSound();
-    setExpandedSections((prev) =>
-      prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]
-    );
-  };
-
   const SectionHeader = ({
-    id, icon, iconColor, title,
-  }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button
-      onClick={() => toggleSection(id)}
-      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
-    >
+    icon, iconColor, title,
+  }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
+    <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {true
-        ? <ChevronUp className="w-5 h-5 text-primary" />
-        : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   const Badge = ({ label, color }: { label: string; color: string }) => (
@@ -198,26 +181,22 @@ const MetodeEliminasiPage = () => {
           {/* ── PENJELASAN & PEMBAHASAN ANIMASI ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="animasi" icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title="✨ Penjelasan & Pembahasan — Format Eliminasi" />
-            {expandedSections.includes("animasi") && (
-              <div className="px-5 pb-5 pt-1">
-                <EliminasiAnimasiPembahasan />
-              </div>
-            )}
+            <div className="px-5 pb-5 pt-1">
+              <EliminasiAnimasiPembahasan />
+            </div>
           </div>
 
           {/* ── LAB INTERAKTIF ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="lab" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title="🧪 Lab Interaktif — Lihat Eliminasi Beraksi!" />
-            {expandedSections.includes("lab") && (
-              <div className="px-5 pb-5 space-y-3">
+            <div className="px-5 pb-5 space-y-3">
                 <div className="bg-red-900/20 border border-red-500/20 rounded-xl p-3">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
                     Masukkan <strong className="text-red-300">sistem persamaan</strong> milikmu, pilih variabel mana yang dieliminasi pertama, lalu tekan <strong className="text-orange-300">✖️ Eliminasi</strong> — kamu akan melihat secara langsung bagaimana variabel <strong className="text-red-300">lenyap</strong> dan tersisa satu variabel yang mudah diselesaikan!
                   </p>
                 </div>
                 <EliminasiInteraktif />
-              </div>
-            )}
+            </div>
           </div>
 
           {/* ── CONTOH SOAL ── */}
