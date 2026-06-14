@@ -63,17 +63,65 @@ const MetodeEliminasiPage = () => {
                   Kata "eliminasi" berasal dari bahasa Latin yang berarti <strong className="text-cyan-300">menghilangkan</strong> atau <strong className="text-cyan-300">mengeliminasi</strong>. Ide utama metode ini: kita <em>menghapus</em> salah satu variabel dari sistem persamaan dengan cara menjumlahkan atau mengurangkan kedua persamaan, sehingga tersisa hanya satu variabel yang bisa langsung diselesaikan.
                 </p>
 
-                <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4">
-                  <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">🔄 Prinsip Dasar Eliminasi</p>
-                  <div className="space-y-2 text-sm font-body text-white/80">
-                    <div className="bg-slate-800/60 border border-cyan-500/10 rounded-lg px-3 py-2">
-                      <p className="text-cyan-300 font-semibold mb-1">Jika koefisien dua variabel SAMA dan BERTANDA SAMA → Kurangkan</p>
-                      <BlockMath math="(ax + by) - (ax + cy) = d - e \;\Rightarrow\; (b-c)y = d - e" />
+                <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4 space-y-4">
+                  <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-1">🔄 Prinsip Dasar Eliminasi</p>
+
+                  {/* Kasus 1 — kurangkan */}
+                  <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4 space-y-2">
+                    <p className="font-body text-xs font-semibold text-cyan-300 mb-3">
+                      🔴 Koefisien sama dan <span className="text-red-300">bertanda sama</span> → <strong className="text-red-300">Kurangkan (−)</strong>
+                    </p>
+                    <div className="font-mono text-sm overflow-x-auto">
+                      {/* Baris 1 */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/30 w-4 shrink-0"> </span>
+                        <span className="text-white/80">ax + by = d</span>
+                      </div>
+                      {/* Baris 2 */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-red-400 font-bold w-4 shrink-0">−</span>
+                        <span className="text-white/80">ax + cy = e</span>
+                      </div>
+                      {/* Garis */}
+                      <div className="border-t-2 border-white/30 my-1.5 ml-6" />
+                      {/* Hasil */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/30 w-4 shrink-0"> </span>
+                        <span className="text-yellow-300 font-semibold">(b − c)y = d − e</span>
+                      </div>
                     </div>
-                    <div className="bg-slate-800/60 border border-violet-500/10 rounded-lg px-3 py-2">
-                      <p className="text-violet-300 font-semibold mb-1">Jika koefisien dua variabel SAMA dan BERTANDA BERBEDA → Jumlahkan</p>
-                      <BlockMath math="(ax + by) + (ax - by) = d + e \;\Rightarrow\; 2ax = d + e" />
+                    <p className="font-body text-xs text-white/50 mt-1">
+                      Variabel <InlineMath math="x" /> hilang karena <InlineMath math="ax - ax = 0" />
+                    </p>
+                  </div>
+
+                  {/* Kasus 2 — jumlahkan */}
+                  <div className="bg-slate-800/60 border border-violet-500/20 rounded-xl p-4 space-y-2">
+                    <p className="font-body text-xs font-semibold text-violet-300 mb-3">
+                      🟢 Koefisien sama dan <span className="text-green-300">bertanda berbeda</span> → <strong className="text-green-300">Jumlahkan (+)</strong>
+                    </p>
+                    <div className="font-mono text-sm overflow-x-auto">
+                      {/* Baris 1 */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/30 w-4 shrink-0"> </span>
+                        <span className="text-white/80">ax + by = d</span>
+                      </div>
+                      {/* Baris 2 */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-green-400 font-bold w-4 shrink-0">+</span>
+                        <span className="text-white/80">ax − by = e</span>
+                      </div>
+                      {/* Garis */}
+                      <div className="border-t-2 border-white/30 my-1.5 ml-6" />
+                      {/* Hasil */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/30 w-4 shrink-0"> </span>
+                        <span className="text-yellow-300 font-semibold">2ax = d + e</span>
+                      </div>
                     </div>
+                    <p className="font-body text-xs text-white/50 mt-1">
+                      Variabel <InlineMath math="y" /> hilang karena <InlineMath math="by + (-by) = 0" />
+                    </p>
                   </div>
                 </div>
 
