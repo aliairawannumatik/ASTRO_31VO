@@ -418,20 +418,20 @@ const DefinisiSPLDVPage = () => {
                         <text x="200" y="75" fill="#ef4444" fontSize="18" fontFamily="monospace" fontWeight="bold" opacity="0.7">∅</text>
                         <text x="269" y="109" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">x</text>
                         <text x="144" y="14" fill="#ffffff" fillOpacity="0.4" fontSize="10" fontFamily="monospace">y</text>
-                        <text x="16" y="180" fill="#fdba74" fontSize="10" fontFamily="monospace">y = x+2,5</text>
-                        <text x="196" y="20" fill="#fca5a5" fontSize="10" fontFamily="monospace">y = x−1,5</text>
+                        <text x="16" y="180" fill="#fdba74" fontSize="10" fontFamily="monospace">2x−2y=−5</text>
+                        <text x="188" y="20" fill="#fca5a5" fontSize="10" fontFamily="monospace">2x−2y=3</text>
                       </svg>
                     </div>
                     <div className="px-4 pb-3 pt-1 space-y-1">
                       <div className="flex flex-wrap gap-2">
                         <span className="inline-flex items-center gap-1 text-[11px] font-body bg-orange-500/15 border border-orange-500/30 text-orange-300 rounded-full px-2.5 py-0.5">
-                          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block"/>y = x + 2,5
+                          <span className="w-2 h-2 rounded-full bg-orange-400 inline-block"/>2x − 2y = −5
                         </span>
                         <span className="inline-flex items-center gap-1 text-[11px] font-body bg-red-500/15 border border-red-500/30 text-red-300 rounded-full px-2.5 py-0.5">
-                          <span className="w-2 h-2 rounded-full bg-red-400 inline-block"/>y = x − 1,5
+                          <span className="w-2 h-2 rounded-full bg-red-400 inline-block"/>2x − 2y = 3
                         </span>
                       </div>
-                      <p className="font-body text-[11px] text-white/55">Gradien sama, konstanta berbeda → garis sejajar → <strong className="text-red-300">tidak ada solusi</strong> (∅).</p>
+                      <p className="font-body text-[11px] text-white/55">Koefisien x dan y sama, konstanta berbeda → garis sejajar → <strong className="text-red-300">tidak ada solusi</strong> (∅).</p>
                     </div>
                   </div>
 
