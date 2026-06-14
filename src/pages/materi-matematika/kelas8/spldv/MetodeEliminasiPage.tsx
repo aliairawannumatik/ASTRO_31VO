@@ -161,8 +161,18 @@ const MetodeEliminasiPage = () => {
                       </div>
                     </div>
                     <div className="pt-2 space-y-1">
-                      <div className="flex justify-end pr-1"><span className="text-yellow-300 font-bold">px = q</span></div>
-                      <div className="flex justify-end pr-1"><span className="text-emerald-300 font-bold">x = q/p</span></div>
+                      <div className="grid grid-cols-[1fr_58px_1fr]">
+                        <div /><div />
+                        <div className="px-3 py-0.5 flex items-center">
+                          <span className="text-yellow-300 font-bold">px = q</span>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-[1fr_58px_1fr]">
+                        <div /><div />
+                        <div className="px-3 py-0.5 flex items-center">
+                          <span className="text-emerald-300 font-bold">x = q/p</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
