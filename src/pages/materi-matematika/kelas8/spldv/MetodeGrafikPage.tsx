@@ -253,7 +253,7 @@ const MetodeGrafikPage = () => {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
-                    <p className="font-body text-sm font-semibold text-white">Soal 1</p>
+                    <p className="font-body text-sm font-semibold text-white">Contoh Soal 1</p>
                   </div>
                   <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-4">
                     <p className="font-body text-sm text-white/90">
@@ -336,7 +336,7 @@ const MetodeGrafikPage = () => {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
-                    <p className="font-body text-sm font-semibold text-white">Soal 2</p>
+                    <p className="font-body text-sm font-semibold text-white">Contoh Soal 2</p>
                   </div>
                   <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-4">
                     <p className="font-body text-sm text-white/90">
@@ -390,7 +390,7 @@ const MetodeGrafikPage = () => {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
-                    <p className="font-body text-sm font-semibold text-white">Soal 3</p>
+                    <p className="font-body text-sm font-semibold text-white">Contoh Soal 3</p>
                   </div>
                   <div className="bg-red-900/30 border border-red-500/30 rounded-lg p-4">
                     <p className="font-body text-sm text-white/90">
