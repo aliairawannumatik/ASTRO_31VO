@@ -178,20 +178,6 @@ const MetodeEliminasiPage = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {[
-                    { icon: "1️⃣", title: "Samakan Koefisien", desc: "Kalikan salah satu atau kedua persamaan agar koefisien variabel yang akan dieliminasi menjadi sama.", color: "border-cyan-500/30 bg-cyan-900/10" },
-                    { icon: "2️⃣", title: "Eliminasi Variabel", desc: "Jumlahkan atau kurangkan kedua persamaan untuk menghilangkan satu variabel.", color: "border-violet-500/30 bg-violet-900/10" },
-                    { icon: "3️⃣", title: "Selesaikan & Cari Variabel Lain", desc: "Selesaikan persamaan satu variabel, lalu eliminasi variabel lain untuk mendapat nilai lengkap.", color: "border-green-500/30 bg-green-900/10" },
-                  ].map(({ icon, title, desc, color }) => (
-                    <div key={title} className={`border ${color} rounded-xl p-3 text-center`}>
-                      <p className="text-2xl mb-1">{icon}</p>
-                      <p className="font-display text-sm font-bold text-white mb-1">{title}</p>
-                      <p className="font-body text-xs text-white/60">{desc}</p>
-                    </div>
-                  ))}
-                </div>
-
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
                     <strong>Keunggulan Eliminasi:</strong> Sangat efektif ketika koefisien variabel sudah sama atau bisa disamakan dengan perkalian sederhana. Tidak perlu menyatakan satu variabel secara eksplisit seperti metode substitusi!
