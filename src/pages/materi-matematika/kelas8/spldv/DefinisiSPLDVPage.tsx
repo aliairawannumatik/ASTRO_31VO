@@ -458,11 +458,11 @@ const DefinisiSPLDVPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-6">
 
-                {/* SOAL 1 — MUDAH */}
+                {/* CONTOH SOAL 1 — MUDAH */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
-                    <p className="font-body text-sm font-semibold text-white">Soal 1</p>
+                    <p className="font-body text-sm font-semibold text-white">Contoh Soal 1</p>
                   </div>
                   <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-4">
                     <p className="font-body text-sm text-white/90">
@@ -497,11 +497,11 @@ const DefinisiSPLDVPage = () => {
 
                 <div className="border-t border-white/10" />
 
-                {/* SOAL 2 — SEDANG */}
+                {/* CONTOH SOAL 2 — SEDANG */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
-                    <p className="font-body text-sm font-semibold text-white">Soal 2</p>
+                    <p className="font-body text-sm font-semibold text-white">Contoh Soal 2</p>
                   </div>
                   <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-4">
                     <p className="font-body text-sm text-white/90">
@@ -536,56 +536,140 @@ const DefinisiSPLDVPage = () => {
 
                 <div className="border-t border-white/10" />
 
-                {/* SOAL 3 — SULIT */}
+                {/* CONTOH SOAL 3 — SULIT */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
-                    <p className="font-body text-sm font-semibold text-white">Soal 3</p>
+                    <p className="font-body text-sm font-semibold text-white">Contoh Soal 3</p>
                   </div>
                   <div className="bg-red-900/30 border border-red-500/30 rounded-lg p-4">
-                    <p className="font-body text-sm text-white/90">
-                      Ubahlah permasalahan berikut menjadi model SPLDV, kemudian identifikasi koefisien, variabel, dan konstantanya!<br /><br />
-                      <em>"Sebuah toko menjual pensil dan pulpen. Harga 3 pensil dan 2 pulpen adalah Rp13.000. Harga 1 pensil dan 4 pulpen adalah Rp15.000."</em>
+                    <p className="font-body text-sm text-white/90 leading-relaxed">
+                      Tentukan apakah setiap SPLDV berikut memiliki <strong className="text-emerald-300">tepat satu penyelesaian</strong>, <strong className="text-yellow-300">tak hingga penyelesaian</strong>, atau <strong className="text-red-300">tidak memiliki penyelesaian</strong>!
                     </p>
+                    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-body">
+                      {[
+                        { no: "a", sys: String.raw`\begin{cases} x + 2y = 6 \\ 3x - y = 4 \end{cases}` },
+                        { no: "b", sys: String.raw`\begin{cases} 2x + 4y = 8 \\ x + 2y = 4 \end{cases}` },
+                        { no: "c", sys: String.raw`\begin{cases} 3x - 6y = 9 \\ x - 2y = 5 \end{cases}` },
+                        { no: "d", sys: String.raw`\begin{cases} 5x + y = 10 \\ 10x + 2y = 20 \end{cases}` },
+                        { no: "e", sys: String.raw`\begin{cases} 4x - 2y = 6 \\ 6x - 3y = 9 \end{cases}` },
+                        { no: "f", sys: String.raw`\begin{cases} x + 3y = 7 \\ 2x + 6y = 15 \end{cases}` },
+                      ].map(({ no, sys }) => (
+                        <div key={no} className="bg-slate-800/50 border border-white/10 rounded-lg px-3 py-2">
+                          <p className="font-body text-xs text-white/50 mb-1 font-bold">{no}.</p>
+                          <BlockMath math={sys} />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="bg-slate-900/60 border border-red-500/20 rounded-lg p-4 space-y-3">
+                  <div className="bg-slate-900/60 border border-red-500/20 rounded-lg p-4 space-y-4">
                     <p className="font-body text-xs font-bold text-red-300 uppercase">✅ Pembahasan</p>
-                    <p className="font-body text-sm text-white/80">Langkah 1 — Definisikan variabel:</p>
-                    <div className="bg-slate-800/50 rounded-lg px-4 py-2 text-sm font-body text-white/80 space-y-1">
-                      <p>Misalkan <InlineMath math="x" /> = harga satu pensil (rupiah)</p>
-                      <p>Misalkan <InlineMath math="y" /> = harga satu pulpen (rupiah)</p>
+
+                    {/* Kunci cara cepat */}
+                    <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 space-y-2">
+                      <p className="font-body text-xs font-bold text-cyan-300">🔑 Cara Cepat Menentukan Jenis Penyelesaian</p>
+                      <p className="font-body text-xs text-white/70">Untuk SPLDV <InlineMath math="a_1x+b_1y=c_1" /> dan <InlineMath math="a_2x+b_2y=c_2" />, bandingkan rasio koefisiennya:</p>
+                      <div className="space-y-1 text-xs font-body">
+                        <div className="flex items-center gap-2 bg-emerald-900/30 border border-emerald-500/20 rounded-lg px-3 py-1.5">
+                          <span className="text-emerald-300 font-bold shrink-0">🎯 1 penyelesaian:</span>
+                          <span className="text-white/70"><InlineMath math="\dfrac{a_1}{a_2} \neq \dfrac{b_1}{b_2}" /> (gradien berbeda, garis berpotongan)</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-yellow-900/30 border border-yellow-500/20 rounded-lg px-3 py-1.5">
+                          <span className="text-yellow-300 font-bold shrink-0">♾️ Tak hingga:</span>
+                          <span className="text-white/70"><InlineMath math="\dfrac{a_1}{a_2} = \dfrac{b_1}{b_2} = \dfrac{c_1}{c_2}" /> (garis berimpit)</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-red-900/30 border border-red-500/20 rounded-lg px-3 py-1.5">
+                          <span className="text-red-300 font-bold shrink-0">∅ Tidak ada:</span>
+                          <span className="text-white/70"><InlineMath math="\dfrac{a_1}{a_2} = \dfrac{b_1}{b_2} \neq \dfrac{c_1}{c_2}" /> (garis sejajar)</span>
+                        </div>
+                      </div>
                     </div>
-                    <p className="font-body text-sm text-white/80">Langkah 2 — Buat model persamaan:</p>
-                    <BlockMath math="\begin{cases} 3x + 2y = 13.000 \quad \cdots (1)\\ x + 4y = 15.000 \quad \cdots (2) \end{cases}" />
-                    <p className="font-body text-sm text-white/80">Langkah 3 — Identifikasi komponen:</p>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-xs font-body border-collapse">
-                        <thead>
-                          <tr className="bg-red-900/40">
-                            <th className="border border-red-500/30 px-3 py-2 text-red-200">Persamaan</th>
-                            <th className="border border-red-500/30 px-3 py-2 text-red-200 text-center"><InlineMath math="a" /></th>
-                            <th className="border border-red-500/30 px-3 py-2 text-red-200 text-center"><InlineMath math="b" /></th>
-                            <th className="border border-red-500/30 px-3 py-2 text-red-200 text-center"><InlineMath math="c" /></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="bg-white/5">
-                            <td className="border border-white/10 px-3 py-2 text-white font-mono">3x + 2y = 13.000</td>
-                            <td className="border border-white/10 px-3 py-2 text-center text-cyan-300">3</td>
-                            <td className="border border-white/10 px-3 py-2 text-center text-green-300">2</td>
-                            <td className="border border-white/10 px-3 py-2 text-center text-yellow-300">13.000</td>
-                          </tr>
-                          <tr>
-                            <td className="border border-white/10 px-3 py-2 text-white font-mono">x + 4y = 15.000</td>
-                            <td className="border border-white/10 px-3 py-2 text-center text-cyan-300">1</td>
-                            <td className="border border-white/10 px-3 py-2 text-center text-green-300">4</td>
-                            <td className="border border-white/10 px-3 py-2 text-center text-yellow-300">15.000</td>
-                          </tr>
-                        </tbody>
-                      </table>
+
+                    {/* Pembahasan tiap soal */}
+                    <div className="space-y-3">
+
+                      {/* a */}
+                      <div className="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-3 space-y-1">
+                        <p className="font-body text-xs font-bold text-emerald-300">a. <InlineMath math="x + 2y = 6" /> dan <InlineMath math="3x - y = 4" /></p>
+                        <p className="font-body text-xs text-white/70">Bandingkan rasio: <InlineMath math="\dfrac{a_1}{a_2} = \dfrac{1}{3}" />, <InlineMath math="\dfrac{b_1}{b_2} = \dfrac{2}{-1} = -2" /></p>
+                        <p className="font-body text-xs text-white/70"><InlineMath math="\dfrac{1}{3} \neq -2" /> → gradien berbeda → garis berpotongan</p>
+                        <p className="font-body text-xs font-bold text-emerald-300">✅ Tepat satu penyelesaian</p>
+                      </div>
+
+                      {/* b */}
+                      <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-3 space-y-1">
+                        <p className="font-body text-xs font-bold text-yellow-300">b. <InlineMath math="2x + 4y = 8" /> dan <InlineMath math="x + 2y = 4" /></p>
+                        <p className="font-body text-xs text-white/70">Persamaan 2 dikalikan 2: <InlineMath math="2x + 4y = 8" /> → identik dengan persamaan 1</p>
+                        <p className="font-body text-xs text-white/70">Rasio: <InlineMath math="\dfrac{2}{1} = \dfrac{4}{2} = \dfrac{8}{4} = 2" /> → semua rasio sama</p>
+                        <p className="font-body text-xs font-bold text-yellow-300">♾️ Tak hingga penyelesaian</p>
+                      </div>
+
+                      {/* c */}
+                      <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-3 space-y-1">
+                        <p className="font-body text-xs font-bold text-red-300">c. <InlineMath math="3x - 6y = 9" /> dan <InlineMath math="x - 2y = 5" /></p>
+                        <p className="font-body text-xs text-white/70">Rasio koefisien: <InlineMath math="\dfrac{3}{1} = \dfrac{-6}{-2} = 3" />, rasio konstanta: <InlineMath math="\dfrac{9}{5}" /></p>
+                        <p className="font-body text-xs text-white/70"><InlineMath math="3 \neq \dfrac{9}{5}" /> → koefisien sebanding, konstanta tidak → garis sejajar</p>
+                        <p className="font-body text-xs font-bold text-red-300">∅ Tidak memiliki penyelesaian</p>
+                      </div>
+
+                      {/* d */}
+                      <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-3 space-y-1">
+                        <p className="font-body text-xs font-bold text-yellow-300">d. <InlineMath math="5x + y = 10" /> dan <InlineMath math="10x + 2y = 20" /></p>
+                        <p className="font-body text-xs text-white/70">Persamaan 2 dikalikan <InlineMath math="\tfrac{1}{2}" />: <InlineMath math="5x + y = 10" /> → identik dengan persamaan 1</p>
+                        <p className="font-body text-xs text-white/70">Rasio: <InlineMath math="\dfrac{5}{10} = \dfrac{1}{2} = \dfrac{10}{20} = \dfrac{1}{2}" /> → semua rasio sama</p>
+                        <p className="font-body text-xs font-bold text-yellow-300">♾️ Tak hingga penyelesaian</p>
+                      </div>
+
+                      {/* e */}
+                      <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-3 space-y-1">
+                        <p className="font-body text-xs font-bold text-yellow-300">e. <InlineMath math="4x - 2y = 6" /> dan <InlineMath math="6x - 3y = 9" /></p>
+                        <p className="font-body text-xs text-white/70">Rasio: <InlineMath math="\dfrac{4}{6} = \dfrac{2}{3}" />, <InlineMath math="\dfrac{-2}{-3} = \dfrac{2}{3}" />, <InlineMath math="\dfrac{6}{9} = \dfrac{2}{3}" /> → semua rasio sama</p>
+                        <p className="font-body text-xs text-white/70">Persamaan 2 = <InlineMath math="\tfrac{3}{2}" /> kali persamaan 1 → garis berimpit</p>
+                        <p className="font-body text-xs font-bold text-yellow-300">♾️ Tak hingga penyelesaian</p>
+                      </div>
+
+                      {/* f */}
+                      <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-3 space-y-1">
+                        <p className="font-body text-xs font-bold text-red-300">f. <InlineMath math="x + 3y = 7" /> dan <InlineMath math="2x + 6y = 15" /></p>
+                        <p className="font-body text-xs text-white/70">Rasio koefisien: <InlineMath math="\dfrac{1}{2} = \dfrac{3}{6} = \dfrac{1}{2}" />, rasio konstanta: <InlineMath math="\dfrac{7}{15}" /></p>
+                        <p className="font-body text-xs text-white/70"><InlineMath math="\dfrac{1}{2} \neq \dfrac{7}{15}" /> → koefisien sebanding, konstanta tidak → garis sejajar</p>
+                        <p className="font-body text-xs font-bold text-red-300">∅ Tidak memiliki penyelesaian</p>
+                      </div>
+
                     </div>
+
+                    {/* Tabel Rekapitulasi */}
+                    <div className="space-y-1">
+                      <p className="font-body text-xs font-bold text-white">📊 Rekapitulasi Jawaban</p>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs font-body border-collapse">
+                          <thead>
+                            <tr className="bg-slate-700/60">
+                              <th className="border border-white/15 px-3 py-2 text-white/80 text-left">SPLDV</th>
+                              <th className="border border-white/15 px-3 py-2 text-white/80 text-center">Jenis Penyelesaian</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {[
+                              { lbl: "a. x + 2y = 6  ;  3x − y = 4", result: "🎯 Tepat satu penyelesaian", c: "text-emerald-300" },
+                              { lbl: "b. 2x + 4y = 8  ;  x + 2y = 4", result: "♾️ Tak hingga penyelesaian", c: "text-yellow-300" },
+                              { lbl: "c. 3x − 6y = 9  ;  x − 2y = 5", result: "∅ Tidak memiliki penyelesaian", c: "text-red-300" },
+                              { lbl: "d. 5x + y = 10  ;  10x + 2y = 20", result: "♾️ Tak hingga penyelesaian", c: "text-yellow-300" },
+                              { lbl: "e. 4x − 2y = 6  ;  6x − 3y = 9", result: "♾️ Tak hingga penyelesaian", c: "text-yellow-300" },
+                              { lbl: "f. x + 3y = 7  ;  2x + 6y = 15", result: "∅ Tidak memiliki penyelesaian", c: "text-red-300" },
+                            ].map(({ lbl, result, c }, i) => (
+                              <tr key={i} className={i % 2 === 0 ? "bg-white/5" : ""}>
+                                <td className="border border-white/10 px-3 py-2 text-white/70 font-mono">{lbl}</td>
+                                <td className={`border border-white/10 px-3 py-2 text-center font-bold ${c}`}>{result}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
                     <div className="bg-red-900/20 border border-red-500/20 rounded p-2">
-                      <p className="font-body text-xs text-red-300">⚠️ Membuat model SPLDV adalah langkah paling kritis dalam memecahkan soal cerita! Pastikan definisi variabel jelas dan setiap kalimat dalam soal terwakilkan oleh satu persamaan.</p>
+                      <p className="font-body text-xs text-red-300">💡 Ingat: cukup bandingkan rasio koefisien <InlineMath math="\tfrac{a_1}{a_2}" />, <InlineMath math="\tfrac{b_1}{b_2}" />, dan <InlineMath math="\tfrac{c_1}{c_2}" /> — tidak perlu menyelesaikan SPLDV-nya secara lengkap!</p>
                     </div>
                   </div>
                 </div>
