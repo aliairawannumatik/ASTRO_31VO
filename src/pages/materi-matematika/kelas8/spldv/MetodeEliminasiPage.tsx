@@ -488,16 +488,34 @@ const MetodeEliminasiPage = () => {
 
                     <div>
                       <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 3 — Eliminasi <InlineMath math="m" /> untuk mencari <InlineMath math="j" />:</strong></p>
-                      <p className="font-body text-xs text-white/60 mb-2">KPK dari 2 dan 3 adalah 6. Kalikan P1' × 3 dan P2 × 2.</p>
-                      <div className="bg-slate-800/50 rounded-lg px-4 py-3 space-y-1 text-sm font-body">
-                        <div className="flex items-center gap-2">
+                      <p className="font-body text-xs text-white/60 mb-2">KPK dari 2 dan 3 adalah 6. Kalikan P1' × 3 dan P2 × 2 agar koefisien <InlineMath math="m" /> sama.</p>
+
+                      {/* Samakan koefisien m */}
+                      <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 text-sm font-body mb-2">
+                        <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Samakan koefisien m → kalikan kedua persamaan</p>
+                        <div className="flex items-center gap-2 font-mono text-sm">
+                          <span className="text-white/50 w-6 shrink-0">P1'</span>
+                          <span className="text-white/80">2m + 3j = 66.000</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×3|</span>
+                          <span className="text-cyan-300 font-bold">6m + 9j = 198.000</span>
+                        </div>
+                        <div className="flex items-center gap-2 font-mono text-sm">
+                          <span className="text-white/50 w-6 shrink-0">P2</span>
+                          <span className="text-white/80">3m + 2j = 72.000</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×2|</span>
+                          <span className="text-cyan-300 font-bold">6m + 4j = 144.000</span>
+                        </div>
+                      </div>
+
+                      <div className="bg-slate-800/50 rounded-lg px-4 py-3 text-sm font-body">
+                        <div className="flex items-center gap-2 pr-2">
                           <span className="text-white/40 w-10 shrink-0">P1'×3</span>
                           <span className="text-white font-mono">6m + 9j = 198.000</span>
                         </div>
-                        <div className="flex items-center gap-2 border-b border-white/20 pb-1">
+                        <div className="flex items-center gap-2 pr-2 pb-1 border-b border-white/20">
                           <span className="text-white/40 w-10 shrink-0">P2×2</span>
                           <span className="text-white font-mono">6m + 4j = 144.000</span>
-                          <span className="text-red-400 ml-auto text-xs shrink-0">(dikurangkan)</span>
+                          <span className="text-red-400 font-bold ml-2">−</span>
                         </div>
                         <div className="flex items-center gap-2 pt-1">
                           <span className="text-white/40 w-10 shrink-0"></span>
@@ -509,16 +527,34 @@ const MetodeEliminasiPage = () => {
 
                     <div>
                       <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 4 — Eliminasi <InlineMath math="j" /> untuk mencari <InlineMath math="m" />:</strong></p>
-                      <p className="font-body text-xs text-white/60 mb-2">KPK dari 3 dan 2 adalah 6. Kalikan P1' × 2 dan P2 × 3.</p>
-                      <div className="bg-slate-800/50 rounded-lg px-4 py-3 space-y-1 text-sm font-body">
-                        <div className="flex items-center gap-2">
+                      <p className="font-body text-xs text-white/60 mb-2">KPK dari 3 dan 2 adalah 6. Kalikan P1' × 2 dan P2 × 3 agar koefisien <InlineMath math="j" /> sama.</p>
+
+                      {/* Samakan koefisien j */}
+                      <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 text-sm font-body mb-2">
+                        <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Samakan koefisien j → kalikan kedua persamaan</p>
+                        <div className="flex items-center gap-2 font-mono text-sm">
+                          <span className="text-white/50 w-6 shrink-0">P1'</span>
+                          <span className="text-white/80">2m + 3j = 66.000</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×2|</span>
+                          <span className="text-cyan-300 font-bold">4m + 6j = 132.000</span>
+                        </div>
+                        <div className="flex items-center gap-2 font-mono text-sm">
+                          <span className="text-white/50 w-6 shrink-0">P2</span>
+                          <span className="text-white/80">3m + 2j = 72.000</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×3|</span>
+                          <span className="text-cyan-300 font-bold">9m + 6j = 216.000</span>
+                        </div>
+                      </div>
+
+                      <div className="bg-slate-800/50 rounded-lg px-4 py-3 text-sm font-body">
+                        <div className="flex items-center gap-2 pr-2">
                           <span className="text-white/40 w-10 shrink-0">P1'×2</span>
                           <span className="text-white font-mono">4m + 6j = 132.000</span>
                         </div>
-                        <div className="flex items-center gap-2 border-b border-white/20 pb-1">
+                        <div className="flex items-center gap-2 pr-2 pb-1 border-b border-white/20">
                           <span className="text-white/40 w-10 shrink-0">P2×3</span>
                           <span className="text-white font-mono">9m + 6j = 216.000</span>
-                          <span className="text-red-400 ml-auto text-xs shrink-0">(dikurangkan)</span>
+                          <span className="text-red-400 font-bold ml-2">−</span>
                         </div>
                         <div className="flex items-center gap-2 pt-1">
                           <span className="text-white/40 w-10 shrink-0"></span>
