@@ -792,7 +792,6 @@ const DefinisiSPLDVMMK8Page = lazy(() => import("./pages/materi-matematika/kelas
 const MetodeGrafikMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/MetodeGrafikPage"));
 const MetodeSubstitusiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/MetodeSubstitusiPage"));
 const MetodeEliminasiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/MetodeEliminasiPage"));
-const BukuAnimasiEliminasiPage = lazy(() => import("./pages/materi-matematika/kelas8/spldv/BukuAnimasiEliminasiPage"));
 const MetodeCampuranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/MetodeCampuranPage"));
 const ModelSPLDVMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/ModelSPLDVPage"));
 const PenyelesaianMasalahSPLDVMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/spldv/PenyelesaianMasalahSPLDVPage"));
@@ -1621,7 +1620,6 @@ const AppInner = () => {
           <Route path="/materi-matematika/kelas-8/spldv/metode-grafik" element={<MetodeGrafikMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/spldv/metode-substitusi" element={<MetodeSubstitusiMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/spldv/metode-eliminasi" element={<MetodeEliminasiMMK8Page />} />
-          <Route path="/materi-matematika/kelas-8/spldv/buku-animasi-eliminasi" element={<BukuAnimasiEliminasiPage />} />
           <Route path="/materi-matematika/kelas-8/spldv/metode-campuran" element={<MetodeCampuranMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/spldv/model-spldv" element={<ModelSPLDVMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVMMK8Page />} />
