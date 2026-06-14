@@ -71,23 +71,21 @@ const MetodeEliminasiPage = () => {
                     <p className="font-body text-xs font-semibold text-cyan-300 mb-3">
                       🔴 Koefisien sama dan <span className="text-red-300">bertanda sama</span> → <strong className="text-red-300">Kurangkan (−)</strong>
                     </p>
-                    <div className="font-mono text-sm overflow-x-auto">
+                    <div className="font-mono text-sm inline-block min-w-0">
                       {/* Baris 1 */}
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 pr-6">
                         <span className="text-white/80">ax + by = d</span>
-                        <span className="text-white/20 w-4 shrink-0"> </span>
                       </div>
                       {/* Baris 2 */}
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
                         <span className="text-white/80">ax + cy = e</span>
-                        <span className="text-red-400 font-bold w-4 shrink-0 text-right">−</span>
+                        <span className="text-red-400 font-bold">−</span>
                       </div>
                       {/* Garis */}
                       <div className="border-t-2 border-white/30 my-1.5" />
                       {/* Hasil */}
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 pr-6">
                         <span className="text-yellow-300 font-semibold">(b − c)y = d − e</span>
-                        <span className="text-white/20 w-4 shrink-0"> </span>
                       </div>
                     </div>
                     <p className="font-body text-xs text-white/50 mt-1">
@@ -100,23 +98,21 @@ const MetodeEliminasiPage = () => {
                     <p className="font-body text-xs font-semibold text-violet-300 mb-3">
                       🟢 Koefisien sama dan <span className="text-green-300">bertanda berbeda</span> → <strong className="text-green-300">Jumlahkan (+)</strong>
                     </p>
-                    <div className="font-mono text-sm overflow-x-auto">
+                    <div className="font-mono text-sm inline-block min-w-0">
                       {/* Baris 1 */}
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 pr-6">
                         <span className="text-white/80">ax + by = d</span>
-                        <span className="text-white/20 w-4 shrink-0"> </span>
                       </div>
                       {/* Baris 2 */}
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
                         <span className="text-white/80">ax − by = e</span>
-                        <span className="text-green-400 font-bold w-4 shrink-0 text-right">+</span>
+                        <span className="text-green-400 font-bold">+</span>
                       </div>
                       {/* Garis */}
                       <div className="border-t-2 border-white/30 my-1.5" />
                       {/* Hasil */}
-                      <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 pr-6">
                         <span className="text-yellow-300 font-semibold">2ax = d + e</span>
-                        <span className="text-white/20 w-4 shrink-0"> </span>
                       </div>
                     </div>
                     <p className="font-body text-xs text-white/50 mt-1">
