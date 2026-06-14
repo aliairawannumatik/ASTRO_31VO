@@ -173,9 +173,17 @@ const MetodeEliminasiPage = () => {
                   </Step>
                   <Step no="3" title="Samakan koefisien variabel yang dipilih" color="border-green-500/30 bg-green-900/10">
                     <p className="text-white/70">Setelah perkalian, koefisien variabel yang dipilih harus sama besar di kedua persamaan.</p>
-                    <div className="mt-2">
-                      <BlockMath math="4x + 6y = 24 \quad \left| 1 \times 2 \right|" />
-                      <BlockMath math="4x + y = 10 \qquad \left| 2 \right|" />
+                    <div className="mt-2 font-mono text-sm space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/80">2x + 3y = 12</span>
+                        <span className="text-yellow-300 font-bold">|× 2|</span>
+                        <span className="text-cyan-300 font-bold">4x + 6y = 24</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/80">4x +  y  = 10</span>
+                        <span className="text-yellow-300 font-bold">|× 1|</span>
+                        <span className="text-cyan-300 font-bold">4x +  y  = 10</span>
+                      </div>
                     </div>
                   </Step>
                   <Step no="4" title="Kurangkan atau jumlahkan kedua persamaan" color="border-orange-500/30 bg-orange-900/10">
@@ -192,8 +200,10 @@ const MetodeEliminasiPage = () => {
                       <div className="flex items-center gap-3 pr-6">
                         <span className="text-cyan-300 font-bold">5y = 14</span>
                       </div>
+                      <div className="flex items-center gap-3 pr-6">
+                        <span className="text-yellow-300 font-bold">&nbsp;y = 14/5</span>
+                      </div>
                     </div>
-                    <BlockMath math="y = \dfrac{14}{5}" />
                   </Step>
                   <Step no="5" title="Eliminasi variabel lain untuk mendapat nilai lengkap" color="border-yellow-500/30 bg-yellow-900/10">
                     <p className="text-white/70">Ulangi proses eliminasi, kali ini hapus variabel yang sudah ditemukan nilainya untuk mendapat variabel satunya.</p>
