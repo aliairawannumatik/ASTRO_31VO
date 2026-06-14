@@ -196,6 +196,17 @@ const DefinisiSPLDVPage = () => {
                   <p className="font-body text-xs text-center text-white/50">Inilah kenapa kita butuh <strong className="text-cyan-300">dua</strong> persamaan untuk mendapat solusi tunggal!</p>
                 </div>
 
+                {/* Verifikasi solusi */}
+                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-bold text-white">🔍 Cara Memverifikasi Solusi</p>
+                  <p className="font-body text-xs text-white/70">Misalkan solusi SPLDV adalah <InlineMath math="x = 3, y = 1" />. Untuk membuktikannya, substitusikan ke <strong>kedua</strong> persamaan:</p>
+                  <div className="space-y-1 text-sm font-body">
+                    <BlockMath math="\text{Persamaan 1: } 2(3) + 3(1) = 6 + 3 = 9 \checkmark" />
+                    <BlockMath math="\text{Persamaan 2: } (3) - (1) = 2 \checkmark" />
+                  </div>
+                  <p className="font-body text-xs text-center text-cyan-300">Jika keduanya benar, maka <InlineMath math="(3, 1)" /> adalah solusi SPLDV yang valid!</p>
+                </div>
+
               </div>
             )}
           </div>
@@ -435,17 +446,6 @@ const DefinisiSPLDVPage = () => {
                     </div>
                   </div>
 
-                </div>
-
-                {/* Verifikasi solusi */}
-                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-bold text-white">🔍 Cara Memverifikasi Solusi</p>
-                  <p className="font-body text-xs text-white/70">Misalkan solusi SPLDV adalah <InlineMath math="x = 3, y = 1" />. Untuk membuktikannya, substitusikan ke <strong>kedua</strong> persamaan:</p>
-                  <div className="space-y-1 text-sm font-body">
-                    <BlockMath math="\text{Persamaan 1: } 2(3) + 3(1) = 6 + 3 = 9 \checkmark" />
-                    <BlockMath math="\text{Persamaan 2: } (3) - (1) = 2 \checkmark" />
-                  </div>
-                  <p className="font-body text-xs text-center text-cyan-300">Jika keduanya benar, maka <InlineMath math="(3, 1)" /> adalah solusi SPLDV yang valid!</p>
                 </div>
 
               </div>
