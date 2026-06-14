@@ -267,9 +267,9 @@ const DefinisiSPLDVPage = () => {
                         {/* Axis arrows */}
                         <polygon points="275,95 268,91 268,99" fill="#ffffff" fillOpacity="0.25"/>
                         <polygon points="140,5 136,12 144,12" fill="#ffffff" fillOpacity="0.25"/>
-                        {/* Line 1: y = x  (cyan) */}
-                        <line x1="15" y1="220" x2="235" y2="-30" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow1)" strokeOpacity="0.9"/>
-                        <line x1="15" y1="220" x2="235" y2="-30" stroke="#67e8f9" strokeWidth="1.5" strokeLinecap="round"/>
+                        {/* Line 1: y = x  (cyan) — svg_y = 235 − svg_x */}
+                        <line x1="15" y1="220" x2="235" y2="0" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow1)" strokeOpacity="0.9"/>
+                        <line x1="15" y1="220" x2="235" y2="0" stroke="#67e8f9" strokeWidth="1.5" strokeLinecap="round"/>
                         {/* Line 2: y = -x + 4  (rose) */}
                         <line x1="120" y1="-25" x2="275" y2="130" stroke="#fb7185" strokeWidth="2.5" strokeLinecap="round" filter="url(#glow1)" strokeOpacity="0.9"/>
                         <line x1="120" y1="-25" x2="275" y2="130" stroke="#fda4af" strokeWidth="1.5" strokeLinecap="round"/>
