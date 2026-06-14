@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Minus } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Minus, FlaskConical } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import EliminasiInteraktif from "@/components/EliminasiInteraktif";
 
 const MetodeEliminasiPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "langkah", "contoh1", "rangkuman",
+    "intro", "langkah", "lab", "contoh1", "rangkuman",
   ]);
 
   const toggleSection = (section: string) => {
@@ -191,6 +192,21 @@ const MetodeEliminasiPage = () => {
                   </div>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* ── LAB INTERAKTIF ── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="lab" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title="🧪 Lab Interaktif — Lihat Eliminasi Beraksi!" />
+            {expandedSections.includes("lab") && (
+              <div className="px-5 pb-5 space-y-3">
+                <div className="bg-red-900/20 border border-red-500/20 rounded-xl p-3">
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Masukkan <strong className="text-red-300">sistem persamaan</strong> milikmu, pilih variabel mana yang dieliminasi pertama, lalu tekan <strong className="text-orange-300">✖️ Eliminasi</strong> — kamu akan melihat secara langsung bagaimana variabel <strong className="text-red-300">lenyap</strong> dan tersisa satu variabel yang mudah diselesaikan!
+                  </p>
+                </div>
+                <EliminasiInteraktif />
               </div>
             )}
           </div>
