@@ -169,8 +169,9 @@ const MetodeEliminasiPage = () => {
                       </div>
                       <div className="grid grid-cols-[1fr_58px_1fr]">
                         <div /><div />
-                        <div className="px-3 py-0.5">
-                          <span className="text-emerald-300 font-bold whitespace-pre">{`          x = q/p`}</span>
+                        <div className="px-3 py-0.5 flex items-center">
+                          <span className="text-emerald-300 font-bold whitespace-pre">{`          x = `}</span>
+                          <span className="text-emerald-300 font-bold"><InlineMath math="\dfrac{q}{p}" /></span>
                         </div>
                       </div>
                     </div>
