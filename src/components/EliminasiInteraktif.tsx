@@ -78,6 +78,10 @@ interface ElimBlock {
   solveVar: "x" | "y";
   solveFrac: [number, number];
   color: string;
+  // original (un-multiplied) values and multipliers
+  origA1: number; origB1: number; origC1: number;
+  origA2: number; origB2: number; origC2: number;
+  m1: number; m2: number;
 }
 
 // Build one elimination pass: eliminate `elimVar`, solve for `solveVar`
@@ -119,7 +123,13 @@ function buildElimBlock(
   const solveFrac = red(resultC, resultA);
   const solveVar: "x" | "y" = elimVar === "x" ? "y" : "x";
 
-  return { title: `Eliminasi ${elimVar} → cari ${solveVar}`, row1: r1, row2: r2, op, elimVar, resultA, resultC, solveFrac, solveVar, color };
+  return {
+    title: `Eliminasi ${elimVar} → cari ${solveVar}`,
+    row1: r1, row2: r2, op, elimVar, resultA, resultC, solveFrac, solveVar, color,
+    origA1: a1, origB1: b1, origC1: c1,
+    origA2: a2, origB2: b2, origC2: c2,
+    m1, m2,
+  };
 }
 
 // ── Step types ────────────────────────────────────────────────────────────────
@@ -147,55 +157,76 @@ function termStr(coeff: number, varName: string): string {
 }
 
 const ElimTable: React.FC<{ block: ElimBlock; visible: boolean }> = ({ block, visible }) => {
-  const { row1, row2, op, elimVar, resultA, resultC, solveFrac, solveVar } = block;
+  const { row1, row2, op, elimVar, resultA, resultC, solveFrac, solveVar,
+          origA1, origB1, origC1, origA2, origB2, origC2, m1, m2 } = block;
 
   const cellBase = "px-2 py-1.5 text-center font-mono text-sm tabular-nums";
-  const deadCell = `${cellBase} line-through text-red-400/80`; // eliminated column
+  const deadCell = `${cellBase} line-through text-red-400/80`;
   const liveCell = `${cellBase} text-emerald-300 font-bold`;
   const dimCell  = `${cellBase} text-white/60`;
-  const resultElim = `${cellBase} text-red-400/60 line-through font-bold`; // "0" for eliminated
-  const resultLive = `${cellBase} text-yellow-300 font-bold text-base`; // solved value
+  const resultElim = `${cellBase} text-red-400/60 line-through font-bold`;
+  const resultLive = `${cellBase} text-yellow-300 font-bold text-base`;
 
-  // Row data
   const xDead = elimVar === "x";
+  const needsMult = m1 !== 1 || m2 !== 1;
 
+  // Render one equation row with sign badge on the right (for row2)
   const renderRow = (row: ERow, isRow2: boolean) => (
     <div className={`flex items-center gap-1 ${isRow2 ? "border-b border-white/20 pb-1" : ""}`}>
       <div className="w-14 shrink-0 text-right pr-2">
-        <span className="text-white/60 text-[11px] font-body">{isRow2 ? `${op === "-" ? "−" : "+"} ${row.label}` : row.label}</span>
+        <span className="text-white/60 text-[11px] font-body">{row.label}</span>
       </div>
       <span className={xDead ? deadCell : liveCell}>{termStr(row.a, "x")}</span>
       <span className={dimCell}>+</span>
       <span className={xDead ? liveCell : deadCell}>{termStr(row.b, "y")}</span>
       <span className={dimCell}>=</span>
       <span className={`${cellBase} text-white/80`}>{row.c}</span>
+      {/* Sign badge on the RIGHT for row 2 */}
+      {isRow2 && (
+        <span className={`ml-1 text-xs font-bold font-body px-1.5 py-0.5 rounded ${
+          op === "-" ? "text-red-300 bg-red-900/50 border border-red-500/30" : "text-green-300 bg-green-900/50 border border-green-500/30"
+        }`}>
+          {op === "-" ? "dikurangkan" : "dijumlahkan"}
+        </span>
+      )}
     </div>
   );
 
-  const solveTex = solveFrac[1] === 1
-    ? `${solveVar} = \\dfrac{${resultC}}{${resultA}} = ${ft(solveFrac)}`
-    : `${solveVar} = \\dfrac{${resultC}}{${resultA}} = ${ft(solveFrac)}`;
+  const solveTex = `${solveVar} = \\dfrac{${resultC}}{${resultA}} = ${ft(solveFrac)}`;
 
   return (
     <div className={`space-y-2 transition-all duration-700 ${visible ? "opacity-100" : "opacity-0"}`}>
 
-      {/* Title pill */}
+      {/* Title */}
       <div className="flex items-center gap-2">
         <Zap className="w-4 h-4 text-yellow-400 shrink-0" />
         <p className="font-body text-sm font-bold text-white">{block.title}</p>
       </div>
 
-      {/* Multiplier hint */}
-      {(row1.label !== "P1" || row2.label !== "P2") && (
-        <p className="font-body text-xs text-white/50">
-          {row1.label !== "P1" ? `Kalikan P1 dengan ${row1.label.replace("P1×", "")}` : "P1 tetap"}
-          {" · "}
-          {row2.label !== "P2" ? `kalikan P2 dengan ${row2.label.replace("P2×", "")}` : "P2 tetap"}
-          {" → koefisien "}{elimVar}{" menjadi sama"}
-        </p>
+      {/* ── Step A: Original equations → multiply to equalize ── */}
+      {needsMult && (
+        <div className="bg-slate-900/60 border border-white/10 rounded-xl p-3 space-y-1.5">
+          <p className="font-body text-[10px] uppercase text-white/50 tracking-wide mb-1">
+            Samakan koefisien {elimVar} → kalikan kedua persamaan
+          </p>
+          {/* Row for P1 */}
+          <div className="flex items-center gap-2 font-mono text-sm">
+            <span className="text-white/50 w-5 shrink-0 text-right">P1</span>
+            <span className="text-white/80">{termStr(origA1, "x")} + {termStr(origB1, "y")} = {origC1}</span>
+            <span className="text-yellow-300 font-bold mx-1">|×{m1}|</span>
+            <span className="text-cyan-300 font-bold">{termStr(row1.a, "x")} + {termStr(row1.b, "y")} = {row1.c}</span>
+          </div>
+          {/* Row for P2 */}
+          <div className="flex items-center gap-2 font-mono text-sm">
+            <span className="text-white/50 w-5 shrink-0 text-right">P2</span>
+            <span className="text-white/80">{termStr(origA2, "x")} + {termStr(origB2, "y")} = {origC2}</span>
+            <span className="text-yellow-300 font-bold mx-1">|×{m2}|</span>
+            <span className="text-cyan-300 font-bold">{termStr(row2.a, "x")} + {termStr(row2.b, "y")} = {row2.c}</span>
+          </div>
+        </div>
       )}
 
-      {/* The visual operation table */}
+      {/* ── Step B: The elimination operation table ── */}
       <div className="bg-slate-900/80 border border-white/10 rounded-xl p-3 space-y-0.5">
         {/* Header */}
         <div className="flex items-center gap-1 mb-1">
@@ -210,7 +241,7 @@ const ElimTable: React.FC<{ block: ElimBlock; visible: boolean }> = ({ block, vi
         {/* Row 1 */}
         {renderRow(row1, false)}
 
-        {/* Row 2 (with op prefix and underline) */}
+        {/* Row 2 — sign shown on the right */}
         {renderRow(row2, true)}
 
         {/* Result row */}
