@@ -254,34 +254,6 @@ const MetodeEliminasiPage = () => {
                   </Step>
                 </div>
 
-                {/* Tips kapan eliminasi lebih baik dari substitusi */}
-                <div className="bg-slate-800/40 border border-yellow-500/20 rounded-xl p-3 space-y-2">
-                  <p className="font-body text-sm font-bold text-yellow-300">⚡ Kapan Pilih Eliminasi vs Substitusi?</p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs font-body border-collapse">
-                      <thead>
-                        <tr className="bg-yellow-900/40">
-                          <th className="border border-yellow-500/30 px-3 py-1 text-yellow-200 text-left">Kondisi SPLDV</th>
-                          <th className="border border-yellow-500/30 px-3 py-1 text-yellow-200 text-center">Pilih</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {[
-                          ["Ada variabel berkoefisien 1", "Substitusi (lebih cepat)"],
-                          ["Koefisien variabel sama di kedua persamaan", "Eliminasi (langsung)"],
-                          ["Semua koefisien besar, tidak ada yang 1", "Eliminasi (lebih efisien)"],
-                          ["Persamaan sudah dalam bentuk y = mx + c", "Substitusi (tanpa perlu isolasi)"],
-                        ].map(([kondisi, pilih], i) => (
-                          <tr key={i} className={i % 2 === 0 ? "bg-white/5" : ""}>
-                            <td className="border border-white/10 px-3 py-1 text-white/70">{kondisi}</td>
-                            <td className="border border-white/10 px-3 py-1 text-center text-cyan-300 font-semibold">{pilih}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
               </div>
             )}
           </div>
