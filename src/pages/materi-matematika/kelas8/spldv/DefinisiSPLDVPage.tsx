@@ -320,10 +320,10 @@ const DefinisiSPLDVPage = () => {
                   {/* ── CONTOH 2: soal cerita nasi goreng & mie goreng ── */}
                   {(() => {
                     const choices2 = [
-                      { label: "A", n: 9, m: 7, p1: "2(9) + 7 = 25", p1ok: true, p2: "9 + 2(7) = 23", p2ok: true },
-                      { label: "B", n: 8, m: 9, p1: "2(8) + 9 = 25", p1ok: true, p2: "8 + 2(9) = 26 \\neq 23", p2ok: false },
-                      { label: "C", n: 10, m: 5, p1: "2(10) + 5 = 25", p1ok: true, p2: "10 + 2(5) = 20 \\neq 23", p2ok: false },
-                      { label: "D", n: 7, m: 11, p1: "2(7) + 11 = 25", p1ok: true, p2: "7 + 2(11) = 29 \\neq 23", p2ok: false },
+                      { label: "A", n: 9, m: 7, p1: "2(9.000) + 7.000 = 18.000 + 7.000 = 25.000", p1ok: true, p2: "9.000 + 2(7.000) = 9.000 + 14.000 = 23.000", p2ok: true },
+                      { label: "B", n: 8, m: 9, p1: "2(8.000) + 9.000 = 16.000 + 9.000 = 25.000", p1ok: true, p2: "8.000 + 2(9.000) = 8.000 + 18.000 = 26.000 \\neq 23.000", p2ok: false },
+                      { label: "C", n: 10, m: 5, p1: "2(10.000) + 5.000 = 20.000 + 5.000 = 25.000", p1ok: true, p2: "10.000 + 2(5.000) = 10.000 + 10.000 = 20.000 \\neq 23.000", p2ok: false },
+                      { label: "D", n: 7, m: 11, p1: "2(7.000) + 11.000 = 14.000 + 11.000 = 25.000", p1ok: true, p2: "7.000 + 2(11.000) = 7.000 + 22.000 = 29.000 \\neq 23.000", p2ok: false },
                     ];
                     const sel = jawab2;
                     const chosen = sel !== null ? choices2[sel] : null;
@@ -368,10 +368,10 @@ const DefinisiSPLDVPage = () => {
                           </div>
                           {chosen && (
                             <div className={`mt-3 rounded-xl border p-4 space-y-3 transition-all duration-500 ${isCorrect ? "border-emerald-500/40 bg-emerald-900/20" : "border-red-500/40 bg-red-900/20"}`}>
-                              <p className="font-body text-xs font-bold uppercase tracking-widest text-white/50">🔬 Pembuktian — substitusi dalam ribuan (÷1.000)</p>
+                              <p className="font-body text-xs font-bold uppercase tracking-widest text-white/50">🔬 Pembuktian — substitusi ke kedua persamaan</p>
                               <div className="space-y-2">
                                 <div className={`rounded-lg px-3 py-2 border ${chosen.p1ok ? "border-emerald-500/30 bg-emerald-900/20" : "border-red-500/30 bg-red-900/20"}`}>
-                                  <p className="font-body text-xs text-white/50 mb-1">Persamaan (1): <InlineMath math="2n + m = 25" /></p>
+                                  <p className="font-body text-xs text-white/50 mb-1">Persamaan (1): <InlineMath math="2n + m = 25.000" /></p>
                                   <div className="overflow-x-auto">
                                     <BlockMath math={chosen.p1 + (chosen.p1ok ? " \\checkmark" : " \\times")} />
                                   </div>
@@ -380,7 +380,7 @@ const DefinisiSPLDVPage = () => {
                                   </p>
                                 </div>
                                 <div className={`rounded-lg px-3 py-2 border ${chosen.p2ok ? "border-emerald-500/30 bg-emerald-900/20" : "border-red-500/30 bg-red-900/20"}`}>
-                                  <p className="font-body text-xs text-white/50 mb-1">Persamaan (2): <InlineMath math="n + 2m = 23" /></p>
+                                  <p className="font-body text-xs text-white/50 mb-1">Persamaan (2): <InlineMath math="n + 2m = 23.000" /></p>
                                   <div className="overflow-x-auto">
                                     <BlockMath math={chosen.p2 + (chosen.p2ok ? " \\checkmark" : " \\times")} />
                                   </div>
