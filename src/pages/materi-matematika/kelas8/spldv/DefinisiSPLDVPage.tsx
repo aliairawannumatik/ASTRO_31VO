@@ -448,6 +448,181 @@ const DefinisiSPLDVPage = () => {
 
                 </div>
 
+                {/* ── CARA MEMBEDAKAN JENIS PENYELESAIAN ── */}
+                <div className="space-y-3">
+                  <p className="font-body text-sm font-bold text-white">🧭 Bagaimana Cara Membedakannya?</p>
+                  <p className="font-body text-xs text-white/70 leading-relaxed">
+                    Untuk SPLDV <InlineMath math="\begin{cases} a_1x + b_1y = c_1 \\ a_2x + b_2y = c_2 \end{cases}" />, cukup bandingkan <strong className="text-cyan-300">tiga rasio</strong> berikut:
+                  </p>
+
+                  {/* Tiga rasio */}
+                  <div className="grid grid-cols-3 gap-2 text-center text-xs font-body">
+                    <div className="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-3 space-y-1">
+                      <p className="text-cyan-300 font-bold text-sm"><InlineMath math="\dfrac{a_1}{a_2}" /></p>
+                      <p className="text-white/50 text-[10px]">Rasio koefisien x</p>
+                    </div>
+                    <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-3 space-y-1">
+                      <p className="text-violet-300 font-bold text-sm"><InlineMath math="\dfrac{b_1}{b_2}" /></p>
+                      <p className="text-white/50 text-[10px]">Rasio koefisien y</p>
+                    </div>
+                    <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-3 space-y-1">
+                      <p className="text-yellow-300 font-bold text-sm"><InlineMath math="\dfrac{c_1}{c_2}" /></p>
+                      <p className="text-white/50 text-[10px]">Rasio konstanta</p>
+                    </div>
+                  </div>
+
+                  {/* Tiga aturan dengan warna berbeda */}
+                  <div className="space-y-2">
+
+                    {/* Aturan 1 — satu penyelesaian */}
+                    <div className="bg-gradient-to-r from-emerald-950/70 to-emerald-900/30 border border-emerald-500/40 rounded-xl p-4 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl">🎯</span>
+                        <p className="font-display text-sm font-bold text-emerald-300">Tepat Satu Penyelesaian</p>
+                      </div>
+                      <div className="bg-emerald-900/40 border border-emerald-500/20 rounded-lg px-3 py-2 text-center">
+                        <BlockMath math="\frac{a_1}{a_2} \neq \frac{b_1}{b_2}" />
+                      </div>
+                      <p className="font-body text-xs text-white/70 leading-relaxed">
+                        Rasio koefisien x <strong className="text-emerald-300">berbeda</strong> dari rasio koefisien y. Artinya kedua garis punya <em>kemiringan (gradien) yang berbeda</em>, sehingga pasti berpotongan tepat di satu titik.
+                      </p>
+                      {/* Contoh */}
+                      <div className="bg-black/30 rounded-lg px-3 py-2 space-y-1">
+                        <p className="font-body text-[11px] font-bold text-emerald-400">✏️ Contoh:</p>
+                        <BlockMath math="\begin{cases} 2x + y = 5 \\ x + 3y = 10 \end{cases}" />
+                        <p className="font-body text-[11px] text-white/60">
+                          Cek: <InlineMath math="\dfrac{a_1}{a_2} = \dfrac{2}{1} = 2" /> dan <InlineMath math="\dfrac{b_1}{b_2} = \dfrac{1}{3}" />
+                        </p>
+                        <p className="font-body text-[11px] text-white/60">
+                          Karena <InlineMath math="2 \neq \dfrac{1}{3}" /> → <strong className="text-emerald-300">tepat satu penyelesaian ✅</strong>
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Aturan 2 — tak hingga */}
+                    <div className="bg-gradient-to-r from-yellow-950/70 to-amber-900/30 border border-yellow-500/40 rounded-xl p-4 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl">♾️</span>
+                        <p className="font-display text-sm font-bold text-yellow-300">Tak Hingga Penyelesaian</p>
+                      </div>
+                      <div className="bg-yellow-900/40 border border-yellow-500/20 rounded-lg px-3 py-2 text-center">
+                        <BlockMath math="\frac{a_1}{a_2} = \frac{b_1}{b_2} = \frac{c_1}{c_2}" />
+                      </div>
+                      <p className="font-body text-xs text-white/70 leading-relaxed">
+                        Ketiga rasio <strong className="text-yellow-300">semuanya sama</strong>. Artinya persamaan kedua hanyalah <em>kelipatan</em> dari persamaan pertama — kedua garis <em>berimpit</em> (saling menumpuk), sehingga setiap titik pada garis adalah solusi.
+                      </p>
+                      {/* Contoh */}
+                      <div className="bg-black/30 rounded-lg px-3 py-2 space-y-1">
+                        <p className="font-body text-[11px] font-bold text-yellow-400">✏️ Contoh:</p>
+                        <BlockMath math="\begin{cases} 2x + 4y = 8 \\ x + 2y = 4 \end{cases}" />
+                        <p className="font-body text-[11px] text-white/60">
+                          Cek: <InlineMath math="\dfrac{2}{1} = 2" />, <InlineMath math="\dfrac{4}{2} = 2" />, <InlineMath math="\dfrac{8}{4} = 2" />
+                        </p>
+                        <p className="font-body text-[11px] text-white/60">
+                          Karena <InlineMath math="2 = 2 = 2" /> → <strong className="text-yellow-300">tak hingga penyelesaian ♾️</strong>
+                        </p>
+                        <p className="font-body text-[11px] text-white/50 italic">
+                          (Persamaan 1 = 2 × Persamaan 2, jadi keduanya adalah garis yang sama)
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Aturan 3 — tidak ada */}
+                    <div className="bg-gradient-to-r from-red-950/70 to-rose-900/30 border border-red-500/40 rounded-xl p-4 space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl">∅</span>
+                        <p className="font-display text-sm font-bold text-red-300">Tidak Memiliki Penyelesaian</p>
+                      </div>
+                      <div className="bg-red-900/40 border border-red-500/20 rounded-lg px-3 py-2 text-center">
+                        <BlockMath math="\frac{a_1}{a_2} = \frac{b_1}{b_2} \neq \frac{c_1}{c_2}" />
+                      </div>
+                      <p className="font-body text-xs text-white/70 leading-relaxed">
+                        Rasio koefisien x dan y <strong className="text-red-300">sama</strong>, tetapi rasio konstanta <strong className="text-red-300">berbeda</strong>. Artinya kedua garis punya kemiringan yang sama (sejajar) namun berada di posisi berbeda, sehingga tidak pernah berpotongan.
+                      </p>
+                      {/* Contoh */}
+                      <div className="bg-black/30 rounded-lg px-3 py-2 space-y-1">
+                        <p className="font-body text-[11px] font-bold text-red-400">✏️ Contoh:</p>
+                        <BlockMath math="\begin{cases} x + 3y = 7 \\ 2x + 6y = 15 \end{cases}" />
+                        <p className="font-body text-[11px] text-white/60">
+                          Cek: <InlineMath math="\dfrac{1}{2}" />, <InlineMath math="\dfrac{3}{6} = \dfrac{1}{2}" />, <InlineMath math="\dfrac{7}{15}" />
+                        </p>
+                        <p className="font-body text-[11px] text-white/60">
+                          Karena <InlineMath math="\dfrac{1}{2} = \dfrac{1}{2}" /> tetapi <InlineMath math="\dfrac{1}{2} \neq \dfrac{7}{15}" /> → <strong className="text-red-300">tidak ada penyelesaian ∅</strong>
+                        </p>
+                        <p className="font-body text-[11px] text-white/50 italic">
+                          (Garis sejajar — kemiringan sama, tapi jarak berbeda)
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Diagram Alur */}
+                  <div className="bg-slate-800/60 border border-white/10 rounded-xl p-4 space-y-3">
+                    <p className="font-body text-xs font-bold text-white text-center">🗺️ Diagram Alur Penentuan Jenis Penyelesaian</p>
+                    <div className="flex flex-col items-center gap-2 text-xs font-body">
+
+                      {/* Langkah 1 */}
+                      <div className="bg-cyan-900/50 border border-cyan-500/40 rounded-xl px-4 py-2 text-center w-full max-w-xs">
+                        <p className="text-cyan-200 font-semibold">Hitung rasio:</p>
+                        <p className="text-white/70 mt-0.5"><InlineMath math="\tfrac{a_1}{a_2}" />, <InlineMath math="\tfrac{b_1}{b_2}" />, dan <InlineMath math="\tfrac{c_1}{c_2}" /></p>
+                      </div>
+
+                      <div className="text-white/30 text-lg">↓</div>
+
+                      {/* Pertanyaan 1 */}
+                      <div className="bg-slate-700/60 border border-white/20 rounded-xl px-4 py-2 text-center w-full max-w-xs">
+                        <p className="text-white/80 font-semibold">Apakah <InlineMath math="\tfrac{a_1}{a_2} \neq \tfrac{b_1}{b_2}" />?</p>
+                      </div>
+
+                      <div className="flex w-full max-w-sm justify-around text-xs">
+                        <div className="flex flex-col items-center gap-1">
+                          <span className="text-white/30">↓ Ya</span>
+                          <div className="bg-emerald-900/60 border border-emerald-500/40 rounded-lg px-3 py-1.5 text-center">
+                            <p className="text-emerald-300 font-bold">🎯 Tepat satu</p>
+                            <p className="text-emerald-300 font-bold">penyelesaian</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-center gap-1">
+                          <span className="text-white/30">↓ Tidak</span>
+                          <div className="bg-slate-700/60 border border-white/20 rounded-lg px-3 py-1.5 text-center">
+                            <p className="text-white/80 font-semibold text-[10px]">Apakah</p>
+                            <p className="text-white/80 font-semibold text-[10px]"><InlineMath math="\tfrac{c_1}{c_2}" /> juga sama?</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex w-full max-w-sm justify-end text-xs pr-2">
+                        <div className="flex gap-6">
+                          <div className="flex flex-col items-center gap-1">
+                            <span className="text-white/30">↓ Ya</span>
+                            <div className="bg-yellow-900/60 border border-yellow-500/40 rounded-lg px-3 py-1.5 text-center">
+                              <p className="text-yellow-300 font-bold">♾️ Tak hingga</p>
+                              <p className="text-yellow-300 font-bold">penyelesaian</p>
+                            </div>
+                          </div>
+                          <div className="flex flex-col items-center gap-1">
+                            <span className="text-white/30">↓ Tidak</span>
+                            <div className="bg-red-900/60 border border-red-500/40 rounded-lg px-3 py-1.5 text-center">
+                              <p className="text-red-300 font-bold">∅ Tidak ada</p>
+                              <p className="text-red-300 font-bold">penyelesaian</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Tips kotak kuning */}
+                  <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                    <p className="font-body text-sm text-yellow-200">
+                      <strong>💡 Cara mudah mengingat:</strong> Bayangkan dua garis di koordinat. Jika kemiringannya <em>beda</em> → pasti ketemu (1 solusi). Jika <em>sama persis</em> → tumpang tindih (∞ solusi). Jika <em>sama kemiringan tapi beda posisi</em> → tidak pernah ketemu (0 solusi).
+                    </p>
+                  </div>
+
+                </div>
+
               </div>
             )}
           </div>
