@@ -68,7 +68,7 @@ const DefinisiSPLDVPage = () => {
                   Bayangkan kamu pergi ke kantin dan membeli 2 nasi goreng dan 1 mie goreng seharga Rp25.000. Temanmu membeli 1 nasi goreng dan 2 mie goreng seharga Rp23.000. Dari dua informasi ini, bisa tidak kita tahu harga masing-masing makanan? Nah, inilah kegunaan <strong className="text-cyan-300">SPLDV</strong> — alat matematika untuk memecahkan masalah yang punya <em>dua ketidaktahuan</em> sekaligus!
                 </p>
                 <div className="rounded-xl overflow-hidden border border-white/10">
-                  <img src="/images/spldv-konteks-warung.png" alt="Konteks warung nasi goreng dan mie goreng SPLDV" className="w-full object-cover max-h-64" />
+                  <img src="/images/spldv-konteks-warung.png" alt="Konteks warung nasi goreng dan mie goreng SPLDV" className="w-full object-contain" />
                   <div className="bg-black/40 px-3 py-1.5 flex items-center gap-1.5">
                     <span className="text-white/40 text-[10px]">🖼️</span>
                     <p className="font-body text-[10px] text-white/40">Sumber gambar:</p>
