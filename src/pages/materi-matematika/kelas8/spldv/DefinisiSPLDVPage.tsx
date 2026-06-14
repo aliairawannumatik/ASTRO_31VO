@@ -12,6 +12,8 @@ const DefinisiSPLDVPage = () => {
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "pldv", "spldv", "contoh1", "rangkuman",
   ]);
+  const [jawab1, setJawab1] = useState<number | null>(null);
+  const [jawab2, setJawab2] = useState<number | null>(null);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -196,16 +198,6 @@ const DefinisiSPLDVPage = () => {
                   <p className="font-body text-xs text-center text-white/50">Inilah kenapa kita butuh <strong className="text-cyan-300">dua</strong> persamaan untuk mendapat solusi tunggal!</p>
                 </div>
 
-                {/* Verifikasi solusi */}
-                <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-bold text-white">🔍 Cara Memverifikasi Solusi</p>
-                  <p className="font-body text-xs text-white/70">Misalkan solusi SPLDV adalah <InlineMath math="x = 3, y = 1" />. Untuk membuktikannya, substitusikan ke <strong>kedua</strong> persamaan:</p>
-                  <div className="space-y-1 text-sm font-body">
-                    <BlockMath math="\text{Persamaan 1: } 2(3) + 3(1) = 6 + 3 = 9 \checkmark" />
-                    <BlockMath math="\text{Persamaan 2: } (3) - (1) = 2 \checkmark" />
-                  </div>
-                  <p className="font-body text-xs text-center text-cyan-300">Jika keduanya benar, maka <InlineMath math="(3, 1)" /> adalah solusi SPLDV yang valid!</p>
-                </div>
 
               </div>
             )}
@@ -238,6 +230,179 @@ const DefinisiSPLDVPage = () => {
                       <p className="text-white/60 mt-1">PLDV kedua yang berbeda dari pertama</p>
                     </div>
                   </div>
+                </div>
+
+                {/* ── CONTOH INTERAKTIF: CEK SOLUSI ── */}
+                <div className="space-y-4">
+                  <p className="font-body text-sm font-bold text-white">🔍 Cek Solusi SPLDV — Pilihlah Jawaban yang Benar!</p>
+                  <p className="font-body text-xs text-white/60 leading-relaxed">
+                    Jawaban sudah disediakan. Tugasmu hanya memilih pasangan <InlineMath math="(x, y)" /> yang memenuhi <strong className="text-cyan-300">kedua</strong> persamaan sekaligus, lalu buktikan!
+                  </p>
+
+                  {/* ── CONTOH 1: x dan y ── */}
+                  {(() => {
+                    const choices1 = [
+                      { label: "A", x: 3, y: 1, p1: "2(3) + 1 = 7", p1ok: true, p2: "3 - 1 = 2", p2ok: true },
+                      { label: "B", x: 2, y: 3, p1: "2(2) + 3 = 7", p1ok: true, p2: "2 - 3 = -1 \\neq 2", p2ok: false },
+                      { label: "C", x: 4, y: -1, p1: "2(4) + (-1) = 7", p1ok: true, p2: "4 - (-1) = 5 \\neq 2", p2ok: false },
+                      { label: "D", x: 1, y: 5, p1: "2(1) + 5 = 7", p1ok: true, p2: "1 - 5 = -4 \\neq 2", p2ok: false },
+                    ];
+                    const sel = jawab1;
+                    const chosen = sel !== null ? choices1[sel] : null;
+                    const isCorrect = chosen ? chosen.p1ok && chosen.p2ok : null;
+                    return (
+                      <div className="bg-slate-800/60 border border-cyan-500/30 rounded-2xl overflow-hidden">
+                        <div className="px-4 pt-4 pb-3 border-b border-white/10 bg-cyan-900/20">
+                          <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest mb-2">📘 Contoh 1 — Variabel x dan y</p>
+                          <div className="overflow-x-auto">
+                            <BlockMath math="\begin{cases} 2x + y = 7 \quad \cdots (1) \\ x - y = 2 \quad \cdots (2) \end{cases}" />
+                          </div>
+                          <p className="font-body text-xs text-white/60 mt-1">Manakah pasangan <InlineMath math="(x,\, y)" /> yang merupakan solusi SPLDV di atas?</p>
+                        </div>
+                        <div className="px-4 py-3 space-y-2">
+                          <div className="grid grid-cols-2 gap-2">
+                            {choices1.map((c, i) => {
+                              const isSelected = sel === i;
+                              const correct = c.p1ok && c.p2ok;
+                              let cls = "border border-white/15 bg-slate-700/40 text-white/70 hover:bg-slate-600/50 hover:border-white/30";
+                              if (isSelected && correct) cls = "border-2 border-emerald-400 bg-emerald-900/30 text-emerald-200 shadow-lg shadow-emerald-900/30";
+                              else if (isSelected && !correct) cls = "border-2 border-red-400 bg-red-900/30 text-red-200";
+                              return (
+                                <button
+                                  key={i}
+                                  onClick={() => { playPopSound(); setJawab1(i); }}
+                                  className={`rounded-xl px-3 py-2.5 text-sm font-body font-semibold text-left transition-all ${cls}`}
+                                >
+                                  <span className="font-bold">{c.label}.</span>{" "}
+                                  <InlineMath math={`x=${c.x},\\; y=${c.y}`} />
+                                </button>
+                              );
+                            })}
+                          </div>
+                          {chosen && (
+                            <div className={`mt-3 rounded-xl border p-4 space-y-3 transition-all duration-500 ${isCorrect ? "border-emerald-500/40 bg-emerald-900/20" : "border-red-500/40 bg-red-900/20"}`}>
+                              <p className="font-body text-xs font-bold uppercase tracking-widest text-white/50">🔬 Pembuktian — substitusikan ke kedua persamaan</p>
+                              <div className="space-y-2">
+                                <div className={`rounded-lg px-3 py-2 border ${chosen.p1ok ? "border-emerald-500/30 bg-emerald-900/20" : "border-red-500/30 bg-red-900/20"}`}>
+                                  <p className="font-body text-xs text-white/50 mb-1">Persamaan (1): <InlineMath math="2x + y = 7" /></p>
+                                  <div className="overflow-x-auto">
+                                    <BlockMath math={chosen.p1 + (chosen.p1ok ? " \\checkmark" : " \\times")} />
+                                  </div>
+                                  <p className={`font-body text-xs font-bold ${chosen.p1ok ? "text-emerald-300" : "text-red-300"}`}>
+                                    {chosen.p1ok ? "✅ Persamaan (1) terpenuhi" : "❌ Persamaan (1) tidak terpenuhi"}
+                                  </p>
+                                </div>
+                                <div className={`rounded-lg px-3 py-2 border ${chosen.p2ok ? "border-emerald-500/30 bg-emerald-900/20" : "border-red-500/30 bg-red-900/20"}`}>
+                                  <p className="font-body text-xs text-white/50 mb-1">Persamaan (2): <InlineMath math="x - y = 2" /></p>
+                                  <div className="overflow-x-auto">
+                                    <BlockMath math={chosen.p2 + (chosen.p2ok ? " \\checkmark" : " \\times")} />
+                                  </div>
+                                  <p className={`font-body text-xs font-bold ${chosen.p2ok ? "text-emerald-300" : "text-red-300"}`}>
+                                    {chosen.p2ok ? "✅ Persamaan (2) terpenuhi" : "❌ Persamaan (2) tidak terpenuhi"}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className={`rounded-xl px-4 py-2.5 text-center font-body font-bold text-sm border ${isCorrect ? "bg-emerald-900/40 border-emerald-400/50 text-emerald-300" : "bg-red-900/40 border-red-400/50 text-red-300"}`}>
+                                {isCorrect
+                                  ? `🎉 Benar! (${chosen.x}, ${chosen.y}) adalah solusi SPLDV — keduanya terpenuhi!`
+                                  : `❌ Bukan solusi. Persamaan (2) tidak terpenuhi. Coba pilihan lain!`}
+                              </div>
+                            </div>
+                          )}
+                          {sel === null && (
+                            <p className="font-body text-xs text-center text-white/30 italic pt-1">👆 Pilih salah satu jawaban di atas untuk membuktikannya</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })()}
+
+                  {/* ── CONTOH 2: soal cerita nasi goreng & mie goreng ── */}
+                  {(() => {
+                    const choices2 = [
+                      { label: "A", n: 9, m: 7, p1: "2(9) + 7 = 25", p1ok: true, p2: "9 + 2(7) = 23", p2ok: true },
+                      { label: "B", n: 8, m: 9, p1: "2(8) + 9 = 25", p1ok: true, p2: "8 + 2(9) = 26 \\neq 23", p2ok: false },
+                      { label: "C", n: 10, m: 5, p1: "2(10) + 5 = 25", p1ok: true, p2: "10 + 2(5) = 20 \\neq 23", p2ok: false },
+                      { label: "D", n: 7, m: 11, p1: "2(7) + 11 = 25", p1ok: true, p2: "7 + 2(11) = 29 \\neq 23", p2ok: false },
+                    ];
+                    const sel = jawab2;
+                    const chosen = sel !== null ? choices2[sel] : null;
+                    const isCorrect = chosen ? chosen.p1ok && chosen.p2ok : null;
+                    return (
+                      <div className="bg-slate-800/60 border border-amber-500/30 rounded-2xl overflow-hidden">
+                        <div className="px-4 pt-4 pb-3 border-b border-white/10 bg-amber-900/20">
+                          <p className="font-body text-xs font-bold text-amber-300 uppercase tracking-widest mb-2">🍛 Contoh 2 — Soal Cerita Kontekstual</p>
+                          <div className="rounded-xl overflow-hidden border border-white/10 mb-3">
+                            <img src="/images/spldv-konteks-warung.png" alt="Nasi goreng dan mie goreng" className="w-full max-h-36 object-cover" />
+                          </div>
+                          <p className="font-body text-sm text-white/85 leading-relaxed mb-2">
+                            Budi membeli <strong className="text-amber-300">2 nasi goreng</strong> dan <strong className="text-amber-300">1 mie goreng</strong> seharga <strong className="text-yellow-300">Rp25.000</strong>.<br />
+                            Ani membeli <strong className="text-amber-300">1 nasi goreng</strong> dan <strong className="text-amber-300">2 mie goreng</strong> seharga <strong className="text-yellow-300">Rp23.000</strong>.
+                          </p>
+                          <div className="bg-black/30 rounded-xl p-3 text-xs font-body text-white/60 space-y-1">
+                            <p>Misalkan: <InlineMath math="n" /> = harga nasi goreng (Rp), <InlineMath math="m" /> = harga mie goreng (Rp)</p>
+                            <div className="overflow-x-auto">
+                              <BlockMath math="\begin{cases} 2n + m = 25.000 \quad \cdots (1) \\ n + 2m = 23.000 \quad \cdots (2) \end{cases}" />
+                            </div>
+                          </div>
+                          <p className="font-body text-xs text-white/60 mt-2">Manakah harga yang benar untuk nasi goreng dan mie goreng?</p>
+                        </div>
+                        <div className="px-4 py-3 space-y-2">
+                          <div className="grid grid-cols-2 gap-2">
+                            {choices2.map((c, i) => {
+                              const isSelected = sel === i;
+                              const correct = c.p1ok && c.p2ok;
+                              let cls = "border border-white/15 bg-slate-700/40 text-white/70 hover:bg-slate-600/50 hover:border-white/30";
+                              if (isSelected && correct) cls = "border-2 border-emerald-400 bg-emerald-900/30 text-emerald-200 shadow-lg shadow-emerald-900/30";
+                              else if (isSelected && !correct) cls = "border-2 border-red-400 bg-red-900/30 text-red-200";
+                              return (
+                                <button
+                                  key={i}
+                                  onClick={() => { playPopSound(); setJawab2(i); }}
+                                  className={`rounded-xl px-3 py-2.5 text-xs font-body font-semibold text-left transition-all ${cls}`}
+                                >
+                                  <span className="font-bold">{c.label}.</span>{" "}n = Rp{c.n}.000, m = Rp{c.m}.000
+                                </button>
+                              );
+                            })}
+                          </div>
+                          {chosen && (
+                            <div className={`mt-3 rounded-xl border p-4 space-y-3 transition-all duration-500 ${isCorrect ? "border-emerald-500/40 bg-emerald-900/20" : "border-red-500/40 bg-red-900/20"}`}>
+                              <p className="font-body text-xs font-bold uppercase tracking-widest text-white/50">🔬 Pembuktian — substitusi dalam ribuan (÷1.000)</p>
+                              <div className="space-y-2">
+                                <div className={`rounded-lg px-3 py-2 border ${chosen.p1ok ? "border-emerald-500/30 bg-emerald-900/20" : "border-red-500/30 bg-red-900/20"}`}>
+                                  <p className="font-body text-xs text-white/50 mb-1">Persamaan (1): <InlineMath math="2n + m = 25" /></p>
+                                  <div className="overflow-x-auto">
+                                    <BlockMath math={chosen.p1 + (chosen.p1ok ? " \\checkmark" : " \\times")} />
+                                  </div>
+                                  <p className={`font-body text-xs font-bold ${chosen.p1ok ? "text-emerald-300" : "text-red-300"}`}>
+                                    {chosen.p1ok ? "✅ Persamaan (1) terpenuhi" : "❌ Persamaan (1) tidak terpenuhi"}
+                                  </p>
+                                </div>
+                                <div className={`rounded-lg px-3 py-2 border ${chosen.p2ok ? "border-emerald-500/30 bg-emerald-900/20" : "border-red-500/30 bg-red-900/20"}`}>
+                                  <p className="font-body text-xs text-white/50 mb-1">Persamaan (2): <InlineMath math="n + 2m = 23" /></p>
+                                  <div className="overflow-x-auto">
+                                    <BlockMath math={chosen.p2 + (chosen.p2ok ? " \\checkmark" : " \\times")} />
+                                  </div>
+                                  <p className={`font-body text-xs font-bold ${chosen.p2ok ? "text-emerald-300" : "text-red-300"}`}>
+                                    {chosen.p2ok ? "✅ Persamaan (2) terpenuhi" : "❌ Persamaan (2) tidak terpenuhi"}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className={`rounded-xl px-4 py-2.5 text-center font-body font-bold text-sm border ${isCorrect ? "bg-emerald-900/40 border-emerald-400/50 text-emerald-300" : "bg-red-900/40 border-red-400/50 text-red-300"}`}>
+                                {isCorrect
+                                  ? `🎉 Tepat! Nasi goreng Rp${chosen.n}.000 dan mie goreng Rp${chosen.m}.000 — keduanya terbukti benar!`
+                                  : `❌ Belum tepat. Persamaan (2) tidak terpenuhi. Coba pilihan lain!`}
+                              </div>
+                            </div>
+                          )}
+                          {sel === null && (
+                            <p className="font-body text-xs text-center text-white/30 italic pt-1">👆 Pilih salah satu jawaban di atas untuk membuktikannya</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 {/* Jenis Solusi SPLDV — SVG Illustrations */}
