@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { BlockMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
-import { Play, RotateCcw, Zap } from "lucide-react";
+import { Play, RotateCcw, Zap, ChevronRight, ChevronLeft } from "lucide-react";
 import "katex/dist/katex.min.css";
 
 // ── Math helpers ──────────────────────────────────────────────────────────────
@@ -340,8 +340,6 @@ const COLORS: Record<string, { border: string; bg: string; badge: string }> = {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-const STEP_DELAY_MS = 1400;
-
 const EliminasiInteraktif: React.FC = () => {
   const [eq1, setEq1]         = useState("3x + y = 7");
   const [eq2, setEq2]         = useState("x + y = 3");
@@ -349,27 +347,13 @@ const EliminasiInteraktif: React.FC = () => {
   const [eq1Err, setEq1Err]   = useState(false);
   const [eq2Err, setEq2Err]   = useState(false);
 
-  const [steps, setSteps]         = useState<SolStep[]>([]);
-  const [visibleCount, setVC]     = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
-  const [error, setError]         = useState("");
-  const [done, setDone]           = useState(false);
+  const [steps, setSteps] = useState<SolStep[]>([]);
+  const [visibleCount, setVC] = useState(0);
+  const [error, setError]     = useState("");
 
   const bottomRef = useRef<HTMLDivElement>(null);
-  const timerRef  = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    if (isRunning && visibleCount < steps.length) {
-      timerRef.current = setTimeout(() => {
-        setVC(c => c + 1);
-        bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }, STEP_DELAY_MS);
-    }
-    if (visibleCount >= steps.length && steps.length > 0 && isRunning) {
-      setIsRunning(false); setDone(true);
-    }
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [isRunning, visibleCount, steps.length]);
+  const done = visibleCount >= steps.length && steps.length > 0;
 
   const handleSolve = () => {
     playPopSound();
@@ -379,20 +363,28 @@ const EliminasiInteraktif: React.FC = () => {
     if (!p2) { setEq2Err(true); err = true; } else setEq2Err(false);
     if (err) return;
     const { steps: s, error: e } = generateSteps(p1!, p2!, elimFirst);
-    if (e) { setError(e); setSteps([]); setVC(0); setDone(false); return; }
-    setError(""); setSteps(s); setVC(1); setIsRunning(true); setDone(false);
+    if (e) { setError(e); setSteps([]); setVC(0); return; }
+    setError(""); setSteps(s); setVC(1);
+  };
+
+  const handleNext = () => {
+    playPopSound();
+    setVC(c => {
+      const next = Math.min(c + 1, steps.length);
+      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
+      return next;
+    });
+  };
+
+  const handlePrev = () => {
+    playPopSound();
+    setVC(c => Math.max(c - 1, 1));
   };
 
   const handleReset = () => {
     playPopSound();
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setSteps([]); setVC(0); setIsRunning(false); setDone(false);
+    setSteps([]); setVC(0);
     setError(""); setEq1Err(false); setEq2Err(false);
-  };
-
-  const handleSkip = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setVC(steps.length); setIsRunning(false); setDone(true);
   };
 
   // Label for the strategy description
@@ -456,11 +448,10 @@ const EliminasiInteraktif: React.FC = () => {
         <div className="flex gap-2 pt-1">
           <button
             onClick={handleSolve}
-            disabled={isRunning}
-            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold font-body py-3 rounded-xl transition-all shadow-lg"
+            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white text-sm font-bold font-body py-3 rounded-xl transition-all shadow-lg"
           >
             <Play className="w-4 h-4" />
-            {isRunning ? "Sedang mengeliminasi…" : "✖️ Eliminasi Langkah demi Langkah"}
+            ✖️ Eliminasi Langkah demi Langkah
           </button>
           {(steps.length > 0 || error) && (
             <button onClick={handleReset} className="px-4 py-3 bg-slate-700/60 hover:bg-slate-600/60 border border-white/10 text-white/70 text-sm rounded-xl transition-all">
@@ -468,11 +459,6 @@ const EliminasiInteraktif: React.FC = () => {
             </button>
           )}
         </div>
-        {isRunning && (
-          <button onClick={handleSkip} className="w-full text-xs text-white/40 hover:text-white/70 font-body transition-all text-center">
-            Lewati animasi (tampilkan semua sekaligus)
-          </button>
-        )}
       </div>
 
       {/* ── Error ── */}
@@ -548,17 +534,35 @@ const EliminasiInteraktif: React.FC = () => {
             );
           })}
 
-          {/* Running indicator */}
-          {isRunning && (
-            <div className="flex items-center justify-center gap-2 py-2">
-              <div className="flex gap-1">
-                {[0, 1, 2].map(i => (
-                  <div key={i} className="w-2 h-2 rounded-full bg-red-400 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
-                ))}
-              </div>
-              <span className="text-xs text-white/40 font-body">Mengeliminasi variabel…</span>
+          {/* Lanjut / Kembali navigation */}
+          <div className="flex items-center gap-3 pt-1">
+            <button
+              onClick={handlePrev}
+              disabled={visibleCount <= 1}
+              className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-700/60 hover:bg-slate-600/60 disabled:opacity-30 disabled:cursor-not-allowed border border-white/10 text-white/80 text-sm font-bold font-body rounded-xl transition-all"
+            >
+              <ChevronLeft className="w-4 h-4" /> Kembali
+            </button>
+
+            <div className="flex-1 text-center">
+              <span className="text-xs text-white/40 font-body">
+                Langkah {visibleCount} dari {steps.length}
+              </span>
             </div>
-          )}
+
+            {!done ? (
+              <button
+                onClick={handleNext}
+                className="flex items-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-500 hover:to-orange-400 text-white text-sm font-bold font-body rounded-xl transition-all shadow-md"
+              >
+                Lanjut <ChevronRight className="w-4 h-4" />
+              </button>
+            ) : (
+              <span className="text-emerald-400 text-sm font-bold font-body flex items-center gap-1">
+                🎉 Selesai!
+              </span>
+            )}
+          </div>
 
           {done && (
             <div className="bg-green-900/20 border border-green-500/30 rounded-xl px-4 py-3 text-center space-y-1">
