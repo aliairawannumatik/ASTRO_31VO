@@ -394,67 +394,165 @@ const MetodeGrafikPage = () => {
                   </div>
                   <div className="bg-red-900/30 border border-red-500/30 rounded-lg p-4">
                     <p className="font-body text-sm text-white/90">
-                      Tanpa menggambar, tentukan jenis solusi (satu, tak hingga, atau tidak ada) dari SPLDV berikut dengan menganalisis gradiennya:<br />
-                      a. <InlineMath math="2x + 4y = 8" /> dan <InlineMath math="x + 2y = 4" /><br />
-                      b. <InlineMath math="3x - y = 6" /> dan <InlineMath math="3x - y = 9" /><br />
-                      c. <InlineMath math="x + 2y = 5" /> dan <InlineMath math="2x - y = 5" />
+                      Selesaikan SPLDV berikut dengan metode grafik:<br />
+                      <InlineMath math="x + 2y = 6" /> dan <InlineMath math="x + 2y = 10" />
                     </p>
                   </div>
                   <div className="bg-slate-900/60 border border-red-500/20 rounded-lg p-4 space-y-4">
                     <p className="font-body text-xs font-bold text-red-300 uppercase">✅ Pembahasan</p>
-                    <p className="font-body text-xs text-white/60">Ubah ke bentuk <InlineMath math="y = mx + c" /> untuk membandingkan gradien (<InlineMath math="m" />) dan konstanta (<InlineMath math="c" />).</p>
 
-                    <div className="space-y-4">
-                      {[
-                        {
-                          no: "a",
-                          p: [
-                            { raw: "2x + 4y = 8", slope: "y = -\\frac{1}{2}x + 2", m: "-1/2", c: "2" },
-                            { raw: "x + 2y = 4", slope: "y = -\\frac{1}{2}x + 2", m: "-1/2", c: "2" },
-                          ],
-                          verdict: "♾️ TAK HINGGA SOLUSI",
-                          reason: "Gradien dan konstanta SAMA → kedua persamaan identik (garis berimpit).",
-                          color: "text-yellow-300 bg-yellow-900/20 border-yellow-500/20",
-                        },
-                        {
-                          no: "b",
-                          p: [
-                            { raw: "3x - y = 6", slope: "y = 3x - 6", m: "3", c: "-6" },
-                            { raw: "3x - y = 9", slope: "y = 3x - 9", m: "3", c: "-9" },
-                          ],
-                          verdict: "🚫 TIDAK ADA SOLUSI",
-                          reason: "Gradien SAMA tetapi konstanta BERBEDA → dua garis sejajar, tidak berpotongan.",
-                          color: "text-red-300 bg-red-900/20 border-red-500/20",
-                        },
-                        {
-                          no: "c",
-                          p: [
-                            { raw: "x + 2y = 5", slope: "y = -\\frac{1}{2}x + \\frac{5}{2}", m: "-1/2", c: "5/2" },
-                            { raw: "2x - y = 5", slope: "y = 2x - 5", m: "2", c: "-5" },
-                          ],
-                          verdict: "🎯 TEPAT SATU SOLUSI",
-                          reason: "Gradien BERBEDA → dua garis pasti berpotongan di satu titik.",
-                          color: "text-green-300 bg-green-900/20 border-green-500/20",
-                        },
-                      ].map(({ no, p, verdict, reason, color }) => (
-                        <div key={no} className="space-y-2">
-                          <p className="font-body text-sm text-white/80 font-semibold">{no}. Analisis:</p>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {p.map(({ raw, slope, m, c }) => (
-                              <div key={raw} className="bg-slate-800/50 border border-white/10 rounded-lg px-3 py-2 text-xs font-body">
-                                <p className="text-white font-mono">{raw}</p>
-                                <p className="text-cyan-300 mt-1">→ <InlineMath math={slope} /></p>
-                                <p className="text-white/50 mt-0.5">m = {m}, c = {c}</p>
-                              </div>
-                            ))}
-                          </div>
-                          <div className={`border ${color} rounded-lg px-3 py-2 text-xs font-body`}>
-                            <p className="font-bold">{verdict}</p>
-                            <p className="text-white/60 mt-0.5">{reason}</p>
-                          </div>
+                    {/* Langkah 1 — tabel titik */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <p className="font-body text-sm font-semibold text-cyan-300 mb-2">📋 Persamaan 1: <InlineMath math="x + 2y = 6" /></p>
+                        <div className="bg-slate-800/50 rounded-lg p-2 text-xs font-body space-y-1 text-white/80">
+                          <p>Jika <InlineMath math="x = 0" />: <InlineMath math="2y = 6 \Rightarrow y = 3" /> → (0, 3)</p>
+                          <p>Jika <InlineMath math="y = 0" />: <InlineMath math="x = 6" /> → (6, 0)</p>
                         </div>
-                      ))}
+                        <div className="overflow-x-auto mt-2">
+                          <table className="text-xs font-body border-collapse mx-auto">
+                            <thead>
+                              <tr className="bg-cyan-900/40">
+                                <th className="border border-cyan-500/30 px-4 py-1 text-cyan-200"><InlineMath math="x" /></th>
+                                <th className="border border-cyan-500/30 px-4 py-1 text-cyan-200">0</th>
+                                <th className="border border-cyan-500/30 px-4 py-1 text-cyan-200">6</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td className="border border-white/10 px-4 py-1 text-cyan-200 font-bold"><InlineMath math="y" /></td>
+                                <td className="border border-white/10 px-4 py-1 text-center text-white">3</td>
+                                <td className="border border-white/10 px-4 py-1 text-center text-white">0</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div>
+                        <p className="font-body text-sm font-semibold text-orange-300 mb-2">📋 Persamaan 2: <InlineMath math="x + 2y = 10" /></p>
+                        <div className="bg-slate-800/50 rounded-lg p-2 text-xs font-body space-y-1 text-white/80">
+                          <p>Jika <InlineMath math="x = 0" />: <InlineMath math="2y = 10 \Rightarrow y = 5" /> → (0, 5)</p>
+                          <p>Jika <InlineMath math="x = 6" />: <InlineMath math="6 + 2y = 10 \Rightarrow y = 2" /> → (6, 2)</p>
+                        </div>
+                        <div className="overflow-x-auto mt-2">
+                          <table className="text-xs font-body border-collapse mx-auto">
+                            <thead>
+                              <tr className="bg-orange-900/40">
+                                <th className="border border-orange-500/30 px-4 py-1 text-orange-200"><InlineMath math="x" /></th>
+                                <th className="border border-orange-500/30 px-4 py-1 text-orange-200">0</th>
+                                <th className="border border-orange-500/30 px-4 py-1 text-orange-200">6</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td className="border border-white/10 px-4 py-1 text-orange-200 font-bold"><InlineMath math="y" /></td>
+                                <td className="border border-white/10 px-4 py-1 text-center text-white">5</td>
+                                <td className="border border-white/10 px-4 py-1 text-center text-white">2</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
+
+                    {/* Grafik */}
+                    <div className="bg-slate-800/40 border border-red-500/20 rounded-xl p-3 space-y-2">
+                      <p className="font-body text-xs font-bold text-white text-center">📊 Grafik Kedua Persamaan</p>
+                      {/* SVG grafik dua garis sejajar */}
+                      <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto">
+                        <defs>
+                          <filter id="glowRed">
+                            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                          </filter>
+                          <marker id="arrowR" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                            <path d="M0,1 L5,3 L0,5 Z" fill="#475569"/>
+                          </marker>
+                        </defs>
+                        {/* Background */}
+                        <rect x="30" y="10" width="240" height="190" fill="#0f172a" rx="4"/>
+                        {/* Grid lines */}
+                        {[0,1,2,3,4,5,6,7,8].map(i => {
+                          const sx = 30 + i * 30;
+                          const sy = 200 - i * 22.5;
+                          return (
+                            <g key={i}>
+                              <line x1={sx} y1="10" x2={sx} y2="200" stroke="#1e293b" strokeWidth="0.7"/>
+                              <line x1="30" y1={sy} x2="270" y2={sy} stroke="#1e293b" strokeWidth="0.7"/>
+                              <text x={sx} y="212" textAnchor="middle" fill="#475569" fontSize="9" fontFamily="monospace">{i}</text>
+                              {i > 0 && <text x="22" y={sy + 3} textAnchor="end" fill="#475569" fontSize="9" fontFamily="monospace">{i}</text>}
+                            </g>
+                          );
+                        })}
+                        {/* Axes */}
+                        <line x1="30" y1="200" x2="268" y2="200" stroke="#475569" strokeWidth="1.5" markerEnd="url(#arrowR)"/>
+                        <line x1="30" y1="200" x2="30" y2="12" stroke="#475569" strokeWidth="1.5" markerEnd="url(#arrowR)"/>
+                        <text x="272" y="204" fill="#64748b" fontSize="10" fontStyle="italic">x</text>
+                        <text x="28" y="10" fill="#64748b" fontSize="10" fontStyle="italic">y</text>
+                        {/* P1: x+2y=6 → (0,3)→(6,0)  svg: (30,132.5)→(210,200) */}
+                        <line x1="30" y1="132.5" x2="210" y2="200"
+                          stroke="#22d3ee" strokeWidth="2.8" strokeLinecap="round"
+                          filter="url(#glowRed)" opacity="0.9"/>
+                        {/* P2: x+2y=10 → (0,5)→(6,2)  svg: (30,87.5)→(210,155) */}
+                        <line x1="30" y1="87.5" x2="210" y2="155"
+                          stroke="#fb923c" strokeWidth="2.8" strokeLinecap="round"
+                          filter="url(#glowRed)" opacity="0.9"/>
+                        {/* Dots P1 */}
+                        <circle cx="30" cy="132.5" r="4" fill="#22d3ee"/>
+                        <circle cx="210" cy="200" r="4" fill="#22d3ee"/>
+                        {/* Dots P2 */}
+                        <circle cx="30" cy="87.5" r="4" fill="#fb923c"/>
+                        <circle cx="210" cy="155" r="4" fill="#fb923c"/>
+                        {/* "SEJAJAR" label between lines */}
+                        <rect x="82" y="148" width="116" height="20" rx="5" fill="#1c0a0a" fillOpacity="0.9"/>
+                        <text x="140" y="162" textAnchor="middle" fill="#f87171" fontSize="11" fontFamily="sans-serif" fontWeight="bold">⟺ Garis Sejajar</text>
+                        {/* No solution symbol */}
+                        <text x="220" y="100" fill="#ef4444" fontSize="22" fontFamily="monospace" fontWeight="bold" opacity="0.75">∅</text>
+                        {/* Legend */}
+                        <rect x="32" y="14" width="130" height="38" rx="4" fill="#0f172a" fillOpacity="0.85"/>
+                        <line x1="38" y1="27" x2="58" y2="27" stroke="#22d3ee" strokeWidth="2.5"/>
+                        <text x="62" y="31" fill="#22d3ee" fontSize="10" fontFamily="monospace">x + 2y = 6</text>
+                        <line x1="38" y1="44" x2="58" y2="44" stroke="#fb923c" strokeWidth="2.5"/>
+                        <text x="62" y="48" fill="#fb923c" fontSize="10" fontFamily="monospace">x + 2y = 10</text>
+                      </svg>
+                      <p className="font-body text-[11px] text-center text-red-300/80">
+                        Kedua garis <strong>tidak berpotongan</strong> — selalu sejajar sepanjang bidang koordinat.
+                      </p>
+                    </div>
+
+                    {/* Analisis gradien */}
+                    <div className="space-y-2">
+                      <p className="font-body text-sm text-white/80">🔍 Mengapa kedua garis sejajar? Ubah ke bentuk <InlineMath math="y = mx + c" />:</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div className="bg-cyan-900/20 border border-cyan-500/20 rounded-lg px-3 py-2 text-xs font-body space-y-1">
+                          <p className="text-white font-mono">x + 2y = 6</p>
+                          <BlockMath math="y = -\tfrac{1}{2}x + 3" />
+                          <p className="text-white/50">gradien <InlineMath math="m = -\tfrac{1}{2}" />, titik potong sumbu-y = <strong className="text-cyan-300">3</strong></p>
+                        </div>
+                        <div className="bg-orange-900/20 border border-orange-500/20 rounded-lg px-3 py-2 text-xs font-body space-y-1">
+                          <p className="text-white font-mono">x + 2y = 10</p>
+                          <BlockMath math="y = -\tfrac{1}{2}x + 5" />
+                          <p className="text-white/50">gradien <InlineMath math="m = -\tfrac{1}{2}" />, titik potong sumbu-y = <strong className="text-orange-300">5</strong></p>
+                        </div>
+                      </div>
+                      <div className="bg-slate-800/50 border border-white/10 rounded-lg px-3 py-2 text-xs font-body space-y-1">
+                        <p className="text-white/70">Gradien kedua garis: <InlineMath math="-\tfrac{1}{2} = -\tfrac{1}{2}" /> <span className="text-yellow-300 font-bold">→ SAMA</span></p>
+                        <p className="text-white/70">Konstanta (y-intercept): <InlineMath math="3 \neq 5" /> <span className="text-red-300 font-bold">→ BERBEDA</span></p>
+                      </div>
+                    </div>
+
+                    {/* Kesimpulan */}
+                    <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4 text-center space-y-2">
+                      <p className="font-display text-base font-bold text-red-300">∅ SPLDV Tidak Memiliki Penyelesaian!</p>
+                      <p className="font-body text-xs text-white/60">
+                        Karena gradien sama tetapi konstanta berbeda, kedua garis <strong className="text-red-300">sejajar</strong> dan tidak pernah berpotongan.
+                        Tidak ada pasangan <InlineMath math="(x, y)" /> yang memenuhi kedua persamaan secara bersamaan.
+                      </p>
+                      <div className="bg-slate-900/50 rounded-lg px-4 py-2 inline-block mt-1">
+                        <BlockMath math="\frac{1}{1} = \frac{2}{2} \neq \frac{6}{10} \quad \Rightarrow \quad \text{tidak ada penyelesaian}" />
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
