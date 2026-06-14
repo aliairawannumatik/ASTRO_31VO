@@ -176,7 +176,7 @@ function generateSteps(
       lines: [
         `\\begin{cases} P1:\\; ${eqTex(p1.a, p1.b, p1.c)} \\\\[4pt] P2:\\; ${eqTex(p2.a, p2.b, p2.c)} \\end{cases}`,
       ],
-      note: `Pilih: isolasi y dari ${srcLbl}, lalu substitusikan ke ${tgtLbl}.`,
+      note: `Pilih: nyatakan y dari ${srcLbl}, lalu substitusikan ke ${tgtLbl}.`,
       color: "border-slate-500/40 bg-slate-800/40",
     });
 
@@ -195,9 +195,9 @@ function generateSteps(
     isolateLines.push(`y = ${expr} \\quad \\cdots (*)`);
 
     steps.push({
-      title: `Langkah 2 — Isolasi y dari ${srcLbl}`,
+      title: `Langkah 2 — Nyatakan y dari ${srcLbl}`,
       lines: isolateLines,
-      note: "Pindahkan suku x ke ruas kanan, bagi dengan koefisien y.",
+      note: "Pindahkan suku x ke ruas kanan, lalu bagi dengan koefisien y.",
       color: "border-cyan-500/40 bg-cyan-900/20",
     });
 
@@ -326,7 +326,7 @@ function generateSteps(
       lines: [
         `\\begin{cases} P1:\\; ${eqTex(p1.a, p1.b, p1.c)} \\\\[4pt] P2:\\; ${eqTex(p2.a, p2.b, p2.c)} \\end{cases}`,
       ],
-      note: `Pilih: isolasi x dari ${srcLbl}, lalu substitusikan ke ${tgtLbl}.`,
+      note: `Pilih: nyatakan x dari ${srcLbl}, lalu substitusikan ke ${tgtLbl}.`,
       color: "border-slate-500/40 bg-slate-800/40",
     });
 
@@ -339,9 +339,9 @@ function generateSteps(
     isolateLines.push(`x = ${expr} \\quad \\cdots (*)`);
 
     steps.push({
-      title: `Langkah 2 — Isolasi x dari ${srcLbl}`,
+      title: `Langkah 2 — Nyatakan x dari ${srcLbl}`,
       lines: isolateLines,
-      note: "Pindahkan suku y ke ruas kanan, bagi dengan koefisien x.",
+      note: "Pindahkan suku y ke ruas kanan, lalu bagi dengan koefisien x.",
       color: "border-cyan-500/40 bg-cyan-900/20",
     });
 
@@ -563,7 +563,7 @@ const SubstitusiInteraktif: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* Isolasi dari persamaan mana */}
           <div className="space-y-2">
-            <p className="font-body text-xs text-white/60">Isolasi dari persamaan:</p>
+            <p className="font-body text-xs text-white/60">Nyatakan dari persamaan:</p>
             <div className="flex gap-2">
               {([1, 2] as const).map((n) => (
                 <button
@@ -583,7 +583,7 @@ const SubstitusiInteraktif: React.FC = () => {
 
           {/* Variabel yang diisolasi */}
           <div className="space-y-2">
-            <p className="font-body text-xs text-white/60">Variabel yang diisolasi:</p>
+            <p className="font-body text-xs text-white/60">Variabel yang dinyatakan:</p>
             <div className="flex gap-2">
               {(["x", "y"] as const).map((v) => (
                 <button

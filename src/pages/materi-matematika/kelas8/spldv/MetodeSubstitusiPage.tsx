@@ -100,7 +100,7 @@ const MetodeSubstitusiPage = () => {
 
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>Keunggulan Substitusi:</strong> Hasilnya <em>presisi</em> — tidak bergantung pada akurasi gambar seperti metode grafik. Metode ini paling efektif ketika salah satu persamaan sudah ada variabel dengan koefisien 1 (mudah diisolasi).
+                    <strong>Keunggulan Substitusi:</strong> Hasilnya <em>presisi</em> — tidak bergantung pada akurasi gambar seperti metode grafik. Metode ini paling efektif ketika salah satu persamaan sudah ada variabel dengan koefisien 1 (mudah dinyatakan).
                   </p>
                 </div>
               </div>
@@ -162,7 +162,7 @@ const MetodeSubstitusiPage = () => {
                       </thead>
                       <tbody>
                         {[
-                          ["Ada variabel berkoefisien 1", "Isolasi variabel tersebut → paling mudah"],
+                          ["Ada variabel berkoefisien 1", "Nyatakan variabel tersebut → paling mudah"],
                           ["Semua koefisien sama", "Pilih variabel apa saja, prosesnya setara"],
                           ["Koefisien besar semua", "Pertimbangkan metode eliminasi"],
                         ].map(([situasi, strategi], i) => (
@@ -187,7 +187,7 @@ const MetodeSubstitusiPage = () => {
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-violet-900/20 border border-violet-500/20 rounded-xl p-3">
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Masukkan <strong className="text-violet-300">sistem persamaan linear dua variabel</strong> milikmu, pilih persamaan & variabel yang ingin diisolasi, lalu tekan <strong className="text-cyan-300">▶ Selesaikan</strong> — setiap langkah akan muncul satu per satu secara otomatis!
+                    Masukkan <strong className="text-violet-300">sistem persamaan linear dua variabel</strong> milikmu, pilih persamaan & variabel yang ingin dinyatakan, lalu tekan <strong className="text-cyan-300">▶ Selesaikan</strong> — setiap langkah akan muncul satu per satu secara otomatis!
                   </p>
                 </div>
                 <SubstitusiInteraktif />
@@ -255,7 +255,7 @@ const MetodeSubstitusiPage = () => {
                     <p className="font-body text-xs font-bold text-yellow-300 uppercase">✅ Pembahasan</p>
 
                     <div>
-                      <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 1 — Isolasi variabel dari Persamaan 2:</strong></p>
+                      <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 1 — Nyatakan variabel dari Persamaan 2:</strong></p>
                       <p className="font-body text-xs text-white/60">Persamaan 2: <InlineMath math="x - y = 2" /> → koefisien x dan y keduanya 1, pilih nyatakan x:</p>
                       <BlockMath math="x = y + 2 \quad \cdots (*)" />
                     </div>
@@ -280,7 +280,7 @@ const MetodeSubstitusiPage = () => {
                     </div>
 
                     <div className="bg-yellow-900/20 border border-yellow-500/20 rounded p-2">
-                      <p className="font-body text-xs text-yellow-300">💡 Solusi: <InlineMath math="x = 4,\ y = 2" />. Kunci: pilih persamaan yang lebih mudah diisolasi (koefisien lebih kecil) untuk langkah pertama.</p>
+                      <p className="font-body text-xs text-yellow-300">💡 Solusi: <InlineMath math="x = 4,\ y = 2" />. Kunci: pilih persamaan yang lebih mudah dinyatakan (koefisien lebih kecil) untuk langkah pertama.</p>
                     </div>
                   </div>
                 </div>
@@ -311,7 +311,7 @@ const MetodeSubstitusiPage = () => {
                     </div>
 
                     <div>
-                      <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 2 — Isolasi x dari Persamaan 2</strong> (koefisien x = 1, paling mudah):</p>
+                      <p className="font-body text-sm text-white/80 mb-1"><strong>Langkah 2 — Nyatakan x dari Persamaan 2</strong> (koefisien x = 1, paling mudah):</p>
                       <BlockMath math="x = 270.000 - 4y \quad \cdots (*)" />
                     </div>
 
@@ -353,7 +353,7 @@ const MetodeSubstitusiPage = () => {
                 <div className="grid grid-cols-1 gap-2 font-body text-sm">
                   {[
                     { poin: "Metode substitusi: nyatakan satu variabel dari satu persamaan, lalu gantikan ke persamaan lain.", icon: "🔄" },
-                    { poin: "Pilih persamaan dengan variabel berkoefisien 1 untuk langkah isolasi — ini mempermudah perhitungan.", icon: "💡" },
+                    { poin: "Pilih persamaan dengan variabel berkoefisien 1 untuk langkah penyataan variabel — ini mempermudah perhitungan.", icon: "💡" },
                     { poin: "Setelah mendapat nilai satu variabel, substitusikan kembali untuk mendapat variabel kedua.", icon: "🔢" },
                     { poin: "Metode ini memberikan hasil yang presisi (tidak perlu gambar grafik).", icon: "🎯" },
                     { poin: "Selalu verifikasi solusi ke KEDUA persamaan awal untuk memastikan jawabannya benar.", icon: "✅" },
