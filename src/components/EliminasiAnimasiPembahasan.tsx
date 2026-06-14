@@ -441,54 +441,6 @@ const EliminasiAnimasiPembahasan: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* Format visual guide */}
-      <div className="bg-slate-900/70 border border-cyan-500/30 rounded-xl overflow-hidden">
-        <div className="px-4 py-3 border-b border-cyan-500/20 bg-cyan-900/20">
-          <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest">📐 Format Penulisan Eliminasi</p>
-        </div>
-        <div className="p-4 overflow-x-auto font-mono text-sm">
-          <div className="grid grid-cols-[1fr_58px_1fr] text-[10px] text-white/30 uppercase tracking-wider font-body mb-2">
-            <div className="text-center">Persamaan Asal</div>
-            <div className="text-center">Pengali</div>
-            <div className="text-center">Bentuk Baru</div>
-          </div>
-          <div className="border border-white/10 rounded-t-lg grid grid-cols-[1fr_58px_1fr]">
-            <div className="px-3 py-2.5 flex flex-col gap-0.5">
-              <span className="text-[10px] text-white/30 font-body">PLDV (1)</span>
-              <span className="text-white/70">ax + by = c</span>
-            </div>
-            <div className="flex items-center justify-center border-x border-white/10 bg-amber-900/10">
-              <span className="text-amber-300 font-bold">× k₁</span>
-            </div>
-            <div className="px-3 py-2.5 flex items-center">
-              <span className="text-cyan-200">k₁ax + k₁by = k₁c</span>
-            </div>
-          </div>
-          <div className="border-x border-b border-white/10 rounded-b-lg grid grid-cols-[1fr_58px_1fr]">
-            <div className="px-3 py-2.5 flex flex-col gap-0.5">
-              <span className="text-[10px] text-white/30 font-body">PLDV (2)</span>
-              <span className="text-white/70">dx + ey = f</span>
-            </div>
-            <div className="flex items-center justify-center border-x border-white/10 bg-amber-900/10">
-              <span className="text-amber-300 font-bold">× k₂</span>
-            </div>
-            <div className="px-3 py-2.5 flex items-center">
-              <span className="text-cyan-200">k₂dx + k₂ey = k₂f</span>
-            </div>
-          </div>
-          {/* Divider */}
-          <div className="relative border-t-2 border-white/30 mt-1">
-            <div className="absolute right-0 -top-3.5 bg-slate-900 px-2">
-              <span className="text-red-400 font-bold text-base">(±)</span>
-            </div>
-          </div>
-          <div className="pt-2 space-y-1">
-            <div className="flex justify-end pr-1"><span className="text-yellow-300 font-bold">px = q</span></div>
-            <div className="flex justify-end pr-1"><span className="text-emerald-300 font-bold">x = q/p</span></div>
-          </div>
-        </div>
-      </div>
-
       {/* Rules */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="border border-red-500/30 bg-red-900/10 rounded-xl p-3">
