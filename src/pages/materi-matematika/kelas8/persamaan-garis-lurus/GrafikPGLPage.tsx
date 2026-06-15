@@ -39,16 +39,173 @@ const CoordSystem = ({ children, w = W, h = H, label = "", showNumbers = false }
       <text x={mx+3} y={my+11} fill="#475569" fontSize="7">O</text>
       {label && <text x={6} y={14} fill="#94a3b8" fontSize="8">{label}</text>}
       {/* axis numbers */}
-      {showNumbers && ticks.map(v => (
+      {showNumbers && [-4,-3,-2,-1,1,2,3,4].map(v => (
         <g key={`num-${v}`}>
-          {/* x-axis numbers */}
-          <text x={mx + v*xStep - (v < 0 ? 6 : 3)} y={my + 11} fill="#64748b" fontSize="7">{v}</text>
-          {/* y-axis numbers */}
-          <text x={mx - 14} y={my - v*yStep + 3} fill="#64748b" fontSize="7">{v}</text>
+          <text x={mx + v*xStep - (v < -9 ? 9 : v < 0 ? 6 : 3)} y={my + 11} fill="#64748b" fontSize="7">{v}</text>
+          <text x={mx - 15} y={my - v*yStep + 3} fill="#64748b" fontSize="7">{v}</text>
         </g>
       ))}
       {children}
     </svg>
+  );
+};
+
+/* ─── Interactive Step Graph ─── */
+const ISG_W = 300, ISG_H = 260, ISG_MX = 150, ISG_MY = 130, ISG_SC = 22;
+const iax = (x: number) => ISG_MX + x * ISG_SC;
+const iay = (y: number) => ISG_MY - y * ISG_SC;
+const ISG_TICKS = [-5,-4,-3,-2,-1,1,2,3,4,5];
+
+interface IStepDef { label: string; color: string; bg: string; desc: string; }
+
+const InteractiveStepGraph = ({
+  equationLabel, linePoints, point1, point2, lineColor, steps,
+}: {
+  equationLabel: string;
+  linePoints: [number,number][];
+  point1: [number,number];
+  point2: [number,number];
+  lineColor: string;
+  steps: [IStepDef, IStepDef, IStepDef, IStepDef];
+}) => {
+  const [step, setStep] = React.useState(0);
+
+  const ptLabelPos = (x: number, y: number, above: boolean): [number,number] => {
+    const px = iax(x), py = iay(y);
+    const dx = px > ISG_MX + 70 ? -62 : 9;
+    const dy = above ? -9 : 16;
+    return [px + dx, py + dy];
+  };
+  const [p1lx, p1ly] = ptLabelPos(point1[0], point1[1], point1[1] > 1);
+  const [p2lx, p2ly] = ptLabelPos(point2[0], point2[1], point2[1] < 0);
+
+  const stepIcons = ["🗺️","📍","📌","✏️"];
+
+  return (
+    <div className="space-y-3">
+      {/* Step pills */}
+      <div className="flex gap-2 flex-wrap">
+        {steps.map((s, i) => (
+          <button key={i} onClick={() => setStep(i)}
+            style={i === step ? { background: s.bg, borderColor: s.color + "88", color: s.color, boxShadow: `0 0 12px ${s.color}33` } : {}}
+            className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-body font-semibold transition-all duration-200 border ${
+              i === step ? 'scale-105' :
+              i < step ? 'border-white/20 bg-white/10 text-white/50' :
+              'border-white/8 bg-white/5 text-white/25'
+            }`}>
+            <span className="text-[11px]">{stepIcons[i]}</span>
+            <span className="hidden sm:inline">{s.label}</span>
+            <span className="sm:hidden">{i+1}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Step description */}
+      <div className="rounded-xl p-3.5 border" style={{ background: steps[step].bg, borderColor: steps[step].color + "44" }}>
+        <div className="flex items-start gap-2">
+          <span className="text-base shrink-0 mt-0.5">{stepIcons[step]}</span>
+          <div>
+            <p className="text-xs font-bold font-body mb-0.5" style={{ color: steps[step].color }}>{steps[step].label}</p>
+            <p className="text-xs font-body text-white/80 leading-relaxed">{steps[step].desc}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* SVG Graph */}
+      <div className="relative">
+        <svg viewBox={`0 0 ${ISG_W} ${ISG_H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.97)", maxHeight: 380 }}>
+          {/* grid lines */}
+          {[-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6].map(v => (
+            <g key={v}>
+              <line x1={iax(v)} y1={3} x2={iax(v)} y2={ISG_H-3} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.8"}/>
+              <line x1={3} y1={iay(v)} x2={ISG_W-3} y2={iay(v)} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.8"}/>
+            </g>
+          ))}
+          {/* axes */}
+          <line x1={6} y1={ISG_MY} x2={ISG_W-6} y2={ISG_MY} stroke="#475569" strokeWidth="2"/>
+          <line x1={ISG_MX} y1={ISG_H-6} x2={ISG_MX} y2={6} stroke="#475569" strokeWidth="2"/>
+          {/* axis arrow tips */}
+          <polygon points={`${ISG_W-6},${ISG_MY} ${ISG_W-12},${ISG_MY-4} ${ISG_W-12},${ISG_MY+4}`} fill="#475569"/>
+          <polygon points={`${ISG_MX},6 ${ISG_MX-4},12 ${ISG_MX+4},12`} fill="#475569"/>
+          {/* axis labels */}
+          <text x={ISG_W-14} y={ISG_MY+13} fill="#64748b" fontSize="10" fontWeight="bold">x</text>
+          <text x={ISG_MX+6} y={15} fill="#64748b" fontSize="10" fontWeight="bold">y</text>
+          <text x={ISG_MX+3} y={ISG_MY+13} fill="#475569" fontSize="8">O</text>
+          {/* tick numbers - x axis */}
+          {ISG_TICKS.map(v => (
+            <g key={`xn${v}`}>
+              <line x1={iax(v)} y1={ISG_MY-3} x2={iax(v)} y2={ISG_MY+3} stroke="#475569" strokeWidth="1"/>
+              <text x={iax(v)-(v<=-10?10:v<0?7:3)} y={ISG_MY+13} fill="#4b5563" fontSize="7.5">{v}</text>
+            </g>
+          ))}
+          {/* tick numbers - y axis */}
+          {ISG_TICKS.map(v => (
+            <g key={`yn${v}`}>
+              <line x1={ISG_MX-3} y1={iay(v)} x2={ISG_MX+3} y2={iay(v)} stroke="#475569" strokeWidth="1"/>
+              <text x={ISG_MX-16} y={iay(v)+3} fill="#4b5563" fontSize="7.5">{v}</text>
+            </g>
+          ))}
+          {/* equation label badge */}
+          <rect x={6} y={6} width={equationLabel.length*6+10} height={14} rx="3" fill="rgba(30,41,59,0.9)"/>
+          <text x={11} y={16} fill="#94a3b8" fontSize="8.5" fontWeight="bold">{equationLabel}</text>
+
+          {/* Step 3: draw line */}
+          {step >= 3 && (
+            <polyline
+              points={linePoints.map(([x,y]) => `${iax(x)},${iay(y)}`).join(' ')}
+              fill="none" stroke={lineColor} strokeWidth="2.8" strokeLinecap="round"
+            />
+          )}
+
+          {/* Step 1: point1 (cyan) */}
+          {step >= 1 && (
+            <g>
+              <circle cx={iax(point1[0])} cy={iay(point1[1])} r="7" fill="#22d3ee" stroke="#cffafe" strokeWidth="2"/>
+              <circle cx={iax(point1[0])} cy={iay(point1[1])} r="11" fill="none" stroke="#22d3ee" strokeWidth="1" strokeOpacity="0.4"/>
+              <rect x={p1lx-1} y={p1ly-9} width={`${String(point1).replace(',',' ').length*5+16}px`} height="12" rx="2" fill="rgba(6,12,30,0.85)"/>
+              <text x={p1lx} y={p1ly} fill="#22d3ee" fontSize="9" fontWeight="bold">({point1[0]}, {point1[1]})</text>
+            </g>
+          )}
+
+          {/* Step 2: point2 (violet) */}
+          {step >= 2 && (
+            <g>
+              <circle cx={iax(point2[0])} cy={iay(point2[1])} r="7" fill="#a78bfa" stroke="#ede9fe" strokeWidth="2"/>
+              <circle cx={iax(point2[0])} cy={iay(point2[1])} r="11" fill="none" stroke="#a78bfa" strokeWidth="1" strokeOpacity="0.4"/>
+              <rect x={p2lx-1} y={p2ly-9} width={`${String(point2).replace(',',' ').length*5+16}px`} height="12" rx="2" fill="rgba(6,12,30,0.85)"/>
+              <text x={p2lx} y={p2ly} fill="#a78bfa" fontSize="9" fontWeight="bold">({point2[0]}, {point2[1]})</text>
+            </g>
+          )}
+        </svg>
+      </div>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-between gap-3">
+        <button onClick={() => setStep(s => Math.max(0, s-1))} disabled={step === 0}
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold font-body bg-white/10 text-white/80 disabled:opacity-25 hover:bg-white/20 active:scale-95 transition-all">
+          ← Sebelumnya
+        </button>
+        <div className="flex gap-2 items-center">
+          {steps.map((s, i) => (
+            <button key={i} onClick={() => setStep(i)}
+              style={i === step ? { background: s.color } : {}}
+              className={`rounded-full transition-all duration-300 ${i === step ? 'w-6 h-2.5' : 'w-2.5 h-2.5 bg-white/20 hover:bg-white/40'}`}/>
+          ))}
+        </div>
+        {step < 3 ? (
+          <button onClick={() => setStep(s => s + 1)}
+            style={{ background: steps[step+1 < 4 ? step+1 : step].bg, borderColor: steps[step+1 < 4 ? step+1 : step].color + "66", color: steps[step+1 < 4 ? step+1 : step].color }}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold font-body border active:scale-95 transition-all hover:opacity-80">
+            Selanjutnya →
+          </button>
+        ) : (
+          <button onClick={() => setStep(0)}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold font-body bg-green-600/20 border border-green-500/40 text-green-300 active:scale-95 transition-all hover:bg-green-600/30">
+            🔄 Ulangi
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 
@@ -298,18 +455,19 @@ const GrafikPGLPage = () => {
                         </tbody>
                       </table>
                     </div>
-                    <CoordSystem w={W} h={H} label="y = 2x + 6" showNumbers>
-                      <polyline
-                        points={[[-5,-4],[-4,-2],[-3,0],[-2,2],[-1,4],[0,6]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
-                        fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round"
-                      />
-                      {[[-3,0],[0,6]].map(([x,y]) => (
-                        <g key={`sp1-${x}-${y}`}>
-                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
-                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
-                        </g>
-                      ))}
-                    </CoordSystem>
+                    <InteractiveStepGraph
+                      equationLabel="y = 2x + 6"
+                      linePoints={[[-5,-4],[-4,-2],[-3,0],[-2,2],[-1,4],[0,6]]}
+                      point1={[-3, 0]}
+                      point2={[0, 6]}
+                      lineColor="#22d3ee"
+                      steps={[
+                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat Kartesius. Kita akan menggambar garis y = 2x + 6 menggunakan dua titik potong sumbu." },
+                        { label:"Titik Potong Sb-x", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Substitusi y = 0 ke persamaan: 0 = 2x + 6 → 2x = −6 → x = −3. Titik potong sumbu-x adalah (−3, 0). Plot titik ini!" },
+                        { label:"Titik Potong Sb-y", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Substitusi x = 0 ke persamaan: y = 2(0) + 6 = 6. Titik potong sumbu-y adalah (0, 6). Plot titik ini!" },
+                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (−3, 0) dan (0, 6) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = 2x + 6 selesai! 🎉" },
+                      ]}
+                    />
                   </div>
 
                   {/* Contoh 2 */}
@@ -343,18 +501,19 @@ const GrafikPGLPage = () => {
                         </tbody>
                       </table>
                     </div>
-                    <CoordSystem w={W} h={H} label="2x − 3y = 12" showNumbers>
-                      <polyline
-                        points={[[-1,-14/3],[0,-4],[3,-2],[6,0]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
-                        fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round"
-                      />
-                      {[[6,0],[0,-4]].map(([x,y]) => (
-                        <g key={`sp2-${x}-${y}`}>
-                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
-                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
-                        </g>
-                      ))}
-                    </CoordSystem>
+                    <InteractiveStepGraph
+                      equationLabel="2x - 3y = 12"
+                      linePoints={[[-1,-14/3],[0,-4],[3,-2],[6,0]]}
+                      point1={[6, 0]}
+                      point2={[0, -4]}
+                      lineColor="#a78bfa"
+                      steps={[
+                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat Kartesius. Kita akan menggambar garis 2x − 3y = 12 menggunakan dua titik potong sumbu." },
+                        { label:"Titik Potong Sb-x", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Substitusi y = 0: 2x − 3(0) = 12 → 2x = 12 → x = 6. Titik potong sumbu-x adalah (6, 0). Plot titik ini!" },
+                        { label:"Titik Potong Sb-y", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Substitusi x = 0: 2(0) − 3y = 12 → −3y = 12 → y = −4. Titik potong sumbu-y adalah (0, −4). Plot titik ini!" },
+                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (6, 0) dan (0, −4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis 2x − 3y = 12 selesai! 🎉" },
+                      ]}
+                    />
                   </div>
                 </div>
               </div>
@@ -426,18 +585,19 @@ const GrafikPGLPage = () => {
                         </tbody>
                       </table>
                     </div>
-                    <CoordSystem w={W} h={H} label="y = 3x − 2" showNumbers>
-                      <polyline
-                        points={[[-1,-5],[0,-2],[1,1],[2,4],[3,7]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
-                        fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round"
-                      />
-                      {[[0,-2],[2,4]].map(([x,y]) => (
-                        <g key={`ta1-${x}-${y}`}>
-                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
-                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
-                        </g>
-                      ))}
-                    </CoordSystem>
+                    <InteractiveStepGraph
+                      equationLabel="y = 3x - 2"
+                      linePoints={[[-1,-5],[0,-2],[1,1],[2,4],[3,7]]}
+                      point1={[0, -2]}
+                      point2={[2, 4]}
+                      lineColor="#4ade80"
+                      steps={[
+                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = 3x − 2." },
+                        { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = 0: y = 3(0) − 2 = −2. Titik pertama adalah (0, −2). Plot titik ini di bidang koordinat!" },
+                        { label:"Titik Kedua", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Pilih x = 2: y = 3(2) − 2 = 6 − 2 = 4. Titik kedua adalah (2, 4). Plot titik ini di bidang koordinat!" },
+                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (0, −2) dan (2, 4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = 3x − 2 selesai! 🎉" },
+                      ]}
+                    />
                   </div>
 
                   {/* Contoh 2 */}
@@ -471,18 +631,19 @@ const GrafikPGLPage = () => {
                         </tbody>
                       </table>
                     </div>
-                    <CoordSystem w={W} h={H} label="y = −x + 3" showNumbers>
-                      <polyline
-                        points={[[-1,4],[0,3],[1,2],[2,1],[3,0],[4,-1],[5,-2]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
-                        fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round"
-                      />
-                      {[[1,2],[4,-1]].map(([x,y]) => (
-                        <g key={`ta2-${x}-${y}`}>
-                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
-                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
-                        </g>
-                      ))}
-                    </CoordSystem>
+                    <InteractiveStepGraph
+                      equationLabel="y = -x + 3"
+                      linePoints={[[-1,4],[0,3],[1,2],[2,1],[3,0],[4,-1],[5,-2]]}
+                      point1={[1, 2]}
+                      point2={[4, -1]}
+                      lineColor="#fb923c"
+                      steps={[
+                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = −x + 3." },
+                        { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = 1: y = −(1) + 3 = 2. Titik pertama adalah (1, 2). Plot titik ini di bidang koordinat!" },
+                        { label:"Titik Kedua", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Pilih x = 4: y = −(4) + 3 = −1. Titik kedua adalah (4, −1). Plot titik ini di bidang koordinat!" },
+                        { label:"Gambar Garis", color:"#fb923c", bg:"rgba(251,146,60,0.08)", desc:"Hubungkan titik (1, 2) dan (4, −1) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = −x + 3 selesai! 🎉" },
+                      ]}
+                    />
                   </div>
                 </div>
               </div>
