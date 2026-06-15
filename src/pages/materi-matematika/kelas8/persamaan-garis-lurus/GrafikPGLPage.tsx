@@ -672,7 +672,7 @@ const GrafikPGLPage = () => {
                   <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4 space-y-3">
                     <p className="text-xs font-bold text-green-300 font-body uppercase tracking-wide">Contoh 1</p>
                     <div className="bg-green-900/20 border border-green-500/20 rounded-lg p-3">
-                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = 3x - 2" />!</p>
+                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = x + 2" />!</p>
                     </div>
                     <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
                     <div className="overflow-x-auto">
@@ -685,10 +685,10 @@ const GrafikPGLPage = () => {
                         </tr></thead>
                         <tbody>
                           <tr className="bg-slate-800/30">
-                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-2</td>
-                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(0, -2)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik pertama (x = 0 dipilih)</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(-2, 0)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik pertama (x = -2 dipilih)</td>
                           </tr>
                           <tr className="bg-slate-700/20">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">2</td>
@@ -700,16 +700,16 @@ const GrafikPGLPage = () => {
                       </table>
                     </div>
                     <InteractiveStepGraph
-                      equationLabel="y = 3x - 2"
-                      linePoints={[[-1,-5],[0,-2],[1,1],[2,4],[3,7]]}
-                      point1={[0, -2]}
+                      equationLabel="y = x + 2"
+                      linePoints={[[-4,-2],[-2,0],[0,2],[2,4],[4,6]]}
+                      point1={[-2, 0]}
                       point2={[2, 4]}
                       lineColor="#4ade80"
                       steps={[
-                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = 3x − 2." },
-                        { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = 0: y = 3(0) − 2 = −2. Titik pertama adalah (0, −2). Plot titik ini di bidang koordinat!" },
-                        { label:"Titik Kedua", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Pilih x = 2: y = 3(2) − 2 = 6 − 2 = 4. Titik kedua adalah (2, 4). Plot titik ini di bidang koordinat!" },
-                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (0, −2) dan (2, 4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = 3x − 2 selesai! 🎉" },
+                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = x + 2." },
+                        { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = −2: y = (−2) + 2 = 0. Titik pertama adalah (−2, 0). Plot titik ini di bidang koordinat!" },
+                        { label:"Titik Kedua", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Pilih x = 2: y = 2 + 2 = 4. Titik kedua adalah (2, 4). Plot titik ini di bidang koordinat!" },
+                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (−2, 0) dan (2, 4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = x + 2 selesai! 🎉" },
                       ]}
                     />
                   </div>
@@ -718,7 +718,7 @@ const GrafikPGLPage = () => {
                   <div className="bg-slate-800/60 border border-orange-500/30 rounded-xl p-4 space-y-3">
                     <p className="text-xs font-bold text-orange-300 font-body uppercase tracking-wide">Contoh 2</p>
                     <div className="bg-orange-900/20 border border-orange-500/20 rounded-lg p-3">
-                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = -x + 3" />!</p>
+                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = -2x + 4" />!</p>
                     </div>
                     <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
                     <div className="overflow-x-auto">
@@ -737,25 +737,25 @@ const GrafikPGLPage = () => {
                             <td className="border border-white/10 px-3 py-2 text-white/50">Titik pertama (x = 1 dipilih)</td>
                           </tr>
                           <tr className="bg-slate-700/20">
-                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">4</td>
-                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-1</td>
-                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(4, -1)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik kedua (x = 4 dipilih)</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">3</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-2</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(3, -2)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik kedua (x = 3 dipilih)</td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
                     <InteractiveStepGraph
-                      equationLabel="y = -x + 3"
-                      linePoints={[[-1,4],[0,3],[1,2],[2,1],[3,0],[4,-1],[5,-2]]}
+                      equationLabel="y = -2x + 4"
+                      linePoints={[[-1,6],[0,4],[1,2],[2,0],[3,-2],[4,-4]]}
                       point1={[1, 2]}
-                      point2={[4, -1]}
+                      point2={[3, -2]}
                       lineColor="#fb923c"
                       steps={[
-                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = −x + 3." },
-                        { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = 1: y = −(1) + 3 = 2. Titik pertama adalah (1, 2). Plot titik ini di bidang koordinat!" },
-                        { label:"Titik Kedua", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Pilih x = 4: y = −(4) + 3 = −1. Titik kedua adalah (4, −1). Plot titik ini di bidang koordinat!" },
-                        { label:"Gambar Garis", color:"#fb923c", bg:"rgba(251,146,60,0.08)", desc:"Hubungkan titik (1, 2) dan (4, −1) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = −x + 3 selesai! 🎉" },
+                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = −2x + 4." },
+                        { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = 1: y = −2(1) + 4 = −2 + 4 = 2. Titik pertama adalah (1, 2). Plot titik ini di bidang koordinat!" },
+                        { label:"Titik Kedua", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Pilih x = 3: y = −2(3) + 4 = −6 + 4 = −2. Titik kedua adalah (3, −2). Plot titik ini di bidang koordinat!" },
+                        { label:"Gambar Garis", color:"#fb923c", bg:"rgba(251,146,60,0.08)", desc:"Hubungkan titik (1, 2) dan (3, −2) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = −2x + 4 selesai! 🎉" },
                       ]}
                     />
                   </div>
