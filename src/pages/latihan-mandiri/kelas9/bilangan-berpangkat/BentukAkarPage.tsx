@@ -83,13 +83,13 @@ const questions: Q[] = [
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{3} \\times \\sqrt{12} = \\ldots" },
-      { label: "b.", math: "\\sqrt{5} \\times \\sqrt{20} = \\ldots" },
+      { label: "b.", math: "\\sqrt{2} \\times \\sqrt{6} = \\ldots" },
       { label: "c.", math: "\\sqrt{6} \\times \\sqrt{24} = \\ldots" },
-      { label: "d.", math: "2\\sqrt{3} \\times 3\\sqrt{3} = \\ldots" },
+      { label: "d.", math: "2\\sqrt{5} \\times 3\\sqrt{2} = \\ldots" },
       { label: "e.", math: "4\\sqrt{5} \\times 2\\sqrt{5} = \\ldots" },
-      { label: "f.", math: "3\\sqrt{2} \\times 5\\sqrt{8} = \\ldots" },
+      { label: "f.", math: "3\\sqrt{3} \\times 2\\sqrt{6} = \\ldots" },
       { label: "g.", math: "\\frac{\\sqrt{50}}{\\sqrt{2}} = \\ldots" },
-      { label: "h.", math: "\\frac{6\\sqrt{8}}{3\\sqrt{2}} = \\ldots" },
+      { label: "h.", math: "\\frac{4\\sqrt{15}}{2\\sqrt{5}} = \\ldots" },
     ],
   }),
   Qn(5, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
