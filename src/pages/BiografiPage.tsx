@@ -232,6 +232,7 @@ const BiografiPage = () => {
                   <p className="text-emerald-300 font-body text-[10px] font-bold tracking-widest uppercase">Keluarga · Motivator · Kolaborator</p>
                 </div>
                 <h3 className="font-display text-xl font-black text-white text-center drop-shadow-[0_0_10px_rgba(16,185,129,0.6)]">Tim MGMP Matematika</h3>
+                <p className="text-emerald-300/80 font-body text-sm font-semibold tracking-wide mt-1">SMPN 28 Bandung</p>
                 <div className="w-full mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {[{ nama: "Bapak Mohamad Kosasih, S.Pd" },{ nama: "Ibu Maya Rahmawati, S.Pd" },{ nama: "Ibu Dini Haerani, S.Pd" },{ nama: "Ibu Yulia Eka Rachmayunita, S.Pd" }].map((p) => (
                     <div key={p.nama} className="flex items-center gap-2.5 bg-emerald-500/8 border border-emerald-400/20 rounded-xl px-3 py-2">
