@@ -13,12 +13,13 @@ const questions: Q[] = [
   Qn(1, "Pengertian Notasi Ilmiah – Dasar", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "3{,}5 \\times 10^4 \\text{ — apakah ini notasi ilmiah yang valid?}" },
+      { label: "a.", math: "3{,}5 \\times 10^4 \\text{ — apakah ini notasi ilmiah yang valid? Mengapa?}" },
       { label: "b.", math: "15 \\times 10^3 \\text{ — apakah ini notasi ilmiah yang valid? Perbaiki jika salah.}" },
     ],
   }),
   Qn(2, "Mengubah ke Notasi Ilmiah & Memperbaiki Notasi – UN/ANBK/TKA", {
     type: "mixed",
+    content: "Ubahlah bentuk berikut ke dalam notasi ilmiah!",
     parts: [
       { label: "a.", math: "7.500.000 = \\ldots" },
       { label: "b.", math: "43.000.000.000 = \\ldots" },
@@ -33,6 +34,7 @@ const questions: Q[] = [
   }),
   Qn(3, "Mengubah dari Notasi Ilmiah – UN/ANBK/TKA", {
     type: "mixed",
+    content: "Ubahlah bentuk notasi ilmiah berikut ke bentuk biasa!",
     parts: [
       { label: "a.", math: "6{,}02 \\times 10^{23} = \\ldots" },
       { label: "b.", math: "3{,}0 \\times 10^8 = \\ldots \\text{ (kecepatan cahaya, m/s)}" },
@@ -44,6 +46,7 @@ const questions: Q[] = [
   }),
   Qn(4, "Perkalian & Pembagian Notasi Ilmiah – UN/ANBK", {
     type: "mixed",
+    content: "Sederhanakan dan ubahlah ke bentuk notasi ilmiah!",
     parts: [
       { label: "a.", math: "(3 \\times 10^4)(2 \\times 10^5) = 6 \\times 10^9" },
       { label: "b.", math: "(4 \\times 10^3)(5 \\times 10^6) = \\ldots" },
@@ -55,6 +58,7 @@ const questions: Q[] = [
   }),
   Qn(5, "Penjumlahan & Pengurangan Notasi Ilmiah – UN/TKA", {
     type: "mixed",
+    content: "Sederhanakan dan ubahlah ke bentuk notasi ilmiah!",
     parts: [
       { label: "a.", math: "3 \\times 10^5 + 2 \\times 10^5 = 5 \\times 10^5" },
       { label: "b.", math: "4{,}2 \\times 10^6 + 3{,}8 \\times 10^6 = \\ldots" },
@@ -101,6 +105,7 @@ const NotasiIlmiahPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
+                    {q.content && <p className="font-body text-sm text-white/80 italic mb-3">{q.content}</p>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
