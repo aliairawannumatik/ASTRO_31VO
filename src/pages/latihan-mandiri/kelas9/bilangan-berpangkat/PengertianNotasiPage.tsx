@@ -40,10 +40,10 @@ const questions: Q[] = [
     type: "mixed",
     content: "Perhatikan perbedaan antara (−a)ⁿ dan −aⁿ. Pada (−a)ⁿ, tanda negatif ikut dipangkatkan; pada −aⁿ, hanya a yang dipangkatkan kemudian hasilnya dinegatifkan.",
     parts: [
-      { label: "a.", math: "(-2)^4 = (-2)\\times(-2)\\times(-2)\\times(-2) = \\ldots" },
-      { label: "b.", math: "-2^4 = -(2 \\times 2 \\times 2 \\times 2) = \\ldots" },
+      { label: "a.", math: "(-2)^4 = \\ldots" },
+      { label: "b.", math: "-2^4 = \\ldots" },
       { label: "c.", math: "(-3)^2 = \\ldots \\quad \\text{dan} \\quad -3^2 = \\ldots" },
-      { label: "d.", math: "(-5)^3 = \\ldots \\quad \\text{dan} \\quad -5^3 = \\ldots" },
+      { label: "d.", math: "-3^2 = \\ldots" },
       { label: "e.", text: "Tuliskan kesimpulan: kapan (−a)ⁿ ≠ −aⁿ dan kapan (−a)ⁿ = −aⁿ?" },
     ],
   }),
