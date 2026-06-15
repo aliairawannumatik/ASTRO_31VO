@@ -174,16 +174,48 @@ const PenyelesaianMasalahSPLDVPage = () => {
                       <BlockMath math="\begin{cases} 3a + 2j = 54.000 \quad \cdots (I) \\ a + 4j = 52.000 \quad \cdots (II) \end{cases}" />
                     </div>
 
-                    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+                    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3 space-y-2">
                       <p className="text-cyan-300 font-semibold">Langkah 3 — Metode Campuran (Eliminasi <InlineMath math="a" /> lalu Substitusi):</p>
-                      <p className="text-white/60 text-xs mt-1">Kalikan Pers. (II) × 3:</p>
-                      <BlockMath math="3a + 12j = 156.000" />
-                      <p className="text-white/60 text-xs">Kurangkan dengan Pers. (I):</p>
-                      <BlockMath math="(3a + 12j) - (3a + 2j) = 156.000 - 54.000" />
-                      <BlockMath math="10j = 102.000 \Rightarrow j = 10.200" />
-                      <p className="text-white/60 text-xs mt-2">Substitusi <InlineMath math="j = 10.200" /> ke Pers. (II):</p>
-                      <BlockMath math="a + 4(10.200) = 52.000" />
-                      <BlockMath math="a + 40.800 = 52.000 \Rightarrow a = 11.200" />
+
+                      <p className="text-white/60 text-xs font-semibold mt-1">Samakan koefisien <InlineMath math="a" /> (KPK dari 3 dan 1 adalah 3):</p>
+                      <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 font-body">
+                        <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Kalikan kedua persamaan</p>
+                        <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                          <span className="text-white/50 w-5 shrink-0">P1</span>
+                          <span className="text-white/80">3a + 2j = 54.000</span>
+                          <span className="text-white/30 text-xs mx-1">|×1 (tetap)|</span>
+                        </div>
+                        <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                          <span className="text-white/50 w-5 shrink-0">P2</span>
+                          <span className="text-white/80">a + 4j = 52.000</span>
+                          <span className="text-yellow-300 font-bold mx-1">|×3|</span>
+                          <span className="text-cyan-300 font-bold">3a + 12j = 156.000</span>
+                        </div>
+                      </div>
+
+                      <p className="text-white/60 text-xs font-semibold">Kurangkan (koefisien <InlineMath math="a" /> sama tanda) → <InlineMath math="a" /> lenyap:</p>
+                      <div className="bg-slate-800/50 rounded-lg px-4 py-3 font-body">
+                        <div className="flex items-center gap-2">
+                          <span className="text-white/40 w-10 shrink-0">P2×3</span>
+                          <span className="text-white font-mono">3a + 12j = 156.000</span>
+                        </div>
+                        <div className="flex items-center gap-2 pb-1 border-b border-white/20">
+                          <span className="text-white/40 w-10 shrink-0">P1×1</span>
+                          <span className="text-white font-mono">3a + 2j = 54.000</span>
+                          <span className="text-red-400 font-bold ml-2">−</span>
+                        </div>
+                        <div className="flex items-center gap-2 pt-1">
+                          <span className="text-white/40 w-10 shrink-0"></span>
+                          <span className="text-cyan-300 font-mono font-bold">10j = 102.000</span>
+                        </div>
+                      </div>
+                      <BlockMath math="j = \dfrac{102.000}{10} = 10.200" />
+
+                      <p className="text-white/60 text-xs font-semibold">Substitusi <InlineMath math="j = 10.200" /> ke Persamaan (II):</p>
+                      <div className="bg-slate-800/50 rounded-lg p-2">
+                        <BlockMath math="a + 4(10.200) = 52.000" />
+                        <BlockMath math="a + 40.800 = 52.000 \;\Rightarrow\; a = 11.200" />
+                      </div>
                     </div>
 
                     <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3">
@@ -244,18 +276,52 @@ const PenyelesaianMasalahSPLDVPage = () => {
                       </div>
                     </div>
 
-                    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+                    <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3 space-y-2">
                       <p className="text-cyan-300 font-semibold">Langkah 3 — Metode Eliminasi:</p>
-                      <BlockMath math="h - 4r = -15 \quad \cdots (I)" />
-                      <BlockMath math="h + r = 53 \quad \cdots (II)" />
-                      <p className="text-white/60 text-xs">Kurangkan (II) - (I):</p>
-                      <BlockMath math="(h + r) - (h - 4r) = 53 - (-15)" />
-                      <BlockMath math="5r = 68 \Rightarrow r = 13{,}6" />
-                      <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-2 mt-2">
-                        <p className="text-yellow-200 text-xs">🤔 Hasil tidak bulat? Mari periksa soal kembali. Kondisi "5 tahun lalu Pak Hadi <em>4 kali</em> umur Rafi" dan "3 tahun lagi jumlah keduanya 59" menghasilkan umur yang tidak bulat jika kedua kondisi tersebut diterapkan secara bersamaan seperti di atas. Ini contoh soal yang sengaja menguji ketelitian pemodelan.</p>
+                      <div className="bg-slate-800/50 rounded-lg p-2">
+                        <BlockMath math="\begin{cases} \text{(I):}\quad h - 4r = -15 \\ \text{(II):}\quad h + r = 53 \end{cases}" />
                       </div>
-                      <p className="text-white/60 text-xs mt-2">Substitusi ke Pers. (II):</p>
-                      <BlockMath math="h = 53 - r = 53 - 13{,}6 = 39{,}4" />
+
+                      <p className="text-white/60 text-xs font-semibold">Samakan koefisien <InlineMath math="h" /> (koefisien sudah sama = 1, tidak perlu dikalikan):</p>
+                      <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 font-body">
+                        <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Koefisien h sudah sama → langsung operasikan</p>
+                        <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                          <span className="text-white/50 w-5 shrink-0">P1</span>
+                          <span className="text-white/80">h − 4r = −15</span>
+                          <span className="text-white/30 text-xs mx-1">|×1 (tetap)|</span>
+                        </div>
+                        <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                          <span className="text-white/50 w-5 shrink-0">P2</span>
+                          <span className="text-white/80">h + r = 53</span>
+                          <span className="text-white/30 text-xs mx-1">|×1 (tetap)|</span>
+                        </div>
+                      </div>
+
+                      <p className="text-white/60 text-xs font-semibold">Kurangkan P2 − P1 (koefisien <InlineMath math="h" /> sama tanda) → <InlineMath math="h" /> lenyap:</p>
+                      <div className="bg-slate-800/50 rounded-lg px-4 py-3 font-body">
+                        <div className="flex items-center gap-2">
+                          <span className="text-white/40 w-10 shrink-0">P2×1</span>
+                          <span className="text-white font-mono">h + r = 53</span>
+                        </div>
+                        <div className="flex items-center gap-2 pb-1 border-b border-white/20">
+                          <span className="text-white/40 w-10 shrink-0">P1×1</span>
+                          <span className="text-white font-mono">h − 4r = −15</span>
+                          <span className="text-red-400 font-bold ml-2">−</span>
+                        </div>
+                        <div className="flex items-center gap-2 pt-1">
+                          <span className="text-white/40 w-10 shrink-0"></span>
+                          <span className="text-cyan-300 font-mono font-bold">5r = 68</span>
+                        </div>
+                      </div>
+                      <BlockMath math="r = \dfrac{68}{5} = 13{,}6" />
+                      <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-2">
+                        <p className="text-yellow-200 text-xs">🤔 Hasil tidak bulat karena soal ini memang menghasilkan umur desimal. Secara matematis penyelesaiannya tetap valid.</p>
+                      </div>
+
+                      <p className="text-white/60 text-xs font-semibold">Substitusi <InlineMath math="r = 13{,}6" /> ke Persamaan (II):</p>
+                      <div className="bg-slate-800/50 rounded-lg p-2">
+                        <BlockMath math="h + 13{,}6 = 53 \;\Rightarrow\; h = 39{,}4" />
+                      </div>
                     </div>
 
                     <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3">
