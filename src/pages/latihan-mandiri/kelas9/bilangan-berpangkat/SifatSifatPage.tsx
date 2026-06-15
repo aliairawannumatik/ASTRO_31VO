@@ -10,7 +10,7 @@ type Q = { n: number; title: string; content?: string; mathContent?: string; par
 const Qn = (n: number, title: string, rest: Omit<Q, "n"|"title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1, "Sifat Perkalian, Pembagian & Pemangkatan – UN / TKA", {
+  Qn(1, "Sifat Perkalian, Pembagian & Pemangkatan", {
     type: "mixed",
     parts: [
       { label: "a.", math: "3^4 \\times 3^5 = 3^{\\square} = \\ldots" },
@@ -24,7 +24,7 @@ const questions: Q[] = [
       { label: "i.", math: "(5^4)^2 = \\ldots" },
     ],
   }),
-  Qn(2, "Sifat Distribusi Perkalian & Pembagian – UN / ANBK", {
+  Qn(2, "Sifat Distribusi Perkalian & Pembagian", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(2 \\times 3)^4 = 2^4 \\times 3^4 = \\ldots" },
@@ -35,7 +35,7 @@ const questions: Q[] = [
       { label: "f.", math: "\\left(\\frac{6}{7}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(3, "Soal UN / TKA – Sifat Distribusi & Eksponen Aljabar", {
+  Qn(3, "Sifat Distribusi & Eksponen Aljabar", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(2a)^3 = \\ldots" },
@@ -93,7 +93,7 @@ const SifatSifatPage = () => {
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
             <span className="text-emerald-400 text-xs font-bold">📋 4 Soal</span>
             <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className="text-white/50 text-xs">TKA</span>
           </div>
         </div>
         <div className="mb-5 bg-emerald-900/20 border border-emerald-500/20 rounded-xl p-4">
@@ -105,7 +105,6 @@ const SifatSifatPage = () => {
               { name: "Pemangkatan", math: "(a^m)^n = a^{mn}" },
               { name: "Distribusi ×", math: "(ab)^n = a^n b^n" },
               { name: "Distribusi ÷", math: "\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n}" },
-              { name: "Pangkat Nol", math: "a^0 = 1 \\;(a \\ne 0)" },
             ].map(r => (
               <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2">
                 <div className="text-white/40 text-[9px] uppercase mb-1">{r.name}</div>
