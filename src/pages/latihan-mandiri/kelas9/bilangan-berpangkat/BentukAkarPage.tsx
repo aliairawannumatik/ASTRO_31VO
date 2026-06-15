@@ -82,7 +82,7 @@ const questions: Q[] = [
       { label: "i.", math: "\\sqrt{50} - \\sqrt{18} + \\sqrt{8} = \\ldots" },
     ],
   }),
-  Qn(4, "Perkalian Bentuk Akar – UN/ANBK", {
+  Qn(4, "Perkalian & Pembagian Bentuk Akar – UN/ANBK/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{3} \\times \\sqrt{12} = \\ldots" },
@@ -91,17 +91,12 @@ const questions: Q[] = [
       { label: "d.", math: "2\\sqrt{3} \\times 3\\sqrt{3} = \\ldots" },
       { label: "e.", math: "4\\sqrt{5} \\times 2\\sqrt{5} = \\ldots" },
       { label: "f.", math: "3\\sqrt{2} \\times 5\\sqrt{8} = \\ldots" },
+      { label: "g.", math: "\\frac{\\sqrt{50}}{\\sqrt{2}} = \\ldots" },
+      { label: "h.", math: "\\frac{\\sqrt{75}}{\\sqrt{3}} = \\ldots" },
+      { label: "i.", math: "\\frac{6\\sqrt{8}}{3\\sqrt{2}} = \\ldots" },
     ],
   }),
-  Qn(5, "Pembagian Bentuk Akar – TKA", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{\\sqrt{50}}{\\sqrt{2}} = \\ldots" },
-      { label: "b.", math: "\\frac{\\sqrt{75}}{\\sqrt{3}} = \\ldots" },
-      { label: "c.", math: "\\frac{6\\sqrt{8}}{3\\sqrt{2}} = \\ldots" },
-    ],
-  }),
-  Qn(6, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
+  Qn(5, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{6}{\\sqrt{3}} = \\frac{6\\sqrt{3}}{3} = \\ldots" },
@@ -116,7 +111,7 @@ const questions: Q[] = [
       { label: "j.", math: "\\frac{\\sqrt{75}+\\sqrt{48}}{\\sqrt{3}} = \\ldots" },
     ],
   }),
-  Qn(7, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
+  Qn(6, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{1}{2+\\sqrt{3}} = \\frac{2-\\sqrt{3}}{(2)^2-(\\sqrt{3})^2} = \\ldots" },
@@ -129,7 +124,7 @@ const questions: Q[] = [
       { label: "h.", math: "\\frac{4}{\\sqrt{5}+\\sqrt{3}} = \\ldots" },
     ],
   }),
-  Qn(8, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
+  Qn(7, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\sqrt{2}(\\sqrt{8}+\\sqrt{2}) = \\ldots" },
@@ -141,47 +136,6 @@ const questions: Q[] = [
       { label: "g.", math: "(2+\\sqrt{3})(3+\\sqrt{3}) = \\ldots" },
       { label: "h.", math: "(\\sqrt{5}-2)(\\sqrt{5}+4) = \\ldots" },
       { label: "i.", math: "(3\\sqrt{2}-1)^2 = \\ldots" },
-    ],
-  }),
-  Qn(9, "Akar dan Pangkat Campuran – ANBK", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt{2^6} = \\ldots" },
-      { label: "b.", math: "\\sqrt[3]{3^6} = \\ldots" },
-      { label: "c.", math: "\\sqrt{5^4 \\times 2^2} = \\ldots" },
-    ],
-  }),
-  Qn(10, "Akar dan Eksponen Pecahan – UN", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt[5]{32} = 32^{\\frac{1}{5}} = \\ldots" },
-      { label: "b.", math: "\\sqrt[4]{81} = \\ldots" },
-      { label: "c.", math: "\\sqrt[6]{64} = \\ldots" },
-    ],
-  }),
-  Qn(11, "Soal ANBK – Penyederhanaan Lanjutan", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt{12} \\times \\sqrt{3} + \\sqrt{2} \\times \\sqrt{8} = \\ldots" },
-      { label: "b.", math: "\\sqrt{5}(\\sqrt{5}+\\sqrt{20}) = \\ldots" },
-      { label: "c.", math: "\\sqrt{6}(\\sqrt{6}-\\sqrt{24}) = \\ldots" },
-    ],
-  }),
-  Qn(12, "Soal TKA – Akar Ganda dalam Ekspresi", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{\\sqrt{3}+1}{\\sqrt{3}-1} + \\frac{\\sqrt{3}-1}{\\sqrt{3}+1} = \\ldots" },
-      { label: "b.", math: "\\left(\\sqrt{2}+\\frac{1}{\\sqrt{2}}\\right)^2 = \\ldots" },
-      { label: "c.", math: "\\left(\\sqrt{5}-\\frac{2}{\\sqrt{5}}\\right)^2 = \\ldots" },
-    ],
-  }),
-  Qn(13, "Soal UN/ANBK/TKA – Gabungan Bentuk Akar", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt{48} + \\sqrt{75} - \\sqrt{27} = \\ldots" },
-      { label: "b.", math: "\\frac{6}{\\sqrt{6}} + \\sqrt{6} = \\ldots" },
-      { label: "c.", math: "(\\sqrt{2}+\\sqrt{3})^2 - (\\sqrt{2}-\\sqrt{3})^2 = \\ldots" },
-      { label: "d.", math: "\\frac{\\sqrt{5}+\\sqrt{2}}{\\sqrt{5}-\\sqrt{2}} = \\ldots" },
     ],
   }),
 ];
@@ -203,7 +157,7 @@ const BentukAkarPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-            <span className="text-amber-400 text-xs font-bold">📋 13 Soal</span>
+            <span className="text-amber-400 text-xs font-bold">📋 7 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
