@@ -123,16 +123,12 @@ const questions: Q[] = [
   Qn(7, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "\\frac{1}{2+\\sqrt{3}} = \\ldots" },
-      { label: "b.", math: "\\frac{4}{3-\\sqrt{5}} = \\ldots" },
-      { label: "c.", math: "\\frac{6}{\\sqrt{7}+1} = \\ldots" },
-      { label: "d.", math: "\\frac{\\sqrt{5}+\\sqrt{3}}{\\sqrt{5}-\\sqrt{3}} = \\ldots" },
-      { label: "e.", math: "\\frac{3+\\sqrt{2}}{3-\\sqrt{2}} = \\ldots" },
-      { label: "f.", math: "\\frac{\\sqrt{6}-\\sqrt{2}}{\\sqrt{6}+\\sqrt{2}} = \\ldots" },
-      { label: "g.", math: "\\frac{\\sqrt{2}+1}{\\sqrt{2}-1} = \\ldots" },
-      { label: "h.", math: "\\frac{4}{\\sqrt{5}+\\sqrt{3}} = \\ldots" },
-      { label: "i.", math: "\\frac{2\\sqrt{3}+\\sqrt{5}}{2\\sqrt{3}-\\sqrt{5}} = \\ldots" },
-      { label: "j.", math: "\\frac{3\\sqrt{2}-\\sqrt{6}}{3\\sqrt{2}+\\sqrt{6}} = \\ldots" },
+      { label: "a.", math: "\\frac{4}{3-\\sqrt{5}} = \\ldots" },
+      { label: "b.", math: "\\frac{6}{\\sqrt{7}+1} = \\ldots" },
+      { label: "c.", math: "\\frac{\\sqrt{5}+\\sqrt{3}}{\\sqrt{5}-\\sqrt{3}} = \\ldots" },
+      { label: "d.", math: "\\frac{3+\\sqrt{2}}{3-\\sqrt{2}} = \\ldots" },
+      { label: "e.", math: "\\frac{2\\sqrt{3}+\\sqrt{5}}{2\\sqrt{3}-\\sqrt{5}} = \\ldots" },
+      { label: "f.", math: "\\frac{3\\sqrt{2}-\\sqrt{6}}{3\\sqrt{2}+\\sqrt{6}} = \\ldots" },
     ],
   }),
 ];
