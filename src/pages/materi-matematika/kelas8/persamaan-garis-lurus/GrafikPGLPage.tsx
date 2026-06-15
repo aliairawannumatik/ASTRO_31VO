@@ -973,15 +973,9 @@ const GrafikPGLPage = () => {
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
-            {true && (() => {
-              const GW2 = 300, GH2 = 260, GMX2 = GW2 / 2, GMY2 = GH2 / 2, SC2 = 26;
-              const gx2 = (x: number) => GMX2 + x * SC2;
-              const gy2 = (y: number) => GMY2 - y * SC2;
-              const ticks2 = [-4,-3,-2,-1,1,2,3,4];
-              return (
-                <div className="px-5 pb-5 pt-4 space-y-4">
-                  <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
-                  <MCQGrafik1 />
+            <div className="px-5 pb-5 pt-4 space-y-4">
+              <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
+              <MCQGrafik1 />
 
                   {/* ── PEMBAHASAN ── */}
                   <div className="bg-slate-700/40 border border-yellow-500/25 rounded-xl p-4 space-y-4">
@@ -991,128 +985,108 @@ const GrafikPGLPage = () => {
                     <div className="bg-slate-800/60 rounded-xl p-3 space-y-2">
                       <p className="text-xs font-bold text-cyan-300 font-body">📍 Langkah 1 — Baca Dua Titik dari Grafik</p>
                       <p className="text-xs text-white/70 font-body leading-relaxed">
-                        Dari grafik yang diberikan, kita dapat membaca dua titik kunci yang sudah ditandai:
+                        Dari grafik, baca dua titik yang dilalui garis (ditandai dengan titik kuning):
                       </p>
                       <div className="grid grid-cols-2 gap-2">
                         <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-lg p-2.5 text-center">
-                          <p className="text-[10px] text-white/50 font-body mb-1">Titik potong sumbu-<strong>x</strong></p>
+                          <p className="text-[10px] text-white/50 font-body mb-1">Titik 1</p>
                           <p className="text-base font-bold text-cyan-300 font-mono">(−2, 0)</p>
-                          <p className="text-[10px] text-white/40 font-body mt-0.5">saat y = 0</p>
                         </div>
                         <div className="bg-violet-900/30 border border-violet-500/30 rounded-lg p-2.5 text-center">
-                          <p className="text-[10px] text-white/50 font-body mb-1">Titik potong sumbu-<strong>y</strong></p>
+                          <p className="text-[10px] text-white/50 font-body mb-1">Titik 2</p>
                           <p className="text-base font-bold text-violet-300 font-mono">(0, 2)</p>
-                          <p className="text-[10px] text-white/40 font-body mt-0.5">saat x = 0</p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Langkah 2 — hitung gradien */}
-                    <div className="bg-slate-800/60 rounded-xl p-3 space-y-2">
-                      <p className="text-xs font-bold text-yellow-300 font-body">📐 Langkah 2 — Hitung Gradien (m)</p>
-                      <p className="text-xs text-white/70 font-body">Gunakan rumus gradien dari dua titik:</p>
-                      <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{2 - 0}{0 - (-2)} = \frac{2}{2} = 1" />
-                      <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-2 text-center">
-                        <p className="text-xs font-bold text-yellow-300 font-body">Gradien <InlineMath math="m = 1" /> (garis naik ke kanan)</p>
-                      </div>
-                    </div>
+                    {/* Langkah 2 — substitusi ke tiap opsi */}
+                    <div className="bg-slate-800/60 rounded-xl p-3 space-y-3">
+                      <p className="text-xs font-bold text-yellow-300 font-body">🔁 Langkah 2 — Substitusi Titik ke Setiap Opsi</p>
+                      <p className="text-xs text-white/65 font-body leading-relaxed">
+                        Masukkan kedua titik ke masing-masing persamaan. Persamaan yang <strong className="text-white">menghasilkan nilai y yang sama</strong> untuk <em>kedua</em> titik = jawaban yang benar.
+                      </p>
 
-                    {/* Langkah 3 — tentukan persamaan */}
-                    <div className="bg-slate-800/60 rounded-xl p-3 space-y-2">
-                      <p className="text-xs font-bold text-green-300 font-body">✏️ Langkah 3 — Tentukan Persamaan Garis</p>
-                      <p className="text-xs text-white/70 font-body">Dari titik potong sumbu-y, diperoleh <InlineMath math="c = 2" />. Gunakan bentuk <InlineMath math="y = mx + c" />:</p>
-                      <BlockMath math="y = 1 \cdot x + 2 = x + 2" />
-                      <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-2 text-center">
-                        <p className="text-sm font-bold text-green-300 font-body">✅ Persamaan garis: <InlineMath math="y = x + 2" /></p>
-                      </div>
-                    </div>
-
-                    {/* Grafik besar */}
-                    <div className="bg-slate-800/60 rounded-xl p-3 space-y-2">
-                      <p className="text-xs font-bold text-orange-300 font-body">📊 Grafik <InlineMath math="y = x + 2" /></p>
-                      <svg viewBox={`0 0 ${GW2} ${GH2}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.97)" }}>
-                        {/* grid */}
-                        {[-5,-4,-3,-2,-1,0,1,2,3,4,5].map(v => (
-                          <g key={`g${v}`}>
-                            <line x1={gx2(v)} y1={4} x2={gx2(v)} y2={GH2-4} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.7"}/>
-                            <line x1={4} y1={gy2(v)} x2={GW2-4} y2={gy2(v)} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.7"}/>
-                          </g>
-                        ))}
-                        {/* axes */}
-                        <line x1={6} y1={GMY2} x2={GW2-6} y2={GMY2} stroke="#475569" strokeWidth="2"/>
-                        <line x1={GMX2} y1={GH2-6} x2={GMX2} y2={6} stroke="#475569" strokeWidth="2"/>
-                        <polygon points={`${GW2-6},${GMY2} ${GW2-12},${GMY2-4} ${GW2-12},${GMY2+4}`} fill="#475569"/>
-                        <polygon points={`${GMX2},6 ${GMX2-4},12 ${GMX2+4},12`} fill="#475569"/>
-                        <text x={GW2-16} y={GMY2+13} fill="#64748b" fontSize="11" fontWeight="bold">x</text>
-                        <text x={GMX2+6} y={16} fill="#64748b" fontSize="11" fontWeight="bold">y</text>
-                        <text x={GMX2+4} y={GMY2+14} fill="#475569" fontSize="9">O</text>
-                        {/* tick numbers */}
-                        {ticks2.map(v => (
-                          <g key={`tn${v}`}>
-                            <line x1={gx2(v)} y1={GMY2-3} x2={gx2(v)} y2={GMY2+3} stroke="#475569" strokeWidth="1"/>
-                            <text x={gx2(v)-(v<0?8:4)} y={GMY2+14} fill="#4b5563" fontSize="9">{v}</text>
-                            <line x1={GMX2-3} y1={gy2(v)} x2={GMX2+3} y2={gy2(v)} stroke="#475569" strokeWidth="1"/>
-                            <text x={GMX2-18} y={gy2(v)+4} fill="#4b5563" fontSize="9">{v}</text>
-                          </g>
-                        ))}
-                        {/* line y = x + 2: from (-4,-2) to (2,4) */}
-                        <polyline
-                          points={[[-4,-2],[-3,-1],[-2,0],[-1,1],[0,2],[1,3],[2,4]].map(([x,y])=>`${gx2(x)},${gy2(y)}`).join(' ')}
-                          fill="none" stroke="#22d3ee" strokeWidth="3" strokeLinecap="round"
-                        />
-                        {/* x-intercept (-2, 0) */}
-                        <circle cx={gx2(-2)} cy={gy2(0)} r="7" fill="#22d3ee" stroke="#cffafe" strokeWidth="2"/>
-                        <rect x={gx2(-2)+10} y={gy2(0)-18} width={52} height={14} rx="3" fill="rgba(6,12,30,0.85)"/>
-                        <text x={gx2(-2)+12} y={gy2(0)-7} fill="#22d3ee" fontSize="10" fontWeight="bold">(−2, 0)</text>
-                        {/* y-intercept (0, 2) */}
-                        <circle cx={gx2(0)} cy={gy2(2)} r="7" fill="#a78bfa" stroke="#ede9fe" strokeWidth="2"/>
-                        <rect x={gx2(0)+10} y={gy2(2)-18} width={46} height={14} rx="3" fill="rgba(6,12,30,0.85)"/>
-                        <text x={gx2(0)+12} y={gy2(2)-7} fill="#a78bfa" fontSize="10" fontWeight="bold">(0, 2)</text>
-                        {/* gradient arrow annotation */}
-                        <line x1={gx2(-1)} y1={gy2(0)} x2={gx2(0)} y2={gy2(0)} stroke="#facc15" strokeWidth="1.5" strokeDasharray="3,2"/>
-                        <line x1={gx2(0)} y1={gy2(0)} x2={gx2(0)} y2={gy2(1)} stroke="#facc15" strokeWidth="1.5" strokeDasharray="3,2"/>
-                        <text x={gx2(-0.6)} y={gy2(-0.3)} fill="#facc15" fontSize="8">+1</text>
-                        <text x={gx2(0)+5} y={gy2(0.5)} fill="#facc15" fontSize="8">+1</text>
-                        {/* equation label */}
-                        <rect x={8} y={8} width={64} height={16} rx="4" fill="rgba(30,41,59,0.9)"/>
-                        <text x={12} y={20} fill="#22d3ee" fontSize="10" fontWeight="bold">y = x + 2</text>
-                      </svg>
-                      <p className="text-[10px] text-white/40 font-body text-center italic">Garis naik ke kanan dengan gradien m = 1 dan memotong sb-y di (0, 2)</p>
-                    </div>
-
-                    {/* Mengapa opsi lain salah */}
-                    <div className="bg-slate-800/60 rounded-xl p-3 space-y-2">
-                      <p className="text-xs font-bold text-red-300 font-body">❌ Mengapa Opsi Lain Salah?</p>
-                      <div className="space-y-2">
-                        {[
-                          { kode:"B", katex:"y = 2x + 2", alasan:"Gradiennya 2, bukan 1. Garis ini lebih curam — untuk setiap +1 satuan ke kanan, naik +2. Tidak sesuai grafik." },
-                          { kode:"C", katex:"y = x - 2",  alasan:"Titik potong sb-y = −2, bukan 2. Garis ini memotong sumbu-y di bawah titik O, berlawanan dengan grafik." },
-                          { kode:"D", katex:"y = -x + 2", alasan:"Gradiennya −1 (negatif). Garis ini turun ke kanan, sedangkan pada grafik garis naik ke kanan." },
-                        ].map(({ kode, katex, alasan }) => (
-                          <div key={kode} className="flex gap-3 items-start bg-red-900/15 border border-red-500/20 rounded-lg p-2.5">
-                            <span className="w-6 h-6 rounded-full bg-red-700/60 text-red-200 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{kode}</span>
-                            <div>
-                              <p className="text-xs font-bold text-red-300 font-body mb-0.5"><InlineMath math={katex} /></p>
-                              <p className="text-xs text-white/60 font-body leading-relaxed">{alasan}</p>
-                            </div>
+                      {/* Opsi A */}
+                      <div className="rounded-xl border border-green-500/40 bg-green-900/15 p-3 space-y-1.5">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="w-6 h-6 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center shrink-0">A</span>
+                          <InlineMath math="y = x + 2" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-xs font-body">
+                          <div className="bg-slate-900/50 rounded-lg p-2 space-y-0.5">
+                            <p className="text-white/50">Titik <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
+                            <BlockMath math="y = -2 + 2 = 0 \checkmark" />
+                            <p className="text-green-400 font-bold text-center">Nilai y = 0 ✓</p>
                           </div>
-                        ))}
+                          <div className="bg-slate-900/50 rounded-lg p-2 space-y-0.5">
+                            <p className="text-white/50">Titik <span className="text-violet-300 font-bold">(0, 2)</span>:</p>
+                            <BlockMath math="y = 0 + 2 = 2 \checkmark" />
+                            <p className="text-green-400 font-bold text-center">Nilai y = 2 ✓</p>
+                          </div>
+                        </div>
+                        <p className="text-xs font-bold text-green-300 font-body text-center pt-1">✅ Kedua titik terpenuhi → Opsi A BENAR</p>
+                      </div>
+
+                      {/* Opsi B */}
+                      <div className="rounded-xl border border-red-500/25 bg-red-900/10 p-3 space-y-1.5">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="w-6 h-6 rounded-full bg-red-700/70 text-white text-xs font-bold flex items-center justify-center shrink-0">B</span>
+                          <InlineMath math="y = 2x + 2" />
+                        </div>
+                        <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
+                          <p className="text-white/50 mb-0.5">Titik <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
+                          <BlockMath math="y = 2(-2) + 2 = -4 + 2 = -2 \neq 0" />
+                          <p className="text-red-400 font-bold text-center">Nilai y = −2, bukan 0 ✗</p>
+                        </div>
+                        <p className="text-xs text-red-300/70 font-body text-center">❌ Titik (−2, 0) tidak terpenuhi → Opsi B SALAH</p>
+                      </div>
+
+                      {/* Opsi C */}
+                      <div className="rounded-xl border border-red-500/25 bg-red-900/10 p-3 space-y-1.5">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="w-6 h-6 rounded-full bg-red-700/70 text-white text-xs font-bold flex items-center justify-center shrink-0">C</span>
+                          <InlineMath math="y = x - 2" />
+                        </div>
+                        <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
+                          <p className="text-white/50 mb-0.5">Titik <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
+                          <BlockMath math="y = -2 - 2 = -4 \neq 0" />
+                          <p className="text-red-400 font-bold text-center">Nilai y = −4, bukan 0 ✗</p>
+                        </div>
+                        <p className="text-xs text-red-300/70 font-body text-center">❌ Titik (−2, 0) tidak terpenuhi → Opsi C SALAH</p>
+                      </div>
+
+                      {/* Opsi D */}
+                      <div className="rounded-xl border border-red-500/25 bg-red-900/10 p-3 space-y-1.5">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="w-6 h-6 rounded-full bg-red-700/70 text-white text-xs font-bold flex items-center justify-center shrink-0">D</span>
+                          <InlineMath math="y = -x + 2" />
+                        </div>
+                        <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
+                          <p className="text-white/50 mb-0.5">Titik <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
+                          <BlockMath math="y = -(-2) + 2 = 2 + 2 = 4 \neq 0" />
+                          <p className="text-red-400 font-bold text-center">Nilai y = 4, bukan 0 ✗</p>
+                        </div>
+                        <p className="text-xs text-red-300/70 font-body text-center">❌ Titik (−2, 0) tidak terpenuhi → Opsi D SALAH</p>
                       </div>
                     </div>
 
                     {/* Kesimpulan */}
+                    <div className="bg-green-500/10 border border-green-500/35 rounded-xl p-3">
+                      <p className="text-sm font-bold text-green-300 font-body mb-1">✅ Kesimpulan: Jawaban A — <InlineMath math="y = x + 2" /></p>
+                      <p className="text-xs text-white/65 font-body leading-relaxed">Hanya opsi A yang menghasilkan nilai y yang tepat untuk <strong>kedua</strong> titik yang terbaca dari grafik.</p>
+                    </div>
+
+                    {/* Tips */}
                     <div className="bg-yellow-500/10 border border-yellow-500/35 rounded-xl p-3">
-                      <p className="text-xs font-bold text-yellow-300 font-body mb-1">💡 Strategi Membaca Grafik Garis Lurus</p>
+                      <p className="text-xs font-bold text-yellow-300 font-body mb-1">💡 Tips Teknik Substitusi</p>
                       <div className="space-y-1 text-xs text-white/70 font-body">
-                        <p>① Baca titik potong sb-y → nilai <InlineMath math="c" /> langsung didapat</p>
-                        <p>② Hitung gradien dari 2 titik → <InlineMath math="m = \frac{\Delta y}{\Delta x}" /></p>
-                        <p>③ Tulis persamaan → <InlineMath math="y = mx + c" /></p>
+                        <p>① Baca 2 titik yang dilalui garis dari grafik</p>
+                        <p>② Substitusi titik pertama ke semua opsi → eliminasi yang tidak cocok</p>
+                        <p>③ Jika masih ada 2+ opsi yang lolos, substitusi titik kedua untuk memastikan</p>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })()}
+            </div>
           </div>
 
           {/* CONTOH 3 */}
