@@ -73,16 +73,13 @@ const questions: Q[] = [
   Qn(3, "Pangkat Pecahan – Akar Kuadrat, Kubik & Umum", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "25^{\\frac{1}{2}} = \\sqrt{25} = \\ldots" },
-      { label: "b.", math: "144^{\\frac{1}{2}} = \\ldots" },
-      { label: "c.", math: "8^{\\frac{1}{3}} = \\sqrt[3]{8} = \\ldots" },
-      { label: "d.", math: "125^{\\frac{1}{3}} = \\ldots" },
-      { label: "e.", math: "27^{\\frac{2}{3}} = \\ldots" },
-      { label: "f.", math: "16^{\\frac{3}{4}} = \\ldots" },
-      { label: "g.", math: "4^{\\frac{5}{2}} = (\\sqrt{4})^5 = \\ldots" },
-      { label: "h.", math: "9^{\\frac{3}{2}} = \\ldots" },
-      { label: "i.", math: "100^{\\frac{3}{2}} = (\\sqrt{100})^3 = \\ldots" },
-      { label: "j.", math: "64^{\\frac{2}{3}} = \\ldots" },
+      { label: "a.", math: "25^{\\frac{1}{2}} = \\ldots" },
+      { label: "b.", math: "8^{\\frac{1}{3}} = \\ldots" },
+      { label: "c.", math: "27^{\\frac{2}{3}} = \\ldots" },
+      { label: "d.", math: "16^{\\frac{3}{4}} = \\ldots" },
+      { label: "e.", math: "9^{\\frac{3}{2}} = \\ldots" },
+      { label: "f.", math: "100^{\\frac{3}{2}} = \\ldots" },
+      { label: "g.", math: "64^{\\frac{2}{3}} = \\ldots" },
     ],
   }),
   Qn(4, "Pangkat Pecahan Negatif – Dasar, Lanjutan & Ekspresi Kompleks", {
