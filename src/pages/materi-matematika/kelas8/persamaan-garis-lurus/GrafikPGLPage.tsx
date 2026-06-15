@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, TrendingUp } from "lucide-react";
-import { playPopSound } from "@/hooks/useAudio";
+import { BookOpen, Lightbulb, Target, Layers, TrendingUp } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import GeoGebraGrapher from "@/components/GeoGebraGrapher";
@@ -45,15 +44,10 @@ const CoordSystem = ({ children, w = W, h = H, label = "" }: { children?: React.
 
 const GrafikPGLPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep", "bentuk", "titik-potong", "visual-lines", "contoh1", "contoh2", "contoh3", "rangkuman",
-  ]);
-  const toggleSection = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
-  const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button onClick={() => toggleSection(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+  const SH = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
+    <div className="w-full flex items-center px-5 py-4 border-b border-white/10">
       <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
-      <ChevronUp className="w-5 h-5 text-primary" />
-    </button>
+    </div>
   );
   const Badge = ({ label, color }: { label: string; color: string }) => (
     <span className={`inline-block px-2 py-0.5 rounded text-xs font-bold font-body ${color}`}>{label}</span>
