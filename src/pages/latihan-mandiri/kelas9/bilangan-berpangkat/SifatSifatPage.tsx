@@ -19,6 +19,9 @@ const questions: Q[] = [
       { label: "d.", math: "2^{10} \\div 2^6 = \\ldots" },
       { label: "e.", math: "(2^3)^4 = 2^{\\square} = \\ldots" },
       { label: "f.", math: "(3^2)^5 = \\ldots" },
+      { label: "g.", text: "Sebuah bakteri melipatganda 3⁴ kali pada fase pertama, lalu 3⁵ kali pada fase kedua. Berapa total lipatan? Nyatakan dalam bentuk pangkat yang disederhanakan!" },
+      { label: "h.", text: "Kolam renang memiliki panjang 7⁹ cm dan lebar 7⁴ cm. Berapa perbandingan panjang terhadap lebar? Nyatakan dalam bentuk pangkat sederhana!" },
+      { label: "i.", text: "Sebuah kubus besar memiliki sisi (2³)⁴ mm. Nyatakan panjang sisi tersebut dalam bentuk pangkat tunggal!" },
     ],
   }),
   Qn(2, "Sifat Distribusi Perkalian & Pembagian", {
@@ -29,6 +32,9 @@ const questions: Q[] = [
       { label: "c.", math: "\\left(\\frac{3}{4}\\right)^2 = \\frac{3^2}{4^2} = \\ldots" },
       { label: "d.", math: "\\left(\\frac{2}{5}\\right)^3 = \\ldots" },
       { label: "e.", math: "\\left(\\frac{6}{7}\\right)^2 = \\ldots" },
+      { label: "f.", text: "Luas lantai persegi dengan sisi (2×3) meter dinyatakan sebagai (2×3)⁴. Hitung luasnya menggunakan sifat distribusi!" },
+      { label: "g.", text: "Sebuah lapangan berbentuk persegi dengan sisi (3/4) km. Jika diperlukan kuadratnya, hitung nilai (3/4)² km²!" },
+      { label: "h.", text: "Volume sebuah kontainer dinyatakan (6/7)² m³. Hitung volume kontainer tersebut dalam bentuk pecahan sederhana!" },
     ],
   }),
   Qn(3, "Sifat Distribusi & Eksponen Aljabar", {
@@ -40,6 +46,9 @@ const questions: Q[] = [
       { label: "d.", math: "\\left(\\frac{2x^2}{y^3}\\right)^3 = \\ldots" },
       { label: "e.", math: "\\frac{(2a)^4}{4a^2} = \\ldots" },
       { label: "f.", math: "\\frac{(ab)^5}{a^3 b^2} = \\ldots" },
+      { label: "g.", text: "Sebuah kubus memiliki sisi (3a²) cm. Tuliskan volume kubus tersebut dalam bentuk aljabar yang paling sederhana!" },
+      { label: "h.", text: "Luas permukaan sebuah benda dinyatakan dengan ekspresi (2x³y)³ cm². Sederhanakan ekspresi tersebut!" },
+      { label: "i.", text: "Kecepatan angin dinyatakan (ab)⁵ ÷ (a³b²) km/jam. Sederhanakan ekspresi tersebut untuk menemukan bentuk paling sederhana!" },
     ],
   }),
   Qn(4, "Penyederhanaan Eksponen – Dasar & Tingkat Lanjut", {
@@ -53,6 +62,9 @@ const questions: Q[] = [
       { label: "f.", math: "\\frac{(2^3 \\cdot 3^2)^2}{6^4} = \\ldots" },
       { label: "g.", math: "\\frac{(ab)^5}{a^3 b^4} \\cdot \\frac{a^2}{b} = \\ldots" },
       { label: "h.", math: "\\left(\\frac{2x^3 y}{4xy^2}\\right)^2 = \\ldots" },
+      { label: "i.", text: "Massa sebuah partikel dalam model fisika = a⁵b³ ÷ (a²b) gram. Sederhanakan ekspresinya untuk mendapatkan bentuk paling sederhana!" },
+      { label: "j.", text: "Luas permukaan suatu benda = ((2x³y)/(4xy²))² cm². Sederhanakan ekspresi tersebut!" },
+      { label: "k.", text: "Dalam rumus fisika, sebuah besaran dinyatakan sebagai (p²q³)⁴ ÷ (p⁵q⁸). Sederhanakan untuk mendapatkan ekspresi akhirnya!" },
     ],
   }),
 ];

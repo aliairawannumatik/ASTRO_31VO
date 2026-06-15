@@ -49,6 +49,9 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt[3]{64} = \\ldots" },
       { label: "d.", math: "\\sqrt[4]{81} = \\ldots" },
       { label: "e.", math: "\\sqrt[5]{32} = \\ldots" },
+      { label: "f.", text: "Luas sebuah ubin berbentuk persegi adalah 49 cm². Berapa panjang sisi ubin tersebut?" },
+      { label: "g.", text: "Sebuah akuarium berbentuk kubus memiliki volume 64 liter. Berapa panjang sisi akuarium tersebut?" },
+      { label: "h.", text: "Sebuah peta menggunakan skala √(25/9). Nyatakan skala tersebut sebagai pecahan sederhana!" },
     ],
   }),
   Qn(2, "Menyederhanakan Bentuk Akar – UN/ANBK/TKA", {
@@ -64,6 +67,9 @@ const questions: Q[] = [
       { label: "h.", math: "\\sqrt{200} = \\ldots" },
       { label: "i.", math: "\\sqrt{1{,}44} = \\ldots" },
       { label: "j.", math: "\\sqrt{0{,}25} = \\ldots" },
+      { label: "k.", text: "Seorang tukang lantai memesan ubin persegi dengan luas 18 cm². Berapa panjang sisi ubin dalam bentuk akar paling sederhana?" },
+      { label: "l.", text: "Jarak dua kota di peta adalah √75 km. Sederhanakan jarak tersebut ke bentuk akar yang paling sederhana!" },
+      { label: "m.", text: "Tinggi segitiga sama sisi dengan sisi 10 cm adalah √75 cm. Sederhanakan tingginya!" },
     ],
   }),
   Qn(3, "Operasi Penjumlahan & Pengurangan Bentuk Akar – UN/ANBK/TKA", {
@@ -78,6 +84,9 @@ const questions: Q[] = [
       { label: "g.", math: "3\\sqrt{8} + 2\\sqrt{2} = \\ldots" },
       { label: "h.", math: "2\\sqrt{12} + 3\\sqrt{27} = \\ldots" },
       { label: "i.", math: "2\\sqrt{50} - \\sqrt{18} + 3\\sqrt{8} = \\ldots" },
+      { label: "j.", text: "Panjang dua tali masing-masing 3√2 m dan 5√2 m disambung. Berapa total panjang kedua tali?" },
+      { label: "k.", text: "Dua rel kereta masing-masing sepanjang 2√8 m dan √32 m. Berapa total panjangnya dalam bentuk akar paling sederhana?" },
+      { label: "l.", text: "Selisih tinggi dua pohon adalah (2√45 − 3√20 + 4√5) meter. Sederhanakan ekspresi tersebut!" },
     ],
   }),
   Qn(4, "Perkalian & Pembagian Bentuk Akar – UN/ANBK/TKA", {
@@ -89,6 +98,9 @@ const questions: Q[] = [
       { label: "d.", math: "3\\sqrt{3} \\times 2\\sqrt{6} = \\ldots" },
       { label: "e.", math: "\\frac{\\sqrt{50}}{\\sqrt{2}} = \\ldots" },
       { label: "f.", math: "\\frac{4\\sqrt{15}}{2\\sqrt{5}} = \\ldots" },
+      { label: "g.", text: "Luas persegi panjang = √3 × √12 cm². Hitung luasnya!" },
+      { label: "h.", text: "Sebuah balok memiliki panjang 4√5 cm dan lebar 2√5 cm. Hitung luas alasnya!" },
+      { label: "i.", text: "Kecepatan sebuah benda = √50 ÷ √2 m/s. Berapa kecepatannya dalam bilangan bulat?" },
     ],
   }),
   Qn(5, "Operasi Campuran Bilangan Akar – UN/ANBK/TKA", {
@@ -104,6 +116,9 @@ const questions: Q[] = [
       { label: "h.", math: "(\\sqrt{18} + \\sqrt{2}) \\times \\sqrt{2} = \\ldots" },
       { label: "i.", math: "(\\sqrt{6} \\times \\sqrt{6}) \\div (\\sqrt{2} \\times \\sqrt{2}) = \\ldots" },
       { label: "j.", math: "\\sqrt{2} \\times \\sqrt{18} \\div (\\sqrt{3} \\times \\sqrt{3}) + \\sqrt{5} \\times \\sqrt{5} = \\ldots" },
+      { label: "k.", text: "Luas suatu taman = (√12 × √3 + √2 × √50) m². Hitung luas taman tersebut!" },
+      { label: "l.", text: "Total perjalanan = (√50 ÷ √2 + √75 ÷ √3) km. Berapa total perjalanannya?" },
+      { label: "m.", text: "Energi suatu sistem = (√18 + √2) × √2 joule. Hitung energi tersebut!" },
     ],
   }),
   Qn(6, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
@@ -117,6 +132,9 @@ const questions: Q[] = [
       { label: "f.", math: "(2+\\sqrt{3})(3+\\sqrt{3}) = \\ldots" },
       { label: "g.", math: "(3\\sqrt{2}-1)^2 = \\ldots" },
       { label: "h.", math: "(\\sqrt{5}+2)^2 = \\ldots" },
+      { label: "i.", text: "Luas persegi panjang = √2(√8 + √2) cm². Hitung luasnya!" },
+      { label: "j.", text: "Selisih luas dua persegi adalah (√7 + √3)(√7 − √3) cm². Hitung selisihnya!" },
+      { label: "k.", text: "Volume sebuah balok dinyatakan (2 + √3)(2 − √3) m³. Hitung volumenya!" },
     ],
   }),
   Qn(7, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
@@ -131,6 +149,9 @@ const questions: Q[] = [
       { label: "g.", math: "\\sqrt{\\dfrac{6}{10}} = \\ldots" },
       { label: "h.", math: "\\frac{\\sqrt{3}+\\sqrt{6}}{\\sqrt{3}} = \\ldots" },
       { label: "i.", math: "\\frac{2\\sqrt{5}+\\sqrt{10}}{\\sqrt{5}} = \\ldots" },
+      { label: "j.", text: "Tinggi sebuah bangunan = 6/√3 meter. Rasionalkan penyebutnya untuk mendapatkan bentuk yang lebih sederhana!" },
+      { label: "k.", text: "Kecepatan arus sungai = 2√2/√6 m/s. Rasionalkan dan sederhanakan!" },
+      { label: "l.", text: "Panjang bayangan sebuah tiang = (√18 + √8)/√2 meter. Rasionalkan dan sederhanakan!" },
     ],
   }),
   Qn(8, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
@@ -142,6 +163,9 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{3+\\sqrt{2}}{3-\\sqrt{2}} = \\ldots" },
       { label: "e.", math: "\\frac{2\\sqrt{3}+\\sqrt{5}}{2\\sqrt{3}-\\sqrt{5}} = \\ldots" },
       { label: "f.", math: "\\frac{3\\sqrt{2}-\\sqrt{6}}{3\\sqrt{2}+\\sqrt{6}} = \\ldots" },
+      { label: "g.", text: "Harga per unit barang = 4/(3 − √5) ribu rupiah. Rasionalkan penyebutnya untuk mendapatkan harga dalam bentuk yang lebih mudah dibaca!" },
+      { label: "h.", text: "Kecepatan reaksi kimia = 6/(√7 + 1) mol/detik. Rasionalkan penyebutnya!" },
+      { label: "i.", text: "Perbandingan dua besaran fisika = (√5 + √3)/(√5 − √3). Rasionalkan dan sederhanakan!" },
     ],
   }),
 ];

@@ -15,6 +15,9 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "3{,}5 \\times 10^4 \\text{ — apakah ini notasi ilmiah yang valid? Mengapa?}" },
       { label: "b.", math: "15 \\times 10^3 \\text{ — apakah ini notasi ilmiah yang valid? Perbaiki jika salah.}" },
+      { label: "c.", text: "0,00045 × 10² — apakah ini notasi ilmiah yang valid? Perbaiki jika salah!" },
+      { label: "d.", text: "Jarak Bumi ke Matahari adalah 150.000.000 km. Seorang siswa menulisnya sebagai 150 × 10⁶. Apakah penulisan ini valid sebagai notasi ilmiah? Jelaskan dan perbaiki!" },
+      { label: "e.", text: "Massa sebuah elektron adalah sekitar 0,00000000000000000000000000000091 kg. Tuliskan perkiraan nilainya dalam notasi ilmiah yang valid!" },
     ],
   }),
   Qn(2, "Mengubah ke Notasi Ilmiah & Memperbaiki Notasi – UN/ANBK/TKA", {
@@ -30,6 +33,9 @@ const questions: Q[] = [
       { label: "g.", math: "25 \\times 10^4 = \\ldots" },
       { label: "h.", math: "0{,}35 \\times 10^7 = \\ldots" },
       { label: "i.", math: "120 \\times 10^{-3} = \\ldots" },
+      { label: "j.", text: "Jarak rata-rata Bumi ke Matahari adalah 149.600.000 km. Ubahlah ke notasi ilmiah!" },
+      { label: "k.", text: "Kecepatan cahaya adalah 300.000.000 m/s. Ubahlah ke notasi ilmiah!" },
+      { label: "l.", text: "Diameter sebuah virus adalah 0,0000002 m. Ubahlah ke notasi ilmiah!" },
     ],
   }),
   Qn(3, "Mengubah dari Notasi Ilmiah – UN/ANBK/TKA", {
@@ -42,6 +48,9 @@ const questions: Q[] = [
       { label: "d.", math: "4{,}5 \\times 10^{-4} = 0{,}00045" },
       { label: "e.", math: "1{,}67 \\times 10^{-27} = \\ldots \\text{ (massa proton, kg)}" },
       { label: "f.", math: "2{,}5 \\times 10^{-6} = \\ldots \\text{ m}" },
+      { label: "g.", text: "Massa Bumi adalah 5,97 × 10²⁴ kg. Tuliskan dalam bentuk biasa!" },
+      { label: "h.", text: "Jarak rata-rata Bumi ke Bulan adalah 3,84 × 10⁵ km. Tuliskan dalam bentuk biasa!" },
+      { label: "i.", text: "Ukuran sebuah atom hidrogen adalah 1,2 × 10⁻¹⁰ m. Tuliskan dalam bentuk biasa!" },
     ],
   }),
   Qn(4, "Perkalian & Pembagian Notasi Ilmiah – UN/ANBK", {
@@ -54,6 +63,9 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{8 \\times 10^9}{4 \\times 10^3} = 2 \\times 10^6" },
       { label: "e.", math: "\\frac{6 \\times 10^{12}}{3 \\times 10^5} = \\ldots" },
       { label: "f.", math: "\\frac{9 \\times 10^8}{3 \\times 10^{-2}} = \\ldots" },
+      { label: "g.", text: "Jarak dari Matahari ke planet X adalah (2,5 × 10⁸) × (4 × 10³) km. Hitung jaraknya dalam notasi ilmiah!" },
+      { label: "h.", text: "Kecepatan sebuah roket = (9 × 10⁸) ÷ (3 × 10²) m/s. Hitung kecepatannya dalam notasi ilmiah!" },
+      { label: "i.", text: "Massa gabungan dua partikel = (6 × 10⁻²⁷) × (3 × 10⁴) kg. Hitung massanya dalam notasi ilmiah!" },
     ],
   }),
   Qn(5, "Penjumlahan & Pengurangan Notasi Ilmiah – UN/TKA", {
@@ -66,6 +78,9 @@ const questions: Q[] = [
       { label: "d.", math: "7 \\times 10^8 - 3 \\times 10^8 = \\ldots" },
       { label: "e.", math: "9{,}5 \\times 10^5 - 4{,}5 \\times 10^5 = \\ldots" },
       { label: "f.", math: "6 \\times 10^7 - 4 \\times 10^6 = \\ldots" },
+      { label: "g.", text: "Populasi bakteri di hari pertama = 3 × 10⁶ sel, di hari kedua bertambah 2 × 10⁶ sel. Berapa total populasi dalam notasi ilmiah?" },
+      { label: "h.", text: "Jarak kota A ke B = 4,2 × 10⁴ m, jarak B ke C = 3,8 × 10⁴ m. Berapa total jarak A ke C dalam notasi ilmiah?" },
+      { label: "i.", text: "Dana awal proyek = 9,5 × 10⁸ rupiah, digunakan 4,5 × 10⁸ rupiah. Berapa sisa dana dalam notasi ilmiah?" },
     ],
   }),
 ];
