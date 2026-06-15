@@ -258,6 +258,13 @@ const GrafikPGLPage = () => {
                     </a>
                   </figcaption>
                 </figure>
+                {/* Judul visual grafik */}
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
+                  <p className="text-sm font-bold text-cyan-300 font-body tracking-wide whitespace-nowrap">📈 Visual dari Grafik Persamaan Garis</p>
+                  <div className="h-px flex-1 bg-gradient-to-l from-transparent via-cyan-500/40 to-transparent" />
+                </div>
+
                 {/* 4-panel visual intro */}
                 <div className="grid grid-cols-2 gap-3">
                   {[
@@ -351,6 +358,67 @@ const GrafikPGLPage = () => {
                       ))}
                     </tbody>
                   </table>
+                </div>
+
+                {/* ── Ciri Khas Persamaan Garis Lurus ── */}
+                <div className="rounded-xl overflow-hidden border border-cyan-500/30 bg-gradient-to-br from-cyan-950/60 to-slate-900/80">
+                  {/* Headline */}
+                  <div className="px-4 py-3 bg-cyan-500/15 border-b border-cyan-500/25 flex items-center gap-2">
+                    <span className="text-lg">🔑</span>
+                    <p className="font-body font-bold text-cyan-200 text-sm tracking-wide">
+                      Ciri Khas Persamaan Garis Lurus: Pangkat Variabel = 1
+                    </p>
+                  </div>
+                  <div className="px-4 py-4 space-y-3">
+                    <p className="text-xs font-body text-white/75 leading-relaxed">
+                      Dari ketiga bentuk persamaan garis lurus yang telah diuraikan di atas —
+                      <span className="text-cyan-300 font-semibold"> y = mx + c</span>,
+                      <span className="text-violet-300 font-semibold"> ax + by + c = 0</span>, dan
+                      <span className="text-green-300 font-semibold"> x/a + y/b = 1</span> —
+                      semuanya memiliki satu <strong className="text-white">ciri khas yang sama</strong>:
+                    </p>
+
+                    {/* Highlight box */}
+                    <div className="rounded-xl bg-cyan-500/10 border-2 border-cyan-400/40 px-4 py-4 flex flex-col items-center gap-2 text-center">
+                      <p className="text-[11px] font-body text-white/50 uppercase tracking-widest">Kunci Utama</p>
+                      <p className="font-display font-bold text-white text-base leading-snug">
+                        Variabel <span className="text-cyan-300">x</span> dan <span className="text-cyan-300">y</span> hanya berpangkat <span className="text-yellow-300 text-2xl">1</span>
+                      </p>
+                      <p className="text-xs font-body text-white/55 max-w-xs leading-relaxed">
+                        Tidak ada x², y², xy, √x, atau bentuk pangkat lainnya. Selama x dan y hanya muncul dengan pangkat 1, grafiknya <em>pasti</em> berupa garis lurus.
+                      </p>
+                    </div>
+
+                    {/* Tiga bentuk vs contoh bukan */}
+                    <div className="grid grid-cols-1 gap-2">
+                      <p className="text-[10px] font-bold text-white/40 uppercase tracking-wider">Perbandingan Cepat</p>
+                      {[
+                        { rumus: "y = 2x + 3",        pangkat: "x¹",   status: true,  alasan: "x pangkat 1 → garis lurus" },
+                        { rumus: "ax + by + c = 0",    pangkat: "x¹, y¹", status: true, alasan: "x dan y pangkat 1 → garis lurus" },
+                        { rumus: "x/a + y/b = 1",      pangkat: "x¹, y¹", status: true, alasan: "x dan y pangkat 1 → garis lurus" },
+                        { rumus: "y = x² + 1",         pangkat: "x²",   status: false, alasan: "x pangkat 2 → bukan garis lurus (parabola)" },
+                        { rumus: "y = 1/x",            pangkat: "x⁻¹",  status: false, alasan: "x pangkat -1 → bukan garis lurus (hiperbola)" },
+                      ].map(({ rumus, pangkat, status, alasan }) => (
+                        <div key={rumus} className={`flex items-start gap-3 px-3 py-2 rounded-lg border ${status ? "bg-cyan-900/20 border-cyan-500/20" : "bg-rose-900/15 border-rose-500/20"}`}>
+                          <span className={`mt-0.5 text-xs font-bold shrink-0 ${status ? "text-cyan-400" : "text-rose-400"}`}>{status ? "✓" : "✗"}</span>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-mono text-xs font-bold text-white">{rumus}</span>
+                              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${status ? "bg-cyan-500/20 text-cyan-300" : "bg-rose-500/20 text-rose-300"}`}>{pangkat}</span>
+                            </div>
+                            <p className="text-[11px] font-body text-white/50 mt-0.5">{alasan}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Rumus ingatan cepat */}
+                    <div className="rounded-lg bg-yellow-500/10 border border-yellow-500/30 px-3 py-2.5">
+                      <p className="text-xs font-body text-yellow-200 leading-relaxed">
+                        <strong>💡 Cara cepat mengecek:</strong> Lihat pangkat x dan y di persamaannya. Kalau <em>semua</em> x dan y berpangkat 1 (tidak ada kuadrat, akar, atau negatif) → <strong className="text-yellow-100">itu persamaan garis lurus!</strong>
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
                 {/* ── Animasi Interaktif: Persamaan Garis Lurus vs Bukan ── */}
