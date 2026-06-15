@@ -82,7 +82,7 @@ const GrafikPGLPage = () => {
                   <img
                     src="/image_1781556662891.png"
                     alt="Garis horizon laut sebagai contoh nyata garis lurus"
-                    className="w-full rounded-xl object-cover max-h-52 border border-cyan-500/20"
+                    className="w-full rounded-xl object-cover max-h-80 border border-cyan-500/20"
                   />
                   <figcaption className="text-xs text-white/50 font-body text-center italic">
                     Garis horizon di lautan — contoh nyata garis lurus yang dapat dideskripsikan dengan persamaan matematika
