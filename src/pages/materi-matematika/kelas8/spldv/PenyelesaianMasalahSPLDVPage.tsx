@@ -244,7 +244,7 @@ const PenyelesaianMasalahSPLDVPage = () => {
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-yellow-300 mb-2">📝 Soal</p>
                   <p className="font-body text-sm text-white/85 leading-relaxed">
-                    Lima tahun lalu, umur Pak Hadi adalah empat kali umur anaknya, Rafi. Tiga tahun mendatang, jumlah umur keduanya akan menjadi 59 tahun. Berapakah umur Pak Hadi dan Rafi saat ini?
+                    Lima tahun lalu, umur Pak Hadi adalah empat kali umur anaknya, Rafi. Tiga tahun mendatang, jumlah umur keduanya akan menjadi 56 tahun. Berapakah umur Pak Hadi dan Rafi saat ini?
                   </p>
                 </div>
 
@@ -270,16 +270,16 @@ const PenyelesaianMasalahSPLDVPage = () => {
                         <BlockMath math="h - 5 = 4(r - 5)" />
                         <BlockMath math="h - 5 = 4r - 20 \Rightarrow h - 4r = -15 \quad \cdots (I)" />
                         <p className="text-white/60 text-xs mt-2">3 tahun mendatang: usia keduanya <InlineMath math="(h+3)" /> dan <InlineMath math="(r+3)" /></p>
-                        <p className="text-white/60 text-xs">Pernyataan 2: jumlah umur = 59</p>
-                        <BlockMath math="(h+3) + (r+3) = 59" />
-                        <BlockMath math="h + r = 53 \quad \cdots (II)" />
+                        <p className="text-white/60 text-xs">Pernyataan 2: jumlah umur = 56</p>
+                        <BlockMath math="(h+3) + (r+3) = 56" />
+                        <BlockMath math="h + r = 50 \quad \cdots (II)" />
                       </div>
                     </div>
 
                     <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3 space-y-2">
                       <p className="text-cyan-300 font-semibold">Langkah 3 — Metode Eliminasi:</p>
                       <div className="bg-slate-800/50 rounded-lg p-2">
-                        <BlockMath math="\begin{cases} \text{(I):}\quad h - 4r = -15 \\ \text{(II):}\quad h + r = 53 \end{cases}" />
+                        <BlockMath math="\begin{cases} \text{(I):}\quad h - 4r = -15 \\ \text{(II):}\quad h + r = 50 \end{cases}" />
                       </div>
 
                       <p className="text-white/60 text-xs font-semibold">Samakan koefisien <InlineMath math="h" /> (koefisien sudah sama = 1, tidak perlu dikalikan):</p>
@@ -292,7 +292,7 @@ const PenyelesaianMasalahSPLDVPage = () => {
                         </div>
                         <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
                           <span className="text-white/50 w-5 shrink-0">P2</span>
-                          <span className="text-white/80">h + r = 53</span>
+                          <span className="text-white/80">h + r = 50</span>
                           <span className="text-white/30 text-xs mx-1">|×1 (tetap)|</span>
                         </div>
                       </div>
@@ -301,7 +301,7 @@ const PenyelesaianMasalahSPLDVPage = () => {
                       <div className="bg-slate-800/50 rounded-lg px-4 py-3 font-body">
                         <div className="flex items-center gap-2">
                           <span className="text-white/40 w-10 shrink-0">P2×1</span>
-                          <span className="text-white font-mono">h + r = 53</span>
+                          <span className="text-white font-mono">h + r = 50</span>
                         </div>
                         <div className="flex items-center gap-2 pb-1 border-b border-white/20">
                           <span className="text-white/40 w-10 shrink-0">P1×1</span>
@@ -310,31 +310,27 @@ const PenyelesaianMasalahSPLDVPage = () => {
                         </div>
                         <div className="flex items-center gap-2 pt-1">
                           <span className="text-white/40 w-10 shrink-0"></span>
-                          <span className="text-cyan-300 font-mono font-bold">5r = 68</span>
+                          <span className="text-cyan-300 font-mono font-bold">5r = 65</span>
                         </div>
                       </div>
-                      <BlockMath math="r = \dfrac{68}{5} = 13{,}6" />
-                      <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-2">
-                        <p className="text-yellow-200 text-xs">🤔 Hasil tidak bulat karena soal ini memang menghasilkan umur desimal. Secara matematis penyelesaiannya tetap valid.</p>
-                      </div>
+                      <BlockMath math="r = \dfrac{65}{5} = 13" />
 
-                      <p className="text-white/60 text-xs font-semibold">Substitusi <InlineMath math="r = 13{,}6" /> ke Persamaan (II):</p>
+                      <p className="text-white/60 text-xs font-semibold">Substitusi <InlineMath math="r = 13" /> ke Persamaan (II):</p>
                       <div className="bg-slate-800/50 rounded-lg p-2">
-                        <BlockMath math="h + 13{,}6 = 53 \;\Rightarrow\; h = 39{,}4" />
+                        <BlockMath math="h + 13 = 50 \;\Rightarrow\; h = 37" />
                       </div>
                     </div>
 
                     <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-3">
                       <p className="text-green-300 font-semibold">Langkah 4 — Verifikasi:</p>
-                      <p className="text-white/70 text-xs">Cek 5 tahun lalu: <InlineMath math="39{,}4 - 5 = 34{,}4" /> dan <InlineMath math="13{,}6 - 5 = 8{,}6" /></p>
-                      <p className="text-white/70 text-xs"><InlineMath math="34{,}4 = 4 \times 8{,}6 = 34{,}4" /> ✅</p>
-                      <p className="text-white/70 text-xs">Cek 3 tahun lagi: <InlineMath math="(39{,}4 + 3) + (13{,}6 + 3) = 42{,}4 + 16{,}6 = 59" /> ✅</p>
+                      <p className="text-white/70 text-xs">Cek 5 tahun lalu: <InlineMath math="37 - 5 = 32" /> dan <InlineMath math="13 - 5 = 8" /></p>
+                      <p className="text-white/70 text-xs"><InlineMath math="32 = 4 \times 8 = 32" /> ✅</p>
+                      <p className="text-white/70 text-xs">Cek 3 tahun lagi: <InlineMath math="(37 + 3) + (13 + 3) = 40 + 16 = 56" /> ✅</p>
                     </div>
 
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
                       <p className="font-body text-sm font-bold text-cyan-300 mb-1">Langkah 5 — Jawaban:</p>
-                      <p className="font-body text-sm text-white/80">Umur Pak Hadi sekarang adalah <strong className="text-cyan-300">39,4 tahun</strong> dan umur Rafi sekarang adalah <strong className="text-green-300">13,6 tahun</strong>.</p>
-                      <p className="text-white/50 text-xs mt-1">Catatan: Soal umur biasanya didesain menghasilkan bilangan bulat. Jika hasil tidak bulat, cek kembali pemodelan Anda.</p>
+                      <p className="font-body text-sm text-white/80">Umur Pak Hadi sekarang adalah <strong className="text-cyan-300">37 tahun</strong> dan umur Rafi sekarang adalah <strong className="text-green-300">13 tahun</strong>.</p>
                     </div>
                   </div>
                 </div>
