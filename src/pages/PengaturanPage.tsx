@@ -83,7 +83,7 @@ const THEME_DEFS: ThemeDef[] = [
   {
     id: "sunset",
     emoji: "☁️",
-    name: "Krem Classic",
+    name: "Langit Cerah",
     desc: "Cerah seperti langit biru & awan ☁️",
     gradient: "linear-gradient(135deg,#38bdf8,#7dd3fc,#bae6fd,#e0f2fe,#f0f9ff)",
     activeBorder: "border-sky-400",
