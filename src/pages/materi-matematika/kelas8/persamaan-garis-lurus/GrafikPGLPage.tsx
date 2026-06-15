@@ -78,6 +78,16 @@ const GrafikPGLPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Rel kereta api, pinggir buku, garis horizon pantai — semuanya membentuk <strong className="text-cyan-300">garis lurus</strong>. Dalam matematika, persamaan garis lurus mendeskripsikan semua garis tersebut dengan sebuah persamaan sederhana yang melibatkan variabel <InlineMath math="x" /> dan <InlineMath math="y" />.
                 </p>
+                <figure className="flex flex-col items-center gap-2">
+                  <img
+                    src="/image_1781556662891.png"
+                    alt="Garis horizon laut sebagai contoh nyata garis lurus"
+                    className="w-full rounded-xl object-cover max-h-52 border border-cyan-500/20"
+                  />
+                  <figcaption className="text-xs text-white/50 font-body text-center italic">
+                    Garis horizon di lautan — contoh nyata garis lurus yang dapat dideskripsikan dengan persamaan matematika
+                  </figcaption>
+                </figure>
                 {/* 4-panel visual intro */}
                 <div className="grid grid-cols-2 gap-3">
                   {[
