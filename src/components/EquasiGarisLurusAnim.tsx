@@ -277,15 +277,10 @@ const EquasiGarisLurusAnim: React.FC = () => {
           </div>
         </div>
 
-        {/* Graph: always visible */}
-        <div className="px-4 pt-3 pb-2 bg-slate-900/50">
-          <p className="text-[10px] font-bold text-white/35 uppercase tracking-wider mb-2">📊 Grafik</p>
-          <MiniGraph eq={eq} animKey={animKey} />
-        </div>
-
-        {/* Reveal button OR penjelasan */}
+        {/* Reveal button OR grafik + penjelasan */}
         {!revealed ? (
-          <div className="px-4 pb-4 pt-1 bg-slate-900/50 flex justify-center">
+          <div className="px-4 pb-5 pt-4 bg-slate-900/50 flex flex-col items-center gap-3">
+            <p className="text-xs text-white/40 font-body italic">Amati persamaannya, lalu ungkap grafiknya…</p>
             <button
               onClick={handleReveal}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-body font-bold text-sm
@@ -294,7 +289,7 @@ const EquasiGarisLurusAnim: React.FC = () => {
                 active:scale-95 transition-all duration-200"
             >
               <Eye className="w-4 h-4" />
-              Tampilkan Penjelasan
+              Tampilkan Grafik &amp; Penjelasan
             </button>
           </div>
         ) : (
@@ -310,6 +305,12 @@ const EquasiGarisLurusAnim: React.FC = () => {
               >
                 <EyeOff className="w-3.5 h-3.5" /> Sembunyikan
               </button>
+            </div>
+
+            {/* Grafik */}
+            <div className="space-y-1">
+              <p className="text-[10px] font-bold text-white/35 uppercase tracking-wider">📊 Grafik</p>
+              <MiniGraph eq={eq} animKey={animKey} />
             </div>
 
             {/* Deskripsi */}
