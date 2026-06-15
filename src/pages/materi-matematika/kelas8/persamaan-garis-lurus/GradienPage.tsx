@@ -68,6 +68,17 @@ const GradienPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Tanjakan jalan yang curam vs landai, lereng gunung yang terjal vs miring perlahan — semua punya tingkat kemiringan yang berbeda. Dalam matematika, tingkat kemiringan ini disebut <strong className="text-cyan-300">gradien</strong> (atau slope).
                 </p>
+                {/* Foto ilustrasi jalan tanjakan */}
+                <figure className="rounded-xl overflow-hidden border border-white/10">
+                  <img
+                    src="/jalan-tanjakan.png"
+                    alt="Perbandingan jalan tanjakan terjal dan landai"
+                    className="w-full object-cover"
+                  />
+                  <figcaption className="text-center text-[10px] text-white/40 font-body py-1.5 bg-slate-900/60">
+                    bing.com/images/create
+                  </figcaption>
+                </figure>
                 {/* Analogi kemiringan */}
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
                   <p className="text-xs font-bold text-cyan-300 uppercase mb-3">⛰️ Analogi Kemiringan dalam Kehidupan</p>
