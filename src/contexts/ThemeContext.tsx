@@ -11,7 +11,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const DARK_THEMES: Theme[] = ["dark", "ocean"];
+const DARK_THEMES: Theme[] = ["dark", "ocean", "sunset"];
 const VALID_THEMES: Theme[] = ["dark", "light", "white", "forest", "ocean", "sunset"];
 const STORAGE_KEY = "numatik-theme";
 
