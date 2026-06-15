@@ -51,7 +51,7 @@ const FracExpSVG = () => (
 
 const questions: Q[] = [
   Qn(1, "Pangkat Nol – Konsep Dasar & Berbagai Ekspresi", {
-    type: "mixed", mathContent: "a^0 = 1 \\quad (a \\ne 0)",
+    type: "mixed",
     parts: [
       { label: "a.", math: "5^0 = \\ldots" },
       { label: "b.", math: "(-7)^0 = \\ldots" },
@@ -61,7 +61,7 @@ const questions: Q[] = [
     ],
   }),
   Qn(2, "Pangkat Negatif – Definisi, Konversi & Nilai", {
-    type: "mixed", mathContent: "a^{-n} = \\frac{1}{a^n}",
+    type: "mixed",
     parts: [
       { label: "a.", math: "5^{-3} = \\ldots" },
       { label: "b.", math: "\\left(\\frac{2}{3}\\right)^{-2} = \\left(\\frac{3}{2}\\right)^2 = \\ldots" },
@@ -71,33 +71,29 @@ const questions: Q[] = [
     ],
   }),
   Qn(3, "Pangkat Pecahan – Akar Kuadrat, Kubik & Umum", {
-    type: "mixed", diagram: <FracExpSVG />, mathContent: "a^{\\frac{p}{q}} = \\sqrt[q]{a^p} = (\\sqrt[q]{a})^p",
+    type: "mixed",
     parts: [
       { label: "a.", math: "25^{\\frac{1}{2}} = \\sqrt{25} = \\ldots" },
-      { label: "b.", math: "64^{\\frac{1}{2}} = \\ldots" },
-      { label: "c.", math: "144^{\\frac{1}{2}} = \\ldots" },
-      { label: "d.", math: "8^{\\frac{1}{3}} = \\sqrt[3]{8} = \\ldots" },
-      { label: "e.", math: "27^{\\frac{1}{3}} = \\ldots" },
-      { label: "f.", math: "125^{\\frac{1}{3}} = \\ldots" },
-      { label: "g.", math: "27^{\\frac{2}{3}} = \\ldots" },
-      { label: "h.", math: "16^{\\frac{3}{4}} = \\ldots" },
-      { label: "i.", math: "4^{\\frac{5}{2}} = (\\sqrt{4})^5 = \\ldots" },
-      { label: "j.", math: "9^{\\frac{3}{2}} = \\ldots" },
-      { label: "k.", math: "100^{\\frac{3}{2}} = (\\sqrt{100})^3 = \\ldots" },
-      { label: "l.", math: "64^{\\frac{2}{3}} = \\ldots" },
+      { label: "b.", math: "144^{\\frac{1}{2}} = \\ldots" },
+      { label: "c.", math: "8^{\\frac{1}{3}} = \\sqrt[3]{8} = \\ldots" },
+      { label: "d.", math: "125^{\\frac{1}{3}} = \\ldots" },
+      { label: "e.", math: "27^{\\frac{2}{3}} = \\ldots" },
+      { label: "f.", math: "16^{\\frac{3}{4}} = \\ldots" },
+      { label: "g.", math: "4^{\\frac{5}{2}} = (\\sqrt{4})^5 = \\ldots" },
+      { label: "h.", math: "9^{\\frac{3}{2}} = \\ldots" },
+      { label: "i.", math: "100^{\\frac{3}{2}} = (\\sqrt{100})^3 = \\ldots" },
+      { label: "j.", math: "64^{\\frac{2}{3}} = \\ldots" },
     ],
   }),
   Qn(4, "Pangkat Pecahan Negatif – Dasar, Lanjutan & Ekspresi Kompleks", {
     type: "mixed",
     parts: [
       { label: "a.", math: "4^{-\\frac{1}{2}} = \\frac{1}{4^{\\frac{1}{2}}} = \\ldots" },
-      { label: "b.", math: "8^{-\\frac{1}{3}} = \\ldots" },
-      { label: "c.", math: "27^{-\\frac{2}{3}} = \\ldots" },
-      { label: "d.", math: "16^{-\\frac{3}{4}} = \\frac{1}{16^{\\frac{3}{4}}} = \\ldots" },
-      { label: "e.", math: "32^{-\\frac{3}{5}} = \\ldots" },
-      { label: "f.", math: "\\left(\\frac{1}{4}\\right)^{-\\frac{3}{2}} = \\ldots" },
-      { label: "g.", math: "\\left(\\frac{8}{27}\\right)^{-\\frac{2}{3}} = \\ldots" },
-      { label: "h.", math: "\\left(\\frac{9}{25}\\right)^{-\\frac{1}{2}} = \\ldots" },
+      { label: "b.", math: "27^{-\\frac{2}{3}} = \\ldots" },
+      { label: "c.", math: "16^{-\\frac{3}{4}} = \\frac{1}{16^{\\frac{3}{4}}} = \\ldots" },
+      { label: "d.", math: "32^{-\\frac{3}{5}} = \\ldots" },
+      { label: "e.", math: "\\left(\\frac{1}{4}\\right)^{-\\frac{3}{2}} = \\ldots" },
+      { label: "f.", math: "\\left(\\frac{8}{27}\\right)^{-\\frac{2}{3}} = \\ldots" },
     ],
   }),
   Qn(5, "Pangkat Desimal", {
