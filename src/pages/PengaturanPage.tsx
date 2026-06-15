@@ -82,9 +82,9 @@ const THEME_DEFS: ThemeDef[] = [
   },
   {
     id: "sunset",
-    emoji: "☕",
-    name: "Krem Hangat",
-    desc: "Hangat & lembut seperti kopi ☕",
+    emoji: "📜",
+    name: "Krem Classic",
+    desc: "Elegan & bersih gaya klasik 📜",
     gradient: "linear-gradient(135deg,#fdf6e3,#f5e6c8,#e8d5a3,#d4b87a)",
     activeBorder: "border-amber-700",
     activeShadow: "shadow-[0_0_16px_rgba(160,120,64,0.45)]",

@@ -342,7 +342,7 @@ const Starfield = () => {
     case "white":   return <WhiteCanvas />;
     case "forest":  return <ForestCanvas />;
     case "ocean":   return <OceanCanvas />;
-    case "sunset":  return <SunsetCanvas />;
+    case "sunset":  return null;
     default:        return <StarCanvas />;
   }
 };
