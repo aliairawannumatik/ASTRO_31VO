@@ -55,22 +55,12 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "5^0 = \\ldots" },
       { label: "b.", math: "(-7)^0 = \\ldots" },
-      { label: "c.", math: "(2024)^0 = \\ldots" },
-      { label: "d.", math: "(3a)^0 = \\ldots \\text{ untuk } a \\ne 0" },
-      { label: "e.", math: "3a^0 = \\ldots" },
-      { label: "f.", math: "(x^2 + y^2)^0 = \\ldots \\text{ untuk } x,y \\ne 0" },
+      { label: "c.", math: "(3a)^0 = \\ldots \\text{ untuk } a \\ne 0" },
+      { label: "d.", math: "3a^0 = \\ldots" },
+      { label: "e.", math: "(x^2 + y^2)^0 = \\ldots \\text{ untuk } x,y \\ne 0" },
     ],
   }),
-  Qn(2, "Pangkat Nol – Pola Penurunan (ANBK)", {
-    type: "mixed", diagram: <NegExpSVG />,
-    content: "Perhatikan pola: 2³=8, 2²=4, 2¹=2, 2⁰=?, 2⁻¹=?, 2⁻²=?",
-    parts: [
-      { label: "a.", text: "Lengkapi: 2⁰ = ?" },
-      { label: "b.", math: "2^{-1} = \\ldots" },
-      { label: "c.", math: "2^{-2} = \\ldots" },
-    ],
-  }),
-  Qn(3, "Pangkat Negatif – Definisi, Konversi & Nilai", {
+  Qn(2, "Pangkat Negatif – Definisi, Konversi & Nilai", {
     type: "mixed", mathContent: "a^{-n} = \\frac{1}{a^n}",
     parts: [
       { label: "a.", math: "5^{-3} = \\ldots" },
@@ -80,45 +70,37 @@ const questions: Q[] = [
       { label: "e.", math: "\\left(-\\frac{1}{2}\\right)^{-2} = \\ldots" },
     ],
   }),
-  Qn(4, "Pangkat Pecahan – Akar Kuadrat – ANBK", {
-    type: "mixed", mathContent: "a^{\\frac{1}{2}} = \\sqrt{a}",
+  Qn(3, "Pangkat Pecahan – Akar Kuadrat, Kubik & Umum", {
+    type: "mixed", diagram: <FracExpSVG />, mathContent: "a^{\\frac{p}{q}} = \\sqrt[q]{a^p} = (\\sqrt[q]{a})^p",
     parts: [
       { label: "a.", math: "25^{\\frac{1}{2}} = \\sqrt{25} = \\ldots" },
       { label: "b.", math: "64^{\\frac{1}{2}} = \\ldots" },
       { label: "c.", math: "144^{\\frac{1}{2}} = \\ldots" },
+      { label: "d.", math: "8^{\\frac{1}{3}} = \\sqrt[3]{8} = \\ldots" },
+      { label: "e.", math: "27^{\\frac{1}{3}} = \\ldots" },
+      { label: "f.", math: "125^{\\frac{1}{3}} = \\ldots" },
+      { label: "g.", math: "27^{\\frac{2}{3}} = \\ldots" },
+      { label: "h.", math: "16^{\\frac{3}{4}} = \\ldots" },
+      { label: "i.", math: "4^{\\frac{5}{2}} = (\\sqrt{4})^5 = \\ldots" },
+      { label: "j.", math: "9^{\\frac{3}{2}} = \\ldots" },
+      { label: "k.", math: "100^{\\frac{3}{2}} = (\\sqrt{100})^3 = \\ldots" },
+      { label: "l.", math: "64^{\\frac{2}{3}} = \\ldots" },
     ],
   }),
-  Qn(5, "Pangkat Pecahan – Akar Pangkat Tiga – TKA", {
-    type: "mixed", mathContent: "a^{\\frac{1}{3}} = \\sqrt[3]{a}",
-    parts: [
-      { label: "a.", math: "8^{\\frac{1}{3}} = \\sqrt[3]{8} = \\ldots" },
-      { label: "b.", math: "27^{\\frac{1}{3}} = \\ldots" },
-      { label: "c.", math: "125^{\\frac{1}{3}} = \\ldots" },
-    ],
-  }),
-  Qn(6, "Pangkat Pecahan – Umum, Evaluasi & Hubungan Akar", {
-    type: "mixed", diagram: <FracExpSVG />, mathContent: "a^{\\frac{p}{q}} = \\sqrt[q]{a^p} = (\\sqrt[q]{a})^p",
-    parts: [
-      { label: "a.", math: "27^{\\frac{2}{3}} = \\ldots" },
-      { label: "b.", math: "16^{\\frac{3}{4}} = \\ldots" },
-      { label: "c.", math: "4^{\\frac{5}{2}} = (\\sqrt{4})^5 = \\ldots" },
-      { label: "d.", math: "9^{\\frac{3}{2}} = \\ldots" },
-      { label: "e.", math: "100^{\\frac{3}{2}} = (\\sqrt{100})^3 = \\ldots" },
-      { label: "f.", math: "64^{\\frac{2}{3}} = \\ldots" },
-    ],
-  }),
-  Qn(7, "Pangkat Pecahan Negatif – Dasar & Lanjutan", {
+  Qn(4, "Pangkat Pecahan Negatif – Dasar, Lanjutan & Ekspresi Kompleks", {
     type: "mixed",
     parts: [
       { label: "a.", math: "4^{-\\frac{1}{2}} = \\frac{1}{4^{\\frac{1}{2}}} = \\ldots" },
       { label: "b.", math: "8^{-\\frac{1}{3}} = \\ldots" },
       { label: "c.", math: "27^{-\\frac{2}{3}} = \\ldots" },
       { label: "d.", math: "16^{-\\frac{3}{4}} = \\frac{1}{16^{\\frac{3}{4}}} = \\ldots" },
-      { label: "e.", math: "27^{-\\frac{2}{3}} = \\ldots" },
-      { label: "f.", math: "32^{-\\frac{3}{5}} = \\ldots" },
+      { label: "e.", math: "32^{-\\frac{3}{5}} = \\ldots" },
+      { label: "f.", math: "\\left(\\frac{1}{4}\\right)^{-\\frac{3}{2}} = \\ldots" },
+      { label: "g.", math: "\\left(\\frac{8}{27}\\right)^{-\\frac{2}{3}} = \\ldots" },
+      { label: "h.", math: "\\left(\\frac{9}{25}\\right)^{-\\frac{1}{2}} = \\ldots" },
     ],
   }),
-  Qn(8, "Soal ANBK – Pangkat Desimal", {
+  Qn(5, "Pangkat Desimal", {
     type: "mixed",
     content: "Pangkat desimal sama dengan pangkat pecahan:",
     parts: [
@@ -127,15 +109,7 @@ const questions: Q[] = [
       { label: "c.", math: "16^{0.75} = 16^{\\frac{3}{4}} = \\ldots" },
     ],
   }),
-  Qn(9, "Soal TKA – Evaluasi Ekspresi Kompleks", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\left(\\frac{1}{4}\\right)^{-\\frac{3}{2}} = \\ldots" },
-      { label: "b.", math: "\\left(\\frac{8}{27}\\right)^{-\\frac{2}{3}} = \\ldots" },
-      { label: "c.", math: "\\left(\\frac{9}{25}\\right)^{-\\frac{1}{2}} = \\ldots" },
-    ],
-  }),
-  Qn(10, "Soal TKA – Gabungan Semua Jenis Pangkat", {
+  Qn(6, "Gabungan Semua Jenis Pangkat", {
     type: "mixed",
     parts: [
       { label: "a.", math: "2^{-2} \\times 4^{\\frac{3}{2}} + 3^0 = \\ldots" },
@@ -162,9 +136,9 @@ const PangkatNolNegatifPecahanPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 10 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 6 Soal</span>
             <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className="text-white/50 text-xs">TKA</span>
           </div>
         </div>
         <div className="mb-5 bg-violet-900/20 border border-violet-500/20 rounded-xl p-4">
