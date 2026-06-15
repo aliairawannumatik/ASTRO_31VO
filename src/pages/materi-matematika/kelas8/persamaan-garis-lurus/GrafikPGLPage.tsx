@@ -361,63 +361,102 @@ const GrafikPGLPage = () => {
                 </div>
 
                 {/* ── Ciri Khas Persamaan Garis Lurus ── */}
-                <div className="rounded-xl overflow-hidden border border-cyan-500/30 bg-gradient-to-br from-cyan-950/60 to-slate-900/80">
-                  {/* Headline */}
-                  <div className="px-4 py-3 bg-cyan-500/15 border-b border-cyan-500/25 flex items-center gap-2">
-                    <span className="text-lg">🔑</span>
-                    <p className="font-body font-bold text-cyan-200 text-sm tracking-wide">
-                      Ciri Khas Persamaan Garis Lurus: Pangkat Variabel = 1
-                    </p>
+                <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg,#0d1b3e 0%,#0c1a2e 40%,#130d2e 100%)", border: "1px solid rgba(139,92,246,0.35)" }}>
+
+                  {/* Header gradien */}
+                  <div className="px-5 py-4 flex items-center gap-3" style={{ background: "linear-gradient(90deg,rgba(139,92,246,0.35) 0%,rgba(6,182,212,0.25) 60%,rgba(16,185,129,0.15) 100%)" }}>
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center text-xl shrink-0" style={{ background: "linear-gradient(135deg,#7c3aed,#0891b2)" }}>🔑</div>
+                    <div>
+                      <p className="font-body font-extrabold text-transparent text-sm bg-clip-text tracking-wide" style={{ backgroundImage: "linear-gradient(90deg,#c4b5fd,#67e8f9,#6ee7b7)" }}>
+                        Ciri Khas Persamaan Garis Lurus
+                      </p>
+                      <p className="text-[11px] text-white/45 font-body">Berlaku untuk semua bentuk persamaan garis</p>
+                    </div>
                   </div>
-                  <div className="px-4 py-4 space-y-3">
-                    <p className="text-xs font-body text-white/75 leading-relaxed">
-                      Dari ketiga bentuk persamaan garis lurus yang telah diuraikan di atas —
-                      <span className="text-cyan-300 font-semibold"> y = mx + c</span>,
-                      <span className="text-violet-300 font-semibold"> ax + by + c = 0</span>, dan
-                      <span className="text-green-300 font-semibold"> x/a + y/b = 1</span> —
-                      semuanya memiliki satu <strong className="text-white">ciri khas yang sama</strong>:
-                    </p>
 
-                    {/* Highlight box */}
-                    <div className="rounded-xl bg-cyan-500/10 border-2 border-cyan-400/40 px-4 py-4 flex flex-col items-center gap-2 text-center">
-                      <p className="text-[11px] font-body text-white/50 uppercase tracking-widest">Kunci Utama</p>
-                      <p className="font-display font-bold text-white text-base leading-snug">
-                        Variabel <span className="text-cyan-300">x</span> dan <span className="text-cyan-300">y</span> hanya berpangkat <span className="text-yellow-300 text-2xl">1</span>
-                      </p>
-                      <p className="text-xs font-body text-white/55 max-w-xs leading-relaxed">
-                        Tidak ada x², y², xy, √x, atau bentuk pangkat lainnya. Selama x dan y hanya muncul dengan pangkat 1, grafiknya <em>pasti</em> berupa garis lurus.
-                      </p>
-                    </div>
+                  <div className="px-4 pb-5 pt-4 space-y-4">
 
-                    {/* Tiga bentuk vs contoh bukan */}
-                    <div className="grid grid-cols-1 gap-2">
-                      <p className="text-[10px] font-bold text-white/40 uppercase tracking-wider">Perbandingan Cepat</p>
-                      {[
-                        { rumus: "y = 2x + 3",        pangkat: "x¹",   status: true,  alasan: "x pangkat 1 → garis lurus" },
-                        { rumus: "ax + by + c = 0",    pangkat: "x¹, y¹", status: true, alasan: "x dan y pangkat 1 → garis lurus" },
-                        { rumus: "x/a + y/b = 1",      pangkat: "x¹, y¹", status: true, alasan: "x dan y pangkat 1 → garis lurus" },
-                        { rumus: "y = x² + 1",         pangkat: "x²",   status: false, alasan: "x pangkat 2 → bukan garis lurus (parabola)" },
-                        { rumus: "y = 1/x",            pangkat: "x⁻¹",  status: false, alasan: "x pangkat -1 → bukan garis lurus (hiperbola)" },
-                      ].map(({ rumus, pangkat, status, alasan }) => (
-                        <div key={rumus} className={`flex items-start gap-3 px-3 py-2 rounded-lg border ${status ? "bg-cyan-900/20 border-cyan-500/20" : "bg-rose-900/15 border-rose-500/20"}`}>
-                          <span className={`mt-0.5 text-xs font-bold shrink-0 ${status ? "text-cyan-400" : "text-rose-400"}`}>{status ? "✓" : "✗"}</span>
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <span className="font-mono text-xs font-bold text-white">{rumus}</span>
-                              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${status ? "bg-cyan-500/20 text-cyan-300" : "bg-rose-500/20 text-rose-300"}`}>{pangkat}</span>
-                            </div>
-                            <p className="text-[11px] font-body text-white/50 mt-0.5">{alasan}</p>
+                    {/* Tiga bentuk — 3 kartu warna */}
+                    <div>
+                      <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest mb-2">Dari ketiga bentuk ini…</p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {[
+                          { rumus: "y = mx + c",      nama: "Lereng-Intersep", from: "#0e7490", to: "#0284c7", border: "#22d3ee" },
+                          { rumus: "ax+by+c = 0",     nama: "Bentuk Umum",     from: "#5b21b6", to: "#7c3aed", border: "#a78bfa" },
+                          { rumus: "x/a + y/b = 1",   nama: "Bentuk Intersep", from: "#065f46", to: "#0d9488", border: "#6ee7b7" },
+                        ].map(({ rumus, nama, from, to, border }) => (
+                          <div key={nama} className="rounded-xl p-2.5 text-center" style={{ background: `linear-gradient(135deg,${from}55,${to}33)`, border: `1px solid ${border}44` }}>
+                            <p className="font-mono text-[10px] font-bold text-white leading-snug">{rumus}</p>
+                            <p className="text-[9px] mt-0.5 font-body" style={{ color: border }}>{nama}</p>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
 
-                    {/* Rumus ingatan cepat */}
-                    <div className="rounded-lg bg-yellow-500/10 border border-yellow-500/30 px-3 py-2.5">
-                      <p className="text-xs font-body text-yellow-200 leading-relaxed">
-                        <strong>💡 Cara cepat mengecek:</strong> Lihat pangkat x dan y di persamaannya. Kalau <em>semua</em> x dan y berpangkat 1 (tidak ada kuadrat, akar, atau negatif) → <strong className="text-yellow-100">itu persamaan garis lurus!</strong>
+                    {/* BIG highlight — pangkat 1 */}
+                    <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg,rgba(250,204,21,0.12),rgba(234,179,8,0.06))", border: "2px solid rgba(250,204,21,0.45)" }}>
+                      <div className="px-4 py-1.5 text-center text-[10px] font-bold tracking-widest uppercase font-body text-yellow-300/70" style={{ background: "rgba(250,204,21,0.10)", borderBottom: "1px solid rgba(250,204,21,0.20)" }}>
+                        ✦ Kunci Utama ✦
+                      </div>
+                      <div className="px-4 py-5 flex flex-col items-center gap-3 text-center">
+                        {/* Big formula */}
+                        <div className="flex items-end justify-center gap-1">
+                          <span className="font-display font-black text-4xl" style={{ color: "#22d3ee", textShadow: "0 0 20px #22d3ee88" }}>x</span>
+                          <span className="font-display font-black text-2xl mb-1 text-white/40"> dan </span>
+                          <span className="font-display font-black text-4xl" style={{ color: "#a78bfa", textShadow: "0 0 20px #a78bfa88" }}>y</span>
+                          <span className="font-display font-black text-2xl mb-1 text-white/50"> hanya berpangkat </span>
+                          <span className="font-display font-black text-5xl" style={{ color: "#fde047", textShadow: "0 0 24px #fde04799" }}>1</span>
+                        </div>
+                        <p className="text-xs font-body text-white/60 max-w-xs leading-relaxed">
+                          Tidak ada <span className="text-rose-300 font-bold">x²</span>, <span className="text-rose-300 font-bold">y²</span>, <span className="text-rose-300 font-bold">xy</span>, <span className="text-rose-300 font-bold">√x</span>, atau pangkat lainnya.<br />
+                          Selama x dan y berpangkat 1, grafiknya <span className="text-yellow-200 font-bold">pasti garis lurus</span>.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Perbandingan ✓ vs ✗ */}
+                    <div>
+                      <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest mb-2">Perbandingan Cepat</p>
+                      <div className="space-y-1.5">
+                        {[
+                          { rumus: "y = 2x + 3",     pangkat: "x¹",     status: true,  alasan: "x pangkat 1 → garis lurus" },
+                          { rumus: "ax + by + c = 0", pangkat: "x¹, y¹", status: true,  alasan: "x & y pangkat 1 → garis lurus" },
+                          { rumus: "x/a + y/b = 1",   pangkat: "x¹, y¹", status: true,  alasan: "x & y pangkat 1 → garis lurus" },
+                          { rumus: "y = x² + 1",      pangkat: "x²",     status: false, alasan: "x pangkat 2 → parabola, bukan garis" },
+                          { rumus: "y = 1/x",         pangkat: "x⁻¹",   status: false, alasan: "x pangkat −1 → hiperbola, bukan garis" },
+                        ].map(({ rumus, pangkat, status, alasan }) => (
+                          <div key={rumus} className="flex items-center gap-2 px-3 py-2.5 rounded-xl" style={{
+                            background: status ? "linear-gradient(90deg,rgba(6,182,212,0.12),rgba(16,185,129,0.08))" : "linear-gradient(90deg,rgba(244,63,94,0.12),rgba(220,38,38,0.08))",
+                            border: `1px solid ${status ? "rgba(34,211,238,0.25)" : "rgba(251,113,133,0.25)"}`,
+                          }}>
+                            <div className="w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm shrink-0" style={{
+                              background: status ? "linear-gradient(135deg,#0e7490,#0284c7)" : "linear-gradient(135deg,#9f1239,#dc2626)",
+                            }}>
+                              <span className="text-white text-xs">{status ? "✓" : "✗"}</span>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <span className="font-mono text-xs font-bold" style={{ color: status ? "#67e8f9" : "#fda4af" }}>{rumus}</span>
+                                <span className="text-[9px] px-1.5 py-0.5 rounded-full font-bold font-body" style={{
+                                  background: status ? "rgba(34,211,238,0.18)" : "rgba(251,113,133,0.18)",
+                                  color: status ? "#22d3ee" : "#fb7185",
+                                }}>{pangkat}</span>
+                              </div>
+                              <p className="text-[10px] font-body text-white/45 mt-0.5">{alasan}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Tips ingat cepat */}
+                    <div className="rounded-xl px-4 py-3 flex gap-3 items-start" style={{ background: "linear-gradient(135deg,rgba(234,179,8,0.15),rgba(245,158,11,0.08))", border: "1px solid rgba(250,204,21,0.35)" }}>
+                      <span className="text-xl shrink-0 mt-0.5">💡</span>
+                      <p className="text-xs font-body text-yellow-100 leading-relaxed">
+                        <strong className="text-yellow-300">Cara cepat mengecek:</strong> Lihat pangkat semua x dan y di persamaannya. Kalau <span className="text-yellow-200 font-bold">semuanya pangkat 1</span> (tidak ada kuadrat, akar, atau pangkat negatif) → <span className="underline decoration-yellow-400 underline-offset-2 font-bold">itu pasti persamaan garis lurus!</span>
                       </p>
                     </div>
+
                   </div>
                 </div>
 
