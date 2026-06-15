@@ -59,57 +59,37 @@ const questions: Q[] = [
       { label: "d.", math: "\\frac{p^8 q^4}{p^3 q^4} = \\ldots" },
     ],
   }),
-  Qn(7, "Soal UN – Sifat Distribusi Campuran", {
+  Qn(7, "Soal UN / TKA – Sifat Distribusi & Eksponen Aljabar", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(2a)^3 = \\ldots" },
       { label: "b.", math: "(3x)^4 = \\ldots" },
       { label: "c.", math: "\\left(\\frac{2x}{3y}\\right)^2 = \\ldots" },
+      { label: "d.", math: "(2x^3)^4 = 2^4 \\times x^{12} = \\ldots" },
+      { label: "e.", math: "(3a^2 b)^3 = \\ldots" },
+      { label: "f.", math: "\\left(\\frac{2x^2}{y^3}\\right)^3 = \\ldots" },
+      { label: "g.", math: "\\frac{(2a)^4}{4a^2} = \\ldots" },
+      { label: "h.", math: "\\frac{(3x)^3}{9x} = \\ldots" },
+      { label: "i.", math: "\\frac{(ab)^5}{a^3 b^2} = \\ldots" },
     ],
   }),
-  Qn(8, "Soal TKA – Menyederhanakan Eksponen Besar", {
+  Qn(8, "Soal TKA / UN – Penyederhanaan Eksponen Tingkat Lanjut", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{2^{15}}{4^5} = \\ldots" },
-    ],
-  }),
-  Qn(9, "Soal UN – Ekspresi Variabel Gabungan", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "(a^2 b^3)^4 = a^\\square b^\\square" },
-      { label: "b.", math: "(x^3 y^2)^3 \\div (x^2 y)^3 = \\ldots" },
-      { label: "c.", math: "\\left(\\frac{a^3}{b^2}\\right)^3 = \\ldots" },
-    ],
-  }),
-  Qn(10, "Penyederhanaan & Gabungan Sifat Tingkat Lanjut", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{(3^4)^2}{3^5 \\times 3^2} = \\ldots" },
-      { label: "b.", math: "\\frac{(x^3 y)^4}{x^8 y^3} = \\ldots" },
-      { label: "c.", math: "\\frac{(2m^2)^3 \\times m^4}{4m^5} = \\ldots" },
-      { label: "d.", math: "\\frac{(p^2 q^3)^4}{p^5 q^8} = \\ldots" },
-      { label: "e.", math: "\\frac{(2^3 \\cdot 3^2)^2}{6^4} = \\ldots" },
-      { label: "f.", math: "\\frac{(ab)^5}{a^3 b^4} \\cdot \\frac{a^2}{b} = \\ldots" },
-      { label: "g.", math: "\\left(\\frac{x^3}{y^2}\\right)^4 \\cdot \\frac{y^{10}}{x^8} = \\ldots" },
-      { label: "h.", math: "\\frac{(2^3)^4 \\times 2^2}{2^{10} \\times 2^2} = \\ldots" },
-      { label: "i.", math: "\\frac{(3a^2)^3 \\times a^4}{9a^8} = \\ldots" },
-      { label: "j.", math: "\\left(\\frac{2x^3 y}{4xy^2}\\right)^2 = \\ldots" },
-    ],
-  }),
-  Qn(11, "Soal TKA – Variabel dan Angka", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "(2x^3)^4 = 2^4 \\times x^{12} = \\ldots" },
-      { label: "b.", math: "(3a^2 b)^3 = \\ldots" },
-      { label: "c.", math: "\\left(\\frac{2x^2}{y^3}\\right)^3 = \\ldots" },
-    ],
-  }),
-  Qn(12, "Soal UN – Sifat Eksponen pada Aljabar", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{(2a)^4}{4a^2} = \\ldots" },
-      { label: "b.", math: "\\frac{(3x)^3}{9x} = \\ldots" },
-      { label: "c.", math: "\\frac{(ab)^5}{a^3 b^2} = \\ldots" },
+      { label: "b.", math: "(a^2 b^3)^4 = a^\\square b^\\square" },
+      { label: "c.", math: "(x^3 y^2)^3 \\div (x^2 y)^3 = \\ldots" },
+      { label: "d.", math: "\\left(\\frac{a^3}{b^2}\\right)^3 = \\ldots" },
+      { label: "e.", math: "\\frac{(3^4)^2}{3^5 \\times 3^2} = \\ldots" },
+      { label: "f.", math: "\\frac{(x^3 y)^4}{x^8 y^3} = \\ldots" },
+      { label: "g.", math: "\\frac{(2m^2)^3 \\times m^4}{4m^5} = \\ldots" },
+      { label: "h.", math: "\\frac{(p^2 q^3)^4}{p^5 q^8} = \\ldots" },
+      { label: "i.", math: "\\frac{(2^3 \\cdot 3^2)^2}{6^4} = \\ldots" },
+      { label: "j.", math: "\\frac{(ab)^5}{a^3 b^4} \\cdot \\frac{a^2}{b} = \\ldots" },
+      { label: "k.", math: "\\left(\\frac{x^3}{y^2}\\right)^4 \\cdot \\frac{y^{10}}{x^8} = \\ldots" },
+      { label: "l.", math: "\\frac{(2^3)^4 \\times 2^2}{2^{10} \\times 2^2} = \\ldots" },
+      { label: "m.", math: "\\frac{(3a^2)^3 \\times a^4}{9a^8} = \\ldots" },
+      { label: "n.", math: "\\left(\\frac{2x^3 y}{4xy^2}\\right)^2 = \\ldots" },
     ],
   }),
 ];
@@ -131,7 +111,7 @@ const SifatSifatPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 12 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 8 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
