@@ -77,6 +77,9 @@ const DefinisiSPLDVPage = () => {
                     <a href="https://www.bing.com/images/create" target="_blank" rel="noopener noreferrer" className="font-body text-[10px] text-cyan-400/60 hover:text-cyan-400 transition-colors underline underline-offset-2">bing.com/images/create</a>
                   </div>
                 </div>
+                <div className="rounded-xl overflow-hidden border border-white/10">
+                  <img src="/image_1781493810310.png" alt="Konteks restoran ayam goreng — paket harga SPLDV" className="w-full object-contain" />
+                </div>
                 <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4 text-sm font-body space-y-2">
                   <p className="text-cyan-300 font-semibold">🛸 Peta Konsep</p>
                   <div className="flex flex-col sm:flex-row items-center gap-2 text-center">
