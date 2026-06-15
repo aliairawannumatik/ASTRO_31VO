@@ -10,56 +10,32 @@ type Q = { n: number; title: string; content?: string; mathContent?: string; par
 const Qn = (n: number, title: string, rest: Omit<Q, "n"|"title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1, "Sifat Perkalian – Angka & Variabel", {
-    type: "mixed", mathContent: "a^m \\times a^n = a^{m+n}",
+  Qn(1, "Sifat Perkalian, Pembagian & Pemangkatan – UN / TKA", {
+    type: "mixed",
     parts: [
       { label: "a.", math: "3^4 \\times 3^5 = 3^{\\square} = \\ldots" },
       { label: "b.", math: "a^3 \\times a^7 = \\ldots" },
       { label: "c.", math: "x^4 \\times x^2 \\times x = \\ldots" },
+      { label: "d.", math: "7^9 \\div 7^4 = 7^{\\square} = \\ldots" },
+      { label: "e.", math: "2^{10} \\div 2^6 = \\ldots" },
+      { label: "f.", math: "5^8 \\div 5^5 = \\ldots" },
+      { label: "g.", math: "(2^3)^4 = 2^{\\square} = \\ldots" },
+      { label: "h.", math: "(3^2)^5 = \\ldots" },
+      { label: "i.", math: "(5^4)^2 = \\ldots" },
     ],
   }),
-  Qn(2, "Sifat Pembagian Pangkat Basis Sama – UN", {
-    type: "mixed", mathContent: "a^m \\div a^n = a^{m-n}",
-    parts: [
-      { label: "a.", math: "7^9 \\div 7^4 = 7^{\\square} = \\ldots" },
-      { label: "b.", math: "2^{10} \\div 2^6 = \\ldots" },
-      { label: "c.", math: "5^8 \\div 5^5 = \\ldots" },
-    ],
-  }),
-  Qn(3, "Sifat Pemangkatan – TKA", {
-    type: "mixed", mathContent: "(a^m)^n = a^{m \\times n}",
-    parts: [
-      { label: "a.", math: "(2^3)^4 = 2^{\\square} = \\ldots" },
-      { label: "b.", math: "(3^2)^5 = \\ldots" },
-      { label: "c.", math: "(5^4)^2 = \\ldots" },
-    ],
-  }),
-  Qn(4, "Sifat Distribusi Perkalian – UN", {
-    type: "mixed", mathContent: "(ab)^n = a^n \\cdot b^n",
+  Qn(2, "Sifat Distribusi Perkalian & Pembagian – UN / ANBK", {
+    type: "mixed",
     parts: [
       { label: "a.", math: "(2 \\times 3)^4 = 2^4 \\times 3^4 = \\ldots" },
       { label: "b.", math: "(3 \\times 5)^2 = \\ldots" },
       { label: "c.", math: "(4 \\times 2)^3 = \\ldots" },
+      { label: "d.", math: "\\left(\\frac{3}{4}\\right)^2 = \\frac{3^2}{4^2} = \\ldots" },
+      { label: "e.", math: "\\left(\\frac{2}{5}\\right)^3 = \\ldots" },
+      { label: "f.", math: "\\left(\\frac{6}{7}\\right)^2 = \\ldots" },
     ],
   }),
-  Qn(5, "Sifat Distribusi Pembagian – ANBK", {
-    type: "mixed", mathContent: "\\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n}",
-    parts: [
-      { label: "a.", math: "\\left(\\frac{3}{4}\\right)^2 = \\frac{3^2}{4^2} = \\ldots" },
-      { label: "b.", math: "\\left(\\frac{2}{5}\\right)^3 = \\ldots" },
-      { label: "c.", math: "\\left(\\frac{6}{7}\\right)^2 = \\ldots" },
-    ],
-  }),
-  Qn(6, "Menyederhanakan & Penyederhanaan Ekspresi", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\frac{3^6}{3^2 \\times 3} = \\ldots" },
-      { label: "b.", math: "\\frac{m^8 \\times m^3}{m^6} = \\ldots" },
-      { label: "c.", math: "\\frac{a^5 b^3}{a^2 b} = \\ldots" },
-      { label: "d.", math: "\\frac{p^8 q^4}{p^3 q^4} = \\ldots" },
-    ],
-  }),
-  Qn(7, "Soal UN / TKA – Sifat Distribusi & Eksponen Aljabar", {
+  Qn(3, "Soal UN / TKA – Sifat Distribusi & Eksponen Aljabar", {
     type: "mixed",
     parts: [
       { label: "a.", math: "(2a)^3 = \\ldots" },
@@ -73,23 +49,27 @@ const questions: Q[] = [
       { label: "i.", math: "\\frac{(ab)^5}{a^3 b^2} = \\ldots" },
     ],
   }),
-  Qn(8, "Soal TKA / UN – Penyederhanaan Eksponen Tingkat Lanjut", {
+  Qn(4, "Penyederhanaan Eksponen – Dasar & Tingkat Lanjut", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "\\frac{2^{15}}{4^5} = \\ldots" },
-      { label: "b.", math: "(a^2 b^3)^4 = a^\\square b^\\square" },
-      { label: "c.", math: "(x^3 y^2)^3 \\div (x^2 y)^3 = \\ldots" },
-      { label: "d.", math: "\\left(\\frac{a^3}{b^2}\\right)^3 = \\ldots" },
-      { label: "e.", math: "\\frac{(3^4)^2}{3^5 \\times 3^2} = \\ldots" },
-      { label: "f.", math: "\\frac{(x^3 y)^4}{x^8 y^3} = \\ldots" },
-      { label: "g.", math: "\\frac{(2m^2)^3 \\times m^4}{4m^5} = \\ldots" },
-      { label: "h.", math: "\\frac{(p^2 q^3)^4}{p^5 q^8} = \\ldots" },
-      { label: "i.", math: "\\frac{(2^3 \\cdot 3^2)^2}{6^4} = \\ldots" },
-      { label: "j.", math: "\\frac{(ab)^5}{a^3 b^4} \\cdot \\frac{a^2}{b} = \\ldots" },
-      { label: "k.", math: "\\left(\\frac{x^3}{y^2}\\right)^4 \\cdot \\frac{y^{10}}{x^8} = \\ldots" },
-      { label: "l.", math: "\\frac{(2^3)^4 \\times 2^2}{2^{10} \\times 2^2} = \\ldots" },
-      { label: "m.", math: "\\frac{(3a^2)^3 \\times a^4}{9a^8} = \\ldots" },
-      { label: "n.", math: "\\left(\\frac{2x^3 y}{4xy^2}\\right)^2 = \\ldots" },
+      { label: "a.", math: "\\frac{3^6}{3^2 \\times 3} = \\ldots" },
+      { label: "b.", math: "\\frac{m^8 \\times m^3}{m^6} = \\ldots" },
+      { label: "c.", math: "\\frac{a^5 b^3}{a^2 b} = \\ldots" },
+      { label: "d.", math: "\\frac{p^8 q^4}{p^3 q^4} = \\ldots" },
+      { label: "e.", math: "\\frac{2^{15}}{4^5} = \\ldots" },
+      { label: "f.", math: "(a^2 b^3)^4 = a^\\square b^\\square" },
+      { label: "g.", math: "(x^3 y^2)^3 \\div (x^2 y)^3 = \\ldots" },
+      { label: "h.", math: "\\left(\\frac{a^3}{b^2}\\right)^3 = \\ldots" },
+      { label: "i.", math: "\\frac{(3^4)^2}{3^5 \\times 3^2} = \\ldots" },
+      { label: "j.", math: "\\frac{(x^3 y)^4}{x^8 y^3} = \\ldots" },
+      { label: "k.", math: "\\frac{(2m^2)^3 \\times m^4}{4m^5} = \\ldots" },
+      { label: "l.", math: "\\frac{(p^2 q^3)^4}{p^5 q^8} = \\ldots" },
+      { label: "m.", math: "\\frac{(2^3 \\cdot 3^2)^2}{6^4} = \\ldots" },
+      { label: "n.", math: "\\frac{(ab)^5}{a^3 b^4} \\cdot \\frac{a^2}{b} = \\ldots" },
+      { label: "o.", math: "\\left(\\frac{x^3}{y^2}\\right)^4 \\cdot \\frac{y^{10}}{x^8} = \\ldots" },
+      { label: "p.", math: "\\frac{(2^3)^4 \\times 2^2}{2^{10} \\times 2^2} = \\ldots" },
+      { label: "q.", math: "\\frac{(3a^2)^3 \\times a^4}{9a^8} = \\ldots" },
+      { label: "r.", math: "\\left(\\frac{2x^3 y}{4xy^2}\\right)^2 = \\ldots" },
     ],
   }),
 ];
@@ -111,7 +91,7 @@ const SifatSifatPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 8 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 4 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
