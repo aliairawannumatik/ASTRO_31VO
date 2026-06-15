@@ -214,26 +214,47 @@ const MetodeCampuranPage = () => {
                   <div className="space-y-2 text-sm font-body">
                     <p className="text-white/70 font-semibold">Langkah 1 — Tulis persamaan:</p>
                     <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="\text{(I): } x + 2y = 8" />
-                      <BlockMath math="\text{(II): } 3x - y = 3" />
+                      <BlockMath math="\begin{cases} \text{(I):}\quad x + 2y = 8 \\ \text{(II):}\quad 3x - y = 3 \end{cases}" />
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Langkah 2 — Eliminasi variabel <InlineMath math="x" /> (kalikan Pers. I dengan 3):</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="x + 2y = 8 \quad |\times 3 \quad \Rightarrow \quad 3x + 6y = 24" />
-                      <BlockMath math="3x - y = 3 \quad |\times 1 \quad \Rightarrow \quad 3x - y = 3" />
+                    <p className="text-white/70 font-semibold mt-3">Langkah 2 — Samakan koefisien <InlineMath math="x" /> (KPK dari 1 dan 3 adalah 3):</p>
+                    <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 font-body">
+                      <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Samakan koefisien x → kalikan kedua persamaan</p>
+                      <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                        <span className="text-white/50 w-5 shrink-0">P1</span>
+                        <span className="text-white/80">x + 2y = 8</span>
+                        <span className="text-yellow-300 font-bold mx-1">|×3|</span>
+                        <span className="text-cyan-300 font-bold">3x + 6y = 24</span>
+                      </div>
+                      <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                        <span className="text-white/50 w-5 shrink-0">P2</span>
+                        <span className="text-white/80">3x − y = 3</span>
+                        <span className="text-white/30 text-xs mx-1">|×1 (tetap)|</span>
+                      </div>
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Langkah 3 — Kurangkan kedua persamaan (eliminasi <InlineMath math="x" />):</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="(3x + 6y) - (3x - y) = 24 - 3" />
-                      <BlockMath math="7y = 21 \Rightarrow y = 3" />
+                    <p className="text-white/70 font-semibold mt-3">Langkah 3 — Kurangkan (koefisien <InlineMath math="x" /> sama tanda) → <InlineMath math="x" /> lenyap:</p>
+                    <div className="bg-slate-800/50 rounded-lg px-4 py-3 font-body">
+                      <div className="flex items-center gap-2 pr-2">
+                        <span className="text-white/40 w-10 shrink-0">P1×3</span>
+                        <span className="text-white font-mono">3x + 6y = 24</span>
+                      </div>
+                      <div className="flex items-center gap-2 pr-2 pb-1 border-b border-white/20">
+                        <span className="text-white/40 w-10 shrink-0">P2×1</span>
+                        <span className="text-white font-mono">3x − y = 3</span>
+                        <span className="text-red-400 font-bold ml-2">−</span>
+                      </div>
+                      <div className="flex items-center gap-2 pt-1">
+                        <span className="text-white/40 w-10 shrink-0"></span>
+                        <span className="text-cyan-300 font-mono font-bold">7y = 21</span>
+                      </div>
                     </div>
+                    <BlockMath math="y = \dfrac{21}{7} = 3" />
 
                     <p className="text-white/70 font-semibold mt-3">Langkah 4 — Substitusi <InlineMath math="y = 3" /> ke Persamaan (I):</p>
                     <div className="bg-slate-800/50 rounded-lg p-2">
                       <BlockMath math="x + 2(3) = 8" />
-                      <BlockMath math="x + 6 = 8 \Rightarrow x = 2" />
+                      <BlockMath math="x + 6 = 8 \;\Rightarrow\; x = 2" />
                     </div>
 
                     <p className="text-white/70 font-semibold mt-3">Langkah 5 — Verifikasi:</p>
@@ -276,40 +297,57 @@ const MetodeCampuranPage = () => {
                   <div className="space-y-2 text-sm font-body">
                     <p className="text-white/70 font-semibold">Langkah 1 — Tulis persamaan:</p>
                     <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="\text{(I): } 4x - 3y = 1" />
-                      <BlockMath math="\text{(II): } 2x + 5y = 19" />
+                      <BlockMath math="\begin{cases} \text{(I):}\quad 4x - 3y = 1 \\ \text{(II):}\quad 2x + 5y = 19 \end{cases}" />
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Langkah 2 — Eliminasi variabel <InlineMath math="x" /> (kalikan Pers. II dengan 2):</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="4x - 3y = 1 \quad |\times 1" />
-                      <BlockMath math="2x + 5y = 19 \quad |\times 2 \quad \Rightarrow \quad 4x + 10y = 38" />
+                    <p className="text-white/70 font-semibold mt-3">Langkah 2 — Samakan koefisien <InlineMath math="x" /> (KPK dari 4 dan 2 adalah 4):</p>
+                    <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 font-body">
+                      <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Samakan koefisien x → kalikan kedua persamaan</p>
+                      <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                        <span className="text-white/50 w-5 shrink-0">P1</span>
+                        <span className="text-white/80">4x − 3y = 1</span>
+                        <span className="text-white/30 text-xs mx-1">|×1 (tetap)|</span>
+                      </div>
+                      <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                        <span className="text-white/50 w-5 shrink-0">P2</span>
+                        <span className="text-white/80">2x + 5y = 19</span>
+                        <span className="text-yellow-300 font-bold mx-1">|×2|</span>
+                        <span className="text-cyan-300 font-bold">4x + 10y = 38</span>
+                      </div>
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Langkah 3 — Kurangkan persamaan (eliminasi <InlineMath math="x" />):</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="(4x + 10y) - (4x - 3y) = 38 - 1" />
-                      <BlockMath math="13y = 37" />
-                      <BlockMath math="y = \frac{37}{13}" />
+                    <p className="text-white/70 font-semibold mt-3">Langkah 3 — Kurangkan (koefisien <InlineMath math="x" /> sama tanda) → <InlineMath math="x" /> lenyap:</p>
+                    <div className="bg-slate-800/50 rounded-lg px-4 py-3 font-body">
+                      <div className="flex items-center gap-2 pr-2">
+                        <span className="text-white/40 w-10 shrink-0">P1×1</span>
+                        <span className="text-white font-mono">4x − 3y = 1</span>
+                      </div>
+                      <div className="flex items-center gap-2 pr-2 pb-1 border-b border-white/20">
+                        <span className="text-white/40 w-10 shrink-0">P2×2</span>
+                        <span className="text-white font-mono">4x + 10y = 38</span>
+                        <span className="text-red-400 font-bold ml-2">−</span>
+                      </div>
+                      <div className="flex items-center gap-2 pt-1">
+                        <span className="text-white/40 w-10 shrink-0"></span>
+                        <span className="text-cyan-300 font-mono font-bold">−13y = −37</span>
+                      </div>
                     </div>
-                    <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-2">
-                      <p className="text-yellow-200 text-xs">⚠️ Hasil tidak bulat? Jangan khawatir — SPLDV memang bisa menghasilkan pecahan. Mari kita coba eliminasi variabel <InlineMath math="y" /> saja.</p>
+                    <BlockMath math="y = \dfrac{-37}{-13} = \dfrac{37}{13}" />
+                    <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg px-3 py-2">
+                      <p className="text-yellow-200 text-xs">💡 Hasil pecahan adalah hal wajar — SPLDV ini memang menghasilkan solusi berupa pecahan.</p>
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Strategi Alternatif — Eliminasi variabel <InlineMath math="y" />:</p>
+                    <p className="text-white/70 font-semibold mt-3">Langkah 4 — Substitusi <InlineMath math="y = \dfrac{37}{13}" /> ke Persamaan (II):</p>
                     <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="4x - 3y = 1 \quad |\times 5 \quad \Rightarrow \quad 20x - 15y = 5" />
-                      <BlockMath math="2x + 5y = 19 \quad |\times 3 \quad \Rightarrow \quad 6x + 15y = 57" />
-                      <p className="text-white/60 text-xs mt-1">Jumlahkan (koefisien y berlawanan tanda):</p>
-                      <BlockMath math="26x = 62 \Rightarrow x = \frac{62}{26} = \frac{31}{13}" />
+                      <BlockMath math="2x + 5 \cdot \dfrac{37}{13} = 19" />
+                      <BlockMath math="2x = 19 - \dfrac{185}{13} = \dfrac{247 - 185}{13} = \dfrac{62}{13}" />
+                      <BlockMath math="x = \dfrac{62}{26} = \dfrac{31}{13}" />
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Langkah 4 — Substitusi <InlineMath math="x = \frac{31}{13}" /> ke Persamaan (II):</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="2 \cdot \frac{31}{13} + 5y = 19" />
-                      <BlockMath math="\frac{62}{13} + 5y = 19" />
-                      <BlockMath math="5y = 19 - \frac{62}{13} = \frac{247 - 62}{13} = \frac{185}{13}" />
-                      <BlockMath math="y = \frac{185}{65} = \frac{37}{13}" />
+                    <p className="text-white/70 font-semibold mt-3">Langkah 5 — Verifikasi:</p>
+                    <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2 space-y-1">
+                      <p className="text-white/70 text-xs">Cek Pers. (I): <InlineMath math="4 \cdot \frac{31}{13} - 3 \cdot \frac{37}{13} = \frac{124-111}{13} = \frac{13}{13} = 1" /> ✅</p>
+                      <p className="text-white/70 text-xs">Cek Pers. (II): <InlineMath math="2 \cdot \frac{31}{13} + 5 \cdot \frac{37}{13} = \frac{62+185}{13} = \frac{247}{13} = 19" /> ✅</p>
                     </div>
 
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3 mt-2">
@@ -320,7 +358,7 @@ const MetodeCampuranPage = () => {
 
                     <div className="bg-slate-800/40 border border-yellow-500/20 rounded-xl p-3 mt-2">
                       <p className="font-body text-xs text-yellow-300 font-semibold">💡 Pelajaran dari Soal Ini</p>
-                      <p className="font-body text-xs text-white/70 mt-1">Ketika koefisien tidak saling habis membagi, eliminasi variabel <InlineMath math="y" /> terlebih dahulu bisa menghasilkan jawaban yang sama persis. Selalu pilih variabel yang KPK-nya paling kecil untuk dieliminasi!</p>
+                      <p className="font-body text-xs text-white/70 mt-1">Tidak semua SPLDV menghasilkan bilangan bulat. Metode campuran tetap bekerja sempurna untuk solusi pecahan — yang penting prosesnya teliti!</p>
                     </div>
                   </div>
                 </div>
@@ -338,7 +376,7 @@ const MetodeCampuranPage = () => {
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                   <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
                   <p className="font-body text-sm text-white/85 leading-relaxed">
-                    Diketahui dua buah bilangan. Tiga kali bilangan pertama dikurangi dua kali bilangan kedua sama dengan 7. Jika empat kali bilangan pertama ditambah lima kali bilangan kedua sama dengan 42. Tentukan kedua bilangan tersebut menggunakan metode campuran!
+                    Di sebuah toko buah, 3 kg apel dan 5 kg jeruk dijual seharga Rp58.000. Jika 2 kg apel dan 3 kg jeruk dijual seharga Rp37.000, tentukan harga 1 kg apel dan 1 kg jeruk menggunakan metode campuran!
                   </p>
                 </div>
 
@@ -346,74 +384,69 @@ const MetodeCampuranPage = () => {
                   <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan Langkah demi Langkah</p>
 
                   <div className="space-y-2 text-sm font-body">
-                    <p className="text-white/70 font-semibold">Langkah 1 — Buat model matematika:</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <p className="text-white/60 text-xs">Misalkan bilangan pertama = <InlineMath math="p" />, bilangan kedua = <InlineMath math="q" /></p>
-                      <BlockMath math="\text{(I): } 3p - 2q = 7" />
-                      <BlockMath math="\text{(II): } 4p + 5q = 42" />
+                    <p className="text-white/70 font-semibold">Langkah 1 — Buat model SPLDV:</p>
+                    <div className="bg-slate-800/50 rounded-lg p-2 space-y-1">
+                      <p className="text-white/60 text-xs">Misalkan <InlineMath math="a" /> = harga 1 kg apel (rupiah), <InlineMath math="j" /> = harga 1 kg jeruk (rupiah)</p>
+                      <BlockMath math="\begin{cases} \text{(I):}\quad 3a + 5j = 58.000 \\ \text{(II):}\quad 2a + 3j = 37.000 \end{cases}" />
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Langkah 2 — Pilih strategi eliminasi terbaik:</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <p className="text-white/60 text-xs mb-1">Eliminasi <InlineMath math="q" />: kalikan Pers. (I) × 5 dan Pers. (II) × 2</p>
-                      <BlockMath math="3p - 2q = 7 \quad |\times 5 \quad \Rightarrow \quad 15p - 10q = 35" />
-                      <BlockMath math="4p + 5q = 42 \quad |\times 2 \quad \Rightarrow \quad 8p + 10q = 84" />
+                    <p className="text-white/70 font-semibold mt-3">Langkah 2 — Samakan koefisien <InlineMath math="a" /> (KPK dari 3 dan 2 adalah 6):</p>
+                    <div className="bg-slate-900/60 border border-white/10 rounded-lg px-4 py-3 space-y-1.5 font-body">
+                      <p className="text-[10px] uppercase text-white/50 tracking-wide mb-1">Samakan koefisien a → kalikan kedua persamaan</p>
+                      <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                        <span className="text-white/50 w-5 shrink-0">P1</span>
+                        <span className="text-white/80">3a + 5j = 58.000</span>
+                        <span className="text-yellow-300 font-bold mx-1">|×2|</span>
+                        <span className="text-cyan-300 font-bold">6a + 10j = 116.000</span>
+                      </div>
+                      <div className="flex items-center gap-2 font-mono text-sm flex-wrap">
+                        <span className="text-white/50 w-5 shrink-0">P2</span>
+                        <span className="text-white/80">2a + 3j = 37.000</span>
+                        <span className="text-yellow-300 font-bold mx-1">|×3|</span>
+                        <span className="text-cyan-300 font-bold">6a + 9j = 111.000</span>
+                      </div>
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Langkah 3 — Jumlahkan (koefisien <InlineMath math="q" /> berlawanan):</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="15p - 10q = 35" />
-                      <BlockMath math="8p + 10q = 84 \quad (+)" />
-                      <BlockMath math="23p = 119 \Rightarrow p = \frac{119}{23} = \mathbf{5{,}17...}" />
+                    <p className="text-white/70 font-semibold mt-3">Langkah 3 — Kurangkan (koefisien <InlineMath math="a" /> sama tanda) → <InlineMath math="a" /> lenyap:</p>
+                    <div className="bg-slate-800/50 rounded-lg px-4 py-3 font-body">
+                      <div className="flex items-center gap-2 pr-2">
+                        <span className="text-white/40 w-10 shrink-0">P1×2</span>
+                        <span className="text-white font-mono">6a + 10j = 116.000</span>
+                      </div>
+                      <div className="flex items-center gap-2 pr-2 pb-1 border-b border-white/20">
+                        <span className="text-white/40 w-10 shrink-0">P2×3</span>
+                        <span className="text-white font-mono">6a + 9j = 111.000</span>
+                        <span className="text-red-400 font-bold ml-2">−</span>
+                      </div>
+                      <div className="flex items-center gap-2 pt-1">
+                        <span className="text-white/40 w-10 shrink-0"></span>
+                        <span className="text-cyan-300 font-mono font-bold">j = 5.000</span>
+                      </div>
                     </div>
-                    <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-2">
-                      <p className="text-orange-200 text-xs">🔄 Hasil tidak bulat? Coba ganti: eliminasi <InlineMath math="p" /> saja!</p>
+                    <BlockMath math="j = 5.000" />
+
+                    <p className="text-white/70 font-semibold mt-3">Langkah 4 — Substitusi <InlineMath math="j = 5.000" /> ke Persamaan (I):</p>
+                    <div className="bg-slate-800/50 rounded-lg p-2">
+                      <BlockMath math="3a + 5(5.000) = 58.000" />
+                      <BlockMath math="3a + 25.000 = 58.000" />
+                      <BlockMath math="3a = 33.000 \;\Rightarrow\; a = 11.000" />
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Strategi Baru — Eliminasi <InlineMath math="p" />: kalikan Pers. (I) × 4 dan Pers. (II) × 3</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="3p - 2q = 7 \quad |\times 4 \quad \Rightarrow \quad 12p - 8q = 28" />
-                      <BlockMath math="4p + 5q = 42 \quad |\times 3 \quad \Rightarrow \quad 12p + 15q = 126" />
-                      <p className="text-white/60 text-xs mt-1">Kurangkan:</p>
-                      <BlockMath math="(12p + 15q) - (12p - 8q) = 126 - 28" />
-                      <BlockMath math="23q = 98" />
-                      <BlockMath math="q = \frac{98}{23}" />
-                    </div>
-                    <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-2">
-                      <p className="text-yellow-200 text-xs">💡 Hm, tetap pecahan. Ini memang soalnya dirancang begitu — ayo kita periksa ulang soalnya. Untuk latihan bersih, mari kita gunakan sistem yang lebih bersahabat: <InlineMath math="3p - 2q = 7" /> dan <InlineMath math="4p + 5q = 41" />.</p>
+                    <p className="text-white/70 font-semibold mt-3">Langkah 5 — Verifikasi:</p>
+                    <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2 space-y-1">
+                      <p className="text-white/70 text-xs">Cek Pers. (I): <InlineMath math="3(11.000) + 5(5.000) = 33.000 + 25.000 = 58.000" /> ✅</p>
+                      <p className="text-white/70 text-xs">Cek Pers. (II): <InlineMath math="2(11.000) + 3(5.000) = 22.000 + 15.000 = 37.000" /> ✅</p>
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Koreksi: <InlineMath math="4p + 5q = 41" /> (Eliminasi <InlineMath math="p" />):</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="12p - 8q = 28" />
-                      <BlockMath math="12p + 15q = 123 \quad (-)" />
-                      <BlockMath math="-23q = -95 \Rightarrow q = \frac{95}{23}" />
+                    <div className="bg-red-900/20 border border-red-500/20 rounded p-2 space-y-1 mt-2">
+                      <p className="font-body text-xs text-red-300 font-bold">🔑 Harga 1 kg apel: Rp11.000 | Harga 1 kg jeruk: Rp5.000</p>
                     </div>
 
-                    <p className="text-white/70 font-semibold mt-3">Solusi Bersih menggunakan SPLDV asal dengan <InlineMath math="4p + 5q = 43" />:</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="12p - 8q = 28" />
-                      <BlockMath math="12p + 15q = 129 \quad (-)" />
-                      <BlockMath math="-23q = -101 \Rightarrow \text{masih pecahan}" />
-                    </div>
-
-                    <p className="text-white/70 font-semibold mt-3">✅ Gunakan SPLDV yang menghasilkan bilangan bulat:</p>
-                    <div className="bg-slate-800/50 rounded-lg p-2">
-                      <BlockMath math="\text{(I): } 3p - 2q = 7" />
-                      <BlockMath math="\text{(II): } 4p + 5q = 42" />
-                      <p className="text-white/60 text-xs">Eliminasi p (× 4 dan × 3):</p>
-                      <BlockMath math="12p - 8q = 28 \quad \text{dan} \quad 12p + 15q = 126" />
-                      <BlockMath math="23q = 98 \Rightarrow q \approx 4{,}26" />
-                      <p className="text-white/60 text-xs mt-2">Soal ini sengaja dibuat dengan jawaban pecahan. Substitusikan kembali ke Pers. (I):</p>
-                      <BlockMath math="3p = 7 + 2 \cdot \frac{98}{23} = 7 + \frac{196}{23} = \frac{161 + 196}{23} = \frac{357}{23}" />
-                      <BlockMath math="p = \frac{357}{69} = \frac{119}{23}" />
-                    </div>
-
-                    <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3 mt-2">
+                    <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3 mt-1">
                       <p className="font-body text-sm font-bold text-cyan-300">
-                        ✅ Solusi: <InlineMath math="p = \dfrac{119}{23}" /> dan <InlineMath math="q = \dfrac{98}{23}" />
+                        ✅ Solusi: <InlineMath math="a = 11.000" /> dan <InlineMath math="j = 5.000" />
                       </p>
-                      <p className="font-body text-xs text-white/60 mt-1">Catatan: Soal "sulit" kadang memang menghasilkan jawaban pecahan. Metode campuran tetap bekerja — tinggal teliti menghitung!</p>
+                      <p className="font-body text-xs text-white/60 mt-1">Tips: Pada soal cerita, selalu definisikan variabel di awal dan verifikasi ke soal aslinya!</p>
                     </div>
                   </div>
                 </div>
