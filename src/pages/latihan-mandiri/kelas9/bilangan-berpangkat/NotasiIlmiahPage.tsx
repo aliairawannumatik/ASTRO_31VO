@@ -20,13 +20,13 @@ const questions: Q[] = [
   Qn(2, "Mengubah ke Notasi Ilmiah & Memperbaiki Notasi – UN/ANBK/TKA", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "7.500.000 = 7{,}5 \\times 10^{\\square}" },
-      { label: "b.", math: "43.000.000.000 = \\ldots \\times 10^{\\square}" },
+      { label: "a.", math: "7.500.000 = \\ldots" },
+      { label: "b.", math: "43.000.000.000 = \\ldots" },
       { label: "c.", math: "986.000 = \\ldots" },
-      { label: "d.", math: "0{,}0035 = 3{,}5 \\times 10^{-3}" },
+      { label: "d.", math: "0{,}0035 = \\ldots" },
       { label: "e.", math: "0{,}000072 = \\ldots" },
       { label: "f.", math: "0{,}00000045 = \\ldots" },
-      { label: "g.", math: "25 \\times 10^4 = 2{,}5 \\times 10^5" },
+      { label: "g.", math: "25 \\times 10^4 = \\ldots" },
       { label: "h.", math: "0{,}35 \\times 10^7 = \\ldots" },
       { label: "i.", math: "120 \\times 10^{-3} = \\ldots" },
     ],
