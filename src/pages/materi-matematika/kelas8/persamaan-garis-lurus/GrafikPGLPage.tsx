@@ -196,7 +196,6 @@ const GrafikPGLPage = () => {
                   <div className="flex items-center gap-2">
                     <span className="text-lg">🖥️</span>
                     <p className="text-sm font-bold text-cyan-300 font-body">Laboratorium Grafik Interaktif</p>
-                    <span className="text-xs bg-cyan-600/30 border border-cyan-500/40 text-cyan-300 px-2 py-0.5 rounded-full">GeoGebra-style</span>
                   </div>
                   <p className="text-xs text-white/60 font-body leading-relaxed">
                     Ketik persamaan apa saja di panel kanan — grafiknya langsung tergambar! Gunakan scroll untuk zoom, drag untuk geser bidang, dan hover untuk melihat koordinat.
@@ -212,11 +211,16 @@ const GrafikPGLPage = () => {
             )}
           </div>
 
-          {/* TITIK POTONG */}
+          {/* METODE 1 — 2 TITIK POTONG SUMBU */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="titik-potong" icon={<BookOpen className="w-5 h-5" />} iconColor="text-orange-400" title="📌 Titik Potong Sumbu dan Cara Menggambar" />
+            <SH id="titik-potong" icon={<BookOpen className="w-5 h-5" />} iconColor="text-orange-400" title="📌 Menggambar Grafik Persamaan Garis dengan 2 Titik Potong Sumbu X dan Sumbu Y" />
             {true && (
               <div className="px-5 pb-5 space-y-4">
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Untuk menggambar grafik persamaan garis lurus, kita membutuhkan <strong className="text-orange-300">minimal 2 titik</strong>. Dua titik sudah cukup untuk menentukan sebuah garis lurus secara tepat. Salah satu cara termudah adalah menggunakan <strong className="text-orange-300">titik potong sumbu-x</strong> (saat <InlineMath math="y=0" />) dan <strong className="text-orange-300">titik potong sumbu-y</strong> (saat <InlineMath math="x=0" />) sebagai dua titik tersebut.
+                  </p>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4">
                     <p className="text-sm font-bold text-cyan-300 mb-2">📍 Titik Potong Sumbu-x</p>
@@ -238,13 +242,12 @@ const GrafikPGLPage = () => {
                   </div>
                 </div>
 
-                {/* Step-by-step cara menggambar */}
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="text-sm font-bold text-white mb-3">🖊️ Langkah Menggambar Garis (Metode 2 Titik)</p>
+                  <p className="text-sm font-bold text-white mb-3">🖊️ Langkah Menggambar (Metode Titik Potong Sumbu)</p>
                   <div className="space-y-2">
                     {[
-                      { n:"1", t:"Cari titik potong sumbu-x", d:"Substitusi y=0, hitung x → titik (x₀, 0)", c:"border-cyan-500/30 bg-cyan-900/10" },
-                      { n:"2", t:"Cari titik potong sumbu-y", d:"Substitusi x=0, hitung y → titik (0, y₀)", c:"border-violet-500/30 bg-violet-900/10" },
+                      { n:"1", t:"Cari titik potong sumbu-x", d:"Substitusi y = 0, hitung x → titik (x₀, 0)", c:"border-cyan-500/30 bg-cyan-900/10" },
+                      { n:"2", t:"Cari titik potong sumbu-y", d:"Substitusi x = 0, hitung y → titik (0, y₀)", c:"border-violet-500/30 bg-violet-900/10" },
                       { n:"3", t:"Plot kedua titik", d:"Tandai titik (x₀, 0) dan (0, y₀) di bidang koordinat", c:"border-green-500/30 bg-green-900/10" },
                       { n:"4", t:"Tarik garis lurus", d:"Hubungkan kedua titik dan perpanjang ke kedua arah", c:"border-orange-500/30 bg-orange-900/10" },
                     ].map(({ n,t,d,c }) => (
@@ -259,34 +262,34 @@ const GrafikPGLPage = () => {
             )}
           </div>
 
-          {/* GALERI VISUAL GARIS */}
+          {/* METODE 2 — 2 TITIK ACAK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="visual-lines" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-green-400" title="🎨 Galeri Visual: Berbagai Jenis Garis" />
+            <SH id="titik-acak" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-green-400" title="📐 Cara Menggambar Persamaan Garis dengan Menggunakan Dua Titik Acak" />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {[
-                    { eq: "y = x", color: "#22d3ee", pts: [[-4,-4],[-2,-2],[0,0],[2,2],[4,4]], note: "m=1, c=0" },
-                    { eq: "y = 2x − 3", color: "#a78bfa", pts: [[-1,-5],[0,-3],[1,-1],[2,1],[3,3]], note: "m=2, c=−3" },
-                    { eq: "y = −x + 4", color: "#fb923c", pts: [[-1,5],[0,4],[1,3],[2,2],[3,1],[4,0]], note: "m=−1, c=4" },
-                    { eq: "y = ½x + 1", color: "#4ade80", pts: [[-4,-1],[-2,0],[0,1],[2,2],[4,3]], note: "m=½, c=1" },
-                    { eq: "y = −2x", color: "#f472b6", pts: [[-2,4],[-1,2],[0,0],[1,-2],[2,-4]], note: "m=−2, c=0" },
-                    { eq: "y = 5", color: "#facc15", pts: [[-4,5],[-2,5],[0,5],[2,5],[4,5]], note: "m=0 (horizontal)" },
-                  ].map(({ eq, color, pts, note }) => (
-                    <div key={eq} className="bg-slate-900/70 border border-white/10 rounded-xl p-2">
-                      <CoordSystem w={130} h={110} label={eq}>
-                        <polyline
-                          points={pts.map(([x,y])=>`${65+x*12},${55-y*9}`).join(' ')}
-                          fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round"
-                        />
-                        {pts.slice(1,-1).map(([x,y],i) => <circle key={i} cx={65+x*12} cy={55-y*9} r="2.5" fill={color} opacity="0.8" />)}
-                      </CoordSystem>
-                      <p className="text-center text-xs mt-1 text-white/40">{note}</p>
-                    </div>
-                  ))}
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Ingat, kita hanya butuh <strong className="text-green-300">minimal 2 titik</strong> untuk menggambar garis lurus. Selain menggunakan titik potong sumbu, kita bisa bebas memilih <strong className="text-green-300">dua nilai x sembarang</strong>, lalu menghitung nilai y yang bersesuaian dari persamaan. Kedua pasangan (x, y) itulah yang menjadi dua titik penentu garis.
+                  </p>
+                </div>
+                <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
+                  <p className="text-sm font-bold text-white mb-3">🖊️ Langkah Menggambar (Metode Dua Titik Acak)</p>
+                  <div className="space-y-2">
+                    {[
+                      { n:"1", t:"Pilih sembarang nilai x₁", d:"Misalnya x₁ = 1, substitusi ke persamaan untuk mendapat y₁ → titik (x₁, y₁)", c:"border-green-500/30 bg-green-900/10" },
+                      { n:"2", t:"Pilih sembarang nilai x₂ yang berbeda", d:"Misalnya x₂ = 3, substitusi ke persamaan untuk mendapat y₂ → titik (x₂, y₂)", c:"border-teal-500/30 bg-teal-900/10" },
+                      { n:"3", t:"Plot kedua titik di bidang koordinat", d:"Tandai (x₁, y₁) dan (x₂, y₂) pada sumbu koordinat", c:"border-cyan-500/30 bg-cyan-900/10" },
+                      { n:"4", t:"Tarik garis lurus melewati kedua titik", d:"Hubungkan dan perpanjang garis ke kedua arah", c:"border-orange-500/30 bg-orange-900/10" },
+                    ].map(({ n,t,d,c }) => (
+                      <div key={n} className={`border ${c} rounded-lg p-3 flex gap-3 text-sm font-body`}>
+                        <span className="font-display font-bold text-white bg-white/10 rounded-full w-7 h-7 flex items-center justify-center shrink-0">{n}</span>
+                        <div><p className="text-white font-semibold">{t}</p><p className="text-white/60 text-xs">{d}</p></div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="text-xs text-yellow-200"><strong>💡 Perhatikan:</strong> Gradien positif → garis naik dari kiri ke kanan. Gradien negatif → garis turun dari kiri ke kanan. Gradien nol → garis mendatar (horizontal).</p>
+                  <p className="text-xs text-yellow-200 font-body"><strong>💡 Tips:</strong> Pilih nilai x yang mudah dihitung, misalnya x = 0, 1, 2, atau 3. Hindari pecahan agar koordinat titiknya bilangan bulat dan mudah diplot di bidang koordinat.</p>
                 </div>
               </div>
             )}
