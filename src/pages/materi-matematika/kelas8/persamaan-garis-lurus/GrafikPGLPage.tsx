@@ -430,6 +430,42 @@ const GrafikPGLPage = () => {
                   <EquasiGarisLurusAnim />
                 </div>
 
+                {/* ── Jembatan deskripsi ke Laboratorium ── */}
+                <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg,rgba(6,182,212,0.08) 0%,rgba(139,92,246,0.08) 50%,rgba(16,185,129,0.06) 100%)", border: "1px solid rgba(6,182,212,0.25)" }}>
+                  <div className="px-4 py-3 flex items-center gap-2" style={{ background: "linear-gradient(90deg,rgba(6,182,212,0.15),rgba(139,92,246,0.10))", borderBottom: "1px solid rgba(6,182,212,0.15)" }}>
+                    <span className="text-base">🔭</span>
+                    <p className="font-body font-bold text-cyan-200 text-xs tracking-wide uppercase">Eksplorasi Lebih Lanjut</p>
+                  </div>
+                  <div className="px-4 py-4 space-y-2">
+                    <p className="text-sm font-body text-white/85 leading-relaxed">
+                      Kamu sudah melihat bagaimana berbagai persamaan menghasilkan bentuk kurva yang berbeda-beda —
+                      ada yang berupa <span className="text-cyan-300 font-semibold">garis lurus</span>,
+                      ada yang melengkung menjadi <span className="text-violet-300 font-semibold">parabola</span>,
+                      ada yang berbentuk <span className="text-emerald-300 font-semibold">hiperbola</span>, dan lainnya.
+                    </p>
+                    <p className="text-sm font-body text-white/75 leading-relaxed">
+                      Untuk lebih jelas memahami dan membandingkan berbagai jenis kurva tersebut,
+                      kamu bisa <strong className="text-white">menginput langsung persamaan apa saja</strong> pada
+                      <span className="text-cyan-300 font-semibold"> Laboratorium Grafik Interaktif</span> di bawah ini —
+                      grafiknya akan tergambar secara <em>real-time</em> sehingga kamu dapat mengamati perbedaan bentuknya secara langsung!
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {[
+                        { label: "y = 2x + 1",   warna: "#22d3ee", ket: "Garis Lurus" },
+                        { label: "y = x² − 3",   warna: "#a78bfa", ket: "Parabola" },
+                        { label: "y = 1/x",       warna: "#f87171", ket: "Hiperbola" },
+                        { label: "y = √x",        warna: "#6ee7b7", ket: "Akar" },
+                      ].map(({ label, warna, ket }) => (
+                        <div key={label} className="flex items-center gap-1.5 px-2.5 py-1 rounded-full" style={{ background: `${warna}15`, border: `1px solid ${warna}35` }}>
+                          <span className="font-mono text-[11px] font-bold" style={{ color: warna }}>{label}</span>
+                          <span className="text-[10px] text-white/40 font-body">({ket})</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-[11px] text-white/45 font-body italic">↓ Coba masukkan salah satu persamaan di atas ke laboratorium berikut!</p>
+                  </div>
+                </div>
+
                 {/* ── GeoGebra-style interactive graphing tool ── */}
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
