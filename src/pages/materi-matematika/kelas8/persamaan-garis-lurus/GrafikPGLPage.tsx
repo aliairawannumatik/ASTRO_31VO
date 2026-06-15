@@ -12,16 +12,18 @@ const W = 200, H = 160, MX = 100, MY = 80, SC = 16;
 const toX = (x: number) => MX + x * SC;
 const toY = (y: number) => MY - y * SC;
 
-const CoordSystem = ({ children, w = W, h = H, label = "" }: { children?: React.ReactNode; w?: number; h?: number; label?: string }) => {
+const CoordSystem = ({ children, w = W, h = H, label = "", showNumbers = false }: { children?: React.ReactNode; w?: number; h?: number; label?: string; showNumbers?: boolean }) => {
   const mx = w / 2, my = h / 2;
   const uid = React.useId().replace(/:/g, "");
+  const xStep = w / 12, yStep = h / 10;
+  const ticks = [-4, -2, 2, 4];
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full rounded-xl" style={{ maxHeight: 180, background: "rgba(15,23,42,0.7)" }}>
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full rounded-xl" style={{ maxHeight: showNumbers ? 220 : 180, background: "rgba(15,23,42,0.7)" }}>
       {/* grid */}
       {[-5,-4,-3,-2,-1,1,2,3,4,5].map(v => (
         <g key={v}>
-          <line x1={mx + v*(w/12)} y1={4} x2={mx + v*(w/12)} y2={h-4} stroke="#1e293b" strokeWidth="1" />
-          <line x1={4} y1={my - v*(h/10)} x2={w-4} y2={my - v*(h/10)} stroke="#1e293b" strokeWidth="1" />
+          <line x1={mx + v*xStep} y1={4} x2={mx + v*xStep} y2={h-4} stroke="#1e293b" strokeWidth="1" />
+          <line x1={4} y1={my - v*yStep} x2={w-4} y2={my - v*yStep} stroke="#1e293b" strokeWidth="1" />
         </g>
       ))}
       {/* axes */}
@@ -34,9 +36,17 @@ const CoordSystem = ({ children, w = W, h = H, label = "" }: { children?: React.
       </defs>
       <text x={w-10} y={my+12} fill="#64748b" fontSize="9">x</text>
       <text x={mx+4} y={12} fill="#64748b" fontSize="9">y</text>
-      {/* origin */}
       <text x={mx+3} y={my+11} fill="#475569" fontSize="7">O</text>
       {label && <text x={6} y={14} fill="#94a3b8" fontSize="8">{label}</text>}
+      {/* axis numbers */}
+      {showNumbers && ticks.map(v => (
+        <g key={`num-${v}`}>
+          {/* x-axis numbers */}
+          <text x={mx + v*xStep - (v < 0 ? 6 : 3)} y={my + 11} fill="#64748b" fontSize="7">{v}</text>
+          {/* y-axis numbers */}
+          <text x={mx - 14} y={my - v*yStep + 3} fill="#64748b" fontSize="7">{v}</text>
+        </g>
+      ))}
       {children}
     </svg>
   );
@@ -255,16 +265,40 @@ const GrafikPGLPage = () => {
 
                 {/* Contoh Metode Titik Potong Sumbu */}
                 <p className="text-sm font-bold text-white/90 font-body">📖 Contoh Soal</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-5">
 
                   {/* Contoh 1 */}
                   <div className="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-cyan-300 font-body">Contoh 1: <span className="font-mono">y = 2x + 6</span></p>
-                    <div className="space-y-1 text-xs font-body text-white/75">
-                      <p><span className="text-cyan-300 font-semibold">Sb-x</span> (y=0): <InlineMath math="0=2x+6 \Rightarrow x=-3" /> → <strong className="text-yellow-300">(-3, 0)</strong></p>
-                      <p><span className="text-violet-300 font-semibold">Sb-y</span> (x=0): <InlineMath math="y=2(0)+6=6" /> → <strong className="text-yellow-300">(0, 6)</strong></p>
+                    <p className="text-xs font-bold text-cyan-300 font-body uppercase tracking-wide">Contoh 1</p>
+                    <div className="bg-cyan-900/20 border border-cyan-500/20 rounded-lg p-3">
+                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = 2x + 6" />!</p>
                     </div>
-                    <CoordSystem w={W} h={H} label="y = 2x + 6">
+                    <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs font-body border-collapse">
+                        <thead><tr className="bg-cyan-900/40">
+                          <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">x</th>
+                          <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">y</th>
+                          <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Titik</th>
+                          <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Keterangan</th>
+                        </tr></thead>
+                        <tbody>
+                          <tr className="bg-slate-800/30">
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-3</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(-3, 0)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-x (y = 0)</td>
+                          </tr>
+                          <tr className="bg-slate-700/20">
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">6</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(0, 6)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-y (x = 0)</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <CoordSystem w={W} h={H} label="y = 2x + 6" showNumbers>
                       <polyline
                         points={[[-5,-4],[-4,-2],[-3,0],[-2,2],[-1,4],[0,6]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
                         fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round"
@@ -280,12 +314,36 @@ const GrafikPGLPage = () => {
 
                   {/* Contoh 2 */}
                   <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-violet-300 font-body">Contoh 2: <span className="font-mono">2x − 3y = 12</span></p>
-                    <div className="space-y-1 text-xs font-body text-white/75">
-                      <p><span className="text-cyan-300 font-semibold">Sb-x</span> (y=0): <InlineMath math="2x=12 \Rightarrow x=6" /> → <strong className="text-yellow-300">(6, 0)</strong></p>
-                      <p><span className="text-violet-300 font-semibold">Sb-y</span> (x=0): <InlineMath math="-3y=12 \Rightarrow y=-4" /> → <strong className="text-yellow-300">(0, -4)</strong></p>
+                    <p className="text-xs font-bold text-violet-300 font-body uppercase tracking-wide">Contoh 2</p>
+                    <div className="bg-violet-900/20 border border-violet-500/20 rounded-lg p-3">
+                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="2x - 3y = 12" />!</p>
                     </div>
-                    <CoordSystem w={W} h={H} label="2x − 3y = 12">
+                    <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs font-body border-collapse">
+                        <thead><tr className="bg-violet-900/40">
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">x</th>
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">y</th>
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">Titik</th>
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">Keterangan</th>
+                        </tr></thead>
+                        <tbody>
+                          <tr className="bg-slate-800/30">
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">6</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(6, 0)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-x (y = 0)</td>
+                          </tr>
+                          <tr className="bg-slate-700/20">
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-4</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(0, -4)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-y (x = 0)</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <CoordSystem w={W} h={H} label="2x − 3y = 12" showNumbers>
                       <polyline
                         points={[[-1,-14/3],[0,-4],[3,-2],[6,0]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
                         fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round"
@@ -335,16 +393,40 @@ const GrafikPGLPage = () => {
 
                 {/* Contoh Metode Dua Titik Acak */}
                 <p className="text-sm font-bold text-white/90 font-body">📖 Contoh Soal</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-5">
 
                   {/* Contoh 1 */}
                   <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-green-300 font-body">Contoh 1: <span className="font-mono">y = 3x − 2</span></p>
-                    <div className="space-y-1 text-xs font-body text-white/75">
-                      <p><span className="text-green-300 font-semibold">x = 0</span>: <InlineMath math="y=3(0)-2=-2" /> → <strong className="text-yellow-300">(0, -2)</strong></p>
-                      <p><span className="text-green-300 font-semibold">x = 2</span>: <InlineMath math="y=3(2)-2=4" /> → <strong className="text-yellow-300">(2, 4)</strong></p>
+                    <p className="text-xs font-bold text-green-300 font-body uppercase tracking-wide">Contoh 1</p>
+                    <div className="bg-green-900/20 border border-green-500/20 rounded-lg p-3">
+                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = 3x - 2" />!</p>
                     </div>
-                    <CoordSystem w={W} h={H} label="y = 3x − 2">
+                    <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs font-body border-collapse">
+                        <thead><tr className="bg-green-900/40">
+                          <th className="border border-green-500/30 px-3 py-2 text-green-200">x</th>
+                          <th className="border border-green-500/30 px-3 py-2 text-green-200">y</th>
+                          <th className="border border-green-500/30 px-3 py-2 text-green-200">Titik</th>
+                          <th className="border border-green-500/30 px-3 py-2 text-green-200 text-left">Keterangan</th>
+                        </tr></thead>
+                        <tbody>
+                          <tr className="bg-slate-800/30">
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-2</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(0, -2)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik pertama (x = 0 dipilih)</td>
+                          </tr>
+                          <tr className="bg-slate-700/20">
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">2</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">4</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(2, 4)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik kedua (x = 2 dipilih)</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <CoordSystem w={W} h={H} label="y = 3x − 2" showNumbers>
                       <polyline
                         points={[[-1,-5],[0,-2],[1,1],[2,4],[3,7]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
                         fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round"
@@ -360,12 +442,36 @@ const GrafikPGLPage = () => {
 
                   {/* Contoh 2 */}
                   <div className="bg-slate-800/60 border border-orange-500/30 rounded-xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-orange-300 font-body">Contoh 2: <span className="font-mono">y = −x + 3</span></p>
-                    <div className="space-y-1 text-xs font-body text-white/75">
-                      <p><span className="text-orange-300 font-semibold">x = 1</span>: <InlineMath math="y=-1+3=2" /> → <strong className="text-yellow-300">(1, 2)</strong></p>
-                      <p><span className="text-orange-300 font-semibold">x = 4</span>: <InlineMath math="y=-4+3=-1" /> → <strong className="text-yellow-300">(4, -1)</strong></p>
+                    <p className="text-xs font-bold text-orange-300 font-body uppercase tracking-wide">Contoh 2</p>
+                    <div className="bg-orange-900/20 border border-orange-500/20 rounded-lg p-3">
+                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = -x + 3" />!</p>
                     </div>
-                    <CoordSystem w={W} h={H} label="y = −x + 3">
+                    <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs font-body border-collapse">
+                        <thead><tr className="bg-orange-900/40">
+                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200">x</th>
+                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200">y</th>
+                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200">Titik</th>
+                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200 text-left">Keterangan</th>
+                        </tr></thead>
+                        <tbody>
+                          <tr className="bg-slate-800/30">
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">1</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">2</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(1, 2)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik pertama (x = 1 dipilih)</td>
+                          </tr>
+                          <tr className="bg-slate-700/20">
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">4</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-1</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(4, -1)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik kedua (x = 4 dipilih)</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <CoordSystem w={W} h={H} label="y = −x + 3" showNumbers>
                       <polyline
                         points={[[-1,4],[0,3],[1,2],[2,1],[3,0],[4,-1],[5,-2]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
                         fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round"
