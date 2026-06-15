@@ -14,9 +14,8 @@ const questions: Q[] = [
     type: "mixed", mathContent: "a^m \\times a^n = a^{m+n}",
     parts: [
       { label: "a.", math: "3^4 \\times 3^5 = 3^{\\square} = \\ldots" },
-      { label: "b.", math: "5^2 \\times 5^6 = \\ldots" },
-      { label: "c.", math: "a^3 \\times a^7 = \\ldots" },
-      { label: "d.", math: "x^4 \\times x^2 \\times x = \\ldots" },
+      { label: "b.", math: "a^3 \\times a^7 = \\ldots" },
+      { label: "c.", math: "x^4 \\times x^2 \\times x = \\ldots" },
     ],
   }),
   Qn(2, "Sifat Pembagian Pangkat Basis Sama – UN", {
@@ -71,9 +70,7 @@ const questions: Q[] = [
   Qn(8, "Soal TKA – Menyederhanakan Eksponen Besar", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "\\frac{6^5}{6^2} = \\ldots" },
-      { label: "b.", math: "\\frac{10^8}{10^3 \\times 10^2} = \\ldots" },
-      { label: "c.", math: "\\frac{2^{15}}{4^5} = \\ldots" },
+      { label: "a.", math: "\\frac{2^{15}}{4^5} = \\ldots" },
     ],
   }),
   Qn(9, "Soal UN – Ekspresi Variabel Gabungan", {
