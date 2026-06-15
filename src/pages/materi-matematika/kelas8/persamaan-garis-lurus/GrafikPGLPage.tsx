@@ -160,20 +160,22 @@ const GrafikPGLPage = () => {
                     <thead><tr className="bg-cyan-900/40">
                       <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Persamaan</th>
                       <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Gradien (m)</th>
+                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Potong sb-x</th>
                       <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Potong sb-y (c)</th>
                       <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Arah</th>
                     </tr></thead>
                     <tbody>
                       {[
-                        ["y = 3x + 2", "3", "2", "↗ Naik"],
-                        ["y = -2x + 5", "-2", "5", "↘ Turun"],
-                        ["y = ½x - 1", "½", "-1", "↗ Naik landai"],
-                        ["y = 4", "0", "4", "→ Horizontal"],
-                      ].map(([p,m,c,a],i) => (
+                        ["y = 3x + 2",  "3",          "(-⅔, 0)",  "(0, 2)",  "↗ Naik"],
+                        ["y = -2x + 5", "-2",         "(5/2, 0)", "(0, 5)",  "↘ Turun"],
+                        ["x = -5",      "∞ tak hingga", "(-5, 0)", "—",       "↕ Vertikal"],
+                        ["y = 4",       "0",           "—",        "(0, 4)",  "→ Horizontal"],
+                      ].map(([p,m,sx,sy,a],i) => (
                         <tr key={i} className={i%2===0?"bg-slate-800/30":"bg-slate-700/20"}>
                           <td className="border border-white/10 px-3 py-2 text-cyan-300 font-mono">{p}</td>
                           <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center">{m}</td>
-                          <td className="border border-white/10 px-3 py-2 text-green-300 text-center">{c}</td>
+                          <td className="border border-white/10 px-3 py-2 text-orange-300 text-center">{sx}</td>
+                          <td className="border border-white/10 px-3 py-2 text-green-300 text-center">{sy}</td>
                           <td className="border border-white/10 px-3 py-2 text-white/60 text-center">{a}</td>
                         </tr>
                       ))}
