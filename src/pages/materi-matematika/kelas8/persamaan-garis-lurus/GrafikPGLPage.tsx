@@ -6,6 +6,7 @@ import { BookOpen, Lightbulb, Target, Layers, TrendingUp } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import GeoGebraGrapher from "@/components/GeoGebraGrapher";
+import EquasiGarisLurusAnim from "@/components/EquasiGarisLurusAnim";
 
 /* ─── SVG helpers ─── */
 const W = 200, H = 160, MX = 100, MY = 80, SC = 16;
@@ -230,6 +231,17 @@ const GrafikPGLPage = () => {
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">Gambar Garis Lurus di Bidang Koordinat!</p>
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Persamaan Garis Lurus · Materi Matematika</p>
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ANIMASI INTERAKTIF — paling atas */}
+          <div className="bg-card/80 backdrop-blur border border-cyan-500/25 rounded-xl overflow-hidden">
+            <div className="w-full flex items-center gap-3 px-5 py-4 border-b border-white/10">
+              <span className="text-violet-400 text-lg">🎬</span>
+              <span className="font-body font-semibold text-white">Persamaan Garis Lurus vs. Bukan — Animasi Interaktif</span>
+            </div>
+            <div className="px-5 pb-5 pt-4">
+              <EquasiGarisLurusAnim />
+            </div>
+          </div>
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
