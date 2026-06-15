@@ -92,7 +92,21 @@ const questions: Q[] = [
       { label: "h.", math: "\\frac{4\\sqrt{15}}{2\\sqrt{5}} = \\ldots" },
     ],
   }),
-  Qn(5, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
+  Qn(5, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
+    type: "mixed",
+    parts: [
+      { label: "a.", math: "\\sqrt{2}(\\sqrt{8}+\\sqrt{2}) = \\ldots" },
+      { label: "b.", math: "(\\sqrt{3}+1)(\\sqrt{3}-1) = \\ldots" },
+      { label: "c.", math: "(\\sqrt{5}+2)^2 = \\ldots" },
+      { label: "d.", math: "(\\sqrt{7}+\\sqrt{3})(\\sqrt{7}-\\sqrt{3}) = \\ldots" },
+      { label: "e.", math: "(\\sqrt{10}+\\sqrt{6})(\\sqrt{10}-\\sqrt{6}) = \\ldots" },
+      { label: "f.", math: "(2+\\sqrt{3})(2-\\sqrt{3}) = \\ldots" },
+      { label: "g.", math: "(2+\\sqrt{3})(3+\\sqrt{3}) = \\ldots" },
+      { label: "h.", math: "(\\sqrt{5}-2)(\\sqrt{5}+4) = \\ldots" },
+      { label: "i.", math: "(3\\sqrt{2}-1)^2 = \\ldots" },
+    ],
+  }),
+  Qn(6, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{6}{\\sqrt{3}} = \\ldots" },
@@ -107,7 +121,7 @@ const questions: Q[] = [
       { label: "j.", math: "\\frac{\\sqrt{75}+\\sqrt{48}}{\\sqrt{3}} = \\ldots" },
     ],
   }),
-  Qn(6, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
+  Qn(7, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
     type: "mixed",
     parts: [
       { label: "a.", math: "\\frac{1}{2+\\sqrt{3}} = \\ldots" },
@@ -118,20 +132,6 @@ const questions: Q[] = [
       { label: "f.", math: "\\frac{\\sqrt{6}-\\sqrt{2}}{\\sqrt{6}+\\sqrt{2}} = \\ldots" },
       { label: "g.", math: "\\frac{\\sqrt{2}+1}{\\sqrt{2}-1} = \\ldots" },
       { label: "h.", math: "\\frac{4}{\\sqrt{5}+\\sqrt{3}} = \\ldots" },
-    ],
-  }),
-  Qn(7, "Perkalian & Distribusi Bentuk Akar – UN/ANBK", {
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "\\sqrt{2}(\\sqrt{8}+\\sqrt{2}) = \\ldots" },
-      { label: "b.", math: "(\\sqrt{3}+1)(\\sqrt{3}-1) = \\ldots" },
-      { label: "c.", math: "(\\sqrt{5}+2)^2 = \\ldots" },
-      { label: "d.", math: "(\\sqrt{7}+\\sqrt{3})(\\sqrt{7}-\\sqrt{3}) = \\ldots" },
-      { label: "e.", math: "(\\sqrt{10}+\\sqrt{6})(\\sqrt{10}-\\sqrt{6}) = \\ldots" },
-      { label: "f.", math: "(2+\\sqrt{3})(2-\\sqrt{3}) = \\ldots" },
-      { label: "g.", math: "(2+\\sqrt{3})(3+\\sqrt{3}) = \\ldots" },
-      { label: "h.", math: "(\\sqrt{5}-2)(\\sqrt{5}+4) = \\ldots" },
-      { label: "i.", math: "(3\\sqrt{2}-1)^2 = \\ldots" },
     ],
   }),
 ];
