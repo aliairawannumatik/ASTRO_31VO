@@ -918,20 +918,11 @@ const GrafikPGLPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
-            <div className="px-5 pb-5 pt-4 space-y-1">
-              <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
-              <MCQGrafik1 />
-            </div>
-          </div>
-
-          {/* CONTOH 2 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
-                <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">📝 Soal</p>
+                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
+                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
                   <p className="text-sm text-white/85 font-body">Persamaan garis: <InlineMath math="3x - 2y + 6 = 0" />. Tentukan: a) titik potong sumbu-x dan sumbu-y, b) gambarkan grafiknya!</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
@@ -970,13 +961,22 @@ const GrafikPGLPage = () => {
                         ))}
                       </CoordSystem>
                     </div>
-                    <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-lg p-3">
-                      <p className="text-sm font-bold text-yellow-300 font-body">✅ Sb-x = (−2, 0), Sb-y = (0, 3). Gradien m = 3/2, garis naik</p>
+                    <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
+                      <p className="text-sm font-bold text-green-300 font-body">✅ Sb-x = (−2, 0), Sb-y = (0, 3). Gradien m = 3/2, garis naik</p>
                     </div>
                   </div>
                 </div>
               </div>
             )}
+          </div>
+
+          {/* CONTOH 2 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
+            <div className="px-5 pb-5 pt-4 space-y-1">
+              <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
+              <MCQGrafik1 />
+            </div>
           </div>
 
           {/* CONTOH 3 */}
