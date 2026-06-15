@@ -54,15 +54,15 @@ const questions: Q[] = [
   Qn(2, "Menyederhanakan Bentuk Akar – UN/ANBK/TKA", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "\\sqrt{50} = \\sqrt{25 \\times 2} = 5\\sqrt{2}" },
+      { label: "a.", math: "\\sqrt{50} = \\ldots" },
       { label: "b.", math: "\\sqrt{18} = \\ldots" },
       { label: "c.", math: "\\sqrt{200} = \\ldots" },
       { label: "d.", math: "\\sqrt{48} = \\ldots" },
       { label: "e.", math: "\\sqrt{75} = \\ldots" },
-      { label: "f.", math: "\\sqrt{0{,}25} = \\ldots" },
-      { label: "g.", math: "\\sqrt{108} = \\ldots" },
-      { label: "h.", math: "\\sqrt{147} = \\ldots" },
-      { label: "i.", math: "\\sqrt{1{,}44} = \\ldots" },
+      { label: "f.", math: "\\sqrt{108} = \\ldots" },
+      { label: "g.", math: "\\sqrt{147} = \\ldots" },
+      { label: "h.", math: "\\sqrt{1{,}44} = \\ldots" },
+      { label: "i.", math: "\\sqrt{0{,}25} = \\ldots" },
     ],
   }),
   Qn(3, "Operasi Penjumlahan & Pengurangan Bentuk Akar – UN/ANBK/TKA", {
@@ -72,11 +72,11 @@ const questions: Q[] = [
       { label: "b.", math: "7\\sqrt{3} - 4\\sqrt{3} = \\ldots" },
       { label: "c.", math: "2\\sqrt{5} + 3\\sqrt{5} - \\sqrt{5} = \\ldots" },
       { label: "d.", math: "\\sqrt{3} + \\sqrt{12} + \\sqrt{27} = \\ldots" },
-      { label: "e.", math: "\\sqrt{8} - \\sqrt{32} + \\sqrt{50} = \\ldots" },
-      { label: "f.", math: "2\\sqrt{45} - 3\\sqrt{20} + \\sqrt{5} = \\ldots" },
-      { label: "g.", math: "\\sqrt{8} + \\sqrt{2} = 2\\sqrt{2} + \\sqrt{2} = \\ldots" },
-      { label: "h.", math: "\\sqrt{12} + \\sqrt{27} = \\ldots" },
-      { label: "i.", math: "\\sqrt{50} - \\sqrt{18} + \\sqrt{8} = \\ldots" },
+      { label: "e.", math: "2\\sqrt{8} - \\sqrt{32} + \\sqrt{50} = \\ldots" },
+      { label: "f.", math: "2\\sqrt{45} - 3\\sqrt{20} + 4\\sqrt{5} = \\ldots" },
+      { label: "g.", math: "3\\sqrt{8} + 2\\sqrt{2} = \\ldots" },
+      { label: "h.", math: "2\\sqrt{12} + 3\\sqrt{27} = \\ldots" },
+      { label: "i.", math: "2\\sqrt{50} - \\sqrt{18} + 3\\sqrt{8} = \\ldots" },
     ],
   }),
   Qn(4, "Perkalian & Pembagian Bentuk Akar – UN/ANBK/TKA", {
@@ -95,10 +95,10 @@ const questions: Q[] = [
   Qn(5, "Merasionalkan Penyebut & Operasi Campuran – UN/ANBK/TKA", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "\\frac{6}{\\sqrt{3}} = \\frac{6\\sqrt{3}}{3} = \\ldots" },
+      { label: "a.", math: "\\frac{6}{\\sqrt{3}} = \\ldots" },
       { label: "b.", math: "\\frac{10}{\\sqrt{5}} = \\ldots" },
       { label: "c.", math: "\\frac{4}{\\sqrt{2}} = \\ldots" },
-      { label: "d.", math: "\\frac{\\sqrt{3}}{\\sqrt{5}} = \\frac{\\sqrt{15}}{5}" },
+      { label: "d.", math: "\\frac{\\sqrt{3}}{\\sqrt{5}} = \\ldots" },
       { label: "e.", math: "\\frac{2\\sqrt{2}}{\\sqrt{6}} = \\ldots" },
       { label: "f.", math: "\\frac{3\\sqrt{5}}{\\sqrt{15}} = \\ldots" },
       { label: "g.", math: "\\frac{5}{2\\sqrt{3}} = \\ldots" },
@@ -110,7 +110,7 @@ const questions: Q[] = [
   Qn(6, "Merasionalkan Penyebut Binomial & Tingkat Lanjut – UN/TKA", {
     type: "mixed",
     parts: [
-      { label: "a.", math: "\\frac{1}{2+\\sqrt{3}} = \\frac{2-\\sqrt{3}}{(2)^2-(\\sqrt{3})^2} = \\ldots" },
+      { label: "a.", math: "\\frac{1}{2+\\sqrt{3}} = \\ldots" },
       { label: "b.", math: "\\frac{4}{3-\\sqrt{5}} = \\ldots" },
       { label: "c.", math: "\\frac{6}{\\sqrt{7}+1} = \\ldots" },
       { label: "d.", math: "\\frac{\\sqrt{5}+\\sqrt{3}}{\\sqrt{5}-\\sqrt{3}} = \\ldots" },
