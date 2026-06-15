@@ -252,6 +252,53 @@ const GrafikPGLPage = () => {
                     ))}
                   </div>
                 </div>
+
+                {/* Contoh Metode Titik Potong Sumbu */}
+                <p className="text-sm font-bold text-white/90 font-body">📖 Contoh Soal</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                  {/* Contoh 1 */}
+                  <div className="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+                    <p className="text-xs font-bold text-cyan-300 font-body">Contoh 1: <span className="font-mono">y = 2x + 6</span></p>
+                    <div className="space-y-1 text-xs font-body text-white/75">
+                      <p><span className="text-cyan-300 font-semibold">Sb-x</span> (y=0): <InlineMath math="0=2x+6 \Rightarrow x=-3" /> → <strong className="text-yellow-300">(-3, 0)</strong></p>
+                      <p><span className="text-violet-300 font-semibold">Sb-y</span> (x=0): <InlineMath math="y=2(0)+6=6" /> → <strong className="text-yellow-300">(0, 6)</strong></p>
+                    </div>
+                    <CoordSystem w={W} h={H} label="y = 2x + 6">
+                      <polyline
+                        points={[[-5,-4],[-4,-2],[-3,0],[-2,2],[-1,4],[0,6]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
+                        fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round"
+                      />
+                      {[[-3,0],[0,6]].map(([x,y]) => (
+                        <g key={`sp1-${x}-${y}`}>
+                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
+                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
+                        </g>
+                      ))}
+                    </CoordSystem>
+                  </div>
+
+                  {/* Contoh 2 */}
+                  <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-4 space-y-3">
+                    <p className="text-xs font-bold text-violet-300 font-body">Contoh 2: <span className="font-mono">2x − 3y = 12</span></p>
+                    <div className="space-y-1 text-xs font-body text-white/75">
+                      <p><span className="text-cyan-300 font-semibold">Sb-x</span> (y=0): <InlineMath math="2x=12 \Rightarrow x=6" /> → <strong className="text-yellow-300">(6, 0)</strong></p>
+                      <p><span className="text-violet-300 font-semibold">Sb-y</span> (x=0): <InlineMath math="-3y=12 \Rightarrow y=-4" /> → <strong className="text-yellow-300">(0, -4)</strong></p>
+                    </div>
+                    <CoordSystem w={W} h={H} label="2x − 3y = 12">
+                      <polyline
+                        points={[[-1,-14/3],[0,-4],[3,-2],[6,0]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
+                        fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round"
+                      />
+                      {[[6,0],[0,-4]].map(([x,y]) => (
+                        <g key={`sp2-${x}-${y}`}>
+                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
+                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
+                        </g>
+                      ))}
+                    </CoordSystem>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -284,6 +331,53 @@ const GrafikPGLPage = () => {
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="text-xs text-yellow-200 font-body"><strong>💡 Tips:</strong> Pilih nilai x yang mudah dihitung, misalnya x = 0, 1, 2, atau 3. Hindari pecahan agar koordinat titiknya bilangan bulat dan mudah diplot di bidang koordinat.</p>
+                </div>
+
+                {/* Contoh Metode Dua Titik Acak */}
+                <p className="text-sm font-bold text-white/90 font-body">📖 Contoh Soal</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                  {/* Contoh 1 */}
+                  <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4 space-y-3">
+                    <p className="text-xs font-bold text-green-300 font-body">Contoh 1: <span className="font-mono">y = 3x − 2</span></p>
+                    <div className="space-y-1 text-xs font-body text-white/75">
+                      <p><span className="text-green-300 font-semibold">x = 0</span>: <InlineMath math="y=3(0)-2=-2" /> → <strong className="text-yellow-300">(0, -2)</strong></p>
+                      <p><span className="text-green-300 font-semibold">x = 2</span>: <InlineMath math="y=3(2)-2=4" /> → <strong className="text-yellow-300">(2, 4)</strong></p>
+                    </div>
+                    <CoordSystem w={W} h={H} label="y = 3x − 2">
+                      <polyline
+                        points={[[-1,-5],[0,-2],[1,1],[2,4],[3,7]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
+                        fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round"
+                      />
+                      {[[0,-2],[2,4]].map(([x,y]) => (
+                        <g key={`ta1-${x}-${y}`}>
+                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
+                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
+                        </g>
+                      ))}
+                    </CoordSystem>
+                  </div>
+
+                  {/* Contoh 2 */}
+                  <div className="bg-slate-800/60 border border-orange-500/30 rounded-xl p-4 space-y-3">
+                    <p className="text-xs font-bold text-orange-300 font-body">Contoh 2: <span className="font-mono">y = −x + 3</span></p>
+                    <div className="space-y-1 text-xs font-body text-white/75">
+                      <p><span className="text-orange-300 font-semibold">x = 1</span>: <InlineMath math="y=-1+3=2" /> → <strong className="text-yellow-300">(1, 2)</strong></p>
+                      <p><span className="text-orange-300 font-semibold">x = 4</span>: <InlineMath math="y=-4+3=-1" /> → <strong className="text-yellow-300">(4, -1)</strong></p>
+                    </div>
+                    <CoordSystem w={W} h={H} label="y = −x + 3">
+                      <polyline
+                        points={[[-1,4],[0,3],[1,2],[2,1],[3,0],[4,-1],[5,-2]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
+                        fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round"
+                      />
+                      {[[1,2],[4,-1]].map(([x,y]) => (
+                        <g key={`ta2-${x}-${y}`}>
+                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
+                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
+                        </g>
+                      ))}
+                    </CoordSystem>
+                  </div>
                 </div>
               </div>
             )}
