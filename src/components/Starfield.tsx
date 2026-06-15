@@ -277,10 +277,8 @@ const OceanCanvas = () => {
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
 };
 
-// ── 6. Sunset: floating embers / fireflies ─────────────────────
-// Note: gradient creation moved out of per-frame loop to avoid GC pressure.
-// Each ember uses a simple solid circle instead of createRadialGradient per frame.
-const SunsetCanvas = () => {
+// ── 6. Sky: drifting fluffy clouds ────────────────────────────
+const CloudCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current; if (!canvas) return;
@@ -288,47 +286,53 @@ const SunsetCanvas = () => {
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener("resize", resize);
-    const colors = ["#fbbf24","#f97316","#ef4444","#fcd34d","#fb923c","#f87171","#fde68a","#fdba74"];
-    const embers = Array.from({ length: 60 }, () => ({
+
+    function drawCloud(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, opacity: number) {
+      ctx.save();
+      ctx.globalAlpha = opacity;
+      ctx.fillStyle = "rgba(255,255,255,0.92)";
+      ctx.shadowColor = "rgba(180,220,255,0.6)";
+      ctx.shadowBlur = 18;
+      const h = w * 0.38;
+      const bumps = [
+        { dx: 0,        dy: 0,      r: w * 0.22 },
+        { dx: w * 0.18, dy: -h * 0.35, r: w * 0.18 },
+        { dx: -w * 0.17,dy: -h * 0.25, r: w * 0.15 },
+        { dx: w * 0.35, dy: -h * 0.10, r: w * 0.13 },
+        { dx: -w * 0.32,dy: -h * 0.05, r: w * 0.12 },
+        { dx: w * 0.28, dy:  h * 0.08,  r: w * 0.14 },
+        { dx: -w * 0.28,dy:  h * 0.08,  r: w * 0.14 },
+      ];
+      bumps.forEach(b => {
+        ctx.beginPath();
+        ctx.arc(x + b.dx, y + b.dy, b.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+
+    const clouds = Array.from({ length: 9 }, (_, i) => ({
       x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight + window.innerHeight * 0.2,
-      r: Math.random() * 3 + 1,
-      speed: Math.random() * 1.4 + 0.4,
-      drift: Math.random() * 1.4 - 0.7,
-      opacity: Math.random() * 0.75 + 0.20,
-      twinkleSpeed: Math.random() * 0.038 + 0.01,
-      twinkleDir: 1,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      phase: Math.random() * Math.PI * 2,
-      wobbleSpeed: Math.random() * 0.018 + 0.008,
+      y: Math.random() * window.innerHeight * 0.65,
+      w: Math.random() * 130 + 70,
+      speed: Math.random() * 0.20 + 0.06,
+      opacity: Math.random() * 0.38 + 0.22,
+      bobPhase: Math.random() * Math.PI * 2,
+      bobSpeed: Math.random() * 0.004 + 0.002,
+      bobAmt: Math.random() * 4 + 2,
     }));
+
     let frame = 0;
     const stop = startLoop(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       frame++;
-      embers.forEach((e) => {
-        e.y -= e.speed;
-        e.x += e.drift + Math.sin(frame * e.wobbleSpeed + e.phase) * 0.9;
-        e.opacity += e.twinkleSpeed * e.twinkleDir;
-        if (e.opacity >= 0.95 || e.opacity <= 0.08) e.twinkleDir *= -1;
-        if (e.y < -e.r * 2) { e.y = canvas.height + e.r; e.x = Math.random() * canvas.width; }
-        if (e.x > canvas.width + 12) e.x = -12;
-        if (e.x < -12) e.x = canvas.width + 12;
-        ctx.save();
-        ctx.globalAlpha = e.opacity * 0.4;
-        ctx.beginPath();
-        ctx.arc(e.x, e.y, e.r * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = e.color;
-        ctx.fill();
-        ctx.globalAlpha = e.opacity;
-        ctx.beginPath();
-        ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
-        ctx.fillStyle = "#fff";
-        ctx.fill();
-        ctx.globalAlpha = 1;
-        ctx.restore();
+      clouds.forEach((c) => {
+        c.x += c.speed;
+        if (c.x - c.w > canvas.width) { c.x = -c.w * 1.5; c.y = Math.random() * canvas.height * 0.65; }
+        const bobY = c.y + Math.sin(frame * c.bobSpeed + c.bobPhase) * c.bobAmt;
+        drawCloud(ctx, c.x, bobY, c.w, c.opacity);
       });
-    });
+    }, 30);
     return () => { stop(); window.removeEventListener("resize", resize); };
   }, []);
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
@@ -342,7 +346,7 @@ const Starfield = () => {
     case "white":   return <WhiteCanvas />;
     case "forest":  return <ForestCanvas />;
     case "ocean":   return <OceanCanvas />;
-    case "sunset":  return null;
+    case "sunset":  return <CloudCanvas />;
     default:        return <StarCanvas />;
   }
 };
