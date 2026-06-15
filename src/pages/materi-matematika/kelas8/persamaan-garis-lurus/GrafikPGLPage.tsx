@@ -414,41 +414,6 @@ const GrafikPGLPage = () => {
                       </div>
                     </div>
 
-                    {/* Perbandingan ✓ vs ✗ */}
-                    <div>
-                      <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest mb-2">Perbandingan Cepat</p>
-                      <div className="space-y-1.5">
-                        {[
-                          { rumus: "y = 2x + 3",     pangkat: "x¹",     status: true,  alasan: "x pangkat 1 → garis lurus" },
-                          { rumus: "ax + by + c = 0", pangkat: "x¹, y¹", status: true,  alasan: "x & y pangkat 1 → garis lurus" },
-                          { rumus: "x/a + y/b = 1",   pangkat: "x¹, y¹", status: true,  alasan: "x & y pangkat 1 → garis lurus" },
-                          { rumus: "y = x² + 1",      pangkat: "x²",     status: false, alasan: "x pangkat 2 → parabola, bukan garis" },
-                          { rumus: "y = 1/x",         pangkat: "x⁻¹",   status: false, alasan: "x pangkat −1 → hiperbola, bukan garis" },
-                        ].map(({ rumus, pangkat, status, alasan }) => (
-                          <div key={rumus} className="flex items-center gap-2 px-3 py-2.5 rounded-xl" style={{
-                            background: status ? "linear-gradient(90deg,rgba(6,182,212,0.12),rgba(16,185,129,0.08))" : "linear-gradient(90deg,rgba(244,63,94,0.12),rgba(220,38,38,0.08))",
-                            border: `1px solid ${status ? "rgba(34,211,238,0.25)" : "rgba(251,113,133,0.25)"}`,
-                          }}>
-                            <div className="w-6 h-6 rounded-full flex items-center justify-center font-bold text-sm shrink-0" style={{
-                              background: status ? "linear-gradient(135deg,#0e7490,#0284c7)" : "linear-gradient(135deg,#9f1239,#dc2626)",
-                            }}>
-                              <span className="text-white text-xs">{status ? "✓" : "✗"}</span>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-1.5 flex-wrap">
-                                <span className="font-mono text-xs font-bold" style={{ color: status ? "#67e8f9" : "#fda4af" }}>{rumus}</span>
-                                <span className="text-[9px] px-1.5 py-0.5 rounded-full font-bold font-body" style={{
-                                  background: status ? "rgba(34,211,238,0.18)" : "rgba(251,113,133,0.18)",
-                                  color: status ? "#22d3ee" : "#fb7185",
-                                }}>{pangkat}</span>
-                              </div>
-                              <p className="text-[10px] font-body text-white/45 mt-0.5">{alasan}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
                     {/* Tips ingat cepat */}
                     <div className="rounded-xl px-4 py-3 flex gap-3 items-start" style={{ background: "linear-gradient(135deg,rgba(234,179,8,0.15),rgba(245,158,11,0.08))", border: "1px solid rgba(250,204,21,0.35)" }}>
                       <span className="text-xl shrink-0 mt-0.5">💡</span>
@@ -461,14 +426,8 @@ const GrafikPGLPage = () => {
                 </div>
 
                 {/* ── Animasi Interaktif: Persamaan Garis Lurus vs Bukan ── */}
-                <div className="rounded-xl border border-violet-500/25 bg-slate-900/50 overflow-hidden">
-                  <div className="flex items-center gap-3 px-4 py-3 border-b border-white/8">
-                    <span className="text-violet-400 text-lg">🎬</span>
-                    <span className="font-body font-semibold text-white text-sm">Persamaan Garis Lurus vs. Bukan — Animasi Interaktif</span>
-                  </div>
-                  <div className="px-4 pb-4 pt-3">
-                    <EquasiGarisLurusAnim />
-                  </div>
+                <div className="rounded-xl border border-violet-500/25 bg-slate-900/50 px-4 pb-4 pt-3">
+                  <EquasiGarisLurusAnim />
                 </div>
 
                 {/* ── GeoGebra-style interactive graphing tool ── */}
