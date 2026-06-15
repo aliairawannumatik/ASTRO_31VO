@@ -982,47 +982,154 @@ const GrafikPGLPage = () => {
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
-            {true && (
-              <div className="px-5 pb-5 space-y-4">
-                <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
-                <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Dua garis <InlineMath math="\ell_1: 2x + y - 6 = 0" /> dan <InlineMath math="\ell_2: x - 2y - 2 = 0" /> digambar pada satu bidang koordinat. Tentukan titik potong kedua garis tersebut, lalu gambarkan!</p>
-                </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                  <p className="text-sm font-semibold text-cyan-300 font-body">🔍 Pembahasan</p>
-                  <div className="space-y-3 text-sm font-body">
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-1">Selesaikan sistem persamaan (eliminasi):</p>
-                      <BlockMath math="\ell_1: 2x + y = 6 \quad \cdots (1)" />
-                      <BlockMath math="\ell_2: x - 2y = 2 \quad \cdots (2)" />
-                      <p className="text-white/60 text-xs">(1)×2: 4x + 2y = 12, kemudian tambahkan dengan (2):</p>
-                      <BlockMath math="5x = 14 \Rightarrow x = \frac{14}{5} = 2{,}8" />
-                      <p className="text-white/60 text-xs">Sub x ke (1):</p>
-                      <BlockMath math="2(2{,}8) + y = 6 \Rightarrow y = 0{,}4" />
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik kedua garis:</p>
-                      <CoordSystem w={W} h={H} label="ℓ₁ dan ℓ₂">
-                        {/* l1: 2x+y=6 → y=6-2x */}
-                        <polyline points={[[-1,8],[0,6],[1,4],[2,2],[3,0],[4,-2]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
-                        {/* l2: x-2y=2 → y=(x-2)/2 */}
-                        <polyline points={[[-2,-2],[0,-1],[2,0],[4,1],[6,2]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
-                        {/* intersection */}
-                        <circle cx={toX(2.8)} cy={toY(0.4)} r="6" fill="#facc15" stroke="#fde047" strokeWidth="2" />
-                        <text x={toX(2.8)+7} y={toY(0.4)-4} fill="#fde047" fontSize="8">(2.8; 0.4)</text>
-                        {/* labels */}
-                        <text x={toX(-0.5)} y={toY(7)} fill="#22d3ee" fontSize="8">ℓ₁</text>
-                        <text x={toX(3.5)} y={toY(0.8)} fill="#f472b6" fontSize="8">ℓ₂</text>
-                      </CoordSystem>
-                    </div>
-                    <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
-                      <p className="text-sm font-bold text-red-300 font-body">✅ Titik potong kedua garis: <InlineMath math="\left(\frac{14}{5},\ \frac{2}{5}\right) = (2{,}8;\ 0{,}4)" /></p>
+            {true && (() => {
+              const W3 = 320, H3 = 280, MX3 = 160, MY3 = 140, SC3 = 22;
+              const tx = (x: number) => MX3 + x * SC3;
+              const ty = (y: number) => MY3 - y * SC3;
+              const ticks3 = [-6,-5,-4,-3,-2,-1,1,2,3,4,5,6];
+              return (
+                <div className="px-5 pb-5 space-y-4">
+                  <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
+                  <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
+                    <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
+                    <p className="text-sm text-white/85 font-body">Dua garis <InlineMath math="\ell_1: x + y = 4" /> dan <InlineMath math="\ell_2: 2x - y = 2" /> digambar pada satu bidang koordinat. Tentukan titik potong kedua garis tersebut, lalu gambarkan!</p>
+                  </div>
+                  <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
+                    <p className="text-sm font-semibold text-cyan-300 font-body">🔍 Pembahasan</p>
+                    <div className="space-y-3 text-sm font-body">
+
+                      {/* Tabel titik potong l1 */}
+                      <div className="bg-slate-800/50 rounded-lg p-3 space-y-2">
+                        <p className="text-cyan-300 font-semibold text-xs">Titik bantu <InlineMath math="\ell_1: x + y = 4" /> <span className="text-white/50">(y = 4 − x)</span></p>
+                        <div className="overflow-x-auto">
+                          <table className="text-xs font-body border-collapse w-full">
+                            <thead><tr className="bg-cyan-900/40">
+                              <th className="border border-cyan-500/30 px-3 py-1.5 text-cyan-200">x</th>
+                              <th className="border border-cyan-500/30 px-3 py-1.5 text-cyan-200">y = 4 − x</th>
+                              <th className="border border-cyan-500/30 px-3 py-1.5 text-cyan-200">Titik</th>
+                            </tr></thead>
+                            <tbody>
+                              <tr className="bg-slate-800/30">
+                                <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">0</td>
+                                <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">4</td>
+                                <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">(0, 4)</td>
+                              </tr>
+                              <tr className="bg-slate-700/20">
+                                <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">4</td>
+                                <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">0</td>
+                                <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">(4, 0)</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      {/* Tabel titik potong l2 */}
+                      <div className="bg-slate-800/50 rounded-lg p-3 space-y-2">
+                        <p className="text-pink-300 font-semibold text-xs">Titik bantu <InlineMath math="\ell_2: 2x - y = 2" /> <span className="text-white/50">(y = 2x − 2)</span></p>
+                        <div className="overflow-x-auto">
+                          <table className="text-xs font-body border-collapse w-full">
+                            <thead><tr className="bg-pink-900/40">
+                              <th className="border border-pink-500/30 px-3 py-1.5 text-pink-200">x</th>
+                              <th className="border border-pink-500/30 px-3 py-1.5 text-pink-200">y = 2x − 2</th>
+                              <th className="border border-pink-500/30 px-3 py-1.5 text-pink-200">Titik</th>
+                            </tr></thead>
+                            <tbody>
+                              <tr className="bg-slate-800/30">
+                                <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">0</td>
+                                <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">−2</td>
+                                <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">(0, −2)</td>
+                              </tr>
+                              <tr className="bg-slate-700/20">
+                                <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">1</td>
+                                <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">0</td>
+                                <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">(1, 0)</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      {/* Eliminasi */}
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <p className="text-cyan-300 font-semibold mb-1 text-xs">Titik potong — selesaikan dengan eliminasi:</p>
+                        <BlockMath math="\ell_1:\quad x + y = 4 \quad \cdots (1)" />
+                        <BlockMath math="\ell_2:\quad 2x - y = 2 \quad \cdots (2)" />
+                        <p className="text-white/60 text-xs mb-1">Jumlahkan (1) dan (2):</p>
+                        <BlockMath math="3x = 6 \Rightarrow x = 2" />
+                        <p className="text-white/60 text-xs mb-1">Substitusi x = 2 ke persamaan (1):</p>
+                        <BlockMath math="2 + y = 4 \Rightarrow y = 2" />
+                      </div>
+
+                      {/* Grafik besar */}
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <p className="text-orange-300 font-semibold mb-3 text-xs">Grafik <InlineMath math="\ell_1" /> dan <InlineMath math="\ell_2" />:</p>
+                        <svg viewBox={`0 0 ${W3} ${H3}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.97)" }}>
+                          {/* grid */}
+                          {ticks3.concat([0]).map(v => (
+                            <g key={v}>
+                              <line x1={tx(v)} y1={4} x2={tx(v)} y2={H3-4} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.8"}/>
+                              <line x1={4} y1={ty(v)} x2={W3-4} y2={ty(v)} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.8"}/>
+                            </g>
+                          ))}
+                          {/* axes */}
+                          <line x1={6} y1={MY3} x2={W3-6} y2={MY3} stroke="#475569" strokeWidth="2"/>
+                          <line x1={MX3} y1={H3-6} x2={MX3} y2={6} stroke="#475569" strokeWidth="2"/>
+                          <polygon points={`${W3-6},${MY3} ${W3-12},${MY3-4} ${W3-12},${MY3+4}`} fill="#475569"/>
+                          <polygon points={`${MX3},6 ${MX3-4},12 ${MX3+4},12`} fill="#475569"/>
+                          {/* axis labels */}
+                          <text x={W3-16} y={MY3+13} fill="#64748b" fontSize="11" fontWeight="bold">x</text>
+                          <text x={MX3+6} y={16} fill="#64748b" fontSize="11" fontWeight="bold">y</text>
+                          <text x={MX3+4} y={MY3+13} fill="#475569" fontSize="9">O</text>
+                          {/* tick numbers */}
+                          {[-5,-4,-3,-2,-1,1,2,3,4,5].map(v => (
+                            <g key={`t${v}`}>
+                              <line x1={tx(v)} y1={MY3-3} x2={tx(v)} y2={MY3+3} stroke="#475569" strokeWidth="1"/>
+                              <text x={tx(v)-(v<-9?11:v<0?8:4)} y={MY3+14} fill="#4b5563" fontSize="9">{v}</text>
+                              <line x1={MX3-3} y1={ty(v)} x2={MX3+3} y2={ty(v)} stroke="#475569" strokeWidth="1"/>
+                              <text x={MX3-18} y={ty(v)+4} fill="#4b5563" fontSize="9">{v}</text>
+                            </g>
+                          ))}
+                          {/* ℓ1: x+y=4 → y=4-x, points: (-1,5)→(5,-1) */}
+                          <polyline
+                            points={[[-1,5],[0,4],[1,3],[2,2],[3,1],[4,0],[5,-1]].map(([x,y])=>`${tx(x)},${ty(y)}`).join(' ')}
+                            fill="none" stroke="#22d3ee" strokeWidth="3" strokeLinecap="round"
+                          />
+                          {/* ℓ2: 2x-y=2 → y=2x-2, points: (-1,-4)→(3,4) */}
+                          <polyline
+                            points={[[-1,-4],[0,-2],[1,0],[2,2],[3,4]].map(([x,y])=>`${tx(x)},${ty(y)}`).join(' ')}
+                            fill="none" stroke="#f472b6" strokeWidth="3" strokeLinecap="round"
+                          />
+                          {/* key axis intercepts - l1 */}
+                          <circle cx={tx(0)} cy={ty(4)} r="5" fill="#22d3ee" stroke="#cffafe" strokeWidth="1.5"/>
+                          <text x={tx(0)+8} y={ty(4)+4} fill="#22d3ee" fontSize="9" fontWeight="bold">(0, 4)</text>
+                          <circle cx={tx(4)} cy={ty(0)} r="5" fill="#22d3ee" stroke="#cffafe" strokeWidth="1.5"/>
+                          <text x={tx(4)-36} y={ty(0)-8} fill="#22d3ee" fontSize="9" fontWeight="bold">(4, 0)</text>
+                          {/* key axis intercepts - l2 */}
+                          <circle cx={tx(0)} cy={ty(-2)} r="5" fill="#f472b6" stroke="#fce7f3" strokeWidth="1.5"/>
+                          <text x={tx(0)+8} y={ty(-2)+4} fill="#f472b6" fontSize="9" fontWeight="bold">(0, −2)</text>
+                          <circle cx={tx(1)} cy={ty(0)} r="5" fill="#f472b6" stroke="#fce7f3" strokeWidth="1.5"/>
+                          <text x={tx(1)+8} y={ty(0)-8} fill="#f472b6" fontSize="9" fontWeight="bold">(1, 0)</text>
+                          {/* intersection point */}
+                          <circle cx={tx(2)} cy={ty(2)} r="9" fill="#facc15" stroke="#fde047" strokeWidth="2.5"/>
+                          <circle cx={tx(2)} cy={ty(2)} r="14" fill="none" stroke="#facc1566" strokeWidth="1.5"/>
+                          <text x={tx(2)+13} y={ty(2)-6} fill="#fde047" fontSize="11" fontWeight="bold">(2, 2)</text>
+                          {/* line labels */}
+                          <rect x={tx(-0.8)-2} y={ty(4.8)-10} width={22} height={14} rx="3" fill="rgba(6,12,30,0.8)"/>
+                          <text x={tx(-0.8)} y={ty(4.8)} fill="#22d3ee" fontSize="11" fontWeight="bold">ℓ₁</text>
+                          <rect x={tx(2.6)-2} y={ty(3.2)-10} width={22} height={14} rx="3" fill="rgba(6,12,30,0.8)"/>
+                          <text x={tx(2.6)} y={ty(3.2)} fill="#f472b6" fontSize="11" fontWeight="bold">ℓ₂</text>
+                        </svg>
+                      </div>
+
+                      <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
+                        <p className="text-sm font-bold text-red-300 font-body">✅ Titik potong kedua garis: <InlineMath math="(2,\ 2)" /> — semua koordinat bilangan bulat!</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              );
+            })()}
           </div>
 
           {/* RANGKUMAN */}
