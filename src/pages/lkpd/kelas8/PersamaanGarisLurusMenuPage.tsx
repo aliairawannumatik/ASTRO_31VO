@@ -1,6 +1,7 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
+  { label: "BUKU ANIMASI: PERSAMAAN GARIS LURUS", path: "/lkpd/kelas-8/persamaan-garis-lurus/buku-animasi", icon: "🎬" },
   { label: "GRAFIK PERSAMAAN GARIS LURUS", path: "/lkpd/kelas-8/persamaan-garis-lurus/lkpd", icon: "📈" },
   { label: "GRADIEN (KEMIRINGAN GARIS)", path: "/lkpd/kelas-8/persamaan-garis-lurus/lkpd", icon: "📐" },
   { label: "MENENTUKAN PERSAMAAN GARIS LURUS", path: "/lkpd/kelas-8/persamaan-garis-lurus/lkpd", icon: "✏️" },
