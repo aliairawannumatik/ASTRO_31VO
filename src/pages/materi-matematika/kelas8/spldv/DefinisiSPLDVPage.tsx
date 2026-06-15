@@ -1042,6 +1042,56 @@ const DefinisiSPLDVPage = () => {
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3 mt-2">
                   <BlockMath math="\text{PLDV: } ax + by = c \quad \longrightarrow \quad \text{SPLDV: } \begin{cases} a_1x + b_1y = c_1 \\ a_2x + b_2y = c_2 \end{cases}" />
                 </div>
+
+                {/* Tips dan Trik */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-bold text-yellow-400/80 uppercase tracking-wide">💡 Tips dan Trik</p>
+                  <div className="grid grid-cols-1 gap-2">
+                    {[
+                      {
+                        tip: "Cara cepat cek apakah suatu persamaan adalah PLDV",
+                        detail: "Pastikan: (1) ada tepat 2 variabel, (2) pangkat variabel = 1, (3) tidak ada perkalian antar variabel (xy). Jika semua terpenuhi → itu PLDV!",
+                        color: "border-yellow-500/30 bg-yellow-900/10",
+                        badge: "bg-yellow-500/20 text-yellow-300",
+                      },
+                      {
+                        tip: "Gunakan rasio koefisien untuk menentukan jenis penyelesaian tanpa menghitung",
+                        detail: "Bandingkan a₁/a₂, b₁/b₂, c₁/c₂. Tidak perlu menyelesaikan SPLDV-nya — cukup 3 perbandingan untuk tahu ada berapa solusi.",
+                        color: "border-cyan-500/30 bg-cyan-900/10",
+                        badge: "bg-cyan-500/20 text-cyan-300",
+                      },
+                      {
+                        tip: "Jangan bingung PLDV dengan PLD satu variabel",
+                        detail: "PLD satu variabel: 2x = 8 → hanya 1 solusi. PLDV: 2x + y = 8 → tak hingga solusi karena ada dua ketidaktahuan.",
+                        color: "border-purple-500/30 bg-purple-900/10",
+                        badge: "bg-purple-500/20 text-purple-300",
+                      },
+                      {
+                        tip: "Verifikasi solusi: substitusi ke KEDUA persamaan",
+                        detail: "Banyak siswa hanya mengecek ke satu persamaan. Solusi SPLDV harus memenuhi persamaan pertama DAN persamaan kedua sekaligus.",
+                        color: "border-emerald-500/30 bg-emerald-900/10",
+                        badge: "bg-emerald-500/20 text-emerald-300",
+                      },
+                    ].map(({ tip, detail, color, badge }) => (
+                      <div key={tip} className={`border rounded-xl p-3 space-y-1 ${color}`}>
+                        <p className={`font-body text-xs font-bold px-2 py-0.5 rounded-full inline-block ${badge}`}>✦ {tip}</p>
+                        <p className="font-body text-xs text-white/70">{detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Kesimpulan */}
+                <div className="bg-gradient-to-r from-cyan-900/30 to-purple-900/30 border border-cyan-500/20 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-bold text-white">🎯 Kesimpulan</p>
+                  <p className="font-body text-sm text-white/80">
+                    SPLDV adalah fondasi dari aljabar lanjutan. Memahami konsep dasar — apa itu PLDV, bagaimana dua persamaan membentuk sistem, dan bagaimana mengenali jenis penyelesaiannya — adalah kunci untuk menguasai semua metode penyelesaian yang akan dipelajari berikutnya.
+                  </p>
+                  <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 mt-1">
+                    <p className="font-body text-xs text-white/60 text-center italic">"Satu persamaan menceritakan sebuah garis. Dua persamaan menceritakan di mana dua garis bertemu."</p>
+                  </div>
+                </div>
+
               </div>
             )}
           </div>

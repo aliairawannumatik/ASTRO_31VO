@@ -400,6 +400,90 @@ const ModelSPLDVPage = () => {
 
         </div>
 
+        {/* ── RANGKUMAN & TIPS ── */}
+        <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+          <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-primary" title="📋 Rangkuman & Tips dan Trik" />
+          {expandedSections.includes("rangkuman") && (
+            <div className="px-5 pb-5 space-y-4">
+
+              {/* Rangkuman */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-white/60 uppercase tracking-wide">📌 Poin-Poin Penting</p>
+                <div className="grid grid-cols-1 gap-2 font-body text-sm">
+                  {[
+                    { icon: "🔤", poin: "Pemodelan matematika mengubah soal cerita menjadi sistem persamaan yang bisa diselesaikan secara aljabar." },
+                    { icon: "🔣", poin: "Langkah pertama selalu: tentukan variabel dengan jelas (misal: x = harga buku, y = harga pensil)." },
+                    { icon: "📐", poin: "Setiap kalimat dalam soal yang menyatakan hubungan dua besaran → satu persamaan." },
+                    { icon: "✅", poin: "SPLDV yang valid harus memiliki tepat DUA persamaan dengan DUA variabel yang sama." },
+                    { icon: "🔁", poin: "Selalu verifikasi model dengan mensubstitusi nilai ke kalimat soal, bukan hanya ke persamaan." },
+                  ].map(({ icon, poin }) => (
+                    <div key={poin} className="flex items-start gap-3 bg-slate-800/40 border border-white/10 rounded-lg px-4 py-3">
+                      <span className="text-lg shrink-0">{icon}</span>
+                      <p className="text-white/80">{poin}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tips dan Trik */}
+              <div className="space-y-2">
+                <p className="font-body text-xs font-bold text-yellow-400/80 uppercase tracking-wide">💡 Tips dan Trik</p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    {
+                      tip: "Baca soal minimal 2 kali sebelum menulis apapun",
+                      detail: "Bacaan pertama untuk memahami konteks, bacaan kedua untuk mengidentifikasi apa yang diketahui dan apa yang ditanya.",
+                      color: "border-yellow-500/30 bg-yellow-900/10",
+                      badge: "bg-yellow-500/20 text-yellow-300",
+                    },
+                    {
+                      tip: "Gunakan huruf awal kata benda sebagai variabel",
+                      detail: "Misal: harga Buku → b, harga Pensil → p. Ini memudahkan kamu mengingat arti variabel saat menyelesaikan.",
+                      color: "border-cyan-500/30 bg-cyan-900/10",
+                      badge: "bg-cyan-500/20 text-cyan-300",
+                    },
+                    {
+                      tip: "Tandai kata kunci matematika dalam soal",
+                      detail: '"jumlah" → penjumlahan, "selisih" → pengurangan, "dua kali" → ×2, "total" → keseluruhan semua item.',
+                      color: "border-purple-500/30 bg-purple-900/10",
+                      badge: "bg-purple-500/20 text-purple-300",
+                    },
+                    {
+                      tip: "Tulis satuan di setiap langkah",
+                      detail: "Jangan lupa mencantumkan satuan (Rp, meter, kg, dll.) agar jawaban akhir bermakna dan lengkap.",
+                      color: "border-emerald-500/30 bg-emerald-900/10",
+                      badge: "bg-emerald-500/20 text-emerald-300",
+                    },
+                    {
+                      tip: "Periksa apakah jawaban masuk akal",
+                      detail: "Harga barang tidak mungkin negatif, umur tidak mungkin nol — gunakan logika sehari-hari untuk validasi jawaban.",
+                      color: "border-red-500/30 bg-red-900/10",
+                      badge: "bg-red-500/20 text-red-300",
+                    },
+                  ].map(({ tip, detail, color, badge }) => (
+                    <div key={tip} className={`border rounded-xl p-3 space-y-1 ${color}`}>
+                      <p className={`font-body text-xs font-bold px-2 py-0.5 rounded-full inline-block ${badge}`}>✦ {tip}</p>
+                      <p className="font-body text-xs text-white/70">{detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kesimpulan */}
+              <div className="bg-gradient-to-r from-cyan-900/30 to-purple-900/30 border border-cyan-500/20 rounded-xl p-4 space-y-2">
+                <p className="font-body text-sm font-bold text-white">🎯 Kesimpulan</p>
+                <p className="font-body text-sm text-white/80">
+                  Pemodelan matematika adalah <em>jembatan</em> antara dunia nyata dan dunia matematika. Dengan menguasai cara membuat model SPLDV dari soal cerita, kamu tidak hanya belajar teknik menghitung — kamu belajar <strong className="text-cyan-300">berpikir logis dan sistematis</strong>, sebuah keterampilan yang sangat berharga di kehidupan nyata.
+                </p>
+                <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 mt-1">
+                  <p className="font-body text-xs text-white/60 text-center italic">"Matematika bukan tentang angka — melainkan tentang memahami pola di balik permasalahan nyata."</p>
+                </div>
+              </div>
+
+            </div>
+          )}
+        </div>
+
         <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/spldv"); }}

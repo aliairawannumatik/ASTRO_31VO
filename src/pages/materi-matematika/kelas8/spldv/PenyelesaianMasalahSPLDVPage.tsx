@@ -451,6 +451,62 @@ const PenyelesaianMasalahSPLDVPage = () => {
                     <strong>🚀 Pesan Terakhir:</strong> Kemampuan menyelesaikan masalah SPLDV adalah salah satu skill matematika terpenting yang akan terus kamu pakai — bahkan di tingkat SMA dan kuliah. Semakin sering berlatih dengan soal beragam, semakin cepat dan akurat kemampuanmu!
                   </p>
                 </div>
+
+                {/* Tips dan Trik */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-bold text-yellow-400/80 uppercase tracking-wide">💡 Tips dan Trik</p>
+                  <div className="grid grid-cols-1 gap-2">
+                    {[
+                      {
+                        tip: "Pilih metode yang paling efisien untuk soal yang ada",
+                        detail: "Substitusi cocok jika salah satu variabel mudah diisolasi. Eliminasi lebih cepat jika koefisien sudah sama. Grafik cocok untuk visualisasi.",
+                        color: "border-yellow-500/30 bg-yellow-900/10",
+                        badge: "bg-yellow-500/20 text-yellow-300",
+                      },
+                      {
+                        tip: "Identifikasi apa yang benar-benar ditanya di akhir soal",
+                        detail: "Soal mungkin meminta luas (p × l), selisih, atau total — bukan langsung nilai x atau y. Selalu baca ulang pertanyaan sebelum menulis jawaban akhir.",
+                        color: "border-cyan-500/30 bg-cyan-900/10",
+                        badge: "bg-cyan-500/20 text-cyan-300",
+                      },
+                      {
+                        tip: "Definisikan variabel dengan satuan yang jelas",
+                        detail: "Tulis: 'Misalkan x = panjang (meter) dan y = lebar (meter)'. Satuan yang jelas mencegah kesalahan interpretasi di langkah akhir.",
+                        color: "border-purple-500/30 bg-purple-900/10",
+                        badge: "bg-purple-500/20 text-purple-300",
+                      },
+                      {
+                        tip: "Waspada soal yang membutuhkan perhitungan tambahan setelah SPLDV",
+                        detail: "Setelah menemukan x dan y, baca soal lagi — mungkin diminta menghitung luas, persentase, selisih, atau hasil perkalian dari kedua variabel.",
+                        color: "border-red-500/30 bg-red-900/10",
+                        badge: "bg-red-500/20 text-red-300",
+                      },
+                      {
+                        tip: "Gunakan angka bulat sebagai sinyal kebenaran",
+                        detail: "Pada soal cerita tingkat SMP, solusinya hampir selalu bilangan bulat positif. Jika dapat pecahan aneh, cek ulang pemodelan atau perhitunganmu.",
+                        color: "border-emerald-500/30 bg-emerald-900/10",
+                        badge: "bg-emerald-500/20 text-emerald-300",
+                      },
+                    ].map(({ tip, detail, color, badge }) => (
+                      <div key={tip} className={`border rounded-xl p-3 space-y-1 ${color}`}>
+                        <p className={`font-body text-xs font-bold px-2 py-0.5 rounded-full inline-block ${badge}`}>✦ {tip}</p>
+                        <p className="font-body text-xs text-white/70">{detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Kesimpulan */}
+                <div className="bg-gradient-to-r from-cyan-900/30 to-purple-900/30 border border-cyan-500/20 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-bold text-white">🎯 Kesimpulan</p>
+                  <p className="font-body text-sm text-white/80">
+                    Menyelesaikan masalah nyata dengan SPLDV adalah tujuan akhir dari seluruh pembelajaran ini. Lima langkah — pahami, rencanakan, selesaikan, verifikasi, tafsirkan — bukan hanya untuk matematika, melainkan kerangka berpikir yang bisa kamu gunakan untuk memecahkan berbagai masalah dalam kehidupan sehari-hari.
+                  </p>
+                  <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 mt-1">
+                    <p className="font-body text-xs text-white/60 text-center italic">"Masalah yang sulit hanyalah kumpulan langkah kecil yang belum diurai dengan runtut."</p>
+                  </div>
+                </div>
+
               </div>
             )}
           </div>
