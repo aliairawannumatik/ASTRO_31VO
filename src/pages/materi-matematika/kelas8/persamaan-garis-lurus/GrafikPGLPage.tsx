@@ -588,7 +588,7 @@ const GrafikPGLPage = () => {
                   <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-4 space-y-3">
                     <p className="text-xs font-bold text-violet-300 font-body uppercase tracking-wide">Contoh 2</p>
                     <div className="bg-violet-900/20 border border-violet-500/20 rounded-lg p-3">
-                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="2x - 3y = 12" />!</p>
+                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="3x - 5y = 15" />!</p>
                     </div>
                     <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
                     <div className="overflow-x-auto">
@@ -601,31 +601,31 @@ const GrafikPGLPage = () => {
                         </tr></thead>
                         <tbody>
                           <tr className="bg-slate-800/30">
-                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">6</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">5</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
-                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(6, 0)</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(5, 0)</td>
                             <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-x (y = 0)</td>
                           </tr>
                           <tr className="bg-slate-700/20">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
-                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-4</td>
-                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(0, -4)</td>
+                            <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-3</td>
+                            <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(0, -3)</td>
                             <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-y (x = 0)</td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
                     <InteractiveStepGraph
-                      equationLabel="2x - 3y = 12"
-                      linePoints={[[-1,-14/3],[0,-4],[3,-2],[6,0]]}
-                      point1={[6, 0]}
-                      point2={[0, -4]}
+                      equationLabel="3x - 5y = 15"
+                      linePoints={[[-5,-6],[0,-3],[5,0],[10,3]]}
+                      point1={[5, 0]}
+                      point2={[0, -3]}
                       lineColor="#a78bfa"
                       steps={[
-                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat Kartesius. Kita akan menggambar garis 2x − 3y = 12 menggunakan dua titik potong sumbu." },
-                        { label:"Titik Potong Sb-x", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Substitusi y = 0: 2x − 3(0) = 12 → 2x = 12 → x = 6. Titik potong sumbu-x adalah (6, 0). Plot titik ini!" },
-                        { label:"Titik Potong Sb-y", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Substitusi x = 0: 2(0) − 3y = 12 → −3y = 12 → y = −4. Titik potong sumbu-y adalah (0, −4). Plot titik ini!" },
-                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (6, 0) dan (0, −4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis 2x − 3y = 12 selesai! 🎉" },
+                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat Kartesius. Kita akan menggambar garis 3x − 5y = 15 menggunakan dua titik potong sumbu." },
+                        { label:"Titik Potong Sb-x", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Substitusi y = 0: 3x − 5(0) = 15 → 3x = 15 → x = 5. Titik potong sumbu-x adalah (5, 0). Plot titik ini!" },
+                        { label:"Titik Potong Sb-y", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Substitusi x = 0: 3(0) − 5y = 15 → −5y = 15 → y = −3. Titik potong sumbu-y adalah (0, −3). Plot titik ini!" },
+                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (5, 0) dan (0, −3) dengan garis lurus, lalu perpanjang ke kedua arah. Garis 3x − 5y = 15 selesai! 🎉" },
                       ]}
                     />
                   </div>
