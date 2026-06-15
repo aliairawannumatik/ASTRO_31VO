@@ -49,6 +49,8 @@ const questions: Q[] = [
       { label: "c.", math: "\\sqrt[3]{64} = \\ldots" },
       { label: "d.", math: "\\sqrt{\\frac{49}{4}} = \\ldots" },
       { label: "e.", math: "\\sqrt{\\frac{25}{9}} = \\ldots" },
+      { label: "f.", math: "\\sqrt[4]{81} = \\ldots" },
+      { label: "g.", math: "\\sqrt[5]{32} = \\ldots" },
     ],
   }),
   Qn(2, "Menyederhanakan Bentuk Akar – UN/ANBK/TKA", {
@@ -63,6 +65,7 @@ const questions: Q[] = [
       { label: "g.", math: "\\sqrt{147} = \\ldots" },
       { label: "h.", math: "\\sqrt{1{,}44} = \\ldots" },
       { label: "i.", math: "\\sqrt{0{,}25} = \\ldots" },
+      { label: "j.", math: "\\sqrt{80} = \\ldots" },
     ],
   }),
   Qn(3, "Operasi Penjumlahan & Pengurangan Bentuk Akar – UN/ANBK/TKA", {
@@ -71,8 +74,8 @@ const questions: Q[] = [
       { label: "a.", math: "3\\sqrt{2} + 5\\sqrt{2} = \\ldots" },
       { label: "b.", math: "7\\sqrt{3} - 4\\sqrt{3} = \\ldots" },
       { label: "c.", math: "2\\sqrt{5} + 3\\sqrt{5} - \\sqrt{5} = \\ldots" },
-      { label: "d.", math: "\\sqrt{3} + \\sqrt{12} + \\sqrt{27} = \\ldots" },
-      { label: "e.", math: "2\\sqrt{8} - \\sqrt{32} + \\sqrt{50} = \\ldots" },
+      { label: "d.", math: "\\sqrt{3} + \\sqrt{8} + \\sqrt{27} = \\ldots" },
+      { label: "e.", math: "2\\sqrt{8} - \\sqrt{32} + \\sqrt{48} = \\ldots" },
       { label: "f.", math: "2\\sqrt{45} - 3\\sqrt{20} + 4\\sqrt{5} = \\ldots" },
       { label: "g.", math: "3\\sqrt{8} + 2\\sqrt{2} = \\ldots" },
       { label: "h.", math: "2\\sqrt{12} + 3\\sqrt{27} = \\ldots" },
@@ -131,6 +134,21 @@ const questions: Q[] = [
       { label: "f.", math: "\\frac{3\\sqrt{2}-\\sqrt{6}}{3\\sqrt{2}+\\sqrt{6}} = \\ldots" },
     ],
   }),
+  Qn(8, "Operasi Campuran Bilangan Akar – UN/ANBK/TKA/Olimpiade", {
+    type: "mixed",
+    parts: [
+      { label: "a.", math: "\\sqrt{3} \\times \\sqrt{3} + \\sqrt{2} \\times \\sqrt{8} = \\ldots" },
+      { label: "b.", math: "(\\sqrt{5} + \\sqrt{3})^2 = \\ldots" },
+      { label: "c.", math: "\\sqrt{12} \\times \\sqrt{3} - \\sqrt{48} = \\ldots" },
+      { label: "d.", math: "\\dfrac{6}{\\sqrt{3}} + \\sqrt{3} = \\ldots" },
+      { label: "e.", math: "2\\sqrt{2} \\times \\sqrt{8} - \\sqrt{50} + \\sqrt{18} = \\ldots" },
+      { label: "f.", math: "(\\sqrt{6}+\\sqrt{2})(\\sqrt{6}-\\sqrt{2}) + \\sqrt{8} = \\ldots" },
+      { label: "g.", math: "\\sqrt{75} - \\dfrac{6}{\\sqrt{3}} + 2\\sqrt{3} = \\ldots" },
+      { label: "h.", math: "\\dfrac{\\sqrt{50} - \\sqrt{8}}{\\sqrt{2}} + \\sqrt{3} \\times \\sqrt{12} = \\ldots" },
+      { label: "i.", math: "(2\\sqrt{3}-\\sqrt{2})(2\\sqrt{3}+\\sqrt{2}) + \\sqrt{32} - \\sqrt{50} = \\ldots" },
+      { label: "j.", math: "\\dfrac{3\\sqrt{2}+\\sqrt{18}}{\\sqrt{2}} \\times \\left(\\sqrt{3}-1\\right)^2 = \\ldots" },
+    ],
+  }),
 ];
 
 const BentukAkarPage = () => {
@@ -150,7 +168,7 @@ const BentukAkarPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-            <span className="text-amber-400 text-xs font-bold">📋 7 Soal</span>
+            <span className="text-amber-400 text-xs font-bold">📋 8 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
