@@ -85,7 +85,15 @@ const GrafikPGLPage = () => {
                     className="w-full rounded-xl object-cover max-h-80 border border-cyan-500/20"
                   />
                   <figcaption className="text-xs text-white/50 font-body text-center italic">
-                    Garis horizon di lautan — contoh nyata garis lurus yang dapat dideskripsikan dengan persamaan matematika
+                    Garis horizon di lautan — contoh nyata garis lurus yang dapat dideskripsikan dengan persamaan matematika.{" "}
+                    <a
+                      href="https://id.pngtree.com/freebackground/sea-horizon-line-unAder-aquatic-photo_9262149.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-white/80 transition-colors"
+                    >
+                      Sumber gambar
+                    </a>
                   </figcaption>
                 </figure>
                 {/* 4-panel visual intro */}
