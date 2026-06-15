@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle, XCircle, Eye, EyeOff } from "lucide-react";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
@@ -193,12 +193,22 @@ const MiniGraph: React.FC<{ eq: EqEntry; animKey: number }> = ({ eq, animKey }) 
 const EquasiGarisLurusAnim: React.FC = () => {
   const [sel, setSel] = useState(1);
   const [animKey, setAnimKey] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  // track which IDs the user has already revealed
+  const [revealedIds, setRevealedIds] = useState<Set<number>>(new Set());
   const eq = EQUATIONS[sel - 1];
 
   const pick = (id: number) => {
     if (id === sel) return;
     setSel(id);
     setAnimKey(k => k + 1);
+    // hide penjelasan when switching to a new equation
+    setRevealed(false);
+  };
+
+  const handleReveal = () => {
+    setRevealed(true);
+    setRevealedIds(prev => new Set(prev).add(sel));
   };
 
   return (
@@ -209,18 +219,8 @@ const EquasiGarisLurusAnim: React.FC = () => {
         <p className="text-sm font-bold text-cyan-300 font-body">Persamaan Garis Lurus vs. Bukan — Interaktif</p>
       </div>
       <p className="text-xs text-white/60 font-body leading-relaxed">
-        Klik nomor <strong className="text-white/80">1–10</strong> untuk melihat apakah persamaan tersebut merupakan persamaan garis lurus atau bukan, lengkap dengan grafik animasi dan penjelasan.
+        Klik nomor <strong className="text-white/80">1–10</strong>, amati persamaan dan grafiknya, lalu tekan <strong className="text-white/80">"Tampilkan Penjelasan"</strong> untuk melihat jawabannya.
       </p>
-
-      {/* Stats */}
-      <div className="flex gap-2 flex-wrap">
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[11px] font-bold font-body">
-          <CheckCircle className="w-3 h-3" /> 5 Persamaan Garis
-        </span>
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px] font-bold font-body">
-          <XCircle className="w-3 h-3" /> 5 Bukan Garis Lurus
-        </span>
-      </div>
 
       {/* Number buttons */}
       <div className="flex gap-2 flex-wrap">
@@ -231,14 +231,15 @@ const EquasiGarisLurusAnim: React.FC = () => {
             className={`relative w-9 h-9 rounded-full text-xs font-bold font-body border-2 transition-all duration-200 select-none
               ${sel === e.id ? "scale-110 z-10" : "bg-slate-800/70 border-white/10 text-white/50 hover:scale-105 hover:border-white/25"}`}
             style={sel === e.id ? {
-              background: e.isLinear ? "linear-gradient(135deg,#0e7490,#0891b2)" : "linear-gradient(135deg,#9f1239,#be123c)",
+              background: "linear-gradient(135deg,#1e3a5f,#1e4d6b)",
               borderColor: e.color,
               color: "#fff",
               boxShadow: `0 0 14px ${e.color}55`,
             } : {}}
           >
             {e.id}
-            {sel === e.id && (
+            {/* only show ✓/✗ badge after revealed */}
+            {revealedIds.has(e.id) && (
               <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full flex items-center justify-center text-[7px] font-bold"
                 style={{ background: e.isLinear ? "#22d3ee" : "#f43f5e", color: "#fff" }}>
                 {e.isLinear ? "✓" : "✗"}
@@ -248,51 +249,76 @@ const EquasiGarisLurusAnim: React.FC = () => {
         ))}
       </div>
 
-      {/* Detail card */}
-      <div
-        key={animKey}
-        className="rounded-xl border overflow-hidden"
-        style={{ borderColor: eq.isLinear ? "#0891b244" : "#be123c44" }}
-      >
-        {/* Card header */}
-        <div
-          className="flex items-center gap-3 px-4 py-3 border-b"
-          style={{
-            background: eq.isLinear ? "rgba(8,145,178,0.12)" : "rgba(190,18,60,0.12)",
-            borderColor: eq.isLinear ? "#0891b230" : "#be123c30",
-          }}
-        >
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
-            style={{ background: eq.isLinear ? "#0e7490" : "#9f1239", color: "#fff" }}
-          >
+      {/* Card: equation + graph always visible */}
+      <div key={animKey} className="rounded-xl border border-white/15 overflow-hidden">
+
+        {/* Header: nomor + persamaan (always shown, NO status badge) */}
+        <div className="flex items-center gap-3 px-4 py-3 bg-slate-800/60 border-b border-white/8">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0 bg-slate-600/80 text-white">
             {eq.id}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] text-white/40 font-body leading-none mb-0.5">{eq.label}</p>
-            <span className="font-display font-bold text-base text-white">
+            <p className="text-[10px] text-white/35 font-body leading-none mb-0.5">{eq.label}</p>
+            <span className="font-display font-bold text-lg text-white">
               <InlineMath math={eq.katex} />
             </span>
           </div>
-          <div className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold font-body shrink-0 ${
-            eq.isLinear
-              ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/35"
-              : "bg-rose-500/15 text-rose-300 border border-rose-500/35"
-          }`}>
-            {eq.isLinear
-              ? <><CheckCircle className="w-3 h-3" /> Garis Lurus</>
-              : <><XCircle className="w-3 h-3" /> Bukan Garis Lurus</>}
+          {/* badge: hidden until revealed */}
+          <div className={`transition-all duration-500 ${revealed ? "opacity-100 scale-100" : "opacity-0 scale-75 pointer-events-none"}`}>
+            <div className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold font-body ${
+              eq.isLinear
+                ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/35"
+                : "bg-rose-500/15 text-rose-300 border border-rose-500/35"
+            }`}>
+              {eq.isLinear
+                ? <><CheckCircle className="w-3 h-3" /> Garis Lurus</>
+                : <><XCircle className="w-3 h-3" /> Bukan Garis Lurus</>}
+            </div>
           </div>
         </div>
 
-        {/* Card body */}
-        <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-900/40">
-          {/* Text left */}
-          <div className="space-y-2">
+        {/* Graph: always visible */}
+        <div className="px-4 pt-3 pb-2 bg-slate-900/50">
+          <p className="text-[10px] font-bold text-white/35 uppercase tracking-wider mb-2">📊 Grafik</p>
+          <MiniGraph eq={eq} animKey={animKey} />
+        </div>
+
+        {/* Reveal button OR penjelasan */}
+        {!revealed ? (
+          <div className="px-4 pb-4 pt-1 bg-slate-900/50 flex justify-center">
+            <button
+              onClick={handleReveal}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-body font-bold text-sm
+                bg-gradient-to-r from-violet-600/80 to-cyan-600/80 hover:from-violet-500/90 hover:to-cyan-500/90
+                border border-violet-400/30 text-white shadow-lg shadow-violet-900/30
+                active:scale-95 transition-all duration-200"
+            >
+              <Eye className="w-4 h-4" />
+              Tampilkan Penjelasan
+            </button>
+          </div>
+        ) : (
+          <div
+            className="px-4 pb-4 pt-1 bg-slate-900/50 space-y-2"
+            style={{ animation: "slideDown 0.35s ease-out" }}
+          >
+            {/* hide button */}
+            <div className="flex justify-end mb-1">
+              <button
+                onClick={() => setRevealed(false)}
+                className="flex items-center gap-1.5 text-[11px] font-body text-white/35 hover:text-white/60 transition-colors"
+              >
+                <EyeOff className="w-3.5 h-3.5" /> Sembunyikan
+              </button>
+            </div>
+
+            {/* Deskripsi */}
             <div className="rounded-lg p-3 bg-white/5 border border-white/8">
               <p className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-1">📋 Deskripsi</p>
               <p className="text-xs font-body text-white/80 leading-relaxed">{eq.description}</p>
             </div>
+
+            {/* Alasan */}
             <div className="rounded-lg p-3 border"
               style={{ background: eq.isLinear ? "rgba(8,145,178,0.07)" : "rgba(190,18,60,0.07)", borderColor: eq.isLinear ? "#0891b228" : "#be123c28" }}>
               <p className="text-[10px] font-bold uppercase tracking-wider mb-1"
@@ -301,27 +327,27 @@ const EquasiGarisLurusAnim: React.FC = () => {
               </p>
               <p className="text-xs font-body text-white/80 leading-relaxed">{eq.reason}</p>
             </div>
+
+            {/* Tips */}
             <div className="rounded-lg px-3 py-2 bg-yellow-500/8 border border-yellow-500/25">
               <p className="text-[11px] font-body text-yellow-200">
                 <strong>💡 Tips:</strong> {eq.tip}
               </p>
             </div>
-          </div>
 
-          {/* Graph right */}
-          <div className="flex flex-col gap-2">
-            <p className="text-[10px] font-bold text-white/40 uppercase tracking-wider">📊 Grafik</p>
-            <MiniGraph eq={eq} animKey={animKey} />
-            <div className="rounded-lg px-3 py-1.5 text-center text-[11px] font-body"
+            {/* Status footer */}
+            <div className="rounded-lg px-3 py-2 text-center text-[11px] font-body font-bold"
               style={{
-                background: eq.isLinear ? "rgba(8,145,178,0.10)" : "rgba(190,18,60,0.10)",
+                background: eq.isLinear ? "rgba(8,145,178,0.12)" : "rgba(190,18,60,0.12)",
                 color: eq.isLinear ? "#67e8f9" : "#fda4af",
-                border: `1px solid ${eq.isLinear ? "#0891b220" : "#be123c20"}`,
+                border: `1px solid ${eq.isLinear ? "#0891b230" : "#be123c30"}`,
               }}>
-              {eq.isLinear ? "Grafik berupa garis LURUS ✓" : "Grafik BUKAN garis lurus ✗"}
+              {eq.isLinear
+                ? "✅ Kesimpulan: Grafik berupa garis LURUS"
+                : "❌ Kesimpulan: Grafik BUKAN garis lurus"}
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Prev / Next nav */}
@@ -337,14 +363,15 @@ const EquasiGarisLurusAnim: React.FC = () => {
         </button>
       </div>
 
-      {/* Summary table */}
+      {/* Summary bar: ✓/✗ only shown after each is revealed */}
       <div className="rounded-xl border border-white/8 overflow-hidden">
         <div className="grid grid-cols-10 bg-slate-800/60">
           {EQUATIONS.map(e => (
             <button key={e.id} onClick={() => pick(e.id)}
               className={`py-2 text-[10px] font-bold font-body text-center transition-all border-r border-white/5 last:border-0 ${
-                sel === e.id ? "bg-white/10" : "hover:bg-white/5"}`}
-              style={{ color: e.isLinear ? "#22d3ee" : "#f87171" }}>
+                sel === e.id ? "bg-white/10" : "hover:bg-white/5"
+              }`}
+              style={{ color: sel === e.id ? e.color : "rgba(255,255,255,0.35)" }}>
               {e.id}
             </button>
           ))}
@@ -352,9 +379,13 @@ const EquasiGarisLurusAnim: React.FC = () => {
         <div className="grid grid-cols-10">
           {EQUATIONS.map(e => (
             <div key={e.id} className="flex items-center justify-center py-1.5 border-r border-white/5 last:border-0">
-              {e.isLinear
-                ? <CheckCircle className="w-3 h-3 text-cyan-400/60" />
-                : <XCircle className="w-3 h-3 text-rose-400/60" />}
+              {revealedIds.has(e.id) ? (
+                e.isLinear
+                  ? <CheckCircle className="w-3 h-3 text-cyan-400/70" />
+                  : <XCircle className="w-3 h-3 text-rose-400/70" />
+              ) : (
+                <span className="w-3 h-3 rounded-full border border-white/15 block" />
+              )}
             </div>
           ))}
         </div>
@@ -362,5 +393,13 @@ const EquasiGarisLurusAnim: React.FC = () => {
     </div>
   );
 };
+
+/* ─── Slide-down keyframe (inline) ──────────────────────────── */
+const styleTag = document.createElement("style");
+styleTag.textContent = `@keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }`;
+if (!document.head.querySelector("[data-eq-anim]")) {
+  styleTag.setAttribute("data-eq-anim", "1");
+  document.head.appendChild(styleTag);
+}
 
 export default EquasiGarisLurusAnim;
