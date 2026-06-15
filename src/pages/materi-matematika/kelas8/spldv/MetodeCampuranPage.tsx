@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Zap, Target } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Zap, Target, FlaskConical } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import CampuranInteraktif from "@/components/CampuranInteraktif";
 
 const MetodeCampuranPage = () => {
   const navigate = useNavigate();
@@ -171,6 +172,21 @@ const MetodeCampuranPage = () => {
                     <p className="text-white/70">Masukkan pasangan nilai <InlineMath math="(x, y)" /> ke kedua persamaan asli. Jika keduanya menghasilkan pernyataan yang benar, solusinya valid!</p>
                   </Step>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── LAB INTERAKTIF ── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="lab" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400" title="🧪 Lab Interaktif — Lihat Metode Campuran Beraksi!" />
+            {true && (
+              <div className="px-5 pb-5 space-y-3">
+                <div className="bg-violet-900/20 border border-violet-500/20 rounded-xl p-3">
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Masukkan <strong className="text-violet-300">sistem persamaan</strong> milikmu, pilih variabel yang dieliminasi, lalu tekan <strong className="text-blue-300">🔀 Metode Campuran</strong> — kamu akan melihat secara langsung bagaimana proses <strong className="text-violet-300">eliminasi</strong> dan <strong className="text-green-300">substitusi</strong> bekerja langkah demi langkah!
+                  </p>
+                </div>
+                <CampuranInteraktif />
               </div>
             )}
           </div>
