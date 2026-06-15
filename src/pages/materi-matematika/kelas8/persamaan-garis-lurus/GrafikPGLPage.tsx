@@ -232,17 +232,6 @@ const GrafikPGLPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Persamaan Garis Lurus · Materi Matematika</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* ANIMASI INTERAKTIF — paling atas */}
-          <div className="bg-card/80 backdrop-blur border border-cyan-500/25 rounded-xl overflow-hidden">
-            <div className="w-full flex items-center gap-3 px-5 py-4 border-b border-white/10">
-              <span className="text-violet-400 text-lg">🎬</span>
-              <span className="font-body font-semibold text-white">Persamaan Garis Lurus vs. Bukan — Animasi Interaktif</span>
-            </div>
-            <div className="px-5 pb-5 pt-4">
-              <EquasiGarisLurusAnim />
-            </div>
-          </div>
-
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Garis Lurus — Ada di Mana-mana!" />
@@ -362,6 +351,17 @@ const GrafikPGLPage = () => {
                       ))}
                     </tbody>
                   </table>
+                </div>
+
+                {/* ── Animasi Interaktif: Persamaan Garis Lurus vs Bukan ── */}
+                <div className="rounded-xl border border-violet-500/25 bg-slate-900/50 overflow-hidden">
+                  <div className="flex items-center gap-3 px-4 py-3 border-b border-white/8">
+                    <span className="text-violet-400 text-lg">🎬</span>
+                    <span className="font-body font-semibold text-white text-sm">Persamaan Garis Lurus vs. Bukan — Animasi Interaktif</span>
+                  </div>
+                  <div className="px-4 pb-4 pt-3">
+                    <EquasiGarisLurusAnim />
+                  </div>
                 </div>
 
                 {/* ── GeoGebra-style interactive graphing tool ── */}
