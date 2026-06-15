@@ -210,6 +210,157 @@ const InteractiveStepGraph = ({
   );
 };
 
+/* ── MCQ Contoh 1: Identifikasi Persamaan dari Grafik ── */
+const MCQGrafik1: React.FC = () => {
+  const [pilihan, setPilihan] = React.useState<string | null>(null);
+  const [lihatPembahasan, setLihatPembahasan] = React.useState(false);
+
+  const opsi = [
+    { kode: "A", rumus: "y = x + 2",  katex: "y = x + 2",  benar: true  },
+    { kode: "B", rumus: "y = 2x + 2", katex: "y = 2x + 2", benar: false },
+    { kode: "C", rumus: "y = x - 2",  katex: "y = x - 2",  benar: false },
+    { kode: "D", rumus: "y = -x + 2", katex: "y = -x + 2", benar: false },
+  ];
+
+  const sudahJawab = pilihan !== null;
+  const benar = opsi.find(o => o.kode === pilihan)?.benar ?? false;
+
+  /* koordinat SVG */
+  const GW = 220, GH = 200, GMX = GW / 2, GMY = GH / 2, SCALE = 20;
+  const gx = (x: number) => GMX + x * SCALE;
+  const gy = (y: number) => GMY - y * SCALE;
+  /* garis y = x + 2 */
+  const pts: [number, number][] = [[-5,-3],[-4,-2],[-3,-1],[-2,0],[-1,1],[0,2],[1,3],[2,4],[3,5]];
+  const linePts = pts.map(([x,y]) => `${gx(x)},${gy(y)}`).join(" ");
+
+  return (
+    <div className="space-y-4">
+      {/* Pertanyaan */}
+      <div className="bg-green-900/20 border border-green-500/25 rounded-xl p-4">
+        <p className="text-xs font-bold text-green-300 uppercase tracking-wider mb-1 font-body">📝 Soal</p>
+        <p className="text-sm text-white/90 font-body leading-relaxed">
+          Perhatikan grafik berikut! Persamaan garis yang digambarkan pada grafik di bawah ini adalah…
+        </p>
+      </div>
+
+      {/* Grafik SVG */}
+      <div className="flex justify-center">
+        <div className="rounded-xl overflow-hidden border border-white/15" style={{ background: "rgba(6,12,30,0.95)", maxWidth: 240 }}>
+          <svg viewBox={`0 0 ${GW} ${GH}`} width={GW} height={GH}>
+            {/* Grid */}
+            {[-4,-3,-2,-1,1,2,3,4].map(v => (
+              <g key={v}>
+                <line x1={gx(v)} y1={4} x2={gx(v)} y2={GH-4} stroke="#0f1f3d" strokeWidth="0.7"/>
+                <line x1={4} y1={gy(v)} x2={GW-4} y2={gy(v)} stroke="#0f1f3d" strokeWidth="0.7"/>
+              </g>
+            ))}
+            {/* Axes */}
+            <line x1={4} y1={GMY} x2={GW-4} y2={GMY} stroke="#2d3f5e" strokeWidth="1.5"/>
+            <line x1={GMX} y1={GH-4} x2={GMX} y2={4} stroke="#2d3f5e" strokeWidth="1.5"/>
+            {/* Arrows */}
+            <polygon points={`${GW-4},${GMY} ${GW-9},${GMY-3} ${GW-9},${GMY+3}`} fill="#2d3f5e"/>
+            <polygon points={`${GMX},4 ${GMX-3},9 ${GMX+3},9`} fill="#2d3f5e"/>
+            {/* Axis labels */}
+            <text x={GW-13} y={GMY+10} fill="#3d5275" fontSize="8" fontWeight="bold">x</text>
+            <text x={GMX+3} y={13} fill="#3d5275" fontSize="8" fontWeight="bold">y</text>
+            {/* Tick labels */}
+            {[-4,-2,2,4].map(v => (
+              <g key={v}>
+                <text x={gx(v)-3} y={GMY+12} fill="#3d5275" fontSize="7">{v}</text>
+                <text x={GMX+3} y={gy(v)+3} fill="#3d5275" fontSize="7">{v}</text>
+              </g>
+            ))}
+            {/* The line — hidden before answered */}
+            <polyline points={linePts} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round"/>
+            {/* Key points */}
+            <circle cx={gx(-2)} cy={gy(0)} r="4" fill="#facc15" stroke="#fde04788" strokeWidth="1.5"/>
+            <text x={gx(-2)+5} y={gy(0)-5} fill="#fde047" fontSize="7.5" fontWeight="bold">(-2, 0)</text>
+            <circle cx={gx(0)} cy={gy(2)} r="4" fill="#facc15" stroke="#fde04788" strokeWidth="1.5"/>
+            <text x={gx(0)+5} y={gy(2)-5} fill="#fde047" fontSize="7.5" fontWeight="bold">(0, 2)</text>
+          </svg>
+        </div>
+      </div>
+
+      {/* Pilihan ganda */}
+      <div className="grid grid-cols-1 gap-2">
+        {opsi.map(({ kode, katex, benar: isBenar }) => {
+          const dipilih = pilihan === kode;
+          let style = "bg-slate-800/60 border-white/15 text-white/80";
+          if (sudahJawab && dipilih && isBenar)  style = "bg-green-800/50 border-green-400/60 text-green-200";
+          if (sudahJawab && dipilih && !isBenar) style = "bg-rose-800/40 border-rose-400/50 text-rose-200";
+          if (sudahJawab && !dipilih && isBenar) style = "bg-green-900/30 border-green-500/40 text-green-300";
+          return (
+            <button
+              key={kode}
+              disabled={sudahJawab}
+              onClick={() => { setPilihan(kode); setLihatPembahasan(false); }}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-body text-left transition-all duration-200 active:scale-98 disabled:cursor-default ${style}`}
+            >
+              <span className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${
+                sudahJawab && dipilih && isBenar  ? "bg-green-500 text-white" :
+                sudahJawab && dipilih && !isBenar ? "bg-rose-500 text-white" :
+                sudahJawab && isBenar             ? "bg-green-700/60 text-green-200" :
+                                                    "bg-white/10 text-white/60"
+              }`}>{kode}</span>
+              <span className="flex-1"><InlineMath math={katex} /></span>
+              {sudahJawab && isBenar  && <span className="text-green-400 text-base shrink-0">✓</span>}
+              {sudahJawab && dipilih && !isBenar && <span className="text-rose-400 text-base shrink-0">✗</span>}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Feedback setelah jawab */}
+      {sudahJawab && (
+        <div className={`rounded-xl px-4 py-3 border text-sm font-body ${benar ? "bg-green-900/30 border-green-500/40 text-green-200" : "bg-rose-900/25 border-rose-500/35 text-rose-200"}`}>
+          {benar
+            ? "✅ Benar! Grafik tersebut merupakan garis y = x + 2."
+            : "❌ Jawaban kurang tepat. Perhatikan titik-titik yang ditandai pada grafik dan coba lagi!"}
+          {!benar && (
+            <button onClick={() => { setPilihan(null); setLihatPembahasan(false); }}
+              className="ml-3 text-xs underline text-rose-300 hover:text-white transition-colors">
+              Coba lagi
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Tombol lihat pembahasan */}
+      {sudahJawab && (
+        <button onClick={() => setLihatPembahasan(v => !v)}
+          className="w-full py-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs font-bold font-body hover:bg-cyan-500/20 transition-all">
+          {lihatPembahasan ? "▲ Sembunyikan Pembahasan" : "▼ Lihat Pembahasan"}
+        </button>
+      )}
+
+      {/* Pembahasan */}
+      {lihatPembahasan && (
+        <div className="rounded-xl border border-cyan-500/25 bg-slate-800/60 p-4 space-y-3 text-sm font-body" style={{ animation: "slideDown 0.3s ease-out" }}>
+          <p className="text-cyan-300 font-bold">🔍 Pembahasan</p>
+          <p className="text-white/75 leading-relaxed">Dari grafik, kita dapat membaca dua titik kunci yang sudah ditandai:</p>
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { label: "Titik potong sumbu-x", titik: "(−2, 0)", warna: "text-cyan-300" },
+              { label: "Titik potong sumbu-y", titik: "(0, 2)", warna: "text-violet-300" },
+            ].map(({ label, titik, warna }) => (
+              <div key={label} className="bg-slate-900/50 rounded-lg p-2 text-center">
+                <p className="text-[10px] text-white/40 mb-1">{label}</p>
+                <p className={`font-bold text-sm ${warna}`}>{titik}</p>
+              </div>
+            ))}
+          </div>
+          <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 text-xs">
+            <p className="text-white/60">Dari titik potong sb-y → <span className="text-yellow-300 font-bold">c = 2</span></p>
+            <p className="text-white/60">Gradien: <InlineMath math="m = \dfrac{0-2}{-2-0} = \dfrac{-2}{-2} = 1" /></p>
+            <p className="text-white/60">Sehingga: <span className="text-green-300 font-bold">y = 1·x + 2 = x + 2</span> ✅</p>
+          </div>
+          <p className="text-white/50 text-xs">Opsi B (y = 2x + 2) salah karena gradiennya 2, bukan 1. Opsi C (y = x − 2) salah karena intercept-y = −2, bukan 2. Opsi D (y = −x + 2) salah karena grafiknya turun ke kanan (gradien negatif).</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const GrafikPGLPage = () => {
   const navigate = useNavigate();
   const SH = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
@@ -767,49 +918,10 @@ const GrafikPGLPage = () => {
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
-            {true && (
-              <div className="px-5 pb-5 space-y-4">
-                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
-                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Gambarlah grafik garis <InlineMath math="y = 2x - 4" />! Tentukan titik potong dengan sumbu-x dan sumbu-y terlebih dahulu.</p>
-                </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                  <p className="text-sm font-semibold text-cyan-300 font-body">🔍 Pembahasan</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-body">
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-1 text-xs">Titik potong sumbu-x (y = 0):</p>
-                      <BlockMath math="0 = 2x - 4 \Rightarrow x = 2" />
-                      <p className="text-green-300 text-xs font-bold">Titik: (2, 0)</p>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1 text-xs">Titik potong sumbu-y (x = 0):</p>
-                      <BlockMath math="y = 2(0) - 4 = -4" />
-                      <p className="text-green-300 text-xs font-bold">Titik: (0, -4)</p>
-                    </div>
-                  </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik y = 2x − 4:</p>
-                    <CoordSystem w={W} h={H} label="y = 2x − 4">
-                      <polyline
-                        points={[[-2,-8],[-1,-6],[0,-4],[1,-2],[2,0],[3,2],[4,4]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
-                        fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round"
-                      />
-                      {/* Key points */}
-                      {[[2,0],[0,-4]].map(([x,y]) => (
-                        <g key={`${x},${y}`}>
-                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
-                          <text x={toX(x)+6} y={toY(y)-4} fill="#fde047" fontSize="8">({x},{y})</text>
-                        </g>
-                      ))}
-                    </CoordSystem>
-                  </div>
-                  <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-green-300 font-body">✅ Titik potong sb-x = (2, 0), sb-y = (0, −4). Garis naik karena m = 2 &gt; 0</p>
-                  </div>
-                </div>
-              </div>
-            )}
+            <div className="px-5 pb-5 pt-4 space-y-1">
+              <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+              <MCQGrafik1 />
+            </div>
           </div>
 
           {/* CONTOH 2 */}
