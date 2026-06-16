@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import GradienInvariantAnimation from "@/components/GradienInvariantAnimation";
 import GradienDuaTitikInteraktif from "@/components/GradienDuaTitikInteraktif";
+import GradienPersamaanInteraktif from "@/components/GradienPersamaanInteraktif";
 
 const W = 180, H = 150, MX = 90, MY = 75, SC = 14;
 const toX = (x: number) => MX + x * SC;
@@ -37,7 +38,7 @@ const CoordSys = ({ children, label = "", w = W, h = H }: { children?: React.Rea
 const GradienPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "definisi", "animasi", "duatitik", "rumus", "visualgradien", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "definisi", "animasi", "duatitik", "persamaan", "rumus", "visualgradien", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
@@ -205,6 +206,19 @@ const GradienPage = () => {
                   Seret titik <span className="text-cyan-300 font-bold">P₁</span> dan <span className="text-yellow-300 font-bold">P₂</span> ke sembarang posisi — rumus akan terisi otomatis langkah demi langkah.
                 </p>
                 <GradienDuaTitikInteraktif />
+              </div>
+            )}
+          </div>
+
+          {/* GRADIEN DARI PERSAMAAN GARIS */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SH id="persamaan" icon={<Sliders className="w-5 h-5" />} iconColor="text-cyan-400" title="📐 Gradien dari Persamaan Garis" />
+            {expandedSections.includes("persamaan") && (
+              <div className="px-5 pb-5 space-y-4">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
+                  Ada dua bentuk persamaan garis yang sering muncul. Masing-masing punya cara berbeda untuk membaca gradiennya — dan ada alasan matematisnya.
+                </p>
+                <GradienPersamaanInteraktif />
               </div>
             )}
           </div>
