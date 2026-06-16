@@ -32,7 +32,7 @@ const CoordSys = ({ children, label = "" }: { children?: React.ReactNode; label?
 const MenentukanPGLPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "rumus1", "rumus2", "rumus3", "peta-rumus", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "rumus1", "rumus2", "peta-rumus", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
@@ -58,18 +58,17 @@ const MenentukanPGLPage = () => {
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Tiga Skenario Menentukan Persamaan Garis" />
+            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Dua Skenario Menentukan Persamaan Garis" />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">Bergantung pada informasi yang diberikan, ada tiga skenario utama untuk menentukan persamaan garis lurus. Pilih rumus yang sesuai dengan data yang tersedia!</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">Bergantung pada informasi yang diberikan, ada dua skenario utama untuk menentukan persamaan garis lurus. Pilih rumus yang sesuai dengan data yang tersedia!</p>
                 {/* Peta skenario */}
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
                   <p className="text-xs font-bold text-cyan-300 uppercase mb-3">🗺️ Peta Skenario Penentuan Persamaan Garis</p>
                   <div className="space-y-2">
                     {[
-                      { no: "1", info: "Diketahui gradien (m) dan titik potong sb-y (c)", rumus: "y = mx + c", color: "border-cyan-500/40 bg-cyan-900/10" },
-                      { no: "2", info: "Diketahui gradien (m) dan satu titik (x₁, y₁)", rumus: "y − y₁ = m(x − x₁)", color: "border-violet-500/40 bg-violet-900/10" },
-                      { no: "3", info: "Diketahui dua titik (x₁, y₁) dan (x₂, y₂)", rumus: "y − y₁ / y₂ − y₁ = x − x₁ / x₂ − x₁", color: "border-orange-500/40 bg-orange-900/10" },
+                      { no: "1", info: "Diketahui gradien (m) dan satu titik (x₁, y₁)", rumus: "y − y₁ = m(x − x₁)", color: "border-violet-500/40 bg-violet-900/10" },
+                      { no: "2", info: "Diketahui dua titik (x₁, y₁) dan (x₂, y₂)", rumus: "y − y₁ / y₂ − y₁ = x − x₁ / x₂ − x₁", color: "border-orange-500/40 bg-orange-900/10" },
                     ].map(({ no, info, rumus, color }) => (
                       <div key={no} className={`border ${color} rounded-xl p-3 flex gap-3 text-sm font-body`}>
                         <div className="bg-white/10 rounded-full w-7 h-7 shrink-0 flex items-center justify-center font-bold text-white font-display">{no}</div>
@@ -87,32 +86,7 @@ const MenentukanPGLPage = () => {
 
           {/* SKENARIO 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rumus1" icon={<Layers className="w-5 h-5" />} iconColor="text-cyan-400" title="📐 Skenario 1: Diketahui m dan c (Titik Potong sb-y)" />
-            {true && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4 text-center">
-                  <BlockMath math="y = mx + c" />
-                  <p className="text-xs text-white/60 mt-1">Langsung substitusi nilai m dan c yang diketahui</p>
-                </div>
-                {/* Visual */}
-                <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3">
-                  <p className="text-xs font-bold text-cyan-300 mb-2">Contoh: m = 2, c = 3 → y = 2x + 3</p>
-                  <CoordSys label="y = 2x + 3">
-                    <polyline points={[[-3,-3],[-2,-1],[-1,1],[0,3],[1,5],[2,7]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
-                    <circle cx={toX(0)} cy={toY(3)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
-                    <text x={toX(0)+5} y={toY(3)-4} fill="#facc15" fontSize="8">c = 3</text>
-                  </CoordSys>
-                </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="text-xs text-yellow-200 font-body"><strong>💡 Skenario termudah!</strong> Titik potong sb-y langsung menjadi nilai c dalam persamaan y = mx + c.</p>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* SKENARIO 2 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rumus2" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📐 Skenario 2: Diketahui m dan Satu Titik (x₁, y₁)" />
+            <SH id="rumus1" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📐 Skenario 1: Diketahui m dan Satu Titik (x₁, y₁)" />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-900/20 border border-violet-500/40 rounded-xl p-4 text-center">
@@ -148,9 +122,9 @@ const MenentukanPGLPage = () => {
             )}
           </div>
 
-          {/* SKENARIO 3 */}
+          {/* SKENARIO 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rumus3" icon={<Layers className="w-5 h-5" />} iconColor="text-orange-400" title="📐 Skenario 3: Diketahui Dua Titik" />
+            <SH id="rumus2" icon={<Layers className="w-5 h-5" />} iconColor="text-orange-400" title="📐 Skenario 2: Diketahui Dua Titik" />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-900/20 border border-orange-500/40 rounded-xl p-4 text-center">
@@ -188,42 +162,35 @@ const MenentukanPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-slate-800/60 border border-yellow-500/20 rounded-xl p-4">
-                  <svg viewBox="0 0 320 200" className="w-full" style={{ maxHeight: 200 }}>
+                  <svg viewBox="0 0 260 200" className="w-full" style={{ maxHeight: 200 }}>
                     {/* Start */}
-                    <rect x="110" y="5" width="100" height="30" rx="6" fill="#1e3a5f" stroke="#22d3ee" strokeWidth="1.5" />
-                    <text x="160" y="25" textAnchor="middle" fill="#22d3ee" fontSize="10" fontWeight="bold">INFO GARIS?</text>
+                    <rect x="80" y="5" width="100" height="30" rx="6" fill="#1e3a5f" stroke="#22d3ee" strokeWidth="1.5" />
+                    <text x="130" y="25" textAnchor="middle" fill="#22d3ee" fontSize="10" fontWeight="bold">INFO GARIS?</text>
                     {/* Arrow down */}
-                    <line x1="160" y1="35" x2="160" y2="55" stroke="#475569" strokeWidth="1.5" />
-                    <polygon points="155,53 165,53 160,60" fill="#475569" />
-                    {/* 3 branches */}
-                    <line x1="160" y1="60" x2="55" y2="85" stroke="#22d3ee" strokeWidth="1.2" />
-                    <line x1="160" y1="60" x2="160" y2="85" stroke="#a78bfa" strokeWidth="1.2" />
-                    <line x1="160" y1="60" x2="265" y2="85" stroke="#fb923c" strokeWidth="1.2" />
+                    <line x1="130" y1="35" x2="130" y2="52" stroke="#475569" strokeWidth="1.5" />
+                    <polygon points="125,50 135,50 130,57" fill="#475569" />
+                    {/* 2 branches */}
+                    <line x1="130" y1="57" x2="65" y2="82" stroke="#a78bfa" strokeWidth="1.2" />
+                    <line x1="130" y1="57" x2="195" y2="82" stroke="#fb923c" strokeWidth="1.2" />
                     {/* Labels on branches */}
-                    <text x="90" y="76" textAnchor="middle" fill="#22d3ee" fontSize="8">m dan c</text>
-                    <text x="160" y="76" textAnchor="middle" fill="#a78bfa" fontSize="8">m dan 1 titik</text>
-                    <text x="240" y="76" textAnchor="middle" fill="#fb923c" fontSize="8">2 titik</text>
+                    <text x="65" y="74" textAnchor="middle" fill="#a78bfa" fontSize="8">m dan 1 titik</text>
+                    <text x="195" y="74" textAnchor="middle" fill="#fb923c" fontSize="8">2 titik</text>
                     {/* Box 1 */}
-                    <rect x="5" y="88" width="100" height="40" rx="5" fill="#0c2340" stroke="#22d3ee" strokeWidth="1.2" />
-                    <text x="55" y="104" textAnchor="middle" fill="#22d3ee" fontSize="8" fontWeight="bold">y = mx + c</text>
-                    <text x="55" y="117" textAnchor="middle" fill="#7dd3fc" fontSize="7">Langsung substitusi</text>
+                    <rect x="10" y="85" width="110" height="40" rx="5" fill="#1a0b3a" stroke="#a78bfa" strokeWidth="1.2" />
+                    <text x="65" y="101" textAnchor="middle" fill="#a78bfa" fontSize="8" fontWeight="bold">y−y₁ = m(x−x₁)</text>
+                    <text x="65" y="114" textAnchor="middle" fill="#c4b5fd" fontSize="7">Titik-gradien</text>
                     {/* Box 2 */}
-                    <rect x="110" y="88" width="100" height="40" rx="5" fill="#1a0b3a" stroke="#a78bfa" strokeWidth="1.2" />
-                    <text x="160" y="104" textAnchor="middle" fill="#a78bfa" fontSize="8" fontWeight="bold">y−y₁ = m(x−x₁)</text>
-                    <text x="160" y="117" textAnchor="middle" fill="#c4b5fd" fontSize="7">Titik-gradien</text>
-                    {/* Box 3 */}
-                    <rect x="215" y="88" width="100" height="40" rx="5" fill="#1c0d00" stroke="#fb923c" strokeWidth="1.2" />
-                    <text x="265" y="104" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">Hitung m dulu,</text>
-                    <text x="265" y="116" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">lalu skenario 2</text>
-                    {/* All converge to result */}
-                    <line x1="55" y1="128" x2="55" y2="155" stroke="#475569" strokeWidth="1" />
-                    <line x1="160" y1="128" x2="160" y2="155" stroke="#475569" strokeWidth="1" />
-                    <line x1="265" y1="128" x2="265" y2="155" stroke="#475569" strokeWidth="1" />
-                    <line x1="55" y1="155" x2="265" y2="155" stroke="#475569" strokeWidth="1" />
-                    <line x1="160" y1="155" x2="160" y2="168" stroke="#475569" strokeWidth="1" />
-                    <polygon points="155,166 165,166 160,173" fill="#4ade80" />
-                    <rect x="100" y="173" width="120" height="26" rx="5" fill="#064e3b" stroke="#4ade80" strokeWidth="1.5" />
-                    <text x="160" y="190" textAnchor="middle" fill="#4ade80" fontSize="10" fontWeight="bold">y = mx + c ✅</text>
+                    <rect x="140" y="85" width="110" height="40" rx="5" fill="#1c0d00" stroke="#fb923c" strokeWidth="1.2" />
+                    <text x="195" y="101" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">Hitung m dulu,</text>
+                    <text x="195" y="113" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">lalu skenario 1</text>
+                    {/* Both converge to result */}
+                    <line x1="65" y1="125" x2="65" y2="152" stroke="#475569" strokeWidth="1" />
+                    <line x1="195" y1="125" x2="195" y2="152" stroke="#475569" strokeWidth="1" />
+                    <line x1="65" y1="152" x2="195" y2="152" stroke="#475569" strokeWidth="1" />
+                    <line x1="130" y1="152" x2="130" y2="165" stroke="#475569" strokeWidth="1" />
+                    <polygon points="125,163 135,163 130,170" fill="#4ade80" />
+                    <rect x="70" y="170" width="120" height="26" rx="5" fill="#064e3b" stroke="#4ade80" strokeWidth="1.5" />
+                    <text x="130" y="187" textAnchor="middle" fill="#4ade80" fontSize="10" fontWeight="bold">y = mx + c ✅</text>
                   </svg>
                 </div>
               </div>
@@ -242,8 +209,10 @@ const MenentukanPGLPage = () => {
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-1">Diketahui titik (0, −3) → ini titik potong sb-y, jadi c = −3</p>
-                    <BlockMath math="y = mx + c = 4x + (-3) = 4x - 3" />
+                    <p className="text-cyan-300 font-semibold mb-1">Gunakan rumus skenario 1: y − y₁ = m(x − x₁)</p>
+                    <BlockMath math="y - (-3) = 4(x - 0)" />
+                    <BlockMath math="y + 3 = 4x" />
+                    <BlockMath math="y = 4x - 3" />
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik y = 4x − 3:</p>
@@ -350,9 +319,8 @@ const MenentukanPGLPage = () => {
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {[
-                    ["Skenario 1 (m & c)", "Langsung pakai y = mx + c"],
-                    ["Skenario 2 (m & 1 titik)", "y − y₁ = m(x − x₁)"],
-                    ["Skenario 3 (2 titik)", "Hitung m dulu, lalu pakai skenario 2"],
+                    ["Skenario 1 (m & 1 titik)", "y − y₁ = m(x − x₁)"],
+                    ["Skenario 2 (2 titik)", "Hitung m dulu, lalu pakai skenario 1"],
                     ["Bentuk Umum", "ax + by + c = 0 (pindahkan semua ke satu sisi)"],
                     ["Verifikasi", "Substitusi koordinat titik ke persamaan, harus memenuhi!"],
                   ].map(([t,d]) => (
