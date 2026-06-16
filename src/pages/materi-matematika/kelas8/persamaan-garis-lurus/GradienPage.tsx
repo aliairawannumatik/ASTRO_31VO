@@ -114,23 +114,58 @@ const GradienPage = () => {
                     <strong className="text-green-300">sisi datar</strong> (jarak ke kanan) dari segitiga siku-siku yang terbentuk di bawah garis.
                   </p>
                   <div className="bg-violet-900/40 border border-violet-400/30 rounded-xl p-4 mt-3 text-center">
-                    <BlockMath math="m = \frac{\text{sisi tegak}}{\text{sisi datar}} = \frac{y_2 - y_1}{x_2 - x_1}" />
+                    <BlockMath math="m = \frac{\text{panjang sisi tegak}}{\text{panjang sisi datar}}" />
                   </div>
                 </div>
 
-                {/* Positif vs Negatif */}
+                {/* Positif vs Negatif — SVG illustrations */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-3 text-center">
-                    <p className="text-3xl mb-1">↗</p>
-                    <p className="text-xs font-bold text-green-300 font-body">Garis ke kanan ATAS</p>
-                    <p className="text-xs text-white/60 font-body mt-1">Gradien <strong className="text-green-300">POSITIF (+)</strong></p>
-                    <p className="text-xs text-white/40 font-body mt-0.5">sisi tegak naik ke atas</p>
+                  {/* Gradien Positif */}
+                  <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-3 flex flex-col items-center gap-2">
+                    <svg viewBox="0 0 120 90" className="w-full max-w-[140px]" style={{ background: "rgba(15,23,42,0.7)", borderRadius: 8 }}>
+                      {/* grid lines */}
+                      {[20,40,60,80].map(v => (
+                        <line key={`gh${v}`} x1="10" y1={v} x2="110" y2={v} stroke="#1e293b" strokeWidth="1" />
+                      ))}
+                      {[30,50,70,90].map(v => (
+                        <line key={`gv${v}`} x1={v} y1="10" x2={v} y2="80" stroke="#1e293b" strokeWidth="1" />
+                      ))}
+                      {/* the line — goes up to the right */}
+                      <line x1="20" y1="72" x2="100" y2="18" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" />
+                      {/* right-angle triangle */}
+                      <line x1="20" y1="72" x2="100" y2="72" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.6" />
+                      <line x1="100" y1="72" x2="100" y2="18" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.6" />
+                      {/* sisi tegak label */}
+                      <text x="103" y="48" fill="#f472b6" fontSize="8" fontWeight="bold">tegak</text>
+                      {/* sisi datar label */}
+                      <text x="48" y="82" fill="#4ade80" fontSize="8" fontWeight="bold">datar</text>
+                    </svg>
+                    <p className="text-xs font-bold text-green-300 font-body text-center">Gradien <span className="text-green-400">POSITIF (+)</span></p>
+                    <p className="text-[10px] text-white/50 font-body text-center">Garis naik ke kanan</p>
                   </div>
-                  <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-3 text-center">
-                    <p className="text-3xl mb-1">↘</p>
-                    <p className="text-xs font-bold text-red-300 font-body">Garis ke kanan BAWAH</p>
-                    <p className="text-xs text-white/60 font-body mt-1">Gradien <strong className="text-red-300">NEGATIF (−)</strong></p>
-                    <p className="text-xs text-white/40 font-body mt-0.5">sisi tegak turun ke bawah</p>
+
+                  {/* Gradien Negatif */}
+                  <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-3 flex flex-col items-center gap-2">
+                    <svg viewBox="0 0 120 90" className="w-full max-w-[140px]" style={{ background: "rgba(15,23,42,0.7)", borderRadius: 8 }}>
+                      {/* grid lines */}
+                      {[20,40,60,80].map(v => (
+                        <line key={`rh${v}`} x1="10" y1={v} x2="110" y2={v} stroke="#1e293b" strokeWidth="1" />
+                      ))}
+                      {[30,50,70,90].map(v => (
+                        <line key={`rv${v}`} x1={v} y1="10" x2={v} y2="80" stroke="#1e293b" strokeWidth="1" />
+                      ))}
+                      {/* the line — goes down to the right */}
+                      <line x1="20" y1="18" x2="100" y2="72" stroke="#f87171" strokeWidth="3" strokeLinecap="round" />
+                      {/* right-angle triangle */}
+                      <line x1="20" y1="18" x2="100" y2="18" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.6" />
+                      <line x1="100" y1="18" x2="100" y2="72" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.6" />
+                      {/* sisi tegak label */}
+                      <text x="103" y="48" fill="#f472b6" fontSize="8" fontWeight="bold">tegak</text>
+                      {/* sisi datar label */}
+                      <text x="48" y="14" fill="#4ade80" fontSize="8" fontWeight="bold">datar</text>
+                    </svg>
+                    <p className="text-xs font-bold text-red-300 font-body text-center">Gradien <span className="text-red-400">NEGATIF (−)</span></p>
+                    <p className="text-[10px] text-white/50 font-body text-center">Garis turun ke kanan</p>
                   </div>
                 </div>
 
