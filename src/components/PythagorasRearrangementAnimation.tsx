@@ -299,8 +299,20 @@ const PythagorasRearrangementAnimation: React.FC = () => {
           {/* ── 1. Big outer square (always) ── */}
           <rect x={OX} y={OY} width={S} height={S}
             fill="none" stroke="rgba(148,163,184,0.55)" strokeWidth="2" strokeDasharray="8 4"/>
-          <text x={OX+S/2} y={OY-9} textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="monospace">(a+b)</text>
-          <text x={OX-24}  y={OY+S/2+4} textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="monospace">(a+b)</text>
+          {/* Top dimension guide — b | a breakdown */}
+          <line x1={OX} y1={OY-11} x2={OX+S} y2={OY-11} stroke="rgba(100,116,139,0.65)" strokeWidth="1"/>
+          <line x1={OX}     y1={OY-15} x2={OX}     y2={OY-7} stroke="rgba(100,116,139,0.65)" strokeWidth="1.5"/>
+          <line x1={OX+B_S} y1={OY-15} x2={OX+B_S} y2={OY-7} stroke="rgba(100,116,139,0.65)" strokeWidth="1.5"/>
+          <line x1={OX+S}   y1={OY-15} x2={OX+S}   y2={OY-7} stroke="rgba(100,116,139,0.65)" strokeWidth="1.5"/>
+          <text x={(OX*2+B_S)/2}    y={OY-17} textAnchor="middle" fill="#86efac" fontSize="10" fontWeight="bold" fontFamily="monospace">b</text>
+          <text x={(OX+B_S+OX+S)/2} y={OY-17} textAnchor="middle" fill="#93c5fd" fontSize="10" fontWeight="bold" fontFamily="monospace">a</text>
+          {/* Left dimension guide — a | b breakdown */}
+          <line x1={OX-13} y1={OY} x2={OX-13} y2={OY+S} stroke="rgba(100,116,139,0.65)" strokeWidth="1"/>
+          <line x1={OX-17} y1={OY}      x2={OX-9} y2={OY}      stroke="rgba(100,116,139,0.65)" strokeWidth="1.5"/>
+          <line x1={OX-17} y1={OY+A_S}  x2={OX-9} y2={OY+A_S}  stroke="rgba(100,116,139,0.65)" strokeWidth="1.5"/>
+          <line x1={OX-17} y1={OY+S}    x2={OX-9} y2={OY+S}    stroke="rgba(100,116,139,0.65)" strokeWidth="1.5"/>
+          <text x={OX-24} y={(OY*2+A_S)/2+4}    textAnchor="middle" fill="#93c5fd" fontSize="10" fontWeight="bold" fontFamily="monospace">a</text>
+          <text x={OX-24} y={(OY+A_S+OY+S)/2+4} textAnchor="middle" fill="#86efac" fontSize="10" fontWeight="bold" fontFamily="monospace">b</text>
 
           {/* ── 2. Step 1+: glow HYPOTENUSES of all 4 triangles ──
                   These are the 4 edges of the inner tilted square.
@@ -414,13 +426,9 @@ const PythagorasRearrangementAnimation: React.FC = () => {
             );
           })}
 
-          {/* ── 7. Side labels a, b, c on T1 (steps 0 and 1) ── */}
+          {/* ── 7. Label c on T1 hypotenuse (steps 0 and 1) ── */}
           {showSideLabels && (
             <g>
-              <text x={MID_A[0]} y={MID_A[1]+4} textAnchor="middle"
-                fill="#93c5fd" fontSize="13" fontWeight="bold" fontFamily="monospace">a</text>
-              <text x={MID_B[0]} y={MID_B[1]} textAnchor="middle"
-                fill="#86efac" fontSize="13" fontWeight="bold" fontFamily="monospace">b</text>
               {/* 'c' on hypotenuse: red throughout */}
               <text x={MID_C[0]} y={MID_C[1]} textAnchor="middle"
                 fill={step >= 1 ? "#ef4444" : "#fca5a5"}
@@ -428,6 +436,24 @@ const PythagorasRearrangementAnimation: React.FC = () => {
                 fontWeight="bold" fontFamily="monospace"
                 filter={step >= 1 ? "url(#ra-glow-hy)" : undefined}
               >c</text>
+            </g>
+          )}
+
+          {/* ── 7b. Labels a & b inside all 4 triangles (steps 0–2) ── */}
+          {step < 3 && (
+            <g fontFamily="monospace" fontSize="11" fontWeight="bold">
+              {/* T1: right-angle top-left — a=down, b=right */}
+              <text x={78}  y={88}  fill="#93c5fd" textAnchor="middle">a</text>
+              <text x={137} y={46}  fill="#86efac" textAnchor="middle">b</text>
+              {/* T2: right-angle top-right — a=left, b=down */}
+              <text x={261} y={46}  fill="#93c5fd" textAnchor="middle">a</text>
+              <text x={305} y={106} fill="#86efac" textAnchor="middle">b</text>
+              {/* T3: right-angle bot-right — a=up, b=left */}
+              <text x={305} y={226} fill="#93c5fd" textAnchor="middle">a</text>
+              <text x={243} y={272} fill="#86efac" textAnchor="middle">b</text>
+              {/* T4: right-angle bot-left — a=right, b=up */}
+              <text x={119} y={272} fill="#93c5fd" textAnchor="middle">a</text>
+              <text x={78}  y={208} fill="#86efac" textAnchor="middle">b</text>
             </g>
           )}
 
