@@ -159,26 +159,6 @@ const GradienPage = () => {
                   </div>
                 </div>
 
-                {/* Segitiga gradien visual */}
-                <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="text-xs font-bold text-cyan-300 mb-3">📐 Segitiga Gradien — Sisi Tegak & Sisi Datar</p>
-                  <div className="flex justify-center">
-                    <svg viewBox="0 0 220 140" className="w-full max-w-xs rounded-xl" style={{ maxHeight: 150, background: "rgba(15,23,42,0.8)" }}>
-                      <line x1="20" y1="110" x2="200" y2="110" stroke="#475569" strokeWidth="1.5" />
-                      <line x1="20" y1="10" x2="20" y2="115" stroke="#475569" strokeWidth="1.5" />
-                      <line x1="30" y1="100" x2="180" y2="30" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
-                      <circle cx="50" cy="88" r="4" fill="#facc15" />
-                      <circle cx="150" cy="38" r="4" fill="#facc15" />
-                      <text x="30" y="100" fill="#facc15" fontSize="9">P₁(x₁, y₁)</text>
-                      <text x="152" y="34" fill="#facc15" fontSize="9">P₂(x₂, y₂)</text>
-                      <line x1="50" y1="88" x2="150" y2="88" stroke="#4ade80" strokeWidth="1.8" strokeDasharray="4,2" />
-                      <line x1="150" y1="88" x2="150" y2="38" stroke="#f472b6" strokeWidth="1.8" strokeDasharray="4,2" />
-                      <text x="78" y="101" fill="#4ade80" fontSize="9" fontWeight="bold">sisi datar</text>
-                      <text x="153" y="66" fill="#f472b6" fontSize="9" fontWeight="bold">sisi tegak</text>
-                      <text x="40" y="128" fill="#a78bfa" fontSize="9">m = sisi tegak / sisi datar</text>
-                    </svg>
-                  </div>
-                </div>
               </div>
             )}
           </div>
@@ -189,9 +169,7 @@ const GradienPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/70 leading-relaxed">
-                  Kamu bisa menggambar segitiga siku-siku di <strong className="text-cyan-300">bagian mana pun</strong> dari sebuah garis —
-                  besar atau kecil — dan perbandingan <strong className="text-pink-300">sisi tegak / sisi datar</strong> selalu menghasilkan nilai gradien yang sama.
-                  Coba buktikan sendiri!
+                  Seret kedua titik ke posisi mana pun di grid — gradien selalu bisa dihitung dari <strong className="text-green-300">sisi datar</strong> dan <strong className="text-pink-300">sisi tegak</strong> di antara keduanya.
                 </p>
                 <GradienInvariantAnimation />
               </div>

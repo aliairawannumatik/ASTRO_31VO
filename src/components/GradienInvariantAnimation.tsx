@@ -1,201 +1,249 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
-const W = 268, H = 182;
-const OX = 24, OY = 155;
-const SC = 18;
-const gx = (x: number) => OX + x * SC;
-const gy = (y: number) => OY - y * SC;
+const CELL = 22;
+const COLS = 11;
+const ROWS = 8;
+const PAD = 14;
+const W = PAD * 2 + COLS * CELL;
+const H = PAD * 2 + ROWS * CELL;
 
-type Tri = {
-  x1: number; y1: number;
-  x2: number; y2: number;
-  color: string;
-  datar: number;
-  tegak: number;
-  gradStr: string;
-};
-
-const TRIS_POS: Tri[] = [
-  { x1:1, y1:2/3,  x2:4, y2:8/3,  color:"#22d3ee", datar:3, tegak:2, gradStr:"+2/3" },
-  { x1:4, y1:8/3,  x2:7, y2:14/3, color:"#4ade80", datar:3, tegak:2, gradStr:"+2/3" },
-  { x1:1, y1:2/3,  x2:7, y2:14/3, color:"#facc15", datar:6, tegak:4, gradStr:"+4/6 = +2/3" },
+const toSVG = (gx: number, gy: number): [number, number] => [
+  PAD + gx * CELL,
+  H - PAD - gy * CELL,
 ];
-
-const TRIS_NEG: Tri[] = [
-  { x1:1, y1:13/3, x2:4, y2:7/3,  color:"#f472b6", datar:3, tegak:2, gradStr:"−2/3" },
-  { x1:4, y1:7/3,  x2:7, y2:1/3,  color:"#fb923c", datar:3, tegak:2, gradStr:"−2/3" },
-  { x1:1, y1:13/3, x2:7, y2:1/3,  color:"#ef4444", datar:6, tegak:4, gradStr:"−4/6 = −2/3" },
+const toGrid = (sx: number, sy: number): [number, number] => [
+  (sx - PAD) / CELL,
+  (H - PAD - sy) / CELL,
 ];
+const snap = (v: number, max: number) =>
+  Math.max(0, Math.min(max, Math.round(v)));
 
-function TriDraw({ tri, isNeg }: { tri: Tri; isNeg: boolean }) {
-  const cx1 = gx(tri.x1), cy1 = gy(tri.y1);
-  const cx2 = gx(tri.x2), cy2 = gy(tri.y2);
-  const cX = cx2, cY = cy1;
-  const c = tri.color;
-  const RA = 5;
-  const raDir = isNeg ? +RA : -RA;
+function gcd(a: number, b: number): number {
+  a = Math.abs(a);
+  b = Math.abs(b);
+  while (b) {
+    [a, b] = [b, a % b];
+  }
+  return a || 1;
+}
+
+function calcM(dx: number, dy: number): string {
+  if (dx === 0) return "∞";
+  if (dy === 0) return "0";
+  const g = gcd(Math.abs(dx), Math.abs(dy));
+  const num = Math.abs(dy / g);
+  const den = Math.abs(dx / g);
+  const sign = dx * dy > 0 ? "+" : "−";
+  return den === 1 ? `${sign}${num}` : `${sign}${num}/${den}`;
+}
+
+interface PanelProps {
+  initP1: [number, number];
+  initP2: [number, number];
+  lineColor: string;
+  accentClass: string;
+  labelText: string;
+}
+
+function DraggableGrid({ initP1, initP2, lineColor, accentClass, labelText }: PanelProps) {
+  const [p1, setP1] = useState<[number, number]>(initP1);
+  const [p2, setP2] = useState<[number, number]>(initP2);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const dragging = useRef<"p1" | "p2" | null>(null);
+
+  const getGridPos = (clientX: number, clientY: number): [number, number] => {
+    const svg = svgRef.current;
+    if (!svg) return [0, 0];
+    const rect = svg.getBoundingClientRect();
+    const sx = (clientX - rect.left) * (W / rect.width);
+    const sy = (clientY - rect.top) * (H / rect.height);
+    const [gx, gy] = toGrid(sx, sy);
+    return [snap(gx, COLS), snap(gy, ROWS)];
+  };
+
+  const onMove = (clientX: number, clientY: number) => {
+    if (!dragging.current) return;
+    const pos = getGridPos(clientX, clientY);
+    if (dragging.current === "p1") setP1(pos);
+    else setP2(pos);
+  };
+
+  const [x1, y1] = p1;
+  const [x2, y2] = p2;
+  const [sx1, sy1] = toSVG(x1, y1);
+  const [sx2, sy2] = toSVG(x2, y2);
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const samePoint = dx === 0 && dy === 0;
+  const csx = sx2;
+  const csy = sy1;
+  const m = calcM(dx, dy);
 
   return (
-    <g style={{ animation: "gfadeIn 0.45s ease-out" }}>
-      <line x1={cx1} y1={cY} x2={cX} y2={cY}
-        stroke={c} strokeWidth="2" strokeDasharray="5,2" opacity="0.9" />
-      <line x1={cX} y1={cY} x2={cx2} y2={cy2}
-        stroke={c} strokeWidth="2" strokeDasharray="5,2" opacity="0.9" />
-      <polyline
-        points={`${cX-RA},${cY} ${cX-RA},${cY+raDir} ${cX},${cY+raDir}`}
-        fill="none" stroke={c} strokeWidth="0.9" opacity="0.55"
-      />
-      <circle cx={cx1} cy={cy1} r="3.5" fill={c} />
-      <circle cx={cx2} cy={cy2} r="3.5" fill={c} />
-      <text x={(cx1+cX)/2} y={cY + (isNeg ? -7 : 13)}
-        textAnchor="middle" fontSize="9" fontWeight="bold" fill="#facc15">{tri.datar}</text>
-      <text x={cX+7} y={(cY+cy2)/2+3.5}
-        fontSize="9" fontWeight="bold" fill="#facc15">{tri.tegak}</text>
-    </g>
+    <div className="space-y-1.5">
+      <p className={`text-xs font-bold font-body ${accentClass}`}>{labelText}</p>
+      <svg
+        ref={svgRef}
+        viewBox={`0 0 ${W} ${H}`}
+        width="100%"
+        style={{
+          background: "rgba(10,18,35,0.88)",
+          borderRadius: 10,
+          userSelect: "none",
+          touchAction: "none",
+        }}
+        onMouseMove={e => onMove(e.clientX, e.clientY)}
+        onMouseUp={() => { dragging.current = null; }}
+        onMouseLeave={() => { dragging.current = null; }}
+        onTouchMove={e => {
+          e.preventDefault();
+          onMove(e.touches[0].clientX, e.touches[0].clientY);
+        }}
+        onTouchEnd={() => { dragging.current = null; }}
+      >
+        {/* Grid columns */}
+        {Array.from({ length: COLS + 1 }, (_, i) => (
+          <line
+            key={`vc${i}`}
+            x1={PAD + i * CELL} y1={PAD}
+            x2={PAD + i * CELL} y2={H - PAD}
+            stroke="#1a2744" strokeWidth="1"
+          />
+        ))}
+        {/* Grid rows */}
+        {Array.from({ length: ROWS + 1 }, (_, i) => (
+          <line
+            key={`hr${i}`}
+            x1={PAD} y1={PAD + i * CELL}
+            x2={W - PAD} y2={PAD + i * CELL}
+            stroke="#1a2744" strokeWidth="1"
+          />
+        ))}
+
+        {/* Extended faint line */}
+        {dx !== 0 && (() => {
+          const slope = dy / dx;
+          const yAt0 = y1 + slope * (0 - x1);
+          const yAtMax = y1 + slope * (COLS - x1);
+          return (
+            <line
+              x1={PAD} y1={H - PAD - yAt0 * CELL}
+              x2={W - PAD} y2={H - PAD - yAtMax * CELL}
+              stroke={lineColor} strokeWidth="1.2" opacity="0.22" strokeLinecap="round"
+            />
+          );
+        })()}
+
+        {/* Triangle dashes */}
+        {!samePoint && dx !== 0 && dy !== 0 && (
+          <>
+            {/* sisi datar */}
+            <line x1={sx1} y1={sy1} x2={csx} y2={csy}
+              stroke="#4ade80" strokeWidth="1.8" strokeDasharray="4,2" opacity="0.9" />
+            {/* sisi tegak */}
+            <line x1={csx} y1={csy} x2={sx2} y2={sy2}
+              stroke="#f472b6" strokeWidth="1.8" strokeDasharray="4,2" opacity="0.9" />
+            {/* right-angle mark */}
+            <polyline
+              points={`${csx + (dx > 0 ? -5 : 5)},${csy} ${csx + (dx > 0 ? -5 : 5)},${csy + (dy > 0 ? 5 : -5)} ${csx},${csy + (dy > 0 ? 5 : -5)}`}
+              fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.3"
+            />
+            {/* datar number */}
+            <text
+              x={(sx1 + csx) / 2}
+              y={csy + (dy >= 0 ? 12 : -4)}
+              fill="#4ade80" fontSize="9.5" fontWeight="bold" textAnchor="middle"
+            >
+              {Math.abs(dx)}
+            </text>
+            {/* tegak number */}
+            <text
+              x={csx + (dx >= 0 ? 9 : -9)}
+              y={(csy + sy2) / 2 + 4}
+              fill="#f472b6" fontSize="9.5" fontWeight="bold"
+              textAnchor={dx >= 0 ? "start" : "end"}
+            >
+              {Math.abs(dy)}
+            </text>
+          </>
+        )}
+
+        {/* Main segment */}
+        {!samePoint && (
+          <line x1={sx1} y1={sy1} x2={sx2} y2={sy2}
+            stroke={lineColor} strokeWidth="3" strokeLinecap="round" />
+        )}
+
+        {/* P1 handle */}
+        <g
+          style={{ cursor: "grab" }}
+          onMouseDown={e => { e.preventDefault(); dragging.current = "p1"; }}
+          onTouchStart={e => { e.preventDefault(); dragging.current = "p1"; }}
+        >
+          <circle cx={sx1} cy={sy1} r="11" fill={lineColor} opacity="0.12" />
+          <circle cx={sx1} cy={sy1} r="5" fill={lineColor} stroke="white" strokeWidth="1.5" />
+        </g>
+
+        {/* P2 handle */}
+        <g
+          style={{ cursor: "grab" }}
+          onMouseDown={e => { e.preventDefault(); dragging.current = "p2"; }}
+          onTouchStart={e => { e.preventDefault(); dragging.current = "p2"; }}
+        >
+          <circle cx={sx2} cy={sy2} r="11" fill={lineColor} opacity="0.12" />
+          <circle cx={sx2} cy={sy2} r="5" fill={lineColor} stroke="white" strokeWidth="1.5" />
+        </g>
+
+        {/* Hint when same point */}
+        {samePoint && (
+          <text x={W / 2} y={H / 2} fill="#475569" fontSize="9" textAnchor="middle">
+            Seret titik ke posisi berbeda
+          </text>
+        )}
+      </svg>
+
+      {/* Result row */}
+      <div
+        className="flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-xs font-body"
+        style={{ background: `${lineColor}14`, border: `1px solid ${lineColor}38` }}
+      >
+        {samePoint || dx === 0 ? (
+          <span className="text-white/40">Geser titik untuk melihat gradien</span>
+        ) : (
+          <>
+            <span style={{ color: "#4ade80" }} className="font-bold">{Math.abs(dx)}</span>
+            <span className="text-white/35">datar</span>
+            <span className="text-white/25 mx-0.5">/</span>
+            <span style={{ color: "#f472b6" }} className="font-bold">{Math.abs(dy)}</span>
+            <span className="text-white/35">tegak</span>
+            <span className="text-white/30 mx-1">→</span>
+            <span className="font-bold text-base font-mono" style={{ color: lineColor }}>
+              m = {m}
+            </span>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 
 export default function GradienInvariantAnimation() {
-  const [mode, setMode] = useState<"pos" | "neg">("pos");
-  const [step, setStep] = useState(0);
-  const tris = mode === "pos" ? TRIS_POS : TRIS_NEG;
-  const lineColor = mode === "pos" ? "#22d3ee" : "#f472b6";
-
-  const switchMode = (m: "pos" | "neg") => { setMode(m); setStep(0); };
-
-  const lx1 = 0, ly1 = mode === "pos" ? 0 : 5;
-  const lx2 = mode === "pos" ? 8 : 7.5, ly2 = mode === "pos" ? 8*(2/3) : 0;
-
-  const btnLabels = ["Tampilkan Segitiga 1", "Tampilkan Segitiga 2", "Tampilkan Segitiga 3"];
-
   return (
-    <div className="space-y-3">
-      <div className="flex gap-2">
-        {(["pos", "neg"] as const).map(m => (
-          <button key={m} onClick={() => switchMode(m)}
-            className={`flex-1 text-xs font-bold py-2 rounded-lg border transition-all duration-200 font-body ${
-              mode === m
-                ? m === "pos"
-                  ? "bg-cyan-900/60 border-cyan-400/60 text-cyan-200 scale-105"
-                  : "bg-pink-900/60 border-pink-400/60 text-pink-200 scale-105"
-                : "bg-slate-800/40 border-white/10 text-white/40 hover:text-white/70"
-            }`}>
-            {m === "pos" ? "↗ Gradien Positif" : "↘ Gradien Negatif"}
-          </button>
-        ))}
-      </div>
-
-      <div className={`text-xs font-body rounded-lg px-3 py-2 border font-semibold ${
-        mode === "pos"
-          ? "bg-cyan-900/20 border-cyan-500/30 text-cyan-200"
-          : "bg-pink-900/20 border-pink-500/30 text-pink-200"
-      }`}>
-        {mode === "pos"
-          ? "✅ Garis naik ke kanan atas → gradien POSITIF (+2/3)"
-          : "❌ Garis turun ke kanan bawah → gradien NEGATIF (−2/3)"}
-      </div>
-
-      <div className="rounded-xl overflow-hidden" style={{ background: "var(--bg-card)" }}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%">
-          {[1,2,3,4,5,6,7,8].map(v => (
-            <g key={v}>
-              <line x1={gx(v)} y1={4} x2={gx(v)} y2={H-4} stroke="#1a2744" strokeWidth="0.6" />
-              <line x1={4} y1={gy(v)} x2={W-4} y2={gy(v)} stroke="#1a2744" strokeWidth="0.6" />
-            </g>
-          ))}
-          <line x1={OX} y1={4} x2={OX} y2={H-4} stroke="#334155" strokeWidth="1.5" />
-          <line x1={4} y1={OY} x2={W-4} y2={OY} stroke="#334155" strokeWidth="1.5" />
-          <text x={W-13} y={OY+10} fill="#475569" fontSize="9">x</text>
-          <text x={OX+3} y={12} fill="#475569" fontSize="9">y</text>
-
-          <line
-            x1={gx(lx1)} y1={gy(ly1)} x2={gx(lx2)} y2={gy(ly2)}
-            stroke={lineColor} strokeWidth="2.8" strokeLinecap="round"
-            style={{ filter: `drop-shadow(0 0 5px ${lineColor}55)` }}
-          />
-
-          {tris.slice(0, step).map((t, i) => (
-            <TriDraw key={i} tri={t} isNeg={mode === "neg"} />
-          ))}
-
-          <text x={OX+2} y={OY-3} fill="#475569" fontSize="8">O</text>
-
-          <text x={W-65} y={18} fill={lineColor} fontSize="8" fontWeight="bold">
-            {mode === "pos" ? "y = ⅔x" : "y = −⅔x + 5"}
-          </text>
-
-          {step === 0 && (
-            <text x={W/2} y={H/2+20} fill="#475569" fontSize="9" textAnchor="middle">
-              Tekan tombol di bawah untuk mulai
-            </text>
-          )}
-
-          {step > 0 && (
-            <>
-              <text x={W-48} y={H-10} fill="#475569" fontSize="7.5">sisi datar →</text>
-              <text x={W-48} y={H-2} fill="#475569" fontSize="7.5">↕ sisi tegak</text>
-            </>
-          )}
-        </svg>
-      </div>
-
-      <div className="flex gap-2">
-        {step < 3 && (
-          <button onClick={() => setStep(s => s + 1)}
-            className={`flex-1 text-xs font-bold py-2.5 rounded-lg border transition-all font-body ${
-              mode === "pos"
-                ? "bg-cyan-900/40 border-cyan-500/40 text-cyan-200 hover:bg-cyan-900/70"
-                : "bg-pink-900/40 border-pink-500/40 text-pink-200 hover:bg-pink-900/70"
-            }`}>
-            {btnLabels[step]}
-          </button>
-        )}
-        {step > 0 && (
-          <button onClick={() => setStep(0)}
-            className="text-xs font-bold py-2.5 px-4 rounded-lg border border-white/15 text-white/40 hover:text-white/70 transition-all font-body">
-            Ulangi
-          </button>
-        )}
-      </div>
-
-      {step > 0 && (
-        <div className="space-y-1.5">
-          {tris.slice(0, step).map((t, i) => (
-            <div key={i} className="flex items-start gap-2.5 bg-slate-800/50 rounded-lg px-3 py-2">
-              <div className="w-2.5 h-2.5 rounded-full flex-shrink-0 mt-0.5" style={{ background: t.color }} />
-              <div className="text-xs font-body leading-relaxed">
-                <span className="text-white/50">Segitiga {i+1}: </span>
-                <span style={{ color: t.color }}>sisi datar = {t.datar}, sisi tegak = {t.tegak}</span>
-                <span className="text-white/30 mx-1.5">→</span>
-                <span className="font-bold text-white">m = {t.gradStr}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {step === 3 && (
-        <div className={`border rounded-xl p-4 space-y-2 ${
-          mode === "pos" ? "bg-cyan-500/10 border-cyan-500/40" : "bg-pink-500/10 border-pink-500/40"
-        }`}>
-          <p className="text-sm font-bold text-white font-body text-center">
-            {mode === "pos"
-              ? "✅ Ketiga segitiga berbeda ukuran — gradiennya tetap +2/3!"
-              : "✅ Ketiga segitiga berbeda ukuran — gradiennya tetap −2/3!"}
-          </p>
-          <p className="text-xs text-white/60 font-body text-center leading-relaxed">
-            Gradien <strong className="text-white/80">tidak bergantung</strong> pada panjang atau posisi bagian garis yang diukur.
-            Kamu bisa memilih segitiga dari bagian mana pun — hasilnya selalu sama.
-          </p>
-        </div>
-      )}
-
-      <style>{`
-        @keyframes gfadeIn {
-          from { opacity: 0; transform: scale(0.92); }
-          to   { opacity: 1; transform: scale(1); }
-        }
-      `}</style>
+    <div className="space-y-5">
+      <DraggableGrid
+        initP1={[1, 1]}
+        initP2={[7, 5]}
+        lineColor="#4ade80"
+        accentClass="text-green-300"
+        labelText="↗ Gradien Positif — seret titik untuk mengukur di bagian mana pun"
+      />
+      <DraggableGrid
+        initP1={[1, 7]}
+        initP2={[7, 3]}
+        lineColor="#f87171"
+        accentClass="text-red-300"
+        labelText="↘ Gradien Negatif — seret titik untuk mengukur di bagian mana pun"
+      />
     </div>
   );
 }
