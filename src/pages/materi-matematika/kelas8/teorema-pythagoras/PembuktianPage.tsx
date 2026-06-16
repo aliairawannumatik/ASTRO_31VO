@@ -320,6 +320,32 @@ const PembuktianPage = () => {
                       <p className="text-white/60 mt-1">Hipotenusa (miring)</p>
                     </div>
                   </div>
+
+                  {/* Dua variasi rumus lain */}
+                  <div className="mt-4 space-y-2">
+                    <p className="text-cyan-300/70 text-xs font-body font-semibold uppercase tracking-wide">🔄 Variasi Rumus — Mencari Sisi Lain</p>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <div className="bg-blue-900/30 border border-blue-500/30 rounded-xl p-3 space-y-1">
+                        <p className="text-blue-300 text-xs font-body font-semibold">Mencari sisi tegak <InlineMath math="a"/></p>
+                        <p className="text-white/50 text-xs font-body">Jika <InlineMath math="b"/> dan <InlineMath math="c"/> diketahui:</p>
+                        <div className="bg-slate-900/60 rounded-lg px-3 py-1">
+                          <BlockMath math="a = \sqrt{c^2 - b^2}"/>
+                        </div>
+                      </div>
+                      <div className="bg-green-900/30 border border-green-500/30 rounded-xl p-3 space-y-1">
+                        <p className="text-green-300 text-xs font-body font-semibold">Mencari sisi alas <InlineMath math="b"/></p>
+                        <p className="text-white/50 text-xs font-body">Jika <InlineMath math="a"/> dan <InlineMath math="c"/> diketahui:</p>
+                        <div className="bg-slate-900/60 rounded-lg px-3 py-1">
+                          <BlockMath math="b = \sqrt{c^2 - a^2}"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-slate-700/40 border border-slate-600/40 rounded-lg p-2 mt-1">
+                      <p className="text-white/50 text-xs font-body text-center">
+                        💡 Ketiga rumus ini berasal dari <strong className="text-yellow-300">persamaan yang sama</strong> — hanya dipindah-pindah ruas saja!
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
