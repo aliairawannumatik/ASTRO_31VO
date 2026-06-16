@@ -457,81 +457,45 @@ const GradienPage = () => {
 
                 {/* Grafik soal — 2 kolom */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* a) garis melalui A(-3,1) dan B(1,-1), m = -1/2 */}
+                  {/* a) y = -x/2 - 1/2, dari x=-4 ke x=4 */}
                   <div className="bg-slate-900/60 border border-cyan-500/20 rounded-xl p-3">
                     <p className="text-xs font-bold text-cyan-300 mb-2 font-body">a) Tentukan gradien garis di bawah ini:</p>
                     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
-                      {/* Grid */}
-                      {[-4,-3,-2,-1,1,2,3,4].map(v => (
-                        <g key={`a-grid-${v}`}>
-                          <line x1={MX+v*SC} y1={6} x2={MX+v*SC} y2={H-6} stroke="#0f172a" strokeWidth="1" />
-                          <line x1={6} y1={MY-v*SC} x2={W-6} y2={MY-v*SC} stroke="#0f172a" strokeWidth="1" />
+                      {/* Grid kotak — termasuk baris/kolom ke-0 */}
+                      {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
+                        <g key={`aq-${v}`}>
+                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke="#1e293b" strokeWidth="0.9" />
+                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke="#1e293b" strokeWidth="0.9" />
                         </g>
                       ))}
-                      {/* Axes */}
-                      <line x1={6} y1={MY} x2={W-6} y2={MY} stroke="#334155" strokeWidth="1.5" />
-                      <line x1={MX} y1={H-6} x2={MX} y2={6} stroke="#334155" strokeWidth="1.5" />
-                      <polygon points={`${W-6},${MY} ${W-12},${MY-3} ${W-12},${MY+3}`} fill="#334155" />
-                      <polygon points={`${MX},6 ${MX-3},12 ${MX+3},12`} fill="#334155" />
-                      <text x={W-10} y={MY+10} fill="#475569" fontSize="8">x</text>
-                      <text x={MX+4} y={13} fill="#475569" fontSize="8">y</text>
-                      <text x={MX+3} y={MY+10} fill="#334155" fontSize="7">O</text>
-                      {/* Tick numbers */}
-                      {[-4,-2,2,4].map(v=>(
-                        <g key={`a-tick-${v}`}>
-                          <text x={MX+v*SC-(v<0?5:3)} y={MY+10} fill="#374151" fontSize="7">{v}</text>
-                          <text x={MX-12} y={MY-v*SC+3} fill="#374151" fontSize="7">{v}</text>
-                        </g>
-                      ))}
-                      {/* Garis melalui A(-3,1) dan B(1,-1), diperpanjang */}
-                      <polyline
-                        points={[[-4,2],[-3,1],[-1,0],[1,-1],[2,-2]].map(([x,y])=>`${MX+x*SC},${MY-y*SC}`).join(' ')}
-                        fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round"
+                      {/* Garis lurus — y = -½x - ½, x dari -4 ke 4 */}
+                      {/* At x=-4: y=1.5  At x=4: y=-2.5 */}
+                      <line
+                        x1={MX+(-4)*SC} y1={MY-1.5*SC}
+                        x2={MX+4*SC}    y2={MY-(-2.5)*SC}
+                        stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round"
                       />
-                      {/* Titik A dan B */}
-                      <circle cx={MX+(-3)*SC} cy={MY-1*SC} r="5" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.5" />
-                      <circle cx={MX+1*SC}   cy={MY-(-1)*SC} r="5" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.5" />
-                      <text x={MX+(-3)*SC-5} y={MY-1*SC-8}  fill="#67e8f9" fontSize="8" textAnchor="middle">A(−3, 1)</text>
-                      <text x={MX+1*SC+4}   y={MY-(-1)*SC+14} fill="#67e8f9" fontSize="8">B(1, −1)</text>
                     </svg>
                   </div>
 
-                  {/* b) garis melalui P(-2,-2) dan Q(1,4), m = 2 */}
+                  {/* b) y = 2x+2, dari x=-2.5 ke x=1.5 */}
                   <div className="bg-slate-900/60 border border-amber-500/20 rounded-xl p-3">
                     <p className="text-xs font-bold text-amber-300 mb-2 font-body">b) Tentukan gradien garis di bawah ini:</p>
                     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
-                      {/* Grid */}
-                      {[-4,-3,-2,-1,1,2,3,4].map(v => (
-                        <g key={`b-grid-${v}`}>
-                          <line x1={MX+v*SC} y1={6} x2={MX+v*SC} y2={H-6} stroke="#0f172a" strokeWidth="1" />
-                          <line x1={6} y1={MY-v*SC} x2={W-6} y2={MY-v*SC} stroke="#0f172a" strokeWidth="1" />
+                      {/* Grid kotak — termasuk baris/kolom ke-0 */}
+                      {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
+                        <g key={`bq-${v}`}>
+                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke="#1e293b" strokeWidth="0.9" />
+                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke="#1e293b" strokeWidth="0.9" />
                         </g>
                       ))}
-                      {/* Axes */}
-                      <line x1={6} y1={MY} x2={W-6} y2={MY} stroke="#334155" strokeWidth="1.5" />
-                      <line x1={MX} y1={H-6} x2={MX} y2={6} stroke="#334155" strokeWidth="1.5" />
-                      <polygon points={`${W-6},${MY} ${W-12},${MY-3} ${W-12},${MY+3}`} fill="#334155" />
-                      <polygon points={`${MX},6 ${MX-3},12 ${MX+3},12`} fill="#334155" />
-                      <text x={W-10} y={MY+10} fill="#475569" fontSize="8">x</text>
-                      <text x={MX+4} y={13} fill="#475569" fontSize="8">y</text>
-                      <text x={MX+3} y={MY+10} fill="#334155" fontSize="7">O</text>
-                      {/* Tick numbers */}
-                      {[-4,-2,2,4].map(v=>(
-                        <g key={`b-tick-${v}`}>
-                          <text x={MX+v*SC-(v<0?5:3)} y={MY+10} fill="#374151" fontSize="7">{v}</text>
-                          <text x={MX-12} y={MY-v*SC+3} fill="#374151" fontSize="7">{v}</text>
-                        </g>
-                      ))}
-                      {/* Garis melalui P(-2,-2) dan Q(1,4), y=2x+2, diperpanjang */}
-                      <polyline
-                        points={[[-2.5,-3],[-2,-2],[-1,0],[0,2],[1,4],[1.2,4.4]].map(([x,y])=>`${MX+x*SC},${MY-y*SC}`).join(' ')}
-                        fill="none" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round"
+                      {/* Garis lurus — y = 2x+2, x dari -2.5 ke 1.5 */}
+                      {/* At x=-2.5: y=-3  At x=1.5: y=5 */}
+                      <line
+                        x1={MX+(-2.5)*SC} y1={MY-(-3)*SC}
+                        x2={MX+1.5*SC}    y2={MY-5*SC}
+                        stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round"
                       />
-                      {/* Titik P dan Q */}
-                      <circle cx={MX+(-2)*SC} cy={MY-(-2)*SC} r="5" fill="#fbbf24" stroke="#fde68a" strokeWidth="1.5" />
-                      <circle cx={MX+1*SC}    cy={MY-4*SC}    r="5" fill="#fbbf24" stroke="#fde68a" strokeWidth="1.5" />
-                      <text x={MX+(-2)*SC-4} y={MY-(-2)*SC+14} fill="#fde68a" fontSize="8" textAnchor="middle">P(−2, −2)</text>
-                      <text x={MX+1*SC+4}    y={MY-4*SC+4}    fill="#fde68a" fontSize="8">Q(1, 4)</text>
                     </svg>
                   </div>
                 </div>
