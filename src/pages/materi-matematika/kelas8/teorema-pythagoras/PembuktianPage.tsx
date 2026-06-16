@@ -252,18 +252,6 @@ const PembuktianPage = () => {
                   Lebih dari 2.500 tahun lalu, seorang matematikawan Yunani bernama <strong className="text-cyan-300">Pythagoras</strong> menemukan sebuah pola yang luar biasa di setiap segitiga siku-siku. Hubungan antar sisi-sisinya selalu berlaku, tanpa terkecuali! Inilah yang kita kenal sebagai <strong className="text-yellow-300">Teorema Pythagoras</strong> — salah satu rumus paling terkenal di dunia matematika.
                 </p>
 
-                {/* Gambar Konstruksi */}
-                <figure className="rounded-xl overflow-hidden border border-yellow-500/30 bg-slate-900/60">
-                  <img
-                    src="/pythagoras-construction.png"
-                    alt="Pekerja konstruksi menggunakan Teorema Pythagoras di lapangan"
-                    className="w-full object-cover max-h-72"
-                  />
-                  <figcaption className="text-center text-white/40 text-xs py-2 px-3 font-body italic">
-                    bing.com/images/create
-                  </figcaption>
-                </figure>
-
                 {/* Kegunaan Teorema Pythagoras */}
                 <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-3">
                   <p className="text-yellow-300 font-semibold text-sm">🏗️ Kegunaan Teorema Pythagoras dalam Kehidupan Nyata</p>
@@ -273,7 +261,7 @@ const PembuktianPage = () => {
                   <ul className="space-y-2 font-body text-sm text-white/75">
                     <li className="flex gap-2">
                       <span className="text-orange-400 shrink-0">🏗️</span>
-                      <span><strong className="text-orange-300">Konstruksi & Arsitektur</strong> — Seperti terlihat pada gambar di atas, para pekerja bangunan menggunakan Teorema Pythagoras untuk memastikan sudut bangunan benar-benar 90° (siku-siku), mengukur diagonal pondasi, dan menghitung panjang rangka atap secara presisi.</span>
+                      <span><strong className="text-orange-300">Konstruksi & Arsitektur</strong> — Seperti terlihat pada gambar di bawah, para pekerja bangunan menggunakan Teorema Pythagoras untuk memastikan sudut bangunan benar-benar 90° (siku-siku), mengukur diagonal pondasi, dan menghitung panjang rangka atap secara presisi.</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-cyan-400 shrink-0">🗺️</span>
@@ -292,6 +280,19 @@ const PembuktianPage = () => {
                       <span><strong className="text-pink-300">Kedokteran & Imaging</strong> — Digunakan dalam pemrosesan gambar medis seperti CT scan dan MRI untuk menghitung jarak dan ukuran organ.</span>
                     </li>
                   </ul>
+
+                  {/* Gambar Konstruksi */}
+                  <figure className="rounded-xl overflow-hidden border border-yellow-500/30 bg-slate-900/60">
+                    <img
+                      src="/pythagoras-construction.png"
+                      alt="Pekerja konstruksi menggunakan Teorema Pythagoras di lapangan"
+                      className="w-full object-cover max-h-72"
+                    />
+                    <figcaption className="text-center text-white/40 text-xs py-2 px-3 font-body italic">
+                      bing.com/images/create
+                    </figcaption>
+                  </figure>
+
                   <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3 mt-2">
                     <p className="font-body text-xs text-yellow-200">
                       💡 <strong>Fakta Menarik:</strong> Teknik "<em>3-4-5</em>" yang dipakai tukang bangunan untuk memastikan sudut siku-siku adalah penerapan langsung Teorema Pythagoras (3² + 4² = 5²) — digunakan sejak zaman Mesir Kuno!
