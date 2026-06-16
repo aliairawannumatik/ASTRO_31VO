@@ -282,41 +282,9 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
   if(pSqC>0) {
     if(flA>0.002) {
       poly(ctx,cStrip(0,flA)); ctx.fillStyle=COL_A+"bb"; ctx.fill();
-      // thin grid inside a-zone
-      const aZone = cStrip(0,flA);
-      // draw parallel lines in BA direction
-      ctx.save(); ctx.globalAlpha=0.35; ctx.strokeStyle=COL_A; ctx.lineWidth=0.7;
-      for(let i=1;i<5;i++) {
-        const v=i/5;
-        const p1={x:lerp(aZone[0].x,aZone[3].x,v),y:lerp(aZone[0].y,aZone[3].y,v)};
-        const p2={x:lerp(aZone[1].x,aZone[2].x,v),y:lerp(aZone[1].y,aZone[2].y,v)};
-        ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
-      }
-      for(let i=1;i<10;i++) {
-        const u=i/10;
-        const p1={x:lerp(aZone[0].x,aZone[1].x,u),y:lerp(aZone[0].y,aZone[1].y,u)};
-        const p2={x:lerp(aZone[3].x,aZone[2].x,u),y:lerp(aZone[3].y,aZone[2].y,u)};
-        ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
-      }
-      ctx.restore();
     }
     if(flB>F_A+0.002) {
       poly(ctx,cStrip(F_A,flB)); ctx.fillStyle=COL_B+"bb"; ctx.fill();
-      const bZone=cStrip(F_A,flB);
-      ctx.save(); ctx.globalAlpha=0.35; ctx.strokeStyle=COL_B; ctx.lineWidth=0.7;
-      for(let i=1;i<8;i++) {
-        const v=i/8;
-        const p1={x:lerp(bZone[0].x,bZone[3].x,v),y:lerp(bZone[0].y,bZone[3].y,v)};
-        const p2={x:lerp(bZone[1].x,bZone[2].x,v),y:lerp(bZone[1].y,bZone[2].y,v)};
-        ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
-      }
-      for(let i=1;i<10;i++) {
-        const u=i/10;
-        const p1={x:lerp(bZone[0].x,bZone[1].x,u),y:lerp(bZone[0].y,bZone[1].y,u)};
-        const p2={x:lerp(bZone[3].x,bZone[2].x,u),y:lerp(bZone[3].y,bZone[2].y,u)};
-        ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
-      }
-      ctx.restore();
     }
   }
 
@@ -379,7 +347,6 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     const fadeOut  = Math.max(0, 1 - eO3(ph(t, 0.82, 0.88)));
     const flyAlpha = slideIn * fadeOut;
     drawFlyingRect(ctx,flyX,flyY,flyAng,100,36,flyAlpha,COL_A+"66",COL_A);
-    drawFlyingGrid(ctx,flyX,flyY,flyAng,100,36,3,3,COL_A,flyAlpha);
   }
 
   // ── 7. Flying rectangle b² → c² (SLIDES as solid shape, fades only after arriving) ──
@@ -391,7 +358,6 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     const fadeOut  = Math.max(0, 1 - eO3(ph(t, 0.91, 0.96)));
     const flyAlpha = slideIn * fadeOut;
     drawFlyingRect(ctx,flyX,flyY,flyAng,100,64,flyAlpha,COL_B+"66",COL_B);
-    drawFlyingGrid(ctx,flyX,flyY,flyAng,100,64,4,4,COL_B,flyAlpha);
   }
 
   // ── 8. Labels inside filled c² zones ────────────────────────────────────────
