@@ -508,7 +508,7 @@ const GradienPage = () => {
                       <BlockMath math="m = \frac{y_B - y_A}{x_B - x_A} = \frac{-1 - 1}{2 - (-2)} = \frac{-2}{4} = -\frac{1}{2}" />
                     </div>
                     {/* Grid pembahasan — sama dengan soal + garis putus-putus segitiga */}
-                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
+                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full sm:w-1/2 mx-auto block rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`sa-${v}`}>
                           <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke="#1e293b" strokeWidth="0.9" />
@@ -548,7 +548,7 @@ const GradienPage = () => {
                       <BlockMath math="m = \frac{y_Q - y_P}{x_Q - x_P} = \frac{4 - (-2)}{1 - (-2)} = \frac{6}{3} = 2" />
                     </div>
                     {/* Grid pembahasan — sama dengan soal + garis putus-putus segitiga */}
-                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
+                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full sm:w-1/2 mx-auto block rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`sb-${v}`}>
                           <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke="#1e293b" strokeWidth="0.9" />
