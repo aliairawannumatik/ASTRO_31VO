@@ -286,7 +286,7 @@ const PembuktianPage = () => {
                     <img
                       src="/pythagoras-construction.png"
                       alt="Pekerja konstruksi menggunakan Teorema Pythagoras di lapangan"
-                      className="w-full object-cover max-h-72"
+                      className="w-full object-contain"
                     />
                     <figcaption className="text-center text-white/40 text-xs py-2 px-3 font-body italic">
                       bing.com/images/create
