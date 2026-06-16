@@ -192,7 +192,21 @@ const PythagorasRearrangementAnimation: React.FC = () => {
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
   }, []);
 
-  // ── Button handler ────────────────────────────────────────────────────────
+  // ── Back button handler ───────────────────────────────────────────────────
+  const handleBack = useCallback(() => {
+    if (isAnimating) return;
+    // Cancel any running animation
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    isAnimRef.current = false;
+    setIsAnimating(false);
+    setAnimDone(false);
+    setT(0);
+    tRef.current = 0;
+    startTsRef.current = null;
+    setStep(s => Math.max(0, s - 1));
+  }, [isAnimating]);
+
+  // ── Forward button handler ────────────────────────────────────────────────
   const handleBtn = useCallback(() => {
     if (step < 2) {
       // Steps 0→1→2: just advance
@@ -456,19 +470,36 @@ const PythagorasRearrangementAnimation: React.FC = () => {
         <p className="text-xs text-white/75 font-body leading-relaxed">{info.desc}</p>
       </div>
 
-      {/* ── Action button ────────────────────────────────────────────────── */}
-      <button
-        onClick={handleBtn}
-        disabled={isAnimating}
-        className="px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-        style={{
-          background: `${info.btnColor}0.18)`,
-          border: `1.5px solid ${info.btnColor}0.7)`,
-          color: step === 1 ? "#fde68a" : step === 2 ? "#fbbf24" : step === 3 && animDone ? "#86efac" : "#d8b4fe",
-        }}
-      >
-        {isAnimating ? "⏳ Menggeser segitiga…" : info.btn}
-      </button>
+      {/* ── Action buttons ───────────────────────────────────────────────── */}
+      <div className="flex items-center gap-3">
+        {/* Back button */}
+        <button
+          onClick={handleBack}
+          disabled={isAnimating || step === 0}
+          className="px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          style={{
+            background: "rgba(100,116,139,0.18)",
+            border: "1.5px solid rgba(100,116,139,0.6)",
+            color: "#cbd5e1",
+          }}
+        >
+          ← Kembali
+        </button>
+
+        {/* Forward / reset button */}
+        <button
+          onClick={handleBtn}
+          disabled={isAnimating}
+          className="px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+          style={{
+            background: `${info.btnColor}0.18)`,
+            border: `1.5px solid ${info.btnColor}0.7)`,
+            color: step === 1 ? "#fde68a" : step === 2 ? "#fbbf24" : step === 3 && animDone ? "#86efac" : "#d8b4fe",
+          }}
+        >
+          {isAnimating ? "⏳ Menggeser segitiga…" : info.btn}
+        </button>
+      </div>
 
       {/* ── Colour legend ────────────────────────────────────────────────── */}
       <div className="flex flex-wrap justify-center gap-3 text-xs font-body">
