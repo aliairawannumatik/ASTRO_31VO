@@ -316,27 +316,23 @@ const PythagorasRearrangementAnimation: React.FC = () => {
           {showC2Fill && (
             <>
               <polygon points={pts(INNER_C2)}
-                fill={`rgba(251,191,36,${0.2 * c2Opacity})`}
-                stroke={`rgba(251,191,36,${c2Opacity})`}
+                fill={`rgba(239,68,68,${0.35 * c2Opacity})`}
+                stroke={`rgba(239,68,68,${c2Opacity})`}
                 strokeWidth="2"
                 filter={c2Opacity > 0.3 ? "url(#ra-glow-sq)" : undefined}
               />
               {c2Opacity > 0.05 && (
                 <>
                   <text x={C2_CX} y={C2_CY+2} textAnchor="middle"
-                    fill={`rgba(253,230,138,${c2Opacity})`}
+                    fill={`rgba(252,165,165,${c2Opacity})`}
                     fontSize="20" fontWeight="bold" fontFamily="monospace"
                     filter="url(#ra-glow-sq)"
                   >c²</text>
-                  <text x={C2_CX} y={C2_CY+20} textAnchor="middle"
-                    fill={`rgba(251,191,36,${c2Opacity*0.8})`}
-                    fontSize="11" fontFamily="monospace"
-                  >= 25</text>
                   {/* "c" labels on each side (step 2 only, fade when animating) */}
                   {step === 2 && HYPO_MIDS.map((m,i) => (
                     <text key={i}
                       x={m.mx+m.ox} y={m.my+m.oy}
-                      textAnchor="middle" fill="#fbbf24" fontSize="12" fontWeight="bold"
+                      textAnchor="middle" fill="#fca5a5" fontSize="12" fontWeight="bold"
                       fontFamily="monospace"
                     >c</text>
                   ))}
