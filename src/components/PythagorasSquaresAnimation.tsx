@@ -352,7 +352,7 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
       // reorder [BR,TR,TL,BL] → [TL,TR,BR,BL] for the grid function
       const gridPts = [morphed[2],morphed[1],morphed[0],morphed[3]];
       const ctr = avgPts(morphed);
-      drawMorphShape(ctx,gridPts,3,3,COL_A+"44",COL_A,shapeAlpha,
+      drawMorphShape(ctx,gridPts,1,1,COL_A+"44",COL_A,shapeAlpha,
         ctr.x,ctr.y,"a²",pMorphA);
     }
   }
@@ -364,7 +364,7 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
       const morphed = lerpPts(SQ_B, RECT_B, pMorphB);
       // SQ_B already in [TL,TR,BR,BL] order
       const ctr = avgPts(morphed);
-      drawMorphShape(ctx,morphed,4,4,COL_B+"44",COL_B,shapeAlpha,
+      drawMorphShape(ctx,morphed,1,1,COL_B+"44",COL_B,shapeAlpha,
         ctr.x,ctr.y,"b²",pMorphB);
     }
   }
