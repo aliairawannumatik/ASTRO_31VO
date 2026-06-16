@@ -302,6 +302,7 @@ const PembuktianPage = () => {
 
                 <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4">
                   <p className="text-cyan-300 font-semibold text-sm mb-3">🔭 Rumus Inti Teorema Pythagoras</p>
+                  <SegitigaSikuSVG/>
                   <div className="bg-slate-900/60 rounded-lg p-3">
                     <BlockMath math="a^2 + b^2 = c^2"/>
                   </div>
@@ -320,7 +321,6 @@ const PembuktianPage = () => {
                     </div>
                   </div>
                 </div>
-                <SegitigaSikuSVG/>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
                     💡 <strong>Ingat!</strong> Huruf <strong className="text-orange-300">c</strong> selalu mewakili sisi miring (hipotenusa) — yaitu sisi yang berhadapan dengan sudut 90°. Ini adalah sisi terpanjang dari segitiga siku-siku.
