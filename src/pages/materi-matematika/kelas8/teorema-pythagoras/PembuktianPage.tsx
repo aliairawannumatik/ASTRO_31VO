@@ -6,7 +6,6 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical, Rule
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
-import PythagorasDiscoveryAnimation from "@/components/PythagorasDiscoveryAnimation";
 import PythagorasRearrangementAnimation from "@/components/PythagorasRearrangementAnimation";
 import PythagorasWaterProof from "@/components/PythagorasWaterProof";
 import PythagorasSquaresAnimation from "@/components/PythagorasSquaresAnimation";
@@ -214,7 +213,7 @@ const MiniTriangle = ({
 
 const PembuktianPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "animasi", "rearrangement", "pembuktian", "contoh1", "contoh2", "contoh3", "mhg_intro", "mhg_prosedur", "mhg_c1", "mhg_c2", "mhg_c3", "rangkuman", "kuadrat"]);
+  const [open, setOpen] = useState<string[]>(["intro", "rearrangement", "pembuktian", "contoh1", "contoh2", "contoh3", "mhg_intro", "mhg_prosedur", "mhg_c1", "mhg_c2", "mhg_c3", "rangkuman", "kuadrat"]);
 
   const toggle = (id: string) => {
     playPopSound();
@@ -394,21 +393,6 @@ const PembuktianPage = () => {
           {/* SQUARES ANIMATION */}
           <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-2xl overflow-hidden p-4">
             <PythagorasSquaresAnimation />
-          </div>
-
-          {/* ANIMASI PENEMUAN */}
-          <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-xl overflow-hidden">
-            <SectionHeader id="animasi" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="🎬 Animasi: Bagaimana Pythagoras Menemukannya?"/>
-            {open.includes("animasi") && (
-              <div className="px-4 pb-5 space-y-3">
-                <div className="bg-cyan-900/30 border border-cyan-500/20 rounded-lg p-3">
-                  <p className="font-body text-sm text-cyan-200 leading-relaxed">
-                    🚀 Ikuti animasi langkah demi langkah ini untuk melihat bagaimana teorema Pythagoras <strong className="text-yellow-300">ditemukan secara visual</strong> melalui metode persegi pada setiap sisi segitiga siku-siku!
-                  </p>
-                </div>
-                <PythagorasDiscoveryAnimation />
-              </div>
-            )}
           </div>
 
           {/* ANIMASI REARRANGEMENT */}
