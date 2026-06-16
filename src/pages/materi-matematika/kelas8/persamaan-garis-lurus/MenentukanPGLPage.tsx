@@ -510,6 +510,49 @@ const MenentukanPGLPage = () => {
                   <p className="text-sm text-white/85 font-body">Tentukan persamaan garis yang melalui titik <InlineMath math="A(-2, 5)" /> dan <InlineMath math="B(4, -1)" />. Nyatakan dalam bentuk <InlineMath math="ax + by + c = 0" />!</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
+
+                  {/* ── CARA 1 ── */}
+                  <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
+                    <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider">📐 Cara 1 — Rumus Dua Titik Langsung</p>
+                    <p className="text-xs text-white/60 mt-1">Gunakan rumus dua titik secara langsung: <InlineMath math="\dfrac{y - y_1}{y_2 - y_1} = \dfrac{x - x_1}{x_2 - x_1}" /></p>
+                  </div>
+
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-cyan-300 font-semibold mb-1">Langkah 1 — Substitusi ke Rumus Dua Titik</p>
+                    <p className="text-xs text-white/50 mb-2 font-body">x₁ = −2, y₁ = 5, x₂ = 4, y₂ = −1</p>
+                    <BlockMath math="\frac{y - 5}{-1 - 5} = \frac{x - (-2)}{4 - (-2)}" />
+                    <BlockMath math="\frac{y - 5}{-6} = \frac{x + 2}{6}" />
+                  </div>
+
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Kalikan Silang</p>
+                    <BlockMath math="6(y - 5) = -6(x + 2)" />
+                    <BlockMath math="6y - 30 = -6x - 12" />
+                  </div>
+
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Sederhanakan</p>
+                    <BlockMath math="6y = -6x - 12 + 30" />
+                    <BlockMath math="6y = -6x + 18" />
+                    <BlockMath math="y = -x + 3" />
+                  </div>
+
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-pink-300 font-semibold mb-1">Langkah 4 — Ubah ke Bentuk Umum</p>
+                    <BlockMath math="y = -x + 3 \implies x + y - 3 = 0" />
+                  </div>
+
+                  <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
+                    <p className="text-sm font-bold text-cyan-300">✅ Persamaan (Cara 1): y = −x + 3 atau x + y − 3 = 0</p>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="flex items-center gap-3 py-1">
+                    <div className="flex-1 h-px bg-white/10" />
+                    <span className="text-xs text-white/30 font-body">atau gunakan cara berikut</span>
+                    <div className="flex-1 h-px bg-white/10" />
+                  </div>
+
                   {/* Label Cara 2 */}
                   <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
                     <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">💡 Cara 2 — Alternatif Penyelesaian</p>
