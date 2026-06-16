@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -29,6 +29,33 @@ const CoordSys = ({ children, label = "" }: { children?: React.ReactNode; label?
   </svg>
 );
 
+// ── Interactive calculator helpers ──────────────────────────────────────
+const _gcd = (a: number, b: number): number => {
+  a = Math.abs(Math.round(a)); b = Math.abs(Math.round(b));
+  while (b) { const t = b; b = a % b; a = t; }
+  return a || 1;
+};
+const toFrac = (n: number, d: number): string => {
+  if (Math.abs(d) < 1e-9) return "\\text{td}";
+  const ni = Math.round(n), di = Math.round(d);
+  if (Math.abs(ni - n) < 1e-4 && Math.abs(di - d) < 1e-4) {
+    const g = _gcd(Math.abs(ni), Math.abs(di));
+    const sn = (di < 0 ? -ni : ni) / g, sd = Math.abs(di) / g;
+    return sd === 1 ? String(sn) : `\\frac{${sn}}{${sd}}`;
+  }
+  return String(Math.round((n / d) * 10000) / 10000);
+};
+const nL = (v: number) => String(Math.round(v * 10000) / 10000);
+const pL = (v: number) => v < 0 ? `(${nL(v)})` : nL(v);
+const sT = (v: number): string => {
+  const r = Math.round(v * 10000) / 10000;
+  if (Math.abs(r) < 1e-9) return "";
+  return r > 0 ? `+ ${r}` : `- ${-r}`;
+};
+const gPts = (m: number, c: number) =>
+  [-7, -4, -1, 2, 5, 7].map(x => `${toX(x)},${toY(m * x + c)}`).join(' ');
+// ────────────────────────────────────────────────────────────────────────
+
 const MenentukanPGLPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -44,6 +71,34 @@ const MenentukanPGLPage = () => {
   const Badge = ({ label, color }: { label: string; color: string }) => (
     <span className={`inline-block px-2 py-0.5 rounded text-xs font-bold font-body ${color}`}>{label}</span>
   );
+
+  // ── Interactive Skenario 1 state ────────────────────────────────────────
+  const [iv1, setIv1] = useState({ m: "", x1: "", y1: "", step: 0, error: "" });
+  const [iv1Off, setIv1Off] = useState(10000);
+  const _m1 = parseFloat(iv1.m), _x1a = parseFloat(iv1.x1), _y1a = parseFloat(iv1.y1);
+  const iv1ok = !isNaN(_m1) && !isNaN(_x1a) && !isNaN(_y1a);
+  const iv1c = iv1ok ? -_m1 * _x1a + _y1a : 0;
+
+  // ── Interactive Skenario 2 state ────────────────────────────────────────
+  const [iv2, setIv2] = useState({ x1: "", y1: "", x2: "", y2: "", step: 0, error: "" });
+  const [iv2Off, setIv2Off] = useState(10000);
+  const _x1b = parseFloat(iv2.x1), _y1b = parseFloat(iv2.y1);
+  const _x2b = parseFloat(iv2.x2), _y2b = parseFloat(iv2.y2);
+  const iv2ok = !isNaN(_x1b) && !isNaN(_y1b) && !isNaN(_x2b) && !isNaN(_y2b) && Math.abs(_x2b - _x1b) > 1e-9;
+  const iv2mn = iv2ok ? _y2b - _y1b : 0;
+  const iv2md = iv2ok ? _x2b - _x1b : 1;
+  const iv2m = iv2mn / iv2md;
+  const iv2mF = iv2ok ? toFrac(iv2mn, iv2md) : "0";
+  const iv2mPlain = iv2ok ? String(Math.round(iv2m * 10000) / 10000) : "0";
+  const iv2c = iv2ok ? _y1b - iv2m * _x1b : 0;
+
+  // ── Graph animation effects ─────────────────────────────────────────────
+  useEffect(() => {
+    if (iv1.step >= 3) { setIv1Off(10000); const t = setTimeout(() => setIv1Off(0), 80); return () => clearTimeout(t); }
+  }, [iv1.step]);
+  useEffect(() => {
+    if (iv2.step >= 4) { setIv2Off(10000); const t = setTimeout(() => setIv2Off(0), 80); return () => clearTimeout(t); }
+  }, [iv2.step]);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
@@ -118,6 +173,87 @@ const MenentukanPGLPage = () => {
                     <text x={toX(1)+5} y={toY(2)-4} fill="#facc15" fontSize="8">(1,2)</text>
                   </CoordSys>
                 </div>
+
+                {/* ── INTERACTIVE S1 ── */}
+                <div className="bg-violet-900/10 border border-violet-500/30 rounded-xl p-4 space-y-4">
+                  <p className="text-xs font-bold text-violet-300 uppercase tracking-wider">🎮 Kalkulator Interaktif — Coba Sendiri!</p>
+                  <div className="grid grid-cols-3 gap-3">
+                    {([
+                      ["Gradien (m)", iv1.m, (v: string) => setIv1(p => ({...p, m: v, step: 0, error: ""}))],
+                      ["x₁", iv1.x1, (v: string) => setIv1(p => ({...p, x1: v, step: 0, error: ""}))],
+                      ["y₁", iv1.y1, (v: string) => setIv1(p => ({...p, y1: v, step: 0, error: ""}))],
+                    ] as [string, string, (v: string) => void][]).map(([label, val, onChange]) => (
+                      <div key={label}>
+                        <p className="text-xs text-white/50 mb-1 text-center font-body">{label}</p>
+                        <input
+                          type="number"
+                          value={val}
+                          onChange={e => { playPopSound(); onChange(e.target.value); }}
+                          placeholder="0"
+                          className="w-full bg-slate-900/60 border border-slate-600 hover:border-violet-500/60 focus:border-violet-400 rounded-lg px-2 py-2 text-white text-sm text-center font-mono focus:outline-none transition-colors"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  {iv1.error && <p className="text-red-400 text-xs text-center font-body">{iv1.error}</p>}
+                  {iv1.step === 0 && (
+                    <button
+                      onClick={() => {
+                        if (!iv1ok) { setIv1(p => ({...p, error: "Isi semua kotak dengan angka yang valid!"})); return; }
+                        playPopSound();
+                        setIv1(p => ({...p, step: 1, error: ""}));
+                      }}
+                      className="w-full bg-violet-600 hover:bg-violet-500 active:scale-95 text-white font-bold py-2.5 rounded-lg text-sm transition-all cursor-pointer font-display"
+                    >🚀 Mulai Langkah Demi Langkah</button>
+                  )}
+                  {iv1.step >= 1 && iv1ok && (() => {
+                    const steps = [
+                      { title: "Langkah 1 — Substitusi ke Rumus", accent: "border-violet-500/40 bg-violet-900/20",
+                        note: `Masukkan m = ${nL(_m1)}, x₁ = ${nL(_x1a)}, y₁ = ${nL(_y1a)} ke rumus y − y₁ = m(x − x₁)`,
+                        math: `y - ${pL(_y1a)} = ${nL(_m1)}\\left(x - ${pL(_x1a)}\\right)` },
+                      { title: "Langkah 2 — Ekspansi Ruas Kanan", accent: "border-cyan-500/40 bg-cyan-900/20",
+                        note: `Distribusikan: ${nL(_m1)} × x = ${nL(_m1)}x  dan  ${nL(_m1)} × ${pL(_x1a)} = ${nL(_m1 * _x1a)}`,
+                        math: `y - ${pL(_y1a)} = ${nL(_m1)}x ${sT(-_m1 * _x1a)}` },
+                      { title: "Langkah 3 — Persamaan Garis Lurus ✅", accent: "border-green-500/40 bg-green-900/20",
+                        note: `Tambahkan ${pL(_y1a)} ke kedua ruas → bentuk y = mx + c`,
+                        math: `y = ${nL(_m1)}x ${sT(iv1c)}`,
+                        showGraph: true },
+                    ];
+                    return (
+                      <div className="space-y-3">
+                        {steps.slice(0, iv1.step).map((st, i) => (
+                          <div key={i} className={`border ${st.accent} rounded-xl p-3 space-y-2`}>
+                            <p className="text-xs font-bold text-white/90 font-display">{st.title}</p>
+                            <p className="text-xs text-white/50 font-body italic">{st.note}</p>
+                            <BlockMath math={st.math} />
+                            {st.showGraph && (
+                              <div className="mt-2 space-y-1">
+                                <p className="text-xs text-green-400 font-semibold font-body">📈 Grafik tergambar:</p>
+                                <CoordSys label={`y=${nL(_m1)}x${iv1c >= 0 ? '+'+nL(iv1c) : nL(iv1c)}`}>
+                                  <polyline points={gPts(_m1, iv1c)} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round"
+                                    strokeDasharray={10000} strokeDashoffset={iv1Off}
+                                    style={{ transition: 'stroke-dashoffset 1.5s ease' }} />
+                                </CoordSys>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                        {iv1.step < steps.length && (
+                          <button onClick={() => { playPopSound(); setIv1(p => ({...p, step: p.step + 1})); }}
+                            className="w-full bg-violet-800/60 hover:bg-violet-700 border border-violet-500/40 text-white font-bold py-2 rounded-lg text-sm transition-all cursor-pointer font-display active:scale-95">
+                            ▶ Langkah Berikutnya
+                          </button>
+                        )}
+                        {iv1.step >= steps.length && (
+                          <button onClick={() => { playPopSound(); setIv1({ m:"", x1:"", y1:"", step:0, error:"" }); setIv1Off(10000); }}
+                            className="w-full bg-slate-700/60 hover:bg-slate-600 border border-slate-500/30 text-white/70 hover:text-white py-2 rounded-lg text-sm transition-all cursor-pointer font-body">
+                            🔄 Coba Angka Lain
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })()}
+                </div>
               </div>
             )}
           </div>
@@ -135,7 +271,7 @@ const MenentukanPGLPage = () => {
                   <p className="text-xs font-bold text-orange-300 mb-2">Strategi Alternatif (Lebih Mudah):</p>
                   <div className="space-y-1 text-xs font-body text-white/70">
                     <p>1. Hitung dulu gradien: <InlineMath math="m = \frac{y_2 - y_1}{x_2 - x_1}" /></p>
-                    <p>2. Pilih salah satu titik, masukkan ke skenario 2</p>
+                    <p>2. Pilih salah satu titik, masukkan ke skenario 1</p>
                     <p>3. Selesaikan untuk mendapat bentuk y = mx + c</p>
                   </div>
                 </div>
@@ -151,6 +287,102 @@ const MenentukanPGLPage = () => {
                       </g>
                     ))}
                   </CoordSys>
+                </div>
+
+                {/* ── INTERACTIVE S2 ── */}
+                <div className="bg-orange-900/10 border border-orange-500/30 rounded-xl p-4 space-y-4">
+                  <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">🎮 Kalkulator Interaktif — Coba Sendiri!</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    {([
+                      ["x₁", iv2.x1, (v: string) => setIv2(p => ({...p, x1: v, step: 0, error: ""}))],
+                      ["y₁", iv2.y1, (v: string) => setIv2(p => ({...p, y1: v, step: 0, error: ""}))],
+                      ["x₂", iv2.x2, (v: string) => setIv2(p => ({...p, x2: v, step: 0, error: ""}))],
+                      ["y₂", iv2.y2, (v: string) => setIv2(p => ({...p, y2: v, step: 0, error: ""}))],
+                    ] as [string, string, (v: string) => void][]).map(([label, val, onChange]) => (
+                      <div key={label}>
+                        <p className="text-xs text-white/50 mb-1 text-center font-body">{label}</p>
+                        <input
+                          type="number"
+                          value={val}
+                          onChange={e => { playPopSound(); onChange(e.target.value); }}
+                          placeholder="0"
+                          className="w-full bg-slate-900/60 border border-slate-600 hover:border-orange-500/60 focus:border-orange-400 rounded-lg px-2 py-2 text-white text-sm text-center font-mono focus:outline-none transition-colors"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  {iv2.error && <p className="text-red-400 text-xs text-center font-body">{iv2.error}</p>}
+                  {iv2.step === 0 && (
+                    <button
+                      onClick={() => {
+                        if (!iv2ok) {
+                          const msg = (!isNaN(_x1b) && !isNaN(_x2b) && Math.abs(_x2b - _x1b) < 1e-9)
+                            ? "x₁ dan x₂ tidak boleh sama (garis vertikal)!"
+                            : "Isi semua kotak dengan angka yang valid!";
+                          setIv2(p => ({...p, error: msg})); return;
+                        }
+                        playPopSound();
+                        setIv2(p => ({...p, step: 1, error: ""}));
+                      }}
+                      className="w-full bg-orange-600 hover:bg-orange-500 active:scale-95 text-white font-bold py-2.5 rounded-lg text-sm transition-all cursor-pointer font-display"
+                    >🚀 Mulai Langkah Demi Langkah</button>
+                  )}
+                  {iv2.step >= 1 && iv2ok && (() => {
+                    const steps = [
+                      { title: "Langkah 1 — Hitung Gradien (m)", accent: "border-orange-500/40 bg-orange-900/20",
+                        note: "Gradien = selisih y dibagi selisih x dari dua titik",
+                        math: `m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{${nL(iv2mn)}}{${nL(iv2md)}} = ${iv2mF}` },
+                      { title: "Langkah 2 — Substitusi ke Rumus Titik-Gradien", accent: "border-violet-500/40 bg-violet-900/20",
+                        note: `Pakai m = ${iv2mPlain} dan titik pertama (${nL(_x1b)}, ${nL(_y1b)})`,
+                        math: `y - ${pL(_y1b)} = ${iv2mF}\\left(x - ${pL(_x1b)}\\right)` },
+                      { title: "Langkah 3 — Ekspansi Ruas Kanan", accent: "border-cyan-500/40 bg-cyan-900/20",
+                        note: `Kalikan ${iv2mPlain} dengan (x − ${pL(_x1b)})`,
+                        math: `y - ${pL(_y1b)} = ${iv2mF}x ${sT(-iv2m * _x1b)}` },
+                      { title: "Langkah 4 — Persamaan Garis Lurus ✅", accent: "border-green-500/40 bg-green-900/20",
+                        note: `Tambahkan ${pL(_y1b)} ke kedua ruas → bentuk y = mx + c`,
+                        math: `y = ${iv2mF}x ${sT(iv2c)}`,
+                        showGraph: true },
+                    ];
+                    return (
+                      <div className="space-y-3">
+                        {steps.slice(0, iv2.step).map((st, i) => (
+                          <div key={i} className={`border ${st.accent} rounded-xl p-3 space-y-2`}>
+                            <p className="text-xs font-bold text-white/90 font-display">{st.title}</p>
+                            <p className="text-xs text-white/50 font-body italic">{st.note}</p>
+                            <BlockMath math={st.math} />
+                            {st.showGraph && (
+                              <div className="mt-2 space-y-1">
+                                <p className="text-xs text-green-400 font-semibold font-body">📈 Grafik tergambar:</p>
+                                <CoordSys label={`y=${iv2mPlain}x${iv2c >= 0 ? '+'+nL(iv2c) : nL(iv2c)}`}>
+                                  <polyline points={gPts(iv2m, iv2c)} fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round"
+                                    strokeDasharray={10000} strokeDashoffset={iv2Off}
+                                    style={{ transition: 'stroke-dashoffset 1.5s ease' }} />
+                                  {[[_x1b, _y1b], [_x2b, _y2b]].map(([x, y], idx) => (
+                                    <g key={idx}>
+                                      <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
+                                      <text x={toX(x)+5} y={toY(y)-4} fill="#facc15" fontSize="8">({nL(x)},{nL(y)})</text>
+                                    </g>
+                                  ))}
+                                </CoordSys>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                        {iv2.step < steps.length && (
+                          <button onClick={() => { playPopSound(); setIv2(p => ({...p, step: p.step + 1})); }}
+                            className="w-full bg-orange-800/60 hover:bg-orange-700 border border-orange-500/40 text-white font-bold py-2 rounded-lg text-sm transition-all cursor-pointer font-display active:scale-95">
+                            ▶ Langkah Berikutnya
+                          </button>
+                        )}
+                        {iv2.step >= steps.length && (
+                          <button onClick={() => { playPopSound(); setIv2({ x1:"", y1:"", x2:"", y2:"", step:0, error:"" }); setIv2Off(10000); }}
+                            className="w-full bg-slate-700/60 hover:bg-slate-600 border border-slate-500/30 text-white/70 hover:text-white py-2 rounded-lg text-sm transition-all cursor-pointer font-body">
+                            🔄 Coba Angka Lain
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
               </div>
             )}
