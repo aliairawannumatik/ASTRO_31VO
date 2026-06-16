@@ -502,12 +502,12 @@ const GradienPage = () => {
 
                   {/* Solusi a */}
                   <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
-                    <p className="text-cyan-300 font-semibold text-sm">a) Garis melalui A(−2, 1) dan B(2, −1)</p>
-                    <p className="text-white/60 text-xs">Baca dua titik dari grafik: A(−2, 1) dan B(2, −1), lalu substitusi ke rumus gradien:</p>
+                    <p className="text-cyan-300 font-semibold text-sm">a) Garis melalui A(−4, 2) dan B(4, −2)</p>
+                    <p className="text-white/60 text-xs">Baca dua titik ujung garis dari grafik: A(−4, 2) dan B(4, −2), lalu substitusi ke rumus gradien:</p>
                     <div className="bg-slate-900/60 rounded-lg p-3">
-                      <BlockMath math="m = \frac{y_B - y_A}{x_B - x_A} = \frac{-1 - 1}{2 - (-2)} = \frac{-2}{4} = -\frac{1}{2}" />
+                      <BlockMath math="m = \frac{y_B - y_A}{x_B - x_A} = \frac{-2 - 2}{4 - (-4)} = \frac{-4}{8} = -\frac{1}{2}" />
                     </div>
-                    {/* Grid pembahasan — sama dengan soal + garis putus-putus segitiga */}
+                    {/* Grid pembahasan — sama dengan soal + segitiga ujung ke ujung */}
                     <svg viewBox={`0 0 ${W} ${H}`} className="w-full sm:w-1/2 mx-auto block rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`sa-${v}`}>
@@ -515,25 +515,27 @@ const GradienPage = () => {
                           <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke="#1e293b" strokeWidth="0.9" />
                         </g>
                       ))}
-                      {/* Garis lurus — y = -½x, sama persis dengan soal */}
+                      {/* Garis lurus — y = -½x */}
                       <line x1={MX+(-4)*SC} y1={MY-2*SC} x2={MX+4*SC} y2={MY-(-2)*SC}
                         stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
-                      {/* Sisi datar (Δx): horizontal A(-2,1) → (2,1) */}
-                      <line x1={MX+(-2)*SC} y1={MY-1*SC} x2={MX+2*SC} y2={MY-1*SC}
-                        stroke="#4ade80" strokeWidth="1.8" strokeDasharray="5,3" />
-                      {/* Sisi tegak (Δy): vertikal (2,1) → B(2,-1) */}
-                      <line x1={MX+2*SC} y1={MY-1*SC} x2={MX+2*SC} y2={MY-(-1)*SC}
+                      {/* Sisi datar (Δx): A(-4,2) → (-4,-2) arah kanan ke B */}
+                      {/* Pakai sudut kiri bawah (-4,-2) sebagai titik siku */}
+                      {/* Vertikal kiri: A(-4,2) → (-4,-2) */}
+                      <line x1={MX+(-4)*SC} y1={MY-2*SC} x2={MX+(-4)*SC} y2={MY-(-2)*SC}
                         stroke="#f472b6" strokeWidth="1.8" strokeDasharray="5,3" />
-                      {/* Label */}
-                      <text x={MX+0*SC} y={MY-1*SC-5} fill="#4ade80" fontSize="9" textAnchor="middle" fontWeight="bold">Δx = 4</text>
-                      <text x={MX+2*SC+26} y={MY} fill="#f472b6" fontSize="9" textAnchor="middle" fontWeight="bold">Δy = −2</text>
-                      {/* Siku-siku di (2,1) */}
-                      <rect x={MX+2*SC-6} y={MY-1*SC} width="6" height="6" fill="none" stroke="#94a3b8" strokeWidth="0.8" />
+                      {/* Horizontal bawah: (-4,-2) → B(4,-2) */}
+                      <line x1={MX+(-4)*SC} y1={MY-(-2)*SC} x2={MX+4*SC} y2={MY-(-2)*SC}
+                        stroke="#4ade80" strokeWidth="1.8" strokeDasharray="5,3" />
+                      {/* Siku-siku di (-4,-2) — sudut kiri bawah */}
+                      <rect x={MX+(-4)*SC} y={MY-(-2)*SC-6} width="6" height="6" fill="none" stroke="#94a3b8" strokeWidth="0.8" />
+                      {/* Label Δy kiri, Δx bawah */}
+                      <text x={MX+(-4)*SC+4} y={MY-0*SC} fill="#f472b6" fontSize="9" textAnchor="start" fontWeight="bold">Δy=−4</text>
+                      <text x={MX+0*SC} y={MY-(-2)*SC+12} fill="#4ade80" fontSize="9" textAnchor="middle" fontWeight="bold">Δx = 8</text>
                       {/* Titik A dan B */}
-                      <circle cx={MX+(-2)*SC} cy={MY-1*SC}    r="4" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.2" />
-                      <circle cx={MX+2*SC}    cy={MY-(-1)*SC} r="4" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.2" />
-                      <text x={MX+(-2)*SC-2} y={MY-1*SC-9}    fill="#67e8f9" fontSize="8" textAnchor="middle">A</text>
-                      <text x={MX+2*SC+8}    y={MY-(-1)*SC+4} fill="#67e8f9" fontSize="8">B</text>
+                      <circle cx={MX+(-4)*SC} cy={MY-2*SC}    r="4" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.2" />
+                      <circle cx={MX+4*SC}    cy={MY-(-2)*SC} r="4" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.2" />
+                      <text x={MX+(-4)*SC+4} y={MY-2*SC-7}    fill="#67e8f9" fontSize="8" textAnchor="start">A</text>
+                      <text x={MX+4*SC+5}    y={MY-(-2)*SC+4} fill="#67e8f9" fontSize="8">B</text>
                     </svg>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
                       <p className="text-sm font-bold text-cyan-300">✅ Gradien = −½  (garis turun landai ke kanan)</p>
@@ -542,12 +544,12 @@ const GradienPage = () => {
 
                   {/* Solusi b */}
                   <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
-                    <p className="text-amber-300 font-semibold text-sm">b) Garis melalui P(−2, −2) dan Q(1, 4)</p>
-                    <p className="text-white/60 text-xs">Baca dua titik dari grafik: P(−2, −2) dan Q(1, 4), lalu substitusi ke rumus gradien:</p>
+                    <p className="text-amber-300 font-semibold text-sm">b) Garis melalui P(−3, −4) dan Q(1, 4)</p>
+                    <p className="text-white/60 text-xs">Baca dua titik ujung garis dari grafik: P(−3, −4) dan Q(1, 4), lalu substitusi ke rumus gradien:</p>
                     <div className="bg-slate-900/60 rounded-lg p-3">
-                      <BlockMath math="m = \frac{y_Q - y_P}{x_Q - x_P} = \frac{4 - (-2)}{1 - (-2)} = \frac{6}{3} = 2" />
+                      <BlockMath math="m = \frac{y_Q - y_P}{x_Q - x_P} = \frac{4 - (-4)}{1 - (-3)} = \frac{8}{4} = 2" />
                     </div>
-                    {/* Grid pembahasan — sama dengan soal + garis putus-putus segitiga */}
+                    {/* Grid pembahasan — sama dengan soal + segitiga ujung ke ujung */}
                     <svg viewBox={`0 0 ${W} ${H}`} className="w-full sm:w-1/2 mx-auto block rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`sb-${v}`}>
@@ -555,25 +557,26 @@ const GradienPage = () => {
                           <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke="#1e293b" strokeWidth="0.9" />
                         </g>
                       ))}
-                      {/* Garis lurus — y = 2x+2, sama persis dengan soal */}
+                      {/* Garis lurus — y = 2x+2 */}
                       <line x1={MX+(-3)*SC} y1={MY-(-4)*SC} x2={MX+1*SC} y2={MY-4*SC}
                         stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round" />
-                      {/* Sisi datar (Δx): horizontal P(-2,-2) → (1,-2) */}
-                      <line x1={MX+(-2)*SC} y1={MY-(-2)*SC} x2={MX+1*SC} y2={MY-(-2)*SC}
+                      {/* Sudut siku di (1,-4) — kanan bawah */}
+                      {/* Horizontal bawah: P(-3,-4) → (1,-4) */}
+                      <line x1={MX+(-3)*SC} y1={MY-(-4)*SC} x2={MX+1*SC} y2={MY-(-4)*SC}
                         stroke="#4ade80" strokeWidth="1.8" strokeDasharray="5,3" />
-                      {/* Sisi tegak (Δy): vertikal (1,-2) → Q(1,4) */}
-                      <line x1={MX+1*SC} y1={MY-(-2)*SC} x2={MX+1*SC} y2={MY-4*SC}
+                      {/* Vertikal kanan: (1,-4) → Q(1,4) */}
+                      <line x1={MX+1*SC} y1={MY-(-4)*SC} x2={MX+1*SC} y2={MY-4*SC}
                         stroke="#f472b6" strokeWidth="1.8" strokeDasharray="5,3" />
-                      {/* Label */}
-                      <text x={MX+(-0.5)*SC} y={MY-(-2)*SC+12} fill="#4ade80" fontSize="9" textAnchor="middle" fontWeight="bold">Δx = 3</text>
-                      <text x={MX+1*SC+26} y={MY-1*SC} fill="#f472b6" fontSize="9" textAnchor="middle" fontWeight="bold">Δy = 6</text>
-                      {/* Siku-siku di (1,-2) */}
-                      <rect x={MX+1*SC-6} y={MY-(-2)*SC-6} width="6" height="6" fill="none" stroke="#94a3b8" strokeWidth="0.8" />
+                      {/* Siku-siku di (1,-4) */}
+                      <rect x={MX+1*SC-6} y={MY-(-4)*SC-6} width="6" height="6" fill="none" stroke="#94a3b8" strokeWidth="0.8" />
+                      {/* Label Δx bawah, Δy kanan */}
+                      <text x={MX+(-1)*SC} y={MY-(-4)*SC+12} fill="#4ade80" fontSize="9" textAnchor="middle" fontWeight="bold">Δx = 4</text>
+                      <text x={MX+1*SC+5}  y={MY-0*SC}        fill="#f472b6" fontSize="9" textAnchor="start"  fontWeight="bold">Δy = 8</text>
                       {/* Titik P dan Q */}
-                      <circle cx={MX+(-2)*SC} cy={MY-(-2)*SC} r="4" fill="#fbbf24" stroke="#fde68a" strokeWidth="1.2" />
+                      <circle cx={MX+(-3)*SC} cy={MY-(-4)*SC} r="4" fill="#fbbf24" stroke="#fde68a" strokeWidth="1.2" />
                       <circle cx={MX+1*SC}    cy={MY-4*SC}    r="4" fill="#fbbf24" stroke="#fde68a" strokeWidth="1.2" />
-                      <text x={MX+(-2)*SC-8} y={MY-(-2)*SC+4} fill="#fde68a" fontSize="8" textAnchor="end">P</text>
-                      <text x={MX+1*SC+8}    y={MY-4*SC+4}   fill="#fde68a" fontSize="8">Q</text>
+                      <text x={MX+(-3)*SC-6} y={MY-(-4)*SC+4} fill="#fde68a" fontSize="8" textAnchor="end">P</text>
+                      <text x={MX+1*SC+5}    y={MY-4*SC-5}    fill="#fde68a" fontSize="8">Q</text>
                     </svg>
                     <div className="bg-amber-500/10 border border-amber-500/40 rounded-lg p-3">
                       <p className="text-sm font-bold text-amber-300">✅ Gradien = 2  (garis naik curam ke kanan)</p>
