@@ -376,33 +376,64 @@ const GradienPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
+
+                {/* Soal */}
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Titik <InlineMath math="P(k, 3)" /> dan <InlineMath math="Q(2, 7)" /> terletak pada sebuah garis dengan gradien <InlineMath math="m = -2" />. Tentukan nilai <InlineMath math="k" /> dan gambarkan garisnya!</p>
+                  <p className="text-sm text-white/85 font-body leading-relaxed">
+                    Titik <InlineMath math="P(k,\, 0)" />, <InlineMath math="Q(0,\, 2)" />, dan <InlineMath math="R(2,\, 4)" /> terletak pada satu garis lurus yang sama (segaris/kolinear). Tentukan nilai <InlineMath math="k" />!
+                  </p>
                 </div>
+
+                {/* Pembahasan */}
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-2">Substitusi ke rumus gradien:</p>
-                    <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1}" />
-                    <BlockMath math="-2 = \frac{7 - 3}{2 - k} = \frac{4}{2 - k}" />
-                    <BlockMath math="-2(2 - k) = 4" />
-                    <BlockMath math="-4 + 2k = 4" />
-                    <BlockMath math="2k = 8 \implies k = 4" />
+
+                  {/* Langkah 1 */}
+                  <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
+                    <p className="text-cyan-300 font-semibold text-xs mb-2">Langkah 1 — Hitung gradien QR (titik yang sudah diketahui nilai pastinya):</p>
+                    <BlockMath math="m_{QR} = \frac{y_R - y_Q}{x_R - x_Q} = \frac{4 - 2}{2 - 0} = \frac{2}{2} = 1" />
                   </div>
+
+                  {/* Langkah 2 */}
+                  <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
+                    <p className="text-violet-300 font-semibold text-xs mb-2">Langkah 2 — Karena P, Q, R segaris, gradien PQ = gradien QR:</p>
+                    <BlockMath math="m_{PQ} = \frac{y_Q - y_P}{x_Q - x_P} = \frac{2 - 0}{0 - k} = \frac{2}{-k}" />
+                    <BlockMath math="\frac{2}{-k} = 1" />
+                  </div>
+
+                  {/* Langkah 3 */}
+                  <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
+                    <p className="text-orange-300 font-semibold text-xs mb-2">Langkah 3 — Selesaikan persamaan untuk k:</p>
+                    <BlockMath math="2 = 1 \times (-k)" />
+                    <BlockMath math="-k = 2 \implies k = -2" />
+                  </div>
+
+                  {/* Grafik */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-violet-300 font-semibold mb-2 text-xs">Jadi P(4, 3) dan Q(2, 7). Grafik garis:</p>
-                    <CoordSys w={W} h={H} label="P(4,3) dan Q(2,7)">
-                      <polyline points={[[-1,13],[0,11],[1,9],[2,7],[3,5],[4,3],[5,1]].map(([x,y])=>`${MX+x*SC},${MY-y*SC}`).join(' ')} fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
-                      {[[4,3],[2,7]].map(([x,y]) => (
-                        <g key={`${x},${y}`}>
-                          <circle cx={toX(x)} cy={toY(y)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
-                          <text x={toX(x)+6} y={toY(y)} fill="#facc15" fontSize="8">({x},{y})</text>
+                    <p className="text-emerald-300 font-semibold text-xs mb-2">Verifikasi — Ketiga titik P(−2, 0), Q(0, 2), R(2, 4) pada garis y = x + 2:</p>
+                    <CoordSys w={W} h={H} label="P(−2,0)  Q(0,2)  R(2,4)">
+                      {/* Garis y = x+2 */}
+                      <polyline
+                        points={[[-4,-2],[-2,0],[0,2],[2,4]].map(([x,y])=>`${MX+x*SC},${MY-y*SC}`).join(' ')}
+                        fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round"
+                      />
+                      {/* Titik P, Q, R */}
+                      {([[-2,0,"P(−2, 0)","#f472b6"],[0,2,"Q(0, 2)","#facc15"],[2,4,"R(2, 4)","#4ade80"]] as [number,number,string,string][]).map(([x,y,lbl,clr]) => (
+                        <g key={lbl}>
+                          <circle cx={toX(x)} cy={toY(y)} r="5" fill={clr} stroke="white" strokeWidth="1" />
+                          <text
+                            x={toX(x) + (x === -2 ? -4 : 6)}
+                            y={toY(y) + (y === 4 ? 12 : -6)}
+                            fill={clr} fontSize="8"
+                            textAnchor={x === -2 ? "end" : "start"}
+                          >{lbl}</text>
                         </g>
                       ))}
                     </CoordSys>
                   </div>
+
                   <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-red-300">✅ k = 4, sehingga P(4, 3). Garis turun dengan m = −2.</p>
+                    <p className="text-sm font-bold text-red-300">✅ k = −2, sehingga P(−2, 0). Ketiga titik terletak pada garis <InlineMath math="y = x + 2" /> dengan gradien m = 1.</p>
                   </div>
                 </div>
               </div>
