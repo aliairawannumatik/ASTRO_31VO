@@ -268,23 +268,24 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
   const pMorphA = eIO3(ph(t,0.52,0.63));  // a² square → rectangle
   const pMorphB = eIO3(ph(t,0.59,0.70));  // b² square → rectangle
   const pMvA    = eIO3(ph(t,0.72,0.82));  // a-rect slides to c²
-  const pFlA    = eO5(ph(t,0.83,0.90));   // a-strip fills (AFTER slide ends)
   const pMvB    = eIO3(ph(t,0.81,0.91));  // b-rect slides to c²
-  const pFlB    = eO5(ph(t,0.92,0.97));   // b-strip fills (AFTER slide ends)
+  // zone reveals instantly once rect arrives (no gradual fill)
+  const arrivedA = eO3(ph(t,0.83,0.87));  // a-zone snaps in as flying rect fades out
+  const arrivedB = eO3(ph(t,0.92,0.96));  // b-zone snaps in as flying rect fades out
   const pDiv    = eO3(ph(t,0.88,0.94));   // divider line
   const pFrm    = eO3(ph(t,0.96,1.00));   // formula
 
-  // current fill extents inside c²
-  const flA = pFlA * F_A;                       // 0 → 0.36
-  const flB = F_A + pFlB * (1 - F_A);           // 0.36 → 1.0
-
-  // ── 1. c² fill zones (behind outline) ───────────────────────────────────────
+  // ── 1. c² fill zones — full zone appears once rect has arrived ───────────────
   if(pSqC>0) {
-    if(flA>0.002) {
-      poly(ctx,cStrip(0,flA)); ctx.fillStyle=COL_A+"bb"; ctx.fill();
+    if(arrivedA>0.002) {
+      ctx.save(); ctx.globalAlpha=arrivedA;
+      poly(ctx,cStrip(0,F_A)); ctx.fillStyle=COL_A+"bb"; ctx.fill();
+      ctx.restore();
     }
-    if(flB>F_A+0.002) {
-      poly(ctx,cStrip(F_A,flB)); ctx.fillStyle=COL_B+"bb"; ctx.fill();
+    if(arrivedB>0.002) {
+      ctx.save(); ctx.globalAlpha=arrivedB;
+      poly(ctx,cStrip(F_A,1.0)); ctx.fillStyle=COL_B+"bb"; ctx.fill();
+      ctx.restore();
     }
   }
 
@@ -293,10 +294,10 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     ctx.save();
     ctx.globalAlpha=pSqC;
     ctx.translate(CTR_C.x,CTR_C.y); ctx.scale(pSqC,pSqC); ctx.translate(-CTR_C.x,-CTR_C.y);
-    if(pFlA>0||pFlB>F_A) { ctx.shadowColor=COL_C; ctx.shadowBlur=16; }
+    if(arrivedA>0||arrivedB>0) { ctx.shadowColor=COL_C; ctx.shadowBlur=16; }
     poly(ctx,SQ_C); ctx.strokeStyle=COL_C; ctx.lineWidth=3/pSqC; ctx.stroke();
     ctx.restore();
-    if(pMvA<0.05) { // hide after squares fly in
+    if(pMvA<0.05) {
       lbl(ctx,"c²",CTR_C.x,CTR_C.y,COL_C,22,pSqC);
     }
   }
@@ -337,19 +338,24 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     }
   }
 
-  // ── 6. Flying rectangle a² → c² (SLIDES as solid shape, fades only after arriving) ──
+  // ── 6. Flying rectangle a² — label travels with rect, stays after arriving ───
   if(pMvA>0) {
     const flyX   = lerp(CTR_A.x, DST_A.x, pMvA);
     const flyY   = lerp(CTR_A.y, DST_A.y, pMvA);
     const flyAng = ANGLE_C * pMvA;
-    // Ramp up quickly at start, stay fully visible during slide, fade out AFTER arriving at c²
     const slideIn  = Math.min(pMvA * 5, 1);
     const fadeOut  = Math.max(0, 1 - eO3(ph(t, 0.82, 0.88)));
     const flyAlpha = slideIn * fadeOut;
     drawFlyingRect(ctx,flyX,flyY,flyAng,100,36,flyAlpha,COL_A+"66",COL_A);
+    // label travels with the rectangle
+    if(flyAlpha>0.005) lbl(ctx,"a²",flyX,flyY,"#e0f7ff",15,flyAlpha);
+  }
+  // label stays at destination after rect fades out
+  if(arrivedA>0.005) {
+    lbl(ctx,"a²",DST_A.x,DST_A.y,"#e0f7ff",15,arrivedA);
   }
 
-  // ── 7. Flying rectangle b² → c² (SLIDES as solid shape, fades only after arriving) ──
+  // ── 7. Flying rectangle b² — label travels with rect, stays after arriving ───
   if(pMvB>0) {
     const flyX   = lerp(CTR_B.x, DST_B.x, pMvB);
     const flyY   = lerp(CTR_B.y, DST_B.y, pMvB);
@@ -358,21 +364,12 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     const fadeOut  = Math.max(0, 1 - eO3(ph(t, 0.91, 0.96)));
     const flyAlpha = slideIn * fadeOut;
     drawFlyingRect(ctx,flyX,flyY,flyAng,100,64,flyAlpha,COL_B+"66",COL_B);
+    // label travels with the rectangle
+    if(flyAlpha>0.005) lbl(ctx,"b²",flyX,flyY,"#e0ffe0",15,flyAlpha);
   }
-
-  // ── 8. Labels inside filled c² zones ────────────────────────────────────────
-  if(pFlA>0.65) {
-    const fa=Math.min((pFlA-0.65)/0.35,1);
-    const ctr=avgPts(cStrip(0,F_A));
-    lbl(ctx,"a²",ctr.x,ctr.y,"#e0f7ff",14,fa);
-  }
-  if(pFlB>F_A+0.15) {
-    const bFrac=(pFlB-F_A)/(1-F_A);
-    if(bFrac>0.65) {
-      const fb=Math.min((bFrac-0.65)/0.35,1);
-      const ctr=avgPts(cStrip(F_A,1.0));
-      lbl(ctx,"b²",ctr.x,ctr.y,"#e0ffe0",14,fb);
-    }
+  // label stays at destination after rect fades out
+  if(arrivedB>0.005) {
+    lbl(ctx,"b²",DST_B.x,DST_B.y,"#e0ffe0",15,arrivedB);
   }
 
   // ── 9. Triangle ──────────────────────────────────────────────────────────────
