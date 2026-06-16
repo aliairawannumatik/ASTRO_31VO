@@ -98,14 +98,14 @@ const COL_BG = "#1a1a2e";
 
 // ─── Narration ────────────────────────────────────────────────────────────────
 const NARRATION = [
-  { t: 0.00, text: "Langkah 1: Segitiga siku-siku dengan sisi a = 3, b = 4, c = 5." },
-  { t: 0.10, text: "Langkah 2: Persegi terbentuk di setiap sisi segitiga." },
-  { t: 0.38, text: "Langkah 3: Luas a² = 9,  b² = 16,  c² = 25 satuan." },
-  { t: 0.52, text: "Langkah 4: a² berubah bentuk jadi persegi panjang — perhatikan LUAS TETAP 9! Grid tidak hilang." },
-  { t: 0.60, text: "Langkah 5: b² berubah bentuk jadi persegi panjang — LUAS TETAP 16! Sama banyak kotaknya." },
-  { t: 0.72, text: "Langkah 6: Persegi panjang biru (luas 9) BERGESER masuk ke persegi c²..." },
-  { t: 0.83, text: "Langkah 7: Persegi panjang hijau (luas 16) BERGESER masuk mengisi sisa c²..." },
-  { t: 0.96, text: "Langkah 8: 9 + 16 = 25 = c²  ✓  a² + b² = c²  Terbukti!" },
+  { t: 0.00, text: "Langkah 1: Segitiga siku-siku dengan tiga sisi: a, b, dan c (hipotenusa)." },
+  { t: 0.10, text: "Langkah 2: Persegi terbentuk di setiap sisi segitiga — masing-masing luasnya a², b², dan c²." },
+  { t: 0.38, text: "Langkah 3: Perhatikan luas masing-masing persegi: a², b², dan c²." },
+  { t: 0.52, text: "Langkah 4: a² berubah bentuk jadi persegi panjang — perhatikan LUAS TETAP sama! Grid tidak hilang." },
+  { t: 0.60, text: "Langkah 5: b² berubah bentuk jadi persegi panjang — LUAS TETAP sama! Sama banyak kotaknya." },
+  { t: 0.72, text: "Langkah 6: Persegi panjang biru (luas a²) BERGESER masuk ke persegi c²..." },
+  { t: 0.83, text: "Langkah 7: Persegi panjang hijau (luas b²) BERGESER masuk mengisi sisa c²..." },
+  { t: 0.96, text: "Langkah 8: a² + b² = c²  ✓  Teorema Pythagoras Terbukti secara visual!" },
 ];
 
 // ─── Easing ───────────────────────────────────────────────────────────────────
@@ -404,12 +404,13 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
 // ─── React component ──────────────────────────────────────────────────────────
 type UIState="idle"|"playing"|"paused"|"done";
 
+const FIXED_SPEED = 0.5;
+
 const PythagorasSquaresAnimation:React.FC=()=>{
   const canvasRef=useRef<HTMLCanvasElement>(null);
-  const anim=useRef({running:false,raf:0,startTs:0,elapsed:0,speed:1});
+  const anim=useRef({running:false,raf:0,startTs:0,elapsed:0,speed:FIXED_SPEED});
   const stepRef=useRef<(ts:number)=>void>(()=>{});
   const [uiState,setUiState]=useState<UIState>("idle");
-  const [speed,setSpeed]=useState(1);
   const [narration,setNarration]=useState(NARRATION[0].text);
   const [prog,setProg]=useState(0);
 
@@ -449,12 +450,6 @@ const PythagorasSquaresAnimation:React.FC=()=>{
     setNarration(NARRATION[0].text); draw(0);
   },[draw]);
 
-  const handleSpeed=useCallback((v:number)=>{
-    const a=anim.current;
-    if(a.running) a.startTs=performance.now()-a.elapsed/v;
-    a.speed=v; setSpeed(v);
-  },[]);
-
   useEffect(()=>{draw(0);},[draw]);
   useEffect(()=>()=>cancelAnimationFrame(anim.current.raf),[]);
 
@@ -462,7 +457,7 @@ const PythagorasSquaresAnimation:React.FC=()=>{
     <div className="flex flex-col items-center gap-4 select-none">
       <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl px-4 py-2 w-full text-center">
         <p className="font-display text-xs font-bold text-blue-300 uppercase tracking-widest">
-          🟦 Animasi Persegi Bergerak — Pembuktian a² + b² = c²
+          🟦 Pembuktian Teorema Pythagoras 3 Animasi persegi bergerak
         </p>
         <p className="font-body text-xs text-white/50 mt-0.5">
           Persegi berubah bentuk (luas tetap!) lalu masuk dan mengisi tepat seluruh persegi c²
@@ -497,20 +492,6 @@ const PythagorasSquaresAnimation:React.FC=()=>{
         {uiState==="done"&&(
           <button onClick={reset} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white transition-all active:scale-95">🔄 Ulangi</button>
         )}
-        <div className="flex items-center gap-2 font-body text-xs text-white/60">
-          <span title="Lambat">🐢</span>
-          <input type="range" min={0.5} max={2} step={0.25} value={speed}
-            onChange={e=>handleSpeed(Number(e.target.value))}
-            className="w-24 accent-cyan-400" aria-label="Kecepatan animasi"/>
-          <span title="Cepat">🚀</span>
-          <span className="text-cyan-300 font-bold w-8">{speed}×</span>
-        </div>
-      </div>
-
-      <div className="flex gap-3 justify-center flex-wrap font-body text-xs">
-        <span className="bg-blue-900/40 border border-blue-500/30 rounded-lg px-3 py-1 text-blue-300 font-bold">a=3 → a²=9</span>
-        <span className="bg-green-900/40 border border-green-500/30 rounded-lg px-3 py-1 text-green-300 font-bold">b=4 → b²=16</span>
-        <span className="bg-orange-900/40 border border-orange-500/30 rounded-lg px-3 py-1 text-orange-300 font-bold">c=5 → c²=25</span>
       </div>
 
       <div className="w-full max-w-lg mx-auto bg-slate-800/60 border border-slate-600/40 rounded-xl px-4 py-3 min-h-[52px] flex items-center">
@@ -523,7 +504,7 @@ const PythagorasSquaresAnimation:React.FC=()=>{
         {uiState==="idle"&&"Tekan ▶ Play — perhatikan bagaimana setiap persegi berubah bentuk (luas tetap!) lalu masuk ke c²!"}
         {uiState==="playing"&&"Perhatikan jumlah kotak grid tidak berubah saat persegi jadi persegi panjang…"}
         {uiState==="paused"&&"Dijeda. Tekan Lanjut untuk melanjutkan."}
-        {uiState==="done"&&"a² (9 kotak biru) + b² (16 kotak hijau) = tepat 25 kotak = c² ✓"}
+        {uiState==="done"&&"a² (biru) + b² (hijau) = tepat mengisi c² ✓  Teorema Pythagoras terbukti!"}
       </p>
     </div>
   );

@@ -204,7 +204,7 @@ const PythagorasWaterProof: React.FC = () => {
       {/* ── Title ── */}
       <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl px-4 py-2 w-full text-center">
         <p className="font-display text-xs font-bold text-cyan-300 uppercase tracking-widest">
-          💧 Pembuktian Air — a² + b² = c²
+          💧 Pembuktian Teorema Pythagoras 2 Animasi air
         </p>
         <p className="font-body text-xs text-white/50 mt-0.5">
           Jika luas a² dan b² disatukan → tepat memenuhi luas c²
@@ -387,36 +387,24 @@ const PythagorasWaterProof: React.FC = () => {
 
           {/* ══ LABELS: square names & areas ══ */}
           {/* a² */}
-          <text x={SQA.x + SQA.w / 2} y={SQA.y + SQA.h / 2 - 6}
+          <text x={SQA.x + SQA.w / 2} y={SQA.y + SQA.h / 2}
             textAnchor="middle" fill="white" fontSize="17" fontWeight="bold"
             style={{ paintOrder: "stroke", stroke: "rgba(0,0,0,0.7)", strokeWidth: 3 }}>
             a²
           </text>
-          <text x={SQA.x + SQA.w / 2} y={SQA.y + SQA.h / 2 + 12}
-            textAnchor="middle" fill="rgba(186,230,253,0.85)" fontSize="10">
-            = 9
-          </text>
 
           {/* b² */}
-          <text x={SQB.x + SQB.w / 2} y={SQB.y + SQB.h / 2 - 6}
+          <text x={SQB.x + SQB.w / 2} y={SQB.y + SQB.h / 2}
             textAnchor="middle" fill="white" fontSize="17" fontWeight="bold"
             style={{ paintOrder: "stroke", stroke: "rgba(0,0,0,0.7)", strokeWidth: 3 }}>
             b²
           </text>
-          <text x={SQB.x + SQB.w / 2} y={SQB.y + SQB.h / 2 + 12}
-            textAnchor="middle" fill="rgba(167,243,208,0.85)" fontSize="10">
-            = 16
-          </text>
 
           {/* c² */}
-          <text x={CC.x} y={CC.y - 6}
+          <text x={CC.x} y={CC.y}
             textAnchor="middle" fill="white" fontSize="17" fontWeight="bold"
             style={{ paintOrder: "stroke", stroke: "rgba(0,0,0,0.7)", strokeWidth: 3 }}>
             c²
-          </text>
-          <text x={CC.x} y={CC.y + 12}
-            textAnchor="middle" fill="rgba(253,186,116,0.85)" fontSize="10">
-            = 25
           </text>
 
           {/* ══ FILL % on c² during animation ══ */}
@@ -434,7 +422,7 @@ const PythagorasWaterProof: React.FC = () => {
                 fill="rgba(234,179,8,0.18)" stroke="#eab308" strokeWidth="1.5"/>
               <text x="215" y="454" textAnchor="middle"
                 fill="#fde047" fontSize="13" fontWeight="bold">
-                ✓  9 + 16 = 25  ⟹  a² + b² = c²
+                ✓  a² + b² = c²  Terbukti!
               </text>
             </g>
           )}

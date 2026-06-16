@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical, Ruler } from "lucide-react";
+import { BookOpen, Lightbulb, Target, FlaskConical, Ruler } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
-import { playPopSound } from "@/hooks/useAudio";
 import PythagorasRearrangementAnimation from "@/components/PythagorasRearrangementAnimation";
 import PythagorasWaterProof from "@/components/PythagorasWaterProof";
 import PythagorasSquaresAnimation from "@/components/PythagorasSquaresAnimation";
 
 /*
   Pembuktian SVG — 4 right-triangles (a=60, b=80, c=100) inside a square (side=140).
-  Outer square corners: (40,20)→(180,20)→(180,160)→(40,160)
-  Inner rotated square vertices (all sides = c = 100):
-    P1=(100,20) P2=(180,80) P3=(120,160) P4=(40,100)
 */
 const PembuktianSVG = () => (
   <svg viewBox="0 0 440 238" className="w-full max-w-2xl mx-auto my-2" aria-label="Pembuktian Teorema Pythagoras - Metode Persegi">
@@ -35,23 +31,14 @@ const PembuktianSVG = () => (
       </filter>
     </defs>
 
-    {/* ══ FIGURE AREA (left half) ══ */}
-
-    {/* Outer big square  (a+b)×(a+b) — dashed border */}
     <rect x="35" y="25" width="154" height="154"
       fill="rgba(15,23,42,0.5)" stroke="rgba(148,163,184,0.5)" strokeWidth="1.5" strokeDasharray="7 3"/>
 
-    {/* 4 triangles  a=66px  b=88px  (scale=22, triangle 3-4-5) */}
-    {/* T1 blue   — top-left,   right angle at (35,25) */}
     <polygon points="35,25 123,25 35,91"   fill="#3b82f6" fillOpacity="0.72" stroke="#60a5fa" strokeWidth="1.5"/>
-    {/* T2 green  — top-right,  right angle at (189,25) */}
     <polygon points="189,25 189,113 123,25" fill="#22c55e" fillOpacity="0.72" stroke="#4ade80" strokeWidth="1.5"/>
-    {/* T3 orange — bot-right,  right angle at (189,179) */}
     <polygon points="189,179 101,179 189,113" fill="#f97316" fillOpacity="0.72" stroke="#fb923c" strokeWidth="1.5"/>
-    {/* T4 purple — bot-left,   right angle at (35,179) */}
     <polygon points="35,179 35,91 101,179"  fill="#a855f7" fillOpacity="0.72" stroke="#c084fc" strokeWidth="1.5"/>
 
-    {/* Inner c² square — red, glowing */}
     <polygon points="123,25 189,113 101,179 35,91"
       fill="rgba(239,68,68,0.18)" stroke="#ef4444" strokeWidth="2.5"
       filter="url(#psv-glow)" className="c2-anim"/>
@@ -60,68 +47,52 @@ const PembuktianSVG = () => (
       filter="url(#psv-glow)" className="c2-anim">c²</text>
     <text x="158" y="63" fill="#fca5a5" fontSize="12" fontWeight="bold" className="lbl-anim" filter="url(#psv-glow)">c</text>
 
-    {/* Right-angle marks at each outer corner */}
     <polyline points="35,33 43,33 43,25"   fill="none" stroke="#94a3b8" strokeWidth="1" opacity="0.55"/>
     <polyline points="181,25 181,33 189,33" fill="none" stroke="#94a3b8" strokeWidth="1" opacity="0.55"/>
     <polyline points="189,171 181,171 181,179" fill="none" stroke="#94a3b8" strokeWidth="1" opacity="0.55"/>
     <polyline points="43,179 43,171 35,171"  fill="none" stroke="#94a3b8" strokeWidth="1" opacity="0.55"/>
 
-    {/* Edge labels — a = blue, b = green (consistent throughout) */}
-    {/* Top:    b (T1, 35→123)  then  a (T2, 123→189) */}
     <text x="79"  y="18" fill="#86efac" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
     <text x="156" y="18" fill="#93c5fd" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
-    {/* Right:  b (T2, 25→113) then  a (T3, 113→179) */}
     <text x="196" y="74"  fill="#86efac" fontSize="12" fontWeight="bold" className="lbl-anim">b</text>
     <text x="196" y="151" fill="#93c5fd" fontSize="12" fontWeight="bold" className="lbl-anim">a</text>
-    {/* Bottom: a (T4, 35→101) then  b (T3, 101→189) */}
     <text x="68"  y="194" fill="#93c5fd" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
     <text x="145" y="194" fill="#86efac" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
-    {/* Left:   a (T1, 25→91)  then  b (T4, 91→179) */}
     <text x="27"  y="62"  fill="#93c5fd" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
     <text x="27"  y="140" fill="#86efac" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
 
-    {/* a+b top dimension guide */}
     <line x1="35" y1="12" x2="189" y2="12" stroke="rgba(100,116,139,0.55)" strokeWidth="1"/>
     <line x1="35"  y1="8" x2="35"  y2="16" stroke="rgba(100,116,139,0.55)" strokeWidth="1.5"/>
     <line x1="189" y1="8" x2="189" y2="16" stroke="rgba(100,116,139,0.55)" strokeWidth="1.5"/>
     <text x="112" y="8" textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace">a + b</text>
 
-    {/* ══ DIVIDER ══ */}
     <line x1="206" y1="10" x2="206" y2="228" stroke="rgba(51,65,85,0.9)" strokeWidth="1" strokeDasharray="4 2"/>
 
-    {/* ══ FORMULA PANEL (right half) ══ */}
     <rect x="212" y="12" width="222" height="218" rx="10"
       fill="rgba(15,23,42,0.88)" stroke="rgba(51,65,85,0.8)" strokeWidth="1"/>
 
-    {/* Panel title */}
     <text x="323" y="30" textAnchor="middle" fill="#64748b" fontSize="9.5" fontWeight="bold" fontFamily="monospace" letterSpacing="0.8">PENURUNAN RUMUS</text>
     <line x1="219" y1="35" x2="427" y2="35" stroke="rgba(51,65,85,0.8)" strokeWidth="1"/>
 
-    {/* ── Cara 1 ── */}
     <rect x="218" y="39" width="216" height="42" rx="6"
       fill="rgba(234,179,8,0.1)" stroke="rgba(234,179,8,0.35)" strokeWidth="1"/>
     <text x="226" y="53" fill="#fbbf24" fontSize="9.5" fontWeight="bold" fontFamily="monospace">🟡 Cara 1 — rumus persegi (a+b)</text>
     <text x="226" y="68" fill="#fde68a" fontSize="11.5" fontWeight="bold" fontFamily="monospace">(a+b)² = a² + 2ab + b²</text>
 
-    {/* equal sign */}
     <text x="323" y="94" textAnchor="middle" fill="#475569" fontSize="13" fontWeight="bold" fontFamily="monospace">=</text>
 
-    {/* ── Cara 2 ── */}
     <rect x="218" y="98" width="216" height="42" rx="6"
       fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.35)" strokeWidth="1"/>
     <text x="226" y="112" fill="#60a5fa" fontSize="9.5" fontWeight="bold" fontFamily="monospace">🔵 Cara 2 — 4 segitiga + c²</text>
     <text x="226" y="127" fill="#93c5fd" fontSize="11.5" fontWeight="bold" fontFamily="monospace">4×½ab + c² = 2ab + c²</text>
 
-    {/* ── Cancellation arrow ── */}
     <text x="323" y="153" textAnchor="middle" fill="#64748b" fontSize="9" fontFamily="monospace">↓ samakan → kurangi 2ab</text>
     <line x1="218" y1="157" x2="434" y2="157" stroke="rgba(71,85,105,0.6)" strokeWidth="1" strokeDasharray="3 2"/>
 
-    {/* cancellation step */}
     <text x="226" y="171" fill="#94a3b8" fontSize="10.5" fontFamily="monospace">a² + 2ab + b² = 2ab + c²</text>
     <text x="226" y="183" fill="#475569" fontSize="9"   fontFamily="monospace">    ─────       ─────</text>
     <text x="226" y="193" fill="#64748b" fontSize="9"   fontFamily="monospace">    − 2ab        − 2ab</text>
 
-    {/* ── Result ── */}
     <rect x="218" y="198" width="216" height="26" rx="6"
       fill="rgba(239,68,68,0.18)" stroke="rgba(239,68,68,0.7)" strokeWidth="1.8"
       filter="url(#psv-glow-lg)" className="c2-anim"/>
@@ -131,7 +102,6 @@ const PembuktianSVG = () => (
   </svg>
 );
 
-/* ── SVG: Right triangle labelled a, b, c ── */
 const SegitigaSikuSVG = () => (
   <svg viewBox="0 0 200 160" className="w-full max-w-xs mx-auto my-2" aria-label="Segitiga siku-siku">
     <defs>
@@ -157,7 +127,6 @@ const SegitigaSikuSVG = () => (
   </svg>
 );
 
-/* ── SVG: Three variations of the Pythagoras formula ── */
 const RumusVariasiSVG = () => (
   <svg viewBox="0 0 340 230" className="w-full max-w-sm mx-auto my-2" aria-label="Variasi rumus Pythagoras">
     <defs>
@@ -171,41 +140,40 @@ const RumusVariasiSVG = () => (
     <g transform="translate(10,10)">
       <polygon points="10,100 90,100 10,20" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" strokeWidth="1.5"/>
       <polyline points="10,82 28,82 28,100" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
-      <text x="8"  y="15"  fill="#60a5fa" fontSize="9" fontFamily="monospace">a=3</text>
-      <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace">b=4</text>
+      <text x="8"  y="15"  fill="#60a5fa" fontSize="9" fontFamily="monospace">a</text>
+      <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace">b</text>
       <text x="55" y="55"  fill="#fb923c" fontSize="9" fontFamily="monospace" className="p1">c=?</text>
       <text x="5"  y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">Cari c (hipotenusa)</text>
-      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">c=√(a²+b²)</text>
+      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">c²=a²+b²</text>
     </g>
     <line x1="115" y1="10" x2="115" y2="160" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
     <g transform="translate(125,10)">
       <polygon points="10,100 90,100 10,20" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
       <polyline points="10,82 28,82 28,100" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
       <text x="8"  y="15"  fill="#60a5fa" fontSize="9" fontFamily="monospace" className="p2">a=?</text>
-      <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace">b=4</text>
-      <text x="55" y="55"  fill="#fb923c" fontSize="9" fontFamily="monospace">c=5</text>
+      <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace">b</text>
+      <text x="55" y="55"  fill="#fb923c" fontSize="9" fontFamily="monospace">c</text>
       <text x="5"  y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">Cari a (kaki)</text>
-      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">a=√(c²-b²)</text>
+      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">a²=c²-b²</text>
     </g>
     <line x1="230" y1="10" x2="230" y2="160" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
     <g transform="translate(240,10)">
       <polygon points="10,100 90,100 10,20" fill="rgba(249,115,22,0.2)" stroke="#f97316" strokeWidth="1.5"/>
       <polyline points="10,82 28,82 28,100" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
-      <text x="8"  y="15"  fill="#60a5fa" fontSize="9" fontFamily="monospace">a=3</text>
+      <text x="8"  y="15"  fill="#60a5fa" fontSize="9" fontFamily="monospace">a</text>
       <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace" className="p3">b=?</text>
-      <text x="55" y="55"  fill="#fb923c" fontSize="9" fontFamily="monospace">c=5</text>
+      <text x="55" y="55"  fill="#fb923c" fontSize="9" fontFamily="monospace">c</text>
       <text x="5"  y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">Cari b (kaki)</text>
-      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">b=√(c²-a²)</text>
+      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">b²=c²-a²</text>
     </g>
     <rect x="10" y="170" width="320" height="50" rx="8" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1"/>
     <text x="170" y="187" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">TIGA VARIASI RUMUS PYTHAGORAS</text>
-    <text x="60"  y="205" fill="#fb923c" fontSize="8" textAnchor="middle" fontFamily="monospace">c = √(a²+b²)</text>
-    <text x="170" y="205" fill="#60a5fa" fontSize="8" textAnchor="middle" fontFamily="monospace">a = √(c²-b²)</text>
-    <text x="282" y="205" fill="#4ade80" fontSize="8" textAnchor="middle" fontFamily="monospace">b = √(c²-a²)</text>
+    <text x="60"  y="205" fill="#fb923c" fontSize="8" textAnchor="middle" fontFamily="monospace">c² = a²+b²</text>
+    <text x="170" y="205" fill="#60a5fa" fontSize="8" textAnchor="middle" fontFamily="monospace">a² = c²-b²</text>
+    <text x="282" y="205" fill="#4ade80" fontSize="8" textAnchor="middle" fontFamily="monospace">b² = c²-a²</text>
   </svg>
 );
 
-/* ── Bar chart SVG for calculation visualisation ── */
 const HitungSVG = ({ a, b, c, cari }: { a: number; b: number; c: number; cari: "a"|"b"|"c" }) => {
   const maxVal = Math.max(a*a, b*b, c*c);
   const scale  = 260 / maxVal;
@@ -222,65 +190,16 @@ const HitungSVG = ({ a, b, c, cari }: { a: number; b: number; c: number; cari: "
   );
 };
 
-/* ── Small right-triangle SVG used in Contoh 1 ── */
-const MiniTriangle = ({
-  a, b, c,
-  labelA, labelB, labelC,
-  colorA = "#60a5fa", colorB = "#4ade80", colorC = "#fb923c",
-  question,
-}: {
-  a: number; b: number; c: number;
-  labelA: string; labelB: string; labelC: string;
-  colorA?: string; colorB?: string; colorC?: string;
-  question?: string;
-}) => {
-  const scale = 100 / Math.max(a, b);
-  const W = b * scale, H = a * scale;
-  const vw = W + 60, vh = H + 60;
-  return (
-    <svg viewBox={`0 0 ${vw} ${vh}`} className="w-full max-w-[220px] mx-auto" aria-label="Segitiga">
-      {question && (
-        <text x={vw / 2} y="14" fill="#facc15" fontSize="10" fontWeight="bold" textAnchor="middle">{question}</text>
-      )}
-      {/* triangle: right angle at bottom-left */}
-      <polygon
-        points={`30,${H + 24} ${W + 30},${H + 24} 30,24`}
-        fill="rgba(59,130,246,0.12)"
-        stroke="none"
-      />
-      {/* vertical leg (a) */}
-      <line x1="30" y1="24" x2="30" y2={H + 24} stroke={colorA} strokeWidth="2.5"/>
-      {/* horizontal leg (b) */}
-      <line x1="30" y1={H + 24} x2={W + 30} y2={H + 24} stroke={colorB} strokeWidth="2.5"/>
-      {/* hypotenuse (c) */}
-      <line x1="30" y1="24" x2={W + 30} y2={H + 24} stroke={colorC} strokeWidth="2.5"/>
-      {/* right angle mark */}
-      <polyline points={`30,${H + 14} 40,${H + 14} 40,${H + 24}`} fill="none" stroke="#94a3b8" strokeWidth="1.2"/>
-      {/* labels */}
-      <text x="18"         y={H / 2 + 28}  fill={colorA} fontSize="12" fontWeight="bold" textAnchor="middle">{labelA}</text>
-      <text x={W / 2 + 30} y={H + 42}      fill={colorB} fontSize="12" fontWeight="bold" textAnchor="middle">{labelB}</text>
-      <text x={W / 2 + 38} y={H / 2 + 16}  fill={colorC} fontSize="12" fontWeight="bold" textAnchor="middle">{labelC}</text>
-    </svg>
-  );
-};
-
 const PembuktianPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "rearrangement", "pembuktian", "contoh1", "contoh2", "contoh3", "mhg_intro", "mhg_prosedur", "mhg_c1", "mhg_c2", "mhg_c3", "rangkuman", "kuadrat"]);
 
-  const toggle = (id: string) => {
-    playPopSound();
-    setOpen(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]);
-  };
-
-  const SectionHeader = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+  const SectionHeader = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
+    <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    </div>
   );
 
   return (
@@ -296,123 +215,118 @@ const PembuktianPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* ══ INTRO — PALING ATAS ══ */}
+          {/* ══ INTRO ══ */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title="🌟 Selamat Datang di Dunia Teorema Pythagoras!"/>
-            {open.includes("intro") && (
-              <div className="px-5 pb-5 space-y-4">
+            <div className="px-5 pb-5 space-y-4">
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Lebih dari 2.500 tahun lalu, seorang matematikawan Yunani bernama <strong className="text-cyan-300">Pythagoras</strong> menemukan sebuah pola yang luar biasa di setiap segitiga siku-siku. Hubungan antar sisi-sisinya selalu berlaku, tanpa terkecuali! Inilah yang kita kenal sebagai <strong className="text-yellow-300">Teorema Pythagoras</strong> — salah satu rumus paling terkenal di dunia matematika.
+              </p>
+
+              <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-3">
+                <p className="text-yellow-300 font-semibold text-sm">🏗️ Kegunaan Teorema Pythagoras dalam Kehidupan Nyata</p>
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Lebih dari 2.500 tahun lalu, seorang matematikawan Yunani bernama <strong className="text-cyan-300">Pythagoras</strong> menemukan sebuah pola yang luar biasa di setiap segitiga siku-siku. Hubungan antar sisi-sisinya selalu berlaku, tanpa terkecuali! Inilah yang kita kenal sebagai <strong className="text-yellow-300">Teorema Pythagoras</strong> — salah satu rumus paling terkenal di dunia matematika.
+                  Teorema Pythagoras bukan sekadar rumus di buku teks — ia dipakai setiap hari oleh para profesional di berbagai bidang:
                 </p>
+                <ul className="space-y-2 font-body text-sm text-white/75">
+                  <li className="flex gap-2">
+                    <span className="text-orange-400 shrink-0">🏗️</span>
+                    <span><strong className="text-orange-300">Konstruksi & Arsitektur</strong> — Para pekerja bangunan menggunakan Teorema Pythagoras untuk memastikan sudut bangunan benar-benar 90° (siku-siku), mengukur diagonal pondasi, dan menghitung panjang rangka atap secara presisi.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-cyan-400 shrink-0">🗺️</span>
+                    <span><strong className="text-cyan-300">Navigasi & Pemetaan</strong> — Menentukan jarak terpendek antara dua titik di peta, digunakan pada GPS dan sistem navigasi kapal maupun pesawat.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-green-400 shrink-0">📡</span>
+                    <span><strong className="text-green-300">Teknologi & Sinyal</strong> — Menghitung jangkauan sinyal antena, jarak antar menara telekomunikasi, dan posisi satelit.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-purple-400 shrink-0">🎮</span>
+                    <span><strong className="text-purple-300">Game & Grafis Komputer</strong> — Menghitung jarak antar objek dalam ruang 2D dan 3D, dipakai dalam rendering dan deteksi tabrakan (collision detection).</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-pink-400 shrink-0">⚕️</span>
+                    <span><strong className="text-pink-300">Kedokteran & Imaging</strong> — Digunakan dalam pemrosesan gambar medis seperti CT scan dan MRI untuk menghitung jarak dan ukuran organ.</span>
+                  </li>
+                </ul>
 
-                {/* Kegunaan Teorema Pythagoras */}
-                <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-3">
-                  <p className="text-yellow-300 font-semibold text-sm">🏗️ Kegunaan Teorema Pythagoras dalam Kehidupan Nyata</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Teorema Pythagoras bukan sekadar rumus di buku teks — ia dipakai setiap hari oleh para profesional di berbagai bidang:
-                  </p>
-                  <ul className="space-y-2 font-body text-sm text-white/75">
-                    <li className="flex gap-2">
-                      <span className="text-orange-400 shrink-0">🏗️</span>
-                      <span><strong className="text-orange-300">Konstruksi & Arsitektur</strong> — Seperti terlihat pada gambar di bawah, para pekerja bangunan menggunakan Teorema Pythagoras untuk memastikan sudut bangunan benar-benar 90° (siku-siku), mengukur diagonal pondasi, dan menghitung panjang rangka atap secara presisi.</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-cyan-400 shrink-0">🗺️</span>
-                      <span><strong className="text-cyan-300">Navigasi & Pemetaan</strong> — Menentukan jarak terpendek antara dua titik di peta, digunakan pada GPS dan sistem navigasi kapal maupun pesawat.</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-green-400 shrink-0">📡</span>
-                      <span><strong className="text-green-300">Teknologi & Sinyal</strong> — Menghitung jangkauan sinyal antena, jarak antar menara telekomunikasi, dan posisi satelit.</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-purple-400 shrink-0">🎮</span>
-                      <span><strong className="text-purple-300">Game & Grafis Komputer</strong> — Menghitung jarak antar objek dalam ruang 2D dan 3D, dipakai dalam rendering dan deteksi tabrakan (collision detection).</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-pink-400 shrink-0">⚕️</span>
-                      <span><strong className="text-pink-300">Kedokteran & Imaging</strong> — Digunakan dalam pemrosesan gambar medis seperti CT scan dan MRI untuk menghitung jarak dan ukuran organ.</span>
-                    </li>
-                  </ul>
+                <figure className="rounded-xl overflow-hidden border border-yellow-500/30 bg-slate-900/60">
+                  <img
+                    src="/pythagoras-construction.png"
+                    alt="Pekerja konstruksi menggunakan Teorema Pythagoras di lapangan"
+                    className="w-full object-contain"
+                  />
+                  <figcaption className="text-center text-white/40 text-xs py-2 px-3 font-body italic">
+                    bing.com/images/create
+                  </figcaption>
+                </figure>
 
-                  {/* Gambar Konstruksi */}
-                  <figure className="rounded-xl overflow-hidden border border-yellow-500/30 bg-slate-900/60">
-                    <img
-                      src="/pythagoras-construction.png"
-                      alt="Pekerja konstruksi menggunakan Teorema Pythagoras di lapangan"
-                      className="w-full object-contain"
-                    />
-                    <figcaption className="text-center text-white/40 text-xs py-2 px-3 font-body italic">
-                      bing.com/images/create
-                    </figcaption>
-                  </figure>
-
-                  <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3 mt-2">
-                    <p className="font-body text-xs text-yellow-200">
-                      💡 <strong>Fakta Menarik:</strong> Teknik "<em>3-4-5</em>" yang dipakai tukang bangunan untuk memastikan sudut siku-siku adalah penerapan langsung Teorema Pythagoras (3² + 4² = 5²) — digunakan sejak zaman Mesir Kuno!
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4">
-                  <p className="text-cyan-300 font-semibold text-sm mb-3">🔭 Rumus Inti Teorema Pythagoras</p>
-                  <SegitigaSikuSVG/>
-                  <div className="bg-slate-900/60 rounded-lg p-3">
-                    <BlockMath math="a^2 + b^2 = c^2"/>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 mt-3 text-xs font-body">
-                    <div className="bg-blue-900/40 border border-blue-500/30 rounded-lg p-2 text-center">
-                      <p className="text-blue-300 font-bold"><InlineMath math="a"/></p>
-                      <p className="text-white/60 mt-1">Sisi tegak (kaki 1)</p>
-                    </div>
-                    <div className="bg-green-900/40 border border-green-500/30 rounded-lg p-2 text-center">
-                      <p className="text-green-300 font-bold"><InlineMath math="b"/></p>
-                      <p className="text-white/60 mt-1">Sisi alas (kaki 2)</p>
-                    </div>
-                    <div className="bg-orange-900/40 border border-orange-500/30 rounded-lg p-2 text-center">
-                      <p className="text-orange-300 font-bold"><InlineMath math="c"/></p>
-                      <p className="text-white/60 mt-1">Hipotenusa (miring)</p>
-                    </div>
-                  </div>
-
-                  {/* Dua variasi rumus lain */}
-                  <div className="mt-4 space-y-2">
-                    <p className="text-cyan-300/70 text-xs font-body font-semibold uppercase tracking-wide">🔄 Variasi Rumus — Mencari Sisi Lain</p>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      <div className="bg-blue-900/30 border border-blue-500/30 rounded-xl p-3 space-y-1">
-                        <p className="text-blue-300 text-xs font-body font-semibold">Mencari sisi tegak <InlineMath math="a"/></p>
-                        <p className="text-white/50 text-xs font-body">Jika <InlineMath math="b"/> dan <InlineMath math="c"/> diketahui:</p>
-                        <div className="bg-slate-900/60 rounded-lg px-3 py-1">
-                          <BlockMath math="a^2 = c^2 - b^2"/>
-                        </div>
-                      </div>
-                      <div className="bg-green-900/30 border border-green-500/30 rounded-xl p-3 space-y-1">
-                        <p className="text-green-300 text-xs font-body font-semibold">Mencari sisi alas <InlineMath math="b"/></p>
-                        <p className="text-white/50 text-xs font-body">Jika <InlineMath math="a"/> dan <InlineMath math="c"/> diketahui:</p>
-                        <div className="bg-slate-900/60 rounded-lg px-3 py-1">
-                          <BlockMath math="b^2 = c^2 - a^2"/>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-slate-700/40 border border-slate-600/40 rounded-lg p-2 mt-1">
-                      <p className="text-white/50 text-xs font-body text-center">
-                        💡 Ketiga rumus ini berasal dari <strong className="text-yellow-300">persamaan yang sama</strong> — hanya dipindah-pindah ruas saja!
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-yellow-200">
-                    💡 <strong>Ingat!</strong> Huruf <strong className="text-orange-300">c</strong> selalu mewakili sisi miring (hipotenusa) — yaitu sisi yang berhadapan dengan sudut 90°. Ini adalah sisi terpanjang dari segitiga siku-siku.
+                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3 mt-2">
+                  <p className="font-body text-xs text-yellow-200">
+                    💡 <strong>Fakta Menarik:</strong> Teknik "<em>3-4-5</em>" yang dipakai tukang bangunan untuk memastikan sudut siku-siku adalah penerapan langsung Teorema Pythagoras (3² + 4² = 5²) — digunakan sejak zaman Mesir Kuno!
                   </p>
                 </div>
               </div>
-            )}
+
+              <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4">
+                <p className="text-cyan-300 font-semibold text-sm mb-3">🔭 Rumus Inti Teorema Pythagoras</p>
+                <SegitigaSikuSVG/>
+                <div className="bg-slate-900/60 rounded-lg p-3">
+                  <BlockMath math="a^2 + b^2 = c^2"/>
+                </div>
+                <div className="grid grid-cols-3 gap-2 mt-3 text-xs font-body">
+                  <div className="bg-blue-900/40 border border-blue-500/30 rounded-lg p-2 text-center">
+                    <p className="text-blue-300 font-bold"><InlineMath math="a"/></p>
+                    <p className="text-white/60 mt-1">Sisi siku-siku (kaki 1)</p>
+                  </div>
+                  <div className="bg-green-900/40 border border-green-500/30 rounded-lg p-2 text-center">
+                    <p className="text-green-300 font-bold"><InlineMath math="b"/></p>
+                    <p className="text-white/60 mt-1">Sisi siku-siku (kaki 2)</p>
+                  </div>
+                  <div className="bg-orange-900/40 border border-orange-500/30 rounded-lg p-2 text-center">
+                    <p className="text-orange-300 font-bold"><InlineMath math="c"/></p>
+                    <p className="text-white/60 mt-1">Hipotenusa (miring)</p>
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-2">
+                  <p className="text-cyan-300/70 text-xs font-body font-semibold uppercase tracking-wide">🔄 Variasi Rumus — Mencari Sisi Lain</p>
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div className="bg-blue-900/30 border border-blue-500/30 rounded-xl p-3 space-y-1">
+                      <p className="text-blue-300 text-xs font-body font-semibold">Mencari sisi siku-siku <InlineMath math="a"/></p>
+                      <p className="text-white/50 text-xs font-body">Jika <InlineMath math="b"/> dan <InlineMath math="c"/> diketahui:</p>
+                      <div className="bg-slate-900/60 rounded-lg px-3 py-1">
+                        <BlockMath math="a^2 = c^2 - b^2"/>
+                      </div>
+                    </div>
+                    <div className="bg-green-900/30 border border-green-500/30 rounded-xl p-3 space-y-1">
+                      <p className="text-green-300 text-xs font-body font-semibold">Mencari sisi siku-siku <InlineMath math="b"/></p>
+                      <p className="text-white/50 text-xs font-body">Jika <InlineMath math="a"/> dan <InlineMath math="c"/> diketahui:</p>
+                      <div className="bg-slate-900/60 rounded-lg px-3 py-1">
+                        <BlockMath math="b^2 = c^2 - a^2"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-slate-700/40 border border-slate-600/40 rounded-lg p-2 mt-1">
+                    <p className="text-white/50 text-xs font-body text-center">
+                      💡 Ketiga rumus ini berasal dari <strong className="text-yellow-300">persamaan yang sama</strong> — hanya dipindah-pindah ruas saja!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                <p className="font-body text-sm text-yellow-200">
+                  💡 <strong>Ingat!</strong> Huruf <strong className="text-orange-300">c</strong> selalu mewakili sisi miring (hipotenusa) — yaitu sisi yang berhadapan dengan sudut 90°. Ini adalah sisi terpanjang dari segitiga siku-siku.
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* VIDEO YOUTUBE */}
+          {/* VIDEO YOUTUBE — Pembuktian 1 */}
           <div className="w-full">
             <p className="text-center font-display font-bold text-white text-base md:text-lg mb-3 tracking-wide">
-              📽️ Pembuktian Teorema Pythagoras
+              📽️ Pembuktian Teorema Pythagoras 1 (Video Animasi)
             </p>
             <div className="rounded-2xl overflow-hidden border border-cyan-500/40 shadow-lg shadow-cyan-900/30 bg-black">
               <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
@@ -438,338 +352,102 @@ const PembuktianPage = () => {
             </p>
           </div>
 
-          {/* WATER PROOF ANIMATION */}
+          {/* WATER PROOF ANIMATION — Pembuktian 2 */}
           <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-2xl overflow-hidden p-4">
             <PythagorasWaterProof />
           </div>
 
-          {/* SQUARES ANIMATION */}
+          {/* SQUARES ANIMATION — Pembuktian 3 */}
           <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-2xl overflow-hidden p-4">
             <PythagorasSquaresAnimation />
           </div>
 
-          {/* ANIMASI REARRANGEMENT */}
+          {/* ANIMASI REARRANGEMENT — Pembuktian 4 */}
           <div className="bg-card/80 backdrop-blur border border-violet-500/40 rounded-xl overflow-hidden">
-            <SectionHeader id="rearrangement" icon={<Target className="w-5 h-5"/>} iconColor="text-violet-400" title="🔀 Animasi: Metode Penyusunan Ulang (Rearrangement)"/>
-            {open.includes("rearrangement") && (
-              <div className="px-4 pb-5 space-y-3">
-                <div className="bg-violet-900/30 border border-violet-500/20 rounded-lg p-3">
-                  <p className="font-body text-sm text-violet-200 leading-relaxed">
-                    🔬 Bukti paling elegan! Empat segitiga siku-siku yang sama disusun di dalam persegi besar <InlineMath math="(a+b)^2"/>. Dengan <strong className="text-yellow-300">menggeser posisi keempat segitiga</strong>, terlihat bahwa ruang kosong berubah dari <strong className="text-yellow-300">c²</strong> menjadi <strong className="text-cyan-300">a² + b²</strong> — membuktikan teorema secara visual!
-                  </p>
-                </div>
-                <PythagorasRearrangementAnimation />
+            <SectionHeader id="rearrangement" icon={<Target className="w-5 h-5"/>} iconColor="text-violet-400" title="🔀 Pembuktian Teorema Pythagoras 4 Animasi : Metode Penyusunan Ulang (Rearrangement)"/>
+            <div className="px-4 pb-5 space-y-3">
+              <div className="bg-violet-900/30 border border-violet-500/20 rounded-lg p-3">
+                <p className="font-body text-sm text-violet-200 leading-relaxed">
+                  🔬 Bukti paling elegan! Empat segitiga siku-siku yang sama disusun di dalam persegi besar <InlineMath math="(a+b)^2"/>. Dengan <strong className="text-yellow-300">menggeser posisi keempat segitiga</strong>, terlihat bahwa ruang kosong berubah dari <strong className="text-yellow-300">c²</strong> menjadi <strong className="text-cyan-300">a² + b²</strong> — membuktikan teorema secara visual!
+                </p>
               </div>
-            )}
+              <PythagorasRearrangementAnimation />
+            </div>
           </div>
 
-          {/* PEMBUKTIAN VISUAL */}
+          {/* PEMBUKTIAN VISUAL — Pembuktian 5 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="pembuktian" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Pembuktian Visual: Metode Persegi"/>
-            {open.includes("pembuktian") && (
-              <div className="px-5 pb-5 space-y-4">
+            <SectionHeader id="pembuktian" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Pembuktian 5 Teorema Pythagoras : Pembuktian Metode Persegi"/>
+            <div className="px-5 pb-5 space-y-4">
 
-                {/* Intro */}
-                <div className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ide Utama Pembuktian</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Susun <strong className="text-cyan-300">4 segitiga siku-siku identik</strong> di dalam persegi besar bersisi (a+b).
-                    Hitung luasnya dengan <strong className="text-yellow-300">dua cara berbeda</strong> — karena hasilnya harus sama,
-                    kita buktikan bahwa <InlineMath math="a^2 + b^2 = c^2"/>.
-                  </p>
-                </div>
+              <div className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-4">
+                <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ide Utama Pembuktian</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Susun <strong className="text-cyan-300">4 segitiga siku-siku identik</strong> di dalam persegi besar bersisi (a+b).
+                  Hitung luasnya dengan <strong className="text-yellow-300">dua cara berbeda</strong> — karena hasilnya harus sama,
+                  kita buktikan bahwa <InlineMath math="a^2 + b^2 = c^2"/>.
+                </p>
+              </div>
 
-                {/* SVG diagram */}
-                <div className="bg-slate-900/60 rounded-xl p-3 border border-slate-700/50">
-                  <p className="text-center text-xs text-slate-400 mb-1 font-body">
-                    4 segitiga identik (biru · hijau · oranye · ungu) + persegi <span className="text-red-400 font-bold">c²</span> merah di tengah
-                  </p>
-                  <PembuktianSVG/>
-                </div>
+              <div className="bg-slate-900/60 rounded-xl p-3 border border-slate-700/50">
+                <p className="text-center text-xs text-slate-400 mb-1 font-body">
+                  4 segitiga identik (biru · hijau · oranye · ungu) + persegi <span className="text-red-400 font-bold">c²</span> merah di tengah
+                </p>
+                <PembuktianSVG/>
+              </div>
 
-                {/* Derivation flow */}
-                <div className="space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wider text-center">⚖️ Dua Cara Menghitung Luas Persegi Besar</p>
+              <div className="space-y-3">
+                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wider text-center">⚖️ Dua Cara Menghitung Luas Persegi Besar</p>
 
-                  {/* Two method cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
-                    <div className="bg-yellow-900/25 border border-yellow-500/40 rounded-xl p-4 space-y-2">
-                      <p className="text-yellow-300 text-xs font-bold uppercase tracking-wide">🟡 Cara 1 — Rumus Ekspansi</p>
-                      <p className="text-white/60 text-xs font-body">Persegi besar bersisi (a+b):</p>
-                      <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
-                        <BlockMath math="(a+b)^2 = a^2 + 2ab + b^2"/>
-                      </div>
-                    </div>
-
-                    <div className="text-3xl font-bold text-slate-500 self-center text-center hidden sm:block">=</div>
-
-                    <div className="bg-blue-900/25 border border-blue-500/40 rounded-xl p-4 space-y-2">
-                      <p className="text-blue-300 text-xs font-bold uppercase tracking-wide">🔵 Cara 2 — Komponen Dalam</p>
-                      <p className="text-white/60 text-xs font-body">4 segitiga + persegi merah c²:</p>
-                      <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
-                        <BlockMath math="4 \cdot \tfrac{1}{2}ab + c^2 = 2ab + c^2"/>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="sm:hidden text-center text-slate-500 text-2xl font-bold">=</div>
-
-                  {/* Divider with label */}
-                  <div className="flex items-center gap-2">
-                    <div className="flex-1 h-px bg-slate-700/70"/>
-                    <p className="text-slate-400 text-xs font-body whitespace-nowrap px-2">↓ Samakan keduanya, lalu kurangi 2ab di kedua ruas</p>
-                    <div className="flex-1 h-px bg-slate-700/70"/>
-                  </div>
-
-                  {/* Cancellation step */}
-                  <div className="bg-slate-800/60 border border-slate-600/50 rounded-xl p-4">
-                    <p className="text-slate-400 text-xs font-body mb-2">Dari persamaan kedua cara:</p>
+                <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
+                  <div className="bg-yellow-900/25 border border-yellow-500/40 rounded-xl p-4 space-y-2">
+                    <p className="text-yellow-300 text-xs font-bold uppercase tracking-wide">🟡 Cara 1 — Rumus Ekspansi</p>
+                    <p className="text-white/60 text-xs font-body">Persegi besar bersisi (a+b):</p>
                     <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
-                      <BlockMath math="a^2 + \cancel{2ab} + b^2 = \cancel{2ab} + c^2"/>
+                      <BlockMath math="(a+b)^2 = a^2 + 2ab + b^2"/>
                     </div>
                   </div>
 
-                  {/* Final result */}
-                  <div
-                    className="bg-gradient-to-r from-red-900/40 via-rose-900/30 to-red-900/40 border-2 border-red-500/60 rounded-xl p-5 text-center space-y-2"
-                    style={{boxShadow: '0 0 28px rgba(239,68,68,0.22), inset 0 0 18px rgba(239,68,68,0.07)'}}
-                  >
-                    <p className="text-red-300 text-xs font-bold uppercase tracking-wider">✅ Teorema Pythagoras — Terbukti!</p>
-                    <div className="bg-slate-900/70 rounded-xl px-4 py-1">
-                      <BlockMath math="\boxed{a^2 + b^2 = c^2}"/>
-                    </div>
-                    <p className="text-white/55 text-xs font-body">
-                      Berlaku di <strong className="text-white/75">setiap</strong> segitiga siku-siku tanpa terkecuali.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+                  <div className="text-3xl font-bold text-slate-500 self-center text-center hidden sm:block">=</div>
 
-          {/* ══ CONTOH 1 — 3 segitiga siku-siku ══ */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh 1 — Menghitung Panjang Sisi Segitiga Siku-Siku"/>
-            {open.includes("contoh1") && (
-              <div className="px-5 pb-5 space-y-6">
-                <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-3">
-                  <p className="text-green-300 font-bold text-xs uppercase tracking-wide">🟢 Tingkat: Dasar</p>
-                </div>
-
-                {/* ─── Pertanyaan a ─── */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shrink-0">a</span>
-                    <p className="font-body text-sm text-white/90 font-semibold">Tentukan panjang sisi miring segitiga berikut!</p>
-                  </div>
-                  <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                    <MiniTriangle
-                      a={3} b={4} c={5}
-                      labelA="3 cm" labelB="4 cm" labelC="c = ?"
-                      colorC="#facc15"
-                      question="Cari sisi miring (c)"
-                    />
-                    <p className="font-body text-xs text-slate-300 uppercase tracking-wide font-bold mt-2">📋 Penyelesaian</p>
-                    <p className="font-body text-sm text-white/80">Gunakan rumus: <InlineMath math="c^2 = a^2 + b^2"/></p>
-                    <BlockMath math="c^2 = 3^2 + 4^2 = 9 + 16 = 25"/>
-                    <BlockMath math="c = \sqrt{25} = 5 \text{ cm}"/>
-                    <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm text-green-300 text-center font-bold">✅ Panjang sisi miring = <strong>5 cm</strong></p>
+                  <div className="bg-blue-900/25 border border-blue-500/40 rounded-xl p-4 space-y-2">
+                    <p className="text-blue-300 text-xs font-bold uppercase tracking-wide">🔵 Cara 2 — Komponen Dalam</p>
+                    <p className="text-white/60 text-xs font-body">4 segitiga + persegi merah c²:</p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="4 \cdot \tfrac{1}{2}ab + c^2 = 2ab + c^2"/>
                     </div>
                   </div>
                 </div>
 
-                {/* ─── Pertanyaan b ─── */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-yellow-600 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shrink-0">b</span>
-                    <p className="font-body text-sm text-white/90 font-semibold">Tentukan panjang sisi siku-siku yang belum diketahui!</p>
-                  </div>
-                  <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                    <MiniTriangle
-                      a={5} b={12} c={13}
-                      labelA="a = ?" labelB="12 cm" labelC="13 cm"
-                      colorA="#facc15"
-                      question="Cari sisi siku-siku (a)"
-                    />
-                    <p className="font-body text-xs text-slate-300 uppercase tracking-wide font-bold mt-2">📋 Penyelesaian</p>
-                    <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="b = 12"/> cm, <InlineMath math="c = 13"/> cm. Gunakan:</p>
-                    <BlockMath math="a^2 = c^2 - b^2 = 13^2 - 12^2 = 169 - 144 = 25"/>
-                    <BlockMath math="a = \sqrt{25} = 5 \text{ cm}"/>
-                    <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm text-yellow-200 text-center font-bold">✅ Panjang sisi siku-siku = <strong>5 cm</strong></p>
-                    </div>
+                <div className="sm:hidden text-center text-slate-500 text-2xl font-bold">=</div>
+
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 h-px bg-slate-700/70"/>
+                  <p className="text-slate-400 text-xs font-body whitespace-nowrap px-2">↓ Samakan keduanya, lalu kurangi 2ab di kedua ruas</p>
+                  <div className="flex-1 h-px bg-slate-700/70"/>
+                </div>
+
+                <div className="bg-slate-800/60 border border-slate-600/50 rounded-xl p-4">
+                  <p className="text-slate-400 text-xs font-body mb-2">Dari persamaan kedua cara:</p>
+                  <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <BlockMath math="a^2 + \cancel{2ab} + b^2 = \cancel{2ab} + c^2"/>
                   </div>
                 </div>
 
-                {/* ─── Pertanyaan c ─── */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-orange-600 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shrink-0">c</span>
-                    <p className="font-body text-sm text-white/90 font-semibold">Tentukan panjang sisi siku-siku yang belum diketahui!</p>
+                <div
+                  className="bg-gradient-to-r from-red-900/40 via-rose-900/30 to-red-900/40 border-2 border-red-500/60 rounded-xl p-5 text-center space-y-2"
+                  style={{boxShadow: '0 0 28px rgba(239,68,68,0.22), inset 0 0 18px rgba(239,68,68,0.07)'}}
+                >
+                  <p className="text-red-300 text-xs font-bold uppercase tracking-wider">✅ Teorema Pythagoras — Terbukti!</p>
+                  <div className="bg-slate-900/70 rounded-xl px-4 py-1">
+                    <BlockMath math="\boxed{a^2 + b^2 = c^2}"/>
                   </div>
-                  <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                    <MiniTriangle
-                      a={8} b={15} c={17}
-                      labelA="8 cm" labelB="b = ?" labelC="17 cm"
-                      colorB="#facc15"
-                      question="Cari sisi siku-siku (b)"
-                    />
-                    <p className="font-body text-xs text-slate-300 uppercase tracking-wide font-bold mt-2">📋 Penyelesaian</p>
-                    <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="a = 8"/> cm, <InlineMath math="c = 17"/> cm. Gunakan:</p>
-                    <BlockMath math="b^2 = c^2 - a^2 = 17^2 - 8^2 = 289 - 64 = 225"/>
-                    <BlockMath math="b = \sqrt{225} = 15 \text{ cm}"/>
-                    <div className="bg-orange-900/30 border border-orange-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm text-orange-200 text-center font-bold">✅ Panjang sisi siku-siku = <strong>15 cm</strong></p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            )}
-          </div>
-
-          {/* ══ CONTOH 2 — Jawaban berupa akar ══ */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh 2 — Jawaban Berupa Bentuk Akar"/>
-            {open.includes("contoh2") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
-                  <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
-                  <p className="font-body text-sm text-white/90 leading-relaxed">
-                    Sebuah segitiga siku-siku memiliki sisi tegak <strong>5 cm</strong> dan sisi alas <strong>7 cm</strong>.
-                    Tentukan panjang sisi miringnya! Nyatakan dalam bentuk akar paling sederhana.
-                  </p>
-                </div>
-
-                {/* Gambar segitiga */}
-                <div className="bg-slate-900/50 rounded-xl border border-slate-700/60 p-3">
-                  <MiniTriangle
-                    a={5} b={7} c={0}
-                    labelA="5 cm" labelB="7 cm" labelC="c = ?"
-                    colorC="#facc15"
-                    question="Cari sisi miring (c)"
-                  />
-                </div>
-
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Penyelesaian</p>
-                  <p className="font-body text-sm text-white/80">
-                    Diketahui: <InlineMath math="a = 5"/> cm, <InlineMath math="b = 7"/> cm. Gunakan rumus Pythagoras:
-                  </p>
-                  <BlockMath math="c^2 = a^2 + b^2 = 5^2 + 7^2"/>
-                  <BlockMath math="c^2 = 25 + 49 = 74"/>
-                  <BlockMath math="c = \sqrt{74} \text{ cm}"/>
-                  <div className="bg-slate-700/50 rounded-lg p-3">
-                    <p className="font-body text-sm text-white/70 mb-1">
-                      💡 Apakah <InlineMath math="\sqrt{74}"/> bisa disederhanakan?
-                    </p>
-                    <p className="font-body text-sm text-white/70">
-                      Faktorisasi: <InlineMath math="74 = 2 \times 37"/>. Tidak ada faktor kuadrat sempurna, jadi <InlineMath math="\sqrt{74}"/> sudah dalam bentuk paling sederhana.
-                    </p>
-                  </div>
-                  <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                    <BlockMath math="\boxed{c = \sqrt{74} \approx 8{,}60 \text{ cm}}"/>
-                    <p className="font-body text-sm text-yellow-200 text-center mt-1">
-                      ✅ Panjang sisi miring = <strong><InlineMath math="\sqrt{74}"/></strong> cm ≈ <strong>8,60 cm</strong>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-cyan-200">
-                    🔑 <strong>Kunci:</strong> Tidak semua perhitungan Pythagoras menghasilkan bilangan bulat. Ketika hasilnya bukan kuadrat sempurna, nyatakan sebagai bentuk akar <InlineMath math="\sqrt{n}"/> dan sederhanakan semaksimal mungkin.
+                  <p className="text-white/55 text-xs font-body">
+                    Berlaku di <strong className="text-white/75">setiap</strong> segitiga siku-siku tanpa terkecuali.
                   </p>
                 </div>
               </div>
-            )}
-          </div>
-
-          {/* ══ CONTOH 3 — Aplikasi: Kapal Laut ══ */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 3 — Aplikasi: Pelayaran Kapal Laut"/>
-            {open.includes("contoh3") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
-                  <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Aplikasi</p>
-                  <p className="font-body text-sm text-white/90 leading-relaxed">
-                    Sebuah kapal laut bertolak dari Pelabuhan A. Kapal tersebut berlayar ke arah <strong>Timur sejauh 8 km</strong>, lalu berbelok ke arah <strong>Utara sejauh 15 km</strong> hingga tiba di Pelabuhan B. Berapa jarak terpendek (lurus) dari Pelabuhan A ke Pelabuhan B?
-                  </p>
-                </div>
-
-                {/* Ilustrasi jalur kapal */}
-                <div className="bg-slate-900/60 rounded-xl border border-slate-700/60 p-4">
-                  <svg viewBox="0 0 280 200" className="w-full max-w-sm mx-auto" aria-label="Ilustrasi jalur kapal laut">
-                    {/* laut */}
-                    <rect x="0" y="0" width="280" height="200" fill="#0f172a" rx="8"/>
-                    {/* grid ringan */}
-                    {[40,80,120,160,200,240].map(x => (
-                      <line key={x} x1={x} y1="10" x2={x} y2="190" stroke="#1e3a5f" strokeWidth="0.5"/>
-                    ))}
-                    {[40,80,120,160].map(y => (
-                      <line key={y} x1="10" y1={y} x2="270" y2={y} stroke="#1e3a5f" strokeWidth="0.5"/>
-                    ))}
-
-                    {/* Jalur Timur: A→C (horizontal ke kanan) */}
-                    <line x1="40" y1="160" x2="200" y2="160" stroke="#22c55e" strokeWidth="2.5" strokeDasharray="6 3"/>
-                    {/* Jalur Utara: C→B (vertikal ke atas) */}
-                    <line x1="200" y1="160" x2="200" y2="40" stroke="#3b82f6" strokeWidth="2.5" strokeDasharray="6 3"/>
-                    {/* Jarak lurus: A→B */}
-                    <line x1="40" y1="160" x2="200" y2="40" stroke="#f97316" strokeWidth="2.5"/>
-
-                    {/* Sudut siku-siku di C */}
-                    <polyline points="190,160 190,150 200,150" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
-
-                    {/* Pelabuhan A */}
-                    <circle cx="40" cy="160" r="5" fill="#facc15"/>
-                    <text x="24" y="176" fill="#facc15" fontSize="12" fontWeight="bold">A</text>
-
-                    {/* Titik belok C */}
-                    <circle cx="200" cy="160" r="4" fill="#94a3b8"/>
-                    <text x="206" y="176" fill="#94a3b8" fontSize="11">C</text>
-
-                    {/* Pelabuhan B */}
-                    <circle cx="200" cy="40" r="5" fill="#facc15"/>
-                    <text x="208" y="38" fill="#facc15" fontSize="12" fontWeight="bold">B</text>
-
-                    {/* Label jarak */}
-                    <text x="112" y="175" fill="#4ade80" fontSize="11" fontWeight="bold" textAnchor="middle">8 km</text>
-                    <text x="216" y="104" fill="#60a5fa" fontSize="11" fontWeight="bold" textAnchor="start">15 km</text>
-                    <text x="100"  y="88"  fill="#fb923c" fontSize="11" fontWeight="bold" textAnchor="middle">d = ?</text>
-
-                    {/* Arah mata angin */}
-                    <text x="248" y="26" fill="#94a3b8" fontSize="9">U</text>
-                    <line x1="252" y1="28" x2="252" y2="50" stroke="#94a3b8" strokeWidth="1" markerEnd="url(#arrow)"/>
-                  </svg>
-                  <p className="text-center text-xs text-slate-400 mt-2 font-body">Jalur kapal: Timur 8 km → Utara 15 km. Jarak langsung A ke B = ?</p>
-                </div>
-
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Penyelesaian</p>
-                  <div className="space-y-1 font-body text-sm text-white/80">
-                    <p>• Jarak ke Timur (AC) = <InlineMath math="b = 8"/> km</p>
-                    <p>• Jarak ke Utara (CB) = <InlineMath math="a = 15"/> km</p>
-                    <p>• Sudut di C = 90° → berlaku Teorema Pythagoras</p>
-                  </div>
-                  <p className="font-body text-sm text-white/80 mt-1">Hitung jarak lurus A ke B:</p>
-                  <BlockMath math="d^2 = a^2 + b^2 = 15^2 + 8^2"/>
-                  <BlockMath math="d^2 = 225 + 64 = 289"/>
-                  <BlockMath math="d = \sqrt{289} = 17 \text{ km}"/>
-                  <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                    <BlockMath math="\boxed{d = 17 \text{ km}}"/>
-                    <p className="font-body text-sm text-red-200 text-center mt-1">
-                      ✅ Jarak terpendek dari Pelabuhan A ke Pelabuhan B adalah <strong>17 km</strong>.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-cyan-200">
-                    🚢 <strong>Pesan:</strong> Teorema Pythagoras sangat berguna dalam navigasi pelayaran dan penerbangan untuk menghitung jarak terpendek antar dua titik ketika rute aktual membentuk sudut siku-siku.
-                  </p>
-                </div>
-              </div>
-            )}
+            </div>
           </div>
 
           {/* ══════════════════════════════════════════════════════
@@ -787,245 +465,231 @@ const PembuktianPage = () => {
           {/* MHG INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="mhg_intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title="🌟 Tiga Skenario Berbeda"/>
-            {open.includes("mhg_intro") && (
-              <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Dalam sebuah segitiga siku-siku, ada <strong className="text-cyan-300">tiga sisi</strong>: dua kaki (<InlineMath math="a"/> dan <InlineMath math="b"/>) dan satu hipotenusa (<InlineMath math="c"/>). Menggunakan Teorema Pythagoras, kita bisa mencari salah satu sisi <em>jika dua sisi lainnya diketahui</em>. Ada tiga skenario berbeda yang perlu kamu kuasai!
-                </p>
-                <RumusVariasiSVG/>
-                <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4 space-y-2">
-                  <p className="text-cyan-300 font-semibold text-sm">📌 Tiga Variasi Rumus Pythagoras</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                    <BlockMath math="c = \sqrt{a^2 + b^2} \quad \text{(cari hipotenusa)}"/>
-                    <BlockMath math="a = \sqrt{c^2 - b^2} \quad \text{(cari kaki pertama)}"/>
-                    <BlockMath math="b = \sqrt{c^2 - a^2} \quad \text{(cari kaki kedua)}"/>
-                  </div>
-                </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-yellow-200">
-                    💡 <strong>Strategi mudah:</strong> Sisi yang <em>dicari</em> pindahkan ke kiri, dua sisi yang <em>diketahui</em> tetap di kanan. Jika mencari <strong className="text-orange-300">c</strong> → tambahkan. Jika mencari <strong className="text-blue-300">a atau b</strong> → kurangkan <strong className="text-orange-300">c²</strong> dengan sisi yang diketahui.
-                  </p>
+            <div className="px-5 pb-5 space-y-4">
+              <p className="font-body text-sm text-white/80 leading-relaxed">
+                Dalam sebuah segitiga siku-siku, ada <strong className="text-cyan-300">tiga sisi</strong>: dua kaki (<InlineMath math="a"/> dan <InlineMath math="b"/>) dan satu hipotenusa (<InlineMath math="c"/>). Menggunakan Teorema Pythagoras, kita bisa mencari salah satu sisi <em>jika dua sisi lainnya diketahui</em>. Ada tiga skenario berbeda yang perlu kamu kuasai!
+              </p>
+              <RumusVariasiSVG/>
+              <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4 space-y-2">
+                <p className="text-cyan-300 font-semibold text-sm">📌 Tiga Variasi Rumus Pythagoras</p>
+                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
+                  <BlockMath math="c^2 = a^2 + b^2 \quad \text{(cari hipotenusa)}"/>
+                  <BlockMath math="a^2 = c^2 - b^2 \quad \text{(cari kaki pertama)}"/>
+                  <BlockMath math="b^2 = c^2 - a^2 \quad \text{(cari kaki kedua)}"/>
                 </div>
               </div>
-            )}
+              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                <p className="font-body text-sm text-yellow-200">
+                  💡 <strong>Strategi mudah:</strong> Sisi yang <em>dicari</em> pindahkan ke kiri dalam bentuk kuadrat, dua sisi yang <em>diketahui</em> tetap di kanan. Jika mencari <strong className="text-orange-300">c²</strong> → tambahkan. Jika mencari <strong className="text-blue-300">a² atau b²</strong> → kurangkan dari <strong className="text-orange-300">c²</strong>.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* MHG PROSEDUR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="mhg_prosedur" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Prosedur Menghitung Langkah demi Langkah"/>
-            {open.includes("mhg_prosedur") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ringkasan Intisari</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Kunci menghitung panjang sisi adalah: <strong className="text-cyan-300">(1)</strong> identifikasi mana hipotenusa, <strong className="text-cyan-300">(2)</strong> pilih rumus yang tepat, <strong className="text-cyan-300">(3)</strong> substitusikan nilai, <strong className="text-cyan-300">(4)</strong> sederhanakan hasilnya — pastikan dalam bentuk akar sederhana jika perlu.
-                  </p>
-                </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Cara Menyederhanakan Akar</p>
-                  <p className="font-body text-sm text-white/80">Contoh: Sederhanakan <InlineMath math="\sqrt{72}"/></p>
-                  <BlockMath math="\sqrt{72} = \sqrt{36 \times 2} = \sqrt{36} \times \sqrt{2} = 6\sqrt{2}"/>
-                  <p className="font-body text-sm text-white/80">Langkah: Cari faktor kuadrat sempurna terbesar dari bilangan di bawah akar!</p>
-                  <div className="grid grid-cols-2 gap-2 text-xs font-body">
-                    <div className="bg-slate-700/50 rounded-lg p-2">
-                      <p className="text-cyan-300 font-bold mb-1">Bilangan Akar Sempurna:</p>
-                      <p className="text-white/60"><InlineMath math="\sqrt{4}=2,\ \sqrt{9}=3,\ \sqrt{16}=4"/></p>
-                      <p className="text-white/60"><InlineMath math="\sqrt{25}=5,\ \sqrt{36}=6,\ \sqrt{49}=7"/></p>
-                    </div>
-                    <div className="bg-slate-700/50 rounded-lg p-2">
-                      <p className="text-yellow-300 font-bold mb-1">Tips:</p>
-                      <p className="text-white/60">Jika hasilnya bulat → tulis tanpa akar. Jika tidak → sederhanakan ke bentuk <InlineMath math="n\sqrt{k}"/>.</p>
-                    </div>
+            <div className="px-5 pb-5 space-y-4">
+              <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+                <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ringkasan Intisari</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Kunci menghitung panjang sisi adalah: <strong className="text-cyan-300">(1)</strong> identifikasi mana hipotenusa, <strong className="text-cyan-300">(2)</strong> pilih rumus yang tepat, <strong className="text-cyan-300">(3)</strong> substitusikan nilai, <strong className="text-cyan-300">(4)</strong> sederhanakan hasilnya.
+                </p>
+              </div>
+              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Cara Menyederhanakan Akar</p>
+                <p className="font-body text-sm text-white/80">Contoh: Sederhanakan <InlineMath math="\sqrt{72}"/></p>
+                <BlockMath math="\sqrt{72} = \sqrt{36 \times 2} = \sqrt{36} \times \sqrt{2} = 6\sqrt{2}"/>
+                <p className="font-body text-sm text-white/80">Langkah: Cari faktor kuadrat sempurna terbesar dari bilangan di bawah akar!</p>
+                <div className="grid grid-cols-2 gap-2 text-xs font-body">
+                  <div className="bg-slate-700/50 rounded-lg p-2">
+                    <p className="text-cyan-300 font-bold mb-1">Bilangan Akar Sempurna:</p>
+                    <p className="text-white/60"><InlineMath math="\sqrt{4}=2,\ \sqrt{9}=3,\ \sqrt{16}=4"/></p>
+                    <p className="text-white/60"><InlineMath math="\sqrt{25}=5,\ \sqrt{36}=6,\ \sqrt{49}=7"/></p>
+                  </div>
+                  <div className="bg-slate-700/50 rounded-lg p-2">
+                    <p className="text-yellow-300 font-bold mb-1">Tips:</p>
+                    <p className="text-white/60">Jika hasilnya bulat → tulis tanpa akar. Jika tidak → sederhanakan ke bentuk <InlineMath math="n\sqrt{k}"/>.</p>
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
 
           {/* MHG CONTOH 4 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="mhg_c1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh 4 — Mencari Hipotenusa (Mudah)"/>
-            {open.includes("mhg_c1") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
-                  <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Tingkat: Mudah</p>
-                  <p className="font-body text-sm text-white/90">
-                    Sebuah tangga disandarkan ke dinding. Kaki tangga berjarak <strong>6 m</strong> dari dinding, dan tinggi tembok yang dijangkau tangga adalah <strong>8 m</strong>. Berapa panjang tangga tersebut?
-                  </p>
-                </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="a = 6"/> m, <InlineMath math="b = 8"/> m. Dicari: <InlineMath math="c"/> (panjang tangga).</p>
-                  <BlockMath math="c = \sqrt{a^2 + b^2} = \sqrt{6^2 + 8^2}"/>
-                  <BlockMath math="c = \sqrt{36 + 64} = \sqrt{100}"/>
-                  <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
-                    <BlockMath math="c = 10 \text{ m}"/>
-                    <p className="font-body text-sm text-green-300 text-center mt-1">✅ Panjang tangga adalah <strong>10 m</strong>.</p>
-                  </div>
-                  <HitungSVG a={6} b={8} c={10} cari="c"/>
-                </div>
+            <div className="px-5 pb-5 space-y-4">
+              <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
+                <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Tingkat: Mudah</p>
+                <p className="font-body text-sm text-white/90">
+                  Sebuah tangga disandarkan ke dinding. Kaki tangga berjarak <strong>6 m</strong> dari dinding, dan tinggi tembok yang dijangkau tangga adalah <strong>8 m</strong>. Berapa panjang tangga tersebut?
+                </p>
               </div>
-            )}
+              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="a = 6"/> m, <InlineMath math="b = 8"/> m. Dicari: <InlineMath math="c"/> (panjang tangga).</p>
+                <BlockMath math="c^2 = a^2 + b^2 = 6^2 + 8^2"/>
+                <BlockMath math="c^2 = 36 + 64 = 100"/>
+                <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                  <BlockMath math="c = \sqrt{100} = 10 \text{ m}"/>
+                  <p className="font-body text-sm text-green-300 text-center mt-1">✅ Panjang tangga adalah <strong>10 m</strong>.</p>
+                </div>
+                <HitungSVG a={6} b={8} c={10} cari="c"/>
+              </div>
+            </div>
           </div>
 
           {/* MHG CONTOH 5 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="mhg_c2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh 5 — Mencari Salah Satu Kaki (Sedang)"/>
-            {open.includes("mhg_c2") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
-                  <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
-                  <p className="font-body text-sm text-white/90">
-                    Sebuah layar kapal berbentuk segitiga siku-siku. Sisi miringnya (tali layar terpanjang) adalah <strong>13 m</strong> dan alas layarnya <strong>5 m</strong>. Tentukan tinggi layar tersebut!
-                  </p>
-                </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="c = 13"/> m, <InlineMath math="b = 5"/> m. Dicari: <InlineMath math="a"/> (tinggi layar).</p>
-                  <BlockMath math="a = \sqrt{c^2 - b^2} = \sqrt{13^2 - 5^2}"/>
-                  <BlockMath math="a = \sqrt{169 - 25} = \sqrt{144}"/>
-                  <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                    <BlockMath math="a = 12 \text{ m}"/>
-                    <p className="font-body text-sm text-yellow-200 text-center mt-1">✅ Tinggi layar kapal adalah <strong>12 m</strong>.</p>
-                  </div>
+            <div className="px-5 pb-5 space-y-4">
+              <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
+                <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
+                <p className="font-body text-sm text-white/90">
+                  Sebuah layar kapal berbentuk segitiga siku-siku. Sisi miringnya (tali layar terpanjang) adalah <strong>13 m</strong> dan alas layarnya <strong>5 m</strong>. Tentukan tinggi layar tersebut!
+                </p>
+              </div>
+              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="c = 13"/> m, <InlineMath math="b = 5"/> m. Dicari: <InlineMath math="a"/> (tinggi layar).</p>
+                <BlockMath math="a^2 = c^2 - b^2 = 13^2 - 5^2"/>
+                <BlockMath math="a^2 = 169 - 25 = 144"/>
+                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
+                  <BlockMath math="a = \sqrt{144} = 12 \text{ m}"/>
+                  <p className="font-body text-sm text-yellow-200 text-center mt-1">✅ Tinggi layar kapal adalah <strong>12 m</strong>.</p>
                 </div>
               </div>
-            )}
+            </div>
           </div>
 
           {/* MHG CONTOH 6 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="mhg_c3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 6 — Hasil Bentuk Akar (Sulit)"/>
-            {open.includes("mhg_c3") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
-                  <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
-                  <p className="font-body text-sm text-white/90">
-                    Sebuah lapangan berbentuk persegi panjang berukuran <strong>7 m × 9 m</strong>. Seorang siswa berlari dari sudut A ke sudut C (diagonal lapangan). Berapa jarak yang ditempuh siswa tersebut? Nyatakan dalam bentuk akar sederhana!
+            <div className="px-5 pb-5 space-y-4">
+              <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
+                <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
+                <p className="font-body text-sm text-white/90">
+                  Sebuah lapangan berbentuk persegi panjang berukuran <strong>7 m × 9 m</strong>. Seorang siswa berlari dari sudut A ke sudut C (diagonal lapangan). Berapa jarak yang ditempuh siswa tersebut? Nyatakan dalam bentuk akar sederhana!
+                </p>
+              </div>
+              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                <p className="font-body text-sm text-white/80">Diagonal persegi panjang membentuk segitiga siku-siku dengan kaki <InlineMath math="a = 7"/> m dan <InlineMath math="b = 9"/> m.</p>
+                <BlockMath math="c^2 = a^2 + b^2 = 7^2 + 9^2"/>
+                <BlockMath math="c^2 = 49 + 81 = 130"/>
+                <p className="font-body text-sm text-white/80">Apakah 130 bisa disederhanakan? Faktorkan: <InlineMath math="130 = 2 \times 5 \times 13"/>. Tidak ada faktor kuadrat sempurna.</p>
+                <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
+                  <BlockMath math="c = \sqrt{130} \approx 11{,}40 \text{ m}"/>
+                  <p className="font-body text-sm text-red-200 text-center mt-1">
+                    ✅ Jarak diagonal adalah <InlineMath math="\sqrt{130}"/> m atau sekitar <strong>11,40 m</strong>.
                   </p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Diagonal persegi panjang membentuk segitiga siku-siku dengan kaki <InlineMath math="a = 7"/> m dan <InlineMath math="b = 9"/> m.</p>
-                  <BlockMath math="c = \sqrt{a^2 + b^2} = \sqrt{7^2 + 9^2}"/>
-                  <BlockMath math="c = \sqrt{49 + 81} = \sqrt{130}"/>
-                  <p className="font-body text-sm text-white/80">Apakah 130 bisa disederhanakan? Faktorkan: <InlineMath math="130 = 2 \times 5 \times 13"/>. Tidak ada faktor kuadrat sempurna.</p>
-                  <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                    <BlockMath math="c = \sqrt{130} \approx 11{,}40 \text{ m}"/>
-                    <p className="font-body text-sm text-red-200 text-center mt-1">
-                      ✅ Jarak diagonal adalah <InlineMath math="\sqrt{130}"/> m atau sekitar <strong>11,40 m</strong>.
-                    </p>
-                  </div>
-                </div>
               </div>
-            )}
+            </div>
           </div>
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5"/>} iconColor="text-violet-400" title="📌 Rangkuman Sub-Bab"/>
-            {open.includes("rangkuman") && (
-              <div className="px-5 pb-5 space-y-3">
-                <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-xs font-bold text-violet-300 uppercase mb-1">📐 Pembuktian</p>
-                  <p className="font-body text-sm text-white/80">• Teorema Pythagoras berlaku di <strong className="text-cyan-300">setiap segitiga siku-siku</strong>.</p>
-                  <p className="font-body text-sm text-white/80">• Rumus dasar: <InlineMath math="a^2 + b^2 = c^2"/> di mana <InlineMath math="c"/> adalah hipotenusa.</p>
-                  <p className="font-body text-sm text-white/80">• Dibuktikan secara visual dengan <strong className="text-yellow-300">metode susunan persegi</strong> (4 segitiga identik dalam persegi besar).</p>
-                  <div className="border-t border-violet-500/20 pt-2 mt-2"/>
-                  <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-1">📏 Menghitung Panjang Sisi</p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-orange-300">Mencari c:</strong> <InlineMath math="c = \sqrt{a^2 + b^2}"/></p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-blue-300">Mencari a:</strong> <InlineMath math="a = \sqrt{c^2 - b^2}"/></p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-green-300">Mencari b:</strong> <InlineMath math="b = \sqrt{c^2 - a^2}"/></p>
-                  <p className="font-body text-sm text-white/80">• Jawaban bisa berupa <strong className="text-cyan-300">bilangan bulat</strong> atau <strong className="text-yellow-300">bentuk akar</strong> — sederhanakan dengan mencari faktor kuadrat sempurna terbesar.</p>
-                </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-yellow-200">
-                    🚀 <strong>Tips Astronot:</strong> Teorema Pythagoras digunakan bahkan dalam navigasi satelit dan GPS! Tanpa Pythagoras, kita tidak bisa menghitung jarak antar titik di ruang angkasa.
-                  </p>
-                </div>
+            <div className="px-5 pb-5 space-y-3">
+              <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
+                <p className="font-body text-xs font-bold text-violet-300 uppercase mb-1">📐 Pembuktian</p>
+                <p className="font-body text-sm text-white/80">• Teorema Pythagoras berlaku di <strong className="text-cyan-300">setiap segitiga siku-siku</strong>.</p>
+                <p className="font-body text-sm text-white/80">• Rumus dasar: <InlineMath math="a^2 + b^2 = c^2"/> di mana <InlineMath math="c"/> adalah hipotenusa.</p>
+                <p className="font-body text-sm text-white/80">• Dibuktikan secara visual dengan <strong className="text-yellow-300">metode susunan persegi</strong> (4 segitiga identik dalam persegi besar).</p>
+                <div className="border-t border-violet-500/20 pt-2 mt-2"/>
+                <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-1">📏 Menghitung Panjang Sisi</p>
+                <p className="font-body text-sm text-white/80">• <strong className="text-orange-300">Mencari c²:</strong> <InlineMath math="c^2 = a^2 + b^2"/></p>
+                <p className="font-body text-sm text-white/80">• <strong className="text-blue-300">Mencari a²:</strong> <InlineMath math="a^2 = c^2 - b^2"/></p>
+                <p className="font-body text-sm text-white/80">• <strong className="text-green-300">Mencari b²:</strong> <InlineMath math="b^2 = c^2 - a^2"/></p>
+                <p className="font-body text-sm text-white/80">• Jawaban bisa berupa <strong className="text-cyan-300">bilangan bulat</strong> atau <strong className="text-yellow-300">bentuk akar</strong> — sederhanakan dengan mencari faktor kuadrat sempurna terbesar.</p>
               </div>
-            )}
+              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                <p className="font-body text-sm text-yellow-200">
+                  🚀 <strong>Tips Astronot:</strong> Teorema Pythagoras digunakan bahkan dalam navigasi satelit dan GPS! Tanpa Pythagoras, kita tidak bisa menghitung jarak antar titik di ruang angkasa.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* HAFAL BILANGAN KUADRAT 1–30 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="kuadrat" icon={<Target className="w-5 h-5"/>} iconColor="text-yellow-400" title="⚡ Hafal Bilangan Kuadrat 1–30"/>
-            {open.includes("kuadrat") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-bold text-yellow-300">🎯 Mengapa Harus Dihafal?</p>
-                  <p className="font-body text-sm text-white/80">
-                    Dalam soal Teorema Pythagoras, kita sering harus <strong className="text-cyan-300">mencari sisi yang tidak diketahui</strong> dengan cara mengakarkan bilangan.
-                    Jika kamu hafal bilangan kuadrat 1–30, kamu bisa langsung tahu hasil akarnya <strong className="text-yellow-300">tanpa kalkulator</strong>!
-                  </p>
-                  <p className="font-body text-sm text-white/80">
-                    Contoh: jika <InlineMath math="c^2 = 169"/>, kamu langsung tahu <InlineMath math="c = 13"/> karena hafal <InlineMath math="13^2 = 169"/>. ✅
-                  </p>
-                  <p className="font-body text-sm text-white/80">
-                    Manfaat lain: mempercepat perhitungan <strong className="text-pink-300">Triple Pythagoras</strong>, soal ANBK, UN, dan olimpiade matematika.
-                  </p>
-                </div>
+            <div className="px-5 pb-5 space-y-4">
+              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 space-y-2">
+                <p className="font-body text-sm font-bold text-yellow-300">🎯 Mengapa Harus Dihafal?</p>
+                <p className="font-body text-sm text-white/80">
+                  Dalam soal Teorema Pythagoras, kita sering harus <strong className="text-cyan-300">mencari sisi yang tidak diketahui</strong> dengan cara mengakarkan bilangan.
+                  Jika kamu hafal bilangan kuadrat 1–30, kamu bisa langsung tahu hasil akarnya <strong className="text-yellow-300">tanpa kalkulator</strong>!
+                </p>
+                <p className="font-body text-sm text-white/80">
+                  Contoh: jika <InlineMath math="c^2 = 169"/>, kamu langsung tahu <InlineMath math="c = 13"/> karena hafal <InlineMath math="13^2 = 169"/>. ✅
+                </p>
+                <p className="font-body text-sm text-white/80">
+                  Manfaat lain: mempercepat perhitungan <strong className="text-pink-300">Triple Pythagoras</strong>, soal ANBK, UN, dan olimpiade matematika.
+                </p>
+              </div>
 
-                <div className="space-y-1">
-                  <p className="font-body text-xs font-bold text-sky-300 mb-2">🔵 Kelompok 1 — Bilangan 1 sampai 10</p>
-                  <div className="grid grid-cols-5 gap-1.5">
-                    {[1,2,3,4,5,6,7,8,9,10].map(n => (
-                      <div key={n} className="bg-sky-900/40 border border-sky-600/40 rounded-lg p-2 text-center">
-                        <p className="text-sky-300 font-bold font-mono text-xs">{n}²</p>
-                        <p className="text-white font-bold font-mono text-sm">{n*n}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <p className="font-body text-xs font-bold text-emerald-300 mb-2">🟢 Kelompok 2 — Bilangan 11 sampai 20</p>
-                  <div className="grid grid-cols-5 gap-1.5">
-                    {[11,12,13,14,15,16,17,18,19,20].map(n => (
-                      <div key={n} className="bg-emerald-900/40 border border-emerald-600/40 rounded-lg p-2 text-center">
-                        <p className="text-emerald-300 font-bold font-mono text-xs">{n}²</p>
-                        <p className="text-white font-bold font-mono text-sm">{n*n}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <p className="font-body text-xs font-bold text-orange-300 mb-2">🟠 Kelompok 3 — Bilangan 21 sampai 30</p>
-                  <div className="grid grid-cols-5 gap-1.5">
-                    {[21,22,23,24,25,26,27,28,29,30].map(n => (
-                      <div key={n} className="bg-orange-900/40 border border-orange-600/40 rounded-lg p-2 text-center">
-                        <p className="text-orange-300 font-bold font-mono text-xs">{n}²</p>
-                        <p className="text-white font-bold font-mono text-sm">{n*n}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-bold text-violet-300">🔍 Pola Menarik Bilangan Kuadrat</p>
-                  <ul className="space-y-1.5 font-body text-sm text-white/80">
-                    <li>• Bilangan kuadrat <strong className="text-yellow-300">hanya berakhiran 0, 1, 4, 5, 6, atau 9</strong> — tidak pernah 2, 3, 7, atau 8.</li>
-                    <li>• Bilangan yang berakhiran <strong className="text-sky-300">5</strong>, kuadratnya selalu berakhiran <strong className="text-sky-300">25</strong>. Contoh: 5²=25, 15²=225, 25²=625.</li>
-                    <li>• Selisih dua bilangan kuadrat berurutan selalu ganjil: <InlineMath math="(n+1)^2 - n^2 = 2n+1"/>.</li>
-                    <li>• Contoh: 10²=100, 11²=121, selisihnya = 21 = 2×10+1. ✅</li>
-                  </ul>
-                </div>
-
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-cyan-200">
-                    🚀 <strong>Tips Hafal Cepat:</strong> Mulai dari kelompok 1 (1–10), hafalkan dulu sampai lancar. Lanjut kelompok 2 (11–20), perhatikan polanya. Kelompok 3 (21–30) lebih mudah jika kamu sudah paham pola selisihnya.
-                  </p>
+              <div className="space-y-1">
+                <p className="font-body text-xs font-bold text-sky-300 mb-2">🔵 Kelompok 1 — Bilangan 1 sampai 10</p>
+                <div className="grid grid-cols-5 gap-1.5">
+                  {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                    <div key={n} className="bg-sky-900/40 border border-sky-600/40 rounded-lg p-2 text-center">
+                      <p className="text-sky-300 font-bold font-mono text-xs">{n}²</p>
+                      <p className="text-white font-bold font-mono text-sm">{n*n}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            )}
+
+              <div className="space-y-1">
+                <p className="font-body text-xs font-bold text-emerald-300 mb-2">🟢 Kelompok 2 — Bilangan 11 sampai 20</p>
+                <div className="grid grid-cols-5 gap-1.5">
+                  {[11,12,13,14,15,16,17,18,19,20].map(n => (
+                    <div key={n} className="bg-emerald-900/40 border border-emerald-600/40 rounded-lg p-2 text-center">
+                      <p className="text-emerald-300 font-bold font-mono text-xs">{n}²</p>
+                      <p className="text-white font-bold font-mono text-sm">{n*n}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <p className="font-body text-xs font-bold text-orange-300 mb-2">🟠 Kelompok 3 — Bilangan 21 sampai 30</p>
+                <div className="grid grid-cols-5 gap-1.5">
+                  {[21,22,23,24,25,26,27,28,29,30].map(n => (
+                    <div key={n} className="bg-orange-900/40 border border-orange-600/40 rounded-lg p-2 text-center">
+                      <p className="text-orange-300 font-bold font-mono text-xs">{n}²</p>
+                      <p className="text-white font-bold font-mono text-sm">{n*n}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
+                <p className="font-body text-sm font-bold text-violet-300">🔍 Pola Menarik Bilangan Kuadrat</p>
+                <ul className="space-y-1.5 font-body text-sm text-white/80">
+                  <li>• Bilangan kuadrat <strong className="text-yellow-300">hanya berakhiran 0, 1, 4, 5, 6, atau 9</strong> — tidak pernah 2, 3, 7, atau 8.</li>
+                  <li>• Bilangan yang berakhiran <strong className="text-sky-300">5</strong>, kuadratnya selalu berakhiran <strong className="text-sky-300">25</strong>. Contoh: 5²=25, 15²=225, 25²=625.</li>
+                  <li>• Selisih dua bilangan kuadrat berurutan selalu ganjil: <InlineMath math="(n+1)^2 - n^2 = 2n+1"/>.</li>
+                  <li>• Contoh: 10²=100, 11²=121, selisihnya = 21 = 2×10+1. ✅</li>
+                </ul>
+              </div>
+
+              <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
+                <p className="font-body text-sm text-cyan-200">
+                  🚀 <strong>Tips Hafal Cepat:</strong> Mulai dari kelompok 1 (1–10), hafalkan dulu sampai lancar. Lanjut kelompok 2 (11–20), perhatikan polanya. Kelompok 3 (21–30) lebih mudah jika kamu sudah paham pola selisihnya.
+                </p>
+              </div>
+            </div>
           </div>
 
         </div>
 
         <div className="mt-8 text-center">
           <button
-            onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/teorema-pythagoras"); }}
+            onClick={() => navigate("/materi-matematika/kelas-8/teorema-pythagoras")}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             ← Kembali ke Teorema Pythagoras
