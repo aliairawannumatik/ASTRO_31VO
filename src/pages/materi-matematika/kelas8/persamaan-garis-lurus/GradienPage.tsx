@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import GradienInvariantAnimation from "@/components/GradienInvariantAnimation";
+import GradienDuaTitikInteraktif from "@/components/GradienDuaTitikInteraktif";
 
 const W = 180, H = 150, MX = 90, MY = 75, SC = 14;
 const toX = (x: number) => MX + x * SC;
@@ -36,7 +37,7 @@ const CoordSys = ({ children, label = "", w = W, h = H }: { children?: React.Rea
 const GradienPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "definisi", "animasi", "rumus", "visualgradien", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "definisi", "animasi", "duatitik", "rumus", "visualgradien", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
@@ -172,6 +173,38 @@ const GradienPage = () => {
                   Seret kedua titik ke posisi mana pun di grid — gradien selalu bisa dihitung dari <strong className="text-green-300">sisi datar</strong> dan <strong className="text-pink-300">sisi tegak</strong> di antara keduanya.
                 </p>
                 <GradienInvariantAnimation />
+              </div>
+            )}
+          </div>
+
+          {/* GRADIEN MELALUI DUA TITIK */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SH id="duatitik" icon={<Target className="w-5 h-5" />} iconColor="text-violet-400" title="📍 Gradien Melalui Dua Titik" />
+            {expandedSections.includes("duatitik") && (
+              <div className="px-5 pb-5 space-y-4">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
+                  Jika diketahui dua titik <InlineMath math="P_1(x_1,\, y_1)" /> dan <InlineMath math="P_2(x_2,\, y_2)" />,
+                  gradien garis yang melalui keduanya dihitung dengan rumus:
+                </p>
+                <div className="bg-violet-900/30 border border-violet-400/30 rounded-xl p-4 text-center">
+                  <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{\Delta y}{\Delta x}" />
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-xs font-body">
+                  <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2.5 text-center">
+                    <p className="text-green-300 font-bold mb-1">Δy = sisi tegak</p>
+                    <InlineMath math="\Delta y = y_2 - y_1" />
+                    <p className="text-white/40 mt-1">selisih vertikal</p>
+                  </div>
+                  <div className="bg-pink-900/20 border border-pink-500/30 rounded-lg p-2.5 text-center">
+                    <p className="text-pink-300 font-bold mb-1">Δx = sisi datar</p>
+                    <InlineMath math="\Delta x = x_2 - x_1" />
+                    <p className="text-white/40 mt-1">selisih horizontal</p>
+                  </div>
+                </div>
+                <p className="font-body text-xs text-white/50 leading-relaxed">
+                  Seret titik <span className="text-cyan-300 font-bold">P₁</span> dan <span className="text-yellow-300 font-bold">P₂</span> ke sembarang posisi — rumus akan terisi otomatis langkah demi langkah.
+                </p>
+                <GradienDuaTitikInteraktif />
               </div>
             )}
           </div>
