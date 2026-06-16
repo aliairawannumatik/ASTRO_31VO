@@ -329,14 +329,14 @@ const PembuktianPage = () => {
                         <p className="text-blue-300 text-xs font-body font-semibold">Mencari sisi tegak <InlineMath math="a"/></p>
                         <p className="text-white/50 text-xs font-body">Jika <InlineMath math="b"/> dan <InlineMath math="c"/> diketahui:</p>
                         <div className="bg-slate-900/60 rounded-lg px-3 py-1">
-                          <BlockMath math="a = \sqrt{c^2 - b^2}"/>
+                          <BlockMath math="a^2 = c^2 - b^2"/>
                         </div>
                       </div>
                       <div className="bg-green-900/30 border border-green-500/30 rounded-xl p-3 space-y-1">
                         <p className="text-green-300 text-xs font-body font-semibold">Mencari sisi alas <InlineMath math="b"/></p>
                         <p className="text-white/50 text-xs font-body">Jika <InlineMath math="a"/> dan <InlineMath math="c"/> diketahui:</p>
                         <div className="bg-slate-900/60 rounded-lg px-3 py-1">
-                          <BlockMath math="b = \sqrt{c^2 - a^2}"/>
+                          <BlockMath math="b^2 = c^2 - a^2"/>
                         </div>
                       </div>
                     </div>
@@ -358,6 +358,9 @@ const PembuktianPage = () => {
 
           {/* VIDEO YOUTUBE */}
           <div className="w-full">
+            <p className="text-center font-display font-bold text-white text-base md:text-lg mb-3 tracking-wide">
+              📽️ Pembuktian Teorema Pythagoras
+            </p>
             <div className="rounded-2xl overflow-hidden border border-cyan-500/40 shadow-lg shadow-cyan-900/30 bg-black">
               <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                 <iframe
