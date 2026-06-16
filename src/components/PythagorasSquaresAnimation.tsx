@@ -329,8 +329,7 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     poly(ctx,SQ_C); ctx.strokeStyle=COL_C; ctx.lineWidth=3/pSqC; ctx.stroke();
     ctx.restore();
     if(pMvA<0.05) { // hide after squares fly in
-      lbl(ctx,"c²",CTR_C.x,CTR_C.y-9,COL_C,22,pSqC);
-      lbl(ctx,"= 25",CTR_C.x,CTR_C.y+14,COL_C,13,pSqC*0.85);
+      lbl(ctx,"c²",CTR_C.x,CTR_C.y,COL_C,22,pSqC);
     }
   }
 
@@ -354,7 +353,7 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
       const gridPts = [morphed[2],morphed[1],morphed[0],morphed[3]];
       const ctr = avgPts(morphed);
       drawMorphShape(ctx,gridPts,3,3,COL_A+"44",COL_A,shapeAlpha,
-        ctr.x,ctr.y,"a² = 9",pMorphA);
+        ctr.x,ctr.y,"a²",pMorphA);
     }
   }
 
@@ -366,7 +365,7 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
       // SQ_B already in [TL,TR,BR,BL] order
       const ctr = avgPts(morphed);
       drawMorphShape(ctx,morphed,4,4,COL_B+"44",COL_B,shapeAlpha,
-        ctr.x,ctr.y,"b² = 16",pMorphB);
+        ctr.x,ctr.y,"b²",pMorphB);
     }
   }
 
@@ -399,14 +398,14 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
   if(pFlA>0.65) {
     const fa=Math.min((pFlA-0.65)/0.35,1);
     const ctr=avgPts(cStrip(0,F_A));
-    lbl(ctx,"a² = 9",ctr.x,ctr.y,"#e0f7ff",14,fa);
+    lbl(ctx,"a²",ctr.x,ctr.y,"#e0f7ff",14,fa);
   }
   if(pFlB>F_A+0.15) {
     const bFrac=(pFlB-F_A)/(1-F_A);
     if(bFrac>0.65) {
       const fb=Math.min((bFrac-0.65)/0.35,1);
       const ctr=avgPts(cStrip(F_A,1.0));
-      lbl(ctx,"b² = 16",ctr.x,ctr.y,"#e0ffe0",14,fb);
+      lbl(ctx,"b²",ctr.x,ctr.y,"#e0ffe0",14,fb);
     }
   }
 
