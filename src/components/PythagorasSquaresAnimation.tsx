@@ -387,22 +387,6 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     ctx.restore();
   }
 
-  // ── 10. Area counter (top-right corner) ──────────────────────────────────────
-  if(pFlA>0.05) {
-    const areaA=Math.round(pFlA/F_A*9);
-    const areaB=Math.round(Math.max(0,pFlB-F_A)/(1-F_A)*16);
-    const total=areaA+areaB;
-    const ca=Math.min(pFlA*4,1);
-    const px=W-14, py=18, pw=148, ph2=62;
-    ctx.save(); ctx.globalAlpha=ca*0.92;
-    ctx.fillStyle="rgba(8,12,36,0.82)"; ctx.strokeStyle="#334155"; ctx.lineWidth=1;
-    roundRect(ctx,px-pw,py,pw,ph2,8); ctx.fill(); ctx.stroke();
-    ctx.restore();
-    lbl(ctx,`a²: ${areaA}`,px-pw/2,py+14,COL_A,12,ca);
-    lbl(ctx,`b²: ${areaB}`,px-pw/2,py+30,COL_B,12,ca);
-    lbl(ctx,`Terisi: ${total}/25`,px-pw/2,py+48,
-      total===25?"#fde047":"rgba(255,255,255,0.6)",11,ca);
-  }
 
   // ── 11. Formula banner ───────────────────────────────────────────────────────
   if(pFrm>0) {
