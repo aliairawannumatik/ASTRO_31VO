@@ -440,20 +440,43 @@ const GradienPage = () => {
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-orange-300 font-semibold mb-2 text-xs">Visualisasi segitiga gradien:</p>
-                    <CoordSys w={W} h={H} label="A(3,−2) ke B(−1,6)">
-                      {/* line through A(3,-2) and B(-1,6) */}
-                      <polyline points={[[-3,10],[-1,6],[1,2],[3,-2],[4,-4]].map(([x,y])=>`${MX+x*SC},${MY-y*SC}`).join(' ')} fill="none" stroke="#facc15" strokeWidth="2" strokeLinecap="round" />
-                      {/* A and B */}
-                      <circle cx={toX(3)} cy={toY(-2)} r="5" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.5" />
-                      <circle cx={toX(-1)} cy={toY(6)} r="5" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.5" />
-                      <text x={toX(3)+5} y={toY(-2)+4} fill="#22d3ee" fontSize="8">A(3,−2)</text>
-                      <text x={toX(-1)+5} y={toY(6)-4} fill="#22d3ee" fontSize="8">B(−1,6)</text>
-                      {/* triangle */}
-                      <line x1={toX(3)} y1={toY(-2)} x2={toX(-1)} y2={toY(-2)} stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" />
-                      <line x1={toX(-1)} y1={toY(-2)} x2={toX(-1)} y2={toY(6)} stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" />
-                      <text x={toX(0.8)} y={toY(-2)+13} fill="#4ade80" fontSize="8">Δx=−4</text>
-                      <text x={toX(-1)+5} y={toY(1)} fill="#f472b6" fontSize="8">Δy=8</text>
-                    </CoordSys>
+                    {/* Grid diperluas agar B(−1,6) terlihat: W2=200 H2=210 MX2=100 MY2=130 SC2=14 */}
+                    <svg viewBox="0 0 200 210" className="w-full sm:w-2/3 mx-auto block rounded-xl" style={{ background: "rgba(15,23,42,0.7)" }}>
+                      {[-6,-5,-4,-3,-2,-1,1,2,3,4,5,6].map(v => (
+                        <g key={`g2-${v}`}>
+                          <line x1={100+v*14} y1={4} x2={100+v*14} y2={206} stroke="#1e293b" strokeWidth="0.8" />
+                          <line x1={4} y1={130-v*14} x2={196} y2={130-v*14} stroke="#1e293b" strokeWidth="0.8" />
+                        </g>
+                      ))}
+                      {/* Sumbu */}
+                      <line x1={4} y1={130} x2={196} y2={130} stroke="#475569" strokeWidth="1.5" />
+                      <line x1={100} y1={4} x2={100} y2={206} stroke="#475569" strokeWidth="1.5" />
+                      <text x={192} y={141} fill="#64748b" fontSize="8">x</text>
+                      <text x={103} y={12} fill="#64748b" fontSize="8">y</text>
+                      <text x={102} y={141} fill="#475569" fontSize="7">O</text>
+                      {/* Angka sumbu */}
+                      {([-4,-2,2,4] as number[]).map(v => (
+                        <g key={`n2-${v}`}>
+                          <text x={100+v*14} y={142} fill="#475569" fontSize="7" textAnchor="middle">{v}</text>
+                          <text x={96} y={130-v*14+3} fill="#475569" fontSize="7" textAnchor="end">{v}</text>
+                        </g>
+                      ))}
+                      {/* Garis y = −2x+4, dari (−2,8) ke (4,−4) */}
+                      <line x1={72} y1={18} x2={156} y2={186} stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
+                      {/* Segitiga gradien: A(3,−2)→corner(−1,−2)→B(−1,6) */}
+                      <line x1={142} y1={158} x2={86} y2={158} stroke="#4ade80" strokeWidth="1.8" strokeDasharray="5,3" />
+                      <line x1={86} y1={158} x2={86} y2={46} stroke="#f472b6" strokeWidth="1.8" strokeDasharray="5,3" />
+                      {/* Siku-siku di corner(−1,−2) */}
+                      <rect x={86} y={152} width="6" height="6" fill="none" stroke="#94a3b8" strokeWidth="0.9" />
+                      {/* Label Δx dan Δy */}
+                      <text x={114} y={172} fill="#4ade80" fontSize="9" textAnchor="middle" fontWeight="bold">Δx = −4</text>
+                      <text x={76} y={106} fill="#f472b6" fontSize="9" textAnchor="end" fontWeight="bold">Δy = 8</text>
+                      {/* Titik A dan B */}
+                      <circle cx={142} cy={158} r="5" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.5" />
+                      <circle cx={86} cy={46} r="5" fill="#22d3ee" stroke="#67e8f9" strokeWidth="1.5" />
+                      <text x={148} y={162} fill="#22d3ee" fontSize="8">A(3,−2)</text>
+                      <text x={92} y={43} fill="#22d3ee" fontSize="8">B(−1,6)</text>
+                    </svg>
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-lg p-3">
                     <p className="text-sm font-bold text-yellow-300">✅ Gradien = −2 (garis turun curam dari kiri ke kanan)</p>
@@ -465,7 +488,37 @@ const GradienPage = () => {
 
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
+            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 3 — Tingkat Mudah" />
+            {true && (
+              <div className="px-5 pb-5 space-y-4">
+                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
+                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
+                  <p className="text-sm text-white/85 font-body">Tentukan gradien dari persamaan berikut: a) <InlineMath math="y = -4x + 7" />, b) <InlineMath math="6x - 3y + 9 = 0" />, c) <InlineMath math="y = 5" /></p>
+                </div>
+                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
+                  {[
+                    { bag: "a) y = −4x + 7", ket: "Koefisien x adalah −4", hasil: "m = −4", color: "text-cyan-300" },
+                    { bag: "b) 6x − 3y + 9 = 0", ket: "Ubah: −3y = −6x − 9 → y = 2x + 3", hasil: "m = 2", color: "text-violet-300" },
+                    { bag: "c) y = 5", ket: "Garis horizontal → gradien = 0", hasil: "m = 0", color: "text-green-300" },
+                  ].map(({ bag, ket, hasil, color }) => (
+                    <div key={bag} className="bg-slate-800/50 rounded-lg p-3">
+                      <p className={`${color} font-semibold text-xs mb-1`}>{bag}</p>
+                      <p className="text-white/60 text-xs">{ket}</p>
+                      <p className="text-green-300 font-bold text-sm mt-1">→ {hasil}</p>
+                    </div>
+                  ))}
+                  <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
+                    <p className="text-sm font-bold text-green-300">✅ a) m = −4, b) m = 2, c) m = 0</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* CONTOH 4 */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SH id="contoh4" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 4 — Tingkat Sulit" />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
@@ -527,36 +580,6 @@ const GradienPage = () => {
 
                   <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
                     <p className="text-sm font-bold text-red-300">✅ k = −2, sehingga P(−2, 0). Ketiga titik terletak pada garis <InlineMath math="y = x + 2" /> dengan gradien m = 1.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* CONTOH 4 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh4" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 4 — Tingkat Mudah" />
-            {true && (
-              <div className="px-5 pb-5 space-y-4">
-                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
-                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Tentukan gradien dari persamaan berikut: a) <InlineMath math="y = -4x + 7" />, b) <InlineMath math="6x - 3y + 9 = 0" />, c) <InlineMath math="y = 5" /></p>
-                </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  {[
-                    { bag: "a) y = −4x + 7", ket: "Koefisien x adalah −4", hasil: "m = −4", color: "text-cyan-300" },
-                    { bag: "b) 6x − 3y + 9 = 0", ket: "Ubah: −3y = −6x − 9 → y = 2x + 3", hasil: "m = 2", color: "text-violet-300" },
-                    { bag: "c) y = 5", ket: "Garis horizontal → gradien = 0", hasil: "m = 0", color: "text-green-300" },
-                  ].map(({ bag, ket, hasil, color }) => (
-                    <div key={bag} className="bg-slate-800/50 rounded-lg p-3">
-                      <p className={`${color} font-semibold text-xs mb-1`}>{bag}</p>
-                      <p className="text-white/60 text-xs">{ket}</p>
-                      <p className="text-green-300 font-bold text-sm mt-1">→ {hasil}</p>
-                    </div>
-                  ))}
-                  <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-green-300">✅ a) m = −4, b) m = 2, c) m = 0</p>
                   </div>
                 </div>
               </div>
