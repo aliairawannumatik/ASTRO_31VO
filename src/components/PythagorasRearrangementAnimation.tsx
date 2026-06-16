@@ -246,8 +246,8 @@ const PythagorasRearrangementAnimation: React.FC = () => {
   const showSideLabels = step <= 1;
   // Step 1: glow hypotenuses + show "c" on each inner side
   const showHypoGlow   = step >= 1;
-  // Step 2+: show filled c² square
-  const showC2Fill     = step >= 2;
+  // Show filled c² square from step 0 onwards
+  const showC2Fill     = true;
   // c² square fades out during step 3 animation (as t increases)
   const c2Opacity      = step < 3 ? 1 : (1 - t);
   // a² and b² fade in during step 3 animation
@@ -310,7 +310,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
             return (
               <line key={i}
                 x1={p[0]} y1={p[1]} x2={next[0]} y2={next[1]}
-                stroke="#fbbf24" strokeWidth={step >= 2 ? 2.5 : 3.5}
+                stroke="#ef4444" strokeWidth={step >= 2 ? 2.5 : 3.5}
                 strokeOpacity={step >= 2 ? 0.7 : 1}
                 filter="url(#ra-glow-hy)"
               />
@@ -321,7 +321,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
           {step === 1 && HYPO_MIDS.map((m, i) => (
             <text key={i}
               x={m.mx + m.ox} y={m.my + m.oy}
-              textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold"
+              textAnchor="middle" fill="#ef4444" fontSize="13" fontWeight="bold"
               fontFamily="monospace" filter="url(#ra-glow-hy)"
             >c</text>
           ))}
@@ -421,9 +421,9 @@ const PythagorasRearrangementAnimation: React.FC = () => {
                 fill="#93c5fd" fontSize="13" fontWeight="bold" fontFamily="monospace">a</text>
               <text x={MID_B[0]} y={MID_B[1]} textAnchor="middle"
                 fill="#86efac" fontSize="13" fontWeight="bold" fontFamily="monospace">b</text>
-              {/* 'c' on hypotenuse: highlighted yellow in step 1 */}
+              {/* 'c' on hypotenuse: red throughout */}
               <text x={MID_C[0]} y={MID_C[1]} textAnchor="middle"
-                fill={step >= 1 ? "#fbbf24" : "#fdba74"}
+                fill={step >= 1 ? "#ef4444" : "#fca5a5"}
                 fontSize={step >= 1 ? "15" : "13"}
                 fontWeight="bold" fontFamily="monospace"
                 filter={step >= 1 ? "url(#ra-glow-hy)" : undefined}
