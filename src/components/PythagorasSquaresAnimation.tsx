@@ -447,7 +447,7 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     roundRect(ctx,fx-152,fy-20,304,40,10); ctx.fill(); ctx.stroke();
     ctx.shadowBlur=12; ctx.fillStyle="#fde047";
     ctx.font="bold 20px Arial,sans-serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("9 + 16 = 25  →  a² + b² = c²  ✓",fx,fy);
+    ctx.fillText("a² + b² = c²  ✓",fx,fy);
     ctx.restore();
   }
 
