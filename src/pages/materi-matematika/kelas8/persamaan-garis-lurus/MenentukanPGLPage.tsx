@@ -176,7 +176,7 @@ const MenentukanPGLPage = () => {
 
                 {/* ── INTERACTIVE S1 ── */}
                 <div className="bg-violet-900/10 border border-violet-500/30 rounded-xl p-4 space-y-4">
-                  <p className="text-xs font-bold text-violet-300 uppercase tracking-wider">🎮 Kalkulator Interaktif — Coba Sendiri!</p>
+                  <p className="text-xs font-bold text-violet-300 uppercase tracking-wider">🎮 Kalkulator Interaktif Menentukan Persamaan Garis yang Melalui Titik (x₁, y₁) dan Bergradien m – Coba Sendiri!</p>
                   <div className="grid grid-cols-3 gap-3">
                     {([
                       ["Gradien (m)", iv1.m, (v: string) => setIv1(p => ({...p, m: v, step: 0, error: ""}))],
@@ -291,7 +291,7 @@ const MenentukanPGLPage = () => {
 
                 {/* ── INTERACTIVE S2 ── */}
                 <div className="bg-orange-900/10 border border-orange-500/30 rounded-xl p-4 space-y-4">
-                  <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">🎮 Kalkulator Interaktif — Coba Sendiri!</p>
+                  <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">🎮 Kalkulator Interaktif Menentukan Persamaan Garis yang Melalui 2 Titik (x₁, y₁) dan (x₂, y₂) – Coba Sendiri!</p>
                   <div className="grid grid-cols-2 gap-3">
                     {([
                       ["x₁", iv2.x1, (v: string) => setIv2(p => ({...p, x1: v, step: 0, error: ""}))],
