@@ -317,7 +317,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
           {/* ── 2. Step 1+: glow HYPOTENUSES of all 4 triangles ──
                   These are the 4 edges of the inner tilted square.
                   Showing them glowing makes it clear they form a square. ── */}
-          {showHypoGlow && INNER_C2.map((p, i) => {
+          {showHypoGlow && !animDone && INNER_C2.map((p, i) => {
             const next = INNER_C2[(i+1) % 4];
             return (
               <line key={i}
@@ -369,19 +369,20 @@ const PythagorasRearrangementAnimation: React.FC = () => {
 
           {/* ── 4. a² empty square (fades in during step 3) ── */}
           <rect x={OX} y={OY} width={A_S} height={A_S}
-            fill={`rgba(59,130,246,${0.2*abOpacity})`}
-            stroke={`rgba(59,130,246,${abOpacity*0.95})`}
+            fill={`rgba(${animDone ? '239,68,68' : '59,130,246'},${0.35*abOpacity})`}
+            stroke={`rgba(${animDone ? '239,68,68' : '59,130,246'},${abOpacity*0.95})`}
             strokeWidth="2.5"
+            filter={animDone ? "url(#ra-glow-sq)" : undefined}
           />
           {abOpacity > 0.08 && (
             <>
               <text x={OX+A_S/2} y={OY+A_S/2+4} textAnchor="middle"
-                fill={`rgba(147,197,253,${abOpacity})`}
+                fill={`rgba(${animDone ? '252,165,165' : '147,197,253'},${abOpacity})`}
                 fontSize="20" fontWeight="bold" fontFamily="monospace"
                 filter="url(#ra-glow-sq)"
               >a²</text>
               <text x={OX+A_S/2} y={OY+A_S/2+20} textAnchor="middle"
-                fill={`rgba(147,197,253,${abOpacity*0.8})`}
+                fill={`rgba(${animDone ? '252,165,165' : '147,197,253'},${abOpacity*0.8})`}
                 fontSize="11" fontFamily="monospace"
               >= 9</text>
             </>
@@ -389,19 +390,20 @@ const PythagorasRearrangementAnimation: React.FC = () => {
 
           {/* ── 5. b² empty square (fades in during step 3) ── */}
           <rect x={OX+A_S} y={OY+A_S} width={B_S} height={B_S}
-            fill={`rgba(34,197,94,${0.2*abOpacity})`}
-            stroke={`rgba(34,197,94,${abOpacity*0.95})`}
+            fill={`rgba(${animDone ? '239,68,68' : '34,197,94'},${0.35*abOpacity})`}
+            stroke={`rgba(${animDone ? '239,68,68' : '34,197,94'},${abOpacity*0.95})`}
             strokeWidth="2.5"
+            filter={animDone ? "url(#ra-glow-sq)" : undefined}
           />
           {abOpacity > 0.08 && (
             <>
               <text x={OX+A_S+B_S/2} y={OY+A_S+B_S/2+4} textAnchor="middle"
-                fill={`rgba(134,239,172,${abOpacity})`}
+                fill={`rgba(${animDone ? '252,165,165' : '134,239,172'},${abOpacity})`}
                 fontSize="20" fontWeight="bold" fontFamily="monospace"
                 filter="url(#ra-glow-sq)"
               >b²</text>
               <text x={OX+A_S+B_S/2} y={OY+A_S+B_S/2+20} textAnchor="middle"
-                fill={`rgba(134,239,172,${abOpacity*0.8})`}
+                fill={`rgba(${animDone ? '252,165,165' : '134,239,172'},${abOpacity*0.8})`}
                 fontSize="11" fontFamily="monospace"
               >= 16</text>
             </>
