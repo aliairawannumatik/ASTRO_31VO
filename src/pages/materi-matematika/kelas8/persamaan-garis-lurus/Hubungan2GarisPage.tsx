@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, GitBranch } from "lucide-react";
+import { BookOpen, ChevronUp, Lightbulb, Target, Layers, GitBranch } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -29,6 +29,61 @@ const CoordSys = ({ children, label = "" }: { children?: React.ReactNode; label?
   </svg>
 );
 
+const gPts = (m: number, c: number) =>
+  [-7, -4, -1, 2, 5, 7].map(x => `${toX(x)},${toY(m * x + c)}`).join(' ');
+
+const perpMark = (ix: number, iy: number, m1: number, m2: number, d = 0.48) => {
+  const n1 = Math.sqrt(1 + m1 * m1), n2 = Math.sqrt(1 + m2 * m2);
+  const u1x = d / n1, u1y = d * m1 / n1;
+  const u2x = d / n2, u2y = d * m2 / n2;
+  return [
+    [toX(ix),           toY(iy)],
+    [toX(ix + u1x),     toY(iy + u1y)],
+    [toX(ix+u1x+u2x),  toY(iy+u1y+u2y)],
+    [toX(ix + u2x),     toY(iy + u2y)],
+  ].map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
+};
+
+const lineIntersect = (m1: number, c1: number, m2: number, c2: number): [number,number]|null => {
+  if (Math.abs(m1 - m2) < 1e-9) return null;
+  const x = (c2 - c1) / (m1 - m2);
+  return [x, m1 * x + c1];
+};
+
+const gcd = (a: number, b: number): number => { a=Math.abs(a); b=Math.abs(b); while(b){const t=b;b=a%b;a=t;} return a||1; };
+const mTeX = (m: number): string => {
+  const r = Math.round(m * 1000) / 1000;
+  if (Number.isInteger(r)) return String(r);
+  for (let d = 2; d <= 9; d++) {
+    const n = Math.round(m * d);
+    if (Math.abs(n / d - m) < 0.001) {
+      const g = gcd(Math.abs(n), d);
+      const sn = n / g, sd = d / g;
+      if (sd === 1) return String(sn);
+      return sn < 0 ? `-\\frac{${-sn}}{${sd}}` : `\\frac{${sn}}{${sd}}`;
+    }
+  }
+  return String(r);
+};
+const mDisp = (m: number): string => {
+  const r = Math.round(m * 1000) / 1000;
+  if (Number.isInteger(r)) return String(r);
+  for (let d = 2; d <= 9; d++) {
+    const n = Math.round(m * d);
+    if (Math.abs(n / d - m) < 0.001) {
+      const g = gcd(Math.abs(n), d);
+      const sn = n / g, sd = d / g;
+      if (sd === 1) return String(sn);
+      return sn < 0 ? `−${-sn}/${sd}` : `${sn}/${sd}`;
+    }
+  }
+  return String(r);
+};
+
+const SEJ_OPTS = [-2, -1, -0.5, 0.5, 1, 2, 3];
+const TEK_OPTS = [-3, -2, -1, 1, 2, 3];
+const BER_OPTS = [-2, -1, 1, 2, 3];
+
 const Hubungan2GarisPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -44,6 +99,12 @@ const Hubungan2GarisPage = () => {
   const Badge = ({ label, color }: { label: string; color: string }) => (
     <span className={`inline-block px-2 py-0.5 rounded text-xs font-bold font-body ${color}`}>{label}</span>
   );
+
+  const [sejM, setSejM] = useState(2);
+  const [tekM1, setTekM1] = useState(2);
+  const tekM2 = -1 / tekM1;
+  const [berM1, setBerM1] = useState(2);
+  const [berM2, setBerM2] = useState(-1);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
@@ -62,21 +123,11 @@ const Hubungan2GarisPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">Ketika dua garis lurus ada di bidang yang sama, hanya ada tiga kemungkinan hubungan di antara mereka. Hubungan ini ditentukan oleh nilai gradien masing-masing garis.</p>
-                {/* 3-panel overview */}
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    {
-                      label: "SEJAJAR", icon: "∥", color: "#22d3ee", bg: "border-cyan-500/40 bg-cyan-900/20",
-                      ket: "Tidak pernah bertemu"
-                    },
-                    {
-                      label: "TEGAK LURUS", icon: "⊥", color: "#a78bfa", bg: "border-violet-500/40 bg-violet-900/20",
-                      ket: "Berpotongan 90°"
-                    },
-                    {
-                      label: "BERPOTONGAN", icon: "✕", color: "#4ade80", bg: "border-green-500/40 bg-green-900/20",
-                      ket: "Bertemu di satu titik"
-                    },
+                    { label: "SEJAJAR", icon: "∥", color: "#22d3ee", bg: "border-cyan-500/40 bg-cyan-900/20", ket: "Tidak pernah bertemu" },
+                    { label: "TEGAK LURUS", icon: "⊥", color: "#a78bfa", bg: "border-violet-500/40 bg-violet-900/20", ket: "Berpotongan 90°" },
+                    { label: "BERPOTONGAN", icon: "✕", color: "#4ade80", bg: "border-green-500/40 bg-green-900/20", ket: "Bertemu di satu titik" },
                   ].map(({ label, icon, color, bg, ket }) => (
                     <div key={label} className={`border ${bg} rounded-xl p-3 text-center`}>
                       <div className="text-3xl mb-1" style={{ color }}>{icon}</div>
@@ -101,13 +152,26 @@ const Hubungan2GarisPage = () => {
                   </div>
                   <p className="text-xs text-white/60 text-center mt-1">Gradien sama, titik potong sb-y berbeda</p>
                 </div>
+
+                {/* Penjelasan MENGAPA */}
+                <div className="bg-slate-800/50 border border-cyan-500/20 rounded-xl p-4 space-y-2">
+                  <p className="text-xs font-bold text-cyan-300 uppercase tracking-wide">💡 Mengapa harus m₁ = m₂?</p>
+                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                    Gradien (m) menunjukkan <strong className="text-cyan-300">kecuraman atau laju kenaikan</strong> sebuah garis — setiap bergerak 1 satuan ke kanan, garis naik sebesar m. Jika dua garis punya gradien sama, keduanya <em>naik dan turun dengan laju yang identik</em>.
+                  </p>
+                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                    Bayangkan dua mobil yang melaju dengan kecepatan yang sama: mobil A selalu 5 km di depan mobil B. Mobil B tidak akan pernah menyalip A karena lajunya sama persis. Begitu juga dua garis sejajar — jarak vertikal antara keduanya selalu konstan sebesar <InlineMath math="|c_1 - c_2|" />, sehingga tidak pernah bertemu.
+                  </p>
+                  <div className="bg-cyan-900/30 rounded-lg p-2 text-xs font-body">
+                    <p className="text-cyan-200">📌 Jika c₁ = c₂ juga: kedua garis <strong>berimpit</strong> (sama persis, bukan sejajar).</p>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3">
                     <p className="text-xs font-bold text-cyan-300 mb-2">Visual: Dua garis sejajar</p>
                     <CoordSys label="ℓ₁ ∥ ℓ₂">
-                      {/* l1: y=2x+1 */}
                       <polyline points={[[-3,-5],[-2,-3],[-1,-1],[0,1],[1,3],[2,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
-                      {/* l2: y=2x-3 */}
                       <polyline points={[[-1,-5],[0,-3],[1,-1],[2,1],[3,3],[4,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#67e8f9" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="5,3" />
                       <text x={toX(-2.5)} y={toY(4)} fill="#22d3ee" fontSize="8">ℓ₁: y=2x+1</text>
                       <text x={toX(0)} y={toY(-4)} fill="#67e8f9" fontSize="8">ℓ₂: y=2x−3</text>
@@ -128,6 +192,32 @@ const Hubungan2GarisPage = () => {
                         </div>
                       ))}
                     </div>
+                  </div>
+                </div>
+
+                {/* ANIMASI INTERAKTIF SEJAJAR */}
+                <div className="bg-cyan-900/10 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+                  <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider">🎮 Animasi Interaktif — Garis Sejajar</p>
+                  <p className="text-xs text-white/60 font-body">Ubah nilai gradien m. Amati: kedua garis selalu tetap sejajar karena gradiennya sama!</p>
+                  <div className="flex flex-wrap gap-2">
+                    {SEJ_OPTS.map(v => (
+                      <button key={v} onClick={() => { playPopSound(); setSejM(v); }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${sejM === v ? "bg-cyan-500 text-white" : "bg-slate-700/60 text-white/60 hover:bg-slate-600"}`}>
+                        m = {mDisp(v)}
+                      </button>
+                    ))}
+                  </div>
+                  <CoordSys label={`ℓ₁ ∥ ℓ₂ (m=${mDisp(sejM)})`}>
+                    <polyline points={gPts(sejM, 2)} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
+                    <polyline points={gPts(sejM, -2)} fill="none" stroke="#67e8f9" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="6,3" />
+                    <text x={5} y={H-20} fill="#22d3ee" fontSize="7">ℓ₁: y={mDisp(sejM)}x+2</text>
+                    <text x={5} y={H-11} fill="#67e8f9" fontSize="7">ℓ₂: y={mDisp(sejM)}x−2</text>
+                  </CoordSys>
+                  <div className="bg-cyan-900/30 rounded-lg p-3 text-xs font-body space-y-1">
+                    <p className="text-cyan-300 font-semibold">Observasi:</p>
+                    <p className="text-white/70">ℓ₁: y = <InlineMath math={`${mTeX(sejM)}x + 2`} />, ℓ₂: y = <InlineMath math={`${mTeX(sejM)}x - 2`} /></p>
+                    <p className="text-white/70">Gradien: m₁ = m₂ = <strong className="text-cyan-300">{mDisp(sejM)}</strong> → kedua garis <strong className="text-cyan-300">sejajar</strong></p>
+                    <p className="text-white/50">Jarak vertikal antar garis selalu = |2 − (−2)| = 4 (konstan)</p>
                   </div>
                 </div>
               </div>
@@ -151,16 +241,35 @@ const Hubungan2GarisPage = () => {
                     <p className="text-xs text-white/50">m₂ adalah negatif kebalikan dari m₁</p>
                   </div>
                 </div>
+
+                {/* Penjelasan MENGAPA */}
+                <div className="bg-slate-800/50 border border-violet-500/20 rounded-xl p-4 space-y-2">
+                  <p className="text-xs font-bold text-violet-300 uppercase tracking-wide">💡 Mengapa harus m₁ × m₂ = −1?</p>
+                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                    Bayangkan garis ℓ₁ memiliki gradien m₁, artinya <strong className="text-violet-300">arahnya adalah "bergerak 1 ke kanan, naik m₁"</strong> — vektor arahnya adalah (1, m₁).
+                  </p>
+                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                    Untuk mendapat garis yang tegak lurus, kita perlu memutar vektor ini <strong className="text-violet-300">90°</strong>. Rotasi 90° dari (1, m₁) menghasilkan (−m₁, 1) atau (m₁, −1). Gradien dari arah (−m₁, 1) adalah:
+                  </p>
+                  <div className="text-center">
+                    <BlockMath math="m_2 = \frac{1}{-m_1} = -\frac{1}{m_1}" />
+                  </div>
+                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                    Maka verifikasi: <InlineMath math="m_1 \times m_2 = m_1 \times \left(-\frac{1}{m_1}\right) = -1" /> ✓
+                  </p>
+                  <div className="bg-violet-900/30 rounded-lg p-2 text-xs font-body">
+                    <p className="text-violet-200">📌 Cara mudah: balik pembilang dan penyebut, lalu ubah tanda. Contoh: m₁ = 3 → m₂ = −⅓. m₁ = −⅔ → m₂ = 3/2.</p>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="bg-slate-800/60 border border-violet-500/20 rounded-xl p-3">
                     <p className="text-xs font-bold text-violet-300 mb-2">Visual: Dua garis tegak lurus</p>
                     <CoordSys label="ℓ₁ ⊥ ℓ₂">
-                      {/* l1: y=2x */}
                       <polyline points={[[-3,-6],[-2,-4],[-1,-2],[0,0],[1,2],[2,4],[3,6]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
-                      {/* l2: y=-0.5x+2 */}
                       <polyline points={[[-4,4],[-2,3],[0,2],[2,1],[4,0],[6,-1]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
-                      {/* right angle marker at intersection */}
-                      <rect x={toX(0.8)} y={toY(1.5)} width="8" height="8" fill="none" stroke="#facc15" strokeWidth="1" />
+                      {/* ℓ₁: y=2x, ℓ₂: y=-0.5x+2 → intersect at (0.8,1.6) */}
+                      <polygon points={perpMark(0.8, 1.6, 2, -0.5)} fill="none" stroke="#facc15" strokeWidth="1.5" />
                       <text x={toX(-2)} y={toY(5)} fill="#a78bfa" fontSize="8">ℓ₁: y=2x</text>
                       <text x={toX(1)} y={toY(-2)} fill="#f472b6" fontSize="8">ℓ₂: y=−½x+2</text>
                     </CoordSys>
@@ -182,6 +291,34 @@ const Hubungan2GarisPage = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* ANIMASI INTERAKTIF TEGAK LURUS */}
+                <div className="bg-violet-900/10 border border-violet-500/30 rounded-xl p-4 space-y-3">
+                  <p className="text-xs font-bold text-violet-300 uppercase tracking-wider">🎮 Animasi Interaktif — Garis Tegak Lurus</p>
+                  <p className="text-xs text-white/60 font-body">Pilih gradien m₁. Gradien m₂ otomatis dihitung sebagai <InlineMath math="m_2 = -\frac{1}{m_1}" />. Perhatikan sudut 90° yang terbentuk!</p>
+                  <div className="flex flex-wrap gap-2">
+                    {TEK_OPTS.map(v => (
+                      <button key={v} onClick={() => { playPopSound(); setTekM1(v); }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${tekM1 === v ? "bg-violet-500 text-white" : "bg-slate-700/60 text-white/60 hover:bg-slate-600"}`}>
+                        m₁ = {mDisp(v)}
+                      </button>
+                    ))}
+                  </div>
+                  <CoordSys label={`m₁·m₂=−1`}>
+                    <polyline points={gPts(tekM1, 0)} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
+                    <polyline points={gPts(tekM2, 0)} fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* Both lines pass through origin (0,0) */}
+                    <polygon points={perpMark(0, 0, tekM1, tekM2, 0.5)} fill="none" stroke="#facc15" strokeWidth="1.8" />
+                    <text x={5} y={H-20} fill="#a78bfa" fontSize="7">ℓ₁: y={mDisp(tekM1)}x</text>
+                    <text x={5} y={H-11} fill="#f472b6" fontSize="7">ℓ₂: y={mDisp(tekM2)}x</text>
+                  </CoordSys>
+                  <div className="bg-violet-900/30 rounded-lg p-3 text-xs font-body space-y-1">
+                    <p className="text-violet-300 font-semibold">Observasi:</p>
+                    <p className="text-white/70">m₁ = <strong className="text-violet-300">{mDisp(tekM1)}</strong>, maka m₂ = −1/m₁ = <strong className="text-pink-300">{mDisp(tekM2)}</strong></p>
+                    <p className="text-white/70">Verifikasi: <InlineMath math={`m_1 \\times m_2 = ${mTeX(tekM1)} \\times ${mTeX(tekM2)} = -1`} /> ✓</p>
+                    <p className="text-white/50">Kotak kuning kecil = tanda sudut 90° di titik potong</p>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -197,6 +334,24 @@ const Hubungan2GarisPage = () => {
                   <p className="text-xs text-white/60 mt-1">Gradien berbeda → pasti berpotongan di suatu titik</p>
                   <p className="text-xs text-white/50 mt-1">Jika <InlineMath math="m_1 \times m_2 \neq -1" /> → berpotongan biasa (bukan 90°)</p>
                 </div>
+
+                {/* Penjelasan MENGAPA */}
+                <div className="bg-slate-800/50 border border-green-500/20 rounded-xl p-4 space-y-2">
+                  <p className="text-xs font-bold text-green-300 uppercase tracking-wide">💡 Mengapa garis dengan m₁ ≠ m₂ pasti berpotongan?</p>
+                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                    Jika dua garis punya gradien berbeda, maka <strong className="text-green-300">laju kenaikannya berbeda</strong>. Misalnya garis ℓ₁ naik lebih cepat dari ℓ₂: dari suatu titik di kiri, ℓ₁ berada di bawah ℓ₂, tapi karena ℓ₁ naik lebih cepat, <em>pasti ada satu titik di mana ℓ₁ menyalib ℓ₂</em>.
+                  </p>
+                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                    Secara aljabar: dua persamaan <InlineMath math="y = m_1 x + c_1" /> dan <InlineMath math="y = m_2 x + c_2" /> dengan <InlineMath math="m_1 \neq m_2" /> selalu memiliki tepat <strong className="text-green-300">satu solusi</strong>:
+                  </p>
+                  <div className="text-center">
+                    <BlockMath math="x = \frac{c_2 - c_1}{m_1 - m_2}" />
+                  </div>
+                  <div className="bg-green-900/30 rounded-lg p-2 text-xs font-body">
+                    <p className="text-green-200">📌 Titik potong dihitung dengan <strong>SPLDV</strong> (substitusi atau eliminasi). Jika m₁×m₂ = −1, potongannya membentuk sudut 90° (tegak lurus).</p>
+                  </div>
+                </div>
+
                 <div className="bg-slate-800/60 border border-green-500/20 rounded-xl p-3">
                   <p className="text-xs font-bold text-green-300 mb-2">Cara menentukan titik potong:</p>
                   <p className="text-xs text-white/60 mb-2">Selesaikan sistem persamaan kedua garis (SPLDV)</p>
@@ -207,6 +362,67 @@ const Hubungan2GarisPage = () => {
                     <p>→ y = 2(1) + 1 = 3</p>
                   </div>
                   <p className="text-green-300 font-bold text-xs mt-1">Titik potong: (1, 3)</p>
+                </div>
+
+                {/* ANIMASI INTERAKTIF BERPOTONGAN */}
+                <div className="bg-green-900/10 border border-green-500/30 rounded-xl p-4 space-y-3">
+                  <p className="text-xs font-bold text-green-300 uppercase tracking-wider">🎮 Animasi Interaktif — Garis Berpotongan</p>
+                  <p className="text-xs text-white/60 font-body">Pilih m₁ dan m₂. Selama m₁ ≠ m₂, kedua garis pasti berpotongan!</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <p className="text-xs text-cyan-300 font-semibold mb-2">m₁ (ℓ₁ — biru):</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {BER_OPTS.map(v => (
+                          <button key={v} onClick={() => { playPopSound(); setBerM1(v); }}
+                            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${berM1 === v ? "bg-cyan-500 text-white" : "bg-slate-700/60 text-white/60 hover:bg-slate-600"}`}>
+                            {mDisp(v)}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-xs text-yellow-300 font-semibold mb-2">m₂ (ℓ₂ — kuning):</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {BER_OPTS.map(v => (
+                          <button key={v} onClick={() => { playPopSound(); setBerM2(v); }}
+                            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${berM2 === v ? "bg-yellow-500 text-slate-900" : "bg-slate-700/60 text-white/60 hover:bg-slate-600"}`}>
+                            {mDisp(v)}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  {(() => {
+                    const pt = lineIntersect(berM1, 1, berM2, -1);
+                    const isParallel = berM1 === berM2;
+                    const isPerp = Math.abs(berM1 * berM2 + 1) < 0.001;
+                    return (
+                      <>
+                        <CoordSys label={isParallel ? "Sejajar!" : `Titik potong ${pt ? `(${Math.round(pt[0]*10)/10}, ${Math.round(pt[1]*10)/10})` : ""}`}>
+                          <polyline points={gPts(berM1, 1)} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
+                          <polyline points={gPts(berM2, -1)} fill="none" stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
+                          {pt && !isParallel && (
+                            <>
+                              {isPerp && <polygon points={perpMark(pt[0], pt[1], berM1, berM2, 0.45)} fill="none" stroke="#f87171" strokeWidth="1.5" />}
+                              <circle cx={toX(pt[0])} cy={toY(pt[1])} r="5" fill={isPerp ? "#f87171" : "#4ade80"} stroke={isPerp ? "#fca5a5" : "#86efac"} strokeWidth="1.5" />
+                              <text x={toX(pt[0])+6} y={toY(pt[1])-4} fill={isPerp ? "#f87171" : "#4ade80"} fontSize="8">({Math.round(pt[0]*10)/10},{Math.round(pt[1]*10)/10})</text>
+                            </>
+                          )}
+                          <text x={5} y={H-20} fill="#22d3ee" fontSize="7">ℓ₁: y={mDisp(berM1)}x+1</text>
+                          <text x={5} y={H-11} fill="#facc15" fontSize="7">ℓ₂: y={mDisp(berM2)}x−1</text>
+                        </CoordSys>
+                        <div className={`rounded-lg p-3 text-xs font-body space-y-1 border ${isParallel ? "bg-cyan-900/30 border-cyan-500/30" : isPerp ? "bg-red-900/30 border-red-500/30" : "bg-green-900/30 border-green-500/30"}`}>
+                          <p className={`font-semibold ${isParallel ? "text-cyan-300" : isPerp ? "text-red-300" : "text-green-300"}`}>
+                            {isParallel ? "⚠️ SEJAJAR" : isPerp ? "⊥ TEGAK LURUS (90°)" : "✕ BERPOTONGAN BIASA"}
+                          </p>
+                          <p className="text-white/70">m₁ = <strong>{mDisp(berM1)}</strong>, m₂ = <strong>{mDisp(berM2)}</strong></p>
+                          {isParallel && <p className="text-white/60">m₁ = m₂ → garis sejajar, tidak berpotongan!</p>}
+                          {isPerp && pt && <p className="text-white/60">m₁ × m₂ = {mDisp(berM1)} × {mDisp(berM2)} = −1 → sudut 90° di ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
+                          {!isParallel && !isPerp && pt && <p className="text-white/60">m₁ ≠ m₂, m₁×m₂ = {Math.round(berM1*berM2*100)/100} ≠ −1 → titik potong ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
             )}
@@ -231,13 +447,14 @@ const Hubungan2GarisPage = () => {
                       <p className="text-white/40">m₁ = m₂ = 2</p>
                     </div>
                   </div>
-                  {/* Tegak lurus */}
+                  {/* Tegak lurus — fixed right-angle marker */}
                   <div className="bg-slate-900/60 border border-violet-500/30 rounded-xl p-3">
                     <p className="text-xs font-bold text-violet-300 mb-2 text-center">⊥ TEGAK LURUS</p>
                     <CoordSys label="m₁·m₂=−1">
+                      {/* ℓ₁: y=2x, ℓ₂: y=-0.5x → intersect at origin (0,0) */}
                       <polyline points={[[-3,-6],[-2,-4],[-1,-2],[0,0],[1,2],[2,4]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
                       <polyline points={[[-4,2],[-2,1],[0,0],[2,-1],[4,-2]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
-                      <rect x={toX(0)-5} y={toY(0)-5} width="8" height="8" fill="none" stroke="#facc15" strokeWidth="1.5" />
+                      <polygon points={perpMark(0, 0, 2, -0.5)} fill="none" stroke="#facc15" strokeWidth="1.5" />
                     </CoordSys>
                     <div className="mt-2 space-y-1 text-xs">
                       <p className="text-violet-300 font-mono">ℓ₁: y = 2x</p>
@@ -346,11 +563,12 @@ const Hubungan2GarisPage = () => {
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik kedua garis:</p>
                     <CoordSys label="⊥ di (2,5)">
+                      {/* ℓ₁: y=4x-3, ℓ₂: y=-¼x+5.5, intersect at (2,5) */}
                       <polyline points={[[-1,-7],[0,-3],[1,1],[2,5],[3,9]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#facc15" strokeWidth="2" strokeLinecap="round" />
                       <polyline points={[[-4,6.5],[-2,6],[0,5.5],[2,5],[4,4.5],[6,4]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" />
+                      <polygon points={perpMark(2, 5, 4, -0.25, 0.3)} fill="none" stroke="#f87171" strokeWidth="1.2" />
                       <circle cx={toX(2)} cy={toY(5)} r="5" fill="#f87171" stroke="#fca5a5" strokeWidth="1.5" />
                       <text x={toX(2)+5} y={toY(5)-5} fill="#f87171" fontSize="8">(2,5)</text>
-                      <rect x={toX(2)-2} y={toY(5)-2} width="7" height="7" fill="none" stroke="#facc15" strokeWidth="1" />
                     </CoordSys>
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-lg p-3">
