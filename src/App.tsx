@@ -1633,7 +1633,7 @@ const AppInner = () => {
           <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/teorema-pythagoras/pembuktian" element={<PembuktianPythagorasMMK8Page />} />
-          <Route path="/materi-matematika/kelas-8/teorema-pythagoras/menghitung-panjang" element={<MenghitungPanjangPythagorasMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/teorema-pythagoras/menghitung-panjang" element={<PembuktianPythagorasMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/teorema-pythagoras/triple-pythagoras" element={<TriplePythagorasMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/teorema-pythagoras/jenis-segitiga" element={<JenisSegitigaPythagorasMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasMMK8Page />} />
