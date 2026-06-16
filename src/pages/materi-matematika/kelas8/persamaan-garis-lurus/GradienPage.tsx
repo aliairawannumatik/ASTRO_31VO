@@ -122,23 +122,18 @@ const GradienPage = () => {
                 <div className="grid grid-cols-2 gap-3">
                   {/* Gradien Positif */}
                   <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-3 flex flex-col items-center gap-2">
-                    <svg viewBox="0 0 120 90" className="w-full max-w-[140px]" style={{ background: "rgba(15,23,42,0.7)", borderRadius: 8 }}>
-                      {/* grid lines */}
+                    <svg viewBox="0 0 150 100" className="w-full max-w-[160px]" style={{ background: "rgba(15,23,42,0.7)", borderRadius: 8 }}>
                       {[20,40,60,80].map(v => (
-                        <line key={`gh${v}`} x1="10" y1={v} x2="110" y2={v} stroke="#1e293b" strokeWidth="1" />
+                        <line key={`gh${v}`} x1="10" y1={v} x2="120" y2={v} stroke="#1e293b" strokeWidth="1" />
                       ))}
-                      {[30,50,70,90].map(v => (
-                        <line key={`gv${v}`} x1={v} y1="10" x2={v} y2="80" stroke="#1e293b" strokeWidth="1" />
+                      {[30,50,70,90,110].map(v => (
+                        <line key={`gv${v}`} x1={v} y1="10" x2={v} y2="90" stroke="#1e293b" strokeWidth="1" />
                       ))}
-                      {/* the line — goes up to the right */}
-                      <line x1="20" y1="72" x2="100" y2="18" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" />
-                      {/* right-angle triangle */}
-                      <line x1="20" y1="72" x2="100" y2="72" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.6" />
-                      <line x1="100" y1="72" x2="100" y2="18" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.6" />
-                      {/* sisi tegak label */}
-                      <text x="103" y="48" fill="#f472b6" fontSize="8" fontWeight="bold">tegak</text>
-                      {/* sisi datar label */}
-                      <text x="48" y="82" fill="#4ade80" fontSize="8" fontWeight="bold">datar</text>
+                      <line x1="20" y1="80" x2="110" y2="20" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" />
+                      <line x1="20" y1="80" x2="110" y2="80" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
+                      <line x1="110" y1="80" x2="110" y2="20" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
+                      <text x="55" y="93" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">datar</text>
+                      <text x="110" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,110,53)">tegak</text>
                     </svg>
                     <p className="text-xs font-bold text-green-300 font-body text-center">Gradien <span className="text-green-400">POSITIF (+)</span></p>
                     <p className="text-[10px] text-white/50 font-body text-center">Garis naik ke kanan</p>
@@ -146,23 +141,18 @@ const GradienPage = () => {
 
                   {/* Gradien Negatif */}
                   <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-3 flex flex-col items-center gap-2">
-                    <svg viewBox="0 0 120 90" className="w-full max-w-[140px]" style={{ background: "rgba(15,23,42,0.7)", borderRadius: 8 }}>
-                      {/* grid lines */}
+                    <svg viewBox="0 0 150 100" className="w-full max-w-[160px]" style={{ background: "rgba(15,23,42,0.7)", borderRadius: 8 }}>
                       {[20,40,60,80].map(v => (
-                        <line key={`rh${v}`} x1="10" y1={v} x2="110" y2={v} stroke="#1e293b" strokeWidth="1" />
+                        <line key={`rh${v}`} x1="10" y1={v} x2="120" y2={v} stroke="#1e293b" strokeWidth="1" />
                       ))}
-                      {[30,50,70,90].map(v => (
-                        <line key={`rv${v}`} x1={v} y1="10" x2={v} y2="80" stroke="#1e293b" strokeWidth="1" />
+                      {[30,50,70,90,110].map(v => (
+                        <line key={`rv${v}`} x1={v} y1="10" x2={v} y2="90" stroke="#1e293b" strokeWidth="1" />
                       ))}
-                      {/* the line — goes down to the right */}
-                      <line x1="20" y1="18" x2="100" y2="72" stroke="#f87171" strokeWidth="3" strokeLinecap="round" />
-                      {/* right-angle triangle */}
-                      <line x1="20" y1="18" x2="100" y2="18" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.6" />
-                      <line x1="100" y1="18" x2="100" y2="72" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.6" />
-                      {/* sisi tegak label */}
-                      <text x="103" y="48" fill="#f472b6" fontSize="8" fontWeight="bold">tegak</text>
-                      {/* sisi datar label */}
-                      <text x="48" y="14" fill="#4ade80" fontSize="8" fontWeight="bold">datar</text>
+                      <line x1="20" y1="20" x2="110" y2="80" stroke="#f87171" strokeWidth="3" strokeLinecap="round" />
+                      <line x1="20" y1="20" x2="110" y2="20" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
+                      <line x1="110" y1="20" x2="110" y2="80" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
+                      <text x="55" y="14" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">datar</text>
+                      <text x="110" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,110,53)">tegak</text>
                     </svg>
                     <p className="text-xs font-bold text-red-300 font-body text-center">Gradien <span className="text-red-400">NEGATIF (−)</span></p>
                     <p className="text-[10px] text-white/50 font-body text-center">Garis turun ke kanan</p>
