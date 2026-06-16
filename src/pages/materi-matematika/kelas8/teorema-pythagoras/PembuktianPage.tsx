@@ -9,6 +9,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import PythagorasDiscoveryAnimation from "@/components/PythagorasDiscoveryAnimation";
 import PythagorasRearrangementAnimation from "@/components/PythagorasRearrangementAnimation";
 import PythagorasWaterProof from "@/components/PythagorasWaterProof";
+import PythagorasSquaresAnimation from "@/components/PythagorasSquaresAnimation";
 
 /*
   Pembuktian SVG — 4 right-triangles (a=60, b=80, c=100) inside a square (side=140).
@@ -388,6 +389,11 @@ const PembuktianPage = () => {
           {/* WATER PROOF ANIMATION */}
           <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-2xl overflow-hidden p-4">
             <PythagorasWaterProof />
+          </div>
+
+          {/* SQUARES ANIMATION */}
+          <div className="bg-card/80 backdrop-blur border border-blue-500/40 rounded-2xl overflow-hidden p-4">
+            <PythagorasSquaresAnimation />
           </div>
 
           {/* ANIMASI PENEMUAN */}
