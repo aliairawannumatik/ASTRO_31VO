@@ -419,12 +419,6 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     ctx.moveTo(C_PT.x,C_PT.y-15); ctx.lineTo(C_PT.x+15,C_PT.y-15); ctx.lineTo(C_PT.x+15,C_PT.y);
     ctx.strokeStyle="rgba(255,255,255,0.55)"; ctx.lineWidth=1.5; ctx.stroke();
     ctx.restore();
-    if(pTri>0.4) {
-      const la=Math.min((pTri-0.4)/0.6,1);
-      lbl(ctx,"a=3",C_PT.x-30,(C_PT.y+B_PT.y)/2,"#93c5fd",13,la);
-      lbl(ctx,"b=4",(C_PT.x+A_PT.x)/2,C_PT.y+22,"#86efac",13,la);
-      lbl(ctx,"c=5",(B_PT.x+A_PT.x)/2+24,(B_PT.y+A_PT.y)/2-12,"#fdba74",13,la);
-    }
   }
 
   // ── 10. Area counter (top-right corner) ──────────────────────────────────────
