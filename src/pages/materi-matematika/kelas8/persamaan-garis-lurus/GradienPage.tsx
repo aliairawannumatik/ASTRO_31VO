@@ -38,7 +38,7 @@ const CoordSys = ({ children, label = "", w = W, h = H }: { children?: React.Rea
 const GradienPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "definisi", "animasi", "duatitik", "persamaan", "rumus", "visualgradien", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "definisi", "animasi", "duatitik", "persamaan", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
@@ -219,107 +219,6 @@ const GradienPage = () => {
                   Ada dua bentuk persamaan garis yang sering muncul. Masing-masing punya cara berbeda untuk membaca gradiennya — dan ada alasan matematisnya.
                 </p>
                 <GradienPersamaanInteraktif />
-              </div>
-            )}
-          </div>
-
-          {/* CARA MENENTUKAN GRADIEN */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rumus" icon={<BookOpen className="w-5 h-5" />} iconColor="text-green-400" title="🔢 3 Cara Menentukan Gradien" />
-            {true && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="space-y-3">
-                  {[
-                    {
-                      no: "1", judul: "Dari Persamaan y = mx + c",
-                      penj: "Gradien = koefisien x", contoh: "y = 3x - 7", hasil: "m = 3",
-                      color: "border-cyan-500/40 bg-cyan-900/10",
-                    },
-                    {
-                      no: "2", judul: "Dari Persamaan ax + by + c = 0",
-                      penj: "Ubah ke bentuk y = mx + c terlebih dahulu", contoh: "2x + 3y - 6 = 0 → y = -⅔x + 2", hasil: "m = -⅔",
-                      color: "border-violet-500/40 bg-violet-900/10",
-                    },
-                    {
-                      no: "3", judul: "Dari Dua Titik (x₁,y₁) dan (x₂,y₂)",
-                      penj: "Gunakan rumus m = (y₂-y₁)/(x₂-x₁)", contoh: "Titik A(1,3) dan B(4,9)", hasil: "m = (9-3)/(4-1) = 6/3 = 2",
-                      color: "border-orange-500/40 bg-orange-900/10",
-                    },
-                  ].map(({ no, judul, penj, contoh, hasil, color }) => (
-                    <div key={no} className={`border ${color} rounded-xl p-4 text-sm font-body`}>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="bg-white/10 rounded-full w-7 h-7 flex items-center justify-center font-bold text-white font-display">{no}</span>
-                        <p className="font-bold text-white">{judul}</p>
-                      </div>
-                      <p className="text-white/60 text-xs mb-2">{penj}</p>
-                      <div className="bg-slate-800/60 rounded-lg p-2 text-xs">
-                        <p className="text-white/60">Contoh: <span className="text-cyan-300 font-mono">{contoh}</span></p>
-                        <p className="text-green-300 font-bold mt-1">{hasil}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* GALERI VISUAL GRADIEN */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="visualgradien" icon={<Sliders className="w-5 h-5" />} iconColor="text-orange-400" title="🎨 Galeri Visual: Efek Berbagai Nilai Gradien" />
-            {true && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {[
-                    { m: 3, label: "m = 3", color: "#22d3ee", note: "Curam ke kanan ↗" },
-                    { m: 1, label: "m = 1", color: "#4ade80", note: "45° ke kanan ↗" },
-                    { m: 0.3, label: "m = ⅓", color: "#a78bfa", note: "Landai ke kanan ↗" },
-                    { m: 0, label: "m = 0", color: "#facc15", note: "Horizontal →" },
-                    { m: -1, label: "m = −1", color: "#fb923c", note: "Turun 45° ↘" },
-                    { m: -3, label: "m = −3", color: "#f472b6", note: "Curam ke kiri ↘" },
-                  ].map(({ m, label, color, note }) => {
-                    const pts: [number,number][] = [[-3, -3*m],[-2,-2*m],[-1,-m],[0,0],[1,m],[2,2*m],[3,3*m]];
-                    const maxY = Math.max(...pts.map(([,y])=>Math.abs(y)));
-                    const scl = maxY > 3 ? 3/maxY : 1;
-                    return (
-                      <div key={label} className="bg-slate-900/70 border border-white/10 rounded-xl p-2">
-                        <CoordSys w={130} h={110} label={label}>
-                          <polyline
-                            points={pts.map(([x,y])=>`${65+x*13},${55-y*scl*12}`).join(' ')}
-                            fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round"
-                          />
-                          <circle cx={65} cy={55} r="3" fill={color} opacity="0.8" />
-                        </CoordSys>
-                        <p className="text-center text-xs mt-1 text-white/40">{note}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="text-sm font-bold text-white mb-2 font-body">📊 Tabel Ringkasan Nilai Gradien</p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs font-body border-collapse">
-                      <thead><tr className="bg-cyan-900/40">
-                        <th className="border border-cyan-500/30 px-2 py-2 text-cyan-200">Nilai m</th>
-                        <th className="border border-cyan-500/30 px-2 py-2 text-cyan-200">Arah Garis</th>
-                        <th className="border border-cyan-500/30 px-2 py-2 text-cyan-200">Semakin besar |m|</th>
-                      </tr></thead>
-                      <tbody>
-                        {[
-                          ["m > 0", "↗ Naik dari kiri ke kanan", "Semakin curam ke kanan"],
-                          ["m < 0", "↘ Turun dari kiri ke kanan", "Semakin curam ke kiri"],
-                          ["m = 0", "→ Horizontal (mendatar)", "Tidak berubah"],
-                          ["m tidak ada", "↕ Vertikal (x = konstanta)", "Tidak terdefinisi"],
-                        ].map(([v,a,s],i) => (
-                          <tr key={i} className={i%2===0?"bg-slate-800/30":"bg-slate-700/20"}>
-                            <td className="border border-white/10 px-2 py-2 text-cyan-300 font-mono font-bold text-center">{v}</td>
-                            <td className="border border-white/10 px-2 py-2 text-white/70 text-center">{a}</td>
-                            <td className="border border-white/10 px-2 py-2 text-white/60 text-center">{s}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
               </div>
             )}
           </div>
