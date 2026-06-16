@@ -133,7 +133,7 @@ const GradienPage = () => {
                       <line x1="20" y1="80" x2="110" y2="80" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
                       <line x1="110" y1="80" x2="110" y2="20" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
                       <text x="55" y="93" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">datar</text>
-                      <text x="110" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,110,53)">tegak</text>
+                      <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">tegak</text>
                     </svg>
                     <p className="text-xs font-bold text-green-300 font-body text-center">Gradien <span className="text-green-400">POSITIF (+)</span></p>
                     <p className="text-[10px] text-white/50 font-body text-center">Garis naik ke kanan</p>
@@ -152,7 +152,7 @@ const GradienPage = () => {
                       <line x1="20" y1="20" x2="110" y2="20" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
                       <line x1="110" y1="20" x2="110" y2="80" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
                       <text x="55" y="14" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">datar</text>
-                      <text x="110" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,110,53)">tegak</text>
+                      <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">tegak</text>
                     </svg>
                     <p className="text-xs font-bold text-red-300 font-body text-center">Gradien <span className="text-red-400">NEGATIF (−)</span></p>
                     <p className="text-[10px] text-white/50 font-body text-center">Garis turun ke kanan</p>
