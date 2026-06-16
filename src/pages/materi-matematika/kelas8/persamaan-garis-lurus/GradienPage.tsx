@@ -199,6 +199,49 @@ const GradienPage = () => {
             )}
           </div>
 
+          {/* JENIS GARIS KHUSUS */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SH id="jenis" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-cyan-400" title="⚡ Garis Horizontal, Vertikal & Melalui Titik Asal" />
+            {true && (
+              <div className="px-5 pb-5 space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {[
+                    {
+                      judul: "Garis Horizontal", eq: "y = c", m: "m = 0",
+                      color: "#4ade80", ket: "Gradien 0, sejajar sumbu-x",
+                      pts: [[-4,2],[0,2],[4,2]],
+                    },
+                    {
+                      judul: "Garis Vertikal", eq: "x = c", m: "m = ∞ (tdk ada)",
+                      color: "#f472b6", ket: "Gradien tidak terdefinisi, sejajar sumbu-y",
+                      pts: [[2,-3],[2,0],[2,3]],
+                    },
+                    {
+                      judul: "Melalui Titik Asal", eq: "y = mx", m: "c = 0",
+                      color: "#a78bfa", ket: "Melewati titik (0,0), c=0",
+                      pts: [[-3,-3],[0,0],[3,3]],
+                    },
+                  ].map(({ judul, eq, m, color, ket, pts }) => (
+                    <div key={judul} className="bg-slate-900/60 border border-white/10 rounded-xl p-3">
+                      <p className="text-xs font-bold mb-1" style={{ color }}>{judul}</p>
+                      <CoordSys w={130} h={100} label={eq}>
+                        {pts[0][0] === pts[1][0] ? (
+                          /* vertical line */
+                          <line x1={65+pts[0][0]*13} y1={10} x2={65+pts[0][0]*13} y2={90} stroke={color} strokeWidth="2.5" />
+                        ) : (
+                          <polyline points={pts.map(([x,y])=>`${65+x*13},${50-y*13}`).join(' ')} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
+                        )}
+                        <circle cx={65+pts[1][0]*13} cy={50-pts[1][1]*13} r="3.5" fill={color} />
+                      </CoordSys>
+                      <p className="text-xs font-mono mt-1" style={{ color }}>{m}</p>
+                      <p className="text-xs text-white/40 mt-0.5">{ket}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* ANIMASI INVARIANSI GRADIEN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH id="animasi" icon={<PlayCircle className="w-5 h-5" />} iconColor="text-cyan-400" title="🎬 Animasi: Gradien Tidak Bergantung Panjang Garis" />
@@ -253,49 +296,6 @@ const GradienPage = () => {
                   Ada dua bentuk persamaan garis yang sering muncul. Masing-masing punya cara berbeda untuk membaca gradiennya — dan ada alasan matematisnya.
                 </p>
                 <GradienPersamaanInteraktif />
-              </div>
-            )}
-          </div>
-
-          {/* JENIS GARIS KHUSUS */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="jenis" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-cyan-400" title="⚡ Garis Horizontal, Vertikal & Melalui Titik Asal" />
-            {true && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {[
-                    {
-                      judul: "Garis Horizontal", eq: "y = c", m: "m = 0",
-                      color: "#4ade80", ket: "Gradien 0, sejajar sumbu-x",
-                      pts: [[-4,2],[0,2],[4,2]],
-                    },
-                    {
-                      judul: "Garis Vertikal", eq: "x = c", m: "m = ∞ (tdk ada)",
-                      color: "#f472b6", ket: "Gradien tidak terdefinisi, sejajar sumbu-y",
-                      pts: [[2,-3],[2,0],[2,3]],
-                    },
-                    {
-                      judul: "Melalui Titik Asal", eq: "y = mx", m: "c = 0",
-                      color: "#a78bfa", ket: "Melewati titik (0,0), c=0",
-                      pts: [[-3,-3],[0,0],[3,3]],
-                    },
-                  ].map(({ judul, eq, m, color, ket, pts }) => (
-                    <div key={judul} className="bg-slate-900/60 border border-white/10 rounded-xl p-3">
-                      <p className="text-xs font-bold mb-1" style={{ color }}>{judul}</p>
-                      <CoordSys w={130} h={100} label={eq}>
-                        {pts[0][0] === pts[1][0] ? (
-                          /* vertical line */
-                          <line x1={65+pts[0][0]*13} y1={10} x2={65+pts[0][0]*13} y2={90} stroke={color} strokeWidth="2.5" />
-                        ) : (
-                          <polyline points={pts.map(([x,y])=>`${65+x*13},${50-y*13}`).join(' ')} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-                        )}
-                        <circle cx={65+pts[1][0]*13} cy={50-pts[1][1]*13} r="3.5" fill={color} />
-                      </CoordSys>
-                      <p className="text-xs font-mono mt-1" style={{ color }}>{m}</p>
-                      <p className="text-xs text-white/40 mt-0.5">{ket}</p>
-                    </div>
-                  ))}
-                </div>
               </div>
             )}
           </div>
