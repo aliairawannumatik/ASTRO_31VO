@@ -103,9 +103,9 @@ const NARRATION = [
   { t: 0.38, text: "Langkah 3: Luas a² = 9,  b² = 16,  c² = 25 satuan." },
   { t: 0.52, text: "Langkah 4: a² berubah bentuk jadi persegi panjang — perhatikan LUAS TETAP 9! Grid tidak hilang." },
   { t: 0.60, text: "Langkah 5: b² berubah bentuk jadi persegi panjang — LUAS TETAP 16! Sama banyak kotaknya." },
-  { t: 0.72, text: "Langkah 6: Persegi panjang biru (luas 9) berputar masuk ke persegi c²..." },
-  { t: 0.82, text: "Langkah 7: Persegi panjang hijau (luas 16) berputar masuk mengisi sisa c²..." },
-  { t: 0.93, text: "Langkah 8: 9 + 16 = 25 = c²  ✓  a² + b² = c²  Terbukti!" },
+  { t: 0.72, text: "Langkah 6: Persegi panjang biru (luas 9) BERGESER masuk ke persegi c²..." },
+  { t: 0.83, text: "Langkah 7: Persegi panjang hijau (luas 16) BERGESER masuk mengisi sisa c²..." },
+  { t: 0.96, text: "Langkah 8: 9 + 16 = 25 = c²  ✓  a² + b² = c²  Terbukti!" },
 ];
 
 // ─── Easing ───────────────────────────────────────────────────────────────────
@@ -267,12 +267,12 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
   const pSqC    = eO3(ph(t,0.32,0.50));   // c² outline appears
   const pMorphA = eIO3(ph(t,0.52,0.63));  // a² square → rectangle
   const pMorphB = eIO3(ph(t,0.59,0.70));  // b² square → rectangle
-  const pMvA    = eIO3(ph(t,0.72,0.82));  // a-rect flies to c²
-  const pFlA    = eO5(ph(t,0.74,0.84));   // a-strip fills
-  const pMvB    = eIO3(ph(t,0.81,0.91));  // b-rect flies to c²
-  const pFlB    = eO5(ph(t,0.83,0.93));   // b-strip fills
-  const pDiv    = eO3(ph(t,0.85,0.92));   // divider line
-  const pFrm    = eO3(ph(t,0.93,1.00));   // formula
+  const pMvA    = eIO3(ph(t,0.72,0.82));  // a-rect slides to c²
+  const pFlA    = eO5(ph(t,0.83,0.90));   // a-strip fills (AFTER slide ends)
+  const pMvB    = eIO3(ph(t,0.81,0.91));  // b-rect slides to c²
+  const pFlB    = eO5(ph(t,0.92,0.97));   // b-strip fills (AFTER slide ends)
+  const pDiv    = eO3(ph(t,0.88,0.94));   // divider line
+  const pFrm    = eO3(ph(t,0.96,1.00));   // formula
 
   // current fill extents inside c²
   const flA = pFlA * F_A;                       // 0 → 0.36
@@ -346,8 +346,8 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
 
   // ── 4. Square a² morphing to rectangle ──────────────────────────────────────
   if(pSqA>0) {
-    // shape alpha: visible, fades out as it starts to fly
-    const shapeAlpha = Math.min(pSqA*2,1) * (1-pMvA);
+    // shape alpha: quick fade-out right as the slide begins (flying rect takes over seamlessly)
+    const shapeAlpha = Math.min(pSqA*2,1) * Math.max(0, 1 - pMvA*5);
     if(shapeAlpha>0.005) {
       const morphed = lerpPts(SQ_A, RECT_A, pMorphA);
       // reorder [BR,TR,TL,BL] → [TL,TR,BR,BL] for the grid function
@@ -360,7 +360,7 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
 
   // ── 5. Square b² morphing to rectangle ──────────────────────────────────────
   if(pSqB>0) {
-    const shapeAlpha = Math.min(pSqB*2,1) * (1-pMvB);
+    const shapeAlpha = Math.min(pSqB*2,1) * Math.max(0, 1 - pMvB*5);
     if(shapeAlpha>0.005) {
       const morphed = lerpPts(SQ_B, RECT_B, pMorphB);
       // SQ_B already in [TL,TR,BR,BL] order
@@ -370,24 +370,28 @@ function drawFrame(ctx:CanvasRenderingContext2D, elapsed:number): number {
     }
   }
 
-  // ── 6. Flying rectangle a² → c² ─────────────────────────────────────────────
+  // ── 6. Flying rectangle a² → c² (SLIDES as solid shape, fades only after arriving) ──
   if(pMvA>0) {
     const flyX   = lerp(CTR_A.x, DST_A.x, pMvA);
     const flyY   = lerp(CTR_A.y, DST_A.y, pMvA);
     const flyAng = ANGLE_C * pMvA;
-    // alpha: appears, then fades as strip fills
-    const flyAlpha = pMvA * Math.max(0, 1 - pFlA * 1.4);
-    drawFlyingRect(ctx,flyX,flyY,flyAng,100,36,flyAlpha,COL_A+"55",COL_A);
+    // Ramp up quickly at start, stay fully visible during slide, fade out AFTER arriving at c²
+    const slideIn  = Math.min(pMvA * 5, 1);
+    const fadeOut  = Math.max(0, 1 - eO3(ph(t, 0.82, 0.88)));
+    const flyAlpha = slideIn * fadeOut;
+    drawFlyingRect(ctx,flyX,flyY,flyAng,100,36,flyAlpha,COL_A+"66",COL_A);
     drawFlyingGrid(ctx,flyX,flyY,flyAng,100,36,3,3,COL_A,flyAlpha);
   }
 
-  // ── 7. Flying rectangle b² → c² ─────────────────────────────────────────────
+  // ── 7. Flying rectangle b² → c² (SLIDES as solid shape, fades only after arriving) ──
   if(pMvB>0) {
     const flyX   = lerp(CTR_B.x, DST_B.x, pMvB);
     const flyY   = lerp(CTR_B.y, DST_B.y, pMvB);
     const flyAng = ANGLE_C * pMvB;
-    const flyAlpha = pMvB * Math.max(0, 1 - pFlB * 1.2);
-    drawFlyingRect(ctx,flyX,flyY,flyAng,100,64,flyAlpha,COL_B+"55",COL_B);
+    const slideIn  = Math.min(pMvB * 5, 1);
+    const fadeOut  = Math.max(0, 1 - eO3(ph(t, 0.91, 0.96)));
+    const flyAlpha = slideIn * fadeOut;
+    drawFlyingRect(ctx,flyX,flyY,flyAng,100,64,flyAlpha,COL_B+"66",COL_B);
     drawFlyingGrid(ctx,flyX,flyY,flyAng,100,64,4,4,COL_B,flyAlpha);
   }
 
