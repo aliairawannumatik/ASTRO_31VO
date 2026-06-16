@@ -510,22 +510,44 @@ const MenentukanPGLPage = () => {
                   <p className="text-sm text-white/85 font-body">Tentukan persamaan garis yang melalui titik <InlineMath math="A(-2, 5)" /> dan <InlineMath math="B(4, -1)" />. Nyatakan dalam bentuk <InlineMath math="ax + by + c = 0" />!</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-1">Langkah 1 — Hitung gradien:</p>
-                    <BlockMath math="m = \frac{-1-5}{4-(-2)} = \frac{-6}{6} = -1" />
+                  {/* Label Cara 2 */}
+                  <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
+                    <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">💡 Cara 2 — Alternatif Penyelesaian</p>
+                    <p className="text-xs text-white/60 mt-1">Cari gradien (m) terlebih dahulu menggunakan <InlineMath math="m = \frac{y_2 - y_1}{x_2 - x_1}" />, kemudian substitusi ke rumus <InlineMath math="y - y_1 = m(x - x_1)" /></p>
                   </div>
+
+                  {/* Langkah 1 */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Gunakan titik A(−2, 5):</p>
-                    <BlockMath math="y - 5 = -1(x - (-2))" />
+                    <p className="text-cyan-300 font-semibold mb-1">Langkah 1 — Hitung Gradien (m)</p>
+                    <p className="text-xs text-white/50 mb-2 font-body">Diketahui: x₁ = −2, y₁ = 5, x₂ = 4, y₂ = −1</p>
+                    <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{-1 - 5}{4 - (-2)} = \frac{-6}{6} = -1" />
+                  </div>
+
+                  {/* Langkah 2 */}
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Substitusi ke y − y₁ = m(x − x₁)</p>
+                    <p className="text-xs text-white/50 mb-2 font-body">Gunakan m = −1 dan titik A(−2, 5) → x₁ = −2, y₁ = 5</p>
+                    <BlockMath math="y - 5 = -1\bigl(x - (-2)\bigr)" />
+                    <BlockMath math="y - 5 = -1(x + 2)" />
+                  </div>
+
+                  {/* Langkah 3 */}
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Sederhanakan</p>
                     <BlockMath math="y - 5 = -x - 2" />
+                    <BlockMath math="y = -x - 2 + 5" />
                     <BlockMath math="y = -x + 3" />
                   </div>
+
+                  {/* Langkah 4 */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Bentuk umum:</p>
+                    <p className="text-pink-300 font-semibold mb-1">Langkah 4 — Ubah ke Bentuk Umum ax + by + c = 0</p>
                     <BlockMath math="y = -x + 3 \implies x + y - 3 = 0" />
                   </div>
+
+                  {/* Grafik */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik melalui A(−2,5) dan B(4,−1):</p>
+                    <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik melalui A(−2, 5) dan B(4, −1):</p>
                     <CoordSys label="x + y − 3 = 0">
                       <polyline points={[[-2,5],[-1,4],[0,3],[1,2],[2,1],[3,0],[4,-1]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
                       {[[-2,5],[4,-1]].map(([x,y]) => (
@@ -536,8 +558,11 @@ const MenentukanPGLPage = () => {
                       ))}
                     </CoordSys>
                   </div>
-                  <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-red-300">✅ Persamaan: y = −x + 3 atau x + y − 3 = 0. Gradien m = −1 (turun 45°)</p>
+
+                  {/* Hasil */}
+                  <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3 space-y-1">
+                    <p className="text-sm font-bold text-red-300">✅ Persamaan: y = −x + 3  atau  x + y − 3 = 0</p>
+                    <p className="text-xs text-white/50 font-body">Verifikasi: A(−2, 5): (−2) + 5 − 3 = 0 ✓ &nbsp;|&nbsp; B(4, −1): 4 + (−1) − 3 = 0 ✓</p>
                   </div>
                 </div>
               </div>
