@@ -10,56 +10,71 @@ import PythagorasDiscoveryAnimation from "@/components/PythagorasDiscoveryAnimat
 import PythagorasRearrangementAnimation from "@/components/PythagorasRearrangementAnimation";
 import PythagorasWaterProof from "@/components/PythagorasWaterProof";
 
-/* ── SVG: Visual proof — four identical right triangles rearranged inside a square ── */
+/*
+  Pembuktian SVG — 4 right-triangles (a=60, b=80, c=100) inside a square (side=140).
+  Outer square corners: (40,20)→(180,20)→(180,160)→(40,160)
+  Inner rotated square vertices (all sides = c = 100):
+    P1=(100,20) P2=(180,80) P3=(120,160) P4=(40,100)
+*/
 const PembuktianSVG = () => (
-  <svg viewBox="0 0 320 220" className="w-full max-w-sm mx-auto my-2" aria-label="Pembuktian Teorema Pythagoras">
+  <svg viewBox="0 0 350 205" className="w-full max-w-lg mx-auto my-4" aria-label="Pembuktian Teorema Pythagoras">
     <defs>
       <style>{`
         @keyframes fadeLabel{0%,100%{opacity:1;}50%{opacity:0.4;}}
         .lbl-anim{animation:fadeLabel 2.5s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Outer big square (side c) */}
-    <rect x="20" y="10" width="160" height="160" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="6 3"/>
-    {/* 4 right triangles: a=96, b=64, c=160 — colours differ */}
-    {/* Top-left triangle: vertices (20,10),(116,10),(20,74) */}
-    <polygon points="20,10 116,10 20,74" fill="#3b82f6" fillOpacity="0.7" stroke="#60a5fa" strokeWidth="1.5"/>
-    {/* Top-right triangle: vertices (116,10),(180,10),(180,74) */}
-    <polygon points="116,10 180,10 180,74" fill="#22c55e" fillOpacity="0.7" stroke="#4ade80" strokeWidth="1.5"/>
-    {/* Bottom-right triangle: vertices (180,74),(180,170),(84,170) */}
-    <polygon points="180,74 180,170 84,170" fill="#f97316" fillOpacity="0.7" stroke="#fb923c" strokeWidth="1.5"/>
-    {/* Bottom-left triangle: vertices (20,74),(84,170),(20,170) */}
-    <polygon points="20,74 84,170 20,170" fill="#a855f7" fillOpacity="0.7" stroke="#c084fc" strokeWidth="1.5"/>
-    {/* Inner square (side c rotated) */}
-    <polygon points="116,10 180,74 84,170 20,106" fill="#fef08a" fillOpacity="0.25" stroke="#eab308" strokeWidth="2"/>
 
-    {/* Labels */}
-    <text x="67" y="8" fill="#60a5fa" fontSize="11" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
-    <text x="148" y="8" fill="#4ade80" fontSize="11" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
-    <text x="8" y="44" fill="#c084fc" fontSize="11" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
-    <text x="8" y="126" fill="#c084fc" fontSize="11" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
-    <text x="188" y="44" fill="#4ade80" fontSize="11" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
-    <text x="188" y="126" fill="#fb923c" fontSize="11" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
-    <text x="50" y="178" fill="#fb923c" fontSize="11" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
-    <text x="134" y="178" fill="#60a5fa" fontSize="11" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
-    {/* c label on inner square side */}
-    <text x="155" y="47" fill="#eab308" fontSize="11" fontWeight="bold" className="lbl-anim">c</text>
+    {/* ── Outer big square (side = a+b = 140) ── */}
+    <rect x="40" y="20" width="140" height="140" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="6 3"/>
 
-    {/* Right angle marks */}
-    <rect x="20" y="10" width="8" height="8" fill="none" stroke="var(--icon-stroke)" strokeWidth="1" opacity="0.5"/>
-    <rect x="172" y="10" width="8" height="8" fill="none" stroke="var(--icon-stroke)" strokeWidth="1" opacity="0.5"/>
-    <rect x="172" y="162" width="8" height="8" fill="none" stroke="var(--icon-stroke)" strokeWidth="1" opacity="0.5"/>
-    <rect x="20" y="162" width="8" height="8" fill="none" stroke="var(--icon-stroke)" strokeWidth="1" opacity="0.5"/>
+    {/* ── 4 right triangles ── */}
+    {/* Top-left: right angle at (40,20), legs a=60 right & b=80 down */}
+    <polygon points="40,20 100,20 40,100" fill="#3b82f6" fillOpacity="0.75" stroke="#60a5fa" strokeWidth="1.5"/>
+    {/* Top-right: right angle at (180,20), legs b=80 left & a=60 down */}
+    <polygon points="180,20 100,20 180,80" fill="#22c55e" fillOpacity="0.75" stroke="#4ade80" strokeWidth="1.5"/>
+    {/* Bottom-right: right angle at (180,160), legs a=60 up & b=80 left */}
+    <polygon points="180,160 180,80 120,160" fill="#f97316" fillOpacity="0.75" stroke="#fb923c" strokeWidth="1.5"/>
+    {/* Bottom-left: right angle at (40,160), legs b=80 up & a=60 right */}
+    <polygon points="40,160 40,100 120,160" fill="#a855f7" fillOpacity="0.75" stroke="#c084fc" strokeWidth="1.5"/>
 
-    {/* Right panel explanation */}
-    <text x="210" y="30" fill="#94a3b8" fontSize="10" fontFamily="monospace">Luas persegi besar:</text>
-    <text x="210" y="46" fill="#eab308" fontSize="10" fontFamily="monospace" fontWeight="bold">= (a + b)²</text>
-    <text x="210" y="72" fill="#94a3b8" fontSize="10" fontFamily="monospace">= 4 segitiga +</text>
-    <text x="210" y="86" fill="#94a3b8" fontSize="10" fontFamily="monospace">  persegi tengah</text>
-    <text x="210" y="112" fill="#94a3b8" fontSize="10" fontFamily="monospace">4 × ½ab + c²</text>
-    <text x="210" y="138" fill="#94a3b8" fontSize="10" fontFamily="monospace">= 2ab + c²</text>
-    <text x="210" y="164" fill="#eab308" fontSize="10" fontFamily="monospace" fontWeight="bold">∴ a² + b² = c²</text>
-    <line x1="205" y1="20" x2="205" y2="175" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
+    {/* ── Inner square (all sides = c = 100) ── */}
+    <polygon points="100,20 180,80 120,160 40,100" fill="#fef08a" fillOpacity="0.22" stroke="#eab308" strokeWidth="2.5"/>
+
+    {/* ── Side labels on outer square edges ── */}
+    {/* Top edge: a (40→100) and b (100→180) */}
+    <text x="70"  y="14" fill="#60a5fa" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
+    <text x="140" y="14" fill="#4ade80" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
+    {/* Right edge: a (20→80) and b (80→160) */}
+    <text x="191" y="54"  fill="#4ade80" fontSize="13" fontWeight="bold" textAnchor="start" className="lbl-anim">a</text>
+    <text x="191" y="124" fill="#fb923c" fontSize="13" fontWeight="bold" textAnchor="start" className="lbl-anim">b</text>
+    {/* Bottom edge: b (40→120) and a (120→180) */}
+    <text x="80"  y="178" fill="#c084fc" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
+    <text x="150" y="178" fill="#fb923c" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
+    {/* Left edge: b (20→100) and a (100→160) */}
+    <text x="28" y="64"  fill="#60a5fa" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
+    <text x="28" y="134" fill="#c084fc" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
+
+    {/* ── c label on one side of inner square ── */}
+    <text x="145" y="46" fill="#eab308" fontSize="13" fontWeight="bold" className="lbl-anim">c</text>
+
+    {/* ── Right angle marks at outer corners ── */}
+    <polyline points="40,28 48,28 48,20"   fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
+    <polyline points="172,20 172,28 180,28" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
+    <polyline points="180,152 172,152 172,160" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
+    <polyline points="48,160 48,152 40,152"  fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
+
+    {/* ── Divider ── */}
+    <line x1="212" y1="18" x2="212" y2="182" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
+
+    {/* ── Explanation panel ── */}
+    <text x="220" y="34"  fill="#94a3b8" fontSize="10" fontFamily="monospace">Luas persegi besar:</text>
+    <text x="220" y="49"  fill="#eab308" fontSize="10" fontFamily="monospace" fontWeight="bold">= (a + b)²</text>
+    <text x="220" y="72"  fill="#94a3b8" fontSize="10" fontFamily="monospace">= 4 segitiga +</text>
+    <text x="220" y="85"  fill="#94a3b8" fontSize="10" fontFamily="monospace">  persegi tengah</text>
+    <text x="220" y="108" fill="#94a3b8" fontSize="10" fontFamily="monospace">4 × ½ab + c²</text>
+    <text x="220" y="124" fill="#94a3b8" fontSize="10" fontFamily="monospace">= 2ab + c²</text>
+    <text x="220" y="152" fill="#eab308" fontSize="11" fontFamily="monospace" fontWeight="bold">∴ a² + b² = c²</text>
   </svg>
 );
 
@@ -74,27 +89,62 @@ const SegitigaSikuSVG = () => (
         .side-c{animation:sideGlow 1.8s ease-in-out infinite 1.2s;}
       `}</style>
     </defs>
-    {/* Triangle */}
     <polygon points="20,130 160,130 20,20" fill="rgba(59,130,246,0.15)" stroke="none"/>
-    {/* Side b (base, horizontal) */}
     <line x1="20" y1="130" x2="160" y2="130" stroke="#22c55e" strokeWidth="3" className="side-b"/>
-    {/* Side a (vertical) */}
     <line x1="20" y1="20" x2="20" y2="130" stroke="#3b82f6" strokeWidth="3" className="side-a"/>
-    {/* Side c (hypotenuse) */}
     <line x1="20" y1="20" x2="160" y2="130" stroke="#f97316" strokeWidth="3" className="side-c"/>
-    {/* Right angle mark */}
     <polyline points="20,110 40,110 40,130" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.7"/>
-    {/* Labels */}
-    <text x="8" y="80" fill="#60a5fa" fontSize="14" fontWeight="bold">a</text>
-    <text x="87" y="148" fill="#4ade80" fontSize="14" fontWeight="bold">b</text>
-    <text x="100" y="75" fill="#fb923c" fontSize="14" fontWeight="bold">c</text>
-    <text x="20" y="13" fill="#94a3b8" fontSize="9">A</text>
+    <text x="8"   y="80"  fill="#60a5fa" fontSize="14" fontWeight="bold">a</text>
+    <text x="87"  y="148" fill="#4ade80" fontSize="14" fontWeight="bold">b</text>
+    <text x="100" y="75"  fill="#fb923c" fontSize="14" fontWeight="bold">c</text>
+    <text x="20"  y="13"  fill="#94a3b8" fontSize="9">A</text>
     <text x="162" y="134" fill="#94a3b8" fontSize="9">B</text>
-    <text x="8" y="134" fill="#94a3b8" fontSize="9">C</text>
-    {/* 90° label */}
-    <text x="44" y="126" fill="var(--icon-color)" fontSize="8" opacity="0.6">90°</text>
+    <text x="8"   y="134" fill="#94a3b8" fontSize="9">C</text>
+    <text x="44"  y="126" fill="var(--icon-color)" fontSize="8" opacity="0.6">90°</text>
   </svg>
 );
+
+/* ── Small right-triangle SVG used in Contoh 1 ── */
+const MiniTriangle = ({
+  a, b, c,
+  labelA, labelB, labelC,
+  colorA = "#60a5fa", colorB = "#4ade80", colorC = "#fb923c",
+  question,
+}: {
+  a: number; b: number; c: number;
+  labelA: string; labelB: string; labelC: string;
+  colorA?: string; colorB?: string; colorC?: string;
+  question?: string;
+}) => {
+  const scale = 100 / Math.max(a, b);
+  const W = b * scale, H = a * scale;
+  const vw = W + 60, vh = H + 60;
+  return (
+    <svg viewBox={`0 0 ${vw} ${vh}`} className="w-full max-w-[220px] mx-auto" aria-label="Segitiga">
+      {question && (
+        <text x={vw / 2} y="14" fill="#facc15" fontSize="10" fontWeight="bold" textAnchor="middle">{question}</text>
+      )}
+      {/* triangle: right angle at bottom-left */}
+      <polygon
+        points={`30,${H + 24} ${W + 30},${H + 24} 30,24`}
+        fill="rgba(59,130,246,0.12)"
+        stroke="none"
+      />
+      {/* vertical leg (a) */}
+      <line x1="30" y1="24" x2="30" y2={H + 24} stroke={colorA} strokeWidth="2.5"/>
+      {/* horizontal leg (b) */}
+      <line x1="30" y1={H + 24} x2={W + 30} y2={H + 24} stroke={colorB} strokeWidth="2.5"/>
+      {/* hypotenuse (c) */}
+      <line x1="30" y1="24" x2={W + 30} y2={H + 24} stroke={colorC} strokeWidth="2.5"/>
+      {/* right angle mark */}
+      <polyline points={`30,${H + 14} 40,${H + 14} 40,${H + 24}`} fill="none" stroke="#94a3b8" strokeWidth="1.2"/>
+      {/* labels */}
+      <text x="18"         y={H / 2 + 28}  fill={colorA} fontSize="12" fontWeight="bold" textAnchor="middle">{labelA}</text>
+      <text x={W / 2 + 30} y={H + 42}      fill={colorB} fontSize="12" fontWeight="bold" textAnchor="middle">{labelB}</text>
+      <text x={W / 2 + 38} y={H / 2 + 16}  fill={colorC} fontSize="12" fontWeight="bold" textAnchor="middle">{labelC}</text>
+    </svg>
+  );
+};
 
 const PembuktianPage = () => {
   const navigate = useNavigate();
@@ -126,43 +176,11 @@ const PembuktianPage = () => {
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Teorema Pythagoras · Materi Matematika</p>
 
-        {/* VIDEO YOUTUBE */}
-        <div className="w-full mb-4">
-          <div className="rounded-2xl overflow-hidden border border-cyan-500/40 shadow-lg shadow-cyan-900/30 bg-black">
-            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/vbG_YBTiN38?rel=0&modestbranding=1"
-                title="Pembuktian Teorema Pythagoras"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-          <p className="text-center text-white/50 text-xs mt-2 font-body">
-            oleh{" "}
-            <a
-              href="https://www.youtube.com/watch?v=vbG_YBTiN38"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors"
-            >
-              Elyarch Ltd
-            </a>
-          </p>
-        </div>
-
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* WATER PROOF ANIMATION — paling atas */}
-          <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-2xl overflow-hidden p-4">
-            <PythagorasWaterProof />
-          </div>
-
-
-          {/* INTRO */}
+          {/* ══ INTRO — PALING ATAS ══ */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title="🌟 Selamat Datang di Dunia Pythagoras!"/>
+            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title="🌟 Selamat Datang di Dunia Teorema Pythagoras!"/>
             {open.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -198,6 +216,37 @@ const PembuktianPage = () => {
             )}
           </div>
 
+          {/* VIDEO YOUTUBE */}
+          <div className="w-full">
+            <div className="rounded-2xl overflow-hidden border border-cyan-500/40 shadow-lg shadow-cyan-900/30 bg-black">
+              <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/vbG_YBTiN38?rel=0&modestbranding=1"
+                  title="Pembuktian Teorema Pythagoras"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+            <p className="text-center text-white/50 text-xs mt-2 font-body">
+              oleh{" "}
+              <a
+                href="https://www.youtube.com/watch?v=vbG_YBTiN38"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors"
+              >
+                Elyarch Ltd
+              </a>
+            </p>
+          </div>
+
+          {/* WATER PROOF ANIMATION */}
+          <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-2xl overflow-hidden p-4">
+            <PythagorasWaterProof />
+          </div>
+
           {/* ANIMASI PENEMUAN */}
           <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-xl overflow-hidden">
             <SectionHeader id="animasi" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="🎬 Animasi: Bagaimana Pythagoras Menemukannya?"/>
@@ -228,7 +277,7 @@ const PembuktianPage = () => {
             )}
           </div>
 
-          {/* PEMBUKTIAN */}
+          {/* PEMBUKTIAN VISUAL */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="pembuktian" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Pembuktian Visual: Metode Persegi"/>
             {open.includes("pembuktian") && (
@@ -240,7 +289,13 @@ const PembuktianPage = () => {
                   </p>
                 </div>
 
-                <PembuktianSVG/>
+                {/* Fixed square SVG */}
+                <div className="bg-slate-900/50 rounded-xl p-3 border border-slate-700/60">
+                  <p className="text-center text-xs text-slate-400 mb-1 font-body">
+                    4 segitiga siku-siku identik (biru, hijau, oranye, ungu) membentuk persegi tengah bersisi <strong className="text-yellow-300">c</strong>
+                  </p>
+                  <PembuktianSVG/>
+                </div>
 
                 <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
                   <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Langkah-Langkah Pembuktian</p>
@@ -255,14 +310,14 @@ const PembuktianPage = () => {
                     <div className="flex gap-3">
                       <span className="bg-green-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">2</span>
                       <div>
-                        <p className="font-body text-sm text-white/80">Di dalamnya, susun 4 segitiga siku-siku (kaki <InlineMath math="a"/> dan <InlineMath math="b"/>) sehingga membentuk persegi kecil bersisi <InlineMath math="c"/> di tengah. Total luas 4 segitiga:</p>
+                        <p className="font-body text-sm text-white/80">Di dalamnya, susun 4 segitiga siku-siku (kaki <InlineMath math="a"/> dan <InlineMath math="b"/>) sehingga membentuk <strong className="text-yellow-300">persegi sejati bersisi c</strong> di tengah. Total luas 4 segitiga:</p>
                         <div className="mt-1"><BlockMath math="L_{4\triangle} = 4 \times \tfrac{1}{2}ab = 2ab"/></div>
                       </div>
                     </div>
                     <div className="flex gap-3">
                       <span className="bg-orange-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">3</span>
                       <div>
-                        <p className="font-body text-sm text-white/80">Luas persegi kecil di tengah adalah <InlineMath math="c^2"/>. Jadi, luas persegi besar bisa juga ditulis:</p>
+                        <p className="font-body text-sm text-white/80">Luas persegi tengah (bersisi <InlineMath math="c"/>) adalah <InlineMath math="c^2"/>. Jadi, luas persegi besar bisa juga ditulis:</p>
                         <div className="mt-1"><BlockMath math="L_{\text{besar}} = 2ab + c^2"/></div>
                       </div>
                     </div>
@@ -288,92 +343,226 @@ const PembuktianPage = () => {
             )}
           </div>
 
-          {/* CONTOH 1 - MUDAH */}
+          {/* ══ CONTOH 1 — 3 segitiga siku-siku ══ */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh 1 — Verifikasi Tripel Pythagoras (Mudah)"/>
+            <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh 1 — Menghitung Panjang Sisi Segitiga Siku-Siku"/>
             {open.includes("contoh1") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
-                  <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Tingkat: Mudah</p>
-                  <p className="font-body text-sm text-white/90">
-                    Apakah segitiga dengan panjang sisi <strong>3 cm, 4 cm, dan 5 cm</strong> merupakan segitiga siku-siku?
-                  </p>
+              <div className="px-5 pb-5 space-y-6">
+                <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-3">
+                  <p className="text-green-300 font-bold text-xs uppercase tracking-wide">🟢 Tingkat: Dasar</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Identifikasi sisi terpanjang sebagai hipotenusa: <InlineMath math="c = 5"/>, <InlineMath math="a = 3"/>, <InlineMath math="b = 4"/>.</p>
-                  <p className="font-body text-sm text-white/80">Cek apakah berlaku <InlineMath math="a^2 + b^2 = c^2"/>:</p>
-                  <BlockMath math="3^2 + 4^2 = 9 + 16 = 25"/>
-                  <BlockMath math="c^2 = 5^2 = 25"/>
-                  <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
-                    <BlockMath math="25 = 25 \checkmark"/>
-                    <p className="font-body text-sm text-green-300 text-center mt-1">
-                      ✅ Karena <InlineMath math="a^2 + b^2 = c^2"/>, maka segitiga 3-4-5 <strong>adalah segitiga siku-siku</strong>.
-                    </p>
+
+                {/* ─── Pertanyaan a ─── */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shrink-0">a</span>
+                    <p className="font-body text-sm text-white/90 font-semibold">Tentukan panjang sisi miring segitiga berikut!</p>
+                  </div>
+                  <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+                    <MiniTriangle
+                      a={3} b={4} c={5}
+                      labelA="3 cm" labelB="4 cm" labelC="c = ?"
+                      colorC="#facc15"
+                      question="Cari sisi miring (c)"
+                    />
+                    <p className="font-body text-xs text-slate-300 uppercase tracking-wide font-bold mt-2">📋 Penyelesaian</p>
+                    <p className="font-body text-sm text-white/80">Gunakan rumus: <InlineMath math="c^2 = a^2 + b^2"/></p>
+                    <BlockMath math="c^2 = 3^2 + 4^2 = 9 + 16 = 25"/>
+                    <BlockMath math="c = \sqrt{25} = 5 \text{ cm}"/>
+                    <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                      <p className="font-body text-sm text-green-300 text-center font-bold">✅ Panjang sisi miring = <strong>5 cm</strong></p>
+                    </div>
                   </div>
                 </div>
+
+                {/* ─── Pertanyaan b ─── */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-yellow-600 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shrink-0">b</span>
+                    <p className="font-body text-sm text-white/90 font-semibold">Tentukan panjang sisi siku-siku yang belum diketahui!</p>
+                  </div>
+                  <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+                    <MiniTriangle
+                      a={5} b={12} c={13}
+                      labelA="a = ?" labelB="12 cm" labelC="13 cm"
+                      colorA="#facc15"
+                      question="Cari sisi siku-siku (a)"
+                    />
+                    <p className="font-body text-xs text-slate-300 uppercase tracking-wide font-bold mt-2">📋 Penyelesaian</p>
+                    <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="b = 12"/> cm, <InlineMath math="c = 13"/> cm. Gunakan:</p>
+                    <BlockMath math="a^2 = c^2 - b^2 = 13^2 - 12^2 = 169 - 144 = 25"/>
+                    <BlockMath math="a = \sqrt{25} = 5 \text{ cm}"/>
+                    <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
+                      <p className="font-body text-sm text-yellow-200 text-center font-bold">✅ Panjang sisi siku-siku = <strong>5 cm</strong></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ─── Pertanyaan c ─── */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-orange-600 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shrink-0">c</span>
+                    <p className="font-body text-sm text-white/90 font-semibold">Tentukan panjang sisi siku-siku yang belum diketahui!</p>
+                  </div>
+                  <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+                    <MiniTriangle
+                      a={8} b={15} c={17}
+                      labelA="8 cm" labelB="b = ?" labelC="17 cm"
+                      colorB="#facc15"
+                      question="Cari sisi siku-siku (b)"
+                    />
+                    <p className="font-body text-xs text-slate-300 uppercase tracking-wide font-bold mt-2">📋 Penyelesaian</p>
+                    <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="a = 8"/> cm, <InlineMath math="c = 17"/> cm. Gunakan:</p>
+                    <BlockMath math="b^2 = c^2 - a^2 = 17^2 - 8^2 = 289 - 64 = 225"/>
+                    <BlockMath math="b = \sqrt{225} = 15 \text{ cm}"/>
+                    <div className="bg-orange-900/30 border border-orange-500/40 rounded-lg p-3">
+                      <p className="font-body text-sm text-orange-200 text-center font-bold">✅ Panjang sisi siku-siku = <strong>15 cm</strong></p>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             )}
           </div>
 
-          {/* CONTOH 2 - SEDANG */}
+          {/* ══ CONTOH 2 — Jawaban berupa akar ══ */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh 2 — Menentukan Jenis Segitiga (Sedang)"/>
+            <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh 2 — Jawaban Berupa Bentuk Akar"/>
             {open.includes("contoh2") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
-                  <p className="font-body text-sm text-white/90">
-                    Seorang arsitek memiliki tiga batang besi dengan panjang <strong>8 m, 15 m, dan 17 m</strong>. Buktikan bahwa ketiga batang tersebut dapat membentuk segitiga siku-siku!
+                  <p className="font-body text-sm text-white/90 leading-relaxed">
+                    Sebuah segitiga siku-siku memiliki sisi tegak <strong>5 cm</strong> dan sisi alas <strong>7 cm</strong>.
+                    Tentukan panjang sisi miringnya! Nyatakan dalam bentuk akar paling sederhana.
                   </p>
                 </div>
+
+                {/* Gambar segitiga */}
+                <div className="bg-slate-900/50 rounded-xl border border-slate-700/60 p-3">
+                  <MiniTriangle
+                    a={5} b={7} c={0}
+                    labelA="5 cm" labelB="7 cm" labelC="c = ?"
+                    colorC="#facc15"
+                    question="Cari sisi miring (c)"
+                  />
+                </div>
+
                 <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Sisi terpanjang <InlineMath math="c = 17"/>, dua sisi lain <InlineMath math="a = 8"/> dan <InlineMath math="b = 15"/>.</p>
-                  <p className="font-body text-sm text-white/80">Periksa sisi kiri persamaan Pythagoras:</p>
-                  <BlockMath math="a^2 + b^2 = 8^2 + 15^2 = 64 + 225 = 289"/>
-                  <p className="font-body text-sm text-white/80">Periksa sisi kanan:</p>
-                  <BlockMath math="c^2 = 17^2 = 289"/>
-                  <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                    <BlockMath math="289 = 289 \checkmark"/>
-                    <p className="font-body text-sm text-yellow-200 text-center mt-1">
-                      ✅ Terbukti! Ketiga batang besi membentuk <strong>segitiga siku-siku</strong>. Arsitek dapat menggunakannya untuk membuat sudut 90° yang tepat.
+                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Penyelesaian</p>
+                  <p className="font-body text-sm text-white/80">
+                    Diketahui: <InlineMath math="a = 5"/> cm, <InlineMath math="b = 7"/> cm. Gunakan rumus Pythagoras:
+                  </p>
+                  <BlockMath math="c^2 = a^2 + b^2 = 5^2 + 7^2"/>
+                  <BlockMath math="c^2 = 25 + 49 = 74"/>
+                  <BlockMath math="c = \sqrt{74} \text{ cm}"/>
+                  <div className="bg-slate-700/50 rounded-lg p-3">
+                    <p className="font-body text-sm text-white/70 mb-1">
+                      💡 Apakah <InlineMath math="\sqrt{74}"/> bisa disederhanakan?
+                    </p>
+                    <p className="font-body text-sm text-white/70">
+                      Faktorisasi: <InlineMath math="74 = 2 \times 37"/>. Tidak ada faktor kuadrat sempurna, jadi <InlineMath math="\sqrt{74}"/> sudah dalam bentuk paling sederhana.
                     </p>
                   </div>
+                  <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
+                    <BlockMath math="\boxed{c = \sqrt{74} \approx 8{,}60 \text{ cm}}"/>
+                    <p className="font-body text-sm text-yellow-200 text-center mt-1">
+                      ✅ Panjang sisi miring = <strong><InlineMath math="\sqrt{74}"/></strong> cm ≈ <strong>8,60 cm</strong>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
+                  <p className="font-body text-sm text-cyan-200">
+                    🔑 <strong>Kunci:</strong> Tidak semua perhitungan Pythagoras menghasilkan bilangan bulat. Ketika hasilnya bukan kuadrat sempurna, nyatakan sebagai bentuk akar <InlineMath math="\sqrt{n}"/> dan sederhanakan semaksimal mungkin.
+                  </p>
                 </div>
               </div>
             )}
           </div>
 
-          {/* CONTOH 3 - SULIT */}
+          {/* ══ CONTOH 3 — Aplikasi: Kapal Laut ══ */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 3 — Buktikan dari Luas (Sulit)"/>
+            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 3 — Aplikasi: Pelayaran Kapal Laut"/>
             {open.includes("contoh3") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
-                  <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
-                  <p className="font-body text-sm text-white/90">
-                    Sebuah segitiga siku-siku mempunyai dua sisi siku-siku. Sisi pertama adalah <InlineMath math="(x+3)"/> cm dan sisi kedua adalah <InlineMath math="(x-1)"/> cm, dengan hipotenusa <InlineMath math="\sqrt{x^2 + 9x + 10}"/> cm. Tunjukkan bahwa persamaan ini berlaku sesuai Teorema Pythagoras!
+                  <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Aplikasi</p>
+                  <p className="font-body text-sm text-white/90 leading-relaxed">
+                    Sebuah kapal laut bertolak dari Pelabuhan A. Kapal tersebut berlayar ke arah <strong>Timur sejauh 8 km</strong>, lalu berbelok ke arah <strong>Utara sejauh 15 km</strong> hingga tiba di Pelabuhan B. Berapa jarak terpendek (lurus) dari Pelabuhan A ke Pelabuhan B?
                   </p>
                 </div>
+
+                {/* Ilustrasi jalur kapal */}
+                <div className="bg-slate-900/60 rounded-xl border border-slate-700/60 p-4">
+                  <svg viewBox="0 0 280 200" className="w-full max-w-sm mx-auto" aria-label="Ilustrasi jalur kapal laut">
+                    {/* laut */}
+                    <rect x="0" y="0" width="280" height="200" fill="#0f172a" rx="8"/>
+                    {/* grid ringan */}
+                    {[40,80,120,160,200,240].map(x => (
+                      <line key={x} x1={x} y1="10" x2={x} y2="190" stroke="#1e3a5f" strokeWidth="0.5"/>
+                    ))}
+                    {[40,80,120,160].map(y => (
+                      <line key={y} x1="10" y1={y} x2="270" y2={y} stroke="#1e3a5f" strokeWidth="0.5"/>
+                    ))}
+
+                    {/* Jalur Timur: A→C (horizontal ke kanan) */}
+                    <line x1="40" y1="160" x2="200" y2="160" stroke="#22c55e" strokeWidth="2.5" strokeDasharray="6 3"/>
+                    {/* Jalur Utara: C→B (vertikal ke atas) */}
+                    <line x1="200" y1="160" x2="200" y2="40" stroke="#3b82f6" strokeWidth="2.5" strokeDasharray="6 3"/>
+                    {/* Jarak lurus: A→B */}
+                    <line x1="40" y1="160" x2="200" y2="40" stroke="#f97316" strokeWidth="2.5"/>
+
+                    {/* Sudut siku-siku di C */}
+                    <polyline points="190,160 190,150 200,150" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+
+                    {/* Pelabuhan A */}
+                    <circle cx="40" cy="160" r="5" fill="#facc15"/>
+                    <text x="24" y="176" fill="#facc15" fontSize="12" fontWeight="bold">A</text>
+
+                    {/* Titik belok C */}
+                    <circle cx="200" cy="160" r="4" fill="#94a3b8"/>
+                    <text x="206" y="176" fill="#94a3b8" fontSize="11">C</text>
+
+                    {/* Pelabuhan B */}
+                    <circle cx="200" cy="40" r="5" fill="#facc15"/>
+                    <text x="208" y="38" fill="#facc15" fontSize="12" fontWeight="bold">B</text>
+
+                    {/* Label jarak */}
+                    <text x="112" y="175" fill="#4ade80" fontSize="11" fontWeight="bold" textAnchor="middle">8 km</text>
+                    <text x="216" y="104" fill="#60a5fa" fontSize="11" fontWeight="bold" textAnchor="start">15 km</text>
+                    <text x="100"  y="88"  fill="#fb923c" fontSize="11" fontWeight="bold" textAnchor="middle">d = ?</text>
+
+                    {/* Arah mata angin */}
+                    <text x="248" y="26" fill="#94a3b8" fontSize="9">U</text>
+                    <line x1="252" y1="28" x2="252" y2="50" stroke="#94a3b8" strokeWidth="1" markerEnd="url(#arrow)"/>
+                  </svg>
+                  <p className="text-center text-xs text-slate-400 mt-2 font-body">Jalur kapal: Timur 8 km → Utara 15 km. Jarak langsung A ke B = ?</p>
+                </div>
+
                 <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Gunakan <InlineMath math="a^2 + b^2 = c^2"/>. Substitusikan nilai-nilainya:</p>
-                  <BlockMath math="(x+3)^2 + (x-1)^2 = \left(\sqrt{x^2 + 9x + 10}\right)^2"/>
-                  <p className="font-body text-sm text-white/80">Ekspansi ruas kiri:</p>
-                  <BlockMath math="(x^2 + 6x + 9) + (x^2 - 2x + 1) = x^2 + 9x + 10"/>
-                  <BlockMath math="2x^2 + 4x + 10 = x^2 + 9x + 10"/>
-                  <p className="font-body text-sm text-white/80">Hmmm, ternyata ada selisih! Mari kita cek lebih teliti:</p>
-                  <BlockMath math="2x^2 + 4x + 10 \neq x^2 + 9x + 10 \text{ secara umum}"/>
-                  <div className="bg-orange-900/30 border border-orange-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-orange-200">
-                      💡 <strong>Pelajaran penting:</strong> Tidak semua ekspresi aljabar yang "terlihat mirip" membentuk Tripel Pythagoras yang valid. Verifikasi selalu diperlukan! Dalam soal ini, persamaan hanya valid untuk nilai <InlineMath math="x"/> tertentu, yaitu saat:
-                    </p>
-                    <div className="mt-2"><BlockMath math="x^2 - 5x = 0 \Rightarrow x(x-5) = 0 \Rightarrow x = 5"/></div>
-                    <p className="font-body text-sm text-orange-200 mt-2">
-                      Sehingga sisi-sisinya: <InlineMath math="a=8"/>, <InlineMath math="b=4"/>, <InlineMath math="c = \sqrt{80} = 4\sqrt{5}"/>. ✅
+                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Penyelesaian</p>
+                  <div className="space-y-1 font-body text-sm text-white/80">
+                    <p>• Jarak ke Timur (AC) = <InlineMath math="b = 8"/> km</p>
+                    <p>• Jarak ke Utara (CB) = <InlineMath math="a = 15"/> km</p>
+                    <p>• Sudut di C = 90° → berlaku Teorema Pythagoras</p>
+                  </div>
+                  <p className="font-body text-sm text-white/80 mt-1">Hitung jarak lurus A ke B:</p>
+                  <BlockMath math="d^2 = a^2 + b^2 = 15^2 + 8^2"/>
+                  <BlockMath math="d^2 = 225 + 64 = 289"/>
+                  <BlockMath math="d = \sqrt{289} = 17 \text{ km}"/>
+                  <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
+                    <BlockMath math="\boxed{d = 17 \text{ km}}"/>
+                    <p className="font-body text-sm text-red-200 text-center mt-1">
+                      ✅ Jarak terpendek dari Pelabuhan A ke Pelabuhan B adalah <strong>17 km</strong>.
                     </p>
                   </div>
+                </div>
+
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
+                  <p className="font-body text-sm text-cyan-200">
+                    🚢 <strong>Pesan:</strong> Teorema Pythagoras sangat berguna dalam navigasi pelayaran dan penerbangan untuk menghitung jarak terpendek antar dua titik ketika rute aktual membentuk sudut siku-siku.
+                  </p>
                 </div>
               </div>
             )}
@@ -388,7 +577,8 @@ const PembuktianPage = () => {
                   <p className="font-body text-sm text-white/80">• Teorema Pythagoras berlaku di <strong className="text-cyan-300">setiap segitiga siku-siku</strong>.</p>
                   <p className="font-body text-sm text-white/80">• Rumus: <InlineMath math="a^2 + b^2 = c^2"/> di mana <InlineMath math="c"/> adalah hipotenusa.</p>
                   <p className="font-body text-sm text-white/80">• Pembuktian dapat dilakukan secara visual dengan <strong className="text-yellow-300">metode susunan persegi</strong>.</p>
-                  <p className="font-body text-sm text-white/80">• Untuk mengecek apakah segitiga siku-siku, substitusikan ketiga sisi ke rumus dan periksa kesamaannya.</p>
+                  <p className="font-body text-sm text-white/80">• Jawaban bisa berupa bilangan bulat <strong>atau</strong> bentuk akar <InlineMath math="\sqrt{n}"/>.</p>
+                  <p className="font-body text-sm text-white/80">• Teorema ini digunakan dalam navigasi, arsitektur, dan kehidupan sehari-hari.</p>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
@@ -404,8 +594,6 @@ const PembuktianPage = () => {
             <SectionHeader id="kuadrat" icon={<Target className="w-5 h-5"/>} iconColor="text-yellow-400" title="⚡ Hafal Bilangan Kuadrat 1–30"/>
             {open.includes("kuadrat") && (
               <div className="px-5 pb-5 space-y-4">
-
-                {/* Mengapa penting */}
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm font-bold text-yellow-300">🎯 Mengapa Harus Dihafal?</p>
                   <p className="font-body text-sm text-white/80">
@@ -420,7 +608,6 @@ const PembuktianPage = () => {
                   </p>
                 </div>
 
-                {/* Tabel 1–10 */}
                 <div className="space-y-1">
                   <p className="font-body text-xs font-bold text-sky-300 mb-2">🔵 Kelompok 1 — Bilangan 1 sampai 10</p>
                   <div className="grid grid-cols-5 gap-1.5">
@@ -433,7 +620,6 @@ const PembuktianPage = () => {
                   </div>
                 </div>
 
-                {/* Tabel 11–20 */}
                 <div className="space-y-1">
                   <p className="font-body text-xs font-bold text-emerald-300 mb-2">🟢 Kelompok 2 — Bilangan 11 sampai 20</p>
                   <div className="grid grid-cols-5 gap-1.5">
@@ -446,7 +632,6 @@ const PembuktianPage = () => {
                   </div>
                 </div>
 
-                {/* Tabel 21–30 */}
                 <div className="space-y-1">
                   <p className="font-body text-xs font-bold text-orange-300 mb-2">🟠 Kelompok 3 — Bilangan 21 sampai 30</p>
                   <div className="grid grid-cols-5 gap-1.5">
@@ -459,7 +644,6 @@ const PembuktianPage = () => {
                   </div>
                 </div>
 
-                {/* Pola menarik */}
                 <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm font-bold text-violet-300">🔍 Pola Menarik Bilangan Kuadrat</p>
                   <ul className="space-y-1.5 font-body text-sm text-white/80">
@@ -475,7 +659,6 @@ const PembuktianPage = () => {
                     🚀 <strong>Tips Hafal Cepat:</strong> Mulai dari kelompok 1 (1–10), hafalkan dulu sampai lancar. Lanjut kelompok 2 (11–20), perhatikan polanya. Kelompok 3 (21–30) lebih mudah jika kamu sudah paham pola selisihnya.
                   </p>
                 </div>
-
               </div>
             )}
           </div>
