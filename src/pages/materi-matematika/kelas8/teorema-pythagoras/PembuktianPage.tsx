@@ -17,64 +17,117 @@ import PythagorasSquaresAnimation from "@/components/PythagorasSquaresAnimation"
     P1=(100,20) P2=(180,80) P3=(120,160) P4=(40,100)
 */
 const PembuktianSVG = () => (
-  <svg viewBox="0 0 350 205" className="w-full max-w-lg mx-auto my-4" aria-label="Pembuktian Teorema Pythagoras">
+  <svg viewBox="0 0 440 238" className="w-full max-w-2xl mx-auto my-2" aria-label="Pembuktian Teorema Pythagoras - Metode Persegi">
     <defs>
       <style>{`
-        @keyframes fadeLabel{0%,100%{opacity:1;}50%{opacity:0.4;}}
-        .lbl-anim{animation:fadeLabel 2.5s ease-in-out infinite;}
+        @keyframes lbl-pulse{0%,100%{opacity:1;}50%{opacity:0.45;}}
+        @keyframes c2-glow{0%,100%{opacity:1;}50%{opacity:0.6;}}
+        .lbl-anim{animation:lbl-pulse 2.8s ease-in-out infinite;}
+        .c2-anim{animation:c2-glow 2s ease-in-out infinite;}
       `}</style>
+      <filter id="psv-glow">
+        <feGaussianBlur stdDeviation="3" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="psv-glow-lg">
+        <feGaussianBlur stdDeviation="5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
     </defs>
 
-    {/* ── Outer big square (side = a+b = 140) ── */}
-    <rect x="40" y="20" width="140" height="140" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="6 3"/>
+    {/* ══ FIGURE AREA (left half) ══ */}
 
-    {/* ── 4 right triangles ── */}
-    {/* Top-left: right angle at (40,20), legs a=60 right & b=80 down */}
-    <polygon points="40,20 100,20 40,100" fill="#3b82f6" fillOpacity="0.75" stroke="#60a5fa" strokeWidth="1.5"/>
-    {/* Top-right: right angle at (180,20), legs b=80 left & a=60 down */}
-    <polygon points="180,20 100,20 180,80" fill="#22c55e" fillOpacity="0.75" stroke="#4ade80" strokeWidth="1.5"/>
-    {/* Bottom-right: right angle at (180,160), legs a=60 up & b=80 left */}
-    <polygon points="180,160 180,80 120,160" fill="#f97316" fillOpacity="0.75" stroke="#fb923c" strokeWidth="1.5"/>
-    {/* Bottom-left: right angle at (40,160), legs b=80 up & a=60 right */}
-    <polygon points="40,160 40,100 120,160" fill="#a855f7" fillOpacity="0.75" stroke="#c084fc" strokeWidth="1.5"/>
+    {/* Outer big square  (a+b)×(a+b) — dashed border */}
+    <rect x="35" y="25" width="154" height="154"
+      fill="rgba(15,23,42,0.5)" stroke="rgba(148,163,184,0.5)" strokeWidth="1.5" strokeDasharray="7 3"/>
 
-    {/* ── Inner square (all sides = c = 100) ── */}
-    <polygon points="100,20 180,80 120,160 40,100" fill="#fef08a" fillOpacity="0.22" stroke="#eab308" strokeWidth="2.5"/>
+    {/* 4 triangles  a=66px  b=88px  (scale=22, triangle 3-4-5) */}
+    {/* T1 blue   — top-left,   right angle at (35,25) */}
+    <polygon points="35,25 123,25 35,91"   fill="#3b82f6" fillOpacity="0.72" stroke="#60a5fa" strokeWidth="1.5"/>
+    {/* T2 green  — top-right,  right angle at (189,25) */}
+    <polygon points="189,25 189,113 123,25" fill="#22c55e" fillOpacity="0.72" stroke="#4ade80" strokeWidth="1.5"/>
+    {/* T3 orange — bot-right,  right angle at (189,179) */}
+    <polygon points="189,179 101,179 189,113" fill="#f97316" fillOpacity="0.72" stroke="#fb923c" strokeWidth="1.5"/>
+    {/* T4 purple — bot-left,   right angle at (35,179) */}
+    <polygon points="35,179 35,91 101,179"  fill="#a855f7" fillOpacity="0.72" stroke="#c084fc" strokeWidth="1.5"/>
 
-    {/* ── Side labels on outer square edges ── */}
-    {/* Top edge: a (40→100) and b (100→180) */}
-    <text x="70"  y="14" fill="#60a5fa" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
-    <text x="140" y="14" fill="#4ade80" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
-    {/* Right edge: a (20→80) and b (80→160) */}
-    <text x="191" y="54"  fill="#4ade80" fontSize="13" fontWeight="bold" textAnchor="start" className="lbl-anim">a</text>
-    <text x="191" y="124" fill="#fb923c" fontSize="13" fontWeight="bold" textAnchor="start" className="lbl-anim">b</text>
-    {/* Bottom edge: b (40→120) and a (120→180) */}
-    <text x="80"  y="178" fill="#c084fc" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
-    <text x="150" y="178" fill="#fb923c" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
-    {/* Left edge: b (20→100) and a (100→160) */}
-    <text x="28" y="64"  fill="#60a5fa" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
-    <text x="28" y="134" fill="#c084fc" fontSize="13" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
+    {/* Inner c² square — red, glowing */}
+    <polygon points="123,25 189,113 101,179 35,91"
+      fill="rgba(239,68,68,0.18)" stroke="#ef4444" strokeWidth="2.5"
+      filter="url(#psv-glow)" className="c2-anim"/>
+    <text x="113" y="105" textAnchor="middle"
+      fill="rgba(252,165,165,0.9)" fontSize="15" fontWeight="bold" fontFamily="monospace"
+      filter="url(#psv-glow)" className="c2-anim">c²</text>
+    <text x="158" y="63" fill="#fca5a5" fontSize="12" fontWeight="bold" className="lbl-anim" filter="url(#psv-glow)">c</text>
 
-    {/* ── c label on one side of inner square ── */}
-    <text x="145" y="46" fill="#eab308" fontSize="13" fontWeight="bold" className="lbl-anim">c</text>
+    {/* Right-angle marks at each outer corner */}
+    <polyline points="35,33 43,33 43,25"   fill="none" stroke="#94a3b8" strokeWidth="1" opacity="0.55"/>
+    <polyline points="181,25 181,33 189,33" fill="none" stroke="#94a3b8" strokeWidth="1" opacity="0.55"/>
+    <polyline points="189,171 181,171 181,179" fill="none" stroke="#94a3b8" strokeWidth="1" opacity="0.55"/>
+    <polyline points="43,179 43,171 35,171"  fill="none" stroke="#94a3b8" strokeWidth="1" opacity="0.55"/>
 
-    {/* ── Right angle marks at outer corners ── */}
-    <polyline points="40,28 48,28 48,20"   fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
-    <polyline points="172,20 172,28 180,28" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
-    <polyline points="180,152 172,152 172,160" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
-    <polyline points="48,160 48,152 40,152"  fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
+    {/* Edge labels — a = blue, b = green (consistent throughout) */}
+    {/* Top:    b (T1, 35→123)  then  a (T2, 123→189) */}
+    <text x="79"  y="18" fill="#86efac" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
+    <text x="156" y="18" fill="#93c5fd" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
+    {/* Right:  b (T2, 25→113) then  a (T3, 113→179) */}
+    <text x="196" y="74"  fill="#86efac" fontSize="12" fontWeight="bold" className="lbl-anim">b</text>
+    <text x="196" y="151" fill="#93c5fd" fontSize="12" fontWeight="bold" className="lbl-anim">a</text>
+    {/* Bottom: a (T4, 35→101) then  b (T3, 101→189) */}
+    <text x="68"  y="194" fill="#93c5fd" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
+    <text x="145" y="194" fill="#86efac" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
+    {/* Left:   a (T1, 25→91)  then  b (T4, 91→179) */}
+    <text x="27"  y="62"  fill="#93c5fd" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">a</text>
+    <text x="27"  y="140" fill="#86efac" fontSize="12" fontWeight="bold" textAnchor="middle" className="lbl-anim">b</text>
 
-    {/* ── Divider ── */}
-    <line x1="212" y1="18" x2="212" y2="182" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
+    {/* a+b top dimension guide */}
+    <line x1="35" y1="12" x2="189" y2="12" stroke="rgba(100,116,139,0.55)" strokeWidth="1"/>
+    <line x1="35"  y1="8" x2="35"  y2="16" stroke="rgba(100,116,139,0.55)" strokeWidth="1.5"/>
+    <line x1="189" y1="8" x2="189" y2="16" stroke="rgba(100,116,139,0.55)" strokeWidth="1.5"/>
+    <text x="112" y="8" textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace">a + b</text>
 
-    {/* ── Explanation panel ── */}
-    <text x="220" y="34"  fill="#94a3b8" fontSize="10" fontFamily="monospace">Luas persegi besar:</text>
-    <text x="220" y="49"  fill="#eab308" fontSize="10" fontFamily="monospace" fontWeight="bold">= (a + b)²</text>
-    <text x="220" y="72"  fill="#94a3b8" fontSize="10" fontFamily="monospace">= 4 segitiga +</text>
-    <text x="220" y="85"  fill="#94a3b8" fontSize="10" fontFamily="monospace">  persegi tengah</text>
-    <text x="220" y="108" fill="#94a3b8" fontSize="10" fontFamily="monospace">4 × ½ab + c²</text>
-    <text x="220" y="124" fill="#94a3b8" fontSize="10" fontFamily="monospace">= 2ab + c²</text>
-    <text x="220" y="152" fill="#eab308" fontSize="11" fontFamily="monospace" fontWeight="bold">∴ a² + b² = c²</text>
+    {/* ══ DIVIDER ══ */}
+    <line x1="206" y1="10" x2="206" y2="228" stroke="rgba(51,65,85,0.9)" strokeWidth="1" strokeDasharray="4 2"/>
+
+    {/* ══ FORMULA PANEL (right half) ══ */}
+    <rect x="212" y="12" width="222" height="218" rx="10"
+      fill="rgba(15,23,42,0.88)" stroke="rgba(51,65,85,0.8)" strokeWidth="1"/>
+
+    {/* Panel title */}
+    <text x="323" y="30" textAnchor="middle" fill="#64748b" fontSize="9.5" fontWeight="bold" fontFamily="monospace" letterSpacing="0.8">PENURUNAN RUMUS</text>
+    <line x1="219" y1="35" x2="427" y2="35" stroke="rgba(51,65,85,0.8)" strokeWidth="1"/>
+
+    {/* ── Cara 1 ── */}
+    <rect x="218" y="39" width="216" height="42" rx="6"
+      fill="rgba(234,179,8,0.1)" stroke="rgba(234,179,8,0.35)" strokeWidth="1"/>
+    <text x="226" y="53" fill="#fbbf24" fontSize="9.5" fontWeight="bold" fontFamily="monospace">🟡 Cara 1 — rumus persegi (a+b)</text>
+    <text x="226" y="68" fill="#fde68a" fontSize="11.5" fontWeight="bold" fontFamily="monospace">(a+b)² = a² + 2ab + b²</text>
+
+    {/* equal sign */}
+    <text x="323" y="94" textAnchor="middle" fill="#475569" fontSize="13" fontWeight="bold" fontFamily="monospace">=</text>
+
+    {/* ── Cara 2 ── */}
+    <rect x="218" y="98" width="216" height="42" rx="6"
+      fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.35)" strokeWidth="1"/>
+    <text x="226" y="112" fill="#60a5fa" fontSize="9.5" fontWeight="bold" fontFamily="monospace">🔵 Cara 2 — 4 segitiga + c²</text>
+    <text x="226" y="127" fill="#93c5fd" fontSize="11.5" fontWeight="bold" fontFamily="monospace">4×½ab + c² = 2ab + c²</text>
+
+    {/* ── Cancellation arrow ── */}
+    <text x="323" y="153" textAnchor="middle" fill="#64748b" fontSize="9" fontFamily="monospace">↓ samakan → kurangi 2ab</text>
+    <line x1="218" y1="157" x2="434" y2="157" stroke="rgba(71,85,105,0.6)" strokeWidth="1" strokeDasharray="3 2"/>
+
+    {/* cancellation step */}
+    <text x="226" y="171" fill="#94a3b8" fontSize="10.5" fontFamily="monospace">a² + 2ab + b² = 2ab + c²</text>
+    <text x="226" y="183" fill="#475569" fontSize="9"   fontFamily="monospace">    ─────       ─────</text>
+    <text x="226" y="193" fill="#64748b" fontSize="9"   fontFamily="monospace">    − 2ab        − 2ab</text>
+
+    {/* ── Result ── */}
+    <rect x="218" y="198" width="216" height="26" rx="6"
+      fill="rgba(239,68,68,0.18)" stroke="rgba(239,68,68,0.7)" strokeWidth="1.8"
+      filter="url(#psv-glow-lg)" className="c2-anim"/>
+    <text x="323" y="216" textAnchor="middle"
+      fill="#fca5a5" fontSize="13" fontWeight="bold" fontFamily="monospace"
+      filter="url(#psv-glow)" className="c2-anim">∴ a² + b² = c²  ✓</text>
   </svg>
 );
 
@@ -415,62 +468,80 @@ const PembuktianPage = () => {
             <SectionHeader id="pembuktian" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Pembuktian Visual: Metode Persegi"/>
             {open.includes("pembuktian") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ringkasan Intisari</p>
+
+                {/* Intro */}
+                <div className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ide Utama Pembuktian</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Teorema Pythagoras dapat dibuktikan dengan <strong className="text-cyan-300">menyusun empat segitiga siku-siku yang identik</strong> di dalam sebuah persegi besar. Luas persegi besar bisa dihitung dengan dua cara berbeda — dan keduanya harus sama. Dari sini, kita membuktikan bahwa <InlineMath math="a^2 + b^2 = c^2"/>.
+                    Susun <strong className="text-cyan-300">4 segitiga siku-siku identik</strong> di dalam persegi besar bersisi (a+b).
+                    Hitung luasnya dengan <strong className="text-yellow-300">dua cara berbeda</strong> — karena hasilnya harus sama,
+                    kita buktikan bahwa <InlineMath math="a^2 + b^2 = c^2"/>.
                   </p>
                 </div>
 
-                {/* Fixed square SVG */}
-                <div className="bg-slate-900/50 rounded-xl p-3 border border-slate-700/60">
+                {/* SVG diagram */}
+                <div className="bg-slate-900/60 rounded-xl p-3 border border-slate-700/50">
                   <p className="text-center text-xs text-slate-400 mb-1 font-body">
-                    4 segitiga siku-siku identik (biru, hijau, oranye, ungu) membentuk persegi tengah bersisi <strong className="text-yellow-300">c</strong>
+                    4 segitiga identik (biru · hijau · oranye · ungu) + persegi <span className="text-red-400 font-bold">c²</span> merah di tengah
                   </p>
                   <PembuktianSVG/>
                 </div>
 
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Langkah-Langkah Pembuktian</p>
-                  <div className="space-y-3">
-                    <div className="flex gap-3">
-                      <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">1</span>
-                      <div>
-                        <p className="font-body text-sm text-white/80">Buat persegi besar dengan panjang sisi <InlineMath math="(a + b)"/>. Luasnya:</p>
-                        <div className="mt-1"><BlockMath math="L_{\text{besar}} = (a+b)^2 = a^2 + 2ab + b^2"/></div>
+                {/* Derivation flow */}
+                <div className="space-y-3">
+                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wider text-center">⚖️ Dua Cara Menghitung Luas Persegi Besar</p>
+
+                  {/* Two method cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
+                    <div className="bg-yellow-900/25 border border-yellow-500/40 rounded-xl p-4 space-y-2">
+                      <p className="text-yellow-300 text-xs font-bold uppercase tracking-wide">🟡 Cara 1 — Rumus Ekspansi</p>
+                      <p className="text-white/60 text-xs font-body">Persegi besar bersisi (a+b):</p>
+                      <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                        <BlockMath math="(a+b)^2 = a^2 + 2ab + b^2"/>
                       </div>
                     </div>
-                    <div className="flex gap-3">
-                      <span className="bg-green-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">2</span>
-                      <div>
-                        <p className="font-body text-sm text-white/80">Di dalamnya, susun 4 segitiga siku-siku (kaki <InlineMath math="a"/> dan <InlineMath math="b"/>) sehingga membentuk <strong className="text-yellow-300">persegi sejati bersisi c</strong> di tengah. Total luas 4 segitiga:</p>
-                        <div className="mt-1"><BlockMath math="L_{4\triangle} = 4 \times \tfrac{1}{2}ab = 2ab"/></div>
-                      </div>
-                    </div>
-                    <div className="flex gap-3">
-                      <span className="bg-orange-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">3</span>
-                      <div>
-                        <p className="font-body text-sm text-white/80">Luas persegi tengah (bersisi <InlineMath math="c"/>) adalah <InlineMath math="c^2"/>. Jadi, luas persegi besar bisa juga ditulis:</p>
-                        <div className="mt-1"><BlockMath math="L_{\text{besar}} = 2ab + c^2"/></div>
-                      </div>
-                    </div>
-                    <div className="flex gap-3">
-                      <span className="bg-yellow-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">4</span>
-                      <div>
-                        <p className="font-body text-sm text-white/80">Samakan dua ekspresi luas persegi besar:</p>
-                        <div className="mt-1"><BlockMath math="a^2 + 2ab + b^2 = 2ab + c^2"/></div>
-                        <p className="font-body text-sm text-white/80 mt-1">Kurangi kedua ruas dengan <InlineMath math="2ab"/>:</p>
-                        <div className="mt-1 bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-2">
-                          <BlockMath math="\boxed{a^2 + b^2 = c^2}"/>
-                        </div>
+
+                    <div className="text-3xl font-bold text-slate-500 self-center text-center hidden sm:block">=</div>
+
+                    <div className="bg-blue-900/25 border border-blue-500/40 rounded-xl p-4 space-y-2">
+                      <p className="text-blue-300 text-xs font-bold uppercase tracking-wide">🔵 Cara 2 — Komponen Dalam</p>
+                      <p className="text-white/60 text-xs font-body">4 segitiga + persegi merah c²:</p>
+                      <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                        <BlockMath math="4 \cdot \tfrac{1}{2}ab + c^2 = 2ab + c^2"/>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-green-200">
-                    ✅ <strong>Terbukti!</strong> Dengan cara menyamakan luas dari dua perspektif berbeda, kita membuktikan bahwa di setiap segitiga siku-siku, <strong className="text-yellow-300">kuadrat sisi miring = jumlah kuadrat dua sisi lainnya</strong>.
-                  </p>
+
+                  <div className="sm:hidden text-center text-slate-500 text-2xl font-bold">=</div>
+
+                  {/* Divider with label */}
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-px bg-slate-700/70"/>
+                    <p className="text-slate-400 text-xs font-body whitespace-nowrap px-2">↓ Samakan keduanya, lalu kurangi 2ab di kedua ruas</p>
+                    <div className="flex-1 h-px bg-slate-700/70"/>
+                  </div>
+
+                  {/* Cancellation step */}
+                  <div className="bg-slate-800/60 border border-slate-600/50 rounded-xl p-4">
+                    <p className="text-slate-400 text-xs font-body mb-2">Dari persamaan kedua cara:</p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="a^2 + \cancel{2ab} + b^2 = \cancel{2ab} + c^2"/>
+                    </div>
+                  </div>
+
+                  {/* Final result */}
+                  <div
+                    className="bg-gradient-to-r from-red-900/40 via-rose-900/30 to-red-900/40 border-2 border-red-500/60 rounded-xl p-5 text-center space-y-2"
+                    style={{boxShadow: '0 0 28px rgba(239,68,68,0.22), inset 0 0 18px rgba(239,68,68,0.07)'}}
+                  >
+                    <p className="text-red-300 text-xs font-bold uppercase tracking-wider">✅ Teorema Pythagoras — Terbukti!</p>
+                    <div className="bg-slate-900/70 rounded-xl px-4 py-1">
+                      <BlockMath math="\boxed{a^2 + b^2 = c^2}"/>
+                    </div>
+                    <p className="text-white/55 text-xs font-body">
+                      Berlaku di <strong className="text-white/75">setiap</strong> segitiga siku-siku tanpa terkecuali.
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
