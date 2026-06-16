@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { InlineMath, BlockMath } from "react-katex";
 
 /* ─── Grid config ─────────────────────────────────────────── */
@@ -55,24 +55,50 @@ function numStr(v: number): string {
 export default function GradienDuaTitikInteraktif() {
   const [p1, setP1] = useState<[number, number]>([-3, -1]);
   const [p2, setP2] = useState<[number, number]>([3, 3]);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const dragging = useRef<"p1" | "p2" | null>(null);
+  const svgRef    = useRef<SVGSVGElement>(null);
+  const dragging  = useRef<"p1" | "p2" | null>(null);
 
-  const getMathPos = (clientX: number, clientY: number): [number, number] => {
+  const getMathPos = useCallback((clientX: number, clientY: number): [number, number] => {
     const svg = svgRef.current;
     if (!svg) return [0, 0];
     const rect = svg.getBoundingClientRect();
     const sx = (clientX - rect.left) * (W / rect.width);
     const sy = (clientY - rect.top)  * (H / rect.height);
     return toMath(sx, sy);
-  };
+  }, []);
 
-  const onMove = (clientX: number, clientY: number) => {
-    if (!dragging.current) return;
-    const pos = getMathPos(clientX, clientY);
-    if (dragging.current === "p1") setP1(pos);
-    else setP2(pos);
-  };
+  /* Attach move/up listeners on WINDOW so drag never breaks
+     when the cursor leaves the SVG boundary                  */
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      if (!dragging.current) return;
+      const pos = getMathPos(e.clientX, e.clientY);
+      if (dragging.current === "p1") setP1(pos);
+      else setP2(pos);
+    };
+    const onMouseUp = () => { dragging.current = null; };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!dragging.current) return;
+      e.preventDefault();
+      const t = e.touches[0];
+      const pos = getMathPos(t.clientX, t.clientY);
+      if (dragging.current === "p1") setP1(pos);
+      else setP2(pos);
+    };
+    const onTouchEnd = () => { dragging.current = null; };
+
+    window.addEventListener("mousemove",  onMouseMove);
+    window.addEventListener("mouseup",    onMouseUp);
+    window.addEventListener("touchmove",  onTouchMove, { passive: false });
+    window.addEventListener("touchend",   onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove",  onMouseMove);
+      window.removeEventListener("mouseup",    onMouseUp);
+      window.removeEventListener("touchmove",  onTouchMove);
+      window.removeEventListener("touchend",   onTouchEnd);
+    };
+  }, [getMathPos]);
 
   const [x1, y1] = p1;
   const [x2, y2] = p2;
@@ -133,11 +159,6 @@ export default function GradienDuaTitikInteraktif() {
           userSelect: "none",
           touchAction: "none",
         }}
-        onMouseMove={e => onMove(e.clientX, e.clientY)}
-        onMouseUp={() => { dragging.current = null; }}
-        onMouseLeave={() => { dragging.current = null; }}
-        onTouchMove={e => { e.preventDefault(); onMove(e.touches[0].clientX, e.touches[0].clientY); }}
-        onTouchEnd={() => { dragging.current = null; }}
       >
         {/* Minor grid */}
         {Array.from({ length: COLS + 1 }, (_, i) => (
