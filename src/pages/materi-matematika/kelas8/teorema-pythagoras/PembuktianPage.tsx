@@ -375,12 +375,12 @@ const PembuktianPage = () => {
             <p className="text-center text-white/50 text-xs mt-2 font-body">
               oleh{" "}
               <a
-                href="https://www.youtube.com/watch?v=vbG_YBTiN38"
+                href="https://www.youtube.com/watch?v=COkhrDbNcuA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors"
               >
-                Elyarch Ltd
+                Beau Janzen
               </a>
             </p>
           </div>
