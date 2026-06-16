@@ -38,7 +38,7 @@ const CoordSys = ({ children, label = "", w = W, h = H }: { children?: React.Rea
 const GradienPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "definisi", "animasi", "duatitik", "persamaan", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "definisi", "tabelgradien", "animasi", "duatitik", "persamaan", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
@@ -161,6 +161,40 @@ const GradienPage = () => {
                   </div>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* TABEL RINGKASAN NILAI GRADIEN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SH id="tabelgradien" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-amber-400" title="📊 Tabel Ringkasan Nilai Gradien" />
+            {expandedSections.includes("tabelgradien") && (
+              <div className="px-5 pb-5">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs font-body border-collapse">
+                    <thead>
+                      <tr className="bg-cyan-900/40">
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Nilai m</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Arah Garis</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Semakin besar |m|</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        ["m > 0", "↗ Naik dari kiri ke kanan", "Semakin curam ke kanan"],
+                        ["m < 0", "↘ Turun dari kiri ke kanan", "Semakin curam ke kiri"],
+                        ["m = 0", "→ Horizontal (mendatar)", "Tidak berubah"],
+                        ["m tidak ada", "↕ Vertikal (x = konstanta)", "Tidak terdefinisi"],
+                      ].map(([v, a, s], i) => (
+                        <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
+                          <td className="border border-white/10 px-3 py-2 text-cyan-300 font-mono font-bold text-center">{v}</td>
+                          <td className="border border-white/10 px-3 py-2 text-white/70 text-center">{a}</td>
+                          <td className="border border-white/10 px-3 py-2 text-white/60 text-center">{s}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </div>
