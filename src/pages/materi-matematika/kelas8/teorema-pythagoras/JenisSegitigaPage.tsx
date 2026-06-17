@@ -98,9 +98,184 @@ const TriangleTypeChecker = () => {
   );
 };
 
+/* ── Interactive draggable-angle triangle ── */
+const SegitigaInteraktif = () => {
+  const [theta, setTheta] = useState(90); // angle at apex C in degrees
+
+  // Fixed side lengths (a = b = 5 cm), pixel scale L
+  const a = 5, b = 5, L = 105;
+  const CX = 150, CY = 26; // apex vertex C (fixed)
+
+  const rad  = (theta * Math.PI) / 180;
+  const half = rad / 2;
+
+  // Base vertices (symmetric isoceles → same Y)
+  const AX = CX - L * Math.sin(half);
+  const AY = CY + L * Math.cos(half);
+  const BX = CX + L * Math.sin(half);
+  const BY = AY;
+
+  // Computed values
+  const cSqRaw = a*a + b*b - 2*a*b*Math.cos(rad);
+  const cSq    = +cSqRaw.toFixed(2);
+  const c      = +Math.sqrt(Math.max(0, cSqRaw)).toFixed(2);
+  const abSq   = a*a + b*b; // = 50, always fixed
+
+  // Triangle type
+  const diff = abSq - cSq;
+  const type  = Math.abs(diff) < 0.06 ? 'right' : diff > 0 ? 'acute' : 'obtuse';
+
+  const COL = {
+    acute:  { fill:'rgba(34,197,94,0.2)',  stroke:'#22c55e', text:'text-green-300',  bg:'bg-green-900/30',  bd:'border-green-500/40',  op:'>',  tag:'🔺 LANCIP',    desc:'Semua sudut < 90° — segitiga lancip', barFill:'rgba(34,197,94,0.7)'  },
+    right:  { fill:'rgba(59,130,246,0.2)', stroke:'#3b82f6', text:'text-blue-300',   bg:'bg-blue-900/30',   bd:'border-blue-500/40',   op:'=',  tag:'▪ SIKU-SIKU',  desc:'Tepat satu sudut = 90° — segitiga siku-siku', barFill:'rgba(59,130,246,0.7)'  },
+    obtuse: { fill:'rgba(249,115,22,0.2)', stroke:'#f97316', text:'text-orange-300', bg:'bg-orange-900/30', bd:'border-orange-500/40', op:'<',  tag:'▶ TUMPUL',     desc:'Ada sudut > 90° — segitiga tumpul', barFill:'rgba(249,115,22,0.7)'  },
+  }[type];
+
+  // Right-angle mark polyline at apex C (only shown when type=right)
+  const MK = 11;
+  const nAx = (AX - CX) / L, nAy = (AY - CY) / L;
+  const nBx = (BX - CX) / L, nBy = (BY - CY) / L;
+  const rmPts = [
+    `${(CX+MK*nAx).toFixed(1)},${(CY+MK*nAy).toFixed(1)}`,
+    `${(CX+MK*(nAx+nBx)).toFixed(1)},${(CY+MK*(nAy+nBy)).toFixed(1)}`,
+    `${(CX+MK*nBx).toFixed(1)},${(CY+MK*nBy).toFixed(1)}`,
+  ].join(' ');
+
+  // Angle arc at apex
+  const arcR = 22;
+  const arcPath = `M ${(CX-arcR*Math.sin(half)).toFixed(1)},${(CY+arcR*Math.cos(half)).toFixed(1)} A ${arcR} ${arcR} 0 0 1 ${(CX+arcR*Math.sin(half)).toFixed(1)},${(CY+arcR*Math.cos(half)).toFixed(1)}`;
+
+  // Bar chart (bottom-right of SVG, y=140→190)
+  const BASE_Y = 188, REF_H = 42;
+  const abBar = REF_H;                       // fixed: 50
+  const cBar  = Math.min((cSq / abSq) * REF_H, REF_H * 2.1); // dynamic
+
+  const SK = { stroke:'rgba(2,6,23,0.85)', strokeWidth:2.5, paintOrder:'stroke' as const };
+
+  return (
+    <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
+
+      {/* Preset buttons */}
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { label:'🔺 Lancip',    t:60,  cls:'bg-green-700/80 border-green-600' },
+          { label:'▪ Siku-siku', t:90,  cls:'bg-blue-700/80 border-blue-600'   },
+          { label:'▶ Tumpul',    t:120, cls:'bg-orange-700/80 border-orange-600'},
+        ].map(p => (
+          <button key={p.t} onClick={() => setTheta(p.t)}
+            className={`py-2 rounded-lg text-xs font-bold text-white border transition-all duration-200 cursor-pointer hover:brightness-125 ${p.cls} ${theta===p.t ? 'ring-2 ring-white/30 brightness-110' : 'opacity-75'}`}>
+            {p.label}
+          </button>
+        ))}
+      </div>
+
+      {/* SVG canvas */}
+      <svg viewBox="0 0 300 195" className="w-full">
+
+        {/* Triangle */}
+        <polygon
+          points={`${CX},${CY} ${AX.toFixed(1)},${AY.toFixed(1)} ${BX.toFixed(1)},${BY.toFixed(1)}`}
+          fill={COL.fill} stroke={COL.stroke} strokeWidth="2.2" strokeLinejoin="round"
+        />
+
+        {/* Angle arc + θ label at apex */}
+        <path d={arcPath} fill="none" stroke="#eab308" strokeWidth="1.8"/>
+        <text x={CX} y={CY + arcR + 14} textAnchor="middle"
+          fill="#eab308" fontSize="11" fontWeight="bold" fontFamily="sans-serif" {...SK}>
+          θ={theta}°
+        </text>
+
+        {/* Right-angle mark (only at 90°) */}
+        {type === 'right' && <polyline points={rmPts} fill="none" stroke="#94a3b8" strokeWidth="1.8"/>}
+
+        {/* Side labels */}
+        <text x={(CX+AX)/2-9} y={(CY+AY)/2} textAnchor="end"
+          fill="#60a5fa" fontSize="11" fontWeight="bold" fontFamily="sans-serif" {...SK}>a=5</text>
+        <text x={(CX+BX)/2+9} y={(CY+BY)/2} textAnchor="start"
+          fill="#4ade80" fontSize="11" fontWeight="bold" fontFamily="sans-serif" {...SK}>b=5</text>
+        <text x={(AX+BX)/2} y={Math.min(AY+17, 185)} textAnchor="middle"
+          fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="sans-serif" {...SK}>c={c}</text>
+
+        {/* Vertex dots */}
+        <circle cx={CX} cy={CY} r="4.5" fill={COL.stroke} opacity="0.9"/>
+        <circle cx={AX.toFixed(1)} cy={AY.toFixed(1)} r="4" fill="#60a5fa" opacity="0.8"/>
+        <circle cx={BX.toFixed(1)} cy={BY.toFixed(1)} r="4" fill="#4ade80" opacity="0.8"/>
+
+        {/* Vertex labels */}
+        <text x={CX} y={CY-9} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="sans-serif">C</text>
+        <text x={Math.max(AX-10, 2)} y={Math.min(AY+12, 192)} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">A</text>
+        <text x={Math.min(BX+3, 285)} y={Math.min(BY+12, 192)} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">B</text>
+
+        {/* ─── Bar chart: bottom-right corner ─── */}
+        {/* Base line */}
+        <line x1="224" y1={BASE_Y} x2="292" y2={BASE_Y} stroke="#475569" strokeWidth="1"/>
+        {/* Column headers */}
+        <text x="237" y="140" textAnchor="middle" fill="#64748b" fontSize="7.5" fontFamily="sans-serif">a²+b²</text>
+        <text x="270" y="140" textAnchor="middle" fill="#64748b" fontSize="7.5" fontFamily="sans-serif">c²</text>
+
+        {/* a²+b² bar (blue, fixed) */}
+        <rect x="224" y={BASE_Y - abBar} width="24" height={abBar} fill="rgba(59,130,246,0.55)" rx="2"/>
+        <text x="236" y={BASE_Y - abBar - 3} textAnchor="middle"
+          fill="#93c5fd" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">{abSq}</text>
+
+        {/* c² bar (dynamic color) */}
+        <rect x="256" y={BASE_Y - cBar} width="24" height={cBar} fill={COL.barFill} rx="2"/>
+        <text x="268" y={BASE_Y - cBar - 3} textAnchor="middle"
+          fill="#fdba74" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">{cSq}</text>
+
+        {/* Operator between bars */}
+        <text x="250" y={BASE_Y - Math.max(abBar, cBar)/2} textAnchor="middle"
+          fill={COL.stroke} fontSize="13" fontWeight="bold" fontFamily="monospace" {...SK}>
+          {COL.op}
+        </text>
+      </svg>
+
+      {/* Slider */}
+      <div className="space-y-2 px-1">
+        <div className="flex items-center justify-between">
+          <span className="font-body text-xs text-white/60">🔄 Ubah sudut di titik C (geser ke kiri/kanan):</span>
+          <span className={`text-sm font-bold px-2 py-0.5 rounded font-mono bg-slate-700/60 ${COL.text}`}>
+            θ = {theta}°
+          </span>
+        </div>
+        <input type="range" min="15" max="160" step="1" value={theta}
+          onChange={e => setTheta(+e.target.value)}
+          className="w-full cursor-pointer"
+          style={{ accentColor: COL.stroke }}
+        />
+        <div className="flex justify-between text-xs text-slate-500 px-1 font-mono">
+          <span>15° (lancip)</span><span>90° (siku-siku)</span><span>160° (tumpul)</span>
+        </div>
+      </div>
+
+      {/* Result panel */}
+      <div className={`${COL.bg} border ${COL.bd} rounded-xl p-4 space-y-3`}>
+        <p className={`font-mono text-base font-bold text-center ${COL.text}`}>{COL.tag}</p>
+        <div className="grid grid-cols-3 gap-2 text-center items-center">
+          <div className="bg-slate-900/60 rounded-lg p-2 space-y-1">
+            <p className="text-xs text-white/40">a² + b²</p>
+            <p className="text-blue-300 font-bold text-xl font-mono">{abSq}</p>
+            <p className="text-xs text-slate-500">(tetap)</p>
+          </div>
+          <div className="flex flex-col items-center gap-1">
+            <p className={`font-black text-3xl font-mono ${COL.text}`}>{COL.op}</p>
+            <p className="text-xs text-white/40 leading-tight text-center">{COL.op === '=' ? 'sama dengan' : COL.op === '>' ? 'lebih besar' : 'lebih kecil'}</p>
+          </div>
+          <div className="bg-slate-900/60 rounded-lg p-2 space-y-1">
+            <p className="text-xs text-white/40">c²</p>
+            <p className="text-orange-300 font-bold text-xl font-mono">{cSq}</p>
+            <p className="text-xs text-slate-500">(berubah)</p>
+          </div>
+        </div>
+        <p className="font-body text-xs text-white/60 text-center italic">{COL.desc}</p>
+      </div>
+    </div>
+  );
+};
+
 const JenisSegitigaPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro","jenis","contoh1","contoh2","contoh3","rangkuman"]);
+  const [open, setOpen] = useState<string[]>(["intro","interaktif","jenis","contoh1","contoh2","contoh3","rangkuman"]);
 
   const toggle = (id: string) => {
     playPopSound();
@@ -166,6 +341,21 @@ const JenisSegitigaPage = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* ANIMASI INTERAKTIF */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="interaktif" icon={<Target className="w-5 h-5"/>} iconColor="text-pink-400" title="🎮 Animasi Interaktif — Ubah Sudut, Lihat Jenisnya!"/>
+            {open.includes("interaktif") && (
+              <div className="px-5 pb-5 space-y-3">
+                <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg px-4 py-2">
+                  <p className="font-body text-xs text-pink-200">
+                    💡 Geser slider atau tekan tombol untuk mengubah sudut θ di titik C. Amati bagaimana nilai <strong>a²+b²</strong> dibandingkan <strong>c²</strong> berubah seiring jenis segitiga yang terbentuk!
+                  </p>
+                </div>
+                <SegitigaInteraktif/>
               </div>
             )}
           </div>
