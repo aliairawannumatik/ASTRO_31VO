@@ -12,7 +12,7 @@ const PiAnimationSVG = () => {
   useEffect(() => {
     let id: number;
     const start = performance.now();
-    const PERIOD = 10000;
+    const PERIOD = 13000;
     const loop = (now: number) => { setProg(((now - start) % PERIOD) / PERIOD); id = requestAnimationFrame(loop); };
     id = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(id);
@@ -22,134 +22,210 @@ const PiAnimationSVG = () => {
   const band  = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
   const cl    = (x: number) => Math.max(0, Math.min(1, x));
 
-  /* geometry — circle stays intact the whole time */
-  const R = 30, CX = 52, CY = 66;
-  const CIRC = 2 * Math.PI * R;   // ≈ 188.5
-  const D    = 60;                  // 2*R
-  const partial = CIRC - 3 * D;   // ≈ 8.5
+  /* ── Geometry ── */
+  const R    = 36;
+  const CX   = 68, CY = 78;
+  const CIRC = 2 * Math.PI * R;   // ≈ 226.2
+  const D    = 2 * R;              // 72
+  const PART = CIRC - 3 * D;      // ≈ 10.2  (0.14d)
 
-  /* rope + segment rows */
-  const RX = 14, ROPE_Y = 132, SEG_Y = 158;
+  const LINE_X = 14;
+  const LINE_Y = 152;
+  const SEG_Y  = 178;
 
-  /* timing */
-  const ropeP  = band(0.17, 0.50); // tali dibentangkan
-  const s1     = band(0.50, 0.62);
-  const s2     = band(0.59, 0.71);
-  const s3     = band(0.68, 0.80);
-  const s4     = band(0.77, 0.85);
-  const piLbl  = band(0.85, 0.97);
-  const fadeOut = prog > 0.97 ? 1 - cl((prog-0.97)/0.03) : 1;
+  /* ── Timing ── */
+  const drawCircle = band(0.02, 0.20);  // circle draws itself in
+  const drawDiam   = band(0.18, 0.35);  // diameter revealed from centre outward
+  const unroll     = band(0.35, 0.68);  // circumference peels off → horizontal line
+  const s1         = band(0.68, 0.77);
+  const s2         = band(0.75, 0.83);
+  const s3         = band(0.81, 0.89);
+  const s4         = band(0.87, 0.93);
+  const piLbl      = band(0.93, 0.98);
+  const fadeOut    = prog > 0.98 ? 1 - cl((prog-0.98)/0.02) : 1;
 
-  const ropeX1 = RX + CIRC * ropeP;
+  /* ── Circle stroke: draw in, then unroll away ──
+     Draw  : dasharray=[CIRC, big], offset = CIRC*(1-drawCircle)  → 0..CIRC → full circle appears
+     Unroll: dasharray=[CIRC*(1-u), big], offset = -CIRC*u        → remaining arc shrinks from top
+  */
+  const GAP   = CIRC + 200;
+  const cDash = drawCircle < 1 ? CIRC              : CIRC * (1 - unroll);
+  const cOff  = drawCircle < 1 ? CIRC*(1-drawCircle) : -CIRC * unroll;
+  const circleAlpha = drawCircle > 0 ? 1 : 0;
 
-  const phaseLabel =
-    prog < 0.17 ? '① Perhatikan diameter lingkaran' :
-    prog < 0.50 ? '② Tali sepanjang keliling dibentangkan...' :
-    prog < 0.85 ? '③ Bandingkan panjang tali dengan diameter' :
-                  '④ π = panjang tali ÷ diameter ≈ 3,14';
+  /* ── Travelling dot: follows drawing edge, then the unroll peel point ── */
+  const dotProg  = drawCircle < 1 ? drawCircle : unroll;
+  const dotAngle = -Math.PI / 2 + 2 * Math.PI * dotProg;
+  const dotX     = CX + R * Math.cos(dotAngle);
+  const dotY     = CY + R * Math.sin(dotAngle);
+  const showDot  = dotProg > 0.01 && dotProg < 0.995;
 
-  const SEGMENTS = [
-    { x0: RX,          len: D*s1,        color: '#22c55e', label: 'd' },
-    { x0: RX+D,        len: D*s2,        color: '#3b82f6', label: 'd' },
-    { x0: RX+2*D,      len: D*s3,        color: '#a855f7', label: 'd' },
-    { x0: RX+3*D,      len: partial*s4,  color: '#eab308', label: '0,14d', dashed: true },
+  /* ── Horizontal circumference line ── */
+  const lineLen  = CIRC * unroll;
+  const showLine = lineLen > 1;
+
+  /* ── Diameter segments below the line ── */
+  const SEGS = [
+    { x0: LINE_X,         len: D    * s1, color: '#22c55e', label: 'd',       dashed: false },
+    { x0: LINE_X + D,     len: D    * s2, color: '#3b82f6', label: 'd',       dashed: false },
+    { x0: LINE_X + 2*D,   len: D    * s3, color: '#a855f7', label: 'd',       dashed: false },
+    { x0: LINE_X + 3*D,   len: PART * s4, color: '#eab308', label: '≈0,14d',  dashed: true  },
   ];
 
-  /* small bobbing dot that travels around the circle while rope grows */
-  const dotAngle = -Math.PI/2 + 2*Math.PI * ropeP;
-  const dotX = CX + R * Math.cos(dotAngle);
-  const dotY = CY + R * Math.sin(dotAngle);
+  const phaseLabel =
+    drawCircle < 0.4  ? '① Lingkaran terbentuk...' :
+    drawDiam   < 0.7  ? '② Diameter terungkap dari pusat!' :
+    unroll     < 0.05 ? '③ Keliling siap dibentangkan...' :
+    unroll     < 0.99 ? `③ Keliling dibentangkan → ${(CIRC * unroll).toFixed(1)}` :
+    s4         < 0.9  ? '④ Bandingkan keliling dengan diameter!' :
+                        '⑤ π = Keliling ÷ Diameter ≈ 3,14';
 
   return (
     <div className="select-none">
-      <svg viewBox="0 0 310 200" className="w-full max-w-sm mx-auto my-2" aria-label="Animasi π" style={{ opacity: fadeOut }}>
+      <svg viewBox="0 0 310 218" className="w-full max-w-sm mx-auto my-2"
+        aria-label="Animasi keliling lingkaran terbongkar menjadi garis" style={{ opacity: fadeOut }}>
 
-        {/* ══ CIRCLE — always fully drawn ══ */}
-        <circle cx={CX} cy={CY} r={R} fill="rgba(6,182,212,0.13)" />
-        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#06b6d4" strokeWidth="2.5" />
-        <circle cx={CX} cy={CY} r="3" fill="#94a3b8" />
-
-        {/* Diameter line — always visible */}
-        <line x1={CX-R} y1={CY} x2={CX+R} y2={CY} stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
-        <text x={CX} y={CY-R-6} fill="#4ade80" fontSize="9.5" textAnchor="middle" fontFamily="sans-serif" fontWeight="bold">
-          d = 2r = {D}
-        </text>
-
-        {/* Jari-jari label kiri & kanan */}
-        <text x={CX-R/2} y={CY-4} fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="sans-serif">r</text>
-        <text x={CX+R/2} y={CY-4} fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="sans-serif">r</text>
-
-        {/* Dot traveling around circle while rope extends */}
-        {ropeP > 0 && ropeP < 1 && (
-          <circle cx={dotX} cy={dotY} r="4" fill="#fbbf24" opacity={0.9} />
+        {/* ── CIRCLE fill + stroke ── */}
+        {circleAlpha > 0 && (
+          <>
+            {/* fill fades out as circle unrolls */}
+            <circle cx={CX} cy={CY} r={R}
+              fill={`rgba(6,182,212,${0.13 * (1 - unroll)})`} />
+            {/* stroke: draw in then unroll */}
+            <circle cx={CX} cy={CY} r={R} fill="none"
+              stroke="#06b6d4" strokeWidth="2.8" strokeLinecap="round"
+              strokeDasharray={`${cDash} ${GAP}`}
+              strokeDashoffset={cOff}
+              transform={`rotate(-90 ${CX} ${CY})`} />
+            {/* centre dot */}
+            <circle cx={CX} cy={CY} r="3" fill="#94a3b8" />
+          </>
         )}
 
-        {/* ══ ROPE (tali) — separate row, grows left→right ══ */}
-        {ropeP > 0.01 && (
+        {/* ── DIAMETER: grows outward from centre ── */}
+        {drawDiam > 0 && (
           <>
-            {/* rope shadow / glow */}
-            <line x1={RX} y1={ROPE_Y} x2={ropeX1} y2={ROPE_Y}
-              stroke="rgba(251,191,36,0.18)" strokeWidth="8" strokeLinecap="round" />
-            {/* rope body */}
-            <line x1={RX} y1={ROPE_Y} x2={ropeX1} y2={ROPE_Y}
-              stroke="#d97706" strokeWidth="4" strokeLinecap="round" />
-            {/* rope highlight */}
-            <line x1={RX} y1={ROPE_Y-1} x2={ropeX1} y2={ROPE_Y-1}
-              stroke="rgba(254,215,105,0.5)" strokeWidth="1.5" strokeLinecap="round" />
-
-            {/* end caps */}
-            <line x1={RX}   y1={ROPE_Y-5} x2={RX}   y2={ROPE_Y+5} stroke="#d97706" strokeWidth="2" />
-            {ropeP > 0.97 && (
-              <line x1={ropeX1} y1={ROPE_Y-5} x2={ropeX1} y2={ROPE_Y+5} stroke="#d97706" strokeWidth="2" />
+            {/* left arm */}
+            <line x1={CX} y1={CY} x2={CX - R * drawDiam} y2={CY}
+              stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" />
+            {/* right arm */}
+            <line x1={CX} y1={CY} x2={CX + R * drawDiam} y2={CY}
+              stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" />
+            {/* endpoint dots */}
+            {drawDiam > 0.55 && (
+              <>
+                <circle cx={CX - R * drawDiam} cy={CY} r="3" fill="#22c55e" opacity={drawDiam} />
+                <circle cx={CX + R * drawDiam} cy={CY} r="3" fill="#22c55e" opacity={drawDiam} />
+              </>
             )}
+            {/* label */}
+            {drawDiam > 0.65 && (
+              <text x={CX} y={CY - R - 9} fill="#4ade80" fontSize="9" textAnchor="middle"
+                fontFamily="monospace" fontWeight="bold" opacity={drawDiam}>
+                d = 2r = {D}
+              </text>
+            )}
+            {/* r labels */}
+            {drawDiam > 0.85 && (
+              <>
+                <text x={CX - R/2} y={CY - 5} fill="#94a3b8" fontSize="7.5"
+                  textAnchor="middle" fontFamily="sans-serif" opacity={0.7}>r</text>
+                <text x={CX + R/2} y={CY - 5} fill="#94a3b8" fontSize="7.5"
+                  textAnchor="middle" fontFamily="sans-serif" opacity={0.7}>r</text>
+              </>
+            )}
+          </>
+        )}
 
-            {/* label above rope */}
-            <text x={(RX + ropeX1)/2} y={ROPE_Y-10} fill="#fbbf24" fontSize="9"
-              textAnchor="middle" fontFamily="sans-serif" fontWeight="bold">
-              tali (keliling) = {(CIRC * ropeP).toFixed(1)}
+        {/* ── TRAVELLING DOT (bright peel-point) ── */}
+        {showDot && (
+          <>
+            {/* glow */}
+            <circle cx={dotX} cy={dotY} r="7" fill="rgba(251,191,36,0.25)" />
+            {/* dot */}
+            <circle cx={dotX} cy={dotY} r="4.5" fill="#fbbf24" />
+          </>
+        )}
+
+        {/* ── HORIZONTAL LINE (keliling dibentangkan) ── */}
+        {showLine && (
+          <>
+            {/* outer glow */}
+            <line x1={LINE_X} y1={LINE_Y} x2={LINE_X + lineLen} y2={LINE_Y}
+              stroke="rgba(251,191,36,0.22)" strokeWidth="13" strokeLinecap="round" />
+            {/* body */}
+            <line x1={LINE_X} y1={LINE_Y} x2={LINE_X + lineLen} y2={LINE_Y}
+              stroke="#d97706" strokeWidth="5.5" strokeLinecap="round" />
+            {/* shine */}
+            <line x1={LINE_X} y1={LINE_Y - 2} x2={LINE_X + lineLen} y2={LINE_Y - 2}
+              stroke="rgba(254,215,105,0.55)" strokeWidth="1.8" strokeLinecap="round" />
+            {/* left end cap */}
+            <line x1={LINE_X} y1={LINE_Y - 7} x2={LINE_X} y2={LINE_Y + 7}
+              stroke="#d97706" strokeWidth="2.2" />
+            {/* right end cap — only when fully unrolled */}
+            {unroll > 0.97 && (
+              <line x1={LINE_X + CIRC} y1={LINE_Y - 7} x2={LINE_X + CIRC} y2={LINE_Y + 7}
+                stroke="#d97706" strokeWidth="2.2" />
+            )}
+            {/* label above line */}
+            <text x={(2 * LINE_X + lineLen) / 2} y={LINE_Y - 14} fill="#fbbf24" fontSize="9"
+              textAnchor="middle" fontFamily="monospace" fontWeight="bold">
+              Keliling = {(CIRC * unroll).toFixed(1)}
             </text>
           </>
         )}
 
-        {/* ══ DIAMETER SEGMENTS — appear below rope ══ */}
-        {SEGMENTS.map((seg, i) => seg.len > 0.5 && (
+        {/* ── DIAMETER SEGMENTS (appear below line) ── */}
+        {SEGS.map((seg, i) => seg.len > 0.5 && (
           <g key={i}>
-            <line x1={seg.x0} y1={SEG_Y} x2={seg.x0+seg.len} y2={SEG_Y}
+            <line x1={seg.x0} y1={SEG_Y} x2={seg.x0 + seg.len} y2={SEG_Y}
               stroke={seg.color} strokeWidth="3.5" strokeLinecap="round"
               strokeDasharray={seg.dashed ? '5 3' : undefined} />
-            <line x1={seg.x0}        y1={SEG_Y-4} x2={seg.x0}        y2={SEG_Y+4} stroke={seg.color} strokeWidth="1.5" />
-            {seg.len > (i < 3 ? D*0.85 : partial*0.85) && (
+            {/* left tick */}
+            <line x1={seg.x0} y1={SEG_Y - 5} x2={seg.x0} y2={SEG_Y + 5}
+              stroke={seg.color} strokeWidth="1.5" />
+            {seg.len > (i < 3 ? D*0.8 : PART*0.75) && (
               <>
-                <line x1={seg.x0+seg.len} y1={SEG_Y-4} x2={seg.x0+seg.len} y2={SEG_Y+4} stroke={seg.color} strokeWidth="1.5" />
-                <text x={seg.x0+seg.len/2} y={SEG_Y+13} fill={seg.color} fontSize="8.5"
-                  textAnchor="middle" fontFamily="sans-serif" fontWeight="bold">{seg.label}</text>
+                {/* right tick */}
+                <line x1={seg.x0 + seg.len} y1={SEG_Y - 5} x2={seg.x0 + seg.len} y2={SEG_Y + 5}
+                  stroke={seg.color} strokeWidth="1.5" />
+                {/* label */}
+                <text x={seg.x0 + seg.len / 2} y={SEG_Y + 14} fill={seg.color} fontSize="8"
+                  textAnchor="middle" fontFamily="monospace" fontWeight="bold">
+                  {seg.label}
+                </text>
               </>
             )}
           </g>
         ))}
 
-        {/* Brace verticals when both rows complete */}
+        {/* dotted connectors between line and segments */}
         {s4 > 0.9 && (
           <>
-            <line x1={RX}      y1={ROPE_Y+7} x2={RX}      y2={SEG_Y-6} stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
-            <line x1={RX+CIRC} y1={ROPE_Y+7} x2={RX+CIRC} y2={SEG_Y-6} stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1={LINE_X}        y1={LINE_Y + 9} x2={LINE_X}        y2={SEG_Y - 6}
+              stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1={LINE_X + CIRC} y1={LINE_Y + 9} x2={LINE_X + CIRC} y2={SEG_Y - 6}
+              stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
           </>
         )}
 
-        {/* ══ π CONCLUSION BOX ══ */}
+        {/* ── π CONCLUSION BOX ── */}
         {piLbl > 0 && (
           <g opacity={piLbl}>
-            <rect x={215} y={46} width={88} height={66} rx="8"
-              fill="rgba(168,85,247,0.18)" stroke="#a855f7" strokeWidth="1.5" />
-            <text x={259} y={66}  fill="#c084fc" fontSize="10"  textAnchor="middle" fontFamily="monospace" fontWeight="bold">π = tali ÷ d</text>
-            <text x={259} y={83}  fill="#fbbf24" fontSize="14"  textAnchor="middle" fontFamily="monospace" fontWeight="bold">≈ 3,14</text>
-            <text x={259} y={100} fill="#94a3b8" fontSize="9"   textAnchor="middle" fontFamily="sans-serif">= 22/7</text>
-            <text x={259} y={113} fill="#475569" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">selalu sama!</text>
+            <rect x={218} y={16} width={86} height={76} rx="9"
+              fill="rgba(168,85,247,0.20)" stroke="#a855f7" strokeWidth="1.5" />
+            <text x={261} y={38}  fill="#c084fc" fontSize="9.5" textAnchor="middle"
+              fontFamily="monospace" fontWeight="bold">π = K ÷ d</text>
+            <text x={261} y={60}  fill="#fbbf24" fontSize="17" textAnchor="middle"
+              fontFamily="monospace" fontWeight="black">≈ 3,14</text>
+            <text x={261} y={78}  fill="#94a3b8" fontSize="8.5" textAnchor="middle"
+              fontFamily="sans-serif">= 22/7 · selalu sama!</text>
           </g>
         )}
 
-        {/* Phase label */}
-        <text x={155} y={196} fill="#475569" fontSize="8" textAnchor="middle" fontFamily="sans-serif">{phaseLabel}</text>
+        {/* phase label */}
+        <text x={155} y={212} fill="#475569" fontSize="7.5" textAnchor="middle"
+          fontFamily="sans-serif">{phaseLabel}</text>
       </svg>
     </div>
   );
