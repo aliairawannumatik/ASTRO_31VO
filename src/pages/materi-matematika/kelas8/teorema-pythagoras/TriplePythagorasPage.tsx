@@ -571,76 +571,203 @@ const TriplePythagorasPage = () => {
             )}
           </div>
 
-          {/* CONTOH 1 - MUDAH */}
+          {/* CONTOH 1 — BERBAGAI POSISI SEGITIGA */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh 1 — Kenali Triple Langsung (Mudah)"/>
+            <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh 1 — Triple di Berbagai Posisi Segitiga"/>
             {open.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Tingkat: Mudah</p>
                   <p className="font-body text-sm text-white/90">
-                    Segitiga ABC siku-siku di C, dengan <InlineMath math="AC = 5"/> cm dan <InlineMath math="BC = 12"/> cm. Tanpa menghitung akar, berapakah panjang AB?
+                    Tentukan sisi yang belum diketahui pada masing-masing segitiga berikut <strong className="text-yellow-300">tanpa kalkulator</strong> menggunakan hafalan Triple Pythagoras!
                   </p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Kenali pola: kaki-kaki bernilai 5 dan 12. Ini adalah triple Pythagoras <strong className="text-yellow-300">5-12-13</strong>!</p>
-                  <BlockMath math="AB = \sqrt{5^2 + 12^2} = \sqrt{25 + 144} = \sqrt{169} = 13 \text{ cm}"/>
-                  <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-green-300 text-center">✅ <InlineMath math="AB = 13"/> cm. Dengan hafal triple 5-12-13, tidak perlu kalkulator!</p>
+
+                {/* Sub-soal grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+
+                  {/* (a) Triple 3-4-5, siku di B bawah-kiri */}
+                  <div className="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-3 flex flex-col gap-2">
+                    <p className="text-cyan-300 font-bold text-xs font-body text-center">(a) Siku-siku di B</p>
+                    <svg viewBox="0 0 130 130" className="w-full max-w-[130px] mx-auto" aria-label="Segitiga a">
+                      <defs><filter id="g1"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                      <polygon points="25,105 25,25 85,105" fill="rgba(6,182,212,0.08)" stroke="none"/>
+                      {/* leg AB vertical — 4 */}
+                      <line x1="25" y1="105" x2="25" y2="25" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" filter="url(#g1)"/>
+                      {/* leg BC horizontal — 3 */}
+                      <line x1="25" y1="105" x2="85" y2="105" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" filter="url(#g1)"/>
+                      {/* hypotenuse AC — 5 */}
+                      <line x1="25" y1="25" x2="85" y2="105" stroke="#facc15" strokeWidth="3" strokeLinecap="round" filter="url(#g1)"/>
+                      {/* right angle at B */}
+                      <polyline points="25,90 40,90 40,105" fill="none" stroke="#4ade80" strokeWidth="1.5"/>
+                      {/* labels */}
+                      <text x="10" y="70" fill="#86efac" fontSize="10" fontFamily="monospace" fontWeight="bold">4 cm</text>
+                      <text x="45" y="118" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">3 cm</text>
+                      <text x="58" y="58" fill="#fde047" fontSize="10" fontFamily="monospace" fontWeight="bold">?</text>
+                      <text x="20" y="18" fill="#94a3b8" fontSize="9" fontFamily="monospace">A</text>
+                      <text x="10" y="118" fill="#94a3b8" fontSize="9" fontFamily="monospace">B</text>
+                      <text x="88" y="118" fill="#94a3b8" fontSize="9" fontFamily="monospace">C</text>
+                    </svg>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1">
+                      <p className="text-[10px] text-white/50 font-body">Kenali pola: <span className="text-yellow-300 font-bold">3–4–5</span></p>
+                      <p className="text-[11px] text-green-300 font-mono font-bold text-center">AC = 5 cm ✓</p>
+                    </div>
                   </div>
+
+                  {/* (b) Triple 7-24-25, siku di R bawah-kanan */}
+                  <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-3 flex flex-col gap-2">
+                    <p className="text-violet-300 font-bold text-xs font-body text-center">(b) Siku-siku di R (kanan)</p>
+                    <svg viewBox="0 0 130 130" className="w-full max-w-[130px] mx-auto" aria-label="Segitiga b">
+                      <defs><filter id="g2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                      <polygon points="105,105 105,10 20,105" fill="rgba(139,92,246,0.08)" stroke="none"/>
+                      {/* leg PR vertical — 24 */}
+                      <line x1="105" y1="105" x2="105" y2="10" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" filter="url(#g2)"/>
+                      {/* leg QR horizontal — 7 */}
+                      <line x1="105" y1="105" x2="20" y2="105" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" filter="url(#g2)"/>
+                      {/* hypotenuse PQ — 25 */}
+                      <line x1="105" y1="10" x2="20" y2="105" stroke="#facc15" strokeWidth="3" strokeLinecap="round" filter="url(#g2)"/>
+                      {/* right angle at R */}
+                      <polyline points="105,90 90,90 90,105" fill="none" stroke="#4ade80" strokeWidth="1.5"/>
+                      {/* labels */}
+                      <text x="108" y="62" fill="#86efac" fontSize="10" fontFamily="monospace" fontWeight="bold">24</text>
+                      <text x="52" y="118" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">7 cm</text>
+                      <text x="46" y="52" fill="#fde047" fontSize="10" fontFamily="monospace" fontWeight="bold">?</text>
+                      <text x="100" y="8" fill="#94a3b8" fontSize="9" fontFamily="monospace">P</text>
+                      <text x="8"   y="118" fill="#94a3b8" fontSize="9" fontFamily="monospace">Q</text>
+                      <text x="108" y="118" fill="#94a3b8" fontSize="9" fontFamily="monospace">R</text>
+                    </svg>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1">
+                      <p className="text-[10px] text-white/50 font-body">Kenali pola: <span className="text-violet-300 font-bold">7–24–25</span></p>
+                      <p className="text-[11px] text-green-300 font-mono font-bold text-center">PQ = 25 cm ✓</p>
+                    </div>
+                  </div>
+
+                  {/* (c) Triple 8-15-17, siku di E kiri atas */}
+                  <div className="bg-slate-800/60 border border-pink-500/30 rounded-xl p-3 flex flex-col gap-2">
+                    <p className="text-pink-300 font-bold text-xs font-body text-center">(c) Siku-siku di E (atas)</p>
+                    <svg viewBox="0 0 130 130" className="w-full max-w-[130px] mx-auto" aria-label="Segitiga c">
+                      <defs><filter id="g3"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                      <polygon points="20,20 20,95 52,20" fill="rgba(236,72,153,0.08)" stroke="none"/>
+                      {/* leg DE vertical — 15 */}
+                      <line x1="20" y1="20" x2="20" y2="95" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" filter="url(#g3)"/>
+                      {/* leg EF horizontal — 8 */}
+                      <line x1="20" y1="20" x2="52" y2="20" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" filter="url(#g3)"/>
+                      {/* hypotenuse DF — 17 */}
+                      <line x1="20" y1="95" x2="52" y2="20" stroke="#facc15" strokeWidth="3" strokeLinecap="round" filter="url(#g3)"/>
+                      {/* right angle at E */}
+                      <polyline points="20,35 35,35 35,20" fill="none" stroke="#4ade80" strokeWidth="1.5"/>
+                      {/* labels */}
+                      <text x="2" y="62" fill="#86efac" fontSize="10" fontFamily="monospace" fontWeight="bold">15</text>
+                      <text x="22" y="14" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">8 cm</text>
+                      <text x="50" y="65" fill="#fde047" fontSize="10" fontFamily="monospace" fontWeight="bold">?</text>
+                      <text x="14" y="14" fill="#94a3b8" fontSize="9" fontFamily="monospace">E</text>
+                      <text x="8"  y="108" fill="#94a3b8" fontSize="9" fontFamily="monospace">D</text>
+                      <text x="54" y="14" fill="#94a3b8" fontSize="9" fontFamily="monospace">F</text>
+                    </svg>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1">
+                      <p className="text-[10px] text-white/50 font-body">Kenali pola: <span className="text-pink-300 font-bold">8–15–17</span></p>
+                      <p className="text-[11px] text-green-300 font-mono font-bold text-center">DF = 17 cm ✓</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                  <p className="font-body text-sm text-green-300 text-center">
+                    ✅ Triple Pythagoras berlaku di <strong>posisi manapun</strong> — miring, terbalik, atau berputar!
+                  </p>
                 </div>
               </div>
             )}
           </div>
 
-          {/* CONTOH 2 - SEDANG */}
+          {/* CONTOH 2 — KELIPATAN TRIPLE */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh 2 — Kelipatan Triple (Sedang)"/>
+            <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh 2 — Cari Sisi Miring dengan Kelipatan Triple"/>
             {open.includes("contoh2") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
                   <p className="font-body text-sm text-white/90">
-                    Sebuah kolam renang berbentuk segitiga siku-siku. Dua sisinya berukuran <strong>30 m</strong> dan <strong>40 m</strong>. Apakah kolam ini menggunakan triple Pythagoras? Tentukan sisi miringnya!
+                    Segitiga PQR siku-siku di Q. Diketahui panjang <strong className="text-cyan-300">PQ = 15 cm</strong> dan <strong className="text-green-300">QR = 36 cm</strong>. Tentukan panjang sisi miring <strong className="text-yellow-300">PR</strong> menggunakan kelipatan Triple Pythagoras!
                   </p>
                 </div>
                 <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
                   <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Cek apakah 30 dan 40 merupakan kelipatan dari triple dasar:</p>
-                  <BlockMath math="30 = 10 \times 3, \quad 40 = 10 \times 4"/>
-                  <p className="font-body text-sm text-white/80">Ini adalah triple <strong className="text-yellow-300">3-4-5</strong> dikalikan <strong className="text-cyan-300">10</strong>! Maka sisi miring:</p>
-                  <BlockMath math="c = 10 \times 5 = 50 \text{ m}"/>
-                  <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-yellow-200 text-center">✅ Ya, ini kelipatan triple 3-4-5. Sisi miring kolam = <strong>50 m</strong>.</p>
+
+                  <p className="font-body text-sm text-white/80 font-semibold">🔍 Langkah 1: Cari FPB dari 15 dan 36</p>
+                  <BlockMath math="15 = 3 \times 5, \quad 36 = 3 \times 12"/>
+                  <p className="font-body text-sm text-white/80">FPB = <strong className="text-cyan-300">3</strong>, sehingga:</p>
+                  <BlockMath math="\frac{15}{3} = 5 \qquad \frac{36}{3} = 12"/>
+
+                  <p className="font-body text-sm text-white/80 font-semibold">🔍 Langkah 2: Kenali triple dasar</p>
+                  <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg px-3 py-2 text-center">
+                    <p className="font-mono text-yellow-300 font-bold text-sm">5 – 12 – 13</p>
+                    <p className="text-xs text-white/50 font-body">5² + 12² = 25 + 144 = 169 = 13² ✓</p>
                   </div>
-                  <TripleVerifSVG a={30} b={40} c={50}/>
+
+                  <p className="font-body text-sm text-white/80 font-semibold">🔍 Langkah 3: Hitung sisi miring dengan kelipatan k = 3</p>
+                  <BlockMath math="PR = k \times 13 = 3 \times 13 = 39 \text{ cm}"/>
+
+                  <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                    <p className="font-body text-sm text-green-300 text-center">
+                      ✅ <strong>PR = 39 cm</strong> — ini kelipatan triple <span className="text-yellow-300 font-bold">5–12–13</span> dengan k = 3. Tidak perlu kalkulator!
+                    </p>
+                  </div>
+                  <TripleVerifSVG a={15} b={36} c={39}/>
                 </div>
               </div>
             )}
           </div>
 
-          {/* CONTOH 3 - SULIT */}
+          {/* CONTOH 3 — SOAL CERITA ANGKA BESAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 3 — Temukan Triple yang Hilang (Sulit)"/>
+            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 3 — Soal Cerita Angka Besar (Sulit)"/>
             {open.includes("contoh3") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
-                  <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
-                  <p className="font-body text-sm text-white/90">
-                    Sebuah segitiga siku-siku memiliki hipotenusa 85 cm dan salah satu kakinya 13 cm. Apakah ini merupakan triple Pythagoras? Jika ya, sebutkan triple-nya!
-                  </p>
+                <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4 space-y-3">
+                  <p className="text-red-300 font-bold text-xs uppercase tracking-wide">🔴 Tingkat: Sulit</p>
+
+                  {/* Context illustration */}
+                  <div className="flex gap-3 items-center bg-slate-900/50 border border-slate-700/50 rounded-lg p-3">
+                    <span className="text-4xl flex-shrink-0">🏗️</span>
+                    <p className="font-body text-sm text-white/90 leading-relaxed">
+                      Seorang insinyur merancang tangga darurat sebuah gedung bertingkat. Jarak horizontal dari ujung bawah tangga ke dinding gedung adalah <strong className="text-cyan-300">560 cm</strong>, dan tinggi dinding tempat tangga bersandar adalah <strong className="text-green-300">1.050 cm</strong>. Berapakah panjang tangga (sisi miring) yang dibutuhkan?
+                    </p>
+                  </div>
                 </div>
+
                 <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
                   <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="c = 85"/>, <InlineMath math="a = 13"/>. Cari kaki lain:</p>
-                  <BlockMath math="b = \sqrt{c^2 - a^2} = \sqrt{85^2 - 13^2}"/>
-                  <BlockMath math="b = \sqrt{7225 - 169} = \sqrt{7056}"/>
-                  <p className="font-body text-sm text-white/80">Apakah 7056 bilangan kuadrat sempurna?</p>
-                  <BlockMath math="\sqrt{7056} = 84 \quad \text{(karena } 84^2 = 7056\text{)}"/>
-                  <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-red-200 text-center">✅ Triple Pythagoras: <strong className="text-yellow-300">13 – 84 – 85</strong>. Ini adalah triple asli (bukan kelipatan triple lain)!</p>
+
+                  <p className="font-body text-sm text-white/80 font-semibold">🔍 Langkah 1: Cari FPB dari 560 dan 1.050</p>
+                  <BlockMath math="560 = 70 \times 8 \qquad 1050 = 70 \times 15"/>
+                  <p className="font-body text-sm text-white/80">FPB = <strong className="text-red-300">70</strong>, maka:</p>
+                  <BlockMath math="\frac{560}{70} = 8 \qquad \frac{1050}{70} = 15"/>
+
+                  <p className="font-body text-sm text-white/80 font-semibold">🔍 Langkah 2: Kenali triple dasar</p>
+                  <div className="bg-red-900/30 border border-red-500/40 rounded-lg px-3 py-2 text-center">
+                    <p className="font-mono text-red-300 font-bold text-sm">8 – 15 – 17</p>
+                    <p className="text-xs text-white/50 font-body">8² + 15² = 64 + 225 = 289 = 17² ✓</p>
                   </div>
+
+                  <p className="font-body text-sm text-white/80 font-semibold">🔍 Langkah 3: Hitung panjang tangga dengan kelipatan k = 70</p>
+                  <BlockMath math="\text{Panjang tangga} = k \times 17 = 70 \times 17 = 1.190 \text{ cm}"/>
+
+                  <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                    <p className="font-body text-sm text-green-300 text-center">
+                      ✅ Panjang tangga = <strong>1.190 cm</strong> — kelipatan triple <span className="text-red-300 font-bold">8–15–17</span> dengan k = 70. Angka besar pun selesai dalam hitungan detik! 🚀
+                    </p>
+                  </div>
+
+                  {/* Key insight box */}
+                  <div className="bg-amber-900/20 border border-amber-500/30 rounded-lg px-3 py-2">
+                    <p className="font-body text-xs text-amber-300 font-semibold mb-1">💡 Trik Rahasia:</p>
+                    <p className="font-body text-xs text-white/70">
+                      Angka sebesar apapun bisa diselesaikan dengan triple jika kamu bisa menemukan FPB-nya. Bagi kedua kaki dengan FPB → kenali triple dasar → kalikan hipotenusa dengan FPB yang sama!
+                    </p>
+                  </div>
+
+                  <TripleVerifSVG a={560} b={1050} c={1190}/>
                 </div>
               </div>
             )}
