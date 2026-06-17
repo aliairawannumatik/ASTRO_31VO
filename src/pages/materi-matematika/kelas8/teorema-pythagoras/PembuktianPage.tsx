@@ -178,14 +178,6 @@ const RumusVariasiSVG = () => (
     <rect x="95" y="99" width="26" height="26" rx="6" fill="rgba(249,115,22,0.3)" stroke="#f97316" strokeWidth="1.5" className="gl-c"/>
     <text x="108" y="116" textAnchor="middle" fill="#fdba74" fontSize="16" fontWeight="bold" fontFamily="sans-serif" className="gl-c">c</text>
 
-    {/* Legend strip at bottom-left */}
-    <rect x="8" y="8" width="12" height="9" rx="2" fill="#3b82f6"/>
-    <text x="24" y="16" fill="#93c5fd" fontSize="8.5" fontFamily="sans-serif">sisi siku-siku (kaki) a</text>
-    <rect x="8" y="20" width="12" height="9" rx="2" fill="#22c55e"/>
-    <text x="24" y="28" fill="#86efac" fontSize="8.5" fontFamily="sans-serif">sisi siku-siku (kaki) b</text>
-    <rect x="8" y="32" width="12" height="9" rx="2" fill="#f97316"/>
-    <text x="24" y="40" fill="#fdba74" fontSize="8.5" fontFamily="sans-serif">hipotenusa (sisi miring) c</text>
-
     {/* ════ DIVIDER ════ */}
     <line x1="196" y1="8" x2="196" y2="222" stroke="rgba(71,85,105,0.6)" strokeWidth="1.2" strokeDasharray="5 3"/>
 
@@ -517,14 +509,6 @@ const PembuktianPage = () => {
                 Dalam sebuah segitiga siku-siku, ada <strong className="text-cyan-300">tiga sisi</strong>: dua kaki (<InlineMath math="a"/> dan <InlineMath math="b"/>) dan satu hipotenusa (<InlineMath math="c"/>). Menggunakan Teorema Pythagoras, kita bisa mencari salah satu sisi <em>jika dua sisi lainnya diketahui</em>. Ada tiga skenario berbeda yang perlu kamu kuasai!
               </p>
               <RumusVariasiSVG/>
-              <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4 space-y-2">
-                <p className="text-cyan-300 font-semibold text-sm">📌 Tiga Variasi Rumus Pythagoras</p>
-                <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                  <BlockMath math="c^2 = a^2 + b^2 \quad \text{(cari hipotenusa)}"/>
-                  <BlockMath math="a^2 = c^2 - b^2 \quad \text{(cari kaki pertama)}"/>
-                  <BlockMath math="b^2 = c^2 - a^2 \quad \text{(cari kaki kedua)}"/>
-                </div>
-              </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                 <p className="font-body text-sm text-yellow-200">
                   💡 <strong>Strategi mudah:</strong> Sisi yang <em>dicari</em> pindahkan ke kiri dalam bentuk kuadrat, dua sisi yang <em>diketahui</em> tetap di kanan. Jika mencari <strong className="text-orange-300">c²</strong> → tambahkan. Jika mencari <strong className="text-blue-300">a² atau b²</strong> → kurangkan dari <strong className="text-orange-300">c²</strong>.
@@ -687,18 +671,19 @@ const PembuktianPage = () => {
                   <p className="font-body text-sm text-white/90">Sebuah layar kapal berbentuk segitiga siku-siku dengan dua kaki masing-masing <strong className="text-yellow-300">5 cm</strong> dan <strong className="text-yellow-300">12 cm</strong>. Berapa panjang tali layar (sisi miring) tersebut?</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  {/* Rotated 90° CW — right angle at top-left */}
                   <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
-                    <polygon points="30,125 30,65 150,125" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.3)" strokeWidth="1"/>
-                    <line x1="30" y1="65" x2="30" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
-                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
-                    <line x1="30" y1="65" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
-                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
-                    <text x="3"  y="95"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=5</text>
-                    <text x="80" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=12</text>
-                    <text x="90" y="87"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
-                    <text x="20" y="60"  fill="#94a3b8" fontSize="9">A</text>
-                    <text x="20" y="137" fill="#94a3b8" fontSize="9">C</text>
-                    <text x="153" y="137" fill="#94a3b8" fontSize="9">B</text>
+                    <polygon points="30,25 150,25 30,125" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.3)" strokeWidth="1"/>
+                    <line x1="30" y1="25" x2="30" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="25" x2="150" y2="25" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="125" x2="150" y2="25" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <polyline points="42,25 42,37 30,37" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="3"  y="82"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=5</text>
+                    <text x="76" y="18"  fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=12</text>
+                    <text x="92" y="90"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
+                    <text x="18" y="22"  fill="#94a3b8" fontSize="9">C</text>
+                    <text x="18" y="138" fill="#94a3b8" fontSize="9">A</text>
+                    <text x="153" y="22" fill="#94a3b8" fontSize="9">B</text>
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=5"/> cm, <InlineMath math="b=12"/> cm &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
@@ -723,18 +708,19 @@ const PembuktianPage = () => {
                   <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai sisi miring <strong className="text-yellow-300">10 cm</strong> dan salah satu kaki <strong className="text-yellow-300">6 cm</strong>. Tentukan panjang kaki lainnya!</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  {/* Rotated 180° — right angle at top-right */}
                   <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
-                    <polygon points="30,125 30,25 150,125" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.3)" strokeWidth="1"/>
-                    <line x1="30" y1="25" x2="30" y2="125" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
-                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
-                    <line x1="30" y1="25" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round"/>
-                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
-                    <text x="0"  y="75"  fill="#c4b5fd" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=?</text>
-                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=6</text>
-                    <text x="92" y="72"  fill="#fb923c" fontSize="12" fontWeight="bold" fontFamily="sans-serif">c=10</text>
-                    <text x="20" y="20"  fill="#94a3b8" fontSize="9">A</text>
-                    <text x="20" y="137" fill="#94a3b8" fontSize="9">C</text>
-                    <text x="153" y="137" fill="#94a3b8" fontSize="9">B</text>
+                    <polygon points="160,30 160,130 40,30" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.3)" strokeWidth="1"/>
+                    <line x1="160" y1="30" x2="160" y2="130" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <line x1="40"  y1="30" x2="160" y2="30"  stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="160" y1="130" x2="40" y2="30"  stroke="#f97316" strokeWidth="3" strokeLinecap="round"/>
+                    <polyline points="148,30 148,42 160,42" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="163" y="85"  fill="#c4b5fd" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=?</text>
+                    <text x="85"  y="22"  fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=6</text>
+                    <text x="68"  y="92"  fill="#fb923c" fontSize="12" fontWeight="bold" fontFamily="sans-serif">c=10</text>
+                    <text x="163" y="27"  fill="#94a3b8" fontSize="9">C</text>
+                    <text x="163" y="143" fill="#94a3b8" fontSize="9">A</text>
+                    <text x="26"  y="27"  fill="#94a3b8" fontSize="9">B</text>
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="c=10"/> cm, <InlineMath math="b=6"/> cm &nbsp;|&nbsp; Dicari: <InlineMath math="a"/></p>
@@ -770,15 +756,16 @@ const PembuktianPage = () => {
                   <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai dua kaki <strong className="text-yellow-300">4 cm</strong> dan <strong className="text-yellow-300">6 cm</strong>. Tentukan panjang sisi miringnya dalam bentuk akar paling sederhana!</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  {/* Mirrored about Y-axis — right angle at bottom-right */}
                   <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
-                    <polygon points="30,125 30,35 150,125" fill="rgba(234,179,8,0.07)" stroke="rgba(234,179,8,0.3)" strokeWidth="1"/>
-                    <line x1="30" y1="35" x2="30" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
-                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
-                    <line x1="30" y1="35" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
-                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
-                    <text x="3"  y="80"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=4</text>
-                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=6</text>
-                    <text x="95" y="72"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
+                    <polygon points="160,125 160,35 40,125" fill="rgba(234,179,8,0.07)" stroke="rgba(234,179,8,0.3)" strokeWidth="1"/>
+                    <line x1="160" y1="35" x2="160" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="40"  y1="125" x2="160" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="160" y1="35" x2="40"  y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <polyline points="148,125 148,113 160,113" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="163" y="82"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=4</text>
+                    <text x="85"  y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=6</text>
+                    <text x="75"  y="68"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=4"/>, <InlineMath math="b=6"/> &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
@@ -804,15 +791,16 @@ const PembuktianPage = () => {
                   <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku sama kaki dengan kedua kaki masing-masing <strong className="text-yellow-300">3 cm</strong>. Berapa panjang sisi miringnya?</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  {/* Tilted — right angle at interior point */}
                   <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
-                    <polygon points="30,125 30,25 150,125" fill="rgba(249,115,22,0.07)" stroke="rgba(249,115,22,0.3)" strokeWidth="1"/>
-                    <line x1="30" y1="25" x2="30" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
-                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
-                    <line x1="30" y1="25" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
-                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
-                    <text x="3"  y="75"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=3</text>
-                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=3</text>
-                    <text x="95" y="72"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
+                    <polygon points="30,55 120,125 155,80" fill="rgba(249,115,22,0.07)" stroke="rgba(249,115,22,0.3)" strokeWidth="1"/>
+                    <line x1="30"  y1="55"  x2="120" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="120" y1="125" x2="155" y2="80"  stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30"  y1="55"  x2="155" y2="80"  stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <polyline points="111,118 118,109 127,116" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="42"  y="98"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=3</text>
+                    <text x="140" y="113" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=3</text>
+                    <text x="78"  y="50"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=3"/>, <InlineMath math="b=3"/> &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
@@ -838,15 +826,16 @@ const PembuktianPage = () => {
                   <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai sisi miring <strong className="text-yellow-300">6 cm</strong> dan salah satu kaki <strong className="text-yellow-300">2 cm</strong>. Tentukan kaki lainnya!</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  {/* Rotated 270° CW — right angle at bottom-right */}
                   <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
-                    <polygon points="30,125 30,25 150,125" fill="rgba(244,63,94,0.07)" stroke="rgba(244,63,94,0.3)" strokeWidth="1"/>
-                    <line x1="30" y1="25" x2="30" y2="125" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
-                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
-                    <line x1="30" y1="25" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round"/>
-                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
-                    <text x="0"  y="75"  fill="#c4b5fd" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=?</text>
-                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=2</text>
-                    <text x="92" y="72"  fill="#fb923c" fontSize="12" fontWeight="bold" fontFamily="sans-serif">c=6</text>
+                    <polygon points="30,125 155,125 155,25" fill="rgba(244,63,94,0.07)" stroke="rgba(244,63,94,0.3)" strokeWidth="1"/>
+                    <line x1="30"  y1="125" x2="155" y2="125" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <line x1="155" y1="125" x2="155" y2="25"  stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30"  y1="125" x2="155" y2="25"  stroke="#f97316" strokeWidth="3" strokeLinecap="round"/>
+                    <polyline points="143,125 143,113 155,113" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="76"  y="140" fill="#c4b5fd" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=?</text>
+                    <text x="158" y="80"  fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=2</text>
+                    <text x="75"  y="65"  fill="#fb923c" fontSize="12" fontWeight="bold" fontFamily="sans-serif">c=6</text>
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="c=6"/>, <InlineMath math="b=2"/> &nbsp;|&nbsp; Dicari: <InlineMath math="a"/></p>
