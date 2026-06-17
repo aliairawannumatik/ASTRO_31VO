@@ -62,6 +62,193 @@ const Sudut3060SVG = () => (
   </svg>
 );
 
+/* ── Interactive Triangle Explorer ── */
+const TriangleInteraktif = () => {
+  const [mode, setMode] = useState<'45' | '30'>('45');
+  const [a, setA] = useState(4);
+
+  const SVG_W = 300, SVG_H = 218;
+  const CX = 38, CY = 185;   // right-angle vertex (bottom-left)
+
+  const PX = mode === '45' ? 15 : 13;      // px per unit of 'a'
+  const shortPx = a * PX;
+  const longPx  = mode === '45' ? a * PX : a * PX * Math.sqrt(3);
+
+  const AX = CX, AY = CY - shortPx;       // top vertex (end of short leg)
+  const BX = CX + longPx, BY = CY;        // right vertex (end of long leg)
+
+  const shortVal = a;
+  const longVal  = mode === '45' ? a : +(a * Math.sqrt(3)).toFixed(2);
+  const hypVal   = mode === '45' ? +(a * Math.sqrt(2)).toFixed(2) : 2 * a;
+
+  const shortSym = 'a';
+  const longSym  = mode === '45' ? 'a' : 'a√3';
+  const hypSym   = mode === '45' ? 'a√2' : '2a';
+
+  const ratioStr   = mode === '45' ? '1 : 1 : √2' : '1 : √3 : 2';
+  const triColor   = mode === '45' ? 'rgba(168,85,247,0.18)' : 'rgba(34,197,94,0.18)';
+  const edgeColor  = mode === '45' ? '#a855f7' : '#22c55e';
+  const accentHex  = mode === '45' ? '#a855f7' : '#22c55e';
+
+  const hypMidX = (AX + BX) / 2;
+  const hypMidY = (AY + BY) / 2;
+  const showLabels = shortPx >= 26;
+  const MK = 11;
+
+  const txtShadow = { stroke: 'rgba(2,6,23,0.85)', strokeWidth: 2, paintOrder: 'stroke' as const };
+
+  return (
+    <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
+      {/* Header */}
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">🎛️ Eksplorasi Interaktif</p>
+        <span className={`text-xs font-bold px-2 py-1 rounded-full border ${mode==='45' ? 'bg-purple-900/50 text-purple-200 border-purple-500/40' : 'bg-green-900/50 text-green-200 border-green-500/40'}`}>
+          Rasio tetap: {ratioStr}
+        </span>
+      </div>
+
+      {/* Mode Tabs */}
+      <div className="grid grid-cols-2 gap-2">
+        {(['45','30'] as const).map(m => (
+          <button key={m} onClick={() => { setMode(m); setA(4); }}
+            className={`py-2 rounded-lg text-xs font-bold transition-all duration-200 border ${
+              mode === m
+                ? m === '45' ? 'bg-purple-600 text-white border-purple-500' : 'bg-green-700 text-white border-green-600'
+                : 'bg-slate-700/50 text-slate-400 border-slate-600 hover:border-slate-500'
+            }`}>
+            {m === '45' ? '▪ 45°–45°–90°' : '▲ 30°–60°–90°'}
+          </button>
+        ))}
+      </div>
+
+      {/* SVG */}
+      <div className="relative">
+        <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} className="w-full">
+          <defs>
+            <filter id="triGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+
+          {/* Faint grid guide lines */}
+          <line x1={CX} y1="8" x2={CX} y2={CY} stroke="rgba(100,116,139,0.18)" strokeWidth="1" strokeDasharray="4 4"/>
+          <line x1={CX} y1={CY} x2={SVG_W-4} y2={CY} stroke="rgba(100,116,139,0.18)" strokeWidth="1" strokeDasharray="4 4"/>
+
+          {/* Triangle fill */}
+          <polygon
+            points={`${CX},${AY} ${BX},${BY} ${CX},${CY}`}
+            fill={triColor} stroke={edgeColor} strokeWidth="1.5" strokeLinejoin="round"
+          />
+
+          {/* Sides */}
+          <line x1={CX} y1={CY} x2={AX} y2={AY} stroke="#3b82f6" strokeWidth="2.8" strokeLinecap="round"/>
+          <line x1={CX} y1={CY} x2={BX} y2={BY} stroke="#22c55e" strokeWidth="2.8" strokeLinecap="round"/>
+          <line x1={AX} y1={AY} x2={BX} y2={BY} stroke="#f97316" strokeWidth="2.8" strokeLinecap="round"/>
+
+          {/* Right angle mark */}
+          <polyline
+            points={`${CX},${CY-MK} ${CX+MK},${CY-MK} ${CX+MK},${CY}`}
+            fill="none" stroke="#94a3b8" strokeWidth="1.5"
+          />
+
+          {/* Angle labels */}
+          {showLabels && <>
+            <text x={AX+7} y={AY+15} fill="#eab308" fontSize="11" fontFamily="sans-serif" fontWeight="bold" {...txtShadow}>
+              {mode==='45' ? '45°' : '60°'}
+            </text>
+            <text x={Math.max(BX-22, CX+28)} y={BY-4} fill="#eab308" fontSize="11" fontFamily="sans-serif" fontWeight="bold" {...txtShadow}>
+              {mode==='45' ? '45°' : '30°'}
+            </text>
+          </>}
+          <text x={CX+14} y={CY-3} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">90°</text>
+
+          {/* Side value labels */}
+          {showLabels && <>
+            {/* short leg — left of vertical */}
+            <text x={CX-5} y={(CY+AY)/2+4}
+              fill="#60a5fa" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
+              textAnchor="end" {...txtShadow}>
+              {shortSym}={shortVal}
+            </text>
+            {/* long leg — below horizontal */}
+            <text x={Math.min((CX+BX)/2, SVG_W-40)} y={CY+16}
+              fill="#4ade80" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
+              textAnchor="middle" {...txtShadow}>
+              {longSym}={longVal}
+            </text>
+            {/* hypotenuse — beside mid-point */}
+            <text x={Math.min(hypMidX+7, SVG_W-56)} y={Math.max(hypMidY-7, 16)}
+              fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
+              {...txtShadow}>
+              {hypSym}={hypVal}
+            </text>
+          </>}
+
+          {/* Vertex dots */}
+          <circle cx={CX} cy={CY} r="5" fill={accentHex} opacity="0.85"/>
+          <circle cx={AX} cy={AY} r="5" fill="#3b82f6" opacity="0.85"/>
+          <circle cx={BX} cy={BY} r="5" fill="#22c55e" opacity="0.85"/>
+
+          {/* Vertex labels */}
+          <text x={CX-15} y={CY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">C(90°)</text>
+          {showLabels && <>
+            <text x={AX-18} y={AY-4} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">A</text>
+            <text x={BX+4}  y={BY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">B</text>
+          </>}
+        </svg>
+      </div>
+
+      {/* Slider */}
+      <div className="space-y-2 px-1">
+        <div className="flex justify-between items-center">
+          <label className="font-body text-xs text-white/70">
+            🔍 Geser untuk memperbesar segitiga (<em>a</em> = kelipatan dasar):
+          </label>
+          <span className={`text-sm font-bold px-2 py-0.5 rounded font-mono ${mode==='45' ? 'bg-purple-900/60 text-purple-200' : 'bg-green-900/60 text-green-200'}`}>
+            a = {a}
+          </span>
+        </div>
+        <input
+          type="range" min="1" max="10" step="1" value={a}
+          onChange={e => setA(+e.target.value)}
+          className="w-full h-2 rounded-full cursor-pointer"
+          style={{ accentColor: accentHex }}
+        />
+        <div className="flex justify-between text-xs text-slate-500 px-0.5 font-mono">
+          {[1,2,3,4,5,6,7,8,9,10].map(n => <span key={n}>{n}</span>)}
+        </div>
+      </div>
+
+      {/* Value cards */}
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { label: 'Kaki pendek', sym: shortSym, val: shortVal, c: 'text-blue-300',   bg: 'bg-blue-900/25',   bd: 'border-blue-500/30'   },
+          { label: mode==='45' ? 'Kaki (sama)' : 'Kaki panjang', sym: longSym, val: longVal, c: 'text-green-300',  bg: 'bg-green-900/25',  bd: 'border-green-500/30'  },
+          { label: 'Hipotenusa',   sym: hypSym,   val: hypVal,   c: 'text-orange-300', bg: 'bg-orange-900/25', bd: 'border-orange-500/30' },
+        ].map(({ label, sym, val, c, bg, bd }, idx) => (
+          <div key={idx} className={`${bg} border ${bd} rounded-lg p-2 text-center`}>
+            <p className="text-xs text-white/40 leading-tight">{label}</p>
+            <p className={`font-bold text-sm mt-0.5 ${c}`}>{val} <span className="text-xs font-normal">cm</span></p>
+            <p className="text-xs text-slate-500 font-mono">({sym})</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Ratio reminder */}
+      <div className={`border rounded-lg px-3 py-2 flex items-start gap-2 ${mode==='45' ? 'bg-purple-900/20 border-purple-500/30' : 'bg-green-900/20 border-green-500/30'}`}>
+        <span className="text-lg mt-0.5">✨</span>
+        <div>
+          <p className="font-body text-xs font-bold text-yellow-300">Rasio selalu tetap: {ratioStr}</p>
+          <p className="font-body text-xs text-white/60 mt-0.5">
+            {mode==='45'
+              ? `Berapapun nilai a, sisi-sisinya selalu ${a} : ${a} : ${longVal === a ? `${a}×√2 ≈ ${hypVal}` : hypVal} — perbandingannya tidak pernah berubah!`
+              : `Berapapun nilai a, sisi-sisinya selalu ${shortVal} : ${longVal} : ${hypVal} — perbandingannya tidak pernah berubah!`
+            }
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 /* ── Comparison Card ── */
 const CompareCard = ({ title, ratio, color, sides, example }: {
   title: string; ratio: string; color: string; sides: string[]; example: { angles: string; vals: string[] }
@@ -86,7 +273,7 @@ const CompareCard = ({ title, ratio, color, sides, example }: {
 
 const SudutKhususPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro","sudut45","sudut30","perbandingan","contoh1","contoh2","contoh3","rangkuman"]);
+  const [open, setOpen] = useState<string[]>(["intro","interaktif","sudut45","sudut30","perbandingan","contoh1","contoh2","contoh3","rangkuman"]);
 
   const toggle = (id: string) => {
     playPopSound();
@@ -139,6 +326,21 @@ const SudutKhususPage = () => {
                     <p className="text-yellow-300 font-bold mt-1">a : a√3 : 2a</p>
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* ANIMASI INTERAKTIF */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="interaktif" icon={<Target className="w-5 h-5"/>} iconColor="text-pink-400" title="🎮 Animasi Interaktif — Perbesar Segitiga Sudut Khusus"/>
+            {open.includes("interaktif") && (
+              <div className="px-5 pb-5 space-y-3">
+                <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg px-4 py-2">
+                  <p className="font-body text-xs text-pink-200">
+                    💡 Geser slider untuk memperbesar atau memperkecil segitiga. Perhatikan bahwa <strong>rasio sisi selalu tetap</strong> meskipun ukurannya berubah — itulah kunci sudut khusus!
+                  </p>
+                </div>
+                <TriangleInteraktif/>
               </div>
             )}
           </div>
