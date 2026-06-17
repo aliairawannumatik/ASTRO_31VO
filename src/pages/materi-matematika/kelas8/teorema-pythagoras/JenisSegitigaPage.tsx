@@ -364,13 +364,13 @@ const JenisSegitigaPage = () => {
             <SectionHeader id="jenis" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Detail Tiga Jenis Segitiga"/>
             {open.includes("jenis") && (
               <div className="px-5 pb-5 space-y-4">
-                <TriangleTypeChecker/>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
                     Dengan membandingkan <InlineMath math="a^2 + b^2"/> dan <InlineMath math="c^2"/>, kita bisa <strong className="text-cyan-300">mengklasifikasikan setiap segitiga</strong> tanpa harus mengukur sudutnya secara langsung. Ini sangat berguna di bidang teknik dan arsitektur!
                   </p>
                 </div>
+                <TriangleTypeChecker/>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
                     💡 <strong>Tips:</strong> Selalu urutkan sisi dari kecil ke besar dulu. Sisi terpanjang itulah yang menjadi <InlineMath math="c"/> dalam perbandingan. Jangan sampai terbalik!
