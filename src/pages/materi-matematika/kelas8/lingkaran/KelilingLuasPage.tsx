@@ -12,125 +12,144 @@ const PiAnimationSVG = () => {
   useEffect(() => {
     let id: number;
     const start = performance.now();
-    const PERIOD = 9000;
+    const PERIOD = 10000;
     const loop = (now: number) => { setProg(((now - start) % PERIOD) / PERIOD); id = requestAnimationFrame(loop); };
     id = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(id);
   }, []);
 
-  const ease = (x: number) => x < 0.5 ? 2*x*x : 1 - (-2*x+2)**2/2;
-  const band = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
-  const cl = (x: number) => Math.max(0, Math.min(1, x));
+  const ease  = (x: number) => x < 0.5 ? 2*x*x : 1 - (-2*x+2)**2/2;
+  const band  = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
+  const cl    = (x: number) => Math.max(0, Math.min(1, x));
 
-  const R = 32, CX = 54, CY = 68;
-  const CIRC = 2 * Math.PI * R;
-  const D = 64;
-  const partial = CIRC - 3 * D;
+  /* geometry — circle stays intact the whole time */
+  const R = 30, CX = 52, CY = 66;
+  const CIRC = 2 * Math.PI * R;   // ≈ 188.5
+  const D    = 60;                  // 2*R
+  const partial = CIRC - 3 * D;   // ≈ 8.5
 
-  const LX = 14, LY = 136, SEG_Y = 162;
+  /* rope + segment rows */
+  const RX = 14, ROPE_Y = 132, SEG_Y = 158;
 
-  const unroll = band(0.18, 0.52);
-  const s1 = band(0.52, 0.63);
-  const s2 = band(0.60, 0.71);
-  const s3 = band(0.68, 0.79);
-  const s4 = band(0.76, 0.84);
-  const piLbl = band(0.84, 0.96);
-  const fadeOut = prog > 0.96 ? 1 - cl((prog - 0.96) / 0.04) : 1;
+  /* timing */
+  const ropeP  = band(0.17, 0.50); // tali dibentangkan
+  const s1     = band(0.50, 0.62);
+  const s2     = band(0.59, 0.71);
+  const s3     = band(0.68, 0.80);
+  const s4     = band(0.77, 0.85);
+  const piLbl  = band(0.85, 0.97);
+  const fadeOut = prog > 0.97 ? 1 - cl((prog-0.97)/0.03) : 1;
 
-  const lineX1 = LX + CIRC * unroll;
-  const dashOff = CIRC * unroll;
+  const ropeX1 = RX + CIRC * ropeP;
 
   const phaseLabel =
-    prog < 0.18 ? '① Lihat diameter lingkaran' :
-    prog < 0.52 ? '② Keliling dibentangkan...' :
-    prog < 0.84 ? '③ Bandingkan dengan diameter' :
-                  '④ π = Keliling ÷ Diameter ≈ 3,14';
+    prog < 0.17 ? '① Perhatikan diameter lingkaran' :
+    prog < 0.50 ? '② Tali sepanjang keliling dibentangkan...' :
+    prog < 0.85 ? '③ Bandingkan panjang tali dengan diameter' :
+                  '④ π = panjang tali ÷ diameter ≈ 3,14';
 
   const SEGMENTS = [
-    { x0: LX,         len: D * s1,       color: '#22c55e', label: 'd' },
-    { x0: LX + D,     len: D * s2,       color: '#3b82f6', label: 'd' },
-    { x0: LX + 2*D,   len: D * s3,       color: '#a855f7', label: 'd' },
-    { x0: LX + 3*D,   len: partial * s4, color: '#eab308', label: '0,14d', dashed: true },
+    { x0: RX,          len: D*s1,        color: '#22c55e', label: 'd' },
+    { x0: RX+D,        len: D*s2,        color: '#3b82f6', label: 'd' },
+    { x0: RX+2*D,      len: D*s3,        color: '#a855f7', label: 'd' },
+    { x0: RX+3*D,      len: partial*s4,  color: '#eab308', label: '0,14d', dashed: true },
   ];
 
+  /* small bobbing dot that travels around the circle while rope grows */
+  const dotAngle = -Math.PI/2 + 2*Math.PI * ropeP;
+  const dotX = CX + R * Math.cos(dotAngle);
+  const dotY = CY + R * Math.sin(dotAngle);
+
   return (
-    <div className="relative select-none">
-      <svg viewBox="0 0 310 195" className="w-full max-w-sm mx-auto my-2" aria-label="Animasi π" style={{ opacity: fadeOut }}>
-        {/* ── Circle fill (dims as it unrolls) ── */}
-        <circle cx={CX} cy={CY} r={R} fill={`rgba(6,182,212,${0.18*(1-unroll)})`} />
+    <div className="select-none">
+      <svg viewBox="0 0 310 200" className="w-full max-w-sm mx-auto my-2" aria-label="Animasi π" style={{ opacity: fadeOut }}>
 
-        {/* ── Circle stroke unwinds ── */}
-        <circle cx={CX} cy={CY} r={R}
-          fill="none" stroke="#06b6d4" strokeWidth="2.5"
-          strokeDasharray={CIRC} strokeDashoffset={dashOff}
-          strokeLinecap="round"
-          style={{ transformOrigin: `${CX}px ${CY}px`, transform: 'rotate(-90deg)' }}
-        />
-
-        {/* ── Center dot ── */}
+        {/* ══ CIRCLE — always fully drawn ══ */}
+        <circle cx={CX} cy={CY} r={R} fill="rgba(6,182,212,0.13)" />
+        <circle cx={CX} cy={CY} r={R} fill="none" stroke="#06b6d4" strokeWidth="2.5" />
         <circle cx={CX} cy={CY} r="3" fill="#94a3b8" />
 
-        {/* ── Diameter line (phase 0 only) ── */}
-        {unroll === 0 && (
-          <>
-            <line x1={CX-R} y1={CY} x2={CX+R} y2={CY} stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" />
-            <text x={CX} y={CY-R-7} fill="#4ade80" fontSize="10" textAnchor="middle" fontFamily="sans-serif" fontWeight="bold">d = 2r = {D}</text>
-            <text x={CX-R-4} y={CY+4} fill="#94a3b8" fontSize="9" textAnchor="end" fontFamily="sans-serif">r</text>
-            <text x={CX+R+4} y={CY+4} fill="#94a3b8" fontSize="9" textAnchor="start" fontFamily="sans-serif">r</text>
-          </>
+        {/* Diameter line — always visible */}
+        <line x1={CX-R} y1={CY} x2={CX+R} y2={CY} stroke="#22c55e" strokeWidth="2.2" strokeLinecap="round" />
+        <text x={CX} y={CY-R-6} fill="#4ade80" fontSize="9.5" textAnchor="middle" fontFamily="sans-serif" fontWeight="bold">
+          d = 2r = {D}
+        </text>
+
+        {/* Jari-jari label kiri & kanan */}
+        <text x={CX-R/2} y={CY-4} fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="sans-serif">r</text>
+        <text x={CX+R/2} y={CY-4} fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="sans-serif">r</text>
+
+        {/* Dot traveling around circle while rope extends */}
+        {ropeP > 0 && ropeP < 1 && (
+          <circle cx={dotX} cy={dotY} r="4" fill="#fbbf24" opacity={0.9} />
         )}
 
-        {/* ── Unrolled circumference line ── */}
-        {unroll > 0.01 && (
+        {/* ══ ROPE (tali) — separate row, grows left→right ══ */}
+        {ropeP > 0.01 && (
           <>
-            <line x1={LX} y1={LY} x2={lineX1} y2={LY}
-              stroke="#f97316" strokeWidth="3.5" strokeLinecap="round" />
-            <line x1={LX} y1={LY-5} x2={LX} y2={LY+5} stroke="#f97316" strokeWidth="2" />
-            {unroll > 0.97 && <line x1={LX+CIRC-1} y1={LY-5} x2={LX+CIRC-1} y2={LY+5} stroke="#f97316" strokeWidth="2" />}
-            <text x={(LX + lineX1)/2} y={LY-9} fill="#fb923c" fontSize="9" textAnchor="middle" fontFamily="sans-serif" fontWeight="bold">
-              K = {(CIRC * unroll).toFixed(1)} px
+            {/* rope shadow / glow */}
+            <line x1={RX} y1={ROPE_Y} x2={ropeX1} y2={ROPE_Y}
+              stroke="rgba(251,191,36,0.18)" strokeWidth="8" strokeLinecap="round" />
+            {/* rope body */}
+            <line x1={RX} y1={ROPE_Y} x2={ropeX1} y2={ROPE_Y}
+              stroke="#d97706" strokeWidth="4" strokeLinecap="round" />
+            {/* rope highlight */}
+            <line x1={RX} y1={ROPE_Y-1} x2={ropeX1} y2={ROPE_Y-1}
+              stroke="rgba(254,215,105,0.5)" strokeWidth="1.5" strokeLinecap="round" />
+
+            {/* end caps */}
+            <line x1={RX}   y1={ROPE_Y-5} x2={RX}   y2={ROPE_Y+5} stroke="#d97706" strokeWidth="2" />
+            {ropeP > 0.97 && (
+              <line x1={ropeX1} y1={ROPE_Y-5} x2={ropeX1} y2={ROPE_Y+5} stroke="#d97706" strokeWidth="2" />
+            )}
+
+            {/* label above rope */}
+            <text x={(RX + ropeX1)/2} y={ROPE_Y-10} fill="#fbbf24" fontSize="9"
+              textAnchor="middle" fontFamily="sans-serif" fontWeight="bold">
+              tali (keliling) = {(CIRC * ropeP).toFixed(1)}
             </text>
           </>
         )}
 
-        {/* ── Diameter comparison segments ── */}
+        {/* ══ DIAMETER SEGMENTS — appear below rope ══ */}
         {SEGMENTS.map((seg, i) => seg.len > 0.5 && (
           <g key={i}>
-            <line x1={seg.x0} y1={SEG_Y} x2={seg.x0 + seg.len} y2={SEG_Y}
+            <line x1={seg.x0} y1={SEG_Y} x2={seg.x0+seg.len} y2={SEG_Y}
               stroke={seg.color} strokeWidth="3.5" strokeLinecap="round"
               strokeDasharray={seg.dashed ? '5 3' : undefined} />
-            <line x1={seg.x0} y1={SEG_Y-4} x2={seg.x0} y2={SEG_Y+4} stroke={seg.color} strokeWidth="1.5" />
+            <line x1={seg.x0}        y1={SEG_Y-4} x2={seg.x0}        y2={SEG_Y+4} stroke={seg.color} strokeWidth="1.5" />
             {seg.len > (i < 3 ? D*0.85 : partial*0.85) && (
               <>
                 <line x1={seg.x0+seg.len} y1={SEG_Y-4} x2={seg.x0+seg.len} y2={SEG_Y+4} stroke={seg.color} strokeWidth="1.5" />
-                <text x={seg.x0 + seg.len/2} y={SEG_Y+14} fill={seg.color} fontSize="8.5"
+                <text x={seg.x0+seg.len/2} y={SEG_Y+13} fill={seg.color} fontSize="8.5"
                   textAnchor="middle" fontFamily="sans-serif" fontWeight="bold">{seg.label}</text>
               </>
             )}
           </g>
         ))}
 
-        {/* ── Brace lines when both rows complete ── */}
+        {/* Brace verticals when both rows complete */}
         {s4 > 0.9 && (
           <>
-            <line x1={LX} y1={LY+6} x2={LX} y2={SEG_Y-6} stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
-            <line x1={LX+CIRC} y1={LY+6} x2={LX+CIRC} y2={SEG_Y-6} stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1={RX}      y1={ROPE_Y+7} x2={RX}      y2={SEG_Y-6} stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1={RX+CIRC} y1={ROPE_Y+7} x2={RX+CIRC} y2={SEG_Y-6} stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
           </>
         )}
 
-        {/* ── π conclusion box ── */}
+        {/* ══ π CONCLUSION BOX ══ */}
         {piLbl > 0 && (
           <g opacity={piLbl}>
-            <rect x={214} y={52} width={90} height={62} rx="8"
+            <rect x={215} y={46} width={88} height={66} rx="8"
               fill="rgba(168,85,247,0.18)" stroke="#a855f7" strokeWidth="1.5" />
-            <text x={259} y={72} fill="#c084fc" fontSize="10.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">π = K ÷ d</text>
-            <text x={259} y={89} fill="#fbbf24" fontSize="14" textAnchor="middle" fontFamily="monospace" fontWeight="bold">≈ 3,14</text>
-            <text x={259} y={105} fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="sans-serif">= 22/7</text>
+            <text x={259} y={66}  fill="#c084fc" fontSize="10"  textAnchor="middle" fontFamily="monospace" fontWeight="bold">π = tali ÷ d</text>
+            <text x={259} y={83}  fill="#fbbf24" fontSize="14"  textAnchor="middle" fontFamily="monospace" fontWeight="bold">≈ 3,14</text>
+            <text x={259} y={100} fill="#94a3b8" fontSize="9"   textAnchor="middle" fontFamily="sans-serif">= 22/7</text>
+            <text x={259} y={113} fill="#475569" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">selalu sama!</text>
           </g>
         )}
 
-        {/* ── Phase label ── */}
-        <text x={155} y={190} fill="#475569" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">{phaseLabel}</text>
+        {/* Phase label */}
+        <text x={155} y={196} fill="#475569" fontSize="8" textAnchor="middle" fontFamily="sans-serif">{phaseLabel}</text>
       </svg>
     </div>
   );
