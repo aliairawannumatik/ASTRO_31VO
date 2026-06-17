@@ -474,34 +474,94 @@ const TriplePythagorasPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="pola" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Tabel Ringkas 5 Tipe + Kelipatannya"/>
             {open.includes("pola") && (
-              <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-xs text-white/60">Lihat sekilas: baris biru = triple dasar (k=1), baris biasa = kelipatannya.</p>
-                <div className="overflow-x-auto rounded-xl border border-slate-600">
-                  <table className="w-full text-xs font-mono">
-                    <thead>
-                      <tr className="bg-slate-800/90">
-                        <th className="px-3 py-2 text-left text-white/50">k</th>
+              <div className="px-3 sm:px-5 pb-5 space-y-4">
+                <p className="font-body text-xs text-white/60">
+                  ⭐ Baris pertama = triple dasar (wajib hafal!), baris berikutnya = kelipatannya.
+                </p>
+
+                {/* ── Attractive compact table — no horizontal scroll ── */}
+                <div className="rounded-2xl overflow-hidden border border-slate-600/60"
+                  style={{background:'linear-gradient(180deg,rgba(15,23,42,0.95) 0%,rgba(2,6,23,0.98) 100%)'}}>
+
+                  {/* Column header */}
+                  <div className="grid font-mono" style={{gridTemplateColumns:'auto repeat(5,1fr)'}}>
+                    {/* k header */}
+                    <div className="px-1.5 sm:px-3 py-2 flex items-center justify-center bg-slate-800/80 border-b border-r border-slate-700/50">
+                      <span className="text-[9px] sm:text-[11px] text-white/40 font-bold tracking-widest">k</span>
+                    </div>
+                    {LIMA_TIPE.map(t => (
+                      <div
+                        key={t.tipe}
+                        className="py-2 px-0.5 flex flex-col items-center justify-center gap-0.5 border-b border-r border-slate-700/50 last:border-r-0"
+                        style={{background: `linear-gradient(160deg, rgba(15,23,42,0.9) 0%, rgba(30,41,59,0.85) 100%)`}}
+                      >
+                        <span className="text-sm sm:text-base leading-none">{t.emoji}</span>
+                        <span className={`text-[8px] sm:text-[10px] font-black uppercase tracking-tight ${t.text}`}>Tipe {t.tipe}</span>
+                        <span className={`text-[7px] sm:text-[9px] font-bold font-mono ${t.text} opacity-80`}>{t.a}–{t.b}–{t.c}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Data rows */}
+                  {[1,2,3,4,5].map(k => {
+                    const isBase = k === 1;
+                    return (
+                      <div
+                        key={k}
+                        className="grid border-b border-slate-700/30 last:border-b-0"
+                        style={{
+                          gridTemplateColumns: 'auto repeat(5,1fr)',
+                          background: isBase
+                            ? 'linear-gradient(90deg,rgba(6,182,212,0.18) 0%,rgba(139,92,246,0.12) 50%,rgba(236,72,153,0.10) 100%)'
+                            : k % 2 === 0 ? 'rgba(15,23,42,0.6)' : 'rgba(30,41,59,0.3)',
+                        }}
+                      >
+                        {/* k cell */}
+                        <div className={`px-1.5 sm:px-3 flex items-center justify-center border-r border-slate-700/40 ${isBase ? 'py-3' : 'py-2'}`}>
+                          {isBase ? (
+                            <div className="flex flex-col items-center gap-0.5">
+                              <span className="text-[8px] sm:text-[10px] leading-none">⭐</span>
+                              <span className="text-[9px] sm:text-[11px] font-black text-cyan-300 font-mono">×1</span>
+                              <span className="text-[6px] sm:text-[8px] text-cyan-400/70 font-body leading-none hidden sm:block">DASAR</span>
+                            </div>
+                          ) : (
+                            <span className="text-[9px] sm:text-[11px] font-bold text-white/40 font-mono">×{k}</span>
+                          )}
+                        </div>
+
+                        {/* Type cells */}
                         {LIMA_TIPE.map(t => (
-                          <th key={t.tipe} className={`px-3 py-2 text-center ${t.text}`}>
-                            {t.emoji} Tipe {t.tipe}
-                          </th>
+                          <div
+                            key={t.tipe}
+                            className={`flex items-center justify-center border-r border-slate-700/30 last:border-r-0 text-center ${isBase ? 'py-3' : 'py-2'}`}
+                          >
+                            {isBase ? (
+                              <div className="flex flex-col items-center gap-0.5">
+                                <span className={`text-[10px] sm:text-[13px] font-black font-mono leading-tight ${t.text}`} style={{textShadow:`0 0 8px currentColor`}}>
+                                  {t.a*k}–{t.b*k}–{t.c*k}
+                                </span>
+                                <span className="text-[7px] sm:text-[9px] text-white/30 font-mono hidden sm:block">
+                                  {t.a*t.a}+{t.b*t.b}={t.c*t.c}
+                                </span>
+                              </div>
+                            ) : (
+                              <span className="text-[8px] sm:text-[11px] font-mono text-white/55">
+                                {t.a*k}–{t.b*k}–{t.c*k}
+                              </span>
+                            )}
+                          </div>
                         ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {[1,2,3,4,5].map(k => (
-                        <tr key={k} className={k===1 ? 'bg-cyan-900/20 border-l-2 border-cyan-500' : k%2===0 ? 'bg-slate-900/40' : 'bg-slate-800/20'}>
-                          <td className="px-3 py-1.5 text-white/50 font-bold">×{k}</td>
-                          {LIMA_TIPE.map(t => (
-                            <td key={t.tipe} className={`px-3 py-1.5 text-center ${k===1 ? t.text+' font-bold' : 'text-white/70'}`}>
-                              {t.a*k}–{t.b*k}–{t.c*k}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </div>
+                    );
+                  })}
                 </div>
+
+                {/* Legend */}
+                <div className="flex items-start gap-2 flex-wrap text-[10px] font-body text-white/50">
+                  <span className="flex items-center gap-1"><span className="text-sm">⭐</span> Baris ×1 = <strong className="text-cyan-300">Triple Dasar (wajib hafal!)</strong></span>
+                  <span className="flex items-center gap-1 ml-auto sm:ml-0">Baris ×2–×5 = kelipatan valid</span>
+                </div>
+
                 <div className="bg-slate-800/40 border border-slate-600 rounded-lg px-4 py-2">
                   <p className="font-body text-xs text-white/50">
                     💡 <strong className="text-white/70">Cara cepat:</strong> Lihat apakah dua kaki segitiga bisa dibagi bilangan yang sama. Jika hasil baginya cocok dengan tipe 1–5, langsung tahu sisi miringnya!
