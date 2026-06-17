@@ -108,7 +108,7 @@ const TentangAplikasiPage = () => {
               {/* Features */}
               <div className="grid grid-cols-2 gap-2 mb-4">
                 {[
-                  { icon: "🖥️", text: "Tampil Full-screen di proyektor" },
+                  { icon: "🖥️", text: "Tampil Full-screen di proyektor, Twin Mirror & Smart TV Windows" },
                   { icon: "⚡", text: "Animasi & visualisasi interaktif" },
                   { icon: "📐", text: "Materi lengkap kelas 7–9" },
                   { icon: "🎮", text: "Game & kuis siap pakai di kelas" },
