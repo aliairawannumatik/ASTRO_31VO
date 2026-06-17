@@ -128,49 +128,96 @@ const SegitigaSikuSVG = () => (
 );
 
 const RumusVariasiSVG = () => (
-  <svg viewBox="0 0 340 230" className="w-full max-w-sm mx-auto my-2" aria-label="Variasi rumus Pythagoras">
+  <svg viewBox="0 0 420 230" className="w-full max-w-xl mx-auto my-2" aria-label="Tiga skenario variasi rumus Pythagoras">
     <defs>
       <style>{`
-        @keyframes pulse2{0%,100%{opacity:1;}50%{opacity:0.4;}}
-        .p1{animation:pulse2 2s ease-in-out infinite;}
-        .p2{animation:pulse2 2s ease-in-out infinite 0.7s;}
-        .p3{animation:pulse2 2s ease-in-out infinite 1.4s;}
+        @keyframes glw{0%,100%{opacity:1;}50%{opacity:0.45;}}
+        .gl-c{animation:glw 2.2s ease-in-out infinite;}
+        .gl-a{animation:glw 2.2s ease-in-out infinite 0.73s;}
+        .gl-b{animation:glw 2.2s ease-in-out infinite 1.47s;}
       `}</style>
+      <filter id="rvs-glow">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
     </defs>
-    <g transform="translate(10,10)">
-      <polygon points="10,100 90,100 10,20" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" strokeWidth="1.5"/>
-      <polyline points="10,82 28,82 28,100" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
-      <text x="8"  y="15"  fill="#60a5fa" fontSize="9" fontFamily="monospace">a</text>
-      <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace">b</text>
-      <text x="55" y="55"  fill="#fb923c" fontSize="9" fontFamily="monospace" className="p1">c=?</text>
-      <text x="5"  y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">Cari c (hipotenusa)</text>
-      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">c²=a²+b²</text>
-    </g>
-    <line x1="115" y1="10" x2="115" y2="160" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
-    <g transform="translate(125,10)">
-      <polygon points="10,100 90,100 10,20" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
-      <polyline points="10,82 28,82 28,100" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
-      <text x="8"  y="15"  fill="#60a5fa" fontSize="9" fontFamily="monospace" className="p2">a=?</text>
-      <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace">b</text>
-      <text x="55" y="55"  fill="#fb923c" fontSize="9" fontFamily="monospace">c</text>
-      <text x="5"  y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">Cari a (kaki)</text>
-      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">a²=c²-b²</text>
-    </g>
-    <line x1="230" y1="10" x2="230" y2="160" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
-    <g transform="translate(240,10)">
-      <polygon points="10,100 90,100 10,20" fill="rgba(249,115,22,0.2)" stroke="#f97316" strokeWidth="1.5"/>
-      <polyline points="10,82 28,82 28,100" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity="0.6"/>
-      <text x="8"  y="15"  fill="#60a5fa" fontSize="9" fontFamily="monospace">a</text>
-      <text x="47" y="112" fill="#4ade80" fontSize="9" fontFamily="monospace" className="p3">b=?</text>
-      <text x="55" y="55"  fill="#fb923c" fontSize="9" fontFamily="monospace">c</text>
-      <text x="5"  y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">Cari b (kaki)</text>
-      <text x="5"  y="135" fill="#eab308" fontSize="8" fontFamily="monospace">b²=c²-a²</text>
-    </g>
-    <rect x="10" y="170" width="320" height="50" rx="8" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1"/>
-    <text x="170" y="187" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">TIGA VARIASI RUMUS PYTHAGORAS</text>
-    <text x="60"  y="205" fill="#fb923c" fontSize="8" textAnchor="middle" fontFamily="monospace">c² = a²+b²</text>
-    <text x="170" y="205" fill="#60a5fa" fontSize="8" textAnchor="middle" fontFamily="monospace">a² = c²-b²</text>
-    <text x="282" y="205" fill="#4ade80" fontSize="8" textAnchor="middle" fontFamily="monospace">b² = c²-a²</text>
+
+    {/* ── Main background ── */}
+    <rect x="1" y="1" width="418" height="228" rx="12" fill="rgba(10,15,30,0.92)" stroke="rgba(51,65,85,0.7)" strokeWidth="1.4"/>
+
+    {/* ════ LEFT: Main labeled triangle ════ */}
+    {/* Right angle at C=(38,200), A=(38,30) vertical leg=a, B=(178,200) horizontal leg=b */}
+    <polygon points="38,30 178,200 38,200" fill="rgba(99,102,241,0.08)"/>
+
+    {/* Side a — vertical, blue */}
+    <line x1="38" y1="30" x2="38" y2="200" stroke="#3b82f6" strokeWidth="4.5" strokeLinecap="round"/>
+    {/* Side b — horizontal, green */}
+    <line x1="38" y1="200" x2="178" y2="200" stroke="#22c55e" strokeWidth="4.5" strokeLinecap="round"/>
+    {/* Hypotenuse c — orange */}
+    <line x1="38" y1="30" x2="178" y2="200" stroke="#f97316" strokeWidth="4.5" strokeLinecap="round"/>
+
+    {/* Right-angle mark */}
+    <polyline points="38,186 52,186 52,200" fill="none" stroke="rgba(148,163,184,0.85)" strokeWidth="1.8"/>
+
+    {/* 90° label */}
+    <text x="28" y="58" fill="#64748b" fontSize="9" fontFamily="monospace">90°</text>
+
+    {/* Vertex labels */}
+    <text x="24" y="28" fill="#94a3b8" fontSize="10" fontWeight="bold">A</text>
+    <text x="24" y="213" fill="#94a3b8" fontSize="10" fontWeight="bold">C</text>
+    <text x="183" y="213" fill="#94a3b8" fontSize="10" fontWeight="bold">B</text>
+
+    {/* Side label badges */}
+    {/* a badge */}
+    <rect x="6" y="107" width="26" height="26" rx="6" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" strokeWidth="1.5"/>
+    <text x="19" y="124" textAnchor="middle" fill="#93c5fd" fontSize="16" fontWeight="bold" fontFamily="sans-serif">a</text>
+    {/* b badge */}
+    <rect x="97" y="205" width="26" height="20" rx="5" fill="rgba(34,197,94,0.3)" stroke="#22c55e" strokeWidth="1.5"/>
+    <text x="110" y="219" textAnchor="middle" fill="#86efac" fontSize="15" fontWeight="bold" fontFamily="sans-serif">b</text>
+    {/* c badge */}
+    <rect x="95" y="99" width="26" height="26" rx="6" fill="rgba(249,115,22,0.3)" stroke="#f97316" strokeWidth="1.5" className="gl-c"/>
+    <text x="108" y="116" textAnchor="middle" fill="#fdba74" fontSize="16" fontWeight="bold" fontFamily="sans-serif" className="gl-c">c</text>
+
+    {/* Legend strip at bottom-left */}
+    <rect x="8" y="8" width="12" height="9" rx="2" fill="#3b82f6"/>
+    <text x="24" y="16" fill="#93c5fd" fontSize="8.5" fontFamily="sans-serif">sisi siku-siku (kaki) a</text>
+    <rect x="8" y="20" width="12" height="9" rx="2" fill="#22c55e"/>
+    <text x="24" y="28" fill="#86efac" fontSize="8.5" fontFamily="sans-serif">sisi siku-siku (kaki) b</text>
+    <rect x="8" y="32" width="12" height="9" rx="2" fill="#f97316"/>
+    <text x="24" y="40" fill="#fdba74" fontSize="8.5" fontFamily="sans-serif">hipotenusa (sisi miring) c</text>
+
+    {/* ════ DIVIDER ════ */}
+    <line x1="196" y1="8" x2="196" y2="222" stroke="rgba(71,85,105,0.6)" strokeWidth="1.2" strokeDasharray="5 3"/>
+
+    {/* ════ RIGHT: 3 Scenario panels ════ */}
+
+    {/* SCENARIO 1 — Cari c */}
+    <rect x="202" y="8" width="210" height="66" rx="8" fill="rgba(249,115,22,0.09)" stroke="rgba(249,115,22,0.55)" strokeWidth="1.4"/>
+    <rect x="207" y="13" width="36" height="16" rx="4" fill="rgba(249,115,22,0.25)"/>
+    <text x="225" y="24" textAnchor="middle" fill="#fb923c" fontSize="9" fontWeight="bold" fontFamily="sans-serif">Skenario 1</text>
+    <text x="250" y="24" fill="#fdba74" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">Cari hipotenusa c</text>
+    <text x="208" y="38" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">Diketahui: a dan b  →  Cari: c (sisi miring)</text>
+    {/* Formula box */}
+    <rect x="207" y="44" width="199" height="25" rx="5" fill="rgba(0,0,0,0.5)" stroke="rgba(249,115,22,0.4)" strokeWidth="1" className="gl-c"/>
+    <text x="306" y="60" textAnchor="middle" fill="#fde68a" fontSize="14" fontWeight="bold" fontFamily="monospace" filter="url(#rvs-glow)" className="gl-c">c² = a² + b²</text>
+
+    {/* SCENARIO 2 — Cari a */}
+    <rect x="202" y="82" width="210" height="66" rx="8" fill="rgba(59,130,246,0.09)" stroke="rgba(59,130,246,0.55)" strokeWidth="1.4"/>
+    <rect x="207" y="87" width="36" height="16" rx="4" fill="rgba(59,130,246,0.25)"/>
+    <text x="225" y="98" textAnchor="middle" fill="#60a5fa" fontSize="9" fontWeight="bold" fontFamily="sans-serif">Skenario 2</text>
+    <text x="250" y="98" fill="#93c5fd" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">Cari kaki pertama a</text>
+    <text x="208" y="112" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">Diketahui: b dan c  →  Cari: a (kaki 1)</text>
+    <rect x="207" y="118" width="199" height="25" rx="5" fill="rgba(0,0,0,0.5)" stroke="rgba(59,130,246,0.4)" strokeWidth="1" className="gl-a"/>
+    <text x="306" y="134" textAnchor="middle" fill="#bfdbfe" fontSize="14" fontWeight="bold" fontFamily="monospace" filter="url(#rvs-glow)" className="gl-a">a² = c² - b²</text>
+
+    {/* SCENARIO 3 — Cari b */}
+    <rect x="202" y="156" width="210" height="66" rx="8" fill="rgba(34,197,94,0.09)" stroke="rgba(34,197,94,0.55)" strokeWidth="1.4"/>
+    <rect x="207" y="161" width="36" height="16" rx="4" fill="rgba(34,197,94,0.25)"/>
+    <text x="225" y="172" textAnchor="middle" fill="#4ade80" fontSize="9" fontWeight="bold" fontFamily="sans-serif">Skenario 3</text>
+    <text x="250" y="172" fill="#86efac" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">Cari kaki kedua b</text>
+    <text x="208" y="186" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">Diketahui: a dan c  →  Cari: b (kaki 2)</text>
+    <rect x="207" y="192" width="199" height="25" rx="5" fill="rgba(0,0,0,0.5)" stroke="rgba(34,197,94,0.4)" strokeWidth="1" className="gl-b"/>
+    <text x="306" y="208" textAnchor="middle" fill="#bbf7d0" fontSize="14" fontWeight="bold" fontFamily="monospace" filter="url(#rvs-glow)" className="gl-b">b² = c² - a²</text>
   </svg>
 );
 
@@ -496,94 +543,440 @@ const PembuktianPage = () => {
                   Kunci menghitung panjang sisi adalah: <strong className="text-cyan-300">(1)</strong> identifikasi mana hipotenusa, <strong className="text-cyan-300">(2)</strong> pilih rumus yang tepat, <strong className="text-cyan-300">(3)</strong> substitusikan nilai, <strong className="text-cyan-300">(4)</strong> sederhanakan hasilnya.
                 </p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+              {/* ── CARA MENYEDERHANAKAN AKAR ── */}
+              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
                 <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Cara Menyederhanakan Akar</p>
-                <p className="font-body text-sm text-white/80">Contoh: Sederhanakan <InlineMath math="\sqrt{72}"/></p>
-                <BlockMath math="\sqrt{72} = \sqrt{36 \times 2} = \sqrt{36} \times \sqrt{2} = 6\sqrt{2}"/>
-                <p className="font-body text-sm text-white/80">Langkah: Cari faktor kuadrat sempurna terbesar dari bilangan di bawah akar!</p>
-                <div className="grid grid-cols-2 gap-2 text-xs font-body">
-                  <div className="bg-slate-700/50 rounded-lg p-2">
-                    <p className="text-cyan-300 font-bold mb-1">Bilangan Akar Sempurna:</p>
-                    <p className="text-white/60"><InlineMath math="\sqrt{4}=2,\ \sqrt{9}=3,\ \sqrt{16}=4"/></p>
-                    <p className="text-white/60"><InlineMath math="\sqrt{25}=5,\ \sqrt{36}=6,\ \sqrt{49}=7"/></p>
-                  </div>
-                  <div className="bg-slate-700/50 rounded-lg p-2">
-                    <p className="text-yellow-300 font-bold mb-1">Tips:</p>
-                    <p className="text-white/60">Jika hasilnya bulat → tulis tanpa akar. Jika tidak → sederhanakan ke bentuk <InlineMath math="n\sqrt{k}"/>.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* MHG CONTOH 4 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="mhg_c1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh 4 — Mencari Hipotenusa (Mudah)"/>
-            <div className="px-5 pb-5 space-y-4">
-              <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
-                <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Tingkat: Mudah</p>
-                <p className="font-body text-sm text-white/90">
-                  Sebuah tangga disandarkan ke dinding. Kaki tangga berjarak <strong>6 m</strong> dari dinding, dan tinggi tembok yang dijangkau tangga adalah <strong>8 m</strong>. Berapa panjang tangga tersebut?
-                </p>
-              </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="a = 6"/> m, <InlineMath math="b = 8"/> m. Dicari: <InlineMath math="c"/> (panjang tangga).</p>
-                <BlockMath math="c^2 = a^2 + b^2 = 6^2 + 8^2"/>
-                <BlockMath math="c^2 = 36 + 64 = 100"/>
-                <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
-                  <BlockMath math="c = \sqrt{100} = 10 \text{ m}"/>
-                  <p className="font-body text-sm text-green-300 text-center mt-1">✅ Panjang tangga adalah <strong>10 m</strong>.</p>
-                </div>
-                <HitungSVG a={6} b={8} c={10} cari="c"/>
-              </div>
-            </div>
-          </div>
-
-          {/* MHG CONTOH 5 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="mhg_c2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh 5 — Mencari Salah Satu Kaki (Sedang)"/>
-            <div className="px-5 pb-5 space-y-4">
-              <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
-                <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
-                <p className="font-body text-sm text-white/90">
-                  Sebuah layar kapal berbentuk segitiga siku-siku. Sisi miringnya (tali layar terpanjang) adalah <strong>13 m</strong> dan alas layarnya <strong>5 m</strong>. Tentukan tinggi layar tersebut!
-                </p>
-              </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                <p className="font-body text-sm text-white/80">Diketahui: <InlineMath math="c = 13"/> m, <InlineMath math="b = 5"/> m. Dicari: <InlineMath math="a"/> (tinggi layar).</p>
-                <BlockMath math="a^2 = c^2 - b^2 = 13^2 - 5^2"/>
-                <BlockMath math="a^2 = 169 - 25 = 144"/>
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                  <BlockMath math="a = \sqrt{144} = 12 \text{ m}"/>
-                  <p className="font-body text-sm text-yellow-200 text-center mt-1">✅ Tinggi layar kapal adalah <strong>12 m</strong>.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* MHG CONTOH 6 */}
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="mhg_c3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 6 — Hasil Bentuk Akar (Sulit)"/>
-            <div className="px-5 pb-5 space-y-4">
-              <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
-                <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
-                <p className="font-body text-sm text-white/90">
-                  Sebuah lapangan berbentuk persegi panjang berukuran <strong>7 m × 9 m</strong>. Seorang siswa berlari dari sudut A ke sudut C (diagonal lapangan). Berapa jarak yang ditempuh siswa tersebut? Nyatakan dalam bentuk akar sederhana!
-                </p>
-              </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                <p className="font-body text-sm text-white/80">Diagonal persegi panjang membentuk segitiga siku-siku dengan kaki <InlineMath math="a = 7"/> m dan <InlineMath math="b = 9"/> m.</p>
-                <BlockMath math="c^2 = a^2 + b^2 = 7^2 + 9^2"/>
-                <BlockMath math="c^2 = 49 + 81 = 130"/>
-                <p className="font-body text-sm text-white/80">Apakah 130 bisa disederhanakan? Faktorkan: <InlineMath math="130 = 2 \times 5 \times 13"/>. Tidak ada faktor kuadrat sempurna.</p>
-                <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                  <BlockMath math="c = \sqrt{130} \approx 11{,}40 \text{ m}"/>
-                  <p className="font-body text-sm text-red-200 text-center mt-1">
-                    ✅ Jarak diagonal adalah <InlineMath math="\sqrt{130}"/> m atau sekitar <strong>11,40 m</strong>.
+                {/* KUNCI UTAMA */}
+                <div className="bg-gradient-to-r from-yellow-900/40 to-amber-900/30 border-2 border-yellow-500/50 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-bold text-yellow-300">🔑 Kunci Utama — Aturan Perkalian Akar</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                    Untuk menyederhanakan <InlineMath math="\sqrt{n}"/>, kamu harus mengubahnya menjadi perkalian <strong className="text-cyan-300">di mana salah satu faktornya adalah bilangan kuadrat sempurna</strong> (seperti 4, 9, 16, 25, 36, ...).
                   </p>
+                  <div className="bg-black/40 rounded-xl px-3 py-2 mt-2 text-center">
+                    <BlockMath math="\sqrt{a^2 \cdot b} = \sqrt{a^2} \times \sqrt{b} = a\sqrt{b}"/>
+                  </div>
+                  <p className="font-body text-xs text-yellow-200/80 text-center">
+                    ↑ Akar dari kuadrat sempurna langsung bisa dikeluarkan dari tanda akar!
+                  </p>
+                </div>
+
+                {/* LANGKAH-LANGKAH */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-wide">⚙️ Langkah-Langkah Menyederhanakan</p>
+                  <div className="grid grid-cols-1 gap-2">
+                    {[
+                      { step: "1", color: "bg-blue-900/40 border-blue-500/40", tc: "text-blue-300", text: "Faktorkan bilangan di bawah akar menjadi dua faktor, di mana salah satunya adalah bilangan kuadrat sempurna terbesar yang mungkin." },
+                      { step: "2", color: "bg-purple-900/40 border-purple-500/40", tc: "text-purple-300", text: "Pisahkan akar menggunakan aturan: √(a² · b) = √a² × √b" },
+                      { step: "3", color: "bg-green-900/40 border-green-500/40", tc: "text-green-300", text: "Selesaikan √a² = a, dan tulis hasilnya dalam bentuk a√b." },
+                    ].map(({step,color,tc,text}) => (
+                      <div key={step} className={`flex gap-3 items-start rounded-lg p-2.5 border ${color}`}>
+                        <span className={`shrink-0 w-6 h-6 rounded-full ${color} border flex items-center justify-center font-bold text-xs ${tc}`}>{step}</span>
+                        <p className="font-body text-xs text-white/75 leading-relaxed">{text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CONTOH */}
+                <div className="space-y-2">
+                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">💡 Contoh Penyederhanaan</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <div className="bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1">
+                      <p className="text-amber-300 font-bold text-xs text-center">√72</p>
+                      <div className="text-center text-xs">
+                        <InlineMath math="\sqrt{72} = \sqrt{36 \times 2}"/>
+                      </div>
+                      <div className="text-center text-xs">
+                        <InlineMath math="= \sqrt{36} \times \sqrt{2}"/>
+                      </div>
+                      <p className="text-center text-green-300 font-bold text-sm"><InlineMath math="= 6\sqrt{2}"/></p>
+                      <p className="text-center text-white/40 text-xs">36 = 6² ✓ kuadrat sempurna</p>
+                    </div>
+                    <div className="bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1">
+                      <p className="text-amber-300 font-bold text-xs text-center">√50</p>
+                      <div className="text-center text-xs">
+                        <InlineMath math="\sqrt{50} = \sqrt{25 \times 2}"/>
+                      </div>
+                      <div className="text-center text-xs">
+                        <InlineMath math="= \sqrt{25} \times \sqrt{2}"/>
+                      </div>
+                      <p className="text-center text-green-300 font-bold text-sm"><InlineMath math="= 5\sqrt{2}"/></p>
+                      <p className="text-center text-white/40 text-xs">25 = 5² ✓ kuadrat sempurna</p>
+                    </div>
+                    <div className="bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1">
+                      <p className="text-amber-300 font-bold text-xs text-center">√48</p>
+                      <div className="text-center text-xs">
+                        <InlineMath math="\sqrt{48} = \sqrt{16 \times 3}"/>
+                      </div>
+                      <div className="text-center text-xs">
+                        <InlineMath math="= \sqrt{16} \times \sqrt{3}"/>
+                      </div>
+                      <p className="text-center text-green-300 font-bold text-sm"><InlineMath math="= 4\sqrt{3}"/></p>
+                      <p className="text-center text-white/40 text-xs">16 = 4² ✓ kuadrat sempurna</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* BILANGAN KUADRAT SEMPURNA */}
+                <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
+                  <p className="font-body text-xs font-bold text-cyan-300 mb-2">📌 Bilangan Kuadrat Sempurna yang Sering Dipakai</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[[1,1],[2,4],[3,9],[4,16],[5,25],[6,36],[7,49],[8,64],[9,81],[10,100],[11,121],[12,144]].map(([n,sq]) => (
+                      <div key={n} className="bg-slate-800/70 border border-slate-600/50 rounded px-2 py-1 text-center min-w-[44px]">
+                        <p className="text-cyan-300 text-xs font-mono font-bold">{n}²</p>
+                        <p className="text-white text-xs font-mono">{sq}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* MHG CONTOH SOAL 1 */}
+          <div className="bg-card/80 backdrop-blur border border-green-500/30 rounded-xl overflow-hidden">
+            <SectionHeader id="mhg_c1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh Soal 1 — Menghitung Sisi Segitiga Siku-Siku (Jawaban Bulat)"/>
+            <div className="px-5 pb-5 space-y-5">
+              <div className="bg-green-900/20 border border-green-500/30 rounded-lg px-4 py-2">
+                <p className="font-body text-xs text-green-300">🟢 Pada contoh soal ini, semua jawaban berupa <strong>bilangan bulat</strong> (Bilangan Triple Pythagoras).</p>
+              </div>
+
+              {/* Sub-soal (a) — Mencari hipotenusa, 3-4-5 */}
+              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+                <div className="bg-green-900/40 px-4 py-2 flex items-center gap-2">
+                  <span className="bg-green-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">a</span>
+                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai dua sisi siku-siku masing-masing <strong className="text-yellow-300">3 cm</strong> dan <strong className="text-yellow-300">4 cm</strong>. Tentukan panjang sisi miringnya!</p>
+                </div>
+                <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  {/* Triangle SVG */}
+                  <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
+                    <polygon points="30,125 30,25 150,125" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.3)" strokeWidth="1"/>
+                    <line x1="30" y1="25" x2="30" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="25" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="3"  y="75"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=3</text>
+                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=4</text>
+                    <text x="95" y="72"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
+                    <text x="20" y="20"  fill="#94a3b8" fontSize="9">A</text>
+                    <text x="20" y="137" fill="#94a3b8" fontSize="9">C</text>
+                    <text x="153" y="137" fill="#94a3b8" fontSize="9">B</text>
+                  </svg>
+                  {/* Solution */}
+                  <div className="space-y-2">
+                    <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=3"/> cm, <InlineMath math="b=4"/> cm &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="c^2 = a^2 + b^2 = 3^2 + 4^2"/>
+                    </div>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="c^2 = 9 + 16 = 25"/>
+                    </div>
+                    <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-2 py-1">
+                      <BlockMath math="c = \sqrt{25} = 5 \text{ cm}"/>
+                    </div>
+                    <p className="font-body text-xs text-green-300 text-center">✅ Sisi miring = <strong>5 cm</strong></p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sub-soal (b) — Mencari hipotenusa, 5-12-13 */}
+              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+                <div className="bg-sky-900/40 px-4 py-2 flex items-center gap-2">
+                  <span className="bg-sky-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">b</span>
+                  <p className="font-body text-sm text-white/90">Sebuah layar kapal berbentuk segitiga siku-siku dengan dua kaki masing-masing <strong className="text-yellow-300">5 cm</strong> dan <strong className="text-yellow-300">12 cm</strong>. Berapa panjang tali layar (sisi miring) tersebut?</p>
+                </div>
+                <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
+                    <polygon points="30,125 30,65 150,125" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.3)" strokeWidth="1"/>
+                    <line x1="30" y1="65" x2="30" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="65" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="3"  y="95"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=5</text>
+                    <text x="80" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=12</text>
+                    <text x="90" y="87"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
+                    <text x="20" y="60"  fill="#94a3b8" fontSize="9">A</text>
+                    <text x="20" y="137" fill="#94a3b8" fontSize="9">C</text>
+                    <text x="153" y="137" fill="#94a3b8" fontSize="9">B</text>
+                  </svg>
+                  <div className="space-y-2">
+                    <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=5"/> cm, <InlineMath math="b=12"/> cm &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="c^2 = 5^2 + 12^2 = 25 + 144"/>
+                    </div>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="c^2 = 169"/>
+                    </div>
+                    <div className="bg-sky-900/40 border border-sky-500/40 rounded-lg px-2 py-1">
+                      <BlockMath math="c = \sqrt{169} = 13 \text{ cm}"/>
+                    </div>
+                    <p className="font-body text-xs text-sky-300 text-center">✅ Panjang tali layar = <strong>13 cm</strong></p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sub-soal (c) — Mencari salah satu kaki, 6-8-10 */}
+              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+                <div className="bg-violet-900/40 px-4 py-2 flex items-center gap-2">
+                  <span className="bg-violet-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">c</span>
+                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai sisi miring <strong className="text-yellow-300">10 cm</strong> dan salah satu kaki <strong className="text-yellow-300">6 cm</strong>. Tentukan panjang kaki lainnya!</p>
+                </div>
+                <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
+                    <polygon points="30,125 30,25 150,125" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.3)" strokeWidth="1"/>
+                    <line x1="30" y1="25" x2="30" y2="125" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="25" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round"/>
+                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="0"  y="75"  fill="#c4b5fd" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=?</text>
+                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=6</text>
+                    <text x="92" y="72"  fill="#fb923c" fontSize="12" fontWeight="bold" fontFamily="sans-serif">c=10</text>
+                    <text x="20" y="20"  fill="#94a3b8" fontSize="9">A</text>
+                    <text x="20" y="137" fill="#94a3b8" fontSize="9">C</text>
+                    <text x="153" y="137" fill="#94a3b8" fontSize="9">B</text>
+                  </svg>
+                  <div className="space-y-2">
+                    <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="c=10"/> cm, <InlineMath math="b=6"/> cm &nbsp;|&nbsp; Dicari: <InlineMath math="a"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="a^2 = c^2 - b^2 = 10^2 - 6^2"/>
+                    </div>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="a^2 = 100 - 36 = 64"/>
+                    </div>
+                    <div className="bg-violet-900/40 border border-violet-500/40 rounded-lg px-2 py-1">
+                      <BlockMath math="a = \sqrt{64} = 8 \text{ cm}"/>
+                    </div>
+                    <p className="font-body text-xs text-violet-300 text-center">✅ Kaki lainnya = <strong>8 cm</strong></p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* MHG CONTOH SOAL 2 */}
+          <div className="bg-card/80 backdrop-blur border border-yellow-500/30 rounded-xl overflow-hidden">
+            <SectionHeader id="mhg_c2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh Soal 2 — Jawaban Bentuk Akar Sederhana"/>
+            <div className="px-5 pb-5 space-y-5">
+              <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg px-4 py-2">
+                <p className="font-body text-xs text-yellow-300">🟡 Pada contoh soal ini, jawaban <strong>tidak bisa menjadi bilangan bulat</strong> — harus disederhanakan ke bentuk <InlineMath math="a\sqrt{b}"/>. Jangan ubah ke bentuk desimal!</p>
+              </div>
+
+              {/* Sub-soal (a) — a=4, b=6 → c²=52=4×13 → c=2√13 */}
+              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+                <div className="bg-yellow-900/40 px-4 py-2 flex items-center gap-2">
+                  <span className="bg-yellow-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">a</span>
+                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai dua kaki <strong className="text-yellow-300">4 cm</strong> dan <strong className="text-yellow-300">6 cm</strong>. Tentukan panjang sisi miringnya dalam bentuk akar paling sederhana!</p>
+                </div>
+                <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
+                    <polygon points="30,125 30,35 150,125" fill="rgba(234,179,8,0.07)" stroke="rgba(234,179,8,0.3)" strokeWidth="1"/>
+                    <line x1="30" y1="35" x2="30" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="35" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="3"  y="80"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=4</text>
+                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=6</text>
+                    <text x="95" y="72"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
+                  </svg>
+                  <div className="space-y-2">
+                    <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=4"/>, <InlineMath math="b=6"/> &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="c^2 = 4^2 + 6^2 = 16 + 36 = 52"/>
+                    </div>
+                    <p className="font-body text-xs text-white/60">Sederhanakan <InlineMath math="\sqrt{52}"/>: faktorkan → <InlineMath math="52 = 4 \times 13"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="\sqrt{52} = \sqrt{4 \times 13} = \sqrt{4}\cdot\sqrt{13} = 2\sqrt{13}"/>
+                    </div>
+                    <div className="bg-yellow-900/40 border border-yellow-500/40 rounded-lg px-2 py-1">
+                      <BlockMath math="c = 2\sqrt{13} \text{ cm}"/>
+                    </div>
+                    <p className="font-body text-xs text-yellow-300 text-center">✅ Sisi miring = <InlineMath math="2\sqrt{13}"/> cm</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sub-soal (b) — a=3, b=3 → c²=18=9×2 → c=3√2 */}
+              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+                <div className="bg-orange-900/40 px-4 py-2 flex items-center gap-2">
+                  <span className="bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">b</span>
+                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku sama kaki dengan kedua kaki masing-masing <strong className="text-yellow-300">3 cm</strong>. Berapa panjang sisi miringnya?</p>
+                </div>
+                <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
+                    <polygon points="30,125 30,25 150,125" fill="rgba(249,115,22,0.07)" stroke="rgba(249,115,22,0.3)" strokeWidth="1"/>
+                    <line x1="30" y1="25" x2="30" y2="125" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="25" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="3"  y="75"  fill="#60a5fa" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=3</text>
+                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=3</text>
+                    <text x="95" y="72"  fill="#fb923c" fontSize="13" fontWeight="bold" fontFamily="sans-serif">c=?</text>
+                  </svg>
+                  <div className="space-y-2">
+                    <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=3"/>, <InlineMath math="b=3"/> &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="c^2 = 3^2 + 3^2 = 9 + 9 = 18"/>
+                    </div>
+                    <p className="font-body text-xs text-white/60">Sederhanakan <InlineMath math="\sqrt{18}"/>: faktorkan → <InlineMath math="18 = 9 \times 2"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="\sqrt{18} = \sqrt{9 \times 2} = \sqrt{9}\cdot\sqrt{2} = 3\sqrt{2}"/>
+                    </div>
+                    <div className="bg-orange-900/40 border border-orange-500/40 rounded-lg px-2 py-1">
+                      <BlockMath math="c = 3\sqrt{2} \text{ cm}"/>
+                    </div>
+                    <p className="font-body text-xs text-orange-300 text-center">✅ Sisi miring = <InlineMath math="3\sqrt{2}"/> cm</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sub-soal (c) — c=6, b=2 → a²=32=16×2 → a=4√2 */}
+              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+                <div className="bg-rose-900/40 px-4 py-2 flex items-center gap-2">
+                  <span className="bg-rose-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">c</span>
+                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai sisi miring <strong className="text-yellow-300">6 cm</strong> dan salah satu kaki <strong className="text-yellow-300">2 cm</strong>. Tentukan kaki lainnya!</p>
+                </div>
+                <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                  <svg viewBox="0 0 190 155" className="w-full max-w-[200px] mx-auto">
+                    <polygon points="30,125 30,25 150,125" fill="rgba(244,63,94,0.07)" stroke="rgba(244,63,94,0.3)" strokeWidth="1"/>
+                    <line x1="30" y1="25" x2="30" y2="125" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 3"/>
+                    <line x1="30" y1="125" x2="150" y2="125" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                    <line x1="30" y1="25" x2="150" y2="125" stroke="#f97316" strokeWidth="3" strokeLinecap="round"/>
+                    <polyline points="30,113 42,113 42,125" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    <text x="0"  y="75"  fill="#c4b5fd" fontSize="12" fontWeight="bold" fontFamily="sans-serif">a=?</text>
+                    <text x="82" y="140" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">b=2</text>
+                    <text x="92" y="72"  fill="#fb923c" fontSize="12" fontWeight="bold" fontFamily="sans-serif">c=6</text>
+                  </svg>
+                  <div className="space-y-2">
+                    <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="c=6"/>, <InlineMath math="b=2"/> &nbsp;|&nbsp; Dicari: <InlineMath math="a"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="a^2 = c^2 - b^2 = 6^2 - 2^2 = 36 - 4 = 32"/>
+                    </div>
+                    <p className="font-body text-xs text-white/60">Sederhanakan <InlineMath math="\sqrt{32}"/>: faktorkan → <InlineMath math="32 = 16 \times 2"/></p>
+                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                      <BlockMath math="\sqrt{32} = \sqrt{16 \times 2} = \sqrt{16}\cdot\sqrt{2} = 4\sqrt{2}"/>
+                    </div>
+                    <div className="bg-rose-900/40 border border-rose-500/40 rounded-lg px-2 py-1">
+                      <BlockMath math="a = 4\sqrt{2} \text{ cm}"/>
+                    </div>
+                    <p className="font-body text-xs text-rose-300 text-center">✅ Kaki lainnya = <InlineMath math="4\sqrt{2}"/> cm</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* MHG CONTOH SOAL 3 */}
+          <div className="bg-card/80 backdrop-blur border border-red-500/30 rounded-xl overflow-hidden">
+            <SectionHeader id="mhg_c3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh Soal 3 — Kapal Berlayar (Soal Cerita)"/>
+            <div className="px-5 pb-5 space-y-4">
+              {/* Soal */}
+              <div className="bg-red-900/20 border border-red-500/40 rounded-xl p-4 space-y-2">
+                <p className="text-red-300 font-bold text-xs uppercase tracking-wide">🔴 Soal Cerita — Navigasi Kapal</p>
+                <p className="font-body text-sm text-white/90 leading-relaxed">
+                  Sebuah kapal berangkat dari <strong className="text-cyan-300">Pelabuhan A</strong>. Kapal berlayar ke <strong className="text-green-300">arah Utara</strong> sejauh <strong className="text-yellow-300">8 km</strong> hingga tiba di <strong className="text-blue-300">Pelabuhan B</strong>. Dari Pelabuhan B, kapal berbelok ke <strong className="text-orange-300">arah Timur</strong> sejauh <strong className="text-yellow-300">15 km</strong> menuju <strong className="text-purple-300">Pelabuhan C</strong>.
+                </p>
+                <p className="font-body text-sm text-white/80 mt-1">
+                  <strong className="text-cyan-200">Pertanyaan:</strong> Berapa jarak lurus (garis lurus) dari Pelabuhan A ke Pelabuhan C?
+                </p>
+              </div>
+
+              {/* Diagram kapal */}
+              <div className="bg-slate-900/60 border border-slate-700/50 rounded-xl p-3">
+                <p className="font-body text-xs text-slate-400 text-center mb-2">📍 Diagram Rute Kapal</p>
+                <svg viewBox="0 0 340 240" className="w-full max-w-md mx-auto">
+                  {/* Background ocean */}
+                  <rect x="0" y="0" width="340" height="240" rx="10" fill="rgba(3,7,18,0.5)"/>
+                  {/* Ocean grid */}
+                  {[0,1,2,3].map(i => (
+                    <line key={`h${i}`} x1="20" y1={60+i*45} x2="320" y2={60+i*45} stroke="rgba(59,130,246,0.08)" strokeWidth="1"/>
+                  ))}
+                  {[0,1,2,3,4].map(i => (
+                    <line key={`v${i}`} x1={20+i*75} y1="20" x2={20+i*75} y2="210" stroke="rgba(59,130,246,0.08)" strokeWidth="1"/>
+                  ))}
+
+                  {/* North arrow */}
+                  <line x1="305" y1="40" x2="305" y2="20" stroke="#4ade80" strokeWidth="1.5" markerEnd="url(#arr)"/>
+                  <text x="299" y="52" fill="#4ade80" fontSize="9" fontFamily="sans-serif" fontWeight="bold">U</text>
+                  <defs>
+                    <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                      <path d="M0,0 L6,3 L0,6 Z" fill="#4ade80"/>
+                    </marker>
+                    <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                      <path d="M0,0 L6,3 L0,6 Z" fill="#94a3b8"/>
+                    </marker>
+                  </defs>
+
+                  {/* Triangle area fill */}
+                  <polygon points="70,190 70,55 250,190" fill="rgba(99,102,241,0.08)" stroke="rgba(99,102,241,0.2)" strokeWidth="1"/>
+
+                  {/* AB — North leg (blue, 8 km) */}
+                  <line x1="70" y1="190" x2="70" y2="55" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+                  {/* BC — East leg (green, 15 km) */}
+                  <line x1="70" y1="55" x2="250" y2="55" stroke="#22c55e" strokeWidth="3" strokeLinecap="round"/>
+                  {/* AC — hypotenuse (orange dashed, unknown → 17 km) */}
+                  <line x1="70" y1="190" x2="250" y2="55" stroke="#f97316" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="8 4"/>
+
+                  {/* Right angle at B */}
+                  <polyline points="70,70 85,70 85,55" fill="none" stroke="rgba(148,163,184,0.8)" strokeWidth="1.5"/>
+
+                  {/* Port markers */}
+                  {/* A */}
+                  <circle cx="70" cy="190" r="7" fill="#06b6d4" opacity="0.9"/>
+                  <text x="70" cy="190" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold" y="193">A</text>
+                  <text x="48" y="200" fill="#06b6d4" fontSize="10" fontWeight="bold" fontFamily="sans-serif">Pelabuhan A</text>
+                  <text x="48" y="212" fill="#94a3b8" fontSize="8" fontFamily="monospace">(start)</text>
+
+                  {/* B */}
+                  <circle cx="70" cy="55" r="7" fill="#3b82f6" opacity="0.9"/>
+                  <text x="70" cy="55" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold" y="58">B</text>
+                  <text x="48" y="45" fill="#3b82f6" fontSize="10" fontWeight="bold" fontFamily="sans-serif">Pelabuhan B</text>
+
+                  {/* C */}
+                  <circle cx="250" cy="55" r="7" fill="#a855f7" opacity="0.9"/>
+                  <text x="250" cy="55" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold" y="58">C</text>
+                  <text x="256" y="45" fill="#a855f7" fontSize="10" fontWeight="bold" fontFamily="sans-serif">Pelabuhan C</text>
+
+                  {/* Side labels */}
+                  {/* AB = 8 km */}
+                  <rect x="20" y="112" width="43" height="18" rx="4" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" strokeWidth="1"/>
+                  <text x="41" y="124" textAnchor="middle" fill="#93c5fd" fontSize="10" fontWeight="bold" fontFamily="monospace">8 km ↑</text>
+
+                  {/* BC = 15 km */}
+                  <rect x="130" y="32" width="56" height="18" rx="4" fill="rgba(34,197,94,0.3)" stroke="#22c55e" strokeWidth="1"/>
+                  <text x="158" y="44" textAnchor="middle" fill="#86efac" fontSize="10" fontWeight="bold" fontFamily="monospace">15 km →</text>
+
+                  {/* AC = ? (diagonal) */}
+                  <rect x="148" y="128" width="46" height="18" rx="4" fill="rgba(249,115,22,0.3)" stroke="#f97316" strokeWidth="1"/>
+                  <text x="171" y="140" textAnchor="middle" fill="#fdba74" fontSize="11" fontWeight="bold" fontFamily="monospace">AC = ?</text>
+                </svg>
+              </div>
+
+              {/* Pembahasan */}
+              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+
+                <div className="bg-slate-700/40 rounded-lg p-3 space-y-1">
+                  <p className="font-body text-xs text-cyan-300 font-bold">Identifikasi Segitiga:</p>
+                  <p className="font-body text-xs text-white/75">• AB = 8 km (kaki — arah Utara)</p>
+                  <p className="font-body text-xs text-white/75">• BC = 15 km (kaki — arah Timur)</p>
+                  <p className="font-body text-xs text-white/75">• Sudut di B = 90° (Utara ⊥ Timur)</p>
+                  <p className="font-body text-xs text-white/75">• AC = hipotenusa (jarak lurus A ke C) = <strong className="text-orange-300">dicari</strong></p>
+                </div>
+
+                <p className="font-body text-xs text-slate-400">Gunakan rumus hipotenusa: <InlineMath math="c^2 = a^2 + b^2"/></p>
+                <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                  <BlockMath math="AC^2 = AB^2 + BC^2 = 8^2 + 15^2"/>
+                </div>
+                <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                  <BlockMath math="AC^2 = 64 + 225 = 289"/>
+                </div>
+                <div className="bg-gradient-to-r from-red-900/40 to-orange-900/30 border border-red-500/40 rounded-xl px-3 py-3 text-center space-y-1">
+                  <BlockMath math="AC = \sqrt{289} = 17 \text{ km}"/>
+                  <p className="font-body text-sm text-red-200 font-semibold">✅ Jarak lurus Pelabuhan A ke Pelabuhan C = <strong className="text-white">17 km</strong></p>
+                  <p className="font-body text-xs text-slate-400">(Kapal menempuh rute 8 + 15 = 23 km, padahal jarak lurus hanya 17 km!)</p>
                 </div>
               </div>
             </div>
