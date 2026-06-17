@@ -182,27 +182,6 @@ const TentangAplikasiPage = () => {
           </div>
         </div>
 
-        <div className="animate-slide-up mb-6" style={{ animationDelay: '0.38s' }}>
-          <div className="relative rounded-2xl p-[1.5px] bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-500 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
-            <div className="rounded-2xl bg-[#0d0d2b] px-6 py-4 flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center shrink-0 overflow-hidden">
-                <img src="/logo-update.png" alt="Update" className="w-full h-full object-contain" />
-              </div>
-              <div className="flex-1">
-                <p className="font-display text-xs font-bold tracking-widest uppercase text-emerald-400 mb-0.5">Jadwal Pembaruan</p>
-                <p className="font-display text-base md:text-lg font-black text-white leading-snug">
-                  Diperbarui setiap{" "}
-                  <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                    2 - 4 minggu sekali
-                  </span>
-                </p>
-                <p className="text-white/55 font-body text-xs mt-1 leading-relaxed">
-                  Konten, fitur, dan perbaikan ditambahkan secara berkala agar pengalaman belajarmu selalu segar dan makin lengkap.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div className="text-center space-y-2 animate-slide-up" style={{ animationDelay: '0.40s' }}>
           <p className="text-white/40 font-body text-xs">
