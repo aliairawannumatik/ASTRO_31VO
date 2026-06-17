@@ -7,16 +7,18 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
-/* ── Known Pythagorean triples data ── */
-const TRIPLES = [
-  { a: 3, b: 4, c: 5, note: "Paling dasar" },
-  { a: 5, b: 12, c: 13, note: "Populer" },
-  { a: 8, b: 15, c: 17, note: "Arsitek" },
-  { a: 7, b: 24, c: 25, note: "Jarang diketahui" },
-  { a: 9, b: 40, c: 41, note: "Cerdas" },
-  { a: 6, b: 8, c: 10, note: "Kelipatan 3-4-5" },
-  { a: 5, b: 12, c: 13, note: "Pelaut" },
-  { a: 20, b: 21, c: 29, note: "Unik" },
+/* ── 5 Tipe Triple Pythagoras ── */
+const LIMA_TIPE = [
+  { tipe:1, a:3,  b:4,  c:5,  emoji:'🥇', label:'Triple Paling Dasar',
+    text:'text-cyan-300',   bd:'border-cyan-500/60',   hdr:'bg-cyan-900/50',   chip:'bg-cyan-900/40'   },
+  { tipe:2, a:5,  b:12, c:13, emoji:'🥈', label:'Triple Pelaut & Navigator',
+    text:'text-green-300',  bd:'border-green-500/60',  hdr:'bg-green-900/50',  chip:'bg-green-900/40'  },
+  { tipe:3, a:7,  b:24, c:25, emoji:'🥉', label:'Triple Tersembunyi',
+    text:'text-violet-300', bd:'border-violet-500/60', hdr:'bg-violet-900/50', chip:'bg-violet-900/40' },
+  { tipe:4, a:8,  b:15, c:17, emoji:'⭐', label:'Triple Para Arsitek',
+    text:'text-yellow-300', bd:'border-yellow-500/60', hdr:'bg-yellow-900/50', chip:'bg-yellow-900/40' },
+  { tipe:5, a:9,  b:40, c:41, emoji:'💎', label:'Triple Luar Biasa',
+    text:'text-pink-300',   bd:'border-pink-500/60',   hdr:'bg-pink-900/50',   chip:'bg-pink-900/40'   },
 ];
 
 /* ── SVG: Triple verification bar chart ── */
@@ -136,41 +138,120 @@ const TriplePythagorasPage = () => {
             )}
           </div>
 
-          {/* DAFTAR TRIPLE */}
+          {/* DAFTAR TRIPLE — 5 TIPE BERWARNA */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="daftar" icon={<Star className="w-5 h-5"/>} iconColor="text-yellow-400" title="⭐ Daftar Triple Pythagoras Penting"/>
+            <SectionHeader id="daftar" icon={<Star className="w-5 h-5"/>} iconColor="text-yellow-400" title="🏆 5 Tipe Triple Pythagoras Wajib Hafal"/>
             {open.includes("daftar") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="overflow-x-auto rounded-xl border border-slate-600">
-                  <table className="w-full text-sm font-body">
-                    <thead>
-                      <tr className="bg-slate-800/80">
-                        <th className="px-4 py-3 text-left text-cyan-300 font-bold">Triple (a, b, c)</th>
-                        <th className="px-4 py-3 text-left text-blue-300 font-bold"><InlineMath math="a^2 + b^2"/></th>
-                        <th className="px-4 py-3 text-left text-orange-300 font-bold"><InlineMath math="c^2"/></th>
-                        <th className="px-4 py-3 text-left text-green-300 font-bold">Keterangan</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {[
-                        {a:3,b:4,c:5,note:"Triple paling dasar"},
-                        {a:5,b:12,c:13,note:"Triple populer"},
-                        {a:8,b:15,c:17,note:"Digunakan arsitek"},
-                        {a:7,b:24,c:25,note:"Jarang, tapi valid"},
-                        {a:9,b:40,c:41,note:"Triple unik"},
-                        {a:6,b:8,c:10,note:"Kelipatan 3-4-5 (×2)"},
-                        {a:20,b:21,c:29,note:"Triple istimewa"},
-                      ].map(({a,b,c,note},i)=>(
-                        <tr key={i} className={i%2===0?"bg-slate-900/40":"bg-slate-800/30"}>
-                          <td className="px-4 py-2 text-white font-bold">{a} – {b} – {c}</td>
-                          <td className="px-4 py-2 text-blue-200">{a*a}+{b*b}={a*a+b*b}</td>
-                          <td className="px-4 py-2 text-orange-200">{c}²={c*c}</td>
-                          <td className="px-4 py-2 text-white/60 text-xs">{note}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+              <div className="px-5 pb-5 space-y-5">
+
+                {/* Headline banner */}
+                <div className="relative rounded-xl overflow-hidden border border-white/10 p-4 text-center"
+                  style={{background:'linear-gradient(135deg,rgba(8,145,178,0.35) 0%,rgba(124,58,237,0.35) 50%,rgba(219,39,119,0.35) 100%)'}}>
+                  <p className="font-display text-base md:text-lg font-black text-white tracking-wide">
+                    ⚡ 5 TIPE DASAR — INDUK SEMUA TRIPLE
+                  </p>
+                  <p className="font-body text-xs text-white/60 mt-1">
+                    Setiap triple Pythagoras (umumnya) adalah kelipatan dari salah satu ke-5 tipe ini!
+                  </p>
                 </div>
+
+                {/* 5 Tipe cards */}
+                {LIMA_TIPE.map(({ tipe, a, b, c, emoji, label, text, bd, hdr, chip }) => (
+                  <div key={tipe} className={`border ${bd} rounded-xl overflow-hidden`}>
+                    {/* Card header */}
+                    <div className={`${hdr} px-4 py-3 flex items-center justify-between gap-2`}>
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className="text-2xl flex-shrink-0">{emoji}</span>
+                        <div className="min-w-0">
+                          <p className={`font-display text-xs font-black ${text} uppercase tracking-[0.15em]`}>TIPE {tipe}</p>
+                          <p className="text-white/50 text-xs truncate">{label}</p>
+                        </div>
+                      </div>
+                      <div className={`font-mono font-black text-xl md:text-2xl ${text} flex-shrink-0`}>
+                        {a} – {b} – {c}
+                      </div>
+                    </div>
+
+                    {/* Card body */}
+                    <div className="px-4 py-3 bg-slate-900/30 space-y-3">
+                      {/* Verification row */}
+                      <div className="bg-slate-800/70 rounded-lg px-3 py-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono">
+                        <span className="text-blue-300">{a}²</span>
+                        <span className="text-white/30">+</span>
+                        <span className="text-green-300">{b}²</span>
+                        <span className="text-white/30">=</span>
+                        <span className="text-blue-300">{a*a}</span>
+                        <span className="text-white/30">+</span>
+                        <span className="text-green-300">{b*b}</span>
+                        <span className="text-white/30">=</span>
+                        <span className="text-white font-bold">{a*a+b*b}</span>
+                        <span className="text-white/30">=</span>
+                        <span className="text-orange-300">{c}²</span>
+                        <span className="text-white/30">=</span>
+                        <span className="text-orange-300">{c*c}</span>
+                        <span className={`font-bold ${text} ml-1`}>✓</span>
+                      </div>
+
+                      {/* Kelipatan grid */}
+                      <div>
+                        <p className="text-xs text-white/40 mb-1.5 font-body">🔢 Kelipatan (juga Triple Pythagoras):</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                          {[2, 3, 4, 5].map(k => (
+                            <div key={k} className={`${chip} rounded-lg px-2 py-2 text-center border border-white/5`}>
+                              <p className="text-[10px] text-white/40 font-body">×{k}</p>
+                              <p className={`text-xs font-bold font-mono ${text}`}>{a*k}–{b*k}–{c*k}</p>
+                              <p className="text-[9px] text-white/30 font-mono">{a*a*k*k+b*b*k*k}={c*c*k*k}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Rumus kelipatan */}
+                <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-4 space-y-2">
+                  <p className="text-cyan-300 font-semibold text-sm">📌 Mengapa Kelipatan Juga Berlaku?</p>
+                  <p className="font-body text-xs text-white/70">
+                    Jika <InlineMath math="(a, b, c)"/> triple Pythagoras, maka untuk sembarang <InlineMath math="k > 0"/>:
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-3">
+                    <BlockMath math="(ka)^2 + (kb)^2 = k^2(a^2+b^2) = k^2c^2 = (kc)^2 \checkmark"/>
+                  </div>
+                </div>
+
+                {/* Triple di luar 5 tipe */}
+                <div className="bg-amber-900/20 border-2 border-amber-500/50 rounded-xl overflow-hidden">
+                  <div className="bg-amber-900/40 px-4 py-2 border-b border-amber-500/30">
+                    <p className="font-display text-sm font-black text-amber-300 tracking-wide">
+                      🌟 TRIPLE DI LUAR 5 TIPE — ADA LHO!
+                    </p>
+                  </div>
+                  <div className="px-4 py-3 space-y-3">
+                    <p className="font-body text-xs text-white/70">
+                      Meskipun 5 tipe di atas sangat populer, <strong className="text-amber-300">ada triple Pythagoras yang bukan kelipatan dari kelimanya</strong>. Contoh paling terkenal:
+                    </p>
+                    <div className="bg-slate-800/60 border border-amber-500/30 rounded-xl p-4 flex items-center gap-4">
+                      <span className="text-4xl flex-shrink-0">💡</span>
+                      <div className="min-w-0">
+                        <p className="text-amber-300 font-mono font-black text-2xl tracking-wide">20 – 21 – 29</p>
+                        <div className="mt-1 text-xs font-mono text-white/60 flex flex-wrap gap-x-2">
+                          <span>20²+21² = 400+441 =</span>
+                          <span className="text-green-300 font-bold">841</span>
+                          <span>= 29² ✓</span>
+                        </div>
+                        <p className="text-xs text-white/40 mt-1 font-body italic">Bukan kelipatan dari Tipe 1–5 manapun!</p>
+                      </div>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg px-3 py-2">
+                      <p className="text-xs font-body text-white/60">
+                        Triple seperti <strong className="text-amber-300">20-21-29</strong> disebut <strong className="text-amber-300">triple primitif</strong> — ketiga anggotanya tidak punya faktor persekutuan selain 1
+                        (FPB = 1). Ini membuktikan bahwa dunia triple Pythagoras sangat luas!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <TripleChecker/>
               </div>
             )}
@@ -178,29 +259,40 @@ const TriplePythagorasPage = () => {
 
           {/* POLA KELIPATAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="pola" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Pola: Kelipatan Triple Pythagoras"/>
+            <SectionHeader id="pola" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Tabel Ringkas 5 Tipe + Kelipatannya"/>
             {open.includes("pola") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4">
-                  <p className="text-cyan-300 font-semibold text-sm mb-2">📌 Sifat Penting</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Jika <InlineMath math="(a, b, c)"/> adalah triple Pythagoras, maka <InlineMath math="(ka, kb, kc)"/> juga triple Pythagoras untuk setiap bilangan bulat positif <InlineMath math="k"/>.
-                  </p>
-                  <div className="mt-3 bg-slate-900/60 rounded-lg p-3">
-                    <BlockMath math="(ka)^2 + (kb)^2 = k^2a^2 + k^2b^2 = k^2(a^2+b^2) = k^2c^2 = (kc)^2"/>
-                  </div>
+                <p className="font-body text-xs text-white/60">Lihat sekilas: baris biru = triple dasar (k=1), baris biasa = kelipatannya.</p>
+                <div className="overflow-x-auto rounded-xl border border-slate-600">
+                  <table className="w-full text-xs font-mono">
+                    <thead>
+                      <tr className="bg-slate-800/90">
+                        <th className="px-3 py-2 text-left text-white/50">k</th>
+                        {LIMA_TIPE.map(t => (
+                          <th key={t.tipe} className={`px-3 py-2 text-center ${t.text}`}>
+                            {t.emoji} Tipe {t.tipe}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[1,2,3,4,5].map(k => (
+                        <tr key={k} className={k===1 ? 'bg-cyan-900/20 border-l-2 border-cyan-500' : k%2===0 ? 'bg-slate-900/40' : 'bg-slate-800/20'}>
+                          <td className="px-3 py-1.5 text-white/50 font-bold">×{k}</td>
+                          {LIMA_TIPE.map(t => (
+                            <td key={t.tipe} className={`px-3 py-1.5 text-center ${k===1 ? t.text+' font-bold' : 'text-white/70'}`}>
+                              {t.a*k}–{t.b*k}–{t.c*k}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">Contoh: Keluarga Triple 3-4-5</p>
-                  <div className="grid grid-cols-2 gap-2 text-xs font-body">
-                    {[1,2,3,4,5,6].map(k=>(
-                      <div key={k} className={`rounded-lg p-2 ${k===1?"bg-cyan-900/40 border border-cyan-500/40":"bg-slate-700/40"}`}>
-                        <span className="text-white/60">k={k}: </span>
-                        <span className="text-white font-bold">{3*k}-{4*k}-{5*k}</span>
-                        {k===1 && <span className="text-cyan-300 ml-1">(asli)</span>}
-                      </div>
-                    ))}
-                  </div>
+                <div className="bg-slate-800/40 border border-slate-600 rounded-lg px-4 py-2">
+                  <p className="font-body text-xs text-white/50">
+                    💡 <strong className="text-white/70">Cara cepat:</strong> Lihat apakah dua kaki segitiga bisa dibagi bilangan yang sama. Jika hasil baginya cocok dengan tipe 1–5, langsung tahu sisi miringnya!
+                  </p>
                 </div>
               </div>
             )}
