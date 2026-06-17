@@ -85,9 +85,10 @@ const TriangleInteraktif = () => {
   const centX = (CX + AX + BX) / 3;
   const centY = (CY + AY + BY) / 3;
 
-  const shortVal = a;
-  const longVal  = mode === '45' ? a : +(a * Math.sqrt(3)).toFixed(2);
-  const hypVal   = mode === '45' ? +(a * Math.sqrt(2)).toFixed(2) : 2 * a;
+  const shortVal   = a;
+  const longVal    = mode === '45' ? a : +(a * Math.sqrt(3)).toFixed(2);
+  const longDisplay = mode === '45' ? String(a) : `${a}√3`;
+  const hypVal     = mode === '45' ? +(a * Math.sqrt(2)).toFixed(2) : 2 * a;
 
   const shortSym = 'a';
   const longSym  = mode === '45' ? 'a' : 'a√3';
@@ -226,7 +227,7 @@ const TriangleInteraktif = () => {
               <text x={Math.min((CX+BX)/2, SVG_W-40)} y={CY+16}
                 fill="#4ade80" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
                 textAnchor="middle" {...txtShadow}>
-                {longVal}
+                {longDisplay}
               </text>
               <text x={Math.min(hypMidX+7, SVG_W-56)} y={Math.max(hypMidY-7, 16)}
                 fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
@@ -300,7 +301,7 @@ const TriangleInteraktif = () => {
       <div className="grid grid-cols-3 gap-2">
         {[
           { label: 'Kaki pendek', sym: shortSym, val: shortVal, c: 'text-blue-300',   bg: 'bg-blue-900/25',   bd: 'border-blue-500/30'   },
-          { label: mode==='45' ? 'Kaki (sama)' : 'Kaki panjang', sym: longSym, val: longVal, c: 'text-green-300',  bg: 'bg-green-900/25',  bd: 'border-green-500/30'  },
+          { label: mode==='45' ? 'Kaki (sama)' : 'Kaki panjang', sym: longSym, val: longDisplay, c: 'text-green-300',  bg: 'bg-green-900/25',  bd: 'border-green-500/30'  },
           { label: 'Hipotenusa',   sym: hypSym,   val: hypVal,   c: 'text-orange-300', bg: 'bg-orange-900/25', bd: 'border-orange-500/30' },
         ].map(({ label, sym, val, c, bg, bd }, idx) => (
           <div key={idx} className={`${bg} border ${bd} rounded-lg p-2 text-center`}>
@@ -319,7 +320,7 @@ const TriangleInteraktif = () => {
           <p className="font-body text-xs text-white/60 mt-0.5">
             {mode==='45'
               ? `Berapapun nilai a, sisi-sisinya selalu ${a} : ${a} : ${longVal === a ? `${a}×√2 ≈ ${hypVal}` : hypVal} — perbandingannya tidak pernah berubah!`
-              : `Berapapun nilai a, sisi-sisinya selalu ${shortVal} : ${longVal} : ${hypVal} — perbandingannya tidak pernah berubah!`
+              : `Berapapun nilai a, sisi-sisinya selalu ${shortVal} : ${longDisplay} : ${hypVal} — perbandingannya tidak pernah berubah!`
             }
           </p>
         </div>
