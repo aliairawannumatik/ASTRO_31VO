@@ -433,28 +433,89 @@ const JenisSegitigaPage = () => {
 
           {/* CONTOH 3 - SULIT */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 3 — Tentukan Nilai x agar Lancip (Sulit)"/>
+            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh 3 — Menentukan Segitiga Tumpul (Sulit)"/>
             {open.includes("contoh3") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                   <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
-                  <p className="font-body text-sm text-white/90">
-                    Segitiga mempunyai sisi <InlineMath math="x"/>, <InlineMath math="x+1"/>, dan <InlineMath math="x+2"/> (dimana <InlineMath math="x+2"/> adalah sisi terpanjang). Untuk nilai <InlineMath math="x"/> berapa segitiga ini menjadi <strong>lancip</strong>?
+                  <p className="font-body text-sm text-white/90 leading-relaxed mb-3">
+                    Diketahui panjang sisi-sisi pada segitiga sebagai berikut:
                   </p>
+                  <div className="space-y-1 mb-3">
+                    {[
+                      { no: "(1)", sisi: "3 cm, 4 cm, 5 cm" },
+                      { no: "(2)", sisi: "6 cm, 7 cm, 10 cm" },
+                      { no: "(3)", sisi: "4 cm, 5 cm, 6 cm" },
+                      { no: "(4)", sisi: "6 cm, 8 cm, 12 cm" },
+                    ].map(({ no, sisi }) => (
+                      <p key={no} className="font-body text-sm text-white/90">
+                        <span className="text-red-300 font-bold">{no}</span> {sisi}
+                      </p>
+                    ))}
+                  </div>
+                  <p className="font-body text-sm text-white/90 font-semibold">
+                    Panjang sisi-sisi di atas yang dapat membentuk segitiga tumpul adalah …
+                  </p>
+                  <div className="grid grid-cols-2 gap-2 mt-3">
+                    {[
+                      { opt: "a.", label: "(1) dan (2)" },
+                      { opt: "b.", label: "(2) dan (3)" },
+                      { opt: "c.", label: "(3) dan (4)" },
+                      { opt: "d.", label: "(2) dan (4)", correct: true },
+                    ].map(({ opt, label, correct }) => (
+                      <div key={opt} className={`flex items-center gap-2 rounded-lg px-3 py-2 border ${correct ? "bg-green-900/30 border-green-500/50" : "bg-slate-900/40 border-slate-600/40"}`}>
+                        <span className={`font-bold text-sm font-mono ${correct ? "text-green-300" : "text-white/50"}`}>{opt}</span>
+                        <span className={`font-body text-sm ${correct ? "text-green-200 font-semibold" : "text-white/70"}`}>{label}</span>
+                        {correct && <span className="ml-auto text-green-400 text-xs font-bold">✓</span>}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
+
+                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
                   <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Agar lancip: <InlineMath math="a^2 + b^2 > c^2"/></p>
-                  <BlockMath math="x^2 + (x+1)^2 > (x+2)^2"/>
-                  <p className="font-body text-sm text-white/80">Ekspansi:</p>
-                  <BlockMath math="x^2 + x^2 + 2x + 1 > x^2 + 4x + 4"/>
-                  <BlockMath math="2x^2 + 2x + 1 > x^2 + 4x + 4"/>
-                  <BlockMath math="x^2 - 2x - 3 > 0"/>
-                  <BlockMath math="(x-3)(x+1) > 0"/>
-                  <p className="font-body text-sm text-white/80">Karena <InlineMath math="x > 0"/>, maka:</p>
-                  <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                    <BlockMath math="x > 3"/>
-                    <p className="font-body text-sm text-red-200 text-center mt-1">✅ Segitiga menjadi lancip jika <strong><InlineMath math="x > 3"/></strong>. Contoh: sisi 4, 5, 6 adalah segitiga lancip.</p>
+                  <p className="font-body text-sm text-white/70">Syarat segitiga <strong className="text-orange-300">tumpul</strong>: <InlineMath math="a^2 + b^2 < c^2"/> (dengan <InlineMath math="c"/> = sisi terpanjang)</p>
+
+                  {/* (1) */}
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <p className="font-body text-xs font-bold text-white/60 uppercase tracking-wide">(1) sisi 3, 4, 5</p>
+                    <BlockMath math="3^2 + 4^2 = 9 + 16 = 25 \quad;\quad 5^2 = 25"/>
+                    <div className="bg-blue-900/30 border border-blue-500/30 rounded px-3 py-1">
+                      <p className="font-body text-xs text-blue-300">25 = 25 → <strong>Segitiga Siku-siku</strong> ✗ bukan tumpul</p>
+                    </div>
+                  </div>
+
+                  {/* (2) */}
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <p className="font-body text-xs font-bold text-white/60 uppercase tracking-wide">(2) sisi 6, 7, 10</p>
+                    <BlockMath math="6^2 + 7^2 = 36 + 49 = 85 \quad;\quad 10^2 = 100"/>
+                    <div className="bg-orange-900/30 border border-orange-500/30 rounded px-3 py-1">
+                      <p className="font-body text-xs text-orange-300">85 &lt; 100 → <strong>Segitiga Tumpul</strong> ✓</p>
+                    </div>
+                  </div>
+
+                  {/* (3) */}
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <p className="font-body text-xs font-bold text-white/60 uppercase tracking-wide">(3) sisi 4, 5, 6</p>
+                    <BlockMath math="4^2 + 5^2 = 16 + 25 = 41 \quad;\quad 6^2 = 36"/>
+                    <div className="bg-green-900/30 border border-green-500/30 rounded px-3 py-1">
+                      <p className="font-body text-xs text-green-300">41 &gt; 36 → <strong>Segitiga Lancip</strong> ✗ bukan tumpul</p>
+                    </div>
+                  </div>
+
+                  {/* (4) */}
+                  <div className="bg-slate-900/50 rounded-lg p-3 space-y-1">
+                    <p className="font-body text-xs font-bold text-white/60 uppercase tracking-wide">(4) sisi 6, 8, 12</p>
+                    <BlockMath math="6^2 + 8^2 = 36 + 64 = 100 \quad;\quad 12^2 = 144"/>
+                    <div className="bg-orange-900/30 border border-orange-500/30 rounded px-3 py-1">
+                      <p className="font-body text-xs text-orange-300">100 &lt; 144 → <strong>Segitiga Tumpul</strong> ✓</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                    <p className="font-body text-sm text-green-200 text-center font-bold">
+                      ✅ Yang membentuk segitiga tumpul: <strong>(2) dan (4)</strong> → Jawaban <strong>d</strong>
+                    </p>
                   </div>
                 </div>
               </div>
