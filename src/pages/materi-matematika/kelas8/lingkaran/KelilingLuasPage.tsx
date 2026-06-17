@@ -12,184 +12,160 @@ const PiAnimationSVG = () => {
   useEffect(() => {
     let id: number;
     const start = performance.now();
-    const PERIOD = 13000;
+    const PERIOD = 14000;
     const loop = (now: number) => { setProg(((now - start) % PERIOD) / PERIOD); id = requestAnimationFrame(loop); };
     id = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(id);
   }, []);
 
-  const ease  = (x: number) => x < 0.5 ? 2*x*x : 1 - (-2*x+2)**2/2;
-  const band  = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
-  const cl    = (x: number) => Math.max(0, Math.min(1, x));
+  const ease = (x: number) => x < 0.5 ? 2*x*x : 1 - (-2*x+2)**2/2;
+  const band = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
+  const cl   = (x: number) => Math.max(0, Math.min(1, x));
+  const lerp = (a: number, b: number, t: number) => a + (b-a)*t;
 
   /* ── Geometry ── */
-  const R    = 36;
-  const CX   = 68, CY = 78;
-  const CIRC = 2 * Math.PI * R;   // ≈ 226.2
-  const D    = 2 * R;              // 72
-  const PART = CIRC - 3 * D;      // ≈ 10.2  (0.14d)
+  const R    = 28;
+  const CX   = 100, CY = 76;
+  const CIRC = 2 * Math.PI * R;   // ≈ 175.9
+  const D    = 2 * R;              // 56
+  const PART = CIRC - 3 * D;      // ≈ 7.9
 
-  const LINE_X = 14;
-  const LINE_Y = 152;
-  const SEG_Y  = 178;
+  /* The flat line is centred at CX so it shares the same x-centre as the circle */
+  const LINE_RX = CIRC / 2;       // half-width of the flat line ≈ 88
+  const LINE_Y  = 150;            // resting y-position after sliding down
+  const SEG_Y   = 176;
+  const SEG_X0  = CX - LINE_RX;  // left edge of segments ≈ 12
 
   /* ── Timing ── */
   const drawCircle = band(0.02, 0.20);  // circle draws itself in
-  const drawDiam   = band(0.18, 0.35);  // diameter revealed from centre outward
-  const unroll     = band(0.35, 0.68);  // circumference peels off → horizontal line
-  const s1         = band(0.68, 0.77);
-  const s2         = band(0.75, 0.83);
-  const s3         = band(0.81, 0.89);
-  const s4         = band(0.87, 0.93);
-  const piLbl      = band(0.93, 0.98);
-  const fadeOut    = prog > 0.98 ? 1 - cl((prog-0.98)/0.02) : 1;
+  const drawDiam   = band(0.18, 0.35);  // diameter grows from centre outward
+  const unroll     = band(0.35, 0.65);  // ellipse morphs: circle → flat line (at CY)
+  const slideDown  = band(0.67, 0.80);  // flat line slides from CY → LINE_Y
+  const s1         = band(0.80, 0.86);
+  const s2         = band(0.84, 0.90);
+  const s3         = band(0.88, 0.94);
+  const s4         = band(0.92, 0.96);
+  const piLbl      = band(0.95, 0.99);
+  const fadeOut    = prog > 0.99 ? 1 - cl((prog-0.99)/0.01) : 1;
 
-  /* ── Circle stroke: draw in, then unroll away ──
-     Draw  : dasharray=[CIRC, big], offset = CIRC*(1-drawCircle)  → 0..CIRC → full circle appears
-     Unroll: dasharray=[CIRC*(1-u), big], offset = -CIRC*u        → remaining arc shrinks from top
-  */
-  const GAP   = CIRC + 200;
-  const cDash = drawCircle < 1 ? CIRC              : CIRC * (1 - unroll);
-  const cOff  = drawCircle < 1 ? CIRC*(1-drawCircle) : -CIRC * unroll;
-  const circleAlpha = drawCircle > 0 ? 1 : 0;
+  /* ── Single ellipse: rx R→LINE_RX, ry R→0, then cy slides down ── */
+  const morphRX  = lerp(R,  LINE_RX, ease(unroll));
+  const morphRY  = lerp(R,  0,       ease(unroll));
+  const morphCY  = lerp(CY, LINE_Y,  ease(slideDown));
+  const fillAlpha = 0.13 * (1 - unroll);  // fill fades as it flattens
 
-  /* ── Travelling dot: follows drawing edge, then the unroll peel point ── */
-  const dotProg  = drawCircle < 1 ? drawCircle : unroll;
-  const dotAngle = -Math.PI / 2 + 2 * Math.PI * dotProg;
-  const dotX     = CX + R * Math.cos(dotAngle);
-  const dotY     = CY + R * Math.sin(dotAngle);
-  const showDot  = dotProg > 0.01 && dotProg < 0.995;
+  /* Diameter fades as unrolling progresses */
+  const diamOpacity = cl(1 - (unroll - 0.3) / 0.5);
 
-  /* ── Horizontal circumference line ── */
-  const lineLen  = CIRC * unroll;
-  const showLine = lineLen > 1;
+  /* End-caps appear once the ellipse is sufficiently flat */
+  const capOpacity = cl((unroll - 0.7) / 0.3);
 
-  /* ── Diameter segments below the line ── */
+  /* Label above the line */
+  const showLabel = unroll > 0.25;
+  const labelY    = morphCY - Math.max(morphRY, 0) - 13;
+
+  /* ── Diameter segments ── */
   const SEGS = [
-    { x0: LINE_X,         len: D    * s1, color: '#22c55e', label: 'd',       dashed: false },
-    { x0: LINE_X + D,     len: D    * s2, color: '#3b82f6', label: 'd',       dashed: false },
-    { x0: LINE_X + 2*D,   len: D    * s3, color: '#a855f7', label: 'd',       dashed: false },
-    { x0: LINE_X + 3*D,   len: PART * s4, color: '#eab308', label: '≈0,14d',  dashed: true  },
+    { x0: SEG_X0,         len: D    * s1, color: '#22c55e', label: 'd',       dashed: false },
+    { x0: SEG_X0 + D,     len: D    * s2, color: '#3b82f6', label: 'd',       dashed: false },
+    { x0: SEG_X0 + 2*D,   len: D    * s3, color: '#a855f7', label: 'd',       dashed: false },
+    { x0: SEG_X0 + 3*D,   len: PART * s4, color: '#eab308', label: '≈0,14d',  dashed: true  },
   ];
 
   const phaseLabel =
     drawCircle < 0.4  ? '① Lingkaran terbentuk...' :
     drawDiam   < 0.7  ? '② Diameter terungkap dari pusat!' :
     unroll     < 0.05 ? '③ Keliling siap dibentangkan...' :
-    unroll     < 0.99 ? `③ Keliling dibentangkan → ${(CIRC * unroll).toFixed(1)}` :
-    s4         < 0.9  ? '④ Bandingkan keliling dengan diameter!' :
-                        '⑤ π = Keliling ÷ Diameter ≈ 3,14';
+    unroll     < 0.99 ? '③ Keliling membentang menjadi garis horizontal...' :
+    slideDown  < 0.6  ? '④ Garis keliling bergeser ke bawah...' :
+    s4         < 0.9  ? '⑤ Bandingkan keliling dengan diameter!' :
+                        '⑥ π = Keliling ÷ Diameter ≈ 3,14';
 
   return (
     <div className="select-none">
-      <svg viewBox="0 0 310 218" className="w-full max-w-sm mx-auto my-2"
-        aria-label="Animasi keliling lingkaran terbongkar menjadi garis" style={{ opacity: fadeOut }}>
+      <svg viewBox="0 0 310 220" className="w-full max-w-sm mx-auto my-2"
+        aria-label="Animasi keliling lingkaran membentang menjadi garis horizontal"
+        style={{ opacity: fadeOut }}>
 
-        {/* ── CIRCLE fill + stroke ── */}
-        {circleAlpha > 0 && (
+        {/* ══ SATU OBJEK KELILING: ellipse morph lingkaran → garis → geser turun ══ */}
+        {drawCircle > 0 && (
           <>
-            {/* fill fades out as circle unrolls */}
-            <circle cx={CX} cy={CY} r={R}
-              fill={`rgba(6,182,212,${0.13 * (1 - unroll)})`} />
-            {/* stroke: draw in then unroll */}
-            <circle cx={CX} cy={CY} r={R} fill="none"
-              stroke="#06b6d4" strokeWidth="2.8" strokeLinecap="round"
-              strokeDasharray={`${cDash} ${GAP}`}
-              strokeDashoffset={cOff}
-              transform={`rotate(-90 ${CX} ${CY})`} />
-            {/* centre dot */}
-            <circle cx={CX} cy={CY} r="3" fill="#94a3b8" />
+            {/* fill (fades as circle flattens) */}
+            <ellipse cx={CX} cy={morphCY} rx={morphRX} ry={morphRY}
+              fill={`rgba(6,182,212,${fillAlpha})`} />
+
+            {/* glow ring */}
+            <ellipse cx={CX} cy={morphCY} rx={morphRX} ry={morphRY}
+              fill="none" stroke="rgba(6,182,212,0.22)" strokeWidth="8"
+              strokeDasharray={drawCircle < 1 ? `${CIRC * drawCircle} ${CIRC + 200}` : undefined}
+              transform={drawCircle < 1 ? `rotate(-90 ${CX} ${CY})` : undefined} />
+
+            {/* main stroke — the one circumference object */}
+            <ellipse cx={CX} cy={morphCY} rx={morphRX} ry={morphRY}
+              fill="none" stroke="#06b6d4" strokeWidth="3" strokeLinecap="round"
+              strokeDasharray={drawCircle < 1 ? `${CIRC * drawCircle} ${CIRC + 200}` : undefined}
+              transform={drawCircle < 1 ? `rotate(-90 ${CX} ${CY})` : undefined} />
+
+            {/* centre dot (disappears as circle flattens) */}
+            {unroll < 0.6 && (
+              <circle cx={CX} cy={CY} r="3" fill="#94a3b8" opacity={1 - unroll / 0.6} />
+            )}
           </>
         )}
 
-        {/* ── DIAMETER: grows outward from centre ── */}
-        {drawDiam > 0 && (
+        {/* end-caps on the flat line */}
+        {capOpacity > 0.01 && (
           <>
-            {/* left arm */}
-            <line x1={CX} y1={CY} x2={CX - R * drawDiam} y2={CY}
+            <line x1={CX - LINE_RX} y1={morphCY - 7} x2={CX - LINE_RX} y2={morphCY + 7}
+              stroke="#06b6d4" strokeWidth="2" opacity={capOpacity} />
+            <line x1={CX + LINE_RX} y1={morphCY - 7} x2={CX + LINE_RX} y2={morphCY + 7}
+              stroke="#06b6d4" strokeWidth="2" opacity={capOpacity} />
+          </>
+        )}
+
+        {/* ══ DIAMETER: grows outward from centre, fades when circle unrolls ══ */}
+        {drawDiam > 0 && diamOpacity > 0.02 && (
+          <g opacity={drawDiam * diamOpacity}>
+            <line x1={CX - R * drawDiam} y1={CY} x2={CX + R * drawDiam} y2={CY}
               stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" />
-            {/* right arm */}
-            <line x1={CX} y1={CY} x2={CX + R * drawDiam} y2={CY}
-              stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" />
-            {/* endpoint dots */}
-            {drawDiam > 0.55 && (
+            {drawDiam > 0.6 && (
               <>
-                <circle cx={CX - R * drawDiam} cy={CY} r="3" fill="#22c55e" opacity={drawDiam} />
-                <circle cx={CX + R * drawDiam} cy={CY} r="3" fill="#22c55e" opacity={drawDiam} />
-              </>
-            )}
-            {/* label */}
-            {drawDiam > 0.65 && (
-              <text x={CX} y={CY - R - 9} fill="#4ade80" fontSize="9" textAnchor="middle"
-                fontFamily="monospace" fontWeight="bold" opacity={drawDiam}>
-                d = 2r = {D}
-              </text>
-            )}
-            {/* r labels */}
-            {drawDiam > 0.85 && (
-              <>
+                <circle cx={CX - R} cy={CY} r="2.5" fill="#22c55e" />
+                <circle cx={CX + R} cy={CY} r="2.5" fill="#22c55e" />
+                <text x={CX} y={CY - R - 10} fill="#4ade80" fontSize="9"
+                  textAnchor="middle" fontFamily="monospace" fontWeight="bold">
+                  d = 2r = {D}
+                </text>
                 <text x={CX - R/2} y={CY - 5} fill="#94a3b8" fontSize="7.5"
-                  textAnchor="middle" fontFamily="sans-serif" opacity={0.7}>r</text>
+                  textAnchor="middle" fontFamily="sans-serif">r</text>
                 <text x={CX + R/2} y={CY - 5} fill="#94a3b8" fontSize="7.5"
-                  textAnchor="middle" fontFamily="sans-serif" opacity={0.7}>r</text>
+                  textAnchor="middle" fontFamily="sans-serif">r</text>
               </>
             )}
-          </>
+          </g>
         )}
 
-        {/* ── TRAVELLING DOT (bright peel-point) ── */}
-        {showDot && (
-          <>
-            {/* glow */}
-            <circle cx={dotX} cy={dotY} r="7" fill="rgba(251,191,36,0.25)" />
-            {/* dot */}
-            <circle cx={dotX} cy={dotY} r="4.5" fill="#fbbf24" />
-          </>
+        {/* ══ LABEL keliling di atas garis ══ */}
+        {showLabel && (
+          <text x={CX} y={labelY} fill="#fbbf24" fontSize="9"
+            textAnchor="middle" fontFamily="monospace" fontWeight="bold"
+            opacity={cl((unroll - 0.25) / 0.3)}>
+            Keliling = {CIRC.toFixed(1)}
+          </text>
         )}
 
-        {/* ── HORIZONTAL LINE (keliling dibentangkan) ── */}
-        {showLine && (
-          <>
-            {/* outer glow */}
-            <line x1={LINE_X} y1={LINE_Y} x2={LINE_X + lineLen} y2={LINE_Y}
-              stroke="rgba(251,191,36,0.22)" strokeWidth="13" strokeLinecap="round" />
-            {/* body */}
-            <line x1={LINE_X} y1={LINE_Y} x2={LINE_X + lineLen} y2={LINE_Y}
-              stroke="#d97706" strokeWidth="5.5" strokeLinecap="round" />
-            {/* shine */}
-            <line x1={LINE_X} y1={LINE_Y - 2} x2={LINE_X + lineLen} y2={LINE_Y - 2}
-              stroke="rgba(254,215,105,0.55)" strokeWidth="1.8" strokeLinecap="round" />
-            {/* left end cap */}
-            <line x1={LINE_X} y1={LINE_Y - 7} x2={LINE_X} y2={LINE_Y + 7}
-              stroke="#d97706" strokeWidth="2.2" />
-            {/* right end cap — only when fully unrolled */}
-            {unroll > 0.97 && (
-              <line x1={LINE_X + CIRC} y1={LINE_Y - 7} x2={LINE_X + CIRC} y2={LINE_Y + 7}
-                stroke="#d97706" strokeWidth="2.2" />
-            )}
-            {/* label above line */}
-            <text x={(2 * LINE_X + lineLen) / 2} y={LINE_Y - 14} fill="#fbbf24" fontSize="9"
-              textAnchor="middle" fontFamily="monospace" fontWeight="bold">
-              Keliling = {(CIRC * unroll).toFixed(1)}
-            </text>
-          </>
-        )}
-
-        {/* ── DIAMETER SEGMENTS (appear below line) ── */}
+        {/* ══ DIAMETER SEGMENTS (muncul di bawah garis) ══ */}
         {SEGS.map((seg, i) => seg.len > 0.5 && (
           <g key={i}>
             <line x1={seg.x0} y1={SEG_Y} x2={seg.x0 + seg.len} y2={SEG_Y}
               stroke={seg.color} strokeWidth="3.5" strokeLinecap="round"
               strokeDasharray={seg.dashed ? '5 3' : undefined} />
-            {/* left tick */}
             <line x1={seg.x0} y1={SEG_Y - 5} x2={seg.x0} y2={SEG_Y + 5}
               stroke={seg.color} strokeWidth="1.5" />
             {seg.len > (i < 3 ? D*0.8 : PART*0.75) && (
               <>
-                {/* right tick */}
                 <line x1={seg.x0 + seg.len} y1={SEG_Y - 5} x2={seg.x0 + seg.len} y2={SEG_Y + 5}
                   stroke={seg.color} strokeWidth="1.5" />
-                {/* label */}
                 <text x={seg.x0 + seg.len / 2} y={SEG_Y + 14} fill={seg.color} fontSize="8"
                   textAnchor="middle" fontFamily="monospace" fontWeight="bold">
                   {seg.label}
@@ -199,32 +175,32 @@ const PiAnimationSVG = () => {
           </g>
         ))}
 
-        {/* dotted connectors between line and segments */}
+        {/* dotted connectors antara garis dan segmen */}
         {s4 > 0.9 && (
           <>
-            <line x1={LINE_X}        y1={LINE_Y + 9} x2={LINE_X}        y2={SEG_Y - 6}
+            <line x1={SEG_X0}        y1={LINE_Y + 8} x2={SEG_X0}        y2={SEG_Y - 6}
               stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
-            <line x1={LINE_X + CIRC} y1={LINE_Y + 9} x2={LINE_X + CIRC} y2={SEG_Y - 6}
+            <line x1={SEG_X0 + CIRC} y1={LINE_Y + 8} x2={SEG_X0 + CIRC} y2={SEG_Y - 6}
               stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
           </>
         )}
 
-        {/* ── π CONCLUSION BOX ── */}
+        {/* ══ π CONCLUSION BOX ══ */}
         {piLbl > 0 && (
           <g opacity={piLbl}>
-            <rect x={218} y={16} width={86} height={76} rx="9"
+            <rect x={213} y={16} width={90} height={78} rx="9"
               fill="rgba(168,85,247,0.20)" stroke="#a855f7" strokeWidth="1.5" />
-            <text x={261} y={38}  fill="#c084fc" fontSize="9.5" textAnchor="middle"
+            <text x={258} y={38}  fill="#c084fc" fontSize="9.5" textAnchor="middle"
               fontFamily="monospace" fontWeight="bold">π = K ÷ d</text>
-            <text x={261} y={60}  fill="#fbbf24" fontSize="17" textAnchor="middle"
+            <text x={258} y={62}  fill="#fbbf24" fontSize="17" textAnchor="middle"
               fontFamily="monospace" fontWeight="black">≈ 3,14</text>
-            <text x={261} y={78}  fill="#94a3b8" fontSize="8.5" textAnchor="middle"
+            <text x={258} y={80}  fill="#94a3b8" fontSize="8" textAnchor="middle"
               fontFamily="sans-serif">= 22/7 · selalu sama!</text>
           </g>
         )}
 
         {/* phase label */}
-        <text x={155} y={212} fill="#475569" fontSize="7.5" textAnchor="middle"
+        <text x="155" y="214" fill="#475569" fontSize="7.5" textAnchor="middle"
           fontFamily="sans-serif">{phaseLabel}</text>
       </svg>
     </div>
