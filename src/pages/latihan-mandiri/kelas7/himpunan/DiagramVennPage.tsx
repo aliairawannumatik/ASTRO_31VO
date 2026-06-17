@@ -125,17 +125,26 @@ const DiagramVennLatihanPage = () => {
           </div>
         </div>
 
-        <VennDua
-          labelA="A" labelB="B"
-          colorA="#60a5fa" colorB="#a78bfa"
-          itemsLeft={["1","3","5"]} itemsMiddle={["7"]} itemsRight={["9","11"]}
-          sLabel="S"
-        />
-
         <div className="space-y-5 animate-slide-up">
           <Section title="Bagian A · Membaca Diagram Venn" color="#60a5fa">
 
-            <Q no={1} badge="Membaca" badgeColor="#60a5fa"
+            <Q no={1} badge="Melengkapi" badgeColor="#60a5fa">
+              <p>
+                Lengkapi diagram Venn dengan data berikut:<br/>
+                <InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />,<br/>
+                <InlineMath math="A = \{1, 2, 3, 4, 5\}" />,<br/>
+                <InlineMath math="B = \{3, 4, 5, 6, 7\}" /><br/>
+                Lalu tentukan:
+                (a) <InlineMath math="A \cap B" />,&nbsp;
+                (b) <InlineMath math="A \cup B" />,&nbsp;
+                (c) <InlineMath math="A - B" />,&nbsp;
+                (d) <InlineMath math="B - A" />,&nbsp;
+                (e) <InlineMath math="A^c" />,&nbsp;
+                (f) <InlineMath math="B^c" />!
+              </p>
+            </Q>
+
+            <Q no={2} badge="Membaca" badgeColor="#60a5fa"
               diagram={<VennDua labelA="A" labelB="B" colorA="#60a5fa" colorB="#a78bfa"
                 itemsLeft={["2","4","8"]} itemsMiddle={["6","12"]} itemsRight={["3","9","15"]} sLabel="S" />}>
               <p>
@@ -144,11 +153,22 @@ const DiagramVennLatihanPage = () => {
                 (b) anggota <InlineMath math="B" />,&nbsp;
                 (c) <InlineMath math="A \cap B" />,&nbsp;
                 (d) <InlineMath math="A \cup B" />,&nbsp;
-                (e) anggota <InlineMath math="S" /> yang tidak ada di <InlineMath math="A" /> maupun <InlineMath math="B" />
+                (e) <InlineMath math="A - B" />,&nbsp;
+                (f) <InlineMath math="B - A" />,&nbsp;
+                (g) anggota <InlineMath math="S" /> yang tidak ada di <InlineMath math="A" /> maupun <InlineMath math="B" />
               </p>
             </Q>
 
-            <Q no={2} badge="Menghitung" badgeColor="#60a5fa">
+            <Q no={3} badge="UN Style" badgeColor="#60a5fa">
+              <p>
+                Diketahui <InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />,
+                <InlineMath math="\; A = \{2, 4, 6, 8, 10\}" />,
+                <InlineMath math="\; B = \{1, 2, 3, 4, 5\}" />.
+                Gambarkan diagram Venn-nya dan tentukan <InlineMath math="A^c" />!
+              </p>
+            </Q>
+
+            <Q no={4} badge="Menghitung" badgeColor="#60a5fa">
               <p>
                 Diketahui dari diagram Venn: <InlineMath math="n(S) = 30" />, <InlineMath math="n(A) = 18" />,
                 <InlineMath math="\; n(B) = 14" />, <InlineMath math="\; n(A \cap B) = 6" />.
@@ -160,36 +180,6 @@ const DiagramVennLatihanPage = () => {
                 <li>(c) Banyak anggota yang hanya ada di <InlineMath math="B" /></li>
                 <li>(d) Banyak anggota yang tidak ada di <InlineMath math="A" /> maupun <InlineMath math="B" /></li>
               </ul>
-            </Q>
-
-            <Q no={3} badge="Melengkapi" badgeColor="#60a5fa">
-              <p>
-                Lengkapi diagram Venn dengan data berikut:<br/>
-                <InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />,<br/>
-                <InlineMath math="A = \{1, 2, 3, 4, 5\}" />,<br/>
-                <InlineMath math="B = \{3, 4, 5, 6, 7\}" /><br/>
-                Lalu tentukan <InlineMath math="A \cap B" /> dan <InlineMath math="A \cup B" />!
-              </p>
-            </Q>
-
-            <Q no={4} badge="Tiga Himpunan" badgeColor="#60a5fa" diagram={<VennTiga />}>
-              <p>
-                Perhatikan diagram Venn tiga himpunan di atas. Sebutkan daerah-daerah yang mewakili:
-              </p>
-              <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) <InlineMath math="A \cap B \cap C" /></li>
-                <li>(b) Anggota yang hanya ada di <InlineMath math="A" /> saja</li>
-                <li>(c) Anggota yang ada di <InlineMath math="A" /> dan <InlineMath math="B" /> tapi bukan <InlineMath math="C" /></li>
-              </ul>
-            </Q>
-
-            <Q no={5} badge="UN Style" badgeColor="#60a5fa">
-              <p>
-                Diketahui <InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />,
-                <InlineMath math="\; A = \{2, 4, 6, 8, 10\}" />,
-                <InlineMath math="\; B = \{1, 2, 3, 4, 5\}" />.
-                Gambarkan diagram Venn-nya dan tentukan <InlineMath math="A^c" />!
-              </p>
             </Q>
           </Section>
 
