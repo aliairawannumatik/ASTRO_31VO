@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -66,16 +66,24 @@ const Sudut3060SVG = () => (
 const TriangleInteraktif = () => {
   const [mode, setMode] = useState<'45' | '30'>('45');
   const [a, setA] = useState(4);
+  const [rotation, setRotation] = useState(0);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const isDragging = useRef(false);
+  const lastPos = useRef({ x: 0, y: 0 });
+  const svgRef = useRef<SVGSVGElement>(null);
 
   const SVG_W = 300, SVG_H = 218;
-  const CX = 38, CY = 185;   // right-angle vertex (bottom-left)
+  const CX = 38, CY = 185;
 
-  const PX = mode === '45' ? 15 : 13;      // px per unit of 'a'
+  const PX = mode === '45' ? 15 : 13;
   const shortPx = a * PX;
   const longPx  = mode === '45' ? a * PX : a * PX * Math.sqrt(3);
 
-  const AX = CX, AY = CY - shortPx;       // top vertex (end of short leg)
-  const BX = CX + longPx, BY = CY;        // right vertex (end of long leg)
+  const AX = CX, AY = CY - shortPx;
+  const BX = CX + longPx, BY = CY;
+
+  const centX = (CX + AX + BX) / 3;
+  const centY = (CY + AY + BY) / 3;
 
   const shortVal = a;
   const longVal  = mode === '45' ? a : +(a * Math.sqrt(3)).toFixed(2);
@@ -85,10 +93,10 @@ const TriangleInteraktif = () => {
   const longSym  = mode === '45' ? 'a' : 'a√3';
   const hypSym   = mode === '45' ? 'a√2' : '2a';
 
-  const ratioStr   = mode === '45' ? '1 : 1 : √2' : '1 : √3 : 2';
-  const triColor   = mode === '45' ? 'rgba(168,85,247,0.18)' : 'rgba(34,197,94,0.18)';
-  const edgeColor  = mode === '45' ? '#a855f7' : '#22c55e';
-  const accentHex  = mode === '45' ? '#a855f7' : '#22c55e';
+  const ratioStr  = mode === '45' ? '1 : 1 : √2' : '1 : √3 : 2';
+  const triColor  = mode === '45' ? 'rgba(168,85,247,0.18)' : 'rgba(34,197,94,0.18)';
+  const edgeColor = mode === '45' ? '#a855f7' : '#22c55e';
+  const accentHex = mode === '45' ? '#a855f7' : '#22c55e';
 
   const hypMidX = (AX + BX) / 2;
   const hypMidY = (AY + BY) / 2;
@@ -96,6 +104,30 @@ const TriangleInteraktif = () => {
   const MK = 11;
 
   const txtShadow = { stroke: 'rgba(2,6,23,0.85)', strokeWidth: 2, paintOrder: 'stroke' as const };
+
+  const toSvgDelta = (dx: number, dy: number) => {
+    if (!svgRef.current) return { dx, dy };
+    const rect = svgRef.current.getBoundingClientRect();
+    return { dx: dx * (SVG_W / rect.width), dy: dy * (SVG_H / rect.height) };
+  };
+
+  const onPointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
+    isDragging.current = true;
+    lastPos.current = { x: e.clientX, y: e.clientY };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (!isDragging.current) return;
+    const raw = { dx: e.clientX - lastPos.current.x, dy: e.clientY - lastPos.current.y };
+    lastPos.current = { x: e.clientX, y: e.clientY };
+    const { dx, dy } = toSvgDelta(raw.dx, raw.dy);
+    setOffset(prev => ({ x: prev.x + dx, y: prev.y + dy }));
+  };
+  const onPointerUp = () => { isDragging.current = false; };
+
+  const reset = () => { setOffset({ x: 0, y: 0 }); setRotation(0); };
+
+  const groupTransform = `translate(${offset.x.toFixed(1)},${offset.y.toFixed(1)}) rotate(${rotation},${centX.toFixed(1)},${centY.toFixed(1)})`;
 
   return (
     <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
@@ -110,7 +142,7 @@ const TriangleInteraktif = () => {
       {/* Mode Tabs */}
       <div className="grid grid-cols-2 gap-2">
         {(['45','30'] as const).map(m => (
-          <button key={m} onClick={() => { setMode(m); setA(4); }}
+          <button key={m} onClick={() => { setMode(m); setA(4); reset(); }}
             className={`py-2 rounded-lg text-xs font-bold transition-all duration-200 border ${
               mode === m
                 ? m === '45' ? 'bg-purple-600 text-white border-purple-500' : 'bg-green-700 text-white border-green-600'
@@ -121,82 +153,116 @@ const TriangleInteraktif = () => {
         ))}
       </div>
 
-      {/* SVG */}
-      <div className="relative">
-        <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} className="w-full">
+      {/* SVG canvas */}
+      <div className="relative rounded-lg overflow-hidden border border-slate-700/50">
+        <svg
+          ref={svgRef}
+          viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+          className="w-full select-none"
+          style={{ cursor: isDragging.current ? 'grabbing' : 'grab', touchAction: 'none' }}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerUp}
+        >
           <defs>
             <filter id="triGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           </defs>
 
-          {/* Faint grid guide lines */}
-          <line x1={CX} y1="8" x2={CX} y2={CY} stroke="rgba(100,116,139,0.18)" strokeWidth="1" strokeDasharray="4 4"/>
-          <line x1={CX} y1={CY} x2={SVG_W-4} y2={CY} stroke="rgba(100,116,139,0.18)" strokeWidth="1" strokeDasharray="4 4"/>
+          {/* Fixed grid guide lines */}
+          <line x1={CX} y1="8" x2={CX} y2={CY} stroke="rgba(100,116,139,0.12)" strokeWidth="1" strokeDasharray="4 4"/>
+          <line x1={CX} y1={CY} x2={SVG_W-4} y2={CY} stroke="rgba(100,116,139,0.12)" strokeWidth="1" strokeDasharray="4 4"/>
 
-          {/* Triangle fill */}
-          <polygon
-            points={`${CX},${AY} ${BX},${BY} ${CX},${CY}`}
-            fill={triColor} stroke={edgeColor} strokeWidth="1.5" strokeLinejoin="round"
-          />
+          {/* Draggable + rotatable group */}
+          <g transform={groupTransform}>
+            {/* Triangle fill */}
+            <polygon
+              points={`${CX},${AY} ${BX},${BY} ${CX},${CY}`}
+              fill={triColor} stroke={edgeColor} strokeWidth="1.5" strokeLinejoin="round"
+            />
 
-          {/* Sides */}
-          <line x1={CX} y1={CY} x2={AX} y2={AY} stroke="#3b82f6" strokeWidth="2.8" strokeLinecap="round"/>
-          <line x1={CX} y1={CY} x2={BX} y2={BY} stroke="#22c55e" strokeWidth="2.8" strokeLinecap="round"/>
-          <line x1={AX} y1={AY} x2={BX} y2={BY} stroke="#f97316" strokeWidth="2.8" strokeLinecap="round"/>
+            {/* Sides */}
+            <line x1={CX} y1={CY} x2={AX} y2={AY} stroke="#3b82f6" strokeWidth="2.8" strokeLinecap="round"/>
+            <line x1={CX} y1={CY} x2={BX} y2={BY} stroke="#22c55e" strokeWidth="2.8" strokeLinecap="round"/>
+            <line x1={AX} y1={AY} x2={BX} y2={BY} stroke="#f97316" strokeWidth="2.8" strokeLinecap="round"/>
 
-          {/* Right angle mark */}
-          <polyline
-            points={`${CX},${CY-MK} ${CX+MK},${CY-MK} ${CX+MK},${CY}`}
-            fill="none" stroke="#94a3b8" strokeWidth="1.5"
-          />
+            {/* Right angle mark */}
+            <polyline
+              points={`${CX},${CY-MK} ${CX+MK},${CY-MK} ${CX+MK},${CY}`}
+              fill="none" stroke="#94a3b8" strokeWidth="1.5"
+            />
 
-          {/* Angle labels */}
-          {showLabels && <>
-            <text x={AX+7} y={AY+15} fill="#eab308" fontSize="11" fontFamily="sans-serif" fontWeight="bold" {...txtShadow}>
-              {mode==='45' ? '45°' : '60°'}
-            </text>
-            <text x={Math.max(BX-22, CX+28)} y={BY-4} fill="#eab308" fontSize="11" fontFamily="sans-serif" fontWeight="bold" {...txtShadow}>
-              {mode==='45' ? '45°' : '30°'}
-            </text>
-          </>}
-          <text x={CX+14} y={CY-3} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">90°</text>
+            {/* Angle labels */}
+            {showLabels && <>
+              <text x={AX+7} y={AY+15} fill="#eab308" fontSize="11" fontFamily="sans-serif" fontWeight="bold" {...txtShadow}>
+                {mode==='45' ? '45°' : '60°'}
+              </text>
+              <text x={Math.max(BX-22, CX+28)} y={BY-4} fill="#eab308" fontSize="11" fontFamily="sans-serif" fontWeight="bold" {...txtShadow}>
+                {mode==='45' ? '45°' : '30°'}
+              </text>
+            </>}
+            <text x={CX+14} y={CY-3} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">90°</text>
 
-          {/* Side value labels */}
-          {showLabels && <>
-            {/* short leg — left of vertical */}
-            <text x={CX-5} y={(CY+AY)/2+4}
-              fill="#60a5fa" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
-              textAnchor="end" {...txtShadow}>
-              {shortVal}
-            </text>
-            {/* long leg — below horizontal */}
-            <text x={Math.min((CX+BX)/2, SVG_W-40)} y={CY+16}
-              fill="#4ade80" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
-              textAnchor="middle" {...txtShadow}>
-              {longVal}
-            </text>
-            {/* hypotenuse — beside mid-point */}
-            <text x={Math.min(hypMidX+7, SVG_W-56)} y={Math.max(hypMidY-7, 16)}
-              fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
-              {...txtShadow}>
-              {mode === '45' ? `${a}√2` : String(hypVal)}
-            </text>
-          </>}
+            {/* Side value labels */}
+            {showLabels && <>
+              <text x={CX-5} y={(CY+AY)/2+4}
+                fill="#60a5fa" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
+                textAnchor="end" {...txtShadow}>
+                {shortVal}
+              </text>
+              <text x={Math.min((CX+BX)/2, SVG_W-40)} y={CY+16}
+                fill="#4ade80" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
+                textAnchor="middle" {...txtShadow}>
+                {longVal}
+              </text>
+              <text x={Math.min(hypMidX+7, SVG_W-56)} y={Math.max(hypMidY-7, 16)}
+                fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
+                {...txtShadow}>
+                {mode === '45' ? `${a}√2` : String(hypVal)}
+              </text>
+            </>}
 
-          {/* Vertex dots */}
-          <circle cx={CX} cy={CY} r="5" fill={accentHex} opacity="0.85"/>
-          <circle cx={AX} cy={AY} r="5" fill="#3b82f6" opacity="0.85"/>
-          <circle cx={BX} cy={BY} r="5" fill="#22c55e" opacity="0.85"/>
+            {/* Vertex dots */}
+            <circle cx={CX} cy={CY} r="5" fill={accentHex} opacity="0.85"/>
+            <circle cx={AX} cy={AY} r="5" fill="#3b82f6" opacity="0.85"/>
+            <circle cx={BX} cy={BY} r="5" fill="#22c55e" opacity="0.85"/>
 
-          {/* Vertex labels */}
-          <text x={CX-12} y={CY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">C</text>
-          {showLabels && <>
-            <text x={AX-18} y={AY-4} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">A</text>
-            <text x={BX+4}  y={BY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">B</text>
-          </>}
+            {/* Vertex labels */}
+            <text x={CX-12} y={CY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">C</text>
+            {showLabels && <>
+              <text x={AX-18} y={AY-4} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">A</text>
+              <text x={BX+4}  y={BY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">B</text>
+            </>}
+          </g>
         </svg>
+        <p className="absolute bottom-1 right-2 text-xs text-slate-600 font-mono pointer-events-none select-none">
+          ✋ seret • 🔄 {rotation}°
+        </p>
       </div>
 
-      {/* Slider */}
+      {/* Rotation slider */}
+      <div className="space-y-1 px-1">
+        <div className="flex justify-between items-center">
+          <label className="font-body text-xs text-white/70">🔄 Putar segitiga:</label>
+          <div className="flex items-center gap-2">
+            <span className={`text-sm font-bold px-2 py-0.5 rounded font-mono ${mode==='45' ? 'bg-purple-900/60 text-purple-200' : 'bg-green-900/60 text-green-200'}`}>
+              {rotation}°
+            </span>
+            <button onClick={reset}
+              className="text-xs px-2 py-1 rounded border border-slate-500 text-slate-400 hover:text-white hover:border-slate-300 transition-colors cursor-pointer">
+              ↺ Reset
+            </button>
+          </div>
+        </div>
+        <input
+          type="range" min="0" max="359" step="1" value={rotation}
+          onChange={e => setRotation(+e.target.value)}
+          className="w-full cursor-pointer"
+          style={{ accentColor: accentHex }}
+        />
+      </div>
+
+      {/* Size slider */}
       <div className="space-y-2 px-1">
         <div className="flex justify-between items-center">
           <label className="font-body text-xs text-white/70">
