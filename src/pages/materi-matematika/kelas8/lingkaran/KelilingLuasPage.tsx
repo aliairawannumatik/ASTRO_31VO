@@ -12,157 +12,167 @@ const PiAnimationSVG = () => {
   useEffect(() => {
     let id: number;
     const start = performance.now();
-    const PERIOD = 16000;
+    const PERIOD = 15000;
     const loop = (now: number) => { setProg(((now - start) % PERIOD) / PERIOD); id = requestAnimationFrame(loop); };
     id = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(id);
   }, []);
 
-  const ease  = (x: number) => x < 0.5 ? 2*x*x : 1 - (-2*x+2)**2/2;
-  const band  = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
-  const cl    = (x: number) => Math.max(0, Math.min(1, x));
+  const ease = (x: number) => x < 0.5 ? 2*x*x : 1 - (-2*x+2)**2/2;
+  const band = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
+  const cl   = (x: number) => Math.max(0, Math.min(1, x));
 
   /* ── Geometri ── */
   const R     = 28;
-  const CX    = 155, CY = 64;       // lingkaran tengah atas
-  const CIRC  = 2 * Math.PI * R;    // ≈ 175.9
-  const D     = 2 * R;              // 56
-  const PART  = CIRC - 3 * D;       // ≈ 7.9
-
-  /* Titik potong = bawah lingkaran */
-  const BOT_Y  = CY + R;            // 92 – y titik potong bawah
-  const LINE_Y = 136;               // y garis setelah bergeser ke bawah
-  const SEG_Y  = 162;               // y segmen diameter
+  const CX    = 155, CY = 66;
+  const CIRC  = 2 * Math.PI * R;   // ≈ 175.9
+  const D     = 2 * R;             // 56
+  const PART  = CIRC - 3 * D;      // ≈ 7.9
+  const BOT_Y = CY + R;            // 94 — titik potong bawah
+  const LINE_Y = 140;
+  const SEG_Y  = 165;
 
   /* ── Timing ── */
-  const drawCircle = band(0.02, 0.18);   // lingkaran terbentuk
-  const drawDiam   = band(0.20, 0.36);   // diameter muncul
-  const peel       = band(0.36, 0.62);   // busur terputus di bawah → membentang simetris
-  const shift      = band(0.63, 0.74);   // garis bergeser ke bawah
-  const s1         = band(0.76, 0.82);
-  const s2         = band(0.80, 0.86);
-  const s3         = band(0.84, 0.90);
-  const s4         = band(0.88, 0.94);
-  const piLbl      = band(0.94, 0.98);
-  const fadeOut    = prog > 0.98 ? 1 - cl((prog-0.98)/0.02) : 1;
+  const drawCircle = band(0.02, 0.18);
+  const drawDiam   = band(0.19, 0.33);
+  const peel       = band(0.35, 0.60);   // busur meluruskan diri → garis horizontal
+  const shift      = band(0.61, 0.71);   // garis bergeser ke bawah
+  const s1         = band(0.73, 0.78);
+  const s2         = band(0.77, 0.82);
+  const s3         = band(0.81, 0.86);
+  const s4         = band(0.85, 0.90);
+  const piLbl      = band(0.91, 0.96);
+  const fadeOut    = prog > 0.97 ? 1 - cl((prog-0.97)/0.03) : 1;
 
-  /* ── Busur sisa: menyusut simetris dari bawah ──
-     Saat peel=u, sisa busur = CIRC*(1-u), terpusat di puncak (atas).
-     rotate(-90) → path mulai dari puncak, berlanjut searah jarum jam.
-     dashoffset = CIRC*(1 - u/2) → titik awal busur bergerak dari bawah ke kiri/kanan naik.
+  /* ── Warna busur: cyan → amber seiring peel ── */
+  const cr = Math.round(6   + (217-6)   * peel);
+  const cg = Math.round(182 + (119-182) * peel);
+  const cb = Math.round(212 + (6-212)   * peel);
+  const morphStroke = `rgb(${cr},${cg},${cb})`;
+  const morphGlow   = `rgba(${cr},${cg},${cb},0.22)`;
+
+  /* ── SVG circle arc (fase menggambar, sebelum morph) ──
+     Menggambar dari atas searah jarum jam dengan growing dasharray.
+     Memudar saat peel mulai.
   */
-  const isDrawing = drawCircle < 1;
-  const arcDash   = isDrawing ? CIRC * drawCircle : CIRC * (1 - peel);
-  const arcOff    = isDrawing ? 0                 : CIRC * (1 - peel / 2);
-  const showArc   = drawCircle > 0.01;
+  const svgDash    = CIRC * drawCircle;
+  const svgOpacity = cl(1 - peel * 5);
 
-  /* ── Ujung busur sisa (bergerak naik dari bawah saat peel) ── */
-  const leftEndAngle  = (-90 - (1 - peel) * 180) * (Math.PI / 180);
-  const rightEndAngle = (-90 + (1 - peel) * 180) * (Math.PI / 180);
-  const arcEndLX = CX + R * Math.cos(leftEndAngle);
-  const arcEndLY = CY + R * Math.sin(leftEndAngle);
-  const arcEndRX = CX + R * Math.cos(rightEndAngle);
-  const arcEndRY = CY + R * Math.sin(rightEndAngle);
-
-  /* ── Garis keliling yang membentang kiri-kanan ──
-     Titik tengah = CX (titik potong), tumbuh simetris.
-     Selama peel: y = BOT_Y; setelah shift: y → LINE_Y
+  /* ── Polyline morph (satu objek yang sama, berubah bentuk) ──
+     N+1 titik dimulai dari BAWAH (titik potong), arah searah jarum jam.
+       t=0   → bawah (CX, BOT_Y)  →  ujung kanan garis (CX + CIRC/2, targetY)
+       t=0.5 → atas  (CX, CY-R)   →  tengah garis (CX, targetY)
+       t=1   → bawah (CX, BOT_Y)  →  ujung kiri garis (CX - CIRC/2, targetY)
+     targetY = BOT_Y saat peel berlangsung → LINE_Y setelah shift.
+     Interpolasi per-titik: lingkaran → garis datar (satu transformasi mulus).
   */
+  const N = 80;
+  const targetY = BOT_Y + (LINE_Y - BOT_Y) * shift;
+
+  let morphPts = '';
+  if (drawCircle > 0.94 || peel > 0) {
+    const pts: string[] = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N;
+      const angle = Math.PI / 2 - t * 2 * Math.PI;   // bawah → CW → bawah
+      const cx_pt = CX + R * Math.cos(angle);
+      const cy_pt = CY + R * Math.sin(angle);
+      const lx_pt = CX + CIRC / 2 - t * CIRC;        // kanan → kiri
+      const px = cx_pt + (lx_pt - cx_pt) * peel;
+      const py = cy_pt + (targetY - cy_pt) * peel;
+      pts.push(`${px.toFixed(1)},${py.toFixed(1)}`);
+    }
+    morphPts = pts.join(' ');
+  }
+  const morphOpacity = cl((drawCircle - 0.94) / 0.06);
+
+  /* Label keliling (mengambang di atas garis) */
   const lineLen  = CIRC * peel;
-  const lineX1   = CX - lineLen / 2;
-  const lineX2   = CX + lineLen / 2;
-  const lineY    = BOT_Y + (LINE_Y - BOT_Y) * shift;
-  const showLine = lineLen > 1;
-
-  /* Diameter memudar saat peel dimulai */
+  const labelY   = targetY - 11;
   const diamOpacity = cl(1 - (peel - 0.1) / 0.4);
 
-  /* ── Segmen diameter (berpusat di bawah garis LINE_Y) ── */
-  const SEG_X0 = CX - CIRC / 2;   // sejajar kiri garis keliling
+  /* ── Segmen diameter ── */
+  const SEG_X0 = CX - CIRC / 2;
   const SEGS = [
-    { x0: SEG_X0,         len: D    * s1, color: '#22c55e', label: 'd',      dashed: false },
-    { x0: SEG_X0 + D,     len: D    * s2, color: '#3b82f6', label: 'd',      dashed: false },
-    { x0: SEG_X0 + 2*D,   len: D    * s3, color: '#a855f7', label: 'd',      dashed: false },
-    { x0: SEG_X0 + 3*D,   len: PART * s4, color: '#eab308', label: '≈0,14d', dashed: true  },
+    { x0: SEG_X0,       len: D    * s1, color: '#22c55e', label: 'd',      dashed: false },
+    { x0: SEG_X0 + D,   len: D    * s2, color: '#3b82f6', label: 'd',      dashed: false },
+    { x0: SEG_X0 + 2*D, len: D    * s3, color: '#a855f7', label: 'd',      dashed: false },
+    { x0: SEG_X0 + 3*D, len: PART * s4, color: '#eab308', label: '≈0,14d', dashed: true  },
   ];
 
   const phaseLabel =
     drawCircle < 0.5  ? '① Lingkaran terbentuk...' :
-    drawDiam   < 0.7  ? '② Diameter terungkap dari pusat!' :
-    peel       < 0.04 ? '③ Keliling terputus di bagian bawah...' :
-    peel       < 0.99 ? `③ Busur membentang ← kiri & kanan → ${lineLen.toFixed(1)}` :
+    drawDiam   < 0.7  ? '② Diameter terungkap!' :
+    peel       < 0.04 ? '③ Keliling terputus di bawah...' :
+    peel       < 0.99 ? `③ Busur meluruskan menjadi garis → ${lineLen.toFixed(1)}` :
     shift      < 0.5  ? '④ Keliling bergeser ke bawah...' :
-    s4         < 0.9  ? '⑤ Bandingkan keliling dengan diameter!' :
-                        '⑥ π = Keliling ÷ Diameter ≈ 3,14';
+    s4         < 0.9  ? '⑤ Bandingkan keliling ÷ diameter!' :
+                        '⑥ π = K ÷ d ≈ 3,14';
 
   return (
     <div className="select-none">
       <svg viewBox="0 0 310 220" className="w-full max-w-sm mx-auto my-2"
-        aria-label="Animasi keliling lingkaran terputus di bawah dan busur membentang kiri-kanan"
+        aria-label="Busur lingkaran meluruskan diri menjadi garis keliling"
         style={{ opacity: fadeOut }}>
 
-        {/* ══ FILL LINGKARAN (memudar saat peel) ══ */}
-        {showArc && (
+        {/* ── Fill lingkaran (memudar saat morph) ── */}
+        {drawCircle > 0.01 && (
           <circle cx={CX} cy={CY} r={R}
-            fill={`rgba(6,182,212,${0.13 * (1 - peel) * (1 - shift)})`} />
+            fill={`rgba(6,182,212,${0.12 * svgOpacity})`} />
         )}
 
-        {/* ══ BUSUR SISA (menyusut simetris dari bawah) ══ */}
-        {showArc && (
+        {/* ── SVG circle arc (fase menggambar) ── */}
+        {drawCircle > 0.01 && svgOpacity > 0.01 && (
           <>
-            {/* glow */}
             <circle cx={CX} cy={CY} r={R} fill="none"
               stroke="rgba(6,182,212,0.22)" strokeWidth="9"
-              strokeDasharray={`${arcDash} ${CIRC + 200}`}
-              strokeDashoffset={arcOff}
+              strokeDasharray={`${svgDash} ${CIRC + 200}`}
               transform={`rotate(-90 ${CX} ${CY})`}
-              opacity={1 - shift} />
-            {/* stroke utama */}
+              opacity={svgOpacity} />
             <circle cx={CX} cy={CY} r={R} fill="none"
-              stroke="#06b6d4" strokeWidth="3" strokeLinecap="round"
-              strokeDasharray={`${arcDash} ${CIRC + 200}`}
-              strokeDashoffset={arcOff}
+              stroke="#06b6d4" strokeWidth="3.5" strokeLinecap="round"
+              strokeDasharray={`${svgDash} ${CIRC + 200}`}
               transform={`rotate(-90 ${CX} ${CY})`}
-              opacity={1 - shift} />
+              opacity={svgOpacity} />
           </>
         )}
 
-        {/* ══ TITIK PUSAT ══ */}
+        {/* ── Titik pusat ── */}
         {drawCircle > 0.1 && peel < 0.8 && (
           <circle cx={CX} cy={CY} r="2.5" fill="#94a3b8"
-            opacity={cl((1 - peel / 0.8) * (1 - shift))} />
+            opacity={cl((1 - peel * 1.2) * (1 - shift))} />
         )}
 
-        {/* ══ INDIKATOR TITIK POTONG (bawah) ══ */}
-        {peel > 0.01 && peel < 0.98 && shift < 0.1 && (
+        {/* ── Tanda potong di bawah (✕ kecil) ── */}
+        {peel > 0.01 && peel < 0.18 && (
+          <g opacity={cl(peel * 8)} stroke="#fbbf24" strokeWidth="1.8">
+            <line x1={CX - 4} y1={BOT_Y - 4} x2={CX + 4} y2={BOT_Y + 4} />
+            <line x1={CX + 4} y1={BOT_Y - 4} x2={CX - 4} y2={BOT_Y + 4} />
+          </g>
+        )}
+
+        {/* ── POLYLINE MORPH — objek tunggal: busur → garis ── */}
+        {morphPts && (
           <>
-            <circle cx={CX} cy={BOT_Y} r="6" fill="rgba(251,191,36,0.25)" />
-            <line x1={CX - 5} y1={BOT_Y} x2={CX + 5} y2={BOT_Y}
-              stroke="#fbbf24" strokeWidth="1.8" />
+            <polyline points={morphPts} fill="none"
+              stroke={morphGlow} strokeWidth="10" strokeLinejoin="round"
+              strokeLinecap="round" opacity={morphOpacity} />
+            <polyline points={morphPts} fill="none"
+              stroke={morphStroke} strokeWidth="3.5" strokeLinejoin="round"
+              strokeLinecap="round" opacity={morphOpacity} />
           </>
         )}
 
-        {/* ══ DOT UJUNG BUSUR bergerak naik dari bawah ══ */}
-        {peel > 0.02 && peel < 0.99 && shift < 0.05 && (
-          <>
-            <circle cx={arcEndLX} cy={arcEndLY} r="4.5" fill="rgba(251,191,36,0.25)" />
-            <circle cx={arcEndLX} cy={arcEndLY} r="3"   fill="#fbbf24" />
-            <circle cx={arcEndRX} cy={arcEndRY} r="4.5" fill="rgba(251,191,36,0.25)" />
-            <circle cx={arcEndRX} cy={arcEndRY} r="3"   fill="#fbbf24" />
-          </>
+        {/* ── Label keliling (muncul saat morph sudah setengah jalan) ── */}
+        {peel > 0.3 && (
+          <text x={CX} y={labelY} fill="#fbbf24" fontSize="8.5"
+            textAnchor="middle" fontFamily="monospace" fontWeight="bold"
+            opacity={cl((peel - 0.3) / 0.3)}>
+            Keliling = {lineLen.toFixed(1)}
+          </text>
         )}
 
-        {/* ══ GARIS PUTUS-PUTUS: ujung busur → ujung garis (selama membentang) ══ */}
-        {showLine && peel > 0.05 && peel < 0.98 && shift < 0.05 && (
-          <>
-            <line x1={arcEndLX} y1={arcEndLY} x2={lineX1} y2={lineY}
-              stroke="rgba(251,191,36,0.30)" strokeWidth="1.2" strokeDasharray="3 3" />
-            <line x1={arcEndRX} y1={arcEndRY} x2={lineX2} y2={lineY}
-              stroke="rgba(251,191,36,0.30)" strokeWidth="1.2" strokeDasharray="3 3" />
-          </>
-        )}
-
-        {/* ══ DIAMETER: muncul dari pusat, memudar saat peel ══ */}
+        {/* ── Diameter ── */}
         {drawDiam > 0 && diamOpacity > 0.02 && (
           <g opacity={drawDiam * diamOpacity}>
             <line x1={CX - R * drawDiam} y1={CY} x2={CX + R * drawDiam} y2={CY}
@@ -175,44 +185,12 @@ const PiAnimationSVG = () => {
                   textAnchor="middle" fontFamily="monospace" fontWeight="bold">
                   d = {D}
                 </text>
-                <text x={CX - R / 2} y={CY - 4} fill="#94a3b8" fontSize="7.5"
-                  textAnchor="middle" fontFamily="sans-serif">r</text>
-                <text x={CX + R / 2} y={CY - 4} fill="#94a3b8" fontSize="7.5"
-                  textAnchor="middle" fontFamily="sans-serif">r</text>
               </>
             )}
           </g>
         )}
 
-        {/* ══ GARIS KELILING (membentang kiri–kanan, lalu bergeser ke bawah) ══ */}
-        {showLine && (
-          <>
-            {/* glow */}
-            <line x1={lineX1} y1={lineY} x2={lineX2} y2={lineY}
-              stroke="rgba(251,191,36,0.18)" strokeWidth="14" strokeLinecap="round" />
-            {/* body */}
-            <line x1={lineX1} y1={lineY} x2={lineX2} y2={lineY}
-              stroke="#d97706" strokeWidth="5" strokeLinecap="round" />
-            {/* highlight */}
-            <line x1={lineX1} y1={lineY - 1.5} x2={lineX2} y2={lineY - 1.5}
-              stroke="rgba(254,215,105,0.45)" strokeWidth="1.5" strokeLinecap="round" />
-            {/* cap kiri */}
-            <line x1={lineX1} y1={lineY - 6} x2={lineX1} y2={lineY + 6}
-              stroke="#d97706" strokeWidth="2" />
-            {/* cap kanan (muncul saat selesai membentang) */}
-            {peel > 0.97 && (
-              <line x1={lineX2} y1={lineY - 6} x2={lineX2} y2={lineY + 6}
-                stroke="#d97706" strokeWidth="2" />
-            )}
-            {/* label keliling */}
-            <text x={CX} y={lineY - 11} fill="#fbbf24" fontSize="9"
-              textAnchor="middle" fontFamily="monospace" fontWeight="bold">
-              Keliling = {lineLen.toFixed(1)}
-            </text>
-          </>
-        )}
-
-        {/* ══ SEGMEN DIAMETER di bawah garis keliling ══ */}
+        {/* ── Segmen diameter (perbandingan keliling ÷ d) ── */}
         {SEGS.map((seg, i) => seg.len > 0.5 && (
           <g key={i}>
             <line x1={seg.x0} y1={SEG_Y} x2={seg.x0 + seg.len} y2={SEG_Y}
@@ -234,7 +212,7 @@ const PiAnimationSVG = () => {
           </g>
         ))}
 
-        {/* garis putus-putus penghubung keliling & diameter */}
+        {/* Konektor dotted */}
         {s4 > 0.9 && (
           <>
             <line x1={SEG_X0}        y1={LINE_Y + 8} x2={SEG_X0}        y2={SEG_Y - 6}
@@ -244,7 +222,7 @@ const PiAnimationSVG = () => {
           </>
         )}
 
-        {/* ══ KOTAK π ══ */}
+        {/* ── Kotak π ── */}
         {piLbl > 0 && (
           <g opacity={piLbl}>
             <rect x={111} y={5} width={88} height={32} rx="8"
@@ -256,7 +234,6 @@ const PiAnimationSVG = () => {
           </g>
         )}
 
-        {/* label fase */}
         <text x="155" y="215" fill="#475569" fontSize="7.5" textAnchor="middle"
           fontFamily="sans-serif">{phaseLabel}</text>
       </svg>
