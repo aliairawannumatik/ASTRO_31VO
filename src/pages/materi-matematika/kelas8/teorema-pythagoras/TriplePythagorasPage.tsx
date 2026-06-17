@@ -39,31 +39,131 @@ const TripleVerifSVG = ({ a, b, c }: { a: number; b: number; c: number }) => {
 };
 
 /* ── Interactive Triple Checker ── */
+/* ── Dynamic triangle SVG for checker ── */
+const CheckerTriangleSVG = ({
+  s1, s2, s3, isTriple,
+}: { s1: number; s2: number; s3: number; isTriple: boolean }) => {
+  const p3x = (s1 * s1 + s2 * s2 - s3 * s3) / (2 * s1);
+  const p3ySq = s2 * s2 - p3x * p3x;
+  if (p3ySq < 0) return null;
+  const p3y = Math.sqrt(p3ySq);
+
+  const minX = Math.min(0, p3x);
+  const maxX = Math.max(s1, p3x);
+  const rawW = maxX - minX || 1;
+  const rawH = p3y || 1;
+
+  const drawW = 300, drawH = 140;
+  const scale = Math.min(drawW / rawW, drawH / rawH) * 0.75;
+  const offsetX = (drawW - rawW * scale) / 2 + 30;
+  const offsetY = 20;
+
+  const tx = (x: number) => (x - minX) * scale + offsetX;
+  const ty = (y: number) => drawH + offsetY - y * scale;
+
+  const P1 = { x: tx(0),   y: ty(0)   };
+  const P2 = { x: tx(s1),  y: ty(0)   };
+  const P3 = { x: tx(p3x), y: ty(p3y) };
+
+  const mid12 = { x: (P1.x + P2.x) / 2, y: (P1.y + P2.y) / 2 };
+  const mid13 = { x: (P1.x + P3.x) / 2, y: (P1.y + P3.y) / 2 };
+  const mid23 = { x: (P2.x + P3.x) / 2, y: (P2.y + P3.y) / 2 };
+
+  const rightAngleSize = Math.min(10, scale * Math.min(s1, s2, s3) * 0.12);
+
+  const RightAngleAt = ({ vx, vy, ax, ay, bx, by }: {
+    vx: number; vy: number; ax: number; ay: number; bx: number; by: number;
+  }) => {
+    const lenA = Math.hypot(ax - vx, ay - vy);
+    const lenB = Math.hypot(bx - vx, by - vy);
+    const uAx = (ax - vx) / lenA * rightAngleSize;
+    const uAy = (ay - vy) / lenA * rightAngleSize;
+    const uBx = (bx - vx) / lenB * rightAngleSize;
+    const uBy = (by - vy) / lenB * rightAngleSize;
+    const mx = vx + uAx + uBx;
+    const my = vy + uAy + uBy;
+    return (
+      <polyline
+        points={`${vx+uAx},${vy+uAy} ${mx},${my} ${vx+uBx},${vy+uBy}`}
+        fill="none" stroke="#4ade80" strokeWidth="1.8"
+      />
+    );
+  };
+
+  const sides = [s1, s2, s3].sort((x, y) => x - y);
+  const hyp = sides[2];
+  let rightVertex: { vx: number; vy: number; ax: number; ay: number; bx: number; by: number } | null = null;
+  if (isTriple) {
+    if (hyp === s3) rightVertex = { vx: P2.x, vy: P2.y, ax: P1.x, ay: P1.y, bx: P3.x, by: P3.y };
+    else if (hyp === s2) rightVertex = { vx: P3.x, vy: P3.y, ax: P1.x, ay: P1.y, bx: P2.x, by: P2.y };
+    else rightVertex = { vx: P1.x, vy: P1.y, ax: P2.x, ay: P2.y, bx: P3.x, by: P3.y };
+  }
+
+  const vb = `0 0 ${drawW + 60} ${drawH + offsetY + 30}`;
+
+  return (
+    <svg viewBox={vb} className="w-full max-w-xs mx-auto block" aria-label="Segitiga dari input">
+      <defs>
+        <filter id="cglow">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <polygon
+        points={`${P1.x},${P1.y} ${P2.x},${P2.y} ${P3.x},${P3.y}`}
+        fill={isTriple ? "rgba(34,197,94,0.08)" : "rgba(239,68,68,0.08)"}
+        stroke="none"
+      />
+
+      <line x1={P1.x} y1={P1.y} x2={P2.x} y2={P2.y} stroke="#60a5fa" strokeWidth="3" strokeLinecap="round" filter="url(#cglow)"/>
+      <line x1={P1.x} y1={P1.y} x2={P3.x} y2={P3.y} stroke="#4ade80" strokeWidth="3" strokeLinecap="round" filter="url(#cglow)"/>
+      <line x1={P2.x} y1={P2.y} x2={P3.x} y2={P3.y} stroke="#fb923c" strokeWidth="3" strokeLinecap="round" filter="url(#cglow)"/>
+
+      {rightVertex && <RightAngleAt {...rightVertex}/>}
+
+      <circle cx={P1.x} cy={P1.y} r="4" fill="#60a5fa"/>
+      <circle cx={P2.x} cy={P2.y} r="4" fill="#fb923c"/>
+      <circle cx={P3.x} cy={P3.y} r="4" fill="#4ade80"/>
+
+      <text x={mid12.x} y={mid12.y + 14} fill="#93c5fd" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Sisi 1 = {s1}</text>
+      <text x={mid13.x - 14} y={mid13.y} fill="#86efac" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Sisi 2 = {s2}</text>
+      <text x={mid23.x + 14} y={mid23.y} fill="#fdba74" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Sisi 3 = {s3}</text>
+    </svg>
+  );
+};
+
 const TripleChecker = () => {
   const [a, setA] = useState("");
   const [b, setB] = useState("");
   const [c, setC] = useState("");
   const [result, setResult] = useState<null | boolean>(null);
+  const [checked, setChecked] = useState<{ na: number; nb: number; nc: number } | null>(null);
 
   const check = () => {
     const na = parseInt(a), nb = parseInt(b), nc = parseInt(c);
     if (isNaN(na) || isNaN(nb) || isNaN(nc) || na <= 0 || nb <= 0 || nc <= 0) {
-      setResult(null); return;
+      setResult(null); setChecked(null); return;
     }
     const sides = [na, nb, nc].sort((x, y) => x - y);
     setResult(sides[0]**2 + sides[1]**2 === sides[2]**2);
+    setChecked({ na, nb, nc });
   };
 
   return (
     <div className="bg-slate-800/70 border border-slate-600 rounded-xl p-4 space-y-3">
       <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">🔬 Cek Triple Pythagoras Sendiri!</p>
       <div className="flex gap-2 items-center flex-wrap">
-        {[{val:a,set:setA,label:"Sisi 1",col:"border-blue-500"},{val:b,set:setB,label:"Sisi 2",col:"border-green-500"},{val:c,set:setC,label:"Sisi 3",col:"border-orange-500"}].map(({val,set,label,col})=>(
+        {[
+          { val: a, set: setA, label: "Sisi 1", col: "border-blue-500" },
+          { val: b, set: setB, label: "Sisi 2", col: "border-green-500" },
+          { val: c, set: setC, label: "Sisi 3", col: "border-orange-500" },
+        ].map(({ val, set, label, col }) => (
           <div key={label} className="flex flex-col gap-1">
             <label className="font-body text-xs text-white/50">{label}</label>
             <input
               type="number" min="1" value={val}
-              onChange={e => { set(e.target.value); setResult(null); }}
+              onChange={e => { set(e.target.value); setResult(null); setChecked(null); }}
               className={`w-20 bg-slate-900/60 border ${col} rounded-lg px-3 py-2 text-white text-sm font-body focus:outline-none`}
               placeholder="..."
             />
@@ -76,12 +176,38 @@ const TripleChecker = () => {
           Cek!
         </button>
       </div>
-      {result !== null && (
-        <div className={`rounded-lg p-3 border ${result ? "bg-green-900/30 border-green-500/50" : "bg-red-900/30 border-red-500/50"}`}>
-          <p className={`font-body text-sm font-bold ${result ? "text-green-300" : "text-red-300"}`}>
-            {result ? `✅ ${a}-${b}-${c} adalah Triple Pythagoras!` : `❌ ${a}-${b}-${c} bukan Triple Pythagoras.`}
-          </p>
-        </div>
+
+      {result !== null && checked && (
+        <>
+          <div className={`rounded-lg p-3 border ${result ? "bg-green-900/30 border-green-500/50" : "bg-red-900/30 border-red-500/50"}`}>
+            <p className={`font-body text-sm font-bold ${result ? "text-green-300" : "text-red-300"}`}>
+              {result
+                ? `✅ ${checked.na}-${checked.nb}-${checked.nc} adalah Triple Pythagoras!`
+                : `❌ ${checked.na}-${checked.nb}-${checked.nc} bukan Triple Pythagoras.`}
+            </p>
+          </div>
+
+          <div className={`rounded-xl border p-3 ${result ? "border-green-500/30 bg-green-950/20" : "border-red-500/30 bg-red-950/20"}`}>
+            <p className="text-center text-xs font-body text-white/50 mb-2">
+              {result ? "✨ Segitiga siku-siku terbentuk!" : "📐 Segitiga terbentuk (bukan siku-siku)"}
+            </p>
+            <CheckerTriangleSVG s1={checked.na} s2={checked.nb} s3={checked.nc} isTriple={result}/>
+            <div className="flex justify-center gap-4 mt-2 flex-wrap">
+              <span className="flex items-center gap-1 text-[10px] font-mono text-blue-300">
+                <span className="inline-block w-4 h-0.5 rounded" style={{background:'#60a5fa', boxShadow:'0 0 4px #60a5fa'}}/>
+                Sisi 1
+              </span>
+              <span className="flex items-center gap-1 text-[10px] font-mono text-green-300">
+                <span className="inline-block w-4 h-0.5 rounded" style={{background:'#4ade80', boxShadow:'0 0 4px #4ade80'}}/>
+                Sisi 2
+              </span>
+              <span className="flex items-center gap-1 text-[10px] font-mono text-orange-300">
+                <span className="inline-block w-4 h-0.5 rounded" style={{background:'#fb923c', boxShadow:'0 0 4px #fb923c'}}/>
+                Sisi 3
+              </span>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
