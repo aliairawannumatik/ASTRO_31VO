@@ -152,6 +152,54 @@ const TripleChecker = () => {
 
   return (
     <div className="bg-slate-800/70 border border-slate-600 rounded-xl p-4 space-y-3">
+
+      {/* Decorative right-triangle illustration */}
+      <div className="rounded-xl bg-slate-900/60 border border-slate-600/50 px-3 pt-3 pb-1">
+        <svg viewBox="0 0 320 150" className="w-full max-w-xs mx-auto block" aria-label="Ilustrasi segitiga siku-siku">
+          <defs>
+            <filter id="ck-glow">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          {/* Triangle fill */}
+          <polygon points="40,125 240,125 40,25" fill="rgba(99,102,241,0.10)" stroke="none"/>
+
+          {/* Leg a — vertical — Sisi 2 — green */}
+          <line x1="40" y1="125" x2="40" y2="25" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" filter="url(#ck-glow)"/>
+          {/* Leg b — horizontal — Sisi 1 — blue */}
+          <line x1="40" y1="125" x2="240" y2="125" stroke="#60a5fa" strokeWidth="3" strokeLinecap="round" filter="url(#ck-glow)"/>
+          {/* Hypotenuse c — Sisi 3 — yellow */}
+          <line x1="240" y1="125" x2="40" y2="25" stroke="#facc15" strokeWidth="3.5" strokeLinecap="round" filter="url(#ck-glow)"/>
+
+          {/* Right angle square at bottom-left (40,125) */}
+          <polyline points="40,107 58,107 58,125" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinejoin="miter"/>
+
+          {/* Vertex dots */}
+          <circle cx="40"  cy="125" r="4" fill="#4ade80"/>
+          <circle cx="240" cy="125" r="4" fill="#60a5fa"/>
+          <circle cx="40"  cy="25"  r="4" fill="#facc15"/>
+
+          {/* Side labels */}
+          {/* Sisi 2 — left, vertical */}
+          <text x="6" y="78" fill="#86efac" fontSize="11" fontFamily="monospace" fontWeight="bold">Sisi 2</text>
+          {/* Sisi 1 — bottom, horizontal */}
+          <text x="118" y="142" fill="#93c5fd" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Sisi 1</text>
+          {/* Sisi 3 — hypotenuse */}
+          <text x="158" y="66" fill="#fde047" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(-27,158,66)">Sisi 3</text>
+
+          {/* 90° label */}
+          <text x="62" y="122" fill="#86efac" fontSize="9" fontFamily="monospace" fontWeight="bold">90°</text>
+
+          {/* Formula badge */}
+          <rect x="248" y="38" width="66" height="34" rx="8" fill="#1e293b" stroke="#6366f1" strokeWidth="1.5" opacity="0.95"/>
+          <text x="281" y="54" fill="#a5b4fc" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Sisi1²+Sisi2²</text>
+          <text x="281" y="66" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">= Sisi3² ?</text>
+        </svg>
+        <p className="text-center text-[10px] text-white/30 font-body pb-1">Masukkan tiga sisi → klik Cek! → segitiga langsung digambar</p>
+      </div>
+
       <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">🔬 Cek Triple Pythagoras Sendiri!</p>
       <div className="flex gap-2 items-center flex-wrap">
         {[
@@ -299,8 +347,9 @@ const TriplePythagorasPage = () => {
                     {/* Hypotenuse — 13 cm — yellow */}
                     <line x1="290" y1="190" x2="50" y2="50" stroke="#facc15" strokeWidth="4" strokeLinecap="round" filter="url(#glowStrong)"/>
 
-                    {/* Right angle marker */}
-                    <polyline points="50,170 70,170 70,190" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinejoin="round"/>
+                    {/* Right angle marker at C=(50,190) — square in the corner */}
+                    {/* C is where the vertical leg (CA) meets the horizontal leg (CB) */}
+                    <polyline points="50,172 68,172 68,190" fill="none" stroke="#4ade80" strokeWidth="2.2" strokeLinejoin="miter"/>
 
                     {/* Vertex dots */}
                     <circle cx="50"  cy="190" r="5" fill="#4ade80"  filter="url(#glow)"/>
@@ -320,13 +369,12 @@ const TriplePythagorasPage = () => {
                     {/* AB = 13 cm — hypotenuse */}
                     <text x="186" y="108" fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(-33,186,108)">13 cm</text>
 
+                    {/* 90° label near right angle */}
+                    <text x="74" y="188" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold">90°</text>
+
                     {/* Badge: ✓ */}
                     <rect x="285" y="30" width="80" height="28" rx="8" fill="#1e1b4b" stroke="#facc15" strokeWidth="1.5" opacity="0.9"/>
                     <text x="325" y="49" fill="#facc15" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">5²+12²=13²✓</text>
-
-                    {/* Angle arc at C */}
-                    <path d="M50,170 A20,20,0,0,1,70,190" fill="none" stroke="#4ade80" strokeWidth="1.5" opacity="0.8"/>
-                    <text x="76" y="183" fill="#4ade80" fontSize="10" fontFamily="monospace">90°</text>
                   </svg>
 
                   {/* Legend row */}
