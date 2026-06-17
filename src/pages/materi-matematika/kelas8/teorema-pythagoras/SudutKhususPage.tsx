@@ -166,19 +166,19 @@ const TriangleInteraktif = () => {
             <text x={CX-5} y={(CY+AY)/2+4}
               fill="#60a5fa" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
               textAnchor="end" {...txtShadow}>
-              {shortSym}={shortVal}
+              {shortVal}
             </text>
             {/* long leg — below horizontal */}
             <text x={Math.min((CX+BX)/2, SVG_W-40)} y={CY+16}
               fill="#4ade80" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
               textAnchor="middle" {...txtShadow}>
-              {longSym}={longVal}
+              {longVal}
             </text>
             {/* hypotenuse — beside mid-point */}
             <text x={Math.min(hypMidX+7, SVG_W-56)} y={Math.max(hypMidY-7, 16)}
               fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
               {...txtShadow}>
-              {hypSym}={hypVal}
+              {mode === '45' ? hypSym : String(hypVal)}
             </text>
           </>}
 
@@ -188,7 +188,7 @@ const TriangleInteraktif = () => {
           <circle cx={BX} cy={BY} r="5" fill="#22c55e" opacity="0.85"/>
 
           {/* Vertex labels */}
-          <text x={CX-15} y={CY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">C(90°)</text>
+          <text x={CX-12} y={CY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">C</text>
           {showLabels && <>
             <text x={AX-18} y={AY-4} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">A</text>
             <text x={BX+4}  y={BY+5} fill="#94a3b8" fontSize="9" fontFamily="sans-serif">B</text>
