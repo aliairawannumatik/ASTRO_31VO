@@ -192,6 +192,19 @@ const TriangleInteraktif = () => {
               fill="none" stroke="#94a3b8" strokeWidth="1.5"
             />
 
+            {/* Tick marks on equal sides (mode 45 only) */}
+            {mode === '45' && showLabels && (() => {
+              const TK = 5;
+              const vMidY = (CY + AY) / 2;
+              const hMidX = (CX + BX) / 2;
+              return <>
+                {/* vertical leg tick */}
+                <line x1={CX - TK} y1={vMidY} x2={CX + TK} y2={vMidY} stroke="#60a5fa" strokeWidth="2" strokeLinecap="round"/>
+                {/* horizontal leg tick */}
+                <line x1={hMidX} y1={CY - TK} x2={hMidX} y2={CY + TK} stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
+              </>;
+            })()}
+
             {/* Angle labels */}
             {showLabels && <>
               <text x={AX+7} y={AY+15} fill="#eab308" fontSize="11" fontFamily="sans-serif" fontWeight="bold" {...txtShadow}>
