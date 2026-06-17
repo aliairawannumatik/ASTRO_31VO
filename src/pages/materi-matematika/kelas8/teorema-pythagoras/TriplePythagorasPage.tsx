@@ -133,6 +133,93 @@ const TriplePythagorasPage = () => {
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan kamu sedang di ujian dan muncul segitiga dengan kaki 5 cm dan 12 cm. Tanpa kalkulator, kamu bisa langsung bilang "hipotenusanya 13 cm!" karena kamu hafal triple <strong className="text-yellow-300">5-12-13</strong>. Keren, kan? 🚀
                 </p>
+
+                {/* ── Attractive 5-12-13 Triangle ── */}
+                <div className="relative rounded-2xl overflow-hidden border border-yellow-500/30 bg-gradient-to-br from-slate-900/90 via-indigo-950/60 to-slate-900/90 p-4">
+                  <p className="text-center text-xs font-bold text-yellow-300 uppercase tracking-widest mb-3 font-body">
+                    ✨ Segitiga 5 – 12 – 13
+                  </p>
+                  <svg
+                    viewBox="0 0 380 230"
+                    className="w-full max-w-sm mx-auto block"
+                    aria-label="Segitiga siku-siku 5-12-13"
+                  >
+                    <defs>
+                      <linearGradient id="triGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.25"/>
+                        <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.25"/>
+                      </linearGradient>
+                      <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                      </filter>
+                      <filter id="glowStrong">
+                        <feGaussianBlur stdDeviation="5" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                      </filter>
+                      <marker id="arrowC" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                        <path d="M0,0 L8,4 L0,8 Z" fill="#facc15"/>
+                      </marker>
+                    </defs>
+
+                    {/* Triangle fill */}
+                    <polygon points="50,190 290,190 50,50" fill="url(#triGrad)" stroke="none"/>
+
+                    {/* Sides — bottom (kaki 12), left (kaki 5), hypotenuse */}
+                    {/* Bottom side — 12 cm — cyan */}
+                    <line x1="50" y1="190" x2="290" y2="190" stroke="#22d3ee" strokeWidth="3.5" strokeLinecap="round" filter="url(#glow)"/>
+                    {/* Left side — 5 cm — green */}
+                    <line x1="50" y1="190" x2="50" y2="50" stroke="#4ade80" strokeWidth="3.5" strokeLinecap="round" filter="url(#glow)"/>
+                    {/* Hypotenuse — 13 cm — yellow */}
+                    <line x1="290" y1="190" x2="50" y2="50" stroke="#facc15" strokeWidth="4" strokeLinecap="round" filter="url(#glowStrong)"/>
+
+                    {/* Right angle marker */}
+                    <polyline points="50,170 70,170 70,190" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinejoin="round"/>
+
+                    {/* Vertex dots */}
+                    <circle cx="50"  cy="190" r="5" fill="#4ade80"  filter="url(#glow)"/>
+                    <circle cx="290" cy="190" r="5" fill="#22d3ee"  filter="url(#glow)"/>
+                    <circle cx="50"  cy="50"  r="5" fill="#facc15"  filter="url(#glowStrong)"/>
+
+                    {/* Vertex labels */}
+                    <text x="30"  y="210" fill="#4ade80" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+                    <text x="295" y="210" fill="#22d3ee" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+                    <text x="34"  y="44"  fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+
+                    {/* Side labels */}
+                    {/* BC = 12 cm — below */}
+                    <text x="160" y="215" fill="#22d3ee" fontSize="13" fontFamily="monospace" fontWeight="bold" textAnchor="middle">12 cm</text>
+                    {/* AC = 5 cm — left */}
+                    <text x="26"  y="125" fill="#4ade80" fontSize="13" fontFamily="monospace" fontWeight="bold" textAnchor="middle">5 cm</text>
+                    {/* AB = 13 cm — hypotenuse */}
+                    <text x="186" y="108" fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(-33,186,108)">13 cm</text>
+
+                    {/* Badge: ✓ */}
+                    <rect x="285" y="30" width="80" height="28" rx="8" fill="#1e1b4b" stroke="#facc15" strokeWidth="1.5" opacity="0.9"/>
+                    <text x="325" y="49" fill="#facc15" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">5²+12²=13²✓</text>
+
+                    {/* Angle arc at C */}
+                    <path d="M50,170 A20,20,0,0,1,70,190" fill="none" stroke="#4ade80" strokeWidth="1.5" opacity="0.8"/>
+                    <text x="76" y="183" fill="#4ade80" fontSize="10" fontFamily="monospace">90°</text>
+                  </svg>
+
+                  {/* Legend row */}
+                  <div className="flex justify-center gap-5 mt-2 flex-wrap">
+                    <span className="flex items-center gap-1.5 text-xs font-mono">
+                      <span className="inline-block w-5 h-1 rounded" style={{background:'#4ade80', boxShadow:'0 0 6px #4ade80'}}/>
+                      <span className="text-green-300">Kaki = 5 cm</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 text-xs font-mono">
+                      <span className="inline-block w-5 h-1 rounded" style={{background:'#22d3ee', boxShadow:'0 0 6px #22d3ee'}}/>
+                      <span className="text-cyan-300">Kaki = 12 cm</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 text-xs font-mono">
+                      <span className="inline-block w-5 h-1 rounded" style={{background:'#facc15', boxShadow:'0 0 8px #facc15'}}/>
+                      <span className="text-yellow-300">Hipotenusa = 13 cm</span>
+                    </span>
+                  </div>
+                </div>
+
                 <TripleVerifSVG a={3} b={4} c={5}/>
               </div>
             )}
