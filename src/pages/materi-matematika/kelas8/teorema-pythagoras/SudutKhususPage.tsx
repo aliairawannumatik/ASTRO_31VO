@@ -178,7 +178,7 @@ const TriangleInteraktif = () => {
             <text x={Math.min(hypMidX+7, SVG_W-56)} y={Math.max(hypMidY-7, 16)}
               fill="#fb923c" fontSize="11" fontWeight="bold" fontFamily="sans-serif"
               {...txtShadow}>
-              {mode === '45' ? hypSym : String(hypVal)}
+              {mode === '45' ? `${a}√2` : String(hypVal)}
             </text>
           </>}
 
