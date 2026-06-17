@@ -209,19 +209,18 @@ const SegitigaInteraktif = () => {
         {/* ─── Bar chart: bottom-right corner ─── */}
         {/* Base line */}
         <line x1="224" y1={BASE_Y} x2="292" y2={BASE_Y} stroke="#475569" strokeWidth="1"/>
-        {/* Column headers */}
-        <text x="237" y="140" textAnchor="middle" fill="#64748b" fontSize="7.5" fontFamily="sans-serif">a²+b²</text>
-        <text x="270" y="140" textAnchor="middle" fill="#64748b" fontSize="7.5" fontFamily="sans-serif">c²</text>
-
         {/* a²+b² bar (blue, fixed) */}
         <rect x="224" y={BASE_Y - abBar} width="24" height={abBar} fill="rgba(59,130,246,0.55)" rx="2"/>
-        <text x="236" y={BASE_Y - abBar - 3} textAnchor="middle"
+        <text x="236" y={BASE_Y - abBar - 12} textAnchor="middle"
           fill="#93c5fd" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">{abSq}</text>
+        {/* Column headers */}
+        <text x="237" y={BASE_Y - abBar - 3} textAnchor="middle" fill="#64748b" fontSize="7.5" fontFamily="sans-serif">a²+b²</text>
 
         {/* c² bar (dynamic color) */}
         <rect x="256" y={BASE_Y - cBar} width="24" height={cBar} fill={COL.barFill} rx="2"/>
-        <text x="268" y={BASE_Y - cBar - 3} textAnchor="middle"
+        <text x="268" y={BASE_Y - cBar - 12} textAnchor="middle"
           fill="#fdba74" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">{cSq}</text>
+        <text x="270" y={BASE_Y - cBar - 3} textAnchor="middle" fill="#64748b" fontSize="7.5" fontFamily="sans-serif">c²</text>
 
         {/* Operator between bars */}
         <text x="250" y={BASE_Y - Math.max(abBar, cBar)/2} textAnchor="middle"
@@ -238,13 +237,13 @@ const SegitigaInteraktif = () => {
             θ = {theta}°
           </span>
         </div>
-        <input type="range" min="15" max="160" step="1" value={theta}
+        <input type="range" min="1" max="179" step="1" value={theta}
           onChange={e => setTheta(+e.target.value)}
           className="w-full cursor-pointer"
           style={{ accentColor: COL.stroke }}
         />
         <div className="flex justify-between text-xs text-slate-500 px-1 font-mono">
-          <span>15° (lancip)</span><span>90° (siku-siku)</span><span>160° (tumpul)</span>
+          <span>1° (lancip)</span><span>90° (siku-siku)</span><span>179° (tumpul)</span>
         </div>
       </div>
 
