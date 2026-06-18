@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
 import ExitDialog from "@/components/ExitDialog";
+import ThemePickerModal from "@/components/ThemePickerModal";
 import { spaceBg } from "@/assets/placeholder";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -10,6 +12,7 @@ const WelcomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = ["light", "white", "forest"].includes(theme);
+  const [showThemePicker, setShowThemePicker] = useState(false);
 
   return (
     <div
@@ -89,7 +92,7 @@ const WelcomePage = () => {
             }`}
           />
           <button
-            onClick={() => { playPopSound(); navigate("/menu"); }}
+            onClick={() => { playPopSound(); setShowThemePicker(true); }}
             className={`relative font-display text-xl sm:text-2xl px-12 py-6 rounded-2xl font-bold tracking-widest shadow-2xl transition-all duration-300 cursor-pointer animate-button-pulse text-white border-2 active:scale-95 ${
               isLight
                 ? "bg-gradient-to-r from-indigo-500 via-cyan-400 to-sky-400 border-cyan-200 hover:border-white hover:shadow-cyan-300/60"
@@ -127,6 +130,9 @@ const WelcomePage = () => {
           </div>
         </div>
       </div>
+
+      {/* Theme picker modal */}
+      <ThemePickerModal open={showThemePicker} onClose={() => setShowThemePicker(false)} />
 
       {/* Marquee text */}
       <div
