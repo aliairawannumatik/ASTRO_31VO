@@ -415,11 +415,15 @@ const KelilingLuasCirclesSVG = () => (
           <line x1="80" y1="80" x2="138" y2="80"
             stroke="#64748b" strokeWidth="1.5" strokeDasharray="4 3" opacity=".6" />
           <text x="110" y="74" fill="#94a3b8" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity=".8">r</text>
-
-          {/* Label inside */}
-          <text x="80" y="84" fill="#22d3ee" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity=".55">K = 2πr</text>
         </svg>
         <p className="font-body text-[10px] text-white/45 leading-snug">Hanya <span className="text-cyan-300 font-semibold">tepi/garis</span> yang menyala — itulah keliling!</p>
+        <div className="w-full bg-green-900/30 border border-green-500/40 rounded-xl p-3 text-center">
+          <p className="font-body text-xs font-bold text-green-300 mb-1">📏 KELILING (K)</p>
+          <BlockMath math="K = \pi \times d" />
+          <p className="font-body text-[10px] text-white/50">atau</p>
+          <BlockMath math="K = 2\pi r" />
+          <p className="font-body text-[10px] text-white/40 mt-1">d = diameter, r = jari-jari</p>
+        </div>
       </div>
 
       {/* ── Luas: interior yang menyala ── */}
@@ -459,11 +463,15 @@ const KelilingLuasCirclesSVG = () => (
           {/* Centre dot */}
           <circle cx="80" cy="80" r="3.5" fill="#fdba74" opacity=".9"
             style={{ filter: 'drop-shadow(0 0 5px #fb923c)' }} />
-
-          {/* Label inside */}
-          <text x="80" y="100" fill="#fb923c" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity=".7">L = πr²</text>
         </svg>
         <p className="font-body text-[10px] text-white/45 leading-snug">Yang menyala adalah <span className="text-orange-300 font-semibold">daerah dalam</span> — itulah luas!</p>
+        <div className="w-full bg-orange-900/30 border border-orange-500/40 rounded-xl p-3 text-center">
+          <p className="font-body text-xs font-bold text-orange-300 mb-1">🔲 LUAS (L)</p>
+          <BlockMath math="L = \pi \times r^2" />
+          <p className="font-body text-[10px] text-white/50">atau</p>
+          <BlockMath math="L = \frac{1}{4}\pi d^2" />
+          <p className="font-body text-[10px] text-white/40 mt-1">r = jari-jari, d = diameter</p>
+        </div>
       </div>
 
     </div>
@@ -544,22 +552,6 @@ const KelilingLuasPage = () => {
                 </div>
                 <KelilingLuasCirclesSVG />
                 <AreaCompareSVG />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4 text-center">
-                    <p className="font-body text-sm font-bold text-green-300 mb-2">📏 KELILING (K)</p>
-                    <BlockMath math="K = \pi \times d" />
-                    <p className="font-body text-xs text-white/60 mt-1">atau</p>
-                    <BlockMath math="K = 2\pi r" />
-                    <p className="font-body text-xs text-white/50 mt-1">d = diameter, r = jari-jari</p>
-                  </div>
-                  <div className="bg-orange-900/30 border border-orange-500/40 rounded-xl p-4 text-center">
-                    <p className="font-body text-sm font-bold text-orange-300 mb-2">🔲 LUAS (L)</p>
-                    <BlockMath math="L = \pi \times r^2" />
-                    <p className="font-body text-xs text-white/60 mt-1">atau</p>
-                    <BlockMath math="L = \frac{1}{4}\pi d^2" />
-                    <p className="font-body text-xs text-white/50 mt-1">r = jari-jari, d = diameter</p>
-                  </div>
-                </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
                     ⚠️ <strong>Perhatikan satuan!</strong> Keliling = satuan panjang (cm, m). Luas = satuan kuadrat (cm², m²).
