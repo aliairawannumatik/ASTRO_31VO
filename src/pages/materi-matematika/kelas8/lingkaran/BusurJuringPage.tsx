@@ -552,48 +552,50 @@ const PizzaAnalogiDua = () => (
 );
 
 const TemberengLengkapSVG = () => (
-  // A=(76,148) B=(204,148): both exactly on circle r=80 → √(64²+48²)=80 ✓
-  // Tembereng = minor segment below chord AB (clockwise arc A→B through bottom)
-  <svg viewBox="0 0 280 215" className="w-full max-w-xs mx-auto my-2" aria-label="Tembereng lingkaran">
+  // Circle: center(140,125) r=80. Top cap tembereng:
+  // A=(76,77) B=(204,77) — exactly on circle: √(64²+48²)=80 ✓
+  // Chord at y=77 (48 above center). Cap = small region above chord up to top(140,45).
+  // Arc through top = CW sweep=1 small arc.
+  <svg viewBox="0 0 280 225" className="w-full max-w-xs mx-auto my-2" aria-label="Tembereng lingkaran">
     <defs>
-      <style>{`@keyframes tFill3{0%{opacity:0;}100%{opacity:1;}}.tf3{animation:tFill3 1.5s ease-in forwards;}`}</style>
+      <style>{`@keyframes tFill4{0%{opacity:0;}100%{opacity:1;}}.tf4{animation:tFill4 1.5s ease-in forwards;}`}</style>
     </defs>
 
     {/* Full circle */}
-    <circle cx="140" cy="100" r="80" fill="rgba(6,182,212,0.08)" stroke="#06b6d4" strokeWidth="2"/>
+    <circle cx="140" cy="125" r="80" fill="rgba(6,182,212,0.08)" stroke="#06b6d4" strokeWidth="2"/>
 
-    {/* TEMBERENG fill — minor segment, clockwise arc A→B goes through the bottom of circle */}
-    <path d="M76,148 A80,80 0 0 1 204,148 Z"
-      fill="rgba(251,146,60,0.55)" stroke="none" className="tf3"/>
+    {/* TEMBERENG fill — small cap above chord, CW arc A→B through top of circle */}
+    <path d="M76,77 A80,80 0 0 1 204,77 Z"
+      fill="rgba(251,146,60,0.60)" stroke="none" className="tf4"/>
 
-    {/* Tembereng arc stroke (lower arc, orange) */}
-    <path d="M76,148 A80,80 0 0 1 204,148"
+    {/* Tembereng arc stroke (upper arc, orange) */}
+    <path d="M76,77 A80,80 0 0 1 204,77"
       fill="none" stroke="#fb923c" strokeWidth="3" strokeLinecap="round"/>
 
     {/* Chord AB (yellow dashed) */}
-    <line x1="76" y1="148" x2="204" y2="148" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6 3"/>
+    <line x1="76" y1="77" x2="204" y2="77" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6 3"/>
 
     {/* Radii OA and OB (green dashed) */}
-    <line x1="140" y1="100" x2="76" y2="148" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4 2"/>
-    <line x1="140" y1="100" x2="204" y2="148" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4 2"/>
+    <line x1="140" y1="125" x2="76" y2="77" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4 2"/>
+    <line x1="140" y1="125" x2="204" y2="77" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4 2"/>
 
     {/* Center O */}
-    <circle cx="140" cy="100" r="4" fill="#06b6d4"/>
-    <text x="147" y="96" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
+    <circle cx="140" cy="125" r="4" fill="#06b6d4"/>
+    <text x="147" y="121" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
 
     {/* Point A */}
-    <circle cx="76" cy="148" r="4" fill="#fb923c"/>
-    <text x="58" y="153" fill="#fed7aa" fontSize="12" fontFamily="monospace" fontWeight="bold">A</text>
+    <circle cx="76" cy="77" r="4" fill="#fb923c"/>
+    <text x="58" y="74" fill="#fed7aa" fontSize="12" fontFamily="monospace" fontWeight="bold">A</text>
 
     {/* Point B */}
-    <circle cx="204" cy="148" r="4" fill="#fb923c"/>
-    <text x="211" y="153" fill="#fed7aa" fontSize="12" fontFamily="monospace" fontWeight="bold">B</text>
+    <circle cx="204" cy="77" r="4" fill="#fb923c"/>
+    <text x="210" y="74" fill="#fed7aa" fontSize="12" fontFamily="monospace" fontWeight="bold">B</text>
 
-    {/* "Tembereng" label inside segment */}
-    <text x="140" y="168" fill="#fed7aa" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Tembereng</text>
+    {/* "Tembereng" label inside the cap */}
+    <text x="140" y="63" fill="#fed7aa" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Tembereng</text>
 
-    {/* Formula */}
-    <text x="140" y="200" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">L.Tembereng = L.Juring OAB − L.△OAB</text>
+    {/* Formula at bottom */}
+    <text x="140" y="215" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">L.Tembereng = L.Juring OAB − L.△OAB</text>
   </svg>
 );
 
