@@ -476,19 +476,19 @@ const ContohDelapanSVG = () => (
       `}</style>
     </defs>
 
-    {/* ── 4 quarter-circle sectors (faint fill only, no arc outline) ── */}
+    {/* ── 4 quarter-circle sectors (no fill — match dark background) ── */}
     {/* TL: center(20,20) */}
     <path d="M20,20 L130,20 A110,110,0,0,1,20,130 Z"
-      fill="rgba(148,163,184,.13)" stroke="none"/>
+      fill="rgba(15,23,42,.85)" stroke="none"/>
     {/* TR: center(240,20) */}
     <path d="M240,20 L130,20 A110,110,0,0,0,240,130 Z"
-      fill="rgba(148,163,184,.13)" stroke="none"/>
+      fill="rgba(15,23,42,.85)" stroke="none"/>
     {/* BL: center(20,240) */}
     <path d="M20,240 L20,130 A110,110,0,0,1,130,240 Z"
-      fill="rgba(148,163,184,.13)" stroke="none"/>
+      fill="rgba(15,23,42,.85)" stroke="none"/>
     {/* BR: center(240,240) */}
     <path d="M240,240 L130,240 A110,110,0,0,0,240,130 Z"
-      fill="rgba(148,163,184,.13)" stroke="none"/>
+      fill="rgba(15,23,42,.85)" stroke="none"/>
 
     {/* ── Center shaded region ── */}
     {/* Bounded by 4 inward-curving arcs, one from each corner */}
@@ -612,17 +612,13 @@ const SoalSVG10 = () => (
     </defs>
     {/* Full circle (unshaded background) */}
     <circle cx="110" cy="120" r="105" fill="rgba(139,92,246,.06)" stroke="#8b5cf6" strokeWidth="2" opacity=".5"/>
-    {/* Right triangle inside sector (O, A, B) — lighter fill underneath */}
-    <polygon points="110,120 215,120 110,225" fill="rgba(196,181,253,.22)"/>
-    {/* Shaded quarter sector (right lower quarter) */}
-    <path d="M110,120 L215,120 A105,105,0,0,1,110,225 Z"
+    {/* Shaded TEMBERENG only (arc segment, no radii) */}
+    <path d="M215,120 A105,105,0,0,1,110,225 Z"
       fill="#8b5cf6" className="sc10-fill"/>
-    <path d="M110,120 L215,120 A105,105,0,0,1,110,225 Z"
+    <path d="M215,120 A105,105,0,0,1,110,225 Z"
       fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinejoin="round" className="sc10-out"/>
-    {/* Hypotenuse AB (the triangle inside the sector) */}
-    <line x1="215" y1="120" x2="110" y2="225" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6 3" opacity=".9"/>
-    {/* Right-angle mark at O */}
-    <polyline points="128,120 128,138 110,138" fill="none" stroke="#a78bfa" strokeWidth="1.5" opacity=".8"/>
+    {/* Chord AB (tali busur) */}
+    <line x1="215" y1="120" x2="110" y2="225" stroke="#a78bfa" strokeWidth="2.5"/>
     {/* Center */}
     <circle cx="110" cy="120" r="4" fill="#8b5cf6"/>
     <text x="93" y="117" fill="#c4b5fd" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
@@ -807,15 +803,13 @@ const SoalSVG14 = () => (
         .sv14-out{animation:sv14g 2.4s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Arsiran HANYA tembereng: busur A→B + tali busur B→A (Z menutup lurus) */}
-    {/* A(20,195) → arc CW r=70 → B(90,125) → garis lurus kembali ke A */}
-    <path d="M20,195 A70,70,0,0,1,90,125 Z"
+    {/* Arsiran PENUH: sektor seperempat lingkaran (termasuk segitiga) + trapesium */}
+    {/* Full quarter-circle sector: center(90,195) → left(20,195) arc CW → top(90,125) close */}
+    <path d="M90,195 L20,195 A70,70,0,0,1,90,125 Z"
       fill="#f43f5e" className="sv14-fill"/>
     {/* Arsiran trapesium */}
     <path d="M90,125 L230,125 L300,195 L90,195 Z"
       fill="#f43f5e" className="sv14-fill"/>
-    {/* Tali busur (chord) dari B(90,125) ke A(20,195) — batas tembereng */}
-    <line x1="90" y1="125" x2="20" y2="195" stroke="#fb7185" strokeWidth="1.8" strokeDasharray="4 2" opacity=".85"/>
     {/* Outline gabungan */}
     <path d="M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z"
       fill="none" stroke="#fb7185" strokeWidth="2.5" strokeLinejoin="round" className="sv14-out"/>
@@ -927,17 +921,13 @@ const SoalSVG16 = () => (
         .sv16-fill{animation:sv16f 2.5s ease-in-out infinite;}
         .sv16-out{animation:sv16g 2.5s ease-in-out infinite;}
       `}</style>
-      {/* Tanda cureuk (hatching diagonal) untuk persegi */}
-      <pattern id="hatch16" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45 0 0)">
-        <line x1="0" y1="0" x2="0" y2="8" stroke="#fbbf24" strokeWidth="1.4" opacity=".75"/>
-      </pattern>
     </defs>
 
-    {/* Arsiran = seluruh lingkaran (termasuk ¼ yang beririsan dengan persegi) */}
+    {/* Arsiran = seluruh lingkaran penuh (termasuk area persegi, warna sama) */}
     <circle cx="160" cy="160" r="110" fill="#f97316" className="sv16-fill"/>
 
-    {/* Tanda cureuk di persegi (overlay hatching) */}
-    <rect x="50" y="50" width="110" height="110" fill="url(#hatch16)" opacity=".9"/>
+    {/* Persegi kiri-atas — warna sama dengan lingkaran, tanpa arsiran */}
+    <rect x="50" y="50" width="110" height="110" fill="#f97316" className="sv16-fill"/>
 
     {/* Lingkaran outline */}
     <circle cx="160" cy="160" r="110" fill="none" stroke="#fb923c" strokeWidth="2.5" className="sv16-out"/>
@@ -984,17 +974,14 @@ const SoalSVG17 = () => (
       `}</style>
     </defs>
 
-    {/* Bangun gabungan:                                                        */}
-    {/* 1. Busur besar atas:  dari (30,130) CW ke (230,130), r=100              */}
-    {/* 2. Busur kecil bawah: dari (230,130) CCW ke (130,130), r=50             */}
-    {/* 3. Tutup: garis lurus dari (130,130) ke (30,130) = setengah diameter kiri */}
-    <path d="M30,130 A100,100,0,0,1,230,130 A50,50,0,0,0,130,130 Z"
+    {/* Bangun gabungan:                                                            */}
+    {/* 1. Busur besar atas:       dari (30,130) CW ke (230,130), r=100            */}
+    {/* 2. Busur kecil kanan bawah: dari (230,130) CCW ke (130,130), r=50          */}
+    {/* 3. Busur kecil kiri bawah: dari (130,130) CCW ke (30,130), r=50            */}
+    <path d="M30,130 A100,100,0,0,1,230,130 A50,50,0,0,0,130,130 A50,50,0,0,0,30,130 Z"
       fill="#ec4899" className="sv17-fill"/>
-    <path d="M30,130 A100,100,0,0,1,230,130 A50,50,0,0,0,130,130 Z"
+    <path d="M30,130 A100,100,0,0,1,230,130 A50,50,0,0,0,130,130 A50,50,0,0,0,30,130 Z"
       fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinejoin="round" className="sv17-out"/>
-
-    {/* Sisi datar kiri (setengah diameter besar = radius R) */}
-    <line x1="30" y1="130" x2="130" y2="130" stroke="#f472b6" strokeWidth="2.5"/>
 
     {/* Titik pusat O */}
     <circle cx="130" cy="130" r="4" fill="#f472b6"/>
@@ -1004,11 +991,16 @@ const SoalSVG17 = () => (
     <line x1="130" y1="130" x2="130" y2="30" stroke="#fbbf24" strokeWidth="1.3" strokeDasharray="5 3" opacity=".75"/>
     <text x="145" y="76" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">R = 10 cm</text>
 
-    {/* Label diameter lingkaran kecil (bawah, di luar bangun) */}
+    {/* Label diameter lingkaran kecil kanan (bawah) */}
     <text x="180" y="200" fill="#a5f3fc" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 10 cm</text>
     <line x1="130" y1="194" x2="230" y2="194" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
     <line x1="130" y1="190" x2="130" y2="198" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
     <line x1="230" y1="190" x2="230" y2="198" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
+
+    {/* Label diameter lingkaran kecil kiri (bawah) */}
+    <text x="80" y="200" fill="#a5f3fc" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 10 cm</text>
+    <line x1="30"  y1="194" x2="130" y2="194" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
+    <line x1="30"  y1="190" x2="30"  y2="198" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
   </svg>
 );
 
@@ -1085,39 +1077,38 @@ const SoalSVG19 = () => (
     </defs>
 
     {/* Combined shape:
-        A(25,130) → large arc CW upward to B(155,130)
-                 → small arc CCW downward to C(225,130) → close to A */}
-    <path d="M25,130 A65,65,0,0,1,155,130 A35,35,0,0,0,225,130 Z"
+        A(25,130) → large arc CW upward to B(155,130) [right end of big = center of small]
+                 → line to right end of small (190,130)
+                 → small arc CCW downward to left end of small (120,130) → close to A */}
+    <path d="M25,130 A65,65,0,0,1,155,130 L190,130 A35,35,0,0,0,120,130 Z"
       fill="#4f46e5" className="sv19-fill"/>
-    <path d="M25,130 A65,65,0,0,1,155,130 A35,35,0,0,0,225,130 Z"
+    <path d="M25,130 A65,65,0,0,1,155,130 L190,130 A35,35,0,0,0,120,130 Z"
       fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinejoin="round" className="sv19-out"/>
 
     {/* Baseline */}
-    <line x1="25" y1="130" x2="225" y2="130" stroke="#818cf8" strokeWidth="1.3" opacity=".35"/>
+    <line x1="25" y1="130" x2="190" y2="130" stroke="#818cf8" strokeWidth="1.3" opacity=".35"/>
 
-    {/* Tick at connection B(155,130) */}
-    <line x1="155" y1="122" x2="155" y2="138" stroke="#c7d2fe" strokeWidth="2" opacity=".9"/>
-
-    {/* Center dots */}
+    {/* Center of big circle (and right-end of big = center of small) */}
     <circle cx="90"  cy="130" r="2.5" fill="#a5b4fc" opacity=".65"/>
-    <circle cx="190" cy="130" r="2.5" fill="#a5b4fc" opacity=".65"/>
+    <circle cx="155" cy="130" r="2.5" fill="#a5b4fc" opacity=".65"/>
 
-    {/* ── Garis bantu: 26 cm (diameter besar, A→B di bawah) ── */}
+    {/* ── Garis bantu: 26 cm (diameter besar, A(25)→B(155)) ── */}
     <line x1="25"  y1="143" x2="155" y2="143" stroke="#fbbf24" strokeWidth="1.3" opacity=".85"/>
     <line x1="25"  y1="139" x2="25"  y2="147" stroke="#fbbf24" strokeWidth="1.2" opacity=".85"/>
     <line x1="155" y1="139" x2="155" y2="147" stroke="#fbbf24" strokeWidth="1.2" opacity=".85"/>
     <text x="90" y="159" fill="#fde68a" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">26 cm</text>
 
-    {/* ── Garis bantu: 14 cm (diameter kecil, B→C di bawah) ── */}
-    <line x1="155" y1="143" x2="225" y2="143" stroke="#67e8f9" strokeWidth="1.3" opacity=".85"/>
-    <line x1="225" y1="139" x2="225" y2="147" stroke="#67e8f9" strokeWidth="1.2" opacity=".85"/>
-    <text x="190" y="159" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
+    {/* ── Garis bantu: 14 cm (diameter kecil, (120)→(190)) ── */}
+    <line x1="120" y1="143" x2="190" y2="143" stroke="#67e8f9" strokeWidth="1.3" opacity=".85"/>
+    <line x1="120" y1="139" x2="120" y2="147" stroke="#67e8f9" strokeWidth="1.2" opacity=".85"/>
+    <line x1="190" y1="139" x2="190" y2="147" stroke="#67e8f9" strokeWidth="1.2" opacity=".85"/>
+    <text x="155" y="159" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
 
     {/* ── Radius labels ── */}
     <line x1="90"  y1="130" x2="90"  y2="65" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="4 2" opacity=".55"/>
     <text x="94"  y="95"  fill="#a5b4fc" fontSize="9" fontFamily="monospace">R=13</text>
-    <line x1="190" y1="130" x2="225" y2="130" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="3 2" opacity=".55"/>
-    <text x="192" y="126" fill="#a5b4fc" fontSize="8.5" fontFamily="monospace">r=7</text>
+    <line x1="155" y1="130" x2="190" y2="130" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="3 2" opacity=".55"/>
+    <text x="157" y="126" fill="#a5b4fc" fontSize="8.5" fontFamily="monospace">r=7</text>
   </svg>
 );
 
