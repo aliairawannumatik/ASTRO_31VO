@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -8,15 +8,26 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 const PiAnimationSVG = () => {
-  const [prog, setProg] = useState(0);
+  const [prog, setProg]       = useState(0);
+  const [running, setRunning] = useState(false);
+  const startRef              = useRef<number | null>(null);
+
   useEffect(() => {
+    if (!running) return;
     let id: number;
-    const start = performance.now();
     const PERIOD = 15000;
-    const loop = (now: number) => { setProg(((now - start) % PERIOD) / PERIOD); id = requestAnimationFrame(loop); };
+    startRef.current = performance.now();
+    const loop = (now: number) => {
+      const p = (now - startRef.current!) / PERIOD;
+      if (p >= 1) { setProg(1); setRunning(false); return; }
+      setProg(p);
+      id = requestAnimationFrame(loop);
+    };
     id = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(id);
-  }, []);
+  }, [running]);
+
+  const handleStart = () => { setProg(0); setRunning(true); };
 
   const ease = (x: number) => x < 0.5 ? 2*x*x : 1 - (-2*x+2)**2/2;
   const band = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
@@ -309,6 +320,35 @@ const PiAnimationSVG = () => {
         <text x="155" y="215" fill="#475569" fontSize="7.5" textAnchor="middle"
           fontFamily="sans-serif">{phaseLabel}</text>
       </svg>
+
+      {/* ── Tombol Mulai / Ulang ── */}
+      <div className="flex justify-center mt-1 mb-2">
+        {!running && prog === 0 && (
+          <button
+            onClick={handleStart}
+            className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold
+              bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-500/50 text-cyan-300
+              transition-all duration-200 active:scale-95"
+          >
+            <span className="text-base">▶</span> Mulai Animasi
+          </button>
+        )}
+        {running && (
+          <span className="text-xs text-white/30 font-mono tracking-widest animate-pulse">
+            ● sedang berjalan…
+          </span>
+        )}
+        {!running && prog > 0 && (
+          <button
+            onClick={handleStart}
+            className="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold
+              bg-purple-500/20 hover:bg-purple-500/35 border border-purple-500/50 text-purple-300
+              transition-all duration-200 active:scale-95"
+          >
+            <span className="text-base">↺</span> Ulang
+          </button>
+        )}
+      </div>
     </div>
   );
 };
