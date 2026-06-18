@@ -727,6 +727,74 @@ const FormulaCard = ({ color, label, luas, keliling }: {
 );
 
 /* ═══════════════════════════════════════════════════════════════════
+   SVG C13 – Es Krim: setengah lingkaran (r=10 cm) + segitiga
+   (alas=20 cm, tinggi=24 cm, sisi miring=26 cm).
+   ViewBox 0 0 280 360. Semicircle center (140,100) r=90.
+   Triangle: (50,100)–(230,100)–(140,316).
+   Scale: 10 cm → 90 px, 24 cm → 216 px, 26 cm → 234 px.
+═══════════════════════════════════════════════════════════════════ */
+const SoalSVG13 = () => (
+  <svg viewBox="0 0 280 360" className="w-full max-w-xs mx-auto" aria-label="Es krim: setengah lingkaran di atas segitiga">
+    <defs>
+      <style>{`
+        @keyframes ek13{0%,100%{opacity:.42;}50%{opacity:.72;}}
+        @keyframes ek13g{0%,100%{filter:drop-shadow(0 0 8px #f97316);}50%{filter:drop-shadow(0 0 22px #f97316);}}
+        @keyframes ek13d{to{stroke-dashoffset:-16;}}
+        .ek13-fill{animation:ek13 2.4s ease-in-out infinite;}
+        .ek13-out{animation:ek13g 2.4s ease-in-out infinite;}
+        .ek13-dash{animation:ek13d 1.2s linear infinite;}
+      `}</style>
+    </defs>
+
+    {/* ── Combined shape fill ── */}
+    {/* Semicircle on top + triangle below, joined at diameter line */}
+    <path
+      d="M50,100 A90,90,0,0,1,230,100 L140,316 Z"
+      fill="rgba(249,115,22,.18)" className="ek13-fill"
+    />
+    <path
+      d="M50,100 A90,90,0,0,1,230,100 L140,316 Z"
+      fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinejoin="round" className="ek13-out"
+    />
+
+    {/* ── Diameter line (hidden boundary between semicircle & triangle) ── */}
+    <line x1="50" y1="100" x2="230" y2="100"
+      stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="6 3" opacity=".55"/>
+
+    {/* ── Height of triangle (dashed) ── */}
+    <line x1="140" y1="100" x2="140" y2="316"
+      stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5 3" className="ek13-dash" opacity=".8"/>
+    {/* Right-angle mark at top of height */}
+    <polyline points="140,100 152,100 152,112" fill="none" stroke="#22d3ee" strokeWidth="1.2" opacity=".7"/>
+
+    {/* ── Labels ── */}
+    {/* Diameter: 20 cm above semicircle */}
+    <text x="140" y="22" fill="#fbbf24" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">20 cm</text>
+    <line x1="50" y1="28" x2="230" y2="28" stroke="#fbbf24" strokeWidth="1.2" opacity=".5"/>
+    <line x1="50" y1="24" x2="50" y2="32" stroke="#fbbf24" strokeWidth="1.2" opacity=".5"/>
+    <line x1="230" y1="24" x2="230" y2="32" stroke="#fbbf24" strokeWidth="1.2" opacity=".5"/>
+
+    {/* Radius label inside semicircle */}
+    <line x1="140" y1="100" x2="230" y2="100" stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="4 2" opacity=".6"/>
+    <text x="188" y="95" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">r=10</text>
+    <circle cx="140" cy="100" r="3.5" fill="#22d3ee"/>
+
+    {/* Height: 24 cm (right side of dashed line) */}
+    <text x="148" y="214" fill="#22d3ee" fontSize="11" fontFamily="monospace" fontWeight="bold"
+      transform="rotate(90,148,214)">24 cm</text>
+
+    {/* Left slant: 26 cm */}
+    <text x="68" y="222" fill="#fb923c" fontSize="11" fontFamily="monospace" fontWeight="bold"
+      transform="rotate(67,68,222)">26 cm</text>
+
+    {/* Tip dot */}
+    <circle cx="140" cy="316" r="3" fill="#fb923c" opacity=".8"/>
+
+    {/* Dimension bracket: 20 cm top */}
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════════════════════════════════════ */
 const KaitanBangunDatarLainnyaPage = () => {
@@ -1150,6 +1218,50 @@ const KaitanBangunDatarLainnyaPage = () => {
                     <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                       <p className="text-cyan-300 text-xs font-bold">✅ Keliling Sektor</p>
                       <p className="text-white text-sm font-bold mt-1">35,7 cm</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          {/* ── CONTOH 13 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh13" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
+              title="✏️ Contoh 13 — Bangun Es Krim: Setengah Lingkaran + Segitiga (π = 3,14)"
+              accent="rgba(249,115,22,.12)" />
+              <div className="px-5 pb-5 pt-3 space-y-4">
+                <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
+                  <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">🍦 Soal</p>
+                  <p className="font-body text-sm text-white/90">
+                    Sebuah bangun berbentuk "es krim" terdiri dari setengah lingkaran di bagian atas dan segitiga sama kaki di bagian bawah. Diameter bagian atas = 20 cm, tinggi segitiga = 24 cm, dan panjang sisi miring segitiga = 26 cm. Hitunglah <strong>(a)</strong> luas bangun dan <strong>(b)</strong> keliling bangun tersebut! <InlineMath math="(\pi = 3{,}14)"/>
+                  </p>
+                </div>
+                <SoalSVG13 />
+                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                  <p className="font-body text-sm text-white/80">
+                    <strong>Diketahui:</strong> diameter = 20 cm → <InlineMath math="r = 10"/> cm, tinggi segitiga <InlineMath math="t = 24"/> cm, sisi miring <InlineMath math="s = 26"/> cm, alas segitiga = diameter = 20 cm.
+                  </p>
+                  <p className="font-body text-sm text-white/80"><strong>(a) Luas bangun:</strong></p>
+                  <p className="font-body text-xs text-white/60 mb-1">Luas = Luas setengah lingkaran + Luas segitiga</p>
+                  <BlockMath math="L = \tfrac{1}{2}\pi r^2 + \tfrac{1}{2} \times \text{alas} \times t" />
+                  <BlockMath math="= \tfrac{1}{2} \times 3{,}14 \times 10^2 + \tfrac{1}{2} \times 20 \times 24" />
+                  <BlockMath math="= \tfrac{1}{2} \times 3{,}14 \times 100 + 240" />
+                  <BlockMath math="= 157 + 240 = \boxed{397 \text{ cm}^2}" />
+                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling bangun:</strong></p>
+                  <p className="font-body text-xs text-white/60 mb-1">Keliling = busur setengah lingkaran + 2 × sisi miring segitiga</p>
+                  <p className="font-body text-xs text-white/60 mb-1">(Alas segitiga/diameter tidak dihitung karena berimpit dengan diameter setengah lingkaran)</p>
+                  <BlockMath math="K = \pi r + 2s = 3{,}14 \times 10 + 2 \times 26" />
+                  <BlockMath math="= 31{,}4 + 52 = \boxed{83{,}4 \text{ cm}}" />
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
+                      <p className="text-orange-300 text-xs font-bold">✅ Luas Bangun</p>
+                      <p className="text-white text-sm font-bold mt-1">397 cm²</p>
+                    </div>
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
+                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling Bangun</p>
+                      <p className="text-white text-sm font-bold mt-1">83,4 cm</p>
                     </div>
                   </div>
                 </div>
