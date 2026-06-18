@@ -732,6 +732,46 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
+          {/* ── CONTOH 6 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(6,182,212,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh6" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-cyan-400"
+              title="✏️ Contoh 6 — Bangun Gabungan: Persegi Panjang + Setengah Lingkaran (π = 22/7)"
+              accent="rgba(6,182,212,.12)" />
+              <div className="px-5 pb-5 pt-3 space-y-4">
+                <div className="rounded-xl p-4 border" style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
+                  <p className="text-cyan-300 font-bold text-xs uppercase tracking-wide mb-2">🔵 Soal</p>
+                  <p className="font-body text-sm text-white/90">
+                    Sebuah bangun datar gabungan terdiri dari persegi panjang berukuran 21 cm × 21 cm dan setengah lingkaran yang menempel pada salah satu sisi tegaknya. Hitunglah <strong>(a)</strong> luas bangun gabungan dan <strong>(b)</strong> kelilingnya! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
+                  </p>
+                </div>
+                <SoalSVG4 />
+                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                  <p className="font-body text-sm text-white/80">
+                    <strong>Diketahui:</strong> <InlineMath math="p = l = 21"/> cm, setengah lingkaran dengan <InlineMath math="r = \tfrac{21}{2} = 10{,}5"/> cm
+                  </p>
+                  <p className="font-body text-sm text-white/80"><strong>(a) Luas bangun gabungan:</strong></p>
+                  <BlockMath math="L = p \times l + \tfrac{1}{2}\pi r^2 = 21 \times 21 + \tfrac{1}{2} \times \tfrac{22}{7} \times (10{,}5)^2" />
+                  <BlockMath math="= 441 + \tfrac{11}{7} \times 110{,}25 = 441 + 173{,}25 \approx \boxed{614{,}25 \text{ cm}^2}" />
+                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling bangun gabungan:</strong></p>
+                  <p className="font-body text-xs text-white/60 mb-1">Sisi atas + sisi bawah + sisi kiri + busur setengah lingkaran (sisi kanan):</p>
+                  <BlockMath math="K = 21 + 21 + 21 + \pi r = 63 + \tfrac{22}{7} \times 10{,}5" />
+                  <BlockMath math="= 63 + 33 = \boxed{96 \text{ cm}}" />
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
+                      <p className="text-cyan-300 text-xs font-bold">✅ Luas Bangun</p>
+                      <p className="text-white text-sm font-bold mt-1">614,25 cm²</p>
+                    </div>
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
+                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling</p>
+                      <p className="text-white text-sm font-bold mt-1">96 cm</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
           {/* ── CONTOH 3 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
@@ -773,119 +813,6 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 4 ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(34,197,94,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh4" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400"
-              title="✏️ Contoh 4 — Seperempat Lingkaran r = 10 cm (π = 3,14)"
-              accent="rgba(34,197,94,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-4 border" style={{ background: "rgba(34,197,94,.1)", borderColor: "rgba(34,197,94,.35)" }}>
-                  <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Soal</p>
-                  <p className="font-body text-sm text-white/90">
-                    Perhatikan gambar di bawah! Daerah yang diarsir adalah seperempat lingkaran dengan jari-jari 10 cm. Hitunglah <strong>(a)</strong> luas daerah arsiran dan <strong>(b)</strong> keliling daerah arsiran! <InlineMath math="(\pi = 3{,}14)"/>
-                  </p>
-                </div>
-                <SoalSVG2 />
-                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80"><strong>Diketahui:</strong> <InlineMath math="r = 10"/> cm, <InlineMath math="\pi = 3{,}14"/></p>
-                  <p className="font-body text-sm text-white/80"><strong>(a) Luas seperempat lingkaran:</strong></p>
-                  <BlockMath math="L = \tfrac{1}{4}\pi r^2 = \tfrac{1}{4} \times 3{,}14 \times 10^2" />
-                  <BlockMath math="= \tfrac{1}{4} \times 314 = \boxed{78{,}5 \text{ cm}^2}" />
-                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling daerah arsiran:</strong></p>
-                  <p className="font-body text-xs text-white/60 mb-1">Dua jari-jari (sisi lurus) + busur seperempat lingkaran:</p>
-                  <BlockMath math="K = 2r + \tfrac{1}{4}(2\pi r) = 2(10) + \tfrac{1}{2} \times 3{,}14 \times 10" />
-                  <BlockMath math="= 20 + 15{,}7 = \boxed{35{,}7 \text{ cm}}" />
-                  <div className="grid grid-cols-2 gap-3 mt-2">
-                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,197,94,.1)", borderColor: "rgba(34,197,94,.35)" }}>
-                      <p className="text-green-300 text-xs font-bold">✅ Luas Arsiran</p>
-                      <p className="text-white text-sm font-bold mt-1">78,5 cm²</p>
-                    </div>
-                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
-                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling Arsiran</p>
-                      <p className="text-white text-sm font-bold mt-1">35,7 cm</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          {/* ── CONTOH 5 ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(168,85,247,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh5" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400"
-              title="✏️ Contoh 5 — Persegi 14 cm dengan Dua Busur Bersilang (π = 22/7)"
-              accent="rgba(168,85,247,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-4 border" style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
-                  <p className="text-violet-300 font-bold text-xs uppercase tracking-wide mb-2">🟣 Soal</p>
-                  <p className="font-body text-sm text-white/90">
-                    Dari sebuah persegi bersisi 14 cm, dibuat dua busur seperempat lingkaran (jari-jari 14 cm) yang berpusat di dua sudut yang berseberangan. Daerah arsiran (sudut atas-kiri dan bawah-kanan) adalah daerah persegi <em>di luar</em> lensa. Hitunglah luas daerah yang diarsir! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
-                  </p>
-                </div>
-                <SoalSVG3 />
-                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">
-                    <strong>Diketahui:</strong> sisi persegi <InlineMath math="a = 14"/> cm, <InlineMath math="r = 14"/> cm (=sisi).
-                  </p>
-                  <p className="font-body text-xs text-white/60">Luas "lensa" (irisan 2 busur) = <InlineMath math="2 \times (\text{sektor} - \text{segitiga})"/></p>
-                  <BlockMath math="L_{\text{lensa}} = 2\left(\tfrac{1}{4}\pi r^2 - \tfrac{1}{2}r^2\right) = 2 \times \tfrac{1}{4}r^2(2\pi - 2)" />
-                  <p className="font-body text-xs text-white/60">Hitung per komponen:</p>
-                  <BlockMath math="L_{\text{sektor}} = \tfrac{1}{4} \times \tfrac{22}{7} \times 14^2 = \tfrac{1}{4} \times \tfrac{22}{7} \times 196 = 154 \text{ cm}^2" />
-                  <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 14 \times 14 = 98 \text{ cm}^2" />
-                  <BlockMath math="L_{\text{lensa}} = 2(154 - 98) = 2 \times 56 = 112 \text{ cm}^2" />
-                  <p className="font-body text-sm text-white/80"><strong>Luas daerah arsiran:</strong></p>
-                  <BlockMath math="L_{\text{arsir}} = L_{\text{persegi}} - L_{\text{lensa}} = 14^2 - 112 = 196 - 112 = \boxed{84 \text{ cm}^2}" />
-                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
-                    <p className="text-violet-300 text-xs font-bold">✅ Luas Arsiran</p>
-                    <p className="text-white text-sm font-bold mt-1">84 cm²</p>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          {/* ── CONTOH 6 ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(6,182,212,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh6" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-cyan-400"
-              title="✏️ Contoh 6 — Bangun Gabungan: Persegi Panjang + Setengah Lingkaran (π = 22/7)"
-              accent="rgba(6,182,212,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-4 border" style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
-                  <p className="text-cyan-300 font-bold text-xs uppercase tracking-wide mb-2">🔵 Soal</p>
-                  <p className="font-body text-sm text-white/90">
-                    Sebuah bangun datar gabungan terdiri dari persegi panjang berukuran 21 cm × 21 cm dan setengah lingkaran yang menempel pada salah satu sisi tegaknya. Hitunglah <strong>(a)</strong> luas bangun gabungan dan <strong>(b)</strong> kelilingnya! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
-                  </p>
-                </div>
-                <SoalSVG4 />
-                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">
-                    <strong>Diketahui:</strong> <InlineMath math="p = l = 21"/> cm, setengah lingkaran dengan <InlineMath math="r = \tfrac{21}{2} = 10{,}5"/> cm
-                  </p>
-                  <p className="font-body text-sm text-white/80"><strong>(a) Luas bangun gabungan:</strong></p>
-                  <BlockMath math="L = p \times l + \tfrac{1}{2}\pi r^2 = 21 \times 21 + \tfrac{1}{2} \times \tfrac{22}{7} \times (10{,}5)^2" />
-                  <BlockMath math="= 441 + \tfrac{11}{7} \times 110{,}25 = 441 + 173{,}25 \approx \boxed{614{,}25 \text{ cm}^2}" />
-                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling bangun gabungan:</strong></p>
-                  <p className="font-body text-xs text-white/60 mb-1">Sisi atas + sisi bawah + sisi kiri + busur setengah lingkaran (sisi kanan):</p>
-                  <BlockMath math="K = 21 + 21 + 21 + \pi r = 63 + \tfrac{22}{7} \times 10{,}5" />
-                  <BlockMath math="= 63 + 33 = \boxed{96 \text{ cm}}" />
-                  <div className="grid grid-cols-2 gap-3 mt-2">
-                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
-                      <p className="text-cyan-300 text-xs font-bold">✅ Luas Bangun</p>
-                      <p className="text-white text-sm font-bold mt-1">614,25 cm²</p>
-                    </div>
-                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
-                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling</p>
-                      <p className="text-white text-sm font-bold mt-1">96 cm</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-
           {/* ── CONTOH 7 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(236,72,153,.25)", backdropFilter: "blur(12px)" }}>
@@ -921,6 +848,44 @@ const KaitanBangunDatarLainnyaPage = () => {
                     <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                       <p className="text-cyan-300 text-xs font-bold">✅ Keliling Arsiran</p>
                       <p className="text-white text-sm font-bold mt-1">57,1 cm</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          {/* ── CONTOH 4 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(34,197,94,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh4" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400"
+              title="✏️ Contoh 4 — Seperempat Lingkaran r = 10 cm (π = 3,14)"
+              accent="rgba(34,197,94,.12)" />
+              <div className="px-5 pb-5 pt-3 space-y-4">
+                <div className="rounded-xl p-4 border" style={{ background: "rgba(34,197,94,.1)", borderColor: "rgba(34,197,94,.35)" }}>
+                  <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Soal</p>
+                  <p className="font-body text-sm text-white/90">
+                    Perhatikan gambar di bawah! Daerah yang diarsir adalah seperempat lingkaran dengan jari-jari 10 cm. Hitunglah <strong>(a)</strong> luas daerah arsiran dan <strong>(b)</strong> keliling daerah arsiran! <InlineMath math="(\pi = 3{,}14)"/>
+                  </p>
+                </div>
+                <SoalSVG2 />
+                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                  <p className="font-body text-sm text-white/80"><strong>Diketahui:</strong> <InlineMath math="r = 10"/> cm, <InlineMath math="\pi = 3{,}14"/></p>
+                  <p className="font-body text-sm text-white/80"><strong>(a) Luas seperempat lingkaran:</strong></p>
+                  <BlockMath math="L = \tfrac{1}{4}\pi r^2 = \tfrac{1}{4} \times 3{,}14 \times 10^2" />
+                  <BlockMath math="= \tfrac{1}{4} \times 314 = \boxed{78{,}5 \text{ cm}^2}" />
+                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling daerah arsiran:</strong></p>
+                  <p className="font-body text-xs text-white/60 mb-1">Dua jari-jari (sisi lurus) + busur seperempat lingkaran:</p>
+                  <BlockMath math="K = 2r + \tfrac{1}{4}(2\pi r) = 2(10) + \tfrac{1}{2} \times 3{,}14 \times 10" />
+                  <BlockMath math="= 20 + 15{,}7 = \boxed{35{,}7 \text{ cm}}" />
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,197,94,.1)", borderColor: "rgba(34,197,94,.35)" }}>
+                      <p className="text-green-300 text-xs font-bold">✅ Luas Arsiran</p>
+                      <p className="text-white text-sm font-bold mt-1">78,5 cm²</p>
+                    </div>
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
+                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling Arsiran</p>
+                      <p className="text-white text-sm font-bold mt-1">35,7 cm</p>
                     </div>
                   </div>
                 </div>
