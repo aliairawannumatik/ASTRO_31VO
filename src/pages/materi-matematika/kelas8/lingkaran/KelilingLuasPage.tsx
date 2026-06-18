@@ -356,8 +356,8 @@ const KelilingLuasCirclesSVG = () => (
         to   { transform: rotate(360deg); }
       }
       @keyframes luasPulse {
-        0%,100% { fill-opacity:.18; filter: drop-shadow(0 0 6px #fb923c)  drop-shadow(0 0 18px rgba(251,146,60,.45)); }
-        50%      { fill-opacity:.42; filter: drop-shadow(0 0 16px #fb923c) drop-shadow(0 0 40px rgba(251,146,60,.8))  drop-shadow(0 0 64px rgba(251,146,60,.3)); }
+        0%,100% { opacity:.82; filter: drop-shadow(0 0 8px #fb923c)  drop-shadow(0 0 22px rgba(251,146,60,.55)); }
+        50%      { opacity:1;   filter: drop-shadow(0 0 12px #fb923c) drop-shadow(0 0 32px rgba(251,146,60,.75)); }
       }
       @keyframes luasSweep {
         0%   { clip-path: inset(0 100% 0 0); }
@@ -442,14 +442,13 @@ const KelilingLuasCirclesSVG = () => (
           <circle cx="80" cy="80" r="58" fill="none"
             stroke="#fb923c" strokeWidth="2" strokeOpacity=".22" />
 
-          {/* Inner glow fill — pulsing */}
+          {/* Inner glow fill — steady, full */}
           <circle cx="80" cy="80" r="57" fill="url(#lGlow)"
-            className="luas-fill" />
+            fillOpacity="1" className="luas-fill" />
 
-          {/* Extra ring-area indicator */}
+          {/* Extra outer halo */}
           <circle cx="80" cy="80" r="57" fill="url(#lGlowOuter)"
-            style={{ filter: 'drop-shadow(0 0 20px rgba(251,146,60,.5))' }}
-            className="luas-fill" />
+            fillOpacity="1" className="luas-fill" />
 
           {/* Radius arrow */}
           <line x1="80" y1="80" x2="130" y2="80"
