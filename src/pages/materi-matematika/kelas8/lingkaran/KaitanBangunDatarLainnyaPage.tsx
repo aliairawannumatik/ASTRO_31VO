@@ -359,60 +359,54 @@ const SoalSVG5 = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
-   SVG C6 – Persegi 14 cm (tiap segmen 7 cm), 4 busur seperempat
-   lingkaran dari setiap sudut membentuk bintang 4 titik di tengah.
-   Square (20,20)→(230,230), side=210. r=105 (half-side).
-   Star center: shaded.
+   SVG C6 – Persegi 14 cm, 4 busur seperempat lingkaran r=14cm dari
+   setiap sudut. Arsiran = bintang 4 titik di DALAM (irisan 4 busur).
+   Square TL(20,20)→BR(240,240), side=220px. r=220px (full side).
+   4 arc tips: top(130,49.5) right(210.5,130) bottom(130,210.5) left(49.5,130)
+   All star arcs: sweep=1 (CW on screen), r=220.
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG6 = () => (
-  <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label="4-leaf flower in quadrants">
+  <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label="4-pointed star from corner arcs">
     <defs>
       <style>{`
-        @keyframes st6{0%,100%{opacity:.45;}50%{opacity:.8;}}
-        @keyframes st6g{0%,100%{filter:drop-shadow(0 0 8px #f59e0b);}50%{filter:drop-shadow(0 0 20px #f59e0b);}}
+        @keyframes st6{0%,100%{opacity:.45;}50%{opacity:.82;}}
+        @keyframes st6g{0%,100%{filter:drop-shadow(0 0 8px #f59e0b);}50%{filter:drop-shadow(0 0 22px #f59e0b);}}
         .st6-fill{animation:st6 2.1s ease-in-out infinite;}
         .st6-out{animation:st6g 2.1s ease-in-out infinite;}
       `}</style>
     </defs>
     {/* Square outline */}
     <rect x="20" y="20" width="220" height="220" fill="none" stroke="#f59e0b" strokeWidth="2.5" className="st6-out"/>
-    {/* Quadrant divider lines (dashed) */}
-    <line x1="130" y1="20" x2="130" y2="240" stroke="#78716c" strokeWidth="1" strokeDasharray="4 3" opacity=".45"/>
-    <line x1="20" y1="130" x2="240" y2="130" stroke="#78716c" strokeWidth="1" strokeDasharray="4 3" opacity=".45"/>
-    {/* Corner arc outlines (from each corner r=110, reaching adjacent side-midpoints) */}
-    <path d="M130,20 A110,110,0,0,0,20,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
-    <path d="M130,20 A110,110,0,0,1,240,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
-    <path d="M20,130 A110,110,0,0,0,130,240" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
-    <path d="M130,240 A110,110,0,0,0,240,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
-    {/* Center arc outlines (from center (130,130) r=110) */}
-    <path d="M20,130 A110,110,0,0,0,130,20" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
-    <path d="M130,20 A110,110,0,0,1,240,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
-    <path d="M130,240 A110,110,0,0,0,20,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
-    <path d="M240,130 A110,110,0,0,0,130,240" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
-    {/* 4 leaf fills — TL, TR, BL, BR quadrants */}
-    {/* TL: arc via corner(20,20) + arc via center(130,130) */}
-    <path d="M130,20 A110,110,0,0,0,20,130 A110,110,0,0,0,130,20 Z"
+    {/* 4 corner arcs as faint guides (r = full side = 220px) */}
+    {/* Arc from TL(20,20): TR→BL, sweep=1, bows toward BR */}
+    <path d="M240,20 A220,220,0,0,1,20,240" fill="none" stroke="#fde68a" strokeWidth="1.4" opacity=".38"/>
+    {/* Arc from TR(240,20): TL→BR, sweep=0, bows toward BL */}
+    <path d="M20,20 A220,220,0,0,0,240,240" fill="none" stroke="#fde68a" strokeWidth="1.4" opacity=".38"/>
+    {/* Arc from BL(20,240): TL→BR, sweep=1, bows toward TR */}
+    <path d="M20,20 A220,220,0,0,1,240,240" fill="none" stroke="#fde68a" strokeWidth="1.4" opacity=".38"/>
+    {/* Arc from BR(240,240): TR→BL, sweep=0, bows toward TL */}
+    <path d="M240,20 A220,220,0,0,0,20,240" fill="none" stroke="#fde68a" strokeWidth="1.4" opacity=".38"/>
+    {/* Inner star: irisan keempat busur sudut (all sweep=1, r=220)
+        Tips: top(130,49.5) right(210.5,130) bottom(130,210.5) left(49.5,130) */}
+    <path
+      d="M130,49.5 A220,220,0,0,1,210.5,130 A220,220,0,0,1,130,210.5 A220,220,0,0,1,49.5,130 A220,220,0,0,1,130,49.5 Z"
       fill="#f59e0b" className="st6-fill"/>
-    {/* TR: arc via corner(240,20) + arc via center(130,130) */}
-    <path d="M130,20 A110,110,0,0,1,240,130 A110,110,0,0,1,130,20 Z"
-      fill="#f59e0b" className="st6-fill"/>
-    {/* BL: arc via corner(20,240) + arc via center(130,130) */}
-    <path d="M20,130 A110,110,0,0,0,130,240 A110,110,0,0,0,20,130 Z"
-      fill="#f59e0b" className="st6-fill"/>
-    {/* BR: arc via corner(240,240) + arc via center(130,130) */}
-    <path d="M130,240 A110,110,0,0,0,240,130 A110,110,0,0,0,130,240 Z"
-      fill="#f59e0b" className="st6-fill"/>
-    {/* Side-midpoint dots */}
-    <circle cx="130" cy="20"  r="3" fill="#fde68a"/>
-    <circle cx="240" cy="130" r="3" fill="#fde68a"/>
-    <circle cx="130" cy="240" r="3" fill="#fde68a"/>
-    <circle cx="20"  cy="130" r="3" fill="#fde68a"/>
+    {/* Corner dots */}
+    <circle cx="20"  cy="20"  r="3" fill="#fde68a" opacity=".7"/>
+    <circle cx="240" cy="20"  r="3" fill="#fde68a" opacity=".7"/>
+    <circle cx="20"  cy="240" r="3" fill="#fde68a" opacity=".7"/>
+    <circle cx="240" cy="240" r="3" fill="#fde68a" opacity=".7"/>
+    {/* Star tip dots */}
+    <circle cx="130"   cy="49.5"  r="2.5" fill="#fff" opacity=".75"/>
+    <circle cx="210.5" cy="130"   r="2.5" fill="#fff" opacity=".75"/>
+    <circle cx="130"   cy="210.5" r="2.5" fill="#fff" opacity=".75"/>
+    <circle cx="49.5"  cy="130"   r="2.5" fill="#fff" opacity=".75"/>
     {/* Dimension labels */}
-    <text x="128" y="257" fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
-    <text x="4" y="134" fill="#f59e0b" fontSize="10" fontFamily="monospace" transform="rotate(-90,4,134)">14 cm</text>
-    {/* 7cm half-side labels */}
-    <text x="75"  y="14" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle">7</text>
-    <text x="185" y="14" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle">7</text>
+    <text x="130" y="257" fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
+    <text x="6" y="130" fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(-90,6,130)">14 cm</text>
+    {/* r label along top side */}
+    <line x1="20" y1="13" x2="240" y2="13" stroke="#fde68a" strokeWidth="1" opacity=".5"/>
+    <text x="130" y="11" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle">r = 14 cm</text>
   </svg>
 );
 
@@ -734,202 +728,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   <p className="font-body text-sm text-yellow-200">
                     🔑 <strong>Kunci utama:</strong> Identifikasi terlebih dahulu <em>bangun apa yang ditambah</em> dan <em>bangun apa yang dikurang</em>. Setelah itu, hitung luas dan kelilingnya secara terpisah.
                   </p>
-                </div>
-              </div>
-          </div>
-
-          {/* ── KASUS 1: Lingkaran Di Dalam Persegi ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="kasus1" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400"
-              title="🔶 Kasus 1 — Lingkaran di Dalam Persegi (Sudut Diarsir)"
-              accent="rgba(249,115,22,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-3 border text-sm font-body"
-                  style={{ background: "rgba(249,115,22,.08)", borderColor: "rgba(249,115,22,.25)" }}>
-                  <p className="text-orange-200 leading-relaxed">
-                    Sebuah lingkaran <strong className="text-cyan-300">tepat menyinggung semua sisi persegi</strong> dari dalam. Daerah yang diarsir adalah <strong className="text-orange-300">keempat sudut persegi</strong> yang tidak tertutupi lingkaran.
-                  </p>
-                </div>
-                <LingkaranDalamPersegiSVG />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="rounded-xl p-4 border space-y-2"
-                    style={{ background: "rgba(249,115,22,.09)", borderColor: "rgba(249,115,22,.3)" }}>
-                    <p className="text-orange-300 font-bold text-xs uppercase tracking-wide">📐 Luas Daerah Arsiran</p>
-                    <p className="text-white/60 text-xs font-body">Luas persegi dikurangi luas lingkaran:</p>
-                    <BlockMath math="L_{\text{arsir}} = a^2 - \pi r^2" />
-                    <p className="text-white/50 text-xs font-body">Karena <InlineMath math="a = 2r" />:</p>
-                    <BlockMath math="L_{\text{arsir}} = 4r^2 - \pi r^2 = r^2(4-\pi)" />
-                  </div>
-                  <div className="rounded-xl p-4 border space-y-2"
-                    style={{ background: "rgba(34,211,238,.09)", borderColor: "rgba(34,211,238,.3)" }}>
-                    <p className="text-cyan-300 font-bold text-xs uppercase tracking-wide">📏 Keliling Daerah Arsiran</p>
-                    <p className="text-white/60 text-xs font-body">Sisi luar (persegi) + sisi dalam (lingkaran):</p>
-                    <BlockMath math="K_{\text{arsir}} = 4a + 2\pi r" />
-                    <p className="text-white/50 text-xs font-body">Karena <InlineMath math="a = 2r" />:</p>
-                    <BlockMath math="K_{\text{arsir}} = 8r + 2\pi r = 2r(4+\pi)" />
-                  </div>
-                </div>
-                <div className="rounded-xl p-3 border"
-                  style={{ background: "rgba(251,191,36,.07)", borderColor: "rgba(251,191,36,.25)" }}>
-                  <p className="text-yellow-200 text-xs font-body">
-                    ✏️ <strong>Ingat:</strong> "Keliling daerah arsiran" = semua garis batas yang mengelilingi daerah tersebut — baik yang lurus (sisi persegi) maupun yang melengkung (busur lingkaran).
-                  </p>
-                </div>
-              </div>
-          </div>
-
-          {/* ── KASUS 2: Bangun Gabungan ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(6,182,212,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="kasus2" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400"
-              title="🔵 Kasus 2 — Bangun Gabungan: Persegi Panjang + Setengah Lingkaran"
-              accent="rgba(6,182,212,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-3 border text-sm font-body"
-                  style={{ background: "rgba(6,182,212,.08)", borderColor: "rgba(6,182,212,.25)" }}>
-                  <p className="text-cyan-200 leading-relaxed">
-                    Dua bangun <strong className="text-cyan-300">digabungkan menjadi satu</strong>: sebuah persegi panjang (panjang <em>p</em>, lebar <em>t</em>) ditambah setengah lingkaran di salah satu sisi panjangnya. Bayangkan kolam renang dengan ujung berbentuk setengah oval!
-                  </p>
-                </div>
-                <BangunGabunganSVG />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="rounded-xl p-4 border space-y-2"
-                    style={{ background: "rgba(6,182,212,.09)", borderColor: "rgba(6,182,212,.3)" }}>
-                    <p className="text-cyan-300 font-bold text-xs uppercase tracking-wide">📐 Luas Gabungan</p>
-                    <p className="text-white/60 text-xs font-body">Luas persegi panjang + luas setengah lingkaran:</p>
-                    <BlockMath math="L = p \times t + \tfrac{1}{2}\pi r^2" />
-                    <p className="text-white/50 text-xs font-body">dengan <InlineMath math="r = \tfrac{p}{2}" /> (diameter = panjang)</p>
-                  </div>
-                  <div className="rounded-xl p-4 border space-y-2"
-                    style={{ background: "rgba(167,139,250,.09)", borderColor: "rgba(167,139,250,.3)" }}>
-                    <p className="text-violet-300 font-bold text-xs uppercase tracking-wide">📏 Keliling Gabungan</p>
-                    <p className="text-white/60 text-xs font-body">Dua sisi pendek + satu sisi panjang + busur setengah lingkaran:</p>
-                    <BlockMath math="K = 2t + p + \pi r" />
-                    <p className="text-white/50 text-xs font-body">Sisi panjang atas diganti busur <InlineMath math="\pi r"/></p>
-                  </div>
-                </div>
-                <div className="rounded-xl p-3 border"
-                  style={{ background: "rgba(251,191,36,.07)", borderColor: "rgba(251,191,36,.25)" }}>
-                  <p className="text-yellow-200 text-xs font-body">
-                    🎯 <strong>Perhatikan:</strong> Keliling bangun gabungan <em>tidak</em> menjumlahkan semua sisi — sisi yang <em>berhimpitan</em> (diameter setengah lingkaran yang berimpit dengan sisi persegi panjang) tidak dihitung!
-                  </p>
-                </div>
-              </div>
-          </div>
-
-          {/* ── KASUS 4: Persegi Panjang − Lingkaran ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(34,197,94,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="kasus4" icon={<Target className="w-5 h-5" />} iconColor="text-green-400"
-              title="🟩 Kasus 4 — Persegi Panjang dengan Lingkaran di Dalamnya"
-              accent="rgba(34,197,94,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-3 border text-sm font-body"
-                  style={{ background: "rgba(34,197,94,.08)", borderColor: "rgba(34,197,94,.25)" }}>
-                  <p className="text-green-200 leading-relaxed">
-                    Sebuah lingkaran berada <strong className="text-green-300">di tengah persegi panjang</strong>. Daerah arsiran adalah bagian persegi panjang di sekitar lingkaran — seperti bingkai foto yang mengelilingi gambar bulat!
-                  </p>
-                </div>
-                <PersegipanjangDanLingkaranSVG />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="rounded-xl p-4 border space-y-2"
-                    style={{ background: "rgba(34,197,94,.09)", borderColor: "rgba(34,197,94,.3)" }}>
-                    <p className="text-green-300 font-bold text-xs uppercase tracking-wide">📐 Luas Daerah Arsiran</p>
-                    <BlockMath math="L_{\text{arsir}} = p \times l - \pi r^2" />
-                    <p className="text-white/60 text-xs font-body">Luas persegi panjang dikurangi luas lingkaran</p>
-                  </div>
-                  <div className="rounded-xl p-4 border space-y-2"
-                    style={{ background: "rgba(74,222,128,.09)", borderColor: "rgba(74,222,128,.3)" }}>
-                    <p className="text-green-300 font-bold text-xs uppercase tracking-wide">📏 Keliling Daerah Arsiran</p>
-                    <BlockMath math="K_{\text{arsir}} = 2(p + l) + 2\pi r" />
-                    <p className="text-white/60 text-xs font-body">Keliling persegi panjang + keliling lingkaran</p>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          {/* ── CONTOH 1 ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
-              title="✏️ Contoh 1 — Persegi dengan Lingkaran Dalam (π = 3,14)"
-              accent="rgba(249,115,22,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-4 border"
-                  style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
-                  <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Soal</p>
-                  <p className="font-body text-sm text-white/90">
-                    Sebuah persegi memiliki sisi 20 cm. Di dalamnya terdapat lingkaran yang menyinggung keempat sisinya. Hitunglah <strong>(a)</strong> luas daerah yang diarsir dan <strong>(b)</strong> keliling daerah yang diarsir! <InlineMath math="(\pi = 3{,}14)"/>
-                  </p>
-                </div>
-                <div className="rounded-xl p-4 space-y-3 border"
-                  style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">
-                    <strong>Diketahui:</strong> sisi persegi <InlineMath math="a = 20"/> cm, sehingga <InlineMath math="r = 10"/> cm
-                  </p>
-                  <p className="font-body text-sm text-white/80"><strong>(a) Luas daerah arsiran:</strong></p>
-                  <BlockMath math="L_{\text{arsir}} = a^2 - \pi r^2 = 20^2 - 3{,}14 \times 10^2" />
-                  <BlockMath math="= 400 - 314 = 86 \text{ cm}^2" />
-                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling daerah arsiran:</strong></p>
-                  <BlockMath math="K_{\text{arsir}} = 4a + 2\pi r = 4(20) + 2 \times 3{,}14 \times 10" />
-                  <BlockMath math="= 80 + 62{,}8 = 142{,}8 \text{ cm}" />
-                  <div className="grid grid-cols-2 gap-3 mt-2">
-                    <div className="rounded-lg p-3 border text-center"
-                      style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
-                      <p className="text-orange-300 text-xs font-bold">✅ Luas Arsiran</p>
-                      <p className="text-white text-sm font-bold mt-1">86 cm²</p>
-                    </div>
-                    <div className="rounded-lg p-3 border text-center"
-                      style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
-                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling Arsiran</p>
-                      <p className="text-white text-sm font-bold mt-1">142,8 cm</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          {/* ── CONTOH 2 ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(168,85,247,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400"
-              title="✏️ Contoh 2 — Bangun Gabungan Persegi Panjang + Setengah Lingkaran (π = 22/7)"
-              accent="rgba(168,85,247,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-4 border"
-                  style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
-                  <p className="text-violet-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Soal</p>
-                  <p className="font-body text-sm text-white/90">
-                    Lapangan futsal berbentuk persegi panjang berukuran 28 m × 14 m. Pada salah satu sisi panjangnya (28 m) ditambahkan setengah lingkaran. Hitunglah <strong>(a)</strong> luas total lapangan dan <strong>(b)</strong> kelilingnya! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
-                  </p>
-                </div>
-                <div className="rounded-xl p-4 space-y-3 border"
-                  style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">
-                    <strong>Diketahui:</strong> <InlineMath math="p = 28"/> m, <InlineMath math="t = 14"/> m, setengah lingkaran dengan <InlineMath math="r = \tfrac{28}{2} = 14"/> m
-                  </p>
-                  <p className="font-body text-sm text-white/80"><strong>(a) Luas total:</strong></p>
-                  <BlockMath math="L = p \times t + \tfrac{1}{2}\pi r^2 = 28 \times 14 + \tfrac{1}{2} \times \tfrac{22}{7} \times 14^2" />
-                  <BlockMath math="= 392 + \tfrac{1}{2} \times \tfrac{22}{7} \times 196 = 392 + 308 = 700 \text{ m}^2" />
-                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling:</strong></p>
-                  <p className="font-body text-xs text-white/60 mb-1">Dua sisi pendek (14 m) + satu sisi panjang bawah (28 m) + busur setengah lingkaran</p>
-                  <BlockMath math="K = 2t + p + \pi r = 2(14) + 28 + \tfrac{22}{7} \times 14" />
-                  <BlockMath math="= 28 + 28 + 44 = 100 \text{ m}" />
-                  <div className="grid grid-cols-2 gap-3 mt-2">
-                    <div className="rounded-lg p-3 border text-center"
-                      style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
-                      <p className="text-violet-300 text-xs font-bold">✅ Luas Total</p>
-                      <p className="text-white text-sm font-bold mt-1">700 m²</p>
-                    </div>
-                    <div className="rounded-lg p-3 border text-center"
-                      style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
-                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling</p>
-                      <p className="text-white text-sm font-bold mt-1">100 m</p>
-                    </div>
-                  </div>
                 </div>
               </div>
           </div>
