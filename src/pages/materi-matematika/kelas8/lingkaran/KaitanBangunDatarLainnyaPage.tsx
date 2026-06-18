@@ -449,9 +449,6 @@ const SoalSVG7 = () => (
     <line x1="264" y1="40"  x2="272" y2="40"  stroke="#4ade80" strokeWidth="1" opacity=".6"/>
     <line x1="264" y1="160" x2="272" y2="160" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
     <text x="277" y="105" fill="#4ade80" fontSize="9" fontFamily="monospace" transform="rotate(90,277,105)">14 cm</text>
-    {/* R labels */}
-    <line x1="140" y1="160" x2="140" y2="40" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4 2" opacity=".6"/>
-    <text x="145" y="105" fill="#38bdf8" fontSize="9" fontFamily="monospace">R=14</text>
   </svg>
 );
 
@@ -774,9 +771,7 @@ const SoalSVG13 = () => (
     <line x1="50" y1="-6"  x2="50"  y2="2"  stroke="#fbbf24" strokeWidth="1.2" opacity=".6"/>
     <line x1="230" y1="-6" x2="230" y2="2"  stroke="#fbbf24" strokeWidth="1.2" opacity=".6"/>
 
-    {/* Radius label inside semicircle */}
-    <line x1="140" y1="100" x2="230" y2="100" stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="4 2" opacity=".6"/>
-    <text x="188" y="95" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">r=10</text>
+    {/* Center dot */}
     <circle cx="140" cy="100" r="3.5" fill="#22d3ee"/>
 
     {/* Height: 24 cm (right side of dashed line) */}
