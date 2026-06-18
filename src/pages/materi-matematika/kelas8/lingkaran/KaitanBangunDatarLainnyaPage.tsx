@@ -327,7 +327,7 @@ const SoalSVG4 = () => (
    kecil (r=5) — bentuk "koma/siput" (half-annulus)
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG5 = () => (
-  <svg viewBox="0 0 280 180" className="w-full max-w-xs mx-auto" aria-label="Snail half-annulus">
+  <svg viewBox="0 0 280 180" className="w-full mx-auto" style={{ maxWidth: "480px" }} aria-label="Snail half-annulus">
     <defs>
       <style>{`
         @keyframes sn5{0%,100%{opacity:.42;}50%{opacity:.75;}}
@@ -739,15 +739,24 @@ const SoalSVG13 = () => (
       `}</style>
     </defs>
 
-    {/* ── Combined shape fill ── */}
-    {/* Semicircle on top + triangle below, joined at diameter line */}
+    {/* ── Semicircle fill (ice cream scoop) ── */}
     <path
-      d="M50,100 A90,90,0,0,1,230,100 L140,316 Z"
-      fill="rgba(249,115,22,.18)" className="ek13-fill"
+      d="M50,100 A90,90,0,0,1,230,100 Z"
+      fill="#ec4899" className="ek13-fill"
+    />
+    {/* ── Triangle fill (cone) ── */}
+    <path
+      d="M50,100 L230,100 L140,316 Z"
+      fill="#f97316" className="ek13-fill"
+    />
+    {/* ── Outlines ── */}
+    <path
+      d="M50,100 A90,90,0,0,1,230,100"
+      fill="none" stroke="#f9a8d4" strokeWidth="2.5" className="ek13-out"
     />
     <path
-      d="M50,100 A90,90,0,0,1,230,100 L140,316 Z"
-      fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinejoin="round" className="ek13-out"
+      d="M50,100 L140,316 L230,100"
+      fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinejoin="round"
     />
 
     {/* ── Diameter line (hidden boundary between semicircle & triangle) ── */}
@@ -931,8 +940,8 @@ const SoalSVG16 = () => (
     {/* Lingkaran outline */}
     <circle cx="160" cy="160" r="110" fill="none" stroke="#fb923c" strokeWidth="2.5" className="sv16-out"/>
 
-    {/* Persegi kiri-atas outline */}
-    <rect x="50" y="50" width="110" height="110" fill="none" stroke="#fbbf24" strokeWidth="2.2"/>
+    {/* Persegi kiri-atas — filled same color as circle */}
+    <rect x="50" y="50" width="110" height="110" fill="#f97316" className="sv16-fill" stroke="#fbbf24" strokeWidth="2.2"/>
 
     {/* Titik pusat O */}
     <circle cx="160" cy="160" r="4" fill="#fb923c"/>
@@ -1095,9 +1104,12 @@ const SoalSVG19 = () => (
     {/* Small downward bump: from (120,130) CCW down to (190,130), close with flat line back */}
     <path d="M120,130 A35,35,0,0,0,190,130 Z"
       fill="#6366f1" className="sv19-fill"/>
-    {/* Outline traces the full combined border */}
-    <path d="M25,130 A65,65,0,0,1,155,130 L190,130 A35,35,0,0,0,120,130 L25,130"
-      fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinejoin="round" className="sv19-out"/>
+    {/* Big dome outline only (no top-arc connector to small circle) */}
+    <path d="M25,130 A65,65,0,0,1,155,130"
+      fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinecap="round" className="sv19-out"/>
+    {/* Small circle — only the downward arc, no flat top */}
+    <path d="M190,130 A35,35,0,0,0,120,130"
+      fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinecap="round"/>
 
     {/* Baseline */}
     <line x1="25" y1="130" x2="190" y2="130" stroke="#818cf8" strokeWidth="1.3" opacity=".35"/>
