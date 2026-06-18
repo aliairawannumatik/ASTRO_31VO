@@ -100,9 +100,15 @@ const AnimasiBusur = () => {
   const aLabel = ptOnCircle(rPx + LAB_OFF, angleA);
   const bLabel = ptOnCircle(rPx + LAB_OFF, angleB);
 
-  const arcLen = arcSpan > 0
-    ? ((arcSpan / 360) * 2 * Math.PI * radius).toFixed(2)
-    : "0.00";
+  const piVal = radius % 7 === 0 ? 22 / 7 : 3.14;
+  const piLabel = radius % 7 === 0 ? "²²⁄₇" : "3,14";
+  const fmtNum = (n: number) => {
+    if (Math.abs(n - Math.round(n)) < 0.005) return Math.round(n).toString();
+    const d1 = Math.round(n * 10) / 10;
+    if (Math.abs(n - d1) < 0.005) return d1.toFixed(1);
+    return n.toFixed(2);
+  };
+  const arcLen = arcSpan > 0 ? fmtNum((arcSpan / 360) * 2 * piVal * radius) : "0";
 
   const handleDrag = useCallback((who: 'A' | 'B', angle: number) => {
     if (who === 'A') setAngleA(angle);
@@ -229,11 +235,18 @@ const AnimasiBusur = () => {
       {/* Formula box */}
       <div className="rounded-xl p-3 border"
         style={{ background: "rgba(251,191,36,.1)", borderColor: "rgba(251,191,36,.35)" }}>
-        <p className="text-xs text-white/55 font-body text-center mb-1">Panjang Busur AB</p>
+        <div className="flex items-center justify-center gap-2 mb-1">
+          <p className="text-xs text-white/55 font-body">Panjang Busur AB</p>
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full"
+            style={{ background: radius % 7 === 0 ? "rgba(74,222,128,.15)" : "rgba(148,163,184,.12)",
+                     color: radius % 7 === 0 ? "#4ade80" : "#94a3b8" }}>
+            π={piLabel}
+          </span>
+        </div>
         <p className="text-amber-300 text-xs font-mono text-center">
-          = ({arcSpan}/360) × 2π × {radius} cm
+          = ({arcSpan}/360) × 2 × {piLabel} × {radius}
         </p>
-        <p className="text-white font-bold text-xl text-center mt-1">≈ {arcLen} cm</p>
+        <p className="text-white font-bold text-xl text-center mt-1">{arcLen} cm</p>
       </div>
     </div>
   );
@@ -280,9 +293,15 @@ const AnimasiJuring = () => {
   const aLabel = ptOnCircle(rPx + LAB_OFF, angleA);
   const bLabel = ptOnCircle(rPx + LAB_OFF, angleB);
 
-  const sectorArea = arcSpan > 0
-    ? ((arcSpan / 360) * Math.PI * radius * radius).toFixed(2)
-    : "0.00";
+  const piVal = radius % 7 === 0 ? 22 / 7 : 3.14;
+  const piLabel = radius % 7 === 0 ? "²²⁄₇" : "3,14";
+  const fmtNum = (n: number) => {
+    if (Math.abs(n - Math.round(n)) < 0.005) return Math.round(n).toString();
+    const d1 = Math.round(n * 10) / 10;
+    if (Math.abs(n - d1) < 0.005) return d1.toFixed(1);
+    return n.toFixed(2);
+  };
+  const sectorArea = arcSpan > 0 ? fmtNum((arcSpan / 360) * piVal * radius * radius) : "0";
 
   const handleDrag = useCallback((who: 'A' | 'B', angle: number) => {
     if (who === 'A') setAngleA(angle);
@@ -418,11 +437,18 @@ const AnimasiJuring = () => {
       {/* Formula box */}
       <div className="rounded-xl p-3 border"
         style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
-        <p className="text-xs text-white/55 font-body text-center mb-1">Luas Juring OAB</p>
+        <div className="flex items-center justify-center gap-2 mb-1">
+          <p className="text-xs text-white/55 font-body">Luas Juring OAB</p>
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full"
+            style={{ background: radius % 7 === 0 ? "rgba(74,222,128,.15)" : "rgba(148,163,184,.12)",
+                     color: radius % 7 === 0 ? "#4ade80" : "#94a3b8" }}>
+            π={piLabel}
+          </span>
+        </div>
         <p className="text-purple-300 text-xs font-mono text-center">
-          = ({arcSpan}/360) × π × {radius}² cm²
+          = ({arcSpan}/360) × {piLabel} × {radius}²
         </p>
-        <p className="text-white font-bold text-xl text-center mt-1">≈ {sectorArea} cm²</p>
+        <p className="text-white font-bold text-xl text-center mt-1">{sectorArea} cm²</p>
       </div>
     </div>
   );
