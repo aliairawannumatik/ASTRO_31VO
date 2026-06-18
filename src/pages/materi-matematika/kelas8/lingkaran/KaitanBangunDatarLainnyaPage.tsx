@@ -1011,7 +1011,7 @@ const SoalSVG17 = () => (
    Shaded area = 196 − 2×¼π(7²) = 119 cm² (π=22/7).
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG18 = () => (
-  <svg viewBox="0 0 220 220" className="w-full max-w-xs mx-auto" aria-label="Persegi minus dua seperempat lingkaran">
+  <svg viewBox="0 0 235 240" className="w-full max-w-xs mx-auto" aria-label="Persegi minus dua seperempat lingkaran">
     <defs>
       <style>{`
         @keyframes sv18f{0%,100%{opacity:.42;}50%{opacity:.74;}}
@@ -1035,9 +1035,6 @@ const SoalSVG18 = () => (
     <path d="M110,20 A90,90,0,0,0,200,110" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5 3" opacity=".7"/>
     {/* BL arc outline */}
     <path d="M20,110 A90,90,0,0,1,110,200" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5 3" opacity=".7"/>
-    {/* Label: 14 cm on right side */}
-    <text x="208" y="114" fill="#2dd4bf" fontSize="11" fontFamily="monospace" fontWeight="bold"
-      textAnchor="middle" transform="rotate(90,208,114)">14 cm</text>
     {/* Corner dots */}
     <circle cx="20"  cy="20"  r="2.5" fill="#64748b" opacity=".7"/>
     <circle cx="200" cy="20"  r="2.5" fill="#64748b" opacity=".7"/>
@@ -1048,6 +1045,17 @@ const SoalSVG18 = () => (
     <line x1="107" y1="196" x2="113" y2="204" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
     <line x1="16" y1="107" x2="24" y2="113" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
     <line x1="196" y1="107" x2="204" y2="113" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
+    {/* ── Garis bantu: sisi persegi = 14 cm (bawah) ── */}
+    <line x1="20"  y1="213" x2="200" y2="213" stroke="#2dd4bf" strokeWidth="1.4" opacity=".8"/>
+    <line x1="20"  y1="208" x2="20"  y2="218" stroke="#2dd4bf" strokeWidth="1.2" opacity=".8"/>
+    <line x1="200" y1="208" x2="200" y2="218" stroke="#2dd4bf" strokeWidth="1.2" opacity=".8"/>
+    <text x="110" y="230" fill="#2dd4bf" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s = 14 cm</text>
+    {/* ── Garis bantu: sisi persegi = 14 cm (kanan) ── */}
+    <line x1="213" y1="20"  x2="213" y2="200" stroke="#2dd4bf" strokeWidth="1.4" opacity=".8"/>
+    <line x1="208" y1="20"  x2="218" y2="20"  stroke="#2dd4bf" strokeWidth="1.2" opacity=".8"/>
+    <line x1="208" y1="200" x2="218" y2="200" stroke="#2dd4bf" strokeWidth="1.2" opacity=".8"/>
+    <text x="223" y="114" fill="#2dd4bf" fontSize="11" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" transform="rotate(90,223,114)">s = 14 cm</text>
   </svg>
 );
 
