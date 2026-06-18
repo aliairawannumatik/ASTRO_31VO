@@ -58,14 +58,17 @@ const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel, 
         <div className="flex flex-col gap-4">
           {subtopics.map((subtopic, i) => {
             const c = COLOR_PALETTE[i % COLOR_PALETTE.length];
+            const isComingSoon = !subtopic.path || subtopic.path === "/coming-soon";
             return (
-              <div
+              <button
                 key={subtopic.label}
-                className="relative rounded-2xl overflow-hidden animate-slide-up"
+                onClick={() => { if (!isComingSoon) { playPopSound(); navigate(subtopic.path); } }}
+                disabled={isComingSoon}
+                className={`water-btn group relative rounded-2xl overflow-hidden text-left transition-all duration-300 animate-slide-up ${isComingSoon ? 'opacity-50 cursor-not-allowed' : 'hover:scale-[1.01] cursor-pointer'}`}
                 style={{ animationDelay: `${i * 0.07}s`, background: 'var(--btn-bg)' }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} backdrop-blur`} />
-                <div className={`absolute inset-0 border ${c.border} rounded-2xl`} />
+                <div className={`absolute inset-0 border ${c.border} rounded-2xl ${isComingSoon ? '' : 'group-hover:border-opacity-80'} transition-colors`} />
                 <div className={`absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b ${c.leftBar} rounded-l-2xl`} />
                 <div className="relative px-5 py-4 flex items-center gap-4">
                   <div className={`w-11 h-11 rounded-xl ${c.iconBg} border ${c.border} flex items-center justify-center shrink-0`}>
@@ -73,9 +76,13 @@ const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel, 
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="font-display text-sm font-bold text-white block leading-snug">{subtopic.label}</span>
+                    {isComingSoon && <span className="text-white/40 text-xs font-body mt-0.5 block">Segera hadir</span>}
                   </div>
+                  {!isComingSoon && (
+                    <ChevronRight className={`w-5 h-5 ${c.iconColor} group-hover:translate-x-1 transition-transform shrink-0`} />
+                  )}
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
