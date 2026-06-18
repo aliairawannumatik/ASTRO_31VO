@@ -244,7 +244,7 @@ const AnimasiBusur = () => {
           </span>
         </div>
         <p className="text-amber-300 text-xs font-mono text-center">
-          = ({arcSpan}/360) × 2 × {piLabel} × {radius}
+          = ({arcSpan}/360) × 2 × π × {radius}
         </p>
         <p className="text-white font-bold text-xl text-center mt-1">{arcLen} cm</p>
       </div>
@@ -446,7 +446,7 @@ const AnimasiJuring = () => {
           </span>
         </div>
         <p className="text-purple-300 text-xs font-mono text-center">
-          = ({arcSpan}/360) × {piLabel} × {radius}²
+          = ({arcSpan}/360) × π × {radius}²
         </p>
         <p className="text-white font-bold text-xl text-center mt-1">{sectorArea} cm²</p>
       </div>
