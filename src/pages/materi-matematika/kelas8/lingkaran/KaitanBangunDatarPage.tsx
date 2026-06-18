@@ -7,66 +7,161 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
-const LingkaranDalamSegtigaSVG = () => (
-  <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-2" aria-label="Lingkaran dalam segitiga">
+/* ─── Incircle (lingkaran dalam segitiga) ───────────────────────────────────
+   Triangle: A(140,22) B(240,198) C(40,198)
+   Incenter : (140,140)   r ≈ 58
+   Tangent points: BC→(140,198)  CA→(89,111)  AB→(191,111)
+*/
+const LingkaranDalamSegitigaSVG = () => (
+  <svg viewBox="0 0 280 230" className="w-full max-w-xs mx-auto" aria-label="Lingkaran dalam segitiga">
     <defs>
-      <style>{`@keyframes glowIn{0%,100%{filter:drop-shadow(0 0 6px #22c55e);}50%{filter:none;}}.gi{animation:glowIn 2s ease-in-out infinite;}`}</style>
+      <radialGradient id="incircleGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"   stopColor="#4ade80" stopOpacity=".35" />
+        <stop offset="100%" stopColor="#4ade80" stopOpacity=".08" />
+      </radialGradient>
+      <filter id="incircleGlow">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <style>{`
+        @keyframes incirclePulse{0%,100%{stroke-opacity:.75;filter:drop-shadow(0 0 5px #4ade80) drop-shadow(0 0 12px rgba(74,222,128,.4));}50%{stroke-opacity:1;filter:drop-shadow(0 0 12px #4ade80) drop-shadow(0 0 28px rgba(74,222,128,.75));}}
+        @keyframes tangentDot{0%,100%{r:4;opacity:.7;}50%{r:6;opacity:1;}}
+        .ic-ring{animation:incirclePulse 2.4s ease-in-out infinite;}
+        .t-dot{animation:tangentDot 2.4s ease-in-out infinite;}
+      `}</style>
     </defs>
-    <polygon points="140,20 250,200 30,200" fill="rgba(6,182,212,0.1)" stroke="#06b6d4" strokeWidth="2.5"/>
-    <circle cx="140" cy="143" r="57" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="2.5" className="gi"/>
-    <circle cx="140" cy="143" r="4" fill="#22c55e"/>
-    <text x="145" y="140" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold">O</text>
-    <line x1="140" y1="143" x2="140" y2="200" stroke="#fbbf24" strokeWidth="1.8" strokeDasharray="4 2"/>
-    <text x="145" y="178" fill="#fbbf24" fontSize="9" fontFamily="monospace">r</text>
-    <circle cx="140" cy="200" r="3.5" fill="#fbbf24"/>
-    <text x="140" y="215" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">Lingkaran Dalam Segitiga (Incircle)</text>
+
+    {/* Triangle fill */}
+    <polygon points="140,22 240,198 40,198"
+      fill="rgba(6,182,212,.12)" stroke="#06b6d4" strokeWidth="2.5" strokeLinejoin="round"/>
+
+    {/* Vertex labels */}
+    <text x="140" y="15" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">A</text>
+    <text x="250" y="208" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">B</text>
+    <text x="30"  y="208" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">C</text>
+
+    {/* Incircle fill */}
+    <circle cx="140" cy="140" r="58" fill="url(#incircleGrad)"/>
+
+    {/* Incircle stroke — glowing */}
+    <circle cx="140" cy="140" r="58" fill="none" stroke="#4ade80" strokeWidth="2.5" className="ic-ring"/>
+
+    {/* Perpendicular lines from incenter to tangent points */}
+    <line x1="140" y1="140" x2="140" y2="198" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="5 3" opacity=".8"/>
+    <line x1="140" y1="140" x2="89"  y2="111" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="5 3" opacity=".8"/>
+    <line x1="140" y1="140" x2="191" y2="111" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="5 3" opacity=".8"/>
+
+    {/* r labels on perpendiculars */}
+    <text x="147" y="175" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold">r</text>
+    <text x="105" y="122" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold">r</text>
+    <text x="172" y="122" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold">r</text>
+
+    {/* Right-angle marks at tangent points */}
+    <rect x="140" y="190" width="8" height="8" fill="none" stroke="#fbbf24" strokeWidth="1.2" opacity=".7"/>
+    <g transform="rotate(-60 89 111)">
+      <rect x="89" y="103" width="8" height="8" fill="none" stroke="#fbbf24" strokeWidth="1.2" opacity=".7"/>
+    </g>
+    <g transform="rotate(60 191 111)">
+      <rect x="183" y="103" width="8" height="8" fill="none" stroke="#fbbf24" strokeWidth="1.2" opacity=".7"/>
+    </g>
+
+    {/* Tangent points */}
+    <circle cx="140" cy="198" r="4.5" fill="#fbbf24" className="t-dot" style={{filter:'drop-shadow(0 0 5px #fbbf24)'}}/>
+    <circle cx="89"  cy="111" r="4.5" fill="#fbbf24" className="t-dot" style={{filter:'drop-shadow(0 0 5px #fbbf24)'}}/>
+    <circle cx="191" cy="111" r="4.5" fill="#fbbf24" className="t-dot" style={{filter:'drop-shadow(0 0 5px #fbbf24)'}}/>
+
+    {/* Incenter */}
+    <circle cx="140" cy="140" r="4" fill="#4ade80" style={{filter:'drop-shadow(0 0 6px #4ade80)'}}/>
+    <text x="148" y="137" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold">O</text>
   </svg>
 );
 
-const LingkaranLuarSegiEmpatSVG = () => (
-  <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-2" aria-label="Lingkaran luar persegi">
+/* ─── Circumscribed circle (lingkaran luar segitiga) ───────────────────────
+   Circle: center(140,108) r=80
+   Vertices on circle at angles -70°, 40°, 175°:
+     A(167,33)  B(201,159)  C(60,115)
+*/
+const LingkaranLuarSegitigaSVG = () => (
+  <svg viewBox="0 0 280 230" className="w-full max-w-xs mx-auto" aria-label="Lingkaran luar segitiga">
     <defs>
-      <style>{`@keyframes rotatePulse{0%,100%{stroke-opacity:0.9;}50%{stroke-opacity:0.3;}}.rp{animation:rotatePulse 2.5s ease-in-out infinite;}`}</style>
+      <radialGradient id="circumGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"   stopColor="#f97316" stopOpacity="0"   />
+        <stop offset="80%"  stopColor="#f97316" stopOpacity=".06" />
+        <stop offset="100%" stopColor="#f97316" stopOpacity=".22" />
+      </radialGradient>
+      <style>{`
+        @keyframes circumPulse{0%,100%{stroke-opacity:.7;filter:drop-shadow(0 0 5px #f97316) drop-shadow(0 0 14px rgba(249,115,22,.4));}50%{stroke-opacity:1;filter:drop-shadow(0 0 14px #f97316) drop-shadow(0 0 32px rgba(249,115,22,.75));}}
+        @keyframes vertexPulse{0%,100%{r:5;opacity:.8;}50%{r:7;opacity:1;}}
+        .cc-ring{animation:circumPulse 2.6s ease-in-out infinite;}
+        .v-dot{animation:vertexPulse 2.6s ease-in-out infinite;}
+      `}</style>
     </defs>
-    <rect x="65" y="50" width="150" height="120" fill="rgba(168,85,247,0.12)" stroke="#a855f7" strokeWidth="2.5"/>
-    <circle cx="140" cy="110" r="96" fill="none" stroke="#f97316" strokeWidth="2.5" className="rp"/>
-    <line x1="65" y1="50" x2="215" y2="170" stroke="#f97316" strokeWidth="1.5" strokeDasharray="5 3" opacity="0.7"/>
-    <text x="135" y="170" fill="#f97316" fontSize="9" textAnchor="middle" fontFamily="monospace">d = diagonal persegi panjang</text>
-    <circle cx="140" cy="110" r="4" fill="#f97316"/>
-    <text x="145" y="107" fill="#fb923c" fontSize="10" fontFamily="monospace" fontWeight="bold">O</text>
-    <text x="140" y="210" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">Lingkaran Luar Persegi Panjang (Circumcircle)</text>
-  </svg>
-);
 
-const SegitigaDalamLingkaranSVG = () => (
-  <svg viewBox="0 0 260 220" className="w-full max-w-xs mx-auto my-2" aria-label="Segitiga dalam lingkaran">
-    <defs>
-      <style>{`@keyframes triangleSpin{0%{transform-origin:130px 110px;transform:rotate(0deg);}100%{transform-origin:130px 110px;transform:rotate(360deg);}}.ts{animation:triangleSpin 8s linear infinite;}`}</style>
-    </defs>
-    <circle cx="130" cy="110" r="85" fill="rgba(6,182,212,0.1)" stroke="#06b6d4" strokeWidth="2.5"/>
-    <polygon points="130,25 215,155 45,155" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" strokeWidth="2.5" className="ts"/>
-    <circle cx="130" cy="25" r="5" fill="#fbbf24"/>
-    <circle cx="215" cy="155" r="5" fill="#fbbf24"/>
-    <circle cx="45" cy="155" r="5" fill="#fbbf24"/>
-    <circle cx="130" cy="110" r="4" fill="#06b6d4"/>
-    <line x1="130" y1="110" x2="130" y2="25" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4 2"/>
-    <text x="120" y="70" fill="#4ade80" fontSize="10" fontFamily="monospace">R</text>
-    <text x="130" y="210" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">Segitiga Bertulis dalam Lingkaran</text>
+    {/* Circumcircle fill */}
+    <circle cx="140" cy="108" r="80" fill="url(#circumGrad)"/>
+
+    {/* Circumcircle stroke */}
+    <circle cx="140" cy="108" r="80" fill="none" stroke="#f97316" strokeWidth="2.5" className="cc-ring"/>
+
+    {/* Triangle */}
+    <polygon points="167,33 201,159 60,115"
+      fill="rgba(251,191,36,.12)" stroke="#fbbf24" strokeWidth="2.5" strokeLinejoin="round"/>
+
+    {/* Vertex labels */}
+    <text x="167" y="24"  fill="#fde68a" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">A</text>
+    <text x="213" y="164" fill="#fde68a" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">B</text>
+    <text x="48"  y="120" fill="#fde68a" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">C</text>
+
+    {/* Radius lines from center to each vertex */}
+    <line x1="140" y1="108" x2="167" y2="33"  stroke="#f97316" strokeWidth="1.4" strokeDasharray="5 3" opacity=".65"/>
+    <line x1="140" y1="108" x2="201" y2="159" stroke="#f97316" strokeWidth="1.4" strokeDasharray="5 3" opacity=".65"/>
+    <line x1="140" y1="108" x2="60"  y2="115" stroke="#f97316" strokeWidth="1.4" strokeDasharray="5 3" opacity=".65"/>
+
+    {/* R label */}
+    <text x="157" y="75"  fill="#fb923c" fontSize="9" fontFamily="monospace" fontWeight="bold">R</text>
+
+    {/* Vertices glow dots */}
+    <circle cx="167" cy="33"  r="5.5" fill="#fbbf24" className="v-dot" style={{filter:'drop-shadow(0 0 7px #fbbf24)'}}/>
+    <circle cx="201" cy="159" r="5.5" fill="#fbbf24" className="v-dot" style={{filter:'drop-shadow(0 0 7px #fbbf24)'}}/>
+    <circle cx="60"  cy="115" r="5.5" fill="#fbbf24" className="v-dot" style={{filter:'drop-shadow(0 0 7px #fbbf24)'}}/>
+
+    {/* Center */}
+    <circle cx="140" cy="108" r="4" fill="#f97316" style={{filter:'drop-shadow(0 0 6px #f97316)'}}/>
+    <text x="148" y="105" fill="#f97316" fontSize="10" fontFamily="monospace" fontWeight="bold">O</text>
+
+    {/* Side labels */}
+    <text x="195" y="102" fill="#fde68a" fontSize="9" fontFamily="monospace" opacity=".8">AB</text>
+    <text x="112" y="148" fill="#fde68a" fontSize="9" fontFamily="monospace" opacity=".8">BC</text>
+    <text x="93"  y="68"  fill="#fde68a" fontSize="9" fontFamily="monospace" opacity=".8">AC</text>
   </svg>
 );
 
 const KaitanBangunDatarPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "kaitan", "contoh1", "contoh2", "contoh3", "rangkuman"]);
+  const [open, setOpen] = useState<string[]>(["intro", "kaitan", "contoh1", "contoh2", "rangkuman"]);
   const toggle = (id: string) => { playPopSound(); setOpen(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]); };
 
-  const SectionHeader = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
+  const SectionHeader = ({
+    id, icon, iconColor, title, gradFrom, gradTo, borderColor,
+  }: {
+    id: string; icon: React.ReactNode; iconColor?: string; title: string;
+    gradFrom?: string; gradTo?: string; borderColor?: string;
+  }) => (
+    <button
+      onClick={() => toggle(id)}
+      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer transition-all"
+      style={open.includes(id) ? {
+        background: `linear-gradient(to right, ${gradFrom ?? "rgba(6,182,212,.12)"}, transparent)`,
+        borderBottom: `1px solid ${borderColor ?? "rgba(6,182,212,.25)"}`,
+      } : {}}
+    >
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
         <span className="font-body font-semibold text-white">{title}</span>
       </div>
-      {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
+      {open.includes(id)
+        ? <ChevronUp   className="w-5 h-5" style={{color: borderColor ?? "#06b6d4"}} />
+        : <ChevronDown className="w-5 h-5 text-white/30" />}
     </button>
   );
 
@@ -75,168 +170,217 @@ const KaitanBangunDatarPage = () => {
       <Starfield />
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
-        <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">KAITAN LINGKARAN DENGAN BANGUN DATAR</h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Lingkaran · Materi Matematika</p>
 
-        <div className="flex flex-col gap-4 animate-slide-up">
+        {/* ── Page header ── */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-3 text-xs font-body font-bold tracking-wide"
+            style={{background:"rgba(168,85,247,.15)",border:"1px solid rgba(168,85,247,.4)",color:"#c084fc"}}>
+            <BookOpen className="w-3.5 h-3.5"/> KELAS 8 · LINGKARAN · MATERI
+          </div>
+          <h1 className="font-display text-xl md:text-3xl font-bold mb-2 text-glow-cyan"
+            style={{background:"linear-gradient(135deg,#22d3ee,#a78bfa,#f97316)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>
+            KAITAN LINGKARAN<br/>DENGAN BANGUN DATAR
+          </h1>
+          <p className="text-white/40 text-xs font-body">Incircle · Circumcircle · Rumus Jari-Jari</p>
+        </div>
 
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🔗 Lingkaran dan Sahabat-Sahabatnya" />
+        <div className="flex flex-col gap-5 animate-slide-up">
+
+          {/* ── Intro ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(6,182,212,.25)",backdropFilter:"blur(12px)"}}>
+            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400"
+              title="🔗 Lingkaran dan Sahabat-Sahabatnya"
+              gradFrom="rgba(234,179,8,.12)" borderColor="rgba(234,179,8,.3)"/>
             {open.includes("intro") && (
-              <div className="px-5 pb-5 space-y-4">
+              <div className="px-5 pb-5 pt-4 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Lingkaran tidak hidup sendiri! Ia sering "bersahabat" dengan bangun datar lain. Ada lingkaran yang berada <strong className="text-green-300">di dalam bangun datar</strong> (disebut <em>lingkaran dalam</em> atau <em>incircle</em>), dan ada yang berada <strong className="text-orange-300">di luar bangun datar</strong> sambil memuat semua sudutnya (disebut <em>lingkaran luar</em> atau <em>circumcircle</em>).
+                  Lingkaran bisa "bersahabat" dengan bangun datar lain dengan dua cara utama:
+                  <strong className="text-green-300"> Lingkaran Dalam</strong> — berada di dalam bangun dan menyinggung setiap sisinya, dan
+                  <strong className="text-orange-300"> Lingkaran Luar</strong> — melingkupi bangun dan melewati setiap titik sudutnya.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-2 text-center">
-                    <p className="text-green-300 text-xs font-bold">Lingkaran Dalam</p>
-                    <p className="text-white/50 text-xs mt-1">Berada di dalam bangun datar, menyinggung semua sisinya</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="rounded-xl p-4 border"
+                    style={{background:"linear-gradient(135deg,rgba(34,197,94,.15),rgba(6,182,212,.08))",borderColor:"rgba(34,197,94,.35)"}}>
+                    <p className="text-green-300 text-sm font-bold mb-1">⭕ Lingkaran Dalam (Incircle)</p>
+                    <p className="text-white/60 text-xs leading-relaxed">Berada di dalam bangun datar, menyinggung semua sisi. Pusatnya disebut <em>incenter</em>.</p>
                   </div>
-                  <div className="bg-orange-900/30 border border-orange-500/30 rounded-lg p-2 text-center">
-                    <p className="text-orange-300 text-xs font-bold">Lingkaran Luar</p>
-                    <p className="text-white/50 text-xs mt-1">Memuat semua titik sudut bangun datar di tepinya</p>
-                  </div>
-                  <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-2 text-center">
-                    <p className="text-purple-300 text-xs font-bold">Bangun Bertulis</p>
-                    <p className="text-white/50 text-xs mt-1">Bangun datar yang terlukis di dalam lingkaran</p>
+                  <div className="rounded-xl p-4 border"
+                    style={{background:"linear-gradient(135deg,rgba(249,115,22,.15),rgba(251,191,36,.08))",borderColor:"rgba(249,115,22,.35)"}}>
+                    <p className="text-orange-300 text-sm font-bold mb-1">🔴 Lingkaran Luar (Circumcircle)</p>
+                    <p className="text-white/60 text-xs leading-relaxed">Melingkupi bangun datar, melewati semua titik sudut. Pusatnya disebut <em>circumcenter</em>.</p>
                   </div>
                 </div>
               </div>
             )}
           </div>
 
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="kaitan" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📐 Kaitan Penting Lingkaran dan Bangun Datar" />
+          {/* ── Kaitan section ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(168,85,247,.25)",backdropFilter:"blur(12px)"}}>
+            <SectionHeader id="kaitan" icon={<Target className="w-5 h-5"/>} iconColor="text-violet-400"
+              title="📐 Lingkaran Dalam & Luar Segitiga"
+              gradFrom="rgba(168,85,247,.12)" borderColor="rgba(168,85,247,.3)"/>
             {open.includes("kaitan") && (
-              <div className="px-5 pb-5 space-y-5">
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
-                  <p className="font-body text-sm text-white/80">Setiap bangun datar memiliki hubungan unik dengan lingkaran. Kuncinya adalah menemukan jari-jari atau diameter dari hubungan tersebut.</p>
-                </div>
+              <div className="px-5 pb-6 pt-4 space-y-8">
 
-                <div>
-                  <p className="font-body text-sm font-bold text-green-300 mb-2">1. Lingkaran Dalam Segitiga</p>
-                  <LingkaranDalamSegtigaSVG />
-                  <div className="bg-green-900/20 border border-green-500/20 rounded-lg p-3 text-sm font-body">
-                    <p className="text-white/80">Pusat lingkaran dalam = <strong className="text-green-300">titik potong garis bagi sudut</strong> segitiga.</p>
-                    <BlockMath math="r_{\text{dalam}} = \frac{\text{Luas Segitiga}}{s} \quad \text{di mana } s = \frac{a+b+c}{2}" />
-                    <p className="text-white/60 text-xs">s = setengah keliling segitiga (semi-perimeter)</p>
+                {/* ── 1. Lingkaran Dalam Segitiga ── */}
+                <div className="rounded-2xl overflow-hidden border"
+                  style={{background:"linear-gradient(135deg,rgba(34,197,94,.1),rgba(6,182,212,.06))",borderColor:"rgba(34,197,94,.3)"}}>
+                  <div className="px-4 pt-4 pb-1 flex items-center gap-2">
+                    <span className="text-xl">🟢</span>
+                    <p className="font-body text-base font-bold text-green-300">1. Lingkaran Dalam Segitiga</p>
+                  </div>
+                  <div className="px-4 pb-4">
+                    <LingkaranDalamSegitigaSVG />
+                    <div className="rounded-xl p-4 mt-2 space-y-2 border"
+                      style={{background:"rgba(34,197,94,.08)",borderColor:"rgba(34,197,94,.2)"}}>
+                      <p className="font-body text-sm text-white/80">
+                        Pusat lingkaran dalam = <strong className="text-green-300">titik potong garis bagi sudut</strong>.
+                        Lingkaran menyinggung <strong className="text-yellow-300">tepat di satu titik</strong> pada setiap sisi segitiga.
+                      </p>
+                      <BlockMath math="r = \dfrac{L_{\triangle}}{s} \qquad s = \dfrac{a+b+c}{2}" />
+                      <p className="text-white/50 text-xs">L = luas segitiga, s = semi-perimeter (setengah keliling), a,b,c = panjang sisi</p>
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <p className="font-body text-sm font-bold text-orange-300 mb-2">2. Lingkaran Luar Persegi Panjang</p>
-                  <LingkaranLuarSegiEmpatSVG />
-                  <div className="bg-orange-900/20 border border-orange-500/20 rounded-lg p-3 text-sm font-body">
-                    <p className="text-white/80">Jari-jari lingkaran luar persegi panjang = <strong className="text-orange-300">setengah diagonal</strong>.</p>
-                    <BlockMath math="R = \frac{d}{2} = \frac{\sqrt{p^2 + l^2}}{2}" />
+                {/* ── 2. Lingkaran Luar Segitiga ── */}
+                <div className="rounded-2xl overflow-hidden border"
+                  style={{background:"linear-gradient(135deg,rgba(249,115,22,.1),rgba(251,191,36,.06))",borderColor:"rgba(249,115,22,.3)"}}>
+                  <div className="px-4 pt-4 pb-1 flex items-center gap-2">
+                    <span className="text-xl">🔴</span>
+                    <p className="font-body text-base font-bold text-orange-300">2. Lingkaran Luar Segitiga</p>
+                  </div>
+                  <div className="px-4 pb-4">
+                    <LingkaranLuarSegitigaSVG />
+                    <div className="rounded-xl p-4 mt-2 space-y-2 border"
+                      style={{background:"rgba(249,115,22,.08)",borderColor:"rgba(249,115,22,.2)"}}>
+                      <p className="font-body text-sm text-white/80">
+                        Pusat lingkaran luar = <strong className="text-orange-300">titik potong sumbu-sumbu sisi</strong>.
+                        Semua <strong className="text-yellow-300">titik sudut segitiga</strong> berada tepat di tepi lingkaran.
+                      </p>
+                      <BlockMath math="R = \dfrac{AB \times AC \times BC}{4 \times L_{\triangle}}" />
+                      <p className="text-white/50 text-xs">AB, AC, BC = panjang sisi-sisi segitiga, L = luas segitiga</p>
+                      <div className="rounded-lg p-3 mt-1 border"
+                        style={{background:"rgba(251,191,36,.08)",borderColor:"rgba(251,191,36,.25)"}}>
+                        <p className="text-yellow-200 text-xs">
+                          💡 <strong>Ingat:</strong> Untuk segitiga siku-siku, sisi miring = diameter lingkaran luar, sehingga{" "}
+                          <InlineMath math="R = \frac{\text{sisi miring}}{2}"/>.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <p className="font-body text-sm font-bold text-yellow-300 mb-2">3. Segitiga Bertulis dalam Lingkaran</p>
-                  <SegitigaDalamLingkaranSVG />
-                  <div className="bg-yellow-900/20 border border-yellow-500/20 rounded-lg p-3 text-sm font-body">
-                    <p className="text-white/80">Jika <strong className="text-yellow-300">segitiga siku-siku</strong> bertulis dalam lingkaran, maka <strong className="text-cyan-300">sisi miring = diameter</strong>.</p>
-                    <BlockMath math="d = \text{sisi miring} = \sqrt{a^2 + b^2}" />
-                  </div>
-                </div>
               </div>
             )}
           </div>
 
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Lingkaran Luar Persegi (Mudah)" />
+          {/* ── Contoh 1: Lingkaran Dalam Segitiga ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(34,197,94,.25)",backdropFilter:"blur(12px)"}}>
+            <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400"
+              title="✏️ Contoh 1 — Lingkaran Dalam Segitiga (Sedang)"
+              gradFrom="rgba(34,197,94,.12)" borderColor="rgba(34,197,94,.3)"/>
             {open.includes("contoh1") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
-                  <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Tingkat: Mudah</p>
+              <div className="px-5 pb-5 pt-4 space-y-4">
+                <div className="rounded-xl p-4 border"
+                  style={{background:"rgba(34,197,94,.1)",borderColor:"rgba(34,197,94,.35)"}}>
+                  <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
                   <p className="font-body text-sm text-white/90">
-                    Sebuah persegi memiliki sisi 10 cm. Tentukan jari-jari lingkaran yang melalui semua titik sudut persegi tersebut! (Gunakan <InlineMath math="\pi = 3{,}14"/>)
+                    Segitiga siku-siku ABC dengan siku-siku di C memiliki <InlineMath math="AC = 5"/> cm,{" "}
+                    <InlineMath math="BC = 12"/> cm. Hitunglah jari-jari lingkaran dalam segitiga tersebut!
                   </p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">Lingkaran luar persegi berpusat di perpotongan diagonal. Jari-jarinya = setengah diagonal persegi.</p>
-                  <p className="font-body text-sm text-white/80"><strong>Langkah 1:</strong> Hitung diagonal persegi</p>
-                  <BlockMath math="d = s\sqrt{2} = 10\sqrt{2} \approx 10 \times 1{,}414 = 14{,}14 \text{ cm}" />
-                  <p className="font-body text-sm text-white/80"><strong>Langkah 2:</strong> Hitung jari-jari</p>
-                  <BlockMath math="R = \frac{d}{2} = \frac{14{,}14}{2} = 7{,}07 \text{ cm}" />
-                  <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-green-300 text-center">✅ Jari-jari lingkaran luar persegi ≈ <strong>7,07 cm</strong>.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Segitiga Siku-Siku dalam Lingkaran (Sedang)" />
-            {open.includes("contoh2") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
-                  <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
-                  <p className="font-body text-sm text-white/90">
-                    Segitiga siku-siku bertulis dalam lingkaran. Dua sisi siku-sikunya adalah 6 cm dan 8 cm. Tentukan keliling lingkaran tersebut! (π = 3,14)
-                  </p>
-                </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80"><strong>Langkah 1:</strong> Cari sisi miring (= diameter lingkaran)</p>
-                  <BlockMath math="c = \sqrt{a^2 + b^2} = \sqrt{6^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 \text{ cm}" />
-                  <p className="font-body text-sm text-white/80"><strong>Langkah 2:</strong> Jari-jari = setengah diameter</p>
-                  <BlockMath math="R = \frac{10}{2} = 5 \text{ cm}" />
-                  <p className="font-body text-sm text-white/80"><strong>Langkah 3:</strong> Keliling lingkaran</p>
-                  <BlockMath math="K = 2\pi R = 2 \times 3{,}14 \times 5 = 31{,}4 \text{ cm}" />
-                  <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-yellow-200 text-center">✅ Keliling lingkaran = <strong>31,4 cm</strong>.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Lingkaran Dalam Segitiga (Sulit)" />
-            {open.includes("contoh3") && (
-              <div className="px-5 pb-5 space-y-4">
-                <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
-                  <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
-                  <p className="font-body text-sm text-white/90">
-                    Segitiga siku-siku ABC dengan siku-siku di C memiliki <InlineMath math="AC = 5"/> cm, <InlineMath math="BC = 12"/> cm. Hitunglah jari-jari lingkaran dalam segitiga tersebut!
-                  </p>
-                </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">📋 Pembahasan</p>
+                <div className="rounded-xl p-4 space-y-3 border"
+                  style={{background:"rgba(15,23,42,.6)",borderColor:"rgba(100,116,139,.35)"}}>
+                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
                   <p className="font-body text-sm text-white/80"><strong>Langkah 1:</strong> Cari sisi miring AB</p>
-                  <BlockMath math="AB = \sqrt{5^2 + 12^2} = \sqrt{25 + 144} = \sqrt{169} = 13 \text{ cm}" />
+                  <BlockMath math="AB = \sqrt{AC^2 + BC^2} = \sqrt{25 + 144} = \sqrt{169} = 13 \text{ cm}"/>
                   <p className="font-body text-sm text-white/80"><strong>Langkah 2:</strong> Hitung luas segitiga</p>
-                  <BlockMath math="L = \frac{1}{2} \times AC \times BC = \frac{1}{2} \times 5 \times 12 = 30 \text{ cm}^2" />
-                  <p className="font-body text-sm text-white/80"><strong>Langkah 3:</strong> Hitung semi-perimeter (s)</p>
-                  <BlockMath math="s = \frac{a + b + c}{2} = \frac{5 + 12 + 13}{2} = 15 \text{ cm}" />
+                  <BlockMath math="L = \tfrac{1}{2} \times AC \times BC = \tfrac{1}{2} \times 5 \times 12 = 30 \text{ cm}^2"/>
+                  <p className="font-body text-sm text-white/80"><strong>Langkah 3:</strong> Hitung semi-perimeter</p>
+                  <BlockMath math="s = \dfrac{5 + 12 + 13}{2} = 15 \text{ cm}"/>
                   <p className="font-body text-sm text-white/80"><strong>Langkah 4:</strong> Jari-jari lingkaran dalam</p>
-                  <BlockMath math="r = \frac{L}{s} = \frac{30}{15} = 2 \text{ cm}" />
-                  <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-red-200 text-center">✅ Jari-jari lingkaran dalam = <strong>2 cm</strong>.</p>
+                  <BlockMath math="r = \dfrac{L}{s} = \dfrac{30}{15} = 2 \text{ cm}"/>
+                  <div className="rounded-lg p-3 border" style={{background:"rgba(34,197,94,.1)",borderColor:"rgba(34,197,94,.35)"}}>
+                    <p className="font-body text-sm text-green-300 text-center">✅ Jari-jari lingkaran dalam = <strong>2 cm</strong></p>
                   </div>
                 </div>
               </div>
             )}
           </div>
 
-          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title="📌 Rangkuman Sub-Bab" />
-            {open.includes("rangkuman") && (
-              <div className="px-5 pb-5 space-y-3">
-                <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm text-white/80">• <strong className="text-green-300">Lingkaran dalam segitiga:</strong> <InlineMath math="r = L/s"/> (L = luas, s = semi-perimeter)</p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-orange-300">Lingkaran luar persegi panjang:</strong> <InlineMath math="R = \text{diagonal}/2"/></p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-yellow-300">Segitiga siku-siku dalam lingkaran:</strong> sisi miring = diameter</p>
+          {/* ── Contoh 2: Lingkaran Luar Segitiga ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(249,115,22,.25)",backdropFilter:"blur(12px)"}}>
+            <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-orange-400"
+              title="✏️ Contoh 2 — Lingkaran Luar Segitiga (Sulit)"
+              gradFrom="rgba(249,115,22,.12)" borderColor="rgba(249,115,22,.3)"/>
+            {open.includes("contoh2") && (
+              <div className="px-5 pb-5 pt-4 space-y-4">
+                <div className="rounded-xl p-4 border"
+                  style={{background:"rgba(249,115,22,.1)",borderColor:"rgba(249,115,22,.35)"}}>
+                  <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
+                  <p className="font-body text-sm text-white/90">
+                    Segitiga ABC memiliki sisi <InlineMath math="AB = 13"/> cm, <InlineMath math="AC = 5"/> cm,{" "}
+                    <InlineMath math="BC = 12"/> cm (segitiga siku-siku di C). Hitunglah jari-jari lingkaran luar segitiga tersebut!
+                  </p>
                 </div>
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
+                <div className="rounded-xl p-4 space-y-3 border"
+                  style={{background:"rgba(15,23,42,.6)",borderColor:"rgba(100,116,139,.35)"}}>
+                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                  <p className="font-body text-sm text-white/80"><strong>Langkah 1:</strong> Hitung luas segitiga</p>
+                  <BlockMath math="L = \tfrac{1}{2} \times AC \times BC = \tfrac{1}{2} \times 5 \times 12 = 30 \text{ cm}^2"/>
+                  <p className="font-body text-sm text-white/80"><strong>Langkah 2:</strong> Gunakan rumus lingkaran luar</p>
+                  <BlockMath math="R = \dfrac{AB \times AC \times BC}{4 \times L} = \dfrac{13 \times 5 \times 12}{4 \times 30}"/>
+                  <BlockMath math="R = \dfrac{780}{120} = 6{,}5 \text{ cm}"/>
+                  <p className="font-body text-sm text-white/60 text-xs">
+                    Cara cepat untuk segitiga siku-siku: <InlineMath math="R = \frac{AB}{2} = \frac{13}{2} = 6{,}5"/> cm ✓
+                  </p>
+                  <div className="rounded-lg p-3 border" style={{background:"rgba(249,115,22,.1)",borderColor:"rgba(249,115,22,.35)"}}>
+                    <p className="font-body text-sm text-orange-300 text-center">✅ Jari-jari lingkaran luar = <strong>6,5 cm</strong></p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── Rangkuman ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(168,85,247,.25)",backdropFilter:"blur(12px)"}}>
+            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5"/>} iconColor="text-violet-400"
+              title="📌 Rangkuman Sub-Bab"
+              gradFrom="rgba(168,85,247,.12)" borderColor="rgba(168,85,247,.3)"/>
+            {open.includes("rangkuman") && (
+              <div className="px-5 pb-5 pt-4 space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="rounded-xl p-4 border space-y-2"
+                    style={{background:"linear-gradient(135deg,rgba(34,197,94,.12),rgba(6,182,212,.06))",borderColor:"rgba(34,197,94,.3)"}}>
+                    <p className="text-green-300 text-sm font-bold">⭕ Lingkaran Dalam Segitiga</p>
+                    <div className="text-white/70 text-xs space-y-1">
+                      <p>• Menyinggung ketiga sisi (tegak lurus)</p>
+                      <p>• Pusat = perpotongan garis bagi sudut</p>
+                    </div>
+                    <BlockMath math="r = \dfrac{L_\triangle}{s}"/>
+                    <p className="text-white/40 text-[10px]">s = (a+b+c)/2</p>
+                  </div>
+                  <div className="rounded-xl p-4 border space-y-2"
+                    style={{background:"linear-gradient(135deg,rgba(249,115,22,.12),rgba(251,191,36,.06))",borderColor:"rgba(249,115,22,.3)"}}>
+                    <p className="text-orange-300 text-sm font-bold">🔴 Lingkaran Luar Segitiga</p>
+                    <div className="text-white/70 text-xs space-y-1">
+                      <p>• Melalui ketiga titik sudut</p>
+                      <p>• Pusat = perpotongan sumbu sisi</p>
+                    </div>
+                    <BlockMath math="R = \dfrac{AB \cdot AC \cdot BC}{4L_\triangle}"/>
+                    <p className="text-white/40 text-[10px]">Siku-siku: R = sisi miring / 2</p>
+                  </div>
+                </div>
+                <div className="rounded-xl p-3 border"
+                  style={{background:"rgba(251,191,36,.08)",borderColor:"rgba(251,191,36,.25)"}}>
                   <p className="font-body text-sm text-yellow-200">
-                    🚀 <strong>Tips Astronot:</strong> Konsep "lingkaran luar" digunakan dalam navigasi — tiga sinyal GPS membentuk tiga lingkaran, dan posisimu ada di perpotongannya!
+                    🚀 <strong>Tips Astronot:</strong> Tiga sinyal GPS membentuk tiga lingkaran — posisimu ada di perpotongannya, persis seperti konsep circumcircle!
                   </p>
                 </div>
               </div>
@@ -244,6 +388,7 @@ const KaitanBangunDatarPage = () => {
           </div>
 
         </div>
+
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/lingkaran"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
