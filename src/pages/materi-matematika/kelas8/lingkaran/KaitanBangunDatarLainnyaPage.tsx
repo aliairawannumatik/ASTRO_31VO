@@ -235,36 +235,36 @@ const PersegipanjangDanLingkaranSVG = () => (
    Rect: (40,30)→(280,150), w=240,h=120. r=60. Masks kiri & kanan.
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG1 = () => (
-  <svg viewBox="0 0 320 190" className="w-full max-w-xs mx-auto" aria-label="Dumbbell arsiran">
+  <svg viewBox="0 0 320 200" className="w-full max-w-xs mx-auto" aria-label="Dumbbell arsiran">
     <defs>
-      <mask id="dbMask">
-        <rect x="40" y="30" width="240" height="120" fill="white"/>
-        <path d="M40,30 A60,60,0,0,0,40,150 Z" fill="black"/>
-        <path d="M280,30 A60,60,0,0,1,280,150 Z" fill="black"/>
-      </mask>
       <style>{`
-        @keyframes db1{0%,100%{opacity:.4;}50%{opacity:.72;}}
-        @keyframes dbg{0%,100%{filter:drop-shadow(0 0 6px #f97316);}50%{filter:drop-shadow(0 0 16px #f97316);}}
+        @keyframes db1{0%,100%{opacity:.42;}50%{opacity:.75;}}
+        @keyframes dbg{0%,100%{filter:drop-shadow(0 0 7px #f97316);}50%{filter:drop-shadow(0 0 18px #f97316);}}
         .db-fill{animation:db1 2.4s ease-in-out infinite;}
-        .db-rect{animation:dbg 2.4s ease-in-out infinite;}
+        .db-out{animation:dbg 2.4s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Shaded dumbbell */}
-    <rect x="40" y="30" width="240" height="120" fill="#f97316" className="db-fill" mask="url(#dbMask)"/>
-    {/* Outline rect */}
-    <rect x="40" y="30" width="240" height="120" fill="none" stroke="#fb923c" strokeWidth="2.5" className="db-rect"/>
-    {/* Left semicircle outline */}
-    <path d="M40,30 A60,60,0,0,0,40,150" fill="none" stroke="#22d3ee" strokeWidth="2"/>
-    {/* Right semicircle outline */}
-    <path d="M280,30 A60,60,0,0,1,280,150" fill="none" stroke="#22d3ee" strokeWidth="2"/>
-    {/* Dimension labels */}
-    <line x1="40" y1="18" x2="280" y2="18" stroke="#fbbf24" strokeWidth="1" markerEnd="url(#arrowR1)" markerStart="url(#arrowL1)" opacity=".7"/>
-    <text x="160" y="14" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
-    <line x1="298" y1="30" x2="298" y2="150" stroke="#4ade80" strokeWidth="1" opacity=".7"/>
-    <text x="310" y="94" fill="#4ade80" fontSize="10" fontFamily="monospace" textAnchor="middle" transform="rotate(90,310,94)">14 cm</text>
-    {/* r label */}
-    <line x1="40" y1="90" x2="100" y2="90" stroke="#22d3ee" strokeWidth="1.2" strokeDasharray="4 2" opacity=".7"/>
-    <text x="70" y="84" fill="#67e8f9" fontSize="9" fontFamily="monospace">r=7</text>
+    {/* Dashed rectangle for reference */}
+    <rect x="40" y="35" width="240" height="120" fill="none" stroke="#64748b" strokeWidth="1.2" strokeDasharray="5 3" opacity=".45"/>
+    {/* Left cut-out D-shape (light cyan) */}
+    <path d="M40,35 A60,60,0,0,0,40,155 Z" fill="rgba(34,211,238,.13)" stroke="#22d3ee" strokeWidth="1.8" strokeDasharray="4 2"/>
+    {/* Right cut-out D-shape */}
+    <path d="M280,35 A60,60,0,0,1,280,155 Z" fill="rgba(34,211,238,.13)" stroke="#22d3ee" strokeWidth="1.8" strokeDasharray="4 2"/>
+    {/* Shaded dumbbell shape (direct path) */}
+    <path d="M40,35 L280,35 A60,60,0,0,1,280,155 L40,155 A60,60,0,0,1,40,35 Z"
+      fill="#f97316" className="db-fill"/>
+    {/* Dumbbell outline */}
+    <path d="M40,35 L280,35 A60,60,0,0,1,280,155 L40,155 A60,60,0,0,1,40,35 Z"
+      fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinejoin="round" className="db-out"/>
+    {/* r=7 inside left cut-out */}
+    <circle cx="40" cy="95" r="3" fill="#22d3ee"/>
+    <line x1="40" y1="95" x2="100" y2="95" stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="4 2" opacity=".9"/>
+    <text x="48" y="88" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">r = 7</text>
+    {/* Dimension 28 cm */}
+    <text x="158" y="23" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
+    {/* Dimension 14 cm */}
+    <line x1="296" y1="35" x2="296" y2="155" stroke="#4ade80" strokeWidth="1.2" opacity=".7"/>
+    <text x="308" y="99" fill="#4ade80" fontSize="10" fontFamily="monospace" transform="rotate(90,308,99)">14 cm</text>
   </svg>
 );
 
@@ -388,20 +388,22 @@ const SoalSVG5 = () => (
     {/* Half annulus via evenodd: big semicircle minus small semicircle */}
     <path fillRule="evenodd" fill="#ec4899" className="sn5-fill"
       d="M30,140 A110,110,0,0,1,250,140 Z M140,140 m-55,0 a55,55,0,0,1,110,0 Z"/>
-    {/* Big semicircle outline */}
-    <path d="M30,140 A110,110,0,0,1,250,140" fill="none" stroke="#f9a8d4" strokeWidth="2.5" className="sn5-out"/>
-    {/* Small semicircle outline */}
-    <path d="M85,140 A55,55,0,0,1,195,140" fill="none" stroke="#a855f7" strokeWidth="2"/>
-    {/* Diameter lines */}
+    {/* Big semicircle outline — same color as small */}
+    <path d="M30,140 A110,110,0,0,1,250,140" fill="none" stroke="#ec4899" strokeWidth="2.5" className="sn5-out"/>
+    {/* Small semicircle outline — same color as big */}
+    <path d="M85,140 A55,55,0,0,1,195,140" fill="none" stroke="#ec4899" strokeWidth="2"/>
+    {/* Diameter base line */}
     <line x1="30" y1="140" x2="250" y2="140" stroke="#fbbf24" strokeWidth="1.3" strokeDasharray="5 3" opacity=".6"/>
-    {/* Center */}
+    {/* Center dot */}
     <circle cx="140" cy="140" r="3.5" fill="#ec4899"/>
-    {/* R label */}
-    <line x1="140" y1="140" x2="30" y2="140" stroke="#f9a8d4" strokeWidth="1.3" strokeDasharray="4 2" opacity=".7"/>
-    <text x="75" y="154" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">10 cm</text>
-    {/* r inner label */}
-    <line x1="140" y1="140" x2="85" y2="140" stroke="#d8b4fe" strokeWidth="1.2" strokeDasharray="3 2" opacity=".7"/>
-    <text x="107" y="130" fill="#d8b4fe" fontSize="9" fontFamily="monospace">r=5</text>
+    {/* R=10 clear radius line from center to right end */}
+    <line x1="140" y1="140" x2="250" y2="140" stroke="#fbbf24" strokeWidth="2" opacity=".9"/>
+    <text x="183" y="132" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">R = 10</text>
+    <circle cx="140" cy="140" r="3" fill="#fbbf24"/>
+    <circle cx="250" cy="140" r="3" fill="#fbbf24"/>
+    {/* r=5 inner label */}
+    <line x1="140" y1="140" x2="85" y2="140" stroke="#f9a8d4" strokeWidth="1.2" strokeDasharray="3 2" opacity=".7"/>
+    <text x="103" y="130" fill="#f9a8d4" fontSize="9" fontFamily="monospace">r=5</text>
   </svg>
 );
 
@@ -412,17 +414,8 @@ const SoalSVG5 = () => (
    Star center: shaded.
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG6 = () => (
-  <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label="4-pointed star from arcs">
+  <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label="4-leaf flower in quadrants">
     <defs>
-      <mask id="starMask6">
-        {/* Filled square */}
-        <rect x="20" y="20" width="220" height="220" fill="white"/>
-        {/* 4 quarter circles (black = removed) */}
-        <path d="M20,20 A220,220,0,0,1,240,240 L20,240 Z" fill="black"/>
-        <path d="M240,20 A220,220,0,0,0,20,240 L240,240 Z" fill="black"/>
-        <path d="M20,240 A220,220,0,0,0,240,20 L20,20 Z" fill="black"/>
-        <path d="M240,240 A220,220,0,0,1,20,20 L240,20 Z" fill="black"/>
-      </mask>
       <style>{`
         @keyframes st6{0%,100%{opacity:.45;}50%{opacity:.8;}}
         @keyframes st6g{0%,100%{filter:drop-shadow(0 0 8px #f59e0b);}50%{filter:drop-shadow(0 0 20px #f59e0b);}}
@@ -430,29 +423,45 @@ const SoalSVG6 = () => (
         .st6-out{animation:st6g 2.1s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Square background */}
-    <rect x="20" y="20" width="220" height="220" fill="rgba(245,158,11,.08)" stroke="#f59e0b" strokeWidth="2.5" className="st6-out"/>
-    {/* 4 arc outlines (from corners, r=220 full side) */}
-    <path d="M20,20 A220,220,0,0,1,240,240" fill="none" stroke="#fbbf24" strokeWidth="1.8" opacity=".5"/>
-    <path d="M240,20 A220,220,0,0,0,20,240" fill="none" stroke="#fbbf24" strokeWidth="1.8" opacity=".5"/>
-    <path d="M20,240 A220,220,0,0,0,240,20" fill="none" stroke="#fbbf24" strokeWidth="1.8" opacity=".5"/>
-    <path d="M240,240 A220,220,0,0,1,20,20" fill="none" stroke="#fbbf24" strokeWidth="1.8" opacity=".5"/>
-    {/* Shaded star via mask */}
-    <rect x="20" y="20" width="220" height="220" fill="#f59e0b" className="st6-fill" mask="url(#starMask6)"/>
+    {/* Square outline */}
+    <rect x="20" y="20" width="220" height="220" fill="none" stroke="#f59e0b" strokeWidth="2.5" className="st6-out"/>
+    {/* Quadrant divider lines (dashed) */}
+    <line x1="130" y1="20" x2="130" y2="240" stroke="#78716c" strokeWidth="1" strokeDasharray="4 3" opacity=".45"/>
+    <line x1="20" y1="130" x2="240" y2="130" stroke="#78716c" strokeWidth="1" strokeDasharray="4 3" opacity=".45"/>
+    {/* Corner arc outlines (from each corner r=110, reaching adjacent side-midpoints) */}
+    <path d="M130,20 A110,110,0,0,0,20,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
+    <path d="M130,20 A110,110,0,0,1,240,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
+    <path d="M20,130 A110,110,0,0,0,130,240" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
+    <path d="M130,240 A110,110,0,0,0,240,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
+    {/* Center arc outlines (from center (130,130) r=110) */}
+    <path d="M20,130 A110,110,0,0,0,130,20" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
+    <path d="M130,20 A110,110,0,0,1,240,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
+    <path d="M130,240 A110,110,0,0,0,20,130" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
+    <path d="M240,130 A110,110,0,0,0,130,240" fill="none" stroke="#fde68a" strokeWidth="1.5" opacity=".5"/>
+    {/* 4 leaf fills — TL, TR, BL, BR quadrants */}
+    {/* TL: arc via corner(20,20) + arc via center(130,130) */}
+    <path d="M130,20 A110,110,0,0,0,20,130 A110,110,0,0,0,130,20 Z"
+      fill="#f59e0b" className="st6-fill"/>
+    {/* TR: arc via corner(240,20) + arc via center(130,130) */}
+    <path d="M130,20 A110,110,0,0,1,240,130 A110,110,0,0,1,130,20 Z"
+      fill="#f59e0b" className="st6-fill"/>
+    {/* BL: arc via corner(20,240) + arc via center(130,130) */}
+    <path d="M20,130 A110,110,0,0,0,130,240 A110,110,0,0,0,20,130 Z"
+      fill="#f59e0b" className="st6-fill"/>
+    {/* BR: arc via corner(240,240) + arc via center(130,130) */}
+    <path d="M130,240 A110,110,0,0,0,240,130 A110,110,0,0,0,130,240 Z"
+      fill="#f59e0b" className="st6-fill"/>
+    {/* Side-midpoint dots */}
+    <circle cx="130" cy="20"  r="3" fill="#fde68a"/>
+    <circle cx="240" cy="130" r="3" fill="#fde68a"/>
+    <circle cx="130" cy="240" r="3" fill="#fde68a"/>
+    <circle cx="20"  cy="130" r="3" fill="#fde68a"/>
     {/* Dimension labels */}
     <text x="128" y="257" fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
     <text x="4" y="134" fill="#f59e0b" fontSize="10" fontFamily="monospace" transform="rotate(-90,4,134)">14 cm</text>
-    {/* 7cm tick labels */}
-    <text x="77"  y="14" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle">7 cm</text>
-    <text x="183" y="14" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle">7 cm</text>
-    <line x1="20"  y1="20" x2="130" y2="20" stroke="#fde68a" strokeWidth="1" opacity=".5"/>
-    <line x1="130" y1="20" x2="240" y2="20" stroke="#fde68a" strokeWidth="1" opacity=".5"/>
-    <circle cx="130" cy="20" r="2.5" fill="#fde68a" opacity=".7"/>
-    <circle cx="20"  cy="130" r="2.5" fill="#fde68a" opacity=".7"/>
-    <circle cx="240" cy="130" r="2.5" fill="#fde68a" opacity=".7"/>
-    <circle cx="130" cy="240" r="2.5" fill="#fde68a" opacity=".7"/>
-    <text x="2" y="77" fill="#fde68a" fontSize="8" fontFamily="monospace" transform="rotate(-90,2,77)">7 cm</text>
-    <text x="2" y="183" fill="#fde68a" fontSize="8" fontFamily="monospace" transform="rotate(-90,2,183)">7 cm</text>
+    {/* 7cm half-side labels */}
+    <text x="75"  y="14" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle">7</text>
+    <text x="185" y="14" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle">7</text>
   </svg>
 );
 
@@ -475,14 +484,14 @@ const SoalSVG7 = () => (
     </defs>
     {/* Rectangle border */}
     <rect x="20" y="40" width="240" height="120" fill="none" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="4 3" opacity=".5"/>
-    {/* Shaded region: big arch - 2 small arches (evenodd) */}
+    {/* Shaded region: big arch - 2 small arches (evenodd) — small arches sweep=1 (upward) */}
     <path fillRule="evenodd" fill="#0ea5e9" className="ar7-fill"
-      d="M20,160 A120,120,0,0,1,260,160 Z M20,160 A60,60,0,0,0,140,160 Z M140,160 A60,60,0,0,0,260,160 Z"/>
+      d="M20,160 A120,120,0,0,1,260,160 Z M20,160 A60,60,0,0,1,140,160 Z M140,160 A60,60,0,0,1,260,160 Z"/>
     {/* Big arch outline */}
     <path d="M20,160 A120,120,0,0,1,260,160" fill="none" stroke="#38bdf8" strokeWidth="2.5" className="ar7-out"/>
-    {/* Two small arch outlines */}
-    <path d="M20,160 A60,60,0,0,0,140,160" fill="none" stroke="#a78bfa" strokeWidth="2"/>
-    <path d="M140,160 A60,60,0,0,0,260,160" fill="none" stroke="#a78bfa" strokeWidth="2"/>
+    {/* Two small arch outlines — same color as big arch, sweep=1 (upward) */}
+    <path d="M20,160 A60,60,0,0,1,140,160" fill="none" stroke="#38bdf8" strokeWidth="2"/>
+    <path d="M140,160 A60,60,0,0,1,260,160" fill="none" stroke="#38bdf8" strokeWidth="2"/>
     {/* Base line */}
     <line x1="20" y1="160" x2="260" y2="160" stroke="#64748b" strokeWidth="1.5" opacity=".6"/>
     {/* Dimension labels */}
@@ -585,19 +594,26 @@ const SoalSVG10 = () => (
     </defs>
     {/* Full circle (unshaded background) */}
     <circle cx="110" cy="120" r="105" fill="rgba(139,92,246,.06)" stroke="#8b5cf6" strokeWidth="2" opacity=".5"/>
+    {/* Right triangle inside sector (O, A, B) — lighter fill underneath */}
+    <polygon points="110,120 215,120 110,225" fill="rgba(196,181,253,.22)"/>
     {/* Shaded quarter sector (right lower quarter) */}
     <path d="M110,120 L215,120 A105,105,0,0,1,110,225 Z"
       fill="#8b5cf6" className="sc10-fill"/>
     <path d="M110,120 L215,120 A105,105,0,0,1,110,225 Z"
       fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinejoin="round" className="sc10-out"/>
-    {/* Right-angle mark */}
+    {/* Hypotenuse AB (the triangle inside the sector) */}
+    <line x1="215" y1="120" x2="110" y2="225" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6 3" opacity=".9"/>
+    {/* Right-angle mark at O */}
     <polyline points="128,120 128,138 110,138" fill="none" stroke="#a78bfa" strokeWidth="1.5" opacity=".8"/>
     {/* Center */}
     <circle cx="110" cy="120" r="4" fill="#8b5cf6"/>
-    <text x="94" y="117" fill="#c4b5fd" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
+    <text x="93" y="117" fill="#c4b5fd" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
+    {/* Vertex labels A and B */}
+    <text x="219" y="117" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="96" y="238" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
     {/* Radius label */}
     <line x1="110" y1="120" x2="215" y2="120" stroke="#fbbf24" strokeWidth="1.4" strokeDasharray="5 3" opacity=".8"/>
-    <text x="157" y="112" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">10 cm</text>
+    <text x="152" y="112" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">10 cm</text>
   </svg>
 );
 
