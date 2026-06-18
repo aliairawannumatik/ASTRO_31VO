@@ -1068,6 +1068,60 @@ const SoalSVG18 = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
+   SVG C19 – Dua setengah lingkaran berdampingan: besar arch UP (d=26),
+   kecil arch DOWN (d=14). Baris dasar bersama, kecil di bagian kanan.
+   Skala 5px/cm. A(25,130) B(155,130) C(225,130).
+   R_large=65px=13cm, r_small=35px=7cm.
+═══════════════════════════════════════════════════════════════════ */
+const SoalSVG19 = () => (
+  <svg viewBox="0 55 255 165" className="w-full max-w-xs mx-auto" aria-label="Setengah lingkaran besar ke atas dan setengah lingkaran kecil ke bawah">
+    <defs>
+      <style>{`
+        @keyframes sv19f{0%,100%{opacity:.42;}50%{opacity:.76;}}
+        @keyframes sv19g{0%,100%{filter:drop-shadow(0 0 7px #4f46e5);}50%{filter:drop-shadow(0 0 20px #818cf8);}}
+        .sv19-fill{animation:sv19f 2.4s ease-in-out infinite;}
+        .sv19-out{animation:sv19g 2.4s ease-in-out infinite;}
+      `}</style>
+    </defs>
+
+    {/* Combined shape:
+        A(25,130) → large arc CW upward to B(155,130)
+                 → small arc CCW downward to C(225,130) → close to A */}
+    <path d="M25,130 A65,65,0,0,1,155,130 A35,35,0,0,0,225,130 Z"
+      fill="#4f46e5" className="sv19-fill"/>
+    <path d="M25,130 A65,65,0,0,1,155,130 A35,35,0,0,0,225,130 Z"
+      fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinejoin="round" className="sv19-out"/>
+
+    {/* Baseline */}
+    <line x1="25" y1="130" x2="225" y2="130" stroke="#818cf8" strokeWidth="1.3" opacity=".35"/>
+
+    {/* Tick at connection B(155,130) */}
+    <line x1="155" y1="122" x2="155" y2="138" stroke="#c7d2fe" strokeWidth="2" opacity=".9"/>
+
+    {/* Center dots */}
+    <circle cx="90"  cy="130" r="2.5" fill="#a5b4fc" opacity=".65"/>
+    <circle cx="190" cy="130" r="2.5" fill="#a5b4fc" opacity=".65"/>
+
+    {/* ── Garis bantu: 26 cm (diameter besar, A→B di bawah) ── */}
+    <line x1="25"  y1="143" x2="155" y2="143" stroke="#fbbf24" strokeWidth="1.3" opacity=".85"/>
+    <line x1="25"  y1="139" x2="25"  y2="147" stroke="#fbbf24" strokeWidth="1.2" opacity=".85"/>
+    <line x1="155" y1="139" x2="155" y2="147" stroke="#fbbf24" strokeWidth="1.2" opacity=".85"/>
+    <text x="90" y="159" fill="#fde68a" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">26 cm</text>
+
+    {/* ── Garis bantu: 14 cm (diameter kecil, B→C di bawah) ── */}
+    <line x1="155" y1="143" x2="225" y2="143" stroke="#67e8f9" strokeWidth="1.3" opacity=".85"/>
+    <line x1="225" y1="139" x2="225" y2="147" stroke="#67e8f9" strokeWidth="1.2" opacity=".85"/>
+    <text x="190" y="159" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
+
+    {/* ── Radius labels ── */}
+    <line x1="90"  y1="130" x2="90"  y2="65" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="4 2" opacity=".55"/>
+    <text x="94"  y="95"  fill="#a5b4fc" fontSize="9" fontFamily="monospace">R=13</text>
+    <line x1="190" y1="130" x2="225" y2="130" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="3 2" opacity=".55"/>
+    <text x="192" y="126" fill="#a5b4fc" fontSize="8.5" fontFamily="monospace">r=7</text>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════════════════════════════════════ */
 const KaitanBangunDatarLainnyaPage = () => {
@@ -1714,6 +1768,49 @@ const KaitanBangunDatarLainnyaPage = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* ── CONTOH 19 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(99,102,241,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh19" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-indigo-400"
+              title="✏️ Contoh 19 — Gabungan Dua Setengah Lingkaran: Besar Atas + Kecil Bawah (π = 22/7)"
+              accent="rgba(99,102,241,.12)" />
+              <div className="px-5 pb-5 pt-3 space-y-4">
+                <div className="rounded-xl p-4 border" style={{ background: "rgba(99,102,241,.1)", borderColor: "rgba(99,102,241,.35)" }}>
+                  <p className="text-indigo-300 font-bold text-xs uppercase tracking-wide mb-2">🔵 Soal</p>
+                  <p className="font-body text-sm text-white/90">
+                    Daerah arsiran pada gambar terbentuk dari gabungan <strong>setengah lingkaran besar</strong> (diameter 26 cm, menghadap ke atas) dan <strong>setengah lingkaran kecil</strong> (diameter 14 cm, menghadap ke bawah) yang terletak berdampingan pada garis dasar yang sama. Hitunglah <strong>(a)</strong> luas dan <strong>(b)</strong> keliling daerah arsiran! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
+                  </p>
+                </div>
+                <SoalSVG19 />
+                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                  <p className="font-body text-sm text-white/80">
+                    <strong>Diketahui:</strong> diameter besar = 26 cm <InlineMath math="\Rightarrow R = 13"/> cm; diameter kecil = 14 cm <InlineMath math="\Rightarrow r = 7"/> cm
+                  </p>
+                  <p className="font-body text-sm text-white/80"><strong>(a) Luas daerah arsiran:</strong></p>
+                  <p className="font-body text-xs text-white/60">Luas = ½ lingkaran besar + ½ lingkaran kecil</p>
+                  <BlockMath math="L = \tfrac{1}{2}\pi R^2 + \tfrac{1}{2}\pi r^2 = \tfrac{1}{2}\pi(R^2 + r^2)" />
+                  <BlockMath math="= \tfrac{1}{2} \times \tfrac{22}{7} \times (13^2 + 7^2) = \tfrac{11}{7} \times (169 + 49) = \tfrac{11}{7} \times 218 = \boxed{\tfrac{2398}{7} = 342\tfrac{4}{7} \text{ cm}^2}" />
+                  <p className="font-body text-sm text-white/80 pt-1"><strong>(b) Keliling daerah arsiran:</strong></p>
+                  <p className="font-body text-xs text-white/60">Keliling = busur setengah lingkaran besar + busur setengah lingkaran kecil (tidak ada sisi lurus yang terekspos)</p>
+                  <BlockMath math="K = \pi R + \pi r = \pi(R + r) = \tfrac{22}{7} \times (13 + 7) = \tfrac{22}{7} \times 20 = \boxed{\tfrac{440}{7} = 62\tfrac{6}{7} \text{ cm}}" />
+                  <div className="rounded-xl p-3 border mt-1" style={{ background: "rgba(99,102,241,.07)", borderColor: "rgba(99,102,241,.25)" }}>
+                    <p className="text-indigo-200 text-xs font-body">💡 <strong>Perhatikan:</strong> garis dasar bersama bukan bagian dari keliling, karena ia menghubungkan dua bangun di "dalam" — hanya busur keduanya yang membentuk batas luar.</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(99,102,241,.1)", borderColor: "rgba(99,102,241,.35)" }}>
+                      <p className="text-indigo-300 text-xs font-bold">✅ Luas</p>
+                      <p className="text-white text-sm font-bold mt-1">342 4⁄7 cm²</p>
+                    </div>
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(99,102,241,.1)", borderColor: "rgba(99,102,241,.35)" }}>
+                      <p className="text-indigo-300 text-xs font-bold">✅ Keliling</p>
+                      <p className="text-white text-sm font-bold mt-1">62 6⁄7 cm</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
 
           {/* ── RANGKUMAN ── */}
