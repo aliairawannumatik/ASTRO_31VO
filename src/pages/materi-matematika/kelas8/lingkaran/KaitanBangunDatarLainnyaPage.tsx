@@ -874,15 +874,18 @@ const SoalSVG15 = () => (
       `}</style>
     </defs>
 
-    {/* Sector fill: kaki CA + busur A→B (CW, menonjol keluar) + kaki BC */}
-    <path d="M30,185 L30,55 A130,130,0,0,1,160,185 Z"
+    {/* Arsiran HANYA tembereng: busur A→B (CW) + tali busur B→A (Z menutup lurus) */}
+    {/* A(30,55) → arc CW r=130 → B(160,185) → garis lurus kembali ke A */}
+    <path d="M30,55 A130,130,0,0,1,160,185 Z"
       fill="#a855f7" className="sv15-fill"/>
-    <path d="M30,185 L30,55 A130,130,0,0,1,160,185 Z"
-      fill="none" stroke="#c084fc" strokeWidth="2.5" strokeLinejoin="round" className="sv15-out"/>
+    <path d="M30,55 A130,130,0,0,1,160,185 Z"
+      fill="none" stroke="#c084fc" strokeWidth="2.5" className="sv15-out"/>
 
-    {/* Sisi miring (hipotenusa) — garis putus-putus menunjukkan segitiga */}
-    <line x1="30" y1="55" x2="160" y2="185"
-      stroke="#e9d5ff" strokeWidth="1.6" strokeDasharray="6 3" opacity=".7"/>
+    {/* Kaki segitiga (tidak diarsir, hanya garis outline) */}
+    {/* Kaki CA: dari C(30,185) ke A(30,55) — vertikal */}
+    <line x1="30" y1="185" x2="30" y2="55" stroke="#c084fc" strokeWidth="2.5"/>
+    {/* Kaki CB: dari C(30,185) ke B(160,185) — horizontal */}
+    <line x1="30" y1="185" x2="160" y2="185" stroke="#c084fc" strokeWidth="2.5"/>
 
     {/* Sudut siku-siku di C(30,185) */}
     <polyline points="30,185 30,168 47,168 47,185"
