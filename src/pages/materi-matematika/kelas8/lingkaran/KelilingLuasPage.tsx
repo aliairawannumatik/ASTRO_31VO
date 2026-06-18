@@ -374,7 +374,7 @@ const KelilingLuasCirclesSVG = () => (
       .circle-card-right { animation: fadeScaleIn .7s .18s cubic-bezier(.22,1,.36,1) both; }
     `}</style>
 
-    <div className="grid grid-cols-2 gap-3 sm:gap-5 mb-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2">
 
       {/* ── Keliling: hanya outline yang menyala ── */}
       <div className="circle-card flex flex-col items-center gap-2 bg-cyan-500/8 border border-cyan-500/30 rounded-2xl px-3 py-4 text-center">
