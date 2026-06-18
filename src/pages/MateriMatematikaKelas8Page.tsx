@@ -26,7 +26,7 @@ const MateriMatematikaKelas8Page = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          MATERI MATEMATIKA - KELAS 8
+          BUKU ANIMASI MATEMATIKA - KELAS 8
         </h1>
         <p className="text-white/60 text-sm text-center mb-8 font-body">
           Pilih topik untuk mempelajari materi
@@ -54,7 +54,7 @@ const MateriMatematikaKelas8Page = () => {
             onClick={() => { playPopSound(); navigate("/materi-matematika"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            Kembali ke Materi Matematika
+            Kembali ke Buku Animasi Matematika
           </button>
         </div>
       </div>

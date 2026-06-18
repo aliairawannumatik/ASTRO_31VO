@@ -5,9 +5,9 @@ import { BookOpen, GraduationCap } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const kelasOptions = [
-  { label: "KELAS 7", path: "/materi-matematika/kelas-7", desc: "Materi matematika kelas 7 SMP" },
-  { label: "KELAS 8", path: "/materi-matematika/kelas-8", desc: "Materi matematika kelas 8 SMP" },
-  { label: "KELAS 9", path: "/materi-matematika/kelas-9", desc: "Materi matematika kelas 9 SMP" },
+  { label: "KELAS 7", path: "/materi-matematika/kelas-7", desc: "Buku Animasi Matematika kelas 7 SMP" },
+  { label: "KELAS 8", path: "/materi-matematika/kelas-8", desc: "Buku Animasi Matematika kelas 8 SMP" },
+  { label: "KELAS 9", path: "/materi-matematika/kelas-9", desc: "Buku Animasi Matematika kelas 9 SMP" },
 ];
 
 const MateriMatematikaPage = () => {
@@ -20,7 +20,7 @@ const MateriMatematikaPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          MATERI MATEMATIKA
+          BUKU ANIMASI MATEMATIKA
         </h1>
         <p className="text-white/60 text-sm text-center mb-8 font-body">
           Pilih kelas untuk mempelajari materi matematika

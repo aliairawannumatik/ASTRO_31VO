@@ -74,9 +74,9 @@ const MenuMockup = () => (
 );
 
 const MateriMockup = () => (
-  <MockupFrame title="MATERI MATEMATIKA" accentColor="text-cyan-400">
+  <MockupFrame title="BUKU ANIMASI MATEMATIKA" accentColor="text-cyan-400">
     <div className="p-3 space-y-2">
-      <p className="text-[9px] text-cyan-300 font-bold text-center">MATERI MATEMATIKA</p>
+      <p className="text-[9px] text-cyan-300 font-bold text-center">BUKU ANIMASI MATEMATIKA</p>
       {["KELAS 7", "KELAS 8", "KELAS 9"].map((k) => (
         <div key={k} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
           <div className="flex items-center gap-1.5">
