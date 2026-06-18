@@ -795,6 +795,197 @@ const SoalSVG13 = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
+   SVG C14 – Trapesium simetris (a₁=28, a₂=42, h=14) + setengah
+   lingkaran (r=14) di atas. Scale: 5px/cm.
+   Bottom: (35,210)-(245,210) = 210px = 42cm
+   Top (diameter): (70,140)-(210,140) = 140px = 28cm
+   Trapezoid height: 70px = 14cm. Semicircle center (140,140) r=70.
+═══════════════════════════════════════════════════════════════════ */
+const SoalSVG14 = () => (
+  <svg viewBox="0 0 280 240" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus setengah lingkaran di atas">
+    <defs>
+      <style>{`
+        @keyframes sv14f{0%,100%{opacity:.38;}50%{opacity:.68;}}
+        @keyframes sv14g{0%,100%{filter:drop-shadow(0 0 7px #0ea5e9);}50%{filter:drop-shadow(0 0 18px #0ea5e9);}}
+        .sv14-fill{animation:sv14f 2.4s ease-in-out infinite;}
+        .sv14-out{animation:sv14g 2.4s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* Combined fill: semicircle on top + trapezoid below */}
+    <path d="M70,140 A70,70,0,0,0,210,140 L245,210 L35,210 Z"
+      fill="rgba(14,165,233,.2)" className="sv14-fill"/>
+    <path d="M70,140 A70,70,0,0,0,210,140 L245,210 L35,210 Z"
+      fill="none" stroke="#0ea5e9" strokeWidth="2.5" strokeLinejoin="round" className="sv14-out"/>
+    {/* Dashed diameter line (boundary between trapezoid & semicircle) */}
+    <line x1="70" y1="140" x2="210" y2="140" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".55"/>
+    {/* Label: 28 cm — diameter of semicircle */}
+    <text x="140" y="83" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
+    <line x1="70" y1="88" x2="210" y2="88" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
+    <line x1="70" y1="84" x2="70" y2="92" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
+    <line x1="210" y1="84" x2="210" y2="92" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
+    {/* Label: 14 cm — height of trapezoid */}
+    <line x1="22" y1="140" x2="22" y2="210" stroke="#4ade80" strokeWidth="1.3" opacity=".7"/>
+    <line x1="18" y1="140" x2="26" y2="140" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
+    <line x1="18" y1="210" x2="26" y2="210" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
+    <text x="10" y="178" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" transform="rotate(-90,10,178)">14 cm</text>
+    {/* Label: 42 cm — bottom of trapezoid */}
+    <text x="140" y="228" fill="#0ea5e9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">42 cm</text>
+    {/* Center dot of semicircle */}
+    <circle cx="140" cy="140" r="3" fill="#0ea5e9" opacity=".7"/>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
+   SVG C15 – Seperempat lingkaran r=14 cm (sektor sudut siku-siku).
+   Corner at (25,170), r=130px (=14cm → ~9.3px/cm).
+   Arc from (155,170) to (25,40). Sweep=0 (CCW = upward-left).
+═══════════════════════════════════════════════════════════════════ */
+const SoalSVG15 = () => (
+  <svg viewBox="0 0 195 205" className="w-full max-w-xs mx-auto" aria-label="Seperempat lingkaran">
+    <defs>
+      <style>{`
+        @keyframes sv15f{0%,100%{opacity:.42;}50%{opacity:.76;}}
+        @keyframes sv15g{0%,100%{filter:drop-shadow(0 0 7px #a855f7);}50%{filter:drop-shadow(0 0 20px #a855f7);}}
+        .sv15-fill{animation:sv15f 2.3s ease-in-out infinite;}
+        .sv15-out{animation:sv15g 2.3s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* Quarter-circle sector fill */}
+    <path d="M25,170 L155,170 A130,130,0,0,0,25,40 Z"
+      fill="#a855f7" className="sv15-fill"/>
+    <path d="M25,170 L155,170 A130,130,0,0,0,25,40 Z"
+      fill="none" stroke="#c084fc" strokeWidth="2.5" strokeLinejoin="round" className="sv15-out"/>
+    {/* Right-angle mark at corner (25,170) */}
+    <polyline points="43,170 43,152 25,152" fill="none" stroke="#c084fc" strokeWidth="1.5" opacity=".8"/>
+    {/* Center dot */}
+    <circle cx="25" cy="170" r="3.5" fill="#a855f7"/>
+    {/* Radius labels */}
+    <text x="88" y="190" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
+    <text x="8" y="108" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" transform="rotate(-90,8,108)">14 cm</text>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
+   SVG C16 – Setengah cincin (half-annulus): outer R=14→120px,
+   inner r=7→60px. Center (140,155). ViewBox 0 0 280 175.
+   Even-odd fill: outer half-disk minus inner half-disk.
+═══════════════════════════════════════════════════════════════════ */
+const SoalSVG16 = () => (
+  <svg viewBox="0 0 280 180" className="w-full max-w-xs mx-auto" aria-label="Setengah cincin half-annulus">
+    <defs>
+      <style>{`
+        @keyframes sv16f{0%,100%{opacity:.42;}50%{opacity:.74;}}
+        @keyframes sv16g{0%,100%{filter:drop-shadow(0 0 8px #f97316);}50%{filter:drop-shadow(0 0 20px #f97316);}}
+        .sv16-fill{animation:sv16f 2.5s ease-in-out infinite;}
+        .sv16-out{animation:sv16g 2.5s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* Half-annulus fill via evenodd: outer half-disk minus inner half-disk */}
+    <path fillRule="evenodd" fill="#f97316" className="sv16-fill"
+      d="M20,158 A120,120,0,0,0,260,158 Z M80,158 A60,60,0,0,0,200,158 Z"/>
+    {/* Outer arc outline */}
+    <path d="M20,158 A120,120,0,0,0,260,158" fill="none" stroke="#fb923c" strokeWidth="2.5" className="sv16-out"/>
+    {/* Inner arc outline */}
+    <path d="M80,158 A60,60,0,0,0,200,158" fill="none" stroke="#fb923c" strokeWidth="2"/>
+    {/* Base lines */}
+    <line x1="20" y1="158" x2="80" y2="158" stroke="#fb923c" strokeWidth="2.5"/>
+    <line x1="200" y1="158" x2="260" y2="158" stroke="#fb923c" strokeWidth="2.5"/>
+    {/* Center dot */}
+    <circle cx="140" cy="158" r="3.5" fill="#fb923c"/>
+    {/* R = 14 cm label */}
+    <line x1="140" y1="158" x2="260" y2="158" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4 2" opacity=".85"/>
+    <text x="195" y="150" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">R = 14</text>
+    {/* r = 7 cm label */}
+    <line x1="140" y1="158" x2="80" y2="158" stroke="#67e8f9" strokeWidth="1.3" strokeDasharray="3 2" opacity=".8"/>
+    <text x="98" y="170" fill="#67e8f9" fontSize="10" fontFamily="monospace">r = 7</text>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
+   SVG C17 – Setengah cincin (half-annulus): outer R=10→100px,
+   inner r=5→50px. Center (130,128). ViewBox 0 0 260 145.
+   "10 cm" label shows the outer radius (dashed horizontal line).
+═══════════════════════════════════════════════════════════════════ */
+const SoalSVG17 = () => (
+  <svg viewBox="0 0 260 148" className="w-full max-w-xs mx-auto" aria-label="Setengah cincin half-annulus 10cm">
+    <defs>
+      <style>{`
+        @keyframes sv17f{0%,100%{opacity:.42;}50%{opacity:.74;}}
+        @keyframes sv17g{0%,100%{filter:drop-shadow(0 0 8px #ec4899);}50%{filter:drop-shadow(0 0 20px #ec4899);}}
+        .sv17-fill{animation:sv17f 2.5s ease-in-out infinite;}
+        .sv17-out{animation:sv17g 2.5s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* Half-annulus fill via evenodd */}
+    <path fillRule="evenodd" fill="#ec4899" className="sv17-fill"
+      d="M30,130 A100,100,0,0,0,230,130 Z M80,130 A50,50,0,0,0,180,130 Z"/>
+    {/* Outer arc */}
+    <path d="M30,130 A100,100,0,0,0,230,130" fill="none" stroke="#f472b6" strokeWidth="2.5" className="sv17-out"/>
+    {/* Inner arc */}
+    <path d="M80,130 A50,50,0,0,0,180,130" fill="none" stroke="#f472b6" strokeWidth="2"/>
+    {/* Base lines */}
+    <line x1="30" y1="130" x2="80" y2="130" stroke="#f472b6" strokeWidth="2.5"/>
+    <line x1="180" y1="130" x2="230" y2="130" stroke="#f472b6" strokeWidth="2.5"/>
+    {/* Center dot */}
+    <circle cx="130" cy="130" r="3.5" fill="#f472b6"/>
+    {/* "10 cm" label = outer radius, dashed */}
+    <line x1="130" y1="130" x2="230" y2="130" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4 2" opacity=".9"/>
+    <text x="176" y="122" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">10 cm</text>
+    {/* r=5 inner label */}
+    <text x="95" y="122" fill="#a5f3fc" fontSize="9" fontFamily="monospace">r=5</text>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
+   SVG C18 – Persegi 14 cm (side=180px) dikurangi dua seperempat
+   lingkaran (r=7cm → 90px): satu di sudut TR, satu di sudut BL.
+   Square (20,20)→(200,200). Mask cuts out the two corner sectors.
+   Shaded area = 196 − 2×¼π(7²) = 119 cm² (π=22/7).
+═══════════════════════════════════════════════════════════════════ */
+const SoalSVG18 = () => (
+  <svg viewBox="0 0 220 220" className="w-full max-w-xs mx-auto" aria-label="Persegi minus dua seperempat lingkaran">
+    <defs>
+      <style>{`
+        @keyframes sv18f{0%,100%{opacity:.42;}50%{opacity:.74;}}
+        @keyframes sv18g{0%,100%{filter:drop-shadow(0 0 7px #14b8a6);}50%{filter:drop-shadow(0 0 18px #14b8a6);}}
+        .sv18-fill{animation:sv18f 2.3s ease-in-out infinite;}
+        .sv18-out{animation:sv18g 2.3s ease-in-out infinite;}
+      `}</style>
+      <mask id="sq18mask">
+        <rect x="20" y="20" width="180" height="180" fill="white"/>
+        {/* TR quarter: center(200,20), arc from (110,20) to (200,110), sweep=0 CCW */}
+        <path d="M200,20 L110,20 A90,90,0,0,0,200,110 Z" fill="black"/>
+        {/* BL quarter: center(20,200), arc from (20,110) to (110,200), sweep=1 CW */}
+        <path d="M20,200 L20,110 A90,90,0,0,1,110,200 Z" fill="black"/>
+      </mask>
+    </defs>
+    {/* Shaded region = square minus two quarter circles */}
+    <rect x="20" y="20" width="180" height="180" fill="#14b8a6" mask="url(#sq18mask)" className="sv18-fill"/>
+    {/* Square outline */}
+    <rect x="20" y="20" width="180" height="180" fill="none" stroke="#2dd4bf" strokeWidth="2.5" className="sv18-out"/>
+    {/* TR arc outline */}
+    <path d="M110,20 A90,90,0,0,0,200,110" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5 3" opacity=".7"/>
+    {/* BL arc outline */}
+    <path d="M20,110 A90,90,0,0,1,110,200" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5 3" opacity=".7"/>
+    {/* Label: 14 cm on right side */}
+    <text x="208" y="114" fill="#2dd4bf" fontSize="11" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" transform="rotate(90,208,114)">14 cm</text>
+    {/* Corner dots */}
+    <circle cx="20"  cy="20"  r="2.5" fill="#64748b" opacity=".7"/>
+    <circle cx="200" cy="20"  r="2.5" fill="#64748b" opacity=".7"/>
+    <circle cx="20"  cy="200" r="2.5" fill="#64748b" opacity=".7"/>
+    <circle cx="200" cy="200" r="2.5" fill="#64748b" opacity=".7"/>
+    {/* Tick marks on sides */}
+    <line x1="107" y1="16" x2="113" y2="24" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
+    <line x1="107" y1="196" x2="113" y2="204" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
+    <line x1="16" y1="107" x2="24" y2="113" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
+    <line x1="196" y1="107" x2="204" y2="113" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════════════════════════════════════ */
 const KaitanBangunDatarLainnyaPage = () => {
@@ -1266,6 +1457,181 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
+          </div>
+
+          {/* ── CONTOH 14 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(14,165,233,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh14" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
+              title="✏️ Contoh 14 — Trapesium + Setengah Lingkaran (π = 22/7)"
+              accent="rgba(14,165,233,.12)" />
+            <div className="px-5 pb-5 pt-3 space-y-4">
+              <div className="rounded-xl p-4 border" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
+                <p className="text-sky-300 font-bold text-xs uppercase tracking-wide mb-2">🔷 Soal</p>
+                <p className="font-body text-sm text-white/90">
+                  Sebuah bangun gabungan terdiri dari trapesium simetris di bagian bawah (sisi sejajar 28 cm dan 42 cm, tinggi 14 cm) dan setengah lingkaran di bagian atas dengan diameter 28 cm. Hitunglah <strong>luas bangun</strong> tersebut! <InlineMath math="(\pi = \tfrac{22}{7})"/>
+                </p>
+              </div>
+              <SoalSVG14 />
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                <p className="font-body text-sm text-white/80">
+                  <strong>Diketahui:</strong> Trapesium: a₁ = 28 cm, a₂ = 42 cm, t = 14 cm. Setengah lingkaran: d = 28 cm → <InlineMath math="r = 14"/> cm.
+                </p>
+                <p className="font-body text-sm text-white/80"><strong>Luas trapesium:</strong></p>
+                <BlockMath math="L_{\text{trap}} = \tfrac{1}{2}(a_1 + a_2) \times t = \tfrac{1}{2}(28 + 42) \times 14 = \tfrac{1}{2} \times 70 \times 14 = 490 \text{ cm}^2" />
+                <p className="font-body text-sm text-white/80"><strong>Luas setengah lingkaran:</strong></p>
+                <BlockMath math="L_{\text{semi}} = \tfrac{1}{2}\pi r^2 = \tfrac{1}{2} \times \tfrac{22}{7} \times 14^2 = \tfrac{1}{2} \times \tfrac{22}{7} \times 196 = \tfrac{1}{2} \times 616 = 308 \text{ cm}^2" />
+                <p className="font-body text-sm text-white/80"><strong>Total luas:</strong></p>
+                <BlockMath math="L = L_{\text{trap}} + L_{\text{semi}} = 490 + 308 = \boxed{798 \text{ cm}^2}" />
+                <div className="rounded-lg p-3 border text-center mt-2" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
+                  <p className="text-sky-300 text-xs font-bold">✅ Luas Bangun</p>
+                  <p className="text-white text-sm font-bold mt-1">798 cm²</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── CONTOH 15 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(168,85,247,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh15" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-purple-400"
+              title="✏️ Contoh 15 — Seperempat Lingkaran (π = 22/7)"
+              accent="rgba(168,85,247,.12)" />
+            <div className="px-5 pb-5 pt-3 space-y-4">
+              <div className="rounded-xl p-4 border" style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
+                <p className="text-purple-300 font-bold text-xs uppercase tracking-wide mb-2">🔵 Soal</p>
+                <p className="font-body text-sm text-white/90">
+                  Sebuah bangun berbentuk seperempat lingkaran dengan jari-jari 14 cm. Hitunglah <strong>(a)</strong> luas dan <strong>(b)</strong> keliling daerah tersebut! <InlineMath math="(\pi = \tfrac{22}{7})"/>
+                </p>
+              </div>
+              <SoalSVG15 />
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                <p className="font-body text-sm text-white/80"><strong>Diketahui:</strong> <InlineMath math="r = 14"/> cm.</p>
+                <p className="font-body text-sm text-white/80"><strong>(a) Luas:</strong></p>
+                <BlockMath math="L = \tfrac{1}{4}\pi r^2 = \tfrac{1}{4} \times \tfrac{22}{7} \times 14^2 = \tfrac{1}{4} \times \tfrac{22}{7} \times 196 = \tfrac{1}{4} \times 616 = \boxed{154 \text{ cm}^2}" />
+                <p className="font-body text-sm text-white/80"><strong>(b) Keliling</strong> = 2 jari-jari + busur:</p>
+                <BlockMath math="K = 2r + \tfrac{1}{4}(2\pi r) = 2(14) + \tfrac{1}{2} \times \tfrac{22}{7} \times 14 = 28 + 22 = \boxed{50 \text{ cm}}" />
+                <div className="grid grid-cols-2 gap-3 mt-2">
+                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
+                    <p className="text-purple-300 text-xs font-bold">✅ Luas</p>
+                    <p className="text-white text-sm font-bold mt-1">154 cm²</p>
+                  </div>
+                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
+                    <p className="text-cyan-300 text-xs font-bold">✅ Keliling</p>
+                    <p className="text-white text-sm font-bold mt-1">50 cm</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── CONTOH 16 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh16" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
+              title="✏️ Contoh 16 — Setengah Cincin: R = 14 cm, r = 7 cm (π = 22/7)"
+              accent="rgba(249,115,22,.12)" />
+            <div className="px-5 pb-5 pt-3 space-y-4">
+              <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
+                <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">🌀 Soal</p>
+                <p className="font-body text-sm text-white/90">
+                  Sebuah bangun berbentuk setengah cincin (half-annulus) dengan jari-jari luar R = 14 cm dan jari-jari dalam r = 7 cm. Hitunglah <strong>(a)</strong> luas dan <strong>(b)</strong> keliling daerah arsiran! <InlineMath math="(\pi = \tfrac{22}{7})"/>
+                </p>
+              </div>
+              <SoalSVG16 />
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                <p className="font-body text-sm text-white/80"><strong>Diketahui:</strong> R = 14 cm, r = 7 cm.</p>
+                <p className="font-body text-sm text-white/80"><strong>(a) Luas setengah cincin:</strong></p>
+                <BlockMath math="L = \tfrac{1}{2}\pi(R^2 - r^2) = \tfrac{1}{2} \times \tfrac{22}{7} \times (14^2 - 7^2)" />
+                <BlockMath math="= \tfrac{1}{2} \times \tfrac{22}{7} \times (196 - 49) = \tfrac{1}{2} \times \tfrac{22}{7} \times 147 = \tfrac{1}{2} \times 462 = \boxed{231 \text{ cm}^2}" />
+                <p className="font-body text-sm text-white/80"><strong>(b) Keliling</strong> = busur luar + busur dalam + 2 × (R − r):</p>
+                <BlockMath math="K = \pi R + \pi r + 2(R - r) = \tfrac{22}{7}(14 + 7) + 2(14 - 7)" />
+                <BlockMath math="= \tfrac{22}{7} \times 21 + 2 \times 7 = 66 + 14 = \boxed{80 \text{ cm}}" />
+                <div className="grid grid-cols-2 gap-3 mt-2">
+                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
+                    <p className="text-orange-300 text-xs font-bold">✅ Luas</p>
+                    <p className="text-white text-sm font-bold mt-1">231 cm²</p>
+                  </div>
+                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
+                    <p className="text-cyan-300 text-xs font-bold">✅ Keliling</p>
+                    <p className="text-white text-sm font-bold mt-1">80 cm</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── CONTOH 17 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(236,72,153,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh17" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-pink-400"
+              title="✏️ Contoh 17 — Setengah Cincin: R = 10 cm, r = 5 cm (π = 3,14)"
+              accent="rgba(236,72,153,.12)" />
+            <div className="px-5 pb-5 pt-3 space-y-4">
+              <div className="rounded-xl p-4 border" style={{ background: "rgba(236,72,153,.1)", borderColor: "rgba(236,72,153,.35)" }}>
+                <p className="text-pink-300 font-bold text-xs uppercase tracking-wide mb-2">🌀 Soal</p>
+                <p className="font-body text-sm text-white/90">
+                  Sebuah bangun berbentuk setengah cincin dengan jari-jari luar R = 10 cm dan jari-jari dalam r = 5 cm. Hitunglah <strong>(a)</strong> luas dan <strong>(b)</strong> keliling daerah arsiran! <InlineMath math="(\pi = 3{,}14)"/>
+                </p>
+              </div>
+              <SoalSVG17 />
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                <p className="font-body text-sm text-white/80"><strong>Diketahui:</strong> R = 10 cm, r = 5 cm.</p>
+                <p className="font-body text-sm text-white/80"><strong>(a) Luas setengah cincin:</strong></p>
+                <BlockMath math="L = \tfrac{1}{2}\pi(R^2 - r^2) = \tfrac{1}{2} \times 3{,}14 \times (10^2 - 5^2)" />
+                <BlockMath math="= \tfrac{1}{2} \times 3{,}14 \times (100 - 25) = \tfrac{1}{2} \times 3{,}14 \times 75 = \boxed{117{,}75 \text{ cm}^2}" />
+                <p className="font-body text-sm text-white/80"><strong>(b) Keliling</strong> = busur luar + busur dalam + 2 × (R − r):</p>
+                <BlockMath math="K = \pi R + \pi r + 2(R - r) = 3{,}14(10 + 5) + 2(10 - 5)" />
+                <BlockMath math="= 3{,}14 \times 15 + 2 \times 5 = 47{,}1 + 10 = \boxed{57{,}1 \text{ cm}}" />
+                <div className="grid grid-cols-2 gap-3 mt-2">
+                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(236,72,153,.1)", borderColor: "rgba(236,72,153,.35)" }}>
+                    <p className="text-pink-300 text-xs font-bold">✅ Luas</p>
+                    <p className="text-white text-sm font-bold mt-1">117,75 cm²</p>
+                  </div>
+                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
+                    <p className="text-cyan-300 text-xs font-bold">✅ Keliling</p>
+                    <p className="text-white text-sm font-bold mt-1">57,1 cm</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── CONTOH 18 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(20,184,166,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="contoh18" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-teal-400"
+              title="✏️ Contoh 18 — Persegi dikurangi Dua Seperempat Lingkaran (π = 22/7)"
+              accent="rgba(20,184,166,.12)" />
+            <div className="px-5 pb-5 pt-3 space-y-4">
+              <div className="rounded-xl p-4 border" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
+                <p className="text-teal-300 font-bold text-xs uppercase tracking-wide mb-2">⬛ Soal</p>
+                <p className="font-body text-sm text-white/90">
+                  Pada sebuah persegi dengan sisi 14 cm, dibuat dua buah seperempat lingkaran berhadapan (masing-masing di sudut kanan atas dan sudut kiri bawah) dengan jari-jari 7 cm. Daerah yang <strong>diarsir</strong> (persegi dikurangi kedua seperempat lingkaran) adalah luas yang dicari. Hitunglah luas daerah arsiran! <InlineMath math="(\pi = \tfrac{22}{7})"/>
+                </p>
+              </div>
+              <SoalSVG18 />
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                <p className="font-body text-sm text-white/80">
+                  <strong>Diketahui:</strong> sisi persegi = 14 cm, jari-jari tiap seperempat lingkaran <InlineMath math="r = 7"/> cm.
+                </p>
+                <p className="font-body text-sm text-white/80"><strong>Luas persegi:</strong></p>
+                <BlockMath math="L_{\text{persegi}} = 14^2 = 196 \text{ cm}^2" />
+                <p className="font-body text-sm text-white/80"><strong>Luas 2 seperempat lingkaran</strong> = luas ½ lingkaran:</p>
+                <BlockMath math="L_{2 \times \frac{1}{4}\text{lingk}} = 2 \times \tfrac{1}{4}\pi r^2 = \tfrac{1}{2} \times \tfrac{22}{7} \times 7^2 = \tfrac{1}{2} \times \tfrac{22}{7} \times 49 = \tfrac{1}{2} \times 154 = 77 \text{ cm}^2" />
+                <p className="font-body text-sm text-white/80"><strong>Luas arsiran:</strong></p>
+                <BlockMath math="L = L_{\text{persegi}} - L_{2 \times \frac{1}{4}\text{lingk}} = 196 - 77 = \boxed{119 \text{ cm}^2}" />
+                <div className="rounded-lg p-3 border text-center mt-2" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
+                  <p className="text-teal-300 text-xs font-bold">✅ Luas Arsiran</p>
+                  <p className="text-white text-sm font-bold mt-1">119 cm²</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* ── RANGKUMAN ── */}
