@@ -796,14 +796,14 @@ const SoalSVG13 = () => (
 
 /* ═══════════════════════════════════════════════════════════════════
    SVG C14 – Trapesium (a₁=28, a₂=42, h=14) + seperempat lingkaran
-   (r=14) di KIRI atas. Scale: 5px/cm.
-   Kanan trapesium: BL(90,195) BR(300,195) TL(90,125) TR(230,125).
-   Seperempat lingkaran: center=TL(90,125), r=70px.
-   Arc from (20,125) CW upward to (90,55). Sector bulges upper-left.
-   Combined path: M20,125 A70,70,0,0,1,90,55 L90,195 L300,195 L230,125 Z
+   (r=14) di KIRI menempel sisi kiri trapesium. Scale: 5px/cm.
+   Trapesium: BL(90,195) BR(300,195) TL(90,125) TR(230,125).
+   Seperempat lingkaran: center=BL(90,195), r=70px.
+   Arc from (20,195) CW upward to (90,125). Sector bulges upper-left.
+   Combined path: M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG14 = () => (
-  <svg viewBox="0 0 325 225" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri atas">
+  <svg viewBox="0 95 325 135" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri menempel sisi kiri">
     <defs>
       <style>{`
         @keyframes sv14f{0%,100%{opacity:.38;}50%{opacity:.68;}}
@@ -812,38 +812,38 @@ const SoalSVG14 = () => (
         .sv14-out{animation:sv14g 2.4s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Combined fill: quarter-circle sector (upper-left) + right trapezoid */}
-    {/* Path: from leftmost arc point, arc CW up to top of sector, then down the left side,
-        along the bottom (42cm), up the right slant, and close along the top (28cm+14cm sector) */}
-    <path d="M20,125 A70,70,0,0,1,90,55 L90,195 L300,195 L230,125 Z"
+    {/* Combined fill: quarter-circle sector (lower-left, flush with left side) + trapezoid */}
+    {/* Quarter circle center=(90,195)=bottom-left of trapezoid, r=70.
+        Arc from (20,195) CW to (90,125) — sector bulges upper-left. */}
+    <path d="M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z"
       fill="rgba(14,165,233,.2)" className="sv14-fill"/>
-    <path d="M20,125 A70,70,0,0,1,90,55 L90,195 L300,195 L230,125 Z"
+    <path d="M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z"
       fill="none" stroke="#0ea5e9" strokeWidth="2.5" strokeLinejoin="round" className="sv14-out"/>
     {/* Dashed radii of the quarter-circle sector */}
-    {/* Horizontal radius: center(90,125)→left(20,125) */}
-    <line x1="20" y1="125" x2="90" y2="125" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".6"/>
-    {/* Vertical radius: center(90,125)→top(90,55) */}
-    <line x1="90" y1="55" x2="90" y2="125" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".6"/>
-    {/* Right-angle mark at center (90,125) */}
-    <polyline points="90,125 90,112 103,112 103,125" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity=".7"/>
+    {/* Horizontal radius: center(90,195)→left(20,195) */}
+    <line x1="20" y1="195" x2="90" y2="195" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".6"/>
+    {/* Vertical radius: center(90,195)→top(90,125) — coincides with trapezoid left side */}
+    <line x1="90" y1="125" x2="90" y2="195" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".6"/>
+    {/* Right-angle mark at center (90,195) — legs go up and left */}
+    <polyline points="90,195 90,182 77,182 77,195" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity=".7"/>
     {/* Center dot */}
-    <circle cx="90" cy="125" r="3.5" fill="#0ea5e9" opacity=".8"/>
+    <circle cx="90" cy="195" r="3.5" fill="#0ea5e9" opacity=".8"/>
 
-    {/* Label: 28 cm — flat top of trapezoid (from TL to TR, at y=125) */}
+    {/* Label: 28 cm — flat top of trapezoid (TL→TR at y=125) */}
     <text x="160" y="117" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
     <line x1="90" y1="121" x2="230" y2="121" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
     <line x1="90" y1="117" x2="90" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
     <line x1="230" y1="117" x2="230" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
 
-    {/* Label: 14 cm — trapezoid height (left side, at x=78 from y=125 to y=195) */}
-    <line x1="78" y1="125" x2="78" y2="195" stroke="#4ade80" strokeWidth="1.3" opacity=".7"/>
-    <line x1="74" y1="125" x2="82" y2="125" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
-    <line x1="74" y1="195" x2="82" y2="195" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
-    <text x="66" y="163" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold"
-      textAnchor="middle" transform="rotate(-90,66,163)">14 cm</text>
+    {/* Label: 14 cm — trapezoid height (right side, x=310, y=125→195) */}
+    <line x1="310" y1="125" x2="310" y2="195" stroke="#4ade80" strokeWidth="1.3" opacity=".7"/>
+    <line x1="306" y1="125" x2="314" y2="125" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
+    <line x1="306" y1="195" x2="314" y2="195" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
+    <text x="322" y="163" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" transform="rotate(-90,322,163)">14 cm</text>
 
-    {/* Label: r = 14 inside the sector area */}
-    <text x="52" y="96" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">r=14</text>
+    {/* Label: r = 14 — above the horizontal dashed radius */}
+    <text x="55" y="186" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r=14</text>
 
     {/* Label: 42 cm — bottom of trapezoid */}
     <text x="195" y="213" fill="#0ea5e9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">42 cm</text>
