@@ -872,6 +872,12 @@ const BusurJuringPage = () => {
                 <div className="space-y-3">
                   <p className="text-white/70 text-xs font-body font-semibold uppercase tracking-wider">📐 Rumus Perbandingan</p>
 
+                  {/* Rumus gabungan */}
+                  <div className="rounded-xl p-4 border border-white/20 bg-slate-800/60 text-center">
+                    <p className="font-body text-xs text-white/60 mb-2">Ketiga besaran ini selalu berbanding sama dalam satu lingkaran:</p>
+                    <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{\text{Busur AB}}{\text{Busur CD}} = \frac{\text{Luas Juring AOB}}{\text{Luas Juring COD}}" />
+                  </div>
+
                   <div className="rounded-xl p-4 border border-cyan-500/40 bg-cyan-900/20">
                     <p className="font-body text-xs font-bold text-cyan-300 mb-2">📏 Perbandingan Sudut Pusat dengan Panjang Busur</p>
                     <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{\text{Busur AB}}{\text{Busur CD}}" />
@@ -882,15 +888,15 @@ const BusurJuringPage = () => {
 
                   <div className="rounded-xl p-4 border border-orange-500/40 bg-orange-900/20">
                     <p className="font-body text-xs font-bold text-orange-300 mb-2">🍕 Perbandingan Sudut Pusat dengan Luas Juring</p>
-                    <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{\text{Luas Juring OAB}}{\text{Luas Juring OCD}}" />
+                    <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{\text{Luas Juring AOB}}{\text{Luas Juring COD}}" />
                     <p className="text-white/55 text-xs font-body mt-1">
-                      ∠AOB = sudut pusat yang menghadap juring OAB &nbsp;·&nbsp; ∠COD = sudut pusat yang menghadap juring OCD
+                      ∠AOB = sudut pusat yang menghadap juring AOB &nbsp;·&nbsp; ∠COD = sudut pusat yang menghadap juring COD
                     </p>
                   </div>
 
                   <div className="rounded-xl p-4 border border-yellow-500/40 bg-yellow-900/20">
                     <p className="font-body text-xs font-bold text-yellow-300 mb-2">🔗 Perbandingan Panjang Busur dan Luas Juring</p>
-                    <BlockMath math="\frac{\text{Busur AB}}{\text{Busur CD}} = \frac{\text{Luas Juring OAB}}{\text{Luas Juring OCD}}" />
+                    <BlockMath math="\frac{\text{Busur AB}}{\text{Busur CD}} = \frac{\text{Luas Juring AOB}}{\text{Luas Juring COD}}" />
                     <p className="text-yellow-200/70 text-xs font-body mt-1">
                       Busur dan juring selalu memiliki rasio yang sama dalam satu lingkaran!
                     </p>
