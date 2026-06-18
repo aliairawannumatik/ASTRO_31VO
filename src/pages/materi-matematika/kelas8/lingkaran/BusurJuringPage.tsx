@@ -552,33 +552,48 @@ const PizzaAnalogiDua = () => (
 );
 
 const TemberengLengkapSVG = () => (
-  <svg viewBox="0 0 280 210" className="w-full max-w-xs mx-auto my-2" aria-label="Tembereng lingkaran">
+  // A=(76,148) B=(204,148): both exactly on circle r=80 → √(64²+48²)=80 ✓
+  // Tembereng = minor segment below chord AB (clockwise arc A→B through bottom)
+  <svg viewBox="0 0 280 215" className="w-full max-w-xs mx-auto my-2" aria-label="Tembereng lingkaran">
     <defs>
-      <style>{`@keyframes tFill2{0%{opacity:0;}100%{opacity:1;}}.tf2{animation:tFill2 1.5s ease-in forwards;}`}</style>
+      <style>{`@keyframes tFill3{0%{opacity:0;}100%{opacity:1;}}.tf3{animation:tFill3 1.5s ease-in forwards;}`}</style>
     </defs>
-    {/* Full circle outline */}
+
+    {/* Full circle */}
     <circle cx="140" cy="100" r="80" fill="rgba(6,182,212,0.08)" stroke="#06b6d4" strokeWidth="2"/>
-    {/* Juring (sector) — green, dim background */}
-    <path d="M140,100 L76,140 A80,80 0 0 1 204,140 Z"
-      fill="rgba(34,197,94,0.18)" stroke="rgba(34,197,94,0.4)" strokeWidth="1.2"/>
-    {/* TEMBERENG — bottom segment (between chord and lower arc), distinct orange-red color */}
-    <path d="M76,140 A80,80 0 0 0 204,140 Z"
-      fill="rgba(251,146,60,0.55)" stroke="#f97316" strokeWidth="2.5" className="tf2"/>
-    {/* Arc stroke on top */}
-    <path d="M76,140 A80,80 0 0 0 204,140"
-      fill="none" stroke="#fb923c" strokeWidth="3.5"/>
-    {/* Chord */}
-    <line x1="76" y1="140" x2="204" y2="140" stroke="#fbbf24" strokeWidth="2.5" strokeDasharray="6 3"/>
-    {/* Radii (dashed) */}
-    <line x1="140" y1="100" x2="76" y2="140" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="4 2"/>
-    <line x1="140" y1="100" x2="204" y2="140" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="4 2"/>
-    {/* Center */}
+
+    {/* TEMBERENG fill — minor segment, clockwise arc A→B goes through the bottom of circle */}
+    <path d="M76,148 A80,80 0 0 1 204,148 Z"
+      fill="rgba(251,146,60,0.55)" stroke="none" className="tf3"/>
+
+    {/* Tembereng arc stroke (lower arc, orange) */}
+    <path d="M76,148 A80,80 0 0 1 204,148"
+      fill="none" stroke="#fb923c" strokeWidth="3" strokeLinecap="round"/>
+
+    {/* Chord AB (yellow dashed) */}
+    <line x1="76" y1="148" x2="204" y2="148" stroke="#fbbf24" strokeWidth="2" strokeDasharray="6 3"/>
+
+    {/* Radii OA and OB (green dashed) */}
+    <line x1="140" y1="100" x2="76" y2="148" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4 2"/>
+    <line x1="140" y1="100" x2="204" y2="148" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4 2"/>
+
+    {/* Center O */}
     <circle cx="140" cy="100" r="4" fill="#06b6d4"/>
     <text x="147" y="96" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
-    {/* Tembereng label — inside segment */}
-    <text x="140" y="163" fill="#fed7aa" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Tembereng</text>
+
+    {/* Point A */}
+    <circle cx="76" cy="148" r="4" fill="#fb923c"/>
+    <text x="58" y="153" fill="#fed7aa" fontSize="12" fontFamily="monospace" fontWeight="bold">A</text>
+
+    {/* Point B */}
+    <circle cx="204" cy="148" r="4" fill="#fb923c"/>
+    <text x="211" y="153" fill="#fed7aa" fontSize="12" fontFamily="monospace" fontWeight="bold">B</text>
+
+    {/* "Tembereng" label inside segment */}
+    <text x="140" y="168" fill="#fed7aa" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Tembereng</text>
+
     {/* Formula */}
-    <text x="140" y="192" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">L.Tembereng = L.Juring − L.Segitiga</text>
+    <text x="140" y="200" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">L.Tembereng = L.Juring OAB − L.△OAB</text>
   </svg>
 );
 
