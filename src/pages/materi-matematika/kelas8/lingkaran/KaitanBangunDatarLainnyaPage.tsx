@@ -805,7 +805,7 @@ const SoalSVG13 = () => (
    Combined path: M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG14 = () => (
-  <svg viewBox="0 108 340 115" className="w-full max-w-sm mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri menempel sisi kiri">
+  <svg viewBox="0 108 340 115" className="w-full mx-auto" style={{ maxWidth: "576px" }} aria-label="Trapesium plus seperempat lingkaran di kiri menempel sisi kiri">
     <defs>
       <style>{`
         @keyframes sv14f{0%,100%{opacity:.42;}50%{opacity:.76;}}
