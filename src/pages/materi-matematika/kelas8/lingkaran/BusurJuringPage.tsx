@@ -600,12 +600,86 @@ const TemberengLengkapSVG = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
+   SVG — Dua sudut dalam satu lingkaran (perbandingan)
+   Circle cx=150 cy=135 r=100
+   Sector α (120°, cyan)  : A=(250,135) → B=(100,48)  sweep=0 large=0
+   Sector β  (90°, orange) : C=(56,169)  → D=(184,229) sweep=0 large=0
+═══════════════════════════════════════════════════════════════════ */
+const SvgPerbandingan = () => (
+  <svg viewBox="0 0 300 265" className="w-full max-w-xs mx-auto my-1" aria-label="Dua sudut dalam satu lingkaran">
+    <defs>
+      <style>{`
+        @keyframes secA{0%,100%{opacity:.55;filter:drop-shadow(0 0 8px #06b6d4);}50%{opacity:.80;filter:drop-shadow(0 0 18px #06b6d4);}}
+        @keyframes secB{0%,100%{opacity:.55;filter:drop-shadow(0 0 8px #f97316);}50%{opacity:.80;filter:drop-shadow(0 0 18px #f97316);}}
+        @keyframes arcA{0%,100%{stroke:#22d3ee;stroke-width:4;}50%{stroke:#67e8f9;stroke-width:6;filter:drop-shadow(0 0 8px #67e8f9);}}
+        @keyframes arcB{0%,100%{stroke:#fb923c;stroke-width:4;}50%{stroke:#fdba74;stroke-width:6;filter:drop-shadow(0 0 8px #fdba74);}}
+        .sa{animation:secA 2s ease-in-out infinite;}
+        .sb{animation:secB 2s ease-in-out infinite; animation-delay:.9s;}
+        .aa{animation:arcA 2s ease-in-out infinite;}
+        .ab{animation:arcB 2s ease-in-out infinite; animation-delay:.9s;}
+      `}</style>
+    </defs>
+
+    {/* Full circle */}
+    <circle cx="150" cy="135" r="100" fill="rgba(6,182,212,0.06)" stroke="#1e3a5f" strokeWidth="1.5"/>
+
+    {/* Sector α — cyan, 120°, from A(250,135) to B(100,48), sweep=0 CCW */}
+    <path d="M150,135 L250,135 A100,100 0 0 0 100,48 Z"
+      fill="rgba(6,182,212,0.35)" stroke="none" className="sa"/>
+    {/* Sector β — orange, 90°, from C(56,169) to D(184,229), sweep=0 CCW */}
+    <path d="M150,135 L56,169 A100,100 0 0 0 184,229 Z"
+      fill="rgba(249,115,22,0.35)" stroke="none" className="sb"/>
+
+    {/* Dim remaining arcs */}
+    <path d="M100,48 A100,100 0 0 0 56,169" fill="none" stroke="#1e3a5f" strokeWidth="2"/>
+    <path d="M184,229 A100,100 0 1 0 250,135" fill="none" stroke="#1e3a5f" strokeWidth="2"/>
+
+    {/* Busur α — glowing cyan arc */}
+    <path d="M250,135 A100,100 0 0 0 100,48" fill="none" className="aa"/>
+    {/* Busur β — glowing orange arc */}
+    <path d="M56,169 A100,100 0 0 0 184,229" fill="none" className="ab"/>
+
+    {/* Radii */}
+    <line x1="150" y1="135" x2="250" y2="135" stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="5 3"/>
+    <line x1="150" y1="135" x2="100" y2="48"  stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="5 3"/>
+    <line x1="150" y1="135" x2="56"  y2="169" stroke="#fb923c" strokeWidth="1.4" strokeDasharray="5 3"/>
+    <line x1="150" y1="135" x2="184" y2="229" stroke="#fb923c" strokeWidth="1.4" strokeDasharray="5 3"/>
+
+    {/* α angle label — inside cyan sector, midpoint ~60° */}
+    <text x="188" y="78" fill="#67e8f9" fontSize="14" fontFamily="monospace" fontWeight="bold" textAnchor="middle">α</text>
+    {/* β angle label — inside orange sector, midpoint ~245° */}
+    <text x="110" y="205" fill="#fdba74" fontSize="14" fontFamily="monospace" fontWeight="bold" textAnchor="middle">β</text>
+
+    {/* Point labels */}
+    <circle cx="250" cy="135" r="4" fill="#22d3ee"/>
+    <text x="258" y="139" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
+
+    <circle cx="100" cy="48" r="4" fill="#22d3ee"/>
+    <text x="88"  y="44"  fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
+
+    <circle cx="56"  cy="169" r="4" fill="#fb923c"/>
+    <text x="38"  y="173" fill="#fdba74" fontSize="11" fontFamily="monospace" fontWeight="bold">C</text>
+
+    <circle cx="184" cy="229" r="4" fill="#fb923c"/>
+    <text x="187" y="245" fill="#fdba74" fontSize="11" fontFamily="monospace" fontWeight="bold">D</text>
+
+    {/* Center O */}
+    <circle cx="150" cy="135" r="4" fill="#06b6d4"/>
+    <text x="156" y="131" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
+
+    {/* Busur labels at arc midpoints */}
+    <text x="210" y="64"  fill="#a5f3fc" fontSize="9" fontFamily="monospace" textAnchor="middle">Busur AB</text>
+    <text x="100" y="222" fill="#fed7aa" fontSize="9" fontFamily="monospace" textAnchor="middle">Busur CD</text>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════════════════════════════════════ */
 const BusurJuringPage = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState<string[]>([
-    "intro", "animasi1", "animasi2", "rumus", "contoh1", "contoh2", "contoh3", "rangkuman"
+    "intro", "animasi1", "animasi2", "rumus", "perbandingan", "contoh1", "contoh2", "contoh3", "rangkuman"
   ]);
   const toggle = (id: string) => {
     playPopSound();
@@ -736,6 +810,135 @@ const BusurJuringPage = () => {
                     <TemberengLengkapSVG />
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* KONSEP PERBANDINGAN */}
+          <div className="rounded-xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.85)", borderColor: "rgba(6,182,212,.35)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="perbandingan" icon={<Target className="w-5 h-5" />}
+              iconColor="text-cyan-400" title="🔗 Konsep — Perbandingan Busur & Juring dalam Satu Lingkaran" />
+            {open.includes("perbandingan") && (
+              <div className="px-5 pb-6 pt-1 space-y-5">
+
+                {/* Hook */}
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm text-white/85 leading-relaxed">
+                    Sejauh ini kita menghitung busur atau juring <em>satu per satu</em> menggunakan
+                    sudut pusat terhadap 360°. Tapi ada situasi yang lebih cerdas: ketika soal
+                    memberikan <strong className="text-cyan-300">dua sudut sekaligus dalam satu lingkaran</strong>,
+                    kita bisa membandingkan langsung tanpa perlu mengetahui jari-jarinya!
+                  </p>
+                </div>
+
+                {/* SVG diagram */}
+                <SvgPerbandingan />
+
+                {/* Legend */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-lg p-3 border border-cyan-500/30 bg-cyan-500/10">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-3 h-3 rounded-full bg-cyan-400"/>
+                      <p className="text-cyan-300 text-xs font-bold font-body">Juring OAB (sudut α)</p>
+                    </div>
+                    <p className="text-white/60 text-[11px] font-body">Busur AB berkilau cyan</p>
+                  </div>
+                  <div className="rounded-lg p-3 border border-orange-500/30 bg-orange-500/10">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-3 h-3 rounded-full bg-orange-400"/>
+                      <p className="text-orange-300 text-xs font-bold font-body">Juring OCD (sudut β)</p>
+                    </div>
+                    <p className="text-white/60 text-[11px] font-body">Busur CD berkilau oranye</p>
+                  </div>
+                </div>
+
+                {/* Inti konsep */}
+                <div className="space-y-1">
+                  <p className="text-white/70 text-xs font-body font-semibold uppercase tracking-wider">💡 Ide Pokok</p>
+                  <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-2">
+                    <p className="font-body text-sm text-white/85 leading-relaxed">
+                      Dalam <strong className="text-yellow-300">satu lingkaran</strong>, dua busur (atau dua juring)
+                      berbanding lurus dengan sudut pusat masing-masing. Artinya:
+                    </p>
+                    <p className="font-body text-sm text-white/70 leading-relaxed">
+                      Jika sudutnya <em>dua kali lebih besar</em>, maka busurnya pun <em>dua kali lebih panjang</em>,
+                      dan juringnya <em>dua kali lebih luas</em> — karena jari-jarinya sama!
+                    </p>
+                  </div>
+                </div>
+
+                {/* Rumus perbandingan */}
+                <div className="space-y-3">
+                  <p className="text-white/70 text-xs font-body font-semibold uppercase tracking-wider">📐 Rumus Perbandingan</p>
+
+                  <div className="rounded-xl p-4 border border-cyan-500/40 bg-cyan-900/20">
+                    <p className="font-body text-xs font-bold text-cyan-300 mb-2">📏 Perbandingan Panjang Busur</p>
+                    <BlockMath math="\frac{\text{Busur AB}}{\text{Busur CD}} = \frac{\alpha}{\beta}" />
+                    <p className="text-white/55 text-xs font-body mt-1">
+                      α = sudut pusat yang menghadap busur AB &nbsp;·&nbsp; β = sudut pusat yang menghadap busur CD
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl p-4 border border-orange-500/40 bg-orange-900/20">
+                    <p className="font-body text-xs font-bold text-orange-300 mb-2">🍕 Perbandingan Luas Juring</p>
+                    <BlockMath math="\frac{\text{Luas Juring OAB}}{\text{Luas Juring OCD}} = \frac{\alpha}{\beta}" />
+                  </div>
+
+                  <div className="rounded-xl p-4 border border-yellow-500/40 bg-yellow-900/20">
+                    <p className="font-body text-xs font-bold text-yellow-300 mb-2">🔁 Bentuk Perkalian Silang</p>
+                    <BlockMath math="\text{Busur AB} \times \beta = \text{Busur CD} \times \alpha" />
+                    <p className="text-yellow-200/70 text-xs font-body mt-1">
+                      Gunakan ini untuk mencari nilai yang belum diketahui dengan mudah!
+                    </p>
+                  </div>
+                </div>
+
+                {/* Kapan digunakan */}
+                <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-xs font-bold text-violet-300 uppercase tracking-wide">🎯 Kapan Menggunakan Konsep Ini?</p>
+                  <ul className="space-y-1.5">
+                    {[
+                      "Soal menyebutkan dua sudut pusat berbeda dalam satu lingkaran yang sama",
+                      "Diketahui salah satu busur/juring dan kedua sudutnya, lalu ditanya busur/juring yang lain",
+                      "Ingin membandingkan dua bagian lingkaran tanpa menghitung masing-masing dari 360°",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-violet-400 mt-0.5">✦</span>
+                        <p className="font-body text-xs text-white/75">{item}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Contoh kilat */}
+                <div className="rounded-xl border border-emerald-500/40 bg-emerald-900/20 p-4 space-y-3">
+                  <p className="font-body text-xs font-bold text-emerald-300 uppercase tracking-wide">⚡ Contoh Kilat</p>
+                  <p className="font-body text-sm text-white/85">
+                    Dalam satu lingkaran, sudut pusat α = 60° menghadap busur AB sepanjang <strong className="text-emerald-300">33 cm</strong>.
+                    Sudut pusat β = 45° menghadap busur CD. Berapa panjang busur CD?
+                  </p>
+                  <div className="bg-slate-800/60 border border-slate-600 rounded-lg p-3 space-y-2">
+                    <p className="text-slate-300 text-xs font-mono font-bold">Penyelesaian:</p>
+                    <BlockMath math="\frac{\text{Busur CD}}{\text{Busur AB}} = \frac{\beta}{\alpha} = \frac{45°}{60°} = \frac{3}{4}" />
+                    <BlockMath math="\text{Busur CD} = \frac{3}{4} \times 33 = 24{,}75 \text{ cm}" />
+                    <div className="bg-emerald-900/40 border border-emerald-500/30 rounded-lg p-2 mt-1">
+                      <p className="font-body text-sm text-emerald-300 text-center font-bold">
+                        ✅ Busur CD = 24,75 cm — tanpa perlu tahu jari-jarinya!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Catatan penting */}
+                <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-3">
+                  <p className="font-body text-xs text-red-200">
+                    ⚠️ <strong>Ingat:</strong> Konsep perbandingan ini hanya berlaku jika kedua busur/juring
+                    berada dalam <strong>lingkaran yang sama</strong> (jari-jari sama). Jika jari-jarinya berbeda,
+                    gunakan rumus dasar masing-masing!
+                  </p>
+                </div>
+
               </div>
             )}
           </div>
