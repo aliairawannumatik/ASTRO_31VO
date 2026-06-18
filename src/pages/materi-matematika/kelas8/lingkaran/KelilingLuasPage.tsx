@@ -102,12 +102,20 @@ const PiAnimationSVG = () => {
   /* Label "d": di atas saat pada lingkaran, di bawah saat sudah bergeser */
   const diamLabelY = peel < 0.05 ? CY - R - 8 : diamY + 14;
 
-  /* ── Segmen diameter (mulai dari d ke-2, karena d ke-1 = diameter yg bergeser) ── */
-  const SEGS = [
-    { x0: SEG_X0 + D,   len: D    * s2, color: '#3b82f6', label: 'd',      dashed: false },
-    { x0: SEG_X0 + 2*D, len: D    * s3, color: '#a855f7', label: 'd',      dashed: false },
-    { x0: SEG_X0 + 3*D, len: PART * s4, color: '#eab308', label: '≈0,14d', dashed: true  },
-  ];
+  /* ── Duplikat diameter ──
+     d2 (biru)  : salinan panjang D yang bergeser dari posisi d1 → posisi d2 (geser kanan).
+     d3 (ungu)  : salinan panjang D yang bergeser dari posisi d2 → posisi d3 (geser kanan).
+     sisa (kuning): panjang PART tumbuh dari ujung d3 (bukan duplikat, melainkan sisa).
+  */
+  // d2 slide: x1 bergerak dari SEG_X0 → SEG_X0+D, lebar tetap D
+  const d2x1 = SEG_X0 + D * s2;
+  const d2x2 = d2x1 + D;
+  // d3 slide: x1 bergerak dari SEG_X0+D → SEG_X0+2D, lebar tetap D
+  const d3x1 = SEG_X0 + D * (1 + s3);
+  const d3x2 = d3x1 + D;
+  // sisa tumbuh dari ujung d3
+  const sisaX1 = SEG_X0 + 3 * D;
+  const sisaX2 = sisaX1 + PART * s4;
 
   const phaseLabel =
     drawCircle < 0.5  ? '① Lingkaran terbentuk...' :
@@ -213,27 +221,68 @@ const PiAnimationSVG = () => {
           </g>
         )}
 
-        {/* ── Segmen diameter (perbandingan keliling ÷ d) ── */}
-        {SEGS.map((seg, i) => seg.len > 0.5 && (
-          <g key={i}>
-            <line x1={seg.x0} y1={SEG_Y} x2={seg.x0 + seg.len} y2={SEG_Y}
-              stroke={seg.color} strokeWidth="3.5" strokeLinecap="round"
-              strokeDasharray={seg.dashed ? '5 3' : undefined} />
-            <line x1={seg.x0} y1={SEG_Y - 5} x2={seg.x0} y2={SEG_Y + 5}
-              stroke={seg.color} strokeWidth="1.5" />
-            {seg.len > (i < 3 ? D*0.8 : PART*0.75) && (
+        {/* ── d1: tick mark kiri-kanan muncul setelah diameter tiba (s1) ── */}
+        {s1 > 0 && (
+          <g opacity={s1}>
+            <line x1={SEG_X0}   y1={SEG_Y-6} x2={SEG_X0}   y2={SEG_Y+6} stroke="#22c55e" strokeWidth="1.5"/>
+            <line x1={SEG_X0+D} y1={SEG_Y-6} x2={SEG_X0+D} y2={SEG_Y+6} stroke="#22c55e" strokeWidth="1.5"/>
+          </g>
+        )}
+
+        {/* ── d2 (biru): salinan diameter yg bergeser dari d1 → posisi d2 ── */}
+        {s2 > 0 && (
+          <g>
+            <line x1={d2x1} y1={SEG_Y} x2={d2x2} y2={SEG_Y}
+              stroke="rgba(59,130,246,0.25)" strokeWidth="9" strokeLinecap="round"/>
+            <line x1={d2x1} y1={SEG_Y} x2={d2x2} y2={SEG_Y}
+              stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
+            <line x1={d2x1} y1={SEG_Y-5} x2={d2x1} y2={SEG_Y+5} stroke="#3b82f6" strokeWidth="1.5"/>
+            <line x1={d2x2} y1={SEG_Y-5} x2={d2x2} y2={SEG_Y+5} stroke="#3b82f6" strokeWidth="1.5"/>
+            {s2 > 0.9 && (
+              <text x={(d2x1+d2x2)/2} y={SEG_Y+14} fill="#60a5fa" fontSize="8"
+                textAnchor="middle" fontFamily="monospace" fontWeight="bold"
+                opacity={cl((s2-0.9)/0.1)}>d</text>
+            )}
+          </g>
+        )}
+
+        {/* ── d3 (ungu): salinan diameter yg bergeser dari d2 → posisi d3 ── */}
+        {s3 > 0 && (
+          <g>
+            <line x1={d3x1} y1={SEG_Y} x2={d3x2} y2={SEG_Y}
+              stroke="rgba(168,85,247,0.25)" strokeWidth="9" strokeLinecap="round"/>
+            <line x1={d3x1} y1={SEG_Y} x2={d3x2} y2={SEG_Y}
+              stroke="#a855f7" strokeWidth="3" strokeLinecap="round"/>
+            <line x1={d3x1} y1={SEG_Y-5} x2={d3x1} y2={SEG_Y+5} stroke="#a855f7" strokeWidth="1.5"/>
+            <line x1={d3x2} y1={SEG_Y-5} x2={d3x2} y2={SEG_Y+5} stroke="#a855f7" strokeWidth="1.5"/>
+            {s3 > 0.9 && (
+              <text x={(d3x1+d3x2)/2} y={SEG_Y+14} fill="#c084fc" fontSize="8"
+                textAnchor="middle" fontFamily="monospace" fontWeight="bold"
+                opacity={cl((s3-0.9)/0.1)}>d</text>
+            )}
+          </g>
+        )}
+
+        {/* ── sisa ≈0,14d (kuning): tumbuh dari ujung d3 ── */}
+        {s4 > 0 && sisaX2 > sisaX1 + 0.5 && (
+          <g>
+            <line x1={sisaX1} y1={SEG_Y} x2={sisaX2} y2={SEG_Y}
+              stroke="rgba(234,179,8,0.25)" strokeWidth="9" strokeLinecap="round"
+              strokeDasharray="5 3"/>
+            <line x1={sisaX1} y1={SEG_Y} x2={sisaX2} y2={SEG_Y}
+              stroke="#eab308" strokeWidth="3" strokeLinecap="round"
+              strokeDasharray="5 3"/>
+            <line x1={sisaX1} y1={SEG_Y-5} x2={sisaX1} y2={SEG_Y+5} stroke="#eab308" strokeWidth="1.5"/>
+            {s4 > 0.85 && (
               <>
-                <line x1={seg.x0 + seg.len} y1={SEG_Y - 5}
-                      x2={seg.x0 + seg.len} y2={SEG_Y + 5}
-                  stroke={seg.color} strokeWidth="1.5" />
-                <text x={seg.x0 + seg.len / 2} y={SEG_Y + 14} fill={seg.color} fontSize="8"
-                  textAnchor="middle" fontFamily="monospace" fontWeight="bold">
-                  {seg.label}
-                </text>
+                <line x1={sisaX2} y1={SEG_Y-5} x2={sisaX2} y2={SEG_Y+5} stroke="#eab308" strokeWidth="1.5"/>
+                <text x={(sisaX1+sisaX2)/2} y={SEG_Y+14} fill="#facc15" fontSize="8"
+                  textAnchor="middle" fontFamily="monospace" fontWeight="bold"
+                  opacity={cl((s4-0.85)/0.15)}>≈0,14d</text>
               </>
             )}
           </g>
-        ))}
+        )}
 
         {/* Konektor dotted */}
         {s4 > 0.9 && (
