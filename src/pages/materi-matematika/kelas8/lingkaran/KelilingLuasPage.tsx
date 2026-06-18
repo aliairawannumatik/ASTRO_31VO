@@ -89,12 +89,21 @@ const PiAnimationSVG = () => {
   /* Label keliling (mengambang di atas garis) */
   const lineLen  = CIRC * peel;
   const labelY   = targetY - 11;
-  const diamOpacity = cl(1 - (peel - 0.1) / 0.4);
 
-  /* ── Segmen diameter ── */
-  const SEG_X0 = CX - CIRC / 2;
+  /* ── Diameter: bergeser ke bawah seiring peel, sejajar segmen pertama ──
+     Saat drawDiam berlangsung: tumbuh dari pusat di y=CY.
+     Saat peel berlangsung: bergeser dari (CX±R, CY) → (SEG_X0 … SEG_X0+D, SEG_Y).
+     Kedua band tidak tumpang tindih sehingga persamaan selalu benar.
+  */
+  const SEG_X0  = CX - CIRC / 2;
+  const diamX1  = (CX - R * drawDiam) + (SEG_X0          - (CX - R)) * peel;
+  const diamX2  = (CX + R * drawDiam) + (SEG_X0 + D      - (CX + R)) * peel;
+  const diamY   = CY + (SEG_Y - CY) * peel;
+  /* Label "d": di atas saat pada lingkaran, di bawah saat sudah bergeser */
+  const diamLabelY = peel < 0.05 ? CY - R - 8 : diamY + 14;
+
+  /* ── Segmen diameter (mulai dari d ke-2, karena d ke-1 = diameter yg bergeser) ── */
   const SEGS = [
-    { x0: SEG_X0,       len: D    * s1, color: '#22c55e', label: 'd',      dashed: false },
     { x0: SEG_X0 + D,   len: D    * s2, color: '#3b82f6', label: 'd',      dashed: false },
     { x0: SEG_X0 + 2*D, len: D    * s3, color: '#a855f7', label: 'd',      dashed: false },
     { x0: SEG_X0 + 3*D, len: PART * s4, color: '#eab308', label: '≈0,14d', dashed: true  },
@@ -172,16 +181,30 @@ const PiAnimationSVG = () => {
           </text>
         )}
 
-        {/* ── Diameter ── */}
-        {drawDiam > 0 && diamOpacity > 0.02 && (
-          <g opacity={drawDiam * diamOpacity}>
-            <line x1={CX - R * drawDiam} y1={CY} x2={CX + R * drawDiam} y2={CY}
+        {/* ── Diameter (tidak menghilang — bergeser ke bawah seiring peel) ── */}
+        {drawDiam > 0 && (
+          <g opacity={drawDiam}>
+            {/* glow */}
+            <line x1={diamX1} y1={diamY} x2={diamX2} y2={diamY}
+              stroke="rgba(34,197,94,0.20)" strokeWidth="8" strokeLinecap="round" />
+            {/* body */}
+            <line x1={diamX1} y1={diamY} x2={diamX2} y2={diamY}
               stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" />
             {drawDiam > 0.6 && (
               <>
-                <circle cx={CX - R} cy={CY} r="2.5" fill="#22c55e" />
-                <circle cx={CX + R} cy={CY} r="2.5" fill="#22c55e" />
-                <text x={CX} y={CY - R - 8} fill="#4ade80" fontSize="9"
+                <circle cx={diamX1} cy={diamY} r="2.5" fill="#22c55e" />
+                <circle cx={diamX2} cy={diamY} r="2.5" fill="#22c55e" />
+                {/* cap kanan (ketika sudah di posisi bawah) */}
+                {peel > 0.97 && (
+                  <>
+                    <line x1={diamX1} y1={diamY - 5} x2={diamX1} y2={diamY + 5}
+                      stroke="#22c55e" strokeWidth="1.5" />
+                    <line x1={diamX2} y1={diamY - 5} x2={diamX2} y2={diamY + 5}
+                      stroke="#22c55e" strokeWidth="1.5" />
+                  </>
+                )}
+                <text x={(diamX1 + diamX2) / 2} y={diamLabelY}
+                  fill="#4ade80" fontSize="9"
                   textAnchor="middle" fontFamily="monospace" fontWeight="bold">
                   d = {D}
                 </text>
