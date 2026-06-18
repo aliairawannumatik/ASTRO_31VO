@@ -79,6 +79,127 @@ const KolongSVG = () => (
   </svg>
 );
 
+const BanMenggelindingSVG = () => {
+  const r = 35;
+  const groundY = 148;
+  const startX = 50;
+  const wheelCY = groundY - r;
+  const dist = Math.round(2 * Math.PI * r); // ≈ 220
+  const endX = startX + dist;
+
+  const spokes = [0, 60, 120, 180, 240, 300];
+
+  return (
+    <svg viewBox="0 0 324 200" className="w-full max-w-md mx-auto" aria-label="Ban menggelinding satu putaran penuh">
+      <defs>
+        <style>{`
+          @keyframes wTranslate {
+            0%   { transform: translate(${startX}px, ${wheelCY}px); }
+            70%  { transform: translate(${endX}px, ${wheelCY}px); }
+            88%  { transform: translate(${endX}px, ${wheelCY}px); }
+            89%  { transform: translate(${startX}px, ${wheelCY}px); }
+            100% { transform: translate(${startX}px, ${wheelCY}px); }
+          }
+          @keyframes wOpacity {
+            0%   { opacity: 1; }
+            87%  { opacity: 1; }
+            88.5%{ opacity: 0; }
+            92%  { opacity: 0; }
+            94%  { opacity: 1; }
+            100% { opacity: 1; }
+          }
+          @keyframes wRotate {
+            0%   { transform: rotate(0deg); }
+            70%  { transform: rotate(360deg); }
+            88%  { transform: rotate(360deg); }
+            89%  { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+          }
+          @keyframes braceFade {
+            0%   { opacity: 0; }
+            69%  { opacity: 0; }
+            72%  { opacity: 1; }
+            87%  { opacity: 1; }
+            89%  { opacity: 0; }
+            100% { opacity: 0; }
+          }
+          @keyframes trailGrow {
+            0%   { stroke-dashoffset: ${dist}; }
+            70%  { stroke-dashoffset: 0; }
+            88%  { stroke-dashoffset: 0; }
+            89%  { stroke-dashoffset: ${dist}; }
+            100% { stroke-dashoffset: ${dist}; }
+          }
+          .ban-wt  { animation: wTranslate 5s ease-in-out infinite, wOpacity 5s ease-in-out infinite; }
+          .ban-wr  { transform-origin: 0px 0px; animation: wRotate 5s ease-in-out infinite; }
+          .ban-brace { animation: braceFade 5s ease-in-out infinite; }
+          .ban-trail { stroke-dasharray: ${dist}; animation: trailGrow 5s ease-in-out infinite; }
+        `}</style>
+      </defs>
+
+      {/* Top label */}
+      <text x="162" y="15" fill="#94a3b8" fontSize="10" textAnchor="middle" fontFamily="monospace" fontWeight="bold">
+        🛞 1 putaran penuh ban = 1 keliling lingkaran
+      </text>
+
+      {/* Trail on ground showing distance traveled */}
+      <line
+        x1={startX} y1={groundY - 1}
+        x2={endX}   y2={groundY - 1}
+        stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"
+        className="ban-trail"
+      />
+
+      {/* Ground */}
+      <line x1="8" y1={groundY} x2="316" y2={groundY} stroke="#475569" strokeWidth="2.5" strokeLinecap="round"/>
+
+      {/* Start tick */}
+      <line x1={startX} y1={groundY} x2={startX} y2={groundY + 9} stroke="#06b6d4" strokeWidth="2"/>
+      <text x={startX} y={groundY + 19} fill="#67e8f9" fontSize="8.5" textAnchor="middle" fontFamily="monospace">Mulai</text>
+
+      {/* Arrival brace + label (fades in when wheel arrives) */}
+      <g className="ban-brace">
+        <line x1={endX} y1={groundY} x2={endX} y2={groundY + 9} stroke="#22c55e" strokeWidth="2"/>
+        <line x1={startX} y1={groundY + 13} x2={endX} y2={groundY + 13} stroke="#fbbf24" strokeWidth="1.5"/>
+        <line x1={startX} y1={groundY + 10} x2={startX} y2={groundY + 16} stroke="#fbbf24" strokeWidth="1.5"/>
+        <line x1={endX}   y1={groundY + 10} x2={endX}   y2={groundY + 16} stroke="#fbbf24" strokeWidth="1.5"/>
+        <text x={(startX + endX) / 2} y={groundY + 29} fill="#fcd34d" fontSize="9.5" textAnchor="middle" fontFamily="monospace" fontWeight="bold">
+          Keliling = πd = 2πr
+        </text>
+        <text x={(startX + endX) / 2} y={groundY + 42} fill="#4ade80" fontSize="8.5" textAnchor="middle" fontFamily="monospace">
+          ✅ Tepat 1 putaran penuh!
+        </text>
+      </g>
+
+      {/* Wheel: outer group translates, inner group rotates */}
+      <g className="ban-wt">
+        <g className="ban-wr">
+          {/* Tire */}
+          <circle cx="0" cy="0" r={r} fill="rgba(15,23,42,0.95)" stroke="#64748b" strokeWidth="6"/>
+          {/* Inner ring */}
+          <circle cx="0" cy="0" r={r - 10} fill="none" stroke="#334155" strokeWidth="2"/>
+          {/* Spokes */}
+          {spokes.map(deg => {
+            const rad = (deg * Math.PI) / 180;
+            return (
+              <line key={deg}
+                x1="0" y1="0"
+                x2={(r - 7) * Math.cos(rad)}
+                y2={(r - 7) * Math.sin(rad)}
+                stroke="#94a3b8" strokeWidth="2" strokeLinecap="round"
+              />
+            );
+          })}
+          {/* Hub */}
+          <circle cx="0" cy="0" r={5} fill="#f59e0b" stroke="#fbbf24" strokeWidth="1.5"/>
+          {/* Red tracking dot on rim — traces rotation */}
+          <circle cx="0" cy={-(r - 6)} r={5.5} fill="#f43f5e" stroke="#fda4af" strokeWidth="1"/>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 const PenerapanKontekstualPage = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState<string[]>(["intro", "strategi", "contoh1", "contoh2", "contoh3", "rangkuman"]);
@@ -102,6 +223,26 @@ const PenerapanKontekstualPage = () => {
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">PENERAPAN LINGKARAN PADA MASALAH KONTEKSTUAL</h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Lingkaran · Materi Matematika</p>
+
+        {/* Hero: animasi ban menggelinding */}
+        <div className="rounded-xl border mb-4 px-4 pt-4 pb-5 text-center"
+          style={{ background: "rgba(15,23,42,.85)", borderColor: "rgba(6,182,212,.3)", backdropFilter: "blur(12px)" }}>
+          <p className="font-body text-xs text-white/55 mb-1 uppercase tracking-widest">Intuisi Awal</p>
+          <p className="font-body text-sm text-white/85 mb-3 leading-relaxed">
+            Bayangkan sebuah ban menggelinding di jalan lurus.{" "}
+            <strong className="text-cyan-300">Satu putaran penuh</strong> artinya ban menempuh jarak
+            yang <em>tepat sama</em> dengan <strong className="text-yellow-300">keliling lingkaran ban</strong> tersebut.
+          </p>
+          <BanMenggelindingSVG />
+          <div className="mt-3 flex flex-wrap justify-center gap-3">
+            <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg px-3 py-1.5">
+              <p className="text-yellow-300 text-xs font-mono font-bold">— Jejak kuning = jarak 1 putaran</p>
+            </div>
+            <div className="bg-red-900/30 border border-red-500/30 rounded-lg px-3 py-1.5">
+              <p className="text-red-300 text-xs font-mono font-bold">● Titik merah = penanda rotasi</p>
+            </div>
+          </div>
+        </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
