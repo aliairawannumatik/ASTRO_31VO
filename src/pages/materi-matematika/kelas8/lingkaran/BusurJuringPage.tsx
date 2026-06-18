@@ -2,11 +2,312 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical, Zap } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
+/* ─────────────────────────────────────────────
+   ANIMASI 1 — Panjang Busur Interaktif
+───────────────────────────────────────────── */
+const AnimasiBusur = () => {
+  const [angle, setAngle] = useState(90);
+  const [radius, setRadius] = useState(7);
+
+  const cx = 150, cy = 145;
+  const rPx = radius * 9;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+
+  const startX = cx + rPx;
+  const startY = cy;
+  const endX = cx + rPx * Math.cos(toRad(angle));
+  const endY = cy - rPx * Math.sin(toRad(angle));
+  const largeArc = angle > 180 ? 1 : 0;
+  const remainLargeArc = largeArc === 1 ? 0 : 1;
+
+  // Arc label — outside the circle at midpoint of arc
+  const midRad = toRad(angle / 2);
+  const arcLabelDist = rPx + (angle < 40 ? 32 : 22);
+  const arcLabelX = cx + arcLabelDist * Math.cos(midRad);
+  const arcLabelY = cy - arcLabelDist * Math.sin(midRad);
+
+  // Angle indicator arc (small, near center)
+  const indR = 28;
+  const indEndX = cx + indR * Math.cos(toRad(angle));
+  const indEndY = cy - indR * Math.sin(toRad(angle));
+
+  // Alpha label inside angle indicator
+  const alphaR = 44;
+  const alphaLabelX = cx + alphaR * Math.cos(midRad);
+  const alphaLabelY = cy - alphaR * Math.sin(midRad);
+
+  // r label midpoint along horizontal radius
+  const rMidX = cx + rPx / 2;
+
+  // Point B label — push away from circle
+  const bLabelX = endX + 12 * Math.cos(toRad(angle));
+  const bLabelY = endY - 12 * Math.sin(toRad(angle));
+
+  const arcLength = ((angle / 360) * 2 * Math.PI * radius).toFixed(2);
+
+  return (
+    <div className="space-y-4">
+      <svg viewBox="0 0 300 285" className="w-full max-w-xs mx-auto">
+        <defs>
+          <style>{`
+            @keyframes bPulse{0%,100%{stroke-width:6;filter:drop-shadow(0 0 7px #f59e0b);}50%{stroke-width:8;filter:drop-shadow(0 0 16px #f59e0b);}}
+            .b-glow{animation:bPulse 1.4s ease-in-out infinite;}
+          `}</style>
+        </defs>
+
+        {/* Full circle outline (dim) */}
+        <circle cx={cx} cy={cy} r={rPx}
+          fill="rgba(6,182,212,0.06)" stroke="#164e63" strokeWidth="1.5"/>
+
+        {/* Remaining arc (dim, CW from A to B) */}
+        <path
+          d={`M ${startX} ${startY} A ${rPx} ${rPx} 0 ${remainLargeArc} 1 ${endX} ${endY}`}
+          fill="none" stroke="#0c2b40" strokeWidth="3" opacity="0.55"/>
+
+        {/* Glowing busur */}
+        <path
+          d={`M ${startX} ${startY} A ${rPx} ${rPx} 0 ${largeArc} 0 ${endX} ${endY}`}
+          fill="none" stroke="#f59e0b" strokeLinecap="round"
+          className="b-glow"/>
+
+        {/* Two radii (dashed green) */}
+        <line x1={cx} y1={cy} x2={startX} y2={startY}
+          stroke="#4ade80" strokeWidth="1.8" strokeDasharray="5 3"/>
+        <line x1={cx} y1={cy} x2={endX} y2={endY}
+          stroke="#4ade80" strokeWidth="1.8" strokeDasharray="5 3"/>
+
+        {/* r label on horizontal radius */}
+        <text x={rMidX} y={cy - 7} fill="#4ade80" fontSize="10"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">r={radius}cm</text>
+
+        {/* Angle indicator arc (small) */}
+        <path
+          d={`M ${cx + indR} ${cy} A ${indR} ${indR} 0 ${largeArc} 0 ${indEndX} ${indEndY}`}
+          fill="none" stroke="#fbbf24" strokeWidth="1.8"/>
+
+        {/* α label */}
+        <text x={alphaLabelX} y={alphaLabelY + 4} fill="#fde68a" fontSize="11"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">{angle}°</text>
+
+        {/* Arc label box outside circle */}
+        <text x={arcLabelX} y={arcLabelY - 7} fill="#fef08a" fontSize="10"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">Busur AB</text>
+        <text x={arcLabelX} y={arcLabelY + 7} fill="#f59e0b" fontSize="10"
+          fontFamily="monospace" textAnchor="middle">≈ {arcLength} cm</text>
+
+        {/* Center O */}
+        <circle cx={cx} cy={cy} r="4" fill="#06b6d4"/>
+        <text x={cx + 7} y={cy - 5} fill="#67e8f9" fontSize="11"
+          fontFamily="monospace" fontWeight="bold">O</text>
+
+        {/* Point A */}
+        <circle cx={startX} cy={startY} r="4.5" fill="#f59e0b"/>
+        <text x={startX + 9} y={startY + 5} fill="#fef08a" fontSize="12"
+          fontFamily="monospace" fontWeight="bold">A</text>
+
+        {/* Point B */}
+        <circle cx={endX} cy={endY} r="4.5" fill="#f59e0b"/>
+        <text x={bLabelX} y={bLabelY + 4} fill="#fef08a" fontSize="12"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">B</text>
+      </svg>
+
+      {/* Sliders */}
+      <div className="space-y-3 px-1">
+        <div>
+          <div className="flex justify-between text-xs font-body text-white/70 mb-1">
+            <span>🔄 Sudut α</span>
+            <span className="text-amber-300 font-bold">{angle}°</span>
+          </div>
+          <input type="range" min="15" max="345" step="5" value={angle}
+            onChange={e => { setAngle(Number(e.target.value)); playPopSound(); }}
+            className="w-full accent-amber-400 cursor-pointer h-2"/>
+        </div>
+        <div>
+          <div className="flex justify-between text-xs font-body text-white/70 mb-1">
+            <span>📏 Jari-jari r</span>
+            <span className="text-green-300 font-bold">{radius} cm</span>
+          </div>
+          <input type="range" min="3" max="9" step="1" value={radius}
+            onChange={e => { setRadius(Number(e.target.value)); playPopSound(); }}
+            className="w-full accent-green-400 cursor-pointer h-2"/>
+        </div>
+      </div>
+
+      {/* Formula result */}
+      <div className="rounded-xl p-3 border"
+        style={{ background: "rgba(251,191,36,.1)", borderColor: "rgba(251,191,36,.35)" }}>
+        <p className="text-xs text-white/55 font-body text-center mb-1">Panjang Busur AB</p>
+        <p className="text-amber-300 text-xs font-mono text-center">
+          = ({angle}/360) × 2π × {radius} cm
+        </p>
+        <p className="text-white font-bold text-xl text-center mt-1">≈ {arcLength} cm</p>
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   ANIMASI 2 — Luas Juring Interaktif
+───────────────────────────────────────────── */
+const AnimasiJuring = () => {
+  const [angle, setAngle] = useState(90);
+  const [radius, setRadius] = useState(7);
+
+  const cx = 150, cy = 145;
+  const rPx = radius * 9;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+
+  const startX = cx + rPx;
+  const startY = cy;
+  const endX = cx + rPx * Math.cos(toRad(angle));
+  const endY = cy - rPx * Math.sin(toRad(angle));
+  const largeArc = angle > 180 ? 1 : 0;
+  const remainLargeArc = largeArc === 1 ? 0 : 1;
+
+  // Label inside sector
+  const midRad = toRad(angle / 2);
+  const labelInR = rPx * 0.52;
+  const secLabelX = cx + labelInR * Math.cos(midRad);
+  const secLabelY = cy - labelInR * Math.sin(midRad);
+
+  // Angle indicator arc (small)
+  const indR = 28;
+  const indEndX = cx + indR * Math.cos(toRad(angle));
+  const indEndY = cy - indR * Math.sin(toRad(angle));
+
+  // α label
+  const alphaR = 46;
+  const alphaLabelX = cx + alphaR * Math.cos(midRad);
+  const alphaLabelY = cy - alphaR * Math.sin(midRad);
+
+  // r label
+  const rMidX = cx + rPx / 2;
+
+  // B label
+  const bLabelX = endX + 12 * Math.cos(toRad(angle));
+  const bLabelY = endY - 12 * Math.sin(toRad(angle));
+
+  const sectorArea = ((angle / 360) * Math.PI * radius * radius).toFixed(2);
+
+  // For very small angle, put label outside
+  const labelInside = angle >= 25;
+  const outsideLabelR = rPx + 24;
+  const outsideLabelX = cx + outsideLabelR * Math.cos(midRad);
+  const outsideLabelY = cy - outsideLabelR * Math.sin(midRad);
+  const lx = labelInside ? secLabelX : outsideLabelX;
+  const ly = labelInside ? secLabelY : outsideLabelY;
+
+  return (
+    <div className="space-y-4">
+      <svg viewBox="0 0 300 285" className="w-full max-w-xs mx-auto">
+        <defs>
+          <style>{`
+            @keyframes jFill{0%,100%{opacity:.55;filter:drop-shadow(0 0 8px #a855f7);}50%{opacity:.82;filter:drop-shadow(0 0 20px #a855f7);}}
+            @keyframes jStroke{0%,100%{stroke:#a855f7;}50%{stroke:#d8b4fe;filter:drop-shadow(0 0 6px #c084fc);}}
+            .j-fill{animation:jFill 1.4s ease-in-out infinite;}
+            .j-stroke{animation:jStroke 1.4s ease-in-out infinite;}
+          `}</style>
+        </defs>
+
+        {/* Full circle outline (dim) */}
+        <circle cx={cx} cy={cy} r={rPx}
+          fill="rgba(6,182,212,0.04)" stroke="#164e63" strokeWidth="1.5" opacity="0.5"/>
+
+        {/* Remaining arc (dim) */}
+        <path
+          d={`M ${startX} ${startY} A ${rPx} ${rPx} 0 ${remainLargeArc} 1 ${endX} ${endY}`}
+          fill="none" stroke="#1e293b" strokeWidth="1.5" opacity="0.5"/>
+
+        {/* Sector fill — glowing */}
+        <path
+          d={`M ${cx} ${cy} L ${startX} ${startY} A ${rPx} ${rPx} 0 ${largeArc} 0 ${endX} ${endY} Z`}
+          fill="rgba(168,85,247,0.55)" stroke="none"
+          className="j-fill"/>
+
+        {/* Sector outline — glowing */}
+        <path
+          d={`M ${cx} ${cy} L ${startX} ${startY} A ${rPx} ${rPx} 0 ${largeArc} 0 ${endX} ${endY} Z`}
+          fill="none" strokeWidth="2.5"
+          className="j-stroke"/>
+
+        {/* Angle indicator arc */}
+        <path
+          d={`M ${cx + indR} ${cy} A ${indR} ${indR} 0 ${largeArc} 0 ${indEndX} ${indEndY}`}
+          fill="none" stroke="#fbbf24" strokeWidth="1.8"/>
+
+        {/* α label */}
+        <text x={alphaLabelX} y={alphaLabelY + 4} fill="#fde68a" fontSize="11"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">{angle}°</text>
+
+        {/* r label */}
+        <text x={rMidX} y={cy - 7} fill="#c4b5fd" fontSize="10"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">r={radius}cm</text>
+
+        {/* Sector area label */}
+        <text x={lx} y={ly - 7} fill="#e9d5ff" fontSize="10"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">Juring</text>
+        <text x={lx} y={ly + 7} fill="#d8b4fe" fontSize="10"
+          fontFamily="monospace" textAnchor="middle">{sectorArea} cm²</text>
+
+        {/* Center O */}
+        <circle cx={cx} cy={cy} r="4" fill="#06b6d4"/>
+        <text x={cx + 7} y={cy - 5} fill="#67e8f9" fontSize="11"
+          fontFamily="monospace" fontWeight="bold">O</text>
+
+        {/* Point A */}
+        <circle cx={startX} cy={startY} r="4.5" fill="#c084fc"/>
+        <text x={startX + 9} y={startY + 5} fill="#e9d5ff" fontSize="12"
+          fontFamily="monospace" fontWeight="bold">A</text>
+
+        {/* Point B */}
+        <circle cx={endX} cy={endY} r="4.5" fill="#c084fc"/>
+        <text x={bLabelX} y={bLabelY + 4} fill="#e9d5ff" fontSize="12"
+          fontFamily="monospace" fontWeight="bold" textAnchor="middle">B</text>
+      </svg>
+
+      {/* Sliders */}
+      <div className="space-y-3 px-1">
+        <div>
+          <div className="flex justify-between text-xs font-body text-white/70 mb-1">
+            <span>🔄 Sudut α</span>
+            <span className="text-purple-300 font-bold">{angle}°</span>
+          </div>
+          <input type="range" min="15" max="345" step="5" value={angle}
+            onChange={e => { setAngle(Number(e.target.value)); playPopSound(); }}
+            className="w-full accent-purple-400 cursor-pointer h-2"/>
+        </div>
+        <div>
+          <div className="flex justify-between text-xs font-body text-white/70 mb-1">
+            <span>📏 Jari-jari r</span>
+            <span className="text-violet-300 font-bold">{radius} cm</span>
+          </div>
+          <input type="range" min="3" max="9" step="1" value={radius}
+            onChange={e => { setRadius(Number(e.target.value)); playPopSound(); }}
+            className="w-full accent-violet-400 cursor-pointer h-2"/>
+        </div>
+      </div>
+
+      {/* Formula result */}
+      <div className="rounded-xl p-3 border"
+        style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
+        <p className="text-xs text-white/55 font-body text-center mb-1">Luas Juring OAB</p>
+        <p className="text-purple-300 text-xs font-mono text-center">
+          = ({angle}/360) × π × {radius}² cm²
+        </p>
+        <p className="text-white font-bold text-xl text-center mt-1">≈ {sectorArea} cm²</p>
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   Static SVGs (kept from original)
+───────────────────────────────────────────── */
 const BusurJuringSVG = () => (
   <svg viewBox="0 0 300 240" className="w-full max-w-sm mx-auto my-2" aria-label="Busur dan juring lingkaran">
     <defs>
@@ -53,9 +354,12 @@ const TemberengLengkapSVG = () => (
   </svg>
 );
 
+/* ─────────────────────────────────────────────
+   MAIN PAGE
+───────────────────────────────────────────── */
 const BusurJuringPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "rumus", "contoh1", "contoh2", "contoh3", "rangkuman"]);
+  const [open, setOpen] = useState<string[]>(["intro", "animasi1", "animasi2", "rumus", "contoh1", "contoh2", "contoh3", "rangkuman"]);
   const toggle = (id: string) => { playPopSound(); setOpen(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]); };
 
   const SectionHeader = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
@@ -79,6 +383,7 @@ const BusurJuringPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
+          {/* ── INTRO ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🍕 Analogi Pizza yang Sempurna" />
             {open.includes("intro") && (
@@ -96,6 +401,43 @@ const BusurJuringPage = () => {
             )}
           </div>
 
+          {/* ── ANIMASI 1 — PANJANG BUSUR ── */}
+          <div className="rounded-xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.8)", borderColor: "rgba(251,191,36,.3)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="animasi1" icon={<Zap className="w-5 h-5" />} iconColor="text-amber-400"
+              title="⚡ Animasi 1 — Eksplorasi Panjang Busur" />
+            {open.includes("animasi1") && (
+              <div className="px-5 pb-5 pt-2 space-y-4">
+                <div className="rounded-xl p-3 border"
+                  style={{ background: "rgba(251,191,36,.08)", borderColor: "rgba(251,191,36,.25)" }}>
+                  <p className="text-amber-200 text-xs font-body leading-relaxed">
+                    🎯 Geser slider <strong>sudut α</strong> dan lihat busur yang menyala (🟠) membesar/mengecil sesuai kelipatan sudutnya. Geser <strong>jari-jari r</strong> untuk ubah ukuran lingkaran. Panjang busur dihitung otomatis!
+                  </p>
+                </div>
+                <AnimasiBusur />
+              </div>
+            )}
+          </div>
+
+          {/* ── ANIMASI 2 — LUAS JURING ── */}
+          <div className="rounded-xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.8)", borderColor: "rgba(168,85,247,.3)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="animasi2" icon={<Zap className="w-5 h-5" />} iconColor="text-purple-400"
+              title="⚡ Animasi 2 — Eksplorasi Luas Juring" />
+            {open.includes("animasi2") && (
+              <div className="px-5 pb-5 pt-2 space-y-4">
+                <div className="rounded-xl p-3 border"
+                  style={{ background: "rgba(168,85,247,.08)", borderColor: "rgba(168,85,247,.25)" }}>
+                  <p className="text-purple-200 text-xs font-body leading-relaxed">
+                    🎯 Geser slider <strong>sudut α</strong> dan lihat juring yang bercahaya (🟣) membesar/mengecil. Perbesar juga <strong>jari-jari r</strong> — juringnya ikut membesar! Luas juring dihitung secara real-time.
+                  </p>
+                </div>
+                <AnimasiJuring />
+              </div>
+            )}
+          </div>
+
+          {/* ── RUMUS ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rumus" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📐 Rumus Panjang Busur, Luas Juring & Tembereng" />
             {open.includes("rumus") && (
@@ -124,6 +466,7 @@ const BusurJuringPage = () => {
             )}
           </div>
 
+          {/* ── CONTOH 1 ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Panjang Busur (Mudah)" />
             {open.includes("contoh1") && (
@@ -148,6 +491,7 @@ const BusurJuringPage = () => {
             )}
           </div>
 
+          {/* ── CONTOH 2 ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Luas Juring (Sedang)" />
             {open.includes("contoh2") && (
@@ -177,6 +521,7 @@ const BusurJuringPage = () => {
             )}
           </div>
 
+          {/* ── CONTOH 3 ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Luas Tembereng (Sulit)" />
             {open.includes("contoh3") && (
@@ -204,6 +549,7 @@ const BusurJuringPage = () => {
             )}
           </div>
 
+          {/* ── RANGKUMAN ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title="📌 Rangkuman Sub-Bab" />
             {open.includes("rangkuman") && (
