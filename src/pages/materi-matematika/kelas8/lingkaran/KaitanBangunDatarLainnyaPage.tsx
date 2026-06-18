@@ -452,6 +452,90 @@ const SoalSVG7 = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
+   SVG C8 – Persegi 14 cm, 4 seperempat lingkaran r=7 cm di setiap
+   sudut, saling bersinggungan di tengah sisi. Arsiran = daerah tengah
+   (area persegi TIDAK tertutup oleh keempat busur).
+   Square TL(20,20)→BR(240,240), side=220px. r=110px (=7cm).
+   Midpoints: top(130,20) right(240,130) bottom(130,240) left(20,130)
+   Center region bounded by 4 clockwise arcs from each corner.
+═══════════════════════════════════════════════════════════════════ */
+const ContohDelapanSVG = () => (
+  <svg viewBox="0 0 270 270" className="w-full max-w-xs mx-auto" aria-label="Persegi dengan 4 seperempat lingkaran di sudut, arsiran tengah">
+    <defs>
+      <style>{`
+        @keyframes lf8{0%,100%{opacity:.48;}50%{opacity:.82;}}
+        @keyframes lf8g{0%,100%{filter:drop-shadow(0 0 8px #f59e0b);}50%{filter:drop-shadow(0 0 22px #f59e0b);}}
+        .lf8-fill{animation:lf8 2.4s ease-in-out infinite;}
+        .lf8-out{animation:lf8g 2.4s ease-in-out infinite;}
+      `}</style>
+    </defs>
+
+    {/* ── 4 quarter-circle sectors (faint fill, dashed arc outline) ── */}
+    {/* TL: center(20,20), arc from (130,20) to (20,130), CW sweep=1 */}
+    <path d="M20,20 L130,20 A110,110,0,0,1,20,130 Z"
+      fill="rgba(148,163,184,.13)" stroke="none"/>
+    <path d="M130,20 A110,110,0,0,1,20,130"
+      fill="none" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="5 3" opacity=".7"/>
+
+    {/* TR: center(240,20), arc from (130,20) to (240,130), CCW sweep=0 */}
+    <path d="M240,20 L130,20 A110,110,0,0,0,240,130 Z"
+      fill="rgba(148,163,184,.13)" stroke="none"/>
+    <path d="M130,20 A110,110,0,0,0,240,130"
+      fill="none" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="5 3" opacity=".7"/>
+
+    {/* BL: center(20,240), arc from (20,130) to (130,240), CW sweep=1 */}
+    <path d="M20,240 L20,130 A110,110,0,0,1,130,240 Z"
+      fill="rgba(148,163,184,.13)" stroke="none"/>
+    <path d="M20,130 A110,110,0,0,1,130,240"
+      fill="none" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="5 3" opacity=".7"/>
+
+    {/* BR: center(240,240), arc from (130,240) to (240,130), CCW sweep=0 */}
+    <path d="M240,240 L130,240 A110,110,0,0,0,240,130 Z"
+      fill="rgba(148,163,184,.13)" stroke="none"/>
+    <path d="M130,240 A110,110,0,0,0,240,130"
+      fill="none" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="5 3" opacity=".7"/>
+
+    {/* ── Center shaded region ── */}
+    {/* Bounded by 4 inward-curving arcs, one from each corner */}
+    {/* M top-mid → TL arc CW → left-mid → BL arc CW → bottom-mid → BR arc CCW → right-mid → TR arc CCW → top-mid */}
+    <path
+      d="M130,20 A110,110,0,0,1,20,130 A110,110,0,0,1,130,240 A110,110,0,0,1,240,130 A110,110,0,0,1,130,20 Z"
+      fill="#f59e0b" className="lf8-fill"
+    />
+    <path
+      d="M130,20 A110,110,0,0,1,20,130 A110,110,0,0,1,130,240 A110,110,0,0,1,240,130 A110,110,0,0,1,130,20 Z"
+      fill="none" stroke="#fbbf24" strokeWidth="2.5" className="lf8-out"
+    />
+
+    {/* ── Square outline ── */}
+    <rect x="20" y="20" width="220" height="220" fill="none" stroke="#64748b" strokeWidth="2.5"/>
+
+    {/* ── Tangent-point dots at side midpoints ── */}
+    <circle cx="130" cy="20"  r="3.5" fill="#22d3ee"/>
+    <circle cx="20"  cy="130" r="3.5" fill="#22d3ee"/>
+    <circle cx="130" cy="240" r="3.5" fill="#22d3ee"/>
+    <circle cx="240" cy="130" r="3.5" fill="#22d3ee"/>
+
+    {/* ── Radius label (TL corner to top midpoint) ── */}
+    <line x1="20" y1="20" x2="130" y2="20" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="4 2" opacity=".8"/>
+    <text x="75" y="15" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r = 7 cm</text>
+
+    {/* ── Corner dot TL ── */}
+    <circle cx="20"  cy="20"  r="3" fill="#64748b"/>
+    <circle cx="240" cy="20"  r="3" fill="#64748b"/>
+    <circle cx="20"  cy="240" r="3" fill="#64748b"/>
+    <circle cx="240" cy="240" r="3" fill="#64748b"/>
+
+    {/* ── Arsiran label ── */}
+    <text x="130" y="134" fill="#fde68a" fontSize="9.5" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Arsiran</text>
+
+    {/* ── Dimension labels ── */}
+    <text x="130" y="260" fill="#94a3b8" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
+    <text x="7"   y="134" fill="#94a3b8" fontSize="10" fontFamily="monospace" transform="rotate(-90,7,134)">14 cm</text>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
    SVG C8 – Persegi 7 cm, daun diagonal (lensa dari 2 busur 90°)
    Square (30,20)→(220,210), side=190≈7cm. Arcs centered at top-right
    & bottom-left corners, r=190.
@@ -460,25 +544,19 @@ const SoalSVG8 = () => (
   <svg viewBox="0 0 250 240" className="w-full max-w-xs mx-auto" aria-label="Diagonal leaf in square">
     <defs>
       <style>{`
-        @keyframes lf8{0%,100%{opacity:.45;}50%{opacity:.78;}}
-        @keyframes lf8g{0%,100%{filter:drop-shadow(0 0 7px #14b8a6);}50%{filter:drop-shadow(0 0 18px #14b8a6);}}
-        .lf8-fill{animation:lf8 2.4s ease-in-out infinite;}
-        .lf8-out{animation:lf8g 2.4s ease-in-out infinite;}
+        @keyframes lf8b{0%,100%{opacity:.45;}50%{opacity:.78;}}
+        @keyframes lf8bg{0%,100%{filter:drop-shadow(0 0 7px #14b8a6);}50%{filter:drop-shadow(0 0 18px #14b8a6);}}
+        .lf8b-fill{animation:lf8b 2.4s ease-in-out infinite;}
+        .lf8b-out{animation:lf8bg 2.4s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Square outline */}
     <rect x="30" y="20" width="190" height="190" fill="none" stroke="#94a3b8" strokeWidth="2" opacity=".6"/>
-    {/* Leaf fill: lens from (30,20)→(220,210) bounded by 2 arcs */}
-    {/* Arc 1: center bottom-left (30,210), from (220,210) to (30,20) */}
-    {/* Arc 2: center top-right (220,20), from (30,20) to (220,210) */}
     <path d="M30,20 A190,190,0,0,1,220,210 A190,190,0,0,1,30,20 Z"
-      fill="#14b8a6" className="lf8-fill"/>
+      fill="#14b8a6" className="lf8b-fill"/>
     <path d="M30,20 A190,190,0,0,1,220,210 A190,190,0,0,1,30,20 Z"
-      fill="none" stroke="#2dd4bf" strokeWidth="2.5" className="lf8-out"/>
-    {/* Arc outlines for clarity */}
+      fill="none" stroke="#2dd4bf" strokeWidth="2.5" className="lf8b-out"/>
     <path d="M30,20 A190,190,0,0,1,220,210" fill="none" stroke="#2dd4bf" strokeWidth="2.5"/>
     <path d="M220,210 A190,190,0,0,1,30,20" fill="none" stroke="#2dd4bf" strokeWidth="2.5"/>
-    {/* Dimension */}
     <text x="122" y="228" fill="#2dd4bf" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">7 cm</text>
     <text x="9" y="118" fill="#2dd4bf" fontSize="10" fontFamily="monospace" transform="rotate(-90,9,118)">7 cm</text>
   </svg>
@@ -905,7 +983,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                     Di dalam persegi bersisi 14 cm, dari keempat sudutnya dibuat busur seperempat lingkaran (jari-jari = 14 cm). Keempat busur tersebut membentuk bintang 4 titik di tengah persegi. Hitunglah luas daerah bintang yang diarsir! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                   </p>
                 </div>
-                <SoalSVG6 />
+                <ContohDelapanSVG />
                 <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                   <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
                   <p className="font-body text-sm text-white/80">
