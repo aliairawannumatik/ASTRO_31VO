@@ -904,12 +904,6 @@ const SoalSVG15 = () => (
     <line x1="30"  y1="200" x2="30"  y2="208" stroke="#fbbf24" strokeWidth="1" opacity=".5"/>
     <line x1="160" y1="200" x2="160" y2="208" stroke="#fbbf24" strokeWidth="1" opacity=".5"/>
 
-    {/* Jari-jari putus-putus ke titik tengah busur (sudut 315° dari C) ≈ (122,93) */}
-    <line x1="30" y1="185" x2="122" y2="93"
-      stroke="#c084fc" strokeWidth="1.2" strokeDasharray="4 2" opacity=".55"/>
-
-    {/* Label: r = 14 cm */}
-    <text x="108" y="112" fill="#e9d5ff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r = 14 cm</text>
   </svg>
 );
 
