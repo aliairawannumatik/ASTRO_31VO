@@ -439,9 +439,15 @@ const SoalSVG7 = () => (
     <path d="M140,160 A60,60,0,0,1,260,160" fill="none" stroke="#38bdf8" strokeWidth="2"/>
     {/* Base line */}
     <line x1="20" y1="160" x2="260" y2="160" stroke="#64748b" strokeWidth="1.5" opacity=".6"/>
-    {/* Dimension labels */}
-    <text x="137" y="180" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
-    <line x1="268" y1="40" x2="268" y2="160" stroke="#4ade80" strokeWidth="1.2" opacity=".6"/>
+    {/* Garis bantu: 28 cm (lebar persegi panjang, bawah) */}
+    <line x1="20"  y1="172" x2="260" y2="172" stroke="#38bdf8" strokeWidth="1.3" opacity=".8"/>
+    <line x1="20"  y1="168" x2="20"  y2="176" stroke="#38bdf8" strokeWidth="1.2" opacity=".8"/>
+    <line x1="260" y1="168" x2="260" y2="176" stroke="#38bdf8" strokeWidth="1.2" opacity=".8"/>
+    <text x="140" y="188" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
+    {/* Garis bantu: 14 cm (tinggi, kanan) */}
+    <line x1="268" y1="40" x2="268" y2="160" stroke="#4ade80" strokeWidth="1.2" opacity=".7"/>
+    <line x1="264" y1="40"  x2="272" y2="40"  stroke="#4ade80" strokeWidth="1" opacity=".6"/>
+    <line x1="264" y1="160" x2="272" y2="160" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
     <text x="277" y="105" fill="#4ade80" fontSize="9" fontFamily="monospace" transform="rotate(90,277,105)">14 cm</text>
     {/* R labels */}
     <line x1="140" y1="160" x2="140" y2="40" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4 2" opacity=".6"/>
@@ -470,30 +476,19 @@ const ContohDelapanSVG = () => (
       `}</style>
     </defs>
 
-    {/* ── 4 quarter-circle sectors (faint fill, dashed arc outline) ── */}
-    {/* TL: center(20,20), arc from (130,20) to (20,130), CW sweep=1 */}
+    {/* ── 4 quarter-circle sectors (faint fill only, no arc outline) ── */}
+    {/* TL: center(20,20) */}
     <path d="M20,20 L130,20 A110,110,0,0,1,20,130 Z"
       fill="rgba(148,163,184,.13)" stroke="none"/>
-    <path d="M130,20 A110,110,0,0,1,20,130"
-      fill="none" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="5 3" opacity=".7"/>
-
-    {/* TR: center(240,20), arc from (130,20) to (240,130), CCW sweep=0 */}
+    {/* TR: center(240,20) */}
     <path d="M240,20 L130,20 A110,110,0,0,0,240,130 Z"
       fill="rgba(148,163,184,.13)" stroke="none"/>
-    <path d="M130,20 A110,110,0,0,0,240,130"
-      fill="none" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="5 3" opacity=".7"/>
-
-    {/* BL: center(20,240), arc from (20,130) to (130,240), CW sweep=1 */}
+    {/* BL: center(20,240) */}
     <path d="M20,240 L20,130 A110,110,0,0,1,130,240 Z"
       fill="rgba(148,163,184,.13)" stroke="none"/>
-    <path d="M20,130 A110,110,0,0,1,130,240"
-      fill="none" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="5 3" opacity=".7"/>
-
-    {/* BR: center(240,240), arc from (130,240) to (240,130), CCW sweep=0 */}
+    {/* BR: center(240,240) */}
     <path d="M240,240 L130,240 A110,110,0,0,0,240,130 Z"
       fill="rgba(148,163,184,.13)" stroke="none"/>
-    <path d="M130,240 A110,110,0,0,0,240,130"
-      fill="none" stroke="#94a3b8" strokeWidth="1.8" strokeDasharray="5 3" opacity=".7"/>
 
     {/* ── Center shaded region ── */}
     {/* Bounded by 4 inward-curving arcs, one from each corner */}
@@ -734,7 +729,7 @@ const FormulaCard = ({ color, label, luas, keliling }: {
    Scale: 10 cm → 90 px, 24 cm → 216 px, 26 cm → 234 px.
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG13 = () => (
-  <svg viewBox="0 0 280 360" className="w-full max-w-xs mx-auto" aria-label="Es krim: setengah lingkaran di atas segitiga">
+  <svg viewBox="0 -20 280 380" className="w-full max-w-xs mx-auto" aria-label="Es krim: setengah lingkaran di atas segitiga">
     <defs>
       <style>{`
         @keyframes ek13{0%,100%{opacity:.42;}50%{opacity:.72;}}
@@ -768,11 +763,11 @@ const SoalSVG13 = () => (
     <polyline points="140,100 152,100 152,112" fill="none" stroke="#22d3ee" strokeWidth="1.2" opacity=".7"/>
 
     {/* ── Labels ── */}
-    {/* Diameter: 20 cm above semicircle */}
-    <text x="140" y="22" fill="#fbbf24" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">20 cm</text>
-    <line x1="50" y1="28" x2="230" y2="28" stroke="#fbbf24" strokeWidth="1.2" opacity=".5"/>
-    <line x1="50" y1="24" x2="50" y2="32" stroke="#fbbf24" strokeWidth="1.2" opacity=".5"/>
-    <line x1="230" y1="24" x2="230" y2="32" stroke="#fbbf24" strokeWidth="1.2" opacity=".5"/>
+    {/* Diameter: 20 cm — geser ke atas agar tidak bertabrakan dengan bangun */}
+    <text x="140" y="-8" fill="#fbbf24" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">20 cm</text>
+    <line x1="50" y1="-2" x2="230" y2="-2" stroke="#fbbf24" strokeWidth="1.2" opacity=".6"/>
+    <line x1="50" y1="-6"  x2="50"  y2="2"  stroke="#fbbf24" strokeWidth="1.2" opacity=".6"/>
+    <line x1="230" y1="-6" x2="230" y2="2"  stroke="#fbbf24" strokeWidth="1.2" opacity=".6"/>
 
     {/* Radius label inside semicircle */}
     <line x1="140" y1="100" x2="230" y2="100" stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="4 2" opacity=".6"/>
@@ -803,7 +798,7 @@ const SoalSVG13 = () => (
    Combined path: M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG14 = () => (
-  <svg viewBox="0 95 325 135" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri menempel sisi kiri">
+  <svg viewBox="0 95 295 125" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri menempel sisi kiri">
     <defs>
       <style>{`
         @keyframes sv14f{0%,100%{opacity:.42;}50%{opacity:.76;}}
@@ -812,11 +807,16 @@ const SoalSVG14 = () => (
         .sv14-out{animation:sv14g 2.4s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Combined fill: quarter-circle sector (lower-left, flush with left side) + trapezoid */}
-    {/* Quarter circle center=(90,195)=bottom-left of trapezoid, r=70.
-        Arc from (20,195) CW to (90,125) — sector bulges upper-left. */}
-    <path d="M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z"
+    {/* Arsiran HANYA tembereng: busur A→B + tali busur B→A (Z menutup lurus) */}
+    {/* A(20,195) → arc CW r=70 → B(90,125) → garis lurus kembali ke A */}
+    <path d="M20,195 A70,70,0,0,1,90,125 Z"
       fill="#f43f5e" className="sv14-fill"/>
+    {/* Arsiran trapesium */}
+    <path d="M90,125 L230,125 L300,195 L90,195 Z"
+      fill="#f43f5e" className="sv14-fill"/>
+    {/* Tali busur (chord) dari B(90,125) ke A(20,195) — batas tembereng */}
+    <line x1="90" y1="125" x2="20" y2="195" stroke="#fb7185" strokeWidth="1.8" strokeDasharray="4 2" opacity=".85"/>
+    {/* Outline gabungan */}
     <path d="M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z"
       fill="none" stroke="#fb7185" strokeWidth="2.5" strokeLinejoin="round" className="sv14-out"/>
     {/* Dashed radii of the quarter-circle sector */}
@@ -927,12 +927,17 @@ const SoalSVG16 = () => (
         .sv16-fill{animation:sv16f 2.5s ease-in-out infinite;}
         .sv16-out{animation:sv16g 2.5s ease-in-out infinite;}
       `}</style>
+      {/* Tanda cureuk (hatching diagonal) untuk persegi */}
+      <pattern id="hatch16" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45 0 0)">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#fbbf24" strokeWidth="1.4" opacity=".75"/>
+      </pattern>
     </defs>
 
-    {/* Arsiran = lingkaran − persegi kiri atas (evenodd rule) */}
-    {/* Lingkaran: center(160,160) r=110. Persegi: (50,50)→(160,160). */}
-    <path fillRule="evenodd" fill="#f97316" className="sv16-fill"
-      d="M160,160 m-110,0 a110,110,0,1,0,220,0 a110,110,0,1,0,-220,0 M50,50 H160 V160 H50 Z"/>
+    {/* Arsiran = seluruh lingkaran (termasuk ¼ yang beririsan dengan persegi) */}
+    <circle cx="160" cy="160" r="110" fill="#f97316" className="sv16-fill"/>
+
+    {/* Tanda cureuk di persegi (overlay hatching) */}
+    <rect x="50" y="50" width="110" height="110" fill="url(#hatch16)" opacity=".9"/>
 
     {/* Lingkaran outline */}
     <circle cx="160" cy="160" r="110" fill="none" stroke="#fb923c" strokeWidth="2.5" className="sv16-out"/>
