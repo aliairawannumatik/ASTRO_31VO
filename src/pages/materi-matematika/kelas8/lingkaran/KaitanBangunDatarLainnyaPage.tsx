@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical, Star } from "lucide-react";
+import { BookOpen, Lightbulb, Target, FlaskConical, Star } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
@@ -131,58 +131,6 @@ const BangunGabunganSVG = () => (
    s=(120+90+150)/2=180; L=½×90×120=5400; r=5400/180=30
    Incenter for right triangle at C: ix=C_x+r=50+30=80, iy=C_y-r=200-30=170
 ═══════════════════════════════════════════════════════════════════ */
-const SegitigaDanLingkaranSVG = () => (
-  <svg viewBox="0 0 280 240" className="w-full max-w-xs mx-auto" aria-label="Segitiga dan lingkaran dalam">
-    <defs>
-      <style>{`
-        @keyframes arsirPurple{0%,100%{opacity:.45;}50%{opacity:.72;}}
-        @keyframes purpleGlow{0%,100%{filter:drop-shadow(0 0 5px #a855f7);}50%{filter:drop-shadow(0 0 14px #a855f7);}}
-        .p-fill{animation:arsirPurple 2.6s ease-in-out infinite;}
-        .p-ring{animation:purpleGlow 2.6s ease-in-out infinite;}
-      `}</style>
-    </defs>
-
-    {/* Shaded region: triangle minus incircle (evenodd) */}
-    <path
-      fillRule="evenodd"
-      fill="#a855f7"
-      className="p-fill"
-      d="M50,200 L50,80 L140,200 Z M80,170 m-30,0 a30,30,0,1,0,60,0 a30,30,0,1,0,-60,0"
-    />
-
-    {/* Triangle outline */}
-    <polygon points="50,200 50,80 140,200" fill="none" stroke="#c084fc" strokeWidth="2.5" strokeLinejoin="round"/>
-
-    {/* Incircle */}
-    <circle cx="80" cy="170" r="30" fill="rgba(168,85,247,.15)" stroke="#d946ef" strokeWidth="2" className="p-ring"/>
-
-    {/* Right-angle mark at C */}
-    <polyline points="60,200 60,190 50,190" fill="none" stroke="#c084fc" strokeWidth="1.5" opacity=".7"/>
-
-    {/* Vertex labels */}
-    <text x="42" y="72"  fill="#e879f9" fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="148" y="208" fill="#e879f9" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="36" y="212" fill="#e879f9" fontSize="11" fontFamily="monospace" fontWeight="bold">C</text>
-
-    {/* Tangent points */}
-    <circle cx="80"  cy="200" r="3.5" fill="#fbbf24"/>
-    <circle cx="50"  cy="170" r="3.5" fill="#fbbf24"/>
-
-    {/* Radius line */}
-    <line x1="80" y1="170" x2="80" y2="200" stroke="#fbbf24" strokeWidth="1.3" strokeDasharray="4 2" opacity=".8"/>
-    <text x="84" y="188" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold">r</text>
-
-    {/* Incenter */}
-    <circle cx="80" cy="170" r="3" fill="#d946ef"/>
-
-    {/* Side labels */}
-    <text x="32"  y="145" fill="#c4b5fd" fontSize="9" fontFamily="monospace">a=120</text>
-    <text x="85"  y="214" fill="#c4b5fd" fontSize="9" fontFamily="monospace">b=90</text>
-
-    {/* Arsiran text */}
-    <text x="106" y="155" fill="#fde68a" fontSize="9" fontFamily="monospace">Arsiran</text>
-  </svg>
-);
 
 /* ═══════════════════════════════════════════════════════════════════
    SVG 4 – Persegi Panjang dengan Lingkaran di Dalam (Arsiran = Sisi-Sisi)
@@ -711,28 +659,20 @@ const FormulaCard = ({ color, label, luas, keliling }: {
 ═══════════════════════════════════════════════════════════════════ */
 const KaitanBangunDatarLainnyaPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "kasus1", "kasus2", "kasus3", "kasus4", "contoh1", "contoh2", "contoh3", "contoh4", "contoh5", "contoh6", "contoh7", "contoh8", "contoh9", "contoh10", "contoh11", "contoh12", "rangkuman"]);
-  const toggle = (id: string) => { playPopSound(); setOpen(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]); };
 
   const SectionHeader = ({
-    id, icon, iconColor, title, accent,
-  }: { id: string; icon: React.ReactNode; iconColor?: string; title: string; accent?: string }) => (
-    <button
-      onClick={() => toggle(id)}
-      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer transition-all"
-      style={open.includes(id) ? {
+    icon, iconColor, title, accent,
+  }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string; accent?: string }) => (
+    <div
+      className="w-full flex items-center px-5 py-4"
+      style={{
         background: `linear-gradient(to right, ${accent ?? "rgba(6,182,212,.12)"}, transparent)`,
-        borderBottom: `1px solid ${accent ? accent.replace("rgba(", "rgba(").replace(", .12)", ", .3)") : "rgba(6,182,212,.3)"}`,
-      } : {}}
+        borderBottom: `1px solid ${accent ? accent.replace(", .12)", ", .3)") : "rgba(6,182,212,.3)"}`,
+      }}
     >
-      <div className="flex items-center gap-3">
-        <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white text-sm leading-snug">{title}</span>
-      </div>
-      {open.includes(id)
-        ? <ChevronUp   className="w-5 h-5 shrink-0" style={{ color: accent ? "#fff" : "#06b6d4" }} />
-        : <ChevronDown className="w-5 h-5 shrink-0 text-white/25" />}
-    </button>
+      <span className={iconColor}>{icon}</span>
+      <span className="font-body font-semibold text-white text-sm leading-snug ml-3">{title}</span>
+    </div>
   );
 
   return (
@@ -772,7 +712,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(251,191,36,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400"
               title="💡 Apa Itu Daerah Arsiran?" accent="rgba(251,191,36,.12)" />
-            {open.includes("intro") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <p className="font-body text-sm text-white/85 leading-relaxed">
                   Dalam soal matematika, kita sering menemukan gambar bangun datar yang <strong className="text-yellow-300">saling bertumpang-tindih</strong> atau saling berada di dalam satu sama lain. Bagian yang <em>diarsir</em> adalah daerah yang menjadi fokus pertanyaan — bisa berupa sudut-sudut yang tersisa, gabungan dua bangun, atau daerah yang "dipotong" oleh lingkaran.
@@ -797,7 +736,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── KASUS 1: Lingkaran Di Dalam Persegi ── */}
@@ -806,7 +744,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="kasus1" icon={<Target className="w-5 h-5" />} iconColor="text-orange-400"
               title="🔶 Kasus 1 — Lingkaran di Dalam Persegi (Sudut Diarsir)"
               accent="rgba(249,115,22,.12)" />
-            {open.includes("kasus1") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-3 border text-sm font-body"
                   style={{ background: "rgba(249,115,22,.08)", borderColor: "rgba(249,115,22,.25)" }}>
@@ -840,7 +777,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── KASUS 2: Bangun Gabungan ── */}
@@ -849,7 +785,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="kasus2" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400"
               title="🔵 Kasus 2 — Bangun Gabungan: Persegi Panjang + Setengah Lingkaran"
               accent="rgba(6,182,212,.12)" />
-            {open.includes("kasus2") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-3 border text-sm font-body"
                   style={{ background: "rgba(6,182,212,.08)", borderColor: "rgba(6,182,212,.25)" }}>
@@ -881,40 +816,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
-          </div>
-
-          {/* ── KASUS 3: Segitiga + Lingkaran Dalam ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(168,85,247,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="kasus3" icon={<Target className="w-5 h-5" />} iconColor="text-violet-400"
-              title="🔺 Kasus 3 — Segitiga dengan Lingkaran Dalam (Arsiran = Segitiga − Lingkaran)"
-              accent="rgba(168,85,247,.12)" />
-            {open.includes("kasus3") && (
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-3 border text-sm font-body"
-                  style={{ background: "rgba(168,85,247,.08)", borderColor: "rgba(168,85,247,.25)" }}>
-                  <p className="text-violet-200 leading-relaxed">
-                    Sebuah lingkaran <strong className="text-violet-300">dimasukkan ke dalam segitiga</strong> sehingga menyinggung ketiga sisinya. Daerah arsiran adalah bagian segitiga yang <strong className="text-pink-300">tidak terisi</strong> oleh lingkaran — biasanya berada di tiga pojok segitiga.
-                  </p>
-                </div>
-                <SegitigaDanLingkaranSVG />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="rounded-xl p-4 border space-y-2"
-                    style={{ background: "rgba(168,85,247,.09)", borderColor: "rgba(168,85,247,.3)" }}>
-                    <p className="text-violet-300 font-bold text-xs uppercase tracking-wide">📐 Luas Daerah Arsiran</p>
-                    <BlockMath math="L_{\text{arsir}} = L_\triangle - \pi r^2" />
-                    <p className="text-white/60 text-xs font-body">dengan <InlineMath math="r = \dfrac{L_\triangle}{s}"/>, <InlineMath math="s = \dfrac{a+b+c}{2}"/></p>
-                  </div>
-                  <div className="rounded-xl p-4 border space-y-2"
-                    style={{ background: "rgba(217,70,239,.09)", borderColor: "rgba(217,70,239,.3)" }}>
-                    <p className="text-fuchsia-300 font-bold text-xs uppercase tracking-wide">📏 Keliling Daerah Arsiran</p>
-                    <BlockMath math="K_{\text{arsir}} = (a+b+c) + 2\pi r" />
-                    <p className="text-white/60 text-xs font-body">Keliling segitiga + keliling lingkaran</p>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* ── KASUS 4: Persegi Panjang − Lingkaran ── */}
@@ -923,7 +824,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="kasus4" icon={<Target className="w-5 h-5" />} iconColor="text-green-400"
               title="🟩 Kasus 4 — Persegi Panjang dengan Lingkaran di Dalamnya"
               accent="rgba(34,197,94,.12)" />
-            {open.includes("kasus4") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-3 border text-sm font-body"
                   style={{ background: "rgba(34,197,94,.08)", borderColor: "rgba(34,197,94,.25)" }}>
@@ -947,7 +847,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 1 ── */}
@@ -956,7 +855,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
               title="✏️ Contoh 1 — Persegi dengan Lingkaran Dalam (π = 3,14)"
               accent="rgba(249,115,22,.12)" />
-            {open.includes("contoh1") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border"
                   style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
@@ -991,7 +889,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 2 ── */}
@@ -1000,7 +897,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400"
               title="✏️ Contoh 2 — Bangun Gabungan Persegi Panjang + Setengah Lingkaran (π = 22/7)"
               accent="rgba(168,85,247,.12)" />
-            {open.includes("contoh2") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border"
                   style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
@@ -1036,7 +932,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 3 ── */}
@@ -1045,7 +940,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
               title="✏️ Contoh 3 — Persegi Panjang 28×14 Dikurangi Dua Setengah Lingkaran (π = 22/7)"
               accent="rgba(249,115,22,.12)" />
-            {open.includes("contoh3") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                   <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Soal</p>
@@ -1079,7 +973,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 4 ── */}
@@ -1088,7 +981,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh4" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400"
               title="✏️ Contoh 4 — Seperempat Lingkaran r = 10 cm (π = 3,14)"
               accent="rgba(34,197,94,.12)" />
-            {open.includes("contoh4") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(34,197,94,.1)", borderColor: "rgba(34,197,94,.35)" }}>
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Soal</p>
@@ -1119,7 +1011,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 5 ── */}
@@ -1128,7 +1019,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh5" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400"
               title="✏️ Contoh 5 — Persegi 14 cm dengan Dua Busur Bersilang (π = 22/7)"
               accent="rgba(168,85,247,.12)" />
-            {open.includes("contoh5") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
                   <p className="text-violet-300 font-bold text-xs uppercase tracking-wide mb-2">🟣 Soal</p>
@@ -1156,7 +1046,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 6 ── */}
@@ -1165,7 +1054,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh6" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-cyan-400"
               title="✏️ Contoh 6 — Bangun Gabungan: Persegi Panjang + Setengah Lingkaran (π = 22/7)"
               accent="rgba(6,182,212,.12)" />
-            {open.includes("contoh6") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
                   <p className="text-cyan-300 font-bold text-xs uppercase tracking-wide mb-2">🔵 Soal</p>
@@ -1198,7 +1086,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 7 ── */}
@@ -1207,7 +1094,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh7" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-pink-400"
               title="✏️ Contoh 7 — Setengah Lingkaran Besar Dikurangi Setengah Lingkaran Kecil (π = 3,14)"
               accent="rgba(236,72,153,.12)" />
-            {open.includes("contoh7") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(236,72,153,.1)", borderColor: "rgba(236,72,153,.35)" }}>
                   <p className="text-pink-300 font-bold text-xs uppercase tracking-wide mb-2">🌹 Soal</p>
@@ -1241,7 +1127,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 8 ── */}
@@ -1250,7 +1135,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh8" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-amber-400"
               title="✏️ Contoh 8 — Bintang 4 Titik dari Busur dalam Persegi 14 cm (π = 22/7)"
               accent="rgba(245,158,11,.12)" />
-            {open.includes("contoh8") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(245,158,11,.1)", borderColor: "rgba(245,158,11,.35)" }}>
                   <p className="text-amber-300 font-bold text-xs uppercase tracking-wide mb-2">⭐ Soal</p>
@@ -1277,7 +1161,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 9 ── */}
@@ -1286,7 +1169,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh9" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
               title="✏️ Contoh 9 — Tiga Busur Lengkung: Busur Besar Dikurangi 2 Busur Kecil (π = 22/7)"
               accent="rgba(14,165,233,.12)" />
-            {open.includes("contoh9") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
                   <p className="text-sky-300 font-bold text-xs uppercase tracking-wide mb-2">🌊 Soal</p>
@@ -1319,7 +1201,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 10 ── */}
@@ -1328,7 +1209,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh10" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-teal-400"
               title="✏️ Contoh 10 — Daun Diagonal dalam Persegi 7 cm (π = 22/7)"
               accent="rgba(20,184,166,.12)" />
-            {open.includes("contoh10") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
                   <p className="text-teal-300 font-bold text-xs uppercase tracking-wide mb-2">🍃 Soal</p>
@@ -1360,7 +1240,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 11 ── */}
@@ -1369,7 +1248,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh11" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
               title="✏️ Contoh 11 — Bunga 4 Kelopak dalam Persegi 14 cm (π = 22/7)"
               accent="rgba(249,115,22,.12)" />
-            {open.includes("contoh11") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                   <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">🌸 Soal</p>
@@ -1395,7 +1273,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── CONTOH 12 ── */}
@@ -1404,7 +1281,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="contoh12" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400"
               title="✏️ Contoh 12 — Sektor Siku-Siku (¼ Lingkaran) r = 10 cm (π = 3,14)"
               accent="rgba(139,92,246,.12)" />
-            {open.includes("contoh12") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(139,92,246,.1)", borderColor: "rgba(139,92,246,.35)" }}>
                   <p className="text-violet-300 font-bold text-xs uppercase tracking-wide mb-2">🔮 Soal</p>
@@ -1437,7 +1313,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── RANGKUMAN ── */}
@@ -1446,7 +1321,6 @@ const KaitanBangunDatarLainnyaPage = () => {
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-yellow-400"
               title="📌 Rangkuman — Peta Rumus Daerah Arsiran"
               accent="rgba(251,191,36,.12)" />
-            {open.includes("rangkuman") && (
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
@@ -1492,7 +1366,6 @@ const KaitanBangunDatarLainnyaPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
         </div>
