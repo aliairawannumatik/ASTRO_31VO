@@ -179,9 +179,13 @@ const KaitanBangunDatarPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-3xl font-bold mb-2 text-glow-cyan"
             style={{background:"linear-gradient(135deg,#22d3ee,#a78bfa,#f97316)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>
-            KAITAN LINGKARAN<br/>DENGAN BANGUN DATAR
+            LINGKARAN DALAM DAN<br/>LINGKARAN LUAR SEGITIGA
           </h1>
-          <p className="text-white/40 text-xs font-body">Incircle · Circumcircle · Rumus Jari-Jari</p>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-body font-bold mt-1"
+            style={{background:"rgba(168,85,247,.2)",border:"1px solid rgba(168,85,247,.4)",color:"#c084fc"}}>
+            ⭐ PENGAYAAN
+          </div>
+          <p className="text-white/40 text-xs font-body mt-2">Incircle · Circumcircle · Rumus Jari-Jari</p>
         </div>
 
         <div className="flex flex-col gap-5 animate-slide-up">
