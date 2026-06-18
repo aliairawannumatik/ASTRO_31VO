@@ -1127,11 +1127,6 @@ const SoalSVG19 = () => (
     <line x1="190" y1="139" x2="190" y2="147" stroke="#67e8f9" strokeWidth="1.2" opacity=".85"/>
     <text x="155" y="159" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
 
-    {/* ── Radius labels ── */}
-    <line x1="90"  y1="130" x2="90"  y2="65" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="4 2" opacity=".55"/>
-    <text x="94"  y="95"  fill="#a5b4fc" fontSize="9" fontFamily="monospace">R=13</text>
-    <line x1="155" y1="130" x2="190" y2="130" stroke="#a5b4fc" strokeWidth="1.2" strokeDasharray="3 2" opacity=".55"/>
-    <text x="157" y="126" fill="#a5b4fc" fontSize="8.5" fontFamily="monospace">r=7</text>
   </svg>
 );
 
