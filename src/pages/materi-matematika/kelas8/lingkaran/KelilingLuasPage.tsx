@@ -340,6 +340,137 @@ const PiAnimationSVG = () => {
   );
 };
 
+const KelilingLuasCirclesSVG = () => (
+  <div className="w-full">
+    <style>{`
+      @keyframes kelilingPulse {
+        0%,100% { stroke-opacity:.55; filter: drop-shadow(0 0 4px #22d3ee) drop-shadow(0 0 10px rgba(34,211,238,.4)); }
+        50%      { stroke-opacity:1;   filter: drop-shadow(0 0 10px #22d3ee) drop-shadow(0 0 28px rgba(34,211,238,.75)) drop-shadow(0 0 48px rgba(34,211,238,.35)); }
+      }
+      @keyframes kelilingDash {
+        from { stroke-dashoffset: 502; }
+        to   { stroke-dashoffset: 0;   }
+      }
+      @keyframes kelilingOrbit {
+        from { transform: rotate(0deg);   }
+        to   { transform: rotate(360deg); }
+      }
+      @keyframes luasPulse {
+        0%,100% { fill-opacity:.18; filter: drop-shadow(0 0 6px #fb923c)  drop-shadow(0 0 18px rgba(251,146,60,.45)); }
+        50%      { fill-opacity:.42; filter: drop-shadow(0 0 16px #fb923c) drop-shadow(0 0 40px rgba(251,146,60,.8))  drop-shadow(0 0 64px rgba(251,146,60,.3)); }
+      }
+      @keyframes luasSweep {
+        0%   { clip-path: inset(0 100% 0 0); }
+        100% { clip-path: inset(0 0% 0 0);   }
+      }
+      @keyframes fadeScaleIn {
+        from { opacity:0; transform:scale(.82); }
+        to   { opacity:1; transform:scale(1);   }
+      }
+      .keliling-ring { animation: kelilingPulse 2.2s ease-in-out infinite, kelilingDash 1.8s ease-out forwards; }
+      .keliling-orbit { transform-origin: 80px 80px; animation: kelilingOrbit 6s linear infinite; }
+      .luas-fill { animation: luasPulse 2.4s ease-in-out infinite; }
+      .circle-card { animation: fadeScaleIn .7s cubic-bezier(.22,1,.36,1) both; }
+      .circle-card-right { animation: fadeScaleIn .7s .18s cubic-bezier(.22,1,.36,1) both; }
+    `}</style>
+
+    <div className="grid grid-cols-2 gap-3 sm:gap-5 mb-2">
+
+      {/* ── Keliling: hanya outline yang menyala ── */}
+      <div className="circle-card flex flex-col items-center gap-2 bg-cyan-500/8 border border-cyan-500/30 rounded-2xl px-3 py-4 text-center">
+        <p className="font-body text-xs font-bold text-cyan-300 tracking-wide uppercase">⭕ Keliling</p>
+        <svg viewBox="0 0 160 160" className="w-full max-w-[140px]" aria-label="Lingkaran keliling">
+          <defs>
+            <radialGradient id="kGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stopColor="#22d3ee" stopOpacity=".06" />
+              <stop offset="100%" stopColor="#22d3ee" stopOpacity="0"   />
+            </radialGradient>
+          </defs>
+
+          {/* Interior: transparan penuh */}
+          <circle cx="80" cy="80" r="58" fill="url(#kGlow)" />
+
+          {/* Outer glow ring */}
+          <circle cx="80" cy="80" r="58" fill="none"
+            stroke="#22d3ee" strokeWidth="12" strokeOpacity=".12"
+            className="keliling-ring"
+            strokeDasharray="502" strokeDashoffset="502" />
+
+          {/* Main glowing stroke */}
+          <circle cx="80" cy="80" r="58" fill="none"
+            stroke="#22d3ee" strokeWidth="3.5" strokeLinecap="round"
+            className="keliling-ring"
+            strokeDasharray="502" strokeDashoffset="502" />
+
+          {/* Orbiting dot */}
+          <g className="keliling-orbit">
+            <circle cx="138" cy="80" r="5" fill="#22d3ee" opacity=".9"
+              style={{ filter: 'drop-shadow(0 0 6px #22d3ee) drop-shadow(0 0 14px rgba(34,211,238,.8))' }} />
+          </g>
+
+          {/* Centre dot */}
+          <circle cx="80" cy="80" r="3" fill="#94a3b8" opacity=".5" />
+
+          {/* Radius dashed line */}
+          <line x1="80" y1="80" x2="138" y2="80"
+            stroke="#64748b" strokeWidth="1.5" strokeDasharray="4 3" opacity=".6" />
+          <text x="110" y="74" fill="#94a3b8" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity=".8">r</text>
+
+          {/* Label inside */}
+          <text x="80" y="84" fill="#22d3ee" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity=".55">K = 2πr</text>
+        </svg>
+        <p className="font-body text-[10px] text-white/45 leading-snug">Hanya <span className="text-cyan-300 font-semibold">tepi/garis</span> yang menyala — itulah keliling!</p>
+      </div>
+
+      {/* ── Luas: interior yang menyala ── */}
+      <div className="circle-card-right flex flex-col items-center gap-2 bg-orange-500/8 border border-orange-500/30 rounded-2xl px-3 py-4 text-center">
+        <p className="font-body text-xs font-bold text-orange-300 tracking-wide uppercase">🟠 Luas</p>
+        <svg viewBox="0 0 160 160" className="w-full max-w-[140px]" aria-label="Lingkaran luas">
+          <defs>
+            <radialGradient id="lGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stopColor="#fb923c" stopOpacity="1"   />
+              <stop offset="70%"  stopColor="#fb923c" stopOpacity=".55" />
+              <stop offset="100%" stopColor="#fb923c" stopOpacity="0"   />
+            </radialGradient>
+            <radialGradient id="lGlowOuter" cx="50%" cy="50%" r="50%">
+              <stop offset="60%"  stopColor="#fb923c" stopOpacity="0"   />
+              <stop offset="100%" stopColor="#fb923c" stopOpacity=".18" />
+            </radialGradient>
+          </defs>
+
+          {/* Outer boundary: dim redup */}
+          <circle cx="80" cy="80" r="58" fill="none"
+            stroke="#fb923c" strokeWidth="2" strokeOpacity=".22" />
+
+          {/* Inner glow fill — pulsing */}
+          <circle cx="80" cy="80" r="57" fill="url(#lGlow)"
+            className="luas-fill" />
+
+          {/* Extra ring-area indicator */}
+          <circle cx="80" cy="80" r="57" fill="url(#lGlowOuter)"
+            style={{ filter: 'drop-shadow(0 0 20px rgba(251,146,60,.5))' }}
+            className="luas-fill" />
+
+          {/* Radius arrow */}
+          <line x1="80" y1="80" x2="130" y2="80"
+            stroke="#fdba74" strokeWidth="2" strokeLinecap="round" opacity=".85" />
+          <polygon points="130,76 138,80 130,84" fill="#fdba74" opacity=".85" />
+          <text x="106" y="74" fill="#fdba74" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+
+          {/* Centre dot */}
+          <circle cx="80" cy="80" r="3.5" fill="#fdba74" opacity=".9"
+            style={{ filter: 'drop-shadow(0 0 5px #fb923c)' }} />
+
+          {/* Label inside */}
+          <text x="80" y="100" fill="#fb923c" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity=".7">L = πr²</text>
+        </svg>
+        <p className="font-body text-[10px] text-white/45 leading-snug">Yang menyala adalah <span className="text-orange-300 font-semibold">daerah dalam</span> — itulah luas!</p>
+      </div>
+
+    </div>
+  </div>
+);
+
 const AreaCompareSVG = () => (
   <svg viewBox="0 0 300 180" className="w-full max-w-sm mx-auto my-2" aria-label="Luas lingkaran">
     <defs>
@@ -412,6 +543,7 @@ const KelilingLuasPage = () => {
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-3">🎯 Ringkasan Intisari</p>
                   <p className="font-body text-sm text-white/80 mb-2">Keliling adalah panjang garis lengkung yang membentuk lingkaran. Luas adalah daerah di dalam lingkaran.</p>
                 </div>
+                <KelilingLuasCirclesSVG />
                 <AreaCompareSVG />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4 text-center">
