@@ -619,6 +619,9 @@ const SoalSVG10 = () => (
       fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinejoin="round" className="sc10-out"/>
     {/* Chord AB (tali busur) */}
     <line x1="215" y1="120" x2="110" y2="225" stroke="#a78bfa" strokeWidth="2.5"/>
+    {/* Dashed radii from O to A and O to B */}
+    <line x1="110" y1="120" x2="215" y2="120" stroke="#fbbf24" strokeWidth="1.4" strokeDasharray="5 3" opacity=".8"/>
+    <line x1="110" y1="120" x2="110" y2="225" stroke="#fbbf24" strokeWidth="1.4" strokeDasharray="5 3" opacity=".8"/>
     {/* Center */}
     <circle cx="110" cy="120" r="4" fill="#8b5cf6"/>
     <text x="93" y="117" fill="#c4b5fd" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
@@ -626,7 +629,6 @@ const SoalSVG10 = () => (
     <text x="219" y="117" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
     <text x="96" y="238" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
     {/* Radius label */}
-    <line x1="110" y1="120" x2="215" y2="120" stroke="#fbbf24" strokeWidth="1.4" strokeDasharray="5 3" opacity=".8"/>
     <text x="152" y="112" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">10 cm</text>
   </svg>
 );
@@ -794,7 +796,7 @@ const SoalSVG13 = () => (
    Combined path: M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG14 = () => (
-  <svg viewBox="0 95 295 125" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri menempel sisi kiri">
+  <svg viewBox="0 108 340 115" className="w-full max-w-sm mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri menempel sisi kiri">
     <defs>
       <style>{`
         @keyframes sv14f{0%,100%{opacity:.42;}50%{opacity:.76;}}
@@ -923,11 +925,8 @@ const SoalSVG16 = () => (
       `}</style>
     </defs>
 
-    {/* Arsiran = seluruh lingkaran penuh (termasuk area persegi, warna sama) */}
+    {/* Arsiran = lingkaran penuh saja (persegi di dalamnya, tidak digambar ulang) */}
     <circle cx="160" cy="160" r="110" fill="#f97316" className="sv16-fill"/>
-
-    {/* Persegi kiri-atas — warna sama dengan lingkaran, tanpa arsiran */}
-    <rect x="50" y="50" width="110" height="110" fill="#f97316" className="sv16-fill"/>
 
     {/* Lingkaran outline */}
     <circle cx="160" cy="160" r="110" fill="none" stroke="#fb923c" strokeWidth="2.5" className="sv16-out"/>
@@ -974,13 +973,13 @@ const SoalSVG17 = () => (
       `}</style>
     </defs>
 
-    {/* Bangun gabungan:                                                            */}
-    {/* 1. Busur besar atas:       dari (30,130) CW ke (230,130), r=100            */}
-    {/* 2. Busur kecil kanan bawah: dari (230,130) CCW ke (130,130), r=50          */}
-    {/* 3. Busur kecil kiri bawah: dari (130,130) CCW ke (30,130), r=50            */}
-    <path d="M30,130 A100,100,0,0,1,230,130 A50,50,0,0,0,130,130 A50,50,0,0,0,30,130 Z"
+    {/* Setengah cincin (half-annulus): outer R=100, inner r=50, same center O(130,130) */}
+    {/* evenodd rule: outer dome minus inner dome = half-donut ring */}
+    <path fillRule="evenodd"
+      d="M30,130 A100,100,0,0,1,230,130 Z M80,130 A50,50,0,0,1,180,130 Z"
       fill="#ec4899" className="sv17-fill"/>
-    <path d="M30,130 A100,100,0,0,1,230,130 A50,50,0,0,0,130,130 A50,50,0,0,0,30,130 Z"
+    <path fillRule="evenodd"
+      d="M30,130 A100,100,0,0,1,230,130 Z M80,130 A50,50,0,0,1,180,130 Z"
       fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinejoin="round" className="sv17-out"/>
 
     {/* Titik pusat O */}
@@ -991,16 +990,15 @@ const SoalSVG17 = () => (
     <line x1="130" y1="130" x2="130" y2="30" stroke="#fbbf24" strokeWidth="1.3" strokeDasharray="5 3" opacity=".75"/>
     <text x="145" y="76" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">R = 10 cm</text>
 
-    {/* Label diameter lingkaran kecil kanan (bawah) */}
-    <text x="180" y="200" fill="#a5f3fc" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 10 cm</text>
-    <line x1="130" y1="194" x2="230" y2="194" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
-    <line x1="130" y1="190" x2="130" y2="198" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
-    <line x1="230" y1="190" x2="230" y2="198" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
+    {/* Jari-jari dalam: O→kanan inner (180,130) */}
+    <line x1="130" y1="130" x2="180" y2="130" stroke="#a5f3fc" strokeWidth="1.2" strokeDasharray="4 2" opacity=".7"/>
+    <text x="158" y="124" fill="#a5f3fc" fontSize="9" fontFamily="monospace">r=5</text>
 
-    {/* Label diameter lingkaran kecil kiri (bawah) */}
-    <text x="80" y="200" fill="#a5f3fc" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 10 cm</text>
-    <line x1="30"  y1="194" x2="130" y2="194" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
-    <line x1="30"  y1="190" x2="30"  y2="198" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
+    {/* Label diameter lingkaran besar (bawah) */}
+    <text x="130" y="200" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 20 cm (= 2R)</text>
+    <line x1="30"  y1="194" x2="230" y2="194" stroke="#fbbf24" strokeWidth="1" opacity=".5"/>
+    <line x1="30"  y1="190" x2="30"  y2="198" stroke="#fbbf24" strokeWidth="1" opacity=".5"/>
+    <line x1="230" y1="190" x2="230" y2="198" stroke="#fbbf24" strokeWidth="1" opacity=".5"/>
   </svg>
 );
 
@@ -1040,11 +1038,25 @@ const SoalSVG18 = () => (
     <circle cx="200" cy="20"  r="2.5" fill="#64748b" opacity=".7"/>
     <circle cx="20"  cy="200" r="2.5" fill="#64748b" opacity=".7"/>
     <circle cx="200" cy="200" r="2.5" fill="#64748b" opacity=".7"/>
-    {/* Tick marks on sides */}
-    <line x1="107" y1="16" x2="113" y2="24" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
-    <line x1="107" y1="196" x2="113" y2="204" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
-    <line x1="16" y1="107" x2="24" y2="113" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
-    <line x1="196" y1="107" x2="204" y2="113" stroke="#94a3b8" strokeWidth="1.2" opacity=".6"/>
+    {/* Equal-bisection tick marks at midpoints of all 4 sides */}
+    {/* Each midpoint gets 2 parallel ticks (double-tick = equal length) */}
+    {/* Top side midpoint (110,20): two vertical ticks */}
+    <line x1="107" y1="14" x2="107" y2="26" stroke="#fbbf24" strokeWidth="1.8" opacity=".85"/>
+    <line x1="113" y1="14" x2="113" y2="26" stroke="#fbbf24" strokeWidth="1.8" opacity=".85"/>
+    {/* Bottom side midpoint (110,200): two vertical ticks */}
+    <line x1="107" y1="194" x2="107" y2="206" stroke="#fbbf24" strokeWidth="1.8" opacity=".85"/>
+    <line x1="113" y1="194" x2="113" y2="206" stroke="#fbbf24" strokeWidth="1.8" opacity=".85"/>
+    {/* Left side midpoint (20,110): two horizontal ticks */}
+    <line x1="14" y1="107" x2="26" y2="107" stroke="#fbbf24" strokeWidth="1.8" opacity=".85"/>
+    <line x1="14" y1="113" x2="26" y2="113" stroke="#fbbf24" strokeWidth="1.8" opacity=".85"/>
+    {/* Right side midpoint (200,110): two horizontal ticks */}
+    <line x1="194" y1="107" x2="206" y2="107" stroke="#fbbf24" strokeWidth="1.8" opacity=".85"/>
+    <line x1="194" y1="113" x2="206" y2="113" stroke="#fbbf24" strokeWidth="1.8" opacity=".85"/>
+    {/* "7 cm" labels on each half-segment of top and bottom sides */}
+    <text x="65"  y="12" fill="#fbbf24" fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
+    <text x="155" y="12" fill="#fbbf24" fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
+    <text x="65"  y="210" fill="#fbbf24" fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
+    <text x="155" y="210" fill="#fbbf24" fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
     {/* ── Garis bantu: sisi persegi = 14 cm (bawah) ── */}
     <line x1="20"  y1="213" x2="200" y2="213" stroke="#2dd4bf" strokeWidth="1.4" opacity=".8"/>
     <line x1="20"  y1="208" x2="20"  y2="218" stroke="#2dd4bf" strokeWidth="1.2" opacity=".8"/>
@@ -1076,13 +1088,15 @@ const SoalSVG19 = () => (
       `}</style>
     </defs>
 
-    {/* Combined shape:
-        A(25,130) → large arc CW upward to B(155,130) [right end of big = center of small]
-                 → line to right end of small (190,130)
-                 → small arc CCW downward to left end of small (120,130) → close to A */}
-    <path d="M25,130 A65,65,0,0,1,155,130 L190,130 A35,35,0,0,0,120,130 Z"
-      fill="#4f46e5" className="sv19-fill"/>
-    <path d="M25,130 A65,65,0,0,1,155,130 L190,130 A35,35,0,0,0,120,130 Z"
+    {/* Two separate fills — avoids winding issues that flip the small arc appearance */}
+    {/* Big dome: A(25,130) arc CW up to B(155,130), close with flat line back */}
+    <path d="M25,130 A65,65,0,0,1,155,130 Z"
+      fill="#6366f1" className="sv19-fill"/>
+    {/* Small downward bump: from (120,130) CCW down to (190,130), close with flat line back */}
+    <path d="M120,130 A35,35,0,0,0,190,130 Z"
+      fill="#6366f1" className="sv19-fill"/>
+    {/* Outline traces the full combined border */}
+    <path d="M25,130 A65,65,0,0,1,155,130 L190,130 A35,35,0,0,0,120,130 L25,130"
       fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinejoin="round" className="sv19-out"/>
 
     {/* Baseline */}
