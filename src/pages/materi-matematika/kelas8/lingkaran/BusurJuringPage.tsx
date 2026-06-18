@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical, Zap } from "lucide-react";
+import { BookOpen, Lightbulb, Target, FlaskConical, Zap } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
@@ -678,27 +678,14 @@ const SvgPerbandingan = () => (
 ═══════════════════════════════════════════════════════════════════ */
 const BusurJuringPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>([
-    "intro", "animasi1", "animasi2", "rumus", "perbandingan", "contoh1", "contoh2", "contoh3", "rangkuman"
-  ]);
-  const toggle = (id: string) => {
-    playPopSound();
-    setOpen(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]);
-  };
 
-  const SectionHeader = ({ id, icon, iconColor, title }: {
-    id: string; icon: React.ReactNode; iconColor?: string; title: string;
+  const SectionHeader = ({ icon, iconColor, title }: {
+    id?: string; icon: React.ReactNode; iconColor?: string; title: string;
   }) => (
-    <button onClick={() => toggle(id)}
-      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
-      <div className="flex items-center gap-3">
-        <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
-      </div>
-      {open.includes(id)
-        ? <ChevronUp className="w-5 h-5 text-primary" />
-        : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+    <div className="w-full flex items-center px-5 py-4">
+      <span className={iconColor}>{icon}</span>
+      <span className="font-body font-semibold text-white ml-3">{title}</span>
+    </div>
   );
 
   return (
@@ -711,7 +698,7 @@ const BusurJuringPage = () => {
           PANJANG BUSUR DAN LUAS JURING
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">
-          Kelas 8 · Lingkaran · Materi Matematika
+          Kelas 8 · Lingkaran · Buku Animasi Matematika
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
@@ -720,7 +707,6 @@ const BusurJuringPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />}
               iconColor="text-yellow-400" title="🍕 Analogi Pizza yang Sempurna" />
-            {open.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Bayangkan sebuah pizza! Jika pizza utuh = lingkaran penuh (360°), maka{" "}
@@ -737,7 +723,6 @@ const BusurJuringPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ANIMASI 1 */}
@@ -745,7 +730,6 @@ const BusurJuringPage = () => {
             style={{ background: "rgba(15,23,42,.8)", borderColor: "rgba(251,191,36,.3)", backdropFilter: "blur(12px)" }}>
             <SectionHeader id="animasi1" icon={<Zap className="w-5 h-5" />}
               iconColor="text-amber-400" title="⚡ Animasi 1 — Eksplorasi Panjang Busur" />
-            {open.includes("animasi1") && (
               <div className="px-5 pb-5 pt-2 space-y-4">
                 <div className="rounded-xl p-3 border"
                   style={{ background: "rgba(251,191,36,.08)", borderColor: "rgba(251,191,36,.25)" }}>
@@ -757,7 +741,6 @@ const BusurJuringPage = () => {
                 </div>
                 <AnimasiBusur />
               </div>
-            )}
           </div>
 
           {/* ANIMASI 2 */}
@@ -765,7 +748,6 @@ const BusurJuringPage = () => {
             style={{ background: "rgba(15,23,42,.8)", borderColor: "rgba(168,85,247,.3)", backdropFilter: "blur(12px)" }}>
             <SectionHeader id="animasi2" icon={<Zap className="w-5 h-5" />}
               iconColor="text-purple-400" title="⚡ Animasi 2 — Eksplorasi Luas Juring" />
-            {open.includes("animasi2") && (
               <div className="px-5 pb-5 pt-2 space-y-4">
                 <div className="rounded-xl p-3 border"
                   style={{ background: "rgba(168,85,247,.08)", borderColor: "rgba(168,85,247,.25)" }}>
@@ -777,14 +759,12 @@ const BusurJuringPage = () => {
                 </div>
                 <AnimasiJuring />
               </div>
-            )}
           </div>
 
           {/* RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rumus" icon={<Target className="w-5 h-5" />}
               iconColor="text-cyan-400" title="📐 Rumus Panjang Busur, Luas Juring & Tembereng" />
-            {open.includes("rumus") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -811,7 +791,6 @@ const BusurJuringPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* KONSEP PERBANDINGAN */}
@@ -819,7 +798,6 @@ const BusurJuringPage = () => {
             style={{ background: "rgba(15,23,42,.85)", borderColor: "rgba(6,182,212,.35)", backdropFilter: "blur(12px)" }}>
             <SectionHeader id="perbandingan" icon={<Target className="w-5 h-5" />}
               iconColor="text-cyan-400" title="🔗 Konsep — Perbandingan Busur & Juring dalam Satu Lingkaran" />
-            {open.includes("perbandingan") && (
               <div className="px-5 pb-6 pt-1 space-y-5">
 
                 {/* Hook */}
@@ -949,14 +927,12 @@ const BusurJuringPage = () => {
                 </div>
 
               </div>
-            )}
           </div>
 
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5" />}
               iconColor="text-green-400" title="✏️ Contoh 1 — Panjang Busur (Mudah)" />
-            {open.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Tingkat: Mudah</p>
@@ -976,14 +952,12 @@ const BusurJuringPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5" />}
               iconColor="text-yellow-400" title="✏️ Contoh 2 — Luas Juring (Sedang)" />
-            {open.includes("contoh2") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
@@ -1008,14 +982,12 @@ const BusurJuringPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5" />}
               iconColor="text-red-400" title="✏️ Contoh 3 — Luas Tembereng (Sulit)" />
-            {open.includes("contoh3") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                   <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
@@ -1039,14 +1011,12 @@ const BusurJuringPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />}
               iconColor="text-violet-400" title="📌 Rangkuman Sub-Bab" />
-            {open.includes("rangkuman") && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm text-white/80">
@@ -1070,7 +1040,6 @@ const BusurJuringPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
         </div>

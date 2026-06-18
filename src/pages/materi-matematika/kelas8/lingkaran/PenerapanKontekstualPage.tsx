@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical } from "lucide-react";
+import { BookOpen, Lightbulb, Target, FlaskConical } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
@@ -202,17 +202,12 @@ const BanMenggelindingSVG = () => {
 
 const PenerapanKontekstualPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "strategi", "contoh1", "contoh2", "contoh3", "rangkuman"]);
-  const toggle = (id: string) => { playPopSound(); setOpen(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]); };
 
-  const SectionHeader = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
-    <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
-      <div className="flex items-center gap-3">
-        <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
-      </div>
-      {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
-    </button>
+  const SectionHeader = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
+    <div className="w-full flex items-center px-5 py-4">
+      <span className={iconColor}>{icon}</span>
+      <span className="font-body font-semibold text-white ml-3">{title}</span>
+    </div>
   );
 
   return (
@@ -222,7 +217,7 @@ const PenerapanKontekstualPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">PENERAPAN LINGKARAN PADA MASALAH KONTEKSTUAL</h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Lingkaran · Materi Matematika</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Lingkaran · Buku Animasi Matematika</p>
 
         {/* Hero: animasi ban menggelinding */}
         <div className="rounded-xl border mb-4 px-4 pt-4 pb-5 text-center"
@@ -248,7 +243,6 @@ const PenerapanKontekstualPage = () => {
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌍 Lingkaran Ada di Mana-Mana!" />
-            {open.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Selama ini kita belajar rumus — sekarang waktunya pakai rumus itu untuk menyelesaikan masalah nyata! Lingkaran hadir dalam kehidupan sehari-hari: <strong className="text-cyan-300">jam dinding, roda kendaraan, pipa air, permukaan kaleng, taman melingkar, antena parabola</strong>, dan masih banyak lagi.
@@ -267,12 +261,10 @@ const PenerapanKontekstualPage = () => {
                   ))}
                 </div>
               </div>
-            )}
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="strategi" icon={<Target className="w-5 h-5" />} iconColor="text-cyan-400" title="📐 Strategi Menyelesaikan Soal Kontekstual" />
-            {open.includes("strategi") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-2">🎯 Ringkasan Intisari</p>
@@ -296,12 +288,10 @@ const PenerapanKontekstualPage = () => {
                   ))}
                 </div>
               </div>
-            )}
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Roda dan Jarak Tempuh (Mudah)" />
-            {open.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">🟢 Tingkat: Mudah</p>
@@ -321,12 +311,10 @@ const PenerapanKontekstualPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Biaya Pengecatan Taman (Sedang)" />
-            {open.includes("contoh2") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">🟡 Tingkat: Sedang</p>
@@ -351,12 +339,10 @@ const PenerapanKontekstualPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Debit Air Pipa (Sulit)" />
-            {open.includes("contoh3") && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                   <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">🔴 Tingkat: Sulit</p>
@@ -380,12 +366,10 @@ const PenerapanKontekstualPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title="📌 Rangkuman Sub-Bab" />
-            {open.includes("rangkuman") && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm text-white/80">• <strong className="text-green-300">Jarak tempuh roda</strong> = jumlah putaran × keliling roda</p>
@@ -400,7 +384,6 @@ const PenerapanKontekstualPage = () => {
                 </div>
                 <RodaGigiSVG />
               </div>
-            )}
           </div>
 
         </div>
