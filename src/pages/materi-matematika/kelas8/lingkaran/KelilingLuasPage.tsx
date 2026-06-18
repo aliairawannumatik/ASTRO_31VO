@@ -332,11 +332,8 @@ const PiAnimationSVG = () => {
           style={{ animation: 'fadeInUp .6s ease both' }}>
           <style>{`@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}`}</style>
           <div className="pi-latex-glow">
-            <BlockMath math={String.raw`\pi \;=\; \frac{K}{d}`} />
+            <BlockMath math={String.raw`\begin{aligned} \pi &= \dfrac{K}{d} \\[4pt] &\approx {\color{#fbbf24} 3{,}14159{\small\color{#fbbf2499}{...}}} \end{aligned}`} />
           </div>
-          <p className="pi-latex-result font-mono text-lg font-black tracking-wider">
-            ≈ 3,14159<span className="opacity-60">...</span>
-          </p>
         </div>
       )}
     </div>
