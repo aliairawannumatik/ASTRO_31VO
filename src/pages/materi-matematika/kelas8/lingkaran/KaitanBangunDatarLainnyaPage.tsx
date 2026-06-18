@@ -1104,12 +1104,9 @@ const SoalSVG19 = () => (
     {/* Small downward bump: from (120,130) CCW down to (190,130), close with flat line back */}
     <path d="M120,130 A35,35,0,0,0,190,130 Z"
       fill="#6366f1" className="sv19-fill"/>
-    {/* Big dome outline only (no top-arc connector to small circle) */}
+    {/* Big dome outline only */}
     <path d="M25,130 A65,65,0,0,1,155,130"
       fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinecap="round" className="sv19-out"/>
-    {/* Small circle — only the downward arc, no flat top */}
-    <path d="M190,130 A35,35,0,0,0,120,130"
-      fill="none" stroke="#818cf8" strokeWidth="2.5" strokeLinecap="round"/>
 
     {/* Baseline */}
     <line x1="25" y1="130" x2="190" y2="130" stroke="#818cf8" strokeWidth="1.3" opacity=".35"/>
