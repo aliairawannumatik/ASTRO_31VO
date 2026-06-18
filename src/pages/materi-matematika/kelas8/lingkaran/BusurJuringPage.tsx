@@ -240,7 +240,7 @@ const AnimasiBusur = () => {
           <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full"
             style={{ background: radius % 7 === 0 ? "rgba(74,222,128,.15)" : "rgba(148,163,184,.12)",
                      color: radius % 7 === 0 ? "#4ade80" : "#94a3b8" }}>
-            π={piLabel}
+            π
           </span>
         </div>
         <p className="text-amber-300 text-xs font-mono text-center">
@@ -442,7 +442,7 @@ const AnimasiJuring = () => {
           <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full"
             style={{ background: radius % 7 === 0 ? "rgba(74,222,128,.15)" : "rgba(148,163,184,.12)",
                      color: radius % 7 === 0 ? "#4ade80" : "#94a3b8" }}>
-            π={piLabel}
+            π
           </span>
         </div>
         <p className="text-purple-300 text-xs font-mono text-center">
@@ -455,51 +455,130 @@ const AnimasiJuring = () => {
 };
 
 /* ═══════════════════════════════════════════════════════════════════
-   Static SVGs (original)
+   Static SVGs — two pizza analogies side by side
 ═══════════════════════════════════════════════════════════════════ */
-const BusurJuringSVG = () => (
-  <svg viewBox="0 0 300 240" className="w-full max-w-sm mx-auto my-2" aria-label="Busur dan juring lingkaran">
+
+const PizzaBusurSVG = () => (
+  <svg viewBox="0 0 220 230" className="w-full" aria-label="Pizza analogi busur">
     <defs>
       <style>{`
-        @keyframes juringFill{0%{opacity:0;}100%{opacity:1;}}
-        @keyframes arcGlow{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 6px #f59e0b);}50%{stroke-opacity:0.4;filter:none;}}
-        .jf{animation:juringFill 1.2s ease-in forwards;}
-        .ag{animation:arcGlow 2s ease-in-out infinite;}
+        @keyframes busurBlink{0%,100%{stroke-width:6;filter:drop-shadow(0 0 10px #f59e0b);opacity:1;}
+          50%{stroke-width:3;filter:none;opacity:0.3;}}
+        .pb-arc{animation:busurBlink 1.2s ease-in-out infinite;}
+        @keyframes crustFill{0%,100%{opacity:0.18;}50%{opacity:0.55;}}
+        .pb-slice{animation:crustFill 1.2s ease-in-out infinite;}
       `}</style>
     </defs>
-    <circle cx="150" cy="120" r="90" fill="rgba(6,182,212,0.08)" stroke="#06b6d4" strokeWidth="2"/>
-    <path d="M150,120 L240,120 A90,90 0 0,0 150,30 Z" fill="rgba(251,191,36,0.3)" stroke="#f59e0b" strokeWidth="2" className="jf"/>
-    <path d="M240,120 A90,90 0 0,0 150,30" fill="none" stroke="#f59e0b" strokeWidth="4" className="ag"/>
-    <line x1="150" y1="120" x2="240" y2="120" stroke="#22c55e" strokeWidth="2" strokeDasharray="5 3"/>
-    <line x1="150" y1="120" x2="150" y2="30" stroke="#22c55e" strokeWidth="2" strokeDasharray="5 3"/>
-    <text x="195" y="116" fill="#4ade80" fontSize="11" fontFamily="monospace" fontWeight="bold">r</text>
-    <text x="145" y="75" fill="#4ade80" fontSize="11" fontFamily="monospace" fontWeight="bold">r</text>
-    <circle cx="150" cy="120" r="4" fill="#06b6d4"/>
-    <text x="155" y="116" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
-    <path d="M150,120 m25,0 a25,25 0 0,0 -25,-25" fill="none" stroke="#fbbf24" strokeWidth="1.5"/>
-    <text x="178" y="104" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">α</text>
-    <text x="195" y="65" fill="#fef08a" fontSize="11" fontFamily="monospace" fontWeight="bold">Busur</text>
-    <text x="190" y="95" fill="#fef08a" fontSize="10" fontFamily="monospace">(panjang = ?)</text>
-    <text x="168" y="108" fill="#fde68a" fontSize="9" fontFamily="monospace">Juring</text>
-    <text x="10" y="200" fill="#94a3b8" fontSize="9" fontFamily="monospace">Panjang Busur = (α/360°) × 2πr</text>
-    <text x="10" y="215" fill="#94a3b8" fontSize="9" fontFamily="monospace">Luas Juring    = (α/360°) × πr²</text>
+    {/* Pizza base (full circle) */}
+    <circle cx="110" cy="110" r="85" fill="rgba(120,53,15,0.55)" stroke="#92400e" strokeWidth="1.5"/>
+    {/* Cheese texture rings */}
+    <circle cx="110" cy="110" r="65" fill="none" stroke="rgba(251,191,36,0.12)" strokeWidth="1"/>
+    <circle cx="110" cy="110" r="40" fill="none" stroke="rgba(251,191,36,0.10)" strokeWidth="1"/>
+    {/* One slice (juring) - dim */}
+    <path d="M110,110 L195,110 A85,85 0 0,0 110,25 Z"
+      fill="rgba(251,191,36,0.15)" stroke="rgba(251,191,36,0.2)" strokeWidth="1"/>
+    {/* BUSUR — blinking arc highlight */}
+    <path d="M195,110 A85,85 0 0,0 110,25"
+      fill="none" stroke="#f59e0b" strokeLinecap="round" className="pb-arc"/>
+    {/* Radii (dim) */}
+    <line x1="110" y1="110" x2="195" y2="110" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="5 3" opacity="0.6"/>
+    <line x1="110" y1="110" x2="110" y2="25" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="5 3" opacity="0.6"/>
+    {/* Center */}
+    <circle cx="110" cy="110" r="4" fill="#06b6d4"/>
+    <text x="117" y="106" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
+    {/* Labels */}
+    <text x="155" y="62" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">BUSUR</text>
+    <text x="152" y="75" fill="#fef08a" fontSize="9" fontFamily="monospace">(tepi kerak)</text>
+    {/* Arrow pointing to arc */}
+    <line x1="153" y1="61" x2="170" y2="72" stroke="#f59e0b" strokeWidth="1.5" markerEnd="url(#arr1)"/>
+    {/* Bottom label */}
+    <text x="110" y="215" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Fokus: Busur 🟠</text>
   </svg>
 );
 
-const TemberengLengkapSVG = () => (
-  <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2" aria-label="Tembereng lingkaran">
+const PizzaJuringSVG = () => (
+  <svg viewBox="0 0 220 230" className="w-full" aria-label="Pizza analogi juring">
     <defs>
-      <style>{`@keyframes tFill{0%{opacity:0;}100%{opacity:1;}}.tf{animation:tFill 1.5s ease-in forwards;}`}</style>
+      <style>{`
+        @keyframes juringBlink{0%,100%{opacity:0.7;filter:drop-shadow(0 0 12px #a855f7);}
+          50%{opacity:0.2;filter:none;}}
+        .pj-slice{animation:juringBlink 1.2s ease-in-out infinite;}
+        @keyframes juringStroke{0%,100%{stroke:#a855f7;filter:drop-shadow(0 0 8px #c084fc);}
+          50%{stroke:#581c87;filter:none;}}
+        .pj-outline{animation:juringStroke 1.2s ease-in-out infinite;}
+      `}</style>
     </defs>
+    {/* Pizza base (full circle) */}
+    <circle cx="110" cy="110" r="85" fill="rgba(120,53,15,0.55)" stroke="#92400e" strokeWidth="1.5"/>
+    {/* Cheese texture rings */}
+    <circle cx="110" cy="110" r="65" fill="none" stroke="rgba(251,191,36,0.12)" strokeWidth="1"/>
+    <circle cx="110" cy="110" r="40" fill="none" stroke="rgba(251,191,36,0.10)" strokeWidth="1"/>
+    {/* JURING — blinking slice */}
+    <path d="M110,110 L195,110 A85,85 0 0,0 110,25 Z"
+      fill="rgba(168,85,247,0.65)" className="pj-slice"/>
+    <path d="M110,110 L195,110 A85,85 0 0,0 110,25 Z"
+      fill="none" strokeWidth="2.5" className="pj-outline"/>
+    {/* Radii */}
+    <line x1="110" y1="110" x2="195" y2="110" stroke="#c4b5fd" strokeWidth="1.8" strokeDasharray="5 3"/>
+    <line x1="110" y1="110" x2="110" y2="25" stroke="#c4b5fd" strokeWidth="1.8" strokeDasharray="5 3"/>
+    {/* r labels */}
+    <text x="155" y="106" fill="#c4b5fd" fontSize="10" fontFamily="monospace" fontWeight="bold">r</text>
+    <text x="104" y="70" fill="#c4b5fd" fontSize="10" fontFamily="monospace" fontWeight="bold">r</text>
+    {/* Center */}
+    <circle cx="110" cy="110" r="4" fill="#06b6d4"/>
+    <text x="117" y="106" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
+    {/* Label inside slice */}
+    <text x="148" y="88" fill="#f3e8ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">JURING</text>
+    <text x="148" y="100" fill="#e9d5ff" fontSize="9" fontFamily="monospace" textAnchor="middle">(potongan)</text>
+    {/* Bottom label */}
+    <text x="110" y="215" fill="#c084fc" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Fokus: Juring 🟣</text>
+  </svg>
+);
+
+const PizzaAnalogiDua = () => (
+  <div className="space-y-2">
+    <div className="grid grid-cols-2 gap-3">
+      <div className="rounded-xl border border-amber-500/30 bg-amber-950/20 p-2">
+        <PizzaBusurSVG />
+      </div>
+      <div className="rounded-xl border border-purple-500/30 bg-purple-950/20 p-2">
+        <PizzaJuringSVG />
+      </div>
+    </div>
+    <p className="text-center text-[10px] text-white/40 font-mono">
+      🍕 Pizza = lingkaran penuh (360°) &nbsp;·&nbsp; Kerak berkedip = busur &nbsp;·&nbsp; Potongan berkedip = juring
+    </p>
+  </div>
+);
+
+const TemberengLengkapSVG = () => (
+  <svg viewBox="0 0 280 210" className="w-full max-w-xs mx-auto my-2" aria-label="Tembereng lingkaran">
+    <defs>
+      <style>{`@keyframes tFill2{0%{opacity:0;}100%{opacity:1;}}.tf2{animation:tFill2 1.5s ease-in forwards;}`}</style>
+    </defs>
+    {/* Full circle outline */}
     <circle cx="140" cy="100" r="80" fill="rgba(6,182,212,0.08)" stroke="#06b6d4" strokeWidth="2"/>
-    <path d="M 76 140 A 80 80 0 0 1 204 140 Z" fill="rgba(168,85,247,0.4)" stroke="#a855f7" strokeWidth="2" className="tf"/>
-    <path d="M 76 140 A 80 80 0 0 1 204 140" fill="none" stroke="#a855f7" strokeWidth="3"/>
-    <line x1="76" y1="140" x2="204" y2="140" stroke="#f97316" strokeWidth="2.5"/>
+    {/* Juring (sector) — green, dim background */}
+    <path d="M140,100 L76,140 A80,80 0 0 1 204,140 Z"
+      fill="rgba(34,197,94,0.18)" stroke="rgba(34,197,94,0.4)" strokeWidth="1.2"/>
+    {/* TEMBERENG — bottom segment (between chord and lower arc), distinct orange-red color */}
+    <path d="M76,140 A80,80 0 0 0 204,140 Z"
+      fill="rgba(251,146,60,0.55)" stroke="#f97316" strokeWidth="2.5" className="tf2"/>
+    {/* Arc stroke on top */}
+    <path d="M76,140 A80,80 0 0 0 204,140"
+      fill="none" stroke="#fb923c" strokeWidth="3.5"/>
+    {/* Chord */}
+    <line x1="76" y1="140" x2="204" y2="140" stroke="#fbbf24" strokeWidth="2.5" strokeDasharray="6 3"/>
+    {/* Radii (dashed) */}
     <line x1="140" y1="100" x2="76" y2="140" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="4 2"/>
     <line x1="140" y1="100" x2="204" y2="140" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="4 2"/>
+    {/* Center */}
     <circle cx="140" cy="100" r="4" fill="#06b6d4"/>
-    <text x="120" y="165" fill="#c084fc" fontSize="10" fontFamily="monospace" fontWeight="bold">Tembereng</text>
-    <text x="100" y="185" fill="#94a3b8" fontSize="8" fontFamily="monospace">L.Tembereng = L.Juring − L.Segitiga</text>
+    <text x="147" y="96" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">O</text>
+    {/* Tembereng label — inside segment */}
+    <text x="140" y="163" fill="#fed7aa" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Tembereng</text>
+    {/* Formula */}
+    <text x="140" y="192" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">L.Tembereng = L.Juring − L.Segitiga</text>
   </svg>
 );
 
@@ -559,7 +638,7 @@ const BusurJuringPage = () => {
                   <strong className="text-orange-300">busur</strong> adalah tepi luar potongan
                   pizza itu — bagian lekungnya yang berkerak!
                 </p>
-                <BusurJuringSVG />
+                <PizzaAnalogiDua />
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
                     💡 <strong>Ide Kunci:</strong> Perbandingan sudut juring dengan sudut penuh
