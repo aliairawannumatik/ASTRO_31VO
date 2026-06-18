@@ -957,12 +957,16 @@ const SoalSVG16 = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
-   SVG C17 – Setengah cincin (half-annulus): outer R=10→100px,
-   inner r=5→50px. Center (130,128). ViewBox 0 0 260 145.
-   "10 cm" label shows the outer radius (dashed horizontal line).
+   SVG C17 – Setengah lingkaran besar (R=10cm→100px, busur atas)
+   + setengah lingkaran kecil (d=R=10cm → r=50px, busur bawah)
+   menempel di SETENGAH sisi datar (kanan) lingkaran besar.
+   Pusat besar O=(130,130). Pusat kecil=(180,130).
+   Path gabungan: M30,130 → busur besar atas → (230,130)
+                → busur kecil bawah → (130,130) → tutup ke kiri.
+   ViewBox "0 0 265 210".
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG17 = () => (
-  <svg viewBox="0 0 260 148" className="w-full max-w-xs mx-auto" aria-label="Setengah cincin half-annulus 10cm">
+  <svg viewBox="0 0 265 210" className="w-full max-w-xs mx-auto" aria-label="Setengah lingkaran besar dengan setengah lingkaran kecil menempel di sisi datar">
     <defs>
       <style>{`
         @keyframes sv17f{0%,100%{opacity:.42;}50%{opacity:.74;}}
@@ -971,23 +975,32 @@ const SoalSVG17 = () => (
         .sv17-out{animation:sv17g 2.5s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Half-annulus fill via evenodd */}
-    <path fillRule="evenodd" fill="#ec4899" className="sv17-fill"
-      d="M30,130 A100,100,0,0,0,230,130 Z M80,130 A50,50,0,0,0,180,130 Z"/>
-    {/* Outer arc */}
-    <path d="M30,130 A100,100,0,0,0,230,130" fill="none" stroke="#f472b6" strokeWidth="2.5" className="sv17-out"/>
-    {/* Inner arc */}
-    <path d="M80,130 A50,50,0,0,0,180,130" fill="none" stroke="#f472b6" strokeWidth="2"/>
-    {/* Base lines */}
-    <line x1="30" y1="130" x2="80" y2="130" stroke="#f472b6" strokeWidth="2.5"/>
-    <line x1="180" y1="130" x2="230" y2="130" stroke="#f472b6" strokeWidth="2.5"/>
-    {/* Center dot */}
-    <circle cx="130" cy="130" r="3.5" fill="#f472b6"/>
-    {/* "10 cm" label = outer radius, dashed */}
-    <line x1="130" y1="130" x2="230" y2="130" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4 2" opacity=".9"/>
-    <text x="176" y="122" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">10 cm</text>
-    {/* r=5 inner label */}
-    <text x="95" y="122" fill="#a5f3fc" fontSize="9" fontFamily="monospace">r=5</text>
+
+    {/* Bangun gabungan:                                                        */}
+    {/* 1. Busur besar atas:  dari (30,130) CW ke (230,130), r=100              */}
+    {/* 2. Busur kecil bawah: dari (230,130) CCW ke (130,130), r=50             */}
+    {/* 3. Tutup: garis lurus dari (130,130) ke (30,130) = setengah diameter kiri */}
+    <path d="M30,130 A100,100,0,0,1,230,130 A50,50,0,0,0,130,130 Z"
+      fill="#ec4899" className="sv17-fill"/>
+    <path d="M30,130 A100,100,0,0,1,230,130 A50,50,0,0,0,130,130 Z"
+      fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinejoin="round" className="sv17-out"/>
+
+    {/* Sisi datar kiri (setengah diameter besar = radius R) */}
+    <line x1="30" y1="130" x2="130" y2="130" stroke="#f472b6" strokeWidth="2.5"/>
+
+    {/* Titik pusat O */}
+    <circle cx="130" cy="130" r="4" fill="#f472b6"/>
+    <text x="118" y="148" fill="#f472b6" fontSize="10" fontFamily="monospace" fontWeight="bold">O</text>
+
+    {/* Jari-jari putus-putus ke atas: R = 10 cm */}
+    <line x1="130" y1="130" x2="130" y2="30" stroke="#fbbf24" strokeWidth="1.3" strokeDasharray="5 3" opacity=".75"/>
+    <text x="145" y="76" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">R = 10 cm</text>
+
+    {/* Label diameter lingkaran kecil (bawah, di luar bangun) */}
+    <text x="180" y="200" fill="#a5f3fc" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 10 cm</text>
+    <line x1="130" y1="194" x2="230" y2="194" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
+    <line x1="130" y1="190" x2="130" y2="198" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
+    <line x1="230" y1="190" x2="230" y2="198" stroke="#a5f3fc" strokeWidth="1" opacity=".5"/>
   </svg>
 );
 
