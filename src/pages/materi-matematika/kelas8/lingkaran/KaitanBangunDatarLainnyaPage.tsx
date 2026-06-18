@@ -908,12 +908,15 @@ const SoalSVG15 = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
-   SVG C16 – Setengah cincin (half-annulus): outer R=14→120px,
-   inner r=7→60px. Center (140,155). ViewBox 0 0 280 175.
-   Even-odd fill: outer half-disk minus inner half-disk.
+   SVG C16 – Lingkaran penuh (r=14cm) dengan persegi di kuadran
+   kiri atas (s = r = 14cm).
+   Scale: 110px = 14cm (~7.86px/cm).
+   Pusat O = (160,160). Lingkaran r=110px.
+   Persegi kiri-atas: (50,50)→(160,160) = 110×110px.
+   Arsiran = lingkaran − persegi (evenodd).
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG16 = () => (
-  <svg viewBox="0 0 280 180" className="w-full max-w-xs mx-auto" aria-label="Setengah cincin half-annulus">
+  <svg viewBox="0 0 295 295" className="w-full max-w-xs mx-auto" aria-label="Lingkaran dengan persegi di kuadran kiri atas">
     <defs>
       <style>{`
         @keyframes sv16f{0%,100%{opacity:.42;}50%{opacity:.74;}}
@@ -922,24 +925,34 @@ const SoalSVG16 = () => (
         .sv16-out{animation:sv16g 2.5s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Half-annulus fill via evenodd: outer half-disk minus inner half-disk */}
+
+    {/* Arsiran = lingkaran − persegi kiri atas (evenodd rule) */}
+    {/* Lingkaran: center(160,160) r=110. Persegi: (50,50)→(160,160). */}
     <path fillRule="evenodd" fill="#f97316" className="sv16-fill"
-      d="M20,158 A120,120,0,0,0,260,158 Z M80,158 A60,60,0,0,0,200,158 Z"/>
-    {/* Outer arc outline */}
-    <path d="M20,158 A120,120,0,0,0,260,158" fill="none" stroke="#fb923c" strokeWidth="2.5" className="sv16-out"/>
-    {/* Inner arc outline */}
-    <path d="M80,158 A60,60,0,0,0,200,158" fill="none" stroke="#fb923c" strokeWidth="2"/>
-    {/* Base lines */}
-    <line x1="20" y1="158" x2="80" y2="158" stroke="#fb923c" strokeWidth="2.5"/>
-    <line x1="200" y1="158" x2="260" y2="158" stroke="#fb923c" strokeWidth="2.5"/>
-    {/* Center dot */}
-    <circle cx="140" cy="158" r="3.5" fill="#fb923c"/>
-    {/* R = 14 cm label */}
-    <line x1="140" y1="158" x2="260" y2="158" stroke="#fbbf24" strokeWidth="1.5" strokeDasharray="4 2" opacity=".85"/>
-    <text x="195" y="150" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold">R = 14</text>
-    {/* r = 7 cm label */}
-    <line x1="140" y1="158" x2="80" y2="158" stroke="#67e8f9" strokeWidth="1.3" strokeDasharray="3 2" opacity=".8"/>
-    <text x="98" y="170" fill="#67e8f9" fontSize="10" fontFamily="monospace">r = 7</text>
+      d="M160,160 m-110,0 a110,110,0,1,0,220,0 a110,110,0,1,0,-220,0 M50,50 H160 V160 H50 Z"/>
+
+    {/* Lingkaran outline */}
+    <circle cx="160" cy="160" r="110" fill="none" stroke="#fb923c" strokeWidth="2.5" className="sv16-out"/>
+
+    {/* Persegi kiri-atas outline */}
+    <rect x="50" y="50" width="110" height="110" fill="none" stroke="#fbbf24" strokeWidth="2.2"/>
+
+    {/* Titik pusat O */}
+    <circle cx="160" cy="160" r="4" fill="#fb923c"/>
+    <text x="164" y="175" fill="#fb923c" fontSize="10" fontFamily="monospace" fontWeight="bold">O</text>
+
+    {/* Jari-jari ke kanan: O→(270,160) */}
+    <line x1="160" y1="160" x2="270" y2="160" stroke="#fbbf24" strokeWidth="1.4" strokeDasharray="5 3" opacity=".75"/>
+    <text x="213" y="152" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r = 14 cm</text>
+
+    {/* Tanda sudut siku-siku di O (sudut persegi) */}
+    <polyline points="160,148 148,148 148,160" fill="none" stroke="#fbbf24" strokeWidth="1.3" opacity=".85"/>
+
+    {/* Label: s = 14 cm — sisi atas persegi */}
+    <text x="105" y="38" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s = 14 cm</text>
+    <line x1="50"  y1="43" x2="160" y2="43" stroke="#67e8f9" strokeWidth="1" opacity=".55"/>
+    <line x1="50"  y1="39" x2="50"  y2="47" stroke="#67e8f9" strokeWidth="1" opacity=".55"/>
+    <line x1="160" y1="39" x2="160" y2="47" stroke="#67e8f9" strokeWidth="1" opacity=".55"/>
   </svg>
 );
 
