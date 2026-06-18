@@ -854,12 +854,17 @@ const SoalSVG14 = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
-   SVG C15 – Seperempat lingkaran r=14 cm (sektor sudut siku-siku).
-   Corner at (25,170), r=130px (=14cm → ~9.3px/cm).
-   Arc from (155,170) to (25,40). Sweep=0 (CCW = upward-left).
+   SVG C15 – Segitiga siku-siku sama kaki (kaki=14cm) dengan
+   seperempat lingkaran di sisi miring (r = kaki = 14cm).
+   Scale: ~9.3px/cm → kaki = 130px.
+   C(30,185) = sudut siku-siku (kanan bawah kiri)
+   A(30, 55) = ujung kaki vertikal
+   B(160,185) = ujung kaki horizontal
+   Sektor: M30,185 L30,55 A130,130,0,0,1,160,185 Z
+   (busur CW dari A ke B, melengkung keluar melewati sisi miring)
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG15 = () => (
-  <svg viewBox="0 0 195 205" className="w-full max-w-xs mx-auto" aria-label="Seperempat lingkaran">
+  <svg viewBox="0 0 210 220" className="w-full max-w-xs mx-auto" aria-label="Segitiga siku-siku sama kaki dengan seperempat lingkaran di sisi miring">
     <defs>
       <style>{`
         @keyframes sv15f{0%,100%{opacity:.42;}50%{opacity:.76;}}
@@ -868,19 +873,43 @@ const SoalSVG15 = () => (
         .sv15-out{animation:sv15g 2.3s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Quarter-circle sector fill */}
-    <path d="M25,170 L155,170 A130,130,0,0,0,25,40 Z"
+
+    {/* Sector fill: kaki CA + busur A→B (CW, menonjol keluar) + kaki BC */}
+    <path d="M30,185 L30,55 A130,130,0,0,1,160,185 Z"
       fill="#a855f7" className="sv15-fill"/>
-    <path d="M25,170 L155,170 A130,130,0,0,0,25,40 Z"
+    <path d="M30,185 L30,55 A130,130,0,0,1,160,185 Z"
       fill="none" stroke="#c084fc" strokeWidth="2.5" strokeLinejoin="round" className="sv15-out"/>
-    {/* Right-angle mark at corner (25,170) */}
-    <polyline points="43,170 43,152 25,152" fill="none" stroke="#c084fc" strokeWidth="1.5" opacity=".8"/>
-    {/* Center dot */}
-    <circle cx="25" cy="170" r="3.5" fill="#a855f7"/>
-    {/* Radius labels */}
-    <text x="88" y="190" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
-    <text x="8" y="108" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold"
-      textAnchor="middle" transform="rotate(-90,8,108)">14 cm</text>
+
+    {/* Sisi miring (hipotenusa) — garis putus-putus menunjukkan segitiga */}
+    <line x1="30" y1="55" x2="160" y2="185"
+      stroke="#e9d5ff" strokeWidth="1.6" strokeDasharray="6 3" opacity=".7"/>
+
+    {/* Sudut siku-siku di C(30,185) */}
+    <polyline points="30,185 30,168 47,168 47,185"
+      fill="none" stroke="#c084fc" strokeWidth="1.3" opacity=".85"/>
+
+    {/* Titik pusat C */}
+    <circle cx="30" cy="185" r="3.5" fill="#c084fc"/>
+
+    {/* Label: 14 cm — kaki vertikal (kiri) */}
+    <line x1="18" y1="55" x2="18" y2="185" stroke="#fbbf24" strokeWidth="1.3" opacity=".7"/>
+    <line x1="14" y1="55"  x2="22" y2="55"  stroke="#fbbf24" strokeWidth="1" opacity=".6"/>
+    <line x1="14" y1="185" x2="22" y2="185" stroke="#fbbf24" strokeWidth="1" opacity=".6"/>
+    <text x="7" y="122" fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" transform="rotate(-90,7,122)">14 cm</text>
+
+    {/* Label: 14 cm — kaki horizontal (bawah) */}
+    <text x="95" y="210" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
+    <line x1="30"  y1="204" x2="160" y2="204" stroke="#fbbf24" strokeWidth="1" opacity=".5"/>
+    <line x1="30"  y1="200" x2="30"  y2="208" stroke="#fbbf24" strokeWidth="1" opacity=".5"/>
+    <line x1="160" y1="200" x2="160" y2="208" stroke="#fbbf24" strokeWidth="1" opacity=".5"/>
+
+    {/* Jari-jari putus-putus ke titik tengah busur (sudut 315° dari C) ≈ (122,93) */}
+    <line x1="30" y1="185" x2="122" y2="93"
+      stroke="#c084fc" strokeWidth="1.2" strokeDasharray="4 2" opacity=".55"/>
+
+    {/* Label: r = 14 cm */}
+    <text x="108" y="112" fill="#e9d5ff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r = 14 cm</text>
   </svg>
 );
 
