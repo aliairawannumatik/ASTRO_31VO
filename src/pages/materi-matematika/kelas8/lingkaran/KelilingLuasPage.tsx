@@ -478,24 +478,6 @@ const KelilingLuasCirclesSVG = () => (
   </div>
 );
 
-const AreaCompareSVG = () => (
-  <svg viewBox="0 0 300 180" className="w-full max-w-sm mx-auto my-2" aria-label="Luas lingkaran">
-    <defs>
-      <style>{`@keyframes sectorFill{0%{opacity:0;}100%{opacity:1;}}.sf{animation:sectorFill 0.8s ease-in forwards;}`}</style>
-    </defs>
-    <circle cx="150" cy="90" r="75" fill="rgba(239,68,68,0.12)" stroke="#ef4444" strokeWidth="2"/>
-    {[0,1,2,3,4,5,6,7].map(i => (
-      <path key={i} d={`M150,90 L${150+75*Math.cos(i*Math.PI/4)},${90+75*Math.sin(i*Math.PI/4)} A75,75 0 0,1 ${150+75*Math.cos((i+1)*Math.PI/4)},${90+75*Math.sin((i+1)*Math.PI/4)} Z`}
-        fill={i%2===0?"rgba(239,68,68,0.3)":"rgba(251,191,36,0.3)"}
-        stroke={i%2===0?"#ef4444":"#fbbf24"} strokeWidth="1" className="sf"
-        style={{animationDelay:`${i*0.1}s`}}/>
-    ))}
-    <circle cx="150" cy="90" r="4" fill="var(--icon-color)"/>
-    <line x1="150" y1="90" x2="225" y2="90" stroke="#22c55e" strokeWidth="2" strokeDasharray="4 2"/>
-    <text x="187" y="84" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold">r</text>
-    <text x="150" y="172" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">L = π × r²  (luas semua juring = luas lingkaran)</text>
-  </svg>
-);
 
 const KelilingLuasPage = () => {
   const navigate = useNavigate();
@@ -551,7 +533,6 @@ const KelilingLuasPage = () => {
                   <p className="font-body text-sm text-white/80 mb-2">Keliling adalah panjang garis lengkung yang membentuk lingkaran. Luas adalah daerah di dalam lingkaran.</p>
                 </div>
                 <KelilingLuasCirclesSVG />
-                <AreaCompareSVG />
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
                     ⚠️ <strong>Perhatikan satuan!</strong> Keliling = satuan panjang (cm, m). Luas = satuan kuadrat (cm², m²).
