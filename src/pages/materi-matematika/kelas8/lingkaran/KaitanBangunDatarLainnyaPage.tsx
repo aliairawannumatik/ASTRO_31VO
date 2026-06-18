@@ -806,8 +806,8 @@ const SoalSVG14 = () => (
   <svg viewBox="0 95 325 135" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri menempel sisi kiri">
     <defs>
       <style>{`
-        @keyframes sv14f{0%,100%{opacity:.38;}50%{opacity:.68;}}
-        @keyframes sv14g{0%,100%{filter:drop-shadow(0 0 7px #0ea5e9);}50%{filter:drop-shadow(0 0 18px #0ea5e9);}}
+        @keyframes sv14f{0%,100%{opacity:.42;}50%{opacity:.76;}}
+        @keyframes sv14g{0%,100%{filter:drop-shadow(0 0 7px #fb7185);}50%{filter:drop-shadow(0 0 20px #fb7185);}}
         .sv14-fill{animation:sv14f 2.4s ease-in-out infinite;}
         .sv14-out{animation:sv14g 2.4s ease-in-out infinite;}
       `}</style>
@@ -816,40 +816,40 @@ const SoalSVG14 = () => (
     {/* Quarter circle center=(90,195)=bottom-left of trapezoid, r=70.
         Arc from (20,195) CW to (90,125) — sector bulges upper-left. */}
     <path d="M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z"
-      fill="rgba(14,165,233,.2)" className="sv14-fill"/>
+      fill="#f43f5e" className="sv14-fill"/>
     <path d="M20,195 A70,70,0,0,1,90,125 L230,125 L300,195 Z"
-      fill="none" stroke="#0ea5e9" strokeWidth="2.5" strokeLinejoin="round" className="sv14-out"/>
+      fill="none" stroke="#fb7185" strokeWidth="2.5" strokeLinejoin="round" className="sv14-out"/>
     {/* Dashed radii of the quarter-circle sector */}
     {/* Horizontal radius: center(90,195)→left(20,195) */}
-    <line x1="20" y1="195" x2="90" y2="195" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".6"/>
+    <line x1="20" y1="195" x2="90" y2="195" stroke="#fda4af" strokeWidth="1.5" strokeDasharray="5 3" opacity=".85"/>
     {/* Vertical radius: center(90,195)→top(90,125) — coincides with trapezoid left side */}
-    <line x1="90" y1="125" x2="90" y2="195" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".6"/>
+    <line x1="90" y1="125" x2="90" y2="195" stroke="#fda4af" strokeWidth="1.5" strokeDasharray="5 3" opacity=".85"/>
     {/* Right-angle mark at center (90,195) — legs go up and left */}
-    <polyline points="90,195 90,182 77,182 77,195" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity=".7"/>
+    <polyline points="90,195 90,182 77,182 77,195" fill="none" stroke="#fda4af" strokeWidth="1.2" opacity=".9"/>
     {/* Center dot */}
-    <circle cx="90" cy="195" r="3.5" fill="#0ea5e9" opacity=".8"/>
+    <circle cx="90" cy="195" r="3.5" fill="white" opacity=".9"/>
 
     {/* Label: 28 cm — flat top of trapezoid (TL→TR at y=125) */}
     <text x="160" y="117" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
-    <line x1="90" y1="121" x2="230" y2="121" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
-    <line x1="90" y1="117" x2="90" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
-    <line x1="230" y1="117" x2="230" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
+    <line x1="90" y1="121" x2="230" y2="121" stroke="#fbbf24" strokeWidth="1" opacity=".55"/>
+    <line x1="90" y1="117" x2="90" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".55"/>
+    <line x1="230" y1="117" x2="230" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".55"/>
 
     {/* Label: 14 cm — trapezoid height (right side, x=310, y=125→195) */}
-    <line x1="310" y1="125" x2="310" y2="195" stroke="#4ade80" strokeWidth="1.3" opacity=".7"/>
-    <line x1="306" y1="125" x2="314" y2="125" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
-    <line x1="306" y1="195" x2="314" y2="195" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
+    <line x1="310" y1="125" x2="310" y2="195" stroke="#4ade80" strokeWidth="1.3" opacity=".8"/>
+    <line x1="306" y1="125" x2="314" y2="125" stroke="#4ade80" strokeWidth="1" opacity=".7"/>
+    <line x1="306" y1="195" x2="314" y2="195" stroke="#4ade80" strokeWidth="1" opacity=".7"/>
     <text x="322" y="163" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold"
       textAnchor="middle" transform="rotate(-90,322,163)">14 cm</text>
 
     {/* Label: r = 14 — above the horizontal dashed radius */}
-    <text x="55" y="186" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r=14</text>
+    <text x="55" y="186" fill="#fda4af" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r=14</text>
 
     {/* Label: 42 cm — bottom of trapezoid */}
-    <text x="195" y="213" fill="#0ea5e9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">42 cm</text>
-    <line x1="90" y1="207" x2="300" y2="207" stroke="#0ea5e9" strokeWidth="1" opacity=".4"/>
-    <line x1="90" y1="203" x2="90" y2="211" stroke="#0ea5e9" strokeWidth="1" opacity=".4"/>
-    <line x1="300" y1="203" x2="300" y2="211" stroke="#0ea5e9" strokeWidth="1" opacity=".4"/>
+    <text x="195" y="213" fill="#fb7185" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">42 cm</text>
+    <line x1="90" y1="207" x2="300" y2="207" stroke="#fb7185" strokeWidth="1" opacity=".55"/>
+    <line x1="90" y1="203" x2="90" y2="211" stroke="#fb7185" strokeWidth="1" opacity=".55"/>
+    <line x1="300" y1="203" x2="300" y2="211" stroke="#fb7185" strokeWidth="1" opacity=".55"/>
   </svg>
 );
 
