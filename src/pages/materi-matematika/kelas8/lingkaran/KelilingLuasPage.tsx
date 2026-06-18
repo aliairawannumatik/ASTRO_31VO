@@ -8,7 +8,8 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 const PiAnimationSVG = () => {
-  const [prog, setProg] = useState(0);
+  const [prog, setProg]       = useState(0);
+  const [hasSeen, setHasSeen] = useState(false);
   useEffect(() => {
     let id: number;
     const start = performance.now();
@@ -17,6 +18,11 @@ const PiAnimationSVG = () => {
     id = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(id);
   }, []);
+
+  /* Sekali π terungkap, tetap tampil walau animasi loop ulang */
+  useEffect(() => {
+    if (prog > 0.91 && !hasSeen) setHasSeen(true);
+  }, [prog, hasSeen]);
 
   const ease = (x: number) => x < 0.5 ? 2*x*x : 1 - (-2*x+2)**2/2;
   const band = (s: number, e: number) => prog < s ? 0 : prog > e ? 1 : ease((prog-s)/(e-s));
@@ -310,6 +316,29 @@ const PiAnimationSVG = () => {
           fontFamily="sans-serif">{phaseLabel}</text>
       </svg>
 
+      {/* ── Hasil π dalam LaTeX, muncul permanen setelah terungkap ── */}
+      <style>{`
+        @keyframes piGlow {
+          0%,100% { opacity:.72; filter: drop-shadow(0 0 5px #c084fc) drop-shadow(0 0 12px rgba(192,132,252,.35)); }
+          50%      { opacity:1;   filter: drop-shadow(0 0 14px #e879f9) drop-shadow(0 0 28px rgba(232,121,249,.65)) drop-shadow(0 0 42px rgba(251,191,36,.25)); }
+        }
+        .pi-latex-glow { animation: piGlow 2.4s ease-in-out infinite; color: #e879f9; }
+        .pi-latex-glow .katex { font-size: 1.35em; }
+        .pi-latex-result { color: #fbbf24; letter-spacing:.04em; }
+      `}</style>
+
+      {hasSeen && (
+        <div className="flex flex-col items-center gap-1 pb-1"
+          style={{ animation: 'fadeInUp .6s ease both' }}>
+          <style>{`@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}`}</style>
+          <div className="pi-latex-glow">
+            <BlockMath math={String.raw`\pi \;=\; \frac{K}{d}`} />
+          </div>
+          <p className="pi-latex-result font-mono text-lg font-black tracking-wider">
+            ≈ 3,14159<span className="opacity-60">...</span>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
