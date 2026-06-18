@@ -307,16 +307,6 @@ const PengaturanPage = () => {
                       <p className={`font-display font-bold text-[10px] text-center leading-tight ${isDark ? "text-white/80" : "text-gray-700"}`}>
                         {td.name}
                       </p>
-                      {/* Ready / Not Ready badge */}
-                      <span className={`text-[8px] font-bold font-display px-1.5 py-0.5 rounded-full leading-none ${
-                        td.ready
-                          ? "bg-emerald-500/20 text-emerald-400 ring-1 ring-emerald-500/30"
-                          : isDark
-                            ? "bg-white/10 text-white/35 ring-1 ring-white/10"
-                            : "bg-gray-200 text-gray-400 ring-1 ring-gray-300"
-                      }`}>
-                        {td.ready ? "✓ Ready" : "Not Ready"}
-                      </span>
                       {isActive && (
                         <div className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full ${td.activeDot}`} />
                       )}
