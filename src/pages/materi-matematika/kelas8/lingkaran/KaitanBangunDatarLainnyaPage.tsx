@@ -795,14 +795,15 @@ const SoalSVG13 = () => (
 );
 
 /* ═══════════════════════════════════════════════════════════════════
-   SVG C14 – Trapesium simetris (a₁=28, a₂=42, h=14) + setengah
-   lingkaran (r=14) di atas. Scale: 5px/cm.
-   Bottom: (35,210)-(245,210) = 210px = 42cm
-   Top (diameter): (70,140)-(210,140) = 140px = 28cm
-   Trapezoid height: 70px = 14cm. Semicircle center (140,140) r=70.
+   SVG C14 – Trapesium (a₁=28, a₂=42, h=14) + seperempat lingkaran
+   (r=14) di KIRI atas. Scale: 5px/cm.
+   Kanan trapesium: BL(90,195) BR(300,195) TL(90,125) TR(230,125).
+   Seperempat lingkaran: center=TL(90,125), r=70px.
+   Arc from (20,125) CW upward to (90,55). Sector bulges upper-left.
+   Combined path: M20,125 A70,70,0,0,1,90,55 L90,195 L300,195 L230,125 Z
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG14 = () => (
-  <svg viewBox="0 0 280 240" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus setengah lingkaran di atas">
+  <svg viewBox="0 0 325 225" className="w-full max-w-xs mx-auto" aria-label="Trapesium plus seperempat lingkaran di kiri atas">
     <defs>
       <style>{`
         @keyframes sv14f{0%,100%{opacity:.38;}50%{opacity:.68;}}
@@ -811,28 +812,44 @@ const SoalSVG14 = () => (
         .sv14-out{animation:sv14g 2.4s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Combined fill: semicircle on top + trapezoid below */}
-    <path d="M70,140 A70,70,0,0,0,210,140 L245,210 L35,210 Z"
+    {/* Combined fill: quarter-circle sector (upper-left) + right trapezoid */}
+    {/* Path: from leftmost arc point, arc CW up to top of sector, then down the left side,
+        along the bottom (42cm), up the right slant, and close along the top (28cm+14cm sector) */}
+    <path d="M20,125 A70,70,0,0,1,90,55 L90,195 L300,195 L230,125 Z"
       fill="rgba(14,165,233,.2)" className="sv14-fill"/>
-    <path d="M70,140 A70,70,0,0,0,210,140 L245,210 L35,210 Z"
+    <path d="M20,125 A70,70,0,0,1,90,55 L90,195 L300,195 L230,125 Z"
       fill="none" stroke="#0ea5e9" strokeWidth="2.5" strokeLinejoin="round" className="sv14-out"/>
-    {/* Dashed diameter line (boundary between trapezoid & semicircle) */}
-    <line x1="70" y1="140" x2="210" y2="140" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".55"/>
-    {/* Label: 28 cm — diameter of semicircle */}
-    <text x="140" y="83" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
-    <line x1="70" y1="88" x2="210" y2="88" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
-    <line x1="70" y1="84" x2="70" y2="92" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
-    <line x1="210" y1="84" x2="210" y2="92" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
-    {/* Label: 14 cm — height of trapezoid */}
-    <line x1="22" y1="140" x2="22" y2="210" stroke="#4ade80" strokeWidth="1.3" opacity=".7"/>
-    <line x1="18" y1="140" x2="26" y2="140" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
-    <line x1="18" y1="210" x2="26" y2="210" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
-    <text x="10" y="178" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold"
-      textAnchor="middle" transform="rotate(-90,10,178)">14 cm</text>
+    {/* Dashed radii of the quarter-circle sector */}
+    {/* Horizontal radius: center(90,125)→left(20,125) */}
+    <line x1="20" y1="125" x2="90" y2="125" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".6"/>
+    {/* Vertical radius: center(90,125)→top(90,55) */}
+    <line x1="90" y1="55" x2="90" y2="125" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5 3" opacity=".6"/>
+    {/* Right-angle mark at center (90,125) */}
+    <polyline points="90,125 90,112 103,112 103,125" fill="none" stroke="#94a3b8" strokeWidth="1.2" opacity=".7"/>
+    {/* Center dot */}
+    <circle cx="90" cy="125" r="3.5" fill="#0ea5e9" opacity=".8"/>
+
+    {/* Label: 28 cm — flat top of trapezoid (from TL to TR, at y=125) */}
+    <text x="160" y="117" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
+    <line x1="90" y1="121" x2="230" y2="121" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
+    <line x1="90" y1="117" x2="90" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
+    <line x1="230" y1="117" x2="230" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".45"/>
+
+    {/* Label: 14 cm — trapezoid height (left side, at x=78 from y=125 to y=195) */}
+    <line x1="78" y1="125" x2="78" y2="195" stroke="#4ade80" strokeWidth="1.3" opacity=".7"/>
+    <line x1="74" y1="125" x2="82" y2="125" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
+    <line x1="74" y1="195" x2="82" y2="195" stroke="#4ade80" strokeWidth="1" opacity=".6"/>
+    <text x="66" y="163" fill="#4ade80" fontSize="10" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" transform="rotate(-90,66,163)">14 cm</text>
+
+    {/* Label: r = 14 inside the sector area */}
+    <text x="52" y="96" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">r=14</text>
+
     {/* Label: 42 cm — bottom of trapezoid */}
-    <text x="140" y="228" fill="#0ea5e9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">42 cm</text>
-    {/* Center dot of semicircle */}
-    <circle cx="140" cy="140" r="3" fill="#0ea5e9" opacity=".7"/>
+    <text x="195" y="213" fill="#0ea5e9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">42 cm</text>
+    <line x1="90" y1="207" x2="300" y2="207" stroke="#0ea5e9" strokeWidth="1" opacity=".4"/>
+    <line x1="90" y1="203" x2="90" y2="211" stroke="#0ea5e9" strokeWidth="1" opacity=".4"/>
+    <line x1="300" y1="203" x2="300" y2="211" stroke="#0ea5e9" strokeWidth="1" opacity=".4"/>
   </svg>
 );
 
@@ -1463,30 +1480,30 @@ const KaitanBangunDatarLainnyaPage = () => {
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(14,165,233,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader id="contoh14" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
-              title="✏️ Contoh 14 — Trapesium + Setengah Lingkaran (π = 22/7)"
+              title="✏️ Contoh 14 — Trapesium + Seperempat Lingkaran di Kiri (π = 22/7)"
               accent="rgba(14,165,233,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
                 <p className="text-sky-300 font-bold text-xs uppercase tracking-wide mb-2">🔷 Soal</p>
                 <p className="font-body text-sm text-white/90">
-                  Sebuah bangun gabungan terdiri dari trapesium simetris di bagian bawah (sisi sejajar 28 cm dan 42 cm, tinggi 14 cm) dan setengah lingkaran di bagian atas dengan diameter 28 cm. Hitunglah <strong>luas bangun</strong> tersebut! <InlineMath math="(\pi = \tfrac{22}{7})"/>
+                  Sebuah bangun gabungan terdiri dari trapesium simetris di bagian kanan (sisi sejajar 28 cm dan 42 cm, tinggi 14 cm) dan seperempat lingkaran di bagian kiri dengan jari-jari 14 cm. Hitunglah <strong>luas bangun</strong> tersebut! <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
               <SoalSVG14 />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
                 <p className="font-body text-sm text-white/80">
-                  <strong>Diketahui:</strong> Trapesium: a₁ = 28 cm, a₂ = 42 cm, t = 14 cm. Setengah lingkaran: d = 28 cm → <InlineMath math="r = 14"/> cm.
+                  <strong>Diketahui:</strong> Trapesium: a₁ = 28 cm, a₂ = 42 cm, t = 14 cm. Seperempat lingkaran: <InlineMath math="r = 14"/> cm.
                 </p>
                 <p className="font-body text-sm text-white/80"><strong>Luas trapesium:</strong></p>
                 <BlockMath math="L_{\text{trap}} = \tfrac{1}{2}(a_1 + a_2) \times t = \tfrac{1}{2}(28 + 42) \times 14 = \tfrac{1}{2} \times 70 \times 14 = 490 \text{ cm}^2" />
-                <p className="font-body text-sm text-white/80"><strong>Luas setengah lingkaran:</strong></p>
-                <BlockMath math="L_{\text{semi}} = \tfrac{1}{2}\pi r^2 = \tfrac{1}{2} \times \tfrac{22}{7} \times 14^2 = \tfrac{1}{2} \times \tfrac{22}{7} \times 196 = \tfrac{1}{2} \times 616 = 308 \text{ cm}^2" />
+                <p className="font-body text-sm text-white/80"><strong>Luas seperempat lingkaran:</strong></p>
+                <BlockMath math="L_{\tfrac{1}{4}\text{lingk}} = \tfrac{1}{4}\pi r^2 = \tfrac{1}{4} \times \tfrac{22}{7} \times 14^2 = \tfrac{1}{4} \times \tfrac{22}{7} \times 196 = \tfrac{1}{4} \times 616 = 154 \text{ cm}^2" />
                 <p className="font-body text-sm text-white/80"><strong>Total luas:</strong></p>
-                <BlockMath math="L = L_{\text{trap}} + L_{\text{semi}} = 490 + 308 = \boxed{798 \text{ cm}^2}" />
+                <BlockMath math="L = L_{\text{trap}} + L_{\tfrac{1}{4}\text{lingk}} = 490 + 154 = \boxed{644 \text{ cm}^2}" />
                 <div className="rounded-lg p-3 border text-center mt-2" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
                   <p className="text-sky-300 text-xs font-bold">✅ Luas Bangun</p>
-                  <p className="text-white text-sm font-bold mt-1">798 cm²</p>
+                  <p className="text-white text-sm font-bold mt-1">644 cm²</p>
                 </div>
               </div>
             </div>
