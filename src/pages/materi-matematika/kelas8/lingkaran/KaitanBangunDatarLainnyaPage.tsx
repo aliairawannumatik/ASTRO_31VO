@@ -235,7 +235,7 @@ const PersegipanjangDanLingkaranSVG = () => (
    Rect: (40,30)→(280,150), w=240,h=120. r=60. Masks kiri & kanan.
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG1 = () => (
-  <svg viewBox="0 0 320 200" className="w-full max-w-xs mx-auto" aria-label="Dumbbell arsiran">
+  <svg viewBox="0 0 320 200" className="w-full max-w-sm mx-auto" aria-label="Dumbbell arsiran">
     <defs>
       <style>{`
         @keyframes db1{0%,100%{opacity:.42;}50%{opacity:.75;}}
@@ -244,27 +244,30 @@ const SoalSVG1 = () => (
         .db-out{animation:dbg 2.4s ease-in-out infinite;}
       `}</style>
     </defs>
-    {/* Dashed rectangle for reference */}
-    <rect x="40" y="35" width="240" height="120" fill="none" stroke="#64748b" strokeWidth="1.2" strokeDasharray="5 3" opacity=".45"/>
-    {/* Left cut-out D-shape (light cyan) */}
-    <path d="M40,35 A60,60,0,0,0,40,155 Z" fill="rgba(34,211,238,.13)" stroke="#22d3ee" strokeWidth="1.8" strokeDasharray="4 2"/>
-    {/* Right cut-out D-shape */}
-    <path d="M280,35 A60,60,0,0,1,280,155 Z" fill="rgba(34,211,238,.13)" stroke="#22d3ee" strokeWidth="1.8" strokeDasharray="4 2"/>
-    {/* Shaded dumbbell shape (direct path) */}
-    <path d="M40,35 L280,35 A60,60,0,0,1,280,155 L40,155 A60,60,0,0,1,40,35 Z"
-      fill="#f97316" className="db-fill"/>
-    {/* Dumbbell outline */}
-    <path d="M40,35 L280,35 A60,60,0,0,1,280,155 L40,155 A60,60,0,0,1,40,35 Z"
-      fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinejoin="round" className="db-out"/>
-    {/* r=7 inside left cut-out */}
-    <circle cx="40" cy="95" r="3" fill="#22d3ee"/>
-    <line x1="40" y1="95" x2="100" y2="95" stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="4 2" opacity=".9"/>
-    <text x="48" y="88" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">r = 7</text>
+    {/* Arsiran fill: rectangle minus two INWARD semicircles (evenodd rule) */}
+    <path
+      fillRule="evenodd"
+      fill="#f97316"
+      className="db-fill"
+      d="M40,35 L280,35 L280,155 L40,155 Z M40,35 A60,60,0,0,1,40,155 Z M280,35 A60,60,0,0,0,280,155 Z"
+    />
+    {/* Rectangle outline */}
+    <rect x="40" y="35" width="240" height="120" fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinejoin="round" className="db-out"/>
+    {/* Left inward-semicircle arc outline */}
+    <path d="M40,35 A60,60,0,0,1,40,155" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="4 2"/>
+    {/* Right inward-semicircle arc outline */}
+    <path d="M280,35 A60,60,0,0,0,280,155" fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="4 2"/>
+    {/* Center dot of left semicircle */}
+    <circle cx="40" cy="95" r="3.5" fill="#22d3ee"/>
+    {/* Radius line: center (40,95) → rightmost point of inward cut (100,95) */}
+    <line x1="40" y1="95" x2="100" y2="95" stroke="#22d3ee" strokeWidth="1.6" strokeDasharray="4 2" opacity=".95"/>
+    {/* r = 7 cm label — centered above the radius line */}
+    <text x="70" y="82" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r = 7 cm</text>
     {/* Dimension 28 cm */}
-    <text x="158" y="23" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
+    <text x="160" y="22" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
     {/* Dimension 14 cm */}
     <line x1="296" y1="35" x2="296" y2="155" stroke="#4ade80" strokeWidth="1.2" opacity=".7"/>
-    <text x="308" y="99" fill="#4ade80" fontSize="10" fontFamily="monospace" transform="rotate(90,308,99)">14 cm</text>
+    <text x="312" y="95" fill="#4ade80" fontSize="10" fontFamily="monospace" textAnchor="middle" transform="rotate(90,312,95)">14 cm</text>
   </svg>
 );
 
@@ -614,6 +617,72 @@ const SoalSVG10 = () => (
     {/* Radius label */}
     <line x1="110" y1="120" x2="215" y2="120" stroke="#fbbf24" strokeWidth="1.4" strokeDasharray="5 3" opacity=".8"/>
     <text x="152" y="112" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">10 cm</text>
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════════════════════════
+   SVG C11 – 4 daun (seperti contoh 10) disusun menjadi bunga
+   Setiap daun = lensa dari 2 busur ¼ lingkaran, seperti pada SVG C8.
+   2×2 grid tiap kotak 110×110 (=7cm), center (130,130), grid 220×220.
+   Daun TL: dari sudut (20,20) → (130,130)
+   Daun TR: dari sudut (240,20) → (130,130)
+   Daun BL: dari sudut (20,240) → (130,130)
+   Daun BR: dari sudut (240,240) → (130,130)
+═══════════════════════════════════════════════════════════════════ */
+const SoalSVG11 = () => (
+  <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label="4 daun bunga dalam persegi">
+    <defs>
+      <style>{`
+        @keyframes fl11{0%,100%{opacity:.45;}50%{opacity:.78;}}
+        @keyframes fl11g{0%,100%{filter:drop-shadow(0 0 8px #14b8a6);}50%{filter:drop-shadow(0 0 20px #14b8a6);}}
+        .fl11-fill{animation:fl11 2.2s ease-in-out infinite;}
+        .fl11-out{animation:fl11g 2.2s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    {/* Outer bounding square 14cm × 14cm */}
+    <rect x="20" y="20" width="220" height="220" fill="none" stroke="#475569" strokeWidth="1.5" strokeDasharray="4 3" opacity=".5"/>
+    {/* Grid dividers (show 4 sub-squares, each = 7cm) */}
+    <line x1="130" y1="20" x2="130" y2="240" stroke="#334155" strokeWidth="1" strokeDasharray="3 3" opacity=".4"/>
+    <line x1="20" y1="130" x2="240" y2="130" stroke="#334155" strokeWidth="1" strokeDasharray="3 3" opacity=".4"/>
+
+    {/* ── 4 daun fills ── */}
+    {/* Daun TL: (20,20)↔(130,130) — arc centres at (130,20) and (20,130) */}
+    <path d="M20,20 A110,110,0,0,1,130,130 A110,110,0,0,1,20,20 Z"
+      fill="#14b8a6" className="fl11-fill"/>
+    {/* Daun TR: (240,20)↔(130,130) — arc centres at (130,20) and (240,130) */}
+    <path d="M240,20 A110,110,0,0,0,130,130 A110,110,0,0,0,240,20 Z"
+      fill="#14b8a6" className="fl11-fill"/>
+    {/* Daun BL: (20,240)↔(130,130) — arc centres at (20,130) and (130,240) */}
+    <path d="M20,240 A110,110,0,0,0,130,130 A110,110,0,0,0,20,240 Z"
+      fill="#14b8a6" className="fl11-fill"/>
+    {/* Daun BR: (240,240)↔(130,130) — arc centres at (240,130) and (130,240) */}
+    <path d="M240,240 A110,110,0,0,1,130,130 A110,110,0,0,1,240,240 Z"
+      fill="#14b8a6" className="fl11-fill"/>
+
+    {/* ── 4 daun outlines ── */}
+    <path d="M20,20 A110,110,0,0,1,130,130 A110,110,0,0,1,20,20 Z"
+      fill="none" stroke="#2dd4bf" strokeWidth="2" className="fl11-out"/>
+    <path d="M240,20 A110,110,0,0,0,130,130 A110,110,0,0,0,240,20 Z"
+      fill="none" stroke="#2dd4bf" strokeWidth="2"/>
+    <path d="M20,240 A110,110,0,0,0,130,130 A110,110,0,0,0,20,240 Z"
+      fill="none" stroke="#2dd4bf" strokeWidth="2"/>
+    <path d="M240,240 A110,110,0,0,1,130,130 A110,110,0,0,1,240,240 Z"
+      fill="none" stroke="#2dd4bf" strokeWidth="2"/>
+
+    {/* Corner dots */}
+    <circle cx="20"  cy="20"  r="3.5" fill="#fde68a"/>
+    <circle cx="240" cy="20"  r="3.5" fill="#fde68a"/>
+    <circle cx="20"  cy="240" r="3.5" fill="#fde68a"/>
+    <circle cx="240" cy="240" r="3.5" fill="#fde68a"/>
+    {/* Center dot */}
+    <circle cx="130" cy="130" r="4" fill="#2dd4bf"/>
+
+    {/* Dimension labels */}
+    <text x="128" y="257" fill="#2dd4bf" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
+    <text x="6" y="134" fill="#2dd4bf" fontSize="10" fontFamily="monospace" transform="rotate(-90,6,134)">14 cm</text>
+    {/* 7cm half-side labels */}
+    <text x="75"  y="14" fill="#fde68a" fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
+    <text x="185" y="14" fill="#fde68a" fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
   </svg>
 );
 
@@ -1308,7 +1377,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                     Di dalam persegi bersisi 14 cm, dari keempat sudutnya dibuat busur seperempat lingkaran (r = 14 cm). Pasangan busur yang saling berpotongan membentuk 4 buah kelopak bunga. Hitunglah luas total keempat kelopak yang diarsir! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                   </p>
                 </div>
-                <SoalSVG9 />
+                <SoalSVG11 />
                 <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                   <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
                   <p className="font-body text-sm text-white/80">
