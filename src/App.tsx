@@ -814,6 +814,7 @@ const UnsurUnsurLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika
 const KelilingLuasLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/KelilingLuasPage"));
 const KaitanBangunDatarLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/KaitanBangunDatarPage"));
 const KaitanBangunDatarLainnyaLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/KaitanBangunDatarLainnyaPage"));
+const BukuAnimasiKaitanBangunDatarLainnyaMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/BukuAnimasiKaitanBangunDatarLainnyaPage"));
 const BusurJuringLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/BusurJuringPage"));
 const SudutPusatKelilingLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/SudutPusatKelilingPage"));
 const PenerapanKontekstualLingkaranMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/lingkaran/PenerapanKontekstualPage"));
@@ -1643,6 +1644,7 @@ const AppInner = () => {
           <Route path="/materi-matematika/kelas-8/lingkaran/unsur-unsur" element={<UnsurUnsurLingkaranMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/lingkaran/keliling-luas" element={<KelilingLuasLingkaranMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/lingkaran/kaitan-bangun-datar-lainnya" element={<KaitanBangunDatarLainnyaLingkaranMMK8Page />} />
+          <Route path="/materi-matematika/kelas-8/lingkaran/buku-animasi-kaitan-bangun-datar-lainnya" element={<BukuAnimasiKaitanBangunDatarLainnyaMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/lingkaran/kaitan-bangun-datar" element={<KaitanBangunDatarLingkaranMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/lingkaran/busur-juring" element={<BusurJuringLingkaranMMK8Page />} />
           <Route path="/materi-matematika/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingLingkaranMMK8Page />} />
