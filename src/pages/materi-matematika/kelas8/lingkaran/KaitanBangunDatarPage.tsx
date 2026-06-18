@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, FlaskConical } from "lucide-react";
+import { BookOpen, Lightbulb, Target, FlaskConical } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
@@ -138,31 +138,23 @@ const LingkaranLuarSegitigaSVG = () => (
 
 const KaitanBangunDatarPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "kaitan", "contoh1", "contoh2", "rangkuman"]);
-  const toggle = (id: string) => { playPopSound(); setOpen(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]); };
 
   const SectionHeader = ({
-    id, icon, iconColor, title, gradFrom, gradTo, borderColor,
+    icon, iconColor, title, gradFrom, borderColor,
   }: {
-    id: string; icon: React.ReactNode; iconColor?: string; title: string;
+    id?: string; icon: React.ReactNode; iconColor?: string; title: string;
     gradFrom?: string; gradTo?: string; borderColor?: string;
   }) => (
-    <button
-      onClick={() => toggle(id)}
-      className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer transition-all"
-      style={open.includes(id) ? {
+    <div
+      className="w-full flex items-center px-5 py-4"
+      style={{
         background: `linear-gradient(to right, ${gradFrom ?? "rgba(6,182,212,.12)"}, transparent)`,
         borderBottom: `1px solid ${borderColor ?? "rgba(6,182,212,.25)"}`,
-      } : {}}
+      }}
     >
-      <div className="flex items-center gap-3">
-        <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
-      </div>
-      {open.includes(id)
-        ? <ChevronUp   className="w-5 h-5" style={{color: borderColor ?? "#06b6d4"}} />
-        : <ChevronDown className="w-5 h-5 text-white/30" />}
-    </button>
+      <span className={iconColor}>{icon}</span>
+      <span className="font-body font-semibold text-white ml-3">{title}</span>
+    </div>
   );
 
   return (
@@ -175,7 +167,7 @@ const KaitanBangunDatarPage = () => {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-3 text-xs font-body font-bold tracking-wide"
             style={{background:"rgba(168,85,247,.15)",border:"1px solid rgba(168,85,247,.4)",color:"#c084fc"}}>
-            <BookOpen className="w-3.5 h-3.5"/> KELAS 8 · LINGKARAN · MATERI
+            <BookOpen className="w-3.5 h-3.5"/> KELAS 8 · LINGKARAN · BUKU ANIMASI MATEMATIKA
           </div>
           <h1 className="font-display text-xl md:text-3xl font-bold mb-2 text-glow-cyan"
             style={{background:"linear-gradient(135deg,#22d3ee,#a78bfa,#f97316)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>
@@ -196,7 +188,6 @@ const KaitanBangunDatarPage = () => {
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400"
               title="🔗 Lingkaran dan Sahabat-Sahabatnya"
               gradFrom="rgba(234,179,8,.12)" borderColor="rgba(234,179,8,.3)"/>
-            {open.includes("intro") && (
               <div className="px-5 pb-5 pt-4 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
                   Lingkaran bisa "bersahabat" dengan bangun datar lain dengan dua cara utama:
@@ -216,7 +207,6 @@ const KaitanBangunDatarPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── Kaitan section ── */}
@@ -225,7 +215,6 @@ const KaitanBangunDatarPage = () => {
             <SectionHeader id="kaitan" icon={<Target className="w-5 h-5"/>} iconColor="text-violet-400"
               title="📐 Lingkaran Dalam & Luar Segitiga"
               gradFrom="rgba(168,85,247,.12)" borderColor="rgba(168,85,247,.3)"/>
-            {open.includes("kaitan") && (
               <div className="px-5 pb-6 pt-4 space-y-8">
 
                 {/* ── 1. Lingkaran Dalam Segitiga ── */}
@@ -278,7 +267,6 @@ const KaitanBangunDatarPage = () => {
                 </div>
 
               </div>
-            )}
           </div>
 
           {/* ── Contoh 1: Lingkaran Dalam Segitiga ── */}
@@ -287,7 +275,6 @@ const KaitanBangunDatarPage = () => {
             <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400"
               title="✏️ Contoh 1 — Lingkaran Dalam Segitiga (Sedang)"
               gradFrom="rgba(34,197,94,.12)" borderColor="rgba(34,197,94,.3)"/>
-            {open.includes("contoh1") && (
               <div className="px-5 pb-5 pt-4 space-y-4">
                 <div className="rounded-xl p-4 border"
                   style={{background:"rgba(34,197,94,.1)",borderColor:"rgba(34,197,94,.35)"}}>
@@ -313,7 +300,6 @@ const KaitanBangunDatarPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── Contoh 2: Lingkaran Luar Segitiga ── */}
@@ -322,7 +308,6 @@ const KaitanBangunDatarPage = () => {
             <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-orange-400"
               title="✏️ Contoh 2 — Lingkaran Luar Segitiga (Sulit)"
               gradFrom="rgba(249,115,22,.12)" borderColor="rgba(249,115,22,.3)"/>
-            {open.includes("contoh2") && (
               <div className="px-5 pb-5 pt-4 space-y-4">
                 <div className="rounded-xl p-4 border"
                   style={{background:"rgba(249,115,22,.1)",borderColor:"rgba(249,115,22,.35)"}}>
@@ -348,7 +333,6 @@ const KaitanBangunDatarPage = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* ── Rangkuman ── */}
@@ -357,7 +341,6 @@ const KaitanBangunDatarPage = () => {
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5"/>} iconColor="text-violet-400"
               title="📌 Rangkuman Sub-Bab"
               gradFrom="rgba(168,85,247,.12)" borderColor="rgba(168,85,247,.3)"/>
-            {open.includes("rangkuman") && (
               <div className="px-5 pb-5 pt-4 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="rounded-xl p-4 border space-y-2"
@@ -388,7 +371,6 @@ const KaitanBangunDatarPage = () => {
                   </p>
                 </div>
               </div>
-            )}
           </div>
 
         </div>
