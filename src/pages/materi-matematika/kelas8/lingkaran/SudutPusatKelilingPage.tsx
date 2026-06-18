@@ -2,10 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, Lightbulb, Target, FlaskConical } from "lucide-react";
+import { BookOpen, Lightbulb, Target, FlaskConical, Microscope, Joystick } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import SudutPusatProofAnim from "@/components/SudutPusatProofAnim";
+import SudutPusatInteraktif from "@/components/SudutPusatInteraktif";
 
 const SudutPusatSVG = () => (
   <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-2" aria-label="Sudut pusat lingkaran">
@@ -158,6 +160,45 @@ const SudutPusatKelilingPage = () => {
                 <p className="font-body text-sm text-white/80 mb-2">Semua sudut keliling yang menghadap busur yang sama memiliki besar yang sama:</p>
                 <BlockMath math="\angle ACB = \angle ADB = \angle AEB" />
               </div>
+            </div>
+          </div>
+
+          {/* ── Animasi 1: Pembuktian Langkah-demi-Langkah ── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader
+              id="anim-bukti"
+              icon={<Microscope className="w-5 h-5" />}
+              iconColor="text-cyan-400"
+              title="🔬 Animasi 1 — Mengapa Sudut Pusat = 2× Sudut Keliling?"
+            />
+            <div className="px-4 pb-4">
+              <div className="bg-cyan-500/8 border border-cyan-500/20 rounded-lg px-4 py-2.5 mb-3">
+                <p className="font-body text-xs text-cyan-200/80 leading-relaxed">
+                  Ikuti <strong className="text-cyan-300">langkah demi langkah</strong> pembuktian geometri mengapa sudut pusat selalu tepat 2 kali sudut keliling. 
+                  Tekan <strong className="text-white/80">Selanjutnya</strong> untuk melanjutkan setiap tahap.
+                </p>
+              </div>
+              <SudutPusatProofAnim />
+            </div>
+          </div>
+
+          {/* ── Animasi 2: Interaktif Geser dan Slider ── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader
+              id="anim-interaktif"
+              icon={<Joystick className="w-5 h-5" />}
+              iconColor="text-purple-400"
+              title="🕹️ Animasi 2 — Eksplorasi Interaktif"
+            />
+            <div className="px-4 pb-4">
+              <div className="bg-purple-500/8 border border-purple-500/20 rounded-lg px-4 py-2.5 mb-3">
+                <p className="font-body text-xs text-purple-200/80 leading-relaxed">
+                  <strong className="text-amber-300">Geser slider</strong> untuk mengubah besar busur (sudut pusat), dan 
+                  <strong className="text-purple-300"> seret titik C </strong> 
+                  ke sembarang posisi di busur besar — lihat bagaimana sudut keliling selalu tepat setengahnya!
+                </p>
+              </div>
+              <SudutPusatInteraktif />
             </div>
           </div>
 
