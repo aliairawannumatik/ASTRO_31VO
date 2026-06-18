@@ -418,7 +418,7 @@ const SoalSVG6 = () => (
    Two small arches r=60, centers (80,130) & (200,130).
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG7 = () => (
-  <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto" aria-label="Three arch pattern">
+  <svg viewBox="0 0 300 200" className="w-full max-w-xs mx-auto" aria-label="Three arch pattern">
     <defs>
       <style>{`
         @keyframes ar7{0%,100%{opacity:.4;}50%{opacity:.72;}}
@@ -452,8 +452,6 @@ const SoalSVG7 = () => (
     {/* R labels */}
     <line x1="140" y1="160" x2="140" y2="40" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4 2" opacity=".6"/>
     <text x="145" y="105" fill="#38bdf8" fontSize="9" fontFamily="monospace">R=14</text>
-    <line x1="80"  y1="160" x2="80"  y2="100" stroke="#a78bfa" strokeWidth="1.1" strokeDasharray="3 2" opacity=".6"/>
-    <text x="84"  y="135" fill="#a78bfa" fontSize="8" fontFamily="monospace">r=7</text>
   </svg>
 );
 
