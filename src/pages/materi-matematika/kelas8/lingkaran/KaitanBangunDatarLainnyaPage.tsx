@@ -1212,11 +1212,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 6 ── */}
+          {/* ── KASUS 1 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(6,182,212,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh6" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-cyan-400"
-              title="✏️ Contoh 6 — Bangun Gabungan: Persegi Panjang + Setengah Lingkaran (π = 22/7)"
+            <SectionHeader id="kasus1" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-cyan-400"
+              title="✏️ Kasus 1 — Bangun Gabungan: Persegi Panjang + Setengah Lingkaran (π = 22/7)"
               accent="rgba(6,182,212,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
@@ -1252,11 +1252,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 3 ── */}
+          {/* ── KASUS 2 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
-              title="✏️ Contoh 3 — Persegi Panjang 28×14 Dikurangi Dua Setengah Lingkaran (π = 22/7)"
+            <SectionHeader id="kasus2" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
+              title="✏️ Kasus 2 — Persegi Panjang 28×14 Dikurangi Dua Setengah Lingkaran (π = 22/7)"
               accent="rgba(249,115,22,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
@@ -1293,11 +1293,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 7 ── */}
+          {/* ── KASUS 3 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(236,72,153,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh7" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-pink-400"
-              title="✏️ Contoh 7 — Setengah Lingkaran Besar Dikurangi Setengah Lingkaran Kecil (π = 3,14)"
+            <SectionHeader id="kasus3" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-pink-400"
+              title="✏️ Kasus 3 — Setengah Lingkaran Besar Dikurangi Setengah Lingkaran Kecil (π = 3,14)"
               accent="rgba(236,72,153,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(236,72,153,.1)", borderColor: "rgba(236,72,153,.35)" }}>
@@ -1334,11 +1334,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 4 ── */}
+          {/* ── KASUS 4 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(34,197,94,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh4" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400"
-              title="✏️ Contoh 4 — Seperempat Lingkaran r = 10 cm (π = 3,14)"
+            <SectionHeader id="kasus4" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400"
+              title="✏️ Kasus 4 — Seperempat Lingkaran r = 10 cm (π = 3,14)"
               accent="rgba(34,197,94,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(34,197,94,.1)", borderColor: "rgba(34,197,94,.35)" }}>
@@ -1372,11 +1372,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 8 ── */}
+          {/* ── KASUS 5 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(245,158,11,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh8" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-amber-400"
-              title="✏️ Contoh 8 — Bintang 4 Titik dari Busur dalam Persegi 14 cm (π = 22/7)"
+            <SectionHeader id="kasus5" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-amber-400"
+              title="✏️ Kasus 5 — Bintang 4 Titik dari Busur dalam Persegi 14 cm (π = 22/7)"
               accent="rgba(245,158,11,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(245,158,11,.1)", borderColor: "rgba(245,158,11,.35)" }}>
@@ -1406,11 +1406,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 9 ── */}
+          {/* ── KASUS 6 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(14,165,233,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh9" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
-              title="✏️ Contoh 9 — Tiga Busur Lengkung: Busur Besar Dikurangi 2 Busur Kecil (π = 22/7)"
+            <SectionHeader id="kasus6" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
+              title="✏️ Kasus 6 — Tiga Busur Lengkung: Busur Besar Dikurangi 2 Busur Kecil (π = 22/7)"
               accent="rgba(14,165,233,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
@@ -1446,83 +1446,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 10 ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(20,184,166,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh10" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-teal-400"
-              title="✏️ Contoh 10 — Daun Diagonal dalam Persegi 7 cm (π = 22/7)"
-              accent="rgba(20,184,166,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-4 border" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
-                  <p className="text-teal-300 font-bold text-xs uppercase tracking-wide mb-2">🍃 Soal</p>
-                  <p className="font-body text-sm text-white/90">
-                    Di dalam persegi bersisi 7 cm, dua busur seperempat lingkaran (jari-jari = 7 cm) ditarik dari dua sudut yang berseberangan sehingga membentuk "daun" di tengah. Hitunglah <strong>(a)</strong> luas daun (daerah arsiran) dan <strong>(b)</strong> kelilingnya! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
-                  </p>
-                </div>
-                <SoalSVG8 />
-                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">
-                    <strong>Diketahui:</strong> sisi persegi <InlineMath math="a = r = 7"/> cm.
-                  </p>
-                  <p className="font-body text-xs text-white/60">Luas daun = 2 × (luas sektor − luas segitiga):</p>
-                  <BlockMath math="L_{\text{daun}} = 2\left(\tfrac{1}{4}\pi r^2 - \tfrac{1}{2}r^2\right) = r^2\left(\tfrac{\pi}{2} - 1\right)" />
-                  <BlockMath math="= 49 \times \left(\tfrac{22}{14} - 1\right) = 49 \times \tfrac{4}{7} = \boxed{28 \text{ cm}^2}" />
-                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling daun:</strong></p>
-                  <p className="font-body text-xs text-white/60 mb-1">Dua busur seperempat lingkaran:</p>
-                  <BlockMath math="K = 2 \times \tfrac{1}{4}(2\pi r) = \pi r = \tfrac{22}{7} \times 7 = \boxed{22 \text{ cm}}" />
-                  <div className="grid grid-cols-2 gap-3 mt-2">
-                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
-                      <p className="text-teal-300 text-xs font-bold">✅ Luas Daun</p>
-                      <p className="text-white text-sm font-bold mt-1">28 cm²</p>
-                    </div>
-                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
-                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling Daun</p>
-                      <p className="text-white text-sm font-bold mt-1">22 cm</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          {/* ── CONTOH 11 ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh11" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
-              title="✏️ Contoh 11 — Bunga 4 Kelopak dalam Persegi 14 cm (π = 22/7)"
-              accent="rgba(249,115,22,.12)" />
-              <div className="px-5 pb-5 pt-3 space-y-4">
-                <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
-                  <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">🌸 Soal</p>
-                  <p className="font-body text-sm text-white/90">
-                    Di dalam persegi bersisi 14 cm, dari keempat sudutnya dibuat busur seperempat lingkaran (r = 14 cm). Pasangan busur yang saling berpotongan membentuk 4 buah kelopak bunga. Hitunglah luas total keempat kelopak yang diarsir! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
-                  </p>
-                </div>
-                <SoalSVG11 />
-                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                  <p className="font-body text-sm text-white/80">
-                    <strong>Diketahui:</strong> sisi persegi <InlineMath math="a = 14"/> cm, <InlineMath math="r = 14"/> cm.
-                  </p>
-                  <p className="font-body text-xs text-white/60">Setiap kelopak = irisan dua sektor yang berpusat di sudut-sudut berdekatan.</p>
-                  <p className="font-body text-xs text-white/60">Luas 1 kelopak = <InlineMath math="r^2\!\left(\tfrac{\pi}{2}-1\right)"/> (sama rumusnya dengan daun diagonal):</p>
-                  <BlockMath math="L_{\text{1 kelopak}} = r^2\!\left(\tfrac{\pi}{2}-1\right) = 196 \times \tfrac{4}{7} = 112 \text{ cm}^2" />
-                  <p className="font-body text-xs text-white/60">Namun dalam susunan ini ada 4 kelopak, masing-masing dihitung sebagai irisan dua busur berdekatan:</p>
-                  <BlockMath math="L_{\text{4 kelopak}} = 4 \times 28 = \boxed{112 \text{ cm}^2}" />
-                  <p className="font-body text-xs text-white/50 italic">*Tiap kelopak dihitung dengan r = 14 cm (sisi penuh), luas 1 kelopak = 28 cm²</p>
-                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
-                    <p className="text-orange-300 text-xs font-bold">✅ Luas 4 Kelopak</p>
-                    <p className="text-white text-sm font-bold mt-1">112 cm²</p>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-          {/* ── CONTOH 12 ── */}
+          {/* ── KASUS 7 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(139,92,246,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh12" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400"
-              title="✏️ Contoh 12 — Sektor Siku-Siku (¼ Lingkaran) r = 10 cm (π = 3,14)"
+            <SectionHeader id="kasus7" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400"
+              title="✏️ Kasus 7 — Sektor Siku-Siku (¼ Lingkaran) r = 10 cm (π = 3,14)"
               accent="rgba(139,92,246,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(139,92,246,.1)", borderColor: "rgba(139,92,246,.35)" }}>
@@ -1558,11 +1486,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 13 ── */}
+          {/* ── KASUS 8 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh13" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
-              title="✏️ Contoh 13 — Bangun Es Krim: Setengah Lingkaran + Segitiga (π = 3,14)"
+            <SectionHeader id="kasus8" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
+              title="✏️ Kasus 8 — Bangun Es Krim: Setengah Lingkaran + Segitiga (π = 3,14)"
               accent="rgba(249,115,22,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
@@ -1602,11 +1530,11 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
           </div>
 
-          {/* ── CONTOH 14 ── */}
+          {/* ── KASUS 9 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(14,165,233,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh14" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
-              title="✏️ Contoh 14 — Trapesium + Seperempat Lingkaran di Kiri (π = 22/7)"
+            <SectionHeader id="kasus9" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
+              title="✏️ Kasus 9 — Trapesium + Seperempat Lingkaran di Kiri (π = 22/7)"
               accent="rgba(14,165,233,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
@@ -1635,11 +1563,11 @@ const KaitanBangunDatarLainnyaPage = () => {
             </div>
           </div>
 
-          {/* ── CONTOH 15 ── */}
+          {/* ── KASUS 10 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(168,85,247,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh15" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-purple-400"
-              title="✏️ Contoh 15 — Seperempat Lingkaran (π = 22/7)"
+            <SectionHeader id="kasus10" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-purple-400"
+              title="✏️ Kasus 10 — Seperempat Lingkaran (π = 22/7)"
               accent="rgba(168,85,247,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
@@ -1670,11 +1598,11 @@ const KaitanBangunDatarLainnyaPage = () => {
             </div>
           </div>
 
-          {/* ── CONTOH 16 ── */}
+          {/* ── KASUS 11 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh16" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
-              title="✏️ Contoh 16 — Setengah Cincin: R = 14 cm, r = 7 cm (π = 22/7)"
+            <SectionHeader id="kasus11" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
+              title="✏️ Kasus 11 — Setengah Cincin: R = 14 cm, r = 7 cm (π = 22/7)"
               accent="rgba(249,115,22,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
@@ -1707,48 +1635,11 @@ const KaitanBangunDatarLainnyaPage = () => {
             </div>
           </div>
 
-          {/* ── CONTOH 17 ── */}
-          <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(236,72,153,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh17" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-pink-400"
-              title="✏️ Contoh 17 — Setengah Cincin: R = 10 cm, r = 5 cm (π = 3,14)"
-              accent="rgba(236,72,153,.12)" />
-            <div className="px-5 pb-5 pt-3 space-y-4">
-              <div className="rounded-xl p-4 border" style={{ background: "rgba(236,72,153,.1)", borderColor: "rgba(236,72,153,.35)" }}>
-                <p className="text-pink-300 font-bold text-xs uppercase tracking-wide mb-2">🌀 Soal</p>
-                <p className="font-body text-sm text-white/90">
-                  Sebuah bangun berbentuk setengah cincin dengan jari-jari luar R = 10 cm dan jari-jari dalam r = 5 cm. Hitunglah <strong>(a)</strong> luas dan <strong>(b)</strong> keliling daerah arsiran! <InlineMath math="(\pi = 3{,}14)"/>
-                </p>
-              </div>
-              <SoalSVG17 />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
-                <p className="font-body text-sm text-white/80"><strong>Diketahui:</strong> R = 10 cm, r = 5 cm.</p>
-                <p className="font-body text-sm text-white/80"><strong>(a) Luas setengah cincin:</strong></p>
-                <BlockMath math="L = \tfrac{1}{2}\pi(R^2 - r^2) = \tfrac{1}{2} \times 3{,}14 \times (10^2 - 5^2)" />
-                <BlockMath math="= \tfrac{1}{2} \times 3{,}14 \times (100 - 25) = \tfrac{1}{2} \times 3{,}14 \times 75 = \boxed{117{,}75 \text{ cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>(b) Keliling</strong> = busur luar + busur dalam + 2 × (R − r):</p>
-                <BlockMath math="K = \pi R + \pi r + 2(R - r) = 3{,}14(10 + 5) + 2(10 - 5)" />
-                <BlockMath math="= 3{,}14 \times 15 + 2 \times 5 = 47{,}1 + 10 = \boxed{57{,}1 \text{ cm}}" />
-                <div className="grid grid-cols-2 gap-3 mt-2">
-                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(236,72,153,.1)", borderColor: "rgba(236,72,153,.35)" }}>
-                    <p className="text-pink-300 text-xs font-bold">✅ Luas</p>
-                    <p className="text-white text-sm font-bold mt-1">117,75 cm²</p>
-                  </div>
-                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
-                    <p className="text-cyan-300 text-xs font-bold">✅ Keliling</p>
-                    <p className="text-white text-sm font-bold mt-1">57,1 cm</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ── CONTOH 18 ── */}
+          {/* ── KASUS 12 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(20,184,166,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh18" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-teal-400"
-              title="✏️ Contoh 18 — Persegi dikurangi Dua Seperempat Lingkaran (π = 22/7)"
+            <SectionHeader id="kasus12" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-teal-400"
+              title="✏️ Kasus 12 — Persegi dikurangi Dua Seperempat Lingkaran (π = 22/7)"
               accent="rgba(20,184,166,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
@@ -1777,11 +1668,11 @@ const KaitanBangunDatarLainnyaPage = () => {
             </div>
           </div>
 
-          {/* ── CONTOH 19 ── */}
+          {/* ── KASUS 13 ── */}
           <div className="rounded-2xl overflow-hidden border"
             style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(99,102,241,.25)", backdropFilter: "blur(12px)" }}>
-            <SectionHeader id="contoh19" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-indigo-400"
-              title="✏️ Contoh 19 — Gabungan Dua Setengah Lingkaran: Besar Atas + Kecil Bawah (π = 22/7)"
+            <SectionHeader id="kasus13" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-indigo-400"
+              title="✏️ Kasus 13 — Gabungan Dua Setengah Lingkaran: Besar Atas + Kecil Bawah (π = 22/7)"
               accent="rgba(99,102,241,.12)" />
               <div className="px-5 pb-5 pt-3 space-y-4">
                 <div className="rounded-xl p-4 border" style={{ background: "rgba(99,102,241,.1)", borderColor: "rgba(99,102,241,.35)" }}>
@@ -1815,6 +1706,78 @@ const KaitanBangunDatarLainnyaPage = () => {
                       <p className="text-indigo-300 text-xs font-bold">✅ Keliling</p>
                       <p className="text-white text-sm font-bold mt-1">62 6⁄7 cm</p>
                     </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          {/* ── KASUS 14 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(20,184,166,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="kasus14" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-teal-400"
+              title="✏️ Kasus 14 — Daun Diagonal dalam Persegi 7 cm (π = 22/7)"
+              accent="rgba(20,184,166,.12)" />
+              <div className="px-5 pb-5 pt-3 space-y-4">
+                <div className="rounded-xl p-4 border" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
+                  <p className="text-teal-300 font-bold text-xs uppercase tracking-wide mb-2">🍃 Soal</p>
+                  <p className="font-body text-sm text-white/90">
+                    Di dalam persegi bersisi 7 cm, dua busur seperempat lingkaran (jari-jari = 7 cm) ditarik dari dua sudut yang berseberangan sehingga membentuk "daun" di tengah. Hitunglah <strong>(a)</strong> luas daun (daerah arsiran) dan <strong>(b)</strong> kelilingnya! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
+                  </p>
+                </div>
+                <SoalSVG8 />
+                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                  <p className="font-body text-sm text-white/80">
+                    <strong>Diketahui:</strong> sisi persegi <InlineMath math="a = r = 7"/> cm.
+                  </p>
+                  <p className="font-body text-xs text-white/60">Luas daun = 2 × (luas sektor − luas segitiga):</p>
+                  <BlockMath math="L_{\text{daun}} = 2\left(\tfrac{1}{4}\pi r^2 - \tfrac{1}{2}r^2\right) = r^2\left(\tfrac{\pi}{2} - 1\right)" />
+                  <BlockMath math="= 49 \times \left(\tfrac{22}{14} - 1\right) = 49 \times \tfrac{4}{7} = \boxed{28 \text{ cm}^2}" />
+                  <p className="font-body text-sm text-white/80"><strong>(b) Keliling daun:</strong></p>
+                  <p className="font-body text-xs text-white/60 mb-1">Dua busur seperempat lingkaran:</p>
+                  <BlockMath math="K = 2 \times \tfrac{1}{4}(2\pi r) = \pi r = \tfrac{22}{7} \times 7 = \boxed{22 \text{ cm}}" />
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
+                      <p className="text-teal-300 text-xs font-bold">✅ Luas Daun</p>
+                      <p className="text-white text-sm font-bold mt-1">28 cm²</p>
+                    </div>
+                    <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
+                      <p className="text-cyan-300 text-xs font-bold">✅ Keliling Daun</p>
+                      <p className="text-white text-sm font-bold mt-1">22 cm</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          {/* ── KASUS 15 ── */}
+          <div className="rounded-2xl overflow-hidden border"
+            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
+            <SectionHeader id="kasus15" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
+              title="✏️ Kasus 15 — Bunga 4 Kelopak dalam Persegi 14 cm (π = 22/7)"
+              accent="rgba(249,115,22,.12)" />
+              <div className="px-5 pb-5 pt-3 space-y-4">
+                <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
+                  <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">🌸 Soal</p>
+                  <p className="font-body text-sm text-white/90">
+                    Di dalam persegi bersisi 14 cm, dari keempat sudutnya dibuat busur seperempat lingkaran (r = 14 cm). Pasangan busur yang saling berpotongan membentuk 4 buah kelopak bunga. Hitunglah luas total keempat kelopak yang diarsir! <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
+                  </p>
+                </div>
+                <SoalSVG11 />
+                <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
+                  <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+                  <p className="font-body text-sm text-white/80">
+                    <strong>Diketahui:</strong> sisi persegi <InlineMath math="a = 14"/> cm, <InlineMath math="r = 14"/> cm.
+                  </p>
+                  <p className="font-body text-xs text-white/60">Setiap kelopak = irisan dua sektor yang berpusat di sudut-sudut berdekatan.</p>
+                  <p className="font-body text-xs text-white/60">Luas 1 kelopak = <InlineMath math="r^2\!\left(\tfrac{\pi}{2}-1\right)"/> (sama rumusnya dengan daun diagonal):</p>
+                  <BlockMath math="L_{\text{1 kelopak}} = r^2\!\left(\tfrac{\pi}{2}-1\right) = 196 \times \tfrac{4}{7} = 112 \text{ cm}^2" />
+                  <p className="font-body text-xs text-white/60">Namun dalam susunan ini ada 4 kelopak, masing-masing dihitung sebagai irisan dua busur berdekatan:</p>
+                  <BlockMath math="L_{\text{4 kelopak}} = 4 \times 28 = \boxed{112 \text{ cm}^2}" />
+                  <p className="font-body text-xs text-white/50 italic">*Tiap kelopak dihitung dengan r = 14 cm (sisi penuh), luas 1 kelopak = 28 cm²</p>
+                  <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
+                    <p className="text-orange-300 text-xs font-bold">✅ Luas 4 Kelopak</p>
+                    <p className="text-white text-sm font-bold mt-1">112 cm²</p>
                   </div>
                 </div>
               </div>
