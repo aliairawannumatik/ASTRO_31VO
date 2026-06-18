@@ -192,8 +192,8 @@ const BanMenggelindingSVG = () => {
           })}
           {/* Hub */}
           <circle cx="0" cy="0" r={5} fill="#f59e0b" stroke="#fbbf24" strokeWidth="1.5"/>
-          {/* Red tracking dot on rim — traces rotation */}
-          <circle cx="0" cy={-(r - 6)} r={5.5} fill="#f43f5e" stroke="#fda4af" strokeWidth="1"/>
+          {/* Red tracking dot on rim — starts at ground contact point */}
+          <circle cx="0" cy={r} r={5.5} fill="#f43f5e" stroke="#fda4af" strokeWidth="1"/>
         </g>
       </g>
     </svg>
