@@ -208,15 +208,6 @@ const PiAnimationSVG = () => {
               <>
                 <circle cx={diamX1} cy={diamY} r="2.5" fill="#22c55e" />
                 <circle cx={diamX2} cy={diamY} r="2.5" fill="#22c55e" />
-                {/* cap kanan (ketika sudah di posisi bawah) */}
-                {peel > 0.97 && (
-                  <>
-                    <line x1={diamX1} y1={diamY - 5} x2={diamX1} y2={diamY + 5}
-                      stroke="#22c55e" strokeWidth="1.5" />
-                    <line x1={diamX2} y1={diamY - 5} x2={diamX2} y2={diamY + 5}
-                      stroke="#22c55e" strokeWidth="1.5" />
-                  </>
-                )}
                 <text x={(diamX1 + diamX2) / 2} y={diamLabelY}
                   fill="#4ade80" fontSize="9"
                   textAnchor="middle" fontFamily="monospace" fontWeight="bold">
@@ -227,13 +218,6 @@ const PiAnimationSVG = () => {
           </g>
         )}
 
-        {/* ── d1: tick mark kiri-kanan muncul setelah diameter tiba (s1) ── */}
-        {s1 > 0 && (
-          <g opacity={s1}>
-            <line x1={SEG_X0}   y1={SEG_Y-6} x2={SEG_X0}   y2={SEG_Y+6} stroke="#22c55e" strokeWidth="1.5"/>
-            <line x1={SEG_X0+D} y1={SEG_Y-6} x2={SEG_X0+D} y2={SEG_Y+6} stroke="#22c55e" strokeWidth="1.5"/>
-          </g>
-        )}
 
         {/* ── d2 (biru): salinan diameter yg bergeser dari d1 → posisi d2 ── */}
         {s2 > 0 && (
@@ -242,8 +226,6 @@ const PiAnimationSVG = () => {
               stroke="rgba(59,130,246,0.25)" strokeWidth="9" strokeLinecap="round"/>
             <line x1={d2x1} y1={SEG_Y} x2={d2x2} y2={SEG_Y}
               stroke="#3b82f6" strokeWidth="3" strokeLinecap="round"/>
-            <line x1={d2x1} y1={SEG_Y-5} x2={d2x1} y2={SEG_Y+5} stroke="#3b82f6" strokeWidth="1.5"/>
-            <line x1={d2x2} y1={SEG_Y-5} x2={d2x2} y2={SEG_Y+5} stroke="#3b82f6" strokeWidth="1.5"/>
             {s2 > 0.9 && (
               <text x={(d2x1+d2x2)/2} y={SEG_Y+14} fill="#60a5fa" fontSize="8"
                 textAnchor="middle" fontFamily="monospace" fontWeight="bold"
@@ -259,8 +241,6 @@ const PiAnimationSVG = () => {
               stroke="rgba(168,85,247,0.25)" strokeWidth="9" strokeLinecap="round"/>
             <line x1={d3x1} y1={SEG_Y} x2={d3x2} y2={SEG_Y}
               stroke="#a855f7" strokeWidth="3" strokeLinecap="round"/>
-            <line x1={d3x1} y1={SEG_Y-5} x2={d3x1} y2={SEG_Y+5} stroke="#a855f7" strokeWidth="1.5"/>
-            <line x1={d3x2} y1={SEG_Y-5} x2={d3x2} y2={SEG_Y+5} stroke="#a855f7" strokeWidth="1.5"/>
             {s3 > 0.9 && (
               <text x={(d3x1+d3x2)/2} y={SEG_Y+14} fill="#c084fc" fontSize="8"
                 textAnchor="middle" fontFamily="monospace" fontWeight="bold"
@@ -278,10 +258,8 @@ const PiAnimationSVG = () => {
             <line x1={sisaX1} y1={SEG_Y} x2={sisaX2} y2={SEG_Y}
               stroke="#eab308" strokeWidth="3" strokeLinecap="round"
               strokeDasharray="5 3"/>
-            <line x1={sisaX1} y1={SEG_Y-5} x2={sisaX1} y2={SEG_Y+5} stroke="#eab308" strokeWidth="1.5"/>
             {s4 > 0.85 && (
               <>
-                <line x1={sisaX2} y1={SEG_Y-5} x2={sisaX2} y2={SEG_Y+5} stroke="#eab308" strokeWidth="1.5"/>
                 <text x={(sisaX1+sisaX2)/2} y={SEG_Y+14} fill="#facc15" fontSize="8"
                   textAnchor="middle" fontFamily="monospace" fontWeight="bold"
                   opacity={cl((s4-0.85)/0.15)}>≈0,14d</text>
