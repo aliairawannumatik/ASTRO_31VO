@@ -2393,6 +2393,85 @@
    Fixes: dark bg, water-btn, SVG gray, text-white, slates
    ══════════════════════════════════════════════════════════ */
 
+/* ── Colored -700 borders (content section frames) → lighter pastel ── */
+.theme-sunset .border-cyan-700,
+.theme-sunset .border-cyan-700\/70,
+.theme-sunset .border-cyan-700\/50,
+.theme-sunset .border-cyan-700\/40,
+.theme-sunset .border-cyan-700\/30   { border-color: rgba(14,165,233,0.40) !important; }
+.theme-sunset .border-violet-700,
+.theme-sunset .border-violet-700\/70,
+.theme-sunset .border-violet-700\/50,
+.theme-sunset .border-violet-700\/40,
+.theme-sunset .border-violet-700\/30 { border-color: rgba(139,92,246,0.35) !important; }
+.theme-sunset .border-green-700,
+.theme-sunset .border-green-700\/70,
+.theme-sunset .border-green-700\/50,
+.theme-sunset .border-green-700\/40,
+.theme-sunset .border-green-700\/30  { border-color: rgba(16,185,129,0.40) !important; }
+.theme-sunset .border-yellow-700,
+.theme-sunset .border-yellow-700\/70,
+.theme-sunset .border-yellow-700\/50,
+.theme-sunset .border-yellow-700\/40,
+.theme-sunset .border-yellow-700\/30 { border-color: rgba(234,179,8,0.40) !important; }
+.theme-sunset .border-blue-700,
+.theme-sunset .border-blue-700\/50,
+.theme-sunset .border-blue-700\/40,
+.theme-sunset .border-blue-700\/30   { border-color: rgba(59,130,246,0.40) !important; }
+.theme-sunset .border-emerald-700,
+.theme-sunset .border-emerald-700\/50,
+.theme-sunset .border-emerald-700\/40,
+.theme-sunset .border-emerald-700\/30 { border-color: rgba(16,185,129,0.40) !important; }
+.theme-sunset .border-rose-700,
+.theme-sunset .border-rose-700\/50,
+.theme-sunset .border-rose-700\/40    { border-color: rgba(244,63,94,0.35) !important; }
+.theme-sunset .border-fuchsia-700,
+.theme-sunset .border-fuchsia-700\/50,
+.theme-sunset .border-fuchsia-700\/40 { border-color: rgba(192,38,211,0.35) !important; }
+.theme-sunset .border-teal-700,
+.theme-sunset .border-teal-700\/50,
+.theme-sunset .border-teal-700\/40    { border-color: rgba(20,184,166,0.40) !important; }
+
+/* ── Extra slate bg variants and hover states ── */
+.theme-sunset .bg-slate-600,
+.theme-sunset .bg-slate-600\/80,
+.theme-sunset .bg-slate-600\/60,
+.theme-sunset .bg-slate-600\/50,
+.theme-sunset .bg-slate-600\/40,
+.theme-sunset .bg-slate-500\/50,
+.theme-sunset .bg-slate-500\/40  { background-color: rgba(224,242,254,0.85) !important; }
+
+.theme-sunset .hover\:bg-slate-800\/90:hover,
+.theme-sunset .hover\:bg-slate-700\/60:hover,
+.theme-sunset .hover\:bg-slate-600\/80:hover,
+.theme-sunset .hover\:bg-slate-600:hover,
+.theme-sunset .hover\:bg-slate-500\/70:hover { background-color: rgba(186,230,253,0.95) !important; }
+
+/* ── Dark slate borders → sky blue ── */
+.theme-sunset .border-slate-900,
+.theme-sunset .border-slate-900\/50,
+.theme-sunset .border-slate-800,
+.theme-sunset .border-slate-800\/50,
+.theme-sunset .border-slate-700,
+.theme-sunset .border-slate-700\/70,
+.theme-sunset .border-slate-700\/50,
+.theme-sunset .border-slate-700\/40,
+.theme-sunset .border-slate-700\/30,
+.theme-sunset .border-slate-600,
+.theme-sunset .border-slate-600\/70,
+.theme-sunset .border-slate-600\/50,
+.theme-sunset .border-slate-600\/40,
+.theme-sunset .border-slate-600\/30,
+.theme-sunset .border-slate-500\/50,
+.theme-sunset .border-slate-500\/40  { border-color: rgba(14,165,233,0.30) !important; }
+
+/* ── Light slate text (invisible on light bg) → dark navy ── */
+.theme-sunset .text-slate-100,
+.theme-sunset .text-slate-200,
+.theme-sunset .text-slate-300  { color: #1e3a5f !important; }
+.theme-sunset .text-slate-400,
+.theme-sunset .text-slate-500  { color: #334155 !important; }
+
 /* ── Dark slate backgrounds → light sky blue ── */
 .theme-sunset .bg-slate-950,
 .theme-sunset .bg-slate-950\/80,
