@@ -2270,6 +2270,7 @@
 .theme-sunset .bg-green-950\/60 { background-color: rgba(224,242,254,0.85) !important; }
 
 /* ── Card overlays ── */
+.theme-sunset .bg-card\/70     { background-color: rgba(240,249,255,0.85) !important; }
 .theme-sunset .bg-card\/80     { background-color: rgba(240,249,255,0.90) !important; }
 .theme-sunset .bg-card\/85     { background-color: rgba(240,249,255,0.92) !important; }
 .theme-sunset .bg-card\/90     { background-color: rgba(240,249,255,0.95) !important; }
@@ -2277,6 +2278,20 @@
 /* ── Very faint white borders (table row dividers, subtle frames) ── */
 .theme-sunset .border-white\/5  { border-color: rgba(14,165,233,0.15) !important; }
 .theme-sunset .border-white\/8  { border-color: rgba(14,165,233,0.18) !important; }
+
+/* ── Colored -200 borders used in LKPD/game components ── */
+.theme-sunset .border-cyan-200\/25,
+.theme-sunset .border-cyan-200\/30,
+.theme-sunset .border-cyan-200\/40  { border-color: rgba(14,165,233,0.35) !important; }
+.theme-sunset .border-fuchsia-200\/25,
+.theme-sunset .border-fuchsia-200\/30,
+.theme-sunset .border-fuchsia-200\/40 { border-color: rgba(192,38,211,0.30) !important; }
+.theme-sunset .border-violet-200\/25,
+.theme-sunset .border-violet-200\/30,
+.theme-sunset .border-violet-200\/40  { border-color: rgba(139,92,246,0.30) !important; }
+.theme-sunset .border-emerald-200\/25,
+.theme-sunset .border-emerald-200\/30,
+.theme-sunset .border-emerald-200\/40 { border-color: rgba(16,185,129,0.35) !important; }
 .theme-sunset .bg-\[#141d35\]  { background-color: #bae6fd !important; }
 .theme-sunset .bg-\[#141d35\]\/90 { background-color: rgba(186,230,253,0.92) !important; }
 .theme-sunset .bg-\[#1a2040\]  { background-color: #e0f2fe !important; }
@@ -2563,7 +2578,10 @@
 .theme-sunset .bg-black\/40,
 .theme-sunset .bg-black\/50,
 .theme-sunset .bg-black\/60,
-.theme-sunset .bg-black\/70  { background-color: rgba(125,211,252,0.30) !important; }
+.theme-sunset .bg-black\/70,
+.theme-sunset .bg-black\/72,
+.theme-sunset .bg-black\/75,
+.theme-sunset .bg-black\/80  { background-color: rgba(125,211,252,0.30) !important; }
 
 /* ── Inline dark hex backgrounds used in materi SVG panels ── */
 .theme-sunset .bg-\[rgba\(15\2C 23\2C 42\2C 0\.5\)\],
