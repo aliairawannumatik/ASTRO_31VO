@@ -106,16 +106,26 @@ const WelcomePage = () => {
 
         {/* Sun (dark/sunset mode) or Crystal Ball (snow/light mode) */}
         <div className="mt-8 mb-12">
-          <div className="relative w-28 h-28 mx-auto">
+          <div className="relative w-28 h-28 mx-auto" style={{ overflow: "visible" }}>
             {isSunset ? (
               <>
-                <div className="absolute inset-0 rounded-full bg-sky-300 opacity-40 blur-2xl animate-pulse scale-125" />
-                <img
-                  src="/sun.png"
-                  alt="Langit Cerah"
-                  className="relative w-28 h-28 mx-auto object-contain animate-rotate-slow drop-shadow-2xl"
-                  style={{ filter: "drop-shadow(0 0 16px rgba(56,189,248,0.85)) drop-shadow(0 0 32px rgba(14,165,233,0.5))" }}
-                />
+                {/* Outer pulsing halo */}
+                <div className="absolute rounded-full animate-pulse" style={{
+                  inset: "-28px",
+                  background: "radial-gradient(circle, rgba(255,255,240,0.52) 22%, rgba(255,230,80,0.22) 52%, transparent 72%)"
+                }} />
+                {/* Rotating corona rays */}
+                <div className="absolute rounded-full animate-rotate-slow" style={{
+                  inset: "-10px",
+                  background: "conic-gradient(from 0deg, transparent 0deg, rgba(255,252,200,0.55) 5deg, transparent 10deg, transparent 40deg, rgba(255,252,200,0.55) 45deg, transparent 50deg, transparent 85deg, rgba(255,252,200,0.55) 90deg, transparent 95deg, transparent 130deg, rgba(255,252,200,0.55) 135deg, transparent 140deg, transparent 175deg, rgba(255,252,200,0.55) 180deg, transparent 185deg, transparent 220deg, rgba(255,252,200,0.55) 225deg, transparent 230deg, transparent 265deg, rgba(255,252,200,0.55) 270deg, transparent 275deg, transparent 310deg, rgba(255,252,200,0.55) 315deg, transparent 320deg)",
+                  filter: "blur(4px)"
+                }} />
+                {/* Sun body — white-to-gold radial gradient */}
+                <div className="absolute rounded-full" style={{
+                  inset: "4px",
+                  background: "radial-gradient(circle at 38% 32%, #ffffff 0%, #fffde7 26%, #fff9c4 50%, #ffd740 80%)",
+                  boxShadow: "0 0 10px #fff, 0 0 24px rgba(255,252,180,1), 0 0 50px rgba(255,228,80,0.85), 0 0 85px rgba(255,200,40,0.60), 0 0 130px rgba(255,165,0,0.35)"
+                }} />
               </>
             ) : isLight ? (
               <>

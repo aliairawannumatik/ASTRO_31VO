@@ -133,9 +133,13 @@
 [data-theme="sunset"] .text-white\/30,
 [data-theme="sunset"] .text-white\/40,
 [data-theme="sunset"] .text-white\/50,
+[data-theme="sunset"] .text-white\/55,
 [data-theme="sunset"] .text-white\/60,
+[data-theme="sunset"] .text-white\/65,
 [data-theme="sunset"] .text-white\/70,
+[data-theme="sunset"] .text-white\/75,
 [data-theme="sunset"] .text-white\/80,
+[data-theme="sunset"] .text-white\/85,
 [data-theme="sunset"] .text-white\/90 {
   color: var(--text-secondary) !important;
 }
@@ -2568,6 +2572,12 @@
 .theme-sunset .bg-\[\#0c1524\],
 .theme-sunset .bg-\[\#0c1a2e\],
 .theme-sunset .bg-\[\#0d1b2e\] { background-color: #bae6fd !important; }
+
+/* ── Dark transparent overlays → light sky ── */
+.theme-sunset .bg-black\/10  { background-color: rgba(186,230,253,0.20) !important; }
+.theme-sunset .bg-black\/15  { background-color: rgba(186,230,253,0.30) !important; }
+.theme-sunset .bg-black\/20  { background-color: rgba(186,230,253,0.35) !important; }
+.theme-sunset .bg-black\/25  { background-color: rgba(186,230,253,0.45) !important; }
 
 /* ── Backdrop/overlay on light cards: invisible black overlays → transparent ── */
 .theme-sunset .backdrop-blur-sm  { --tw-backdrop-blur: blur(4px); }
