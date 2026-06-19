@@ -18,8 +18,6 @@ const questions: Q[] = [
       { label: "b.", math: "(-5)^2" },
       { label: "c.", math: "\\left(\\frac{1}{2}\\right)^5" },
       { label: "d.", text: "Sebuah kubus memiliki panjang sisi 4 cm. Volume kubus = sisi³. Nyatakan volumenya dalam bentuk pangkat lalu hitung!" },
-      { label: "e.", text: "Sebuah tali dipotong menjadi ½ bagian sebanyak 5 kali berturut-turut. Nyatakan sisa panjang tali dalam bentuk pangkat dan hitung nilainya!" },
-      { label: "f.", text: "Suhu di kutub dinyatakan sebagai (−5)² derajat Celsius dalam model matematis. Nyatakan dalam bentuk perkalian berulang dan hitung!" },
     ],
   }),
   Qn(2, "Penulisan Bentuk Pangkat – UN Style", {
@@ -29,9 +27,6 @@ const questions: Q[] = [
       { label: "a.", math: "7 \\times 7 \\times 7 \\times 7 = \\ldots" },
       { label: "b.", math: "(-3) \\times (-3) \\times (-3) = \\ldots" },
       { label: "c.", math: "a \\times a \\times a \\times a \\times a = \\ldots" },
-      { label: "d.", text: "Populasi bakteri dalam suatu koloni bertambah dengan pola 5×5×5×5×5. Tuliskan dalam bentuk pangkat!" },
-      { label: "e.", text: "Volume sebuah ruangan berbentuk kubus dinyatakan p×p×p meter kubik. Tuliskan dalam bentuk pangkat!" },
-      { label: "f.", text: "Kecepatan perambatan sinyal dinyatakan 10×10×10×10×10×10×10×10 m/s. Tuliskan dalam bentuk pangkat!" },
     ],
   }),
   Qn(3, "Nilai Pangkat dengan Basis Negatif – UN", {
@@ -40,9 +35,6 @@ const questions: Q[] = [
       { label: "a.", math: "(-2)^4 = \\ldots" },
       { label: "b.", math: "(-3)^3 = \\ldots" },
       { label: "c.", math: "(-1)^{100} = \\ldots" },
-      { label: "d.", text: "Suhu sebuah ruangan berubah sebesar (−2)⁴ derajat dari titik awal. Positif atau negatifkah perubahan suhu itu? Hitung nilainya!" },
-      { label: "e.", text: "Dalam simulasi fisika, kecepatan sebuah partikel dinyatakan (−3)³ m/s. Hitung nilainya dan tentukan arahnya (positif/negatif)!" },
-      { label: "f.", text: "Sebuah pola bilangan menggunakan (−1)^{100}. Apakah hasilnya positif atau negatif? Berikan alasanmu!" },
     ],
   }),
   Qn(4, "Perbedaan (−a)ⁿ dan −aⁿ – Konsep Penting", {
@@ -51,12 +43,10 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "(-2)^4 = \\ldots" },
       { label: "b.", math: "-2^4 = \\ldots" },
-      { label: "c.", math: "(-3)^2 = \\ldots \\quad \\text{dan} \\quad -3^2 = \\ldots" },
+      { label: "c.", math: "(-3)^2 = \\ldots" },
       { label: "d.", math: "-3^2 = \\ldots" },
       { label: "e.", text: "Tuliskan kesimpulan: kapan (−a)ⁿ ≠ −aⁿ dan kapan (−a)ⁿ = −aⁿ?" },
       { label: "f.", text: "Seorang siswa menghitung nilai −4² dan mendapat 16. Apakah ia benar? Jelaskan perbedaan antara (−4)² dan −4²!" },
-      { label: "g.", text: "Dalam soal fisika, energi potensial dinyatakan −5². Apakah nilainya sama dengan (−5)²? Hitung dan bandingkan!" },
-      { label: "h.", text: "Buat dua contoh soal sendiri yang menunjukkan perbedaan (−a)ⁿ dan −aⁿ, lalu hitung masing-masing!" },
     ],
   }),
   Qn(5, "Eksponen Basis Pecahan – UN/ANBK", {
@@ -65,9 +55,6 @@ const questions: Q[] = [
       { label: "a.", math: "\\left(\\frac{2}{3}\\right)^3 = \\ldots" },
       { label: "b.", math: "\\left(\\frac{1}{4}\\right)^2 = \\ldots" },
       { label: "c.", math: "\\left(\\frac{3}{5}\\right)^2 = \\ldots" },
-      { label: "d.", text: "Sebuah tangki berbentuk kubus memiliki sisi (2/3) meter. Hitung volume tangki tersebut!" },
-      { label: "e.", text: "Peluang hujan pada suatu hari adalah (1/4). Jika peluang hujan dua hari berturut-turut adalah (1/4)², hitung nilai peluang tersebut!" },
-      { label: "f.", text: "Resep kue membutuhkan (3/5)² kg tepung per loyang. Berapa kg tepung yang dibutuhkan?" },
     ],
   }),
   Qn(6, "Menentukan Bilangan Pokok – TKA", {
@@ -79,7 +66,6 @@ const questions: Q[] = [
       { label: "c.", math: "n^4 = 16 \\Rightarrow n = \\ldots" },
       { label: "d.", text: "Luas ubin berbentuk persegi adalah 81 cm². Jika luas = n², berapa panjang sisi ubin?" },
       { label: "e.", text: "Volume sebuah kotak berbentuk kubus adalah 125 cm³. Jika volume = n³, berapa panjang sisi kotak?" },
-      { label: "f.", text: "Sebuah bak air berbentuk kubus memiliki volume 256 liter. Jika volume = n⁴, tentukan nilai n!" },
     ],
   }),
   Qn(7, "Menentukan Pangkat – UN", {
@@ -89,9 +75,7 @@ const questions: Q[] = [
       { label: "a.", math: "2^n = 64 \\Rightarrow n = \\ldots" },
       { label: "b.", math: "3^n = 243 \\Rightarrow n = \\ldots" },
       { label: "c.", math: "5^n = 3125 \\Rightarrow n = \\ldots" },
-      { label: "d.", text: "Tabungan Andi berlipat ganda setiap tahun. Setelah n tahun, tabungannya menjadi 2ⁿ kali lipat. Jika tabungannya sudah 64 kali lipat, sudah berapa tahunkah ia menabung?" },
-      { label: "e.", text: "Sebuah sel membelah menjadi 3 bagian setiap siklus. Setelah n siklus ada 3ⁿ sel. Jika jumlah sel sekarang 243, sudah berapa sikluskah pembelahan itu?" },
-      { label: "f.", text: "Sebuah bakteri berkembang biak dengan faktor 5 setiap jam. Setelah n jam ada 5ⁿ bakteri. Jika ada 3.125 bakteri, sudah berapa jamkah berlalu?" },
+      { label: "d.", text: "Sebuah bakteri berkembang biak dengan faktor 5 setiap jam. Setelah n jam ada 5ⁿ bakteri. Jika ada 3.125 bakteri, sudah berapa jamkah berlalu?" },
     ],
   }),
   Qn(8, "Nilai Pangkat Basis 10 – TKA", {
@@ -100,9 +84,6 @@ const questions: Q[] = [
       { label: "a.", math: "10^4 = \\ldots" },
       { label: "b.", math: "10^6 = \\ldots" },
       { label: "c.", math: "\\text{Berapa digit angka 0 pada } 10^8?" },
-      { label: "d.", text: "Jarak Bumi ke Matahari kira-kira 10⁸ km. Tuliskan jarak tersebut dalam bentuk bilangan biasa!" },
-      { label: "e.", text: "Sebuah negara berpenduduk sekitar 10⁸ jiwa. Tuliskan angka populasinya secara lengkap!" },
-      { label: "f.", text: "Sebuah prosesor komputer mampu melakukan 10⁹ operasi per detik. Berapa banyak operasi per detik itu dalam bentuk bilangan biasa?" },
     ],
   }),
   Qn(9, "Identifikasi Pangkat Ganjil/Genap – TKA", {
@@ -111,10 +92,6 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "(-7)^{15}: \\text{ positif atau negatif?}" },
       { label: "b.", math: "(-4)^{22}: \\text{ positif atau negatif?}" },
-      { label: "c.", text: "Buat aturan umum: kapan (−a)ⁿ bernilai positif dan kapan negatif?" },
-      { label: "d.", text: "Suhu di kutub selatan berubah (−12)¹⁵ derajat dalam model simulasi. Apakah perubahan suhu itu positif atau negatif?" },
-      { label: "e.", text: "Seorang investor mencatat perubahan nilai saham sebagai (−200)²² rupiah. Apakah nilai akhirnya untung atau rugi? Jelaskan!" },
-      { label: "f.", text: "Tanpa menghitung nilainya, tentukan tanda (positif/negatif) dari: (−3)^{101}, (−5)^{50}, dan (−2)^{77}. Jelaskan polamu!" },
     ],
   }),
 ];
