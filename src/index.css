@@ -3613,3 +3613,157 @@
 [data-theme="white"] .bg-orange-500\/20 {
   background: transparent !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RANGKUMAN AKHIR HALAMAN — Light Theme Overrides
+   Covers: white (Putih Bersih), light (Salju Cerah),
+           sunset (Langit Cerah), forest (Hutan Hijau)
+   All scoped inside .bg-slate-900\/90 which is the rangkuman body container
+   in every Kelas 7 (and other) content page.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* 1. Main rangkuman body: dark → light */
+html.light-mode .bg-slate-900\/90 {
+  background: rgba(248, 250, 252, 0.97) !important;
+  backdrop-filter: none !important;
+}
+
+/* 2. Pure-white text → dark readable slate */
+html.light-mode .bg-slate-900\/90 .text-white {
+  color: #1e293b !important;
+}
+
+/* 3. Semi-transparent white text → readable mid-grey */
+html.light-mode .bg-slate-900\/90 .text-white\/50,
+html.light-mode .bg-slate-900\/90 .text-white\/60,
+html.light-mode .bg-slate-900\/90 .text-white\/65,
+html.light-mode .bg-slate-900\/90 .text-white\/70,
+html.light-mode .bg-slate-900\/90 .text-white\/75,
+html.light-mode .bg-slate-900\/90 .text-white\/80,
+html.light-mode .bg-slate-900\/90 .text-white\/90 {
+  color: #475569 !important;
+}
+
+/* 4. Light-on-dark colour labels inside item cards (xxx-200) → darken */
+html.light-mode .bg-slate-900\/90 .text-cyan-200,
+html.light-mode .bg-slate-900\/90 .text-blue-200,
+html.light-mode .bg-slate-900\/90 .text-indigo-200,
+html.light-mode .bg-slate-900\/90 .text-violet-200,
+html.light-mode .bg-slate-900\/90 .text-purple-200,
+html.light-mode .bg-slate-900\/90 .text-green-200,
+html.light-mode .bg-slate-900\/90 .text-emerald-200,
+html.light-mode .bg-slate-900\/90 .text-teal-200,
+html.light-mode .bg-slate-900\/90 .text-yellow-200,
+html.light-mode .bg-slate-900\/90 .text-amber-200,
+html.light-mode .bg-slate-900\/90 .text-orange-200,
+html.light-mode .bg-slate-900\/90 .text-red-200,
+html.light-mode .bg-slate-900\/90 .text-pink-200,
+html.light-mode .bg-slate-900\/90 .text-rose-200 {
+  color: #374151 !important;
+}
+
+/* 5. Dark gradient item cards (bg-gradient-to-r with 900-series colours) → soft card */
+html.light-mode .bg-slate-900\/90 .bg-gradient-to-r {
+  background-image: none !important;
+  background-color: rgba(226, 232, 240, 0.7) !important;
+}
+
+/* 6. Dark tips boxes (bg-xxx-900/30, bg-xxx-800/xx) → soft light */
+html.light-mode .bg-slate-900\/90 .bg-cyan-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-blue-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-indigo-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-violet-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-purple-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-green-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-emerald-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-yellow-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-amber-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-orange-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-red-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-pink-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-slate-900\/30,
+html.light-mode .bg-slate-900\/90 .bg-slate-900\/50,
+html.light-mode .bg-slate-900\/90 .bg-slate-800\/50,
+html.light-mode .bg-slate-900\/90 .bg-slate-800\/30 {
+  background-color: rgba(203, 213, 225, 0.5) !important;
+}
+
+/* 7. Kesimpulan gradient section → soft tinted card */
+html.light-mode .bg-slate-900\/90 .bg-gradient-to-br {
+  background-image: none !important;
+  background-color: rgba(224, 242, 254, 0.6) !important;
+}
+
+/* 8. Tag chips / semi-transparent white backgrounds */
+html.light-mode .bg-slate-900\/90 .bg-white\/5,
+html.light-mode .bg-slate-900\/90 .bg-white\/10,
+html.light-mode .bg-slate-900\/90 .bg-white\/15 {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 9. Invisible white borders → visible subtle dark border */
+html.light-mode .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+html.light-mode .bg-slate-900\/90 .border-white\/20,
+html.light-mode .bg-slate-900\/90 .border-white\/25,
+html.light-mode .bg-slate-900\/90 .border-white\/30 {
+  border-color: rgba(0, 0, 0, 0.14) !important;
+}
+
+/* 10. Dark inline code / formula boxes */
+html.light-mode .bg-slate-900\/90 .bg-slate-800 {
+  background-color: #e2e8f0 !important;
+}
+html.light-mode .bg-slate-900\/90 .bg-slate-800 .text-cyan-300,
+html.light-mode .bg-slate-900\/90 .bg-slate-800 code {
+  color: #1e3a8a !important;
+}
+
+/* 11. Tips text: amber-100 (light on dark) → amber-900 */
+html.light-mode .bg-slate-900\/90 .text-amber-100 {
+  color: #78350f !important;
+}
+html.light-mode .bg-slate-900\/90 .bg-amber-500\/10 {
+  background-color: rgba(251, 191, 36, 0.18) !important;
+}
+
+/* 12. Coloured section-label text (xxx-300) inside rangkuman — keep visible */
+html.light-mode .bg-slate-900\/90 .text-cyan-300    { color: #0e7490 !important; }
+html.light-mode .bg-slate-900\/90 .text-blue-300    { color: #1d4ed8 !important; }
+html.light-mode .bg-slate-900\/90 .text-indigo-300  { color: #3730a3 !important; }
+html.light-mode .bg-slate-900\/90 .text-violet-300  { color: #5b21b6 !important; }
+html.light-mode .bg-slate-900\/90 .text-purple-300  { color: #6b21a8 !important; }
+html.light-mode .bg-slate-900\/90 .text-green-300,
+html.light-mode .bg-slate-900\/90 .text-green-400   { color: #15803d !important; }
+html.light-mode .bg-slate-900\/90 .text-emerald-300 { color: #065f46 !important; }
+html.light-mode .bg-slate-900\/90 .text-teal-300    { color: #0f766e !important; }
+html.light-mode .bg-slate-900\/90 .text-yellow-300  { color: #a16207 !important; }
+html.light-mode .bg-slate-900\/90 .text-amber-300   { color: #92400e !important; }
+html.light-mode .bg-slate-900\/90 .text-orange-300  { color: #c2410c !important; }
+html.light-mode .bg-slate-900\/90 .text-red-300,
+html.light-mode .bg-slate-900\/90 .text-red-400     { color: #b91c1c !important; }
+html.light-mode .bg-slate-900\/90 .text-pink-300    { color: #9d174d !important; }
+html.light-mode .bg-slate-900\/90 .text-rose-300    { color: #9f1239 !important; }
+
+/* 13. Number/step circle backgrounds inside cards */
+html.light-mode .bg-slate-900\/90 .bg-blue-500\/30,
+html.light-mode .bg-slate-900\/90 .bg-green-500\/30,
+html.light-mode .bg-slate-900\/90 .bg-purple-500\/30,
+html.light-mode .bg-slate-900\/90 .bg-orange-500\/30,
+html.light-mode .bg-slate-900\/90 .bg-cyan-500\/30,
+html.light-mode .bg-slate-900\/90 .bg-yellow-500\/30,
+html.light-mode .bg-slate-900\/90 .bg-red-500\/30 {
+  background-color: rgba(148, 163, 184, 0.3) !important;
+}
+
+/* 14. bg-xxx-500/10 tinted section wrappers (e.g. rangkuman sifat boxes) */
+html.light-mode .bg-slate-900\/90 .bg-blue-500\/10,
+html.light-mode .bg-slate-900\/90 .bg-cyan-500\/10,
+html.light-mode .bg-slate-900\/90 .bg-green-500\/10,
+html.light-mode .bg-slate-900\/90 .bg-violet-500\/10,
+html.light-mode .bg-slate-900\/90 .bg-orange-500\/10,
+html.light-mode .bg-slate-900\/90 .bg-red-500\/10,
+html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
+  background-color: rgba(226, 232, 240, 0.5) !important;
+}
