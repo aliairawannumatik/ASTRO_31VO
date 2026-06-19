@@ -32,6 +32,11 @@ const THEMES: ThemeDef[] = [
     ring: "ring-slate-400 shadow-[0_0_14px_rgba(148,163,184,0.5)]", dot: "bg-slate-400",
   },
   {
+    id: "sunset", emoji: "☁️", name: "Langit Cerah",
+    swatch: "linear-gradient(135deg,#38bdf8,#7dd3fc,#bae6fd,#e0f2fe)",
+    ring: "ring-sky-400 shadow-[0_0_14px_rgba(14,165,233,0.5)]", dot: "bg-sky-400",
+  },
+  {
     id: "ocean",  emoji: "🌊", name: "Lautan Biru",
     swatch: "linear-gradient(135deg,#0c2a4a,#075985,#0369a1)",
     ring: "ring-cyan-500 shadow-[0_0_14px_rgba(6,182,212,0.5)]", dot: "bg-cyan-400",
@@ -45,11 +50,6 @@ const THEMES: ThemeDef[] = [
     id: "forest", emoji: "🌿", name: "Hutan Hijau",
     swatch: "linear-gradient(135deg,#bbf7d0,#dcfce7,#f0fdf4)",
     ring: "ring-green-500 shadow-[0_0_14px_rgba(34,197,94,0.45)]", dot: "bg-green-500",
-  },
-  {
-    id: "sunset", emoji: "☁️", name: "Langit Cerah",
-    swatch: "linear-gradient(135deg,#38bdf8,#7dd3fc,#bae6fd,#e0f2fe)",
-    ring: "ring-sky-400 shadow-[0_0_14px_rgba(14,165,233,0.5)]", dot: "bg-sky-400",
   },
 ];
 
