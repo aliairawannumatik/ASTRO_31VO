@@ -79,7 +79,6 @@ const questions: Q[] = [
       { label: "d.", math: "16^{\\frac{3}{4}} = \\ldots" },
       { label: "e.", math: "9^{\\frac{3}{2}} = \\ldots" },
       { label: "f.", math: "100^{\\frac{3}{2}} = \\ldots" },
-      { label: "g.", math: "64^{\\frac{2}{3}} = \\ldots" },
     ],
   }),
   Qn(4, "Pangkat Pecahan Negatif – Dasar, Lanjutan & Ekspresi Kompleks", {

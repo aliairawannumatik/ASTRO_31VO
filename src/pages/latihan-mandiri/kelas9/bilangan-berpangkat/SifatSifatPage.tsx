@@ -26,9 +26,8 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "(2 \\times 3)^4 = 2^4 \\times 3^4 = \\ldots" },
       { label: "b.", math: "(4 \\times 2)^3 = \\ldots" },
-      { label: "c.", math: "\\left(\\frac{3}{4}\\right)^2 = \\frac{3^2}{4^2} = \\ldots" },
-      { label: "d.", math: "\\left(\\frac{2}{5}\\right)^3 = \\ldots" },
-      { label: "e.", math: "\\left(\\frac{6}{7}\\right)^2 = \\ldots" },
+      { label: "c.", math: "\\left(\\frac{2}{5}\\right)^3 = \\ldots" },
+      { label: "d.", math: "\\left(\\frac{6}{7}\\right)^2 = \\ldots" },
     ],
   }),
   Qn(3, "Sifat Distribusi & Eksponen Aljabar", {
