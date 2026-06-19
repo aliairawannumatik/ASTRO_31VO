@@ -91,29 +91,52 @@
 /* 1. Override hardcoded text-white class for non-dark themes */
 [data-theme="light"] .text-white,
 [data-theme="white"] .text-white,
-[data-theme="forest"] .text-white {
+[data-theme="forest"] .text-white,
+[data-theme="sunset"] .text-white {
   color: var(--text-primary) !important;
 }
 
 /* 3. Override white/50 and similar opacity variants for light themes */
+[data-theme="light"] .text-white\/10,
+[data-theme="light"] .text-white\/20,
 [data-theme="light"] .text-white\/25,
 [data-theme="light"] .text-white\/30,
+[data-theme="light"] .text-white\/40,
 [data-theme="light"] .text-white\/50,
 [data-theme="light"] .text-white\/60,
 [data-theme="light"] .text-white\/70,
 [data-theme="light"] .text-white\/80,
+[data-theme="light"] .text-white\/90,
+[data-theme="white"] .text-white\/10,
+[data-theme="white"] .text-white\/20,
 [data-theme="white"] .text-white\/25,
 [data-theme="white"] .text-white\/30,
+[data-theme="white"] .text-white\/40,
 [data-theme="white"] .text-white\/50,
 [data-theme="white"] .text-white\/60,
 [data-theme="white"] .text-white\/70,
 [data-theme="white"] .text-white\/80,
+[data-theme="white"] .text-white\/90,
+[data-theme="forest"] .text-white\/10,
+[data-theme="forest"] .text-white\/20,
 [data-theme="forest"] .text-white\/25,
 [data-theme="forest"] .text-white\/30,
+[data-theme="forest"] .text-white\/40,
 [data-theme="forest"] .text-white\/50,
 [data-theme="forest"] .text-white\/60,
 [data-theme="forest"] .text-white\/70,
-[data-theme="forest"] .text-white\/80 {
+[data-theme="forest"] .text-white\/80,
+[data-theme="forest"] .text-white\/90,
+[data-theme="sunset"] .text-white\/10,
+[data-theme="sunset"] .text-white\/20,
+[data-theme="sunset"] .text-white\/25,
+[data-theme="sunset"] .text-white\/30,
+[data-theme="sunset"] .text-white\/40,
+[data-theme="sunset"] .text-white\/50,
+[data-theme="sunset"] .text-white\/60,
+[data-theme="sunset"] .text-white\/70,
+[data-theme="sunset"] .text-white\/80,
+[data-theme="sunset"] .text-white\/90 {
   color: var(--text-secondary) !important;
 }
 
@@ -125,8 +148,12 @@
 [data-theme="white"] .text-gray-300,
 [data-theme="white"] .text-gray-400,
 [data-theme="white"] .text-slate-300,
-[data-theme="white"] .text-slate-400 {
-  color: #2a2a4a !important;
+[data-theme="white"] .text-slate-400,
+[data-theme="sunset"] .text-gray-300,
+[data-theme="sunset"] .text-gray-400,
+[data-theme="sunset"] .text-slate-300,
+[data-theme="sunset"] .text-slate-400 {
+  color: #075985 !important;
 }
 
 [data-theme="light"] .text-gray-500,
@@ -2328,6 +2355,224 @@
 
 /* ── KaTeX math text: dark navy so formulas stand out ── */
 .theme-sunset .katex { color: #0c4a6e; }
+
+/* ══════════════════════════════════════════════════════════
+   LANGIT CERAH (sunset) — extended overrides
+   Fixes: dark bg, water-btn, SVG gray, text-white, slates
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Dark slate backgrounds → light sky blue ── */
+.theme-sunset .bg-slate-950,
+.theme-sunset .bg-slate-950\/80,
+.theme-sunset .bg-slate-900,
+.theme-sunset .bg-slate-900\/90,
+.theme-sunset .bg-slate-900\/80,
+.theme-sunset .bg-slate-900\/70,
+.theme-sunset .bg-slate-900\/60,
+.theme-sunset .bg-slate-900\/50,
+.theme-sunset .bg-slate-900\/40,
+.theme-sunset .bg-slate-900\/30,
+.theme-sunset .bg-slate-800,
+.theme-sunset .bg-slate-800\/90,
+.theme-sunset .bg-slate-800\/80,
+.theme-sunset .bg-slate-800\/70,
+.theme-sunset .bg-slate-800\/60,
+.theme-sunset .bg-slate-800\/50,
+.theme-sunset .bg-slate-800\/40,
+.theme-sunset .bg-slate-800\/30,
+.theme-sunset .bg-slate-700\/60,
+.theme-sunset .bg-slate-700\/50,
+.theme-sunset .bg-slate-700\/40,
+.theme-sunset .bg-slate-700\/30 { background-color: rgba(224,242,254,0.85) !important; }
+
+/* ── Dark gray backgrounds → light sky ── */
+.theme-sunset .bg-gray-900,
+.theme-sunset .bg-gray-900\/90,
+.theme-sunset .bg-gray-900\/80,
+.theme-sunset .bg-gray-900\/60,
+.theme-sunset .bg-gray-900\/50,
+.theme-sunset .bg-gray-900\/40,
+.theme-sunset .bg-gray-800\/60,
+.theme-sunset .bg-gray-800\/50,
+.theme-sunset .bg-gray-800\/40,
+.theme-sunset .bg-gray-800\/30 { background-color: rgba(224,242,254,0.85) !important; }
+
+/* ── Dark themed color boxes → light pastel versions ── */
+.theme-sunset .bg-blue-900\/30,
+.theme-sunset .bg-blue-900\/40,
+.theme-sunset .bg-blue-900\/50,
+.theme-sunset .bg-blue-900\/60 { background-color: rgba(219,234,254,0.75) !important; }
+.theme-sunset .bg-cyan-900\/30,
+.theme-sunset .bg-cyan-900\/40,
+.theme-sunset .bg-cyan-900\/50  { background-color: rgba(207,250,254,0.75) !important; }
+.theme-sunset .bg-sky-900\/30,
+.theme-sunset .bg-sky-900\/40,
+.theme-sunset .bg-sky-900\/50   { background-color: rgba(186,230,253,0.75) !important; }
+.theme-sunset .bg-violet-900\/30,
+.theme-sunset .bg-violet-900\/40,
+.theme-sunset .bg-violet-900\/50 { background-color: rgba(237,233,254,0.70) !important; }
+.theme-sunset .bg-purple-900\/30,
+.theme-sunset .bg-purple-900\/40,
+.theme-sunset .bg-purple-900\/50 { background-color: rgba(243,232,255,0.70) !important; }
+.theme-sunset .bg-indigo-900\/30,
+.theme-sunset .bg-indigo-900\/40,
+.theme-sunset .bg-indigo-900\/50 { background-color: rgba(224,231,255,0.70) !important; }
+.theme-sunset .bg-teal-900\/30,
+.theme-sunset .bg-teal-900\/40,
+.theme-sunset .bg-teal-900\/50   { background-color: rgba(204,251,241,0.70) !important; }
+.theme-sunset .bg-emerald-900\/30,
+.theme-sunset .bg-emerald-900\/40 { background-color: rgba(209,250,229,0.70) !important; }
+.theme-sunset .bg-green-900\/30,
+.theme-sunset .bg-green-900\/40,
+.theme-sunset .bg-green-900\/50  { background-color: rgba(220,252,231,0.70) !important; }
+.theme-sunset .bg-yellow-900\/30,
+.theme-sunset .bg-yellow-900\/40,
+.theme-sunset .bg-yellow-900\/50 { background-color: rgba(254,249,195,0.75) !important; }
+.theme-sunset .bg-amber-900\/30,
+.theme-sunset .bg-amber-900\/40  { background-color: rgba(254,243,199,0.75) !important; }
+.theme-sunset .bg-orange-900\/30,
+.theme-sunset .bg-orange-900\/40 { background-color: rgba(255,237,213,0.75) !important; }
+.theme-sunset .bg-red-900\/30,
+.theme-sunset .bg-red-900\/40,
+.theme-sunset .bg-red-900\/50    { background-color: rgba(254,226,226,0.75) !important; }
+.theme-sunset .bg-rose-900\/30,
+.theme-sunset .bg-rose-900\/40   { background-color: rgba(255,228,230,0.75) !important; }
+.theme-sunset .bg-pink-900\/30,
+.theme-sunset .bg-pink-900\/40   { background-color: rgba(252,231,243,0.70) !important; }
+.theme-sunset .bg-fuchsia-900\/30,
+.theme-sunset .bg-fuchsia-900\/40 { background-color: rgba(250,232,255,0.70) !important; }
+
+/* ── Semi-transparent white/black overlays on sky bg → sky tinted ── */
+.theme-sunset .bg-white\/5   { background-color: rgba(186,230,253,0.25) !important; }
+.theme-sunset .bg-white\/8   { background-color: rgba(186,230,253,0.35) !important; }
+.theme-sunset .bg-white\/10  { background-color: rgba(186,230,253,0.40) !important; }
+.theme-sunset .bg-white\/15  { background-color: rgba(186,230,253,0.50) !important; }
+.theme-sunset .bg-white\/20  { background-color: rgba(186,230,253,0.55) !important; }
+.theme-sunset .bg-black\/30,
+.theme-sunset .bg-black\/40,
+.theme-sunset .bg-black\/50,
+.theme-sunset .bg-black\/60,
+.theme-sunset .bg-black\/70  { background-color: rgba(125,211,252,0.30) !important; }
+
+/* ── Inline dark hex backgrounds used in materi SVG panels ── */
+.theme-sunset .bg-\[rgba\(15\2C 23\2C 42\2C 0\.5\)\],
+.theme-sunset .bg-\[rgba\(15\2C 23\2C 42\2C 0\.88\)\],
+.theme-sunset .bg-\[rgba\(10\2C 15\2C 30\2C 0\.92\)\] { background-color: rgba(224,242,254,0.90) !important; }
+
+/* ── text-gray/slate remaining variants ── */
+.theme-sunset .text-gray-500,
+.theme-sunset .text-slate-500,
+.theme-sunset .text-gray-600,
+.theme-sunset .text-slate-600 { color: #0c4a6e !important; }
+
+/* ── Sub-material buttons (water-btn): bright sky blue cards ── */
+.theme-sunset .water-btn {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%) !important;
+  border: 1px solid rgba(14,165,233,0.35) !important;
+  box-shadow: 0 2px 10px rgba(14,165,233,0.15) !important;
+}
+/* Override the dark gradient overlay inside each water-btn card */
+.theme-sunset .water-btn [class*="bg-gradient-to-br"][class*="900\/"] {
+  background: rgba(186,230,253,0.45) !important;
+}
+/* Make sure button text is always readable in sunset */
+.theme-sunset .water-btn .font-display { color: #0c4a6e !important; }
+.theme-sunset .water-btn .font-body    { color: #075985 !important; }
+
+/* ── Dark gradient from-xxx-900 stops used inside cards → light sky ── */
+.theme-sunset .from-blue-900\/40,
+.theme-sunset .from-blue-900\/50,
+.theme-sunset .from-cyan-900\/40,
+.theme-sunset .from-cyan-900\/50,
+.theme-sunset .from-sky-900\/40,
+.theme-sunset .from-sky-900\/50,
+.theme-sunset .from-indigo-900\/40,
+.theme-sunset .from-indigo-900\/50,
+.theme-sunset .from-violet-900\/40,
+.theme-sunset .from-violet-900\/50,
+.theme-sunset .from-purple-900\/40,
+.theme-sunset .from-purple-900\/50,
+.theme-sunset .from-teal-900\/40,
+.theme-sunset .from-teal-900\/50,
+.theme-sunset .from-green-900\/40,
+.theme-sunset .from-green-900\/50,
+.theme-sunset .from-rose-900\/40,
+.theme-sunset .from-rose-900\/50,
+.theme-sunset .from-pink-900\/40,
+.theme-sunset .from-pink-900\/50,
+.theme-sunset .from-orange-900\/40,
+.theme-sunset .from-orange-900\/50,
+.theme-sunset .from-amber-900\/40,
+.theme-sunset .from-amber-900\/50,
+.theme-sunset .from-yellow-900\/40,
+.theme-sunset .from-yellow-900\/50,
+.theme-sunset .from-red-900\/40,
+.theme-sunset .from-red-900\/50 {
+  --tw-gradient-from: rgba(186,230,253,0.50) var(--tw-gradient-from-position) !important;
+}
+
+.theme-sunset .to-indigo-900\/30,
+.theme-sunset .to-blue-900\/30,
+.theme-sunset .to-sky-900\/30,
+.theme-sunset .to-cyan-900\/30,
+.theme-sunset .to-purple-900\/30,
+.theme-sunset .to-violet-900\/30,
+.theme-sunset .to-fuchsia-900\/30,
+.theme-sunset .to-teal-900\/30,
+.theme-sunset .to-emerald-900\/30,
+.theme-sunset .to-green-900\/30,
+.theme-sunset .to-amber-900\/30,
+.theme-sunset .to-orange-900\/30,
+.theme-sunset .to-yellow-900\/30,
+.theme-sunset .to-red-900\/30,
+.theme-sunset .to-rose-900\/30,
+.theme-sunset .to-pink-900\/30 {
+  --tw-gradient-to: rgba(224,242,254,0.45) var(--tw-gradient-to-position) !important;
+}
+
+/* ── Borders: slate/white → sky blue ── */
+.theme-sunset .border-white\/10 { border-color: rgba(14,165,233,0.20) !important; }
+.theme-sunset .border-white\/15 { border-color: rgba(14,165,233,0.25) !important; }
+.theme-sunset .border-white\/20 { border-color: rgba(14,165,233,0.30) !important; }
+.theme-sunset .border-white\/25 { border-color: rgba(14,165,233,0.35) !important; }
+.theme-sunset .border-white\/30 { border-color: rgba(14,165,233,0.40) !important; }
+
+/* ── SVG gray fills/strokes → dark navy (issue #3) ── */
+/* Targets inline attribute selectors for common gray palette used in materi SVGs */
+.theme-sunset svg [fill="#94a3b8"],
+.theme-sunset svg [fill="#64748b"],
+.theme-sunset svg [fill="#475569"],
+.theme-sunset svg [fill="#334155"] { fill: #0c4a6e !important; }
+
+.theme-sunset svg [fill="rgba(148,163,184,0.85)"],
+.theme-sunset svg [fill="rgba(148,163,184,0.5)"],
+.theme-sunset svg [fill="rgba(100,116,139,0.55)"],
+.theme-sunset svg [fill="rgba(71,85,105,0.5)"] { fill: rgba(12,74,110,0.70) !important; }
+
+.theme-sunset svg [stroke="#94a3b8"],
+.theme-sunset svg [stroke="#64748b"],
+.theme-sunset svg [stroke="#475569"] { stroke: #0c4a6e !important; }
+
+.theme-sunset svg [stroke="rgba(148,163,184,0.5)"],
+.theme-sunset svg [stroke="rgba(148,163,184,0.85)"],
+.theme-sunset svg [stroke="rgba(100,116,139,0.55)"] { stroke: rgba(12,74,110,0.55) !important; }
+
+/* Dark SVG fill backgrounds (info-panel rectangles, axes BGs) → light sky */
+.theme-sunset svg [fill="rgba(15,23,42,0.5)"],
+.theme-sunset svg [fill="rgba(15,23,42,0.88)"],
+.theme-sunset svg [fill="rgba(10,15,30,0.92)"],
+.theme-sunset svg [fill="#0f172a"],
+.theme-sunset svg [fill="#0a0f1e"] { fill: rgba(224,242,254,0.92) !important; }
+
+/* Icon backgrounds using dark hex colors → sky blue */
+.theme-sunset .bg-\[\#0c1524\],
+.theme-sunset .bg-\[\#0c1a2e\],
+.theme-sunset .bg-\[\#0d1b2e\] { background-color: #bae6fd !important; }
+
+/* ── Backdrop/overlay on light cards: invisible black overlays → transparent ── */
+.theme-sunset .backdrop-blur-sm  { --tw-backdrop-blur: blur(4px); }
+.theme-sunset .bg-background\/80 { background-color: rgba(186,230,253,0.88) !important; }
+.theme-sunset .bg-background\/70 { background-color: rgba(186,230,253,0.80) !important; }
 
 /* ── RPP Print Styles ── */
 @media print {

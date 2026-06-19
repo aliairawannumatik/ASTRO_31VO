@@ -11,13 +11,14 @@ import { useTheme } from "@/contexts/ThemeContext";
 const WelcomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const isLight = ["light", "white", "forest"].includes(theme);
+  const isLight = ["light", "white", "forest", "sunset"].includes(theme);
+  const isSunset = theme === "sunset";
   const [showThemePicker, setShowThemePicker] = useState(false);
 
   return (
     <div
       className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${
-        isLight ? "gradient-snow" : ""
+        isSunset ? "gradient-sunset" : isLight ? "gradient-snow" : ""
       }`}
     >
       {/* Background — space image only in dark mode */}
@@ -103,10 +104,20 @@ const WelcomePage = () => {
           </button>
         </div>
 
-        {/* Sun (dark mode) or Crystal Ball (light mode) */}
+        {/* Sun (dark/sunset mode) or Crystal Ball (snow/light mode) */}
         <div className="mt-8 mb-12">
           <div className="relative w-28 h-28 mx-auto">
-            {isLight ? (
+            {isSunset ? (
+              <>
+                <div className="absolute inset-0 rounded-full bg-sky-300 opacity-40 blur-2xl animate-pulse scale-125" />
+                <img
+                  src="/sun.png"
+                  alt="Langit Cerah"
+                  className="relative w-28 h-28 mx-auto object-contain animate-rotate-slow drop-shadow-2xl"
+                  style={{ filter: "drop-shadow(0 0 16px rgba(56,189,248,0.85)) drop-shadow(0 0 32px rgba(14,165,233,0.5))" }}
+                />
+              </>
+            ) : isLight ? (
               <>
                 <div className="absolute inset-0 rounded-full bg-blue-300 opacity-30 blur-2xl animate-pulse scale-125" />
                 <img
