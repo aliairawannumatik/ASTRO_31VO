@@ -62,10 +62,12 @@ const WelcomePage = () => {
         {/* Main title */}
         <h1
           className={`font-display text-5xl sm:text-7xl font-black mb-8 drop-shadow-lg ${
-            isLight ? "text-cyan-500" : "text-yellow-400"
+            isSunset ? "text-yellow-400" : isLight ? "text-cyan-500" : "text-yellow-400"
           }`}
           style={
-            isLight
+            isSunset
+              ? { textShadow: "0 0 16px rgba(253,224,71,0.9), 0 0 32px rgba(250,204,21,0.8), 0 0 60px rgba(234,179,8,0.6), 0 0 90px rgba(234,179,8,0.35)" }
+              : isLight
               ? { textShadow: "0 0 24px rgba(6,182,212,0.5), 0 0 48px rgba(14,165,233,0.35), 0 2px 8px rgba(6,182,212,0.25)" }
               : { textShadow: "0 0 20px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.3), 0 0 60px rgba(59,130,246,0.2)" }
           }
