@@ -216,9 +216,21 @@ const questions: Q[] = [
     ],
     answer: "A",
   },
-  /* ══════════ GRUP 3: DILATASI KOMPOSISI ══════════ */
+  /* ══════════ GRUP 3: MENCARI TITIK ASAL — PUSAT (a, b) ══════════ */
   {
-    n: 11, title: "ANBK — Dilatasi Dua Kali Berurutan",
+    n: 11, title: "Mencari Titik Asal dari Bayangan — Pusat (1, −2), k = 3",
+    content: "Bayangan titik A setelah didilatasi terhadap pusat P(1, −2) dengan faktor skala k = 3 adalah A′(7, 4). Koordinat titik A adalah ...",
+    choices: [
+      { label: "A", text: "(3, 0)" },
+      { label: "B", text: "(4, 2)" },
+      { label: "C", text: "(1, 0)" },
+      { label: "D", text: "(3, 2)" },
+    ],
+    answer: "A",
+  },
+  /* ══════════ GRUP 4: DILATASI KOMPOSISI ══════════ */
+  {
+    n: 12, title: "ANBK — Dilatasi Dua Kali Berurutan",
     content: "Titik A(1, 2) didilatasi terhadap O dengan k₁ = 2, lalu hasilnya didilatasi lagi dengan k₂ = 3. Koordinat akhir A adalah ...",
     choices: [
       { label: "A", text: "(2, 4)" },
@@ -229,7 +241,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 12, title: "Dilatasi Dilanjut Refleksi Sumbu-x",
+    n: 13, title: "Dilatasi Dilanjut Refleksi Sumbu-x",
     content: "Titik A(2, 3) didilatasi terhadap O dengan k = 2 menghasilkan A′. Kemudian A′ direfleksikan terhadap sumbu-x menghasilkan A″. Koordinat A″ adalah ...",
     choices: [
       { label: "A", text: "(4, 6)" },
@@ -240,7 +252,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 13, title: "Dilatasi Dilanjut Translasi",
+    n: 14, title: "Dilatasi Dilanjut Translasi",
     content: "Titik A(2, 1) didilatasi terhadap O(0, 0) dengan k = 3 menghasilkan A′. Kemudian A′ ditranslasikan oleh T(−4, 2) menghasilkan A″. Koordinat A″ adalah ...",
     choices: [
       { label: "A", text: "(6, 3)" },
@@ -251,7 +263,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 14, title: "Dilatasi Dilanjut Rotasi 90° Berlawanan Arah Jarum Jam",
+    n: 15, title: "Dilatasi Dilanjut Rotasi 90° Berlawanan Arah Jarum Jam",
     content: "Titik C(3, 2) didilatasi terhadap O dengan k = 2 menghasilkan C′(6, 4). C′ dirotasikan 90° berlawanan arah jarum jam terhadap pusat P(2, 0). Koordinat C″ adalah ...",
     choices: [
       { label: "A", text: "(4, −2)" },
@@ -261,25 +273,13 @@ const questions: Q[] = [
     ],
     answer: "B",
   },
-  /* ══════════ GRUP 4: MENCARI TITIK ASAL — PUSAT (a, b) ══════════ */
-  {
-    n: 15, title: "Mencari Titik Asal dari Bayangan — Pusat (1, −2), k = 3",
-    content: "Bayangan titik A setelah didilatasi terhadap pusat P(1, −2) dengan faktor skala k = 3 adalah A′(7, 4). Koordinat titik A adalah ...",
-    choices: [
-      { label: "A", text: "(3, 0)" },
-      { label: "B", text: "(4, 2)" },
-      { label: "C", text: "(1, 0)" },
-      { label: "D", text: "(3, 2)" },
-    ],
-    answer: "A",
-  },
 ];
 
 const groupHeaders: Record<number, string> = {
   1:  "📍 Dilatasi Pusat O(0, 0)",
   9:  "📍 Dilatasi Pusat (a, b)",
-  11: "🔀 Dilatasi Komposisi",
-  15: "🔍 Mencari Titik Asal — Pusat (a, b)",
+  11: "🔍 Mencari Titik Asal — Pusat (a, b)",
+  12: "🔀 Dilatasi Komposisi",
 };
 
 const DilatsiPage = () => {
