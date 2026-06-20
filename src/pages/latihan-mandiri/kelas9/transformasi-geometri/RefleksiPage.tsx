@@ -215,10 +215,6 @@ const questions: Q[] = [
     content:"Koordinat bayangan titik R(−4, 7) setelah dicerminkan terhadap garis y = x adalah ...",
     opts:["(4, −7)","(7, −4)","(−7, 4)","(4, 7)"],
   }),
-  Qn(20,"Puncak Parabola setelah Refleksi y = x",{type:"pg",
-    content:"Grafik f(x) = (x + 3)² dicerminkan terhadap garis y = x. Bayangan titik puncak grafik f(x) berada di koordinat ...",
-    opts:["(0, −3)","(−3, 0)","(3, 0)","(0, 3)"],
-  }),
   Qn(21,"Refleksi Berturut-turut — Sumbu Y lalu y = b",{type:"pg",
     content:"Koordinat bayangan akhir titik A(−4, 1) setelah dicerminkan terhadap sumbu-Y, kemudian dilanjutkan refleksi terhadap garis y = 3 adalah ...",
     opts:["A″(−4, 5)","A″(−4, 1)","A″(4, 1)","A″(4, 5)"],
@@ -254,6 +250,10 @@ const questions: Q[] = [
   Qn(34,"Refleksi Fungsi Linear — y = k",{type:"pg",
     content:"Fungsi linear f(x) = 3x + 2 dicerminkan terhadap garis y = 4. Persamaan bayangan fungsi tersebut adalah ...",
     opts:["y = −3x + 6","y = 3x − 6","y = −3x + 2","y = 3x + 6"],
+  }),
+  Qn(20,"Puncak Parabola setelah Refleksi y = x",{type:"pg",
+    content:"Grafik f(x) = (x + 3)² dicerminkan terhadap garis y = x. Bayangan titik puncak grafik f(x) berada di koordinat ...",
+    opts:["(0, −3)","(−3, 0)","(3, 0)","(0, 3)"],
   }),
 ];
 
