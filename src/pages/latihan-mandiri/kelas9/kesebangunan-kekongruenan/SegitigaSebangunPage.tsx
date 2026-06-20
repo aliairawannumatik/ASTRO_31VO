@@ -446,12 +446,24 @@ const SoalQ7New = () => {
   const tE = (Dx - B.x) / (C.x - B.x);
   const E  = { x: Dx, y: Math.round(B.y + tE * (C.y - B.y)) }; // ≈ (184, 111)
 
-  // Right-angle mark at D (DE⊥AC): square between upward DE direction and leftward DA direction
-  const sq = 8;
-  // sq1: up from D, sq2: up-left, sq3: left from D
-  const sq1 = { x: D.x,      y: D.y - sq };
-  const sq2 = { x: D.x - sq, y: D.y - sq };
-  const sq3 = { x: D.x - sq, y: D.y      };
+  // Arc marks for equal angles: EDC and ABC
+  const arcR = 15;
+  // Angle EDC at D: between DE (up, direction 0,-1) and DC (right, direction 1,0)
+  // Arc from point on DC ray to point on DE ray (CCW in SVG)
+  const arcEDC_start = { x: D.x + arcR, y: D.y };           // along DC
+  const arcEDC_end   = { x: D.x,        y: D.y - arcR };    // along DE
+
+  // Angle ABC at B: between BC and BA rays
+  const bcLen = Math.sqrt((C.x-B.x)**2 + (C.y-B.y)**2);
+  const baLen = Math.sqrt((A.x-B.x)**2 + (A.y-B.y)**2);
+  const arcABC_start = {
+    x: Math.round(B.x + arcR * (C.x-B.x) / bcLen),
+    y: Math.round(B.y + arcR * (C.y-B.y) / bcLen),
+  };
+  const arcABC_end = {
+    x: Math.round(B.x + arcR * (A.x-B.x) / baLen),
+    y: Math.round(B.y + arcR * (A.y-B.y) / baLen),
+  };
 
   const midAB = { x: Math.round((A.x+B.x)/2), y: Math.round((A.y+B.y)/2) };
   const midBE = { x: Math.round((B.x+E.x)/2), y: Math.round((B.y+E.y)/2) };
@@ -463,9 +475,12 @@ const SoalQ7New = () => {
         fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* DE — perfectly vertical */}
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="1.8"/>
-      {/* Right-angle mark at D */}
-      <polyline points={`${sq1.x},${sq1.y} ${sq2.x},${sq2.y} ${sq3.x},${sq3.y}`}
-        fill="none" stroke="#e2e8f0" strokeWidth="1.2"/>
+      {/* Matching arc at angle EDC (at D) */}
+      <path d={`M ${arcEDC_start.x},${arcEDC_start.y} A ${arcR},${arcR} 0 0,0 ${arcEDC_end.x},${arcEDC_end.y}`}
+        fill="none" stroke="#fbbf24" strokeWidth="1.8"/>
+      {/* Matching arc at angle ABC (at B) */}
+      <path d={`M ${arcABC_start.x},${arcABC_start.y} A ${arcR},${arcR} 0 0,0 ${arcABC_end.x},${arcABC_end.y}`}
+        fill="none" stroke="#fbbf24" strokeWidth="1.8"/>
       {/* Vertex dots */}
       <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
       <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
