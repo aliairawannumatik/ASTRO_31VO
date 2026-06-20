@@ -31,27 +31,31 @@ const SoalQ1 = () => (
 );
 
 const SoalQ2 = () => {
-  const A={x:160,y:22}, B={x:30,y:195}, C={x:290,y:195};
-  const D={x:76,y:138}, E={x:244,y:138};
+  // AB is now vertical on the left (A top-left, B bottom-left), BC horizontal at bottom
+  const A={x:55, y:25},  B={x:55, y:195}, C={x:290, y:195};
+  // D on AB at 2/3 from A, E on AC at 2/3 from A → DE ∥ BC (horizontal)
+  const D={x:55,  y:138}, E={x:212, y:138};
   return (
     <svg viewBox="0 0 320 215" className="w-full max-w-xs mx-auto">
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2.2"/>
       {/* Right-pointing arrow on DE (parallel indicator) */}
-      <polygon points="157,135 165,138 157,141" fill="#4ade80"/>
+      <polygon points="128,135 136,138 128,141" fill="#4ade80"/>
       {/* Right-pointing arrow on BC (parallel indicator) */}
-      <polygon points="157,192 165,195 157,198" fill="#60a5fa"/>
-      <text x={A.x-5} y={A.y-5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x-15} y={B.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <polygon points="166,192 174,195 166,198" fill="#60a5fa"/>
+      <text x={A.x-14} y={A.y+4}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x-14} y={B.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
       <text x={C.x+4}  y={C.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
       <text x={D.x-14} y={D.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">D</text>
       <text x={E.x+4}  y={E.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">E</text>
-      <text x="82"  y="82"  fontSize="12" fill="#f97316" fontWeight="bold">c</text>
-      {/* "4 cm" label repositioned to avoid arrow collision */}
-      <text x="8"   y="168" fontSize="11" fill="#fbbf24" fontWeight="bold">4 cm</text>
-      <text x="244" y="82"  fontSize="12" fill="#a855f7" fontWeight="bold">d</text>
-      {/* "3 cm" label repositioned */}
-      <text x="271" y="168" fontSize="11" fill="#fbbf24" fontWeight="bold">3 cm</text>
+      {/* c = AD along left vertical side */}
+      <text x="62"  y="82"  fontSize="12" fill="#f97316" fontWeight="bold">c</text>
+      {/* 4 cm = DB along left vertical side */}
+      <text x="62"  y="168" fontSize="11" fill="#fbbf24" fontWeight="bold">4 cm</text>
+      {/* d = AE along hypotenuse AC, upper part */}
+      <text x="128" y="70"  fontSize="12" fill="#a855f7" fontWeight="bold">d</text>
+      {/* 3 cm = EC along hypotenuse AC, lower part */}
+      <text x="254" y="158" fontSize="11" fill="#fbbf24" fontWeight="bold">3 cm</text>
       <text x={(D.x+E.x)/2} y={D.y-8} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">DE = 8 cm</text>
       <text x={(B.x+C.x)/2} y={B.y+15} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">BC = 12 cm</text>
     </svg>
@@ -59,37 +63,31 @@ const SoalQ2 = () => {
 };
 
 const SoalQ3 = () => {
-  // AB is now vertical on the left; DC is vertical on the right (both parallel)
-  const A={x:62, y:82},  B={x:62, y:122};   // AB = 40px → 5 cm (left side, vertical)
-  const D={x:250, y:22}, C={x:250, y:182};  // DC = 160px → 20 cm (right side, vertical)
-  // E on AD at 2/5 from A; F on BC at 2/5 from B
-  const E={x: A.x+(2/5)*(D.x-A.x), y: A.y+(2/5)*(D.y-A.y)}; // (138, 58)
-  const F={x: B.x+(2/5)*(C.x-B.x), y: B.y+(2/5)*(C.y-B.y)}; // (138, 146)
-  const abMid={x:A.x, y:(A.y+B.y)/2};
-  const efMid={x:E.x, y:(E.y+F.y)/2};
-  const dcMid={x:D.x, y:(D.y+C.y)/2};
+  const A={x:108,y:38}, B={x:192,y:38}, C={x:272,y:182}, D={x:28,y:182};
+  const E={x:A.x+(2/5)*(D.x-A.x), y:A.y+(2/5)*(D.y-A.y)};
+  const F={x:B.x+(2/5)*(C.x-B.x), y:B.y+(2/5)*(C.y-B.y)};
+  const abMid={x:(A.x+B.x)/2, y:A.y};
+  const efMid={x:(E.x+F.x)/2, y:E.y};
+  const dcMid={x:(D.x+C.x)/2, y:D.y};
   return (
     <svg viewBox="0 0 310 210" className="w-full max-w-xs mx-auto">
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y}`} fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
       <line x1={E.x} y1={E.y} x2={F.x} y2={F.y} stroke="#4ade80" strokeWidth="2.5"/>
       <circle cx={E.x} cy={E.y} r="3.5" fill="#4ade80"/>
       <circle cx={F.x} cy={F.y} r="3.5" fill="#4ade80"/>
-      <text x={A.x-15} y={A.y+4}  fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x-15} y={B.y+4}  fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={C.x+4}  y={C.y+4}  fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
-      <text x={D.x+4}  y={D.y+4}  fontSize="12" fill="#93c5fd" fontWeight="bold">D</text>
+      <text x={A.x-14} y={A.y+4}  fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+3}  y={B.y+4}  fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={C.x+4}  y={C.y+12} fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={D.x-15} y={D.y+12} fontSize="12" fill="#93c5fd" fontWeight="bold">D</text>
       <text x={E.x-15} y={E.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">E</text>
-      <text x={F.x-15} y={F.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">F</text>
-      {/* AB label to the left of AB */}
-      <text x={abMid.x-6} y={abMid.y+4} textAnchor="end" fontSize="11" fill="#fde68a" fontWeight="bold">AB=5cm</text>
-      {/* DC label to the right of DC */}
-      <text x={dcMid.x+6} y={dcMid.y+4} textAnchor="start" fontSize="11" fill="#fde68a" fontWeight="bold">DC=20cm</text>
-      {/* EF label above midpoint of EF */}
-      <text x={efMid.x+6} y={efMid.y+4} textAnchor="start" fontSize="11" fill="#4ade80" fontWeight="bold">EF=?</text>
-      {/* Down-pointing arrows on AB, EF, DC (parallel indicators) */}
-      <polygon points={`${abMid.x-3},${abMid.y-4} ${abMid.x},${abMid.y+7} ${abMid.x+3},${abMid.y-4}`} fill="#fde68a"/>
-      <polygon points={`${efMid.x-3},${efMid.y-4} ${efMid.x},${efMid.y+7} ${efMid.x+3},${efMid.y-4}`} fill="#4ade80"/>
-      <polygon points={`${dcMid.x-3},${dcMid.y-4} ${dcMid.x},${dcMid.y+7} ${dcMid.x+3},${dcMid.y-4}`} fill="#fde68a"/>
+      <text x={F.x+4}  y={F.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">F</text>
+      <text x={150} y={26} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">AB = 5 cm</text>
+      <text x={150} y={200} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">DC = 20 cm</text>
+      <text x={efMid.x} y={efMid.y-8} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">EF = ?</text>
+      {/* Right-pointing arrows on AB, EF, DC (parallel indicators) */}
+      <polygon points={`${abMid.x-3},${abMid.y-3} ${abMid.x+7},${abMid.y} ${abMid.x-3},${abMid.y+3}`} fill="#fde68a"/>
+      <polygon points={`${efMid.x-3},${efMid.y-3} ${efMid.x+7},${efMid.y} ${efMid.x-3},${efMid.y+3}`} fill="#4ade80"/>
+      <polygon points={`${dcMid.x-3},${dcMid.y-3} ${dcMid.x+7},${dcMid.y} ${dcMid.x-3},${dcMid.y+3}`} fill="#fde68a"/>
     </svg>
   );
 };
