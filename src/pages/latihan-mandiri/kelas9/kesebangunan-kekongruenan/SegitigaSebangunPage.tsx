@@ -591,6 +591,107 @@ const Q6TriDE2SVG = () => (
   </svg>
 );
 
+const SoalQ10Isosceles = () => {
+  // Isosceles △PQR: PQ=PR, M on PQ, N on PR, MN∥QR, PQ:PM = 4:3
+  const P = { x: 155, y: 22  };
+  const Q = { x:  50, y: 188 };
+  const R = { x: 260, y: 188 };
+  const t = 3/4; // PM/PQ = 3/4
+  const M = { x: Math.round(P.x + t*(Q.x-P.x)), y: Math.round(P.y + t*(Q.y-P.y)) }; // ≈(76,147)
+  const N = { x: Math.round(P.x + t*(R.x-P.x)), y: Math.round(P.y + t*(R.y-P.y)) }; // ≈(234,147)
+  // Equal tick marks at mid-PQ and mid-PR
+  const mpq = { x: (P.x+Q.x)/2, y: (P.y+Q.y)/2 }; // (102.5, 105)
+  const mpr = { x: (P.x+R.x)/2, y: (P.y+R.y)/2 }; // (207.5, 105)
+  const tk = 6; // half-tick length, perpendicular to each side
+  // PQ direction unit: (-105,166)/196.4 ≈ (-0.535,0.846); perp=(0.846,0.535)
+  const pqPerpX = 0.846, pqPerpY = 0.535;
+  // PR direction unit: (105,166)/196.4 ≈ (0.535,0.846); perp=(-0.846,0.535)
+  return (
+    <svg viewBox="0 0 310 210" className="w-full max-w-sm mx-auto" style={{ background:"rgba(15,23,42,0.6)", borderRadius:8 }}>
+      <polygon points={`${P.x},${P.y} ${Q.x},${Q.y} ${R.x},${R.y}`}
+        fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1.8"/>
+      {/* MN line */}
+      <line x1={M.x} y1={M.y} x2={N.x} y2={N.y} stroke="#4ade80" strokeWidth="1.8"/>
+      {/* Equal tick marks on PQ */}
+      <line x1={mpq.x - pqPerpX*tk} y1={mpq.y - pqPerpY*tk}
+            x2={mpq.x + pqPerpX*tk} y2={mpq.y + pqPerpY*tk}
+            stroke="#fbbf24" strokeWidth="2"/>
+      {/* Equal tick marks on PR */}
+      <line x1={mpr.x + pqPerpX*tk} y1={mpr.y - pqPerpY*tk}
+            x2={mpr.x - pqPerpX*tk} y2={mpr.y + pqPerpY*tk}
+            stroke="#fbbf24" strokeWidth="2"/>
+      {/* Dots */}
+      <circle cx={P.x} cy={P.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={Q.x} cy={Q.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={R.x} cy={R.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={M.x} cy={M.y} r="3.5" fill="#fbbf24"/>
+      <circle cx={N.x} cy={N.y} r="3.5" fill="#fbbf24"/>
+      {/* Vertex labels */}
+      <text x={P.x} y={P.y-10} fontSize="14" fill="#93c5fd" fontWeight="bold" textAnchor="middle">P</text>
+      <text x={Q.x-14} y={Q.y+5} fontSize="13" fill="#93c5fd" fontWeight="bold">Q</text>
+      <text x={R.x+6}  y={R.y+5} fontSize="13" fill="#93c5fd" fontWeight="bold">R</text>
+      <text x={M.x-18} y={M.y+5} fontSize="12" fill="#fbbf24" fontWeight="bold">M</text>
+      <text x={N.x+6}  y={N.y+5} fontSize="12" fill="#fbbf24" fontWeight="bold">N</text>
+      {/* Segment labels on PQ side */}
+      <text x={Math.round((P.x+M.x)/2)+8} y={Math.round((P.y+M.y)/2)-4} fontSize="10" fill="#f97316" fontWeight="bold">3</text>
+      <text x={Math.round((M.x+Q.x)/2)+8} y={Math.round((M.y+Q.y)/2)-4} fontSize="10" fill="#a78bfa" fontWeight="bold">1</text>
+      {/* PQ = 4 on PR side */}
+      <text x={Math.round((P.x+N.x)/2)+4} y={Math.round((P.y+N.y)/2)-4} fontSize="10" fill="#f97316" fontWeight="bold">3</text>
+      <text x={Math.round((N.x+R.x)/2)+4} y={Math.round((N.y+R.y)/2)-4} fontSize="10" fill="#a78bfa" fontWeight="bold">1</text>
+      {/* MN∥QR label */}
+      <text x="155" y="203" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">MN ∥ QR</text>
+    </svg>
+  );
+};
+
+const SoalQ11Parallel = () => {
+  // △ABC, P on AB (AP=6, AB=10), Q on AC, PQ∥BC
+  const A = { x: 155, y: 18  };
+  const B = { x:  42, y: 192 };
+  const C = { x: 268, y: 192 };
+  const t = 6/10; // AP/AB = 0.6
+  const P = { x: Math.round(A.x + t*(B.x-A.x)), y: Math.round(A.y + t*(B.y-A.y)) }; // ≈(87,122)
+  const Qp= { x: Math.round(A.x + t*(C.x-A.x)), y: Math.round(A.y + t*(C.y-A.y)) }; // ≈(223,122)
+  // Parallel tick marks: small ">>" perpendicular to AB direction
+  // PQ mid and BC mid
+  const midPQ = { x: (P.x+Qp.x)/2, y: P.y };
+  const midBC = { x: (B.x+C.x)/2,  y: B.y  };
+  const arrow = 5;
+  return (
+    <svg viewBox="0 0 310 215" className="w-full max-w-sm mx-auto" style={{ background:"rgba(15,23,42,0.6)", borderRadius:8 }}>
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
+        fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1.8"/>
+      {/* PQ line */}
+      <line x1={P.x} y1={P.y} x2={Qp.x} y2={Qp.y} stroke="#4ade80" strokeWidth="1.8"/>
+      {/* Parallel tick on PQ */}
+      <line x1={midPQ.x-arrow} y1={midPQ.y-arrow} x2={midPQ.x} y2={midPQ.y+arrow} stroke="#4ade80" strokeWidth="1.6"/>
+      <line x1={midPQ.x}       y1={midPQ.y-arrow} x2={midPQ.x+arrow} y2={midPQ.y+arrow} stroke="#4ade80" strokeWidth="1.6"/>
+      {/* Parallel tick on BC */}
+      <line x1={midBC.x-arrow} y1={midBC.y-arrow} x2={midBC.x} y2={midBC.y+arrow} stroke="#60a5fa" strokeWidth="1.6"/>
+      <line x1={midBC.x}       y1={midBC.y-arrow} x2={midBC.x+arrow} y2={midBC.y+arrow} stroke="#60a5fa" strokeWidth="1.6"/>
+      {/* Dots */}
+      <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={C.x} cy={C.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={P.x} cy={P.y} r="3.5" fill="#fbbf24"/>
+      <circle cx={Qp.x} cy={Qp.y} r="3.5" fill="#fbbf24"/>
+      {/* Vertex labels */}
+      <text x={A.x} y={A.y-10} fontSize="14" fill="#93c5fd" fontWeight="bold" textAnchor="middle">A</text>
+      <text x={B.x-16} y={B.y+5} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={C.x+6}  y={C.y+5} fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={P.x-18} y={P.y+5} fontSize="12" fill="#fbbf24" fontWeight="bold">P</text>
+      <text x={Qp.x+6} y={Qp.y+5} fontSize="12" fill="#fbbf24" fontWeight="bold">Q</text>
+      {/* Segment labels on AB */}
+      <text x={Math.round((A.x+P.x)/2)+8} y={Math.round((A.y+P.y)/2)}   fontSize="10" fill="#f97316" fontWeight="bold">6 cm</text>
+      <text x={Math.round((P.x+B.x)/2)+8} y={Math.round((P.y+B.y)/2)+4} fontSize="10" fill="#c084fc" fontWeight="bold">4 cm</text>
+      {/* AQ:QC label */}
+      <text x={Math.round((A.x+Qp.x)/2)-24} y={Math.round((A.y+Qp.y)/2)} fontSize="10" fill="#f97316" fontWeight="bold">6 cm</text>
+      {/* PQ∥BC label */}
+      <text x="155" y="208" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">PQ ∥ BC</text>
+    </svg>
+  );
+};
+
 const Q10TrapSVG = () => (
   <svg viewBox="0 0 265 140" width="258" height="135" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
     <polygon points="60,20 200,20 240,120 20,120" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
@@ -700,6 +801,7 @@ const questions: Q[] = [
   Qn(10, "Segitiga Sama Kaki – Perbandingan Sisi – ANBK", {
     type: "mixed",
     content: "Diketahui △PQR adalah segitiga sama kaki dengan PQ = PR. Titik M pada PQ dan titik N pada PR sedemikian sehingga MN // QR. Jika PQ : PM = 4 : 3, maka PR : PN adalah ....",
+    diagram: <SoalQ10Isosceles />,
     parts: [
       { label: "A.", math: "4 : 3" },
       { label: "B.", math: "3 : 4" },
@@ -710,6 +812,7 @@ const questions: Q[] = [
   Qn(11, "Garis Sejajar – Perbandingan AQ : QC – TKA", {
     type: "mixed",
     content: "Diketahui △ABC. Titik P pada AB dan titik Q pada AC sedemikian sehingga PQ // BC. Jika panjang AP = 6 cm dan AB = 10 cm, maka AQ : QC adalah ....",
+    diagram: <SoalQ11Parallel />,
     parts: [
       { label: "A.", math: "2 : 3" },
       { label: "B.", math: "3 : 2" },
