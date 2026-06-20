@@ -257,12 +257,8 @@ const SoalQ7 = () => {
       <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
       {/* CF = ? above segment C–F */}
       <text x={Math.round((C.x+F.x)/2)} y={C.y-6} textAnchor="middle" fontSize="10" fill="#ef4444" fontWeight="bold">CF = ?</text>
-      {/* BC = 15 on C→B diagonal (shifted right of arrow) */}
-      <text x={midBC.x+12} y={midBC.y+10} fontSize="9" fill="#f97316" fontWeight="bold">BC=15</text>
-      {/* CD = 15 above F–D segment */}
-      <text x={Math.round((F.x+D.x)/2)} y={D.y-6} textAnchor="middle" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
-      {/* DE = 15 below E-D midpoint (shifted to avoid arrow) */}
-      <text x={midED.x+10} y={midED.y+14} fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
+      {/* BC = 15 on C→B diagonal (shifted far right & down from arrow to avoid collision) */}
+      <text x={midBC.x+22} y={midBC.y+18} fontSize="9" fill="#f97316" fontWeight="bold">BC=15</text>
       {/* AB = 11 on bottom */}
       <text x={Math.round((A.x+B.x)/2)} y={A.y+16} textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
       {/* Note */}
@@ -272,30 +268,93 @@ const SoalQ7 = () => {
 };
 
 const SoalQ8 = () => {
-  const A={x:30,y:52},  B={x:175,y:52};
-  const D={x:175,y:160}, F={x:30,y:160};
-  const G={x:30,y:106};
-  const C={x:175,y:106};
+  // Layout matches uploaded image:
+  // A(bottom-left), B(bottom-right) — AB horizontal
+  // D(middle-left), F(middle-right) — DF horizontal, AB // DF
+  // G(top) — apex; GF // BD
+  // E — on segment DF where line AG crosses DF
+  // C — intersection of line AG and line BD
+  const A={x:40, y:207};
+  const B={x:242,y:207};
+  const D={x:40, y:115};
+  const F={x:242,y:115};
+  // G: GF // BD, GF=6cm, BD=16cm → G = F + (F→D direction) * (6/16)
+  // BD dir (B→D): (-202,-92); G = F + (-202,-92)*(6/16) = (242-75.75, 115-34.5) ≈ (166, 81)
+  const G={x:166,y:81};
+  // E: line AG meets DF (y=115) → t=90/124≈0.726; x=40+125*0.726≈131
+  const E={x:131,y:115};
+  // C: intersection of AG and BD (computed) ≈ (102, 143)
+  const C={x:102,y:143};
+
+  // Parallel arrow helper (right-pointing, single)
+  const arrowRight = (x:number, y:number) =>
+    `${x-6},${y-3} ${x+7},${y} ${x-6},${y+3}`;
+
+  // Diagonal parallel arrow helper
+  const arrowDiag = (mx:number,my:number,ux:number,uy:number) => {
+    const px=-uy, py=ux;
+    const s=7, t=5;
+    const tip  = [mx+s*ux, my+s*uy];
+    const left = [mx-t*ux+t*px, my-t*uy+t*py];
+    const rigt = [mx-t*ux-t*px, my-t*uy-t*py];
+    return [...tip,...left,...rigt].map(v=>Math.round(v))
+      .reduce((a,v,i)=>i%2===0?a+v+',':a+v+' ','').trim();
+  };
+  // BD unit vector (B→D): (-202,-92), mag≈222.1 → (-0.910,-0.414)
+  const ux=-0.910, uy=-0.414;
+  // Arrow on BD segment (between B and C, at 40% from B)
+  const bdAx=Math.round(B.x+0.38*(D.x-B.x)), bdAy=Math.round(B.y+0.38*(D.y-B.y));
+  // Arrow on GF segment (at midpoint G→F, same direction)
+  const gfAx=Math.round((G.x+F.x)/2), gfAy=Math.round((G.y+F.y)/2);
+
   return (
-    <svg viewBox="0 0 280 195" className="w-full max-w-xs mx-auto">
-      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${D.x},${D.y} ${F.x},${F.y}`} fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
-      <line x1={G.x} y1={G.y} x2={D.x} y2={D.y} stroke="#4ade80" strokeWidth="2" strokeDasharray="5,3"/>
-      <line x1={A.x} y1={A.y} x2={D.x} y2={D.y} stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3"/>
+    <svg viewBox="0 0 300 235" className="w-full max-w-xs mx-auto">
+      {/* AB bottom horizontal */}
+      <line x1={A.x} y1={A.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* DF middle horizontal */}
+      <line x1={D.x} y1={D.y} x2={F.x} y2={F.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* GD segment (left side of upper triangle) */}
+      <line x1={G.x} y1={G.y} x2={D.x} y2={D.y} stroke="#a78bfa" strokeWidth="2"/>
+      {/* GF segment (right side of upper triangle, GF // BD) */}
+      <line x1={G.x} y1={G.y} x2={F.x} y2={F.y} stroke="#4ade80" strokeWidth="2"/>
+      {/* Line A→G (passes through C then E on DF, then to G) */}
+      <line x1={A.x} y1={A.y} x2={G.x} y2={G.y} stroke="#a78bfa" strokeWidth="2"/>
+      {/* Line B→D (passes through C, BD // GF) */}
+      <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#f97316" strokeWidth="2"/>
+
+      {/* Parallel indicators on AB (>>) */}
+      <polygon points={arrowRight(142,207)} fill="#fde68a"/>
+      <polygon points={arrowRight(158,207)} fill="#fde68a"/>
+      {/* Parallel indicator on DF (>) */}
+      <polygon points={arrowRight(180,115)} fill="#fde68a"/>
+      {/* Parallel arrows on BD and GF (both upper-left direction) */}
+      <polygon points={arrowDiag(bdAx,bdAy,ux,uy)} fill="#f97316"/>
+      <polygon points={arrowDiag(gfAx,gfAy,ux,uy)} fill="#4ade80"/>
+
+      {/* Dots */}
+      <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={D.x} cy={D.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={F.x} cy={F.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={G.x} cy={G.y} r="3.5" fill="#fbbf24"/>
+      <circle cx={E.x} cy={E.y} r="3"   fill="#4ade80"/>
       <circle cx={C.x} cy={C.y} r="3.5" fill="#ef4444"/>
-      <circle cx={G.x} cy={G.y} r="3.5" fill="#4ade80"/>
-      <text x={A.x-14} y={A.y+4}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x+4}  y={B.y+4}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={B.x+4}  y={D.y+4}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
-      <text x={A.x-14} y={F.y+4}  fontSize="13" fill="#93c5fd" fontWeight="bold">F</text>
-      <text x={A.x-14} y={G.y+4}  fontSize="13" fill="#4ade80" fontWeight="bold">G</text>
-      <text x={B.x+4}  y={C.y+4}  fontSize="13" fill="#ef4444" fontWeight="bold">C</text>
-      <text x={(A.x+B.x)/2} y={A.y-8} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">AB = 16 cm</text>
-      <text x={(F.x+D.x)/2} y={F.y+16} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">DF = 16 cm</text>
-      <text x={B.x+12} y={(B.y+C.y)/2+4} fontSize="10" fill="#fbbf24" fontWeight="bold">BC = ?</text>
-      <text x={A.x-38} y={(F.y+G.y)/2+4} fontSize="10" fill="#4ade80" fontWeight="bold">FG=6</text>
-      <text x={(A.x+B.x)/2+8} y={(A.y+D.y)/2} fontSize="10" fill="#f97316">BD=16</text>
-      <text x="215" y="52"  fontSize="9" fill="#60a5fa">AB // DF</text>
-      <text x="215" y="68"  fontSize="9" fill="#4ade80">BD // GF</text>
+
+      {/* Labels */}
+      <text x={A.x-16} y={A.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={D.x-16} y={D.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
+      <text x={F.x+4}  y={F.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">F</text>
+      <text x={G.x+4}  y={G.y-4}  fontSize="13" fill="#fbbf24" fontWeight="bold">G</text>
+      <text x={E.x-4}  y={E.y-8}  fontSize="11" fill="#4ade80" fontWeight="bold">E</text>
+      <text x={C.x-18} y={C.y+5}  fontSize="13" fill="#ef4444" fontWeight="bold">C</text>
+
+      {/* Measurements */}
+      <text x={(A.x+B.x)/2} y={A.y+17} textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold">AB = 16 cm</text>
+      <text x={(D.x+F.x)/2} y={D.y-8}  textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold">DF = 16 cm</text>
+      <text x={F.x+6} y={(G.y+F.y)/2+4} fontSize="10" fill="#4ade80" fontWeight="bold">FG = 6 cm</text>
+      <text x={(B.x+D.x)/2+14} y={(B.y+D.y)/2+10} fontSize="9" fill="#f97316" fontWeight="bold">BD=16</text>
+      <text x={B.x+6}  y={(B.y+C.y)/2+4} fontSize="10" fill="#ef4444" fontWeight="bold">BC = ?</text>
     </svg>
   );
 };
