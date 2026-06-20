@@ -200,32 +200,47 @@ const SoalQ6 = () => (
 );
 
 const SoalQ7 = () => {
-  // C moved far left, B moved left, E-C and C-A lines removed.
-  // E(58,22), B(220,222) → F on line E-B at y=122:
-  //   x_F = 58 + (100/200)*(220-58) = 58+81 = 139  ✓
-  // C-F-D all at y=122; A-B at y=222
+  // A moved right; F recalculated on line E-A at y=122; B adjusted so BC ∥ ED.
+  // E(58,22), A(100,222) → F at y=122: x=58+(100/200)*(100-58)=79 → F=(79,122)
+  // BC slope = ED slope = 100/194 → B.x = C.x + 194 = 18+194 = 212 → B=(212,222)
+  // Parallel arrow direction (upper-left): unit ≈ (-0.888, -0.459)
   const E={x:58,y:22};
-  const C={x:18,y:122}, F={x:139,y:122}, D={x:252,y:122};
-  const A={x:58,y:222}, B={x:220,y:222};
-  // midpoints for arrows
-  const midCFD={x:Math.round((C.x+D.x)/2), y:122};
-  const midAB ={x:Math.round((A.x+B.x)/2), y:222};
+  const C={x:18,y:122}, F={x:79,y:122}, D={x:252,y:122};
+  const A={x:100,y:222}, B={x:212,y:222};
+
+  // Arrowhead helper: tip pointing in direction (ux,uy) at point (mx,my)
+  const arrowPts = (mx:number, my:number, ux:number, uy:number) => {
+    const px=-uy, py=ux; // perpendicular
+    const s=7, t=5;
+    const tip  = [mx+s*ux,       my+s*uy      ];
+    const left = [mx-t*ux+t*px,  my-t*uy+t*py ];
+    const rigt = [mx-t*ux-t*px,  my-t*uy-t*py ];
+    return tip.map(Math.round).join(',')+" "+left.map(Math.round).join(',')+" "+rigt.map(Math.round).join(',');
+  };
+  // Upper-left unit vector (same for BC and ED since parallel): (-0.888,-0.459)
+  const ux=-0.888, uy=-0.459;
+  const midBC={x:Math.round((B.x+C.x)/2), y:Math.round((B.y+C.y)/2)}; // (115,172)
+  const midED={x:Math.round((E.x+D.x)/2), y:Math.round((E.y+D.y)/2)}; // (155,72)
+
   return (
     <svg viewBox="0 0 318 248" className="w-full max-w-xs mx-auto">
-      {/* Line E → F → B (E, F, B collinear) */}
-      <line x1={E.x} y1={E.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* Line E → F → A (E, F, A collinear — replaces old E-F-B) */}
+      <line x1={E.x} y1={E.y} x2={A.x} y2={A.y} stroke="#60a5fa" strokeWidth="2"/>
       {/* Line E → D */}
       <line x1={E.x} y1={E.y} x2={D.x} y2={D.y} stroke="#a78bfa" strokeWidth="2"/>
       {/* Horizontal C — F — D */}
       <line x1={C.x} y1={C.y} x2={D.x} y2={D.y} stroke="#4ade80" strokeWidth="2"/>
-      {/* Arrow on C-F-D horizontal */}
-      <polygon points={`${midCFD.x-5},${midCFD.y-3} ${midCFD.x+6},${midCFD.y} ${midCFD.x-5},${midCFD.y+3}`} fill="#4ade80"/>
+      {/* Right-arrow on C-F-D (parallel indicator) */}
+      <polygon points="130,119 141,122 130,125" fill="#4ade80"/>
       {/* Bottom horizontal A — B */}
       <line x1={A.x} y1={A.y} x2={B.x} y2={B.y} stroke="#4ade80" strokeWidth="2"/>
-      {/* Arrow on A-B bottom */}
-      <polygon points={`${midAB.x-5},${midAB.y-3} ${midAB.x+6},${midAB.y} ${midAB.x-5},${midAB.y+3}`} fill="#4ade80"/>
-      {/* Line C → B (diagonal, orange) — no E-C or C-A lines */}
+      {/* Right-arrow on A-B (parallel indicator) */}
+      <polygon points="150,219 161,222 150,225" fill="#4ade80"/>
+      {/* Line C → B (orange diagonal, BC ∥ ED) */}
       <line x1={C.x} y1={C.y} x2={B.x} y2={B.y} stroke="#f97316" strokeWidth="2"/>
+      {/* Parallel arrows on BC and ED pointing upper-left */}
+      <polygon points={arrowPts(midBC.x, midBC.y, ux, uy)} fill="#fde68a"/>
+      <polygon points={arrowPts(midED.x, midED.y, ux, uy)} fill="#fde68a"/>
       {/* Dots */}
       <circle cx={E.x} cy={E.y} r="3.5" fill="#93c5fd"/>
       <circle cx={F.x} cy={F.y} r="3.5" fill="#fbbf24"/>
@@ -235,19 +250,19 @@ const SoalQ7 = () => {
       <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
       {/* Labels */}
       <text x={E.x-16} y={E.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">E</text>
-      <text x={F.x+5}  y={F.y-6}  fontSize="12" fill="#fde68a" fontWeight="bold">F</text>
+      <text x={F.x+5}  y={F.y-5}  fontSize="12" fill="#fde68a" fontWeight="bold">F</text>
       <text x={D.x+5}  y={D.y+5}  fontSize="13" fill="#a78bfa" fontWeight="bold">D</text>
       <text x={C.x-16} y={C.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">C</text>
       <text x={A.x-16} y={A.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
       <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      {/* CF = ? label above horizontal between C and F */}
+      {/* CF = ? above segment C–F */}
       <text x={Math.round((C.x+F.x)/2)} y={C.y-6} textAnchor="middle" fontSize="10" fill="#ef4444" fontWeight="bold">CF = ?</text>
-      {/* BC = 15 on C→B diagonal */}
-      <text x={Math.round((C.x+B.x)/2)+8} y={Math.round((C.y+B.y)/2)+12} fontSize="9" fill="#fde68a" fontWeight="bold">BC=15</text>
-      {/* CD = 15 on horizontal right of F */}
+      {/* BC = 15 on C→B diagonal (shifted right of arrow) */}
+      <text x={midBC.x+12} y={midBC.y+10} fontSize="9" fill="#f97316" fontWeight="bold">BC=15</text>
+      {/* CD = 15 above F–D segment */}
       <text x={Math.round((F.x+D.x)/2)} y={D.y-6} textAnchor="middle" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
-      {/* DE = 15 on E-D line */}
-      <text x="162" y="72" fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
+      {/* DE = 15 below E-D midpoint (shifted to avoid arrow) */}
+      <text x={midED.x+10} y={midED.y+14} fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
       {/* AB = 11 on bottom */}
       <text x={Math.round((A.x+B.x)/2)} y={A.y+16} textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
       {/* Note */}
