@@ -200,58 +200,58 @@ const SoalQ6 = () => (
 );
 
 const SoalQ7 = () => {
-  // Corrected figure:
-  // E (top-left), F (middle, on horizontal C-F-D, on line E-F-A), D (middle-right, on horizontal C-F-D)
-  // C (middle-left, on horizontal C-F-D, directly below E)
-  // B (bottom-left, below C — line B-C exists)
-  // A (bottom-right, end of line E-F-A)
-  // Collinear checks:
-  //   E(58,22), F(155,122), A(252,222): slope=(122-22)/(155-58)=100/97≈1.031; (222-122)/(252-155)=100/97≈1.031 ✓
-  //   E-D line: from E(58,22) to D(252,122) — separate line from E-F-A
-  //   C-F-D: all at y=122 ✓
+  // Layout (after swapping A and B):
+  // E (top-left), C (middle-left, below E), F (middle, on horizontal C-F-D), D (middle-right)
+  // A (bottom-LEFT, swapped from old B), B (bottom-RIGHT, swapped from old A)
+  // Collinear: E(58,22), F(155,122), B(252,222) → slope 100/97 each leg ✓
+  // E-D line: E(58,22) → D(252,122)
+  // C-F-D: all at y=122 ✓
+  // New line: C(58,122) → B(252,222)
   const E={x:58,y:22};
   const C={x:58,y:122}, F={x:155,y:122}, D={x:252,y:122};
-  const B={x:58,y:222}, A={x:252,y:222};
+  const A={x:58,y:222}, B={x:252,y:222};
   return (
     <svg viewBox="0 0 318 248" className="w-full max-w-xs mx-auto">
-      {/* Line E → F → A (E, F, A collinear) */}
-      <line x1={E.x} y1={E.y} x2={A.x} y2={A.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* Line E → F → B (E, F, B collinear — main diagonal) */}
+      <line x1={E.x} y1={E.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
       {/* Line E → D */}
       <line x1={E.x} y1={E.y} x2={D.x} y2={D.y} stroke="#a78bfa" strokeWidth="2"/>
       {/* Horizontal C — F — D (all at y=122) */}
       <line x1={C.x} y1={C.y} x2={D.x} y2={D.y} stroke="#4ade80" strokeWidth="2"/>
       {/* Right-arrow on C-F-D horizontal (parallel indicator) */}
       <polygon points="148,119 158,122 148,125" fill="#4ade80"/>
-      {/* Bottom horizontal B — A */}
-      <line x1={B.x} y1={B.y} x2={A.x} y2={A.y} stroke="#4ade80" strokeWidth="2"/>
-      {/* Right-arrow on B-A bottom (parallel indicator) */}
+      {/* Bottom horizontal A — B */}
+      <line x1={A.x} y1={A.y} x2={B.x} y2={B.y} stroke="#4ade80" strokeWidth="2"/>
+      {/* Right-arrow on A-B bottom (parallel indicator) */}
       <polygon points="148,219 158,222 148,225" fill="#4ade80"/>
-      {/* Left vertical: B — C (line between B and C) */}
-      <line x1={C.x} y1={C.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* Left vertical: E — C — A */}
+      <line x1={E.x} y1={E.y} x2={A.x} y2={A.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* New line: C → B (diagonal) */}
+      <line x1={C.x} y1={C.y} x2={B.x} y2={B.y} stroke="#f97316" strokeWidth="2"/>
       {/* Dots at key vertices */}
       <circle cx={E.x} cy={E.y} r="3.5" fill="#93c5fd"/>
       <circle cx={F.x} cy={F.y} r="3.5" fill="#fbbf24"/>
       <circle cx={D.x} cy={D.y} r="3.5" fill="#a78bfa"/>
       <circle cx={C.x} cy={C.y} r="3.5" fill="#4ade80"/>
-      <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
       <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
       {/* Vertex labels */}
       <text x={E.x-16} y={E.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">E</text>
       <text x={F.x+6}  y={F.y+5}  fontSize="12" fill="#fde68a" fontWeight="bold">F</text>
       <text x={D.x+5}  y={D.y+5}  fontSize="13" fill="#a78bfa" fontWeight="bold">D</text>
       <text x={C.x-16} y={C.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">C</text>
-      <text x={B.x-16} y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={A.x+5}  y={A.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      {/* Segment label: EF = ? on the E-F-A line (upper portion) */}
-      <text x="82" y="72" fontSize="10" fill="#ef4444" fontWeight="bold">EF = ?</text>
-      {/* Segment label: BC = 15 on left vertical */}
-      <text x="4" y="176" fontSize="9" fill="#fde68a" fontWeight="bold">BC=15</text>
-      {/* Segment label: CD = 15 on horizontal (left part C to F area) */}
-      <text x="85" y="116" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
+      <text x={A.x-16} y={A.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+5}  y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      {/* Segment label: CF = ? on horizontal between C and F */}
+      <text x="94" y="116" fontSize="10" fill="#ef4444" fontWeight="bold">CF = ?</text>
+      {/* Segment label: BC = 15 on diagonal C→B */}
+      <text x="168" y="188" fontSize="9" fill="#fde68a" fontWeight="bold">BC=15</text>
+      {/* Segment label: CD = 15 on horizontal right part (F to D area) */}
+      <text x="188" y="116" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
       {/* Segment label: DE = 15 on line E-D */}
       <text x="168" y="72" fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
       {/* Segment label: AB = 11 on bottom horizontal */}
-      <text x="145" y="240" textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
+      <text x="155" y="240" textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
       {/* Note */}
       <text x="159" y="10" textAnchor="middle" fontSize="8" fill="#94a3b8">Garis mendatar sejajar</text>
     </svg>
@@ -496,9 +496,9 @@ const questions: Q[] = [
       { label: "D.", text: "20 cm" },
     ],
   }),
-  Qn(7, "Garis-Garis Sejajar – Cari EF", {
+  Qn(7, "Garis-Garis Sejajar – Cari CF", {
     type: "mixed",
-    content: "Perhatikan gambar berikut. Garis-garis mendatar adalah sejajar satu sama lain. Diketahui BC = CD = DE = 15 cm (diukur pada transversal kiri) dan AB = 11 cm. Panjang EF adalah…",
+    content: "Perhatikan gambar berikut. Jika panjang BC = CD = DE = 15 cm dan AB = 11 cm, panjang CF adalah…",
     diagram: <SoalQ7 />,
     parts: [
       { label: "A.", text: "2 cm" },
