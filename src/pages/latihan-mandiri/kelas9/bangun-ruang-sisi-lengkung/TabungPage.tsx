@@ -365,34 +365,20 @@ const TabungPage = () => {
 
                       {q.choices && (
                         <div className="flex flex-col gap-1.5 mt-2">
-                          {q.choices.map((ch) => {
-                            const isAnswer = ch.label === q.answer;
-                            return (
+                          {q.choices.map((ch) => (
                               <div
                                 key={ch.label}
-                                className={`flex items-center gap-3 px-3 py-2 rounded-xl border transition-all
-                                  ${isAnswer
-                                    ? "bg-cyan-500/15 border-cyan-400/50"
-                                    : "bg-white/5 border-white/10"
-                                  }`}
+                                className="flex items-center gap-3 px-3 py-2 rounded-xl border transition-all bg-white/5 border-white/10"
                               >
-                                <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 border
-                                  ${isAnswer
-                                    ? "bg-cyan-400/30 border-cyan-400 text-cyan-200"
-                                    : "bg-white/10 border-white/20 text-white/50"
-                                  }`}>
+                                <span className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 border bg-white/10 border-white/20 text-white/50">
                                   {ch.label}
                                 </span>
-                                <span className={`font-body text-sm ${isAnswer ? "text-cyan-100 font-semibold" : "text-white/70"}`}>
+                                <span className="font-body text-sm text-white/70">
                                   {ch.text && ch.text}
                                   {ch.math && <InlineMath math={ch.math} />}
                                 </span>
-                                {isAnswer && (
-                                  <span className="ml-auto text-cyan-400 text-xs font-bold">✓</span>
-                                )}
                               </div>
-                            );
-                          })}
+                            ))}
                         </div>
                       )}
 
