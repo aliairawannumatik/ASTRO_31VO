@@ -22,9 +22,9 @@ const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, 
 
 const groupHeaders: Record<number, string> = {
   1:  "📌 Bagian A — Unsur-Unsur Tabung",
-  9:  "📐 Bagian B — Luas Permukaan Tabung",
-  26: "🔢 Bagian C — Volume Tabung",
-  33: "🌍 Bagian D — Aplikasi di Kehidupan Nyata",
+  4:  "📐 Bagian B — Luas Permukaan Tabung",
+  12: "🔢 Bagian C — Volume Tabung",
+  15: "🌍 Bagian D — Aplikasi di Kehidupan Nyata",
 };
 
 function CylinderSVG({ r, h, color = "#22d3ee", showSlant = false, extraLabel = "" }: {
@@ -144,56 +144,6 @@ const questions: Q[] = [
     answer: "C",
   }),
   Qn(3, "Konsep Dasar Tabung", {
-    content: "Banyak titik sudut pada tabung adalah ...",
-    choices: [
-      { label: "A", text: "tidak ada" },
-      { label: "B", text: "2 buah" },
-      { label: "C", text: "4 buah" },
-      { label: "D", text: "8 buah" },
-    ],
-    answer: "A",
-  }),
-  Qn(4, "Konsep Dasar Tabung", {
-    content: "Bidang alas tabung berbentuk ...",
-    choices: [
-      { label: "A", text: "persegi" },
-      { label: "B", text: "segitiga" },
-      { label: "C", text: "lingkaran" },
-      { label: "D", text: "trapesium" },
-    ],
-    answer: "C",
-  }),
-  Qn(5, "Konsep Dasar Tabung", {
-    content: "Yang dimaksud dengan tinggi tabung adalah ...",
-    choices: [
-      { label: "A", text: "setengah dari panjang diameter" },
-      { label: "B", text: "jarak antara kedua bidang alas" },
-      { label: "C", text: "keliling lingkaran alas" },
-      { label: "D", text: "panjang selimut tabung" },
-    ],
-    answer: "B",
-  }),
-  Qn(6, "Konsep Dasar Tabung", {
-    content: "Sebuah tabung memiliki diameter 21 cm. Jari-jari tabung tersebut adalah ...",
-    choices: [
-      { label: "A", text: "10,5 cm" },
-      { label: "B", text: "21 cm" },
-      { label: "C", text: "42 cm" },
-      { label: "D", text: "7 cm" },
-    ],
-    answer: "A",
-  }),
-  Qn(7, "Konsep Dasar Tabung", {
-    content: "Jika jari-jari alas tabung adalah r, maka keliling alas tabung adalah ...",
-    choices: [
-      { label: "A", math: "\\pi r^2" },
-      { label: "B", math: "\\pi r" },
-      { label: "C", math: "2\\pi r" },
-      { label: "D", math: "4\\pi r" },
-    ],
-    answer: "C",
-  }),
-  Qn(8, "Konsep Dasar Tabung", {
     content: "Apabila selimut tabung dibuka dan dibentangkan menjadi jaring-jaring, maka bentuknya adalah ...",
     choices: [
       { label: "A", text: "lingkaran" },
@@ -205,38 +155,7 @@ const questions: Q[] = [
   }),
 
   // ── BAGIAN B · LUAS PERMUKAAN ─────────────────────────────────────────────
-  Qn(9, "Rumus Luas Permukaan", {
-    content: "Rumus luas permukaan (sisi) tabung yang benar adalah ...",
-    choices: [
-      { label: "A", math: "L = \\pi r^2 + \\pi r t" },
-      { label: "B", math: "L = \\pi r(r + t)" },
-      { label: "C", math: "L = 2\\pi r(r + t)" },
-      { label: "D", math: "L = 2\\pi r^2 t" },
-    ],
-    answer: "C",
-  }),
-  Qn(10, "Rumus Luas Selimut", {
-    content: "Rumus luas selimut tabung adalah ...",
-    choices: [
-      { label: "A", math: "\\pi r^2" },
-      { label: "B", math: "2\\pi r" },
-      { label: "C", math: "\\pi r^2 t" },
-      { label: "D", math: "2\\pi r t" },
-    ],
-    answer: "D",
-  }),
-  Qn(11, "Luas Permukaan – Bentuk Aljabar", {
-    content: "Sebuah tabung memiliki jari-jari r cm dan tinggi 2r cm. Luas permukaan tabung tersebut adalah ...",
-    diagram: <CylinderSymbolicSVG />,
-    choices: [
-      { label: "A", math: "4\\pi r^2" },
-      { label: "B", math: "5\\pi r^2" },
-      { label: "C", math: "6\\pi r^2" },
-      { label: "D", math: "8\\pi r^2" },
-    ],
-    answer: "C",
-  }),
-  Qn(12, "Luas Selimut – Jari-Jari dari Jaring", {
+  Qn(4, "Luas Selimut – Jari-Jari dari Jaring", {
     content: "Selimut sebuah tabung dibentangkan membentuk persegi panjang dengan panjang 22 cm dan lebar 10 cm. Jari-jari alas tabung tersebut adalah ... (π = 22/7)",
     diagram: <SelimutRectSVG />,
     choices: [
@@ -247,7 +166,7 @@ const questions: Q[] = [
     ],
     answer: "A",
   }),
-  Qn(13, "Luas Selimut – Perhitungan", {
+  Qn(5, "Luas Selimut – Perhitungan", {
     content: "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 20 cm. Luas selimut tabung tersebut adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="7 cm" h="20 cm" />,
     choices: [
@@ -258,40 +177,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(14, "Luas Selimut – Jaring-Jaring", {
-    content: "Sebuah tabung memiliki jari-jari 5 cm dan tinggi 12 cm. Luas selimut tabung tersebut adalah ... (π = 3,14)",
-    diagram: <CylinderNetSVG r="5" h="12" />,
-    choices: [
-      { label: "A", text: "251,2 cm²" },
-      { label: "B", text: "314,0 cm²" },
-      { label: "C", text: "376,8 cm²" },
-      { label: "D", text: "471,0 cm²" },
-    ],
-    answer: "C",
-  }),
-  Qn(15, "Luas Permukaan Total – r = 5, t = 12", {
-    content: "Tabung dengan jari-jari 5 cm dan tinggi 12 cm. Luas permukaan total tabung adalah ... (π = 3,14)",
-    diagram: <CylinderSVG r="5 cm" h="12 cm" />,
-    choices: [
-      { label: "A", text: "376,8 cm²" },
-      { label: "B", text: "471,0 cm²" },
-      { label: "C", text: "533,8 cm²" },
-      { label: "D", text: "628,0 cm²" },
-    ],
-    answer: "C",
-  }),
-  Qn(16, "Luas Permukaan – Diameter Diketahui", {
-    content: "Sebuah tabung mempunyai diameter alas 14 cm dan tinggi 15 cm. Luas permukaan tabung tersebut adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="7 cm" h="15 cm" />,
-    choices: [
-      { label: "A", text: "616 cm²" },
-      { label: "B", text: "792 cm²" },
-      { label: "C", text: "968 cm²" },
-      { label: "D", text: "1.144 cm²" },
-    ],
-    answer: "C",
-  }),
-  Qn(17, "Luas Permukaan dari Luas Alas & Selimut", {
+  Qn(6, "Luas Permukaan dari Luas Alas & Selimut", {
     content: "Luas alas sebuah tabung adalah 154 cm² dan luas selimutnya 440 cm². Luas permukaan tabung tersebut adalah ...",
     choices: [
       { label: "A", text: "594 cm²" },
@@ -301,7 +187,7 @@ const questions: Q[] = [
     ],
     answer: "B",
   }),
-  Qn(18, "Mencari Tinggi dari Luas Selimut – 270π", {
+  Qn(7, "Mencari Tinggi dari Luas Selimut – 270π", {
     content: "Luas selimut sebuah tabung adalah 270π cm². Jika jari-jari alasnya 9 cm, maka tinggi tabung tersebut adalah ...",
     diagram: <CylinderSVG r="9 cm" h="?" />,
     choices: [
@@ -312,18 +198,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(19, "Mencari Jari-Jari dari Luas Selimut", {
-    content: "Diketahui luas selimut sebuah tabung 462 cm² dan tingginya 7 cm. Jari-jari alas tabung tersebut adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="?" h="7 cm" />,
-    choices: [
-      { label: "A", text: "7 cm" },
-      { label: "B", text: "10,5 cm" },
-      { label: "C", text: "14 cm" },
-      { label: "D", text: "21 cm" },
-    ],
-    answer: "B",
-  }),
-  Qn(20, "Mencari Diameter dari Luas Selimut", {
+  Qn(8, "Mencari Diameter dari Luas Selimut", {
     content: "Luas selimut sebuah tabung adalah 1.760 cm². Jika tinggi tabung 20 cm, diameter alas tabung tersebut adalah ... (π = 22/7)",
     choices: [
       { label: "A", text: "7 cm" },
@@ -333,7 +208,7 @@ const questions: Q[] = [
     ],
     answer: "D",
   }),
-  Qn(21, "Luas Permukaan Tabung Terbuka", {
+  Qn(9, "Luas Permukaan Tabung Terbuka", {
     content: "Sebuah tabung tanpa tutup memiliki jari-jari 10 cm dan tinggi 15 cm. Luas permukaannya adalah ... (π = 3,14)",
     diagram: <CylinderSVG r="10 cm" h="15 cm" />,
     choices: [
@@ -344,28 +219,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(22, "Luas Selimut – Soal Terbalik", {
-    content: "Luas selimut sebuah tabung adalah 924 cm². Jika tingginya 3 kali jari-jarinya, jari-jari dan tinggi tabung tersebut adalah ... (π = 22/7)",
-    choices: [
-      { label: "A", text: "r = 3 cm, t = 9 cm" },
-      { label: "B", text: "r = 5 cm, t = 15 cm" },
-      { label: "C", text: "r = 7 cm, t = 21 cm" },
-      { label: "D", text: "r = 9 cm, t = 27 cm" },
-    ],
-    answer: "C",
-  }),
-  Qn(23, "Luas Permukaan – Kaleng Terbuka", {
-    content: "Sebuah kaleng terbuka (tanpa tutup atas) berbentuk tabung dengan r = 10,5 cm dan t = 15 cm. Luas permukaan kaleng tersebut adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="10,5 cm" h="15 cm" color="#fbbf24" extraLabel="Tanpa Tutup Atas" />,
-    choices: [
-      { label: "A", text: "891 cm²" },
-      { label: "B", text: "1.039,5 cm²" },
-      { label: "C", text: "1.336,5 cm²" },
-      { label: "D", text: "1.732 cm²" },
-    ],
-    answer: "C",
-  }),
-  Qn(24, "Luas Selimut – Perbandingan", {
+  Qn(10, "Luas Selimut – Perbandingan", {
     content: "Dua tabung memiliki tinggi yang sama. Jika perbandingan jari-jarinya 2 : 3, perbandingan luas selimut kedua tabung adalah ...",
     choices: [
       { label: "A", text: "4 : 9" },
@@ -375,7 +229,7 @@ const questions: Q[] = [
     ],
     answer: "B",
   }),
-  Qn(25, "Luas Permukaan – Terpadu", {
+  Qn(11, "Luas Permukaan – Terpadu", {
     content: "Sebuah tabung memiliki luas permukaan total 836 cm² dan tinggi 12 cm. Volume tabung tersebut adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="?" h="12 cm" />,
     choices: [
@@ -388,18 +242,7 @@ const questions: Q[] = [
   }),
 
   // ── BAGIAN C · VOLUME ─────────────────────────────────────────────────────
-  Qn(26, "Volume Tabung – r = 6, t = 8", {
-    content: "Sebuah tabung memiliki jari-jari 6 cm dan tinggi 8 cm. Volume tabung tersebut adalah ... (π = 3,14)",
-    diagram: <CylinderSVG r="6 cm" h="8 cm" />,
-    choices: [
-      { label: "A", text: "301,44 cm³" },
-      { label: "B", text: "602,88 cm³" },
-      { label: "C", text: "904,32 cm³" },
-      { label: "D", text: "1.206,76 cm³" },
-    ],
-    answer: "C",
-  }),
-  Qn(27, "Volume Tabung – Diameter Diketahui", {
+  Qn(12, "Volume Tabung – Diameter Diketahui", {
     content: "Sebuah tabung memiliki diameter 14 cm dan tinggi 20 cm. Volume tabung adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="7 cm" h="20 cm" />,
     choices: [
@@ -410,7 +253,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(28, "Volume – dari Luas Alas 154", {
+  Qn(13, "Volume – dari Luas Alas 154", {
     content: "Sebuah tabung mempunyai luas alas 154 cm² dan tinggi 10 cm. Volume tabung tersebut adalah ... (π = 22/7)",
     choices: [
       { label: "A", text: "770 cm³" },
@@ -420,28 +263,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(29, "Mencari Tinggi dari Volume – 1.540", {
-    content: "Volume sebuah tabung adalah 1.540 cm³. Jika jari-jari alasnya 7 cm, maka tinggi tabung tersebut adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="7 cm" h="?" />,
-    choices: [
-      { label: "A", text: "5 cm" },
-      { label: "B", text: "8 cm" },
-      { label: "C", text: "10 cm" },
-      { label: "D", text: "12 cm" },
-    ],
-    answer: "C",
-  }),
-  Qn(30, "Keliling Alas dari Volume", {
-    content: "Volume sebuah tabung adalah 4.620 cm³ dan tingginya 30 cm. Keliling alas tabung tersebut adalah ... (π = 22/7)",
-    choices: [
-      { label: "A", text: "22 cm" },
-      { label: "B", text: "33 cm" },
-      { label: "C", text: "44 cm" },
-      { label: "D", text: "66 cm" },
-    ],
-    answer: "C",
-  }),
-  Qn(31, "Perbandingan Volume Dua Tabung", {
+  Qn(14, "Perbandingan Volume Dua Tabung", {
     content: "Tabung A memiliki r = 3 cm dan t = 8 cm. Tabung B memiliki r = 6 cm dan t = 4 cm. Perbandingan volume Tabung A terhadap Tabung B adalah ...",
     choices: [
       { label: "A", text: "VA = VB" },
@@ -451,20 +273,9 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(32, "Volume – Mencari r dari Minyak Goreng", {
-    content: "Sebuah tabung berisi minyak goreng 3.080 cm³. Jika tinggi minyak dalam tabung 20 cm, jari-jari tabung tersebut adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="?" h="20 cm" color="#fbbf24" />,
-    choices: [
-      { label: "A", text: "3,5 cm" },
-      { label: "B", text: "5 cm" },
-      { label: "C", text: "7 cm" },
-      { label: "D", text: "14 cm" },
-    ],
-    answer: "C",
-  }),
 
   // ── BAGIAN D · APLIKASI DI KEHIDUPAN NYATA ───────────────────────────────
-  Qn(33, "Aplikasi – Kolam Renang", {
+  Qn(15, "Aplikasi – Kolam Renang", {
     content: "Sebuah kolam renang berbentuk tabung berdiameter 14 m dan kedalaman 2 m. Volume air yang dibutuhkan untuk mengisi kolam hingga penuh adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="7 m" h="2 m" color="#38bdf8" extraLabel="Kolam Renang" />,
     choices: [
@@ -475,7 +286,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(34, "Aplikasi – Pengisian Tangki dengan Pompa", {
+  Qn(16, "Aplikasi – Pengisian Tangki dengan Pompa", {
     content: "Sebuah tangki berbentuk tabung dengan r = 3,5 m dan tinggi 5 m akan diisi menggunakan pompa yang mengalirkan 385 liter/menit. Waktu yang dibutuhkan untuk mengisi penuh tangki adalah ... (π = 22/7, 1 m³ = 1.000 liter)",
     diagram: <CylinderSVG r="3,5 m" h="5 m" color="#38bdf8" extraLabel="Tangki" />,
     choices: [
@@ -486,7 +297,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(35, "Aplikasi – Pipa Air Mengalir", {
+  Qn(17, "Aplikasi – Pipa Air Mengalir", {
     content: "Air mengalir melalui pipa silinder berjari-jari 1,4 cm dengan kecepatan 5 cm/detik. Volume air yang mengalir dalam 1 menit adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="1,4 cm" h="300 cm" color="#38bdf8" extraLabel="L = 5 × 60 = 300 cm" />,
     choices: [
@@ -497,7 +308,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(36, "Aplikasi – Kaleng Roti Tanpa Tutup", {
+  Qn(18, "Aplikasi – Kaleng Roti Tanpa Tutup", {
     content: "Sebuah pabrik membuat kaleng roti berbentuk tabung tanpa tutup dengan r = 14 cm dan t = 20 cm. Luas seng yang diperlukan untuk satu kaleng adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="14 cm" h="20 cm" color="#fbbf24" extraLabel="Tanpa Tutup" />,
     choices: [
@@ -508,7 +319,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(39, "Aplikasi – Biaya Cat Selimut", {
+  Qn(19, "Aplikasi – Biaya Cat Selimut", {
     content: "Sebuah tabung dengan r = 7 cm dan t = 20 cm akan dicat selimutnya. Jika biaya cat Rp500,00 per cm², total biaya yang diperlukan adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="7 cm" h="20 cm" color="#a78bfa" />,
     choices: [
@@ -519,7 +330,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(41, "Aplikasi – Tong Sampah", {
+  Qn(20, "Aplikasi – Tong Sampah", {
     content: "Tong sampah berbentuk tabung tanpa tutup dengan diameter 42 cm dan tinggi 60 cm. Jika harga seng Rp25.000,00 per dm², biaya yang dibutuhkan adalah ... (π = 22/7, 1 dm² = 100 cm²)",
     diagram: <CylinderSVG r="21 cm" h="60 cm" color="#6b7280" extraLabel="Tong Sampah" />,
     choices: [
@@ -530,7 +341,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(42, "Aplikasi – Tabung dalam Kotak", {
+  Qn(21, "Aplikasi – Tabung dalam Kotak", {
     content: "Sebuah tabung dengan r = 7 cm dan t = 14 cm dimasukkan pas ke dalam kotak kubus. Sisa volume di dalam kotak yang tidak ditempati tabung adalah ... (π = 22/7)",
     diagram: <CylinderSVG r="7 cm" h="14 cm" />,
     choices: [
@@ -541,7 +352,7 @@ const questions: Q[] = [
     ],
     answer: "C",
   }),
-  Qn(43, "Aplikasi – Lilin Silindris Menyusut", {
+  Qn(22, "Aplikasi – Lilin Silindris Menyusut", {
     content: "Sebuah lilin berbentuk tabung memiliki diameter 3,5 cm dan tinggi 20 cm. Setelah dinyalakan, lilin menyusut 0,5 cm per jam. Volume lilin setelah 4 jam menyala adalah ... (π = 22/7)",
     choices: [
       { label: "A", text: "86,625 cm³" },
@@ -572,7 +383,7 @@ const TabungPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 43 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 22 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
