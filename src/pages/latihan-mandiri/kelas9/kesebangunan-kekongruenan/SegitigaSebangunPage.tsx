@@ -336,9 +336,14 @@ const SoalQ8 = () => {
 };
 
 const SoalQ9 = () => {
-  const E={x:150,y:100};
-  const A={x:58,y:38},  B={x:242,y:38};
-  const D={x:58,y:162}, C={x:242,y:162};
+  // DC = 15 cm, AB = 9 cm → ratio 9:15 = 3:5
+  // Keep DC full-width centered at x=150; scale AB proportionally
+  const D={x:58, y:162}, C={x:242,y:162}; // DC width = 184 px (= 15 cm)
+  // AB width = 184 * (9/15) = 110.4 px, centered at x=150
+  const A={x:95, y:38},  B={x:205,y:38};
+  // E = intersection of diagonals AC and BD
+  // Line AC param: x=95+147t, y=38+124t; Line BD: x=205-147t, y=38+124t → t=110/294≈0.374
+  const E={x:150, y:84};
   return (
     <svg viewBox="0 0 310 200" className="w-full max-w-xs mx-auto">
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${E.x},${E.y}`} fill="#3b82f6" fillOpacity="0.15" stroke="#60a5fa" strokeWidth="2"/>
@@ -348,8 +353,8 @@ const SoalQ9 = () => {
       <circle cx={E.x} cy={E.y} r="3.5" fill="#fbbf24"/>
       <text x={A.x-14} y={A.y+4}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
       <text x={B.x+3}  y={B.y+4}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={B.x+3}  y={C.y+14} fontSize="13" fill="#4ade80" fontWeight="bold">C</text>
-      <text x={A.x-14} y={D.y+14} fontSize="13" fill="#4ade80" fontWeight="bold">D</text>
+      <text x={C.x+3}  y={C.y+14} fontSize="13" fill="#4ade80" fontWeight="bold">C</text>
+      <text x={D.x-14} y={D.y+14} fontSize="13" fill="#4ade80" fontWeight="bold">D</text>
       <text x={E.x+5}  y={E.y+5}  fontSize="12" fill="#fde68a" fontWeight="bold">E</text>
       <text x={(A.x+B.x)/2} y={A.y-8} textAnchor="middle" fontSize="11" fill="#f97316" fontWeight="bold">AB = 9 cm</text>
       <text x={(C.x+D.x)/2} y={C.y+18} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">DC = 15 cm</text>
