@@ -184,9 +184,11 @@ const SoalQ6 = () => {
   const Av={x:18,  y:base};
   const Bv={x:60,  y:base};
   const Cv={x:60,  y:base-56}; // BC=8 → 56px
-  const Pv={x:165, y:base};
-  const Qv={x:228, y:base};
-  const Rv={x:228, y:base-84}; // QR=12 → 84px
+  // PQR rotated: PQ vertical (P top, Q bottom-right), QR horizontal (R to left of Q)
+  // PQ=9 → 63px vertical; QR=12 → 84px horizontal
+  const Qv={x:258, y:base};       // right angle at Q (bottom-right)
+  const Pv={x:258, y:base-63};    // P above Q (PQ vertical)
+  const Rv={x:174, y:base};       // R left of Q (QR horizontal)
   const sq = 7;
   return (
     <svg viewBox="0 0 300 128" className="w-full max-w-sm mx-auto">
@@ -206,21 +208,21 @@ const SoalQ6 = () => {
       <text x={(Av.x+Cv.x)/2-22} y={(Av.y+Cv.y)/2} fontSize="10" fill="#fde68a" fontWeight="bold">CA=10</text>
 
       {/* ~ symbol between triangles */}
-      <text x="136" y={base-10} textAnchor="middle" fontSize="16" fill="#facc15">~</text>
+      <text x="117" y={base-14} textAnchor="middle" fontSize="16" fill="#facc15">~</text>
 
-      {/* ── Triangle PQR ── */}
+      {/* ── Triangle PQR (PQ vertical) ── */}
       <polygon points={`${Pv.x},${Pv.y} ${Qv.x},${Qv.y} ${Rv.x},${Rv.y}`}
         fill="#22c55e" fillOpacity="0.15" stroke="#4ade80" strokeWidth="2"/>
-      {/* Right-angle mark at Q */}
+      {/* Right-angle mark at Q — between QP (up) and QR (left): square top-left of Q */}
       <path d={`M ${Qv.x},${Qv.y-sq} L ${Qv.x-sq},${Qv.y-sq} L ${Qv.x-sq},${Qv.y}`}
         fill="none" stroke="#ffffff" strokeWidth="1.4"/>
       {/* Vertex labels */}
-      <text x={Pv.x-14} y={Pv.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">P</text>
-      <text x={Qv.x+3}  y={Qv.y+13} fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
-      <text x={Rv.x+4}  y={Rv.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">R</text>
+      <text x={Pv.x+4}  y={Pv.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">P</text>
+      <text x={Qv.x+4}  y={Qv.y+13} fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
+      <text x={Rv.x-16} y={Rv.y+13} fontSize="12" fill="#86efac" fontWeight="bold">R</text>
       {/* Side labels */}
-      <text x={(Pv.x+Qv.x)/2} y={Pv.y+14} textAnchor="middle" fontSize="10" fill="#f97316" fontWeight="bold">PQ=9</text>
-      <text x={(Pv.x+Rv.x)/2-24} y={(Pv.y+Rv.y)/2} fontSize="10" fill="#ef4444" fontWeight="bold">PR = ?</text>
+      <text x={Pv.x+4} y={(Pv.y+Qv.y)/2+4} fontSize="10" fill="#f97316" fontWeight="bold">PQ=9</text>
+      <text x={(Rv.x+Pv.x)/2-8} y={(Rv.y+Pv.y)/2-6} fontSize="10" fill="#ef4444" fontWeight="bold">PR=?</text>
     </svg>
   );
 };
