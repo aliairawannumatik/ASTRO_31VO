@@ -44,21 +44,21 @@ const SoalQ2 = () => {
       <polygon points="128,74 136,77 128,80" fill="#4ade80"/>
       {/* Right-pointing arrow on BC (parallel indicator) */}
       <polygon points="166,17 174,20 166,23" fill="#60a5fa"/>
-      <text x={A.x-14} y={A.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x-14} y={B.y-4}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={C.x+4}  y={C.y-4}  fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={A.x-14} y={A.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={B.x-14} y={B.y-4}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={C.x+4}  y={C.y-4}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
       <text x={D.x-14} y={D.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">D</text>
       <text x={E.x+4}  y={E.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">E</text>
-      {/* c = AD along left vertical side (A bottom → D) */}
+      {/* c = CD along left vertical side (C bottom → D) */}
       <text x="62"  y="138" fontSize="12" fill="#f97316" fontWeight="bold">c</text>
-      {/* 4 cm = DB along left vertical side (D → B top) */}
+      {/* 4 cm = DA along left vertical side (D → A top) */}
       <text x="62"  y="50"  fontSize="11" fill="#fbbf24" fontWeight="bold">4 cm</text>
-      {/* d = AE along hypotenuse AC, lower part */}
+      {/* d = CE along hypotenuse CB, lower part */}
       <text x="128" y="148" fontSize="12" fill="#a855f7" fontWeight="bold">d</text>
-      {/* 3 cm = EC along hypotenuse AC, upper part */}
+      {/* 3 cm = EB along hypotenuse CB, upper part */}
       <text x="254" y="46"  fontSize="11" fill="#fbbf24" fontWeight="bold">3 cm</text>
       <text x={(D.x+E.x)/2} y={D.y+14} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">DE = 8 cm</text>
-      <text x={(B.x+C.x)/2} y={B.y+34} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">BC = 12 cm</text>
+      <text x={(B.x+C.x)/2} y={B.y+34} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">AB = 12 cm</text>
     </svg>
   );
 };
@@ -577,9 +577,9 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(3, "Garis Sejajar dalam Segitiga – Cari AD dan AE", {
+  Qn(3, "Garis Sejajar dalam Segitiga – Cari CD dan CE", {
     type: "mixed",
-    content: "Perhatikan gambar segitiga besar ABC dengan garis DE sejajar BC (DE ∥ BC). Diketahui DB = 4 cm, EC = 3 cm, DE = 8 cm, dan BC = 12 cm. Tentukan nilai c = AD dan d = AE!",
+    content: "Perhatikan gambar segitiga besar CAB dengan garis DE sejajar AB (DE ∥ AB). Diketahui DA = 4 cm, EB = 3 cm, DE = 8 cm, dan AB = 12 cm. Tentukan nilai c = CD dan d = CE!",
     diagram: <SoalQ2 />,
   }),
   Qn(4, "Trapesium – Garis Sejajar – Cari EF", {
