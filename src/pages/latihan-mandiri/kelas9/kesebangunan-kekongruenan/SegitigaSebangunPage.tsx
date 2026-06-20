@@ -692,7 +692,7 @@ const questions: Q[] = [
   }),
   Qn(7, "Segitiga Sebangun – Cari x dan y", {
     type: "mixed",
-    content: "Perhatikan gambar segitiga ABC berikut. Diketahui BD ⊥ AC dengan AD = 9 cm, DC = 6 cm, DE = 5 cm, dan EC = 8 cm. Carilah nilai x (= BE) dan y (= AB)!",
+    content: "Perhatikan gambar segitiga ABC berikut. Diketahui \\(\\angle ABC = \\angle EDC\\) dengan AD = 9 cm, DC = 6 cm, DE = 5 cm, dan EC = 8 cm. Carilah nilai x (= BE) dan y (= AB)!",
     diagram: <SoalQ7New />,
   }),
   Qn(8, "Lebar Sungai – Aplikasi Segitiga Sebangun", {
