@@ -405,6 +405,11 @@ const SoalQNew1 = () => {
       <polygon points={`${C.x},${C.y} ${A.x},${A.y} ${B.x},${B.y}`}
         fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2"/>
+      {/* Parallel arrows on CA and DE — both pointing in the C→A / E→D direction (same unit vector) */}
+      {/* CA midpoint (40,90): tip=39,95 base=37,85 / 45,87 */}
+      <polygon points="39,95 37,85 45,87" fill="#fde68a"/>
+      {/* DE midpoint (98,97): tip=96,102 base=94,92 / 102,94 */}
+      <polygon points="96,102 94,92 102,94" fill="#fde68a"/>
       <circle cx={C.x} cy={C.y} r="3" fill="#93c5fd"/>
       <circle cx={A.x} cy={A.y} r="3" fill="#93c5fd"/>
       <circle cx={B.x} cy={B.y} r="3" fill="#93c5fd"/>
