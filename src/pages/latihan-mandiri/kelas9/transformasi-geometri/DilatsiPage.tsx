@@ -12,10 +12,10 @@ const ox = S / 2, oy = S / 2;
 const px = (x: number) => ox + x * sc;
 const py = (y: number) => oy - y * sc;
 
-function GridSVG({ children }: { children?: React.ReactNode }) {
+function GridSVG({ children, w = S, h = S }: { children?: React.ReactNode; w?: number; h?: number }) {
   const ticks = [-5,-4,-3,-2,-1,1,2,3,4,5];
   return (
-    <svg width={S} height={S} className="rounded-xl border border-rose-500/20 bg-slate-900/60">
+    <svg width={w} height={h} viewBox={`0 0 ${S} ${S}`} className="rounded-xl border border-rose-500/20 bg-slate-900/60">
       {ticks.map(t => (
         <g key={t}>
           <line x1={px(t)} y1={0} x2={px(t)} y2={S} stroke="#334155" strokeWidth="0.5"/>
@@ -153,18 +153,7 @@ const questions: Q[] = [
     answer: "D",
   },
   {
-    n: 7, title: "Perbandingan Luas Setelah Dilatasi",
-    content: "Segitiga PQR dengan P(2, 1), Q(6, 1), R(4, 5) didilatasi terhadap O dengan k = 2. Berapa kali lebih besar luas △P′Q′R′ dibanding luas △PQR?",
-    choices: [
-      { label: "A", text: "2 kali" },
-      { label: "B", text: "4 kali" },
-      { label: "C", text: "6 kali" },
-      { label: "D", text: "8 kali" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 8, title: "Luas Bayangan — Diagram Pembesaran",
+    n: 7, title: "Luas Bayangan — Diagram Pembesaran",
     diagram: (
       <GridSVG>
         <Poly pts={[[1,0],[2,0],[2,2],[1,2]]} color="#f43f5e" label="P"/>
@@ -185,18 +174,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 9, title: "Mencari Titik Asal dari Bayangan",
-    content: "Bayangan titik A setelah dilatasi dengan pusat O(0, 0) dan k = 3 adalah A′(12, −9). Koordinat titik A adalah ...",
-    choices: [
-      { label: "A", text: "(4, −3)" },
-      { label: "B", text: "(36, −27)" },
-      { label: "C", text: "(4, 3)" },
-      { label: "D", text: "(−4, 3)" },
-    ],
-    answer: "A",
-  },
-  {
-    n: 10, title: "Dilatasi dengan Koordinat Variabel",
+    n: 8, title: "Dilatasi dengan Koordinat Variabel",
     content: "Titik A(m, 2m) didilatasi terhadap O(0, 0) dengan k = 3 menghasilkan A′(9, 18). Nilai m adalah ...",
     choices: [
       { label: "A", text: "1" },
@@ -208,7 +186,7 @@ const questions: Q[] = [
   },
   /* ══════════ GRUP 2: DILATASI PUSAT (a, b) ══════════ */
   {
-    n: 11, title: "Dilatasi dengan Pusat Bergeser",
+    n: 9, title: "Dilatasi dengan Pusat Bergeser",
     content: "Titik A(5, 4) didilatasi dengan pusat P(1, 2) dan k = 3. Bayangan A′ adalah ...",
     choices: [
       { label: "A", text: "(13, 8)" },
@@ -219,9 +197,9 @@ const questions: Q[] = [
     answer: "A",
   },
   {
-    n: 12, title: "Bayangan Titik — Diagram Pusat Bukan O",
+    n: 10, title: "Bayangan Titik — Diagram Pusat Bukan O",
     diagram: (
-      <GridSVG>
+      <GridSVG w={280} h={280}>
         <Dot x={1} y={1} color="#facc15" r={3} label="P(1,1)"/>
         <Poly pts={[[2,1],[3,1],[2,2]]} color="#f43f5e" label="△"/>
         <Poly pts={[[3,1],[5,1],[3,3]]} color="#22d3ee" fill="rgba(34,211,238,0.12)" label="△'"/>
@@ -240,7 +218,7 @@ const questions: Q[] = [
   },
   /* ══════════ GRUP 3: DILATASI KOMPOSISI ══════════ */
   {
-    n: 13, title: "ANBK — Dilatasi Dua Kali Berurutan",
+    n: 11, title: "ANBK — Dilatasi Dua Kali Berurutan",
     content: "Titik A(1, 2) didilatasi terhadap O dengan k₁ = 2, lalu hasilnya didilatasi lagi dengan k₂ = 3. Koordinat akhir A adalah ...",
     choices: [
       { label: "A", text: "(2, 4)" },
@@ -251,7 +229,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 14, title: "Dilatasi Dilanjut Refleksi Sumbu-x",
+    n: 12, title: "Dilatasi Dilanjut Refleksi Sumbu-x",
     content: "Titik A(2, 3) didilatasi terhadap O dengan k = 2 menghasilkan A′. Kemudian A′ direfleksikan terhadap sumbu-x menghasilkan A″. Koordinat A″ adalah ...",
     choices: [
       { label: "A", text: "(4, 6)" },
@@ -262,7 +240,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 15, title: "Dilatasi Dilanjut Translasi",
+    n: 13, title: "Dilatasi Dilanjut Translasi",
     content: "Titik A(2, 1) didilatasi terhadap O(0, 0) dengan k = 3 menghasilkan A′. Kemudian A′ ditranslasikan oleh T(−4, 2) menghasilkan A″. Koordinat A″ adalah ...",
     choices: [
       { label: "A", text: "(6, 3)" },
@@ -273,18 +251,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 16, title: "Refleksi Dilanjut Dilatasi",
-    content: "Titik B(−2, 4) direfleksikan terhadap sumbu-y menghasilkan B′. Kemudian B′ didilatasi terhadap O(0, 0) dengan k = 2 menghasilkan B″. Koordinat B″ adalah ...",
-    choices: [
-      { label: "A", text: "(−4, 8)" },
-      { label: "B", text: "(4, −8)" },
-      { label: "C", text: "(4, 8)" },
-      { label: "D", text: "(8, 4)" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 17, title: "Dilatasi Dilanjut Rotasi 90° (Berlawanan Jarum Jam) Pusat (a, b)",
+    n: 14, title: "Dilatasi Dilanjut Rotasi 90° Berlawanan Arah Jarum Jam",
     content: "Titik C(3, 2) didilatasi terhadap O dengan k = 2 menghasilkan C′(6, 4). C′ dirotasikan 90° berlawanan arah jarum jam terhadap pusat P(2, 0). Koordinat C″ adalah ...",
     choices: [
       { label: "A", text: "(4, −2)" },
@@ -294,71 +261,25 @@ const questions: Q[] = [
     ],
     answer: "B",
   },
+  /* ══════════ GRUP 4: MENCARI TITIK ASAL — PUSAT (a, b) ══════════ */
   {
-    n: 18, title: "Rotasi 180° Pusat (a, b) Dilanjut Dilatasi Pusat (a, b)",
-    content: "Titik D(5, 3) dirotasikan 180° terhadap pusat P(2, 1) menghasilkan D′. D′ kemudian didilatasi terhadap pusat P(2, 1) dengan k = 2 menghasilkan D″. Koordinat D″ adalah ...",
+    n: 15, title: "Mencari Titik Asal dari Bayangan — Pusat (1, −2), k = 3",
+    content: "Bayangan titik A setelah didilatasi terhadap pusat P(1, −2) dengan faktor skala k = 3 adalah A′(7, 4). Koordinat titik A adalah ...",
     choices: [
-      { label: "A", text: "(−1, −1)" },
-      { label: "B", text: "(8, 5)" },
-      { label: "C", text: "(−4, −3)" },
-      { label: "D", text: "(0, 3)" },
-    ],
-    answer: "C",
-  },
-  /* ══════════ GRUP 4: DILATASI KURVA LINEAR ══════════ */
-  {
-    n: 19, title: "Bayangan Garis Lurus — Pusat O(0, 0)",
-    content: "Garis y = 3x − 4 didilatasi terhadap pusat O(0, 0) dengan faktor skala k = 2. Persamaan bayangan garis tersebut adalah ...",
-    choices: [
-      { label: "A", text: "y = 3x − 2" },
-      { label: "B", text: "y = 6x − 4" },
-      { label: "C", text: "y = 3x − 8" },
-      { label: "D", text: "y = 6x − 8" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 20, title: "Garis Asal dari Bayangan — Pusat O(0, 0)",
-    content: "Bayangan suatu garis setelah dilatasi D[O, 2] adalah y = 2x + 10. Persamaan garis asalnya adalah ...",
-    choices: [
-      { label: "A", text: "y = 2x + 20" },
-      { label: "B", text: "y = 2x + 5" },
-      { label: "C", text: "y = x + 5" },
-      { label: "D", text: "y = 4x + 10" },
-    ],
-    answer: "B",
-  },
-  /* ══════════ GRUP 5: DILATASI PUSAT (a,b) LANJUTAN ══════════ */
-  {
-    n: 21, title: "Dilatasi Pusat P(1, 2) dengan k = 3",
-    content: "Titik A(4, 6) didilatasi terhadap pusat P(1, 2) dengan faktor skala k = 3. Bayangan A′ adalah ...",
-    choices: [
-      { label: "A", text: "(10, 14)" },
-      { label: "B", text: "(13, 20)" },
-      { label: "C", text: "(7, 8)" },
-      { label: "D", text: "(12, 18)" },
+      { label: "A", text: "(3, 0)" },
+      { label: "B", text: "(4, 2)" },
+      { label: "C", text: "(1, 0)" },
+      { label: "D", text: "(3, 2)" },
     ],
     answer: "A",
-  },
-  {
-    n: 22, title: "Dilatasi Pusat Q(2, −1) dengan k = −2",
-    content: "Titik B(−1, 3) didilatasi terhadap pusat Q(2, −1) dengan faktor skala k = −2. Bayangan B′ adalah ...",
-    choices: [
-      { label: "A", text: "(−4, −7)" },
-      { label: "B", text: "(5, −9)" },
-      { label: "C", text: "(8, −9)" },
-      { label: "D", text: "(8, 5)" },
-    ],
-    answer: "C",
   },
 ];
 
 const groupHeaders: Record<number, string> = {
   1:  "📍 Dilatasi Pusat O(0, 0)",
-  11: "📍 Dilatasi Pusat (a, b)",
-  13: "🔀 Dilatasi Komposisi",
-  19: "📈 Dilatasi Kurva Linear — Pusat O(0, 0)",
-  21: "📍 Dilatasi Pusat (a, b) — Lanjutan",
+  9:  "📍 Dilatasi Pusat (a, b)",
+  11: "🔀 Dilatasi Komposisi",
+  15: "🔍 Mencari Titik Asal — Pusat (a, b)",
 };
 
 const DilatsiPage = () => {
@@ -379,7 +300,7 @@ const DilatsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 22 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
