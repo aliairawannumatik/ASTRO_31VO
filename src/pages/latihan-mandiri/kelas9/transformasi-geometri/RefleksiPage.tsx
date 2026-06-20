@@ -201,20 +201,6 @@ const questions: Q[] = [
     content:"Titik B(3, 4) dicerminkan terhadap sumbu X, kemudian hasilnya dicerminkan terhadap garis y = 3. Koordinat bayangan akhir B adalah ...",
     opts:["(3, 10)","(−3, 10)","(3, −10)","(−3, −10)"],
   }),
-  Qn(16,"Diagram — Refleksi Segitiga",{type:"diagram",
-    content:"Perhatikan diagram. Segitiga PQR dicerminkan terhadap sumbu Y. Koordinat bayangan Q′ adalah ...",
-    opts:["(3, 3)","(−3, 3)","(3, −3)","(−3, −3)"],
-    diagram:(
-      <GridSVG>
-        <MirrorLine x={0} vertical={true} color="#facc15"/>
-        <Poly pts={[[1,1],[3,3],[1,4]]} color="#34d399" label="PQR"/>
-        <Poly pts={[[-1,1],[-3,3],[-1,4]]} color="#f472b6" fill="rgba(244,114,182,0.13)" label="P′Q′R′"/>
-        <ConnDash x1={3} y1={3} x2={-3} y2={3}/>
-        <Dot x={3} y={3} color="#34d399" r={3} label="Q"/>
-        <Dot x={-3} y={3} color="#f472b6" r={3} label="Q′"/>
-      </GridSVG>
-    ),
-  }),
   Qn(17,"Garis Cermin dari Pemetaan",{type:"pg",
     content:"Titik M(2, −5) dicerminkan menghasilkan M′(2, 9). Pencerminan tersebut dilakukan terhadap garis ...",
     opts:["x = 2","y = 2","y = x","y = −x"],
@@ -250,10 +236,6 @@ const questions: Q[] = [
   Qn(34,"Refleksi Fungsi Linear — y = k",{type:"pg",
     content:"Fungsi linear f(x) = 3x + 2 dicerminkan terhadap garis y = 4. Persamaan bayangan fungsi tersebut adalah ...",
     opts:["y = −3x + 6","y = 3x − 6","y = −3x + 2","y = 3x + 6"],
-  }),
-  Qn(20,"Puncak Parabola setelah Refleksi y = x",{type:"pg",
-    content:"Grafik f(x) = (x + 3)² dicerminkan terhadap garis y = x. Bayangan titik puncak grafik f(x) berada di koordinat ...",
-    opts:["(0, −3)","(−3, 0)","(3, 0)","(0, 3)"],
   }),
 ];
 
