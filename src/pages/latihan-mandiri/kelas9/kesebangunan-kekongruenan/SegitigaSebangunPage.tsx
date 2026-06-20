@@ -8,23 +8,25 @@ import { Triangle } from "lucide-react";
 import { SimilarTriangles, ParallelLinesTriangle, TriangleAltitude } from "./GeoFigure";
 
 const SoalQ1 = () => (
-  <svg viewBox="0 0 300 195" className="w-full max-w-xs mx-auto">
-    <polygon points="95,35 205,35 238,170 62,170" fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
-    <line x1="95" y1="35" x2="238" y2="170" stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,3"/>
-    <line x1="205" y1="35" x2="62" y2="170" stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,3"/>
-    <circle cx="152" cy="95" r="3.5" fill="#fbbf24"/>
+  <svg viewBox="0 0 300 205" className="w-full max-w-xs mx-auto">
+    <polygon points="95,35 205,35 238,175 62,175" fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
+    <line x1="95" y1="35" x2="238" y2="175" stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,3"/>
+    <line x1="205" y1="35" x2="62" y2="175" stroke="#94a3b8" strokeWidth="1.4" strokeDasharray="5,3"/>
+    {/* E at exact intersection of diagonals AC and BD */}
+    <circle cx="150" cy="87" r="3.5" fill="#fbbf24"/>
+    <text x="155" y="85"  fontSize="12" fill="#fde68a" fontWeight="bold">E</text>
     <text x="83"  y="29"  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
     <text x="207" y="29"  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-    <text x="241" y="183" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
-    <text x="49"  y="183" fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
-    <text x="157" y="93"  fontSize="12" fill="#fde68a" fontWeight="bold">E</text>
+    <text x="241" y="190" fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+    <text x="49"  y="190" fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
+    {/* Right-pointing arrow on AB (parallel indicator) */}
+    <polygon points="147,32 156,35 147,38" fill="#fde68a"/>
+    {/* Right-pointing arrow on DC (parallel indicator) */}
+    <polygon points="147,172 156,175 147,178" fill="#fde68a"/>
     <text x="150" y="22"  textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">AB = 8 cm</text>
-    <text x="150" y="191" textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">DC = 12 cm</text>
-    <text x="100" y="70"  fontSize="11" fill="#f97316" fontWeight="bold">AE = 4 cm</text>
-    <text x="180" y="140" fontSize="11" fill="#a855f7" fontWeight="bold">CE = ?</text>
-    <line x1="140" y1="28" x2="160" y2="28" stroke="#fde68a" strokeWidth="1.5"/>
-    <line x1="143" y1="163" x2="163" y2="163" stroke="#fde68a" strokeWidth="1.5"/>
-    <line x1="147" y1="163" x2="167" y2="163" stroke="#fde68a" strokeWidth="1.5"/>
+    <text x="150" y="200" textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">DC = 12 cm</text>
+    <text x="98"  y="68"  fontSize="11" fill="#f97316" fontWeight="bold">AE = 4 cm</text>
+    <text x="178" y="138" fontSize="11" fill="#a855f7" fontWeight="bold">CE = ?</text>
   </svg>
 );
 
@@ -35,18 +37,21 @@ const SoalQ2 = () => {
     <svg viewBox="0 0 320 215" className="w-full max-w-xs mx-auto">
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2.2"/>
-      <line x1="155" y1="130" x2="165" y2="130" stroke="#4ade80" strokeWidth="2"/>
-      <line x1="153" y1="188" x2="163" y2="188" stroke="#60a5fa" strokeWidth="2"/>
-      <line x1="157" y1="188" x2="167" y2="188" stroke="#60a5fa" strokeWidth="2"/>
+      {/* Right-pointing arrow on DE (parallel indicator) */}
+      <polygon points="157,135 165,138 157,141" fill="#4ade80"/>
+      {/* Right-pointing arrow on BC (parallel indicator) */}
+      <polygon points="157,192 165,195 157,198" fill="#60a5fa"/>
       <text x={A.x-5} y={A.y-5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
       <text x={B.x-15} y={B.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
       <text x={C.x+4}  y={C.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
       <text x={D.x-14} y={D.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">D</text>
       <text x={E.x+4}  y={E.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">E</text>
       <text x="82"  y="82"  fontSize="12" fill="#f97316" fontWeight="bold">c</text>
-      <text x="44"  y="173" fontSize="11" fill="#fbbf24" fontWeight="bold">4</text>
+      {/* "4 cm" label repositioned to avoid arrow collision */}
+      <text x="8"   y="168" fontSize="11" fill="#fbbf24" fontWeight="bold">4 cm</text>
       <text x="244" y="82"  fontSize="12" fill="#a855f7" fontWeight="bold">d</text>
-      <text x="270" y="173" fontSize="11" fill="#fbbf24" fontWeight="bold">3</text>
+      {/* "3 cm" label repositioned */}
+      <text x="271" y="168" fontSize="11" fill="#fbbf24" fontWeight="bold">3 cm</text>
       <text x={(D.x+E.x)/2} y={D.y-8} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">DE = 8 cm</text>
       <text x={(B.x+C.x)/2} y={B.y+15} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">BC = 12 cm</text>
     </svg>
@@ -57,6 +62,9 @@ const SoalQ3 = () => {
   const A={x:108,y:38}, B={x:192,y:38}, C={x:272,y:182}, D={x:28,y:182};
   const E={x:A.x+(2/5)*(D.x-A.x), y:A.y+(2/5)*(D.y-A.y)};
   const F={x:B.x+(2/5)*(C.x-B.x), y:B.y+(2/5)*(C.y-B.y)};
+  const abMid={x:(A.x+B.x)/2, y:A.y};
+  const efMid={x:(E.x+F.x)/2, y:E.y};
+  const dcMid={x:(D.x+C.x)/2, y:D.y};
   return (
     <svg viewBox="0 0 310 210" className="w-full max-w-xs mx-auto">
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y} ${D.x},${D.y}`} fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
@@ -71,40 +79,76 @@ const SoalQ3 = () => {
       <text x={F.x+4}  y={F.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">F</text>
       <text x={150} y={26} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">AB = 5 cm</text>
       <text x={150} y={200} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">DC = 20 cm</text>
-      <text x={(E.x+F.x)/2} y={E.y-8} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">EF = ?</text>
-      <text x={A.x-38} y={(A.y+E.y)/2+4} fontSize="10" fill="#f97316" fontWeight="bold">AE</text>
-      <text x={D.x-14} y={(D.y+E.y)/2+4} fontSize="10" fill="#f97316" fontWeight="bold">ED</text>
-      <text x={A.x-28} y={(A.y+E.y)/2+16} fontSize="9" fill="#f97316">2 : 3</text>
+      <text x={efMid.x} y={efMid.y-8} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">EF = ?</text>
+      {/* Right-pointing arrows on AB, EF, DC (parallel indicators) */}
+      <polygon points={`${abMid.x-3},${abMid.y-3} ${abMid.x+7},${abMid.y} ${abMid.x-3},${abMid.y+3}`} fill="#fde68a"/>
+      <polygon points={`${efMid.x-3},${efMid.y-3} ${efMid.x+7},${efMid.y} ${efMid.x-3},${efMid.y+3}`} fill="#4ade80"/>
+      <polygon points={`${dcMid.x-3},${dcMid.y-3} ${dcMid.x+7},${dcMid.y} ${dcMid.x-3},${dcMid.y+3}`} fill="#fde68a"/>
     </svg>
   );
 };
 
 const SoalQ4 = () => (
-  <svg viewBox="0 0 300 220" className="w-full max-w-xs mx-auto">
-    <rect x="0" y="68" width="300" height="46" fill="#1e3a5f" fillOpacity="0.55" rx="3"/>
-    <text x="150" y="96" textAnchor="middle" fontSize="9" fill="#93c5fd" fontStyle="italic">~ ~ ~ SUNGAI ~ ~ ~</text>
-    <line x1="0" y1="68"  x2="300" y2="68"  stroke="#60a5fa" strokeWidth="1.2" strokeDasharray="6,3"/>
-    <line x1="0" y1="114" x2="300" y2="114" stroke="#4ade80" strokeWidth="1.5"/>
-    <circle cx="68" cy="52" r="4" fill="#f97316"/>
-    <text x="54" y="47" fontSize="13" fill="#f97316" fontWeight="bold">A</text>
-    <circle cx="68" cy="124" r="4" fill="#fbbf24"/>
-    <text x="53" y="140" fontSize="13" fill="#fbbf24" fontWeight="bold">B</text>
-    <line x1="68" y1="68" x2="68" y2="114" stroke="#ef4444" strokeWidth="2" strokeDasharray="5,3"/>
-    <text x="72" y="95" fontSize="11" fill="#ef4444" fontWeight="bold">AB = ?</text>
-    <circle cx="152" cy="124" r="4" fill="#fbbf24"/>
-    <text x="147" y="141" fontSize="13" fill="#fbbf24" fontWeight="bold">C</text>
-    <circle cx="196" cy="124" r="4" fill="#4ade80"/>
-    <text x="191" y="141" fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
-    <circle cx="152" cy="178" r="4" fill="#c084fc"/>
-    <text x="158" y="181" fontSize="13" fill="#c084fc" fontWeight="bold">D</text>
-    <line x1="152" y1="178" x2="68" y2="52" stroke="#a855f7" strokeWidth="1.5" strokeDasharray="4,3"/>
-    <line x1="152" y1="124" x2="152" y2="178" stroke="#c084fc" strokeWidth="2"/>
-    <text x="157" y="155" fontSize="10" fill="#c084fc" fontWeight="bold">DE=3m</text>
-    <line x1="70" y1="108" x2="150" y2="108" stroke="#fbbf24" strokeWidth="1.2"/>
-    <text x="108" y="104" textAnchor="middle" fontSize="10" fill="#fbbf24" fontWeight="bold">BC=12m</text>
-    <line x1="154" y1="108" x2="194" y2="108" stroke="#4ade80" strokeWidth="1.2"/>
-    <text x="175" y="104" textAnchor="middle" fontSize="10" fill="#4ade80" fontWeight="bold">CE=4m</text>
-    <text x="150" y="210" textAnchor="middle" fontSize="9" fill="#94a3b8" fontStyle="italic">D, C, A segaris (satu garis lurus)</text>
+  <svg viewBox="0 0 370 275" className="w-full max-w-sm mx-auto" style={{background:"rgba(15,23,42,0.5)", borderRadius:8}}>
+    <defs>
+      <linearGradient id="q4WaterGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.75"/>
+        <stop offset="100%" stopColor="#0369a1" stopOpacity="0.90"/>
+      </linearGradient>
+      <clipPath id="q4RiverClip">
+        <rect x="0" y="82" width="370" height="95"/>
+      </clipPath>
+    </defs>
+    {/* Upper land */}
+    <rect x="0" y="0" width="370" height="82" fill="#15803d" fillOpacity="0.18"/>
+    {/* River water */}
+    <rect x="0" y="82" width="370" height="95" fill="url(#q4WaterGrad)"/>
+    {/* Animated wave lines clipped to river */}
+    <g clipPath="url(#q4RiverClip)">
+      <path d="M -80,98 Q -60,91 -40,98 Q -20,105 0,98 Q 20,91 40,98 Q 60,105 80,98 Q 100,91 120,98 Q 140,105 160,98 Q 180,91 200,98 Q 220,105 240,98 Q 260,91 280,98 Q 300,105 320,98 Q 340,91 360,98 Q 380,105 400,98 Q 420,91 450,98"
+        fill="none" stroke="rgba(255,255,255,0.30)" strokeWidth="1.8">
+        <animateTransform attributeName="transform" type="translate" from="0,0" to="80,0" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <path d="M -40,122 Q -20,115 0,122 Q 20,129 40,122 Q 60,115 80,122 Q 100,129 120,122 Q 140,115 160,122 Q 180,129 200,122 Q 220,115 240,122 Q 260,129 280,122 Q 300,115 320,122 Q 340,129 360,122 Q 380,115 400,122 Q 420,129 450,122"
+        fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="1.5">
+        <animateTransform attributeName="transform" type="translate" from="-80,0" to="0,0" dur="2.2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M -80,148 Q -60,142 -40,148 Q -20,154 0,148 Q 20,142 40,148 Q 60,154 80,148 Q 100,142 120,148 Q 140,154 160,148 Q 180,142 200,148 Q 220,154 240,148 Q 260,142 280,148 Q 300,154 320,148 Q 340,142 360,148 Q 380,154 400,148 Q 420,142 450,148"
+        fill="none" stroke="rgba(255,255,255,0.16)" strokeWidth="1.3">
+        <animateTransform attributeName="transform" type="translate" from="0,0" to="80,0" dur="4s" repeatCount="indefinite"/>
+      </path>
+      <text x="185" y="133" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.55)" fontStyle="italic">~ ~ SUNGAI ~ ~</text>
+    </g>
+    {/* Lower land */}
+    <rect x="0" y="177" width="370" height="98" fill="#15803d" fillOpacity="0.12"/>
+    {/* River bank lines */}
+    <line x1="0" y1="82"  x2="370" y2="82"  stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="7,4"/>
+    <line x1="0" y1="177" x2="370" y2="177" stroke="#4ade80" strokeWidth="1.8"/>
+    {/* Points: A(117,72) B(117,177) C(180,177) D(222,242) E(222,177) */}
+    {/* D,C,A collinear: direction (-42,-67) scaled */}
+    <circle cx="117" cy="72"  r="4.5" fill="#f97316"/>
+    <text x="100" y="67" fontSize="13" fill="#f97316" fontWeight="bold">A</text>
+    <circle cx="117" cy="177" r="4.5" fill="#fbbf24"/>
+    <text x="100" y="195" fontSize="13" fill="#fbbf24" fontWeight="bold">B</text>
+    <circle cx="180" cy="177" r="4.5" fill="#fbbf24"/>
+    <text x="175" y="195" fontSize="13" fill="#fbbf24" fontWeight="bold">C</text>
+    <circle cx="222" cy="177" r="4.5" fill="#4ade80"/>
+    <text x="217" y="195" fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
+    <circle cx="222" cy="242" r="4.5" fill="#c084fc"/>
+    <text x="228" y="246" fontSize="13" fill="#c084fc" fontWeight="bold">D</text>
+    {/* AB vertical dashed (river width = unknown) */}
+    <line x1="117" y1="82" x2="117" y2="177" stroke="#ef4444" strokeWidth="2" strokeDasharray="5,3"/>
+    <text x="122" y="132" fontSize="11" fill="#ef4444" fontWeight="bold">AB = ?</text>
+    {/* Line D-C-A (collinear) */}
+    <line x1="222" y1="242" x2="117" y2="72" stroke="#a855f7" strokeWidth="1.5" strokeDasharray="4,3"/>
+    {/* DE vertical segment */}
+    <line x1="222" y1="177" x2="222" y2="242" stroke="#c084fc" strokeWidth="2"/>
+    <text x="228" y="213" fontSize="10" fill="#c084fc" fontWeight="bold">DE=3m</text>
+    {/* BC horizontal label */}
+    <text x="148" y="171" textAnchor="middle" fontSize="10" fill="#fbbf24" fontWeight="bold">BC=12m</text>
+    {/* CE horizontal label */}
+    <text x="201" y="171" textAnchor="middle" fontSize="10" fill="#4ade80" fontWeight="bold">CE=4m</text>
+    <text x="185" y="268" textAnchor="middle" fontSize="9" fill="#94a3b8" fontStyle="italic">D, C, A segaris (satu garis lurus)</text>
   </svg>
 );
 
@@ -133,13 +177,15 @@ const SoalQ5 = () => {
 };
 
 const SoalQ6 = () => (
-  <svg viewBox="0 0 320 175" className="w-full max-w-sm mx-auto">
+  <svg viewBox="0 0 320 182" className="w-full max-w-sm mx-auto">
     <polygon points="28,155 88,155 58,38"  fill="#3b82f6" fillOpacity="0.15" stroke="#60a5fa" strokeWidth="2"/>
     <text x="14"  y="167" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
     <text x="88"  y="167" fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
     <text x="53"  y="30"  fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
-    <text x="54"  y="103" fontSize="11" fill="#fde68a">CA=10</text>
-    <text x="27"  y="170" fontSize="10" fill="#f97316">AB=6</text>
+    {/* CA=10 moved to left side of CA segment */}
+    <text x="4"   y="100" fontSize="10" fill="#fde68a" fontWeight="bold">CA=10</text>
+    {/* AB=6 moved to middle of AB side */}
+    <text x="58"  y="172" fontSize="10" fill="#f97316" fontWeight="bold" textAnchor="middle">AB=6</text>
     <text x="65"  y="110" fontSize="11" fill="#4ade80">BC=8</text>
     <text x="148" y="12"  textAnchor="middle" fontSize="10" fill="#fbbf24" fontWeight="bold">△ABC ~ △PQR</text>
     <text x="148" y="155" textAnchor="middle" fontSize="18" fill="#facc15">~</text>
@@ -147,41 +193,60 @@ const SoalQ6 = () => (
     <text x="163" y="167" fontSize="12" fill="#86efac" fontWeight="bold">P</text>
     <text x="297" y="167" fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
     <text x="230" y="30"  fontSize="12" fill="#86efac" fontWeight="bold">R</text>
-    <text x="174" y="170" fontSize="10" fill="#f97316">PQ=9</text>
-    <text x="196" y="99"  fontSize="11" fill="#ef4444" fontWeight="bold">PR = ?</text>
+    {/* PQ=9 moved to middle of PQ side */}
+    <text x="235" y="172" fontSize="10" fill="#f97316" fontWeight="bold" textAnchor="middle">PQ=9</text>
+    <text x="159" y="99"  fontSize="11" fill="#ef4444" fontWeight="bold">PR = ?</text>
   </svg>
 );
 
 const SoalQ7 = () => {
-  const l1y=35, l2y=95, l3y=155, l4y=195;
-  const Ax=68, Fx=240;
-  const Bx=Ax, Cx=Ax+(Fx-Ax)*1/3, Ex=Fx;
+  // Butterfly/bowtie figure matching uploaded image
+  // E top-left, D top-right, F = crossing center, C = left of middle horizontal
+  // A bottom-left, B bottom-right
+  // Line 1 (/): E(75,22) → F(155,112) → B(235,202)
+  // Line 2 (\): D(235,22) → F(155,112) → A(75,202)
+  const E={x:75,y:22}, D={x:235,y:22};
+  const F={x:155,y:112};
+  const A={x:75,y:202}, B={x:235,y:202};
+  // 1/3 and 2/3 marks along E→B ("/" transversal)
+  const d1={x:75+53,y:22+60};   // ≈(128,82) segment label point
+  const d2={x:75+107,y:22+120}; // ≈(182,142)
   return (
-    <svg viewBox="0 0 310 215" className="w-full max-w-xs mx-auto">
-      {[l1y,l2y,l3y,l4y].map((y,i) => (
-        <line key={i} x1="10" y1={y} x2="295" y2={y} stroke="#334155" strokeWidth="1.2" strokeDasharray="6,3"/>
-      ))}
-      <line x1={Ax} y1={l1y} x2={Ax-18} y2={l4y} stroke="#60a5fa" strokeWidth="2"/>
-      <line x1={Ex} y1={l1y} x2={Ex+14} y2={l4y} stroke="#4ade80" strokeWidth="2"/>
-      <line x1={Ax} y1={l1y} x2={Ex+14} y2={l4y} stroke="#fbbf24" strokeWidth="1.8" strokeDasharray="5,3"/>
-      <circle cx={Ax}   cy={l1y} r="3.5" fill="#60a5fa"/>
-      <circle cx={Ax-6} cy={l2y} r="3.5" fill="#fde68a"/>
-      <circle cx={Ax-12} cy={l3y} r="3.5" fill="#fde68a"/>
-      <circle cx={Ax-18} cy={l4y} r="3.5" fill="#fde68a"/>
-      <circle cx={Ex}    cy={l1y} r="3.5" fill="#4ade80"/>
-      <circle cx={Ex+5}  cy={l2y} r="3.5" fill="#f97316"/>
-      <text x={Ax-10} y={l1y-8}  fontSize="13" fill="#60a5fa" fontWeight="bold">A</text>
-      <text x={Ax-22} y={l2y+5}  fontSize="13" fill="#fde68a" fontWeight="bold">B</text>
-      <text x={Ax-30} y={l3y+5}  fontSize="13" fill="#fde68a" fontWeight="bold">C</text>
-      <text x={Ax-34} y={l4y+5}  fontSize="13" fill="#fde68a" fontWeight="bold">D</text>
-      <text x={Ex+7}  y={l1y-8}  fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
-      <text x={Ex+10} y={l2y+5}  fontSize="13" fill="#f97316" fontWeight="bold">F</text>
-      <text x={Ax-62} y={(l1y+l2y)/2+4} fontSize="10" fill="#a855f7" fontWeight="bold">AB=11</text>
-      <text x={Ax-62} y={(l2y+l3y)/2+4} fontSize="10" fill="#fde68a" fontWeight="bold">BC=15</text>
-      <text x={Ax-62} y={(l3y+l4y)/2+4} fontSize="10" fill="#fde68a" fontWeight="bold">CD=15</text>
-      <text x={(Ax+Ex)/2-18} y={l1y+28} fontSize="10" fill="#fbbf24" fontWeight="bold">DE=15</text>
-      <text x={Ex+18} y={(l1y+l2y)/2+4} fontSize="10" fill="#ef4444" fontWeight="bold">EF=?</text>
-      <text x="130" y="210" textAnchor="middle" fontSize="9" fill="#64748b">Garis mendatar sejajar satu sama lain</text>
+    <svg viewBox="0 0 310 230" className="w-full max-w-xs mx-auto">
+      {/* "/" transversal: E → F → B (left transversal / kiri) */}
+      <line x1={E.x} y1={E.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* "\" transversal: D → F → A (right transversal) */}
+      <line x1={D.x} y1={D.y} x2={A.x} y2={A.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* Middle horizontal: C → right, passing through F */}
+      <line x1="18" y1={F.y} x2="290" y2={F.y} stroke="#4ade80" strokeWidth="1.8" strokeDasharray="6,3"/>
+      {/* Blue right-arrow on middle horizontal */}
+      <polygon points="178,109 187,112 178,115" fill="#4ade80"/>
+      {/* Bottom horizontal: A → B */}
+      <line x1={A.x} y1={A.y} x2={B.x} y2={A.y} stroke="#4ade80" strokeWidth="1.8" strokeDasharray="6,3"/>
+      {/* Blue right-arrow on bottom horizontal */}
+      <polygon points="150,199 159,202 150,205" fill="#4ade80"/>
+      {/* Dark chevron arrow on D→F segment (upper "\" arm, showing direction) */}
+      <path d="M 215,44 L 205,53 L 215,62" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
+      {/* F crossing dot */}
+      <circle cx={F.x} cy={F.y} r="3.5" fill="#fbbf24"/>
+      {/* Equal-division dots on "/" transversal */}
+      <circle cx={d1.x} cy={d1.y} r="2.5" fill="#f97316"/>
+      <circle cx={d2.x} cy={d2.y} r="2.5" fill="#f97316"/>
+      {/* Vertex labels */}
+      <text x={E.x-14} y={E.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">E</text>
+      <text x={D.x+4}  y={D.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
+      <text x={F.x+6}  y={F.y+5}  fontSize="12" fill="#fde68a" fontWeight="bold">F</text>
+      <text x="5"      y={F.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">C</text>
+      <text x={A.x-15} y={A.y+16} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+4}  y={B.y+16} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      {/* Segment labels on "/" (kiri) transversal */}
+      <text x="46" y="58"  fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
+      <text x="110" y="122" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
+      <text x="194" y="178" fontSize="9" fill="#fde68a" fontWeight="bold">BC=15</text>
+      {/* Bottom and EF labels */}
+      <text x="155" y="220" textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
+      <text x="86"  y="74"  fontSize="11" fill="#ef4444" fontWeight="bold">EF = ?</text>
+      <text x="155" y="228" textAnchor="middle" fontSize="8" fill="#475569">Garis mendatar sejajar satu sama lain</text>
     </svg>
   );
 };
@@ -233,8 +298,6 @@ const SoalQ9 = () => {
       <text x={E.x+5}  y={E.y+5}  fontSize="12" fill="#fde68a" fontWeight="bold">E</text>
       <text x={(A.x+B.x)/2} y={A.y-8} textAnchor="middle" fontSize="11" fill="#f97316" fontWeight="bold">AB = 9 cm</text>
       <text x={(C.x+D.x)/2} y={C.y+18} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">DC = 15 cm</text>
-      <text x={(A.x+C.x)/2-30} y={(A.y+C.y)/2} fontSize="10" fill="#fbbf24" fontWeight="bold">AC=20</text>
-      <text x={(A.x+E.x)/2-22} y={(A.y+E.y)/2+4} fontSize="11" fill="#a855f7" fontWeight="bold">AE=?</text>
     </svg>
   );
 };
@@ -379,7 +442,7 @@ const questions: Q[] = [
   }),
   Qn(2, "Garis Sejajar dalam Segitiga – Cari AD dan AE", {
     type: "mixed",
-    content: "Perhatikan gambar segitiga besar ABC dengan garis DE sejajar BC (DE ∥ BC). Diketahui DB = 4 cm, EC = 3 cm, DE = 8 cm, dan BC = 12 cm. Tentukan nilai c = AD dan d = AE! (Petunjuk: gunakan sifat kesebangunan AD/DB = AE/EC = DE/BC)",
+    content: "Perhatikan gambar segitiga besar ABC dengan garis DE sejajar BC (DE ∥ BC). Diketahui DB = 4 cm, EC = 3 cm, DE = 8 cm, dan BC = 12 cm. Tentukan nilai c = AD dan d = AE!",
     diagram: <SoalQ2 />,
   }),
   Qn(3, "Trapesium – Garis Sejajar – Cari EF", {
