@@ -200,53 +200,60 @@ const SoalQ6 = () => (
 );
 
 const SoalQ7 = () => {
-  // Butterfly/bowtie figure matching uploaded image
-  // E top-left, D top-right, F = crossing center, C = left of middle horizontal
-  // A bottom-left, B bottom-right
-  // Line 1 (/): E(75,22) → F(155,112) → B(235,202)
-  // Line 2 (\): D(235,22) → F(155,112) → A(75,202)
-  const E={x:75,y:22}, D={x:235,y:22};
-  const F={x:155,y:112};
-  const A={x:75,y:202}, B={x:235,y:202};
-  // 1/3 and 2/3 marks along E→B ("/" transversal)
-  const d1={x:75+53,y:22+60};   // ≈(128,82) segment label point
-  const d2={x:75+107,y:22+120}; // ≈(182,142)
+  // Corrected figure:
+  // E (top-left), F (middle, on horizontal C-F-D, on line E-F-A), D (middle-right, on horizontal C-F-D)
+  // C (middle-left, on horizontal C-F-D, directly below E)
+  // B (bottom-left, below C — line B-C exists)
+  // A (bottom-right, end of line E-F-A)
+  // Collinear checks:
+  //   E(58,22), F(155,122), A(252,222): slope=(122-22)/(155-58)=100/97≈1.031; (222-122)/(252-155)=100/97≈1.031 ✓
+  //   E-D line: from E(58,22) to D(252,122) — separate line from E-F-A
+  //   C-F-D: all at y=122 ✓
+  const E={x:58,y:22};
+  const C={x:58,y:122}, F={x:155,y:122}, D={x:252,y:122};
+  const B={x:58,y:222}, A={x:252,y:222};
   return (
-    <svg viewBox="0 0 310 230" className="w-full max-w-xs mx-auto">
-      {/* "/" transversal: E → F → B (left transversal / kiri) */}
-      <line x1={E.x} y1={E.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
-      {/* "\" transversal: D → F → A (right transversal) */}
-      <line x1={D.x} y1={D.y} x2={A.x} y2={A.y} stroke="#60a5fa" strokeWidth="2"/>
-      {/* Middle horizontal: C → right, passing through F */}
-      <line x1="18" y1={F.y} x2="290" y2={F.y} stroke="#4ade80" strokeWidth="1.8" strokeDasharray="6,3"/>
-      {/* Blue right-arrow on middle horizontal */}
-      <polygon points="178,109 187,112 178,115" fill="#4ade80"/>
-      {/* Bottom horizontal: A → B */}
-      <line x1={A.x} y1={A.y} x2={B.x} y2={A.y} stroke="#4ade80" strokeWidth="1.8" strokeDasharray="6,3"/>
-      {/* Blue right-arrow on bottom horizontal */}
-      <polygon points="150,199 159,202 150,205" fill="#4ade80"/>
-      {/* Dark chevron arrow on D→F segment (upper "\" arm, showing direction) */}
-      <path d="M 215,44 L 205,53 L 215,62" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
-      {/* F crossing dot */}
+    <svg viewBox="0 0 318 248" className="w-full max-w-xs mx-auto">
+      {/* Line E → F → A (E, F, A collinear) */}
+      <line x1={E.x} y1={E.y} x2={A.x} y2={A.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* Line E → D */}
+      <line x1={E.x} y1={E.y} x2={D.x} y2={D.y} stroke="#a78bfa" strokeWidth="2"/>
+      {/* Horizontal C — F — D (all at y=122) */}
+      <line x1={C.x} y1={C.y} x2={D.x} y2={D.y} stroke="#4ade80" strokeWidth="2"/>
+      {/* Right-arrow on C-F-D horizontal (parallel indicator) */}
+      <polygon points="148,119 158,122 148,125" fill="#4ade80"/>
+      {/* Bottom horizontal B — A */}
+      <line x1={B.x} y1={B.y} x2={A.x} y2={A.y} stroke="#4ade80" strokeWidth="2"/>
+      {/* Right-arrow on B-A bottom (parallel indicator) */}
+      <polygon points="148,219 158,222 148,225" fill="#4ade80"/>
+      {/* Left vertical: B — C (line between B and C) */}
+      <line x1={C.x} y1={C.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
+      {/* Dots at key vertices */}
+      <circle cx={E.x} cy={E.y} r="3.5" fill="#93c5fd"/>
       <circle cx={F.x} cy={F.y} r="3.5" fill="#fbbf24"/>
-      {/* Equal-division dots on "/" transversal */}
-      <circle cx={d1.x} cy={d1.y} r="2.5" fill="#f97316"/>
-      <circle cx={d2.x} cy={d2.y} r="2.5" fill="#f97316"/>
+      <circle cx={D.x} cy={D.y} r="3.5" fill="#a78bfa"/>
+      <circle cx={C.x} cy={C.y} r="3.5" fill="#4ade80"/>
+      <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
+      <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
       {/* Vertex labels */}
-      <text x={E.x-14} y={E.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">E</text>
-      <text x={D.x+4}  y={D.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
+      <text x={E.x-16} y={E.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">E</text>
       <text x={F.x+6}  y={F.y+5}  fontSize="12" fill="#fde68a" fontWeight="bold">F</text>
-      <text x="5"      y={F.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">C</text>
-      <text x={A.x-15} y={A.y+16} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x+4}  y={B.y+16} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      {/* Segment labels on "/" (kiri) transversal */}
-      <text x="46" y="58"  fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
-      <text x="110" y="122" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
-      <text x="194" y="178" fontSize="9" fill="#fde68a" fontWeight="bold">BC=15</text>
-      {/* Bottom and EF labels */}
-      <text x="155" y="220" textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
-      <text x="86"  y="74"  fontSize="11" fill="#ef4444" fontWeight="bold">EF = ?</text>
-      <text x="155" y="228" textAnchor="middle" fontSize="8" fill="#475569">Garis mendatar sejajar satu sama lain</text>
+      <text x={D.x+5}  y={D.y+5}  fontSize="13" fill="#a78bfa" fontWeight="bold">D</text>
+      <text x={C.x-16} y={C.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">C</text>
+      <text x={B.x-16} y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={A.x+5}  y={A.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      {/* Segment label: EF = ? on the E-F-A line (upper portion) */}
+      <text x="82" y="72" fontSize="10" fill="#ef4444" fontWeight="bold">EF = ?</text>
+      {/* Segment label: BC = 15 on left vertical */}
+      <text x="4" y="176" fontSize="9" fill="#fde68a" fontWeight="bold">BC=15</text>
+      {/* Segment label: CD = 15 on horizontal (left part C to F area) */}
+      <text x="85" y="116" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
+      {/* Segment label: DE = 15 on line E-D */}
+      <text x="168" y="72" fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
+      {/* Segment label: AB = 11 on bottom horizontal */}
+      <text x="145" y="240" textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
+      {/* Note */}
+      <text x="159" y="10" textAnchor="middle" fontSize="8" fill="#94a3b8">Garis mendatar sejajar</text>
     </svg>
   );
 };
