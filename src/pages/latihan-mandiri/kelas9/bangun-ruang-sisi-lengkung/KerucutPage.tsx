@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -252,35 +252,8 @@ const questions: Q[] = [
   },
 ];
 
-const optionStyle = (key: OptionKey, selected: OptionKey | undefined, answer: OptionKey, revealed: boolean) => {
-  if (!revealed) {
-    return selected === key
-      ? "bg-orange-500/30 border-orange-400 text-white"
-      : "bg-white/5 border-white/10 text-white/80 hover:border-orange-400/50 hover:bg-orange-500/10";
-  }
-  if (key === answer) return "bg-emerald-500/25 border-emerald-400 text-emerald-200";
-  if (selected === key && key !== answer) return "bg-rose-500/25 border-rose-400 text-rose-200 line-through";
-  return "bg-white/3 border-white/8 text-white/40";
-};
-
 const KerucutPage = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState<Record<number, OptionKey>>({});
-  const [revealed, setRevealed] = useState<Record<number, boolean>>({});
-
-  const handleSelect = (n: number, key: OptionKey) => {
-    if (revealed[n]) return;
-    playPopSound();
-    setSelected(prev => ({ ...prev, [n]: key }));
-  };
-
-  const handleReveal = (n: number) => {
-    playPopSound();
-    setRevealed(prev => ({ ...prev, [n]: true }));
-  };
-
-  const score = questions.filter(q => revealed[q.n] && selected[q.n] === q.answer).length;
-  const done = questions.filter(q => revealed[q.n]).length;
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -302,11 +275,6 @@ const KerucutPage = () => {
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
-            {done > 0 && (
-              <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-                <span className="text-emerald-400 text-xs font-bold">✅ {score}/{done} benar</span>
-              </div>
-            )}
           </div>
         </div>
 
@@ -328,21 +296,16 @@ const KerucutPage = () => {
         </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => {
-            const isRevealed = !!revealed[q.n];
-            const sel = selected[q.n];
-            const isCorrect = isRevealed && sel === q.answer;
-            const isWrong = isRevealed && sel && sel !== q.answer;
-            return (
+          {questions.map((q, i) => (
               <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
                 style={{ animationDelay: `${i * 0.015}s` }}>
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-slate-900/80 to-amber-900/30 backdrop-blur" />
-                <div className={`absolute inset-0 rounded-2xl transition-colors duration-300 ${isCorrect ? "border border-emerald-500/40" : isWrong ? "border border-rose-500/40" : "border border-orange-500/20"}`} />
+                <div className="absolute inset-0 rounded-2xl border border-orange-500/20" />
                 <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-orange-400 to-amber-500 rounded-l-2xl" />
                 <div className="relative px-5 py-4">
                   <div className="flex items-start gap-3">
-                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-colors ${isCorrect ? "bg-emerald-500/20 border-emerald-400/50" : isWrong ? "bg-rose-500/20 border-rose-400/50" : "bg-orange-500/20 border-orange-400/50"}`}>
-                      <span className={`text-xs font-bold ${isCorrect ? "text-emerald-300" : isWrong ? "text-rose-300" : "text-orange-300"}`}>{q.n}</span>
+                    <div className="w-8 h-8 rounded-full border bg-orange-500/20 border-orange-400/50 flex items-center justify-center shrink-0">
+                      <span className="text-xs font-bold text-orange-300">{q.n}</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <span className="text-orange-400 text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 px-2 py-0.5 rounded inline-block mb-2">
@@ -351,40 +314,22 @@ const KerucutPage = () => {
                       <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>
                       {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
 
-                      <div className="grid grid-cols-1 gap-2 mb-3">
+                      <div className="grid grid-cols-1 gap-2">
                         {q.options.map(opt => (
-                          <button key={opt.key}
-                            onClick={() => handleSelect(q.n, opt.key)}
-                            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left text-sm font-body transition-all cursor-pointer ${optionStyle(opt.key, sel, q.answer, isRevealed)}`}>
-                            <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${
-                              isRevealed && opt.key === q.answer ? "border-emerald-400 text-emerald-300 bg-emerald-500/20"
-                              : isRevealed && sel === opt.key && opt.key !== q.answer ? "border-rose-400 text-rose-300 bg-rose-500/20"
-                              : sel === opt.key ? "border-orange-400 text-orange-300 bg-orange-500/20"
-                              : "border-white/20 text-white/50"
-                            }`}>{opt.key}</span>
-                            <span>{opt.text}</span>
-                            {isRevealed && opt.key === q.answer && <span className="ml-auto text-emerald-400 text-xs font-bold">✓</span>}
-                            {isRevealed && sel === opt.key && opt.key !== q.answer && <span className="ml-auto text-rose-400 text-xs font-bold">✗</span>}
-                          </button>
+                          <div key={opt.key}
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left text-sm font-body bg-white/5 border-white/10">
+                            <span className="w-6 h-6 rounded-full border border-white/20 text-white/50 flex items-center justify-center text-xs font-bold shrink-0">
+                              {opt.key}
+                            </span>
+                            <span className="text-white/80">{opt.text}</span>
+                          </div>
                         ))}
                       </div>
-
-                      {!isRevealed ? (
-                        <button onClick={() => handleReveal(q.n)}
-                          className="text-xs px-3 py-1.5 rounded-lg bg-orange-500/15 border border-orange-500/30 text-orange-300 hover:bg-orange-500/25 transition-all cursor-pointer font-body">
-                          Lihat Jawaban
-                        </button>
-                      ) : (
-                        <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
-                          {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>
               </div>
-            );
-          })}
+            ))}
         </div>
 
         <div className="mt-10 text-center">
