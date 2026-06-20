@@ -211,6 +211,55 @@ const questions: Q[] = [
     content:"Titik L(2, −4) dirotasi oleh R[(0, 0), θ = 90°] berlawanan arah jarum jam, kemudian bayangannya direfleksikan terhadap garis y = 3. Koordinat bayangan akhir L adalah ...",
     opts:["(4, 4)","(−4, 4)","(4, −4)","(−4, −4)"],
   }),
+  /* ══════════ GRUP 8: ROTASI KURVA LINEAR ══════════ */
+  Qn(16,"Bayangan Kurva Linear — Rotasi 90° Berlawanan Arah Jarum Jam Terhadap O",{type:"mixed",
+    content:"Garis y = x + 2 dirotasikan 90° berlawanan arah jarum jam terhadap pusat O(0, 0). Tentukan persamaan bayangan garis tersebut.",
+    parts:[
+      {label:"Rumus:",math:"R[O,\\,90°\\text{ berlawanan arah jarum jam}]:\\;(x,y)\\to(-y,\\,x)"},
+      {label:"Langkah:",math:"x'=-y,\\;y'=x \\;\\Rightarrow\\; y=-x',\\;x=y'"},
+      {label:"Substitusi ke y = x + 2:",math:"-x' = y' + 2 \\;\\Rightarrow\\; x' + y' + 2 = 0"},
+      {label:"Bayangan:",math:"y = -x - 2"},
+    ],
+  }),
+  Qn(17,"Bayangan Kurva Linear — Rotasi 180° Terhadap O",{type:"mixed",
+    content:"Garis y = 3x − 1 dirotasikan 180° terhadap pusat O(0, 0). Tentukan persamaan bayangan garis tersebut.",
+    parts:[
+      {label:"Rumus:",math:"R[O,\\,180°]:\\;(x,y)\\to(-x,\\,-y)"},
+      {label:"Langkah:",math:"x=-x',\\;y=-y'"},
+      {label:"Substitusi ke y = 3x − 1:",math:"-y' = 3(-x')-1 \\;\\Rightarrow\\; -y'=-3x'-1 \\;\\Rightarrow\\; y'=3x'+1"},
+      {label:"Bayangan:",math:"y = 3x + 1"},
+    ],
+  }),
+  Qn(18,"Bayangan Kurva Linear — Rotasi 90° Searah Jarum Jam Terhadap (1, −2)",{type:"mixed",
+    content:"Garis y = 2x − 1 dirotasikan 90° searah jarum jam terhadap pusat P(1, −2). Tentukan persamaan bayangan garis tersebut.",
+    parts:[
+      {label:"Rumus 90° SJJ thd (a,b):",math:"x'=a+(y-b),\\;y'=b-(x-a)"},
+      {label:"Langkah:",math:"x'=1+(y+2)=y+3,\\;y'=-2-(x-1)=-1-x"},
+      {label:"Invers:",math:"y=x'-3,\\;x=-y'-1"},
+      {label:"Substitusi ke y = 2x − 1:",math:"x'-3=2(-y'-1)-1 \\;\\Rightarrow\\; x'=-2y'"},
+      {label:"Bayangan:",math:"x + 2y = 0"},
+    ],
+  }),
+  Qn(19,"Kurva Asal dari Bayangan — Rotasi 270° Berlawanan Arah Jarum Jam Terhadap (−3, −4)",{type:"mixed",
+    content:"Bayangan suatu garis setelah dirotasi 270° berlawanan arah jarum jam terhadap pusat P(−3, −4) adalah y = x + 5. Tentukan persamaan garis asalnya.",
+    parts:[
+      {label:"Catatan:",text:"270° berlawanan arah jarum jam = 90° searah jarum jam"},
+      {label:"Rumus 90° SJJ thd (−3,−4):",math:"x'=-3+(y+4)=y+1,\\;y'=-4-(x+3)=-7-x"},
+      {label:"Invers (temukan titik asal):",math:"y=x'-1,\\;x=-7-y'"},
+      {label:"Substitusi ke y' = x' + 5:",math:"x=-7-(x'+5-1+1)\\;\\Rightarrow\\; y=-x-13"},
+      {label:"Garis asal:",math:"y = -x - 13"},
+    ],
+  }),
+  Qn(20,"Kurva Asal dari Bayangan — Rotasi 180° Terhadap (−1, 3)",{type:"mixed",
+    content:"Bayangan suatu garis setelah dirotasi 180° terhadap pusat P(−1, 3) adalah y = 2x + 7. Tentukan persamaan garis asalnya.",
+    parts:[
+      {label:"Rumus 180° thd (a,b):",math:"x'=2a-x,\\;y'=2b-y"},
+      {label:"Thd (−1, 3):",math:"x'=-2-x,\\;y'=6-y"},
+      {label:"Invers (sama karena 180° simetri):",math:"x=-2-x',\\;y=6-y'"},
+      {label:"Substitusi ke y' = 2x' + 7:",math:"6-y=2(-2-x)+7 \\;\\Rightarrow\\; 6-y=3-2x \\;\\Rightarrow\\; y=2x+3"},
+      {label:"Garis asal:",math:"y = 2x + 3"},
+    ],
+  }),
 ];
 
 const RotasiPage = () => {
@@ -230,7 +279,7 @@ const RotasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 15 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 20 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
