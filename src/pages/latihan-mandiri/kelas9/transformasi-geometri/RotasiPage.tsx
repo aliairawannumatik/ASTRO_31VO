@@ -140,13 +140,32 @@ const questions: Q[] = [
       {label:"D.",text:"(x, y) → (−y, x)"},
     ],
   }),
-  Qn(4,"Bayangan Titik — Rotasi 90° berlawanan arah jarum jam dari O",{type:"mixed",
-    content:"Hasil rotasi titik A(6, 3) sejauh 90° berlawanan arah jarum jam dengan pusat titik asal O adalah ...",
-    parts:[
-      {label:"A.",text:"A′(6, −3)"},
-      {label:"B.",text:"A′(−6, 3)"},
-      {label:"C.",text:"A′(−3, 6)"},
-      {label:"D.",text:"A′(3, −6)"},
+  Qn(4,"Bayangan Segiempat ABCD — Rotasi 90° Berlawanan Arah Jarum Jam",{type:"pg",
+    diagram:(
+      <GridSVG>
+        {/* Segiempat asal ABCD (kuadran I) */}
+        <Poly pts={[[1,1],[4,1],[4,3],[1,3]]} color="#fb923c" fill="rgba(251,146,60,0.15)" label="ABCD"/>
+        <Dot x={1} y={1} color="#fb923c" r={3} label="A(1,1)"/>
+        <Dot x={4} y={1} color="#fb923c" r={3} label="B(4,1)"/>
+        <Dot x={4} y={3} color="#fb923c" r={3} label="C(4,3)"/>
+        <Dot x={1} y={3} color="#fb923c" r={3} label="D(1,3)"/>
+        {/* Bayangan A'B'C'D' (kuadran II) */}
+        <Poly pts={[[-1,1],[-1,4],[-3,4],[-3,1]]} color="#a78bfa" fill="rgba(167,139,250,0.15)" label="A'B'C'D'"/>
+        <Dot x={-1} y={1} color="#a78bfa" r={3} label="A'"/>
+        <Dot x={-1} y={4} color="#a78bfa" r={3} label="B'"/>
+        <Dot x={-3} y={4} color="#a78bfa" r={3} label="C'"/>
+        <Dot x={-3} y={1} color="#a78bfa" r={3} label="D'"/>
+        {/* Panah arah rotasi */}
+        <ArcArrow cx={0} cy={0} r={22} startAngle={20} endAngle={110} color="#facc15"/>
+        <Dot x={0} y={0} color="#facc15" r={3} label="O"/>
+      </GridSVG>
+    ),
+    content:"Segiempat ABCD dengan A(1, 1), B(4, 1), C(4, 3), D(1, 3) dirotasikan 90° berlawanan arah jarum jam terhadap pusat O(0, 0). Koordinat bayangan A′, B′, C′, D′ berturut-turut adalah ...",
+    opts:[
+      "A′(−1,1), B′(−1,4), C′(−3,4), D′(−3,1)",
+      "A′(1,−1), B′(1,−4), C′(3,−4), D′(3,−1)",
+      "A′(−1,−1), B′(−4,−1), C′(−4,−3), D′(−1,−3)",
+      "A′(1,1), B′(1,4), C′(3,4), D′(3,1)",
     ],
   }),
   Qn(5,"Rotasi 90° berlawanan arah jarum jam — Mencari Parameter",{type:"pg",
