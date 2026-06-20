@@ -273,6 +273,62 @@ const questions: Q[] = [
     ],
     answer: "B",
   },
+  /* ══════════ GRUP 5: DILATASI KURVA LINEAR ══════════ */
+  {
+    n: 16, title: "Bayangan Kurva Linear — k = 2, Pusat O(0, 0)",
+    content: "Garis y = x + 3 didilatasi terhadap pusat O(0, 0) dengan faktor skala k = 2. Persamaan bayangan garis tersebut adalah ...",
+    choices: [
+      { label: "A", text: "y = x + 6" },
+      { label: "B", text: "y = x + 3" },
+      { label: "C", text: "y = 2x + 6" },
+      { label: "D", text: "y = x + 12" },
+    ],
+    answer: "A",
+  },
+  {
+    n: 17, title: "Bayangan Kurva Linear — k = 4, Pusat (1, −2)",
+    content: "Garis y = 2x + 1 didilatasi terhadap pusat P(1, −2) dengan faktor skala k = 4. Persamaan bayangan garis tersebut adalah ...",
+    choices: [
+      { label: "A", text: "y = 2x + 1" },
+      { label: "B", text: "y = 2x − 16" },
+      { label: "C", text: "y = 2x + 4" },
+      { label: "D", text: "y = 2x + 16" },
+    ],
+    answer: "D",
+  },
+  {
+    n: 18, title: "Bayangan Kurva Linear — k = −2, Pusat (−3, 4)",
+    content: "Garis y = 2x + 5 didilatasi terhadap pusat P(−3, 4) dengan faktor skala k = −2. Persamaan bayangan garis tersebut adalah ...",
+    choices: [
+      { label: "A", text: "y = 2x − 20" },
+      { label: "B", text: "y = −2x + 20" },
+      { label: "C", text: "y = 2x + 20" },
+      { label: "D", text: "y = 2x + 5" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 19, title: "Kurva Asal dari Bayangan — k = 3, Pusat O(0, 0)",
+    content: "Bayangan suatu garis setelah didilatasi terhadap pusat O(0, 0) dengan k = 3 adalah y = 2x + 6. Persamaan garis asalnya adalah ...",
+    choices: [
+      { label: "A", text: "y = 2x + 18" },
+      { label: "B", text: "y = 2x + 6" },
+      { label: "C", text: "y = 6x + 6" },
+      { label: "D", text: "y = 2x + 2" },
+    ],
+    answer: "D",
+  },
+  {
+    n: 20, title: "Kurva Asal dari Bayangan — k = 3, Pusat (−5, 1)",
+    content: "Bayangan suatu garis setelah didilatasi terhadap pusat P(−5, 1) dengan k = 3 adalah y = 2x − 13. Persamaan garis asalnya adalah ...",
+    choices: [
+      { label: "A", text: "y = 2x − 3" },
+      { label: "B", text: "y = 2x + 3" },
+      { label: "C", text: "y = 2x − 39" },
+      { label: "D", text: "y = 2x − 13" },
+    ],
+    answer: "B",
+  },
 ];
 
 const groupHeaders: Record<number, string> = {
@@ -280,6 +336,7 @@ const groupHeaders: Record<number, string> = {
   9:  "📍 Dilatasi Pusat (a, b)",
   11: "🔍 Mencari Titik Asal — Pusat (a, b)",
   12: "🔀 Dilatasi Komposisi",
+  16: "📈 Dilatasi Kurva Linear",
 };
 
 const DilatsiPage = () => {
@@ -300,7 +357,7 @@ const DilatsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 15 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 20 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
