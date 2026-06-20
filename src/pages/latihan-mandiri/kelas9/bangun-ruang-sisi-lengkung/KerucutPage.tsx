@@ -32,7 +32,7 @@ function ConeSVG({ r, h, s, color = "#fb923c", extraLabel = "", showHeight = tru
       <line x1="45" y1="160" x2="110" y2="28" stroke={color} strokeWidth="1.8" />
       <line x1="175" y1="160" x2="110" y2="28" stroke={color} strokeWidth="1.8" />
       <polygon points="45,160 175,160 110,28" fill={`url(#cone-fill-${r})`} />
-      {showHeight && !h && (
+      {showHeight && (
         <>
           <line x1="110" y1="28" x2="110" y2="160" stroke={color} strokeWidth="1" strokeDasharray="5,3" />
           <line x1="107" y1="28" x2="113" y2="28" stroke={color} strokeWidth="1.2" />
@@ -45,12 +45,7 @@ function ConeSVG({ r, h, s, color = "#fb923c", extraLabel = "", showHeight = tru
         </>
       )}
       {h && showHeight && (
-        <>
-          <line x1="95" y1="28" x2="95" y2="160" stroke={color} strokeWidth="1" strokeDasharray="4,2" />
-          <line x1="91" y1="28" x2="99" y2="28" stroke={color} strokeWidth="1" />
-          <line x1="91" y1="160" x2="99" y2="160" stroke={color} strokeWidth="1" />
-          <text x="80" y="100" fill={color} fontSize="12" textAnchor="middle" fontFamily="monospace">t = {h}</text>
-        </>
+        <text x="125" y="100" fill={color} fontSize="12" textAnchor="start" fontFamily="monospace">t = {h}</text>
       )}
       {s && (
         <text x="158" y="95" fill={color} fontSize="12" textAnchor="middle" fontFamily="monospace">s = {s}</text>
