@@ -176,28 +176,59 @@ const SoalQ5 = () => {
   );
 };
 
-const SoalQ6 = () => (
-  <svg viewBox="0 0 320 182" className="w-full max-w-sm mx-auto">
-    <polygon points="28,155 88,155 58,38"  fill="#3b82f6" fillOpacity="0.15" stroke="#60a5fa" strokeWidth="2"/>
-    <text x="14"  y="167" fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
-    <text x="88"  y="167" fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
-    <text x="53"  y="30"  fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
-    {/* CA=10 moved to left side of CA segment */}
-    <text x="4"   y="100" fontSize="10" fill="#fde68a" fontWeight="bold">CA=10</text>
-    {/* AB=6 moved to middle of AB side */}
-    <text x="58"  y="172" fontSize="10" fill="#f97316" fontWeight="bold" textAnchor="middle">AB=6</text>
-    <text x="65"  y="110" fontSize="11" fill="#4ade80">BC=8</text>
-    <text x="148" y="12"  textAnchor="middle" fontSize="10" fill="#fbbf24" fontWeight="bold">△ABC ~ △PQR</text>
-    <text x="148" y="155" textAnchor="middle" fontSize="18" fill="#facc15">~</text>
-    <polygon points="175,155 295,155 235,38" fill="#22c55e" fillOpacity="0.15" stroke="#4ade80" strokeWidth="2"/>
-    <text x="163" y="167" fontSize="12" fill="#86efac" fontWeight="bold">P</text>
-    <text x="297" y="167" fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
-    <text x="230" y="30"  fontSize="12" fill="#86efac" fontWeight="bold">R</text>
-    {/* PQ=9 moved to middle of PQ side */}
-    <text x="235" y="172" fontSize="10" fill="#f97316" fontWeight="bold" textAnchor="middle">PQ=9</text>
-    <text x="159" y="99"  fontSize="11" fill="#ef4444" fontWeight="bold">PR = ?</text>
-  </svg>
-);
+const SoalQ6 = () => {
+  // △ABC right-angled at B: AB=6, BC=8, CA=10 (6-8-10 Pythagorean triple)
+  // Scale: 7 px/cm
+  const A={x:18,  y:170};
+  const B={x:60,  y:170}; // right angle at B
+  const C={x:60,  y:114};
+  // △PQR right-angled at Q: PQ=9, QR=12, PR=15
+  const P={x:165, y:170};
+  const Q={x:228, y:170}; // right angle at Q
+  const R={x:228, y:86};
+  // Right-angle square size
+  const sq = 7;
+  return (
+    <svg viewBox="0 0 300 198" className="w-full max-w-sm mx-auto">
+      {/* Label top */}
+      <text x="150" y="13" textAnchor="middle" fontSize="10" fill="#fbbf24" fontWeight="bold">△ABC ~ △PQR</text>
+
+      {/* ── Triangle ABC ── */}
+      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
+        fill="#3b82f6" fillOpacity="0.15" stroke="#60a5fa" strokeWidth="2"/>
+      {/* Right-angle mark at B */}
+      <path d={`M ${B.x},${B.y-sq} L ${B.x-sq},${B.y-sq} L ${B.x-sq},${B.y}`}
+        fill="none" stroke="#ffffff" strokeWidth="1.4"/>
+      {/* Vertex labels */}
+      <text x={A.x-14} y={A.y+5}  fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x+3}  y={B.y+13} fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={C.x+4}  y={C.y+5}  fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
+      {/* Side labels */}
+      <text x={(A.x+B.x)/2} y={A.y+14} textAnchor="middle" fontSize="10" fill="#f97316" fontWeight="bold">AB=6</text>
+      <text x={C.x+4}       y={(B.y+C.y)/2+4} fontSize="10" fill="#4ade80" fontWeight="bold">BC=8</text>
+      {/* CA hypotenuse label — midpoint offset to left */}
+      <text x={(A.x+C.x)/2-22} y={(A.y+C.y)/2} fontSize="10" fill="#fde68a" fontWeight="bold">CA=10</text>
+
+      {/* ~ symbol between triangles */}
+      <text x="136" y="155" textAnchor="middle" fontSize="18" fill="#facc15">~</text>
+
+      {/* ── Triangle PQR ── */}
+      <polygon points={`${P.x},${P.y} ${Q.x},${Q.y} ${R.x},${R.y}`}
+        fill="#22c55e" fillOpacity="0.15" stroke="#4ade80" strokeWidth="2"/>
+      {/* Right-angle mark at Q */}
+      <path d={`M ${Q.x},${Q.y-sq} L ${Q.x-sq},${Q.y-sq} L ${Q.x-sq},${Q.y}`}
+        fill="none" stroke="#ffffff" strokeWidth="1.4"/>
+      {/* Vertex labels */}
+      <text x={P.x-14} y={P.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">P</text>
+      <text x={Q.x+3}  y={Q.y+13} fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
+      <text x={R.x+4}  y={R.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">R</text>
+      {/* Side labels */}
+      <text x={(P.x+Q.x)/2} y={P.y+14} textAnchor="middle" fontSize="10" fill="#f97316" fontWeight="bold">PQ=9</text>
+      {/* PR hypotenuse label */}
+      <text x={(P.x+R.x)/2-24} y={(P.y+R.y)/2} fontSize="10" fill="#ef4444" fontWeight="bold">PR = ?</text>
+    </svg>
+  );
+};
 
 const SoalQ7 = () => {
   // A moved right; F recalculated on line E-A at y=122; B adjusted so BC ∥ ED.
