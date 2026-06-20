@@ -434,29 +434,38 @@ const SoalQNew1 = () => {
 
 const SoalQ7New = () => {
   // Triangle ABC: B top-left, A bottom-left, C bottom-right
-  // D on AC (AD=9, DC=6); E on BC (far along BC so DE is nearly horizontal, clearly ≠ AB slope)
-  // x = BE, y = AB  — no BD line shown
+  // D on AC (AD=9, DC=6 → ratio 3:2); E on BC directly above D → DE is vertical
   const A = { x: 28,  y: 195 };
   const B = { x: 82,  y: 28  };
   const C = { x: 288, y: 195 };
-  // D divides AC: AD=9, DC=6 → ratio 3:2 from A
-  const D = { x: Math.round(A.x + (9/15) * (C.x - A.x)), y: 195 }; // ≈ 184
-  // E on BC at t=0.78 → DE is nearly horizontal, AB is steep — clearly not parallel
-  const t = 0.78;
-  const E = { x: Math.round(B.x + t * (C.x - B.x)), y: Math.round(B.y + t * (C.y - B.y)) };
+  // D divides AC: AD/AC = 9/15 = 3/5 from A
+  const Dx = Math.round(A.x + (9/15) * (C.x - A.x)); // 184
+  const D  = { x: Dx, y: 195 };
+  // E on BC where E.x = D.x → DE is perfectly vertical
+  // BC parametric: x = B.x + t*(C.x-B.x), so t = (Dx - B.x)/(C.x - B.x)
+  const tE = (Dx - B.x) / (C.x - B.x);
+  const E  = { x: Dx, y: Math.round(B.y + tE * (C.y - B.y)) }; // ≈ (184, 111)
+
+  // Right-angle mark at D (DE⊥AC): square between upward DE direction and leftward DA direction
+  const sq = 8;
+  // sq1: up from D, sq2: up-left, sq3: left from D
+  const sq1 = { x: D.x,      y: D.y - sq };
+  const sq2 = { x: D.x - sq, y: D.y - sq };
+  const sq3 = { x: D.x - sq, y: D.y      };
 
   const midAB = { x: Math.round((A.x+B.x)/2), y: Math.round((A.y+B.y)/2) };
   const midBE = { x: Math.round((B.x+E.x)/2), y: Math.round((B.y+E.y)/2) };
-  const midDE = { x: Math.round((D.x+E.x)/2), y: Math.round((D.y+E.y)/2) };
-  const midEC = { x: Math.round((E.x+C.x)/2), y: Math.round((E.y+C.y)/2) };
 
   return (
     <svg viewBox="0 0 320 225" className="w-full max-w-sm mx-auto" style={{ background:"rgba(15,23,42,0.6)", borderRadius:8 }}>
       {/* Main triangle ABC */}
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
         fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1.8"/>
-      {/* DE line — nearly horizontal, clearly different angle from steep AB */}
+      {/* DE — perfectly vertical */}
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="1.8"/>
+      {/* Right-angle mark at D */}
+      <polyline points={`${sq1.x},${sq1.y} ${sq2.x},${sq2.y} ${sq3.x},${sq3.y}`}
+        fill="none" stroke="#e2e8f0" strokeWidth="1.2"/>
       {/* Vertex dots */}
       <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
       <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
@@ -464,16 +473,18 @@ const SoalQ7New = () => {
       <circle cx={D.x} cy={D.y} r="3.5" fill="#fbbf24"/>
       <circle cx={E.x} cy={E.y} r="3.5" fill="#4ade80"/>
       {/* Vertex labels */}
-      <text x={B.x-14} y={B.y+5}  fontSize="14" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={E.x+5}  y={E.y}    fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
-      <text x={A.x-16} y={A.y+5}  fontSize="14" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={D.x-4}  y={D.y+16} fontSize="13" fill="#fbbf24" fontWeight="bold">D</text>
-      <text x={C.x+4}  y={C.y+5}  fontSize="14" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={B.x-14} y={B.y+5}   fontSize="14" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={E.x+6}  y={E.y+5}   fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
+      <text x={A.x-16} y={A.y+5}   fontSize="14" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={D.x+6}  y={D.y+16}  fontSize="13" fill="#fbbf24" fontWeight="bold">D</text>
+      <text x={C.x+4}  y={C.y+5}   fontSize="14" fill="#93c5fd" fontWeight="bold">C</text>
       {/* Measurement labels */}
-      <text x={midAB.x-26} y={midAB.y+4}  fontSize="11" fill="#f97316" fontWeight="bold">y</text>
-      <text x={midBE.x-8}  y={midBE.y-8}  fontSize="11" fill="#ef4444" fontWeight="bold">x</text>
-      <text x={midDE.x-4}  y={midDE.y-8}  fontSize="11" fill="#4ade80" fontWeight="bold">5 cm</text>
-      <text x={midEC.x-10} y={midEC.y+14} fontSize="11" fill="#fde68a" fontWeight="bold">8 cm</text>
+      <text x={midAB.x-26} y={midAB.y+4} fontSize="11" fill="#f97316" fontWeight="bold">y</text>
+      <text x={midBE.x-8}  y={midBE.y-8} fontSize="11" fill="#ef4444" fontWeight="bold">x</text>
+      {/* DE label — to the right of the vertical segment */}
+      <text x={D.x+6} y={Math.round((D.y+E.y)/2)+4} fontSize="11" fill="#4ade80" fontWeight="bold">5 cm</text>
+      {/* EC label — along BC below E */}
+      <text x={Math.round((E.x+C.x)/2)+4} y={Math.round((E.y+C.y)/2)-6} fontSize="11" fill="#fde68a" fontWeight="bold">8 cm</text>
       {/* Base labels */}
       <text x={(A.x+D.x)/2} y={A.y+16} textAnchor="middle" fontSize="11" fill="#c084fc" fontWeight="bold">9 cm</text>
       <text x={(D.x+C.x)/2} y={D.y+16} textAnchor="middle" fontSize="11" fill="#c084fc" fontWeight="bold">6 cm</text>
