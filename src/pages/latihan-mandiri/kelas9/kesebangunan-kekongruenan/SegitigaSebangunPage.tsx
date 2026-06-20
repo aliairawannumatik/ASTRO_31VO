@@ -200,58 +200,56 @@ const SoalQ6 = () => (
 );
 
 const SoalQ7 = () => {
-  // Layout (after swapping A and B):
-  // E (top-left), C (middle-left, below E), F (middle, on horizontal C-F-D), D (middle-right)
-  // A (bottom-LEFT, swapped from old B), B (bottom-RIGHT, swapped from old A)
-  // Collinear: E(58,22), F(155,122), B(252,222) → slope 100/97 each leg ✓
-  // E-D line: E(58,22) → D(252,122)
-  // C-F-D: all at y=122 ✓
-  // New line: C(58,122) → B(252,222)
+  // C moved far left, B moved left, E-C and C-A lines removed.
+  // E(58,22), B(220,222) → F on line E-B at y=122:
+  //   x_F = 58 + (100/200)*(220-58) = 58+81 = 139  ✓
+  // C-F-D all at y=122; A-B at y=222
   const E={x:58,y:22};
-  const C={x:58,y:122}, F={x:155,y:122}, D={x:252,y:122};
-  const A={x:58,y:222}, B={x:252,y:222};
+  const C={x:18,y:122}, F={x:139,y:122}, D={x:252,y:122};
+  const A={x:58,y:222}, B={x:220,y:222};
+  // midpoints for arrows
+  const midCFD={x:Math.round((C.x+D.x)/2), y:122};
+  const midAB ={x:Math.round((A.x+B.x)/2), y:222};
   return (
     <svg viewBox="0 0 318 248" className="w-full max-w-xs mx-auto">
-      {/* Line E → F → B (E, F, B collinear — main diagonal) */}
+      {/* Line E → F → B (E, F, B collinear) */}
       <line x1={E.x} y1={E.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
       {/* Line E → D */}
       <line x1={E.x} y1={E.y} x2={D.x} y2={D.y} stroke="#a78bfa" strokeWidth="2"/>
-      {/* Horizontal C — F — D (all at y=122) */}
+      {/* Horizontal C — F — D */}
       <line x1={C.x} y1={C.y} x2={D.x} y2={D.y} stroke="#4ade80" strokeWidth="2"/>
-      {/* Right-arrow on C-F-D horizontal (parallel indicator) */}
-      <polygon points="148,119 158,122 148,125" fill="#4ade80"/>
+      {/* Arrow on C-F-D horizontal */}
+      <polygon points={`${midCFD.x-5},${midCFD.y-3} ${midCFD.x+6},${midCFD.y} ${midCFD.x-5},${midCFD.y+3}`} fill="#4ade80"/>
       {/* Bottom horizontal A — B */}
       <line x1={A.x} y1={A.y} x2={B.x} y2={B.y} stroke="#4ade80" strokeWidth="2"/>
-      {/* Right-arrow on A-B bottom (parallel indicator) */}
-      <polygon points="148,219 158,222 148,225" fill="#4ade80"/>
-      {/* Left vertical: E — C — A */}
-      <line x1={E.x} y1={E.y} x2={A.x} y2={A.y} stroke="#60a5fa" strokeWidth="2"/>
-      {/* New line: C → B (diagonal) */}
+      {/* Arrow on A-B bottom */}
+      <polygon points={`${midAB.x-5},${midAB.y-3} ${midAB.x+6},${midAB.y} ${midAB.x-5},${midAB.y+3}`} fill="#4ade80"/>
+      {/* Line C → B (diagonal, orange) — no E-C or C-A lines */}
       <line x1={C.x} y1={C.y} x2={B.x} y2={B.y} stroke="#f97316" strokeWidth="2"/>
-      {/* Dots at key vertices */}
+      {/* Dots */}
       <circle cx={E.x} cy={E.y} r="3.5" fill="#93c5fd"/>
       <circle cx={F.x} cy={F.y} r="3.5" fill="#fbbf24"/>
       <circle cx={D.x} cy={D.y} r="3.5" fill="#a78bfa"/>
       <circle cx={C.x} cy={C.y} r="3.5" fill="#4ade80"/>
       <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
       <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
-      {/* Vertex labels */}
+      {/* Labels */}
       <text x={E.x-16} y={E.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">E</text>
-      <text x={F.x+6}  y={F.y+5}  fontSize="12" fill="#fde68a" fontWeight="bold">F</text>
+      <text x={F.x+5}  y={F.y-6}  fontSize="12" fill="#fde68a" fontWeight="bold">F</text>
       <text x={D.x+5}  y={D.y+5}  fontSize="13" fill="#a78bfa" fontWeight="bold">D</text>
       <text x={C.x-16} y={C.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">C</text>
       <text x={A.x-16} y={A.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x+5}  y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      {/* Segment label: CF = ? on horizontal between C and F */}
-      <text x="94" y="116" fontSize="10" fill="#ef4444" fontWeight="bold">CF = ?</text>
-      {/* Segment label: BC = 15 on diagonal C→B */}
-      <text x="168" y="188" fontSize="9" fill="#fde68a" fontWeight="bold">BC=15</text>
-      {/* Segment label: CD = 15 on horizontal right part (F to D area) */}
-      <text x="188" y="116" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
-      {/* Segment label: DE = 15 on line E-D */}
-      <text x="168" y="72" fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
-      {/* Segment label: AB = 11 on bottom horizontal */}
-      <text x="155" y="240" textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
+      <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      {/* CF = ? label above horizontal between C and F */}
+      <text x={Math.round((C.x+F.x)/2)} y={C.y-6} textAnchor="middle" fontSize="10" fill="#ef4444" fontWeight="bold">CF = ?</text>
+      {/* BC = 15 on C→B diagonal */}
+      <text x={Math.round((C.x+B.x)/2)+8} y={Math.round((C.y+B.y)/2)+12} fontSize="9" fill="#fde68a" fontWeight="bold">BC=15</text>
+      {/* CD = 15 on horizontal right of F */}
+      <text x={Math.round((F.x+D.x)/2)} y={D.y-6} textAnchor="middle" fontSize="9" fill="#fde68a" fontWeight="bold">CD=15</text>
+      {/* DE = 15 on E-D line */}
+      <text x="162" y="72" fontSize="9" fill="#fde68a" fontWeight="bold">DE=15</text>
+      {/* AB = 11 on bottom */}
+      <text x={Math.round((A.x+B.x)/2)} y={A.y+16} textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="bold">AB = 11 cm</text>
       {/* Note */}
       <text x="159" y="10" textAnchor="middle" fontSize="8" fill="#94a3b8">Garis mendatar sejajar</text>
     </svg>
