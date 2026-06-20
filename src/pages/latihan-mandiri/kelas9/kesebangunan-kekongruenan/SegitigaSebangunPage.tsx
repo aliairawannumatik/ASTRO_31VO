@@ -396,7 +396,7 @@ const SoalQ9 = () => {
 };
 
 type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: string; };
+type Q = { n: number; title: string; content?: string; contentNode?: React.ReactNode; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: string; };
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 const SoalQNew1 = () => {
@@ -692,7 +692,7 @@ const questions: Q[] = [
   }),
   Qn(7, "Segitiga Sebangun – Cari x dan y", {
     type: "mixed",
-    content: "Perhatikan gambar segitiga ABC berikut. Diketahui \\(\\angle ABC = \\angle EDC\\) dengan AD = 9 cm, DC = 6 cm, DE = 5 cm, dan EC = 8 cm. Carilah nilai x (= BE) dan y (= AB)!",
+    contentNode: <>Perhatikan gambar segitiga ABC berikut. Diketahui <InlineMath math="\angle ABC = \angle EDC" /> dengan AD = 9 cm, DC = 6 cm, DE = 5 cm, dan EC = 8 cm. Carilah nilai x (= BE) dan y (= AB)!</>,
     diagram: <SoalQ7New />,
   }),
   Qn(8, "Lebar Sungai – Aplikasi Segitiga Sebangun", {
@@ -845,7 +845,8 @@ const SegitigaSebangunPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-violet-400 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                    {q.contentNode && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.contentNode}</p>}
+                    {!q.contentNode && q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
                     {q.diagram && <div className="mb-3 flex justify-center rounded-xl overflow-hidden">{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
