@@ -32,7 +32,7 @@ function ConeSVG({ r, h, s, color = "#fb923c", extraLabel = "", showHeight = tru
       <line x1="45" y1="160" x2="110" y2="28" stroke={color} strokeWidth="1.8" />
       <line x1="175" y1="160" x2="110" y2="28" stroke={color} strokeWidth="1.8" />
       <polygon points="45,160 175,160 110,28" fill={`url(#cone-fill-${r})`} />
-      {showHeight && (
+      {showHeight && !h && (
         <>
           <line x1="110" y1="28" x2="110" y2="160" stroke={color} strokeWidth="1" strokeDasharray="5,3" />
           <line x1="107" y1="28" x2="113" y2="28" stroke={color} strokeWidth="1.2" />
