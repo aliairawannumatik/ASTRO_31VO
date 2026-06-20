@@ -144,6 +144,14 @@ const questions: Q[] = [
     content:"Titik A(x, y) berada di Kuadran II. Jika A dicerminkan berturut-turut terhadap sumbu X kemudian sumbu Y, maka bayangan akhir A″ berada di kuadran ...",
     opts:["Kuadran I","Kuadran II","Kuadran III","Kuadran IV"],
   }),
+  Qn(30,"Refleksi Fungsi Linear — y = x",{type:"pg",
+    content:"Fungsi linear f(x) = 2x − 6 dicerminkan terhadap garis y = x. Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = 2x + 3","y = (1/2)x + 3","y = −(1/2)x + 3","y = −2x − 3"],
+  }),
+  Qn(31,"Refleksi Fungsi Linear — y = −x",{type:"pg",
+    content:"Fungsi linear f(x) = 2x + 4 dicerminkan terhadap garis y = −x. Persamaan bayangan fungsi tersebut adalah ...",
+    opts:["y = (1/2)x + 2","y = −(1/2)x − 2","y = 2x − 4","y = −2x + 4"],
+  }),
   Qn(25,"Refleksi terhadap Titik Asal",{type:"pg",
     content:"Titik Q(6, −3) dicerminkan terhadap titik asal O(0, 0). Koordinat bayangan Q adalah ...",
     opts:["Q′(3, 6)","Q′(−6, 3)","Q′(6, 3)","Q′(−3, 6)"],
@@ -194,7 +202,7 @@ const questions: Q[] = [
         <Poly pts={[[1,1],[3,3],[1,4]]} color="#34d399" label="PQR"/>
         <Poly pts={[[-1,1],[-3,3],[-1,4]]} color="#f472b6" fill="rgba(244,114,182,0.13)" label="P′Q′R′"/>
         <ConnDash x1={3} y1={3} x2={-3} y2={3}/>
-        <Dot x={3} y={3} color="#34d399" r={3} label="Q(3,3)"/>
+        <Dot x={3} y={3} color="#34d399" r={3} label="Q"/>
         <Dot x={-3} y={3} color="#f472b6" r={3} label="Q′"/>
       </GridSVG>
     ),
@@ -234,14 +242,6 @@ const questions: Q[] = [
   Qn(29,"Refleksi Fungsi Linear — Sumbu-y",{type:"pg",
     content:"Fungsi linear f(x) = 3x − 2 dicerminkan terhadap sumbu-y. Persamaan bayangan fungsi tersebut adalah ...",
     opts:["y = 3x + 2","y = −3x + 2","y = −3x − 2","y = 3x − 2"],
-  }),
-  Qn(30,"Refleksi Fungsi Linear — y = x",{type:"pg",
-    content:"Fungsi linear f(x) = 2x − 6 dicerminkan terhadap garis y = x. Persamaan bayangan fungsi tersebut adalah ...",
-    opts:["y = 2x + 3","y = (1/2)x + 3","y = −(1/2)x + 3","y = −2x − 3"],
-  }),
-  Qn(31,"Refleksi Fungsi Linear — y = −x",{type:"pg",
-    content:"Fungsi linear f(x) = 2x + 4 dicerminkan terhadap garis y = −x. Persamaan bayangan fungsi tersebut adalah ...",
-    opts:["y = (1/2)x + 2","y = −(1/2)x − 2","y = 2x − 4","y = −2x + 4"],
   }),
   Qn(32,"Refleksi Fungsi Linear — Titik Asal",{type:"pg",
     content:"Fungsi linear f(x) = 4x + 6 dicerminkan terhadap titik asal O(0, 0). Persamaan bayangan fungsi tersebut adalah ...",
