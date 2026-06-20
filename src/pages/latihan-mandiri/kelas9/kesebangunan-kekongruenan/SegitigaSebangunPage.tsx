@@ -447,22 +447,22 @@ const SoalQ7New = () => {
   const E  = { x: Dx, y: Math.round(B.y + tE * (C.y - B.y)) }; // ≈ (184, 111)
 
   // Arc marks for equal angles: EDC and ABC
-  const arcR = 15;
+  const arcR  = 15; // radius for angle EDC (90°)
+  const arcRB = 24; // larger radius for angle ABC (narrower angle ≈69°) so arcs look similar in size
   // Angle EDC at D: between DE (up, direction 0,-1) and DC (right, direction 1,0)
-  // Arc from point on DC ray to point on DE ray (CCW in SVG)
-  const arcEDC_start = { x: D.x + arcR, y: D.y };           // along DC
-  const arcEDC_end   = { x: D.x,        y: D.y - arcR };    // along DE
+  const arcEDC_start = { x: D.x + arcR, y: D.y };
+  const arcEDC_end   = { x: D.x,        y: D.y - arcR };
 
   // Angle ABC at B: between BC and BA rays
   const bcLen = Math.sqrt((C.x-B.x)**2 + (C.y-B.y)**2);
   const baLen = Math.sqrt((A.x-B.x)**2 + (A.y-B.y)**2);
   const arcABC_start = {
-    x: Math.round(B.x + arcR * (C.x-B.x) / bcLen),
-    y: Math.round(B.y + arcR * (C.y-B.y) / bcLen),
+    x: Math.round(B.x + arcRB * (C.x-B.x) / bcLen),
+    y: Math.round(B.y + arcRB * (C.y-B.y) / bcLen),
   };
   const arcABC_end = {
-    x: Math.round(B.x + arcR * (A.x-B.x) / baLen),
-    y: Math.round(B.y + arcR * (A.y-B.y) / baLen),
+    x: Math.round(B.x + arcRB * (A.x-B.x) / baLen),
+    y: Math.round(B.y + arcRB * (A.y-B.y) / baLen),
   };
 
   const midAB = { x: Math.round((A.x+B.x)/2), y: Math.round((A.y+B.y)/2) };
@@ -479,7 +479,7 @@ const SoalQ7New = () => {
       <path d={`M ${arcEDC_start.x},${arcEDC_start.y} A ${arcR},${arcR} 0 0,0 ${arcEDC_end.x},${arcEDC_end.y}`}
         fill="none" stroke="#fbbf24" strokeWidth="1.8"/>
       {/* Matching arc at angle ABC (at B) */}
-      <path d={`M ${arcABC_start.x},${arcABC_start.y} A ${arcR},${arcR} 0 0,1 ${arcABC_end.x},${arcABC_end.y}`}
+      <path d={`M ${arcABC_start.x},${arcABC_start.y} A ${arcRB},${arcRB} 0 0,1 ${arcABC_end.x},${arcABC_end.y}`}
         fill="none" stroke="#fbbf24" strokeWidth="1.8"/>
       {/* Vertex dots */}
       <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
