@@ -113,12 +113,12 @@ const qx = (v: number, ox=110) => ox + v*40;
 const qy = (v: number, oy=110) => oy - v*40;
 
 const questions: Q[] = [
-  /* ══════════ GRUP 1: ROTASI 90° SEARAH JARUM JAM (CW) dari O ══════════ */
-  Qn(1,"Rotasi 90° CW — Bayangan Titik",{type:"pg",
+  /* ══════════ GRUP 1: ROTASI 90° SEARAH JARUM JAM (searah jarum jam) dari O ══════════ */
+  Qn(1,"Rotasi 90° searah jarum jam — Bayangan Titik",{type:"pg",
     content:"Titik Q(−3, 2) dirotasi 90° searah jarum jam terhadap titik asal. Koordinat bayangan Q adalah ...",
     opts:["Q′(2, 3)","Q′(−2, −3)","Q′(3, 2)","Q′(−3, −2)"],
   }),
-  Qn(2,"Diagram — Persegi Panjang Rotasi 90° CW",{type:"pg",
+  Qn(2,"Diagram — Persegi Panjang Rotasi 90° searah jarum jam",{type:"pg",
     diagram:(
       <GridSVG>
         <Poly pts={[[1,1],[4,1],[4,3],[1,3]]} color="#fb923c" label="ABCD"/>
@@ -127,7 +127,7 @@ const questions: Q[] = [
         <ArcArrow cx={0} cy={0} r={25} startAngle={100} endAngle={-10} color="#facc15"/>
       </GridSVG>
     ),
-    content:"Perhatikan diagram. Titik B(4, 1) dari persegi panjang ABCD dirotasi 90° CW terhadap titik asal. Koordinat bayangan B′ adalah ...",
+    content:"Perhatikan diagram. Titik B(4, 1) dari persegi panjang ABCD dirotasi 90° searah jarum jam terhadap titik asal. Koordinat bayangan B′ adalah ...",
     opts:["B′(−4, 1)","B′(1, −4)","B′(4, −1)","B′(−1, 4)"],
   }),
   Qn(3,"Diagram — Segitiga Rotasi ke Kuadran IV",{type:"pg",
@@ -140,27 +140,27 @@ const questions: Q[] = [
       </GridSVG>
     ),
     content:"Perhatikan diagram. Segitiga berputar dari kuadran I ke kuadran IV. Jenis rotasi yang terjadi adalah ...",
-    opts:["90° CCW","90° CW","180°","270° CCW"],
+    opts:["90° berlawanan arah jarum jam","90° searah jarum jam","180°","270° berlawanan arah jarum jam"],
   }),
-  /* ══════════ GRUP 2: ROTASI 90° BERLAWANAN JARUM JAM (CCW) dari O ══════════ */
-  Qn(4,"Pemetaan Dasar Rotasi 90° CCW",{type:"mixed",
+  /* ══════════ GRUP 2: ROTASI 90° BERLAWANAN JARUM JAM (berlawanan arah jarum jam) dari O ══════════ */
+  Qn(4,"Pemetaan Dasar Rotasi 90° berlawanan arah jarum jam",{type:"mixed",
     content:"Rotasi 90° berlawanan arah jarum jam terhadap titik pusat O(0,0) memetakan titik (x, y) menjadi ...",
     parts:[
       {label:"A.",text:"(x, y) → (y, x)"},
       {label:"B.",text:"(x, y) → (−x, −y)"},
       {label:"C.",text:"(x, y) → (y, −x)"},
       {label:"D.",text:"(x, y) → (−y, x)"},
-      {label:"Petunjuk:",text:"Verifikasi pilihan D dengan titik uji P(3, 0): rotasi 90° CCW seharusnya menghasilkan P′(0, 3). Gunakan rumus yang benar."},
+      {label:"Petunjuk:",text:"Verifikasi pilihan D dengan titik uji P(3, 0): rotasi 90° berlawanan arah jarum jam seharusnya menghasilkan P′(0, 3). Gunakan rumus yang benar."},
     ],
   }),
-  Qn(5,"Bayangan Titik — Rotasi 90° CCW dari O",{type:"mixed",
+  Qn(5,"Bayangan Titik — Rotasi 90° berlawanan arah jarum jam dari O",{type:"mixed",
     content:"Hasil rotasi titik A(6, 3) sejauh 90° berlawanan arah jarum jam dengan pusat titik asal O adalah ...",
     parts:[
       {label:"A.",text:"A′(6, −3)"},
       {label:"B.",text:"A′(−6, 3)"},
       {label:"C.",text:"A′(−3, 6)"},
       {label:"D.",text:"A′(3, −6)"},
-      {label:"Tunjukkan:",math:"A(6,3) \\overset{90°\\text{ CCW}}{\\longrightarrow} A'(?,\\,?)"},
+      {label:"Tunjukkan:",math:"A(6,3) \\overset{90°\\text{ berlawanan arah jarum jam}}{\\longrightarrow} A'(?,\\,?)"},
     ],
   }),
   Qn(6,"Diagram — Kuadran Bayangan setelah Rotasi [O, 90°]",{type:"pg",
@@ -179,14 +179,14 @@ const questions: Q[] = [
   }),
   Qn(7,"Menemukan Sudut Rotasi",{type:"pg",
     content:"Titik P(3, 0) dirotasi terhadap titik asal menghasilkan P′(0, 3). Sudut rotasi yang digunakan adalah ...",
-    opts:["90° CW","90° CCW","180°","270° CCW"],
+    opts:["90° searah jarum jam","90° berlawanan arah jarum jam","180°","270° berlawanan arah jarum jam"],
   }),
-  Qn(8,"Mencari Titik Asal dari Bayangan 90° CCW",{type:"pg",
-    content:"Bayangan suatu titik setelah rotasi 90° CCW terhadap titik asal adalah P′(−3, 5). Koordinat titik asal P adalah ...",
+  Qn(8,"Mencari Titik Asal dari Bayangan 90° berlawanan arah jarum jam",{type:"pg",
+    content:"Bayangan suatu titik setelah rotasi 90° berlawanan arah jarum jam terhadap titik asal adalah P′(−3, 5). Koordinat titik asal P adalah ...",
     opts:["P(5, −3)","P(5, 3)","P(3, 5)","P(−5, 3)"],
   }),
-  Qn(9,"Rotasi 90° CCW — Mencari Parameter",{type:"pg",
-    content:"Titik P(a, b) dirotasi 90° CCW terhadap titik asal menghasilkan P′(−4, 3). Nilai a + b adalah ...",
+  Qn(9,"Rotasi 90° berlawanan arah jarum jam — Mencari Parameter",{type:"pg",
+    content:"Titik P(a, b) dirotasi 90° berlawanan arah jarum jam terhadap titik asal menghasilkan P′(−4, 3). Nilai a + b adalah ...",
     opts:["1","5","7","−1"],
   }),
   Qn(10,"Mencari Nilai a + b dari Bayangan Rotasi",{type:"pg",
@@ -232,29 +232,29 @@ const questions: Q[] = [
     content:"Titik A(2, 3) dirotasi 180° terhadap titik asal, lalu ditranslasikan oleh T = (1, −2). Koordinat bayangan akhir A adalah ...",
     opts:["A″(−1, −5)","A″(1, −5)","A″(−1, 5)","A″(3, −5)"],
   }),
-  /* ══════════ GRUP 4: ROTASI 270° BERLAWANAN JARUM JAM (CCW) dari O ══════════ */
-  Qn(16,"Rotasi 270° CCW — Bayangan Titik",{type:"pg",
+  /* ══════════ GRUP 4: ROTASI 270° BERLAWANAN JARUM JAM (berlawanan arah jarum jam) dari O ══════════ */
+  Qn(16,"Rotasi 270° berlawanan arah jarum jam — Bayangan Titik",{type:"pg",
     content:"Titik K(2, 3) dirotasi 270° berlawanan arah jarum jam terhadap titik asal. Koordinat bayangan K adalah ...",
     opts:["K′(−3, 2)","K′(3, −2)","K′(−2, −3)","K′(2, 3)"],
   }),
-  Qn(17,"Rotasi 270° CCW — Sudut Istimewa",{type:"pg",
-    content:"Titik P(4, 0) dirotasi 270° CCW terhadap titik asal. Koordinat bayangan P adalah ...",
+  Qn(17,"Rotasi 270° berlawanan arah jarum jam — Sudut Istimewa",{type:"pg",
+    content:"Titik P(4, 0) dirotasi 270° berlawanan arah jarum jam terhadap titik asal. Koordinat bayangan P adalah ...",
     opts:["P′(0, 4)","P′(0, −4)","P′(−4, 0)","P′(4, 0)"],
   }),
   /* ══════════ GRUP 5: ROTASI 90° terhadap PUSAT (a, b) ══════════ */
-  Qn(18,"Rotasi 90° CCW terhadap Pusat P",{type:"pg",
-    content:"Titik A(5, 3) dirotasi 90° CCW terhadap pusat P(2, 1). Koordinat bayangan A adalah ...",
+  Qn(18,"Rotasi 90° berlawanan arah jarum jam terhadap Pusat P",{type:"pg",
+    content:"Titik A(5, 3) dirotasi 90° berlawanan arah jarum jam terhadap pusat P(2, 1). Koordinat bayangan A adalah ...",
     opts:["A′(0, 2)","A′(0, 4)","A′(2, 4)","A′(−2, 4)"],
   }),
-  Qn(19,"Rotasi 90° CCW dari Pusat Bukan Asal",{type:"pg",
-    content:"Titik P(4, 2) dirotasi 90° CCW terhadap pusat R(1, 1). Koordinat bayangan P adalah ...",
+  Qn(19,"Rotasi 90° berlawanan arah jarum jam dari Pusat Bukan Asal",{type:"pg",
+    content:"Titik P(4, 2) dirotasi 90° berlawanan arah jarum jam terhadap pusat R(1, 1). Koordinat bayangan P adalah ...",
     opts:["P′(0, 2)","P′(0, 4)","P′(2, 4)","P′(4, 0)"],
   }),
   Qn(20,"Menentukan Pusat Rotasi",{type:"pg",
-    content:"Titik P(2, 1) dipetakan ke P′(−1, 2) oleh rotasi 90° CCW. Pusat rotasi tersebut adalah ...",
+    content:"Titik P(2, 1) dipetakan ke P′(−1, 2) oleh rotasi 90° berlawanan arah jarum jam. Pusat rotasi tersebut adalah ...",
     opts:["(1, 1)","(0, 0)","(1, 0)","(0, 1)"],
   }),
-  Qn(21,"Rotasi 90° CCW terhadap Pusat P",{type:"pg",
+  Qn(21,"Rotasi 90° berlawanan arah jarum jam terhadap Pusat P",{type:"pg",
     content:"Titik C(6, 1) dirotasi oleh R[P(2, −1), θ = 90°] berlawanan arah jarum jam. Koordinat bayangan C adalah ...",
     opts:["C′(2, 3)","C′(0, 3)","C′(0, −3)","C′(−2, 3)"],
   }),
@@ -278,17 +278,17 @@ const questions: Q[] = [
       {label:"Petunjuk:",math:"R[O,180°]: (x,y)\\to(-x,-y).\\quad y=x^2+1\\to -y=(-x)^2+1 \\Rightarrow y=-(x^2+1)"},
     ],
   }),
-  Qn(25,"Bayangan Garis y = 2x oleh Rotasi [O, 90° CCW]",{type:"mixed",
+  Qn(25,"Bayangan Garis y = 2x oleh Rotasi [O, 90° berlawanan arah jarum jam]",{type:"mixed",
     content:"Garis y = 2x dirotasikan oleh [O, 90°] berlawanan arah jarum jam. Bayangannya adalah ...",
     parts:[
       {label:"A.",text:"y = −2x"},
       {label:"B.",text:"y = x"},
       {label:"C.",text:"x + 2y = 0"},
       {label:"D.",text:"2x + y = 0"},
-      {label:"Langkah:",math:"\\text{Titik }(t,2t)\\overset{90°\\text{ CCW}}{\\longrightarrow}(-2t,t).\\;x=-2t,\\,y=t \\Rightarrow x=-2y \\Rightarrow x+2y=0"},
+      {label:"Langkah:",math:"\\text{Titik }(t,2t)\\overset{90°\\text{ berlawanan arah jarum jam}}{\\longrightarrow}(-2t,t).\\;x=-2t,\\,y=t \\Rightarrow x=-2y \\Rightarrow x+2y=0"},
     ],
   }),
-  Qn(26,"Rotasi CCW dilanjutkan Refleksi",{type:"pg",
+  Qn(26,"Rotasi berlawanan arah jarum jam dilanjutkan Refleksi",{type:"pg",
     content:"Titik L(2, −4) dirotasi oleh R[(0, 0), θ = 90°] berlawanan arah jarum jam, kemudian bayangannya direfleksikan terhadap garis y = 3. Koordinat bayangan akhir L adalah ...",
     opts:["(4, 4)","(−4, 4)","(4, −4)","(−4, −4)"],
   }),
@@ -321,10 +321,10 @@ const RotasiPage = () => {
           <p className="text-orange-300 text-xs font-bold mb-2">📌 Rumus Kunci — Rotasi terhadap Titik Asal O(0,0)</p>
           <div className="grid grid-cols-2 gap-2 text-[10px]">
             {[
-              {label:"90° CCW", math:"(x,y)\\to(-y,x)"},
-              {label:"90° CW", math:"(x,y)\\to(y,-x)"},
+              {label:"90° berlawanan arah jarum jam", math:"(x,y)\\to(-y,x)"},
+              {label:"90° searah jarum jam", math:"(x,y)\\to(y,-x)"},
               {label:"180°", math:"(x,y)\\to(-x,-y)"},
-              {label:"270° CCW", math:"(x,y)\\to(y,-x)"},
+              {label:"270° berlawanan arah jarum jam", math:"(x,y)\\to(y,-x)"},
             ].map(r => (
               <div key={r.label} className="bg-white/5 rounded-lg px-2 py-1.5">
                 <p className="text-orange-400 font-bold mb-0.5">{r.label}</p>
