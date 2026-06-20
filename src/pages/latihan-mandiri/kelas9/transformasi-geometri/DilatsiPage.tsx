@@ -142,15 +142,15 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 6, title: "Luas Bayangan Segitiga Setelah Dilatasi",
-    content: "Segitiga ABC mempunyai koordinat A(0, 0), B(4, 0), dan C(0, 3). Jika △A′B′C′ adalah bayangan △ABC hasil dilatasi D[O, 3], luas △A′B′C′ adalah ...",
+    n: 6, title: "Bayangan Titik Segitiga Setelah Dilatasi",
+    content: "Segitiga ABC mempunyai koordinat A(0, 0), B(4, 0), dan C(0, 3). Segitiga tersebut didilatasi dengan pusat O(0, 0) dan faktor skala k = 3. Tentukan bayangan A′, B′, dan C′!",
     choices: [
-      { label: "A", text: "6 satuan luas" },
-      { label: "B", text: "18 satuan luas" },
-      { label: "C", text: "36 satuan luas" },
-      { label: "D", text: "54 satuan luas" },
+      { label: "A", text: "A′(0, 0), B′(12, 0), C′(0, 9)" },
+      { label: "B", text: "A′(0, 0), B′(7, 0), C′(0, 6)" },
+      { label: "C", text: "A′(0, 0), B′(4, 0), C′(0, 3)" },
+      { label: "D", text: "A′(3, 3), B′(12, 3), C′(3, 9)" },
     ],
-    answer: "D",
+    answer: "A",
   },
   {
     n: 7, title: "Luas Bayangan — Diagram Pembesaran",
@@ -228,17 +228,17 @@ const questions: Q[] = [
     ],
     answer: "A",
   },
-  /* ══════════ GRUP 4: DILATASI KOMPOSISI ══════════ */
+  /* ══════════ GRUP 4: DILATASI SEGITIGA — PUSAT (a, b) ══════════ */
   {
-    n: 12, title: "ANBK — Dilatasi Dua Kali Berurutan",
-    content: "Titik A(1, 2) didilatasi terhadap O dengan k₁ = 2, lalu hasilnya didilatasi lagi dengan k₂ = 3. Koordinat akhir A adalah ...",
+    n: 12, title: "Bayangan Segitiga — Pusat (−2, 3), k = 4",
+    content: "Diketahui segitiga dengan titik A(−1, 2), B(0, 2), dan C(−1, 4) didilatasikan dengan faktor skala k = 4 dan pusat P(−2, 3). Tentukan bayangan A′, B′, dan C′!",
     choices: [
-      { label: "A", text: "(2, 4)" },
-      { label: "B", text: "(3, 6)" },
-      { label: "C", text: "(6, 12)" },
-      { label: "D", text: "(12, 24)" },
+      { label: "A", text: "A′(2, −1), B′(6, −1), C′(2, 7)" },
+      { label: "B", text: "A′(2, 5), B′(6, 5), C′(2, 13)" },
+      { label: "C", text: "A′(−4, 8), B′(0, 8), C′(−4, 16)" },
+      { label: "D", text: "A′(2, −1), B′(6, −1), C′(6, 7)" },
     ],
-    answer: "C",
+    answer: "A",
   },
   {
     n: 13, title: "Dilatasi Dilanjut Refleksi Sumbu-x",
@@ -335,7 +335,8 @@ const groupHeaders: Record<number, string> = {
   1:  "📍 Dilatasi Pusat O(0, 0)",
   9:  "📍 Dilatasi Pusat (a, b)",
   11: "🔍 Mencari Titik Asal — Pusat (a, b)",
-  12: "🔀 Dilatasi Komposisi",
+  12: "📐 Dilatasi Segitiga — Pusat (a, b)",
+  13: "🔀 Dilatasi Komposisi",
   16: "📈 Dilatasi Kurva Linear",
 };
 
