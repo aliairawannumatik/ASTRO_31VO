@@ -268,29 +268,21 @@ const SoalQ7 = () => {
 };
 
 const SoalQ8 = () => {
-  // Layout matches uploaded image:
-  // A(bottom-left), B(bottom-right) — AB horizontal
-  // D(middle-left), F(middle-right) — DF horizontal, AB // DF
-  // G(top) — apex; GF // BD
-  // E — on segment DF where line AG crosses DF
-  // C — intersection of line AG and line BD
-  const A={x:40, y:207};
-  const B={x:242,y:207};
-  const D={x:40, y:115};
-  const F={x:242,y:115};
-  // G: GF // BD, GF=6cm, BD=16cm → G = F + (F→D direction) * (6/16)
-  // BD dir (B→D): (-202,-92); G = F + (-202,-92)*(6/16) = (242-75.75, 115-34.5) ≈ (166, 81)
-  const G={x:166,y:81};
-  // E: line AG meets DF (y=115) → t=90/124≈0.726; x=40+125*0.726≈131
-  const E={x:131,y:115};
-  // C: intersection of AG and BD (computed) ≈ (102, 143)
-  const C={x:102,y:143};
+  // A moved left, D moved right vs previous version; GD line removed; measurement labels removed
+  const A={x:20, y:210};
+  const B={x:250,y:210};
+  const D={x:95, y:115};
+  const F={x:250,y:115};
+  // G: GF // BD; BD dir (B→D): (-155,-95); G = F + (-155,-95)*(6/16) ≈ (192, 79)
+  const G={x:192,y:79};
+  // E: line AG meets DF (y=115) ≈ x=145
+  const E={x:145,y:115};
+  // C: intersection of line AG and line BD ≈ (123, 132)
+  const C={x:123,y:132};
 
-  // Parallel arrow helper (right-pointing, single)
   const arrowRight = (x:number, y:number) =>
     `${x-6},${y-3} ${x+7},${y} ${x-6},${y+3}`;
 
-  // Diagonal parallel arrow helper
   const arrowDiag = (mx:number,my:number,ux:number,uy:number) => {
     const px=-uy, py=ux;
     const s=7, t=5;
@@ -300,11 +292,9 @@ const SoalQ8 = () => {
     return [...tip,...left,...rigt].map(v=>Math.round(v))
       .reduce((a,v,i)=>i%2===0?a+v+',':a+v+' ','').trim();
   };
-  // BD unit vector (B→D): (-202,-92), mag≈222.1 → (-0.910,-0.414)
-  const ux=-0.910, uy=-0.414;
-  // Arrow on BD segment (between B and C, at 40% from B)
-  const bdAx=Math.round(B.x+0.38*(D.x-B.x)), bdAy=Math.round(B.y+0.38*(D.y-B.y));
-  // Arrow on GF segment (at midpoint G→F, same direction)
+  // BD unit (B→D): (-155,-95), mag≈181.8 → (-0.853,-0.523)
+  const ux=-0.853, uy=-0.523;
+  const bdAx=Math.round(B.x+0.45*(D.x-B.x)), bdAy=Math.round(B.y+0.45*(D.y-B.y));
   const gfAx=Math.round((G.x+F.x)/2), gfAy=Math.round((G.y+F.y)/2);
 
   return (
@@ -313,21 +303,19 @@ const SoalQ8 = () => {
       <line x1={A.x} y1={A.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
       {/* DF middle horizontal */}
       <line x1={D.x} y1={D.y} x2={F.x} y2={F.y} stroke="#60a5fa" strokeWidth="2"/>
-      {/* GD segment (left side of upper triangle) */}
-      <line x1={G.x} y1={G.y} x2={D.x} y2={D.y} stroke="#a78bfa" strokeWidth="2"/>
-      {/* GF segment (right side of upper triangle, GF // BD) */}
+      {/* GF segment (GF // BD) — GD line removed */}
       <line x1={G.x} y1={G.y} x2={F.x} y2={F.y} stroke="#4ade80" strokeWidth="2"/>
-      {/* Line A→G (passes through C then E on DF, then to G) */}
+      {/* Line A→G (through C and E) */}
       <line x1={A.x} y1={A.y} x2={G.x} y2={G.y} stroke="#a78bfa" strokeWidth="2"/>
-      {/* Line B→D (passes through C, BD // GF) */}
+      {/* Line B→D (through C, BD // GF) */}
       <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#f97316" strokeWidth="2"/>
 
       {/* Parallel indicators on AB (>>) */}
-      <polygon points={arrowRight(142,207)} fill="#fde68a"/>
-      <polygon points={arrowRight(158,207)} fill="#fde68a"/>
+      <polygon points={arrowRight(130,210)} fill="#fde68a"/>
+      <polygon points={arrowRight(146,210)} fill="#fde68a"/>
       {/* Parallel indicator on DF (>) */}
-      <polygon points={arrowRight(180,115)} fill="#fde68a"/>
-      {/* Parallel arrows on BD and GF (both upper-left direction) */}
+      <polygon points={arrowRight(178,115)} fill="#fde68a"/>
+      {/* Parallel arrows on BD and GF */}
       <polygon points={arrowDiag(bdAx,bdAy,ux,uy)} fill="#f97316"/>
       <polygon points={arrowDiag(gfAx,gfAy,ux,uy)} fill="#4ade80"/>
 
@@ -340,21 +328,14 @@ const SoalQ8 = () => {
       <circle cx={E.x} cy={E.y} r="3"   fill="#4ade80"/>
       <circle cx={C.x} cy={C.y} r="3.5" fill="#ef4444"/>
 
-      {/* Labels */}
+      {/* Point labels only — measurement labels removed */}
       <text x={A.x-16} y={A.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
       <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={D.x-16} y={D.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
+      <text x={D.x-5}  y={D.y-8}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
       <text x={F.x+4}  y={F.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">F</text>
       <text x={G.x+4}  y={G.y-4}  fontSize="13" fill="#fbbf24" fontWeight="bold">G</text>
-      <text x={E.x-4}  y={E.y-8}  fontSize="11" fill="#4ade80" fontWeight="bold">E</text>
+      <text x={E.x+4}  y={E.y-6}  fontSize="11" fill="#4ade80" fontWeight="bold">E</text>
       <text x={C.x-18} y={C.y+5}  fontSize="13" fill="#ef4444" fontWeight="bold">C</text>
-
-      {/* Measurements */}
-      <text x={(A.x+B.x)/2} y={A.y+17} textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold">AB = 16 cm</text>
-      <text x={(D.x+F.x)/2} y={D.y-8}  textAnchor="middle" fontSize="10" fill="#fde68a" fontWeight="bold">DF = 16 cm</text>
-      <text x={F.x+6} y={(G.y+F.y)/2+4} fontSize="10" fill="#4ade80" fontWeight="bold">FG = 6 cm</text>
-      <text x={(B.x+D.x)/2+14} y={(B.y+D.y)/2+10} fontSize="9" fill="#f97316" fontWeight="bold">BD=16</text>
-      <text x={B.x+6}  y={(B.y+C.y)/2+4} fontSize="10" fill="#ef4444" fontWeight="bold">BC = ?</text>
     </svg>
   );
 };
@@ -581,7 +562,7 @@ const questions: Q[] = [
   }),
   Qn(8, "Garis Sejajar Bersilang – Cari BC", {
     type: "mixed",
-    content: "Perhatikan gambar berikut. Diketahui AB ∥ DF, BD ∥ GF, dan AB = BD = DF = 16 cm. Jika FG = 6 cm, maka panjang BC adalah…",
+    content: "Perhatikan gambar berikut. Diketahui AB // DF, BD // GF, dan AB = BD = DF = 16 cm. Jika FG = 6 cm, maka panjang BC adalah…",
     diagram: <SoalQ8 />,
     parts: [
       { label: "A.", text: "8 cm" },
