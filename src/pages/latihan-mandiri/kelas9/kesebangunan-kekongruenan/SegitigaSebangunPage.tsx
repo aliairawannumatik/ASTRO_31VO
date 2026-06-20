@@ -31,33 +31,34 @@ const SoalQ1 = () => (
 );
 
 const SoalQ2 = () => {
-  // AB is now vertical on the left (A top-left, B bottom-left), BC horizontal at bottom
-  const A={x:55, y:25},  B={x:55, y:195}, C={x:290, y:195};
-  // D on AB at 2/3 from A, E on AC at 2/3 from A → DE ∥ BC (horizontal)
-  const D={x:55,  y:138}, E={x:212, y:138};
+  // Reflected across x-axis (y → 215 − y):
+  // A bottom-left, B top-left (AB vertical), C top-right, BC horizontal at top
+  const A={x:55, y:190}, B={x:55, y:20},  C={x:290, y:20};
+  // D on AB at 2/3 from A (going up), E on AC at 2/3 from A → DE ∥ BC (horizontal)
+  const D={x:55,  y:77},  E={x:212, y:77};
   return (
     <svg viewBox="0 0 320 215" className="w-full max-w-xs mx-auto">
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2.2"/>
       {/* Right-pointing arrow on DE (parallel indicator) */}
-      <polygon points="128,135 136,138 128,141" fill="#4ade80"/>
+      <polygon points="128,74 136,77 128,80" fill="#4ade80"/>
       {/* Right-pointing arrow on BC (parallel indicator) */}
-      <polygon points="166,192 174,195 166,198" fill="#60a5fa"/>
-      <text x={A.x-14} y={A.y+4}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x-14} y={B.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={C.x+4}  y={C.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
+      <polygon points="166,17 174,20 166,23" fill="#60a5fa"/>
+      <text x={A.x-14} y={A.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={B.x-14} y={B.y-4}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={C.x+4}  y={C.y-4}  fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
       <text x={D.x-14} y={D.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">D</text>
       <text x={E.x+4}  y={E.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">E</text>
-      {/* c = AD along left vertical side */}
-      <text x="62"  y="82"  fontSize="12" fill="#f97316" fontWeight="bold">c</text>
-      {/* 4 cm = DB along left vertical side */}
-      <text x="62"  y="168" fontSize="11" fill="#fbbf24" fontWeight="bold">4 cm</text>
-      {/* d = AE along hypotenuse AC, upper part */}
-      <text x="128" y="70"  fontSize="12" fill="#a855f7" fontWeight="bold">d</text>
-      {/* 3 cm = EC along hypotenuse AC, lower part */}
-      <text x="254" y="158" fontSize="11" fill="#fbbf24" fontWeight="bold">3 cm</text>
-      <text x={(D.x+E.x)/2} y={D.y-8} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">DE = 8 cm</text>
-      <text x={(B.x+C.x)/2} y={B.y+15} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">BC = 12 cm</text>
+      {/* c = AD along left vertical side (A bottom → D) */}
+      <text x="62"  y="138" fontSize="12" fill="#f97316" fontWeight="bold">c</text>
+      {/* 4 cm = DB along left vertical side (D → B top) */}
+      <text x="62"  y="50"  fontSize="11" fill="#fbbf24" fontWeight="bold">4 cm</text>
+      {/* d = AE along hypotenuse AC, lower part */}
+      <text x="128" y="148" fontSize="12" fill="#a855f7" fontWeight="bold">d</text>
+      {/* 3 cm = EC along hypotenuse AC, upper part */}
+      <text x="254" y="46"  fontSize="11" fill="#fbbf24" fontWeight="bold">3 cm</text>
+      <text x={(D.x+E.x)/2} y={D.y+14} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">DE = 8 cm</text>
+      <text x={(B.x+C.x)/2} y={B.y+34} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">BC = 12 cm</text>
     </svg>
   );
 };
