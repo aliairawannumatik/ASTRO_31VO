@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "DEFINISI KESEBANGUNAN DAN KEKONGRUENAN",
     path: "/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/definisi",
-    soal: 20,
+    soal: 10,
     icon: Shapes,
     gradient: "from-cyan-900/40 to-teal-900/30",
     border: "border-cyan-500/30",
@@ -21,7 +21,7 @@ const subtopics = [
   {
     label: "MENGHITUNG PANJANG RUSUK BANGUN DATAR YANG SEBANGUN",
     path: "/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk",
-    soal: 40,
+    soal: 8,
     icon: Ruler,
     gradient: "from-orange-900/40 to-amber-900/30",
     border: "border-orange-500/30",
@@ -34,7 +34,7 @@ const subtopics = [
   {
     label: "SEGITIGA-SEGITIGA YANG SEBANGUN",
     path: "/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun",
-    soal: 11,
+    soal: 14,
     icon: Triangle,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
@@ -47,7 +47,7 @@ const subtopics = [
   {
     label: "MENEMUKAN PERBANDINGAN/RASIO RUSUK-RUSUK SEGITIGA SIKU-SIKU",
     path: "/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/rasio-rusuk",
-    soal: 40,
+    soal: 9,
     icon: Percent,
     gradient: "from-emerald-900/40 to-teal-900/30",
     border: "border-emerald-500/30",
@@ -60,7 +60,7 @@ const subtopics = [
   {
     label: "KEKONGRUENAN PADA BANGUN DATAR",
     path: "/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/kekongruenan",
-    soal: 40,
+    soal: 6,
     icon: CheckSquare,
     gradient: "from-rose-900/40 to-pink-900/30",
     border: "border-rose-500/30",
@@ -92,7 +92,7 @@ const KesebangunanKekongruenPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">151 Soal Total · Gambar & Diagram Geometri</span>
+            <span className="text-white/70 text-xs font-body">47 Soal Total · Gambar & Diagram Geometri</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
