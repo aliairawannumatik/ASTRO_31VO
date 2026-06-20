@@ -591,59 +591,6 @@ const Q6TriDE2SVG = () => (
   </svg>
 );
 
-const SoalQ10Isosceles = () => {
-  // Isosceles △PQR: PQ=PR, M on PQ, N on PR, MN∥QR, PQ:PM = 4:3
-  const P = { x: 155, y: 22  };
-  const Q = { x:  50, y: 188 };
-  const R = { x: 260, y: 188 };
-  const t = 3/4; // PM/PQ = 3/4
-  const M = { x: Math.round(P.x + t*(Q.x-P.x)), y: Math.round(P.y + t*(Q.y-P.y)) }; // ≈(76,147)
-  const N = { x: Math.round(P.x + t*(R.x-P.x)), y: Math.round(P.y + t*(R.y-P.y)) }; // ≈(234,147)
-  // Equal tick marks at mid-PQ and mid-PR
-  const mpq = { x: (P.x+Q.x)/2, y: (P.y+Q.y)/2 }; // (102.5, 105)
-  const mpr = { x: (P.x+R.x)/2, y: (P.y+R.y)/2 }; // (207.5, 105)
-  const tk = 6; // half-tick length, perpendicular to each side
-  // PQ direction unit: (-105,166)/196.4 ≈ (-0.535,0.846); perp=(0.846,0.535)
-  const pqPerpX = 0.846, pqPerpY = 0.535;
-  // PR direction unit: (105,166)/196.4 ≈ (0.535,0.846); perp=(-0.846,0.535)
-  return (
-    <svg viewBox="0 0 310 210" className="w-full max-w-sm mx-auto" style={{ background:"rgba(15,23,42,0.6)", borderRadius:8 }}>
-      <polygon points={`${P.x},${P.y} ${Q.x},${Q.y} ${R.x},${R.y}`}
-        fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1.8"/>
-      {/* MN line */}
-      <line x1={M.x} y1={M.y} x2={N.x} y2={N.y} stroke="#4ade80" strokeWidth="1.8"/>
-      {/* Equal tick marks on PQ */}
-      <line x1={mpq.x - pqPerpX*tk} y1={mpq.y - pqPerpY*tk}
-            x2={mpq.x + pqPerpX*tk} y2={mpq.y + pqPerpY*tk}
-            stroke="#fbbf24" strokeWidth="2"/>
-      {/* Equal tick marks on PR */}
-      <line x1={mpr.x + pqPerpX*tk} y1={mpr.y - pqPerpY*tk}
-            x2={mpr.x - pqPerpX*tk} y2={mpr.y + pqPerpY*tk}
-            stroke="#fbbf24" strokeWidth="2"/>
-      {/* Dots */}
-      <circle cx={P.x} cy={P.y} r="3.5" fill="#93c5fd"/>
-      <circle cx={Q.x} cy={Q.y} r="3.5" fill="#93c5fd"/>
-      <circle cx={R.x} cy={R.y} r="3.5" fill="#93c5fd"/>
-      <circle cx={M.x} cy={M.y} r="3.5" fill="#fbbf24"/>
-      <circle cx={N.x} cy={N.y} r="3.5" fill="#fbbf24"/>
-      {/* Vertex labels */}
-      <text x={P.x} y={P.y-10} fontSize="14" fill="#93c5fd" fontWeight="bold" textAnchor="middle">P</text>
-      <text x={Q.x-14} y={Q.y+5} fontSize="13" fill="#93c5fd" fontWeight="bold">Q</text>
-      <text x={R.x+6}  y={R.y+5} fontSize="13" fill="#93c5fd" fontWeight="bold">R</text>
-      <text x={M.x-18} y={M.y+5} fontSize="12" fill="#fbbf24" fontWeight="bold">M</text>
-      <text x={N.x+6}  y={N.y+5} fontSize="12" fill="#fbbf24" fontWeight="bold">N</text>
-      {/* Segment labels on PQ side */}
-      <text x={Math.round((P.x+M.x)/2)+8} y={Math.round((P.y+M.y)/2)-4} fontSize="10" fill="#f97316" fontWeight="bold">3</text>
-      <text x={Math.round((M.x+Q.x)/2)+8} y={Math.round((M.y+Q.y)/2)-4} fontSize="10" fill="#a78bfa" fontWeight="bold">1</text>
-      {/* PQ = 4 on PR side */}
-      <text x={Math.round((P.x+N.x)/2)+4} y={Math.round((P.y+N.y)/2)-4} fontSize="10" fill="#f97316" fontWeight="bold">3</text>
-      <text x={Math.round((N.x+R.x)/2)+4} y={Math.round((N.y+R.y)/2)-4} fontSize="10" fill="#a78bfa" fontWeight="bold">1</text>
-      {/* MN∥QR label */}
-      <text x="155" y="203" fontSize="10" fill="#4ade80" fontWeight="bold" textAnchor="middle">MN ∥ QR</text>
-    </svg>
-  );
-};
-
 const SoalQ11Parallel = () => {
   // △ABC, P on AB (AP=6, AB=10), Q on AC, PQ∥BC
   const A = { x: 155, y: 18  };
@@ -798,18 +745,7 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(10, "Segitiga Sama Kaki – Perbandingan Sisi – ANBK", {
-    type: "mixed",
-    content: "Diketahui △PQR adalah segitiga sama kaki dengan PQ = PR. Titik M pada PQ dan titik N pada PR sedemikian sehingga MN // QR. Jika PQ : PM = 4 : 3, maka PR : PN adalah ....",
-    diagram: <SoalQ10Isosceles />,
-    parts: [
-      { label: "A.", math: "4 : 3" },
-      { label: "B.", math: "3 : 4" },
-      { label: "C.", math: "3 : 2" },
-      { label: "D.", math: "2 : 3" },
-    ],
-  }),
-  Qn(11, "Garis Sejajar – Perbandingan AQ : QC – TKA", {
+  Qn(10, "Garis Sejajar – Perbandingan AQ : QC – TKA", {
     type: "mixed",
     content: "Diketahui △ABC. Titik P pada AB dan titik Q pada AC sedemikian sehingga PQ // BC. Jika panjang AP = 6 cm dan AB = 10 cm, maka AQ : QC adalah ....",
     diagram: <SoalQ11Parallel />,
@@ -820,7 +756,7 @@ const questions: Q[] = [
       { label: "D.", math: "5 : 3" },
     ],
   }),
-  Qn(12, "Trapesium – Cari EF – TKA", {
+  Qn(11, "Trapesium – Cari EF – TKA", {
     type: "mixed",
     content: "Jika panjang PQ = 8 cm, RS = 18 cm, QF = 3 cm, dan FS = 2 cm, maka panjang EF adalah ....",
     diagram: <Q10TrapSVG />,
@@ -831,7 +767,7 @@ const questions: Q[] = [
       { label: "D.", text: "14 cm" },
     ],
   }),
-  Qn(13, "Trapesium – Garis Sejajar – Cari EF", {
+  Qn(12, "Trapesium – Garis Sejajar – Cari EF", {
     type: "mixed",
     content: "Perhatikan trapesium ABCD dengan AB ∥ EF ∥ DC. Titik E berada di sisi AD dan F berada di sisi BC sehingga AE : ED = 2 : 3. Jika AB = 5 cm dan DC = 20 cm, maka panjang EF adalah…",
     diagram: <SoalQ3 />,
@@ -842,7 +778,7 @@ const questions: Q[] = [
       { label: "D.", text: "13 cm" },
     ],
   }),
-  Qn(14, "Garis-Garis Sejajar – Cari CF", {
+  Qn(13, "Garis-Garis Sejajar – Cari CF", {
     type: "mixed",
     content: "Perhatikan gambar berikut. Jika panjang BC = CD = DE = 15 cm dan AB = 11 cm, panjang CF adalah…",
     diagram: <SoalQ7 />,
@@ -853,7 +789,7 @@ const questions: Q[] = [
       { label: "D.", text: "13 cm" },
     ],
   }),
-  Qn(15, "Garis Sejajar Bersilang – Cari BC", {
+  Qn(14, "Garis Sejajar Bersilang – Cari BC", {
     type: "mixed",
     content: "Perhatikan gambar berikut. Diketahui AB // DF, BD // GF, dan AB = BD = DF = 16 cm. Jika FG = 6 cm, maka panjang BC adalah…",
     diagram: <SoalQ8 />,
@@ -883,7 +819,7 @@ const SegitigaSebangunPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 15 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 14 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
