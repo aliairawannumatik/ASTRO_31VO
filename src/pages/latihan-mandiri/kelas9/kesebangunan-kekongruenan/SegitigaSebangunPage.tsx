@@ -555,7 +555,18 @@ const Q10TrapSVG = () => (
 );
 
 const questions: Q[] = [
-  Qn(1, "Segitiga Sebangun – Garis Sejajar – Cari CE", {
+  Qn(1, "Dua Segitiga Sebangun – Cari PR", {
+    type: "mixed",
+    content: "Diketahui △ABC ~ △PQR. Jika AB = 6 cm, BC = 8 cm, CA = 10 cm, dan PQ = 9 cm, maka panjang PR adalah…",
+    diagram: <SoalQ6 />,
+    parts: [
+      { label: "A.", text: "12 cm" },
+      { label: "B.", text: "15 cm" },
+      { label: "C.", text: "18 cm" },
+      { label: "D.", text: "20 cm" },
+    ],
+  }),
+  Qn(2, "Segitiga Sebangun – Garis Sejajar – Cari CE", {
     type: "mixed",
     content: "Perhatikan gambar berikut! Panjang CE adalah…",
     diagram: <SoalQNew1 />,
@@ -566,7 +577,7 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(2, "Trapesium – Diagonal Berpotongan – Cari CE", {
+  Qn(3, "Trapesium – Diagonal Berpotongan – Cari CE", {
     type: "mixed",
     content: "Perhatikan gambar trapesium ABCD berikut. Diagonal AC dan BD berpotongan di titik E. Jika AB = 8 cm, DC = 12 cm, dan AE = 4 cm, maka panjang CE adalah…",
     diagram: <SoalQ1 />,
@@ -577,21 +588,10 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(3, "Garis Sejajar dalam Segitiga – Cari CD dan CE", {
+  Qn(4, "Garis Sejajar dalam Segitiga – Cari CD dan CE", {
     type: "mixed",
     content: "Perhatikan gambar segitiga besar CAB dengan garis DE sejajar AB (DE ∥ AB). Diketahui DA = 4 cm, EB = 3 cm, DE = 8 cm, dan AB = 12 cm. Tentukan nilai c = CD dan d = CE!",
     diagram: <SoalQ2 />,
-  }),
-  Qn(4, "Trapesium – Garis Sejajar – Cari EF", {
-    type: "mixed",
-    content: "Perhatikan trapesium ABCD dengan AB ∥ EF ∥ DC. Titik E berada di sisi AD dan F berada di sisi BC sehingga AE : ED = 2 : 3. Jika AB = 5 cm dan DC = 20 cm, maka panjang EF adalah…",
-    diagram: <SoalQ3 />,
-    parts: [
-      { label: "A.", text: "7,5 cm" },
-      { label: "B.", text: "11 cm" },
-      { label: "C.", text: "12,5 cm" },
-      { label: "D.", text: "13 cm" },
-    ],
   }),
   Qn(5, "Lebar Sungai – Aplikasi Segitiga Sebangun", {
     type: "mixed",
@@ -615,40 +615,7 @@ const questions: Q[] = [
       { label: "D.", text: "15 cm" },
     ],
   }),
-  Qn(7, "Dua Segitiga Sebangun – Cari PR", {
-    type: "mixed",
-    content: "Diketahui △ABC ~ △PQR. Jika AB = 6 cm, BC = 8 cm, CA = 10 cm, dan PQ = 9 cm, maka panjang PR adalah…",
-    diagram: <SoalQ6 />,
-    parts: [
-      { label: "A.", text: "12 cm" },
-      { label: "B.", text: "15 cm" },
-      { label: "C.", text: "18 cm" },
-      { label: "D.", text: "20 cm" },
-    ],
-  }),
-  Qn(8, "Garis-Garis Sejajar – Cari CF", {
-    type: "mixed",
-    content: "Perhatikan gambar berikut. Jika panjang BC = CD = DE = 15 cm dan AB = 11 cm, panjang CF adalah…",
-    diagram: <SoalQ7 />,
-    parts: [
-      { label: "A.", text: "2 cm" },
-      { label: "B.", text: "8 cm" },
-      { label: "C.", text: "12 cm" },
-      { label: "D.", text: "13 cm" },
-    ],
-  }),
-  Qn(9, "Garis Sejajar Bersilang – Cari BC", {
-    type: "mixed",
-    content: "Perhatikan gambar berikut. Diketahui AB // DF, BD // GF, dan AB = BD = DF = 16 cm. Jika FG = 6 cm, maka panjang BC adalah…",
-    diagram: <SoalQ8 />,
-    parts: [
-      { label: "A.", text: "8 cm" },
-      { label: "B.", text: "9 cm" },
-      { label: "C.", text: "10 cm" },
-      { label: "D.", text: "11 cm" },
-    ],
-  }),
-  Qn(10, "Konfigurasi Kupu-Kupu – Cari AE", {
+  Qn(7, "Konfigurasi Kupu-Kupu – Cari AE", {
     type: "mixed",
     content: "Perhatikan gambar dua segitiga yang bertolak belakang di titik E (konfigurasi kupu-kupu). Diketahui AB = 9 cm, DC = 15 cm, dan AC = 20 cm. Panjang AE adalah…",
     diagram: <SoalQ9 />,
@@ -659,7 +626,7 @@ const questions: Q[] = [
       { label: "D.", text: "10,0 cm" },
     ],
   }),
-  Qn(11, "Segitiga Sebangun – Cari ST – UN", {
+  Qn(8, "Segitiga Sebangun – Cari ST – UN", {
     type: "mixed",
     content: "Dengan memperhatikan gambar di bawah, panjang ST adalah ....",
     diagram: <Q1TriSTSVG />,
@@ -670,7 +637,7 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(12, "Dua Segitiga Berpotongan – Nilai x – UN", {
+  Qn(9, "Dua Segitiga Berpotongan – Nilai x – UN", {
     type: "mixed",
     content: "Pada gambar di bawah ini, AB // CD. Nilai OB adalah ....",
     diagram: <Q3CrossLinesSVG />,
@@ -681,7 +648,7 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(13, "Median Diperpanjang – Cari BE – ANBK", {
+  Qn(10, "Median Diperpanjang – Cari BE – ANBK", {
     type: "mixed",
     content: "Garis tengah (median) CD dari △ABC, dengan D titik tengah AB, diperpanjang hingga DE = CD. Jika AC = 10 cm dan AD = DB = 8 cm, maka panjang BE adalah ....",
     diagram: <Q7MedianESVG />,
@@ -692,7 +659,7 @@ const questions: Q[] = [
       { label: "D.", text: "12 cm" },
     ],
   }),
-  Qn(14, "Segitiga Sama Kaki – Perbandingan Sisi – ANBK", {
+  Qn(11, "Segitiga Sama Kaki – Perbandingan Sisi – ANBK", {
     type: "mixed",
     content: "Diketahui △PQR adalah segitiga sama kaki dengan PQ = PR. Titik M pada PQ dan titik N pada PR sedemikian sehingga MN // QR. Jika PQ : PM = 4 : 3, maka PR : PN adalah ....",
     parts: [
@@ -702,7 +669,7 @@ const questions: Q[] = [
       { label: "D.", math: "2 : 3" },
     ],
   }),
-  Qn(15, "Garis Sejajar – Perbandingan AQ : QC – TKA", {
+  Qn(12, "Garis Sejajar – Perbandingan AQ : QC – TKA", {
     type: "mixed",
     content: "Diketahui △ABC. Titik P pada AB dan titik Q pada AC sedemikian sehingga PQ // BC. Jika panjang AP = 6 cm dan AB = 10 cm, maka AQ : QC adalah ....",
     parts: [
@@ -712,7 +679,7 @@ const questions: Q[] = [
       { label: "D.", math: "5 : 3" },
     ],
   }),
-  Qn(16, "Trapesium – Cari EF – TKA", {
+  Qn(13, "Trapesium – Cari EF – TKA", {
     type: "mixed",
     content: "Jika panjang PQ = 8 cm, RS = 18 cm, QF = 3 cm, dan FS = 2 cm, maka panjang EF adalah ....",
     diagram: <Q10TrapSVG />,
@@ -721,6 +688,39 @@ const questions: Q[] = [
       { label: "B.", text: "11 cm" },
       { label: "C.", text: "12 cm" },
       { label: "D.", text: "14 cm" },
+    ],
+  }),
+  Qn(14, "Trapesium – Garis Sejajar – Cari EF", {
+    type: "mixed",
+    content: "Perhatikan trapesium ABCD dengan AB ∥ EF ∥ DC. Titik E berada di sisi AD dan F berada di sisi BC sehingga AE : ED = 2 : 3. Jika AB = 5 cm dan DC = 20 cm, maka panjang EF adalah…",
+    diagram: <SoalQ3 />,
+    parts: [
+      { label: "A.", text: "7,5 cm" },
+      { label: "B.", text: "11 cm" },
+      { label: "C.", text: "12,5 cm" },
+      { label: "D.", text: "13 cm" },
+    ],
+  }),
+  Qn(15, "Garis-Garis Sejajar – Cari CF", {
+    type: "mixed",
+    content: "Perhatikan gambar berikut. Jika panjang BC = CD = DE = 15 cm dan AB = 11 cm, panjang CF adalah…",
+    diagram: <SoalQ7 />,
+    parts: [
+      { label: "A.", text: "2 cm" },
+      { label: "B.", text: "8 cm" },
+      { label: "C.", text: "12 cm" },
+      { label: "D.", text: "13 cm" },
+    ],
+  }),
+  Qn(16, "Garis Sejajar Bersilang – Cari BC", {
+    type: "mixed",
+    content: "Perhatikan gambar berikut. Diketahui AB // DF, BD // GF, dan AB = BD = DF = 16 cm. Jika FG = 6 cm, maka panjang BC adalah…",
+    diagram: <SoalQ8 />,
+    parts: [
+      { label: "A.", text: "8 cm" },
+      { label: "B.", text: "9 cm" },
+      { label: "C.", text: "10 cm" },
+      { label: "D.", text: "11 cm" },
     ],
   }),
 ];
