@@ -124,31 +124,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 5, title: "Volume Kerucut – Diameter Diketahui",
-    content: "Sebuah kerucut berdiameter 21 cm dan tinggi 20 cm. Volume kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="10,5 cm" h="20 cm" />,
-    options: [
-      { key: "A", text: "2.310 cm³" },
-      { key: "B", text: "3.465 cm³" },
-      { key: "C", text: "4.620 cm³" },
-      { key: "D", text: "6.930 cm³" },
-    ],
-    answer: "A",
-  },
-  {
-    n: 6, title: "Mencari Tinggi dari Volume",
-    content: "Volume sebuah kerucut adalah 1.232 cm³. Jika jari-jarinya 7 cm, tinggi kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="7 cm" h="?" />,
-    options: [
-      { key: "A", text: "12 cm" },
-      { key: "B", text: "18 cm" },
-      { key: "C", text: "20 cm" },
-      { key: "D", text: "24 cm" },
-    ],
-    answer: "D",
-  },
-  {
-    n: 7, title: "Mencari Jari-Jari dari Volume",
+    n: 5, title: "Mencari Jari-Jari dari Volume",
     content: "Volume sebuah kerucut adalah 2.512 cm³ dan tingginya 24 cm. Jari-jari alas kerucut tersebut adalah ... (π = 3,14)",
     diagram: <ConeSVG r="?" h="24 cm" />,
     options: [
@@ -160,31 +136,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 8, title: "Mencari Garis Pelukis dari Luas Selimut",
-    content: "Luas selimut sebuah kerucut adalah 550 cm². Jika jari-jarinya 7 cm, garis pelukis kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="7 cm" s="?" />,
-    options: [
-      { key: "A", text: "20 cm" },
-      { key: "B", text: "22 cm" },
-      { key: "C", text: "25 cm" },
-      { key: "D", text: "28 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 9, title: "Luas Selimut dari Jaring-Jaring",
-    content: "Sebuah kerucut memiliki r = 7 cm dan garis pelukis s = 13 cm. Luas selimut kerucut tersebut adalah ... (π = 22/7)",
-    diagram: <ConeNetSVG />,
-    options: [
-      { key: "A", text: "242 cm²" },
-      { key: "B", text: "264 cm²" },
-      { key: "C", text: "286 cm²" },
-      { key: "D", text: "308 cm²" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 10, title: "Soal Cerita – Topi Kerucut",
+    n: 6, title: "Soal Cerita – Topi Kerucut",
     content: "Sebuah topi berbentuk kerucut dengan r = 14 cm dan garis pelukis 25 cm. Luas kain yang dibutuhkan untuk membuat satu topi adalah ... (π = 22/7)",
     diagram: <ConeSVG r="14 cm" s="25 cm" color="#f472b6" extraLabel="Topi" />,
     options: [
@@ -196,7 +148,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 11, title: "Soal Cerita – Corong Kerucut",
+    n: 7, title: "Soal Cerita – Corong Kerucut",
     content: "Sebuah corong berbentuk kerucut tanpa alas memiliki r = 10 cm dan s = 26 cm. Luas selimut corong tersebut adalah ... (π = 3,14)",
     diagram: <ConeSVG r="10 cm" s="26 cm" showHeight={false} />,
     options: [
@@ -208,19 +160,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 12, title: "Volume Kerucut – Cornet Es Krim",
-    content: "Sebuah cornet es krim berbentuk kerucut dengan r = 3,5 cm dan t = 12 cm. Volume es krim yang dapat dimuat adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="3,5 cm" h="12 cm" color="#f472b6" extraLabel="Es Krim" />,
-    options: [
-      { key: "A", text: "77 cm³" },
-      { key: "B", text: "154 cm³" },
-      { key: "C", text: "231 cm³" },
-      { key: "D", text: "308 cm³" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 13, title: "Perbandingan Volume Dua Kerucut",
+    n: 8, title: "Perbandingan Volume Dua Kerucut",
     content: "Kerucut A memiliki r = 6 cm dan t = 4 cm. Kerucut B memiliki r = 3 cm dan t = 8 cm. Perbandingan volume A : B adalah ...",
     options: [
       { key: "A", text: "1 : 1" },
@@ -231,7 +171,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 14, title: "Biaya Pengecatan Selimut Kerucut",
+    n: 9, title: "Biaya Pengecatan Selimut Kerucut",
     content: "Sebuah kerucut dengan r = 7 cm dan s = 20 cm akan dicat. Jika biaya pengecatan Rp2.000 per cm², total biaya pengecatan adalah ... (π = 22/7)",
     diagram: <ConeSVG r="7 cm" s="20 cm" color="#a78bfa" />,
     options: [
@@ -243,19 +183,7 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 15, title: "ANBK – Kerucut dalam Kubus",
-    content: "Sebuah kerucut dengan r = 7 cm dan t = 12 cm dimasukkan ke dalam kubus bersisi 14 cm. Volume ruang yang tersisa di dalam kubus adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="7 cm" h="12 cm" />,
-    options: [
-      { key: "A", text: "1.848 cm³" },
-      { key: "B", text: "2.128 cm³" },
-      { key: "C", text: "2.744 cm³" },
-      { key: "D", text: "3.360 cm³" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 16, title: "TKA – Perbandingan Luas Selimut",
+    n: 10, title: "TKA – Perbandingan Luas Selimut",
     content: "Dua kerucut mempunyai garis pelukis yang sama. Perbandingan jari-jari kerucut pertama dan kedua adalah 3 : 5. Perbandingan luas selimut kedua kerucut adalah ...",
     options: [
       { key: "A", text: "9 : 25" },
@@ -266,18 +194,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 17, title: "Volume Kerucut dari Tabung",
-    content: "Volume kerucut sama dengan sepertiga volume tabung dengan ukuran yang sama. Jika tabung memiliki r = 14 cm dan t = 9 cm, volume kerucut tersebut adalah ... (π = 22/7)",
-    options: [
-      { key: "A", text: "1.386 cm³" },
-      { key: "B", text: "1.848 cm³" },
-      { key: "C", text: "2.772 cm³" },
-      { key: "D", text: "5.544 cm³" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 18, title: "ANBK – Biaya Membuat Kerucut",
+    n: 11, title: "ANBK – Biaya Membuat Kerucut",
     content: "Sebuah kerucut dengan r = 5 cm dan s = 13 cm akan dibuat dari lembaran seng. Jika harga seng Rp1.500 per cm², biaya membuat 5 kerucut tanpa alas adalah ... (π = 3,14)",
     diagram: <ConeSVG r="5 cm" s="13 cm" />,
     options: [
@@ -289,7 +206,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 19, title: "TKA – Volume dari Luas Alas",
+    n: 12, title: "TKA – Volume dari Luas Alas",
     content: "Luas alas sebuah kerucut adalah 154 cm² dan tingginya 18 cm. Volume kerucut tersebut adalah ...",
     options: [
       { key: "A", text: "616 cm³" },
@@ -300,7 +217,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 20, title: "Perbandingan Volume Kerucut dan Tabung",
+    n: 13, title: "Perbandingan Volume Kerucut dan Tabung",
     content: "Sebuah kerucut dan tabung memiliki jari-jari dan tinggi yang sama. Perbandingan volume kerucut terhadap volume tabung adalah ...",
     options: [
       { key: "A", text: "1 : 2" },
@@ -311,7 +228,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 21, title: "Soal Terapan – Karton Topi Ulang Tahun",
+    n: 14, title: "Soal Terapan – Karton Topi Ulang Tahun",
     content: "Seorang anak membuat 10 topi ulang tahun berbentuk kerucut dari karton, setiap topi r = 7 cm dan s = 25 cm. Total karton yang dibutuhkan dalam m² adalah ... (π = 22/7)",
     diagram: <ConeSVG r="7 cm" s="25 cm" color="#f472b6" extraLabel="× 10 topi" />,
     options: [
@@ -323,74 +240,7 @@ const questions: Q[] = [
     answer: "B",
   },
   {
-    n: 22, title: "Mencari Jari-Jari dari Luas Permukaan",
-    content: "Luas permukaan total sebuah kerucut adalah 282,6 cm². Jika garis pelukisnya 13 cm, jari-jari alas kerucut tersebut adalah ... (π = 3,14)",
-    options: [
-      { key: "A", text: "3 cm" },
-      { key: "B", text: "5 cm" },
-      { key: "C", text: "7 cm" },
-      { key: "D", text: "9 cm" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 23, title: "Perbandingan Luas Selimut Dua Kerucut",
-    content: "Kerucut P memiliki r = 6 cm dan s = 10 cm. Kerucut Q memiliki r = 9 cm dan s = 15 cm. Perbandingan luas selimut P : Q adalah ...",
-    options: [
-      { key: "A", text: "2 : 3" },
-      { key: "B", text: "4 : 9" },
-      { key: "C", text: "1 : 2" },
-      { key: "D", text: "6 : 15" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 24, title: "Juring → Kerucut: Jari-Jari Alas",
-    content: "Sebuah juring lingkaran berjari-jari 15 cm dengan sudut pusat 120° dilipat menjadi selimut kerucut. Jari-jari alas kerucut yang terbentuk adalah ...",
-    options: [
-      { key: "A", text: "3 cm" },
-      { key: "B", text: "4 cm" },
-      { key: "C", text: "5 cm" },
-      { key: "D", text: "6 cm" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 25, title: "Aplikasi – Kubah Masjid",
-    content: "Atap menara masjid berbentuk kerucut dengan r = 3,5 m dan s = 6,5 m. Seluruh selimut dicat dengan biaya Rp80.000 per m². Total biaya pengecatan adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="3,5 m" s="6,5 m" color="#a78bfa" extraLabel="Kubah Masjid" />,
-    options: [
-      { key: "A", text: "Rp 4.800.000" },
-      { key: "B", text: "Rp 5.200.000" },
-      { key: "C", text: "Rp 5.720.000" },
-      { key: "D", text: "Rp 6.160.000" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 26, title: "Aplikasi – Kap Lampu (Kerucut Terpancung)",
-    content: "Kap lampu berbentuk kerucut terpancung dengan r₁ = 4 cm (atas), r₂ = 12 cm (bawah), tinggi 9 cm. Volume kerucut kecil yang dipotong adalah ... (π = 3,14)",
-    options: [
-      { key: "A", text: "50,24 cm³" },
-      { key: "B", text: "75,36 cm³" },
-      { key: "C", text: "100,48 cm³" },
-      { key: "D", text: "150,72 cm³" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 27, title: "TKA – Perbandingan r : s = 3 : 5",
-    content: "Sebuah kerucut memiliki perbandingan r : s = 3 : 5. Jika luas selimutnya 135π cm², nilai r dan s adalah ...",
-    options: [
-      { key: "A", text: "r = 6 cm, s = 10 cm" },
-      { key: "B", text: "r = 9 cm, s = 15 cm" },
-      { key: "C", text: "r = 12 cm, s = 20 cm" },
-      { key: "D", text: "r = 3 cm, s = 5 cm" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 28, title: "HOTS – r : s = 7 : 25, Volume",
+    n: 15, title: "HOTS – r : s = 7 : 25, Volume",
     content: "Sebuah kerucut memiliki perbandingan r : s = 7 : 25. Jika luas selimutnya 550 cm², volume kerucut tersebut adalah ... (π = 22/7)",
     options: [
       { key: "A", text: "616 cm³" },
@@ -448,7 +298,7 @@ const KerucutPage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-              <span className="text-orange-400 text-xs font-bold">📋 28 Soal Pilihan Ganda</span>
+              <span className="text-orange-400 text-xs font-bold">📋 15 Soal Pilihan Ganda</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
