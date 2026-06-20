@@ -31,34 +31,33 @@ const SoalQ1 = () => (
 );
 
 const SoalQ2 = () => {
-  // Reflected across x-axis (y → 215 − y):
-  // A bottom-left, B top-left (AB vertical), C top-right, BC horizontal at top
-  const A={x:55, y:190}, B={x:55, y:20},  C={x:290, y:20};
-  // D on AB at 2/3 from A (going up), E on AC at 2/3 from A → DE ∥ BC (horizontal)
-  const D={x:55,  y:77},  E={x:212, y:77};
+  // A top-left, B bottom-left (AB vertical, right angle at B), C bottom-right, BC horizontal at bottom
+  const A={x:55, y:25}, B={x:55, y:195}, C={x:290, y:195};
+  // D on AB at 2/3 from A (going down), E on AC at 2/3 from A → DE ∥ BC (horizontal)
+  const D={x:55, y:138}, E={x:212, y:138};
   return (
     <svg viewBox="0 0 320 215" className="w-full max-w-xs mx-auto">
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`} fill="#3b82f6" fillOpacity="0.10" stroke="#60a5fa" strokeWidth="2"/>
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="2.2"/>
       {/* Right-pointing arrow on DE (parallel indicator) */}
-      <polygon points="128,74 136,77 128,80" fill="#4ade80"/>
+      <polygon points="128,135 136,138 128,141" fill="#4ade80"/>
       {/* Right-pointing arrow on BC (parallel indicator) */}
-      <polygon points="166,17 174,20 166,23" fill="#60a5fa"/>
+      <polygon points="166,192 174,195 166,198" fill="#60a5fa"/>
       <text x={A.x-14} y={A.y+12} fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x-14} y={B.y-4}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={C.x+4}  y={C.y-4}  fontSize="13" fill="#93c5fd" fontWeight="bold">C</text>
-      <text x={D.x-14} y={D.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">D</text>
-      <text x={E.x+4}  y={E.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">E</text>
-      {/* c = AD along left vertical side (A bottom → D) */}
-      <text x="62"  y="138" fontSize="12" fill="#f97316" fontWeight="bold">c</text>
-      {/* 4 cm = DB along left vertical side (D → B top) */}
-      <text x="62"  y="50"  fontSize="11" fill="#fbbf24" fontWeight="bold">4 cm</text>
-      {/* d = AE along hypotenuse AC, lower part */}
-      <text x="128" y="148" fontSize="12" fill="#a855f7" fontWeight="bold">d</text>
-      {/* 3 cm = EC along hypotenuse AC, upper part */}
-      <text x="254" y="46"  fontSize="11" fill="#fbbf24" fontWeight="bold">3 cm</text>
-      <text x={(D.x+E.x)/2} y={D.y+14} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">DE = 8 cm</text>
-      <text x={(B.x+C.x)/2} y={B.y+34} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">BC = 12 cm</text>
+      <text x={B.x-14} y={B.y+14} fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
+      <text x={C.x+4}  y={C.y+14} fontSize="13" fill="#93c5fd" fontWeight="bold">E</text>
+      <text x={D.x-14} y={D.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">B</text>
+      <text x={E.x+4}  y={E.y+5}  fontSize="12" fill="#4ade80" fontWeight="bold">C</text>
+      {/* c = AB along left vertical side (A top → B) */}
+      <text x="62"  y="86"  fontSize="12" fill="#f97316" fontWeight="bold">c</text>
+      {/* 4 cm = BD along left vertical side (B → D bottom) */}
+      <text x="62"  y="172" fontSize="11" fill="#fbbf24" fontWeight="bold">4 cm</text>
+      {/* d = AC along hypotenuse AE, upper part */}
+      <text x="126" y="82"  fontSize="12" fill="#a855f7" fontWeight="bold">d</text>
+      {/* 3 cm = CE along hypotenuse AE, lower part */}
+      <text x="242" y="176" fontSize="11" fill="#fbbf24" fontWeight="bold">3 cm</text>
+      <text x={(D.x+E.x)/2} y={D.y-6} textAnchor="middle" fontSize="11" fill="#4ade80" fontWeight="bold">BC = 8 cm</text>
+      <text x={(B.x+C.x)/2} y={B.y+18} textAnchor="middle" fontSize="11" fill="#fde68a" fontWeight="bold">DE = 12 cm</text>
     </svg>
   );
 };
@@ -577,9 +576,9 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(3, "Garis Sejajar dalam Segitiga – Cari AD dan AE", {
+  Qn(3, "Garis Sejajar dalam Segitiga – Cari AB dan AC", {
     type: "mixed",
-    content: "Perhatikan gambar segitiga besar ABC dengan garis DE sejajar BC (DE ∥ BC). Diketahui DB = 4 cm, EC = 3 cm, DE = 8 cm, dan BC = 12 cm. Tentukan nilai c = AD dan d = AE!",
+    content: "Perhatikan gambar segitiga besar ADE dengan garis BC sejajar DE (BC ∥ DE). Diketahui BD = 4 cm, CE = 3 cm, BC = 8 cm, dan DE = 12 cm. Tentukan nilai c = AB dan d = AC!",
     diagram: <SoalQ2 />,
   }),
   Qn(4, "Trapesium – Garis Sejajar – Cari EF", {
