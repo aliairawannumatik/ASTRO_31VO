@@ -591,26 +591,6 @@ const Q6TriDE2SVG = () => (
   </svg>
 );
 
-const Q7MedianESVG = () => (
-  <svg viewBox="0 0 270 185" width="265" height="180" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
-    <polygon points="50,90 230,90 95,20" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
-    <line x1="95" y1="20" x2="140" y2="90" stroke="#c084fc" strokeWidth="1.5"/>
-    <line x1="140" y1="90" x2="185" y2="160" stroke="#c084fc" strokeWidth="1.5" strokeDasharray="5,3"/>
-    <line x1="230" y1="90" x2="185" y2="160" stroke="#7c3aed" strokeWidth="1.5" strokeDasharray="5,3"/>
-    <line x1="112" y1="59" x2="118" y2="51" stroke="#fbbf24" strokeWidth="1.5"/>
-    <line x1="157" y1="129" x2="163" y2="121" stroke="#fbbf24" strokeWidth="1.5"/>
-    <text x="36" y="94" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
-    <text x="232" y="94" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
-    <text x="86" y="15" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
-    <text x="132" y="106" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
-    <text x="182" y="173" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">E</text>
-    <text x="22" y="56" fill="#c084fc" fontSize="10" fontWeight="bold">AC = 10 cm</text>
-    <text x="88" y="107" fill="#fbbf24" fontSize="9" fontWeight="bold">AD=DB=8cm</text>
-    <text x="192" y="128" fill="#fb923c" fontSize="10" fontWeight="bold">BE = ?</text>
-    <text x="108" y="43" fill="#fbbf24" fontSize="9">CD=DE</text>
-  </svg>
-);
-
 const Q10TrapSVG = () => (
   <svg viewBox="0 0 265 140" width="258" height="135" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
     <polygon points="60,20 200,20 240,120 20,120" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
@@ -717,18 +697,7 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(10, "Median Diperpanjang – Cari BE – ANBK", {
-    type: "mixed",
-    content: "Garis tengah (median) CD dari △ABC, dengan D titik tengah AB, diperpanjang hingga DE = CD. Jika AC = 10 cm dan AD = DB = 8 cm, maka panjang BE adalah ....",
-    diagram: <Q7MedianESVG />,
-    parts: [
-      { label: "A.", text: "8 cm" },
-      { label: "B.", text: "9 cm" },
-      { label: "C.", text: "10 cm" },
-      { label: "D.", text: "12 cm" },
-    ],
-  }),
-  Qn(11, "Segitiga Sama Kaki – Perbandingan Sisi – ANBK", {
+  Qn(10, "Segitiga Sama Kaki – Perbandingan Sisi – ANBK", {
     type: "mixed",
     content: "Diketahui △PQR adalah segitiga sama kaki dengan PQ = PR. Titik M pada PQ dan titik N pada PR sedemikian sehingga MN // QR. Jika PQ : PM = 4 : 3, maka PR : PN adalah ....",
     parts: [
@@ -738,7 +707,7 @@ const questions: Q[] = [
       { label: "D.", math: "2 : 3" },
     ],
   }),
-  Qn(12, "Garis Sejajar – Perbandingan AQ : QC – TKA", {
+  Qn(11, "Garis Sejajar – Perbandingan AQ : QC – TKA", {
     type: "mixed",
     content: "Diketahui △ABC. Titik P pada AB dan titik Q pada AC sedemikian sehingga PQ // BC. Jika panjang AP = 6 cm dan AB = 10 cm, maka AQ : QC adalah ....",
     parts: [
@@ -748,7 +717,7 @@ const questions: Q[] = [
       { label: "D.", math: "5 : 3" },
     ],
   }),
-  Qn(13, "Trapesium – Cari EF – TKA", {
+  Qn(12, "Trapesium – Cari EF – TKA", {
     type: "mixed",
     content: "Jika panjang PQ = 8 cm, RS = 18 cm, QF = 3 cm, dan FS = 2 cm, maka panjang EF adalah ....",
     diagram: <Q10TrapSVG />,
@@ -759,7 +728,7 @@ const questions: Q[] = [
       { label: "D.", text: "14 cm" },
     ],
   }),
-  Qn(14, "Trapesium – Garis Sejajar – Cari EF", {
+  Qn(13, "Trapesium – Garis Sejajar – Cari EF", {
     type: "mixed",
     content: "Perhatikan trapesium ABCD dengan AB ∥ EF ∥ DC. Titik E berada di sisi AD dan F berada di sisi BC sehingga AE : ED = 2 : 3. Jika AB = 5 cm dan DC = 20 cm, maka panjang EF adalah…",
     diagram: <SoalQ3 />,
@@ -770,7 +739,7 @@ const questions: Q[] = [
       { label: "D.", text: "13 cm" },
     ],
   }),
-  Qn(15, "Garis-Garis Sejajar – Cari CF", {
+  Qn(14, "Garis-Garis Sejajar – Cari CF", {
     type: "mixed",
     content: "Perhatikan gambar berikut. Jika panjang BC = CD = DE = 15 cm dan AB = 11 cm, panjang CF adalah…",
     diagram: <SoalQ7 />,
@@ -781,7 +750,7 @@ const questions: Q[] = [
       { label: "D.", text: "13 cm" },
     ],
   }),
-  Qn(16, "Garis Sejajar Bersilang – Cari BC", {
+  Qn(15, "Garis Sejajar Bersilang – Cari BC", {
     type: "mixed",
     content: "Perhatikan gambar berikut. Diketahui AB // DF, BD // GF, dan AB = BD = DF = 16 cm. Jika FG = 6 cm, maka panjang BC adalah…",
     diagram: <SoalQ8 />,
@@ -811,7 +780,7 @@ const SegitigaSebangunPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 16 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
