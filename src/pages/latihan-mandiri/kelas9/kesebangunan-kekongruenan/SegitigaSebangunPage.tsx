@@ -179,53 +179,48 @@ const SoalQ5 = () => {
 const SoalQ6 = () => {
   // △ABC right-angled at B: AB=6, BC=8, CA=10 (6-8-10 Pythagorean triple)
   // Scale: 7 px/cm
-  const A={x:18,  y:170};
-  const B={x:60,  y:170}; // right angle at B
-  const C={x:60,  y:114};
-  // △PQR right-angled at Q: PQ=9, QR=12, PR=15
-  const P={x:165, y:170};
-  const Q={x:228, y:170}; // right angle at Q
-  const R={x:228, y:86};
-  // Right-angle square size
+  // Shift base up to y=108 so R (tallest point) sits near y=24 — no wasted top space
+  const base = 108;
+  const Av={x:18,  y:base};
+  const Bv={x:60,  y:base};
+  const Cv={x:60,  y:base-56}; // BC=8 → 56px
+  const Pv={x:165, y:base};
+  const Qv={x:228, y:base};
+  const Rv={x:228, y:base-84}; // QR=12 → 84px
   const sq = 7;
   return (
-    <svg viewBox="0 0 300 198" className="w-full max-w-sm mx-auto">
-      {/* Label top */}
-      <text x="150" y="13" textAnchor="middle" fontSize="10" fill="#fbbf24" fontWeight="bold">△ABC ~ △PQR</text>
-
+    <svg viewBox="0 0 300 128" className="w-full max-w-sm mx-auto">
       {/* ── Triangle ABC ── */}
-      <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
+      <polygon points={`${Av.x},${Av.y} ${Bv.x},${Bv.y} ${Cv.x},${Cv.y}`}
         fill="#3b82f6" fillOpacity="0.15" stroke="#60a5fa" strokeWidth="2"/>
       {/* Right-angle mark at B */}
-      <path d={`M ${B.x},${B.y-sq} L ${B.x-sq},${B.y-sq} L ${B.x-sq},${B.y}`}
+      <path d={`M ${Bv.x},${Bv.y-sq} L ${Bv.x-sq},${Bv.y-sq} L ${Bv.x-sq},${Bv.y}`}
         fill="none" stroke="#ffffff" strokeWidth="1.4"/>
       {/* Vertex labels */}
-      <text x={A.x-14} y={A.y+5}  fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x+3}  y={B.y+13} fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={C.x+4}  y={C.y+5}  fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
+      <text x={Av.x-14} y={Av.y+5}  fontSize="12" fill="#93c5fd" fontWeight="bold">A</text>
+      <text x={Bv.x+3}  y={Bv.y+13} fontSize="12" fill="#93c5fd" fontWeight="bold">B</text>
+      <text x={Cv.x+4}  y={Cv.y+5}  fontSize="12" fill="#93c5fd" fontWeight="bold">C</text>
       {/* Side labels */}
-      <text x={(A.x+B.x)/2} y={A.y+14} textAnchor="middle" fontSize="10" fill="#f97316" fontWeight="bold">AB=6</text>
-      <text x={C.x+4}       y={(B.y+C.y)/2+4} fontSize="10" fill="#4ade80" fontWeight="bold">BC=8</text>
-      {/* CA hypotenuse label — midpoint offset to left */}
-      <text x={(A.x+C.x)/2-22} y={(A.y+C.y)/2} fontSize="10" fill="#fde68a" fontWeight="bold">CA=10</text>
+      <text x={(Av.x+Bv.x)/2} y={Av.y+14} textAnchor="middle" fontSize="10" fill="#f97316" fontWeight="bold">AB=6</text>
+      <text x={Cv.x+4}        y={(Bv.y+Cv.y)/2+4} fontSize="10" fill="#4ade80" fontWeight="bold">BC=8</text>
+      <text x={(Av.x+Cv.x)/2-22} y={(Av.y+Cv.y)/2} fontSize="10" fill="#fde68a" fontWeight="bold">CA=10</text>
 
       {/* ~ symbol between triangles */}
-      <text x="136" y="155" textAnchor="middle" fontSize="18" fill="#facc15">~</text>
+      <text x="136" y={base-10} textAnchor="middle" fontSize="16" fill="#facc15">~</text>
 
       {/* ── Triangle PQR ── */}
-      <polygon points={`${P.x},${P.y} ${Q.x},${Q.y} ${R.x},${R.y}`}
+      <polygon points={`${Pv.x},${Pv.y} ${Qv.x},${Qv.y} ${Rv.x},${Rv.y}`}
         fill="#22c55e" fillOpacity="0.15" stroke="#4ade80" strokeWidth="2"/>
       {/* Right-angle mark at Q */}
-      <path d={`M ${Q.x},${Q.y-sq} L ${Q.x-sq},${Q.y-sq} L ${Q.x-sq},${Q.y}`}
+      <path d={`M ${Qv.x},${Qv.y-sq} L ${Qv.x-sq},${Qv.y-sq} L ${Qv.x-sq},${Qv.y}`}
         fill="none" stroke="#ffffff" strokeWidth="1.4"/>
       {/* Vertex labels */}
-      <text x={P.x-14} y={P.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">P</text>
-      <text x={Q.x+3}  y={Q.y+13} fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
-      <text x={R.x+4}  y={R.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">R</text>
+      <text x={Pv.x-14} y={Pv.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">P</text>
+      <text x={Qv.x+3}  y={Qv.y+13} fontSize="12" fill="#86efac" fontWeight="bold">Q</text>
+      <text x={Rv.x+4}  y={Rv.y+5}  fontSize="12" fill="#86efac" fontWeight="bold">R</text>
       {/* Side labels */}
-      <text x={(P.x+Q.x)/2} y={P.y+14} textAnchor="middle" fontSize="10" fill="#f97316" fontWeight="bold">PQ=9</text>
-      {/* PR hypotenuse label */}
-      <text x={(P.x+R.x)/2-24} y={(P.y+R.y)/2} fontSize="10" fill="#ef4444" fontWeight="bold">PR = ?</text>
+      <text x={(Pv.x+Qv.x)/2} y={Pv.y+14} textAnchor="middle" fontSize="10" fill="#f97316" fontWeight="bold">PQ=9</text>
+      <text x={(Pv.x+Rv.x)/2-24} y={(Pv.y+Rv.y)/2} fontSize="10" fill="#ef4444" fontWeight="bold">PR = ?</text>
     </svg>
   );
 };
