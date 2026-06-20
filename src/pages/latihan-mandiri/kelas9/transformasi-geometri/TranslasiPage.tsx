@@ -129,8 +129,8 @@ const questions: Q[] = [
         <Poly pts={[[1,1],[3,1],[3,3],[1,3]]} color="#22d3ee" label="A"/>
         <Poly pts={[[3,3],[5,3],[5,5],[3,5]]} color="#f472b6" fill="rgba(244,114,182,0.12)" label="A'"/>
         <Arrow x1={1} y1={1} x2={3} y2={3} color="#facc15"/>
-        <Dot x={1} y={1} color="#22d3ee" label="(1,1)"/>
-        <Dot x={3} y={3} color="#f472b6" label="(3,3)"/>
+        <Dot x={1} y={1} color="#22d3ee"/>
+        <Dot x={3} y={3} color="#f472b6"/>
       </GridSVG>
     ),
   }),
@@ -142,9 +142,9 @@ const questions: Q[] = [
         <Poly pts={[[0,0],[4,0],[2,3]]} color="#22d3ee" label="\u25b3PQR"/>
         <Poly pts={[[-3,-2],[1,-2],[-1,1]]} color="#f472b6" fill="rgba(244,114,182,0.12)" label="\u25b3P'Q'R'"/>
         <Arrow x1={0} y1={0} x2={-3} y2={-2} color="#facc15"/>
-        <Dot x={0} y={0} color="#22d3ee" r={3} label="P(0,0)"/>
-        <Dot x={4} y={0} color="#22d3ee" r={3} label="Q(4,0)"/>
-        <Dot x={2} y={3} color="#22d3ee" r={3} label="R(2,3)"/>
+        <Dot x={0} y={0} color="#22d3ee" r={3}/>
+        <Dot x={4} y={0} color="#22d3ee" r={3}/>
+        <Dot x={2} y={3} color="#22d3ee" r={3}/>
       </GridSVG>
     ),
   }),
