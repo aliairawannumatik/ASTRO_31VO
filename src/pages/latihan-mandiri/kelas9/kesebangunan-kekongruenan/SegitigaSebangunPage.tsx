@@ -434,51 +434,29 @@ const SoalQNew1 = () => {
 
 const SoalQ7New = () => {
   // Triangle ABC: B top-left, A bottom-left, C bottom-right
-  // D on AC (AD=9, DC=6); E on BC; BD drawn; right angle at D
-  // x = BE, y = AB
+  // D on AC (AD=9, DC=6); E on BC (far along BC so DE is nearly horizontal, clearly ≠ AB slope)
+  // x = BE, y = AB  — no BD line shown
   const A = { x: 28,  y: 195 };
-  const C = { x: 288, y: 195 };
-  // D divides AC in ratio 9:6 = 3:2 from A
-  const D = { x: 28 + (9/15) * 260, y: 195 }; // = 184
   const B = { x: 82,  y: 28  };
-  const C2 = { x: 288, y: 195 };
-  // E on segment BC, roughly 55% from B toward C
-  const t = 0.55;
-  const E = { x: Math.round(B.x + t * (C2.x - B.x)), y: Math.round(B.y + t * (C2.y - B.y)) };
+  const C = { x: 288, y: 195 };
+  // D divides AC: AD=9, DC=6 → ratio 3:2 from A
+  const D = { x: Math.round(A.x + (9/15) * (C.x - A.x)), y: 195 }; // ≈ 184
+  // E on BC at t=0.78 → DE is nearly horizontal, AB is steep — clearly not parallel
+  const t = 0.78;
+  const E = { x: Math.round(B.x + t * (C.x - B.x)), y: Math.round(B.y + t * (C.y - B.y)) };
 
-  // Right-angle mark at D (angle BDA ≈ 90°): small square
-  const sq = 8;
-  // BD direction unit vector (from D to B)
-  const bdx = B.x - D.x, bdy = B.y - D.y;
-  const bdLen = Math.sqrt(bdx*bdx + bdy*bdy);
-  const ubx = bdx/bdLen, uby = bdy/bdLen;
-  // AD direction unit (from D to A, i.e. left)
-  const adLen = D.x - A.x;
-  const uax = (A.x - D.x)/adLen, uay = 0;
-  // Square corners: D + sq*(ubx,uby), D + sq*(ubx+uax, uby+uay), D + sq*(uax,uay)
-  const sq1 = { x: D.x + sq*ubx,       y: D.y + sq*uby       };
-  const sq2 = { x: D.x + sq*ubx + sq*uax, y: D.y + sq*uby + sq*uay };
-  const sq3 = { x: D.x + sq*uax,       y: D.y + sq*uay       };
-
-  // Mid-points for labels
-  const midAB = { x: (A.x+B.x)/2, y: (A.y+B.y)/2 };
-  const midBE = { x: (B.x+E.x)/2, y: (B.y+E.y)/2 };
-  const midDE = { x: (D.x+E.x)/2, y: (D.y+E.y)/2 };
-  const midEC = { x: (E.x+C.x)/2, y: (E.y+C.y)/2 };
+  const midAB = { x: Math.round((A.x+B.x)/2), y: Math.round((A.y+B.y)/2) };
+  const midBE = { x: Math.round((B.x+E.x)/2), y: Math.round((B.y+E.y)/2) };
+  const midDE = { x: Math.round((D.x+E.x)/2), y: Math.round((D.y+E.y)/2) };
+  const midEC = { x: Math.round((E.x+C.x)/2), y: Math.round((E.y+C.y)/2) };
 
   return (
     <svg viewBox="0 0 320 225" className="w-full max-w-sm mx-auto" style={{ background:"rgba(15,23,42,0.6)", borderRadius:8 }}>
       {/* Main triangle ABC */}
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
         fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1.8"/>
-      {/* BD line */}
-      <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#a78bfa" strokeWidth="1.8" strokeDasharray="5,3"/>
-      {/* DE line */}
+      {/* DE line — nearly horizontal, clearly different angle from steep AB */}
       <line x1={D.x} y1={D.y} x2={E.x} y2={E.y} stroke="#4ade80" strokeWidth="1.8"/>
-      {/* Right-angle square at D */}
-      <polyline
-        points={`${sq1.x.toFixed(1)},${sq1.y.toFixed(1)} ${sq2.x.toFixed(1)},${sq2.y.toFixed(1)} ${sq3.x.toFixed(1)},${sq3.y.toFixed(1)}`}
-        fill="none" stroke="#e2e8f0" strokeWidth="1.2"/>
       {/* Vertex dots */}
       <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
       <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
@@ -487,15 +465,15 @@ const SoalQ7New = () => {
       <circle cx={E.x} cy={E.y} r="3.5" fill="#4ade80"/>
       {/* Vertex labels */}
       <text x={B.x-14} y={B.y+5}  fontSize="14" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={E.x+5}  y={E.y+5}  fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
+      <text x={E.x+5}  y={E.y}    fontSize="13" fill="#4ade80" fontWeight="bold">E</text>
       <text x={A.x-16} y={A.y+5}  fontSize="14" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={D.x-3}  y={D.y+16} fontSize="13" fill="#fbbf24" fontWeight="bold">D</text>
+      <text x={D.x-4}  y={D.y+16} fontSize="13" fill="#fbbf24" fontWeight="bold">D</text>
       <text x={C.x+4}  y={C.y+5}  fontSize="14" fill="#93c5fd" fontWeight="bold">C</text>
       {/* Measurement labels */}
-      <text x={midAB.x-28} y={midAB.y}   fontSize="11" fill="#f97316" fontWeight="bold">y</text>
-      <text x={midBE.x-2}  y={midBE.y-8} fontSize="11" fill="#ef4444" fontWeight="bold">x</text>
-      <text x={midDE.x+6}  y={midDE.y+4} fontSize="11" fill="#4ade80" fontWeight="bold">5 cm</text>
-      <text x={midEC.x+4}  y={midEC.y-6} fontSize="11" fill="#fde68a" fontWeight="bold">8 cm</text>
+      <text x={midAB.x-26} y={midAB.y+4}  fontSize="11" fill="#f97316" fontWeight="bold">y</text>
+      <text x={midBE.x-8}  y={midBE.y-8}  fontSize="11" fill="#ef4444" fontWeight="bold">x</text>
+      <text x={midDE.x-4}  y={midDE.y-8}  fontSize="11" fill="#4ade80" fontWeight="bold">5 cm</text>
+      <text x={midEC.x-10} y={midEC.y+14} fontSize="11" fill="#fde68a" fontWeight="bold">8 cm</text>
       {/* Base labels */}
       <text x={(A.x+D.x)/2} y={A.y+16} textAnchor="middle" fontSize="11" fill="#c084fc" fontWeight="bold">9 cm</text>
       <text x={(D.x+C.x)/2} y={D.y+16} textAnchor="middle" fontSize="11" fill="#c084fc" fontWeight="bold">6 cm</text>
