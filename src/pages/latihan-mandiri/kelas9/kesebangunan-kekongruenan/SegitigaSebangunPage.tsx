@@ -299,43 +299,38 @@ const SoalQ8 = () => {
 
   return (
     <svg viewBox="0 0 300 235" className="w-full max-w-xs mx-auto">
-      {/* AB bottom horizontal */}
+      {/* All lines same color #60a5fa */}
       <line x1={A.x} y1={A.y} x2={B.x} y2={B.y} stroke="#60a5fa" strokeWidth="2"/>
-      {/* DF middle horizontal */}
       <line x1={D.x} y1={D.y} x2={F.x} y2={F.y} stroke="#60a5fa" strokeWidth="2"/>
-      {/* GF segment (GF // BD) — GD line removed */}
-      <line x1={G.x} y1={G.y} x2={F.x} y2={F.y} stroke="#4ade80" strokeWidth="2"/>
-      {/* Line A→G (through C and E) */}
-      <line x1={A.x} y1={A.y} x2={G.x} y2={G.y} stroke="#a78bfa" strokeWidth="2"/>
-      {/* Line B→D (through C, BD // GF) */}
-      <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#f97316" strokeWidth="2"/>
+      <line x1={G.x} y1={G.y} x2={F.x} y2={F.y} stroke="#60a5fa" strokeWidth="2"/>
+      <line x1={A.x} y1={A.y} x2={G.x} y2={G.y} stroke="#60a5fa" strokeWidth="2"/>
+      <line x1={B.x} y1={B.y} x2={D.x} y2={D.y} stroke="#60a5fa" strokeWidth="2"/>
 
-      {/* Parallel indicators on AB (>>) */}
-      <polygon points={arrowRight(130,210)} fill="#fde68a"/>
-      <polygon points={arrowRight(146,210)} fill="#fde68a"/>
-      {/* Parallel indicator on DF (>) */}
+      {/* Parallel indicator on AB — single arrow */}
+      <polygon points={arrowRight(138,210)} fill="#fde68a"/>
+      {/* Parallel indicator on DF — single arrow */}
       <polygon points={arrowRight(178,115)} fill="#fde68a"/>
-      {/* Parallel arrows on BD and GF */}
-      <polygon points={arrowDiag(bdAx,bdAy,ux,uy)} fill="#f97316"/>
-      <polygon points={arrowDiag(gfAx,gfAy,ux,uy)} fill="#4ade80"/>
+      {/* Parallel arrows on BD and GF — same color */}
+      <polygon points={arrowDiag(bdAx,bdAy,ux,uy)} fill="#fde68a"/>
+      <polygon points={arrowDiag(gfAx,gfAy,ux,uy)} fill="#fde68a"/>
 
-      {/* Dots */}
-      <circle cx={A.x} cy={A.y} r="3.5" fill="#93c5fd"/>
-      <circle cx={B.x} cy={B.y} r="3.5" fill="#93c5fd"/>
-      <circle cx={D.x} cy={D.y} r="3.5" fill="#93c5fd"/>
-      <circle cx={F.x} cy={F.y} r="3.5" fill="#93c5fd"/>
-      <circle cx={G.x} cy={G.y} r="3.5" fill="#fbbf24"/>
-      <circle cx={E.x} cy={E.y} r="3"   fill="#4ade80"/>
-      <circle cx={C.x} cy={C.y} r="3.5" fill="#ef4444"/>
+      {/* Dots — all same color */}
+      <circle cx={A.x} cy={A.y} r="3.5" fill="#e2e8f0"/>
+      <circle cx={B.x} cy={B.y} r="3.5" fill="#e2e8f0"/>
+      <circle cx={D.x} cy={D.y} r="3.5" fill="#e2e8f0"/>
+      <circle cx={F.x} cy={F.y} r="3.5" fill="#e2e8f0"/>
+      <circle cx={G.x} cy={G.y} r="3.5" fill="#e2e8f0"/>
+      <circle cx={E.x} cy={E.y} r="3"   fill="#e2e8f0"/>
+      <circle cx={C.x} cy={C.y} r="3.5" fill="#e2e8f0"/>
 
-      {/* Point labels only — measurement labels removed */}
-      <text x={A.x-16} y={A.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">A</text>
-      <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">B</text>
-      <text x={D.x-5}  y={D.y-8}  fontSize="13" fill="#93c5fd" fontWeight="bold">D</text>
-      <text x={F.x+4}  y={F.y+5}  fontSize="13" fill="#93c5fd" fontWeight="bold">F</text>
-      <text x={G.x+4}  y={G.y-4}  fontSize="13" fill="#fbbf24" fontWeight="bold">G</text>
-      <text x={E.x+4}  y={E.y-6}  fontSize="11" fill="#4ade80" fontWeight="bold">E</text>
-      <text x={C.x-18} y={C.y+5}  fontSize="13" fill="#ef4444" fontWeight="bold">C</text>
+      {/* Point labels — all same color */}
+      <text x={A.x-16} y={A.y+5}  fontSize="13" fill="#e2e8f0" fontWeight="bold">A</text>
+      <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="#e2e8f0" fontWeight="bold">B</text>
+      <text x={D.x-5}  y={D.y-8}  fontSize="13" fill="#e2e8f0" fontWeight="bold">D</text>
+      <text x={F.x+4}  y={F.y+5}  fontSize="13" fill="#e2e8f0" fontWeight="bold">F</text>
+      <text x={G.x+4}  y={G.y-4}  fontSize="13" fill="#e2e8f0" fontWeight="bold">G</text>
+      <text x={E.x+4}  y={E.y-6}  fontSize="11" fill="#e2e8f0" fontWeight="bold">E</text>
+      <text x={C.x-18} y={C.y+5}  fontSize="13" fill="#e2e8f0" fontWeight="bold">C</text>
     </svg>
   );
 };
