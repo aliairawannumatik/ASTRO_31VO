@@ -566,7 +566,18 @@ const questions: Q[] = [
       { label: "D.", text: "20 cm" },
     ],
   }),
-  Qn(2, "Segitiga Sebangun – Garis Sejajar – Cari CE", {
+  Qn(2, "Segitiga Sebangun – Cari ST – UN", {
+    type: "mixed",
+    content: "Dengan memperhatikan gambar di bawah, panjang ST adalah ....",
+    diagram: <Q1TriSTSVG />,
+    parts: [
+      { label: "A.", text: "6 cm" },
+      { label: "B.", text: "7 cm" },
+      { label: "C.", text: "8 cm" },
+      { label: "D.", text: "10 cm" },
+    ],
+  }),
+  Qn(3, "Segitiga Sebangun – Garis Sejajar – Cari CE", {
     type: "mixed",
     content: "Perhatikan gambar berikut! Panjang CE adalah…",
     diagram: <SoalQNew1 />,
@@ -577,7 +588,7 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(3, "Trapesium – Diagonal Berpotongan – Cari CE", {
+  Qn(4, "Trapesium – Diagonal Berpotongan – Cari CE", {
     type: "mixed",
     content: "Perhatikan gambar trapesium ABCD berikut. Diagonal AC dan BD berpotongan di titik E. Jika AB = 8 cm, DC = 12 cm, dan AE = 4 cm, maka panjang CE adalah…",
     diagram: <SoalQ1 />,
@@ -588,21 +599,10 @@ const questions: Q[] = [
       { label: "D.", text: "10 cm" },
     ],
   }),
-  Qn(4, "Garis Sejajar dalam Segitiga – Cari CD dan CE", {
+  Qn(5, "Garis Sejajar dalam Segitiga – Cari CD dan CE", {
     type: "mixed",
     content: "Perhatikan gambar segitiga besar CAB dengan garis DE sejajar AB (DE ∥ AB). Diketahui DA = 4 cm, EB = 3 cm, DE = 8 cm, dan AB = 12 cm. Tentukan nilai c = CD dan d = CE!",
     diagram: <SoalQ2 />,
-  }),
-  Qn(5, "Lebar Sungai – Aplikasi Segitiga Sebangun", {
-    type: "mixed",
-    content: "Untuk mengukur lebar sungai, seorang siswa menancapkan tongkat di titik B, C, D, dan E di tepi sungai. Titik A adalah benda di seberang sungai. Diketahui bahwa D, C, A segaris, BC = 12 m, CE = 4 m, dan DE = 3 m. Lebar sungai AB adalah…",
-    diagram: <SoalQ4 />,
-    parts: [
-      { label: "A.", text: "16 m" },
-      { label: "B.", text: "15 m" },
-      { label: "C.", text: "9 m" },
-      { label: "D.", text: "7 m" },
-    ],
   }),
   Qn(6, "Dua Segitiga Bertolak Belakang – Cari AB", {
     type: "mixed",
@@ -626,15 +626,15 @@ const questions: Q[] = [
       { label: "D.", text: "10,0 cm" },
     ],
   }),
-  Qn(8, "Segitiga Sebangun – Cari ST – UN", {
+  Qn(8, "Lebar Sungai – Aplikasi Segitiga Sebangun", {
     type: "mixed",
-    content: "Dengan memperhatikan gambar di bawah, panjang ST adalah ....",
-    diagram: <Q1TriSTSVG />,
+    content: "Untuk mengukur lebar sungai, seorang siswa menancapkan tongkat di titik B, C, D, dan E di tepi sungai. Titik A adalah benda di seberang sungai. Diketahui bahwa D, C, A segaris, BC = 12 m, CE = 4 m, dan DE = 3 m. Lebar sungai AB adalah…",
+    diagram: <SoalQ4 />,
     parts: [
-      { label: "A.", text: "6 cm" },
-      { label: "B.", text: "7 cm" },
-      { label: "C.", text: "8 cm" },
-      { label: "D.", text: "10 cm" },
+      { label: "A.", text: "16 m" },
+      { label: "B.", text: "15 m" },
+      { label: "C.", text: "9 m" },
+      { label: "D.", text: "7 m" },
     ],
   }),
   Qn(9, "Dua Segitiga Berpotongan – Nilai x – UN", {
