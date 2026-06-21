@@ -244,58 +244,63 @@ function HorizontalCapsuleSVG({ d, totalLen, color = "#34d399" }: {
 }
 
 function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
-  const VW = 360, VH = 300;
-  // Cylinder dimensions
-  const cx = 160, cylW = 72, ell = 18;
-  const topY = 30, botY = 250;
-  const cylH = botY - topY;
-  // Sphere: radius = half cylinder height = half cylinder width
-  const sr = cylW; // sphere visual radius equals cylinder half-width
-  const scx = cx, scy = (topY + botY) / 2;
+  const VW = 360, VH = 280;
+  const cx = 155;
+  const sr = 88;       // sphere visual radius
+  const ell = 22;      // perspective ellipse ry for circles
+  const scy = 136;     // sphere centre y
+
+  // Cylinder top/bottom derived from sphere so they touch exactly
+  const topY = scy - sr;  // = 48
+  const botY = scy + sr;  // = 224
+  const cylW = sr;         // cylinder half-width = sphere radius
 
   return (
     <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
-      {/* Cylinder back wall (light fill) */}
-      <rect x={cx - cylW} y={topY} width={cylW * 2} height={cylH}
-        fill={color} fillOpacity="0.06" />
-      {/* Cylinder side lines */}
+      {/* Cylinder back wall fill */}
+      <rect x={cx - cylW} y={topY} width={cylW * 2} height={botY - topY}
+        fill={color} fillOpacity="0.05" />
+
+      {/* Cylinder left & right edges */}
       <line x1={cx - cylW} y1={topY} x2={cx - cylW} y2={botY} stroke={color} strokeWidth={SW} />
       <line x1={cx + cylW} y1={topY} x2={cx + cylW} y2={botY} stroke={color} strokeWidth={SW} />
-      {/* Cylinder bottom ellipse (solid) */}
+
+      {/* Cylinder bottom ellipse (solid — visible) */}
       <ellipse cx={cx} cy={botY} rx={cylW} ry={ell}
         fill={color} fillOpacity="0.18" stroke={color} strokeWidth={SW} />
-      {/* Cylinder top ellipse (dashed – hidden edge) */}
+
+      {/* Cylinder top ellipse (dashed — hidden edge) */}
       <ellipse cx={cx} cy={topY} rx={cylW} ry={ell}
         fill={color} fillOpacity="0.12" stroke={color} strokeWidth={SW * 0.8} strokeDasharray="6,4" />
 
-      {/* Sphere body (circle) */}
-      <circle cx={scx} cy={scy} r={sr}
-        fill={color} fillOpacity="0.14" stroke={color} strokeWidth={SW} />
-      {/* Sphere equator (horizontal ellipse) */}
-      <ellipse cx={scx} cy={scy} rx={sr} ry={ell}
-        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,3" strokeOpacity="0.7" />
-      {/* Sphere meridian (vertical ellipse – dashed left half) */}
-      <path d={`M ${scx} ${scy - sr} A ${Math.round(sr * 0.45)} ${sr} 0 0 1 ${scx} ${scy + sr}`}
-        fill="none" stroke={color} strokeWidth={LSW} strokeOpacity="0.65" />
-      <path d={`M ${scx} ${scy - sr} A ${Math.round(sr * 0.45)} ${sr} 0 0 0 ${scx} ${scy + sr}`}
-        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,3" strokeOpacity="0.5" />
+      {/* Sphere body */}
+      <circle cx={cx} cy={scy} r={sr}
+        fill={color} fillOpacity="0.13" stroke={color} strokeWidth={SW} />
 
-      {/* Radius line of sphere */}
-      <line x1={scx} y1={scy} x2={scx + sr} y2={scy}
+      {/* Sphere equator ellipse */}
+      <ellipse cx={cx} cy={scy} rx={sr} ry={ell}
+        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,3" strokeOpacity="0.7" />
+
+      {/* Sphere meridian — solid right arc */}
+      <path d={`M ${cx} ${topY} A ${Math.round(sr * 0.44)} ${sr} 0 0 1 ${cx} ${botY}`}
+        fill="none" stroke={color} strokeWidth={LSW} strokeOpacity="0.6" />
+      {/* Sphere meridian — dashed left arc */}
+      <path d={`M ${cx} ${topY} A ${Math.round(sr * 0.44)} ${sr} 0 0 0 ${cx} ${botY}`}
+        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,3" strokeOpacity="0.45" />
+
+      {/* Radius line */}
+      <line x1={cx} y1={scy} x2={cx + sr} y2={scy}
         stroke={color} strokeWidth={LSW} strokeDasharray="4,3" strokeOpacity="0.85" />
-      <text x={scx + sr / 2 - 4} y={scy - 6} fill={color} fontSize="13"
+      <text x={cx + sr / 2} y={scy - 7} fill={color} fontSize="14"
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
 
-      {/* Label: Bola */}
-      <text x={scx - sr - 8} y={scy + 4} fill={color} fontSize="12"
-        fontFamily="monospace" fontWeight="600" textAnchor="end" fillOpacity="0.85">Bola</text>
-      {/* Label: Tabung */}
-      <text x={cx + cylW + 10} y={topY + 14} fill={color} fontSize="12"
+      {/* Labels */}
+      <text x={cx + cylW + 12} y={topY + 14} fill={color} fontSize="12"
         fontFamily="monospace" fontWeight="600" fillOpacity="0.85">Tabung</text>
-
-      {/* Note: t = 2r */}
-      <text x={cx + cylW + 10} y={scy + 4} fill={color} fontSize="12"
+      <text x={cx + cylW + 12} y={scy + 5} fill={color} fontSize="12"
         fontFamily="monospace" fontWeight="bold">t = 2r</text>
+      <text x={cx - cylW - 10} y={scy + 5} fill={color} fontSize="12"
+        fontFamily="monospace" fontWeight="600" textAnchor="end" fillOpacity="0.8">Bola</text>
     </svg>
   );
 }
