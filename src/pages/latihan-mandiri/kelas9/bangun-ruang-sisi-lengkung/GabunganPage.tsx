@@ -177,6 +177,67 @@ function HemiTabKerSVG({ r, tTab, tKer, color = "#fb7185" }: {
   );
 }
 
+function HorizontalCapsuleSVG({ d, totalLen, color = "#34d399" }: {
+  d: number; totalLen: number; color?: string;
+}) {
+  const VW = 360, VH = 260;
+  const cx = VW / 2, cy = VH / 2;
+  const rx = 130;
+  const ry = 46;
+  const capRx = ry;
+  const capRy = ry;
+  const leftCap  = cx - rx;
+  const rightCap = cx + rx;
+  return (
+    <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
+      {/* cylinder body fill */}
+      <rect x={leftCap} y={cy - ry} width={rx * 2} height={ry * 2}
+        fill={color} fillOpacity="0.10" />
+      {/* left hemisphere */}
+      <ellipse cx={leftCap} cy={cy} rx={capRx * 0.58} ry={capRy}
+        fill={color} fillOpacity="0.18" stroke={color} strokeWidth={SW} />
+      {/* right hemisphere */}
+      <ellipse cx={rightCap} cy={cy} rx={capRx * 0.58} ry={capRy}
+        fill={color} fillOpacity="0.18" stroke={color} strokeWidth={SW} />
+      {/* top & bottom straight lines */}
+      <line x1={leftCap} y1={cy - ry} x2={rightCap} y2={cy - ry} stroke={color} strokeWidth={SW} />
+      <line x1={leftCap} y1={cy + ry} x2={rightCap} y2={cy + ry} stroke={color} strokeWidth={SW} />
+      {/* middle cross-section ellipses (dashed) */}
+      <ellipse cx={cx} cy={cy} rx={capRx * 0.58} ry={ry}
+        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,4" strokeOpacity="0.6" />
+      {/* left-quarter dashed ellipse */}
+      <ellipse cx={cx - rx * 0.5} cy={cy} rx={capRx * 0.58} ry={ry}
+        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,4" strokeOpacity="0.45" />
+      {/* HEIGHT dimension line (left side, vertical) */}
+      <line x1={leftCap - 28} y1={cy - ry} x2={leftCap - 28} y2={cy + ry}
+        stroke={color} strokeWidth={LSW} strokeOpacity="0.8" />
+      <line x1={leftCap - 34} y1={cy - ry} x2={leftCap - 22} y2={cy - ry} stroke={color} strokeWidth={LSW} />
+      <line x1={leftCap - 34} y1={cy + ry} x2={leftCap - 22} y2={cy + ry} stroke={color} strokeWidth={LSW} />
+      {/* arrow heads for height */}
+      <polygon points={`${leftCap - 28},${cy - ry - 5} ${leftCap - 32},${cy - ry + 6} ${leftCap - 24},${cy - ry + 6}`}
+        fill={color} fillOpacity="0.85" />
+      <polygon points={`${leftCap - 28},${cy + ry + 5} ${leftCap - 32},${cy + ry - 6} ${leftCap - 24},${cy + ry - 6}`}
+        fill={color} fillOpacity="0.85" />
+      <text x={leftCap - 52} y={cy + 5} fill={color} fontSize="13" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle">{d} cm</text>
+      {/* LENGTH dimension line (bottom, horizontal) */}
+      <line x1={leftCap - capRx * 0.58} y1={cy + ry + 30} x2={rightCap + capRx * 0.58} y2={cy + ry + 30}
+        stroke={color} strokeWidth={LSW} strokeOpacity="0.8" />
+      <line x1={leftCap - capRx * 0.58} y1={cy + ry + 24} x2={leftCap - capRx * 0.58} y2={cy + ry + 36}
+        stroke={color} strokeWidth={LSW} />
+      <line x1={rightCap + capRx * 0.58} y1={cy + ry + 24} x2={rightCap + capRx * 0.58} y2={cy + ry + 36}
+        stroke={color} strokeWidth={LSW} />
+      {/* arrow heads for length */}
+      <polygon points={`${leftCap - capRx * 0.58 - 5},${cy + ry + 30} ${leftCap - capRx * 0.58 + 7},${cy + ry + 25} ${leftCap - capRx * 0.58 + 7},${cy + ry + 35}`}
+        fill={color} fillOpacity="0.85" />
+      <polygon points={`${rightCap + capRx * 0.58 + 5},${cy + ry + 30} ${rightCap + capRx * 0.58 - 7},${cy + ry + 25} ${rightCap + capRx * 0.58 - 7},${cy + ry + 35}`}
+        fill={color} fillOpacity="0.85" />
+      <text x={cx} y={cy + ry + 50} fill={color} fontSize="13" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle">{totalLen} cm</text>
+    </svg>
+  );
+}
+
 function InfoBubbleSVG({ lines, color = "#22d3ee" }: { lines: string[]; color?: string }) {
   const lineH = 32;
   const pad   = 20;
@@ -336,6 +397,18 @@ const mcQuestions: QMC[] = [
     ],
     answer: "D",
   },
+  {
+    n: 12, title: "Luas Permukaan Kapsul (Tabung + 2 Setengah Bola)", cat: "tab-hemi",
+    content: "Perhatikan gambar! Sebuah bangun berbentuk kapsul (tabung dengan kedua ujung setengah bola) dengan diameter 20 cm dan panjang total 60 cm. Luas permukaan bangun tersebut adalah …",
+    diagram: <HorizontalCapsuleSVG d={20} totalLen={60} />,
+    options: [
+      { key: "A", text: "400π cm²" },
+      { key: "B", text: "800π cm²" },
+      { key: "C", text: "1.200π cm²" },
+      { key: "D", text: "1.600π cm²" },
+    ],
+    answer: "C",
+  },
 ];
 
 /* ═══════════════════════════════════════════════════
@@ -405,7 +478,7 @@ const GabunganPage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-              <span className="text-emerald-400 text-xs font-bold">📋 11 Soal</span>
+              <span className="text-emerald-400 text-xs font-bold">📋 12 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
