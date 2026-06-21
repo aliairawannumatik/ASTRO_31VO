@@ -107,49 +107,49 @@ function KolamSetengahBolaSVG({ r, color = "#818cf8" }: { r?: string; color?: st
       {/* Bowl shell */}
       <path d={BOWL} fill="url(#ksh)" stroke={color} strokeWidth="2.5" />
 
-      {/* Water body */}
-      <rect x="0" y="118" width="280" height="90" fill="url(#kwt)" clipPath="url(#kcp)">
-        <animate attributeName="y"      values="118;115;118;121;118" dur="2.6s" repeatCount="indefinite" />
-        <animate attributeName="height" values="90;93;90;87;90"      dur="2.6s" repeatCount="indefinite" />
+      {/* Water body — fills full pool (from rim y≈68 to dome bottom y=190) */}
+      <rect x="0" y="68" width="280" height="130" fill="url(#kwt)" clipPath="url(#kcp)">
+        <animate attributeName="y"      values="68;65;68;71;68"   dur="2.6s" repeatCount="indefinite" />
+        <animate attributeName="height" values="130;133;130;127;130" dur="2.6s" repeatCount="indefinite" />
       </rect>
 
-      {/* Bright shimmer band at water surface */}
-      <rect x="0" y="112" width="280" height="14" fill="url(#kwsh)" clipPath="url(#kcp)">
-        <animate attributeName="y" values="112;109;112;115;112" dur="2.6s" repeatCount="indefinite" />
+      {/* Bright shimmer band at water surface (flush with rim) */}
+      <rect x="0" y="62" width="280" height="18" fill="url(#kwsh)" clipPath="url(#kcp)">
+        <animate attributeName="y" values="62;59;62;65;62" dur="2.6s" repeatCount="indefinite" />
       </rect>
 
-      {/* Surface meniscus ellipse */}
-      <ellipse cx="140" cy="118" rx="99" ry="13" fill="#bae6fd" fillOpacity="0.70" clipPath="url(#kcp)">
-        <animate attributeName="cy" values="118;115;118;121;118" dur="2.6s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="13;17;13;10;13"      dur="2.0s" repeatCount="indefinite" />
-        <animate attributeName="rx" values="99;102;99;96;99"     dur="3.0s" repeatCount="indefinite" />
+      {/* Surface meniscus ellipse — at rim level cy=72 */}
+      <ellipse cx="140" cy="72" rx="100" ry="14" fill="#bae6fd" fillOpacity="0.72" clipPath="url(#kcp)">
+        <animate attributeName="cy" values="72;69;72;75;72" dur="2.6s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="14;18;14;11;14" dur="2.0s" repeatCount="indefinite" />
+        <animate attributeName="rx" values="100;103;100;97;100" dur="3.0s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Ripple 1 */}
-      <ellipse cx="140" cy="118" rx="8" ry="4" fill="none"
+      {/* Ripple 1 — from rim level */}
+      <ellipse cx="140" cy="72" rx="8" ry="4" fill="none"
                stroke="#e0f2fe" strokeWidth="2" clipPath="url(#kcp)">
-        <animate attributeName="rx"      values="8;92;99"             dur="2.4s"        repeatCount="indefinite" />
-        <animate attributeName="ry"      values="4;11;14"             dur="2.4s"        repeatCount="indefinite" />
-        <animate attributeName="opacity" values="1;0.4;0"             dur="2.4s"        repeatCount="indefinite" />
-        <animate attributeName="cy"      values="118;115;118;121;118" dur="2.6s"        repeatCount="indefinite" />
+        <animate attributeName="rx"      values="8;94;100"       dur="2.4s"        repeatCount="indefinite" />
+        <animate attributeName="ry"      values="4;11;14"        dur="2.4s"        repeatCount="indefinite" />
+        <animate attributeName="opacity" values="1;0.4;0"        dur="2.4s"        repeatCount="indefinite" />
+        <animate attributeName="cy"      values="72;69;72;75;72" dur="2.6s"        repeatCount="indefinite" />
       </ellipse>
 
       {/* Ripple 2 offset */}
-      <ellipse cx="140" cy="118" rx="8" ry="4" fill="none"
+      <ellipse cx="140" cy="72" rx="8" ry="4" fill="none"
                stroke="#93c5fd" strokeWidth="1.5" clipPath="url(#kcp)">
-        <animate attributeName="rx"      values="8;92;99"             dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="ry"      values="4;11;14"             dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.8;0.3;0"           dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="cy"      values="118;115;118;121;118" dur="2.6s"              repeatCount="indefinite" />
+        <animate attributeName="rx"      values="8;94;100"       dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        <animate attributeName="ry"      values="4;11;14"        dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.8;0.3;0"      dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        <animate attributeName="cy"      values="72;69;72;75;72" dur="2.6s"              repeatCount="indefinite" />
       </ellipse>
 
       {/* Ripple 3 small fast */}
-      <ellipse cx="140" cy="118" rx="5" ry="3" fill="none"
+      <ellipse cx="140" cy="72" rx="5" ry="3" fill="none"
                stroke="#bae6fd" strokeWidth="1.1" clipPath="url(#kcp)">
-        <animate attributeName="rx"      values="5;52;58"             dur="1.7s" begin="0.6s" repeatCount="indefinite" />
-        <animate attributeName="ry"      values="3;7;9"               dur="1.7s" begin="0.6s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.9;0.3;0"           dur="1.7s" begin="0.6s" repeatCount="indefinite" />
-        <animate attributeName="cy"      values="118;115;118;121;118" dur="2.6s"              repeatCount="indefinite" />
+        <animate attributeName="rx"      values="5;52;58"        dur="1.7s" begin="0.6s" repeatCount="indefinite" />
+        <animate attributeName="ry"      values="3;7;9"          dur="1.7s" begin="0.6s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.9;0.3;0"      dur="1.7s" begin="0.6s" repeatCount="indefinite" />
+        <animate attributeName="cy"      values="72;69;72;75;72" dur="2.6s"              repeatCount="indefinite" />
       </ellipse>
 
       {/* Opening rim */}
