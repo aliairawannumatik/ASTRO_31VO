@@ -51,30 +51,39 @@ const questions: Q[] = [
   Qn(1, "Rata-Rata Data Survei – ANBK", {
     content: "Sebuah survei dilakukan terhadap 10 siswa tentang durasi olahraga mereka setiap hari (dalam jam). Data yang diperoleh: 9, 7, 8, 9, 6, 8, 8, 9, 10, 7. Hitunglah rata-rata durasi olahraga siswa tersebut!",
   }),
-  Qn(2, "Rata-Rata dari Tabel Frekuensi – UN", {
+  Qn(2, "Pemahaman Rata-Rata – ANBK", {
+    content: "Rata-rata gaji 5 karyawan sebuah toko adalah Rp3.000.000. Kemudian seorang manajer dengan gaji Rp8.000.000 bergabung ke dalam tim. Tentukan rata-rata gaji seluruh anggota tim setelah manajer bergabung!",
+  }),
+  Qn(3, "Banyak Siswa di Atas Rata-Rata – UN", {
+    diagram: (() => (
+      <svg width="300" height="88" viewBox="0 0 300 88" className="mx-auto">
+        <rect x="4" y="4" width="292" height="80" rx="10" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
+        <text x="150" y="18" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Tabel Nilai Ulangan Harian</text>
+        <rect x="10" y="23" width="280" height="16" rx="3" fill="#1d4ed8" fillOpacity="0.35"/>
+        <text x="80" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">Nilai</text>
+        <text x="130" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">3</text>
+        <text x="157" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">4</text>
+        <text x="184" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">5</text>
+        <text x="211" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">6</text>
+        <text x="238" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">7</text>
+        <text x="262" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">8</text>
+        <text x="284" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">9</text>
+        <rect x="10" y="39" width="280" height="16" fill="#1e3a5f" fillOpacity="0.25"/>
+        <text x="80" y="50" fill="#bfdbfe" fontSize="8" textAnchor="middle">Frekuensi</text>
+        {[["130","2"],["157","3"],["184","4"],["211","5"],["238","3"],["262","2"],["284","1"]].map(([cx,f],i) => (
+          <text key={i} x={Number(cx)} y="50" fill="#60a5fa" fontSize="8" textAnchor="middle">{f}</text>
+        ))}
+        <rect x="10" y="55" width="280" height="14" fill="#1d4ed8" fillOpacity="0.2"/>
+        <text x="150" y="65" fill="#94a3b8" fontSize="7" textAnchor="middle">n = 20 siswa</text>
+      </svg>
+    ))(),
+    content: "Tabel di atas menunjukkan nilai ulangan harian 20 siswa. Hitunglah rata-rata nilai ulangan tersebut, kemudian tentukan berapa banyak siswa yang mendapat nilai di atas rata-rata!",
+  }),
+  Qn(4, "Rata-Rata dari Tabel Frekuensi – UN", {
     diagram: <TabelSkorSeni />,
     content: "Tabel di atas menunjukkan skor penilaian karya seni dari 30 siswa. Hitunglah rata-rata skor karya seni seluruh siswa!",
   }),
-  Qn(3, "Menentukan x dari Mean – TKA", {
-    diagram: <TabelKuis />,
-    content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Diketahui rata-rata nilai kuis adalah 7,5. Tentukan nilai x (banyak siswa yang mendapat nilai 6)!",
-  }),
-  Qn(4, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
-    content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
-  }),
-  Qn(5, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
-    content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
-  }),
-  Qn(6, "Rata-Rata Berubah karena Koreksi – UN", {
-    content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
-  }),
-  Qn(7, "Pemahaman Rata-Rata – ANBK", {
-    content: "Rata-rata gaji 5 karyawan sebuah toko adalah Rp3.000.000. Kemudian seorang manajer dengan gaji Rp8.000.000 bergabung ke dalam tim. Tentukan rata-rata gaji seluruh anggota tim setelah manajer bergabung!",
-  }),
-  Qn(8, "Nilai yang Harus Dicapai – UN", {
-    content: "Dari 4 ujian yang telah dilaksanakan, rata-rata nilai seorang siswa adalah 75. Siswa tersebut ingin meningkatkan rata-ratanya menjadi 78 setelah mengikuti ujian ke-5. Berapa nilai minimum yang harus ia peroleh pada ujian ke-5?",
-  }),
-  Qn(9, "Mean dari Diagram Batang – UN", {
+  Qn(5, "Mean dari Diagram Batang – UN", {
     diagram: (() => (
       <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
         <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -99,41 +108,7 @@ const questions: Q[] = [
     ))(),
     content: "Diagram batang di atas menunjukkan distribusi nilai ulangan IPA dari 20 siswa. Hitunglah rata-rata nilai ulangan IPA tersebut!",
   }),
-  Qn(10, "Perbandingan Jumlah Siswa dari Mean – UN", {
-    content: "Dalam suatu kelas, rata-rata nilai ujian siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 8,1. Jika rata-rata nilai seluruh kelas adalah 7,5, tentukan perbandingan banyak siswa laki-laki terhadap siswa perempuan!",
-  }),
-  Qn(11, "Mencari Jumlah Siswa dari Mean Gabungan – TKA", {
-    content: "Dalam sebuah kelas yang berjumlah 36 siswa, rata-rata nilai ulangan matematika siswa perempuan adalah 75 dan rata-rata nilai siswa laki-laki adalah 66. Jika rata-rata nilai seluruh kelas adalah 72, tentukan banyak siswa laki-laki di kelas tersebut!",
-  }),
-  Qn(12, "Selisih Siswa dari Data Remedial – ANBK", {
-    content: "Sebanyak 20 siswa mengikuti remedial matematika dengan rata-rata nilai 7. Rata-rata nilai siswa laki-laki adalah 6 dan rata-rata nilai siswa perempuan adalah 8,5. Tentukan selisih banyak siswa laki-laki dan siswa perempuan yang mengikuti remedial tersebut!",
-  }),
-  Qn(13, "Banyak Siswa di Atas Rata-Rata – UN", {
-    diagram: (() => (
-      <svg width="300" height="115" viewBox="0 0 300 115" className="mx-auto">
-        <rect x="4" y="4" width="292" height="107" rx="10" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
-        <text x="150" y="18" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Tabel Nilai Ulangan Harian</text>
-        <rect x="10" y="23" width="280" height="16" rx="3" fill="#1d4ed8" fillOpacity="0.35"/>
-        <text x="80" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">Nilai</text>
-        <text x="130" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">3</text>
-        <text x="157" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">4</text>
-        <text x="184" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">5</text>
-        <text x="211" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">6</text>
-        <text x="238" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">7</text>
-        <text x="262" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">8</text>
-        <text x="284" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">9</text>
-        <rect x="10" y="39" width="280" height="16" fill="#1e3a5f" fillOpacity="0.25"/>
-        <text x="80" y="50" fill="#bfdbfe" fontSize="8" textAnchor="middle">Frekuensi</text>
-        {[["130","2"],["157","3"],["184","4"],["211","5"],["238","3"],["262","2"],["284","1"]].map(([cx,f],i) => (
-          <text key={i} x={Number(cx)} y="50" fill="#60a5fa" fontSize="8" textAnchor="middle">{f}</text>
-        ))}
-        <rect x="10" y="55" width="280" height="14" fill="#1d4ed8" fillOpacity="0.2"/>
-        <text x="150" y="65" fill="#94a3b8" fontSize="7" textAnchor="middle">n = 20 siswa</text>
-      </svg>
-    ))(),
-    content: "Tabel di atas menunjukkan nilai ulangan harian 20 siswa. Hitunglah rata-rata nilai ulangan tersebut, kemudian tentukan berapa banyak siswa yang mendapat nilai di atas rata-rata!",
-  }),
-  Qn(14, "Mean dan Data Tidak Diketahui – ANBK", {
+  Qn(6, "Mean dan Data Tidak Diketahui – ANBK", {
     diagram: (() => (
       <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
         <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -163,6 +138,31 @@ const questions: Q[] = [
       </svg>
     ))(),
     content: "Diagram di atas menunjukkan data pengunjung perpustakaan sekolah selama 5 hari. Data pengunjung hari Rabu tidak terbaca (?). Diketahui rata-rata pengunjung selama 5 hari adalah 41 orang per hari. Tentukan banyak pengunjung pada hari Rabu!",
+  }),
+  Qn(7, "Menentukan x dari Mean – TKA", {
+    diagram: <TabelKuis />,
+    content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Diketahui rata-rata nilai kuis adalah 7,5. Tentukan nilai x (banyak siswa yang mendapat nilai 6)!",
+  }),
+  Qn(8, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
+    content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
+  }),
+  Qn(9, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
+    content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
+  }),
+  Qn(10, "Rata-Rata Berubah karena Koreksi – UN", {
+    content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
+  }),
+  Qn(11, "Nilai yang Harus Dicapai – UN", {
+    content: "Dari 4 ujian yang telah dilaksanakan, rata-rata nilai seorang siswa adalah 75. Siswa tersebut ingin meningkatkan rata-ratanya menjadi 78 setelah mengikuti ujian ke-5. Berapa nilai minimum yang harus ia peroleh pada ujian ke-5?",
+  }),
+  Qn(12, "Perbandingan Jumlah Siswa dari Mean – UN", {
+    content: "Dalam suatu kelas, rata-rata nilai ujian siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 8,1. Jika rata-rata nilai seluruh kelas adalah 7,5, tentukan perbandingan banyak siswa laki-laki terhadap siswa perempuan!",
+  }),
+  Qn(13, "Mencari Jumlah Siswa dari Mean Gabungan – TKA", {
+    content: "Dalam sebuah kelas yang berjumlah 36 siswa, rata-rata nilai ulangan matematika siswa perempuan adalah 75 dan rata-rata nilai siswa laki-laki adalah 66. Jika rata-rata nilai seluruh kelas adalah 72, tentukan banyak siswa laki-laki di kelas tersebut!",
+  }),
+  Qn(14, "Selisih Siswa dari Data Remedial – ANBK", {
+    content: "Sebanyak 20 siswa mengikuti remedial matematika dengan rata-rata nilai 7. Rata-rata nilai siswa laki-laki adalah 6 dan rata-rata nilai siswa perempuan adalah 8,5. Tentukan selisih banyak siswa laki-laki dan siswa perempuan yang mengikuti remedial tersebut!",
   }),
   Qn(15, "Rata-Rata Umur Keluarga – UN", {
     diagram: (() => (
