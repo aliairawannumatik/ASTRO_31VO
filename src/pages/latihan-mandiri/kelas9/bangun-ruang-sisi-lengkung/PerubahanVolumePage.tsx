@@ -416,7 +416,19 @@ const mcQuestions: QMC[] = [
   },
   /* ── BOLA ── */
   {
-    n: 10, title: "Bola – Jari-Jari Diperbesar 2 Kali", cat: "bola",
+    n: 10, title: "Bola – Luas Permukaan saat r Diperbesar 3 Kali", cat: "bola",
+    content: "Sebuah bola berjari-jari r. Jika jari-jari diperbesar 3 kali, perbandingan luas permukaan bola baru terhadap semula adalah ...",
+    diagram: <RumusBubbleSVG lines={["L = 4πr²", "L₂ = 4π(3r)² = 9 × 4πr²", "L₂ : L₁ = 9 : 1"]} color="#818cf8" />,
+    options: [
+      { key: "A", text: "3 : 1" },
+      { key: "B", text: "6 : 1" },
+      { key: "C", text: "9 : 1" },
+      { key: "D", text: "27 : 1" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 11, title: "Bola – Jari-Jari Diperbesar 2 Kali", cat: "bola",
     content: "Sebuah bola berjari-jari r. Jika jari-jari diperbesar 2 kali, volume bola menjadi ... kali semula.",
     diagram: <CompareSphereSVG r1={5} r2={8} />,
     options: [
@@ -428,7 +440,7 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 11, title: "Bola – Jari-Jari Diperkecil Sepertiga", cat: "bola",
+    n: 12, title: "Bola – Jari-Jari Diperkecil Sepertiga", cat: "bola",
     content: "Jika jari-jari bola diperkecil menjadi sepertiga semula, volume bola baru menjadi ...",
     diagram: <CompareSphereSVG r1={7} r2={3} />,
     options: [
@@ -440,7 +452,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 12, title: "Bola – Volume Baru dari Perbandingan r", cat: "bola",
+    n: 13, title: "Bola – Volume Baru dari Perbandingan r", cat: "bola",
     content: "Volume sebuah bola adalah 36π cm³. Jika jari-jari diperbesar menjadi 3/2 kali semula, volume bola baru adalah ...",
     diagram: <RumusBubbleSVG lines={["V₂/V₁ = (3/2)³ = 27/8", "V₂ = 27/8 × 36π = 121,5π cm³"]} color="#818cf8" />,
     options: [
@@ -452,7 +464,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 13, title: "Bola – Volume Berkurang saat r Diperkecil", cat: "bola",
+    n: 14, title: "Bola – Volume Berkurang saat r Diperkecil", cat: "bola",
     content: "Volume awal bola adalah 2.304π cm³. Jika jari-jari berkurang menjadi setengahnya, volume bola yang baru adalah ...",
     diagram: <CompareSphereSVG r1={7} r2={4} />,
     options: [
@@ -465,7 +477,7 @@ const mcQuestions: QMC[] = [
   },
   /* ── GABUNGAN ── */
   {
-    n: 14, title: "Volume Tabung Berkurang karena r Mengecil", cat: "gabungan",
+    n: 15, title: "Volume Tabung Berkurang karena r Mengecil", cat: "gabungan",
     content: "Sebuah tabung mengalami pengurangan jari-jari dari 10 cm menjadi 8 cm, tinggi tetap 15 cm. Persentase volume yang berkurang adalah … (π = 3,14)",
     diagram: <CompareCylSVG r1={10} t1={15} r2={8} t2={15} label1="r=10" label2="r=8" color="#f87171" />,
     options: [
@@ -537,7 +549,7 @@ const PerubahanVolumePage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-lg px-4 py-2">
-              <span className="text-purple-400 text-xs font-bold">📋 14 Soal</span>
+              <span className="text-purple-400 text-xs font-bold">📋 15 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
