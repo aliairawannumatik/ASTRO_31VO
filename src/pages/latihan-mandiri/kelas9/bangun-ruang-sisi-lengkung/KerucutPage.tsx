@@ -69,6 +69,311 @@ function ConeNetSVG({ color = "#fb923c" }: { color?: string }) {
   );
 }
 
+/* ── No 6 · TOPI KERUCUT ───────────────────────────────────────── */
+function TopiKerucutSVG() {
+  return (
+    <svg viewBox="0 0 220 230" width="220" height="230" className="mx-auto">
+      <defs>
+        <linearGradient id="tp-body" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f9a8d4" />
+          <stop offset="100%" stopColor="#ec4899" />
+        </linearGradient>
+        <linearGradient id="tp-stripe1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#fde68a" />
+          <stop offset="100%" stopColor="#f59e0b" />
+        </linearGradient>
+        <linearGradient id="tp-brim" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#fce7f3" />
+          <stop offset="100%" stopColor="#f9a8d4" />
+        </linearGradient>
+        <clipPath id="tp-cone-clip">
+          <polygon points="110,18 38,175 182,175" />
+        </clipPath>
+      </defs>
+
+      {/* Cone body */}
+      <polygon points="110,18 38,175 182,175" fill="url(#tp-body)" stroke="#db2777" strokeWidth="1.5" />
+
+      {/* Diagonal stripes clipped to cone */}
+      {[-80,-50,-20,10,40,70,100].map((offset, i) => (
+        <line key={i}
+          x1={offset} y1="0" x2={offset + 160} y2="200"
+          stroke="url(#tp-stripe1)" strokeWidth="8" strokeOpacity="0.35"
+          clipPath="url(#tp-cone-clip)" />
+      ))}
+
+      {/* Sheen */}
+      <polygon points="110,18 60,130 85,175 38,175"
+        fill="white" fillOpacity="0.15" clipPath="url(#tp-cone-clip)" />
+
+      {/* Brim ellipse */}
+      <ellipse cx="110" cy="175" rx="72" ry="14" fill="url(#tp-brim)" stroke="#db2777" strokeWidth="1.8" />
+      <ellipse cx="110" cy="175" rx="72" ry="14" fill="white" fillOpacity="0.15" />
+
+      {/* Pompom at tip */}
+      <circle cx="110" cy="18" r="9" fill="#fde68a" stroke="#f59e0b" strokeWidth="1.5" />
+      <circle cx="110" cy="18" r="5" fill="white" fillOpacity="0.5" />
+
+      {/* Elastic band strings */}
+      <path d="M 42 177 Q 55 200 80 205 Q 110 210 140 205 Q 165 200 178 177"
+        fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeDasharray="4,3" strokeOpacity="0.7" />
+
+      {/* Labels */}
+      <line x1="110" y1="18" x2="110" y2="175" stroke="#db2777" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.6" />
+      <line x1="110" y1="175" x2="182" y2="175" stroke="#db2777" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="146" y="167" fill="#db2777" fontSize="11" textAnchor="middle" fontFamily="monospace">r = 14 cm</text>
+      <text x="128" y="105" fill="#db2777" fontSize="11" textAnchor="start" fontFamily="monospace">s = 25 cm</text>
+      <text x="110" y="218" fill="#f9a8d4" fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.8">Topi Kerucut</text>
+    </svg>
+  );
+}
+
+/* ── No 7 · CORONG KERUCUT ─────────────────────────────────────── */
+function CorongSVG() {
+  return (
+    <svg viewBox="0 0 220 230" width="220" height="230" className="mx-auto">
+      <defs>
+        <linearGradient id="cr-body" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.7" />
+        </linearGradient>
+        <linearGradient id="cr-pipe" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#38bdf8" />
+          <stop offset="50%" stopColor="#e0f2fe" />
+          <stop offset="100%" stopColor="#38bdf8" />
+        </linearGradient>
+        <linearGradient id="cr-liquid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.6" />
+        </linearGradient>
+        <clipPath id="cr-clip">
+          <polygon points="110,30 32,165 188,165" />
+        </clipPath>
+      </defs>
+
+      {/* Top rim ellipse */}
+      <ellipse cx="110" cy="30" rx="78" ry="16" fill="#bae6fd" fillOpacity="0.3" stroke="#38bdf8" strokeWidth="2" />
+
+      {/* Cone body (inverted funnel) */}
+      <polygon points="110,165 32,30 188,30" fill="url(#cr-body)" stroke="#0ea5e9" strokeWidth="1.8" />
+
+      {/* Sheen left */}
+      <polygon points="32,30 65,30 110,165" fill="white" fillOpacity="0.18" clipPath="url(#cr-clip)" />
+
+      {/* Liquid inside cone */}
+      <polygon points="110,165 65,85 155,85" fill="url(#cr-liquid)" fillOpacity="0.55" />
+      <ellipse cx="110" cy="85" rx="45" ry="9" fill="#fde68a" fillOpacity="0.6" />
+
+      {/* Pipe/tube at bottom */}
+      <rect x="100" y="163" width="20" height="45" fill="url(#cr-pipe)" stroke="#0ea5e9" strokeWidth="1.5" rx="3" />
+      <ellipse cx="110" cy="163" rx="10" ry="3.5" fill="#7dd3fc" stroke="#0ea5e9" strokeWidth="1.2" />
+      <ellipse cx="110" cy="208" rx="10" ry="3.5" fill="#38bdf8" fillOpacity="0.7" stroke="#0ea5e9" strokeWidth="1.2" />
+
+      {/* Liquid drop from pipe */}
+      <ellipse cx="110" cy="215" rx="4" ry="6" fill="#fbbf24" fillOpacity="0.7" />
+
+      {/* Labels */}
+      <line x1="110" y1="30" x2="188" y2="30" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="149" y="22" fill="#38bdf8" fontSize="11" textAnchor="middle" fontFamily="monospace">r = 10 cm</text>
+      <line x1="192" y1="30" x2="192" y2="165" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4,2" />
+      <line x1="187" y1="30" x2="197" y2="30" stroke="#38bdf8" strokeWidth="1.2" />
+      <line x1="187" y1="165" x2="197" y2="165" stroke="#38bdf8" strokeWidth="1.2" />
+      <text x="207" y="102" fill="#38bdf8" fontSize="11" textAnchor="middle" fontFamily="monospace">s=26</text>
+      <text x="110" y="225" fill="#7dd3fc" fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.8">Corong</text>
+    </svg>
+  );
+}
+
+/* ── No 9 · KERUCUT DICAT ──────────────────────────────────────── */
+function KerucutCatSVG() {
+  return (
+    <svg viewBox="0 0 260 220" width="260" height="220" className="mx-auto">
+      <defs>
+        <linearGradient id="kc-body" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#c4b5fd" />
+          <stop offset="100%" stopColor="#7c3aed" />
+        </linearGradient>
+        <linearGradient id="kc-painted" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#ddd6fe" />
+          <stop offset="100%" stopColor="#a78bfa" />
+        </linearGradient>
+        <clipPath id="kc-clip">
+          <polygon points="110,20 38,175 182,175" />
+        </clipPath>
+      </defs>
+
+      {/* Cone body */}
+      <polygon points="110,20 38,175 182,175" fill="url(#kc-body)" stroke="#7c3aed" strokeWidth="1.8" />
+      {/* Already-painted region (left half, slightly lighter) */}
+      <polygon points="110,20 38,175 110,175" fill="url(#kc-painted)" fillOpacity="0.6" clipPath="url(#kc-clip)" />
+      {/* Paint drips along left edge */}
+      <path d="M 68 130 Q 65 140 66 152" fill="none" stroke="#c4b5fd" strokeWidth="3.5" strokeLinecap="round" />
+      <path d="M 55 155 Q 52 162 54 170" fill="none" stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" />
+      <path d="M 82 160 Q 80 168 81 175" fill="none" stroke="#ddd6fe" strokeWidth="2.5" strokeLinecap="round" />
+      {/* Sheen */}
+      <polygon points="110,20 75,100 60,175 38,175" fill="white" fillOpacity="0.12" clipPath="url(#kc-clip)" />
+
+      {/* Base ellipse */}
+      <ellipse cx="110" cy="175" rx="72" ry="14" fill="#7c3aed" fillOpacity="0.2" stroke="#7c3aed" strokeWidth="1.8" />
+
+      {/* Paint bucket */}
+      <rect x="195" y="140" width="34" height="30" fill="#1e293b" stroke="#475569" strokeWidth="1.5" rx="3" />
+      <ellipse cx="212" cy="140" rx="17" ry="5" fill="#7c3aed" stroke="#a78bfa" strokeWidth="1.2" />
+      <ellipse cx="212" cy="140" rx="17" ry="5" fill="#a78bfa" fillOpacity="0.4" />
+      <path d="M 200 138 Q 212 130 224 138" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" />
+      <text x="212" y="160" fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">CAT</text>
+
+      {/* Paint roller / brush handle */}
+      <line x1="182" y1="160" x2="197" y2="150" stroke="#92400e" strokeWidth="3" strokeLinecap="round" />
+      {/* Roller head */}
+      <rect x="174" y="152" width="12" height="20" fill="#a78bfa" rx="4" stroke="#7c3aed" strokeWidth="1.2" />
+      <rect x="174" y="152" width="5" height="20" fill="#ddd6fe" rx="2" fillOpacity="0.5" />
+
+      {/* Paint line on cone surface from roller */}
+      <path d="M 180 165 Q 150 155 125 148" fill="none" stroke="#ddd6fe" strokeWidth="3" strokeOpacity="0.6" strokeLinecap="round" />
+
+      {/* Labels */}
+      <line x1="110" y1="175" x2="182" y2="175" stroke="#a78bfa" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="146" y="167" fill="#a78bfa" fontSize="11" textAnchor="middle" fontFamily="monospace">r = 7 cm</text>
+      <text x="155" y="95" fill="#a78bfa" fontSize="11" textAnchor="middle" fontFamily="monospace">s = 20 cm</text>
+      <text x="110" y="205" fill="#c4b5fd" fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.8">Kerucut Dicat</text>
+    </svg>
+  );
+}
+
+/* ── No 11 · KERUCUT SENG ──────────────────────────────────────── */
+function KerucutSengSVG() {
+  return (
+    <svg viewBox="0 0 220 230" width="220" height="230" className="mx-auto">
+      <defs>
+        <linearGradient id="ks-body" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#cbd5e1" />
+          <stop offset="60%" stopColor="#94a3b8" />
+          <stop offset="100%" stopColor="#64748b" />
+        </linearGradient>
+        <linearGradient id="ks-sheen" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="white" stopOpacity="0.35" />
+          <stop offset="40%" stopColor="white" stopOpacity="0.05" />
+          <stop offset="100%" stopColor="#475569" stopOpacity="0.2" />
+        </linearGradient>
+        <linearGradient id="ks-seam" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#e2e8f0" />
+          <stop offset="100%" stopColor="#475569" />
+        </linearGradient>
+        <clipPath id="ks-clip">
+          <polygon points="110,20 38,175 182,175" />
+        </clipPath>
+      </defs>
+
+      {/* Cone body — metallic */}
+      <polygon points="110,20 38,175 182,175" fill="url(#ks-body)" stroke="#475569" strokeWidth="2" />
+
+      {/* Metallic sheen */}
+      <polygon points="110,20 38,175 182,175" fill="url(#ks-sheen)" clipPath="url(#ks-clip)" />
+
+      {/* Horizontal metallic band lines (rivets/seams) */}
+      {[60, 95, 128, 158].map((y, i) => {
+        const pct = (y - 20) / (175 - 20);
+        const rx = 72 * pct;
+        const cx = 110;
+        return (
+          <ellipse key={i} cx={cx} cy={y} rx={rx} ry={rx * 0.18}
+            fill="none" stroke="#94a3b8" strokeWidth="0.8" strokeOpacity="0.5" />
+        );
+      })}
+
+      {/* Rivet dots along seam */}
+      {[0.25, 0.5, 0.75].map((pct, i) => {
+        const y = 20 + pct * 155;
+        const rx = 72 * pct;
+        return (
+          <g key={i}>
+            <circle cx={110 - rx * 0.9} cy={y} r="2.5" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.8" />
+            <circle cx={110 + rx * 0.9} cy={y} r="2.5" fill="#e2e8f0" stroke="#64748b" strokeWidth="0.8" />
+          </g>
+        );
+      })}
+
+      {/* Seam line down center-right */}
+      <line x1="110" y1="20" x2="182" y2="175" stroke="#e2e8f0" strokeWidth="1" strokeOpacity="0.4" />
+
+      {/* Base ellipse */}
+      <ellipse cx="110" cy="175" rx="72" ry="14" fill="#64748b" fillOpacity="0.3" stroke="#475569" strokeWidth="2" />
+      <ellipse cx="110" cy="175" rx="72" ry="14" fill="url(#ks-sheen)" />
+
+      {/* Tip cap */}
+      <circle cx="110" cy="20" r="5" fill="#e2e8f0" stroke="#64748b" strokeWidth="1.5" />
+
+      {/* Labels */}
+      <line x1="110" y1="175" x2="182" y2="175" stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="146" y="167" fill="#94a3b8" fontSize="11" textAnchor="middle" fontFamily="monospace">r = 5 cm</text>
+      <text x="158" y="98" fill="#94a3b8" fontSize="11" textAnchor="middle" fontFamily="monospace">s = 13 cm</text>
+      <text x="110" y="210" fill="#cbd5e1" fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.8">Dilapisi Seng</text>
+
+      {/* "×5" badge */}
+      <rect x="155" y="18" width="40" height="22" rx="6" fill="#1e293b" stroke="#475569" strokeWidth="1.2" />
+      <text x="175" y="33" fill="#e2e8f0" fontSize="12" textAnchor="middle" fontFamily="monospace" fontWeight="bold">×5</text>
+    </svg>
+  );
+}
+
+/* ── No 14 · 10 TOPI ULANG TAHUN ──────────────────────────────── */
+function TopiUltahBanyakSVG() {
+  const hats = [
+    { cx: 36,  baseY: 160, r: 20, color: "#f472b6", stripe: "#fde68a", pompom: "#fbbf24" },
+    { cx: 82,  baseY: 155, r: 20, color: "#34d399", stripe: "#a78bfa", pompom: "#f472b6" },
+    { cx: 128, baseY: 158, r: 20, color: "#60a5fa", stripe: "#fb923c", pompom: "#34d399" },
+    { cx: 174, baseY: 155, r: 20, color: "#fb923c", stripe: "#34d399", pompom: "#60a5fa" },
+    { cx: 220, baseY: 160, r: 20, color: "#a78bfa", stripe: "#f472b6", pompom: "#fb923c" },
+    { cx: 58,  baseY: 105, r: 18, color: "#fbbf24", stripe: "#60a5fa", pompom: "#f472b6" },
+    { cx: 104, baseY: 100, r: 18, color: "#f472b6", stripe: "#34d399", pompom: "#a78bfa" },
+    { cx: 150, baseY: 103, r: 18, color: "#34d399", stripe: "#fbbf24", pompom: "#60a5fa" },
+    { cx: 196, baseY: 100, r: 18, color: "#60a5fa", stripe: "#fb923c", pompom: "#fbbf24" },
+    { cx: 128, baseY:  50, r: 16, color: "#fb923c", stripe: "#a78bfa", pompom: "#f472b6" },
+  ];
+
+  return (
+    <svg viewBox="0 0 256 200" width="256" height="200" className="mx-auto">
+      <defs>
+        {hats.map((h, i) => (
+          <clipPath key={i} id={`th-clip-${i}`}>
+            <polygon points={`${h.cx},${h.baseY - h.r * 4} ${h.cx - h.r},${h.baseY} ${h.cx + h.r},${h.baseY}`} />
+          </clipPath>
+        ))}
+      </defs>
+
+      {hats.map((h, i) => {
+        const tipY = h.baseY - h.r * 4;
+        return (
+          <g key={i}>
+            {/* Cone */}
+            <polygon
+              points={`${h.cx},${tipY} ${h.cx - h.r},${h.baseY} ${h.cx + h.r},${h.baseY}`}
+              fill={h.color} fillOpacity="0.85" stroke={h.color} strokeWidth="1" />
+            {/* Stripe */}
+            <line x1={h.cx - h.r * 0.5} y1={h.baseY - h.r} x2={h.cx + h.r * 0.5} y2={h.baseY - h.r}
+              stroke={h.stripe} strokeWidth="4" strokeOpacity="0.7"
+              clipPath={`url(#th-clip-${i})`} />
+            {/* Sheen */}
+            <polygon
+              points={`${h.cx},${tipY} ${h.cx - h.r * 0.6},${h.baseY} ${h.cx},${h.baseY}`}
+              fill="white" fillOpacity="0.15" clipPath={`url(#th-clip-${i})`} />
+            {/* Brim */}
+            <ellipse cx={h.cx} cy={h.baseY} rx={h.r} ry={h.r * 0.25}
+              fill={h.color} fillOpacity="0.5" stroke={h.color} strokeWidth="1" />
+            {/* Pompom */}
+            <circle cx={h.cx} cy={tipY} r={h.r * 0.22} fill={h.pompom} />
+          </g>
+        );
+      })}
+
+      {/* Label */}
+      <rect x="78" y="178" width="100" height="18" rx="5" fill="#1e1b4b" fillOpacity="0.7" />
+      <text x="128" y="191" fill="#fde68a" fontSize="11" textAnchor="middle" fontFamily="monospace" fontWeight="bold">10 Topi Ulang Tahun</text>
+    </svg>
+  );
+}
+
 const questions: Q[] = [
   {
     n: 1, title: "Garis Pelukis Kerucut",
@@ -133,7 +438,7 @@ const questions: Q[] = [
   {
     n: 6, title: "Soal Cerita – Topi Kerucut",
     content: "Sebuah topi berbentuk kerucut dengan r = 14 cm dan garis pelukis 25 cm. Luas kain yang dibutuhkan untuk membuat satu topi adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="14 cm" s="25 cm" color="#f472b6" extraLabel="Topi" />,
+    diagram: <TopiKerucutSVG />,
     options: [
       { key: "A", text: "880 cm²" },
       { key: "B", text: "990 cm²" },
@@ -145,7 +450,7 @@ const questions: Q[] = [
   {
     n: 7, title: "Soal Cerita – Corong Kerucut",
     content: "Sebuah corong berbentuk kerucut tanpa alas memiliki r = 10 cm dan s = 26 cm. Luas selimut corong tersebut adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="10 cm" s="26 cm" showHeight={false} />,
+    diagram: <CorongSVG />,
     options: [
       { key: "A", text: "753,6 cm²" },
       { key: "B", text: "816,4 cm²" },
@@ -168,7 +473,7 @@ const questions: Q[] = [
   {
     n: 9, title: "Biaya Pengecatan Selimut Kerucut",
     content: "Sebuah kerucut dengan r = 7 cm dan s = 20 cm akan dicat. Jika biaya pengecatan Rp2.000 per cm², total biaya pengecatan adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="7 cm" s="20 cm" color="#a78bfa" />,
+    diagram: <KerucutCatSVG />,
     options: [
       { key: "A", text: "Rp 660.000" },
       { key: "B", text: "Rp 770.000" },
@@ -191,7 +496,7 @@ const questions: Q[] = [
   {
     n: 11, title: "ANBK – Biaya Membuat Kerucut",
     content: "Sebuah kerucut dengan r = 5 cm dan s = 13 cm akan dibuat dari lembaran seng. Jika harga seng Rp1.500 per cm², biaya membuat 5 kerucut tanpa alas adalah ... (π = 3,14)",
-    diagram: <ConeSVG r="5 cm" s="13 cm" />,
+    diagram: <KerucutSengSVG />,
     options: [
       { key: "A", text: "Rp 1.020.500" },
       { key: "B", text: "Rp 1.530.750" },
@@ -225,7 +530,7 @@ const questions: Q[] = [
   {
     n: 14, title: "Soal Terapan – Karton Topi Ulang Tahun",
     content: "Seorang anak membuat 10 topi ulang tahun berbentuk kerucut dari karton, setiap topi r = 7 cm dan s = 25 cm. Total karton yang dibutuhkan dalam m² adalah ... (π = 22/7)",
-    diagram: <ConeSVG r="7 cm" s="25 cm" color="#f472b6" extraLabel="× 10 topi" />,
+    diagram: <TopiUltahBanyakSVG />,
     options: [
       { key: "A", text: "0,35 m²" },
       { key: "B", text: "0,55 m²" },
