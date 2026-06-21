@@ -297,78 +297,128 @@ function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
 }
 
 function BolaDiTabungAirSVG({ color = "#38bdf8" }: { color?: string }) {
-  const VW = 260, VH = 240;
-  const cx = 105;
-  const cylHW = 42;       // cylinder half-width
-  const br = 21;          // ball visual radius (= half of cylinder half-width × 2)
-  const botY = 220;       // cylinder bottom y
-  const topCylY = 28;     // cylinder top y (visual)
-  const ell = 10;         // ellipse ry for top/bottom circles
+  const VW = 260, VH = 248;
+  const cx = 110;
+  const cylHW = 42;
+  const br = 21;
+  const botY = 218;
+  const topCylY = 26;
+  const ell = 10;
 
-  // Ball centres: 2 per row, 3 rows stacked from bottom
   const balls = [
-    { x: cx - br, y: botY - br },          // row 1 left
-    { x: cx + br, y: botY - br },          // row 1 right
-    { x: cx - br, y: botY - br - br * 2 }, // row 2 left
-    { x: cx + br, y: botY - br - br * 2 }, // row 2 right
-    { x: cx - br, y: botY - br - br * 4 }, // row 3 left
-    { x: cx + br, y: botY - br - br * 4 }, // row 3 right
+    { x: cx - br, y: botY - br },
+    { x: cx + br, y: botY - br },
+    { x: cx - br, y: botY - br - br * 2 },
+    { x: cx + br, y: botY - br - br * 2 },
+    { x: cx - br, y: botY - br - br * 4 },
+    { x: cx + br, y: botY - br - br * 4 },
   ];
 
-  const waterBeforeY = botY - 90;  // 30 cm water
-  const waterAfterY  = botY - 132; // 44 cm water
-  const lx = cx + cylHW + 10;
+  const waterBeforeY = botY - 90;   // 30 cm mark
+  const waterAfterY  = botY - 132;  // final water level (unlabelled)
+
+  const l = cx - cylHW, r = cx + cylHW;
+  const uid = "bdta2";
+
+  // wave path keyframes (same structure, only the Q control-point y changes)
+  const w0 = `M ${l} ${waterAfterY} Q ${cx} ${waterAfterY - 6} ${r} ${waterAfterY} L ${r} ${botY} L ${l} ${botY} Z`;
+  const w1 = `M ${l} ${waterAfterY} Q ${cx} ${waterAfterY + 6} ${r} ${waterAfterY} L ${r} ${botY} L ${l} ${botY} Z`;
+
+  // bob offsets for each ball (alternating direction & speed)
+  const bobs = [
+    { dy: "-3;0;-3", dur: "2.1s" },
+    { dy: "2;-1;2",  dur: "2.5s" },
+    { dy: "-2;1;-2", dur: "1.9s" },
+    { dy: "3;-1;3",  dur: "2.7s" },
+    { dy: "-3;0;-3", dur: "2.3s" },
+    { dy: "2;-2;2",  dur: "2.0s" },
+  ];
 
   return (
     <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: "240px", display: "block", margin: "0 auto" }}>
-      {/* Water fill (after) */}
-      <rect x={cx - cylHW} y={waterAfterY} width={cylHW * 2} height={botY - waterAfterY}
-        fill={color} fillOpacity="0.18" />
+      <defs>
+        {/* Water gradient — deep blue at bottom, lighter at surface */}
+        <linearGradient id={`${uid}-wg`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#7dd3fc" stopOpacity="0.50" />
+          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.78" />
+        </linearGradient>
+        {/* Ball gradient — metallic grey sphere */}
+        <radialGradient id={`${uid}-bg`} cx="32%" cy="28%" r="68%">
+          <stop offset="0%"   stopColor="#e2e8f0" />
+          <stop offset="52%"  stopColor="#64748b" />
+          <stop offset="100%" stopColor="#1e293b" />
+        </radialGradient>
+        {/* Clip: cylinder interior */}
+        <clipPath id={`${uid}-cl`}>
+          <rect x={l} y={topCylY} width={cylHW * 2} height={botY - topCylY + 2} />
+        </clipPath>
+      </defs>
 
-      {/* Balls (clipped within water) */}
-      {balls.map((b, i) => (
-        <circle key={i} cx={b.x} cy={b.y} r={br}
-          fill="#64748b" fillOpacity="0.55" stroke="#94a3b8" strokeWidth={1.5} />
+      {/* ── ANIMATED WATER ── */}
+      <path fill={`url(#${uid}-wg)`} clipPath={`url(#${uid}-cl)`} d={w0}>
+        <animate attributeName="d" dur="2s" repeatCount="indefinite"
+          values={`${w0};${w1};${w0}`} calcMode="spline"
+          keySplines="0.5 0 0.5 1;0.5 0 0.5 1" keyTimes="0;0.5;1" />
+      </path>
+
+      {/* Shimmer lines inside water */}
+      {[cx - 18, cx + 8].map((lx, i) => (
+        <line key={i} x1={lx} y1={waterAfterY + 18} x2={lx + 12} y2={waterAfterY + 18}
+          stroke="white" strokeWidth="1.2" strokeOpacity="0" clipPath={`url(#${uid}-cl)`}>
+          <animate attributeName="stroke-opacity" dur={`${1.6 + i * 0.5}s`} repeatCount="indefinite"
+            values="0;0.25;0" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" keyTimes="0;0.5;1" />
+          <animate attributeName="y1" dur={`${1.6 + i * 0.5}s`} repeatCount="indefinite"
+            values={`${waterAfterY + 18};${waterAfterY + 14};${waterAfterY + 18}`} />
+          <animate attributeName="y2" dur={`${1.6 + i * 0.5}s`} repeatCount="indefinite"
+            values={`${waterAfterY + 18};${waterAfterY + 14};${waterAfterY + 18}`} />
+        </line>
       ))}
 
-      {/* Water surface line (after) */}
-      <line x1={cx - cylHW} y1={waterAfterY} x2={cx + cylHW} y2={waterAfterY}
-        stroke={color} strokeWidth={1.5} strokeDasharray="5,3" strokeOpacity="0.9" />
+      {/* ── ANIMATED BALLS ── */}
+      {balls.map((b, i) => (
+        <g key={i} clipPath={`url(#${uid}-cl)`}>
+          <g>
+            <animateTransform attributeName="transform" type="translate"
+              values={`0,0; 0,${bobs[i].dy.split(';')[1]}; 0,0`}
+              dur={bobs[i].dur} repeatCount="indefinite" calcMode="spline"
+              keySplines="0.5 0 0.5 1;0.5 0 0.5 1" keyTimes="0;0.5;1" />
+            <circle cx={b.x} cy={b.y} r={br}
+              fill={`url(#${uid}-bg)`} stroke="#475569" strokeWidth={1.5} />
+            {/* Highlight glint */}
+            <ellipse cx={b.x - br * 0.28} cy={b.y - br * 0.3}
+              rx={br * 0.22} ry={br * 0.13} fill="white" fillOpacity="0.30" />
+          </g>
+        </g>
+      ))}
 
-      {/* Water surface label (after) */}
-      <text x={cx - cylHW - 6} y={waterAfterY + 4} fill={color} fontSize="10"
-        fontFamily="monospace" fontWeight="bold" textAnchor="end">44 cm</text>
+      {/* ── GUIDE LINE: 30 cm ── */}
+      <line x1={l - 4} y1={waterBeforeY} x2={r + 4} y2={waterBeforeY}
+        stroke="#fbbf24" strokeWidth={1.3} strokeDasharray="4,3" strokeOpacity="0.85" />
+      {/* Arrow tick left */}
+      <line x1={l - 4} y1={waterBeforeY - 4} x2={l - 4} y2={waterBeforeY + 4}
+        stroke="#fbbf24" strokeWidth={1.2} />
+      <text x={l - 8} y={waterBeforeY + 4} fill="#fbbf24" fontSize="10"
+        fontFamily="monospace" fontWeight="bold" textAnchor="end">30 cm</text>
 
-      {/* Water surface line (before, dashed) */}
-      <line x1={cx - cylHW} y1={waterBeforeY} x2={cx + cylHW} y2={waterBeforeY}
-        stroke={color} strokeWidth={1.2} strokeDasharray="3,4" strokeOpacity="0.5" />
-      <text x={cx - cylHW - 6} y={waterBeforeY + 4} fill={color} fontSize="10"
-        fontFamily="monospace" textAnchor="end" fillOpacity="0.6">30 cm</text>
-
-      {/* Cylinder sides */}
-      <line x1={cx - cylHW} y1={topCylY} x2={cx - cylHW} y2={botY} stroke={color} strokeWidth={SW} />
-      <line x1={cx + cylHW} y1={topCylY} x2={cx + cylHW} y2={botY} stroke={color} strokeWidth={SW} />
-
-      {/* Cylinder bottom ellipse */}
+      {/* ── CYLINDER (drawn on top so walls hide water overflow) ── */}
+      <line x1={l} y1={topCylY} x2={l} y2={botY} stroke={color} strokeWidth={SW} />
+      <line x1={r} y1={topCylY} x2={r} y2={botY} stroke={color} strokeWidth={SW} />
       <ellipse cx={cx} cy={botY} rx={cylHW} ry={ell}
         fill={color} fillOpacity="0.20" stroke={color} strokeWidth={SW} />
-
-      {/* Cylinder top ellipse (dashed) */}
       <ellipse cx={cx} cy={topCylY} rx={cylHW} ry={ell}
-        fill="none" stroke={color} strokeWidth={SW * 0.8} strokeDasharray="6,4" strokeOpacity="0.6" />
+        fill="none" stroke={color} strokeWidth={SW * 0.8} strokeDasharray="6,4" strokeOpacity="0.65" />
 
-      {/* Diameter label */}
-      <line x1={cx - cylHW} y1={botY + 16} x2={cx + cylHW} y2={botY + 16}
-        stroke={color} strokeWidth={LSW} strokeOpacity="0.8" />
-      <line x1={cx - cylHW} y1={botY + 10} x2={cx - cylHW} y2={botY + 22} stroke={color} strokeWidth={LSW} />
-      <line x1={cx + cylHW} y1={botY + 10} x2={cx + cylHW} y2={botY + 22} stroke={color} strokeWidth={LSW} />
+      {/* ── DIAMETER LABEL ── */}
+      <line x1={l} y1={botY + 16} x2={r} y2={botY + 16} stroke={color} strokeWidth={LSW} strokeOpacity="0.8" />
+      <line x1={l} y1={botY + 10} x2={l} y2={botY + 22} stroke={color} strokeWidth={LSW} />
+      <line x1={r} y1={botY + 10} x2={r} y2={botY + 22} stroke={color} strokeWidth={LSW} />
       <text x={cx} y={botY + 28} fill={color} fontSize="11"
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 28 cm</text>
 
-      {/* Ball radius label */}
-      <line x1={balls[0].x} y1={balls[0].y} x2={balls[0].x + br} y2={balls[0].y}
+      {/* ── BALL RADIUS LABEL (middle row) ── */}
+      <line x1={balls[2].x} y1={balls[2].y} x2={balls[2].x + br} y2={balls[2].y}
         stroke="#94a3b8" strokeWidth={LSW} strokeDasharray="3,2" />
-      <text x={balls[0].x + br / 2} y={balls[0].y - 4} fill="#94a3b8" fontSize="10"
+      <text x={balls[2].x + br / 2} y={balls[2].y - 5} fill="#94a3b8" fontSize="10"
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">r=7</text>
     </svg>
   );
