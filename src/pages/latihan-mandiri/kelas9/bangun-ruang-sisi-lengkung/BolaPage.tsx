@@ -361,6 +361,151 @@ function PlanetModelSVG({ r }: { r?: string }) {
   );
 }
 
+function BalonUdaraSVG({ r }: { r?: string }) {
+  return (
+    <svg viewBox="0 0 260 270" width="260" height="270" className="mx-auto">
+      <defs>
+        {/* Sky */}
+        <linearGradient id="bu-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#0f172a" />
+          <stop offset="100%" stopColor="#1e3a5f" />
+        </linearGradient>
+        {/* Balloon panels — alternating warm colours */}
+        <radialGradient id="bu-bal" cx="40%" cy="30%" r="65%">
+          <stop offset="0%"   stopColor="#fde68a" />
+          <stop offset="40%"  stopColor="#f59e0b" />
+          <stop offset="80%"  stopColor="#b45309" />
+          <stop offset="100%" stopColor="#78350f" stopOpacity="0.9" />
+        </radialGradient>
+        <radialGradient id="bu-bal2" cx="40%" cy="30%" r="65%">
+          <stop offset="0%"   stopColor="#fca5a5" />
+          <stop offset="40%"  stopColor="#ef4444" />
+          <stop offset="80%"  stopColor="#991b1b" />
+          <stop offset="100%" stopColor="#450a0a" stopOpacity="0.9" />
+        </radialGradient>
+        <radialGradient id="bu-bal3" cx="40%" cy="30%" r="65%">
+          <stop offset="0%"   stopColor="#bbf7d0" />
+          <stop offset="40%"  stopColor="#22c55e" />
+          <stop offset="80%"  stopColor="#14532d" />
+          <stop offset="100%" stopColor="#052e16" stopOpacity="0.9" />
+        </radialGradient>
+        {/* Highlight on balloon */}
+        <radialGradient id="bu-shine" cx="35%" cy="28%" r="45%">
+          <stop offset="0%"   stopColor="white" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="white" stopOpacity="0" />
+        </radialGradient>
+        <filter id="bu-glow" x="-10%" y="-10%" width="120%" height="120%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <filter id="bu-shadow">
+          <feDropShadow dx="2" dy="4" stdDeviation="4" floodColor="#000" floodOpacity="0.35" />
+        </filter>
+        {/* Clip to balloon circle */}
+        <clipPath id="bu-clip">
+          <circle cx="130" cy="105" r="80" />
+        </clipPath>
+      </defs>
+
+      {/* Sky */}
+      <rect x="0" y="0" width="260" height="270" fill="url(#bu-sky)" rx="10" />
+
+      {/* Clouds */}
+      {[[30,38],[190,28],[220,65],[20,72]].map(([cx,cy],i) => (
+        <g key={i} fillOpacity="0.18" fill="white">
+          <ellipse cx={cx} cy={cy} rx="22" ry="10" />
+          <ellipse cx={cx+14} cy={cy-4} rx="14" ry="9" />
+          <ellipse cx={cx-12} cy={cy-3} rx="12" ry="8" />
+        </g>
+      ))}
+
+      {/* Stars */}
+      {[[18,14],[55,8],[105,6],[165,12],[220,8],[248,22],[12,45],[245,48]].map(([x,y],i) => (
+        <circle key={i} cx={x} cy={y} r="1.2" fill="white" fillOpacity="0.5" />
+      ))}
+
+      {/* ── Balloon body ── */}
+      {/* Panel 1 (yellow) */}
+      <path d="M 130 25 A 80 80 0 0 1 210 105 L 130 105 Z"
+            fill="url(#bu-bal)" clipPath="url(#bu-clip)" />
+      {/* Panel 2 (red) */}
+      <path d="M 210 105 A 80 80 0 0 1 130 185 L 130 105 Z"
+            fill="url(#bu-bal2)" clipPath="url(#bu-clip)" />
+      {/* Panel 3 (green) */}
+      <path d="M 130 185 A 80 80 0 0 1 50 105 L 130 105 Z"
+            fill="url(#bu-bal3)" clipPath="url(#bu-clip)" />
+      {/* Panel 4 (yellow) */}
+      <path d="M 50 105 A 80 80 0 0 1 130 25 L 130 105 Z"
+            fill="url(#bu-bal)" clipPath="url(#bu-clip)" />
+
+      {/* Balloon outline */}
+      <circle cx="130" cy="105" r="80" fill="none" stroke="#fbbf24" strokeWidth="2"
+              filter="url(#bu-shadow)" />
+
+      {/* Panel divider lines */}
+      {[0, 90, 180, 270].map((angle, i) => {
+        const rad = (angle - 90) * Math.PI / 180;
+        return (
+          <line key={i}
+                x1="130" y1="105"
+                x2={130 + 80 * Math.cos(rad)}
+                y2={105 + 80 * Math.sin(rad)}
+                stroke="#78350f" strokeWidth="1.2" strokeOpacity="0.55" />
+        );
+      })}
+
+      {/* Latitude rings */}
+      <ellipse cx="130" cy="80"  rx="68" ry="15" fill="none" stroke="#fbbf24" strokeWidth="1" strokeOpacity="0.30" strokeDasharray="5,3" />
+      <ellipse cx="130" cy="105" rx="80" ry="20" fill="none" stroke="#fbbf24" strokeWidth="1" strokeOpacity="0.30" strokeDasharray="5,3" />
+      <ellipse cx="130" cy="130" rx="68" ry="15" fill="none" stroke="#fbbf24" strokeWidth="1" strokeOpacity="0.30" strokeDasharray="5,3" />
+
+      {/* Balloon shine */}
+      <circle cx="130" cy="105" r="80" fill="url(#bu-shine)" />
+
+      {/* ── Ropes from bottom of balloon to basket ── */}
+      {[-28, -10, 10, 28].map((dx, i) => (
+        <line key={i}
+              x1={130 + dx} y1="183"
+              x2={130 + (dx > 0 ? 18 : -18)} y2="215"
+              stroke="#d97706" strokeWidth="1.4" strokeOpacity="0.85" />
+      ))}
+
+      {/* ── Basket ── */}
+      <rect x="112" y="214" width="36" height="24" rx="3"
+            fill="#92400e" stroke="#b45309" strokeWidth="1.8" />
+      {/* Basket weave lines */}
+      <line x1="120" y1="214" x2="120" y2="238" stroke="#b45309" strokeWidth="1" strokeOpacity="0.6" />
+      <line x1="130" y1="214" x2="130" y2="238" stroke="#b45309" strokeWidth="1" strokeOpacity="0.6" />
+      <line x1="140" y1="214" x2="140" y2="238" stroke="#b45309" strokeWidth="1" strokeOpacity="0.6" />
+      <line x1="112" y1="222" x2="148" y2="222" stroke="#b45309" strokeWidth="1" strokeOpacity="0.6" />
+      <line x1="112" y1="230" x2="148" y2="230" stroke="#b45309" strokeWidth="1" strokeOpacity="0.6" />
+
+      {/* Flame glow at basket top */}
+      <ellipse cx="130" cy="213" rx="8" ry="5" fill="#fbbf24" fillOpacity="0.65"
+               filter="url(#bu-glow)" />
+      <ellipse cx="130" cy="211" rx="4" ry="7" fill="#fb923c" fillOpacity="0.80" />
+      <ellipse cx="130" cy="209" rx="2" ry="4" fill="#fde68a" fillOpacity="0.90" />
+
+      {/* ── Radius line ── */}
+      {r && (
+        <>
+          <line x1="130" y1="105" x2="210" y2="105"
+                stroke="#fde68a" strokeWidth="1.6" strokeDasharray="5,3" />
+          <circle cx="130" cy="105" r="3.5" fill="#fde68a" />
+          <text x="172" y="97" fill="#fde68a" fontSize="12"
+                textAnchor="middle" fontFamily="monospace" fontWeight="700">r = {r}</text>
+        </>
+      )}
+
+      {/* Label */}
+      <text x="130" y="260" fill="#fde68a" fontSize="11"
+            textAnchor="middle" fontFamily="monospace" fillOpacity="0.85">
+        Balon Udara (d = 10 m)
+      </text>
+    </svg>
+  );
+}
+
 function GedungAtapSetengahBolaSVG({ r }: { r?: string }) {
   return (
     <svg viewBox="0 0 280 230" width="280" height="230" className="mx-auto">
@@ -751,7 +896,7 @@ const mcQuestions: QMC[] = [
   {
     n: 15, title: "Volume Balon Udara – d = 10 m", cat: "app",
     content: "Sebuah balon udara berbentuk bola berdiameter 10 m. Volume gas yang diisi ke dalam balon adalah ... (π = 3,14)",
-    diagram: <SphereSVG r="5 m" color="#fbbf24" extraLabel="Balon Udara" />,
+    diagram: <BalonUdaraSVG r="5 m" />,
     options: [
       { key: "A", text: "261,67 m³" },
       { key: "B", text: "392,5 m³" },
