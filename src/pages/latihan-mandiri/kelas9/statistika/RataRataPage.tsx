@@ -51,10 +51,7 @@ const questions: Q[] = [
   Qn(1, "Rata-Rata Data Survei – ANBK", {
     content: "Sebuah survei dilakukan terhadap 10 siswa tentang durasi olahraga mereka setiap hari (dalam jam). Data yang diperoleh: 9, 7, 8, 9, 6, 8, 8, 9, 10, 7. Hitunglah rata-rata durasi olahraga siswa tersebut!",
   }),
-  Qn(2, "Pemahaman Rata-Rata – ANBK", {
-    content: "Rata-rata gaji 5 karyawan sebuah toko adalah Rp3.000.000. Kemudian seorang manajer dengan gaji Rp8.000.000 bergabung ke dalam tim. Tentukan rata-rata gaji seluruh anggota tim setelah manajer bergabung!",
-  }),
-  Qn(3, "Banyak Siswa di Atas Rata-Rata – UN", {
+  Qn(2, "Banyak Siswa di Atas Rata-Rata – UN", {
     diagram: (() => (
       <svg width="300" height="88" viewBox="0 0 300 88" className="mx-auto">
         <rect x="4" y="4" width="292" height="80" rx="10" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -79,11 +76,11 @@ const questions: Q[] = [
     ))(),
     content: "Tabel di atas menunjukkan nilai ulangan harian 20 siswa. Hitunglah rata-rata nilai ulangan tersebut, kemudian tentukan berapa banyak siswa yang mendapat nilai di atas rata-rata!",
   }),
-  Qn(4, "Rata-Rata dari Tabel Frekuensi – UN", {
+  Qn(3, "Rata-Rata dari Tabel Frekuensi – UN", {
     diagram: <TabelSkorSeni />,
     content: "Tabel di atas menunjukkan skor penilaian karya seni dari 30 siswa. Hitunglah rata-rata skor karya seni seluruh siswa!",
   }),
-  Qn(5, "Mean dari Diagram Batang – UN", {
+  Qn(4, "Mean dari Diagram Batang – UN", {
     diagram: (() => (
       <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
         <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -108,7 +105,7 @@ const questions: Q[] = [
     ))(),
     content: "Diagram batang di atas menunjukkan distribusi nilai ulangan IPA dari 20 siswa. Hitunglah rata-rata nilai ulangan IPA tersebut!",
   }),
-  Qn(6, "Mean dan Data Tidak Diketahui – ANBK", {
+  Qn(5, "Mean dan Data Tidak Diketahui – ANBK", {
     diagram: (() => (
       <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
         <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -139,12 +136,15 @@ const questions: Q[] = [
     ))(),
     content: "Diagram di atas menunjukkan data pengunjung perpustakaan sekolah selama 5 hari. Data pengunjung hari Rabu tidak terbaca (?). Diketahui rata-rata pengunjung selama 5 hari adalah 41 orang per hari. Tentukan banyak pengunjung pada hari Rabu!",
   }),
-  Qn(7, "Menentukan x dari Mean – TKA", {
+  Qn(6, "Menentukan x dari Mean – TKA", {
     diagram: <TabelKuis />,
     content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Diketahui rata-rata nilai kuis adalah 7,5. Tentukan nilai x (banyak siswa yang mendapat nilai 6)!",
   }),
-  Qn(8, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
+  Qn(7, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
     content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
+  }),
+  Qn(8, "Pemahaman Rata-Rata – ANBK", {
+    content: "Rata-rata gaji 5 karyawan sebuah toko adalah Rp3.000.000. Kemudian seorang manajer dengan gaji Rp8.000.000 bergabung ke dalam tim. Tentukan rata-rata gaji seluruh anggota tim setelah manajer bergabung!",
   }),
   Qn(9, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
     content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
@@ -166,21 +166,22 @@ const questions: Q[] = [
   }),
   Qn(15, "Rata-Rata Umur Keluarga – UN", {
     diagram: (() => (
-      <svg width="310" height="80" viewBox="0 0 310 80" className="mx-auto">
-        <rect x="4" y="4" width="302" height="72" rx="8" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
-        <rect x="10" y="10" width="90" height="56" rx="4" fill="#1d4ed8" fillOpacity="0.3"/>
-        {[["Anggota Keluarga",22],["Umur (tahun)",50]].map(([label, y]) => (
-          <text key={y} x="55" y={y} fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">{label}</text>
-        ))}
-        {[["Ayah","40",106],["Ibu","36",158],["Anak I","8",210],["Anak II","6",255],["Anak III","2",294]].map(([name,age,cx]) => (
+      <svg width="360" height="90" viewBox="0 0 360 90" className="mx-auto">
+        <rect x="2" y="2" width="356" height="86" rx="8" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
+        <rect x="8" y="8" width="344" height="36" rx="0" fill="#1d4ed8" fillOpacity="0.25"/>
+        <rect x="8" y="8" width="112" height="74" rx="0" fill="#1d4ed8" fillOpacity="0.2"/>
+        <text x="64" y="23" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">Anggota</text>
+        <text x="64" y="34" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">Keluarga</text>
+        <text x="64" y="66" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">Umur (tahun)</text>
+        <line x1="8" y1="44" x2="352" y2="44" stroke="#3b82f6" strokeWidth="0.8" strokeOpacity="0.5"/>
+        <line x1="120" y1="8" x2="120" y2="82" stroke="#3b82f6" strokeWidth="1" strokeOpacity="0.6"/>
+        {[["Ayah","40",144],["Ibu","36",192],["Anak I","8",240],["Anak II","6",288],["Anak III","2",336]].map(([name,age,cx]) => (
           <g key={name}>
-            <line x1={Number(cx)-22} y1="10" x2={Number(cx)-22} y2="66" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.4"/>
-            <text x={Number(cx)} y="22" fill="#bfdbfe" fontSize="9" textAnchor="middle">{name}</text>
-            <text x={Number(cx)} y="50" fill="#60a5fa" fontSize="10" textAnchor="middle" fontWeight="bold">{age}</text>
+            <line x1={Number(cx)-24} y1="8" x2={Number(cx)-24} y2="82" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.35"/>
+            <text x={Number(cx)} y="30" fill="#bfdbfe" fontSize="9" textAnchor="middle">{name}</text>
+            <text x={Number(cx)} y="67" fill="#60a5fa" fontSize="11" textAnchor="middle" fontWeight="bold">{age}</text>
           </g>
         ))}
-        <line x1="10" y1="33" x2="300" y2="33" stroke="#3b82f6" strokeWidth="0.8" strokeOpacity="0.5"/>
-        <line x1="100" y1="10" x2="100" y2="66" stroke="#3b82f6" strokeWidth="0.8" strokeOpacity="0.5"/>
       </svg>
     ))(),
     content: "Lima orang dalam satu keluarga dicatat nama dan umurnya sebagaimana tampak pada tabel di atas. Berapakah rata-rata umur keluarga tersebut lima tahun yang lalu?",
