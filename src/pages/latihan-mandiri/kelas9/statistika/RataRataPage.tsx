@@ -53,7 +53,6 @@ const questions: Q[] = [
   }),
   Qn(2, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
     content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
-    mathContent: "\\bar{x}_{gab} = \\frac{n_1\\bar{x}_1 + n_2\\bar{x}_2}{n_1 + n_2}",
   }),
   Qn(3, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
     content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
@@ -65,7 +64,6 @@ const questions: Q[] = [
   Qn(5, "Menentukan x dari Mean – TKA", {
     diagram: <TabelKuis />,
     content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Diketahui rata-rata nilai kuis adalah 7,5. Tentukan nilai x (banyak siswa yang mendapat nilai 6)!",
-    mathContent: "\\frac{6x + 7(8)+8(5)+9(4)+10(3)}{x+20} = 7{,}5",
   }),
   Qn(6, "Rata-Rata Berubah karena Koreksi – UN", {
     content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
@@ -131,8 +129,6 @@ const questions: Q[] = [
         ))}
         <rect x="10" y="55" width="280" height="14" fill="#1d4ed8" fillOpacity="0.2"/>
         <text x="150" y="65" fill="#94a3b8" fontSize="7" textAnchor="middle">n = 20 siswa</text>
-        <text x="150" y="85" fill="#fbbf24" fontSize="8" textAnchor="middle" fontWeight="bold">Σfᵢxᵢ = 3(2)+4(3)+5(4)+6(5)+7(3)+8(2)+9(1) = 114</text>
-        <text x="150" y="100" fill="#34d399" fontSize="8" textAnchor="middle">Rata-rata = 114 ÷ 20 = 5,7</text>
       </svg>
     ))(),
     content: "Tabel di atas menunjukkan nilai ulangan harian 20 siswa. Hitunglah rata-rata nilai ulangan tersebut, kemudian tentukan berapa banyak siswa yang mendapat nilai di atas rata-rata!",
@@ -168,7 +164,28 @@ const questions: Q[] = [
     ))(),
     content: "Diagram di atas menunjukkan data pengunjung perpustakaan sekolah selama 5 hari. Data pengunjung hari Rabu tidak terbaca (?). Diketahui rata-rata pengunjung selama 5 hari adalah 41 orang per hari. Tentukan banyak pengunjung pada hari Rabu!",
   }),
-  Qn(15, "Interpretasi Nilai Rata-Rata – TKA", {
+  Qn(15, "Rata-Rata Umur Keluarga – UN", {
+    diagram: (() => (
+      <svg width="310" height="80" viewBox="0 0 310 80" className="mx-auto">
+        <rect x="4" y="4" width="302" height="72" rx="8" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
+        <rect x="10" y="10" width="90" height="56" rx="4" fill="#1d4ed8" fillOpacity="0.3"/>
+        {[["Anggota Keluarga",22],["Umur (tahun)",50]].map(([label, y]) => (
+          <text key={y} x="55" y={y} fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">{label}</text>
+        ))}
+        {[["Ayah","40",106],["Ibu","36",158],["Anak I","8",210],["Anak II","6",255],["Anak III","2",294]].map(([name,age,cx]) => (
+          <g key={name}>
+            <line x1={Number(cx)-22} y1="10" x2={Number(cx)-22} y2="66" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.4"/>
+            <text x={Number(cx)} y="22" fill="#bfdbfe" fontSize="9" textAnchor="middle">{name}</text>
+            <text x={Number(cx)} y="50" fill="#60a5fa" fontSize="10" textAnchor="middle" fontWeight="bold">{age}</text>
+          </g>
+        ))}
+        <line x1="10" y1="33" x2="300" y2="33" stroke="#3b82f6" strokeWidth="0.8" strokeOpacity="0.5"/>
+        <line x1="100" y1="10" x2="100" y2="66" stroke="#3b82f6" strokeWidth="0.8" strokeOpacity="0.5"/>
+      </svg>
+    ))(),
+    content: "Lima orang dalam satu keluarga dicatat nama dan umurnya sebagaimana tampak pada tabel di atas. Berapakah rata-rata umur keluarga tersebut lima tahun yang lalu?",
+  }),
+  Qn(16, "Interpretasi Nilai Rata-Rata – TKA", {
     content: "Sebuah kelas memiliki 25 siswi dengan rata-rata tinggi badan 130 cm. Tentukan apakah setiap pernyataan berikut BENAR atau SALAH!\n\n(A) Jika ada siswi dengan tinggi 132 cm, maka pasti ada siswi lain yang tingginya 128 cm.\n\n(B) Jika 23 siswi masing-masing tingginya 130 cm dan satu siswi tingginya 133 cm, maka siswi ke-25 tingginya 127 cm.\n\n(C) Jika diurutkan dari terpendek ke tertinggi, siswi urutan ke-13 pasti tingginya 130 cm.\n\n(D) Setengah dari siswi di kelas pasti lebih pendek dari 130 cm dan setengahnya lagi pasti lebih tinggi.",
   }),
 ];
@@ -191,7 +208,7 @@ const RataRataPage = () => {
           <p className="text-blue-200/70 text-sm text-center font-body mb-1">Rata-Rata dan Rata-Rata Gabungan</p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-2">
-            <span className="text-blue-400 text-xs font-bold">📋 15 Soal</span>
+            <span className="text-blue-400 text-xs font-bold">📋 16 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
