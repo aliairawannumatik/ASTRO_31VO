@@ -163,13 +163,31 @@ function KolamRenangSVG() {
       {/* Shine on water */}
       <ellipse cx="140" cy="110" rx="100" ry="28" fill="url(#kr-shine)" />
 
-      {/* Water ripple lines */}
-      <ellipse cx="140" cy="110" rx="60" ry="16" fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.4" />
-      <ellipse cx="140" cy="110" rx="30" ry="8" fill="none" stroke="white" strokeWidth="0.8" strokeOpacity="0.3" />
-      <path d="M 80 108 Q 100 103 120 108 Q 140 113 160 108 Q 180 103 200 108"
-        fill="none" stroke="white" strokeWidth="1.2" strokeOpacity="0.5" />
-      <path d="M 90 115 Q 115 109 140 115 Q 165 121 190 115"
-        fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.35" />
+      {/* Water ripple lines — animated */}
+      <ellipse cx="140" cy="110" rx="60" ry="16" fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.4">
+        <animate attributeName="rx" values="60;72;60" dur="2.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" />
+        <animate attributeName="ry" values="16;20;16" dur="2.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" />
+        <animate attributeName="strokeOpacity" values="0.4;0.05;0.4" dur="2.4s" repeatCount="indefinite" />
+      </ellipse>
+      <ellipse cx="140" cy="110" rx="30" ry="8" fill="none" stroke="white" strokeWidth="0.8" strokeOpacity="0.3">
+        <animate attributeName="rx" values="30;50;30" dur="2.4s" begin="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" />
+        <animate attributeName="ry" values="8;14;8" dur="2.4s" begin="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" />
+        <animate attributeName="strokeOpacity" values="0.5;0.05;0.5" dur="2.4s" begin="0.4s" repeatCount="indefinite" />
+      </ellipse>
+      <path fill="none" stroke="white" strokeWidth="1.2" strokeOpacity="0.5">
+        <animate attributeName="d"
+          values="M 80 108 Q 100 103 120 108 Q 140 113 160 108 Q 180 103 200 108;M 80 111 Q 100 106 120 111 Q 140 116 160 111 Q 180 106 200 111;M 80 108 Q 100 103 120 108 Q 140 113 160 108 Q 180 103 200 108"
+          dur="1.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" />
+      </path>
+      <path fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.35">
+        <animate attributeName="d"
+          values="M 90 115 Q 115 109 140 115 Q 165 121 190 115;M 90 112 Q 115 118 140 112 Q 165 106 190 112;M 90 115 Q 115 109 140 115 Q 165 121 190 115"
+          dur="2.1s" begin="0.3s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" />
+      </path>
+      {/* Shine pulse */}
+      <ellipse cx="140" cy="110" rx="100" ry="28" fill="url(#kr-shine)">
+        <animate attributeName="fillOpacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+      </ellipse>
 
       {/* Top ellipse rim */}
       <ellipse cx="140" cy="90" rx="100" ry="30" fill="#bae6fd" fillOpacity="0.15" stroke="#38bdf8" strokeWidth="2" strokeDasharray="6,4" />
@@ -413,18 +431,41 @@ function LilinSVG() {
         </filter>
       </defs>
 
-      {/* Glow halo behind flame */}
-      <ellipse cx="100" cy="90" rx="38" ry="50" fill="url(#li-glow)" filter="url(#li-blur)" />
+      {/* Glow halo — pulses */}
+      <ellipse cx="100" cy="90" rx="38" ry="50" fill="url(#li-glow)" filter="url(#li-blur)">
+        <animate attributeName="rx" values="38;46;34;42;38" dur="1.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
+        <animate attributeName="ry" values="50;58;44;54;50" dur="1.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
+        <animate attributeName="fillOpacity" values="0.8;1;0.6;0.9;0.8" dur="1.4s" repeatCount="indefinite" />
+      </ellipse>
 
-      {/* FLAME — outer glow */}
-      <path d="M 100 118 C 78 105 72 82 80 62 C 86 48 92 38 100 28 C 108 38 114 48 120 62 C 128 82 122 105 100 118 Z"
-        fill="url(#li-flame-outer)" filter="url(#li-blur)" />
-      {/* FLAME — main */}
-      <path d="M 100 118 C 82 108 76 88 83 68 C 88 54 94 42 100 32 C 106 42 112 54 117 68 C 124 88 118 108 100 118 Z"
-        fill="url(#li-flame-core)" />
-      {/* FLAME — inner bright core */}
-      <path d="M 100 115 C 90 107 88 94 92 80 C 95 70 98 62 100 55 C 102 62 105 70 108 80 C 112 94 110 107 100 115 Z"
-        fill="white" fillOpacity="0.55" />
+      {/* FLAME — outer glow, flickers left-right */}
+      <g>
+        <animateTransform attributeName="transform" type="translate"
+          values="0,0; -3,-2; 2,-1; -1,0; 3,-3; 0,0"
+          dur="0.9s" repeatCount="indefinite" calcMode="spline"
+          keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
+        <path d="M 100 118 C 78 105 72 82 80 62 C 86 48 92 38 100 28 C 108 38 114 48 120 62 C 128 82 122 105 100 118 Z"
+          fill="url(#li-flame-outer)" filter="url(#li-blur)" />
+      </g>
+      {/* FLAME — main, flickers opposite phase */}
+      <g>
+        <animateTransform attributeName="transform" type="translate"
+          values="0,0; 2,-1; -2,-2; 1,0; -3,-2; 0,0"
+          dur="0.9s" repeatCount="indefinite" calcMode="spline"
+          keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
+        <path fill="url(#li-flame-core)">
+          <animate attributeName="d"
+            values="M 100 118 C 82 108 76 88 83 68 C 88 54 94 42 100 32 C 106 42 112 54 117 68 C 124 88 118 108 100 118 Z;M 100 118 C 80 106 75 85 82 65 C 87 51 93 39 100 29 C 107 39 113 51 118 65 C 125 85 120 106 100 118 Z;M 100 118 C 84 109 78 90 84 70 C 89 55 95 43 100 33 C 105 43 111 55 116 70 C 122 90 116 109 100 118 Z;M 100 118 C 82 108 76 88 83 68 C 88 54 94 42 100 32 C 106 42 112 54 117 68 C 124 88 118 108 100 118 Z"
+            dur="0.7s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1" />
+        </path>
+      </g>
+      {/* FLAME — inner bright core, fast flicker */}
+      <path fill="white">
+        <animate attributeName="fillOpacity" values="0.55;0.75;0.45;0.65;0.55" dur="0.5s" repeatCount="indefinite" />
+        <animate attributeName="d"
+          values="M 100 115 C 90 107 88 94 92 80 C 95 70 98 62 100 55 C 102 62 105 70 108 80 C 112 94 110 107 100 115 Z;M 100 115 C 88 106 87 92 91 78 C 94 68 97 60 100 53 C 103 60 106 68 109 78 C 113 92 112 106 100 115 Z;M 100 115 C 90 107 88 94 92 80 C 95 70 98 62 100 55 C 102 62 105 70 108 80 C 112 94 110 107 100 115 Z"
+          dur="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" />
+      </path>
       {/* Wick */}
       <line x1="100" y1="118" x2="100" y2="128" stroke="#292524" strokeWidth="1.5" strokeLinecap="round" />
 
