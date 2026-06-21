@@ -230,13 +230,13 @@ function HorizontalCapsuleSVG({ d, totalLen, color = "#34d399" }: {
       <text x={dimX - 16} y={cy + 5} fill={color} fontSize="12"
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">{d} cm</text>
 
-      {/* LENGTH dimension — below shape */}
-      <line x1={leftX - eRx} y1={botY + 24} x2={rightX + eRx} y2={botY + 24}
+      {/* LENGTH dimension — from leftmost tip of left hemi to rightmost tip of right hemi */}
+      <line x1={leftX - ry} y1={botY + 24} x2={rightX + ry} y2={botY + 24}
         stroke={color} strokeWidth={LSW} strokeOpacity="0.85" />
-      <line x1={leftX - eRx} y1={botY + 18} x2={leftX - eRx} y2={botY + 30} stroke={color} strokeWidth={LSW} />
-      <line x1={rightX + eRx} y1={botY + 18} x2={rightX + eRx} y2={botY + 30} stroke={color} strokeWidth={LSW} />
-      <polygon points={`${leftX - eRx - 5},${botY + 24} ${leftX - eRx + 7},${botY + 19} ${leftX - eRx + 7},${botY + 29}`} fill={color} />
-      <polygon points={`${rightX + eRx + 5},${botY + 24} ${rightX + eRx - 7},${botY + 19} ${rightX + eRx - 7},${botY + 29}`} fill={color} />
+      <line x1={leftX - ry} y1={botY + 18} x2={leftX - ry} y2={botY + 30} stroke={color} strokeWidth={LSW} />
+      <line x1={rightX + ry} y1={botY + 18} x2={rightX + ry} y2={botY + 30} stroke={color} strokeWidth={LSW} />
+      <polygon points={`${leftX - ry - 5},${botY + 24} ${leftX - ry + 7},${botY + 19} ${leftX - ry + 7},${botY + 29}`} fill={color} />
+      <polygon points={`${rightX + ry + 5},${botY + 24} ${rightX + ry - 7},${botY + 19} ${rightX + ry - 7},${botY + 29}`} fill={color} />
       <text x={(leftX + rightX) / 2} y={botY + 46} fill={color} fontSize="12"
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">{totalLen} cm</text>
     </svg>
