@@ -243,6 +243,63 @@ function HorizontalCapsuleSVG({ d, totalLen, color = "#34d399" }: {
   );
 }
 
+function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
+  const VW = 360, VH = 300;
+  // Cylinder dimensions
+  const cx = 160, cylW = 72, ell = 18;
+  const topY = 30, botY = 250;
+  const cylH = botY - topY;
+  // Sphere: radius = half cylinder height = half cylinder width
+  const sr = cylW; // sphere visual radius equals cylinder half-width
+  const scx = cx, scy = (topY + botY) / 2;
+
+  return (
+    <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
+      {/* Cylinder back wall (light fill) */}
+      <rect x={cx - cylW} y={topY} width={cylW * 2} height={cylH}
+        fill={color} fillOpacity="0.06" />
+      {/* Cylinder side lines */}
+      <line x1={cx - cylW} y1={topY} x2={cx - cylW} y2={botY} stroke={color} strokeWidth={SW} />
+      <line x1={cx + cylW} y1={topY} x2={cx + cylW} y2={botY} stroke={color} strokeWidth={SW} />
+      {/* Cylinder bottom ellipse (solid) */}
+      <ellipse cx={cx} cy={botY} rx={cylW} ry={ell}
+        fill={color} fillOpacity="0.18" stroke={color} strokeWidth={SW} />
+      {/* Cylinder top ellipse (dashed – hidden edge) */}
+      <ellipse cx={cx} cy={topY} rx={cylW} ry={ell}
+        fill={color} fillOpacity="0.12" stroke={color} strokeWidth={SW * 0.8} strokeDasharray="6,4" />
+
+      {/* Sphere body (circle) */}
+      <circle cx={scx} cy={scy} r={sr}
+        fill={color} fillOpacity="0.14" stroke={color} strokeWidth={SW} />
+      {/* Sphere equator (horizontal ellipse) */}
+      <ellipse cx={scx} cy={scy} rx={sr} ry={ell}
+        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,3" strokeOpacity="0.7" />
+      {/* Sphere meridian (vertical ellipse – dashed left half) */}
+      <path d={`M ${scx} ${scy - sr} A ${Math.round(sr * 0.45)} ${sr} 0 0 1 ${scx} ${scy + sr}`}
+        fill="none" stroke={color} strokeWidth={LSW} strokeOpacity="0.65" />
+      <path d={`M ${scx} ${scy - sr} A ${Math.round(sr * 0.45)} ${sr} 0 0 0 ${scx} ${scy + sr}`}
+        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,3" strokeOpacity="0.5" />
+
+      {/* Radius line of sphere */}
+      <line x1={scx} y1={scy} x2={scx + sr} y2={scy}
+        stroke={color} strokeWidth={LSW} strokeDasharray="4,3" strokeOpacity="0.85" />
+      <text x={scx + sr / 2 - 4} y={scy - 6} fill={color} fontSize="13"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+
+      {/* Label: Bola */}
+      <text x={scx - sr - 8} y={scy + 4} fill={color} fontSize="12"
+        fontFamily="monospace" fontWeight="600" textAnchor="end" fillOpacity="0.85">Bola</text>
+      {/* Label: Tabung */}
+      <text x={cx + cylW + 10} y={topY + 14} fill={color} fontSize="12"
+        fontFamily="monospace" fontWeight="600" fillOpacity="0.85">Tabung</text>
+
+      {/* Note: t = 2r */}
+      <text x={cx + cylW + 10} y={scy + 4} fill={color} fontSize="12"
+        fontFamily="monospace" fontWeight="bold">t = 2r</text>
+    </svg>
+  );
+}
+
 function InfoBubbleSVG({ lines, color = "#22d3ee" }: { lines: string[]; color?: string }) {
   const lineH = 32;
   const pad   = 20;
@@ -414,6 +471,20 @@ const mcQuestions: QMC[] = [
     ],
     answer: "C",
   },
+
+  /* ── BOLA DI DALAM TABUNG ── */
+  {
+    n: 13, title: "Luas Permukaan Tabung (Bola di Dalam Tabung)", cat: "campuran",
+    content: "Gambar di bawah adalah sebuah bola dimasukkan ke sebuah tabung. Jika luas permukaan bola 240 cm², maka luas permukaan tabung adalah …",
+    diagram: <BolaDalamTabungSVG />,
+    options: [
+      { key: "A", text: "360 cm²" },
+      { key: "B", text: "300 cm²" },
+      { key: "C", text: "160 cm²" },
+      { key: "D", text: "150 cm²" },
+    ],
+    answer: "A",
+  },
 ];
 
 /* ═══════════════════════════════════════════════════
@@ -483,7 +554,7 @@ const GabunganPage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-              <span className="text-emerald-400 text-xs font-bold">📋 12 Soal</span>
+              <span className="text-emerald-400 text-xs font-bold">📋 13 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
