@@ -296,6 +296,84 @@ function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
   );
 }
 
+function BolaDiTabungAirSVG({ color = "#38bdf8" }: { color?: string }) {
+  const VW = 260, VH = 240;
+  const cx = 105;
+  const cylHW = 42;       // cylinder half-width
+  const br = 21;          // ball visual radius (= half of cylinder half-width × 2)
+  const botY = 220;       // cylinder bottom y
+  const topCylY = 28;     // cylinder top y (visual)
+  const ell = 10;         // ellipse ry for top/bottom circles
+
+  // Ball centres: 2 per row, 3 rows stacked from bottom
+  const balls = [
+    { x: cx - br, y: botY - br },          // row 1 left
+    { x: cx + br, y: botY - br },          // row 1 right
+    { x: cx - br, y: botY - br - br * 2 }, // row 2 left
+    { x: cx + br, y: botY - br - br * 2 }, // row 2 right
+    { x: cx - br, y: botY - br - br * 4 }, // row 3 left
+    { x: cx + br, y: botY - br - br * 4 }, // row 3 right
+  ];
+
+  const waterBeforeY = botY - 90;  // 30 cm water
+  const waterAfterY  = botY - 132; // 44 cm water
+  const lx = cx + cylHW + 10;
+
+  return (
+    <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: "240px", display: "block", margin: "0 auto" }}>
+      {/* Water fill (after) */}
+      <rect x={cx - cylHW} y={waterAfterY} width={cylHW * 2} height={botY - waterAfterY}
+        fill={color} fillOpacity="0.18" />
+
+      {/* Balls (clipped within water) */}
+      {balls.map((b, i) => (
+        <circle key={i} cx={b.x} cy={b.y} r={br}
+          fill="#64748b" fillOpacity="0.55" stroke="#94a3b8" strokeWidth={1.5} />
+      ))}
+
+      {/* Water surface line (after) */}
+      <line x1={cx - cylHW} y1={waterAfterY} x2={cx + cylHW} y2={waterAfterY}
+        stroke={color} strokeWidth={1.5} strokeDasharray="5,3" strokeOpacity="0.9" />
+
+      {/* Water surface label (after) */}
+      <text x={cx - cylHW - 6} y={waterAfterY + 4} fill={color} fontSize="10"
+        fontFamily="monospace" fontWeight="bold" textAnchor="end">44 cm</text>
+
+      {/* Water surface line (before, dashed) */}
+      <line x1={cx - cylHW} y1={waterBeforeY} x2={cx + cylHW} y2={waterBeforeY}
+        stroke={color} strokeWidth={1.2} strokeDasharray="3,4" strokeOpacity="0.5" />
+      <text x={cx - cylHW - 6} y={waterBeforeY + 4} fill={color} fontSize="10"
+        fontFamily="monospace" textAnchor="end" fillOpacity="0.6">30 cm</text>
+
+      {/* Cylinder sides */}
+      <line x1={cx - cylHW} y1={topCylY} x2={cx - cylHW} y2={botY} stroke={color} strokeWidth={SW} />
+      <line x1={cx + cylHW} y1={topCylY} x2={cx + cylHW} y2={botY} stroke={color} strokeWidth={SW} />
+
+      {/* Cylinder bottom ellipse */}
+      <ellipse cx={cx} cy={botY} rx={cylHW} ry={ell}
+        fill={color} fillOpacity="0.20" stroke={color} strokeWidth={SW} />
+
+      {/* Cylinder top ellipse (dashed) */}
+      <ellipse cx={cx} cy={topCylY} rx={cylHW} ry={ell}
+        fill="none" stroke={color} strokeWidth={SW * 0.8} strokeDasharray="6,4" strokeOpacity="0.6" />
+
+      {/* Diameter label */}
+      <line x1={cx - cylHW} y1={botY + 16} x2={cx + cylHW} y2={botY + 16}
+        stroke={color} strokeWidth={LSW} strokeOpacity="0.8" />
+      <line x1={cx - cylHW} y1={botY + 10} x2={cx - cylHW} y2={botY + 22} stroke={color} strokeWidth={LSW} />
+      <line x1={cx + cylHW} y1={botY + 10} x2={cx + cylHW} y2={botY + 22} stroke={color} strokeWidth={LSW} />
+      <text x={cx} y={botY + 28} fill={color} fontSize="11"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 28 cm</text>
+
+      {/* Ball radius label */}
+      <line x1={balls[0].x} y1={balls[0].y} x2={balls[0].x + br} y2={balls[0].y}
+        stroke="#94a3b8" strokeWidth={LSW} strokeDasharray="3,2" />
+      <text x={balls[0].x + br / 2} y={balls[0].y - 4} fill="#94a3b8" fontSize="10"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">r=7</text>
+    </svg>
+  );
+}
+
 function InfoBubbleSVG({ lines, color = "#22d3ee" }: { lines: string[]; color?: string }) {
   const lineH = 32;
   const pad   = 20;
@@ -468,9 +546,23 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
 
-  /* ── BOLA DI DALAM TABUNG ── */
+  /* ── BOLA DI DALAM TABUNG (AIR) ── */
   {
-    n: 13, title: "Luas Permukaan Tabung (Bola di Dalam Tabung)", cat: "campuran",
+    n: 13, title: "Tinggi Air Setelah Bola Dimasukkan Tabung", cat: "campuran",
+    content: "Ke dalam tabung berisi air setinggi 30 cm dimasukkan 6 bola besi yang masing-masing berjari-jari 7 cm. Jika diameter tabung 28 cm, tinggi air dalam tabung setelah dimasukkan enam bola besi adalah …",
+    diagram: <BolaDiTabungAirSVG />,
+    options: [
+      { key: "A", text: "37 cm" },
+      { key: "B", text: "42 cm" },
+      { key: "C", text: "44 cm" },
+      { key: "D", text: "52 cm" },
+    ],
+    answer: "C",
+  },
+
+  /* ── BOLA DI DALAM TABUNG (LUAS PERMUKAAN) ── */
+  {
+    n: 14, title: "Luas Permukaan Tabung (Bola di Dalam Tabung)", cat: "campuran",
     content: "Gambar di bawah adalah sebuah bola dimasukkan ke sebuah tabung. Jika luas permukaan bola 240 cm², maka luas permukaan tabung adalah …",
     diagram: <BolaDalamTabungSVG />,
     options: [
@@ -550,7 +642,7 @@ const GabunganPage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-              <span className="text-emerald-400 text-xs font-bold">📋 13 Soal</span>
+              <span className="text-emerald-400 text-xs font-bold">📋 14 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
