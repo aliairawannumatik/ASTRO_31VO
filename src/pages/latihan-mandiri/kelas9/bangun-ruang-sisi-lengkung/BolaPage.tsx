@@ -280,6 +280,87 @@ function BolaInKubusSVG({ s, color = "#818cf8" }: { s?: string; color?: string }
   );
 }
 
+function PlanetModelSVG({ r }: { r?: string }) {
+  return (
+    <svg viewBox="0 0 280 240" width="280" height="240" className="mx-auto">
+      <defs>
+        <radialGradient id="planet-body" cx="35%" cy="30%" r="65%">
+          <stop offset="0%"   stopColor="#c4b5fd" />
+          <stop offset="40%"  stopColor="#7c3aed" />
+          <stop offset="75%"  stopColor="#4c1d95" />
+          <stop offset="100%" stopColor="#1e1b4b" />
+        </radialGradient>
+        <radialGradient id="planet-glow" cx="50%" cy="50%" r="55%">
+          <stop offset="70%"  stopColor="#a78bfa" stopOpacity="0" />
+          <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.35" />
+        </radialGradient>
+        <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor="#ddd6fe" stopOpacity="0.10" />
+          <stop offset="25%"  stopColor="#c4b5fd" stopOpacity="0.65" />
+          <stop offset="50%"  stopColor="#ede9fe" stopOpacity="0.80" />
+          <stop offset="75%"  stopColor="#c4b5fd" stopOpacity="0.65" />
+          <stop offset="100%" stopColor="#ddd6fe" stopOpacity="0.10" />
+        </linearGradient>
+        <clipPath id="ring-front"><rect x="0" y="118" width="280" height="122" /></clipPath>
+        <clipPath id="ring-back"><rect x="0" y="0" width="280" height="118" /></clipPath>
+      </defs>
+
+      {/* Stars */}
+      {[[20,20],[258,35],[14,80],[265,160],[30,190],[250,200],[60,220],[220,10]] .map(([x,y],i) => (
+        <circle key={i} cx={x} cy={y} r="1.5" fill="white" fillOpacity="0.5" />
+      ))}
+
+      {/* Back ring */}
+      <ellipse cx="140" cy="118" rx="110" ry="22"
+               fill="none" stroke="url(#ring-grad)" strokeWidth="14"
+               clipPath="url(#ring-back)" opacity="0.55" />
+
+      {/* Planet body */}
+      <circle cx="140" cy="118" r="72" fill="url(#planet-body)" />
+      <circle cx="140" cy="118" r="72" fill="url(#planet-glow)" />
+
+      {/* Surface bands */}
+      <ellipse cx="140" cy="100" rx="70" ry="8" fill="none" stroke="#c4b5fd" strokeWidth="4" strokeOpacity="0.20" />
+      <ellipse cx="140" cy="118" rx="72" ry="9" fill="none" stroke="#7c3aed" strokeWidth="5" strokeOpacity="0.30" />
+      <ellipse cx="140" cy="136" rx="70" ry="8" fill="none" stroke="#6d28d9" strokeWidth="4" strokeOpacity="0.25" />
+
+      {/* Storm spot */}
+      <ellipse cx="118" cy="110" rx="14" ry="8" fill="#7c3aed" fillOpacity="0.5" />
+      <ellipse cx="118" cy="110" rx="9"  ry="5" fill="#a78bfa" fillOpacity="0.4" />
+      <ellipse cx="118" cy="110" rx="4"  ry="2.5" fill="#c4b5fd" fillOpacity="0.6" />
+
+      {/* Polar cap */}
+      <ellipse cx="140" cy="50" rx="28" ry="10" fill="#ede9fe" fillOpacity="0.25" />
+
+      {/* Equator dashed */}
+      <ellipse cx="140" cy="118" rx="72" ry="20" fill="none" stroke="#ddd6fe"
+               strokeWidth="1" strokeDasharray="5,4" strokeOpacity="0.30" />
+
+      {/* Front ring */}
+      <ellipse cx="140" cy="118" rx="110" ry="22"
+               fill="none" stroke="url(#ring-grad)" strokeWidth="14"
+               clipPath="url(#ring-front)" />
+
+      {/* Radius line */}
+      {r && (
+        <>
+          <line x1="140" y1="118" x2="212" y2="118"
+                stroke="#ddd6fe" strokeWidth="1.6" strokeDasharray="4,3" />
+          <circle cx="140" cy="118" r="3.5" fill="#ddd6fe" />
+          <text x="178" y="110" fill="#ddd6fe" fontSize="12"
+                textAnchor="middle" fontFamily="monospace" fontWeight="700">r = {r}</text>
+        </>
+      )}
+
+      {/* Label */}
+      <text x="140" y="228" fill="#c4b5fd" fontSize="11"
+            textAnchor="middle" fontFamily="monospace" fillOpacity="0.80">
+        Model Planet (d = 1,4 m)
+      </text>
+    </svg>
+  );
+}
+
 function BolaDalamTabungUkuranSVG({ rBola, rTabung, tTabung, color = "#818cf8" }: {
   rBola: string; rTabung: string; tTabung: string; color?: string;
 }) {
@@ -434,7 +515,7 @@ const mcQuestions: QMC[] = [
   {
     n: 11, title: "Kebutuhan Cat Model Planet – d = 1,4 m", cat: "app",
     content: "Sebuah model planet berbentuk bola dengan diameter 1,4 m dicat seluruhnya. Jika 1 kg cat dapat menutup 50 m², cat yang dibutuhkan adalah ... (π = 22/7)",
-    diagram: <SphereSVG r="0,7 m" color="#a78bfa" extraLabel="Model Planet" />,
+    diagram: <PlanetModelSVG r="0,7 m" />,
     options: [
       { key: "A", text: "0,062 kg" },
       { key: "B", text: "0,093 kg" },
