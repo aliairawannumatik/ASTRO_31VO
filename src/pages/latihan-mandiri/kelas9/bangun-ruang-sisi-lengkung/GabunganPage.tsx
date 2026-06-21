@@ -244,19 +244,18 @@ function HorizontalCapsuleSVG({ d, totalLen, color = "#34d399" }: {
 }
 
 function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
-  const VW = 360, VH = 280;
-  const cx = 155;
-  const sr = 88;       // sphere visual radius
-  const ell = 22;      // perspective ellipse ry for circles
-  const scy = 136;     // sphere centre y
+  const VW = 220, VH = 200;
+  const cx = 110;
+  const sr = 62;       // sphere visual radius
+  const ell = 16;      // perspective ellipse ry
+  const scy = 100;     // sphere centre y
 
-  // Cylinder top/bottom derived from sphere so they touch exactly
-  const topY = scy - sr;  // = 48
-  const botY = scy + sr;  // = 224
-  const cylW = sr;         // cylinder half-width = sphere radius
+  const topY = scy - sr;
+  const botY = scy + sr;
+  const cylW = sr;
 
   return (
-    <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
+    <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: "200px", display: "block", margin: "0 auto" }}>
       {/* Cylinder back wall fill */}
       <rect x={cx - cylW} y={topY} width={cylW * 2} height={botY - topY}
         fill={color} fillOpacity="0.05" />
@@ -265,11 +264,11 @@ function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
       <line x1={cx - cylW} y1={topY} x2={cx - cylW} y2={botY} stroke={color} strokeWidth={SW} />
       <line x1={cx + cylW} y1={topY} x2={cx + cylW} y2={botY} stroke={color} strokeWidth={SW} />
 
-      {/* Cylinder bottom ellipse (solid — visible) */}
+      {/* Cylinder bottom ellipse (solid) */}
       <ellipse cx={cx} cy={botY} rx={cylW} ry={ell}
         fill={color} fillOpacity="0.18" stroke={color} strokeWidth={SW} />
 
-      {/* Cylinder top ellipse (dashed — hidden edge) */}
+      {/* Cylinder top ellipse (dashed) */}
       <ellipse cx={cx} cy={topY} rx={cylW} ry={ell}
         fill={color} fillOpacity="0.12" stroke={color} strokeWidth={SW * 0.8} strokeDasharray="6,4" />
 
@@ -277,7 +276,7 @@ function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
       <circle cx={cx} cy={scy} r={sr}
         fill={color} fillOpacity="0.13" stroke={color} strokeWidth={SW} />
 
-      {/* Sphere equator ellipse */}
+      {/* Sphere equator */}
       <ellipse cx={cx} cy={scy} rx={sr} ry={ell}
         fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,3" strokeOpacity="0.7" />
 
@@ -291,16 +290,8 @@ function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
       {/* Radius line */}
       <line x1={cx} y1={scy} x2={cx + sr} y2={scy}
         stroke={color} strokeWidth={LSW} strokeDasharray="4,3" strokeOpacity="0.85" />
-      <text x={cx + sr / 2} y={scy - 7} fill={color} fontSize="14"
+      <text x={cx + sr / 2} y={scy - 6} fill={color} fontSize="13"
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
-
-      {/* Labels */}
-      <text x={cx + cylW + 12} y={topY + 14} fill={color} fontSize="12"
-        fontFamily="monospace" fontWeight="600" fillOpacity="0.85">Tabung</text>
-      <text x={cx + cylW + 12} y={scy + 5} fill={color} fontSize="12"
-        fontFamily="monospace" fontWeight="bold">t = 2r</text>
-      <text x={cx - cylW - 10} y={scy + 5} fill={color} fontSize="12"
-        fontFamily="monospace" fontWeight="600" textAnchor="end" fillOpacity="0.8">Bola</text>
     </svg>
   );
 }
