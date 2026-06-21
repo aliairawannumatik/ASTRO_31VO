@@ -1171,15 +1171,6 @@ function AnimasiBolaTabungSVG() {
           </g>
         )}
 
-        {/* Final label when done */}
-        {done && (
-          <>
-            <line x1={CX + CYL_RX + 2} y1={waterY(finalWaterH)} x2={CX + CYL_RX + 18} y2={waterY(finalWaterH)}
-              stroke="#4ade80" strokeWidth="1.5" strokeOpacity="0.9" />
-            <text x={CX + CYL_RX + 20} y={waterY(finalWaterH) + 4} fill="#4ade80" fontSize="11"
-              fontFamily="monospace" fontWeight="bold">44 cm ✓</text>
-          </>
-        )}
 
         {/* Ball counter chip */}
         <text x={CX + CYL_RX + 6} y={CYL_TOP_Y + 16} fill="#e2e8f0" fontSize="11"
@@ -1205,8 +1196,6 @@ function AnimasiBolaTabungSVG() {
         <text x={CX} y={CYL_BOT_Y + 32} fill="#38bdf8" fontSize="11"
           fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 28 cm</text>
 
-        {/* Ball radius note */}
-        <text x="14" y={CYL_TOP_Y + 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r bola = 7</text>
       </svg>
 
       <div className="text-xs text-white/50 font-body text-center">
@@ -1585,10 +1574,10 @@ const mcQuestions: QMC[] = [
     content: "Sebuah bola besi berada di dalam tabung plastik terbuka di bagian atasnya. Tabung tersebut kemudian diisi dengan air sampai penuh. Jika diameter serta tinggi tabung sama dengan diameter bola yaitu 60 cm, tentukanlah volume air yang sudah tertampung oleh tabung!",
     diagram: <BolaDalamTabungAirPenuhSVG d={60} />,
     options: [
-      { key: "A", text: "18.000π cm³ ≈ 56.520 cm³" },
-      { key: "B", text: "36.000π cm³ ≈ 113.040 cm³" },
-      { key: "C", text: "54.000π cm³ ≈ 169.560 cm³" },
-      { key: "D", text: "72.000π cm³ ≈ 226.080 cm³" },
+      { key: "A", text: "18.000π cm³" },
+      { key: "B", text: "36.000π cm³" },
+      { key: "C", text: "54.000π cm³" },
+      { key: "D", text: "72.000π cm³" },
     ],
     answer: "A",
   },
@@ -1740,14 +1729,7 @@ const GabunganPage = () => {
                             </button>
                           ))}
                         </div>
-                        {!isRevealed ? (
-                          q.n !== 13 && (
-                          <button onClick={() => handleReveal(q.n)}
-                            className="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 transition-all cursor-pointer font-body">
-                            Lihat Jawaban
-                          </button>
-                          )
-                        ) : (
+                        {isRevealed && (
                           <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
                             {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
                           </div>
