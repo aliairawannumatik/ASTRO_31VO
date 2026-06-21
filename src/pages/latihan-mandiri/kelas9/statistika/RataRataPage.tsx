@@ -3,10 +3,9 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 
-type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; mathContent?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay" | "mixed" };
+type Q = { n: number; title: string; content: string; mathContent?: string; diagram?: React.ReactNode };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const TabelSkorSeni = () => (
@@ -50,81 +49,34 @@ const TabelKuis = () => (
 
 const questions: Q[] = [
   Qn(1, "Rata-Rata Data Survei – ANBK", {
-    type: "mixed",
-    content: "Sebuah survei dilakukan terhadap 10 siswa tentang durasi olahraga mereka setiap hari (dalam jam, dibulatkan ke jam terdekat). Data yang diperoleh:\n9, 7, 8, 9, 6, 8, 8, 9, 10, 7\nHitunglah rata-rata durasi olahraga tersebut, dibulatkan ke satu desimal!",
-    parts: [
-      { label: "a.", math: "\\text{Jumlah} = 9+7+8+9+6+8+8+9+10+7 = \\ldots" },
-      { label: "b.", math: "\\bar{x} = \\frac{\\ldots}{10} = \\ldots" },
-      { label: "c.", text: "Berapa banyak siswa yang durasi olahraganya di atas rata-rata?" },
-    ],
+    content: "Sebuah survei dilakukan terhadap 10 siswa tentang durasi olahraga mereka setiap hari (dalam jam). Data yang diperoleh: 9, 7, 8, 9, 6, 8, 8, 9, 10, 7. Hitunglah rata-rata durasi olahraga siswa tersebut!",
   }),
   Qn(2, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
-    type: "mixed",
-    content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai-nilai tersebut kemudian digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungan menjadi 76.",
-    parts: [
-      { label: "a.", text: "Misalkan jumlah siswa kelompok B = n₂. Tuliskan persamaan rata-rata gabungannya!" },
-      { label: "b.", math: "\\frac{12 \\times 74 + n_2 \\times 82}{12 + n_2} = 76" },
-      { label: "c.", math: "888 + 82n_2 = 912 + 76n_2 \\Rightarrow 6n_2 = 24 \\Rightarrow n_2 = \\ldots" },
-    ],
+    content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
+    mathContent: "\\bar{x}_{gab} = \\frac{n_1\\bar{x}_1 + n_2\\bar{x}_2}{n_1 + n_2}",
   }),
   Qn(3, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
-    type: "mixed",
-    content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, hitunglah rata-rata tinggi badan perenang cadangan!",
-    parts: [
-      { label: "a.", math: "\\text{Total tinggi seluruh tim} = 171 \\times 8 = \\ldots \\text{ cm}" },
-      { label: "b.", math: "\\text{Total tinggi perenang utama} = 168 \\times 5 = \\ldots \\text{ cm}" },
-      { label: "c.", math: "\\bar{x}_{\\text{cadangan}} = \\frac{1368 - 840}{3} = \\frac{\\ldots}{3} = \\ldots \\text{ cm}" },
-    ],
+    content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
   }),
   Qn(4, "Rata-Rata dari Tabel Frekuensi – UN", {
-    type: "mixed",
     diagram: <TabelSkorSeni />,
-    content: "Penilaian karya seni 30 siswa dicatat dalam tabel di atas.",
-    parts: [
-      { label: "a.", math: "\\sum f_i x_i = 5(2)+6(5)+7(8)+8(9)+9(5)+10(1) = \\ldots" },
-      { label: "b.", math: "\\bar{x} = \\frac{\\ldots}{30} = \\ldots" },
-      { label: "c.", text: "Berapa banyak siswa yang mendapat skor di atas rata-rata?" },
-    ],
+    content: "Tabel di atas menunjukkan skor penilaian karya seni dari 30 siswa. Hitunglah rata-rata skor karya seni seluruh siswa!",
   }),
   Qn(5, "Menentukan x dari Mean – TKA", {
-    type: "mixed",
     diagram: <TabelKuis />,
-    content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Rata-rata nilainya adalah 7,5.",
-    parts: [
-      { label: "a.", math: "\\frac{6x + 7(8)+8(5)+9(4)+10(3)}{x+20} = 7{,}5" },
-      { label: "b.", math: "6x + 162 = 7{,}5(x+20) \\Rightarrow 6x+162 = 7{,}5x+150 \\Rightarrow x = \\ldots" },
-      { label: "c.", text: "Berapa banyak siswa yang mendapat nilai tidak kurang dari 8?" },
-    ],
+    content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Diketahui rata-rata nilai kuis adalah 7,5. Tentukan nilai x (banyak siswa yang mendapat nilai 6)!",
+    mathContent: "\\frac{6x + 7(8)+8(5)+9(4)+10(3)}{x+20} = 7{,}5",
   }),
   Qn(6, "Rata-Rata Berubah karena Koreksi – UN", {
-    type: "mixed",
-    content: "Rata-rata nilai 20 siswa adalah 75. Ternyata nilai seorang siswa yang dicatat 60 seharusnya 80.",
-    parts: [
-      { label: "a.", math: "\\text{Total awal} = 75 \\times 20 = \\ldots" },
-      { label: "b.", math: "\\text{Total setelah koreksi} = 1500 - 60 + 80 = \\ldots" },
-      { label: "c.", math: "\\bar{x}_{\\text{baru}} = \\frac{1520}{20} = \\ldots" },
-    ],
+    content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
   }),
   Qn(7, "Pemahaman Rata-Rata – ANBK", {
-    type: "mixed",
-    content: "Rata-rata gaji 5 karyawan adalah Rp3.000.000. Jika seorang manajer dengan gaji Rp8.000.000 bergabung:",
-    parts: [
-      { label: "a.", math: "\\text{Total gaji awal} = 3.000.000 \\times 5 = \\ldots" },
-      { label: "b.", math: "\\text{Rata-rata baru} = \\frac{15.000.000 + 8.000.000}{6} = \\ldots" },
-      { label: "c.", text: "Mengapa rata-rata gaji naik meskipun tidak semua karyawan naik gaji?" },
-    ],
+    content: "Rata-rata gaji 5 karyawan sebuah toko adalah Rp3.000.000. Kemudian seorang manajer dengan gaji Rp8.000.000 bergabung ke dalam tim. Tentukan rata-rata gaji seluruh anggota tim setelah manajer bergabung!",
   }),
   Qn(8, "Nilai yang Harus Dicapai – UN", {
-    type: "mixed",
-    content: "Dari 4 ujian, rata-rata seorang siswa adalah 75. Ia ingin rata-rata menjadi 78 setelah ujian ke-5.",
-    parts: [
-      { label: "a.", math: "\\text{Total saat ini} = 75 \\times 4 = \\ldots" },
-      { label: "b.", math: "\\text{Total yang diinginkan} = 78 \\times 5 = \\ldots" },
-      { label: "c.", math: "\\text{Nilai ujian ke-5} = 390 - 300 = \\ldots" },
-    ],
+    content: "Dari 4 ujian yang telah dilaksanakan, rata-rata nilai seorang siswa adalah 75. Siswa tersebut ingin meningkatkan rata-ratanya menjadi 78 setelah mengikuti ujian ke-5. Berapa nilai minimum yang harus ia peroleh pada ujian ke-5?",
   }),
   Qn(9, "Mean dari Diagram Batang – UN", {
-    type: "mixed",
     diagram: (() => (
       <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
         <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -147,42 +99,18 @@ const questions: Q[] = [
         <text x="162" y="170" fill="#94a3b8" fontSize="8" textAnchor="middle">Nilai</text>
       </svg>
     ))(),
-    content: "Diagram batang di atas menunjukkan nilai ulangan IPA dari 20 siswa.",
-    parts: [
-      { label: "a.", math: "\\sum f_i x_i = 5(2)+6(4)+7(6)+8(5)+9(2)+10(1) = \\ldots" },
-      { label: "b.", math: "\\bar{x} = \\frac{\\ldots}{20} = \\ldots" },
-      { label: "c.", text: "Berapa banyak siswa yang mendapat nilai di bawah rata-rata?" },
-    ],
+    content: "Diagram batang di atas menunjukkan distribusi nilai ulangan IPA dari 20 siswa. Hitunglah rata-rata nilai ulangan IPA tersebut!",
   }),
   Qn(10, "Perbandingan Jumlah Siswa dari Mean – UN", {
-    type: "mixed",
-    content: "Dalam suatu kelas, rata-rata nilai ujian siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 8,1. Rata-rata nilai seluruh kelas adalah 7,5.",
-    parts: [
-      { label: "a.", text: "Misalkan banyak siswa laki-laki = L dan perempuan = P. Tuliskan persamaan rata-rata gabungannya!" },
-      { label: "b.", math: "7{,}2L + 8{,}1P = 7{,}5(L+P) \\Rightarrow 0{,}6P = 0{,}3L" },
-      { label: "c.", math: "\\frac{L}{P} = \\frac{0{,}6}{0{,}3} = \\ldots \\Rightarrow L : P = \\ldots" },
-    ],
+    content: "Dalam suatu kelas, rata-rata nilai ujian siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 8,1. Jika rata-rata nilai seluruh kelas adalah 7,5, tentukan perbandingan banyak siswa laki-laki terhadap siswa perempuan!",
   }),
   Qn(11, "Mencari Jumlah Siswa dari Mean Gabungan – TKA", {
-    type: "mixed",
-    content: "Rata-rata nilai ulangan matematika siswa perempuan adalah 75 dan siswa laki-laki adalah 66. Rata-rata nilai seluruh kelas adalah 72. Jumlah siswa dalam kelas adalah 36 orang.",
-    parts: [
-      { label: "a.", text: "Misalkan banyak siswa laki-laki = L dan perempuan = P, maka L + P = 36." },
-      { label: "b.", math: "75P + 66L = 72 \\times 36 = 2592" },
-      { label: "c.", math: "75(36-L)+66L = 2592 \\Rightarrow 2700-9L = 2592 \\Rightarrow L = \\ldots" },
-    ],
+    content: "Dalam sebuah kelas yang berjumlah 36 siswa, rata-rata nilai ulangan matematika siswa perempuan adalah 75 dan rata-rata nilai siswa laki-laki adalah 66. Jika rata-rata nilai seluruh kelas adalah 72, tentukan banyak siswa laki-laki di kelas tersebut!",
   }),
   Qn(12, "Selisih Siswa dari Data Remedial – ANBK", {
-    type: "mixed",
-    content: "Sebanyak 20 siswa mengikuti remedial matematika. Rata-rata nilai mereka adalah 7. Rata-rata nilai siswa laki-laki adalah 6 dan rata-rata nilai siswa perempuan adalah 8,5.",
-    parts: [
-      { label: "a.", text: "Misalkan banyak siswa laki-laki = L. Tuliskan persamaan jumlah nilai seluruh siswa!" },
-      { label: "b.", math: "6L + 8{,}5(20-L) = 7 \\times 20 \\Rightarrow 170-2{,}5L = 140 \\Rightarrow L = \\ldots" },
-      { label: "c.", text: "Berapa selisih banyak siswa laki-laki dan perempuan?" },
-    ],
+    content: "Sebanyak 20 siswa mengikuti remedial matematika dengan rata-rata nilai 7. Rata-rata nilai siswa laki-laki adalah 6 dan rata-rata nilai siswa perempuan adalah 8,5. Tentukan selisih banyak siswa laki-laki dan siswa perempuan yang mengikuti remedial tersebut!",
   }),
   Qn(13, "Banyak Siswa di Atas Rata-Rata – UN", {
-    type: "mixed",
     diagram: (() => (
       <svg width="300" height="115" viewBox="0 0 300 115" className="mx-auto">
         <rect x="4" y="4" width="292" height="107" rx="10" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -207,15 +135,9 @@ const questions: Q[] = [
         <text x="150" y="100" fill="#34d399" fontSize="8" textAnchor="middle">Rata-rata = 114 ÷ 20 = 5,7</text>
       </svg>
     ))(),
-    content: "Dari tabel nilai ulangan harian di atas:",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{3(2)+4(3)+5(4)+6(5)+7(3)+8(2)+9(1)}{20} = \\frac{114}{20} = \\ldots" },
-      { label: "b.", text: "Siswa yang mendapat nilai lebih dari rata-rata adalah yang mendapat nilai 6, 7, 8, atau 9." },
-      { label: "c.", math: "n_{>\\bar{x}} = f_6+f_7+f_8+f_9 = 5+3+2+1 = \\ldots \\text{ siswa}" },
-    ],
+    content: "Tabel di atas menunjukkan nilai ulangan harian 20 siswa. Hitunglah rata-rata nilai ulangan tersebut, kemudian tentukan berapa banyak siswa yang mendapat nilai di atas rata-rata!",
   }),
   Qn(14, "Mean dan Data Tidak Diketahui – ANBK", {
-    type: "mixed",
     diagram: (() => (
       <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
         <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -244,22 +166,10 @@ const questions: Q[] = [
         <text x="60" y="170" fill="#fbbf24" fontSize="7" textAnchor="start">Rata-rata = 41 orang/hari</text>
       </svg>
     ))(),
-    content: "Diagram batang di atas menunjukkan data pengunjung perpustakaan sekolah selama 5 hari. Data hari Rabu tidak terbaca. Diketahui rata-rata pengunjung adalah 41 orang per hari.",
-    parts: [
-      { label: "a.", math: "\\text{Total} = 41 \\times 5 = \\ldots \\text{ orang}" },
-      { label: "b.", math: "35 + 40 + R + 50 + 45 = \\ldots \\Rightarrow R = \\ldots \\text{ orang}" },
-      { label: "c.", text: "Hari apa saja pengunjungnya di atas rata-rata?" },
-    ],
+    content: "Diagram di atas menunjukkan data pengunjung perpustakaan sekolah selama 5 hari. Data pengunjung hari Rabu tidak terbaca (?). Diketahui rata-rata pengunjung selama 5 hari adalah 41 orang per hari. Tentukan banyak pengunjung pada hari Rabu!",
   }),
   Qn(15, "Interpretasi Nilai Rata-Rata – TKA", {
-    type: "mixed",
-    content: "Sebuah kelas memiliki 25 siswi. Rata-rata tinggi badan mereka adalah 130 cm.\nPeriksa setiap pernyataan berikut: BENAR atau SALAH?",
-    parts: [
-      { label: "A.", text: "Jika ada siswi dengan tinggi 132 cm, maka pasti ada siswi lain yang tingginya 128 cm." },
-      { label: "B.", text: "Jika 23 siswi masing-masing tingginya 130 cm dan satu siswi tingginya 133 cm, maka siswi ke-25 tingginya 127 cm." },
-      { label: "C.", text: "Jika diurutkan dari terpendek ke tertinggi, siswi urutan ke-13 (tengah) pasti tingginya 130 cm." },
-      { label: "D.", text: "Setengah dari siswi di kelas pasti lebih pendek dari 130 cm dan setengahnya lagi pasti lebih tinggi." },
-    ],
+    content: "Sebuah kelas memiliki 25 siswi dengan rata-rata tinggi badan 130 cm. Tentukan apakah setiap pernyataan berikut BENAR atau SALAH!\n\n(A) Jika ada siswi dengan tinggi 132 cm, maka pasti ada siswi lain yang tingginya 128 cm.\n\n(B) Jika 23 siswi masing-masing tingginya 130 cm dan satu siswi tingginya 133 cm, maka siswi ke-25 tingginya 127 cm.\n\n(C) Jika diurutkan dari terpendek ke tertinggi, siswi urutan ke-13 pasti tingginya 130 cm.\n\n(D) Setengah dari siswi di kelas pasti lebih pendek dari 130 cm dan setengahnya lagi pasti lebih tinggi.",
   }),
 ];
 
@@ -316,20 +226,13 @@ const RataRataPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-blue-400 text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3 whitespace-pre-line">{q.content}</p>}
-                    {q.mathContent && <div className="mb-3 bg-blue-900/20 border border-blue-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto"><BlockMath math={q.mathContent} /></div>}
                     {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3 overflow-x-auto">{q.diagram}</div>}
-                    {q.parts && (
-                      <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
-                            <span className="text-blue-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
-                          </div>
-                        ))}
+                    {q.mathContent && (
+                      <div className="mb-3 bg-blue-900/20 border border-blue-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto">
+                        <InlineMath math={q.mathContent} />
                       </div>
                     )}
+                    <p className="font-body text-sm text-white/90 leading-relaxed whitespace-pre-line">{q.content}</p>
                   </div>
                 </div>
               </div>
