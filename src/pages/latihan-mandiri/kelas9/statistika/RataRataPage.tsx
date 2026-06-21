@@ -143,28 +143,25 @@ const questions: Q[] = [
   Qn(7, "Pemahaman Rata-Rata – ANBK", {
     content: "Rata-rata gaji 5 karyawan sebuah toko adalah Rp3.000.000. Kemudian seorang manajer dengan gaji Rp8.000.000 bergabung ke dalam tim. Tentukan rata-rata gaji seluruh anggota tim setelah manajer bergabung!",
   }),
-  Qn(8, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
+  Qn(8, "Rata-Rata Gabungan Kelas + Siswa Remedial – UN", {
+    content: "Suatu kelas yang terdiri dari 30 siswa memperoleh rata-rata nilai ulangan matematika sebesar 76. Setelah ujian berakhir, datang 2 orang siswa remedial yang mengikuti ujian susulan dan memperoleh rata-rata nilai 58.\n\nTentukan rata-rata nilai ulangan matematika gabungan seluruh siswa (30 siswa reguler + 2 siswa remedial)!",
+  }),
+  Qn(9, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
     content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
   }),
-  Qn(9, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
+  Qn(10, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
     content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
   }),
-  Qn(10, "Nilai yang Harus Dicapai – UN", {
+  Qn(11, "Nilai yang Harus Dicapai – UN", {
     content: "Dari 4 ujian yang telah dilaksanakan, rata-rata nilai seorang siswa adalah 75. Siswa tersebut ingin meningkatkan rata-ratanya menjadi 78 setelah mengikuti ujian ke-5. Berapa nilai minimum yang harus ia peroleh pada ujian ke-5?",
   }),
-  Qn(11, "Perbandingan Jumlah Siswa dari Mean – UN", {
-    content: "Dalam suatu kelas, rata-rata nilai ujian siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 8,1. Jika rata-rata nilai seluruh kelas adalah 7,5, tentukan perbandingan banyak siswa laki-laki terhadap siswa perempuan!",
-  }),
-  Qn(12, "Mencari Jumlah Siswa dari Mean Gabungan – TKA", {
-    content: "Dalam sebuah kelas yang berjumlah 36 siswa, rata-rata nilai ulangan matematika siswa perempuan adalah 75 dan rata-rata nilai siswa laki-laki adalah 66. Jika rata-rata nilai seluruh kelas adalah 72, tentukan banyak siswa laki-laki di kelas tersebut!",
-  }),
-  Qn(13, "Selisih Siswa dari Data Remedial – ANBK", {
+  Qn(12, "Selisih Siswa dari Data Remedial – ANBK", {
     content: "Sebanyak 20 siswa mengikuti remedial matematika dengan rata-rata nilai 7. Rata-rata nilai siswa laki-laki adalah 6 dan rata-rata nilai siswa perempuan adalah 8,5. Tentukan selisih banyak siswa laki-laki dan siswa perempuan yang mengikuti remedial tersebut!",
   }),
-  Qn(14, "Rata-Rata Berubah karena Koreksi – UN", {
+  Qn(13, "Rata-Rata Berubah karena Koreksi – UN", {
     content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
   }),
-  Qn(15, "Rata-Rata Umur Keluarga – UN", {
+  Qn(14, "Rata-Rata Umur Keluarga – UN", {
     diagram: (() => (
       <svg width="360" height="90" viewBox="0 0 360 90" className="mx-auto">
         <rect x="2" y="2" width="356" height="86" rx="8" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -186,7 +183,7 @@ const questions: Q[] = [
     ))(),
     content: "Lima orang dalam satu keluarga dicatat nama dan umurnya sebagaimana tampak pada tabel di atas. Berapakah rata-rata umur keluarga tersebut lima tahun yang lalu?",
   }),
-  Qn(16, "Interpretasi Nilai Rata-Rata – TKA", {
+  Qn(15, "Interpretasi Nilai Rata-Rata – TKA", {
     content: "Sebuah kelas memiliki 25 siswi dengan rata-rata tinggi badan 130 cm. Tentukan apakah setiap pernyataan berikut BENAR atau SALAH!\n\n(A) Jika ada siswi dengan tinggi 132 cm, maka pasti ada siswi lain yang tingginya 128 cm.\n\n(B) Jika 23 siswi masing-masing tingginya 130 cm dan satu siswi tingginya 133 cm, maka siswi ke-25 tingginya 127 cm.\n\n(C) Jika diurutkan dari terpendek ke tertinggi, siswi urutan ke-13 pasti tingginya 130 cm.\n\n(D) Setengah dari siswi di kelas pasti lebih pendek dari 130 cm dan setengahnya lagi pasti lebih tinggi.",
   }),
 ];
@@ -209,7 +206,7 @@ const RataRataPage = () => {
           <p className="text-blue-200/70 text-sm text-center font-body mb-1">Rata-Rata dan Rata-Rata Gabungan</p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-2">
-            <span className="text-blue-400 text-xs font-bold">📋 16 Soal</span>
+            <span className="text-blue-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
