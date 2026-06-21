@@ -361,6 +361,123 @@ function PlanetModelSVG({ r }: { r?: string }) {
   );
 }
 
+function GedungAtapSetengahBolaSVG({ r }: { r?: string }) {
+  return (
+    <svg viewBox="0 0 280 230" width="280" height="230" className="mx-auto">
+      <defs>
+        {/* Dome gradient — green rooftop */}
+        <radialGradient id="dome-fill" cx="38%" cy="25%" r="65%">
+          <stop offset="0%"   stopColor="#6ee7b7" />
+          <stop offset="45%"  stopColor="#10b981" />
+          <stop offset="85%"  stopColor="#065f46" />
+          <stop offset="100%" stopColor="#022c22" stopOpacity="0.9" />
+        </radialGradient>
+        {/* Dome atmosphere shimmer */}
+        <radialGradient id="dome-glow" cx="50%" cy="50%" r="55%">
+          <stop offset="65%"  stopColor="#34d399" stopOpacity="0" />
+          <stop offset="100%" stopColor="#34d399" stopOpacity="0.25" />
+        </radialGradient>
+        {/* Wall gradient */}
+        <linearGradient id="wall-grad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"   stopColor="#cbd5e1" />
+          <stop offset="50%"  stopColor="#f1f5f9" />
+          <stop offset="100%" stopColor="#94a3b8" />
+        </linearGradient>
+        {/* Sky gradient */}
+        <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#0f172a" />
+          <stop offset="100%" stopColor="#1e3a5f" />
+        </linearGradient>
+        {/* Ground */}
+        <linearGradient id="ground-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#166534" />
+          <stop offset="100%" stopColor="#14532d" />
+        </linearGradient>
+        <filter id="dome-shadow" x="-5%" y="-5%" width="110%" height="110%">
+          <feDropShadow dx="3" dy="4" stdDeviation="4" floodColor="#000" floodOpacity="0.3" />
+        </filter>
+      </defs>
+
+      {/* Sky background */}
+      <rect x="0" y="0" width="280" height="200" fill="url(#sky-grad)" rx="8" />
+
+      {/* Stars */}
+      {[[20,18],[60,10],[110,8],[170,15],[230,10],[255,28],[15,55],[260,60],[35,90]] .map(([x,y],i) => (
+        <circle key={i} cx={x} cy={y} r="1.2" fill="white" fillOpacity="0.55" />
+      ))}
+
+      {/* Ground */}
+      <rect x="0" y="186" width="280" height="44" fill="url(#ground-grad)" />
+
+      {/* Building body (walls) */}
+      <rect x="65" y="130" width="150" height="60" fill="url(#wall-grad)" />
+
+      {/* Wall shading — left column shadow */}
+      <rect x="65" y="130" width="12" height="60" fill="#94a3b8" fillOpacity="0.4" />
+
+      {/* Windows row */}
+      {[95, 135, 175].map((wx) => (
+        <g key={wx}>
+          <rect x={wx} y="148" width="20" height="24" rx="2" fill="#bfdbfe" fillOpacity="0.85" stroke="#60a5fa" strokeWidth="1" />
+          <line x1={wx + 10} y1="148" x2={wx + 10} y2="172" stroke="#60a5fa" strokeWidth="0.8" strokeOpacity="0.6" />
+          <line x1={wx} y1="160" x2={wx + 20} y2="160" stroke="#60a5fa" strokeWidth="0.8" strokeOpacity="0.6" />
+        </g>
+      ))}
+
+      {/* Door */}
+      <rect x="127" y="158" width="26" height="32" rx="2" fill="#78350f" fillOpacity="0.7" stroke="#92400e" strokeWidth="1" />
+      <rect x="130" y="161" width="10" height="14" rx="1" fill="#fbbf24" fillOpacity="0.3" />
+      <rect x="140" y="161" width="10" height="14" rx="1" fill="#fbbf24" fillOpacity="0.3" />
+
+      {/* Dome base ellipse (rim of half-sphere sitting on wall top) */}
+      <ellipse cx="140" cy="132" rx="75" ry="16"
+               fill="#065f46" fillOpacity="0.5" stroke="#34d399" strokeWidth="1.8" />
+
+      {/* Dome body (half-sphere) */}
+      <path d="M 65 132 A 75 75 0 0 1 215 132 Z"
+            fill="url(#dome-fill)" filter="url(#dome-shadow)" />
+
+      {/* Dome atmosphere glow */}
+      <path d="M 65 132 A 75 75 0 0 1 215 132 Z" fill="url(#dome-glow)" />
+
+      {/* Dome latitude lines */}
+      <ellipse cx="140" cy="132" rx="70" ry="10" fill="none" stroke="#6ee7b7" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35" />
+      <ellipse cx="140" cy="108" rx="55" ry="8"  fill="none" stroke="#6ee7b7" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.30" />
+      <ellipse cx="140" cy="84"  rx="32" ry="5"  fill="none" stroke="#6ee7b7" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.25" />
+
+      {/* Dome meridian lines */}
+      <path d="M 140 57 Q 215 95 215 132" fill="none" stroke="#6ee7b7" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.25" />
+      <path d="M 140 57 Q  65 95  65 132" fill="none" stroke="#6ee7b7" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.25" />
+
+      {/* Dome top highlight */}
+      <ellipse cx="130" cy="72" rx="18" ry="9"
+               fill="white" fillOpacity="0.18"
+               transform="rotate(-20,130,72)" />
+
+      {/* Spire / flagpole at top */}
+      <line x1="140" y1="57" x2="140" y2="42" stroke="#fbbf24" strokeWidth="2" />
+      <polygon points="134,44 140,28 146,44" fill="#ef4444" />
+
+      {/* Radius line */}
+      {r && (
+        <>
+          <line x1="140" y1="132" x2="215" y2="132"
+                stroke="#34d399" strokeWidth="1.6" strokeDasharray="5,3" />
+          <circle cx="140" cy="132" r="3" fill="#34d399" />
+          <text x="178" y="122" fill="#34d399" fontSize="12"
+                textAnchor="middle" fontFamily="monospace" fontWeight="700">r = {r}</text>
+        </>
+      )}
+
+      {/* Label */}
+      <text x="140" y="218" fill="#6ee7b7" fontSize="11"
+            textAnchor="middle" fontFamily="monospace" fillOpacity="0.85">
+        Atap Gedung — Setengah Bola
+      </text>
+    </svg>
+  );
+}
+
 function PingPongBallSVG({ r, count }: { r?: string; count?: number }) {
   const balls = Array.from({ length: count ?? 1 });
   const cols = count === 6 ? 3 : 1;
@@ -610,7 +727,7 @@ const mcQuestions: QMC[] = [
   {
     n: 13, title: "Biaya Cat Atap Setengah Bola – d = 14 m", cat: "app",
     content: "Atap sebuah gedung berbentuk setengah bola dengan panjang diameter 14 m. Atap gedung tersebut akan dicat dengan biaya Rp50.000,00 setiap m². Biaya yang diperlukan untuk mengecat atap gedung itu adalah … (π = 22/7)",
-    diagram: <HalfSphereSVG r="7 m" color="#34d399" />,
+    diagram: <GedungAtapSetengahBolaSVG r="7 m" />,
     options: [
       { key: "A", text: "Rp13.700.000,00" },
       { key: "B", text: "Rp15.400.000,00" },
