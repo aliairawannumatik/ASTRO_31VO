@@ -71,79 +71,104 @@ function HalfSphereSVG({ r, color = "#818cf8" }: { r?: string; color?: string })
   );
 }
 
-/* ── Kolam Setengah Bola — dome up / opening down, water snug inside ── */
+/* ── Kolam Setengah Bola — dome up, water surface with wave effects ── */
 function KolamSetengahBolaSVG({ r, color = "#818cf8" }: { r?: string; color?: string }) {
-  /* Geometry:
-     viewBox 0 0 260 210
-     Semicircle r=100, centre at (130,178)
-     Arc endpoints: (30,178) → (230,178), sweep=0 → curves upward (dome peak at y=78)
-     Opening ellipse at cy=178 rx=100 ry=24
-     Water level at y=138  (40 px above opening)
+  /*
+    viewBox 0 0 260 245
+    Dome: r=95, centre=(130,200)
+    Arc: M 35 200 A 95 95 0 0 0 225 200 Z  → peak at y=105
+    Opening ellipse: cx=130 cy=200 rx=95 ry=22  → bottom at y=222 (margin 23px)
+    Water surface at y=155  (45px above opening)
+      half-chord = sqrt(95²−45²) = sqrt(9025−2025) = sqrt(7000) ≈ 83.7
+      so water surface from x≈46 to x≈214
   */
   return (
-    <svg viewBox="0 0 260 210" width="260" height="210" className="mx-auto">
+    <svg viewBox="0 0 260 245" width="260" height="245" className="mx-auto">
       <defs>
-        <radialGradient id="kolam-bg" cx="50%" cy="90%" r="75%">
-          <stop offset="0%" stopColor={color} stopOpacity="0.42" />
-          <stop offset="100%" stopColor={color} stopOpacity="0.06" />
+        <radialGradient id="kolam-bg" cx="50%" cy="95%" r="80%">
+          <stop offset="0%" stopColor={color} stopOpacity="0.38" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.05" />
         </radialGradient>
         <linearGradient id="kolam-water" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.70" />
-          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.50" />
+          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.75" />
         </linearGradient>
-        {/* Clip path exactly matches the dome arc */}
         <clipPath id="kolam-clip">
-          <path d="M 30 178 A 100 100 0 0 0 230 178 Z" />
+          <path d="M 35 200 A 95 95 0 0 0 225 200 Z" />
         </clipPath>
       </defs>
 
-      {/* Dome body */}
-      <path d="M 30 178 A 100 100 0 0 0 230 178 Z"
+      {/* Dome shell */}
+      <path d="M 35 200 A 95 95 0 0 0 225 200 Z"
             fill="url(#kolam-bg)" stroke={color} strokeWidth="2" />
 
-      {/* Water block — full height, clipped tightly to dome */}
-      <rect x="0" y="136" width="260" height="80" fill="url(#kolam-water)" clipPath="url(#kolam-clip)">
-        <animate attributeName="y" values="136;133;136;139;136" dur="2.2s" repeatCount="indefinite" />
+      {/* Water body — clipped to dome */}
+      <rect x="0" y="150" width="260" height="100" fill="url(#kolam-water)" clipPath="url(#kolam-clip)">
+        <animate attributeName="y" values="150;147;150;153;150" dur="2.4s" repeatCount="indefinite" />
       </rect>
 
-      {/* Animated water surface (ellipse sits ON the water edge, clipped) */}
-      <ellipse cx="130" cy="136" rx="96" ry="11" fill="#7dd3fc" fillOpacity="0.65" clipPath="url(#kolam-clip)">
-        <animate attributeName="ry" values="11;14;11;8;11" dur="1.8s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="136;133;136;139;136" dur="2.2s" repeatCount="indefinite" />
-        <animate attributeName="rx" values="96;100;96;92;96" dur="2.8s" repeatCount="indefinite" />
+      {/* ── Water surface waves ── */}
+      {/* Wave band (wide, translucent cap on water) */}
+      <ellipse cx="130" cy="150" rx="81" ry="10" fill="#7dd3fc" fillOpacity="0.50" clipPath="url(#kolam-clip)">
+        <animate attributeName="cy" values="150;147;150;153;150" dur="2.4s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="10;13;10;8;10" dur="2s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Ripple 1 — clipped to dome */}
-      <ellipse cx="130" cy="136" rx="20" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1.3" clipPath="url(#kolam-clip)">
-        <animate attributeName="rx" values="15;60;95" dur="2.4s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="4;8;12" dur="2.4s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.9;0.45;0" dur="2.4s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="136;133;136;139;136" dur="2.2s" repeatCount="indefinite" />
+      {/* Wave path 1 — sinusoidal crest across surface */}
+      <path d="M 47 150 Q 68 143,89 150 Q 110 157,131 150 Q 152 143,173 150 Q 194 157,213 150"
+            fill="none" stroke="#bae6fd" strokeWidth="2" strokeOpacity="0.85"
+            clipPath="url(#kolam-clip)">
+        <animate attributeName="d"
+          values="M 47 150 Q 68 143,89 150 Q 110 157,131 150 Q 152 143,173 150 Q 194 157,213 150;
+                  M 47 147 Q 68 154,89 147 Q 110 140,131 147 Q 152 154,173 147 Q 194 140,213 147;
+                  M 47 150 Q 68 143,89 150 Q 110 157,131 150 Q 152 143,173 150 Q 194 157,213 150"
+          dur="2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.85;0.6;0.85" dur="2s" repeatCount="indefinite" />
+      </path>
+
+      {/* Wave path 2 — offset phase */}
+      <path d="M 47 153 Q 68 146,89 153 Q 110 160,131 153 Q 152 146,173 153 Q 194 160,213 153"
+            fill="none" stroke="#93c5fd" strokeWidth="1.2" strokeOpacity="0.55"
+            clipPath="url(#kolam-clip)">
+        <animate attributeName="d"
+          values="M 47 153 Q 68 146,89 153 Q 110 160,131 153 Q 152 146,173 153 Q 194 160,213 153;
+                  M 47 150 Q 68 157,89 150 Q 110 143,131 150 Q 152 157,173 150 Q 194 143,213 150;
+                  M 47 153 Q 68 146,89 153 Q 110 160,131 153 Q 152 146,173 153 Q 194 160,213 153"
+          dur="2.6s" begin="0.6s" repeatCount="indefinite" />
+      </path>
+
+      {/* Ripple 1 from centre */}
+      <ellipse cx="130" cy="150" rx="10" ry="4" fill="none" stroke="#e0f2fe" strokeWidth="1.4" clipPath="url(#kolam-clip)">
+        <animate attributeName="rx" values="10;75;82" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="4;9;11" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.9;0.4;0" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="150;147;150;153;150" dur="2.4s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Ripple 2 — offset phase */}
-      <ellipse cx="130" cy="136" rx="20" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1" clipPath="url(#kolam-clip)">
-        <animate attributeName="rx" values="15;60;95" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="4;8;12" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.7;0.35;0" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="136;133;136;139;136" dur="2.2s" repeatCount="indefinite" />
+      {/* Ripple 2 — offset */}
+      <ellipse cx="130" cy="150" rx="10" ry="4" fill="none" stroke="#bae6fd" strokeWidth="1" clipPath="url(#kolam-clip)">
+        <animate attributeName="rx" values="10;75;82" dur="2.2s" begin="1.1s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="4;9;11" dur="2.2s" begin="1.1s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7;0.3;0" dur="2.2s" begin="1.1s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="150;147;150;153;150" dur="2.4s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Opening rim ellipse at bottom */}
-      <ellipse cx="130" cy="178" rx="100" ry="24"
-               fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.8" />
+      {/* Opening rim */}
+      <ellipse cx="130" cy="200" rx="95" ry="22"
+               fill={color} fillOpacity="0.09" stroke={color} strokeWidth="1.8" />
 
-      {/* Radius line: centre → dome surface at ~40° */}
-      <line x1="130" y1="178" x2="207" y2="107" stroke={color} strokeWidth="1.5" />
-      <circle cx="130" cy="178" r="3.5" fill={color} />
+      {/* Radius line: centre → dome at ~30° from vertical */}
+      <line x1="130" y1="200" x2="178" y2="118" stroke={color} strokeWidth="1.5" strokeDasharray="4 3" />
+      <circle cx="130" cy="200" r="3.5" fill={color} />
       {r && (
-        <text x="210" y="103" fill={color} fontSize="12" textAnchor="start" fontFamily="monospace">
+        <text x="130" y="168" fill={color} fontSize="11.5" textAnchor="middle"
+              fontFamily="monospace" fontWeight="600">
           r = {r}
         </text>
       )}
 
       {/* Label */}
-      <text x="130" y="22" fill={color} fontSize="11" textAnchor="middle"
+      <text x="130" y="24" fill={color} fontSize="11" textAnchor="middle"
             fontFamily="monospace" fillOpacity="0.75">Kolam Setengah Bola</text>
     </svg>
   );
