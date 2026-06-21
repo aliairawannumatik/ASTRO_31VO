@@ -180,60 +180,76 @@ function HemiTabKerSVG({ r, tTab, tKer, color = "#fb7185" }: {
 function HorizontalCapsuleSVG({ d, totalLen, color = "#34d399" }: {
   d: number; totalLen: number; color?: string;
 }) {
-  const VW = 360, VH = 260;
-  const cx = VW / 2, cy = VH / 2;
-  const rx = 130;
-  const ry = 46;
-  const capRx = ry;
-  const capRy = ry;
-  const leftCap  = cx - rx;
-  const rightCap = cx + rx;
+  const VW = 360, VH = 250;
+  // capsule geometry
+  const leftX  = 80,  rightX = 290;
+  const cy     = 108, ry = 48;
+  const topY   = cy - ry, botY = cy + ry;
+  const eRx    = 14;   // perspective ellipse x-radius (face depth)
+
   return (
     <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: "100%", display: "block" }}>
-      {/* cylinder body fill */}
-      <rect x={leftCap} y={cy - ry} width={rx * 2} height={ry * 2}
+      {/* ── body rectangle fill ── */}
+      <rect x={leftX} y={topY} width={rightX - leftX} height={ry * 2}
         fill={color} fillOpacity="0.10" />
-      {/* left hemisphere */}
-      <ellipse cx={leftCap} cy={cy} rx={capRx * 0.58} ry={capRy}
-        fill={color} fillOpacity="0.18" stroke={color} strokeWidth={SW} />
-      {/* right hemisphere */}
-      <ellipse cx={rightCap} cy={cy} rx={capRx * 0.58} ry={capRy}
-        fill={color} fillOpacity="0.18" stroke={color} strokeWidth={SW} />
-      {/* top & bottom straight lines */}
-      <line x1={leftCap} y1={cy - ry} x2={rightCap} y2={cy - ry} stroke={color} strokeWidth={SW} />
-      <line x1={leftCap} y1={cy + ry} x2={rightCap} y2={cy + ry} stroke={color} strokeWidth={SW} />
-      {/* middle cross-section ellipses (dashed) */}
-      <ellipse cx={cx} cy={cy} rx={capRx * 0.58} ry={ry}
-        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,4" strokeOpacity="0.6" />
-      {/* left-quarter dashed ellipse */}
-      <ellipse cx={cx - rx * 0.5} cy={cy} rx={capRx * 0.58} ry={ry}
-        fill="none" stroke={color} strokeWidth={LSW} strokeDasharray="5,4" strokeOpacity="0.45" />
-      {/* HEIGHT dimension line (left side, vertical) */}
-      <line x1={leftCap - 28} y1={cy - ry} x2={leftCap - 28} y2={cy + ry}
-        stroke={color} strokeWidth={LSW} strokeOpacity="0.8" />
-      <line x1={leftCap - 34} y1={cy - ry} x2={leftCap - 22} y2={cy - ry} stroke={color} strokeWidth={LSW} />
-      <line x1={leftCap - 34} y1={cy + ry} x2={leftCap - 22} y2={cy + ry} stroke={color} strokeWidth={LSW} />
-      {/* arrow heads for height */}
-      <polygon points={`${leftCap - 28},${cy - ry - 5} ${leftCap - 32},${cy - ry + 6} ${leftCap - 24},${cy - ry + 6}`}
-        fill={color} fillOpacity="0.85" />
-      <polygon points={`${leftCap - 28},${cy + ry + 5} ${leftCap - 32},${cy + ry - 6} ${leftCap - 24},${cy + ry - 6}`}
-        fill={color} fillOpacity="0.85" />
-      <text x={leftCap - 52} y={cy + 5} fill={color} fontSize="13" fontFamily="monospace" fontWeight="bold"
-        textAnchor="middle">{d} cm</text>
-      {/* LENGTH dimension line (bottom, horizontal) */}
-      <line x1={leftCap - capRx * 0.58} y1={cy + ry + 30} x2={rightCap + capRx * 0.58} y2={cy + ry + 30}
-        stroke={color} strokeWidth={LSW} strokeOpacity="0.8" />
-      <line x1={leftCap - capRx * 0.58} y1={cy + ry + 24} x2={leftCap - capRx * 0.58} y2={cy + ry + 36}
+
+      {/* ── left hemisphere fill (semi-arc bulge) ── */}
+      <path d={`M ${leftX} ${topY} A ${ry} ${ry} 0 0 0 ${leftX} ${botY}`}
+        fill={color} fillOpacity="0.20" />
+
+      {/* ── right hemisphere fill (semi-arc bulge) ── */}
+      <path d={`M ${rightX} ${topY} A ${ry} ${ry} 0 0 1 ${rightX} ${botY}`}
+        fill={color} fillOpacity="0.20" />
+
+      {/* ── full capsule outline (pill shape) ── */}
+      <path
+        d={`M ${leftX} ${topY} L ${rightX} ${topY} A ${ry} ${ry} 0 0 1 ${rightX} ${botY} L ${leftX} ${botY} A ${ry} ${ry} 0 0 0 ${leftX} ${topY} Z`}
+        fill="none" stroke={color} strokeWidth={SW}
+      />
+
+      {/* ── left circular face (3-D ellipse, dashed for back face) ── */}
+      <ellipse cx={leftX} cy={cy} rx={eRx} ry={ry}
+        fill={color} fillOpacity="0.18"
+        stroke={color} strokeWidth={LSW} strokeDasharray="5,3" />
+
+      {/* ── right circular face (solid – visible front) ── */}
+      <ellipse cx={rightX} cy={cy} rx={eRx} ry={ry}
+        fill={color} fillOpacity="0.22"
+        stroke={color} strokeWidth={SW * 0.85} />
+
+      {/* ── inner cross-section ellipses at cylinder–hemisphere junctions ── */}
+      <ellipse cx={leftX + 34} cy={cy} rx={eRx} ry={ry}
+        fill="none" stroke={color} strokeWidth={LSW}
+        strokeDasharray="5,3" strokeOpacity="0.55" />
+      <ellipse cx={rightX - 34} cy={cy} rx={eRx} ry={ry}
+        fill="none" stroke={color} strokeWidth={LSW}
+        strokeDasharray="5,3" strokeOpacity="0.55" />
+
+      {/* ── HEIGHT dimension (left, vertical) ── */}
+      <line x1={leftX - 28} y1={topY} x2={leftX - 28} y2={botY}
+        stroke={color} strokeWidth={LSW} strokeOpacity="0.85" />
+      <line x1={leftX - 34} y1={topY} x2={leftX - 22} y2={topY} stroke={color} strokeWidth={LSW} />
+      <line x1={leftX - 34} y1={botY} x2={leftX - 22} y2={botY} stroke={color} strokeWidth={LSW} />
+      <polygon points={`${leftX - 28},${topY - 6} ${leftX - 33},${topY + 7} ${leftX - 23},${topY + 7}`}
+        fill={color} />
+      <polygon points={`${leftX - 28},${botY + 6} ${leftX - 33},${botY - 7} ${leftX - 23},${botY - 7}`}
+        fill={color} />
+      <text x={leftX - 50} y={cy + 5} fill={color} fontSize="13"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">{d} cm</text>
+
+      {/* ── LENGTH dimension (bottom, horizontal) ── */}
+      <line x1={leftX - eRx} y1={botY + 28} x2={rightX + eRx} y2={botY + 28}
+        stroke={color} strokeWidth={LSW} strokeOpacity="0.85" />
+      <line x1={leftX - eRx} y1={botY + 22} x2={leftX - eRx} y2={botY + 34}
         stroke={color} strokeWidth={LSW} />
-      <line x1={rightCap + capRx * 0.58} y1={cy + ry + 24} x2={rightCap + capRx * 0.58} y2={cy + ry + 36}
+      <line x1={rightX + eRx} y1={botY + 22} x2={rightX + eRx} y2={botY + 34}
         stroke={color} strokeWidth={LSW} />
-      {/* arrow heads for length */}
-      <polygon points={`${leftCap - capRx * 0.58 - 5},${cy + ry + 30} ${leftCap - capRx * 0.58 + 7},${cy + ry + 25} ${leftCap - capRx * 0.58 + 7},${cy + ry + 35}`}
-        fill={color} fillOpacity="0.85" />
-      <polygon points={`${rightCap + capRx * 0.58 + 5},${cy + ry + 30} ${rightCap + capRx * 0.58 - 7},${cy + ry + 25} ${rightCap + capRx * 0.58 - 7},${cy + ry + 35}`}
-        fill={color} fillOpacity="0.85" />
-      <text x={cx} y={cy + ry + 50} fill={color} fontSize="13" fontFamily="monospace" fontWeight="bold"
-        textAnchor="middle">{totalLen} cm</text>
+      <polygon points={`${leftX - eRx - 6},${botY + 28} ${leftX - eRx + 8},${botY + 22} ${leftX - eRx + 8},${botY + 34}`}
+        fill={color} />
+      <polygon points={`${rightX + eRx + 6},${botY + 28} ${rightX + eRx - 8},${botY + 22} ${rightX + eRx - 8},${botY + 34}`}
+        fill={color} />
+      <text x={(leftX + rightX) / 2} y={botY + 50} fill={color} fontSize="13"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">{totalLen} cm</text>
     </svg>
   );
 }
