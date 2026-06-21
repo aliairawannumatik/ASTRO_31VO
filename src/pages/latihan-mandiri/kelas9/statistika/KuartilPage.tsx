@@ -5,8 +5,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
-type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; mathContent?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay" | "mixed" };
+type Q = { n: number; title: string; content: string; diagram?: React.ReactNode };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const KuartilGarisData = () => (
@@ -45,9 +44,9 @@ const BoxPlotSVG = () => (
     <line x1="60" y1="70" x2="100" y2="70" stroke="#4ade80" strokeWidth="1.5" />
     <line x1="220" y1="70" x2="260" y2="70" stroke="#4ade80" strokeWidth="1.5" />
     <line x1="260" y1="50" x2="260" y2="90" stroke="#4ade80" strokeWidth="1.5" />
-    {[["60","Min"],[100,"Q₁"],[160,"Q₂\n(Median)"],[220,"Q₃"],[260,"Max"]].map(([x,label], i) => (
+    {([["60","Min"],[100,"Q₁"],[160,"Q₂"],[220,"Q₃"],[260,"Max"]] as [string|number, string][]).map(([x,label], i) => (
       <g key={i}>
-        <text x={Number(x)} y={108} fill="#86efac" fontSize="8" textAnchor="middle">{String(label).split("\n")[0]}</text>
+        <text x={Number(x)} y={108} fill="#86efac" fontSize="8" textAnchor="middle">{label}</text>
       </g>
     ))}
     <text x="150" y="34" fill="#86efac" fontSize="8" textAnchor="middle">← IQR = Q₃ − Q₁ →</text>
@@ -56,115 +55,42 @@ const BoxPlotSVG = () => (
 
 const questions: Q[] = [
   Qn(1, "Pengertian Kuartil – UN", {
-    type: "mixed",
     diagram: <KuartilGarisData />,
-    content: "Kuartil membagi data yang telah diurutkan menjadi empat bagian yang sama besar.",
-    parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan Q₁, Q₂, dan Q₃?" },
-      { label: "b.", text: "Berapa persen data yang berada di bawah Q₁?" },
-      { label: "c.", text: "Berapa persen data yang berada di antara Q₁ dan Q₃?" },
-    ],
+    content: "Perhatikan diagram di atas yang menunjukkan letak kuartil pada data terurut. Jelaskan apa yang dimaksud dengan Q₁, Q₂, dan Q₃, serta sebutkan berapa persen data yang berada di antara Q₁ dan Q₃!",
   }),
   Qn(2, "Menentukan Kuartil Data Ganjil – ANBK", {
-    type: "mixed",
-    mathContent: "Q_i = x_{\\frac{i(n+1)}{4}}",
-    content: "Data (n=11): 5, 8, 10, 12, 14, 15, 18, 20, 22, 25, 30.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{\\frac{1 \\times 12}{4}} = x_3 = \\ldots" },
-      { label: "b.", math: "Q_2 = x_{\\frac{2 \\times 12}{4}} = x_6 = \\ldots" },
-      { label: "c.", math: "Q_3 = x_{\\frac{3 \\times 12}{4}} = x_9 = \\ldots" },
-    ],
+    content: "Sebelas data yang sudah diurutkan dari kecil ke besar: 5, 8, 10, 12, 14, 15, 18, 20, 22, 25, 30. Tentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
   Qn(3, "Kuartil Data Genap – TKA", {
-    type: "mixed",
-    content: "Data (n=8): 3, 6, 9, 12, 15, 18, 21, 24.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{\\frac{1 \\times 9}{4}} = x_{2{,}25} = x_2 + 0{,}25(x_3 - x_2) = 6 + 0{,}25(3) = \\ldots" },
-      { label: "b.", math: "Q_2 = \\frac{x_4+x_5}{2} = \\frac{12+15}{2} = \\ldots" },
-      { label: "c.", math: "Q_3 = x_{6{,}75} = x_6 + 0{,}75(x_7-x_6) = 18+0{,}75(3) = \\ldots" },
-    ],
+    content: "Delapan data yang sudah diurutkan dari kecil ke besar: 3, 6, 9, 12, 15, 18, 21, 24. Tentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
-  Qn(4, "Box Plot – UN", {
-    type: "mixed",
+  Qn(4, "Box Plot dan IQR – UN", {
     diagram: <BoxPlotSVG />,
-    content: "Data nilai: min=55, Q₁=65, Q₂=75, Q₃=85, max=95.",
-    parts: [
-      { label: "a.", math: "\\text{IQR} = Q_3 - Q_1 = 85 - 65 = \\ldots" },
-      { label: "b.", text: "Gambarkan box plot dari data tersebut. Beri label semua komponen." },
-      { label: "c.", text: "Berapa persen data yang berada di dalam kotak (box)?" },
-    ],
+    content: "Sebuah data nilai ujian memiliki lima rangkuman berikut: nilai minimum = 55, Q₁ = 65, Q₂ = 75, Q₃ = 85, nilai maksimum = 95. Tentukan IQR (jangkauan interkuartil) dari data tersebut dan jelaskan berapa persen data yang berada di dalam kotak (antara Q₁ dan Q₃)!",
   }),
-  Qn(5, "Kuartil dari Data Terurut – TKA", {
-    type: "mixed",
-    content: "Data tinggi badan 12 siswa (cm): 148, 150, 152, 154, 155, 157, 158, 160, 162, 164, 166, 170.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{\\frac{13}{4}} = x_{3{,}25} = 152 + 0{,}25(154-152) = 152 + 0{,}5 = \\ldots" },
-      { label: "b.", math: "Q_2 = \\frac{x_6+x_7}{2} = \\frac{157+158}{2} = \\ldots" },
-      { label: "c.", math: "Q_3 = x_{9{,}75} = 162 + 0{,}75(164-162) = 162 + 1{,}5 = \\ldots" },
-    ],
+  Qn(5, "Kuartil Tinggi Badan Siswa – TKA", {
+    content: "Data tinggi badan 12 siswa (dalam cm) yang sudah diurutkan: 148, 150, 152, 154, 155, 157, 158, 160, 162, 164, 166, 170. Tentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
-  Qn(6, "Interpretasi Kuartil – ANBK", {
-    type: "mixed",
-    content: "Dari data nilai ujian 40 siswa: Q₁=65, Q₂=75, Q₃=85.",
-    parts: [
-      { label: "a.", text: "Berapa persen siswa yang mendapat nilai di bawah 65?" },
-      { label: "b.", text: "Berapa persen siswa yang nilainya antara 65 dan 85?" },
-      { label: "c.", text: "Berapa persen siswa yang nilainya di atas Q₃=85?" },
-    ],
+  Qn(6, "Interpretasi Kuartil Nilai Ujian – ANBK", {
+    content: "Dari data nilai ujian 40 siswa, diperoleh Q₁ = 65, Q₂ = 75, dan Q₃ = 85. Berapa banyak siswa yang mendapat nilai antara 65 dan 85? Berapa banyak siswa yang mendapat nilai di bawah Q₁?",
   }),
   Qn(7, "Posisi Kuartil dalam Data – UN", {
-    type: "mixed",
-    content: "Data (n=20) yang sudah diurutkan. Tentukan posisi Q₁, Q₂, Q₃:",
-    parts: [
-      { label: "a.", math: "\\text{Posisi } Q_1 = \\frac{1(20+1)}{4} = \\frac{21}{4} = 5{,}25 \\Rightarrow \\text{interpolasi antara data ke-5 dan ke-6}" },
-      { label: "b.", math: "\\text{Posisi } Q_2 = \\frac{2(21)}{4} = 10{,}5 \\Rightarrow \\text{interpolasi antara data ke-10 dan ke-11}" },
-      { label: "c.", math: "\\text{Posisi } Q_3 = \\frac{3(21)}{4} = 15{,}75 \\Rightarrow \\text{interpolasi antara data ke-15 dan ke-16}" },
-    ],
+    content: "Suatu data terdiri dari 20 nilai yang sudah diurutkan dari kecil ke besar. Tentukan posisi (letak) Q₁, Q₂, dan Q₃ menggunakan rumus letak kuartil, kemudian jelaskan cara membaca hasil posisi desimal tersebut!",
   }),
-  Qn(8, "Kuartil Data 16 Nilai – UN", {
-    type: "mixed",
-    content: "Data n=16 terurut: 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{4{,}25} = x_4 + 0{,}25(x_5-x_4) = 18+0{,}25(2) = \\ldots" },
-      { label: "b.", math: "Q_2 = \\frac{x_8+x_9}{2} = \\frac{26+28}{2} = \\ldots" },
-      { label: "c.", math: "Q_3 = x_{12{,}75} = x_{12}+0{,}75(x_{13}-x_{12}) = 34+0{,}75(2) = \\ldots" },
-    ],
+  Qn(8, "Kuartil 16 Data Terurut – UN", {
+    content: "Enam belas data yang sudah diurutkan dari kecil ke besar: 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42. Tentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
-  Qn(9, "Soal Cerita Kuartil – UN", {
-    type: "mixed",
-    content: "Nilai ujian 9 siswa (sudah urut): 55, 62, 68, 72, 75, 80, 85, 88, 92.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{\\frac{10}{4}} = x_{2{,}5} = \\frac{x_2+x_3}{2} = \\frac{62+68}{2} = \\ldots" },
-      { label: "b.", math: "Q_2 = x_5 = \\ldots" },
-      { label: "c.", math: "Q_3 = x_{7{,}5} = \\frac{x_7+x_8}{2} = \\frac{85+88}{2} = \\ldots" },
-    ],
+  Qn(9, "Kuartil Nilai Ujian 9 Siswa – UN", {
+    content: "Nilai ujian 9 siswa yang sudah diurutkan dari kecil ke besar: 55, 62, 68, 72, 75, 80, 85, 88, 92. Tentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
-  Qn(10, "Soal Cerita – Kuartil Nilai Rapor – UN", {
-    type: "mixed",
-    content: "Nilai rapor 20 siswa (sudah urut dari kecil):\n60, 62, 65, 68, 70, 72, 73, 75, 76, 78,\n80, 80, 82, 84, 85, 87, 88, 90, 92, 95.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{5{,}25} = 70+0{,}25(72-70) = 70{,}5" },
-      { label: "b.", math: "Q_2 = \\frac{x_{10}+x_{11}}{2} = \\frac{78+80}{2} = \\ldots" },
-      { label: "c.", math: "Q_3 = x_{15{,}75} = 85+0{,}75(87-85) = 85+1{,}5 = \\ldots" },
-    ],
+  Qn(10, "Kuartil Nilai Rapor 20 Siswa – UN", {
+    content: "Nilai rapor 20 siswa yang sudah diurutkan dari kecil ke besar:\n60, 62, 65, 68, 70, 72, 73, 75, 76, 78, 80, 80, 82, 84, 85, 87, 88, 90, 92, 95.\nTentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
-  Qn(11, "Soal UN – Kuartil dan Median", {
-    type: "mixed",
-    content: "Data nilai 12 siswa: 55, 60, 62, 65, 68, 70, 72, 75, 78, 80, 85, 90.",
-    parts: [
-      { label: "a.", math: "Q_1 = \\frac{x_3+x_4}{2} = \\frac{62+65}{2} = \\ldots" },
-      { label: "b.", math: "Q_2 = \\frac{x_6+x_7}{2} = \\frac{70+72}{2} = \\ldots" },
-      { label: "c.", math: "Q_3 = \\frac{x_9+x_{10}}{2} = \\frac{78+80}{2} = \\ldots" },
-    ],
+  Qn(11, "Kuartil Nilai 12 Siswa – UN", {
+    content: "Data nilai 12 siswa yang sudah diurutkan dari kecil ke besar: 55, 60, 62, 65, 68, 70, 72, 75, 78, 80, 85, 90. Tentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
-  Qn(12, "Soal ANBK – Kuartil Berganda", {
-    type: "mixed",
-    content: "Data n=16: 5, 8, 10, 12, 14, 15, 17, 20, 22, 24, 26, 28, 30, 32, 35, 40.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{4{,}25} = 12+0{,}25(14-12) = 12{,}5" },
-      { label: "b.", math: "Q_2 = \\frac{x_8+x_9}{2} = \\frac{20+22}{2} = 21" },
-      { label: "c.", math: "Q_3 = x_{12{,}75} = 28+0{,}75(30-28) = 29{,}5" },
-    ],
+  Qn(12, "Kuartil 16 Data Campuran – ANBK", {
+    content: "Enam belas data yang sudah diurutkan dari kecil ke besar: 5, 8, 10, 12, 14, 15, 17, 20, 22, 24, 26, 28, 30, 32, 35, 40. Tentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
 ];
 
@@ -222,20 +148,8 @@ const KuartilPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-green-400 text-[10px] font-bold uppercase tracking-wider bg-green-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3 whitespace-pre-line">{q.content}</p>}
-                    {q.mathContent && <div className="mb-3 bg-green-900/20 border border-green-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto"><BlockMath math={q.mathContent} /></div>}
                     {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3 overflow-x-auto">{q.diagram}</div>}
-                    {q.parts && (
-                      <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
-                            <span className="text-green-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    <p className="font-body text-sm text-white/90 leading-relaxed whitespace-pre-line">{q.content}</p>
                   </div>
                 </div>
               </div>

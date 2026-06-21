@@ -3,10 +3,9 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 
-type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; mathContent?: string; parts?: Part[]; diagram?: React.ReactNode; type: "essay" | "mixed" };
+type Q = { n: number; title: string; content: string; diagram?: React.ReactNode };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const VariansSimpanganDiagram = () => (
@@ -64,212 +63,72 @@ const TableSimpangan = () => (
 
 const questions: Q[] = [
   Qn(1, "Jangkauan (Range) – ANBK", {
-    type: "mixed",
-    mathContent: "J = x_{\\max} - x_{\\min}",
-    content: "Hitung jangkauan dari data berikut:",
-    parts: [
-      { label: "a.", math: "\\text{Data: } 5, 12, 8, 20, 15, 3 \\Rightarrow J = 20-3 = \\ldots" },
-      { label: "b.", math: "\\text{Data: } 65, 72, 58, 80, 90, 45 \\Rightarrow J = \\ldots" },
-      { label: "c.", text: "Apa kelemahan menggunakan jangkauan sebagai ukuran penyebaran?" },
-    ],
+    content: "Nilai ulangan harian enam siswa adalah: 65, 72, 58, 80, 90, 45. Tentukan jangkauan dari data nilai tersebut, kemudian jelaskan satu kelemahan jangkauan sebagai ukuran penyebaran data!",
   }),
   Qn(2, "Jangkauan Interkuartil (IQR) – UN", {
-    type: "mixed",
-    mathContent: "\\text{IQR} = Q_3 - Q_1",
-    content: "Hitung IQR dari data berikut:",
-    parts: [
-      { label: "a.", math: "Q_1=45, Q_3=75 \\Rightarrow \\text{IQR} = 75-45 = \\ldots" },
-      { label: "b.", math: "Q_1=62{,}5, Q_3=87{,}5 \\Rightarrow \\text{IQR} = \\ldots" },
-      { label: "c.", text: "Mengapa IQR lebih tahan terhadap data pencilan dibandingkan jangkauan?" },
-    ],
+    content: "Data nilai 10 siswa yang sudah diurutkan: 55, 60, 65, 70, 72, 75, 80, 82, 88, 95. Diketahui Q₁ = 63,75 dan Q₃ = 83,5. Tentukan IQR (Jangkauan Interkuartil) dari data tersebut!",
   }),
   Qn(3, "Simpangan Kuartil (SQ) – TKA", {
-    type: "mixed",
-    mathContent: "SQ = \\frac{Q_3 - Q_1}{2} = \\frac{\\text{IQR}}{2}",
-    content: "Hitung simpangan kuartil dari data berikut:",
-    parts: [
-      { label: "a.", math: "Q_1=50, Q_3=80 \\Rightarrow SQ = \\frac{80-50}{2} = \\ldots" },
-      { label: "b.", math: "Q_1=63, Q_3=89 \\Rightarrow SQ = \\ldots" },
-      { label: "c.", text: "Apa yang dimaksud dengan simpangan kuartil? Apa kegunaannya?" },
-    ],
+    content: "Data yang sudah diurutkan: 10, 15, 20, 25, 30, 35, 40, 45, 50. Diketahui Q₁ = 17,5 dan Q₃ = 42,5. Tentukan IQR dan simpangan kuartil (SQ) dari data tersebut!",
   }),
-  Qn(4, "Menghitung IQR dari Data Terurut – ANBK", {
-    type: "mixed",
-    content: "Data nilai 10 siswa (sudah urut): 55, 60, 65, 70, 72, 75, 80, 82, 88, 95.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{2{,}75} = 60+0{,}75(5) = 63{,}75" },
-      { label: "b.", math: "Q_3 = x_{8{,}25} = 82+0{,}25(6) = 83{,}5" },
-      { label: "c.", math: "\\text{IQR} = 83{,}5 - 63{,}75 = \\ldots, \\quad SQ = \\frac{\\text{IQR}}{2} = \\ldots" },
-    ],
+  Qn(4, "IQR dan Simpangan Kuartil dari Data – ANBK", {
+    content: "Data nilai 10 siswa yang sudah diurutkan: 55, 60, 65, 70, 72, 75, 80, 82, 88, 95. Tentukan Q₁, Q₃, IQR, dan simpangan kuartil dari data tersebut!",
   }),
   Qn(5, "Simpangan Rata-Rata – UN", {
-    type: "mixed",
     diagram: <TableSimpangan />,
-    mathContent: "SR = \\frac{\\sum |x_i - \\bar{x}|}{n}",
-    content: "Data: 4, 5, 7, 8, 11. Rata-rata = 7.",
-    parts: [
-      { label: "a.", math: "|4-7|=3, |5-7|=2, |7-7|=0, |8-7|=1, |11-7|=4" },
-      { label: "b.", math: "\\sum |x_i - \\bar{x}| = 3+2+0+1+4 = \\ldots" },
-      { label: "c.", math: "SR = \\frac{10}{5} = \\ldots" },
-    ],
+    content: "Data nilai: 4, 5, 7, 8, 11. Rata-rata dari data tersebut adalah 7. Perhatikan tabel di atas sebagai panduan. Tentukan simpangan rata-rata (SR) dari data tersebut!",
   }),
-  Qn(6, "Varians Data Tunggal – TKA", {
-    type: "mixed",
-    mathContent: "s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n}",
-    content: "Data: 4, 5, 7, 8, 11. Rata-rata = 7.",
-    parts: [
-      { label: "a.", math: "(4-7)^2+(5-7)^2+(7-7)^2+(8-7)^2+(11-7)^2 = 9+4+0+1+16 = \\ldots" },
-      { label: "b.", math: "s^2 = \\frac{30}{5} = \\ldots" },
-      { label: "c.", math: "s = \\sqrt{s^2} = \\sqrt{6} \\approx \\ldots" },
-    ],
+  Qn(6, "Varians dan Simpangan Baku Tunggal – TKA", {
+    content: "Data nilai: 4, 5, 7, 8, 11. Diketahui rata-rata data tersebut adalah 7. Tentukan varians (s²) dan simpangan baku (s) dari data tersebut!",
   }),
   Qn(7, "Simpangan Baku – ANBK", {
-    type: "mixed",
-    mathContent: "s = \\sqrt{\\frac{\\sum (x_i - \\bar{x})^2}{n}}",
-    content: "Data nilai: 6, 7, 8, 9, 10.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{6+7+8+9+10}{5} = 8" },
-      { label: "b.", math: "\\sum(x_i-\\bar{x})^2 = 4+1+0+1+4 = 10 \\Rightarrow s^2 = \\frac{10}{5} = 2" },
-      { label: "c.", math: "s = \\sqrt{2} \\approx \\ldots" },
-    ],
+    content: "Data nilai ulangan lima siswa: 6, 7, 8, 9, 10. Tentukan rata-rata, varians, dan simpangan baku dari data tersebut!",
   }),
   Qn(8, "Varians dan Simpangan Baku Berbobot – UN", {
-    type: "mixed",
-    mathContent: "s^2 = \\frac{\\sum f_i(x_i - \\bar{x})^2}{\\sum f_i}",
-    content: "Nilai (frekuensi): 6 (2), 7 (5), 8 (8), 9 (4), 10 (1). x̄ = 7,75.",
-    parts: [
-      { label: "a.", math: "\\sum f_i(x_i-\\bar{x})^2 = 2(1{,}75)^2+5(0{,}75)^2+8(0{,}25)^2+4(1{,}25)^2+1(2{,}25)^2" },
-      { label: "b.", math: "= 2(3{,}0625)+5(0{,}5625)+8(0{,}0625)+4(1{,}5625)+1(5{,}0625) = \\ldots" },
-      { label: "c.", math: "s^2 = \\frac{\\ldots}{20} = \\ldots, \\quad s = \\ldots" },
-    ],
+    content: "Data nilai ulangan beserta frekuensinya: nilai 6 sebanyak 2 siswa, nilai 7 sebanyak 5 siswa, nilai 8 sebanyak 8 siswa, nilai 9 sebanyak 4 siswa, dan nilai 10 sebanyak 1 siswa. Diketahui rata-rata = 7,75. Tentukan varians dan simpangan baku dari data tersebut!",
   }),
-  Qn(9, "Perbandingan Penyebaran Dua Data – ANBK", {
-    type: "mixed",
-    content: "Kelas A: nilai 70, 72, 74, 76, 78 (rata-rata=74)\nKelas B: nilai 60, 68, 74, 80, 88 (rata-rata=74)",
-    parts: [
-      { label: "a.", text: "Hitung jangkauan masing-masing kelas." },
-      { label: "b.", text: "Hitung simpangan baku masing-masing kelas." },
-      { label: "c.", text: "Kelas mana yang datanya lebih seragam? Jelaskan." },
-    ],
+  Qn(9, "Perbandingan Penyebaran Dua Kelas – ANBK", {
+    content: "Kelas A memiliki nilai ulangan: 70, 72, 74, 76, 78. Kelas B memiliki nilai ulangan: 60, 68, 74, 80, 88. Keduanya memiliki rata-rata yang sama yaitu 74. Hitung simpangan baku masing-masing kelas, kemudian tentukan kelas mana yang datanya lebih seragam!",
   }),
-  Qn(10, "Soal Cerita Jangkauan – UN", {
-    type: "mixed",
-    content: "Suhu udara selama 7 hari: 28, 30, 27, 32, 29, 31, 26 °C.",
-    parts: [
-      { label: "a.", math: "J = T_{\\max} - T_{\\min} = 32-26 = \\ldots ^\\circ C" },
-      { label: "b.", math: "\\bar{T} = \\frac{28+30+27+32+29+31+26}{7} = \\ldots ^\\circ C" },
-      { label: "c.", text: "Apa arti jangkauan dalam konteks suhu udara ini?" },
-    ],
+  Qn(10, "Jangkauan Suhu Udara – UN", {
+    content: "Suhu udara di suatu kota selama 7 hari berturut-turut tercatat sebagai berikut (dalam °C): 28, 30, 27, 32, 29, 31, 26. Tentukan jangkauan suhu udara selama 7 hari tersebut!",
   }),
-  Qn(11, "Jangkauan Interkuartil dari Data – ANBK", {
-    type: "mixed",
-    content: "Data (sudah urut): 10, 15, 20, 25, 30, 35, 40, 45, 50.",
-    parts: [
-      { label: "a.", math: "Q_1 = x_{\\frac{10}{4}} = x_{2{,}5} = \\frac{15+20}{2} = \\ldots" },
-      { label: "b.", math: "Q_3 = x_{7{,}5} = \\frac{40+45}{2} = \\ldots" },
-      { label: "c.", math: "\\text{IQR} = 42{,}5 - 17{,}5 = \\ldots, \\quad SQ = \\frac{\\text{IQR}}{2} = \\ldots" },
-    ],
+  Qn(11, "IQR dan Simpangan Kuartil Data Berurut – ANBK", {
+    content: "Data yang sudah diurutkan dari kecil ke besar: 10, 15, 20, 25, 30, 35, 40, 45, 50. Tentukan Q₁, Q₃, IQR, dan simpangan kuartil dari data tersebut!",
   }),
   Qn(12, "Simpangan Rata-Rata Berbobot – UN", {
-    type: "mixed",
-    mathContent: "SR = \\frac{\\sum f_i |x_i - \\bar{x}|}{\\sum f_i}",
-    content: "Nilai (frekuensi): 5 (3), 7 (5), 9 (2). Hitung simpangan rata-rata.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{3(5)+5(7)+2(9)}{10} = \\frac{15+35+18}{10} = \\frac{68}{10} = 6{,}8" },
-      { label: "b.", math: "\\sum f_i|x_i-\\bar{x}| = 3|5-6{,}8|+5|7-6{,}8|+2|9-6{,}8| = 3(1{,}8)+5(0{,}2)+2(2{,}2) = \\ldots" },
-      { label: "c.", math: "SR = \\frac{\\ldots}{10} = \\ldots" },
-    ],
+    content: "Data nilai beserta frekuensinya: nilai 5 sebanyak 3 siswa, nilai 7 sebanyak 5 siswa, nilai 9 sebanyak 2 siswa. Tentukan rata-rata dan simpangan rata-rata dari data tersebut!",
   }),
-  Qn(13, "Deteksi Pencilan dari IQR – TKA", {
-    type: "mixed",
-    content: "Data: 20, 22, 24, 26, 28, 30, 32, 34, 36, 80. Q₁=23, Q₃=33.",
-    parts: [
-      { label: "a.", math: "\\text{IQR} = 33-23 = 10" },
-      { label: "b.", math: "\\text{Batas bawah} = 23-1{,}5(10) = 8, \\quad \\text{Batas atas} = 33+1{,}5(10) = 48" },
-      { label: "c.", text: "Apakah nilai 80 merupakan pencilan? Jelaskan." },
-    ],
+  Qn(13, "Deteksi Data Pencilan (Outlier) – TKA", {
+    content: "Data hasil ulangan: 20, 22, 24, 26, 28, 30, 32, 34, 36, 80. Diketahui Q₁ = 23 dan Q₃ = 33. Gunakan aturan IQR (batas bawah = Q₁ − 1,5 × IQR dan batas atas = Q₃ + 1,5 × IQR) untuk menentukan apakah nilai 80 merupakan data pencilan (outlier)!",
   }),
   Qn(14, "Simpangan Baku Data Berbobot – UN", {
-    type: "mixed",
-    content: "Nilai (frekuensi): 60 (4), 70 (8), 80 (12), 90 (6). x̄ = 77.",
-    parts: [
-      { label: "a.", math: "\\sum f_i(x_i-\\bar{x})^2 = 4(17)^2+8(7)^2+12(3)^2+6(13)^2 = \\ldots" },
-      { label: "b.", math: "= 4(289)+8(49)+12(9)+6(169) = 1156+392+108+1014 = \\ldots" },
-      { label: "c.", math: "s^2 = \\frac{2670}{30} = 89, \\quad s = \\sqrt{89} \\approx \\ldots" },
-    ],
+    content: "Data nilai beserta frekuensinya: nilai 60 sebanyak 4 siswa, nilai 70 sebanyak 8 siswa, nilai 80 sebanyak 12 siswa, nilai 90 sebanyak 6 siswa. Diketahui rata-rata = 77. Tentukan varians dan simpangan baku dari data tersebut!",
   }),
-  Qn(15, "Membandingkan Tiga Ukuran Penyebaran – TKA", {
-    type: "mixed",
-    content: "Data A: 4, 6, 8, 10, 12. Data B: 2, 4, 8, 12, 14.",
-    parts: [
-      { label: "a.", text: "Hitung jangkauan kedua data." },
-      { label: "b.", text: "Hitung IQR kedua data." },
-      { label: "c.", text: "Data mana yang lebih bervariasi? Jelaskan dengan menggunakan jangkauan dan IQR." },
-    ],
+  Qn(15, "Membandingkan Dua Ukuran Penyebaran – TKA", {
+    content: "Data A: 4, 6, 8, 10, 12. Data B: 2, 4, 8, 12, 14. Keduanya memiliki rata-rata yang sama yaitu 8. Hitung jangkauan dan IQR masing-masing data, kemudian tentukan data mana yang lebih bervariasi!",
   }),
-  Qn(16, "Hubungan Varians dan Simpangan Baku – TKA", {
-    type: "mixed",
-    content: "Jika varians suatu data adalah 25:",
-    parts: [
-      { label: "a.", math: "s = \\sqrt{25} = \\ldots" },
-      { label: "b.", text: "Jika semua nilai data ditambah 10, apakah varians berubah? Mengapa?" },
-      { label: "c.", text: "Jika semua nilai data dikali 2, bagaimana perubahan varians?" },
-    ],
+  Qn(16, "Efek Perkalian Konstanta terhadap Varians – TKA", {
+    content: "Diketahui varians suatu data adalah 25. Jika setiap nilai data dikali 2, tentukan varians dan simpangan baku yang baru! Jelaskan aturan umum perubahan varians akibat perkalian konstanta!",
   }),
-  Qn(17, "Soal Cerita Simpangan Baku – ANBK", {
-    type: "mixed",
-    content: "Produksi harian pabrik selama 5 hari (unit): 100, 105, 98, 103, 104.",
-    parts: [
-      { label: "a.", math: "\\bar{x} = \\frac{100+105+98+103+104}{5} = \\frac{510}{5} = \\ldots" },
-      { label: "b.", math: "\\sum(x_i-\\bar{x})^2 = (-2)^2+3^2+(-4)^2+1^2+2^2 = 4+9+16+1+4 = \\ldots" },
-      { label: "c.", math: "s = \\sqrt{\\frac{34}{5}} = \\sqrt{6{,}8} \\approx \\ldots" },
-    ],
+  Qn(17, "Simpangan Baku Produksi Pabrik – ANBK", {
+    content: "Produksi harian suatu pabrik selama 5 hari (dalam unit) tercatat sebagai berikut: 100, 105, 98, 103, 104. Tentukan rata-rata produksi harian dan simpangan baku dari data tersebut!",
   }),
-  Qn(18, "IQR dan Penyebaran Distribusi – TKA", {
-    type: "mixed",
-    content: "Dua distribusi: A memiliki IQR=10, B memiliki IQR=30. Keduanya memiliki median yang sama.",
-    parts: [
-      { label: "a.", text: "Distribusi mana yang lebih 'terkonsentrasi' di sekitar median?" },
-      { label: "b.", text: "Distribusi mana yang lebih bervariasi?" },
-      { label: "c.", math: "SQ_A = \\frac{10}{2} = 5, \\quad SQ_B = \\frac{30}{2} = \\ldots" },
-    ],
+  Qn(18, "Membandingkan IQR Dua Kelompok – TKA", {
+    content: "Dua kelompok data, A dan B, memiliki median yang sama. Kelompok A memiliki IQR = 10 sedangkan kelompok B memiliki IQR = 30. Tentukan simpangan kuartil masing-masing kelompok, kemudian simpulkan kelompok mana yang datanya lebih terkonsentrasi di sekitar median dan mana yang lebih menyebar!",
   }),
-  Qn(19, "Soal UN – Lengkap Semua Ukuran Penyebaran", {
-    type: "mixed",
-    content: "Data: 10, 14, 16, 18, 20, 22, 24, 26, 30.",
-    parts: [
-      { label: "a.", math: "J = 30-10 = \\ldots" },
-      { label: "b.", math: "Q_1=15, Q_3=25 \\Rightarrow \\text{IQR}=10, SQ=5" },
-      { label: "c.", math: "\\bar{x}=20, \\sum(x_i-20)^2=200 \\Rightarrow s^2=\\frac{200}{9}\\approx 22{,}2, s\\approx \\ldots" },
-    ],
+  Qn(19, "Jangkauan, IQR, dan Simpangan Kuartil – UN", {
+    content: "Data nilai: 10, 14, 16, 18, 20, 22, 24, 26, 30. Diketahui Q₁ = 15 dan Q₃ = 25. Tentukan jangkauan, IQR, dan simpangan kuartil dari data tersebut!",
   }),
-  Qn(20, "Soal ANBK – Memilih Ukuran Penyebaran", {
-    type: "mixed",
-    content: "Tentukan ukuran penyebaran yang paling tepat untuk situasi berikut:",
-    parts: [
-      { label: "a.", text: "Data gaji karyawan dengan satu manajer bergaji sangat tinggi → gunakan apa?" },
-      { label: "b.", text: "Data nilai ujian yang terdistribusi normal → gunakan apa?" },
-      { label: "c.", text: "Membandingkan variabilitas dua data yang berbeda skala → gunakan apa?" },
-    ],
+  Qn(20, "Memilih Ukuran Penyebaran yang Tepat – ANBK", {
+    content: "Data gaji 10 karyawan (dalam juta rupiah): 3, 3, 4, 4, 4, 5, 5, 6, 6, 50. Seorang manajer memiliki gaji sangat tinggi yaitu 50 juta. Tentukan jangkauan dan IQR dari data tersebut, kemudian jelaskan ukuran penyebaran mana yang lebih tepat digunakan untuk menggambarkan kondisi gaji di perusahaan ini dan mengapa!",
   }),
-  Qn(21, "Soal TKA – Efek Penambahan Konstanta", {
-    type: "mixed",
-    content: "Diketahui data dengan rata-rata 70 dan simpangan baku 8. Setiap nilai ditambah 10.",
-    parts: [
-      { label: "a.", math: "\\bar{x}_{\\text{baru}} = 70+10 = \\ldots" },
-      { label: "b.", math: "s_{\\text{baru}} = \\ldots \\text{ (tidak berubah, karena penyebaran relatif tidak berubah)}" },
-      { label: "c.", text: "Jelaskan mengapa simpangan baku tidak berubah ketika semua data ditambah konstanta." },
-    ],
+  Qn(21, "Efek Penambahan Konstanta terhadap Simpangan Baku – TKA", {
+    content: "Diketahui data dengan rata-rata 70 dan simpangan baku 8. Jika setiap nilai data ditambah 10, tentukan rata-rata dan simpangan baku yang baru! Jelaskan mengapa simpangan baku tidak berubah ketika semua data ditambah dengan konstanta yang sama!",
   }),
-  Qn(22, "Soal UN – Interpretasi Penyebaran", {
-    type: "mixed",
+  Qn(22, "Perbandingan Tiga Ukuran Penyebaran – UN", {
     diagram: <VariansSimpanganDiagram />,
-    content: "Jelaskan perbedaan antara ketiga ukuran penyebaran ini:",
-    parts: [
-      { label: "a.", text: "Jangkauan: mudah dihitung tapi tidak mempertimbangkan semua data." },
-      { label: "b.", text: "IQR/Simpangan Kuartil: lebih tahan terhadap pencilan karena hanya memakai 50% data tengah." },
-      { label: "c.", text: "Simpangan Baku: mempertimbangkan semua data, paling informatif untuk distribusi normal." },
-    ],
+    content: "Perhatikan diagram di atas yang merangkum tiga ukuran penyebaran data. Jelaskan perbedaan antara jangkauan, IQR/simpangan kuartil, dan simpangan baku! Sebutkan kondisi kapan sebaiknya menggunakan IQR dibandingkan jangkauan atau simpangan baku!",
   }),
 ];
 
@@ -329,20 +188,8 @@ const PenyebaranDataPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-orange-400 text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3 whitespace-pre-line">{q.content}</p>}
-                    {q.mathContent && <div className="mb-3 bg-orange-900/20 border border-orange-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto"><BlockMath math={q.mathContent} /></div>}
                     {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3 overflow-x-auto">{q.diagram}</div>}
-                    {q.parts && (
-                      <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
-                            <span className="text-orange-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    <p className="font-body text-sm text-white/90 leading-relaxed">{q.content}</p>
                   </div>
                 </div>
               </div>
