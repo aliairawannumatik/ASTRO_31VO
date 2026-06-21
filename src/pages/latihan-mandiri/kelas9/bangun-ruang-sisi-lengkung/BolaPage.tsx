@@ -71,98 +71,103 @@ function HalfSphereSVG({ r, color = "#818cf8" }: { r?: string; color?: string })
   );
 }
 
-/* ── Kolam Setengah Bola — opening UP (pool), dome curves DOWN, water fills inside ── */
+/* ── Kolam Setengah Bola ──
+   Pool: opening at TOP, dome curves DOWNWARD.
+   Shape built with cubic bezier (no arc ambiguity):
+     M 30 72 C 30 142, 84 190, 140 190 C 196 190, 250 142, 250 72 Z
+   viewBox 0 0 280 230  |  Opening ellipse cy=72 rx=110 ry=24  (top=48, clear margin)
+   Water surface WY=118  |  Dome bottom y=190  |  Label y=218
+──────────────────────────────────────────── */
 function KolamSetengahBolaSVG({ r, color = "#818cf8" }: { r?: string; color?: string }) {
-  /*
-    Pool = half-sphere with opening at TOP, dome curving DOWNWARD.
-    sweep-flag=1 (same as HalfSphereSVG) curves the arc downward.
-    viewBox 0 0 260 210
-    Opening ellipse: cx=130 cy=48 rx=100 ry=24  → top=24, bottom=72
-    Arc: M 30 48 A 100 100 0 0 1 230 48 Z  → dome bottom at y=48+100=148
-    Water surface at y=92 (44px below opening rim)
-      half-chord at y=92: dist-from-centre=92-48=44 → sqrt(100²-44²)≈89.8
-      water spans x≈40 to x≈220
-    Label below dome: y=195
-  */
-  const WY = 92; /* water surface y */
+  /* Bowl bezier path — unambiguous downward bowl shape.
+     Two symmetric cubics approximate a true semicircle (r≈118px):
+       Left:  M 30 72 C 30 142, 84 190, 140 190
+       Right: C 196 190, 250 142, 250 72
+     Verified: at x=140 the curve passes through y=190 (bottom) ✓
+               at x=30 and x=250 the curve starts at y=72 (rim) ✓            */
+  const BOWL = "M 30 72 C 30 142, 84 190, 140 190 C 196 190, 250 142, 250 72 Z";
   return (
-    <svg viewBox="0 0 260 210" width="260" height="210" className="mx-auto">
+    <svg viewBox="0 0 280 230" width="280" height="230" className="mx-auto">
       <defs>
-        <radialGradient id="ksh" cx="50%" cy="10%" r="80%">
-          <stop offset="0%" stopColor={color} stopOpacity="0.30" />
-          <stop offset="100%" stopColor={color} stopOpacity="0.06" />
+        <radialGradient id="ksh" cx="50%" cy="5%" r="85%">
+          <stop offset="0%"   stopColor={color}   stopOpacity="0.30" />
+          <stop offset="100%" stopColor={color}   stopOpacity="0.04" />
         </radialGradient>
         <linearGradient id="kwt" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.70" />
-          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.90" />
+          <stop offset="0%"   stopColor="#38bdf8" stopOpacity="0.68" />
+          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.95" />
         </linearGradient>
-        {/* clip = dome interior (opening at top, dome curves down) */}
-        <clipPath id="kcp">
-          <path d="M 30 48 A 100 100 0 0 1 230 48 Z" />
-        </clipPath>
+        <linearGradient id="kwsh" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="#e0f2fe" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#7dd3fc" stopOpacity="0.15" />
+        </linearGradient>
+        <clipPath id="kcp"><path d={BOWL} /></clipPath>
       </defs>
 
-      {/* Pool shell */}
-      <path d="M 30 48 A 100 100 0 0 1 230 48 Z"
-            fill="url(#ksh)" stroke={color} strokeWidth="2" />
+      {/* Bowl shell */}
+      <path d={BOWL} fill="url(#ksh)" stroke={color} strokeWidth="2.5" />
 
-      {/* Water body — fills from surface down to dome bottom, clipped to shell */}
-      <rect x="0" y={WY} width="260" height="110" fill="url(#kwt)" clipPath="url(#kcp)">
-        <animate attributeName="y" values={`${WY};${WY-3};${WY};${WY+3};${WY}`} dur="2.4s" repeatCount="indefinite" />
+      {/* Water body */}
+      <rect x="0" y="118" width="280" height="90" fill="url(#kwt)" clipPath="url(#kcp)">
+        <animate attributeName="y"      values="118;115;118;121;118" dur="2.6s" repeatCount="indefinite" />
+        <animate attributeName="height" values="90;93;90;87;90"      dur="2.6s" repeatCount="indefinite" />
       </rect>
 
-      {/* Water surface bright cap */}
-      <ellipse cx="130" cy={WY} rx="88" ry="11" fill="#bae6fd" fillOpacity="0.55" clipPath="url(#kcp)">
-        <animate attributeName="cy" values={`${WY};${WY-3};${WY};${WY+3};${WY}`} dur="2.4s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="11;14;11;9;11" dur="2s" repeatCount="indefinite" />
-        <animate attributeName="rx" values="88;91;88;85;88" dur="2.8s" repeatCount="indefinite" />
+      {/* Bright shimmer band at water surface */}
+      <rect x="0" y="112" width="280" height="14" fill="url(#kwsh)" clipPath="url(#kcp)">
+        <animate attributeName="y" values="112;109;112;115;112" dur="2.6s" repeatCount="indefinite" />
+      </rect>
+
+      {/* Surface meniscus ellipse */}
+      <ellipse cx="140" cy="118" rx="99" ry="13" fill="#bae6fd" fillOpacity="0.70" clipPath="url(#kcp)">
+        <animate attributeName="cy" values="118;115;118;121;118" dur="2.6s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="13;17;13;10;13"      dur="2.0s" repeatCount="indefinite" />
+        <animate attributeName="rx" values="99;102;99;96;99"     dur="3.0s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Wave line 1 */}
-      <path fill="none" stroke="#e0f2fe" strokeWidth="2.2" strokeOpacity="0.9" clipPath="url(#kcp)"
-            d={`M 42 ${WY} Q 66 ${WY-7},90 ${WY} Q 114 ${WY+7},138 ${WY} Q 162 ${WY-7},186 ${WY} Q 200 ${WY+4},218 ${WY}`}>
-        <animate attributeName="d"
-          values={`M 42 ${WY} Q 66 ${WY-7},90 ${WY} Q 114 ${WY+7},138 ${WY} Q 162 ${WY-7},186 ${WY} Q 200 ${WY+4},218 ${WY};M 42 ${WY-4} Q 66 ${WY+5},90 ${WY-4} Q 114 ${WY-11},138 ${WY-4} Q 162 ${WY+5},186 ${WY-4} Q 200 ${WY-2},218 ${WY-4};M 42 ${WY} Q 66 ${WY-7},90 ${WY} Q 114 ${WY+7},138 ${WY} Q 162 ${WY-7},186 ${WY} Q 200 ${WY+4},218 ${WY}`}
-          dur="2s" repeatCount="indefinite" />
-      </path>
-
-      {/* Wave line 2 — offset */}
-      <path fill="none" stroke="#93c5fd" strokeWidth="1.3" strokeOpacity="0.60" clipPath="url(#kcp)"
-            d={`M 42 ${WY+4} Q 66 ${WY-3},90 ${WY+4} Q 114 ${WY+11},138 ${WY+4} Q 162 ${WY-3},186 ${WY+4} Q 200 ${WY+7},218 ${WY+4}`}>
-        <animate attributeName="d"
-          values={`M 42 ${WY+4} Q 66 ${WY-3},90 ${WY+4} Q 114 ${WY+11},138 ${WY+4} Q 162 ${WY-3},186 ${WY+4} Q 200 ${WY+7},218 ${WY+4};M 42 ${WY} Q 66 ${WY+9},90 ${WY} Q 114 ${WY-7},138 ${WY} Q 162 ${WY+9},186 ${WY} Q 200 ${WY+3},218 ${WY};M 42 ${WY+4} Q 66 ${WY-3},90 ${WY+4} Q 114 ${WY+11},138 ${WY+4} Q 162 ${WY-3},186 ${WY+4} Q 200 ${WY+7},218 ${WY+4}`}
-          dur="2.8s" begin="0.7s" repeatCount="indefinite" />
-      </path>
-
       {/* Ripple 1 */}
-      <ellipse cx="130" cy={WY} rx="12" ry="5" fill="none" stroke="#e0f2fe" strokeWidth="1.5" clipPath="url(#kcp)">
-        <animate attributeName="rx" values="12;80;88" dur="2.3s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="5;10;12" dur="2.3s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.9;0.35;0" dur="2.3s" repeatCount="indefinite" />
+      <ellipse cx="140" cy="118" rx="8" ry="4" fill="none"
+               stroke="#e0f2fe" strokeWidth="2" clipPath="url(#kcp)">
+        <animate attributeName="rx"      values="8;92;99"             dur="2.4s"        repeatCount="indefinite" />
+        <animate attributeName="ry"      values="4;11;14"             dur="2.4s"        repeatCount="indefinite" />
+        <animate attributeName="opacity" values="1;0.4;0"             dur="2.4s"        repeatCount="indefinite" />
+        <animate attributeName="cy"      values="118;115;118;121;118" dur="2.6s"        repeatCount="indefinite" />
       </ellipse>
 
       {/* Ripple 2 offset */}
-      <ellipse cx="130" cy={WY} rx="12" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1.1" clipPath="url(#kcp)">
-        <animate attributeName="rx" values="12;80;88" dur="2.3s" begin="1.15s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="5;10;12" dur="2.3s" begin="1.15s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.7;0.25;0" dur="2.3s" begin="1.15s" repeatCount="indefinite" />
+      <ellipse cx="140" cy="118" rx="8" ry="4" fill="none"
+               stroke="#93c5fd" strokeWidth="1.5" clipPath="url(#kcp)">
+        <animate attributeName="rx"      values="8;92;99"             dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        <animate attributeName="ry"      values="4;11;14"             dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.8;0.3;0"           dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        <animate attributeName="cy"      values="118;115;118;121;118" dur="2.6s"              repeatCount="indefinite" />
       </ellipse>
 
-      {/* Opening rim at top */}
-      <ellipse cx="130" cy="48" rx="100" ry="24"
-               fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.8" />
+      {/* Ripple 3 small fast */}
+      <ellipse cx="140" cy="118" rx="5" ry="3" fill="none"
+               stroke="#bae6fd" strokeWidth="1.1" clipPath="url(#kcp)">
+        <animate attributeName="rx"      values="5;52;58"             dur="1.7s" begin="0.6s" repeatCount="indefinite" />
+        <animate attributeName="ry"      values="3;7;9"               dur="1.7s" begin="0.6s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.9;0.3;0"           dur="1.7s" begin="0.6s" repeatCount="indefinite" />
+        <animate attributeName="cy"      values="118;115;118;121;118" dur="2.6s"              repeatCount="indefinite" />
+      </ellipse>
 
-      {/* Radius arrow along opening rim */}
-      <line x1="130" y1="48" x2="230" y2="48" stroke={color} strokeWidth="1.6" strokeDasharray="5 3" />
-      <circle cx="130" cy="48" r="3.5" fill={color} />
+      {/* Opening rim */}
+      <ellipse cx="140" cy="72" rx="110" ry="24"
+               fill={color} fillOpacity="0.10" stroke={color} strokeWidth="2.2" />
+
+      {/* Radius line centre → right rim */}
+      <line x1="140" y1="72" x2="250" y2="72"
+            stroke={color} strokeWidth="1.8" strokeDasharray="6 3" />
+      <circle cx="140" cy="72" r="4" fill={color} />
       {r && (
-        <text x="178" y="38" fill={color} fontSize="12" textAnchor="middle"
-              fontFamily="monospace" fontWeight="600">r = {r}</text>
+        <text x="193" y="60" fill={color} fontSize="13" textAnchor="middle"
+              fontFamily="monospace" fontWeight="700">r = {r}</text>
       )}
 
       {/* Label */}
-      <text x="130" y="198" fill={color} fontSize="11" textAnchor="middle"
-            fontFamily="monospace" fillOpacity="0.75">Kolam Setengah Bola</text>
+      <text x="140" y="218" fill={color} fontSize="11" textAnchor="middle"
+            fontFamily="monospace" fillOpacity="0.70">Kolam Setengah Bola</text>
     </svg>
   );
 }
