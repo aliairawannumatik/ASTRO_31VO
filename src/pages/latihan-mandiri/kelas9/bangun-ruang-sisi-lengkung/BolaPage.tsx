@@ -71,64 +71,66 @@ function HalfSphereSVG({ r, color = "#818cf8" }: { r?: string; color?: string })
   );
 }
 
-/* ── Kolam Setengah Bola (bowl / pool shape) with animated water ── */
+/* ── Kolam Setengah Bola — mirrored against X-axis (dome up, opening down) with animated water ── */
 function KolamSetengahBolaSVG({ r, color = "#818cf8" }: { r?: string; color?: string }) {
   return (
     <svg viewBox="0 0 220 185" width="220" height="185" className="mx-auto">
       <defs>
-        <radialGradient id="kolam-bg" cx="50%" cy="20%" r="70%">
-          <stop offset="0%" stopColor={color} stopOpacity="0.35" />
+        <radialGradient id="kolam-bg" cx="50%" cy="80%" r="70%">
+          <stop offset="0%" stopColor={color} stopOpacity="0.40" />
           <stop offset="100%" stopColor={color} stopOpacity="0.06" />
         </radialGradient>
         <linearGradient id="kolam-water" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.75" />
-          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.50" />
+          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.65" />
+          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.45" />
         </linearGradient>
         <clipPath id="kolam-clip">
-          <path d="M 35 30 A 75 75 0 0 1 185 30 L 185 30 L 35 30 Z" />
+          {/* Dome shape clip — arc curves upward */}
+          <path d="M 35 155 A 75 75 0 0 0 185 155 Z" />
         </clipPath>
       </defs>
 
-      {/* Bowl body — arc curves downward (opening at top) */}
-      <path d="M 35 30 A 75 75 0 0 1 185 30 Z" fill="url(#kolam-bg)" stroke={color} strokeWidth="2" />
+      {/* Dome body — arc curves upward, opening at bottom (mirrored) */}
+      <path d="M 35 155 A 75 75 0 0 0 185 155 Z" fill="url(#kolam-bg)" stroke={color} strokeWidth="2" />
 
-      {/* Water fill clipped to bowl shape */}
-      <rect x="35" y="48" width="150" height="60" fill="url(#kolam-water)" clipPath="url(#kolam-clip)">
-        <animate attributeName="y" values="48;45;48;51;48" dur="2.2s" repeatCount="indefinite" />
+      {/* Water fill inside dome — clipped, sits at bottom of dome */}
+      <rect x="35" y="118" width="150" height="40" fill="url(#kolam-water)" clipPath="url(#kolam-clip)">
+        <animate attributeName="y" values="118;115;118;121;118" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="height" values="40;43;40;37;40" dur="2.2s" repeatCount="indefinite" />
       </rect>
 
       {/* Animated water surface wave */}
-      <ellipse cx="110" cy="48" rx="58" ry="9" fill="#7dd3fc" fillOpacity="0.55">
+      <ellipse cx="110" cy="118" rx="57" ry="9" fill="#7dd3fc" fillOpacity="0.60">
         <animate attributeName="ry" values="9;12;9;7;9" dur="1.8s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="48;45;48;51;48" dur="2.2s" repeatCount="indefinite" />
-        <animate attributeName="rx" values="58;62;58;55;58" dur="2.8s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="118;115;118;121;118" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="rx" values="57;61;57;54;57" dur="2.8s" repeatCount="indefinite" />
       </ellipse>
 
       {/* Ripple 1 */}
-      <ellipse cx="110" cy="48" rx="25" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1.2" strokeOpacity="0.9">
-        <animate attributeName="rx" values="15;45;70" dur="2.4s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="4;7;11" dur="2.4s" repeatCount="indefinite" />
+      <ellipse cx="110" cy="118" rx="25" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1.2" strokeOpacity="0.9">
+        <animate attributeName="rx" values="15;44;68" dur="2.4s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="4;7;10" dur="2.4s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.9;0.45;0" dur="2.4s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="48;45;48;51;48" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="118;115;118;121;118" dur="2.2s" repeatCount="indefinite" />
       </ellipse>
 
       {/* Ripple 2 — offset */}
-      <ellipse cx="110" cy="48" rx="25" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1" strokeOpacity="0.7">
-        <animate attributeName="rx" values="15;45;70" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="4;7;11" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+      <ellipse cx="110" cy="118" rx="25" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1" strokeOpacity="0.7">
+        <animate attributeName="rx" values="15;44;68" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="4;7;10" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.7;0.35;0" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="48;45;48;51;48" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="118;115;118;121;118" dur="2.2s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Top ellipse — opening rim */}
-      <ellipse cx="110" cy="30" rx="75" ry="20" fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.8" />
+      {/* Bottom ellipse — opening rim */}
+      <ellipse cx="110" cy="155" rx="75" ry="20" fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.8" />
 
-      {/* Radius line */}
-      <line x1="110" y1="30" x2="158" y2="58" stroke={color} strokeWidth="1.5" />
-      <circle cx="110" cy="30" r="3" fill={color} />
-      {r && <text x="150" y="53" fill={color} fontSize="12" textAnchor="start" fontFamily="monospace">r = {r}</text>}
+      {/* Radius line from center (bottom) up to dome surface */}
+      <line x1="110" y1="155" x2="176" y2="117" stroke={color} strokeWidth="1.5" />
+      <circle cx="110" cy="155" r="3" fill={color} />
+      {r && <text x="178" y="113" fill={color} fontSize="12" textAnchor="start" fontFamily="monospace">r = {r}</text>}
 
-      <text x="110" y="172" fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Kolam Setengah Bola</text>
+      <text x="110" y="15" fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Kolam Setengah Bola</text>
     </svg>
   );
 }
@@ -367,33 +369,9 @@ const mcQuestions: QMC[] = [
     ],
     answer: "C",
   },
-  {
-    n: 9, title: "Perubahan Volume saat Jari-Jari Diperbesar", cat: "vol",
-    content: "Jari-jari sebuah bola diperbesar menjadi 3/2 kali jari-jari semula. Perbandingan volume bola sebelum dan sesudah diperbesar adalah ...",
-    options: [
-      { key: "A", text: "4 : 9" },
-      { key: "B", text: "8 : 9" },
-      { key: "C", text: "8 : 27" },
-      { key: "D", text: "27 : 8" },
-    ],
-    answer: "C",
-  },
-  /* ── APLIKASI ── */
-  {
-    n: 10, title: "Bola dalam Tabung", cat: "app",
-    content: "Sebuah bola menyinggung semua sisi bagian dalam sebuah tabung (diameter dan tinggi tabung sama dengan diameter bola). Perbandingan volume bola terhadap volume tabung adalah ...",
-    diagram: <BolaDalamTabungSVG />,
-    options: [
-      { key: "A", text: "1 : 2" },
-      { key: "B", text: "2 : 3" },
-      { key: "C", text: "3 : 4" },
-      { key: "D", text: "3 : 2" },
-    ],
-    answer: "B",
-  },
   /* ── LUAS PERMUKAAN (lanjutan) ── */
   {
-    n: 11, title: "Luas Permukaan – Diameter 14 cm", cat: "lp",
+    n: 9, title: "Luas Permukaan – Diameter 14 cm", cat: "lp",
     content: "Sebuah bola berdiameter 14 cm. Luas permukaan bola tersebut adalah ... (π = 22/7)",
     diagram: <SphereSVG r="7 cm" color="#60a5fa" />,
     options: [
@@ -405,7 +383,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 12, title: "Jari-Jari dari Luas Permukaan 616 cm²", cat: "lp",
+    n: 10, title: "Jari-Jari dari Luas Permukaan 616 cm²", cat: "lp",
     content: "Luas permukaan sebuah bola adalah 616 cm². Panjang jari-jari bola tersebut adalah ... (π = 22/7)",
     diagram: <SphereSVG r="?" />,
     options: [
@@ -416,68 +394,9 @@ const mcQuestions: QMC[] = [
     ],
     answer: "C",
   },
+  /* ── APLIKASI ── */
   {
-    n: 13, title: "Luas Permukaan saat Jari-Jari Diperbesar 2 Kali", cat: "lp",
-    content: "Jika jari-jari sebuah bola diperbesar 2 kali, luas permukaannya menjadi ... kali semula.",
-    options: [
-      { key: "A", text: "2 kali" },
-      { key: "B", text: "3 kali" },
-      { key: "C", text: "4 kali" },
-      { key: "D", text: "8 kali" },
-    ],
-    answer: "C",
-  },
-  /* ── VOLUME (lanjutan) ── */
-  {
-    n: 14, title: "Volume saat Jari-Jari Diperbesar 3 Kali", cat: "vol",
-    content: "Jika jari-jari sebuah bola diperbesar 3 kali, volume bola menjadi ... kali semula.",
-    options: [
-      { key: "A", text: "3 kali" },
-      { key: "B", text: "9 kali" },
-      { key: "C", text: "27 kali" },
-      { key: "D", text: "81 kali" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 15, title: "Volume dari Luas Permukaan 1.386 cm²", cat: "vol",
-    content: "Sebuah bola memiliki luas permukaan 1.386 cm². Volume bola tersebut adalah ... (π = 22/7)",
-    diagram: <SphereSVG r="?" />,
-    options: [
-      { key: "A", text: "1.212,75 cm³" },
-      { key: "B", text: "2.425,5 cm³" },
-      { key: "C", text: "3.637,5 cm³" },
-      { key: "D", text: "4.851 cm³" },
-    ],
-    answer: "D",
-  },
-  /* ── APLIKASI (lanjutan) ── */
-  {
-    n: 16, title: "Harga Bola Plastik – r = 3,5 cm", cat: "app",
-    content: "Sebuah bola plastik berjari-jari 3,5 cm dijual dengan harga Rp500 per cm² bahan. Harga satu bola adalah ... (π = 22/7)",
-    diagram: <SphereSVG r="3,5 cm" color="#f472b6" extraLabel="Bola Plastik" />,
-    options: [
-      { key: "A", text: "Rp38.500" },
-      { key: "B", text: "Rp57.750" },
-      { key: "C", text: "Rp77.000" },
-      { key: "D", text: "Rp115.500" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 17, title: "Volume Sisa Bola dalam Kubus – s = 14 cm", cat: "app",
-    content: "Sebuah bola dimasukkan ke dalam kubus bersisi 14 cm (bola tepat menyentuh semua sisi kubus). Volume sisa ruang di dalam kubus adalah ... (π = 22/7)",
-    diagram: <BolaInKubusSVG s="14 cm" />,
-    options: [
-      { key: "A", text: "869,33 cm³" },
-      { key: "B", text: "1.088 cm³" },
-      { key: "C", text: "1.306,67 cm³" },
-      { key: "D", text: "1.525,33 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 18, title: "Volume Balon Udara – d = 10 m", cat: "app",
+    n: 11, title: "Volume Balon Udara – d = 10 m", cat: "app",
     content: "Sebuah balon udara berbentuk bola berdiameter 10 m. Volume gas yang diisi ke dalam balon adalah ... (π = 3,14)",
     diagram: <SphereSVG r="5 m" color="#fbbf24" extraLabel="Balon Udara" />,
     options: [
@@ -489,31 +408,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 19, title: "Berat Bola Lempung – r = 5 cm", cat: "app",
-    content: "Seorang anak membuat bola dari lempung berjari-jari 5 cm. Jika massa jenis lempung 2 g/cm³, berat bola tersebut adalah ... (π = 3,14)",
-    diagram: <SphereSVG r="5 cm" color="#a78bfa" extraLabel="Bola Lempung" />,
-    options: [
-      { key: "A", text: "523,33 gram" },
-      { key: "B", text: "785 gram" },
-      { key: "C", text: "1.046,67 gram" },
-      { key: "D", text: "1.570 gram" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 20, title: "Volume Ruang Kosong Bola dalam Tabung", cat: "app",
-    content: "Sebuah bola dengan r = 7 cm dimasukkan ke dalam tabung dengan r = 7 cm dan t = 14 cm. Volume ruang kosong dalam tabung adalah ... (π = 22/7)",
-    diagram: <BolaDalamTabungUkuranSVG rBola="7 cm" rTabung="7 cm" tTabung="14 cm" />,
-    options: [
-      { key: "A", text: "359,33 cm³" },
-      { key: "B", text: "539 cm³" },
-      { key: "C", text: "718,67 cm³" },
-      { key: "D", text: "1.078 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 21, title: "Kebutuhan Cat Model Planet – d = 1,4 m", cat: "app",
+    n: 12, title: "Kebutuhan Cat Model Planet – d = 1,4 m", cat: "app",
     content: "Sebuah model planet berbentuk bola dengan diameter 1,4 m dicat seluruhnya. Jika 1 kg cat dapat menutup 50 m², cat yang dibutuhkan adalah ... (π = 22/7)",
     diagram: <SphereSVG r="0,7 m" color="#a78bfa" extraLabel="Model Planet" />,
     options: [
@@ -525,7 +420,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 22, title: "Biaya Bungkus 6 Bola Pingpong – d = 4 cm", cat: "app",
+    n: 13, title: "Biaya Bungkus 6 Bola Pingpong – d = 4 cm", cat: "app",
     content: "Sebuah bola pingpong berdiameter 4 cm akan dibungkus kertas tipis seharga Rp100 per cm². Biaya untuk membungkus 6 bola adalah ... (π = 3,14)",
     diagram: <SphereSVG r="2 cm" color="#fbbf24" extraLabel="× 6 bola" />,
     options: [
@@ -537,7 +432,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 23, title: "Volume Kolam Setengah Bola – r = 70 cm", cat: "app",
+    n: 14, title: "Volume Kolam Setengah Bola – r = 70 cm", cat: "app",
     content: "Sebuah kolam mandi anak berbentuk setengah bola berjari-jari 70 cm. Volume air untuk mengisi penuh kolam tersebut adalah ... (π = 22/7, 1 liter = 1.000 cm³)",
     diagram: <KolamSetengahBolaSVG r="70 cm" />,
     options: [
@@ -548,9 +443,8 @@ const mcQuestions: QMC[] = [
     ],
     answer: "C",
   },
-  /* ── SOAL TAMBAHAN ── */
   {
-    n: 24, title: "Biaya Cat Atap Setengah Bola – d = 14 m", cat: "app",
+    n: 15, title: "Biaya Cat Atap Setengah Bola – d = 14 m", cat: "app",
     content: "Atap sebuah gedung berbentuk setengah bola dengan panjang diameter 14 m. Atap gedung tersebut akan dicat dengan biaya Rp50.000,00 setiap m². Biaya yang diperlukan untuk mengecat atap gedung itu adalah … (π = 22/7)",
     diagram: <HalfSphereSVG r="7 m" color="#34d399" />,
     options: [
@@ -560,18 +454,6 @@ const mcQuestions: QMC[] = [
       { key: "D", text: "Rp16.400.000,00" },
     ],
     answer: "B",
-  },
-  {
-    n: 25, title: "Luas Aluminium Kubah Masjid – r = 3,5 m", cat: "app",
-    content: "Kubah masjid berbentuk setengah bola yang akan dilapisi aluminium di sisi luarnya. Panjang jari-jari kubah 3,5 m. Luas aluminium yang dibutuhkan adalah … (π = 22/7)",
-    diagram: <HalfSphereSVG r="3,5 m" color="#38bdf8" />,
-    options: [
-      { key: "A", text: "77 m²" },
-      { key: "B", text: "154 m²" },
-      { key: "C", text: "770 m²" },
-      { key: "D", text: "1.540 m²" },
-    ],
-    answer: "A",
   },
 ];
 
@@ -634,7 +516,7 @@ const BolaPage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-2">
-              <span className="text-indigo-400 text-xs font-bold">📋 25 Soal</span>
+              <span className="text-indigo-400 text-xs font-bold">📋 15 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
@@ -665,7 +547,7 @@ const BolaPage = () => {
 
         <div className="mb-3 flex items-center gap-2">
           <div className="h-px flex-1 bg-indigo-500/20" />
-          <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–25 · Pilihan Ganda</span>
+          <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–15 · Pilihan Ganda</span>
           <div className="h-px flex-1 bg-indigo-500/20" />
         </div>
 
