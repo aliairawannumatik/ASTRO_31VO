@@ -318,18 +318,6 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 2, title: "Tabung – Tinggi Diperbesar 3 Kali", cat: "tabung",
-    content: "Sebuah tabung dengan r = 7 cm dan t = 5 cm. Jika tingginya diperbesar 3 kali (jari-jari tetap), volume tabung menjadi ... kali semula.",
-    diagram: <CompareCylSVG r1={7} t1={5} r2={7} t2={15} />,
-    options: [
-      { key: "A", text: "2 kali" },
-      { key: "B", text: "3 kali" },
-      { key: "C", text: "6 kali" },
-      { key: "D", text: "9 kali" },
-    ],
-    answer: "B",
-  },
-  {
     n: 3, title: "Tabung – r Diperkecil Setengah", cat: "tabung",
     content: "Sebuah tabung dengan r = 6 cm dan t = 10 cm. Jika jari-jari diperkecil menjadi setengahnya (tinggi tetap), volume tabung yang baru adalah ...",
     diagram: <CompareCylSVG r1={6} t1={10} r2={3} t2={10} label1="r = 6" label2="r = 3" />,
@@ -354,42 +342,6 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 5, title: "Tabung – Perbandingan Volume", cat: "tabung",
-    content: "Tabung A: r = 3 cm, t = 8 cm. Tabung B: r = 6 cm, t = 2 cm. Perbandingan volume tabung A terhadap B adalah ...",
-    diagram: <ThreeCylSVG items={[{ r: 3, t: 8, label: "A: r=3, t=8" }, { r: 6, t: 2, label: "B: r=6, t=2" }]} />,
-    options: [
-      { key: "A", text: "VA < VB" },
-      { key: "B", text: "VA > VB" },
-      { key: "C", text: "VA = VB" },
-      { key: "D", text: "Tidak dapat ditentukan" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 6, title: "Tabung – Pengaruh r terhadap Luas Selimut", cat: "tabung",
-    content: "Jika jari-jari sebuah tabung diperbesar n kali (tinggi tetap), luas selimut tabung menjadi ...",
-    diagram: <RumusBubbleSVG lines={["Ls = 2πrt", "Ls₂ = 2π(nr)t = n × Ls₁"]} />,
-    options: [
-      { key: "A", text: "n kali" },
-      { key: "B", text: "n² kali" },
-      { key: "C", text: "n³ kali" },
-      { key: "D", text: "2n kali" },
-    ],
-    answer: "A",
-  },
-  {
-    n: 7, title: "Tabung – Pengaruh r terhadap Volume", cat: "tabung",
-    content: "Jika jari-jari tabung diperbesar n kali (tinggi tetap), volume tabung bertambah ...",
-    diagram: <RumusBubbleSVG lines={["V = πr²t", "V₂ = π(nr)²t = n²πr²t = n²V₁"]} />,
-    options: [
-      { key: "A", text: "n kali" },
-      { key: "B", text: "n² kali" },
-      { key: "C", text: "n³ kali" },
-      { key: "D", text: "2n kali" },
-    ],
-    answer: "B",
-  },
-  {
     n: 9, title: "Tabung – Volume Berkurang ¼", cat: "tabung",
     content: "Volume sebuah tabung berkurang menjadi ¼ semula. Jika jari-jari tidak berubah, tinggi tabung baru menjadi ...",
     diagram: <RumusBubbleSVG lines={["V₂/V₁ = t₂/t₁ = 1/4", "→ tinggi menjadi 1/4 kali"]} />,
@@ -412,30 +364,6 @@ const mcQuestions: QMC[] = [
       { key: "D", text: "18 kali" },
     ],
     answer: "D",
-  },
-  {
-    n: 11, title: "Tangki Air Diperbesar – r: 1→2 m", cat: "tabung",
-    content: "Sebuah tangki tabung r = 1 m, t = 2 m diubah menjadi r = 2 m, t = 2 m. Tambahan kapasitas tangki adalah … (π = 3,14; 1 m³ = 1.000 liter)",
-    diagram: <CompareCylSVG r1={1} t1={2} r2={2} t2={2} color="#38bdf8" label1="r=1 m" label2="r=2 m" />,
-    options: [
-      { key: "A", text: "6.280 liter" },
-      { key: "B", text: "12.560 liter" },
-      { key: "C", text: "18.840 liter" },
-      { key: "D", text: "25.120 liter" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 12, title: "Mencari r agar Volume 4 Kali", cat: "tabung",
-    content: "Sebuah tabung dengan r = 5 cm dan t konstan. Agar volume menjadi 4 kali semula, jari-jari baru yang diperlukan adalah ...",
-    diagram: <RumusBubbleSVG lines={["V₂/V₁ = (r₂/r₁)² = 4", "r₂/r₁ = √4 = 2 → r₂ = 2 × 5"]} />,
-    options: [
-      { key: "A", text: "5 cm" },
-      { key: "B", text: "8 cm" },
-      { key: "C", text: "10 cm" },
-      { key: "D", text: "20 cm" },
-    ],
-    answer: "C",
   },
   /* ── KERUCUT ── */
   {
@@ -483,30 +411,6 @@ const mcQuestions: QMC[] = [
       { key: "B", text: "3 : 1" },
       { key: "C", text: "4 : 1" },
       { key: "D", text: "5 : 1" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 20, title: "Kerucut – r Dikali n (Pembuktian)", cat: "kerucut",
-    content: "Jika jari-jari kerucut diperbesar n kali (t tetap), volume kerucut berubah menjadi ...",
-    diagram: <RumusBubbleSVG lines={["V₁ = ¹⁄₃πr²t", "V₂ = ¹⁄₃π(nr)²t = n²V₁"]} color="#fb923c" />,
-    options: [
-      { key: "A", text: "n kali" },
-      { key: "B", text: "n² kali" },
-      { key: "C", text: "n³ kali" },
-      { key: "D", text: "2n kali" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 21, title: "Kerucut – Mencari t agar Volume Sama", cat: "kerucut",
-    content: "Kerucut A: r = 6, t = 8. Kerucut B: r = 4, t = ?. Agar volume B = volume A, tinggi kerucut B adalah ...",
-    diagram: <CompareConeSVG r1={6} t1={8} r2={4} t2={18} color="#fb923c" />,
-    options: [
-      { key: "A", text: "12 cm" },
-      { key: "B", text: "15 cm" },
-      { key: "C", text: "18 cm" },
-      { key: "D", text: "24 cm" },
     ],
     answer: "C",
   },
@@ -572,18 +476,6 @@ const mcQuestions: QMC[] = [
     ],
     answer: "C",
   },
-  {
-    n: 31, title: "Setengah Bola dan Kerucut – Volume Sama", cat: "gabungan",
-    content: "Sebuah setengah bola berjari-jari 6 cm dan sebuah kerucut berjari-jari 6 cm memiliki volume yang sama. Tinggi kerucut tersebut adalah ...",
-    diagram: <RumusBubbleSVG lines={["V_½bola = ²⁄₃π×216 = 144π cm³", "¹⁄₃π×36×t = 144π → t = ?"]} color="#10b981" />,
-    options: [
-      { key: "A", text: "8 cm" },
-      { key: "B", text: "10 cm" },
-      { key: "C", text: "12 cm" },
-      { key: "D", text: "16 cm" },
-    ],
-    answer: "C",
-  },
 ];
 
 function CatDivider({ cat }: { cat: Cat }) {
@@ -645,7 +537,7 @@ const PerubahanVolumePage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-lg px-4 py-2">
-              <span className="text-purple-400 text-xs font-bold">📋 23 Soal</span>
+              <span className="text-purple-400 text-xs font-bold">📋 13 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
@@ -677,7 +569,7 @@ const PerubahanVolumePage = () => {
 
         <div className="mb-3 flex items-center gap-2">
           <div className="h-px flex-1 bg-purple-500/20" />
-          <span className="text-purple-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal 1–31 · Pilihan Ganda</span>
+          <span className="text-purple-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal Pilihan Ganda</span>
           <div className="h-px flex-1 bg-purple-500/20" />
         </div>
 
