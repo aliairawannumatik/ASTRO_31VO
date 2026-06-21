@@ -51,19 +51,19 @@ const questions: Q[] = [
   Qn(1, "Rata-Rata Data Survei – ANBK", {
     content: "Sebuah survei dilakukan terhadap 10 siswa tentang durasi olahraga mereka setiap hari (dalam jam). Data yang diperoleh: 9, 7, 8, 9, 6, 8, 8, 9, 10, 7. Hitunglah rata-rata durasi olahraga siswa tersebut!",
   }),
-  Qn(2, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
-    content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
-  }),
-  Qn(3, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
-    content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
-  }),
-  Qn(4, "Rata-Rata dari Tabel Frekuensi – UN", {
+  Qn(2, "Rata-Rata dari Tabel Frekuensi – UN", {
     diagram: <TabelSkorSeni />,
     content: "Tabel di atas menunjukkan skor penilaian karya seni dari 30 siswa. Hitunglah rata-rata skor karya seni seluruh siswa!",
   }),
-  Qn(5, "Menentukan x dari Mean – TKA", {
+  Qn(3, "Menentukan x dari Mean – TKA", {
     diagram: <TabelKuis />,
     content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Diketahui rata-rata nilai kuis adalah 7,5. Tentukan nilai x (banyak siswa yang mendapat nilai 6)!",
+  }),
+  Qn(4, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
+    content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
+  }),
+  Qn(5, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
+    content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
   }),
   Qn(6, "Rata-Rata Berubah karena Koreksi – UN", {
     content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
