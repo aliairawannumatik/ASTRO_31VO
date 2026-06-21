@@ -8,7 +8,7 @@ const subtopics = [
   {
     label: "PENGANTAR STATISTIKA, PENGUMPULAN DATA DAN PENYAJIAN DATA",
     path: "/latihan-mandiri/kelas-9/statistika/pengantar",
-    soal: 13,
+    soal: 15,
     icon: BookOpen,
     desc: "Populasi, sampel, jenis data, teknik pengumpulan, tabel distribusi, diagram batang, garis, lingkaran",
     color: "cyan",
