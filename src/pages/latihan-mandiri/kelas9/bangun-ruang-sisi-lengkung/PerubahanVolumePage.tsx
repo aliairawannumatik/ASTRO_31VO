@@ -629,12 +629,7 @@ const PerubahanVolumePage = () => {
                             </button>
                           ))}
                         </div>
-                        {!isRevealed ? (
-                          <button onClick={() => handleReveal(q.n)}
-                            className="text-xs px-3 py-1.5 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-300 hover:bg-purple-500/25 transition-all cursor-pointer font-body">
-                            Lihat Jawaban
-                          </button>
-                        ) : (
+                        {isRevealed && (
                           <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
                             {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
                           </div>
