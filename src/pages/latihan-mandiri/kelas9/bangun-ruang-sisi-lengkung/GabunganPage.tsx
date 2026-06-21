@@ -951,9 +951,6 @@ function KapsulSVG({ d, totalLen }: { d: number; totalLen: number }) {
       <g clipPath="url(#capRight)">
         <path d={`M ${midX} ${cy - ry} L ${rightX} ${cy - ry} A ${ry} ${ry} 0 0 1 ${rightX} ${cy + ry} L ${midX} ${cy + ry} L ${midX} ${cy - ry} Z`}
           fill="url(#capRightBody)" filter="url(#capShadow)" />
-        {/* Right highlight */}
-        <path d={`M ${midX} ${cy - ry} L ${rightX - 20} ${cy - ry} A ${ry - 4} ${ry - 4} 0 0 1 ${rightX} ${cy - ry + 20} L ${rightX} ${cy - ry + 4} A ${ry} ${ry} 0 0 0 ${midX} ${cy - ry + 20} Z`}
-          fill="url(#capRightHi)" />
       </g>
 
       {/* Dividing line */}
@@ -963,9 +960,6 @@ function KapsulSVG({ d, totalLen }: { d: number; totalLen: number }) {
       <path d={`M ${leftX} ${cy - ry} L ${rightX} ${cy - ry} A ${ry} ${ry} 0 0 1 ${rightX} ${cy + ry} L ${leftX} ${cy + ry} A ${ry} ${ry} 0 0 1 ${leftX} ${cy - ry} Z`}
         fill="none" stroke="#1e293b" strokeWidth="2" strokeOpacity="0.4" />
 
-      {/* Sheen line across top */}
-      <path d={`M ${leftX + 8} ${cy - ry + 10} Q ${midX} ${cy - ry + 4} ${rightX - 8} ${cy - ry + 10}`}
-        fill="none" stroke="white" strokeWidth="3" strokeOpacity="0.3" strokeLinecap="round" />
 
       {/* Diameter dimension */}
       <line x1={rightX + ry + 6} y1={cy - ry} x2={rightX + ry + 6} y2={cy + ry}
@@ -983,10 +977,6 @@ function KapsulSVG({ d, totalLen }: { d: number; totalLen: number }) {
         Panjang = {totalLen} cm
       </text>
 
-      {/* Label kiri/kanan */}
-      <text x={midX - 42} y={cy + 6} fill="white" fontSize="11" fontFamily="monospace" fontWeight="bold" fillOpacity="0.7" textAnchor="middle">½ Bola</text>
-      <text x={midX + 42} y={cy + 6} fill="white" fontSize="11" fontFamily="monospace" fontWeight="bold" fillOpacity="0.7" textAnchor="middle">½ Bola</text>
-      <text x={midX} y={cy - ry - 8} fill="#e2e8f0" fontSize="10" fontFamily="monospace" fillOpacity="0.6" textAnchor="middle">Tabung tengah: p = {totalLen - d} cm</text>
     </svg>
   );
 }
