@@ -158,10 +158,16 @@ const questions: Q[] = [
   Qn(12, "Selisih Siswa dari Data Remedial – ANBK", {
     content: "Sebanyak 20 siswa mengikuti remedial matematika dengan rata-rata nilai 7. Rata-rata nilai siswa laki-laki adalah 6 dan rata-rata nilai siswa perempuan adalah 8,5. Tentukan selisih banyak siswa laki-laki dan siswa perempuan yang mengikuti remedial tersebut!",
   }),
-  Qn(13, "Rata-Rata Berubah karena Koreksi – UN", {
+  Qn(13, "Rata-Rata Berubah karena Siswa Keluar – UN", {
+    content: "Suatu kelas yang terdiri dari 25 siswa memiliki rata-rata berat badan 52 kg. Budi kemudian keluar dari kelas tersebut sehingga rata-rata berat badan 24 siswa yang tersisa turun menjadi 51,5 kg.\n\nTentukan berat badan Budi!",
+  }),
+  Qn(14, "Rata-Rata Naik karena Dua Siswa Keluar – TKA", {
+    content: "Suatu kelas yang terdiri dari 30 siswa memiliki rata-rata nilai ulangan matematika 72. Zico dan Daffy kemudian pindah sekolah sehingga rata-rata nilai ulangan matematika 28 siswa yang tersisa naik menjadi 73.\n\nTentukan rata-rata nilai matematika Zico dan Daffy!",
+  }),
+  Qn(15, "Rata-Rata Berubah karena Koreksi – UN", {
     content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
   }),
-  Qn(14, "Rata-Rata Umur Keluarga – UN", {
+  Qn(16, "Rata-Rata Umur Keluarga – UN", {
     diagram: (() => (
       <svg width="360" height="90" viewBox="0 0 360 90" className="mx-auto">
         <rect x="2" y="2" width="356" height="86" rx="8" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -183,7 +189,7 @@ const questions: Q[] = [
     ))(),
     content: "Lima orang dalam satu keluarga dicatat nama dan umurnya sebagaimana tampak pada tabel di atas. Berapakah rata-rata umur keluarga tersebut lima tahun yang lalu?",
   }),
-  Qn(15, "Interpretasi Nilai Rata-Rata – TKA", {
+  Qn(17, "Interpretasi Nilai Rata-Rata – TKA", {
     content: "Sebuah kelas memiliki 25 siswi dengan rata-rata tinggi badan 130 cm. Tentukan apakah setiap pernyataan berikut BENAR atau SALAH!\n\n(A) Jika ada siswi dengan tinggi 132 cm, maka pasti ada siswi lain yang tingginya 128 cm.\n\n(B) Jika 23 siswi masing-masing tingginya 130 cm dan satu siswi tingginya 133 cm, maka siswi ke-25 tingginya 127 cm.\n\n(C) Jika diurutkan dari terpendek ke tertinggi, siswi urutan ke-13 pasti tingginya 130 cm.\n\n(D) Setengah dari siswi di kelas pasti lebih pendek dari 130 cm dan setengahnya lagi pasti lebih tinggi.",
   }),
 ];
@@ -206,7 +212,7 @@ const RataRataPage = () => {
           <p className="text-blue-200/70 text-sm text-center font-body mb-1">Rata-Rata dan Rata-Rata Gabungan</p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-2">
-            <span className="text-blue-400 text-xs font-bold">📋 15 Soal</span>
+            <span className="text-blue-400 text-xs font-bold">📋 17 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>

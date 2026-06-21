@@ -23,7 +23,7 @@ const subtopics = [
   {
     label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)",
     path: "/latihan-mandiri/kelas-9/statistika/rata-rata",
-    soal: 15,
+    soal: 17,
     icon: PieChart,
     desc: "Mean tunggal, berbobot, berkelompok, rata-rata gabungan",
     color: "blue",
