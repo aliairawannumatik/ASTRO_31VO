@@ -71,66 +71,80 @@ function HalfSphereSVG({ r, color = "#818cf8" }: { r?: string; color?: string })
   );
 }
 
-/* ── Kolam Setengah Bola — mirrored against X-axis (dome up, opening down) with animated water ── */
+/* ── Kolam Setengah Bola — dome up / opening down, water snug inside ── */
 function KolamSetengahBolaSVG({ r, color = "#818cf8" }: { r?: string; color?: string }) {
+  /* Geometry:
+     viewBox 0 0 260 210
+     Semicircle r=100, centre at (130,178)
+     Arc endpoints: (30,178) → (230,178), sweep=0 → curves upward (dome peak at y=78)
+     Opening ellipse at cy=178 rx=100 ry=24
+     Water level at y=138  (40 px above opening)
+  */
   return (
-    <svg viewBox="0 0 220 185" width="220" height="185" className="mx-auto">
+    <svg viewBox="0 0 260 210" width="260" height="210" className="mx-auto">
       <defs>
-        <radialGradient id="kolam-bg" cx="50%" cy="80%" r="70%">
-          <stop offset="0%" stopColor={color} stopOpacity="0.40" />
+        <radialGradient id="kolam-bg" cx="50%" cy="90%" r="75%">
+          <stop offset="0%" stopColor={color} stopOpacity="0.42" />
           <stop offset="100%" stopColor={color} stopOpacity="0.06" />
         </radialGradient>
         <linearGradient id="kolam-water" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.65" />
-          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.45" />
+          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.70" />
+          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.50" />
         </linearGradient>
+        {/* Clip path exactly matches the dome arc */}
         <clipPath id="kolam-clip">
-          {/* Dome shape clip — arc curves upward */}
-          <path d="M 35 155 A 75 75 0 0 0 185 155 Z" />
+          <path d="M 30 178 A 100 100 0 0 0 230 178 Z" />
         </clipPath>
       </defs>
 
-      {/* Dome body — arc curves upward, opening at bottom (mirrored) */}
-      <path d="M 35 155 A 75 75 0 0 0 185 155 Z" fill="url(#kolam-bg)" stroke={color} strokeWidth="2" />
+      {/* Dome body */}
+      <path d="M 30 178 A 100 100 0 0 0 230 178 Z"
+            fill="url(#kolam-bg)" stroke={color} strokeWidth="2" />
 
-      {/* Water fill inside dome — clipped, sits at bottom of dome */}
-      <rect x="35" y="118" width="150" height="40" fill="url(#kolam-water)" clipPath="url(#kolam-clip)">
-        <animate attributeName="y" values="118;115;118;121;118" dur="2.2s" repeatCount="indefinite" />
-        <animate attributeName="height" values="40;43;40;37;40" dur="2.2s" repeatCount="indefinite" />
+      {/* Water block — full height, clipped tightly to dome */}
+      <rect x="0" y="136" width="260" height="80" fill="url(#kolam-water)" clipPath="url(#kolam-clip)">
+        <animate attributeName="y" values="136;133;136;139;136" dur="2.2s" repeatCount="indefinite" />
       </rect>
 
-      {/* Animated water surface wave */}
-      <ellipse cx="110" cy="118" rx="57" ry="9" fill="#7dd3fc" fillOpacity="0.60">
-        <animate attributeName="ry" values="9;12;9;7;9" dur="1.8s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="118;115;118;121;118" dur="2.2s" repeatCount="indefinite" />
-        <animate attributeName="rx" values="57;61;57;54;57" dur="2.8s" repeatCount="indefinite" />
+      {/* Animated water surface (ellipse sits ON the water edge, clipped) */}
+      <ellipse cx="130" cy="136" rx="96" ry="11" fill="#7dd3fc" fillOpacity="0.65" clipPath="url(#kolam-clip)">
+        <animate attributeName="ry" values="11;14;11;8;11" dur="1.8s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="136;133;136;139;136" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="rx" values="96;100;96;92;96" dur="2.8s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Ripple 1 */}
-      <ellipse cx="110" cy="118" rx="25" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1.2" strokeOpacity="0.9">
-        <animate attributeName="rx" values="15;44;68" dur="2.4s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="4;7;10" dur="2.4s" repeatCount="indefinite" />
+      {/* Ripple 1 — clipped to dome */}
+      <ellipse cx="130" cy="136" rx="20" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1.3" clipPath="url(#kolam-clip)">
+        <animate attributeName="rx" values="15;60;95" dur="2.4s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="4;8;12" dur="2.4s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.9;0.45;0" dur="2.4s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="118;115;118;121;118" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="136;133;136;139;136" dur="2.2s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Ripple 2 — offset */}
-      <ellipse cx="110" cy="118" rx="25" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1" strokeOpacity="0.7">
-        <animate attributeName="rx" values="15;44;68" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="ry" values="4;7;10" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+      {/* Ripple 2 — offset phase */}
+      <ellipse cx="130" cy="136" rx="20" ry="5" fill="none" stroke="#bae6fd" strokeWidth="1" clipPath="url(#kolam-clip)">
+        <animate attributeName="rx" values="15;60;95" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        <animate attributeName="ry" values="4;8;12" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.7;0.35;0" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="118;115;118;121;118" dur="2.2s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="136;133;136;139;136" dur="2.2s" repeatCount="indefinite" />
       </ellipse>
 
-      {/* Bottom ellipse — opening rim */}
-      <ellipse cx="110" cy="155" rx="75" ry="20" fill={color} fillOpacity="0.12" stroke={color} strokeWidth="1.8" />
+      {/* Opening rim ellipse at bottom */}
+      <ellipse cx="130" cy="178" rx="100" ry="24"
+               fill={color} fillOpacity="0.10" stroke={color} strokeWidth="1.8" />
 
-      {/* Radius line from center (bottom) up to dome surface */}
-      <line x1="110" y1="155" x2="176" y2="117" stroke={color} strokeWidth="1.5" />
-      <circle cx="110" cy="155" r="3" fill={color} />
-      {r && <text x="178" y="113" fill={color} fontSize="12" textAnchor="start" fontFamily="monospace">r = {r}</text>}
+      {/* Radius line: centre → dome surface at ~40° */}
+      <line x1="130" y1="178" x2="207" y2="107" stroke={color} strokeWidth="1.5" />
+      <circle cx="130" cy="178" r="3.5" fill={color} />
+      {r && (
+        <text x="210" y="103" fill={color} fontSize="12" textAnchor="start" fontFamily="monospace">
+          r = {r}
+        </text>
+      )}
 
-      <text x="110" y="15" fill={color} fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Kolam Setengah Bola</text>
+      {/* Label */}
+      <text x="130" y="22" fill={color} fontSize="11" textAnchor="middle"
+            fontFamily="monospace" fillOpacity="0.75">Kolam Setengah Bola</text>
     </svg>
   );
 }
@@ -300,78 +314,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 3, title: "Mencari Jari-Jari dari Luas Permukaan", cat: "lp",
-    content: "Luas permukaan sebuah bola adalah 154 cm². Panjang jari-jari bola tersebut adalah ... (π = 22/7)",
-    diagram: <SphereSVG r="?" />,
-    options: [
-      { key: "A", text: "3 cm" },
-      { key: "B", text: "3,5 cm" },
-      { key: "C", text: "5 cm" },
-      { key: "D", text: "7 cm" },
-    ],
-    answer: "B",
-  },
-  {
-    n: 4, title: "Perbandingan Luas Permukaan – Diameter Berbeda", cat: "lp",
-    content: "Dua buah bola memiliki diameter masing-masing 6 cm dan 8 cm. Perbandingan luas permukaan kedua bola adalah ...",
-    options: [
-      { key: "A", text: "3 : 4" },
-      { key: "B", text: "4 : 9" },
-      { key: "C", text: "9 : 16" },
-      { key: "D", text: "16 : 27" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 5, title: "Luas Permukaan dari Volume Bola", cat: "lp",
-    content: "Volume sebuah bola adalah 36π cm³. Luas permukaan bola tersebut adalah ...",
-    options: [
-      { key: "A", text: "18π cm²" },
-      { key: "B", text: "27π cm²" },
-      { key: "C", text: "36π cm²" },
-      { key: "D", text: "54π cm²" },
-    ],
-    answer: "C",
-  },
-  /* ── VOLUME ── */
-  {
-    n: 6, title: "Volume Bola – Diameter 21 cm", cat: "vol",
-    content: "Sebuah bola memiliki diameter 21 cm. Volume bola tersebut adalah ... (π = 22/7)",
-    diagram: <SphereSVG r="10,5 cm" />,
-    options: [
-      { key: "A", text: "1.386 cm³" },
-      { key: "B", text: "2.910 cm³" },
-      { key: "C", text: "4.851 cm³" },
-      { key: "D", text: "9.702 cm³" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 7, title: "Perbandingan Volume Dua Bola", cat: "vol",
-    content: "Dua buah bola memiliki jari-jari masing-masing 3 cm dan 6 cm. Perbandingan volume bola pertama terhadap bola kedua adalah ...",
-    options: [
-      { key: "A", text: "1 : 4" },
-      { key: "B", text: "1 : 6" },
-      { key: "C", text: "1 : 8" },
-      { key: "D", text: "2 : 3" },
-    ],
-    answer: "C",
-  },
-  {
-    n: 8, title: "Perbandingan Volume Tabung, Bola, Kerucut", cat: "vol",
-    content: "Sebuah tabung, bola, dan kerucut memiliki jari-jari dan tinggi yang sama (tinggi = 2r). Perbandingan volume tabung : bola : kerucut adalah ...",
-    diagram: <PerbandinganBangunSVG />,
-    options: [
-      { key: "A", text: "1 : 2 : 3" },
-      { key: "B", text: "2 : 1 : 3" },
-      { key: "C", text: "3 : 2 : 1" },
-      { key: "D", text: "3 : 1 : 2" },
-    ],
-    answer: "C",
-  },
-  /* ── LUAS PERMUKAAN (lanjutan) ── */
-  {
-    n: 9, title: "Luas Permukaan – Diameter 14 cm", cat: "lp",
+    n: 3, title: "Luas Permukaan – Diameter 14 cm", cat: "lp",
     content: "Sebuah bola berdiameter 14 cm. Luas permukaan bola tersebut adalah ... (π = 22/7)",
     diagram: <SphereSVG r="7 cm" color="#60a5fa" />,
     options: [
@@ -383,7 +326,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 10, title: "Jari-Jari dari Luas Permukaan 616 cm²", cat: "lp",
+    n: 4, title: "Jari-Jari dari Luas Permukaan 616 cm²", cat: "lp",
     content: "Luas permukaan sebuah bola adalah 616 cm². Panjang jari-jari bola tersebut adalah ... (π = 22/7)",
     diagram: <SphereSVG r="?" />,
     options: [
@@ -394,21 +337,79 @@ const mcQuestions: QMC[] = [
     ],
     answer: "C",
   },
-  /* ── APLIKASI ── */
   {
-    n: 11, title: "Volume Balon Udara – d = 10 m", cat: "app",
-    content: "Sebuah balon udara berbentuk bola berdiameter 10 m. Volume gas yang diisi ke dalam balon adalah ... (π = 3,14)",
-    diagram: <SphereSVG r="5 m" color="#fbbf24" extraLabel="Balon Udara" />,
+    n: 5, title: "Mencari Jari-Jari dari Luas Permukaan", cat: "lp",
+    content: "Luas permukaan sebuah bola adalah 154 cm². Panjang jari-jari bola tersebut adalah ... (π = 22/7)",
+    diagram: <SphereSVG r="?" />,
     options: [
-      { key: "A", text: "261,67 m³" },
-      { key: "B", text: "392,5 m³" },
-      { key: "C", text: "523,33 m³" },
-      { key: "D", text: "785 m³" },
+      { key: "A", text: "3 cm" },
+      { key: "B", text: "3,5 cm" },
+      { key: "C", text: "5 cm" },
+      { key: "D", text: "7 cm" },
+    ],
+    answer: "B",
+  },
+  {
+    n: 6, title: "Perbandingan Luas Permukaan – Diameter Berbeda", cat: "lp",
+    content: "Dua buah bola memiliki diameter masing-masing 6 cm dan 8 cm. Perbandingan luas permukaan kedua bola adalah ...",
+    options: [
+      { key: "A", text: "3 : 4" },
+      { key: "B", text: "4 : 9" },
+      { key: "C", text: "9 : 16" },
+      { key: "D", text: "16 : 27" },
     ],
     answer: "C",
   },
   {
-    n: 12, title: "Kebutuhan Cat Model Planet – d = 1,4 m", cat: "app",
+    n: 7, title: "Luas Permukaan dari Volume Bola", cat: "lp",
+    content: "Volume sebuah bola adalah 36π cm³. Luas permukaan bola tersebut adalah ...",
+    options: [
+      { key: "A", text: "18π cm²" },
+      { key: "B", text: "27π cm²" },
+      { key: "C", text: "36π cm²" },
+      { key: "D", text: "54π cm²" },
+    ],
+    answer: "C",
+  },
+  /* ── VOLUME ── */
+  {
+    n: 8, title: "Volume Bola – Diameter 21 cm", cat: "vol",
+    content: "Sebuah bola memiliki diameter 21 cm. Volume bola tersebut adalah ... (π = 22/7)",
+    diagram: <SphereSVG r="10,5 cm" />,
+    options: [
+      { key: "A", text: "1.386 cm³" },
+      { key: "B", text: "2.910 cm³" },
+      { key: "C", text: "4.851 cm³" },
+      { key: "D", text: "9.702 cm³" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 9, title: "Perbandingan Volume Dua Bola", cat: "vol",
+    content: "Dua buah bola memiliki jari-jari masing-masing 3 cm dan 6 cm. Perbandingan volume bola pertama terhadap bola kedua adalah ...",
+    options: [
+      { key: "A", text: "1 : 4" },
+      { key: "B", text: "1 : 6" },
+      { key: "C", text: "1 : 8" },
+      { key: "D", text: "2 : 3" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 10, title: "Perbandingan Volume Tabung, Bola, Kerucut", cat: "vol",
+    content: "Sebuah tabung, bola, dan kerucut memiliki jari-jari dan tinggi yang sama (tinggi = 2r). Perbandingan volume tabung : bola : kerucut adalah ...",
+    diagram: <PerbandinganBangunSVG />,
+    options: [
+      { key: "A", text: "1 : 2 : 3" },
+      { key: "B", text: "2 : 1 : 3" },
+      { key: "C", text: "3 : 2 : 1" },
+      { key: "D", text: "3 : 1 : 2" },
+    ],
+    answer: "C",
+  },
+  /* ── APLIKASI ── */
+  {
+    n: 11, title: "Kebutuhan Cat Model Planet – d = 1,4 m", cat: "app",
     content: "Sebuah model planet berbentuk bola dengan diameter 1,4 m dicat seluruhnya. Jika 1 kg cat dapat menutup 50 m², cat yang dibutuhkan adalah ... (π = 22/7)",
     diagram: <SphereSVG r="0,7 m" color="#a78bfa" extraLabel="Model Planet" />,
     options: [
@@ -420,7 +421,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 13, title: "Biaya Bungkus 6 Bola Pingpong – d = 4 cm", cat: "app",
+    n: 12, title: "Biaya Bungkus 6 Bola Pingpong – d = 4 cm", cat: "app",
     content: "Sebuah bola pingpong berdiameter 4 cm akan dibungkus kertas tipis seharga Rp100 per cm². Biaya untuk membungkus 6 bola adalah ... (π = 3,14)",
     diagram: <SphereSVG r="2 cm" color="#fbbf24" extraLabel="× 6 bola" />,
     options: [
@@ -430,6 +431,18 @@ const mcQuestions: QMC[] = [
       { key: "D", text: "Rp40.192" },
     ],
     answer: "C",
+  },
+  {
+    n: 13, title: "Biaya Cat Atap Setengah Bola – d = 14 m", cat: "app",
+    content: "Atap sebuah gedung berbentuk setengah bola dengan panjang diameter 14 m. Atap gedung tersebut akan dicat dengan biaya Rp50.000,00 setiap m². Biaya yang diperlukan untuk mengecat atap gedung itu adalah … (π = 22/7)",
+    diagram: <HalfSphereSVG r="7 m" color="#34d399" />,
+    options: [
+      { key: "A", text: "Rp13.700.000,00" },
+      { key: "B", text: "Rp15.400.000,00" },
+      { key: "C", text: "Rp15.850.000,00" },
+      { key: "D", text: "Rp16.400.000,00" },
+    ],
+    answer: "B",
   },
   {
     n: 14, title: "Volume Kolam Setengah Bola – r = 70 cm", cat: "app",
@@ -444,16 +457,16 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 15, title: "Biaya Cat Atap Setengah Bola – d = 14 m", cat: "app",
-    content: "Atap sebuah gedung berbentuk setengah bola dengan panjang diameter 14 m. Atap gedung tersebut akan dicat dengan biaya Rp50.000,00 setiap m². Biaya yang diperlukan untuk mengecat atap gedung itu adalah … (π = 22/7)",
-    diagram: <HalfSphereSVG r="7 m" color="#34d399" />,
+    n: 15, title: "Volume Balon Udara – d = 10 m", cat: "app",
+    content: "Sebuah balon udara berbentuk bola berdiameter 10 m. Volume gas yang diisi ke dalam balon adalah ... (π = 3,14)",
+    diagram: <SphereSVG r="5 m" color="#fbbf24" extraLabel="Balon Udara" />,
     options: [
-      { key: "A", text: "Rp13.700.000,00" },
-      { key: "B", text: "Rp15.400.000,00" },
-      { key: "C", text: "Rp15.850.000,00" },
-      { key: "D", text: "Rp16.400.000,00" },
+      { key: "A", text: "261,67 m³" },
+      { key: "B", text: "392,5 m³" },
+      { key: "C", text: "523,33 m³" },
+      { key: "D", text: "785 m³" },
     ],
-    answer: "B",
+    answer: "C",
   },
 ];
 
