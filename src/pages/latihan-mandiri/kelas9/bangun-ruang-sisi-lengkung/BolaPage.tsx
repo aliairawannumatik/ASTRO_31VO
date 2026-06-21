@@ -361,6 +361,77 @@ function PlanetModelSVG({ r }: { r?: string }) {
   );
 }
 
+function PingPongBallSVG({ r, count }: { r?: string; count?: number }) {
+  const balls = Array.from({ length: count ?? 1 });
+  const cols = count === 6 ? 3 : 1;
+  const rows = count === 6 ? 2 : 1;
+  const bx = (i: number) => 55 + (i % cols) * 60;
+  const by = (i: number) => 50 + Math.floor(i / cols) * 60;
+  const br = 24;
+
+  return (
+    <svg viewBox="0 0 230 160" width="230" height="160" className="mx-auto">
+      <defs>
+        {balls.map((_, i) => (
+          <radialGradient key={i} id={`pp-${i}`} cx="38%" cy="32%" r="58%">
+            <stop offset="0%"   stopColor="#ffffff" />
+            <stop offset="45%"  stopColor="#fde68a" />
+            <stop offset="80%"  stopColor="#f59e0b" />
+            <stop offset="100%" stopColor="#b45309" stopOpacity="0.9" />
+          </radialGradient>
+        ))}
+        <filter id="pp-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="2" dy="2" stdDeviation="2" floodColor="#78350f" floodOpacity="0.35" />
+        </filter>
+      </defs>
+
+      {balls.map((_, i) => {
+        const cx = bx(i);
+        const cy = by(i);
+        return (
+          <g key={i} filter="url(#pp-shadow)">
+            {/* Ball body */}
+            <circle cx={cx} cy={cy} r={br} fill={`url(#pp-${i})`} />
+
+            {/* Characteristic curved seam line */}
+            <path
+              d={`M ${cx - br} ${cy} Q ${cx - br * 0.5} ${cy - br * 0.7}, ${cx} ${cy - br * 0.05} Q ${cx + br * 0.5} ${cy + br * 0.7}, ${cx + br} ${cy}`}
+              fill="none" stroke="white" strokeWidth="1.8" strokeOpacity="0.85"
+            />
+            <path
+              d={`M ${cx - br} ${cy} Q ${cx - br * 0.5} ${cy + br * 0.7}, ${cx} ${cy + br * 0.05} Q ${cx + br * 0.5} ${cy - br * 0.7}, ${cx + br} ${cy}`}
+              fill="none" stroke="white" strokeWidth="1.8" strokeOpacity="0.85"
+            />
+
+            {/* Specular highlight */}
+            <ellipse cx={cx - br * 0.28} cy={cy - br * 0.3} rx={br * 0.22} ry={br * 0.14}
+                     fill="white" fillOpacity="0.55" transform={`rotate(-30,${cx - br * 0.28},${cy - br * 0.3})`} />
+          </g>
+        );
+      })}
+
+      {/* Radius label on first ball */}
+      {r && (
+        <>
+          <line x1={bx(0)} y1={by(0)} x2={bx(0) + br} y2={by(0)}
+                stroke="#b45309" strokeWidth="1.4" strokeDasharray="3,2" />
+          <circle cx={bx(0)} cy={by(0)} r="2.5" fill="#b45309" />
+          <text x={bx(0) + br + 4} y={by(0) - 4} fill="#fbbf24" fontSize="11"
+                fontFamily="monospace" fontWeight="700">r = {r}</text>
+        </>
+      )}
+
+      {/* Count label */}
+      {count && count > 1 && (
+        <text x="115" y="148" fill="#fbbf24" fontSize="11"
+              textAnchor="middle" fontFamily="monospace" fillOpacity="0.85">
+          {count} bola pingpong
+        </text>
+      )}
+    </svg>
+  );
+}
+
 function BolaDalamTabungUkuranSVG({ rBola, rTabung, tTabung, color = "#818cf8" }: {
   rBola: string; rTabung: string; tTabung: string; color?: string;
 }) {
@@ -527,7 +598,7 @@ const mcQuestions: QMC[] = [
   {
     n: 12, title: "Biaya Bungkus 6 Bola Pingpong – d = 4 cm", cat: "app",
     content: "Sebuah bola pingpong berdiameter 4 cm akan dibungkus kertas tipis seharga Rp100 per cm². Biaya untuk membungkus 6 bola adalah ... (π = 3,14)",
-    diagram: <SphereSVG r="2 cm" color="#fbbf24" extraLabel="× 6 bola" />,
+    diagram: <PingPongBallSVG r="2 cm" count={6} />,
     options: [
       { key: "A", text: "Rp20.096" },
       { key: "B", text: "Rp25.120" },
