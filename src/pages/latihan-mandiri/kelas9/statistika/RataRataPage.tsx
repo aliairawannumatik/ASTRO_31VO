@@ -105,7 +105,11 @@ const questions: Q[] = [
     ))(),
     content: "Diagram batang di atas menunjukkan distribusi nilai ulangan IPA dari 20 siswa. Hitunglah rata-rata nilai ulangan IPA tersebut!",
   }),
-  Qn(5, "Mean dan Data Tidak Diketahui – ANBK", {
+  Qn(5, "Menentukan x dari Mean – TKA", {
+    diagram: <TabelKuis />,
+    content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Diketahui rata-rata nilai kuis adalah 7,5. Tentukan nilai x (banyak siswa yang mendapat nilai 6)!",
+  }),
+  Qn(6, "Mean dan Data Tidak Diketahui – ANBK", {
     diagram: (() => (
       <svg width="300" height="175" viewBox="0 0 300 175" className="mx-auto">
         <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
@@ -136,33 +140,29 @@ const questions: Q[] = [
     ))(),
     content: "Diagram di atas menunjukkan data pengunjung perpustakaan sekolah selama 5 hari. Data pengunjung hari Rabu tidak terbaca (?). Diketahui rata-rata pengunjung selama 5 hari adalah 41 orang per hari. Tentukan banyak pengunjung pada hari Rabu!",
   }),
-  Qn(6, "Menentukan x dari Mean – TKA", {
-    diagram: <TabelKuis />,
-    content: "Tabel di atas menunjukkan nilai kuis matematika sejumlah siswa. Diketahui rata-rata nilai kuis adalah 7,5. Tentukan nilai x (banyak siswa yang mendapat nilai 6)!",
-  }),
-  Qn(7, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
-    content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
-  }),
-  Qn(8, "Pemahaman Rata-Rata – ANBK", {
+  Qn(7, "Pemahaman Rata-Rata – ANBK", {
     content: "Rata-rata gaji 5 karyawan sebuah toko adalah Rp3.000.000. Kemudian seorang manajer dengan gaji Rp8.000.000 bergabung ke dalam tim. Tentukan rata-rata gaji seluruh anggota tim setelah manajer bergabung!",
+  }),
+  Qn(8, "Rata-Rata Gabungan – Mencari n₂ – TKA", {
+    content: "Rata-rata nilai ulangan 12 siswa kelompok A adalah 74. Nilai mereka digabungkan dengan nilai sejumlah siswa kelompok B yang memiliki rata-rata 82, sehingga rata-rata gabungannya menjadi 76. Tentukan banyak siswa kelompok B!",
   }),
   Qn(9, "Rata-Rata Gabungan – Mencari x̄₂ – ANBK", {
     content: "Tim renang sekolah terdiri dari 5 perenang utama dan 3 perenang cadangan. Rata-rata tinggi badan perenang utama adalah 168 cm. Jika rata-rata tinggi badan seluruh 8 anggota tim adalah 171 cm, tentukan rata-rata tinggi badan perenang cadangan!",
   }),
-  Qn(10, "Rata-Rata Berubah karena Koreksi – UN", {
-    content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
-  }),
-  Qn(11, "Nilai yang Harus Dicapai – UN", {
+  Qn(10, "Nilai yang Harus Dicapai – UN", {
     content: "Dari 4 ujian yang telah dilaksanakan, rata-rata nilai seorang siswa adalah 75. Siswa tersebut ingin meningkatkan rata-ratanya menjadi 78 setelah mengikuti ujian ke-5. Berapa nilai minimum yang harus ia peroleh pada ujian ke-5?",
   }),
-  Qn(12, "Perbandingan Jumlah Siswa dari Mean – UN", {
+  Qn(11, "Perbandingan Jumlah Siswa dari Mean – UN", {
     content: "Dalam suatu kelas, rata-rata nilai ujian siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 8,1. Jika rata-rata nilai seluruh kelas adalah 7,5, tentukan perbandingan banyak siswa laki-laki terhadap siswa perempuan!",
   }),
-  Qn(13, "Mencari Jumlah Siswa dari Mean Gabungan – TKA", {
+  Qn(12, "Mencari Jumlah Siswa dari Mean Gabungan – TKA", {
     content: "Dalam sebuah kelas yang berjumlah 36 siswa, rata-rata nilai ulangan matematika siswa perempuan adalah 75 dan rata-rata nilai siswa laki-laki adalah 66. Jika rata-rata nilai seluruh kelas adalah 72, tentukan banyak siswa laki-laki di kelas tersebut!",
   }),
-  Qn(14, "Selisih Siswa dari Data Remedial – ANBK", {
+  Qn(13, "Selisih Siswa dari Data Remedial – ANBK", {
     content: "Sebanyak 20 siswa mengikuti remedial matematika dengan rata-rata nilai 7. Rata-rata nilai siswa laki-laki adalah 6 dan rata-rata nilai siswa perempuan adalah 8,5. Tentukan selisih banyak siswa laki-laki dan siswa perempuan yang mengikuti remedial tersebut!",
+  }),
+  Qn(14, "Rata-Rata Berubah karena Koreksi – UN", {
+    content: "Rata-rata nilai ulangan 20 siswa adalah 75. Setelah diperiksa ulang, ternyata nilai seorang siswa yang seharusnya 80 tercatat salah menjadi 60. Tentukan rata-rata nilai yang sebenarnya setelah koreksi!",
   }),
   Qn(15, "Rata-Rata Umur Keluarga – UN", {
     diagram: (() => (
