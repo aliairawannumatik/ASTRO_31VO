@@ -484,70 +484,97 @@ function IceCreamSVG({ r, tKer }: { r: number; tKer: number }) {
 }
 
 /* ═══════════════════════════════════════════════
-   SVG: No 7 — PION CATUR (Kerucut + ½ Bola)
+   SVG: No 7 — PION CATUR (Kerucut di atas ½ Bola)
+   Bentuk: ½ bola (dome bawah) + kerucut (runcing atas)
 ═══════════════════════════════════════════════ */
 function PionCaturSVG({ r, sKer }: { r: number; sKer: number }) {
+  const cx = 140;
+  const W = 52;          // visual half-width = radius scale
+  const ell = 12;        // ellipse y-radius for 3D perspective
+  const apexY = 48;      // top of cone
+  const juncY = 175;     // junction: flat face of ½ bola = base of cone
+  const domeBot = juncY + W; // bottom of hemisphere dome ≈ 227
+
   return (
-    <svg viewBox="0 0 280 300" width="100%" style={{ maxWidth: 240, display: "block", margin: "0 auto" }}>
+    <svg viewBox="0 0 300 290" width="100%" style={{ maxWidth: 260, display: "block", margin: "0 auto" }}>
       <defs>
-        <radialGradient id="pawnHead" cx="38%" cy="35%" r="65%">
-          <stop offset="0%" stopColor="#e2e8f0" />
-          <stop offset="45%" stopColor="#64748b" />
-          <stop offset="100%" stopColor="#0f172a" />
-        </radialGradient>
-        <linearGradient id="pawnBody" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient id="p7cone" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#cbd5e1" />
-          <stop offset="45%" stopColor="#475569" />
+          <stop offset="42%" stopColor="#475569" />
           <stop offset="100%" stopColor="#0f172a" />
         </linearGradient>
-        <linearGradient id="pawnBase" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient id="p7dome" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#94a3b8" />
-          <stop offset="50%" stopColor="#334155" />
+          <stop offset="48%" stopColor="#334155" />
           <stop offset="100%" stopColor="#0f172a" />
         </linearGradient>
-        <radialGradient id="pawnShadow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#0f172a" stopOpacity="0.6" />
+        <radialGradient id="p7shadow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#0f172a" stopOpacity="0.45" />
           <stop offset="100%" stopColor="#0f172a" stopOpacity="0" />
         </radialGradient>
       </defs>
 
-      {/* Shadow */}
-      <ellipse cx="140" cy="272" rx="54" ry="12" fill="url(#pawnShadow)" />
+      {/* Ground shadow */}
+      <ellipse cx={cx} cy={domeBot + 18} rx={W + 8} ry={10} fill="url(#p7shadow)" />
 
-      {/* Base disk */}
-      <ellipse cx="140" cy="260" rx="54" ry="12" fill="url(#pawnBase)" stroke="#1e293b" strokeWidth="1.5" />
-      <rect x="86" y="248" width="108" height="12" fill="url(#pawnBase)" />
-      <ellipse cx="140" cy="248" rx="54" ry="12" fill="url(#pawnBase)" stroke="#334155" strokeWidth="1.5" />
+      {/* ── ½ BOLA (dome bulging downward) ── */}
+      {/* Body of dome */}
+      <path d={`M ${cx - W} ${juncY} A ${W} ${W} 0 0 0 ${cx + W} ${juncY}`}
+        fill="url(#p7dome)" stroke="#1e293b" strokeWidth="1.8" />
+      {/* Highlight on dome */}
+      <path d={`M ${cx - W + 8} ${juncY} A ${W - 8} ${W - 8} 0 0 0 ${cx - W * 0.3} ${juncY + W * 0.35}`}
+        fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.22" strokeLinecap="round" />
 
-      {/* Cone body */}
-      <polygon points="140,108 86,248 194,248" fill="url(#pawnBody)" stroke="#334155" strokeWidth="1.5" />
-      <ellipse cx="140" cy="248" rx="54" ry="12" fill="none" stroke="#475569" strokeWidth="1.3" strokeDasharray="4,3" />
-      {/* Body highlight */}
-      <path d="M 86 248 L 102 144 A 12 12 0 0 0 88 144 Z" fill="white" fillOpacity="0.1" />
+      {/* Flat junction face (ellipse at top of dome = base of cone) */}
+      <ellipse cx={cx} cy={juncY} rx={W} ry={ell}
+        fill="#334155" fillOpacity="0.65" stroke="#64748b" strokeWidth="1.5" />
 
-      {/* Neck / waist ring */}
-      <ellipse cx="140" cy="140" rx="22" ry="5" fill="#334155" stroke="#475569" strokeWidth="1.5" />
-      <rect x="118" y="128" width="44" height="12" fill="url(#pawnBody)" fillOpacity="0.5" />
-      <ellipse cx="140" cy="128" rx="22" ry="5" fill="#475569" stroke="#64748b" strokeWidth="1.3" />
+      {/* ── KERUCUT (cone, apex pointing up) ── */}
+      {/* Left face */}
+      <polygon points={`${cx - W},${juncY} ${cx},${apexY} ${cx},${juncY}`}
+        fill="#475569" fillOpacity="0.88" />
+      {/* Right face */}
+      <polygon points={`${cx},${juncY} ${cx},${apexY} ${cx + W},${juncY}`}
+        fill="url(#p7cone)" fillOpacity="0.88" />
+      {/* Cone outline */}
+      <line x1={cx - W} y1={juncY} x2={cx} y2={apexY} stroke="#1e293b" strokeWidth="1.8" />
+      <line x1={cx + W} y1={juncY} x2={cx} y2={apexY} stroke="#1e293b" strokeWidth="1.8" />
+      {/* Highlight edge on cone */}
+      <line x1={cx - W + 6} y1={juncY} x2={cx} y2={apexY + 6}
+        stroke="white" strokeWidth="1.2" strokeOpacity="0.18" />
 
-      {/* Head sphere (top hemisphere + lower half for full ball look) */}
-      <circle cx="140" cy="92" r="38" fill="url(#pawnHead)" stroke="#334155" strokeWidth="1.5" />
-      {/* Head highlight */}
-      <ellipse cx="126" cy="76" rx="14" ry="9" fill="white" fillOpacity="0.22" />
-      {/* Equator line */}
-      <ellipse cx="140" cy="92" rx="38" ry="8" fill="none" stroke="#475569" strokeWidth="0.8" strokeDasharray="4,3" strokeOpacity="0.6" />
+      {/* Base ellipse of cone (= flat face of hemisphere, drawn again on top) */}
+      <ellipse cx={cx} cy={juncY} rx={W} ry={ell}
+        fill="none" stroke="#475569" strokeWidth="1.3" strokeDasharray="5,3" />
 
-      {/* Dimension labels */}
-      <line x1="202" y1="108" x2="202" y2="248" stroke="#94a3b8" strokeWidth="1.2" strokeOpacity="0.85" />
-      <line x1="196" y1="108" x2="208" y2="108" stroke="#94a3b8" strokeWidth="1.2" />
-      <line x1="196" y1="248" x2="208" y2="248" stroke="#94a3b8" strokeWidth="1.2" />
-      <text x="212" y="182" fill="#94a3b8" fontSize="11" fontFamily="monospace" fontWeight="bold">s={sKer}</text>
+      {/* Apex tip cap */}
+      <ellipse cx={cx} cy={apexY} rx={4} ry={2} fill="#64748b" />
 
-      <line x1="140" y1="248" x2="194" y2="248" stroke="#cbd5e1" strokeWidth="1" strokeDasharray="3,2" strokeOpacity="0.8" />
-      <text x="163" y="266" fill="#cbd5e1" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r={r}</text>
+      {/* ── DIMENSION LABELS ── */}
+      {/* Slant height s of cone */}
+      {/* slant = from apex to bottom-left of cone base */}
+      <line x1="208" y1={apexY} x2="208" y2={juncY}
+        stroke="#94a3b8" strokeWidth="1.2" strokeOpacity="0.85" />
+      <line x1="202" y1={apexY} x2="214" y2={apexY} stroke="#94a3b8" strokeWidth="1.2" />
+      <line x1="202" y1={juncY} x2="214" y2={juncY} stroke="#94a3b8" strokeWidth="1.2" />
+      <text x="218" y={(apexY + juncY) / 2 + 4} fill="#94a3b8" fontSize="11" fontFamily="monospace" fontWeight="bold">s={sKer}</text>
 
-      <text x="44" y="88" fill="#cbd5e1" fontSize="10" fontFamily="monospace" fontWeight="bold">½ Bola</text>
-      <line x1="72" y1="88" x2="100" y2="88" stroke="#cbd5e1" strokeWidth="0.8" strokeOpacity="0.6" />
+      {/* Radius at base */}
+      <line x1={cx} y1={juncY} x2={cx + W} y2={juncY}
+        stroke="#cbd5e1" strokeWidth="1" strokeDasharray="3,2" strokeOpacity="0.8" />
+      <text x={cx + W / 2 - 2} y={juncY + 22} fill="#cbd5e1" fontSize="11"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">r={r}</text>
+
+      {/* Labels */}
+      <text x="34" y={apexY + (juncY - apexY) / 2 + 4} fill="#94a3b8" fontSize="10"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">Kerucut</text>
+      <line x1="62" y1={apexY + (juncY - apexY) / 2} x2={cx - W} y2={apexY + (juncY - apexY) / 2}
+        stroke="#94a3b8" strokeWidth="0.8" strokeOpacity="0.55" />
+
+      <text x="34" y={juncY + W / 2 + 4} fill="#cbd5e1" fontSize="10"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">½ Bola</text>
+      <line x1="62" y1={juncY + W / 2} x2={cx - W + 6} y2={juncY + W / 2}
+        stroke="#cbd5e1" strokeWidth="0.8" strokeOpacity="0.55" />
     </svg>
   );
 }
@@ -577,11 +604,11 @@ function MenaraSVG({ r, tTab, tKer }: { r: number; tTab: number; tKer: number })
       </defs>
 
       {/* Ground */}
-      <ellipse cx="155" cy="285" rx="78" ry="12" fill="#064e3b" fillOpacity="0.4" />
+      <ellipse cx="155" cy="285" rx="60" ry="10" fill="#064e3b" fillOpacity="0.4" />
 
-      {/* Hemisphere base */}
-      <path d="M 92 230 A 63 63 0 0 0 218 230" fill="url(#towerBase)" stroke="#065f46" strokeWidth="1.8" />
-      <ellipse cx="155" cy="230" rx="63" ry="13" fill="#064e3b" fillOpacity="0.35" stroke="#065f46" strokeWidth="1.5" />
+      {/* Hemisphere base — same width as cylinder (rx=41) */}
+      <path d="M 114 230 A 41 41 0 0 0 196 230" fill="url(#towerBase)" stroke="#065f46" strokeWidth="1.8" />
+      <ellipse cx="155" cy="230" rx="41" ry="9" fill="#064e3b" fillOpacity="0.35" stroke="#065f46" strokeWidth="1.5" />
 
       {/* Cylinder tower body */}
       <rect x="114" y="100" width="82" height="130" fill="url(#towerWall)" fillOpacity="0.88" />
@@ -628,12 +655,12 @@ function MenaraSVG({ r, tTab, tKer }: { r: number; tTab: number; tKer: number })
       <text x="218" y="170" fill="#fef9c3" fontSize="11" fontFamily="monospace" fontWeight="bold">t={tTab}</text>
 
       {/* Radius */}
-      <line x1="155" y1="230" x2="218" y2="230" stroke="#6ee7b7" strokeWidth="1" strokeDasharray="3,2" strokeOpacity="0.8" />
-      <text x="182" y="248" fill="#6ee7b7" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r={r}</text>
+      <line x1="155" y1="230" x2="196" y2="230" stroke="#6ee7b7" strokeWidth="1" strokeDasharray="3,2" strokeOpacity="0.8" />
+      <text x="172" y="248" fill="#6ee7b7" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r={r}</text>
 
       {/* Labels */}
-      <text x="44" y="228" fill="#6ee7b7" fontSize="10" fontFamily="monospace" fontWeight="bold">½ Bola</text>
-      <line x1="78" y1="225" x2="100" y2="225" stroke="#6ee7b7" strokeWidth="0.8" strokeOpacity="0.65" />
+      <text x="44" y="250" fill="#6ee7b7" fontSize="10" fontFamily="monospace" fontWeight="bold">½ Bola</text>
+      <line x1="78" y1="247" x2="118" y2="238" stroke="#6ee7b7" strokeWidth="0.8" strokeOpacity="0.65" />
     </svg>
   );
 }
@@ -807,12 +834,6 @@ function RoketAntariksaSVG({ r, tTab, tKer }: { r: number; tTab: number; tKer: n
           <stop offset="50%" stopColor="#ef4444" />
           <stop offset="100%" stopColor="#7f1d1d" />
         </linearGradient>
-        <radialGradient id="flame2" cx="50%" cy="0%" r="80%">
-          <stop offset="0%" stopColor="#fef9c3" />
-          <stop offset="30%" stopColor="#f97316" />
-          <stop offset="80%" stopColor="#dc2626" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
-        </radialGradient>
       </defs>
 
       {/* Stars in background */}
@@ -827,10 +848,6 @@ function RoketAntariksaSVG({ r, tTab, tKer }: { r: number; tTab: number; tKer: n
       {/* Tail nozzle (cone pointing down) */}
       <polygon points="108,260 162,260 135,295" fill="url(#rocketTail2)" stroke="#7f1d1d" strokeWidth="1.2" />
       <ellipse cx="135" cy="260" rx="27" ry="7" fill="#ef4444" fillOpacity="0.5" stroke="#7f1d1d" strokeWidth="1.3" />
-
-      {/* Flame exhaust */}
-      <ellipse cx="135" cy="296" rx="18" ry="32" fill="url(#flame2)" fillOpacity="0.9" />
-      <ellipse cx="128" cy="300" rx="8" ry="20" fill="#fef9c3" fillOpacity="0.55" />
 
       {/* Body cylinder */}
       <rect x="108" y="120" width="54" height="140" fill="url(#rocketBody2)" />
@@ -976,62 +993,72 @@ function KapsulSVG({ d, totalLen }: { d: number; totalLen: number }) {
 
 /* ═══════════════════════════════════════════════
    SVG: No 13 — ANIMASI BOLA DIMASUKKAN KE TABUNG
+   3 kolom × 2 baris, auto-run tanpa tombol
 ═══════════════════════════════════════════════ */
 function AnimasiBolaTabungSVG() {
   const TOTAL_BALLS = 6;
-  const INIT_H_CM = 30;   // initial water height
-  const RISE_PER_BALL = 7 / 3; // cm per ball ≈ 2.333
+  const INIT_H_CM = 30;
+  const RISE_PER_BALL = 7 / 3; // ≈ 2.333 cm per ball
 
-  // SVG coordinate system
-  const CX = 118;
-  const CYL_RX = 50;
-  const CYL_EY = 11;
-  const CYL_TOP_Y = 28;
-  const CYL_BOT_Y = 238;
-  const CYL_H_PX = CYL_BOT_Y - CYL_TOP_Y; // 210px
-  const MAX_CM = 55; // display range (gives space above 44cm)
+  // SVG layout — wider cylinder to fit 3 columns
+  const CX = 148;
+  const CYL_RX = 64;
+  const CYL_EY = 13;
+  const CYL_TOP_Y = 32;
+  const CYL_BOT_Y = 252;
+  const CYL_H_PX = CYL_BOT_Y - CYL_TOP_Y; // 220px
+  const MAX_CM = 58;
   const pxPerCm = CYL_H_PX / MAX_CM;
 
-  const BALL_R = 16;
-  const BALL_DROP_START_Y = CYL_TOP_Y - 40;
+  const BALL_R = 18;
+  // 3 columns: left / center / right, each 36px apart (= 2×BALL_R spacing)
+  const COL_OFFSETS = [-36, 0, 36];
+  // 2 rows: bottom first (row=0), then top (row=1)
+  const ballPos = (idx: number) => {
+    const row = Math.floor(idx / 3); // 0 = bottom, 1 = top
+    const col = idx % 3;
+    return {
+      x: CX + COL_OFFSETS[col],
+      y: CYL_BOT_Y - BALL_R - 2 - row * (BALL_R * 2 + 2),
+    };
+  };
 
-  // Water Y from water height in cm (Y decreases as cm increases — SVG top=low Y)
   const waterY = (cm: number) => CYL_BOT_Y - cm * pxPerCm;
 
-  // Ball final Y positions (stacked from bottom, each ball diameter = r*2 visual)
-  const ballVisH = BALL_R * 2;
-  const ballFinalY = (idx: number) => CYL_BOT_Y - BALL_R - idx * ballVisH * 0.95;
-
   const [ballsIn, setBallsIn] = useState(0);
-  const [dropProgress, setDropProgress] = useState(0); // 0..1
+  const [dropProgress, setDropProgress] = useState(0);
   const [dropping, setDropping] = useState(false);
-  const [started, setStarted] = useState(false);
   const [done, setDone] = useState(false);
   const animRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(0);
+  const ballsInRef = useRef(0);
+  const droppingRef = useRef(false);
+  const doneRef = useRef(false);
 
   const currentWaterH = INIT_H_CM + ballsIn * RISE_PER_BALL;
   const finalWaterH = INIT_H_CM + TOTAL_BALLS * RISE_PER_BALL; // 44 cm
 
   const startDrop = () => {
+    droppingRef.current = true;
     setDropping(true);
     setDropProgress(0);
     startTimeRef.current = performance.now();
-    const DURATION = 1800; // ms per ball
-
+    const DURATION = 1400;
     const animate = (now: number) => {
       const elapsed = now - startTimeRef.current;
       const p = Math.min(elapsed / DURATION, 1);
-      // Ease-in (accelerate on drop)
       const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
       setDropProgress(eased);
       if (p < 1) {
         animRef.current = requestAnimationFrame(animate);
       } else {
+        droppingRef.current = false;
         setDropping(false);
         setBallsIn(prev => {
           const next = prev + 1;
+          ballsInRef.current = next;
           if (next >= TOTAL_BALLS) {
+            doneRef.current = true;
             setDone(true);
           }
           return next;
@@ -1041,58 +1068,54 @@ function AnimasiBolaTabungSVG() {
     animRef.current = requestAnimationFrame(animate);
   };
 
+  // Auto-start on mount; chain after each ball lands
   useEffect(() => {
-    if (!started || done) return;
-    if (dropping) return;
+    if (doneRef.current || droppingRef.current) return;
+    if (ballsInRef.current >= TOTAL_BALLS) return;
+    const delay = ballsIn === 0 ? 700 : 450;
     const timer = setTimeout(() => {
-      if (ballsIn < TOTAL_BALLS) startDrop();
-    }, 500);
+      if (!doneRef.current && !droppingRef.current && ballsInRef.current < TOTAL_BALLS) {
+        startDrop();
+      }
+    }, delay);
     return () => clearTimeout(timer);
-  }, [started, dropping, ballsIn, done]);
+  }, [ballsIn, dropping, done]);
 
   useEffect(() => {
     return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
   }, []);
 
-  const handleStart = () => {
-    playPopSound();
-    setStarted(true);
-    setBallsIn(0);
-    setDone(false);
-    setDropping(false);
-  };
-
   const handleReset = () => {
     playPopSound();
     if (animRef.current) cancelAnimationFrame(animRef.current);
-    setStarted(false);
+    doneRef.current = false;
+    droppingRef.current = false;
+    ballsInRef.current = 0;
     setBallsIn(0);
     setDropProgress(0);
     setDropping(false);
     setDone(false);
   };
 
-  // Current dropping ball Y
-  const droppingBallTargetY = ballFinalY(ballsIn);
-  const droppingBallCurrentY = BALL_DROP_START_Y + dropProgress * (droppingBallTargetY - BALL_DROP_START_Y);
+  const dropTarget = ballPos(Math.min(ballsIn, TOTAL_BALLS - 1));
+  const dropCurrentY = (CYL_TOP_Y - 28) + dropProgress * (dropTarget.y - (CYL_TOP_Y - 28));
 
-  // Water gradient uid
   const uid = "abt13";
   const wY = waterY(currentWaterH);
-  const wY0 = `M ${CX - CYL_RX} ${wY} Q ${CX} ${wY - 5} ${CX + CYL_RX} ${wY} L ${CX + CYL_RX} ${CYL_BOT_Y} L ${CX - CYL_RX} ${CYL_BOT_Y} Z`;
-  const wY1 = `M ${CX - CYL_RX} ${wY} Q ${CX} ${wY + 5} ${CX + CYL_RX} ${wY} L ${CX + CYL_RX} ${CYL_BOT_Y} L ${CX - CYL_RX} ${CYL_BOT_Y} Z`;
+  const wP0 = `M ${CX - CYL_RX} ${wY} Q ${CX} ${wY - 5} ${CX + CYL_RX} ${wY} L ${CX + CYL_RX} ${CYL_BOT_Y} L ${CX - CYL_RX} ${CYL_BOT_Y} Z`;
+  const wP1 = `M ${CX - CYL_RX} ${wY} Q ${CX} ${wY + 5} ${CX + CYL_RX} ${wY} L ${CX + CYL_RX} ${CYL_BOT_Y} L ${CX - CYL_RX} ${CYL_BOT_Y} Z`;
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <svg viewBox="0 0 270 280" width="100%" style={{ maxWidth: 260, display: "block" }}>
+    <div className="flex flex-col items-center gap-2">
+      <svg viewBox="0 0 330 300" width="100%" style={{ maxWidth: 310, display: "block" }}>
         <defs>
           <linearGradient id={`${uid}-wg`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#0369a1" stopOpacity="0.82" />
+            <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#0369a1" stopOpacity="0.85" />
           </linearGradient>
-          <radialGradient id={`${uid}-bg`} cx="32%" cy="28%" r="68%">
+          <radialGradient id={`${uid}-bg`} cx="30%" cy="28%" r="70%">
             <stop offset="0%" stopColor="#e2e8f0" />
-            <stop offset="52%" stopColor="#64748b" />
+            <stop offset="50%" stopColor="#64748b" />
             <stop offset="100%" stopColor="#1e293b" />
           </radialGradient>
           <clipPath id={`${uid}-cl`}>
@@ -1100,99 +1123,75 @@ function AnimasiBolaTabungSVG() {
           </clipPath>
         </defs>
 
-        {/* Initial 30cm water line guide */}
-        {!started && (
-          <>
-            <line x1={CX - CYL_RX - 4} y1={waterY(INIT_H_CM)} x2={CX + CYL_RX + 4} y2={waterY(INIT_H_CM)}
-              stroke="#fbbf24" strokeWidth="1.3" strokeDasharray="5,3" strokeOpacity="0.9" />
-            <text x={CX - CYL_RX - 8} y={waterY(INIT_H_CM) + 4} fill="#fbbf24" fontSize="10"
-              fontFamily="monospace" fontWeight="bold" textAnchor="end">30 cm</text>
-          </>
-        )}
+        {/* Static 30cm guide line (always visible) */}
+        <line x1={CX - CYL_RX - 4} y1={waterY(INIT_H_CM)} x2={CX + CYL_RX + 4} y2={waterY(INIT_H_CM)}
+          stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="5,3" strokeOpacity="0.7" />
+        <text x={CX - CYL_RX - 8} y={waterY(INIT_H_CM) + 4} fill="#fbbf24" fontSize="10"
+          fontFamily="monospace" fontWeight="bold" textAnchor="end">30 cm</text>
 
         {/* Water body */}
-        {started && (
-          <g clipPath={`url(#${uid}-cl)`}>
-            <path fill={`url(#${uid}-wg)`} d={wY0}>
-              {!done && (
-                <animate attributeName="d" dur="2s" repeatCount="indefinite"
-                  values={`${wY0};${wY1};${wY0}`} calcMode="spline"
-                  keySplines="0.5 0 0.5 1;0.5 0 0.5 1" keyTimes="0;0.5;1" />
-              )}
-            </path>
-          </g>
-        )}
+        <g clipPath={`url(#${uid}-cl)`}>
+          <path fill={`url(#${uid}-wg)`} d={wP0}>
+            {!done && (
+              <animate attributeName="d" dur="2s" repeatCount="indefinite"
+                values={`${wP0};${wP1};${wP0}`} calcMode="spline"
+                keySplines="0.5 0 0.5 1;0.5 0 0.5 1" keyTimes="0;0.5;1" />
+            )}
+          </path>
+        </g>
 
-        {/* Balls already in cylinder */}
-        {Array.from({ length: ballsIn }, (_, i) => (
-          <g key={i} clipPath={`url(#${uid}-cl)`}>
-            <circle cx={CX} cy={ballFinalY(i)} r={BALL_R}
-              fill={`url(#${uid}-bg)`} stroke="#475569" strokeWidth="1.2" />
-            <ellipse cx={CX - BALL_R * 0.28} cy={ballFinalY(i) - BALL_R * 0.28}
-              rx={BALL_R * 0.22} ry={BALL_R * 0.13} fill="white" fillOpacity="0.32" />
-          </g>
-        ))}
+        {/* Balls already in cylinder (3-column layout) */}
+        {Array.from({ length: ballsIn }, (_, i) => {
+          const pos = ballPos(i);
+          return (
+            <g key={i} clipPath={`url(#${uid}-cl)`}>
+              <circle cx={pos.x} cy={pos.y} r={BALL_R}
+                fill={`url(#${uid}-bg)`} stroke="#475569" strokeWidth="1.2" />
+              <ellipse cx={pos.x - BALL_R * 0.28} cy={pos.y - BALL_R * 0.28}
+                rx={BALL_R * 0.22} ry={BALL_R * 0.13} fill="white" fillOpacity="0.32" />
+            </g>
+          );
+        })}
 
         {/* Currently dropping ball */}
-        {dropping && (
+        {dropping && ballsIn < TOTAL_BALLS && (
           <g>
-            <circle cx={CX} cy={droppingBallCurrentY} r={BALL_R}
+            <circle cx={dropTarget.x} cy={dropCurrentY} r={BALL_R}
               fill={`url(#${uid}-bg)`} stroke="#475569" strokeWidth="1.2" />
-            <ellipse cx={CX - BALL_R * 0.28} cy={droppingBallCurrentY - BALL_R * 0.28}
+            <ellipse cx={dropTarget.x - BALL_R * 0.28} cy={dropCurrentY - BALL_R * 0.28}
               rx={BALL_R * 0.22} ry={BALL_R * 0.13} fill="white" fillOpacity="0.32" />
           </g>
         )}
 
-        {/* Initial water fill (before animation) */}
-        {!started && (
-          <g clipPath={`url(#${uid}-cl)`}>
-            <rect x={CX - CYL_RX} y={waterY(INIT_H_CM)} width={CYL_RX * 2}
-              height={CYL_BOT_Y - waterY(INIT_H_CM)}
-              fill="url(#abt13-wg)" fillOpacity="0.75" />
-          </g>
-        )}
+        {/* Live water level label */}
+        <line x1={CX - CYL_RX - 4} y1={wY} x2={CX - CYL_RX - 2} y2={wY}
+          stroke="#38bdf8" strokeWidth="1.2" strokeOpacity="0.9" />
+        <text x={CX - CYL_RX - 6} y={wY + 4} fill="#38bdf8" fontSize="10"
+          fontFamily="monospace" fontWeight="bold" textAnchor="end">
+          {currentWaterH.toFixed(1)} cm
+        </text>
 
-        {/* Water level label when animating */}
-        {started && (
-          <>
-            <line x1={CX - CYL_RX - 4} y1={wY} x2={CX - CYL_RX - 2} y2={wY}
-              stroke="#38bdf8" strokeWidth="1.2" strokeOpacity="0.9" />
-            <text x={CX - CYL_RX - 6} y={wY + 4} fill="#38bdf8" fontSize="10"
-              fontFamily="monospace" fontWeight="bold" textAnchor="end">
-              {currentWaterH.toFixed(1)} cm
-            </text>
-          </>
-        )}
-
-        {/* Final water level label when done */}
+        {/* Final label when done */}
         {done && (
           <>
             <line x1={CX + CYL_RX + 2} y1={waterY(finalWaterH)} x2={CX + CYL_RX + 18} y2={waterY(finalWaterH)}
               stroke="#4ade80" strokeWidth="1.5" strokeOpacity="0.9" />
             <text x={CX + CYL_RX + 20} y={waterY(finalWaterH) + 4} fill="#4ade80" fontSize="11"
-              fontFamily="monospace" fontWeight="bold">44 cm</text>
+              fontFamily="monospace" fontWeight="bold">44 cm ✓</text>
           </>
         )}
 
-        {/* 30cm reference when started */}
-        {started && (
-          <line x1={CX - CYL_RX} y1={waterY(INIT_H_CM)} x2={CX + CYL_RX} y2={waterY(INIT_H_CM)}
-            stroke="#fbbf24" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.5" />
-        )}
+        {/* Ball counter chip */}
+        <text x={CX + CYL_RX + 6} y={CYL_TOP_Y + 16} fill="#e2e8f0" fontSize="11"
+          fontFamily="monospace" fontWeight="bold">
+          {ballsIn}/{TOTAL_BALLS}🔵
+        </text>
 
-        {/* Ball counter */}
-        {started && (
-          <text x={CX + CYL_RX + 8} y={CYL_TOP_Y + 18} fill="#e2e8f0" fontSize="11"
-            fontFamily="monospace" fontWeight="bold">
-            {ballsIn}/{TOTAL_BALLS} 🔵
-          </text>
-        )}
-
-        {/* CYLINDER (drawn on top so walls mask overflow) */}
-        <line x1={CX - CYL_RX} y1={CYL_TOP_Y} x2={CX - CYL_RX} y2={CYL_BOT_Y} stroke="#38bdf8" strokeWidth="2" />
-        <line x1={CX + CYL_RX} y1={CYL_TOP_Y} x2={CX + CYL_RX} y2={CYL_BOT_Y} stroke="#38bdf8" strokeWidth="2" />
+        {/* CYLINDER walls (drawn last to clip overflow) */}
+        <line x1={CX - CYL_RX} y1={CYL_TOP_Y} x2={CX - CYL_RX} y2={CYL_BOT_Y} stroke="#38bdf8" strokeWidth="2.2" />
+        <line x1={CX + CYL_RX} y1={CYL_TOP_Y} x2={CX + CYL_RX} y2={CYL_BOT_Y} stroke="#38bdf8" strokeWidth="2.2" />
         <ellipse cx={CX} cy={CYL_BOT_Y} rx={CYL_RX} ry={CYL_EY}
-          fill="#0369a1" fillOpacity="0.25" stroke="#38bdf8" strokeWidth="2" />
+          fill="#0369a1" fillOpacity="0.22" stroke="#38bdf8" strokeWidth="2" />
         <ellipse cx={CX} cy={CYL_TOP_Y} rx={CYL_RX} ry={CYL_EY}
           fill="none" stroke="#38bdf8" strokeWidth="1.5" strokeDasharray="5,4" strokeOpacity="0.7" />
 
@@ -1206,68 +1205,117 @@ function AnimasiBolaTabungSVG() {
         <text x={CX} y={CYL_BOT_Y + 32} fill="#38bdf8" fontSize="11"
           fontFamily="monospace" fontWeight="bold" textAnchor="middle">d = 28 cm</text>
 
-        {/* Ball radius label */}
-        {!started && (
-          <text x={CX + 8} y={waterY(INIT_H_CM) - 8} fill="#94a3b8" fontSize="10" fontFamily="monospace">r_bola=7</text>
-        )}
+        {/* Ball radius note */}
+        <text x="14" y={CYL_TOP_Y + 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r bola = 7</text>
       </svg>
 
-      {/* Controls */}
+      {/* Controls: only reset (no start button) */}
       <div className="flex gap-3 items-center">
-        {!started ? (
-          <button onClick={handleStart}
-            className="px-5 py-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-sm font-bold hover:bg-emerald-500/30 transition-all cursor-pointer">
-            ▶ Mulai Animasi
-          </button>
-        ) : (
-          <button onClick={handleReset}
-            className="px-4 py-2 rounded-xl bg-white/8 border border-white/15 text-white/60 text-xs font-bold hover:bg-white/12 transition-all cursor-pointer">
-            ↺ Ulangi
-          </button>
-        )}
-        {started && (
-          <span className="text-xs text-white/50 font-body">
-            {done ? "✅ Selesai! Tinggi air = 44 cm" : dropping ? "⬇ Memasukkan bola..." : "⏳ Siap memasukkan bola berikutnya..."}
-          </span>
-        )}
+        <button onClick={handleReset}
+          className="px-4 py-1.5 rounded-xl bg-white/8 border border-white/15 text-white/60 text-xs font-bold hover:bg-white/12 transition-all cursor-pointer">
+          ↺ Ulangi
+        </button>
+        <span className="text-xs text-white/50 font-body">
+          {done
+            ? "✅ Selesai! Tinggi air = 44 cm"
+            : dropping
+              ? `⬇ Memasukkan bola ${ballsIn + 1}...`
+              : ballsIn === 0 ? "⏳ Memulai..." : "⏳ Siap bola berikutnya..."}
+        </span>
       </div>
     </div>
   );
 }
 
 /* ═══════════════════════════════════════════════
-   SVG: No 14 — BOLA DI DALAM TABUNG (tetap)
+   SVG: No 14 — BOLA SEPAK DI DALAM TABUNG
 ═══════════════════════════════════════════════ */
 function BolaDalamTabungSVG({ color = "#34d399" }: { color?: string }) {
-  const VW = 220, VH = 200;
-  const cx = 110;
-  const sr = 62;
+  const VW = 240, VH = 210;
+  const cx = 120;
+  const sr = 64;   // sphere radius
   const ell = 16;
-  const scy = 100;
+  const scy = 106;
   const topY = scy - sr;
   const botY = scy + sr;
   const cylW = sr;
+
+  // Soccer ball patch helper (pentagon-like irregular shapes, clipped to sphere)
+  // Coordinates relative to sphere center (cx, scy)
+  const pt = (dx: number, dy: number) => `${cx + dx},${scy + dy}`;
+  const patches = [
+    // Top center pentagon
+    `${pt(0, -sr + 2)} ${pt(-18, -sr + 20)} ${pt(-10, -sr + 38)} ${pt(10, -sr + 38)} ${pt(18, -sr + 20)}`,
+    // Upper-left patch
+    `${pt(-sr + 4, -16)} ${pt(-sr + 20, -sr + 22)} ${pt(-sr + 38, -sr + 16)} ${pt(-sr + 40, 0)} ${pt(-sr + 22, 8)}`,
+    // Upper-right patch
+    `${pt(sr - 4, -16)} ${pt(sr - 20, -sr + 22)} ${pt(sr - 38, -sr + 16)} ${pt(sr - 40, 0)} ${pt(sr - 22, 8)}`,
+    // Lower-left patch
+    `${pt(-sr + 8, 26)} ${pt(-sr + 24, 14)} ${pt(-sr + 36, 30)} ${pt(-sr + 26, 46)} ${pt(-sr + 8, 44)}`,
+    // Lower-right patch
+    `${pt(sr - 8, 26)} ${pt(sr - 24, 14)} ${pt(sr - 36, 30)} ${pt(sr - 26, 46)} ${pt(sr - 8, 44)}`,
+    // Bottom patch
+    `${pt(-16, sr - 4)} ${pt(-22, sr - 22)} ${pt(0, sr - 32)} ${pt(22, sr - 22)} ${pt(16, sr - 4)}`,
+  ];
+
   return (
-    <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: 200, display: "block", margin: "0 auto" }}>
+    <svg viewBox={`0 0 ${VW} ${VH}`} width="100%" style={{ maxWidth: 220, display: "block", margin: "0 auto" }}>
       <defs>
-        <radialGradient id="b14sg" cx="35%" cy="32%" r="65%">
-          <stop offset="0%" stopColor="#d1fae5" />
-          <stop offset="50%" stopColor="#34d399" />
-          <stop offset="100%" stopColor="#064e3b" />
+        <radialGradient id="b14soccerGrad" cx="35%" cy="30%" r="68%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="55%" stopColor="#e2e8f0" />
+          <stop offset="100%" stopColor="#94a3b8" />
         </radialGradient>
+        <clipPath id="b14soccerClip">
+          <circle cx={cx} cy={scy} r={sr} />
+        </clipPath>
       </defs>
+
+      {/* Cylinder */}
       <rect x={cx - cylW} y={topY} width={cylW * 2} height={botY - topY} fill={color} fillOpacity="0.05" />
       <line x1={cx - cylW} y1={topY} x2={cx - cylW} y2={botY} stroke={color} strokeWidth={2} />
       <line x1={cx + cylW} y1={topY} x2={cx + cylW} y2={botY} stroke={color} strokeWidth={2} />
       <ellipse cx={cx} cy={botY} rx={cylW} ry={ell} fill={color} fillOpacity="0.18" stroke={color} strokeWidth={2} />
       <ellipse cx={cx} cy={topY} rx={cylW} ry={ell} fill={color} fillOpacity="0.12" stroke={color} strokeWidth={1.5} strokeDasharray="6,4" />
-      <circle cx={cx} cy={scy} r={sr} fill="url(#b14sg)" fillOpacity="0.8" stroke={color} strokeWidth={2} />
-      <ellipse cx={cx} cy={scy} rx={sr} ry={ell} fill="none" stroke={color} strokeWidth={1} strokeDasharray="5,3" strokeOpacity="0.7" />
-      <path d={`M ${cx} ${topY} A ${Math.round(sr * 0.44)} ${sr} 0 0 1 ${cx} ${botY}`} fill="none" stroke={color} strokeWidth={1} strokeOpacity="0.55" />
-      <path d={`M ${cx} ${topY} A ${Math.round(sr * 0.44)} ${sr} 0 0 0 ${cx} ${botY}`} fill="none" stroke={color} strokeWidth={1} strokeDasharray="5,3" strokeOpacity="0.4" />
-      <ellipse cx={cx - sr * 0.3} cy={scy - sr * 0.3} rx={sr * 0.15} ry={sr * 0.09} fill="white" fillOpacity="0.35" />
-      <line x1={cx} y1={scy} x2={cx + sr} y2={scy} stroke={color} strokeWidth={1} strokeDasharray="4,3" strokeOpacity="0.85" />
-      <text x={cx + sr / 2} y={scy - 6} fill={color} fontSize="13" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+
+      {/* Soccer ball — white base */}
+      <circle cx={cx} cy={scy} r={sr} fill="url(#b14soccerGrad)" stroke="#334155" strokeWidth={2} />
+
+      {/* Black patches (clipped to sphere) */}
+      <g clipPath="url(#b14soccerClip)" fill="#1e293b" fillOpacity="0.88">
+        {patches.map((pts, i) => (
+          <polygon key={i} points={pts} />
+        ))}
+      </g>
+
+      {/* Stitching lines between patches (subtle) */}
+      <g clipPath="url(#b14soccerClip)" fill="none" stroke="#64748b" strokeWidth="0.9" strokeOpacity="0.55">
+        <line x1={cx} y1={scy - sr + 38} x2={cx - 18} y2={scy - sr + 55} />
+        <line x1={cx} y1={scy - sr + 38} x2={cx + 18} y2={scy - sr + 55} />
+        <line x1={cx - sr + 38} y1={scy - sr + 16} x2={cx - sr + 22} y2={scy + 8} />
+        <line x1={cx + sr - 38} y1={scy - sr + 16} x2={cx + sr - 22} y2={scy + 8} />
+        <line x1={cx - sr + 22} y1={scy + 8} x2={cx - sr + 24} y2={scy + 14} />
+        <line x1={cx + sr - 22} y1={scy + 8} x2={cx + sr - 24} y2={scy + 14} />
+        <line x1={cx - sr + 36} y1={scy + 30} x2={cx - 22} y2={scy + sr - 22} />
+        <line x1={cx + sr - 36} y1={scy + 30} x2={cx + 22} y2={scy + sr - 22} />
+      </g>
+
+      {/* Sphere outline */}
+      <circle cx={cx} cy={scy} r={sr} fill="none" stroke="#334155" strokeWidth={2} />
+
+      {/* Highlight */}
+      <ellipse cx={cx - sr * 0.3} cy={scy - sr * 0.32} rx={sr * 0.16} ry={sr * 0.1}
+        fill="white" fillOpacity="0.5" />
+
+      {/* Equator dashed line */}
+      <ellipse cx={cx} cy={scy} rx={sr} ry={ell} fill="none" stroke="#475569"
+        strokeWidth={1} strokeDasharray="5,3" strokeOpacity="0.55" />
+
+      {/* Radius label */}
+      <line x1={cx} y1={scy} x2={cx + sr} y2={scy} stroke={color} strokeWidth={1}
+        strokeDasharray="4,3" strokeOpacity="0.85" />
+      <text x={cx + sr / 2} y={scy - 6} fill={color} fontSize="13"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
     </svg>
   );
 }
