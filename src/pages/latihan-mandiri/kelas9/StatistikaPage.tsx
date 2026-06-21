@@ -23,7 +23,7 @@ const subtopics = [
   {
     label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)",
     path: "/latihan-mandiri/kelas-9/statistika/rata-rata",
-    soal: 29,
+    soal: 15,
     icon: PieChart,
     desc: "Mean tunggal, berbobot, berkelompok, rata-rata gabungan",
     color: "blue",
@@ -102,7 +102,7 @@ const StatistikaPage = () => {
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-white/70 text-xs font-body">5 Sub Topik</span>
             <span className="text-white/20">·</span>
-            <span className="text-cyan-400 text-xs font-bold">92 Soal Total</span>
+            <span className="text-cyan-400 text-xs font-bold">78 Soal Total</span>
             <span className="text-white/20">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
