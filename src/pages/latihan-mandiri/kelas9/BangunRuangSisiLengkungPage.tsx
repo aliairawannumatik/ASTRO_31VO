@@ -8,7 +8,7 @@ const subtopics = [
   { label: "TABUNG", path: "/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/tabung", emoji: "🧴", color: "cyan" },
   { label: "KERUCUT", path: "/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/kerucut", emoji: "🔺", color: "orange" },
   { label: "BOLA", path: "/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/bola", emoji: "🔮", color: "indigo" },
-  { label: "PERUBAHAN VOLUME BANGUN RUANG SISI LENGKUNG", path: "/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume", emoji: "🔄", color: "purple" },
+  { label: "PERUBAHAN LUAS PERMUKAAN DAN VOLUME BANGUN RUANG SISI LENGKUNG", path: "/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume", emoji: "🔄", color: "purple" },
   { label: "BANGUN RUANG SISI LENGKUNG GABUNGAN", path: "/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/gabungan", emoji: "🧩", color: "emerald" },
 ];
 

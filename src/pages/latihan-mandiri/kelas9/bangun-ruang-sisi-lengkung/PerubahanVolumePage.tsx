@@ -544,7 +544,7 @@ const PerubahanVolumePage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-purple-300 text-center mb-1"
             style={{ textShadow: '0 0 24px rgba(168,85,247,0.7)' }}>
-            PERUBAHAN VOLUME BANGUN RUANG SISI LENGKUNG
+            PERUBAHAN LUAS PERMUKAAN DAN VOLUME BANGUN RUANG SISI LENGKUNG
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
