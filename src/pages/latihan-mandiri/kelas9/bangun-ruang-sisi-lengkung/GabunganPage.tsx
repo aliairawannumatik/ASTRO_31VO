@@ -1086,7 +1086,6 @@ function AnimasiBolaTabungSVG() {
   }, []);
 
   const handleReset = () => {
-    playPopSound();
     if (animRef.current) cancelAnimationFrame(animRef.current);
     doneRef.current = false;
     droppingRef.current = false;
@@ -1096,6 +1095,15 @@ function AnimasiBolaTabungSVG() {
     setDropping(false);
     setDone(false);
   };
+
+  // Auto-loop: restart animation 2.5s after completing
+  useEffect(() => {
+    if (!done) return;
+    const timer = setTimeout(() => {
+      handleReset();
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [done]);
 
   const dropTarget = ballPos(Math.min(ballsIn, TOTAL_BALLS - 1));
   const dropCurrentY = (CYL_TOP_Y - 28) + dropProgress * (dropTarget.y - (CYL_TOP_Y - 28));
@@ -1163,14 +1171,6 @@ function AnimasiBolaTabungSVG() {
           </g>
         )}
 
-        {/* Live water level label */}
-        <line x1={CX - CYL_RX - 4} y1={wY} x2={CX - CYL_RX - 2} y2={wY}
-          stroke="#38bdf8" strokeWidth="1.2" strokeOpacity="0.9" />
-        <text x={CX - CYL_RX - 6} y={wY + 4} fill="#38bdf8" fontSize="10"
-          fontFamily="monospace" fontWeight="bold" textAnchor="end">
-          {currentWaterH.toFixed(1)} cm
-        </text>
-
         {/* Final label when done */}
         {done && (
           <>
@@ -1209,19 +1209,12 @@ function AnimasiBolaTabungSVG() {
         <text x="14" y={CYL_TOP_Y + 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r bola = 7</text>
       </svg>
 
-      {/* Controls: only reset (no start button) */}
-      <div className="flex gap-3 items-center">
-        <button onClick={handleReset}
-          className="px-4 py-1.5 rounded-xl bg-white/8 border border-white/15 text-white/60 text-xs font-bold hover:bg-white/12 transition-all cursor-pointer">
-          ↺ Ulangi
-        </button>
-        <span className="text-xs text-white/50 font-body">
-          {done
-            ? "✅ Selesai! Tinggi air = 44 cm"
-            : dropping
-              ? `⬇ Memasukkan bola ${ballsIn + 1}...`
-              : ballsIn === 0 ? "⏳ Memulai..." : "⏳ Siap bola berikutnya..."}
-        </span>
+      <div className="text-xs text-white/50 font-body text-center">
+        {done
+          ? "✅ Selesai! Tinggi air = 44 cm"
+          : dropping
+            ? `⬇ Memasukkan bola ${ballsIn + 1}...`
+            : ballsIn === 0 ? "⏳ Memulai..." : "⏳ Siap bola berikutnya..."}
       </div>
     </div>
   );
@@ -1748,10 +1741,12 @@ const GabunganPage = () => {
                           ))}
                         </div>
                         {!isRevealed ? (
+                          q.n !== 13 && (
                           <button onClick={() => handleReveal(q.n)}
                             className="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 transition-all cursor-pointer font-body">
                             Lihat Jawaban
                           </button>
+                          )
                         ) : (
                           <div className={`text-xs px-3 py-1.5 rounded-lg font-body inline-block ${isCorrect ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-300" : "bg-rose-500/15 border border-rose-500/30 text-rose-300"}`}>
                             {isCorrect ? "✅ Jawaban kamu benar!" : `❌ Jawaban benar: ${q.answer}`}
