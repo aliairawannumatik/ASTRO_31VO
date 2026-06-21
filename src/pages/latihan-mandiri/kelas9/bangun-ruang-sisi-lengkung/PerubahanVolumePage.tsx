@@ -318,7 +318,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 3, title: "Tabung – r Diperkecil Setengah", cat: "tabung",
+    n: 2, title: "Tabung – r Diperkecil Setengah", cat: "tabung",
     content: "Sebuah tabung dengan r = 6 cm dan t = 10 cm. Jika jari-jari diperkecil menjadi setengahnya (tinggi tetap), volume tabung yang baru adalah ...",
     diagram: <CompareCylSVG r1={6} t1={10} r2={3} t2={10} label1="r = 6" label2="r = 3" />,
     options: [
@@ -330,7 +330,7 @@ const mcQuestions: QMC[] = [
     answer: "B",
   },
   {
-    n: 4, title: "Tabung – r dan t Keduanya Diperbesar 2 Kali", cat: "tabung",
+    n: 3, title: "Tabung – r dan t Keduanya Diperbesar 2 Kali", cat: "tabung",
     content: "Sebuah tabung diperbesar sehingga r dan t masing-masing menjadi 2 kali semula. Volume tabung baru dibanding semula adalah ...",
     diagram: <RumusBubbleSVG lines={["r × 2,  t × 2", "V₂ = π(2r)²(2t) = 8πr²t", "V₂ / V₁ = 8 kali"]} />,
     options: [
@@ -342,7 +342,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 9, title: "Tabung – Volume Berkurang ¼", cat: "tabung",
+    n: 4, title: "Tabung – Volume Berkurang ¼", cat: "tabung",
     content: "Volume sebuah tabung berkurang menjadi ¼ semula. Jika jari-jari tidak berubah, tinggi tabung baru menjadi ...",
     diagram: <RumusBubbleSVG lines={["V₂/V₁ = t₂/t₁ = 1/4", "→ tinggi menjadi 1/4 kali"]} />,
     options: [
@@ -354,7 +354,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 10, title: "Tabung – r dan t Bersamaan Berubah", cat: "tabung",
+    n: 5, title: "Tabung – r dan t Bersamaan Berubah", cat: "tabung",
     content: "Sebuah tabung diperbesar: r menjadi 3 kali dan t menjadi 2 kali semula. Volume tabung baru menjadi ... kali semula.",
     diagram: <RumusBubbleSVG lines={["V₂/V₁ = (3r)²(2t) / (r²t)", "= 9 × 2 = 18 kali"]} />,
     options: [
@@ -367,7 +367,7 @@ const mcQuestions: QMC[] = [
   },
   /* ── KERUCUT ── */
   {
-    n: 16, title: "Kerucut – Jari-Jari Diperbesar 2 Kali", cat: "kerucut",
+    n: 6, title: "Kerucut – Jari-Jari Diperbesar 2 Kali", cat: "kerucut",
     content: "Sebuah kerucut r = 5 cm, t = 12 cm. Jika r diperbesar 2 kali dan t tetap, volume kerucut baru menjadi ... kali semula.",
     diagram: <CompareConeSVG r1={5} t1={12} r2={10} t2={12} />,
     options: [
@@ -379,7 +379,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 17, title: "Kerucut – Tinggi Diperbesar 3 Kali", cat: "kerucut",
+    n: 7, title: "Kerucut – Tinggi Diperbesar 3 Kali", cat: "kerucut",
     content: "Sebuah kerucut r = 7 cm, t = 6 cm. Jika tinggi diperbesar 3 kali dan r tetap, volume kerucut baru menjadi ... kali semula.",
     diagram: <CompareConeSVG r1={7} t1={6} r2={7} t2={18} />,
     options: [
@@ -391,7 +391,7 @@ const mcQuestions: QMC[] = [
     answer: "B",
   },
   {
-    n: 18, title: "Kerucut – r dan t Masing-Masing Dikali 2", cat: "kerucut",
+    n: 8, title: "Kerucut – r dan t Masing-Masing Dikali 2", cat: "kerucut",
     content: "Sebuah kerucut dengan r = 3 cm dan t = 4 cm. Jika r dan t masing-masing diperbesar 2 kali, volume kerucut baru menjadi ... kali semula.",
     diagram: <CompareConeSVG r1={3} t1={4} r2={6} t2={8} />,
     options: [
@@ -403,7 +403,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 19, title: "Kerucut – Perubahan Volume karena Tinggi", cat: "kerucut",
+    n: 9, title: "Kerucut – Perubahan Volume karena Tinggi", cat: "kerucut",
     content: "Kerucut A: r = 6, t = 5. Kerucut B: r = 6, t = 20. Perbandingan volume V_B : V_A adalah ...",
     diagram: <CompareConeSVG r1={6} t1={5} r2={6} t2={20} color="#fb923c" />,
     options: [
@@ -416,7 +416,7 @@ const mcQuestions: QMC[] = [
   },
   /* ── BOLA ── */
   {
-    n: 22, title: "Bola – Jari-Jari Diperbesar 2 Kali", cat: "bola",
+    n: 10, title: "Bola – Jari-Jari Diperbesar 2 Kali", cat: "bola",
     content: "Sebuah bola berjari-jari r. Jika jari-jari diperbesar 2 kali, volume bola menjadi ... kali semula.",
     diagram: <CompareSphereSVG r1={5} r2={8} />,
     options: [
@@ -428,7 +428,7 @@ const mcQuestions: QMC[] = [
     answer: "D",
   },
   {
-    n: 24, title: "Bola – Jari-Jari Diperkecil Sepertiga", cat: "bola",
+    n: 11, title: "Bola – Jari-Jari Diperkecil Sepertiga", cat: "bola",
     content: "Jika jari-jari bola diperkecil menjadi sepertiga semula, volume bola baru menjadi ...",
     diagram: <CompareSphereSVG r1={7} r2={3} />,
     options: [
@@ -440,7 +440,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 26, title: "Bola – Volume Baru dari Perbandingan r", cat: "bola",
+    n: 12, title: "Bola – Volume Baru dari Perbandingan r", cat: "bola",
     content: "Volume sebuah bola adalah 36π cm³. Jika jari-jari diperbesar menjadi 3/2 kali semula, volume bola baru adalah ...",
     diagram: <RumusBubbleSVG lines={["V₂/V₁ = (3/2)³ = 27/8", "V₂ = 27/8 × 36π = 121,5π cm³"]} color="#818cf8" />,
     options: [
@@ -452,7 +452,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 27, title: "Bola – Volume Berkurang saat r Diperkecil", cat: "bola",
+    n: 13, title: "Bola – Volume Berkurang saat r Diperkecil", cat: "bola",
     content: "Volume awal bola adalah 2.304π cm³. Jika jari-jari berkurang menjadi setengahnya, volume bola yang baru adalah ...",
     diagram: <CompareSphereSVG r1={7} r2={4} />,
     options: [
@@ -465,7 +465,7 @@ const mcQuestions: QMC[] = [
   },
   /* ── GABUNGAN ── */
   {
-    n: 30, title: "Volume Tabung Berkurang karena r Mengecil", cat: "gabungan",
+    n: 14, title: "Volume Tabung Berkurang karena r Mengecil", cat: "gabungan",
     content: "Sebuah tabung mengalami pengurangan jari-jari dari 10 cm menjadi 8 cm, tinggi tetap 15 cm. Persentase volume yang berkurang adalah … (π = 3,14)",
     diagram: <CompareCylSVG r1={10} t1={15} r2={8} t2={15} label1="r=10" label2="r=8" color="#f87171" />,
     options: [
@@ -537,7 +537,7 @@ const PerubahanVolumePage = () => {
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-lg px-4 py-2">
-              <span className="text-purple-400 text-xs font-bold">📋 13 Soal</span>
+              <span className="text-purple-400 text-xs font-bold">📋 14 Soal</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
