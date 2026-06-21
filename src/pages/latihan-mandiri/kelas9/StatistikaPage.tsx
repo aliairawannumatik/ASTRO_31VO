@@ -6,11 +6,11 @@ import { ChevronRight, BarChart2, PieChart, Target, BoxSelect, TrendingDown, Boo
 
 const subtopics = [
   {
-    label: "PENGANTAR STATISTIKA DAN PENGUMPULAN DATA",
+    label: "PENGANTAR STATISTIKA, PENGUMPULAN DATA DAN PENYAJIAN DATA",
     path: "/latihan-mandiri/kelas-9/statistika/pengantar",
-    soal: 5,
+    soal: 13,
     icon: BookOpen,
-    desc: "Populasi, sampel, jenis data, teknik pengumpulan, tabel distribusi",
+    desc: "Populasi, sampel, jenis data, teknik pengumpulan, tabel distribusi, diagram batang, garis, lingkaran",
     color: "cyan",
     gradient: "from-cyan-500/20 to-teal-500/10",
     border: "border-cyan-500/30",
@@ -19,21 +19,6 @@ const subtopics = [
     iconBg: "bg-cyan-500/20",
     iconColor: "text-cyan-400",
     accent: "from-cyan-400 to-teal-400",
-  },
-  {
-    label: "PENYAJIAN DATA",
-    path: "/latihan-mandiri/kelas-9/statistika/penyajian-data",
-    soal: 8,
-    icon: BarChart2,
-    desc: "Diagram batang, garis, lingkaran, histogram, ogive, poligon frekuensi",
-    color: "teal",
-    gradient: "from-teal-500/20 to-emerald-500/10",
-    border: "border-teal-500/30",
-    text: "text-teal-300",
-    badge: "bg-teal-500/15 text-teal-400",
-    iconBg: "bg-teal-500/20",
-    iconColor: "text-teal-400",
-    accent: "from-teal-400 to-emerald-400",
   },
   {
     label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)",
@@ -115,7 +100,7 @@ const StatistikaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 — Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
-            <span className="text-white/70 text-xs font-body">6 Sub Topik</span>
+            <span className="text-white/70 text-xs font-body">5 Sub Topik</span>
             <span className="text-white/20">·</span>
             <span className="text-cyan-400 text-xs font-bold">92 Soal Total</span>
             <span className="text-white/20">·</span>

@@ -1,8 +1,7 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "PENGANTAR STATISTIKA DAN PENGUMPULAN DATA", path: "/materi-matematika/kelas-9/statistika/pengantar", icon: "📚" },
-  { label: "PENYAJIAN DATA", path: "/materi-matematika/kelas-9/statistika/penyajian-data", icon: "📊" },
+  { label: "PENGANTAR STATISTIKA, PENGUMPULAN DATA DAN PENYAJIAN DATA", path: "/materi-matematika/kelas-9/statistika/pengantar", icon: "📚" },
   { label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)", path: "/materi-matematika/kelas-9/statistika/rata-rata", icon: "➕" },
   { label: "UKURAN PEMUSATAN DATA (MEDIAN DAN MODUS)", path: "/materi-matematika/kelas-9/statistika/median-modus", icon: "🎯" },
   { label: "UKURAN LETAK DATA (KUARTIL)", path: "/materi-matematika/kelas-9/statistika/kuartil", icon: "📐" },
