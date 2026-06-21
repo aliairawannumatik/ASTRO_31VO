@@ -121,6 +121,357 @@ function SelimutRectSVG({ color = "#22d3ee" }: { color?: string }) {
   );
 }
 
+/* ── No 11 · KOLAM RENANG ─────────────────────────────────────── */
+function KolamRenangSVG() {
+  return (
+    <svg viewBox="0 0 280 220" width="280" height="220" className="mx-auto">
+      <defs>
+        <linearGradient id="kr-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.08" />
+        </linearGradient>
+        <linearGradient id="kr-water" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.9" />
+        </linearGradient>
+        <linearGradient id="kr-wall" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#bae6fd" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="#0284c7" stopOpacity="0.15" />
+        </linearGradient>
+        <radialGradient id="kr-shine" cx="40%" cy="35%" r="55%">
+          <stop offset="0%" stopColor="white" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="white" stopOpacity="0" />
+        </radialGradient>
+        <clipPath id="kr-clip">
+          <ellipse cx="140" cy="90" rx="100" ry="32" />
+        </clipPath>
+      </defs>
+
+      {/* Pool wall cylinder */}
+      <rect x="40" y="90" width="200" height="90" fill="url(#kr-wall)" />
+      <line x1="40" y1="90" x2="40" y2="180" stroke="#38bdf8" strokeWidth="2" />
+      <line x1="240" y1="90" x2="240" y2="180" stroke="#38bdf8" strokeWidth="2" />
+
+      {/* Bottom ellipse */}
+      <ellipse cx="140" cy="180" rx="100" ry="30" fill="#0369a1" fillOpacity="0.35" stroke="#38bdf8" strokeWidth="1.8" />
+
+      {/* Water fill */}
+      <rect x="40" y="110" width="200" height="70" fill="url(#kr-water)" />
+
+      {/* Water surface ellipse */}
+      <ellipse cx="140" cy="110" rx="100" ry="28" fill="#7dd3fc" fillOpacity="0.6" stroke="#38bdf8" strokeWidth="2" />
+      {/* Shine on water */}
+      <ellipse cx="140" cy="110" rx="100" ry="28" fill="url(#kr-shine)" />
+
+      {/* Water ripple lines */}
+      <ellipse cx="140" cy="110" rx="60" ry="16" fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.4" />
+      <ellipse cx="140" cy="110" rx="30" ry="8" fill="none" stroke="white" strokeWidth="0.8" strokeOpacity="0.3" />
+      <path d="M 80 108 Q 100 103 120 108 Q 140 113 160 108 Q 180 103 200 108"
+        fill="none" stroke="white" strokeWidth="1.2" strokeOpacity="0.5" />
+      <path d="M 90 115 Q 115 109 140 115 Q 165 121 190 115"
+        fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.35" />
+
+      {/* Top ellipse rim */}
+      <ellipse cx="140" cy="90" rx="100" ry="30" fill="#bae6fd" fillOpacity="0.15" stroke="#38bdf8" strokeWidth="2" strokeDasharray="6,4" />
+
+      {/* Labels */}
+      <line x1="140" y1="90" x2="240" y2="90" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="190" y="82" fill="#38bdf8" fontSize="12" textAnchor="middle" fontFamily="monospace">r = 7 m</text>
+      <line x1="252" y1="90" x2="252" y2="180" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4,2" />
+      <line x1="247" y1="90" x2="257" y2="90" stroke="#38bdf8" strokeWidth="1.2" />
+      <line x1="247" y1="180" x2="257" y2="180" stroke="#38bdf8" strokeWidth="1.2" />
+      <text x="270" y="140" fill="#38bdf8" fontSize="12" textAnchor="middle" fontFamily="monospace">2 m</text>
+
+      {/* Title label */}
+      <text x="140" y="212" fill="#7dd3fc" fontSize="11" textAnchor="middle" fontFamily="monospace" fillOpacity="0.8">Kolam Renang</text>
+    </svg>
+  );
+}
+
+/* ── No 12 · TANGKI AIR ────────────────────────────────────────── */
+function TangkiAirSVG() {
+  return (
+    <svg viewBox="0 0 260 230" width="260" height="230" className="mx-auto">
+      <defs>
+        <linearGradient id="tk-body" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#94a3b8" stopOpacity="0.9" />
+          <stop offset="40%" stopColor="#e2e8f0" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#334155" stopOpacity="0.9" />
+        </linearGradient>
+        <linearGradient id="tk-top" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#cbd5e1" />
+          <stop offset="100%" stopColor="#64748b" />
+        </linearGradient>
+        <linearGradient id="tk-leg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#94a3b8" />
+          <stop offset="100%" stopColor="#334155" />
+        </linearGradient>
+      </defs>
+
+      {/* Support legs */}
+      <rect x="85" y="185" width="10" height="35" fill="url(#tk-leg)" rx="2" />
+      <rect x="165" y="185" width="10" height="35" fill="url(#tk-leg)" rx="2" />
+      <line x1="80" y1="210" x2="185" y2="210" stroke="#64748b" strokeWidth="2.5" strokeLinecap="round" />
+      {/* Cross brace */}
+      <line x1="85" y1="195" x2="175" y2="218" stroke="#64748b" strokeWidth="1.5" strokeOpacity="0.6" />
+      <line x1="85" y1="218" x2="175" y2="195" stroke="#64748b" strokeWidth="1.5" strokeOpacity="0.6" />
+
+      {/* Cylinder body */}
+      <rect x="70" y="52" width="120" height="135" fill="url(#tk-body)" />
+      {/* Left sheen */}
+      <rect x="70" y="52" width="12" height="135" fill="white" fillOpacity="0.2" />
+      {/* Right shadow */}
+      <rect x="178" y="52" width="12" height="135" fill="#0f172a" fillOpacity="0.2" />
+
+      {/* Bolt rings */}
+      {[100, 140, 170].map((y, i) => (
+        <g key={i}>
+          <ellipse cx="130" cy={y} rx="60" ry="7" fill="none" stroke="#64748b" strokeWidth="2" />
+          {[-40, -20, 0, 20, 40].map((dx, j) => (
+            <circle key={j} cx={130 + dx} cy={y} r="2" fill="#94a3b8" />
+          ))}
+        </g>
+      ))}
+
+      {/* Bottom ellipse */}
+      <ellipse cx="130" cy="187" rx="60" ry="16" fill="#334155" fillOpacity="0.7" stroke="#64748b" strokeWidth="1.8" />
+
+      {/* Top ellipse */}
+      <ellipse cx="130" cy="52" rx="60" ry="16" fill="url(#tk-top)" stroke="#94a3b8" strokeWidth="1.8" />
+
+      {/* Top pipe */}
+      <rect x="124" y="22" width="12" height="32" fill="#475569" stroke="#334155" strokeWidth="1" />
+      <ellipse cx="130" cy="22" rx="10" ry="4" fill="#64748b" stroke="#334155" strokeWidth="1" />
+      <rect x="118" y="18" width="24" height="7" fill="#64748b" rx="2" />
+
+      {/* Labels */}
+      <line x1="130" y1="52" x2="190" y2="52" stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="162" y="44" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="monospace">r = 3,5 m</text>
+      <line x1="200" y1="52" x2="200" y2="187" stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,2" />
+      <line x1="195" y1="52" x2="205" y2="52" stroke="#94a3b8" strokeWidth="1.2" />
+      <line x1="195" y1="187" x2="205" y2="187" stroke="#94a3b8" strokeWidth="1.2" />
+      <text x="222" y="124" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="monospace">5 m</text>
+
+      <text x="130" y="222" fill="#94a3b8" fontSize="11" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Tangki Air</text>
+    </svg>
+  );
+}
+
+/* ── No 13 · TABUNG DICAT ──────────────────────────────────────── */
+function TabungCatSVG() {
+  return (
+    <svg viewBox="0 0 270 230" width="270" height="230" className="mx-auto">
+      <defs>
+        <linearGradient id="cat-body" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.2" />
+          <stop offset="50%" stopColor="#7c3aed" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#4c1d95" stopOpacity="0.3" />
+        </linearGradient>
+        <linearGradient id="cat-paint" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#c4b5fd" stopOpacity="0.7" />
+          <stop offset="60%" stopColor="#8b5cf6" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#6d28d9" stopOpacity="0.7" />
+        </linearGradient>
+        <linearGradient id="brush-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#d97706" />
+          <stop offset="60%" stopColor="#92400e" />
+          <stop offset="100%" stopColor="#c4b5fd" />
+        </linearGradient>
+      </defs>
+
+      {/* Cylinder body (uncoated, lower half) */}
+      <rect x="70" y="50" width="120" height="140" fill="url(#cat-body)" />
+
+      {/* Painted portion (upper 2/3 - selimut cat) */}
+      <rect x="70" y="50" width="120" height="95" fill="url(#cat-paint)" />
+      {/* Paint drip effects */}
+      <path d="M 90 145 Q 88 152 90 158 Q 92 163 90 168" fill="none" stroke="#8b5cf6" strokeWidth="3" strokeLinecap="round" strokeOpacity="0.7" />
+      <path d="M 130 145 Q 128 150 131 156 Q 133 160 130 165" fill="none" stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.7" />
+      <path d="M 170 145 Q 168 153 170 159" fill="none" stroke="#8b5cf6" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.7" />
+
+      {/* Boundary line (paint edge) */}
+      <ellipse cx="130" cy="145" rx="60" ry="10" fill="none" stroke="#c4b5fd" strokeWidth="1.8" strokeDasharray="6,3" />
+
+      {/* Bottom ellipse */}
+      <ellipse cx="130" cy="190" rx="60" ry="15" fill="#4c1d95" fillOpacity="0.3" stroke="#a78bfa" strokeWidth="1.8" />
+      {/* Top ellipse */}
+      <ellipse cx="130" cy="50" rx="60" ry="15" fill="#c4b5fd" fillOpacity="0.35" stroke="#a78bfa" strokeWidth="1.8" />
+
+      {/* Paint roller / brush */}
+      <rect x="180" y="42" width="7" height="48" fill="#92400e" rx="2" />
+      <rect x="176" y="46" width="16" height="38" fill="url(#brush-grad)" rx="3" />
+      {/* Roller bristles */}
+      {[50, 56, 62, 68, 74].map((y, i) => (
+        <line key={i} x1="176" y1={y} x2="192" y2={y} stroke="#c4b5fd" strokeWidth="1.5" strokeOpacity="0.6" />
+      ))}
+      {/* Handle extension */}
+      <line x1="183" y1="42" x2="200" y2="20" stroke="#b45309" strokeWidth="3" strokeLinecap="round" />
+
+      {/* Labels */}
+      <line x1="130" y1="50" x2="190" y2="50" stroke="#a78bfa" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="157" y="42" fill="#a78bfa" fontSize="12" textAnchor="middle" fontFamily="monospace">r = 7 cm</text>
+      <line x1="44" y1="50" x2="44" y2="190" stroke="#a78bfa" strokeWidth="1.2" strokeDasharray="4,2" />
+      <line x1="39" y1="50" x2="49" y2="50" stroke="#a78bfa" strokeWidth="1.2" />
+      <line x1="39" y1="190" x2="49" y2="190" stroke="#a78bfa" strokeWidth="1.2" />
+      <text x="22" y="124" fill="#a78bfa" fontSize="12" textAnchor="middle" fontFamily="monospace">20 cm</text>
+
+      <text x="130" y="218" fill="#a78bfa" fontSize="11" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Tabung Dicat</text>
+    </svg>
+  );
+}
+
+/* ── No 14 · TONG SAMPAH ──────────────────────────────────────── */
+function TongSampahSVG() {
+  return (
+    <svg viewBox="0 0 240 230" width="240" height="230" className="mx-auto">
+      <defs>
+        <linearGradient id="ts-body" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#9ca3af" stopOpacity="0.9" />
+          <stop offset="35%" stopColor="#d1d5db" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#374151" stopOpacity="0.9" />
+        </linearGradient>
+        <linearGradient id="ts-bot" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#6b7280" />
+          <stop offset="100%" stopColor="#1f2937" />
+        </linearGradient>
+      </defs>
+
+      {/* Tong body */}
+      <rect x="55" y="45" width="130" height="155" fill="url(#ts-body)" />
+      {/* Left sheen */}
+      <rect x="55" y="45" width="13" height="155" fill="white" fillOpacity="0.18" />
+      {/* Right shadow */}
+      <rect x="172" y="45" width="13" height="155" fill="#111827" fillOpacity="0.22" />
+
+      {/* Horizontal rib bands */}
+      {[90, 130, 165].map((y, i) => (
+        <g key={i}>
+          <ellipse cx="120" cy={y} rx="65" ry="8" fill="none" stroke="#6b7280" strokeWidth="2.5" />
+        </g>
+      ))}
+
+      {/* Bottom ellipse (closed) */}
+      <ellipse cx="120" cy="200" rx="65" ry="17" fill="url(#ts-bot)" stroke="#4b5563" strokeWidth="2" />
+
+      {/* TOP — open (no lid, just rim) */}
+      <ellipse cx="120" cy="45" rx="65" ry="17" fill="#1f2937" fillOpacity="0.4" stroke="#9ca3af" strokeWidth="2.2" />
+      {/* Open top hint - dark inside */}
+      <ellipse cx="120" cy="45" rx="55" ry="12" fill="#111827" fillOpacity="0.6" />
+
+      {/* Trash icon inside */}
+      <text x="120" y="135" fill="#6b7280" fontSize="28" textAnchor="middle" fillOpacity="0.45">🗑</text>
+
+      {/* Handle (ring on side) */}
+      <path d="M 55 80 Q 40 100 55 120" fill="none" stroke="#9ca3af" strokeWidth="4" strokeLinecap="round" />
+      <path d="M 185 80 Q 200 100 185 120" fill="none" stroke="#9ca3af" strokeWidth="4" strokeLinecap="round" />
+
+      {/* Labels */}
+      <line x1="120" y1="45" x2="185" y2="45" stroke="#9ca3af" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="155" y="37" fill="#9ca3af" fontSize="11" textAnchor="middle" fontFamily="monospace">r = 21 cm</text>
+      <line x1="210" y1="45" x2="210" y2="200" stroke="#9ca3af" strokeWidth="1.2" strokeDasharray="4,2" />
+      <line x1="205" y1="45" x2="215" y2="45" stroke="#9ca3af" strokeWidth="1.2" />
+      <line x1="205" y1="200" x2="215" y2="200" stroke="#9ca3af" strokeWidth="1.2" />
+      <text x="230" y="127" fill="#9ca3af" fontSize="11" textAnchor="middle" fontFamily="monospace">60 cm</text>
+
+      <text x="120" y="222" fill="#9ca3af" fontSize="11" textAnchor="middle" fontFamily="monospace" fillOpacity="0.7">Tong Sampah (tanpa tutup)</text>
+    </svg>
+  );
+}
+
+/* ── No 15 · LILIN MENYALA ─────────────────────────────────────── */
+function LilinSVG() {
+  return (
+    <svg viewBox="0 0 200 260" width="200" height="260" className="mx-auto">
+      <defs>
+        <linearGradient id="li-body" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#fef9c3" stopOpacity="0.9" />
+          <stop offset="40%" stopColor="#fef08a" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#ca8a04" stopOpacity="0.8" />
+        </linearGradient>
+        <radialGradient id="li-flame-core" cx="50%" cy="85%" r="60%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="30%" stopColor="#fef9c3" />
+          <stop offset="70%" stopColor="#f97316" />
+          <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="li-flame-outer" cx="50%" cy="80%" r="65%">
+          <stop offset="0%" stopColor="#fef08a" stopOpacity="0.7" />
+          <stop offset="60%" stopColor="#f97316" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="li-glow" cx="50%" cy="100%" r="70%">
+          <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#f97316" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="li-melt" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#fef9c3" />
+          <stop offset="50%" stopColor="#fef08a" />
+          <stop offset="100%" stopColor="#fde047" />
+        </linearGradient>
+        <filter id="li-blur">
+          <feGaussianBlur stdDeviation="3" />
+        </filter>
+      </defs>
+
+      {/* Glow halo behind flame */}
+      <ellipse cx="100" cy="90" rx="38" ry="50" fill="url(#li-glow)" filter="url(#li-blur)" />
+
+      {/* FLAME — outer glow */}
+      <path d="M 100 118 C 78 105 72 82 80 62 C 86 48 92 38 100 28 C 108 38 114 48 120 62 C 128 82 122 105 100 118 Z"
+        fill="url(#li-flame-outer)" filter="url(#li-blur)" />
+      {/* FLAME — main */}
+      <path d="M 100 118 C 82 108 76 88 83 68 C 88 54 94 42 100 32 C 106 42 112 54 117 68 C 124 88 118 108 100 118 Z"
+        fill="url(#li-flame-core)" />
+      {/* FLAME — inner bright core */}
+      <path d="M 100 115 C 90 107 88 94 92 80 C 95 70 98 62 100 55 C 102 62 105 70 108 80 C 112 94 110 107 100 115 Z"
+        fill="white" fillOpacity="0.55" />
+      {/* Wick */}
+      <line x1="100" y1="118" x2="100" y2="128" stroke="#292524" strokeWidth="1.5" strokeLinecap="round" />
+
+      {/* Candle top (melted wax pool) */}
+      <ellipse cx="100" cy="128" rx="28" ry="7" fill="url(#li-melt)" />
+      {/* Wax drip left */}
+      <path d="M 74 130 Q 71 140 73 148 Q 75 155 73 162" fill="none" stroke="#fef08a" strokeWidth="3.5" strokeLinecap="round" strokeOpacity="0.8" />
+      {/* Wax drip right */}
+      <path d="M 126 132 Q 129 142 127 150" fill="none" stroke="#fef9c3" strokeWidth="3" strokeLinecap="round" strokeOpacity="0.7" />
+
+      {/* Candle cylinder body */}
+      <rect x="72" y="128" width="56" height="110" fill="url(#li-body)" />
+      {/* Left sheen */}
+      <rect x="72" y="128" width="7" height="110" fill="white" fillOpacity="0.25" />
+      {/* Right shadow */}
+      <rect x="121" y="128" width="7" height="110" fill="#713f12" fillOpacity="0.3" />
+
+      {/* Bottom ellipse */}
+      <ellipse cx="100" cy="238" rx="28" ry="7" fill="#ca8a04" fillOpacity="0.5" stroke="#a16207" strokeWidth="1.5" />
+      {/* Top ellipse / wax surface */}
+      <ellipse cx="100" cy="128" rx="28" ry="7" fill="none" stroke="#fde047" strokeWidth="1.2" strokeOpacity="0.6" />
+
+      {/* Candleholder base plate */}
+      <rect x="60" y="236" width="80" height="8" fill="#78716c" rx="3" />
+      <ellipse cx="100" cy="236" rx="40" ry="5" fill="#57534e" fillOpacity="0.7" />
+
+      {/* Light rays */}
+      {[[-30, -38], [30, -38], [-42, -8], [42, -8]].map(([dx, dy], i) => (
+        <line key={i}
+          x1={100 + dx * 0.4} y1={75 + dy * 0.4}
+          x2={100 + dx} y2={75 + dy}
+          stroke="#fbbf24" strokeWidth="1.2" strokeOpacity="0.5" strokeLinecap="round" />
+      ))}
+
+      {/* Labels */}
+      <line x1="100" y1="128" x2="128" y2="128" stroke="#fde047" strokeWidth="1.2" strokeDasharray="4,2" />
+      <text x="146" y="132" fill="#fde047" fontSize="11" textAnchor="middle" fontFamily="monospace">r=1,75</text>
+      <line x1="148" y1="128" x2="148" y2="238" stroke="#fde047" strokeWidth="1.2" strokeDasharray="4,2" />
+      <line x1="143" y1="128" x2="153" y2="128" stroke="#fde047" strokeWidth="1.2" />
+      <line x1="143" y1="238" x2="153" y2="238" stroke="#fde047" strokeWidth="1.2" />
+      <text x="168" y="187" fill="#fde047" fontSize="11" textAnchor="middle" fontFamily="monospace">20 cm</text>
+
+      <text x="100" y="255" fill="#fde047" fontSize="11" textAnchor="middle" fontFamily="monospace" fillOpacity="0.8">Lilin Menyala 🕯️</text>
+    </svg>
+  );
+}
+
 const questions: Q[] = [
   // ── BAGIAN A · UNSUR-UNSUR ───────────────────────────────────────────────
   Qn(1, "Konsep Dasar Tabung", {
@@ -236,7 +587,7 @@ const questions: Q[] = [
   // ── BAGIAN D · APLIKASI DI KEHIDUPAN NYATA ───────────────────────────────
   Qn(11, "Aplikasi – Kolam Renang", {
     content: "Sebuah kolam renang berbentuk tabung berdiameter 14 m dan kedalaman 2 m. Volume air yang dibutuhkan untuk mengisi kolam hingga penuh adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="7 m" h="2 m" color="#38bdf8" extraLabel="Kolam Renang" />,
+    diagram: <KolamRenangSVG />,
     choices: [
       { label: "A", text: "77 m³" },
       { label: "B", text: "154 m³" },
@@ -247,7 +598,7 @@ const questions: Q[] = [
   }),
   Qn(12, "Aplikasi – Pengisian Tangki dengan Pompa", {
     content: "Sebuah tangki berbentuk tabung dengan r = 3,5 m dan tinggi 5 m akan diisi menggunakan pompa yang mengalirkan 385 liter/menit. Waktu yang dibutuhkan untuk mengisi penuh tangki adalah ... (π = 22/7, 1 m³ = 1.000 liter)",
-    diagram: <CylinderSVG r="3,5 m" h="5 m" color="#38bdf8" extraLabel="Tangki" />,
+    diagram: <TangkiAirSVG />,
     choices: [
       { label: "A", text: "100 menit" },
       { label: "B", text: "250 menit" },
@@ -258,7 +609,7 @@ const questions: Q[] = [
   }),
   Qn(13, "Aplikasi – Biaya Cat Selimut", {
     content: "Sebuah tabung dengan r = 7 cm dan t = 20 cm akan dicat selimutnya. Jika biaya cat Rp500,00 per cm², total biaya yang diperlukan adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="7 cm" h="20 cm" color="#a78bfa" />,
+    diagram: <TabungCatSVG />,
     choices: [
       { label: "A", text: "Rp220.000" },
       { label: "B", text: "Rp330.000" },
@@ -269,7 +620,7 @@ const questions: Q[] = [
   }),
   Qn(14, "Aplikasi – Tong Sampah", {
     content: "Tong sampah berbentuk tabung tanpa tutup dengan diameter 42 cm dan tinggi 60 cm. Jika harga seng Rp25.000,00 per dm², biaya yang dibutuhkan adalah ... (π = 22/7, 1 dm² = 100 cm²)",
-    diagram: <CylinderSVG r="21 cm" h="60 cm" color="#6b7280" extraLabel="Tong Sampah" />,
+    diagram: <TongSampahSVG />,
     choices: [
       { label: "A", text: "Rp1.163.250" },
       { label: "B", text: "Rp1.980.000" },
@@ -280,6 +631,7 @@ const questions: Q[] = [
   }),
   Qn(15, "Aplikasi – Lilin Silindris Menyusut", {
     content: "Sebuah lilin berbentuk tabung memiliki diameter 3,5 cm dan tinggi 20 cm. Setelah dinyalakan, lilin menyusut 0,5 cm per jam. Volume lilin setelah 4 jam menyala adalah ... (π = 22/7)",
+    diagram: <LilinSVG />,
     choices: [
       { label: "A", text: "86,625 cm³" },
       { label: "B", text: "130,0 cm³" },
