@@ -360,20 +360,9 @@ const mcQuestions: QMC[] = [
     ],
     answer: "C",
   },
-  {
-    n: 7, title: "Luas Permukaan dari Volume Bola", cat: "lp",
-    content: "Volume sebuah bola adalah 36π cm³. Luas permukaan bola tersebut adalah ...",
-    options: [
-      { key: "A", text: "18π cm²" },
-      { key: "B", text: "27π cm²" },
-      { key: "C", text: "36π cm²" },
-      { key: "D", text: "54π cm²" },
-    ],
-    answer: "C",
-  },
   /* ── VOLUME ── */
   {
-    n: 8, title: "Volume Bola – Diameter 21 cm", cat: "vol",
+    n: 7, title: "Volume Bola – Diameter 21 cm", cat: "vol",
     content: "Sebuah bola memiliki diameter 21 cm. Volume bola tersebut adalah ... (π = 22/7)",
     diagram: <SphereSVG r="10,5 cm" />,
     options: [
@@ -385,7 +374,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 9, title: "Perbandingan Volume Dua Bola", cat: "vol",
+    n: 8, title: "Perbandingan Volume Dua Bola", cat: "vol",
     content: "Dua buah bola memiliki jari-jari masing-masing 3 cm dan 6 cm. Perbandingan volume bola pertama terhadap bola kedua adalah ...",
     options: [
       { key: "A", text: "1 : 4" },
@@ -396,7 +385,7 @@ const mcQuestions: QMC[] = [
     answer: "C",
   },
   {
-    n: 10, title: "Perbandingan Volume Tabung, Bola, Kerucut", cat: "vol",
+    n: 9, title: "Perbandingan Volume Tabung, Bola, Kerucut", cat: "vol",
     content: "Sebuah tabung, bola, dan kerucut memiliki jari-jari dan tinggi yang sama (tinggi = 2r). Perbandingan volume tabung : bola : kerucut adalah ...",
     diagram: <PerbandinganBangunSVG />,
     options: [
@@ -404,6 +393,17 @@ const mcQuestions: QMC[] = [
       { key: "B", text: "2 : 1 : 3" },
       { key: "C", text: "3 : 2 : 1" },
       { key: "D", text: "3 : 1 : 2" },
+    ],
+    answer: "C",
+  },
+  {
+    n: 10, title: "Luas Permukaan dari Volume Bola", cat: "lp",
+    content: "Volume sebuah bola adalah 36π cm³. Luas permukaan bola tersebut adalah ...",
+    options: [
+      { key: "A", text: "18π cm²" },
+      { key: "B", text: "27π cm²" },
+      { key: "C", text: "36π cm²" },
+      { key: "D", text: "54π cm²" },
     ],
     answer: "C",
   },
