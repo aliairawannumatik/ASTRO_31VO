@@ -38,7 +38,7 @@ const subtopics = [
   {
     label: "UKURAN PEMUSATAN DATA (MEDIAN DAN MODUS)",
     path: "/latihan-mandiri/kelas-9/statistika/median-modus",
-    soal: 16,
+    soal: 10,
     icon: Target,
     desc: "Median dan modus data tunggal dan berkelompok, interpretasi",
     color: "violet",
