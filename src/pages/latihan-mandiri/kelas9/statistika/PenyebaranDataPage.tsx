@@ -107,6 +107,49 @@ const DiagramBatang27 = () => {
   );
 };
 
+// soal 8 — diagram batang, n=25, tanya jangkauan + kuartil
+const DiagramBatangJangkauan = () => {
+  const bars = [
+    { label:"50", value:2,  color:"#c2410c" },
+    { label:"60", value:5,  color:"#ea580c" },
+    { label:"70", value:8,  color:"#fb923c" },
+    { label:"80", value:7,  color:"#ea580c" },
+    { label:"90", value:3,  color:"#c2410c" },
+  ];
+  const maxVal = 10, chartH = 100, x0 = 48, y0 = 28, y1 = y0+chartH, barW = 34, gap = 18;
+  return (
+    <svg width="320" height="178" viewBox="0 0 320 178" className="mx-auto">
+      <rect x="2" y="2" width="316" height="174" rx="10" fill="#7c2d12" fillOpacity="0.2" stroke="#fb923c" strokeWidth="1.5"/>
+      <text x="160" y="16" fill="#fb923c" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai Ujian Siswa (n = 25)</text>
+      <line x1={x0} y1={y0} x2={x0} y2={y1} stroke="#fb923c" strokeWidth="1.5"/>
+      <line x1={x0} y1={y1} x2="315" y2={y1} stroke="#fb923c" strokeWidth="1.5"/>
+      {[0,2,4,6,8,10].map((v,i)=>{
+        const gy = y1-(v/maxVal)*chartH;
+        return (
+          <g key={i}>
+            <line x1={x0-3} y1={gy} x2={x0} y2={gy} stroke="#fb923c" strokeWidth="1"/>
+            <line x1={x0} y1={gy} x2="315" y2={gy} stroke="#fb923c" strokeWidth="0.4" strokeOpacity="0.3"/>
+            <text x={x0-5} y={gy+3} fill="#fdba74" fontSize="7" textAnchor="end">{v}</text>
+          </g>
+        );
+      })}
+      {bars.map((b,i)=>{
+        const bh = (b.value/maxVal)*chartH;
+        const bx = x0+10+i*(barW+gap);
+        const by = y1-bh;
+        return (
+          <g key={i}>
+            <rect x={bx} y={by} width={barW} height={bh} fill={b.color} fillOpacity="0.85" rx="3"/>
+            <text x={bx+barW/2} y={by-4} fill="#fed7aa" fontSize="8" textAnchor="middle">{b.value}</text>
+            <text x={bx+barW/2} y={y1+13} fill="#fdba74" fontSize="9" textAnchor="middle">{b.label}</text>
+          </g>
+        );
+      })}
+      <text x="190" y="170" fill="#fdba74" fontSize="8" textAnchor="middle">Nilai Ujian</text>
+    </svg>
+  );
+};
+
 // soal 2 — tabel frekuensi vertikal, tanya jangkauan
 const TabelFrekuensiJangkauan = () => {
   const rows = [["40","2"],["50","5"],["60","8"],["70","6"],["80","3"]];
@@ -157,10 +200,14 @@ const questions: Q[] = [
     diagram: <DiagramBatang27 />,
     content: "Diagram batang di atas menunjukkan distribusi nilai rapor 27 siswa. Tentukan Q\u2081, Q\u2082, Q\u2083, Q\u1D63, dan Q\u1D48 dari data tersebut!",
   }),
-  Qn(8, "Varians dan Simpangan Baku – UN", {
+  Qn(8, "Jangkauan dan Kuartil dari Diagram Batang – UN", {
+    diagram: <DiagramBatangJangkauan />,
+    content: "Diagram batang di atas menunjukkan distribusi nilai ujian 25 siswa. Tentukan jangkauan, Q\u2081, Q\u2082, Q\u2083, Q\u1D63, dan Q\u1D48 dari data tersebut!",
+  }),
+  Qn(9, "Varians dan Simpangan Baku – UN", {
     content: "Data nilai ulangan 5 siswa: 6, 2, 8, 4, 5. Tentukan varians (s\u00B2) dan simpangan baku (s) dari data tersebut!",
   }),
-  Qn(9, "Simpangan Rata-Rata – ANBK", {
+  Qn(10, "Simpangan Rata-Rata – ANBK", {
     content: "Data nilai ulangan 5 siswa: 8, 4, 6, 7, 5. Tentukan rata-rata dan simpangan rata-rata (SR) dari data tersebut!",
   }),
 ];
@@ -185,7 +232,7 @@ const PenyebaranDataPage = () => {
           </p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 9 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 10 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
