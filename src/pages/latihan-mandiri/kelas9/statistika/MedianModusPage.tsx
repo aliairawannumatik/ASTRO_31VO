@@ -8,6 +8,7 @@ import { InlineMath } from 'react-katex';
 type Q = { n: number; title: string; content: string; mathContent?: string; diagram?: React.ReactNode };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
+// soal 5 — freq 75:10, freq 85:7
 const TabelModusFreq = () => (
   <svg width="300" height="150" viewBox="0 0 300 150" className="mx-auto">
     <rect x="4" y="4" width="292" height="142" rx="10" fill="#4c1d95" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="1.5" />
@@ -16,19 +17,20 @@ const TabelModusFreq = () => (
     <text x="80" y="38" fill="#c4b5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Nilai</text>
     <text x="180" y="38" fill="#c4b5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Frekuensi</text>
     {[
-      ["65","4"],["70","7"],["75","12"],["80","9"],["85","5"],["90","3"],
+      ["65","4"],["70","7"],["75","10"],["80","9"],["85","7"],["90","3"],
     ].map(([v,f], i) => (
       <g key={i}>
         <rect x="10" y={45+i*16} width="272" height="15"
-          fill={f==="12" ? "#7c3aed" : i%2===0 ? "#2e1065" : "transparent"}
-          fillOpacity={f==="12" ? 0.4 : 0.2} />
-        <text x="80" y={56+i*16} fill={f==="12"?"#f5f3ff":"#ddd6fe"} fontSize="9" textAnchor="middle" fontWeight={f==="12"?"bold":"normal"}>{v}</text>
-        <text x="180" y={56+i*16} fill={f==="12"?"#a78bfa":"#c4b5fd"} fontSize="9" textAnchor="middle" fontWeight={f==="12"?"bold":"normal"}>{f}</text>
+          fill={f==="10" && v==="75" ? "#7c3aed" : i%2===0 ? "#2e1065" : "transparent"}
+          fillOpacity={f==="10" && v==="75" ? 0.4 : 0.2} />
+        <text x="80" y={56+i*16} fill={f==="10"&&v==="75"?"#f5f3ff":"#ddd6fe"} fontSize="9" textAnchor="middle" fontWeight={f==="10"&&v==="75"?"bold":"normal"}>{v}</text>
+        <text x="180" y={56+i*16} fill={f==="10"&&v==="75"?"#a78bfa":"#c4b5fd"} fontSize="9" textAnchor="middle" fontWeight={f==="10"&&v==="75"?"bold":"normal"}>{f}</text>
       </g>
     ))}
   </svg>
 );
 
+// soal 4
 const TabelFrekuensiKumulatif = () => {
   const rows = [
     ["60","2","2"],
@@ -59,6 +61,7 @@ const TabelFrekuensiKumulatif = () => {
   );
 };
 
+// soal 7 — fix: y0=32 agar angka 20 tidak bertabrakan dengan judul
 const DiagramSepatuBar = () => {
   const bars = [
     { label: "39", value: 5,  color: "#6d28d9" },
@@ -67,11 +70,11 @@ const DiagramSepatuBar = () => {
     { label: "42", value: 15, color: "#8b5cf6" },
     { label: "43", value: 8,  color: "#7c3aed" },
   ];
-  const maxVal = 20, chartH = 108, x0 = 50, y0 = 20, y1 = y0 + chartH, barW = 34, gap = 18;
+  const maxVal = 20, chartH = 106, x0 = 50, y0 = 32, y1 = y0 + chartH, barW = 34, gap = 18;
   return (
-    <svg width="320" height="175" viewBox="0 0 320 175" className="mx-auto">
-      <rect x="2" y="2" width="316" height="171" rx="10" fill="#4c1d95" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="1.5" />
-      <text x="160" y="15" fill="#a78bfa" fontSize="10" textAnchor="middle" fontWeight="bold">Penjualan Sepatu (pasang)</text>
+    <svg width="320" height="182" viewBox="0 0 320 182" className="mx-auto">
+      <rect x="2" y="2" width="316" height="178" rx="10" fill="#4c1d95" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="1.5" />
+      <text x="160" y="16" fill="#a78bfa" fontSize="10" textAnchor="middle" fontWeight="bold">Penjualan Sepatu (pasang)</text>
       <line x1={x0} y1={y0} x2={x0} y2={y1} stroke="#a78bfa" strokeWidth="1.5" />
       <line x1={x0} y1={y1} x2="315" y2={y1} stroke="#a78bfa" strokeWidth="1.5" />
       {[0,5,10,15,20].map((v,i) => {
@@ -96,24 +99,25 @@ const DiagramSepatuBar = () => {
           </g>
         );
       })}
-      <text x="185" y="168" fill="#94a3b8" fontSize="8" textAnchor="middle">Ukuran Sepatu</text>
+      <text x="185" y="175" fill="#94a3b8" fontSize="8" textAnchor="middle">Ukuran Sepatu</text>
     </svg>
   );
 };
 
+// soal 10 — data baru (nilai rapor), fix collision, berbeda dari soal 7
 const DiagramBatangNilai = () => {
   const bars = [
-    { label: "6",  value: 8,  color: "#6d28d9" },
-    { label: "7",  value: 12, color: "#7c3aed" },
-    { label: "8",  value: 20, color: "#a78bfa" },
-    { label: "9",  value: 15, color: "#8b5cf6" },
-    { label: "10", value: 5,  color: "#6d28d9" },
+    { label: "70", value: 5,  color: "#6d28d9" },
+    { label: "75", value: 12, color: "#7c3aed" },
+    { label: "80", value: 20, color: "#a78bfa" },
+    { label: "85", value: 9,  color: "#8b5cf6" },
+    { label: "90", value: 4,  color: "#6d28d9" },
   ];
-  const maxVal = 20, chartH = 108, x0 = 55, y0 = 20, y1 = y0 + chartH, barW = 34, gap = 16;
+  const maxVal = 20, chartH = 106, x0 = 55, y0 = 32, y1 = y0 + chartH, barW = 34, gap = 16;
   return (
-    <svg width="320" height="175" viewBox="0 0 320 175" className="mx-auto">
-      <rect x="2" y="2" width="316" height="171" rx="10" fill="#4c1d95" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="1.5" />
-      <text x="160" y="15" fill="#a78bfa" fontSize="10" textAnchor="middle" fontWeight="bold">Diagram Batang Nilai Ulangan</text>
+    <svg width="320" height="182" viewBox="0 0 320 182" className="mx-auto">
+      <rect x="2" y="2" width="316" height="178" rx="10" fill="#4c1d95" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="1.5" />
+      <text x="160" y="16" fill="#a78bfa" fontSize="10" textAnchor="middle" fontWeight="bold">Distribusi Nilai Rapor Siswa</text>
       <line x1={x0} y1={y0} x2={x0} y2={y1} stroke="#a78bfa" strokeWidth="1.5" />
       <line x1={x0} y1={y1} x2="315" y2={y1} stroke="#a78bfa" strokeWidth="1.5" />
       {[0,5,10,15,20].map((v,i) => {
@@ -138,7 +142,7 @@ const DiagramBatangNilai = () => {
           </g>
         );
       })}
-      <text x="185" y="168" fill="#94a3b8" fontSize="8" textAnchor="middle">Nilai</text>
+      <text x="190" y="175" fill="#94a3b8" fontSize="8" textAnchor="middle">Nilai Rapor</text>
     </svg>
   );
 };
@@ -150,19 +154,19 @@ const questions: Q[] = [
   Qn(2, "Median dan Modus Data Genap – ANBK", {
     content: "Delapan siswa mendapat nilai ulangan sebagai berikut: 85, 70, 80, 75, 80, 90, 95, 80. Tentukan median dan modus dari nilai kedelapan siswa tersebut!",
   }),
-  Qn(3, "Modus dan Median dari Tabel Frekuensi – UN", {
+  Qn(3, "Median dan Modus dari Data Survei – ANBK", {
+    content: "Nilai hasil tes sejumlah siswa: 72, 85, 68, 72, 90, 78, 72, 85, 72, 80, 65. Tentukan median dan modus dari data tersebut!",
+  }),
+  Qn(4, "Median dan Modus dari Tabel Frekuensi Kumulatif – TKA", {
+    diagram: <TabelFrekuensiKumulatif />,
+    content: "Tabel di atas menunjukkan distribusi nilai ujian sejumlah siswa beserta frekuensi kumulatifnya. Tentukan median dan modus dari data nilai ujian tersebut!",
+  }),
+  Qn(5, "Modus dan Median dari Tabel Frekuensi – UN", {
     diagram: <TabelModusFreq />,
     content: "Tabel di atas menunjukkan frekuensi nilai ulangan matematika sejumlah siswa. Tentukan modus dan median dari data pada tabel tersebut!",
   }),
-  Qn(4, "Median dari Tabel Frekuensi – TKA", {
-    diagram: <TabelFrekuensiKumulatif />,
-    content: "Tabel di atas menunjukkan distribusi nilai ujian 31 siswa beserta frekuensi kumulatifnya. Tentukan median dari data nilai ujian tersebut!",
-  }),
-  Qn(5, "Menentukan Nilai Data dari Median – UN", {
+  Qn(6, "Menentukan Nilai Data dari Median – UN", {
     content: "Lima data: 10, 4, a, 12, 6. Diketahui median dari kelima data tersebut adalah 8. Tentukan nilai a!",
-  }),
-  Qn(6, "Median dan Modus dari Data Survei – ANBK", {
-    content: "Nilai hasil tes 11 siswa: 72, 85, 68, 72, 90, 78, 72, 85, 72, 80, 65. Tentukan median dan modus dari data tersebut!",
   }),
   Qn(7, "Modus dalam Kehidupan Nyata – TKA", {
     diagram: <DiagramSepatuBar />,
@@ -176,7 +180,7 @@ const questions: Q[] = [
   }),
   Qn(10, "Modus dan Median dari Diagram Batang – UN", {
     diagram: <DiagramBatangNilai />,
-    content: "Diagram batang di atas menunjukkan distribusi nilai ulangan sejumlah siswa. Tentukan modus dan median dari data tersebut!",
+    content: "Diagram batang di atas menunjukkan distribusi nilai rapor sejumlah siswa. Tentukan modus dan median dari data tersebut!",
   }),
 ];
 
