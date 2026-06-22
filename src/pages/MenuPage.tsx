@@ -30,7 +30,7 @@ const menuItems = [
   { label: "PETUNJUK PENGGUNAAN", icon: Info, path: "/petunjuk", desc: "Panduan penggunaan" },
   { label: "RUANG UNTUK GURU", icon: GraduationCap, path: "/ruang-untuk-guru", desc: "Ruang khusus untuk para pendidik" },
   { label: "BUKU ANIMASI MATEMATIKA", icon: BookOpen, path: "/materi-matematika", desc: "Pelajari materi matematika lengkap" },
-  { label: "TUGAS / LATIHAN MANDIRI", icon: ClipboardList, path: "/latihan-mandiri", desc: "Latihan soal per topik" },
+  { label: "TUGAS - LATIHAN MANDIRI", icon: ClipboardList, path: "/latihan-mandiri", desc: "Latihan soal per topik" },
   { label: "MATH GAME ARENA", icon: Gamepad2, path: "/math-game-arena", desc: "Bermain game matematika interaktif" },
   { label: "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", icon: Bot, path: "/chat-ai", desc: "Tanya jawab dengan AI matematika" },
   { label: "LKPD", icon: ClipboardCheck, path: "/lkpd", desc: "Lembar kerja interaktif dan berskor" },

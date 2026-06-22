@@ -197,7 +197,7 @@ const MedianModusPage = () => {
             UKURAN PEMUSATAN DATA
           </h1>
           <p className="text-violet-200/70 text-sm text-center font-body mb-1">Median dan Modus</p>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
             <span className="text-violet-400 text-xs font-bold">📋 16 Soal</span>
             <span className="text-white/30 text-xs">·</span>

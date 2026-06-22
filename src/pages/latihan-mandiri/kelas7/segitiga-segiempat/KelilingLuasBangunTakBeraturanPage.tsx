@@ -143,7 +143,7 @@ const KelilingLuasBangunTakBeraturanLatihanPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
             KELILING &amp; LUAS BANGUN TAK BERATURAN
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · Latihan Mandiri · Segitiga dan Segiempat</p>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · Tugas - Latihan Mandiri · Segitiga dan Segiempat</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>

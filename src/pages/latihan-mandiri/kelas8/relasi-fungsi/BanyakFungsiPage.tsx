@@ -136,7 +136,7 @@ const BanyakFungsiPage = () => {
             style={{ textShadow: '0 0 20px rgba(251,146,60,0.7)' }}>
             BANYAK FUNGSI DAN KORESPONDENSI SATU-SATU
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
             <span className="text-orange-400 text-xs font-bold">📋 11 Soal</span>
             <span className="text-white/30 text-xs">·</span>

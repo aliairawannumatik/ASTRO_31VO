@@ -319,7 +319,7 @@ const GSPLPage = () => {
             style={{ textShadow: '0 0 20px rgba(56,189,248,0.7)' }}>
             GARIS SINGGUNG PERSEKUTUAN LUAR (GSPL)
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Garis Singgung Lingkaran · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Garis Singgung Lingkaran · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
             <span className="text-cyan-400 text-xs font-bold">📋 11 Soal</span>
             <span className="text-white/30 text-xs">·</span>

@@ -87,7 +87,7 @@ const SPLDVPage = () => {
             style={{ color: "#a78bfa", textShadow: "0 0 24px #a78bfa88" }}>
             SISTEM PERSAMAAN LINEAR DUA VARIABEL
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Latihan Mandiri · 7 Sub Topik · 128 Soal UN/ANBK/TKA</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Tugas - Latihan Mandiri · 7 Sub Topik · 128 Soal UN/ANBK/TKA</p>
         </div>
 
         <div className="flex flex-col gap-3 animate-slide-up">

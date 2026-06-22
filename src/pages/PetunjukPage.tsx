@@ -91,9 +91,9 @@ const MateriMockup = () => (
 );
 
 const LatihanMockup = () => (
-  <MockupFrame title="LATIHAN MANDIRI" accentColor="text-yellow-400">
+  <MockupFrame title="TUGAS - LATIHAN MANDIRI" accentColor="text-yellow-400">
     <div className="p-3 space-y-2">
-      <p className="text-[9px] text-yellow-300 font-bold text-center">LATIHAN MANDIRI</p>
+      <p className="text-[9px] text-yellow-300 font-bold text-center">TUGAS - LATIHAN MANDIRI</p>
       {["KELAS 7", "KELAS 8", "KELAS 9"].map((k) => (
         <div key={k} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
           <div className="flex items-center gap-1.5">
@@ -464,13 +464,13 @@ const slides: Slide[] = [
   },
   {
     id: 4,
-    title: "Latihan Mandiri",
+    title: "Tugas - Latihan Mandiri",
     icon: <ClipboardList className="w-8 h-8" />,
     color: "text-yellow-400",
     bgGradient: "from-yellow-900/20 to-amber-900/20",
     description: "Latihan soal per topik untuk menguji pemahaman kamu. Tersedia soal latihan untuk setiap bab dengan langsung diberikan jawaban dan pembahasannya.",
     steps: [
-      "Pilih 'LATIHAN MANDIRI' dari Menu Utama",
+      "Pilih 'TUGAS - LATIHAN MANDIRI' dari Menu Utama",
       "Pilih kelas (7, 8, atau 9) yang sesuai",
       "Pilih topik/bab yang ingin dilatih",
       "Kerjakan soal dan periksa jawabanmu",

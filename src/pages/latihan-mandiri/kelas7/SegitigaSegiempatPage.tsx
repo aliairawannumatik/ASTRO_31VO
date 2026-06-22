@@ -24,7 +24,7 @@ const SegitigaSegiempatPage = () => {
             <span className="text-3xl">📐</span>
           </div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-rose-300 text-center mb-1" style={{ textShadow: '0 0 24px rgba(251,113,133,0.7)' }}>SEGITIGA DAN SEGIEMPAT</h1>
-          <p className="text-white/50 text-xs text-center font-body mb-1">Kelas 7 · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-1">Kelas 7 · Tugas - Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2 mt-2">
             <span className="text-yellow-400 text-sm">⭐</span>
             <span className="text-white/70 text-xs font-body">70 Soal Total · UN / TKA / ANBK</span>

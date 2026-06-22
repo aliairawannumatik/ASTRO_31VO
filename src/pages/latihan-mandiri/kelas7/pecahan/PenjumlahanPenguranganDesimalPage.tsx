@@ -289,7 +289,7 @@ const PenjumlahanPenguranganDesimalPage = () => {
             <br />
             <span className="text-green-300">BENTUK DESIMAL</span>
           </h1>
-          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · Pecahan · Latihan Mandiri</p>
+          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · Pecahan · Tugas - Latihan Mandiri</p>
           <div className="flex items-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">8 Soal Essay</span>
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-green-500/10 border border-green-400/20 text-green-400 font-body">✦ Kelas 7</span>

@@ -26,7 +26,7 @@ const LatihanMandiriKelas7Page = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <GraduationCap className="w-12 h-12 text-accent mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          LATIHAN MANDIRI - KELAS 7
+          TUGAS - LATIHAN MANDIRI - KELAS 7
         </h1>
         <p className="text-white/60 text-sm text-center mb-8 font-body">
           Pilih topik untuk memulai latihan
@@ -57,7 +57,7 @@ const LatihanMandiriKelas7Page = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            Kembali ke Latihan Mandiri
+            Kembali ke Tugas - Latihan Mandiri
           </button>
         </div>
       </div>

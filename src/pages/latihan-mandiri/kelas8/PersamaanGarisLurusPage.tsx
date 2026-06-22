@@ -59,7 +59,7 @@ const PersamaanGarisLurusPage = () => {
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
           PERSAMAAN GARIS LURUS
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Latihan Mandiri · 5 Sub Topik · 81 Soal Total</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Tugas - Latihan Mandiri · 5 Sub Topik · 81 Soal Total</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((sub, i) => {

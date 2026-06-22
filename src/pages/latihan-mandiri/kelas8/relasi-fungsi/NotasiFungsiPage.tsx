@@ -210,7 +210,7 @@ const NotasiFungsiPage = () => {
             style={{ textShadow: '0 0 20px rgba(56,189,248,0.7)' }}>
             NOTASI DAN RUMUS FUNGSI
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
             <span className="text-sky-400 text-xs font-bold">📋 19 Soal</span>
             <span className="text-white/30 text-xs">·</span>

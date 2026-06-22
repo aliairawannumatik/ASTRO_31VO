@@ -110,7 +110,7 @@ const KuartilPage = () => {
             UKURAN LETAK DATA
           </h1>
           <p className="text-green-200/70 text-sm text-center font-body mb-1">Kuartil</p>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-lg px-4 py-2">
             <span className="text-green-400 text-xs font-bold">📋 12 Soal</span>
             <span className="text-white/30 text-xs">·</span>

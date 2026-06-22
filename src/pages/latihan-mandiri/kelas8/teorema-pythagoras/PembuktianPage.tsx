@@ -78,7 +78,7 @@ const PembuktianPage = () => {
             PEMBUKTIAN TEOREMA PYTHAGORAS
           </h1>
         </div>
-        <p className="text-white/40 text-xs text-center mb-1 font-body">Kelas 8 · Latihan Mandiri · 3 Soal</p>
+        <p className="text-white/40 text-xs text-center mb-1 font-body">Kelas 8 · Tugas - Latihan Mandiri · 3 Soal</p>
         <div className="flex justify-center gap-2 mb-6 flex-wrap">
           {badge("UN/USBN", "#34d399")}
           {badge("ANBK", "#60a5fa")}

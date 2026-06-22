@@ -67,7 +67,7 @@ const TeoremaPythagorasPage = () => {
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
           TEOREMA PYTHAGORAS
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Latihan Mandiri · 6 Sub Topik · 44 Soal Total</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Tugas - Latihan Mandiri · 6 Sub Topik · 44 Soal Total</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((sub, i) => {

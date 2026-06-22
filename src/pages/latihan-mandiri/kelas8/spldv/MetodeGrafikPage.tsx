@@ -250,7 +250,7 @@ const MetodeGrafikPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             PENYELESAIAN SPLDV — METODE GRAFIK
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Latihan Mandiri · 21 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Tugas - Latihan Mandiri · 21 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>

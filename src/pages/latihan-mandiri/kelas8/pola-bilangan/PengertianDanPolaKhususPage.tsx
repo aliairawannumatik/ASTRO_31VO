@@ -351,7 +351,7 @@ const PengertianDanPolaKhususPage = () => {
             <br />
             <span className="text-purple-300">DAN POLA-POLA KHUSUS</span>
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Pola Bilangan · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Pola Bilangan · Tugas - Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-cyan-400 text-xs font-bold">📋 12 Soal</span>
             <span className="text-white/30 text-xs">+</span>

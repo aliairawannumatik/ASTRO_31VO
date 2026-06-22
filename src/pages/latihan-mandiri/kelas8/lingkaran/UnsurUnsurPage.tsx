@@ -81,7 +81,7 @@ const UnsurUnsurLingkaranPage = () => {
             style={{ textShadow: '0 0 20px rgba(34,211,238,0.7)' }}>
             UNSUR-UNSUR LINGKARAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
             <span className="text-cyan-400 text-xs font-bold">📋 2 Soal</span>
             <span className="text-white/30 text-xs">·</span>

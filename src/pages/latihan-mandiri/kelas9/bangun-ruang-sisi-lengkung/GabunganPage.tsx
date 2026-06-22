@@ -1635,7 +1635,7 @@ const GabunganPage = () => {
             style={{ textShadow: '0 0 24px rgba(16,185,129,0.7)' }}>
             BANGUN RUANG SISI LENGKUNG GABUNGAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
               <span className="text-emerald-400 text-xs font-bold">📋 15 Soal</span>

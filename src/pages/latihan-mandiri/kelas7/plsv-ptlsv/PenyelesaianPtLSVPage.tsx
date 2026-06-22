@@ -245,7 +245,7 @@ const PenyelesaianPtLSVPage = () => {
             style={{ textShadow: '0 0 32px rgba(244,63,94,0.5)' }}>
             LINEAR SATU VARIABEL
           </h1>
-          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · PLSV & PtLSV · Latihan Mandiri</p>
+          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · PLSV & PtLSV · Tugas - Latihan Mandiri</p>
           <div className="flex items-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">75 Soal</span>
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-rose-500/10 border border-rose-400/20 text-rose-400 font-body">✦ Kelas 7</span>

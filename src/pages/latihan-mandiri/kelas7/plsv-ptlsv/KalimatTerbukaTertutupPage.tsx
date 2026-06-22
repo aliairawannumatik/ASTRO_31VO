@@ -228,7 +228,7 @@ const KalimatTerbukaTertutupPage = () => {
             KALIMAT TERBUKA DAN TERTUTUP
           </h1>
           <p className="text-white/40 text-xs text-center font-body mt-1">(Pernyataan)</p>
-          <p className="text-white/40 text-xs text-center font-body mt-1">Kelas 7 · PLSV & PtLSV · Latihan Mandiri</p>
+          <p className="text-white/40 text-xs text-center font-body mt-1">Kelas 7 · PLSV & PtLSV · Tugas - Latihan Mandiri</p>
           <div className="flex items-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">5 Soal Essay</span>
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-orange-500/10 border border-orange-400/20 text-orange-400 font-body">✦ Kelas 7</span>

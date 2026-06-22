@@ -210,7 +210,7 @@ const RataRataPage = () => {
             UKURAN PEMUSATAN DATA
           </h1>
           <p className="text-blue-200/70 text-sm text-center font-body mb-1">Rata-Rata dan Rata-Rata Gabungan</p>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-2">
             <span className="text-blue-400 text-xs font-bold">📋 17 Soal</span>
             <span className="text-white/30 text-xs">·</span>

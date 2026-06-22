@@ -93,7 +93,7 @@ const BangunRuangSisiLengkungPage = () => {
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center">
             BANGUN RUANG SISI LENGKUNG
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Tugas - Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
             <span className="text-white/70 text-xs font-body">75 Soal Total · Diagram Visual & Soal Terapan</span>

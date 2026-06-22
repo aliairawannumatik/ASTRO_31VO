@@ -110,7 +110,7 @@ const LuasSegitigaLatihanPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
             LUAS SEGITIGA
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · Latihan Mandiri · Segitiga dan Segiempat</p>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · Tugas - Latihan Mandiri · Segitiga dan Segiempat</p>
         </div>
 
         {/* Info box */}

@@ -82,7 +82,7 @@ const BilanganBerpangkatPage = () => {
             style={{ textShadow: '0 0 24px rgba(56,189,248,0.6)' }}>
             BILANGAN BERPANGKAT
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Tugas - Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
             <span className="text-white/70 text-xs font-body">119 Soal Total · LaTeX & Diagram</span>
