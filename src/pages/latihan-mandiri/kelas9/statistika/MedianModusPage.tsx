@@ -108,19 +108,19 @@ const DiagramSepatuBar = () => {
 const DiagramBatangNilai = () => {
   const bars = [
     { label: "70", value: 5,  color: "#6d28d9" },
-    { label: "75", value: 12, color: "#7c3aed" },
-    { label: "80", value: 20, color: "#a78bfa" },
-    { label: "85", value: 9,  color: "#8b5cf6" },
-    { label: "90", value: 4,  color: "#6d28d9" },
+    { label: "75", value: 7,  color: "#7c3aed" },
+    { label: "80", value: 13, color: "#a78bfa" },
+    { label: "85", value: 13, color: "#8b5cf6" },
+    { label: "90", value: 12, color: "#6d28d9" },
   ];
-  const maxVal = 20, chartH = 106, x0 = 55, y0 = 32, y1 = y0 + chartH, barW = 34, gap = 16;
+  const maxVal = 15, chartH = 106, x0 = 55, y0 = 32, y1 = y0 + chartH, barW = 34, gap = 16;
   return (
     <svg width="320" height="182" viewBox="0 0 320 182" className="mx-auto">
       <rect x="2" y="2" width="316" height="178" rx="10" fill="#4c1d95" fillOpacity="0.2" stroke="#a78bfa" strokeWidth="1.5" />
       <text x="160" y="16" fill="#a78bfa" fontSize="10" textAnchor="middle" fontWeight="bold">Distribusi Nilai Rapor Siswa</text>
       <line x1={x0} y1={y0} x2={x0} y2={y1} stroke="#a78bfa" strokeWidth="1.5" />
       <line x1={x0} y1={y1} x2="315" y2={y1} stroke="#a78bfa" strokeWidth="1.5" />
-      {[0,5,10,15,20].map((v,i) => {
+      {[0,5,10,15].map((v,i) => {
         const gy = y1 - (v / maxVal) * chartH;
         return (
           <g key={i}>
