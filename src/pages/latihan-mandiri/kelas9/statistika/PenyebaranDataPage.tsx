@@ -107,32 +107,60 @@ const DiagramBatang27 = () => {
   );
 };
 
+// soal 2 — tabel frekuensi vertikal, tanya jangkauan
+const TabelFrekuensiJangkauan = () => {
+  const rows = [["40","2"],["50","5"],["60","8"],["70","6"],["80","3"]];
+  return (
+    <svg width="240" height="175" viewBox="0 0 240 175" className="mx-auto">
+      <rect x="4" y="4" width="232" height="167" rx="10" fill="#7c2d12" fillOpacity="0.2" stroke="#fb923c" strokeWidth="1.5"/>
+      <text x="120" y="18" fill="#fb923c" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai Ulangan Matematika</text>
+      <rect x="10" y="24" width="212" height="18" rx="3" fill="#c2410c" fillOpacity="0.4"/>
+      <text x="70" y="36" fill="#fed7aa" fontSize="9" textAnchor="middle" fontWeight="bold">Nilai</text>
+      <text x="165" y="36" fill="#fed7aa" fontSize="9" textAnchor="middle" fontWeight="bold">Frekuensi</text>
+      {rows.map(([v,f],i)=>(
+        <g key={i}>
+          <rect x="10" y={43+i*19} width="212" height="18" fill={i%2===0?"#7c2d12":"transparent"} fillOpacity="0.3" rx="2"/>
+          <text x="70" y={55+i*19} fill="#fdba74" fontSize="9" textAnchor="middle">{v}</text>
+          <text x="165" y={55+i*19} fill="#fed7aa" fontSize="9" textAnchor="middle">{f}</text>
+        </g>
+      ))}
+      <rect x="10" y="138" width="212" height="18" rx="3" fill="#c2410c" fillOpacity="0.25"/>
+      <text x="70" y="150" fill="#fb923c" fontSize="9" textAnchor="middle" fontWeight="bold">Total</text>
+      <text x="165" y="150" fill="#fb923c" fontSize="9" textAnchor="middle" fontWeight="bold">24 siswa</text>
+    </svg>
+  );
+};
+
 const questions: Q[] = [
   Qn(1, "Jangkauan (Range) – ANBK", {
     content: "Nilai ulangan harian enam siswa adalah: 65, 72, 58, 80, 90, 45. Tentukan jangkauan dari data nilai tersebut, kemudian jelaskan satu kelemahan jangkauan sebagai ukuran penyebaran data!",
   }),
-  Qn(2, "Jangkauan Antarkuartil (QR) – UN", {
+  Qn(2, "Jangkauan dari Tabel Frekuensi – UN", {
+    diagram: <TabelFrekuensiJangkauan />,
+    content: "Tabel di atas menunjukkan distribusi nilai ulangan matematika 24 siswa. Tentukan jangkauan dari data tersebut!",
+  }),
+  Qn(3, "Jangkauan Antarkuartil (QR) – UN", {
     content: "Data nilai 10 siswa: 72, 88, 60, 80, 95, 65, 55, 82, 70, 75. Diketahui Q\u2081 = 63,75 dan Q\u2083 = 83,5. Tentukan Q\u1D63 (jangkauan antarkuartil) dan Q\u1D48 (simpangan kuartil) dari data tersebut!",
   }),
-  Qn(3, "QR dan Simpangan Kuartil dari Data – ANBK", {
+  Qn(4, "QR dan Simpangan Kuartil dari Data – ANBK", {
     content: "Data nilai 11 siswa: 82, 65, 75, 55, 88, 70, 95, 60, 72, 80, 45. Tentukan Q\u2081, Q\u2083, Q\u1D63, dan Q\u1D48 dari data tersebut!",
   }),
-  Qn(4, "QR dan Simpangan Kuartil dari Tabel – UN", {
+  Qn(5, "QR dan Simpangan Kuartil dari Tabel – UN", {
     diagram: <TabelHorizontal30 />,
     content: "Tabel di atas menunjukkan distribusi nilai ujian matematika 30 siswa. Tentukan Q\u2081, Q\u2082, Q\u2083, Q\u1D63, dan Q\u1D48 dari data tersebut!",
   }),
-  Qn(5, "QR dan Simpangan Kuartil dari Tabel – ANBK", {
+  Qn(6, "QR dan Simpangan Kuartil dari Tabel – ANBK", {
     diagram: <TabelVertikal27 />,
     content: "Tabel di atas menunjukkan distribusi nilai ulangan harian 27 siswa. Tentukan Q\u2081, Q\u2082, Q\u2083, Q\u1D63, dan Q\u1D48 dari data tersebut!",
   }),
-  Qn(6, "QR dan Simpangan Kuartil dari Diagram – TKA", {
+  Qn(7, "QR dan Simpangan Kuartil dari Diagram – TKA", {
     diagram: <DiagramBatang27 />,
     content: "Diagram batang di atas menunjukkan distribusi nilai rapor 27 siswa. Tentukan Q\u2081, Q\u2082, Q\u2083, Q\u1D63, dan Q\u1D48 dari data tersebut!",
   }),
-  Qn(7, "Varians dan Simpangan Baku – UN", {
+  Qn(8, "Varians dan Simpangan Baku – UN", {
     content: "Data nilai ulangan 5 siswa: 6, 2, 8, 4, 5. Tentukan varians (s\u00B2) dan simpangan baku (s) dari data tersebut!",
   }),
-  Qn(8, "Simpangan Rata-Rata – ANBK", {
+  Qn(9, "Simpangan Rata-Rata – ANBK", {
     content: "Data nilai ulangan 5 siswa: 8, 4, 6, 7, 5. Tentukan rata-rata dan simpangan rata-rata (SR) dari data tersebut!",
   }),
 ];
@@ -157,7 +185,7 @@ const PenyebaranDataPage = () => {
           </p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 8 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 9 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
