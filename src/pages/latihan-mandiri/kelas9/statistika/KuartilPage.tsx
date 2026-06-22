@@ -186,6 +186,9 @@ const questions: Q[] = [
     diagram: <DiagramBatangGenap />,
     content: "Diagram batang di atas menunjukkan distribusi nilai ujian semester 28 siswa. Tentukan nilai Q₁, Q₂, dan Q₃ dari data tersebut!",
   }),
+  Qn(10, "Menentukan Nilai x dari Q₃ – UN", {
+    content: "Diketahui tujuh data: 20, 4, x, 16, 8, 28, 24. Jika Q₃ dari data tersebut adalah 26, tentukan nilai x!",
+  }),
 ];
 
 const KuartilPage = () => {
@@ -206,7 +209,7 @@ const KuartilPage = () => {
           <p className="text-green-200/70 text-sm text-center font-body mb-1">Kuartil</p>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-lg px-4 py-2">
-            <span className="text-green-400 text-xs font-bold">📋 9 Soal</span>
+            <span className="text-green-400 text-xs font-bold">📋 10 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
