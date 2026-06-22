@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { BlockMath } from 'react-katex';
 import { BarChart3 } from "lucide-react";
 
 const FreqTable = ({ headers, rows, caption }: { headers: string[]; rows: (string | number)[][]; caption?: string }) => (
@@ -30,345 +31,283 @@ const FreqTable = ({ headers, rows, caption }: { headers: string[]; rows: (strin
   </div>
 );
 
-const BarChart = ({ data, colors }: { data: { label: string; value: number }[]; colors: string[] }) => {
-  const max = Math.max(...data.map(d => d.value));
-  return (
-    <div className="flex items-end gap-2 h-28 px-2 pb-1">
-      {data.map((d, i) => (
-        <div key={i} className="flex flex-col items-center flex-1 gap-1">
-          <span className="text-[9px] text-white/70 font-bold">{d.value}</span>
-          <div className="w-full rounded-t-md" style={{ height: `${(d.value / max) * 80}px`, background: colors[i % colors.length] }} />
-          <span className="text-[9px] text-white/60">{d.label}</span>
-        </div>
-      ))}
-    </div>
-  );
+type MCQ = {
+  n: number;
+  title: string;
+  content: string;
+  diagram?: React.ReactNode;
+  options: string[];
+  answer: number;
 };
 
-type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: string };
-const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
-
-const questions: Q[] = [
-  Qn(1, "Memahami Frekuensi Relatif", {
-    type: "mixed",
-    content: "Sebuah koin dilempar 50 kali. Hasilnya: Angka muncul 28 kali dan Gambar muncul 22 kali.",
+const questions: MCQ[] = [
+  {
+    n: 1, title: "Frekuensi Relatif – Koin 50 Lemparan",
+    content: "Sebuah koin dilempar 50 kali. Sisi Angka muncul sebanyak 28 kali dan sisi Gambar muncul 22 kali. Frekuensi relatif munculnya sisi Angka adalah ...",
     diagram: (
       <FreqTable
         caption="Hasil percobaan melempar koin"
-        headers={["Hasil", "Frekuensi", "Frekuensi Relatif"]}
-        rows={[["Angka",28,"?"],[" Gambar",22,"?"],["Total",50,"1"]]}
+        headers={["Hasil", "Frekuensi"]}
+        rows={[["Angka", 28], ["Gambar", 22], ["Total", 50]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "\\text{FR(Angka)} = \\frac{28}{50} = \\ldots" },
-      { label: "b.", math: "\\text{FR(Gambar)} = \\frac{22}{50} = \\ldots" },
-      { label: "c.", text: "Apakah FR(Angka) + FR(Gambar) = 1? Mengapa selalu demikian?" },
-    ],
-  }),
-  Qn(2, "Peluang Empirik dari Data Percobaan", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar 120 kali. Data frekuensi muncul setiap angka:",
+    options: ["22/50 = 0,44", "28/50 = 0,56", "28/22 = 1,27", "50/28 = 1,79"],
+    answer: 1,
+  },
+  {
+    n: 2, title: "Peluang Empirik – Dadu 120 Lemparan",
+    content: "Sebuah dadu dilempar 120 kali. Angka genap (2, 4, 6) muncul masing-masing 22, 21, dan 20 kali. Peluang empirik muncul angka genap adalah ...",
     diagram: (
       <FreqTable
         caption="Frekuensi munculnya angka dadu (120 lemparan)"
-        headers={["Angka","1","2","3","4","5","6"]}
-        rows={[["Frekuensi",18,22,19,21,20,20]]}
+        headers={["Angka", "1", "2", "3", "4", "5", "6"]}
+        rows={[["Frekuensi", 18, 22, 19, 21, 20, 20]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "P_{empirik}(1) = \\frac{18}{120} = \\ldots" },
-      { label: "b.", math: "P_{empirik}(\\text{genap}) = \\frac{22+21+20}{120} = \\ldots" },
-      { label: "c.", text: "Apakah peluang empirik ini mendekati peluang teoretik? Jelaskan." },
-    ],
-  }),
-  Qn(3, "Tabel Frekuensi – Warna Kelereng", {
-    type: "mixed",
+    options: ["60/120 = 1/2", "63/120 = 21/40", "57/120 = 19/40", "65/120 = 13/24"],
+    answer: 1,
+  },
+  {
+    n: 3, title: "Peluang Empirik – Kelereng 200 Kali",
+    content: "Percobaan pengambilan kelereng dilakukan 200 kali dengan pengembalian. Hasilnya: Merah 65, Biru 55, Kuning 45, Hijau 35. Peluang empirik terambilnya kelereng bukan Kuning adalah ...",
     diagram: (
       <FreqTable
-        caption="Pengambilan kelereng 200 kali (dengan pengembalian)"
-        headers={["Warna","Merah","Biru","Kuning","Hijau","Total"]}
-        rows={[["Frekuensi",65,55,45,35,200]]}
+        caption="Pengambilan kelereng 200 kali"
+        headers={["Warna", "Merah", "Biru", "Kuning", "Hijau", "Total"]}
+        rows={[["Frekuensi", 65, 55, 45, 35, 200]]}
       />
     ),
-    content: "Percobaan pengambilan kelereng dilakukan 200 kali. Hasilnya dicatat dalam tabel.",
-    parts: [
-      { label: "a.", math: "P_{emp}(\\text{Merah}) = \\frac{65}{200} = \\ldots" },
-      { label: "b.", math: "P_{emp}(\\text{bukan Kuning}) = \\frac{200-45}{200} = \\ldots" },
-      { label: "c.", text: "Warna kelereng apa yang paling jarang muncul?" },
-    ],
-  }),
-  Qn(4, "Diagram Batang – Analisis Data", {
-    type: "mixed",
-    diagram: (
-      <BarChart
-        data={[{label:"Sen",value:12},{label:"Sel",value:18},{label:"Rab",value:15},{label:"Kam",value:20},{label:"Jum",value:10}]}
-        colors={["#f59e0b","#f97316","#eab308","#fb923c","#fbbf24"]}
-      />
-    ),
-    content: "Diagram batang menunjukkan banyaknya siswa yang hadir ke perpustakaan setiap hari dalam sepekan.",
-    parts: [
-      { label: "a.", text: "Berapa total siswa yang datang ke perpustakaan dalam sepekan?" },
-      { label: "b.", text: "Berapa frekuensi relatif hari Kamis?" },
-      { label: "c.", text: "Pada hari apa peluang empirik seorang siswa pergi ke perpustakaan paling besar?" },
-    ],
-  }),
-  Qn(5, "Membandingkan Dua Percobaan", {
-    type: "mixed",
+    options: ["45/200", "100/200", "155/200", "120/200"],
+    answer: 2,
+  },
+  {
+    n: 4, title: "Diagram Batang – Kunjungan Perpustakaan",
+    content: "Data kunjungan perpustakaan dalam sepekan: Senin 12, Selasa 18, Rabu 15, Kamis 20, Jumat 10 siswa. Total seluruh siswa yang berkunjung dalam sepekan itu adalah ...",
+    options: ["65 siswa", "70 siswa", "75 siswa", "80 siswa"],
+    answer: 2,
+  },
+  {
+    n: 5, title: "Membandingkan Frekuensi Relatif – Hukum Bilangan Besar",
+    content: "Andi melempar koin 10 kali (muncul A: 4 kali), Budi 100 kali (muncul A: 47 kali), Citra 1.000 kali (muncul A: 503 kali). Frekuensi relatif sisi Angka milik siapa yang paling mendekati peluang teoretik 0,5?",
     diagram: (
       <FreqTable
-        caption="Perbandingan dua percobaan melempar koin"
-        headers={["Percobaan","Jumlah Lemparan","Muncul Angka","FR(Angka)"]}
-        rows={[["Andi",10,4,"?"],[" Budi",100,47,"?"],[" Citra",1000,503,"?"]]}
+        caption="Perbandingan tiga percobaan melempar koin"
+        headers={["Percobaan", "Jumlah Lemparan", "Muncul Angka", "FR(Angka)"]}
+        rows={[["Andi", 10, 4, "0,40"], ["Budi", 100, 47, "0,47"], ["Citra", 1000, 503, "0,503"]]}
       />
     ),
-    parts: [
-      { label: "a.", text: "Hitung FR(Angka) untuk setiap percobaan." },
-      { label: "b.", text: "Siapa yang hasil FR-nya paling mendekati peluang teoretik (0,5)?" },
-      { label: "c.", text: "Apa kesimpulanmu tentang hubungan banyak percobaan dan nilai FR?" },
-    ],
-  }),
-  Qn(6, "Peluang Empirik – Penjualan Produk", {
-    type: "mixed",
+    options: ["Andi (FR = 0,40)", "Budi (FR = 0,47)", "Citra (FR = 0,503)", "Ketiganya sama"],
+    answer: 2,
+  },
+  {
+    n: 6, title: "Peluang Empirik – Penjualan Produk",
+    content: "Data penjualan 30 hari: Produk A terjual 8 hari, B 12 hari, C 6 hari, D 4 hari. Peluang empirik terjualnya produk B adalah ...",
     diagram: (
       <FreqTable
         caption="Data penjualan produk selama 30 hari"
-        headers={["Produk","A","B","C","D","Total"]}
-        rows={[["Terjual",8,12,6,4,30]]}
+        headers={["Produk", "A", "B", "C", "D", "Total"]}
+        rows={[["Terjual", 8, 12, 6, 4, 30]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "P_{emp}(A) = \\frac{8}{30} = \\ldots" },
-      { label: "b.", text: "Produk mana yang paling sering terjual?" },
-      { label: "c.", text: "Berapa frekuensi relatif produk C dan D digabung?" },
-    ],
-  }),
-  Qn(7, "Frekuensi Relatif – Cuaca", {
-    type: "mixed",
+    options: ["8/30", "10/30", "12/30", "6/30"],
+    answer: 2,
+  },
+  {
+    n: 7, title: "Frekuensi Relatif – Data Cuaca",
+    content: "Selama 60 hari tercatat: Cerah 35 hari, Berawan 15 hari, Hujan 10 hari. Frekuensi relatif hari tidak hujan (Cerah + Berawan) adalah ...",
     diagram: (
       <FreqTable
         caption="Data cuaca selama 60 hari"
-        headers={["Cuaca","Cerah","Berawan","Hujan","Total"]}
-        rows={[["Hari",35,15,10,60]]}
+        headers={["Cuaca", "Cerah", "Berawan", "Hujan", "Total"]}
+        rows={[["Hari", 35, 15, 10, 60]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "P_{emp}(\\text{Hujan}) = \\frac{10}{60} = \\ldots" },
-      { label: "b.", text: "Cuaca apa yang paling sering terjadi?" },
-      { label: "c.", text: "Berapa frekuensi relatif cuaca tidak hujan?" },
-    ],
-  }),
-  Qn(8, "Menentukan Peluang dari Data Survei", {
-    type: "mixed",
+    options: ["10/60 = 1/6", "35/60 = 7/12", "50/60 = 5/6", "15/60 = 1/4"],
+    answer: 2,
+  },
+  {
+    n: 8, title: "Peluang Empirik – Survei Mapel Favorit",
+    content: "Survei terhadap 80 siswa tentang mata pelajaran favorit: Matematika 24, IPA 20, IPS 16, Bahasa 12, Seni 8. Jika dipilih satu siswa secara acak, peluang empirik terpilihnya siswa yang menyukai Matematika adalah ...",
     diagram: (
       <FreqTable
         caption="Survei mata pelajaran favorit (80 siswa)"
-        headers={["Mata Pelajaran","Matematika","IPA","IPS","Bahasa","Seni"]}
-        rows={[["Jumlah Siswa",24,20,16,12,8]]}
+        headers={["Mata Pelajaran", "Matematika", "IPA", "IPS", "Bahasa", "Seni"]}
+        rows={[["Jumlah Siswa", 24, 20, 16, 12, 8]]}
       />
     ),
-    parts: [
-      { label: "a.", text: "Jika dipilih satu siswa secara acak, berapa peluang empirik terpilihnya siswa yang menyukai Matematika?" },
-      { label: "b.", math: "P_{emp}(\\text{IPA atau IPS}) = \\frac{20+16}{80} = \\ldots" },
-      { label: "c.", text: "Mata pelajaran favorit mana yang peluangnya paling kecil?" },
-    ],
-  }),
-  Qn(9, "Diagram Batang – Frekuensi Warna", {
-    type: "mixed",
-    diagram: (
-      <BarChart
-        data={[{label:"Merah",value:30},{label:"Biru",value:45},{label:"Kuning",value:15},{label:"Hijau",value:10}]}
-        colors={["#ef4444","#3b82f6","#eab308","#22c55e"]}
-      />
-    ),
-    content: "Diagram batang menunjukkan frekuensi warna yang dipilih oleh 100 responden.",
-    parts: [
-      { label: "a.", text: "Berapa total responden? Cocokkan dengan diagram." },
-      { label: "b.", text: "Hitung frekuensi relatif warna Biru." },
-      { label: "c.", text: "Warna mana yang paling jarang dipilih?" },
-    ],
-  }),
-  Qn(10, "Percobaan Berulang – Semakin Stabil", {
-    type: "mixed",
+    options: ["20/80 = 1/4", "24/80 = 3/10", "12/80 = 3/20", "16/80 = 1/5"],
+    answer: 1,
+  },
+  {
+    n: 9, title: "Diagram Batang – Warna Favorit Responden",
+    content: "Dari 100 responden yang memilih warna favorit: Merah 30, Biru 45, Kuning 15, Hijau 10. Frekuensi relatif warna Biru adalah ...",
+    options: ["30/100 = 0,30", "45/100 = 0,45", "15/100 = 0,15", "10/100 = 0,10"],
+    answer: 1,
+  },
+  {
+    n: 10, title: "Hukum Bilangan Besar – Stabilisasi FR",
+    content: "Frekuensi relatif Angka pada melempar koin: n=10 → 0,40; n=50 → 0,48; n=100 → 0,51; n=500 → 0,502; n=1000 → 0,499. Kesimpulan yang paling tepat adalah ...",
     diagram: (
       <FreqTable
-        caption="Frekuensi relatif Angka pada melempar koin"
-        headers={["n (lemparan)","10","50","100","500","1000"]}
-        rows={[["FR(Angka)","0,40","0,48","0,51","0,502","0,499"]]}
+        caption="Frekuensi relatif Angka pada berbagai jumlah lemparan"
+        headers={["n (lemparan)", "10", "50", "100", "500", "1000"]}
+        rows={[["FR(Angka)", "0,40", "0,48", "0,51", "0,502", "0,499"]]}
       />
     ),
-    parts: [
-      { label: "a.", text: "Apa yang terjadi pada nilai FR saat n semakin besar?" },
-      { label: "b.", text: "Nilai berapa yang dituju oleh FR seiring n → ∞?" },
-      { label: "c.", text: "Apa hubungan antara peluang empirik dan peluang teoretik pada percobaan berulang?" },
+    options: [
+      "Semakin kecil n, semakin dekat FR ke 0,5",
+      "Semakin besar n, semakin mendekati FR ke peluang teoretik",
+      "FR selalu sama dengan peluang teoretik",
+      "Besar n tidak berpengaruh terhadap FR",
     ],
-  }),
-  Qn(11, "Peluang Empirik – Nilai Dadu", {
-    type: "mixed",
+    answer: 1,
+  },
+  {
+    n: 11, title: "Peluang Empirik – Dadu 180 Lemparan",
+    content: "Dadu dilempar 180 kali. Angka 5 muncul 31 kali dan angka 6 muncul 30 kali. Peluang empirik muncul angka lebih dari 4 (yaitu 5 atau 6) adalah ...",
     diagram: (
       <FreqTable
         caption="Percobaan 180 kali melempar dadu"
-        headers={["Angka","1","2","3","4","5","6","Total"]}
-        rows={[["Frekuensi",28,30,32,29,31,30,180]]}
+        headers={["Angka", "1", "2", "3", "4", "5", "6", "Total"]}
+        rows={[["Frekuensi", 28, 30, 32, 29, 31, 30, 180]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "P_{emp}(\\text{angka} > 4) = \\frac{31+30}{180} = \\ldots" },
-      { label: "b.", math: "P_{emp}(\\text{angka ganjil}) = \\frac{28+32+31}{180} = \\ldots" },
-      { label: "c.", text: "Apakah dadu ini seimbang (fair)? Jelaskan berdasarkan data." },
-    ],
-  }),
-  Qn(12, "Soal UN – Frekuensi Relatif", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar 90 kali. Frekuensi relatif muncul angka 5 adalah 1/6.",
-    parts: [
-      { label: "a.", math: "\\text{Frekuensi angka 5} = \\frac{1}{6} \\times 90 = \\ldots" },
-      { label: "b.", text: "Berapa banyak angka selain 5 muncul?" },
-      { label: "c.", text: "Apakah frekuensi relatif selalu sama dengan peluang teoretik? Jelaskan." },
-    ],
-  }),
-  Qn(13, "Membandingkan Percobaan Koin", {
-    type: "mixed",
+    options: ["61/180", "60/180", "59/180", "62/180"],
+    answer: 0,
+  },
+  {
+    n: 12, title: "Soal UN – Frekuensi dari Frekuensi Relatif",
+    content: "Sebuah dadu dilempar 90 kali. Frekuensi relatif muncul angka 5 adalah 1/6. Berapa kali angka 5 muncul dalam percobaan tersebut?",
+    options: ["12 kali", "15 kali", "18 kali", "20 kali"],
+    answer: 1,
+  },
+  {
+    n: 13, title: "Membandingkan FR – Tiga Siswa",
+    content: "Ayu melempar koin 20 kali (A: 9 kali), Bagas 50 kali (A: 27 kali), Cici 200 kali (A: 98 kali). FR(A) Cici adalah 98/200 = 0,49. FR(A) siapa yang paling mendekati 0,5?",
     diagram: (
       <FreqTable
         caption="Percobaan melempar koin oleh 3 siswa"
-        headers={["Siswa","Jumlah Lemparan","Muncul A","Muncul G","FR(A)"]}
-        rows={[["Ayu",20,9,11,"?"],["Bagas",50,27,23,"?"],["Cici",200,98,102,"?"]]}
+        headers={["Siswa", "Lemparan", "Muncul A", "FR(A)"]}
+        rows={[["Ayu", 20, 9, "0,45"], ["Bagas", 50, 27, "0,54"], ["Cici", 200, 98, "0,49"]]}
       />
     ),
-    parts: [
-      { label: "a.", text: "Hitung FR(A) untuk masing-masing siswa." },
-      { label: "b.", text: "Siapa yang FR(A)-nya paling mendekati 0,5?" },
-      { label: "c.", text: "Simpulkan: bagaimana pengaruh n terhadap FR?" },
-    ],
-  }),
-  Qn(14, "Soal TKA – Frekuensi Relatif Gabungan", {
-    type: "mixed",
-    content: "Dari 400 percobaan melempar dua koin, hasil AA muncul 97 kali, AG muncul 104 kali, GA muncul 99 kali, dan GG muncul 100 kali.",
-    parts: [
-      { label: "a.", math: "P_{emp}(\\text{AA}) = \\frac{97}{400} = \\ldots" },
-      { label: "b.", math: "P_{emp}(\\text{tepat 1 Angka}) = \\frac{104+99}{400} = \\ldots" },
-      { label: "c.", text: "Bandingkan dengan peluang teoretik masing-masing. Apakah mendekati?" },
-    ],
-  }),
-  Qn(15, "Soal ANBK – Peluang Empirik Produksi", {
-    type: "mixed",
+    options: ["Ayu (0,45)", "Bagas (0,54)", "Cici (0,49)", "Ketiganya sama dekat"],
+    answer: 2,
+  },
+  {
+    n: 14, title: "Soal TKA – FR Gabungan Dua Koin",
+    content: "Dari 400 percobaan melempar dua koin: AA muncul 97 kali, AG muncul 104 kali, GA muncul 99 kali, GG muncul 100 kali. Peluang empirik muncul tepat satu sisi Angka (AG atau GA) adalah ...",
+    options: ["97/400", "100/400", "203/400", "104/400"],
+    answer: 2,
+  },
+  {
+    n: 15, title: "Soal ANBK – Peluang Empirik Kualitas Produk",
+    content: "Dari 1.000 produk yang diperiksa: Sangat Baik 650, Baik 250, Cukup 70, Kurang 30. Peluang empirik produk berkualitas Cukup atau Kurang adalah ...",
     diagram: (
       <FreqTable
-        caption="Kontrol kualitas: 1000 produk"
-        headers={["Kategori","Sangat Baik","Baik","Cukup","Kurang"]}
-        rows={[["Jumlah",650,250,70,30]]}
+        caption="Kontrol kualitas: 1.000 produk"
+        headers={["Kategori", "Sangat Baik", "Baik", "Cukup", "Kurang"]}
+        rows={[["Jumlah", 650, 250, 70, 30]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "P_{emp}(\\text{Baik atau Sangat Baik}) = \\frac{650+250}{1000} = \\ldots" },
-      { label: "b.", math: "P_{emp}(\\text{Cukup atau Kurang}) = \\frac{70+30}{1000} = \\ldots" },
-      { label: "c.", text: "Jika produksi 5000 unit, perkirakan berapa yang berkualitas Kurang." },
-    ],
-  }),
-  Qn(16, "Diagram Batang – Bulan Lahir", {
-    type: "mixed",
-    diagram: (
-      <BarChart
-        data={[
-          {label:"Jan",value:5},{label:"Feb",value:4},{label:"Mar",value:6},{label:"Apr",value:3},
-          {label:"Mei",value:7},{label:"Jun",value:5},
-        ]}
-        colors={["#f59e0b","#f97316","#eab308","#fb923c","#fbbf24","#fde68a"]}
-      />
-    ),
-    content: "Diagram batang menunjukkan bulan lahir 30 siswa (Jan–Jun saja yang ditampilkan).",
-    parts: [
-      { label: "a.", text: "Berapa frekuensi relatif lahir di bulan Mei?" },
-      { label: "b.", text: "Berapa peluang empirik lahir di bulan dengan huruf awal 'J'?" },
-      { label: "c.", text: "Bulan mana yang paling banyak siswanya lahir?" },
-    ],
-  }),
-  Qn(17, "Soal UN – Menghitung Frekuensi dari FR", {
-    type: "mixed",
-    content: "Dalam percobaan melempar dadu 300 kali, frekuensi relatif muncul bilangan genap adalah 0,52.",
-    parts: [
-      { label: "a.", math: "\\text{Frekuensi genap} = 0{,}52 \\times 300 = \\ldots" },
-      { label: "b.", math: "\\text{Frekuensi ganjil} = 300 - \\ldots = \\ldots" },
-      { label: "c.", math: "P_{emp}(\\text{ganjil}) = \\frac{\\ldots}{300} = \\ldots" },
-    ],
-  }),
-  Qn(18, "Soal UN – Frekuensi Relatif Kartu", {
-    type: "mixed",
-    content: "Satu kartu diambil dari 52 kartu remi sebanyak 260 kali (dengan pengembalian). Kartu As muncul 22 kali.",
-    parts: [
-      { label: "a.", math: "P_{emp}(\\text{As}) = \\frac{22}{260} = \\ldots" },
-      { label: "b.", math: "P_{teoretik}(\\text{As}) = \\frac{4}{52} = \\frac{1}{13} \\approx \\ldots" },
-      { label: "c.", text: "Apakah perbedaan keduanya masih dalam batas wajar? Jelaskan." },
-    ],
-  }),
-  Qn(19, "Peluang Empirik – Golongan Darah", {
-    type: "mixed",
+    options: ["70/1000", "30/1000", "100/1000", "900/1000"],
+    answer: 2,
+  },
+  {
+    n: 16, title: "Diagram Batang – Bulan Lahir Siswa",
+    content: "Bulan lahir 30 siswa (Jan–Jun): Jan 5, Feb 4, Mar 6, Apr 3, Mei 7, Jun 5. Frekuensi relatif siswa lahir di bulan Mei adalah ...",
+    options: ["5/30", "6/30", "7/30", "4/30"],
+    answer: 2,
+  },
+  {
+    n: 17, title: "Soal UN – Menghitung Frekuensi dari FR",
+    content: "Dalam percobaan melempar dadu 300 kali, frekuensi relatif muncul bilangan genap adalah 0,52. Berapa kali bilangan genap muncul dalam percobaan tersebut?",
+    options: ["144 kali", "150 kali", "156 kali", "160 kali"],
+    answer: 2,
+  },
+  {
+    n: 18, title: "Soal UN – FR Kartu As Remi",
+    content: "Satu kartu diambil dari 52 kartu remi sebanyak 260 kali (dengan pengembalian). Kartu As muncul 22 kali. Peluang empirik munculnya kartu As adalah ...",
+    options: ["4/52 = 1/13", "22/260 = 11/130", "20/260 = 1/13", "26/260 = 1/10"],
+    answer: 1,
+  },
+  {
+    n: 19, title: "Peluang Empirik – Golongan Darah",
+    content: "Sampel 200 orang Indonesia: Gol A 58, Gol B 62, Gol AB 20, Gol O 60. Peluang empirik seseorang bergolongan darah O adalah ...",
     diagram: (
       <FreqTable
         caption="Golongan darah 200 orang Indonesia (sampel)"
-        headers={["Gol. Darah","A","B","AB","O","Total"]}
-        rows={[["Frekuensi",58,62,20,60,200]]}
+        headers={["Gol. Darah", "A", "B", "AB", "O", "Total"]}
+        rows={[["Frekuensi", 58, 62, 20, 60, 200]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "P_{emp}(\\text{golongan O}) = \\frac{60}{200} = \\ldots" },
-      { label: "b.", text: "Berapa peluang empirik golongan darah bukan AB?" },
-      { label: "c.", text: "Golongan darah mana yang paling jarang dalam sampel ini?" },
-    ],
-  }),
-  Qn(20, "Soal TKA – FR dari Dua Kejadian", {
-    type: "mixed",
-    content: "Dalam 240 lemparan dadu, muncul bilangan prima sebanyak 122 kali dan bilangan genap 116 kali.",
-    parts: [
-      { label: "a.", math: "P_{emp}(\\text{prima}) = \\frac{122}{240} = \\ldots" },
-      { label: "b.", math: "P_{emp}(\\text{genap}) = \\frac{116}{240} = \\ldots" },
-      { label: "c.", text: "Bilangan pada dadu yang prima DAN genap adalah? Berapa peluangnya secara teoretik?" },
-    ],
-  }),
-  Qn(21, "Soal UN – Mencari Frekuensi yang Hilang", {
-    type: "mixed",
+    options: ["58/200 = 0,29", "62/200 = 0,31", "60/200 = 0,30", "20/200 = 0,10"],
+    answer: 2,
+  },
+  {
+    n: 20, title: "Soal TKA – FR Bilangan Prima dan Genap",
+    content: "Dalam 240 lemparan dadu, muncul bilangan prima (2,3,5) sebanyak 122 kali. Peluang empirik munculnya bilangan prima adalah ...",
+    options: ["116/240", "122/240", "120/240", "118/240"],
+    answer: 1,
+  },
+  {
+    n: 21, title: "Soal UN – Mencari Frekuensi yang Hilang",
+    content: "Dari 100 kali pengambilan, warna Biru 30, Kuning 25, Putih 20 kali. Berapa kali warna Merah muncul?",
     diagram: (
       <FreqTable
         caption="Frekuensi warna dalam 100 kali pengambilan"
-        headers={["Warna","Merah","Biru","Kuning","Putih","Total"]}
-        rows={[["Frekuensi","?",30,25,20,100]]}
+        headers={["Warna", "Merah", "Biru", "Kuning", "Putih", "Total"]}
+        rows={[["Frekuensi", "?", 30, 25, 20, 100]]}
       />
     ),
-    parts: [
-      { label: "a.", text: "Tentukan frekuensi warna Merah." },
-      { label: "b.", math: "P_{emp}(\\text{Merah}) = \\frac{\\ldots}{100} = \\ldots" },
-      { label: "c.", text: "Apakah warna Merah memiliki peluang empirik terbesar? Jelaskan." },
-    ],
-  }),
-  Qn(22, "Soal TKA – Mencari n Percobaan", {
-    type: "mixed",
-    content: "Frekuensi relatif muncul sisi Angka pada percobaan melempar koin adalah 0,52. Angka muncul sebanyak 130 kali.",
-    parts: [
-      { label: "a.", math: "n = \\frac{130}{0{,}52} = \\ldots" },
-      { label: "b.", text: "Berapa kali sisi Gambar muncul?" },
-      { label: "c.", math: "P_{emp}(\\text{Gambar}) = \\frac{\\ldots}{n} = \\ldots" },
-    ],
-  }),
-  Qn(23, "Soal UN Level Tinggi – Analisis Lengkap", {
-    type: "mixed",
+    options: ["20 kali", "25 kali", "30 kali", "35 kali"],
+    answer: 1,
+  },
+  {
+    n: 22, title: "Soal TKA – Mencari Banyak Percobaan dari FR",
+    content: "Frekuensi relatif muncul sisi Angka pada percobaan melempar koin adalah 0,52. Sisi Angka muncul sebanyak 130 kali. Berapa total percobaan yang dilakukan?",
+    options: ["200 kali", "225 kali", "250 kali", "260 kali"],
+    answer: 2,
+  },
+  {
+    n: 23, title: "Soal UN Level Tinggi – FR Jumlah Dua Dadu",
+    content: "Dua dadu dilempar 360 kali. Jumlah = 7 muncul 58 kali. Peluang empirik muncul jumlah = 7 dibandingkan peluang teoretiknya (6/36 ≈ 0,167) menunjukkan ...",
     diagram: (
       <FreqTable
-        caption="Percobaan melempar dua dadu 360 kali (jumlah kedua dadu)"
-        headers={["Jumlah","2","3","4","5","6","7","8","9","10","11","12"]}
-        rows={[["Frekuensi",8,18,28,38,45,58,48,40,32,22,23]]}
+        caption="Percobaan melempar dua dadu 360 kali"
+        headers={["Jumlah", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]}
+        rows={[["Frekuensi", 8, 18, 28, 38, 45, 58, 48, 40, 32, 22, 23]]}
       />
     ),
-    parts: [
-      { label: "a.", text: "Berapa frekuensi relatif jumlah = 7?" },
-      { label: "b.", text: "Berapa peluang empirik jumlah ≥ 10?" },
-      { label: "c.", text: "Bandingkan peluang empirik jumlah = 7 dengan peluang teoretiknya (6/36). Apakah mendekati?" },
+    options: [
+      "FR empirik (58/360 ≈ 0,161) jauh berbeda dari teoretik",
+      "FR empirik (58/360 ≈ 0,161) mendekati peluang teoretik 6/36 ≈ 0,167",
+      "FR empirik (58/360 ≈ 0,161) selalu lebih kecil dari teoretik",
+      "FR empirik tidak bisa dibandingkan dengan peluang teoretik",
     ],
-  }),
+    answer: 1,
+  },
 ];
+
+const OPTS = ["A", "B", "C", "D"];
 
 const PeluangEmpirikPage = () => {
   const navigate = useNavigate();
+  const [selected, setSelected] = useState<Record<number, number>>({});
+  const [revealed, setRevealed] = useState<Record<number, boolean>>({});
+
+  const handleSelect = (qn: number, idx: number) => {
+    if (revealed[qn]) return;
+    setSelected(s => ({ ...s, [qn]: idx }));
+  };
+
+  const handleReveal = (qn: number) => {
+    setRevealed(r => ({ ...r, [qn]: true }));
+  };
+
+  const score = questions.filter(q => revealed[q.n] && selected[q.n] === q.answer).length;
+  const totalRevealed = Object.keys(revealed).length;
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -384,59 +323,81 @@ const PeluangEmpirikPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2">
-            <span className="text-amber-400 text-xs font-bold">📋 23 Soal</span>
+            <span className="text-amber-400 text-xs font-bold">📋 {questions.length} Soal Pilihan Ganda</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
+          {totalRevealed > 0 && (
+            <div className="mt-2 bg-amber-900/30 border border-amber-500/30 rounded-lg px-4 py-1.5 text-xs font-body text-amber-300">
+              Skor: {score} / {totalRevealed} soal dijawab
+            </div>
+          )}
         </div>
 
         <div className="mb-5 bg-amber-900/20 border border-amber-500/20 rounded-xl p-4">
           <p className="text-amber-300 text-xs font-bold mb-2">📌 Rumus Utama</p>
-          <div className="flex flex-col gap-2">
-            <div className="bg-white/5 rounded-lg px-3 py-2 text-center">
-              <BlockMath math="P_{empirik}(A) = \frac{\text{Frekuensi kejadian } A}{\text{Banyak percobaan}}" />
-            </div>
-            <p className="text-white/50 text-xs font-body text-center">Semakin besar n, semakin mendekati peluang teoretik</p>
+          <div className="bg-white/5 rounded-lg px-3 py-2 text-center">
+            <BlockMath math="P_{empirik}(A) = \frac{\text{Frekuensi kejadian } A}{\text{Banyak percobaan}}" />
           </div>
+          <p className="text-white/50 text-xs font-body text-center mt-1">Semakin besar n, semakin mendekati peluang teoretik</p>
         </div>
 
-        <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => (
-            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 via-slate-900/80 to-orange-900/30 backdrop-blur" />
-              <div className="absolute inset-0 border border-amber-500/20 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-amber-400 to-orange-500 rounded-l-2xl" />
-              <div className="relative px-5 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-amber-300 text-xs font-bold">{q.n}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-amber-400 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                      {q.title}
-                    </span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
-                    {q.math && <div className="mb-3 text-white overflow-x-auto"><BlockMath math={q.math} /></div>}
-                    {q.diagram && <div className="mb-3">{q.diagram}</div>}
-                    {q.parts && (
+        <div className="flex flex-col gap-5 animate-slide-up">
+          {questions.map((q, qi) => {
+            const sel = selected[q.n];
+            const isRevealed = revealed[q.n];
+            const hasSel = sel !== undefined;
+            return (
+              <div key={q.n} className="relative rounded-2xl overflow-hidden" style={{ animationDelay: `${qi * 0.02}s` }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 via-slate-900/80 to-orange-900/30 backdrop-blur" />
+                <div className="absolute inset-0 border border-amber-500/20 rounded-2xl" />
+                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-amber-400 to-orange-500 rounded-l-2xl" />
+                <div className="relative px-5 py-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center shrink-0">
+                      <span className="text-amber-300 text-xs font-bold">{q.n}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-amber-400 text-[10px] font-bold uppercase tracking-wider bg-amber-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                        {q.title}
+                      </span>
+                      {q.diagram && <div className="mb-3">{q.diagram}</div>}
+                      <p className="font-body text-sm text-white/90 leading-relaxed mb-4">{q.content}</p>
                       <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? "bg-white/5" : "bg-transparent px-0"}`}>
-                            {p.label && <span className="text-amber-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
-                            {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
-                            }
-                          </div>
-                        ))}
+                        {q.options.map((opt, oi) => {
+                          let cls = "bg-white/5 border border-white/10 text-white/80";
+                          if (isRevealed) {
+                            if (oi === q.answer) cls = "bg-emerald-500/20 border border-emerald-400/60 text-emerald-300 font-bold";
+                            else if (oi === sel) cls = "bg-red-500/20 border border-red-400/60 text-red-300";
+                            else cls = "bg-white/3 border border-white/5 text-white/40";
+                          } else if (hasSel && oi === sel) {
+                            cls = "bg-amber-500/25 border border-amber-400/60 text-amber-200";
+                          }
+                          return (
+                            <button key={oi} onClick={() => handleSelect(q.n, oi)}
+                              className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-left transition-all duration-200 ${cls} ${!isRevealed ? "cursor-pointer hover:border-amber-400/40" : "cursor-default"}`}>
+                              <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 border ${isRevealed && oi === q.answer ? "bg-emerald-500/30 border-emerald-400" : isRevealed && oi === sel ? "bg-red-500/30 border-red-400" : hasSel && oi === sel ? "bg-amber-500/30 border-amber-400" : "bg-white/10 border-white/20"}`}>
+                                {OPTS[oi]}
+                              </span>
+                              <span className="font-body text-sm">{opt}</span>
+                              {isRevealed && oi === q.answer && <span className="ml-auto text-emerald-400 text-xs font-bold">✓ Benar</span>}
+                              {isRevealed && oi === sel && oi !== q.answer && <span className="ml-auto text-red-400 text-xs font-bold">✗ Salah</span>}
+                            </button>
+                          );
+                        })}
                       </div>
-                    )}
+                      {hasSel && !isRevealed && (
+                        <button onClick={() => handleReveal(q.n)}
+                          className="mt-3 text-xs bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-300 rounded-lg px-4 py-1.5 transition-colors font-body cursor-pointer">
+                          Cek Jawaban
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-8 text-center">

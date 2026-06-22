@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { BlockMath } from 'react-katex';
 import { FlipHorizontal2 } from "lucide-react";
 
 const FreqTable = ({ headers, rows, caption }: { headers: string[]; rows: (string | number)[][]; caption?: string }) => (
@@ -30,297 +31,209 @@ const FreqTable = ({ headers, rows, caption }: { headers: string[]; rows: (strin
   </div>
 );
 
-const VennDiagram = ({ label, aLabel, aCompLabel, pa, pac }: { label: string; aLabel: string; aCompLabel: string; pa: string; pac: string }) => (
-  <svg viewBox="0 0 280 110" className="w-full max-w-xs mx-auto">
-    <rect x={5} y={5} width={270} height={100} rx={10} fill="none" stroke="#f43f5e" strokeWidth={2} opacity={0.6} />
-    <text x={20} y={22} fill="#f43f5e" fontSize={10} fontWeight="bold">{label} (Ruang Sampel S)</text>
-    <ellipse cx={105} cy={60} rx={65} ry={35} fill="#f43f5e" fillOpacity={0.25} stroke="#f43f5e" strokeWidth={2} />
-    <text x={78} y={55} fill="#fda4af" fontSize={11} fontWeight="bold">{aLabel}</text>
-    <text x={70} y={72} fill="#fda4af" fontSize={10}>P = {pa}</text>
-    <text x={185} y={55} fill="#c4b5fd" fontSize={11} fontWeight="bold">{aCompLabel}</text>
-    <text x={178} y={72} fill="#c4b5fd" fontSize={10}>P = {pac}</text>
-  </svg>
-);
+type MCQ = {
+  n: number;
+  title: string;
+  content: string;
+  diagram?: React.ReactNode;
+  options: string[];
+  answer: number;
+};
 
-const DiceGrid = ({ highlight }: { highlight?: (i: number, j: number) => boolean }) => (
-  <div className="overflow-x-auto rounded-xl border border-rose-500/30 my-2">
-    <table className="text-[10px] font-body">
-      <thead>
-        <tr className="bg-rose-900/50">
-          <th className="px-2 py-1 text-rose-300 border border-rose-500/20 w-10">🎲₁\🎲₂</th>
-          {[1,2,3,4,5,6].map(n => (
-            <th key={n} className="px-2 py-1 text-rose-300 border border-rose-500/20 w-10">{n}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {[1,2,3,4,5,6].map(i => (
-          <tr key={i}>
-            <td className="px-2 py-1 text-rose-300 font-bold bg-rose-900/40 border border-rose-500/20 text-center">{i}</td>
-            {[1,2,3,4,5,6].map(j => (
-              <td key={j} className={`px-1 py-1 border border-rose-500/10 text-center transition-colors ${highlight && highlight(i,j) ? "bg-rose-400/30 text-rose-200 font-bold" : "text-white/60"}`}>
-                ({i},{j})
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-);
-
-type Part = { label: string; math?: string; text?: string };
-type Q = { n: number; title: string; content?: string; math?: string; parts?: Part[]; diagram?: React.ReactNode; type: string };
-const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
-
-const questions: Q[] = [
-  Qn(1, "Konsep Komplemen Kejadian", {
-    type: "mixed",
-    diagram: <VennDiagram label="S" aLabel="A" aCompLabel="A'" pa="P(A)" pac="P(A')" />,
-    content: "Komplemen suatu kejadian A adalah kejadian A' (dibaca: 'A komplemen'), yaitu semua titik sampel yang BUKAN A.",
-    parts: [
-      { label: "a.", math: "P(A) + P(A') = 1" },
-      { label: "b.", math: "P(A') = 1 - P(A)" },
-      { label: "c.", text: "Jika P(A) = 3/7, berapa P(A')?" },
-    ],
-  }),
-  Qn(2, "Komplemen – Dadu Tunggal", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar. A = kejadian muncul angka prima = {2, 3, 5}.",
-    parts: [
-      { label: "a.", math: "P(A) = \\frac{3}{6} = \\frac{1}{2}" },
-      { label: "b.", math: "A' = \\text{komplemen prima} = \\{1, 4, 6\\}" },
-      { label: "c.", math: "P(A') = 1 - \\frac{1}{2} = \\frac{1}{2}" },
-    ],
-  }),
-  Qn(3, "Komplemen – Koin Tunggal", {
-    type: "mixed",
-    diagram: <VennDiagram label="S = {A, G}" aLabel="A = Angka" aCompLabel="A' = Gambar" pa="1/2" pac="1/2" />,
-    parts: [
-      { label: "a.", math: "P(\\text{Angka}) = \\frac{1}{2}" },
-      { label: "b.", math: "P(\\text{Gambar}) = P(\\text{Angka}') = 1 - \\frac{1}{2} = \\frac{1}{2}" },
-      { label: "c.", text: "Mengapa P(Angka) = P(Angka')? Kapan hal ini tidak berlaku?" },
-    ],
-  }),
-  Qn(4, "Komplemen – Kartu Remi", {
-    type: "mixed",
-    content: "Satu kartu diambil dari 52 kartu remi. A = muncul kartu As.",
-    parts: [
-      { label: "a.", math: "P(A) = \\frac{4}{52} = \\frac{1}{13}" },
-      { label: "b.", math: "P(A') = P(\\text{bukan As}) = 1 - \\frac{1}{13} = \\frac{12}{13}" },
-      { label: "c.", text: "Apakah lebih mudah menghitung P(bukan As) langsung atau menggunakan komplemen? Jelaskan." },
-    ],
-  }),
-  Qn(5, "Menggunakan Komplemen untuk Memudahkan Perhitungan", {
-    type: "mixed",
-    content: "Dua dadu dilempar. Tentukan peluang jumlah kedua dadu BUKAN 2.",
-    parts: [
-      { label: "a.", math: "P(\\text{jumlah} = 2) = \\frac{1}{36}" },
-      { label: "b.", math: "P(\\text{jumlah} \\neq 2) = 1 - \\frac{1}{36} = \\frac{35}{36}" },
-      { label: "c.", text: "Mengapa menggunakan komplemen lebih efisien di sini?" },
-    ],
-  }),
-  Qn(6, "Komplemen – Bola Berwarna", {
-    type: "mixed",
+const questions: MCQ[] = [
+  {
+    n: 1, title: "Konsep Komplemen – Mencari P(A')",
+    content: "Komplemen kejadian A (ditulis A') adalah semua titik sampel yang bukan A. Jika P(A) = 3/7, maka nilai P(A') adalah ...",
+    options: ["3/7", "4/7", "5/7", "1/7"],
+    answer: 1,
+  },
+  {
+    n: 2, title: "Komplemen – Dadu Tunggal",
+    content: "Sebuah dadu dilempar sekali. A = muncul angka prima = {2, 3, 5}. Komplemen A adalah A' = {1, 4, 6}. Nilai P(A') adalah ...",
+    options: ["1/6", "1/3", "1/2", "2/3"],
+    answer: 2,
+  },
+  {
+    n: 3, title: "Komplemen – Koin Tunggal",
+    content: "Sebuah koin dilempar sekali. P(Angka) = 1/2. Menggunakan konsep komplemen, P(Gambar) = P(Angka') adalah ...",
+    options: ["1/4", "1/3", "1/2", "2/3"],
+    answer: 2,
+  },
+  {
+    n: 4, title: "Komplemen – Kartu As Remi",
+    content: "Satu kartu diambil dari 52 kartu remi. A = terambil kartu As. P(As) = 4/52 = 1/13. Nilai P(bukan As) menggunakan rumus komplemen adalah ...",
+    options: ["1/13", "11/13", "12/13", "48/52 tanpa menyederhanakan"],
+    answer: 2,
+  },
+  {
+    n: 5, title: "Menggunakan Komplemen – Dua Dadu",
+    content: "Dua dadu dilempar bersamaan. Hanya ada 1 titik sampel dengan jumlah = 2, yaitu (1,1). Peluang jumlah kedua dadu BUKAN 2 adalah ...",
+    options: ["1/36", "34/36", "35/36", "36/36"],
+    answer: 2,
+  },
+  {
+    n: 6, title: "Komplemen – Bola Berwarna",
+    content: "Sebuah kantong berisi 8 bola merah, 5 biru, dan 7 kuning (total 20 bola). Satu bola diambil acak. Peluang terambilnya bola bukan Merah adalah ...",
     diagram: (
       <FreqTable
         caption="Isi kantong bola"
-        headers={["Warna","Merah","Biru","Kuning","Total"]}
-        rows={[["Banyak",8,5,7,20]]}
+        headers={["Warna", "Merah", "Biru", "Kuning", "Total"]}
+        rows={[["Banyak", 8, 5, 7, 20]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "P(\\text{Merah}) = \\frac{8}{20} = \\frac{2}{5}" },
-      { label: "b.", math: "P(\\text{bukan Merah}) = 1 - \\frac{2}{5} = \\frac{3}{5}" },
-      { label: "c.", math: "\\text{Verifikasi: } P(\\text{Biru}) + P(\\text{Kuning}) = \\frac{5+7}{20} = \\frac{12}{20} = \\frac{3}{5} \\checkmark" },
-    ],
-  }),
-  Qn(7, "Soal UN – Komplemen Dadu", {
-    type: "mixed",
-    content: "Sebuah dadu dilempar. Tentukan peluang muncul angka yang bukan kelipatan 2.",
-    parts: [
-      { label: "a.", math: "A = \\text{kelipatan 2} = \\{2, 4, 6\\} \\Rightarrow P(A) = \\frac{3}{6} = \\frac{1}{2}" },
-      { label: "b.", math: "A' = \\text{bukan kelipatan 2} = \\{1, 3, 5\\}" },
-      { label: "c.", math: "P(A') = 1 - \\frac{1}{2} = \\frac{1}{2}" },
-    ],
-  }),
-  Qn(8, "Mencari P(A) dari P(A') yang Diketahui", {
-    type: "mixed",
-    content: "Peluang tidak hujan hari ini adalah 0,65. Berapa peluang hujan?",
-    parts: [
-      { label: "a.", math: "P(\\text{tidak hujan}) = 0{,}65 = P(A')" },
-      { label: "b.", math: "P(\\text{hujan}) = P(A) = 1 - 0{,}65 = \\ldots" },
-      { label: "c.", text: "Jika besok P(hujan) = 0,4, berapa P(tidak hujan) besok?" },
-    ],
-  }),
-  Qn(9, "Komplemen – Soal Cerita Ujian", {
-    type: "mixed",
-    content: "Peluang seorang siswa lulus ujian adalah 4/5. Berapa peluang siswa tersebut tidak lulus?",
-    parts: [
-      { label: "a.", math: "P(\\text{lulus}) = \\frac{4}{5}" },
-      { label: "b.", math: "P(\\text{tidak lulus}) = 1 - \\frac{4}{5} = \\frac{1}{5}" },
-      { label: "c.", text: "Jika ada 200 siswa mengikuti ujian, berapa frekuensi harapan yang tidak lulus?" },
-    ],
-  }),
-  Qn(10, "Memilih Mana yang Lebih Mudah – Komplemen", {
-    type: "mixed",
-    content: "Kartu bernomor 1–20 diacak. A = angka bukan prima.",
-    parts: [
-      { label: "a.", math: "A' = \\text{prima dari 1–20} = \\{2,3,5,7,11,13,17,19\\} \\Rightarrow n(A') = 8" },
-      { label: "b.", math: "P(A') = \\frac{8}{20} = \\frac{2}{5}" },
-      { label: "c.", math: "P(A) = 1 - \\frac{2}{5} = \\frac{3}{5}" },
-    ],
-  }),
-  Qn(11, "Komplemen – Spinner", {
-    type: "mixed",
-    content: "Sebuah spinner dengan 8 sektor sama besar bernomor 1–8. A = angka lebih dari 5.",
-    parts: [
-      { label: "a.", math: "A = \\{6,7,8\\} \\Rightarrow P(A) = \\frac{3}{8}" },
-      { label: "b.", math: "A' = \\{1,2,3,4,5\\} \\Rightarrow P(A') = \\frac{5}{8}" },
-      { label: "c.", math: "P(A) + P(A') = \\frac{3}{8} + \\frac{5}{8} = 1 \\checkmark" },
-    ],
-  }),
-  Qn(12, "Soal UN – Mencari P(A) dari P(A')", {
-    type: "mixed",
-    content: "Peluang tidak terpilihnya kelereng merah dari suatu kantong adalah 5/8. Berapa peluang terpilihnya kelereng merah?",
-    parts: [
-      { label: "a.", math: "P(\\text{merah}') = \\frac{5}{8}" },
-      { label: "b.", math: "P(\\text{merah}) = 1 - \\frac{5}{8} = \\frac{3}{8}" },
-      { label: "c.", text: "Jika ada 40 kelereng, berapa kelereng merah dan berapa kelereng bukan merah?" },
-    ],
-  }),
-  Qn(13, "Komplemen – Dua Koin", {
-    type: "mixed",
-    content: "Dua koin dilempar. A = paling sedikit satu muncul Angka.",
-    diagram: <VennDiagram label="S (4 titik sampel)" aLabel="A: AA,AG,GA" aCompLabel="A': GG" pa="3/4" pac="1/4" />,
-    parts: [
-      { label: "a.", math: "A' = \\text{tidak ada Angka} = \\{\\text{GG}\\}" },
-      { label: "b.", math: "P(A') = \\frac{1}{4}" },
-      { label: "c.", math: "P(A) = 1 - \\frac{1}{4} = \\frac{3}{4}" },
-    ],
-  }),
-  Qn(14, "Komplemen – Kartu Gambar Remi", {
-    type: "mixed",
-    content: "Satu kartu diambil dari 52 kartu remi. A = kartu gambar (J, Q, K).",
-    parts: [
-      { label: "a.", math: "n(A) = 4 \\times 3 = 12 \\Rightarrow P(A) = \\frac{12}{52} = \\frac{3}{13}" },
-      { label: "b.", math: "P(A') = 1 - \\frac{3}{13} = \\frac{10}{13}" },
-      { label: "c.", text: "Kartu apa saja yang termasuk A' (bukan kartu gambar)?" },
-    ],
-  }),
-  Qn(15, "Soal TKA – Komplemen Kompleks", {
-    type: "mixed",
-    content: "Sebuah kantong berisi 3 merah, 4 biru, 5 hijau. A = tidak terambil bola hijau.",
-    parts: [
-      { label: "a.", math: "P(\\text{hijau}) = \\frac{5}{12}" },
-      { label: "b.", math: "P(A) = P(\\text{bukan hijau}) = 1 - \\frac{5}{12} = \\frac{7}{12}" },
-      { label: "c.", math: "P(A) = \\frac{3+4}{12} = \\frac{7}{12} \\checkmark \\text{ (verifikasi langsung)}" },
-    ],
-  }),
-  Qn(16, "Soal UN – Komplemen dalam Konteks", {
-    type: "mixed",
-    content: "Di kelas 9 terdapat 36 siswa. 15 siswa suka matematika, 12 suka IPA, 9 suka keduanya.",
+    options: ["8/20 = 2/5", "12/20 = 3/5", "5/20 = 1/4", "15/20 = 3/4"],
+    answer: 1,
+  },
+  {
+    n: 7, title: "Soal UN – Komplemen Dadu",
+    content: "Sebuah dadu dilempar sekali. A = muncul kelipatan 2 = {2, 4, 6}. Menggunakan konsep komplemen, peluang muncul angka yang bukan kelipatan 2 adalah ...",
+    options: ["1/6", "1/3", "1/2", "2/3"],
+    answer: 2,
+  },
+  {
+    n: 8, title: "Mencari P(A) dari P(A') – Cuaca",
+    content: "Peluang tidak hujan hari ini adalah 0,65. Menggunakan rumus P(A) = 1 − P(A'), peluang hujan hari ini adalah ...",
+    options: ["0,25", "0,30", "0,35", "0,45"],
+    answer: 2,
+  },
+  {
+    n: 9, title: "Komplemen – Soal Cerita Ujian",
+    content: "Peluang seorang siswa lulus ujian adalah 4/5. Peluang siswa tersebut tidak lulus ujian adalah ...",
+    options: ["1/10", "1/5", "2/5", "3/5"],
+    answer: 1,
+  },
+  {
+    n: 10, title: "Komplemen untuk Memudahkan – Kartu 1–20",
+    content: "Kartu bernomor 1–20 diacak. A = angka bukan prima. Bilangan prima dari 1–20 ada 8 angka (2,3,5,7,11,13,17,19). Peluang terambil kartu bukan prima adalah ...",
+    options: ["8/20 = 2/5", "10/20 = 1/2", "12/20 = 3/5", "14/20 = 7/10"],
+    answer: 2,
+  },
+  {
+    n: 11, title: "Komplemen – Spinner Angka 1–8",
+    content: "Sebuah spinner dengan 8 sektor sama besar bernomor 1–8. A = jarum berhenti di angka lebih dari 5. Maka A = {6, 7, 8} dan A' = {1, 2, 3, 4, 5}. Nilai P(A') adalah ...",
+    options: ["3/8", "4/8", "5/8", "6/8"],
+    answer: 2,
+  },
+  {
+    n: 12, title: "Soal UN – Mencari P(A) dari P(A') yang Diketahui",
+    content: "Peluang tidak terpilihnya kelereng merah dari suatu kantong adalah 5/8. Peluang terpilihnya kelereng merah menggunakan komplemen adalah ...",
+    options: ["1/8", "2/8", "3/8", "4/8"],
+    answer: 2,
+  },
+  {
+    n: 13, title: "Komplemen – Dua Koin Dilempar",
+    content: "Dua koin dilempar bersamaan. Ruang sampel: {AA, AG, GA, GG}. A = paling sedikit satu Angka. Menggunakan komplemen (A' = GG saja), P(A) adalah ...",
+    options: ["1/4", "1/2", "3/4", "2/4"],
+    answer: 2,
+  },
+  {
+    n: 14, title: "Komplemen – Kartu Gambar Remi",
+    content: "Satu kartu diambil dari 52 kartu remi. A = kartu gambar (J, Q, K) = 12 kartu. P(A) = 12/52 = 3/13. Peluang terambilnya bukan kartu gambar adalah ...",
+    options: ["3/13", "9/13", "10/13", "11/13"],
+    answer: 2,
+  },
+  {
+    n: 15, title: "Soal TKA – Komplemen Bola Berwarna",
+    content: "Sebuah kantong berisi 3 merah, 4 biru, dan 5 hijau (total 12 bola). Satu bola diambil acak. Peluang terambilnya bola bukan hijau adalah ...",
+    options: ["5/12", "6/12 = 1/2", "7/12", "8/12 = 2/3"],
+    answer: 2,
+  },
+  {
+    n: 16, title: "Soal UN – Komplemen dalam Konteks Kelas",
+    content: "Di kelas 9 ada 36 siswa. 15 suka Matematika, 12 suka IPA, 9 suka keduanya. Banyak siswa yang suka setidaknya satu pelajaran = 15 + 12 − 9 = 18. Peluang seorang siswa tidak suka keduanya adalah ...",
     diagram: (
       <FreqTable
         caption="Distribusi minat siswa"
-        headers={["Kategori","Suka Mat","Suka IPA","Keduanya","Tidak Keduanya"]}
-        rows={[["Siswa",15,12,9,"?"]]}
+        headers={["Kategori", "Suka Mat", "Suka IPA", "Keduanya", "Total Siswa"]}
+        rows={[["Siswa", 15, 12, 9, 36]]}
       />
     ),
-    parts: [
-      { label: "a.", text: "Berapa siswa yang tidak suka keduanya (matematika maupun IPA)?" },
-      { label: "b.", text: "Berapa peluang seorang siswa tidak suka matematika maupun IPA?" },
-      { label: "c.", math: "P(\\text{tidak keduanya}) = 1 - P(\\text{suka setidaknya satu})" },
-    ],
-  }),
-  Qn(17, "Komplemen – Soal Cuaca Lanjutan", {
-    type: "mixed",
+    options: ["9/36 = 1/4", "14/36 = 7/18", "18/36 = 1/2", "27/36 = 3/4"],
+    answer: 2,
+  },
+  {
+    n: 17, title: "Komplemen – Prediksi Cuaca Seminggu",
+    content: "Prediksi cuaca 7 hari ke depan, P(Hujan): Senin 0,3 — Selasa 0,5 — Rabu 0,4 — Kamis 0,2 — Jumat 0,6 — Sabtu 0,3 — Minggu 0,1. Pada hari manakah peluang TIDAK hujan paling besar?",
     diagram: (
       <FreqTable
         caption="Prediksi cuaca 7 hari ke depan"
-        headers={["Hari","Sen","Sel","Rab","Kam","Jum","Sab","Min"]}
-        rows={[["P(Hujan)","0,3","0,5","0,4","0,2","0,6","0,3","0,1"]]}
+        headers={["Hari", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"]}
+        rows={[["P(Hujan)", "0,3", "0,5", "0,4", "0,2", "0,6", "0,3", "0,1"]]}
       />
     ),
-    parts: [
-      { label: "a.", text: "Pada hari apa peluang tidak hujan paling besar?" },
-      { label: "b.", text: "Hitung P(tidak hujan) untuk setiap hari." },
-      { label: "c.", text: "Berapa hari yang peluang hujannya lebih dari 0,4?" },
-    ],
-  }),
-  Qn(18, "Soal UN – Komplemen Berganda", {
-    type: "mixed",
-    content: "Dalam sebuah kantong terdapat bola berwarna. P(merah) = 0,3 dan P(biru) = 0,25. Sisanya bola hijau.",
-    parts: [
-      { label: "a.", math: "P(\\text{hijau}) = 1 - 0{,}3 - 0{,}25 = \\ldots" },
-      { label: "b.", math: "P(\\text{bukan hijau}) = P(\\text{merah}) + P(\\text{biru}) = \\ldots" },
-      { label: "c.", text: "Jika ada 40 bola, berapa bola hijau?" },
-    ],
-  }),
-  Qn(19, "Komplemen – Kartu Bernomor 1–25", {
-    type: "mixed",
-    content: "Kartu bernomor 1–25 diacak. Satu kartu diambil. A = bukan kelipatan 5.",
-    parts: [
-      { label: "a.", math: "A' = \\text{kelipatan 5 dari 1–25} = \\{5,10,15,20,25\\} \\Rightarrow n(A') = 5" },
-      { label: "b.", math: "P(A') = \\frac{5}{25} = \\frac{1}{5}" },
-      { label: "c.", math: "P(A) = 1 - \\frac{1}{5} = \\frac{4}{5}" },
-    ],
-  }),
-  Qn(20, "Soal ANBK – Komplemen Sederhana", {
-    type: "mixed",
+    options: ["Selasa (P tidak hujan = 0,5)", "Kamis (P tidak hujan = 0,8)", "Minggu (P tidak hujan = 0,9)", "Jumat (P tidak hujan = 0,4)"],
+    answer: 2,
+  },
+  {
+    n: 18, title: "Soal UN – Komplemen Tiga Warna Bola",
+    content: "Dalam sebuah kantong terdapat bola berwarna. P(merah) = 0,3 dan P(biru) = 0,25. Sisanya adalah bola hijau. Nilai P(hijau) menggunakan komplemen adalah ...",
+    options: ["0,40", "0,45", "0,50", "0,55"],
+    answer: 1,
+  },
+  {
+    n: 19, title: "Komplemen – Kartu Bernomor 1–25",
+    content: "Kartu bernomor 1–25 diacak. A = terambil kartu bukan kelipatan 5. A' = kelipatan 5 dari 1–25 = {5,10,15,20,25} → n(A') = 5. Nilai P(A) = P(bukan kelipatan 5) adalah ...",
+    options: ["1/5", "2/5", "3/5", "4/5"],
+    answer: 3,
+  },
+  {
+    n: 20, title: "Soal ANBK – Komplemen Hobi Siswa",
+    content: "Survei hobi 60 siswa: Membaca 20, Olahraga 25, Musik 15. P(Olahraga) = 25/60 = 5/12. Peluang siswa yang TIDAK hobi Olahraga adalah ...",
     diagram: (
       <FreqTable
         caption="Hasil survei hobi 60 siswa"
-        headers={["Hobi","Membaca","Olahraga","Musik","Total"]}
-        rows={[["Siswa",20,25,15,60]]}
+        headers={["Hobi", "Membaca", "Olahraga", "Musik", "Total"]}
+        rows={[["Siswa", 20, 25, 15, 60]]}
       />
     ),
-    parts: [
-      { label: "a.", math: "P(\\text{Olahraga}) = \\frac{25}{60} = \\frac{5}{12}" },
-      { label: "b.", math: "P(\\text{bukan Olahraga}) = 1 - \\frac{5}{12} = \\frac{7}{12}" },
-      { label: "c.", text: "Verifikasi: P(Membaca) + P(Musik) = P(bukan Olahraga)?" },
-    ],
-  }),
-  Qn(21, "Soal UN – Aplikasi Komplemen dalam Kehidupan", {
-    type: "mixed",
-    content: "Peluang sebuah pesawat tiba tepat waktu adalah 0,92. Berapa peluang pesawat terlambat atau dibatalkan?",
-    parts: [
-      { label: "a.", math: "P(\\text{tepat waktu}) = 0{,}92" },
-      { label: "b.", math: "P(\\text{tidak tepat waktu}) = 1 - 0{,}92 = \\ldots" },
-      { label: "c.", text: "Jika ada 250 penerbangan, berapa frekuensi harapan penerbangan yang tidak tepat waktu?" },
-    ],
-  }),
-  Qn(22, "Komplemen – Soal Pabrik", {
-    type: "mixed",
-    content: "Peluang produk tidak cacat adalah 0,96. Pabrik memproduksi 5.000 unit.",
-    parts: [
-      { label: "a.", math: "P(\\text{cacat}) = 1 - 0{,}96 = \\ldots" },
-      { label: "b.", math: "f_h(\\text{cacat}) = 5000 \\times \\ldots = \\ldots" },
-      { label: "c.", text: "Berapa unit yang diharapkan tidak cacat?" },
-    ],
-  }),
-  Qn(23, "Soal UN – Komplemen dan fh", {
-    type: "mixed",
-    content: "Peluang siswa tidak membawa tugas adalah 1/8. Dalam 1 semester ada 64 pertemuan.",
-    parts: [
-      { label: "a.", math: "P(\\text{tidak bawa tugas}) = \\frac{1}{8}" },
-      { label: "b.", math: "P(\\text{bawa tugas}) = 1 - \\frac{1}{8} = \\frac{7}{8}" },
-      { label: "c.", math: "f_h(\\text{bawa tugas}) = 64 \\times \\frac{7}{8} = \\ldots" },
-    ],
-  }),
-  Qn(24, "Soal TKA – P(A') Lebih Mudah dari P(A)", {
-    type: "mixed",
-    content: "Tiga koin dilempar. A = paling sedikit satu Angka.",
-    parts: [
-      { label: "a.", math: "A' = \\text{tidak ada Angka} = \\{\\text{GGG}\\} \\Rightarrow P(A') = \\frac{1}{8}" },
-      { label: "b.", math: "P(A) = 1 - \\frac{1}{8} = \\frac{7}{8}" },
-      { label: "c.", text: "Mengapa lebih mudah menghitung P(A) menggunakan komplemen?" },
-    ],
-  }),
+    options: ["5/12", "6/12 = 1/2", "7/12", "8/12 = 2/3"],
+    answer: 2,
+  },
+  {
+    n: 21, title: "Soal UN – Komplemen dalam Kehidupan Nyata",
+    content: "Peluang sebuah pesawat tiba tepat waktu adalah 0,92. Berapa peluang pesawat TIDAK tiba tepat waktu (terlambat atau dibatalkan)?",
+    options: ["0,04", "0,06", "0,08", "0,10"],
+    answer: 2,
+  },
+  {
+    n: 22, title: "Komplemen – Produk Cacat di Pabrik",
+    content: "Peluang suatu produk tidak cacat adalah 0,96. Pabrik memproduksi 5.000 unit. Peluang produk cacat menggunakan komplemen adalah ...",
+    options: ["0,02", "0,04", "0,06", "0,08"],
+    answer: 1,
+  },
+  {
+    n: 23, title: "Soal UN – Komplemen Siswa Membawa Tugas",
+    content: "Peluang siswa tidak membawa tugas adalah 1/8. Dalam 1 semester ada 64 pertemuan. Peluang siswa membawa tugas pada suatu pertemuan adalah ...",
+    options: ["1/8", "5/8", "6/8 = 3/4", "7/8"],
+    answer: 3,
+  },
+  {
+    n: 24, title: "Soal TKA – Komplemen Tiga Koin",
+    content: "Tiga koin dilempar bersamaan. Ruang sampel ada 8 titik. A = paling sedikit satu Angka. A' = tidak ada Angka sama sekali = {GGG} → P(A') = 1/8. Nilai P(A) adalah ...",
+    options: ["1/8", "3/8", "5/8", "7/8"],
+    answer: 3,
+  },
 ];
+
+const OPTS = ["A", "B", "C", "D"];
 
 const KomplementPage = () => {
   const navigate = useNavigate();
+  const [selected, setSelected] = useState<Record<number, number>>({});
+  const [revealed, setRevealed] = useState<Record<number, boolean>>({});
+
+  const handleSelect = (qn: number, idx: number) => {
+    if (revealed[qn]) return;
+    setSelected(s => ({ ...s, [qn]: idx }));
+  };
+
+  const handleReveal = (qn: number) => {
+    setRevealed(r => ({ ...r, [qn]: true }));
+  };
+
+  const score = questions.filter(q => revealed[q.n] && selected[q.n] === q.answer).length;
+  const totalRevealed = Object.keys(revealed).length;
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -336,10 +249,15 @@ const KomplementPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 24 Soal</span>
+            <span className="text-rose-400 text-xs font-bold">📋 {questions.length} Soal Pilihan Ganda</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
+          {totalRevealed > 0 && (
+            <div className="mt-2 bg-rose-900/30 border border-rose-500/30 rounded-lg px-4 py-1.5 text-xs font-body text-rose-300">
+              Skor: {score} / {totalRevealed} soal dijawab
+            </div>
+          )}
         </div>
 
         <div className="mb-5 bg-rose-900/20 border border-rose-500/20 rounded-xl p-4">
@@ -362,43 +280,62 @@ const KomplementPage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 animate-slide-up">
-          {questions.map((q, i) => (
-            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
-              style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
-              <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
-              <div className="relative px-5 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-rose-500/20 border border-rose-400/50 flex items-center justify-center shrink-0">
-                    <span className="text-rose-300 text-xs font-bold">{q.n}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                      {q.title}
-                    </span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
-                    {q.math && <div className="mb-3 text-white overflow-x-auto"><BlockMath math={q.math} /></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
-                    {q.parts && (
+        <div className="flex flex-col gap-5 animate-slide-up">
+          {questions.map((q, qi) => {
+            const sel = selected[q.n];
+            const isRevealed = revealed[q.n];
+            const hasSel = sel !== undefined;
+            return (
+              <div key={q.n} className="relative rounded-2xl overflow-hidden" style={{ animationDelay: `${qi * 0.02}s` }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
+                <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
+                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
+                <div className="relative px-5 py-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-rose-500/20 border border-rose-400/50 flex items-center justify-center shrink-0">
+                      <span className="text-rose-300 text-xs font-bold">{q.n}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                        {q.title}
+                      </span>
+                      {q.diagram && <div className="mb-3">{q.diagram}</div>}
+                      <p className="font-body text-sm text-white/90 leading-relaxed mb-4">{q.content}</p>
                       <div className="flex flex-col gap-2">
-                        {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? "bg-white/5" : "bg-transparent px-0"}`}>
-                            {p.label && <span className="text-rose-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
-                            {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
-                            }
-                          </div>
-                        ))}
+                        {q.options.map((opt, oi) => {
+                          let cls = "bg-white/5 border border-white/10 text-white/80";
+                          if (isRevealed) {
+                            if (oi === q.answer) cls = "bg-emerald-500/20 border border-emerald-400/60 text-emerald-300 font-bold";
+                            else if (oi === sel) cls = "bg-red-500/20 border border-red-400/60 text-red-300";
+                            else cls = "bg-white/3 border border-white/5 text-white/40";
+                          } else if (hasSel && oi === sel) {
+                            cls = "bg-rose-500/25 border border-rose-400/60 text-rose-200";
+                          }
+                          return (
+                            <button key={oi} onClick={() => handleSelect(q.n, oi)}
+                              className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-left transition-all duration-200 ${cls} ${!isRevealed ? "cursor-pointer hover:border-rose-400/40" : "cursor-default"}`}>
+                              <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 border ${isRevealed && oi === q.answer ? "bg-emerald-500/30 border-emerald-400" : isRevealed && oi === sel ? "bg-red-500/30 border-red-400" : hasSel && oi === sel ? "bg-rose-500/30 border-rose-400" : "bg-white/10 border-white/20"}`}>
+                                {OPTS[oi]}
+                              </span>
+                              <span className="font-body text-sm">{opt}</span>
+                              {isRevealed && oi === q.answer && <span className="ml-auto text-emerald-400 text-xs font-bold">✓ Benar</span>}
+                              {isRevealed && oi === sel && oi !== q.answer && <span className="ml-auto text-red-400 text-xs font-bold">✗ Salah</span>}
+                            </button>
+                          );
+                        })}
                       </div>
-                    )}
+                      {hasSel && !isRevealed && (
+                        <button onClick={() => handleReveal(q.n)}
+                          className="mt-3 text-xs bg-rose-500/20 hover:bg-rose-500/30 border border-rose-400/40 text-rose-300 rounded-lg px-4 py-1.5 transition-colors font-body cursor-pointer">
+                          Cek Jawaban
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-8 text-center">
