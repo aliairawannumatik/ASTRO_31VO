@@ -456,9 +456,9 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
     setPhase("idle");
   };
 
-  const arcColor = b >= 0 ? "#4ade80" : "#f87171";
+  const arcColor = b >= 0 ? "#38bdf8" : "#f87171";
   const arcUp    = b >= 0;
-  const markerId = b >= 0 ? "ia-arrow-g" : "ia-arrow-r";
+  const markerId = b >= 0 ? "ia-arrow-b" : "ia-arrow-r";
   const unitPx   = (SVG_W - PAD * 2) / rangeW;
 
   const isDone = phase === "done";
@@ -587,7 +587,7 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
               <filter id="glow-g" x="-40%" y="-40%" width="180%" height="180%">
                 <feGaussianBlur stdDeviation="3.5" result="blur"/>
                 <feColorMatrix in="blur" type="matrix"
-                  values="0 0 0 0 0.2  0 0 0 0 1  0 0 0 0 0.4  0 0 0 1 0" result="colored"/>
+                  values="0 0 0 0 0.22  0 0 0 0 0.75  0 0 0 0 1  0 0 0 1 0" result="colored"/>
                 <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
               <filter id="glow-r" x="-40%" y="-40%" width="180%" height="180%">
@@ -609,9 +609,9 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
 
               {/* Gradients for arcs */}
               <linearGradient id="grad-g" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"   stopColor="#86efac"/>
-                <stop offset="50%"  stopColor="#4ade80"/>
-                <stop offset="100%" stopColor="#22c55e"/>
+                <stop offset="0%"   stopColor="#bae6fd"/>
+                <stop offset="50%"  stopColor="#38bdf8"/>
+                <stop offset="100%" stopColor="#0ea5e9"/>
               </linearGradient>
               <linearGradient id="grad-r" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%"   stopColor="#fca5a5"/>
@@ -627,7 +627,10 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
                 <polygon points="0 0,9 3.5,0 7" fill="#FFD700"/>
               </marker>
               <marker id="ia-arrow-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                <polygon points="0 0,8 3,0 6" fill="#4ade80"/>
+                <polygon points="0 0,8 3,0 6" fill="#38bdf8"/>
+              </marker>
+              <marker id="ia-arrow-b" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0,8 3,0 6" fill="#38bdf8"/>
               </marker>
               <marker id="ia-arrow-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
                 <polygon points="0 0,8 3,0 6" fill="#f87171"/>
@@ -722,21 +725,14 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
               );
             })}
 
-            {/* Moving dot — slides smoothly via CSS transition on transform */}
-            {phase !== "idle" && (
-              <g
-                style={{
-                  transform: `translateX(${dotTargetX - toX(a)}px)`,
-                  transition: phase === "animating"
-                    ? `transform ${totalMs * 0.001 * 0.92}s cubic-bezier(0.4,0,0.2,1)`
-                    : "none",
-                }}
-              >
-                <circle cx={toX(a)} cy={lineY} r="13"
-                  fill={isDone ? "#67e8f9" : arcColor} opacity="0.13" className="dot-fade"/>
-                <circle cx={toX(a)} cy={lineY} r="7"
-                  fill={isDone ? "#67e8f9" : arcColor}
-                  filter={isDone ? "url(#glow-cyan)" : (arcUp ? "url(#glow-g)" : "url(#glow-r)")}
+            {/* Result dot — only appears when animation is done */}
+            {isDone && (
+              <g>
+                <circle cx={toX(result)} cy={lineY} r="13"
+                  fill="#67e8f9" opacity="0.13" className="dot-fade"/>
+                <circle cx={toX(result)} cy={lineY} r="7"
+                  fill="#67e8f9"
+                  filter="url(#glow-cyan)"
                   className="dot-fade"
                 />
               </g>
