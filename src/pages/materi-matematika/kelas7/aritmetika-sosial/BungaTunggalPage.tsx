@@ -138,9 +138,6 @@ const BungaTunggalPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* ─── ANIMASI BANK ─── */}
-          <BankSimulasi />
-
           {/* ─── PENGANTAR ─── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button onClick={() => toggleSection("intro")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
@@ -339,6 +336,9 @@ const BungaTunggalPage = () => {
               </div>
             )}
           </div>
+
+          {/* ─── ANIMASI BANK ─── */}
+          <BankSimulasi />
 
           {/* ─── KALKULATOR INTERAKTIF ─── */}
           <div className="rounded-xl overflow-hidden shadow-lg shadow-amber-500/10" style={{background: "linear-gradient(135deg, #1a1200 0%, #2a1a00 40%, #1a1200 100%)", border: "2px solid rgba(251,191,36,0.5)"}}>

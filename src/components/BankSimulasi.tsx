@@ -209,7 +209,7 @@ const MoneyStack = ({ amount, maxAmount, label, color }: {
   const pct = maxAmount > 0 ? Math.min((amount / maxAmount) * 100, 100) : 0;
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className="w-16 h-24 relative flex flex-col justify-end rounded-lg overflow-hidden border border-white/20" style={{ background: "rgba(0,0,0,0.4)" }}>
+      <div className="w-16 h-24 relative flex flex-col justify-end rounded-lg overflow-hidden border border-gray-200" style={{ background: "rgba(0,0,0,0.06)" }}>
         <motion.div
           className="w-full rounded-b-lg"
           style={{ background: color }}
@@ -302,32 +302,32 @@ export default function BankSimulasi() {
     <div
       className="rounded-2xl overflow-hidden border-2"
       style={{
-        background: "linear-gradient(135deg, #0a0f2e 0%, #0c1a45 50%, #071024 100%)",
-        borderColor: "rgba(59,130,246,0.5)",
-        boxShadow: "0 0 40px rgba(59,130,246,0.15)",
+        background: "#ffffff",
+        borderColor: "rgba(59,130,246,0.35)",
+        boxShadow: "0 4px 24px rgba(59,130,246,0.12)",
       }}
     >
       {/* Header */}
-      <div className="px-5 py-3 flex items-center gap-3" style={{ background: "linear-gradient(90deg, rgba(59,130,246,0.2), rgba(99,102,241,0.1))" }}>
+      <div className="px-5 py-3 flex items-center gap-3" style={{ background: "linear-gradient(90deg, rgba(59,130,246,0.1), rgba(99,102,241,0.05))" }}>
         <span className="text-2xl">🏦</span>
         <div>
-          <p className="font-body font-bold text-blue-200 text-sm">Simulasi Menabung di Bank</p>
-          <p className="font-body text-[10px] text-blue-400/60">Masukkan data → tekan Simulasi → lihat animasinya!</p>
+          <p className="font-body font-bold text-blue-700 text-sm">Simulasi Menabung di Bank</p>
+          <p className="font-body text-[10px] text-blue-500/70">Masukkan data → tekan Simulasi → lihat animasinya!</p>
         </div>
         <span className="ml-auto bg-blue-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">ANIMASI</span>
       </div>
 
       {/* Scene */}
-      <div className="relative mx-4 mt-4 rounded-xl overflow-hidden" style={{ height: 190, background: "linear-gradient(180deg, #050d20 0%, #0a1929 60%, #111c2e 100%)" }}>
-        {/* Sky dots */}
-        {[...Array(20)].map((_, i) => (
-          <div key={i} className="absolute rounded-full bg-white" style={{ width: 1.5, height: 1.5, top: `${Math.random() * 60}%`, left: `${Math.random() * 100}%`, opacity: Math.random() * 0.7 + 0.2 }} />
+      <div className="relative mx-4 mt-4 rounded-xl overflow-hidden" style={{ height: 190, background: "linear-gradient(180deg, #e0f2fe 0%, #bae6fd 55%, #d1fae5 100%)" }}>
+        {/* Clouds */}
+        {[10, 40, 70].map((x, i) => (
+          <div key={i} className="absolute rounded-full bg-white/70" style={{ width: 40 + i * 10, height: 14, top: `${10 + i * 8}%`, left: `${x}%`, filter: "blur(4px)" }} />
         ))}
         {/* Ground */}
-        <div className="absolute bottom-0 left-0 right-0 h-10 rounded-b-xl" style={{ background: "linear-gradient(180deg, #1a3a1a 0%, #0f2410 100%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-10 rounded-b-xl" style={{ background: "linear-gradient(180deg, #4ade80 0%, #16a34a 100%)" }} />
         {/* Road markings */}
         {[15, 35, 55, 75].map((x, i) => (
-          <div key={i} className="absolute bottom-3" style={{ left: `${x}%`, width: 20, height: 3, background: "rgba(255,255,255,0.15)", borderRadius: 2 }} />
+          <div key={i} className="absolute bottom-3" style={{ left: `${x}%`, width: 20, height: 3, background: "rgba(255,255,255,0.5)", borderRadius: 2 }} />
         ))}
 
         {/* Bank building – right side */}
@@ -359,14 +359,14 @@ export default function BankSimulasi() {
         <AnimatePresence>
           {phase === "idle" && (
             <motion.div
-              className="absolute font-body text-[10px] text-white bg-blue-900/80 border border-blue-500/50 rounded-xl px-3 py-1.5 shadow-lg"
+              className="absolute font-body text-[10px] text-blue-800 bg-white border border-blue-300 rounded-xl px-3 py-1.5 shadow-lg"
               style={{ top: 16, left: 16 }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
             >
               💭 "Ayo nabung supaya dapat bunga!"
-              <div className="absolute bottom-0 left-6 translate-y-full w-0 h-0" style={{ borderLeft: "6px solid transparent", borderRight: "6px solid transparent", borderTop: "8px solid rgba(30,58,166,0.9)" }} />
+              <div className="absolute bottom-0 left-6 translate-y-full w-0 h-0" style={{ borderLeft: "6px solid transparent", borderRight: "6px solid transparent", borderTop: "8px solid white" }} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -381,11 +381,11 @@ export default function BankSimulasi() {
               exit={{ opacity: 0 }}
             >
               <motion.div
-                className="bg-slate-900/90 border border-yellow-500/50 rounded-xl px-6 py-3 text-center"
+                className="bg-white border border-yellow-400 rounded-xl px-6 py-3 text-center shadow-lg"
                 animate={{ scale: [1, 1.04, 1] }}
                 transition={{ duration: 0.5, repeat: Infinity }}
               >
-                <p className="text-yellow-300 font-body text-sm font-bold">🧮 Menghitung bunga...</p>
+                <p className="text-yellow-600 font-body text-sm font-bold">🧮 Menghitung bunga...</p>
                 <div className="flex gap-1 justify-center mt-1">
                   {[0, 1, 2].map((i) => (
                     <motion.div key={i} className="w-2 h-2 rounded-full bg-yellow-400"
@@ -403,14 +403,14 @@ export default function BankSimulasi() {
         <AnimatePresence>
           {phase === "done" && result && (
             <motion.div
-              className="absolute font-body text-[10px] text-white bg-green-900/90 border border-green-500/50 rounded-xl px-3 py-2 shadow-lg"
+              className="absolute font-body text-[10px] text-green-800 bg-green-50 border border-green-400 rounded-xl px-3 py-2 shadow-lg"
               style={{ top: 12, right: 16 }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
             >
-              <p className="font-bold text-green-300">✅ Tabungan berhasil!</p>
-              <p>Bunga: <span className="text-yellow-300 font-bold">{fmt(result.bunga)}</span></p>
+              <p className="font-bold text-green-700">✅ Tabungan berhasil!</p>
+              <p>Bunga: <span className="text-yellow-600 font-bold">{fmt(result.bunga)}</span></p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -426,11 +426,11 @@ export default function BankSimulasi() {
 
       {/* Input section */}
       <div className="px-4 pt-4 pb-2">
-        <p className="font-body text-xs text-blue-300/70 mb-3 text-center">📝 Isi data tabunganmu di bawah ini</p>
+        <p className="font-body text-xs text-blue-600 mb-3 text-center">📝 Isi data tabunganmu di bawah ini</p>
         <div className="grid grid-cols-2 gap-3">
           {/* Tabungan Awal */}
           <div className="col-span-2 space-y-1">
-            <label className="font-body text-xs text-yellow-300 font-semibold flex items-center gap-1">
+            <label className="font-body text-xs text-yellow-600 font-semibold flex items-center gap-1">
               💰 Tabungan Awal (Rp)
             </label>
             <input
@@ -438,14 +438,14 @@ export default function BankSimulasi() {
               value={tabAwal}
               onChange={(e) => { setTabAwal(e.target.value); handleReset(); }}
               placeholder="contoh: 5000000"
-              className="w-full rounded-lg px-3 py-2.5 text-sm text-white font-body focus:outline-none transition-all"
-              style={{ background: "rgba(251,191,36,0.08)", border: "1.5px solid rgba(251,191,36,0.3)" }}
+              className="w-full rounded-lg px-3 py-2.5 text-sm text-gray-800 font-body focus:outline-none transition-all"
+              style={{ background: "rgba(251,191,36,0.08)", border: "1.5px solid rgba(217,162,0,0.4)" }}
             />
           </div>
 
           {/* Waktu */}
           <div className="space-y-1">
-            <label className="font-body text-xs text-blue-300 font-semibold flex items-center gap-1">
+            <label className="font-body text-xs text-blue-600 font-semibold flex items-center gap-1">
               ⏱ Waktu
             </label>
             <input
@@ -453,14 +453,14 @@ export default function BankSimulasi() {
               value={waktu}
               onChange={(e) => { setWaktu(e.target.value); handleReset(); }}
               placeholder="contoh: 2"
-              className="w-full rounded-lg px-3 py-2.5 text-sm text-white font-body focus:outline-none"
-              style={{ background: "rgba(59,130,246,0.08)", border: "1.5px solid rgba(59,130,246,0.3)" }}
+              className="w-full rounded-lg px-3 py-2.5 text-sm text-gray-800 font-body focus:outline-none"
+              style={{ background: "rgba(59,130,246,0.07)", border: "1.5px solid rgba(59,130,246,0.35)" }}
             />
           </div>
 
           {/* Satuan waktu toggle */}
           <div className="space-y-1">
-            <label className="font-body text-xs text-blue-300 font-semibold">📅 Satuan</label>
+            <label className="font-body text-xs text-blue-600 font-semibold">📅 Satuan</label>
             <div className="flex gap-2 h-[42px]">
               {(["tahun", "bulan"] as const).map((s) => (
                 <button
@@ -468,8 +468,8 @@ export default function BankSimulasi() {
                   onClick={() => { setSatuanWaktu(s); handleReset(); playPopSound(); }}
                   className="flex-1 rounded-lg text-xs font-body font-bold transition-all"
                   style={satuanWaktu === s
-                    ? { background: "rgba(59,130,246,0.35)", border: "1.5px solid rgba(99,102,241,0.8)", color: "#93c5fd" }
-                    : { background: "rgba(59,130,246,0.06)", border: "1.5px solid rgba(59,130,246,0.2)", color: "rgba(147,197,253,0.4)" }}
+                    ? { background: "rgba(59,130,246,0.15)", border: "1.5px solid rgba(59,130,246,0.6)", color: "#1d4ed8" }
+                    : { background: "#f1f5f9", border: "1.5px solid rgba(59,130,246,0.2)", color: "#94a3b8" }}
                 >
                   {s.charAt(0).toUpperCase() + s.slice(1)}
                 </button>
@@ -479,7 +479,7 @@ export default function BankSimulasi() {
 
           {/* Persen bunga */}
           <div className="col-span-2 space-y-1">
-            <label className="font-body text-xs text-green-300 font-semibold flex items-center gap-1">
+            <label className="font-body text-xs text-green-600 font-semibold flex items-center gap-1">
               📈 Suku Bunga (% per {satuanWaktu})
             </label>
             <input
@@ -487,8 +487,8 @@ export default function BankSimulasi() {
               value={persenBunga}
               onChange={(e) => { setPersenBunga(e.target.value); handleReset(); }}
               placeholder={`contoh: 6  (artinya 6% per ${satuanWaktu})`}
-              className="w-full rounded-lg px-3 py-2.5 text-sm text-white font-body focus:outline-none"
-              style={{ background: "rgba(34,197,94,0.08)", border: "1.5px solid rgba(34,197,94,0.3)" }}
+              className="w-full rounded-lg px-3 py-2.5 text-sm text-gray-800 font-body focus:outline-none"
+              style={{ background: "rgba(34,197,94,0.07)", border: "1.5px solid rgba(34,197,94,0.4)" }}
             />
           </div>
         </div>
@@ -503,16 +503,16 @@ export default function BankSimulasi() {
               exit={{ opacity: 0 }}
             >
               {/* Bunga per satuan */}
-              <div className="rounded-lg p-2.5 text-center" style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)" }}>
-                <p className="font-body text-[9px] text-green-400/70 mb-0.5">Bunga ({satuanWaktu})</p>
-                <p className="font-body text-[11px] font-bold text-green-300">
+              <div className="rounded-lg p-2.5 text-center" style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.35)" }}>
+                <p className="font-body text-[9px] text-green-600 mb-0.5">Bunga ({satuanWaktu})</p>
+                <p className="font-body text-[11px] font-bold text-green-700">
                   {persenNum > 0 ? `${persenNum}%` : "—"}
                 </p>
               </div>
               {/* Besar bunga */}
-              <div className="rounded-lg p-2.5 text-center" style={{ background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.3)" }}>
-                <p className="font-body text-[9px] text-yellow-400/70 mb-0.5">Total Bunga</p>
-                <p className="font-body text-[10px] font-bold text-yellow-300 leading-tight">
+              <div className="rounded-lg p-2.5 text-center" style={{ background: "rgba(251,191,36,0.1)", border: "1px solid rgba(217,162,0,0.35)" }}>
+                <p className="font-body text-[9px] text-yellow-600 mb-0.5">Total Bunga</p>
+                <p className="font-body text-[10px] font-bold text-yellow-700 leading-tight">
                   {result
                     ? fmt(result.bunga)
                     : canCompute
@@ -521,9 +521,9 @@ export default function BankSimulasi() {
                 </p>
               </div>
               {/* Tabungan akhir */}
-              <div className="rounded-lg p-2.5 text-center" style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.3)" }}>
-                <p className="font-body text-[9px] text-indigo-400/70 mb-0.5">Tabungan Akhir</p>
-                <p className="font-body text-[10px] font-bold text-indigo-200 leading-tight">
+              <div className="rounded-lg p-2.5 text-center" style={{ background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.35)" }}>
+                <p className="font-body text-[9px] text-indigo-500 mb-0.5">Tabungan Akhir</p>
+                <p className="font-body text-[10px] font-bold text-indigo-700 leading-tight">
                   {result
                     ? fmt(result.tabAkhir)
                     : canCompute
@@ -540,7 +540,7 @@ export default function BankSimulasi() {
           {(canCompute || result) && (
             <motion.div
               className="mt-3 flex gap-4 justify-center items-end px-4 py-3 rounded-xl"
-              style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "rgba(59,130,246,0.04)", border: "1px solid rgba(59,130,246,0.15)" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -555,11 +555,11 @@ export default function BankSimulasi() {
                 <motion.div
                   animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
-                  className="text-green-400 font-bold text-lg"
+                  className="text-green-500 font-bold text-lg"
                 >
                   +
                 </motion.div>
-                <div className="text-[9px] text-white/40 font-body">bunga</div>
+                <div className="text-[9px] text-gray-400 font-body">bunga</div>
               </div>
               <MoneyStack
                 amount={result ? result.bunga : tabAwalNum * (satuanWaktu === "bulan" ? waktuNum / 12 : waktuNum) * (persenNum / 100)}
@@ -568,7 +568,7 @@ export default function BankSimulasi() {
                 color="linear-gradient(to top, #92400e, #fbbf24)"
               />
               <div className="flex flex-col items-center self-center mb-6">
-                <div className="text-blue-400 font-bold text-lg">=</div>
+                <div className="text-blue-500 font-bold text-lg">=</div>
               </div>
               <MoneyStack
                 amount={result ? result.tabAkhir : tabAwalNum + tabAwalNum * (satuanWaktu === "bulan" ? waktuNum / 12 : waktuNum) * (persenNum / 100)}
@@ -584,14 +584,14 @@ export default function BankSimulasi() {
         <AnimatePresence>
           {canCompute && (
             <motion.div
-              className="mt-3 rounded-lg px-4 py-2.5 font-body text-xs text-white/70"
-              style={{ background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.2)" }}
+              className="mt-3 rounded-lg px-4 py-2.5 font-body text-xs text-gray-600"
+              style={{ background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.25)" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              <p className="text-indigo-300 font-semibold text-[10px] mb-1">📐 Penghitungan:</p>
+              <p className="text-indigo-600 font-semibold text-[10px] mb-1">📐 Penghitungan:</p>
               <p>B = {fmt(tabAwalNum)} × {satuanWaktu === "bulan" ? `(${waktuNum}/12)` : waktuNum} × {persenNum}%</p>
-              <p className="text-yellow-300 font-semibold mt-0.5">
+              <p className="text-yellow-600 font-semibold mt-0.5">
                 B = {fmt(tabAwalNum * (satuanWaktu === "bulan" ? waktuNum / 12 : waktuNum) * (persenNum / 100))}
               </p>
             </motion.div>
@@ -614,7 +614,7 @@ export default function BankSimulasi() {
         <motion.button
           onClick={handleReset}
           className="px-4 rounded-xl font-body text-sm py-3 transition-all"
-          style={{ background: "rgba(59,130,246,0.1)", border: "1.5px solid rgba(59,130,246,0.25)", color: "rgba(147,197,253,0.7)" }}
+          style={{ background: "#f1f5f9", border: "1.5px solid rgba(59,130,246,0.3)", color: "#64748b" }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
         >
