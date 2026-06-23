@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
+import RestoranPPN from "@/components/RestoranPPN";
 import {
   BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator,
   Target, Receipt, AlertCircle, Star, Zap, RotateCcw,
@@ -65,6 +66,9 @@ const PPNPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ─── ANIMASI RESTORAN PPN ─── */}
+          <RestoranPPN />
 
           {/* ─── PENGANTAR ─── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
