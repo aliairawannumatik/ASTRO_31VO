@@ -307,12 +307,17 @@ type OrderItem = { id: number; nama: string; emoji: string; harga: number; qty: 
 export default function RestoranPPN() {
   const [order, setOrder]           = useState<OrderItem[]>([]);
   const [ppnPct, setPpnPct]         = useState(11);
+  const [customMode, setCustomMode] = useState(false);
+  const [customInput, setCustomInput] = useState("");
   const [phase, setPhase]           = useState<"idle" | "taking" | "counting" | "presenting">("idle");
   const [showReceipt, setShowReceipt] = useState(false);
   const [floatKey, setFloatKey]     = useState(0);
   const [floatText, setFloatText]   = useState("");
   const [floatColor, setFloatColor] = useState("bg-green-500");
   const [activeKat, setActiveKat]   = useState<string>("Makanan");
+
+  const PRESET_RATES = [10, 11, 12];
+  const isCustomActive = !PRESET_RATES.includes(ppnPct) || customMode;
 
   const subtotal = order.reduce((s, it) => s + it.harga * it.qty, 0);
   const ppnRp    = subtotal * (ppnPct / 100);
@@ -525,26 +530,56 @@ export default function RestoranPPN() {
 
       {/* ── PPN Rate selector ── */}
       <div className="mx-4 mt-3">
-        <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl" style={{ background: "rgba(124,58,237,0.12)", border: "1px solid rgba(167,139,250,0.3)" }}>
-          <span className="text-purple-300 font-body font-bold text-xs">📊 Tarif PPN:</span>
-          <div className="flex gap-2 flex-1">
-            {[10, 11, 12].map((p) => (
+        <div className="px-4 py-3 rounded-xl space-y-2.5" style={{ background: "rgba(124,58,237,0.12)", border: "1px solid rgba(167,139,250,0.3)" }}>
+          <div className="flex items-center justify-between">
+            <span className="text-purple-300 font-body font-bold text-xs">📊 Tarif PPN:</span>
+            <div className="text-right">
+              <p className="text-[9px] text-purple-400/60 font-body">PPN saat ini</p>
+              <p className="text-purple-200 font-black text-sm">{ppnPct}%</p>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            {PRESET_RATES.map((p) => (
               <button
                 key={p}
-                onClick={() => { setPpnPct(p); playPopSound(); }}
+                onClick={() => { setPpnPct(p); setCustomMode(false); setCustomInput(""); playPopSound(); }}
                 className="flex-1 py-1.5 rounded-lg text-xs font-bold font-body transition-all"
-                style={ppnPct === p
+                style={ppnPct === p && !isCustomActive
                   ? { background: "rgba(124,58,237,0.5)", border: "1.5px solid #a78bfa", color: "#e9d5ff" }
                   : { background: "rgba(124,58,237,0.08)", border: "1.5px solid rgba(167,139,250,0.2)", color: "rgba(167,139,250,0.5)" }}
               >
                 {p}%
               </button>
             ))}
+            <button
+              onClick={() => { setCustomMode(true); setCustomInput(String(ppnPct)); playPopSound(); }}
+              className="flex-1 py-1.5 rounded-lg text-xs font-bold font-body transition-all"
+              style={isCustomActive
+                ? { background: "rgba(236,72,153,0.4)", border: "1.5px solid #f472b6", color: "#fce7f3" }
+                : { background: "rgba(236,72,153,0.08)", border: "1.5px solid rgba(244,114,182,0.25)", color: "rgba(244,114,182,0.5)" }}
+            >
+              ✏️ Custom
+            </button>
           </div>
-          <div className="text-right">
-            <p className="text-[9px] text-purple-400/60 font-body">PPN saat ini</p>
-            <p className="text-purple-200 font-black text-sm">{ppnPct}%</p>
-          </div>
+          {isCustomActive && (
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value={customInput}
+                onChange={(e) => {
+                  setCustomInput(e.target.value);
+                  const val = parseFloat(e.target.value);
+                  if (!isNaN(val) && val >= 0 && val <= 100) setPpnPct(val);
+                }}
+                placeholder="Masukkan % PPN..."
+                className="flex-1 rounded-lg px-3 py-2 text-sm font-bold font-body focus:outline-none"
+                style={{ background: "rgba(236,72,153,0.12)", border: "1.5px solid rgba(244,114,182,0.5)", color: "#fce7f3" }}
+              />
+              <span className="text-pink-300 font-black text-sm">%</span>
+            </div>
+          )}
         </div>
       </div>
 
