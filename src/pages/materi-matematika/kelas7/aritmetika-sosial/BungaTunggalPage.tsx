@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
+import BankSimulasi from "@/components/BankSimulasi";
 import {
   BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator,
   Target, DollarSign, AlertCircle, Star, TrendingUp, Zap,
@@ -136,6 +137,9 @@ const BungaTunggalPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ─── ANIMASI BANK ─── */}
+          <BankSimulasi />
 
           {/* ─── PENGANTAR ─── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
