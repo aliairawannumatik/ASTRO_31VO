@@ -480,41 +480,61 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
         <div className="flex items-center justify-center gap-2 flex-wrap">
           <div className="flex flex-col items-center gap-1">
             <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-cyan-300/70"}`}>Bilangan ke-1</span>
-            <input
-              type="number"
-              value={inputA}
-              onChange={e => { setInputA(e.target.value); handleReset(); }}
-              placeholder="0"
-              min={-20} max={20}
-              className={`w-20 h-12 text-center text-xl font-bold rounded-xl border-2 outline-none transition-all font-mono
-                ${lightMode
-                  ? "bg-blue-50 border-blue-300 text-slate-800 focus:border-blue-500"
-                  : "bg-slate-800 border-cyan-500/60 text-cyan-200 focus:border-cyan-400"
-                }
-                ${validA ? (lightMode ? "border-blue-500 shadow-md" : "border-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.3)]") : ""}`}
-            />
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => { const v = inputA === "" ? 0 : parseInt(inputA); if (!isNaN(v)) { setInputA(String(Math.max(-20, v - 1))); handleReset(); } else { setInputA("-1"); handleReset(); } }}
+                className={`w-8 h-12 rounded-l-xl border-2 border-r-0 text-lg font-bold transition-all active:scale-95 ${lightMode ? "bg-blue-100 border-blue-300 text-slate-600 hover:bg-blue-200" : "bg-slate-700 border-cyan-500/60 text-cyan-300 hover:bg-slate-600"}`}
+              >−</button>
+              <input
+                type="number"
+                value={inputA}
+                onChange={e => { setInputA(e.target.value); handleReset(); }}
+                placeholder="0"
+                min={-20} max={20}
+                className={`w-16 h-12 text-center text-xl font-bold border-y-2 outline-none transition-all font-mono [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
+                  ${lightMode
+                    ? "bg-blue-50 border-blue-300 text-slate-800"
+                    : "bg-slate-800 border-cyan-500/60 text-cyan-200"
+                  }
+                  ${validA ? (lightMode ? "border-blue-500" : "border-cyan-400") : ""}`}
+              />
+              <button
+                onClick={() => { const v = inputA === "" ? 0 : parseInt(inputA); if (!isNaN(v)) { setInputA(String(Math.min(20, v + 1))); handleReset(); } else { setInputA("1"); handleReset(); } }}
+                className={`w-8 h-12 rounded-r-xl border-2 border-l-0 text-lg font-bold transition-all active:scale-95 ${lightMode ? "bg-blue-100 border-blue-300 text-slate-600 hover:bg-blue-200" : "bg-slate-700 border-cyan-500/60 text-cyan-300 hover:bg-slate-600"}`}
+              >+</button>
+            </div>
           </div>
 
           <span className={`text-3xl font-bold mt-5 ${lightMode ? "text-slate-600" : "text-yellow-300"}`}>+</span>
 
           <div className="flex flex-col items-center gap-1">
             <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-cyan-300/70"}`}>Bilangan ke-2</span>
-            <input
-              type="number"
-              value={inputB}
-              onChange={e => { setInputB(e.target.value); handleReset(); }}
-              placeholder="0"
-              min={-20} max={20}
-              className={`w-20 h-12 text-center text-xl font-bold rounded-xl border-2 outline-none transition-all font-mono
-                ${lightMode
-                  ? "bg-blue-50 border-blue-300 text-slate-800 focus:border-blue-500"
-                  : "bg-slate-800 border-cyan-500/60 text-cyan-200 focus:border-cyan-400"
-                }
-                ${validB ? (b >= 0
-                  ? (lightMode ? "border-green-500 shadow-md" : "border-green-400 shadow-[0_0_12px_rgba(74,222,128,0.3)]")
-                  : (lightMode ? "border-red-400 shadow-md" : "border-red-400 shadow-[0_0_12px_rgba(248,113,113,0.3)]")
-                ) : ""}`}
-            />
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => { const v = inputB === "" ? 0 : parseInt(inputB); if (!isNaN(v)) { setInputB(String(Math.max(-20, v - 1))); handleReset(); } else { setInputB("-1"); handleReset(); } }}
+                className={`w-8 h-12 rounded-l-xl border-2 border-r-0 text-lg font-bold transition-all active:scale-95 ${lightMode ? "bg-blue-100 border-blue-300 text-slate-600 hover:bg-blue-200" : "bg-slate-700 border-cyan-500/60 text-cyan-300 hover:bg-slate-600"}`}
+              >−</button>
+              <input
+                type="number"
+                value={inputB}
+                onChange={e => { setInputB(e.target.value); handleReset(); }}
+                placeholder="0"
+                min={-20} max={20}
+                className={`w-16 h-12 text-center text-xl font-bold border-y-2 outline-none transition-all font-mono [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
+                  ${lightMode
+                    ? "bg-blue-50 border-blue-300 text-slate-800"
+                    : "bg-slate-800 border-cyan-500/60 text-cyan-200"
+                  }
+                  ${validB ? (b >= 0
+                    ? (lightMode ? "border-sky-500" : "border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)]")
+                    : (lightMode ? "border-red-400" : "border-red-400 shadow-[0_0_12px_rgba(248,113,113,0.3)]")
+                  ) : ""}`}
+              />
+              <button
+                onClick={() => { const v = inputB === "" ? 0 : parseInt(inputB); if (!isNaN(v)) { setInputB(String(Math.min(20, v + 1))); handleReset(); } else { setInputB("1"); handleReset(); } }}
+                className={`w-8 h-12 rounded-r-xl border-2 border-l-0 text-lg font-bold transition-all active:scale-95 ${lightMode ? "bg-blue-100 border-blue-300 text-slate-600 hover:bg-blue-200" : "bg-slate-700 border-cyan-500/60 text-cyan-300 hover:bg-slate-600"}`}
+              >+</button>
+            </div>
           </div>
 
           <span className={`text-3xl font-bold mt-5 ${lightMode ? "text-slate-600" : "text-yellow-300"}`}>=</span>
@@ -523,7 +543,7 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
             <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-cyan-300/70"}`}>Hasil</span>
             <div className={`w-20 h-12 flex items-center justify-center rounded-xl border-2 text-xl font-bold font-mono transition-all
               ${isDone
-                ? (lightMode ? "bg-green-50 border-green-400 text-green-700" : "bg-green-900/30 border-green-400 text-green-300 shadow-[0_0_16px_rgba(74,222,128,0.4)]")
+                ? (lightMode ? "bg-amber-50 border-amber-400 text-amber-700" : "bg-amber-900/30 border-amber-400 text-amber-300 shadow-[0_0_16px_rgba(251,191,36,0.4)]")
                 : (lightMode ? "bg-slate-100 border-slate-200 text-slate-300" : "bg-slate-800/50 border-slate-600 text-slate-500")
               }`}>
               {isDone ? result : "?"}
@@ -600,6 +620,12 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
                 <feGaussianBlur stdDeviation="4" result="blur"/>
                 <feColorMatrix in="blur" type="matrix"
                   values="0 0 0 0 0  0 0 0 0 0.9  0 0 0 0 1  0 0 0 1 0" result="colored"/>
+                <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="glow-amber" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="4" result="blur"/>
+                <feColorMatrix in="blur" type="matrix"
+                  values="0 0 0 0 1  0 0 0 0 0.75  0 0 0 0 0  0 0 0 1 0" result="colored"/>
                 <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
               <filter id="glow-dot" x="-80%" y="-80%" width="360%" height="360%">
@@ -729,10 +755,10 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
             {isDone && (
               <g>
                 <circle cx={toX(result)} cy={lineY} r="13"
-                  fill="#67e8f9" opacity="0.13" className="dot-fade"/>
+                  fill="#fbbf24" opacity="0.15" className="dot-fade"/>
                 <circle cx={toX(result)} cy={lineY} r="7"
-                  fill="#67e8f9"
-                  filter="url(#glow-cyan)"
+                  fill="#fbbf24"
+                  filter="url(#glow-amber)"
                   className="dot-fade"
                 />
               </g>
@@ -742,8 +768,8 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
             {isDone && (
               <g>
                 <circle cx={toX(result)} cy={lineY} r="13"
-                  fill="none" stroke="#67e8f9" strokeWidth="2.5"
-                  filter="url(#glow-cyan)"
+                  fill="none" stroke="#fbbf24" strokeWidth="2.5"
+                  filter="url(#glow-amber)"
                   className="ring-pop"
                 />
                 {/* Mini sparkle stars around result */}
@@ -753,7 +779,7 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
                   const sy = lineY + Math.sin(rad) * 18;
                   return (
                     <circle key={`sp${si}`} cx={sx} cy={sy} r="2"
-                      fill="#67e8f9"
+                      fill="#fbbf24"
                       className="sparkle-burst"
                       style={{ animationDelay: `${si * 0.06}s`, transformOrigin: `${sx}px ${sy}px` }}
                     />
@@ -779,7 +805,7 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
             <span>{b >= 0 ? "➡️" : "⬅️"}</span>
             <span>
               {b >= 0
-                ? `Bilangan ke-2 positif → busur hijau bergerak ke KANAN sejauh ${steps} langkah`
+                ? `Bilangan ke-2 positif → busur biru bergerak ke KANAN sejauh ${steps} langkah`
                 : `Bilangan ke-2 negatif → busur merah bergerak ke KIRI sejauh ${steps} langkah`}
             </span>
           </div>
