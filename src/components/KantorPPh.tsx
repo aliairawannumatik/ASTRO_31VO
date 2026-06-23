@@ -23,7 +23,7 @@ const PROFESI = [
   { nama: "Dokter RS",          emoji: "🩺",  gaji: 15_000_000 },
   { nama: "Software Engineer",  emoji: "💻",  gaji: 25_000_000 },
   { nama: "Direktur",           emoji: "🏢",  gaji: 50_000_000 },
-  { nama: "Hakim",              emoji: "⚖️",  gaji: 12_000_000 },
+  { nama: "Hakim",              emoji: "⚖️",  gaji: 110_000_000 },
 ];
 
 /* ─── PPh tarif progresif (pasal 17) ─────────────────── */
