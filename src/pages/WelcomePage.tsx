@@ -4,7 +4,6 @@ import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
 import ExitDialog from "@/components/ExitDialog";
 import ThemePickerModal from "@/components/ThemePickerModal";
-import WarungAritmetika from "@/components/WarungAritmetika";
 import { spaceBg } from "@/assets/placeholder";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -153,18 +152,6 @@ const WelcomePage = () => {
             )}
           </div>
         </div>
-      </div>
-
-      {/* Warung Aritmetika Sosial Section */}
-      <div className="relative z-10 w-full max-w-4xl px-4 pb-8">
-        <div className="text-center mb-4">
-          <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow ${
-            isLight ? "bg-amber-100 text-amber-700 border border-amber-300" : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-          }`}>
-            📖 Buku Animasi Matematika · Kelas 7
-          </span>
-        </div>
-        <WarungAritmetika />
       </div>
 
       {/* Theme picker modal */}

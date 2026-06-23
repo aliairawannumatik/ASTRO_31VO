@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
+import WarungAritmetika from "@/components/WarungAritmetika";
 import {
   BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator,
   Target, TrendingUp, TrendingDown, Minus, Star, AlertCircle,
@@ -552,6 +553,9 @@ const JualBeliUntungRugiPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ── ANIMASI WARUNG INTERAKTIF ─────────────────────────── */}
+          <WarungAritmetika />
 
           {/* ── PENGANTAR ─────────────────────────────────────────── */}
           <Section id="intro" expanded={true} onToggle={toggleSection}
