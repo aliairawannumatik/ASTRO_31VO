@@ -68,9 +68,6 @@ const PPhPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* ─── ANIMASI KANTOR PPh ─── */}
-          <KantorPPh />
-
           {/* ─── PENGANTAR ─── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button onClick={() => toggleSection("intro")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
@@ -354,6 +351,9 @@ const PPhPage = () => {
               </div>
             )}
           </div>
+
+          {/* ─── ANIMASI KANTOR PPh ─── */}
+          <KantorPPh />
 
           {/* ─── KALKULATOR INTERAKTIF ─── */}
           <div className="rounded-xl overflow-hidden shadow-lg shadow-emerald-500/10" style={{ background: "linear-gradient(135deg, #001a0a 0%, #002a12 40%, #001a0a 100%)", border: "2px solid rgba(52,211,153,0.5)" }}>
