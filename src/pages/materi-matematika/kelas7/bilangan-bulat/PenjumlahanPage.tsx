@@ -415,7 +415,7 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
   useEffect(() => {
     if (phase !== "animating") return;
     if (animStep >= steps) { setPhase("done"); return; }
-    timerRef.current = setTimeout(() => setAnimStep(s => s + 1), 420);
+    timerRef.current = setTimeout(() => setAnimStep(s => s + 1), 950);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [phase, animStep, steps]);
 
@@ -552,11 +552,11 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
                   0%, 100% { stroke-opacity: 0.7; }
                   50%      { stroke-opacity: 1; }
                 }
-                .arc-new  { animation: arcDraw 0.45s cubic-bezier(0.22,1.6,0.36,1) forwards; }
-                .arc-done { animation: shimmer 2.2s ease-in-out infinite; }
-                .dot-pop  { animation: dotPop 0.5s cubic-bezier(0.34,1.8,0.64,1) forwards; }
-                .ring-pop { animation: ringPulse 0.55s cubic-bezier(0.22,1.4,0.36,1) forwards; }
-                .sparkle-burst { animation: sparkle 0.6s ease-out forwards; }
+                .arc-new  { animation: arcDraw 0.85s cubic-bezier(0.16,1,0.3,1) forwards; }
+                .arc-done { animation: shimmer 2.8s ease-in-out infinite; }
+                .dot-pop  { animation: dotPop 0.7s cubic-bezier(0.16,1.4,0.3,1) forwards; }
+                .ring-pop { animation: ringPulse 0.9s cubic-bezier(0.16,1.2,0.3,1) forwards; }
+                .sparkle-burst { animation: sparkle 1s ease-out forwards; }
               `}</style>
 
               {/* Glow filters */}
