@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
+import KantorPPh from "@/components/KantorPPh";
 import {
   BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator,
   Target, AlertCircle, Star, Zap, RotateCcw,
@@ -66,6 +67,9 @@ const PPhPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ─── ANIMASI KANTOR PPh ─── */}
+          <KantorPPh />
 
           {/* ─── PENGANTAR ─── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
