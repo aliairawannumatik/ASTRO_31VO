@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -351,6 +351,438 @@ const NumberLineContoh1SVG = () => {
   );
 };
 
+/* ── Kalkulator Interaktif Pengurangan Garis Bilangan ───────────────────── */
+const InteraktifPengurangan = ({ lightMode = false }: { lightMode?: boolean }) => {
+  const [inputA, setInputA] = useState("");
+  const [inputB, setInputB] = useState("");
+  const [phase, setPhase] = useState<"idle" | "animating" | "done">("idle");
+  const [animStep, setAnimStep] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const stepIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const rawA = parseInt(inputA);
+  const rawB = parseInt(inputB);
+  const validA = inputA !== "" && !isNaN(rawA);
+  const validB = inputB !== "" && !isNaN(rawB);
+  const bothValid = validA && validB;
+
+  const a = validA ? Math.max(-20, Math.min(20, rawA)) : 0;
+  const b = validB ? Math.max(-20, Math.min(20, rawB)) : 0;
+  const result = a - b;
+  const steps = Math.abs(b);
+
+  const ARC_DUR = 1.1;
+  const totalMs = steps * ARC_DUR * 1000 + 900;
+
+  const allPoints = bothValid ? [0, a, result] : validA ? [0, a] : [0];
+  const minV = Math.min(...allPoints) - 2;
+  const maxV = Math.max(...allPoints) + 2;
+  const rangeW = Math.max(maxV - minV, 6);
+
+  const SVG_W = 580;
+  const SVG_H = 120;
+  const PAD = 28;
+  const lineY = 66;
+  const toX = (n: number) => PAD + ((n - minV) / rangeW) * (SVG_W - PAD * 2);
+
+  const visibleNums: number[] = [];
+  for (let i = Math.ceil(minV); i <= Math.floor(maxV); i++) visibleNums.push(i);
+  const labelStep = rangeW > 16 ? 5 : rangeW > 8 ? 2 : 1;
+
+  useEffect(() => {
+    if (phase !== "animating") return;
+    timerRef.current = setTimeout(() => setPhase("done"), totalMs);
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [phase, totalMs]);
+
+  useEffect(() => {
+    if (phase !== "animating") {
+      if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
+      return;
+    }
+    setAnimStep(0);
+    stepIntervalRef.current = setInterval(() => {
+      setAnimStep(s => s + 1);
+    }, ARC_DUR * 1000);
+    return () => { if (stepIntervalRef.current) clearInterval(stepIntervalRef.current); };
+  }, [phase]);
+
+  const handleOperate = () => {
+    if (!bothValid) return;
+    playPopSound();
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
+    if (steps === 0) { setPhase("done"); return; }
+    setAnimStep(0);
+    setPhase("idle");
+    requestAnimationFrame(() => requestAnimationFrame(() => setPhase("animating")));
+  };
+
+  const handleReset = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
+    setAnimStep(0);
+    setPhase("idle");
+  };
+
+  // b > 0 → subtract positive → move LEFT (red arcs, curve down)
+  // b < 0 → subtract negative → move RIGHT (green arcs, curve up)
+  const arcUp    = b < 0;
+  const arcColor = b < 0 ? "#4ade80" : "#f87171";
+  const markerId = b < 0 ? "is-arrow-g" : "is-arrow-r";
+  const unitPx   = (SVG_W - PAD * 2) / rangeW;
+
+  const isDone = phase === "done";
+  const resultEmoji = isDone ? (b === 0 ? "😐" : b > 0 ? "⬅️" : "➡️") : "";
+
+  return (
+    <div className={`rounded-2xl border overflow-hidden shadow-xl mb-4 ${lightMode ? "bg-white/80 border-orange-200" : "bg-slate-900/90 border-orange-500/40"}`}>
+      {/* Header */}
+      <div className="bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 px-5 py-3 flex items-center gap-2">
+        <span className="text-lg">🔢</span>
+        <span className="font-display text-sm font-bold text-white tracking-wide">Kalkulator Interaktif Pengurangan – Garis Bilangan</span>
+      </div>
+
+      <div className="px-4 py-4 space-y-4">
+        {/* Input Row */}
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          {/* Bilangan ke-1 */}
+          <div className="flex flex-col items-center gap-1">
+            <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-orange-300/70"}`}>Bilangan ke-1</span>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => { const v = inputA === "" ? 0 : parseInt(inputA); if (!isNaN(v)) { setInputA(String(Math.max(-20, v - 1))); handleReset(); } else { setInputA("-1"); handleReset(); } }}
+                className={`w-8 h-12 rounded-l-xl border-2 border-r-0 text-lg font-bold transition-all active:scale-95 ${lightMode ? "bg-orange-100 border-orange-300 text-slate-600 hover:bg-orange-200" : "bg-slate-700 border-orange-500/60 text-orange-300 hover:bg-slate-600"}`}
+              >−</button>
+              <input
+                type="number"
+                value={inputA}
+                onChange={e => { setInputA(e.target.value); handleReset(); }}
+                placeholder="0"
+                min={-20} max={20}
+                className={`w-16 h-12 text-center text-xl font-bold border-y-2 outline-none transition-all font-mono [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
+                  ${lightMode ? "bg-orange-50 border-orange-300 text-slate-800" : "bg-slate-800 border-orange-500/60 text-orange-200"}
+                  ${validA ? (lightMode ? "border-orange-500" : "border-orange-400") : ""}`}
+              />
+              <button
+                onClick={() => { const v = inputA === "" ? 0 : parseInt(inputA); if (!isNaN(v)) { setInputA(String(Math.min(20, v + 1))); handleReset(); } else { setInputA("1"); handleReset(); } }}
+                className={`w-8 h-12 rounded-r-xl border-2 border-l-0 text-lg font-bold transition-all active:scale-95 ${lightMode ? "bg-orange-100 border-orange-300 text-slate-600 hover:bg-orange-200" : "bg-slate-700 border-orange-500/60 text-orange-300 hover:bg-slate-600"}`}
+              >+</button>
+            </div>
+          </div>
+
+          <span className={`text-3xl font-bold mt-5 ${lightMode ? "text-slate-600" : "text-yellow-300"}`}>−</span>
+
+          {/* Bilangan ke-2 */}
+          <div className="flex flex-col items-center gap-1">
+            <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-orange-300/70"}`}>Bilangan ke-2</span>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => { const v = inputB === "" ? 0 : parseInt(inputB); if (!isNaN(v)) { setInputB(String(Math.max(-20, v - 1))); handleReset(); } else { setInputB("-1"); handleReset(); } }}
+                className={`w-8 h-12 rounded-l-xl border-2 border-r-0 text-lg font-bold transition-all active:scale-95 ${lightMode ? "bg-orange-100 border-orange-300 text-slate-600 hover:bg-orange-200" : "bg-slate-700 border-orange-500/60 text-orange-300 hover:bg-slate-600"}`}
+              >−</button>
+              <input
+                type="number"
+                value={inputB}
+                onChange={e => { setInputB(e.target.value); handleReset(); }}
+                placeholder="0"
+                min={-20} max={20}
+                className={`w-16 h-12 text-center text-xl font-bold border-y-2 outline-none transition-all font-mono [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
+                  ${lightMode ? "bg-orange-50 border-orange-300 text-slate-800" : "bg-slate-800 border-orange-500/60 text-orange-200"}
+                  ${validB ? (b <= 0
+                    ? (lightMode ? "border-red-400" : "border-red-400 shadow-[0_0_12px_rgba(248,113,113,0.3)]")
+                    : (lightMode ? "border-green-500" : "border-green-400 shadow-[0_0_12px_rgba(74,222,128,0.3)]")
+                  ) : ""}`}
+              />
+              <button
+                onClick={() => { const v = inputB === "" ? 0 : parseInt(inputB); if (!isNaN(v)) { setInputB(String(Math.min(20, v + 1))); handleReset(); } else { setInputB("1"); handleReset(); } }}
+                className={`w-8 h-12 rounded-r-xl border-2 border-l-0 text-lg font-bold transition-all active:scale-95 ${lightMode ? "bg-orange-100 border-orange-300 text-slate-600 hover:bg-orange-200" : "bg-slate-700 border-orange-500/60 text-orange-300 hover:bg-slate-600"}`}
+              >+</button>
+            </div>
+          </div>
+
+          <span className={`text-3xl font-bold mt-5 ${lightMode ? "text-slate-600" : "text-yellow-300"}`}>=</span>
+
+          {/* Hasil */}
+          <div className="flex flex-col items-center gap-1">
+            <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-orange-300/70"}`}>Hasil</span>
+            <div className={`w-20 h-12 flex items-center justify-center rounded-xl border-2 text-xl font-bold font-mono transition-all
+              ${isDone
+                ? (lightMode ? "bg-amber-50 border-amber-400 text-amber-700" : "bg-amber-900/30 border-amber-400 text-amber-300 shadow-[0_0_16px_rgba(251,191,36,0.4)]")
+                : (lightMode ? "bg-slate-100 border-slate-200 text-slate-300" : "bg-slate-800/50 border-slate-600 text-slate-500")
+              }`}>
+              {isDone ? result : "?"}
+            </div>
+          </div>
+        </div>
+
+        {/* Number line SVG */}
+        <div className={`rounded-xl p-3 border ${lightMode ? "bg-slate-50 border-slate-200" : "bg-slate-950/60 border-white/10"}`}>
+          <p className={`text-xs text-center mb-2 font-body ${lightMode ? "text-slate-400" : "text-white/40"}`}>
+            {phase === "idle" && !validA && "Masukkan angka untuk melihat garis bilangan"}
+            {phase === "idle" && validA && !validB && `Titik merah = ${a} · masukkan bilangan ke-2`}
+            {phase === "idle" && bothValid && `Siap! Klik Operasikan untuk melihat animasi busur`}
+            {phase === "animating" && `Melangkah... ${animStep} dari ${steps} langkah`}
+            {phase === "done" && `${a} − (${b}) = ${result} ${resultEmoji}`}
+          </p>
+
+          <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} width="100%" xmlns="http://www.w3.org/2000/svg" style={{ overflow: "visible" }}>
+            <defs>
+              <style>{`
+                @keyframes isArcDraw {
+                  0%   { stroke-dashoffset: 100; opacity: 0; }
+                  15%  { opacity: 1; }
+                  100% { stroke-dashoffset: 0; opacity: 1; }
+                }
+                @keyframes isShimmer {
+                  0%, 100% { stroke-opacity: 0.65; }
+                  50%      { stroke-opacity: 1; }
+                }
+                @keyframes isDotFade {
+                  0%   { opacity: 0; transform: scale(0.4); }
+                  100% { opacity: 1; transform: scale(1); }
+                }
+                @keyframes isRingPulse {
+                  0%   { opacity: 0; transform: scale(0.5); }
+                  60%  { opacity: 0.9; transform: scale(1.15); }
+                  100% { opacity: 1; transform: scale(1); }
+                }
+                @keyframes isSparkle {
+                  0%   { opacity: 1; transform: scale(1); }
+                  100% { opacity: 0; transform: scale(3); }
+                }
+                .is-arc-draw   { animation: isArcDraw 1.0s cubic-bezier(0.4,0,0.2,1) both; }
+                .is-arc-shimmer { animation: isShimmer 3s ease-in-out infinite; }
+                .is-dot-fade   { animation: isDotFade 0.5s ease-out both; }
+                .is-ring-pop   { animation: isRingPulse 0.8s cubic-bezier(0.34,1.4,0.64,1) forwards; transform-box: fill-box; transform-origin: center; }
+                .is-sparkle    { animation: isSparkle 0.9s ease-out forwards; transform-box: fill-box; transform-origin: center; }
+              `}</style>
+
+              {/* Glow filters */}
+              <filter id="is-glow-g" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.27  0 0 0 0 0.87  0 0 0 0 0.5  0 0 0 1 0" result="colored"/>
+                <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="is-glow-r" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                <feColorMatrix in="blur" type="matrix" values="0 0 0 0 1  0 0 0 0 0.2  0 0 0 0 0.2  0 0 0 1 0" result="colored"/>
+                <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="is-glow-amber" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="4" result="blur"/>
+                <feColorMatrix in="blur" type="matrix" values="0 0 0 0 1  0 0 0 0 0.75  0 0 0 0 0  0 0 0 1 0" result="colored"/>
+                <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="is-glow-dot" x="-80%" y="-80%" width="360%" height="360%">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+
+              {/* Gradients */}
+              <linearGradient id="is-grad-g" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stopColor="#bbf7d0"/>
+                <stop offset="50%"  stopColor="#4ade80"/>
+                <stop offset="100%" stopColor="#16a34a"/>
+              </linearGradient>
+              <linearGradient id="is-grad-r" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stopColor="#fca5a5"/>
+                <stop offset="50%"  stopColor="#f87171"/>
+                <stop offset="100%" stopColor="#ef4444"/>
+              </linearGradient>
+
+              {/* Axis markers */}
+              <marker id="is-axis-r" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0,9 3.5,0 7" fill="#FFD700"/>
+              </marker>
+              <marker id="is-axis-l" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+                <polygon points="0 0,9 3.5,0 7" fill="#FFD700"/>
+              </marker>
+              <marker id="is-arrow-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0,8 3,0 6" fill="#4ade80"/>
+              </marker>
+              <marker id="is-arrow-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0,8 3,0 6" fill="#f87171"/>
+              </marker>
+            </defs>
+
+            {/* Axis */}
+            <line x1={10} y1={lineY} x2={SVG_W - 10} y2={lineY}
+              stroke="#FFD700" strokeWidth="2.5"
+              markerEnd="url(#is-axis-r)" markerStart="url(#is-axis-l)"
+              style={{ filter: "drop-shadow(0 0 3px #FFD70088)" }}
+            />
+
+            {/* Ticks and labels */}
+            {visibleNums.map(n => {
+              const x = toX(n);
+              const isZero = n === 0;
+              const isA    = validA && n === a;
+              const isRes  = isDone && n === result;
+              const showLabel = n % labelStep === 0 || isA || isRes || isZero;
+              const prominent = isZero || isA || isRes;
+              const tickColor = isRes ? "#67e8f9" : isA ? "#fb923c" : isZero ? "#ffffff" : "#FFD700";
+              const textColor = isRes ? "#67e8f9" : isA ? "#fb923c" : isZero ? "#ffffff" : (lightMode ? "#334155" : "#FFE57F");
+              return (
+                <g key={n}>
+                  <line
+                    x1={x} y1={prominent ? lineY - 11 : lineY - 6}
+                    x2={x} y2={prominent ? lineY + 11 : lineY + 6}
+                    stroke={tickColor} strokeWidth={prominent ? 2.5 : 1.5}
+                    style={prominent ? { filter: `drop-shadow(0 0 4px ${tickColor}99)` } : undefined}
+                  />
+                  {showLabel && (
+                    <text x={x} y={lineY + 26} textAnchor="middle" fontFamily="monospace"
+                      fill={textColor}
+                      fontSize={prominent ? 13 : 10}
+                      fontWeight={prominent ? "bold" : "normal"}
+                    >{n}</text>
+                  )}
+                </g>
+              );
+            })}
+
+            {/* Idle dot at A */}
+            {validA && phase === "idle" && (
+              <g key={`is-dot-a-${a}`} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+                <circle cx={toX(a)} cy={lineY} r="9" fill="#fb923c" opacity="0.18" className="is-dot-fade"/>
+                <circle cx={toX(a)} cy={lineY} r="6" fill="#fb923c" filter="url(#is-glow-dot)" className="is-dot-fade"/>
+              </g>
+            )}
+
+            {/* Arcs with staggered CSS animation */}
+            {phase !== "idle" && Array.from({ length: steps }, (_, i) => {
+              // b > 0 → go left; b < 0 → go right
+              const x1 = b > 0 ? toX(a - i)     : toX(a + i);
+              const x2 = b > 0 ? toX(a - i - 1) : toX(a + i + 1);
+              const mx = (x1 + x2) / 2;
+              const arcH = Math.min(34, unitPx * 0.6 + 10);
+              const cy = arcUp ? lineY - arcH : lineY + arcH;
+              const dPath = `M ${x1},${lineY} Q ${mx},${cy} ${x2},${lineY}`;
+              const delay = `${i * ARC_DUR}s`;
+              const glowFilter = arcUp ? "url(#is-glow-g)" : "url(#is-glow-r)";
+              const gradId = arcUp ? "url(#is-grad-g)" : "url(#is-grad-r)";
+              return (
+                <g key={`is-arc-${i}`}>
+                  <path
+                    d={dPath}
+                    fill="none"
+                    stroke={arcColor}
+                    strokeWidth="10"
+                    strokeLinecap="round"
+                    strokeOpacity="0.18"
+                    pathLength="100"
+                    strokeDasharray="100"
+                    className="is-arc-draw is-arc-shimmer"
+                    style={{ animationDelay: delay }}
+                  />
+                  <path
+                    d={dPath}
+                    fill="none"
+                    stroke={gradId}
+                    strokeWidth="3.2"
+                    strokeLinecap="round"
+                    pathLength="100"
+                    strokeDasharray="100"
+                    filter={glowFilter}
+                    className="is-arc-draw"
+                    style={{ animationDelay: delay }}
+                    markerEnd={`url(#${markerId})`}
+                  />
+                </g>
+              );
+            })}
+
+            {/* Result dot */}
+            {isDone && (
+              <g>
+                <circle cx={toX(result)} cy={lineY} r="13" fill="#fbbf24" opacity="0.15" className="is-dot-fade"/>
+                <circle cx={toX(result)} cy={lineY} r="7" fill="#fbbf24" filter="url(#is-glow-amber)" className="is-dot-fade"/>
+              </g>
+            )}
+
+            {/* Result ring + sparkle */}
+            {isDone && (
+              <g>
+                <circle cx={toX(result)} cy={lineY} r="13"
+                  fill="none" stroke="#fbbf24" strokeWidth="2.5"
+                  filter="url(#is-glow-amber)"
+                  className="is-ring-pop"
+                />
+                {[0, 60, 120, 180, 240, 300].map((deg, si) => {
+                  const rad = (deg * Math.PI) / 180;
+                  const sx = toX(result) + Math.cos(rad) * 18;
+                  const sy = lineY + Math.sin(rad) * 18;
+                  return (
+                    <circle key={`is-sp${si}`} cx={sx} cy={sy} r="2"
+                      fill="#fbbf24"
+                      className="is-sparkle"
+                      style={{ animationDelay: `${si * 0.06}s`, transformOrigin: `${sx}px ${sy}px` }}
+                    />
+                  );
+                })}
+              </g>
+            )}
+
+            {/* Label "mulai" */}
+            {phase !== "idle" && (
+              <text x={toX(a)} y={lineY - 22}
+                textAnchor="middle" fontFamily="sans-serif" fontSize="9"
+                fill="#fb923c" opacity="0.85">
+                mulai ({a})
+              </text>
+            )}
+          </svg>
+        </div>
+
+        {/* Hint row */}
+        {bothValid && phase === "idle" && (
+          <div className={`flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-body ${lightMode ? "bg-orange-50 text-orange-700" : "bg-orange-900/30 text-orange-300"}`}>
+            <span>{b > 0 ? "⬅️" : b < 0 ? "➡️" : "⏸️"}</span>
+            <span>
+              {b > 0
+                ? `Mengurangi bilangan positif → busur merah bergerak ke KIRI sejauh ${steps} langkah`
+                : b < 0
+                ? `Mengurangi bilangan negatif → busur hijau bergerak ke KANAN sejauh ${steps} langkah (min-min = plus!)`
+                : "Mengurangi nol → posisi tidak berubah"}
+            </span>
+          </div>
+        )}
+        {isDone && (
+          <div className={`flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-body font-semibold ${lightMode ? "bg-green-50 text-green-700 border border-green-200" : "bg-green-900/30 text-green-300 border border-green-500/30"}`}>
+            <span>✅</span>
+            <span>{a} − ({b}) = <strong>{result}</strong> {resultEmoji}</span>
+          </div>
+        )}
+
+        {/* Button */}
+        <div className="flex justify-center">
+          <button
+            onClick={handleOperate}
+            disabled={!bothValid || phase === "animating"}
+            className={`px-6 py-2.5 rounded-xl font-display text-sm font-bold tracking-wide transition-all
+              ${!bothValid || phase === "animating"
+                ? "bg-slate-600/40 text-slate-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg hover:shadow-orange-500/40 hover:scale-105 active:scale-95 cursor-pointer"
+              }`}
+          >
+            {phase === "animating" ? "⏳ Animasi berjalan..." : phase === "done" ? "🔄 Ulangi" : "🚀 Operasikan"}
+          </button>
+          {phase === "done" && (
+            <button
+              onClick={() => { setInputA(""); setInputB(""); handleReset(); }}
+              className={`ml-2 px-4 py-2.5 rounded-xl font-body text-sm transition-all cursor-pointer
+                ${lightMode ? "bg-slate-100 text-slate-600 hover:bg-slate-200" : "bg-slate-700/60 text-slate-300 hover:bg-slate-600/60"}`}
+            >
+              Reset
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const PenguranganBilanganBulatPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -378,6 +810,9 @@ const PenguranganBilanganBulatPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ── Kalkulator Interaktif ── */}
+          <InteraktifPengurangan lightMode={lightMode} />
 
           {/* Section: Pengantar - Kunci Rahasia Pengurangan */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
