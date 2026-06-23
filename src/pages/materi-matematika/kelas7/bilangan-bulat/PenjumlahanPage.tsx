@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -378,6 +378,319 @@ const NumberLineContoh1SVG = () => {
   );
 };
 
+/* ── Kalkulator Interaktif Garis Bilangan ───────────────────── */
+const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) => {
+  const [inputA, setInputA] = useState("");
+  const [inputB, setInputB] = useState("");
+  const [phase, setPhase] = useState<"idle" | "animating" | "done">("idle");
+  const [animStep, setAnimStep] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const rawA = parseInt(inputA);
+  const rawB = parseInt(inputB);
+  const validA = inputA !== "" && !isNaN(rawA);
+  const validB = inputB !== "" && !isNaN(rawB);
+  const bothValid = validA && validB;
+
+  const a = validA ? Math.max(-20, Math.min(20, rawA)) : 0;
+  const b = validB ? Math.max(-20, Math.min(20, rawB)) : 0;
+  const result = a + b;
+  const steps = Math.abs(b);
+
+  const allPoints = bothValid ? [0, a, result] : validA ? [0, a] : [0];
+  const minV = Math.min(...allPoints) - 2;
+  const maxV = Math.max(...allPoints) + 2;
+  const rangeW = Math.max(maxV - minV, 6);
+
+  const SVG_W = 580;
+  const SVG_H = 120;
+  const PAD = 28;
+  const lineY = 66;
+  const toX = (n: number) => PAD + ((n - minV) / rangeW) * (SVG_W - PAD * 2);
+
+  const visibleNums: number[] = [];
+  for (let i = Math.ceil(minV); i <= Math.floor(maxV); i++) visibleNums.push(i);
+  const step = rangeW > 16 ? 5 : rangeW > 8 ? 2 : 1;
+
+  useEffect(() => {
+    if (phase !== "animating") return;
+    if (animStep >= steps) { setPhase("done"); return; }
+    timerRef.current = setTimeout(() => setAnimStep(s => s + 1), 420);
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [phase, animStep, steps]);
+
+  const handleOperate = () => {
+    if (!bothValid) return;
+    playPopSound();
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (steps === 0) { setPhase("done"); return; }
+    setAnimStep(0);
+    setPhase("animating");
+  };
+
+  const handleReset = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setPhase("idle");
+    setAnimStep(0);
+  };
+
+  const arcCount = phase === "idle" ? 0 : phase === "done" ? steps : animStep;
+  const dotPos = phase === "idle"
+    ? (validA ? a : null)
+    : b >= 0 ? a + Math.min(animStep, steps) : a - Math.min(animStep, steps);
+
+  const arcColor = b >= 0 ? "#4ade80" : "#f87171";
+  const arcUp    = b >= 0;
+  const markerId = b >= 0 ? "ia-arrow-g" : "ia-arrow-r";
+  const unitPx   = (SVG_W - PAD * 2) / rangeW;
+
+  const isDone = phase === "done";
+  const resultEmoji = isDone ? (b === 0 ? "😐" : b > 0 ? "🎉" : "🔄") : "";
+
+  return (
+    <div className={`rounded-2xl border overflow-hidden shadow-xl mb-4 ${lightMode ? "bg-white/80 border-blue-200" : "bg-slate-900/90 border-cyan-500/40"}`}>
+      {/* Header */}
+      <div className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 px-5 py-3 flex items-center gap-2">
+        <span className="text-lg">🧮</span>
+        <span className="font-display text-sm font-bold text-white tracking-wide">Kalkulator Interaktif Garis Bilangan</span>
+      </div>
+
+      <div className="px-4 py-4 space-y-4">
+        {/* Input Row */}
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <div className="flex flex-col items-center gap-1">
+            <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-cyan-300/70"}`}>Bilangan ke-1</span>
+            <input
+              type="number"
+              value={inputA}
+              onChange={e => { setInputA(e.target.value); handleReset(); }}
+              placeholder="0"
+              min={-20} max={20}
+              className={`w-20 h-12 text-center text-xl font-bold rounded-xl border-2 outline-none transition-all font-mono
+                ${lightMode
+                  ? "bg-blue-50 border-blue-300 text-slate-800 focus:border-blue-500"
+                  : "bg-slate-800 border-cyan-500/60 text-cyan-200 focus:border-cyan-400"
+                }
+                ${validA ? (lightMode ? "border-blue-500 shadow-md" : "border-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.3)]") : ""}`}
+            />
+          </div>
+
+          <span className={`text-3xl font-bold mt-5 ${lightMode ? "text-slate-600" : "text-yellow-300"}`}>+</span>
+
+          <div className="flex flex-col items-center gap-1">
+            <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-cyan-300/70"}`}>Bilangan ke-2</span>
+            <input
+              type="number"
+              value={inputB}
+              onChange={e => { setInputB(e.target.value); handleReset(); }}
+              placeholder="0"
+              min={-20} max={20}
+              className={`w-20 h-12 text-center text-xl font-bold rounded-xl border-2 outline-none transition-all font-mono
+                ${lightMode
+                  ? "bg-blue-50 border-blue-300 text-slate-800 focus:border-blue-500"
+                  : "bg-slate-800 border-cyan-500/60 text-cyan-200 focus:border-cyan-400"
+                }
+                ${validB ? (b >= 0
+                  ? (lightMode ? "border-green-500 shadow-md" : "border-green-400 shadow-[0_0_12px_rgba(74,222,128,0.3)]")
+                  : (lightMode ? "border-red-400 shadow-md" : "border-red-400 shadow-[0_0_12px_rgba(248,113,113,0.3)]")
+                ) : ""}`}
+            />
+          </div>
+
+          <span className={`text-3xl font-bold mt-5 ${lightMode ? "text-slate-600" : "text-yellow-300"}`}>=</span>
+
+          <div className="flex flex-col items-center gap-1">
+            <span className={`text-xs font-body font-semibold ${lightMode ? "text-slate-500" : "text-cyan-300/70"}`}>Hasil</span>
+            <div className={`w-20 h-12 flex items-center justify-center rounded-xl border-2 text-xl font-bold font-mono transition-all
+              ${isDone
+                ? (lightMode ? "bg-green-50 border-green-400 text-green-700" : "bg-green-900/30 border-green-400 text-green-300 shadow-[0_0_16px_rgba(74,222,128,0.4)]")
+                : (lightMode ? "bg-slate-100 border-slate-200 text-slate-300" : "bg-slate-800/50 border-slate-600 text-slate-500")
+              }`}>
+              {isDone ? result : "?"}
+            </div>
+          </div>
+        </div>
+
+        {/* Number line SVG */}
+        <div className={`rounded-xl p-3 border ${lightMode ? "bg-slate-50 border-slate-200" : "bg-slate-950/60 border-white/10"}`}>
+          <p className={`text-xs text-center mb-2 font-body ${lightMode ? "text-slate-400" : "text-white/40"}`}>
+            {phase === "idle" && !validA && "Masukkan angka untuk melihat garis bilangan"}
+            {phase === "idle" && validA && !validB && `Titik merah = ${a} · masukkan bilangan ke-2`}
+            {phase === "idle" && bothValid && `Siap! Klik Operasikan untuk melihat animasi busur`}
+            {phase === "animating" && `Melangkah... ${animStep} dari ${steps} langkah`}
+            {phase === "done" && `${a} + (${b}) = ${result} ${resultEmoji}`}
+          </p>
+
+          <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} width="100%" xmlns="http://www.w3.org/2000/svg" style={{ overflow: "visible" }}>
+            <defs>
+              <style>{`
+                @keyframes drawArc {
+                  from { stroke-dashoffset: 100; opacity: 0.3; }
+                  to   { stroke-dashoffset: 0;   opacity: 1;   }
+                }
+                @keyframes popDot {
+                  0%   { r: 0; opacity: 0; }
+                  60%  { r: 9px; opacity: 1; }
+                  100% { r: 6px; opacity: 1; }
+                }
+                .arc-new { animation: drawArc 0.38s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+                .dot-pop  { animation: popDot 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+              `}</style>
+              <marker id="ia-axis-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0,8 3,0 6" fill="#FFD700"/>
+              </marker>
+              <marker id="ia-axis-l" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+                <polygon points="0 0,8 3,0 6" fill="#FFD700"/>
+              </marker>
+              <marker id="ia-arrow-g" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+                <polygon points="0 0,7 2.5,0 5" fill="#4ade80"/>
+              </marker>
+              <marker id="ia-arrow-r" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+                <polygon points="0 0,7 2.5,0 5" fill="#f87171"/>
+              </marker>
+            </defs>
+
+            {/* Axis */}
+            <line x1={10} y1={lineY} x2={SVG_W - 10} y2={lineY}
+              stroke="#FFD700" strokeWidth="2.5"
+              markerEnd="url(#ia-axis-r)" markerStart="url(#ia-axis-l)" />
+
+            {/* Ticks and labels */}
+            {visibleNums.map(n => {
+              const x = toX(n);
+              const isZero = n === 0;
+              const isA    = validA && n === a;
+              const isRes  = isDone && n === result;
+              const showLabel = n % step === 0 || isA || isRes || isZero;
+              const prominent = isZero || isA || isRes;
+              const tickColor = isRes ? "#67e8f9" : isA ? "#f0abfc" : isZero ? "#ffffff" : "#FFD700";
+              const textColor = isRes ? "#67e8f9" : isA ? "#f0abfc" : isZero ? "#ffffff" : (lightMode ? "#334155" : "#FFE57F");
+              return (
+                <g key={n}>
+                  <line
+                    x1={x} y1={prominent ? lineY - 10 : lineY - 6}
+                    x2={x} y2={prominent ? lineY + 10 : lineY + 6}
+                    stroke={tickColor} strokeWidth={prominent ? 2.5 : 1.5}
+                  />
+                  {showLabel && (
+                    <text x={x} y={lineY + 24} textAnchor="middle" fontFamily="monospace"
+                      fill={textColor}
+                      fontSize={prominent ? 13 : 10}
+                      fontWeight={prominent ? "bold" : "normal"}
+                    >{n}</text>
+                  )}
+                </g>
+              );
+            })}
+
+            {/* Dot at position A when valid (idle) */}
+            {validA && phase === "idle" && (
+              <circle cx={toX(a)} cy={lineY} r="6" fill="#f0abfc"
+                className="dot-pop"
+                key={`dot-a-${a}`}
+              />
+            )}
+
+            {/* Arcs */}
+            {Array.from({ length: arcCount }, (_, i) => {
+              const x1 = b > 0 ? toX(a + i) : toX(a - i);
+              const x2 = b > 0 ? toX(a + i + 1) : toX(a - i - 1);
+              const mx = (x1 + x2) / 2;
+              const arcH = Math.min(28, unitPx * 0.55 + 8);
+              const cy = arcUp ? lineY - arcH : lineY + arcH;
+              const isNew = i === arcCount - 1 && phase === "animating";
+              return (
+                <path
+                  key={`arc-${i}`}
+                  d={`M ${x1},${lineY} Q ${mx},${cy} ${x2},${lineY}`}
+                  fill="none"
+                  stroke={arcColor}
+                  strokeWidth="2.4"
+                  pathLength="100"
+                  strokeDasharray="100"
+                  strokeDashoffset={isNew ? undefined : 0}
+                  className={isNew ? "arc-new" : undefined}
+                  markerEnd={`url(#${markerId})`}
+                />
+              );
+            })}
+
+            {/* Moving dot */}
+            {phase !== "idle" && dotPos !== null && (
+              <circle
+                key={`movdot-${dotPos}`}
+                cx={toX(dotPos)}
+                cy={lineY}
+                r="6"
+                fill={isDone ? "#67e8f9" : arcColor}
+                className="dot-pop"
+              />
+            )}
+
+            {/* Result ring */}
+            {isDone && (
+              <circle cx={toX(result)} cy={lineY} r="11"
+                fill="none" stroke="#67e8f9" strokeWidth="2.5"
+                strokeDasharray="5 3" opacity="0.9"
+              />
+            )}
+
+            {/* Label "Mulai" above start dot when animating */}
+            {phase !== "idle" && (
+              <text x={toX(a)} y={lineY - 16} textAnchor="middle"
+                fontFamily="sans-serif" fontSize="9" fill="#f0abfc" opacity="0.8">
+                mulai ({a})
+              </text>
+            )}
+          </svg>
+        </div>
+
+        {/* Hint row */}
+        {bothValid && phase === "idle" && (
+          <div className={`flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-body ${lightMode ? "bg-blue-50 text-blue-600" : "bg-cyan-900/30 text-cyan-300"}`}>
+            <span>{b >= 0 ? "➡️" : "⬅️"}</span>
+            <span>
+              {b >= 0
+                ? `Bilangan ke-2 positif → busur hijau bergerak ke KANAN sejauh ${steps} langkah`
+                : `Bilangan ke-2 negatif → busur merah bergerak ke KIRI sejauh ${steps} langkah`}
+            </span>
+          </div>
+        )}
+        {isDone && (
+          <div className={`flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-body font-semibold ${lightMode ? "bg-green-50 text-green-700 border border-green-200" : "bg-green-900/30 text-green-300 border border-green-500/30"}`}>
+            <span>✅</span>
+            <span>{a} + ({b}) = <strong>{result}</strong> {resultEmoji}</span>
+          </div>
+        )}
+
+        {/* Button */}
+        <div className="flex justify-center">
+          <button
+            onClick={handleOperate}
+            disabled={!bothValid || phase === "animating"}
+            className={`px-6 py-2.5 rounded-xl font-display text-sm font-bold tracking-wide transition-all
+              ${!bothValid || phase === "animating"
+                ? "bg-slate-600/40 text-slate-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 cursor-pointer"
+              }`}
+          >
+            {phase === "animating" ? "⏳ Animasi berjalan..." : phase === "done" ? "🔄 Ulangi" : "🚀 Operasikan"}
+          </button>
+          {phase === "done" && (
+            <button
+              onClick={() => { setInputA(""); setInputB(""); handleReset(); }}
+              className={`ml-2 px-4 py-2.5 rounded-xl font-body text-sm transition-all cursor-pointer
+                ${lightMode ? "bg-slate-100 text-slate-600 hover:bg-slate-200" : "bg-slate-700/60 text-slate-300 hover:bg-slate-600/60"}`}
+            >
+              Reset
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const PenjumlahanBilanganBulatPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -405,6 +718,9 @@ const PenjumlahanBilanganBulatPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+          {/* ── Kalkulator Interaktif ── */}
+          <InteraktifPenjumlahan lightMode={lightMode} />
+
           {/* Section: Pengantar */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button
