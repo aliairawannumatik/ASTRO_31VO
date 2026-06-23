@@ -554,9 +554,6 @@ const JualBeliUntungRugiPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* ── ANIMASI WARUNG INTERAKTIF ─────────────────────────── */}
-          <WarungAritmetika />
-
           {/* ── PENGANTAR ─────────────────────────────────────────── */}
           <Section id="intro" expanded={true} onToggle={toggleSection}
             icon={<Lightbulb className="w-5 h-5 text-yellow-400" />}
@@ -735,6 +732,8 @@ const JualBeliUntungRugiPage = () => {
                   </div>
                 </div>
               </div>
+              <WarungAritmetika />
+
               <div className="bg-slate-900/60 border border-border rounded-lg overflow-hidden">
                 <div className="px-4 py-2 bg-slate-800/80">
                   <p className="font-body text-xs font-bold text-white/70 uppercase tracking-wide">Ringkasan Semua Rumus</p>
