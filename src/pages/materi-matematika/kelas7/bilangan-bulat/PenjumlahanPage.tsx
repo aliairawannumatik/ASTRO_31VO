@@ -872,9 +872,6 @@ const PenjumlahanBilanganBulatPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
-          {/* ── Kalkulator Interaktif ── */}
-          <InteraktifPenjumlahan lightMode={lightMode} />
-
           {/* Section: Pengantar */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button
@@ -967,13 +964,8 @@ const PenjumlahanBilanganBulatPage = () => {
                   <NumberLineSVG lightMode={lightMode} />
                 </div>
 
-                {/* ── Demo Arah Pergerakan ── */}
-                <div className="bg-slate-900/60 rounded-xl p-3 border border-cyan-500/20">
-                  <p className={`text-xs text-center mb-1 font-body ${lightMode ? "text-foreground/60" : "text-cyan-300/70"}`}>
-                    Demo: Tambah Positif = Kanan · Tambah Negatif = Kiri
-                  </p>
-                  <DirectionDemoSVG lightMode={lightMode} />
-                </div>
+                {/* ── Kalkulator Interaktif ── */}
+                <InteraktifPenjumlahan lightMode={lightMode} />
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
                   <p className="font-body text-sm font-semibold text-purple-300 mb-3">Rumus Penjumlahan Bilangan Bulat:</p>
