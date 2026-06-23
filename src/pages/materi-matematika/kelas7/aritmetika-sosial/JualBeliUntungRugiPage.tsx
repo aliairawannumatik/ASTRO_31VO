@@ -752,6 +752,18 @@ const JualBeliUntungRugiPage = () => {
             </div>
           </Section>
 
+          {/* ── KALKULATOR INTERAKTIF ─────────────────────────────── */}
+          <Section id="kalkulator" expanded={true} onToggle={toggleSection}
+            icon={<Calculator className="w-5 h-5 text-emerald-400" />}
+            title="Kalkulator Jual Beli Interaktif">
+            <div className="space-y-3">
+              <p className="font-body text-xs text-white/50 leading-relaxed">
+                Gunakan kalkulator ini untuk memverifikasi perhitunganmu. Pilih mode sesuai yang ingin dihitung, lalu masukkan nilai yang diketahui — hasilnya langsung muncul secara otomatis.
+              </p>
+              <KalkulatorJualBeli />
+            </div>
+          </Section>
+
           {/* ── TIPS & STRATEGI ───────────────────────────────────── */}
           <Section id="tips" expanded={true} onToggle={toggleSection}
             icon={<Star className="w-5 h-5 text-yellow-400" />}
@@ -771,18 +783,6 @@ const JualBeliUntungRugiPage = () => {
                   </div>
                 </div>
               ))}
-            </div>
-          </Section>
-
-          {/* ── KALKULATOR INTERAKTIF ─────────────────────────────── */}
-          <Section id="kalkulator" expanded={true} onToggle={toggleSection}
-            icon={<Calculator className="w-5 h-5 text-emerald-400" />}
-            title="Kalkulator Jual Beli Interaktif">
-            <div className="space-y-3">
-              <p className="font-body text-xs text-white/50 leading-relaxed">
-                Gunakan kalkulator ini untuk memverifikasi perhitunganmu. Pilih mode sesuai yang ingin dihitung, lalu masukkan nilai yang diketahui — hasilnya langsung muncul secara otomatis.
-              </p>
-              <KalkulatorJualBeli />
             </div>
           </Section>
 
