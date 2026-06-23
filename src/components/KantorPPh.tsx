@@ -207,12 +207,22 @@ const SlipGaji = ({
   return (
     <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-4"
       style={{ background: "rgba(0,0,0,0.8)", backdropFilter: "blur(6px)" }}
-      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      onClick={onClose}>
       <motion.div className="relative max-w-sm w-full"
+        onClick={e => e.stopPropagation()}
         initial={{ y: -100, scale: 0.6, rotate: -5 }}
         animate={{ y: 0, scale: 1, rotate: 0 }}
         exit={{ y: 100, scale: 0.6 }}
         transition={{ type: "spring", damping: 16, stiffness: 180 }}>
+
+        {/* ── Tombol tutup (X) ── */}
+        <motion.button onClick={onClose}
+          className="absolute -top-3 -right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center font-black text-base shadow-lg"
+          style={{ background: "#1e293b", color: "white", border: "2px solid rgba(255,255,255,0.2)" }}
+          whileHover={{ scale: 1.15, background: "#dc2626" }} whileTap={{ scale: 0.9 }}>
+          ✕
+        </motion.button>
 
         {/* ── AMPLOP / envelope top ── */}
         <div className="h-6 rounded-t-2xl overflow-hidden relative"
