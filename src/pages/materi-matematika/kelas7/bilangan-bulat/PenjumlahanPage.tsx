@@ -383,7 +383,9 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
   const [inputA, setInputA] = useState("");
   const [inputB, setInputB] = useState("");
   const [phase, setPhase] = useState<"idle" | "animating" | "done">("idle");
+  const [animStep, setAnimStep] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const stepIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const rawA = parseInt(inputA);
   const rawB = parseInt(inputB);
@@ -423,17 +425,34 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [phase, totalMs]);
 
+  // Step counter: increments animStep once per arc during animation
+  useEffect(() => {
+    if (phase !== "animating") {
+      if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
+      return;
+    }
+    setAnimStep(0);
+    stepIntervalRef.current = setInterval(() => {
+      setAnimStep(s => s + 1);
+    }, ARC_DUR * 1000);
+    return () => { if (stepIntervalRef.current) clearInterval(stepIntervalRef.current); };
+  }, [phase, ARC_DUR]);
+
   const handleOperate = () => {
     if (!bothValid) return;
     playPopSound();
     if (timerRef.current) clearTimeout(timerRef.current);
+    if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
     if (steps === 0) { setPhase("done"); return; }
+    setAnimStep(0);
     setPhase("idle");          // brief reset so CSS animations restart
     requestAnimationFrame(() => requestAnimationFrame(() => setPhase("animating")));
   };
 
   const handleReset = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
+    if (stepIntervalRef.current) clearInterval(stepIntervalRef.current);
+    setAnimStep(0);
     setPhase("idle");
   };
 
