@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
+import TimbanganBNT from "@/components/TimbanganBNT";
 import {
   BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator,
   Target, Package, AlertCircle, Star, CheckCircle, XCircle,
@@ -516,6 +517,9 @@ const BrutoNettoTaraPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* ── TIMBANGAN INTERAKTIF BNT ──────────────────────── */}
+          <TimbanganBNT />
 
           {/* 1. PENGANTAR */}
           <Section id="intro" expanded={true} onToggle={toggleSection}
