@@ -383,7 +383,6 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
   const [inputA, setInputA] = useState("");
   const [inputB, setInputB] = useState("");
   const [phase, setPhase] = useState<"idle" | "animating" | "done">("idle");
-  const [animStep, setAnimStep] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const rawA = parseInt(inputA);
@@ -396,6 +395,11 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
   const b = validB ? Math.max(-20, Math.min(20, rawB)) : 0;
   const result = a + b;
   const steps = Math.abs(b);
+
+  // Per-arc duration (seconds) — arcs stagger by this amount
+  const ARC_DUR = 1.1;
+  // Total animation time in ms = steps * ARC_DUR * 1000 + tail
+  const totalMs = steps * ARC_DUR * 1000 + 900;
 
   const allPoints = bothValid ? [0, a, result] : validA ? [0, a] : [0];
   const minV = Math.min(...allPoints) - 2;
@@ -412,32 +416,26 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
   for (let i = Math.ceil(minV); i <= Math.floor(maxV); i++) visibleNums.push(i);
   const step = rangeW > 16 ? 5 : rangeW > 8 ? 2 : 1;
 
+  // Single timer: marks done after all CSS arcs finish
   useEffect(() => {
     if (phase !== "animating") return;
-    if (animStep >= steps) { setPhase("done"); return; }
-    timerRef.current = setTimeout(() => setAnimStep(s => s + 1), 950);
+    timerRef.current = setTimeout(() => setPhase("done"), totalMs);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [phase, animStep, steps]);
+  }, [phase, totalMs]);
 
   const handleOperate = () => {
     if (!bothValid) return;
     playPopSound();
     if (timerRef.current) clearTimeout(timerRef.current);
     if (steps === 0) { setPhase("done"); return; }
-    setAnimStep(0);
-    setPhase("animating");
+    setPhase("idle");          // brief reset so CSS animations restart
+    requestAnimationFrame(() => requestAnimationFrame(() => setPhase("animating")));
   };
 
   const handleReset = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
     setPhase("idle");
-    setAnimStep(0);
   };
-
-  const arcCount = phase === "idle" ? 0 : phase === "done" ? steps : animStep;
-  const dotPos = phase === "idle"
-    ? (validA ? a : null)
-    : b >= 0 ? a + Math.min(animStep, steps) : a - Math.min(animStep, steps);
 
   const arcColor = b >= 0 ? "#4ade80" : "#f87171";
   const arcUp    = b >= 0;
@@ -445,6 +443,9 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
   const unitPx   = (SVG_W - PAD * 2) / rangeW;
 
   const isDone = phase === "done";
+  // Dot x-offset from starting position a, driven by CSS transition
+  const dotTargetX = isDone ? toX(result) : phase === "animating" ? toX(result) : toX(a);
+
   const resultEmoji = isDone ? (b === 0 ? "😐" : b > 0 ? "🎉" : "🔄") : "";
 
   return (
@@ -525,38 +526,42 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
             <defs>
               <style>{`
                 @keyframes arcDraw {
-                  0%   { stroke-dashoffset: 100; opacity: 0; filter: brightness(2.5); }
-                  30%  { opacity: 1; filter: brightness(1.8); }
-                  100% { stroke-dashoffset: 0;   opacity: 1; filter: brightness(1); }
+                  0%   { stroke-dashoffset: 100; opacity: 0; }
+                  15%  { opacity: 1; }
+                  100% { stroke-dashoffset: 0; opacity: 1; }
                 }
-                @keyframes arcGlowPulse {
-                  0%, 100% { opacity: 0.55; }
-                  50%      { opacity: 0.9; }
+                @keyframes shimmer {
+                  0%, 100% { stroke-opacity: 0.65; }
+                  50%      { stroke-opacity: 1; }
                 }
-                @keyframes dotPop {
-                  0%   { r: 0px;  opacity: 0; }
-                  55%  { r: 10px; opacity: 1; }
-                  75%  { r: 5px;  opacity: 1; }
-                  100% { r: 7px;  opacity: 1; }
+                @keyframes dotFade {
+                  0%   { opacity: 0; transform: scale(0.4); }
+                  100% { opacity: 1; transform: scale(1); }
                 }
                 @keyframes ringPulse {
-                  0%   { r: 9px;  opacity: 0; stroke-width: 3; }
-                  50%  { r: 16px; opacity: 0.6; stroke-width: 1.5; }
-                  100% { r: 13px; opacity: 0.9; stroke-width: 2; }
+                  0%   { opacity: 0; transform: scale(0.5); }
+                  60%  { opacity: 0.9; transform: scale(1.15); }
+                  100% { opacity: 1; transform: scale(1); }
                 }
                 @keyframes sparkle {
                   0%   { opacity: 1; transform: scale(1); }
-                  100% { opacity: 0; transform: scale(2.5); }
+                  100% { opacity: 0; transform: scale(3); }
                 }
-                @keyframes shimmer {
-                  0%, 100% { stroke-opacity: 0.7; }
-                  50%      { stroke-opacity: 1; }
+                .arc-draw  {
+                  animation: arcDraw 1.0s cubic-bezier(0.4,0,0.2,1) both;
                 }
-                .arc-new  { animation: arcDraw 0.85s cubic-bezier(0.16,1,0.3,1) forwards; }
-                .arc-done { animation: shimmer 2.8s ease-in-out infinite; }
-                .dot-pop  { animation: dotPop 0.7s cubic-bezier(0.16,1.4,0.3,1) forwards; }
-                .ring-pop { animation: ringPulse 0.9s cubic-bezier(0.16,1.2,0.3,1) forwards; }
-                .sparkle-burst { animation: sparkle 1s ease-out forwards; }
+                .arc-shimmer { animation: shimmer 3s ease-in-out infinite; }
+                .dot-fade  { animation: dotFade 0.5s ease-out both; }
+                .ring-pop  {
+                  animation: ringPulse 0.8s cubic-bezier(0.34,1.4,0.64,1) forwards;
+                  transform-box: fill-box;
+                  transform-origin: center;
+                }
+                .sparkle-burst {
+                  animation: sparkle 0.9s ease-out forwards;
+                  transform-box: fill-box;
+                  transform-origin: center;
+                }
               `}</style>
 
               {/* Glow filters */}
@@ -648,65 +653,73 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
 
             {/* Idle dot at A */}
             {validA && phase === "idle" && (
-              <g key={`dot-a-${a}`}>
-                <circle cx={toX(a)} cy={lineY} r="9" fill="#f0abfc" opacity="0.18" className="dot-pop"/>
-                <circle cx={toX(a)} cy={lineY} r="6" fill="#f0abfc" filter="url(#glow-dot)" className="dot-pop"/>
+              <g key={`dot-a-${a}`} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+                <circle cx={toX(a)} cy={lineY} r="9" fill="#f0abfc" opacity="0.18" className="dot-fade"/>
+                <circle cx={toX(a)} cy={lineY} r="6" fill="#f0abfc" filter="url(#glow-dot)" className="dot-fade"/>
               </g>
             )}
 
-            {/* Arcs — glow shadow layer first, then colored arc on top */}
-            {Array.from({ length: arcCount }, (_, i) => {
+            {/* All arcs — rendered immediately with staggered CSS animationDelay */}
+            {phase !== "idle" && Array.from({ length: steps }, (_, i) => {
               const x1 = b > 0 ? toX(a + i)     : toX(a - i);
               const x2 = b > 0 ? toX(a + i + 1) : toX(a - i - 1);
               const mx = (x1 + x2) / 2;
               const arcH = Math.min(34, unitPx * 0.6 + 10);
               const cy = arcUp ? lineY - arcH : lineY + arcH;
               const dPath = `M ${x1},${lineY} Q ${mx},${cy} ${x2},${lineY}`;
-              const isNew = i === arcCount - 1 && phase === "animating";
+              const delay = `${i * ARC_DUR}s`;
               const glowFilter = arcUp ? "url(#glow-g)" : "url(#glow-r)";
               const gradId = arcUp ? "url(#grad-g)" : "url(#grad-r)";
               return (
                 <g key={`arc-${i}`}>
-                  {/* Fat soft glow behind */}
+                  {/* Soft glow halo */}
                   <path
                     d={dPath}
                     fill="none"
                     stroke={arcColor}
-                    strokeWidth="8"
+                    strokeWidth="10"
                     strokeLinecap="round"
-                    strokeOpacity="0.22"
+                    strokeOpacity="0.18"
                     pathLength="100"
                     strokeDasharray="100"
-                    strokeDashoffset={isNew ? undefined : 0}
-                    className={isNew ? "arc-new arc-done" : "arc-done"}
+                    className="arc-draw arc-shimmer"
+                    style={{ animationDelay: delay }}
                   />
-                  {/* Main arc with gradient + glow */}
+                  {/* Main glowing arc */}
                   <path
                     d={dPath}
                     fill="none"
                     stroke={gradId}
-                    strokeWidth="3"
+                    strokeWidth="3.2"
                     strokeLinecap="round"
                     pathLength="100"
                     strokeDasharray="100"
-                    strokeDashoffset={isNew ? undefined : 0}
                     filter={glowFilter}
-                    className={isNew ? "arc-new" : undefined}
+                    className="arc-draw"
+                    style={{ animationDelay: delay }}
                     markerEnd={`url(#${markerId})`}
                   />
                 </g>
               );
             })}
 
-            {/* Moving dot with glow */}
-            {phase !== "idle" && dotPos !== null && (
-              <g key={`movdot-${dotPos}-${phase}`}>
-                <circle cx={toX(dotPos)} cy={lineY} r="12"
-                  fill={isDone ? "#67e8f9" : arcColor} opacity="0.15" className="dot-pop"/>
-                <circle cx={toX(dotPos)} cy={lineY} r="7"
+            {/* Moving dot — slides smoothly via CSS transition on transform */}
+            {phase !== "idle" && (
+              <g
+                style={{
+                  transform: `translateX(${dotTargetX - toX(a)}px)`,
+                  transition: phase === "animating"
+                    ? `transform ${totalMs * 0.001 * 0.92}s cubic-bezier(0.4,0,0.2,1)`
+                    : "none",
+                }}
+              >
+                <circle cx={toX(a)} cy={lineY} r="13"
+                  fill={isDone ? "#67e8f9" : arcColor} opacity="0.13" className="dot-fade"/>
+                <circle cx={toX(a)} cy={lineY} r="7"
                   fill={isDone ? "#67e8f9" : arcColor}
                   filter={isDone ? "url(#glow-cyan)" : (arcUp ? "url(#glow-g)" : "url(#glow-r)")}
-                  className="dot-pop"/>
+                  className="dot-fade"
+                />
               </g>
             )}
 
@@ -736,7 +749,7 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
 
             {/* Label "mulai" */}
             {phase !== "idle" && (
-              <text x={toX(a)} y={arcUp ? lineY - arcCount * 0 - 22 : lineY - 18}
+              <text x={toX(a)} y={lineY - 22}
                 textAnchor="middle" fontFamily="sans-serif" fontSize="9"
                 fill="#f0abfc" opacity="0.85">
                 mulai ({a})
