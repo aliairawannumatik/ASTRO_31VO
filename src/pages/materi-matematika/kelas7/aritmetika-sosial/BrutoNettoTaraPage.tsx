@@ -518,9 +518,6 @@ const BrutoNettoTaraPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* ── TIMBANGAN INTERAKTIF BNT ──────────────────────── */}
-          <TimbanganBNT />
-
           {/* 1. PENGANTAR */}
           <Section id="intro" expanded={true} onToggle={toggleSection}
             icon={<Lightbulb className="w-5 h-5 text-yellow-400" />}
@@ -608,6 +605,9 @@ const BrutoNettoTaraPage = () => {
               </div>
             </div>
           </Section>
+
+          {/* ── TIMBANGAN INTERAKTIF BNT ──────────────────────── */}
+          <TimbanganBNT />
 
           {/* 4. KALKULATOR */}
           <Section id="kalkulator" expanded={true} onToggle={toggleSection}
