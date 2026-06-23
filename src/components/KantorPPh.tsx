@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { playPopSound } from "@/hooks/useAudio";
 
@@ -713,20 +714,24 @@ export default function KantorPPh() {
         </motion.button>
       </div>
 
-      {/* ── Slip Gaji Modal ── */}
-      <AnimatePresence>
-        {showSlip && result && (
-          <SlipGaji
-            profesi={selectedProfesi !== null ? PROFESI[selectedProfesi].nama : "Karyawan"}
-            gajiBrutoTahun={result.brutoTahun}
-            ptkpNilai={ptkp.nilai}
-            pkp={result.pkp}
-            pphTahun={result.pphTahun}
-            gajiBersihTahun={result.bersihTahun}
-            onClose={() => { setShowSlip(false); playPopSound(); }}
-          />
-        )}
-      </AnimatePresence>
+      {/* ── Slip Gaji Modal (portal → renders outside transformed parents) ── */}
+      {createPortal(
+        <AnimatePresence>
+          {showSlip && result && (
+            <SlipGaji
+              key="slip-gaji"
+              profesi={selectedProfesi !== null ? PROFESI[selectedProfesi].nama : "Karyawan"}
+              gajiBrutoTahun={result.brutoTahun}
+              ptkpNilai={ptkp.nilai}
+              pkp={result.pkp}
+              pphTahun={result.pphTahun}
+              gajiBersihTahun={result.bersihTahun}
+              onClose={() => { setShowSlip(false); playPopSound(); }}
+            />
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 }
