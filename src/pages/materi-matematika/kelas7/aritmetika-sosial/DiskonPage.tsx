@@ -537,9 +537,6 @@ const DiskonPage = () => {
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
-          {/* ── ANIMASI WARUNG DISKON ─────────────────────────── */}
-          <WarungDiskon />
-
           {/* 1. PENGANTAR */}
           <Section id="intro" expanded={true} onToggle={toggleSection}
             icon={<Lightbulb className="w-5 h-5 text-yellow-400" />}
@@ -676,6 +673,9 @@ const DiskonPage = () => {
               </div>
             </div>
           </Section>
+
+          {/* ── ANIMASI WARUNG DISKON ─────────────────────────── */}
+          <WarungDiskon />
 
           {/* 4. KALKULATOR INTERAKTIF */}
           <Section id="kalkulator" expanded={true} onToggle={toggleSection}
