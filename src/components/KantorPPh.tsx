@@ -18,12 +18,12 @@ const PTKP_LIST = [
 
 /* ─── Preset professions ──────────────────────────────── */
 const PROFESI = [
-  { nama: "Guru SD",            emoji: "👩‍🏫", gaji: 3_500_000 },
   { nama: "Pegawai Negeri",     emoji: "👨‍💼", gaji: 5_000_000 },
-  { nama: "Karyawan Swasta",    emoji: "👷", gaji: 8_000_000 },
-  { nama: "Dokter RS",          emoji: "🩺", gaji: 15_000_000 },
-  { nama: "Software Engineer",  emoji: "💻", gaji: 25_000_000 },
-  { nama: "Direktur",           emoji: "🏢", gaji: 50_000_000 },
+  { nama: "Karyawan Swasta",    emoji: "👷",  gaji: 8_000_000 },
+  { nama: "Dokter RS",          emoji: "🩺",  gaji: 15_000_000 },
+  { nama: "Software Engineer",  emoji: "💻",  gaji: 25_000_000 },
+  { nama: "Direktur",           emoji: "🏢",  gaji: 50_000_000 },
+  { nama: "Hakim",              emoji: "⚖️",  gaji: 12_000_000 },
 ];
 
 /* ─── PPh tarif progresif (pasal 17) ─────────────────── */
