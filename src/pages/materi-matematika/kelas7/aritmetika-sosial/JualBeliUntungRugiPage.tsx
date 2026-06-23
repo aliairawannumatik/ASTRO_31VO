@@ -733,7 +733,18 @@ const JualBeliUntungRugiPage = () => {
                 </div>
               </div>
               <WarungAritmetika />
+            </div>
+          </Section>
 
+          {/* ── KALKULATOR INTERAKTIF ─────────────────────────────── */}
+          <Section id="kalkulator" expanded={true} onToggle={toggleSection}
+            icon={<Calculator className="w-5 h-5 text-emerald-400" />}
+            title="Kalkulator Jual Beli Interaktif">
+            <div className="space-y-3">
+              <p className="font-body text-xs text-white/50 leading-relaxed">
+                Gunakan kalkulator ini untuk memverifikasi perhitunganmu. Pilih mode sesuai yang ingin dihitung, lalu masukkan nilai yang diketahui — hasilnya langsung muncul secara otomatis.
+              </p>
+              <KalkulatorJualBeli />
               <div className="bg-slate-900/60 border border-border rounded-lg overflow-hidden">
                 <div className="px-4 py-2 bg-slate-800/80">
                   <p className="font-body text-xs font-bold text-white/70 uppercase tracking-wide">Ringkasan Semua Rumus</p>
@@ -749,18 +760,6 @@ const JualBeliUntungRugiPage = () => {
                   <div className="flex gap-2 items-start"><span className="text-cyan-300 shrink-0 font-bold w-28">HB (dari rugi)</span><span><InlineMath math="= \frac{100}{100-R} \times HJ" /></span></div>
                 </div>
               </div>
-            </div>
-          </Section>
-
-          {/* ── KALKULATOR INTERAKTIF ─────────────────────────────── */}
-          <Section id="kalkulator" expanded={true} onToggle={toggleSection}
-            icon={<Calculator className="w-5 h-5 text-emerald-400" />}
-            title="Kalkulator Jual Beli Interaktif">
-            <div className="space-y-3">
-              <p className="font-body text-xs text-white/50 leading-relaxed">
-                Gunakan kalkulator ini untuk memverifikasi perhitunganmu. Pilih mode sesuai yang ingin dihitung, lalu masukkan nilai yang diketahui — hasilnya langsung muncul secara otomatis.
-              </p>
-              <KalkulatorJualBeli />
             </div>
           </Section>
 
