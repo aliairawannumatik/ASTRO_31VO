@@ -385,23 +385,25 @@ const WarungDiskon = () => {
       </div>
 
       {/* ── MODE TABS ──────────────────────────────────────── */}
-      <div className="flex gap-0 border-b-2 border-gray-200">
+      <div className="flex gap-3 px-4 py-3 bg-gray-100/80 border-b-2 border-gray-200">
         <button
           onClick={() => { setMode("biasa"); setShowResult(false); }}
-          className={`flex-1 py-3 font-black text-sm transition-all ${
+          className={`flex-1 py-3 px-4 rounded-xl font-black text-sm transition-all duration-200 cursor-pointer select-none
+            border-2 shadow-md active:scale-95 active:shadow-sm ${
             mode === "biasa"
-              ? "bg-gradient-to-r from-orange-400 to-red-400 text-white shadow-inner"
-              : "bg-white/60 text-gray-500 hover:bg-orange-50"
+              ? "bg-gradient-to-r from-orange-400 to-red-400 text-white border-orange-500 shadow-orange-200"
+              : "bg-white text-gray-600 border-gray-300 hover:border-orange-400 hover:text-orange-500 hover:bg-orange-50 hover:shadow-orange-100"
           }`}
         >
           🏷️ Diskon Biasa
         </button>
         <button
           onClick={() => { setMode("berganda"); setShowResult(false); }}
-          className={`flex-1 py-3 font-black text-sm transition-all ${
+          className={`flex-1 py-3 px-4 rounded-xl font-black text-sm transition-all duration-200 cursor-pointer select-none
+            border-2 shadow-md active:scale-95 active:shadow-sm ${
             mode === "berganda"
-              ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-inner"
-              : "bg-white/60 text-gray-500 hover:bg-purple-50"
+              ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-purple-600 shadow-purple-200"
+              : "bg-white text-gray-600 border-gray-300 hover:border-purple-400 hover:text-purple-500 hover:bg-purple-50 hover:shadow-purple-100"
           }`}
         >
           🎉 Diskon Berganda
