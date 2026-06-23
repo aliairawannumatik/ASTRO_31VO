@@ -236,13 +236,14 @@ const SlipGaji = ({
 
         <div className="bg-white shadow-2xl" style={{ boxShadow: "0 25px 80px rgba(0,0,0,0.6)" }}>
           {/* header */}
-          <div className="py-4 px-5 text-center"
+          <div className="py-3 px-4 text-center"
             style={{ background: kenaPajak ? "linear-gradient(135deg,#7f1d1d,#b91c1c)" : "linear-gradient(135deg,#14532d,#15803d)" }}>
-            <p className="text-white font-black text-base tracking-widest">📄 SLIP GAJI RESMI</p>
-            <p className="text-white/70 text-[10px] mt-0.5">PT. Numatik Indonesia — Periode 2024</p>
+            <p className="text-white font-black text-sm tracking-widest">📄 SLIP GAJI RESMI</p>
+            <p className="text-white/70 text-[9px] mt-0.5">PT. Numatik Indonesia — Periode 2024</p>
           </div>
 
-          <div className="px-5 pt-4 pb-2 font-mono text-xs">
+          <div className="overflow-y-auto" style={{ maxHeight: "45vh" }}>
+          <div className="px-4 pt-3 pb-2 font-mono text-xs">
             {/* employee info */}
             <div className="flex justify-between mb-3 pb-3 border-b border-dashed border-gray-300">
               <div>
@@ -344,6 +345,7 @@ const SlipGaji = ({
               Dokumen resmi. Diterbitkan sistem otomatis NUMATIK.
             </p>
           </div>
+          </div>{/* end scroll wrapper */}
         </div>
 
         {/* torn bottom */}
