@@ -524,36 +524,98 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
           <svg viewBox={`0 0 ${SVG_W} ${SVG_H}`} width="100%" xmlns="http://www.w3.org/2000/svg" style={{ overflow: "visible" }}>
             <defs>
               <style>{`
-                @keyframes drawArc {
-                  from { stroke-dashoffset: 100; opacity: 0.3; }
-                  to   { stroke-dashoffset: 0;   opacity: 1;   }
+                @keyframes arcDraw {
+                  0%   { stroke-dashoffset: 100; opacity: 0; filter: brightness(2.5); }
+                  30%  { opacity: 1; filter: brightness(1.8); }
+                  100% { stroke-dashoffset: 0;   opacity: 1; filter: brightness(1); }
                 }
-                @keyframes popDot {
-                  0%   { r: 0; opacity: 0; }
-                  60%  { r: 9px; opacity: 1; }
-                  100% { r: 6px; opacity: 1; }
+                @keyframes arcGlowPulse {
+                  0%, 100% { opacity: 0.55; }
+                  50%      { opacity: 0.9; }
                 }
-                .arc-new { animation: drawArc 0.38s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-                .dot-pop  { animation: popDot 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+                @keyframes dotPop {
+                  0%   { r: 0px;  opacity: 0; }
+                  55%  { r: 10px; opacity: 1; }
+                  75%  { r: 5px;  opacity: 1; }
+                  100% { r: 7px;  opacity: 1; }
+                }
+                @keyframes ringPulse {
+                  0%   { r: 9px;  opacity: 0; stroke-width: 3; }
+                  50%  { r: 16px; opacity: 0.6; stroke-width: 1.5; }
+                  100% { r: 13px; opacity: 0.9; stroke-width: 2; }
+                }
+                @keyframes sparkle {
+                  0%   { opacity: 1; transform: scale(1); }
+                  100% { opacity: 0; transform: scale(2.5); }
+                }
+                @keyframes shimmer {
+                  0%, 100% { stroke-opacity: 0.7; }
+                  50%      { stroke-opacity: 1; }
+                }
+                .arc-new  { animation: arcDraw 0.45s cubic-bezier(0.22,1.6,0.36,1) forwards; }
+                .arc-done { animation: shimmer 2.2s ease-in-out infinite; }
+                .dot-pop  { animation: dotPop 0.5s cubic-bezier(0.34,1.8,0.64,1) forwards; }
+                .ring-pop { animation: ringPulse 0.55s cubic-bezier(0.22,1.4,0.36,1) forwards; }
+                .sparkle-burst { animation: sparkle 0.6s ease-out forwards; }
               `}</style>
-              <marker id="ia-axis-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-                <polygon points="0 0,8 3,0 6" fill="#FFD700"/>
+
+              {/* Glow filters */}
+              <filter id="glow-g" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                <feColorMatrix in="blur" type="matrix"
+                  values="0 0 0 0 0.2  0 0 0 0 1  0 0 0 0 0.4  0 0 0 1 0" result="colored"/>
+                <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="glow-r" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                <feColorMatrix in="blur" type="matrix"
+                  values="0 0 0 0 1  0 0 0 0 0.2  0 0 0 0 0.2  0 0 0 1 0" result="colored"/>
+                <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="glow-cyan" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="4" result="blur"/>
+                <feColorMatrix in="blur" type="matrix"
+                  values="0 0 0 0 0  0 0 0 0 0.9  0 0 0 0 1  0 0 0 1 0" result="colored"/>
+                <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="glow-dot" x="-80%" y="-80%" width="360%" height="360%">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+
+              {/* Gradients for arcs */}
+              <linearGradient id="grad-g" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stopColor="#86efac"/>
+                <stop offset="50%"  stopColor="#4ade80"/>
+                <stop offset="100%" stopColor="#22c55e"/>
+              </linearGradient>
+              <linearGradient id="grad-r" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stopColor="#fca5a5"/>
+                <stop offset="50%"  stopColor="#f87171"/>
+                <stop offset="100%" stopColor="#ef4444"/>
+              </linearGradient>
+
+              {/* Axis markers */}
+              <marker id="ia-axis-r" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0,9 3.5,0 7" fill="#FFD700"/>
               </marker>
-              <marker id="ia-axis-l" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
-                <polygon points="0 0,8 3,0 6" fill="#FFD700"/>
+              <marker id="ia-axis-l" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+                <polygon points="0 0,9 3.5,0 7" fill="#FFD700"/>
               </marker>
-              <marker id="ia-arrow-g" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
-                <polygon points="0 0,7 2.5,0 5" fill="#4ade80"/>
+              <marker id="ia-arrow-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0,8 3,0 6" fill="#4ade80"/>
               </marker>
-              <marker id="ia-arrow-r" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
-                <polygon points="0 0,7 2.5,0 5" fill="#f87171"/>
+              <marker id="ia-arrow-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0,8 3,0 6" fill="#f87171"/>
               </marker>
             </defs>
 
             {/* Axis */}
             <line x1={10} y1={lineY} x2={SVG_W - 10} y2={lineY}
               stroke="#FFD700" strokeWidth="2.5"
-              markerEnd="url(#ia-axis-r)" markerStart="url(#ia-axis-l)" />
+              markerEnd="url(#ia-axis-r)" markerStart="url(#ia-axis-l)"
+              style={{ filter: "drop-shadow(0 0 3px #FFD70088)" }}
+            />
 
             {/* Ticks and labels */}
             {visibleNums.map(n => {
@@ -568,12 +630,13 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
               return (
                 <g key={n}>
                   <line
-                    x1={x} y1={prominent ? lineY - 10 : lineY - 6}
-                    x2={x} y2={prominent ? lineY + 10 : lineY + 6}
+                    x1={x} y1={prominent ? lineY - 11 : lineY - 6}
+                    x2={x} y2={prominent ? lineY + 11 : lineY + 6}
                     stroke={tickColor} strokeWidth={prominent ? 2.5 : 1.5}
+                    style={prominent ? { filter: `drop-shadow(0 0 4px ${tickColor}99)` } : undefined}
                   />
                   {showLabel && (
-                    <text x={x} y={lineY + 24} textAnchor="middle" fontFamily="monospace"
+                    <text x={x} y={lineY + 26} textAnchor="middle" fontFamily="monospace"
                       fill={textColor}
                       fontSize={prominent ? 13 : 10}
                       fontWeight={prominent ? "bold" : "normal"}
@@ -583,62 +646,99 @@ const InteraktifPenjumlahan = ({ lightMode = false }: { lightMode?: boolean }) =
               );
             })}
 
-            {/* Dot at position A when valid (idle) */}
+            {/* Idle dot at A */}
             {validA && phase === "idle" && (
-              <circle cx={toX(a)} cy={lineY} r="6" fill="#f0abfc"
-                className="dot-pop"
-                key={`dot-a-${a}`}
-              />
+              <g key={`dot-a-${a}`}>
+                <circle cx={toX(a)} cy={lineY} r="9" fill="#f0abfc" opacity="0.18" className="dot-pop"/>
+                <circle cx={toX(a)} cy={lineY} r="6" fill="#f0abfc" filter="url(#glow-dot)" className="dot-pop"/>
+              </g>
             )}
 
-            {/* Arcs */}
+            {/* Arcs — glow shadow layer first, then colored arc on top */}
             {Array.from({ length: arcCount }, (_, i) => {
-              const x1 = b > 0 ? toX(a + i) : toX(a - i);
+              const x1 = b > 0 ? toX(a + i)     : toX(a - i);
               const x2 = b > 0 ? toX(a + i + 1) : toX(a - i - 1);
               const mx = (x1 + x2) / 2;
-              const arcH = Math.min(28, unitPx * 0.55 + 8);
+              const arcH = Math.min(34, unitPx * 0.6 + 10);
               const cy = arcUp ? lineY - arcH : lineY + arcH;
+              const dPath = `M ${x1},${lineY} Q ${mx},${cy} ${x2},${lineY}`;
               const isNew = i === arcCount - 1 && phase === "animating";
+              const glowFilter = arcUp ? "url(#glow-g)" : "url(#glow-r)";
+              const gradId = arcUp ? "url(#grad-g)" : "url(#grad-r)";
               return (
-                <path
-                  key={`arc-${i}`}
-                  d={`M ${x1},${lineY} Q ${mx},${cy} ${x2},${lineY}`}
-                  fill="none"
-                  stroke={arcColor}
-                  strokeWidth="2.4"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset={isNew ? undefined : 0}
-                  className={isNew ? "arc-new" : undefined}
-                  markerEnd={`url(#${markerId})`}
-                />
+                <g key={`arc-${i}`}>
+                  {/* Fat soft glow behind */}
+                  <path
+                    d={dPath}
+                    fill="none"
+                    stroke={arcColor}
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeOpacity="0.22"
+                    pathLength="100"
+                    strokeDasharray="100"
+                    strokeDashoffset={isNew ? undefined : 0}
+                    className={isNew ? "arc-new arc-done" : "arc-done"}
+                  />
+                  {/* Main arc with gradient + glow */}
+                  <path
+                    d={dPath}
+                    fill="none"
+                    stroke={gradId}
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    pathLength="100"
+                    strokeDasharray="100"
+                    strokeDashoffset={isNew ? undefined : 0}
+                    filter={glowFilter}
+                    className={isNew ? "arc-new" : undefined}
+                    markerEnd={`url(#${markerId})`}
+                  />
+                </g>
               );
             })}
 
-            {/* Moving dot */}
+            {/* Moving dot with glow */}
             {phase !== "idle" && dotPos !== null && (
-              <circle
-                key={`movdot-${dotPos}`}
-                cx={toX(dotPos)}
-                cy={lineY}
-                r="6"
-                fill={isDone ? "#67e8f9" : arcColor}
-                className="dot-pop"
-              />
+              <g key={`movdot-${dotPos}-${phase}`}>
+                <circle cx={toX(dotPos)} cy={lineY} r="12"
+                  fill={isDone ? "#67e8f9" : arcColor} opacity="0.15" className="dot-pop"/>
+                <circle cx={toX(dotPos)} cy={lineY} r="7"
+                  fill={isDone ? "#67e8f9" : arcColor}
+                  filter={isDone ? "url(#glow-cyan)" : (arcUp ? "url(#glow-g)" : "url(#glow-r)")}
+                  className="dot-pop"/>
+              </g>
             )}
 
-            {/* Result ring */}
+            {/* Result ring + sparkle */}
             {isDone && (
-              <circle cx={toX(result)} cy={lineY} r="11"
-                fill="none" stroke="#67e8f9" strokeWidth="2.5"
-                strokeDasharray="5 3" opacity="0.9"
-              />
+              <g>
+                <circle cx={toX(result)} cy={lineY} r="13"
+                  fill="none" stroke="#67e8f9" strokeWidth="2.5"
+                  filter="url(#glow-cyan)"
+                  className="ring-pop"
+                />
+                {/* Mini sparkle stars around result */}
+                {[0, 60, 120, 180, 240, 300].map((deg, si) => {
+                  const rad = (deg * Math.PI) / 180;
+                  const sx = toX(result) + Math.cos(rad) * 18;
+                  const sy = lineY + Math.sin(rad) * 18;
+                  return (
+                    <circle key={`sp${si}`} cx={sx} cy={sy} r="2"
+                      fill="#67e8f9"
+                      className="sparkle-burst"
+                      style={{ animationDelay: `${si * 0.06}s`, transformOrigin: `${sx}px ${sy}px` }}
+                    />
+                  );
+                })}
+              </g>
             )}
 
-            {/* Label "Mulai" above start dot when animating */}
+            {/* Label "mulai" */}
             {phase !== "idle" && (
-              <text x={toX(a)} y={lineY - 16} textAnchor="middle"
-                fontFamily="sans-serif" fontSize="9" fill="#f0abfc" opacity="0.8">
+              <text x={toX(a)} y={arcUp ? lineY - arcCount * 0 - 22 : lineY - 18}
+                textAnchor="middle" fontFamily="sans-serif" fontSize="9"
+                fill="#f0abfc" opacity="0.85">
                 mulai ({a})
               </text>
             )}
