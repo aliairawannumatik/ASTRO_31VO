@@ -21,6 +21,256 @@ import InteractiveLKPD, {
 import type { LKPDGame } from "@/components/LKPDGameZone";
 
 /* ──────────────────────────────────────────────────────────────
+   INTERACTIVE NUMBER LINE CALCULATOR
+──────────────────────────────────────────────────────────────── */
+
+const InteraktifGarisBilangan = () => {
+  const [inputA, setInputA] = useState('');
+  const [inputB, setInputB] = useState('');
+  const [phase, setPhase] = useState<'idle' | 'animating' | 'done'>('idle');
+  const [arcCount, setArcCount] = useState(0);
+
+  const numA = inputA !== '' ? parseInt(inputA) : null;
+  const numB = inputB !== '' ? parseInt(inputB) : null;
+  const hasA = numA !== null && !isNaN(numA);
+  const hasB = numB !== null && !isNaN(numB);
+  const canOperate = hasA && hasB;
+  const result = canOperate ? numA! + numB! : null;
+  const totalArcs = hasB ? Math.abs(numB!) : 0;
+  const bDir = hasB && numB! >= 0 ? 1 : -1;
+  const isPos = hasB && numB! >= 0;
+  const arcCol = isPos ? '#4ade80' : '#f87171';
+
+  const keyPoints = [0, ...(hasA ? [numA!] : []), ...(result !== null ? [result] : [])];
+  const rawMin = Math.min(...keyPoints);
+  const rawMax = Math.max(...keyPoints);
+  const span = rawMax - rawMin;
+  const buf = Math.max(3, Math.ceil(span * 0.25) + 1);
+  const low = rawMin - buf;
+  const high = rawMax + buf;
+  const range = Math.max(high - low, 8);
+
+  const SVG_W = 600, PAD = 46, Y_LINE = 90;
+  const unitW = (SVG_W - 2 * PAD) / range;
+  const cx = (n: number) => PAD + (n - low) * unitW;
+  const arcH = Math.max(unitW * 0.75, 24);
+  const svgH = 152;
+
+  const tickStep = range > 40 ? 10 : range > 20 ? 5 : range > 12 ? 2 : 1;
+  const tickSet = new Set<number>();
+  for (let n = Math.ceil(low / tickStep) * tickStep; n <= Math.floor(high / tickStep) * tickStep; n += tickStep) tickSet.add(n);
+  keyPoints.forEach(p => { if (p >= low && p <= high) tickSet.add(p); });
+  const ticks = [...tickSet].sort((a, b) => a - b);
+
+  const arcs: { x1: number; x2: number; mx: number; up: boolean; idx: number }[] = [];
+  if (hasA && hasB) {
+    for (let i = 0; i < totalArcs; i++) {
+      const from = numA! + i * bDir;
+      const to = from + bDir;
+      const x1 = cx(from), x2 = cx(to), mx = (x1 + x2) / 2;
+      arcs.push({ x1, x2, mx, up: bDir > 0, idx: i });
+    }
+  }
+
+  const currentPos = phase !== 'idle' && hasA ? numA! + arcCount * bDir : null;
+
+  useEffect(() => {
+    if (phase !== 'animating') return;
+    if (arcCount >= totalArcs) { setPhase('done'); return; }
+    const t = setTimeout(() => setArcCount(c => c + 1), 420);
+    return () => clearTimeout(t);
+  }, [phase, arcCount, totalArcs]);
+
+  useEffect(() => { setPhase('idle'); setArcCount(0); }, [inputA, inputB]);
+
+  const handleOperate = () => {
+    if (!canOperate) return;
+    if (totalArcs === 0) { setPhase('done'); return; }
+    setPhase('animating');
+    setArcCount(0);
+  };
+
+  const handleReset = () => { setInputA(''); setInputB(''); setPhase('idle'); setArcCount(0); };
+
+  return (
+    <section className="mb-6 rounded-3xl border border-cyan-400/30 bg-gradient-to-br from-cyan-950/60 via-blue-950/50 to-indigo-950/60 backdrop-blur overflow-hidden">
+      <div className="px-6 pt-5 pb-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-cyan-400/20 border border-cyan-300/40 flex items-center justify-center shrink-0 text-xl">🎮</div>
+          <div>
+            <p className="font-display font-bold text-cyan-100 text-lg leading-tight">Kalkulator Garis Bilangan Interaktif</p>
+            <p className="text-xs text-cyan-200/60 font-body mt-0.5">Masukkan dua bilangan bulat, lalu klik Operasikan!</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-6 pb-4 space-y-4">
+        {/* Input row */}
+        <div className="flex items-end justify-center gap-2 flex-wrap">
+          <div className="flex flex-col items-center gap-1.5">
+            <label className="text-xs font-semibold text-cyan-300/80 font-body tracking-wide">Angka Pertama</label>
+            <input
+              type="number"
+              value={inputA}
+              onChange={e => setInputA(e.target.value)}
+              placeholder="misal: 3"
+              className="w-28 text-center text-2xl font-black bg-slate-900/80 border-2 border-cyan-400/50 rounded-2xl px-2 py-3 text-cyan-200 placeholder-white/15 focus:outline-none focus:border-cyan-300 transition-all shadow-inner"
+            />
+          </div>
+
+          <div className="flex items-center pb-3">
+            <span className="text-4xl font-black text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)] select-none">+</span>
+          </div>
+
+          <div className="flex flex-col items-center gap-1.5">
+            <label className="text-xs font-semibold text-purple-300/80 font-body tracking-wide">Angka Kedua</label>
+            <input
+              type="number"
+              value={inputB}
+              onChange={e => setInputB(e.target.value)}
+              placeholder="misal: −2"
+              className="w-28 text-center text-2xl font-black bg-slate-900/80 border-2 border-purple-400/50 rounded-2xl px-2 py-3 text-purple-200 placeholder-white/15 focus:outline-none focus:border-purple-300 transition-all shadow-inner"
+            />
+          </div>
+
+          <div className="flex items-center pb-3">
+            <span className="text-4xl font-black text-white/30 select-none">=</span>
+          </div>
+
+          <div className="flex flex-col items-center gap-1.5">
+            <label className="text-xs font-semibold text-amber-300/80 font-body tracking-wide">Hasil</label>
+            <div className={`w-28 h-[58px] flex items-center justify-center rounded-2xl border-2 transition-all duration-500 ${
+              phase === 'done' ? 'border-amber-400/70 bg-amber-500/15 shadow-[0_0_16px_rgba(251,191,36,0.3)]' : 'border-white/10 bg-slate-900/50'
+            }`}>
+              {phase === 'done' && result !== null
+                ? <span className="text-2xl font-black text-amber-300">{result}</span>
+                : <span className="text-3xl font-black text-white/15">?</span>}
+            </div>
+          </div>
+        </div>
+
+        {/* Direction hint */}
+        {hasB && (
+          <p className={`text-center text-xs font-semibold font-body transition-all ${isPos ? 'text-green-400' : 'text-red-400'}`}>
+            {isPos
+              ? `✅ Bilangan kedua positif (+${numB}) → bergerak ke KANAN →`
+              : `🔴 Bilangan kedua negatif (${numB}) → bergerak ke KIRI ←`}
+          </p>
+        )}
+
+        {/* Buttons */}
+        <div className="flex justify-center gap-3">
+          <button
+            onClick={handleOperate}
+            disabled={!canOperate || phase === 'animating'}
+            className="px-8 py-3 rounded-2xl font-bold text-base bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-900/50 hover:from-cyan-400 hover:to-blue-500 active:scale-95 transition-all disabled:opacity-35 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            {phase === 'animating' ? <><span className="inline-block animate-spin">⚙️</span> Menghitung…</> : <>🚀 Operasikan!</>}
+          </button>
+          {(inputA || inputB) && (
+            <button onClick={handleReset} className="px-4 py-3 rounded-2xl font-bold text-sm bg-white/5 border border-white/15 text-white/60 hover:bg-white/10 hover:text-white transition-all active:scale-95">
+              🔄 Reset
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Number line */}
+      <div className="px-4 pb-6">
+        <div className="bg-slate-900/70 rounded-2xl border border-white/10 p-3 pt-4">
+          <p className="text-center text-xs text-white/35 font-body mb-1">📏 Garis Bilangan</p>
+          <svg viewBox={`0 0 ${SVG_W} ${svgH}`} width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="igb-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#FFD700"/></marker>
+              <marker id="igb-al" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse"><polygon points="0 0,8 3,0 6" fill="#FFD700"/></marker>
+              <marker id="igb-mg" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#4ade80"/></marker>
+              <marker id="igb-mr" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#f87171"/></marker>
+            </defs>
+
+            {/* Axis */}
+            <line x1={PAD - 8} y1={Y_LINE} x2={SVG_W - PAD + 8} y2={Y_LINE} stroke="#FFD700" strokeWidth="2.5" markerEnd="url(#igb-ar)" markerStart="url(#igb-al)"/>
+
+            {/* Ticks + labels */}
+            {ticks.map(n => {
+              const x = cx(n);
+              const isZero = n === 0;
+              const isA = hasA && n === numA;
+              const isRes = phase === 'done' && result !== null && n === result;
+              const prominent = isZero || isA || isRes;
+              const col = isRes ? '#fbbf24' : isA && phase === 'idle' ? '#67e8f9' : isZero ? '#e2e8f0' : '#FFD700';
+              return (
+                <g key={n}>
+                  <line x1={x} y1={prominent ? Y_LINE - 9 : Y_LINE - 5} x2={x} y2={prominent ? Y_LINE + 9 : Y_LINE + 5} stroke={col} strokeWidth={prominent ? 2.5 : 1.5}/>
+                  <text x={x} y={Y_LINE + 23} textAnchor="middle" fill={col} fontSize={prominent ? 13 : 10} fontWeight={prominent ? 'bold' : 'normal'} fontFamily="monospace">{n}</text>
+                </g>
+              );
+            })}
+
+            {/* Dot at numA — shown before animating */}
+            {hasA && phase === 'idle' && (
+              <circle cx={cx(numA!)} cy={Y_LINE} r="9" fill="#67e8f9" opacity="0.85"/>
+            )}
+
+            {/* Ghost start dot during/after animation */}
+            {phase !== 'idle' && hasA && (
+              <circle cx={cx(numA!)} cy={Y_LINE} r="6" fill="#67e8f9" opacity="0.3"/>
+            )}
+
+            {/* Progressive arcs */}
+            {phase !== 'idle' && arcs.slice(0, arcCount).map(({ x1, x2, mx, up, idx }) => {
+              const qy = up ? Y_LINE - arcH : Y_LINE + arcH;
+              return (
+                <path key={idx}
+                  d={`M ${x1},${Y_LINE} Q ${mx},${qy} ${x2},${Y_LINE}`}
+                  fill="none" stroke={arcCol} strokeWidth="2.4"
+                  markerEnd={up ? 'url(#igb-mg)' : 'url(#igb-mr)'}
+                  opacity="0.9"
+                />
+              );
+            })}
+
+            {/* Moving dot during animation */}
+            {phase === 'animating' && currentPos !== null && (
+              <circle cx={cx(currentPos)} cy={Y_LINE} r="8" fill={arcCol} opacity="0.95"/>
+            )}
+
+            {/* Result dot + ring */}
+            {phase === 'done' && result !== null && (
+              <>
+                <circle cx={cx(result)} cy={Y_LINE} r="13" fill="none" stroke="#fbbf24" strokeWidth="2.5" opacity="0.6"/>
+                <circle cx={cx(result)} cy={Y_LINE} r="8" fill="#fbbf24" opacity="0.95"/>
+              </>
+            )}
+
+            {/* Result label above */}
+            {phase === 'done' && result !== null && hasA && hasB && (
+              <text x={cx(result)} y={numB! >= 0 ? Y_LINE - arcH - 10 : Y_LINE + arcH + 22}
+                textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold" fontFamily="sans-serif">
+                {numA} + ({numB}) = {result}
+              </text>
+            )}
+          </svg>
+
+          {/* Legend */}
+          <div className="flex flex-wrap gap-4 justify-center mt-2 text-xs font-body text-white/45">
+            {hasA && <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-cyan-400 inline-block"/>{inputA} (titik awal)</span>}
+            {phase !== 'idle' && totalArcs > 0 && (
+              <span className="flex items-center gap-1.5">
+                <span className="w-6 h-1 rounded-full inline-block" style={{ background: arcCol }}/>
+                {isPos ? 'Busur ke kanan (+)' : 'Busur ke kiri (−)'}
+              </span>
+            )}
+            {phase === 'done' && result !== null && (
+              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-amber-400 inline-block"/>Hasil: {result}</span>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ──────────────────────────────────────────────────────────────
    ANIMATED SVG COMPONENTS  (adapted from PenjumlahanPage.tsx)
 ──────────────────────────────────────────────────────────────── */
 
