@@ -122,7 +122,95 @@ const SpinnerDiagram = ({ sectors }: { sectors: { label: string; color: string; 
 
 type PGOpt = { key: string; text: string; math?: boolean };
 type PGQ = { n: number; content: string; options: PGOpt[]; diagram?: React.ReactNode };
+const OutfitDiagram = () => (
+  <div className="bg-slate-800/70 border border-cyan-500/30 rounded-xl p-4 mb-2">
+    <p className="text-[11px] font-bold text-center text-cyan-300 mb-4 tracking-wide">🎽 Ilustrasi Pilihan Busana Reza</p>
+    <div className="flex flex-col gap-4">
+      {/* Kaos */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <div className="h-px flex-1 bg-red-400/30" />
+          <span className="text-[10px] text-red-300 font-bold tracking-widest">👕 3 KAOS</span>
+          <div className="h-px flex-1 bg-red-400/30" />
+        </div>
+        <div className="flex justify-center gap-3">
+          {[
+            { label: "K₁", warna: "Merah", bg: "bg-red-500/20", border: "border-red-400/50", dot: "#ef4444" },
+            { label: "K₂", warna: "Biru",  bg: "bg-blue-500/20", border: "border-blue-400/50", dot: "#3b82f6" },
+            { label: "K₃", warna: "Hijau", bg: "bg-green-500/20", border: "border-green-400/50", dot: "#22c55e" },
+          ].map(item => (
+            <div key={item.label} className={`flex flex-col items-center gap-1.5 rounded-xl px-3 py-2 border ${item.bg} ${item.border}`}>
+              <svg viewBox="0 0 40 38" width="42" height="40">
+                <path d="M14,2 L6,10 L2,8 L2,18 L10,18 L10,36 L30,36 L30,18 L38,18 L38,8 L34,10 L26,2 Q20,6 14,2 Z"
+                  fill={item.dot} stroke="rgba(255,255,255,0.25)" strokeWidth="1" strokeLinejoin="round"/>
+                <path d="M14,2 Q20,6 26,2" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1"/>
+              </svg>
+              <span className="text-[10px] font-bold text-white/80">{item.label}</span>
+              <span className="text-[9px] text-white/40">{item.warna}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Celana */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <div className="h-px flex-1 bg-blue-400/30" />
+          <span className="text-[10px] text-blue-300 font-bold tracking-widest">👖 4 CELANA</span>
+          <div className="h-px flex-1 bg-blue-400/30" />
+        </div>
+        <div className="flex justify-center gap-2">
+          {[
+            { label: "C₁", warna: "Hitam",  color: "#1e293b", border: "#475569" },
+            { label: "C₂", warna: "Abu",    color: "#64748b", border: "#94a3b8" },
+            { label: "C₃", warna: "Coklat", color: "#92400e", border: "#d97706" },
+            { label: "C₄", warna: "Navy",   color: "#1e3a5f", border: "#3b82f6" },
+          ].map(item => (
+            <div key={item.label} className="flex flex-col items-center gap-1.5 rounded-xl px-2 py-2 bg-white/5 border border-white/10">
+              <svg viewBox="0 0 36 40" width="36" height="40">
+                <rect x="2" y="2" width="32" height="12" rx="2" fill={item.color} stroke={item.border} strokeWidth="1.2"/>
+                <rect x="2" y="13" width="14" height="25" rx="2" fill={item.color} stroke={item.border} strokeWidth="1.2"/>
+                <rect x="20" y="13" width="14" height="25" rx="2" fill={item.color} stroke={item.border} strokeWidth="1.2"/>
+                <line x1="18" y1="13" x2="18" y2="38" stroke={item.border} strokeWidth="1" strokeDasharray="2,2"/>
+              </svg>
+              <span className="text-[10px] font-bold text-white/80">{item.label}</span>
+              <span className="text-[9px] text-white/40">{item.warna}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Sepatu */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <div className="h-px flex-1 bg-purple-400/30" />
+          <span className="text-[10px] text-purple-300 font-bold tracking-widest">👟 2 PASANG SEPATU</span>
+          <div className="h-px flex-1 bg-purple-400/30" />
+        </div>
+        <div className="flex justify-center gap-6">
+          {[
+            { label: "S₁", warna: "Sneakers", color: "#ffffff", stroke: "#94a3b8" },
+            { label: "S₂", warna: "Sandal",   color: "#92400e", stroke: "#d97706" },
+          ].map(item => (
+            <div key={item.label} className="flex flex-col items-center gap-1.5 rounded-xl px-4 py-2 bg-purple-500/10 border border-purple-400/30">
+              <svg viewBox="0 0 60 30" width="60" height="30">
+                <ellipse cx="32" cy="22" rx="26" ry="7" fill="#334155" stroke="#475569" strokeWidth="1"/>
+                <path d="M8,22 Q10,10 22,8 L42,8 Q52,8 56,16 L56,22 Z" fill={item.color} stroke={item.stroke} strokeWidth="1.2" strokeLinejoin="round"/>
+                <path d="M22,8 Q28,4 36,6" fill="none" stroke={item.stroke} strokeWidth="1" opacity="0.6"/>
+              </svg>
+              <span className="text-[10px] font-bold text-white/80">{item.label}</span>
+              <span className="text-[9px] text-white/40">{item.warna}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="border-t border-cyan-500/20 pt-3 text-center">
+        <p className="text-[10px] text-cyan-400/70 font-body">Gunakan <span className="text-cyan-300 font-bold">kaidah perkalian</span>: 3 × 4 × 2 = ?</p>
+      </div>
+    </div>
+  </div>
+);
+
 const pgQuestions: PGQ[] = [
+  /* ── 1 ── */
   {
     n: 1,
     content: "Ruang sampel dari percobaan melempar 2 keping uang koin adalah ....",
@@ -133,8 +221,109 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "S = \\{(A, G),\\ (G, A)\\}", math: true },
     ],
   },
+  /* ── 2 (was 6) ── */
   {
     n: 2,
+    content: "Banyaknya titik sampel pada percobaan melempar 2 buah dadu secara bersamaan adalah ....",
+    options: [
+      { key: "A", text: "12" },
+      { key: "B", text: "18" },
+      { key: "C", text: "36" },
+      { key: "D", text: "48" },
+    ],
+  },
+  /* ── 3 (was 7) ── */
+  {
+    n: 3,
+    content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
+    options: [
+      { key: "A", text: "2" },
+      { key: "B", text: "3" },
+      { key: "C", text: "4" },
+      { key: "D", text: "5" },
+    ],
+  },
+  /* ── 4 (was 8) ── */
+  {
+    n: 4,
+    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
+    options: [
+      { key: "A", text: "12" },
+      { key: "B", text: "18" },
+      { key: "C", text: "24" },
+      { key: "D", text: "36" },
+    ],
+  },
+  /* ── 5 (was 12) ── */
+  {
+    n: 5,
+    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
+    options: [
+      { key: "A", text: "\\{(A, A)\\}", math: true },
+      { key: "B", text: "\\{(G, G)\\}", math: true },
+      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
+      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
+    ],
+  },
+  /* ── 6 (was 13) ── */
+  {
+    n: 6,
+    content: "Tiga keping uang logam dilempar secara bersamaan. Banyaknya anggota ruang sampel dari percobaan tersebut adalah ....",
+    diagram: (
+      <TreeDiagram
+        title="Percobaan 3 Koin"
+        branches={[
+          { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
+          { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
+          { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
+          { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
+        ]}
+      />
+    ),
+    options: [
+      { key: "A", text: "4" },
+      { key: "B", text: "6" },
+      { key: "C", text: "8" },
+      { key: "D", text: "10" },
+    ],
+  },
+  /* ── 7 (was 14) ── */
+  {
+    n: 7,
+    content: "Dari kota A ke kota B tersedia 3 jalur berbeda, dan dari kota B ke kota C tersedia 4 jalur berbeda. Banyaknya rute yang dapat ditempuh dari kota A ke kota C melalui kota B adalah ....",
+    diagram: (
+      <svg viewBox="0 0 340 210" className="w-full max-w-sm mx-auto">
+        <path d="M 62,83 Q 115,30 148,83"  fill="none" stroke="#22d3ee" strokeWidth="2"   strokeDasharray="5,3"/>
+        <path d="M 62,90 L 148,90"          fill="none" stroke="#06b6d4" strokeWidth="2"   strokeDasharray="5,3"/>
+        <path d="M 62,97 Q 115,152 148,97"  fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="5,3"/>
+        <path d="M 192,82 Q 247,22  278,82" fill="none" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 192,87 Q 247,60  278,87" fill="none" stroke="#c084fc" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 192,93 Q 247,120 278,93" fill="none" stroke="#d946ef" strokeWidth="2" strokeDasharray="5,3"/>
+        <path d="M 192,98 Q 247,158 278,98" fill="none" stroke="#e879f9" strokeWidth="2" strokeDasharray="5,3"/>
+        <circle cx="40" cy="90" r="22" fill="#0f2a3a" stroke="#22d3ee" strokeWidth="2.5"/>
+        <text x="40" y="95" textAnchor="middle" fill="#22d3ee" fontSize="16" fontWeight="bold">A</text>
+        <circle cx="170" cy="90" r="22" fill="#1a0f3a" stroke="#a855f7" strokeWidth="2.5"/>
+        <text x="170" y="95" textAnchor="middle" fill="#c084fc" fontSize="16" fontWeight="bold">B</text>
+        <circle cx="300" cy="90" r="22" fill="#2a0f1a" stroke="#e879f9" strokeWidth="2.5"/>
+        <text x="300" y="95" textAnchor="middle" fill="#e879f9" fontSize="16" fontWeight="bold">C</text>
+        <polygon points="148,90 138,86 138,94" fill="#06b6d4"/>
+        <polygon points="278,90 268,86 268,94" fill="#c084fc"/>
+        <rect x="4" y="193" width="100" height="14" rx="5" fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="1"/>
+        <text x="54" y="203" textAnchor="middle" fill="#67e8f9" fontSize="9" fontWeight="bold">A → B : 3 jalur</text>
+        <rect x="116" y="193" width="110" height="14" rx="5" fill="rgba(168,85,247,0.08)" stroke="#a855f7" strokeWidth="1"/>
+        <text x="171" y="203" textAnchor="middle" fill="#d8b4fe" fontSize="9" fontWeight="bold">B → C : 4 jalur</text>
+      </svg>
+    ),
+    options: [
+      { key: "A", text: "7" },
+      { key: "B", text: "10" },
+      { key: "C", text: "12" },
+      { key: "D", text: "16" },
+    ],
+  },
+  /* ── 8 (was 2) ── */
+  {
+    n: 8,
     content: "Dua buah dadu dilempar bersamaan. Himpunan kejadian jumlah mata kedua dadu adalah 7 merupakan ....",
     options: [
       { key: "A", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2)\\}", math: true },
@@ -143,8 +332,52 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4)\\}", math: true },
     ],
   },
+  /* ── 9 (was 9) ── */
   {
-    n: 3,
+    n: 9,
+    content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu 4 atau 8 adalah ....",
+    options: [
+      { key: "A", text: "6" },
+      { key: "B", text: "8" },
+      { key: "C", text: "10" },
+      { key: "D", text: "12" },
+    ],
+  },
+  /* ── 10 (NEW) ── */
+  {
+    n: 10,
+    content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu lebih dari 3 dan kurang dari 7 adalah ....",
+    diagram: (
+      <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 mb-1">
+        <p className="text-[10px] text-cyan-300 font-bold mb-2 text-center">🎲 Jumlah yang memenuhi: lebih dari 3 DAN kurang dari 7</p>
+        <div className="flex gap-2 flex-wrap justify-center">
+          {[
+            { sum: 4, pairs: ["(1,3)","(2,2)","(3,1)"], color: "bg-cyan-500/15 border-cyan-400/40 text-cyan-200" },
+            { sum: 5, pairs: ["(1,4)","(2,3)","(3,2)","(4,1)"], color: "bg-blue-500/15 border-blue-400/40 text-blue-200" },
+            { sum: 6, pairs: ["(1,5)","(2,4)","(3,3)","(4,2)","(5,1)"], color: "bg-indigo-500/15 border-indigo-400/40 text-indigo-200" },
+          ].map(row => (
+            <div key={row.sum} className={`rounded-lg border px-3 py-2 ${row.color}`}>
+              <p className="text-[10px] font-bold mb-1 text-center">Jumlah = {row.sum}</p>
+              <div className="flex gap-1 flex-wrap justify-center">
+                {row.pairs.map(p => (
+                  <span key={p} className="text-[9px] bg-white/10 rounded px-1 py-0.5">{p}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+    options: [
+      { key: "A", text: "8" },
+      { key: "B", text: "10" },
+      { key: "C", text: "12" },
+      { key: "D", text: "14" },
+    ],
+  },
+  /* ── 11 (was 3) ── */
+  {
+    n: 11,
     content: "Sebuah kantong berisi kartu bernomor 1, 2, 3, 4 dan kartu berhuruf A, B, C. Jika diambil satu kartu secara acak, banyaknya titik sampelnya adalah ....",
     options: [
       { key: "A", text: "5" },
@@ -153,8 +386,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "8" },
     ],
   },
+  /* ── 12 (was 4) ── */
   {
-    n: 4,
+    n: 12,
     content: "Sebuah koin dan sebuah dadu dilempar bersama-sama. Banyaknya anggota ruang sampel percobaan tersebut adalah ....",
     diagram: (
       <FreqTable
@@ -177,9 +411,11 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "18" },
     ],
   },
+  /* ── 13 (was 5, + ilustrasi busana) ── */
   {
-    n: 5,
+    n: 13,
     content: "Reza mempunyai 3 kaos, 4 celana, dan 2 pasang sepatu. Banyaknya cara Reza dapat memilih busana yang akan dikenakan adalah ....",
+    diagram: <OutfitDiagram />,
     options: [
       { key: "A", text: "9" },
       { key: "B", text: "12" },
@@ -187,48 +423,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "24" },
     ],
   },
+  /* ── 14 (was 10) ── */
   {
-    n: 6,
-    content: "Banyaknya titik sampel pada percobaan melempar 2 buah dadu secara bersamaan adalah ....",
-    options: [
-      { key: "A", text: "12" },
-      { key: "B", text: "18" },
-      { key: "C", text: "36" },
-      { key: "D", text: "48" },
-    ],
-  },
-  {
-    n: 7,
-    content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
-    options: [
-      { key: "A", text: "2" },
-      { key: "B", text: "3" },
-      { key: "C", text: "4" },
-      { key: "D", text: "5" },
-    ],
-  },
-  {
-    n: 8,
-    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
-    options: [
-      { key: "A", text: "12" },
-      { key: "B", text: "18" },
-      { key: "C", text: "24" },
-      { key: "D", text: "36" },
-    ],
-  },
-  {
-    n: 9,
-    content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu 4 atau 8 adalah ....",
-    options: [
-      { key: "A", text: "6" },
-      { key: "B", text: "8" },
-      { key: "C", text: "10" },
-      { key: "D", text: "12" },
-    ],
-  },
-  {
-    n: 10,
+    n: 14,
     content: "Sebuah dadu dilempar satu kali. Banyaknya kemungkinan muncul mata dadu bukan angka 2 adalah ....",
     options: [
       { key: "A", text: "4" },
@@ -237,85 +434,15 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "7" },
     ],
   },
+  /* ── 15 (was 11) ── */
   {
-    n: 11,
+    n: 15,
     content: "Pasangan suami istri berencana memiliki 3 orang anak. Banyaknya titik sampel dari jenis kelamin anak yang mungkin terjadi adalah ....",
     options: [
       { key: "A", text: "4" },
       { key: "B", text: "6" },
       { key: "C", text: "8" },
       { key: "D", text: "12" },
-    ],
-  },
-  {
-    n: 12,
-    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
-    options: [
-      { key: "A", text: "\\{(A, A)\\}", math: true },
-      { key: "B", text: "\\{(G, G)\\}", math: true },
-      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
-      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
-    ],
-  },
-  {
-    n: 13,
-    content: "Tiga keping uang logam dilempar secara bersamaan. Banyaknya anggota ruang sampel dari percobaan tersebut adalah ....",
-    diagram: (
-      <TreeDiagram
-        title="Percobaan 3 Koin"
-        branches={[
-          { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
-          { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
-          { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
-          { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
-        ]}
-      />
-    ),
-    options: [
-      { key: "A", text: "4" },
-      { key: "B", text: "6" },
-      { key: "C", text: "8" },
-      { key: "D", text: "10" },
-    ],
-  },
-  {
-    n: 14,
-    content: "Dari kota A ke kota B tersedia 3 jalur berbeda, dan dari kota B ke kota C tersedia 4 jalur berbeda. Banyaknya rute yang dapat ditempuh dari kota A ke kota C melalui kota B adalah ....",
-    diagram: (
-      <svg viewBox="0 0 340 210" className="w-full max-w-sm mx-auto">
-        {/* A→B: 3 jalur */}
-        <path d="M 62,83 Q 115,30 148,83"  fill="none" stroke="#22d3ee" strokeWidth="2"   strokeDasharray="5,3"/>
-        <path d="M 62,90 L 148,90"          fill="none" stroke="#06b6d4" strokeWidth="2"   strokeDasharray="5,3"/>
-        <path d="M 62,97 Q 115,152 148,97"  fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="5,3"/>
-        {/* B→C: 4 jalur */}
-        <path d="M 192,82 Q 247,22  278,82" fill="none" stroke="#a855f7" strokeWidth="2" strokeDasharray="5,3"/>
-        <path d="M 192,87 Q 247,60  278,87" fill="none" stroke="#c084fc" strokeWidth="2" strokeDasharray="5,3"/>
-        <path d="M 192,93 Q 247,120 278,93" fill="none" stroke="#d946ef" strokeWidth="2" strokeDasharray="5,3"/>
-        <path d="M 192,98 Q 247,158 278,98" fill="none" stroke="#e879f9" strokeWidth="2" strokeDasharray="5,3"/>
-        {/* City A */}
-        <circle cx="40" cy="90" r="22" fill="#0f2a3a" stroke="#22d3ee" strokeWidth="2.5"/>
-        <text x="40" y="95" textAnchor="middle" fill="#22d3ee" fontSize="16" fontWeight="bold">A</text>
-        {/* City B */}
-        <circle cx="170" cy="90" r="22" fill="#1a0f3a" stroke="#a855f7" strokeWidth="2.5"/>
-        <text x="170" y="95" textAnchor="middle" fill="#c084fc" fontSize="16" fontWeight="bold">B</text>
-        {/* City C */}
-        <circle cx="300" cy="90" r="22" fill="#2a0f1a" stroke="#e879f9" strokeWidth="2.5"/>
-        <text x="300" y="95" textAnchor="middle" fill="#e879f9" fontSize="16" fontWeight="bold">C</text>
-        {/* Arrowheads */}
-        <polygon points="148,90 138,86 138,94" fill="#06b6d4"/>
-        <polygon points="278,90 268,86 268,94" fill="#c084fc"/>
-        {/* Legend */}
-        <rect x="4" y="193" width="100" height="14" rx="5" fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="1"/>
-        <text x="54" y="203" textAnchor="middle" fill="#67e8f9" fontSize="9" fontWeight="bold">A → B : 3 jalur</text>
-        <rect x="116" y="193" width="110" height="14" rx="5" fill="rgba(168,85,247,0.08)" stroke="#a855f7" strokeWidth="1"/>
-        <text x="171" y="203" textAnchor="middle" fill="#d8b4fe" fontSize="9" fontWeight="bold">B → C : 4 jalur</text>
-      </svg>
-    ),
-    options: [
-      { key: "A", text: "7" },
-      { key: "B", text: "10" },
-      { key: "C", text: "12" },
-      { key: "D", text: "16" },
     ],
   },
 ];
@@ -337,7 +464,7 @@ const RuangSampelPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · Tugas - Latihan Mandiri</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 14 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 15 Soal</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
