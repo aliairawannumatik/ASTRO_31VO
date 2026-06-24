@@ -256,42 +256,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "48" },
     ],
   },
-  /* ── 3 (was 7) ── */
+  /* ── 3 (was 6/13: 3 koin tree) ── */
   {
     n: 3,
-    content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
-    options: [
-      { key: "A", text: "2" },
-      { key: "B", text: "3" },
-      { key: "C", text: "4" },
-      { key: "D", text: "5" },
-    ],
-  },
-  /* ── 4 (was 8) ── */
-  {
-    n: 4,
-    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
-    options: [
-      { key: "A", text: "12" },
-      { key: "B", text: "18" },
-      { key: "C", text: "24" },
-      { key: "D", text: "36" },
-    ],
-  },
-  /* ── 5 (was 12) ── */
-  {
-    n: 5,
-    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
-    options: [
-      { key: "A", text: "\\{(A, A)\\}", math: true },
-      { key: "B", text: "\\{(G, G)\\}", math: true },
-      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
-      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
-    ],
-  },
-  /* ── 6 (was 13) ── */
-  {
-    n: 6,
     content: "Tiga keping uang logam dilempar secara bersamaan. Banyaknya anggota ruang sampel dari percobaan tersebut adalah ....",
     diagram: (
       <TreeDiagram
@@ -309,6 +276,54 @@ const pgQuestions: PGQ[] = [
       { key: "B", text: "6" },
       { key: "C", text: "8" },
       { key: "D", text: "10" },
+    ],
+  },
+  /* ── 4 (was 5/12: 2 keping tepat 1 angka) ── */
+  {
+    n: 4,
+    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
+    options: [
+      { key: "A", text: "\\{(A, A)\\}", math: true },
+      { key: "B", text: "\\{(G, G)\\}", math: true },
+      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
+      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
+    ],
+  },
+  /* ── 5 (was 12/4: koin+dadu tabel) ── */
+  {
+    n: 5,
+    content: "Sebuah koin dan sebuah dadu dilempar bersama-sama. Banyaknya anggota ruang sampel percobaan tersebut adalah ....",
+    diagram: (
+      <FreqTable
+        caption="Tabel ruang sampel: Dadu + Koin"
+        headers={["Dadu", "Koin A", "Koin G"]}
+        rows={[
+          [1,"(1,A)","(1,G)"],
+          [2,"(2,A)","(2,G)"],
+          [3,"(3,A)","(3,G)"],
+          [4,"(4,A)","(4,G)"],
+          [5,"(5,A)","(5,G)"],
+          [6,"(6,A)","(6,G)"],
+        ]}
+      />
+    ),
+    options: [
+      { key: "A", text: "6" },
+      { key: "B", text: "8" },
+      { key: "C", text: "12" },
+      { key: "D", text: "18" },
+    ],
+  },
+  /* ── 6 (was 13/5: kaos ilustrasi) ── */
+  {
+    n: 6,
+    content: "Reza mempunyai 3 kaos, 4 celana, dan 2 pasang sepatu. Banyaknya cara Reza dapat memilih busana yang akan dikenakan adalah ....",
+    diagram: <OutfitDiagram />,
+    options: [
+      { key: "A", text: "9" },
+      { key: "B", text: "12" },
+      { key: "C", text: "18" },
+      { key: "D", text: "24" },
     ],
   },
   /* ── 7 (was 14) ── */
@@ -410,41 +425,26 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "8" },
     ],
   },
-  /* ── 12 (was 4) ── */
+  /* ── 12 (was 3/7: 3 keping tepat 2 angka) ── */
   {
     n: 12,
-    content: "Sebuah koin dan sebuah dadu dilempar bersama-sama. Banyaknya anggota ruang sampel percobaan tersebut adalah ....",
-    diagram: (
-      <FreqTable
-        caption="Tabel ruang sampel: Dadu + Koin"
-        headers={["Dadu", "Koin A", "Koin G"]}
-        rows={[
-          [1,"(1,A)","(1,G)"],
-          [2,"(2,A)","(2,G)"],
-          [3,"(3,A)","(3,G)"],
-          [4,"(4,A)","(4,G)"],
-          [5,"(5,A)","(5,G)"],
-          [6,"(6,A)","(6,G)"],
-        ]}
-      />
-    ),
+    content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
     options: [
-      { key: "A", text: "6" },
-      { key: "B", text: "8" },
-      { key: "C", text: "12" },
-      { key: "D", text: "18" },
+      { key: "A", text: "2" },
+      { key: "B", text: "3" },
+      { key: "C", text: "4" },
+      { key: "D", text: "5" },
     ],
   },
-  /* ── 13 (was 5, + ilustrasi busana) ── */
+  /* ── 13 (was 4/8: 2 keping + dadu, 24) ── */
   {
     n: 13,
-    content: "Reza mempunyai 3 kaos, 4 celana, dan 2 pasang sepatu. Banyaknya cara Reza dapat memilih busana yang akan dikenakan adalah ....",
-    diagram: <OutfitDiagram />,
+    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
     options: [
-      { key: "A", text: "9" },
-      { key: "B", text: "12" },
-      { key: "C", text: "18" },
-      { key: "D", text: "24" },
+      { key: "A", text: "12" },
+      { key: "B", text: "18" },
+      { key: "C", text: "24" },
+      { key: "D", text: "36" },
     ],
   },
   /* ── 14 (was 10) ── */
