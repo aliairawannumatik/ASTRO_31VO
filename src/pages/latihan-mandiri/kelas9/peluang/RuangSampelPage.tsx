@@ -261,15 +261,23 @@ const pgQuestions: PGQ[] = [
     n: 3,
     content: "Tiga keping uang logam dilempar secara bersamaan. Banyaknya anggota ruang sampel dari percobaan tersebut adalah ....",
     diagram: (
-      <TreeDiagram
-        title="Percobaan 3 Koin"
-        branches={[
-          { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
-          { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
-          { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
-          { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
-        ]}
-      />
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-400/50 text-amber-300 text-[11px] font-extrabold tracking-widest uppercase rounded-lg px-3 py-1">
+            💡 Trik
+          </span>
+          <span className="text-white/50 text-[10px] font-body">Gunakan diagram pohon untuk menghitung semua kemungkinan</span>
+        </div>
+        <TreeDiagram
+          title="Percobaan 3 Koin"
+          branches={[
+            { label: "A-A", children: ["(A,A,A)", "(A,A,G)"] },
+            { label: "A-G", children: ["(A,G,A)", "(A,G,G)"] },
+            { label: "G-A", children: ["(G,A,A)", "(G,A,G)"] },
+            { label: "G-G", children: ["(G,G,A)", "(G,G,G)"] },
+          ]}
+        />
+      </div>
     ),
     options: [
       { key: "A", text: "4" },
@@ -278,20 +286,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "10" },
     ],
   },
-  /* ── 4 (was 5/12: 2 keping tepat 1 angka) ── */
+  /* ── 4 (koin+dadu tabel) ── */
   {
     n: 4,
-    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
-    options: [
-      { key: "A", text: "\\{(A, A)\\}", math: true },
-      { key: "B", text: "\\{(G, G)\\}", math: true },
-      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
-      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
-    ],
-  },
-  /* ── 5 (was 12/4: koin+dadu tabel) ── */
-  {
-    n: 5,
     content: "Sebuah koin dan sebuah dadu dilempar bersama-sama. Banyaknya anggota ruang sampel percobaan tersebut adalah ....",
     diagram: (
       <FreqTable
@@ -314,9 +311,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "18" },
     ],
   },
-  /* ── 6 (was 13/5: kaos ilustrasi) ── */
+  /* ── 5 (kaos ilustrasi) ── */
   {
-    n: 6,
+    n: 5,
     content: "Reza mempunyai 3 kaos, 4 celana, dan 2 pasang sepatu. Banyaknya cara Reza dapat memilih busana yang akan dikenakan adalah ....",
     diagram: <OutfitDiagram />,
     options: [
@@ -326,9 +323,31 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "24" },
     ],
   },
-  /* ── 7 (was 14) ── */
+  /* ── 6 (2 keping + dadu, 24) ── */
+  {
+    n: 6,
+    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
+    options: [
+      { key: "A", text: "12" },
+      { key: "B", text: "18" },
+      { key: "C", text: "24" },
+      { key: "D", text: "36" },
+    ],
+  },
+  /* ── 7 (2 keping tepat 1 angka) ── */
   {
     n: 7,
+    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
+    options: [
+      { key: "A", text: "\\{(A, A)\\}", math: true },
+      { key: "B", text: "\\{(G, G)\\}", math: true },
+      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
+      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
+    ],
+  },
+  /* ── 8 (jalur A→B→C) ── */
+  {
+    n: 8,
     content: "Dari kota A ke kota B tersedia 3 jalur berbeda, dan dari kota B ke kota C tersedia 4 jalur berbeda. Banyaknya rute yang dapat ditempuh dari kota A ke kota C melalui kota B adalah ....",
     diagram: (
       <svg viewBox="0 0 340 210" className="w-full max-w-sm mx-auto">
@@ -360,9 +379,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "16" },
     ],
   },
-  /* ── 8 (was 2) ── */
+  /* ── 9 (2 dadu jumlah 7) ── */
   {
-    n: 8,
+    n: 9,
     content: "Dua buah dadu dilempar bersamaan. Himpunan kejadian jumlah mata kedua dadu adalah 7 merupakan ....",
     options: [
       { key: "A", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2)\\}", math: true },
@@ -371,9 +390,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4)\\}", math: true },
     ],
   },
-  /* ── 9 (was 9) ── */
+  /* ── 10 (2 dadu jumlah 4 atau 8) ── */
   {
-    n: 9,
+    n: 10,
     content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu 4 atau 8 adalah ....",
     options: [
       { key: "A", text: "6" },
@@ -382,28 +401,36 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "12" },
     ],
   },
-  /* ── 10 (NEW) ── */
+  /* ── 11 (2 dadu lebih dari 3 DAN kurang dari 7) ── */
   {
-    n: 10,
+    n: 11,
     content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu lebih dari 3 dan kurang dari 7 adalah ....",
     diagram: (
-      <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 mb-1">
-        <p className="text-[10px] text-cyan-300 font-bold mb-2 text-center">🎲 Jumlah yang memenuhi: lebih dari 3 DAN kurang dari 7</p>
-        <div className="flex gap-2 flex-wrap justify-center">
-          {[
-            { sum: 4, pairs: ["(1,3)","(2,2)","(3,1)"], color: "bg-cyan-500/15 border-cyan-400/40 text-cyan-200" },
-            { sum: 5, pairs: ["(1,4)","(2,3)","(3,2)","(4,1)"], color: "bg-blue-500/15 border-blue-400/40 text-blue-200" },
-            { sum: 6, pairs: ["(1,5)","(2,4)","(3,3)","(4,2)","(5,1)"], color: "bg-indigo-500/15 border-indigo-400/40 text-indigo-200" },
-          ].map(row => (
-            <div key={row.sum} className={`rounded-lg border px-3 py-2 ${row.color}`}>
-              <p className="text-[10px] font-bold mb-1 text-center">Jumlah = {row.sum}</p>
-              <div className="flex gap-1 flex-wrap justify-center">
-                {row.pairs.map(p => (
-                  <span key={p} className="text-[9px] bg-white/10 rounded px-1 py-0.5">{p}</span>
-                ))}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-400/50 text-amber-300 text-[11px] font-extrabold tracking-widest uppercase rounded-lg px-3 py-1">
+            💡 Trik
+          </span>
+          <span className="text-white/50 text-[10px] font-body">Daftarkan semua pasangan yang memenuhi kondisi DAN</span>
+        </div>
+        <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 mb-1">
+          <p className="text-[10px] text-cyan-300 font-bold mb-2 text-center">🎲 Jumlah yang memenuhi: lebih dari 3 DAN kurang dari 7</p>
+          <div className="flex gap-2 flex-wrap justify-center">
+            {[
+              { sum: 4, pairs: ["(1,3)","(2,2)","(3,1)"], color: "bg-cyan-500/15 border-cyan-400/40 text-cyan-200" },
+              { sum: 5, pairs: ["(1,4)","(2,3)","(3,2)","(4,1)"], color: "bg-blue-500/15 border-blue-400/40 text-blue-200" },
+              { sum: 6, pairs: ["(1,5)","(2,4)","(3,3)","(4,2)","(5,1)"], color: "bg-indigo-500/15 border-indigo-400/40 text-indigo-200" },
+            ].map(row => (
+              <div key={row.sum} className={`rounded-lg border px-3 py-2 ${row.color}`}>
+                <p className="text-[10px] font-bold mb-1 text-center">Jumlah = {row.sum}</p>
+                <div className="flex gap-1 flex-wrap justify-center">
+                  {row.pairs.map(p => (
+                    <span key={p} className="text-[9px] bg-white/10 rounded px-1 py-0.5">{p}</span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     ),
@@ -414,9 +441,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "14" },
     ],
   },
-  /* ── 11 (was 3) ── */
+  /* ── 12 (kartu bernomor + berhuruf) ── */
   {
-    n: 11,
+    n: 12,
     content: "Sebuah kantong berisi kartu bernomor 1, 2, 3, 4 dan kartu berhuruf A, B, C. Jika diambil satu kartu secara acak, banyaknya titik sampelnya adalah ....",
     options: [
       { key: "A", text: "5" },
@@ -425,26 +452,15 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "8" },
     ],
   },
-  /* ── 12 (was 3/7: 3 keping tepat 2 angka) ── */
+  /* ── 13 (3 keping tepat 2 angka) ── */
   {
-    n: 12,
+    n: 13,
     content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
     options: [
       { key: "A", text: "2" },
       { key: "B", text: "3" },
       { key: "C", text: "4" },
       { key: "D", text: "5" },
-    ],
-  },
-  /* ── 13 (was 4/8: 2 keping + dadu, 24) ── */
-  {
-    n: 13,
-    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
-    options: [
-      { key: "A", text: "12" },
-      { key: "B", text: "18" },
-      { key: "C", text: "24" },
-      { key: "D", text: "36" },
     ],
   },
   /* ── 14 (was 10) ── */
