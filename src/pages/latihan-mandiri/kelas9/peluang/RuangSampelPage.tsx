@@ -311,9 +311,20 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "18" },
     ],
   },
-  /* ── 5 (kaos ilustrasi) ── */
+  /* ── 5 (2 keping + dadu, 24) ── */
   {
     n: 5,
+    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
+    options: [
+      { key: "A", text: "12" },
+      { key: "B", text: "18" },
+      { key: "C", text: "24" },
+      { key: "D", text: "36" },
+    ],
+  },
+  /* ── 6 (kaos ilustrasi) ── */
+  {
+    n: 6,
     content: "Reza mempunyai 3 kaos, 4 celana, dan 2 pasang sepatu. Banyaknya cara Reza dapat memilih busana yang akan dikenakan adalah ....",
     diagram: <OutfitDiagram />,
     options: [
@@ -321,17 +332,6 @@ const pgQuestions: PGQ[] = [
       { key: "B", text: "12" },
       { key: "C", text: "18" },
       { key: "D", text: "24" },
-    ],
-  },
-  /* ── 6 (2 keping + dadu, 24) ── */
-  {
-    n: 6,
-    content: "Dua keping uang logam dan sebuah dadu dilempar secara bersamaan. Banyaknya titik sampel percobaan ini adalah ....",
-    options: [
-      { key: "A", text: "12" },
-      { key: "B", text: "18" },
-      { key: "C", text: "24" },
-      { key: "D", text: "36" },
     ],
   },
   /* ── 7 (jalur A→B→C) ── */
@@ -368,9 +368,75 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "16" },
     ],
   },
-  /* ── 8 (2 dadu jumlah 4 atau 8) ── */
+  /* ── 8 (kartu bernomor + berhuruf) ── */
   {
     n: 8,
+    content: "Sebuah kantong berisi kartu bernomor 1, 2, 3, 4 dan kartu berhuruf A, B, C. Jika diambil satu kartu secara acak, banyaknya titik sampelnya adalah ....",
+    options: [
+      { key: "A", text: "5" },
+      { key: "B", text: "6" },
+      { key: "C", text: "7" },
+      { key: "D", text: "8" },
+    ],
+  },
+  /* ── 9 (3 keping tepat 2 angka) ── */
+  {
+    n: 9,
+    content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
+    options: [
+      { key: "A", text: "2" },
+      { key: "B", text: "3" },
+      { key: "C", text: "4" },
+      { key: "D", text: "5" },
+    ],
+  },
+  /* ── 10 (2 keping tepat 1 angka) ── */
+  {
+    n: 10,
+    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
+    options: [
+      { key: "A", text: "\\{(A, A)\\}", math: true },
+      { key: "B", text: "\\{(G, G)\\}", math: true },
+      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
+      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
+    ],
+  },
+  /* ── 11 (2 dadu jumlah 7) ── */
+  {
+    n: 11,
+    content: "Dua buah dadu dilempar bersamaan. Himpunan kejadian jumlah mata kedua dadu adalah 7 merupakan ....",
+    options: [
+      { key: "A", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2)\\}", math: true },
+      { key: "B", text: "\\{(1,6),\\ (2,5),\\ (3,4)\\}", math: true },
+      { key: "C", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4),\\ (4,3)\\}", math: true },
+      { key: "D", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4)\\}", math: true },
+    ],
+  },
+  /* ── 12 (dadu bukan angka 2) ── */
+  {
+    n: 12,
+    content: "Sebuah dadu dilempar satu kali. Banyaknya kemungkinan muncul mata dadu bukan angka 2 adalah ....",
+    options: [
+      { key: "A", text: "4" },
+      { key: "B", text: "5" },
+      { key: "C", text: "6" },
+      { key: "D", text: "7" },
+    ],
+  },
+  /* ── 13 (suami istri 3 anak) ── */
+  {
+    n: 13,
+    content: "Pasangan suami istri berencana memiliki 3 orang anak. Banyaknya titik sampel dari jenis kelamin anak yang mungkin terjadi adalah ....",
+    options: [
+      { key: "A", text: "4" },
+      { key: "B", text: "6" },
+      { key: "C", text: "8" },
+      { key: "D", text: "12" },
+    ],
+  },
+  /* ── 14 (2 dadu jumlah 4 atau 8) ── */
+  {
+    n: 14,
     content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu 4 atau 8 adalah ....",
     options: [
       { key: "A", text: "6" },
@@ -379,9 +445,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "12" },
     ],
   },
-  /* ── 9 (2 dadu lebih dari 3 DAN kurang dari 7) ── */
+  /* ── 15 (2 dadu lebih dari 3 DAN kurang dari 7) ── */
   {
-    n: 9,
+    n: 15,
     content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu lebih dari 3 dan kurang dari 7 adalah ....",
     diagram: (
       <div>
@@ -417,72 +483,6 @@ const pgQuestions: PGQ[] = [
       { key: "B", text: "10" },
       { key: "C", text: "12" },
       { key: "D", text: "14" },
-    ],
-  },
-  /* ── 10 (kartu bernomor + berhuruf) ── */
-  {
-    n: 10,
-    content: "Sebuah kantong berisi kartu bernomor 1, 2, 3, 4 dan kartu berhuruf A, B, C. Jika diambil satu kartu secara acak, banyaknya titik sampelnya adalah ....",
-    options: [
-      { key: "A", text: "5" },
-      { key: "B", text: "6" },
-      { key: "C", text: "7" },
-      { key: "D", text: "8" },
-    ],
-  },
-  /* ── 11 (3 keping tepat 2 angka) ── */
-  {
-    n: 11,
-    content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
-    options: [
-      { key: "A", text: "2" },
-      { key: "B", text: "3" },
-      { key: "C", text: "4" },
-      { key: "D", text: "5" },
-    ],
-  },
-  /* ── 12 (2 keping tepat 1 angka) ── */
-  {
-    n: 12,
-    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
-    options: [
-      { key: "A", text: "\\{(A, A)\\}", math: true },
-      { key: "B", text: "\\{(G, G)\\}", math: true },
-      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
-      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
-    ],
-  },
-  /* ── 13 (2 dadu jumlah 7) ── */
-  {
-    n: 13,
-    content: "Dua buah dadu dilempar bersamaan. Himpunan kejadian jumlah mata kedua dadu adalah 7 merupakan ....",
-    options: [
-      { key: "A", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2)\\}", math: true },
-      { key: "B", text: "\\{(1,6),\\ (2,5),\\ (3,4)\\}", math: true },
-      { key: "C", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4),\\ (4,3)\\}", math: true },
-      { key: "D", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4)\\}", math: true },
-    ],
-  },
-  /* ── 14 (was 10) ── */
-  {
-    n: 14,
-    content: "Sebuah dadu dilempar satu kali. Banyaknya kemungkinan muncul mata dadu bukan angka 2 adalah ....",
-    options: [
-      { key: "A", text: "4" },
-      { key: "B", text: "5" },
-      { key: "C", text: "6" },
-      { key: "D", text: "7" },
-    ],
-  },
-  /* ── 15 (was 11) ── */
-  {
-    n: 15,
-    content: "Pasangan suami istri berencana memiliki 3 orang anak. Banyaknya titik sampel dari jenis kelamin anak yang mungkin terjadi adalah ....",
-    options: [
-      { key: "A", text: "4" },
-      { key: "B", text: "6" },
-      { key: "C", text: "8" },
-      { key: "D", text: "12" },
     ],
   },
 ];
