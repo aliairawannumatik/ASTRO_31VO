@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
@@ -17,10 +17,10 @@ const WelcomePage = () => {
   const [showThemePicker, setShowThemePicker] = useState(false);
   const [showLangPicker, setShowLangPicker] = useState(false);
 
-  const handleThemeContinue = () => {
+  const handleThemeContinue = useCallback(() => {
     setShowThemePicker(false);
     setShowLangPicker(true);
-  };
+  }, []);
 
   return (
     <div

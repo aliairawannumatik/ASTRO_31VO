@@ -206,7 +206,11 @@ const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
 
   const handleSkip = () => {
     playPopSound();
-    navigate("/menu");
+    if (onContinue) {
+      onClose();
+    } else {
+      navigate("/menu");
+    }
   };
 
   const activeDef = THEMES.find((t) => t.id === selected)!;
