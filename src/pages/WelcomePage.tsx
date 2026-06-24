@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
@@ -9,13 +8,10 @@ import LanguagePickerModal from "@/components/LanguagePickerModal";
 import { spaceBg } from "@/assets/placeholder";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 const WelcomePage = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const { hasChosenLanguage } = useLanguage();
   const isLight = ["light", "white", "forest", "sunset"].includes(theme);
   const isSunset = theme === "sunset";
   const [showThemePicker, setShowThemePicker] = useState(false);
@@ -23,11 +19,7 @@ const WelcomePage = () => {
 
   const handleThemeContinue = () => {
     setShowThemePicker(false);
-    if (hasChosenLanguage) {
-      navigate("/menu");
-    } else {
-      setShowLangPicker(true);
-    }
+    setShowLangPicker(true);
   };
 
   return (
