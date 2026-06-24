@@ -187,14 +187,38 @@ const OutfitDiagram = () => (
         </div>
         <div className="flex justify-center gap-6">
           {[
-            { label: "S₁", warna: "Sneakers", color: "#ffffff", stroke: "#94a3b8" },
-            { label: "S₂", warna: "Sandal",   color: "#92400e", stroke: "#d97706" },
+            { label: "S₁", warna: "Kets Putih", color: "#e2e8f0", stroke: "#94a3b8", heel: "rgba(148,163,184,0.4)", stripe: "rgba(100,116,139,0.6)" },
+            { label: "S₂", warna: "Sepatu Hitam", color: "#1e293b", stroke: "#475569", heel: "rgba(71,85,105,0.5)", stripe: "rgba(148,163,184,0.3)" },
           ].map(item => (
             <div key={item.label} className="flex flex-col items-center gap-1.5 rounded-xl px-4 py-2 bg-purple-500/10 border border-purple-400/30">
-              <svg viewBox="0 0 60 30" width="60" height="30">
-                <ellipse cx="32" cy="22" rx="26" ry="7" fill="#334155" stroke="#475569" strokeWidth="1"/>
-                <path d="M8,22 Q10,10 22,8 L42,8 Q52,8 56,16 L56,22 Z" fill={item.color} stroke={item.stroke} strokeWidth="1.2" strokeLinejoin="round"/>
-                <path d="M22,8 Q28,4 36,6" fill="none" stroke={item.stroke} strokeWidth="1" opacity="0.6"/>
+              <svg viewBox="0 0 74 50" width="74" height="50">
+                {/* Outsole — dark rubber, full width, rounded toe & heel */}
+                <path d="M8,44 Q8,49 15,49 L62,49 Q70,49 70,44 L70,40 L8,40 Z"
+                  fill="#0f172a" stroke="#334155" strokeWidth="0.8"/>
+                {/* Midsole — lighter cushion strip */}
+                <rect x="8" y="35" width="62" height="7" rx="3"
+                  fill="#1e293b" stroke="#475569" strokeWidth="0.8"/>
+                {/* Upper body — heel right (tall), toe left (rounded & lower) */}
+                <path d="M10,35 L10,21 Q10,12 21,11 L46,11 Q58,11 65,17 L70,26 L70,35 Z"
+                  fill={item.color} stroke={item.stroke} strokeWidth="1.3" strokeLinejoin="round"/>
+                {/* Toe cap highlight */}
+                <path d="M10,21 Q10,12 21,11 L27,11 Q19,14 15,21 L10,23 Z"
+                  fill="rgba(255,255,255,0.18)"/>
+                {/* Collar — opening where foot goes in */}
+                <path d="M10,23 Q18,8 36,8 L36,13 Q24,13 15,26 Z"
+                  fill="rgba(0,0,0,0.22)"/>
+                {/* Tongue */}
+                <path d="M36,8 L36,26 Q40,28 44,26 L44,8 Q40,6 36,8 Z"
+                  fill={item.color} stroke={item.stroke} strokeWidth="0.8"/>
+                {/* Laces on tongue */}
+                <line x1="38" y1="12" x2="42" y2="12" stroke="rgba(255,255,255,0.85)" strokeWidth="1.2"/>
+                <line x1="38" y1="15.5" x2="42" y2="15.5" stroke="rgba(255,255,255,0.85)" strokeWidth="1.2"/>
+                <line x1="38" y1="19" x2="42" y2="19" stroke="rgba(255,255,255,0.85)" strokeWidth="1.2"/>
+                {/* Heel counter */}
+                <path d="M61,35 L61,20 Q66,15 70,21 L70,35 Z"
+                  fill={item.heel}/>
+                {/* Side stripe */}
+                <path d="M24,15 Q44,11 63,19" fill="none" stroke={item.stripe} strokeWidth="1.8" strokeLinecap="round"/>
               </svg>
               <span className="text-[10px] font-bold text-white/80">{item.label}</span>
               <span className="text-[9px] text-white/40">{item.warna}</span>
