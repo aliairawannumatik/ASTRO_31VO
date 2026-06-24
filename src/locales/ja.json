@@ -90,6 +90,28 @@
     "study": "学ぶ",
     "backToMenu": "メニューに戻る"
   },
+  "chatAI": {
+    "backToMenu": "← メニューに戻る",
+    "robotSubtitle": "あなたの数学宇宙飛行士ロボット 🚀",
+    "newChat": "新しい会話を始める",
+    "welcomeHeading": "やあ、NUMATIKフレンド！",
+    "welcomeDesc": "数学について何でも聞いてね — ステップごとに楽しく説明するよ！",
+    "popularTopics": "🔥 人気のトピック",
+    "youLabel": "あなた",
+    "thinking": "考え中...",
+    "tip": "Enterで送信 • Shift+Enterで改行",
+    "uploadTitle": "画像またはファイルをアップロード",
+    "placeholder": "数学について何でも聞いてね... 🌟",
+    "stopRecording": "録音を停止",
+    "startRecording": "音声でメッセージを送る",
+    "listening": "聞いています... 今話してください！",
+    "noVoiceSupport": "お使いのブラウザは音声入力に対応していません。Chromeをお試しください！ 🎤",
+    "analyzeImage": "この画像を分析してください:",
+    "fileAttached": "添付ファイル:",
+    "noResponse": "申し訳ありませんが、サーバーからの応答がありません。",
+    "errorMsg": "おっと！ 😅 接続エラーが発生しました。もう一度試してね、NUMATIKフレンド！ 🚀",
+    "welcomeMsg": "こんにちは、NUMATIKフレンド！ 🚀 私はNUMATIK AI、このギャラクシーのスマートな数学アシスタントです！ ✨\n\n楽しくわかりやすく数学を学ぶお手伝いをします。今日は何を聞きたいですか？ 😊"
+  },
   "settings": {
     "title": "設定",
     "subtitle": "アプリを好みにカスタマイズ ✨",

@@ -7,6 +7,7 @@ import { Send, User, Rocket, RefreshCw, Paperclip, Mic, MicOff, X, FileText, Ima
 import "katex/dist/katex.min.css";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const QUICK_TOPICS = [
   { label: "Bilangan Pecahan 🍕", prompt: "Tolong jelaskan cara menjumlahkan bilangan pecahan dengan penyebut berbeda!" },
@@ -43,12 +44,13 @@ const ChatAIPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const { language } = useLanguage();
+  const { t } = useTranslation();
   const isSunset = theme === "sunset";
 
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "model",
-      text: "Halo, Sobat Numatik! 🚀 Aku NUMATIK AI, asisten matematika pintarmu di galaksi ini! ✨\n\nAku siap membantu kamu belajar matematika dengan cara yang seru dan mudah dipahami. Mau tanya apa hari ini? 😊",
+      text: t("chatAI.welcomeMsg"),
     },
   ]);
   const [input, setInput] = useState("");
@@ -98,7 +100,7 @@ const ChatAIPage = () => {
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-      alert("Browser kamu belum mendukung fitur suara. Coba Chrome ya! 🎤");
+      alert(t("chatAI.noVoiceSupport"));
       return;
     }
 
@@ -137,12 +139,12 @@ const ChatAIPage = () => {
     if (attachedFile) {
       if (isImage && attachedPreview) {
         imageUrl = attachedPreview;
-        messageText = trimmed || `Tolong analisis gambar ini: ${attachedFile.name}`;
+        messageText = trimmed || `${t("chatAI.analyzeImage")} ${attachedFile.name}`;
       } else {
         fileName = attachedFile.name;
         messageText = trimmed
-          ? `${trimmed}\n[File terlampir: ${attachedFile.name}]`
-          : `[File terlampir: ${attachedFile.name}]`;
+          ? `${trimmed}\n[${t("chatAI.fileAttached")} ${attachedFile.name}]`
+          : `[${t("chatAI.fileAttached")} ${attachedFile.name}]`;
       }
       removeAttachment();
     }
@@ -164,14 +166,14 @@ const ChatAIPage = () => {
 
       if (!res.ok) throw new Error(`AI chat error: ${res.status}`);
       const data = await res.json();
-      const responseText = data.text ?? "Maaf, tidak ada respons dari server.";
+      const responseText = data.text ?? t("chatAI.noResponse");
       setMessages((prev) => [...prev, { role: "model", text: responseText }]);
     } catch {
       setMessages((prev) => [
         ...prev,
         {
           role: "model",
-          text: "Oops! 😅 Terjadi kesalahan koneksi ke sistem galaksi. Coba lagi ya, Sobat Numatik! 🚀",
+          text: t("chatAI.errorMsg"),
         },
       ]);
     } finally {
@@ -190,7 +192,7 @@ const ChatAIPage = () => {
   const resetChat = () => {
     setMessages([{
       role: "model",
-      text: "Halo, Sobat Numatik! 🚀 Aku NUMATIK AI, asisten matematika pintarmu di galaksi ini! ✨\n\nAku siap membantu kamu belajar matematika dengan cara yang seru dan mudah dipahami. Mau tanya apa hari ini? 😊",
+      text: t("chatAI.welcomeMsg"),
     }]);
     setInput("");
     removeAttachment();
@@ -221,7 +223,7 @@ const ChatAIPage = () => {
               isSunset ? "text-sky-600/70 hover:text-yellow-500" : "text-white/30 hover:text-amber-400"
             }`}
           >
-            ← Kembali ke Menu
+            {t("chatAI.backToMenu")}
           </button>
 
           <div className="relative shrink-0">
@@ -244,14 +246,14 @@ const ChatAIPage = () => {
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
               <p className={`font-body text-[11px] ${isSunset ? "text-sky-600/70" : "text-white/40"}`}>
-                Robot Astronot Matematikamu 🚀
+                {t("chatAI.robotSubtitle")}
               </p>
             </div>
           </div>
 
           <button
             onClick={resetChat}
-            title="Mulai percakapan baru"
+            title={t("chatAI.newChat")}
             className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all shrink-0 ${
               isSunset
                 ? "text-sky-500/60 hover:text-sky-700 hover:bg-sky-500/10"
@@ -290,21 +292,21 @@ const ChatAIPage = () => {
               </div>
 
               <h2 className={`font-display text-xl font-black mb-1 ${isSunset ? "text-sky-800" : "text-white"}`}>
-                Hai, Sobat Numatik! <span className={isSunset ? "text-yellow-500" : "text-cyan-400"}>👋</span>
+                {t("chatAI.welcomeHeading")} <span className={isSunset ? "text-yellow-500" : "text-cyan-400"}>👋</span>
               </h2>
               <p className={`font-body text-xs max-w-xs leading-relaxed mb-5 ${isSunset ? "text-sky-700/70" : "text-white/45"}`}>
-                Tanya apa saja tentang matematika — aku akan jelasin langkah demi langkah dengan cara yang seru!
+                {t("chatAI.welcomeDesc")}
               </p>
 
               <div className="w-full max-w-sm">
                 <p className={`text-[10px] font-display font-bold tracking-widest uppercase mb-2.5 ${isSunset ? "text-sky-600/50" : "text-white/30"}`}>
-                  🔥 Topik Populer
+                  {t("chatAI.popularTopics")}
                 </p>
                 <div className="grid grid-cols-2 gap-2">
-                  {QUICK_TOPICS.map((t) => (
+                  {QUICK_TOPICS.map((topic) => (
                     <button
-                      key={t.label}
-                      onClick={() => sendMessage(t.prompt)}
+                      key={topic.label}
+                      onClick={() => sendMessage(topic.prompt)}
                       className={`text-left px-3 py-2.5 rounded-xl border transition-all duration-200 group ${
                         isSunset
                           ? "border-sky-300/50 bg-white/50 hover:bg-sky-100/70 hover:border-sky-400/60"
@@ -316,7 +318,7 @@ const ChatAIPage = () => {
                           ? "text-sky-700 group-hover:text-sky-900"
                           : "text-white/70 group-hover:text-cyan-300"
                       }`}>
-                        {t.label}
+                        {topic.label}
                       </span>
                     </button>
                   ))}
@@ -356,7 +358,9 @@ const ChatAIPage = () => {
                 </span>
               )}
               {msg.role === "user" && (
-                <span className="text-[9px] font-display font-bold text-violet-400/60 px-1 tracking-wide text-right">KAMU</span>
+                <span className="text-[9px] font-display font-bold text-violet-400/60 px-1 tracking-wide text-right">
+                  {t("chatAI.youLabel")}
+                </span>
               )}
 
               {msg.imageUrl && (
@@ -407,7 +411,9 @@ const ChatAIPage = () => {
                   : "bg-[#0d1627]/95 border border-cyan-500/15 shadow-[0_4px_20px_rgba(6,182,212,0.08)]"
               }`}>
                 <Rocket className={`w-3.5 h-3.5 animate-pulse shrink-0 ${isSunset ? "text-sky-500" : "text-cyan-400"}`} />
-                <span className={`text-xs font-body ${isSunset ? "text-sky-600/60" : "text-white/40"}`}>Lagi ngitung...</span>
+                <span className={`text-xs font-body ${isSunset ? "text-sky-600/60" : "text-white/40"}`}>
+                  {t("chatAI.thinking")}
+                </span>
                 <span className="flex gap-1 items-end h-4">
                   {[0, 150, 300].map((delay, j) => (
                     <span
@@ -436,7 +442,7 @@ const ChatAIPage = () => {
         <div className="flex items-center gap-1.5 mb-2 px-1">
           <Rocket className={`w-3 h-3 ${isSunset ? "text-sky-400/60" : "text-cyan-400/50"}`} />
           <span className={`text-[10px] font-body ${isSunset ? "text-sky-600/40" : "text-white/20"}`}>
-            Tekan Enter kirim • Shift+Enter baris baru
+            {t("chatAI.tip")}
           </span>
         </div>
 
@@ -486,7 +492,7 @@ const ChatAIPage = () => {
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={loading}
-            title="Upload gambar atau file"
+            title={t("chatAI.uploadTitle")}
             className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
               attachedFile
                 ? "bg-violet-500/30 text-violet-300 border border-violet-500/40"
@@ -508,7 +514,7 @@ const ChatAIPage = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Tanya apa saja tentang matematika... 🌟"
+            placeholder={t("chatAI.placeholder")}
             rows={1}
             disabled={loading}
             className={`flex-1 bg-transparent text-sm font-body resize-none outline-none max-h-28 leading-relaxed py-0.5 ${
@@ -523,7 +529,7 @@ const ChatAIPage = () => {
           <button
             onClick={toggleVoice}
             disabled={loading}
-            title={isRecording ? "Hentikan rekaman" : "Kirim pesan dengan suara"}
+            title={isRecording ? t("chatAI.stopRecording") : t("chatAI.startRecording")}
             className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
               isRecording
                 ? "bg-red-500/30 text-red-400 border border-red-500/50 shadow-[0_0_12px_rgba(239,68,68,0.3)] animate-pulse"
@@ -563,7 +569,7 @@ const ChatAIPage = () => {
               className="flex items-center gap-2 mt-2 px-1"
             >
               <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-              <span className="text-red-400 text-[10px] font-body">Sedang mendengarkan... bicara sekarang!</span>
+              <span className="text-red-400 text-[10px] font-body">{t("chatAI.listening")}</span>
             </motion.div>
           )}
         </AnimatePresence>

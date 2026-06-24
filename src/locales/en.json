@@ -90,6 +90,28 @@
     "study": "STUDY",
     "backToMenu": "Back to Menu"
   },
+  "chatAI": {
+    "backToMenu": "← Back to Menu",
+    "robotSubtitle": "Your Math Astronaut Robot 🚀",
+    "newChat": "Start a new conversation",
+    "welcomeHeading": "Hey, NUMATIK Friend!",
+    "welcomeDesc": "Ask anything about math — I'll explain step by step in a fun way!",
+    "popularTopics": "🔥 Popular Topics",
+    "youLabel": "YOU",
+    "thinking": "Thinking...",
+    "tip": "Press Enter to send • Shift+Enter for new line",
+    "uploadTitle": "Upload image or file",
+    "placeholder": "Ask anything about math... 🌟",
+    "stopRecording": "Stop recording",
+    "startRecording": "Send message by voice",
+    "listening": "Listening... speak now!",
+    "noVoiceSupport": "Your browser doesn't support voice input. Try Chrome! 🎤",
+    "analyzeImage": "Please analyze this image:",
+    "fileAttached": "File attached:",
+    "noResponse": "Sorry, no response from server.",
+    "errorMsg": "Oops! 😅 A connection error occurred. Please try again, NUMATIK Friend! 🚀",
+    "welcomeMsg": "Hello, NUMATIK Friend! 🚀 I'm NUMATIK AI, your smart math assistant in this galaxy! ✨\n\nI'm ready to help you learn math in a fun and easy way. What would you like to ask today? 😊"
+  },
   "settings": {
     "title": "Settings",
     "subtitle": "Customize the app to your liking ✨",

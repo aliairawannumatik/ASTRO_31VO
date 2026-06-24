@@ -90,6 +90,28 @@
     "study": "BELAJAR",
     "backToMenu": "Kembali ke Menu"
   },
+  "chatAI": {
+    "backToMenu": "← Kembali ke Menu",
+    "robotSubtitle": "Robot Astronot Matematikamu 🚀",
+    "newChat": "Mulai percakapan baru",
+    "welcomeHeading": "Hai, Sobat Numatik!",
+    "welcomeDesc": "Tanya apa saja tentang matematika — aku akan jelasin langkah demi langkah dengan cara yang seru!",
+    "popularTopics": "🔥 Topik Populer",
+    "youLabel": "KAMU",
+    "thinking": "Lagi ngitung...",
+    "tip": "Tekan Enter kirim • Shift+Enter baris baru",
+    "uploadTitle": "Upload gambar atau file",
+    "placeholder": "Tanya apa saja tentang matematika... 🌟",
+    "stopRecording": "Hentikan rekaman",
+    "startRecording": "Kirim pesan dengan suara",
+    "listening": "Sedang mendengarkan... bicara sekarang!",
+    "noVoiceSupport": "Browser kamu belum mendukung fitur suara. Coba Chrome ya! 🎤",
+    "analyzeImage": "Tolong analisis gambar ini:",
+    "fileAttached": "File terlampir:",
+    "noResponse": "Maaf, tidak ada respons dari server.",
+    "errorMsg": "Oops! 😅 Terjadi kesalahan koneksi ke sistem galaksi. Coba lagi ya, Sobat Numatik! 🚀",
+    "welcomeMsg": "Halo, Sobat Numatik! 🚀 Aku NUMATIK AI, asisten matematika pintarmu di galaksi ini! ✨\n\nAku siap membantu kamu belajar matematika dengan cara yang seru dan mudah dipahami. Mau tanya apa hari ini? 😊"
+  },
   "settings": {
     "title": "Pengaturan",
     "subtitle": "Sesuaikan aplikasi sesuai keinginanmu ✨",
