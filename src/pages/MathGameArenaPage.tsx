@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
@@ -6,16 +7,17 @@ import { Gamepad2, GraduationCap } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 
-const kelasOptions = [
-  { label: "KELAS 7", path: "/math-game-arena/kelas-7", desc: "Game matematika kelas 7 SMP" },
-  { label: "KELAS 8", path: "/math-game-arena/kelas-8", desc: "Game matematika kelas 8 SMP" },
-  { label: "KELAS 9", path: "/math-game-arena/kelas-9", desc: "Game matematika kelas 9 SMP" },
-];
-
 const MathGameArenaPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { t } = useTranslation();
   const isLight = theme === "light";
+
+  const kelasOptions = [
+    { labelKey: "kelas7", path: "/math-game-arena/kelas-7", descKey: "kelas7Desc" },
+    { labelKey: "kelas8", path: "/math-game-arena/kelas-8", descKey: "kelas8Desc" },
+    { labelKey: "kelas9", path: "/math-game-arena/kelas-9", descKey: "kelas9Desc" },
+  ];
 
   return (
     <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
@@ -27,13 +29,13 @@ const MathGameArenaPage = () => {
           MATH GAME ARENA
         </h1>
         <p className="text-white/60 text-sm text-center mb-8 font-body">
-          Pilih kelas untuk bermain game matematika
+          {t('gameArena.subtitle')}
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
           {kelasOptions.map((kelas, i) => (
             <button
-              key={kelas.label}
+              key={kelas.labelKey}
               onClick={() => {
                 playPopSound();
                 navigate(kelas.path);
@@ -45,10 +47,10 @@ const MathGameArenaPage = () => {
             >
               <GraduationCap className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />
               <div className="flex flex-col">
-                <span className="font-display text-lg text-white">{kelas.label}</span>
-                <span className="font-body text-xs text-white/50">{kelas.desc}</span>
+                <span className="font-display text-lg text-white">{t(`gameArena.${kelas.labelKey}`)}</span>
+                <span className="font-body text-xs text-white/50">{t(`gameArena.${kelas.descKey}`)}</span>
               </div>
-              <span className="ml-auto text-xs text-accent font-display">MAIN</span>
+              <span className="ml-auto text-xs text-accent font-display">{t('gameArena.playBtn')}</span>
             </button>
           ))}
         </div>
@@ -58,7 +60,7 @@ const MathGameArenaPage = () => {
             onClick={() => { playPopSound(); navigate("/menu"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            Kembali ke Menu
+            {t('gameArena.backToMenu')}
           </button>
         </div>
       </div>

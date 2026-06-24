@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { playPopSound } from "@/hooks/useAudio";
 
 const QUIZ_INTERVAL = 40;
@@ -57,6 +58,7 @@ function pickQuestion(used: Set<number>): { q: MQ; idx: number } {
 const QuizGameOverlay = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const isGamePage = location.pathname.startsWith("/math-game-arena/umum/");
 
@@ -71,7 +73,6 @@ const QuizGameOverlay = () => {
   const usedRef = useRef<Set<number>>(new Set());
   const prevPath = useRef("");
 
-  // Reset on game page entry
   useEffect(() => {
     if (isGamePage && location.pathname !== prevPath.current) {
       prevPath.current = location.pathname;
@@ -92,14 +93,13 @@ const QuizGameOverlay = () => {
     }
   }, [location.pathname, isGamePage]);
 
-  // 40-second countdown tick
   useEffect(() => {
     if (!isGamePage || activeQuiz !== null || gameOver) return;
     const id = setInterval(() => {
       setCountdown(prev => {
         if (prev <= 1) {
           const { q } = pickQuestion(usedRef.current);
-          setTotalAsked(t => t + 1);
+          setTotalAsked(t2 => t2 + 1);
           setActiveQuiz(q);
           return QUIZ_INTERVAL;
         }
@@ -140,16 +140,15 @@ const QuizGameOverlay = () => {
 
   return (
     <>
-      {/* Countdown badge - always visible on game pages */}
       {!activeQuiz && !gameOver && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-40 pointer-events-none">
           <div className="flex items-center gap-2 bg-slate-950/80 border border-cyan-400/40 rounded-full px-4 py-1.5 shadow-lg backdrop-blur-sm">
-            <span className="text-white/60 text-[10px] font-bold tracking-widest font-mono">SOAL DALAM</span>
+            <span className="text-white/60 text-[10px] font-bold tracking-widest font-mono">{t('gameArena.countdownLabel')}</span>
             <span className={`text-sm font-black font-mono ${countdown <= 10 ? "text-red-400 animate-pulse" : "text-cyan-300"}`}>
               {countdown}s
             </span>
             <span className="text-white/40 mx-1">|</span>
-            <span className="text-[10px] font-bold tracking-widest text-white/60 font-mono">NYAWA</span>
+            <span className="text-[10px] font-bold tracking-widest text-white/60 font-mono">{t('gameArena.livesLabel')}</span>
             {Array.from({ length: MAX_LIVES }).map((_, i) => (
               <span key={i} className={`text-sm ${i < lives ? "text-red-400" : "text-white/20"}`}>♥</span>
             ))}
@@ -157,14 +156,12 @@ const QuizGameOverlay = () => {
         </div>
       )}
 
-      {/* Quiz popup overlay */}
       {activeQuiz && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(2,6,23,0.82)" }}>
           <div className="w-full max-w-sm bg-slate-950 border-2 border-cyan-400 rounded-2xl p-6 shadow-[0_0_50px_rgba(0,240,255,0.3)]">
-            {/* Header */}
             <div className="text-center mb-4">
               <div className="inline-flex items-center gap-2 bg-cyan-500/15 border border-cyan-400/40 rounded-full px-3 py-1">
-                <span className="text-cyan-300 text-xs font-bold tracking-widest">❓ SOAL MATEMATIKA</span>
+                <span className="text-cyan-300 text-xs font-bold tracking-widest">❓ {t('gameArena.quizHeader')}</span>
               </div>
               <div className="flex justify-center gap-1 mt-2">
                 {Array.from({ length: MAX_LIVES }).map((_, i) => (
@@ -173,12 +170,10 @@ const QuizGameOverlay = () => {
               </div>
             </div>
 
-            {/* Question */}
             <p className="text-white text-sm font-bold text-center leading-snug mb-5">
               {activeQuiz.q}
             </p>
 
-            {/* Options */}
             <div className="grid grid-cols-2 gap-2">
               {activeQuiz.opts.map((opt, i) => {
                 let btnClass = "bg-slate-800 hover:bg-cyan-800/60 border border-slate-600 hover:border-cyan-400 text-white";
@@ -200,37 +195,37 @@ const QuizGameOverlay = () => {
               })}
             </div>
 
-            {/* Feedback banner */}
             {feedback && (
               <div className={`mt-4 rounded-xl py-2 text-center text-sm font-black tracking-wide ${feedback === "correct" ? "bg-green-600/30 text-green-300" : "bg-red-600/30 text-red-300"}`}>
-                {feedback === "correct" ? "✅ BENAR! Lanjutkan bermain!" : `❌ Salah! Sisa nyawa: ${lives - 1}`}
+                {feedback === "correct"
+                  ? `✅ ${t('gameArena.correctFeedback')}`
+                  : `❌ ${t('gameArena.wrongFeedback', { count: lives - 1 })}`}
               </div>
             )}
 
             <p className="text-center text-white/30 text-[10px] mt-3 font-mono">
-              Soal {totalAsked} · Benar: {score}
+              {t('gameArena.questionCounter', { asked: totalAsked, score })}
             </p>
           </div>
         </div>
       )}
 
-      {/* Game over overlay */}
       {gameOver && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(2,6,23,0.90)" }}>
           <div className="w-full max-w-sm bg-slate-950 border-2 border-red-500 rounded-2xl p-6 text-center shadow-[0_0_50px_rgba(255,80,80,0.3)]">
             <div className="text-5xl mb-3">💀</div>
-            <h2 className="text-red-400 text-xl font-black tracking-widest font-display mb-1">NYAWA HABIS!</h2>
-            <p className="text-white/60 text-sm font-body mb-4">Semua nyawa kuis telah habis.</p>
+            <h2 className="text-red-400 text-xl font-black tracking-widest font-display mb-1">{t('gameArena.gameOverTitle')}</h2>
+            <p className="text-white/60 text-sm font-body mb-4">{t('gameArena.gameOverDesc')}</p>
             <div className="bg-slate-900 rounded-xl p-4 mb-5 space-y-1">
-              <p className="text-white/50 text-xs font-mono">Total Soal: <span className="text-white font-bold">{totalAsked}</span></p>
-              <p className="text-white/50 text-xs font-mono">Jawaban Benar: <span className="text-green-400 font-bold">{score}</span></p>
-              <p className="text-white/50 text-xs font-mono">Jawaban Salah: <span className="text-red-400 font-bold">{totalAsked - score}</span></p>
+              <p className="text-white/50 text-xs font-mono">{t('gameArena.totalQuestions')}: <span className="text-white font-bold">{totalAsked}</span></p>
+              <p className="text-white/50 text-xs font-mono">{t('gameArena.correctAnswers')}: <span className="text-green-400 font-bold">{score}</span></p>
+              <p className="text-white/50 text-xs font-mono">{t('gameArena.wrongAnswers')}: <span className="text-red-400 font-bold">{totalAsked - score}</span></p>
             </div>
             <button
               onClick={() => { playPopSound(); navigate(-1); }}
               className="w-full rounded-xl bg-red-500 hover:bg-red-400 py-3 text-white font-bold text-sm transition-colors"
             >
-              Kembali ke Menu
+              {t('gameArena.backToMenuOverlay')}
             </button>
             <button
               onClick={() => {
@@ -244,7 +239,7 @@ const QuizGameOverlay = () => {
               }}
               className="w-full mt-2 rounded-xl bg-slate-700 hover:bg-slate-600 py-3 text-white font-bold text-sm transition-colors"
             >
-              Coba Lagi (Reset Nyawa)
+              {t('gameArena.tryAgainBtn')}
             </button>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
@@ -39,13 +40,19 @@ const GameSubtopicPage = ({
   title,
   subtopics,
   backPath = "/math-game-arena/kelas-7",
-  backLabel = "Kembali ke Kelas 7",
+  backLabel,
   icon = "🚀",
-  kelasLabel = "Kelas 7",
+  kelasLabel,
 }: GameSubtopicPageProps) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { t } = useTranslation();
   const isLight = theme === "light";
+
+  const kelasMatch = backPath.match(/kelas-([789])/);
+  const kelasNum = kelasMatch ? kelasMatch[1] : "7";
+  const resolvedBackLabel = backLabel || t(`gameArena.backToKelas${kelasNum}`);
+  const resolvedKelasLabel = kelasLabel || t(`gameArena.kelas${kelasNum}Label`);
 
   return (
     <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
@@ -62,11 +69,11 @@ const GameSubtopicPage = ({
             {title}
           </h1>
           <p className="text-cyan-400/60 text-xs font-body tracking-widest uppercase">
-            {kelasLabel} · Math Game Arena
+            {resolvedKelasLabel} · Math Game Arena
           </p>
           <div className="mt-3 flex items-center justify-center gap-2 text-[11px] font-body" style={{ color: "var(--text-secondary)" }}>
             <span>☄️</span>
-            <span>Tembak meteor yang benar · Kumpulkan bintang!</span>
+            <span>{t('gameArena.meteorTagline')}</span>
           </div>
         </div>
 
@@ -148,7 +155,7 @@ const GameSubtopicPage = ({
                     className="text-[9px] font-black tracking-widest"
                     style={{ color: isComingSoon ? "rgba(255,255,255,0.2)" : colors.from }}
                   >
-                    LVL
+                    {t('gameArena.lvl')}
                   </span>
                   <span
                     className="text-2xl font-black leading-tight"
@@ -160,7 +167,7 @@ const GameSubtopicPage = ({
                   >
                     {levelNum}
                   </span>
-                  <span className="text-[8px] text-white/20 mt-0.5">STAGE</span>
+                  <span className="text-[8px] text-white/20 mt-0.5">{t('gameArena.stage')}</span>
                 </div>
 
                 <div className="relative flex-1 flex items-center gap-3 px-4 py-3.5 min-w-0">
@@ -173,7 +180,7 @@ const GameSubtopicPage = ({
                     </div>
                     <div className="flex items-center gap-1.5 mt-1.5">
                       {isComingSoon ? (
-                        <span className="text-[9px] text-white/25">Sedang disiapkan...</span>
+                        <span className="text-[9px] text-white/25">{t('gameArena.comingSoonText')}</span>
                       ) : (
                         <>
                           <span
@@ -184,9 +191,9 @@ const GameSubtopicPage = ({
                               border: `1px solid ${colors.to}44`,
                             }}
                           >
-                            🎯 5 SOAL
+                            🎯 {t('gameArena.fiveQuestions')}
                           </span>
-                          <span className="text-[9px] text-white/30">· Meteor Shooting</span>
+                          <span className="text-[9px] text-white/30">· {t('gameArena.meteorShooting')}</span>
                         </>
                       )}
                     </div>
@@ -197,7 +204,7 @@ const GameSubtopicPage = ({
                   {isComingSoon ? (
                     <div className="flex items-center gap-1 px-3 py-2 rounded-xl font-black text-[10px] text-white/25 border border-white/10">
                       <span>⏳</span>
-                      <span>SEGERA</span>
+                      <span>{t('gameArena.soonBadge')}</span>
                     </div>
                   ) : (
                     <div
@@ -209,7 +216,7 @@ const GameSubtopicPage = ({
                       }}
                     >
                       <Play className="w-3 h-3 fill-white" />
-                      <span>MAIN!</span>
+                      <span>{t('gameArena.playShort')}</span>
                     </div>
                   )}
                 </div>
@@ -223,7 +230,7 @@ const GameSubtopicPage = ({
             onClick={() => { playPopSound(); navigate(backPath); }}
             className="text-sm text-white/40 hover:text-cyan-400 transition-colors cursor-pointer font-body"
           >
-            ← {backLabel}
+            ← {resolvedBackLabel}
           </button>
         </div>
       </div>

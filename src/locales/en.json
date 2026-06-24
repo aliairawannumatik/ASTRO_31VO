@@ -57,26 +57,86 @@
     "guide": "GUIDE"
   },
   "menuItems": {
-    "guide": { "label": "USER GUIDE", "desc": "Usage guide" },
-    "teacherRoom": { "label": "TEACHER ROOM", "desc": "Dedicated space for educators" },
-    "animatedBook": { "label": "ANIMATED MATH BOOK", "desc": "Learn math materials completely" },
-    "practice": { "label": "TASKS - SELF PRACTICE", "desc": "Practice questions by topic" },
-    "gameArena": { "label": "MATH GAME ARENA", "desc": "Play interactive math games" },
-    "ai": { "label": "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", "desc": "Q&A with math AI" },
-    "lkpd": { "label": "WORKSHEET", "desc": "Interactive and scored worksheets" },
-    "calculator": { "label": "SCIENTIFIC CALCULATOR", "desc": "Calculate quickly with scientific calculator" },
-    "olympiad": { "label": "MATH OLYMPIAD", "desc": "For those who love challenges" },
-    "fastCalc": { "label": "FAST CALCULATION", "desc": "Mental math tricks without a calculator" },
-    "academic": { "label": "ACADEMIC ABILITY TEST", "desc": "Test your academic abilities" },
-    "conversion": { "label": "UNIT CONVERSION", "desc": "Convert various measurement units" },
-    "formula": { "label": "FORMULA COLLECTION", "desc": "Complete junior high math formulas" },
-    "video": { "label": "LEARNING VIDEOS", "desc": "Learn through interactive videos" },
-    "questionBank": { "label": "QUESTION BANK", "desc": "Complete collection of math questions" },
-    "settings": { "label": "SETTINGS", "desc": "Adjust dark/light mode" },
-    "donate": { "label": "DONATE", "desc": "Support to help the app grow" },
-    "biography": { "label": "BIOGRAPHY", "desc": "App creator information" },
-    "reference": { "label": "REFERENCES", "desc": "Bibliography" },
-    "about": { "label": "ABOUT APP", "desc": "Information about the app" }
+    "guide": {
+      "label": "USER GUIDE",
+      "desc": "Usage guide"
+    },
+    "teacherRoom": {
+      "label": "TEACHER ROOM",
+      "desc": "Dedicated space for educators"
+    },
+    "animatedBook": {
+      "label": "ANIMATED MATH BOOK",
+      "desc": "Learn math materials completely"
+    },
+    "practice": {
+      "label": "TASKS - SELF PRACTICE",
+      "desc": "Practice questions by topic"
+    },
+    "gameArena": {
+      "label": "MATH GAME ARENA",
+      "desc": "Play interactive math games"
+    },
+    "ai": {
+      "label": "NUMATIK ARTIFICIAL INTELLIGENCE (AI)",
+      "desc": "Q&A with math AI"
+    },
+    "lkpd": {
+      "label": "WORKSHEET",
+      "desc": "Interactive and scored worksheets"
+    },
+    "calculator": {
+      "label": "SCIENTIFIC CALCULATOR",
+      "desc": "Calculate quickly with scientific calculator"
+    },
+    "olympiad": {
+      "label": "MATH OLYMPIAD",
+      "desc": "For those who love challenges"
+    },
+    "fastCalc": {
+      "label": "FAST CALCULATION",
+      "desc": "Mental math tricks without a calculator"
+    },
+    "academic": {
+      "label": "ACADEMIC ABILITY TEST",
+      "desc": "Test your academic abilities"
+    },
+    "conversion": {
+      "label": "UNIT CONVERSION",
+      "desc": "Convert various measurement units"
+    },
+    "formula": {
+      "label": "FORMULA COLLECTION",
+      "desc": "Complete junior high math formulas"
+    },
+    "video": {
+      "label": "LEARNING VIDEOS",
+      "desc": "Learn through interactive videos"
+    },
+    "questionBank": {
+      "label": "QUESTION BANK",
+      "desc": "Complete collection of math questions"
+    },
+    "settings": {
+      "label": "SETTINGS",
+      "desc": "Adjust dark/light mode"
+    },
+    "donate": {
+      "label": "DONATE",
+      "desc": "Support to help the app grow"
+    },
+    "biography": {
+      "label": "BIOGRAPHY",
+      "desc": "App creator information"
+    },
+    "reference": {
+      "label": "REFERENCES",
+      "desc": "Bibliography"
+    },
+    "about": {
+      "label": "ABOUT APP",
+      "desc": "Information about the app"
+    }
   },
   "materiMatematika": {
     "title": "ANIMATED MATH BOOK",
@@ -235,5 +295,133 @@
     "soundVariant": "🎛️ Button Sound Variants",
     "footerDark": "✨ Space Mode — stars accompany your learning",
     "footerLight": "🌟 Keep up the learning spirit today!"
+  },
+  "gameArena": {
+    "subtitle": "Choose a class to play math games",
+    "playBtn": "PLAY",
+    "backToMenu": "Back to Menu",
+    "kelas7Desc": "Grade 7 Math Games",
+    "kelas8Desc": "Grade 8 Math Games",
+    "kelas9Desc": "Grade 9 Math Games",
+    "kelas7Title": "MATH GAME ARENA - GRADE 7",
+    "kelas8Title": "MATH GAME ARENA - GRADE 8",
+    "kelas9Title": "MATH GAME ARENA - GRADE 9",
+    "chooseTopic": "Choose a topic to play",
+    "backToArena": "Back to Math Game Arena",
+    "umumTitle": "GAME ARENA — GENERAL",
+    "umumSubtitle": "Fun games for all levels!",
+    "newBadge": "NEW",
+    "backToKelas7": "Back to Grade 7",
+    "backToKelas8": "Back to Grade 8",
+    "backToKelas9": "Back to Grade 9",
+    "kelas7Label": "Grade 7",
+    "kelas8Label": "Grade 8",
+    "kelas9Label": "Grade 9",
+    "kelas7ArenaLabel": "Grade 7 · Math Game Arena",
+    "kelas8ArenaLabel": "Grade 8 · Math Game Arena",
+    "kelas9ArenaLabel": "Grade 9 · Math Game Arena",
+    "meteorTagline": "Shoot the correct meteor · Collect stars!",
+    "fiveQuestions": "5 QUESTIONS",
+    "meteorShooting": "Meteor Shooting",
+    "comingSoonText": "Coming soon...",
+    "lvl": "LVL",
+    "stage": "STAGE",
+    "soonBadge": "SOON",
+    "playShort": "PLAY!",
+    "countdownLabel": "QUESTION IN",
+    "livesLabel": "LIVES",
+    "quizHeader": "MATH QUESTION",
+    "correctFeedback": "CORRECT! Keep playing!",
+    "wrongFeedback": "Wrong! Lives left: {{count}}",
+    "questionCounter": "Q {{asked}} · Correct: {{score}}",
+    "gameOverTitle": "GAME OVER!",
+    "gameOverDesc": "All quiz lives have been used.",
+    "totalQuestions": "Total Questions",
+    "correctAnswers": "Correct Answers",
+    "wrongAnswers": "Wrong Answers",
+    "backToMenuOverlay": "Back to Menu",
+    "tryAgainBtn": "Try Again (Reset Lives)",
+    "howToPlay": "HOW TO PLAY",
+    "backBtn": "Back",
+    "homeBtn": "Home",
+    "chooserTagline": "Choose your favorite game to practice {{topic}}!",
+    "subNotFoundTitle": "Subtopic not found",
+    "subNotFoundDesc": "This subtopic is not yet available in Math Game Arena.",
+    "gameVariantBack": "← Back",
+    "gameNotFoundTitle": "Game not found",
+    "gameNotFoundDesc": "This page is not yet available.",
+    "variantNotFoundTitle": "Unknown game",
+    "variantNotFoundDesc": "Variant \"{{variant}}\" is not available.",
+    "backToPickGame": "Back to Game Selection",
+    "game_balapMobil": "Math Car Racing",
+    "game_balapMobilDesc": "Answer questions to get turbo boost and win the race!",
+    "game_tetris": "Numatik Tetris",
+    "game_tetrisDesc": "Stack colorful blocks, collect the highest score and level up!",
+    "game_lariMat": "Math Run",
+    "game_lariMatDesc": "Jump and dodge obstacles! Answer questions for bonus score!",
+    "game_flappyRocket": "Flappy Rocket",
+    "game_flappyRocketDesc": "Fly the rocket through neon gates! Gold gates = bonus question + shield!",
+    "game_tangkapBenda": "Catch Items!",
+    "game_tangkapBendaDesc": "Move the basket left-right! Catch all items, don't miss any!",
+    "game_snakeMat": "Math Snake",
+    "game_snakeMatDesc": "Guide the snake to correct answers! Wrong → shrinks, more correct → faster!",
+    "game_galaksiTempur": "Galaxy Battle",
+    "game_galaksiTempurDesc": "Shoot enemy ships and answer math questions that appear",
+    "game_popSoal": "Pop Quiz!",
+    "game_popSoalDesc": "Colorful bubbles rise up! Click the correct answer before it escapes!",
+    "game_hajarMol": "Whack-a-Mole!",
+    "game_hajarMolDesc": "Neon moles pop up with numbers! Whack the mole with the correct answer before it escapes!",
+    "game_mancingSoal": "Fishing Math!",
+    "game_mancingSoalDesc": "Neon fish swim with numbers! Click the fish with the correct answer before it escapes!",
+    "game_tembakTank": "Tank Shoot!",
+    "game_tembakTankDesc": "Your tank vs enemy tanks! Shoot the tank carrying the correct answer, avoid counterattacks!",
+    "game_keretaKoin": "Math Coin Train",
+    "game_keretaKoinDesc": "Switch lanes to collect correct answer coins, build combos, and avoid neon bombs!",
+    "game_ninjaBuah": "Math Fruit Ninja",
+    "game_ninjaBuahDesc": "Slice fruits carrying the correct answer before they fall, collect combos, don't hit bombs!",
+    "game_pulauHarta": "Math Treasure Island",
+    "game_pulauHartaDesc": "Steer the ship to the correct answer chest, collect treasure, combos, and avoid sea bombs!",
+    "game_kapalSelam": "Submarine Math Battle",
+    "game_kapalSelamDesc": "Shoot bombers above and enemy submarines from left-right with torpedoes!",
+    "game_lompatJawaban": "Answer Jump",
+    "game_lompatJawabanDesc": "Control the neon astronaut! Jump to platforms with correct answers, double jump, and chase combos!",
+    "game_ksatria": "Math Knight",
+    "game_ksatriaDesc": "Epic RPG adventure! Fight slimes, goblins, skeletons & dragon boss across 3 floors by answering questions!",
+    "game_spaceImpact": "Space Impact Math",
+    "game_spaceImpactDesc": "Shoot enemies carrying correct answers! Collect power-ups, face space enemy waves!",
+    "game_meteorPantul": "NUMATIK Meteor Bounce",
+    "game_meteorPantulDesc": "Meteor Game! Bounce the meteor to crystals carrying the correct answer to destroy them!",
+    "game_pacMath": "Pac Math",
+    "game_pacMathDesc": "Eat all dots in the maze! Find the correct answer color pellets for big score & scared ghosts!",
+    "game_zumMath": "Zum Math",
+    "game_zumMathDesc": "Shoot color balls from a cannon! Match 3+ same color balls. Correct answer color = BIG BONUS!",
+    "game_bounceMath": "Bounce Math",
+    "game_bounceMathDesc": "Neon balls bounce everywhere! Click the ball carrying the correct answer before it escapes!",
+    "game_westernBar": "Western Bar Math",
+    "game_westernBarDesc": "Shoot bottles & cans at the cowboy bar! Aim at targets with correct answers before they escape!",
+    "game_pinball": "Pinball Math",
+    "game_pinballDesc": "Fun neon pinball! Bounce the ball to correct answer bumpers, use left & right flippers!",
+    "variant_meteor": "Meteor Shooter",
+    "variant_meteorDesc": "Shoot meteors containing the correct answer from your spaceship.",
+    "variant_galaksi": "Galaxy Battle",
+    "variant_galaksiDesc": "Shoot alien enemies & answer subject questions every 25 seconds for bonus points!",
+    "variant_flappy": "Flappy Rocket",
+    "variant_flappyDesc": "Fly the rocket through gates. Each special gate = question!",
+    "variant_tank": "Shoot Tank",
+    "variant_tankDesc": "Battle enemy tanks! Answer bonus questions for time & point rewards.",
+    "variant_space": "Space Impact Math",
+    "variant_spaceDesc": "Shoot only enemy ships labeled with the CORRECT answer!",
+    "variant_turtle": "Turtle Run Math",
+    "variant_turtleDesc": "Run, jump, and dodge! Answer bonus questions for extra score.",
+    "variant_tetris": "Numatik Tetris",
+    "variant_tetrisDesc": "Stack blocks so they don't pile up! Answer bonus questions for extra score.",
+    "variant_snake": "Math Snake",
+    "variant_snakeDesc": "Eat correct answers and avoid wrong answers!",
+    "variant_pantul": "NUMATIK Meteor Bounce",
+    "variant_pantulDesc": "Bounce meteors with your ship and destroy crystal asteroids! Answer bonus questions for big score.",
+    "variant_zum": "Zum Math",
+    "variant_zumDesc": "Click correct answer bubbles before they fall! Subject questions appear every 25 seconds.",
+    "variant_pac": "Pac Math",
+    "variant_pacDesc": "Eat all dots and avoid ghosts! Answer subject questions every 25 seconds for bonus points."
   }
 }

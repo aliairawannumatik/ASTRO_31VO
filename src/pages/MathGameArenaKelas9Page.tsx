@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
@@ -20,6 +21,7 @@ const topics = [
 const MathGameArenaKelas9Page = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { t } = useTranslation();
   const isLight = theme === "light";
 
   return (
@@ -29,9 +31,9 @@ const MathGameArenaKelas9Page = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <Gamepad2 className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          MATH GAME ARENA - KELAS 9
+          {t('gameArena.kelas9Title')}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Pilih topik untuk bermain</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{t('gameArena.chooseTopic')}</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {topics.map((topic, i) => (
@@ -45,7 +47,7 @@ const MathGameArenaKelas9Page = () => {
             >
               <BookOpen className="w-5 h-5 text-accent shrink-0 group-hover:scale-110 transition-transform" />
               <span className="font-body text-sm text-white">{topic.label}</span>
-              <span className="ml-auto text-xs text-accent font-display">MAIN</span>
+              <span className="ml-auto text-xs text-accent font-display">{t('gameArena.playBtn')}</span>
             </button>
           ))}
         </div>
@@ -55,7 +57,7 @@ const MathGameArenaKelas9Page = () => {
             onClick={() => { playPopSound(); navigate("/math-game-arena"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            Kembali ke Math Game Arena
+            {t('gameArena.backToArena')}
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, Home } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import { spaceBg } from "@/assets/placeholder";
@@ -168,17 +169,18 @@ const MathGameIntro = ({
   bestLabel,
   extraOverlay,
 }: MathGameIntroProps) => {
-  const t = themePresets[theme];
+  const { t } = useTranslation();
+  const tp = themePresets[theme];
 
   return (
     <div className="fixed inset-0 z-[100] overflow-hidden">
-      {t.useSpaceBg && (
+      {tp.useSpaceBg && (
         <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
       )}
-      <div className={`absolute inset-0 bg-gradient-to-b ${t.baseGradient}`} />
-      <div className={`absolute inset-0 ${t.radial1}`} />
-      <div className={`absolute inset-0 ${t.radial2}`} />
-      <div className={`absolute inset-0 ${t.radial3}`} />
+      <div className={`absolute inset-0 bg-gradient-to-b ${tp.baseGradient}`} />
+      <div className={`absolute inset-0 ${tp.radial1}`} />
+      <div className={`absolute inset-0 ${tp.radial2}`} />
+      <div className={`absolute inset-0 ${tp.radial3}`} />
       <Starfield />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -215,7 +217,7 @@ const MathGameIntro = ({
 
           <div className="mb-3 sm:mb-5">
             <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-[0.15em] leading-none">
-              <span className={`bg-gradient-to-r ${t.titleGradient} bg-clip-text text-transparent ${t.titleGlow}`}>
+              <span className={`bg-gradient-to-r ${tp.titleGradient} bg-clip-text text-transparent ${tp.titleGlow}`}>
                 {gameTitle}
               </span>
             </h2>
@@ -226,22 +228,22 @@ const MathGameIntro = ({
 
           {topicLabel && (
             <div className="inline-block mb-4 sm:mb-6">
-              <div className={`px-5 py-1.5 rounded-full bg-gradient-to-r ${t.pillBg} border ${t.pillBorder} backdrop-blur-sm`}>
-                <span className={`font-display text-xs sm:text-sm font-bold ${t.pillText} tracking-wide`}>
+              <div className={`px-5 py-1.5 rounded-full bg-gradient-to-r ${tp.pillBg} border ${tp.pillBorder} backdrop-blur-sm`}>
+                <span className={`font-display text-xs sm:text-sm font-bold ${tp.pillText} tracking-wide`}>
                   {topicLabel}
                 </span>
               </div>
             </div>
           )}
 
-          <div className={`bg-card/70 backdrop-blur-md border ${t.cardBorder} rounded-2xl p-4 sm:p-6 max-w-md mx-auto mb-5 sm:mb-7 ${t.cardShadow}`}>
-            <h3 className={`font-display text-base sm:text-lg font-bold ${t.cardTitleColor} mb-3 sm:mb-4 flex items-center justify-center gap-2`}>
-              <span className="text-xl">{heroEmoji}</span> CARA BERMAIN <span className="text-xl">{heroEmoji}</span>
+          <div className={`bg-card/70 backdrop-blur-md border ${tp.cardBorder} rounded-2xl p-4 sm:p-6 max-w-md mx-auto mb-5 sm:mb-7 ${tp.cardShadow}`}>
+            <h3 className={`font-display text-base sm:text-lg font-bold ${tp.cardTitleColor} mb-3 sm:mb-4 flex items-center justify-center gap-2`}>
+              <span className="text-xl">{heroEmoji}</span> {t('gameArena.howToPlay')} <span className="text-xl">{heroEmoji}</span>
             </h3>
             <ul className="text-left space-y-2 sm:space-y-3 font-body text-xs sm:text-sm text-foreground/90">
               {instructions.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className={`flex-shrink-0 w-6 h-6 rounded-full ${t.numberBg} flex items-center justify-center ${t.numberText} font-bold text-xs`}>
+                  <span className={`flex-shrink-0 w-6 h-6 rounded-full ${tp.numberBg} flex items-center justify-center ${tp.numberText} font-bold text-xs`}>
                     {i + 1}
                   </span>
                   <span>{item.text}</span>
@@ -252,7 +254,7 @@ const MathGameIntro = ({
 
           <button
             onClick={onStart}
-            className={`relative font-display text-lg sm:text-xl md:text-2xl px-10 sm:px-14 py-3 sm:py-5 rounded-2xl bg-gradient-to-r ${t.startBgGradient} text-white font-black tracking-wider cursor-pointer ${t.startShadow} ${t.startHoverShadow} transition-shadow duration-300 animate-pulse-scale`}
+            className={`relative font-display text-lg sm:text-xl md:text-2xl px-10 sm:px-14 py-3 sm:py-5 rounded-2xl bg-gradient-to-r ${tp.startBgGradient} text-white font-black tracking-wider cursor-pointer ${tp.startShadow} ${tp.startHoverShadow} transition-shadow duration-300 animate-pulse-scale`}
           >
             <span className="relative z-10 flex items-center gap-3">
               <span>&#9658;</span> {startLabel} <span>&#9658;</span>
@@ -280,20 +282,20 @@ const MathGameIntro = ({
             <button
               onClick={onBack}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
-              title="Kembali"
+              title={t('gameArena.backBtn')}
             >
               <ArrowLeft className="w-4 h-4" />
-              <span className="hidden sm:inline">Kembali</span>
+              <span className="hidden sm:inline">{t('gameArena.backBtn')}</span>
             </button>
           ) : <span />}
           {onHome ? (
             <button
               onClick={onHome}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-xs sm:text-sm shadow-[0_0_15px_rgba(0,200,255,0.45)] hover:opacity-90 transition-opacity cursor-pointer"
-              title="Menu Utama"
+              title={t('gameArena.homeBtn')}
             >
               <Home className="w-4 h-4" />
-              <span className="hidden sm:inline">Home</span>
+              <span className="hidden sm:inline">{t('gameArena.homeBtn')}</span>
             </button>
           ) : <span />}
         </div>

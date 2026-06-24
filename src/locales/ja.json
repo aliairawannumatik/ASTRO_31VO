@@ -57,26 +57,86 @@
     "guide": "ガイド"
   },
   "menuItems": {
-    "guide": { "label": "使い方ガイド", "desc": "操作ガイド" },
-    "teacherRoom": { "label": "教師の部屋", "desc": "教育者専用スペース" },
-    "animatedBook": { "label": "アニメ数学書", "desc": "数学の教材を完全に学ぶ" },
-    "practice": { "label": "課題・自主練習", "desc": "トピック別練習問題" },
-    "gameArena": { "label": "数学ゲームアリーナ", "desc": "インタラクティブな数学ゲームで遊ぶ" },
-    "ai": { "label": "NUMATIK AI", "desc": "数学AIとQ&A" },
-    "lkpd": { "label": "ワークシート", "desc": "インタラクティブな採点付きワークシート" },
-    "calculator": { "label": "関数電卓", "desc": "科学計算機で素早く計算" },
-    "olympiad": { "label": "数学オリンピック", "desc": "挑戦が好きな人のために" },
-    "fastCalc": { "label": "暗算", "desc": "電卓なしのメンタル数学テクニック" },
-    "academic": { "label": "学力テスト", "desc": "学力を試してみよう" },
-    "conversion": { "label": "単位変換", "desc": "各種単位を変換する" },
-    "formula": { "label": "公式集", "desc": "中学数学の公式一覧" },
-    "video": { "label": "学習動画", "desc": "インタラクティブ動画で学ぶ" },
-    "questionBank": { "label": "問題バンク", "desc": "数学問題の完全コレクション" },
-    "settings": { "label": "設定", "desc": "ダーク/ライトモード調整" },
-    "donate": { "label": "寄付", "desc": "アプリの発展を応援しよう" },
-    "biography": { "label": "プロフィール", "desc": "アプリ製作者情報" },
-    "reference": { "label": "参考資料", "desc": "参考文献" },
-    "about": { "label": "このアプリについて", "desc": "アプリの情報" }
+    "guide": {
+      "label": "使い方ガイド",
+      "desc": "操作ガイド"
+    },
+    "teacherRoom": {
+      "label": "教師の部屋",
+      "desc": "教育者専用スペース"
+    },
+    "animatedBook": {
+      "label": "アニメ数学書",
+      "desc": "数学の教材を完全に学ぶ"
+    },
+    "practice": {
+      "label": "課題・自主練習",
+      "desc": "トピック別練習問題"
+    },
+    "gameArena": {
+      "label": "数学ゲームアリーナ",
+      "desc": "インタラクティブな数学ゲームで遊ぶ"
+    },
+    "ai": {
+      "label": "NUMATIK AI",
+      "desc": "数学AIとQ&A"
+    },
+    "lkpd": {
+      "label": "ワークシート",
+      "desc": "インタラクティブな採点付きワークシート"
+    },
+    "calculator": {
+      "label": "関数電卓",
+      "desc": "科学計算機で素早く計算"
+    },
+    "olympiad": {
+      "label": "数学オリンピック",
+      "desc": "挑戦が好きな人のために"
+    },
+    "fastCalc": {
+      "label": "暗算",
+      "desc": "電卓なしのメンタル数学テクニック"
+    },
+    "academic": {
+      "label": "学力テスト",
+      "desc": "学力を試してみよう"
+    },
+    "conversion": {
+      "label": "単位変換",
+      "desc": "各種単位を変換する"
+    },
+    "formula": {
+      "label": "公式集",
+      "desc": "中学数学の公式一覧"
+    },
+    "video": {
+      "label": "学習動画",
+      "desc": "インタラクティブ動画で学ぶ"
+    },
+    "questionBank": {
+      "label": "問題バンク",
+      "desc": "数学問題の完全コレクション"
+    },
+    "settings": {
+      "label": "設定",
+      "desc": "ダーク/ライトモード調整"
+    },
+    "donate": {
+      "label": "寄付",
+      "desc": "アプリの発展を応援しよう"
+    },
+    "biography": {
+      "label": "プロフィール",
+      "desc": "アプリ製作者情報"
+    },
+    "reference": {
+      "label": "参考資料",
+      "desc": "参考文献"
+    },
+    "about": {
+      "label": "このアプリについて",
+      "desc": "アプリの情報"
+    }
   },
   "materiMatematika": {
     "title": "アニメ数学書",
@@ -235,5 +295,133 @@
     "soundVariant": "🎛️ ボタン音バリエーション",
     "footerDark": "✨ 宇宙モード — 星があなたの学習を見守っています",
     "footerLight": "🌟 今日も学習頑張ろう！"
+  },
+  "gameArena": {
+    "subtitle": "数学ゲームをするクラスを選んでください",
+    "playBtn": "プレイ",
+    "backToMenu": "メニューへ戻る",
+    "kelas7Desc": "中学1年の数学ゲーム",
+    "kelas8Desc": "中学2年の数学ゲーム",
+    "kelas9Desc": "中学3年の数学ゲーム",
+    "kelas7Title": "数学ゲームアリーナ - 中学1年",
+    "kelas8Title": "数学ゲームアリーナ - 中学2年",
+    "kelas9Title": "数学ゲームアリーナ - 中学3年",
+    "chooseTopic": "トピックを選んでプレイ",
+    "backToArena": "数学ゲームアリーナへ戻る",
+    "umumTitle": "ゲームアリーナ — 一般",
+    "umumSubtitle": "全レベル対応の楽しいゲーム！",
+    "newBadge": "新着",
+    "backToKelas7": "中学1年へ戻る",
+    "backToKelas8": "中学2年へ戻る",
+    "backToKelas9": "中学3年へ戻る",
+    "kelas7Label": "中学1年",
+    "kelas8Label": "中学2年",
+    "kelas9Label": "中学3年",
+    "kelas7ArenaLabel": "中学1年 · 数学ゲームアリーナ",
+    "kelas8ArenaLabel": "中学2年 · 数学ゲームアリーナ",
+    "kelas9ArenaLabel": "中学3年 · 数学ゲームアリーナ",
+    "meteorTagline": "正しい流星を撃て · 星を集めよう！",
+    "fiveQuestions": "5問",
+    "meteorShooting": "流星シューティング",
+    "comingSoonText": "準備中...",
+    "lvl": "LVL",
+    "stage": "STAGE",
+    "soonBadge": "近日公開",
+    "playShort": "プレイ！",
+    "countdownLabel": "次の問題まで",
+    "livesLabel": "ライフ",
+    "quizHeader": "数学の問題",
+    "correctFeedback": "正解！プレイを続けよう！",
+    "wrongFeedback": "不正解！残りライフ：{{count}}",
+    "questionCounter": "問{{asked}} · 正解：{{score}}",
+    "gameOverTitle": "ゲームオーバー！",
+    "gameOverDesc": "ライフがなくなりました。",
+    "totalQuestions": "合計問題数",
+    "correctAnswers": "正解数",
+    "wrongAnswers": "不正解数",
+    "backToMenuOverlay": "メニューへ戻る",
+    "tryAgainBtn": "もう一度（ライフリセット）",
+    "howToPlay": "遊び方",
+    "backBtn": "戻る",
+    "homeBtn": "ホーム",
+    "chooserTagline": "{{topic}}を練習するお気に入りのゲームを選ぼう！",
+    "subNotFoundTitle": "サブトピックが見つかりません",
+    "subNotFoundDesc": "このサブトピックはまだ利用できません。",
+    "gameVariantBack": "← 戻る",
+    "gameNotFoundTitle": "ゲームが見つかりません",
+    "gameNotFoundDesc": "このページはまだ利用できません。",
+    "variantNotFoundTitle": "不明なゲーム",
+    "variantNotFoundDesc": "バリアント「{{variant}}」は利用できません。",
+    "backToPickGame": "ゲーム選択へ戻る",
+    "game_balapMobil": "数学カーレース",
+    "game_balapMobilDesc": "問題に答えてターボブーストを手に入れよう！",
+    "game_tetris": "NUMATIKテトリス",
+    "game_tetrisDesc": "カラフルなブロックを積んでスコアを競おう！",
+    "game_lariMat": "数学マラソン",
+    "game_lariMatDesc": "ジャンプして障害物を避けよう！問題に答えてボーナス！",
+    "game_flappyRocket": "フラッピーロケット",
+    "game_flappyRocketDesc": "ネオンゲートをくぐりながらロケットを飛ばそう！",
+    "game_tangkapBenda": "アイテムキャッチ！",
+    "game_tangkapBendaDesc": "バスケットを左右に動かしてアイテムをキャッチ！",
+    "game_snakeMat": "数学スネーク",
+    "game_snakeMatDesc": "正しい答えへヘビを誘導しよう！",
+    "game_galaksiTempur": "銀河バトル",
+    "game_galaksiTempurDesc": "敵の宇宙船を撃ち、数学の問題に答えよう！",
+    "game_popSoal": "問題ポップ！",
+    "game_popSoalDesc": "カラフルなバブルが上昇！逃げる前に正解をクリック！",
+    "game_hajarMol": "モグラ叩き！",
+    "game_hajarMolDesc": "ネオンモグラが数字を持って登場！正解のモグラを叩こう！",
+    "game_mancingSoal": "釣り数学！",
+    "game_mancingSoalDesc": "ネオンの魚が数字を運ぶ！正解の魚をクリック！",
+    "game_tembakTank": "タンクシュート！",
+    "game_tembakTankDesc": "あなたのタンク vs 敵タンク！正解を運ぶタンクを撃とう！",
+    "game_keretaKoin": "数学コイントレイン",
+    "game_keretaKoinDesc": "レーンを切り替えて正解コインを集めよう！",
+    "game_ninjaBuah": "数学フルーツニンジャ",
+    "game_ninjaBuahDesc": "正解を運ぶフルーツをスライスしよう！",
+    "game_pulauHarta": "数学宝島",
+    "game_pulauHartaDesc": "船を操縦して正解の宝箱へ向かおう！",
+    "game_kapalSelam": "潜水艦数学バトル",
+    "game_kapalSelamDesc": "爆撃機と敵潜水艦をトーピードで撃とう！",
+    "game_lompatJawaban": "ジャンプアンサー",
+    "game_lompatJawabanDesc": "宇宙飛行士を操縦！正解のプラットフォームへジャンプ！",
+    "game_ksatria": "数学騎士",
+    "game_ksatriaDesc": "壮大なRPG冒険！問題に答えながら敵を倒そう！",
+    "game_spaceImpact": "スペースインパクト数学",
+    "game_spaceImpactDesc": "正解を運ぶ敵を撃とう！パワーアップを集めよう！",
+    "game_meteorPantul": "NUMATIK流星バウンス",
+    "game_meteorPantulDesc": "流星を弾ませて正解を運ぶ結晶を破壊しよう！",
+    "game_pacMath": "パック数学",
+    "game_pacMathDesc": "迷路のドットを全部食べよう！正解の色のペレットで大得点！",
+    "game_zumMath": "ズム数学",
+    "game_zumMathDesc": "大砲からカラーボールを撃とう！同じ色3つ以上でマッチ！",
+    "game_bounceMath": "バウンス数学",
+    "game_bounceMathDesc": "ネオンボールが跳ね回る！正解のボールをクリック！",
+    "game_westernBar": "ウエスタンバー数学",
+    "game_westernBarDesc": "カウボーイバーで瓶と缶を撃とう！正解を狙え！",
+    "game_pinball": "ピンボール数学",
+    "game_pinballDesc": "ネオンピンボール！正解バンパーへボールを弾かせよう！",
+    "variant_meteor": "流星シューター",
+    "variant_meteorDesc": "宇宙船から正解を含む流星を撃とう。",
+    "variant_galaksi": "銀河バトル",
+    "variant_galaksiDesc": "エイリアンを撃ち、25秒ごとに問題に答えよう！",
+    "variant_flappy": "フラッピーロケット",
+    "variant_flappyDesc": "ゲートをくぐりながらロケットを飛ばそう！",
+    "variant_tank": "タンクシュート",
+    "variant_tankDesc": "敵タンクと戦おう！ボーナス問題に答えよう！",
+    "variant_space": "スペースインパクト数学",
+    "variant_spaceDesc": "正解ラベルの敵機だけを撃とう！",
+    "variant_turtle": "カメラン数学",
+    "variant_turtleDesc": "走って、ジャンプして、伏せよう！ボーナス問題に答えよう！",
+    "variant_tetris": "NUMATIKテトリス",
+    "variant_tetrisDesc": "ブロックを積んで崩れないように！ボーナス問題に答えよう！",
+    "variant_snake": "数学スネーク",
+    "variant_snakeDesc": "正解を食べて不正解を避けよう！",
+    "variant_pantul": "NUMATIK流星バウンス",
+    "variant_pantulDesc": "流星を弾ませて結晶小惑星を破壊しよう！",
+    "variant_zum": "ズム数学",
+    "variant_zumDesc": "落ちる前に正解バブルをクリック！",
+    "variant_pac": "パック数学",
+    "variant_pacDesc": "全ドットを食べてゴーストを避けよう！"
   }
 }

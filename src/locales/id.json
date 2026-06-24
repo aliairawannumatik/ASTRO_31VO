@@ -57,26 +57,86 @@
     "guide": "PETUNJUK"
   },
   "menuItems": {
-    "guide": { "label": "PETUNJUK PENGGUNAAN", "desc": "Panduan penggunaan" },
-    "teacherRoom": { "label": "RUANG UNTUK GURU", "desc": "Ruang khusus untuk para pendidik" },
-    "animatedBook": { "label": "BUKU ANIMASI MATEMATIKA", "desc": "Pelajari materi matematika lengkap" },
-    "practice": { "label": "TUGAS - LATIHAN MANDIRI", "desc": "Latihan soal per topik" },
-    "gameArena": { "label": "MATH GAME ARENA", "desc": "Bermain game matematika interaktif" },
-    "ai": { "label": "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", "desc": "Tanya jawab dengan AI matematika" },
-    "lkpd": { "label": "LKPD", "desc": "Lembar kerja interaktif dan berskor" },
-    "calculator": { "label": "KALKULATOR SCIENTIFIC", "desc": "Hitung cepat dengan kalkulator scientific" },
-    "olympiad": { "label": "OLIMPIADE MATEMATIKA", "desc": "Untuk yang suka tantangan" },
-    "fastCalc": { "label": "MENGHITUNG CEPAT", "desc": "Trik mental math tanpa kalkulator" },
-    "academic": { "label": "TES KEMAMPUAN AKADEMIK", "desc": "Uji kemampuan akademikmu" },
-    "conversion": { "label": "KONVERSI SATUAN", "desc": "Konversi berbagai satuan pengukuran" },
-    "formula": { "label": "KUMPULAN RUMUS", "desc": "Kumpulan rumus matematika SMP lengkap" },
-    "video": { "label": "VIDEO PEMBELAJARAN", "desc": "Belajar melalui video interaktif" },
-    "questionBank": { "label": "BANK SOAL", "desc": "Koleksi lengkap soal matematika" },
-    "settings": { "label": "PENGATURAN", "desc": "Atur mode gelap/terang" },
-    "donate": { "label": "DONASI", "desc": "Ayo dukung agar aplikasinya lebih berkembang" },
-    "biography": { "label": "BIOGRAFI", "desc": "Data pembuat aplikasi" },
-    "reference": { "label": "SUMBER REFERENSI", "desc": "Daftar pustaka" },
-    "about": { "label": "TENTANG APLIKASI", "desc": "Informasi tentang aplikasi" }
+    "guide": {
+      "label": "PETUNJUK PENGGUNAAN",
+      "desc": "Panduan penggunaan"
+    },
+    "teacherRoom": {
+      "label": "RUANG UNTUK GURU",
+      "desc": "Ruang khusus untuk para pendidik"
+    },
+    "animatedBook": {
+      "label": "BUKU ANIMASI MATEMATIKA",
+      "desc": "Pelajari materi matematika lengkap"
+    },
+    "practice": {
+      "label": "TUGAS - LATIHAN MANDIRI",
+      "desc": "Latihan soal per topik"
+    },
+    "gameArena": {
+      "label": "MATH GAME ARENA",
+      "desc": "Bermain game matematika interaktif"
+    },
+    "ai": {
+      "label": "NUMATIK ARTIFICIAL INTELLIGENCE (AI)",
+      "desc": "Tanya jawab dengan AI matematika"
+    },
+    "lkpd": {
+      "label": "LKPD",
+      "desc": "Lembar kerja interaktif dan berskor"
+    },
+    "calculator": {
+      "label": "KALKULATOR SCIENTIFIC",
+      "desc": "Hitung cepat dengan kalkulator scientific"
+    },
+    "olympiad": {
+      "label": "OLIMPIADE MATEMATIKA",
+      "desc": "Untuk yang suka tantangan"
+    },
+    "fastCalc": {
+      "label": "MENGHITUNG CEPAT",
+      "desc": "Trik mental math tanpa kalkulator"
+    },
+    "academic": {
+      "label": "TES KEMAMPUAN AKADEMIK",
+      "desc": "Uji kemampuan akademikmu"
+    },
+    "conversion": {
+      "label": "KONVERSI SATUAN",
+      "desc": "Konversi berbagai satuan pengukuran"
+    },
+    "formula": {
+      "label": "KUMPULAN RUMUS",
+      "desc": "Kumpulan rumus matematika SMP lengkap"
+    },
+    "video": {
+      "label": "VIDEO PEMBELAJARAN",
+      "desc": "Belajar melalui video interaktif"
+    },
+    "questionBank": {
+      "label": "BANK SOAL",
+      "desc": "Koleksi lengkap soal matematika"
+    },
+    "settings": {
+      "label": "PENGATURAN",
+      "desc": "Atur mode gelap/terang"
+    },
+    "donate": {
+      "label": "DONASI",
+      "desc": "Ayo dukung agar aplikasinya lebih berkembang"
+    },
+    "biography": {
+      "label": "BIOGRAFI",
+      "desc": "Data pembuat aplikasi"
+    },
+    "reference": {
+      "label": "SUMBER REFERENSI",
+      "desc": "Daftar pustaka"
+    },
+    "about": {
+      "label": "TENTANG APLIKASI",
+      "desc": "Informasi tentang aplikasi"
+    }
   },
   "materiMatematika": {
     "title": "BUKU ANIMASI MATEMATIKA",
@@ -235,5 +295,133 @@
     "soundVariant": "🎛️ Variasi Suara Tombol",
     "footerDark": "✨ Mode Luar Angkasa — bintang menemanimu belajar",
     "footerLight": "🌟 Semangat belajar hari ini!"
+  },
+  "gameArena": {
+    "subtitle": "Pilih kelas untuk bermain game matematika",
+    "playBtn": "MAIN",
+    "backToMenu": "Kembali ke Menu",
+    "kelas7Desc": "Game matematika kelas 7 SMP",
+    "kelas8Desc": "Game matematika kelas 8 SMP",
+    "kelas9Desc": "Game matematika kelas 9 SMP",
+    "kelas7Title": "MATH GAME ARENA - KELAS 7",
+    "kelas8Title": "MATH GAME ARENA - KELAS 8",
+    "kelas9Title": "MATH GAME ARENA - KELAS 9",
+    "chooseTopic": "Pilih topik untuk bermain",
+    "backToArena": "Kembali ke Math Game Arena",
+    "umumTitle": "GAME ARENA — UMUM",
+    "umumSubtitle": "Game seru untuk semua tingkatan!",
+    "newBadge": "BARU",
+    "backToKelas7": "Kembali ke Kelas 7",
+    "backToKelas8": "Kembali ke Kelas 8",
+    "backToKelas9": "Kembali ke Kelas 9",
+    "kelas7Label": "Kelas 7",
+    "kelas8Label": "Kelas 8",
+    "kelas9Label": "Kelas 9",
+    "kelas7ArenaLabel": "Kelas 7 · Math Game Arena",
+    "kelas8ArenaLabel": "Kelas 8 · Math Game Arena",
+    "kelas9ArenaLabel": "Kelas 9 · Math Game Arena",
+    "meteorTagline": "Tembak meteor yang benar · Kumpulkan bintang!",
+    "fiveQuestions": "5 SOAL",
+    "meteorShooting": "Meteor Shooting",
+    "comingSoonText": "Sedang disiapkan...",
+    "lvl": "LVL",
+    "stage": "STAGE",
+    "soonBadge": "SEGERA",
+    "playShort": "MAIN!",
+    "countdownLabel": "SOAL DALAM",
+    "livesLabel": "NYAWA",
+    "quizHeader": "SOAL MATEMATIKA",
+    "correctFeedback": "BENAR! Lanjutkan bermain!",
+    "wrongFeedback": "Salah! Sisa nyawa: {{count}}",
+    "questionCounter": "Soal {{asked}} · Benar: {{score}}",
+    "gameOverTitle": "NYAWA HABIS!",
+    "gameOverDesc": "Semua nyawa kuis telah habis.",
+    "totalQuestions": "Total Soal",
+    "correctAnswers": "Jawaban Benar",
+    "wrongAnswers": "Jawaban Salah",
+    "backToMenuOverlay": "Kembali ke Menu",
+    "tryAgainBtn": "Coba Lagi (Reset Nyawa)",
+    "howToPlay": "CARA BERMAIN",
+    "backBtn": "Kembali",
+    "homeBtn": "Home",
+    "chooserTagline": "Pilih game favoritmu untuk berlatih {{topic}}!",
+    "subNotFoundTitle": "Sub-materi tidak ditemukan",
+    "subNotFoundDesc": "Sub-materi ini belum tersedia di Math Game Arena.",
+    "gameVariantBack": "← Kembali",
+    "gameNotFoundTitle": "Game tidak ditemukan",
+    "gameNotFoundDesc": "Halaman ini belum tersedia.",
+    "variantNotFoundTitle": "Game tidak dikenal",
+    "variantNotFoundDesc": "Varian \"{{variant}}\" tidak tersedia.",
+    "backToPickGame": "Kembali ke Pilihan Game",
+    "game_balapMobil": "Balap Mobil Matematika",
+    "game_balapMobilDesc": "Jawab soal untuk mendapatkan turbo boost dan menangkan balapan!",
+    "game_tetris": "Tetris Numatik",
+    "game_tetrisDesc": "Susun blok warna-warni, kumpulkan skor tertinggi dan naiki level!",
+    "game_lariMat": "Lari Matematika",
+    "game_lariMatDesc": "Loncat dan tiarap hindari rintangan! Jawab soal untuk bonus skor!",
+    "game_flappyRocket": "Flappy Rocket",
+    "game_flappyRocketDesc": "Terbangkan roket melewati gerbang neon! Gerbang emas = soal bonus + perisai!",
+    "game_tangkapBenda": "Tangkap Benda!",
+    "game_tangkapBendaDesc": "Gerakkan keranjang kiri-kanan! Tangkap semua benda, jangan ada yang terlewat!",
+    "game_snakeMat": "Snake Matematika",
+    "game_snakeMatDesc": "Arahkan ular ke jawaban yang benar! Salah → memendek, makin benar → makin cepat!",
+    "game_galaksiTempur": "Galaksi Tempur",
+    "game_galaksiTempurDesc": "Tembak pesawat musuh dan jawablah pertanyaan matematika yang muncul",
+    "game_popSoal": "Pop Soal!",
+    "game_popSoalDesc": "Gelembung warna-warni naik ke atas! Klik jawaban yang benar sebelum kabur!",
+    "game_hajarMol": "Hajar Mol!",
+    "game_hajarMolDesc": "Mol neon naik membawa angka! Hajar mol yang punya jawaban benar sebelum kabur!",
+    "game_mancingSoal": "Mancing Soal!",
+    "game_mancingSoalDesc": "Ikan-ikan neon berenang membawa angka! Klik ikan dengan jawaban benar sebelum kabur!",
+    "game_tembakTank": "Tembak Tank!",
+    "game_tembakTankDesc": "Tankmu vs tank-tank musuh! Tembak tank yang membawa jawaban benar, hindari serangan balik!",
+    "game_keretaKoin": "Kereta Koin Math",
+    "game_keretaKoinDesc": "Pindah jalur untuk mengambil koin jawaban benar, kumpulkan combo, dan hindari bom neon!",
+    "game_ninjaBuah": "Ninja Buah Math",
+    "game_ninjaBuahDesc": "Iris buah yang membawa jawaban benar sebelum jatuh, kumpulkan combo, dan jangan kena bom!",
+    "game_pulauHarta": "Pulau Harta Math",
+    "game_pulauHartaDesc": "Kemudikan kapal ke peti jawaban benar, kumpulkan harta, combo, dan hindari bom laut!",
+    "game_kapalSelam": "Kapal Selam Math Battle",
+    "game_kapalSelamDesc": "Tembak pesawat pembom di atas dan kapal selam musuh dari kiri-kanan dengan torpedo!",
+    "game_lompatJawaban": "Lompat Jawaban",
+    "game_lompatJawabanDesc": "Kendalikan astronot neon! Lompat ke platform dengan jawaban benar, double jump, dan kejar combo!",
+    "game_ksatria": "Ksatria Matematika",
+    "game_ksatriaDesc": "RPG petualangan epik! Lawan slime, goblin, kerangka & naga boss lewat 3 lantai dengan jawab soal!",
+    "game_spaceImpact": "Space Impact Math",
+    "game_spaceImpactDesc": "Tembak musuh yang membawa jawaban benar! Kumpulkan power-up, hadapi gelombang musuh luar angkasa!",
+    "game_meteorPantul": "Meteor Pantul NUMATIK",
+    "game_meteorPantulDesc": "Game Meteor! Pantulkan meteor ke kristal yang membawa jawaban benar untuk menghancurkannya!",
+    "game_pacMath": "Pac Math",
+    "game_pacMathDesc": "Makan semua titik di labirin! Temukan pelet warna jawaban BENAR untuk skor besar & hantu ketakutan!",
+    "game_zumMath": "Zum Math",
+    "game_zumMathDesc": "Tembak bola warna dari meriam! Cocokkan 3+ bola warna yang sama. Warna jawaban benar = BONUS besar!",
+    "game_bounceMath": "Bounce Math",
+    "game_bounceMathDesc": "Bola-bola neon memantul ke mana-mana! Klik bola yang membawa jawaban benar sebelum kabur!",
+    "game_westernBar": "Western Bar Math",
+    "game_westernBarDesc": "Tembak botol & kaleng di bar koboi! Bidik target dengan jawaban benar sebelum mereka kabur!",
+    "game_pinball": "Pinball Math",
+    "game_pinballDesc": "Pinball neon seru! Pantulkan bola ke bumper jawaban benar, gunakan flipper kiri & kanan!",
+    "variant_meteor": "Pesawat Tembak Meteor",
+    "variant_meteorDesc": "Tembak meteor berisi jawaban yang benar dari pesawat luar angkasamu.",
+    "variant_galaksi": "Galaksi Tempur",
+    "variant_galaksiDesc": "Tembak musuh alien & jawab soal materi setiap 25 detik untuk poin bonus!",
+    "variant_flappy": "Flappy Rocket",
+    "variant_flappyDesc": "Terbangkan roket lewati gerbang. Tiap gerbang khusus = soal!",
+    "variant_tank": "Shoot Tank",
+    "variant_tankDesc": "Bertempur lawan tank musuh! Jawab soal bonus untuk hadiah waktu & poin.",
+    "variant_space": "Space Impact Math",
+    "variant_spaceDesc": "Tembak hanya pesawat musuh berlabel jawaban yang BENAR!",
+    "variant_turtle": "Turtle Run Math",
+    "variant_turtleDesc": "Lari, lompat, dan tiarap! Jawab soal bonus untuk skor tambahan.",
+    "variant_tetris": "Tetris Numatik",
+    "variant_tetrisDesc": "Susun blok agar tidak menumpuk! Jawab soal bonus untuk skor tambahan.",
+    "variant_snake": "Snake Matematika",
+    "variant_snakeDesc": "Makan jawaban yang benar dan hindari jawaban salah!",
+    "variant_pantul": "Meteor Pantul NUMATIK",
+    "variant_pantulDesc": "Pantulkan meteor dengan pesawatmu dan hancurkan kristal asteroid! Jawab soal bonus untuk skor besar.",
+    "variant_zum": "Zum Math",
+    "variant_zumDesc": "Klik gelembung jawaban yang benar sebelum jatuh! Soal materi muncul setiap 25 detik.",
+    "variant_pac": "Pac Math",
+    "variant_pacDesc": "Makan semua titik dan hindari hantu! Jawab soal materi setiap 25 detik untuk poin bonus."
   }
 }
