@@ -85,6 +85,47 @@ const WelcomePage = () => {
           Numerasi Aktif dengan Teknologi<br />Informasi dan Komunikasi
         </p>
 
+        {/* Tahun Ajaran Badge */}
+        <div className="relative mb-10 animate-fade-in">
+          <div
+            className="absolute inset-0 rounded-full blur-lg opacity-60"
+            style={{
+              background: isSunset
+                ? "linear-gradient(90deg, #f59e0b, #ef4444, #f59e0b)"
+                : isLight
+                ? "linear-gradient(90deg, #6366f1, #06b6d4, #6366f1)"
+                : "linear-gradient(90deg, #8b5cf6, #06b6d4, #8b5cf6)",
+            }}
+          />
+          <div
+            className="relative flex items-center gap-3 px-6 py-3 rounded-full font-display font-bold text-sm sm:text-base tracking-widest text-white border"
+            style={{
+              background: isSunset
+                ? "linear-gradient(90deg, rgba(245,158,11,0.25), rgba(239,68,68,0.25), rgba(245,158,11,0.25))"
+                : isLight
+                ? "linear-gradient(90deg, rgba(99,102,241,0.2), rgba(6,182,212,0.2), rgba(99,102,241,0.2))"
+                : "linear-gradient(90deg, rgba(139,92,246,0.25), rgba(6,182,212,0.25), rgba(139,92,246,0.25))",
+              borderColor: isSunset
+                ? "rgba(245,158,11,0.6)"
+                : isLight
+                ? "rgba(99,102,241,0.5)"
+                : "rgba(139,92,246,0.6)",
+              boxShadow: isSunset
+                ? "inset 0 1px 0 rgba(255,255,255,0.15)"
+                : "inset 0 1px 0 rgba(255,255,255,0.1)",
+              color: isSunset
+                ? "#fde68a"
+                : isLight
+                ? "#4f46e5"
+                : "#c4b5fd",
+            }}
+          >
+            <span className="text-base">🗓️</span>
+            <span>Tahun Ajaran 2026 – 2027</span>
+            <span className="text-base">🗓️</span>
+          </div>
+        </div>
+
         {/* Main button */}
         <div className="relative mb-16">
           <div
