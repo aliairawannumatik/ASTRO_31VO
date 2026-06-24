@@ -78,6 +78,18 @@
     "reference": { "label": "REFERENCES", "desc": "Bibliography" },
     "about": { "label": "ABOUT APP", "desc": "Information about the app" }
   },
+  "materiMatematika": {
+    "title": "ANIMATED MATH BOOK",
+    "subtitle": "Choose a grade to learn math materials",
+    "grade7": "GRADE 7",
+    "grade8": "GRADE 8",
+    "grade9": "GRADE 9",
+    "grade7desc": "Animated Math Book for Grade 7 Junior High",
+    "grade8desc": "Animated Math Book for Grade 8 Junior High",
+    "grade9desc": "Animated Math Book for Grade 9 Junior High",
+    "study": "STUDY",
+    "backToMenu": "Back to Menu"
+  },
   "settings": {
     "title": "Settings",
     "subtitle": "Customize the app to your liking ✨",

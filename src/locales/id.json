@@ -78,6 +78,18 @@
     "reference": { "label": "SUMBER REFERENSI", "desc": "Daftar pustaka" },
     "about": { "label": "TENTANG APLIKASI", "desc": "Informasi tentang aplikasi" }
   },
+  "materiMatematika": {
+    "title": "BUKU ANIMASI MATEMATIKA",
+    "subtitle": "Pilih kelas untuk mempelajari materi matematika",
+    "grade7": "KELAS 7",
+    "grade8": "KELAS 8",
+    "grade9": "KELAS 9",
+    "grade7desc": "Buku Animasi Matematika kelas 7 SMP",
+    "grade8desc": "Buku Animasi Matematika kelas 8 SMP",
+    "grade9desc": "Buku Animasi Matematika kelas 9 SMP",
+    "study": "BELAJAR",
+    "backToMenu": "Kembali ke Menu"
+  },
   "settings": {
     "title": "Pengaturan",
     "subtitle": "Sesuaikan aplikasi sesuai keinginanmu ✨",

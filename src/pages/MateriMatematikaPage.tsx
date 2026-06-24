@@ -1,17 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, GraduationCap } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
-const kelasOptions = [
-  { label: "KELAS 7", path: "/materi-matematika/kelas-7", desc: "Buku Animasi Matematika kelas 7 SMP" },
-  { label: "KELAS 8", path: "/materi-matematika/kelas-8", desc: "Buku Animasi Matematika kelas 8 SMP" },
-  { label: "KELAS 9", path: "/materi-matematika/kelas-9", desc: "Buku Animasi Matematika kelas 9 SMP" },
-];
+const KELAS_OPTIONS = [
+  { gradeKey: "grade7", path: "/materi-matematika/kelas-7" },
+  { gradeKey: "grade8", path: "/materi-matematika/kelas-8" },
+  { gradeKey: "grade9", path: "/materi-matematika/kelas-9" },
+] as const;
 
 const MateriMatematikaPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -20,16 +22,16 @@ const MateriMatematikaPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          BUKU ANIMASI MATEMATIKA
+          {t("materiMatematika.title")}
         </h1>
         <p className="text-white/60 text-sm text-center mb-8 font-body">
-          Pilih kelas untuk mempelajari materi matematika
+          {t("materiMatematika.subtitle")}
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
-          {kelasOptions.map((kelas, i) => (
+          {KELAS_OPTIONS.map((kelas, i) => (
             <button
-              key={kelas.label}
+              key={kelas.path}
               onClick={() => {
                 playPopSound();
                 navigate(kelas.path);
@@ -41,10 +43,16 @@ const MateriMatematikaPage = () => {
             >
               <GraduationCap className="w-8 h-8 text-primary shrink-0 group-hover:scale-110 transition-transform" />
               <div className="flex flex-col">
-                <span className="font-display text-lg text-white">{kelas.label}</span>
-                <span className="font-body text-xs text-white/50">{kelas.desc}</span>
+                <span className="font-display text-lg text-white">
+                  {t(`materiMatematika.${kelas.gradeKey}`)}
+                </span>
+                <span className="font-body text-xs text-white/50">
+                  {t(`materiMatematika.${kelas.gradeKey}desc`)}
+                </span>
               </div>
-              <span className="ml-auto text-xs text-primary font-display">BELAJAR</span>
+              <span className="ml-auto text-xs text-primary font-display">
+                {t("materiMatematika.study")}
+              </span>
             </button>
           ))}
         </div>
@@ -54,7 +62,7 @@ const MateriMatematikaPage = () => {
             onClick={() => { playPopSound(); navigate("/menu"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            Kembali ke Menu
+            {t("materiMatematika.backToMenu")}
           </button>
         </div>
       </div>

@@ -78,6 +78,18 @@
     "reference": { "label": "参考資料", "desc": "参考文献" },
     "about": { "label": "このアプリについて", "desc": "アプリの情報" }
   },
+  "materiMatematika": {
+    "title": "アニメ数学書",
+    "subtitle": "学年を選んで数学の教材を学ぼう",
+    "grade7": "7年生",
+    "grade8": "8年生",
+    "grade9": "9年生",
+    "grade7desc": "中学1年生向けアニメ数学書",
+    "grade8desc": "中学2年生向けアニメ数学書",
+    "grade9desc": "中学3年生向けアニメ数学書",
+    "study": "学ぶ",
+    "backToMenu": "メニューに戻る"
+  },
   "settings": {
     "title": "設定",
     "subtitle": "アプリを好みにカスタマイズ ✨",
