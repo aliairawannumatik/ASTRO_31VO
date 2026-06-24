@@ -90,6 +90,28 @@
     "study": "学ぶ",
     "backToMenu": "メニューに戻る"
   },
+  "unitConverter": {
+    "title": "単位変換",
+    "subtitle": "さまざまな測定単位を変換する",
+    "inputLabel": "値",
+    "inputPlaceholder": "値を入力",
+    "fromLabel": "変換元",
+    "toLabel": "変換先",
+    "resultLabel": "変換結果",
+    "conversionLadder": "変換スケール",
+    "backToMenu": "← メニューに戻る",
+    "categories": {
+      "panjang": "長さ",
+      "massa": "質量/重さ",
+      "waktu": "時間",
+      "luas": "面積",
+      "volume": "体積",
+      "suhu": "温度",
+      "kecepatan": "速度",
+      "sudut": "角度",
+      "data": "デジタルデータ"
+    }
+  },
   "calculator": {
     "title": "NUMATIK 関数電卓",
     "backToMenu": "メニューに戻る",

@@ -90,6 +90,28 @@
     "study": "BELAJAR",
     "backToMenu": "Kembali ke Menu"
   },
+  "unitConverter": {
+    "title": "KONVERSI SATUAN",
+    "subtitle": "Konversi berbagai satuan pengukuran",
+    "inputLabel": "Nilai",
+    "inputPlaceholder": "Masukkan nilai",
+    "fromLabel": "Dari",
+    "toLabel": "Ke",
+    "resultLabel": "Hasil Konversi",
+    "conversionLadder": "Tangga Konversi",
+    "backToMenu": "← Kembali ke Menu",
+    "categories": {
+      "panjang": "Panjang",
+      "massa": "Massa/Berat",
+      "waktu": "Waktu",
+      "luas": "Luas",
+      "volume": "Volume",
+      "suhu": "Suhu",
+      "kecepatan": "Kecepatan",
+      "sudut": "Sudut",
+      "data": "Data Digital"
+    }
+  },
   "calculator": {
     "title": "KALKULATOR SCIENTIFIC NUMATIK",
     "backToMenu": "Kembali ke Menu",

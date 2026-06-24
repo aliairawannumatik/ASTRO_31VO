@@ -4,6 +4,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { Calculator, ArrowRight, RefreshCw } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTranslation } from "react-i18next";
 
 type UnitCategory = {
   id: string;
@@ -198,6 +199,7 @@ const convertTemperature = (value: number, from: string, to: string): number => 
 
 const KonversiSatuanPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<string>("panjang");
   const [inputValue, setInputValue] = useState<string>("1");
   const [fromUnit, setFromUnit] = useState<string>("m");
@@ -271,10 +273,10 @@ const KonversiSatuanPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <Calculator className="w-12 h-12 text-accent mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          KONVERSI SATUAN
+          {t("unitConverter.title")}
         </h1>
         <p className="text-white/60 text-sm text-center mb-6 font-body">
-          Konversi berbagai satuan pengukuran
+          {t("unitConverter.subtitle")}
         </p>
 
         {/* Category Selector */}
@@ -290,7 +292,7 @@ const KonversiSatuanPage = () => {
               }`}
             >
               <span className="text-xl mb-1">{category.icon}</span>
-              <span className="text-[10px] font-medium">{category.name}</span>
+              <span className="text-[10px] font-medium">{t(`unitConverter.categories.${category.id}`)}</span>
             </button>
           ))}
         </div>
@@ -299,20 +301,20 @@ const KonversiSatuanPage = () => {
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6">
           {/* Input */}
           <div className="mb-4">
-            <label className="text-xs text-white/60 mb-2 block">Nilai</label>
+            <label className="text-xs text-white/60 mb-2 block">{t("unitConverter.inputLabel")}</label>
             <input
               type="number"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               className="w-full bg-slate-800/50 border border-white/10 rounded-lg px-4 py-3 text-2xl text-white font-mono focus:outline-none focus:border-accent/60"
-              placeholder="Masukkan nilai"
+              placeholder={t("unitConverter.inputPlaceholder")}
             />
           </div>
 
           {/* From/To Units */}
           <div className="flex items-center gap-3 mb-6">
             <div className="flex-1">
-              <label className="text-xs text-white/60 mb-2 block">Dari</label>
+              <label className="text-xs text-white/60 mb-2 block">{t("unitConverter.fromLabel")}</label>
               <select
                 value={fromUnit}
                 onChange={(e) => { playPopSound(); setFromUnit(e.target.value); }}
@@ -334,7 +336,7 @@ const KonversiSatuanPage = () => {
             </button>
 
             <div className="flex-1">
-              <label className="text-xs text-white/60 mb-2 block">Ke</label>
+              <label className="text-xs text-white/60 mb-2 block">{t("unitConverter.toLabel")}</label>
               <select
                 value={toUnit}
                 onChange={(e) => { playPopSound(); setToUnit(e.target.value); }}
@@ -352,7 +354,7 @@ const KonversiSatuanPage = () => {
           {/* Result */}
           <div className="bg-gradient-to-br from-accent/10 to-primary/10 border border-accent/30 rounded-xl p-6">
             <div className="text-center">
-              <div className="text-sm text-white/60 mb-2">Hasil Konversi</div>
+              <div className="text-sm text-white/60 mb-2">{t("unitConverter.resultLabel")}</div>
               <div className="flex items-center justify-center gap-3">
                 <span className="text-lg text-white/70">{inputValue || "0"} {fromUnit}</span>
                 <ArrowRight className="w-5 h-5 text-accent" />
@@ -367,7 +369,7 @@ const KonversiSatuanPage = () => {
 
         {/* Quick Reference */}
         <div className="mt-6 bg-card/80 backdrop-blur border border-border rounded-xl p-4">
-          <h3 className="text-sm font-bold text-white mb-3">Tangga Konversi {currentCategory?.name}</h3>
+          <h3 className="text-sm font-bold text-white mb-3">{t("unitConverter.conversionLadder")} {t(`unitConverter.categories.${currentCategory?.id}`)}</h3>
           <div className="flex flex-wrap gap-2">
             {currentCategory?.units.slice(0, 8).map((unit, idx) => (
               <div
@@ -386,7 +388,7 @@ const KonversiSatuanPage = () => {
             onClick={() => { playPopSound(); navigate("/menu"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Menu
+            {t("unitConverter.backToMenu")}
           </button>
         </div>
       </div>

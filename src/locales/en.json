@@ -90,6 +90,28 @@
     "study": "STUDY",
     "backToMenu": "Back to Menu"
   },
+  "unitConverter": {
+    "title": "UNIT CONVERTER",
+    "subtitle": "Convert various measurement units",
+    "inputLabel": "Value",
+    "inputPlaceholder": "Enter value",
+    "fromLabel": "From",
+    "toLabel": "To",
+    "resultLabel": "Conversion Result",
+    "conversionLadder": "Conversion Scale",
+    "backToMenu": "← Back to Menu",
+    "categories": {
+      "panjang": "Length",
+      "massa": "Mass/Weight",
+      "waktu": "Time",
+      "luas": "Area",
+      "volume": "Volume",
+      "suhu": "Temperature",
+      "kecepatan": "Speed",
+      "sudut": "Angle",
+      "data": "Digital Data"
+    }
+  },
   "calculator": {
     "title": "NUMATIK SCIENTIFIC CALCULATOR",
     "backToMenu": "Back to Menu",
