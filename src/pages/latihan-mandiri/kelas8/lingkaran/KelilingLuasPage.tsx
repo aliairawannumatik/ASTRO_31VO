@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -163,6 +164,7 @@ const questions: Q[] = [
 
 const KelilingLuasPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -176,9 +178,9 @@ const KelilingLuasPage = () => {
             style={{ textShadow: '0 0 20px rgba(52,211,153,0.7)' }}>
             KELILING DAN LUAS LINGKARAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 13 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 13 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -247,7 +249,7 @@ const KelilingLuasPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/lingkaran"); }}
             className="text-sm text-muted-foreground hover:text-emerald-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Lingkaran
+            {t('practice.backTo')} Lingkaran
           </button>
         </div>
       </div>

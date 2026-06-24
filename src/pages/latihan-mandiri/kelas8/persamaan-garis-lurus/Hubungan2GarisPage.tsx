@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -169,6 +170,7 @@ const questions: Q[] = [
 
 const Hubungan2GarisPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -236,7 +238,7 @@ const Hubungan2GarisPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/persamaan-garis-lurus"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Persamaan Garis Lurus
+            {t('practice.backTo')} Persamaan Garis Lurus
           </button>
         </div>
       </div>

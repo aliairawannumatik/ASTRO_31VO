@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
@@ -95,6 +96,7 @@ const Q = ({ no, children, diagram, badgeColor = "#60a5fa" }: QProps) => (
 /* ─────────────── PAGE ─────────────── */
 const LuasSegitigaLatihanPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -110,7 +112,7 @@ const LuasSegitigaLatihanPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
             LUAS SEGITIGA
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · Tugas - Latihan Mandiri · Segitiga dan Segiempat</p>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Segitiga dan Segiempat</p>
         </div>
 
         {/* Info box */}
@@ -159,8 +161,8 @@ const LuasSegitigaLatihanPage = () => {
 
           </Section>
 
-          {/* ── BAGIAN II: Soal Pilihan Ganda ── */}
-          <Section title="Bagian II · Soal Pilihan Ganda" color="#a78bfa">
+          {/* ── BAGIAN II: Soal {t('practice.multipleChoice')} ── */}
+          <Section title="Bagian II · Soal {t('practice.multipleChoice')}" color="#a78bfa">
 
             <Q no={1} badgeColor="#a78bfa">
               <p className="mb-3">

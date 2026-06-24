@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen } from "lucide-react";
@@ -60,6 +61,7 @@ b. Jika semua bus sudah terisi peserta, berapa total kursi yang masih kosong?`,
 
 const PembagianPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">

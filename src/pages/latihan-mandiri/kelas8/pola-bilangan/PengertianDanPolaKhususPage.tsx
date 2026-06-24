@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -329,6 +330,7 @@ const QuestionCard = ({
 
 const PengertianDanPolaKhususPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -351,9 +353,9 @@ const PengertianDanPolaKhususPage = () => {
             <br />
             <span className="text-purple-300">DAN POLA-POLA KHUSUS</span>
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Pola Bilangan · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 12 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">+</span>
             <span className="text-purple-400 text-xs font-bold">13 Soal</span>
             <span className="text-white/30 text-xs">·</span>
@@ -408,7 +410,7 @@ const PengertianDanPolaKhususPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/pola-bilangan"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Pola Bilangan
+            {t('practice.backTo')} Pola Bilangan
           </button>
         </div>
       </div>

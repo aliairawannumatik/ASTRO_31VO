@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -119,6 +120,7 @@ const questions: Q[] = [
 
 const PangkatNolNegatifPecahanPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -132,9 +134,9 @@ const PangkatNolNegatifPecahanPage = () => {
             style={{ textShadow: '0 0 20px rgba(167,139,250,0.7)' }}>
             PANGKAT NOL, NEGATIF & PECAHAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 6 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">TKA</span>
           </div>
@@ -193,7 +195,7 @@ const PangkatNolNegatifPecahanPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9/bilangan-berpangkat"); }}
             className="text-sm text-muted-foreground hover:text-violet-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Bilangan Berpangkat
+            {t('practice.backTo')} Bilangan Berpangkat
           </button>
         </div>
       </div>

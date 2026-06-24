@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
@@ -35,6 +36,7 @@ const Q = ({ no, children, badge, badgeColor = "#60a5fa" }: QProps) => (
 /* ─── PAGE ─── */
 const PengertianKeanggotaanLatihanPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -49,7 +51,7 @@ const PengertianKeanggotaanLatihanPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
             PENGERTIAN DAN KEANGGOTAAN HIMPUNAN
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · Tugas - Latihan Mandiri · Himpunan</p>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Himpunan</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
@@ -108,6 +109,7 @@ const QuestionCard = ({ no, question, diagram }: QuestionCardProps) => (
 ───────────────────────────────────────────── */
 const KelilingSegitigaSegiempatLatihanPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">

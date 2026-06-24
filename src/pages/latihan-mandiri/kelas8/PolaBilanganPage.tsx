@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -51,6 +52,7 @@ const subtopics = [
 
 const PolaBilanganPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -65,10 +67,10 @@ const PolaBilanganPage = () => {
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center">
             POLA BILANGAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">50 Soal Total · UN / ANBK / TKA</span>
+            <span className="text-white/70 text-xs font-body">50 {t('practice.suffixSoalTotal')} · UN / ANBK / TKA</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
@@ -101,7 +103,7 @@ const PolaBilanganPage = () => {
 
                   <div className="flex flex-col items-end gap-2 shrink-0">
                     <span className={`text-[10px] font-bold px-2 py-1 rounded-full border ${s.badge}`}>
-                      {s.soal} Soal
+                      {s.soal} {t('practice.suffixSoal')}
                     </span>
                     <ChevronRight className={`w-4 h-4 ${s.iconColor} group-hover:translate-x-1 transition-transform`} />
                   </div>
@@ -123,7 +125,7 @@ const PolaBilanganPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Kelas 8
+            {t('practice.backToGrade8')}
           </button>
         </div>
       </div>

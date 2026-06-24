@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronRight, Layers, TrendingUp, Replace, Minus, Shuffle, FileText, Rocket } from "lucide-react";
@@ -72,6 +73,7 @@ const subtopics = [
 
 const SPLDVPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -87,7 +89,7 @@ const SPLDVPage = () => {
             style={{ color: "#a78bfa", textShadow: "0 0 24px #a78bfa88" }}>
             SISTEM PERSAMAAN LINEAR DUA VARIABEL
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Tugas - Latihan Mandiri · 7 Sub Topik · 128 Soal UN/ANBK/TKA</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 7 {t('practice.suffixSubTopik')} · 128 Soal UN/ANBK/TKA</p>
         </div>
 
         <div className="flex flex-col gap-3 animate-slide-up">
@@ -123,7 +125,7 @@ const SPLDVPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8"); }}
             className="text-sm text-white/40 hover:text-white/80 transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Kelas 8
+            {t('practice.backToGrade8')}
           </button>
         </div>
       </div>

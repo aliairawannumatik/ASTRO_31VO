@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -186,6 +187,7 @@ const questions: Q[] = [
 
 const MedianModusPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -200,16 +202,16 @@ const MedianModusPage = () => {
             UKURAN PEMUSATAN DATA
           </h1>
           <p className="text-violet-200/70 text-sm text-center font-body mb-1">Median dan Modus</p>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 10 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 10 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
         </div>
 
         <div className="mb-5 bg-violet-900/20 border border-violet-500/20 rounded-xl p-4">
-          <p className="text-violet-300 text-xs font-bold mb-3">📌 Rumus Kunci</p>
+          <p className="text-violet-300 text-xs font-bold mb-3">{t('practice.keyFormula')}</p>
           <div className="grid grid-cols-1 gap-2">
             {[
               { name: "Median (n ganjil)", math: "Me = x_{\\frac{n+1}{2}}" },
@@ -257,7 +259,7 @@ const MedianModusPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9/statistika"); }}
             className="text-sm text-muted-foreground hover:text-violet-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Statistika
+            {t('practice.backTo')} Statistika
           </button>
         </div>
       </div>

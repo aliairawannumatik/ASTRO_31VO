@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronRight, BarChart2, TrendingUp, PenLine, GitBranch, Globe } from "lucide-react";
@@ -49,6 +50,7 @@ const subtopics = [
 
 const PersamaanGarisLurusPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -59,7 +61,7 @@ const PersamaanGarisLurusPage = () => {
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
           PERSAMAAN GARIS LURUS
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Tugas - Latihan Mandiri · 5 Sub Topik · 81 Soal Total</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · {t('practice.breadcrumb')} · 5 {t('practice.suffixSubTopik')} · 81 {t('practice.suffixSoalTotal')}</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((sub, i) => {
@@ -90,7 +92,7 @@ const PersamaanGarisLurusPage = () => {
                 <div className="flex flex-col items-end gap-1.5 shrink-0">
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full"
                     style={{ background: `${sub.color}22`, color: sub.color, border: `1px solid ${sub.color}44` }}>
-                    {sub.soal} Soal
+                    {sub.soal} {t('practice.suffixSoal')}
                   </span>
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" style={{ color: sub.color }} />
                 </div>
@@ -104,7 +106,7 @@ const PersamaanGarisLurusPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            Kembali ke Kelas 8
+            {t('practice.backToGrade8')}
           </button>
         </div>
       </div>

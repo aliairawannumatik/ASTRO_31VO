@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
@@ -17,6 +18,7 @@ const isianPendek = [
 
 const JumlahSudutPadaSegiBanyakPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -52,7 +54,7 @@ const JumlahSudutPadaSegiBanyakPage = () => {
 
         {/* Bagian II */}
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <p className="text-accent text-sm font-bold mb-2 font-display">Bagian II — Pilihan Ganda</p>
+          <p className="text-accent text-sm font-bold mb-2 font-display">Bagian II — {t('practice.multipleChoice')}</p>
           <p className="text-yellow-400 text-sm mb-6 font-body">Kerjakan soal-soal berikut lengkap dengan caranya</p>
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">

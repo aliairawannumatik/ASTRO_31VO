@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -8,6 +9,7 @@ import { Zap } from "lucide-react";
 
 const PolaGeometriPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const questions = [
     {
@@ -146,9 +148,9 @@ const PolaGeometriPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-orange-300 text-center mb-1" style={{ textShadow: '0 0 20px rgba(251,146,60,0.7)' }}>
             BARISAN DAN DERET GEOMETRI
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 12 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
           </div>
@@ -228,7 +230,7 @@ const PolaGeometriPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/pola-bilangan"); }}
             className="text-sm text-muted-foreground hover:text-orange-400 transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Pola Bilangan
+            {t('practice.backTo')} Pola Bilangan
           </button>
         </div>
       </div>

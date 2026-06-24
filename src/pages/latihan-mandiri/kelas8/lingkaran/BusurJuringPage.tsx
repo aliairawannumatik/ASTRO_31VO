@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -91,6 +92,7 @@ const soalList: Soal[] = [
 
 const BusurJuringPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -106,9 +108,9 @@ const BusurJuringPage = () => {
           >
             PANJANG BUSUR DAN LUAS JURING
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 rounded-lg px-4 py-2">
-            <span className="text-yellow-400 text-xs font-bold">📋 6 Soal</span>
+            <span className="text-yellow-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -167,7 +169,7 @@ const BusurJuringPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/lingkaran"); }}
             className="text-sm text-muted-foreground hover:text-yellow-400 transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Lingkaran
+            {t('practice.backTo')} Lingkaran
           </button>
         </div>
       </div>

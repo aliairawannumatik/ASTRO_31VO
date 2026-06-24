@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -128,6 +129,7 @@ const questions: Q[] = [
 
 const TriplePythagorasPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -139,7 +141,7 @@ const TriplePythagorasPage = () => {
             TRIPLE PYTHAGORAS
           </h1>
         </div>
-        <p className="text-white/40 text-xs text-center mb-1 font-body">Kelas 8 · Tugas - Latihan Mandiri · 11 Soal</p>
+        <p className="text-white/40 text-xs text-center mb-1 font-body">Kelas 8 · {t('practice.breadcrumb')} · 11 Soal</p>
         <div className="flex justify-center gap-2 mb-6 flex-wrap">
           {badge("UN/USBN", "#34d399")}
           {badge("ANBK", "#60a5fa")}
@@ -174,7 +176,7 @@ const TriplePythagorasPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/teorema-pythagoras"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Teorema Pythagoras
+            {t('practice.backTo')} Teorema Pythagoras
           </button>
         </div>
       </div>

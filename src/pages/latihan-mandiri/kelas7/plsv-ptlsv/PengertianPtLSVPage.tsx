@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -489,6 +490,7 @@ const cards = [
 ══════════════════════════════════════════════════════════ */
 const PengertianPtLSVPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -514,7 +516,7 @@ const PengertianPtLSVPage = () => {
           >
             PERTIDAKSAMAAN DAN PtLSV
           </h1>
-          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · PLSV & PtLSV · Tugas - Latihan Mandiri</p>
+          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · PLSV & PtLSV · {t('practice.breadcrumb')}</p>
           <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">13 Soal</span>
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-red-500/10 border border-red-400/20 text-red-400 font-body">✦ Mudah</span>
@@ -553,7 +555,7 @@ const PengertianPtLSVPage = () => {
 
         {/* Legend */}
         <div className="mt-8 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">📖 Panduan Tingkat Soal</p>
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">{t('practice.levelGuide')}</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[10px] font-body">
             {[
               { col: "text-red-400", label: "Mudah", desc: "Soal 1–5: konsep dasar simbol & identifikasi" },
@@ -574,7 +576,7 @@ const PengertianPtLSVPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-7/plsv-ptlsv"); }}
             className="text-sm text-white/30 hover:text-red-400 transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke PLSV & PtLSV
+            {t('practice.backTo')} PLSV & PtLSV
           </button>
         </div>
       </div>

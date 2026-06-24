@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -204,6 +205,7 @@ const questions: Q[] = [
 
 const MetodeSubstitusiPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -218,7 +220,7 @@ const MetodeSubstitusiPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             PENYELESAIAN SPLDV — METODE SUBSTITUSI
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · Tugas - Latihan Mandiri · 17 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 17 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
@@ -273,7 +275,7 @@ const MetodeSubstitusiPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/spldv"); }}
             className="text-sm text-white/40 hover:text-white/80 transition-colors cursor-pointer font-body">
-            ← Kembali ke Menu SPLDV
+            ← {t('practice.backToMenu')} SPLDV
           </button>
         </div>
       </div>

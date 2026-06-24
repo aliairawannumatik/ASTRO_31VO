@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -16,6 +17,7 @@ const subtopics = [
 
 const PLSVPtLSVPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -26,10 +28,10 @@ const PLSVPtLSVPage = () => {
             <span className="text-3xl">⚖️</span>
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-orange-300 text-center mb-1" style={{ textShadow: '0 0 24px rgba(251,146,60,0.7)' }}>PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL</h1>
-          <p className="text-white/50 text-xs text-center font-body mb-1">Kelas 7 · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-1">Kelas 7 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2 mt-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">280 Soal Total · UN / TKA / ANBK</span>
+            <span className="text-white/70 text-xs font-body">280 {t('practice.suffixSoalTotal')} · UN / TKA / ANBK</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
@@ -52,7 +54,7 @@ const PLSVPtLSVPage = () => {
                     <p className="text-white/40 text-xs font-body">{s.desc}</p>
                   </div>
                   <div className="flex flex-col items-end gap-2 shrink-0">
-                    <span className={`text-[10px] font-bold px-2 py-1 rounded-full border ${s.badge}`}>{s.soal} Soal</span>
+                    <span className={`text-[10px] font-bold px-2 py-1 rounded-full border ${s.badge}`}>{s.soal} {t('practice.suffixSoal')}</span>
                     <ChevronRight className={`w-4 h-4 ${s.iconColor} group-hover:translate-x-1 transition-transform`} />
                   </div>
                 </div>
@@ -61,11 +63,11 @@ const PLSVPtLSVPage = () => {
           })}
         </div>
         <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">📝 Catatan Pengayaan</p>
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">{t('practice.enrichmentNote')}</p>
           <p className="text-white/60 text-xs font-body leading-relaxed">Soal-soal PLSV & PtLSV dari pengenalan konsep hingga soal cerita kontekstual HOTS, sesuai kisi-kisi UN, TKA, dan ANBK Kelas 7.</p>
         </div>
         <div className="mt-6 text-center">
-          <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-7"); }} className="text-sm text-muted-foreground hover:text-orange-400 transition-colors cursor-pointer font-body">← Kembali ke Kelas 7</button>
+          <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-7"); }} className="text-sm text-muted-foreground hover:text-orange-400 transition-colors cursor-pointer font-body">{t('practice.backToGrade7')}</button>
         </div>
       </div>
     </div>

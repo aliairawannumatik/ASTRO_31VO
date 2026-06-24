@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -1605,6 +1606,7 @@ const optionStyle = (key: OptionKey, selected: OptionKey | undefined, answer: Op
 ═══════════════════════════════════════════════ */
 const GabunganPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<Record<number, OptionKey>>({});
   const [revealed, setRevealed] = useState<Record<number, boolean>>({});
 
@@ -1635,10 +1637,10 @@ const GabunganPage = () => {
             style={{ textShadow: '0 0 24px rgba(16,185,129,0.7)' }}>
             BANGUN RUANG SISI LENGKUNG GABUNGAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bangun Ruang Sisi Lengkung · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-center">
             <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-              <span className="text-emerald-400 text-xs font-bold">📋 15 Soal</span>
+              <span className="text-emerald-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
               <span className="text-white/30 text-xs">·</span>
               <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
             </div>
@@ -1671,7 +1673,7 @@ const GabunganPage = () => {
 
         <div className="mb-3 flex items-center gap-2">
           <div className="h-px flex-1 bg-emerald-500/20" />
-          <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal Pilihan Ganda</span>
+          <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest px-2">Soal {t('practice.multipleChoice')}</span>
           <div className="h-px flex-1 bg-emerald-500/20" />
         </div>
 
@@ -1738,7 +1740,7 @@ const GabunganPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Bangun Ruang Sisi Lengkung
+            {t('practice.backTo')} Bangun Ruang Sisi Lengkung
           </button>
         </div>
       </div>

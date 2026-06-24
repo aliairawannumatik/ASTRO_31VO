@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -227,6 +228,7 @@ const cards = [
 /* ── Page ─────────────────────────────────────────────── */
 const PenyelesaianPtLSVPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -245,7 +247,7 @@ const PenyelesaianPtLSVPage = () => {
             style={{ textShadow: '0 0 32px rgba(244,63,94,0.5)' }}>
             LINEAR SATU VARIABEL
           </h1>
-          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · PLSV & PtLSV · Tugas - Latihan Mandiri</p>
+          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · PLSV & PtLSV · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">75 Soal</span>
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-rose-500/10 border border-rose-400/20 text-rose-400 font-body">✦ Kelas 7</span>
@@ -273,7 +275,7 @@ const PenyelesaianPtLSVPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-7/plsv-ptlsv"); }}
             className="text-sm text-white/30 hover:text-rose-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke PLSV & PtLSV
+            {t('practice.backTo')} PLSV & PtLSV
           </button>
         </div>
       </div>

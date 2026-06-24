@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -137,6 +138,7 @@ const questions: Q[] = [
 
 const PengertianRelasiPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -150,9 +152,9 @@ const PengertianRelasiPage = () => {
             style={{ textShadow: '0 0 20px rgba(167,139,250,0.7)' }}>
             PENGERTIAN RELASI DAN PENYAJIANNYA
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 12 Soal</span>
+            <span className="text-violet-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -215,7 +217,7 @@ const PengertianRelasiPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/relasi-dan-fungsi"); }}
             className="text-sm text-muted-foreground hover:text-violet-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Relasi dan Fungsi
+            {t('practice.backTo')} Relasi dan Fungsi
           </button>
         </div>
       </div>

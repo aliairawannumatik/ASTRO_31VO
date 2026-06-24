@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -74,6 +75,7 @@ const subtopics = [
 
 const KesebangunanKekongruenPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -89,10 +91,10 @@ const KesebangunanKekongruenPage = () => {
             style={{ textShadow: '0 0 20px rgba(34,211,238,0.6)' }}>
             KESEBANGUNAN DAN KEKONGRUENAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">47 Soal Total · Gambar & Diagram Geometri</span>
+            <span className="text-white/70 text-xs font-body">47 {t('practice.suffixSoalTotal')} · Gambar & Diagram Geometri</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
@@ -122,7 +124,7 @@ const KesebangunanKekongruenPage = () => {
                   </div>
                   <div className="flex flex-col items-end gap-2 shrink-0">
                     <span className={`text-[10px] font-bold px-2 py-1 rounded-full border ${s.badge}`}>
-                      {s.soal} Soal
+                      {s.soal} {t('practice.suffixSoal')}
                     </span>
                     <ChevronRight className={`w-4 h-4 ${s.iconColor} group-hover:translate-x-1 transition-transform`} />
                   </div>
@@ -144,7 +146,7 @@ const KesebangunanKekongruenPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Kelas 9
+            {t('practice.backToGrade9')}
           </button>
         </div>
       </div>

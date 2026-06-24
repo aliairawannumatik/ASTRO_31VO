@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -207,6 +208,7 @@ const cards = [
 /* ── Page ─────────────────────────────────────────────── */
 const PembagianPecahanPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -226,7 +228,7 @@ const PembagianPecahanPage = () => {
             <br />
             <span className="text-indigo-300">DAN SIFAT OPERASINYA</span>
           </h1>
-          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · Pecahan · Tugas - Latihan Mandiri</p>
+          <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · Pecahan · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">8 Soal Essay</span>
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/20 text-indigo-400 font-body">✦ Kelas 7</span>
@@ -266,7 +268,7 @@ const PembagianPecahanPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-7/bilangan-rasional"); }}
             className="text-sm text-white/30 hover:text-indigo-400 transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Pecahan
+            {t('practice.backTo')} Pecahan
           </button>
         </div>
       </div>

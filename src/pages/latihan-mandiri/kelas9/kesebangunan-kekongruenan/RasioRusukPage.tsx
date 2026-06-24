@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -313,6 +314,7 @@ const questions: Q[] = [
 
 const RasioRusukPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -326,15 +328,15 @@ const RasioRusukPage = () => {
             style={{ textShadow: '0 0 20px rgba(52,211,153,0.7)' }}>
             RASIO RUSUK SEGITIGA SIKU-SIKU DENGAN KESEBANGUNAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 9 Soal</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 9 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
         </div>
         <div className="mb-5 bg-emerald-900/20 border border-emerald-500/20 rounded-xl p-4">
-          <p className="text-emerald-300 text-xs font-bold mb-2">📌 Rumus Kunci – Garis Tinggi Siku-Siku</p>
+          <p className="text-emerald-300 text-xs font-bold mb-2">{t('practice.keyFormula')} – Garis Tinggi Siku-Siku</p>
           <div className="grid grid-cols-3 gap-2">
             {[
               { label: "Altitude", math: "h^2 = p \\cdot q" },
@@ -400,7 +402,7 @@ const RasioRusukPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9/kesebangunan-kekongruenan"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Kesebangunan & Kekongruenan
+            {t('practice.backTo')} Kesebangunan & Kekongruenan
           </button>
         </div>
       </div>

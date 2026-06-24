@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -406,6 +407,7 @@ const questions: Q[] = [
 
 const PengantarStatistikaPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -419,9 +421,9 @@ const PengantarStatistikaPage = () => {
             style={{ textShadow: '0 0 20px rgba(34,211,238,0.7)' }}>
             PENGANTAR STATISTIKA & PENYAJIAN DATA
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 10 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 10 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -482,7 +484,7 @@ const PengantarStatistikaPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9/statistika"); }}
             className="text-sm text-muted-foreground hover:text-cyan-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Statistika
+            {t('practice.backTo')} Statistika
           </button>
         </div>
       </div>

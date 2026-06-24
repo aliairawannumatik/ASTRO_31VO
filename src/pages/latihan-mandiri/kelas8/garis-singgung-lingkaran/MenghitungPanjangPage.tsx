@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -264,6 +265,7 @@ const diffColor: Record<string, string> = {
 
 const MenghitungPanjangPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -277,9 +279,9 @@ const MenghitungPanjangPage = () => {
             style={{ textShadow: '0 0 20px rgba(251,146,60,0.7)' }}>
             MENGHITUNG PANJANG GARIS SINGGUNG
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Garis Singgung Lingkaran · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Garis Singgung Lingkaran · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 7 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -352,7 +354,7 @@ const MenghitungPanjangPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/garis-singgung-lingkaran"); }}
             className="text-sm text-muted-foreground hover:text-orange-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Garis Singgung Lingkaran
+            {t('practice.backTo')} Garis Singgung Lingkaran
           </button>
         </div>
       </div>

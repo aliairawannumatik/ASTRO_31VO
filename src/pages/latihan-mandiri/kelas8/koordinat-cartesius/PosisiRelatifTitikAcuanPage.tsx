@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -205,6 +206,7 @@ const accentHex = "#a78bfa";
 
 const PosisiRelatifTitikAcuanPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -219,7 +221,7 @@ const PosisiRelatifTitikAcuanPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-violet-300 text-center mb-1">
             POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Koordinat Kartesius · Kelas 8 · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Koordinat Kartesius · Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-violet-400 text-sm">🎯</span>
             <span className="text-white/70 text-xs font-body">14 Soal · Posisi Relatif Titik Acuan</span>
@@ -284,7 +286,7 @@ const PosisiRelatifTitikAcuanPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/koordinat-cartesius"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Koordinat Kartesius
+            {t('practice.backTo')} Koordinat Kartesius
           </button>
         </div>
       </div>

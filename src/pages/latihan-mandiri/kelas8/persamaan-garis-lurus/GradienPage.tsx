@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -298,6 +299,7 @@ const questions: Q[] = [
 
 const GradienPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -306,7 +308,7 @@ const GradienPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-full px-4 py-1 mb-3">
-            <span className="text-blue-400 text-xs font-body">{questions.length} Soal Latihan</span>
+            <span className="text-blue-400 text-xs font-body">{questions.length} {t('practice.suffixSoal')} Latihan</span>
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
             GRADIEN (KEMIRINGAN GARIS)
@@ -365,7 +367,7 @@ const GradienPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/persamaan-garis-lurus"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Persamaan Garis Lurus
+            {t('practice.backTo')} Persamaan Garis Lurus
           </button>
         </div>
       </div>

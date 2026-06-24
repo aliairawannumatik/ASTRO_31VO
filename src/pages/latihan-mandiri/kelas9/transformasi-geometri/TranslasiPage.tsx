@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -188,6 +189,7 @@ const questions: Q[] = [
 
 const TranslasiPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -201,16 +203,16 @@ const TranslasiPage = () => {
             style={{ textShadow: '0 0 20px rgba(34,211,238,0.7)' }}>
             TRANSLASI (PERGESERAN)
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
-            <span className="text-cyan-400 text-xs font-bold">📋 20 Soal</span>
+            <span className="text-cyan-400 text-xs font-bold">📋 20 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">Pilihan Ganda · UN / ANBK / TKA</span>
+            <span className="text-white/50 text-xs">{t('practice.multipleChoice')} · UN / ANBK / TKA</span>
           </div>
         </div>
 
         <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4">
-          <p className="text-cyan-300 text-xs font-bold mb-2">📌 Rumus Kunci — Translasi</p>
+          <p className="text-cyan-300 text-xs font-bold mb-2">{t('practice.keyFormula')} — Translasi</p>
           <div className="flex flex-col gap-2">
             <BlockMath>{String.raw`\text{Jika } T = \begin{pmatrix}a\\b\end{pmatrix}, \text{ maka } P(x,y) \to P'(x+a,\; y+b)`}</BlockMath>
             <p className="text-white/50 text-[10px] font-body">Translasi tidak mengubah bentuk, ukuran, atau orientasi bangun.</p>
@@ -252,7 +254,7 @@ const TranslasiPage = () => {
         </div>
 
         <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">🖼️ Fitur Visual</p>
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">{t('practice.visualFeature')}</p>
           <p className="text-white/60 text-xs font-body leading-relaxed">
             Beberapa soal dilengkapi dengan diagram bidang koordinat yang menunjukkan pergeseran titik dan bangun. Soal-soal dipilih dari kisi-kisi UN, ANBK, dan TKA untuk mempersiapkan siswa menghadapi ujian resmi.
           </p>
@@ -263,7 +265,7 @@ const TranslasiPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9/transformasi-geometri"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Transformasi Geometri
+            {t('practice.backTo')} Transformasi Geometri
           </button>
         </div>
       </div>

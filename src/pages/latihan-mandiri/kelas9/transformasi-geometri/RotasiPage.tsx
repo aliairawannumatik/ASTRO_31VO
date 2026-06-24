@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -251,6 +252,7 @@ const questions: Q[] = [
 
 const RotasiPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -264,16 +266,16 @@ const RotasiPage = () => {
             style={{ textShadow: '0 0 20px rgba(251,146,60,0.7)' }}>
             ROTASI (PERPUTARAN)
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Transformasi Geometri · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 20 Soal</span>
+            <span className="text-orange-400 text-xs font-bold">📋 20 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
         </div>
 
         <div className="mb-5 bg-orange-900/20 border border-orange-500/20 rounded-xl p-4">
-          <p className="text-orange-300 text-xs font-bold mb-2">📌 Rumus Kunci — Rotasi terhadap Titik Asal O(0,0)</p>
+          <p className="text-orange-300 text-xs font-bold mb-2">{t('practice.keyFormula')} — Rotasi terhadap Titik Asal O(0,0)</p>
           <div className="grid grid-cols-2 gap-2 text-[10px]">
             {[
               {label:"90° berlawanan arah jarum jam", math:"(x,y)\\to(-y,x)"},
@@ -339,7 +341,7 @@ const RotasiPage = () => {
         </div>
 
         <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">🖼️ Fitur Visual</p>
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">{t('practice.visualFeature')}</p>
           <p className="text-white/60 text-xs font-body leading-relaxed">
             Beberapa soal dilengkapi diagram bidang koordinat yang menunjukkan perputaran titik dan bangun dengan indikator arah rotasi. Soal-soal dipilih dari kisi-kisi UN, ANBK, dan TKA.
           </p>
@@ -350,7 +352,7 @@ const RotasiPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9/transformasi-geometri"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Transformasi Geometri
+            {t('practice.backTo')} Transformasi Geometri
           </button>
         </div>
       </div>

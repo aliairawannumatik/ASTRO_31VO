@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -61,6 +62,7 @@ const subtopics = [
 
 const TransformasiGeometriPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -75,10 +77,10 @@ const TransformasiGeometriPage = () => {
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center">
             TRANSFORMASI GEOMETRI
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · Tugas - Latihan Mandiri</p>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 9 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">80 Soal Total · Diagram Koordinat & Visual</span>
+            <span className="text-white/70 text-xs font-body">80 {t('practice.suffixSoalTotal')} · Diagram Koordinat & Visual</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
@@ -108,7 +110,7 @@ const TransformasiGeometriPage = () => {
                   </div>
                   <div className="flex flex-col items-end gap-2 shrink-0">
                     <span className={`text-[10px] font-bold px-2 py-1 rounded-full border ${s.badge}`}>
-                      {s.soal} Soal
+                      {s.soal} {t('practice.suffixSoal')}
                     </span>
                     <ChevronRight className={`w-4 h-4 ${s.iconColor} group-hover:translate-x-1 transition-transform`} />
                   </div>
@@ -119,7 +121,7 @@ const TransformasiGeometriPage = () => {
         </div>
 
         <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">🖼️ Fitur Visual</p>
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">{t('practice.visualFeature')}</p>
           <p className="text-white/60 text-xs font-body leading-relaxed">
             Setiap sub-topik dilengkapi dengan diagram bidang koordinat yang menunjukkan transformasi titik dan bangun secara visual. Soal-soal dipilih dari kisi-kisi UN, ANBK, dan TKA untuk mempersiapkan siswa menghadapi ujian resmi.
           </p>
@@ -130,7 +132,7 @@ const TransformasiGeometriPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-9"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Kelas 9
+            {t('practice.backToGrade9')}
           </button>
         </div>
       </div>
