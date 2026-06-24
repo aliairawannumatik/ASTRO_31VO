@@ -702,12 +702,12 @@ const KumpulanRumusPage = () => {
             <div className="space-y-3">
               {filteredData.map((category) => {
                 const isOpen = expandedCategory === category.id;
-                return renderCategoryCard(category, isOpen, toggleCategory);
+                return renderCategoryCard(category, isOpen, toggleCategory, t);
               })}
             </div>
           ) : (
             groupSections
-              .filter((group) => activeGroup === "all" || activeGroup === group.label)
+              .filter((group) => activeGroup === "all" || activeGroup === group.id)
               .map((group) => {
                 const groupCategories = rumusData.filter(c => group.categoryIds.includes(c.id));
                 if (groupCategories.length === 0) return null;
@@ -723,10 +723,10 @@ const KumpulanRumusPage = () => {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h2 className={`font-display text-base md:text-lg font-black tracking-wide ${group.color} leading-tight`}>
-                            {group.label}
+                            {t(`formulas.groups.${group.id}`)}
                           </h2>
                           <p className="text-[11px] text-white/45 mt-0.5">
-                            {groupCategories.length} kategori &middot; {totalGroupRumus} rumus
+                            {groupCategories.length} {t("formulas.suffixKategori")} &middot; {totalGroupRumus} {t("formulas.suffixRumus")}
                           </p>
                         </div>
                       </div>
@@ -736,7 +736,7 @@ const KumpulanRumusPage = () => {
                     <div className="space-y-2">
                       {groupCategories.map((category) => {
                         const isOpen = expandedCategory === category.id;
-                        return renderCategoryCard(category, isOpen, toggleCategory);
+                        return renderCategoryCard(category, isOpen, toggleCategory, t);
                       })}
                     </div>
                   </section>
@@ -751,7 +751,7 @@ const KumpulanRumusPage = () => {
             onClick={() => { playPopSound(); navigate("/menu"); }}
             className="text-sm text-white/30 hover:text-cyan-400 transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Menu
+            {t("formulas.backToMenu")}
           </button>
         </div>
       </div>
