@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import {
@@ -408,6 +409,7 @@ const rumusData: RumusCategory[] = [
 const totalRumus = rumusData.reduce((sum, cat) => sum + cat.rumus.length, 0);
 
 type GroupSection = {
+  id: string;
   label: string;
   emoji: string;
   color: string;
@@ -418,6 +420,7 @@ type GroupSection = {
 
 const groupSections: GroupSection[] = [
   {
+    id: "numerasi",
     label: "Bilangan & Operasi",
     emoji: "🔢",
     color: "text-cyan-300",
@@ -426,6 +429,7 @@ const groupSections: GroupSection[] = [
     categoryIds: ["bilangan", "fpb-kpk", "pecahan", "perbandingan"],
   },
   {
+    id: "aljabar-fungsi",
     label: "Aljabar & Fungsi",
     emoji: "📐",
     color: "text-violet-300",
@@ -434,6 +438,7 @@ const groupSections: GroupSection[] = [
     categoryIds: ["aljabar", "plsv", "fungsi", "persamaan-garis", "aritmetika-sosial", "pola-bilangan", "persamaan-kuadrat"],
   },
   {
+    id: "geometri",
     label: "Geometri & Pengukuran",
     emoji: "📏",
     color: "text-emerald-300",
@@ -442,6 +447,7 @@ const groupSections: GroupSection[] = [
     categoryIds: ["sudut-garis", "segitiga", "segiempat", "lingkaran", "brsd", "brsl", "kesebangunan", "transformasi"],
   },
   {
+    id: "statistika-peluang",
     label: "Statistika & Peluang",
     emoji: "📊",
     color: "text-orange-300",
@@ -454,7 +460,8 @@ const groupSections: GroupSection[] = [
 const renderCategoryCard = (
   category: RumusCategory,
   isOpen: boolean,
-  toggleCategory: (id: string) => void
+  toggleCategory: (id: string) => void,
+  t: (key: string, opts?: Record<string, unknown>) => string
 ) => (
   <div
     key={category.id}
@@ -479,10 +486,10 @@ const renderCategoryCard = (
           <div className={`font-display text-sm md:text-base font-bold transition-colors truncate ${
             isOpen ? category.color : "text-white/90"
           }`}>
-            {category.title}
+            {t(`formulas.categories.${category.id}`)}
           </div>
           <div className="text-[11px] text-white/40 mt-0.5">
-            {category.rumus.length} rumus
+            {category.rumus.length} {t("formulas.suffixRumus")}
           </div>
         </div>
       </div>
@@ -505,13 +512,13 @@ const renderCategoryCard = (
               No
             </div>
             <div className={`px-3 py-2.5 text-[10px] font-black uppercase tracking-widest ${category.color} opacity-70 flex items-center border-l border-white/10`}>
-              Nama Rumus
+              {t("formulas.colName")}
             </div>
             <div className={`px-3 py-2.5 text-[10px] font-black uppercase tracking-widest ${category.color} opacity-70 flex items-center border-l border-white/10`}>
-              Rumus
+              {t("formulas.colFormula")}
             </div>
             <div className={`px-3 py-2.5 text-[10px] font-black uppercase tracking-widest ${category.color} opacity-70 flex items-center border-l border-white/10`}>
-              Keterangan
+              {t("formulas.colDesc")}
             </div>
           </div>
 
@@ -559,6 +566,7 @@ const renderCategoryCard = (
 
 const KumpulanRumusPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [expandedCategory, setExpandedCategory] = useState<string | null>("bilangan");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeGroup, setActiveGroup] = useState<string>("all");
@@ -573,12 +581,12 @@ const KumpulanRumusPage = () => {
     setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
   };
 
-  const jumpToGroup = (groupLabel: string) => {
+  const jumpToGroup = (groupId: string) => {
     playPopSound();
-    setActiveGroup(groupLabel);
-    if (groupLabel !== "all") {
+    setActiveGroup(groupId);
+    if (groupId !== "all") {
       setTimeout(() => {
-        const el = document.getElementById(`group-${groupLabel.replace(/\s+/g, "-")}`);
+        const el = document.getElementById(`group-${groupId}`);
         if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 50);
     }
@@ -610,17 +618,17 @@ const KumpulanRumusPage = () => {
             </div>
           </div>
           <h1 className="font-display text-2xl md:text-4xl font-bold text-center mb-2 bg-gradient-to-r from-cyan-300 via-white to-violet-300 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(6,182,212,0.5)]">
-            KUMPULAN RUMUS
+            {t("formulas.title")}
           </h1>
-          <p className="text-white/50 text-sm font-body text-center mb-4">Matematika SMP — Lengkap &amp; Terstruktur</p>
+          <p className="text-white/50 text-sm font-body text-center mb-4">{t("formulas.subtitle")}</p>
           <div className="flex gap-3">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-300 font-medium">
               <Layers className="w-3.5 h-3.5" />
-              {rumusData.length} Kategori
+              {rumusData.length} {t("formulas.suffixKategori")}
             </div>
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/30 text-xs text-violet-300 font-medium">
               <Sigma className="w-3.5 h-3.5" />
-              {totalRumus} Rumus
+              {totalRumus} {t("formulas.suffixRumus")}
             </div>
           </div>
         </div>
@@ -631,7 +639,7 @@ const KumpulanRumusPage = () => {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within:text-cyan-400 transition-colors z-10" />
           <input
             type="text"
-            placeholder="Cari rumus atau kategori..."
+            placeholder={t("formulas.searchPlaceholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="relative w-full bg-white/5 backdrop-blur border border-white/10 rounded-2xl pl-11 pr-4 py-3 text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-cyan-500/60 focus:bg-white/8 transition-all"
@@ -662,20 +670,20 @@ const KumpulanRumusPage = () => {
               }`}
             >
               <span className="text-sm">📚</span>
-              <span className="tracking-wide uppercase">Semua</span>
+              <span className="tracking-wide uppercase">{t("formulas.allGroups")}</span>
             </button>
             {groupSections.map((group) => (
               <button
-                key={group.label}
-                onClick={() => jumpToGroup(group.label)}
+                key={group.id}
+                onClick={() => jumpToGroup(group.id)}
                 className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-display font-bold border transition-all ${
-                  activeGroup === group.label
+                  activeGroup === group.id
                     ? `${group.bg} ${group.border} ${group.color}`
                     : "bg-white/[0.03] border-white/10 text-white/50 hover:text-white/80 hover:bg-white/8"
                 }`}
               >
                 <span className="text-sm">{group.emoji}</span>
-                <span className="tracking-wide uppercase">{group.label}</span>
+                <span className="tracking-wide uppercase">{t(`formulas.groups.${group.id}`)}</span>
               </button>
             ))}
           </div>
@@ -686,7 +694,7 @@ const KumpulanRumusPage = () => {
           {filteredData.length === 0 && (
             <div className="text-center py-16 text-white/30">
               <Search className="w-10 h-10 mx-auto mb-3 opacity-30" />
-              <p className="text-sm">Tidak ada rumus yang cocok dengan "{searchQuery}"</p>
+              <p className="text-sm">{t("formulas.noResults", { query: searchQuery })}</p>
             </div>
           )}
 
@@ -705,7 +713,7 @@ const KumpulanRumusPage = () => {
                 if (groupCategories.length === 0) return null;
                 const totalGroupRumus = groupCategories.reduce((s, c) => s + c.rumus.length, 0);
                 return (
-                  <section key={group.label} id={`group-${group.label.replace(/\s+/g, "-")}`}>
+                  <section key={group.id} id={`group-${group.id}`}>
                     {/* Section Banner */}
                     <div className={`relative rounded-2xl overflow-hidden border ${group.border} ${group.bg} mb-4`}>
                       <div className="absolute inset-0 bg-gradient-to-r from-white/[0.03] to-transparent pointer-events-none" />

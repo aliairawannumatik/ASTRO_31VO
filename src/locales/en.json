@@ -120,6 +120,48 @@
     "noHistory": "No history yet",
     "expressionEditor": "Expression editor — tap to position cursor"
   },
+  "formulas": {
+    "title": "FORMULA COLLECTION",
+    "subtitle": "Junior High Math — Complete & Structured",
+    "suffixKategori": "Categories",
+    "suffixRumus": "Formulas",
+    "searchPlaceholder": "Search formulas or categories...",
+    "allGroups": "All",
+    "noResults": "No formulas matching \"{{query}}\"",
+    "colName": "Formula Name",
+    "colFormula": "Formula",
+    "colDesc": "Description",
+    "backToMenu": "← Back to Menu",
+    "groups": {
+      "numerasi": "Numbers & Operations",
+      "aljabar-fungsi": "Algebra & Functions",
+      "geometri": "Geometry & Measurement",
+      "statistika-peluang": "Statistics & Probability"
+    },
+    "categories": {
+      "bilangan": "Numbers",
+      "fpb-kpk": "GCD and LCM",
+      "pecahan": "Fractions",
+      "perbandingan": "Ratios",
+      "aljabar": "Algebra",
+      "plsv": "Linear Equations",
+      "fungsi": "Relations & Functions",
+      "persamaan-garis": "Linear Graph Equations",
+      "aritmetika-sosial": "Social Arithmetic",
+      "sudut-garis": "Lines & Angles",
+      "segitiga": "Triangles",
+      "segiempat": "Quadrilaterals",
+      "lingkaran": "Circles",
+      "brsd": "Flat-Sided 3D Shapes",
+      "brsl": "Curved-Sided 3D Shapes",
+      "kesebangunan": "Similarity & Congruence",
+      "transformasi": "Geometric Transformations",
+      "statistika": "Statistics",
+      "peluang": "Probability",
+      "pola-bilangan": "Number Patterns",
+      "persamaan-kuadrat": "Quadratic Equations"
+    }
+  },
   "chatAI": {
     "backToMenu": "← Back to Menu",
     "robotSubtitle": "Your Math Astronaut Robot 🚀",

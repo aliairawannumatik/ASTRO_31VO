@@ -120,6 +120,48 @@
     "noHistory": "履歴がありません",
     "expressionEditor": "式エディタ — タップしてカーソルを配置"
   },
+  "formulas": {
+    "title": "数式コレクション",
+    "subtitle": "中学数学 — 完全版・体系的",
+    "suffixKategori": "カテゴリ",
+    "suffixRumus": "数式",
+    "searchPlaceholder": "数式またはカテゴリを検索...",
+    "allGroups": "すべて",
+    "noResults": "「{{query}}」に一致する数式が見つかりません",
+    "colName": "数式名",
+    "colFormula": "数式",
+    "colDesc": "説明",
+    "backToMenu": "← メニューに戻る",
+    "groups": {
+      "numerasi": "数と演算",
+      "aljabar-fungsi": "代数と関数",
+      "geometri": "図形と測定",
+      "statistika-peluang": "統計と確率"
+    },
+    "categories": {
+      "bilangan": "数",
+      "fpb-kpk": "最大公約数と最小公倍数",
+      "pecahan": "分数",
+      "perbandingan": "比",
+      "aljabar": "代数",
+      "plsv": "一次方程式",
+      "fungsi": "関係と関数",
+      "persamaan-garis": "直線の方程式",
+      "aritmetika-sosial": "生活算数",
+      "sudut-garis": "直線と角度",
+      "segitiga": "三角形",
+      "segiempat": "四角形",
+      "lingkaran": "円",
+      "brsd": "平面で囲まれた立体",
+      "brsl": "曲面を含む立体",
+      "kesebangunan": "相似と合同",
+      "transformasi": "図形の変換",
+      "statistika": "統計",
+      "peluang": "確率",
+      "pola-bilangan": "数列",
+      "persamaan-kuadrat": "二次方程式"
+    }
+  },
   "chatAI": {
     "backToMenu": "← メニューに戻る",
     "robotSubtitle": "あなたの数学宇宙飛行士ロボット 🚀",

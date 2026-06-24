@@ -120,6 +120,48 @@
     "noHistory": "Belum ada riwayat",
     "expressionEditor": "Editor ekspresi — ketuk untuk memposisikan kursor"
   },
+  "formulas": {
+    "title": "KUMPULAN RUMUS",
+    "subtitle": "Matematika SMP — Lengkap & Terstruktur",
+    "suffixKategori": "Kategori",
+    "suffixRumus": "Rumus",
+    "searchPlaceholder": "Cari rumus atau kategori...",
+    "allGroups": "Semua",
+    "noResults": "Tidak ada rumus yang cocok dengan \"{{query}}\"",
+    "colName": "Nama Rumus",
+    "colFormula": "Rumus",
+    "colDesc": "Keterangan",
+    "backToMenu": "← Kembali ke Menu",
+    "groups": {
+      "numerasi": "Bilangan & Operasi",
+      "aljabar-fungsi": "Aljabar & Fungsi",
+      "geometri": "Geometri & Pengukuran",
+      "statistika-peluang": "Statistika & Peluang"
+    },
+    "categories": {
+      "bilangan": "Bilangan",
+      "fpb-kpk": "FPB dan KPK",
+      "pecahan": "Pecahan",
+      "perbandingan": "Perbandingan",
+      "aljabar": "Aljabar",
+      "plsv": "Persamaan Linear",
+      "fungsi": "Relasi dan Fungsi",
+      "persamaan-garis": "Persamaan Garis Lurus",
+      "aritmetika-sosial": "Aritmetika Sosial",
+      "sudut-garis": "Garis dan Sudut",
+      "segitiga": "Segitiga",
+      "segiempat": "Segiempat",
+      "lingkaran": "Lingkaran",
+      "brsd": "Bangun Ruang Sisi Datar",
+      "brsl": "Bangun Ruang Sisi Lengkung",
+      "kesebangunan": "Kesebangunan",
+      "transformasi": "Transformasi Geometri",
+      "statistika": "Statistika",
+      "peluang": "Peluang",
+      "pola-bilangan": "Pola Bilangan",
+      "persamaan-kuadrat": "Persamaan Kuadrat"
+    }
+  },
   "chatAI": {
     "backToMenu": "← Kembali ke Menu",
     "robotSubtitle": "Robot Astronot Matematikamu 🚀",
