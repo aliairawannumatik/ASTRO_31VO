@@ -1,27 +1,28 @@
 import { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Settings, Volume2, VolumeX, Music2, Music4, Type, ChevronDown } from "lucide-react";
+import { Settings, Volume2, VolumeX, Music2, Type, ChevronDown, Globe } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme, Theme } from "@/contexts/ThemeContext";
 import { useSound } from "@/contexts/SoundContext";
 import { useMusic } from "@/contexts/MusicContext";
 import { useFont, FONT_OPTIONS, FontKey } from "@/contexts/FontContext";
+import { useLanguage, Language } from "@/contexts/LanguageContext";
 import { TRACKS } from "@/hooks/bgMusicTracks";
 import { MP3_TRACKS } from "@/hooks/mp3Tracks";
 import { SFX_EFFECTS, playSfxById } from "@/hooks/soundEffects";
 
-// ── Theme definitions for the selector grid ───────────────────
 type ThemeDef = {
   id: Theme;
   emoji: string;
   name: string;
   desc: string;
-  gradient: string;        // inline background for preview swatch
-  activeBorder: string;    // Tailwind border class when active
-  activeShadow: string;    // arbitrary shadow class when active
-  activeDot: string;       // dot color class
-  ready: boolean;          // whether this theme is fully supported
+  gradient: string;
+  activeBorder: string;
+  activeShadow: string;
+  activeDot: string;
+  ready: boolean;
 };
 
 const THEME_DEFS: ThemeDef[] = [
@@ -93,6 +94,38 @@ const THEME_DEFS: ThemeDef[] = [
   },
 ];
 
+type LangOption = {
+  id: Language;
+  flag: string;
+  native: string;
+  sub: string;
+  ring: string;
+};
+
+const LANG_OPTIONS: LangOption[] = [
+  {
+    id: "id",
+    flag: "🇮🇩",
+    native: "Bahasa Indonesia",
+    sub: "Bahasa resmi aplikasi",
+    ring: "ring-red-400 shadow-[0_0_14px_rgba(220,38,38,0.45)]",
+  },
+  {
+    id: "en",
+    flag: "🇬🇧",
+    native: "English",
+    sub: "International language",
+    ring: "ring-blue-400 shadow-[0_0_14px_rgba(29,78,216,0.45)]",
+  },
+  {
+    id: "ja",
+    flag: "🇯🇵",
+    native: "日本語",
+    sub: "にほんご",
+    ring: "ring-rose-400 shadow-[0_0_14px_rgba(244,63,94,0.45)]",
+  },
+];
+
 function getThemeGradient(t: Theme): string {
   const map: Record<Theme, string> = {
     dark:   "gradient-space",
@@ -105,8 +138,6 @@ function getThemeGradient(t: Theme): string {
   return map[t] ?? "gradient-space";
 }
 
-// Tailwind colour map for track accent colours
-// (full class strings required so Tailwind JIT can detect them)
 const ACCENT: Record<string, { border: string; bg: string; shadow: string; text: string; dot: string }> = {
   violet:  { border: "border-violet-500",  bg: "bg-violet-900/30",  shadow: "shadow-[0_0_18px_rgba(139,92,246,0.35)]",  text: "text-violet-300",  dot: "bg-violet-400"  },
   blue:    { border: "border-blue-500",    bg: "bg-blue-900/30",    shadow: "shadow-[0_0_18px_rgba(59,130,246,0.35)]",   text: "text-blue-300",    dot: "bg-blue-400"    },
@@ -138,10 +169,12 @@ const ACCENT_LIGHT: Record<string, { border: string; bg: string; shadow: string;
 };
 
 const PengaturanPage = () => {
+  const { t } = useTranslation();
   const { theme, isDark, setTheme: applyTheme } = useTheme();
   const { soundOn, toggleSound, sfxId, setSfxId, volume, setVolume: setSfxVolume } = useSound();
   const { musicOn, toggleMusic, trackId, setTrackId, musicVolume, setMusicVolume: setMusicVol } = useMusic();
   const { fontKey, setFont } = useFont();
+  const { language, setLanguage } = useLanguage();
 
   const [shakingBtn, setShakingBtn] = useState<string | null>(null);
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
@@ -149,6 +182,7 @@ const PengaturanPage = () => {
     font: false,
     musik: false,
     suara: false,
+    bahasa: false,
   });
   const toggleSection = useCallback((key: string) => {
     playPopSound();
@@ -177,6 +211,11 @@ const PengaturanPage = () => {
   const handleSetFont = (key: FontKey) => {
     playPopSound();
     setFont(key);
+  };
+
+  const handleSetLanguage = (lang: Language) => {
+    playPopSound();
+    setLanguage(lang);
   };
 
   return (
@@ -244,10 +283,10 @@ const PengaturanPage = () => {
               ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-200 to-violet-300"
               : "text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600"
           }`}>
-            Pengaturan
+            {t("settings.title")}
           </h1>
           <p className={`font-body text-sm mt-1.5 ${isDark ? "text-white/40" : "text-gray-500"}`}>
-            Sesuaikan aplikasi sesuai keinginanmu ✨
+            {t("settings.subtitle")}
           </p>
         </div>
 
@@ -259,8 +298,6 @@ const PengaturanPage = () => {
         }`}>
           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-blue-400 to-violet-500 rounded-r-full" />
           <div className="px-5 py-5 pl-6">
-
-            {/* Section header — clickable */}
             <button
               onClick={() => toggleSection("tema")}
               className="w-full flex items-center gap-3 mb-0 cursor-pointer"
@@ -270,23 +307,20 @@ const PengaturanPage = () => {
               </div>
               <div className="flex-1 text-left">
                 <h2 className={`font-display text-[15px] font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
-                  Tema Tampilan
+                  {t("settings.themeSection")}
                 </h2>
                 <p className={`font-body text-[11px] ${isDark ? "text-white/40" : "text-gray-400"}`}>
-                  Pilih tampilan yang kamu suka
+                  {t("settings.themeDesc")}
                 </p>
               </div>
               <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
                 openSections.tema ? "rotate-180" : ""
               } ${isDark ? "text-white/40" : "text-gray-400"}`} />
             </button>
-
           </div>
 
-          {/* Accordion content */}
           <div className={`accordion-content${openSections.tema ? " open" : ""}`}>
             <div className="accordion-inner px-5 pb-5 pl-6 pt-4">
-              {/* Theme grid — 3 columns */}
               <div className="grid grid-cols-3 gap-2">
                 {THEME_DEFS.map((td) => {
                   const isActive = theme === td.id;
@@ -316,7 +350,75 @@ const PengaturanPage = () => {
               </div>
             </div>
           </div>
+        </div>
 
+        {/* ── BAHASA / LANGUAGE ── */}
+        <div className={`relative rounded-2xl overflow-hidden ${
+          isDark
+            ? "bg-gradient-to-br from-cyan-500/10 to-teal-500/5 border border-white/10 backdrop-blur-xl shadow-[0_4px_32px_rgba(6,182,212,0.10)]"
+            : "bg-white/92 backdrop-blur-xl border border-cyan-100/80 shadow-xl"
+        }`}>
+          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-cyan-400 to-teal-500 rounded-r-full" />
+          <div className="px-5 py-5 pl-6">
+            <button
+              onClick={() => toggleSection("bahasa")}
+              className="w-full flex items-center gap-3 cursor-pointer"
+            >
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center shadow-lg shadow-cyan-500/30 flex-shrink-0">
+                <Globe className="w-[18px] h-[18px] text-white" />
+              </div>
+              <div className="flex-1 text-left">
+                <h2 className={`font-display text-[15px] font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
+                  {t("settings.languageSection")}
+                </h2>
+                <p className={`font-body text-[11px] ${isDark ? "text-white/40" : "text-gray-400"}`}>
+                  {LANG_OPTIONS.find(l => l.id === language)?.flag}{" "}
+                  {LANG_OPTIONS.find(l => l.id === language)?.native}
+                </p>
+              </div>
+              <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
+                openSections.bahasa ? "rotate-180" : ""
+              } ${isDark ? "text-white/40" : "text-gray-400"}`} />
+            </button>
+          </div>
+
+          <div className={`accordion-content${openSections.bahasa ? " open" : ""}`}>
+            <div className="accordion-inner px-5 pb-5 pl-6 pt-2">
+              <div className="flex flex-col gap-2">
+                {LANG_OPTIONS.map((lang) => {
+                  const isActive = language === lang.id;
+                  return (
+                    <button
+                      key={lang.id}
+                      onClick={() => handleSetLanguage(lang.id)}
+                      className={`relative flex items-center gap-4 rounded-2xl px-4 py-3 border-2 transition-all duration-200 cursor-pointer text-left ${
+                        isActive
+                          ? `border-transparent ring-2 ${lang.ring} ${isDark ? "bg-white/10" : "bg-cyan-50"}`
+                          : isDark
+                            ? "border-white/10 bg-white/5 hover:bg-white/8 hover:border-white/20"
+                            : "border-gray-200 bg-gray-50 hover:bg-gray-100 hover:border-gray-300"
+                      }`}
+                    >
+                      <span className="text-3xl leading-none">{lang.flag}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className={`font-display font-black text-sm leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
+                          {lang.native}
+                        </p>
+                        <p className={`font-body text-[11px] mt-0.5 ${isDark ? "text-white/45" : "text-gray-400"}`}>
+                          {lang.sub}
+                        </p>
+                      </div>
+                      {isActive && (
+                        <div className="w-5 h-5 rounded-full bg-cyan-400/80 flex items-center justify-center shrink-0">
+                          <span className="text-[10px] font-black text-slate-900">✓</span>
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* ── GAYA FONT ── */}
@@ -327,7 +429,6 @@ const PengaturanPage = () => {
         }`}>
           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-amber-400 to-orange-500 rounded-r-full" />
           <div className="px-5 py-5 pl-6">
-
             <button
               onClick={() => toggleSection("font")}
               className="w-full flex items-center gap-3 cursor-pointer"
@@ -337,20 +438,18 @@ const PengaturanPage = () => {
               </div>
               <div className="flex-1 text-left">
                 <h2 className={`font-display text-[15px] font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
-                  Gaya Font
+                  {t("settings.fontSection")}
                 </h2>
                 <p className={`font-body text-[11px] ${isDark ? "text-white/40" : "text-gray-400"}`}>
-                  Font yang nyaman untuk belajar
+                  {t("settings.fontDesc")}
                 </p>
               </div>
               <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
                 openSections.font ? "rotate-180" : ""
               } ${isDark ? "text-white/40" : "text-gray-400"}`} />
             </button>
-
           </div>
 
-          {/* Accordion content */}
           <div className={`accordion-content${openSections.font ? " open" : ""}`}>
             <div className="accordion-inner px-5 pb-5 pl-6 pt-4">
               <div className="flex flex-col gap-2">
@@ -399,7 +498,6 @@ const PengaturanPage = () => {
               </div>
             </div>
           </div>
-
         </div>
 
         {/* ── MUSIK LATAR ── */}
@@ -410,8 +508,6 @@ const PengaturanPage = () => {
         }`}>
           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-violet-400 to-fuchsia-500 rounded-r-full" />
           <div className="px-5 py-5 pl-6">
-
-            {/* Section header + inline toggle switch */}
             <div className="flex items-center gap-3">
               <button
                 onClick={() => toggleSection("musik")}
@@ -422,21 +518,20 @@ const PengaturanPage = () => {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h2 className={`font-display text-[15px] font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
-                    Musik Latar
+                    {t("settings.musicSection")}
                   </h2>
                   <p className={`font-body text-[11px] ${
                     musicOn
                       ? isDark ? "text-violet-300/80" : "text-violet-500"
                       : isDark ? "text-white/35" : "text-gray-400"
                   }`}>
-                    {musicOn ? "🎵 Musik sedang diputar" : "🔕 Musik dimatikan"}
+                    {musicOn ? t("settings.musicOn") : t("settings.musicOff")}
                   </p>
                 </div>
                 <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 mr-2 ${
                   openSections.musik ? "rotate-180" : ""
                 } ${isDark ? "text-white/40" : "text-gray-400"}`} />
               </button>
-              {/* Pill toggle */}
               <button
                 onClick={() => { playPopSound(); toggleMusic(); triggerShake("music-toggle"); }}
                 className={`relative rounded-full transition-all duration-300 flex-shrink-0 ${shakingBtn === "music-toggle" ? "numatik-shake" : ""} ${
@@ -449,18 +544,15 @@ const PengaturanPage = () => {
                 <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-white shadow-md transition-transform duration-300 ${musicOn ? "translate-x-6" : "translate-x-0"}`} />
               </button>
             </div>
-
           </div>
 
-          {/* Accordion content */}
           <div className={`accordion-content${openSections.musik ? " open" : ""}`}>
             <div className="accordion-inner px-5 pb-5 pl-6 pt-4">
 
-            {/* Volume slider */}
             <div className={`rounded-xl px-4 py-3 mb-4 ${isDark ? "bg-white/5 border border-white/8" : "bg-gray-50 border border-gray-100"}`}>
               <div className="flex items-center justify-between mb-2.5">
                 <p className={`font-display text-xs font-semibold ${isDark ? "text-white/60" : "text-gray-500"}`}>
-                  🎚️ Volume Musik
+                  {t("settings.volumeMusic")}
                 </p>
                 <span className={`font-display text-xs font-bold px-2 py-0.5 rounded-full ${
                   isDark ? "bg-violet-500/20 text-violet-300" : "bg-violet-100 text-violet-700"
@@ -484,11 +576,9 @@ const PengaturanPage = () => {
               </div>
             </div>
 
-            {/* Track list */}
             <div className="flex flex-col gap-1.5 max-h-[440px] overflow-y-auto pr-0.5" style={{ scrollbarWidth: "thin" }}>
-
               <p className={`font-body text-[10px] font-bold uppercase tracking-widest mb-1 px-1 ${isDark ? "text-violet-400/60" : "text-violet-500"}`}>
-                🎵 Pilih Musik
+                {t("settings.chooseMusic")}
               </p>
 
               {MP3_TRACKS.map((track) => {
@@ -564,11 +654,9 @@ const PengaturanPage = () => {
                   })}
                 </>
               )}
-
             </div>
             </div>
           </div>
-
         </div>
 
         {/* ── EFEK SUARA ── */}
@@ -579,8 +667,6 @@ const PengaturanPage = () => {
         }`}>
           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-cyan-400 to-blue-500 rounded-r-full" />
           <div className="px-5 py-5 pl-6">
-
-            {/* Section header + inline toggle switch */}
             <div className="flex items-center gap-3">
               <button
                 onClick={() => toggleSection("suara")}
@@ -591,21 +677,20 @@ const PengaturanPage = () => {
                 </div>
                 <div className="flex-1 min-w-0">
                   <h2 className={`font-display text-[15px] font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
-                    Efek Suara
+                    {t("settings.soundSection")}
                   </h2>
                   <p className={`font-body text-[11px] ${
                     soundOn
                       ? isDark ? "text-cyan-300/80" : "text-cyan-600"
                       : isDark ? "text-white/35" : "text-gray-400"
                   }`}>
-                    {soundOn ? "🔊 Suara tombol aktif" : "🔇 Suara dimatikan"}
+                    {soundOn ? t("settings.soundOn") : t("settings.soundOff")}
                   </p>
                 </div>
                 <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 mr-2 ${
                   openSections.suara ? "rotate-180" : ""
                 } ${isDark ? "text-white/40" : "text-gray-400"}`} />
               </button>
-              {/* Pill toggle */}
               <button
                 onClick={() => { handleToggleSound(); triggerShake("sound-toggle"); }}
                 className={`relative rounded-full transition-all duration-300 flex-shrink-0 ${shakingBtn === "sound-toggle" ? "numatik-shake" : ""} ${
@@ -618,18 +703,15 @@ const PengaturanPage = () => {
                 <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-white shadow-md transition-transform duration-300 ${soundOn ? "translate-x-6" : "translate-x-0"}`} />
               </button>
             </div>
-
           </div>
 
-          {/* Accordion content */}
           <div className={`accordion-content${openSections.suara ? " open" : ""}`}>
             <div className="accordion-inner px-5 pb-5 pl-6 pt-4">
 
-            {/* Volume slider */}
             <div className={`rounded-xl px-4 py-3 mb-5 ${isDark ? "bg-white/5 border border-white/8" : "bg-gray-50 border border-gray-100"}`}>
               <div className="flex items-center justify-between mb-2.5">
                 <p className={`font-display text-xs font-semibold ${isDark ? "text-white/60" : "text-gray-500"}`}>
-                  🔉 Volume Efek Suara
+                  {t("settings.volumeSound")}
                 </p>
                 <span className={`font-display text-xs font-bold px-2 py-0.5 rounded-full ${
                   isDark ? "bg-cyan-500/20 text-cyan-300" : "bg-cyan-100 text-cyan-700"
@@ -655,9 +737,8 @@ const PengaturanPage = () => {
               </div>
             </div>
 
-            {/* SFX grid */}
             <p className={`font-display text-xs font-semibold mb-2.5 ${isDark ? "text-white/55" : "text-gray-500"}`}>
-              🎛️ Variasi Suara Tombol
+              {t("settings.soundVariant")}
             </p>
             <div className="grid grid-cols-2 gap-2">
               {SFX_EFFECTS.map((sfx) => {
@@ -693,13 +774,12 @@ const PengaturanPage = () => {
 
             </div>
           </div>
-
         </div>
 
         {/* Footer note */}
-        <div className={`text-center py-2`}>
+        <div className="text-center py-2">
           <p className={`font-body text-[11px] ${isDark ? "text-white/25" : "text-gray-400"}`}>
-            {isDark ? "✨ Mode Luar Angkasa — bintang menemanimu belajar" : "🌟 Semangat belajar hari ini!"}
+            {isDark ? t("settings.footerDark") : t("settings.footerLight")}
           </p>
         </div>
 

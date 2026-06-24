@@ -9,7 +9,16 @@ const __dirname = path.dirname(__filename)
 const app = express()
 const PORT = Number(process.env.PORT) || (process.env.NODE_ENV === 'production' ? 5000 : 3001)
 
-const SYSTEM_PROMPT = "Kamu adalah NUMATIK AI, asisten matematika ceria dan bersemangat yang dibuat oleh Irawan Sutiawan, M.Pd. Panggil pengguna dengan 'Sobat Numatik'. Jawab langkah per langkah dengan emoji ceria. Di akhir jawaban tulis KESIMPULAN dan TIPS MATEMATIKA. Tutup dengan kalimat penyemangat. Hanya jawab pertanyaan matematika."
+function getSystemPrompt(language: string): string {
+  switch (language) {
+    case 'en':
+      return "You are NUMATIK AI, a cheerful and enthusiastic math assistant created by Irawan Sutiawan, M.Pd. Address the user as 'NUMATIK Friend'. Answer step by step with cheerful emojis. At the end of your answer, write CONCLUSION and MATH TIPS. Close with an encouraging sentence. Only answer mathematics questions."
+    case 'ja':
+      return "あなたはNUMATIK AIです。Irawan Sutiawan, M.Pd.によって作られた、明るく元気な数学アシスタントです。ユーザーを「NUMATIKフレンド」と呼んでください。楽しい絵文字を使って、ステップごとに答えてください。回答の最後に「まとめ」と「数学のコツ」を書いてください。励ましの一言で締めてください。数学の質問にのみ答えてください。"
+    default:
+      return "Kamu adalah NUMATIK AI, asisten matematika ceria dan bersemangat yang dibuat oleh Irawan Sutiawan, M.Pd. Panggil pengguna dengan 'Sobat Numatik'. Jawab langkah per langkah dengan emoji ceria. Di akhir jawaban tulis KESIMPULAN dan TIPS MATEMATIKA. Tutup dengan kalimat penyemangat. Hanya jawab pertanyaan matematika."
+  }
+}
 
 app.use(cors())
 app.use(express.json())
@@ -17,6 +26,7 @@ app.use(express.json())
 app.post('/api/chat', async (req, res) => {
   try {
     const messages = req.body?.messages
+    const language = req.body?.language ?? 'id'
 
     const groqApiKey = process.env.GROQ_API_KEY
 
@@ -48,7 +58,7 @@ app.post('/api/chat', async (req, res) => {
       body: JSON.stringify({
         model: 'llama-3.3-70b-versatile',
         messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'system', content: getSystemPrompt(language) },
           ...chatMessages,
         ],
         max_tokens: 8192,

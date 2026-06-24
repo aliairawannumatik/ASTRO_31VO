@@ -28,6 +28,12 @@
     "en": "English",
     "ja": "日本語"
   },
+  "nav": {
+    "back": "Kembali",
+    "next": "Halaman berikutnya",
+    "home": "Menu Utama",
+    "backToHome": "← Kembali ke Beranda"
+  },
   "menu": {
     "title": "MENU UTAMA",
     "subtitle": "Pilih menu yang ingin kamu jelajahi",
@@ -49,5 +55,49 @@
     "biography": "BIOGRAFI",
     "donate": "DONASI",
     "guide": "PETUNJUK"
+  },
+  "menuItems": {
+    "guide": { "label": "PETUNJUK PENGGUNAAN", "desc": "Panduan penggunaan" },
+    "teacherRoom": { "label": "RUANG UNTUK GURU", "desc": "Ruang khusus untuk para pendidik" },
+    "animatedBook": { "label": "BUKU ANIMASI MATEMATIKA", "desc": "Pelajari materi matematika lengkap" },
+    "practice": { "label": "TUGAS - LATIHAN MANDIRI", "desc": "Latihan soal per topik" },
+    "gameArena": { "label": "MATH GAME ARENA", "desc": "Bermain game matematika interaktif" },
+    "ai": { "label": "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", "desc": "Tanya jawab dengan AI matematika" },
+    "lkpd": { "label": "LKPD", "desc": "Lembar kerja interaktif dan berskor" },
+    "calculator": { "label": "KALKULATOR SCIENTIFIC", "desc": "Hitung cepat dengan kalkulator scientific" },
+    "olympiad": { "label": "OLIMPIADE MATEMATIKA", "desc": "Untuk yang suka tantangan" },
+    "fastCalc": { "label": "MENGHITUNG CEPAT", "desc": "Trik mental math tanpa kalkulator" },
+    "academic": { "label": "TES KEMAMPUAN AKADEMIK", "desc": "Uji kemampuan akademikmu" },
+    "conversion": { "label": "KONVERSI SATUAN", "desc": "Konversi berbagai satuan pengukuran" },
+    "formula": { "label": "KUMPULAN RUMUS", "desc": "Kumpulan rumus matematika SMP lengkap" },
+    "video": { "label": "VIDEO PEMBELAJARAN", "desc": "Belajar melalui video interaktif" },
+    "questionBank": { "label": "BANK SOAL", "desc": "Koleksi lengkap soal matematika" },
+    "settings": { "label": "PENGATURAN", "desc": "Atur mode gelap/terang" },
+    "donate": { "label": "DONASI", "desc": "Ayo dukung agar aplikasinya lebih berkembang" },
+    "biography": { "label": "BIOGRAFI", "desc": "Data pembuat aplikasi" },
+    "reference": { "label": "SUMBER REFERENSI", "desc": "Daftar pustaka" },
+    "about": { "label": "TENTANG APLIKASI", "desc": "Informasi tentang aplikasi" }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "subtitle": "Sesuaikan aplikasi sesuai keinginanmu ✨",
+    "themeSection": "Tema Tampilan",
+    "themeDesc": "Pilih tampilan yang kamu suka",
+    "fontSection": "Gaya Font",
+    "fontDesc": "Font yang nyaman untuk belajar",
+    "musicSection": "Musik Latar",
+    "musicOn": "🎵 Musik sedang diputar",
+    "musicOff": "🔕 Musik dimatikan",
+    "soundSection": "Efek Suara",
+    "soundOn": "🔊 Suara tombol aktif",
+    "soundOff": "🔇 Suara dimatikan",
+    "languageSection": "Bahasa / Language",
+    "languageDesc": "Bahasa tampilan aplikasi",
+    "volumeMusic": "🎚️ Volume Musik",
+    "volumeSound": "🔉 Volume Efek Suara",
+    "chooseMusic": "🎵 Pilih Musik",
+    "soundVariant": "🎛️ Variasi Suara Tombol",
+    "footerDark": "✨ Mode Luar Angkasa — bintang menemanimu belajar",
+    "footerLight": "🌟 Semangat belajar hari ini!"
   }
 }

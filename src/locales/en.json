@@ -28,6 +28,12 @@
     "en": "English",
     "ja": "日本語"
   },
+  "nav": {
+    "back": "Back",
+    "next": "Next page",
+    "home": "Main Menu",
+    "backToHome": "← Back to Home"
+  },
   "menu": {
     "title": "MAIN MENU",
     "subtitle": "Choose a menu to explore",
@@ -49,5 +55,49 @@
     "biography": "BIOGRAPHY",
     "donate": "DONATE",
     "guide": "GUIDE"
+  },
+  "menuItems": {
+    "guide": { "label": "USER GUIDE", "desc": "Usage guide" },
+    "teacherRoom": { "label": "TEACHER ROOM", "desc": "Dedicated space for educators" },
+    "animatedBook": { "label": "ANIMATED MATH BOOK", "desc": "Learn math materials completely" },
+    "practice": { "label": "TASKS - SELF PRACTICE", "desc": "Practice questions by topic" },
+    "gameArena": { "label": "MATH GAME ARENA", "desc": "Play interactive math games" },
+    "ai": { "label": "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", "desc": "Q&A with math AI" },
+    "lkpd": { "label": "WORKSHEET", "desc": "Interactive and scored worksheets" },
+    "calculator": { "label": "SCIENTIFIC CALCULATOR", "desc": "Calculate quickly with scientific calculator" },
+    "olympiad": { "label": "MATH OLYMPIAD", "desc": "For those who love challenges" },
+    "fastCalc": { "label": "FAST CALCULATION", "desc": "Mental math tricks without a calculator" },
+    "academic": { "label": "ACADEMIC ABILITY TEST", "desc": "Test your academic abilities" },
+    "conversion": { "label": "UNIT CONVERSION", "desc": "Convert various measurement units" },
+    "formula": { "label": "FORMULA COLLECTION", "desc": "Complete junior high math formulas" },
+    "video": { "label": "LEARNING VIDEOS", "desc": "Learn through interactive videos" },
+    "questionBank": { "label": "QUESTION BANK", "desc": "Complete collection of math questions" },
+    "settings": { "label": "SETTINGS", "desc": "Adjust dark/light mode" },
+    "donate": { "label": "DONATE", "desc": "Support to help the app grow" },
+    "biography": { "label": "BIOGRAPHY", "desc": "App creator information" },
+    "reference": { "label": "REFERENCES", "desc": "Bibliography" },
+    "about": { "label": "ABOUT APP", "desc": "Information about the app" }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Customize the app to your liking ✨",
+    "themeSection": "Display Theme",
+    "themeDesc": "Choose a theme you like",
+    "fontSection": "Font Style",
+    "fontDesc": "A comfortable font for learning",
+    "musicSection": "Background Music",
+    "musicOn": "🎵 Music is playing",
+    "musicOff": "🔕 Music is off",
+    "soundSection": "Sound Effects",
+    "soundOn": "🔊 Button sound active",
+    "soundOff": "🔇 Sound is off",
+    "languageSection": "Language",
+    "languageDesc": "App display language",
+    "volumeMusic": "🎚️ Music Volume",
+    "volumeSound": "🔉 Sound Effect Volume",
+    "chooseMusic": "🎵 Choose Music",
+    "soundVariant": "🎛️ Button Sound Variants",
+    "footerDark": "✨ Space Mode — stars accompany your learning",
+    "footerLight": "🌟 Keep up the learning spirit today!"
   }
 }

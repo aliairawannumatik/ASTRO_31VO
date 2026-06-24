@@ -28,6 +28,12 @@
     "en": "English",
     "ja": "日本語"
   },
+  "nav": {
+    "back": "戻る",
+    "next": "次のページ",
+    "home": "メインメニュー",
+    "backToHome": "← ホームに戻る"
+  },
   "menu": {
     "title": "メインメニュー",
     "subtitle": "探索したいメニューを選んでください",
@@ -49,5 +55,49 @@
     "biography": "プロフィール",
     "donate": "寄付",
     "guide": "ガイド"
+  },
+  "menuItems": {
+    "guide": { "label": "使い方ガイド", "desc": "操作ガイド" },
+    "teacherRoom": { "label": "教師の部屋", "desc": "教育者専用スペース" },
+    "animatedBook": { "label": "アニメ数学書", "desc": "数学の教材を完全に学ぶ" },
+    "practice": { "label": "課題・自主練習", "desc": "トピック別練習問題" },
+    "gameArena": { "label": "数学ゲームアリーナ", "desc": "インタラクティブな数学ゲームで遊ぶ" },
+    "ai": { "label": "NUMATIK AI", "desc": "数学AIとQ&A" },
+    "lkpd": { "label": "ワークシート", "desc": "インタラクティブな採点付きワークシート" },
+    "calculator": { "label": "関数電卓", "desc": "科学計算機で素早く計算" },
+    "olympiad": { "label": "数学オリンピック", "desc": "挑戦が好きな人のために" },
+    "fastCalc": { "label": "暗算", "desc": "電卓なしのメンタル数学テクニック" },
+    "academic": { "label": "学力テスト", "desc": "学力を試してみよう" },
+    "conversion": { "label": "単位変換", "desc": "各種単位を変換する" },
+    "formula": { "label": "公式集", "desc": "中学数学の公式一覧" },
+    "video": { "label": "学習動画", "desc": "インタラクティブ動画で学ぶ" },
+    "questionBank": { "label": "問題バンク", "desc": "数学問題の完全コレクション" },
+    "settings": { "label": "設定", "desc": "ダーク/ライトモード調整" },
+    "donate": { "label": "寄付", "desc": "アプリの発展を応援しよう" },
+    "biography": { "label": "プロフィール", "desc": "アプリ製作者情報" },
+    "reference": { "label": "参考資料", "desc": "参考文献" },
+    "about": { "label": "このアプリについて", "desc": "アプリの情報" }
+  },
+  "settings": {
+    "title": "設定",
+    "subtitle": "アプリを好みにカスタマイズ ✨",
+    "themeSection": "表示テーマ",
+    "themeDesc": "好きなテーマを選んでください",
+    "fontSection": "フォントスタイル",
+    "fontDesc": "学習に快適なフォント",
+    "musicSection": "BGM",
+    "musicOn": "🎵 音楽再生中",
+    "musicOff": "🔕 音楽オフ",
+    "soundSection": "効果音",
+    "soundOn": "🔊 ボタン音有効",
+    "soundOff": "🔇 音オフ",
+    "languageSection": "言語",
+    "languageDesc": "アプリの表示言語",
+    "volumeMusic": "🎚️ 音楽ボリューム",
+    "volumeSound": "🔉 効果音ボリューム",
+    "chooseMusic": "🎵 音楽を選ぶ",
+    "soundVariant": "🎛️ ボタン音バリエーション",
+    "footerDark": "✨ 宇宙モード — 星があなたの学習を見守っています",
+    "footerLight": "🌟 今日も学習頑張ろう！"
   }
 }

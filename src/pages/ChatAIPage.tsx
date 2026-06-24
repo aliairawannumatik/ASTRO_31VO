@@ -6,6 +6,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { Send, User, Rocket, RefreshCw, Paperclip, Mic, MicOff, X, FileText, ImageIcon } from "lucide-react";
 import "katex/dist/katex.min.css";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const QUICK_TOPICS = [
   { label: "Bilangan Pecahan 🍕", prompt: "Tolong jelaskan cara menjumlahkan bilangan pecahan dengan penyebut berbeda!" },
@@ -41,6 +42,7 @@ const formatText = (text: string) => {
 const ChatAIPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { language } = useLanguage();
   const isSunset = theme === "sunset";
 
   const [messages, setMessages] = useState<Message[]>([
@@ -157,7 +159,7 @@ const ChatAIPage = () => {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updatedMessages }),
+        body: JSON.stringify({ messages: updatedMessages, language }),
       });
 
       if (!res.ok) throw new Error(`AI chat error: ${res.status}`);

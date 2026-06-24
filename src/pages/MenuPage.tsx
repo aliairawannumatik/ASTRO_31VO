@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import { useTheme } from "@/contexts/ThemeContext";
 import {
@@ -26,34 +27,35 @@ import {
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
-const menuItems = [
-  { label: "PETUNJUK PENGGUNAAN", icon: Info, path: "/petunjuk", desc: "Panduan penggunaan" },
-  { label: "RUANG UNTUK GURU", icon: GraduationCap, path: "/ruang-untuk-guru", desc: "Ruang khusus untuk para pendidik" },
-  { label: "BUKU ANIMASI MATEMATIKA", icon: BookOpen, path: "/materi-matematika", desc: "Pelajari materi matematika lengkap" },
-  { label: "TUGAS - LATIHAN MANDIRI", icon: ClipboardList, path: "/latihan-mandiri", desc: "Latihan soal per topik" },
-  { label: "MATH GAME ARENA", icon: Gamepad2, path: "/math-game-arena", desc: "Bermain game matematika interaktif" },
-  { label: "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", icon: Bot, path: "/chat-ai", desc: "Tanya jawab dengan AI matematika" },
-  { label: "LKPD", icon: ClipboardCheck, path: "/lkpd", desc: "Lembar kerja interaktif dan berskor" },
-  { label: "KALKULATOR SCIENTIFIC", icon: Calculator, path: "/kalkulator-scientific", desc: "Hitung cepat dengan kalkulator scientific" },
-  { label: "OLIMPIADE MATEMATIKA", icon: Trophy, path: "/olimpiade", desc: "Untuk yang suka tantangan" },
-  { label: "MENGHITUNG CEPAT", icon: Zap, path: "/menghitung-cepat", desc: "Trik mental math tanpa kalkulator" },
-  { label: "TES KEMAMPUAN AKADEMIK", icon: Brain, path: "/tka", desc: "Uji kemampuan akademikmu" },
-  { label: "KONVERSI SATUAN", icon: ArrowLeftRight, path: "/konversi-satuan", desc: "Konversi berbagai satuan pengukuran" },
-  { label: "KUMPULAN RUMUS", icon: Sigma, path: "/kumpulan-rumus", desc: "Kumpulan rumus matematika SMP lengkap" },
-  { label: "VIDEO PEMBELAJARAN", icon: PlayCircle, path: "/video-pembelajaran", desc: "Belajar melalui video interaktif" },
-  { label: "BANK SOAL", icon: FileText, path: "/bank-soal", desc: "Koleksi lengkap soal matematika" },
-  { label: "PENGATURAN", icon: Settings, path: "/pengaturan", desc: "Atur mode gelap/terang" },
-  { label: "DONASI", icon: Heart, path: "/donasi", desc: "Ayo dukung agar aplikasinya lebih berkembang" },
-  { label: "BIOGRAFI", icon: User, path: "/biografi", desc: "Data pembuat aplikasi" },
-  { label: "SUMBER REFERENSI", icon: BookMarked, path: "/referensi", desc: "Daftar pustaka" },
-  { label: "TENTANG APLIKASI", icon: Rocket, path: "/tentang-aplikasi", desc: "Informasi tentang aplikasi" },
-];
-
 const MenuPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const isWhite = theme === "white";
   const isSpace = theme === "dark";
+
+  const menuItems = [
+    { key: "guide",       icon: Info,           path: "/petunjuk" },
+    { key: "teacherRoom", icon: GraduationCap,  path: "/ruang-untuk-guru" },
+    { key: "animatedBook",icon: BookOpen,        path: "/materi-matematika" },
+    { key: "practice",    icon: ClipboardList,  path: "/latihan-mandiri" },
+    { key: "gameArena",   icon: Gamepad2,       path: "/math-game-arena" },
+    { key: "ai",          icon: Bot,            path: "/chat-ai" },
+    { key: "lkpd",        icon: ClipboardCheck, path: "/lkpd" },
+    { key: "calculator",  icon: Calculator,     path: "/kalkulator-scientific" },
+    { key: "olympiad",    icon: Trophy,         path: "/olimpiade" },
+    { key: "fastCalc",    icon: Zap,            path: "/menghitung-cepat" },
+    { key: "academic",    icon: Brain,          path: "/tka" },
+    { key: "conversion",  icon: ArrowLeftRight, path: "/konversi-satuan" },
+    { key: "formula",     icon: Sigma,          path: "/kumpulan-rumus" },
+    { key: "video",       icon: PlayCircle,     path: "/video-pembelajaran" },
+    { key: "questionBank",icon: FileText,       path: "/bank-soal" },
+    { key: "settings",    icon: Settings,       path: "/pengaturan" },
+    { key: "donate",      icon: Heart,          path: "/donasi" },
+    { key: "biography",   icon: User,           path: "/biografi" },
+    { key: "reference",   icon: BookMarked,     path: "/referensi" },
+    { key: "about",       icon: Rocket,         path: "/tentang-aplikasi" },
+  ];
 
   const handleClick = (path: string) => {
     playPopSound();
@@ -66,9 +68,9 @@ const MenuPage = () => {
       <PageNavigation prevPath="/" />
       <div className="relative z-10 text-center px-4 max-w-3xl w-full pt-20 pb-12 md:pt-24 md:pb-16">
         <h1 className="font-display text-3xl md:text-4xl font-bold text-primary text-glow-cyan mb-2">
-          MENU UTAMA
+          {t("menu.title")}
         </h1>
-        <p className="text-muted-foreground mb-10 text-sm">Pilih menu yang ingin kamu jelajahi</p>
+        <p className="text-muted-foreground mb-10 text-sm">{t("menu.subtitle")}</p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
           {menuItems.map((item, i) => (
@@ -92,13 +94,13 @@ const MenuPage = () => {
                 className="font-display text-[11px] sm:text-base font-bold mb-1 leading-tight"
                 style={{ color: isWhite ? "#ffffff" : undefined }}
               >
-                {item.label}
+                {t(`menuItems.${item.key}.label`)}
               </h3>
               <p
                 className="text-xs"
                 style={{ color: isWhite ? "rgba(255,255,255,0.8)" : isSpace ? "hsl(var(--primary))" : undefined }}
               >
-                {item.desc}
+                {t(`menuItems.${item.key}.desc`)}
               </p>
             </button>
           ))}
@@ -108,7 +110,7 @@ const MenuPage = () => {
           onClick={() => { playPopSound(); navigate("/"); }}
           className="mt-8 text-sm text-muted-foreground hover:text-primary transition-colors font-body cursor-pointer"
         >
-          ← Kembali ke Beranda
+          {t("nav.backToHome")}
         </button>
       </div>
     </div>
