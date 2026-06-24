@@ -14,9 +14,9 @@ const MathGameArenaPage = () => {
   const isLight = theme === "light";
 
   const kelasOptions = [
-    { labelKey: "kelas7", path: "/math-game-arena/kelas-7", descKey: "kelas7Desc" },
-    { labelKey: "kelas8", path: "/math-game-arena/kelas-8", descKey: "kelas8Desc" },
-    { labelKey: "kelas9", path: "/math-game-arena/kelas-9", descKey: "kelas9Desc" },
+    { labelKey: "kelas7Label", path: "/math-game-arena/kelas-7", descKey: "kelas7Desc" },
+    { labelKey: "kelas8Label", path: "/math-game-arena/kelas-8", descKey: "kelas8Desc" },
+    { labelKey: "kelas9Label", path: "/math-game-arena/kelas-9", descKey: "kelas9Desc" },
   ];
 
   return (

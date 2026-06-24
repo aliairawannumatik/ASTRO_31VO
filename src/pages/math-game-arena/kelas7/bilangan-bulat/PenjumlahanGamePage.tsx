@@ -4,6 +4,7 @@ import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 import { Play } from "lucide-react";
 
 interface GameVariant {
@@ -14,6 +15,7 @@ interface GameVariant {
   from: string;
   to: string;
   glow: string;
+  variantKey: string;
 }
 
 const variants: GameVariant[] = [
@@ -25,6 +27,7 @@ const variants: GameVariant[] = [
     from: "#06b6d4",
     to: "#7c3aed",
     glow: "rgba(124,58,237,0.4)",
+    variantKey: "meteor",
   },
   {
     name: "Galaksi Tempur",
@@ -34,6 +37,7 @@ const variants: GameVariant[] = [
     from: "#7c3aed",
     to: "#ec4899",
     glow: "rgba(236,72,153,0.4)",
+    variantKey: "galaksi",
   },
   {
     name: "Flappy Rocket",
@@ -43,6 +47,7 @@ const variants: GameVariant[] = [
     from: "#f59e0b",
     to: "#ef4444",
     glow: "rgba(239,68,68,0.4)",
+    variantKey: "flappy",
   },
   {
     name: "Shoot Tank",
@@ -52,6 +57,7 @@ const variants: GameVariant[] = [
     from: "#dc2626",
     to: "#9333ea",
     glow: "rgba(147,51,234,0.4)",
+    variantKey: "tank",
   },
   {
     name: "Space Impact Math",
@@ -61,6 +67,7 @@ const variants: GameVariant[] = [
     from: "#0ea5e9",
     to: "#8b5cf6",
     glow: "rgba(14,165,233,0.4)",
+    variantKey: "space",
   },
   {
     name: "Turtle Run Math",
@@ -70,6 +77,7 @@ const variants: GameVariant[] = [
     from: "#10b981",
     to: "#06b6d4",
     glow: "rgba(16,185,129,0.4)",
+    variantKey: "turtle",
   },
   {
     name: "Tetris Numatik",
@@ -79,6 +87,7 @@ const variants: GameVariant[] = [
     from: "#06b6d4",
     to: "#a855f7",
     glow: "rgba(168,85,247,0.4)",
+    variantKey: "tetris",
   },
   {
     name: "Snake Matematika",
@@ -88,6 +97,7 @@ const variants: GameVariant[] = [
     from: "#22c55e",
     to: "#0ea5e9",
     glow: "rgba(34,197,94,0.4)",
+    variantKey: "snake",
   },
   {
     name: "Meteor Pantul NUMATIK",
@@ -97,6 +107,7 @@ const variants: GameVariant[] = [
     from: "#f97316",
     to: "#a855f7",
     glow: "rgba(249,115,22,0.4)",
+    variantKey: "pantul",
   },
   {
     name: "Zum Math",
@@ -106,6 +117,7 @@ const variants: GameVariant[] = [
     from: "#a855f7",
     to: "#6366f1",
     glow: "rgba(168,85,247,0.4)",
+    variantKey: "zum",
   },
   {
     name: "Pac Math",
@@ -115,12 +127,14 @@ const variants: GameVariant[] = [
     from: "#eab308",
     to: "#f97316",
     glow: "rgba(234,179,8,0.4)",
+    variantKey: "pac",
   },
 ];
 
 const PenjumlahanGamePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { t } = useTranslation();
   const isLight = theme === "light";
 
   return (
@@ -138,18 +152,18 @@ const PenjumlahanGamePage = () => {
             PENJUMLAHAN BILANGAN BULAT
           </h1>
           <p className="text-cyan-400/60 text-xs font-body tracking-widest uppercase">
-            Kelas 7 · Math Game Arena
+            {t('gameArena.kelas7ArenaLabel')}
           </p>
           <div className="mt-3 flex items-center justify-center gap-2 text-white/40 text-[11px] font-body">
             <span>🎮</span>
-            <span>Pilih game favoritmu untuk berlatih penjumlahan bilangan bulat!</span>
+            <span>{t('gameArena.chooserTagline', { topic: 'penjumlahan bilangan bulat' })}</span>
           </div>
         </div>
 
         <div className="flex flex-col gap-3">
           {variants.map((v, i) => (
             <button
-              key={v.name}
+              key={v.path}
               onClick={() => { playPopSound(); navigate(v.path); }}
               className="group relative flex items-stretch overflow-hidden rounded-2xl text-left
                 transition-all duration-300 animate-slide-up cursor-pointer hover:scale-[1.015]"
@@ -221,10 +235,10 @@ const PenjumlahanGamePage = () => {
               <div className="relative flex-1 flex items-center gap-3 px-4 py-4 min-w-0">
                 <div className="min-w-0 flex-1">
                   <div className="font-display text-sm font-bold text-white leading-tight mb-1">
-                    {v.name}
+                    {t(`gameArena.variant_${v.variantKey}`)}
                   </div>
                   <div className="text-[11px] text-white/50 font-body leading-snug">
-                    {v.description}
+                    {t(`gameArena.variant_${v.variantKey}Desc`)}
                   </div>
                 </div>
               </div>
@@ -238,7 +252,7 @@ const PenjumlahanGamePage = () => {
                   }}
                 >
                   <Play className="w-3 h-3 fill-white" />
-                  <span>MAIN!</span>
+                  <span>{t('gameArena.playShort')}</span>
                 </div>
               </div>
             </button>
@@ -250,7 +264,7 @@ const PenjumlahanGamePage = () => {
             onClick={() => { playPopSound(); navigate("/math-game-arena/kelas-7/bilangan-bulat"); }}
             className="text-sm text-white/40 hover:text-cyan-400 transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Bilangan Bulat
+            {t('gameArena.gameVariantBack')}
           </button>
         </div>
       </div>

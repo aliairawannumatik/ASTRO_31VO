@@ -12,6 +12,7 @@ import ZumaMathPage from "@/pages/math-game-arena/umum/ZumaMathPage";
 import PacmanMathPage from "@/pages/math-game-arena/umum/PacmanMathPage";
 import { getSubmaterialK8 } from "@/data/mga-k8/registry";
 import type { GuruQuestion } from "@/hooks/useGuruQuiz";
+import { useTranslation } from "react-i18next";
 
 const GAME_OFFSETS: Record<string, number> = {
   "snake-math":      0,
@@ -35,6 +36,7 @@ function gameSlice(questions: GuruQuestion[], variant: string): GuruQuestion[] {
 
 const SubmaterialGameDispatcherK8 = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { parentSlug, slug, variant } = useParams<{
     parentSlug: string;
     slug: string;
@@ -47,13 +49,13 @@ const SubmaterialGameDispatcherK8 = () => {
     return (
       <div className="relative min-h-screen flex flex-col items-center justify-center bg-slate-950">
         <div className="relative z-10 text-center px-6">
-          <h1 className="font-display text-2xl font-black text-white mb-2">Game tidak ditemukan</h1>
-          <p className="text-white/60 text-sm mb-6">Halaman ini belum tersedia.</p>
+          <h1 className="font-display text-2xl font-black text-white mb-2">{t('gameArena.gameNotFoundTitle')}</h1>
+          <p className="text-white/60 text-sm mb-6">{t('gameArena.gameNotFoundDesc')}</p>
           <button
             onClick={() => navigate(-1)}
             className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-bold text-white hover:bg-white/20 transition-colors"
           >
-            ← Kembali
+            {t('gameArena.gameVariantBack')}
           </button>
         </div>
       </div>
@@ -162,13 +164,13 @@ const SubmaterialGameDispatcherK8 = () => {
         <div className="relative min-h-screen flex flex-col items-center justify-center bg-slate-950">
           <div className="relative z-10 text-center px-6">
             <h1 className="font-display text-2xl font-black text-white mb-2">Game tidak dikenal</h1>
-            <p className="text-white/60 text-sm mb-6">Varian "{variant}" tidak tersedia.</p>
+            <p className="text-white/60 text-sm mb-6">{t('gameArena.variantNotFoundDesc', { variant })}</p>
             <button
               onClick={() => navigate(backPath)}
               className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-bold text-white hover:bg-white/20 transition-colors"
             >
-              ← Kembali
-            </button>
+            {t('gameArena.gameVariantBack')}
+          </button>
           </div>
         </div>
       );
