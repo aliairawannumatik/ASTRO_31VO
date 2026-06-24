@@ -177,9 +177,10 @@ const FullMenuPreview = ({ theme }: { theme: Theme }) => {
 interface Props {
   open: boolean;
   onClose: () => void;
+  onContinue?: () => void;
 }
 
-const ThemePickerModal = ({ open, onClose }: Props) => {
+const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
   const [selected, setSelected] = useState<Theme>(theme);
@@ -194,7 +195,13 @@ const ThemePickerModal = ({ open, onClose }: Props) => {
   const handleContinue = () => {
     playPopSound();
     setConfirming(true);
-    setTimeout(() => navigate("/menu"), 350);
+    setTimeout(() => {
+      if (onContinue) {
+        onContinue();
+      } else {
+        navigate("/menu");
+      }
+    }, 350);
   };
 
   const handleSkip = () => {

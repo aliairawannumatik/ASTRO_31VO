@@ -4,16 +4,29 @@ import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
 import ExitDialog from "@/components/ExitDialog";
 import ThemePickerModal from "@/components/ThemePickerModal";
+import LanguagePickerModal from "@/components/LanguagePickerModal";
 import { spaceBg } from "@/assets/placeholder";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const WelcomePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const { hasChosenLanguage } = useLanguage();
   const isLight = ["light", "white", "forest", "sunset"].includes(theme);
   const isSunset = theme === "sunset";
   const [showThemePicker, setShowThemePicker] = useState(false);
+  const [showLangPicker, setShowLangPicker] = useState(false);
+
+  const handleThemeContinue = () => {
+    setShowThemePicker(false);
+    if (hasChosenLanguage) {
+      navigate("/menu");
+    } else {
+      setShowLangPicker(true);
+    }
+  };
 
   return (
     <div
@@ -195,8 +208,15 @@ const WelcomePage = () => {
         </div>
       </div>
 
-      {/* Theme picker modal */}
-      <ThemePickerModal open={showThemePicker} onClose={() => setShowThemePicker(false)} />
+      <ThemePickerModal
+        open={showThemePicker}
+        onClose={() => setShowThemePicker(false)}
+        onContinue={handleThemeContinue}
+      />
+      <LanguagePickerModal
+        open={showLangPicker}
+        onClose={() => setShowLangPicker(false)}
+      />
 
       {/* Marquee text */}
       <div

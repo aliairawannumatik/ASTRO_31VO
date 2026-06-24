@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { startGlobalAmbient } from "@/hooks/useAudio";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import { SoundProvider } from "@/contexts/SoundContext";
 import { MusicProvider } from "@/contexts/MusicContext";
 import { FontProvider } from "@/contexts/FontContext";
@@ -1721,6 +1722,7 @@ const AppInner = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
+      <LanguageProvider>
       <SoundProvider>
         <MusicProvider>
           <FontProvider>
@@ -1734,6 +1736,7 @@ const App = () => (
           </FontProvider>
         </MusicProvider>
       </SoundProvider>
+      </LanguageProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );

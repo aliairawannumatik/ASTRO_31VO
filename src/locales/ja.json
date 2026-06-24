@@ -1,0 +1,53 @@
+{
+  "welcome": "アプリへようこそ",
+  "appName": "NUMATIK",
+  "subtitle": "情報通信技術を活用した\nアクティブ数的思考",
+  "schoolYear": "2026 – 2027 年度",
+  "start": "🚀 スタート",
+  "marquee": "✨ 中学校数学インタラクティブ学習アプリ ✨",
+  "selectTheme": "テーマを選ぶ",
+  "themeSubtitle": "タップしてプレビュー",
+  "continueWithTheme": "🚀 {{name}} で始める！",
+  "loading": "⏳ 読み込み中...",
+  "changeThemeHint": "いつでもテーマを変更できます",
+  "settingsTheme": "設定 → 表示テーマ",
+  "previewMenu": "メインメニュープレビュー",
+  "selectMenuHint": "探索したいメニューを選んでください",
+  "selectLanguage": "言語を選ぶ",
+  "languageSubtitle": "使用する言語を選択してください",
+  "languageContinue": "🌏 メインメニューへ",
+  "changeLanguageHint": "いつでも言語を変更できます",
+  "settingsLanguage": "設定 → 言語",
+  "languages": {
+    "id": "Bahasa Indonesia",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "languageNative": {
+    "id": "Bahasa Indonesia",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "menu": {
+    "title": "メインメニュー",
+    "subtitle": "探索したいメニューを選んでください",
+    "teacherRoom": "教師の部屋",
+    "animatedBook": "アニメ教科書",
+    "gameArena": "ゲームアリーナ",
+    "ai": "NUMATIK AI",
+    "lkpd": "ワークシート",
+    "olympiad": "数学オリンピック",
+    "calculator": "電卓",
+    "fastCalc": "暗算",
+    "academic": "学力テスト",
+    "conversion": "単位変換",
+    "formula": "公式集",
+    "video": "動画",
+    "questionBank": "問題バンク",
+    "practice": "練習問題",
+    "about": "このアプリについて",
+    "biography": "プロフィール",
+    "donate": "寄付",
+    "guide": "ガイド"
+  }
+}

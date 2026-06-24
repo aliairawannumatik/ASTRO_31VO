@@ -1,0 +1,53 @@
+{
+  "welcome": "Welcome to the Application",
+  "appName": "NUMATIK",
+  "subtitle": "Active Numeracy with Information\nand Communication Technology",
+  "schoolYear": "Academic Year 2026 – 2027",
+  "start": "🚀 START",
+  "marquee": "✨ INTERACTIVE MULTIMEDIA MATHEMATICS LEARNING APP FOR JUNIOR HIGH ✨",
+  "selectTheme": "Choose Theme",
+  "themeSubtitle": "Tap to preview instantly",
+  "continueWithTheme": "🚀 Start with {{name}}!",
+  "loading": "⏳ Loading...",
+  "changeThemeHint": "You can change the theme anytime in",
+  "settingsTheme": "Settings → Display Theme",
+  "previewMenu": "Main Menu Preview",
+  "selectMenuHint": "Choose a menu to explore",
+  "selectLanguage": "Choose Language",
+  "languageSubtitle": "Select the language you want to use",
+  "languageContinue": "🌏 Continue to Main Menu",
+  "changeLanguageHint": "You can change the language anytime in",
+  "settingsLanguage": "Settings → Language",
+  "languages": {
+    "id": "Bahasa Indonesia",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "languageNative": {
+    "id": "Bahasa Indonesia",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "menu": {
+    "title": "MAIN MENU",
+    "subtitle": "Choose a menu to explore",
+    "teacherRoom": "TEACHER ROOM",
+    "animatedBook": "ANIMATED BOOK",
+    "gameArena": "GAME ARENA",
+    "ai": "NUMATIK AI",
+    "lkpd": "WORKSHEET",
+    "olympiad": "OLYMPIAD",
+    "calculator": "CALCULATOR",
+    "fastCalc": "FAST CALC",
+    "academic": "ACADEMIC TEST",
+    "conversion": "CONVERSION",
+    "formula": "FORMULA",
+    "video": "VIDEO",
+    "questionBank": "QUESTION BANK",
+    "practice": "PRACTICE",
+    "about": "ABOUT",
+    "biography": "BIOGRAPHY",
+    "donate": "DONATE",
+    "guide": "GUIDE"
+  }
+}

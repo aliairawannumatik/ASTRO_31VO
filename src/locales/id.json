@@ -1,0 +1,53 @@
+{
+  "welcome": "Selamat Datang di Aplikasi",
+  "appName": "NUMATIK",
+  "subtitle": "Numerasi Aktif dengan Teknologi\nInformasi dan Komunikasi",
+  "schoolYear": "Tahun Ajaran 2026 – 2027",
+  "start": "🚀 MULAI",
+  "marquee": "✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨",
+  "selectTheme": "Pilih Tema",
+  "themeSubtitle": "Ketuk untuk preview langsung",
+  "continueWithTheme": "🚀 Mulai dengan {{name}}!",
+  "loading": "⏳ Memuat...",
+  "changeThemeHint": "Bisa ganti tema kapan saja di",
+  "settingsTheme": "Pengaturan → Tema Tampilan",
+  "previewMenu": "Preview Menu Utama",
+  "selectMenuHint": "Pilih menu yang ingin kamu jelajahi",
+  "selectLanguage": "Pilih Bahasa",
+  "languageSubtitle": "Pilih bahasa yang ingin kamu gunakan",
+  "languageContinue": "🌏 Lanjut ke Menu Utama",
+  "changeLanguageHint": "Bisa ganti bahasa kapan saja di",
+  "settingsLanguage": "Pengaturan → Bahasa",
+  "languages": {
+    "id": "Bahasa Indonesia",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "languageNative": {
+    "id": "Bahasa Indonesia",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "menu": {
+    "title": "MENU UTAMA",
+    "subtitle": "Pilih menu yang ingin kamu jelajahi",
+    "teacherRoom": "RUANG GURU",
+    "animatedBook": "BUKU ANIMASI",
+    "gameArena": "GAME ARENA",
+    "ai": "NUMATIK AI",
+    "lkpd": "LKPD",
+    "olympiad": "OLIMPIADE",
+    "calculator": "KALKULATOR",
+    "fastCalc": "HITUNG CEPAT",
+    "academic": "TES AKADEMIK",
+    "conversion": "KONVERSI",
+    "formula": "RUMUS",
+    "video": "VIDEO",
+    "questionBank": "BANK SOAL",
+    "practice": "LATIHAN",
+    "about": "TENTANG",
+    "biography": "BIOGRAFI",
+    "donate": "DONASI",
+    "guide": "PETUNJUK"
+  }
+}
