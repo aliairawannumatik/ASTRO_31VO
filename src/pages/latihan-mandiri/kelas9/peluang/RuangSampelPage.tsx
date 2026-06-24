@@ -334,20 +334,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "36" },
     ],
   },
-  /* ── 7 (2 keping tepat 1 angka) ── */
+  /* ── 7 (jalur A→B→C) ── */
   {
     n: 7,
-    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
-    options: [
-      { key: "A", text: "\\{(A, A)\\}", math: true },
-      { key: "B", text: "\\{(G, G)\\}", math: true },
-      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
-      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
-    ],
-  },
-  /* ── 8 (jalur A→B→C) ── */
-  {
-    n: 8,
     content: "Dari kota A ke kota B tersedia 3 jalur berbeda, dan dari kota B ke kota C tersedia 4 jalur berbeda. Banyaknya rute yang dapat ditempuh dari kota A ke kota C melalui kota B adalah ....",
     diagram: (
       <svg viewBox="0 0 340 210" className="w-full max-w-sm mx-auto">
@@ -379,20 +368,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "16" },
     ],
   },
-  /* ── 9 (2 dadu jumlah 7) ── */
+  /* ── 8 (2 dadu jumlah 4 atau 8) ── */
   {
-    n: 9,
-    content: "Dua buah dadu dilempar bersamaan. Himpunan kejadian jumlah mata kedua dadu adalah 7 merupakan ....",
-    options: [
-      { key: "A", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2)\\}", math: true },
-      { key: "B", text: "\\{(1,6),\\ (2,5),\\ (3,4)\\}", math: true },
-      { key: "C", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4),\\ (4,3)\\}", math: true },
-      { key: "D", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4)\\}", math: true },
-    ],
-  },
-  /* ── 10 (2 dadu jumlah 4 atau 8) ── */
-  {
-    n: 10,
+    n: 8,
     content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu 4 atau 8 adalah ....",
     options: [
       { key: "A", text: "6" },
@@ -401,9 +379,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "12" },
     ],
   },
-  /* ── 11 (2 dadu lebih dari 3 DAN kurang dari 7) ── */
+  /* ── 9 (2 dadu lebih dari 3 DAN kurang dari 7) ── */
   {
-    n: 11,
+    n: 9,
     content: "Dua buah dadu dilempar bersama-sama. Banyaknya kejadian muncul jumlah mata dadu lebih dari 3 dan kurang dari 7 adalah ....",
     diagram: (
       <div>
@@ -441,9 +419,9 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "14" },
     ],
   },
-  /* ── 12 (kartu bernomor + berhuruf) ── */
+  /* ── 10 (kartu bernomor + berhuruf) ── */
   {
-    n: 12,
+    n: 10,
     content: "Sebuah kantong berisi kartu bernomor 1, 2, 3, 4 dan kartu berhuruf A, B, C. Jika diambil satu kartu secara acak, banyaknya titik sampelnya adalah ....",
     options: [
       { key: "A", text: "5" },
@@ -452,15 +430,37 @@ const pgQuestions: PGQ[] = [
       { key: "D", text: "8" },
     ],
   },
-  /* ── 13 (3 keping tepat 2 angka) ── */
+  /* ── 11 (3 keping tepat 2 angka) ── */
   {
-    n: 13,
+    n: 11,
     content: "Tiga keping uang logam dilempar bersama-sama. Banyaknya kejadian muncul tepat dua sisi Angka adalah ....",
     options: [
       { key: "A", text: "2" },
       { key: "B", text: "3" },
       { key: "C", text: "4" },
       { key: "D", text: "5" },
+    ],
+  },
+  /* ── 12 (2 keping tepat 1 angka) ── */
+  {
+    n: 12,
+    content: "Dua keping uang logam dilempar bersamaan. Kejadian muncul tepat satu sisi Angka adalah ....",
+    options: [
+      { key: "A", text: "\\{(A, A)\\}", math: true },
+      { key: "B", text: "\\{(G, G)\\}", math: true },
+      { key: "C", text: "\\{(A, G),\\ (G, A)\\}", math: true },
+      { key: "D", text: "\\{(G, G),\\ (A, G),\\ (G, A)\\}", math: true },
+    ],
+  },
+  /* ── 13 (2 dadu jumlah 7) ── */
+  {
+    n: 13,
+    content: "Dua buah dadu dilempar bersamaan. Himpunan kejadian jumlah mata kedua dadu adalah 7 merupakan ....",
+    options: [
+      { key: "A", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2)\\}", math: true },
+      { key: "B", text: "\\{(1,6),\\ (2,5),\\ (3,4)\\}", math: true },
+      { key: "C", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4),\\ (4,3)\\}", math: true },
+      { key: "D", text: "\\{(1,6),\\ (6,1),\\ (2,5),\\ (5,2),\\ (3,4)\\}", math: true },
     ],
   },
   /* ── 14 (was 10) ── */
