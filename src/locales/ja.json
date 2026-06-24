@@ -90,6 +90,14 @@
     "study": "学ぶ",
     "backToMenu": "メニューに戻る"
   },
+  "calculator": {
+    "title": "NUMATIK 関数電卓",
+    "backToMenu": "メニューに戻る",
+    "history": "履歴",
+    "closeHistory": "閉じる",
+    "noHistory": "履歴がありません",
+    "expressionEditor": "式エディタ — タップしてカーソルを配置"
+  },
   "chatAI": {
     "backToMenu": "← メニューに戻る",
     "robotSubtitle": "あなたの数学宇宙飛行士ロボット 🚀",

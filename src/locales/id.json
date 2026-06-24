@@ -90,6 +90,14 @@
     "study": "BELAJAR",
     "backToMenu": "Kembali ke Menu"
   },
+  "calculator": {
+    "title": "KALKULATOR SCIENTIFIC NUMATIK",
+    "backToMenu": "Kembali ke Menu",
+    "history": "Riwayat",
+    "closeHistory": "Tutup",
+    "noHistory": "Belum ada riwayat",
+    "expressionEditor": "Editor ekspresi — ketuk untuk memposisikan kursor"
+  },
   "chatAI": {
     "backToMenu": "← Kembali ke Menu",
     "robotSubtitle": "Robot Astronot Matematikamu 🚀",

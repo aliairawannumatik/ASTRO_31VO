@@ -3,6 +3,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { Calculator, ChevronLeft, ChevronRight, History, Settings2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback, Fragment } from "react";
 import { evaluate, pi, e as eulerE, factorial, sqrt, log, log10, sin, cos, tan, asin, acos, atan, sinh, cosh, tanh, asinh, acosh, atanh, abs, ceil, floor, round, gcd, lcm, mod, nthRoot, pow, exp, combinations, permutations } from "mathjs";
 
@@ -253,6 +254,7 @@ const renderExpression = (
 
 const KalkulatorScientificPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [expression, setExpression] = useState<string>("");
   const [displayExpression, setDisplayExpression] = useState<string>("");
   const [result, setResult] = useState<string>("0");
@@ -670,7 +672,7 @@ const KalkulatorScientificPage = () => {
             </div>
             <div>
               <h1 className="font-display text-sm font-bold text-cyan-400 text-glow-cyan tracking-wide">
-                SCIENTIFIC CALCULATOR NUMATIK
+                {t("calculator.title")}
               </h1>
               <p className="text-[10px] text-white/50 tracking-wide mt-0.5">
                 Irawan Sutiawan, M.Pd
@@ -743,13 +745,13 @@ const KalkulatorScientificPage = () => {
         {showHistory && (
           <div className="absolute top-32 left-2 right-2 z-50 bg-slate-900/95 backdrop-blur-xl border border-cyan-500/30 rounded-xl p-3 max-h-[300px] overflow-y-auto shadow-2xl">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-semibold text-cyan-400">History</h3>
+              <h3 className="text-sm font-semibold text-cyan-400">{t("calculator.history")}</h3>
               <button onClick={() => setShowHistory(false)} className="text-white/50 hover:text-white text-xs">
-                Close
+                {t("calculator.closeHistory")}
               </button>
             </div>
             {history.length === 0 ? (
-              <p className="text-xs text-white/40">No history yet</p>
+              <p className="text-xs text-white/40">{t("calculator.noHistory")}</p>
             ) : (
               <div className="space-y-2">
                 {history.map((item, idx) => (
@@ -1148,7 +1150,7 @@ const KalkulatorScientificPage = () => {
             className="text-xs text-white/50 hover:text-cyan-400 transition-colors font-body flex items-center gap-1"
           >
             <ChevronLeft className="w-3 h-3" />
-            Kembali ke Menu
+            {t("calculator.backToMenu")}
           </button>
         </div>
       </div>

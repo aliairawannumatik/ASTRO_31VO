@@ -90,6 +90,14 @@
     "study": "STUDY",
     "backToMenu": "Back to Menu"
   },
+  "calculator": {
+    "title": "NUMATIK SCIENTIFIC CALCULATOR",
+    "backToMenu": "Back to Menu",
+    "history": "History",
+    "closeHistory": "Close",
+    "noHistory": "No history yet",
+    "expressionEditor": "Expression editor — tap to position cursor"
+  },
   "chatAI": {
     "backToMenu": "← Back to Menu",
     "robotSubtitle": "Your Math Astronaut Robot 🚀",
