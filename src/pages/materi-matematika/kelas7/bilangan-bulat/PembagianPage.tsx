@@ -389,7 +389,7 @@ const translations = {
 
   ja: {
     pageTitle: "整数の割り算",
-    pageSubtitle: "7年生 - 整数 - 数学",
+    pageSubtitle: "中学1年 - 整数 - 数学",
 
     introBtn: "秘密の鍵：割り算＝掛け算の逆",
     introBodyP1: "割り算を簡単に理解する秘密を知りたいですか？ ",
@@ -534,7 +534,7 @@ const translations = {
     tip4End: "なので、割り算の順序を入れ替えてはいけません！",
 
     rangkumanTitle: "➗ 完全まとめ",
-    rangkumanSub: "整数の割り算 — 7年生",
+    rangkumanSub: "整数の割り算 — 中学1年",
     aturanTandaTitle: "割り算の符号ルール — 掛け算と同じ！",
     aturanEmasTitle: "🔑 黄金ルール — 掛け算と同じ：",
     aturanEmasBody1: "同じ",
