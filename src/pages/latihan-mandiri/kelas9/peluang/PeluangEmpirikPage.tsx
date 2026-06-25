@@ -69,7 +69,18 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 4, title: "Peluang Empirik – Dadu 120 Lemparan",
+    n: 4, title: "Soal UN – Frekuensi Relatif Warna Merah",
+    content: "Dari 100 kali pengambilan, warna Biru muncul 30 kali, Kuning 25 kali, Putih 20 kali, dan Merah sisanya. Tentukan frekuensi relatif muncul warna Merah adalah ...",
+    diagram: (
+      <FreqTable caption="Frekuensi warna dalam 100 kali pengambilan"
+        headers={["Warna", "Merah", "Biru", "Kuning", "Putih", "Total"]}
+        rows={[["Frekuensi", "?", 30, 25, 20, 100]]} />
+    ),
+    options: ["\\frac{1}{4}", "\\frac{3}{10}", "\\frac{1}{5}", "\\frac{1}{2}"],
+    answer: 0,
+  },
+  {
+    n: 5, title: "Peluang Empirik – Dadu 120 Lemparan",
     content: "Sebuah dadu dilempar 120 kali. Hasil percobaan seperti pada tabel. Peluang empirik muncul angka genap adalah ...",
     diagram: (
       <FreqTable caption="Frekuensi munculnya angka dadu (120 lemparan)"
@@ -80,7 +91,7 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 5, title: "Peluang Empirik – Kelereng 200 Kali",
+    n: 6, title: "Peluang Empirik – Kelereng 200 Kali",
     content: "Percobaan pengambilan kelereng dilakukan 200 kali dengan pengembalian. Hasilnya seperti pada tabel. Peluang empirik terambilnya kelereng bukan Kuning adalah ...",
     diagram: (
       <FreqTable caption="Pengambilan kelereng 200 kali"
@@ -91,7 +102,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 6, title: "Frekuensi Relatif – Data Cuaca",
+    n: 7, title: "Frekuensi Relatif – Data Cuaca",
     content: "Selama 60 hari tercatat: Cerah 35 hari, Berawan 15 hari, Hujan 10 hari. Frekuensi relatif hari tidak hujan adalah ...",
     diagram: (
       <FreqTable caption="Data cuaca selama 60 hari"
@@ -102,7 +113,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 7, title: "Peluang Empirik – Dadu 180 Lemparan",
+    n: 8, title: "Peluang Empirik – Dadu 180 Lemparan",
     content: "Dadu dilempar 180 kali dengan hasil sesuai tabel di atas. Peluang empirik muncul angka lebih dari 4 adalah ...",
     diagram: (
       <FreqTable caption="Percobaan 180 kali melempar dadu"
@@ -111,12 +122,6 @@ const questions: MCQ[] = [
     ),
     options: ["\\frac{61}{180}", "\\frac{1}{3}", "\\frac{59}{180}", "\\frac{31}{90}"],
     answer: 0,
-  },
-  {
-    n: 8, title: "Soal UN – Frekuensi dari Frekuensi Relatif",
-    content: <>Sebuah dadu dilempar 90 kali. Frekuensi relatif muncul angka 5 adalah <InlineMath math="\frac{1}{6}" />. Berapa kali angka 5 muncul dalam percobaan tersebut?</>,
-    options: ["12 \\text{ kali}", "15 \\text{ kali}", "18 \\text{ kali}", "20 \\text{ kali}"],
-    answer: 1,
   },
   {
     n: 9, title: "Soal TKA – FR Gabungan Dua Koin",
@@ -136,15 +141,10 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 11, title: "Soal UN – Frekuensi Relatif Warna Merah",
-    content: "Dari 100 kali pengambilan, warna Biru muncul 30 kali, Kuning 25 kali, Putih 20 kali, dan Merah sisanya. Tentukan frekuensi relatif muncul warna Merah adalah ...",
-    diagram: (
-      <FreqTable caption="Frekuensi warna dalam 100 kali pengambilan"
-        headers={["Warna", "Merah", "Biru", "Kuning", "Putih", "Total"]}
-        rows={[["Frekuensi", "?", 30, 25, 20, 100]]} />
-    ),
-    options: ["\\frac{1}{4}", "\\frac{3}{10}", "\\frac{1}{5}", "\\frac{1}{2}"],
-    answer: 0,
+    n: 11, title: "Soal UN – Frekuensi dari Frekuensi Relatif",
+    content: <>Sebuah dadu dilempar 90 kali. Frekuensi relatif muncul angka 5 adalah <InlineMath math="\frac{1}{6}" />. Berapa kali angka 5 muncul dalam percobaan tersebut?</>,
+    options: ["12 \\text{ kali}", "15 \\text{ kali}", "18 \\text{ kali}", "20 \\text{ kali}"],
+    answer: 1,
   },
   {
     n: 12, title: "Soal UN – Menghitung Frekuensi dari FR",
