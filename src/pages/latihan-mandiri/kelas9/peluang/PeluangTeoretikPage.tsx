@@ -142,8 +142,55 @@ const questions: MCQ[] = [
     n: 18, title: "Peluang – Permen Warna Merah (Grafik)",
     content: "Roni mengambil 1 permen secara acak dari kantong. Banyaknya permen tiap warna ditunjukkan pada grafik berikut. Berapa peluang Roni mengambil permen warna merah?",
     diagram: (
-      <div className="my-2">
-        <img src="/grafik-permen.png" alt="Grafik permen" className="max-w-full rounded-lg border border-violet-500/20 mx-auto" style={{ maxHeight: 200 }} />
+      <div className="my-2 flex justify-center">
+        <svg viewBox="0 0 320 210" width="100%" style={{ maxWidth: 320 }} aria-label="Grafik jumlah permen per warna">
+          {/* Background */}
+          <rect x="0" y="0" width="320" height="210" rx="10" fill="rgba(109,40,217,0.08)" stroke="rgba(139,92,246,0.25)" strokeWidth="1" />
+          {/* Title */}
+          <text x="160" y="18" textAnchor="middle" fontSize="9" fontWeight="bold" fill="rgba(196,181,253,0.9)" fontFamily="sans-serif">Banyaknya Permen per Warna</text>
+          {/* Grid lines */}
+          {[0,2,4,6,8,10].map((v, i) => {
+            const y = 165 - i * 14;
+            return (
+              <g key={v}>
+                <line x1="45" y1={y} x2="300" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                <text x="40" y={y + 3.5} textAnchor="end" fontSize="8" fill="rgba(255,255,255,0.4)" fontFamily="sans-serif">{v}</text>
+              </g>
+            );
+          })}
+          {/* Y-axis */}
+          <line x1="45" y1="25" x2="45" y2="165" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+          {/* X-axis */}
+          <line x1="45" y1="165" x2="300" y2="165" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+
+          {/* Bars: Merah=6, Biru=9, Kuning=8, Hijau=7  (total=30) */}
+          {/* Bar: Merah */}
+          <rect x="60" y={165 - 6*14} width="42" height={6*14} rx="3" fill="#ef4444" fillOpacity="0.85" />
+          <text x="81" y={165 - 6*14 - 4} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#fca5a5" fontFamily="sans-serif">6</text>
+          <text x="81" y="178" textAnchor="middle" fontSize="8.5" fill="rgba(255,255,255,0.7)" fontFamily="sans-serif">Merah</text>
+          <rect x="60" y={165 - 6*14} width="42" height={6*14} rx="3" fill="url(#gradMerah)" />
+
+          {/* Bar: Biru */}
+          <rect x="118" y={165 - 9*14} width="42" height={9*14} rx="3" fill="#3b82f6" fillOpacity="0.85" />
+          <text x="139" y={165 - 9*14 - 4} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#93c5fd" fontFamily="sans-serif">9</text>
+          <text x="139" y="178" textAnchor="middle" fontSize="8.5" fill="rgba(255,255,255,0.7)" fontFamily="sans-serif">Biru</text>
+
+          {/* Bar: Kuning */}
+          <rect x="176" y={165 - 8*14} width="42" height={8*14} rx="3" fill="#eab308" fillOpacity="0.85" />
+          <text x="197" y={165 - 8*14 - 4} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#fde047" fontFamily="sans-serif">8</text>
+          <text x="197" y="178" textAnchor="middle" fontSize="8.5" fill="rgba(255,255,255,0.7)" fontFamily="sans-serif">Kuning</text>
+
+          {/* Bar: Hijau */}
+          <rect x="234" y={165 - 7*14} width="42" height={7*14} rx="3" fill="#22c55e" fillOpacity="0.85" />
+          <text x="255" y={165 - 7*14 - 4} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#86efac" fontFamily="sans-serif">7</text>
+          <text x="255" y="178" textAnchor="middle" fontSize="8.5" fill="rgba(255,255,255,0.7)" fontFamily="sans-serif">Hijau</text>
+
+          {/* Y-axis label */}
+          <text x="12" y="100" textAnchor="middle" fontSize="8" fill="rgba(255,255,255,0.4)" fontFamily="sans-serif" transform="rotate(-90,12,100)">Jumlah</text>
+
+          {/* Total label */}
+          <text x="160" y="198" textAnchor="middle" fontSize="8" fill="rgba(196,181,253,0.6)" fontFamily="sans-serif">Total = 6 + 9 + 8 + 7 = 30 permen</text>
+        </svg>
       </div>
     ),
     options: ["10\\%", "20\\%", "25\\%", "50\\%"],
