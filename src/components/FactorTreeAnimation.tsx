@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Node {
   id: number;
@@ -10,53 +11,41 @@ interface Node {
 }
 
 interface TreeConfig {
-  nodes: Node[];
-  edges: { from: number; to: number }[];
   label: string;
   result: string;
   color: string;
   glowColor: string;
+  nodes: Node[];
+  edges: { from: number; to: number }[];
 }
 
-const tree12: TreeConfig = {
-  label: "Pohon Faktor 12",
-  result: "12 = 2² × 3",
-  color: "#38bdf8",
-  glowColor: "rgba(56,189,248,0.4)",
-  nodes: [
-    { id: 0, value: 12, x: 130, y: 28, isPrime: false },
-    { id: 1, value: 2,  x: 60,  y: 100, isPrime: true },
-    { id: 2, value: 6,  x: 200, y: 100, isPrime: false, parentId: 0 },
-    { id: 3, value: 2,  x: 150, y: 172, isPrime: true,  parentId: 2 },
-    { id: 4, value: 3,  x: 250, y: 172, isPrime: true,  parentId: 2 },
-  ],
-  edges: [
-    { from: 0, to: 1 },
-    { from: 0, to: 2 },
-    { from: 2, to: 3 },
-    { from: 2, to: 4 },
-  ],
-};
+const tree12Nodes: Node[] = [
+  { id: 0, value: 12, x: 130, y: 28, isPrime: false },
+  { id: 1, value: 2,  x: 60,  y: 100, isPrime: true },
+  { id: 2, value: 6,  x: 200, y: 100, isPrime: false, parentId: 0 },
+  { id: 3, value: 2,  x: 150, y: 172, isPrime: true,  parentId: 2 },
+  { id: 4, value: 3,  x: 250, y: 172, isPrime: true,  parentId: 2 },
+];
+const tree12Edges = [
+  { from: 0, to: 1 },
+  { from: 0, to: 2 },
+  { from: 2, to: 3 },
+  { from: 2, to: 4 },
+];
 
-const tree18: TreeConfig = {
-  label: "Pohon Faktor 18",
-  result: "18 = 2 × 3²",
-  color: "#a78bfa",
-  glowColor: "rgba(167,139,250,0.4)",
-  nodes: [
-    { id: 0, value: 18, x: 130, y: 28, isPrime: false },
-    { id: 1, value: 2,  x: 60,  y: 100, isPrime: true },
-    { id: 2, value: 9,  x: 200, y: 100, isPrime: false, parentId: 0 },
-    { id: 3, value: 3,  x: 150, y: 172, isPrime: true,  parentId: 2 },
-    { id: 4, value: 3,  x: 250, y: 172, isPrime: true,  parentId: 2 },
-  ],
-  edges: [
-    { from: 0, to: 1 },
-    { from: 0, to: 2 },
-    { from: 2, to: 3 },
-    { from: 2, to: 4 },
-  ],
-};
+const tree18Nodes: Node[] = [
+  { id: 0, value: 18, x: 130, y: 28, isPrime: false },
+  { id: 1, value: 2,  x: 60,  y: 100, isPrime: true },
+  { id: 2, value: 9,  x: 200, y: 100, isPrime: false, parentId: 0 },
+  { id: 3, value: 3,  x: 150, y: 172, isPrime: true,  parentId: 2 },
+  { id: 4, value: 3,  x: 250, y: 172, isPrime: true,  parentId: 2 },
+];
+const tree18Edges = [
+  { from: 0, to: 1 },
+  { from: 0, to: 2 },
+  { from: 2, to: 3 },
+  { from: 2, to: 4 },
+];
 
 const REVEAL_STEPS = [
   [0],
@@ -64,7 +53,7 @@ const REVEAL_STEPS = [
   [0, 1, 2, 3, 4],
 ];
 
-function FactorTree({ tree, step }: { tree: TreeConfig; step: number }) {
+function FactorTree({ tree, step, primeLabel }: { tree: TreeConfig; step: number; primeLabel: string }) {
   const visibleIds = new Set(REVEAL_STEPS[Math.min(step, REVEAL_STEPS.length - 1)]);
 
   const getNode = (id: number) => tree.nodes.find((n) => n.id === id)!;
@@ -139,7 +128,7 @@ function FactorTree({ tree, step }: { tree: TreeConfig; step: number }) {
                     fontSize="8"
                     opacity="0.9"
                   >
-                    ★ Prima
+                    {primeLabel}
                   </text>
                 </>
               ) : (
@@ -188,6 +177,75 @@ function FactorTree({ tree, step }: { tree: TreeConfig; step: number }) {
 export default function FactorTreeAnimation() {
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const { language } = useLanguage();
+
+  const translations = {
+    id: {
+      title: "🌳 Animasi Pohon Faktor",
+      start: "▶ Mulai",
+      reset: "↺ Reset",
+      steps: ["Tampilkan akar", "Pecah menjadi dua", "Temukan faktor prima"],
+      tree12Label: "Pohon Faktor 12",
+      tree18Label: "Pohon Faktor 18",
+      primeLabel: "★ Prima",
+      legendPrime: "Bilangan kuning",
+      legendPrimeDesc: "= bilangan prima (tidak bisa dibagi lagi)",
+      legendLCM: "KPK",
+      legendLCMDesc: "= pangkat tertinggi →",
+      legendGCD: "FPB",
+      legendGCDDesc: "= pangkat terendah (faktor sama) →",
+    },
+    en: {
+      title: "🌳 Factor Tree Animation",
+      start: "▶ Start",
+      reset: "↺ Reset",
+      steps: ["Show root", "Split into two", "Find prime factors"],
+      tree12Label: "Factor Tree 12",
+      tree18Label: "Factor Tree 18",
+      primeLabel: "★ Prime",
+      legendPrime: "Yellow numbers",
+      legendPrimeDesc: "= prime numbers (cannot be divided further)",
+      legendLCM: "LCM",
+      legendLCMDesc: "= highest power →",
+      legendGCD: "GCD",
+      legendGCDDesc: "= lowest power (common factors) →",
+    },
+    ja: {
+      title: "🌳 因数木アニメーション",
+      start: "▶ 開始",
+      reset: "↺ リセット",
+      steps: ["根を表示", "2つに分割", "素因数を探す"],
+      tree12Label: "因数木 12",
+      tree18Label: "因数木 18",
+      primeLabel: "★ 素数",
+      legendPrime: "黄色の数",
+      legendPrimeDesc: "= 素数（これ以上割れない）",
+      legendLCM: "最小公倍数",
+      legendLCMDesc: "= 最高の指数 →",
+      legendGCD: "最大公約数",
+      legendGCDDesc: "= 最小の指数（共通因数）→",
+    },
+  };
+
+  const c = translations[language];
+
+  const tree12: TreeConfig = {
+    label: c.tree12Label,
+    result: "12 = 2² × 3",
+    color: "#38bdf8",
+    glowColor: "rgba(56,189,248,0.4)",
+    nodes: tree12Nodes,
+    edges: tree12Edges,
+  };
+
+  const tree18: TreeConfig = {
+    label: c.tree18Label,
+    result: "18 = 2 × 3²",
+    color: "#a78bfa",
+    glowColor: "rgba(167,139,250,0.4)",
+    nodes: tree18Nodes,
+    edges: tree18Edges,
+  };
 
   useEffect(() => {
     if (!playing) return;
@@ -212,7 +270,7 @@ export default function FactorTreeAnimation() {
   return (
     <div className="bg-slate-900/60 border border-blue-500/30 rounded-xl p-4 space-y-4">
       <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold text-blue-300">🌳 Animasi Pohon Faktor</p>
+        <p className="text-sm font-semibold text-blue-300">{c.title}</p>
         <div className="flex gap-2">
           <button
             onClick={handlePlay}
@@ -226,7 +284,7 @@ export default function FactorTreeAnimation() {
               cursor: playing ? "not-allowed" : "pointer",
             }}
           >
-            ▶ Mulai
+            {c.start}
           </button>
           <button
             onClick={handleReset}
@@ -238,13 +296,13 @@ export default function FactorTreeAnimation() {
               cursor: "pointer",
             }}
           >
-            ↺ Reset
+            {c.reset}
           </button>
         </div>
       </div>
 
       <div className="flex items-center gap-2 text-xs text-white/50">
-        {["Tampilkan akar", "Pecah menjadi dua", "Temukan faktor prima"].map((label, i) => (
+        {c.steps.map((label, i) => (
           <span key={i} className="flex items-center gap-1">
             <span
               className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0"
@@ -263,21 +321,21 @@ export default function FactorTreeAnimation() {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <FactorTree tree={tree12} step={step} />
-        <FactorTree tree={tree18} step={step} />
+        <FactorTree tree={tree12} step={step} primeLabel={c.primeLabel} />
+        <FactorTree tree={tree18} step={step} primeLabel={c.primeLabel} />
       </div>
 
       {step >= 2 && (
         <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10 rounded-lg p-3 text-xs text-white/70 space-y-1 animate-fade-in">
           <p>
-            <span className="text-yellow-400 font-semibold">★ Bilangan kuning</span> = bilangan prima (tidak bisa dibagi lagi)
+            <span className="text-yellow-400 font-semibold">★ {c.legendPrime}</span> {c.legendPrimeDesc}
           </p>
           <p>
-            <span className="text-sky-400 font-semibold">KPK</span> = pangkat tertinggi →{" "}
+            <span className="text-sky-400 font-semibold">{c.legendLCM}</span> {c.legendLCMDesc}{" "}
             <span className="text-sky-300 font-bold">2² × 3² = 36</span>
           </p>
           <p>
-            <span className="text-orange-400 font-semibold">FPB</span> = pangkat terendah (faktor sama) →{" "}
+            <span className="text-orange-400 font-semibold">{c.legendGCD}</span> {c.legendGCDDesc}{" "}
             <span className="text-orange-300 font-bold">2¹ × 3¹ = 6</span>
           </p>
         </div>

@@ -3,6 +3,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const COLOR_PALETTE = [
   { gradient: "from-blue-900/40 to-indigo-900/30", border: "border-blue-500/30", iconBg: "bg-blue-500/20", iconColor: "text-blue-300", leftBar: "from-blue-400 to-indigo-500" },
@@ -33,8 +34,18 @@ interface MateriTopicPageProps {
   contextLabel?: string;
 }
 
-const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel, contextLabel = "Buku Animasi Matematika" }: MateriTopicPageProps) => {
+const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel, contextLabel }: MateriTopicPageProps) => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+
+  const uiText = {
+    id: { subTopics: "Sub Topik", comingSoon: "Segera hadir", contextDefault: "Buku Animasi Matematika" },
+    en: { subTopics: "Sub Topics", comingSoon: "Coming soon", contextDefault: "Math Animation Book" },
+    ja: { subTopics: "サブトピック", comingSoon: "近日公開", contextDefault: "数学アニメーションブック" },
+  };
+
+  const ui = uiText[language];
+  const resolvedContextLabel = contextLabel ?? ui.contextDefault;
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -48,10 +59,10 @@ const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel, 
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan text-center mb-1" style={{ textShadow: '0 0 24px rgba(96,165,250,0.7)' }}>
             {title}
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-1">{kelas} · {contextLabel}</p>
+          <p className="text-white/50 text-xs text-center font-body mb-1">{kelas} · {resolvedContextLabel}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2 mt-2">
             <BookOpen className="w-4 h-4 text-primary" />
-            <span className="text-white/70 text-xs font-body">{subtopics.length} Sub Topik</span>
+            <span className="text-white/70 text-xs font-body">{subtopics.length} {ui.subTopics}</span>
           </div>
         </div>
 
@@ -76,7 +87,7 @@ const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel, 
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="font-display text-sm font-bold text-white block leading-snug">{subtopic.label}</span>
-                    {isComingSoon && <span className="text-white/40 text-xs font-body mt-0.5 block">Segera hadir</span>}
+                    {isComingSoon && <span className="text-white/40 text-xs font-body mt-0.5 block">{ui.comingSoon}</span>}
                   </div>
                   {!isComingSoon && (
                     <ChevronRight className={`w-5 h-5 ${c.iconColor} group-hover:translate-x-1 transition-transform shrink-0`} />
