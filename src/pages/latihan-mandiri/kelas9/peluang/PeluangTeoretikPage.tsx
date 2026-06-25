@@ -148,18 +148,20 @@ const questions: MCQ[] = [
           <rect x="0" y="0" width="320" height="210" rx="10" fill="rgba(109,40,217,0.08)" stroke="rgba(139,92,246,0.25)" strokeWidth="1" />
           {/* Title */}
           <text x="160" y="18" textAnchor="middle" fontSize="9" fontWeight="bold" fill="rgba(196,181,253,0.9)" fontFamily="sans-serif">Banyaknya Permen per Warna</text>
-          {/* Grid lines */}
-          {[0,2,4,6,8,10].map((v, i) => {
-            const y = 165 - i * 14;
+          {/* Grid lines — only at actual bar values: 6, 7, 8, 9 */}
+          {[6, 7, 8, 9].map((v) => {
+            const y = 165 - v * 14;
             return (
               <g key={v}>
-                <line x1="45" y1={y} x2="300" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
-                <text x="40" y={y + 3.5} textAnchor="end" fontSize="8" fill="rgba(255,255,255,0.4)" fontFamily="sans-serif">{v}</text>
+                <line x1="45" y1={y} x2="300" y2={y} stroke="rgba(255,255,255,0.12)" strokeWidth="1" strokeDasharray="3 3" />
+                <text x="40" y={y + 3.5} textAnchor="end" fontSize="8" fill="rgba(255,255,255,0.55)" fontFamily="sans-serif">{v}</text>
               </g>
             );
           })}
+          {/* Baseline 0 */}
+          <text x="40" y="168.5" textAnchor="end" fontSize="8" fill="rgba(255,255,255,0.55)" fontFamily="sans-serif">0</text>
           {/* Y-axis */}
-          <line x1="45" y1="25" x2="45" y2="165" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+          <line x1="45" y1="39" x2="45" y2="165" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
           {/* X-axis */}
           <line x1="45" y1="165" x2="300" y2="165" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
 
