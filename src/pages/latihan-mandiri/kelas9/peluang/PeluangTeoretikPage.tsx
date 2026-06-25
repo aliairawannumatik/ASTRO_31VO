@@ -108,6 +108,47 @@ const questions: MCQ[] = [
     options: ["\\frac{2}{5}", "\\frac{12}{25}", "\\frac{3}{5}", "\\frac{13}{25}"],
     answer: 2,
   },
+  {
+    n: 13, title: "Peluang – Dua Dadu Berjumlah 9",
+    content: "Dua buah dadu dilempar bersama-sama. Pasangan yang berjumlah 9 adalah (3,6), (4,5), (5,4), (6,3) sehingga ada 4 titik sampel dari 36. Peluang munculnya dadu berjumlah 9 adalah ...",
+    options: ["\\frac{1}{9}", "\\frac{3}{4}", "\\frac{1}{4}", "\\frac{1}{3}"],
+    answer: 0,
+  },
+  {
+    n: 14, title: "Peluang – Huruf A dari MATEMATIKA",
+    content: "Jika dipilih satu huruf dari kata M A T E M A T I K A (10 huruf), huruf A muncul sebanyak 3 kali. Maka peluang yang terpilih huruf A adalah ...",
+    options: ["\\frac{1}{6}", "\\frac{1}{5}", "\\frac{1}{4}", "\\frac{3}{10}"],
+    answer: 3,
+  },
+  {
+    n: 15, title: "Peluang – Seleksi Pegawai (Tes Akademik & Fisik)",
+    content: "Pada seleksi pegawai, 25 orang lulus tes akademik, 20 orang lulus tes fisik, dan 15 orang lulus keduanya. Total peserta = 25 + 20 − 15 = 30. Hanya lulus tes fisik = 20 − 15 = 5. Peluang terpanggil peserta yang hanya lulus tes fisik adalah ...",
+    options: ["\\frac{5}{6}", "\\frac{2}{3}", "\\frac{1}{2}", "\\frac{1}{6}"],
+    answer: 3,
+  },
+  {
+    n: 16, title: "Peluang – Tiga Koin, Dua Angka Satu Gambar",
+    content: "Tiga mata uang dilempar bersama-sama (ruang sampel: AAA, AAG, AGA, GAA, AGG, GAG, GGA, GGG). Titik sampel dengan tepat dua Angka dan satu Gambar: {AAG, AGA, GAA} = 3 titik. Peluang munculnya dua angka dan satu gambar adalah ...",
+    options: ["\\frac{3}{4}", "\\frac{2}{4}", "\\frac{3}{8}", "\\frac{2}{8}"],
+    answer: 2,
+  },
+  {
+    n: 17, title: "Peluang – Tiga Koin, Minimal 2 Angka",
+    content: "Dalam percobaan melempar 3 uang logam secara bersamaan, ruang sampel terdiri dari 8 titik. Kejadian minimal 2 angka: {AAA, AAG, AGA, GAA} = 4 titik. Peluang muncul minimal 2 angka adalah ...",
+    options: ["0{,}375", "0{,}500", "0{,}667", "0{,}875"],
+    answer: 1,
+  },
+  {
+    n: 18, title: "Peluang – Permen Warna Merah (Grafik)",
+    content: "Roni mengambil 1 permen secara acak dari kantong. Banyaknya permen tiap warna ditunjukkan pada grafik berikut. Total permen = 30 buah, permen merah = 6 buah. Berapa peluang Roni mengambil permen warna merah?",
+    diagram: (
+      <div className="my-2">
+        <img src="/grafik-permen.png" alt="Grafik permen" className="max-w-full rounded-lg border border-violet-500/20 mx-auto" style={{ maxHeight: 200 }} />
+      </div>
+    ),
+    options: ["10\\%", "20\\%", "25\\%", "50\\%"],
+    answer: 1,
+  },
 ];
 
 const OPTS = ["A", "B", "C", "D"];
