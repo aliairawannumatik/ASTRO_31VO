@@ -190,8 +190,6 @@ const questions: MCQ[] = [
           {/* Y-axis label */}
           <text x="12" y="100" textAnchor="middle" fontSize="8" fill="rgba(255,255,255,0.4)" fontFamily="sans-serif" transform="rotate(-90,12,100)">Jumlah</text>
 
-          {/* Total label */}
-          <text x="160" y="198" textAnchor="middle" fontSize="8" fill="rgba(196,181,253,0.6)" fontFamily="sans-serif">Total = 6 + 9 + 8 + 7 = 30 permen</text>
         </svg>
       </div>
     ),
