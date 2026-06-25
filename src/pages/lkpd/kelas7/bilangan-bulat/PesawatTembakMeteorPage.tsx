@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import { playPopSound } from "@/hooks/useAudio";
@@ -90,6 +91,25 @@ const PesawatTembakMeteorPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isLight = theme === "light";
+  const { language } = useLanguage();
+
+  const tRef = useRef({
+    score: "SKOR", best: "REKOR",
+    correct: "🎯 TEPAT! Meteor hancur!",
+    wrongPre: "❌ Salah! Jawaban: ",
+    miss: "💥 Meteor lolos! Nyawa berkurang!",
+    wrongPop: "−5 SALAH!",
+  });
+  useEffect(() => {
+    if (language === "en") {
+      tRef.current = { score: "SCORE", best: "BEST", correct: "🎯 HIT! Meteor destroyed!", wrongPre: "❌ Wrong! Answer: ", miss: "💥 Meteor escaped! Lost a life!", wrongPop: "−5 WRONG!" };
+    } else if (language === "ja") {
+      tRef.current = { score: "スコア", best: "記録", correct: "🎯 命中！流星撃破！", wrongPre: "❌ 不正解！答え: ", miss: "💥 流星逃げた！残機減少！", wrongPop: "−5 誤！" };
+    } else {
+      tRef.current = { score: "SKOR", best: "REKOR", correct: "🎯 TEPAT! Meteor hancur!", wrongPre: "❌ Salah! Jawaban: ", miss: "💥 Meteor lolos! Nyawa berkurang!", wrongPop: "−5 SALAH!" };
+    }
+  }, [language]);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef(0);
   const lastRafRef = useRef(0);
@@ -435,15 +455,15 @@ const PesawatTembakMeteorPage = () => {
               setScore(scoreRef.current);
               spawnParticles(a.x, a.y, "#FFD700", 18);
               scorePopRef.current.push({ x: a.x, y: a.y, txt: `+${pts}`, alpha: 1, vy: -80, good: true });
-              showFeedback("🎯 TEPAT! Meteor hancur!", true);
+              showFeedback(tRef.current.correct, true);
               newQuestion();
               asteroidsRef.current.forEach(other => { if (!other.hit && !other.correct) other.hit = true; });
             } else {
               scoreRef.current = Math.max(0, scoreRef.current - 5);
               setScore(scoreRef.current);
               spawnParticles(a.x, a.y, "#FF6644", 10);
-              scorePopRef.current.push({ x: a.x, y: a.y, txt: "−5 SALAH!", alpha: 1, vy: -70, good: false });
-              showFeedback(`❌ Salah! Jawaban: ${qRef.current.ans}`, false);
+              scorePopRef.current.push({ x: a.x, y: a.y, txt: tRef.current.wrongPop, alpha: 1, vy: -70, good: false });
+              showFeedback(tRef.current.wrongPre + qRef.current.ans, false);
             }
           }
         });
@@ -459,7 +479,7 @@ const PesawatTembakMeteorPage = () => {
               livesRef.current = Math.max(0, livesRef.current - 1);
               setLives(livesRef.current);
               shakeDurRef.current = 0.45;
-              showFeedback("💥 Meteor lolos! Nyawa berkurang!", false);
+              showFeedback(tRef.current.miss, false);
               if (livesRef.current <= 0) {
                 phaseRef.current = "dead";
                 setPhase("dead");
@@ -564,10 +584,10 @@ const PesawatTembakMeteorPage = () => {
 
     ctx.fillStyle = "#00FFAA";
     ctx.font = "bold 15px monospace";
-    ctx.fillText(`SKOR: ${scoreRef.current}`, 10, CH - 34);
+    ctx.fillText(`${tRef.current.score}: ${scoreRef.current}`, 10, CH - 34);
     ctx.fillStyle = "rgba(255,255,255,0.35)";
     ctx.font = "11px monospace";
-    ctx.fillText(`REKOR: ${bestRef.current}`, 10, CH - 18);
+    ctx.fillText(`${tRef.current.best}: ${bestRef.current}`, 10, CH - 18);
 
     for (let i = 0; i < 3; i++) {
       ctx.globalAlpha = i < livesRef.current ? 1 : 0.2;
@@ -636,7 +656,7 @@ const PesawatTembakMeteorPage = () => {
             🏠
           </button>
           <h1 className="font-display text-lg sm:text-xl font-bold text-primary text-glow-cyan text-center flex-1">
-            🚀 PESAWAT TEMBAK METEOR
+            {language === "en" ? "🚀 METEOR SHOOTER" : language === "ja" ? "🚀 流星シューター" : "🚀 PESAWAT TEMBAK METEOR"}
           </h1>
           <button
             onClick={() => { playPopSound(); navigate(-1); }}
@@ -647,9 +667,9 @@ const PesawatTembakMeteorPage = () => {
           </button>
         </div>
         <div className="flex gap-4 mb-2 text-xs font-display">
-          <span className="text-cyan-400">SKOR: <span className="font-bold text-sm">{score}</span></span>
-          <span className="text-white/50">REKOR: <span className="text-yellow-400 font-bold">{best}</span></span>
-          <span className="text-pink-300">NYAWA: <span className="font-bold text-sm">{lives}</span></span>
+          <span className="text-cyan-400">{language === "en" ? "SCORE" : language === "ja" ? "スコア" : "SKOR"}: <span className="font-bold text-sm">{score}</span></span>
+          <span className="text-white/50">{language === "en" ? "BEST" : language === "ja" ? "記録" : "REKOR"}: <span className="text-yellow-400 font-bold">{best}</span></span>
+          <span className="text-pink-300">{language === "en" ? "LIVES" : language === "ja" ? "残機" : "NYAWA"}: <span className="font-bold text-sm">{lives}</span></span>
         </div>
 
         <div
@@ -678,22 +698,25 @@ const PesawatTembakMeteorPage = () => {
             <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/70">
               <div className="text-center px-5 max-w-xs">
                 <div className="text-5xl mb-2">☄️</div>
-                <h2 className="font-display text-xl font-bold text-cyan-400 mb-2">PESAWAT TEMBAK METEOR</h2>
+                <h2 className="font-display text-xl font-bold text-cyan-400 mb-2">
+                  {language === "en" ? "METEOR SHOOTER" : language === "ja" ? "流星シューター" : "PESAWAT TEMBAK METEOR"}
+                </h2>
                 <p className="text-white/65 text-xs mb-3 leading-relaxed">
-                  Hitung operasi <span className="text-yellow-400 font-bold">bilangan bulat</span> di atas layar!<br />
-                  Tembak meteor yang membawa <span className="text-yellow-400 font-bold">jawaban benar</span>!<br />
-                  Salah tembak: <span className="text-red-400">−5 poin</span> · Jawaban lolos: <span className="text-red-400">nyawa berkurang</span>
+                  {language === "en" ? <>Solve the <span className="text-yellow-400 font-bold">integer operation</span> above!<br />Shoot the meteor with the <span className="text-yellow-400 font-bold">correct answer</span>!<br />Wrong shot: <span className="text-red-400">−5 pts</span> · Miss: <span className="text-red-400">lose a life</span></> : language === "ja" ? <>画面の<span className="text-yellow-400 font-bold">整数計算</span>を解こう！<br /><span className="text-yellow-400 font-bold">正しい答え</span>の流星を撃て！<br />誤射: <span className="text-red-400">−5点</span> · 逃げたら: <span className="text-red-400">残機減少</span></> : <>Hitung operasi <span className="text-yellow-400 font-bold">bilangan bulat</span> di atas layar!<br />Tembak meteor yang membawa <span className="text-yellow-400 font-bold">jawaban benar</span>!<br />Salah tembak: <span className="text-red-400">−5 poin</span> · Jawaban lolos: <span className="text-red-400">nyawa berkurang</span></>}
                 </p>
                 <div className="flex justify-center gap-2 mb-3 text-[10px] flex-wrap">
-                  <span className="bg-yellow-500/20 border border-yellow-500/40 rounded-lg px-2 py-1">✨ Meteor emas = jawaban benar</span>
-                  <span className="bg-slate-500/20 border border-slate-400/30 rounded-lg px-2 py-1">🪨 Abu-abu = salah</span>
+                  <span className="bg-yellow-500/20 border border-yellow-500/40 rounded-lg px-2 py-1">
+                    {language === "en" ? "✨ Gold meteor = correct" : language === "ja" ? "✨ 金の流星 = 正解" : "✨ Meteor emas = jawaban benar"}
+                  </span>
+                  <span className="bg-slate-500/20 border border-slate-400/30 rounded-lg px-2 py-1">
+                    {language === "en" ? "🪨 Gray = wrong" : language === "ja" ? "🪨 灰色 = 不正解" : "🪨 Abu-abu = salah"}
+                  </span>
                 </div>
                 <p className="text-white/40 text-[10px] mb-4">
-                  Keyboard: ← → gerak · SPASI tembak<br />
-                  HP: sentuh & geser + tombol TEMBAK
+                  {language === "en" ? <>Keyboard: ← → move · SPACE shoot<br />Touch: drag + FIRE button</> : language === "ja" ? <>キーボード: ← → 移動 · スペース 発射<br />タッチ: スワイプ + 発射ボタン</> : <>Keyboard: ← → gerak · SPASI tembak<br />HP: sentuh &amp; geser + tombol TEMBAK</>}
                 </p>
                 <button onClick={startGame} className="bg-cyan-500 text-black font-bold px-10 py-3 rounded-xl hover:opacity-90 transition text-lg cursor-pointer shadow-lg">
-                  🚀 MULAI
+                  {language === "en" ? "🚀 START" : language === "ja" ? "🚀 スタート" : "🚀 MULAI"}
                 </button>
               </div>
             </div>
@@ -704,10 +727,10 @@ const PesawatTembakMeteorPage = () => {
               <div className="text-center px-5">
                 <div className="text-4xl mb-2">💥</div>
                 <h2 className="font-display text-2xl font-bold text-red-400 mb-1">GAME OVER</h2>
-                <p className="text-white mb-1">Skor: <span className="text-yellow-400 font-bold text-2xl">{score}</span></p>
-                <p className="text-white/50 text-sm mb-5">Rekor: {best}</p>
+                <p className="text-white mb-1">{language === "en" ? "Score" : language === "ja" ? "スコア" : "Skor"}: <span className="text-yellow-400 font-bold text-2xl">{score}</span></p>
+                <p className="text-white/50 text-sm mb-5">{language === "en" ? "Best" : language === "ja" ? "記録" : "Rekor"}: {best}</p>
                 <button onClick={startGame} className="bg-cyan-500 text-black font-bold px-8 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-lg">
-                  🚀 Main Lagi
+                  {language === "en" ? "🚀 Play Again" : language === "ja" ? "🚀 もう一度" : "🚀 Main Lagi"}
                 </button>
               </div>
             </div>
@@ -726,7 +749,7 @@ const PesawatTembakMeteorPage = () => {
             onPointerUp={() => { autoShootRef.current = false; }}
             onPointerLeave={() => { autoShootRef.current = false; }}
             className="bg-cyan-500/20 border-2 border-cyan-400 text-cyan-400 font-bold px-6 py-4 rounded-xl hover:bg-cyan-500/40 transition cursor-pointer active:scale-95 select-none text-sm"
-          >🔫 TEMBAK</button>
+          >{language === "en" ? "🔫 FIRE" : language === "ja" ? "🔫 発射" : "🔫 TEMBAK"}</button>
           <button
             onPointerDown={() => { keysRef.current["ArrowRight"] = true; }}
             onPointerUp={() => { keysRef.current["ArrowRight"] = false; }}
@@ -735,7 +758,7 @@ const PesawatTembakMeteorPage = () => {
           >▶</button>
         </div>
         <p className="mt-2 text-white/35 text-xs font-body text-center">
-          Keyboard: ← → gerak · SPASI tembak &nbsp;·&nbsp; HP: sentuh & geser layar
+          {language === "en" ? "Keyboard: ← → move · SPACE shoot  ·  Touch: drag & swipe" : language === "ja" ? "キーボード: ← → 移動 · スペース 発射  ·  タッチ: スワイプ" : "Keyboard: ← → gerak · SPASI tembak \u00a0·\u00a0 HP: sentuh & geser layar"}
         </p>
       </div>
     </div>

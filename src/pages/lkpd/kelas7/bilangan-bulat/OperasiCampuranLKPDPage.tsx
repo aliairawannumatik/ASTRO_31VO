@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /* ══════════════════════════════════════════════════════════
    TYPES
@@ -265,6 +266,8 @@ function EqLineRow({ line, lineState, onBoxChange, onCheck, locked }: {
   onCheck: () => void;
   locked: boolean;
 }) {
+  const { language } = useLanguage();
+  const checkLabel = language === "en" ? "Check ✓" : language === "ja" ? "確認 ✓" : "Cek ✓";
   const isDone   = lineState.status === "correct";
   const isWrong  = lineState.status === "wrong";
   const noBoxes  = line.isHeader || line.boxes.length === 0;
@@ -309,7 +312,7 @@ function EqLineRow({ line, lineState, onBoxChange, onCheck, locked }: {
                 className="ml-2 inline-flex items-center gap-1 px-3 py-0.5 rounded-lg border text-xs font-bold transition-all cursor-pointer
                   bg-white/10 border-white/20 text-white/80 hover:bg-white/20 hover:text-white
                   disabled:opacity-30 disabled:cursor-not-allowed">
-                Cek ✓
+                {checkLabel}
               </button>
             )}
 
@@ -337,6 +340,7 @@ function ChoiceLineRow({ line, lineState, onSelect, onCheck, locked }: {
   onCheck: () => void;
   locked: boolean;
 }) {
+  const { language } = useLanguage();
   const isDone  = lineState.status === "correct";
   const isWrong = lineState.status === "wrong";
   const sel     = lineState.choiceSelected;
@@ -371,11 +375,11 @@ function ChoiceLineRow({ line, lineState, onSelect, onCheck, locked }: {
         {sel && !isDone && (
           <button onClick={() => { playPopSound(); onCheck(); }}
             className="mt-3 w-full py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm font-bold hover:bg-white/15 transition-all cursor-pointer font-body">
-            Cek Jawaban ✓
+            {language === "en" ? "Check Answer ✓" : language === "ja" ? "答えを確認 ✓" : "Cek Jawaban ✓"}
           </button>
         )}
-        {isWrong && <p className="mt-2 text-rose-400 text-xs">❌ Kurang tepat. {line.hint && <span className="text-white/50">💡 {line.hint}</span>}</p>}
-        {isDone  && <p className="mt-2 text-emerald-400 text-xs font-bold">✅ Benar! Jawaban C adalah yang tepat.</p>}
+        {isWrong && <p className="mt-2 text-rose-400 text-xs">❌ {language === "en" ? "Not quite right." : language === "ja" ? "もう少し。" : "Kurang tepat."} {line.hint && <span className="text-white/50">💡 {line.hint}</span>}</p>}
+        {isDone  && <p className="mt-2 text-emerald-400 text-xs font-bold">✅ {language === "en" ? "Correct!" : language === "ja" ? "正解！" : "Benar!"}</p>}
       </div>
     </div>
   );
@@ -393,6 +397,7 @@ function ProblemCard({ prob, lineStates, onBoxChange, onCheck, onChoiceSelect, o
   onChoiceSelect: (li: number, key: string) => void;
   onChoiceCheck: (li: number) => void;
 }) {
+  const { language } = useLanguage();
   const [showSol, setShowSol] = useState(false);
   const allDone = lineStates.every(s => s.status === "correct");
   const doneCount = lineStates.filter(s => s.status === "correct").length;
@@ -416,7 +421,7 @@ function ProblemCard({ prob, lineStates, onBoxChange, onCheck, onChoiceSelect, o
           </div>
           <div>
             <div className="flex flex-wrap gap-2 mb-1">
-              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${prob.badge}`}>{prob.emoji} Soal {prob.n}</span>
+              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${prob.badge}`}>{prob.emoji} {language === "en" ? "Problem" : language === "ja" ? "問題" : "Soal"} {prob.n}</span>
               <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${prob.badge}`}>{prob.title}</span>
             </div>
             <p className="text-white/90 text-sm font-body leading-relaxed whitespace-pre-line">{prob.context}</p>
@@ -427,7 +432,7 @@ function ProblemCard({ prob, lineStates, onBoxChange, onCheck, onChoiceSelect, o
         <div className="flex items-center gap-2 mb-3">
           <div className="h-px flex-1 bg-white/10" />
           <span className="text-white/35 text-[10px] font-bold uppercase tracking-widest">
-            Langkah Penyelesaian ({doneCount}/{lineStates.length})
+            {language === "en" ? "Solution Steps" : language === "ja" ? "解法ステップ" : "Langkah Penyelesaian"} ({doneCount}/{lineStates.length})
           </span>
           <div className="h-px flex-1 bg-white/10" />
         </div>
@@ -461,7 +466,7 @@ function ProblemCard({ prob, lineStates, onBoxChange, onCheck, onChoiceSelect, o
           <div className="mt-4">
             <button onClick={() => { playPopSound(); setShowSol(s => !s); }}
               className="w-full py-2 rounded-xl border text-sm font-bold transition-all cursor-pointer font-body bg-white/8 border-white/15 text-white/60 hover:bg-white/12 hover:text-white/80">
-              {showSol ? "▲ Tutup Pembahasan" : "▼ Lihat Pembahasan Lengkap 📖"}
+              {showSol ? (language === "en" ? "▲ Close Solution" : language === "ja" ? "▲ 閉じる" : "▲ Tutup Pembahasan") : (language === "en" ? "▼ Full Solution 📖" : language === "ja" ? "▼ 解説を見る 📖" : "▼ Lihat Pembahasan Lengkap 📖")}
             </button>
             {showSol && (
               <div className="mt-2 rounded-xl border border-white/10 bg-black/20 p-4">
@@ -489,6 +494,8 @@ function ProblemCard({ prob, lineStates, onBoxChange, onCheck, onChoiceSelect, o
 
 const OperasiCampuranLKPDPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const s = (id: string, en: string, ja: string) => language === "en" ? en : language === "ja" ? ja : id;
 
   const [allLineStates, setAllLineStates] = useState<LineState[][]>(
     problems.map(p => p.lines.map(initLineState))
@@ -553,23 +560,31 @@ const OperasiCampuranLKPDPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-yellow-300 mb-1"
             style={{ textShadow: "0 0 24px rgba(234,179,8,0.7)" }}>
-            PENERAPAN OPERASI HITUNG BILANGAN BULAT
+            {s("PENERAPAN OPERASI HITUNG BILANGAN BULAT", "INTEGER OPERATIONS — APPLIED PROBLEMS", "整数計算の応用問題")}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · Bilangan Bulat · LKPD Interaktif</p>
+          <p className="text-white/50 text-xs font-body">{s("Kelas 7 · Bilangan Bulat · LKPD Interaktif", "Grade 7 · Integers · Interactive LKPD", "7年生 · 整数 · インタラクティブLKPD")}</p>
           <p className="mt-2 text-white/60 text-sm font-body max-w-xl">
-            Isi kotak isian di dalam setiap baris langkah demi langkah — soalnya tetap utuh, kamu hanya mengisi nilai sub-operasinya!
+            {s("Isi kotak isian di dalam setiap baris langkah demi langkah — soalnya tetap utuh, kamu hanya mengisi nilai sub-operasinya!", "Fill in the blanks step by step — the problem stays intact, you only fill in the sub-operation values!", "各行の空欄を順番に埋めよう — 問題はそのままで、計算の途中の値だけ入力します！")}
           </p>
         </div>
 
         {/* ── CARA MENGERJAKAN ── */}
         <div className="mb-5 bg-yellow-900/20 border border-yellow-500/25 rounded-xl p-4">
-          <p className="text-yellow-300 text-xs font-bold mb-3">📌 Cara Mengerjakan</p>
+          <p className="text-yellow-300 text-xs font-bold mb-3">{s("📌 Cara Mengerjakan", "📌 How to Work", "📌 解き方")}</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {[
+            {(language === "en" ? [
+              { icon: "👁️", step: "1. Read the problem", desc: "Read the problem and look at the first row — that's the full equation." },
+              { icon: "✏️", step: "2. Fill in the boxes", desc: "Each row has fill-in boxes. Fill all boxes, then press Check ✓." },
+              { icon: "🔓", step: "3. Next row unlocks", desc: "If correct, the next row automatically unlocks. Keep going!" },
+            ] : language === "ja" ? [
+              { icon: "👁️", step: "1. 問題を読む", desc: "問題を読み、最初の行を確認しましょう — それが完全な等式です。" },
+              { icon: "✏️", step: "2. 空欄を埋める", desc: "各行には空欄があります。すべて埋めて確認 ✓ を押しましょう。" },
+              { icon: "🔓", step: "3. 次の行が開く", desc: "正解なら次の行が自動的に開きます。最後まで続けよう！" },
+            ] : [
               { icon: "👁️", step: "1. Baca soal", desc: "Baca soal dan perhatikan baris pertama — itu persamaan lengkapnya." },
               { icon: "✏️", step: "2. Isi kotak dalam baris", desc: "Setiap baris memiliki kotak isian. Isi semua kotak, lalu tekan Cek ✓." },
               { icon: "🔓", step: "3. Baris berikutnya terbuka", desc: "Jika benar, baris selanjutnya otomatis terbuka. Lanjut sampai selesai!" },
-            ].map(c => (
+            ]).map(c => (
               <div key={c.step} className="bg-white/5 rounded-lg p-3 flex gap-3 items-start">
                 <span className="text-xl">{c.icon}</span>
                 <div>
@@ -583,14 +598,24 @@ const OperasiCampuranLKPDPage = () => {
 
         {/* ── URUTAN OPERASI ── */}
         <div className="mb-5 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-yellow-300 text-xs font-bold mb-2">💡 Ingat Urutan Operasi</p>
+          <p className="text-yellow-300 text-xs font-bold mb-2">{s("💡 Ingat Urutan Operasi", "💡 Order of Operations", "💡 計算の順序")}</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
-            {[
+            {(language === "en" ? [
+              { n:"1", lbl:"( Brackets )",     cls:"text-cyan-400 border-cyan-500/30 bg-cyan-500/10" },
+              { n:"2", lbl:"× ÷ Multiply/Divide", cls:"text-rose-400 border-rose-500/30 bg-rose-500/10" },
+              { n:"3", lbl:"+ − Add/Subtract", cls:"text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
+              { n:"→", lbl:"Left to Right",    cls:"text-amber-400 border-amber-500/30 bg-amber-500/10" },
+            ] : language === "ja" ? [
+              { n:"1", lbl:"( カッコ )",       cls:"text-cyan-400 border-cyan-500/30 bg-cyan-500/10" },
+              { n:"2", lbl:"× ÷ かけ算/わり算",cls:"text-rose-400 border-rose-500/30 bg-rose-500/10" },
+              { n:"3", lbl:"+ − たし算/ひき算",cls:"text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
+              { n:"→", lbl:"左から右へ",        cls:"text-amber-400 border-amber-500/30 bg-amber-500/10" },
+            ] : [
               { n:"1", lbl:"( Kurung )",       cls:"text-cyan-400 border-cyan-500/30 bg-cyan-500/10" },
               { n:"2", lbl:"× ÷ Kali/Bagi",   cls:"text-rose-400 border-rose-500/30 bg-rose-500/10" },
               { n:"3", lbl:"+ − Tambah/Kurang",cls:"text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
               { n:"→", lbl:"Kiri ke Kanan",    cls:"text-amber-400 border-amber-500/30 bg-amber-500/10" },
-            ].map(r => (
+            ]).map(r => (
               <div key={r.n} className={`border rounded-lg py-2 px-1 text-xs font-bold ${r.cls}`}>
                 <div className="text-xl font-black">{r.n}</div>
                 <div className="mt-0.5">{r.lbl}</div>
@@ -602,9 +627,9 @@ const OperasiCampuranLKPDPage = () => {
         {/* ── PROGRESS ── */}
         <div className="mb-6 bg-white/5 border border-white/10 rounded-xl p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-white/60 text-xs font-bold">Progress</span>
+            <span className="text-white/60 text-xs font-bold">{s("Progress", "Progress", "進捗")}</span>
             <span className={`text-xs font-bold ${allDone ? "text-emerald-400" : "text-yellow-400"}`}>
-              {doneReal}/{totalReal} langkah ({pct}%)
+              {doneReal}/{totalReal} {s("langkah", "steps", "ステップ")} ({pct}%)
             </span>
           </div>
           <div className="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -613,7 +638,7 @@ const OperasiCampuranLKPDPage = () => {
           </div>
           {allDone && (
             <p className="mt-2 text-center text-emerald-400 text-sm font-bold animate-bounce">
-              🎉 Luar biasa! Semua soal berhasil kamu kerjakan! Sobat Numatik keren! 🌟
+              {s("🎉 Luar biasa! Semua soal berhasil kamu kerjakan! Sobat Numatik keren! 🌟", "🎉 Amazing! You've completed all problems! Great work! 🌟", "🎉 素晴らしい！全問題を解き終えました！ 🌟")}
             </p>
           )}
         </div>
@@ -636,7 +661,7 @@ const OperasiCampuranLKPDPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/lkpd/kelas-7/bilangan-bulat"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke LKPD Bilangan Bulat
+            {s("← Kembali ke LKPD Bilangan Bulat", "← Back to Integer LKPD", "← 整数LKPDに戻る")}
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import {
@@ -1081,27 +1082,62 @@ const summaryCards: SummaryCard[] = [
    PAGE COMPONENT
 ──────────────────────────────────────────────────────────────── */
 
-const PenjumlahanLKPDPage = () => (
-  <InteractiveLKPD
-    badgeText="LKPD Interaktif Matematika Kelas 7"
-    title="Penjumlahan Bilangan Bulat"
-    intro="LKPD ini melatih Sobat Numatik menjumlahkan bilangan bulat lewat isian, pilihan ganda, jodoh, urut, dan benar/salah. Baca materi di bawah sebelum mengerjakan soal!"
-    steps={[
-      { icon: "Compass", title: "Baca Materi", text: "Buka bagian '📖 Baca Materi Dulu' dan pelajari konsep serta contoh soalnya." },
-      { icon: "Lightbulb", title: "Temukan", text: "Selesaikan setiap soal untuk menemukan dan memahami aturan penjumlahan." },
-      { icon: "Target", title: "Terapkan", text: "Gunakan rumus dan garis bilangan pada soal latihan kontekstual." },
-    ]}
-    headerSlot={<MateriSection />}
-    situations={situations}
-    guidedIntro="Selesaikan beragam jenis soal berikut untuk menemukan aturan penjumlahan bilangan bulat."
-    guidedItems={guidedItems}
-    summaryCards={summaryCards}
-    practiceIntro="Terapkan aturan tanda dan strategi garis bilangan pada soal-soal di bawah ini."
-    practiceItems={practiceItems}
-    games={games}
-    prevPath="/lkpd/kelas-7/bilangan-bulat"
-    backLabel="Kembali ke LKPD Bilangan Bulat"
-  />
-);
+const PenjumlahanLKPDPage = () => {
+  const { language } = useLanguage();
+  const s = (id: string, en: string, ja: string) => language === "en" ? en : language === "ja" ? ja : id;
+
+  const translatedSummaryCards: SummaryCard[] = language === "en" ? [
+    { title: "Same Sign", text: "Add absolute values; keep the original sign.", tone: "cyan" },
+    { title: "Different Signs", text: "Subtract smaller absolute value from larger; take the sign of the larger.", tone: "yellow" },
+    { title: "Properties", text: "Commutative (a+b=b+a) & associative. Adding 0 returns the number itself.", tone: "emerald" },
+  ] : language === "ja" ? [
+    { title: "同符号", text: "絶対値を足す。元の符号をそのまま使う。", tone: "cyan" },
+    { title: "異符号", text: "大きい絶対値から小さい絶対値を引く。大きい方の符号に従う。", tone: "yellow" },
+    { title: "性質", text: "交換法則(a+b=b+a)・結合法則あり。0との加算 = 元の数。", tone: "emerald" },
+  ] : summaryCards;
+
+  return (
+    <InteractiveLKPD
+      badgeText={s("LKPD Interaktif Matematika Kelas 7", "Grade 7 Interactive Math LKPD", "7年生 インタラクティブ数学LKPD")}
+      title={s("Penjumlahan Bilangan Bulat", "Integer Addition", "整数の足し算")}
+      intro={s(
+        "LKPD ini melatih Sobat Numatik menjumlahkan bilangan bulat lewat isian, pilihan ganda, jodoh, urut, dan benar/salah. Baca materi di bawah sebelum mengerjakan soal!",
+        "This LKPD trains you to add integers through fill-in, multiple choice, matching, sorting, and true/false. Read the material below before working on the exercises!",
+        "このLKPDでは、整数の足し算を記述・選択・並べ替え・正誤問題などで練習します。問題を解く前に下の教材を読もう！"
+      )}
+      steps={language === "en" ? [
+        { icon: "Compass", title: "Read Material", text: "Open the '📖 Read Material First' section and study the concepts and examples." },
+        { icon: "Lightbulb", title: "Discover", text: "Complete each exercise to discover and understand the rules of addition." },
+        { icon: "Target", title: "Apply", text: "Use the formulas and number line in contextual practice problems." },
+      ] : language === "ja" ? [
+        { icon: "Compass", title: "教材を読む", text: "「📖 まず教材を読もう」セクションを開き、概念と例題を学びましょう。" },
+        { icon: "Lightbulb", title: "発見する", text: "各問題を解いて足し算のルールを発見・理解しましょう。" },
+        { icon: "Target", title: "応用する", text: "数式と数直線を実践的な練習問題に応用しましょう。" },
+      ] : [
+        { icon: "Compass", title: "Baca Materi", text: "Buka bagian '📖 Baca Materi Dulu' dan pelajari konsep serta contoh soalnya." },
+        { icon: "Lightbulb", title: "Temukan", text: "Selesaikan setiap soal untuk menemukan dan memahami aturan penjumlahan." },
+        { icon: "Target", title: "Terapkan", text: "Gunakan rumus dan garis bilangan pada soal latihan kontekstual." },
+      ]}
+      headerSlot={<MateriSection />}
+      situations={situations}
+      guidedIntro={s(
+        "Selesaikan beragam jenis soal berikut untuk menemukan aturan penjumlahan bilangan bulat.",
+        "Complete the following exercises to discover the rules of integer addition.",
+        "以下の問題を解いて整数の足し算のルールを発見しましょう。"
+      )}
+      guidedItems={guidedItems}
+      summaryCards={translatedSummaryCards}
+      practiceIntro={s(
+        "Terapkan aturan tanda dan strategi garis bilangan pada soal-soal di bawah ini.",
+        "Apply the sign rules and number line strategy to the problems below.",
+        "下の問題に符号ルールと数直線の戦略を応用しましょう。"
+      )}
+      practiceItems={practiceItems}
+      games={games}
+      prevPath="/lkpd/kelas-7/bilangan-bulat"
+      backLabel={s("Kembali ke LKPD Bilangan Bulat", "Back to Integer LKPD", "整数LKPDに戻る")}
+    />
+  );
+};
 
 export default PenjumlahanLKPDPage;

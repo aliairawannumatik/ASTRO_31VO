@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /* ══════════════════════════════════════════════════════════
    SHARED LINE TYPES  (same as OperasiCampuran page)
@@ -356,6 +357,8 @@ function EqLineRow({ line, lineState, onBoxChange, onCheck, locked }: {
   onCheck: () => void;
   locked: boolean;
 }) {
+  const { language } = useLanguage();
+  const checkLabel = language === "en" ? "Check ✓" : language === "ja" ? "確認 ✓" : "Cek ✓";
   const isDone   = lineState.status === "correct";
   const isWrong  = lineState.status === "wrong";
   const noBoxes  = line.isHeader || line.boxes.length === 0;
@@ -392,7 +395,7 @@ function EqLineRow({ line, lineState, onBoxChange, onCheck, locked }: {
                 className="ml-2 inline-flex items-center gap-1 px-3 py-0.5 rounded-lg border text-xs font-bold transition-all cursor-pointer
                   bg-white/10 border-white/20 text-white/80 hover:bg-white/20 hover:text-white
                   disabled:opacity-30 disabled:cursor-not-allowed">
-                Cek ✓
+                {checkLabel}
               </button>
             )}
             {isDone  && <span className="ml-2 text-emerald-400 text-xs font-bold">✅</span>}
@@ -414,6 +417,7 @@ function ChoiceLineRow({ line, lineState, onSelect, onCheck, locked }: {
   onCheck: () => void;
   locked: boolean;
 }) {
+  const { language } = useLanguage();
   const isDone  = lineState.status === "correct";
   const isWrong = lineState.status === "wrong";
   const sel     = lineState.choiceSelected;
@@ -447,11 +451,11 @@ function ChoiceLineRow({ line, lineState, onSelect, onCheck, locked }: {
         {sel && !isDone && (
           <button onClick={() => { playPopSound(); onCheck(); }}
             className="mt-3 w-full py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm font-bold hover:bg-white/15 transition-all cursor-pointer font-body">
-            Cek Jawaban ✓
+            {language === "en" ? "Check Answer ✓" : language === "ja" ? "答えを確認 ✓" : "Cek Jawaban ✓"}
           </button>
         )}
-        {isWrong && <p className="mt-2 text-rose-400 text-xs">❌ Kurang tepat. {line.hint && <span className="text-white/45">💡 {line.hint}</span>}</p>}
-        {isDone  && <p className="mt-2 text-emerald-400 text-xs font-bold">✅ Benar!</p>}
+        {isWrong && <p className="mt-2 text-rose-400 text-xs">❌ {language === "en" ? "Not quite right." : language === "ja" ? "もう少し。" : "Kurang tepat."} {line.hint && <span className="text-white/45">💡 {line.hint}</span>}</p>}
+        {isDone  && <p className="mt-2 text-emerald-400 text-xs font-bold">✅ {language === "en" ? "Correct!" : language === "ja" ? "正解！" : "Benar!"}</p>}
       </div>
     </div>
   );
@@ -478,6 +482,7 @@ function PolyaStepCard({ step, stepIdx, lineStates, isLocked, isExpanded, onTogg
   onChoiceSelect: (li: number, key: string) => void;
   onChoiceCheck: (li: number) => void;
 }) {
+  const { language } = useLanguage();
   const col = POLYA_COLORS[stepIdx];
   const done = lineStates.filter(s => s.status === "correct" && (s.boxStates.length > 0 || s.choiceSelected !== undefined)).length;
   const total = lineStates.filter(s => s.boxStates.length > 0 || s.choiceSelected !== undefined).length;
@@ -495,7 +500,7 @@ function PolyaStepCard({ step, stepIdx, lineStates, isLocked, isExpanded, onTogg
         </div>
         <div className="flex-1 min-w-0">
           <p className={`text-sm font-bold ${allDone ? col.text : isLocked ? "text-white/35" : "text-white/90"}`}>
-            Langkah {stepIdx + 1}: {step.title}
+            {language === "en" ? `Step ${stepIdx + 1}: ${step.title}` : language === "ja" ? `ステップ ${stepIdx + 1}: ${step.title}` : `Langkah ${stepIdx + 1}: ${step.title}`}
           </p>
           <p className="text-white/40 text-xs font-body truncate">{step.description}</p>
         </div>
@@ -552,6 +557,7 @@ function KasusCard({ kasus, stepStates, onBoxChange, onCheck, onChoiceSelect, on
   onChoiceCheck: (si: number, li: number) => void;
   onToggleStep: (si: number) => void;
 }) {
+  const { language } = useLanguage();
   const allStepsDone = stepStates.every(ss => {
     const total = ss.lineStates.filter(s => s.boxStates.length > 0 || s.choiceSelected !== undefined).length;
     const done  = ss.lineStates.filter(s => s.status === "correct" && (s.boxStates.length > 0 || s.choiceSelected !== undefined)).length;
@@ -577,8 +583,8 @@ function KasusCard({ kasus, stepStates, onBoxChange, onCheck, onChoiceSelect, on
           </div>
           <div className="flex-1">
             <div className="flex flex-wrap gap-2 mb-1">
-              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${kasus.badge}`}>{kasus.emoji} Kasus {kasus.n}</span>
-              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${kasus.badge}`}>Konsep: {kasus.concept}</span>
+              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${kasus.badge}`}>{kasus.emoji} {language === "en" ? "Case" : language === "ja" ? "ケース" : "Kasus"} {kasus.n}</span>
+              <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${kasus.badge}`}>{language === "en" ? "Concept" : language === "ja" ? "概念" : "Konsep"}: {kasus.concept}</span>
             </div>
             <h3 className="text-white font-bold text-sm mb-1">{kasus.title}</h3>
             <p className="text-white/80 text-sm font-body leading-relaxed">{kasus.context}</p>
@@ -588,7 +594,7 @@ function KasusCard({ kasus, stepStates, onBoxChange, onCheck, onChoiceSelect, on
         {/* Polya Steps */}
         <div className="flex items-center gap-2 mb-3">
           <div className="h-px flex-1 bg-white/10" />
-          <span className="text-white/35 text-[10px] font-bold uppercase tracking-widest">Metode Polya — 4 Langkah</span>
+          <span className="text-white/35 text-[10px] font-bold uppercase tracking-widest">{language === "en" ? "Polya Method — 4 Steps" : language === "ja" ? "ポリア法 — 4ステップ" : "Metode Polya — 4 Langkah"}</span>
           <div className="h-px flex-1 bg-white/10" />
         </div>
 
@@ -619,7 +625,7 @@ function KasusCard({ kasus, stepStates, onBoxChange, onCheck, onChoiceSelect, on
         {allStepsDone && (
           <div className="mt-4 p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10">
             <p className="text-emerald-300 text-sm font-bold text-center">
-              🎯 Jawaban: {kasus.answer}
+              🎯 {language === "en" ? "Answer" : language === "ja" ? "答え" : "Jawaban"}: {kasus.answer}
             </p>
           </div>
         )}
@@ -634,6 +640,8 @@ function KasusCard({ kasus, stepStates, onBoxChange, onCheck, onChoiceSelect, on
 
 const KPKFPBLKPDPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const s = (id: string, en: string, ja: string) => language === "en" ? en : language === "ja" ? ja : id;
 
   const [allStates, setAllStates] = useState<StepState[][][]>(
     kasusList.map(k =>
@@ -725,24 +733,34 @@ const KPKFPBLKPDPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-yellow-300 mb-1"
             style={{ textShadow: "0 0 24px rgba(234,179,8,0.7)" }}>
-            KPK DAN FPB — MASALAH KONTEKSTUAL
+            {s("KPK DAN FPB — MASALAH KONTEKSTUAL", "LCM & GCF — CONTEXTUAL PROBLEMS", "最小公倍数・最大公約数 — 応用問題")}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · Bilangan Bulat · LKPD Interaktif</p>
+          <p className="text-white/50 text-xs font-body">{s("Kelas 7 · Bilangan Bulat · LKPD Interaktif", "Grade 7 · Integers · Interactive LKPD", "7年生 · 整数 · インタラクティブLKPD")}</p>
           <p className="mt-2 text-white/60 text-sm font-body max-w-xl">
-            Selesaikan setiap kasus menggunakan <strong className="text-yellow-300">Metode Polya</strong> — 4 langkah berpikir sistematis yang akan membantumu memecahkan masalah matematika!
+            {language === "en" ? <>Solve each case using the <strong className="text-yellow-300">Polya Method</strong> — 4 systematic thinking steps to help you solve math problems!</> : language === "ja" ? <>各ケースを<strong className="text-yellow-300">ポリア法</strong>で解こう — 数学の問題を解くための4つの系統的思考ステップ！</> : <>Selesaikan setiap kasus menggunakan <strong className="text-yellow-300">Metode Polya</strong> — 4 langkah berpikir sistematis yang akan membantumu memecahkan masalah matematika!</>}
           </p>
         </div>
 
         {/* POLYA INTRODUCTION */}
         <div className="mb-5 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-yellow-300 text-xs font-bold mb-3">🧠 Metode Polya — 4 Langkah Pemecahan Masalah</p>
+          <p className="text-yellow-300 text-xs font-bold mb-3">{s("🧠 Metode Polya — 4 Langkah Pemecahan Masalah", "🧠 Polya Method — 4 Problem-Solving Steps", "🧠 ポリア法 — 4つの問題解決ステップ")}</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {[
-              { n: "1", icon: "🔍", lbl: "Memahami Masalah", sub: "Apa yang diketahui & ditanyakan?",       cls: "border-sky-500/30 bg-sky-500/10 text-sky-300" },
-              { n: "2", icon: "🎯", lbl: "Merencanakan Strategi", sub: "Gunakan KPK atau FPB?",             cls: "border-amber-500/30 bg-amber-500/10 text-amber-300" },
-              { n: "3", icon: "⚙️", lbl: "Menjalankan Rencana", sub: "Hitung faktorisasi & jawaban",       cls: "border-violet-500/30 bg-violet-500/10 text-violet-300" },
-              { n: "4", icon: "✅", lbl: "Memeriksa Kembali", sub: "Periksa apakah jawaban masuk akal",    cls: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300" },
-            ].map(r => (
+            {(language === "en" ? [
+              { n: "1", icon: "🔍", lbl: "Understand", sub: "What is given & asked?", cls: "border-sky-500/30 bg-sky-500/10 text-sky-300" },
+              { n: "2", icon: "🎯", lbl: "Plan Strategy", sub: "Use LCM or GCF?", cls: "border-amber-500/30 bg-amber-500/10 text-amber-300" },
+              { n: "3", icon: "⚙️", lbl: "Execute Plan", sub: "Calculate factorisation & answer", cls: "border-violet-500/30 bg-violet-500/10 text-violet-300" },
+              { n: "4", icon: "✅", lbl: "Look Back", sub: "Check if the answer makes sense", cls: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300" },
+            ] : language === "ja" ? [
+              { n: "1", icon: "🔍", lbl: "問題理解", sub: "与えられた情報と問いは何？", cls: "border-sky-500/30 bg-sky-500/10 text-sky-300" },
+              { n: "2", icon: "🎯", lbl: "計画立案", sub: "LCM または GCF を使う？", cls: "border-amber-500/30 bg-amber-500/10 text-amber-300" },
+              { n: "3", icon: "⚙️", lbl: "計画実行", sub: "因数分解と答えを計算", cls: "border-violet-500/30 bg-violet-500/10 text-violet-300" },
+              { n: "4", icon: "✅", lbl: "振り返り", sub: "答えが正しいか確認", cls: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300" },
+            ] : [
+              { n: "1", icon: "🔍", lbl: "Memahami Masalah", sub: "Apa yang diketahui & ditanyakan?", cls: "border-sky-500/30 bg-sky-500/10 text-sky-300" },
+              { n: "2", icon: "🎯", lbl: "Merencanakan Strategi", sub: "Gunakan KPK atau FPB?", cls: "border-amber-500/30 bg-amber-500/10 text-amber-300" },
+              { n: "3", icon: "⚙️", lbl: "Menjalankan Rencana", sub: "Hitung faktorisasi & jawaban", cls: "border-violet-500/30 bg-violet-500/10 text-violet-300" },
+              { n: "4", icon: "✅", lbl: "Memeriksa Kembali", sub: "Periksa apakah jawaban masuk akal", cls: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300" },
+            ]).map(r => (
               <div key={r.n} className={`border rounded-lg p-2 text-center ${r.cls}`}>
                 <div className="text-xl mb-1">{r.icon}</div>
                 <div className="text-xs font-bold leading-tight">{r.lbl}</div>
@@ -755,21 +773,21 @@ const KPKFPBLKPDPage = () => {
         {/* KPK vs FPB TIPS */}
         <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="bg-sky-900/25 border border-sky-500/25 rounded-xl p-4">
-            <p className="text-sky-300 text-xs font-bold mb-2">⏱️ Kapan pakai KPK?</p>
-            <p className="text-white/70 text-xs font-body leading-relaxed">Gunakan KPK saat soal menggunakan kata kunci seperti <strong className="text-sky-300">"bersama-sama lagi"</strong>, <strong className="text-sky-300">"setiap … sekali"</strong>, atau <strong className="text-sky-300">"kapan bertemu kembali"</strong>.</p>
+            <p className="text-sky-300 text-xs font-bold mb-2">{s("⏱️ Kapan pakai KPK?", "⏱️ When to use LCM?", "⏱️ LCMをいつ使う？")}</p>
+            <p className="text-white/70 text-xs font-body leading-relaxed">{language === "en" ? <>Use LCM when the problem uses keywords like <strong className="text-sky-300">"together again"</strong>, <strong className="text-sky-300">"every … times"</strong>, or <strong className="text-sky-300">"when do they meet again"</strong>.</> : language === "ja" ? <>問題に<strong className="text-sky-300">「また一緒に」</strong>、<strong className="text-sky-300">「…ごとに」</strong>、<strong className="text-sky-300">「いつ再会するか」</strong>などのキーワードがある場合にLCMを使います。</> : <>Gunakan KPK saat soal menggunakan kata kunci seperti <strong className="text-sky-300">"bersama-sama lagi"</strong>, <strong className="text-sky-300">"setiap … sekali"</strong>, atau <strong className="text-sky-300">"kapan bertemu kembali"</strong>.</>}</p>
           </div>
           <div className="bg-rose-900/25 border border-rose-500/25 rounded-xl p-4">
-            <p className="text-rose-300 text-xs font-bold mb-2">📦 Kapan pakai FPB?</p>
-            <p className="text-white/70 text-xs font-body leading-relaxed">Gunakan FPB saat soal menggunakan kata kunci seperti <strong className="text-rose-300">"dibagi sama rata"</strong>, <strong className="text-rose-300">"sebanyak-banyaknya kelompok"</strong>, atau <strong className="text-rose-300">"ukuran terbesar"</strong>.</p>
+            <p className="text-rose-300 text-xs font-bold mb-2">{s("📦 Kapan pakai FPB?", "📦 When to use GCF?", "📦 GCFをいつ使う？")}</p>
+            <p className="text-white/70 text-xs font-body leading-relaxed">{language === "en" ? <>Use GCF when the problem uses keywords like <strong className="text-rose-300">"divided equally"</strong>, <strong className="text-rose-300">"maximum number of groups"</strong>, or <strong className="text-rose-300">"largest size"</strong>.</> : language === "ja" ? <>問題に<strong className="text-rose-300">「等分する」</strong>、<strong className="text-rose-300">「最大のグループ数」</strong>、<strong className="text-rose-300">「最大サイズ」</strong>などのキーワードがある場合にGCFを使います。</> : <>Gunakan FPB saat soal menggunakan kata kunci seperti <strong className="text-rose-300">"dibagi sama rata"</strong>, <strong className="text-rose-300">"sebanyak-banyaknya kelompok"</strong>, atau <strong className="text-rose-300">"ukuran terbesar"</strong>.</>}</p>
           </div>
         </div>
 
         {/* PROGRESS */}
         <div className="mb-6 bg-white/5 border border-white/10 rounded-xl p-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-white/60 text-xs font-bold">Progress</span>
+            <span className="text-white/60 text-xs font-bold">{s("Progress", "Progress", "進捗")}</span>
             <span className={`text-xs font-bold ${allDone ? "text-emerald-400" : "text-yellow-400"}`}>
-              {doneInteractive}/{totalInteractive} langkah ({pct}%)
+              {doneInteractive}/{totalInteractive} {s("langkah", "steps", "ステップ")} ({pct}%)
             </span>
           </div>
           <div className="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -778,7 +796,7 @@ const KPKFPBLKPDPage = () => {
           </div>
           {allDone && (
             <p className="mt-2 text-center text-emerald-400 text-sm font-bold animate-bounce">
-              🎉 Luar biasa! Semua kasus berhasil diselesaikan dengan Metode Polya! 🌟
+              {s("🎉 Luar biasa! Semua kasus berhasil diselesaikan dengan Metode Polya! 🌟", "🎉 Amazing! All cases solved using the Polya Method! 🌟", "🎉 素晴らしい！すべてのケースをポリア法で解き終えました！ 🌟")}
             </p>
           )}
         </div>
@@ -802,7 +820,7 @@ const KPKFPBLKPDPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/lkpd/kelas-7/bilangan-bulat"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke LKPD Bilangan Bulat
+            {s("← Kembali ke LKPD Bilangan Bulat", "← Back to Integer LKPD", "← 整数LKPDに戻る")}
           </button>
         </div>
       </div>
