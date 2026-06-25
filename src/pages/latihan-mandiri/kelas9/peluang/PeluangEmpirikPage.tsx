@@ -143,15 +143,15 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 12, title: "Soal UN – Mencari Frekuensi yang Hilang",
-    content: "Dari 100 kali pengambilan, warna Biru 30, Kuning 25, Putih 20 kali. Berapa kali warna Merah muncul?",
+    n: 12, title: "Soal UN – Frekuensi Relatif Warna Merah",
+    content: "Dari 100 kali pengambilan, warna Biru muncul 30 kali, Kuning 25 kali, Putih 20 kali, dan Merah sisanya. Tentukan frekuensi relatif muncul warna Merah adalah ...",
     diagram: (
       <FreqTable caption="Frekuensi warna dalam 100 kali pengambilan"
         headers={["Warna", "Merah", "Biru", "Kuning", "Putih", "Total"]}
         rows={[["Frekuensi", "?", 30, 25, 20, 100]]} />
     ),
-    options: ["20 \\text{ kali}", "25 \\text{ kali}", "30 \\text{ kali}", "35 \\text{ kali}"],
-    answer: 1,
+    options: ["\\frac{1}{4}", "\\frac{3}{10}", "\\frac{1}{5}", "\\frac{1}{2}"],
+    answer: 0,
   },
   {
     n: 13, title: "Soal TKA – Mencari Banyak Percobaan dari FR",
