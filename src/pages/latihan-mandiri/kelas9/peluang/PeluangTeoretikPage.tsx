@@ -135,7 +135,7 @@ const questions: MCQ[] = [
   {
     n: 17, title: "Peluang – Tiga Koin, Minimal 2 Angka",
     content: "Dalam percobaan melempar 3 uang logam secara bersamaan, ruang sampel terdiri dari 8 titik. Peluang muncul minimal 2 angka adalah ...",
-    options: ["0{,}375", "0{,}500", "0{,}667", "0{,}875"],
+    options: ["0,375", "0,500", "0,667", "0,875"],
     answer: 1,
   },
   {
