@@ -92,23 +92,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 6, title: "Membandingkan Frekuensi Relatif – Hukum Bilangan Besar",
-    content: "Frekuensi relatif siapa yang paling mendekati nilai peluang teoretik 0,5?",
-    diagram: (
-      <FreqTable caption="Perbandingan tiga percobaan melempar koin"
-        headers={["Percobaan", "Jumlah Lemparan", "Muncul Angka", "FR(Angka)"]}
-        rows={[["Andi", 10, 4, "0,40"], ["Budi", 100, 47, "0,47"], ["Citra", 1000, 503, "0,503"]]} />
-    ),
-    options: [
-      "\\text{Andi}",
-      "\\text{Budi}",
-      "\\text{Citra}",
-      "\\text{Ketiganya sama}",
-    ],
-    answer: 2,
-  },
-  {
-    n: 7, title: "Frekuensi Relatif – Data Cuaca",
+    n: 6, title: "Frekuensi Relatif – Data Cuaca",
     content: "Selama 60 hari tercatat: Cerah 35 hari, Berawan 15 hari, Hujan 10 hari. Frekuensi relatif hari tidak hujan (Cerah + Berawan) adalah ...",
     diagram: (
       <FreqTable caption="Data cuaca selama 60 hari"
@@ -119,7 +103,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 8, title: "Peluang Empirik – Dadu 180 Lemparan",
+    n: 7, title: "Peluang Empirik – Dadu 180 Lemparan",
     content: "Dadu dilempar 180 kali. Angka 5 muncul 31 kali dan angka 6 muncul 30 kali. Peluang empirik muncul angka lebih dari 4 (yaitu 5 atau 6) adalah ...",
     diagram: (
       <FreqTable caption="Percobaan 180 kali melempar dadu"
@@ -130,35 +114,19 @@ const questions: MCQ[] = [
     answer: 0,
   },
   {
-    n: 9, title: "Soal UN – Frekuensi dari Frekuensi Relatif",
+    n: 8, title: "Soal UN – Frekuensi dari Frekuensi Relatif",
     content: "Sebuah dadu dilempar 90 kali. Frekuensi relatif muncul angka 5 adalah 1/6. Berapa kali angka 5 muncul dalam percobaan tersebut?",
     options: ["12 \\text{ kali}", "15 \\text{ kali}", "18 \\text{ kali}", "20 \\text{ kali}"],
     answer: 1,
   },
   {
-    n: 10, title: "Membandingkan FR – Tiga Siswa",
-    content: "Ayu melempar koin 20 kali (A: 9 kali), Bagas 50 kali (A: 27 kali), Cici 200 kali (A: 98 kali). FR(A) siapa yang paling mendekati 0,5?",
-    diagram: (
-      <FreqTable caption="Percobaan melempar koin oleh 3 siswa"
-        headers={["Siswa", "Lemparan", "Muncul A", "FR(A)"]}
-        rows={[["Ayu", 20, 9, "0,45"], ["Bagas", 50, 27, "0,54"], ["Cici", 200, 98, "0,49"]]} />
-    ),
-    options: [
-      "\\text{Ayu } (0{,}45)",
-      "\\text{Bagas } (0{,}54)",
-      "\\text{Cici } (0{,}49)",
-      "\\text{Ketiganya sama dekat}",
-    ],
-    answer: 2,
-  },
-  {
-    n: 11, title: "Soal TKA – FR Gabungan Dua Koin",
+    n: 9, title: "Soal TKA – FR Gabungan Dua Koin",
     content: "Dari 400 percobaan melempar dua koin: AA muncul 97 kali, AG muncul 104 kali, GA muncul 99 kali, GG muncul 100 kali. Peluang empirik muncul tepat satu sisi Angka (AG atau GA) adalah ...",
     options: ["\\frac{97}{400}", "\\frac{1}{4}", "\\frac{203}{400}", "\\frac{13}{50}"],
     answer: 2,
   },
   {
-    n: 12, title: "Soal ANBK – Peluang Empirik Kualitas Produk",
+    n: 10, title: "Soal ANBK – Peluang Empirik Kualitas Produk",
     content: "Dari 1.000 produk yang diperiksa: Sangat Baik 650, Baik 250, Cukup 70, Kurang 30. Peluang empirik produk berkualitas Cukup atau Kurang adalah ...",
     diagram: (
       <FreqTable caption="Kontrol kualitas: 1.000 produk"
@@ -169,13 +137,13 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 13, title: "Soal UN – Menghitung Frekuensi dari FR",
+    n: 11, title: "Soal UN – Menghitung Frekuensi dari FR",
     content: "Dalam percobaan melempar dadu 300 kali, frekuensi relatif muncul bilangan genap adalah 0,52. Berapa kali bilangan genap muncul dalam percobaan tersebut?",
     options: ["144 \\text{ kali}", "150 \\text{ kali}", "156 \\text{ kali}", "160 \\text{ kali}"],
     answer: 2,
   },
   {
-    n: 14, title: "Soal UN – Mencari Frekuensi yang Hilang",
+    n: 12, title: "Soal UN – Mencari Frekuensi yang Hilang",
     content: "Dari 100 kali pengambilan, warna Biru 30, Kuning 25, Putih 20 kali. Berapa kali warna Merah muncul?",
     diagram: (
       <FreqTable caption="Frekuensi warna dalam 100 kali pengambilan"
@@ -186,7 +154,7 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 15, title: "Soal TKA – Mencari Banyak Percobaan dari FR",
+    n: 13, title: "Soal TKA – Mencari Banyak Percobaan dari FR",
     content: "Frekuensi relatif muncul sisi Angka pada percobaan melempar koin adalah 0,52. Sisi Angka muncul sebanyak 130 kali. Berapa total percobaan yang dilakukan?",
     options: ["200 \\text{ kali}", "225 \\text{ kali}", "250 \\text{ kali}", "260 \\text{ kali}"],
     answer: 2,
