@@ -38,25 +38,25 @@ type MCQ = { n: number; title: string; content: string; diagram?: React.ReactNod
 const questions: MCQ[] = [
   {
     n: 1, title: "Peluang – Dadu Angka Prima",
-    content: "Sebuah dadu dilempar sekali. Angka prima pada dadu adalah 2, 3, dan 5. Peluang muncul angka prima adalah ...",
+    content: "Sebuah dadu dilempar sekali. Peluang muncul angka prima adalah ...",
     options: ["\\frac{1}{6}", "\\frac{1}{2}", "\\frac{2}{3}", "\\frac{1}{3}"],
     answer: 1,
   },
   {
     n: 2, title: "Peluang – Koin Tunggal",
-    content: "Sebuah koin dilempar sekali. Ruang sampelnya adalah {Angka, Gambar}. Peluang muncul sisi Angka adalah ...",
+    content: "Sebuah koin dilempar sekali. Peluang muncul sisi Angka adalah ...",
     options: ["\\frac{1}{4}", "\\frac{1}{3}", "\\frac{1}{2}", "1"],
     answer: 2,
   },
   {
     n: 3, title: "Peluang – Dua Koin Bersamaan",
-    content: "Dua koin dilempar bersamaan. Ruang sampelnya adalah {AA, AG, GA, GG}. Peluang muncul tepat satu sisi Angka adalah ...",
+    content: "Dua koin dilempar bersamaan. Peluang muncul tepat satu sisi Angka adalah ...",
     options: ["\\frac{1}{4}", "\\frac{1}{2}", "\\frac{3}{4}", "\\frac{1}{3}"],
     answer: 1,
   },
   {
     n: 4, title: "Peluang – Dua Dadu, Jumlah 7",
-    content: "Dua dadu dilempar bersamaan. Ruang sampelnya terdiri dari 36 titik sampel. Peluang jumlah kedua dadu sama dengan 7 adalah ...",
+    content: "Dua dadu dilempar bersamaan. Peluang jumlah kedua dadu sama dengan 7 adalah ...",
     options: ["\\frac{5}{36}", "\\frac{1}{6}", "\\frac{7}{36}", "\\frac{1}{9}"],
     answer: 1,
   },
@@ -68,37 +68,37 @@ const questions: MCQ[] = [
   },
   {
     n: 6, title: "Peluang Kartu – Kartu Merah",
-    content: "Satu kartu diambil secara acak dari 52 kartu remi. Kartu merah terdiri dari ♥ dan ♦. Peluang terambilnya kartu merah adalah ...",
+    content: "Satu kartu diambil secara acak dari 52 kartu remi. Peluang terambilnya kartu merah adalah ...",
     options: ["\\frac{1}{4}", "\\frac{1}{3}", "\\frac{1}{2}", "\\frac{2}{3}"],
     answer: 2,
   },
   {
     n: 7, title: "Peluang – Bola dalam Kantong",
-    content: "Sebuah kantong berisi 6 bola merah, 4 bola biru, dan 2 bola kuning (total 12 bola). Satu bola diambil secara acak. Peluang terambilnya bola biru adalah ...",
+    content: "Sebuah kantong berisi 6 bola merah, 4 bola biru, dan 2 bola kuning. Satu bola diambil secara acak. Peluang terambilnya bola biru adalah ...",
     options: ["\\frac{1}{6}", "\\frac{1}{4}", "\\frac{1}{3}", "\\frac{1}{2}"],
     answer: 2,
   },
   {
     n: 8, title: "Peluang – Kartu Bernomor 1–20",
-    content: "Kartu bernomor 1 sampai 20 disimpan dalam kotak. Satu kartu diambil secara acak. Banyak bilangan prima dari 1–20 adalah 8 (yaitu 2,3,5,7,11,13,17,19). Peluang terambilnya kartu bernomor prima adalah ...",
+    content: "Kartu bernomor 1 sampai 20 disimpan dalam kotak. Satu kartu diambil secara acak. Peluang terambilnya kartu bernomor prima adalah ...",
     options: ["\\frac{7}{20}", "\\frac{2}{5}", "\\frac{9}{20}", "\\frac{3}{10}"],
     answer: 1,
   },
   {
     n: 9, title: "Peluang – Kelereng Campuran",
-    content: "Sebuah kotak berisi 5 kelereng merah, 3 putih, 7 hijau, dan 5 hitam (total 20). Satu kelereng diambil acak. Peluang terambilnya kelereng Merah atau Hitam adalah ...",
+    content: "Sebuah kotak berisi 5 kelereng merah, 3 putih, 7 hijau, dan 5 hitam. Satu kelereng diambil acak. Peluang terambilnya kelereng Merah atau Hitam adalah ...",
     options: ["\\frac{9}{20}", "\\frac{1}{2}", "\\frac{11}{20}", "\\frac{7}{20}"],
     answer: 1,
   },
   {
     n: 10, title: "Peluang – Dua Dadu, Hasil Kali 12",
-    content: "Dua dadu dilempar bersamaan. Titik sampel dengan hasil kali 12 adalah (2,6), (3,4), (4,3), (6,2). Peluang hasil kali kedua dadu sama dengan 12 adalah ...",
+    content: "Dua dadu dilempar bersamaan. Peluang hasil kali kedua dadu sama dengan 12 adalah ...",
     options: ["\\frac{1}{12}", "\\frac{1}{9}", "\\frac{5}{36}", "\\frac{1}{6}"],
     answer: 1,
   },
   {
     n: 11, title: "Peluang – Kartu As Merah",
-    content: "Satu kartu diambil dari 52 kartu remi. Kartu As Merah adalah As ♥ dan As ♦. Peluang terambilnya kartu As Merah adalah ...",
+    content: "Satu kartu diambil dari 52 kartu remi. Peluang terambilnya kartu As Merah adalah ...",
     options: ["\\frac{1}{52}", "\\frac{1}{26}", "\\frac{1}{13}", "\\frac{2}{13}"],
     answer: 1,
   },
@@ -110,7 +110,7 @@ const questions: MCQ[] = [
   },
   {
     n: 13, title: "Peluang – Dua Dadu Berjumlah 9",
-    content: "Dua buah dadu dilempar bersama-sama. Pasangan yang berjumlah 9 adalah (3,6), (4,5), (5,4), (6,3) sehingga ada 4 titik sampel dari 36. Peluang munculnya dadu berjumlah 9 adalah ...",
+    content: "Dua buah dadu dilempar bersama-sama. Peluang munculnya dadu berjumlah 9 adalah ...",
     options: ["\\frac{1}{9}", "\\frac{3}{4}", "\\frac{1}{4}", "\\frac{1}{3}"],
     answer: 0,
   },
@@ -122,25 +122,25 @@ const questions: MCQ[] = [
   },
   {
     n: 15, title: "Peluang – Seleksi Pegawai (Tes Akademik & Fisik)",
-    content: "Pada seleksi pegawai, 25 orang lulus tes akademik, 20 orang lulus tes fisik, dan 15 orang lulus keduanya. Total peserta = 25 + 20 − 15 = 30. Hanya lulus tes fisik = 20 − 15 = 5. Peluang terpanggil peserta yang hanya lulus tes fisik adalah ...",
+    content: "Pada seleksi pegawai, 25 orang lulus tes akademik, 20 orang lulus tes fisik, dan 15 orang lulus keduanya. Peluang terpanggil peserta yang hanya lulus tes fisik adalah ...",
     options: ["\\frac{5}{6}", "\\frac{2}{3}", "\\frac{1}{2}", "\\frac{1}{6}"],
     answer: 3,
   },
   {
     n: 16, title: "Peluang – Tiga Koin, Dua Angka Satu Gambar",
-    content: "Tiga mata uang dilempar bersama-sama (ruang sampel: AAA, AAG, AGA, GAA, AGG, GAG, GGA, GGG). Titik sampel dengan tepat dua Angka dan satu Gambar: {AAG, AGA, GAA} = 3 titik. Peluang munculnya dua angka dan satu gambar adalah ...",
+    content: "Tiga mata uang dilempar bersama-sama. Peluang munculnya dua angka dan satu gambar adalah ...",
     options: ["\\frac{3}{4}", "\\frac{2}{4}", "\\frac{3}{8}", "\\frac{2}{8}"],
     answer: 2,
   },
   {
     n: 17, title: "Peluang – Tiga Koin, Minimal 2 Angka",
-    content: "Dalam percobaan melempar 3 uang logam secara bersamaan, ruang sampel terdiri dari 8 titik. Kejadian minimal 2 angka: {AAA, AAG, AGA, GAA} = 4 titik. Peluang muncul minimal 2 angka adalah ...",
+    content: "Dalam percobaan melempar 3 uang logam secara bersamaan, ruang sampel terdiri dari 8 titik. Peluang muncul minimal 2 angka adalah ...",
     options: ["0{,}375", "0{,}500", "0{,}667", "0{,}875"],
     answer: 1,
   },
   {
     n: 18, title: "Peluang – Permen Warna Merah (Grafik)",
-    content: "Roni mengambil 1 permen secara acak dari kantong. Banyaknya permen tiap warna ditunjukkan pada grafik berikut. Total permen = 30 buah, permen merah = 6 buah. Berapa peluang Roni mengambil permen warna merah?",
+    content: "Roni mengambil 1 permen secara acak dari kantong. Banyaknya permen tiap warna ditunjukkan pada grafik berikut. Berapa peluang Roni mengambil permen warna merah?",
     diagram: (
       <div className="my-2">
         <img src="/grafik-permen.png" alt="Grafik permen" className="max-w-full rounded-lg border border-violet-500/20 mx-auto" style={{ maxHeight: 200 }} />
