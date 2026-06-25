@@ -152,12 +152,6 @@ const questions: MCQ[] = [
     options: ["144 \\text{ kali}", "150 \\text{ kali}", "156 \\text{ kali}", "160 \\text{ kali}"],
     answer: 2,
   },
-  {
-    n: 13, title: "Soal TKA – Mencari Banyak Percobaan dari FR",
-    content: <>Frekuensi relatif muncul sisi Angka pada percobaan melempar koin adalah <InlineMath math="0{,}52" />. Sisi Angka muncul sebanyak 130 kali. Berapa total percobaan yang dilakukan?</>,
-    options: ["200 \\text{ kali}", "225 \\text{ kali}", "250 \\text{ kali}", "260 \\text{ kali}"],
-    answer: 2,
-  },
 ];
 
 const OPTS = ["A", "B", "C", "D"];
