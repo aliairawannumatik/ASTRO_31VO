@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function gcd(a: number, b: number): number {
   return b === 0 ? a : gcd(b, a % b);
@@ -69,25 +70,91 @@ const PRESETS = [
   { label: "½ ÷ ⅓", n1: 1, d1: 2, n2: 1, d2: 3 },
 ];
 
-const STEPS = [
-  "Lihat kedua pecahan",
-  "Balik pecahan pembagi!",
-  "Ubah ÷ menjadi ×",
-  "Lihat hasilnya!",
-];
+const ui = {
+  id: {
+    steps: ["Lihat kedua pecahan", "Balik pecahan pembagi!", "Ubah ÷ menjadi ×", "Lihat hasilnya!"],
+    stepLabel: (n: number) => `Langkah ${n}:`,
+    header: "🎯 Animasi Interaktif: Cara Kerja Pembagian Pecahan",
+    subheader: "Pilih contoh pecahan, lalu ikuti langkah-langkahnya!",
+    labelDividend: "yang dibagi",
+    labelNumerator: (n: number) => `pembilang: ${n}`,
+    labelDivisor: "pembagi",
+    labelFlipped: (n2: number, d2: number) => `dibalik! ${n2}/${d2} → ${d2}/${n2}`,
+    labelDenominator: (d: number) => `penyebut: ${d}`,
+    flipReminder: (n2: number, d2: number) => `Pembagi dibalik: ${n2}/${d2} menjadi ${d2}/${n2}`,
+    btn0: "🔄 Balik Pecahan Pembagi →",
+    btn1: "✖️ Ubah ke Perkalian →",
+    btn2: "🎯 Lihat Hasil →",
+    reset: "🔄 Ulangi",
+    step0msg: (n1: number, d1: number, n2: number, d2: number) =>
+      <>Ini adalah <span className="text-pink-400 font-semibold">{n1}/{d1}</span> (yang dibagi) dan{" "}<span className="text-orange-400 font-semibold">{n2}/{d2}</span> (pembagi).{" "}Rahasia pembagian pecahan: <strong className="text-white">balik pembagi, lalu kalikan!</strong></>,
+    step1title: "🔄 Pecahan pembagi dibalik (diresiprokkan)!",
+    step1swap: "pembilang & penyebut ditukar posisinya",
+    step2title: "✖️ Tanda ÷ berubah menjadi ×",
+    step3title: "🎉 Hasil pembagian pecahan:",
+    simplified: (g: number) => `✨ Disederhanakan dengan GCD = ${g}`,
+  },
+  en: {
+    steps: ["See both fractions", "Flip the divisor!", "Change ÷ to ×", "See the result!"],
+    stepLabel: (n: number) => `Step ${n}:`,
+    header: "🎯 Interactive Animation: How Fraction Division Works",
+    subheader: "Pick a fraction example, then follow the steps!",
+    labelDividend: "dividend",
+    labelNumerator: (n: number) => `numerator: ${n}`,
+    labelDivisor: "divisor",
+    labelFlipped: (n2: number, d2: number) => `flipped! ${n2}/${d2} → ${d2}/${n2}`,
+    labelDenominator: (d: number) => `denominator: ${d}`,
+    flipReminder: (n2: number, d2: number) => `Divisor flipped: ${n2}/${d2} becomes ${d2}/${n2}`,
+    btn0: "🔄 Flip the Divisor →",
+    btn1: "✖️ Change to Multiplication →",
+    btn2: "🎯 See the Result →",
+    reset: "🔄 Reset",
+    step0msg: (n1: number, d1: number, n2: number, d2: number) =>
+      <>This is <span className="text-pink-400 font-semibold">{n1}/{d1}</span> (dividend) and{" "}<span className="text-orange-400 font-semibold">{n2}/{d2}</span> (divisor).{" "}The secret of fraction division: <strong className="text-white">flip the divisor, then multiply!</strong></>,
+    step1title: "🔄 The divisor fraction is flipped (reciprocal)!",
+    step1swap: "numerator & denominator swap positions",
+    step2title: "✖️ The ÷ sign changes to ×",
+    step3title: "🎉 Result of fraction division:",
+    simplified: (g: number) => `✨ Simplified with GCD = ${g}`,
+  },
+  ja: {
+    steps: ["2つの分数を見る", "除数を逆にする！", "÷ を × に変える", "結果を見る！"],
+    stepLabel: (n: number) => `手順 ${n}：`,
+    header: "🎯 インタラクティブアニメーション：分数の割り算の仕組み",
+    subheader: "分数の例を選んで、手順に従ってください！",
+    labelDividend: "被除数",
+    labelNumerator: (n: number) => `分子：${n}`,
+    labelDivisor: "除数",
+    labelFlipped: (n2: number, d2: number) => `逆にした！${n2}/${d2} → ${d2}/${n2}`,
+    labelDenominator: (d: number) => `分母：${d}`,
+    flipReminder: (n2: number, d2: number) => `除数を逆に：${n2}/${d2} が ${d2}/${n2} になる`,
+    btn0: "🔄 除数を逆にする →",
+    btn1: "✖️ 掛け算に変える →",
+    btn2: "🎯 結果を見る →",
+    reset: "🔄 リセット",
+    step0msg: (n1: number, d1: number, n2: number, d2: number) =>
+      <>これは <span className="text-pink-400 font-semibold">{n1}/{d1}</span>（被除数）と{" "}<span className="text-orange-400 font-semibold">{n2}/{d2}</span>（除数）です。{" "}分数の割り算の秘訣：<strong className="text-white">除数を逆にして掛ける！</strong></>,
+    step1title: "🔄 除数の分数が逆数になりました！",
+    step1swap: "分子と分母の位置が入れ替わります",
+    step2title: "✖️ ÷ の記号が × に変わります",
+    step3title: "🎉 分数の割り算の結果：",
+    simplified: (g: number) => `✨ GCD = ${g} で約分`,
+  },
+};
 
 export default function FractionDivisionAnimation() {
+  const { language } = useLanguage();
+  const t = ui[language];
+
   const [preset, setPreset] = useState(0);
   const [step, setStep] = useState(0);
   const [flipActive, setFlipActive] = useState(false);
 
   const { n1, d1, n2, d2 } = PRESETS[preset];
 
-  // After flip: reciprocal of divider
   const flippedN = d2;
   const flippedD = n2;
 
-  // Result: a/b × d/c
   const resNum = n1 * flippedN;
   const resDen = d1 * flippedD;
   const g = gcd(resNum, resDen);
@@ -95,7 +162,6 @@ export default function FractionDivisionAnimation() {
   const simplDen = resDen / g;
   const isSimplified = g > 1;
 
-  // Display values for circle 2
   const circ2N = step >= 1 ? flippedN : n2;
   const circ2D = step >= 1 ? flippedD : d2;
 
@@ -131,17 +197,8 @@ export default function FractionDivisionAnimation() {
     setFlipActive(false);
   };
 
-  const btnLabel = step === 0
-    ? "🔄 Balik Pecahan Pembagi →"
-    : step === 1
-    ? "✖️ Ubah ke Perkalian →"
-    : step === 2
-    ? "🎯 Lihat Hasil →"
-    : null;
-
-  // Operator display
+  const btnLabel = step === 0 ? t.btn0 : step === 1 ? t.btn1 : step === 2 ? t.btn2 : null;
   const operatorText = step >= 2 ? "×" : "÷";
-  const operatorColor = step >= 2 ? "white" : "white";
 
   return (
     <div className="rounded-2xl overflow-hidden border border-orange-500/30 bg-gradient-to-br from-slate-900/80 to-orange-950/40 backdrop-blur">
@@ -162,17 +219,15 @@ export default function FractionDivisionAnimation() {
         }
       `}</style>
 
-      {/* Header */}
       <div className="px-4 pt-4 pb-2">
         <p className="text-center font-display text-sm font-bold text-orange-300 mb-1">
-          🎯 Animasi Interaktif: Cara Kerja Pembagian Pecahan
+          {t.header}
         </p>
         <p className="text-center text-xs text-white/50 font-body">
-          Pilih contoh pecahan, lalu ikuti langkah-langkahnya!
+          {t.subheader}
         </p>
       </div>
 
-      {/* Preset selector */}
       <div className="flex flex-wrap gap-2 justify-center px-4 py-2">
         {PRESETS.map((p, i) => (
           <button
@@ -189,7 +244,6 @@ export default function FractionDivisionAnimation() {
         ))}
       </div>
 
-      {/* Step indicator */}
       <div className="flex justify-center gap-1.5 py-2">
         {[0, 1, 2, 3].map(s => (
           <div
@@ -200,15 +254,14 @@ export default function FractionDivisionAnimation() {
           />
         ))}
       </div>
+
       <p className="text-center text-xs font-body text-orange-300 mb-1 font-semibold">
-        Langkah {step + 1}: {STEPS[step]}
+        {t.stepLabel(step + 1)} {t.steps[step]}
       </p>
 
-      {/* SVG Visualization */}
       <div className="px-4">
         <svg viewBox="0 0 490 230" className="w-full" style={{ maxHeight: 260 }}>
 
-          {/* Circle 1 — stays unchanged */}
           <FractionCircle
             cx={CX1} cy={CY} r={R}
             numerator={n1} denominator={d1}
@@ -218,17 +271,15 @@ export default function FractionDivisionAnimation() {
             {n1}/{d1}
           </text>
           <text x={CX1} y={CY + R + 33} textAnchor="middle" fill="#e879f9" fontSize="10" fontFamily="serif">
-            {step >= 1 ? `pembilang: ${n1}` : "yang dibagi"}
+            {step >= 1 ? t.labelNumerator(n1) : t.labelDividend}
           </text>
 
-          {/* Operator */}
           <text x="160" y={CY + 8} textAnchor="middle" fill={step >= 2 ? "#86efac" : "#fb923c"}
             fontSize="26" fontWeight="bold" fontFamily="sans-serif"
             style={{ transition: "fill 0.4s ease" }}>
             {operatorText}
           </text>
 
-          {/* Circle 2 — flips at step 1 */}
           <g style={{
             animation: flipActive ? "flip-circle 0.5s ease" : undefined,
             transformOrigin: `${CX2}px ${CY}px`,
@@ -244,31 +295,28 @@ export default function FractionDivisionAnimation() {
             {circ2N}/{circ2D}
           </text>
 
-          {/* Sub-label circle 2 */}
           {step === 0 && (
             <text x={CX2} y={CY + R + 33} textAnchor="middle" fill="#fb923c" fontSize="10" fontFamily="serif">
-              pembagi
+              {t.labelDivisor}
             </text>
           )}
           {step === 1 && (
             <text x={CX2} y={CY + R + 33} textAnchor="middle" fill="#f97316" fontSize="10" fontFamily="serif">
-              dibalik! {n2}/{d2} → {d2}/{n2}
+              {t.labelFlipped(n2, d2)}
             </text>
           )}
           {step >= 2 && (
             <text x={CX2} y={CY + R + 33} textAnchor="middle" fill="#86efac" fontSize="10" fontFamily="serif">
-              penyebut: {circ2D}
+              {t.labelDenominator(circ2D)}
             </text>
           )}
 
-          {/* = sign */}
           <text x="330" y={CY + 8} textAnchor="middle"
             fill={step >= 3 ? "white" : "rgba(255,255,255,0.2)"}
             fontSize="28" fontWeight="bold" fontFamily="sans-serif">
             =
           </text>
 
-          {/* Result Circle */}
           {step >= 3 ? (
             <g style={{ animation: "pulse-scale-div 0.6s ease", transformOrigin: `${CX3}px ${CY}px` }}>
               <FractionCircle
@@ -293,17 +341,15 @@ export default function FractionDivisionAnimation() {
             </>
           )}
 
-          {/* Step 1: flip reminder */}
           {step === 1 && (
             <g>
               <rect x="80" y="192" width="330" height="28" rx="8" fill="rgba(249,115,22,0.15)" stroke="#f97316" strokeWidth="1"/>
               <text x="245" y="211" textAnchor="middle" fill="#f97316" fontSize="12" fontFamily="serif">
-                Pembagi dibalik: {n2}/{d2} menjadi {d2}/{n2}
+                {t.flipReminder(n2, d2)}
               </text>
             </g>
           )}
 
-          {/* Step 2: now it's multiplication */}
           {step === 2 && (
             <g>
               <rect x="80" y="192" width="330" height="28" rx="8" fill="rgba(134,239,172,0.12)" stroke="#86efac" strokeWidth="1"/>
@@ -313,7 +359,6 @@ export default function FractionDivisionAnimation() {
             </g>
           )}
 
-          {/* Step 3: full result */}
           {step === 3 && (
             <g>
               <rect x="80" y="192" width="330" height="28" rx="8" fill="rgba(167,139,250,0.15)" stroke="#a78bfa" strokeWidth="1"/>
@@ -325,33 +370,30 @@ export default function FractionDivisionAnimation() {
         </svg>
       </div>
 
-      {/* Message boxes per step */}
       <div className="px-4 pb-2 min-h-[72px]">
         {step === 0 && (
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl px-4 py-3 text-center">
             <p className="text-white/80 text-xs font-body leading-relaxed">
-              Ini adalah <span className="text-pink-400 font-semibold">{n1}/{d1}</span> (yang dibagi) dan{" "}
-              <span className="text-orange-400 font-semibold">{n2}/{d2}</span> (pembagi).{" "}
-              Rahasia pembagian pecahan: <strong className="text-white">balik pembagi, lalu kalikan!</strong>
+              {t.step0msg(n1, d1, n2, d2)}
             </p>
           </div>
         )}
         {step === 1 && (
           <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl px-4 py-3 text-center">
             <p className="text-orange-300 text-xs font-body font-semibold mb-1">
-              🔄 Pecahan pembagi dibalik (diresiprokkan)!
+              {t.step1title}
             </p>
             <div className="text-xs text-white/70 font-body">
               <InlineMath math={`\\frac{${n2}}{${d2}} \\rightarrow \\frac{${d2}}{${n2}}`} />
               <span className="mx-2 text-white/40">→</span>
-              <span className="text-orange-300">pembilang & penyebut ditukar posisinya</span>
+              <span className="text-orange-300">{t.step1swap}</span>
             </div>
           </div>
         )}
         {step === 2 && (
           <div className="bg-green-500/10 border border-green-500/30 rounded-xl px-4 py-3 text-center">
             <p className="text-green-300 text-xs font-body font-semibold mb-1">
-              ✖️ Tanda ÷ berubah menjadi ×
+              {t.step2title}
             </p>
             <div className="text-xs text-white/70 font-body">
               <InlineMath math={`\\frac{${n1}}{${d1}} \\div \\frac{${n2}}{${d2}} = \\frac{${n1}}{${d1}} \\times \\frac{${d2}}{${n2}}`} />
@@ -361,19 +403,18 @@ export default function FractionDivisionAnimation() {
         {step === 3 && (
           <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl px-4 py-3 text-center">
             <p className="text-purple-300 text-xs font-body font-semibold mb-1">
-              🎉 Hasil pembagian pecahan:
+              {t.step3title}
             </p>
             <div className="text-xs text-white/70 font-body">
               <InlineMath math={`\\frac{${n1}}{${d1}} \\div \\frac{${n2}}{${d2}} = \\frac{${n1} \\times ${d2}}{${d1} \\times ${n2}} = \\frac{${resNum}}{${resDen}}${isSimplified ? ` = \\frac{${simplNum}}{${simplDen}}` : ""}`} />
             </div>
             {isSimplified && (
-              <p className="text-yellow-300 text-xs font-body mt-1">✨ Disederhanakan dengan GCD = {g}</p>
+              <p className="text-yellow-300 text-xs font-body mt-1">{t.simplified(g)}</p>
             )}
           </div>
         )}
       </div>
 
-      {/* Controls */}
       <div className="flex justify-center gap-3 px-4 pb-4">
         {btnLabel && (
           <button
@@ -388,7 +429,7 @@ export default function FractionDivisionAnimation() {
             onClick={handleReset}
             className="text-xs px-4 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white/70 font-body transition-all cursor-pointer hover:text-white"
           >
-            🔄 Ulangi
+            {t.reset}
           </button>
         )}
       </div>
