@@ -43,12 +43,6 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 2, title: "Peluang – Koin Tunggal",
-    content: "Sebuah koin dilempar sekali. Peluang muncul sisi Angka adalah ...",
-    options: ["\\frac{1}{4}", "\\frac{1}{3}", "\\frac{1}{2}", "1"],
-    answer: 2,
-  },
-  {
     n: 3, title: "Peluang – Dua Koin Bersamaan",
     content: "Dua koin dilempar bersamaan. Peluang muncul tepat satu sisi Angka adalah ...",
     options: ["\\frac{1}{4}", "\\frac{1}{2}", "\\frac{3}{4}", "\\frac{1}{3}"],
@@ -101,18 +95,6 @@ const questions: MCQ[] = [
     content: "Satu kartu diambil dari 52 kartu remi. Peluang terambilnya kartu As Merah adalah ...",
     options: ["\\frac{1}{52}", "\\frac{1}{26}", "\\frac{1}{13}", "\\frac{2}{13}"],
     answer: 1,
-  },
-  {
-    n: 12, title: "Peluang – Undi Nama Kelas",
-    content: "Kelas 9A terdiri dari 15 siswa perempuan dan 10 siswa laki-laki. Satu siswa dipilih secara acak sebagai pembawa bendera. Peluang terpilihnya siswa perempuan adalah ...",
-    options: ["\\frac{2}{5}", "\\frac{12}{25}", "\\frac{3}{5}", "\\frac{13}{25}"],
-    answer: 2,
-  },
-  {
-    n: 13, title: "Peluang – Dua Dadu Berjumlah 9",
-    content: "Dua buah dadu dilempar bersama-sama. Peluang munculnya dadu berjumlah 9 adalah ...",
-    options: ["\\frac{1}{9}", "\\frac{3}{4}", "\\frac{1}{4}", "\\frac{1}{3}"],
-    answer: 0,
   },
   {
     n: 14, title: "Peluang – Huruf A dari MATEMATIKA",
