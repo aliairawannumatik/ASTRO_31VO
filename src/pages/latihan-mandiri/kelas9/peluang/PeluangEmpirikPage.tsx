@@ -48,7 +48,29 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 2, title: "Peluang Empirik – Dadu 120 Lemparan",
+    n: 2, title: "Peluang Empirik – Penjualan Produk",
+    content: "Data penjualan 30 hari: Produk A terjual 8 hari, B 12 hari, C 6 hari, D 4 hari. Peluang empirik terjualnya produk B adalah ...",
+    diagram: (
+      <FreqTable caption="Data penjualan produk selama 30 hari"
+        headers={["Produk", "A", "B", "C", "D", "Total"]}
+        rows={[["Terjual", 8, 12, 6, 4, 30]]} />
+    ),
+    options: ["\\frac{4}{15}", "\\frac{1}{3}", "\\frac{2}{5}", "\\frac{1}{5}"],
+    answer: 2,
+  },
+  {
+    n: 3, title: "Peluang Empirik – Survei Mapel Favorit",
+    content: "Survei terhadap 80 siswa: Matematika 24, IPA 20, IPS 16, Bahasa 12, Seni 8. Jika dipilih satu siswa acak, peluang empirik terpilihnya siswa yang menyukai Matematika adalah ...",
+    diagram: (
+      <FreqTable caption="Survei mata pelajaran favorit (80 siswa)"
+        headers={["Mata Pelajaran", "Matematika", "IPA", "IPS", "Bahasa", "Seni"]}
+        rows={[["Jumlah Siswa", 24, 20, 16, 12, 8]]} />
+    ),
+    options: ["\\frac{1}{4}", "\\frac{3}{10}", "\\frac{3}{20}", "\\frac{1}{5}"],
+    answer: 1,
+  },
+  {
+    n: 4, title: "Peluang Empirik – Dadu 120 Lemparan",
     content: "Sebuah dadu dilempar 120 kali. Hasil percobaan seperti pada tabel. Peluang empirik muncul angka genap adalah ...",
     diagram: (
       <FreqTable caption="Frekuensi munculnya angka dadu (120 lemparan)"
@@ -59,7 +81,7 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 3, title: "Peluang Empirik – Kelereng 200 Kali",
+    n: 5, title: "Peluang Empirik – Kelereng 200 Kali",
     content: "Percobaan pengambilan kelereng dilakukan 200 kali dengan pengembalian. Hasilnya seperti pada tabel. Peluang empirik terambilnya kelereng bukan Kuning adalah ...",
     diagram: (
       <FreqTable caption="Pengambilan kelereng 200 kali"
@@ -70,7 +92,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 4, title: "Membandingkan Frekuensi Relatif – Hukum Bilangan Besar",
+    n: 6, title: "Membandingkan Frekuensi Relatif – Hukum Bilangan Besar",
     content: "Frekuensi relatif siapa yang paling mendekati nilai peluang teoretik 0,5?",
     diagram: (
       <FreqTable caption="Perbandingan tiga percobaan melempar koin"
@@ -86,18 +108,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 5, title: "Peluang Empirik – Penjualan Produk",
-    content: "Data penjualan 30 hari: Produk A terjual 8 hari, B 12 hari, C 6 hari, D 4 hari. Peluang empirik terjualnya produk B adalah ...",
-    diagram: (
-      <FreqTable caption="Data penjualan produk selama 30 hari"
-        headers={["Produk", "A", "B", "C", "D", "Total"]}
-        rows={[["Terjual", 8, 12, 6, 4, 30]]} />
-    ),
-    options: ["\\frac{4}{15}", "\\frac{1}{3}", "\\frac{2}{5}", "\\frac{1}{5}"],
-    answer: 2,
-  },
-  {
-    n: 6, title: "Frekuensi Relatif – Data Cuaca",
+    n: 7, title: "Frekuensi Relatif – Data Cuaca",
     content: "Selama 60 hari tercatat: Cerah 35 hari, Berawan 15 hari, Hujan 10 hari. Frekuensi relatif hari tidak hujan (Cerah + Berawan) adalah ...",
     diagram: (
       <FreqTable caption="Data cuaca selama 60 hari"
@@ -108,40 +119,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 7, title: "Peluang Empirik – Survei Mapel Favorit",
-    content: "Survei terhadap 80 siswa: Matematika 24, IPA 20, IPS 16, Bahasa 12, Seni 8. Jika dipilih satu siswa acak, peluang empirik terpilihnya siswa yang menyukai Matematika adalah ...",
-    diagram: (
-      <FreqTable caption="Survei mata pelajaran favorit (80 siswa)"
-        headers={["Mata Pelajaran", "Matematika", "IPA", "IPS", "Bahasa", "Seni"]}
-        rows={[["Jumlah Siswa", 24, 20, 16, 12, 8]]} />
-    ),
-    options: ["\\frac{1}{4}", "\\frac{3}{10}", "\\frac{3}{20}", "\\frac{1}{5}"],
-    answer: 1,
-  },
-  {
-    n: 8, title: "Diagram Batang – Warna Favorit Responden",
-    content: "Dari 100 responden yang memilih warna favorit: Merah 30, Biru 45, Kuning 15, Hijau 10. Frekuensi relatif warna Biru adalah ...",
-    options: ["\\frac{3}{10}", "\\frac{9}{20}", "\\frac{3}{20}", "\\frac{1}{10}"],
-    answer: 1,
-  },
-  {
-    n: 9, title: "Hukum Bilangan Besar – Stabilisasi FR",
-    content: "FR(Angka) koin pada berbagai n: n=10 → 0,40; n=50 → 0,48; n=100 → 0,51; n=500 → 0,502; n=1000 → 0,499. Kesimpulan yang paling tepat adalah ...",
-    diagram: (
-      <FreqTable caption="Frekuensi relatif Angka pada berbagai jumlah lemparan"
-        headers={["n (lemparan)", "10", "50", "100", "500", "1000"]}
-        rows={[["FR(Angka)", "0,40", "0,48", "0,51", "0,502", "0,499"]]} />
-    ),
-    options: [
-      "\\text{Semakin kecil } n \\text{, semakin dekat FR ke } 0{,}5",
-      "\\text{Semakin besar } n \\text{, FR semakin mendekati peluang teoretik}",
-      "\\text{FR selalu sama dengan peluang teoretik}",
-      "\\text{Besar } n \\text{ tidak berpengaruh terhadap FR}",
-    ],
-    answer: 1,
-  },
-  {
-    n: 10, title: "Peluang Empirik – Dadu 180 Lemparan",
+    n: 8, title: "Peluang Empirik – Dadu 180 Lemparan",
     content: "Dadu dilempar 180 kali. Angka 5 muncul 31 kali dan angka 6 muncul 30 kali. Peluang empirik muncul angka lebih dari 4 (yaitu 5 atau 6) adalah ...",
     diagram: (
       <FreqTable caption="Percobaan 180 kali melempar dadu"
@@ -152,13 +130,13 @@ const questions: MCQ[] = [
     answer: 0,
   },
   {
-    n: 11, title: "Soal UN – Frekuensi dari Frekuensi Relatif",
+    n: 9, title: "Soal UN – Frekuensi dari Frekuensi Relatif",
     content: "Sebuah dadu dilempar 90 kali. Frekuensi relatif muncul angka 5 adalah 1/6. Berapa kali angka 5 muncul dalam percobaan tersebut?",
     options: ["12 \\text{ kali}", "15 \\text{ kali}", "18 \\text{ kali}", "20 \\text{ kali}"],
     answer: 1,
   },
   {
-    n: 12, title: "Membandingkan FR – Tiga Siswa",
+    n: 10, title: "Membandingkan FR – Tiga Siswa",
     content: "Ayu melempar koin 20 kali (A: 9 kali), Bagas 50 kali (A: 27 kali), Cici 200 kali (A: 98 kali). FR(A) siapa yang paling mendekati 0,5?",
     diagram: (
       <FreqTable caption="Percobaan melempar koin oleh 3 siswa"
@@ -174,13 +152,13 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 13, title: "Soal TKA – FR Gabungan Dua Koin",
+    n: 11, title: "Soal TKA – FR Gabungan Dua Koin",
     content: "Dari 400 percobaan melempar dua koin: AA muncul 97 kali, AG muncul 104 kali, GA muncul 99 kali, GG muncul 100 kali. Peluang empirik muncul tepat satu sisi Angka (AG atau GA) adalah ...",
     options: ["\\frac{97}{400}", "\\frac{1}{4}", "\\frac{203}{400}", "\\frac{13}{50}"],
     answer: 2,
   },
   {
-    n: 14, title: "Soal ANBK – Peluang Empirik Kualitas Produk",
+    n: 12, title: "Soal ANBK – Peluang Empirik Kualitas Produk",
     content: "Dari 1.000 produk yang diperiksa: Sangat Baik 650, Baik 250, Cukup 70, Kurang 30. Peluang empirik produk berkualitas Cukup atau Kurang adalah ...",
     diagram: (
       <FreqTable caption="Kontrol kualitas: 1.000 produk"
@@ -191,36 +169,13 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 15, title: "Diagram Batang – Bulan Lahir Siswa",
-    content: "Bulan lahir 30 siswa (Jan–Jun): Jan 5, Feb 4, Mar 6, Apr 3, Mei 7, Jun 5. Frekuensi relatif siswa lahir di bulan Mei adalah ...",
-    options: ["\\frac{1}{6}", "\\frac{1}{5}", "\\frac{7}{30}", "\\frac{2}{15}"],
-    answer: 2,
-  },
-  {
-    n: 16, title: "Soal UN – Menghitung Frekuensi dari FR",
+    n: 13, title: "Soal UN – Menghitung Frekuensi dari FR",
     content: "Dalam percobaan melempar dadu 300 kali, frekuensi relatif muncul bilangan genap adalah 0,52. Berapa kali bilangan genap muncul dalam percobaan tersebut?",
     options: ["144 \\text{ kali}", "150 \\text{ kali}", "156 \\text{ kali}", "160 \\text{ kali}"],
     answer: 2,
   },
   {
-    n: 17, title: "Soal UN – FR Kartu As Remi",
-    content: "Satu kartu diambil dari 52 kartu remi sebanyak 260 kali (dengan pengembalian). Kartu As muncul 22 kali. Peluang empirik munculnya kartu As adalah ...",
-    options: ["\\frac{1}{13}", "\\frac{11}{130}", "\\frac{1}{13}", "\\frac{1}{10}"],
-    answer: 1,
-  },
-  {
-    n: 18, title: "Peluang Empirik – Golongan Darah",
-    content: "Sampel 200 orang Indonesia: Gol A 58, Gol B 62, Gol AB 20, Gol O 60. Peluang empirik seseorang bergolongan darah O adalah ...",
-    diagram: (
-      <FreqTable caption="Golongan darah 200 orang Indonesia (sampel)"
-        headers={["Gol. Darah", "A", "B", "AB", "O", "Total"]}
-        rows={[["Frekuensi", 58, 62, 20, 60, 200]]} />
-    ),
-    options: ["\\frac{29}{100}", "\\frac{31}{100}", "\\frac{3}{10}", "\\frac{1}{10}"],
-    answer: 2,
-  },
-  {
-    n: 19, title: "Soal UN – Mencari Frekuensi yang Hilang",
+    n: 14, title: "Soal UN – Mencari Frekuensi yang Hilang",
     content: "Dari 100 kali pengambilan, warna Biru 30, Kuning 25, Putih 20 kali. Berapa kali warna Merah muncul?",
     diagram: (
       <FreqTable caption="Frekuensi warna dalam 100 kali pengambilan"
@@ -231,7 +186,7 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 20, title: "Soal TKA – Mencari Banyak Percobaan dari FR",
+    n: 15, title: "Soal TKA – Mencari Banyak Percobaan dari FR",
     content: "Frekuensi relatif muncul sisi Angka pada percobaan melempar koin adalah 0,52. Sisi Angka muncul sebanyak 130 kali. Berapa total percobaan yang dilakukan?",
     options: ["200 \\text{ kali}", "225 \\text{ kali}", "250 \\text{ kali}", "260 \\text{ kali}"],
     answer: 2,
