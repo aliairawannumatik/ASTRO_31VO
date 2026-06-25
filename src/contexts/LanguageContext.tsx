@@ -15,8 +15,10 @@ const STORAGE_KEY = "numatik_language";
 const VALID_LANGS: Language[] = ["id", "en", "ja"];
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+  const urlParam = new URLSearchParams(window.location.search).get("lang") as Language | null;
   const saved = localStorage.getItem(STORAGE_KEY);
-  const resolved: Language = VALID_LANGS.includes(saved as Language) ? (saved as Language) : "id";
+  const initial: Language = VALID_LANGS.includes(urlParam as Language) ? (urlParam as Language) : VALID_LANGS.includes(saved as Language) ? (saved as Language) : "id";
+  const resolved: Language = initial;
 
   const [language, setLangState] = useState<Language>(resolved);
   const [hasChosenLanguage, setHasChosenLanguage] = useState(!!saved);
