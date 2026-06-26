@@ -208,6 +208,7 @@ type QuestionItem = {
   number: number;
   title: string;
   content: string;
+  content2?: string;
   type: "essay" | "mixed";
   parts?: { label: string; math?: string; text?: string }[];
   svgNode?: React.ReactNode;
