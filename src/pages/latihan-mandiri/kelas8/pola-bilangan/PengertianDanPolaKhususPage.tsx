@@ -7,12 +7,407 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { Sigma, Star } from "lucide-react";
 
+// ─── SVG Illustrations ────────────────────────────────────────────────────────
+
+const SvgQ1 = () => {
+  const nums = [2, 5, 10, 17, 26];
+  const diffs = ["+3", "+5", "+7", "+9", "+11"];
+  const bw = 48, bh = 32, gap = 18;
+  const step = bw + gap;
+  const svgW = 6 + nums.length * step + bw + 6;
+  return (
+    <svg viewBox={`0 0 ${svgW} 72`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,1 L6,3.5 L0,6 Z" fill="rgba(167,139,250,0.9)" />
+        </marker>
+      </defs>
+      {nums.map((n, i) => (
+        <g key={i}>
+          <rect x={6 + i * step} y={14} width={bw} height={bh} rx={7}
+            fill="rgba(6,182,212,0.13)" stroke="rgba(6,182,212,0.6)" strokeWidth="1.5" />
+          <text x={6 + i * step + bw / 2} y={14 + bh / 2 + 1}
+            textAnchor="middle" dominantBaseline="middle"
+            fill="#67e8f9" fontSize="15" fontWeight="bold" fontFamily="monospace">{n}</text>
+        </g>
+      ))}
+      <rect x={6 + nums.length * step} y={14} width={bw} height={bh} rx={7}
+        fill="rgba(251,191,36,0.13)" stroke="rgba(251,191,36,0.6)" strokeWidth="1.5" strokeDasharray="5 2" />
+      <text x={6 + nums.length * step + bw / 2} y={14 + bh / 2 + 1}
+        textAnchor="middle" dominantBaseline="middle"
+        fill="#fbbf24" fontSize="15" fontWeight="bold" fontFamily="monospace">?</text>
+      {diffs.map((d, i) => {
+        const x1 = 6 + i * step + bw + 2;
+        const x2 = 6 + (i + 1) * step - 2;
+        const mx = (x1 + x2) / 2;
+        return (
+          <g key={i}>
+            <line x1={x1} y1={14 + bh / 2} x2={x2} y2={14 + bh / 2}
+              stroke="rgba(167,139,250,0.85)" strokeWidth="1.5" markerEnd="url(#arrQ1)" />
+            <text x={mx} y={11} textAnchor="middle" fill="#c4b5fd" fontSize="9" fontFamily="monospace">{d}</text>
+          </g>
+        );
+      })}
+      <text x={svgW / 2} y={64} textAnchor="middle"
+        fill="rgba(255,255,255,0.38)" fontSize="9.5" fontFamily="sans-serif">
+        Selisih bertambah +2 setiap langkah → beda ke-2 konstan
+      </text>
+    </svg>
+  );
+};
+
+const SvgQ3 = () => {
+  const bw = 20, bh = 10, hGap = 2, vGap = 2;
+  const rowW = 3 * bw + 2 * hGap;
+  const rowH = bh + vGap;
+  const maxRows = 4;
+  const groupGap = 18;
+  const svgH = maxRows * rowH + 38;
+  const svgW = 4 * rowW + 3 * groupGap + 10;
+  const bottomY = maxRows * rowH;
+  const brickColors = [
+    ["rgba(251,146,60,0.30)", "rgba(251,146,60,0.75)"],
+    ["rgba(251,191,36,0.28)", "rgba(251,191,36,0.70)"],
+  ];
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {[1, 2, 3, 4].map((rows, gi) => {
+        const gx = 5 + gi * (rowW + groupGap);
+        return (
+          <g key={gi}>
+            {Array.from({ length: rows }, (_, ri) => {
+              const y = bottomY - (ri + 1) * rowH;
+              const [fill, stroke] = brickColors[ri % 2];
+              return Array.from({ length: 3 }, (_, bi) => (
+                <rect key={`${ri}-${bi}`}
+                  x={gx + bi * (bw + hGap)} y={y} width={bw} height={bh} rx={2}
+                  fill={fill} stroke={stroke} strokeWidth="1" />
+              ));
+            })}
+            <text x={gx + rowW / 2} y={bottomY + 13} textAnchor="middle"
+              fill="#a78bfa" fontSize="8.5" fontFamily="sans-serif">Baris {gi + 1}</text>
+            <text x={gx + rowW / 2} y={bottomY + 26} textAnchor="middle"
+              fill="#67e8f9" fontSize="9" fontFamily="monospace">= {rows * 3} bata</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const SvgQ4 = () => {
+  const weeks = [10, 13, 16, 19];
+  const barW = 38, barGap = 18;
+  const maxVal = 22;
+  const chartH = 72, padT = 10, padB = 34, padL = 36, padR = 8;
+  const svgW = padL + weeks.length * (barW + barGap) - barGap + padR;
+  const svgH = chartH + padT + padB;
+  const scale = chartH / maxVal;
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
+      <line x1={padL} y1={padT} x2={padL} y2={padT + chartH} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+      <line x1={padL} y1={padT + chartH} x2={svgW - padR} y2={padT + chartH} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+      <text x={11} y={padT + chartH / 2} textAnchor="middle" fill="rgba(255,255,255,0.45)"
+        fontSize="7.5" fontFamily="sans-serif"
+        transform={`rotate(-90, 11, ${padT + chartH / 2})`}>Tinggi (cm)</text>
+      {[5, 10, 15, 20].map(v => {
+        const y = padT + chartH - v * scale;
+        return (
+          <g key={v}>
+            <line x1={padL - 3} y1={y} x2={padL} y2={y} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+            <text x={padL - 5} y={y + 1} textAnchor="end" dominantBaseline="middle"
+              fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="monospace">{v}</text>
+          </g>
+        );
+      })}
+      {weeks.map((h, i) => {
+        const bx = padL + i * (barW + barGap);
+        const bh = h * scale;
+        const by = padT + chartH - bh;
+        const alpha = 0.22 + i * 0.06;
+        return (
+          <g key={i}>
+            <rect x={bx} y={by} width={barW} height={bh} rx={4}
+              fill={`rgba(34,211,238,${alpha})`} stroke="rgba(34,211,238,0.75)" strokeWidth="1.5" />
+            <text x={bx + barW / 2} y={by - 3} textAnchor="middle"
+              fill="#67e8f9" fontSize="9" fontFamily="monospace">{h} cm</text>
+            <text x={bx + barW / 2} y={padT + chartH + 12} textAnchor="middle"
+              fill="rgba(255,255,255,0.55)" fontSize="8.5" fontFamily="sans-serif">Mgg {i + 1}</text>
+          </g>
+        );
+      })}
+      {weeks.map((h, i) => {
+        if (i === 0) return null;
+        const x1 = padL + (i - 1) * (barW + barGap) + barW / 2;
+        const y1 = padT + chartH - weeks[i - 1] * scale;
+        const x2 = padL + i * (barW + barGap) + barW / 2;
+        const y2 = padT + chartH - h * scale;
+        const mx = (x1 + x2) / 2;
+        const my = (y1 + y2) / 2 - 5;
+        return (
+          <g key={i}>
+            <line x1={x1} y1={y1} x2={x2} y2={y2}
+              stroke="rgba(251,191,36,0.65)" strokeWidth="1.5" strokeDasharray="4 2" />
+            <text x={mx} y={my} textAnchor="middle" fill="#fbbf24" fontSize="8" fontFamily="monospace">+3</text>
+          </g>
+        );
+      })}
+      <text x={svgW / 2} y={svgH - 2} textAnchor="middle"
+        fill="rgba(255,255,255,0.30)" fontSize="8" fontFamily="sans-serif">
+        Pola aritmetika: beda = +3 cm/minggu
+      </text>
+    </svg>
+  );
+};
+
+const SvgQ7 = () => {
+  const configs = [
+    { n: 1, label: "T\u2081 = 1" },
+    { n: 2, label: "T\u2082 = 3" },
+    { n: 3, label: "T\u2083 = 6" },
+    { n: 4, label: "T\u2084 = 10" },
+  ];
+  const groupW = 80, svgH = 96, r = 4, sp = 12;
+  const svgW = configs.length * groupW + 10;
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {configs.map(({ n, label }, gi) => {
+        const cx = 5 + gi * groupW + groupW / 2;
+        const cy = 44;
+        const totalH = (n - 1) * sp;
+        const dots = [];
+        for (let row = 0; row < n; row++) {
+          const dotsInRow = row + 1;
+          const rowY = cy - totalH / 2 + row * sp;
+          const rowStartX = cx - (dotsInRow - 1) * sp / 2;
+          for (let d = 0; d < dotsInRow; d++) {
+            dots.push(
+              <circle key={`${row}-${d}`}
+                cx={rowStartX + d * sp} cy={rowY} r={r}
+                fill="rgba(99,102,241,0.65)" stroke="#818cf8" strokeWidth="1" />
+            );
+          }
+        }
+        return (
+          <g key={gi}>
+            {dots}
+            <text x={cx} y={svgH - 8} textAnchor="middle"
+              fill="#a5b4fc" fontSize="9.5" fontFamily="monospace">{label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const SvgQ8 = () => {
+  const configs = [
+    { n: 1, label: "1\u00B2 = 1" },
+    { n: 2, label: "2\u00B2 = 4" },
+    { n: 3, label: "3\u00B2 = 9" },
+    { n: 4, label: "4\u00B2 = 16" },
+  ];
+  const groupW = 82, svgH = 96, r = 4, sp = 12;
+  const svgW = configs.length * groupW + 10;
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {configs.map(({ n, label }, gi) => {
+        const cx = 5 + gi * groupW + groupW / 2;
+        const cy = 44;
+        const dots = [];
+        for (let row = 0; row < n; row++) {
+          for (let col = 0; col < n; col++) {
+            dots.push(
+              <circle key={`${row}-${col}`}
+                cx={cx - (n - 1) * sp / 2 + col * sp}
+                cy={cy - (n - 1) * sp / 2 + row * sp}
+                r={r} fill="rgba(34,211,238,0.65)" stroke="#22d3ee" strokeWidth="1" />
+            );
+          }
+        }
+        return (
+          <g key={gi}>
+            {dots}
+            <text x={cx} y={svgH - 8} textAnchor="middle"
+              fill="#67e8f9" fontSize="9.5" fontFamily="monospace">{label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const SvgQ9 = () => {
+  const configs = [
+    { rows: 1, cols: 2, label: "1\u00D72 = 2" },
+    { rows: 2, cols: 3, label: "2\u00D73 = 6" },
+    { rows: 3, cols: 4, label: "3\u00D74 = 12" },
+    { rows: 4, cols: 5, label: "4\u00D75 = 20" },
+  ];
+  const groupW = 88, svgH = 100, r = 4, sp = 12;
+  const svgW = configs.length * groupW + 10;
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {configs.map(({ rows, cols, label }, gi) => {
+        const cx = 5 + gi * groupW + groupW / 2;
+        const cy = 44;
+        const dots = [];
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < cols; col++) {
+            dots.push(
+              <circle key={`${row}-${col}`}
+                cx={cx - (cols - 1) * sp / 2 + col * sp}
+                cy={cy - (rows - 1) * sp / 2 + row * sp}
+                r={r} fill="rgba(251,146,60,0.65)" stroke="#fb923c" strokeWidth="1" />
+            );
+          }
+        }
+        return (
+          <g key={gi}>
+            {dots}
+            <text x={cx} y={svgH - 8} textAnchor="middle"
+              fill="#fdba74" fontSize="9.5" fontFamily="monospace">{label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const SvgQ14 = () => {
+  const configs = [
+    { n: 1, label: "1\u00B3 = 1", cx: 22 },
+    { n: 2, label: "2\u00B3 = 8", cx: 88 },
+    { n: 3, label: "3\u00B3 = 27", cx: 186 },
+    { n: 4, label: "4\u00B3 = 64", cx: 318 },
+  ];
+  const baseS = 14;
+  const svgH = 120, svgW = 390;
+  const bottomY = 90;
+
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {configs.map(({ n, label, cx }, gi) => {
+        const s = n * baseS;
+        const dx = s * 0.866;
+        const dh = s * 0.5;
+        const y = bottomY - 2 * dh - s;
+
+        const A = [cx, y];
+        const B = [cx + dx, y + dh];
+        const C = [cx, y + 2 * dh];
+        const D = [cx - dx, y + dh];
+        const E = [cx, y + 2 * dh + s];
+        const F = [cx + dx, y + dh + s];
+        const G = [cx - dx, y + dh + s];
+
+        const pt = (p: number[]) => `${p[0]},${p[1]}`;
+        const sk = "rgba(165,180,252,0.55)";
+        const topC = `rgba(99,102,241,${0.38 + gi * 0.07})`;
+        const leftC = `rgba(55,48,163,${0.45 + gi * 0.06})`;
+        const rightC = `rgba(79,70,229,${0.35 + gi * 0.07})`;
+
+        const gridLines: JSX.Element[] = [];
+        if (n > 1) {
+          for (let k = 1; k < n; k++) {
+            const t = k / n;
+            gridLines.push(
+              <line key={`tL${k}`}
+                x1={D[0] + t * (A[0] - D[0])} y1={D[1] + t * (A[1] - D[1])}
+                x2={C[0] + t * (B[0] - C[0])} y2={C[1] + t * (B[1] - C[1])}
+                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
+              <line key={`tR${k}`}
+                x1={A[0] + t * (D[0] - A[0])} y1={A[1] + t * (D[1] - A[1])}
+                x2={B[0] + t * (C[0] - B[0])} y2={B[1] + t * (C[1] - B[1])}
+                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
+              <line key={`rH${k}`}
+                x1={C[0] + t * (B[0] - C[0])} y1={C[1] + t * (B[1] - C[1])}
+                x2={E[0] + t * (F[0] - E[0])} y2={E[1] + t * (F[1] - E[1])}
+                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
+              <line key={`rV${k}`}
+                x1={B[0] + t * (C[0] - B[0])} y1={B[1] + t * (C[1] - B[1])}
+                x2={F[0] + t * (E[0] - F[0])} y2={F[1] + t * (E[1] - F[1])}
+                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
+              <line key={`lH${k}`}
+                x1={D[0] + t * (C[0] - D[0])} y1={D[1] + t * (C[1] - D[1])}
+                x2={G[0] + t * (E[0] - G[0])} y2={G[1] + t * (E[1] - G[1])}
+                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
+              <line key={`lV${k}`}
+                x1={C[0] + t * (D[0] - C[0])} y1={C[1] + t * (D[1] - C[1])}
+                x2={E[0] + t * (G[0] - E[0])} y2={E[1] + t * (G[1] - E[1])}
+                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
+            );
+          }
+        }
+
+        return (
+          <g key={gi}>
+            <polygon points={`${pt(B)} ${pt(F)} ${pt(E)} ${pt(C)}`} fill={rightC} stroke={sk} strokeWidth="0.9" />
+            <polygon points={`${pt(D)} ${pt(C)} ${pt(E)} ${pt(G)}`} fill={leftC} stroke={sk} strokeWidth="0.9" />
+            <polygon points={`${pt(A)} ${pt(B)} ${pt(C)} ${pt(D)}`} fill={topC} stroke={sk} strokeWidth="0.9" />
+            {gridLines}
+            <text x={cx} y={svgH - 8} textAnchor="middle"
+              fill="#a5b4fc" fontSize="9.5" fontFamily="monospace">{label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const SvgQ17 = () => {
+  const nums = [1, 2, 4, 7, 11, 16, 22];
+  const diffs = ["+1", "+2", "+3", "+4", "+5", "+6"];
+  const bw = 36, bh = 30, gap = 14;
+  const step = bw + gap;
+  const svgW = 6 + nums.length * step - gap + 6;
+  const svgH = 80;
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ17" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,1 L6,3.5 L0,6 Z" fill="rgba(52,211,153,0.9)" />
+        </marker>
+      </defs>
+      {nums.map((n, i) => (
+        <g key={i}>
+          <rect x={6 + i * step} y={14} width={bw} height={bh} rx={7}
+            fill="rgba(16,185,129,0.13)" stroke="rgba(52,211,153,0.60)" strokeWidth="1.5" />
+          <text x={6 + i * step + bw / 2} y={14 + bh / 2 + 1}
+            textAnchor="middle" dominantBaseline="middle"
+            fill="#6ee7b7" fontSize="13" fontWeight="bold" fontFamily="monospace">{n}</text>
+        </g>
+      ))}
+      {diffs.map((d, i) => {
+        const x1 = 6 + i * step + bw + 2;
+        const x2 = 6 + (i + 1) * step - 2;
+        const mx = (x1 + x2) / 2;
+        return (
+          <g key={i}>
+            <line x1={x1} y1={14 + bh / 2} x2={x2} y2={14 + bh / 2}
+              stroke="rgba(52,211,153,0.85)" strokeWidth="1.5" markerEnd="url(#arrQ17)" />
+            <text x={mx} y={11} textAnchor="middle"
+              fill="#34d399" fontSize="8.5" fontFamily="monospace">{d}</text>
+          </g>
+        );
+      })}
+      <text x={svgW / 2} y={svgH - 6} textAnchor="middle"
+        fill="rgba(255,255,255,0.38)" fontSize="9" fontFamily="sans-serif">
+        Beda: 1, 2, 3, 4, 5, 6 → pola bertingkat (beda ke-2 konstan = 1)
+      </text>
+    </svg>
+  );
+};
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
 type QuestionItem = {
   number: number;
   title: string;
   content: string;
   type: "essay" | "mixed";
   parts?: { label: string; math?: string; text?: string }[];
+  svgNode?: React.ReactNode;
 };
 
 const questions: QuestionItem[] = [
@@ -21,6 +416,7 @@ const questions: QuestionItem[] = [
     title: "Melanjutkan Pola Bilangan",
     content: "Perhatikan barisan bilangan berikut:\n2, 5, 10, 17, 26, ...\nTentukan dua suku berikutnya dari barisan bilangan tersebut dan jelaskan aturan polanya!",
     type: "essay",
+    svgNode: <SvgQ1 />,
   },
   {
     number: 2,
@@ -38,12 +434,14 @@ const questions: QuestionItem[] = [
     title: "Pola Gambar Susunan Batu Bata",
     content: "Seorang tukang batu menyusun batu bata membentuk pola:\nBaris ke-1: 3 batu bata | Baris ke-2: 6 | Baris ke-3: 9 | Baris ke-4: 12\n\na. Tentukan pola yang terbentuk.\nb. Berapa banyak batu bata pada baris ke-10?\nc. Berapa total batu bata jika ada 8 baris?",
     type: "essay",
+    svgNode: <SvgQ3 />,
   },
   {
     number: 4,
     title: "Soal Kontekstual - Pertumbuhan Tanaman",
     content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
     type: "essay",
+    svgNode: <SvgQ4 />,
   },
   {
     number: 5,
@@ -68,6 +466,7 @@ const questions: QuestionItem[] = [
     title: "Bilangan Segitiga",
     content: "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
     type: "mixed",
+    svgNode: <SvgQ7 />,
     parts: [
       { label: "Pola:", math: "1,\\ 3,\\ 6,\\ 10,\\ 15,\\ ..." },
       { label: "a.", text: "Jelaskan cara membentuk bilangan segitiga." },
@@ -80,6 +479,7 @@ const questions: QuestionItem[] = [
     title: "Bilangan Persegi",
     content: "Perhatikan bilangan persegi berikut:",
     type: "mixed",
+    svgNode: <SvgQ8 />,
     parts: [
       { label: "Pola:", math: "1,\\ 4,\\ 9,\\ 16,\\ 25,\\ ..." },
       { label: "a.", text: "Nyatakan rumus bilangan persegi ke-n." },
@@ -92,6 +492,7 @@ const questions: QuestionItem[] = [
     title: "Bilangan Persegi Panjang",
     content: "Bilangan persegi panjang dibentuk dari susunan titik berbentuk persegi panjang:",
     type: "mixed",
+    svgNode: <SvgQ9 />,
     parts: [
       { label: "Pola:", math: "2,\\ 6,\\ 12,\\ 20,\\ 30,\\ ..." },
       { label: "a.", text: "Tentukan aturan pola bilangan persegi panjang." },
@@ -143,6 +544,7 @@ const questions: QuestionItem[] = [
     title: "Pola Bilangan Kubik",
     content: "Bilangan kubik: 1, 8, 27, 64, 125, ...",
     type: "mixed",
+    svgNode: <SvgQ14 />,
     parts: [
       { label: "a.", text: "Nyatakan rumus bilangan kubik ke-n." },
       { label: "b.", text: "Bilangan kubik ke-7 adalah ...." },
@@ -172,6 +574,7 @@ const questions: QuestionItem[] = [
     title: "Soal TKA - Pola Kombinasi",
     content: "Perhatikan barisan: 1, 2, 4, 7, 11, 16, 22, ...\n\na. Tentukan beda antara suku-suku berurutan.\nb. Identifikasi pola beda tersebut.\nc. Tentukan dua suku berikutnya.\nd. Tuliskan rumus umum suku ke-n.",
     type: "essay",
+    svgNode: <SvgQ17 />,
   },
   {
     number: 18,
@@ -202,6 +605,8 @@ const questions: QuestionItem[] = [
   },
 ];
 
+// ─── Card Component ────────────────────────────────────────────────────────────
+
 const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => (
   <div
     className="relative rounded-2xl overflow-hidden animate-slide-up"
@@ -226,6 +631,11 @@ const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => (
           {q.content && (
             <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.content}</p>
           )}
+          {q.svgNode && (
+            <div className="my-3 rounded-xl overflow-hidden bg-black/25 border border-white/5 px-2 py-3">
+              {q.svgNode}
+            </div>
+          )}
           {q.type === "mixed" && q.parts && (
             <div className="flex flex-col gap-2 mt-2">
               {q.parts.map((part, pi) => (
@@ -247,6 +657,8 @@ const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => (
     </div>
   </div>
 );
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 const PengertianDanPolaKhususPage = () => {
   const navigate = useNavigate();
