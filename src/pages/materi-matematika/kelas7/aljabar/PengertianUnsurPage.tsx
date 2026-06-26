@@ -23,7 +23,7 @@ const translations = {
     introBoxEnd: "rupiah. Bentuk",
     introBoxEnd2: "inilah yang disebut",
     introBoxEnd3: "bentuk aljabar",
-    introPara2a: "Kata "aljabar" sendiri berasal dari karya ilmuwan muslim bernama",
+    introPara2a: "Kata \u201caljabar\u201d sendiri berasal dari karya ilmuwan muslim bernama",
     introPara2b: "(780–850 M). Beliau menulis buku berjudul",
     introPara2c: "yang menjadi fondasi ilmu aljabar modern.",
 
