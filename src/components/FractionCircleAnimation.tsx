@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function gcd(a: number, b: number): number {
   return b === 0 ? a : gcd(b, a % b);
@@ -68,7 +69,109 @@ const PRESETS = [
   { label: "⅝ + ¼", n1: 5, d1: 8, n2: 1, d2: 4, op: "+" },
 ];
 
+const ui = {
+  id: {
+    header: "🎯 Animasi Interaktif: Mengapa Penyebut Harus Disamakan?",
+    subheader: "Pilih contoh pecahan, lalu ikuti langkah-langkahnya!",
+    stepLabel: (n: number) => `Langkah ${n}:`,
+    steps: ["Lihat kedua pecahan", "Mencoba digabung langsung...", "Samakan penyebut (KPK)", "Lihat hasilnya!"],
+    btnTrySame: "✅ Langsung Gabungkan →",
+    btnTry: "🤔 Coba Gabung Langsung →",
+    btnEqualize: "🔑 Samakan Penyebut →",
+    btnMergeAdd: "➕ Gabungkan Sekarang →",
+    btnMergeSub: "➖ Gabungkan Sekarang →",
+    reset: "🔄 Ulangi",
+    step0msg: (n1: number, d1: number, n2: number, d2: number) => (
+      <>
+        Ini adalah{" "}
+        <span className="text-pink-400 font-semibold">{n1}/{d1}</span> dan{" "}
+        <span className="text-cyan-400 font-semibold">{n2}/{d2}</span>.{" "}
+        Perhatikan <strong className="text-white">ukuran potongannya berbeda</strong> karena penyebutnya berbeda ({d1} vs {d2}).
+      </>
+    ),
+    step1title: "❌ Tidak bisa! Ukuran potongannya berbeda.",
+    step1body: "Seperti mencoba menjumlahkan irisan pizza berukuran ½ dengan irisan kue berukuran ⅓ — potongannya tidak sama, jadi kita tidak bisa langsung menggabungkan jumlahnya!",
+    step2title: (d1: number, d2: number, common: number) => `✅ KPK dari ${d1} dan ${d2} = ${common}`,
+    step2body: (common: number) => `Sekarang kedua lingkaran dibagi menjadi ${common} potongan sama besar.`,
+    step2equal: (n1: number, d1: number, newN1: number, common: number, n2: number, d2: number, newN2: number) => (
+      <>
+        {" "}<span className="text-pink-400">{n1}/{d1} = {newN1}/{common}</span> dan{" "}
+        <span className="text-cyan-400">{n2}/{d2} = {newN2}/{common}</span> — potongannya sudah sama!
+      </>
+    ),
+    step3title: (newN1: number, op: string, newN2: number, resNum: number, resDen: number) =>
+      `🎉 Hasil: ${newN1} ${op} ${newN2} = ${resNum} potongan dari ${resDen}`,
+  },
+  en: {
+    header: "🎯 Interactive Animation: Why Must Denominators Be Equal?",
+    subheader: "Pick a fraction example, then follow the steps!",
+    stepLabel: (n: number) => `Step ${n}:`,
+    steps: ["See both fractions", "Try combining directly...", "Equalize denominators (LCM)", "See the result!"],
+    btnTrySame: "✅ Combine Directly →",
+    btnTry: "🤔 Try Combining Directly →",
+    btnEqualize: "🔑 Equalize Denominators →",
+    btnMergeAdd: "➕ Combine Now →",
+    btnMergeSub: "➖ Combine Now →",
+    reset: "🔄 Reset",
+    step0msg: (n1: number, d1: number, n2: number, d2: number) => (
+      <>
+        These are{" "}
+        <span className="text-pink-400 font-semibold">{n1}/{d1}</span> and{" "}
+        <span className="text-cyan-400 font-semibold">{n2}/{d2}</span>.{" "}
+        Notice that <strong className="text-white">the slice sizes are different</strong> because the denominators differ ({d1} vs {d2}).
+      </>
+    ),
+    step1title: "❌ Can't do it! The slice sizes are different.",
+    step1body: "It's like trying to add a ½-pizza slice and a ⅓-cake slice — the pieces are not the same size, so we can't directly add their counts!",
+    step2title: (d1: number, d2: number, common: number) => `✅ LCM of ${d1} and ${d2} = ${common}`,
+    step2body: (common: number) => `Now both circles are divided into ${common} equal pieces.`,
+    step2equal: (n1: number, d1: number, newN1: number, common: number, n2: number, d2: number, newN2: number) => (
+      <>
+        {" "}<span className="text-pink-400">{n1}/{d1} = {newN1}/{common}</span> and{" "}
+        <span className="text-cyan-400">{n2}/{d2} = {newN2}/{common}</span> — the pieces are now equal!
+      </>
+    ),
+    step3title: (newN1: number, op: string, newN2: number, resNum: number, resDen: number) =>
+      `🎉 Result: ${newN1} ${op} ${newN2} = ${resNum} pieces out of ${resDen}`,
+  },
+  ja: {
+    header: "🎯 インタラクティブアニメーション：なぜ分母を揃えるの？",
+    subheader: "分数の例を選んで、手順に従ってください！",
+    stepLabel: (n: number) => `手順 ${n}：`,
+    steps: ["2つの分数を見る", "そのまま合わせてみる...", "分母を揃える（最小公倍数）", "結果を見る！"],
+    btnTrySame: "✅ そのまま合わせる →",
+    btnTry: "🤔 そのまま合わせてみる →",
+    btnEqualize: "🔑 分母を揃える →",
+    btnMergeAdd: "➕ 今すぐ合わせる →",
+    btnMergeSub: "➖ 今すぐ計算する →",
+    reset: "🔄 リセット",
+    step0msg: (n1: number, d1: number, n2: number, d2: number) => (
+      <>
+        これは{" "}
+        <span className="text-pink-400 font-semibold">{n1}/{d1}</span> と{" "}
+        <span className="text-cyan-400 font-semibold">{n2}/{d2}</span> です。{" "}
+        分母が違う（{d1} と {d2}）ため、<strong className="text-white">切り口の大きさが異なる</strong>ことに注目しましょう。
+      </>
+    ),
+    step1title: "❌ できません！切り口の大きさが違います。",
+    step1body: "ピザの½切れとケーキの⅓切れを足そうとするようなもの — ピースの大きさが違うので、そのまま数を合わせることはできません！",
+    step2title: (d1: number, d2: number, common: number) => `✅ ${d1} と ${d2} の最小公倍数 = ${common}`,
+    step2body: (common: number) => `これで両方の円が ${common} 等分されました。`,
+    step2equal: (n1: number, d1: number, newN1: number, common: number, n2: number, d2: number, newN2: number) => (
+      <>
+        {" "}<span className="text-pink-400">{n1}/{d1} = {newN1}/{common}</span> と{" "}
+        <span className="text-cyan-400">{n2}/{d2} = {newN2}/{common}</span> — 切り口の大きさが揃いました！
+      </>
+    ),
+    step3title: (newN1: number, op: string, newN2: number, resNum: number, resDen: number) =>
+      `🎉 結果：${newN1} ${op} ${newN2} = ${resDen} 等分のうち ${resNum} 個`,
+  },
+};
+
 export default function FractionCircleAnimation() {
+  const { language } = useLanguage();
+  const t = ui[language];
+
   const [preset, setPreset] = useState(0);
   const [step, setStep] = useState(0);
   const [shakeActive, setShakeActive] = useState(false);
@@ -123,14 +226,14 @@ export default function FractionCircleAnimation() {
     setShakeActive(false);
   };
 
-  const stepLabel = ["Lihat kedua pecahan", "Mencoba digabung langsung...", "Samakan penyebut (KPK)", "Lihat hasilnya!"];
-  const btnLabel = step === 0
-    ? (isAlreadySame ? "✅ Langsung Gabungkan →" : "🤔 Coba Gabung Langsung →")
-    : step === 1
-    ? "🔑 Samakan Penyebut →"
-    : step === 2
-    ? `${op === "+" ? "➕" : "➖"} Gabungkan Sekarang →`
-    : null;
+  const btnLabel =
+    step === 0
+      ? isAlreadySame ? t.btnTrySame : t.btnTry
+      : step === 1
+      ? t.btnEqualize
+      : step === 2
+      ? op === "+" ? t.btnMergeAdd : t.btnMergeSub
+      : null;
 
   const den1Display = step >= 2 ? common : d1;
   const den2Display = step >= 2 ? common : d2;
@@ -159,10 +262,10 @@ export default function FractionCircleAnimation() {
       {/* Header */}
       <div className="px-4 pt-4 pb-2">
         <p className="text-center font-display text-sm font-bold text-purple-300 mb-1">
-          🎯 Animasi Interaktif: Mengapa Penyebut Harus Disamakan?
+          {t.header}
         </p>
         <p className="text-center text-xs text-white/50 font-body">
-          Pilih contoh pecahan, lalu ikuti langkah-langkahnya!
+          {t.subheader}
         </p>
       </div>
 
@@ -195,7 +298,7 @@ export default function FractionCircleAnimation() {
         ))}
       </div>
       <p className="text-center text-xs font-body text-purple-300 mb-1 font-semibold">
-        Langkah {step + 1}: {stepLabel[step]}
+        {t.stepLabel(step + 1)} {t.steps[step]}
       </p>
 
       {/* SVG Visualization */}
@@ -260,38 +363,35 @@ export default function FractionCircleAnimation() {
         {step === 0 && (
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl px-4 py-3 text-center">
             <p className="text-white/80 text-xs font-body leading-relaxed">
-              Ini adalah <span className="text-pink-400 font-semibold">{n1}/{d1}</span> dan <span className="text-cyan-400 font-semibold">{n2}/{d2}</span>.
-              Perhatikan <strong className="text-white">ukuran potongannya berbeda</strong> karena penyebutnya berbeda ({d1} vs {d2}).
+              {t.step0msg(n1, d1, n2, d2)}
             </p>
           </div>
         )}
         {step === 1 && (
           <div className="bg-red-500/10 border border-red-500/40 rounded-xl px-4 py-3 text-center">
             <p className="text-red-300 text-xs font-body leading-relaxed font-semibold">
-              ❌ Tidak bisa! Ukuran potongannya berbeda.
+              {t.step1title}
             </p>
             <p className="text-white/70 text-xs font-body mt-1">
-              Seperti mencoba menjumlahkan irisan pizza berukuran ½ dengan irisan kue berukuran ⅓ — potongannya tidak sama, jadi kita tidak bisa langsung menggabungkan jumlahnya!
+              {t.step1body}
             </p>
           </div>
         )}
         {step === 2 && (
           <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl px-4 py-3 text-center">
             <p className="text-yellow-300 text-xs font-body font-semibold mb-1">
-              ✅ KPK dari {d1} dan {d2} = {common}
+              {t.step2title(d1, d2, common)}
             </p>
             <p className="text-white/70 text-xs font-body">
-              Sekarang kedua lingkaran dibagi menjadi <strong className="text-yellow-300">{common} potongan sama besar</strong>.
-              {!isAlreadySame && (
-                <span> <span className="text-pink-400">{n1}/{d1} = {newN1}/{common}</span> dan <span className="text-cyan-400">{n2}/{d2} = {newN2}/{common}</span> — potongannya sudah sama!</span>
-              )}
+              {t.step2body(common)}
+              {!isAlreadySame && t.step2equal(n1, d1, newN1, common, n2, d2, newN2)}
             </p>
           </div>
         )}
         {step === 3 && (
           <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl px-4 py-3 text-center">
             <p className="text-purple-300 text-xs font-body font-semibold mb-1">
-              🎉 Hasil: {newN1} {op} {newN2} = {resNum} potongan dari {resDen}
+              {t.step3title(newN1, op, newN2, resNum, resDen)}
             </p>
             <div className="text-xs text-white/70 font-body">
               <InlineMath math={`\\frac{${newN1}}{${common}} ${op === "+" ? "+" : "-"} \\frac{${newN2}}{${common}} = \\frac{${resNum}}{${resDen}}${gcdRes > 1 ? ` = \\frac{${simplNum}}{${simplDen}}` : ""}`} />
@@ -315,7 +415,7 @@ export default function FractionCircleAnimation() {
             onClick={handleReset}
             className="text-xs px-4 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white/70 font-body transition-all cursor-pointer hover:text-white"
           >
-            🔄 Ulangi
+            {t.reset}
           </button>
         )}
       </div>
