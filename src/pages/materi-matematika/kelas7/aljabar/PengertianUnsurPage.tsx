@@ -146,7 +146,7 @@ const translations = {
     tidakSejenis: "unlike terms ✗",
     tidakSejenisNote: "(different exponent of y)",
     tips: "Tips:",
-    tipsDesc: "Like terms are like a "family" — the names (coefficients) can differ, but they must share the exact same variable "lineage"!",
+    tipsDesc: 'Like terms are like a "family" — the names (coefficients) can differ, but they must share the exact same variable "lineage"!',
 
     contohTitle: "Examples and Solutions",
     easy: "EASY",
