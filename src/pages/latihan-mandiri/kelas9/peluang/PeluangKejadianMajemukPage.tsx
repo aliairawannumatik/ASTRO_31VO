@@ -121,13 +121,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 10, title: "Kontekstual DAN – Memilih Menu Makan Siang",
-    content: "Di kantin sekolah, peluang seorang murid memilih nasi = 3/5 dan memilih minuman teh = 1/3. Karena pilihan makanan dan minuman tidak saling mempengaruhi (saling bebas), peluang memilih nasi DAN teh adalah ...",
-    options: ["\\frac{1}{15}", "\\frac{1}{5}", "\\frac{2}{5}", "\\frac{4}{15}"],
-    answer: 1,
-  },
-  {
-    n: 11, title: "Kontekstual DAN – Dua Mesin Produksi",
+    n: 10, title: "Kontekstual DAN – Dua Mesin Produksi",
     content: "Mesin A menghasilkan produk cacat dengan peluang 1/10 dan Mesin B dengan peluang 1/8. Kedua mesin bekerja secara independen. Peluang keduanya menghasilkan produk cacat secara bersamaan adalah ...",
     options: ["\\frac{1}{80}", "\\frac{1}{40}", "\\frac{1}{20}", "\\frac{1}{10}"],
     answer: 0,
