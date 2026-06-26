@@ -66,19 +66,13 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 5, title: "Soal UN – Mencari n dari Frekuensi Harapan",
-    content: "Sebuah dadu dilempar beberapa kali. Frekuensi harapan muncul angka 6 adalah 25 kali. Jika P(6) = 1/6, maka total percobaan yang dilakukan adalah ...",
-    options: ["100 \\text{ kali}", "120 \\text{ kali}", "150 \\text{ kali}", "180 \\text{ kali}"],
-    answer: 2,
-  },
-  {
-    n: 6, title: "Frekuensi Harapan – Produk Cacat Pabrik",
+    n: 5, title: "Frekuensi Harapan – Produk Cacat Pabrik",
     content: "Sebuah mesin memproduksi barang dengan peluang cacat 0,04. Mesin menghasilkan 2.500 barang. Frekuensi harapan barang cacat adalah ...",
     options: ["75 \\text{ barang}", "100 \\text{ barang}", "125 \\text{ barang}", "200 \\text{ barang}"],
     answer: 1,
   },
   {
-    n: 7, title: "Frekuensi Harapan – Spinner 4 Warna, 800 Putaran",
+    n: 6, title: "Frekuensi Harapan – Spinner 4 Warna, 800 Putaran",
     content: "Spinner dibagi 4 sektor: Merah 1/4, Biru 1/4, Kuning 3/8, Hijau 1/8. Spinner diputar 800 kali. Frekuensi harapan muncul warna Kuning adalah ...",
     diagram: (
       <FreqTable caption="Peluang tiap warna pada spinner"
@@ -89,7 +83,7 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 8, title: "Soal TKA – Frekuensi Harapan Bola Campuran",
+    n: 7, title: "Soal TKA – Frekuensi Harapan Bola Campuran",
     content: "Kantong berisi 6 merah, 4 biru, 5 kuning, 5 putih (total 20 bola). Pengambilan dengan pengembalian 100 kali. Frekuensi harapan terambilnya bola Merah adalah ...",
     diagram: (
       <FreqTable caption="Isi kantong bola (total 20)"
@@ -100,104 +94,51 @@ const questions: MCQ[] = [
     answer: 2,
   },
   {
-    n: 9, title: "Frekuensi Harapan – Nilai Ulangan",
+    n: 8, title: "Frekuensi Harapan – Nilai Ulangan",
     content: "Peluang seorang siswa mendapat nilai ≥ 80 pada ulangan adalah 0,6. Dalam 1 semester ada 5 ulangan. Frekuensi harapan siswa mendapat nilai ≥ 80 adalah ...",
     options: ["2 \\text{ kali}", "3 \\text{ kali}", "4 \\text{ kali}", "5 \\text{ kali}"],
     answer: 1,
   },
   {
-    n: 10, title: "Soal UN – Menentukan n dari Frekuensi Harapan",
+    n: 9, title: "Soal UN – Menentukan n dari Frekuensi Harapan",
     content: "Peluang sebuah lampu cacat adalah 1/50. Frekuensi harapan lampu cacat adalah 30 buah. Banyak lampu yang diproduksi adalah ...",
     options: ["1.000 \\text{ buah}", "1.200 \\text{ buah}", "1.500 \\text{ buah}", "2.000 \\text{ buah}"],
     answer: 2,
   },
   {
-    n: 11, title: "Soal UN – Frekuensi Harapan Kartu Sekop",
-    content: "Satu kartu diambil dari 52 kartu remi (dengan pengembalian) sebanyak 104 kali. P(sekop) = 1/4. Frekuensi harapan terambilnya kartu sekop adalah ...",
-    options: ["13 \\text{ kali}", "20 \\text{ kali}", "26 \\text{ kali}", "30 \\text{ kali}"],
-    answer: 2,
-  },
-  {
-    n: 12, title: "Soal ANBK – Menentukan n dari fh Bola Merah",
-    content: "Sebuah kotak berisi 3 merah dan 7 putih. Pengambilan dengan pengembalian dilakukan n kali. Diharapkan bola merah muncul 24 kali. Nilai n adalah ...",
-    options: ["60 \\text{ kali}", "70 \\text{ kali}", "80 \\text{ kali}", "90 \\text{ kali}"],
-    answer: 2,
-  },
-  {
-    n: 13, title: "Frekuensi Harapan – Kelahiran Bayi",
-    content: "Peluang lahirnya bayi laki-laki adalah 0,52. Di suatu desa diperkirakan ada 250 kelahiran dalam setahun. Frekuensi harapan bayi laki-laki adalah ...",
-    options: ["100 \\text{ bayi}", "110 \\text{ bayi}", "120 \\text{ bayi}", "130 \\text{ bayi}"],
-    answer: 3,
-  },
-  {
-    n: 14, title: "Soal UN – Frekuensi Harapan Pertandingan",
+    n: 10, title: "Soal UN – Frekuensi Harapan Pertandingan",
     content: "Peluang tim A menang dalam setiap pertandingan adalah 3/5. Tim A akan bermain 20 pertandingan. Frekuensi harapan kemenangan tim A adalah ...",
     options: ["8 \\text{ kali}", "10 \\text{ kali}", "12 \\text{ kali}", "15 \\text{ kali}"],
     answer: 2,
   },
   {
-    n: 15, title: "Soal UN – Frekuensi Harapan dari Rasio Bola",
-    content: "Kantong berisi bola merah dan biru dengan rasio 2:3. Satu bola diambil (dengan pengembalian) sebanyak 150 kali. P(Merah) = 2/5. Frekuensi harapan bola Merah adalah ...",
-    options: ["40 \\text{ kali}", "50 \\text{ kali}", "60 \\text{ kali}", "75 \\text{ kali}"],
-    answer: 2,
-  },
-  {
-    n: 16, title: "Frekuensi Harapan – Pasien Sembuh",
+    n: 11, title: "Frekuensi Harapan – Pasien Sembuh",
     content: "Peluang suatu obat berhasil menyembuhkan adalah 0,9. Obat diberikan kepada 300 pasien. Frekuensi harapan pasien yang sembuh adalah ...",
     options: ["240 \\text{ pasien}", "250 \\text{ pasien}", "270 \\text{ pasien}", "280 \\text{ pasien}"],
     answer: 2,
   },
   {
-    n: 17, title: "Frekuensi Harapan – Turnamen Basket",
-    content: "Tim basket memiliki peluang menang 2/3 per pertandingan. Dalam satu musim mereka bermain 36 pertandingan. Frekuensi harapan kemenangan adalah ...",
-    options: ["18 \\text{ kali}", "20 \\text{ kali}", "24 \\text{ kali}", "27 \\text{ kali}"],
-    answer: 2,
-  },
-  {
-    n: 18, title: "Soal ANBK – Frekuensi Harapan Kecelakaan",
+    n: 12, title: "Soal ANBK – Frekuensi Harapan Kecelakaan",
     content: "Peluang seseorang mengalami kecelakaan dalam setahun adalah 0,02. Perusahaan asuransi memiliki 5.000 nasabah. Frekuensi harapan nasabah yang mengalami kecelakaan adalah ...",
     options: ["50 \\text{ orang}", "75 \\text{ orang}", "100 \\text{ orang}", "150 \\text{ orang}"],
     answer: 2,
   },
   {
-    n: 19, title: "Soal TKA – Frekuensi Harapan dari Rating TV",
-    content: "Rating 4 saluran TV dari 400 pemirsa: A=160, B=120, C=80, D=40. Jika disurvei 1.000 pemirsa acak, frekuensi harapan pemirsa saluran B adalah ...",
-    diagram: (
-      <FreqTable caption="Rating 4 saluran TV (total pemirsa: 400)"
-        headers={["Saluran", "A", "B", "C", "D", "Total"]}
-        rows={[["Pemirsa", 160, 120, 80, 40, 400]]} />
-    ),
-    options: ["200 \\text{ orang}", "250 \\text{ orang}", "300 \\text{ orang}", "350 \\text{ orang}"],
-    answer: 2,
-  },
-  {
-    n: 20, title: "Frekuensi Harapan – Prediksi Cuaca Hujan",
+    n: 13, title: "Frekuensi Harapan – Prediksi Cuaca Hujan",
     content: "Berdasarkan data 10 tahun, peluang hujan pada bulan Juli di suatu kota adalah 0,3. Bulan Juli memiliki 31 hari. Frekuensi harapan hari hujan di bulan Juli adalah ...",
     options: ["6{,}2 \\text{ hari}", "7{,}5 \\text{ hari}", "9{,}3 \\text{ hari}", "12{,}4 \\text{ hari}"],
     answer: 2,
   },
   {
-    n: 21, title: "Soal TKA – Membandingkan fh Dua Siswa",
-    content: "Peluang siswa A lulus ujian = 0,8 dan siswa B = 0,75. Keduanya mengikuti 20 ujian. Selisih frekuensi harapan kelulusan A dan B adalah ...",
-    options: ["0 \\text{ kali}", "1 \\text{ kali}", "2 \\text{ kali}", "3 \\text{ kali}"],
-    answer: 1,
-  },
-  {
-    n: 22, title: "Frekuensi Harapan – Bayi Kembar",
+    n: 14, title: "Frekuensi Harapan – Bayi Kembar",
     content: "Peluang seorang ibu melahirkan bayi kembar adalah 1/80. Di suatu kota terdapat 4.000 ibu hamil dalam setahun. Frekuensi harapan kelahiran kembar adalah ...",
     options: ["25 \\text{ kali}", "40 \\text{ kali}", "50 \\text{ kali}", "80 \\text{ kali}"],
     answer: 2,
   },
   {
-    n: 23, title: "Soal ANBK – Frekuensi Harapan Penembak",
+    n: 15, title: "Soal ANBK – Frekuensi Harapan Penembak",
     content: "Seorang penembak memiliki peluang mengenai sasaran 4/5. Ia menembak 50 kali. Frekuensi harapan mengenai sasaran adalah ...",
     options: ["30 \\text{ kali}", "35 \\text{ kali}", "40 \\text{ kali}", "45 \\text{ kali}"],
-    answer: 2,
-  },
-  {
-    n: 24, title: "Soal UN Level Tinggi – Perbandingan 3 Warna Bola",
-    content: "Kantong berisi bola dengan perbandingan merah : biru : hijau = 3 : 4 : 5 (total 12 bagian). Percobaan dilakukan 480 kali dengan pengembalian. P(Hijau) = 5/12. Frekuensi harapan bola Hijau adalah ...",
-    options: ["120 \\text{ kali}", "160 \\text{ kali}", "200 \\text{ kali}", "240 \\text{ kali}"],
     answer: 2,
   },
 ];

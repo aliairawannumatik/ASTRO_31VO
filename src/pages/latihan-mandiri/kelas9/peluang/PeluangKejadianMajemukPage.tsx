@@ -37,65 +37,7 @@ type MCQ = { n: number; title: string; content: string; diagram?: React.ReactNod
 
 const questions: MCQ[] = [
   {
-    n: 1, title: "Aturan Penjumlahan – Kejadian Saling Lepas",
-    content: "Dua kejadian A dan B dikatakan saling lepas jika A ∩ B = ∅. Jika P(A) = 1/4 dan P(B) = 1/3 dan A, B saling lepas, maka P(A ∪ B) adalah ...",
-    options: ["\\frac{1}{12}", "\\frac{5}{12}", "\\frac{7}{12}", "\\frac{1}{2}"],
-    answer: 2,
-  },
-  {
-    n: 2, title: "Aturan Penjumlahan – Kejadian Tidak Saling Lepas",
-    content: "Jika P(A) = 1/2, P(B) = 1/3, dan P(A ∩ B) = 1/6, maka nilai P(A ∪ B) adalah ...",
-    options: ["\\frac{1}{3}", "\\frac{1}{2}", "\\frac{2}{3}", "\\frac{5}{6}"],
-    answer: 2,
-  },
-  {
-    n: 3, title: "Dadu Tunggal – Saling Lepas",
-    content: "Sebuah dadu dilempar sekali. A = muncul angka prima = {2,3,5}, B = muncul angka 6 = {6}. Karena A ∩ B = ∅ (saling lepas), P(A ∪ B) adalah ...",
-    options: ["\\frac{1}{6}", "\\frac{1}{3}", "\\frac{1}{2}", "\\frac{2}{3}"],
-    answer: 3,
-  },
-  {
-    n: 4, title: "Kartu Bridge – Tidak Saling Lepas",
-    content: "Satu kartu diambil dari 52 kartu remi. A = kartu merah (26 kartu), B = kartu bergambar J/Q/K (12 kartu), A ∩ B = kartu merah bergambar (6 kartu). Nilai P(A ∪ B) adalah ...",
-    diagram: (
-      <FreqTable caption="Distribusi kartu bridge 52 lembar"
-        headers={["", "Gambar (J,Q,K)", "Bukan Gambar", "Total"]}
-        rows={[["Merah", 6, 20, 26], ["Hitam", 6, 20, 26], ["Total", 12, 40, 52]]} />
-    ),
-    options: ["\\frac{1}{2}", "\\frac{15}{26}", "\\frac{8}{13}", "\\frac{19}{26}"],
-    answer: 1,
-  },
-  {
-    n: 5, title: "Aturan Perkalian – Kejadian Saling Bebas",
-    content: "Sebuah koin dilempar dan sebuah dadu dilempar secara terpisah. A = koin Angka, B = dadu angka genap. Karena saling bebas, P(A ∩ B) adalah ...",
-    options: ["\\frac{1}{6}", "\\frac{1}{4}", "\\frac{1}{3}", "\\frac{1}{2}"],
-    answer: 1,
-  },
-  {
-    n: 6, title: "Koin dan Dadu – Saling Bebas",
-    content: "Sebuah koin dan sebuah dadu dilempar bersamaan. P(koin Angka) = 1/2 dan P(dadu > 4) = 1/3. Peluang mendapat koin Angka DAN dadu > 4 adalah ...",
-    options: ["\\frac{1}{2}", "\\frac{1}{3}", "\\frac{1}{6}", "\\frac{1}{4}"],
-    answer: 2,
-  },
-  {
-    n: 7, title: "Dua Dadu – Peluang Kejadian Spesifik",
-    content: "Dua dadu dilempar bersamaan. P(dadu pertama = 3) = 1/6 dan P(dadu kedua = 4) = 1/6. Karena saling bebas, P(dadu pertama = 3 DAN dadu kedua = 4) adalah ...",
-    options: ["\\frac{1}{6}", "\\frac{1}{18}", "\\frac{1}{36}", "\\frac{1}{12}"],
-    answer: 2,
-  },
-  {
-    n: 8, title: "Soal UN – Kartu As dan Kartu Hitam",
-    content: "Dari 52 kartu bridge, satu kartu diambil. A = kartu As (4 kartu), B = kartu hitam (26 kartu), A ∩ B = As hitam (2 kartu). Nilai P(A ∪ B) adalah ...",
-    diagram: (
-      <FreqTable caption="Perpotongan kejadian As dan Hitam"
-        headers={["", "As", "Bukan As", "Total"]}
-        rows={[["Hitam", 2, 24, 26], ["Merah", 2, 24, 26], ["Total", 4, 48, 52]]} />
-    ),
-    options: ["\\frac{1}{2}", "\\frac{7}{13}", "\\frac{15}{26}", "\\frac{8}{13}"],
-    answer: 1,
-  },
-  {
-    n: 9, title: "Pengambilan Tanpa Pengembalian – Peluang Dua Bola",
+    n: 1, title: "Pengambilan Tanpa Pengembalian – Peluang Dua Bola",
     content: "Kotak berisi 4 bola merah dan 6 bola biru. Dua bola diambil tanpa pengembalian. Peluang kedua bola berwarna biru (BB) adalah ...",
     options: [
       "\\frac{6}{10} \\times \\frac{5}{9} = \\frac{1}{3}",
@@ -106,18 +48,7 @@ const questions: MCQ[] = [
     answer: 0,
   },
   {
-    n: 10, title: "Soal ANBK – Kartu Merah atau Angka 7",
-    content: "Dari 52 kartu bridge, satu kartu diambil. P(merah) = 1/2, P(angka 7) = 1/13, P(merah ∩ angka 7) = 1/26. Nilai P(merah ∪ angka 7) adalah ...",
-    options: [
-      "\\frac{7}{13}",
-      "\\frac{15}{26}",
-      "\\frac{1}{2}",
-      "\\frac{8}{13}",
-    ],
-    answer: 0,
-  },
-  {
-    n: 11, title: "Pengambilan Dengan Pengembalian – Saling Bebas",
+    n: 2, title: "Pengambilan Dengan Pengembalian – Saling Bebas",
     content: "Kotak berisi 3 merah dan 7 biru. Dua bola diambil satu per satu dengan pengembalian. Peluang mendapat bola berbeda warna (satu merah, satu biru) adalah ...",
     options: [
       "\\frac{3}{10} \\times \\frac{7}{10} = \\frac{21}{100}",
@@ -128,13 +59,7 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 12, title: "Soal UN – Menghitung P(A ∪ B) dan Komplemennya",
-    content: "Diketahui P(A) = 0,4, P(B) = 0,5, dan P(A ∩ B) = 0,2. Nilai P((A ∪ B)') — yaitu peluang tidak terjadi A maupun B — adalah ...",
-    options: ["0{,}2", "0{,}3", "0{,}4", "0{,}7"],
-    answer: 1,
-  },
-  {
-    n: 13, title: "Spinner Dua Putaran – Saling Bebas",
+    n: 3, title: "Spinner Dua Putaran – Saling Bebas",
     content: "Sebuah spinner punya 8 sektor sama besar: Merah 3, Biru 3, Kuning 2. Dua putaran dilakukan. Peluang mendapat Merah di putaran 1 DAN Kuning di putaran 2 adalah ...",
     diagram: (
       <FreqTable caption="Spinner dengan 8 sektor sama besar"
@@ -150,7 +75,7 @@ const questions: MCQ[] = [
     answer: 1,
   },
   {
-    n: 14, title: "Soal ANBK – Himpunan dan Peluang Gabungan",
+    n: 4, title: "Soal ANBK – Himpunan dan Peluang Gabungan",
     content: "Dari 50 siswa: 35 suka sepak bola, 25 suka basket, 15 suka keduanya. Peluang siswa yang tidak suka sepak bola maupun basket adalah ...",
     diagram: (
       <FreqTable caption="Data 50 siswa"
@@ -161,7 +86,7 @@ const questions: MCQ[] = [
     answer: 0,
   },
   {
-    n: 15, title: "Soal TKA – Tiga Bola Merah dari 6 Bola",
+    n: 5, title: "Soal TKA – Tiga Bola Merah dari 6 Bola",
     content: "Kotak berisi 6 bola: 3 merah (M), 2 biru (B), 1 hijau (H). Tiga bola diambil tanpa pengembalian. Peluang ketiganya berwarna merah adalah ...",
     options: [
       "\\frac{3}{6} \\times \\frac{2}{5} \\times \\frac{1}{4} = \\frac{1}{20}",
@@ -172,32 +97,40 @@ const questions: MCQ[] = [
     answer: 0,
   },
   {
-    n: 16, title: "Soal ANBK – Membuktikan Saling Bebas",
-    content: "Dari 52 kartu bridge, satu kartu diambil. A = kartu As, B = kartu merah. P(A) = 1/13 dan P(B) = 1/2. Apakah A dan B saling bebas?",
-    options: [
-      "\\text{Ya, karena } P(A \\cap B) = \\frac{1}{26} = P(A) \\times P(B)",
-      "\\text{Tidak, karena } P(A \\cap B) \\neq P(A) \\times P(B)",
-      "\\text{Ya, karena } A \\text{ dan } B \\text{ tidak punya irisan}",
-      "\\text{Tidak, karena kartu As selalu berwarna hitam}",
-    ],
-    answer: 0,
-  },
-  {
-    n: 17, title: "Soal UN – Peluang Bersyarat",
-    content: "Dalam sebuah kotak terdapat 10 kelereng. P(ganjil) = 3/5. P(merah | ganjil) = 1/2. Nilai P(merah ∩ ganjil) adalah ...",
-    options: ["\\frac{1}{2}", "\\frac{3}{10}", "\\frac{1}{5}", "\\frac{2}{5}"],
+    n: 6, title: "Kontekstual ATAU – Ekskul Sekolah",
+    content: "Dalam sebuah kelas, peluang siswa mengikuti ekskul musik = 2/5 dan ekskul olahraga = 1/3. Diketahui peluang mengikuti keduanya = 1/10. Peluang siswa mengikuti ekskul musik ATAU olahraga adalah ...",
+    options: ["\\frac{1}{2}", "\\frac{19}{30}", "\\frac{2}{3}", "\\frac{7}{10}"],
     answer: 1,
   },
   {
-    n: 18, title: "Soal ANBK – Peluang Bersyarat dari Tabel",
-    content: "Survei 200 siswa: 100 laki-laki (70 suka Matematika), 100 perempuan (50 suka Matematika). Satu siswa dipilih acak dan ternyata laki-laki. Peluang ia suka Matematika — yaitu P(suka Mat | laki-laki) — adalah ...",
-    diagram: (
-      <FreqTable caption="Survei 200 siswa"
-        headers={["", "Suka Matematika", "Tidak Suka", "Total"]}
-        rows={[["Laki-laki", 70, 30, 100], ["Perempuan", 50, 50, 100], ["Total", 120, 80, 200]]} />
-    ),
-    options: ["\\frac{1}{2}", "\\frac{7}{20}", "\\frac{7}{10}", "\\frac{3}{5}"],
+    n: 7, title: "Kontekstual ATAU – Belanja di Supermarket",
+    content: "Peluang seorang pelanggan membeli roti = 0,4, membeli susu = 0,3, dan membeli keduanya = 0,15. Peluang pelanggan membeli roti ATAU susu adalah ...",
+    options: ["0{,}45", "0{,}55", "0{,}60", "0{,}70"],
+    answer: 1,
+  },
+  {
+    n: 8, title: "Kontekstual ATAU – Kegiatan Siswa",
+    content: "Dari 30 siswa sebuah kelas: 12 mengikuti ekstrakurikuler musik, 15 mengikuti olahraga, dan 5 mengikuti keduanya. Peluang memilih satu siswa yang mengikuti musik ATAU olahraga adalah ...",
+    options: ["\\frac{2}{5}", "\\frac{11}{15}", "\\frac{22}{30}", "\\frac{3}{4}"],
+    answer: 1,
+  },
+  {
+    n: 9, title: "Kontekstual DAN – Membawa Buku Pelajaran",
+    content: "Peluang seorang siswa membawa buku Matematika = 3/4 dan peluang membawa buku IPA = 2/3. Jika kedua kejadian saling bebas, peluang siswa membawa buku Matematika DAN buku IPA adalah ...",
+    options: ["\\frac{1}{4}", "\\frac{1}{3}", "\\frac{1}{2}", "\\frac{5}{12}"],
     answer: 2,
+  },
+  {
+    n: 10, title: "Kontekstual DAN – Memilih Menu Makan Siang",
+    content: "Di kantin sekolah, peluang seorang murid memilih nasi = 3/5 dan memilih minuman teh = 1/3. Karena pilihan makanan dan minuman tidak saling mempengaruhi (saling bebas), peluang memilih nasi DAN teh adalah ...",
+    options: ["\\frac{1}{15}", "\\frac{1}{5}", "\\frac{2}{5}", "\\frac{4}{15}"],
+    answer: 1,
+  },
+  {
+    n: 11, title: "Kontekstual DAN – Dua Mesin Produksi",
+    content: "Mesin A menghasilkan produk cacat dengan peluang 1/10 dan Mesin B dengan peluang 1/8. Kedua mesin bekerja secara independen. Peluang keduanya menghasilkan produk cacat secara bersamaan adalah ...",
+    options: ["\\frac{1}{80}", "\\frac{1}{40}", "\\frac{1}{20}", "\\frac{1}{10}"],
+    answer: 0,
   },
 ];
 
