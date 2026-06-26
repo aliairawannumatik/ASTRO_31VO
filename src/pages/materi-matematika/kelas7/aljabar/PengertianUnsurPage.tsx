@@ -54,7 +54,7 @@ const translations = {
     tidakSejenis: "tidak sejenis ✗",
     tidakSejenisNote: "(pangkat y berbeda)",
     tips: "Tips:",
-    tipsDesc: "Suku sejenis itu seperti "keluarga" — boleh beda nama (koefisien), tapi harus punya "silsilah" variabel yang sama persis!",
+    tipsDesc: "Suku sejenis itu seperti 'keluarga' — boleh beda nama (koefisien), tapi harus punya 'silsilah' variabel yang sama persis!",
 
     contohTitle: "Contoh Soal dan Pembahasan",
     easy: "MUDAH",
