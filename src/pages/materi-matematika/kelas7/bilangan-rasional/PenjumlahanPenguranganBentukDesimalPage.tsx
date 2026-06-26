@@ -349,8 +349,8 @@ const translations = {
 
 const PenjumlahanPenguranganBentukDesimalPage = () => {
   const navigate = useNavigate();
-  const { lang } = useLanguage();
-  const t = translations[lang];
+  const { language } = useLanguage();
+  const t = translations[language];
   const [activeSection, setActiveSection] = useState<number | null>(null);
 
   const toggleSection = (index: number) => {
