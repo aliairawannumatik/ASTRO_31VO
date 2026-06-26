@@ -374,7 +374,7 @@ const HimpunanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/Himpuna
 
 // Kelas 8 Topic Pages
 const PolaBilanganK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/PolaBilanganPage"));
-const PengertianPolaK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PengertianDanPolaKhususPage"));
+const PengertianPolaK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PengertianPolaPage"));
 const PolaKhususK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaKhususPage"));
 const PolaAritmetikaK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaAritmetikaPage"));
 const PolaGeometriK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaGeometriPage"));

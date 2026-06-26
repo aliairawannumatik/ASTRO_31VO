@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
@@ -5,7 +6,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
-import { Sigma } from "lucide-react";
+import { Sigma, ChevronDown, ChevronUp, CheckCircle2 } from "lucide-react";
 
 // ─── SVG Illustrations ────────────────────────────────────────────────────────
 
@@ -201,6 +202,8 @@ const SvgLingkaran = () => {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
+type KunciStep = { label: string; text?: string; math?: string };
+
 type QuestionItem = {
   number: number;
   title: string;
@@ -208,6 +211,7 @@ type QuestionItem = {
   type: "essay" | "mixed";
   parts?: { label: string; math?: string; text?: string }[];
   svgNode?: React.ReactNode;
+  kunciJawaban?: KunciStep[];
 };
 
 const questions: QuestionItem[] = [
@@ -223,15 +227,28 @@ const questions: QuestionItem[] = [
       { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
       { label: "c.", text: "Tentukan banyaknya persegi pada pola ke-25 dan pola ke-50." },
     ],
+    kunciJawaban: [
+      { label: "a.", text: "Pola ke-1 = 1 persegi, Pola ke-2 = 4 persegi, Pola ke-3 = 9 persegi → Barisan: 1, 4, 9, ..." },
+      { label: "b.", math: "U_n = n^2 \\text{ (bilangan persegi/kuadrat). Setiap pola ke-}n\\text{ memiliki }n^2\\text{ persegi.}" },
+      { label: "c.", math: "U_{25} = 25^2 = 625 \\text{ persegi};\\quad U_{50} = 50^2 = 2.500 \\text{ persegi}" },
+    ],
   },
   {
     number: 2,
     title: "Pola Gambar – Susunan Segitiga (Batang Korek Api)",
     content: "Perhatikan pola berikut.",
-    type: "essay",
+    type: "mixed",
     svgNode: <SvgSegitiga />,
-    content2: "Yeni menyusun segitiga-segitiga seperti gambar di atas menggunakan batang-batang korek api. Tentukan banyaknya batang korek api untuk menyusun segitiga pada pola ke-15 dan pola ke-30.",
-  } as QuestionItem,
+    parts: [
+      { label: "", text: "Yeni menyusun segitiga-segitiga seperti gambar di atas menggunakan batang-batang korek api. Tentukan banyaknya batang korek api untuk menyusun segitiga pada pola ke-15 dan pola ke-30." },
+    ],
+    kunciJawaban: [
+      { label: "Pola:", text: "Pola ke-1 = 3 batang, Pola ke-2 = 5 batang, Pola ke-3 = 7 batang → beda = +2 setiap pola." },
+      { label: "Rumus:", math: "U_n = 2n + 1" },
+      { label: "Pola ke-15:", math: "U_{15} = 2(15) + 1 = 31 \\text{ batang korek api}" },
+      { label: "Pola ke-30:", math: "U_{30} = 2(30) + 1 = 61 \\text{ batang korek api}" },
+    ],
+  },
   {
     number: 3,
     title: "Pola Gambar – Susunan Noktah (Bentuk M)",
@@ -243,6 +260,12 @@ const questions: QuestionItem[] = [
       { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan tersebut." },
       { label: "c.", text: "Tentukan banyak noktah pada pola ke-100." },
       { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai pola ke-10." },
+    ],
+    kunciJawaban: [
+      { label: "a.", text: "Barisan noktah: 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, ..." },
+      { label: "b.", math: "U_n = 4n + 1 \\text{ (setiap pola bertambah 4 noktah; beda tetap = 4)}" },
+      { label: "c.", math: "U_{100} = 4(100) + 1 = 401 \\text{ noktah}" },
+      { label: "d.", math: "S_{10} = \\sum_{n=1}^{10}(4n+1) = 5+9+13+17+21+25+29+33+37+41 = 230 \\text{ noktah}" },
     ],
   },
   {
@@ -257,6 +280,12 @@ const questions: QuestionItem[] = [
       { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
       { label: "d.", text: "Tentukan jumlah lingkaran dari pola ke-1 sampai dengan pola ke-10." },
     ],
+    kunciJawaban: [
+      { label: "a.", text: "Barisan lingkaran: 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, ... (bilangan segitiga mulai T₂)" },
+      { label: "b.", math: "U_n = \\frac{(n+1)(n+2)}{2} \\text{ (merupakan bilangan segitiga ke-}(n+1)\\text{)}" },
+      { label: "c.", math: "U_{20} = \\frac{(21)(22)}{2} = \\frac{462}{2} = 231 \\text{ lingkaran}" },
+      { label: "d.", math: "\\text{Jumlah} = 3+6+10+15+21+28+36+45+55+66 = 285 \\text{ lingkaran}" },
+    ],
   },
   {
     number: 5,
@@ -266,6 +295,10 @@ const questions: QuestionItem[] = [
     parts: [
       { label: "a.", math: "0,\\ 3,\\ 6,\\ 9,\\ \\ldots" },
       { label: "b.", math: "1,\\ 5,\\ 9,\\ 13,\\ \\ldots" },
+    ],
+    kunciJawaban: [
+      { label: "a.", math: "0,\\ 3,\\ 6,\\ 9,\\ \\underbrace{12,\\ 15,\\ 18}_{\\text{3 suku berikutnya}} \\quad (\\text{beda} = +3,\\ U_n = 3(n-1))" },
+      { label: "b.", math: "1,\\ 5,\\ 9,\\ 13,\\ \\underbrace{17,\\ 21,\\ 25}_{\\text{3 suku berikutnya}} \\quad (\\text{beda} = +4,\\ U_n = 4n - 3)" },
     ],
   },
   // ── Soal Lanjutan ─────────────────────────────────────────────────────────
@@ -366,61 +399,97 @@ const questions: QuestionItem[] = [
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 
-const QuestionCard = ({ q, i }: { q: QuestionItem & { content2?: string }; i: number }) => (
-  <div
-    className="relative rounded-2xl overflow-hidden animate-slide-up"
-    style={{ animationDelay: `${i * 0.03}s` }}
-  >
-    <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" />
-    <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
-    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-blue-500 rounded-l-2xl" />
-    <div className="relative px-5 py-4">
-      <div className="flex items-start gap-3">
-        <div className="shrink-0">
-          <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center">
-            <span className="text-cyan-300 text-xs font-bold">{q.number}</span>
+const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => {
+  const [showKunci, setShowKunci] = useState(false);
+
+  return (
+    <div
+      className="relative rounded-2xl overflow-hidden animate-slide-up"
+      style={{ animationDelay: `${i * 0.03}s` }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" />
+      <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
+      <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-blue-500 rounded-l-2xl" />
+      <div className="relative px-5 py-4">
+        <div className="flex items-start gap-3">
+          <div className="shrink-0">
+            <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center">
+              <span className="text-cyan-300 text-xs font-bold">{q.number}</span>
+            </div>
           </div>
-        </div>
-        <div className="flex-1 min-w-0">
-          {q.title && (
-            <span className="text-cyan-400 bg-cyan-500/10 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded inline-block mb-2">
-              {q.title}
-            </span>
-          )}
-          {q.content && (
-            <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.content}</p>
-          )}
-          {q.svgNode && (
-            <div className="my-3 rounded-xl overflow-hidden bg-black/25 border border-white/5 px-2 py-3">
-              {q.svgNode}
-            </div>
-          )}
-          {(q as { content2?: string }).content2 && (
-            <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">
-              {(q as { content2?: string }).content2}
-            </p>
-          )}
-          {q.type === "mixed" && q.parts && (
-            <div className="flex flex-col gap-2 mt-2">
-              {q.parts.map((part, pi) => (
-                <div key={pi} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2">
-                  <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[24px]">{part.label}</span>
-                  {part.math ? (
-                    <div className="text-white text-sm overflow-x-auto">
-                      <InlineMath math={part.math} />
-                    </div>
-                  ) : (
-                    <p className="font-body text-sm text-white/80 whitespace-pre-line">{part.text}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="flex-1 min-w-0">
+            {q.title && (
+              <span className="text-cyan-400 bg-cyan-500/10 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded inline-block mb-2">
+                {q.title}
+              </span>
+            )}
+            {q.content && (
+              <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.content}</p>
+            )}
+            {q.svgNode && (
+              <div className="my-3 rounded-xl overflow-hidden bg-black/25 border border-white/5 px-2 py-3">
+                {q.svgNode}
+              </div>
+            )}
+            {q.type === "mixed" && q.parts && (
+              <div className="flex flex-col gap-2 mt-2">
+                {q.parts.map((part, pi) => (
+                  <div key={pi} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2">
+                    <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[24px]">{part.label}</span>
+                    {part.math ? (
+                      <div className="text-white text-sm overflow-x-auto">
+                        <InlineMath math={part.math} />
+                      </div>
+                    ) : (
+                      <p className="font-body text-sm text-white/80 whitespace-pre-line">{part.text}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {q.kunciJawaban && (
+              <div className="mt-3">
+                <button
+                  onClick={() => setShowKunci(v => !v)}
+                  className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer"
+                  style={showKunci
+                    ? { color: '#34d399', borderColor: 'rgba(52,211,153,0.5)', background: 'rgba(52,211,153,0.1)' }
+                    : { color: '#a78bfa', borderColor: 'rgba(167,139,250,0.4)', background: 'rgba(167,139,250,0.08)' }
+                  }
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  {showKunci ? 'Sembunyikan Kunci' : 'Lihat Kunci Jawaban'}
+                  {showKunci ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                </button>
+
+                {showKunci && (
+                  <div className="mt-2 rounded-xl border border-emerald-500/25 bg-emerald-950/30 px-4 py-3 flex flex-col gap-2">
+                    <p className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-1">✅ Kunci Jawaban</p>
+                    {q.kunciJawaban.map((step, si) => (
+                      <div key={si} className="flex items-start gap-2">
+                        {step.label && (
+                          <span className="text-emerald-300 text-xs font-bold shrink-0 min-w-[52px]">{step.label}</span>
+                        )}
+                        {step.math ? (
+                          <div className="text-white/90 text-sm overflow-x-auto">
+                            <InlineMath math={step.math} />
+                          </div>
+                        ) : (
+                          <p className="font-body text-sm text-white/80 whitespace-pre-line">{step.text}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
