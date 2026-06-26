@@ -115,7 +115,7 @@ const translations = {
     introBoxEnd: "dollars. The expression",
     introBoxEnd2: "is called an",
     introBoxEnd3: "algebraic expression",
-    introPara2a: "The word "algebra" comes from the work of a Muslim scholar named",
+    introPara2a: "The word \u201calgebra\u201d comes from the work of a Muslim scholar named",
     introPara2b: "(780–850 AD). He wrote a book titled",
     introPara2c: "which became the foundation of modern algebra.",
 
