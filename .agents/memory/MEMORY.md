@@ -4,3 +4,4 @@
 - [Perbandingan trilingual complete](perbandingan-trilingual.md) — all 6 Kelas 7 Perbandingan files done with ID/EN/JA; hub uses useLanguage to pass language-specific subtopics arrays to MateriTopicPage.
 - [Garis dan Sudut trilingual complete](garis-dan-sudut-trilingual.md) — all 6 Kelas 7 Garis dan Sudut materi-matematika pages done with ID/EN/JA including ProtractorAnimation component.
 - [Pola Bilangan K8 trilingual complete](pola-bilangan-k8-trilingual.md) — all 6 Kelas 8 Pola Bilangan materi-matematika files done; PolaAritmetika/PolaKhusus/PolaGeometri rewrtten with full id/en/ja; PolaKhususPage was also missing language prop on ArcDifferenceAnimation (now fixed).
+- [Koordinat Cartesius K8 trilingual complete](koordinat-cartesius-k8-trilingual.md) — all 6 K8 Koordinat Cartesius files audited/fixed; KaTeX `\text{}` must never contain Indonesian — use pure math + `t.rumusLabel` text label outside BlockMath.

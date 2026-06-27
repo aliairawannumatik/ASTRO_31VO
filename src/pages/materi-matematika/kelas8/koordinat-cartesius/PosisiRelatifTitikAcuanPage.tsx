@@ -466,7 +466,8 @@ const PosisiRelatifTitikAcuanPage = () => {
 
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4 text-center space-y-2">
                   <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-2">{t.rumusHeader}</p>
-                  <BlockMath math="\text{Posisi B relatif terhadap A} = (x_2 - x_1,\ y_2 - y_1)" />
+                  <p className="font-body text-xs text-orange-200 mb-1">{t.rumusLabel}</p>
+                  <BlockMath math="\Delta x = x_2 - x_1 \qquad \Delta y = y_2 - y_1" />
                   <div className="flex justify-center gap-4 text-xs font-body flex-wrap mt-1">
                     <span className="text-cyan-300"><InlineMath math="x_2 - x_1" /> {t.selisihH}</span>
                     <span className="text-green-300"><InlineMath math="y_2 - y_1" /> {t.selisihV}</span>
