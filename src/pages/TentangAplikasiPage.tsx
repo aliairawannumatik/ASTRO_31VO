@@ -47,14 +47,6 @@ const TentangAplikasiPage = () => {
 
       <div className="relative z-10 max-w-4xl w-full px-4 py-10">
         <div className="text-center mb-8 animate-scale-in">
-          <div className="relative w-32 h-32 mx-auto mb-4">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full opacity-20 blur-2xl animate-pulse" />
-            <img
-              src="/logo-numatik.png"
-              alt="NUMATIK Logo"
-              className="relative w-32 h-32 mx-auto object-contain opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_0_20px_rgba(234,179,8,0.5)]"
-            />
-          </div>
           <h1 className="font-display text-3xl md:text-4xl font-black text-primary text-glow-cyan mb-2">
             NUMATIK
           </h1>
