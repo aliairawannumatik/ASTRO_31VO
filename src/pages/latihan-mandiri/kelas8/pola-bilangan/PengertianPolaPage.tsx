@@ -440,9 +440,22 @@ const questions: QuestionItem[] = [
     content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
     type: "essay",
   },
-  // no. 9 (dipindah dari no. 5)
+  // no. 9 (ditambah dari no. 4)
   {
     number: 9,
+    content: "Perhatikan pola berikut.",
+    type: "mixed",
+    svgNode: <SvgLingkaran />,
+    parts: [
+      { label: "a.", text: "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan." },
+      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
+      { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
+      { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
+    ],
+  },
+  // no. 10
+  {
+    number: 10,
     title: "Pola Gambar – Susunan Persegi",
     content: "Perhatikan pola berikut.",
     type: "mixed",
