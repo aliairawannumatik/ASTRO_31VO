@@ -2,55 +2,177 @@ import { useState, useRef } from "react";
 import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
 import { Pencil, X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+type StepLabels = {
+  substituteX: string;
+  multiply: string;
+  power: string;
+  negate: string;
+  compute: string;
+  result: string;
+  formula: string;
+};
+
+const STEP_LABELS: Record<string, StepLabels> = {
+  id: {
+    substituteX: "Substitusi x",
+    multiply: "Kalikan",
+    power: "Pangkatkan",
+    negate: "Negatifkan",
+    compute: "Hitung",
+    result: "Hasil",
+    formula: "Rumus",
+  },
+  en: {
+    substituteX: "Substitute x",
+    multiply: "Multiply",
+    power: "Apply power",
+    negate: "Negate",
+    compute: "Compute",
+    result: "Result",
+    formula: "Formula",
+  },
+  ja: {
+    substituteX: "x を代入",
+    multiply: "掛け算",
+    power: "べき乗",
+    negate: "符号反転",
+    compute: "計算",
+    result: "結果",
+    formula: "式",
+  },
+};
+
+const UI = {
+  id: {
+    header: "Mesin Fungsi Interaktif",
+    subtitle: "Masukkan nilai domain → mesin memproses → lihat f(x) keluar!",
+    custom: "Buat Sendiri",
+    placeholder: "contoh: 2x^2 - 3x + 1",
+    invalidFormula: "Rumus tidak valid. Gunakan: angka, x, +, -, ^, ()",
+    validFormula: "Rumus valid — f(x) =",
+    quickExamples: "Contoh cepat:",
+    hint: "Gunakan",
+    hintVar: "x",
+    hintAsPow: "sebagai variabel,",
+    hintPow: "untuk pangkat (mis.",
+    hintBracket: "), tanda kurung",
+    hintJika: "jika perlu.",
+    stepsTitle: "Langkah Pengerjaan",
+    idleHint: 'Masukkan nilai x dan tekan "Jalankan" untuk melihat proses...',
+    invalidHint: "Tulis rumus fungsi yang valid terlebih dahulu...",
+    tryDomain: "Coba nilai domain:",
+    run: "▶ Jalankan Mesin",
+    processing: "⚙️ Memproses...",
+    machineLabel: "fungsi",
+    inputLabel: "Input",
+    inputSub: "domain",
+    outputLabel: "Output",
+    outputSub: "kodomain",
+  },
+  en: {
+    header: "Interactive Function Machine",
+    subtitle: "Enter a domain value → machine processes → see f(x) output!",
+    custom: "Custom",
+    placeholder: "example: 2x^2 - 3x + 1",
+    invalidFormula: "Invalid formula. Use: numbers, x, +, -, ^, ()",
+    validFormula: "Valid formula — f(x) =",
+    quickExamples: "Quick examples:",
+    hint: "Use",
+    hintVar: "x",
+    hintAsPow: "as variable,",
+    hintPow: "for powers (e.g.",
+    hintBracket: "), parentheses",
+    hintJika: "when needed.",
+    stepsTitle: "Step-by-Step",
+    idleHint: 'Enter x value and press "Run" to see the process...',
+    invalidHint: "Write a valid function formula first...",
+    tryDomain: "Try domain values:",
+    run: "▶ Run Machine",
+    processing: "⚙️ Processing...",
+    machineLabel: "function",
+    inputLabel: "Input",
+    inputSub: "domain",
+    outputLabel: "Output",
+    outputSub: "codomain",
+  },
+  ja: {
+    header: "関数マシン・インタラクティブ",
+    subtitle: "定義域の値を入力 → マシンが処理 → f(x) が出力！",
+    custom: "自作",
+    placeholder: "例: 2x^2 - 3x + 1",
+    invalidFormula: "無効な式。数字、x、+、-、^、() を使ってください",
+    validFormula: "有効な式 — f(x) =",
+    quickExamples: "クイック例:",
+    hint: "",
+    hintVar: "x",
+    hintAsPow: "を変数として使用、",
+    hintPow: "はべき乗 (例:",
+    hintBracket: ")、括弧",
+    hintJika: "も使えます。",
+    stepsTitle: "計算ステップ",
+    idleHint: 'x の値を入力して「実行」を押してください...',
+    invalidHint: "先に有効な関数式を入力してください...",
+    tryDomain: "定義域の値を試す:",
+    run: "▶ 実行",
+    processing: "⚙️ 処理中...",
+    machineLabel: "関数",
+    inputLabel: "入力",
+    inputSub: "定義域",
+    outputLabel: "出力",
+    outputSub: "値域",
+  },
+};
 
 const FUNCTIONS = [
   {
     id: "f1", label: "2x + 3", latex: "f(x) = 2x + 3",
     fn: (x: number) => 2 * x + 3,
-    steps: (x: number) => [
-      { desc: "Substitusi x", expr: `f(${x}) = 2(${x}) + 3` },
-      { desc: "Kalikan", expr: `= ${2 * x} + 3` },
-      { desc: "Hasil", expr: `= ${2 * x + 3}` },
+    makeSteps: (x: number, L: StepLabels) => [
+      { desc: L.substituteX, expr: `f(${x}) = 2(${x}) + 3` },
+      { desc: L.multiply, expr: `= ${2 * x} + 3` },
+      { desc: L.result, expr: `= ${2 * x + 3}` },
     ],
     color: "#a78bfa", bg: "bg-violet-500/20 border-violet-500/40",
   },
   {
     id: "f2", label: "x² − 1", latex: "f(x) = x^2 - 1",
     fn: (x: number) => x * x - 1,
-    steps: (x: number) => [
-      { desc: "Substitusi x", expr: `f(${x}) = (${x})² − 1` },
-      { desc: "Pangkatkan", expr: `= ${x * x} − 1` },
-      { desc: "Hasil", expr: `= ${x * x - 1}` },
+    makeSteps: (x: number, L: StepLabels) => [
+      { desc: L.substituteX, expr: `f(${x}) = (${x})² − 1` },
+      { desc: L.power, expr: `= ${x * x} − 1` },
+      { desc: L.result, expr: `= ${x * x - 1}` },
     ],
     color: "#22d3ee", bg: "bg-cyan-500/20 border-cyan-500/40",
   },
   {
     id: "f3", label: "3x − 5", latex: "f(x) = 3x - 5",
     fn: (x: number) => 3 * x - 5,
-    steps: (x: number) => [
-      { desc: "Substitusi x", expr: `f(${x}) = 3(${x}) − 5` },
-      { desc: "Kalikan", expr: `= ${3 * x} − 5` },
-      { desc: "Hasil", expr: `= ${3 * x - 5}` },
+    makeSteps: (x: number, L: StepLabels) => [
+      { desc: L.substituteX, expr: `f(${x}) = 3(${x}) − 5` },
+      { desc: L.multiply, expr: `= ${3 * x} − 5` },
+      { desc: L.result, expr: `= ${3 * x - 5}` },
     ],
     color: "#f472b6", bg: "bg-pink-500/20 border-pink-500/40",
   },
   {
     id: "f4", label: "x² + 2x", latex: "f(x) = x^2 + 2x",
     fn: (x: number) => x * x + 2 * x,
-    steps: (x: number) => [
-      { desc: "Substitusi x", expr: `f(${x}) = (${x})² + 2(${x})` },
-      { desc: "Hitung", expr: `= ${x * x} + ${2 * x}` },
-      { desc: "Hasil", expr: `= ${x * x + 2 * x}` },
+    makeSteps: (x: number, L: StepLabels) => [
+      { desc: L.substituteX, expr: `f(${x}) = (${x})² + 2(${x})` },
+      { desc: L.compute, expr: `= ${x * x} + ${2 * x}` },
+      { desc: L.result, expr: `= ${x * x + 2 * x}` },
     ],
     color: "#fbbf24", bg: "bg-yellow-500/20 border-yellow-500/40",
   },
   {
     id: "f5", label: "−x + 10", latex: "f(x) = -x + 10",
     fn: (x: number) => -x + 10,
-    steps: (x: number) => [
-      { desc: "Substitusi x", expr: `f(${x}) = −(${x}) + 10` },
-      { desc: "Negatifkan", expr: `= ${-x} + 10` },
-      { desc: "Hasil", expr: `= ${-x + 10}` },
+    makeSteps: (x: number, L: StepLabels) => [
+      { desc: L.substituteX, expr: `f(${x}) = −(${x}) + 10` },
+      { desc: L.negate, expr: `= ${-x} + 10` },
+      { desc: L.result, expr: `= ${-x + 10}` },
     ],
     color: "#4ade80", bg: "bg-green-500/20 border-green-500/40",
   },
@@ -90,13 +212,13 @@ function evalFormula(formula: string, x: number): number | null {
   }
 }
 
-function buildCustomSteps(formula: string, x: number): { desc: string; expr: string }[] {
+function buildCustomSteps(formula: string, x: number, L: StepLabels): { desc: string; expr: string }[] {
   const substituted = formula.replace(/x/gi, `(${x})`);
   const result = evalFormula(formula, x);
   return [
-    { desc: "Rumus", expr: `f(x) = ${formula}` },
-    { desc: "Substitusi x", expr: `f(${x}) = ${substituted}` },
-    { desc: "Hasil", expr: `= ${result ?? "?"}`},
+    { desc: L.formula, expr: `f(x) = ${formula}` },
+    { desc: L.substituteX, expr: `f(${x}) = ${substituted}` },
+    { desc: L.result, expr: `= ${result ?? "?"}`},
   ];
 }
 
@@ -195,6 +317,10 @@ function Arrow({ color, active, vertical }: { color: string; active: boolean; ve
 }
 
 export default function FunctionMachineAnimation() {
+  const { language } = useLanguage();
+  const ui = UI[language as keyof typeof UI] ?? UI.id;
+  const stepLabels = STEP_LABELS[language as keyof typeof STEP_LABELS] ?? STEP_LABELS.id;
+
   const [fn, setFn] = useState(FUNCTIONS[0]);
   const [isCustom, setIsCustom] = useState(false);
   const [customFormula, setCustomFormula] = useState("2x^2 - 3x + 1");
@@ -210,7 +336,6 @@ export default function FunctionMachineAnimation() {
   const addTimer = (cb: () => void, delay: number) => { timerRefs.current.push(setTimeout(cb, delay)); };
 
   const activeColor = isCustom ? CUSTOM_COLOR : fn.color;
-  const activeBg    = isCustom ? CUSTOM_BG : fn.bg;
 
   const x = parseInt(inputVal);
   const xValid = !isNaN(x);
@@ -221,8 +346,8 @@ export default function FunctionMachineAnimation() {
 
   const getSteps = () => {
     if (!xValid) return [];
-    if (isCustom) return buildCustomSteps(customFormula, x);
-    return fn.steps(x);
+    if (isCustom) return buildCustomSteps(customFormula, x, stepLabels);
+    return fn.makeSteps(x, stepLabels);
   };
 
   const getResult = () => {
@@ -235,7 +360,7 @@ export default function FunctionMachineAnimation() {
 
   const run = () => {
     if (!xValid) return;
-    if (isCustom && !customFormulaValid) { setCustomError("Rumus tidak valid. Gunakan: angka, x, +, -, *, ^, ()"); return; }
+    if (isCustom && !customFormulaValid) { setCustomError(ui.invalidFormula); return; }
     playPopSound();
     clearTimers();
     const output = getResult();
@@ -273,8 +398,6 @@ export default function FunctionMachineAnimation() {
   const arrowRightActive = phase === "outputting" || phase === "done";
   const spinning = phase === "processing";
 
-  const machineLabel = isCustom ? `f(x) = ${customFormula}` : fn.label;
-
   const MachineBox = ({ size }: { size: "sm" | "lg" }) => (
     <div
       className={`relative rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 ${size === "lg" ? "px-5 py-4 w-full max-w-[220px]" : "px-4 py-4 flex-shrink-0"}`}
@@ -292,7 +415,7 @@ export default function FunctionMachineAnimation() {
         <GearSVG size={size === "lg" ? 20 : 18} speed={1.2} clockwise={false} color={activeColor} spinning={spinning} />
         <GearSVG size={size === "lg" ? 24 : 22} speed={1.5} clockwise={true}  color={activeColor} spinning={spinning} />
       </div>
-      <div className="text-[9px] text-white/40 font-body uppercase tracking-wider mb-0.5">fungsi</div>
+      <div className="text-[9px] text-white/40 font-body uppercase tracking-wider mb-0.5">{ui.machineLabel}</div>
       <div style={{ color: activeColor }} className={`font-mono font-bold text-center leading-tight ${size === "lg" ? "text-sm" : "text-xs"} max-w-[130px] break-all`}>
         {isCustom
           ? <span>f(x) = <span className="text-orange-300">{customFormula || "..."}</span></span>
@@ -349,11 +472,11 @@ export default function FunctionMachineAnimation() {
         <div className="flex items-center justify-center gap-2 mb-1">
           <span className="text-xl">⚙️</span>
           <p className="font-display text-base font-bold" style={{ background: "linear-gradient(90deg, #a78bfa, #22d3ee, #f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            Mesin Fungsi Interaktif
+            {ui.header}
           </p>
           <span className="text-xl">🎯</span>
         </div>
-        <p className="text-xs text-white/60 font-body">Masukkan nilai domain → mesin memproses → lihat f(x) keluar!</p>
+        <p className="text-xs text-white/60 font-body">{ui.subtitle}</p>
       </div>
 
       {/* Function Selector */}
@@ -379,7 +502,7 @@ export default function FunctionMachineAnimation() {
             : { border: "1.5px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.5)" }
           }
         >
-          <Pencil className="w-3 h-3" /> Buat Sendiri
+          <Pencil className="w-3 h-3" /> {ui.custom}
         </button>
       </div>
 
@@ -392,7 +515,7 @@ export default function FunctionMachineAnimation() {
               type="text"
               value={customFormula}
               onChange={e => handleCustomFormulaChange(e.target.value)}
-              placeholder="contoh: 2x^2 - 3x + 1"
+              placeholder={ui.placeholder}
               className="flex-1 bg-slate-900/60 border border-orange-500/30 rounded-lg px-3 py-1.5 text-sm font-mono text-orange-200 placeholder-white/20 outline-none focus:border-orange-400/60 focus:ring-1 focus:ring-orange-400/30 transition-all"
               disabled={isRunning}
             />
@@ -407,13 +530,13 @@ export default function FunctionMachineAnimation() {
             <p className="text-[11px] text-red-400 font-body">{customError}</p>
           )}
           {!customError && customFormula && !customFormulaValid && (
-            <p className="text-[11px] text-red-400 font-body">⚠️ Rumus tidak valid. Gunakan: angka, x, +, -, ^, ()</p>
+            <p className="text-[11px] text-red-400 font-body">⚠️ {ui.invalidFormula}</p>
           )}
           {!customError && customFormulaValid && customFormula && (
-            <p className="text-[11px] text-green-400 font-body">✅ Rumus valid — f(x) = {customFormula}</p>
+            <p className="text-[11px] text-green-400 font-body">✅ {ui.validFormula} {customFormula}</p>
           )}
           <div>
-            <p className="text-[10px] text-white/30 font-body mb-1.5 uppercase tracking-wider">Contoh cepat:</p>
+            <p className="text-[10px] text-white/30 font-body mb-1.5 uppercase tracking-wider">{ui.quickExamples}</p>
             <div className="flex flex-wrap gap-1.5">
               {QUICK_PRESETS.map(p => (
                 <button key={p.value}
@@ -425,7 +548,7 @@ export default function FunctionMachineAnimation() {
             </div>
           </div>
           <p className="text-[10px] text-white/25 font-body">
-            💡 Gunakan <code className="text-orange-300/60">x</code> sebagai variabel, <code className="text-orange-300/60">^</code> untuk pangkat (mis. <code className="text-orange-300/60">x^2</code>), tanda kurung <code className="text-orange-300/60">()</code> jika perlu.
+            💡 {ui.hint} <code className="text-orange-300/60">{ui.hintVar}</code> {ui.hintAsPow} <code className="text-orange-300/60">^</code> {ui.hintPow} <code className="text-orange-300/60">x^2</code>{ui.hintBracket} <code className="text-orange-300/60">()</code> {ui.hintJika}
           </p>
         </div>
       )}
@@ -440,8 +563,8 @@ export default function FunctionMachineAnimation() {
             color={activeColor}
             visible={inputVisible}
             animClass={phase === "feeding" ? "fma-ball-enter" : ""}
-            label="Input"
-            sublabel="domain"
+            label={ui.inputLabel}
+            sublabel={ui.inputSub}
           />
           <Arrow color={activeColor} active={arrowLeftActive} />
           <MachineBox size="sm" />
@@ -451,8 +574,8 @@ export default function FunctionMachineAnimation() {
             color={activeColor}
             visible={outputVisible}
             animClass={phase === "done" ? "fma-bounce-result" : ""}
-            label="Output"
-            sublabel="kodomain"
+            label={ui.outputLabel}
+            sublabel={ui.outputSub}
           />
         </div>
 
@@ -463,8 +586,8 @@ export default function FunctionMachineAnimation() {
             color={activeColor}
             visible={inputVisible}
             animClass={phase === "feeding" ? "fma-ball-enter" : ""}
-            label="Input"
-            sublabel="domain"
+            label={ui.inputLabel}
+            sublabel={ui.inputSub}
           />
           <Arrow color={activeColor} active={arrowLeftActive} vertical />
           <MachineBox size="lg" />
@@ -474,8 +597,8 @@ export default function FunctionMachineAnimation() {
             color={activeColor}
             visible={outputVisible}
             animClass={phase === "done" ? "fma-bounce-result" : ""}
-            label="Output"
-            sublabel="kodomain"
+            label={ui.outputLabel}
+            sublabel={ui.outputSub}
           />
         </div>
       </div>
@@ -489,13 +612,11 @@ export default function FunctionMachineAnimation() {
         }}>
           <div className="flex items-center gap-2 mb-2">
             <div className="w-1.5 h-1.5 rounded-full" style={{ background: activeColor, boxShadow: `0 0 6px ${activeColor}` }} />
-            <p className="text-[10px] font-bold uppercase tracking-wider font-body" style={{ color: activeColor }}>Langkah Pengerjaan</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider font-body" style={{ color: activeColor }}>{ui.stepsTitle}</p>
           </div>
           {visibleSteps === 0 && phase === "idle" && (
             <p className="text-white/30 text-xs font-body italic">
-              {isCustom && !customFormulaValid
-                ? "Tulis rumus fungsi yang valid terlebih dahulu..."
-                : "Masukkan nilai x dan tekan \"Jalankan\" untuk melihat proses..."}
+              {isCustom && !customFormulaValid ? ui.invalidHint : ui.idleHint}
             </p>
           )}
           {steps.slice(0, visibleSteps).map((step, i) => (
@@ -543,7 +664,7 @@ export default function FunctionMachineAnimation() {
               : { background: `linear-gradient(135deg, ${activeColor} 0%, ${activeColor}cc 100%)`, border: "none", boxShadow: `0 4px 16px ${activeColor}50` }
             }
           >
-            {isRunning ? "⚙️ Memproses..." : "▶ Jalankan Mesin"}
+            {isRunning ? ui.processing : ui.run}
           </button>
           {phase === "done" && (
             <button onClick={reset}
@@ -558,7 +679,7 @@ export default function FunctionMachineAnimation() {
       {/* Preset values */}
       <div className="px-4 pb-5">
         <p className="text-[10px] font-bold uppercase tracking-wider font-body mb-2" style={{ color: `${activeColor}90` }}>
-          Coba nilai domain:
+          {ui.tryDomain}
         </p>
         <div className="flex flex-wrap gap-2">
           {PRESETS.map((v, idx) => {

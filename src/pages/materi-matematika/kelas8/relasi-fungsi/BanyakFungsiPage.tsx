@@ -722,7 +722,8 @@ const BanyakFungsiPage = () => {
                     Jika <InlineMath math="n(A)" /> menyatakan banyak anggota himpunan A dan <InlineMath math="n(B)" /> menyatakan banyak anggota himpunan B, maka banyak fungsi yang dapat dibentuk dari A ke B adalah:
                   </p>
                   <div className="bg-violet-900/40 border border-violet-400/40 rounded-xl p-4 mt-3 text-center">
-                    <BlockMath math="\text{Banyak fungsi dari } A \text{ ke } B = n(B)^{n(A)}" />
+                    <p className="font-body text-sm font-semibold text-violet-200 mb-2">Banyak fungsi dari A ke B</p>
+                    <BlockMath math="= n(B)^{n(A)}" />
                   </div>
                 </div>
 
@@ -810,7 +811,8 @@ const BanyakFungsiPage = () => {
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
                   <p className="font-body text-sm font-bold text-white mb-3">🔢 Rumus Banyak Korespondensi Satu-Satu</p>
                   <div className="bg-violet-900/30 border border-violet-500/30 rounded-lg p-4 text-center">
-                    <BlockMath math="\text{Banyak korespondensi satu-satu} = n! = n \times (n-1) \times \cdots \times 2 \times 1" />
+                    <p className="font-body text-sm font-semibold text-violet-200 mb-2">Banyak korespondensi satu-satu</p>
+                    <BlockMath math="= n! = n \times (n-1) \times \cdots \times 2 \times 1" />
                     <p className="text-xs text-white/50 mt-1">di mana n = n(A) = n(B)</p>
                   </div>
 
@@ -911,7 +913,8 @@ const BanyakFungsiPage = () => {
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <p className="text-violet-300 font-semibold mb-1">Gunakan Rumus:</p>
-                      <BlockMath math="\text{Banyak fungsi} = n(B)^{n(A)} = 4^3 = 64" />
+                      <p className="font-body text-xs text-violet-200 mb-1">Banyak fungsi</p>
+                      <BlockMath math="= n(B)^{n(A)} = 4^3 = 64" />
                     </div>
                     <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
                       <p className="font-body text-sm font-bold text-green-300">✅ Banyak fungsi dari A ke B = <strong>64 fungsi</strong></p>
@@ -954,7 +957,8 @@ const BanyakFungsiPage = () => {
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <p className="text-orange-300 font-semibold mb-1">c) Perbandingan:</p>
-                      <BlockMath math="\frac{\text{Korespondensi}}{\text{Total Fungsi}} = \frac{24}{256} = \frac{3}{32}" />
+                      <p className="font-body text-xs text-orange-200 mb-1">Korespondensi ÷ Total Fungsi</p>
+                      <BlockMath math="\frac{24}{256} = \frac{3}{32}" />
                       <p className="text-white/50 text-xs mt-1">Hanya sekitar 9,4% dari semua fungsi yang merupakan korespondensi satu-satu!</p>
                     </div>
                     <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-lg p-3">
