@@ -95,7 +95,48 @@ const SvgPersegiDua = () => {
   );
 };
 
-/** Soal 2 – Pola segitiga batang korek api: 1, 2, 3 segitiga */
+/** Soal 2 (BARU) – Segitiga berjajar horizontal: 1, 2, 3 segitiga dalam satu baris */
+const SvgSegitigaBarisan = () => {
+  const W = 34, H = 30;
+  const groupW = 100;
+  const svgW = 3 * groupW + 10;
+  const svgH = 82;
+  const baseY = 58;
+
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {[1, 2, 3].map((n, gi) => {
+        const cx = 5 + gi * groupW + groupW / 2;
+        const totalW = n * W;
+        const startX = cx - totalW / 2;
+        const lines: [number, number, number, number][] = [];
+        for (let k = 0; k < n; k++) {
+          const bx = startX + k * W;
+          const ax = bx + W / 2;
+          // left slant
+          lines.push([bx, baseY, ax, baseY - H]);
+          // right slant
+          lines.push([ax, baseY - H, bx + W, baseY]);
+          // base
+          lines.push([bx, baseY, bx + W, baseY]);
+        }
+        return (
+          <g key={gi}>
+            {lines.map(([x1, y1, x2, y2], li) => (
+              <line key={li} x1={x1} y1={y1} x2={x2} y2={y2}
+                stroke="#fbbf24" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            ))}
+            <text x={cx} y={svgH - 10} textAnchor="middle" fill="#fcd34d" fontSize="9" fontFamily="sans-serif" fontWeight="600">
+              Pola ke-{n}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+/** Soal lama – Pola segitiga batang korek api: 1, 2, 3 segitiga */
 const SvgSegitiga = () => {
   const s = 28, h = s * 0.866;
   const groupW = 95;
