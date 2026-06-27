@@ -222,22 +222,9 @@ type QuestionItem = {
 };
 
 const questions: QuestionItem[] = [
-  // ══════════════════════════════════════════════════════════════════════
-  //  SOAL DARI LEMBAR KERJA (persis seperti yang diupload)
-  // ══════════════════════════════════════════════════════════════════════
+  // Q2 dari upload → no. 1
   {
     number: 1,
-    content: "Perhatikan pola berikut.",
-    type: "mixed",
-    svgNode: <SvgPersegi />,
-    parts: [
-      { label: "a.", text: "Tuliskan banyaknya persegi pada setiap pola di atas." },
-      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
-      { label: "c.", text: "Tentukan banyaknya persegi pada pola ke-25 dan pola ke-50." },
-    ],
-  },
-  {
-    number: 2,
     content: "Perhatikan pola berikut.",
     type: "mixed",
     svgNode: <SvgSegitiga />,
@@ -248,20 +235,9 @@ const questions: QuestionItem[] = [
       },
     ],
   },
+  // Q4 dari upload → no. 2
   {
-    number: 3,
-    content: "Perhatikan pola berikut.",
-    type: "mixed",
-    svgNode: <SvgPolaM />,
-    parts: [
-      { label: "a.", text: "Tuliskan banyaknya noktah pada setiap pola tersebut dalam bentuk deret bilangan." },
-      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan tersebut." },
-      { label: "c.", text: "Tentukan banyak noktah pada pola ke-100." },
-      { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai pola ke-10." },
-    ],
-  },
-  {
-    number: 4,
+    number: 2,
     content: "Perhatikan pola berikut.",
     type: "mixed",
     svgNode: <SvgLingkaran />,
@@ -272,20 +248,9 @@ const questions: QuestionItem[] = [
       { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
     ],
   },
+  // Q6 (soal asli no.1) → no. 3
   {
-    number: 5,
-    content: "Tentukan 3 suku berikutnya dari pola bilangan berikut.",
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "0,\\ 3,\\ 6,\\ 9,\\ \\ldots" },
-      { label: "b.", math: "1,\\ 5,\\ 9,\\ 13,\\ \\ldots" },
-    ],
-  },
-  // ══════════════════════════════════════════════════════════════════════
-  //  SOAL LANJUTAN (dipertahankan dari soal asli)
-  // ══════════════════════════════════════════════════════════════════════
-  {
-    number: 6,
+    number: 3,
     title: "Pola Gambar – Susunan Persegi",
     content: "Perhatikan pola berikut.",
     type: "mixed",
@@ -301,66 +266,9 @@ const questions: QuestionItem[] = [
       { label: "c.", math: "U_{25} = 25^2 = 625 \\text{ persegi};\\quad U_{50} = 50^2 = 2.500 \\text{ persegi}" },
     ],
   },
+  // Q11 (soal asli no.7) → no. 4
   {
-    number: 7,
-    title: "Pola Gambar – Susunan Segitiga (Batang Korek Api)",
-    content: "Perhatikan pola berikut.",
-    type: "mixed",
-    svgNode: <SvgSegitiga />,
-    parts: [
-      {
-        label: "",
-        text: "Yeni menyusun segitiga-segitiga seperti gambar di atas menggunakan batang-batang korek api. Tentukan banyaknya batang korek api untuk menyusun segitiga pada pola ke-15 dan pola ke-30.",
-      },
-    ],
-    kunciJawaban: [
-      { label: "Pola:", text: "Pola ke-1 = 3 batang, Pola ke-2 = 5 batang, Pola ke-3 = 7 batang → beda = +2 setiap pola." },
-      { label: "Rumus:", math: "U_n = 2n + 1" },
-      { label: "Pola ke-15:", math: "U_{15} = 2(15) + 1 = 31 \\text{ batang korek api}" },
-      { label: "Pola ke-30:", math: "U_{30} = 2(30) + 1 = 61 \\text{ batang korek api}" },
-    ],
-  },
-  {
-    number: 8,
-    title: "Pola Gambar – Susunan Lingkaran",
-    content: "Perhatikan pola berikut.",
-    type: "mixed",
-    svgNode: <SvgLingkaran />,
-    parts: [
-      { label: "a.", text: "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan." },
-      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
-      { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
-      { label: "d.", text: "Tentukan jumlah lingkaran dari pola ke-1 sampai dengan pola ke-10." },
-    ],
-    kunciJawaban: [
-      { label: "a.", text: "Barisan lingkaran: 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, ... (bilangan segitiga mulai T₂)" },
-      { label: "b.", math: "U_n = \\frac{(n+1)(n+2)}{2}" },
-      { label: "c.", math: "U_{20} = \\frac{(21)(22)}{2} = 231 \\text{ lingkaran}" },
-      { label: "d.", math: "\\text{Jumlah} = 3+6+10+15+21+28+36+45+55+66 = 285 \\text{ lingkaran}" },
-    ],
-  },
-  {
-    number: 9,
-    title: "Melanjutkan Barisan Bilangan",
-    content: "Tentukan 3 suku berikutnya dari pola bilangan berikut.",
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "0,\\ 3,\\ 6,\\ 9,\\ \\ldots" },
-      { label: "b.", math: "1,\\ 5,\\ 9,\\ 13,\\ \\ldots" },
-    ],
-    kunciJawaban: [
-      { label: "a.", math: "0,\\ 3,\\ 6,\\ 9,\\ \\underbrace{12,\\ 15,\\ 18}_{\\text{3 suku berikutnya}} \\quad (\\text{beda} = +3,\\ U_n = 3(n-1))" },
-      { label: "b.", math: "1,\\ 5,\\ 9,\\ 13,\\ \\underbrace{17,\\ 21,\\ 25}_{\\text{3 suku berikutnya}} \\quad (\\text{beda} = +4,\\ U_n = 4n - 3)" },
-    ],
-  },
-  {
-    number: 10,
-    title: "Melanjutkan Pola Bilangan",
-    content: "Perhatikan barisan bilangan berikut:\n2, 5, 10, 17, 26, ...\nTentukan dua suku berikutnya dari barisan bilangan tersebut dan jelaskan aturan polanya!",
-    type: "essay",
-  },
-  {
-    number: 11,
+    number: 4,
     title: "Suku yang Hilang",
     content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
     type: "mixed",
@@ -370,20 +278,23 @@ const questions: QuestionItem[] = [
       { label: "c.", math: "100,\\ 95,\\ 88,\\ 79,\\ ?,\\ 55" },
     ],
   },
+  // Q12 (soal asli no.9) → no. 5
   {
-    number: 12,
+    number: 5,
     title: "Konfigurasi Objek – Pola Titik",
     content: "Perhatikan susunan titik yang membentuk baris ganjil: 1, 3, 5, 7, ...\na. Tuliskan aturan/pola barisannya.\nb. Berapa banyak titik pada susunan ke-8?\nc. Susunan ke berapa yang memiliki 25 titik?",
     type: "essay",
   },
+  // Q13 (soal asli no.14) → no. 6
   {
-    number: 13,
+    number: 6,
     title: "Barisan Bertingkat",
     content: "Barisan bilangan: 1, 3, 7, 13, 21, 31, ...\n\na. Hitung selisih antara suku-suku berurutan (beda tingkat 1).\nb. Hitung selisih dari barisan beda tingkat 1 (beda tingkat 2).\nc. Tentukan suku ke-8 dari barisan tersebut.",
     type: "essay",
   },
+  // Q14 (soal asli no.15) → no. 7
   {
-    number: 14,
+    number: 7,
     title: "Soal Kontekstual – Pertumbuhan Tanaman",
     content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
     type: "essay",
