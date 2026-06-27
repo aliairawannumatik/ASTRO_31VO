@@ -375,9 +375,55 @@ const questions: QuestionItem[] = [
       },
     ],
   },
-  // Q baru dari upload → no. 3
+  // no. 3
   {
     number: 3,
+    content: "Perhatikan pola berikut.",
+    type: "mixed",
+    svgNode: <SvgLingkaran />,
+    parts: [
+      { label: "a.", text: "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan." },
+      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
+      { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
+      { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
+    ],
+  },
+  // no. 4
+  {
+    number: 4,
+    title: "Suku yang Hilang",
+    content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
+    type: "mixed",
+    parts: [
+      { label: "a.", math: "3,\\ 7,\\ 11,\\ ?,\\ 19,\\ 23" },
+      { label: "b.", math: "2,\\ 4,\\ 8,\\ ?,\\ 32,\\ 64" },
+      { label: "c.", math: "100,\\ 95,\\ 88,\\ 79,\\ ?,\\ 55" },
+    ],
+  },
+  // no. 5
+  {
+    number: 5,
+    title: "Konfigurasi Objek – Pola Titik",
+    content: "Perhatikan susunan titik yang membentuk baris ganjil: 1, 3, 5, 7, ...\na. Tuliskan aturan/pola barisannya.\nb. Berapa banyak titik pada susunan ke-8?\nc. Susunan ke berapa yang memiliki 25 titik?",
+    type: "essay",
+  },
+  // no. 6
+  {
+    number: 6,
+    title: "Barisan Bertingkat",
+    content: "Barisan bilangan: 1, 3, 7, 13, 21, 31, ...\n\na. Hitung selisih antara suku-suku berurutan (beda tingkat 1).\nb. Hitung selisih dari barisan beda tingkat 1 (beda tingkat 2).\nc. Tentukan suku ke-8 dari barisan tersebut.",
+    type: "essay",
+  },
+  // no. 7
+  {
+    number: 7,
+    title: "Soal Kontekstual – Pertumbuhan Tanaman",
+    content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
+    type: "essay",
+  },
+  // no. 8 (dipindah dari no. 3)
+  {
+    number: 8,
     content: "Perhatikan pola berikut.",
     type: "mixed",
     svgNode: <SvgLingkaranPersegi />,
@@ -393,52 +439,6 @@ const questions: QuestionItem[] = [
       { label: "c.", math: "U_{20} = 20 \\times 22 = 440 \\text{ lingkaran}" },
       { label: "d.", math: "S_{10} = \\sum_{n=1}^{10}(n^2+2n) = 385 + 110 = 495 \\text{ noktah}" },
     ],
-  },
-  // Q4 dari upload → no. 4
-  {
-    number: 4,
-    content: "Perhatikan pola berikut.",
-    type: "mixed",
-    svgNode: <SvgLingkaran />,
-    parts: [
-      { label: "a.", text: "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan." },
-      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
-      { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
-      { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
-    ],
-  },
-  // no. 5
-  {
-    number: 5,
-    title: "Suku yang Hilang",
-    content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "3,\\ 7,\\ 11,\\ ?,\\ 19,\\ 23" },
-      { label: "b.", math: "2,\\ 4,\\ 8,\\ ?,\\ 32,\\ 64" },
-      { label: "c.", math: "100,\\ 95,\\ 88,\\ 79,\\ ?,\\ 55" },
-    ],
-  },
-  // no. 6
-  {
-    number: 6,
-    title: "Konfigurasi Objek – Pola Titik",
-    content: "Perhatikan susunan titik yang membentuk baris ganjil: 1, 3, 5, 7, ...\na. Tuliskan aturan/pola barisannya.\nb. Berapa banyak titik pada susunan ke-8?\nc. Susunan ke berapa yang memiliki 25 titik?",
-    type: "essay",
-  },
-  // no. 7
-  {
-    number: 7,
-    title: "Barisan Bertingkat",
-    content: "Barisan bilangan: 1, 3, 7, 13, 21, 31, ...\n\na. Hitung selisih antara suku-suku berurutan (beda tingkat 1).\nb. Hitung selisih dari barisan beda tingkat 1 (beda tingkat 2).\nc. Tentukan suku ke-8 dari barisan tersebut.",
-    type: "essay",
-  },
-  // no. 8
-  {
-    number: 8,
-    title: "Soal Kontekstual – Pertumbuhan Tanaman",
-    content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
-    type: "essay",
   },
   // no. 9 (ditambah dari no. 4)
   {
