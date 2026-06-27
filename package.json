@@ -8,14 +8,14 @@
     "*.scss"
   ],
   "scripts": {
-    "dev": "./node_modules/.bin/tsx watch server.ts & ./node_modules/.bin/vite --port 5000",
-    "server": "./node_modules/.bin/tsx watch server.ts",
-    "build": "NODE_ENV=production ./node_modules/.bin/vite build",
-    "build:dev": "./node_modules/.bin/vite build --mode development",
-    "build:analyze": "./node_modules/.bin/vite build --mode development",
-    "start": "NODE_ENV=production ./node_modules/.bin/tsx server.ts",
-    "lint": "./node_modules/.bin/eslint .",
-    "preview": "./node_modules/.bin/vite preview"
+    "dev": "npx tsx watch server.ts & npx vite --port 5000",
+    "server": "npx tsx watch server.ts",
+    "build": "NODE_ENV=production npx vite build",
+    "build:dev": "npx vite build --mode development",
+    "build:analyze": "npx vite build --mode development",
+    "start": "NODE_ENV=production npx tsx server.ts",
+    "lint": "npx eslint .",
+    "preview": "npx vite preview"
   },
   "dependencies": {
     "@google/genai": "^2.10.0",
