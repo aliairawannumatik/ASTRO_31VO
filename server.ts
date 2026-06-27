@@ -29,7 +29,7 @@ app.post('/api/chat', async (req, res) => {
     const messages = req.body?.messages
     const language = req.body?.language ?? 'id'
 
-    const geminiApiKey = process.env.AI_INTEGRATIONS_GEMINI_API_KEY
+    const geminiApiKey = process.env.AI_INTEGRATIONS_GEMINI_API_KEY || process.env.GEMINI_API_KEY
     const geminiBaseUrl = process.env.AI_INTEGRATIONS_GEMINI_BASE_URL
 
     if (!geminiApiKey) {
