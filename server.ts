@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { GoogleGenAI } from '@google/genai'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -28,9 +29,10 @@ app.post('/api/chat', async (req, res) => {
     const messages = req.body?.messages
     const language = req.body?.language ?? 'id'
 
-    const groqApiKey = process.env.GROQ_API_KEY
+    const geminiApiKey = process.env.AI_INTEGRATIONS_GEMINI_API_KEY
+    const geminiBaseUrl = process.env.AI_INTEGRATIONS_GEMINI_BASE_URL
 
-    if (!groqApiKey) {
+    if (!geminiApiKey) {
       return res.status(503).json({ error: 'Layanan AI belum dikonfigurasi di server.' })
     }
 
@@ -41,38 +43,35 @@ app.post('/api/chat', async (req, res) => {
     const chatMessages = messages
       .filter((m) => m && (m.role === 'user' || m.role === 'model') && typeof m.text === 'string')
       .map((m) => ({
-        role: m.role === 'model' ? 'assistant' : 'user',
-        content: m.text as string,
+        role: m.role === 'model' ? 'model' : 'user',
+        parts: [{ text: m.text as string }],
       }))
 
     if (chatMessages.length === 0) {
       return res.status(400).json({ error: 'Pesan tidak valid.' })
     }
 
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${groqApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        messages: [
-          { role: 'system', content: getSystemPrompt(language) },
-          ...chatMessages,
-        ],
-        max_tokens: 8192,
-      }),
-    })
-
-    if (!response.ok) {
-      const err = await response.text()
-      console.error('Groq API error:', err)
-      return res.status(502).json({ error: 'Terjadi kesalahan saat menghubungi NUMATIK AI.' })
+    const clientOptions: { apiKey: string; baseUrl?: string } = { apiKey: geminiApiKey }
+    if (geminiBaseUrl) {
+      clientOptions.baseUrl = geminiBaseUrl
     }
 
-    const data = await response.json() as { choices?: { message?: { content?: string } }[] }
-    const text = data.choices?.[0]?.message?.content ?? ''
+    const ai = new GoogleGenAI(clientOptions)
+
+    const lastMessage = chatMessages[chatMessages.length - 1]
+    const history = chatMessages.slice(0, -1)
+
+    const chat = ai.chats.create({
+      model: 'gemini-2.0-flash',
+      config: {
+        systemInstruction: getSystemPrompt(language),
+        maxOutputTokens: 8192,
+      },
+      history,
+    })
+
+    const response = await chat.sendMessage({ message: lastMessage.parts[0].text })
+    const text = response.text ?? ''
 
     return res.json({ text })
   } catch (error) {
