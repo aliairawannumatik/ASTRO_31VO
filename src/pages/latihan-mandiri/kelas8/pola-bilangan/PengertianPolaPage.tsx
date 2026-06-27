@@ -407,9 +407,42 @@ const questions: QuestionItem[] = [
       { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
     ],
   },
-  // Q6 (soal asli no.1) → no. 5
+  // no. 5
   {
     number: 5,
+    title: "Suku yang Hilang",
+    content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
+    type: "mixed",
+    parts: [
+      { label: "a.", math: "3,\\ 7,\\ 11,\\ ?,\\ 19,\\ 23" },
+      { label: "b.", math: "2,\\ 4,\\ 8,\\ ?,\\ 32,\\ 64" },
+      { label: "c.", math: "100,\\ 95,\\ 88,\\ 79,\\ ?,\\ 55" },
+    ],
+  },
+  // no. 6
+  {
+    number: 6,
+    title: "Konfigurasi Objek – Pola Titik",
+    content: "Perhatikan susunan titik yang membentuk baris ganjil: 1, 3, 5, 7, ...\na. Tuliskan aturan/pola barisannya.\nb. Berapa banyak titik pada susunan ke-8?\nc. Susunan ke berapa yang memiliki 25 titik?",
+    type: "essay",
+  },
+  // no. 7
+  {
+    number: 7,
+    title: "Barisan Bertingkat",
+    content: "Barisan bilangan: 1, 3, 7, 13, 21, 31, ...\n\na. Hitung selisih antara suku-suku berurutan (beda tingkat 1).\nb. Hitung selisih dari barisan beda tingkat 1 (beda tingkat 2).\nc. Tentukan suku ke-8 dari barisan tersebut.",
+    type: "essay",
+  },
+  // no. 8
+  {
+    number: 8,
+    title: "Soal Kontekstual – Pertumbuhan Tanaman",
+    content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
+    type: "essay",
+  },
+  // no. 9 (dipindah dari no. 5)
+  {
+    number: 9,
     title: "Pola Gambar – Susunan Persegi",
     content: "Perhatikan pola berikut.",
     type: "mixed",
@@ -424,39 +457,6 @@ const questions: QuestionItem[] = [
       { label: "b.", math: "U_n = n^2 \\text{ (bilangan kuadrat). Setiap pola ke-}n\\text{ memiliki }n^2\\text{ persegi.}" },
       { label: "c.", math: "U_{25} = 25^2 = 625 \\text{ persegi};\\quad U_{50} = 50^2 = 2.500 \\text{ persegi}" },
     ],
-  },
-  // Q11 (soal asli no.7) → no. 6
-  {
-    number: 6,
-    title: "Suku yang Hilang",
-    content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
-    type: "mixed",
-    parts: [
-      { label: "a.", math: "3,\\ 7,\\ 11,\\ ?,\\ 19,\\ 23" },
-      { label: "b.", math: "2,\\ 4,\\ 8,\\ ?,\\ 32,\\ 64" },
-      { label: "c.", math: "100,\\ 95,\\ 88,\\ 79,\\ ?,\\ 55" },
-    ],
-  },
-  // Q12 (soal asli no.9) → no. 7
-  {
-    number: 7,
-    title: "Konfigurasi Objek – Pola Titik",
-    content: "Perhatikan susunan titik yang membentuk baris ganjil: 1, 3, 5, 7, ...\na. Tuliskan aturan/pola barisannya.\nb. Berapa banyak titik pada susunan ke-8?\nc. Susunan ke berapa yang memiliki 25 titik?",
-    type: "essay",
-  },
-  // Q13 (soal asli no.14) → no. 8
-  {
-    number: 8,
-    title: "Barisan Bertingkat",
-    content: "Barisan bilangan: 1, 3, 7, 13, 21, 31, ...\n\na. Hitung selisih antara suku-suku berurutan (beda tingkat 1).\nb. Hitung selisih dari barisan beda tingkat 1 (beda tingkat 2).\nc. Tentukan suku ke-8 dari barisan tersebut.",
-    type: "essay",
-  },
-  // Q14 (soal asli no.15) → no. 9
-  {
-    number: 9,
-    title: "Soal Kontekstual – Pertumbuhan Tanaman",
-    content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
-    type: "essay",
   },
 ];
 
