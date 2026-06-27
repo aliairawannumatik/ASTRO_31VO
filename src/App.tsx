@@ -779,9 +779,9 @@ const PolaAritmetikaMMK8Page = lazy(() => import("./pages/materi-matematika/kela
 const PolaGeometriMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/pola-bilangan/PolaGeometriPage"));
 const KoordinatCartesiusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/KoordinatCartesiusPage"));
 const UnsurUnsurCartesiusMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/UnsurUnsurCartesiusPage"));
-const PosisiRelatifTitikAcuanMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikDanGarisPage"));
+const PosisiRelatifTitikAcuanMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage"));
 const JarakTitikGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/JarakTitikGarisPage"));
-const PosisiRelatifGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikDanGarisPage"));
+const PosisiRelatifGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifGarisPage"));
 const PosisiRelatifTitikDanGarisMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikDanGarisPage"));
 const RelasiFungsiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/RelasiFungsiPage"));
 const PengertianRelasiMMK8Page = lazy(() => import("./pages/materi-matematika/kelas8/relasi-fungsi/PengertianRelasiPage"));
