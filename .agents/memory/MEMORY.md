@@ -2,3 +2,4 @@
 - [Translation pattern](translation-pattern.md) — all Bilangan Bulat Kelas 7 pages use a big `translations = {id:{}, en:{}, ja:{}}` object in the main component; sub-components call `useLanguage()` directly.
 - [Terminology rules](terminology-rules.md) — difficulty badges, grade names, and key term translations for id/en/ja.
 - [Perbandingan trilingual complete](perbandingan-trilingual.md) — all 6 Kelas 7 Perbandingan files done with ID/EN/JA; hub uses useLanguage to pass language-specific subtopics arrays to MateriTopicPage.
+- [Garis dan Sudut trilingual complete](garis-dan-sudut-trilingual.md) — all 6 Kelas 7 Garis dan Sudut materi-matematika pages done with ID/EN/JA including ProtractorAnimation component.

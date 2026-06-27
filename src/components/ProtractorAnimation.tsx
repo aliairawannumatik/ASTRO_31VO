@@ -1,32 +1,145 @@
 import { useState, useRef, useCallback } from "react";
 import { RotateCcw } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // ── Constants ──────────────────────────────────────────────────────────
-const R = 86;          // protractor outer radius (local coords)
+const R = 86;
 const SVG_W = 400;
 const SVG_H = 320;
-const VX = 200;        // vertex X in canvas
-const VY = 248;        // vertex Y in canvas
-const RAY = 130;       // ray length
+const VX = 200;
+const VY = 248;
+const RAY = 130;
 
+// Mode keys are internal logic/state — never translated
 type Mode = "pelurus" | "penyiku" | "bertolak";
+
+// ── uiMap ──────────────────────────────────────────────────────────────
+const uiMap = {
+  id: {
+    header: "Busur Derajat Portabel — Simulasi Interaktif",
+    dragHint: "seret busur untuk memindahkan",
+    tabPelurus: "↔ Pelurus",
+    tabPenyiku: "⌐ Penyiku",
+    tabBertolak: "✕ Bertolak",
+    svgDragGrip: "✥ seret",
+    svgBusurAt: (x: number, y: number) => `Busur @ (${x}, ${y})`,
+    sliderAngleLabel: "📐 Besar Sudut α",
+    sliderTiltLabel: "🔄 Kemiringan Busur",
+    tiltLeft: "miring kiri −80°",
+    tiltCenter: "tegak 0°",
+    tiltRight: "miring kanan +80°",
+    modePelurusTitle: "↔ Sudut Pelurus (Supplementary)",
+    modePenyikuTitle: "⌐ Sudut Penyiku (Complementary)",
+    modeBertolakTitle: "✕ Sudut Bertolak Belakang (Vertical Angles)",
+    betaPelurus: "β (pelurus)",
+    betaPenyiku: "β (penyiku)",
+    bertolakLabel: "(bertolak belakang)",
+    bertolakPelurus: "(pelurus)",
+    tipPelurus: (compl: number, a: number) =>
+      `Jika pelurus dari α diketahui, α = 180° − ${compl}° = ${a}°. Busur derajat mengukur sudut langsung.`,
+    tipPenyiku:
+      "Penyiku hanya ada untuk sudut < 90°. Dua sudut yang penyiku membentuk sudut siku-siku sempurna.",
+    tipBertolak:
+      "Dua garis berpotongan selalu membentuk 2 pasang sudut bertolak belakang yang sama besar. Tidak perlu mengukur semua!",
+    howToTitle: "💡 Cara Menggunakan Busur:",
+    howTo1a: "Seret busur",
+    howTo1b: "ke titik sudut (O) untuk mengukur",
+    howTo2a: "Geser α",
+    howTo2b: "untuk mengubah besar sudut yang diukur",
+    howTo3a: "Miringkan busur",
+    howTo3b: "untuk menyelaraskan dengan sisi sudut",
+    howTo4: "Baca angka pada busur di mana sinar kedua memotong skala",
+    resetBtn: "Kembalikan Busur ke Posisi Awal",
+  },
+  en: {
+    header: "Portable Protractor — Interactive Simulation",
+    dragHint: "drag protractor to move",
+    tabPelurus: "↔ Supplementary",
+    tabPenyiku: "⌐ Complementary",
+    tabBertolak: "✕ Vertical Angles",
+    svgDragGrip: "✥ drag",
+    svgBusurAt: (x: number, y: number) => `Protractor @ (${x}, ${y})`,
+    sliderAngleLabel: "📐 Angle Size α",
+    sliderTiltLabel: "🔄 Protractor Tilt",
+    tiltLeft: "tilt left −80°",
+    tiltCenter: "upright 0°",
+    tiltRight: "tilt right +80°",
+    modePelurusTitle: "↔ Supplementary Angles",
+    modePenyikuTitle: "⌐ Complementary Angles",
+    modeBertolakTitle: "✕ Vertical Angles",
+    betaPelurus: "β (supplement)",
+    betaPenyiku: "β (complement)",
+    bertolakLabel: "(vertical angles)",
+    bertolakPelurus: "(supplementary)",
+    tipPelurus: (compl: number, a: number) =>
+      `If the supplement of α is known, α = 180° − ${compl}° = ${a}°. The protractor measures the angle directly.`,
+    tipPenyiku:
+      "Complementary angles only exist for angles < 90°. Two complementary angles together form a perfect right angle.",
+    tipBertolak:
+      "Two intersecting lines always form 2 pairs of equal vertical angles. No need to measure all of them!",
+    howToTitle: "💡 How to Use the Protractor:",
+    howTo1a: "Drag the protractor",
+    howTo1b: "to the vertex point (O) to measure",
+    howTo2a: "Slide α",
+    howTo2b: "to change the measured angle size",
+    howTo3a: "Tilt the protractor",
+    howTo3b: "to align it with the angle's side",
+    howTo4: "Read the number on the protractor where the second ray crosses the scale",
+    resetBtn: "Reset Protractor to Initial Position",
+  },
+  ja: {
+    header: "携帯分度器 — インタラクティブシミュレーション",
+    dragHint: "ドラッグして移動",
+    tabPelurus: "↔ 補角",
+    tabPenyiku: "⌐ 余角",
+    tabBertolak: "✕ 対頂角",
+    svgDragGrip: "✥ ドラッグ",
+    svgBusurAt: (x: number, y: number) => `分度器 @ (${x}, ${y})`,
+    sliderAngleLabel: "📐 角αの大きさ",
+    sliderTiltLabel: "🔄 分度器の傾き",
+    tiltLeft: "左に傾ける −80°",
+    tiltCenter: "垂直 0°",
+    tiltRight: "右に傾ける +80°",
+    modePelurusTitle: "↔ 補角（Supplementary）",
+    modePenyikuTitle: "⌐ 余角（Complementary）",
+    modeBertolakTitle: "✕ 対頂角（Vertical Angles）",
+    betaPelurus: "β（補角）",
+    betaPenyiku: "β（余角）",
+    bertolakLabel: "（対頂角）",
+    bertolakPelurus: "（補角）",
+    tipPelurus: (compl: number, a: number) =>
+      `αの補角がわかれば、α = 180° − ${compl}° = ${a}°。分度器で直接測定できます。`,
+    tipPenyiku:
+      "余角は90°未満の角にのみ存在します。2つの余角を合わせると直角になります。",
+    tipBertolak:
+      "2直線が交わると常に2組の等しい対頂角ができます。すべてを測る必要はありません！",
+    howToTitle: "💡 分度器の使い方：",
+    howTo1a: "分度器をドラッグ",
+    howTo1b: "して頂点（O）に合わせて測る",
+    howTo2a: "αをスライド",
+    howTo2b: "して測る角の大きさを変える",
+    howTo3a: "分度器を傾ける",
+    howTo3b: "角の辺に合わせる",
+    howTo4: "2本目の光線が目盛りと交わる数字を読む",
+    resetBtn: "分度器を元の位置に戻す",
+  },
+};
+
+type UI = typeof uiMap.id;
 
 // ── Helpers ────────────────────────────────────────────────────────────
 const deg2rad = (d: number) => (d * Math.PI) / 180;
 
-/** Point on protractor arc at deg (0=right, 90=up, 180=left) in local coords */
 const arcPt = (deg: number, r = R) => ({
   x: r * Math.cos(deg2rad(deg)),
   y: -r * Math.sin(deg2rad(deg)),
 });
 
-/** Canvas endpoint of a ray from (vx,vy) at angleDeg, length len */
 const rayPt = (vx: number, vy: number, angleDeg: number, len = RAY) => ({
   x: vx + len * Math.cos(deg2rad(angleDeg)),
   y: vy - len * Math.sin(deg2rad(angleDeg)),
 });
 
-/** Sector arc path (for filled sectors around a vertex in canvas coords) */
 const sectorPath = (vx: number, vy: number, r: number, a1: number, a2: number) => {
   const s = rayPt(vx, vy, a1, r);
   const e = rayPt(vx, vy, a2, r);
@@ -36,8 +149,7 @@ const sectorPath = (vx: number, vy: number, r: number, a1: number, a2: number) =
 };
 
 // ── Protractor SVG (local, center at origin) ───────────────────────────
-function ProtractorBody({ angle }: { angle: number }) {
-  const sectors = [];
+function ProtractorBody({ angle, dragGripLabel }: { angle: number; dragGripLabel: string }) {
   const ticks: { d: number; ox: number; oy: number; ix: number; iy: number; major: boolean }[] = [];
 
   for (let d = 0; d <= 180; d += 5) {
@@ -53,40 +165,29 @@ function ProtractorBody({ angle }: { angle: number }) {
 
   return (
     <>
-      {/* Body fill */}
       <path
         d={`M ${-R},0 L ${R},0 A ${R},${R} 0 0,1 ${-R},0 Z`}
         fill="rgba(34,211,238,0.07)"
         stroke="none"
       />
-
-      {/* Highlighted sector (measured angle) */}
       <path
         d={`M 0,0 L ${R},0 A ${R},${R} 0 ${angle > 180 ? 1 : 0},1 ${arm.x},${arm.y} Z`}
         fill="rgba(250,204,21,0.18)"
         stroke="none"
       />
-
-      {/* Outer arc */}
       <path
         d={`M ${R},0 A ${R},${R} 0 0,1 ${-R},0`}
         fill="none"
         stroke="#22d3ee"
         strokeWidth="2.2"
       />
-
-      {/* Inner arc (decoration) */}
       <path
         d={`M ${R - 18},0 A ${R - 18},${R - 18} 0 0,1 ${-(R - 18)},0`}
         fill="none"
         stroke="rgba(34,211,238,0.2)"
         strokeWidth="1"
       />
-
-      {/* Baseline */}
       <line x1={-R} y1={0} x2={R} y2={0} stroke="#22d3ee" strokeWidth="2" />
-
-      {/* Tick marks */}
       {ticks.map(({ d, ox, oy, ix, iy, major }) => (
         <line
           key={d}
@@ -95,8 +196,6 @@ function ProtractorBody({ angle }: { angle: number }) {
           strokeWidth={major ? 1.5 : 0.8}
         />
       ))}
-
-      {/* Degree labels (every 10°) */}
       {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180].map(d => {
         const lp = arcPt(d, R - 26);
         return (
@@ -115,16 +214,10 @@ function ProtractorBody({ angle }: { angle: number }) {
           </text>
         );
       })}
-
-      {/* Center base notch */}
       <rect x={-3} y={-3} width={6} height={6} fill="var(--bg-secondary)" rx={1} />
       <circle cx={0} cy={0} r={2.5} fill="#facc15" />
-
-      {/* 0 and 180 end markers */}
       <text x={R + 6} y={4} fontSize="8" fill="#22d3ee" fontFamily="monospace" textAnchor="start">0°</text>
       <text x={-(R + 6)} y={4} fontSize="8" fill="#22d3ee" fontFamily="monospace" textAnchor="end">180°</text>
-
-      {/* Angle indicator arm */}
       <line
         x1={0} y1={0}
         x2={arm.x} y2={arm.y}
@@ -133,25 +226,26 @@ function ProtractorBody({ angle }: { angle: number }) {
         strokeLinecap="round"
         strokeDasharray="none"
       />
-      {/* Arm tip circle */}
       <circle cx={arm.x} cy={arm.y} r={4} fill="#facc15" />
-
-      {/* Angle readout bubble */}
       <g transform={`translate(${midPt.x},${midPt.y})`}>
         <rect x={-18} y={-9} width={36} height={18} rx={5} fill="var(--bg-card)" stroke="#facc15" strokeWidth={1} />
         <text textAnchor="middle" dominantBaseline="middle" fontSize="11" fill="#facc15" fontWeight="bold" fontFamily="monospace">
           {angle}°
         </text>
       </g>
-
-      {/* Drag grip label */}
-      <text x={0} y={15} textAnchor="middle" fontSize="7" fill="rgba(34,211,238,0.5)" fontFamily="sans-serif">✥ seret</text>
+      {/* Drag grip label — translated */}
+      <text x={0} y={15} textAnchor="middle" fontSize="7" fill="rgba(34,211,238,0.5)" fontFamily="sans-serif">
+        {dragGripLabel}
+      </text>
     </>
   );
 }
 
 // ── Main Component ─────────────────────────────────────────────────────
 export default function ProtractorAnimation() {
+  const { language } = useLanguage();
+  const ui: UI = uiMap[language as "id" | "en" | "ja"] ?? uiMap.id;
+
   const [angle, setAngle] = useState(55);
   const [mode, setMode] = useState<Mode>("pelurus");
   const [protX, setProtX] = useState(VX);
@@ -165,7 +259,6 @@ export default function ProtractorAnimation() {
   const α = Math.min(angle, maxAngle);
   const complement = mode === "penyiku" ? 90 - α : 180 - α;
 
-  // ── Get SVG-space coords from pointer/mouse event
   const getSVGXY = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     const svg = svgRef.current;
     if (!svg) return { x: 0, y: 0 };
@@ -178,7 +271,6 @@ export default function ProtractorAnimation() {
     };
   }, []);
 
-  // ── Drag handlers
   const onDown = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     const { x, y } = getSVGXY(e);
     const dx = x - protX;
@@ -205,14 +297,21 @@ export default function ProtractorAnimation() {
 
   const resetProt = () => { setProtX(VX); setProtY(VY); setProtRot(0); };
 
-  // ── Diagram geometry
   const p = (a: number, len = RAY) => rayPt(VX, VY, a, len);
 
-  // ── Colors
   const C_ALPHA = "#facc15";
   const C_BETA  = "#a78bfa";
   const C_COMP  = "#22d3ee";
   const C_OPP   = "#fb923c";
+
+  // Display label for mode tab — separated from internal Mode key
+  const modeTabLabel = (m: Mode): string =>
+    m === "pelurus" ? ui.tabPelurus : m === "penyiku" ? ui.tabPenyiku : ui.tabBertolak;
+
+  const modeTitle =
+    mode === "pelurus" ? ui.modePelurusTitle :
+    mode === "penyiku" ? ui.modePenyikuTitle :
+    ui.modeBertolakTitle;
 
   return (
     <div className="rounded-xl border border-cyan-500/30 bg-slate-900/60 overflow-hidden">
@@ -220,14 +319,14 @@ export default function ProtractorAnimation() {
       <div className="bg-cyan-500/10 border-b border-cyan-500/20 px-4 py-3 flex items-center gap-2">
         <span className="text-lg">📏</span>
         <span className="font-body font-semibold text-cyan-300 text-sm">
-          Busur Derajat Portabel — Simulasi Interaktif
+          {ui.header}
         </span>
-        <span className="ml-auto text-xs text-white/30 font-body">seret busur untuk memindahkan</span>
+        <span className="ml-auto text-xs text-white/30 font-body">{ui.dragHint}</span>
       </div>
 
       <div className="p-4 space-y-3">
 
-        {/* Mode tabs */}
+        {/* Mode tabs — display label translated, internal key unchanged */}
         <div className="flex gap-1 p-1 bg-slate-800/60 rounded-lg">
           {(["pelurus", "penyiku", "bertolak"] as Mode[]).map(m => (
             <button
@@ -237,7 +336,7 @@ export default function ProtractorAnimation() {
                 mode === m ? "bg-cyan-600/80 text-white shadow" : "text-white/50 hover:text-white/80"
               }`}
             >
-              {m === "pelurus" ? "↔ Pelurus" : m === "penyiku" ? "⌐ Penyiku" : "✕ Bertolak"}
+              {modeTabLabel(m)}
             </button>
           ))}
         </div>
@@ -264,7 +363,6 @@ export default function ProtractorAnimation() {
               <pattern id="pgrid" width="20" height="20" patternUnits="userSpaceOnUse">
                 <path d="M20 0L0 0 0 20" fill="none" stroke="#0f172a" strokeWidth="0.8" />
               </pattern>
-              {/* Arrow markers */}
               {[
                 ["arC", "#22d3ee"], ["arO", "#fb923c"], ["arG", "#4ade80"],
                 ["arY", "#facc15"], ["arP", "#a78bfa"],
@@ -273,7 +371,6 @@ export default function ProtractorAnimation() {
                   <path d="M0,0 L0,6 L7,3 z" fill={color} />
                 </marker>
               ))}
-              {/* Reverse arrows for bidirectional */}
               {[
                 ["arCR", "#22d3ee"], ["arOR", "#fb923c"],
               ].map(([id, color]) => (
@@ -283,29 +380,22 @@ export default function ProtractorAnimation() {
               ))}
             </defs>
 
-            {/* Background */}
             <rect width={SVG_W} height={SVG_H} fill="url(#pgrid)" />
 
             {/* ─ PELURUS MODE ─ */}
             {mode === "pelurus" && (
               <g>
-                {/* Full straight line */}
                 <line x1={p(180).x} y1={p(180).y} x2={p(0).x} y2={p(0).y}
                   stroke={C_COMP} strokeWidth={2.5}
                   markerEnd="url(#arC)" markerStart="url(#arCR)" />
-                {/* Second ray */}
                 <line x1={VX} y1={VY} x2={p(α).x} y2={p(α).y}
                   stroke={C_OPP} strokeWidth={2.5} markerEnd="url(#arO)" />
-                {/* Alpha sector */}
                 <path d={sectorPath(VX, VY, 45, 0, α)}
                   fill="rgba(250,204,21,0.18)" stroke={C_ALPHA} strokeWidth={1.2} />
-                {/* Beta sector */}
                 <path d={sectorPath(VX, VY, 45, α, 180)}
                   fill="rgba(167,139,250,0.15)" stroke={C_BETA} strokeWidth={1.2} />
-                {/* Labels */}
                 <text {...textProps(rayPt(VX, VY, α / 2, 60), C_ALPHA, 14, "bold")}>α</text>
                 <text {...textProps(rayPt(VX, VY, (α + 180) / 2, 60), C_BETA, 14, "bold")}>β</text>
-                {/* Degree values near arcs */}
                 <text {...textProps(rayPt(VX, VY, α / 2, 78), C_ALPHA, 9)}>{α}°</text>
                 <text {...textProps(rayPt(VX, VY, (α + 180) / 2, 78), C_BETA, 9)}>{180 - α}°</text>
               </g>
@@ -314,25 +404,18 @@ export default function ProtractorAnimation() {
             {/* ─ PENYIKU MODE ─ */}
             {mode === "penyiku" && (
               <g>
-                {/* Horizontal ray */}
                 <line x1={VX} y1={VY} x2={p(0).x} y2={p(0).y}
                   stroke={C_COMP} strokeWidth={2.5} markerEnd="url(#arC)" />
-                {/* Vertical ray */}
                 <line x1={VX} y1={VY} x2={p(90).x} y2={p(90).y}
                   stroke={C_COMP} strokeWidth={2.5} markerEnd="url(#arC)" />
-                {/* Right-angle box */}
                 <rect x={VX} y={VY - 16} width={16} height={16}
                   fill="none" stroke={C_COMP} strokeWidth={1.5} />
-                {/* Second ray */}
                 <line x1={VX} y1={VY} x2={p(α).x} y2={p(α).y}
                   stroke={C_OPP} strokeWidth={2.5} markerEnd="url(#arO)" />
-                {/* Alpha sector */}
                 <path d={sectorPath(VX, VY, 45, 0, α)}
                   fill="rgba(250,204,21,0.18)" stroke={C_ALPHA} strokeWidth={1.2} />
-                {/* Beta sector */}
                 <path d={sectorPath(VX, VY, 45, α, 90)}
                   fill="rgba(167,139,250,0.15)" stroke={C_BETA} strokeWidth={1.2} />
-                {/* Labels */}
                 <text {...textProps(rayPt(VX, VY, α / 2, 60), C_ALPHA, 14, "bold")}>α</text>
                 <text {...textProps(rayPt(VX, VY, (α + 90) / 2, 60), C_BETA, 14, "bold")}>β</text>
                 <text {...textProps(rayPt(VX, VY, α / 2, 77), C_ALPHA, 9)}>{α}°</text>
@@ -343,28 +426,20 @@ export default function ProtractorAnimation() {
             {/* ─ BERTOLAK BELAKANG MODE ─ */}
             {mode === "bertolak" && (
               <g>
-                {/* Line 1: horizontal */}
                 <line x1={p(180).x} y1={p(180).y} x2={p(0).x} y2={p(0).y}
                   stroke={C_COMP} strokeWidth={2.5}
                   markerEnd="url(#arC)" markerStart="url(#arCR)" />
-                {/* Line 2: at angle α, bidirectional */}
                 <line x1={p(α + 180).x} y1={p(α + 180).y} x2={p(α).x} y2={p(α).y}
                   stroke={C_OPP} strokeWidth={2.5}
                   markerEnd="url(#arO)" markerStart="url(#arOR)" />
-                {/* 4 sectors */}
-                {/* ∠1 = α (top-right) */}
                 <path d={sectorPath(VX, VY, 38, 0, α)}
                   fill="rgba(250,204,21,0.22)" stroke={C_ALPHA} strokeWidth={1} />
-                {/* ∠2 = 180-α (top-left) */}
                 <path d={sectorPath(VX, VY, 38, α, 180)}
                   fill="rgba(167,139,250,0.18)" stroke={C_BETA} strokeWidth={1} />
-                {/* ∠3 = α (bottom-left, = ∠1) */}
                 <path d={sectorPath(VX, VY, 38, 180, 180 + α)}
                   fill="rgba(250,204,21,0.22)" stroke={C_ALPHA} strokeWidth={1} />
-                {/* ∠4 = 180-α (bottom-right, = ∠2) */}
                 <path d={sectorPath(VX, VY, 38, 180 + α, 360)}
                   fill="rgba(167,139,250,0.18)" stroke={C_BETA} strokeWidth={1} />
-                {/* Labels */}
                 <text {...textProps(rayPt(VX, VY, α / 2, 58), C_ALPHA, 11, "bold")}>∠1={α}°</text>
                 <text {...textProps(rayPt(VX, VY, (α + 180) / 2, 58), C_BETA, 11, "bold")}>∠2={180-α}°</text>
                 <text {...textProps(rayPt(VX, VY, 180 + α / 2, 58), C_ALPHA, 11, "bold")}>∠3={α}°</text>
@@ -381,10 +456,10 @@ export default function ProtractorAnimation() {
               transform={`translate(${protX},${protY}) rotate(${protRot})`}
               style={{ cursor: isDragging ? "grabbing" : "grab" }}
             >
-              <ProtractorBody angle={α} />
+              <ProtractorBody angle={α} dragGripLabel={ui.svgDragGrip} />
             </g>
 
-            {/* Snap guide: dashed line from vertex to protractor center */}
+            {/* Snap guide */}
             {!isDragging && (Math.abs(protX - VX) > 20 || Math.abs(protY - VY) > 20) && (
               <line
                 x1={VX} y1={VY} x2={protX} y2={protY}
@@ -394,9 +469,9 @@ export default function ProtractorAnimation() {
               />
             )}
 
-            {/* Position info */}
+            {/* Position info — translated */}
             <text x={8} y={15} fontSize={9} fill="#334155" fontFamily="monospace">
-              Busur @ ({Math.round(protX)}, {Math.round(protY)})
+              {ui.svgBusurAt(Math.round(protX), Math.round(protY))}
             </text>
           </svg>
         </div>
@@ -404,7 +479,7 @@ export default function ProtractorAnimation() {
         {/* Angle slider */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="font-body text-xs font-semibold text-white/70">📐 Besar Sudut α</label>
+            <label className="font-body text-xs font-semibold text-white/70">{ui.sliderAngleLabel}</label>
             <span className="font-mono text-sm font-bold text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded">
               α = {α}°
             </span>
@@ -424,7 +499,7 @@ export default function ProtractorAnimation() {
         {/* Protractor rotation slider */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="font-body text-xs font-semibold text-white/70">🔄 Kemiringan Busur</label>
+            <label className="font-body text-xs font-semibold text-white/70">{ui.sliderTiltLabel}</label>
             <span className="font-mono text-xs font-bold text-cyan-400">{protRot > 0 ? "+" : ""}{protRot}°</span>
           </div>
           <input
@@ -433,9 +508,9 @@ export default function ProtractorAnimation() {
             className="w-full h-2 rounded-full accent-cyan-400 cursor-pointer"
           />
           <div className="flex justify-between text-xs text-white/25 font-body">
-            <span>miring kiri −80°</span>
-            <span>tegak 0°</span>
-            <span>miring kanan +80°</span>
+            <span>{ui.tiltLeft}</span>
+            <span>{ui.tiltCenter}</span>
+            <span>{ui.tiltRight}</span>
           </div>
         </div>
 
@@ -450,53 +525,51 @@ export default function ProtractorAnimation() {
             mode === "penyiku"   ? "text-green-300"  :
                                    "text-yellow-300"
           }`}>
-            {mode === "pelurus"   ? "↔ Sudut Pelurus (Supplementary)" :
-             mode === "penyiku"   ? "⌐ Sudut Penyiku (Complementary)" :
-                                    "✕ Sudut Bertolak Belakang (Vertical Angles)"}
+            {modeTitle}
           </p>
 
           <div className="bg-slate-900/60 rounded p-2 space-y-1 font-mono text-xs">
             {mode === "pelurus" && (
               <>
                 <p className="text-yellow-400">α = {α}°</p>
-                <p className="text-purple-400">β (pelurus) = 180° − {α}° = {180 - α}°</p>
+                <p className="text-purple-400">{ui.betaPelurus} = 180° − {α}° = {180 - α}°</p>
                 <p className="text-green-400">✓ α + β = {α}° + {180 - α}° = 180°</p>
               </>
             )}
             {mode === "penyiku" && (
               <>
                 <p className="text-yellow-400">α = {α}°</p>
-                <p className="text-purple-400">β (penyiku) = 90° − {α}° = {90 - α}°</p>
+                <p className="text-purple-400">{ui.betaPenyiku} = 90° − {α}° = {90 - α}°</p>
                 <p className="text-green-400">✓ α + β = {α}° + {90 - α}° = 90°</p>
               </>
             )}
             {mode === "bertolak" && (
               <>
-                <p className="text-yellow-400">∠1 = ∠3 = {α}° (bertolak belakang)</p>
-                <p className="text-purple-400">∠2 = ∠4 = {180 - α}° (bertolak belakang)</p>
-                <p className="text-green-400">✓ ∠1 + ∠2 = {α}° + {180 - α}° = 180° (pelurus)</p>
+                <p className="text-yellow-400">∠1 = ∠3 = {α}° {ui.bertolakLabel}</p>
+                <p className="text-purple-400">∠2 = ∠4 = {180 - α}° {ui.bertolakLabel}</p>
+                <p className="text-green-400">✓ ∠1 + ∠2 = {α}° + {180 - α}° = 180° {ui.bertolakPelurus}</p>
               </>
             )}
           </div>
 
           <p className="font-body text-xs text-white/50 leading-relaxed">
             {mode === "pelurus"
-              ? `Jika pelurus dari α diketahui, α = 180° − ${180-α}° = ${α}°. Busur derajat mengukur sudut langsung.`
+              ? ui.tipPelurus(complement, α)
               : mode === "penyiku"
-              ? `Penyiku hanya ada untuk sudut < 90°. Dua sudut yang penyiku membentuk sudut siku-siku sempurna.`
-              : `Dua garis berpotongan selalu membentuk 2 pasang sudut bertolak belakang yang sama besar. Tidak perlu mengukur semua!`
+              ? ui.tipPenyiku
+              : ui.tipBertolak
             }
           </p>
         </div>
 
         {/* How to use */}
         <div className="bg-slate-800/40 border border-slate-700/40 rounded-lg p-3">
-          <p className="font-body text-xs font-semibold text-slate-300 mb-1.5">💡 Cara Menggunakan Busur:</p>
+          <p className="font-body text-xs font-semibold text-slate-300 mb-1.5">{ui.howToTitle}</p>
           <div className="space-y-1 font-body text-xs text-white/50 leading-relaxed">
-            <p>① <strong className="text-white/70">Seret busur</strong> ke titik sudut (O) untuk mengukur</p>
-            <p>② <strong className="text-white/70">Geser α</strong> untuk mengubah besar sudut yang diukur</p>
-            <p>③ <strong className="text-white/70">Miringkan busur</strong> untuk menyelaraskan dengan sisi sudut</p>
-            <p>④ Baca angka pada busur di mana sinar kedua memotong skala</p>
+            <p>① <strong className="text-white/70">{ui.howTo1a}</strong> {ui.howTo1b}</p>
+            <p>② <strong className="text-white/70">{ui.howTo2a}</strong> {ui.howTo2b}</p>
+            <p>③ <strong className="text-white/70">{ui.howTo3a}</strong> {ui.howTo3b}</p>
+            <p>④ {ui.howTo4}</p>
           </div>
         </div>
 
@@ -506,7 +579,7 @@ export default function ProtractorAnimation() {
           className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-slate-700/60 hover:bg-slate-600/60 text-white/50 hover:text-white text-xs font-body cursor-pointer transition-colors"
         >
           <RotateCcw className="w-3.5 h-3.5" />
-          Kembalikan Busur ke Posisi Awal
+          {ui.resetBtn}
         </button>
       </div>
     </div>
