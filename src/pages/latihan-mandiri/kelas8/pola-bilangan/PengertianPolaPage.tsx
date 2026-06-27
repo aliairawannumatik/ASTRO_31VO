@@ -254,6 +254,49 @@ const SvgPolaM = () => {
   );
 };
 
+/** Soal 3 BARU – Pola lingkaran persegi panjang: 3, 8, 15 (n×(n+2)) */
+const SvgLingkaranPersegi = () => {
+  const r = 7, sp = 17;
+  const groupW = 110;
+  const svgW = 3 * groupW + 10;
+  const svgH = 110;
+  const topY = 14;
+
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {[1, 2, 3].map((n, gi) => {
+        const cols = n + 2;
+        const rows = n;
+        const cx = 5 + gi * groupW + groupW / 2;
+        const gridW = cols * sp;
+        const gridH = rows * sp;
+        const startX = cx - gridW / 2 + sp / 2;
+        const startY = topY;
+        return (
+          <g key={gi}>
+            {Array.from({ length: rows }, (_, row) =>
+              Array.from({ length: cols }, (_, col) => (
+                <circle
+                  key={`${row}-${col}`}
+                  cx={startX + col * sp}
+                  cy={startY + row * sp}
+                  r={r}
+                  fill="rgba(20,184,166,0.18)"
+                  stroke="rgba(45,212,191,0.9)"
+                  strokeWidth="1.5"
+                />
+              ))
+            )}
+            <text x={cx} y={topY + gridH + 18} textAnchor="middle" fill="#5eead4" fontSize="9" fontFamily="sans-serif" fontWeight="600">
+              Pola ke-{n}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 /** Soal 4 – Pola lingkaran (bilangan segitiga): 3, 6, 10 lingkaran */
 const SvgLingkaran = () => {
   const r = 6, sp = 15;
@@ -332,9 +375,28 @@ const questions: QuestionItem[] = [
       },
     ],
   },
-  // Q4 dari upload → no. 3
+  // Q baru dari upload → no. 3
   {
     number: 3,
+    content: "Perhatikan pola berikut.",
+    type: "mixed",
+    svgNode: <SvgLingkaranPersegi />,
+    parts: [
+      { label: "a.", text: "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan." },
+      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
+      { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
+      { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
+    ],
+    kunciJawaban: [
+      { label: "a.", text: "Pola ke-1 = 3, Pola ke-2 = 8, Pola ke-3 = 15 → Barisan: 3, 8, 15, ..." },
+      { label: "b.", math: "U_n = n \\times (n+2) = n^2 + 2n \\text{ (setiap pola ke-}n\\text{ = }n\\text{ baris} \\times (n+2)\\text{ kolom)}" },
+      { label: "c.", math: "U_{20} = 20 \\times 22 = 440 \\text{ lingkaran}" },
+      { label: "d.", math: "S_{10} = \\sum_{n=1}^{10}(n^2+2n) = 385 + 110 = 495 \\text{ noktah}" },
+    ],
+  },
+  // Q4 dari upload → no. 4
+  {
+    number: 4,
     content: "Perhatikan pola berikut.",
     type: "mixed",
     svgNode: <SvgLingkaran />,
@@ -345,9 +407,9 @@ const questions: QuestionItem[] = [
       { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
     ],
   },
-  // Q6 (soal asli no.1) → no. 4
+  // Q6 (soal asli no.1) → no. 5
   {
-    number: 4,
+    number: 5,
     title: "Pola Gambar – Susunan Persegi",
     content: "Perhatikan pola berikut.",
     type: "mixed",
@@ -363,9 +425,9 @@ const questions: QuestionItem[] = [
       { label: "c.", math: "U_{25} = 25^2 = 625 \\text{ persegi};\\quad U_{50} = 50^2 = 2.500 \\text{ persegi}" },
     ],
   },
-  // Q11 (soal asli no.7) → no. 5
+  // Q11 (soal asli no.7) → no. 6
   {
-    number: 5,
+    number: 6,
     title: "Suku yang Hilang",
     content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
     type: "mixed",
@@ -375,23 +437,23 @@ const questions: QuestionItem[] = [
       { label: "c.", math: "100,\\ 95,\\ 88,\\ 79,\\ ?,\\ 55" },
     ],
   },
-  // Q12 (soal asli no.9) → no. 6
+  // Q12 (soal asli no.9) → no. 7
   {
-    number: 6,
+    number: 7,
     title: "Konfigurasi Objek – Pola Titik",
     content: "Perhatikan susunan titik yang membentuk baris ganjil: 1, 3, 5, 7, ...\na. Tuliskan aturan/pola barisannya.\nb. Berapa banyak titik pada susunan ke-8?\nc. Susunan ke berapa yang memiliki 25 titik?",
     type: "essay",
   },
-  // Q13 (soal asli no.14) → no. 7
+  // Q13 (soal asli no.14) → no. 8
   {
-    number: 7,
+    number: 8,
     title: "Barisan Bertingkat",
     content: "Barisan bilangan: 1, 3, 7, 13, 21, 31, ...\n\na. Hitung selisih antara suku-suku berurutan (beda tingkat 1).\nb. Hitung selisih dari barisan beda tingkat 1 (beda tingkat 2).\nc. Tentukan suku ke-8 dari barisan tersebut.",
     type: "essay",
   },
-  // Q14 (soal asli no.15) → no. 8
+  // Q14 (soal asli no.15) → no. 9
   {
-    number: 8,
+    number: 9,
     title: "Soal Kontekstual – Pertumbuhan Tanaman",
     content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
     type: "essay",
