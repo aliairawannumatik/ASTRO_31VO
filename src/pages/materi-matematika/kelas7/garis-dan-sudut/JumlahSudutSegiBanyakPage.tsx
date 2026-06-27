@@ -21,6 +21,7 @@ const uiMap = {
     intisariP: "Setiap segi banyak (poligon) bisa dipecah menjadi",
     intisariBold: "segitiga-segitiga",
     intisariEnd: ". Dari situlah lahir rumus ajaib untuk menghitung jumlah sudut semua segi banyak:",
+    intisariFormula: "\\text{Jumlah Sudut Segi-}n = (n - 2) \\times 180°",
     grid3: "🔺 Segitiga (n=3):",
     grid4: "🔷 Segi 4 (n=4):",
     grid5: "⭐ Segi 5 (n=5):",
@@ -148,6 +149,7 @@ const uiMap = {
     intisariP: "Every polygon can be divided into",
     intisariBold: "triangles",
     intisariEnd: ". This gives us the formula for the angle sum of any polygon:",
+    intisariFormula: "\\text{Angle Sum of }n\\text{-gon} = (n - 2) \\times 180°",
     grid3: "🔺 Triangle (n=3):",
     grid4: "🔷 Quadrilateral (n=4):",
     grid5: "⭐ Pentagon (n=5):",
@@ -267,6 +269,7 @@ const uiMap = {
     intisariP: "すべての多角形は",
     intisariBold: "三角形",
     intisariEnd: "に分割できます。そこから、すべての多角形の内角の和を求める公式が生まれます：",
+    intisariFormula: "n\\text{角形の内角の和} = (n - 2) \\times 180°",
     grid3: "🔺 三角形（n=3）：",
     grid4: "🔷 四角形（n=4）：",
     grid5: "⭐ 五角形（n=5）：",
@@ -807,7 +810,7 @@ const JumlahSudutSegiBanyakPage = () => {
             {ui.intisariP} <strong className="text-yellow-300">{ui.intisariBold}</strong>{ui.intisariEnd}
           </p>
           <div className="mt-3 bg-pink-950/60 border border-pink-700/40 rounded-lg p-3 text-center">
-            <BlockMath math="\text{Jumlah Sudut Segi-}n = (n - 2) \times 180°" />
+            <BlockMath math={ui.intisariFormula} />
           </div>
           <div className="mt-2 grid grid-cols-2 gap-2 text-xs text-white/60">
             <div className="bg-slate-800/50 rounded p-2">{ui.grid3} <span className="text-cyan-300 font-semibold">180°</span></div>

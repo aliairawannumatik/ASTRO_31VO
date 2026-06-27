@@ -59,6 +59,11 @@ const uiMap = {
     s1tipA: "terbentuk ∠A1, ∠A2, ∠A3, ∠A4.",
     s1tipB: "terbentuk ∠B1, ∠B2, ∠B3, ∠B4.",
     s1tipPotong: "(potong",
+    s1atPointA: "Di titik A",
+    s1atPointB: "Di titik B",
+    s1notaWord1: "Garis",
+    s1notaMeans: "artinya",
+    s1notaParallel: "sejajar dengan",
     s1pengelompokan: "Pengelompokan Sudut:",
     s1dalam: "• Sudut dalam:",
     s1dalamTxt: "di antara dua garis sejajar → ∠A3, ∠A4 (di bawah g₁) dan ∠B1, ∠B2 (di atas g₂)",
@@ -192,6 +197,11 @@ const uiMap = {
     s1tipA: "forms ∠A1, ∠A2, ∠A3, ∠A4.",
     s1tipB: "forms ∠B1, ∠B2, ∠B3, ∠B4.",
     s1tipPotong: "(cuts",
+    s1atPointA: "At point A",
+    s1atPointB: "At point B",
+    s1notaWord1: "",
+    s1notaMeans: "means",
+    s1notaParallel: "is parallel to",
     s1pengelompokan: "Angle Classification:",
     s1dalam: "• Interior angles:",
     s1dalamTxt: "between the two parallel lines → ∠A3, ∠A4 (below g₁) and ∠B1, ∠B2 (above g₂)",
@@ -319,6 +329,11 @@ const uiMap = {
     s1tipA: "で∠A1, ∠A2, ∠A3, ∠A4ができる。",
     s1tipB: "で∠B1, ∠B2, ∠B3, ∠B4ができる。",
     s1tipPotong: "（切る",
+    s1atPointA: "A点",
+    s1atPointB: "B点",
+    s1notaWord1: "",
+    s1notaMeans: "は",
+    s1notaParallel: "と平行",
     s1pengelompokan: "角の分類：",
     s1dalam: "• 内角：",
     s1dalamTxt: "2本の平行線の間 → ∠A3, ∠A4（g₁の下）と∠B1, ∠B2（g₂の上）",
@@ -572,13 +587,13 @@ const getSections = (ui: UI): Section[] => [
           {ui.s1p1a} <strong className="text-cyan-300">{ui.s1bold}</strong>.
         </p>
         <div className="bg-cyan-950/60 border border-cyan-700/50 rounded-lg p-4 space-y-2">
-          <p><strong className="text-cyan-300">{ui.s1nota}</strong> Garis <InlineMath math="g_1 \parallel g_2" /> artinya <InlineMath math="g_1" /> sejajar dengan <InlineMath math="g_2" />.</p>
+          <p><strong className="text-cyan-300">{ui.s1nota}</strong> {ui.s1notaWord1 ? ui.s1notaWord1 + " " : ""}<InlineMath math="g_1 \parallel g_2" /> {ui.s1notaMeans} <InlineMath math="g_1" /> {ui.s1notaParallel} <InlineMath math="g_2" />.</p>
           <p>{ui.s1notaP2a} <strong className="text-orange-300">{ui.s1notaTransversal}</strong>{ui.s1notaP2b} <strong className="text-yellow-300">{ui.s1notaAngles}</strong> {ui.s1notaP2c}</p>
         </div>
         <DuaGarisSVGAll lgSejajar={ui.lgSejajar} lgTransversal={ui.lgTransversal} lgAtas={ui.lgAtas} lgBawah={ui.lgBawah} />
         <div className="bg-yellow-950/50 border border-yellow-600/40 rounded-lg p-3 text-yellow-200 text-xs">
-          💡 {ui.s1tipPotong} <InlineMath math="g_1" />) {ui.s1tipA}<br />
-          {ui.s1tipPotong} <InlineMath math="g_2" />) {ui.s1tipB}
+          💡 {ui.s1atPointA} {ui.s1tipPotong} <InlineMath math="g_1" />) {ui.s1tipA}<br />
+          {ui.s1atPointB} {ui.s1tipPotong} <InlineMath math="g_2" />) {ui.s1tipB}
         </div>
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
           <p className="text-white/80 font-semibold mb-1">{ui.s1pengelompokan}</p>
