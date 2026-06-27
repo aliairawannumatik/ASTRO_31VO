@@ -233,6 +233,7 @@ export default function BankSimulasi() {
       rumusBunga: "Bunga = Modal × Suku Bunga × Lama",
       rumusSaldo: "Saldo Akhir = Modal + Bunga",
       phModal: "Masukkan modal awal",
+      phaseMenghitung: "🧮 Menghitung...",
     },
     en: {
       headerTitle: "Bank Numatik — Simple Interest Simulation",
@@ -256,6 +257,7 @@ export default function BankSimulasi() {
       rumusBunga: "Interest = Principal × Rate × Time",
       rumusSaldo: "Final Balance = Principal + Interest",
       phModal: "Enter principal amount",
+      phaseMenghitung: "🧮 Calculating...",
     },
     ja: {
       headerTitle: "バンクNUMATIK — 単利シミュレーション",
@@ -279,6 +281,7 @@ export default function BankSimulasi() {
       rumusBunga: "利息 = 元金 × 利率 × 期間",
       rumusSaldo: "最終残高 = 元金 + 利息",
       phModal: "元金を入力",
+      phaseMenghitung: "🧮 計算中...",
     },
   };
   const ui = uiMap[lang as keyof typeof uiMap] ?? uiMap.id;
@@ -403,7 +406,7 @@ export default function BankSimulasi() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0 }}
                 >
-                  {phase === "menghitung" ? "🧮 Menghitung..." : `✅ +${fmt(bungaRp)}`}
+                  {phase === "menghitung" ? ui.phaseMenghitung : `✅ +${fmt(bungaRp)}`}
                 </motion.div>
               )}
             </AnimatePresence>

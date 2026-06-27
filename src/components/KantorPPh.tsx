@@ -225,6 +225,8 @@ export default function KantorPPh() {
       bebasPajak: "Penghasilan di bawah PTKP → Bebas PPh!",
       noteLabel: "Sistem PPh Indonesia digunakan sebagai contoh pembelajaran pajak penghasilan.",
       phGaji: "Masukkan gaji bruto per bulan",
+      phaseHitung: "🧮 MENGHITUNG...",
+      phaseSelesai: "✅ SELESAI!",
     },
     en: {
       headerTitle: "Tax Office — Progressive Income Tax Simulation",
@@ -246,6 +248,8 @@ export default function KantorPPh() {
       bebasPajak: "Income below tax-free threshold → No Income Tax!",
       noteLabel: "This simulation uses Indonesia's income tax (PPh) system as an illustrative example of progressive income tax.",
       phGaji: "Enter monthly gross salary",
+      phaseHitung: "🧮 CALCULATING...",
+      phaseSelesai: "✅ DONE!",
     },
     ja: {
       headerTitle: "税務署 — 累進所得税シミュレーション",
@@ -267,6 +271,8 @@ export default function KantorPPh() {
       bebasPajak: "非課税基準額以下 → 所得税免除！",
       noteLabel: "このシミュレーションはインドネシアの所得税制度を累進課税の学習例として使用しています。",
       phGaji: "月額給与を入力",
+      phaseHitung: "🧮 計算中...",
+      phaseSelesai: "✅ 完了！",
     },
   };
   const ui = uiMap[lang as keyof typeof uiMap] ?? uiMap.id;
@@ -328,13 +334,13 @@ export default function KantorPPh() {
             {phase === "hitung" && (
               <motion.div className="absolute top-3 right-3 bg-blue-600 text-white text-[10px] font-black px-2 py-1 rounded-full"
                 animate={{ opacity: [1, 0.5, 1] }} transition={{ duration: 0.8, repeat: Infinity }}>
-                🧮 MENGHITUNG...
+                {ui.phaseHitung}
               </motion.div>
             )}
             {phase === "selesai" && (
               <motion.div className="absolute top-3 right-3 bg-green-600 text-white text-[10px] font-black px-2 py-1 rounded-full"
                 initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
-                ✅ SELESAI!
+                {ui.phaseSelesai}
               </motion.div>
             )}
           </div>
