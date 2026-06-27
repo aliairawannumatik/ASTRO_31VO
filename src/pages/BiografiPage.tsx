@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { User } from "lucide-react";
@@ -10,6 +10,7 @@ const BiografiPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const isWhite = theme === "white";
+  const [pesan, setPesan] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -43,6 +44,10 @@ const BiografiPage = () => {
               <p className="text-white font-body text-sm">Matematika</p>
             </div>
             <div>
+              <p className="text-primary font-display text-xs mb-1">NEGARA</p>
+              <p className="text-white font-body text-sm">Indonesia</p>
+            </div>
+            <div>
               <p className="text-primary font-display text-xs mb-1">Follow My Medsos :</p>
               <div className="space-y-2 mt-2">
                 <p className="font-body text-sm text-white">Instagram : @irawansutiawan.one</p>
@@ -52,9 +57,27 @@ const BiografiPage = () => {
               </div>
             </div>
             <div>
-              <p className="text-primary font-display text-xs mb-1">KRITIK &amp; SARAN</p>
-              <p className="font-body text-sm text-accent">Email: numatik.app@gmail.com</p>
-              <p className="text-white/60 font-body text-xs mt-1">Kirim kritik dan saran untuk pengembangan aplikasi ini ya.</p>
+              <p className="text-primary font-display text-xs mb-2">KRITIK &amp; SARAN</p>
+              <div className="space-y-2">
+                <textarea
+                  className="w-full bg-white/5 border border-border rounded-lg p-3 text-white/90 font-body text-sm resize-none focus:outline-none focus:border-primary/60 placeholder:text-white/30"
+                  rows={4}
+                  placeholder="Tulis kritik atau saranmu di sini..."
+                  value={pesan}
+                  onChange={(e) => setPesan(e.target.value)}
+                />
+                <button
+                  onClick={() => {
+                    if (!pesan.trim()) return;
+                    window.open(`mailto:numatik.app@gmail.com?subject=Kritik%20%26%20Saran%20NUMATIK&body=${encodeURIComponent(pesan)}`, '_blank');
+                  }}
+                  disabled={!pesan.trim()}
+                  className="w-full py-2 rounded-lg bg-primary/80 hover:bg-primary disabled:opacity-40 disabled:cursor-not-allowed text-white font-display text-sm font-bold transition-colors"
+                >
+                  📨 Kirim via Email
+                </button>
+                <p className="text-white/40 font-body text-[11px] text-center">Akan dikirim ke: numatik.app@gmail.com</p>
+              </div>
             </div>
           </div>
         </div>
@@ -207,104 +230,6 @@ const BiografiPage = () => {
                 </div>
                 <div className="pt-3">
                   <p className="text-yellow-300/80 font-display text-xs font-bold tracking-widest">✦ &nbsp; TERIMA KASIH SEBESAR-BESARNYA, PAK WANDRI &nbsp; ✦</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tim MGMP */}
-        <div className="animate-slide-up mb-6">
-          <div className="relative rounded-2xl p-[2px] bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-400 shadow-[0_0_40px_rgba(16,185,129,0.3)]">
-            <div className="relative rounded-2xl bg-[#0d0d2b] p-6 overflow-hidden text-left">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute top-4 left-4 text-emerald-400/20 text-6xl font-serif pointer-events-none select-none">"</div>
-              <div className="absolute bottom-4 right-4 text-emerald-400/20 text-6xl font-serif pointer-events-none select-none">"</div>
-
-              <div className="flex flex-col items-center mb-5 relative z-10">
-                <div className="relative mb-4 w-full">
-                  <div className="w-full rounded-xl overflow-hidden border-2 border-emerald-400/50">
-                    <img src="/mgmp-foto.png" alt="Tim MGMP Matematika SMPN 28 Bandung" className="w-full object-cover" />
-                  </div>
-                </div>
-                <div className="bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/40 rounded-full px-4 py-0.5 mb-2">
-                  <p className="text-emerald-300 font-body text-[10px] font-bold tracking-widest uppercase">Keluarga · Motivator · Kolaborator</p>
-                </div>
-                <h3 className="font-display text-xl font-black text-white text-center drop-shadow-[0_0_10px_rgba(16,185,129,0.6)]">Tim MGMP Matematika</h3>
-                <p className="text-emerald-300/80 font-body text-sm font-semibold tracking-wide mt-1">SMPN 28 Bandung</p>
-                <div className="w-full mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {[{ nama: "Bapak Mohamad Kosasih, S.Pd" },{ nama: "Ibu Maya Rahmawati, S.Pd" },{ nama: "Ibu Dini Haerani, S.Pd" },{ nama: "Ibu Yulia Eka Rachmayunita, S.Pd" }].map((p) => (
-                    <div key={p.nama} className="flex items-center gap-2.5 bg-emerald-500/8 border border-emerald-400/20 rounded-xl px-3 py-2">
-                      <span className="text-emerald-400 text-base shrink-0">✦</span>
-                      <span className="text-white/85 font-body text-xs leading-snug">{p.nama}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="h-[1px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent mb-5" />
-
-              <div className="relative z-10 space-y-3 text-center px-2">
-                <p className="text-white/90 font-body text-sm leading-relaxed text-justify">
-                  Terima kasih yang sebesar-besarnya saya haturkan kepada <strong className="text-emerald-300">Tim MGMP Matematika SMPN 28 Bandung</strong> — rekan-rekan luar biasa yang telah memberikan begitu banyak <strong className="text-accent">motivasi, masukan, dan dukungan</strong>.
-                </p>
-                <p className="text-white/70 font-body text-sm leading-relaxed text-justify italic">
-                  "Bersama kalian, setiap proses terasa lebih ringan, setiap pencapaian terasa lebih bermakna."
-                </p>
-                <div className="flex flex-wrap justify-center gap-2 pt-2">
-                  {["💚 Motivasi", "🤝 Kebersamaan", "📐 Konten Materi", "🎨 Masukan Desain"].map((item) => (
-                    <span key={item} className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-white/60 font-body text-[11px]">{item}</span>
-                  ))}
-                </div>
-                <div className="pt-3">
-                  <p className="text-emerald-300/80 font-display text-xs font-bold tracking-widest">✦ &nbsp; TERIMA KASIH, TIM MGMP MATEMATIKA SMPN 28 BANDUNG &nbsp; ✦</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Rekan Individu */}
-        <div className="animate-slide-up mb-8">
-          <div className="relative rounded-2xl p-[2px] bg-gradient-to-br from-rose-400 via-pink-500 to-fuchsia-400 shadow-[0_0_30px_rgba(244,63,94,0.2)]">
-            <div className="relative rounded-2xl bg-[#0d0d2b] p-6 overflow-hidden text-left">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-pink-500/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute top-4 left-4 text-rose-400/20 text-6xl font-serif pointer-events-none select-none">"</div>
-              <div className="absolute bottom-4 right-4 text-rose-400/20 text-6xl font-serif pointer-events-none select-none">"</div>
-
-              <div className="relative z-10 space-y-5">
-                <div className="flex flex-wrap justify-center gap-3">
-                  {[
-                    { nama: "Ibu Nurti Istila Ratnasari, S.Pd", peran: "Guru IPA / Rekan & Pendukung", foto: "/nurti-foto.jpeg" },
-                    { nama: "Bapak Aldi Muhammad Lukman, S.Pd", peran: "Guru IPA / Rekan & Pendukung", foto: "/aldi-foto.jpeg" },
-                  ].map((orang) => (
-                    <div key={orang.nama} className="flex flex-col items-center bg-white/5 border border-white/10 rounded-2xl px-5 py-4 min-w-[140px]">
-                      <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-rose-400/50 mb-2">
-                        <img src={orang.foto} alt={orang.nama} className="w-full h-full object-cover object-top" />
-                      </div>
-                      <p className="text-white font-display text-sm font-bold text-center leading-tight">{orang.nama}</p>
-                      <p className="text-rose-300/70 font-body text-[10px] mt-1 tracking-wide">{orang.peran}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="h-[1px] bg-gradient-to-r from-transparent via-rose-400/30 to-transparent" />
-
-                <div className="space-y-3 text-center px-2">
-                  <p className="text-white/90 font-body text-sm leading-relaxed text-justify">
-                    Terima kasih yang tulus kepada <strong className="text-rose-300">Ibu Nurti Istila Ratnasari, S.Pd</strong> dan <strong className="text-rose-300">Bapak Aldi Muhammad Lukman, S.Pd</strong>, serta seluruh pihak yang tidak dapat disebutkan satu persatu — yang telah memberikan dukungan dan kontribusi nyata dalam perjalanan pengembangan aplikasi <strong className="text-primary">NUMATIK</strong> ini.
-                  </p>
-                  <p className="text-white/70 font-body text-sm leading-relaxed text-justify italic">
-                    "Setiap kebaikan yang kalian berikan, sekecil apapun, telah menjadi bagian dari fondasi yang menopang aplikasi ini."
-                  </p>
-                </div>
-
-                <div className="text-center pt-1">
-                  <p className="text-rose-300/80 font-display text-xs font-bold tracking-widest">
-                    ✦ &nbsp; TERIMA KASIH UNTUK SEMUA PIHAK YANG TELAH BERKONTRIBUSI &nbsp; ✦
-                  </p>
                 </div>
               </div>
             </div>
