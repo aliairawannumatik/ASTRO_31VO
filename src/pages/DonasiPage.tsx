@@ -25,6 +25,12 @@ const DonasiPage = () => {
             Dukungan Anda sangat berarti untuk pengembangan aplikasi NUMATIK agar semakin bermanfaat bagi siswa-siswi di seluruh Indonesia. 💙
           </p>
 
+          {/* Indonesia notice */}
+          <div className="flex items-center justify-center gap-2 bg-red-500/10 border border-red-400/30 rounded-lg px-4 py-2">
+            <span className="text-lg">🇮🇩</span>
+            <p className="text-red-300 font-display text-xs font-bold tracking-wide">Rekening Bank dari Negara Indonesia</p>
+          </div>
+
           {/* Bank Account Info */}
           <div className="bg-muted/50 border border-primary/30 rounded-xl p-6 box-glow-cyan">
             <CreditCard className="w-8 h-8 text-primary mx-auto mb-3" />
