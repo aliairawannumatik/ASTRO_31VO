@@ -22,7 +22,7 @@ const DonasiPage = () => {
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-8 space-y-6">
           <p className="text-white font-body text-sm">
-            Dukungan Anda sangat berarti untuk pengembangan aplikasi NUMATIK agar semakin bermanfaat bagi siswa-siswi di seluruh Indonesia. 💙
+            Dukungan Anda sangat berarti untuk pengembangan aplikasi NUMATIK agar semakin bermanfaat bagi siswa-siswi di seluruh Dunia. 💙
           </p>
 
           {/* Indonesia notice */}
