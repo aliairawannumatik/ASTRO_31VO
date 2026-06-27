@@ -57,6 +57,16 @@ const BiografiPage = () => {
               </div>
             </div>
             <div>
+              <p className="text-primary font-display text-xs mb-2">PESAN DARI PEMBUAT</p>
+              <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-400/30 rounded-xl p-4 space-y-2">
+                <p className="text-cyan-300 font-display text-xs font-bold tracking-widest uppercase mb-2">🌍 Untuk Seluruh Siswa di Pelosok Dunia</p>
+                <p className="text-white/85 font-body text-sm leading-relaxed text-justify italic">
+                  "Halo Siswa-siswi hebat di seluruh dunia, Aplikasi ini Bapak rancang khusus agar matematika terasa lebih dekat dan bersahabat dengan kalian. Ingat, tidak ada orang yang 'bodoh' dalam matematika, yang ada hanyalah orang yang belum cukup berlatih. Selamat menjelajah, jangan takut salah, karena dari salahlah kita belajar!"
+                </p>
+                <p className="text-cyan-400/70 font-display text-xs font-bold text-right">— Irawan Sutiawan, M.Pd</p>
+              </div>
+            </div>
+            <div>
               <p className="text-primary font-display text-xs mb-2">KRITIK &amp; SARAN</p>
               <div className="space-y-2">
                 <textarea
