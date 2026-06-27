@@ -229,7 +229,7 @@ const PPhPage = () => {
         { label: "Gaji Bersih", math: "\\text{Bruto} - \\text{PPh}" },
         { label: "Tarif PPh",   math: "\\frac{\\text{PPh}}{PKP} \\times 100\\%" },
       ],
-      realWorldNote: "🌍 Koneksi ke Kehidupan Nyata: Ketika orang tua atau saudara menerima slip gaji, ada baris "Potongan PPh" yang tertera. Itulah pajak yang langsung dipotong oleh perusahaan sebelum gaji diterima karyawan — disebut sistem withholding tax. Coba minta slip gaji orang tuamu dan temukan baris PPh di sana!",
+      realWorldNote: "🌍 Koneksi ke Kehidupan Nyata: Ketika orang tua atau saudara menerima slip gaji, ada baris 'Potongan PPh' yang tertera. Itulah pajak yang langsung dipotong oleh perusahaan sebelum gaji diterima karyawan — disebut sistem withholding tax. Coba minta slip gaji orang tuamu dan temukan baris PPh di sana!",
 
       backBtn: "← Kembali ke Aritmetika Sosial",
     },
