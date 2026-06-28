@@ -259,14 +259,14 @@ const questions: Q[] = [
         { x: 1, y: 2, label: "P", color: "#facc15", labelPos: "br" },
       ],
       segs: [
-        { x1: -3, y1: -1, x2: 5, y2: 5, color: "rgba(255,255,255,0.35)", label: "d" },
+        { x1: -3, y1: -1, x2: 5, y2: 5, color: "#facc15", dashed: true, label: "AB (diameter)" },
       ],
       circles: [
         { cx: 1, cy: 2, r: 5, color: "#34d399" },
       ],
     },
     parts: [
-      { label: "Diket:", text: "Titik A(−3, −1) dan B(5, 5) adalah ujung-ujung diameter sebuah lingkaran." },
+      { label: "Diket:", text: "AB adalah diameter lingkaran, dengan A(−3, −1) dan B(5, 5) adalah ujung-ujung diameter tersebut." },
       { label: "a.", text: "Tentukan koordinat titik pusat P (titik tengah AB)." },
       { label: "b.", text: "Hitung jari-jari lingkaran tersebut (jarak dari P ke A)." },
       { label: "c.", text: "Apakah titik C(4, −2) berada di dalam, di luar, atau tepat pada lingkaran? Jelaskan!" },
