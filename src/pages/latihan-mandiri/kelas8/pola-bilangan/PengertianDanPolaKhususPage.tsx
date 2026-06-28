@@ -210,87 +210,6 @@ const SvgQ9 = () => {
   );
 };
 
-const SvgQ14 = () => {
-  const configs = [
-    { n: 1, label: "1\u00B3 = 1", cx: 22 },
-    { n: 2, label: "2\u00B3 = 8", cx: 88 },
-    { n: 3, label: "3\u00B3 = 27", cx: 186 },
-    { n: 4, label: "4\u00B3 = 64", cx: 318 },
-  ];
-  const baseS = 14;
-  const svgH = 120, svgW = 390;
-  const bottomY = 90;
-
-  return (
-    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
-      {configs.map(({ n, label, cx }, gi) => {
-        const s = n * baseS;
-        const dx = s * 0.866;
-        const dh = s * 0.5;
-        const y = bottomY - 2 * dh - s;
-
-        const A = [cx, y];
-        const B = [cx + dx, y + dh];
-        const C = [cx, y + 2 * dh];
-        const D = [cx - dx, y + dh];
-        const E = [cx, y + 2 * dh + s];
-        const F = [cx + dx, y + dh + s];
-        const G = [cx - dx, y + dh + s];
-
-        const pt = (p: number[]) => `${p[0]},${p[1]}`;
-        const sk = "rgba(165,180,252,0.55)";
-        const topC = `rgba(99,102,241,${0.38 + gi * 0.07})`;
-        const leftC = `rgba(55,48,163,${0.45 + gi * 0.06})`;
-        const rightC = `rgba(79,70,229,${0.35 + gi * 0.07})`;
-
-        const gridLines: JSX.Element[] = [];
-        if (n > 1) {
-          for (let k = 1; k < n; k++) {
-            const t = k / n;
-            gridLines.push(
-              <line key={`tL${k}`}
-                x1={D[0] + t * (A[0] - D[0])} y1={D[1] + t * (A[1] - D[1])}
-                x2={C[0] + t * (B[0] - C[0])} y2={C[1] + t * (B[1] - C[1])}
-                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
-              <line key={`tR${k}`}
-                x1={A[0] + t * (D[0] - A[0])} y1={A[1] + t * (D[1] - A[1])}
-                x2={B[0] + t * (C[0] - B[0])} y2={B[1] + t * (C[1] - B[1])}
-                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
-              <line key={`rH${k}`}
-                x1={C[0] + t * (B[0] - C[0])} y1={C[1] + t * (B[1] - C[1])}
-                x2={E[0] + t * (F[0] - E[0])} y2={E[1] + t * (F[1] - E[1])}
-                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
-              <line key={`rV${k}`}
-                x1={B[0] + t * (C[0] - B[0])} y1={B[1] + t * (C[1] - B[1])}
-                x2={F[0] + t * (E[0] - F[0])} y2={F[1] + t * (E[1] - F[1])}
-                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
-              <line key={`lH${k}`}
-                x1={D[0] + t * (C[0] - D[0])} y1={D[1] + t * (C[1] - D[1])}
-                x2={G[0] + t * (E[0] - G[0])} y2={G[1] + t * (E[1] - G[1])}
-                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
-              <line key={`lV${k}`}
-                x1={C[0] + t * (D[0] - C[0])} y1={C[1] + t * (D[1] - C[1])}
-                x2={E[0] + t * (G[0] - E[0])} y2={E[1] + t * (G[1] - E[1])}
-                stroke="rgba(165,180,252,0.25)" strokeWidth="0.7" />,
-            );
-          }
-        }
-
-        return (
-          <g key={gi}>
-            <polygon points={`${pt(B)} ${pt(F)} ${pt(E)} ${pt(C)}`} fill={rightC} stroke={sk} strokeWidth="0.9" />
-            <polygon points={`${pt(D)} ${pt(C)} ${pt(E)} ${pt(G)}`} fill={leftC} stroke={sk} strokeWidth="0.9" />
-            <polygon points={`${pt(A)} ${pt(B)} ${pt(C)} ${pt(D)}`} fill={topC} stroke={sk} strokeWidth="0.9" />
-            {gridLines}
-            <text x={cx} y={svgH - 8} textAnchor="middle"
-              fill="#a5b4fc" fontSize="9.5" fontFamily="monospace">{label}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-};
-
 const SvgQ17 = () => {
   const nums = [1, 2, 4, 7, 11, 16, 22];
   const diffs = ["+1", "+2", "+3", "+4", "+5", "+6"];
@@ -374,24 +293,6 @@ const questions: QuestionItem[] = [
   },
   {
     number: 4,
-    title: "Pola Barisan Fibonacci",
-    content: "Barisan Fibonacci: 1, 1, 2, 3, 5, 8, 13, 21, ...\n\na. Jelaskan aturan pembentukan barisan Fibonacci.\nb. Tuliskan 4 suku berikutnya dari barisan tersebut.\nc. Berapa nilai suku ke-14 dari barisan Fibonacci?",
-    type: "essay",
-  },
-  {
-    number: 5,
-    title: "Soal ANBK - Evaluasi Pernyataan",
-    content: "Perhatikan barisan: 5, 15, 45, 135, ...\nTentukan pernyataan yang BENAR (B) atau SALAH (S) dan berikan alasannya:",
-    type: "mixed",
-    parts: [
-      { label: "(1)", text: "Setiap suku berikutnya diperoleh dengan mengalikan suku sebelumnya dengan 3." },
-      { label: "(2)", text: "Selisih antara dua suku berurutan selalu tetap." },
-      { label: "(3)", text: "Suku ke-6 dari barisan tersebut adalah 3.645." },
-      { label: "(4)", text: "Suku ke-5 dari barisan tersebut adalah 405." },
-    ],
-  },
-  {
-    number: 6,
     title: "Bilangan Segitiga",
     content: "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
     type: "mixed",
@@ -404,7 +305,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 7,
+    number: 5,
     title: "Bilangan Persegi",
     content: "Perhatikan bilangan persegi berikut:",
     type: "mixed",
@@ -417,7 +318,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 8,
+    number: 6,
     title: "Bilangan Persegi Panjang",
     content: "Bilangan persegi panjang dibentuk dari susunan titik berbentuk persegi panjang:",
     type: "mixed",
@@ -430,110 +331,14 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 9,
-    title: "Segitiga Pascal - Pola Baris",
-    content: "Perhatikan Segitiga Pascal berikut:\nBaris ke-0: 1\nBaris ke-1: 1  1\nBaris ke-2: 1  2  1\nBaris ke-3: 1  3  3  1\nBaris ke-4: 1  4  6  4  1\n\na. Tuliskan isi baris ke-5 dan ke-6 dari Segitiga Pascal.\nb. Berapa jumlah bilangan pada baris ke-7?\nc. Berapa banyak bilangan yang ada pada baris ke-n?",
-    type: "essay",
-  },
-  {
-    number: 10,
-    title: "Pola Jumlah Baris Segitiga Pascal",
-    content: "Jumlah bilangan pada setiap baris Segitiga Pascal membentuk pola tersendiri:",
-    type: "mixed",
-    parts: [
-      { label: "Baris 0:", math: "1 \\Rightarrow \\text{jumlah} = 1" },
-      { label: "Baris 1:", math: "1+1 = 2" },
-      { label: "Baris 2:", math: "1+2+1 = 4" },
-      { label: "Baris 3:", math: "1+3+3+1 = 8" },
-      { label: "a.", text: "Tentukan pola jumlah bilangan setiap baris." },
-      { label: "b.", text: "Berapa jumlah bilangan pada baris ke-10?" },
-    ],
-  },
-  {
-    number: 11,
-    title: "Hubungan Bilangan Segitiga dan Persegi",
-    content: "Perhatikan pola hubungan berikut:",
-    type: "mixed",
-    parts: [
-      { label: "", math: "1 + 3 = 4 = 2^2" },
-      { label: "", math: "1 + 3 + 5 = 9 = 3^2" },
-      { label: "", math: "1 + 3 + 5 + 7 = 16 = 4^2" },
-      { label: "a.", text: "Tuliskan pola selanjutnya hingga penjumlahan bilangan ganjil ke-6." },
-      { label: "b.", text: "Buktikan bahwa penjumlahan n bilangan ganjil pertama sama dengan n²." },
-    ],
-  },
-  {
-    number: 12,
-    title: "Pola Bilangan Prima",
-    content: "Perhatikan barisan bilangan prima: 2, 3, 5, 7, 11, 13, 17, 19, 23, ...\n\na. Tentukan 5 bilangan prima berikutnya setelah 23.\nb. Apakah 91 termasuk bilangan prima? Jelaskan dengan cara faktorisasi!\nc. Jelaskan mengapa 1 bukan termasuk bilangan prima.",
-    type: "essay",
-  },
-  {
-    number: 13,
-    title: "Pola Bilangan Kubik",
-    content: "Bilangan kubik: 1, 8, 27, 64, 125, ...",
-    type: "mixed",
-    svgNode: <SvgQ14 />,
-    parts: [
-      { label: "a.", text: "Nyatakan rumus bilangan kubik ke-n." },
-      { label: "b.", text: "Bilangan kubik ke-7 adalah ...." },
-      { label: "c.", math: "\\text{Tentukan nilai } n \\text{ jika bilangan kubik ke-}n = 512" },
-    ],
-  },
-  {
-    number: 14,
-    title: "Segitiga Pascal - Koefisien Binomial",
-    content: "Dalam Segitiga Pascal, baris ke-n merupakan koefisien dari penjabaran (a + b)ⁿ.\n\na. Jabarkan (a + b)⁴ menggunakan Segitiga Pascal.\nb. Jabarkan (a + b)⁵ menggunakan Segitiga Pascal.\nc. Tentukan suku ke-3 dari penjabaran (x + y)⁶.",
-    type: "essay",
-  },
-  {
-    number: 15,
-    title: "Pola Bilangan Segitiga Bertingkat",
-    content: "Jumlah n bilangan asli pertama membentuk bilangan segitiga.",
-    type: "mixed",
-    parts: [
-      { label: "Rumus:", math: "T_n = \\frac{n(n+1)}{2}" },
-      { label: "a.", text: "Hitung T₁₀ (bilangan segitiga ke-10)." },
-      { label: "b.", math: "\\text{Apakah } T_{20} = 210 \\text{ ? Verifikasi jawabanmu!}" },
-      { label: "c.", text: "Bilangan segitiga ke berapa yang nilainya 120?" },
-    ],
-  },
-  {
-    number: 16,
+    number: 7,
     title: "Soal TKA - Pola Kombinasi",
     content: "Perhatikan barisan: 1, 2, 4, 7, 11, 16, 22, ...\n\na. Tentukan beda antara suku-suku berurutan.\nb. Identifikasi pola beda tersebut.\nc. Tentukan dua suku berikutnya.\nd. Tuliskan rumus umum suku ke-n.",
     type: "essay",
     svgNode: <SvgQ17 />,
   },
   {
-    number: 17,
-    title: "Pola Bilangan Ganjil dan Persegi",
-    content: "Perhatikan hubungan antara bilangan ganjil dan bilangan persegi:",
-    type: "mixed",
-    parts: [
-      { label: "", math: "1 = 1^2" },
-      { label: "", math: "1 + 3 = 2^2" },
-      { label: "", math: "1 + 3 + 5 = 3^2" },
-      { label: "", math: "1 + 3 + 5 + 7 = 4^2" },
-      { label: "a.", text: "Lanjutkan pola tersebut untuk n = 5 dan n = 6." },
-      { label: "b.", math: "\\text{Buktikan: } \\sum_{k=1}^{n}(2k-1) = n^2" },
-    ],
-  },
-  {
-    number: 18,
-    title: "Soal ANBK - Pola Bilangan Khusus Terpadu",
-    content: "Di bawah ini terdapat empat barisan bilangan. Pasangkan setiap barisan dengan jenis polanya yang tepat!",
-    type: "mixed",
-    parts: [
-      { label: "(1)", math: "1,\\ 4,\\ 9,\\ 16,\\ 25,\\ ..." },
-      { label: "(2)", math: "1,\\ 3,\\ 6,\\ 10,\\ 15,\\ ..." },
-      { label: "(3)", math: "2,\\ 6,\\ 12,\\ 20,\\ 30,\\ ..." },
-      { label: "(4)", math: "1,\\ 8,\\ 27,\\ 64,\\ 125,\\ ..." },
-      { label: "", text: "Pilihan: Bilangan Segitiga / Bilangan Persegi / Bilangan Persegi Panjang / Bilangan Kubik" },
-    ],
-  },
-  {
-    number: 19,
+    number: 8,
     title: "Menghitung Suku dengan Rumus Umum",
     content: "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-10 dan suku ke-100 untuk masing-masing barisan berikut:",
     type: "mixed",
@@ -544,7 +349,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 20,
+    number: 9,
     title: "Rumus Suku ke-n dan Suku ke-100",
     content: "Tentukan rumus suku ke-n dan hitunglah suku ke-100 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
     type: "mixed",
