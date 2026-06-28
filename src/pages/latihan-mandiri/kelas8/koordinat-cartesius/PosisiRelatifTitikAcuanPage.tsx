@@ -55,76 +55,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(3, "Selisih Koordinat sebagai Posisi Relatif", {
-    type: "essay",
-    content: "Posisi relatif titik B(x₂, y₂) terhadap titik acuan A(x₁, y₁) dinyatakan sebagai: Δx = x₂ − x₁ (positif = kanan, negatif = kiri) dan Δy = y₂ − y₁ (positif = atas, negatif = bawah).",
-    parts: [
-      { label: "a.", text: "Hitung posisi relatif titik C(7, 3) terhadap titik acuan B(4, 1)!", math: "\\Delta x = 7 - 4 = 3, \\quad \\Delta y = 3 - 1 = 2" },
-      { label: "b.", text: "Hitung posisi relatif titik D(−3, 5) terhadap titik acuan E(2, −1)!" },
-      { label: "c.", text: "Hitung posisi relatif titik F(0, 0) terhadap titik acuan G(5, 3)!" },
-    ],
-  }),
-
-  Qn(4, "Menentukan Koordinat dari Posisi Relatif", {
-    type: "essay",
-    content: "Jika titik acuan adalah A(2, 3), dan titik B berada 4 satuan ke kanan dan 2 satuan ke bawah dari A, maka koordinat B dapat dicari.",
-    parts: [
-      { label: "a.", text: "Tentukan koordinat titik B!", math: "B = (2 + 4,\\; 3 + (-2)) = (6, 1)" },
-      { label: "b.", text: "Titik C berada 3 satuan ke kiri dan 5 satuan ke atas dari A(2,3). Tentukan koordinat C!" },
-      { label: "c.", text: "Titik D berada 6 satuan ke kanan dan 4 satuan ke atas dari titik asal O(0,0). Tentukan koordinat D!" },
-    ],
-  }),
-
-  Qn(5, "Posisi Relatif pada Kuadran Berbeda", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      pts: [
-        { x: -3, y: -2, label: "P(−3,−2)", color: "#facc15", labelPos: "bl" },
-        { x: 2, y: 4, label: "A(2,4)", color: "#f472b6", labelPos: "tr" },
-        { x: -1, y: 3, label: "B(−1,3)", color: "#60a5fa", labelPos: "tl" },
-        { x: 4, y: -3, label: "C(4,−3)", color: "#34d399", labelPos: "br" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Titik P(−3,−2) sebagai titik acuan. Nyatakan posisi titik A terhadap P!" },
-      { label: "b.", text: "Nyatakan posisi titik B terhadap P(−3,−2)!" },
-      { label: "c.", text: "Nyatakan posisi titik C terhadap P(−3,−2)!" },
-    ],
-  }),
-
-  Qn(6, "Titik yang Segaris Horizontal dengan Titik Acuan", {
-    type: "essay",
-    content: "Titik B dikatakan segaris horizontal dengan titik acuan A jika kedua titik memiliki nilai y yang sama (Δy = 0).",
-    parts: [
-      { label: "a.", text: "Jika titik acuan adalah A(2, 5), tentukan koordinat titik B yang segaris horizontal dengan A dan berada 4 satuan ke kanan A!" },
-      { label: "b.", text: "Titik C(x, 5) segaris horizontal dengan A(2,5). Apakah posisi C di kiri atau kanan A jika x = −3?" },
-      { label: "c.", text: "Apakah titik D(7, 5) dan E(−1, 5) keduanya segaris horizontal dengan A(2, 5)? Jelaskan!" },
-    ],
-  }),
-
-  Qn(7, "Titik yang Segaris Vertikal dengan Titik Acuan", {
-    type: "essay",
-    content: "Titik B dikatakan segaris vertikal dengan titik acuan A jika kedua titik memiliki nilai x yang sama (Δx = 0).",
-    parts: [
-      { label: "a.", text: "Jika titik acuan adalah A(−3, 2), tentukan koordinat titik C yang segaris vertikal dengan A dan berada 5 satuan ke bawah A!" },
-      { label: "b.", text: "Titik D(−3, y) segaris vertikal dengan A(−3, 2). Apakah D di atas atau bawah A jika y = 7?" },
-      { label: "c.", text: "Tentukan semua titik dari daftar berikut yang segaris vertikal dengan P(4, 1): Q(4, 5), R(2, 1), S(4, −3), T(−4, 1)!" },
-    ],
-  }),
-
-  Qn(8, "Posisi Relatif: Atas/Bawah/Kiri/Kanan", {
-    type: "essay",
-    content: "Diberikan titik acuan A(1, 2) dan beberapa titik lainnya.",
-    parts: [
-      { label: "a.", text: "Tentukan posisi titik B(4, 2) terhadap A: apakah di atas, bawah, kiri, atau kanan?" },
-      { label: "b.", text: "Tentukan posisi titik C(1, −1) terhadap A(1,2)!" },
-      { label: "c.", text: "Tentukan posisi titik D(−2, 5) terhadap A(1,2)!" },
-      { label: "d.", text: "Titik E(1, 2) sama dengan A. Apa yang dapat kamu simpulkan?" },
-    ],
-  }),
-
-  Qn(9, "Menentukan Titik Acuan dari Informasi Posisi Relatif", {
+  Qn(3, "Menentukan Titik Acuan dari Informasi Posisi Relatif", {
     type: "essay",
     content: "Titik P berada 3 satuan ke kanan dan 4 satuan ke atas dari titik acuan Q.",
     parts: [
@@ -134,25 +65,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(10, "Posisi Relatif Titik-titik dalam Bangun Datar", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      pts: [
-        { x: 1, y: 1, label: "A(1,1)", color: "#f472b6", labelPos: "bl" },
-        { x: 5, y: 1, label: "B(5,1)", color: "#60a5fa", labelPos: "br" },
-        { x: 5, y: 4, label: "C(5,4)", color: "#34d399", labelPos: "tr" },
-        { x: 1, y: 4, label: "D(1,4)", color: "#a78bfa", labelPos: "tl" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "ABCD adalah sudut-sudut persegi panjang. Dengan A sebagai titik acuan, nyatakan posisi relatif titik B, C, dan D terhadap A!" },
-      { label: "b.", text: "Dengan B sebagai titik acuan, nyatakan posisi relatif titik C terhadap B!" },
-      { label: "c.", text: "Hitunglah panjang AB dan BC berdasarkan selisih koordinat!" },
-    ],
-  }),
-
-  Qn(11, "Posisi Relatif Titik terhadap Titik Tengah Segmen", {
+  Qn(4, "Posisi Relatif Titik terhadap Titik Tengah Segmen", {
     type: "essay",
     content: "Titik tengah dari segmen AB dengan A(2, 4) dan B(6, 2) dapat dihitung.",
     math: "M = \\left(\\frac{2+6}{2},\\; \\frac{4+2}{2}\\right) = (4, 3)",
@@ -163,7 +76,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(12, "Posisi Relatif pada Peta Sederhana", {
+  Qn(5, "Posisi Relatif pada Peta Sederhana", {
     type: "essay",
     content: "Sebuah peta menggunakan sistem koordinat. Perpustakaan berada di titik P(3, 5), kantin di K(7, 2), kelas di C(1, 8).",
     parts: [
@@ -173,24 +86,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(13, "Posisi Relatif Tiga Titik Berurutan", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      pts: [
-        { x: -2, y: -3, label: "A(−2,−3)", color: "#f472b6", labelPos: "bl" },
-        { x: 2, y: 1, label: "B(2,1)", color: "#60a5fa", labelPos: "tr" },
-        { x: 5, y: 4, label: "C(5,4)", color: "#34d399", labelPos: "tr" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Nyatakan posisi B terhadap A!" },
-      { label: "b.", text: "Nyatakan posisi C terhadap B!" },
-      { label: "c.", text: "Jika kamu bergerak dari A ke B lalu ke C, berapa total perpindahan (Δx dan Δy) dari A ke C?" },
-    ],
-  }),
-
-  Qn(14, "Posisi Relatif dalam Sistem Navigasi Sederhana", {
+  Qn(6, "Posisi Relatif dalam Sistem Navigasi Sederhana", {
     type: "essay",
     content: "Sebuah kapal berada di posisi K(2, 3). Mercusuar A berada di (5, 7), mercusuar B di (−1, 6), pulau C di (4, −2).",
     parts: [
@@ -224,7 +120,7 @@ const PosisiRelatifTitikAcuanPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Koordinat Kartesius · Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-violet-400 text-sm">🎯</span>
-            <span className="text-white/70 text-xs font-body">14 Soal · Posisi Relatif Titik Acuan</span>
+            <span className="text-white/70 text-xs font-body">6 Soal · Posisi Relatif Titik Acuan</span>
             <span className="text-violet-400 text-sm">🎯</span>
           </div>
         </div>
