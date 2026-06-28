@@ -136,26 +136,27 @@ const SvgQ3 = () => {
 };
 
 const SvgQ5Lingkaran = () => {
-  const r = 7, sp = 18;
+  // Pola ke-n: rows=n, cols=n+2 → 3, 8, 15 circles
+  const r = 6, sp = 15;
   const groups = [
-    { n: 1, label: "Pola ke-1" },
-    { n: 2, label: "Pola ke-2" },
-    { n: 3, label: "Pola ke-3" },
+    { rows: 1, cols: 3, label: "Pola ke-1" },
+    { rows: 2, cols: 4, label: "Pola ke-2" },
+    { rows: 3, cols: 5, label: "Pola ke-3" },
   ];
-  const groupW = 80, svgH = 90;
+  const groupW = 100, svgH = 90;
   const svgW = groups.length * groupW + 10;
   return (
-    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
-      {groups.map(({ n, label }, gi) => {
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-md mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {groups.map(({ rows, cols, label }, gi) => {
         const cx = 5 + gi * groupW + groupW / 2;
-        const cy = 36;
+        const cy = 38;
         const circles = [];
-        for (let row = 0; row < n; row++) {
-          for (let col = 0; col < n; col++) {
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < cols; col++) {
             circles.push(
               <circle key={`${row}-${col}`}
-                cx={cx - (n - 1) * sp / 2 + col * sp}
-                cy={cy - (n - 1) * sp / 2 + row * sp}
+                cx={cx - (cols - 1) * sp / 2 + col * sp}
+                cy={cy - (rows - 1) * sp / 2 + row * sp}
                 r={r}
                 fill="rgba(56,189,248,0.25)"
                 stroke="rgba(56,189,248,0.9)"
