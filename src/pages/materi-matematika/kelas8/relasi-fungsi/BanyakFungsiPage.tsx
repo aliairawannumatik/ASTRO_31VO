@@ -2,10 +2,526 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Hash, RotateCcw, Trophy, XCircle, CheckCircle2, ArrowLeftRight } from "lucide-react";
+import { BookOpen, ChevronUp, Lightbulb, Target, Layers, Hash, RotateCcw, Trophy, XCircle, CheckCircle2, ArrowLeftRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+
+/* ══════════════════════════════════════════════════════
+   TRANSLATIONS
+══════════════════════════════════════════════════════ */
+const TR = {
+  id: {
+    /* ── page header ── */
+    title:    "MENENTUKAN BANYAK FUNGSI & KORESPONDENSI SATU-SATU",
+    subtitle: "Hitung Berapa Fungsi yang Bisa Dibentuk!",
+    badge:    "Kelas 8 · Relasi dan Fungsi · Materi Matematika",
+
+    /* ── section titles ── */
+    sec_intro:        "🌟 Berapa Banyak Fungsi yang Bisa Dibuat?",
+    sec_rumus:        "📘 Rumus Menentukan Banyak Fungsi",
+    sec_koresp:       "🔗 Korespondensi Satu-Satu (Bijeksi)",
+    sec_c1:           "✏️ Contoh 1 — Tingkat Mudah",
+    sec_c2:           "✏️ Contoh 2 — Tingkat Sedang",
+    sec_c3:           "✏️ Contoh 3 — Tingkat Sulit",
+    sec_rangkuman:    "📌 Rangkuman & Kesimpulan",
+
+    /* ── badges ── */
+    badge_easy:   "MUDAH",
+    badge_medium: "SEDANG",
+    badge_hard:   "SULIT",
+
+    /* ── intro section ── */
+    intro_p: "Diberikan dua himpunan, berapa banyak fungsi yang bisa kita buat dari satu himpunan ke himpunan lain? Pertanyaan ini punya jawaban matematika yang elegan dan bisa dihitung dengan rumus sederhana!",
+    intro_idea_head: "🔢 Ide Dasar",
+    intro_idea_p: "Jika A = {1, 2} dan B = {a, b, c}, maka setiap anggota A bisa dipasangkan ke salah satu dari 3 pilihan di B. Karena ada 2 anggota di A, maka total fungsi = 3 × 3 = 3² = 9 fungsi.",
+
+    /* ── rumus section ── */
+    rumus_summary_head: "🎯 Ringkasan Intisari",
+    rumus_summary_p: "Jika n(A) menyatakan banyak anggota himpunan A dan n(B) menyatakan banyak anggota himpunan B, maka banyak fungsi yang dapat dibentuk dari A ke B adalah:",
+    rumus_box_label: "Banyak fungsi dari A ke B",
+    rumus_why_head: "🔎 Mengapa Rumusnya Demikian?",
+    rumus_why_assume: "Misalkan A = {a₁, a₂, ..., aₘ} dan B = {b₁, b₂, ..., bₙ}",
+    rumus_li1: "bisa dipasangkan ke salah satu dari",
+    rumus_li1b: "pilihan di B",
+    rumus_li2: "bisa dipasangkan ke salah satu dari",
+    rumus_li2b: "pilihan di B",
+    rumus_li3: "... dan seterusnya hingga",
+    rumus_total: "Total =",
+    rumus_times: "(sebanyak m kali)",
+    rumus_tbl_nA: "n(A)",
+    rumus_tbl_nB: "n(B)",
+    rumus_tbl_AB: "Banyak Fungsi A→B",
+    rumus_tbl_BA: "Banyak Fungsi B→A",
+
+    /* ── korespondensi section ── */
+    koresp_summary_head: "🎯 Ringkasan Intisari",
+    koresp_def: "Korespondensi satu-satu (bijeksi) adalah fungsi yang memenuhi dua syarat sekaligus:",
+    koresp_injective_head: "Injektif (satu-satu):",
+    koresp_injective_p: "Setiap anggota kodomain dipasangkan oleh paling banyak satu anggota domain. Tidak ada dua anggota domain yang punya pasangan sama.",
+    koresp_surjective_head: "Surjektif (pada):",
+    koresp_surjective_p: "Setiap anggota kodomain punya pasangan (tidak ada yang \"menganggur\").",
+    koresp_syarat_head: "📐 Syarat Korespondensi Satu-Satu",
+    koresp_syarat_p: "Korespondensi satu-satu hanya dapat terjadi jika:",
+    koresp_syarat_note: "Jumlah anggota domain dan kodomain harus sama!",
+    koresp_rumus_head: "🔢 Rumus Banyak Korespondensi Satu-Satu",
+    koresp_rumus_box: "Banyak korespondensi satu-satu",
+    koresp_rumus_note: "di mana n = n(A) = n(B)",
+    koresp_tbl_n: "n(A) = n(B)",
+    koresp_tbl_fact: "n! (Faktorial)",
+    koresp_tbl_count: "Banyak Korespondensi",
+    koresp_visual_yes: "✅ KORESPONDENSI SATU-SATU",
+    koresp_visual_no:  "❌ BUKAN KORESPONDENSI 1-1",
+    koresp_visual_yes_note: "n(A)=n(B)=3, tiap elemen berpasangan tepat satu",
+    koresp_visual_no_note:  "n(A)≠n(B), elemen d tidak punya pasangan",
+
+    /* ── contoh 1 ── */
+    c1_soal_head: "📝 Soal",
+    c1_soal_p: "Diketahui A = {p, q, r} dan B = {1, 2, 3, 4}. Tentukan banyaknya fungsi yang dapat dibuat dari A ke B!",
+    c1_pembahasan_head: "🔍 Pembahasan",
+    c1_ident_head: "Identifikasi:",
+    c1_nA_note: "(banyak anggota domain)",
+    c1_nB_note: "(banyak pilihan untuk setiap anggota A)",
+    c1_rumus_head: "Gunakan Rumus:",
+    c1_rumus_lbl: "Banyak fungsi",
+    c1_result: "✅ Banyak fungsi dari A ke B = 64 fungsi",
+
+    /* ── contoh 2 ── */
+    c2_soal_head: "📝 Soal",
+    c2_soal_p: "Diketahui P = {a, b, c, d} dan Q = {1, 2, 3, 4}.",
+    c2_soal_a: "a) Berapa banyak korespondensi satu-satu dari P ke Q?",
+    c2_soal_b: "b) Berapa banyak fungsi (bukan hanya korespondensi) dari P ke Q?",
+    c2_soal_c: "c) Berapa perbandingan keduanya?",
+    c2_pembahasan_head: "🔍 Pembahasan",
+    c2_ident_head: "Identifikasi:",
+    c2_ident_note: "→ n(P) = n(Q) = 4, bisa dibuat korespondensi!",
+    c2_a_head: "a) Korespondensi Satu-Satu:",
+    c2_b_head: "b) Semua Fungsi dari P ke Q:",
+    c2_c_head: "c) Perbandingan:",
+    c2_c_lbl: "Korespondensi ÷ Total Fungsi",
+    c2_c_note: "Hanya sekitar 9,4% dari semua fungsi yang merupakan korespondensi satu-satu!",
+    c2_result: "✅ Korespondensi = 24, Total Fungsi = 256",
+
+    /* ── contoh 3 ── */
+    c3_soal_head: "📝 Soal",
+    c3_soal_p: "Himpunan A mempunyai n(A) = m anggota dan himpunan B mempunyai n(B) = 4 anggota. Jika banyaknya fungsi dari A ke B adalah 1024, tentukan:",
+    c3_soal_a: "a) Nilai m",
+    c3_soal_b: "b) Apakah mungkin membuat korespondensi satu-satu dari A ke B? Jika ya, berapa banyaknya?",
+    c3_pembahasan_head: "🔍 Pembahasan",
+    c3_a_head: "a) Mencari nilai m:",
+    c3_a_step1: "Gunakan rumus banyak fungsi:",
+    c3_a_step2: "Ingat bahwa 1024 = 2¹⁰ dan 4 = 2², maka:",
+    c3_b_head: "b) Korespondensi Satu-Satu?",
+    c3_b_nA: "n(A) = 5, n(B) = 4",
+    c3_b_note: "Karena n(A) ≠ n(B) (5 ≠ 4), maka korespondensi satu-satu tidak mungkin dibuat.",
+    c3_b_syarat: "Syarat korespondensi satu-satu adalah n(A) = n(B).",
+    c3_result: "✅ m = 5. Korespondensi satu-satu tidak mungkin karena n(A) ≠ n(B).",
+
+    /* ── rangkuman ── */
+    rang_head: "📚 Rangkuman Materi",
+    rang_items: [
+      { icon: "🔢", label: "Banyak Fungsi A → B", desc: "Rumus: n(B)^n(A) — kodomain dijadikan basis, domain dijadikan pangkat." },
+      { icon: "🔄", label: "Korespondensi Satu-Satu", desc: "Fungsi di mana setiap anggota A berpasangan unik dengan setiap anggota B (bijektif)." },
+      { icon: "⚖️", label: "Syarat Korespondensi", desc: "Hanya mungkin jika n(A) = n(B) — jumlah anggota kedua himpunan harus sama." },
+      { icon: "🏆", label: "Banyak Korespondensi", desc: "Rumus: n! (n faktorial) di mana n = n(A) = n(B)." },
+      { icon: "❗", label: "Faktorial", desc: "n! = n × (n−1) × (n−2) × … × 2 × 1. Contoh: 4! = 4×3×2×1 = 24." },
+    ],
+    tips_head: "💡 Tips & Trik",
+    tips: [
+      "Rumus n(B)^n(A): ingat B = tujuan = basis, A = asal = pangkat. Jangan terbalik!",
+      "Korespondensi hanya bisa ada jika n(A) = n(B). Cek dulu sebelum menghitung!",
+      "Trik hitung faktorial: mulai dari n, kalikan mundur sampai 1. Contoh: 5! = 5×4×3×2×1 = 120.",
+    ],
+    kesimpulan_head: "🎯 Kesimpulan",
+    kesimpulan_p: "Banyak fungsi = menghitung semua kemungkinan. Kuasai rumus n(B)^n(A) untuk fungsi biasa dan n! untuk korespondensi satu-satu!",
+    back_btn: "← Kembali ke Relasi dan Fungsi",
+
+    /* ── diagram interaktif banyak fungsi ── */
+    diag_title:      "🎮 Buktikan Sendiri — Seret Panah!",
+    diag_switch:     "Ganti Mode",
+    diag_size_head:  "⚙️ Atur ukuran himpunan:",
+    diag_member:     "anggota",
+    diag_func_count: (d: string, c: string) => `Banyak fungsi ${d}→${c} =`,
+    diag_too_many:   "(banyak sekali!)",
+    diag_progress:   (n: number, max: number) => `${n}/${max} fungsi`,
+    diag_complete:   "🎉 Lengkap!",
+    diag_domain:     (l: string) => `Domain (${l})`,
+    diag_codomain:   (l: string) => `Kodomain (${l})`,
+    diag_drag_hint:  "👆 Seret dari kiri ke kanan · Double-tap untuk hapus panah",
+    diag_valid:      "✅ Fungsi valid! Setiap elemen domain punya tepat satu pasangan.",
+    diag_dup:        "⚠️ Fungsi ini sudah ada! Coba kombinasi lain.",
+    diag_remaining:  (n: number) => `Hubungkan ${n} elemen domain yang tersisa.`,
+    diag_err_incomplete: "Belum semua elemen domain dipasangkan!",
+    diag_err_dup:        "Fungsi ini sudah ada! Coba kombinasi lain.",
+    diag_all_found:  (max: number) => `🎉 Semua ${max} fungsi ditemukan!`,
+    diag_saved:      (n: number) => `✅ Fungsi ke-${n} disimpan!`,
+    diag_reset:      "Reset",
+    diag_reset_all:  "Reset Semua",
+    diag_save_btn:   "Simpan ke Koleksi",
+    diag_gallery:    (d: string, c: string, n: number, max: number) => `Fungsi ${d}→${c} yang ditemukan (${n}/${max}):`,
+    diag_more_left:  (n: number) => `… masih ${n} lagi`,
+    diag_proven:     (d: string, c: string, nCod: number, sup: string, max: number) =>
+      `🎉 Terbukti! Banyak fungsi ${d}→${c} = ${nCod}${sup} = ${max}`,
+
+    /* ── diagram interaktif bijeksi ── */
+    bij_title:       "🎮 Buktikan Sendiri — Seret Panah Bijeksi!",
+    bij_count_lbl:   (n: number, max: number) => `${n}! = ${max} korespondensi`,
+    bij_size_head:   "⚙️ Pilih ukuran n(A) = n(B):",
+    bij_member:      "anggota",
+    bij_count_eq:    "Banyak korespondensi =",
+    bij_complete:    "🎉 Lengkap!",
+    bij_domain:      "Domain (A)",
+    bij_codomain:    "Kodomain (B)",
+    bij_drag_hint:   "👆 Seret dari kiri ke kanan · Double-tap untuk hapus panah",
+    bij_valid:       "✅ Bijeksi valid! Setiap elemen berpasangan tepat satu-satu.",
+    bij_not_bij:     (msg: string | null) => `❌ Bukan bijeksi! ${msg ?? "Ada target yang dipakai dua kali."}`,
+    bij_dup:         "⚠️ Korespondensi ini sudah ada! Coba kombinasi lain.",
+    bij_remaining:   (n: number) => `Hubungkan ${n} elemen domain yang tersisa.`,
+    bij_err_incomplete: "Belum semua elemen domain dipasangkan!",
+    bij_err_not_bij:    "Bukan bijeksi! Ada dua elemen menuju target yang sama.",
+    bij_err_dup:        "Korespondensi ini sudah ada! Coba kombinasi lain.",
+    bij_all_found:   (max: number) => `🎉 Semua ${max} korespondensi ditemukan!`,
+    bij_saved:       (n: number) => `✅ Korespondensi ke-${n} disimpan!`,
+    bij_reset:       "Reset",
+    bij_reset_all:   "Reset Semua",
+    bij_save_btn:    "Simpan ke Koleksi",
+    bij_gallery:     (n: number, max: number) => `Korespondensi yang ditemukan (${n}/${max}):`,
+    bij_proven:      (n: number, max: number) => `🎉 Terbukti! Banyak korespondensi satu-satu = ${n}! = ${max}`,
+  },
+
+  en: {
+    title:    "COUNTING FUNCTIONS & ONE-TO-ONE CORRESPONDENCES",
+    subtitle: "Count How Many Functions Can Be Made!",
+    badge:    "Grade 8 · Relations & Functions · Mathematics",
+
+    sec_intro:        "🌟 How Many Functions Can Be Made?",
+    sec_rumus:        "📘 Formula for Counting Functions",
+    sec_koresp:       "🔗 One-to-One Correspondence (Bijection)",
+    sec_c1:           "✏️ Example 1 — Easy Level",
+    sec_c2:           "✏️ Example 2 — Medium Level",
+    sec_c3:           "✏️ Example 3 — Hard Level",
+    sec_rangkuman:    "📌 Summary & Conclusion",
+
+    badge_easy:   "EASY",
+    badge_medium: "MEDIUM",
+    badge_hard:   "HARD",
+
+    intro_p: "Given two sets, how many functions can we build from one set to another? This question has an elegant mathematical answer that can be calculated with a simple formula!",
+    intro_idea_head: "🔢 Core Idea",
+    intro_idea_p: "If A = {1, 2} and B = {a, b, c}, then each element of A can be paired with one of 3 choices in B. Since there are 2 elements in A, the total number of functions = 3 × 3 = 3² = 9 functions.",
+
+    rumus_summary_head: "🎯 Key Summary",
+    rumus_summary_p: "If n(A) is the number of elements in set A and n(B) is the number of elements in set B, then the number of functions from A to B is:",
+    rumus_box_label: "Number of functions from A to B",
+    rumus_why_head: "🔎 Why Does the Formula Work?",
+    rumus_why_assume: "Let A = {a₁, a₂, ..., aₘ} and B = {b₁, b₂, ..., bₙ}",
+    rumus_li1: "can be paired with one of",
+    rumus_li1b: "choices in B",
+    rumus_li2: "can be paired with one of",
+    rumus_li2b: "choices in B",
+    rumus_li3: "... and so on up to",
+    rumus_total: "Total =",
+    rumus_times: "(m times)",
+    rumus_tbl_nA: "n(A)",
+    rumus_tbl_nB: "n(B)",
+    rumus_tbl_AB: "Functions A→B",
+    rumus_tbl_BA: "Functions B→A",
+
+    koresp_summary_head: "🎯 Key Summary",
+    koresp_def: "A one-to-one correspondence (bijection) is a function that satisfies two conditions simultaneously:",
+    koresp_injective_head: "Injective (one-to-one):",
+    koresp_injective_p: "Every element of the codomain is paired by at most one domain element. No two domain elements share the same output.",
+    koresp_surjective_head: "Surjective (onto):",
+    koresp_surjective_p: "Every element of the codomain has a pair (none is \"left out\").",
+    koresp_syarat_head: "📐 Condition for One-to-One Correspondence",
+    koresp_syarat_p: "A one-to-one correspondence can only exist if:",
+    koresp_syarat_note: "The number of elements in the domain and codomain must be equal!",
+    koresp_rumus_head: "🔢 Formula for Counting Bijections",
+    koresp_rumus_box: "Number of one-to-one correspondences",
+    koresp_rumus_note: "where n = n(A) = n(B)",
+    koresp_tbl_n: "n(A) = n(B)",
+    koresp_tbl_fact: "n! (Factorial)",
+    koresp_tbl_count: "# Correspondences",
+    koresp_visual_yes: "✅ ONE-TO-ONE CORRESPONDENCE",
+    koresp_visual_no:  "❌ NOT ONE-TO-ONE",
+    koresp_visual_yes_note: "n(A)=n(B)=3, each element paired exactly once",
+    koresp_visual_no_note:  "n(A)≠n(B), element d has no pair",
+
+    c1_soal_head: "📝 Problem",
+    c1_soal_p: "Given A = {p, q, r} and B = {1, 2, 3, 4}. Find the number of functions that can be made from A to B!",
+    c1_pembahasan_head: "🔍 Solution",
+    c1_ident_head: "Identify:",
+    c1_nA_note: "(number of domain elements)",
+    c1_nB_note: "(number of choices for each element of A)",
+    c1_rumus_head: "Apply the Formula:",
+    c1_rumus_lbl: "Number of functions",
+    c1_result: "✅ Number of functions from A to B = 64 functions",
+
+    c2_soal_head: "📝 Problem",
+    c2_soal_p: "Given P = {a, b, c, d} and Q = {1, 2, 3, 4}.",
+    c2_soal_a: "a) How many one-to-one correspondences are there from P to Q?",
+    c2_soal_b: "b) How many functions (not only correspondences) are there from P to Q?",
+    c2_soal_c: "c) What is the ratio between the two?",
+    c2_pembahasan_head: "🔍 Solution",
+    c2_ident_head: "Identify:",
+    c2_ident_note: "→ n(P) = n(Q) = 4, bijections can be made!",
+    c2_a_head: "a) One-to-One Correspondences:",
+    c2_b_head: "b) All Functions from P to Q:",
+    c2_c_head: "c) Ratio:",
+    c2_c_lbl: "Correspondences ÷ Total Functions",
+    c2_c_note: "Only about 9.4% of all functions are one-to-one correspondences!",
+    c2_result: "✅ Correspondences = 24, Total Functions = 256",
+
+    c3_soal_head: "📝 Problem",
+    c3_soal_p: "Set A has n(A) = m elements and set B has n(B) = 4 elements. If the number of functions from A to B is 1024, find:",
+    c3_soal_a: "a) The value of m",
+    c3_soal_b: "b) Is it possible to make a one-to-one correspondence from A to B? If yes, how many?",
+    c3_pembahasan_head: "🔍 Solution",
+    c3_a_head: "a) Finding m:",
+    c3_a_step1: "Use the formula for counting functions:",
+    c3_a_step2: "Note that 1024 = 2¹⁰ and 4 = 2², so:",
+    c3_b_head: "b) One-to-One Correspondence?",
+    c3_b_nA: "n(A) = 5, n(B) = 4",
+    c3_b_note: "Since n(A) ≠ n(B) (5 ≠ 4), a one-to-one correspondence is impossible.",
+    c3_b_syarat: "The condition for a bijection is n(A) = n(B).",
+    c3_result: "✅ m = 5. Bijection is impossible because n(A) ≠ n(B).",
+
+    rang_head: "📚 Summary",
+    rang_items: [
+      { icon: "🔢", label: "Functions A → B", desc: "Formula: n(B)^n(A) — codomain is the base, domain is the exponent." },
+      { icon: "🔄", label: "One-to-One Correspondence", desc: "A function where every element of A is uniquely paired with every element of B (bijective)." },
+      { icon: "⚖️", label: "Bijection Condition", desc: "Only possible if n(A) = n(B) — both sets must have the same number of elements." },
+      { icon: "🏆", label: "Number of Bijections", desc: "Formula: n! (n factorial) where n = n(A) = n(B)." },
+      { icon: "❗", label: "Factorial", desc: "n! = n × (n−1) × (n−2) × … × 2 × 1. Example: 4! = 4×3×2×1 = 24." },
+    ],
+    tips_head: "💡 Tips & Tricks",
+    tips: [
+      "Formula n(B)^n(A): remember B = destination = base, A = source = exponent. Don't mix them up!",
+      "A bijection can only exist if n(A) = n(B). Check this first before calculating!",
+      "Factorial trick: start from n, multiply down to 1. Example: 5! = 5×4×3×2×1 = 120.",
+    ],
+    kesimpulan_head: "🎯 Conclusion",
+    kesimpulan_p: "Counting functions = counting all possibilities. Master the formula n(B)^n(A) for ordinary functions and n! for one-to-one correspondences!",
+    back_btn: "← Back to Relations & Functions",
+
+    diag_title:      "🎮 Prove It Yourself — Drag Arrows!",
+    diag_switch:     "Switch Mode",
+    diag_size_head:  "⚙️ Set set sizes:",
+    diag_member:     "elements",
+    diag_func_count: (d: string, c: string) => `Functions ${d}→${c} =`,
+    diag_too_many:   "(so many!)",
+    diag_progress:   (n: number, max: number) => `${n}/${max} functions`,
+    diag_complete:   "🎉 Complete!",
+    diag_domain:     (l: string) => `Domain (${l})`,
+    diag_codomain:   (l: string) => `Codomain (${l})`,
+    diag_drag_hint:  "👆 Drag left to right · Double-tap to remove arrow",
+    diag_valid:      "✅ Valid function! Every domain element has exactly one pair.",
+    diag_dup:        "⚠️ This function already exists! Try another combination.",
+    diag_remaining:  (n: number) => `Connect ${n} remaining domain element${n === 1 ? "" : "s"}.`,
+    diag_err_incomplete: "Not all domain elements are connected!",
+    diag_err_dup:        "This function already exists! Try another combination.",
+    diag_all_found:  (max: number) => `🎉 All ${max} functions found!`,
+    diag_saved:      (n: number) => `✅ Function #${n} saved!`,
+    diag_reset:      "Reset",
+    diag_reset_all:  "Reset All",
+    diag_save_btn:   "Save to Collection",
+    diag_gallery:    (d: string, c: string, n: number, max: number) => `Functions ${d}→${c} found (${n}/${max}):`,
+    diag_more_left:  (n: number) => `… ${n} more`,
+    diag_proven:     (d: string, c: string, nCod: number, sup: string, max: number) =>
+      `🎉 Proven! Functions ${d}→${c} = ${nCod}${sup} = ${max}`,
+
+    bij_title:       "🎮 Prove It Yourself — Drag Bijection Arrows!",
+    bij_count_lbl:   (n: number, max: number) => `${n}! = ${max} correspondences`,
+    bij_size_head:   "⚙️ Select size n(A) = n(B):",
+    bij_member:      "elements",
+    bij_count_eq:    "Number of correspondences =",
+    bij_complete:    "🎉 Complete!",
+    bij_domain:      "Domain (A)",
+    bij_codomain:    "Codomain (B)",
+    bij_drag_hint:   "👆 Drag left to right · Double-tap to remove arrow",
+    bij_valid:       "✅ Valid bijection! Every element is paired exactly once.",
+    bij_not_bij:     (msg: string | null) => `❌ Not a bijection! ${msg ?? "A target is used twice."}`,
+    bij_dup:         "⚠️ This correspondence already exists! Try another combination.",
+    bij_remaining:   (n: number) => `Connect ${n} remaining domain element${n === 1 ? "" : "s"}.`,
+    bij_err_incomplete: "Not all domain elements are connected!",
+    bij_err_not_bij:    "Not a bijection! Two elements point to the same target.",
+    bij_err_dup:        "This correspondence already exists! Try another combination.",
+    bij_all_found:   (max: number) => `🎉 All ${max} correspondences found!`,
+    bij_saved:       (n: number) => `✅ Correspondence #${n} saved!`,
+    bij_reset:       "Reset",
+    bij_reset_all:   "Reset All",
+    bij_save_btn:    "Save to Collection",
+    bij_gallery:     (n: number, max: number) => `Correspondences found (${n}/${max}):`,
+    bij_proven:      (n: number, max: number) => `🎉 Proven! Bijections = ${n}! = ${max}`,
+  },
+
+  ja: {
+    title:    "関数の個数・全単射の個数",
+    subtitle: "作れる関数の数を数えよう！",
+    badge:    "中学2年 · 関係と関数 · 数学",
+
+    sec_intro:        "🌟 いくつの関数が作れる？",
+    sec_rumus:        "📘 関数の個数の公式",
+    sec_koresp:       "🔗 一対一対応（全単射）",
+    sec_c1:           "✏️ 例題 1 — 基本レベル",
+    sec_c2:           "✏️ 例題 2 — 標準レベル",
+    sec_c3:           "✏️ 例題 3 — 発展レベル",
+    sec_rangkuman:    "📌 まとめ・結論",
+
+    badge_easy:   "基本",
+    badge_medium: "標準",
+    badge_hard:   "発展",
+
+    intro_p: "2つの集合が与えられたとき、一方の集合からもう一方への関数はいくつ作れるでしょう？この問いにはエレガントな数学的答えがあり、シンプルな公式で計算できます！",
+    intro_idea_head: "🔢 基本的なアイデア",
+    intro_idea_p: "A = {1, 2}、B = {a, b, c} のとき、Aの各要素はBの3つの選択肢のうちの1つと対応できます。Aの要素が2つなので、関数の総数 = 3 × 3 = 3² = 9 個です。",
+
+    rumus_summary_head: "🎯 重要まとめ",
+    rumus_summary_p: "n(A) を集合Aの要素数、n(B) を集合Bの要素数とすると、AからBへの関数の個数は：",
+    rumus_box_label: "A から B への関数の数",
+    rumus_why_head: "🔎 なぜこの公式になるの？",
+    rumus_why_assume: "A = {a₁, a₂, ..., aₘ}、B = {b₁, b₂, ..., bₙ} とおくと",
+    rumus_li1: "はBの",
+    rumus_li1b: "つの選択肢のうち1つと対応できる",
+    rumus_li2: "はBの",
+    rumus_li2b: "つの選択肢のうち1つと対応できる",
+    rumus_li3: "... 以下同様に",
+    rumus_total: "合計 =",
+    rumus_times: "（m回）",
+    rumus_tbl_nA: "n(A)",
+    rumus_tbl_nB: "n(B)",
+    rumus_tbl_AB: "関数 A→B の個数",
+    rumus_tbl_BA: "関数 B→A の個数",
+
+    koresp_summary_head: "🎯 重要まとめ",
+    koresp_def: "全単射（一対一対応）とは、次の2つの条件を同時に満たす関数です：",
+    koresp_injective_head: "単射（一対一）：",
+    koresp_injective_p: "値域の各要素は定義域の高々1つの要素に対応します。2つの定義域要素が同じ値を持つことはありません。",
+    koresp_surjective_head: "全射（上への）：",
+    koresp_surjective_p: "値域の全要素が対応を持ちます（「余り」がありません）。",
+    koresp_syarat_head: "📐 全単射の条件",
+    koresp_syarat_p: "一対一対応が存在できるのは次の場合のみ：",
+    koresp_syarat_note: "定義域と値域の要素数が等しくなければなりません！",
+    koresp_rumus_head: "🔢 全単射の個数の公式",
+    koresp_rumus_box: "全単射（一対一対応）の個数",
+    koresp_rumus_note: "ただし n = n(A) = n(B)",
+    koresp_tbl_n: "n(A) = n(B)",
+    koresp_tbl_fact: "n!（階乗）",
+    koresp_tbl_count: "対応の個数",
+    koresp_visual_yes: "✅ 一対一対応",
+    koresp_visual_no:  "❌ 一対一対応ではない",
+    koresp_visual_yes_note: "n(A)=n(B)=3、各要素が正確に1つと対応",
+    koresp_visual_no_note:  "n(A)≠n(B)、要素dに対応がない",
+
+    c1_soal_head: "📝 問題",
+    c1_soal_p: "A = {p, q, r}、B = {1, 2, 3, 4} のとき、AからBへの関数の個数を求めなさい！",
+    c1_pembahasan_head: "🔍 解説",
+    c1_ident_head: "確認：",
+    c1_nA_note: "（定義域の要素数）",
+    c1_nB_note: "（Aの各要素に対する選択肢数）",
+    c1_rumus_head: "公式を使う：",
+    c1_rumus_lbl: "関数の個数",
+    c1_result: "✅ AからBへの関数の個数 = 64 個",
+
+    c2_soal_head: "📝 問題",
+    c2_soal_p: "P = {a, b, c, d}、Q = {1, 2, 3, 4} とする。",
+    c2_soal_a: "a) PからQへの全単射は何個あるか？",
+    c2_soal_b: "b) PからQへの関数（全単射に限らない）は何個あるか？",
+    c2_soal_c: "c) 両者の比を求めなさい。",
+    c2_pembahasan_head: "🔍 解説",
+    c2_ident_head: "確認：",
+    c2_ident_note: "→ n(P) = n(Q) = 4、全単射が作れる！",
+    c2_a_head: "a) 全単射の個数：",
+    c2_b_head: "b) PからQへの全関数の個数：",
+    c2_c_head: "c) 比：",
+    c2_c_lbl: "全単射 ÷ 全関数",
+    c2_c_note: "全関数のうちわずか約9.4%が全単射です！",
+    c2_result: "✅ 全単射 = 24、全関数 = 256",
+
+    c3_soal_head: "📝 問題",
+    c3_soal_p: "集合A は n(A) = m 個の要素を持ち、集合B は n(B) = 4 個の要素を持つ。AからBへの関数の個数が1024のとき、次を求めなさい：",
+    c3_soal_a: "a) m の値",
+    c3_soal_b: "b) AからBへの全単射は作れるか？作れるなら何個か？",
+    c3_pembahasan_head: "🔍 解説",
+    c3_a_head: "a) m を求める：",
+    c3_a_step1: "関数の個数の公式を使う：",
+    c3_a_step2: "1024 = 2¹⁰、4 = 2² なので：",
+    c3_b_head: "b) 全単射は作れるか？",
+    c3_b_nA: "n(A) = 5、n(B) = 4",
+    c3_b_note: "n(A) ≠ n(B)（5 ≠ 4）なので、全単射を作ることは不可能です。",
+    c3_b_syarat: "全単射の条件は n(A) = n(B) です。",
+    c3_result: "✅ m = 5。n(A) ≠ n(B) のため全単射は不可能。",
+
+    rang_head: "📚 まとめ",
+    rang_items: [
+      { icon: "🔢", label: "A→B の関数の個数", desc: "公式：n(B)^n(A) — 値域が底、定義域が指数。" },
+      { icon: "🔄", label: "全単射（一対一対応）", desc: "Aの各要素がBの各要素と一意に対応する関数（全単射）。" },
+      { icon: "⚖️", label: "全単射の条件", desc: "n(A) = n(B) のときのみ可能 — 両集合の要素数が等しくなければならない。" },
+      { icon: "🏆", label: "全単射の個数", desc: "公式：n!（n の階乗）ただし n = n(A) = n(B)。" },
+      { icon: "❗", label: "階乗", desc: "n! = n × (n−1) × (n−2) × … × 2 × 1。例：4! = 4×3×2×1 = 24。" },
+    ],
+    tips_head: "💡 コツ・ポイント",
+    tips: [
+      "公式 n(B)^n(A)：B = 行き先 = 底、A = 出発点 = 指数。逆にしないように！",
+      "全単射は n(A) = n(B) のときのみ存在できる。計算前に必ず確認！",
+      "階乗の計算：n から始めて1まで掛け合わせる。例：5! = 5×4×3×2×1 = 120。",
+    ],
+    kesimpulan_head: "🎯 結論",
+    kesimpulan_p: "関数の個数 = すべての可能性を数えること。通常の関数には n(B)^n(A)、全単射には n! の公式をマスターしよう！",
+    back_btn: "← 関係と関数に戻る",
+
+    diag_title:      "🎮 自分で証明しよう — 矢印をドラッグ！",
+    diag_switch:     "モード切替",
+    diag_size_head:  "⚙️ 集合のサイズを設定：",
+    diag_member:     "要素",
+    diag_func_count: (d: string, c: string) => `関数 ${d}→${c} の数 =`,
+    diag_too_many:   "（たくさん！）",
+    diag_progress:   (n: number, max: number) => `${n}/${max} 個の関数`,
+    diag_complete:   "🎉 完了！",
+    diag_domain:     (l: string) => `定義域 (${l})`,
+    diag_codomain:   (l: string) => `値域 (${l})`,
+    diag_drag_hint:  "👆 左から右へドラッグ · ダブルタップで矢印削除",
+    diag_valid:      "✅ 有効な関数！定義域の各要素がちょうど1つの値を持ちます。",
+    diag_dup:        "⚠️ この関数はすでに存在します！別の組み合わせを試してください。",
+    diag_remaining:  (n: number) => `残り ${n} 個の定義域要素を接続してください。`,
+    diag_err_incomplete: "定義域の全要素が接続されていません！",
+    diag_err_dup:        "この関数はすでに存在します！別の組み合わせを試してください。",
+    diag_all_found:  (max: number) => `🎉 ${max} 個の関数をすべて発見！`,
+    diag_saved:      (n: number) => `✅ 関数 #${n} を保存！`,
+    diag_reset:      "リセット",
+    diag_reset_all:  "全リセット",
+    diag_save_btn:   "コレクションに保存",
+    diag_gallery:    (d: string, c: string, n: number, max: number) => `発見した関数 ${d}→${c} (${n}/${max})：`,
+    diag_more_left:  (n: number) => `… 残り ${n} 個`,
+    diag_proven:     (d: string, c: string, nCod: number, sup: string, max: number) =>
+      `🎉 証明完了！関数 ${d}→${c} の数 = ${nCod}${sup} = ${max}`,
+
+    bij_title:       "🎮 自分で証明しよう — 全単射の矢印をドラッグ！",
+    bij_count_lbl:   (n: number, max: number) => `${n}! = ${max} 個の対応`,
+    bij_size_head:   "⚙️ n(A) = n(B) のサイズを選択：",
+    bij_member:      "要素",
+    bij_count_eq:    "対応の数 =",
+    bij_complete:    "🎉 完了！",
+    bij_domain:      "定義域 (A)",
+    bij_codomain:    "値域 (B)",
+    bij_drag_hint:   "👆 左から右へドラッグ · ダブルタップで矢印削除",
+    bij_valid:       "✅ 有効な全単射！全要素がちょうど1対1で対応しています。",
+    bij_not_bij:     (msg: string | null) => `❌ 全単射ではありません！${msg ?? "同じ値域要素に2本の矢印があります。"}`,
+    bij_dup:         "⚠️ この対応はすでに存在します！別の組み合わせを試してください。",
+    bij_remaining:   (n: number) => `残り ${n} 個の定義域要素を接続してください。`,
+    bij_err_incomplete: "定義域の全要素が接続されていません！",
+    bij_err_not_bij:    "全単射ではありません！2つの要素が同じ値域要素に接続しています。",
+    bij_err_dup:        "この対応はすでに存在します！別の組み合わせを試してください。",
+    bij_all_found:   (max: number) => `🎉 ${max} 個の対応をすべて発見！`,
+    bij_saved:       (n: number) => `✅ 対応 #${n} を保存！`,
+    bij_reset:       "リセット",
+    bij_reset_all:   "全リセット",
+    bij_save_btn:    "コレクションに保存",
+    bij_gallery:     (n: number, max: number) => `発見した対応 (${n}/${max})：`,
+    bij_proven:      (n: number, max: number) => `🎉 証明完了！全単射の数 = ${n}! = ${max}`,
+  },
+} as const;
 
 /* ══════════════════════════════════════════════════════
    DIAGRAM PANAH INTERAKTIF — komponen tertanam
@@ -99,7 +615,7 @@ const MiniDiag: React.FC<{ mapping: Mapping; domain: string[]; codomain: string[
   );
 };
 
-const SizeButtons: React.FC<{ label: string; value: number; color: string; onChange: (n: number) => void }> = ({ label, value, color, onChange }) => (
+const SizeButtons: React.FC<{ label: string; value: number; color: string; memberLabel: string; onChange: (n: number) => void }> = ({ label, value, color, memberLabel, onChange }) => (
   <div className="flex items-center gap-1.5 flex-wrap">
     <span className={`text-[10px] font-bold font-mono w-10 shrink-0 ${color}`}>{label}</span>
     {[1,2,3,4,5].map(n => (
@@ -112,11 +628,14 @@ const SizeButtons: React.FC<{ label: string; value: number; color: string; onCha
         {n}
       </button>
     ))}
-    <span className="text-[10px] text-white/30 font-mono">anggota</span>
+    <span className="text-[10px] text-white/30 font-mono">{memberLabel}</span>
   </div>
 );
 
 const DiagramInteraktifBanyakFungsi: React.FC = () => {
+  const { language } = useLanguage();
+  const tr = TR[language];
+
   const [domainSize, setDomainSize]     = useState(2);
   const [codomainSize, setCodomainSize] = useState(3);
   const [mode, setMode]   = useState<Mode>("AtoB");
@@ -182,14 +701,14 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
   const removeArrow = (el: string) => { playPopSound(); setCur(p => { const n = { ...p }; delete n[el]; return n; }); };
 
   const addFn = () => {
-    if (!isComplete) { setMsg({ t: "Belum semua elemen domain dipasangkan!", ok: false }); return; }
-    if (isDup)       { setMsg({ t: "Fungsi ini sudah ada! Coba kombinasi lain.", ok: false }); return; }
+    if (!isComplete) { setMsg({ t: tr.diag_err_incomplete, ok: false }); return; }
+    if (isDup)       { setMsg({ t: tr.diag_err_dup, ok: false }); return; }
     playPopSound();
     const next = [...list, { ...cur }];
     (setList as React.Dispatch<React.SetStateAction<Mapping[]>>)(next);
     setCur({});
-    if (next.length === maxF) { setDone(true); setMsg({ t: `🎉 Semua ${maxF} fungsi ditemukan!`, ok: true }); }
-    else setMsg({ t: `✅ Fungsi ke-${next.length} disimpan!`, ok: true });
+    if (next.length === maxF) { setDone(true); setMsg({ t: tr.diag_all_found(maxF), ok: true }); }
+    else setMsg({ t: tr.diag_saved(next.length), ok: true });
   };
 
   const dragFromPos = drag ? domPos[drag.from] : null;
@@ -205,12 +724,12 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
 
       {/* ── Judul + Ganti Mode ── */}
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <p className="font-body text-sm font-bold text-fuchsia-300">🎮 Buktikan Sendiri — Seret Panah!</p>
+        <p className="font-body text-sm font-bold text-fuchsia-300">{tr.diag_title}</p>
         <div className="flex items-center gap-1.5">
           <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded ${mode==="AtoB"?"bg-cyan-700/60 text-cyan-200 ring-1 ring-cyan-400":"text-white/30"}`}>A→B</span>
           <button onClick={() => { playPopSound(); setMode(m => m==="AtoB"?"BtoA":"AtoB"); setCur({}); setDone(false); setMsg(null); }}
             className="flex items-center gap-1 bg-slate-700/60 hover:bg-slate-600/70 border border-white/20 text-white text-[11px] font-bold px-2.5 py-1 rounded-full transition-all active:scale-95">
-            <ArrowLeftRight className="w-3 h-3" /> Ganti Mode
+            <ArrowLeftRight className="w-3 h-3" /> {tr.diag_switch}
           </button>
           <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded ${mode==="BtoA"?"bg-violet-700/60 text-violet-200 ring-1 ring-violet-400":"text-white/30"}`}>B→A</span>
         </div>
@@ -218,16 +737,16 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
 
       {/* ── Kontrol Ukuran Himpunan ── */}
       <div className="bg-slate-800/60 border border-white/10 rounded-xl p-3 space-y-2">
-        <p className="text-[10px] text-fuchsia-300/70 font-bold font-body mb-1">⚙️ Atur ukuran himpunan:</p>
-        <SizeButtons label="n(A)" value={domainSize}   color="text-cyan-400"   onChange={changeDomainSize} />
-        <SizeButtons label="n(B)" value={codomainSize} color="text-violet-400" onChange={changeCodomainSize} />
+        <p className="text-[10px] text-fuchsia-300/70 font-bold font-body mb-1">{tr.diag_size_head}</p>
+        <SizeButtons label="n(A)" value={domainSize}   color="text-cyan-400"   memberLabel={tr.diag_member} onChange={changeDomainSize} />
+        <SizeButtons label="n(B)" value={codomainSize} color="text-violet-400" memberLabel={tr.diag_member} onChange={changeCodomainSize} />
         <div className="pt-2 border-t border-white/5 flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] text-white/40 font-body">Banyak fungsi {domLabel}→{codLabel} =</span>
+          <span className="text-[10px] text-white/40 font-body">{tr.diag_func_count(domLabel, codLabel)}</span>
           <span className="text-[11px] font-mono text-white/50">n({codLabel})^n({domLabel}) =</span>
           <span className="text-[13px] font-bold font-mono text-yellow-300">
             {nCodSize}{SUPERSCRIPTS[nDomSize] ?? `^${nDomSize}`} = {maxF}
           </span>
-          {maxF > 100 && <span className="text-[9px] text-orange-400/70 font-body">(banyak sekali!)</span>}
+          {maxF > 100 && <span className="text-[9px] text-orange-400/70 font-body">{tr.diag_too_many}</span>}
         </div>
       </div>
 
@@ -237,16 +756,16 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
           <div className="h-full bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-full transition-all duration-500"
             style={{ width: `${maxF > 0 ? (list.length / maxF) * 100 : 0}%` }} />
         </div>
-        <span className="text-[11px] text-white/50 font-mono shrink-0">{list.length}/{maxF} fungsi</span>
-        {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">🎉 Lengkap!</span>}
+        <span className="text-[11px] text-white/50 font-mono shrink-0">{tr.diag_progress(list.length, maxF)}</span>
+        {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">{tr.diag_complete}</span>}
       </div>
 
       {/* ── SVG Diagram ── */}
       <div className="flex justify-center">
         <div className="bg-slate-900/60 rounded-xl border border-white/10 p-2 select-none w-full" style={{ maxWidth: SVG_W + 16 }}>
           <div className="flex justify-between px-4 mb-1 text-[10px] font-bold font-mono">
-            <span className="text-cyan-400">Domain ({domLabel})</span>
-            <span className="text-violet-400">Kodomain ({codLabel})</span>
+            <span className="text-cyan-400">{tr.diag_domain(domLabel)}</span>
+            <span className="text-violet-400">{tr.diag_codomain(codLabel)}</span>
           </div>
           <svg ref={svgRef} viewBox={`0 0 ${SVG_W} ${H}`} width="100%"
             style={{ cursor: drag ? "crosshair" : "default", touchAction: "none" }}
@@ -298,7 +817,7 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
               );
             })}
           </svg>
-          <p className="text-center text-[10px] text-white/25 mt-1">👆 Seret dari kiri ke kanan · Double-tap untuk hapus panah</p>
+          <p className="text-center text-[10px] text-white/25 mt-1">{tr.diag_drag_hint}</p>
         </div>
       </div>
 
@@ -308,10 +827,10 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
         {isDup && <XCircle className="w-3.5 h-3.5 shrink-0" />}
         {!isComplete && <div className="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0" />}
         {isComplete && !isDup
-          ? "✅ Fungsi valid! Setiap elemen domain punya tepat satu pasangan."
+          ? tr.diag_valid
           : isDup
-          ? "⚠️ Fungsi ini sudah ada! Coba kombinasi lain."
-          : `Hubungkan ${domain.filter(el => !cur[el]).length} elemen domain yang tersisa.`}
+          ? tr.diag_dup
+          : tr.diag_remaining(domain.filter(el => !cur[el]).length)}
       </div>
 
       {msg && <div className={`text-center text-xs font-bold py-1.5 px-3 rounded-lg ${msg.ok?"bg-green-900/40 text-green-300 border border-green-500/30":"bg-red-900/40 text-red-300 border border-red-500/30"}`}>{msg.t}</div>}
@@ -320,15 +839,15 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
       <div className="flex gap-2">
         <button onClick={() => { playPopSound(); setCur({}); }}
           className="flex items-center gap-1 bg-slate-700/50 hover:bg-slate-600/60 border border-white/15 text-white/60 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
-          <RotateCcw className="w-3 h-3" /> Reset
+          <RotateCcw className="w-3 h-3" /> {tr.diag_reset}
         </button>
         <button onClick={() => { playPopSound(); resetAll(); }}
           className="flex items-center gap-1 bg-slate-700/50 hover:bg-red-900/40 border border-white/15 hover:border-red-500/40 text-white/60 hover:text-red-300 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
-          <RotateCcw className="w-3 h-3" /> Reset Semua
+          <RotateCcw className="w-3 h-3" /> {tr.diag_reset_all}
         </button>
         <button onClick={addFn} disabled={!isComplete || isDup}
           className={`flex-1 flex items-center justify-center gap-1.5 text-xs font-bold py-2 rounded-lg border transition-all active:scale-95 ${isComplete&&!isDup?"bg-fuchsia-600/80 hover:bg-fuchsia-500/90 border-fuchsia-400/60 text-white cursor-pointer":"bg-slate-800/40 border-white/10 text-white/20 cursor-not-allowed"}`}>
-          <Trophy className="w-3.5 h-3.5" /> Simpan ke Koleksi
+          <Trophy className="w-3.5 h-3.5" /> {tr.diag_save_btn}
         </button>
       </div>
 
@@ -336,7 +855,7 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
       {list.length > 0 && (
         <div>
           <p className="text-[11px] font-bold text-yellow-300 mb-2 flex items-center gap-1">
-            <Trophy className="w-3 h-3" /> Fungsi {domLabel}→{codLabel} yang ditemukan ({list.length}/{maxF}):
+            <Trophy className="w-3 h-3" /> {tr.diag_gallery(domLabel, codLabel, list.length, maxF)}
           </p>
           <div className="flex flex-wrap gap-2">
             {list.map((m, i) => <MiniDiag key={i} mapping={m} domain={domain} codomain={codomain} idx={i} />)}
@@ -347,14 +866,14 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
             ))}
             {!showPlaceholders && list.length < maxF && (
               <div className="text-[10px] text-white/30 font-mono self-center px-2">
-                … masih {maxF - list.length} lagi
+                {tr.diag_more_left(maxF - list.length)}
               </div>
             )}
           </div>
           {done && (
             <div className="mt-3 bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
               <p className="text-green-300 font-bold text-xs">
-                🎉 Terbukti! Banyak fungsi {domLabel}→{codLabel} = {nCodSize}{SUPERSCRIPTS[nDomSize] ?? `^${nDomSize}`} = {maxF}
+                {tr.diag_proven(domLabel, codLabel, nCodSize, SUPERSCRIPTS[nDomSize] ?? `^${nDomSize}`, maxF)}
               </p>
             </div>
           )}
@@ -370,6 +889,9 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
 function factorial(x: number): number { return x <= 1 ? 1 : x * factorial(x - 1); }
 
 const DiagramInteraktifBijeksi: React.FC = () => {
+  const { language } = useLanguage();
+  const tr = TR[language];
+
   const [n, setN]       = useState(2);
   const [cur, setCur]   = useState<Mapping>({});
   const [list, setList] = useState<Mapping[]>([]);
@@ -431,14 +953,14 @@ const DiagramInteraktifBijeksi: React.FC = () => {
   };
 
   const addBijection = () => {
-    if (!isComplete)  { setMsg({ t: "Belum semua elemen domain dipasangkan!", ok: false }); return; }
-    if (!isInjective) { setMsg({ t: "Bukan bijeksi! Ada dua elemen menuju target yang sama.", ok: false }); return; }
-    if (isDup)        { setMsg({ t: "Korespondensi ini sudah ada! Coba kombinasi lain.", ok: false }); return; }
+    if (!isComplete)  { setMsg({ t: tr.bij_err_incomplete, ok: false }); return; }
+    if (!isInjective) { setMsg({ t: tr.bij_err_not_bij, ok: false }); return; }
+    if (isDup)        { setMsg({ t: tr.bij_err_dup, ok: false }); return; }
     playPopSound();
     const next = [...list, { ...cur }];
     setList(next); setCur({});
-    if (next.length === maxF) { setDone(true); setMsg({ t: `🎉 Semua ${maxF} korespondensi ditemukan!`, ok: true }); }
-    else setMsg({ t: `✅ Korespondensi ke-${next.length} disimpan!`, ok: true });
+    if (next.length === maxF) { setDone(true); setMsg({ t: tr.bij_all_found(maxF), ok: true }); }
+    else setMsg({ t: tr.bij_saved(next.length), ok: true });
   };
 
   const dragFromPos = drag ? domPos[drag.from] : null;
@@ -448,7 +970,7 @@ const DiagramInteraktifBijeksi: React.FC = () => {
     const seen: Record<string, string[]> = {};
     for (const [k, v] of Object.entries(cur)) { (seen[v] = seen[v] ?? []).push(k); }
     const dup = Object.entries(seen).find(([, ks]) => ks.length > 1);
-    return dup ? `${dup[1].join(" & ")} → "${dup[0]}" sama` : null;
+    return dup ? `${dup[1].join(" & ")} → "${dup[0]}"` : null;
   })();
 
   return (
@@ -456,15 +978,15 @@ const DiagramInteraktifBijeksi: React.FC = () => {
 
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <p className="font-body text-sm font-bold text-green-300">🎮 Buktikan Sendiri — Seret Panah Bijeksi!</p>
+        <p className="font-body text-sm font-bold text-green-300">{tr.bij_title}</p>
         <span className="text-[11px] font-mono bg-green-800/40 text-green-200 px-2 py-0.5 rounded border border-green-500/30">
-          {n}! = {maxF} korespondensi
+          {tr.bij_count_lbl(n, maxF)}
         </span>
       </div>
 
       {/* Size selector */}
       <div className="bg-slate-800/60 border border-white/10 rounded-xl p-3 space-y-2">
-        <p className="text-[10px] text-green-300/70 font-bold font-body mb-1">⚙️ Pilih ukuran n(A) = n(B):</p>
+        <p className="text-[10px] text-green-300/70 font-bold font-body mb-1">{tr.bij_size_head}</p>
         <div className="flex items-center gap-1.5 flex-wrap">
           <span className="text-[10px] font-bold font-mono w-8 shrink-0 text-green-400">n =</span>
           {[1, 2, 3, 4, 5].map(v => (
@@ -475,10 +997,10 @@ const DiagramInteraktifBijeksi: React.FC = () => {
                   : "bg-slate-700/50 border-white/10 text-white/40 hover:bg-slate-600/60 hover:text-white/80"
               }`}>{v}</button>
           ))}
-          <span className="text-[10px] text-white/30 font-mono">anggota</span>
+          <span className="text-[10px] text-white/30 font-mono">{tr.bij_member}</span>
         </div>
         <div className="pt-2 border-t border-white/5 flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] text-white/40 font-body">Banyak korespondensi =</span>
+          <span className="text-[10px] text-white/40 font-body">{tr.bij_count_eq}</span>
           <span className="text-[11px] font-mono text-white/50">n! =</span>
           <span className="text-[13px] font-bold font-mono text-yellow-300">
             {n}! = {maxF}
@@ -493,15 +1015,15 @@ const DiagramInteraktifBijeksi: React.FC = () => {
             style={{ width: `${maxF > 0 ? (list.length / maxF) * 100 : 0}%` }} />
         </div>
         <span className="text-[11px] text-white/50 font-mono shrink-0">{list.length}/{maxF}</span>
-        {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">🎉 Lengkap!</span>}
+        {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">{tr.bij_complete}</span>}
       </div>
 
       {/* SVG Diagram */}
       <div className="flex justify-center">
         <div className="bg-slate-900/60 rounded-xl border border-white/10 p-2 select-none w-full" style={{ maxWidth: SVG_W + 16 }}>
           <div className="flex justify-between px-4 mb-1 text-[10px] font-bold font-mono">
-            <span className="text-cyan-400">Domain (A)</span>
-            <span className="text-violet-400">Kodomain (B)</span>
+            <span className="text-cyan-400">{tr.bij_domain}</span>
+            <span className="text-violet-400">{tr.bij_codomain}</span>
           </div>
           <svg ref={svgRef} viewBox={`0 0 ${SVG_W} ${H}`} width="100%"
             style={{ cursor: drag ? "crosshair" : "default", touchAction: "none" }}
@@ -571,7 +1093,7 @@ const DiagramInteraktifBijeksi: React.FC = () => {
               );
             })}
           </svg>
-          <p className="text-center text-[10px] text-white/25 mt-1">👆 Seret dari kiri ke kanan · Double-tap untuk hapus panah</p>
+          <p className="text-center text-[10px] text-white/25 mt-1">{tr.bij_drag_hint}</p>
         </div>
       </div>
 
@@ -586,12 +1108,12 @@ const DiagramInteraktifBijeksi: React.FC = () => {
         {(isComplete && !isInjective || isDup) && <XCircle className="w-3.5 h-3.5 shrink-0" />}
         {!isComplete && !isDup  && <div className="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0" />}
         {isBijective && !isDup
-          ? "✅ Bijeksi valid! Setiap elemen berpasangan tepat satu-satu."
+          ? tr.bij_valid
           : isComplete && !isInjective
-          ? `❌ Bukan bijeksi! ${dupStatusMsg ?? "Ada target yang dipakai dua kali."}`
+          ? tr.bij_not_bij(dupStatusMsg)
           : isDup
-          ? "⚠️ Korespondensi ini sudah ada! Coba kombinasi lain."
-          : `Hubungkan ${domain.filter(el => !cur[el]).length} elemen domain yang tersisa.`}
+          ? tr.bij_dup
+          : tr.bij_remaining(domain.filter(el => !cur[el]).length)}
       </div>
 
       {msg && (
@@ -604,11 +1126,11 @@ const DiagramInteraktifBijeksi: React.FC = () => {
       <div className="flex gap-2">
         <button onClick={() => { playPopSound(); setCur({}); }}
           className="flex items-center gap-1 bg-slate-700/50 hover:bg-slate-600/60 border border-white/15 text-white/60 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
-          <RotateCcw className="w-3 h-3" /> Reset
+          <RotateCcw className="w-3 h-3" /> {tr.bij_reset}
         </button>
         <button onClick={() => { playPopSound(); resetAll(); }}
           className="flex items-center gap-1 bg-slate-700/50 hover:bg-red-900/40 border border-white/15 hover:border-red-500/40 text-white/60 hover:text-red-300 text-xs font-bold px-3 py-2 rounded-lg transition-all active:scale-95">
-          <RotateCcw className="w-3 h-3" /> Reset Semua
+          <RotateCcw className="w-3 h-3" /> {tr.bij_reset_all}
         </button>
         <button onClick={addBijection} disabled={!isBijective || isDup}
           className={`flex-1 flex items-center justify-center gap-1.5 text-xs font-bold py-2 rounded-lg border transition-all active:scale-95 ${
@@ -616,7 +1138,7 @@ const DiagramInteraktifBijeksi: React.FC = () => {
               ? "bg-green-600/80 hover:bg-green-500/90 border-green-400/60 text-white cursor-pointer"
               : "bg-slate-800/40 border-white/10 text-white/20 cursor-not-allowed"
           }`}>
-          <Trophy className="w-3.5 h-3.5" /> Simpan ke Koleksi
+          <Trophy className="w-3.5 h-3.5" /> {tr.bij_save_btn}
         </button>
       </div>
 
@@ -624,7 +1146,7 @@ const DiagramInteraktifBijeksi: React.FC = () => {
       {list.length > 0 && (
         <div>
           <p className="text-[11px] font-bold text-yellow-300 mb-2 flex items-center gap-1">
-            <Trophy className="w-3 h-3" /> Korespondensi yang ditemukan ({list.length}/{maxF}):
+            <Trophy className="w-3 h-3" /> {tr.bij_gallery(list.length, maxF)}
           </p>
           <div className="flex flex-wrap gap-2">
             {list.map((m, i) => <MiniDiag key={i} mapping={m} domain={domain} codomain={codomain} idx={i} />)}
@@ -637,7 +1159,7 @@ const DiagramInteraktifBijeksi: React.FC = () => {
           {done && (
             <div className="mt-3 bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
               <p className="text-green-300 font-bold text-xs">
-                🎉 Terbukti! Banyak korespondensi satu-satu = {n}! = {maxF}
+                {tr.bij_proven(n, maxF)}
               </p>
             </div>
           )}
@@ -649,6 +1171,9 @@ const DiagramInteraktifBijeksi: React.FC = () => {
 
 const BanyakFungsiPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const tr = TR[language];
+
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "rumus", "korespondensi", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
@@ -683,28 +1208,27 @@ const BanyakFungsiPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <Hash className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          MENENTUKAN BANYAK FUNGSI & KORESPONDENSI SATU-SATU
+          {tr.title}
         </h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">
-          Hitung Berapa Fungsi yang Bisa Dibentuk!
+          {tr.subtitle}
         </p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Relasi dan Fungsi · Materi Matematika</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{tr.badge}</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Berapa Banyak Fungsi yang Bisa Dibuat?" />
+            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={tr.sec_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Diberikan dua himpunan, berapa banyak fungsi yang bisa kita buat dari satu himpunan ke himpunan lain? Pertanyaan ini punya jawaban matematika yang elegan dan bisa dihitung dengan rumus sederhana!
+                  {tr.intro_p}
                 </p>
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">🔢 Ide Dasar</p>
+                  <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">{tr.intro_idea_head}</p>
                   <p className="font-body text-sm text-white/70 leading-relaxed">
-                    Jika <InlineMath math="A = \{1, 2\}" /> dan <InlineMath math="B = \{a, b, c\}" />, maka setiap anggota A bisa dipasangkan ke salah satu dari 3 pilihan di B.
-                    Karena ada 2 anggota di A, maka total fungsi = <InlineMath math="3 \times 3 = 3^2 = 9" /> fungsi.
+                    {tr.intro_idea_p}
                   </p>
                 </div>
               </div>
@@ -713,31 +1237,31 @@ const BanyakFungsiPage = () => {
 
           {/* RUMUS BANYAK FUNGSI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rumus" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Rumus Menentukan Banyak Fungsi" />
+            <SectionHeader id="rumus" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title={tr.sec_rumus} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-violet-300 mb-2">🎯 Ringkasan Intisari</p>
+                  <p className="font-body text-sm font-semibold text-violet-300 mb-2">{tr.rumus_summary_head}</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Jika <InlineMath math="n(A)" /> menyatakan banyak anggota himpunan A dan <InlineMath math="n(B)" /> menyatakan banyak anggota himpunan B, maka banyak fungsi yang dapat dibentuk dari A ke B adalah:
+                    {tr.rumus_summary_p}
                   </p>
                   <div className="bg-violet-900/40 border border-violet-400/40 rounded-xl p-4 mt-3 text-center">
-                    <p className="font-body text-sm font-semibold text-violet-200 mb-2">Banyak fungsi dari A ke B</p>
+                    <p className="font-body text-sm font-semibold text-violet-200 mb-2">{tr.rumus_box_label}</p>
                     <BlockMath math="= n(B)^{n(A)}" />
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="font-body text-sm font-bold text-white mb-3">🔎 Mengapa Rumusnya Demikian?</p>
+                  <p className="font-body text-sm font-bold text-white mb-3">{tr.rumus_why_head}</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-700/40 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold text-xs mb-1">Misalkan A = &#123;a₁, a₂, ..., aₘ&#125; dan B = &#123;b₁, b₂, ..., bₙ&#125;</p>
+                      <p className="text-cyan-300 font-semibold text-xs mb-1">{tr.rumus_why_assume}</p>
                       <ul className="text-white/70 text-xs space-y-1 list-disc list-inside">
-                        <li><InlineMath math="a_1" /> bisa dipasangkan ke salah satu dari <InlineMath math="n" /> pilihan di B</li>
-                        <li><InlineMath math="a_2" /> bisa dipasangkan ke salah satu dari <InlineMath math="n" /> pilihan di B</li>
-                        <li>... dan seterusnya hingga <InlineMath math="a_m" /></li>
+                        <li><InlineMath math="a_1" /> {tr.rumus_li1} <InlineMath math="n" /> {tr.rumus_li1b}</li>
+                        <li><InlineMath math="a_2" /> {tr.rumus_li2} <InlineMath math="n" /> {tr.rumus_li2b}</li>
+                        <li>{tr.rumus_li3} <InlineMath math="a_m" /></li>
                       </ul>
-                      <p className="text-white/70 text-xs mt-2">Total = <InlineMath math="n \times n \times \cdots \times n" /> (sebanyak m kali) <InlineMath math="= n^m" /></p>
+                      <p className="text-white/70 text-xs mt-2">{tr.rumus_total} <InlineMath math="n \times n \times \cdots \times n" /> {tr.rumus_times} <InlineMath math="= n^m" /></p>
                     </div>
                   </div>
                 </div>
@@ -749,10 +1273,10 @@ const BanyakFungsiPage = () => {
                   <table className="w-full text-xs font-body border-collapse">
                     <thead>
                       <tr className="bg-cyan-900/40">
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">n(A)</th>
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">n(B)</th>
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Banyak Fungsi A→B</th>
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Banyak Fungsi B→A</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">{tr.rumus_tbl_nA}</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">{tr.rumus_tbl_nB}</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">{tr.rumus_tbl_AB}</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">{tr.rumus_tbl_BA}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -779,50 +1303,50 @@ const BanyakFungsiPage = () => {
 
           {/* KORESPONDENSI SATU-SATU */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="korespondensi" icon={<BookOpen className="w-5 h-5" />} iconColor="text-green-400" title="🔗 Korespondensi Satu-Satu (Bijeksi)" />
+            <SectionHeader id="korespondensi" icon={<BookOpen className="w-5 h-5" />} iconColor="text-green-400" title={tr.sec_koresp} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-green-300 mb-2">🎯 Ringkasan Intisari</p>
+                  <p className="font-body text-sm font-semibold text-green-300 mb-2">{tr.koresp_summary_head}</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    <strong className="text-cyan-300">Korespondensi satu-satu</strong> (bijeksi) adalah fungsi yang memenuhi dua syarat sekaligus:
+                    <strong className="text-cyan-300">{language === "id" ? "Korespondensi satu-satu" : language === "en" ? "One-to-one correspondence" : "全単射"}</strong> {language === "id" ? "(bijeksi)" : language === "en" ? "(bijection)" : "（全単射）"} {tr.koresp_def}
                   </p>
                   <div className="mt-2 space-y-1">
                     <div className="flex gap-2 text-sm text-white/80">
                       <span className="text-green-400 shrink-0">1.</span>
-                      <p><strong className="text-yellow-300">Injektif (satu-satu):</strong> Setiap anggota kodomain dipasangkan oleh paling banyak satu anggota domain. Tidak ada dua anggota domain yang punya pasangan sama.</p>
+                      <p><strong className="text-yellow-300">{tr.koresp_injective_head}</strong> {tr.koresp_injective_p}</p>
                     </div>
                     <div className="flex gap-2 text-sm text-white/80">
                       <span className="text-green-400 shrink-0">2.</span>
-                      <p><strong className="text-orange-300">Surjektif (pada):</strong> Setiap anggota kodomain punya pasangan (tidak ada yang "menganggur").</p>
+                      <p><strong className="text-orange-300">{tr.koresp_surjective_head}</strong> {tr.koresp_surjective_p}</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="font-body text-sm font-bold text-white mb-3">📐 Syarat Korespondensi Satu-Satu</p>
+                  <p className="font-body text-sm font-bold text-white mb-3">{tr.koresp_syarat_head}</p>
                   <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3">
-                    <p className="text-sm text-white/80 font-body">Korespondensi satu-satu hanya dapat terjadi jika:</p>
+                    <p className="text-sm text-white/80 font-body">{tr.koresp_syarat_p}</p>
                     <BlockMath math="n(A) = n(B)" />
-                    <p className="text-xs text-white/50">Jumlah anggota domain dan kodomain harus sama!</p>
+                    <p className="text-xs text-white/50">{tr.koresp_syarat_note}</p>
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="font-body text-sm font-bold text-white mb-3">🔢 Rumus Banyak Korespondensi Satu-Satu</p>
+                  <p className="font-body text-sm font-bold text-white mb-3">{tr.koresp_rumus_head}</p>
                   <div className="bg-violet-900/30 border border-violet-500/30 rounded-lg p-4 text-center">
-                    <p className="font-body text-sm font-semibold text-violet-200 mb-2">Banyak korespondensi satu-satu</p>
+                    <p className="font-body text-sm font-semibold text-violet-200 mb-2">{tr.koresp_rumus_box}</p>
                     <BlockMath math="= n! = n \times (n-1) \times \cdots \times 2 \times 1" />
-                    <p className="text-xs text-white/50 mt-1">di mana n = n(A) = n(B)</p>
+                    <p className="text-xs text-white/50 mt-1">{tr.koresp_rumus_note}</p>
                   </div>
 
                   <div className="mt-3 overflow-x-auto">
                     <table className="w-full text-xs font-body border-collapse">
                       <thead>
                         <tr className="bg-violet-900/40">
-                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">n(A) = n(B)</th>
-                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">n! (Faktorial)</th>
-                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">Banyak Korespondensi</th>
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">{tr.koresp_tbl_n}</th>
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">{tr.koresp_tbl_fact}</th>
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">{tr.koresp_tbl_count}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -847,7 +1371,7 @@ const BanyakFungsiPage = () => {
                 {/* Visual korespondensi */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-green-900/20 border border-green-500/40 rounded-xl p-4">
-                    <p className="text-xs font-bold text-green-300 text-center mb-2">✅ KORESPONDENSI SATU-SATU</p>
+                    <p className="text-xs font-bold text-green-300 text-center mb-2">{tr.koresp_visual_yes}</p>
                     <div className="flex gap-3 justify-center items-center">
                       <div className="space-y-1.5 text-center">
                         <p className="text-xs text-cyan-400 font-bold">A</p>
@@ -861,10 +1385,10 @@ const BanyakFungsiPage = () => {
                         {["a", "b", "c"].map(x => <div key={x} className="bg-violet-800/40 rounded px-3 py-1 text-violet-200 text-xs font-bold">{x}</div>)}
                       </div>
                     </div>
-                    <p className="text-xs text-white/40 text-center mt-2">n(A)=n(B)=3, tiap elemen berpasangan tepat satu</p>
+                    <p className="text-xs text-white/40 text-center mt-2">{tr.koresp_visual_yes_note}</p>
                   </div>
                   <div className="bg-red-900/20 border border-red-500/40 rounded-xl p-4">
-                    <p className="text-xs font-bold text-red-300 text-center mb-2">❌ BUKAN KORESPONDENSI 1-1</p>
+                    <p className="text-xs font-bold text-red-300 text-center mb-2">{tr.koresp_visual_no}</p>
                     <div className="flex gap-3 justify-center items-center">
                       <div className="space-y-1.5 text-center">
                         <p className="text-xs text-cyan-400 font-bold">A</p>
@@ -880,7 +1404,7 @@ const BanyakFungsiPage = () => {
                         {["a", "b", "c", "d"].map(x => <div key={x} className="bg-violet-800/40 rounded px-3 py-1 text-violet-200 text-xs font-bold">{x}</div>)}
                       </div>
                     </div>
-                    <p className="text-xs text-red-400 text-center mt-2">n(A)≠n(B), elemen d tidak punya pasangan</p>
+                    <p className="text-xs text-red-400 text-center mt-2">{tr.koresp_visual_no_note}</p>
                   </div>
                 </div>
 
@@ -893,31 +1417,31 @@ const BanyakFungsiPage = () => {
 
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
+            <SectionHeader id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title={tr.sec_c1} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+                <Badge label={tr.badge_easy} color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-green-300 mb-2">📝 Soal</p>
+                  <p className="font-body text-sm font-semibold text-green-300 mb-2">{tr.c1_soal_head}</p>
                   <p className="font-body text-sm text-white/85 leading-relaxed">
-                    Diketahui <InlineMath math="A = \{p, q, r\}" /> dan <InlineMath math="B = \{1, 2, 3, 4\}" />. Tentukan banyaknya fungsi yang dapat dibuat dari A ke B!
+                    {tr.c1_soal_p}
                   </p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
+                  <p className="font-body text-sm font-semibold text-cyan-300">{tr.c1_pembahasan_head}</p>
                   <div className="space-y-2 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-2">Identifikasi:</p>
-                      <p className="text-white/70 text-xs"><InlineMath math="n(A) = 3" /> (banyak anggota domain)</p>
-                      <p className="text-white/70 text-xs"><InlineMath math="n(B) = 4" /> (banyak pilihan untuk setiap anggota A)</p>
+                      <p className="text-cyan-300 font-semibold mb-2">{tr.c1_ident_head}</p>
+                      <p className="text-white/70 text-xs"><InlineMath math="n(A) = 3" /> {tr.c1_nA_note}</p>
+                      <p className="text-white/70 text-xs"><InlineMath math="n(B) = 4" /> {tr.c1_nB_note}</p>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">Gunakan Rumus:</p>
-                      <p className="font-body text-xs text-violet-200 mb-1">Banyak fungsi</p>
+                      <p className="text-violet-300 font-semibold mb-1">{tr.c1_rumus_head}</p>
+                      <p className="font-body text-xs text-violet-200 mb-1">{tr.c1_rumus_lbl}</p>
                       <BlockMath math="= n(B)^{n(A)} = 4^3 = 64" />
                     </div>
                     <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-green-300">✅ Banyak fungsi dari A ke B = <strong>64 fungsi</strong></p>
+                      <p className="font-body text-sm font-bold text-green-300">{tr.c1_result}</p>
                     </div>
                   </div>
                 </div>
@@ -927,42 +1451,42 @@ const BanyakFungsiPage = () => {
 
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
+            <SectionHeader id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title={tr.sec_c2} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
+                <Badge label={tr.badge_medium} color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-yellow-300 mb-2">📝 Soal</p>
+                  <p className="font-body text-sm font-semibold text-yellow-300 mb-2">{tr.c2_soal_head}</p>
                   <p className="font-body text-sm text-white/85 leading-relaxed">
-                    Diketahui <InlineMath math="P = \{a, b, c, d\}" /> dan <InlineMath math="Q = \{1, 2, 3, 4\}" />.
-                    <br />a) Berapa banyak korespondensi satu-satu dari P ke Q?
-                    <br />b) Berapa banyak fungsi (bukan hanya korespondensi) dari P ke Q?
-                    <br />c) Berapa perbandingan keduanya?
+                    {tr.c2_soal_p}
+                    <br />{tr.c2_soal_a}
+                    <br />{tr.c2_soal_b}
+                    <br />{tr.c2_soal_c}
                   </p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
+                  <p className="font-body text-sm font-semibold text-cyan-300">{tr.c2_pembahasan_head}</p>
                   <div className="space-y-3 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-1">Identifikasi:</p>
-                      <p className="text-white/60 text-xs"><InlineMath math="n(P) = 4" />, <InlineMath math="n(Q) = 4" /> → n(P) = n(Q) = 4, bisa dibuat korespondensi!</p>
+                      <p className="text-cyan-300 font-semibold mb-1">{tr.c2_ident_head}</p>
+                      <p className="text-white/60 text-xs"><InlineMath math="n(P) = 4" />, <InlineMath math="n(Q) = 4" /> {tr.c2_ident_note}</p>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">a) Korespondensi Satu-Satu:</p>
+                      <p className="text-violet-300 font-semibold mb-1">{tr.c2_a_head}</p>
                       <BlockMath math="n! = 4! = 4 \times 3 \times 2 \times 1 = 24" />
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-green-300 font-semibold mb-1">b) Semua Fungsi dari P ke Q:</p>
+                      <p className="text-green-300 font-semibold mb-1">{tr.c2_b_head}</p>
                       <BlockMath math="n(Q)^{n(P)} = 4^4 = 256" />
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-orange-300 font-semibold mb-1">c) Perbandingan:</p>
-                      <p className="font-body text-xs text-orange-200 mb-1">Korespondensi ÷ Total Fungsi</p>
+                      <p className="text-orange-300 font-semibold mb-1">{tr.c2_c_head}</p>
+                      <p className="font-body text-xs text-orange-200 mb-1">{tr.c2_c_lbl}</p>
                       <BlockMath math="\frac{24}{256} = \frac{3}{32}" />
-                      <p className="text-white/50 text-xs mt-1">Hanya sekitar 9,4% dari semua fungsi yang merupakan korespondensi satu-satu!</p>
+                      <p className="text-white/50 text-xs mt-1">{tr.c2_c_note}</p>
                     </div>
                     <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-yellow-300">✅ Korespondensi = 24, Total Fungsi = 256</p>
+                      <p className="font-body text-sm font-bold text-yellow-300">{tr.c2_result}</p>
                     </div>
                   </div>
                 </div>
@@ -972,38 +1496,38 @@ const BanyakFungsiPage = () => {
 
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
+            <SectionHeader id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title={tr.sec_c3} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
+                <Badge label={tr.badge_hard} color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-red-300 mb-2">📝 Soal</p>
+                  <p className="font-body text-sm font-semibold text-red-300 mb-2">{tr.c3_soal_head}</p>
                   <p className="font-body text-sm text-white/85 leading-relaxed">
-                    Himpunan <InlineMath math="A" /> mempunyai <InlineMath math="n(A) = m" /> anggota dan himpunan <InlineMath math="B" /> mempunyai <InlineMath math="n(B) = 4" /> anggota. Jika banyaknya fungsi dari A ke B adalah 1024, tentukan:
-                    <br />a) Nilai <InlineMath math="m" />
-                    <br />b) Apakah mungkin membuat korespondensi satu-satu dari A ke B? Jika ya, berapa banyaknya?
+                    {tr.c3_soal_p}
+                    <br />{tr.c3_soal_a}
+                    <br />{tr.c3_soal_b}
                   </p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">🔍 Pembahasan</p>
+                  <p className="font-body text-sm font-semibold text-cyan-300">{tr.c3_pembahasan_head}</p>
                   <div className="space-y-3 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-2">a) Mencari nilai m:</p>
-                      <p className="text-white/70 text-xs mb-1">Gunakan rumus banyak fungsi:</p>
+                      <p className="text-cyan-300 font-semibold mb-2">{tr.c3_a_head}</p>
+                      <p className="text-white/70 text-xs mb-1">{tr.c3_a_step1}</p>
                       <BlockMath math="n(B)^{n(A)} = 1024" />
                       <BlockMath math="4^m = 1024" />
-                      <p className="text-white/70 text-xs mb-1">Ingat bahwa <InlineMath math="1024 = 2^{10}" /> dan <InlineMath math="4 = 2^2" />, maka:</p>
+                      <p className="text-white/70 text-xs mb-1">{tr.c3_a_step2}</p>
                       <BlockMath math="(2^2)^m = 2^{10} \implies 2^{2m} = 2^{10}" />
                       <BlockMath math="2m = 10 \implies m = 5" />
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">b) Korespondensi Satu-Satu?</p>
+                      <p className="text-violet-300 font-semibold mb-1">{tr.c3_b_head}</p>
                       <p className="text-white/70 text-xs">n(A) = 5, n(B) = 4</p>
-                      <p className="text-white/70 text-xs mt-1">Karena <InlineMath math="n(A) \neq n(B)" /> (5 ≠ 4), maka <strong className="text-red-300">korespondensi satu-satu tidak mungkin dibuat</strong>.</p>
-                      <p className="text-white/50 text-xs mt-1">Syarat korespondensi satu-satu adalah n(A) = n(B).</p>
+                      <p className="text-white/70 text-xs mt-1">{tr.c3_b_note} <strong className="text-red-300">{language === "id" ? "korespondensi satu-satu tidak mungkin dibuat" : language === "en" ? "bijection is impossible" : "全単射は不可能"}</strong>.</p>
+                      <p className="text-white/50 text-xs mt-1">{tr.c3_b_syarat}</p>
                     </div>
                     <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
-                      <p className="font-body text-sm font-bold text-red-300">✅ m = 5. Korespondensi satu-satu tidak mungkin karena n(A) ≠ n(B).</p>
+                      <p className="font-body text-sm font-bold text-red-300">{tr.c3_result}</p>
                     </div>
                   </div>
                 </div>
@@ -1013,21 +1537,21 @@ const BanyakFungsiPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman & Kesimpulan" />
+            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title={tr.sec_rangkuman} />
             {true && (
               <div className="px-5 pb-6 space-y-4">
 
                 {/* RANGKUMAN */}
-                <p className="font-display text-xs font-bold text-rose-300 uppercase tracking-wider pt-1">📚 Rangkuman Materi</p>
+                <p className="font-display text-xs font-bold text-rose-300 uppercase tracking-wider pt-1">{tr.rang_head}</p>
                 <div className="grid grid-cols-1 gap-2">
-                  {[
-                    { icon: "🔢", label: "Banyak Fungsi A → B", desc: "Rumus: n(B)^n(A) — kodomain dijadikan basis, domain dijadikan pangkat.", color: "from-rose-900/60 to-red-900/60 border-rose-500/40 text-rose-300" },
-                    { icon: "🔄", label: "Korespondensi Satu-Satu", desc: "Fungsi di mana setiap anggota A berpasangan unik dengan setiap anggota B (bijektif).", color: "from-pink-900/60 to-fuchsia-900/60 border-pink-500/40 text-pink-300" },
-                    { icon: "⚖️", label: "Syarat Korespondensi", desc: "Hanya mungkin jika n(A) = n(B) — jumlah anggota kedua himpunan harus sama.", color: "from-purple-900/60 to-violet-900/60 border-purple-500/40 text-purple-300" },
-                    { icon: "🏆", label: "Banyak Korespondensi", desc: "Rumus: n! (n faktorial) di mana n = n(A) = n(B).", color: "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300" },
-                    { icon: "❗", label: "Faktorial", desc: "n! = n × (n−1) × (n−2) × … × 2 × 1. Contoh: 4! = 4×3×2×1 = 24.", color: "from-amber-900/60 to-yellow-900/60 border-amber-500/40 text-amber-300" },
-                  ].map(({ icon, label, desc, color }) => (
-                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                  {(tr.rang_items as { icon: string; label: string; desc: string }[]).map(({ icon, label, desc }) => (
+                    <div key={label} className={`bg-gradient-to-r border rounded-xl px-4 py-3 flex gap-3 items-start ${
+                      icon === "🔢" ? "from-rose-900/60 to-red-900/60 border-rose-500/40 text-rose-300" :
+                      icon === "🔄" ? "from-pink-900/60 to-fuchsia-900/60 border-pink-500/40 text-pink-300" :
+                      icon === "⚖️" ? "from-purple-900/60 to-violet-900/60 border-purple-500/40 text-purple-300" :
+                      icon === "🏆" ? "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300" :
+                      "from-amber-900/60 to-yellow-900/60 border-amber-500/40 text-amber-300"
+                    }`}>
                       <span className="text-xl shrink-0">{icon}</span>
                       <div>
                         <p className="font-display text-xs font-bold mb-0.5">{label}</p>
@@ -1039,13 +1563,9 @@ const BanyakFungsiPage = () => {
 
                 {/* TIPS & TRIK */}
                 <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">💡 Tips &amp; Trik</p>
+                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">{tr.tips_head}</p>
                   <div className="space-y-2">
-                    {[
-                      "Rumus n(B)^n(A): ingat B = tujuan = basis, A = asal = pangkat. Jangan terbalik!",
-                      "Korespondensi hanya bisa ada jika n(A) = n(B). Cek dulu sebelum menghitung!",
-                      "Trik hitung faktorial: mulai dari n, kalikan mundur sampai 1. Contoh: 5! = 5×4×3×2×1 = 120.",
-                    ].map((tip, i) => (
+                    {(tr.tips as string[]).map((tip, i) => (
                       <div key={i} className="flex gap-2 items-start">
                         <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
                         <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
@@ -1056,9 +1576,9 @@ const BanyakFungsiPage = () => {
 
                 {/* KESIMPULAN */}
                 <div className="bg-gradient-to-r from-rose-900/60 to-pink-900/60 border border-rose-400/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-rose-300 uppercase tracking-wider mb-2">🎯 Kesimpulan</p>
+                  <p className="font-display text-xs font-bold text-rose-300 uppercase tracking-wider mb-2">{tr.kesimpulan_head}</p>
                   <p className="font-body text-sm text-white/90 leading-relaxed">
-                    Banyak fungsi = <strong className="text-rose-300">menghitung semua kemungkinan</strong>. Kuasai rumus <strong className="text-orange-300">n(B)^n(A)</strong> untuk fungsi biasa dan <strong className="text-pink-300">n!</strong> untuk korespondensi satu-satu!
+                    {tr.kesimpulan_p}
                   </p>
                 </div>
 
@@ -1070,7 +1590,7 @@ const BanyakFungsiPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/relasi-dan-fungsi"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Relasi dan Fungsi
+            {tr.back_btn}
           </button>
         </div>
       </div>
