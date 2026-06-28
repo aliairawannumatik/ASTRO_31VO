@@ -222,11 +222,10 @@ const questions: Q[] = [
 
   Q(13, "Titik di Kuadran IV", {
     type: "mixed",
-    content: "Perhatikan titik-titik berikut:",
+    content: "Perhatikan titik-titik berikut:\nA(5, −3),  B(−2, −4),  C(4, −1),  D(−3, 6),  E(7, −5),  F(0, −2)",
     parts: [
-      { label: "a.", math: "A(5,\\ -3),\\ B(-2,\\ -4),\\ C(4,\\ -1),\\ D(-3,\\ 6),\\ E(7,\\ -5),\\ F(0,\\ -2)" },
-      { label: "b.", text: "Titik mana saja yang berada di Kuadran IV? Sebutkan absisnya (nilai x) dan ordinatnya (nilai y) masing-masing!" },
-      { label: "c.", text: "Mengapa titik F(0, −2) tidak termasuk Kuadran IV meskipun nilai y-nya negatif?" },
+      { label: "a.", text: "Titik mana saja yang berada di Kuadran IV? Sebutkan absisnya (nilai x) dan ordinatnya (nilai y) masing-masing!" },
+      { label: "b.", text: "Mengapa titik F(0, −2) tidak termasuk Kuadran IV meskipun nilai y-nya negatif?" },
     ],
   }),
 
