@@ -231,11 +231,10 @@ const questions: Q[] = [
 
   Q(14, "Koordinat di Atas Sumbu-x", {
     type: "mixed",
-    content: "Dari daftar koordinat berikut, tentukan manakah yang berada di atas sumbu-x:",
+    content: "Dari daftar koordinat berikut, tentukan manakah yang berada di atas sumbu-x:\nP(−3, 5),  Q(4, −2),  R(0, 7),  S(−1, −6),  T(6, 3),  U(2, 0)",
     parts: [
-      { label: "a.", math: "P(-3,\\ 5),\\ Q(4,\\ -2),\\ R(0,\\ 7),\\ S(-1,\\ -6),\\ T(6,\\ 3),\\ U(2,\\ 0)" },
-      { label: "b.", text: "Tuliskan semua titik yang berada di atas sumbu-x beserta alasannya." },
-      { label: "c.", text: "Apakah titik yang tepat berada pada sumbu-x (y = 0) dianggap 'di atas sumbu-x'? Jelaskan!" },
+      { label: "a.", text: "Tuliskan semua titik yang berada di atas sumbu-x beserta alasannya." },
+      { label: "b.", text: "Apakah titik yang tepat berada pada sumbu-x (y = 0) dianggap 'di atas sumbu-x'? Jelaskan!" },
     ],
   }),
 
