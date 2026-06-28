@@ -532,6 +532,17 @@ const questions: QuestionItem[] = [
       { label: "", text: "Pilihan: Bilangan Segitiga / Bilangan Persegi / Bilangan Persegi Panjang / Bilangan Kubik" },
     ],
   },
+  {
+    number: 19,
+    title: "Menghitung Suku dengan Rumus Umum",
+    content: "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-10 dan suku ke-100 untuk masing-masing barisan berikut:",
+    type: "mixed",
+    parts: [
+      { label: "a.", math: "U_n = n(n + 2)" },
+      { label: "b.", math: "U_n = 2n(n - 1)" },
+      { label: "c.", math: "U_n = 2n^2 - 1" },
+    ],
+  },
 ];
 
 // ─── Card Component ────────────────────────────────────────────────────────────
