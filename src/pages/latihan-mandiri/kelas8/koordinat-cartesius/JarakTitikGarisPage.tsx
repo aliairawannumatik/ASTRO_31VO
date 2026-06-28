@@ -206,28 +206,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(10, "Luas Segitiga dari Koordinat", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 0, y: 0, label: "O", color: "#f472b6", labelPos: "bl" },
-        { x: 5, y: 0, label: "A(5,0)", color: "#fb923c", labelPos: "br" },
-        { x: 0, y: 4, label: "B(0,4)", color: "#34d399", labelPos: "tl" },
-      ],
-      segs: [
-        { x1: 0, y1: 0, x2: 5, y2: 0, color: "#60a5fa" },
-        { x1: 5, y1: 0, x2: 0, y2: 4, color: "#60a5fa" },
-        { x1: 0, y1: 4, x2: 0, y2: 0, color: "#60a5fa" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung panjang sisi OA dan OB." },
-      { label: "b.", text: "Apakah segitiga OAB siku-siku? Di mana sudut siku-sikunya?" },
-      { label: "c.", text: "Hitung luas segitiga OAB." },
-    ],
-  }),
-
   Qn(12, "Jarak dalam Konteks Nyata", {
     type: "mixed",
     content: "Sebuah peta kota menggunakan koordinat kartesius (dalam km).\nRumah Andi: A(2, 3), Sekolah: B(8, 11)",
@@ -271,25 +249,48 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(14, "Luas Segitiga — Koordinat Beragam", {
+  Qn(14, "Luas Segitiga dari Koordinat", {
     type: "mixed",
     diagram: {
-      size: 260, range: 7,
+      size: 260, range: 6,
       pts: [
-        { x: -4, y: -3, label: "P", color: "#f472b6", labelPos: "bl" },
-        { x: 3, y: -3, label: "Q", color: "#fb923c", labelPos: "br" },
-        { x: -1, y: 5, label: "R", color: "#34d399", labelPos: "top" },
+        { x: 0, y: 0, label: "O", color: "#f472b6", labelPos: "bl" },
+        { x: 5, y: 0, label: "A(5,0)", color: "#fb923c", labelPos: "br" },
+        { x: 0, y: 4, label: "B(0,4)", color: "#34d399", labelPos: "tl" },
       ],
       segs: [
-        { x1: -4, y1: -3, x2: 3, y2: -3, color: "#60a5fa" },
-        { x1: 3, y1: -3, x2: -1, y2: 5, color: "#60a5fa" },
-        { x1: -1, y1: 5, x2: -4, y2: -3, color: "#60a5fa" },
+        { x1: 0, y1: 0, x2: 5, y2: 0, color: "#60a5fa" },
+        { x1: 5, y1: 0, x2: 0, y2: 4, color: "#60a5fa" },
+        { x1: 0, y1: 4, x2: 0, y2: 0, color: "#60a5fa" },
       ],
     },
     parts: [
-      { label: "a.", text: "Hitung panjang alas PQ." },
-      { label: "b.", text: "Hitung tinggi segitiga PQR (jarak R ke garis y = −3)." },
-      { label: "c.", text: "Hitung luas segitiga PQR." },
+      { label: "a.", text: "Hitung panjang sisi OA dan OB." },
+      { label: "b.", text: "Apakah segitiga OAB siku-siku? Di mana sudut siku-sikunya?" },
+      { label: "c.", text: "Hitung luas segitiga OAB." },
+    ],
+  }),
+
+  Qn(15, "Titik Tengah di Antara Dua Titik", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 8,
+      pts: [
+        { x: -4, y: 2, label: "A(−4,2)", color: "#f472b6", labelPos: "tl" },
+        { x: 6, y: 8, label: "B(6,8)", color: "#60a5fa", labelPos: "tr" },
+        { x: 1, y: 5, label: "M(1,5)", color: "#facc15", labelPos: "br" },
+      ],
+      segs: [
+        { x1: -4, y1: 2, x2: 6, y2: 8, color: "rgba(255,255,255,0.25)", dashed: true },
+        { x1: -4, y1: 2, x2: 1, y2: 5, color: "#f472b6" },
+        { x1: 1, y1: 5, x2: 6, y2: 8, color: "#60a5fa" },
+      ],
+    },
+    parts: [
+      { label: "Rumus:", math: "M = \\left(\\frac{x_1 + x_2}{2},\\ \\frac{y_1 + y_2}{2}\\right)" },
+      { label: "a.", text: "Tentukan koordinat titik tengah M dari A(−4, 2) dan B(6, 8)." },
+      { label: "b.", text: "Jika titik tengah M dari P(1, 3) dan Q adalah M(4, 7), tentukan koordinat Q." },
+      { label: "c.", text: "Titik K(−2, 5) dan L(8, −3). Tentukan koordinat titik tengah KL, lalu hitung jarak titik tengah tersebut ke titik asal O(0, 0)." },
     ],
   }),
 ];
@@ -313,7 +314,7 @@ const JarakTitikGarisPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Kartesius · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
+            <span className="text-teal-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -328,6 +329,7 @@ const JarakTitikGarisPage = () => {
               { label: "Titik ke sumbu-y", math: "d = |x_0|" },
               { label: "Titik (x₀,y₀) ke garis y=k", math: "d = |y_0 - k|" },
               { label: "Titik (x₀,y₀) ke garis x=k", math: "d = |x_0 - k|" },
+              { label: "Titik tengah (x₁,y₁) & (x₂,y₂)", math: "M = \\left(\\frac{x_1+x_2}{2},\\frac{y_1+y_2}{2}\\right)" },
             ].map((r, i) => (
               <div key={i} className="bg-white/5 rounded-lg px-3 py-2 flex items-center gap-3">
                 <span className="text-white/40 text-[10px] shrink-0 w-32">{r.label}</span>
