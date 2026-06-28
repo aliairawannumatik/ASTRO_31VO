@@ -86,17 +86,7 @@ const questions: Q[] = [
       { label: "c.", text: "Gambarlah dalam diagram Kartesius." },
     ],
   }),
-  Qn(4, "Memahami Konsep Relasi", {
-    type: "mixed",
-    content: "Perhatikan himpunan A = {1, 2, 3, 4} dan B = {a, b, c, d}. Relasi 'dipetakan ke' dari A ke B dinyatakan dengan diagram panah berikut:",
-    diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c','d']} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#a78bfa" colorB="#38bdf8" arrowColor="#f472b6" />,
-    parts: [
-      { label: "a.", text: "Tuliskan relasi tersebut sebagai himpunan pasangan berurutan." },
-      { label: "b.", text: "Apa nama relasi ini? Apakah setiap anggota A dipasangkan tepat satu ke B?" },
-      { label: "c.", text: "Tuliskan domain, kodomain, dan range dari relasi tersebut." },
-    ],
-  }),
-  Qn(5, "Relasi 'Faktor dari'", {
+  Qn(4, "Relasi 'Faktor dari'", {
     type: "mixed",
     content: "Diketahui A = {2, 3, 4, 6} dan B = {6, 8, 12, 18, 24}. Relasi yang menghubungkan A ke B adalah 'faktor dari'.",
     parts: [
@@ -105,7 +95,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan range relasi tersebut." },
     ],
   }),
-  Qn(6, "Relasi 'Lebih dari'", {
+  Qn(5, "Relasi 'Lebih dari'", {
     type: "mixed",
     content: "Diketahui P = {2, 4, 6} dan Q = {1, 3, 5, 7}. Relasi yang berlaku adalah 'lebih dari'.",
     parts: [
@@ -114,7 +104,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan range relasi tersebut." },
     ],
   }),
-  Qn(7, "Relasi dari Diagram Kartesius – Tentukan Aturan", {
+  Qn(6, "Relasi dari Diagram Kartesius – Tentukan Aturan", {
     type: "mixed",
     diagram: (
       <div className="flex flex-col items-center my-2">
@@ -179,7 +169,7 @@ const PengertianRelasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
+            <span className="text-violet-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
