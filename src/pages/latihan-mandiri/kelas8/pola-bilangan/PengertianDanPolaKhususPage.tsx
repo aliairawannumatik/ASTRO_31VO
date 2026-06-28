@@ -9,6 +9,75 @@ import { Sigma, Star } from "lucide-react";
 
 // ─── SVG Illustrations ────────────────────────────────────────────────────────
 
+const SvgPolaGambar1 = () => {
+  const sq = 20, gap = 3;
+  const groupW = 90, svgH = 90;
+  const svgW = 3 * groupW + 10;
+  const bottomY = 60;
+  const labels = ["Pola ke-1", "Pola ke-2", "Pola ke-3"];
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {[1, 2, 3].map((n, gi) => {
+        const cx = 5 + gi * groupW + groupW / 2;
+        const gridW = n * sq + (n - 1) * gap;
+        const startX = cx - gridW / 2;
+        const startY = bottomY - gridW;
+        return (
+          <g key={gi}>
+            {Array.from({ length: n }, (_, row) =>
+              Array.from({ length: n }, (_, col) => (
+                <rect key={`${row}-${col}`}
+                  x={startX + col * (sq + gap)} y={startY + row * (sq + gap)}
+                  width={sq} height={sq} rx={2}
+                  fill="rgba(56,189,248,0.45)" stroke="rgba(56,189,248,0.9)" strokeWidth="1.5" />
+              ))
+            )}
+            <text x={cx} y={svgH - 6} textAnchor="middle"
+              fill="#7dd3fc" fontSize="9" fontFamily="sans-serif">{labels[gi]}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const SvgPolaGambar2 = () => {
+  const svgW = 320, svgH = 80;
+  const configs = [
+    { count: 1, label: "Pola ke-1", cx: 40 },
+    { count: 2, label: "Pola ke-2", cx: 130 },
+    { count: 3, label: "Pola ke-3", cx: 230 },
+  ];
+  const h = 30, base = 36;
+  const stroke = "rgba(251,191,36,0.9)";
+  const sw = "2";
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {configs.map(({ count, label, cx }, gi) => {
+        const totalW = base + (count - 1) * (base / 2);
+        const sx = cx - totalW / 2;
+        const by = 14 + h;
+        const lines: JSX.Element[] = [];
+        for (let i = 0; i < count; i++) {
+          const lx = sx + i * (base / 2);
+          lines.push(
+            <line key={`b${i}`} x1={lx} y1={by} x2={lx + base} y2={by} stroke={stroke} strokeWidth={sw} />,
+            <line key={`l${i}`} x1={lx} y1={by} x2={lx + base / 2} y2={14} stroke={stroke} strokeWidth={sw} />,
+            <line key={`r${i}`} x1={lx + base / 2} y1={14} x2={lx + base} y2={by} stroke={stroke} strokeWidth={sw} />,
+          );
+        }
+        return (
+          <g key={gi}>
+            {lines}
+            <text x={cx} y={svgH - 6} textAnchor="middle"
+              fill="#fde68a" fontSize="9" fontFamily="sans-serif">{label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 const SvgQ1 = () => {
   const nums = [2, 5, 10, 17, 26];
   const diffs = ["+3", "+5", "+7", "+9", "+11"];
@@ -268,13 +337,32 @@ type QuestionItem = {
 const questions: QuestionItem[] = [
   {
     number: 1,
+    title: "Pola Gambar Persegi",
+    content: "Perhatikan pola berikut.",
+    type: "mixed",
+    svgNode: <SvgPolaGambar1 />,
+    parts: [
+      { label: "a.", text: "Tuliskan banyaknya persegi pada setiap pola di atas." },
+      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
+      { label: "c.", text: "Tentukan banyaknya persegi pada pola ke-25 dan pola ke-50." },
+    ],
+  },
+  {
+    number: 2,
+    title: "Pola Gambar Segitiga Korek Api",
+    content: "Perhatikan pola berikut.\n\nYeni menyusun segitiga-segitiga seperti gambar di atas menggunakan batang-batang korek api. Tentukan banyaknya batang korek api untuk menyusun segitiga pada pola ke-15 dan pola ke-30.",
+    type: "essay",
+    svgNode: <SvgPolaGambar2 />,
+  },
+  {
+    number: 3,
     title: "Melanjutkan Pola Bilangan",
     content: "Perhatikan barisan bilangan berikut:\n2, 5, 10, 17, 26, ...\nTentukan dua suku berikutnya dari barisan bilangan tersebut dan jelaskan aturan polanya!",
     type: "essay",
     svgNode: <SvgQ1 />,
   },
   {
-    number: 2,
+    number: 4,
     title: "Suku yang Hilang",
     content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
     type: "mixed",
@@ -285,14 +373,14 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 3,
+    number: 5,
     title: "Pola Gambar Susunan Batu Bata",
     content: "Seorang tukang batu menyusun batu bata membentuk pola:\nBaris ke-1: 3 batu bata | Baris ke-2: 6 | Baris ke-3: 9 | Baris ke-4: 12\n\na. Tentukan pola yang terbentuk.\nb. Berapa banyak batu bata pada baris ke-10?\nc. Berapa total batu bata jika ada 8 baris?",
     type: "essay",
     svgNode: <SvgQ3 />,
   },
   {
-    number: 4,
+    number: 6,
     title: "Bilangan Segitiga",
     content: "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
     type: "mixed",
@@ -305,7 +393,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 5,
+    number: 7,
     title: "Bilangan Persegi",
     content: "Perhatikan bilangan persegi berikut:",
     type: "mixed",
@@ -318,7 +406,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 6,
+    number: 8,
     title: "Bilangan Persegi Panjang",
     content: "Bilangan persegi panjang dibentuk dari susunan titik berbentuk persegi panjang:",
     type: "mixed",
@@ -331,14 +419,14 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 7,
+    number: 9,
     title: "Soal TKA - Pola Kombinasi",
     content: "Perhatikan barisan: 1, 2, 4, 7, 11, 16, 22, ...\n\na. Tentukan beda antara suku-suku berurutan.\nb. Identifikasi pola beda tersebut.\nc. Tentukan dua suku berikutnya.\nd. Tuliskan rumus umum suku ke-n.",
     type: "essay",
     svgNode: <SvgQ17 />,
   },
   {
-    number: 8,
+    number: 10,
     title: "Menghitung Suku dengan Rumus Umum",
     content: "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-10 dan suku ke-100 untuk masing-masing barisan berikut:",
     type: "mixed",
@@ -349,7 +437,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 9,
+    number: 11,
     title: "Rumus Suku ke-n dan Suku ke-100",
     content: "Tentukan rumus suku ke-n dan hitunglah suku ke-100 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
     type: "mixed",
