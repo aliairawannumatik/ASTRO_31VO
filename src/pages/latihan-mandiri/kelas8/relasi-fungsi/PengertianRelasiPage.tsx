@@ -22,7 +22,53 @@ type Q = {
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1, "Relasi Anak-anak dan Buah Kesukaan", {
+  Qn(1, "Domain, Kodomain, dan Range", {
+    type: "mixed",
+    diagram: (
+      <div className="flex flex-col items-center my-2">
+        <svg width="320" height="298" viewBox="0 0 320 298">
+          <rect width="320" height="298" fill="white" rx="14" stroke="#e2e8f0" strokeWidth="1" />
+          {/* Oval A */}
+          <ellipse cx="70" cy="160" rx="50" ry="92" fill="#f472b622" stroke="#f472b6" strokeWidth="1.5" strokeOpacity="0.8" />
+          {/* Oval B */}
+          <ellipse cx="250" cy="160" rx="50" ry="110" fill="#60a5fa22" stroke="#60a5fa" strokeWidth="1.5" strokeOpacity="0.8" />
+          {/* Labels */}
+          <text x="70" y="56" fill="#f472b6" fontSize="12" fontWeight="bold" textAnchor="middle">A</text>
+          <text x="250" y="40" fill="#60a5fa" fontSize="12" fontWeight="bold" textAnchor="middle">B</text>
+          {/* A elements: centers at y=88,124,160,196,232 */}
+          {[1,2,3,4,5].map((v,i) => (
+            <text key={v} x="70" y={92+i*36} fill="rgba(20,20,20,0.9)" fontSize="12" fontWeight="bold" textAnchor="middle">{v}</text>
+          ))}
+          {/* B elements: centers at y=70,106,142,178,214,250 */}
+          {[1,4,9,16,25,36].map((v,i) => (
+            <text key={v} x="250" y={74+i*36} fill="rgba(20,20,20,0.9)" fontSize="12" fontWeight="bold" textAnchor="middle">{v}</text>
+          ))}
+          {/* Arrows touching numbers: from right of A number to left of B number */}
+          <defs>
+            <marker id="arr-dk" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <polygon points="0 0, 7 3.5, 0 7" fill="#34d399" opacity="0.9" />
+            </marker>
+          </defs>
+          {/* 1→1: A[0] center y=88, B[0] center y=70 */}
+          <line x1="84" y1="88" x2="234" y2="70" stroke="#34d399" strokeWidth="1.8" opacity="0.9" markerEnd="url(#arr-dk)" />
+          {/* 2→4: A[1] y=124, B[1] y=106 */}
+          <line x1="84" y1="124" x2="234" y2="106" stroke="#34d399" strokeWidth="1.8" opacity="0.9" markerEnd="url(#arr-dk)" />
+          {/* 3→9: A[2] y=160, B[2] y=142 */}
+          <line x1="84" y1="160" x2="234" y2="142" stroke="#34d399" strokeWidth="1.8" opacity="0.9" markerEnd="url(#arr-dk)" />
+          {/* 4→16: A[3] y=196, B[3] y=178 */}
+          <line x1="84" y1="196" x2="234" y2="178" stroke="#34d399" strokeWidth="1.8" opacity="0.9" markerEnd="url(#arr-dk)" />
+          {/* 5→25: A[4] y=232, B[4] y=214 */}
+          <line x1="84" y1="232" x2="234" y2="214" stroke="#34d399" strokeWidth="1.8" opacity="0.9" markerEnd="url(#arr-dk)" />
+        </svg>
+      </div>
+    ),
+    parts: [
+      { label: "a.", text: "Tentukan domain, kodomain, dan range dari relasi di atas." },
+      { label: "b.", text: "Anggota kodomain mana yang tidak menjadi range? Sebutkan." },
+      { label: "c.", text: "Apa nama aturan relasi pada diagram tersebut?" },
+    ],
+  }),
+  Qn(2, "Relasi Anak-anak dan Buah Kesukaan", {
     type: "mixed",
     content: "Diketahui data kesukaan buah tiga anak sebagai berikut:\n\u2022 Andi menyukai: Apel dan Mangga\n\u2022 Budi menyukai: Jeruk dan Pisang\n\u2022 Citra menyukai: Apel, Mangga, dan Anggur\n\nRelasi yang berlaku adalah 'menyukai' dari himpunan anak ke himpunan buah.",
     parts: [
@@ -31,7 +77,7 @@ const questions: Q[] = [
       { label: "c.", text: "Gambarlah diagram Kartesius untuk relasi tersebut. (Sumbu mendatar = nama anak, sumbu tegak = nama buah)" },
     ],
   }),
-  Qn(2, "Relasi 'Setengah dari'", {
+  Qn(3, "Relasi 'Setengah dari'", {
     type: "mixed",
     content: "Diketahui himpunan A = {2, 4, 6, 8, 10} dan B = {1, 2, 3, 4, 5, 6, 7, 8}. Relasi yang menghubungkan A ke B adalah 'setengah dari'.",
     parts: [
@@ -40,7 +86,7 @@ const questions: Q[] = [
       { label: "c.", text: "Gambarlah dalam diagram Kartesius." },
     ],
   }),
-  Qn(3, "Memahami Konsep Relasi", {
+  Qn(4, "Memahami Konsep Relasi", {
     type: "mixed",
     content: "Perhatikan himpunan A = {1, 2, 3, 4} dan B = {a, b, c, d}. Relasi 'dipetakan ke' dari A ke B dinyatakan dengan diagram panah berikut:",
     diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c','d']} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#a78bfa" colorB="#38bdf8" arrowColor="#f472b6" />,
@@ -50,7 +96,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tuliskan domain, kodomain, dan range dari relasi tersebut." },
     ],
   }),
-  Qn(4, "Relasi Dari Pasangan Berurutan", {
+  Qn(5, "Relasi Dari Pasangan Berurutan", {
     type: "mixed",
     content: "Diketahui relasi R dari A ke B dinyatakan sebagai himpunan pasangan berurutan:",
     parts: [
@@ -60,22 +106,13 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan domain, kodomain, dan range jika B = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}." },
     ],
   }),
-  Qn(5, "Relasi 'Faktor dari'", {
+  Qn(6, "Relasi 'Faktor dari'", {
     type: "mixed",
     content: "Diketahui A = {2, 3, 4, 6} dan B = {6, 8, 12, 18, 24}. Relasi yang menghubungkan A ke B adalah 'faktor dari'.",
     parts: [
       { label: "a.", text: "Gambarlah diagram panah untuk relasi 'faktor dari' ini." },
       { label: "b.", text: "Tuliskan himpunan pasangan berurutannya." },
       { label: "c.", text: "Tentukan range relasi tersebut." },
-    ],
-  }),
-  Qn(6, "Domain, Kodomain, dan Range", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3,4,5]} setB={[1,4,9,16,25,36]} arrows={[[0,0],[1,1],[2,2],[3,3],[4,4]]} labelA="A" labelB="B" colorA="#f472b6" colorB="#60a5fa" arrowColor="#34d399" />,
-    parts: [
-      { label: "a.", text: "Tentukan domain, kodomain, dan range dari relasi di atas." },
-      { label: "b.", text: "Anggota kodomain mana yang tidak menjadi range? Sebutkan." },
-      { label: "c.", text: "Apa nama aturan relasi pada diagram tersebut?" },
     ],
   }),
   Qn(7, "Relasi 'Kuadrat dari'", {
