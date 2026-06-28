@@ -15,11 +15,9 @@ const SvgBarisanObjek = () => {
   const dy = 14;
   const groupCenters = [42, 138, 234, 330];
   const topY = 14;
-  const maxRows = 4;
-  const labelY = topY + maxRows * dy + 16;
 
   return (
-    <svg viewBox="0 0 374 108" className="w-full max-w-md mx-auto my-3" aria-label="Ilustrasi barisan aritmetika dengan benda nyata">
+    <svg viewBox="0 0 374 72" className="w-full max-w-md mx-auto my-3" aria-label="Ilustrasi barisan aritmetika dengan bola">
       <defs>
         <marker id="ao" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
           <path d="M0,0 L0,7 L7,3.5 Z" fill="#fbbf24" />
@@ -46,9 +44,6 @@ const SvgBarisanObjek = () => {
                 />
               );
             })}
-            <text x={groupCenters[gi]} y={labelY} textAnchor="middle" fill="#6ee7b7" fontSize="11" fontWeight="bold">
-              {`U${gi + 1} = ${count}`}
-            </text>
           </g>
         );
       })}
@@ -66,15 +61,6 @@ const SvgBarisanObjek = () => {
           </g>
         );
       })}
-
-      <rect x={2} y={labelY + 4} width={80} height={14} rx={3} fill="#064e3b" stroke="#34d399" strokeWidth="1" />
-      <text x={42} y={labelY + 14} textAnchor="middle" fill="#a7f3d0" fontSize="9" fontWeight="bold">
-        a = 7 (suku pertama)
-      </text>
-      <rect x={84} y={topY + dy} width={54} height={14} rx={3} fill="#78350f" stroke="#fbbf24" strokeWidth="1" />
-      <text x={111} y={topY + dy + 10} textAnchor="middle" fill="#fef08a" fontSize="9" fontWeight="bold">
-        b = 4 (beda)
-      </text>
     </svg>
   );
 };
@@ -149,6 +135,28 @@ const PolaAritmetikaPage = () => {
     },
     {
       number: 2,
+      title: "Barisan Aritmetika Sederhana",
+      content: "Diketahui barisan aritmetika: 3, 7, 11, 15, ...",
+      type: "mixed",
+      parts: [
+        { label: "a.", text: "Tentukan suku pertama (a) barisan tersebut." },
+        { label: "b.", text: "Tentukan beda (b) barisan tersebut." },
+        { label: "c.", math: "\\text{Hitung nilai } U_{25}." },
+      ],
+    },
+    {
+      number: 3,
+      title: "Barisan Aritmetika Turun",
+      content: "Diketahui barisan aritmetika: 10, 7, 4, 1, −2, ...",
+      type: "mixed",
+      parts: [
+        { label: "a.", text: "Tentukan suku pertama (a) barisan tersebut." },
+        { label: "b.", text: "Tentukan beda (b) barisan tersebut." },
+        { label: "c.", math: "\\text{Hitung nilai } U_{40}." },
+      ],
+    },
+    {
+      number: 4,
       title: "Menentukan Beda (b) Barisan Aritmetika",
       content: "Dalam suatu barisan aritmetika, diketahui:",
       type: "mixed",
@@ -160,7 +168,7 @@ const PolaAritmetikaPage = () => {
       ],
     },
     {
-      number: 3,
+      number: 5,
       title: "Barisan Aritmetika - Soal UN",
       content: "Suku ke-5 suatu barisan aritmetika adalah 17 dan suku ke-9 adalah 33.",
       type: "mixed",
@@ -171,7 +179,7 @@ const PolaAritmetikaPage = () => {
       ],
     },
     {
-      number: 4,
+      number: 6,
       title: "Jumlah n Suku Pertama Barisan Aritmetika",
       content: "Rumus jumlah n suku pertama barisan aritmetika:",
       type: "mixed",
@@ -182,19 +190,19 @@ const PolaAritmetikaPage = () => {
       ],
     },
     {
-      number: 5,
+      number: 7,
       title: "Aplikasi Barisan Aritmetika - Gaji Karyawan",
       content: "Seorang karyawan mendapatkan gaji bulan pertama sebesar Rp2.500.000. Setiap bulan gajinya naik Rp150.000.\n\na. Berapa gaji karyawan tersebut pada bulan ke-12?\nb. Berapa total gaji yang diterima selama 1 tahun (12 bulan)?\nc. Pada bulan ke berapa karyawan mendapatkan gaji Rp4.150.000?",
       type: "essay",
     },
     {
-      number: 6,
+      number: 8,
       title: "Menyisipkan Bilangan dalam Barisan Aritmetika",
       content: "Di antara bilangan 4 dan 28, disisipkan 5 bilangan sehingga membentuk barisan aritmetika.\n\na. Tentukan beda barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Berapakah jumlah semua bilangan dalam barisan itu?",
       type: "essay",
     },
     {
-      number: 7,
+      number: 9,
       title: "Soal TKA - Barisan Aritmetika",
       content: "Jumlah 10 suku pertama suatu barisan aritmetika adalah 155 dan suku ke-10 adalah 28.",
       type: "mixed",
@@ -205,46 +213,39 @@ const PolaAritmetikaPage = () => {
       ],
     },
     {
-      number: 8,
+      number: 10,
       title: "Soal Kontekstual - Kursi Gedung Pertunjukan",
       content: "Sebuah gedung pertunjukan memiliki 20 baris kursi. Baris pertama berisi 15 kursi, baris kedua 18 kursi, baris ketiga 21 kursi, dan seterusnya membentuk barisan aritmetika.\n\na. Berapa banyak kursi pada baris ke-20?\nb. Berapa total kursi di seluruh gedung pertunjukan?",
       type: "essay",
     },
     {
-      number: 9,
+      number: 11,
       title: "Soal ANBK - Deret Aritmetika Terapan",
       content: "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp5.000, hari kedua Rp7.000, hari ketiga Rp9.000, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp192.000?",
       type: "essay",
     },
     {
-      number: 10,
+      number: 12,
       title: "Soal Kontekstual - Tumpukan Batu Bata",
       content: "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya.\n\nJika ada 15 tumpukan batu bata (dari atas sampai bawah), tentukan banyak batu bata pada tumpukan paling bawah (U₁₅) = ?",
       type: "essay",
       svg: <SvgBatuBata />,
     },
     {
-      number: 11,
+      number: 13,
       title: "Jumlah Kelipatan 3",
       content: "Tentukan jumlah semua bilangan kelipatan 3 yang berada di antara 1 dan 100.",
-      type: "mixed",
-      parts: [
-        { label: "Petunjuk:", text: "Tuliskan deret: 3 + 6 + 9 + ⋯ + 99 sebagai deret aritmetika." },
-        { label: "a.", text: "Tentukan suku pertama (a), beda (b), dan banyak suku (n)." },
-        { label: "b.", math: "\\text{Hitung jumlah deret: } S_n = \\frac{n}{2}(U_1 + U_n)" },
-        { label: "c.", text: "Berapa jumlah seluruh kelipatan 3 antara 1 dan 100?" },
-      ],
+      type: "essay",
     },
     {
-      number: 12,
-      title: "Jumlah Kelipatan 2 dan 3",
-      content: "Tentukan jumlah semua bilangan yang merupakan kelipatan 2 sekaligus kelipatan 3 (yaitu kelipatan 6) yang berada di antara 1 dan 100.",
+      number: 14,
+      title: "Jumlah Kelipatan 6",
+      content: "Tentukan jumlah semua bilangan yang merupakan kelipatan 6 yang berada di antara 120 dan 300.",
       type: "mixed",
       parts: [
-        { label: "Petunjuk:", text: "Bilangan yang kelipatan 2 dan 3 sekaligus = kelipatan 6. Tuliskan: 6 + 12 + 18 + ⋯ + 96." },
         { label: "a.", text: "Tentukan suku pertama (a), beda (b), dan banyak suku (n)." },
         { label: "b.", math: "\\text{Hitung } S_n = \\frac{n}{2}(U_1 + U_n)" },
-        { label: "c.", text: "Berapa jumlah seluruh kelipatan 6 antara 1 dan 100?" },
+        { label: "c.", text: "Berapa jumlah seluruh kelipatan 6 di antara 120 dan 300?" },
       ],
     },
   ];
@@ -264,7 +265,7 @@ const PolaAritmetikaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
           </div>
