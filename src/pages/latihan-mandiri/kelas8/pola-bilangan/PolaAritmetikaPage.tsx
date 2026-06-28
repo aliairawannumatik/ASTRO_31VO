@@ -15,15 +15,10 @@ const SvgBarisanObjek = () => {
   const dy = 14;
   const groupCenters = [42, 138, 234, 330];
   const topY = 14;
+  const labelY = 80;
 
   return (
-    <svg viewBox="0 0 374 72" className="w-full max-w-md mx-auto my-3" aria-label="Ilustrasi barisan aritmetika dengan bola">
-      <defs>
-        <marker id="ao" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-          <path d="M0,0 L0,7 L7,3.5 Z" fill="#fbbf24" />
-        </marker>
-      </defs>
-
+    <svg viewBox="0 0 374 92" className="w-full max-w-md mx-auto my-3" aria-label="Ilustrasi barisan aritmetika dengan bola">
       {terms.map((count, gi) => {
         const cx0 = groupCenters[gi] - Math.floor(dotsPerRow / 2) * dx;
         return (
@@ -44,19 +39,8 @@ const SvgBarisanObjek = () => {
                 />
               );
             })}
-          </g>
-        );
-      })}
-
-      {[0, 1, 2].map((gi) => {
-        const x1 = groupCenters[gi] + 34;
-        const x2 = groupCenters[gi + 1] - 34;
-        const my = topY + dy + 6;
-        return (
-          <g key={gi}>
-            <line x1={x1} y1={my} x2={x2} y2={my} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#ao)" />
-            <text x={(x1 + x2) / 2} y={my - 5} textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold">
-              +4
+            <text x={groupCenters[gi]} y={labelY} textAnchor="middle" fill="#6ee7b7" fontSize="11" fontWeight="bold">
+              {`U${gi + 1}`}
             </text>
           </g>
         );
@@ -160,16 +144,6 @@ const PolaAritmetikaPage = () => {
     },
     {
       number: 5,
-      title: "Deret Aritmetika - Mencari Jumlah Suku",
-      content: "Dalam suatu barisan aritmetika, diketahui suku ke-4 adalah 11 dan suku ke-10 adalah 35.",
-      type: "mixed",
-      parts: [
-        { label: "a.", text: "Tentukan suku pertama (a) dan beda (b)." },
-        { label: "b.", math: "\\text{Tentukan nilai } S_{20}." },
-      ],
-    },
-    {
-      number: 6,
       title: "Barisan Aritmetika - Soal UN",
       content: "Suku ke-5 suatu barisan aritmetika adalah 17 dan suku ke-9 adalah 33.",
       type: "mixed",
@@ -180,6 +154,16 @@ const PolaAritmetikaPage = () => {
       ],
     },
     {
+      number: 6,
+      title: "Deret Aritmetika - Mencari Jumlah Suku",
+      content: "Dalam suatu barisan aritmetika, diketahui suku ke-4 adalah 11 dan suku ke-10 adalah 35.",
+      type: "mixed",
+      parts: [
+        { label: "a.", text: "Tentukan suku pertama (a) dan beda (b)." },
+        { label: "b.", math: "\\text{Tentukan nilai } S_{20}." },
+      ],
+    },
+    {
       number: 7,
       title: "Jumlah n Suku Pertama Barisan Aritmetika",
       content: "Rumus jumlah n suku pertama barisan aritmetika:",
@@ -187,7 +171,7 @@ const PolaAritmetikaPage = () => {
       parts: [
         { label: "Rumus:", math: "S_n = \\frac{n}{2}(2a + (n-1)b)" },
         { label: "", math: "\\text{atau} \\quad S_n = \\frac{n}{2}(U_1 + U_n)" },
-        { label: "Soal:", text: "Hitung jumlah 20 suku pertama dari barisan: 3, 7, 11, 15, ..." },
+        { label: "Soal:", text: "Hitung jumlah 20 suku pertama dari deret: 3 + 7 + 11 + 15 + ..." },
       ],
     },
     {
@@ -198,12 +182,31 @@ const PolaAritmetikaPage = () => {
     },
     {
       number: 9,
+      title: "Soal Kontekstual - Kursi Gedung Pertunjukan",
+      content: "Sebuah gedung pertunjukan memiliki 20 baris kursi. Baris pertama berisi 15 kursi, baris kedua 18 kursi, baris ketiga 21 kursi, dan seterusnya membentuk barisan aritmetika.\n\na. Berapa banyak kursi pada baris ke-20?\nb. Berapa total kursi di seluruh gedung pertunjukan?",
+      type: "essay",
+    },
+    {
+      number: 10,
+      title: "Soal ANBK - Deret Aritmetika Terapan",
+      content: "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp5.000, hari kedua Rp7.000, hari ketiga Rp9.000, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp192.000?",
+      type: "essay",
+    },
+    {
+      number: 11,
+      title: "Soal Kontekstual - Tumpukan Batu Bata",
+      content: "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya.\n\nJika ada 15 tumpukan batu bata (dari atas sampai bawah), tentukan banyak batu bata pada tumpukan paling bawah (U₁₅) = ?",
+      type: "essay",
+      svg: <SvgBatuBata />,
+    },
+    {
+      number: 12,
       title: "Menyisipkan Bilangan dalam Barisan Aritmetika",
       content: "Di antara bilangan 4 dan 28, disisipkan 5 bilangan sehingga membentuk barisan aritmetika.\n\na. Tentukan beda barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Berapakah jumlah semua bilangan dalam barisan itu?",
       type: "essay",
     },
     {
-      number: 10,
+      number: 13,
       title: "Soal TKA - Barisan Aritmetika",
       content: "Jumlah 10 suku pertama suatu barisan aritmetika adalah 155 dan suku ke-10 adalah 28.",
       type: "mixed",
@@ -212,25 +215,6 @@ const PolaAritmetikaPage = () => {
         { label: "b.", text: "Tentukan beda barisan tersebut." },
         { label: "c.", math: "\\text{Hitung } U_{25}." },
       ],
-    },
-    {
-      number: 11,
-      title: "Soal Kontekstual - Kursi Gedung Pertunjukan",
-      content: "Sebuah gedung pertunjukan memiliki 20 baris kursi. Baris pertama berisi 15 kursi, baris kedua 18 kursi, baris ketiga 21 kursi, dan seterusnya membentuk barisan aritmetika.\n\na. Berapa banyak kursi pada baris ke-20?\nb. Berapa total kursi di seluruh gedung pertunjukan?",
-      type: "essay",
-    },
-    {
-      number: 12,
-      title: "Soal ANBK - Deret Aritmetika Terapan",
-      content: "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp5.000, hari kedua Rp7.000, hari ketiga Rp9.000, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp192.000?",
-      type: "essay",
-    },
-    {
-      number: 13,
-      title: "Soal Kontekstual - Tumpukan Batu Bata",
-      content: "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya.\n\nJika ada 15 tumpukan batu bata (dari atas sampai bawah), tentukan banyak batu bata pada tumpukan paling bawah (U₁₅) = ?",
-      type: "essay",
-      svg: <SvgBatuBata />,
     },
     {
       number: 14,
