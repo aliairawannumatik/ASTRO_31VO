@@ -362,21 +362,22 @@ const PosisiRelatifTitikAcuanPage = () => {
     const colors = ["bg-cyan-400", "bg-green-400", "bg-yellow-400", "bg-pink-400"];
     const textColors = ["text-cyan-300", "text-green-300", "text-yellow-300", "text-pink-300"];
 
+    const darkTextColors = ["text-cyan-600", "text-green-600", "text-yellow-600", "text-pink-600"];
     return (
       <div className="flex flex-col items-center gap-2">
-        <div className="relative border border-white/20 rounded-lg overflow-hidden"
-          style={{ width: total * cellPx, height: total * cellPx, background: "rgba(15,23,42,0.85)" }}>
+        <div className="relative border border-gray-300 rounded-lg overflow-hidden"
+          style={{ width: total * cellPx, height: total * cellPx, background: "#ffffff" }}>
           {Array.from({ length: total + 1 }).map((_, i) => (
             <React.Fragment key={i}>
-              <div className="absolute" style={{ left: i * cellPx, top: 0, width: 1, height: total * cellPx, background: i === size ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.07)" }} />
-              <div className="absolute" style={{ top: i * cellPx, left: 0, height: 1, width: total * cellPx, background: i === size ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.07)" }} />
+              <div className="absolute" style={{ left: i * cellPx, top: 0, width: 1, height: total * cellPx, background: i === size ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.1)" }} />
+              <div className="absolute" style={{ top: i * cellPx, left: 0, height: 1, width: total * cellPx, background: i === size ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.1)" }} />
             </React.Fragment>
           ))}
           <div className="absolute z-20 flex items-center justify-center"
             style={{ left: toCell(acuan[0]) * cellPx - 6, top: toCell(-acuan[1]) * cellPx - 6, width: 12, height: 12 }}>
-            <div className="w-3 h-3 bg-orange-400 rotate-45 border border-white/80" />
+            <div className="w-3 h-3 bg-orange-500 rotate-45 border border-orange-800" />
           </div>
-          <span className="absolute z-20 font-mono font-bold text-orange-300"
+          <span className="absolute z-20 font-mono font-bold text-orange-700"
             style={{ fontSize: 8, left: toCell(acuan[0]) * cellPx + 7, top: toCell(-acuan[1]) * cellPx - 12, whiteSpace: "nowrap" }}>
             {t.acuanLabel}({acuan[0]},{acuan[1]})
           </span>
@@ -390,15 +391,15 @@ const PosisiRelatifTitikAcuanPage = () => {
             const len = Math.sqrt(dx * dx + dy * dy);
             const angle = Math.atan2(dy, dx) * 180 / Math.PI;
             return (
-              <div key={i} className="absolute z-10 origin-left opacity-50"
-                style={{ left: ax, top: ay, width: len, height: 1, background: ["#22d3ee", "#4ade80", "#facc15", "#f472b6"][i % 4], transform: `rotate(${angle}deg)` }} />
+              <div key={i} className="absolute z-10 origin-left opacity-70"
+                style={{ left: ax, top: ay, width: len, height: 2, background: ["#0891b2", "#16a34a", "#ca8a04", "#db2777"][i % 4], transform: `rotate(${angle}deg)` }} />
             );
           })}
           {titik.map(([tx, ty], i) => (
             <div key={i}>
-              <div className={`absolute rounded-full ${colors[i % 4]} border-2 border-white/80 z-20`}
+              <div className={`absolute rounded-full ${colors[i % 4]} border-2 border-white z-20`}
                 style={{ width: 8, height: 8, left: toCell(tx) * cellPx - 4, top: toCell(-ty) * cellPx - 4 }} />
-              <span className={`absolute font-mono font-bold z-20 ${textColors[i % 4]}`}
+              <span className={`absolute font-mono font-bold z-20 ${darkTextColors[i % 4]}`}
                 style={{ fontSize: 8, left: toCell(tx) * cellPx + 5, top: toCell(-ty) * cellPx - 10, whiteSpace: "nowrap" }}>
                 {label[i]}
               </span>
@@ -406,11 +407,11 @@ const PosisiRelatifTitikAcuanPage = () => {
           ))}
         </div>
         <div className="flex gap-2 flex-wrap justify-center">
-          <span className="text-orange-300 text-xs font-mono flex items-center gap-1">
-            <span className="inline-block w-2 h-2 bg-orange-400 rotate-45" />{t.acuanLabel}
+          <span className="text-orange-600 text-xs font-mono flex items-center gap-1">
+            <span className="inline-block w-2 h-2 bg-orange-500 rotate-45" />{t.acuanLabel}
           </span>
           {titik.map((_, i) => (
-            <span key={i} className={`text-xs font-mono flex items-center gap-1 ${textColors[i % 4]}`}>
+            <span key={i} className={`text-xs font-mono flex items-center gap-1 ${darkTextColors[i % 4]}`}>
               <span className={`inline-block w-2 h-2 rounded-full ${colors[i % 4]}`} />{label[i]}
             </span>
           ))}
