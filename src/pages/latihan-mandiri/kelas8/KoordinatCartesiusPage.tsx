@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { MapPin, Ruler, Navigation, Crosshair, ChevronRight } from "lucide-react";
+import { MapPin, Ruler, Crosshair, ChevronRight } from "lucide-react";
 
 const subtopics = [
   {
@@ -20,9 +20,9 @@ const subtopics = [
     desc: "Koordinat titik, kuadran, sumbu, pencerminan, translasi",
   },
   {
-    label: "POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN",
+    label: "POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN DAN TERHADAP SUATU GARIS",
     path: "/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan",
-    soal: 14,
+    soal: 16,
     icon: Crosshair,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
@@ -30,12 +30,12 @@ const subtopics = [
     iconBg: "bg-violet-500/20",
     iconColor: "text-violet-400",
     leftBar: "from-violet-400 to-purple-500",
-    desc: "Posisi relatif titik, selisih koordinat, titik acuan sembarang",
+    desc: "Posisi relatif terhadap titik acuan, sumbu, dan persamaan garis",
   },
   {
     label: "JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS",
     path: "/latihan-mandiri/kelas-8/koordinat-cartesius/jarak-titik-garis",
-    soal: 19,
+    soal: 14,
     icon: Ruler,
     gradient: "from-teal-900/40 to-cyan-900/30",
     border: "border-teal-500/30",
@@ -44,19 +44,6 @@ const subtopics = [
     iconColor: "text-teal-400",
     leftBar: "from-teal-400 to-cyan-500",
     desc: "Rumus jarak, jarak ke sumbu & garis, keliling, luas",
-  },
-  {
-    label: "POSISI RELATIF SUATU TITIK TERHADAP SUATU GARIS",
-    path: "/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif",
-    soal: 10,
-    icon: Navigation,
-    gradient: "from-rose-900/40 to-pink-900/30",
-    border: "border-rose-500/30",
-    badge: "bg-rose-500/20 text-rose-300 border-rose-400/40",
-    iconBg: "bg-rose-500/20",
-    iconColor: "text-rose-400",
-    leftBar: "from-rose-400 to-pink-500",
-    desc: "Di atas/bawah garis, di kiri/kanan, daerah irisan syarat",
   },
 ];
 
@@ -80,7 +67,7 @@ const KoordinatCartesiusPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">55 {t('practice.suffixSoalTotal')} · Dilengkapi Diagram Koordinat</span>
+            <span className="text-white/70 text-xs font-body">42 {t('practice.suffixSoalTotal')} · Dilengkapi Diagram Koordinat</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>

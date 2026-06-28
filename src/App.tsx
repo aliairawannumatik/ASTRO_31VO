@@ -383,7 +383,6 @@ const KoordinatCartesiusK8Page = lazy(() => import("./pages/latihan-mandiri/kela
 const UnsurUnsurCartesiusK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/koordinat-cartesius/UnsurUnsurPage"));
 const PosisiRelatifTitikAcuanK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage"));
 const JarakTitikGarisK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/koordinat-cartesius/JarakTitikGarisPage"));
-const PosisiRelatifGarisK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifPage"));
 const RelasiFungsiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/RelasiFungsiPage"));
 const PengertianRelasiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/relasi-fungsi/PengertianRelasiPage"));
 const PengertianFungsiK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/relasi-fungsi/PengertianFungsiPage"));
@@ -1286,7 +1285,6 @@ const AppInner = () => {
           <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" element={<PosisiRelatifTitikAcuanK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisK8Page />} />
-          <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif" element={<PosisiRelatifGarisK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiK8Page />} />
