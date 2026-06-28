@@ -283,7 +283,7 @@ const UnsurUnsurPage = () => {
                     {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
                     {q.diagram && (
                       <div className="mb-3 flex justify-center">
-                        <CoordPlane {...q.diagram} />
+                        <CoordPlane {...q.diagram} lightBg={true} />
                       </div>
                     )}
                     {q.parts && (

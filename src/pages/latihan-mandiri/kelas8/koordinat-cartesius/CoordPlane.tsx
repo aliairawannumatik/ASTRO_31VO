@@ -20,6 +20,7 @@ export type CoordPlaneProps = {
   shades?: ShadeRegion[];
   quadrantLabels?: boolean;
   title?: string;
+  lightBg?: boolean;
 };
 
 const CoordPlane = ({
@@ -31,6 +32,7 @@ const CoordPlane = ({
   shades = [],
   quadrantLabels = false,
   title,
+  lightBg = false,
 }: CoordPlaneProps) => {
   const pad = 18;
   const inner = size - 2 * pad;
@@ -41,11 +43,23 @@ const CoordPlane = ({
   const py = (y: number) => cy - y * sc;
   const ticks = Array.from({ length: 2 * range - 1 }, (_, i) => i - range + 1).filter(n => n !== 0);
 
+  // Theme colours
+  const bg          = lightBg ? '#ffffff'               : 'rgba(2,8,23,0.95)';
+  const gridLine    = lightBg ? 'rgba(0,0,0,0.09)'      : 'rgba(148,163,184,0.07)';
+  const axisStroke  = lightBg ? 'rgba(30,30,30,0.75)'   : 'rgba(148,163,184,0.55)';
+  const axisLabel   = lightBg ? 'rgba(30,30,30,0.85)'   : 'rgba(148,163,184,0.8)';
+  const originLabel = lightBg ? 'rgba(30,30,30,0.5)'    : 'rgba(148,163,184,0.45)';
+  const tickStroke  = lightBg ? 'rgba(30,30,30,0.5)'    : 'rgba(148,163,184,0.4)';
+  const tickNum     = lightBg ? 'rgba(30,30,30,0.6)'    : 'rgba(148,163,184,0.45)';
+  const ptStroke    = lightBg ? 'rgba(0,0,0,0.25)'      : 'rgba(255,255,255,0.8)';
+  const extraFill   = lightBg ? 'rgba(0,0,0,0.6)'       : 'rgba(255,255,255,0.5)';
+  const titleColor  = lightBg ? 'text-black/50'         : 'text-white/50';
+
   return (
     <div className="flex flex-col items-center">
-      {title && <p className="text-white/50 text-[10px] text-center mb-1 font-body">{title}</p>}
+      {title && <p className={`${titleColor} text-[10px] text-center mb-1 font-body`}>{title}</p>}
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="rounded-xl overflow-hidden">
-        <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+        <rect width={size} height={size} fill={bg} rx="12" />
 
         {/* Shaded regions */}
         {shades.map((s, i) => (
@@ -61,41 +75,41 @@ const CoordPlane = ({
         {/* Grid lines */}
         {ticks.map(n => (
           <g key={n}>
-            <line x1={px(n)} y1={pad} x2={px(n)} y2={size - pad} stroke="rgba(148,163,184,0.07)" strokeWidth="0.5" />
-            <line x1={pad} y1={py(n)} x2={size - pad} y2={py(n)} stroke="rgba(148,163,184,0.07)" strokeWidth="0.5" />
+            <line x1={px(n)} y1={pad} x2={px(n)} y2={size - pad} stroke={gridLine} strokeWidth="0.5" />
+            <line x1={pad} y1={py(n)} x2={size - pad} y2={py(n)} stroke={gridLine} strokeWidth="0.5" />
           </g>
         ))}
 
         {/* Axes */}
-        <line x1={pad} y1={cy} x2={size - pad + 4} y2={cy} stroke="rgba(148,163,184,0.55)" strokeWidth="1.5" />
-        <line x1={cx} y1={size - pad + 4} x2={cx} y2={pad - 4} stroke="rgba(148,163,184,0.55)" strokeWidth="1.5" />
+        <line x1={pad} y1={cy} x2={size - pad + 4} y2={cy} stroke={axisStroke} strokeWidth="1.5" />
+        <line x1={cx} y1={size - pad + 4} x2={cx} y2={pad - 4} stroke={axisStroke} strokeWidth="1.5" />
 
         {/* Axis arrows */}
-        <polygon points={`${size - pad + 5},${cy} ${size - pad - 3},${cy - 4} ${size - pad - 3},${cy + 4}`} fill="rgba(148,163,184,0.55)" />
-        <polygon points={`${cx},${pad - 5} ${cx - 4},${pad + 3} ${cx + 4},${pad + 3}`} fill="rgba(148,163,184,0.55)" />
+        <polygon points={`${size - pad + 5},${cy} ${size - pad - 3},${cy - 4} ${size - pad - 3},${cy + 4}`} fill={axisStroke} />
+        <polygon points={`${cx},${pad - 5} ${cx - 4},${pad + 3} ${cx + 4},${pad + 3}`} fill={axisStroke} />
 
         {/* Axis labels */}
-        <text x={size - pad + 8} y={cy + 4} fill="rgba(148,163,184,0.8)" fontSize="12" textAnchor="start" fontStyle="italic">x</text>
-        <text x={cx + 6} y={pad - 6} fill="rgba(148,163,184,0.8)" fontSize="12" fontStyle="italic">y</text>
-        <text x={cx + 5} y={cy + 12} fill="rgba(148,163,184,0.45)" fontSize="9">O</text>
+        <text x={size - pad + 8} y={cy + 4} fill={axisLabel} fontSize="12" textAnchor="start" fontStyle="italic">x</text>
+        <text x={cx + 6} y={pad - 6} fill={axisLabel} fontSize="12" fontStyle="italic">y</text>
+        <text x={cx + 5} y={cy + 12} fill={originLabel} fontSize="9">O</text>
 
         {/* Tick marks & numbers */}
         {ticks.map(n => (
           <g key={n}>
-            <line x1={px(n)} y1={cy - 3} x2={px(n)} y2={cy + 3} stroke="rgba(148,163,184,0.4)" strokeWidth="1" />
-            <line x1={cx - 3} y1={py(n)} x2={cx + 3} y2={py(n)} stroke="rgba(148,163,184,0.4)" strokeWidth="1" />
-            <text x={px(n)} y={cy + 13} fill="rgba(148,163,184,0.45)" fontSize="8" textAnchor="middle">{n}</text>
-            <text x={cx - 5} y={py(n) + 3} fill="rgba(148,163,184,0.45)" fontSize="8" textAnchor="end">{n}</text>
+            <line x1={px(n)} y1={cy - 3} x2={px(n)} y2={cy + 3} stroke={tickStroke} strokeWidth="1" />
+            <line x1={cx - 3} y1={py(n)} x2={cx + 3} y2={py(n)} stroke={tickStroke} strokeWidth="1" />
+            <text x={px(n)} y={cy + 13} fill={tickNum} fontSize="8" textAnchor="middle">{n}</text>
+            <text x={cx - 5} y={py(n) + 3} fill={tickNum} fontSize="8" textAnchor="end">{n}</text>
           </g>
         ))}
 
         {/* Quadrant labels */}
         {quadrantLabels && (
           <>
-            <text x={cx + inner * 0.3} y={cy - inner * 0.3} fill="rgba(250,204,21,0.3)" fontSize="18" fontWeight="bold" textAnchor="middle">I</text>
-            <text x={cx - inner * 0.3} y={cy - inner * 0.3} fill="rgba(167,139,250,0.3)" fontSize="18" fontWeight="bold" textAnchor="middle">II</text>
-            <text x={cx - inner * 0.3} y={cy + inner * 0.35} fill="rgba(52,211,153,0.3)" fontSize="18" fontWeight="bold" textAnchor="middle">III</text>
-            <text x={cx + inner * 0.3} y={cy + inner * 0.35} fill="rgba(251,113,133,0.3)" fontSize="18" fontWeight="bold" textAnchor="middle">IV</text>
+            <text x={cx + inner * 0.3} y={cy - inner * 0.3} fill={lightBg ? 'rgba(202,138,4,0.35)' : 'rgba(250,204,21,0.3)'} fontSize="18" fontWeight="bold" textAnchor="middle">I</text>
+            <text x={cx - inner * 0.3} y={cy - inner * 0.3} fill={lightBg ? 'rgba(109,40,217,0.3)' : 'rgba(167,139,250,0.3)'} fontSize="18" fontWeight="bold" textAnchor="middle">II</text>
+            <text x={cx - inner * 0.3} y={cy + inner * 0.35} fill={lightBg ? 'rgba(4,120,87,0.3)' : 'rgba(52,211,153,0.3)'} fontSize="18" fontWeight="bold" textAnchor="middle">III</text>
+            <text x={cx + inner * 0.3} y={cy + inner * 0.35} fill={lightBg ? 'rgba(190,18,60,0.3)' : 'rgba(251,113,133,0.3)'} fontSize="18" fontWeight="bold" textAnchor="middle">IV</text>
           </>
         )}
 
@@ -125,7 +139,7 @@ const CoordPlane = ({
             : py(p.y) - 7;
           return (
             <g key={i}>
-              <circle cx={px(p.x)} cy={py(p.y)} r={4.5} fill={p.color || '#f472b6'} stroke="rgba(255,255,255,0.8)" strokeWidth="1.2" />
+              <circle cx={px(p.x)} cy={py(p.y)} r={4.5} fill={p.color || '#f472b6'} stroke={ptStroke} strokeWidth="1.2" />
               {p.label && (
                 <text x={lx} y={ly} fill={p.color || '#f472b6'} fontSize="11" fontWeight="bold"
                   textAnchor={p.labelPos?.includes('l') ? 'end' : 'start'}>{p.label}</text>
@@ -136,7 +150,7 @@ const CoordPlane = ({
 
         {/* Extra text elements */}
         {extraTexts.map((t, i) => (
-          <text key={i} x={px(t.x)} y={py(t.y)} fill={t.color || 'rgba(255,255,255,0.5)'}
+          <text key={i} x={px(t.x)} y={py(t.y)} fill={t.color || extraFill}
             fontSize={t.size || 9} textAnchor="middle">{t.text}</text>
         ))}
       </svg>
