@@ -249,6 +249,30 @@ const questions: Q[] = [
     ],
   }),
 
+  Qn(16, "Titik Pusat Lingkaran dari Diameter", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 8,
+      pts: [
+        { x: -3, y: -1, label: "A(−3,−1)", color: "#f472b6", labelPos: "bl" },
+        { x: 5, y: 5, label: "B(5,5)", color: "#60a5fa", labelPos: "tr" },
+        { x: 1, y: 2, label: "P", color: "#facc15", labelPos: "br" },
+      ],
+      segs: [
+        { x1: -3, y1: -1, x2: 5, y2: 5, color: "rgba(255,255,255,0.35)", label: "d" },
+      ],
+      circles: [
+        { cx: 1, cy: 2, r: 5, color: "#34d399" },
+      ],
+    },
+    parts: [
+      { label: "Diket:", text: "Titik A(−3, −1) dan B(5, 5) adalah ujung-ujung diameter sebuah lingkaran." },
+      { label: "a.", text: "Tentukan koordinat titik pusat P (titik tengah AB)." },
+      { label: "b.", text: "Hitung jari-jari lingkaran tersebut (jarak dari P ke A)." },
+      { label: "c.", text: "Apakah titik C(4, −2) berada di dalam, di luar, atau tepat pada lingkaran? Jelaskan!" },
+    ],
+  }),
+
   Qn(15, "Titik Tengah di Antara Dua Titik", {
     type: "mixed",
     diagram: {
@@ -256,7 +280,7 @@ const questions: Q[] = [
       pts: [
         { x: -4, y: 2, label: "A(−4,2)", color: "#f472b6", labelPos: "tl" },
         { x: 6, y: 8, label: "B(6,8)", color: "#60a5fa", labelPos: "tr" },
-        { x: 1, y: 5, label: "M(1,5)", color: "#facc15", labelPos: "br" },
+        { x: 1, y: 5, label: "M", color: "#facc15", labelPos: "br" },
       ],
       segs: [
         { x1: -4, y1: 2, x2: 6, y2: 8, color: "rgba(255,255,255,0.25)", dashed: true },
@@ -292,7 +316,7 @@ const JarakTitikGarisPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Kartesius · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
+            <span className="text-teal-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>

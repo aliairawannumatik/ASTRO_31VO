@@ -10,10 +10,12 @@ type Seg = {
 };
 type ExtraText = { x: number; y: number; text: string; color?: string; size?: number };
 type ShadeRegion = { type: 'rect'; x1: number; y1: number; x2: number; y2: number; color?: string };
+type Circle = { cx: number; cy: number; r: number; color?: string; dashed?: boolean };
 
 export type CoordPlaneProps = {
   pts?: Pt[];
   segs?: Seg[];
+  circles?: Circle[];
   range?: number;
   size?: number;
   extraTexts?: ExtraText[];
@@ -26,6 +28,7 @@ export type CoordPlaneProps = {
 const CoordPlane = ({
   pts = [],
   segs = [],
+  circles = [],
   range = 6,
   size = 240,
   extraTexts = [],
@@ -112,6 +115,16 @@ const CoordPlane = ({
             <text x={cx + inner * 0.3} y={cy + inner * 0.35} fill={lightBg ? 'rgba(190,18,60,0.3)' : 'rgba(251,113,133,0.3)'} fontSize="18" fontWeight="bold" textAnchor="middle">IV</text>
           </>
         )}
+
+        {/* Circles */}
+        {circles.map((c, i) => (
+          <circle key={i}
+            cx={px(c.cx)} cy={py(c.cy)} r={c.r * sc}
+            fill="none"
+            stroke={c.color || '#60a5fa'} strokeWidth="1.8"
+            strokeDasharray={c.dashed ? "6,4" : undefined}
+          />
+        ))}
 
         {/* Segments */}
         {segs.map((s, i) => {
