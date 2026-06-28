@@ -95,70 +95,6 @@ const SvgQ3 = () => {
   );
 };
 
-const SvgQ4 = () => {
-  const weeks = [10, 13, 16, 19];
-  const barW = 38, barGap = 18;
-  const maxVal = 22;
-  const chartH = 72, padT = 10, padB = 34, padL = 36, padR = 8;
-  const svgW = padL + weeks.length * (barW + barGap) - barGap + padR;
-  const svgH = chartH + padT + padB;
-  const scale = chartH / maxVal;
-  return (
-    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
-      <line x1={padL} y1={padT} x2={padL} y2={padT + chartH} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-      <line x1={padL} y1={padT + chartH} x2={svgW - padR} y2={padT + chartH} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-      <text x={11} y={padT + chartH / 2} textAnchor="middle" fill="rgba(255,255,255,0.45)"
-        fontSize="7.5" fontFamily="sans-serif"
-        transform={`rotate(-90, 11, ${padT + chartH / 2})`}>Tinggi (cm)</text>
-      {[5, 10, 15, 20].map(v => {
-        const y = padT + chartH - v * scale;
-        return (
-          <g key={v}>
-            <line x1={padL - 3} y1={y} x2={padL} y2={y} stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-            <text x={padL - 5} y={y + 1} textAnchor="end" dominantBaseline="middle"
-              fill="rgba(255,255,255,0.35)" fontSize="7" fontFamily="monospace">{v}</text>
-          </g>
-        );
-      })}
-      {weeks.map((h, i) => {
-        const bx = padL + i * (barW + barGap);
-        const bh = h * scale;
-        const by = padT + chartH - bh;
-        const alpha = 0.22 + i * 0.06;
-        return (
-          <g key={i}>
-            <rect x={bx} y={by} width={barW} height={bh} rx={4}
-              fill={`rgba(34,211,238,${alpha})`} stroke="rgba(34,211,238,0.75)" strokeWidth="1.5" />
-            <text x={bx + barW / 2} y={by - 3} textAnchor="middle"
-              fill="#67e8f9" fontSize="9" fontFamily="monospace">{h} cm</text>
-            <text x={bx + barW / 2} y={padT + chartH + 12} textAnchor="middle"
-              fill="rgba(255,255,255,0.55)" fontSize="8.5" fontFamily="sans-serif">Mgg {i + 1}</text>
-          </g>
-        );
-      })}
-      {weeks.map((h, i) => {
-        if (i === 0) return null;
-        const x1 = padL + (i - 1) * (barW + barGap) + barW / 2;
-        const y1 = padT + chartH - weeks[i - 1] * scale;
-        const x2 = padL + i * (barW + barGap) + barW / 2;
-        const y2 = padT + chartH - h * scale;
-        const mx = (x1 + x2) / 2;
-        const my = (y1 + y2) / 2 - 5;
-        return (
-          <g key={i}>
-            <line x1={x1} y1={y1} x2={x2} y2={y2}
-              stroke="rgba(251,191,36,0.65)" strokeWidth="1.5" strokeDasharray="4 2" />
-            <text x={mx} y={my} textAnchor="middle" fill="#fbbf24" fontSize="8" fontFamily="monospace">+3</text>
-          </g>
-        );
-      })}
-      <text x={svgW / 2} y={svgH - 2} textAnchor="middle"
-        fill="rgba(255,255,255,0.30)" fontSize="8" fontFamily="sans-serif">
-        Pola aritmetika: beda = +3 cm/minggu
-      </text>
-    </svg>
-  );
-};
 
 const SvgQ7 = () => {
   const configs = [
@@ -438,19 +374,12 @@ const questions: QuestionItem[] = [
   },
   {
     number: 4,
-    title: "Soal Kontekstual - Pertumbuhan Tanaman",
-    content: "Sebuah tanaman bambu tumbuh mengikuti pola:\nMinggu ke-1: 10 cm | Minggu ke-2: 13 cm | Minggu ke-3: 16 cm | Minggu ke-4: 19 cm\n\na. Identifikasi pola pertumbuhan bambu tersebut.\nb. Berapa tinggi bambu pada minggu ke-10?\nc. Pada minggu ke berapa bambu mencapai tinggi 43 cm?",
-    type: "essay",
-    svgNode: <SvgQ4 />,
-  },
-  {
-    number: 5,
     title: "Pola Barisan Fibonacci",
     content: "Barisan Fibonacci: 1, 1, 2, 3, 5, 8, 13, 21, ...\n\na. Jelaskan aturan pembentukan barisan Fibonacci.\nb. Tuliskan 4 suku berikutnya dari barisan tersebut.\nc. Berapa nilai suku ke-14 dari barisan Fibonacci?",
     type: "essay",
   },
   {
-    number: 6,
+    number: 5,
     title: "Soal ANBK - Evaluasi Pernyataan",
     content: "Perhatikan barisan: 5, 15, 45, 135, ...\nTentukan pernyataan yang BENAR (B) atau SALAH (S) dan berikan alasannya:",
     type: "mixed",
@@ -462,7 +391,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 7,
+    number: 6,
     title: "Bilangan Segitiga",
     content: "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
     type: "mixed",
@@ -475,7 +404,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 8,
+    number: 7,
     title: "Bilangan Persegi",
     content: "Perhatikan bilangan persegi berikut:",
     type: "mixed",
@@ -488,7 +417,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 9,
+    number: 8,
     title: "Bilangan Persegi Panjang",
     content: "Bilangan persegi panjang dibentuk dari susunan titik berbentuk persegi panjang:",
     type: "mixed",
@@ -501,13 +430,13 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 10,
+    number: 9,
     title: "Segitiga Pascal - Pola Baris",
     content: "Perhatikan Segitiga Pascal berikut:\nBaris ke-0: 1\nBaris ke-1: 1  1\nBaris ke-2: 1  2  1\nBaris ke-3: 1  3  3  1\nBaris ke-4: 1  4  6  4  1\n\na. Tuliskan isi baris ke-5 dan ke-6 dari Segitiga Pascal.\nb. Berapa jumlah bilangan pada baris ke-7?\nc. Berapa banyak bilangan yang ada pada baris ke-n?",
     type: "essay",
   },
   {
-    number: 11,
+    number: 10,
     title: "Pola Jumlah Baris Segitiga Pascal",
     content: "Jumlah bilangan pada setiap baris Segitiga Pascal membentuk pola tersendiri:",
     type: "mixed",
@@ -521,7 +450,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 12,
+    number: 11,
     title: "Hubungan Bilangan Segitiga dan Persegi",
     content: "Perhatikan pola hubungan berikut:",
     type: "mixed",
@@ -534,13 +463,13 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 13,
+    number: 12,
     title: "Pola Bilangan Prima",
     content: "Perhatikan barisan bilangan prima: 2, 3, 5, 7, 11, 13, 17, 19, 23, ...\n\na. Tentukan 5 bilangan prima berikutnya setelah 23.\nb. Apakah 91 termasuk bilangan prima? Jelaskan dengan cara faktorisasi!\nc. Jelaskan mengapa 1 bukan termasuk bilangan prima.",
     type: "essay",
   },
   {
-    number: 14,
+    number: 13,
     title: "Pola Bilangan Kubik",
     content: "Bilangan kubik: 1, 8, 27, 64, 125, ...",
     type: "mixed",
@@ -552,13 +481,13 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 15,
+    number: 14,
     title: "Segitiga Pascal - Koefisien Binomial",
     content: "Dalam Segitiga Pascal, baris ke-n merupakan koefisien dari penjabaran (a + b)ⁿ.\n\na. Jabarkan (a + b)⁴ menggunakan Segitiga Pascal.\nb. Jabarkan (a + b)⁵ menggunakan Segitiga Pascal.\nc. Tentukan suku ke-3 dari penjabaran (x + y)⁶.",
     type: "essay",
   },
   {
-    number: 16,
+    number: 15,
     title: "Pola Bilangan Segitiga Bertingkat",
     content: "Jumlah n bilangan asli pertama membentuk bilangan segitiga.",
     type: "mixed",
@@ -570,14 +499,14 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 17,
+    number: 16,
     title: "Soal TKA - Pola Kombinasi",
     content: "Perhatikan barisan: 1, 2, 4, 7, 11, 16, 22, ...\n\na. Tentukan beda antara suku-suku berurutan.\nb. Identifikasi pola beda tersebut.\nc. Tentukan dua suku berikutnya.\nd. Tuliskan rumus umum suku ke-n.",
     type: "essay",
     svgNode: <SvgQ17 />,
   },
   {
-    number: 18,
+    number: 17,
     title: "Pola Bilangan Ganjil dan Persegi",
     content: "Perhatikan hubungan antara bilangan ganjil dan bilangan persegi:",
     type: "mixed",
@@ -591,7 +520,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 19,
+    number: 18,
     title: "Soal ANBK - Pola Bilangan Khusus Terpadu",
     content: "Di bawah ini terdapat empat barisan bilangan. Pasangkan setiap barisan dengan jenis polanya yang tepat!",
     type: "mixed",

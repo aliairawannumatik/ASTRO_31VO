@@ -9,7 +9,7 @@ const subtopics = [
   {
     label: "PENGERTIAN POLA, BARISAN BILANGAN DAN POLA-POLA KHUSUS",
     path: "/latihan-mandiri/kelas-8/pola-bilangan/pengertian-pola",
-    soal: 10,
+    soal: 8,
     icon: Sigma,
     color: "cyan",
     gradient: "from-cyan-900/40 via-purple-900/20 to-violet-900/30",
