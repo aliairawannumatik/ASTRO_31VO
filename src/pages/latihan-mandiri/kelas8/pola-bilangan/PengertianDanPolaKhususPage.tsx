@@ -543,6 +543,20 @@ const questions: QuestionItem[] = [
       { label: "c.", math: "U_n = 2n^2 - 1" },
     ],
   },
+  {
+    number: 20,
+    title: "Rumus Suku ke-n dan Suku ke-100",
+    content: "Tentukan rumus suku ke-n dan hitunglah suku ke-100 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
+    type: "mixed",
+    parts: [
+      { label: "a.", math: "1,\\ 4,\\ 9,\\ 16,\\ 25,\\ \\ldots" },
+      { label: "b.", math: "0,\\ 3,\\ 8,\\ 15,\\ 24,\\ \\ldots" },
+      { label: "c.", math: "1,\\ 7,\\ 17,\\ 31,\\ 49,\\ \\ldots" },
+      { label: "d.", math: "1,\\ 6,\\ 15,\\ 28,\\ 45,\\ \\ldots" },
+      { label: "e.", math: "2,\\ 5,\\ 9,\\ 14,\\ 20,\\ \\ldots" },
+      { label: "f.", math: "3,\\ 9,\\ 18,\\ 30,\\ 45,\\ \\ldots" },
+    ],
+  },
 ];
 
 // ─── Card Component ────────────────────────────────────────────────────────────
