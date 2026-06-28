@@ -135,6 +135,46 @@ const SvgQ3 = () => {
   );
 };
 
+const SvgQ5Lingkaran = () => {
+  const r = 7, sp = 18;
+  const groups = [
+    { n: 1, label: "Pola ke-1" },
+    { n: 2, label: "Pola ke-2" },
+    { n: 3, label: "Pola ke-3" },
+  ];
+  const groupW = 80, svgH = 90;
+  const svgW = groups.length * groupW + 10;
+  return (
+    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
+      {groups.map(({ n, label }, gi) => {
+        const cx = 5 + gi * groupW + groupW / 2;
+        const cy = 36;
+        const circles = [];
+        for (let row = 0; row < n; row++) {
+          for (let col = 0; col < n; col++) {
+            circles.push(
+              <circle key={`${row}-${col}`}
+                cx={cx - (n - 1) * sp / 2 + col * sp}
+                cy={cy - (n - 1) * sp / 2 + row * sp}
+                r={r}
+                fill="rgba(56,189,248,0.25)"
+                stroke="rgba(56,189,248,0.9)"
+                strokeWidth="1.5" />
+            );
+          }
+        }
+        return (
+          <g key={gi}>
+            {circles}
+            <text x={cx} y={svgH - 8} textAnchor="middle"
+              fill="#7dd3fc" fontSize="9" fontFamily="sans-serif">{label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 const SvgQ7 = () => {
   const configs = [{ n: 1 }, { n: 2 }, { n: 3 }, { n: 4 }];
   const groupW = 80, svgH = 80, r = 4, sp = 12;
@@ -283,12 +323,11 @@ const questions: QuestionItem[] = [
     title: "Pola Gambar Lingkaran",
     content: "Perhatikan pola berikut.",
     type: "mixed",
-    imgSrc: "/pola-lingkaran-q5.png",
+    svgNode: <SvgQ5Lingkaran />,
     parts: [
       { label: "a.", text: "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan." },
       { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
       { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
-      { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
     ],
   },
   {
