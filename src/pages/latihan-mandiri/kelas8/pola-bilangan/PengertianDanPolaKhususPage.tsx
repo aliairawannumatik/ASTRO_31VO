@@ -344,11 +344,11 @@ const questions: QuestionItem[] = [
     content: "Tentukan rumus suku ke-n dan hitunglah suku ke-100 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
     type: "mixed",
     parts: [
-      { label: "b.", math: "0,\\ 3,\\ 8,\\ 15,\\ 24,\\ \\ldots" },
-      { label: "c.", math: "1,\\ 7,\\ 17,\\ 31,\\ 49,\\ \\ldots" },
-      { label: "d.", math: "1,\\ 6,\\ 15,\\ 28,\\ 45,\\ \\ldots" },
-      { label: "e.", math: "2,\\ 5,\\ 9,\\ 14,\\ 20,\\ \\ldots" },
-      { label: "f.", math: "3,\\ 9,\\ 18,\\ 30,\\ 45,\\ \\ldots" },
+      { label: "a.", math: "0,\\ 3,\\ 8,\\ 15,\\ 24,\\ \\ldots" },
+      { label: "b.", math: "1,\\ 7,\\ 17,\\ 31,\\ 49,\\ \\ldots" },
+      { label: "c.", math: "1,\\ 6,\\ 15,\\ 28,\\ 45,\\ \\ldots" },
+      { label: "d.", math: "2,\\ 5,\\ 9,\\ 14,\\ 20,\\ \\ldots" },
+      { label: "e.", math: "3,\\ 9,\\ 18,\\ 30,\\ 45,\\ \\ldots" },
     ],
   },
 ];
