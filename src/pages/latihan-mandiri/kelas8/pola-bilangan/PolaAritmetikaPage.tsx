@@ -134,6 +134,52 @@ const PolaAritmetikaPage = () => {
         { label: "d.", text: "Suku ke berapa yang nilainya 48?" },
       ],
     },
+    {
+      number: 14,
+      title: "Diketahui Dua Suku — Cari Suku Lain & Jumlah",
+      content: "Dalam suatu barisan aritmetika, diketahui:",
+      type: "mixed",
+      parts: [
+        { label: "Diket:", math: "U_4 = 22 \\quad \\text{dan} \\quad U_9 = 47" },
+        { label: "a.", text: "Tentukan nilai beda (b) dan suku pertama (a) barisan tersebut." },
+        { label: "b.", math: "\\text{Tentukan nilai } U_{20}." },
+        { label: "c.", math: "\\text{Hitung } S_{15} \\text{ (jumlah 15 suku pertama).}" },
+      ],
+    },
+    {
+      number: 15,
+      title: "Diketahui Dua Suku — Cari Suku Lain & Jumlah",
+      content: "Dalam suatu barisan aritmetika, diketahui:",
+      type: "mixed",
+      parts: [
+        { label: "Diket:", math: "U_2 = 9 \\quad \\text{dan} \\quad U_7 = 29" },
+        { label: "a.", text: "Tentukan nilai beda (b) dan suku pertama (a) barisan tersebut." },
+        { label: "b.", math: "\\text{Tentukan nilai } U_{12}." },
+        { label: "c.", math: "\\text{Hitung } S_{20} \\text{ (jumlah 20 suku pertama).}" },
+      ],
+    },
+    {
+      number: 16,
+      title: "Soal Kontekstual — Produksi Kue",
+      content: "Sebuah toko kue mencatat produksinya setiap hari. Pada hari ke-3 diproduksi 24 kue, dan pada hari ke-8 diproduksi 54 kue. Produksi setiap harinya bertambah secara konstan membentuk barisan aritmetika.",
+      type: "mixed",
+      parts: [
+        { label: "a.", text: "Tentukan beda (b) dan jumlah produksi pada hari pertama (a)." },
+        { label: "b.", math: "\\text{Berapa kue yang diproduksi pada hari ke-15?}" },
+        { label: "c.", math: "\\text{Berapa total kue yang diproduksi selama 20 hari pertama?}" },
+      ],
+    },
+    {
+      number: 17,
+      title: "Soal Kontekstual — Pemasangan Ubin",
+      content: "Seorang tukang memasang ubin setiap hari. Pada hari ke-2 ia memasang 18 ubin, dan pada hari ke-6 ia memasang 38 ubin. Jumlah ubin yang dipasang setiap hari bertambah secara konstan membentuk barisan aritmetika.",
+      type: "mixed",
+      parts: [
+        { label: "a.", text: "Tentukan beda (b) dan banyak ubin yang dipasang pada hari pertama (a)." },
+        { label: "b.", math: "\\text{Berapa ubin yang dipasang pada hari ke-10?}" },
+        { label: "c.", math: "\\text{Berapa total ubin yang telah dipasang selama 15 hari?}" },
+      ],
+    },
   ];
 
   return (
@@ -151,7 +197,7 @@ const PolaAritmetikaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 13 {t('practice.suffixSoal')}</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 17 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
           </div>
