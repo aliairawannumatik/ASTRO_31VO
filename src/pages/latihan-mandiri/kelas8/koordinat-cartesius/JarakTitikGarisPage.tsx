@@ -163,28 +163,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(8, "Keliling Segitiga dari Koordinat", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 0, y: 0, label: "A(0,0)", color: "#f472b6", labelPos: "bl" },
-        { x: 4, y: 0, label: "B(4,0)", color: "#fb923c", labelPos: "br" },
-        { x: 4, y: 3, label: "C(4,3)", color: "#34d399", labelPos: "tr" },
-      ],
-      segs: [
-        { x1: 0, y1: 0, x2: 4, y2: 0, color: "#60a5fa", label: "AB" },
-        { x1: 4, y1: 0, x2: 4, y2: 3, color: "#60a5fa", label: "BC" },
-        { x1: 4, y1: 3, x2: 0, y2: 0, color: "#60a5fa", label: "AC" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung panjang AB, BC, dan AC." },
-      { label: "b.", text: "Hitung keliling segitiga ABC." },
-      { label: "c.", text: "Apakah segitiga ABC siku-siku? Jelaskan!" },
-    ],
-  }),
-
   Qn(9, "Keliling Segitiga — Koordinat Negatif", {
     type: "mixed",
     diagram: {
@@ -314,7 +292,7 @@ const JarakTitikGarisPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Kartesius · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
+            <span className="text-teal-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
