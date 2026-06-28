@@ -10,22 +10,26 @@ import { Sigma, Star } from "lucide-react";
 // ─── SVG Illustrations ────────────────────────────────────────────────────────
 
 const SvgPolaGambar1 = () => {
-  const sq = 20, gap = 3;
-  const groupW = 90, svgH = 90;
-  const svgW = 3 * groupW + 10;
-  const bottomY = 60;
-  const labels = ["Pola ke-1", "Pola ke-2", "Pola ke-3"];
+  const sq = 22, gap = 3;
+  const svgH = 96, svgW = 310;
+  const bottomY = 68;
+  // Pola ke-1: 1×1, Pola ke-2: 1col×2rows, Pola ke-3: 3col×2rows
+  const configs = [
+    { cols: 1, rows: 1, label: "Pola ke-1", cx: 45 },
+    { cols: 1, rows: 2, label: "Pola ke-2", cx: 140 },
+    { cols: 3, rows: 2, label: "Pola ke-3", cx: 245 },
+  ];
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
-      {[1, 2, 3].map((n, gi) => {
-        const cx = 5 + gi * groupW + groupW / 2;
-        const gridW = n * sq + (n - 1) * gap;
+      {configs.map(({ cols, rows, label, cx }, gi) => {
+        const gridW = cols * sq + (cols - 1) * gap;
+        const gridH = rows * sq + (rows - 1) * gap;
         const startX = cx - gridW / 2;
-        const startY = bottomY - gridW;
+        const startY = bottomY - gridH;
         return (
           <g key={gi}>
-            {Array.from({ length: n }, (_, row) =>
-              Array.from({ length: n }, (_, col) => (
+            {Array.from({ length: rows }, (_, row) =>
+              Array.from({ length: cols }, (_, col) => (
                 <rect key={`${row}-${col}`}
                   x={startX + col * (sq + gap)} y={startY + row * (sq + gap)}
                   width={sq} height={sq} rx={2}
@@ -33,7 +37,7 @@ const SvgPolaGambar1 = () => {
               ))
             )}
             <text x={cx} y={svgH - 6} textAnchor="middle"
-              fill="#7dd3fc" fontSize="9" fontFamily="sans-serif">{labels[gi]}</text>
+              fill="#7dd3fc" fontSize="9" fontFamily="sans-serif">{label}</text>
           </g>
         );
       })}
@@ -42,28 +46,29 @@ const SvgPolaGambar1 = () => {
 };
 
 const SvgPolaGambar2 = () => {
-  const svgW = 320, svgH = 80;
+  const svgW = 340, svgH = 82;
+  const triBase = 30, triH = 26, peakY = 10, byY = 10 + triH;
   const configs = [
-    { count: 1, label: "Pola ke-1", cx: 40 },
-    { count: 2, label: "Pola ke-2", cx: 130 },
-    { count: 3, label: "Pola ke-3", cx: 230 },
+    { count: 1, label: "Pola ke-1", cx: 42 },
+    { count: 2, label: "Pola ke-2", cx: 140 },
+    { count: 3, label: "Pola ke-3", cx: 258 },
   ];
-  const h = 30, base = 36;
   const stroke = "rgba(251,191,36,0.9)";
-  const sw = "2";
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
       {configs.map(({ count, label, cx }, gi) => {
-        const totalW = base + (count - 1) * (base / 2);
+        const totalW = count * triBase;
         const sx = cx - totalW / 2;
-        const by = 14 + h;
         const lines: JSX.Element[] = [];
         for (let i = 0; i < count; i++) {
-          const lx = sx + i * (base / 2);
+          // Each triangle offset by full triBase — no overlap, no crossing
+          const lx = sx + i * triBase;
+          const rx = lx + triBase;
+          const px = lx + triBase / 2;
           lines.push(
-            <line key={`b${i}`} x1={lx} y1={by} x2={lx + base} y2={by} stroke={stroke} strokeWidth={sw} />,
-            <line key={`l${i}`} x1={lx} y1={by} x2={lx + base / 2} y2={14} stroke={stroke} strokeWidth={sw} />,
-            <line key={`r${i}`} x1={lx + base / 2} y1={14} x2={lx + base} y2={by} stroke={stroke} strokeWidth={sw} />,
+            <line key={`b${i}`} x1={lx} y1={byY} x2={rx} y2={byY} stroke={stroke} strokeWidth="2" />,
+            <line key={`l${i}`} x1={lx} y1={byY} x2={px} y2={peakY} stroke={stroke} strokeWidth="2" />,
+            <line key={`r${i}`} x1={px} y1={peakY} x2={rx} y2={byY} stroke={stroke} strokeWidth="2" />,
           );
         }
         return (
