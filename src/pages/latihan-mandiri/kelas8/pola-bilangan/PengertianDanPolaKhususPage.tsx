@@ -13,7 +13,6 @@ const SvgPolaGambar1 = () => {
   const sq = 22, gap = 3;
   const svgH = 96, svgW = 310;
   const bottomY = 68;
-  // Pola ke-1: 1×1, Pola ke-2: 1col×2rows, Pola ke-3: 3col×2rows
   const configs = [
     { cols: 1, rows: 1, label: "Pola ke-1", cx: 45 },
     { cols: 1, rows: 2, label: "Pola ke-2", cx: 140 },
@@ -45,8 +44,6 @@ const SvgPolaGambar1 = () => {
   );
 };
 
-// Pola ke-1: 1 segitiga, Pola ke-2: 3 segitiga (2 atas + 1 terbalik via garis horizontal di puncak),
-// Pola ke-3: 5 segitiga (3 atas + 2 terbalik)
 const SvgPolaGambar2 = () => {
   const svgW = 340, svgH = 82;
   const triBase = 28, triH = 24, peakY = 10, byY = 10 + triH;
@@ -63,7 +60,6 @@ const SvgPolaGambar2 = () => {
         const sx = cx - totalW / 2;
         const lines: JSX.Element[] = [];
 
-        // Base segments (shared bottom line)
         for (let i = 0; i < count; i++) {
           lines.push(
             <line key={`base${i}`}
@@ -73,7 +69,6 @@ const SvgPolaGambar2 = () => {
           );
         }
 
-        // Left and right sides of each upward triangle
         for (let i = 0; i < count; i++) {
           const bx = sx + i * triBase;
           const px = sx + (i + 0.5) * triBase;
@@ -83,7 +78,6 @@ const SvgPolaGambar2 = () => {
           );
         }
 
-        // Horizontal lines at peak level connecting adjacent peaks → forms inverted triangles
         for (let i = 0; i < count - 1; i++) {
           const px1 = sx + (i + 0.5) * triBase;
           const px2 = sx + (i + 1.5) * triBase;
@@ -141,14 +135,8 @@ const SvgQ3 = () => {
   );
 };
 
-
 const SvgQ7 = () => {
-  const configs = [
-    { n: 1 },
-    { n: 2 },
-    { n: 3 },
-    { n: 4 },
-  ];
+  const configs = [{ n: 1 }, { n: 2 }, { n: 3 }, { n: 4 }];
   const groupW = 80, svgH = 80, r = 4, sp = 12;
   const svgW = configs.length * groupW + 10;
   return (
@@ -170,23 +158,14 @@ const SvgQ7 = () => {
             );
           }
         }
-        return (
-          <g key={gi}>
-            {dots}
-          </g>
-        );
+        return <g key={gi}>{dots}</g>;
       })}
     </svg>
   );
 };
 
 const SvgQ8 = () => {
-  const configs = [
-    { n: 1 },
-    { n: 2 },
-    { n: 3 },
-    { n: 4 },
-  ];
+  const configs = [{ n: 1 }, { n: 2 }, { n: 3 }, { n: 4 }];
   const groupW = 82, svgH = 80, r = 4, sp = 12;
   const svgW = configs.length * groupW + 10;
   return (
@@ -205,11 +184,7 @@ const SvgQ8 = () => {
             );
           }
         }
-        return (
-          <g key={gi}>
-            {dots}
-          </g>
-        );
+        return <g key={gi}>{dots}</g>;
       })}
     </svg>
   );
@@ -240,11 +215,7 @@ const SvgQ9 = () => {
             );
           }
         }
-        return (
-          <g key={gi}>
-            {dots}
-          </g>
-        );
+        return <g key={gi}>{dots}</g>;
       })}
     </svg>
   );
@@ -256,9 +227,11 @@ type QuestionItem = {
   number: number;
   title: string;
   content: string;
+  contentAfterSvg?: string;
   type: "essay" | "mixed";
   parts?: { label: string; math?: string; text?: string }[];
   svgNode?: React.ReactNode;
+  imgSrc?: string;
 };
 
 const questions: QuestionItem[] = [
@@ -271,13 +244,14 @@ const questions: QuestionItem[] = [
     parts: [
       { label: "a.", text: "Tuliskan banyaknya persegi pada setiap pola di atas." },
       { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
-      { label: "c.", text: "Tentukan banyaknya persegi pada pola ke-25 dan pola ke-50." },
+      { label: "c.", text: "Tentukan banyak persegi pada pola ke-20 dan pola ke-45." },
     ],
   },
   {
     number: 2,
     title: "Pola Gambar Segitiga Korek Api",
-    content: "Perhatikan pola berikut.\n\nYeni menyusun segitiga-segitiga seperti gambar di atas menggunakan batang-batang korek api. Tentukan banyaknya batang korek api untuk menyusun segitiga pada pola ke-15 dan pola ke-30.",
+    content: "Perhatikan pola berikut.",
+    contentAfterSvg: "Yeni menyusun segitiga-segitiga seperti gambar di atas menggunakan batang-batang korek api. Tentukan banyaknya batang korek api untuk menyusun segitiga pada pola ke-15 dan pola ke-30.",
     type: "essay",
     svgNode: <SvgPolaGambar2 />,
   },
@@ -289,7 +263,8 @@ const questions: QuestionItem[] = [
     parts: [
       { label: "a.", math: "3,\\ 7,\\ 11,\\ ?,\\ 19,\\ 23" },
       { label: "b.", math: "2,\\ 4,\\ 8,\\ ?,\\ 32,\\ 64" },
-      { label: "c.", math: "100,\\ 95,\\ 88,\\ 79,\\ ?,\\ 55" },
+      { label: "c.", math: "1,\\ 2,\\ 4,\\ 7,\\ 11,\\ 16,\\ \\ldots" },
+      { label: "d.", math: "100,\\ 95,\\ 88,\\ 79,\\ ?,\\ 55" },
     ],
   },
   {
@@ -305,14 +280,15 @@ const questions: QuestionItem[] = [
   },
   {
     number: 5,
-    title: "Bilangan Segitiga",
-    content: "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
+    title: "Pola Gambar Lingkaran",
+    content: "Perhatikan pola berikut.",
     type: "mixed",
-    svgNode: <SvgQ7 />,
+    imgSrc: "/pola-lingkaran-q5.png",
     parts: [
-      { label: "Pola:", math: "1,\\ 3,\\ 6,\\ 10,\\ 15,\\ ..." },
-      { label: "a.", text: "Tuliskan rumus bilangan segitiga ke-n." },
-      { label: "b.", text: "Tentukan bilangan segitiga ke-10." },
+      { label: "a.", text: "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan." },
+      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
+      { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
+      { label: "d.", text: "Tentukan jumlah noktah dari pola ke-1 sampai dengan pola ke-10." },
     ],
   },
   {
@@ -329,6 +305,18 @@ const questions: QuestionItem[] = [
   },
   {
     number: 7,
+    title: "Bilangan Segitiga",
+    content: "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
+    type: "mixed",
+    svgNode: <SvgQ7 />,
+    parts: [
+      { label: "Pola:", math: "1,\\ 3,\\ 6,\\ 10,\\ 15,\\ ..." },
+      { label: "a.", text: "Tuliskan rumus bilangan segitiga ke-n." },
+      { label: "b.", text: "Tentukan bilangan segitiga ke-10." },
+    ],
+  },
+  {
+    number: 8,
     title: "Bilangan Persegi Panjang",
     content: "Bilangan persegi panjang dibentuk dari susunan titik berbentuk persegi panjang:",
     type: "mixed",
@@ -340,7 +328,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 8,
+    number: 9,
     title: "Menghitung Suku dengan Rumus Umum",
     content: "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-10 dan suku ke-100 untuk masing-masing barisan berikut:",
     type: "mixed",
@@ -351,12 +339,11 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 9,
+    number: 10,
     title: "Rumus Suku ke-n dan Suku ke-100",
     content: "Tentukan rumus suku ke-n dan hitunglah suku ke-100 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
     type: "mixed",
     parts: [
-      { label: "a.", math: "1,\\ 4,\\ 9,\\ 16,\\ 25,\\ \\ldots" },
       { label: "b.", math: "0,\\ 3,\\ 8,\\ 15,\\ 24,\\ \\ldots" },
       { label: "c.", math: "1,\\ 7,\\ 17,\\ 31,\\ 49,\\ \\ldots" },
       { label: "d.", math: "1,\\ 6,\\ 15,\\ 28,\\ 45,\\ \\ldots" },
@@ -396,6 +383,14 @@ const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => (
             <div className="my-3 rounded-xl overflow-hidden bg-black/25 border border-white/5 px-2 py-3">
               {q.svgNode}
             </div>
+          )}
+          {q.imgSrc && (
+            <div className="my-3 rounded-xl overflow-hidden bg-white border border-white/20 flex items-center justify-center p-3">
+              <img src={q.imgSrc} alt="Pola gambar" className="max-w-full h-auto" />
+            </div>
+          )}
+          {q.contentAfterSvg && (
+            <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.contentAfterSvg}</p>
           )}
           {q.type === "mixed" && q.parts && (
             <div className="flex flex-col gap-2 mt-2">
