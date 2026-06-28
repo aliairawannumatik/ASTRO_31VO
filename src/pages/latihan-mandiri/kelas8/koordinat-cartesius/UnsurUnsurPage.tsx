@@ -209,18 +209,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(12, "Soal ANBK - Evaluasi Pernyataan", {
-    type: "mixed",
-    content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang koordinat:",
-    parts: [
-      { label: "(1)", text: "Titik (0, 0) berada di Kuadran I." },
-      { label: "(2)", text: "Titik yang berada di Kuadran II memiliki x < 0 dan y > 0." },
-      { label: "(3)", text: "Titik (5, 0) terletak pada sumbu-x." },
-      { label: "(4)", text: "Jika x = 0 dan y ≠ 0, titik tersebut terletak pada sumbu-y." },
-    ],
-  }),
-
-  Q(13, "Titik di Kuadran IV", {
+  Q(12, "Titik di Kuadran IV", {
     type: "mixed",
     content: "Perhatikan titik-titik berikut:\nA(5, −3),  B(−2, −4),  C(4, −1),  D(−3, 6),  E(7, −5),  F(0, −2)",
     parts: [
@@ -229,7 +218,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(14, "Koordinat di Atas Sumbu-x", {
+  Q(13, "Koordinat di Atas Sumbu-x", {
     type: "mixed",
     content: "Dari daftar koordinat berikut, tentukan manakah yang berada di atas sumbu-x:\nP(−3, 5),  Q(4, −2),  R(0, 7),  S(−1, −6),  T(6, 3),  U(2, 0)",
     parts: [
@@ -238,7 +227,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Jarak Titik ke Garis Vertikal", {
+  Q(14, "Jarak Titik ke Garis Vertikal", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -256,6 +245,17 @@ const questions: Q[] = [
       { label: "a.", text: "Tentukan persamaan garis yang melalui titik (3, −5) dan (3, 4). Apa jenis garis tersebut?" },
       { label: "b.", text: "Hitung jarak titik A(−1, 2) terhadap garis tersebut dalam satuan." },
       { label: "c.", text: "Jelaskan cara menghitung jarak sebuah titik ke garis vertikal x = k." },
+    ],
+  }),
+
+  Q(15, "Soal ANBK - Evaluasi Pernyataan", {
+    type: "mixed",
+    content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang koordinat:",
+    parts: [
+      { label: "(1)", text: "Titik (0, 0) berada di Kuadran I." },
+      { label: "(2)", text: "Titik yang berada di Kuadran II memiliki x < 0 dan y > 0." },
+      { label: "(3)", text: "Titik (5, 0) terletak pada sumbu-x." },
+      { label: "(4)", text: "Jika x = 0 dan y ≠ 0, titik tersebut terletak pada sumbu-y." },
     ],
   }),
 
