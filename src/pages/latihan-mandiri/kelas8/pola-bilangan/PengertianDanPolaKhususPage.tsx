@@ -45,12 +45,14 @@ const SvgPolaGambar1 = () => {
   );
 };
 
+// Pola ke-1: 1 segitiga, Pola ke-2: 3 segitiga (2 atas + 1 terbalik via garis horizontal di puncak),
+// Pola ke-3: 5 segitiga (3 atas + 2 terbalik)
 const SvgPolaGambar2 = () => {
   const svgW = 340, svgH = 82;
-  const triBase = 30, triH = 26, peakY = 10, byY = 10 + triH;
+  const triBase = 28, triH = 24, peakY = 10, byY = 10 + triH;
   const configs = [
     { count: 1, label: "Pola ke-1", cx: 42 },
-    { count: 2, label: "Pola ke-2", cx: 140 },
+    { count: 2, label: "Pola ke-2", cx: 138 },
     { count: 3, label: "Pola ke-3", cx: 258 },
   ];
   const stroke = "rgba(251,191,36,0.9)";
@@ -60,17 +62,36 @@ const SvgPolaGambar2 = () => {
         const totalW = count * triBase;
         const sx = cx - totalW / 2;
         const lines: JSX.Element[] = [];
+
+        // Base segments (shared bottom line)
         for (let i = 0; i < count; i++) {
-          // Each triangle offset by full triBase — no overlap, no crossing
-          const lx = sx + i * triBase;
-          const rx = lx + triBase;
-          const px = lx + triBase / 2;
           lines.push(
-            <line key={`b${i}`} x1={lx} y1={byY} x2={rx} y2={byY} stroke={stroke} strokeWidth="2" />,
-            <line key={`l${i}`} x1={lx} y1={byY} x2={px} y2={peakY} stroke={stroke} strokeWidth="2" />,
-            <line key={`r${i}`} x1={px} y1={peakY} x2={rx} y2={byY} stroke={stroke} strokeWidth="2" />,
+            <line key={`base${i}`}
+              x1={sx + i * triBase} y1={byY}
+              x2={sx + (i + 1) * triBase} y2={byY}
+              stroke={stroke} strokeWidth="2" />
           );
         }
+
+        // Left and right sides of each upward triangle
+        for (let i = 0; i < count; i++) {
+          const bx = sx + i * triBase;
+          const px = sx + (i + 0.5) * triBase;
+          lines.push(
+            <line key={`L${i}`} x1={bx} y1={byY} x2={px} y2={peakY} stroke={stroke} strokeWidth="2" />,
+            <line key={`R${i}`} x1={px} y1={peakY} x2={bx + triBase} y2={byY} stroke={stroke} strokeWidth="2" />
+          );
+        }
+
+        // Horizontal lines at peak level connecting adjacent peaks → forms inverted triangles
+        for (let i = 0; i < count - 1; i++) {
+          const px1 = sx + (i + 0.5) * triBase;
+          const px2 = sx + (i + 1.5) * triBase;
+          lines.push(
+            <line key={`H${i}`} x1={px1} y1={peakY} x2={px2} y2={peakY} stroke={stroke} strokeWidth="2" />
+          );
+        }
+
         return (
           <g key={gi}>
             {lines}
@@ -83,60 +104,13 @@ const SvgPolaGambar2 = () => {
   );
 };
 
-const SvgQ1 = () => {
-  const nums = [2, 5, 10, 17, 26];
-  const diffs = ["+3", "+5", "+7", "+9", "+11"];
-  const bw = 48, bh = 32, gap = 18;
-  const step = bw + gap;
-  const svgW = 6 + nums.length * step + bw + 6;
-  return (
-    <svg viewBox={`0 0 ${svgW} 72`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arrQ1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-          <path d="M0,1 L6,3.5 L0,6 Z" fill="rgba(167,139,250,0.9)" />
-        </marker>
-      </defs>
-      {nums.map((n, i) => (
-        <g key={i}>
-          <rect x={6 + i * step} y={14} width={bw} height={bh} rx={7}
-            fill="rgba(6,182,212,0.13)" stroke="rgba(6,182,212,0.6)" strokeWidth="1.5" />
-          <text x={6 + i * step + bw / 2} y={14 + bh / 2 + 1}
-            textAnchor="middle" dominantBaseline="middle"
-            fill="#67e8f9" fontSize="15" fontWeight="bold" fontFamily="monospace">{n}</text>
-        </g>
-      ))}
-      <rect x={6 + nums.length * step} y={14} width={bw} height={bh} rx={7}
-        fill="rgba(251,191,36,0.13)" stroke="rgba(251,191,36,0.6)" strokeWidth="1.5" strokeDasharray="5 2" />
-      <text x={6 + nums.length * step + bw / 2} y={14 + bh / 2 + 1}
-        textAnchor="middle" dominantBaseline="middle"
-        fill="#fbbf24" fontSize="15" fontWeight="bold" fontFamily="monospace">?</text>
-      {diffs.map((d, i) => {
-        const x1 = 6 + i * step + bw + 2;
-        const x2 = 6 + (i + 1) * step - 2;
-        const mx = (x1 + x2) / 2;
-        return (
-          <g key={i}>
-            <line x1={x1} y1={14 + bh / 2} x2={x2} y2={14 + bh / 2}
-              stroke="rgba(167,139,250,0.85)" strokeWidth="1.5" markerEnd="url(#arrQ1)" />
-            <text x={mx} y={11} textAnchor="middle" fill="#c4b5fd" fontSize="9" fontFamily="monospace">{d}</text>
-          </g>
-        );
-      })}
-      <text x={svgW / 2} y={64} textAnchor="middle"
-        fill="rgba(255,255,255,0.38)" fontSize="9.5" fontFamily="sans-serif">
-        Selisih bertambah +2 setiap langkah → beda ke-2 konstan
-      </text>
-    </svg>
-  );
-};
-
 const SvgQ3 = () => {
   const bw = 20, bh = 10, hGap = 2, vGap = 2;
   const rowW = 3 * bw + 2 * hGap;
   const rowH = bh + vGap;
   const maxRows = 4;
   const groupGap = 18;
-  const svgH = maxRows * rowH + 38;
+  const svgH = maxRows * rowH + 22;
   const svgW = 4 * rowW + 3 * groupGap + 10;
   const bottomY = maxRows * rowH;
   const brickColors = [
@@ -160,8 +134,6 @@ const SvgQ3 = () => {
             })}
             <text x={gx + rowW / 2} y={bottomY + 13} textAnchor="middle"
               fill="#a78bfa" fontSize="8.5" fontFamily="sans-serif">Baris {gi + 1}</text>
-            <text x={gx + rowW / 2} y={bottomY + 26} textAnchor="middle"
-              fill="#67e8f9" fontSize="9" fontFamily="monospace">= {rows * 3} bata</text>
           </g>
         );
       })}
@@ -172,18 +144,18 @@ const SvgQ3 = () => {
 
 const SvgQ7 = () => {
   const configs = [
-    { n: 1, label: "T\u2081 = 1" },
-    { n: 2, label: "T\u2082 = 3" },
-    { n: 3, label: "T\u2083 = 6" },
-    { n: 4, label: "T\u2084 = 10" },
+    { n: 1 },
+    { n: 2 },
+    { n: 3 },
+    { n: 4 },
   ];
-  const groupW = 80, svgH = 96, r = 4, sp = 12;
+  const groupW = 80, svgH = 80, r = 4, sp = 12;
   const svgW = configs.length * groupW + 10;
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
-      {configs.map(({ n, label }, gi) => {
+      {configs.map(({ n }, gi) => {
         const cx = 5 + gi * groupW + groupW / 2;
-        const cy = 44;
+        const cy = 40;
         const totalH = (n - 1) * sp;
         const dots = [];
         for (let row = 0; row < n; row++) {
@@ -201,8 +173,6 @@ const SvgQ7 = () => {
         return (
           <g key={gi}>
             {dots}
-            <text x={cx} y={svgH - 8} textAnchor="middle"
-              fill="#a5b4fc" fontSize="9.5" fontFamily="monospace">{label}</text>
           </g>
         );
       })}
@@ -212,18 +182,18 @@ const SvgQ7 = () => {
 
 const SvgQ8 = () => {
   const configs = [
-    { n: 1, label: "1\u00B2 = 1" },
-    { n: 2, label: "2\u00B2 = 4" },
-    { n: 3, label: "3\u00B2 = 9" },
-    { n: 4, label: "4\u00B2 = 16" },
+    { n: 1 },
+    { n: 2 },
+    { n: 3 },
+    { n: 4 },
   ];
-  const groupW = 82, svgH = 96, r = 4, sp = 12;
+  const groupW = 82, svgH = 80, r = 4, sp = 12;
   const svgW = configs.length * groupW + 10;
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
-      {configs.map(({ n, label }, gi) => {
+      {configs.map(({ n }, gi) => {
         const cx = 5 + gi * groupW + groupW / 2;
-        const cy = 44;
+        const cy = 40;
         const dots = [];
         for (let row = 0; row < n; row++) {
           for (let col = 0; col < n; col++) {
@@ -238,8 +208,6 @@ const SvgQ8 = () => {
         return (
           <g key={gi}>
             {dots}
-            <text x={cx} y={svgH - 8} textAnchor="middle"
-              fill="#67e8f9" fontSize="9.5" fontFamily="monospace">{label}</text>
           </g>
         );
       })}
@@ -249,18 +217,18 @@ const SvgQ8 = () => {
 
 const SvgQ9 = () => {
   const configs = [
-    { rows: 1, cols: 2, label: "1\u00D72 = 2" },
-    { rows: 2, cols: 3, label: "2\u00D73 = 6" },
-    { rows: 3, cols: 4, label: "3\u00D74 = 12" },
-    { rows: 4, cols: 5, label: "4\u00D75 = 20" },
+    { rows: 1, cols: 2 },
+    { rows: 2, cols: 3 },
+    { rows: 3, cols: 4 },
+    { rows: 4, cols: 5 },
   ];
-  const groupW = 88, svgH = 100, r = 4, sp = 12;
+  const groupW = 88, svgH = 84, r = 4, sp = 12;
   const svgW = configs.length * groupW + 10;
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
-      {configs.map(({ rows, cols, label }, gi) => {
+      {configs.map(({ rows, cols }, gi) => {
         const cx = 5 + gi * groupW + groupW / 2;
-        const cy = 44;
+        const cy = 42;
         const dots = [];
         for (let row = 0; row < rows; row++) {
           for (let col = 0; col < cols; col++) {
@@ -275,55 +243,9 @@ const SvgQ9 = () => {
         return (
           <g key={gi}>
             {dots}
-            <text x={cx} y={svgH - 8} textAnchor="middle"
-              fill="#fdba74" fontSize="9.5" fontFamily="monospace">{label}</text>
           </g>
         );
       })}
-    </svg>
-  );
-};
-
-const SvgQ17 = () => {
-  const nums = [1, 2, 4, 7, 11, 16, 22];
-  const diffs = ["+1", "+2", "+3", "+4", "+5", "+6"];
-  const bw = 36, bh = 30, gap = 14;
-  const step = bw + gap;
-  const svgW = 6 + nums.length * step - gap + 6;
-  const svgH = 80;
-  return (
-    <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-lg mx-auto" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arrQ17" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-          <path d="M0,1 L6,3.5 L0,6 Z" fill="rgba(52,211,153,0.9)" />
-        </marker>
-      </defs>
-      {nums.map((n, i) => (
-        <g key={i}>
-          <rect x={6 + i * step} y={14} width={bw} height={bh} rx={7}
-            fill="rgba(16,185,129,0.13)" stroke="rgba(52,211,153,0.60)" strokeWidth="1.5" />
-          <text x={6 + i * step + bw / 2} y={14 + bh / 2 + 1}
-            textAnchor="middle" dominantBaseline="middle"
-            fill="#6ee7b7" fontSize="13" fontWeight="bold" fontFamily="monospace">{n}</text>
-        </g>
-      ))}
-      {diffs.map((d, i) => {
-        const x1 = 6 + i * step + bw + 2;
-        const x2 = 6 + (i + 1) * step - 2;
-        const mx = (x1 + x2) / 2;
-        return (
-          <g key={i}>
-            <line x1={x1} y1={14 + bh / 2} x2={x2} y2={14 + bh / 2}
-              stroke="rgba(52,211,153,0.85)" strokeWidth="1.5" markerEnd="url(#arrQ17)" />
-            <text x={mx} y={11} textAnchor="middle"
-              fill="#34d399" fontSize="8.5" fontFamily="monospace">{d}</text>
-          </g>
-        );
-      })}
-      <text x={svgW / 2} y={svgH - 6} textAnchor="middle"
-        fill="rgba(255,255,255,0.38)" fontSize="9" fontFamily="sans-serif">
-        Beda: 1, 2, 3, 4, 5, 6 → pola bertingkat (beda ke-2 konstan = 1)
-      </text>
     </svg>
   );
 };
@@ -361,13 +283,6 @@ const questions: QuestionItem[] = [
   },
   {
     number: 3,
-    title: "Melanjutkan Pola Bilangan",
-    content: "Perhatikan barisan bilangan berikut:\n2, 5, 10, 17, 26, ...\nTentukan dua suku berikutnya dari barisan bilangan tersebut dan jelaskan aturan polanya!",
-    type: "essay",
-    svgNode: <SvgQ1 />,
-  },
-  {
-    number: 4,
     title: "Suku yang Hilang",
     content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
     type: "mixed",
@@ -378,27 +293,30 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 5,
+    number: 4,
     title: "Pola Gambar Susunan Batu Bata",
-    content: "Seorang tukang batu menyusun batu bata membentuk pola:\nBaris ke-1: 3 batu bata | Baris ke-2: 6 | Baris ke-3: 9 | Baris ke-4: 12\n\na. Tentukan pola yang terbentuk.\nb. Berapa banyak batu bata pada baris ke-10?\nc. Berapa total batu bata jika ada 8 baris?",
-    type: "essay",
+    content: "Seorang tukang batu menyusun batu bata membentuk pola seperti gambar berikut.",
+    type: "mixed",
     svgNode: <SvgQ3 />,
+    parts: [
+      { label: "a.", text: "Tentukan pola yang terbentuk." },
+      { label: "b.", text: "Berapa banyak batu bata pada baris ke-10?" },
+    ],
   },
   {
-    number: 6,
+    number: 5,
     title: "Bilangan Segitiga",
     content: "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
     type: "mixed",
     svgNode: <SvgQ7 />,
     parts: [
       { label: "Pola:", math: "1,\\ 3,\\ 6,\\ 10,\\ 15,\\ ..." },
-      { label: "a.", text: "Jelaskan cara membentuk bilangan segitiga." },
-      { label: "b.", text: "Tuliskan rumus bilangan segitiga ke-n." },
-      { label: "c.", text: "Tentukan bilangan segitiga ke-10." },
+      { label: "a.", text: "Tuliskan rumus bilangan segitiga ke-n." },
+      { label: "b.", text: "Tentukan bilangan segitiga ke-10." },
     ],
   },
   {
-    number: 7,
+    number: 6,
     title: "Bilangan Persegi",
     content: "Perhatikan bilangan persegi berikut:",
     type: "mixed",
@@ -407,31 +325,22 @@ const questions: QuestionItem[] = [
       { label: "Pola:", math: "1,\\ 4,\\ 9,\\ 16,\\ 25,\\ ..." },
       { label: "a.", text: "Nyatakan rumus bilangan persegi ke-n." },
       { label: "b.", text: "Bilangan persegi ke-15 adalah ...." },
-      { label: "c.", text: "Apakah 144 merupakan bilangan persegi? Jelaskan!" },
     ],
   },
   {
-    number: 8,
+    number: 7,
     title: "Bilangan Persegi Panjang",
     content: "Bilangan persegi panjang dibentuk dari susunan titik berbentuk persegi panjang:",
     type: "mixed",
     svgNode: <SvgQ9 />,
     parts: [
       { label: "Pola:", math: "2,\\ 6,\\ 12,\\ 20,\\ 30,\\ ..." },
-      { label: "a.", text: "Tentukan aturan pola bilangan persegi panjang." },
-      { label: "b.", text: "Tuliskan rumus bilangan persegi panjang ke-n." },
-      { label: "c.", text: "Hitung bilangan persegi panjang ke-8." },
+      { label: "a.", text: "Tuliskan rumus bilangan persegi panjang ke-n." },
+      { label: "b.", text: "Hitung bilangan persegi panjang ke-8." },
     ],
   },
   {
-    number: 9,
-    title: "Soal TKA - Pola Kombinasi",
-    content: "Perhatikan barisan: 1, 2, 4, 7, 11, 16, 22, ...\n\na. Tentukan beda antara suku-suku berurutan.\nb. Identifikasi pola beda tersebut.\nc. Tentukan dua suku berikutnya.\nd. Tuliskan rumus umum suku ke-n.",
-    type: "essay",
-    svgNode: <SvgQ17 />,
-  },
-  {
-    number: 10,
+    number: 8,
     title: "Menghitung Suku dengan Rumus Umum",
     content: "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-10 dan suku ke-100 untuk masing-masing barisan berikut:",
     type: "mixed",
@@ -442,7 +351,7 @@ const questions: QuestionItem[] = [
     ],
   },
   {
-    number: 11,
+    number: 9,
     title: "Rumus Suku ke-n dan Suku ke-100",
     content: "Tentukan rumus suku ke-n dan hitunglah suku ke-100 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
     type: "mixed",
