@@ -76,62 +76,9 @@ const PolaGeometriPage = () => {
     },
     {
       number: 7,
-      title: "Soal TKA - Barisan Geometri Desimal",
-      content: "Diketahui barisan geometri:",
-      type: "mixed",
-      parts: [
-        { label: "Barisan:", math: "0{,}5 \\quad 1{,}5 \\quad 4{,}5 \\quad 13{,}5 \\quad ..." },
-        { label: "a.", math: "\\text{Tentukan } U_6." },
-        { label: "b.", math: "\\text{Hitung } S_5." },
-        { label: "c.", text: "Tuliskan rumus Un dari barisan tersebut." },
-      ],
-    },
-    {
-      number: 8,
       title: "Menyisipkan Bilangan dalam Barisan Geometri",
       content: "Di antara bilangan 2 dan 162, disisipkan 3 buah bilangan sehingga terbentuk barisan geometri.\n\na. Tentukan rasio barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Hitung jumlah semua bilangan dalam barisan tersebut.",
       type: "essay",
-    },
-    {
-      number: 9,
-      title: "Deret Geometri Tak Hingga",
-      content: "Deret geometri tak hingga memiliki jumlah jika |r| < 1, dengan rumus:",
-      type: "mixed",
-      parts: [
-        { label: "Rumus:", math: "S_\\infty = \\frac{a}{1 - r}" },
-        { label: "Soal 1:", math: "\\text{Hitung jumlah: } 8 + 4 + 2 + 1 + \\frac{1}{2} + \\cdots" },
-        { label: "Soal 2:", math: "\\text{Hitung jumlah: } 27 + 9 + 3 + 1 + \\cdots" },
-      ],
-    },
-    {
-      number: 10,
-      title: "Soal ANBK - Aplikasi Pertumbuhan Investasi",
-      content: "Seseorang menginvestasikan uang sebesar Rp1.000.000. Investasi tersebut bertumbuh 20% setiap tahun.\n\na. Tuliskan nilai investasi dari tahun ke-1 hingga tahun ke-5 sebagai barisan geometri.\nb. Berapa nilai investasi pada tahun ke-8?\nc. Pada tahun ke berapa nilai investasi melebihi Rp5.000.000?",
-      type: "essay",
-    },
-    {
-      number: 11,
-      title: "Soal UN - Gabungan Aritmetika dan Geometri",
-      content: "Suku ke-3 dan suku ke-6 suatu barisan geometri masing-masing adalah 24 dan 192.",
-      type: "mixed",
-      parts: [
-        { label: "a.", text: "Tentukan rasio dan suku pertama barisan tersebut." },
-        { label: "b.", math: "\\text{Tentukan } U_9." },
-        { label: "c.", math: "\\text{Hitung } S_7." },
-      ],
-    },
-    {
-      number: 12,
-      title: "Soal ANBK - Identifikasi Jenis Barisan",
-      content: "Tentukan apakah setiap barisan berikut merupakan barisan ARITMETIKA, GEOMETRI, atau BUKAN KEDUANYA. Berikan alasan dan tentukan rumus Un-nya jika ada!",
-      type: "mixed",
-      parts: [
-        { label: "(1)", math: "1,\\ 4,\\ 9,\\ 16,\\ 25,\\ ..." },
-        { label: "(2)", math: "5,\\ 10,\\ 20,\\ 40,\\ 80,\\ ..." },
-        { label: "(3)", math: "3,\\ 7,\\ 11,\\ 15,\\ 19,\\ ..." },
-        { label: "(4)", math: "100,\\ 10,\\ 1,\\ 0{,}1,\\ ..." },
-        { label: "(5)", math: "2,\\ 3,\\ 5,\\ 7,\\ 11,\\ ..." },
-      ],
     },
   ];
 
@@ -150,7 +97,7 @@ const PolaGeometriPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
+            <span className="text-orange-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
           </div>
@@ -163,7 +110,6 @@ const PolaGeometriPage = () => {
               { label: "Suku ke-n", math: "U_n = a \\cdot r^{n-1}" },
               { label: "Jumlah n suku (r > 1)", math: "S_n = \\frac{a(r^n - 1)}{r - 1}" },
               { label: "Jumlah n suku (r < 1)", math: "S_n = \\frac{a(1 - r^n)}{1 - r}" },
-              { label: "Deret tak hingga (|r| < 1)", math: "S_\\infty = \\frac{a}{1 - r}" },
             ].map((r, i) => (
               <div key={i} className="bg-white/5 rounded-lg px-4 py-2">
                 <p className="text-white/40 text-[10px] mb-1">{r.label}</p>
