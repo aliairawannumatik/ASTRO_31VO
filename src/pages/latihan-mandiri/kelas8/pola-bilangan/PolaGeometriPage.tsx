@@ -25,6 +25,28 @@ const PolaGeometriPage = () => {
     },
     {
       number: 2,
+      title: "Barisan Geometri Menurun",
+      content: "Diketahui barisan geometri: 192, 96, 48, 24, ...",
+      type: "mixed",
+      parts: [
+        { label: "a.", math: "\\text{Tentukan rasio } r." },
+        { label: "b.", math: "\\text{Hitung } U_8." },
+        { label: "c.", text: "Suku ke berapa yang bernilai 3/4?" },
+      ],
+    },
+    {
+      number: 3,
+      title: "Soal UN - Barisan Geometri",
+      content: "Suku pertama barisan geometri adalah 3 dan suku ke-5 adalah 48.",
+      type: "mixed",
+      parts: [
+        { label: "a.", text: "Tentukan rasio barisan tersebut." },
+        { label: "b.", math: "\\text{Hitung } U_{10}." },
+        { label: "c.", math: "\\text{Hitung } S_8." },
+      ],
+    },
+    {
+      number: 4,
       title: "Menentukan Rasio dari Dua Suku",
       content: "Dalam suatu barisan geometri diketahui:",
       type: "mixed",
@@ -36,36 +58,14 @@ const PolaGeometriPage = () => {
       ],
     },
     {
-      number: 3,
-      title: "Barisan Geometri Menurun",
-      content: "Diketahui barisan geometri: 192, 96, 48, 24, ...",
-      type: "mixed",
-      parts: [
-        { label: "a.", math: "\\text{Tentukan rasio } r." },
-        { label: "b.", math: "\\text{Hitung } U_8." },
-        { label: "c.", text: "Suku ke berapa yang bernilai 3/4?" },
-      ],
-    },
-    {
-      number: 4,
+      number: 5,
       title: "Jumlah n Suku Pertama Deret Geometri",
       content: "Rumus jumlah n suku pertama deret geometri:",
       type: "mixed",
       parts: [
         { label: "r > 1:", math: "S_n = \\frac{a(r^n - 1)}{r - 1}" },
         { label: "r < 1:", math: "S_n = \\frac{a(1 - r^n)}{1 - r}" },
-        { label: "Soal:", text: "Hitung jumlah 6 suku pertama dari barisan: 1, 3, 9, 27, ..." },
-      ],
-    },
-    {
-      number: 5,
-      title: "Soal UN - Barisan Geometri",
-      content: "Suku pertama barisan geometri adalah 3 dan suku ke-5 adalah 48.",
-      type: "mixed",
-      parts: [
-        { label: "a.", text: "Tentukan rasio barisan tersebut." },
-        { label: "b.", math: "\\text{Hitung } U_{10}." },
-        { label: "c.", math: "\\text{Hitung } S_8." },
+        { label: "Soal:", text: "Hitung jumlah 6 suku pertama dari deret: 1 + 3 + 9 + 27 + ..." },
       ],
     },
     {
