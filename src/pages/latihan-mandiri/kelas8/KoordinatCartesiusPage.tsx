@@ -22,7 +22,7 @@ const subtopics = [
   {
     label: "POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN DAN TERHADAP SUATU GARIS",
     path: "/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan",
-    soal: 16,
+    soal: 11,
     icon: Crosshair,
     gradient: "from-violet-900/40 to-purple-900/30",
     border: "border-violet-500/30",
@@ -67,7 +67,7 @@ const KoordinatCartesiusPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">41 {t('practice.suffixSoalTotal')} · Dilengkapi Diagram Koordinat</span>
+            <span className="text-white/70 text-xs font-body">36 {t('practice.suffixSoalTotal')} · Dilengkapi Diagram Koordinat</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>

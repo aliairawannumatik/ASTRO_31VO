@@ -56,28 +56,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(3, "Menentukan Titik Acuan dari Informasi Posisi Relatif", {
-    type: "essay",
-    content: "Titik P berada 3 satuan ke kanan dan 4 satuan ke atas dari titik acuan Q.",
-    parts: [
-      { label: "a.", text: "Jika koordinat P adalah (5, 6), tentukan koordinat titik acuan Q!", math: "Q = (5 - 3,\\; 6 - 4) = (2, 2)" },
-      { label: "b.", text: "Jika P(−1, 3) berada 2 satuan ke kiri dan 5 satuan ke atas dari Q, tentukan Q!" },
-      { label: "c.", text: "Jika R(4, −2) berada 6 satuan ke kanan dan 3 satuan ke bawah dari S, tentukan S!" },
-    ],
-  }),
-
-  Qn(4, "Posisi Relatif Titik terhadap Titik Tengah Segmen", {
-    type: "essay",
-    content: "Titik tengah dari segmen AB dengan A(2, 4) dan B(6, 2) dapat dihitung.",
-    math: "M = \\left(\\frac{2+6}{2},\\; \\frac{4+2}{2}\\right) = (4, 3)",
-    parts: [
-      { label: "a.", text: "Hitung koordinat titik tengah M dari segmen AB dengan A(2,4) dan B(6,2)!" },
-      { label: "b.", text: "Dengan M sebagai titik acuan, nyatakan posisi relatif titik C(7, 5) terhadap M!" },
-      { label: "c.", text: "Titik D berada 2 satuan ke kiri dan 3 satuan ke bawah dari M. Tentukan koordinat D!" },
-    ],
-  }),
-
-  Qn(5, "Posisi Relatif pada Peta Sederhana", {
+  Qn(3, "Posisi Relatif pada Peta Sederhana", {
     type: "essay",
     content: "Sebuah peta menggunakan sistem koordinat. Perpustakaan berada di titik P(3, 5), kantin di K(7, 2), kelas di C(1, 8).",
     parts: [
@@ -87,7 +66,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(6, "Posisi Relatif dalam Sistem Navigasi Sederhana", {
+  Qn(4, "Posisi Relatif dalam Sistem Navigasi Sederhana", {
     type: "essay",
     content: "Sebuah kapal berada di posisi K(2, 3). Mercusuar A berada di (5, 7), mercusuar B di (−1, 6), pulau C di (4, −2).",
     parts: [
@@ -98,7 +77,7 @@ const questions: Q[] = [
   }),
 
   // ── Bagian 2: Posisi Relatif terhadap Suatu Garis ─────────────────────
-  Qn(7, "Posisi Titik terhadap Sumbu-x", {
+  Qn(5, "Posisi Titik terhadap Sumbu-x", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -117,7 +96,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(8, "Posisi Titik terhadap Sumbu-y", {
+  Qn(6, "Posisi Titik terhadap Sumbu-y", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -136,7 +115,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(9, "Posisi terhadap Garis y = 3", {
+  Qn(7, "Posisi terhadap Garis y = 3", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -157,7 +136,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(10, "Posisi terhadap Garis x = −2", {
+  Qn(8, "Posisi terhadap Garis x = −2", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -177,55 +156,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(11, "Menentukan Posisi Relatif Kelompok Titik", {
-    type: "mixed",
-    content: "Tentukan posisi setiap titik terhadap garis y = 4 (di atas, di bawah, atau pada):",
-    parts: [
-      { label: "a.", math: "A(2,\\ 7)" },
-      { label: "b.", math: "B(-3,\\ 4)" },
-      { label: "c.", math: "C(5,\\ 1)" },
-      { label: "d.", math: "D(-1,\\ -2)" },
-      { label: "e.", math: "E(0,\\ 4)" },
-      { label: "f.", math: "F(8,\\ 10)" },
-    ],
-  }),
-
-  Qn(12, "Menentukan Posisi terhadap Garis x = 5", {
-    type: "mixed",
-    content: "Tentukan posisi setiap titik terhadap garis x = 5 (di kanan, di kiri, atau pada):",
-    parts: [
-      { label: "a.", math: "A(8,\\ 3)" },
-      { label: "b.", math: "B(5,\\ -2)" },
-      { label: "c.", math: "C(2,\\ 7)" },
-      { label: "d.", math: "D(-4,\\ 1)" },
-      { label: "e.", math: "E(5,\\ 0)" },
-      { label: "f.", math: "F(11,\\ -5)" },
-    ],
-  }),
-
-  Qn(13, "Posisi Relatif terhadap Dua Garis", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      segs: [
-        { x1: -6.5, y1: 2, x2: 6.5, y2: 2, color: "#facc15", label: "y=2" },
-        { x1: -1, y1: -6.5, x2: -1, y2: 6.5, color: "#a78bfa", label: "x=−1" },
-      ],
-      pts: [
-        { x: 3, y: 5, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: -4, y: 4, label: "B", color: "#fb923c", labelPos: "tl" },
-        { x: -3, y: -2, label: "C", color: "#34d399", labelPos: "bl" },
-        { x: 4, y: -3, label: "D", color: "#60a5fa", labelPos: "br" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Tentukan posisi setiap titik terhadap garis y = 2 (atas/bawah/pada)." },
-      { label: "b.", text: "Tentukan posisi setiap titik terhadap garis x = −1 (kanan/kiri/pada)." },
-      { label: "c.", text: "Titik mana yang berada di atas y = 2 DAN di kanan x = −1?" },
-    ],
-  }),
-
-  Qn(14, "Titik pada Garis — Persamaan Garis Lurus", {
+  Qn(9, "Titik pada Garis — Persamaan Garis Lurus", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -245,7 +176,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(15, "Apakah Titik Memenuhi Persamaan Garis?", {
+  Qn(10, "Apakah Titik Memenuhi Persamaan Garis?", {
     type: "mixed",
     content: "Periksa apakah setiap titik berikut terletak pada garis y = 3x − 1:",
     parts: [
@@ -257,7 +188,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(16, "Soal ANBK — Gabungan Posisi Relatif", {
+  Qn(11, "Soal ANBK — Gabungan Posisi Relatif", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -304,7 +235,7 @@ const PosisiRelatifTitikAcuanPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Koordinat Kartesius · Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-violet-400 text-sm">🎯</span>
-            <span className="text-white/70 text-xs font-body">16 Soal · Posisi Relatif Titik &amp; Garis</span>
+            <span className="text-white/70 text-xs font-body">11 Soal · Posisi Relatif Titik &amp; Garis</span>
             <span className="text-violet-400 text-sm">🎯</span>
           </div>
         </div>
