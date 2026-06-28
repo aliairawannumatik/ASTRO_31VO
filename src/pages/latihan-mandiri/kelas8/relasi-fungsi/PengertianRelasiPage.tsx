@@ -167,10 +167,7 @@ const questions: Q[] = [
           <text x="48" y="10" fill="#334155" fontSize="11" fontWeight="bold">y</text>
           {/* data points: (1,3),(2,5),(3,7),(4,9) */}
           {[[1,3],[2,5],[3,7],[4,9]].map(([x,y], i) => (
-            <g key={i}>
-              <circle cx={45+x*44} cy={215-y*20} r="6" fill="#fb923c" stroke="#ea580c" strokeWidth="1.5" opacity="0.9" />
-              <text x={45+x*44+10} y={215-y*20-6} fill="#ea580c" fontSize="10" fontWeight="bold">({x},{y})</text>
-            </g>
+            <circle key={i} cx={45+x*44} cy={215-y*20} r="6" fill="#fb923c" stroke="#ea580c" strokeWidth="1.5" opacity="0.9" />
           ))}
         </svg>
       </div>
