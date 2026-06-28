@@ -330,7 +330,7 @@ const questions: QuestionItem[] = [
   {
     number: 9,
     title: "Menghitung Suku dengan Rumus Umum",
-    content: "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-10 dan suku ke-100 untuk masing-masing barisan berikut:",
+    content: "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-15 dan suku ke-50 untuk masing-masing barisan berikut:",
     type: "mixed",
     parts: [
       { label: "a.", math: "U_n = n(n + 2)" },
@@ -341,7 +341,7 @@ const questions: QuestionItem[] = [
   {
     number: 10,
     title: "Rumus Suku ke-n dan Suku ke-100",
-    content: "Tentukan rumus suku ke-n dan hitunglah suku ke-100 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
+    content: "Tentukan rumus suku ke-n dan hitunglah suku ke-50 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
     type: "mixed",
     parts: [
       { label: "a.", math: "0,\\ 3,\\ 8,\\ 15,\\ 24,\\ \\ldots" },
