@@ -375,6 +375,7 @@ const HimpunanK7Page = lazy(() => import("./pages/latihan-mandiri/kelas7/Himpuna
 // Kelas 8 Topic Pages
 const PolaBilanganK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/PolaBilanganPage"));
 const PengertianPolaK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PengertianPolaPage"));
+const PengertianDanPolaKhususK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PengertianDanPolaKhususPage"));
 const PolaKhususK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaKhususPage"));
 const PolaAritmetikaK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaAritmetikaPage"));
 const PolaGeometriK8Page = lazy(() => import("./pages/latihan-mandiri/kelas8/pola-bilangan/PolaGeometriPage"));
@@ -1277,6 +1278,7 @@ const AppInner = () => {
           {/* Kelas 8 Topic Routes */}
           <Route path="/latihan-mandiri/kelas-8/pola-bilangan" element={<PolaBilanganK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pengertian-pola" element={<PengertianPolaK8Page />} />
+          <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pengertian-dan-pola-khusus" element={<PengertianDanPolaKhususK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaK8Page />} />
           <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriK8Page />} />
