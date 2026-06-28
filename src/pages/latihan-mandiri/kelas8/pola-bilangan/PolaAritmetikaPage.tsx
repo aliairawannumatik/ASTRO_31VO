@@ -7,105 +7,116 @@ import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { TrendingUp } from "lucide-react";
 
-const SvgBarisanAritmetika = () => (
-  <svg viewBox="0 0 420 130" className="w-full max-w-md mx-auto my-3" aria-label="Ilustrasi barisan aritmetika 7, 11, 15, 19">
-    {[
-      { cx: 52, val: "7", label: "U₁" },
-      { cx: 152, val: "11", label: "U₂" },
-      { cx: 252, val: "15", label: "U₃" },
-      { cx: 352, val: "19", label: "U₄" },
-    ].map(({ cx, val, label }) => (
-      <g key={cx}>
-        <circle cx={cx} cy={52} r={36} fill="#064e3b" stroke="#34d399" strokeWidth="2" />
-        <text x={cx} y={57} textAnchor="middle" fill="#6ee7b7" fontSize="18" fontWeight="bold">{val}</text>
-        <text x={cx} y={105} textAnchor="middle" fill="#6ee7b7" fontSize="11">{label}</text>
-      </g>
-    ))}
-    {[102, 202, 302].map((x) => (
-      <g key={x}>
-        <line x1={x - 2} y1={52} x2={x + 2} y2={52} stroke="none" />
-        <path d={`M${x - 14},52 L${x + 14},52`} stroke="#fbbf24" strokeWidth="2" markerEnd="url(#arr)" />
-        <text x={x} y={38} textAnchor="middle" fill="#fbbf24" fontSize="11" fontWeight="bold">+4</text>
-      </g>
-    ))}
-    <defs>
-      <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-        <path d="M0,0 L0,6 L6,3 Z" fill="#fbbf24" />
-      </marker>
-    </defs>
-    <text x={52} y={122} textAnchor="middle" fill="#34d399" fontSize="10">a = 7</text>
-    <rect x={4} y={108} width={94} height={16} rx={4} fill="#064e3b" stroke="#34d399" strokeWidth="1" />
-    <text x={51} y={120} textAnchor="middle" fill="#34d399" fontSize="10" fontWeight="bold">a = 7 (suku pertama)</text>
-    <rect x={76} y={26} width={52} height={16} rx={4} fill="#78350f" stroke="#fbbf24" strokeWidth="1" />
-    <text x={102} y={37} textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold">b = 4 (beda)</text>
-  </svg>
-);
+const SvgBarisanObjek = () => {
+  const terms = [7, 11, 15, 19];
+  const dotsPerRow = 5;
+  const dotR = 5;
+  const dx = 14;
+  const dy = 14;
+  const groupCenters = [42, 138, 234, 330];
+  const topY = 14;
+  const maxRows = 4;
+  const labelY = topY + maxRows * dy + 16;
+
+  return (
+    <svg viewBox="0 0 374 108" className="w-full max-w-md mx-auto my-3" aria-label="Ilustrasi barisan aritmetika dengan benda nyata">
+      <defs>
+        <marker id="ao" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L0,7 L7,3.5 Z" fill="#fbbf24" />
+        </marker>
+      </defs>
+
+      {terms.map((count, gi) => {
+        const cx0 = groupCenters[gi] - Math.floor(dotsPerRow / 2) * dx;
+        return (
+          <g key={gi}>
+            {Array.from({ length: count }, (_, i) => {
+              const col = i % dotsPerRow;
+              const row = Math.floor(i / dotsPerRow);
+              return (
+                <circle
+                  key={i}
+                  cx={cx0 + col * dx}
+                  cy={topY + row * dy}
+                  r={dotR}
+                  fill="#34d399"
+                  stroke="#064e3b"
+                  strokeWidth="0.8"
+                  opacity="0.92"
+                />
+              );
+            })}
+            <text x={groupCenters[gi]} y={labelY} textAnchor="middle" fill="#6ee7b7" fontSize="11" fontWeight="bold">
+              {`U${gi + 1} = ${count}`}
+            </text>
+          </g>
+        );
+      })}
+
+      {[0, 1, 2].map((gi) => {
+        const x1 = groupCenters[gi] + 34;
+        const x2 = groupCenters[gi + 1] - 34;
+        const my = topY + dy + 6;
+        return (
+          <g key={gi}>
+            <line x1={x1} y1={my} x2={x2} y2={my} stroke="#fbbf24" strokeWidth="1.5" markerEnd="url(#ao)" />
+            <text x={(x1 + x2) / 2} y={my - 5} textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold">
+              +4
+            </text>
+          </g>
+        );
+      })}
+
+      <rect x={2} y={labelY + 4} width={80} height={14} rx={3} fill="#064e3b" stroke="#34d399" strokeWidth="1" />
+      <text x={42} y={labelY + 14} textAnchor="middle" fill="#a7f3d0" fontSize="9" fontWeight="bold">
+        a = 7 (suku pertama)
+      </text>
+      <rect x={84} y={topY + dy} width={54} height={14} rx={3} fill="#78350f" stroke="#fbbf24" strokeWidth="1" />
+      <text x={111} y={topY + dy + 10} textAnchor="middle" fill="#fef08a" fontSize="9" fontWeight="bold">
+        b = 4 (beda)
+      </text>
+    </svg>
+  );
+};
 
 const SvgBatuBata = () => {
-  const rows = [8, 10, 12, 14];
   const brickW = 28;
   const brickH = 14;
   const gap = 3;
   const rowGap = 5;
   const maxBricks = 16;
   const svgW = maxBricks * (brickW + gap) + 20;
-  const totalRows = 6;
 
   return (
     <svg viewBox={`0 0 ${svgW} 220`} className="w-full max-w-lg mx-auto my-3" aria-label="Ilustrasi tumpukan batu bata">
-      {rows.map((count, ri) => {
+      {[8, 10, 12, 14].map((count, ri) => {
         const y = ri * (brickH + rowGap) + 10;
         const totalW = count * (brickW + gap) - gap;
         const startX = (svgW - totalW) / 2;
-        const rowNum = ri + 1;
         return (
           <g key={ri}>
-            {Array.from({ length: count }).map((_, bi) => (
-              <rect
-                key={bi}
-                x={startX + bi * (brickW + gap)}
-                y={y}
-                width={brickW}
-                height={brickH}
-                rx={2}
-                fill={ri === 0 ? "#b45309" : ri === 1 ? "#b45309" : "#92400e"}
-                stroke="#fbbf24"
-                strokeWidth="0.8"
-              />
+            {Array.from({ length: count }, (_, bi) => (
+              <rect key={bi} x={startX + bi * (brickW + gap)} y={y} width={brickW} height={brickH}
+                rx={2} fill="#b45309" stroke="#fbbf24" strokeWidth="0.8" />
             ))}
             <text x={svgW - 8} y={y + brickH / 2 + 4} textAnchor="end" fill="#fbbf24" fontSize="10">
-              {count} bata (tumpukan {rowNum})
+              {count} bata (tumpukan {ri + 1})
             </text>
           </g>
         );
       })}
-
-      <text x={svgW / 2} y={rows.length * (brickH + rowGap) + 22} textAnchor="middle" fill="#6ee7b7" fontSize="13" fontWeight="bold">
-        ⋮
-      </text>
-      <text x={svgW / 2} y={rows.length * (brickH + rowGap) + 36} textAnchor="middle" fill="#6ee7b7" fontSize="11">
-        (tumpukan 5 s.d. 14)
-      </text>
-
+      <text x={svgW / 2} y={4 * (brickH + rowGap) + 22} textAnchor="middle" fill="#6ee7b7" fontSize="13" fontWeight="bold">⋮</text>
+      <text x={svgW / 2} y={4 * (brickH + rowGap) + 36} textAnchor="middle" fill="#6ee7b7" fontSize="11">(tumpukan 5 s.d. 14)</text>
       {(() => {
-        const lastCount = 8 + 14 * 2;
-        const lastY = rows.length * (brickH + rowGap) + 50;
+        const lastCount = 36;
+        const lastY = 4 * (brickH + rowGap) + 50;
         const totalW = Math.min(lastCount, maxBricks) * (brickW + gap) - gap;
         const startX = (svgW - totalW) / 2;
         return (
           <g>
-            {Array.from({ length: Math.min(lastCount, maxBricks) }).map((_, bi) => (
-              <rect
-                key={bi}
-                x={startX + bi * (brickW + gap)}
-                y={lastY}
-                width={brickW}
-                height={brickH}
-                rx={2}
-                fill="#7c3aed"
-                stroke="#c4b5fd"
-                strokeWidth="0.8"
-              />
+            {Array.from({ length: Math.min(lastCount, maxBricks) }, (_, bi) => (
+              <rect key={bi} x={startX + bi * (brickW + gap)} y={lastY} width={brickW} height={brickH}
+                rx={2} fill="#7c3aed" stroke="#c4b5fd" strokeWidth="0.8" />
             ))}
             <text x={svgW - 8} y={lastY + brickH / 2 + 4} textAnchor="end" fill="#c4b5fd" fontSize="10">
               ? bata (tumpukan 15)
@@ -113,9 +124,8 @@ const SvgBatuBata = () => {
           </g>
         );
       })()}
-
-      <text x={10} y={200} fill="#34d399" fontSize="10">↑ Atas</text>
-      <text x={10} y={212} fill="#c4b5fd" fontSize="10">↓ Bawah (paling bawah)</text>
+      <text x={10} y={200} fill="#34d399" fontSize="10">↑ Atas (tumpukan ke-1)</text>
+      <text x={10} y={212} fill="#c4b5fd" fontSize="10">↓ Bawah (tumpukan ke-15)</text>
     </svg>
   );
 };
@@ -128,11 +138,10 @@ const PolaAritmetikaPage = () => {
     {
       number: 1,
       title: "Menentukan Suku ke-n Barisan Aritmetika",
-      content: "Diketahui barisan aritmetika berikut:",
+      content: "Perhatikan barisan benda berikut yang membentuk barisan aritmetika:",
       type: "mixed",
-      svg: <SvgBarisanAritmetika />,
+      svg: <SvgBarisanObjek />,
       parts: [
-        { label: "Barisan:", math: "7,\\ 11,\\ 15,\\ 19,\\ \\ldots" },
         { label: "a.", text: "Tentukan suku pertama (a) dan beda (b) dari barisan tersebut." },
         { label: "b.", math: "\\text{Tuliskan rumus } U_n \\text{ dari barisan tersebut.}" },
         { label: "c.", math: "\\text{Hitung nilai } U_{20}." },
@@ -203,32 +212,39 @@ const PolaAritmetikaPage = () => {
     },
     {
       number: 9,
-      title: "Menentukan Suku Pertama dari Informasi S_n",
-      content: "Jumlah n suku pertama suatu barisan aritmetika dinyatakan dengan:",
-      type: "mixed",
-      parts: [
-        { label: "Diket:", math: "S_n = 3n^2 + 5n" },
-        { label: "a.", math: "\\text{Tentukan } U_1,\\ U_2,\\ U_3." },
-        { label: "b.", text: "Tentukan beda barisan tersebut." },
-        { label: "c.", math: "\\text{Tentukan rumus } U_n." },
-      ],
-    },
-    {
-      number: 10,
       title: "Soal ANBK - Deret Aritmetika Terapan",
       content: "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp5.000, hari kedua Rp7.000, hari ketiga Rp9.000, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp192.000?",
       type: "essay",
     },
     {
-      number: 11,
+      number: 10,
       title: "Soal Kontekstual - Tumpukan Batu Bata",
-      content: "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya. Jika ada 15 tumpukan batu bata (dari atas sampai bawah), berapa banyak batu bata pada tumpukan paling bawah?",
-      type: "mixed",
+      content: "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya.\n\nJika ada 15 tumpukan batu bata (dari atas sampai bawah), tentukan banyak batu bata pada tumpukan paling bawah (U₁₅) = ?",
+      type: "essay",
       svg: <SvgBatuBata />,
+    },
+    {
+      number: 11,
+      title: "Jumlah Kelipatan 3",
+      content: "Tentukan jumlah semua bilangan kelipatan 3 yang berada di antara 1 dan 100.",
+      type: "mixed",
       parts: [
-        { label: "Diket:", math: "a = 8,\\quad b = 2,\\quad n = 15" },
-        { label: "Tanya:", text: "Banyak batu bata pada tumpukan ke-15 (paling bawah) = U₁₅ = ?" },
-        { label: "Rumus:", math: "U_n = a + (n-1)\\,b" },
+        { label: "Petunjuk:", text: "Tuliskan deret: 3 + 6 + 9 + ⋯ + 99 sebagai deret aritmetika." },
+        { label: "a.", text: "Tentukan suku pertama (a), beda (b), dan banyak suku (n)." },
+        { label: "b.", math: "\\text{Hitung jumlah deret: } S_n = \\frac{n}{2}(U_1 + U_n)" },
+        { label: "c.", text: "Berapa jumlah seluruh kelipatan 3 antara 1 dan 100?" },
+      ],
+    },
+    {
+      number: 12,
+      title: "Jumlah Kelipatan 2 dan 3",
+      content: "Tentukan jumlah semua bilangan yang merupakan kelipatan 2 sekaligus kelipatan 3 (yaitu kelipatan 6) yang berada di antara 1 dan 100.",
+      type: "mixed",
+      parts: [
+        { label: "Petunjuk:", text: "Bilangan yang kelipatan 2 dan 3 sekaligus = kelipatan 6. Tuliskan: 6 + 12 + 18 + ⋯ + 96." },
+        { label: "a.", text: "Tentukan suku pertama (a), beda (b), dan banyak suku (n)." },
+        { label: "b.", math: "\\text{Hitung } S_n = \\frac{n}{2}(U_1 + U_n)" },
+        { label: "c.", text: "Berapa jumlah seluruh kelipatan 6 antara 1 dan 100?" },
       ],
     },
   ];
@@ -248,7 +264,7 @@ const PolaAritmetikaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 11 {t('practice.suffixSoal')}</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
           </div>
