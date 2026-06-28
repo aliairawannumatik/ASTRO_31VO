@@ -74,7 +74,7 @@ const SvgBatuBata = () => {
   const svgW = maxBricks * (brickW + gap) + 20;
 
   return (
-    <svg viewBox={`0 0 ${svgW} 220`} className="w-full max-w-lg mx-auto my-3" aria-label="Ilustrasi tumpukan batu bata">
+    <svg viewBox={`0 0 ${svgW} 170`} className="w-full max-w-lg mx-auto my-3" aria-label="Ilustrasi tumpukan batu bata">
       {[8, 10, 12, 14].map((count, ri) => {
         const y = ri * (brickH + rowGap) + 10;
         const totalW = count * (brickW + gap) - gap;
@@ -85,14 +85,10 @@ const SvgBatuBata = () => {
               <rect key={bi} x={startX + bi * (brickW + gap)} y={y} width={brickW} height={brickH}
                 rx={2} fill="#b45309" stroke="#fbbf24" strokeWidth="0.8" />
             ))}
-            <text x={svgW - 8} y={y + brickH / 2 + 4} textAnchor="end" fill="#fbbf24" fontSize="10">
-              {count} bata (tumpukan {ri + 1})
-            </text>
           </g>
         );
       })}
       <text x={svgW / 2} y={4 * (brickH + rowGap) + 22} textAnchor="middle" fill="#6ee7b7" fontSize="13" fontWeight="bold">⋮</text>
-      <text x={svgW / 2} y={4 * (brickH + rowGap) + 36} textAnchor="middle" fill="#6ee7b7" fontSize="11">(tumpukan 5 s.d. 14)</text>
       {(() => {
         const lastCount = 36;
         const lastY = 4 * (brickH + rowGap) + 50;
@@ -104,14 +100,9 @@ const SvgBatuBata = () => {
               <rect key={bi} x={startX + bi * (brickW + gap)} y={lastY} width={brickW} height={brickH}
                 rx={2} fill="#7c3aed" stroke="#c4b5fd" strokeWidth="0.8" />
             ))}
-            <text x={svgW - 8} y={lastY + brickH / 2 + 4} textAnchor="end" fill="#c4b5fd" fontSize="10">
-              ? bata (tumpukan 15)
-            </text>
           </g>
         );
       })()}
-      <text x={10} y={200} fill="#34d399" fontSize="10">↑ Atas (tumpukan ke-1)</text>
-      <text x={10} y={212} fill="#c4b5fd" fontSize="10">↓ Bawah (tumpukan ke-15)</text>
     </svg>
   );
 };
@@ -169,6 +160,16 @@ const PolaAritmetikaPage = () => {
     },
     {
       number: 5,
+      title: "Deret Aritmetika - Mencari Jumlah Suku",
+      content: "Dalam suatu barisan aritmetika, diketahui suku ke-4 adalah 11 dan suku ke-10 adalah 35.",
+      type: "mixed",
+      parts: [
+        { label: "a.", text: "Tentukan suku pertama (a) dan beda (b)." },
+        { label: "b.", math: "\\text{Tentukan nilai } S_{20}." },
+      ],
+    },
+    {
+      number: 6,
       title: "Barisan Aritmetika - Soal UN",
       content: "Suku ke-5 suatu barisan aritmetika adalah 17 dan suku ke-9 adalah 33.",
       type: "mixed",
@@ -179,7 +180,7 @@ const PolaAritmetikaPage = () => {
       ],
     },
     {
-      number: 6,
+      number: 7,
       title: "Jumlah n Suku Pertama Barisan Aritmetika",
       content: "Rumus jumlah n suku pertama barisan aritmetika:",
       type: "mixed",
@@ -190,19 +191,19 @@ const PolaAritmetikaPage = () => {
       ],
     },
     {
-      number: 7,
+      number: 8,
       title: "Aplikasi Barisan Aritmetika - Gaji Karyawan",
       content: "Seorang karyawan mendapatkan gaji bulan pertama sebesar Rp2.500.000. Setiap bulan gajinya naik Rp150.000.\n\na. Berapa gaji karyawan tersebut pada bulan ke-12?\nb. Berapa total gaji yang diterima selama 1 tahun (12 bulan)?\nc. Pada bulan ke berapa karyawan mendapatkan gaji Rp4.150.000?",
       type: "essay",
     },
     {
-      number: 8,
+      number: 9,
       title: "Menyisipkan Bilangan dalam Barisan Aritmetika",
       content: "Di antara bilangan 4 dan 28, disisipkan 5 bilangan sehingga membentuk barisan aritmetika.\n\na. Tentukan beda barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Berapakah jumlah semua bilangan dalam barisan itu?",
       type: "essay",
     },
     {
-      number: 9,
+      number: 10,
       title: "Soal TKA - Barisan Aritmetika",
       content: "Jumlah 10 suku pertama suatu barisan aritmetika adalah 155 dan suku ke-10 adalah 28.",
       type: "mixed",
@@ -213,40 +214,35 @@ const PolaAritmetikaPage = () => {
       ],
     },
     {
-      number: 10,
+      number: 11,
       title: "Soal Kontekstual - Kursi Gedung Pertunjukan",
       content: "Sebuah gedung pertunjukan memiliki 20 baris kursi. Baris pertama berisi 15 kursi, baris kedua 18 kursi, baris ketiga 21 kursi, dan seterusnya membentuk barisan aritmetika.\n\na. Berapa banyak kursi pada baris ke-20?\nb. Berapa total kursi di seluruh gedung pertunjukan?",
       type: "essay",
     },
     {
-      number: 11,
+      number: 12,
       title: "Soal ANBK - Deret Aritmetika Terapan",
       content: "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp5.000, hari kedua Rp7.000, hari ketiga Rp9.000, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp192.000?",
       type: "essay",
     },
     {
-      number: 12,
+      number: 13,
       title: "Soal Kontekstual - Tumpukan Batu Bata",
       content: "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya.\n\nJika ada 15 tumpukan batu bata (dari atas sampai bawah), tentukan banyak batu bata pada tumpukan paling bawah (U₁₅) = ?",
       type: "essay",
       svg: <SvgBatuBata />,
     },
     {
-      number: 13,
+      number: 14,
       title: "Jumlah Kelipatan 3",
       content: "Tentukan jumlah semua bilangan kelipatan 3 yang berada di antara 1 dan 100.",
       type: "essay",
     },
     {
-      number: 14,
+      number: 15,
       title: "Jumlah Kelipatan 6",
       content: "Tentukan jumlah semua bilangan yang merupakan kelipatan 6 yang berada di antara 120 dan 300.",
-      type: "mixed",
-      parts: [
-        { label: "a.", text: "Tentukan suku pertama (a), beda (b), dan banyak suku (n)." },
-        { label: "b.", math: "\\text{Hitung } S_n = \\frac{n}{2}(U_1 + U_n)" },
-        { label: "c.", text: "Berapa jumlah seluruh kelipatan 6 di antara 120 dan 300?" },
-      ],
+      type: "essay",
     },
   ];
 
@@ -265,7 +261,7 @@ const PolaAritmetikaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
           </div>
