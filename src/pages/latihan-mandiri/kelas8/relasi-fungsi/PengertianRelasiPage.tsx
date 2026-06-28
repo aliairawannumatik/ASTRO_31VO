@@ -86,20 +86,20 @@ const questions: Q[] = [
       { label: "c.", text: "Gambarlah dalam diagram Kartesius." },
     ],
   }),
-  Qn(4, "Relasi 'Faktor dari'", {
-    type: "mixed",
-    content: "Diketahui A = {2, 3, 4, 6} dan B = {6, 8, 12, 18, 24}. Relasi yang menghubungkan A ke B adalah 'faktor dari'.",
-    parts: [
-      { label: "a.", text: "Gambarlah diagram panah untuk relasi 'faktor dari' ini." },
-      { label: "b.", text: "Tuliskan himpunan pasangan berurutannya." },
-      { label: "c.", text: "Tentukan range relasi tersebut." },
-    ],
-  }),
-  Qn(5, "Relasi 'Lebih dari'", {
+  Qn(4, "Relasi 'Lebih dari'", {
     type: "mixed",
     content: "Diketahui P = {2, 4, 6} dan Q = {1, 3, 5, 7}. Relasi yang berlaku adalah 'lebih dari'.",
     parts: [
       { label: "a.", text: "Gambarlah diagram panah untuk relasi 'lebih dari' dari P ke Q." },
+      { label: "b.", text: "Tuliskan himpunan pasangan berurutannya." },
+      { label: "c.", text: "Tentukan range relasi tersebut." },
+    ],
+  }),
+  Qn(5, "Relasi 'Faktor dari'", {
+    type: "mixed",
+    content: "Diketahui A = {2, 3, 4, 6} dan B = {6, 8, 12, 18, 24}. Relasi yang menghubungkan A ke B adalah 'faktor dari'.",
+    parts: [
+      { label: "a.", text: "Gambarlah diagram panah untuk relasi 'faktor dari' ini." },
       { label: "b.", text: "Tuliskan himpunan pasangan berurutannya." },
       { label: "c.", text: "Tentukan range relasi tersebut." },
     ],
@@ -145,8 +145,16 @@ const questions: Q[] = [
     ),
     parts: [
       { label: "a.", text: "Tuliskan himpunan pasangan berurutannya." },
-      { label: "b.", math: "\\text{Tentukan aturan relasinya: } y = \\ldots" },
-      { label: "c.", text: "Jika A diperluas hingga {1, 2, 3, 4, 5}, apa nilai yang dipasangkan dengan 5?" },
+      { label: "b.", text: "Tentukan aturan relasinya." },
+    ],
+  }),
+  Qn(7, "Relasi dari Pasangan Berurutan", {
+    type: "mixed",
+    content: "Diketahui relasi R dari himpunan A ke himpunan B dinyatakan dengan himpunan pasangan berurutan berikut:",
+    parts: [
+      { label: "", math: "R = \\{(1,5),\\ (2,10),\\ (3,15),\\ (4,20)\\}" },
+      { label: "a.", text: "Gambarlah relasi R dalam bentuk diagram panah." },
+      { label: "b.", text: "Tentukan aturan relasinya." },
     ],
   }),
 ];
