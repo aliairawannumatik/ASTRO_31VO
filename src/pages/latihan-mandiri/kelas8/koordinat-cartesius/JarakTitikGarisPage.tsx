@@ -163,19 +163,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(8, "Latihan Jarak ke Garis — Beragam", {
-    type: "mixed",
-    content: "Hitung jarak setiap titik ke garis yang diberikan:",
-    parts: [
-      { label: "a.", math: "P(4,\\ -3) \\text{ ke garis } y = 1" },
-      { label: "b.", math: "Q(-5,\\ 2) \\text{ ke garis } x = -8" },
-      { label: "c.", math: "R(0,\\ 7) \\text{ ke garis } y = -2" },
-      { label: "d.", math: "S(-3,\\ -4) \\text{ ke garis } x = 5" },
-      { label: "e.", math: "T(6,\\ -1) \\text{ ke garis } y = 6" },
-    ],
-  }),
-
-  Qn(9, "Keliling Segitiga dari Koordinat", {
+  Qn(8, "Keliling Segitiga dari Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -197,7 +185,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(10, "Keliling Segitiga — Koordinat Negatif", {
+  Qn(9, "Keliling Segitiga — Koordinat Negatif", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -218,7 +206,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(11, "Titik Tengah Segmen dari Diagram", {
+  Qn(10, "Titik Tengah Segmen dari Diagram", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -237,7 +225,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(12, "Luas Segitiga dari Koordinat", {
+  Qn(11, "Luas Segitiga dari Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -259,7 +247,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(13, "Jarak dalam Konteks Nyata", {
+  Qn(12, "Jarak dalam Konteks Nyata", {
     type: "mixed",
     content: "Sebuah peta kota menggunakan koordinat kartesius (dalam km).\nRumah Andi: A(2, 3), Sekolah: B(8, 11)",
     diagram: {
@@ -276,37 +264,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(14, "Jarak Titik ke Garis — Lanjutan", {
-    type: "mixed",
-    content: "Hitung jarak dari titik ke garis yang diberikan:",
-    parts: [
-      { label: "a.", math: "A(3,\\ 7) \\text{ ke garis } y = 3" },
-      { label: "b.", math: "B(-2,\\ -5) \\text{ ke garis } y = 1" },
-      { label: "c.", math: "C(4,\\ 2) \\text{ ke garis } x = -2" },
-      { label: "d.", math: "D(-6,\\ 3) \\text{ ke garis } x = 1" },
-    ],
-  }),
-
-  Qn(15, "Titik Equidistant dari Dua Garis", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      segs: [
-        { x1: -6.5, y1: -3, x2: 6.5, y2: -3, color: "#facc15", label: "y=−3" },
-        { x1: -6.5, y1: 5, x2: 6.5, y2: 5, color: "#a78bfa", label: "y=5" },
-      ],
-      pts: [
-        { x: 2, y: 1, label: "P(2,1)", color: "#f472b6", labelPos: "tr" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung jarak titik P(2, 1) ke garis y = −3." },
-      { label: "b.", text: "Hitung jarak titik P(2, 1) ke garis y = 5." },
-      { label: "c.", text: "Apakah P berjarak sama dari kedua garis? Jika tidak, cari titik yang berjarak sama dari y=−3 dan y=5 pada x=2." },
-    ],
-  }),
-
-  Qn(16, "Persegi Panjang — Diagonal", {
+  Qn(13, "Persegi Panjang — Diagonal", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -317,10 +275,10 @@ const questions: Q[] = [
         { x: -3, y: 3, label: "D", color: "#facc15", labelPos: "tl" },
       ],
       segs: [
-        { x1: -3, y1: -2, x2: 4, y2: -2, color: "rgba(255,255,255,0.3)" },
-        { x1: 4, y1: -2, x2: 4, y2: 3, color: "rgba(255,255,255,0.3)" },
-        { x1: 4, y1: 3, x2: -3, y2: 3, color: "rgba(255,255,255,0.3)" },
-        { x1: -3, y1: 3, x2: -3, y2: -2, color: "rgba(255,255,255,0.3)" },
+        { x1: -3, y1: -2, x2: 4, y2: -2, color: "rgba(0,0,0,0.35)" },
+        { x1: 4, y1: -2, x2: 4, y2: 3, color: "rgba(0,0,0,0.35)" },
+        { x1: 4, y1: 3, x2: -3, y2: 3, color: "rgba(0,0,0,0.35)" },
+        { x1: -3, y1: 3, x2: -3, y2: -2, color: "rgba(0,0,0,0.35)" },
         { x1: -3, y1: -2, x2: 4, y2: 3, color: "#60a5fa", dashed: true, label: "d₁" },
         { x1: 4, y1: -2, x2: -3, y2: 3, color: "#f472b6", dashed: true, label: "d₂" },
       ],
@@ -332,7 +290,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(17, "Luas Segitiga — Koordinat Beragam", {
+  Qn(14, "Luas Segitiga — Koordinat Beragam", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -353,52 +311,6 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas segitiga PQR." },
     ],
   }),
-
-  Qn(18, "Keliling Segi Empat dari Koordinat", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      pts: [
-        { x: -3, y: 4, label: "A", color: "#f472b6", labelPos: "tl" },
-        { x: 4, y: 2, label: "B", color: "#fb923c", labelPos: "tr" },
-        { x: 2, y: -4, label: "C", color: "#34d399", labelPos: "br" },
-        { x: -5, y: -2, label: "D", color: "#facc15", labelPos: "bl" },
-      ],
-      segs: [
-        { x1: -3, y1: 4, x2: 4, y2: 2, color: "#60a5fa" },
-        { x1: 4, y1: 2, x2: 2, y2: -4, color: "#60a5fa" },
-        { x1: 2, y1: -4, x2: -5, y2: -2, color: "#60a5fa" },
-        { x1: -5, y1: -2, x2: -3, y2: 4, color: "#60a5fa" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung panjang AB, BC, CD, dan DA." },
-      { label: "b.", text: "Hitung keliling segi empat ABCD." },
-    ],
-  }),
-
-  Qn(19, "Jarak dalam Segitiga Siku-siku", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 8,
-      pts: [
-        { x: 0, y: 0, label: "O(0,0)", color: "#f472b6", labelPos: "bl" },
-        { x: 6, y: 0, label: "A(6,0)", color: "#fb923c", labelPos: "br" },
-        { x: 0, y: 8, label: "B(0,8)", color: "#34d399", labelPos: "tl" },
-      ],
-      segs: [
-        { x1: 0, y1: 0, x2: 6, y2: 0, color: "#60a5fa", label: "6" },
-        { x1: 0, y1: 0, x2: 0, y2: 8, color: "#60a5fa", label: "8" },
-        { x1: 6, y1: 0, x2: 0, y2: 8, color: "#f472b6", label: "AB" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung panjang OA dan OB." },
-      { label: "b.", text: "Hitung panjang AB menggunakan rumus jarak." },
-      { label: "c.", text: "Verifikasi menggunakan Teorema Pythagoras: AB² = OA² + OB²." },
-    ],
-  }),
-
 ];
 
 const JarakTitikGarisPage = () => {
@@ -420,7 +332,7 @@ const JarakTitikGarisPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Kartesius · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 19 {t('practice.suffixSoal')}</span>
+            <span className="text-teal-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
@@ -463,7 +375,7 @@ const JarakTitikGarisPage = () => {
                     {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
                     {q.diagram && (
                       <div className="mb-3 flex justify-center">
-                        <CoordPlane {...q.diagram} />
+                        <CoordPlane {...q.diagram} lightBg />
                       </div>
                     )}
                     {q.parts && (
