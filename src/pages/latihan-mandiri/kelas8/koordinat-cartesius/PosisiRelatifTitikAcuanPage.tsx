@@ -188,31 +188,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(11, "Soal ANBK — Gabungan Posisi Relatif", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      segs: [
-        { x1: -6.5, y1: 3, x2: 6.5, y2: 3, color: "#facc15", label: "y=3" },
-        { x1: 2, y1: -6.5, x2: 2, y2: 6.5, color: "#f472b6", label: "x=2" },
-        { x1: -5.5, y1: -5.5, x2: 5.5, y2: 5.5, color: "#60a5fa", dashed: true },
-      ],
-      pts: [
-        { x: -2, y: 5, label: "A", color: "#34d399", labelPos: "tl" },
-        { x: 4, y: 5, label: "B", color: "#fb923c", labelPos: "tr" },
-        { x: -3, y: -2, label: "C", color: "#a78bfa", labelPos: "bl" },
-        { x: 5, y: -1, label: "D", color: "#f87171", labelPos: "br" },
-      ],
-      extraTexts: [{ x: 5, y: 5.5, text: "y=x", color: "#60a5fa", size: 10 }],
-    },
-    content: "Tiga garis: y = 3, x = 2, y = x (putus-putus).",
-    parts: [
-      { label: "a.", text: "Tentukan posisi setiap titik A, B, C, D terhadap garis y = 3." },
-      { label: "b.", text: "Tentukan posisi setiap titik terhadap garis x = 2." },
-      { label: "c.", text: "Tentukan posisi setiap titik terhadap garis y = x." },
-      { label: "d.", text: "Titik mana yang berada di atas y = 3 DAN di kiri x = 2 DAN di atas y = x?" },
-    ],
-  }),
 ];
 
 const PosisiRelatifTitikAcuanPage = () => {
@@ -235,7 +210,7 @@ const PosisiRelatifTitikAcuanPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Koordinat Kartesius · Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-violet-400 text-sm">🎯</span>
-            <span className="text-white/70 text-xs font-body">11 Soal · Posisi Relatif Titik &amp; Garis</span>
+            <span className="text-white/70 text-xs font-body">10 Soal · Posisi Relatif Titik &amp; Garis</span>
             <span className="text-violet-400 text-sm">🎯</span>
           </div>
         </div>
