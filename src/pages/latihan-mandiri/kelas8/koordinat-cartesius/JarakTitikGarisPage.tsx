@@ -206,26 +206,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(10, "Titik Tengah Segmen dari Diagram", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: -3, y: 1, label: "A(−3,1)", color: "#f472b6", labelPos: "tl" },
-        { x: 5, y: 5, label: "B(5,5)", color: "#fb923c", labelPos: "tr" },
-        { x: 1, y: 3, label: "M(?,?)", color: "#facc15", labelPos: "top" },
-      ],
-      segs: [
-        { x1: -3, y1: 1, x2: 5, y2: 5, color: "#60a5fa" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Tentukan koordinat titik tengah M dari segmen AB." },
-      { label: "b.", math: "\\text{Rumus titik tengah: } M = \\left(\\frac{x_1+x_2}{2},\\ \\frac{y_1+y_2}{2}\\right)" },
-    ],
-  }),
-
-  Qn(11, "Luas Segitiga dari Koordinat", {
+  Qn(10, "Luas Segitiga dari Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
