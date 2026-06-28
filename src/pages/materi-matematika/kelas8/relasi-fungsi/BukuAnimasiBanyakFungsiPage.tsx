@@ -3,16 +3,182 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { ArrowLeftRight, RotateCcw, CheckCircle2, XCircle, Trophy, Lightbulb, ChevronDown, ChevronUp } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-/* ─────────────────────────────────────────────
-   TYPES
-───────────────────────────────────────────── */
+const translations = {
+  id: {
+    badge: "📖 BUKU ANIMASI MATEMATIKA · KELAS 8",
+    title: "BANYAK FUNGSI & KORESPONDENSI SATU-SATU",
+    subtitle: "Relasi dan Fungsi · Seret panah untuk membuktikan",
+    atobLabel: "A → B = {a,b,c}",
+    btoaLabel: "B → A = {a,b,c}",
+    atobFormula: "A = {1, 2} → B = {a, b, c}",
+    btoaFormula: "B = {a,b,c} → A = {1, 2}",
+    atobFuncs: "n(B)^n(A) fungsi",
+    btoaFuncs: "n(A)^n(B) fungsi",
+    switchMode: "Switch Mode",
+    foundFuncs: "Fungsi ditemukan:",
+    complete: "🎉 LENGKAP!",
+    domainLabel: "Domain",
+    codomainLabel: "Kodomain",
+    hint: "👆 Seret dari node",
+    hintDomain: "domain",
+    hintAnd: "ke node",
+    hintCodomain: "kodomain",
+    hintDoubleTap: "· Double-tap untuk hapus panah",
+    statusValid: "✅ Fungsi valid! Setiap elemen domain punya tepat satu pasangan.",
+    statusDup: "⚠️ Fungsi ini sudah ada di koleksimu. Coba kombinasi yang berbeda!",
+    statusRemaining: (n: number) => `Hubungkan ${n} elemen domain yang tersisa.`,
+    errNotComplete: "Belum semua elemen domain dipasangkan!",
+    errDuplicate: "Fungsi ini sudah ada di koleksimu! Coba kombinasi lain.",
+    feedAllFound: (n: number) => `🎉 Semua ${n} fungsi berhasil ditemukan!`,
+    feedAdded: (n: number) => `✅ Fungsi ke-${n} ditambahkan! Lanjut temukan yang lain!`,
+    resetArrows: "Reset Panah",
+    saveBtn: "Simpan ke Koleksi!",
+    resetAll: "Reset Semua",
+    hintTitle: "Petunjuk & Aturan Fungsi",
+    hintFuncTitle: "📌 Syarat sebuah FUNGSI:",
+    hintFuncRule1: "✔ Setiap anggota",
+    hintFuncRule1b: "domain",
+    hintFuncRule1c: "harus punya",
+    hintFuncRule1d: "tepat satu",
+    hintFuncRule1e: "pasangan di kodomain.",
+    hintFuncRule2: "✔ Boleh ada anggota kodomain yang tidak dipasangkan (surjektif tidak wajib).",
+    hintFuncRule3: "✔ Boleh ada dua anggota domain yang dipasangkan ke anggota kodomain yang sama.",
+    hintCountTitle: "🔢 Cara menghitung banyak fungsi:",
+    hintCountAB: "A→B:",
+    hintCountABDetail: "Setiap elemen A punya 3 pilihan di B. Ada 2 elemen di A, jadi 3×3 = 9.",
+    hintCountBA: "B→A:",
+    hintCountBADetail: "Setiap elemen B punya 2 pilihan di A. Ada 3 elemen di B, jadi 2×2×2 = 8.",
+    hintHowTitle: "🎯 Cara menggunakan:",
+    hintHow1: "1. Tekan & seret dari node domain (kiri) menuju node kodomain (kanan)",
+    hintHow2: "2. Double-tap node domain untuk menghapus panahnya",
+    hintHow3: "3. Klik \"Simpan ke Koleksi!\" jika fungsi sudah lengkap dan baru",
+    hintHow4: (n: number) => `4. Coba temukan semua ${n} fungsi yang mungkin!`,
+    galleryTitle: (mode: string) => `Koleksi Fungsi ${mode}`,
+    celebrateTitle: (n: number) => `Luar biasa! Semua ${n} fungsi berhasil ditemukan!`,
+    celebrateDetail: (mode: string) => `Kamu telah membuktikan bahwa banyak fungsi ${mode}`,
+    conclusionTitle: "📌 Kesimpulan",
+    conclusionText: (nA: string, nB: string, nBA: string) =>
+      `Banyak fungsi yang dapat dibentuk dari himpunan dengan ${nA} anggota ke himpunan dengan ${nB} anggota adalah ${nBA}. Untuk A = {1,2} dan B = {a,b,c}, banyak fungsi dari A ke B = 3² = 9, dan dari B ke A = 2³ = 8.`,
+  },
+  en: {
+    badge: "📖 MATH ANIMATION BOOK · GRADE 8",
+    title: "NUMBER OF FUNCTIONS & ONE-TO-ONE CORRESPONDENCE",
+    subtitle: "Relations and Functions · Drag arrows to prove",
+    atobLabel: "A → B = {a,b,c}",
+    btoaLabel: "B → A = {a,b,c}",
+    atobFormula: "A = {1, 2} → B = {a, b, c}",
+    btoaFormula: "B = {a,b,c} → A = {1, 2}",
+    atobFuncs: "n(B)^n(A) functions",
+    btoaFuncs: "n(A)^n(B) functions",
+    switchMode: "Switch Mode",
+    foundFuncs: "Functions found:",
+    complete: "🎉 COMPLETE!",
+    domainLabel: "Domain",
+    codomainLabel: "Codomain",
+    hint: "👆 Drag from",
+    hintDomain: "domain",
+    hintAnd: "node to",
+    hintCodomain: "codomain",
+    hintDoubleTap: "node · Double-tap to remove arrow",
+    statusValid: "✅ Valid function! Every domain element has exactly one pair.",
+    statusDup: "⚠️ This function is already in your collection. Try a different combination!",
+    statusRemaining: (n: number) => `Connect ${n} remaining domain element(s).`,
+    errNotComplete: "Not all domain elements are paired yet!",
+    errDuplicate: "This function is already in your collection! Try another combination.",
+    feedAllFound: (n: number) => `🎉 All ${n} functions found!`,
+    feedAdded: (n: number) => `✅ Function #${n} added! Keep finding more!`,
+    resetArrows: "Reset Arrows",
+    saveBtn: "Save to Collection!",
+    resetAll: "Reset All",
+    hintTitle: "Hints & Function Rules",
+    hintFuncTitle: "📌 Requirements for a FUNCTION:",
+    hintFuncRule1: "✔ Every",
+    hintFuncRule1b: "domain",
+    hintFuncRule1c: "element must have",
+    hintFuncRule1d: "exactly one",
+    hintFuncRule1e: "pair in the codomain.",
+    hintFuncRule2: "✔ Codomain elements may be unpaired (surjectivity not required).",
+    hintFuncRule3: "✔ Two domain elements may be paired to the same codomain element.",
+    hintCountTitle: "🔢 How to count functions:",
+    hintCountAB: "A→B:",
+    hintCountABDetail: "Each element of A has 3 choices in B. There are 2 elements in A, so 3×3 = 9.",
+    hintCountBA: "B→A:",
+    hintCountBADetail: "Each element of B has 2 choices in A. There are 3 elements in B, so 2×2×2 = 8.",
+    hintHowTitle: "🎯 How to use:",
+    hintHow1: "1. Press & drag from domain node (left) to codomain node (right)",
+    hintHow2: "2. Double-tap a domain node to remove its arrow",
+    hintHow3: "3. Click \"Save to Collection!\" when the function is complete and new",
+    hintHow4: (n: number) => `4. Try to find all ${n} possible functions!`,
+    galleryTitle: (mode: string) => `Function Collection ${mode}`,
+    celebrateTitle: (n: number) => `Amazing! All ${n} functions found!`,
+    celebrateDetail: (mode: string) => `You have proven that the number of functions ${mode}`,
+    conclusionTitle: "📌 Conclusion",
+    conclusionText: (nA: string, nB: string, nBA: string) =>
+      `The number of functions that can be formed from a set with ${nA} elements to a set with ${nB} elements is ${nBA}. For A = {1,2} and B = {a,b,c}: functions from A to B = 3² = 9, and from B to A = 2³ = 8.`,
+  },
+  ja: {
+    badge: "📖 数学アニメーションブック · 中学2年",
+    title: "関数の個数と全単射",
+    subtitle: "関係と関数 · 矢印をドラッグして証明しよう",
+    atobLabel: "A → B = {a,b,c}",
+    btoaLabel: "B → A = {a,b,c}",
+    atobFormula: "A = {1, 2} → B = {a, b, c}",
+    btoaFormula: "B = {a,b,c} → A = {1, 2}",
+    atobFuncs: "n(B)^n(A) 個の関数",
+    btoaFuncs: "n(A)^n(B) 個の関数",
+    switchMode: "モード切替",
+    foundFuncs: "発見した関数：",
+    complete: "🎉 完成！",
+    domainLabel: "定義域",
+    codomainLabel: "終域",
+    hint: "👆",
+    hintDomain: "定義域",
+    hintAnd: "ノードから",
+    hintCodomain: "終域",
+    hintDoubleTap: "ノードへドラッグ · ダブルタップで矢印削除",
+    statusValid: "✅ 有効な関数！定義域の各要素にちょうど1つの対応があります。",
+    statusDup: "⚠️ この関数はすでにコレクションにあります。別の組み合わせを試してください！",
+    statusRemaining: (n: number) => `残り${n}個の定義域要素を接続してください。`,
+    errNotComplete: "まだすべての定義域要素が対応していません！",
+    errDuplicate: "この関数はすでにコレクションにあります！別の組み合わせを試してください。",
+    feedAllFound: (n: number) => `🎉 全${n}個の関数を発見しました！`,
+    feedAdded: (n: number) => `✅ 関数${n}番目を追加しました！続けて見つけましょう！`,
+    resetArrows: "矢印リセット",
+    saveBtn: "コレクションに保存！",
+    resetAll: "全リセット",
+    hintTitle: "ヒント・関数の規則",
+    hintFuncTitle: "📌 関数の条件：",
+    hintFuncRule1: "✔",
+    hintFuncRule1b: "定義域",
+    hintFuncRule1c: "のすべての要素は終域に",
+    hintFuncRule1d: "ちょうど1つ",
+    hintFuncRule1e: "の対応を持つ必要があります。",
+    hintFuncRule2: "✔ 終域の要素が対応を持たなくてもよい（全射は不要）。",
+    hintFuncRule3: "✔ 定義域の2つの要素が同じ終域要素に対応してもよい。",
+    hintCountTitle: "🔢 関数の個数の数え方：",
+    hintCountAB: "A→B：",
+    hintCountABDetail: "Aの各要素はBの3択。Aに2要素あるので3×3 = 9。",
+    hintCountBA: "B→A：",
+    hintCountBADetail: "Bの各要素はAの2択。Bに3要素あるので2×2×2 = 8。",
+    hintHowTitle: "🎯 使い方：",
+    hintHow1: "1. 定義域ノード（左）から終域ノード（右）へドラッグ",
+    hintHow2: "2. 定義域ノードをダブルタップして矢印を削除",
+    hintHow3: "3. 関数が完成したら「コレクションに保存！」をクリック",
+    hintHow4: (n: number) => `4. 可能な全${n}個の関数を見つけてみよう！`,
+    galleryTitle: (mode: string) => `関数コレクション ${mode}`,
+    celebrateTitle: (n: number) => `素晴らしい！全${n}個の関数を発見しました！`,
+    celebrateDetail: (mode: string) => `関数の個数 ${mode} であることが証明されました`,
+    conclusionTitle: "📌 まとめ",
+    conclusionText: (nA: string, nB: string, nBA: string) =>
+      `${nA}個の要素を持つ集合から${nB}個の要素を持つ集合への関数の個数は${nBA}です。A = {1,2}、B = {a,b,c}の場合：A→Bの関数 = 3² = 9個、B→Aの関数 = 2³ = 8個。`,
+  },
+} as const;
+
 type Mode = "AtoB" | "BtoA";
-type Mapping = Record<string, string>; // domain → codomain
+type Mapping = Record<string, string>;
 
-/* ─────────────────────────────────────────────
-   CONSTANTS
-───────────────────────────────────────────── */
 const DOMAIN_A = ["1", "2"];
 const CODOMAIN_B = ["a", "b", "c"];
 
@@ -31,9 +197,6 @@ const COLORS = {
   arrowHeadDrag: "url(#ahd)",
 };
 
-/* ─────────────────────────────────────────────
-   HELPERS
-───────────────────────────────────────────── */
 function nodePos(idx: number, total: number, x: number): { x: number; y: number } {
   const spacing = (SVG_H - 50) / (total + 1);
   return { x, y: 25 + spacing * (idx + 1) };
@@ -81,9 +244,6 @@ function getSVGCoords(
   };
 }
 
-/* ─────────────────────────────────────────────
-   MINI DIAGRAM (read-only, shows a discovered function)
-───────────────────────────────────────────── */
 const MiniDiagram: React.FC<{
   mapping: Mapping;
   domain: string[];
@@ -154,10 +314,10 @@ const MiniDiagram: React.FC<{
   );
 };
 
-/* ─────────────────────────────────────────────
-   MAIN PAGE
-───────────────────────────────────────────── */
 const BukuAnimasiBanyakFungsiPage: React.FC = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [mode, setMode] = useState<Mode>("AtoB");
   const [currentMapping, setCurrentMapping] = useState<Mapping>({});
   const [discoveredAtoB, setDiscoveredAtoB] = useState<Mapping[]>([]);
@@ -178,7 +338,6 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
   const domainLabel = mode === "AtoB" ? "A = {1, 2}" : "B = {a, b, c}";
   const codomainLabel = mode === "AtoB" ? "B = {a, b, c}" : "A = {1, 2}";
 
-  /* ── positions ── */
   const domainPositions = Object.fromEntries(
     domain.map((el, i) => [el, nodePos(i, domain.length, DOM_X)])
   );
@@ -186,20 +345,15 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
     codomain.map((el, i) => [el, nodePos(i, codomain.length, COD_X)])
   );
 
-  /* ── isComplete ── */
   const isComplete = domain.every((el) => currentMapping[el] !== undefined);
-
-  /* ── isDuplicate ── */
   const isDuplicate = isComplete && discovered.some((d) => mappingsEqual(d, currentMapping));
 
-  /* ── feedback timer ── */
   useEffect(() => {
     if (!feedback) return;
-    const t = setTimeout(() => setFeedback(null), 2200);
-    return () => clearTimeout(t);
+    const t2 = setTimeout(() => setFeedback(null), 2200);
+    return () => clearTimeout(t2);
   }, [feedback]);
 
-  /* ── drag helpers ── */
   const findCodomainAt = useCallback(
     (x: number, y: number): string | null => {
       for (const el of codomain) {
@@ -245,7 +399,6 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
     [dragging, findCodomainAt]
   );
 
-  /* ── remove arrow on domain double-click ── */
   const removeDomainArrow = (el: string) => {
     playPopSound();
     setCurrentMapping((prev) => {
@@ -255,14 +408,13 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
     });
   };
 
-  /* ── add to collection ── */
   const addFunction = () => {
     if (!isComplete) {
-      setFeedback({ msg: "Belum semua elemen domain dipasangkan!", type: "err" });
+      setFeedback({ msg: t.errNotComplete, type: "err" });
       return;
     }
     if (isDuplicate) {
-      setFeedback({ msg: "Fungsi ini sudah ada di koleksimu! Coba kombinasi lain.", type: "err" });
+      setFeedback({ msg: t.errDuplicate, type: "err" });
       return;
     }
     playPopSound();
@@ -271,13 +423,12 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
     setCurrentMapping({});
     if (next.length === maxFuncs) {
       setCelebrate(true);
-      setFeedback({ msg: `🎉 Semua ${maxFuncs} fungsi berhasil ditemukan!`, type: "ok" });
+      setFeedback({ msg: t.feedAllFound(maxFuncs), type: "ok" });
     } else {
-      setFeedback({ msg: `✅ Fungsi ke-${next.length} ditambahkan! Lanjut temukan yang lain!`, type: "ok" });
+      setFeedback({ msg: t.feedAdded(next.length), type: "ok" });
     }
   };
 
-  /* ── reset ── */
   const resetCurrent = () => {
     playPopSound();
     setCurrentMapping({});
@@ -292,7 +443,6 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
     setFeedback(null);
   };
 
-  /* ── switch mode ── */
   const switchMode = () => {
     playPopSound();
     setMode((m) => (m === "AtoB" ? "BtoA" : "AtoB"));
@@ -301,12 +451,8 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
     setCelebrate(false);
   };
 
-  /* ── dragging from-position ── */
   const draggingFromPos = dragging ? domainPositions[dragging.from] : null;
 
-  /* ─────────────────────────────────────────
-     RENDER
-  ───────────────────────────────────────── */
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto pb-16">
       <Starfield />
@@ -314,33 +460,30 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
 
       <div className="relative z-10 max-w-2xl w-full px-4 pt-20">
 
-        {/* HEADER */}
         <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 bg-fuchsia-900/40 border border-fuchsia-500/40 rounded-full px-4 py-1 text-xs font-bold text-fuchsia-300 mb-3">
-            📖 BUKU ANIMASI MATEMATIKA · KELAS 8
+            {t.badge}
           </div>
           <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            BANYAK FUNGSI &amp; KORESPONDENSI SATU-SATU
+            {t.title}
           </h1>
-          <p className="text-white/50 text-xs font-body">Relasi dan Fungsi · Seret panah untuk membuktikan</p>
+          <p className="text-white/50 text-xs font-body">{t.subtitle}</p>
         </div>
 
-        {/* RUMUS CARD */}
         <div className="bg-slate-800/60 border border-white/10 rounded-xl p-4 mb-5 flex flex-col sm:flex-row gap-3">
           <div className="flex-1 bg-cyan-900/30 border border-cyan-500/30 rounded-lg p-3 text-center">
-            <p className="text-[10px] font-bold text-cyan-400 mb-1">A = &#123;1, 2&#125; → B = &#123;a, b, c&#125;</p>
+            <p className="text-[10px] font-bold text-cyan-400 mb-1">{t.atobFormula}</p>
             <p className="text-2xl font-bold text-cyan-300 font-mono">3² = <span className="text-yellow-300">9</span></p>
-            <p className="text-[10px] text-white/40">n(B)^n(A) fungsi</p>
+            <p className="text-[10px] text-white/40">{t.atobFuncs}</p>
           </div>
           <div className="flex items-center justify-center text-white/30 text-xl">⇄</div>
           <div className="flex-1 bg-violet-900/30 border border-violet-500/30 rounded-lg p-3 text-center">
-            <p className="text-[10px] font-bold text-violet-400 mb-1">B = &#123;a,b,c&#125; → A = &#123;1, 2&#125;</p>
+            <p className="text-[10px] font-bold text-violet-400 mb-1">{t.btoaFormula}</p>
             <p className="text-2xl font-bold text-violet-300 font-mono">2³ = <span className="text-yellow-300">8</span></p>
-            <p className="text-[10px] text-white/40">n(A)^n(B) fungsi</p>
+            <p className="text-[10px] text-white/40">{t.btoaFuncs}</p>
           </div>
         </div>
 
-        {/* MODE SWITCH */}
         <div className="flex items-center justify-center mb-4 gap-3">
           <span className={`text-sm font-bold font-mono px-3 py-1 rounded-lg transition-all ${mode === "AtoB" ? "bg-cyan-700/60 text-cyan-200 ring-1 ring-cyan-400" : "text-white/30"}`}>
             A → B
@@ -350,21 +493,20 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
             className="flex items-center gap-1 bg-slate-700/60 hover:bg-slate-600/70 border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-full transition-all active:scale-95"
           >
             <ArrowLeftRight className="w-4 h-4" />
-            Switch Mode
+            {t.switchMode}
           </button>
           <span className={`text-sm font-bold font-mono px-3 py-1 rounded-lg transition-all ${mode === "BtoA" ? "bg-violet-700/60 text-violet-200 ring-1 ring-violet-400" : "text-white/30"}`}>
             B → A
           </span>
         </div>
 
-        {/* PROGRESS BAR */}
         <div className="mb-4">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs text-white/50 font-body">
-              Fungsi ditemukan: <span className="text-yellow-300 font-bold">{discovered.length}</span> / {maxFuncs}
+              {t.foundFuncs} <span className="text-yellow-300 font-bold">{discovered.length}</span> / {maxFuncs}
             </span>
             {celebrate && (
-              <span className="text-xs text-green-400 font-bold animate-pulse">🎉 LENGKAP!</span>
+              <span className="text-xs text-green-400 font-bold animate-pulse">{t.complete}</span>
             )}
           </div>
           <div className="h-2 bg-slate-800/80 rounded-full overflow-hidden border border-white/10">
@@ -375,23 +517,20 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
           </div>
         </div>
 
-        {/* INTERACTIVE DIAGRAM */}
         <div className="bg-slate-900/70 border border-white/10 rounded-2xl p-4 mb-4 shadow-xl">
-          {/* Labels */}
           <div className="flex justify-between mb-2 px-2">
             <div className="text-center">
-              <span className="text-xs font-bold text-cyan-400 font-mono">Domain</span>
+              <span className="text-xs font-bold text-cyan-400 font-mono">{t.domainLabel}</span>
               <br />
               <span className="text-[11px] text-cyan-300/70 font-mono">{domainLabel}</span>
             </div>
             <div className="text-center">
-              <span className="text-xs font-bold text-violet-400 font-mono">Kodomain</span>
+              <span className="text-xs font-bold text-violet-400 font-mono">{t.codomainLabel}</span>
               <br />
               <span className="text-[11px] text-violet-300/70 font-mono">{codomainLabel}</span>
             </div>
           </div>
 
-          {/* SVG Canvas */}
           <div className="flex justify-center select-none">
             <svg
               ref={svgRef}
@@ -405,11 +544,9 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
               onTouchEnd={onSVGUp}
             >
               <defs>
-                {/* arrowhead for committed arrows */}
                 <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
                   <path d="M0,0 L8,3 L0,6 Z" fill="#f0abfc" />
                 </marker>
-                {/* arrowhead for drag preview */}
                 <marker id="ahd" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
                   <path d="M0,0 L8,3 L0,6 Z" fill="#fbbf24" />
                 </marker>
@@ -419,14 +556,11 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
                 </filter>
               </defs>
 
-              {/* Horizontal separator line */}
               <line x1={SVG_W / 2} y1={10} x2={SVG_W / 2} y2={SVG_H - 10} stroke="rgba(255,255,255,0.06)" strokeWidth={1} strokeDasharray="4 4" />
 
-              {/* Label inside SVG */}
               <text x={DOM_X} y={SVG_H - 8} textAnchor="middle" fill="#22d3ee" fontSize={11} fontFamily="monospace" fontWeight="bold">{mode === "AtoB" ? "A" : "B"}</text>
               <text x={COD_X} y={SVG_H - 8} textAnchor="middle" fill="#a78bfa" fontSize={11} fontFamily="monospace" fontWeight="bold">{mode === "AtoB" ? "B" : "A"}</text>
 
-              {/* Committed arrows */}
               {domain.map((el) => {
                 const target = currentMapping[el];
                 if (!target) return null;
@@ -445,7 +579,6 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
                 );
               })}
 
-              {/* Drag preview arrow */}
               {dragging && draggingFromPos && (
                 <path
                   d={bezierPath(draggingFromPos, mousePos, NODE_R, 0)}
@@ -458,8 +591,7 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
                 />
               )}
 
-              {/* Codomain nodes */}
-              {codomain.map((el, i) => {
+              {codomain.map((el) => {
                 const pos = codomainPositions[el];
                 const isTarget = dragging !== null &&
                   Math.hypot(mousePos.x - pos.x, mousePos.y - pos.y) < NODE_R + 10;
@@ -481,7 +613,6 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
                 );
               })}
 
-              {/* Domain nodes (interactive – drag from here) */}
               {domain.map((el) => {
                 const pos = domainPositions[el];
                 const hasArrow = currentMapping[el] !== undefined;
@@ -518,13 +649,11 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
             </svg>
           </div>
 
-          {/* Interaction hint */}
           <p className="text-center text-[11px] text-white/30 mt-2 font-body">
-            👆 Seret dari node <span className="text-cyan-400">domain</span> ke node <span className="text-violet-400">kodomain</span> · Double-tap untuk hapus panah
+            {t.hint} <span className="text-cyan-400">{t.hintDomain}</span> {t.hintAnd} <span className="text-violet-400">{t.hintCodomain}</span> {t.hintDoubleTap}
           </p>
         </div>
 
-        {/* VALIDATION STATUS */}
         <div className={`flex items-center gap-2 px-4 py-2.5 rounded-xl mb-3 text-sm font-body transition-all ${
           isComplete && !isDuplicate
             ? "bg-green-900/40 border border-green-500/40 text-green-300"
@@ -537,14 +666,13 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
           {!isComplete && <div className="w-4 h-4 rounded-full border border-white/20 shrink-0" />}
           <span>
             {isComplete && !isDuplicate
-              ? "✅ Fungsi valid! Setiap elemen domain punya tepat satu pasangan."
+              ? t.statusValid
               : isDuplicate
-              ? "⚠️ Fungsi ini sudah ada di koleksimu. Coba kombinasi yang berbeda!"
-              : `Hubungkan ${domain.filter(el => !currentMapping[el]).length} elemen domain yang tersisa.`}
+              ? t.statusDup
+              : t.statusRemaining(domain.filter(el => !currentMapping[el]).length)}
           </span>
         </div>
 
-        {/* FEEDBACK TOAST */}
         {feedback && (
           <div className={`text-center text-sm font-bold py-2 px-4 rounded-xl mb-3 transition-all ${
             feedback.type === "ok" ? "bg-green-900/50 text-green-300 border border-green-500/40" :
@@ -555,14 +683,13 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
           </div>
         )}
 
-        {/* ACTION BUTTONS */}
         <div className="flex gap-2 mb-6">
           <button
             onClick={resetCurrent}
             className="flex items-center gap-1.5 bg-slate-700/60 hover:bg-slate-600/70 border border-white/15 text-white/70 text-xs font-bold px-3 py-2.5 rounded-xl transition-all active:scale-95"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            Reset Panah
+            {t.resetArrows}
           </button>
           <button
             onClick={addFunction}
@@ -574,61 +701,61 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
             }`}
           >
             <Trophy className="w-4 h-4" />
-            Simpan ke Koleksi!
+            {t.saveBtn}
           </button>
           <button
             onClick={resetAll}
             className="flex items-center gap-1.5 bg-red-900/40 hover:bg-red-800/50 border border-red-500/30 text-red-300 text-xs font-bold px-3 py-2.5 rounded-xl transition-all active:scale-95"
           >
             <XCircle className="w-3.5 h-3.5" />
-            Reset Semua
+            {t.resetAll}
           </button>
         </div>
 
-        {/* HINT PANEL */}
         <div className="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden mb-6">
           <button
             onClick={() => { setShowHint(h => !h); playPopSound(); }}
             className="w-full flex items-center justify-between px-4 py-3 text-left"
           >
             <div className="flex items-center gap-2 text-yellow-300 text-sm font-bold">
-              <Lightbulb className="w-4 h-4" /> Petunjuk &amp; Aturan Fungsi
+              <Lightbulb className="w-4 h-4" /> {t.hintTitle}
             </div>
             {showHint ? <ChevronUp className="w-4 h-4 text-white/40" /> : <ChevronDown className="w-4 h-4 text-white/40" />}
           </button>
           {showHint && (
             <div className="px-4 pb-4 space-y-3 text-sm font-body">
               <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-3 space-y-1.5">
-                <p className="text-yellow-300 font-bold text-xs">📌 Syarat sebuah FUNGSI:</p>
-                <p className="text-white/70 text-xs">✔ Setiap anggota <strong className="text-cyan-300">domain</strong> harus punya <strong>tepat satu</strong> pasangan di kodomain.</p>
-                <p className="text-white/70 text-xs">✔ Boleh ada anggota kodomain yang tidak dipasangkan (surjektif tidak wajib).</p>
-                <p className="text-white/70 text-xs">✔ Boleh ada dua anggota domain yang dipasangkan ke anggota kodomain yang sama.</p>
+                <p className="text-yellow-300 font-bold text-xs">{t.hintFuncTitle}</p>
+                <p className="text-white/70 text-xs">
+                  {t.hintFuncRule1} <strong className="text-cyan-300">{t.hintFuncRule1b}</strong> {t.hintFuncRule1c} <strong>{t.hintFuncRule1d}</strong> {t.hintFuncRule1e}
+                </p>
+                <p className="text-white/70 text-xs">{t.hintFuncRule2}</p>
+                <p className="text-white/70 text-xs">{t.hintFuncRule3}</p>
               </div>
               <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-3 space-y-1.5">
-                <p className="text-cyan-300 font-bold text-xs">🔢 Cara menghitung banyak fungsi:</p>
-                <p className="text-white/70 text-xs"><strong>A→B:</strong> n(B)^n(A) = 3² = <strong className="text-yellow-300">9 fungsi</strong></p>
-                <p className="text-white/70 text-xs">Setiap elemen A punya 3 pilihan di B. Ada 2 elemen di A, jadi 3×3 = 9.</p>
-                <p className="text-white/70 text-xs mt-1"><strong>B→A:</strong> n(A)^n(B) = 2³ = <strong className="text-yellow-300">8 fungsi</strong></p>
-                <p className="text-white/70 text-xs">Setiap elemen B punya 2 pilihan di A. Ada 3 elemen di B, jadi 2×2×2 = 8.</p>
+                <p className="text-cyan-300 font-bold text-xs">{t.hintCountTitle}</p>
+                <p className="text-white/70 text-xs"><strong>{t.hintCountAB}</strong> n(B)^n(A) = 3² = <strong className="text-yellow-300">9</strong></p>
+                <p className="text-white/70 text-xs">{t.hintCountABDetail}</p>
+                <p className="text-white/70 text-xs mt-1"><strong>{t.hintCountBA}</strong> n(A)^n(B) = 2³ = <strong className="text-yellow-300">8</strong></p>
+                <p className="text-white/70 text-xs">{t.hintCountBADetail}</p>
               </div>
               <div className="bg-fuchsia-900/20 border border-fuchsia-500/30 rounded-lg p-3 space-y-1.5">
-                <p className="text-fuchsia-300 font-bold text-xs">🎯 Cara menggunakan:</p>
-                <p className="text-white/70 text-xs">1. Tekan &amp; seret dari node domain (kiri) menuju node kodomain (kanan)</p>
-                <p className="text-white/70 text-xs">2. Double-tap node domain untuk menghapus panahnya</p>
-                <p className="text-white/70 text-xs">3. Klik "Simpan ke Koleksi!" jika fungsi sudah lengkap dan baru</p>
-                <p className="text-white/70 text-xs">4. Coba temukan semua {maxFuncs} fungsi yang mungkin!</p>
+                <p className="text-fuchsia-300 font-bold text-xs">{t.hintHowTitle}</p>
+                <p className="text-white/70 text-xs">{t.hintHow1}</p>
+                <p className="text-white/70 text-xs">{t.hintHow2}</p>
+                <p className="text-white/70 text-xs">{t.hintHow3}</p>
+                <p className="text-white/70 text-xs">{t.hintHow4(maxFuncs)}</p>
               </div>
             </div>
           )}
         </div>
 
-        {/* DISCOVERED FUNCTIONS GALLERY */}
         {discovered.length > 0 && (
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-3">
               <Trophy className="w-4 h-4 text-yellow-400" />
               <h2 className="text-sm font-bold text-yellow-300">
-                Koleksi Fungsi {mode === "AtoB" ? "A → B" : "B → A"}
+                {t.galleryTitle(mode === "AtoB" ? "A → B" : "B → A")}
                 <span className="ml-2 text-white/40 font-normal">({discovered.length}/{maxFuncs})</span>
               </h2>
             </div>
@@ -642,7 +769,6 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
                   codomain={codomain}
                 />
               ))}
-              {/* Empty slots */}
               {Array.from({ length: maxFuncs - discovered.length }).map((_, idx) => (
                 <div
                   key={`empty-${idx}`}
@@ -656,19 +782,30 @@ const BukuAnimasiBanyakFungsiPage: React.FC = () => {
             {celebrate && (
               <div className="mt-4 bg-gradient-to-r from-yellow-900/40 to-green-900/40 border border-yellow-500/40 rounded-xl p-4 text-center">
                 <p className="text-xl mb-1">🎉🏆🎉</p>
-                <p className="text-yellow-300 font-bold text-sm">Luar biasa! Semua {maxFuncs} fungsi berhasil ditemukan!</p>
-                <p className="text-white/50 text-xs mt-1">Kamu telah membuktikan bahwa banyak fungsi {mode === "AtoB" ? "A→B = n(B)^n(A) = 3² = 9" : "B→A = n(A)^n(B) = 2³ = 8"}</p>
+                <p className="text-yellow-300 font-bold text-sm">{t.celebrateTitle(maxFuncs)}</p>
+                <p className="text-white/50 text-xs mt-1">
+                  {t.celebrateDetail(mode === "AtoB" ? "A→B = n(B)^n(A) = 3² = 9" : "B→A = n(A)^n(B) = 2³ = 8")}
+                </p>
               </div>
             )}
           </div>
         )}
 
-        {/* KESIMPULAN */}
         <div className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-white/10 rounded-xl p-4 mb-6 text-sm font-body">
-          <p className="font-bold text-white mb-2">📌 Kesimpulan</p>
+          <p className="font-bold text-white mb-2">{t.conclusionTitle}</p>
           <p className="text-white/70 text-xs leading-relaxed">
-            Banyak fungsi yang dapat dibentuk dari himpunan dengan <strong className="text-cyan-300">n(A)</strong> anggota ke himpunan dengan <strong className="text-violet-300">n(B)</strong> anggota adalah <strong className="text-yellow-300">n(B)^n(A)</strong>.
-            Untuk A = &#123;1,2&#125; dan B = &#123;a,b,c&#125;, banyak fungsi dari A ke B = 3² = <strong className="text-yellow-300">9</strong>, dan dari B ke A = 2³ = <strong className="text-yellow-300">8</strong>.
+            {t.conclusionText(
+              language === "id" ? "<strong class='text-cyan-300'>n(A)</strong>" : "<strong class='text-cyan-300'>n(A)</strong>",
+              language === "id" ? "<strong class='text-violet-300'>n(B)</strong>" : "<strong class='text-violet-300'>n(B)</strong>",
+              language === "id" ? "<strong class='text-yellow-300'>n(B)^n(A)</strong>" : "<strong class='text-yellow-300'>n(B)^n(A)</strong>"
+            )}
+          </p>
+          <p className="text-white/70 text-xs leading-relaxed mt-1">
+            {language === "id"
+              ? "Untuk A = {1,2} dan B = {a,b,c}, banyak fungsi dari A ke B = 3² = 9, dan dari B ke A = 2³ = 8."
+              : language === "en"
+              ? "For A = {1,2} and B = {a,b,c}: functions from A to B = 3² = 9, and from B to A = 2³ = 8."
+              : "A = {1,2}、B = {a,b,c}の場合：A→Bの関数 = 3² = 9個、B→Aの関数 = 2³ = 8個。"}
           </p>
         </div>
 
