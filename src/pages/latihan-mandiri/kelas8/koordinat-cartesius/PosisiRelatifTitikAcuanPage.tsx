@@ -245,7 +245,7 @@ const PosisiRelatifTitikAcuanPage = () => {
               <div className="px-5 py-4 space-y-3">
                 {q.diagram && (
                   <div className="flex justify-center my-2">
-                    <CoordPlane {...q.diagram} />
+                    <CoordPlane {...q.diagram} lightBg />
                   </div>
                 )}
 
