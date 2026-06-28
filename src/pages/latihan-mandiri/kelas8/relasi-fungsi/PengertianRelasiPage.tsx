@@ -60,17 +60,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan domain, kodomain, dan range jika B = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}." },
     ],
   }),
-  Qn(5, "Membaca Diagram Panah", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={['Ali','Budi','Citra','Dina']} setB={['Merah','Kuning','Hijau','Biru']} arrows={[[0,0],[0,2],[1,1],[2,3],[3,1]]} labelA="Siswa" labelB="Warna Favorit" colorA="#34d399" colorB="#fb923c" arrowColor="#facc15" size="md" />,
-    parts: [
-      { label: "a.", text: "Tuliskan relasi di atas sebagai himpunan pasangan berurutan." },
-      { label: "b.", text: "Siapa saja yang menyukai warna yang sama?" },
-      { label: "c.", text: "Tuliskan domain dan range dari relasi tersebut." },
-      { label: "d.", text: "Apakah relasi ini termasuk fungsi? Jelaskan alasanmu." },
-    ],
-  }),
-  Qn(6, "Relasi 'Faktor dari'", {
+  Qn(5, "Relasi 'Faktor dari'", {
     type: "mixed",
     content: "Diketahui A = {2, 3, 4, 6} dan B = {6, 8, 12, 18, 24}. Relasi yang menghubungkan A ke B adalah 'faktor dari'.",
     parts: [
@@ -79,7 +69,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan range relasi tersebut." },
     ],
   }),
-  Qn(7, "Domain, Kodomain, dan Range", {
+  Qn(6, "Domain, Kodomain, dan Range", {
     type: "mixed",
     diagram: <ArrowDiagram setA={[1,2,3,4,5]} setB={[1,4,9,16,25,36]} arrows={[[0,0],[1,1],[2,2],[3,3],[4,4]]} labelA="A" labelB="B" colorA="#f472b6" colorB="#60a5fa" arrowColor="#34d399" />,
     parts: [
@@ -88,7 +78,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa nama aturan relasi pada diagram tersebut?" },
     ],
   }),
-  Qn(8, "Relasi 'Kuadrat dari'", {
+  Qn(7, "Relasi 'Kuadrat dari'", {
     type: "mixed",
     content: "Diketahui A = {1, 2, 3, 4, 5} dan B = {1, 4, 9, 16, 25, 36}. Relasi yang berlaku adalah 'kuadrat dari'.",
     parts: [
@@ -97,7 +87,7 @@ const questions: Q[] = [
       { label: "c.", text: "Nilai mana di himpunan B yang bukan merupakan range?" },
     ],
   }),
-  Qn(9, "Relasi 'Lebih dari'", {
+  Qn(8, "Relasi 'Lebih dari'", {
     type: "mixed",
     content: "Diketahui P = {2, 4, 6} dan Q = {1, 3, 5, 7}. Relasi yang berlaku adalah 'lebih dari'.",
     parts: [
@@ -106,9 +96,48 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan range relasi tersebut." },
     ],
   }),
-  Qn(10, "Relasi dari Diagram – Tentukan Aturan", {
+  Qn(9, "Relasi dari Diagram Kartesius – Tentukan Aturan", {
     type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3,4]} setB={[3,5,7,9,11]} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#fb923c" colorB="#34d399" arrowColor="#f472b6" />,
+    diagram: (
+      <div className="flex flex-col items-center my-2">
+        <svg width="280" height="250" viewBox="0 0 280 250">
+          <rect width="280" height="250" fill="white" rx="14" stroke="#e2e8f0" strokeWidth="1" />
+          {/* grid lines */}
+          {[1,2,3,4,5].map(x => (
+            <line key={`gx${x}`} x1={45+x*44} y1={15} x2={45+x*44} y2={215} stroke="#f0f0f0" strokeWidth="1" />
+          ))}
+          {[2,4,6,8,10].map(y => (
+            <line key={`gy${y}`} x1={45} y1={215-y*19} x2={265} y2={215-y*19} stroke="#f0f0f0" strokeWidth="1" />
+          ))}
+          {/* axes */}
+          <line x1="45" y1="215" x2="268" y2="215" stroke="#334155" strokeWidth="2" markerEnd="url(#axHead)" />
+          <line x1="45" y1="215" x2="45" y2="12" stroke="#334155" strokeWidth="2" markerEnd="url(#axHead)" />
+          <defs>
+            <marker id="axHead" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+              <polygon points="0 0, 6 3, 0 6" fill="#334155" />
+            </marker>
+          </defs>
+          {/* x-axis labels */}
+          {[1,2,3,4,5].map(x => (
+            <text key={`xl${x}`} x={45+x*44} y={230} fill="#64748b" fontSize="11" textAnchor="middle" fontWeight="bold">{x}</text>
+          ))}
+          {/* y-axis labels */}
+          {[2,4,6,8,10].map(y => (
+            <text key={`yl${y}`} x={36} y={215-y*19+4} fill="#64748b" fontSize="11" textAnchor="middle" fontWeight="bold">{y}</text>
+          ))}
+          {/* axis name */}
+          <text x="270" y="219" fill="#334155" fontSize="11" fontWeight="bold">x</text>
+          <text x="48" y="10" fill="#334155" fontSize="11" fontWeight="bold">y</text>
+          {/* data points: (1,3),(2,5),(3,7),(4,9) */}
+          {[[1,3],[2,5],[3,7],[4,9]].map(([x,y], i) => (
+            <g key={i}>
+              <circle cx={45+x*44} cy={215-y*19} r="6" fill="#fb923c" stroke="#ea580c" strokeWidth="1.5" opacity="0.9" />
+              <text x={45+x*44+10} y={215-y*19-6} fill="#ea580c" fontSize="10" fontWeight="bold">({x},{y})</text>
+            </g>
+          ))}
+        </svg>
+      </div>
+    ),
     parts: [
       { label: "a.", text: "Tuliskan himpunan pasangan berurutannya." },
       { label: "b.", math: "\\text{Tentukan aturan relasinya: } y = \\ldots" },
@@ -135,7 +164,7 @@ const PengertianRelasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 10 {t('practice.suffixSoal')}</span>
+            <span className="text-violet-400 text-xs font-bold">📋 9 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
