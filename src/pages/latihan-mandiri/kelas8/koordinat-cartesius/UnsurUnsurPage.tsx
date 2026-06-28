@@ -228,7 +228,7 @@ const questions: Q[] = [
   }),
 
   Q(14, "Jarak Titik ke Garis Vertikal", {
-    type: "mixed",
+    type: "essay",
     diagram: {
       size: 260, range: 7,
       pts: [
@@ -241,11 +241,7 @@ const questions: Q[] = [
         { x1: -1, y1: 2, x2: 3, y2: 2, color: "#f472b6", dashed: true, label: "?" },
       ],
     },
-    parts: [
-      { label: "a.", text: "Tentukan persamaan garis yang melalui titik (3, −5) dan (3, 4). Apa jenis garis tersebut?" },
-      { label: "b.", text: "Hitung jarak titik A(−1, 2) terhadap garis tersebut dalam satuan." },
-      { label: "c.", text: "Jelaskan cara menghitung jarak sebuah titik ke garis vertikal x = k." },
-    ],
+    content: "Hitung jarak titik A(−1, 2) terhadap garis yang melalui titik (3, 4) dan (3, −5) dalam satuan.",
   }),
 
   Q(15, "Soal ANBK - Evaluasi Pernyataan", {
