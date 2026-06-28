@@ -7,6 +7,119 @@ import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { TrendingUp } from "lucide-react";
 
+const SvgBarisanAritmetika = () => (
+  <svg viewBox="0 0 420 130" className="w-full max-w-md mx-auto my-3" aria-label="Ilustrasi barisan aritmetika 7, 11, 15, 19">
+    {[
+      { cx: 52, val: "7", label: "U₁" },
+      { cx: 152, val: "11", label: "U₂" },
+      { cx: 252, val: "15", label: "U₃" },
+      { cx: 352, val: "19", label: "U₄" },
+    ].map(({ cx, val, label }) => (
+      <g key={cx}>
+        <circle cx={cx} cy={52} r={36} fill="#064e3b" stroke="#34d399" strokeWidth="2" />
+        <text x={cx} y={57} textAnchor="middle" fill="#6ee7b7" fontSize="18" fontWeight="bold">{val}</text>
+        <text x={cx} y={105} textAnchor="middle" fill="#6ee7b7" fontSize="11">{label}</text>
+      </g>
+    ))}
+    {[102, 202, 302].map((x) => (
+      <g key={x}>
+        <line x1={x - 2} y1={52} x2={x + 2} y2={52} stroke="none" />
+        <path d={`M${x - 14},52 L${x + 14},52`} stroke="#fbbf24" strokeWidth="2" markerEnd="url(#arr)" />
+        <text x={x} y={38} textAnchor="middle" fill="#fbbf24" fontSize="11" fontWeight="bold">+4</text>
+      </g>
+    ))}
+    <defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 Z" fill="#fbbf24" />
+      </marker>
+    </defs>
+    <text x={52} y={122} textAnchor="middle" fill="#34d399" fontSize="10">a = 7</text>
+    <rect x={4} y={108} width={94} height={16} rx={4} fill="#064e3b" stroke="#34d399" strokeWidth="1" />
+    <text x={51} y={120} textAnchor="middle" fill="#34d399" fontSize="10" fontWeight="bold">a = 7 (suku pertama)</text>
+    <rect x={76} y={26} width={52} height={16} rx={4} fill="#78350f" stroke="#fbbf24" strokeWidth="1" />
+    <text x={102} y={37} textAnchor="middle" fill="#fbbf24" fontSize="10" fontWeight="bold">b = 4 (beda)</text>
+  </svg>
+);
+
+const SvgBatuBata = () => {
+  const rows = [8, 10, 12, 14];
+  const brickW = 28;
+  const brickH = 14;
+  const gap = 3;
+  const rowGap = 5;
+  const maxBricks = 16;
+  const svgW = maxBricks * (brickW + gap) + 20;
+  const totalRows = 6;
+
+  return (
+    <svg viewBox={`0 0 ${svgW} 220`} className="w-full max-w-lg mx-auto my-3" aria-label="Ilustrasi tumpukan batu bata">
+      {rows.map((count, ri) => {
+        const y = ri * (brickH + rowGap) + 10;
+        const totalW = count * (brickW + gap) - gap;
+        const startX = (svgW - totalW) / 2;
+        const rowNum = ri + 1;
+        return (
+          <g key={ri}>
+            {Array.from({ length: count }).map((_, bi) => (
+              <rect
+                key={bi}
+                x={startX + bi * (brickW + gap)}
+                y={y}
+                width={brickW}
+                height={brickH}
+                rx={2}
+                fill={ri === 0 ? "#b45309" : ri === 1 ? "#b45309" : "#92400e"}
+                stroke="#fbbf24"
+                strokeWidth="0.8"
+              />
+            ))}
+            <text x={svgW - 8} y={y + brickH / 2 + 4} textAnchor="end" fill="#fbbf24" fontSize="10">
+              {count} bata (tumpukan {rowNum})
+            </text>
+          </g>
+        );
+      })}
+
+      <text x={svgW / 2} y={rows.length * (brickH + rowGap) + 22} textAnchor="middle" fill="#6ee7b7" fontSize="13" fontWeight="bold">
+        ⋮
+      </text>
+      <text x={svgW / 2} y={rows.length * (brickH + rowGap) + 36} textAnchor="middle" fill="#6ee7b7" fontSize="11">
+        (tumpukan 5 s.d. 14)
+      </text>
+
+      {(() => {
+        const lastCount = 8 + 14 * 2;
+        const lastY = rows.length * (brickH + rowGap) + 50;
+        const totalW = Math.min(lastCount, maxBricks) * (brickW + gap) - gap;
+        const startX = (svgW - totalW) / 2;
+        return (
+          <g>
+            {Array.from({ length: Math.min(lastCount, maxBricks) }).map((_, bi) => (
+              <rect
+                key={bi}
+                x={startX + bi * (brickW + gap)}
+                y={lastY}
+                width={brickW}
+                height={brickH}
+                rx={2}
+                fill="#7c3aed"
+                stroke="#c4b5fd"
+                strokeWidth="0.8"
+              />
+            ))}
+            <text x={svgW - 8} y={lastY + brickH / 2 + 4} textAnchor="end" fill="#c4b5fd" fontSize="10">
+              ? bata (tumpukan 15)
+            </text>
+          </g>
+        );
+      })()}
+
+      <text x={10} y={200} fill="#34d399" fontSize="10">↑ Atas</text>
+      <text x={10} y={212} fill="#c4b5fd" fontSize="10">↓ Bawah (paling bawah)</text>
+    </svg>
+  );
+};
+
 const PolaAritmetikaPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -15,9 +128,11 @@ const PolaAritmetikaPage = () => {
     {
       number: 1,
       title: "Menentukan Suku ke-n Barisan Aritmetika",
-      content: "Diketahui barisan aritmetika: 7, 11, 15, 19, ...",
+      content: "Diketahui barisan aritmetika berikut:",
       type: "mixed",
+      svg: <SvgBarisanAritmetika />,
       parts: [
+        { label: "Barisan:", math: "7,\\ 11,\\ 15,\\ 19,\\ \\ldots" },
         { label: "a.", text: "Tentukan suku pertama (a) dan beda (b) dari barisan tersebut." },
         { label: "b.", math: "\\text{Tuliskan rumus } U_n \\text{ dari barisan tersebut.}" },
         { label: "c.", math: "\\text{Hitung nilai } U_{20}." },
@@ -101,83 +216,19 @@ const PolaAritmetikaPage = () => {
     {
       number: 10,
       title: "Soal ANBK - Deret Aritmetika Terapan",
-      content: "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp500, hari kedua Rp700, hari ketiga Rp900, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp19.200?",
+      content: "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp5.000, hari kedua Rp7.000, hari ketiga Rp9.000, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp192.000?",
       type: "essay",
     },
     {
       number: 11,
-      title: "Dua Barisan Aritmetika",
-      content: "Diberikan dua barisan aritmetika:\nBarisan A: 2, 5, 8, 11, ...\nBarisan B: 3, 7, 11, 15, ...\n\na. Tentukan suku ke-n dari masing-masing barisan.\nb. Suku ke berapa dari barisan A yang sama dengan suku ke-8 barisan B?\nc. Apakah ada suku yang sama-sama muncul di barisan A dan B? Jika ada, sebutkan!",
-      type: "essay",
-    },
-    {
-      number: 12,
-      title: "Barisan Aritmetika Turun",
-      content: "Diketahui barisan aritmetika: 50, 45, 40, 35, ...",
+      title: "Soal Kontekstual - Tumpukan Batu Bata",
+      content: "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya. Jika ada 15 tumpukan batu bata (dari atas sampai bawah), berapa banyak batu bata pada tumpukan paling bawah?",
       type: "mixed",
+      svg: <SvgBatuBata />,
       parts: [
-        { label: "a.", text: "Tentukan beda (b) dari barisan tersebut." },
-        { label: "b.", math: "\\text{Tentukan } U_{15}." },
-        { label: "c.", text: "Suku ke berapa yang pertama kali bernilai negatif?" },
-        { label: "d.", math: "\\text{Hitung } S_{20}." },
-      ],
-    },
-    {
-      number: 13,
-      title: "Soal UN - Barisan Aritmetika Gabungan",
-      content: "Diketahui barisan aritmetika dengan suku pertama 8 dan jumlah 6 suku pertamanya adalah 78.",
-      type: "mixed",
-      parts: [
-        { label: "a.", text: "Tentukan beda barisan tersebut." },
-        { label: "b.", math: "\\text{Tentukan } U_{10}." },
-        { label: "c.", math: "\\text{Hitung } S_{15}." },
-        { label: "d.", text: "Suku ke berapa yang nilainya 48?" },
-      ],
-    },
-    {
-      number: 14,
-      title: "Diketahui Dua Suku — Cari Suku Lain & Jumlah",
-      content: "Dalam suatu barisan aritmetika, diketahui:",
-      type: "mixed",
-      parts: [
-        { label: "Diket:", math: "U_4 = 22 \\quad \\text{dan} \\quad U_9 = 47" },
-        { label: "a.", text: "Tentukan nilai beda (b) dan suku pertama (a) barisan tersebut." },
-        { label: "b.", math: "\\text{Tentukan nilai } U_{20}." },
-        { label: "c.", math: "\\text{Hitung } S_{15} \\text{ (jumlah 15 suku pertama).}" },
-      ],
-    },
-    {
-      number: 15,
-      title: "Diketahui Dua Suku — Cari Suku Lain & Jumlah",
-      content: "Dalam suatu barisan aritmetika, diketahui:",
-      type: "mixed",
-      parts: [
-        { label: "Diket:", math: "U_2 = 9 \\quad \\text{dan} \\quad U_7 = 29" },
-        { label: "a.", text: "Tentukan nilai beda (b) dan suku pertama (a) barisan tersebut." },
-        { label: "b.", math: "\\text{Tentukan nilai } U_{12}." },
-        { label: "c.", math: "\\text{Hitung } S_{20} \\text{ (jumlah 20 suku pertama).}" },
-      ],
-    },
-    {
-      number: 16,
-      title: "Soal Kontekstual — Produksi Kue",
-      content: "Sebuah toko kue mencatat produksinya setiap hari. Pada hari ke-3 diproduksi 24 kue, dan pada hari ke-8 diproduksi 54 kue. Produksi setiap harinya bertambah secara konstan membentuk barisan aritmetika.",
-      type: "mixed",
-      parts: [
-        { label: "a.", text: "Tentukan beda (b) dan jumlah produksi pada hari pertama (a)." },
-        { label: "b.", math: "\\text{Berapa kue yang diproduksi pada hari ke-15?}" },
-        { label: "c.", math: "\\text{Berapa total kue yang diproduksi selama 20 hari pertama?}" },
-      ],
-    },
-    {
-      number: 17,
-      title: "Soal Kontekstual — Pemasangan Ubin",
-      content: "Seorang tukang memasang ubin setiap hari. Pada hari ke-2 ia memasang 18 ubin, dan pada hari ke-6 ia memasang 38 ubin. Jumlah ubin yang dipasang setiap hari bertambah secara konstan membentuk barisan aritmetika.",
-      type: "mixed",
-      parts: [
-        { label: "a.", text: "Tentukan beda (b) dan banyak ubin yang dipasang pada hari pertama (a)." },
-        { label: "b.", math: "\\text{Berapa ubin yang dipasang pada hari ke-10?}" },
-        { label: "c.", math: "\\text{Berapa total ubin yang telah dipasang selama 15 hari?}" },
+        { label: "Diket:", math: "a = 8,\\quad b = 2,\\quad n = 15" },
+        { label: "Tanya:", text: "Banyak batu bata pada tumpukan ke-15 (paling bawah) = U₁₅ = ?" },
+        { label: "Rumus:", math: "U_n = a + (n-1)\\,b" },
       ],
     },
   ];
@@ -197,7 +248,7 @@ const PolaAritmetikaPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 17 {t('practice.suffixSoal')}</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 11 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
           </div>
@@ -247,6 +298,11 @@ const PolaAritmetikaPage = () => {
                     )}
                     {q.content && (
                       <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.content}</p>
+                    )}
+                    {'svg' in q && q.svg && (
+                      <div className="my-2 bg-white/5 rounded-xl p-3 border border-emerald-500/20">
+                        {q.svg}
+                      </div>
                     )}
                     {q.type === "mixed" && q.parts && (
                       <div className="flex flex-col gap-2 mt-2">
