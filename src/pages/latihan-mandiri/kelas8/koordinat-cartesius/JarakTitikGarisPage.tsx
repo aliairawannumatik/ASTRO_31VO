@@ -163,7 +163,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(9, "Keliling Segitiga — Koordinat Negatif", {
+  Qn(8, "Keliling Segitiga — Koordinat Negatif", {
     type: "mixed",
     diagram: {
       size: 260, range: 7,
@@ -184,7 +184,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(12, "Jarak dalam Konteks Nyata", {
+  Qn(9, "Jarak dalam Konteks Nyata", {
     type: "mixed",
     content: "Sebuah peta kota menggunakan koordinat kartesius (dalam km).\nRumah Andi: A(2, 3), Sekolah: B(8, 11)",
     diagram: {
@@ -201,7 +201,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(13, "Persegi Panjang — Diagonal", {
+  Qn(10, "Persegi Panjang — Diagonal", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -227,7 +227,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(14, "Luas Segitiga dari Koordinat", {
+  Qn(11, "Luas Segitiga dari Koordinat", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -249,31 +249,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Qn(16, "Titik Pusat Lingkaran dari Diameter", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 8,
-      pts: [
-        { x: -3, y: -1, label: "A(−3,−1)", color: "#f472b6", labelPos: "bl" },
-        { x: 5, y: 5, label: "B(5,5)", color: "#60a5fa", labelPos: "tr" },
-        { x: 1, y: 2, label: "P", color: "#facc15", labelPos: "br" },
-      ],
-      segs: [
-        { x1: -3, y1: -1, x2: 5, y2: 5, color: "#facc15", dashed: true, label: "AB (diameter)" },
-      ],
-      circles: [
-        { cx: 1, cy: 2, r: 5, color: "#34d399" },
-      ],
-    },
-    parts: [
-      { label: "Diket:", text: "AB adalah diameter lingkaran, dengan A(−3, −1) dan B(5, 5) adalah ujung-ujung diameter tersebut." },
-      { label: "a.", text: "Tentukan koordinat titik pusat P (titik tengah AB)." },
-      { label: "b.", text: "Hitung jari-jari lingkaran tersebut (jarak dari P ke A)." },
-      { label: "c.", text: "Apakah titik C(4, −2) berada di dalam, di luar, atau tepat pada lingkaran? Jelaskan!" },
-    ],
-  }),
-
-  Qn(15, "Titik Tengah di Antara Dua Titik", {
+  Qn(12, "Titik Tengah di Antara Dua Titik", {
     type: "mixed",
     diagram: {
       size: 260, range: 8,
@@ -293,6 +269,30 @@ const questions: Q[] = [
       { label: "a.", text: "Tentukan koordinat titik tengah M dari A(−4, 2) dan B(6, 8)." },
       { label: "b.", text: "Jika titik tengah M dari P(1, 3) dan Q adalah M(4, 7), tentukan koordinat Q." },
       { label: "c.", text: "Titik K(−2, 5) dan L(8, −3). Tentukan koordinat titik tengah KL, lalu hitung jarak titik tengah tersebut ke titik asal O(0, 0)." },
+    ],
+  }),
+
+  Qn(13, "Titik Pusat Lingkaran dari Diameter", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 8,
+      pts: [
+        { x: -3, y: -1, label: "A(−3,−1)", color: "#f472b6", labelPos: "bl" },
+        { x: 5, y: 5, label: "B(5,5)", color: "#60a5fa", labelPos: "tr" },
+        { x: 1, y: 2, label: "P", color: "#facc15", labelPos: "br" },
+      ],
+      segs: [
+        { x1: -3, y1: -1, x2: 5, y2: 5, color: "#facc15", dashed: true },
+      ],
+      circles: [
+        { cx: 1, cy: 2, r: 5, color: "#34d399" },
+      ],
+    },
+    parts: [
+      { label: "Diket:", text: "AB adalah diameter lingkaran, dengan A(−3, −1) dan B(5, 5) adalah ujung-ujung diameter tersebut." },
+      { label: "a.", text: "Tentukan koordinat titik pusat P (titik tengah AB)." },
+      { label: "b.", text: "Hitung jari-jari lingkaran tersebut (jarak dari P ke A)." },
+      { label: "c.", text: "Apakah titik C(4, −2) berada di dalam, di luar, atau tepat pada lingkaran? Jelaskan!" },
     ],
   }),
 ];
@@ -316,7 +316,7 @@ const JarakTitikGarisPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Kartesius · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
-            <span className="text-teal-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
+            <span className="text-teal-400 text-xs font-bold">📋 13 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
