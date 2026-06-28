@@ -106,8 +106,8 @@ const questions: Q[] = [
           {[1,2,3,4,5].map(x => (
             <line key={`gx${x}`} x1={45+x*44} y1={15} x2={45+x*44} y2={215} stroke="#f0f0f0" strokeWidth="1" />
           ))}
-          {[2,4,6,8,10].map(y => (
-            <line key={`gy${y}`} x1={45} y1={215-y*19} x2={265} y2={215-y*19} stroke="#f0f0f0" strokeWidth="1" />
+          {[1,2,3,4,5,6,7,8,9,10].map(y => (
+            <line key={`gy${y}`} x1={45} y1={215-y*20} x2={265} y2={215-y*20} stroke="#f0f0f0" strokeWidth="1" />
           ))}
           {/* axes */}
           <line x1="45" y1="215" x2="268" y2="215" stroke="#334155" strokeWidth="2" markerEnd="url(#axHead)" />
@@ -121,9 +121,9 @@ const questions: Q[] = [
           {[1,2,3,4,5].map(x => (
             <text key={`xl${x}`} x={45+x*44} y={230} fill="#64748b" fontSize="11" textAnchor="middle" fontWeight="bold">{x}</text>
           ))}
-          {/* y-axis labels */}
-          {[2,4,6,8,10].map(y => (
-            <text key={`yl${y}`} x={36} y={215-y*19+4} fill="#64748b" fontSize="11" textAnchor="middle" fontWeight="bold">{y}</text>
+          {/* y-axis labels: every 1 unit */}
+          {[1,2,3,4,5,6,7,8,9,10].map(y => (
+            <text key={`yl${y}`} x={36} y={215-y*20+4} fill="#64748b" fontSize="9" textAnchor="middle" fontWeight="bold">{y}</text>
           ))}
           {/* axis name */}
           <text x="270" y="219" fill="#334155" fontSize="11" fontWeight="bold">x</text>
@@ -131,8 +131,8 @@ const questions: Q[] = [
           {/* data points: (1,3),(2,5),(3,7),(4,9) */}
           {[[1,3],[2,5],[3,7],[4,9]].map(([x,y], i) => (
             <g key={i}>
-              <circle cx={45+x*44} cy={215-y*19} r="6" fill="#fb923c" stroke="#ea580c" strokeWidth="1.5" opacity="0.9" />
-              <text x={45+x*44+10} y={215-y*19-6} fill="#ea580c" fontSize="10" fontWeight="bold">({x},{y})</text>
+              <circle cx={45+x*44} cy={215-y*20} r="6" fill="#fb923c" stroke="#ea580c" strokeWidth="1.5" opacity="0.9" />
+              <text x={45+x*44+10} y={215-y*20-6} fill="#ea580c" fontSize="10" fontWeight="bold">({x},{y})</text>
             </g>
           ))}
         </svg>
