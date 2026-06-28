@@ -47,7 +47,7 @@ const questions: Q[] = [
   Q(2, "Menentukan Kuadran", {
     type: "mixed",
     diagram: {
-      size: 260, range: 6, quadrantLabels: true,
+      size: 260, range: 6,
       pts: [
         { x: 3, y: 4, label: "P", color: "#f472b6", labelPos: "tr" },
         { x: -2, y: 3, label: "Q", color: "#fb923c", labelPos: "tl" },
@@ -220,6 +220,47 @@ const questions: Q[] = [
     ],
   }),
 
+  Q(13, "Titik di Kuadran IV", {
+    type: "mixed",
+    content: "Perhatikan titik-titik berikut:",
+    parts: [
+      { label: "a.", math: "A(5,\\ -3),\\ B(-2,\\ -4),\\ C(4,\\ -1),\\ D(-3,\\ 6),\\ E(7,\\ -5),\\ F(0,\\ -2)" },
+      { label: "b.", text: "Titik mana saja yang berada di Kuadran IV? Sebutkan absisnya (nilai x) dan ordinatnya (nilai y) masing-masing!" },
+      { label: "c.", text: "Mengapa titik F(0, −2) tidak termasuk Kuadran IV meskipun nilai y-nya negatif?" },
+    ],
+  }),
+
+  Q(14, "Koordinat di Atas Sumbu-x", {
+    type: "mixed",
+    content: "Dari daftar koordinat berikut, tentukan manakah yang berada di atas sumbu-x:",
+    parts: [
+      { label: "a.", math: "P(-3,\\ 5),\\ Q(4,\\ -2),\\ R(0,\\ 7),\\ S(-1,\\ -6),\\ T(6,\\ 3),\\ U(2,\\ 0)" },
+      { label: "b.", text: "Tuliskan semua titik yang berada di atas sumbu-x beserta alasannya." },
+      { label: "c.", text: "Apakah titik yang tepat berada pada sumbu-x (y = 0) dianggap 'di atas sumbu-x'? Jelaskan!" },
+    ],
+  }),
+
+  Q(15, "Jarak Titik ke Garis Vertikal", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 7,
+      pts: [
+        { x: -1, y: 2, label: "A(−1, 2)", color: "#f472b6", labelPos: "tl" },
+        { x: 3, y: -5, label: "(3, −5)", color: "#60a5fa", labelPos: "br" },
+        { x: 3, y: 4, label: "(3, 4)", color: "#60a5fa", labelPos: "tr" },
+      ],
+      segs: [
+        { x1: 3, y1: -5, x2: 3, y2: 4, color: "#60a5fa", label: "garis" },
+        { x1: -1, y1: 2, x2: 3, y2: 2, color: "#f472b6", dashed: true, label: "?" },
+      ],
+    },
+    parts: [
+      { label: "a.", text: "Tentukan persamaan garis yang melalui titik (3, −5) dan (3, 4). Apa jenis garis tersebut?" },
+      { label: "b.", text: "Hitung jarak titik A(−1, 2) terhadap garis tersebut dalam satuan." },
+      { label: "c.", text: "Jelaskan cara menghitung jarak sebuah titik ke garis vertikal x = k." },
+    ],
+  }),
+
 ];
 
 const UnsurUnsurPage = () => {
@@ -241,7 +282,7 @@ const UnsurUnsurPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Koordinat Kartesius · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
+            <span className="text-sky-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
