@@ -22,7 +22,17 @@ type Q = {
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1, "Memahami Konsep Relasi", {
+  Qn(1, "Relasi Anak-anak dan Buah Kesukaan", {
+    type: "mixed",
+    content: "Diketahui data kesukaan buah tiga anak sebagai berikut:\n\u2022 Andi menyukai: Apel dan Mangga\n\u2022 Budi menyukai: Jeruk dan Pisang\n\u2022 Citra menyukai: Apel, Mangga, dan Anggur\n\nRelasi yang berlaku adalah 'menyukai' dari himpunan anak ke himpunan buah.",
+    diagram: <ArrowDiagram setA={['Andi','Budi','Citra']} setB={['Apel','Mangga','Jeruk','Pisang','Anggur']} arrows={[[0,0],[0,1],[1,2],[1,3],[2,0],[2,1],[2,4]]} labelA="Anak" labelB="Buah" colorA="#10b981" colorB="#f97316" arrowColor="#a78bfa" size="md" />,
+    parts: [
+      { label: "a.", text: "Buatlah diagram panah untuk relasi 'menyukai' di atas (sudah ditampilkan)." },
+      { label: "b.", text: "Nyatakan relasi tersebut dalam bentuk himpunan pasangan berurutan." },
+      { label: "c.", text: "Gambarlah diagram Kartesius untuk relasi tersebut. (Sumbu mendatar = nama anak, sumbu tegak = nama buah)" },
+    ],
+  }),
+  Qn(2, "Memahami Konsep Relasi", {
     type: "mixed",
     content: "Perhatikan himpunan A = {1, 2, 3, 4} dan B = {a, b, c, d}. Relasi 'dipetakan ke' dari A ke B dinyatakan dengan diagram panah berikut:",
     diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c','d']} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#a78bfa" colorB="#38bdf8" arrowColor="#f472b6" />,
@@ -32,7 +42,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tuliskan domain, kodomain, dan range dari relasi tersebut." },
     ],
   }),
-  Qn(2, "Relasi Dari Pasangan Berurutan", {
+  Qn(3, "Relasi Dari Pasangan Berurutan", {
     type: "mixed",
     content: "Diketahui relasi R dari A ke B dinyatakan sebagai himpunan pasangan berurutan:",
     parts: [
@@ -42,7 +52,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan domain, kodomain, dan range jika B = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}." },
     ],
   }),
-  Qn(3, "Membaca Diagram Panah", {
+  Qn(4, "Membaca Diagram Panah", {
     type: "mixed",
     diagram: <ArrowDiagram setA={['Ali','Budi','Citra','Dina']} setB={['Merah','Kuning','Hijau','Biru']} arrows={[[0,0],[0,2],[1,1],[2,3],[3,1]]} labelA="Siswa" labelB="Warna Favorit" colorA="#34d399" colorB="#fb923c" arrowColor="#facc15" size="md" />,
     parts: [
@@ -52,7 +62,7 @@ const questions: Q[] = [
       { label: "d.", text: "Apakah relasi ini termasuk fungsi? Jelaskan alasanmu." },
     ],
   }),
-  Qn(4, "Relasi 'Faktor dari'", {
+  Qn(5, "Relasi 'Faktor dari'", {
     type: "mixed",
     content: "Diketahui A = {2, 3, 4, 6} dan B = {6, 8, 12, 18, 24}. Relasi yang menghubungkan A ke B adalah 'faktor dari'.",
     parts: [
@@ -61,7 +71,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan range relasi tersebut." },
     ],
   }),
-  Qn(5, "Domain, Kodomain, dan Range", {
+  Qn(6, "Domain, Kodomain, dan Range", {
     type: "mixed",
     diagram: <ArrowDiagram setA={[1,2,3,4,5]} setB={[1,4,9,16,25,36]} arrows={[[0,0],[1,1],[2,2],[3,3],[4,4]]} labelA="A" labelB="B" colorA="#f472b6" colorB="#60a5fa" arrowColor="#34d399" />,
     parts: [
@@ -70,7 +80,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apa nama aturan relasi pada diagram tersebut?" },
     ],
   }),
-  Qn(6, "Relasi 'Kuadrat dari'", {
+  Qn(7, "Relasi 'Kuadrat dari'", {
     type: "mixed",
     content: "Diketahui A = {1, 2, 3, 4, 5} dan B = {1, 4, 9, 16, 25, 36}. Relasi yang berlaku adalah 'kuadrat dari'.",
     parts: [
@@ -79,7 +89,7 @@ const questions: Q[] = [
       { label: "c.", text: "Nilai mana di himpunan B yang bukan merupakan range?" },
     ],
   }),
-  Qn(7, "Menyatakan Relasi dalam Tiga Cara", {
+  Qn(8, "Menyatakan Relasi dalam Tiga Cara", {
     type: "mixed",
     content: "Relasi R = {(2,5), (3,7), (4,9), (5,11)} diberikan dalam bentuk pasangan berurutan.",
     parts: [
@@ -89,7 +99,7 @@ const questions: Q[] = [
       { label: "d.", text: "Tentukan domain dan range relasi R." },
     ],
   }),
-  Qn(8, "Relasi pada Siswa dan Nilai", {
+  Qn(9, "Relasi pada Siswa dan Nilai", {
     type: "mixed",
     content: "Kelas 8A memiliki 4 siswa: Amir, Budi, Citra, Dini. Nilai matematika mereka: Amir→85, Budi→90, Citra→85, Dini→75.",
     parts: [
@@ -98,7 +108,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan domain dan range relasi ini." },
     ],
   }),
-  Qn(9, "Relasi 'Lebih dari'", {
+  Qn(10, "Relasi 'Lebih dari'", {
     type: "mixed",
     content: "Diketahui P = {2, 4, 6} dan Q = {1, 3, 5, 7}. Relasi yang berlaku adalah 'lebih dari'.",
     parts: [
@@ -107,7 +117,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan range relasi tersebut." },
     ],
   }),
-  Qn(10, "Relasi 'Setengah dari'", {
+  Qn(11, "Relasi 'Setengah dari'", {
     type: "mixed",
     content: "Diketahui himpunan A = {2, 4, 6, 8, 10} dan B = {1, 2, 3, 4, 5, 6, 7, 8}. Relasi yang menghubungkan A ke B adalah 'setengah dari'.",
     parts: [
@@ -116,7 +126,7 @@ const questions: Q[] = [
       { label: "c.", text: "Apakah semua anggota B menjadi range? Jelaskan." },
     ],
   }),
-  Qn(11, "Relasi dari Diagram – Tentukan Aturan", {
+  Qn(12, "Relasi dari Diagram – Tentukan Aturan", {
     type: "mixed",
     diagram: <ArrowDiagram setA={[1,2,3,4]} setB={[3,5,7,9,11]} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#fb923c" colorB="#34d399" arrowColor="#f472b6" />,
     parts: [
@@ -125,7 +135,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika A diperluas hingga {1, 2, 3, 4, 5}, apa nilai yang dipasangkan dengan 5?" },
     ],
   }),
-  Qn(12, "Menemukan Anggota Himpunan dari Relasi", {
+  Qn(13, "Menemukan Anggota Himpunan dari Relasi", {
     type: "mixed",
     content: "Diketahui relasi R dari A ke B dengan aturan 'y = x² − 1'. Jika A = {0, 1, 2, 3, 4}, tentukan:",
     parts: [
@@ -154,7 +164,7 @@ const PengertianRelasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
+            <span className="text-violet-400 text-xs font-bold">📋 13 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>

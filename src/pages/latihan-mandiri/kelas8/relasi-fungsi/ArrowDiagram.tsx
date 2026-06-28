@@ -41,24 +41,24 @@ const ArrowDiagram = ({
 
   return (
     <div className="flex flex-col items-center my-2">
-      {title && <p className="text-white/50 text-[10px] text-center mb-1 font-body">{title}</p>}
+      {title && <p className="text-gray-600 text-[10px] text-center mb-1 font-body">{title}</p>}
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
-        <rect width={W} height={H} fill="rgba(2,8,23,0.85)" rx="14" />
+        <rect width={W} height={H} fill="white" rx="14" stroke="#e2e8f0" strokeWidth="1" />
 
         <ellipse cx={leftX} cy={ovalTop + ovalH / 2} rx={ovalW} ry={ovalH / 2}
-          fill={`${colorA}18`} stroke={colorA} strokeWidth="1.5" strokeOpacity="0.7" />
+          fill={`${colorA}22`} stroke={colorA} strokeWidth="1.5" strokeOpacity="0.8" />
         <ellipse cx={rightX} cy={ovalTop + ovalH / 2} rx={ovalW} ry={ovalH / 2}
-          fill={`${colorB}18`} stroke={colorB} strokeWidth="1.5" strokeOpacity="0.7" />
+          fill={`${colorB}22`} stroke={colorB} strokeWidth="1.5" strokeOpacity="0.8" />
 
         <text x={leftX} y={ovalTop - 8} fill={colorA} fontSize="12" fontWeight="bold" textAnchor="middle" opacity="0.9">{labelA}</text>
         <text x={rightX} y={ovalTop - 8} fill={colorB} fontSize="12" fontWeight="bold" textAnchor="middle" opacity="0.9">{labelB}</text>
 
         {setA.map((el, i) => (
-          <text key={i} x={leftX} y={ayOf(i) + 4} fill="rgba(255,255,255,0.85)" fontSize="12"
+          <text key={i} x={leftX} y={ayOf(i) + 4} fill="rgba(20,20,20,0.9)" fontSize="12"
             fontWeight="bold" textAnchor="middle">{el}</text>
         ))}
         {setB.map((el, i) => (
-          <text key={i} x={rightX} y={byOf(i) + 4} fill="rgba(255,255,255,0.85)" fontSize="12"
+          <text key={i} x={rightX} y={byOf(i) + 4} fill="rgba(20,20,20,0.9)" fontSize="12"
             fontWeight="bold" textAnchor="middle">
             {questionMarks && el === "?" ? "?" : el}
           </text>
