@@ -70,14 +70,32 @@ const PolaGeometriPage = () => {
     },
     {
       number: 6,
-      title: "Aplikasi Geometri - Pertumbuhan Bakteri",
-      content: "Sebuah koloni bakteri berkembang biak dengan cara membelah diri menjadi 2 setiap 30 menit. Jumlah awal bakteri adalah 1.\n\na. Tuliskan barisan jumlah bakteri dari menit ke-0 hingga menit ke-150.\nb. Berapa jumlah bakteri setelah 5 jam?\nc. Tuliskan rumus jumlah bakteri setelah t menit.",
+      title: "Deret Geometri - Jumlah Suku",
+      content: "Suku ke-1 dan suku ke-4 barisan geometri adalah 5 dan 40. Jumlah 6 suku pertama dari barisan tersebut adalah ….",
       type: "essay",
     },
     {
       number: 7,
       title: "Menyisipkan Bilangan dalam Barisan Geometri",
       content: "Di antara bilangan 2 dan 162, disisipkan 3 buah bilangan sehingga terbentuk barisan geometri.\n\na. Tentukan rasio barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Hitung jumlah semua bilangan dalam barisan tersebut.",
+      type: "essay",
+    },
+    {
+      number: 8,
+      title: "Aplikasi Geometri - Pertumbuhan Bakteri",
+      content: "Sebuah koloni bakteri berkembang biak dengan cara membelah diri menjadi 2 setiap 30 menit. Jumlah awal bakteri adalah 1.\n\na. Tuliskan barisan jumlah bakteri dari menit ke-0 hingga menit ke-150.\nb. Berapa jumlah bakteri setelah 5 jam?\nc. Tuliskan rumus jumlah bakteri setelah t menit.",
+      type: "essay",
+    },
+    {
+      number: 9,
+      title: "Aplikasi Deret Geometri - Panjang Tali",
+      content: "Seutas tali dibagi menjadi enam bagian sehingga bagian-bagiannya membentuk barisan geometri. Jika panjang tali terpendek 9 cm dan panjang tali terpanjang 288 cm, maka panjang tali mula-mula adalah ….",
+      type: "essay",
+    },
+    {
+      number: 10,
+      title: "Aplikasi Barisan Geometri - Melipat Kertas",
+      content: "Celin melipat-lipat kertas berkali-kali. Jika ketebalan kertas mula-mula 2 mm, maka butuh berapa kali lipatan sehingga ketebalan kertas menjadi 256 mm?",
       type: "essay",
     },
   ];
@@ -97,7 +115,7 @@ const PolaGeometriPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
+            <span className="text-orange-400 text-xs font-bold">📋 10 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
           </div>
