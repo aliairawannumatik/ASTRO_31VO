@@ -1,7 +1,8 @@
-import React, { useRef, useState, useCallback, useEffect } from "react";
-import { InlineMath } from "react-katex";
-import { RefreshCw, Pencil, CheckCircle2, AlertTriangle, Info } from "lucide-react";
+import React, { useState, useRef, useCallback } from "react";
+import { RefreshCw, CheckCircle2, AlertTriangle, Info, Pencil } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
 /* ─── Grid constants ─────────────────────── */
@@ -72,15 +73,13 @@ function parseEquation(raw: string): { a: number; b: number; c: number } | null 
     if (isNaN(c)) return null;
 
     const lhs = s.slice(0, ei);
-    // Ensure the first term has an explicit sign so we can split cleanly
     const norm = /^[xy]/.test(lhs) ? '+' + lhs : lhs;
-    // Split into signed tokens: each starts with + or -
     const terms = norm.match(/[+\-][^+\-]*/g) ?? [];
 
     let a = 0, b = 0;
     for (const term of terms) {
       const sign = term[0] === '-' ? -1 : 1;
-      const body = term.slice(1); // strip leading sign
+      const body = term.slice(1);
       if (body.includes('x')) {
         const n = body.replace('x', '');
         a = n === '' ? sign : sign * (parseFloat(n) || 0);
@@ -107,7 +106,6 @@ function findTwoPointsOnLine(a: number, b: number, c: number): [Pt, Pt] | null {
       }
     }
   } else if (a !== 0) {
-    // Vertical line x = c/a
     const x = c / a;
     if (x >= 0 && x <= GMAX && Math.abs(x - Math.round(x)) < 1e-6) {
       const xi = Math.round(x);
@@ -117,11 +115,9 @@ function findTwoPointsOnLine(a: number, b: number, c: number): [Pt, Pt] | null {
   }
 
   if (candidates.length >= 2) {
-    // pick widest spread
     return [candidates[0], candidates[candidates.length - 1]];
   }
 
-  // Fallback: use intercepts rounded to grid
   const fallback: Pt[] = [];
   if (b !== 0) fallback.push({ x: 0, y: Math.max(0, Math.min(GMAX, Math.round(c / b))) });
   if (a !== 0) fallback.push({ x: Math.max(0, Math.min(GMAX, Math.round(c / a))), y: 0 });
@@ -146,8 +142,102 @@ function extendedLine(p1: Pt, p2: Pt) {
   return { p1: pts[0], p2: pts[pts.length - 1] };
 }
 
+/* ─── i18n strings ───────────────────────── */
+const ui = {
+  id: {
+    headerTitle: "🖊️ Lab Grafik SPLDV Interaktif",
+    headerSub: "Gambar dua garis — temukan titik potong = solusi!",
+    phases: ["① Atur Titik", "② Gambar Garis 1", "③ Gambar Garis 2", "④ Solusi!"],
+    hintInit: "Ketik persamaan di bawah lalu tekan Terapkan, atau seret titik secara manual, kemudian klik 'Mulai Menggambar!'",
+    hintLine1Done: "Bagus! Sekarang seret dari A₂ (atau B₂) ke titik pasangannya untuk menggambar Garis 2.",
+    hintIntersect: (rx: number, ry: number) => `🎉 Kedua garis berpotongan di (${rx}, ${ry}) — itulah solusi SPLDV!`,
+    hintParallel: "⚠️ Kedua garis sejajar — SPLDV ini tidak memiliki solusi tunggal.",
+    hintAlmost: "Hampir! Seret dari satu titik sampai menyentuh titik pasangannya. 🎯",
+    hintSamePoint1: "⚠️ Titik A₁ dan B₁ harus berbeda!",
+    hintSamePoint2: "⚠️ Titik A₂ dan B₂ harus berbeda!",
+    hintDraw1: "Sentuh titik A₁ (atau B₁), lalu seret ke titik pasangannya untuk menggambar Garis 1.",
+    hintReset: "Ketik persamaan di bawah lalu tekan Terapkan, atau seret titik secara manual, kemudian klik 'Mulai Menggambar!'",
+    hintApplied: (n: number) => `✅ Persamaan ${n === 1 ? "Garis 1" : "Garis 2"} diterapkan! Sesuaikan titik jika perlu, lalu klik 'Mulai Menggambar!'`,
+    backToArrange: "Atur ulang titik-titik, lalu klik 'Mulai Menggambar!' kembali.",
+    intersectionLabel: "Titik Potong",
+    line1Label: "Garis 1",
+    line2Label: "Garis 2",
+    applyBtn: "Terapkan",
+    startBtn: "Mulai Menggambar!",
+    backBtn: "← Kembali ke Atur Titik",
+    tryOtherBtn: "Coba Konfigurasi Titik Lain",
+    solutionFound: "🎯 Solusi SPLDV Ditemukan!",
+    intersectionNote: (isInt: boolean) => "Titik potong kedua garis = penyelesaian sistem persamaan!" + (!isInt ? " (bukan bilangan bulat — coba atur ulang titik-titiknya)" : ""),
+    noSolutionTitle: "⚠️ Tidak Ada Solusi",
+    noSolutionNote: "Kedua garis sejajar — SPLDV ini tidak memiliki penyelesaian!",
+    errorFormat: "⚠️ Format tidak valid. Coba: 2x + 3y = 6",
+    conceptNote: (math: JSX.Element) => <>Setiap PLDV adalah sebuah <strong>garis lurus</strong> di bidang koordinat. <strong className="text-yellow-300">Titik potong</strong> dua garis = nilai {math} yang memenuhi <em>kedua</em> persamaan sekaligus — itulah <strong>penyelesaian SPLDV</strong>!</>,
+  },
+  en: {
+    headerTitle: "🖊️ Interactive SLETV Graph Lab",
+    headerSub: "Draw two lines — find the intersection = solution!",
+    phases: ["① Set Points", "② Draw Line 1", "③ Draw Line 2", "④ Solution!"],
+    hintInit: "Type an equation below and press Apply, or drag the points manually, then click 'Start Drawing!'",
+    hintLine1Done: "Nice! Now drag from A₂ (or B₂) to its partner to draw Line 2.",
+    hintIntersect: (rx: number, ry: number) => `🎉 The lines intersect at (${rx}, ${ry}) — that's the SLETV solution!`,
+    hintParallel: "⚠️ The two lines are parallel — this system has no unique solution.",
+    hintAlmost: "Almost! Drag from one point until you reach its partner. 🎯",
+    hintSamePoint1: "⚠️ Points A₁ and B₁ must be different!",
+    hintSamePoint2: "⚠️ Points A₂ and B₂ must be different!",
+    hintDraw1: "Touch point A₁ (or B₁) and drag to its partner to draw Line 1.",
+    hintReset: "Type an equation below and press Apply, or drag the points manually, then click 'Start Drawing!'",
+    hintApplied: (n: number) => `✅ Line ${n} equation applied! Adjust points if needed, then click 'Start Drawing!'`,
+    backToArrange: "Rearrange the points, then click 'Start Drawing!' again.",
+    intersectionLabel: "Intersection",
+    line1Label: "Line 1",
+    line2Label: "Line 2",
+    applyBtn: "Apply",
+    startBtn: "Start Drawing!",
+    backBtn: "← Back to Set Points",
+    tryOtherBtn: "Try Different Points",
+    solutionFound: "🎯 Solution Found!",
+    intersectionNote: (isInt: boolean) => "Intersection of both lines = solution of the system!" + (!isInt ? " (not integers — try adjusting the points)" : ""),
+    noSolutionTitle: "⚠️ No Solution",
+    noSolutionNote: "The lines are parallel — this system has no solution!",
+    errorFormat: "⚠️ Invalid format. Try: 2x + 3y = 6",
+    conceptNote: (math: JSX.Element) => <>Each linear equation is a <strong>straight line</strong> in the coordinate plane. The <strong className="text-yellow-300">intersection</strong> of two lines = the value {math} that satisfies <em>both</em> equations simultaneously — that's the <strong>solution of the system</strong>!</>,
+  },
+  ja: {
+    headerTitle: "🖊️ 連立方程式インタラクティブグラフ",
+    headerSub: "2本の直線を描こう — 交点 = 解！",
+    phases: ["① 点を設定", "② 直線1を描く", "③ 直線2を描く", "④ 解！"],
+    hintInit: "下の方程式を入力して「適用」を押すか、点を手動でドラッグしてから「描き始める！」をクリック",
+    hintLine1Done: "うまい！次はA₂（またはB₂）からペアの点にドラッグして直線2を描こう。",
+    hintIntersect: (rx: number, ry: number) => `🎉 2本の直線が(${rx}, ${ry})で交わった — これが連立方程式の解！`,
+    hintParallel: "⚠️ 2本の直線は平行 — この連立方程式には唯一の解がありません。",
+    hintAlmost: "惜しい！一方の点からペアの点まで引っ張ってみて。🎯",
+    hintSamePoint1: "⚠️ A₁とB₁は異なる点にしてください！",
+    hintSamePoint2: "⚠️ A₂とB₂は異なる点にしてください！",
+    hintDraw1: "点A₁（またはB₁）を触れてペアの点までドラッグして直線1を描こう。",
+    hintReset: "下の方程式を入力して「適用」を押すか、点を手動でドラッグしてから「描き始める！」をクリック",
+    hintApplied: (n: number) => `✅ 直線${n}の方程式を適用しました！必要なら点を調整してから「描き始める！」をクリック`,
+    backToArrange: "点を再配置してから「描き始める！」をクリックしてください。",
+    intersectionLabel: "交点",
+    line1Label: "直線1",
+    line2Label: "直線2",
+    applyBtn: "適用",
+    startBtn: "描き始める！",
+    backBtn: "← 点の設定に戻る",
+    tryOtherBtn: "別の点を試す",
+    solutionFound: "🎯 解が見つかりました！",
+    intersectionNote: (isInt: boolean) => "2本の直線の交点 = 連立方程式の解！" + (!isInt ? "（整数ではありません — 点を調整してみてください）" : ""),
+    noSolutionTitle: "⚠️ 解なし",
+    noSolutionNote: "2本の直線は平行 — この連立方程式には解がありません！",
+    errorFormat: "⚠️ 無効な形式。例：2x + 3y = 6",
+    conceptNote: (math: JSX.Element) => <>各一次方程式は座標平面上の<strong>直線</strong>です。2本の直線の<strong className="text-yellow-300">交点</strong> = <em>両方</em>の方程式を同時に満たす{math}の値 — それが<strong>連立方程式の解</strong>です！</>,
+  },
+};
+
 /* ─── Component ──────────────────────────── */
 const GrafikSPLDVInteraktif: React.FC = () => {
+  const { language } = useLanguage();
+  const t = ui[language];
+
   /* Use refs for positions so pointer callbacks are always fresh */
   const posRef = useRef<Record<DotId, Pt>>({
     A1: { x: 0, y: 6 }, B1: { x: 6, y: 0 },
@@ -166,7 +256,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
 
   const [line1Drawn, setLine1Drawn] = useState(false);
   const [line2Drawn, setLine2Drawn] = useState(false);
-  const [hint,       setHint]       = useState("Ketik persamaan di bawah lalu tekan Terapkan, atau seret titik secara manual, kemudian klik 'Mulai Menggambar!'");
+  const [hint,       setHint]       = useState(t.hintInit);
 
   const [eq1Input, setEq1Input] = useState("x + y = 6");
   const [eq2Input, setEq2Input] = useState("x - y = 2");
@@ -252,14 +342,13 @@ const GrafikSPLDVInteraktif: React.FC = () => {
       const dist = Math.hypot(sx - tgt.sx, sy - tgt.sy);
 
       if (dist < UNIT * 2) {
-        /* SUCCESS — line drawn */
         playPopSound();
         setDrawFlash(ph === "draw1" ? 1 : 2);
         setTimeout(() => {
           if (phaseRef.current === "draw1") {
             setLine1Drawn(true);
             setPhase("draw2");
-            setHint("Bagus! Sekarang seret dari A₂ (atau B₂) ke titik pasangannya untuk menggambar Garis 2.");
+            setHint(t.hintLine1Done);
           } else {
             setLine2Drawn(true);
             setPhase("done");
@@ -270,30 +359,30 @@ const GrafikSPLDVInteraktif: React.FC = () => {
             if (ix) {
               const rx = Math.round(ix.x * 100) / 100;
               const ry = Math.round(ix.y * 100) / 100;
-              setHint(`🎉 Kedua garis berpotongan di (${rx}, ${ry}) — itulah solusi SPLDV!`);
+              setHint(t.hintIntersect(rx, ry));
             } else {
-              setHint("⚠️ Kedua garis sejajar — SPLDV ini tidak memiliki solusi tunggal.");
+              setHint(t.hintParallel);
             }
           }
           setDrawFlash(null);
         }, 600);
       } else {
-        setHint("Hampir! Seret dari satu titik sampai menyentuh titik pasangannya. 🎯");
+        setHint(t.hintAlmost);
       }
 
       drawDragRef.current = null;
       setDrawCursor(null);
     }
-  }, [getSVGPos]);
+  }, [getSVGPos, t]);
 
   /* ── Actions ── */
   const startDraw = () => {
     const { A1, B1, A2, B2 } = posRef.current;
-    if (A1.x === B1.x && A1.y === B1.y) { setHint("⚠️ Titik A₁ dan B₁ harus berbeda!"); return; }
-    if (A2.x === B2.x && A2.y === B2.y) { setHint("⚠️ Titik A₂ dan B₂ harus berbeda!"); return; }
+    if (A1.x === B1.x && A1.y === B1.y) { setHint(t.hintSamePoint1); return; }
+    if (A2.x === B2.x && A2.y === B2.y) { setHint(t.hintSamePoint2); return; }
     playPopSound();
     setPhase("draw1");
-    setHint("Sentuh titik A₁ (atau B₁), lalu seret ke titik pasangannya untuk menggambar Garis 1.");
+    setHint(t.hintDraw1);
   };
 
   const reset = () => {
@@ -305,7 +394,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
     setDrawCursor(null); drawDragRef.current = null;
     setEq1Input("x + y = 6"); setEq2Input("x - y = 2");
     setEq1Error(false); setEq2Error(false);
-    setHint("Ketik persamaan di bawah lalu tekan Terapkan, atau seret titik secara manual, kemudian klik 'Mulai Menggambar!'");
+    setHint(t.hintReset);
   };
 
   const applyEq = (which: 1 | 2) => {
@@ -332,7 +421,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
     }
     setLine1Drawn(false); setLine2Drawn(false);
     setPhase("arrange");
-    setHint(`✅ Persamaan ${which === 1 ? "Garis 1" : "Garis 2"} diterapkan! Sesuaikan titik jika perlu, lalu klik 'Mulai Menggambar!'`);
+    setHint(t.hintApplied(which));
   };
 
   /* ── Derived ── */
@@ -347,7 +436,6 @@ const GrafikSPLDVInteraktif: React.FC = () => {
   const phaseOrder: Phase[] = ["arrange","draw1","draw2","done"];
   const phaseIdx = phaseOrder.indexOf(phase);
 
-  /* Draw-in-progress line */
   const startPtSVG  = drawDragRef.current ? toSVG(posRef.current[drawDragRef.current.startDot]) : null;
   const activeColor = phase === "draw1" ? "#22d3ee" : "#a78bfa";
 
@@ -357,8 +445,8 @@ const GrafikSPLDVInteraktif: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-indigo-500/20 bg-indigo-900/20">
         <div>
-          <p className="font-display text-sm font-bold text-cyan-300">🖊️ Lab Grafik SPLDV Interaktif</p>
-          <p className="font-body text-xs text-white/40">Gambar dua garis — temukan titik potong = solusi!</p>
+          <p className="font-display text-sm font-bold text-cyan-300">{t.headerTitle}</p>
+          <p className="font-body text-xs text-white/40">{t.headerSub}</p>
         </div>
         <button onClick={reset}
           className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 text-white/50 hover:text-white transition-all"
@@ -369,12 +457,8 @@ const GrafikSPLDVInteraktif: React.FC = () => {
 
       {/* Phase bar */}
       <div className="flex gap-1 px-4 pt-3 pb-1">
-        {([
-          { key:"arrange", label:"① Atur Titik" },
-          { key:"draw1",   label:"② Gambar Garis 1" },
-          { key:"draw2",   label:"③ Gambar Garis 2" },
-          { key:"done",    label:"④ Solusi!" },
-        ] as { key: Phase; label: string }[]).map(({ key, label }, i) => {
+        {(t.phases.map((label, i) => {
+          const key = phaseOrder[i];
           const done    = i < phaseIdx;
           const active  = key === phase;
           return (
@@ -385,7 +469,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
               {done ? "✓ " : ""}{label}
             </div>
           );
-        })}
+        }))}
       </div>
 
       {/* SVG Grid */}
@@ -404,7 +488,6 @@ const GrafikSPLDVInteraktif: React.FC = () => {
             <marker id="axArr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
               <path d="M0,1 L5,3.5 L0,6 Z" fill="#475569" />
             </marker>
-            {/* Glow filter for intersection */}
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="4" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -439,7 +522,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
           <text x={SVG_W-10} y={SVG_H-PAD+4} fill="#64748b" fontSize="12" fontStyle="italic">x</text>
           <text x={PAD-2} y={14} fill="#64748b" fontSize="12" fontStyle="italic">y</text>
 
-          {/* ── Drawn lines (extended to grid edge) ── */}
+          {/* Drawn lines */}
           {line1Drawn && ext1 && (() => {
             const s = toSVG(ext1.p1), e = toSVG(ext1.p2);
             return (
@@ -457,7 +540,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
             );
           })()}
 
-          {/* ── In-progress draw drag line ── */}
+          {/* In-progress draw drag line */}
           {drawCursor && startPtSVG && (
             <line x1={startPtSVG.sx} y1={startPtSVG.sy}
               x2={drawCursor.x} y2={drawCursor.y}
@@ -465,7 +548,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
               strokeDasharray="7,5" opacity="0.75" strokeLinecap="round" />
           )}
 
-          {/* ── Preview dotted lines (in arrange phase) ── */}
+          {/* Preview dotted lines (in arrange phase) */}
           {phase === "arrange" && (() => {
             const ex1 = extendedLine(A1, B1);
             const ex2 = extendedLine(A2, B2);
@@ -483,7 +566,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
             );
           })()}
 
-          {/* ── Dots ── */}
+          {/* Dots */}
           {([
             { id:"A1" as DotId, pt:A1, color:"#22d3ee", label:"A₁", line:1 },
             { id:"B1" as DotId, pt:B1, color:"#22d3ee", label:"B₁", line:1 },
@@ -495,33 +578,27 @@ const GrafikSPLDVInteraktif: React.FC = () => {
             const isDraggable  = phase === "arrange";
             const pulse = isActiveLine;
 
-            /* Label offset: prefer right, but push left near right edge */
             const offX = sx > SVG_W - PAD - 30 ? -38 : 13;
             const offY = sy < PAD + 20 ? 18 : -10;
 
             return (
               <g key={id} style={{ cursor: isDraggable ? "grab" : isActiveLine ? "crosshair" : "default" }}>
-                {/* Pulse ring for active dots */}
                 {pulse && (
                   <circle cx={sx} cy={sy} r={DOT_R+8} fill={color} opacity="0.12">
                     <animate attributeName="r" values={`${DOT_R+4};${DOT_R+12};${DOT_R+4}`} dur="1.4s" repeatCount="indefinite" />
                     <animate attributeName="opacity" values="0.15;0.04;0.15" dur="1.4s" repeatCount="indefinite" />
                   </circle>
                 )}
-                {/* Invisible larger hit area */}
                 <circle cx={sx} cy={sy} r={DOT_R*3} fill="transparent" />
-                {/* Outer ring */}
                 <circle cx={sx} cy={sy} r={DOT_R} fill={color} fillOpacity="0.2" stroke={color} strokeWidth="2" />
-                {/* Inner dot */}
                 <circle cx={sx} cy={sy} r={5} fill={color} />
-                {/* Label + coordinate */}
                 <text x={sx+offX} y={sy+offY} fill={color} fontSize="11" fontWeight="bold" fontFamily="sans-serif">{label}</text>
                 <text x={sx+offX} y={sy+offY+12} fill={color} fontSize="9" fontFamily="monospace" opacity="0.65">({pt.x},{pt.y})</text>
               </g>
             );
           })}
 
-          {/* ── Intersection dot ── */}
+          {/* Intersection dot */}
           {intersection && (() => {
             const rx = Math.round(intersection.x * 100) / 100;
             const ry = Math.round(intersection.y * 100) / 100;
@@ -535,7 +612,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
                 <circle cx={sx} cy={sy} r={11} fill="#fbbf24" opacity="0.25" />
                 <circle cx={sx} cy={sy} r={6}  fill="#fbbf24" stroke="#fff" strokeWidth="2" />
                 <text x={labelX} y={sy-8} fill="#fbbf24" fontSize="11" fontWeight="bold" fontFamily="sans-serif">({rx}, {ry})</text>
-                <text x={labelX} y={sy+5} fill="#fbbf24" fontSize="9" fontFamily="sans-serif" opacity="0.75">Titik Potong</text>
+                <text x={labelX} y={sy+5} fill="#fbbf24" fontSize="9" fontFamily="sans-serif" opacity="0.75">{t.intersectionLabel}</text>
               </g>
             );
           })()}
@@ -560,24 +637,23 @@ const GrafikSPLDVInteraktif: React.FC = () => {
           <p className="font-body text-xs leading-relaxed text-white/80">{hint}</p>
         </div>
 
-        {/* Equation panels — editable */}
+        {/* Equation panels */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {/* Garis 1 */}
+          {/* Line 1 */}
           <div className={`border rounded-xl p-3 transition-all space-y-2
             ${(phase==="draw1"||phase==="arrange") ? "border-cyan-500/50 bg-cyan-900/25" : "border-cyan-500/15 bg-cyan-900/10"}`}>
             <div className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0" />
-              <p className="font-body text-[10px] text-cyan-400 uppercase font-bold">Garis 1</p>
+              <p className="font-body text-[10px] text-cyan-400 uppercase font-bold">{t.line1Label}</p>
               {line1Drawn && <CheckCircle2 className="w-3 h-3 text-green-400 ml-auto" />}
             </div>
-            {/* Input row */}
             <div className="flex gap-1">
               <input
                 type="text"
                 value={eq1Input}
                 onChange={e => { setEq1Input(e.target.value); setEq1Error(false); }}
                 onKeyDown={e => e.key === "Enter" && applyEq(1)}
-                placeholder="cth: 2x + 3y = 6"
+                placeholder="e.g. 2x + 3y = 6"
                 className={`flex-1 min-w-0 bg-slate-900/70 border rounded-lg px-2 py-1.5 text-xs font-mono text-white/90 placeholder-white/25 outline-none focus:ring-1 transition-all
                   ${eq1Error ? "border-red-500/60 focus:ring-red-500/40" : "border-cyan-500/30 focus:ring-cyan-500/40"}`}
               />
@@ -585,13 +661,12 @@ const GrafikSPLDVInteraktif: React.FC = () => {
                 onClick={() => applyEq(1)}
                 className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-[10px] font-bold font-body px-2 py-1.5 rounded-lg transition-all"
               >
-                Terapkan
+                {t.applyBtn}
               </button>
             </div>
             {eq1Error && (
-              <p className="text-[10px] text-red-400 font-body">⚠️ Format tidak valid. Coba: 2x + 3y = 6</p>
+              <p className="text-[10px] text-red-400 font-body">{t.errorFormat}</p>
             )}
-            {/* Derived equation display */}
             <div className="flex items-center justify-between">
               <p className="font-body text-[10px] text-white/40">A₁({A1.x},{A1.y}) · B₁({B1.x},{B1.y})</p>
               {eq1 && (
@@ -602,22 +677,21 @@ const GrafikSPLDVInteraktif: React.FC = () => {
             </div>
           </div>
 
-          {/* Garis 2 */}
+          {/* Line 2 */}
           <div className={`border rounded-xl p-3 transition-all space-y-2
             ${phase==="draw2" ? "border-violet-500/50 bg-violet-900/25" : "border-violet-500/15 bg-violet-900/10"}`}>
             <div className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-violet-400 shrink-0" />
-              <p className="font-body text-[10px] text-violet-400 uppercase font-bold">Garis 2</p>
+              <p className="font-body text-[10px] text-violet-400 uppercase font-bold">{t.line2Label}</p>
               {line2Drawn && <CheckCircle2 className="w-3 h-3 text-green-400 ml-auto" />}
             </div>
-            {/* Input row */}
             <div className="flex gap-1">
               <input
                 type="text"
                 value={eq2Input}
                 onChange={e => { setEq2Input(e.target.value); setEq2Error(false); }}
                 onKeyDown={e => e.key === "Enter" && applyEq(2)}
-                placeholder="cth: x - 2y = 4"
+                placeholder="e.g. x - 2y = 4"
                 className={`flex-1 min-w-0 bg-slate-900/70 border rounded-lg px-2 py-1.5 text-xs font-mono text-white/90 placeholder-white/25 outline-none focus:ring-1 transition-all
                   ${eq2Error ? "border-red-500/60 focus:ring-red-500/40" : "border-violet-500/30 focus:ring-violet-500/40"}`}
               />
@@ -625,13 +699,12 @@ const GrafikSPLDVInteraktif: React.FC = () => {
                 onClick={() => applyEq(2)}
                 className="shrink-0 bg-violet-600 hover:bg-violet-500 text-white text-[10px] font-bold font-body px-2 py-1.5 rounded-lg transition-all"
               >
-                Terapkan
+                {t.applyBtn}
               </button>
             </div>
             {eq2Error && (
-              <p className="text-[10px] text-red-400 font-body">⚠️ Format tidak valid. Coba: x - 2y = 4</p>
+              <p className="text-[10px] text-red-400 font-body">{t.errorFormat}</p>
             )}
-            {/* Derived equation display */}
             <div className="flex items-center justify-between">
               <p className="font-body text-[10px] text-white/40">A₂({A2.x},{A2.y}) · B₂({B2.x},{B2.y})</p>
               {eq2 && (
@@ -650,7 +723,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
           const isInt = Number.isInteger(rx) && Number.isInteger(ry);
           return (
             <div className="bg-yellow-900/25 border border-yellow-500/40 rounded-xl p-4 text-center space-y-2">
-              <p className="font-display text-base font-bold text-yellow-300">🎯 Solusi SPLDV Ditemukan!</p>
+              <p className="font-display text-base font-bold text-yellow-300">{t.solutionFound}</p>
               <div className="flex justify-center gap-6">
                 <div className="bg-yellow-900/30 border border-yellow-500/20 rounded-lg px-4 py-2">
                   <p className="text-yellow-200 text-xs font-body">x</p>
@@ -661,18 +734,15 @@ const GrafikSPLDVInteraktif: React.FC = () => {
                   <p className="text-yellow-300 font-bold text-lg font-display">{ry}</p>
                 </div>
               </div>
-              <p className="font-body text-xs text-white/50">
-                Titik potong kedua garis = penyelesaian sistem persamaan!
-                {!isInt && " (bukan bilangan bulat — coba atur ulang titik-titiknya)"}
-              </p>
+              <p className="font-body text-xs text-white/50">{t.intersectionNote(isInt)}</p>
             </div>
           );
         })()}
 
         {phase === "done" && !intersection && (
           <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-3 text-center">
-            <p className="font-display text-sm font-bold text-red-300">⚠️ Tidak Ada Solusi</p>
-            <p className="font-body text-xs text-white/50 mt-1">Kedua garis sejajar — SPLDV ini tidak memiliki penyelesaian!</p>
+            <p className="font-display text-sm font-bold text-red-300">{t.noSolutionTitle}</p>
+            <p className="font-body text-xs text-white/50 mt-1">{t.noSolutionNote}</p>
           </div>
         )}
 
@@ -681,21 +751,21 @@ const GrafikSPLDVInteraktif: React.FC = () => {
           <button onClick={startDraw}
             className="w-full bg-gradient-to-r from-cyan-600 to-violet-600 hover:from-cyan-500 hover:to-violet-500 text-white font-body font-bold text-sm py-3 rounded-xl transition-all shadow-lg shadow-cyan-900/20 flex items-center justify-center gap-2">
             <Pencil className="w-4 h-4" />
-            Mulai Menggambar!
+            {t.startBtn}
           </button>
         )}
 
         {(phase === "draw1" || phase === "draw2") && (
-          <button onClick={() => { playPopSound(); setPhase("arrange"); setHint("Atur ulang titik-titik, lalu klik 'Mulai Menggambar!' kembali."); setDrawCursor(null); }}
+          <button onClick={() => { playPopSound(); setPhase("arrange"); setHint(t.backToArrange); setDrawCursor(null); }}
             className="w-full bg-white/5 border border-white/10 hover:border-white/20 text-white/50 hover:text-white/80 font-body text-xs py-2 rounded-xl transition-all">
-            ← Kembali ke Atur Titik
+            {t.backBtn}
           </button>
         )}
 
         {phase === "done" && (
           <button onClick={reset}
             className="w-full bg-white/5 border border-white/10 hover:border-white/20 text-white/50 hover:text-white/80 font-body text-xs py-2 rounded-xl transition-all flex items-center justify-center gap-2">
-            <RefreshCw className="w-3.5 h-3.5" /> Coba Konfigurasi Titik Lain
+            <RefreshCw className="w-3.5 h-3.5" /> {t.tryOtherBtn}
           </button>
         )}
 
@@ -703,9 +773,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
         <div className="bg-purple-900/15 border border-purple-500/20 rounded-xl px-4 py-2.5 flex gap-2">
           <span className="text-purple-400 text-sm shrink-0">💡</span>
           <p className="font-body text-xs text-purple-200 leading-relaxed">
-            Setiap PLDV adalah sebuah <strong>garis lurus</strong> di bidang koordinat.
-            <strong className="text-yellow-300"> Titik potong</strong> dua garis = nilai <InlineMath math="(x,y)" /> yang
-            memenuhi <em>kedua</em> persamaan sekaligus — itulah <strong>penyelesaian SPLDV</strong>!
+            {t.conceptNote(<InlineMath math="(x,y)" />)}
           </p>
         </div>
       </div>
