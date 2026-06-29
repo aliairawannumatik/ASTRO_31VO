@@ -26,28 +26,20 @@ const questions: Q[] = [
       { label: "a.", math: "\\text{Banyak fungsi dari A ke B} = \\ldots" },
       { label: "b.", text: "Gambarlah semua fungsi yang mungkin dari A ke B menggunakan diagram panah." },
       { label: "c.", math: "\\text{Banyak fungsi dari B ke A} = \\ldots" },
-      { label: "d.", text: "Gambarlah semua fungsi yang mungkin dari A ke B menggunakan diagram panah." },
+      { label: "d.", text: "Gambarlah semua fungsi yang mungkin dari B ke A menggunakan diagram panah." },
+      { label: "e.", text: "Menurut kamu apakah banyak fungsi dari A ke B dengan B ke A sama atau berbeda? Mengapa?" },
     ],
   }),
-  Qn(2, "Banyak Fungsi – A = {p, q, r, s}, B = {2, 4, 6}", {
+  Qn(2, "Korespondensi Satu-Satu – A = {p, q, r, s}, B = {2, 4, 6, 8}", {
     type: "mixed",
-    content: "Diketahui A = {p, q, r, s} dan B = {2, 4, 6}.",
+    content: "Diketahui A = {p, q, r, s} dan B = {2, 4, 6, 8}.",
     parts: [
-      { label: "a.", math: "\\text{Banyak fungsi dari A ke B} = \\ldots" },
-      { label: "b.", math: "\\text{Banyak fungsi dari B ke A} = \\ldots" },
-      { label: "c.", text: "Mana yang lebih banyak, fungsi dari A ke B atau dari B ke A?" },
+      { label: "a.", math: "\\text{Banyak korespondensi satu-satu dari A ke B} = \\ldots" },
+      { label: "b.", text: "Gambarlah semua korespondensi satu-satu yang mungkin dari A ke B menggunakan diagram panah." },
+      { label: "c.", text: "Menurut kamu apakah banyak korespondensi satu-satu dari A ke B dengan B ke A sama atau berbeda? Mengapa?" },
     ],
   }),
-  Qn(3, "Rumus Banyak Korespondensi Satu-Satu", {
-    type: "mixed",
-    content: "Banyak korespondensi satu-satu dari A ke B (dengan n(A) = n(B) = n) adalah n! (n faktorial).",
-    parts: [
-      { label: "a.", math: "\\text{Jika } n(A) = n(B) = 3,\\ \\text{banyak korespondensi} = \\ldots" },
-      { label: "b.", math: "\\text{Jika } n(A) = n(B) = 4,\\ \\text{banyak korespondensi} = \\ldots" },
-      { label: "c.", math: "\\text{Jika } n(A) = n(B) = 5,\\ \\text{banyak korespondensi} = \\ldots" },
-    ],
-  }),
-  Qn(4, "Korespondensi – Analogi Nyata", {
+  Qn(3, "Korespondensi – Analogi Nyata", {
     type: "mixed",
     content: "Sebuah hotel memiliki 10 kamar dan 10 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
     parts: [
@@ -56,7 +48,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Banyak cara menempati kamar} = 10! = \\ldots \\text{ (tidak perlu dihitung penuh)}" },
     ],
   }),
-  Qn(5, "Soal UN – Menentukan Banyak Pemetaan", {
+  Qn(4, "Soal UN – Menentukan Banyak Pemetaan", {
     type: "mixed",
     content: "Dari himpunan P = {x | 1 ≤ x ≤ 4, x ∈ bilangan bulat} dan Q = {y | 1 ≤ y ≤ 3, y ∈ bilangan bulat}:",
     parts: [
@@ -64,6 +56,16 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Banyak fungsi dari P ke Q} = \\ldots" },
       { label: "c.", math: "\\text{Banyak fungsi dari Q ke P} = \\ldots" },
       { label: "d.", text: "Apakah bisa dibentuk korespondensi satu-satu antara P dan Q? Jelaskan." },
+    ],
+  }),
+  Qn(5, "Korespondensi Satu-Satu – Bilangan Prima dan Genap", {
+    type: "mixed",
+    content: "Diketahui P = {2, 3, 5, 7, 11} (bilangan prima) dan Q = {2, 4, 6, 8, 10} (bilangan genap).",
+    parts: [
+      { label: "a.", text: "Tentukan n(P) dan n(Q)." },
+      { label: "b.", text: "Apakah syarat korespondensi satu-satu terpenuhi antara P dan Q? Jelaskan." },
+      { label: "c.", math: "\\text{Banyak korespondensi satu-satu yang dapat dibuat} = \\ldots" },
+      { label: "d.", text: "Apakah banyak korespondensi satu-satu dari P ke Q sama dengan dari Q ke P? Mengapa?" },
     ],
   }),
 ];
