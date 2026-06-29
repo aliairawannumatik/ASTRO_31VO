@@ -19,89 +19,35 @@ type Q = {
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Qn(1, "Rumus Banyak Fungsi", {
-    type: "mixed",
-    content: "Jika n(A) = m dan n(B) = n, maka banyak fungsi yang dapat dibuat dari A ke B adalah:",
-    parts: [
-      { label: "", math: "\\text{Banyak fungsi} = n^m" },
-      { label: "a.", text: "Mengapa rumusnya adalah n pangkat m, bukan m pangkat n?" },
-      { label: "b.", math: "\\text{Jika } n(A) = 2 \\text{ dan } n(B) = 3,\\ \\text{banyak fungsi} = \\ldots" },
-      { label: "c.", math: "\\text{Jika } n(A) = 3 \\text{ dan } n(B) = 2,\\ \\text{banyak fungsi} = \\ldots" },
-    ],
-  }),
-  Qn(2, "Menghitung Banyak Fungsi – Dasar", {
+  Qn(1, "Menghitung Banyak Fungsi – Dasar", {
     type: "mixed",
     content: "Diketahui A = {a, b} dan B = {1, 2, 3}.",
     parts: [
       { label: "a.", math: "\\text{Banyak fungsi dari A ke B} = \\ldots" },
       { label: "b.", text: "Gambarlah semua fungsi yang mungkin dari A ke B menggunakan diagram panah." },
       { label: "c.", math: "\\text{Banyak fungsi dari B ke A} = \\ldots" },
+      { label: "d.", text: "Gambarlah semua fungsi yang mungkin dari A ke B menggunakan diagram panah." },
     ],
   }),
-  Qn(3, "Banyak Fungsi – n(A) = 3, n(B) = 2", {
+  Qn(2, "Banyak Fungsi – A = {p, q, r, s}, B = {2, 4, 6}", {
     type: "mixed",
-    content: "Diketahui A = {1, 2, 3} dan B = {p, q}.",
+    content: "Diketahui A = {p, q, r, s} dan B = {2, 4, 6}.",
     parts: [
-      { label: "a.", math: "n^m = 2^3 = \\ldots" },
-      { label: "b.", text: "Gambarlah minimal 4 fungsi yang berbeda dari A ke B." },
-      { label: "c.", text: "Berapa banyak di antaranya yang merupakan fungsi surjektif?" },
-    ],
-  }),
-  Qn(4, "Banyak Fungsi – n(A) = 4, n(B) = 3", {
-    type: "mixed",
-    content: "Diketahui n(A) = 4 dan n(B) = 3.",
-    parts: [
-      { label: "a.", math: "\\text{Banyak fungsi dari A ke B} = 3^4 = \\ldots" },
-      { label: "b.", math: "\\text{Banyak fungsi dari B ke A} = 4^3 = \\ldots" },
+      { label: "a.", math: "\\text{Banyak fungsi dari A ke B} = \\ldots" },
+      { label: "b.", math: "\\text{Banyak fungsi dari B ke A} = \\ldots" },
       { label: "c.", text: "Mana yang lebih banyak, fungsi dari A ke B atau dari B ke A?" },
     ],
   }),
-  Qn(5, "Korespondensi Satu-Satu – Pengertian", {
-    type: "mixed",
-    content: "Korespondensi satu-satu (bijeksi) adalah fungsi yang sekaligus injektif dan surjektif.",
-    parts: [
-      { label: "a.", text: "Apa syarat agar fungsi f: A → B merupakan korespondensi satu-satu?" },
-      { label: "b.", text: "Apa hubungan antara n(A) dan n(B) agar korespondensi satu-satu bisa terbentuk?" },
-      { label: "c.", text: "Berikan contoh nyata korespondensi satu-satu dalam kehidupan sehari-hari." },
-    ],
-  }),
-  Qn(6, "Rumus Banyak Korespondensi Satu-Satu", {
+  Qn(3, "Rumus Banyak Korespondensi Satu-Satu", {
     type: "mixed",
     content: "Banyak korespondensi satu-satu dari A ke B (dengan n(A) = n(B) = n) adalah n! (n faktorial).",
     parts: [
-      { label: "a.", math: "\\text{Jika } n(A) = n(B) = 3,\\ \\text{banyak korespondensi} = 3! = \\ldots" },
-      { label: "b.", math: "\\text{Jika } n(A) = n(B) = 4,\\ \\text{banyak korespondensi} = 4! = \\ldots" },
-      { label: "c.", math: "\\text{Jika } n(A) = n(B) = 5,\\ \\text{banyak korespondensi} = 5! = \\ldots" },
+      { label: "a.", math: "\\text{Jika } n(A) = n(B) = 3,\\ \\text{banyak korespondensi} = \\ldots" },
+      { label: "b.", math: "\\text{Jika } n(A) = n(B) = 4,\\ \\text{banyak korespondensi} = \\ldots" },
+      { label: "c.", math: "\\text{Jika } n(A) = n(B) = 5,\\ \\text{banyak korespondensi} = \\ldots" },
     ],
   }),
-  Qn(7, "Banyak Fungsi – Soal Cerita", {
-    type: "mixed",
-    content: "Ada 3 anak (Andi, Bela, Cici) dan 4 mainan berbeda (bola, boneka, mobil, puzzle).",
-    parts: [
-      { label: "a.", text: "Berapa banyak cara memberikan mainan kepada anak-anak jika setiap anak mendapat tepat satu mainan (boleh sama)?" },
-      { label: "b.", text: "Berapa banyak cara jika setiap anak harus mendapat mainan yang berbeda?" },
-      { label: "c.", text: "Bisakah dibuat korespondensi satu-satu antara anak dan mainan? Mengapa?" },
-    ],
-  }),
-  Qn(8, "Korespondensi dalam Kehidupan", {
-    type: "mixed",
-    content: "Identifikasi apakah setiap situasi berikut merupakan korespondensi satu-satu:",
-    parts: [
-      { label: "a.", text: "Hubungan antara nomor kursi dan penumpang pesawat (semua kursi terisi, tidak ada penumpang berdiri)." },
-      { label: "b.", text: "Hubungan antara siswa dan nilai ujian." },
-      { label: "c.", text: "Hubungan antara kode pos unik dan kota (satu kode pos untuk satu kota)." },
-    ],
-  }),
-  Qn(9, "Soal UN – Banyak Pemetaan", {
-    type: "mixed",
-    content: "Diketahui himpunan K = {1, 2, 3} dan L = {a, b, c, d}.",
-    parts: [
-      { label: "a.", math: "\\text{Banyak pemetaan (fungsi) dari K ke L} = \\ldots" },
-      { label: "b.", math: "\\text{Banyak pemetaan dari L ke K} = \\ldots" },
-      { label: "c.", text: "Dapatkah dibuat korespondensi satu-satu antara K dan L? Mengapa?" },
-    ],
-  }),
-  Qn(10, "Korespondensi – Analogi Nyata", {
+  Qn(4, "Korespondensi – Analogi Nyata", {
     type: "mixed",
     content: "Sebuah hotel memiliki 10 kamar dan 10 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
     parts: [
@@ -110,7 +56,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Banyak cara menempati kamar} = 10! = \\ldots \\text{ (tidak perlu dihitung penuh)}" },
     ],
   }),
-  Qn(11, "Soal UN – Menentukan Banyak Pemetaan", {
+  Qn(5, "Soal UN – Menentukan Banyak Pemetaan", {
     type: "mixed",
     content: "Dari himpunan P = {x | 1 ≤ x ≤ 4, x ∈ bilangan bulat} dan Q = {y | 1 ≤ y ≤ 3, y ∈ bilangan bulat}:",
     parts: [
@@ -140,7 +86,7 @@ const BanyakFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 11 {t('practice.suffixSoal')}</span>
+            <span className="text-orange-400 text-xs font-bold">📋 5 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
