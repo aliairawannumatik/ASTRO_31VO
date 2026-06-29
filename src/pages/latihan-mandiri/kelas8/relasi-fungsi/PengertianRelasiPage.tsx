@@ -159,7 +159,7 @@ const questions: Q[] = [
   }),
   Qn(8, "Relasi 'Kelipatan dari' — Diagram Panah", {
     type: "mixed",
-    content: "Diketahui himpunan A = {1, 2, 3, 4, 5, 6, 7, 8, 9} sebagai domain dan himpunan B = {1, 2, 3, 4, 5} sebagai kodomain. Diagram panah berikut menunjukkan relasi \"kelipatan dari\" dari A ke B (setiap anggota A dihubungkan ke anggota B yang merupakan faktornya).",
+    content: "Diketahui himpunan A = {1, 2, 3, 4, 5, 6, 7, 8, 9} sebagai domain dan himpunan B = {1, 2, 3, 4, 5} sebagai kodomain dengan relasi \"kelipatan dari\".",
     diagram: (
       <div className="flex flex-col items-center my-2">
         <svg width="320" height="370" viewBox="0 0 320 370">
