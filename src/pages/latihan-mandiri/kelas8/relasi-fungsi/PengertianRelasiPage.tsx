@@ -157,6 +157,82 @@ const questions: Q[] = [
       { label: "b.", text: "Tentukan aturan relasinya." },
     ],
   }),
+  Qn(8, "Relasi 'Kelipatan dari' — Diagram Panah", {
+    type: "mixed",
+    content: "Diketahui himpunan A = {1, 2, 3, 4, 5, 6, 7, 8, 9} sebagai domain dan himpunan B = {1, 2, 3, 4, 5} sebagai kodomain. Diagram panah berikut menunjukkan relasi \"kelipatan dari\" dari A ke B (setiap anggota A dihubungkan ke anggota B yang merupakan faktornya).",
+    diagram: (
+      <div className="flex flex-col items-center my-2">
+        <svg width="320" height="370" viewBox="0 0 320 370">
+          <rect width="320" height="370" fill="white" rx="14" stroke="#e2e8f0" strokeWidth="1" />
+          {/* Domain oval A */}
+          <ellipse cx="75" cy="200" rx="50" ry="150" fill="#f472b622" stroke="#f472b6" strokeWidth="1.5" strokeOpacity="0.8" />
+          {/* Kodomain oval B */}
+          <ellipse cx="252" cy="200" rx="50" ry="132" fill="#60a5fa22" stroke="#60a5fa" strokeWidth="1.5" strokeOpacity="0.8" />
+          {/* Labels */}
+          <text x="75" y="35" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
+          <text x="252" y="54" fill="#60a5fa" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
+          {/* Domain elements: y = 64 + i*34 */}
+          {[1,2,3,4,5,6,7,8,9].map((v,i) => (
+            <text key={v} x="75" y={64+i*34} fill="rgba(20,20,20,0.9)" fontSize="13" fontWeight="bold" textAnchor="middle">{v}</text>
+          ))}
+          {/* Kodomain elements: y = 80 + j*60 */}
+          {[1,2,3,4,5].map((v,i) => (
+            <text key={v} x="252" y={80+i*60} fill="rgba(20,20,20,0.9)" fontSize="13" fontWeight="bold" textAnchor="middle">{v}</text>
+          ))}
+          {/* Arrow marker */}
+          <defs>
+            <marker id="arr-kl8" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <polygon points="0 0, 7 3.5, 0 7" fill="#34d399" opacity="0.9" />
+            </marker>
+          </defs>
+          {/* domain y[i] = 64+i*34 ; kodomain y[j] = 80+j*60 */}
+          {/* (1→1): i=0 y=64, j=0 y=80 */}
+          <line x1="90" y1="62" x2="235" y2="78" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (2→1): i=1 y=98, j=0 y=80 */}
+          <line x1="90" y1="96" x2="235" y2="80" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (2→2): i=1 y=98, j=1 y=140 */}
+          <line x1="90" y1="96" x2="235" y2="138" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (3→1): i=2 y=132, j=0 y=80 */}
+          <line x1="90" y1="130" x2="235" y2="82" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (3→3): i=2 y=132, j=2 y=200 */}
+          <line x1="90" y1="130" x2="235" y2="198" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (4→1): i=3 y=166, j=0 y=80 */}
+          <line x1="90" y1="164" x2="235" y2="83" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (4→2): i=3 y=166, j=1 y=140 */}
+          <line x1="90" y1="164" x2="235" y2="140" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (4→4): i=3 y=166, j=3 y=260 */}
+          <line x1="90" y1="166" x2="235" y2="258" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (5→1): i=4 y=200, j=0 y=80 */}
+          <line x1="90" y1="198" x2="235" y2="84" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (5→5): i=4 y=200, j=4 y=320 */}
+          <line x1="90" y1="200" x2="235" y2="318" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (6→1): i=5 y=234, j=0 y=80 */}
+          <line x1="90" y1="232" x2="235" y2="84" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (6→2): i=5 y=234, j=1 y=140 */}
+          <line x1="90" y1="234" x2="235" y2="141" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (6→3): i=5 y=234, j=2 y=200 */}
+          <line x1="90" y1="234" x2="235" y2="200" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (7→1): i=6 y=268, j=0 y=80 */}
+          <line x1="90" y1="266" x2="235" y2="84" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (8→1): i=7 y=302, j=0 y=80 */}
+          <line x1="90" y1="300" x2="235" y2="84" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (8→2): i=7 y=302, j=1 y=140 */}
+          <line x1="90" y1="302" x2="235" y2="142" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (8→4): i=7 y=302, j=3 y=260 */}
+          <line x1="90" y1="300" x2="235" y2="258" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (9→1): i=8 y=336, j=0 y=80 */}
+          <line x1="90" y1="334" x2="235" y2="85" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+          {/* (9→3): i=8 y=336, j=2 y=200 */}
+          <line x1="90" y1="336" x2="235" y2="201" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
+        </svg>
+        <p className="text-white/40 text-[10px] mt-1 font-body">Relasi: "kelipatan dari" (A → B)</p>
+      </div>
+    ),
+    parts: [
+      { label: "a.", text: "Tuliskan relasi di atas dalam bentuk himpunan pasangan berurutan." },
+      { label: "b.", text: "Tentukan aturan relasi yang menghubungkan himpunan A ke himpunan B." },
+    ],
+  }),
 ];
 
 const PengertianRelasiPage = () => {
@@ -177,7 +253,7 @@ const PengertianRelasiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
-            <span className="text-violet-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
+            <span className="text-violet-400 text-xs font-bold">📋 8 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
