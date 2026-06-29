@@ -60,7 +60,7 @@ const questions: Q[] = [
   }),
   Qn(5, "Korespondensi Satu-Satu – Bilangan Prima dan Genap", {
     type: "mixed",
-    content: "Diketahui P = {2, 3, 5, 7, 11} (bilangan prima) dan Q = {2, 4, 6, 8, 10} (bilangan genap).",
+    content: "Dari himpunan P = {x | 1 ≤ x ≤ 13, x ∈ bilangan prima} dan Q = {y | 2 ≤ y ≤ 12, y ∈ bilangan genap}:",
     parts: [
       { label: "a.", text: "Tentukan n(P) dan n(Q)." },
       { label: "b.", text: "Apakah syarat korespondensi satu-satu terpenuhi antara P dan Q? Jelaskan." },
