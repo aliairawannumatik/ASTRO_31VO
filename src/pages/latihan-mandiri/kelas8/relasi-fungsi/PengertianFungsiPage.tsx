@@ -48,7 +48,7 @@ const SmallArrow = ({
       </marker>
     </defs>
     {arrows.map(([s, t], k) => (
-      <line key={k} x1="57" y1={dy(s) - 4} x2="116" y2={dy(t) - 4}
+      <line key={k} x1="50" y1={dy(s) - 4} x2="122" y2={dy(t) - 4}
         stroke="#34d399" strokeWidth="1.5" markerEnd={`url(#${id})`} />
     ))}
   </svg>
@@ -157,19 +157,8 @@ const questions: Q[] = [
       { label: "e.", text: "R = {(1, 2), (2, 4), (3, 2), (4, 4), (5, 2)}" },
     ],
   }),
-  /* ── Q6 (was Q3) ── */
-  Qn(6, "Relasi yang Pasti Merupakan Fungsi", {
-    type: "mixed",
-    content: "Manakah di antara relasi-relasi berikut yang pasti merupakan suatu fungsi? Jelaskan alasanmu untuk setiap pilihan.",
-    parts: [
-      { label: "a.", text: "R adalah relasi antara setiap siswa di suatu kelas dengan nomor absen mereka." },
-      { label: "b.", text: "R adalah relasi antara setiap orang tua dengan anak-anak kandung mereka." },
-      { label: "c.", text: "R adalah relasi antara setiap siswa dengan tinggi badan mereka (diukur satu kali pada waktu yang sama)." },
-      { label: "d.", text: "R adalah relasi antara setiap siswa dengan mata pelajaran yang mereka sukai." },
-    ],
-  }),
-  /* ── Q7 (was Q4) ── */
-  Qn(7, "Grafik Fungsi dalam Koordinat Kartesius", {
+  /* ── Q6 ── */
+  Qn(6, "Grafik Fungsi dalam Koordinat Kartesius", {
     type: "mixed",
     content: "Di antara keenam grafik berikut, manakah yang merupakan grafik fungsi y terhadap x? Jelaskan!",
     diagram: (
@@ -217,15 +206,12 @@ const questions: Q[] = [
               fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </CoordGraph>
         </div>
-        {/* f. Dua busur terpisah → BUKAN FUNGSI */}
+        {/* f. Parabola terbuka ke bawah → FUNGSI */}
         <div className="flex flex-col items-center">
           <span className="text-xs font-bold text-white/70 mb-1">f.</span>
           <CoordGraph id="gfx">
-            {/* upper arc: y=-(x-2.5)²/5+4.5 */}
+            {/* arc: y=-(x-2.5)²/5+4.5 */}
             <polyline points="22,52 42,35 62,28 72,25 82,28 102,35 122,52"
-              fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            {/* lower arc: y=-(x-2.5)²/5+1.5 */}
-            <polyline points="22,110 42,93 62,86 72,85 82,86 102,93 122,110"
               fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </CoordGraph>
         </div>
@@ -237,14 +223,15 @@ const questions: Q[] = [
     ],
   }),
 
-  /* ── Q8 (was Q9) ── */
-  Qn(8, "Ini Fungsi atau Bukan?", {
+  /* ── Q7 ── */
+  Qn(7, "Relasi yang Pasti Merupakan Fungsi", {
     type: "mixed",
-    content: "Tentukan apakah setiap pasangan berurutan berikut menyatakan fungsi dari A ke B:",
+    content: "Manakah di antara relasi-relasi berikut yang pasti merupakan suatu fungsi? Jelaskan alasanmu untuk setiap pilihan.",
     parts: [
-      { label: "a.", math: "\\{(1,2),\\ (2,3),\\ (3,4),\\ (4,5)\\},\\ A=\\{1,2,3,4\\},\\ B=\\{1,2,3,4,5\\}" },
-      { label: "b.", math: "\\{(1,2),\\ (1,3),\\ (2,4),\\ (3,5)\\},\\ A=\\{1,2,3\\},\\ B=\\{2,3,4,5\\}" },
-      { label: "c.", math: "\\{(1,5),\\ (2,5),\\ (3,5)\\},\\ A=\\{1,2,3\\},\\ B=\\{4,5,6\\}" },
+      { label: "a.", text: "R adalah relasi antara setiap siswa di suatu kelas dengan nomor absen mereka." },
+      { label: "b.", text: "R adalah relasi antara setiap orang tua dengan anak-anak kandung mereka." },
+      { label: "c.", text: "R adalah relasi antara setiap siswa dengan tinggi badan mereka (diukur satu kali pada waktu yang sama)." },
+      { label: "d.", text: "R adalah relasi antara setiap siswa dengan mata pelajaran yang mereka sukai." },
     ],
   }),
 ];
@@ -267,7 +254,7 @@ const PengertianFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 8 {t('practice.suffixSoal')}</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>

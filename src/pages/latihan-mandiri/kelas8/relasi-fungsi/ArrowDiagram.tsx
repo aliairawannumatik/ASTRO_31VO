@@ -70,9 +70,9 @@ const ArrowDiagram = ({
           </marker>
         </defs>
         {arrows.map(([ai, bi], idx) => {
-          const x1 = leftX + ovalW - 4;
+          const x1 = leftX + 7;
           const y1 = ayOf(ai);
-          const x2 = rightX - ovalW + 4;
+          const x2 = rightX - 7;
           const y2 = byOf(bi);
           return (
             <line key={idx} x1={x1} y1={y1} x2={x2} y2={y2}
