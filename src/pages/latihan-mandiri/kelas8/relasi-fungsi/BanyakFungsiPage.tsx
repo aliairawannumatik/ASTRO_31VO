@@ -75,7 +75,7 @@ const questions: Q[] = [
     parts: [
       { label: "a.", text: "Nyatakan situasi ini dalam bentuk fungsi matematika." },
       { label: "b.", text: "Apakah ini merupakan korespondensi satu-satu? Jelaskan." },
-      { label: "c.", math: "\\text{Banyak cara menempati kamar} = 10! = \\ldots \\text{ (tidak perlu dihitung penuh)}" },
+      { label: "c.", math: "\\text{Banyak cara menempati kamar} = \\ldots \\text{ (tulis jawaban dalam bentuk faktorial)}" },
     ],
   }),
 ];
