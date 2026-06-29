@@ -30,7 +30,17 @@ const questions: Q[] = [
       { label: "e.", text: "Menurut kamu apakah banyak fungsi dari A ke B dengan B ke A sama atau berbeda? Mengapa?" },
     ],
   }),
-  Qn(2, "Korespondensi Satu-Satu – A = {p, q, r, s}, B = {2, 4, 6, 8}", {
+  Qn(2, "Banyak Fungsi – Bilangan Asli dan Ganjil", {
+    type: "mixed",
+    content: "Dari himpunan A = {x | x < 4, x ∈ bilangan asli} dan B = {y | 1 ≤ y < 9, y ∈ bilangan ganjil}:",
+    parts: [
+      { label: "a.", text: "Tentukan n(A) dan n(B)." },
+      { label: "b.", math: "\\text{Banyak fungsi dari A ke B} = \\ldots" },
+      { label: "c.", math: "\\text{Banyak fungsi dari B ke A} = \\ldots" },
+      { label: "d.", text: "Apakah bisa dibentuk korespondensi satu-satu antara A dan B? Jelaskan." },
+    ],
+  }),
+  Qn(3, "Korespondensi Satu-Satu – A = {p, q, r, s}, B = {2, 4, 6, 8}", {
     type: "mixed",
     content: "Diketahui A = {p, q, r, s} dan B = {2, 4, 6, 8}.",
     parts: [
@@ -39,7 +49,7 @@ const questions: Q[] = [
       { label: "c.", text: "Menurut kamu apakah banyak korespondensi satu-satu dari A ke B dengan B ke A sama atau berbeda? Mengapa?" },
     ],
   }),
-  Qn(3, "Soal UN – Menentukan Banyak Pemetaan", {
+  Qn(4, "Soal UN – Menentukan Banyak Pemetaan", {
     type: "mixed",
     content: "Dari himpunan P = {x | 1 ≤ x ≤ 4, x ∈ bilangan bulat} dan Q = {y | 1 ≤ y ≤ 3, y ∈ bilangan bulat}:",
     parts: [
@@ -49,7 +59,7 @@ const questions: Q[] = [
       { label: "d.", text: "Apakah bisa dibentuk korespondensi satu-satu antara P dan Q? Jelaskan." },
     ],
   }),
-  Qn(4, "Korespondensi Satu-Satu – Bilangan Prima dan Genap", {
+  Qn(5, "Korespondensi Satu-Satu – Bilangan Prima dan Genap", {
     type: "mixed",
     content: "Dari himpunan P = {x | 1 ≤ x < 13, x ∈ bilangan prima} dan Q = {y | 2 ≤ y < 12, y ∈ bilangan genap}:",
     parts: [
@@ -59,7 +69,7 @@ const questions: Q[] = [
       { label: "d.", text: "Apakah banyak korespondensi satu-satu dari P ke Q sama dengan dari Q ke P? Mengapa?" },
     ],
   }),
-  Qn(5, "Korespondensi – Analogi Nyata", {
+  Qn(6, "Korespondensi – Analogi Nyata", {
     type: "mixed",
     content: "Sebuah hotel memiliki 10 kamar dan 10 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
     parts: [
@@ -88,7 +98,7 @@ const BanyakFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 5 {t('practice.suffixSoal')}</span>
+            <span className="text-orange-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
