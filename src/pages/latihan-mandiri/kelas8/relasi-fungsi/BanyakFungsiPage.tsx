@@ -39,16 +39,7 @@ const questions: Q[] = [
       { label: "c.", text: "Menurut kamu apakah banyak korespondensi satu-satu dari A ke B dengan B ke A sama atau berbeda? Mengapa?" },
     ],
   }),
-  Qn(3, "Korespondensi – Analogi Nyata", {
-    type: "mixed",
-    content: "Sebuah hotel memiliki 10 kamar dan 10 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
-    parts: [
-      { label: "a.", text: "Nyatakan situasi ini dalam bentuk fungsi matematika." },
-      { label: "b.", text: "Apakah ini merupakan korespondensi satu-satu? Jelaskan." },
-      { label: "c.", math: "\\text{Banyak cara menempati kamar} = 10! = \\ldots \\text{ (tidak perlu dihitung penuh)}" },
-    ],
-  }),
-  Qn(4, "Soal UN – Menentukan Banyak Pemetaan", {
+  Qn(3, "Soal UN – Menentukan Banyak Pemetaan", {
     type: "mixed",
     content: "Dari himpunan P = {x | 1 ≤ x ≤ 4, x ∈ bilangan bulat} dan Q = {y | 1 ≤ y ≤ 3, y ∈ bilangan bulat}:",
     parts: [
@@ -58,7 +49,7 @@ const questions: Q[] = [
       { label: "d.", text: "Apakah bisa dibentuk korespondensi satu-satu antara P dan Q? Jelaskan." },
     ],
   }),
-  Qn(5, "Korespondensi Satu-Satu – Bilangan Prima dan Genap", {
+  Qn(4, "Korespondensi Satu-Satu – Bilangan Prima dan Genap", {
     type: "mixed",
     content: "Dari himpunan P = {x | 1 ≤ x < 13, x ∈ bilangan prima} dan Q = {y | 2 ≤ y < 12, y ∈ bilangan genap}:",
     parts: [
@@ -66,6 +57,15 @@ const questions: Q[] = [
       { label: "b.", text: "Apakah syarat korespondensi satu-satu terpenuhi antara P dan Q? Jelaskan." },
       { label: "c.", math: "\\text{Banyak korespondensi satu-satu yang dapat dibuat} = \\ldots" },
       { label: "d.", text: "Apakah banyak korespondensi satu-satu dari P ke Q sama dengan dari Q ke P? Mengapa?" },
+    ],
+  }),
+  Qn(5, "Korespondensi – Analogi Nyata", {
+    type: "mixed",
+    content: "Sebuah hotel memiliki 10 kamar dan 10 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
+    parts: [
+      { label: "a.", text: "Nyatakan situasi ini dalam bentuk fungsi matematika." },
+      { label: "b.", text: "Apakah ini merupakan korespondensi satu-satu? Jelaskan." },
+      { label: "c.", math: "\\text{Banyak cara menempati kamar} = 10! = \\ldots \\text{ (tidak perlu dihitung penuh)}" },
     ],
   }),
 ];
