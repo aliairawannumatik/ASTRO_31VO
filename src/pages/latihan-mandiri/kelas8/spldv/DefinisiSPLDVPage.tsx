@@ -94,7 +94,7 @@ const questions: Q[] = [
     parts: [
       { label: "a.", text: "Harga 2 buku dan 3 pensil adalah Rp 13.000." },
       { label: "b.", text: "Jumlah dua bilangan adalah 25 dan selisihnya adalah 7." },
-      { label: "c.", text: "Lima kali umur Ani ditambah dua kali umur Budi sama dengan 40 tahun." },
+      { label: "c.", text: "Lima kali umur Nora ditambah dua kali umur Theo sama dengan 40 tahun." },
     ],
   }),
   Q(7, "Menentukan Variabel", {
@@ -129,7 +129,7 @@ const questions: Q[] = [
   Q(10, "SPLDV dari Konteks", {
     badge: "UN",
     type: "mixed",
-    content: "Budi membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Andi membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
+    content: "Theo membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Remy membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
     parts: [
       { label: "a.", text: "Misal harga mangga = x dan harga jeruk = y. Tuliskan SPLDV-nya." },
       { label: "b.", text: "Periksa apakah (10.000, 12.000) merupakan penyelesaiannya." },

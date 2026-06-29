@@ -56,7 +56,7 @@ const questions: Q[] = [
     parts: [
       { label: "a.", text: "Susun SPLDV." },
       { label: "b.", text: "Tentukan panjang dan lebar." },
-      { label: "c.", math: "\\text{Hitung luas persegi panjang tersebut.}" },
+      { label: "c.", text: "Hitung luas persegi panjang tersebut." },
     ],
   }),
   Qf(5, "Soal Ayam dan Kelinci", {
@@ -99,7 +99,7 @@ const questions: Q[] = [
     badge: "TKA", type: "mixed",
     content: "Pipa A dapat mengisi tangki dalam x jam dan pipa B dalam y jam. Bersama-sama mengisi dalam 4 jam. Pipa B membutuhkan waktu 6 jam lebih lama dari pipa A.",
     parts: [
-      { label: "a.", math: "\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{4} \\quad \\text{dan} \\quad y = x + 6" },
+      { label: "a.", math: "\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{4}, \\quad y = x + 6" },
       { label: "b.", text: "Selesaikan sistem tersebut." },
       { label: "c.", text: "Berapa jam pipa A dan B masing-masing mengisi tangki?" },
     ],

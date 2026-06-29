@@ -72,7 +72,7 @@ const questions: Q[] = [
     content: "Dua mobil melaju dari kota A ke kota B (240 km). Mobil pertama (kecepatan x km/jam) tiba 1 jam lebih cepat dari mobil kedua (kecepatan y km/jam). Kecepatan mobil kedua 20 km/jam lebih lambat.",
     parts: [
       { label: "a.", text: "Tuliskan persamaan dari selisih kecepatan." },
-      { label: "b.", math: "\\text{Waktu = } \\frac{\\text{jarak}}{\\text{kecepatan}}. \\text{ Tuliskan persamaan dari selisih waktu.}" },
+      { label: "b.", text: "Tuliskan persamaan dari selisih waktu, gunakan:", math: "t = \\dfrac{d}{v}" },
       { label: "c.", text: "Susun SPLDV." },
     ],
   }),
@@ -106,7 +106,7 @@ const questions: Q[] = [
     badge: "TKA", type: "mixed",
     content: "Tukang A dapat menyelesaikan pekerjaan dalam x hari. Tukang B dalam y hari. Bersama dapat selesai dalam 4 hari. Tukang A bekerja 6 hari lebih cepat dari Tukang B.",
     parts: [
-      { label: "a.", math: "\\text{Kecepatan bersama: } \\frac{1}{x} + \\frac{1}{y} = \\frac{1}{4}" },
+      { label: "a.", text: "Kecepatan bersama:", math: "\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{4}" },
       { label: "b.", text: "Tuliskan persamaan kedua dari selisih waktu." },
       { label: "c.", text: "Tuliskan SPLDV (dalam bentuk x dan y)." },
     ],

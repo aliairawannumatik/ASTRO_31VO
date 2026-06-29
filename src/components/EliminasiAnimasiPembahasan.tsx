@@ -1,8 +1,82 @@
 import React, { useState, useEffect, useRef } from "react";
 import { InlineMath, BlockMath } from "react-katex";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { playPopSound } from "@/hooks/useAudio";
 import { Play, RotateCcw, Sparkles } from "lucide-react";
 import "katex/dist/katex.min.css";
+
+// ─────────────────────────────────────────────────────────────────
+// I18N
+// ─────────────────────────────────────────────────────────────────
+
+const ui = {
+  id: {
+    diffLabel: { MUDAH: "Mudah", SEDANG: "Sedang", SULIT: "Sulit" },
+    soalHeader: "📝 Soal",
+    solveHeader: "✏️ Penyelesaian",
+    verifHeader: "🔍 Verifikasi",
+    answerHeader: "🎉 Jawaban",
+    tipsLabel: "Tips",
+    elimLabel: (ev: string, sv: string) => `Eliminasi ${ev} → cari ${sv}`,
+    origEq: "Persamaan Asal",
+    multiplier: "Pengali",
+    newEq: "Bentuk Baru",
+    playBtn: "Mulai Animasi",
+    skipBtn: "Lewati Animasi ⏭",
+    resetBtn: "Ulangi",
+    doneMsg: "Selesai! Hebat! 🎉",
+    tabLabel: (n: number) => `Soal ${n}`,
+    rulesSameTitle: "🔴 Koefisien SAMA TANDA → Kurangkan (−)",
+    rulesDiffTitle: "🟢 Koefisien BEDA TANDA → Jumlahkan (+)",
+    and: "dan",
+    subtract: "kurangkan",
+    add: "jumlahkan",
+  },
+  en: {
+    diffLabel: { MUDAH: "Easy", SEDANG: "Medium", SULIT: "Hard" },
+    soalHeader: "📝 Problem",
+    solveHeader: "✏️ Solution",
+    verifHeader: "🔍 Verification",
+    answerHeader: "🎉 Answer",
+    tipsLabel: "Tip",
+    elimLabel: (ev: string, sv: string) => `Eliminate ${ev} → find ${sv}`,
+    origEq: "Original Equation",
+    multiplier: "Multiplier",
+    newEq: "New Form",
+    playBtn: "Start Animation",
+    skipBtn: "Skip ⏭",
+    resetBtn: "Reset",
+    doneMsg: "Done! Great work! 🎉",
+    tabLabel: (n: number) => `Problem ${n}`,
+    rulesSameTitle: "🔴 SAME sign coefficients → Subtract (−)",
+    rulesDiffTitle: "🟢 OPPOSITE sign coefficients → Add (+)",
+    and: "and",
+    subtract: "subtract",
+    add: "add",
+  },
+  ja: {
+    diffLabel: { MUDAH: "基本", SEDANG: "標準", SULIT: "発展" },
+    soalHeader: "📝 問題",
+    solveHeader: "✏️ 解法",
+    verifHeader: "🔍 検証",
+    answerHeader: "🎉 答え",
+    tipsLabel: "ヒント",
+    elimLabel: (ev: string, sv: string) => `${ev}を消去 → ${sv}を求める`,
+    origEq: "元の方程式",
+    multiplier: "乗数",
+    newEq: "新しい形",
+    playBtn: "アニメーション開始",
+    skipBtn: "スキップ ⏭",
+    resetBtn: "リセット",
+    doneMsg: "完了！よくできました！🎉",
+    tabLabel: (n: number) => `問題 ${n}`,
+    rulesSameTitle: "🔴 同符号の係数 → 引き算 (−)",
+    rulesDiffTitle: "🟢 異符号の係数 → 足し算 (+)",
+    and: "と",
+    subtract: "引く",
+    add: "足す",
+  },
+};
 
 // ─────────────────────────────────────────────────────────────────
 // TYPES
@@ -153,9 +227,8 @@ const EXAMPLES: Example[] = [
     diffColor: "bg-rose-700/70 text-rose-100",
     borderColor: "border-rose-500/30",
     bgColor: "bg-rose-900/10",
-    soal: "Pak Budi membeli 3 buku dan 2 pensil seharga Rp19.000. Ibu Ani membeli 2 buku dan 5 pensil seharga Rp20.000. Tentukan harga satu buku dan satu pensil!",
+    soal: "Theo membeli 3 buku dan 2 pensil seharga Rp19.000. Nora membeli 2 buku dan 5 pensil seharga Rp20.000. Tentukan harga satu buku (b) dan satu pensil (p), dalam ribuan rupiah!",
     soalTex:
-      "\\text{Misal: } b = \\text{harga buku},\\; p = \\text{harga pensil (dalam ribuan)}\\\\" +
       "\\begin{cases} 3b + 2p = 19 \\quad \\cdots (1)\\\\ 2b + 5p = 20 \\quad \\cdots (2) \\end{cases}",
     steps: [
       {
@@ -170,7 +243,7 @@ const EXAMPLES: Example[] = [
         op: "−",
         result: "11b = 55",
         solve: "b = \\dfrac{55}{11}",
-        solveVal: "b = 5 \\;(\\text{Rp5.000})",
+        solveVal: "b = 5",
         varElim: "p",
         varSolve: "b",
         note: "KPK(2,5) = 10. Koefisien p sama dan bertanda sama → kurangkan (−)",
@@ -187,7 +260,7 @@ const EXAMPLES: Example[] = [
         op: "−",
         result: "-11p = -22",
         solve: "p = \\dfrac{-22}{-11}",
-        solveVal: "p = 2 \\;(\\text{Rp2.000})",
+        solveVal: "p = 2",
         varElim: "b",
         varSolve: "p",
         note: "KPK(3,2) = 6. Koefisien b sama dan bertanda sama → kurangkan (−)",
@@ -197,46 +270,44 @@ const EXAMPLES: Example[] = [
       "P1:\\; 3(5) + 2(2) = 15 + 4 = 19 \\checkmark",
       "P2:\\; 2(5) + 5(2) = 10 + 10 = 20 \\checkmark",
     ],
-    answerTex: "\\boxed{\\; b = 5.000, \\quad p = 2.000 \\;}",
+    answerTex: "\\boxed{\\; b = 5{,}000, \\quad p = 2{,}000 \\;}",
     tips: "Pada soal cerita: buat pemisalan → tulis model SPLDV → selesaikan → jawab pertanyaan soal.",
   },
 ];
 
 // ─────────────────────────────────────────────────────────────────
-// ELIM BLOCK — visual 3-column elimination table
+// ELIM BLOCK
 // ─────────────────────────────────────────────────────────────────
 
 const MAX_PHASE = 5;
 
 interface ElimBlockProps {
   step: ElimStep;
-  phase: number; // 0=hidden, 1=rows visible, 2=line, 3=result, 4=solve, 5=solveVal
+  phase: number;
+  t: typeof ui["id"];
 }
 
-const ElimBlock: React.FC<ElimBlockProps> = ({ step, phase }) => {
+const ElimBlock: React.FC<ElimBlockProps> = ({ step, phase, t }) => {
   const show = (minPhase: number) =>
     phase >= minPhase ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none";
-  const t = "transition-all duration-500 ease-out";
+  const tr = "transition-all duration-500 ease-out";
 
   return (
     <div className="font-mono text-sm">
       {step.note && (
-        <p className={`mb-3 font-body text-xs text-cyan-300/80 italic bg-cyan-900/20 border border-cyan-500/20 rounded-lg px-3 py-2 ${t} ${show(1)}`}>
+        <p className={`mb-3 font-body text-xs text-cyan-300/80 italic bg-cyan-900/20 border border-cyan-500/20 rounded-lg px-3 py-2 ${tr} ${show(1)}`}>
           💡 {step.note}
         </p>
       )}
 
       <div className="bg-slate-900/70 border border-white/10 rounded-xl overflow-hidden">
-
-        {/* Column headers */}
-        <div className={`grid grid-cols-[1fr_58px_1fr] border-b border-white/10 ${t} ${show(1)}`}>
-          <div className="px-3 py-1.5 text-[10px] uppercase tracking-widest text-white/30 font-body text-center">Persamaan Asal</div>
-          <div className="px-1 py-1.5 text-[10px] uppercase tracking-widest text-white/30 font-body text-center border-x border-white/10">Pengali</div>
-          <div className="px-3 py-1.5 text-[10px] uppercase tracking-widest text-white/30 font-body text-center">Bentuk Baru</div>
+        <div className={`grid grid-cols-[1fr_58px_1fr] border-b border-white/10 ${tr} ${show(1)}`}>
+          <div className="px-3 py-1.5 text-[10px] uppercase tracking-widest text-white/30 font-body text-center">{t.origEq}</div>
+          <div className="px-1 py-1.5 text-[10px] uppercase tracking-widest text-white/30 font-body text-center border-x border-white/10">{t.multiplier}</div>
+          <div className="px-3 py-1.5 text-[10px] uppercase tracking-widest text-white/30 font-body text-center">{t.newEq}</div>
         </div>
 
-        {/* Row 1 */}
-        <div className={`grid grid-cols-[1fr_58px_1fr] border-b border-white/5 ${t} ${show(1)}`}>
+        <div className={`grid grid-cols-[1fr_58px_1fr] border-b border-white/5 ${tr} ${show(1)}`}>
           <div className="px-3 py-2.5 flex flex-col gap-0.5">
             <span className="text-[10px] text-white/30 font-body">{step.label1}</span>
             <span className="text-white/70 text-sm">{step.eq1}</span>
@@ -249,8 +320,7 @@ const ElimBlock: React.FC<ElimBlockProps> = ({ step, phase }) => {
           </div>
         </div>
 
-        {/* Row 2 */}
-        <div className={`grid grid-cols-[1fr_58px_1fr] ${t} ${show(1)}`}>
+        <div className={`grid grid-cols-[1fr_58px_1fr] ${tr} ${show(1)}`}>
           <div className="px-3 py-2.5 flex flex-col gap-0.5">
             <span className="text-[10px] text-white/30 font-body">{step.label2}</span>
             <span className="text-white/70 text-sm">{step.eq2}</span>
@@ -263,8 +333,7 @@ const ElimBlock: React.FC<ElimBlockProps> = ({ step, phase }) => {
           </div>
         </div>
 
-        {/* Divider with op sign */}
-        <div className={`relative border-t-2 border-white/25 ${t} ${show(2)}`}>
+        <div className={`relative border-t-2 border-white/25 ${tr} ${show(2)}`}>
           <div className="absolute right-3 -top-3.5 bg-slate-900 px-2">
             <span className={`text-lg font-bold ${step.op === "−" ? "text-red-400" : "text-green-400"}`}>
               ({step.op})
@@ -272,22 +341,19 @@ const ElimBlock: React.FC<ElimBlockProps> = ({ step, phase }) => {
           </div>
         </div>
 
-        {/* Result */}
-        <div className={`px-3 py-2.5 flex justify-end ${t} ${show(3)}`}>
+        <div className={`px-3 py-2.5 flex justify-end ${tr} ${show(3)}`}>
           <span className="text-yellow-300 font-bold text-base">{step.result}</span>
         </div>
       </div>
 
-      {/* Solve steps */}
-      <div className={`mt-3 ml-4 space-y-1.5 ${t} ${show(4)}`}>
+      <div className={`mt-3 ml-4 space-y-1.5 ${tr} ${show(4)}`}>
         <div className="flex items-center gap-3 text-white/80 text-sm">
           <span className="text-white/30">⟹</span>
           <InlineMath math={step.solve} />
         </div>
       </div>
 
-      {/* Final value */}
-      <div className={`mt-2 ml-4 ${t} ${show(5)}`}>
+      <div className={`mt-2 ml-4 ${tr} ${show(5)}`}>
         <div className="inline-flex items-center gap-2 bg-emerald-900/30 border border-emerald-500/40 rounded-xl px-4 py-1.5">
           <span className="text-emerald-300 font-bold text-base"><InlineMath math={step.solveVal} /></span>
           <span className="text-emerald-400">✓</span>
@@ -301,7 +367,7 @@ const ElimBlock: React.FC<ElimBlockProps> = ({ step, phase }) => {
 // EXAMPLE VIEWER
 // ─────────────────────────────────────────────────────────────────
 
-const ExampleViewer: React.FC<{ example: Example }> = ({ example }) => {
+const ExampleViewer: React.FC<{ example: Example; t: typeof ui["id"] }> = ({ example, t }) => {
   const [stepIdx, setStepIdx] = useState(0);
   const [phase, setPhase] = useState(0);
   const [showVerif, setShowVerif] = useState(false);
@@ -345,21 +411,20 @@ const ExampleViewer: React.FC<{ example: Example }> = ({ example }) => {
 
   return (
     <div className="space-y-4">
-      {/* Badge */}
       <div className="flex items-center gap-2 flex-wrap">
-        <span className={`text-xs font-bold px-3 py-1 rounded-full font-body ${example.diffColor}`}>{example.difficulty}</span>
+        <span className={`text-xs font-bold px-3 py-1 rounded-full font-body ${example.diffColor}`}>
+          {t.diffLabel[example.difficulty]}
+        </span>
       </div>
 
-      {/* Soal */}
       <div className={`border ${example.borderColor} ${example.bgColor} rounded-xl p-4 space-y-2`}>
-        <p className="font-body text-xs font-bold text-white/40 uppercase tracking-widest">📝 Soal</p>
+        <p className="font-body text-xs font-bold text-white/40 uppercase tracking-widest">{t.soalHeader}</p>
         <p className="font-body text-sm text-white/85 leading-relaxed">{example.soal}</p>
         <div className="overflow-x-auto"><BlockMath math={example.soalTex} /></div>
       </div>
 
-      {/* Penyelesaian */}
       <div className="space-y-3">
-        <p className="font-body text-xs font-bold text-cyan-300/70 uppercase tracking-widest">✏️ Penyelesaian</p>
+        <p className="font-body text-xs font-bold text-cyan-300/70 uppercase tracking-widest">{t.solveHeader}</p>
 
         {example.steps.map((step, i) => {
           const phaseToUse = i < stepIdx ? MAX_PHASE : i === stepIdx ? phase : 0;
@@ -375,56 +440,52 @@ const ExampleViewer: React.FC<{ example: Example }> = ({ example }) => {
               <div className="flex items-center gap-2">
                 <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 ${accent.badge}`}>{i + 1}</span>
                 <p className="font-body text-sm font-semibold text-white">
-                  Eliminasi <span className="font-mono font-bold text-amber-300">{step.varElim}</span>
-                  {" "}→ cari <span className="font-mono font-bold text-emerald-300">{step.varSolve}</span>
+                  {t.elimLabel(step.varElim, step.varSolve)}
                 </p>
               </div>
-              <ElimBlock step={step} phase={phaseToUse} />
+              <ElimBlock step={step} phase={phaseToUse} t={t} />
             </div>
           );
         })}
       </div>
 
-      {/* Verifikasi */}
       <div className={`border border-green-500/30 bg-green-900/10 rounded-xl p-4 space-y-2 transition-all duration-500 ${showVerif ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 pointer-events-none"}`}>
-        <p className="font-body text-xs font-bold text-green-300/70 uppercase tracking-widest">🔍 Verifikasi</p>
+        <p className="font-body text-xs font-bold text-green-300/70 uppercase tracking-widest">{t.verifHeader}</p>
         <div className="overflow-x-auto space-y-1">
           {example.verification.map((v, i) => <BlockMath key={i} math={v} />)}
         </div>
       </div>
 
-      {/* Jawaban */}
       <div className={`border border-yellow-500/40 bg-yellow-900/10 rounded-xl p-4 space-y-2 transition-all duration-500 ${showAnswer ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 pointer-events-none"}`}>
-        <p className="font-body text-xs font-bold text-yellow-300/70 uppercase tracking-widest">🎉 Jawaban</p>
+        <p className="font-body text-xs font-bold text-yellow-300/70 uppercase tracking-widest">{t.answerHeader}</p>
         <div className="overflow-x-auto"><BlockMath math={example.answerTex} /></div>
         <p className="font-body text-xs text-blue-300 bg-blue-900/20 border border-blue-500/20 rounded-lg px-3 py-2">
-          💡 <strong>Tips:</strong> {example.tips}
+          💡 <strong>{t.tipsLabel}:</strong> {example.tips}
         </p>
       </div>
 
-      {/* Controls */}
       <div className="flex gap-2 flex-wrap items-center pt-1">
         {!showAnswer && !isPlaying && (
           <button
             onClick={handlePlay}
             className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-sm font-bold font-body px-5 py-2 rounded-xl transition-all"
           >
-            <Play className="w-4 h-4" /> Mulai Animasi
+            <Play className="w-4 h-4" /> {t.playBtn}
           </button>
         )}
         {isPlaying && (
           <button onClick={handleSkip} className="flex items-center gap-2 bg-slate-700/70 border border-white/10 text-white/70 text-sm font-body px-5 py-2 rounded-xl transition-all hover:bg-slate-600/70">
-            Lewati Animasi ⏭
+            {t.skipBtn}
           </button>
         )}
         {phase > 0 && (
           <button onClick={handleReset} className="flex items-center gap-2 bg-slate-700/60 border border-white/10 text-white/60 text-sm font-body px-4 py-2 rounded-xl transition-all hover:bg-slate-600/60">
-            <RotateCcw className="w-4 h-4" /> Ulangi
+            <RotateCcw className="w-4 h-4" /> {t.resetBtn}
           </button>
         )}
         {showAnswer && !isPlaying && (
           <span className="text-emerald-400 text-sm font-body flex items-center gap-1.5">
-            <Sparkles className="w-4 h-4" /> Selesai! Hebat! 🎉
+            <Sparkles className="w-4 h-4" /> {t.doneMsg}
           </span>
         )}
       </div>
@@ -433,27 +494,39 @@ const ExampleViewer: React.FC<{ example: Example }> = ({ example }) => {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// MAIN EXPORT — section wrapper with tab switcher
+// MAIN EXPORT
 // ─────────────────────────────────────────────────────────────────
 
 const EliminasiAnimasiPembahasan: React.FC = () => {
+  const { language } = useLanguage();
+  const t = ui[language as keyof typeof ui] ?? ui.id;
   const [activeEx, setActiveEx] = useState(0);
 
   return (
     <div className="space-y-4">
-      {/* Rules */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="border border-red-500/30 bg-red-900/10 rounded-xl p-3">
-          <p className="font-body text-xs font-bold text-red-300 mb-1">🔴 Koefisien SAMA TANDA → Kurangkan (−)</p>
-          <div className="overflow-x-auto"><BlockMath math="+3y \text{ dan } +3y \;\Rightarrow\; \text{kurangkan}" /></div>
+          <p className="font-body text-xs font-bold text-red-300 mb-2">{t.rulesSameTitle}</p>
+          <div className="flex items-center gap-2 flex-wrap text-sm">
+            <InlineMath math="+3y" />
+            <span className="text-white/60">{t.and}</span>
+            <InlineMath math="+3y" />
+            <span className="text-white/40">→</span>
+            <span className="font-bold text-red-300">{t.subtract}</span>
+          </div>
         </div>
         <div className="border border-green-500/30 bg-green-900/10 rounded-xl p-3">
-          <p className="font-body text-xs font-bold text-green-300 mb-1">🟢 Koefisien BEDA TANDA → Jumlahkan (+)</p>
-          <div className="overflow-x-auto"><BlockMath math="+3y \text{ dan } -3y \;\Rightarrow\; \text{jumlahkan}" /></div>
+          <p className="font-body text-xs font-bold text-green-300 mb-2">{t.rulesDiffTitle}</p>
+          <div className="flex items-center gap-2 flex-wrap text-sm">
+            <InlineMath math="+3y" />
+            <span className="text-white/60">{t.and}</span>
+            <InlineMath math="-3y" />
+            <span className="text-white/40">→</span>
+            <span className="font-bold text-green-300">{t.add}</span>
+          </div>
         </div>
       </div>
 
-      {/* Example tabs */}
       <div className="flex gap-1 bg-slate-900/60 border border-white/10 rounded-2xl p-1.5">
         {EXAMPLES.map((ex, i) => (
           <button
@@ -464,12 +537,12 @@ const EliminasiAnimasiPembahasan: React.FC = () => {
             }`}
           >
             {ex.difficulty === "MUDAH" ? "🟢" : ex.difficulty === "SEDANG" ? "🟡" : "🔴"}
-            {" Soal "}{i + 1}
+            {" "}{t.tabLabel(i + 1)}
           </button>
         ))}
       </div>
 
-      <ExampleViewer key={activeEx} example={EXAMPLES[activeEx]} />
+      <ExampleViewer key={activeEx} example={EXAMPLES[activeEx]} t={t} />
     </div>
   );
 };

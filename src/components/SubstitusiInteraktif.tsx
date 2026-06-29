@@ -1,8 +1,141 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BlockMath } from "react-katex";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { playPopSound } from "@/hooks/useAudio";
 import { Play, RotateCcw, ChevronDown } from "lucide-react";
 import "katex/dist/katex.min.css";
+
+// ── i18n ──────────────────────────────────────────────────────────────────────
+
+const ui = {
+  id: {
+    inputTitle: "🔢 Input Sistem Persamaan",
+    eq1Label: "Persamaan 1 (P1)", eq2Label: "Persamaan 2 (P2)",
+    eq1Ph: "cth: x + y = 5", eq2Ph: "cth: 2x + 3y = 11",
+    errFmt: "⚠️ Format tidak dikenali. Gunakan:",
+    isoFromLabel: "Nyatakan dari persamaan:", isoEq1: "Persamaan 1", isoEq2: "Persamaan 2",
+    isoVarLabel: "Variabel yang dinyatakan:",
+    solveRunning: "Sedang memproses…", solveBtnLabel: "▶ Selesaikan Langkah demi Langkah",
+    skipBtn: "Lewati animasi (tampilkan semua)",
+    // steps
+    step1: "Langkah 1 — Tuliskan SPLDV",
+    step1NoteY: (s: string, t: string) => `Pilih: nyatakan y dari ${s}, lalu substitusikan ke ${t}.`,
+    step1NoteX: (s: string, t: string) => `Pilih: nyatakan x dari ${s}, lalu substitusikan ke ${t}.`,
+    step2Y: (s: string) => `Langkah 2 — Nyatakan y dari ${s}`,
+    step2X: (s: string) => `Langkah 2 — Nyatakan x dari ${s}`,
+    step2NoteY: "Pindahkan suku x ke ruas kanan, lalu bagi dengan koefisien y.",
+    step2NoteX: "Pindahkan suku y ke ruas kanan, lalu bagi dengan koefisien x.",
+    step3: (t: string) => `Langkah 3 — Substitusikan (*) ke ${t}`,
+    step3NoteY: (t: string) => `Setiap y di ${t} diganti dengan ekspresi (*).`,
+    step3NoteX: (t: string) => `Setiap x di ${t} diganti dengan ekspresi (*).`,
+    subY: "ganti y dengan (*)", subX: "ganti x dengan (*)",
+    step4: "Langkah 4 — Kembangkan",
+    expandAll: (b: number) => `\\times ${b} \\;\\text{pd semua suku:}`,
+    expandBracket: "\\text{Buka kurung:}",
+    step4NoteCoeff: (b: number) => `Kalikan semua suku dengan ${b} untuk menghilangkan penyebut.`,
+    step4NoteDistrib: "Distribusikan perkalian ke semua suku dalam kurung.",
+    termX: "\\text{suku x}", termY: "\\text{suku y}",
+    step5X: "Langkah 5 — Kumpulkan suku x",
+    step5Y: "Langkah 5 — Kumpulkan suku y",
+    step6X: "Langkah 6 — Selesaikan nilai x",
+    step6Y: "Langkah 6 — Selesaikan nilai y",
+    step6Note: (v: string, val: string) => `Solusi: ${v} = ${val}`,
+    step7Y: "Langkah 7 — Cari nilai y (substitusi balik ke (*))",
+    step7X: "Langkah 7 — Cari nilai x (substitusi balik ke (*))",
+    step8: "Langkah 8 — Verifikasi ke kedua persamaan",
+    step8Ok: "Kedua persamaan terpenuhi! Solusi valid.",
+    step8Fail: "⚠️ Ada ketidaksesuaian — periksa input.",
+    solution: "✅ Solusi SPLDV",
+    errNoY: (n: number) => `Persamaan ${n} tidak memiliki variabel y! Pilih variabel atau persamaan lain.`,
+    errNoX: (n: number) => `Persamaan ${n} tidak memiliki variabel x! Pilih variabel atau persamaan lain.`,
+    errInfinite: "SPLDV ini memiliki TAK HINGGA SOLUSI — kedua garis berimpit.",
+    errParallel: "SPLDV ini TIDAK MEMILIKI SOLUSI — kedua garis sejajar.",
+  },
+  en: {
+    inputTitle: "🔢 Input System of Equations",
+    eq1Label: "Equation 1 (P1)", eq2Label: "Equation 2 (P2)",
+    eq1Ph: "e.g. x + y = 5", eq2Ph: "e.g. 2x + 3y = 11",
+    errFmt: "⚠️ Unrecognized format. Use:",
+    isoFromLabel: "Express variable from equation:", isoEq1: "Equation 1", isoEq2: "Equation 2",
+    isoVarLabel: "Variable to isolate:",
+    solveRunning: "Processing…", solveBtnLabel: "▶ Solve Step by Step",
+    skipBtn: "Skip animation (show all)",
+    step1: "Step 1 — Write the System",
+    step1NoteY: (s: string, t: string) => `Plan: express y from ${s}, then substitute into ${t}.`,
+    step1NoteX: (s: string, t: string) => `Plan: express x from ${s}, then substitute into ${t}.`,
+    step2Y: (s: string) => `Step 2 — Express y from ${s}`,
+    step2X: (s: string) => `Step 2 — Express x from ${s}`,
+    step2NoteY: "Move the x term to the right side, then divide by the y coefficient.",
+    step2NoteX: "Move the y term to the right side, then divide by the x coefficient.",
+    step3: (t: string) => `Step 3 — Substitute (*) into ${t}`,
+    step3NoteY: (t: string) => `Every y in ${t} is replaced by expression (*).`,
+    step3NoteX: (t: string) => `Every x in ${t} is replaced by expression (*).`,
+    subY: "replace y with (*)", subX: "replace x with (*)",
+    step4: "Step 4 — Expand",
+    expandAll: (b: number) => `\\times ${b} \\;\\text{for all terms:}`,
+    expandBracket: "\\text{Expand:}",
+    step4NoteCoeff: (b: number) => `Multiply all terms by ${b} to clear the denominator.`,
+    step4NoteDistrib: "Distribute the multiplication across all terms in the bracket.",
+    termX: "\\text{x term}", termY: "\\text{y term}",
+    step5X: "Step 5 — Collect x terms",
+    step5Y: "Step 5 — Collect y terms",
+    step6X: "Step 6 — Solve for x",
+    step6Y: "Step 6 — Solve for y",
+    step6Note: (v: string, val: string) => `Solution: ${v} = ${val}`,
+    step7Y: "Step 7 — Find y (back-substitute into (*))",
+    step7X: "Step 7 — Find x (back-substitute into (*))",
+    step8: "Step 8 — Verify in both equations",
+    step8Ok: "Both equations satisfied! Valid solution.",
+    step8Fail: "⚠️ Mismatch — check your input.",
+    solution: "✅ Solution",
+    errNoY: (n: number) => `Equation ${n} has no y variable! Choose a different variable or equation.`,
+    errNoX: (n: number) => `Equation ${n} has no x variable! Choose a different variable or equation.`,
+    errInfinite: "This system has INFINITELY MANY SOLUTIONS — the lines coincide.",
+    errParallel: "This system has NO SOLUTION — the lines are parallel.",
+  },
+  ja: {
+    inputTitle: "🔢 連立方程式を入力",
+    eq1Label: "方程式1 (P1)", eq2Label: "方程式2 (P2)",
+    eq1Ph: "例: x + y = 5", eq2Ph: "例: 2x + 3y = 11",
+    errFmt: "⚠️ 形式が無効です。例:",
+    isoFromLabel: "どの式から変数を表すか：", isoEq1: "方程式1", isoEq2: "方程式2",
+    isoVarLabel: "孤立させる変数：",
+    solveRunning: "計算中…", solveBtnLabel: "▶ ステップごとに解く",
+    skipBtn: "アニメーションをスキップ（全表示）",
+    step1: "ステップ1 — 連立方程式を書く",
+    step1NoteY: (s: string, t: string) => `方針：${s}からyを表し、${t}に代入する。`,
+    step1NoteX: (s: string, t: string) => `方針：${s}からxを表し、${t}に代入する。`,
+    step2Y: (s: string) => `ステップ2 — ${s}からyを表す`,
+    step2X: (s: string) => `ステップ2 — ${s}からxを表す`,
+    step2NoteY: "x項を右辺に移し、yの係数で割る。",
+    step2NoteX: "y項を右辺に移し、xの係数で割る。",
+    step3: (t: string) => `ステップ3 — (*)を${t}に代入`,
+    step3NoteY: (t: string) => `${t}のすべてのyを(*)で置き換える。`,
+    step3NoteX: (t: string) => `${t}のすべてのxを(*)で置き換える。`,
+    subY: "yを(*)で置換", subX: "xを(*)で置換",
+    step4: "ステップ4 — 展開",
+    expandAll: (b: number) => `\\times ${b} \\;\\text{各項に:}`,
+    expandBracket: "\\text{括弧を展開:}",
+    step4NoteCoeff: (b: number) => `分母を消すために全項に${b}をかける。`,
+    step4NoteDistrib: "括弧内の全項に掛け算を分配する。",
+    termX: "\\text{x}", termY: "\\text{y}",
+    step5X: "ステップ5 — xの項をまとめる",
+    step5Y: "ステップ5 — yの項をまとめる",
+    step6X: "ステップ6 — xを求める",
+    step6Y: "ステップ6 — yを求める",
+    step6Note: (v: string, val: string) => `解：${v} = ${val}`,
+    step7Y: "ステップ7 — yを求める（(*)に逆代入）",
+    step7X: "ステップ7 — xを求める（(*)に逆代入）",
+    step8: "ステップ8 — 両方の式で検証",
+    step8Ok: "両方の方程式が成立！解は有効です。",
+    step8Fail: "⚠️ 不一致 — 入力を確認してください。",
+    solution: "✅ 解",
+    errNoY: (n: number) => `方程式${n}にはyがありません！別の変数または式を選んでください。`,
+    errNoX: (n: number) => `方程式${n}にはxがありません！別の変数または式を選んでください。`,
+    errInfinite: "この連立方程式は解が無限にあります — 直線が一致しています。",
+    errParallel: "この連立方程式に解はありません — 直線が平行です。",
+  },
+};
 
 // ── Fraction helpers ──────────────────────────────────────────────────────────
 
@@ -132,11 +265,14 @@ interface SolStep {
   isAnswer?: boolean;
 }
 
+type Str = typeof ui["id"];
+
 function generateSteps(
   p1: { a: number; b: number; c: number },
   p2: { a: number; b: number; c: number },
   isoEq: 1 | 2,
-  isoVar: "x" | "y"
+  isoVar: "x" | "y",
+  s: Str
 ): { steps: SolStep[]; error: string } {
   const src = isoEq === 1 ? p1 : p2;
   const tgt = isoEq === 1 ? p2 : p1;
@@ -146,19 +282,13 @@ function generateSteps(
 
   if (isoVar === "y") {
     if (src.b === 0)
-      return { steps: [], error: `Persamaan ${isoEq} tidak memiliki variabel y! Pilih variabel atau persamaan lain.` };
+      return { steps: [], error: s.errNoY(isoEq) };
 
     const coeffX = tgt.a * src.b - tgt.b * src.a;
     const rhsX = tgt.c * src.b - tgt.b * src.c;
 
     if (coeffX === 0) {
-      return {
-        steps: [],
-        error:
-          rhsX === 0
-            ? "SPLDV ini memiliki TAK HINGGA SOLUSI — kedua garis berimpit."
-            : "SPLDV ini TIDAK MEMILIKI SOLUSI — kedua garis sejajar.",
-      };
+      return { steps: [], error: rhsX === 0 ? s.errInfinite : s.errParallel };
     }
 
     const xFrac = red(rhsX, coeffX);
@@ -170,22 +300,16 @@ function generateSteps(
 
     const expr = exprForY(src.a, src.b, src.c);
 
-    // Step 1 — tulis SPLDV
     steps.push({
-      title: "Langkah 1 — Tuliskan SPLDV",
-      lines: [
-        `\\begin{cases} P1:\\; ${eqTex(p1.a, p1.b, p1.c)} \\\\[4pt] P2:\\; ${eqTex(p2.a, p2.b, p2.c)} \\end{cases}`,
-      ],
-      note: `Pilih: nyatakan y dari ${srcLbl}, lalu substitusikan ke ${tgtLbl}.`,
+      title: s.step1,
+      lines: [`\\begin{cases} P1:\\; ${eqTex(p1.a, p1.b, p1.c)} \\\\[4pt] P2:\\; ${eqTex(p2.a, p2.b, p2.c)} \\end{cases}`],
+      note: s.step1NoteY(srcLbl, tgtLbl),
       color: "border-slate-500/40 bg-slate-800/40",
     });
 
-    // Step 2 — isolasi y
     const isolateLines: string[] = [];
     if (src.a !== 0) {
-      isolateLines.push(
-        `${srcLbl}:\\; ${eqTex(src.a, src.b, src.c)}`
-      );
+      isolateLines.push(`${srcLbl}:\\; ${eqTex(src.a, src.b, src.c)}`);
       isolateLines.push(
         `${lhsTex(0, src.b)} = ${nt(src.c)}${src.a > 0 ? ` - ${src.a === 1 ? "" : src.a}x` : ` + ${Math.abs(src.a) === 1 ? "" : Math.abs(src.a)}x`}`
       );
@@ -195,25 +319,23 @@ function generateSteps(
     isolateLines.push(`y = ${expr} \\quad \\cdots (*)`);
 
     steps.push({
-      title: `Langkah 2 — Nyatakan y dari ${srcLbl}`,
+      title: s.step2Y(srcLbl),
       lines: isolateLines,
-      note: "Pindahkan suku x ke ruas kanan, lalu bagi dengan koefisien y.",
+      note: s.step2NoteY,
       color: "border-cyan-500/40 bg-cyan-900/20",
     });
 
-    // Step 3 — tulis target dan substitusi
     steps.push({
-      title: `Langkah 3 — Substitusikan (*) ke ${tgtLbl}`,
+      title: s.step3(tgtLbl),
       lines: [
         `${tgtLbl}:\\; ${eqTex(tgt.a, tgt.b, tgt.c)}`,
-        `\\underbrace{\\text{ganti }y\\text{ dengan }(*)}_{\\downarrow}`,
+        `\\underbrace{\\text{${s.subY}}}_{\\downarrow}`,
         subIntoTgtY(tgt.a, tgt.b, tgt.c, expr),
       ],
-      note: `Setiap y di ${tgtLbl} diganti dengan ekspresi (*).`,
+      note: s.step3NoteY(tgtLbl),
       color: "border-violet-500/40 bg-violet-900/20",
     });
 
-    // Step 4 — expand / kembangkan
     const termAtBs = tgt.a * src.b;
     const termBtCs = tgt.b * src.c;
     const termBtAs = tgt.b * src.a;
@@ -225,70 +347,57 @@ function generateSteps(
     } = ${nt(rhsBs)}`;
 
     steps.push({
-      title: `Langkah 4 — Kembangkan`,
+      title: s.step4,
       lines: [
-        src.b !== 1 && src.b !== -1
-          ? `\\times ${src.b} \\text{ pada semua suku:}`
-          : `\\text{Buka tanda kurung:}`,
+        src.b !== 1 && src.b !== -1 ? s.expandAll(src.b) : s.expandBracket,
         expandLine,
       ],
-      note:
-        src.b !== 1 && src.b !== -1
-          ? `Kalikan semua suku dengan ${src.b} untuk menghilangkan penyebut.`
-          : "Distribusikan perkalian ke semua suku dalam kurung.",
+      note: src.b !== 1 && src.b !== -1 ? s.step4NoteCoeff(src.b) : s.step4NoteDistrib,
       color: "border-blue-500/40 bg-blue-900/20",
     });
 
-    // Step 5 — collect x
     steps.push({
-      title: "Langkah 5 — Kumpulkan suku x",
+      title: s.step5X,
       lines: [
-        `\\underbrace{${nt(termAtBs)}x}_{\\text{suku x}} ${termBtAs > 0 ? `- ${nt(termBtAs)}x` : termBtAs < 0 ? `+ ${nt(Math.abs(termBtAs))}x` : ""} = ${nt(rhsBs)}${termBtCs !== 0 ? (termBtCs > 0 ? ` - ${nt(termBtCs)}` : ` + ${nt(Math.abs(termBtCs))}`) : ""}`,
+        `\\underbrace{${nt(termAtBs)}x}_{${s.termX}} ${termBtAs > 0 ? `- ${nt(termBtAs)}x` : termBtAs < 0 ? `+ ${nt(Math.abs(termBtAs))}x` : ""} = ${nt(rhsBs)}${termBtCs !== 0 ? (termBtCs > 0 ? ` - ${nt(termBtCs)}` : ` + ${nt(Math.abs(termBtCs))}`) : ""}`,
         `${lhsTex(coeffX, 0)} = ${nt(rhsX)}`,
       ],
       color: "border-indigo-500/40 bg-indigo-900/20",
     });
 
-    // Step 6 — selesaikan x
     steps.push({
-      title: "Langkah 6 — Selesaikan nilai x",
+      title: s.step6X,
       lines: [
         coeffX !== 1
           ? `x = \\dfrac{${nt(rhsX)}}{${nt(coeffX)}} = ${ft(xFrac)}`
           : `x = ${ft(xFrac)}`,
       ],
-      note: `Solusi: x = ${ft(xFrac)}`,
+      note: s.step6Note("x", ft(xFrac)),
       color: "border-emerald-500/40 bg-emerald-900/20",
     });
 
-    // Step 7 — cari y
     const xDisplay = ft(xFrac);
     const backSubExpr = exprForY(src.a, src.b, src.c).replace("x", `(${xDisplay})`);
     steps.push({
-      title: "Langkah 7 — Cari nilai y (substitusi balik ke (*))",
-      lines: [
-        `y = ${backSubExpr}`,
-        `y = ${ft(yFrac)}`,
-      ],
+      title: s.step7Y,
+      lines: [`y = ${backSubExpr}`, `y = ${ft(yFrac)}`],
       color: "border-orange-500/40 bg-orange-900/20",
     });
 
-    // Step 8 — verifikasi
     const ok1 = Math.abs(p1.a * xVal + p1.b * yVal - p1.c) < 0.0001;
     const ok2 = Math.abs(p2.a * xVal + p2.b * yVal - p2.c) < 0.0001;
     steps.push({
-      title: "Langkah 8 — Verifikasi ke kedua persamaan",
+      title: s.step8,
       lines: [
         `P1:\\; ${lhsTex(p1.a, p1.b)} = ${p1.a !== 0 ? `${nt(p1.a)}\\cdot${ft(xFrac)}` : ""}${p1.b !== 0 ? `${p1.b > 0 && p1.a !== 0 ? " + " : ""}${nt(p1.b)}\\cdot${ft(yFrac)}` : ""} = ${nt(p1.c)}\\; ${ok1 ? "\\checkmark" : "\\times"}`,
         `P2:\\; ${lhsTex(p2.a, p2.b)} = ${p2.a !== 0 ? `${nt(p2.a)}\\cdot${ft(xFrac)}` : ""}${p2.b !== 0 ? `${p2.b > 0 && p2.a !== 0 ? " + " : ""}${nt(p2.b)}\\cdot${ft(yFrac)}` : ""} = ${nt(p2.c)}\\; ${ok2 ? "\\checkmark" : "\\times"}`,
       ],
-      note: ok1 && ok2 ? "Kedua persamaan terpenuhi! Solusi valid." : "⚠️ Ada ketidaksesuaian — periksa input.",
+      note: ok1 && ok2 ? s.step8Ok : s.step8Fail,
       color: "border-green-500/40 bg-green-900/20",
     });
 
-    // Step 9 — solusi akhir
     steps.push({
-      title: "✅ Solusi SPLDV",
+      title: s.solution,
       lines: [`\\boxed{\\; x = ${ft(xFrac)}, \\quad y = ${ft(yFrac)} \\;}`],
       color: "border-yellow-500/40 bg-yellow-900/20",
       isAnswer: true,
@@ -297,19 +406,13 @@ function generateSteps(
   } else {
     // isoVar === 'x'
     if (src.a === 0)
-      return { steps: [], error: `Persamaan ${isoEq} tidak memiliki variabel x! Pilih variabel atau persamaan lain.` };
+      return { steps: [], error: s.errNoX(isoEq) };
 
     const coeffY = tgt.b * src.a - tgt.a * src.b;
     const rhsY = tgt.c * src.a - tgt.a * src.c;
 
     if (coeffY === 0) {
-      return {
-        steps: [],
-        error:
-          rhsY === 0
-            ? "SPLDV ini memiliki TAK HINGGA SOLUSI — kedua garis berimpit."
-            : "SPLDV ini TIDAK MEMILIKI SOLUSI — kedua garis sejajar.",
-      };
+      return { steps: [], error: rhsY === 0 ? s.errInfinite : s.errParallel };
     }
 
     const yFrac = red(rhsY, coeffY);
@@ -322,11 +425,9 @@ function generateSteps(
     const expr = exprForX(src.a, src.b, src.c);
 
     steps.push({
-      title: "Langkah 1 — Tuliskan SPLDV",
-      lines: [
-        `\\begin{cases} P1:\\; ${eqTex(p1.a, p1.b, p1.c)} \\\\[4pt] P2:\\; ${eqTex(p2.a, p2.b, p2.c)} \\end{cases}`,
-      ],
-      note: `Pilih: nyatakan x dari ${srcLbl}, lalu substitusikan ke ${tgtLbl}.`,
+      title: s.step1,
+      lines: [`\\begin{cases} P1:\\; ${eqTex(p1.a, p1.b, p1.c)} \\\\[4pt] P2:\\; ${eqTex(p2.a, p2.b, p2.c)} \\end{cases}`],
+      note: s.step1NoteX(srcLbl, tgtLbl),
       color: "border-slate-500/40 bg-slate-800/40",
     });
 
@@ -339,20 +440,20 @@ function generateSteps(
     isolateLines.push(`x = ${expr} \\quad \\cdots (*)`);
 
     steps.push({
-      title: `Langkah 2 — Nyatakan x dari ${srcLbl}`,
+      title: s.step2X(srcLbl),
       lines: isolateLines,
-      note: "Pindahkan suku y ke ruas kanan, lalu bagi dengan koefisien x.",
+      note: s.step2NoteX,
       color: "border-cyan-500/40 bg-cyan-900/20",
     });
 
     steps.push({
-      title: `Langkah 3 — Substitusikan (*) ke ${tgtLbl}`,
+      title: s.step3(tgtLbl),
       lines: [
         `${tgtLbl}:\\; ${eqTex(tgt.a, tgt.b, tgt.c)}`,
-        `\\underbrace{\\text{ganti }x\\text{ dengan }(*)}_{\\downarrow}`,
+        `\\underbrace{\\text{${s.subX}}}_{\\downarrow}`,
         subIntoTgtX(tgt.a, tgt.b, tgt.c, expr),
       ],
-      note: `Setiap x di ${tgtLbl} diganti dengan ekspresi (*).`,
+      note: s.step3NoteX(tgtLbl),
       color: "border-violet-500/40 bg-violet-900/20",
     });
 
@@ -378,58 +479,53 @@ function generateSteps(
     } = ${nt(rhsAs)}`;
 
     steps.push({
-      title: "Langkah 4 — Kembangkan",
+      title: s.step4,
       lines: [
-        src.a !== 1 && src.a !== -1
-          ? `\\times ${src.a} \\text{ pada semua suku:}`
-          : `\\text{Buka tanda kurung:}`,
+        src.a !== 1 && src.a !== -1 ? s.expandAll(src.a) : s.expandBracket,
         expandLine,
       ],
       color: "border-blue-500/40 bg-blue-900/20",
     });
 
     steps.push({
-      title: "Langkah 5 — Kumpulkan suku y",
+      title: s.step5Y,
       lines: [`${lhsTex(0, coeffY)} = ${nt(rhsY)}`],
       color: "border-indigo-500/40 bg-indigo-900/20",
     });
 
     steps.push({
-      title: "Langkah 6 — Selesaikan nilai y",
+      title: s.step6Y,
       lines: [
         coeffY !== 1
           ? `y = \\dfrac{${nt(rhsY)}}{${nt(coeffY)}} = ${ft(yFrac)}`
           : `y = ${ft(yFrac)}`,
       ],
-      note: `Solusi: y = ${ft(yFrac)}`,
+      note: s.step6Note("y", ft(yFrac)),
       color: "border-emerald-500/40 bg-emerald-900/20",
     });
 
     const yDisplay = ft(yFrac);
     const backSubExpr = exprForX(src.a, src.b, src.c).replace("y", `(${yDisplay})`);
     steps.push({
-      title: "Langkah 7 — Cari nilai x (substitusi balik ke (*))",
-      lines: [
-        `x = ${backSubExpr}`,
-        `x = ${ft(xFrac)}`,
-      ],
+      title: s.step7X,
+      lines: [`x = ${backSubExpr}`, `x = ${ft(xFrac)}`],
       color: "border-orange-500/40 bg-orange-900/20",
     });
 
     const ok1 = Math.abs(p1.a * xVal + p1.b * yVal - p1.c) < 0.0001;
     const ok2 = Math.abs(p2.a * xVal + p2.b * yVal - p2.c) < 0.0001;
     steps.push({
-      title: "Langkah 8 — Verifikasi ke kedua persamaan",
+      title: s.step8,
       lines: [
         `P1:\\; ${lhsTex(p1.a, p1.b)} = ${p1.a !== 0 ? `${nt(p1.a)}\\cdot${ft(xFrac)}` : ""}${p1.b !== 0 ? `${p1.b > 0 && p1.a !== 0 ? " + " : ""}${nt(p1.b)}\\cdot${ft(yFrac)}` : ""} = ${nt(p1.c)}\\; ${ok1 ? "\\checkmark" : "\\times"}`,
         `P2:\\; ${lhsTex(p2.a, p2.b)} = ${p2.a !== 0 ? `${nt(p2.a)}\\cdot${ft(xFrac)}` : ""}${p2.b !== 0 ? `${p2.b > 0 && p2.a !== 0 ? " + " : ""}${nt(p2.b)}\\cdot${ft(yFrac)}` : ""} = ${nt(p2.c)}\\; ${ok2 ? "\\checkmark" : "\\times"}`,
       ],
-      note: ok1 && ok2 ? "Kedua persamaan terpenuhi! Solusi valid." : "⚠️ Ada ketidaksesuaian — periksa input.",
+      note: ok1 && ok2 ? s.step8Ok : s.step8Fail,
       color: "border-green-500/40 bg-green-900/20",
     });
 
     steps.push({
-      title: "✅ Solusi SPLDV",
+      title: s.solution,
       lines: [`\\boxed{\\; x = ${ft(xFrac)}, \\quad y = ${ft(yFrac)} \\;}`],
       color: "border-yellow-500/40 bg-yellow-900/20",
       isAnswer: true,
@@ -443,7 +539,22 @@ function generateSteps(
 
 const STEP_DELAY_MS = 1300;
 
+const stepColorMap: Record<string, { border: string; bg: string; badge: string }> = {
+  "border-slate-500/40 bg-slate-800/40": { border: "border-slate-500/40", bg: "bg-slate-800/40", badge: "bg-slate-600 text-white" },
+  "border-cyan-500/40 bg-cyan-900/20": { border: "border-cyan-500/40", bg: "bg-cyan-900/20", badge: "bg-cyan-600 text-white" },
+  "border-violet-500/40 bg-violet-900/20": { border: "border-violet-500/40", bg: "bg-violet-900/20", badge: "bg-violet-600 text-white" },
+  "border-blue-500/40 bg-blue-900/20": { border: "border-blue-500/40", bg: "bg-blue-900/20", badge: "bg-blue-600 text-white" },
+  "border-indigo-500/40 bg-indigo-900/20": { border: "border-indigo-500/40", bg: "bg-indigo-900/20", badge: "bg-indigo-600 text-white" },
+  "border-emerald-500/40 bg-emerald-900/20": { border: "border-emerald-500/40", bg: "bg-emerald-900/20", badge: "bg-emerald-600 text-white" },
+  "border-orange-500/40 bg-orange-900/20": { border: "border-orange-500/40", bg: "bg-orange-900/20", badge: "bg-orange-600 text-white" },
+  "border-green-500/40 bg-green-900/20": { border: "border-green-500/40", bg: "bg-green-900/20", badge: "bg-green-600 text-white" },
+  "border-yellow-500/40 bg-yellow-900/20": { border: "border-yellow-500/40", bg: "bg-yellow-900/20", badge: "bg-yellow-500 text-black" },
+};
+
 const SubstitusiInteraktif: React.FC = () => {
+  const { language } = useLanguage();
+  const t = ui[language as keyof typeof ui] ?? ui.id;
+
   const [eq1, setEq1] = useState("x + y = 5");
   const [eq2, setEq2] = useState("2x + 3y = 11");
   const [isoEq, setIsoEq] = useState<1 | 2>(1);
@@ -483,7 +594,7 @@ const SubstitusiInteraktif: React.FC = () => {
     if (!p2) { setEq2Err(true); hasErr = true; } else setEq2Err(false);
     if (hasErr) return;
 
-    const { steps: s, error: e } = generateSteps(p1!, p2!, isoEq, isoVar);
+    const { steps: s, error: e } = generateSteps(p1!, p2!, isoEq, isoVar, t);
     if (e) { setError(e); setSteps([]); setVisibleCount(0); setDone(false); return; }
 
     setError("");
@@ -496,13 +607,8 @@ const SubstitusiInteraktif: React.FC = () => {
   const handleReset = () => {
     playPopSound();
     if (timerRef.current) clearTimeout(timerRef.current);
-    setSteps([]);
-    setVisibleCount(0);
-    setIsRunning(false);
-    setDone(false);
-    setError("");
-    setEq1Err(false);
-    setEq2Err(false);
+    setSteps([]); setVisibleCount(0); setIsRunning(false);
+    setDone(false); setError(""); setEq1Err(false); setEq2Err(false);
   };
 
   const handleSkip = () => {
@@ -512,32 +618,19 @@ const SubstitusiInteraktif: React.FC = () => {
     setDone(true);
   };
 
-  const stepColorMap: Record<string, { border: string; bg: string; badge: string }> = {
-    "border-slate-500/40 bg-slate-800/40": { border: "border-slate-500/40", bg: "bg-slate-800/40", badge: "bg-slate-600 text-white" },
-    "border-cyan-500/40 bg-cyan-900/20": { border: "border-cyan-500/40", bg: "bg-cyan-900/20", badge: "bg-cyan-600 text-white" },
-    "border-violet-500/40 bg-violet-900/20": { border: "border-violet-500/40", bg: "bg-violet-900/20", badge: "bg-violet-600 text-white" },
-    "border-blue-500/40 bg-blue-900/20": { border: "border-blue-500/40", bg: "bg-blue-900/20", badge: "bg-blue-600 text-white" },
-    "border-indigo-500/40 bg-indigo-900/20": { border: "border-indigo-500/40", bg: "bg-indigo-900/20", badge: "bg-indigo-600 text-white" },
-    "border-emerald-500/40 bg-emerald-900/20": { border: "border-emerald-500/40", bg: "bg-emerald-900/20", badge: "bg-emerald-600 text-white" },
-    "border-orange-500/40 bg-orange-900/20": { border: "border-orange-500/40", bg: "bg-orange-900/20", badge: "bg-orange-600 text-white" },
-    "border-green-500/40 bg-green-900/20": { border: "border-green-500/40", bg: "bg-green-900/20", badge: "bg-green-600 text-white" },
-    "border-yellow-500/40 bg-yellow-900/20": { border: "border-yellow-500/40", bg: "bg-yellow-900/20", badge: "bg-yellow-500 text-black" },
-  };
-
   return (
     <div className="space-y-4">
 
       {/* ── Input Panel ── */}
       <div className="bg-slate-900/60 border border-cyan-500/20 rounded-2xl p-4 space-y-4">
         <p className="font-body text-sm font-bold text-cyan-300 text-center uppercase tracking-wide">
-          🔢 Input Sistem Persamaan
+          {t.inputTitle}
         </p>
 
-        {/* Equation inputs */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {[
-            { label: "Persamaan 1 (P1)", val: eq1, set: setEq1, err: eq1Err, ph: "cth: x + y = 5" },
-            { label: "Persamaan 2 (P2)", val: eq2, set: setEq2, err: eq2Err, ph: "cth: 2x + 3y = 11" },
+            { label: t.eq1Label, val: eq1, set: setEq1, err: eq1Err, ph: t.eq1Ph },
+            { label: t.eq2Label, val: eq2, set: setEq2, err: eq2Err, ph: t.eq2Ph },
           ].map(({ label, val, set, err, ph }) => (
             <div key={label} className="space-y-1">
               <label className="font-body text-xs text-white/60">{label}</label>
@@ -552,18 +645,16 @@ const SubstitusiInteraktif: React.FC = () => {
               />
               {err && (
                 <p className="text-[11px] text-red-400 font-body">
-                  ⚠️ Format tidak dikenali. Gunakan: <span className="font-mono">2x + 3y = 6</span>
+                  {t.errFmt} <span className="font-mono">2x + 3y = 6</span>
                 </p>
               )}
             </div>
           ))}
         </div>
 
-        {/* Choices */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* Isolasi dari persamaan mana */}
           <div className="space-y-2">
-            <p className="font-body text-xs text-white/60">Nyatakan dari persamaan:</p>
+            <p className="font-body text-xs text-white/60">{t.isoFromLabel}</p>
             <div className="flex gap-2">
               {([1, 2] as const).map((n) => (
                 <button
@@ -575,15 +666,14 @@ const SubstitusiInteraktif: React.FC = () => {
                       : "bg-slate-800/50 border-white/10 text-white/50 hover:border-white/30"
                   }`}
                 >
-                  Persamaan {n}
+                  {n === 1 ? t.isoEq1 : t.isoEq2}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Variabel yang diisolasi */}
           <div className="space-y-2">
-            <p className="font-body text-xs text-white/60">Variabel yang dinyatakan:</p>
+            <p className="font-body text-xs text-white/60">{t.isoVarLabel}</p>
             <div className="flex gap-2">
               {(["x", "y"] as const).map((v) => (
                 <button
@@ -591,7 +681,7 @@ const SubstitusiInteraktif: React.FC = () => {
                   onClick={() => { playPopSound(); setIsoVar(v); }}
                   className={`flex-1 py-2 rounded-xl text-sm font-bold font-body border transition-all ${
                     isoVar === v
-                      ? "bg-violet-600 border-violet-400 text-white shadow-lg shadow-violet-900/30"
+                      ? "bg-cyan-600 border-cyan-400 text-white shadow-lg shadow-cyan-900/30"
                       : "bg-slate-800/50 border-white/10 text-white/50 hover:border-white/30"
                   }`}
                 >
@@ -602,7 +692,6 @@ const SubstitusiInteraktif: React.FC = () => {
           </div>
         </div>
 
-        {/* Action buttons */}
         <div className="flex gap-2 pt-1">
           <button
             onClick={handleSolve}
@@ -610,7 +699,7 @@ const SubstitusiInteraktif: React.FC = () => {
             className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-600 to-violet-600 hover:from-cyan-500 hover:to-violet-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold font-body py-3 rounded-xl transition-all shadow-lg shadow-cyan-900/20"
           >
             <Play className="w-4 h-4" />
-            {isRunning ? "Sedang memproses…" : "▶ Selesaikan Langkah demi Langkah"}
+            {isRunning ? t.solveRunning : t.solveBtnLabel}
           </button>
           {(steps.length > 0 || error) && (
             <button
@@ -627,7 +716,7 @@ const SubstitusiInteraktif: React.FC = () => {
             onClick={handleSkip}
             className="w-full text-xs text-white/40 hover:text-white/70 font-body transition-all text-center"
           >
-            Lewati animasi (tampilkan semua)
+            {t.skipBtn}
           </button>
         )}
       </div>
@@ -642,7 +731,6 @@ const SubstitusiInteraktif: React.FC = () => {
       {/* ── Steps ── */}
       {steps.length > 0 && (
         <div className="space-y-3">
-          {/* Progress bar */}
           <div className="flex items-center gap-3">
             <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
               <div
@@ -656,71 +744,47 @@ const SubstitusiInteraktif: React.FC = () => {
           </div>
 
           {steps.map((step, i) => {
-            const colors = stepColorMap[step.color] ?? { border: "border-white/20", bg: "bg-white/5", badge: "bg-white/20 text-white" };
             const visible = i < visibleCount;
+            const cm = stepColorMap[step.color] ?? { border: "border-white/20", bg: "bg-slate-800/40", badge: "bg-slate-600 text-white" };
+
             return (
               <div
                 key={i}
-                className={`border ${colors.border} ${colors.bg} rounded-2xl overflow-hidden transition-all duration-700 ease-out ${
-                  visible ? "opacity-100 translate-y-0 max-h-[600px]" : "opacity-0 translate-y-6 max-h-0 pointer-events-none"
+                className={`border ${cm.border} ${cm.bg} rounded-2xl overflow-hidden transition-all duration-700 ease-out ${
+                  visible ? "opacity-100 translate-y-0 max-h-[600px]" : "opacity-0 translate-y-6 max-h-0 pointer-events-none overflow-hidden"
                 }`}
-                style={{ transitionProperty: "opacity, transform, max-height" }}
               >
-                <div className="px-4 pt-3 pb-4">
-                  {/* Step header */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${colors.badge}`}>
-                      {i + 1}
-                    </span>
+                <div className="px-4 pt-3 pb-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${cm.badge}`}>{i + 1}</span>
                     <p className={`font-body text-sm font-semibold ${step.isAnswer ? "text-yellow-300" : "text-white"}`}>
                       {step.title}
                     </p>
                   </div>
 
-                  {/* Math lines */}
-                  <div className={`space-y-1 ${step.isAnswer ? "text-center" : ""}`}>
-                    {step.lines.map((line, j) => (
-                      <div key={j} className={`${step.isAnswer ? "scale-110" : ""}`}>
-                        <BlockMath math={line} />
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Note */}
                   {step.note && (
-                    <p className="font-body text-[11px] text-white/50 mt-2 border-t border-white/10 pt-2">
+                    <p className="font-body text-xs text-cyan-200/80 bg-cyan-900/20 border border-cyan-500/20 rounded-lg px-3 py-2">
                       💡 {step.note}
                     </p>
                   )}
+
+                  <div className="space-y-2 overflow-x-auto">
+                    {step.lines.map((line, j) => (
+                      <BlockMath key={j} math={line} />
+                    ))}
+                  </div>
                 </div>
               </div>
             );
           })}
 
-          {/* Running indicator */}
-          {isRunning && (
-            <div className="flex items-center justify-center gap-2 py-2">
-              <div className="flex gap-1">
-                {[0, 1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce"
-                    style={{ animationDelay: `${i * 0.15}s` }}
-                  />
-                ))}
-              </div>
-              <span className="text-xs text-white/40 font-body">Menghitung langkah berikutnya…</span>
-            </div>
-          )}
+          <div ref={bottomRef} />
 
           {done && (
-            <div className="bg-green-900/20 border border-green-500/30 rounded-xl px-4 py-3 text-center space-y-1">
-              <p className="font-body text-sm font-bold text-green-300">🎉 Selesai! Semua langkah sudah ditampilkan.</p>
-              <p className="font-body text-xs text-white/50">Klik Reset untuk mencoba soal baru.</p>
+            <div className="text-center py-2">
+              <ChevronDown className="w-4 h-4 text-white/20 mx-auto" />
             </div>
           )}
-
-          <div ref={bottomRef} />
         </div>
       )}
     </div>
