@@ -71,11 +71,13 @@ const diagramsQ1: { label: string; arrows: [number,number][] }[] = [
 const CoordGraph = ({ id, children }: { id: string; children: React.ReactNode }) => (
   <svg width="148" height="142" viewBox="0 0 148 142">
     <rect width="148" height="142" fill="white" rx="8" />
-    {/* grid */}
+    {/* grid + tick labels in one pass */}
     {[1,2,3,4,5].map(n => (
-      <g key={n}>
+      <g key={`g${n}`}>
         <line x1={22+n*20} y1="8" x2={22+n*20} y2="118" stroke="#f0f0f0" strokeWidth="0.8" />
         <line x1="22" y1={118-n*20} x2="128" y2={118-n*20} stroke="#f0f0f0" strokeWidth="0.8" />
+        <text x={22+n*20} y="128" fill="#94a3b8" fontSize="8" textAnchor="middle">{n}</text>
+        <text x="17" y={118-n*20+3} fill="#94a3b8" fontSize="8" textAnchor="middle">{n}</text>
       </g>
     ))}
     {/* axes */}
@@ -86,24 +88,45 @@ const CoordGraph = ({ id, children }: { id: string; children: React.ReactNode })
     </defs>
     <line x1="22" y1="118" x2="131" y2="118" stroke="#334155" strokeWidth="1.5" markerEnd={`url(#${id})`} />
     <line x1="22" y1="118" x2="22" y2="5" stroke="#334155" strokeWidth="1.5" markerEnd={`url(#${id})`} />
-    {/* axis labels */}
     <text x="133" y="121" fill="#334155" fontSize="9" fontWeight="bold">x</text>
     <text x="24" y="6" fill="#334155" fontSize="9" fontWeight="bold">y</text>
-    {[1,2,3,4,5].map(n => (
-      <g key={n}>
-        <text x={22+n*20} y="128" fill="#94a3b8" fontSize="8" textAnchor="middle">{n}</text>
-        <text x="17" y={118-n*20+3} fill="#94a3b8" fontSize="8" textAnchor="middle">{n}</text>
-      </g>
-    ))}
     {children}
   </svg>
 );
 
 const questions: Q[] = [
-  /* ══════════════════════════════════════════════════════════════
-     SOAL 1 — Enam diagram panah, tentukan mana yang fungsi
-  ══════════════════════════════════════════════════════════════ */
-  Qn(1, "Manakah Diagram Panah yang Merupakan Fungsi?", {
+  /* ── Q1 (was Q6) ── */
+  Qn(1, "Fungsi dari Diagram Panah Tunggal", {
+    type: "mixed",
+    diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c','d','e']} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#34d399" colorB="#f472b6" arrowColor="#facc15" />,
+    parts: [
+      { label: "a.", text: "Apakah diagram panah di atas menyatakan fungsi? Jelaskan alasanmu." },
+      { label: "b.", text: "Apakah ini fungsi surjektif (onto)? Mengapa?" },
+      { label: "c.", text: "Tentukan domain, kodomain, dan range." },
+    ],
+  }),
+  /* ── Q2 (was Q7) ── */
+  Qn(2, "Bukan Fungsi – Satu ke Banyak", {
+    type: "mixed",
+    diagram: <ArrowDiagram setA={[1,2,3]} setB={['p','q','r','s']} arrows={[[0,0],[0,1],[1,2],[2,3]]} labelA="A" labelB="B" colorA="#f87171" colorB="#60a5fa" arrowColor="#fb923c" />,
+    parts: [
+      { label: "a.", text: "Apakah diagram di atas merupakan fungsi? Berikan alasanmu." },
+      { label: "b.", text: "Anggota A mana yang melanggar syarat fungsi?" },
+      { label: "c.", text: "Ubah diagram agar menjadi fungsi (hapus minimal satu panah). Pilih mana yang dihapus." },
+    ],
+  }),
+  /* ── Q3 (was Q8) ── */
+  Qn(3, "Bukan Fungsi – Ada yang Tidak Dipetakan", {
+    type: "mixed",
+    diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c']} arrows={[[0,0],[1,1],[2,2]]} labelA="A" labelB="B" colorA="#f87171" colorB="#a78bfa" arrowColor="#f472b6" />,
+    parts: [
+      { label: "a.", text: "Apakah diagram di atas merupakan fungsi? Jelaskan." },
+      { label: "b.", text: "Anggota A mana yang tidak memiliki pasangan?" },
+      { label: "c.", text: "Apa yang perlu diperbaiki agar relasi ini menjadi fungsi?" },
+    ],
+  }),
+  /* ── Q4 (was Q1) ── */
+  Qn(4, "Manakah Diagram Panah yang Merupakan Fungsi?", {
     type: "mixed",
     content: "Perhatikan keenam diagram panah berikut. Himpunan A = {a, b, c, d, e} sebagai domain dan himpunan B = {1, 2, 3, 4, 5} sebagai kodomain.",
     diagram: (
@@ -122,10 +145,8 @@ const questions: Q[] = [
     ],
   }),
 
-  /* ══════════════════════════════════════════════════════════════
-     SOAL 2 — Gambarkan diagram panah; identifikasi fungsi atau bukan
-  ══════════════════════════════════════════════════════════════ */
-  Qn(2, "Diagram Panah dari Himpunan Pasangan Berurutan", {
+  /* ── Q5 (was Q2) ── */
+  Qn(5, "Diagram Panah dari Himpunan Pasangan Berurutan", {
     type: "mixed",
     content: "Gambarlah diagram panah untuk setiap relasi berikut, kemudian tentukan manakah yang merupakan fungsi. Berikan alasanmu!",
     parts: [
@@ -136,11 +157,8 @@ const questions: Q[] = [
       { label: "e.", text: "R = {(1, 2), (2, 4), (3, 2), (4, 4), (5, 2)}" },
     ],
   }),
-
-  /* ══════════════════════════════════════════════════════════════
-     SOAL 3 — Relasi manakah yang PASTI merupakan fungsi?
-  ══════════════════════════════════════════════════════════════ */
-  Qn(3, "Relasi yang Pasti Merupakan Fungsi", {
+  /* ── Q6 (was Q3) ── */
+  Qn(6, "Relasi yang Pasti Merupakan Fungsi", {
     type: "mixed",
     content: "Manakah di antara relasi-relasi berikut yang pasti merupakan suatu fungsi? Jelaskan alasanmu untuk setiap pilihan.",
     parts: [
@@ -150,11 +168,8 @@ const questions: Q[] = [
       { label: "d.", text: "R adalah relasi antara setiap siswa dengan mata pelajaran yang mereka sukai." },
     ],
   }),
-
-  /* ══════════════════════════════════════════════════════════════
-     SOAL 4 — Grafik manakah yang merupakan fungsi dalam x?
-  ══════════════════════════════════════════════════════════════ */
-  Qn(4, "Grafik Fungsi dalam Koordinat Kartesius", {
+  /* ── Q7 (was Q4) ── */
+  Qn(7, "Grafik Fungsi dalam Koordinat Kartesius", {
     type: "mixed",
     content: "Di antara keenam grafik berikut, manakah yang merupakan grafik fungsi y terhadap x? Jelaskan!",
     diagram: (
@@ -222,79 +237,14 @@ const questions: Q[] = [
     ],
   }),
 
-  /* ══════════════════════════════════════════════════════════════
-     SOAL 5–12 — Soal-soal lanjutan
-  ══════════════════════════════════════════════════════════════ */
-  Qn(5, "Pengertian Fungsi", {
-    type: "mixed",
-    content: "Fungsi (pemetaan) adalah relasi khusus dari himpunan A ke himpunan B, di mana setiap anggota A dipasangkan tepat satu dengan anggota B.",
-    parts: [
-      { label: "a.", text: "Sebutkan 3 syarat agar suatu relasi menjadi fungsi." },
-      { label: "b.", text: "Apa perbedaan antara relasi dan fungsi? Berikan masing-masing contoh." },
-      { label: "c.", text: "Dapatkah dua anggota A dipasangkan ke anggota B yang sama? Jelaskan." },
-    ],
-  }),
-  Qn(6, "Fungsi dari Diagram Panah Tunggal", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c','d','e']} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#34d399" colorB="#f472b6" arrowColor="#facc15" />,
-    parts: [
-      { label: "a.", text: "Apakah diagram panah di atas menyatakan fungsi? Jelaskan alasanmu." },
-      { label: "b.", text: "Apakah ini fungsi surjektif (onto)? Mengapa?" },
-      { label: "c.", text: "Tentukan domain, kodomain, dan range." },
-    ],
-  }),
-  Qn(7, "Bukan Fungsi – Satu ke Banyak", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3]} setB={['p','q','r','s']} arrows={[[0,0],[0,1],[1,2],[2,3]]} labelA="A" labelB="B" colorA="#f87171" colorB="#60a5fa" arrowColor="#fb923c" />,
-    parts: [
-      { label: "a.", text: "Apakah diagram di atas merupakan fungsi? Berikan alasanmu." },
-      { label: "b.", text: "Anggota A mana yang melanggar syarat fungsi?" },
-      { label: "c.", text: "Ubah diagram agar menjadi fungsi (hapus minimal satu panah). Pilih mana yang dihapus." },
-    ],
-  }),
-  Qn(8, "Bukan Fungsi – Ada yang Tidak Dipetakan", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c']} arrows={[[0,0],[1,1],[2,2]]} labelA="A" labelB="B" colorA="#f87171" colorB="#a78bfa" arrowColor="#f472b6" />,
-    parts: [
-      { label: "a.", text: "Apakah diagram di atas merupakan fungsi? Jelaskan." },
-      { label: "b.", text: "Anggota A mana yang tidak memiliki pasangan?" },
-      { label: "c.", text: "Apa yang perlu diperbaiki agar relasi ini menjadi fungsi?" },
-    ],
-  }),
-  Qn(9, "Ini Fungsi atau Bukan?", {
+  /* ── Q8 (was Q9) ── */
+  Qn(8, "Ini Fungsi atau Bukan?", {
     type: "mixed",
     content: "Tentukan apakah setiap pasangan berurutan berikut menyatakan fungsi dari A ke B:",
     parts: [
       { label: "a.", math: "\\{(1,2),\\ (2,3),\\ (3,4),\\ (4,5)\\},\\ A=\\{1,2,3,4\\},\\ B=\\{1,2,3,4,5\\}" },
       { label: "b.", math: "\\{(1,2),\\ (1,3),\\ (2,4),\\ (3,5)\\},\\ A=\\{1,2,3\\},\\ B=\\{2,3,4,5\\}" },
       { label: "c.", math: "\\{(1,5),\\ (2,5),\\ (3,5)\\},\\ A=\\{1,2,3\\},\\ B=\\{4,5,6\\}" },
-    ],
-  }),
-  Qn(10, "Fungsi Injektif (Satu-Satu)", {
-    type: "mixed",
-    content: "Fungsi f dari A ke B disebut injektif (satu-satu) jika setiap anggota B dipasangkan paling banyak satu anggota A.",
-    diagram: <ArrowDiagram setA={[1,2,3]} setB={['x','y','z','w']} arrows={[[0,0],[1,1],[2,2]]} labelA="A" labelB="B" colorA="#34d399" colorB="#60a5fa" arrowColor="#f472b6" />,
-    parts: [
-      { label: "a.", text: "Apakah fungsi pada diagram di atas merupakan fungsi injektif? Jelaskan." },
-      { label: "b.", text: "Apakah fungsi ini surjektif? Mengapa?" },
-    ],
-  }),
-  Qn(11, "Membedakan Fungsi dan Bukan Fungsi", {
-    type: "mixed",
-    content: "Manakah dari berikut ini yang merupakan fungsi? Jelaskan untuk masing-masing.",
-    parts: [
-      { label: "i.", text: "Relasi 'ibu kandung dari' (dari himpunan anak ke himpunan ibu)." },
-      { label: "ii.", text: "Relasi 'anak dari' (dari himpunan ibu ke himpunan anak)." },
-      { label: "iii.", text: "Relasi 'nilai ujian' (dari himpunan siswa ke himpunan nilai)." },
-    ],
-  }),
-  Qn(12, "Fungsi dalam Kehidupan Nyata – UN Style", {
-    type: "mixed",
-    content: "Setiap warga negara Indonesia memiliki satu Nomor Induk Kependudukan (NIK) yang unik.",
-    parts: [
-      { label: "a.", text: "Apakah relasi 'warga → NIK' merupakan fungsi? Jelaskan." },
-      { label: "b.", text: "Apakah relasi 'NIK → warga' merupakan fungsi? Jelaskan." },
-      { label: "c.", text: "Apakah relasi 'warga → NIK' merupakan korespondensi satu-satu?" },
     ],
   }),
 ];
@@ -317,7 +267,7 @@ const PengertianFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 12 {t('practice.suffixSoal')}</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 8 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
