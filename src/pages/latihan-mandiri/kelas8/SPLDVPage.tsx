@@ -1,79 +1,73 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronRight, Layers, TrendingUp, Replace, Minus, Shuffle, FileText, Rocket } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
-const subtopics = [
-  {
-    label: "DEFINISI DAN BENTUK UMUM SPLDV BESERTA KAITANNYA DENGAN PLDV",
-    route: "/latihan-mandiri/kelas-8/spldv/definisi",
-    icon: Layers,
-    color: "#a78bfa",
-    bg: "rgba(167,139,250,0.12)",
-    border: "rgba(167,139,250,0.3)",
-    badge: "21 Soal",
-  },
-  {
-    label: "PENYELESAIAN SPLDV DENGAN METODE GRAFIK",
-    route: "/latihan-mandiri/kelas-8/spldv/metode-grafik",
-    icon: TrendingUp,
-    color: "#34d399",
-    bg: "rgba(52,211,153,0.12)",
-    border: "rgba(52,211,153,0.3)",
-    badge: "21 Soal",
-  },
-  {
-    label: "PENYELESAIAN SPLDV DENGAN METODE SUBSTITUSI",
-    route: "/latihan-mandiri/kelas-8/spldv/metode-substitusi",
-    icon: Replace,
-    color: "#60a5fa",
-    bg: "rgba(96,165,250,0.12)",
-    border: "rgba(96,165,250,0.3)",
-    badge: "17 Soal",
-  },
-  {
-    label: "PENYELESAIAN SPLDV DENGAN METODE ELIMINASI",
-    route: "/latihan-mandiri/kelas-8/spldv/metode-eliminasi",
-    icon: Minus,
-    color: "#fb923c",
-    bg: "rgba(251,146,60,0.12)",
-    border: "rgba(251,146,60,0.3)",
-    badge: "15 Soal",
-  },
-  {
-    label: "PENYELESAIAN SPLDV DENGAN METODE CAMPURAN",
-    route: "/latihan-mandiri/kelas-8/spldv/metode-campuran",
-    icon: Shuffle,
-    color: "#f472b6",
-    bg: "rgba(244,114,182,0.12)",
-    border: "rgba(244,114,182,0.3)",
-    badge: "19 Soal",
-  },
-  {
-    label: "MEMBUAT MODEL DARI PERMASALAHAN YANG BERKAITAN DENGAN SPLDV",
-    route: "/latihan-mandiri/kelas-8/spldv/model-spldv",
-    icon: FileText,
-    color: "#facc15",
-    bg: "rgba(250,204,21,0.10)",
-    border: "rgba(250,204,21,0.3)",
-    badge: "16 Soal",
-  },
-  {
-    label: "PENYELESAIAN MASALAH YANG BERKAITAN DENGAN SPLDV",
-    route: "/latihan-mandiri/kelas-8/spldv/penyelesaian-masalah",
-    icon: Rocket,
-    color: "#a78bfa",
-    bg: "rgba(167,139,250,0.12)",
-    border: "rgba(167,139,250,0.3)",
-    badge: "19 Soal",
-  },
+const subtopicBase = [
+  { route: "/latihan-mandiri/kelas-8/spldv/definisi",             icon: Layers,     color: "#a78bfa", bg: "rgba(167,139,250,0.12)", border: "rgba(167,139,250,0.3)", count: "21" },
+  { route: "/latihan-mandiri/kelas-8/spldv/metode-grafik",        icon: TrendingUp, color: "#34d399", bg: "rgba(52,211,153,0.12)",  border: "rgba(52,211,153,0.3)",  count: "21" },
+  { route: "/latihan-mandiri/kelas-8/spldv/metode-substitusi",    icon: Replace,    color: "#60a5fa", bg: "rgba(96,165,250,0.12)",  border: "rgba(96,165,250,0.3)",  count: "17" },
+  { route: "/latihan-mandiri/kelas-8/spldv/metode-eliminasi",     icon: Minus,      color: "#fb923c", bg: "rgba(251,146,60,0.12)",  border: "rgba(251,146,60,0.3)",  count: "15" },
+  { route: "/latihan-mandiri/kelas-8/spldv/metode-campuran",      icon: Shuffle,    color: "#f472b6", bg: "rgba(244,114,182,0.12)", border: "rgba(244,114,182,0.3)", count: "19" },
+  { route: "/latihan-mandiri/kelas-8/spldv/model-spldv",          icon: FileText,   color: "#facc15", bg: "rgba(250,204,21,0.10)",  border: "rgba(250,204,21,0.3)",  count: "16" },
+  { route: "/latihan-mandiri/kelas-8/spldv/penyelesaian-masalah", icon: Rocket,     color: "#a78bfa", bg: "rgba(167,139,250,0.12)", border: "rgba(167,139,250,0.3)", count: "19" },
 ];
+
+const hubUi = {
+  id: {
+    title: "SISTEM PERSAMAAN LINEAR DUA VARIABEL",
+    soal: "Soal",
+    labels: [
+      "DEFINISI DAN BENTUK UMUM SPLDV BESERTA KAITANNYA DENGAN PLDV",
+      "PENYELESAIAN SPLDV DENGAN METODE GRAFIK",
+      "PENYELESAIAN SPLDV DENGAN METODE SUBSTITUSI",
+      "PENYELESAIAN SPLDV DENGAN METODE ELIMINASI",
+      "PENYELESAIAN SPLDV DENGAN METODE CAMPURAN",
+      "MEMBUAT MODEL DARI PERMASALAHAN YANG BERKAITAN DENGAN SPLDV",
+      "PENYELESAIAN MASALAH YANG BERKAITAN DENGAN SPLDV",
+    ],
+  },
+  en: {
+    title: "SYSTEM OF LINEAR EQUATIONS IN TWO VARIABLES",
+    soal: "Problems",
+    labels: [
+      "DEFINITION & STANDARD FORM OF SLETV — RELATION TO LINEAR EQUATIONS",
+      "SOLVING SLETV — GRAPHICAL METHOD",
+      "SOLVING SLETV — SUBSTITUTION METHOD",
+      "SOLVING SLETV — ELIMINATION METHOD",
+      "SOLVING SLETV — MIXED METHOD",
+      "BUILDING MODELS FROM SLETV WORD PROBLEMS",
+      "SOLVING REAL-WORLD PROBLEMS WITH SLETV",
+    ],
+  },
+  ja: {
+    title: "二元一次連立方程式",
+    soal: "問題",
+    labels: [
+      "連立方程式の定義と標準形",
+      "グラフ法による解法",
+      "代入法による解法",
+      "加減法による解法",
+      "混合法による解法",
+      "連立方程式の立式",
+      "連立方程式の応用問題",
+    ],
+  },
+};
 
 const SPLDVPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const hu = hubUi[language as keyof typeof hubUi] ?? hubUi.id;
+  const subtopics = subtopicBase.map((s, i) => ({
+    ...s,
+    label: hu.labels[i],
+    badge: `${s.count} ${hu.soal}`,
+  }));
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -87,7 +81,7 @@ const SPLDVPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: "#a78bfa", textShadow: "0 0 24px #a78bfa88" }}>
-            SISTEM PERSAMAAN LINEAR DUA VARIABEL
+            {hu.title}
           </h1>
           <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 7 {t('practice.suffixSubTopik')} · 128 Soal UN/ANBK/TKA</p>
         </div>

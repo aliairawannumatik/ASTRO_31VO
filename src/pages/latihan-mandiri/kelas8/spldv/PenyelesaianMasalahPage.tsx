@@ -6,6 +6,13 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Rocket } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const pageUi = {
+  id: { title: "PENYELESAIAN MASALAH SPLDV" },
+  en: { title: "SOLVING REAL-WORLD SLETV PROBLEMS" },
+  ja: { title: "連立方程式の応用問題" },
+};
 
 const accentColor = "#a78bfa";
 const accentDim = "rgba(167,139,250,0.12)";
@@ -199,6 +206,8 @@ const questions: Q[] = [
 const PenyelesaianMasalahPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const pu = pageUi[language as keyof typeof pageUi] ?? pageUi.id;
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -211,7 +220,7 @@ const PenyelesaianMasalahPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
-            PENYELESAIAN MASALAH SPLDV
+            {pu.title}
           </h1>
           <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 19 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">

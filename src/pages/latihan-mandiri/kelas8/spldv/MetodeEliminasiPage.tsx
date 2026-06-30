@@ -6,6 +6,13 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Minus } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const pageUi = {
+  id: { title: "PENYELESAIAN SPLDV — METODE ELIMINASI" },
+  en: { title: "SOLVING SLETV — ELIMINATION METHOD" },
+  ja: { title: "連立方程式 — 加減法" },
+};
 
 const accentColor = "#fb923c";
 const accentDim = "rgba(251,146,60,0.12)";
@@ -162,6 +169,8 @@ const questions: Q[] = [
 const MetodeEliminasiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const pu = pageUi[language as keyof typeof pageUi] ?? pageUi.id;
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -174,7 +183,7 @@ const MetodeEliminasiPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
-            PENYELESAIAN SPLDV — METODE ELIMINASI
+            {pu.title}
           </h1>
           <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 15 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
