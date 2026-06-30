@@ -110,7 +110,14 @@ const questions: Q[] = [
       { label: "d.", math: "g(1) = \\ldots" },
     ],
   }),
-  Qn(11, "Fungsi f(x) = ax + b – Mencari a dan b", {
+  Qn(11, "Soal UN – Notasi dan Rumus Fungsi", {
+    type: "mixed",
+    content: "Fungsi f dinyatakan dengan f: x ↦ 3x − 7 dengan domain {−1, 0, 1, 2, 3}.",
+    parts: [
+      { label: "a.", text: "Tentukan range fungsi f." },
+    ],
+  }),
+  Qn(12, "Fungsi f(x) = ax + b – Mencari a dan b", {
     type: "mixed",
     content: "Diketahui f: x → ax + b dengan f(2) = 7 dan f(5) = 13.",
     parts: [
@@ -119,7 +126,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Tuliskan rumus lengkap fungsi } f(x) = \\ldots" },
     ],
   }),
-  Qn(12, "Fungsi dengan Parameter", {
+  Qn(13, "Fungsi dengan Parameter", {
     type: "mixed",
     content: "Fungsi f(x) = kx − 4. Diketahui f(3) = 11.",
     parts: [
@@ -128,7 +135,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika } f(x) = 31,\\ x = \\ldots" },
     ],
   }),
-  Qn(13, "Fungsi dari Soal Cerita – TKA", {
+  Qn(14, "Fungsi dari Soal Cerita – TKA", {
     type: "mixed",
     content: "Upah seorang pekerja adalah f(h) = 25.000h + 50.000, di mana h adalah jam kerja per hari.",
     parts: [
@@ -137,19 +144,12 @@ const questions: Q[] = [
       { label: "c.", text: "Jelaskan arti 25.000 dan 50.000 dalam konteks soal." },
     ],
   }),
-  Qn(14, "Rumus Fungsi – Soal UN", {
+  Qn(15, "Rumus Fungsi – Soal UN", {
     type: "mixed",
     content: "Fungsi f didefinisikan f(2x − 1) = 4x + 5.",
     parts: [
       { label: "a.", math: "\\text{Tentukan } f(x)." },
       { label: "b.", math: "f(2) = \\ldots" },
-    ],
-  }),
-  Qn(15, "Soal UN – Notasi dan Rumus Fungsi", {
-    type: "mixed",
-    content: "Fungsi f dinyatakan dengan f: x ↦ 3x − 7 dengan domain {−1, 0, 1, 2, 3}.",
-    parts: [
-      { label: "a.", text: "Tentukan range fungsi f." },
     ],
   }),
 ];
