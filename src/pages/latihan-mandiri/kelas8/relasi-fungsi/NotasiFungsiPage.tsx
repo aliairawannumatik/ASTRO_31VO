@@ -60,16 +60,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Jika } f(x) = 31,\\ x = \\ldots" },
     ],
   }),
-  Qn(6, "Terapan Fungsi – Temperatur", {
-    type: "mixed",
-    content: "Konversi Celsius ke Fahrenheit:",
-    mathContent: "F(C) = \\frac{9}{5}C + 32",
-    parts: [
-      { label: "a.", math: "F(0) = \\ldots ^\\circ F" },
-      { label: "b.", math: "F(100) = \\ldots ^\\circ F" },
-    ],
-  }),
-  Qn(7, "Bayangan dan Nilai Balik Fungsi", {
+  Qn(6, "Bayangan dan Nilai Balik Fungsi", {
     type: "mixed",
     content: "Fungsi f didefinisikan sebagai f(x) = 4x − 5.",
     parts: [
@@ -77,7 +68,7 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Tentukan nilai } m \\text{ jika } f(m) = -7." },
     ],
   }),
-  Qn(8, "Fungsi f(x) = ax + b – Mencari a dan b", {
+  Qn(7, "Fungsi f(x) = ax + b – Mencari a dan b", {
     type: "mixed",
     content: "Diketahui f: x → ax + b dengan f(2) = 7 dan f(5) = 13.",
     parts: [
@@ -86,13 +77,22 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Tuliskan rumus lengkap fungsi } f(x) = \\ldots" },
     ],
   }),
-  Qn(9, "Mencari Konstanta Fungsi dari Dua Kondisi", {
+  Qn(8, "Mencari Konstanta Fungsi dari Dua Kondisi", {
     type: "mixed",
     content: "Fungsi f didefinisikan f: x → ax + b, dengan a dan b bilangan bulat. Diketahui f(2) = 7 dan f(−3) = −8.",
     parts: [
       { label: "a.", text: "Tentukan nilai a dan b." },
       { label: "b.", text: "Tuliskan rumus fungsi f." },
       { label: "c.", math: "\\text{Hitung nilai fungsi } f \\text{ untuk } x = 5." },
+    ],
+  }),
+  Qn(9, "Terapan Fungsi – Temperatur", {
+    type: "mixed",
+    content: "Konversi Celsius ke Fahrenheit:",
+    mathContent: "F(C) = \\frac{9}{5}C + 32",
+    parts: [
+      { label: "a.", math: "F(0) = \\ldots ^\\circ F" },
+      { label: "b.", math: "F(100) = \\ldots ^\\circ F" },
     ],
   }),
   Qn(10, "Fungsi dari Soal Cerita – TKA", {
