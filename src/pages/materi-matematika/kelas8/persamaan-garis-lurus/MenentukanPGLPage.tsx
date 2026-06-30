@@ -148,6 +148,22 @@ const T_MENENTUKAN = {
     ],
     rang_tip: "💡 Selalu verifikasi! Setelah mendapat persamaan garis, cek dengan mensubstitusi koordinat titik yang diketahui. Jika benar, hasilnya harus memenuhi (sama kiri-kanan).",
     introP: "Bergantung pada informasi yang diberikan, ada dua skenario utama untuk menentukan persamaan garis lurus. Pilih rumus yang sesuai dengan data yang tersedia!",
+    pem: "🔍 Pembahasan",
+    iv1_note1: (m: string, x1: string, y1: string) => `Masukkan m = ${m}, x₁ = ${x1}, y₁ = ${y1} ke rumus y − y₁ = m(x − x₁)`,
+    iv1_note2: (m: string, x1: string, mx1: string) => `Distribusikan: ${m} × x = ${m}x  dan  ${m} × ${x1} = ${mx1}`,
+    iv1_note3: (y1: string) => `Tambahkan ${y1} ke kedua ruas → bentuk y = mx + c`,
+    iv2_note1: "Gradien = selisih y dibagi selisih x dari dua titik",
+    iv2_note2: (m: string, x1: string, y1: string) => `Pakai m = ${m} dan titik pertama (${x1}, ${y1})`,
+    iv2_note3: (m: string, x1: string) => `Kalikan ${m} dengan (x − ${x1})`,
+    iv2_note4: (y1: string) => `Tambahkan ${y1} ke kedua ruas → bentuk y = mx + c`,
+    iv3_note1: (x1: string, y1: string, x2: string, y2: string) => `x₁ = ${x1}, y₁ = ${y1}, x₂ = ${x2}, y₂ = ${y2}`,
+    iv3_note2: "Kalikan silang untuk menghilangkan penyebut",
+    iv3_note3: (dx: string, dy: string) => `Kalikan ${dx} ke kiri dan ${dy} ke kanan`,
+    iv3_note4: (dx: string) => `Pindahkan konstanta ke ruas kanan, lalu bagi kedua ruas dengan ${dx}`,
+    iv3_note5: (m: string, c: string) => `Gradien m = ${m}, konstanta c = ${c}`,
+    iv3_l5: "Langkah 5 — Persamaan Garis Lurus ✅",
+    iv3_l4_prefix: "Langkah 4 — Kumpulkan Suku & Bagi dengan ",
+    iv3_l1_cara: "Cara 1 — Menggunakan Rumus",
   },
   en: {
     title: "FINDING THE EQUATION OF A LINE",
@@ -239,6 +255,22 @@ const T_MENENTUKAN = {
     ],
     rang_tip: "💡 Always verify! After finding the equation, check by substituting the known point coordinates. If correct, the result must be satisfied (both sides equal).",
     introP: "Depending on the given information, there are two main scenarios for finding the equation of a straight line. Choose the formula that matches the available data!",
+    pem: "🔍 Solution",
+    iv1_note1: (m: string, x1: string, y1: string) => `Substitute m = ${m}, x₁ = ${x1}, y₁ = ${y1} into the formula y − y₁ = m(x − x₁)`,
+    iv1_note2: (m: string, x1: string, mx1: string) => `Distribute: ${m} × x = ${m}x  and  ${m} × ${x1} = ${mx1}`,
+    iv1_note3: (y1: string) => `Add ${y1} to both sides → form y = mx + c`,
+    iv2_note1: "Slope = difference in y divided by difference in x from two points",
+    iv2_note2: (m: string, x1: string, y1: string) => `Use m = ${m} and first point (${x1}, ${y1})`,
+    iv2_note3: (m: string, x1: string) => `Multiply ${m} by (x − ${x1})`,
+    iv2_note4: (y1: string) => `Add ${y1} to both sides → form y = mx + c`,
+    iv3_note1: (x1: string, y1: string, x2: string, y2: string) => `x₁ = ${x1}, y₁ = ${y1}, x₂ = ${x2}, y₂ = ${y2}`,
+    iv3_note2: "Cross-multiply to eliminate denominators",
+    iv3_note3: (dx: string, dy: string) => `Multiply ${dx} on the left and ${dy} on the right`,
+    iv3_note4: (dx: string) => `Move constant to the right side, then divide both sides by ${dx}`,
+    iv3_note5: (m: string, c: string) => `Slope m = ${m}, constant c = ${c}`,
+    iv3_l5: "Step 5 — Equation of the Line ✅",
+    iv3_l4_prefix: "Step 4 — Collect Terms & Divide by ",
+    iv3_l1_cara: "Method 1 — Using the Formula",
   },
   ja: {
     title: "直線の方程式を求める",
@@ -330,6 +362,22 @@ const T_MENENTUKAN = {
     ],
     rang_tip: "💡 常に検証しよう！方程式を求めた後、既知の点の座標を代入して確認する。正しければ両辺が等しくなる。",
     introP: "与えられた情報によって、直線の方程式を求める主なシナリオが2つある。利用可能なデータに合う公式を選ぼう！",
+    pem: "🔍 解説",
+    iv1_note1: (m: string, x1: string, y1: string) => `m = ${m}、x₁ = ${x1}、y₁ = ${y1}を公式 y − y₁ = m(x − x₁) に代入する`,
+    iv1_note2: (m: string, x1: string, mx1: string) => `展開: ${m} × x = ${m}x  かつ  ${m} × ${x1} = ${mx1}`,
+    iv1_note3: (y1: string) => `両辺に${y1}を加える → y = mx + cの形`,
+    iv2_note1: "傾き = 2点のy差 ÷ x差",
+    iv2_note2: (m: string, x1: string, y1: string) => `m = ${m}と最初の点(${x1}, ${y1})を使う`,
+    iv2_note3: (m: string, x1: string) => `${m}と(x − ${x1})をかける`,
+    iv2_note4: (y1: string) => `両辺に${y1}を加える → y = mx + cの形`,
+    iv3_note1: (x1: string, y1: string, x2: string, y2: string) => `x₁ = ${x1}、y₁ = ${y1}、x₂ = ${x2}、y₂ = ${y2}`,
+    iv3_note2: "分母を消すために交差乗算する",
+    iv3_note3: (dx: string, dy: string) => `左辺に${dx}、右辺に${dy}をかける`,
+    iv3_note4: (dx: string) => `定数を右辺に移動し、両辺を${dx}で割る`,
+    iv3_note5: (m: string, c: string) => `傾きm = ${m}、定数c = ${c}`,
+    iv3_l5: "ステップ5 — 直線の方程式 ✅",
+    iv3_l4_prefix: "ステップ4 — 項をまとめて で割る ",
+    iv3_l1_cara: "方法1 — 公式を使う",
   },
 };
 
@@ -412,23 +460,23 @@ const MenentukanPGLPage = () => {
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">Bergantung pada informasi yang diberikan, ada dua skenario utama untuk menentukan persamaan garis lurus. Pilih rumus yang sesuai dengan data yang tersedia!</p>
+                <p className="font-body text-sm text-white/80 leading-relaxed">{t.introP}</p>
                 {/* Peta skenario */}
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="text-xs font-bold text-cyan-300 uppercase mb-3">🗺️ Peta Skenario Penentuan Persamaan Garis</p>
+                  <p className="text-xs font-bold text-cyan-300 uppercase mb-3">{t.petaTitle}</p>
                   <div className="space-y-2">
-                    {[
-                      { no: "1", info: "Diketahui gradien (m) dan satu titik (x₁, y₁)", rumus: "y − y₁ = m(x − x₁)", color: "border-violet-500/40 bg-violet-900/10" },
-                      { no: "2", info: "Diketahui dua titik (x₁, y₁) dan (x₂, y₂)", rumus: "y − y₁ / y₂ − y₁ = x − x₁ / x₂ − x₁", color: "border-orange-500/40 bg-orange-900/10" },
-                    ].map(({ no, info, rumus, color }) => (
-                      <div key={no} className={`border ${color} rounded-xl p-3 flex gap-3 text-sm font-body`}>
-                        <div className="bg-white/10 rounded-full w-7 h-7 shrink-0 flex items-center justify-center font-bold text-white font-display">{no}</div>
-                        <div>
-                          <p className="text-white/80 text-xs">Info: <span className="text-white font-semibold">{info}</span></p>
-                          <p className="text-cyan-300 font-mono text-xs mt-1">Rumus: {rumus}</p>
+                    {t.skenarios.map(({ no, info, rumus }) => {
+                      const color = no === "1" ? "border-violet-500/40 bg-violet-900/10" : "border-orange-500/40 bg-orange-900/10";
+                      return (
+                        <div key={no} className={`border ${color} rounded-xl p-3 flex gap-3 text-sm font-body`}>
+                          <div className="bg-white/10 rounded-full w-7 h-7 shrink-0 flex items-center justify-center font-bold text-white font-display">{no}</div>
+                          <div>
+                            <p className="text-white/80 text-xs">{t.sk_info} <span className="text-white font-semibold">{info}</span></p>
+                            <p className="text-cyan-300 font-mono text-xs mt-1">{t.sk_rumus_label} {rumus}</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -442,27 +490,26 @@ const MenentukanPGLPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-900/20 border border-violet-500/40 rounded-xl p-4 text-center">
                   <BlockMath math="y - y_1 = m(x - x_1)" />
-                  <p className="text-xs text-white/60 mt-1">Rumus titik-gradien (point-slope form)</p>
+                  <p className="text-xs text-white/60 mt-1">{t.sk1_rumusLabel}</p>
                 </div>
                 {/* Step visual */}
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="text-xs font-bold text-violet-300 mb-2">Langkah-langkah:</p>
+                  <p className="text-xs font-bold text-violet-300 mb-2">{t.sk1_stepsTitle}</p>
                   <div className="space-y-2">
-                    {[
-                      { n:"1", t:"Substitusi m, x₁, y₁ ke rumus", c:"border-violet-500/30 bg-violet-900/10" },
-                      { n:"2", t:"Ekspansi ruas kanan: y − y₁ = mx − mx₁", c:"border-cyan-500/30 bg-cyan-900/10" },
-                      { n:"3", t:"Pindahkan y₁ ke ruas kanan: y = mx − mx₁ + y₁", c:"border-green-500/30 bg-green-900/10" },
-                    ].map(({ n,t,c }) => (
-                      <div key={n} className={`border ${c} rounded-lg p-2 flex gap-2 text-xs font-body`}>
-                        <span className="bg-white/10 rounded-full w-5 h-5 flex items-center justify-center font-bold text-white shrink-0">{n}</span>
-                        <span className="text-white/70">{t}</span>
-                      </div>
-                    ))}
+                    {t.sk1_steps.map(({ t: stepText }, idx) => {
+                      const colors = ["border-violet-500/30 bg-violet-900/10","border-cyan-500/30 bg-cyan-900/10","border-green-500/30 bg-green-900/10"];
+                      return (
+                        <div key={idx} className={`border ${colors[idx]} rounded-lg p-2 flex gap-2 text-xs font-body`}>
+                          <span className="bg-white/10 rounded-full w-5 h-5 flex items-center justify-center font-bold text-white shrink-0">{idx+1}</span>
+                          <span className="text-white/70">{stepText}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 {/* Example visual */}
                 <div className="bg-slate-800/60 border border-violet-500/20 rounded-xl p-3">
-                  <p className="text-xs font-bold text-violet-300 mb-2">Contoh: m = 3, titik (1, 2) → y = 3x − 1</p>
+                  <p className="text-xs font-bold text-violet-300 mb-2">{t.sk1_example}</p>
                   <CoordSys label="y = 3x − 1">
                     <polyline points={[[-2,-7],[-1,-4],[0,-1],[1,2],[2,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
                     <circle cx={toX(1)} cy={toY(2)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
@@ -472,7 +519,7 @@ const MenentukanPGLPage = () => {
 
                 {/* ── INTERACTIVE S1 ── */}
                 <div className="bg-violet-900/10 border border-violet-500/30 rounded-xl p-4 space-y-4">
-                  <p className="text-xs font-bold text-violet-300 uppercase tracking-wider">🎮 Kalkulator Interaktif Menentukan Persamaan Garis yang Melalui Titik (x₁, y₁) dan Bergradien m – Coba Sendiri!</p>
+                  <p className="text-xs font-bold text-violet-300 uppercase tracking-wider">{t.calc1_title}</p>
                   <div className="grid grid-cols-3 gap-3">
                     {([
                       ["Gradien (m)", iv1.m, (v: string) => setIv1(p => ({...p, m: v, step: 0, error: ""}))],
@@ -495,23 +542,23 @@ const MenentukanPGLPage = () => {
                   {iv1.step === 0 && (
                     <button
                       onClick={() => {
-                        if (!iv1ok) { setIv1(p => ({...p, error: "Isi semua kotak dengan angka yang valid!"})); return; }
+                        if (!iv1ok) { setIv1(p => ({...p, error: t.errValid})); return; }
                         playPopSound();
                         setIv1(p => ({...p, step: 1, error: ""}));
                       }}
                       className="w-full bg-violet-600 hover:bg-violet-500 active:scale-95 text-white font-bold py-2.5 rounded-lg text-sm transition-all cursor-pointer font-display"
-                    >🚀 Mulai Langkah Demi Langkah</button>
+                    >🚀 {t.btnMulai}</button>
                   )}
                   {iv1.step >= 1 && iv1ok && (() => {
                     const steps = [
-                      { title: "Langkah 1 — Substitusi ke Rumus", accent: "border-violet-500/40 bg-violet-900/20",
-                        note: `Masukkan m = ${nL(_m1)}, x₁ = ${nL(_x1a)}, y₁ = ${nL(_y1a)} ke rumus y − y₁ = m(x − x₁)`,
+                      { title: t.iv1_l1, accent: "border-violet-500/40 bg-violet-900/20",
+                        note: t.iv1_note1(nL(_m1), nL(_x1a), nL(_y1a)),
                         math: `y - ${pL(_y1a)} = ${nL(_m1)}\\left(x - ${pL(_x1a)}\\right)` },
-                      { title: "Langkah 2 — Ekspansi Ruas Kanan", accent: "border-cyan-500/40 bg-cyan-900/20",
-                        note: `Distribusikan: ${nL(_m1)} × x = ${nL(_m1)}x  dan  ${nL(_m1)} × ${pL(_x1a)} = ${nL(_m1 * _x1a)}`,
+                      { title: t.iv1_l2, accent: "border-cyan-500/40 bg-cyan-900/20",
+                        note: t.iv1_note2(nL(_m1), pL(_x1a), nL(_m1 * _x1a)),
                         math: `y - ${pL(_y1a)} = ${nL(_m1)}x ${sT(-_m1 * _x1a)}` },
-                      { title: "Langkah 3 — Persamaan Garis Lurus ✅", accent: "border-green-500/40 bg-green-900/20",
-                        note: `Tambahkan ${pL(_y1a)} ke kedua ruas → bentuk y = mx + c`,
+                      { title: t.iv1_l3, accent: "border-green-500/40 bg-green-900/20",
+                        note: t.iv1_note3(pL(_y1a)),
                         math: `y = ${nL(_m1)}x ${sT(iv1c)}`,
                         showGraph: true },
                     ];
@@ -524,7 +571,7 @@ const MenentukanPGLPage = () => {
                             <BlockMath math={st.math} />
                             {st.showGraph && (
                               <div className="mt-2 space-y-1">
-                                <p className="text-xs text-green-400 font-semibold font-body">📈 Grafik tergambar:</p>
+                                <p className="text-xs text-green-400 font-semibold font-body">{t.grafik_label}</p>
                                 <CoordSys label={`y=${nL(_m1)}x${iv1c >= 0 ? '+'+nL(iv1c) : nL(iv1c)}`}>
                                   <polyline points={gPts(_m1, iv1c)} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round"
                                     strokeDasharray={10000} strokeDashoffset={iv1Off}
@@ -537,13 +584,13 @@ const MenentukanPGLPage = () => {
                         {iv1.step < steps.length && (
                           <button onClick={() => { playPopSound(); setIv1(p => ({...p, step: p.step + 1})); }}
                             className="w-full bg-violet-800/60 hover:bg-violet-700 border border-violet-500/40 text-white font-bold py-2 rounded-lg text-sm transition-all cursor-pointer font-display active:scale-95">
-                            ▶ Langkah Berikutnya
+                            ▶ {t.btnNext}
                           </button>
                         )}
                         {iv1.step >= steps.length && (
                           <button onClick={() => { playPopSound(); setIv1({ m:"", x1:"", y1:"", step:0, error:"" }); setIv1Off(10000); }}
                             className="w-full bg-slate-700/60 hover:bg-slate-600 border border-slate-500/30 text-white/70 hover:text-white py-2 rounded-lg text-sm transition-all cursor-pointer font-body">
-                            🔄 Coba Angka Lain
+                            🔄 {t.btnReset}
                           </button>
                         )}
                       </div>
@@ -561,19 +608,19 @@ const MenentukanPGLPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-900/20 border border-orange-500/40 rounded-xl p-4 text-center">
                   <BlockMath math="\frac{y - y_1}{y_2 - y_1} = \frac{x - x_1}{x_2 - x_1}" />
-                  <p className="text-xs text-white/60 mt-1">Rumus dua titik (two-point form)</p>
+                  <p className="text-xs text-white/60 mt-1">{t.sk2_rumusLabel}</p>
                 </div>
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="text-xs font-bold text-orange-300 mb-2">Strategi Alternatif (Lebih Mudah):</p>
+                  <p className="text-xs font-bold text-orange-300 mb-2">{t.sk2_altTitle}</p>
                   <div className="space-y-1 text-xs font-body text-white/70">
-                    <p>1. Hitung dulu gradien: <InlineMath math="m = \frac{y_2 - y_1}{x_2 - x_1}" /></p>
-                    <p>2. Pilih salah satu titik, masukkan ke skenario 1</p>
-                    <p>3. Selesaikan untuk mendapat bentuk y = mx + c</p>
+                    {t.sk2_alt.map((step, idx) => (
+                      <p key={idx}>{idx + 1}. {step}</p>
+                    ))}
                   </div>
                 </div>
                 {/* Example visual */}
                 <div className="bg-slate-800/60 border border-orange-500/20 rounded-xl p-3">
-                  <p className="text-xs font-bold text-orange-300 mb-2">Contoh: titik A(0, 1) dan B(3, 7) → y = 2x + 1</p>
+                  <p className="text-xs font-bold text-orange-300 mb-2">{t.sk2_example}</p>
                   <CoordSys label="Melalui A(0,1) dan B(3,7)">
                     <polyline points={[[-1,-1],[0,1],[1,3],[2,5],[3,7],[4,9]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round" />
                     {[[0,1],[3,7]].map(([x,y]) => (
@@ -588,8 +635,8 @@ const MenentukanPGLPage = () => {
                 {/* ── INTERACTIVE S2 CARA 1 (rumus dua titik langsung) ── */}
                 <div className="bg-cyan-900/10 border border-cyan-500/30 rounded-xl p-4 space-y-4">
                   <div>
-                    <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider">🎮 Kalkulator Interaktif Menentukan Persamaan Garis yang Melalui 2 Titik (x₁, y₁) dan (x₂, y₂) – Coba Sendiri!</p>
-                    <p className="text-xs text-cyan-400/70 mt-1 font-body">📐 Cara 1 — Menggunakan Rumus: <InlineMath math="\dfrac{y - y_1}{y_2 - y_1} = \dfrac{x - x_1}{x_2 - x_1}" /></p>
+                    <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider">{t.calc2_title}</p>
+                    <p className="text-xs text-cyan-400/70 mt-1 font-body">📐 {t.iv3_l1_cara}: <InlineMath math="\dfrac{y - y_1}{y_2 - y_1} = \dfrac{x - x_1}{x_2 - x_1}" /></p>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {([
@@ -616,43 +663,43 @@ const MenentukanPGLPage = () => {
                       onClick={() => {
                         if (!iv3ok) {
                           const msg = (!isNaN(_x1c) && !isNaN(_x2c) && Math.abs(_x2c - _x1c) < 1e-9)
-                            ? "x₁ dan x₂ tidak boleh sama (garis vertikal)!"
-                            : "Isi semua kotak dengan angka yang valid!";
+                            ? t.errSameX
+                            : t.errValid;
                           setIv3(p => ({...p, error: msg})); return;
                         }
                         playPopSound();
                         setIv3(p => ({...p, step: 1, error: ""}));
                       }}
                       className="w-full bg-cyan-700 hover:bg-cyan-600 active:scale-95 text-white font-bold py-2.5 rounded-lg text-sm transition-all cursor-pointer font-display"
-                    >🚀 Mulai Langkah Demi Langkah</button>
+                    >🚀 {t.btnMulai}</button>
                   )}
                   {iv3.step >= 1 && iv3ok && (() => {
                     const constTerm = -iv3dy * _x1c + iv3dx * _y1c;
                     const steps = [
-                      { title: "Langkah 1 — Substitusi ke Rumus Dua Titik", accent: "border-cyan-500/40 bg-cyan-900/20",
-                        note: `x₁ = ${nL(_x1c)}, y₁ = ${nL(_y1c)}, x₂ = ${nL(_x2c)}, y₂ = ${nL(_y2c)}`,
+                      { title: t.iv3_l1, accent: "border-cyan-500/40 bg-cyan-900/20",
+                        note: t.iv3_note1(nL(_x1c), nL(_y1c), nL(_x2c), nL(_y2c)),
                         maths: [
                           `\\frac{y - y_1}{y_2 - y_1} = \\frac{x - x_1}{x_2 - x_1}`,
                           `\\frac{y - ${pL(_y1c)}}{${nL(iv3dy)}} = \\frac{x - ${pL(_x1c)}}{${nL(iv3dx)}}`,
                         ]},
-                      { title: "Langkah 2 — Kalikan Silang", accent: "border-violet-500/40 bg-violet-900/20",
-                        note: "Kalikan silang untuk menghilangkan penyebut",
+                      { title: t.iv3_l2, accent: "border-violet-500/40 bg-violet-900/20",
+                        note: t.iv3_note2,
                         maths: [
                           `${nL(iv3dx)}\\left(y - ${pL(_y1c)}\\right) = ${nL(iv3dy)}\\left(x - ${pL(_x1c)}\\right)`,
                         ]},
-                      { title: "Langkah 3 — Ekspansi (Buka Kurung)", accent: "border-yellow-500/40 bg-yellow-900/20",
-                        note: `Kalikan ${nL(iv3dx)} ke kiri dan ${nL(iv3dy)} ke kanan`,
+                      { title: t.iv3_l3, accent: "border-yellow-500/40 bg-yellow-900/20",
+                        note: t.iv3_note3(nL(iv3dx), nL(iv3dy)),
                         maths: [
                           `${nL(iv3dx)}y ${sT(-iv3dx * _y1c)} = ${nL(iv3dy)}x ${sT(-iv3dy * _x1c)}`,
                         ]},
-                      { title: "Langkah 4 — Kumpulkan Suku & Bagi dengan " + nL(iv3dx), accent: "border-green-500/40 bg-green-900/20",
-                        note: `Pindahkan konstanta ke ruas kanan, lalu bagi kedua ruas dengan ${nL(iv3dx)}`,
+                      { title: t.iv3_l4_prefix + nL(iv3dx), accent: "border-green-500/40 bg-green-900/20",
+                        note: t.iv3_note4(nL(iv3dx)),
                         maths: [
                           `${nL(iv3dx)}y = ${nL(iv3dy)}x ${sT(constTerm)}`,
                           `y = ${iv3mF3}x ${sT(iv3c3)}`,
                         ]},
-                      { title: "Langkah 5 — Persamaan Garis Lurus ✅", accent: "border-pink-500/40 bg-pink-900/20",
-                        note: `Gradien m = ${iv3mPlain3}, konstanta c = ${nL(iv3c3)}`,
+                      { title: t.iv3_l5, accent: "border-pink-500/40 bg-pink-900/20",
+                        note: t.iv3_note5(iv3mPlain3, nL(iv3c3)),
                         maths: [`y = ${mCoef3(iv3mF3)}x ${sT(iv3c3)}`],
                         showGraph: true },
                     ];
@@ -665,7 +712,7 @@ const MenentukanPGLPage = () => {
                             {st.maths.map((m, mi) => <BlockMath key={mi} math={m} />)}
                             {st.showGraph && (
                               <div className="mt-2 space-y-1">
-                                <p className="text-xs text-pink-400 font-semibold font-body">📈 Grafik tergambar:</p>
+                                <p className="text-xs text-pink-400 font-semibold font-body">{t.grafik_label}</p>
                                 <CoordSys label={`y=${iv3mPlain3}x${iv3c3 >= 0 ? '+'+nL(iv3c3) : nL(iv3c3)}`}>
                                   <polyline points={gPts(iv3m3, iv3c3)} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round"
                                     strokeDasharray={10000} strokeDashoffset={iv3Off}
@@ -684,13 +731,13 @@ const MenentukanPGLPage = () => {
                         {iv3.step < steps.length && (
                           <button onClick={() => { playPopSound(); setIv3(p => ({...p, step: p.step + 1})); }}
                             className="w-full bg-cyan-800/60 hover:bg-cyan-700 border border-cyan-500/40 text-white font-bold py-2 rounded-lg text-sm transition-all cursor-pointer font-display active:scale-95">
-                            ▶ Langkah Berikutnya
+                            ▶ {t.btnNext}
                           </button>
                         )}
                         {iv3.step >= steps.length && (
                           <button onClick={() => { playPopSound(); setIv3({ x1:"", y1:"", x2:"", y2:"", step:0, error:"" }); setIv3Off(10000); }}
                             className="w-full bg-slate-700/60 hover:bg-slate-600 border border-slate-500/30 text-white/70 hover:text-white py-2 rounded-lg text-sm transition-all cursor-pointer font-body">
-                            🔄 Coba Angka Lain
+                            🔄 {t.btnReset}
                           </button>
                         )}
                       </div>
@@ -700,7 +747,7 @@ const MenentukanPGLPage = () => {
 
                 {/* ── INTERACTIVE S2 ── */}
                 <div className="bg-orange-900/10 border border-orange-500/30 rounded-xl p-4 space-y-4">
-                  <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">🎮 Kalkulator Interaktif Menentukan Persamaan Garis yang Melalui 2 Titik (x₁, y₁) dan (x₂, y₂) – Coba Sendiri!</p>
+                  <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">{t.calc3_title}</p>
                   <div className="grid grid-cols-2 gap-3">
                     {([
                       ["x₁", iv2.x1, (v: string) => setIv2(p => ({...p, x1: v, step: 0, error: ""}))],
@@ -726,29 +773,29 @@ const MenentukanPGLPage = () => {
                       onClick={() => {
                         if (!iv2ok) {
                           const msg = (!isNaN(_x1b) && !isNaN(_x2b) && Math.abs(_x2b - _x1b) < 1e-9)
-                            ? "x₁ dan x₂ tidak boleh sama (garis vertikal)!"
-                            : "Isi semua kotak dengan angka yang valid!";
+                            ? t.errSameX
+                            : t.errValid;
                           setIv2(p => ({...p, error: msg})); return;
                         }
                         playPopSound();
                         setIv2(p => ({...p, step: 1, error: ""}));
                       }}
                       className="w-full bg-orange-600 hover:bg-orange-500 active:scale-95 text-white font-bold py-2.5 rounded-lg text-sm transition-all cursor-pointer font-display"
-                    >🚀 Mulai Langkah Demi Langkah</button>
+                    >🚀 {t.btnMulai}</button>
                   )}
                   {iv2.step >= 1 && iv2ok && (() => {
                     const steps = [
-                      { title: "Langkah 1 — Hitung Gradien (m)", accent: "border-orange-500/40 bg-orange-900/20",
-                        note: "Gradien = selisih y dibagi selisih x dari dua titik",
+                      { title: t.iv2_l1, accent: "border-orange-500/40 bg-orange-900/20",
+                        note: t.iv2_note1,
                         math: `m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{${nL(iv2mn)}}{${nL(iv2md)}} = ${iv2mF}` },
-                      { title: "Langkah 2 — Substitusi ke Rumus Titik-Gradien", accent: "border-violet-500/40 bg-violet-900/20",
-                        note: `Pakai m = ${iv2mPlain} dan titik pertama (${nL(_x1b)}, ${nL(_y1b)})`,
+                      { title: t.iv2_l2, accent: "border-violet-500/40 bg-violet-900/20",
+                        note: t.iv2_note2(iv2mPlain, nL(_x1b), nL(_y1b)),
                         math: `y - ${pL(_y1b)} = ${iv2mF}\\left(x - ${pL(_x1b)}\\right)` },
-                      { title: "Langkah 3 — Ekspansi Ruas Kanan", accent: "border-cyan-500/40 bg-cyan-900/20",
-                        note: `Kalikan ${iv2mPlain} dengan (x − ${pL(_x1b)})`,
+                      { title: t.iv2_l3, accent: "border-cyan-500/40 bg-cyan-900/20",
+                        note: t.iv2_note3(iv2mPlain, pL(_x1b)),
                         math: `y - ${pL(_y1b)} = ${iv2mF}x ${sT(-iv2m * _x1b)}` },
-                      { title: "Langkah 4 — Persamaan Garis Lurus ✅", accent: "border-green-500/40 bg-green-900/20",
-                        note: `Tambahkan ${pL(_y1b)} ke kedua ruas → bentuk y = mx + c`,
+                      { title: t.iv2_l4, accent: "border-green-500/40 bg-green-900/20",
+                        note: t.iv2_note4(pL(_y1b)),
                         math: `y = ${iv2mF}x ${sT(iv2c)}`,
                         showGraph: true },
                     ];
@@ -761,7 +808,7 @@ const MenentukanPGLPage = () => {
                             <BlockMath math={st.math} />
                             {st.showGraph && (
                               <div className="mt-2 space-y-1">
-                                <p className="text-xs text-green-400 font-semibold font-body">📈 Grafik tergambar:</p>
+                                <p className="text-xs text-green-400 font-semibold font-body">{t.iv2_grafik}</p>
                                 <CoordSys label={`y=${iv2mPlain}x${iv2c >= 0 ? '+'+nL(iv2c) : nL(iv2c)}`}>
                                   <polyline points={gPts(iv2m, iv2c)} fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round"
                                     strokeDasharray={10000} strokeDashoffset={iv2Off}
@@ -780,13 +827,13 @@ const MenentukanPGLPage = () => {
                         {iv2.step < steps.length && (
                           <button onClick={() => { playPopSound(); setIv2(p => ({...p, step: p.step + 1})); }}
                             className="w-full bg-orange-800/60 hover:bg-orange-700 border border-orange-500/40 text-white font-bold py-2 rounded-lg text-sm transition-all cursor-pointer font-display active:scale-95">
-                            ▶ Langkah Berikutnya
+                            ▶ {t.btnNext}
                           </button>
                         )}
                         {iv2.step >= steps.length && (
                           <button onClick={() => { playPopSound(); setIv2({ x1:"", y1:"", x2:"", y2:"", step:0, error:"" }); setIv2Off(10000); }}
                             className="w-full bg-slate-700/60 hover:bg-slate-600 border border-slate-500/30 text-white/70 hover:text-white py-2 rounded-lg text-sm transition-all cursor-pointer font-body">
-                            🔄 Coba Angka Lain
+                            🔄 {t.btnReset}
                           </button>
                         )}
                       </div>
@@ -799,7 +846,7 @@ const MenentukanPGLPage = () => {
 
           {/* PETA RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="peta-rumus" icon={<BookOpen className="w-5 h-5" />} iconColor="text-yellow-400" title="🗺️ Peta Lengkap: Pilih Rumus yang Tepat!" />
+            <SH id="peta-rumus" icon={<BookOpen className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_peta} />
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-slate-800/60 border border-yellow-500/20 rounded-xl p-4">
@@ -840,23 +887,23 @@ const MenentukanPGLPage = () => {
 
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
+            <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title={t.sh_contoh1} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+                <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Tentukan persamaan garis dengan gradien <InlineMath math="m = 4" /> yang melalui titik <InlineMath math="(0, -3)" />.</p>
+                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
+                  <p className="text-sm text-white/85 font-body">{t.c1_soal}</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-1">Gunakan rumus skenario 1: y − y₁ = m(x − x₁)</p>
+                    <p className="text-cyan-300 font-semibold mb-1">{t.c1_p1}</p>
                     <BlockMath math="y - (-3) = 4(x - 0)" />
                     <BlockMath math="y + 3 = 4x" />
                     <BlockMath math="y = 4x - 3" />
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik y = 4x − 3:</p>
+                    <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c1_vis}</p>
                     <CoordSys label="y = 4x − 3">
                       <polyline points={[[-2,-11],[-1,-7],[0,-3],[1,1],[2,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" />
                       <circle cx={toX(0)} cy={toY(-3)} r="5" fill="#facc15" stroke="#fde047" strokeWidth="1.5" />
@@ -864,7 +911,7 @@ const MenentukanPGLPage = () => {
                     </CoordSys>
                   </div>
                   <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-green-300">✅ Persamaan: y = 4x − 3</p>
+                    <p className="text-sm font-bold text-green-300">{t.c1_ans}</p>
                   </div>
                 </div>
               </div>
@@ -873,23 +920,23 @@ const MenentukanPGLPage = () => {
 
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
+            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_contoh2} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
+                <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Tentukan persamaan garis bergradien <InlineMath math="-\frac{1}{2}" /> yang melalui titik <InlineMath math="(4, 1)" />!</p>
+                  <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">{t.soal}</p>
+                  <p className="text-sm text-white/85 font-body">{t.c2_soal}</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-1">Gunakan rumus skenario 2: y − y₁ = m(x − x₁)</p>
+                    <p className="text-cyan-300 font-semibold mb-1">{t.c2_p1}</p>
                     <BlockMath math="y - 1 = -\frac{1}{2}(x - 4)" />
                     <BlockMath math="y - 1 = -\frac{1}{2}x + 2" />
                     <BlockMath math="y = -\frac{1}{2}x + 3" />
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-violet-300 font-semibold mb-2 text-xs">Grafik y = −½x + 3:</p>
+                    <p className="text-violet-300 font-semibold mb-2 text-xs">{t.c2_vis}</p>
                     <CoordSys label="y = −½x + 3">
                       <polyline points={[[-4,5],[-2,4],[0,3],[2,2],[4,1],[6,0]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
                       {[[0,3],[4,1]].map(([x,y]) => (
@@ -901,7 +948,7 @@ const MenentukanPGLPage = () => {
                     </CoordSys>
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-yellow-300">✅ Persamaan: <InlineMath math="y = -\frac{1}{2}x + 3" /> atau <InlineMath math="x + 2y - 6 = 0" /></p>
+                    <p className="text-sm font-bold text-yellow-300">{t.c2_ans}</p>
                   </div>
                 </div>
               </div>
@@ -910,96 +957,96 @@ const MenentukanPGLPage = () => {
 
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
+            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title={t.sh_contoh3} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
+                <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Tentukan persamaan garis yang melalui titik <InlineMath math="A(-2, 5)" /> dan <InlineMath math="B(4, -1)" />. Nyatakan dalam bentuk <InlineMath math="ax + by + c = 0" />!</p>
+                  <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
+                  <p className="text-sm text-white/85 font-body">{t.c3_soal}</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
 
                   {/* ── CARA 1 ── */}
                   <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
-                    <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider">📐 Cara 1 — Rumus Dua Titik Langsung</p>
-                    <p className="text-xs text-white/60 mt-1">Gunakan rumus dua titik secara langsung: <InlineMath math="\dfrac{y - y_1}{y_2 - y_1} = \dfrac{x - x_1}{x_2 - x_1}" /></p>
+                    <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider">{t.c3_cara1}</p>
+                    <p className="text-xs text-white/60 mt-1">{t.c3_cara1desc}</p>
                   </div>
 
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-1">Langkah 1 — Substitusi ke Rumus Dua Titik</p>
-                    <p className="text-xs text-white/50 mb-2 font-body">x₁ = −2, y₁ = 5, x₂ = 4, y₂ = −1</p>
+                    <p className="text-cyan-300 font-semibold mb-1">{t.c3_l1}</p>
+                    <p className="text-xs text-white/50 mb-2 font-body">{t.c3_l1note}</p>
                     <BlockMath math="\frac{y - 5}{-1 - 5} = \frac{x - (-2)}{4 - (-2)}" />
                     <BlockMath math="\frac{y - 5}{-6} = \frac{x + 2}{6}" />
                   </div>
 
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Kalikan Silang</p>
+                    <p className="text-violet-300 font-semibold mb-1">{t.c3_l2}</p>
                     <BlockMath math="6(y - 5) = -6(x + 2)" />
                     <BlockMath math="6y - 30 = -6x - 12" />
                   </div>
 
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Sederhanakan</p>
+                    <p className="text-green-300 font-semibold mb-1">{t.c3_l3}</p>
                     <BlockMath math="6y = -6x - 12 + 30" />
                     <BlockMath math="6y = -6x + 18" />
                     <BlockMath math="y = -x + 3" />
                   </div>
 
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-pink-300 font-semibold mb-1">Langkah 4 — Ubah ke Bentuk Umum</p>
+                    <p className="text-pink-300 font-semibold mb-1">{t.c3_l4}</p>
                     <BlockMath math="y = -x + 3 \implies x + y - 3 = 0" />
                   </div>
 
                   <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-cyan-300">✅ Persamaan (Cara 1): y = −x + 3 atau x + y − 3 = 0</p>
+                    <p className="text-sm font-bold text-cyan-300">{t.c3_ans1}</p>
                   </div>
 
                   {/* Divider */}
                   <div className="flex items-center gap-3 py-1">
                     <div className="flex-1 h-px bg-white/10" />
-                    <span className="text-xs text-white/30 font-body">atau gunakan cara berikut</span>
+                    <span className="text-xs text-white/30 font-body">{t.c3_divider}</span>
                     <div className="flex-1 h-px bg-white/10" />
                   </div>
 
                   {/* Label Cara 2 */}
                   <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
-                    <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">💡 Cara 2 — Alternatif Penyelesaian</p>
-                    <p className="text-xs text-white/60 mt-1">Cari gradien (m) terlebih dahulu menggunakan <InlineMath math="m = \frac{y_2 - y_1}{x_2 - x_1}" />, kemudian substitusi ke rumus <InlineMath math="y - y_1 = m(x - x_1)" /></p>
+                    <p className="text-xs font-bold text-orange-300 uppercase tracking-wider">{t.c3_cara2}</p>
+                    <p className="text-xs text-white/60 mt-1">{t.c3_cara2desc}</p>
                   </div>
 
-                  {/* Langkah 1 */}
+                  {/* Langkah 1b */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-1">Langkah 1 — Hitung Gradien (m)</p>
-                    <p className="text-xs text-white/50 mb-2 font-body">Diketahui: x₁ = −2, y₁ = 5, x₂ = 4, y₂ = −1</p>
+                    <p className="text-cyan-300 font-semibold mb-1">{t.c3_l1b}</p>
+                    <p className="text-xs text-white/50 mb-2 font-body">{t.c3_l1bnote}</p>
                     <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{-1 - 5}{4 - (-2)} = \frac{-6}{6} = -1" />
                   </div>
 
-                  {/* Langkah 2 */}
+                  {/* Langkah 2b */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-violet-300 font-semibold mb-1">Langkah 2 — Substitusi ke y − y₁ = m(x − x₁)</p>
-                    <p className="text-xs text-white/50 mb-2 font-body">Gunakan m = −1 dan titik A(−2, 5) → x₁ = −2, y₁ = 5</p>
+                    <p className="text-violet-300 font-semibold mb-1">{t.c3_l2b}</p>
+                    <p className="text-xs text-white/50 mb-2 font-body">{t.c3_l2bnote}</p>
                     <BlockMath math="y - 5 = -1\bigl(x - (-2)\bigr)" />
                     <BlockMath math="y - 5 = -1(x + 2)" />
                   </div>
 
-                  {/* Langkah 3 */}
+                  {/* Langkah 3b */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-green-300 font-semibold mb-1">Langkah 3 — Sederhanakan</p>
+                    <p className="text-green-300 font-semibold mb-1">{t.c3_l3b}</p>
                     <BlockMath math="y - 5 = -x - 2" />
                     <BlockMath math="y = -x - 2 + 5" />
                     <BlockMath math="y = -x + 3" />
                   </div>
 
-                  {/* Langkah 4 */}
+                  {/* Langkah 4b */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-pink-300 font-semibold mb-1">Langkah 4 — Ubah ke Bentuk Umum ax + by + c = 0</p>
+                    <p className="text-pink-300 font-semibold mb-1">{t.c3_l4b}</p>
                     <BlockMath math="y = -x + 3 \implies x + y - 3 = 0" />
                   </div>
 
                   {/* Grafik */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik melalui A(−2, 5) dan B(4, −1):</p>
+                    <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c3_vis}</p>
                     <CoordSys label="x + y − 3 = 0">
                       <polyline points={[[-2,5],[-1,4],[0,3],[1,2],[2,1],[3,0],[4,-1]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
                       {[[-2,5],[4,-1]].map(([x,y]) => (
@@ -1013,8 +1060,8 @@ const MenentukanPGLPage = () => {
 
                   {/* Hasil */}
                   <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3 space-y-1">
-                    <p className="text-sm font-bold text-red-300">✅ Persamaan: y = −x + 3  atau  x + y − 3 = 0</p>
-                    <p className="text-xs text-white/50 font-body">Verifikasi: A(−2, 5): (−2) + 5 − 3 = 0 ✓ &nbsp;|&nbsp; B(4, −1): 4 + (−1) − 3 = 0 ✓</p>
+                    <p className="text-sm font-bold text-red-300">{t.c3_ans}</p>
+                    <p className="text-xs text-white/50 font-body">{t.c3_verify}</p>
                   </div>
                 </div>
               </div>
@@ -1023,21 +1070,16 @@ const MenentukanPGLPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
+            <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_rangkuman} />
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
-                  {[
-                    ["Skenario 1 (m & 1 titik)", "y − y₁ = m(x − x₁)"],
-                    ["Skenario 2 (2 titik)", "Hitung m dulu, lalu pakai skenario 1"],
-                    ["Bentuk Umum", "ax + by + c = 0 (pindahkan semua ke satu sisi)"],
-                    ["Verifikasi", "Substitusi koordinat titik ke persamaan, harus memenuhi!"],
-                  ].map(([t,d]) => (
-                    <div key={t} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80"><strong className="text-cyan-300">{t}:</strong> {d}</p></div>
+                  {t.rang_items.map(([label, desc]) => (
+                    <div key={label} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80"><strong className="text-cyan-300">{label}:</strong> {desc}</p></div>
                   ))}
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="text-xs text-yellow-200 font-body"><strong>💡 Selalu verifikasi!</strong> Setelah mendapat persamaan garis, cek dengan mensubstitusi koordinat titik yang diketahui. Jika benar, hasilnya harus memenuhi (sama kiri-kanan).</p>
+                  <p className="text-xs text-yellow-200 font-body">{t.rang_tip}</p>
                 </div>
               </div>
             )}

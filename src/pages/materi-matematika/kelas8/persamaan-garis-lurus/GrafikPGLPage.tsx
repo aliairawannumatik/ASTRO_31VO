@@ -26,6 +26,10 @@ const T_GRAFIK = {
     mudah: "MUDAH", sedang: "SEDANG", sulit: "SULIT",
     prev: "← Sebelumnya", next: "Selanjutnya →", repeat: "🔄 Ulangi",
     soal: "📝 Soal", pem: "💡 Pembahasan",
+    intro_hook: "Rel kereta api, pinggir buku, garis horizon pantai — semuanya membentuk garis lurus. Dalam matematika, persamaan garis lurus mendeskripsikan semua garis tersebut dengan sebuah persamaan sederhana yang melibatkan variabel",
+    intro_fig_cap: "Garis horizon di lautan — contoh nyata garis lurus yang dapat dideskripsikan dengan persamaan matematika.",
+    intro_vis_title: "📈 Visual dari Grafik Persamaan Garis",
+    intro_panel_descs: ["Naik ke kanan", "Turun ke kanan", "Horizontal", "Vertikal"],
     intro_p1: "Persamaan garis lurus merupakan salah satu konsep paling fundamental dalam matematika. Kita bisa menemukannya di mana-mana dalam kehidupan nyata.",
     intro_examples: [
       ["🛣️ Jalan tol yang lurus", "Memodelkan garis lurus"],
@@ -126,6 +130,10 @@ const T_GRAFIK = {
     mudah: "EASY", sedang: "MEDIUM", sulit: "HARD",
     prev: "← Previous", next: "Next →", repeat: "🔄 Repeat",
     soal: "📝 Problem", pem: "💡 Solution",
+    intro_hook: "Train tracks, book edges, the sea horizon line — they all form straight lines. In mathematics, linear equations describe all these lines with a simple equation involving variables",
+    intro_fig_cap: "The sea horizon line — a real-world example of a straight line that can be described by a mathematical equation.",
+    intro_vis_title: "📈 Visual Graphs of Linear Equations",
+    intro_panel_descs: ["Rising right", "Falling right", "Horizontal", "Vertical"],
     intro_p1: "Linear equations are one of the most fundamental concepts in mathematics. We can find them everywhere in real life.",
     intro_examples: [
       ["🛣️ Straight highways", "Modelling a straight line"],
@@ -226,6 +234,10 @@ const T_GRAFIK = {
     mudah: "基本", sedang: "標準", sulit: "発展",
     prev: "← 前へ", next: "次へ →", repeat: "🔄 繰り返す",
     soal: "📝 問題", pem: "💡 解答",
+    intro_hook: "線路、本の端、海の地平線 — これらはすべて直線を形成している。数学では、一次方程式は変数を含む単純な式でこれらの直線をすべて表す",
+    intro_fig_cap: "海の地平線 — 数学的な方程式で表せる直線の実例。",
+    intro_vis_title: "📈 一次方程式のグラフ　ビジュアル",
+    intro_panel_descs: ["右上がり", "右下がり", "水平", "垂直"],
     intro_p1: "一次方程式は数学で最も基本的な概念の一つです。現実の生活でもあちこちで見つけられます。",
     intro_examples: [
       ["🛣️ まっすぐな高速道路", "直線をモデル化"],
@@ -698,7 +710,7 @@ const GrafikPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Rel kereta api, pinggir buku, garis horizon pantai — semuanya membentuk <strong className="text-cyan-300">garis lurus</strong>. Dalam matematika, persamaan garis lurus mendeskripsikan semua garis tersebut dengan sebuah persamaan sederhana yang melibatkan variabel <InlineMath math="x" /> dan <InlineMath math="y" />.
+                  {t.intro_hook} <InlineMath math="x" /> dan <InlineMath math="y" />.
                 </p>
                 <figure className="flex flex-col items-center gap-2">
                   <img
@@ -707,7 +719,7 @@ const GrafikPGLPage = () => {
                     className="w-full rounded-xl object-cover max-h-80 border border-cyan-500/20"
                   />
                   <figcaption className="text-xs text-white/50 font-body text-center italic">
-                    Garis horizon di lautan — contoh nyata garis lurus yang dapat dideskripsikan dengan persamaan matematika.{" "}
+                    {t.intro_fig_cap}{" "}
                     <a
                       href="https://id.pngtree.com/freebackground/sea-horizon-line-unAder-aquatic-photo_9262149.html"
                       target="_blank"
@@ -721,17 +733,17 @@ const GrafikPGLPage = () => {
                 {/* Judul visual grafik */}
                 <div className="flex items-center gap-2 mt-1">
                   <div className="h-px flex-1 bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
-                  <p className="text-sm font-bold text-cyan-300 font-body tracking-wide whitespace-nowrap">📈 Visual dari Grafik Persamaan Garis</p>
+                  <p className="text-sm font-bold text-cyan-300 font-body tracking-wide whitespace-nowrap">{t.intro_vis_title}</p>
                   <div className="h-px flex-1 bg-gradient-to-l from-transparent via-cyan-500/40 to-transparent" />
                 </div>
 
                 {/* 4-panel visual intro */}
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { label: "y = 2x + 1", color: "#22d3ee", pts: [[-3,-5],[-2,-3],[-1,-1],[0,1],[1,3],[2,5]], desc: "Naik ke kanan" },
-                    { label: "y = -x + 2", color: "#a78bfa", pts: [[-2,4],[-1,3],[0,2],[1,1],[2,0],[3,-1]], desc: "Turun ke kanan" },
-                    { label: "y = 3", color: "#4ade80", pts: [[-3,3],[-1,3],[0,3],[1,3],[3,3]], desc: "Horizontal" },
-                    { label: "x = 2", color: "#fb923c", pts: [[2,-4],[2,-2],[2,0],[2,2],[2,4]], desc: "Vertikal" },
+                    { label: "y = 2x + 1", color: "#22d3ee", pts: [[-3,-5],[-2,-3],[-1,-1],[0,1],[1,3],[2,5]], desc: t.intro_panel_descs[0] },
+                    { label: "y = -x + 2", color: "#a78bfa", pts: [[-2,4],[-1,3],[0,2],[1,1],[2,0],[3,-1]], desc: t.intro_panel_descs[1] },
+                    { label: "y = 3", color: "#4ade80", pts: [[-3,3],[-1,3],[0,3],[1,3],[3,3]], desc: t.intro_panel_descs[2] },
+                    { label: "x = 2", color: "#fb923c", pts: [[2,-4],[2,-2],[2,0],[2,2],[2,4]], desc: t.intro_panel_descs[3] },
                   ].map(({ label, color, pts, desc }) => (
                     <div key={label} className="bg-slate-900/60 border border-white/10 rounded-xl p-2">
                       <CoordSystem w={140} h={120} label={label}>
@@ -743,7 +755,7 @@ const GrafikPGLPage = () => {
                   ))}
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="font-body text-xs text-yellow-200"><strong>💡 Fun fact:</strong> Setiap persamaan linear (pangkat satu) pasti menghasilkan grafik garis lurus. Sebaliknya, setiap garis lurus bisa ditulis sebagai persamaan linear!</p>
+                  <p className="font-body text-xs text-yellow-200">{t.intro_funfact}</p>
                 </div>
               </div>
             )}
@@ -755,14 +767,14 @@ const GrafikPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-violet-300 mb-3">🎯 Ringkasan Intisari</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed mb-3">Ada tiga bentuk utama persamaan garis lurus yang sering digunakan:</p>
+                  <p className="font-body text-sm font-semibold text-violet-300 mb-3">{t.konsep_summary}</p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed mb-3">{t.konsep_p1}</p>
                   <div className="grid grid-cols-1 gap-2">
                     {[
-                      { nama: "Bentuk Slope-Intercept", rumus: "y = mx + c", ket: "m = gradien, c = titik potong sumbu-y", color: "bg-cyan-900/40 border-cyan-500/40" },
-                      { nama: "Bentuk Umum", rumus: "ax + by + c = 0", ket: "a, b, c = konstanta bilangan real", color: "bg-violet-900/40 border-violet-500/40" },
-                      { nama: "Bentuk Intersep", rumus: "x/a + y/b = 1", ket: "a = titik potong sb-x, b = titik potong sb-y", color: "bg-green-900/40 border-green-500/40" },
-                    ].map(({ nama, rumus, ket, color }) => (
+                      { ...t.konsep_forms[0], rumus: "y = mx + c", color: "bg-cyan-900/40 border-cyan-500/40" },
+                      { ...t.konsep_forms[1], rumus: "ax + by + c = 0", color: "bg-violet-900/40 border-violet-500/40" },
+                      { ...t.konsep_forms[2], rumus: "x/a + y/b = 1", color: "bg-green-900/40 border-green-500/40" },
+                    ].map(({ nama, rumus, ket, color }: { nama: string; rumus: string; ket: string; color: string }) => (
                       <div key={nama} className={`${color} border rounded-xl p-3`}>
                         <p className="text-xs text-white/60 font-body">{nama}</p>
                         <div className="my-1"><BlockMath math={rumus} /></div>
@@ -774,19 +786,19 @@ const GrafikPGLPage = () => {
 
                 {/* Anatomy visual */}
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="text-xs font-bold text-cyan-300 mb-3">🔬 Anatomi Persamaan y = mx + c</p>
+                  <p className="text-xs font-bold text-cyan-300 mb-3">{t.konsep_anat}</p>
                   <div className="relative flex flex-col items-center">
                     <div className="text-3xl font-bold font-mono text-white tracking-widest">y = mx + c</div>
                     <div className="flex gap-8 mt-3 text-xs font-body">
                       <div className="text-center">
                         <div className="w-1 h-6 bg-yellow-400 mx-auto mb-1" />
                         <span className="text-yellow-300 font-bold">m</span>
-                        <p className="text-white/50 text-xs">Gradien/kemiringan</p>
+                        <p className="text-white/50 text-xs">{t.konsep_m}</p>
                       </div>
                       <div className="text-center">
                         <div className="w-1 h-6 bg-cyan-400 mx-auto mb-1" />
                         <span className="text-cyan-300 font-bold">c</span>
-                        <p className="text-white/50 text-xs">Titik potong sb-y</p>
+                        <p className="text-white/50 text-xs">{t.konsep_c}</p>
                       </div>
                     </div>
                   </div>
@@ -795,19 +807,12 @@ const GrafikPGLPage = () => {
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-body border-collapse">
                     <thead><tr className="bg-cyan-900/40">
-                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Persamaan</th>
-                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Gradien (m)</th>
-                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Potong sb-x</th>
-                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Potong sb-y (c)</th>
-                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Arah</th>
+                      {t.konsep_tabel_h.map((h: string) => (
+                        <th key={h} className="border border-cyan-500/30 px-3 py-2 text-cyan-200">{h}</th>
+                      ))}
                     </tr></thead>
                     <tbody>
-                      {[
-                        ["y = 3x + 2",  "3",          "(-⅔, 0)",  "(0, 2)",  "↗ Naik"],
-                        ["y = -2x + 5", "-2",         "(5/2, 0)", "(0, 5)",  "↘ Turun"],
-                        ["x = -5",      "∞ tak hingga", "(-5, 0)", "—",       "↕ Vertikal"],
-                        ["y = 4",       "0",           "—",        "(0, 4)",  "→ Horizontal"],
-                      ].map(([p,m,sx,sy,a],i) => (
+                      {t.konsep_tabel_rows.map(([p,m,sx,sy,a]: string[], i: number) => (
                         <tr key={i} className={i%2===0?"bg-slate-800/30":"bg-slate-700/20"}>
                           <td className="border border-white/10 px-3 py-2 text-cyan-300 font-mono">{p}</td>
                           <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center">{m}</td>
@@ -828,9 +833,9 @@ const GrafikPGLPage = () => {
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center text-xl shrink-0" style={{ background: "linear-gradient(135deg,#7c3aed,#0891b2)" }}>🔑</div>
                     <div>
                       <p className="font-body font-extrabold text-transparent text-sm bg-clip-text tracking-wide" style={{ backgroundImage: "linear-gradient(90deg,#c4b5fd,#67e8f9,#6ee7b7)" }}>
-                        Ciri Khas Persamaan Garis Lurus
+                        {t.konsep_ciri}
                       </p>
-                      <p className="text-[11px] text-white/45 font-body">Berlaku untuk semua bentuk persamaan garis</p>
+                      <p className="text-[11px] text-white/45 font-body">{t.konsep_ciri_sub}</p>
                     </div>
                   </div>
 
@@ -838,12 +843,12 @@ const GrafikPGLPage = () => {
 
                     {/* Tiga bentuk — 3 kartu warna */}
                     <div>
-                      <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest mb-2">Dari ketiga bentuk ini…</p>
+                      <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest mb-2">{t.konsep_from}</p>
                       <div className="grid grid-cols-3 gap-2">
                         {[
-                          { rumus: "y = mx + c",      nama: "Lereng-Intersep", from: "#0e7490", to: "#0284c7", border: "#22d3ee" },
-                          { rumus: "ax+by+c = 0",     nama: "Bentuk Umum",     from: "#5b21b6", to: "#7c3aed", border: "#a78bfa" },
-                          { rumus: "x/a + y/b = 1",   nama: "Bentuk Intersep", from: "#065f46", to: "#0d9488", border: "#6ee7b7" },
+                          { rumus: "y = mx + c",      nama: t.konsep_forms3[0].nama, from: "#0e7490", to: "#0284c7", border: "#22d3ee" },
+                          { rumus: "ax+by+c = 0",     nama: t.konsep_forms3[1].nama, from: "#5b21b6", to: "#7c3aed", border: "#a78bfa" },
+                          { rumus: "x/a + y/b = 1",   nama: t.konsep_forms3[2].nama, from: "#065f46", to: "#0d9488", border: "#6ee7b7" },
                         ].map(({ rumus, nama, from, to, border }) => (
                           <div key={nama} className="rounded-xl p-2.5 text-center" style={{ background: `linear-gradient(135deg,${from}55,${to}33)`, border: `1px solid ${border}44` }}>
                             <p className="font-mono text-[10px] font-bold text-white leading-snug">{rumus}</p>
@@ -952,9 +957,7 @@ const GrafikPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Untuk menggambar grafik persamaan garis lurus, kita membutuhkan <strong className="text-orange-300">minimal 2 titik</strong>. Dua titik sudah cukup untuk menentukan sebuah garis lurus secara tepat. Salah satu cara termudah adalah menggunakan <strong className="text-orange-300">titik potong sumbu-x</strong> (saat <InlineMath math="y=0" />) dan <strong className="text-orange-300">titik potong sumbu-y</strong> (saat <InlineMath math="x=0" />) sebagai dua titik tersebut.
-                  </p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">{t.titikpotong_p1}</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4">
@@ -978,19 +981,17 @@ const GrafikPGLPage = () => {
                 </div>
 
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="text-sm font-bold text-white mb-3">🖊️ Langkah Menggambar (Metode Titik Potong Sumbu)</p>
+                  <p className="text-sm font-bold text-white mb-3">🖊️</p>
                   <div className="space-y-2">
-                    {[
-                      { n:"1", t:"Cari titik potong sumbu-x", d:"Substitusi y = 0, hitung x → titik (x₀, 0)", c:"border-cyan-500/30 bg-cyan-900/10" },
-                      { n:"2", t:"Cari titik potong sumbu-y", d:"Substitusi x = 0, hitung y → titik (0, y₀)", c:"border-violet-500/30 bg-violet-900/10" },
-                      { n:"3", t:"Plot kedua titik", d:"Tandai titik (x₀, 0) dan (0, y₀) di bidang koordinat", c:"border-green-500/30 bg-green-900/10" },
-                      { n:"4", t:"Tarik garis lurus", d:"Hubungkan kedua titik dan perpanjang ke kedua arah", c:"border-orange-500/30 bg-orange-900/10" },
-                    ].map(({ n,t,d,c }) => (
-                      <div key={n} className={`border ${c} rounded-lg p-3 flex gap-3 text-sm font-body`}>
-                        <span className="font-display font-bold text-white bg-white/10 rounded-full w-7 h-7 flex items-center justify-center shrink-0">{n}</span>
-                        <div><p className="text-white font-semibold">{t}</p><p className="text-white/60 text-xs">{d}</p></div>
-                      </div>
-                    ))}
+                    {t.titikpotong_steps.map(({ label, desc }: { label: string; desc: string }, idx: number) => {
+                      const colors = ["border-cyan-500/30 bg-cyan-900/10","border-violet-500/30 bg-violet-900/10","border-green-500/30 bg-green-900/10","border-orange-500/30 bg-orange-900/10"];
+                      return (
+                        <div key={idx} className={`border ${colors[idx]} rounded-lg p-3 flex gap-3 text-sm font-body`}>
+                          <span className="font-display font-bold text-white bg-white/10 rounded-full w-7 h-7 flex items-center justify-center shrink-0">{idx+1}</span>
+                          <div><p className="text-white font-semibold">{label}</p><p className="text-white/60 text-xs">{desc}</p></div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -1102,24 +1103,20 @@ const GrafikPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    Ingat, kita hanya butuh <strong className="text-green-300">minimal 2 titik</strong> untuk menggambar garis lurus. Selain menggunakan titik potong sumbu, kita bisa bebas memilih <strong className="text-green-300">dua nilai x sembarang</strong>, lalu menghitung nilai y yang bersesuaian dari persamaan. Kedua pasangan (x, y) itulah yang menjadi dua titik penentu garis.
-                  </p>
+                  <p className="font-body text-sm text-white/80 leading-relaxed">{t.titikacak_p1}</p>
                 </div>
                 <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
-                  <p className="text-sm font-bold text-white mb-3">🖊️ Langkah Menggambar (Metode Dua Titik Acak)</p>
+                  <p className="text-sm font-bold text-white mb-3">🖊️</p>
                   <div className="space-y-2">
-                    {[
-                      { n:"1", t:"Pilih sembarang nilai x₁", d:"Misalnya x₁ = 1, substitusi ke persamaan untuk mendapat y₁ → titik (x₁, y₁)", c:"border-green-500/30 bg-green-900/10" },
-                      { n:"2", t:"Pilih sembarang nilai x₂ yang berbeda", d:"Misalnya x₂ = 3, substitusi ke persamaan untuk mendapat y₂ → titik (x₂, y₂)", c:"border-teal-500/30 bg-teal-900/10" },
-                      { n:"3", t:"Plot kedua titik di bidang koordinat", d:"Tandai (x₁, y₁) dan (x₂, y₂) pada sumbu koordinat", c:"border-cyan-500/30 bg-cyan-900/10" },
-                      { n:"4", t:"Tarik garis lurus melewati kedua titik", d:"Hubungkan dan perpanjang garis ke kedua arah", c:"border-orange-500/30 bg-orange-900/10" },
-                    ].map(({ n,t,d,c }) => (
-                      <div key={n} className={`border ${c} rounded-lg p-3 flex gap-3 text-sm font-body`}>
-                        <span className="font-display font-bold text-white bg-white/10 rounded-full w-7 h-7 flex items-center justify-center shrink-0">{n}</span>
-                        <div><p className="text-white font-semibold">{t}</p><p className="text-white/60 text-xs">{d}</p></div>
-                      </div>
-                    ))}
+                    {t.titikacak_steps.map(({ label, desc }: { label: string; desc: string }, idx: number) => {
+                      const colors = ["border-green-500/30 bg-green-900/10","border-teal-500/30 bg-teal-900/10","border-cyan-500/30 bg-cyan-900/10","border-orange-500/30 bg-orange-900/10"];
+                      return (
+                        <div key={idx} className={`border ${colors[idx]} rounded-lg p-3 flex gap-3 text-sm font-body`}>
+                          <span className="font-display font-bold text-white bg-white/10 rounded-full w-7 h-7 flex items-center justify-center shrink-0">{idx+1}</span>
+                          <div><p className="text-white font-semibold">{label}</p><p className="text-white/60 text-xs">{desc}</p></div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
@@ -1235,11 +1232,11 @@ const GrafikPGLPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
+                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">Persamaan garis: <InlineMath math="3x - 2y + 6 = 0" />. Tentukan: a) titik potong sumbu-x dan sumbu-y, b) gambarkan grafiknya!</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                  <p className="text-sm font-semibold text-cyan-300 font-body">🔍 Pembahasan</p>
+                  <p className="text-sm font-semibold text-cyan-300 font-body">{t.pem}</p>
                   <div className="space-y-3 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <p className="text-cyan-300 font-semibold mb-1">Ubah ke bentuk y = mx + c terlebih dahulu:</p>
@@ -1414,11 +1411,11 @@ const GrafikPGLPage = () => {
                 <div className="px-5 pb-5 space-y-4">
                   <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
                   <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
-                    <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
+                    <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
                     <p className="text-sm text-white/85 font-body">Dua garis <InlineMath math="\ell_1: x + y = 4" /> dan <InlineMath math="\ell_2: 2x - y = 2" /> digambar pada satu bidang koordinat. Tentukan titik potong kedua garis tersebut, lalu gambarkan!</p>
                   </div>
                   <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
-                    <p className="text-sm font-semibold text-cyan-300 font-body">🔍 Pembahasan</p>
+                    <p className="text-sm font-semibold text-cyan-300 font-body">{t.pem}</p>
                     <div className="space-y-3 text-sm font-body">
 
                       {/* Tabel titik potong l1 */}
@@ -1561,18 +1558,12 @@ const GrafikPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
-                  {[
-                    ["Bentuk Umum", "y = mx + c (slope-intercept) atau ax + by + c = 0"],
-                    ["Titik Potong sb-x", "Substitusi y = 0, hitung x"],
-                    ["Titik Potong sb-y", "Substitusi x = 0, hitung y"],
-                    ["Menggambar Garis", "Cukup 2 titik: titik potong sb-x dan sb-y"],
-                    ["Titik Potong 2 Garis", "Selesaikan sistem persamaan linear dua variabel"],
-                  ].map(([t,d]) => (
-                    <div key={t} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80"><strong className="text-cyan-300">{t}:</strong> {d}</p></div>
+                  {t.rang_items.map((item: string) => (
+                    <div key={item} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80">{item}</p></div>
                   ))}
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="text-xs text-yellow-200 font-body"><strong>💡 Strategi Cepat:</strong> Untuk menggambar garis dari persamaan ax + by = c, langsung cari titik saat x=0 dan y=0 — dua titik ini sudah cukup!</p>
+                  <p className="text-xs text-yellow-200 font-body">{t.rang_tip}</p>
                 </div>
               </div>
             )}
