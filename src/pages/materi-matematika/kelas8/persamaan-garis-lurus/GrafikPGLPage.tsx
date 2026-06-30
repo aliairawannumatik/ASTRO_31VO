@@ -112,7 +112,7 @@ const ISG_TICKS = [-5,-4,-3,-2,-1,1,2,3,4,5];
 interface IStepDef { label: string; color: string; bg: string; desc: string; }
 
 const InteractiveStepGraph = ({
-  equationLabel, linePoints, point1, point2, lineColor, steps,
+  equationLabel, linePoints, point1, point2, lineColor, steps, navPrev, navNext, navRepeat,
 }: {
   equationLabel: string;
   linePoints: [number,number][];
@@ -120,6 +120,9 @@ const InteractiveStepGraph = ({
   point2: [number,number];
   lineColor: string;
   steps: [IStepDef, IStepDef, IStepDef, IStepDef];
+  navPrev: string;
+  navNext: string;
+  navRepeat: string;
 }) => {
   const [step, setStep] = React.useState(0);
 
@@ -236,7 +239,7 @@ const InteractiveStepGraph = ({
       <div className="flex items-center justify-between gap-3">
         <button onClick={() => setStep(s => Math.max(0, s-1))} disabled={step === 0}
           className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold font-body bg-white/10 text-white/80 disabled:opacity-25 hover:bg-white/20 active:scale-95 transition-all">
-          ← Sebelumnya
+          {navPrev}
         </button>
         <div className="flex gap-2 items-center">
           {steps.map((s, i) => (
@@ -249,12 +252,12 @@ const InteractiveStepGraph = ({
           <button onClick={() => setStep(s => s + 1)}
             style={{ background: steps[step+1 < 4 ? step+1 : step].bg, borderColor: steps[step+1 < 4 ? step+1 : step].color + "66", color: steps[step+1 < 4 ? step+1 : step].color }}
             className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold font-body border active:scale-95 transition-all hover:opacity-80">
-            Selanjutnya →
+            {navNext}
           </button>
         ) : (
           <button onClick={() => setStep(0)}
             className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold font-body bg-green-600/20 border border-green-500/40 text-green-300 active:scale-95 transition-all hover:bg-green-600/30">
-            🔄 Ulangi
+            {navRepeat}
           </button>
         )}
       </div>
@@ -780,6 +783,7 @@ const GrafikPGLPage = () => {
                       point1={[-2, 0]}
                       point2={[0, 4]}
                       lineColor="#22d3ee"
+                      navPrev={t.prev} navNext={t.next} navRepeat={t.repeat}
                       steps={[
                         { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat Kartesius. Kita akan menggambar garis y = 2x + 4 menggunakan dua titik potong sumbu." },
                         { label:"Titik Potong Sb-x", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Substitusi y = 0 ke persamaan: 0 = 2x + 4 → 2x = −4 → x = −2. Titik potong sumbu-x adalah (−2, 0). Plot titik ini!" },
@@ -826,6 +830,7 @@ const GrafikPGLPage = () => {
                       point1={[5, 0]}
                       point2={[0, -3]}
                       lineColor="#a78bfa"
+                      navPrev={t.prev} navNext={t.next} navRepeat={t.repeat}
                       steps={[
                         { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat Kartesius. Kita akan menggambar garis 3x − 5y = 15 menggunakan dua titik potong sumbu." },
                         { label:"Titik Potong Sb-x", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Substitusi y = 0: 3x − 5(0) = 15 → 3x = 15 → x = 5. Titik potong sumbu-x adalah (5, 0). Plot titik ini!" },
@@ -841,7 +846,7 @@ const GrafikPGLPage = () => {
 
           {/* METODE 2 — 2 TITIK ACAK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="titik-acak" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-green-400" title="📐 Cara Menggambar Persamaan Garis dengan Menggunakan Dua Titik Acak" />
+            <SH id="titik-acak" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-green-400" title={t.sh_titikacak} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
@@ -910,6 +915,7 @@ const GrafikPGLPage = () => {
                       point1={[-2, 0]}
                       point2={[2, 4]}
                       lineColor="#4ade80"
+                      navPrev={t.prev} navNext={t.next} navRepeat={t.repeat}
                       steps={[
                         { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = x + 2." },
                         { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = −2: y = (−2) + 2 = 0. Titik pertama adalah (−2, 0). Plot titik ini di bidang koordinat!" },
@@ -956,6 +962,7 @@ const GrafikPGLPage = () => {
                       point1={[1, 2]}
                       point2={[3, -2]}
                       lineColor="#fb923c"
+                      navPrev={t.prev} navNext={t.next} navRepeat={t.repeat}
                       steps={[
                         { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = −2x + 4." },
                         { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = 1: y = −2(1) + 4 = −2 + 4 = 2. Titik pertama adalah (1, 2). Plot titik ini di bidang koordinat!" },
@@ -971,10 +978,10 @@ const GrafikPGLPage = () => {
 
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah" />
+            <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title={t.sh_contoh1} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+                <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
                   <p className="text-sm text-white/85 font-body">Persamaan garis: <InlineMath math="3x - 2y + 6 = 0" />. Tentukan: a) titik potong sumbu-x dan sumbu-y, b) gambarkan grafiknya!</p>
@@ -1026,9 +1033,9 @@ const GrafikPGLPage = () => {
 
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
+            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_contoh2} />
             <div className="px-5 pb-5 pt-4 space-y-4">
-              <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
+              <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
               <MCQGrafik1 />
 
                   {/* ── PEMBAHASAN ── */}
@@ -1145,7 +1152,7 @@ const GrafikPGLPage = () => {
 
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit" />
+            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title={t.sh_contoh3} />
             {true && (() => {
               const W3 = 320, H3 = 280, MX3 = 160, MY3 = 140, SC3 = 22;
               const tx = (x: number) => MX3 + x * SC3;
@@ -1153,7 +1160,7 @@ const GrafikPGLPage = () => {
               const ticks3 = [-6,-5,-4,-3,-2,-1,1,2,3,4,5,6];
               return (
                 <div className="px-5 pb-5 space-y-4">
-                  <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
+                  <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
                   <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                     <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
                     <p className="text-sm text-white/85 font-body">Dua garis <InlineMath math="\ell_1: x + y = 4" /> dan <InlineMath math="\ell_2: 2x - y = 2" /> digambar pada satu bidang koordinat. Tentukan titik potong kedua garis tersebut, lalu gambarkan!</p>
@@ -1298,7 +1305,7 @@ const GrafikPGLPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
+            <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_rangkuman} />
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
@@ -1323,7 +1330,7 @@ const GrafikPGLPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/persamaan-garis-lurus"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Persamaan Garis Lurus
+            {t.back}
           </button>
         </div>
       </div>

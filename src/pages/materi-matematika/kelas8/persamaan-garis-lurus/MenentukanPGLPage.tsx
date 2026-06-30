@@ -819,7 +819,7 @@ const MenentukanPGLPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/persamaan-garis-lurus"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Persamaan Garis Lurus
+            {t.back}
           </button>
         </div>
       </div>

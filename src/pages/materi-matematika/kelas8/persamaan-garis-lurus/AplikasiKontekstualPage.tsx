@@ -37,8 +37,56 @@ const Chart = ({ children, label = "", xLabel = "x", yLabel = "y" }: { children?
   </svg>
 );
 
+const T_APLIKASI = {
+  id: {
+    title: "APLIKASI PERSAMAAN GARIS LURUS",
+    subtitle: "Matematika dalam Kehidupan Nyata!",
+    breadcrumb: "Kelas 8 · Persamaan Garis Lurus · Materi Matematika",
+    sh_intro: "🌟 Garis Lurus Ada di Sekeliling Kita!",
+    sh_langkah: "📘 Langkah Menyelesaikan Soal Kontekstual",
+    sh_konteks: "🔍 Memahami Makna m dan c dalam Konteks",
+    sh_contoh1: "✏️ Contoh 1 — Tingkat Mudah (Tarif Taksi)",
+    sh_contoh2: "✏️ Contoh 2 — Tingkat Sedang (Pertumbuhan Tanaman)",
+    sh_contoh3: "✏️ Contoh 3 — Tingkat Sulit (Analisis Biaya Produksi)",
+    sh_rangkuman: "📌 Rangkuman",
+    mudah: "MUDAH", sedang: "SEDANG", sulit: "SULIT",
+    back: "← Kembali ke Persamaan Garis Lurus",
+  },
+  en: {
+    title: "APPLICATIONS OF LINEAR EQUATIONS",
+    subtitle: "Mathematics in Real Life!",
+    breadcrumb: "Grade 8 · Equation of a Line · Math",
+    sh_intro: "🌟 Straight Lines Are All Around Us!",
+    sh_langkah: "📘 Steps for Solving Word Problems",
+    sh_konteks: "🔍 Understanding m and c in Context",
+    sh_contoh1: "✏️ Example 1 — Easy Level (Taxi Fare)",
+    sh_contoh2: "✏️ Example 2 — Medium Level (Plant Growth)",
+    sh_contoh3: "✏️ Example 3 — Hard Level (Production Cost Analysis)",
+    sh_rangkuman: "📌 Summary",
+    mudah: "EASY", sedang: "MEDIUM", sulit: "HARD",
+    back: "← Back to Equation of a Line",
+  },
+  ja: {
+    title: "一次方程式の応用",
+    subtitle: "現実の数学！",
+    breadcrumb: "中学2年 · 直線の方程式 · 数学",
+    sh_intro: "🌟 直線は私たちの周りにある！",
+    sh_langkah: "📘 文章問題の解き方",
+    sh_konteks: "🔍 文脈でのmとcの意味を理解する",
+    sh_contoh1: "✏️ 例題1 — 基本レベル（タクシー料金）",
+    sh_contoh2: "✏️ 例題2 — 標準レベル（植物の成長）",
+    sh_contoh3: "✏️ 例題3 — 発展レベル（生産コスト分析）",
+    sh_rangkuman: "📌 まとめ",
+    mudah: "基本", sedang: "標準", sulit: "発展",
+    back: "← 直線の方程式に戻る",
+  },
+} as const;
+type LangKey = keyof typeof T_APLIKASI;
+
 const AplikasiKontekstualPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = T_APLIKASI[language as LangKey] ?? T_APLIKASI.id;
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "langkah", "konteks-list", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
@@ -59,14 +107,14 @@ const AplikasiKontekstualPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <Globe className="w-10 h-10 text-primary mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">APLIKASI PERSAMAAN GARIS LURUS</h1>
-        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">Matematika dalam Kehidupan Nyata!</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Persamaan Garis Lurus · Materi Matematika</p>
+        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.title}</h1>
+        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.subtitle}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Garis Lurus Ada di Sekeliling Kita!" />
+            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">Persamaan garis lurus bukan hanya soal di buku pelajaran — ia hadir dalam banyak situasi nyata: tarif taksi, pertumbuhan tanaman, pemakaian listrik, hingga harga jual-beli. Memahami aplikasinya membantu kita membuat prediksi dan keputusan yang lebih baik!</p>
@@ -90,7 +138,7 @@ const AplikasiKontekstualPage = () => {
 
           {/* LANGKAH PEMECAHAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="langkah" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Langkah Menyelesaikan Soal Kontekstual" />
+            <SH id="langkah" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title={t.sh_langkah} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
@@ -117,7 +165,7 @@ const AplikasiKontekstualPage = () => {
 
           {/* KONTEKS DAN INTERPRETASI */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="konteks-list" icon={<BookOpen className="w-5 h-5" />} iconColor="text-orange-400" title="🔍 Memahami Makna m dan c dalam Konteks" />
+            <SH id="konteks-list" icon={<BookOpen className="w-5 h-5" />} iconColor="text-orange-400" title={t.sh_konteks} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="overflow-x-auto">
@@ -157,10 +205,10 @@ const AplikasiKontekstualPage = () => {
 
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 1 — Tingkat Mudah (Tarif Taksi)" />
+            <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title={t.sh_contoh1} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+                <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
                   <p className="text-sm text-white/85 font-body leading-relaxed">
@@ -232,10 +280,10 @@ const AplikasiKontekstualPage = () => {
 
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang (Pertumbuhan Tanaman)" />
+            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_contoh2} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
+                <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
                   <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">📝 Soal</p>
                   <p className="text-sm text-white/85 font-body leading-relaxed">
@@ -308,10 +356,10 @@ const AplikasiKontekstualPage = () => {
 
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 3 — Tingkat Sulit (Analisis Biaya Produksi)" />
+            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title={t.sh_contoh3} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
+                <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
                   <p className="text-sm text-white/85 font-body leading-relaxed">
@@ -393,7 +441,7 @@ const AplikasiKontekstualPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
+            <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_rangkuman} />
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
@@ -423,7 +471,7 @@ const AplikasiKontekstualPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/persamaan-garis-lurus"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Persamaan Garis Lurus
+            {t.back}
           </button>
         </div>
       </div>

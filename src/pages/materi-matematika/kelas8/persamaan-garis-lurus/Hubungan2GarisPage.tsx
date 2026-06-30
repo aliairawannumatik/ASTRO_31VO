@@ -202,7 +202,7 @@ const Hubungan2GarisPage = () => {
                 <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4">
                   <p className="text-sm font-semibold text-cyan-300 mb-2 font-body">🎯 Syarat Garis Sejajar</p>
                   <div className="text-center">
-                    <BlockMath math="m_1 = m_2 \quad \text{dan} \quad c_1 \neq c_2" />
+                    <BlockMath math="m_1 = m_2 \quad \wedge \quad c_1 \neq c_2" />
                   </div>
                   <p className="text-xs text-white/60 text-center mt-1">Gradien sama, titik potong sb-y berbeda</p>
                 </div>
@@ -379,7 +379,7 @@ const Hubungan2GarisPage = () => {
 
           {/* BERPOTONGAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="berpotongan" icon={<Layers className="w-5 h-5" />} iconColor="text-green-400" title="✕ Garis Berpotongan (Tidak Sejajar, Tidak Tegak Lurus)" />
+            <SH id="berpotongan" icon={<Layers className="w-5 h-5" />} iconColor="text-green-400" title={t.sh_berpotongan} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/20 border border-green-500/40 rounded-xl p-4">
@@ -712,7 +712,7 @@ const Hubungan2GarisPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/persamaan-garis-lurus"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Persamaan Garis Lurus
+            {t.back}
           </button>
         </div>
       </div>
