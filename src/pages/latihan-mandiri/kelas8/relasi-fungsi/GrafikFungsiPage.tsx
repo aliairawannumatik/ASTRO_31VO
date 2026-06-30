@@ -144,21 +144,7 @@ const SvgStepFunction = () => (
 );
 
 const questions: Q[] = [
-  Qn(1, "Membaca Grafik Untung dan Modal", {
-    type: "pilgan",
-    content: "Perhatikan grafik berikut!",
-    diagram: <SvgProfitGraph />,
-    parts: [{ label: "", text: "Dengan modal Rp 30.000,00, berapakah untung yang diperoleh?" }],
-    options: ["Rp 1.200,00", "Rp 1.350,00", "Rp 1.500,00", "Rp 1.800,00"],
-  }),
-  Qn(2, "Membaca Grafik Tarif Ojek Online", {
-    type: "pilgan",
-    content: "Suatu perusahaan ojek online memasang tarif seperti grafik berikut.",
-    diagram: <SvgTaxiLinear />,
-    parts: [{ label: "", text: "Dito pergi ke sekolah yang berjarak 10 km menggunakan ojek online tersebut. Berapa tarif yang harus dibayar Dito?" }],
-    options: ["Rp 30.000,00", "Rp 33.000,00", "Rp 36.000,00", "Rp 39.000,00"],
-  }),
-  Qn(3, "Rumus Fungsi dari Diagram Panah", {
+  Qn(1, "Rumus Fungsi dari Diagram Panah", {
     type: "pilgan",
     content: "Perhatikan gambar diagram panah berikut. Rumus fungsi diagram tersebut adalah ...",
     diagram: (
@@ -172,7 +158,7 @@ const questions: Q[] = [
     ),
     options: ["f(x) = x + 1", "f(x) = 2x + 1", "f(x) = 3x + 1", "f(x) = 4x − 1"],
   }),
-  Qn(4, "Menentukan Rumus Fungsi dari Grafik", {
+  Qn(2, "Menentukan Rumus Fungsi dari Grafik", {
     type: "pilgan",
     content: "Grafik fungsi di bawah ini rumus fungsinya adalah ...",
     diagram: (
@@ -186,19 +172,7 @@ const questions: Q[] = [
     ),
     options: ["f(x) = x − 2", "f(x) = x + 2", "f(x) = 2x − 2", "f(x) = 2x + 2"],
   }),
-  Qn(5, "Memilih Taksi Paling Hemat", {
-    type: "pilgan",
-    content: "Sebuah kota terdapat dua perusahaan taksi, Taksi Sinar dan Taksi Bintang. Perusahaan tersebut menawarkan tarif taksi seperti tabel berikut.",
-    diagram: <SvgTaxiTable />,
-    parts: [{ label: "", text: "Rima ingin pergi ke perpustakaan yang berjarak 9 km dari rumahnya. Agar diperoleh biaya yang lebih hemat, taksi manakah yang sebaiknya digunakan Rima?" }],
-    options: [
-      "Taksi Sinar, karena tarif awalnya lebih kecil sehingga akan terus lebih murah.",
-      "Taksi Bintang, karena tarif per km lebih murah.",
-      "Taksi Sinar, karena lebih hemat Rp 1.500,00.",
-      "Taksi Bintang, karena lebih hemat Rp 1.500,00.",
-    ],
-  }),
-  Qn(6, "Rumus Fungsi dari Grafik Bergradien Negatif", {
+  Qn(3, "Rumus Fungsi dari Grafik Bergradien Negatif", {
     type: "pilgan",
     content: "Perhatikan grafik berikut. Rumus fungsi dari grafik di atas adalah ...",
     diagram: (
@@ -211,6 +185,32 @@ const questions: Q[] = [
       />
     ),
     options: ["f(x) = 2x − 4", "f(x) = 2x + 4", "f(x) = −2x − 4", "f(x) = −2x + 4"],
+  }),
+  Qn(4, "Membaca Grafik Untung dan Modal", {
+    type: "pilgan",
+    content: "Perhatikan grafik berikut!",
+    diagram: <SvgProfitGraph />,
+    parts: [{ label: "", text: "Dengan modal Rp 30.000,00, berapakah untung yang diperoleh?" }],
+    options: ["Rp 1.200,00", "Rp 1.350,00", "Rp 1.500,00", "Rp 1.800,00"],
+  }),
+  Qn(5, "Membaca Grafik Tarif Ojek Online", {
+    type: "pilgan",
+    content: "Suatu perusahaan ojek online memasang tarif seperti grafik berikut.",
+    diagram: <SvgTaxiLinear />,
+    parts: [{ label: "", text: "Dito pergi ke sekolah yang berjarak 10 km menggunakan ojek online tersebut. Berapa tarif yang harus dibayar Dito?" }],
+    options: ["Rp 30.000,00", "Rp 33.000,00", "Rp 36.000,00", "Rp 39.000,00"],
+  }),
+  Qn(6, "Memilih Taksi Paling Hemat", {
+    type: "pilgan",
+    content: "Sebuah kota terdapat dua perusahaan taksi, Taksi Sinar dan Taksi Bintang. Perusahaan tersebut menawarkan tarif taksi seperti tabel berikut.",
+    diagram: <SvgTaxiTable />,
+    parts: [{ label: "", text: "Rima ingin pergi ke perpustakaan yang berjarak 9 km dari rumahnya. Agar diperoleh biaya yang lebih hemat, taksi manakah yang sebaiknya digunakan Rima?" }],
+    options: [
+      "Taksi Sinar, karena tarif awalnya lebih kecil sehingga akan terus lebih murah.",
+      "Taksi Bintang, karena tarif per km lebih murah.",
+      "Taksi Sinar, karena lebih hemat Rp 1.500,00.",
+      "Taksi Bintang, karena lebih hemat Rp 1.500,00.",
+    ],
   }),
   Qn(7, "Membaca Grafik Tarif Bertangga", {
     type: "pilgan",
