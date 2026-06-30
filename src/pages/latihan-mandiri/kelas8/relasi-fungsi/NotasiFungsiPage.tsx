@@ -57,7 +57,6 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "\\text{Tentukan nilai } k" },
       { label: "b.", math: "\\text{Hitung } f(6)" },
-      { label: "c.", math: "\\text{Jika } f(x) = 31,\\ x = \\ldots" },
     ],
   }),
   Qn(6, "Bayangan dan Nilai Balik Fungsi", {
@@ -68,7 +67,14 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Tentukan nilai } m \\text{ jika } f(m) = -7." },
     ],
   }),
-  Qn(7, "Fungsi f(x) = ax + b – Mencari a dan b", {
+  Qn(7, "Mencari Domain dari Range yang Diketahui", {
+    type: "mixed",
+    content: "Diketahui f(x) = x − 2 dengan range = {1, 2, 3, 4, 5}.",
+    parts: [
+      { label: "a.", text: "Tentukan domain fungsi f." },
+    ],
+  }),
+  Qn(8, "Fungsi f(x) = ax + b – Mencari a dan b", {
     type: "mixed",
     content: "Diketahui f: x → ax + b dengan f(2) = 7 dan f(5) = 13.",
     parts: [
@@ -77,7 +83,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Tuliskan rumus lengkap fungsi } f(x) = \\ldots" },
     ],
   }),
-  Qn(8, "Mencari Konstanta Fungsi dari Dua Kondisi", {
+  Qn(9, "Mencari Konstanta Fungsi dari Dua Kondisi", {
     type: "mixed",
     content: "Fungsi f didefinisikan f: x → ax + b, dengan a dan b bilangan bulat. Diketahui f(2) = 7 dan f(−3) = −8.",
     parts: [
@@ -86,7 +92,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Hitung nilai fungsi } f \\text{ untuk } x = 5." },
     ],
   }),
-  Qn(9, "Terapan Fungsi – Temperatur", {
+  Qn(10, "Terapan Fungsi – Temperatur", {
     type: "mixed",
     content: "Konversi Celsius ke Fahrenheit:",
     mathContent: "F(C) = \\frac{9}{5}C + 32",
@@ -95,7 +101,7 @@ const questions: Q[] = [
       { label: "b.", math: "F(100) = \\ldots ^\\circ F" },
     ],
   }),
-  Qn(10, "Fungsi dari Soal Cerita – TKA", {
+  Qn(11, "Fungsi dari Soal Cerita – TKA", {
     type: "mixed",
     content: "Upah seorang pekerja adalah f(h) = 25.000h + 50.000, di mana h adalah jam kerja per hari.",
     parts: [
@@ -104,7 +110,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jelaskan arti 25.000 dan 50.000 dalam konteks soal." },
     ],
   }),
-  Qn(11, "Terapan Fungsi – Soal Cerita", {
+  Qn(12, "Terapan Fungsi – Soal Cerita", {
     type: "mixed",
     content: "Sebuah bus pariwisata mengangkut 12 penumpang dewasa dengan berat rata-rata x kg dan 1 bagasi tambahan seberat (5x + 300) kg. Fungsi total beban bus dinyatakan sebagai T(x) = 12x + (5x + 300).",
     parts: [
@@ -113,7 +119,7 @@ const questions: Q[] = [
       { label: "c.", text: "Jika kapasitas maksimum bus adalah 1.600 kg, apakah bus kelebihan beban? Jelaskan." },
     ],
   }),
-  Qn(12, "Rumus Fungsi – Soal UN", {
+  Qn(13, "Rumus Fungsi – Soal UN", {
     type: "mixed",
     content: "Fungsi f didefinisikan f(2x − 1) = 4x + 5.",
     parts: [
@@ -121,7 +127,7 @@ const questions: Q[] = [
       { label: "b.", math: "f(2) = \\ldots" },
     ],
   }),
-  Qn(13, "Rumus Fungsi dari Notasi Komposit", {
+  Qn(14, "Rumus Fungsi dari Notasi Komposit", {
     type: "mixed",
     content: "Diketahui f(3x − 2) = 9x + 1.",
     parts: [
@@ -150,7 +156,7 @@ const NotasiFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 13 {t('practice.suffixSoal')}</span>
+            <span className="text-sky-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
