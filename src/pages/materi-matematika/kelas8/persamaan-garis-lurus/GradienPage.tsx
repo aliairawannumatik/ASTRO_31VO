@@ -46,6 +46,7 @@ const T_GRADIEN = {
     introP: "Tanjakan jalan yang curam vs landai, lereng gunung yang terjal vs miring perlahan — semua punya tingkat kemiringan yang berbeda. Dalam matematika, tingkat kemiringan ini disebut",
     introKW: "gradien",
     introP2: "(atau slope).",
+    intro_img_alt: "Perbandingan jalan tanjakan terjal dan landai",
     defSummary: "🎯 Ringkasan Intisari",
     defP: "adalah perbandingan antara panjang",
     defSisiTegak: "sisi tegak",
@@ -144,6 +145,7 @@ const T_GRADIEN = {
     introP: "A steep hill vs. a gentle slope — all have different degrees of inclination. In mathematics, this degree of inclination is called the",
     introKW: "gradient",
     introP2: "(or slope).",
+    intro_img_alt: "Comparison of a steep hill and a gentle slope",
     defSummary: "🎯 Key Concept",
     defP: "is the ratio between the length of the",
     defSisiTegak: "vertical side",
@@ -242,9 +244,10 @@ const T_GRADIEN = {
     introP: "急な坂と緩やかな坂 — どちらも傾きの度合いが違います。数学では、この傾きの度合いを",
     introKW: "傾き（グラジエン）",
     introP2: "と呼びます。",
+    intro_img_alt: "急な坂と緩やかな坂の比較",
     defSummary: "🎯 重要概念",
     defP: "とは、直線の下に作られる直角三角形の",
-    defSidiTegak: "垂直辺",
+    defSisiTegak: "垂直辺",
     defP2: "（上昇分）と",
     defSisiDatar: "水平辺",
     defP3: "（水平距離）の比です。",
@@ -374,7 +377,7 @@ const GradienPage = () => {
                 <figure className="rounded-xl overflow-hidden border border-white/10">
                   <img
                     src="/jalan-tanjakan.png"
-                    alt="Perbandingan jalan tanjakan terjal dan landai"
+                    alt={t.intro_img_alt}
                     className="w-full object-cover"
                   />
                   <figcaption className="text-center text-[10px] text-white/40 font-body py-1.5 bg-slate-900/60">

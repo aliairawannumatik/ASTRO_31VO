@@ -424,7 +424,6 @@ const T_HUBUNGAN = {
     ber_anim_tegaklurus: "⊥ 垂直（90°）",
     ber_anim_berpotongan: "✕ 通常の交差",
     ber_anim_sejajar_note: "m₁ = m₂ → 平行線、交わらない！",
-    ber_anim_perp_at: "90°の角、交点",
     ber_anim_int_at: "交点",
     c1_steps: ["ℓ₁: y = 3x − 5 → m₁ = 3", "ℓ₂: y = 3x + 2 → m₂ = 3", "m₁ = m₂ = 3、ただしc₁ = −5 ≠ c₂ = 2"],
     c2_step1: "m₁ = 4（y = 4x − 3より）",

@@ -72,7 +72,7 @@ const T_MENENTUKAN = {
     sh_rangkuman: "📌 Rangkuman",
     back: "← Kembali ke Persamaan Garis Lurus",
     mudah: "MUDAH", sedang: "SEDANG", sulit: "SULIT",
-    soal: "📝 Soal", pem: "💡 Pembahasan",
+    soal: "📝 Soal",
     petaTitle: "🗺️ Peta Skenario Penentuan Persamaan Garis",
     sk_info: "Info:", sk_rumus_label: "Rumus:",
     skenarios: [
@@ -186,7 +186,7 @@ const T_MENENTUKAN = {
     sh_rangkuman: "📌 Summary",
     back: "← Back to Equation of a Line",
     mudah: "EASY", sedang: "MEDIUM", sulit: "HARD",
-    soal: "📝 Problem", pem: "💡 Solution",
+    soal: "📝 Problem",
     petaTitle: "🗺️ Scenario Map for Finding a Line Equation",
     sk_info: "Info:", sk_rumus_label: "Formula:",
     skenarios: [
@@ -300,7 +300,7 @@ const T_MENENTUKAN = {
     sh_rangkuman: "📌 まとめ",
     back: "← 直線の方程式に戻る",
     mudah: "基本", sedang: "標準", sulit: "発展",
-    soal: "📝 問題", pem: "💡 解答",
+    soal: "📝 問題",
     petaTitle: "🗺️ 直線の方程式を求めるシナリオマップ",
     sk_info: "情報:", sk_rumus_label: "公式:",
     skenarios: [

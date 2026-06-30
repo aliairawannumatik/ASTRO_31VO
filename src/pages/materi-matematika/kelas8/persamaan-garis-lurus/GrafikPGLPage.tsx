@@ -28,6 +28,8 @@ const T_GRAFIK = {
     soal: "📝 Soal", pem: "💡 Pembahasan",
     intro_hook: "Rel kereta api, pinggir buku, garis horizon pantai — semuanya membentuk garis lurus. Dalam matematika, persamaan garis lurus mendeskripsikan semua garis tersebut dengan sebuah persamaan sederhana yang melibatkan variabel",
     intro_fig_cap: "Garis horizon di lautan — contoh nyata garis lurus yang dapat dideskripsikan dengan persamaan matematika.",
+    intro_img_alt: "Garis horizon laut sebagai contoh nyata garis lurus",
+    intro_img_src: "Sumber gambar",
     intro_vis_title: "📈 Visual dari Grafik Persamaan Garis",
     intro_panel_descs: ["Naik ke kanan", "Turun ke kanan", "Horizontal", "Vertikal"],
     intro_p1: "Persamaan garis lurus merupakan salah satu konsep paling fundamental dalam matematika. Kita bisa menemukannya di mana-mana dalam kehidupan nyata.",
@@ -266,6 +268,8 @@ const T_GRAFIK = {
     soal: "📝 Problem", pem: "💡 Solution",
     intro_hook: "Train tracks, book edges, the sea horizon line — they all form straight lines. In mathematics, linear equations describe all these lines with a simple equation involving variables",
     intro_fig_cap: "The sea horizon line — a real-world example of a straight line that can be described by a mathematical equation.",
+    intro_img_alt: "The sea horizon line — a real-world example of a straight line",
+    intro_img_src: "Image source",
     intro_vis_title: "📈 Visual Graphs of Linear Equations",
     intro_panel_descs: ["Rising right", "Falling right", "Horizontal", "Vertical"],
     intro_p1: "Linear equations are one of the most fundamental concepts in mathematics. We can find them everywhere in real life.",
@@ -504,6 +508,8 @@ const T_GRAFIK = {
     soal: "📝 問題", pem: "💡 解答",
     intro_hook: "線路、本の端、海の地平線 — これらはすべて直線を形成している。数学では、一次方程式は変数を含む単純な式でこれらの直線をすべて表す",
     intro_fig_cap: "海の地平線 — 数学的な方程式で表せる直線の実例。",
+    intro_img_alt: "海の地平線 — 直線の実例",
+    intro_img_src: "画像出典",
     intro_vis_title: "📈 一次方程式のグラフ　ビジュアル",
     intro_panel_descs: ["右上がり", "右下がり", "水平", "垂直"],
     intro_p1: "一次方程式は数学で最も基本的な概念の一つです。現実の生活でもあちこちで見つけられます。",
@@ -1117,7 +1123,7 @@ const GrafikPGLPage = () => {
                 <figure className="flex flex-col items-center gap-2">
                   <img
                     src="/image_1781556662891.png"
-                    alt="Garis horizon laut sebagai contoh nyata garis lurus"
+                    alt={t.intro_img_alt}
                     className="w-full rounded-xl object-cover max-h-80 border border-cyan-500/20"
                   />
                   <figcaption className="text-xs text-white/50 font-body text-center italic">
@@ -1128,7 +1134,7 @@ const GrafikPGLPage = () => {
                       rel="noopener noreferrer"
                       className="underline hover:text-white/80 transition-colors"
                     >
-                      Sumber gambar
+                      {t.intro_img_src}
                     </a>
                   </figcaption>
                 </figure>
@@ -1150,7 +1156,7 @@ const GrafikPGLPage = () => {
                     <div key={label} className="bg-slate-900/60 border border-white/10 rounded-xl p-2">
                       <CoordSystem w={140} h={120} label={label}>
                         <polyline points={pts.map(([x,y])=>`${70+x*14},${60-y*11}`).join(' ')} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-                        {pts.map(([x,y]) => <circle key={x} cx={70+x*14} cy={60-y*11} r="2.5" fill={color} />)}
+                        {pts.map(([x,y], pi) => <circle key={pi} cx={70+x*14} cy={60-y*11} r="2.5" fill={color} />)}
                       </CoordSystem>
                       <p className="text-xs text-center mt-1" style={{ color }}>{desc}</p>
                     </div>
