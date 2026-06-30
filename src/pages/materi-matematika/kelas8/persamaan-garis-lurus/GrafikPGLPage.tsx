@@ -1109,7 +1109,7 @@ const GrafikPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  {t.intro_hook} <InlineMath math="x" /> dan <InlineMath math="y" />.
+                  {t.intro_hook} <InlineMath math="x" /> {t.konsep_key_dan} <InlineMath math="y" />.
                 </p>
                 <figure className="flex flex-col items-center gap-2">
                   <img
