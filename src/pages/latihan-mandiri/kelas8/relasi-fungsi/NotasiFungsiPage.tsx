@@ -45,10 +45,9 @@ const questions: Q[] = [
     mathContent: "g(x) = x^2 - 2x + 3",
     parts: [
       { label: "a.", math: "g(0) = \\ldots" },
-      { label: "b.", math: "g(3) = \\ldots" },
-      { label: "c.", math: "g(-2) = \\ldots" },
-      { label: "d.", math: "g(1) = \\ldots" },
-      { label: "e.", math: "g(a + 2) = \\ldots" },
+      { label: "b.", math: "g(-2) = \\ldots" },
+      { label: "c.", math: "g(1) = \\ldots" },
+      { label: "d.", math: "g(a + 2) = \\ldots" },
     ],
   }),
   Qn(5, "Fungsi dengan Parameter", {
