@@ -105,7 +105,9 @@ const questions: Q[] = [
     type: "mixed",
     content: "Pak Rudi bekerja sebagai buruh harian di sebuah pabrik. Upah yang ia terima setiap hari dihitung menggunakan fungsi f(h) = 25.000h + 50.000, di mana h adalah jumlah jam kerja dalam sehari. Angka 25.000 mencerminkan upah per jam, sedangkan 50.000 adalah tunjangan harian tetap yang selalu ia terima.",
     parts: [
-      { label: "a.", text: "Jelaskan makna nilai 25.000 dan 50.000 dalam konteks pekerjaan Pak Rudi sehari-hari." },
+      { label: "a.", text: "Jika Pak Rudi bekerja selama 8 jam, tentukan besar upah yang ia terima pada hari itu." },
+      { label: "b.", text: "Jika pada suatu hari Pak Rudi menerima upah sebesar Rp250.000, berapa jam ia bekerja pada hari tersebut?" },
+      { label: "c.", text: "Jelaskan makna nilai 25.000 dan 50.000 dalam konteks pekerjaan Pak Rudi sehari-hari." },
     ],
   }),
   Qn(12, "Terapan Fungsi – Soal Cerita", {
