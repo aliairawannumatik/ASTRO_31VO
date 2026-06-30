@@ -4,206 +4,224 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
 import { TrendingUp } from "lucide-react";
 import CoordPlane from "../koordinat-cartesius/CoordPlane";
 
 type Part = { label: string; math?: string; text?: string };
 type Q = {
   n: number; title: string;
-  content?: string; mathContent?: string;
+  content?: string;
   parts?: Part[];
   diagram?: React.ReactNode;
-  type: "essay" | "mixed";
+  options?: string[];
+  type: "pilgan" | "essay" | "mixed";
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
+const SvgProfitGraph = () => (
+  <svg viewBox="0 0 270 195" width="100%" style={{ maxWidth: 300 }}>
+    <line x1="87" y1="20" x2="87" y2="165" stroke="#1e3a5f" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="129" y1="20" x2="129" y2="165" stroke="#1e3a5f" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="171" y1="20" x2="171" y2="165" stroke="#1e3a5f" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="213" y1="20" x2="213" y2="165" stroke="#1e3a5f" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="45" y1="136" x2="240" y2="136" stroke="#1e3a5f" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="45" y1="107" x2="240" y2="107" stroke="#1e3a5f" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="45" y1="78" x2="240" y2="78" stroke="#1e3a5f" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="45" y1="49" x2="240" y2="49" stroke="#1e3a5f" strokeWidth="0.5" strokeDasharray="3,2" />
+    <line x1="45" y1="165" x2="248" y2="165" stroke="#64748b" strokeWidth="1.5" />
+    <line x1="45" y1="165" x2="45" y2="18" stroke="#64748b" strokeWidth="1.5" />
+    <polygon points="245,161 253,165 245,169" fill="#64748b" />
+    <polygon points="41,21 45,13 49,21" fill="#64748b" />
+    <text x="40" y="139" fill="#94a3b8" fontSize="8" textAnchor="end">250</text>
+    <text x="40" y="110" fill="#94a3b8" fontSize="8" textAnchor="end">500</text>
+    <text x="40" y="81" fill="#94a3b8" fontSize="8" textAnchor="end">750</text>
+    <text x="40" y="52" fill="#94a3b8" fontSize="8" textAnchor="end">1.000</text>
+    <text x="87" y="178" fill="#94a3b8" fontSize="7" textAnchor="middle">5.000</text>
+    <text x="129" y="178" fill="#94a3b8" fontSize="7" textAnchor="middle">10.000</text>
+    <text x="171" y="178" fill="#94a3b8" fontSize="7" textAnchor="middle">15.000</text>
+    <text x="213" y="178" fill="#94a3b8" fontSize="7" textAnchor="middle">20.000</text>
+    <text x="148" y="192" fill="#94a3b8" fontSize="8" textAnchor="middle">modal (dalam rupiah)</text>
+    <text x="13" y="100" fill="#94a3b8" fontSize="8" textAnchor="middle" transform="rotate(-90,13,100)">untung (dalam rupiah)</text>
+    <line x1="45" y1="165" x2="242" y2="22" stroke="#3b82f6" strokeWidth="2.5" />
+    <circle cx="87" cy="136" r="4" fill="#3b82f6" />
+    <circle cx="129" cy="107" r="4" fill="#3b82f6" />
+    <circle cx="171" cy="78" r="4" fill="#3b82f6" />
+    <circle cx="213" cy="49" r="4" fill="#3b82f6" />
+  </svg>
+);
+
+const SvgTaxiLinear = () => (
+  <svg viewBox="0 0 260 200" width="100%" style={{ maxWidth: 300 }}>
+    <line x1="45" y1="107" x2="96" y2="107" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="96" y1="107" x2="96" y2="168" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="45" y1="78" x2="148" y2="78" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="148" y1="78" x2="148" y2="168" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="45" y1="49" x2="200" y2="49" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="200" y1="49" x2="200" y2="168" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="45" y1="168" x2="228" y2="168" stroke="#64748b" strokeWidth="1.5" />
+    <line x1="45" y1="168" x2="45" y2="18" stroke="#64748b" strokeWidth="1.5" />
+    <polygon points="225,164 233,168 225,172" fill="#64748b" />
+    <polygon points="41,21 45,13 49,21" fill="#64748b" />
+    <text x="40" y="110" fill="#94a3b8" fontSize="9" textAnchor="end">12</text>
+    <text x="40" y="81" fill="#94a3b8" fontSize="9" textAnchor="end">18</text>
+    <text x="40" y="52" fill="#94a3b8" fontSize="9" textAnchor="end">24</text>
+    <text x="40" y="26" fill="#94a3b8" fontSize="8" textAnchor="end">30 Ribuan</text>
+    <text x="96" y="181" fill="#94a3b8" fontSize="9" textAnchor="middle">2</text>
+    <text x="148" y="181" fill="#94a3b8" fontSize="9" textAnchor="middle">4</text>
+    <text x="200" y="181" fill="#94a3b8" fontSize="9" textAnchor="middle">6</text>
+    <text x="225" y="175" fill="#94a3b8" fontSize="8">jarak</text>
+    <line x1="45" y1="136" x2="228" y2="33" stroke="#60a5fa" strokeWidth="2.5" />
+    <circle cx="96" cy="107" r="4" fill="#60a5fa" />
+    <text x="102" y="103" fill="#facc15" fontSize="9" fontWeight="bold">12</text>
+    <circle cx="148" cy="78" r="4" fill="#60a5fa" />
+    <text x="154" y="74" fill="#facc15" fontSize="9" fontWeight="bold">18</text>
+    <circle cx="200" cy="49" r="4" fill="#60a5fa" />
+    <text x="206" y="45" fill="#facc15" fontSize="9" fontWeight="bold">24</text>
+  </svg>
+);
+
+const SvgTaxiTable = () => (
+  <div className="w-full text-xs border border-white/20 rounded-lg overflow-hidden">
+    <div className="bg-white/10 px-3 py-1.5 text-center text-white/70 font-bold text-[10px] tracking-wider">"Tarif Taksi"</div>
+    <table className="w-full border-collapse">
+      <thead>
+        <tr className="bg-white/5">
+          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-left text-[10px]">Jarak (km)</th>
+          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-center text-[10px]">Awal (0)</th>
+          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-center text-[10px]">2</th>
+          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-center text-[10px]">4</th>
+          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-center text-[10px]">...</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-[10px]">Taksi Sinar</td>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">10.000</td>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">13.000</td>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">16.000</td>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">...</td>
+        </tr>
+        <tr>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-[10px]">Taksi Bintang</td>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">4.000</td>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">8.000</td>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">12.000</td>
+          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+);
+
+const SvgStepFunction = () => (
+  <svg viewBox="0 0 260 200" width="100%" style={{ maxWidth: 300 }}>
+    <line x1="45" y1="110" x2="90" y2="110" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="90" y1="110" x2="90" y2="170" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="45" y1="80" x2="135" y2="80" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="135" y1="80" x2="135" y2="170" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="45" y1="50" x2="180" y2="50" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="180" y1="50" x2="180" y2="170" stroke="#334155" strokeWidth="0.8" strokeDasharray="4,3" />
+    <line x1="45" y1="170" x2="220" y2="170" stroke="#64748b" strokeWidth="1.5" />
+    <line x1="45" y1="170" x2="45" y2="20" stroke="#64748b" strokeWidth="1.5" />
+    <polygon points="217,166 225,170 217,174" fill="#64748b" />
+    <polygon points="41,23 45,15 49,23" fill="#64748b" />
+    <text x="40" y="113" fill="#94a3b8" fontSize="9" textAnchor="end">12</text>
+    <text x="40" y="83" fill="#94a3b8" fontSize="9" textAnchor="end">18</text>
+    <text x="40" y="53" fill="#94a3b8" fontSize="9" textAnchor="end">24</text>
+    <text x="40" y="30" fill="#94a3b8" fontSize="8" textAnchor="end">30</text>
+    <text x="45" y="184" fill="#94a3b8" fontSize="9" textAnchor="middle">O</text>
+    <text x="90" y="184" fill="#94a3b8" fontSize="9" textAnchor="middle">2</text>
+    <text x="135" y="184" fill="#94a3b8" fontSize="9" textAnchor="middle">4</text>
+    <text x="180" y="184" fill="#94a3b8" fontSize="9" textAnchor="middle">6</text>
+    <text x="215" y="175" fill="#94a3b8" fontSize="8">Jarak (km)</text>
+    <text x="13" y="100" fill="#94a3b8" fontSize="8" textAnchor="middle" transform="rotate(-90,13,100)">Tarif (ribuan)</text>
+    <line x1="45" y1="110" x2="90" y2="110" stroke="#f472b6" strokeWidth="2.5" />
+    <line x1="90" y1="110" x2="90" y2="80" stroke="#f472b6" strokeWidth="2.5" />
+    <line x1="90" y1="80" x2="135" y2="80" stroke="#f472b6" strokeWidth="2.5" />
+    <line x1="135" y1="80" x2="135" y2="50" stroke="#f472b6" strokeWidth="2.5" />
+    <line x1="135" y1="50" x2="180" y2="50" stroke="#f472b6" strokeWidth="2.5" />
+  </svg>
+);
+
 const questions: Q[] = [
-  Qn(1, "Membuat Tabel Nilai Fungsi Linear", {
-    type: "mixed",
-    mathContent: "f(x) = 2x + 1",
-    parts: [
-      { label: "a.", math: "\\text{Lengkapi tabel: } x \\in \\{-3,-2,-1,0,1,2,3\\} \\to f(x) = \\ldots" },
-      { label: "b.", text: "Plot titik-titik hasil pada bidang koordinat." },
-      { label: "c.", text: "Hubungkan titik-titik tersebut. Bentuk kurva apa yang terbentuk?" },
+  Qn(1, "Membaca Grafik Untung dan Modal", {
+    type: "pilgan",
+    content: "Perhatikan grafik berikut!",
+    diagram: <SvgProfitGraph />,
+    parts: [{ label: "", text: "Dengan modal Rp 30.000,00, berapakah untung yang diperoleh?" }],
+    options: ["Rp 1.200,00", "Rp 1.350,00", "Rp 1.500,00", "Rp 1.800,00"],
+  }),
+  Qn(2, "Membaca Grafik Tarif Ojek Online", {
+    type: "pilgan",
+    content: "Suatu perusahaan ojek online memasang tarif seperti grafik berikut.",
+    diagram: <SvgTaxiLinear />,
+    parts: [{ label: "", text: "Dito pergi ke sekolah yang berjarak 10 km menggunakan ojek online tersebut. Berapa tarif yang harus dibayar Dito?" }],
+    options: ["Rp 30.000,00", "Rp 33.000,00", "Rp 36.000,00", "Rp 39.000,00"],
+  }),
+  Qn(3, "Rumus Fungsi dari Diagram Panah", {
+    type: "pilgan",
+    content: "Perhatikan gambar diagram panah berikut. Rumus fungsi diagram tersebut adalah ...",
+    diagram: (
+      <CoordPlane size={240} range={4}
+        segs={[{ x1: -2, y1: -3, x2: 2, y2: 5, color: "#60a5fa" }]}
+        pts={[
+          { x: 0, y: 1, label: "(0, 1)", color: "#f472b6", labelPos: "tl" },
+          { x: 1, y: 3, label: "(1, 3)", color: "#facc15", labelPos: "tr" },
+        ]}
+      />
+    ),
+    options: ["f(x) = x + 1", "f(x) = 2x + 1", "f(x) = 3x + 1", "f(x) = 4x − 1"],
+  }),
+  Qn(4, "Menentukan Rumus Fungsi dari Grafik", {
+    type: "pilgan",
+    content: "Grafik fungsi di bawah ini rumus fungsinya adalah ...",
+    diagram: (
+      <CoordPlane size={240} range={5}
+        segs={[{ x1: -5, y1: -3, x2: 4, y2: 6, color: "#60a5fa" }]}
+        pts={[
+          { x: -2, y: 0, label: "(−2, 0)", color: "#34d399", labelPos: "top" },
+          { x: 0, y: 2, label: "(0, 2)", color: "#f472b6", labelPos: "tl" },
+        ]}
+      />
+    ),
+    options: ["f(x) = x − 2", "f(x) = x + 2", "f(x) = 2x − 2", "f(x) = 2x + 2"],
+  }),
+  Qn(5, "Memilih Taksi Paling Hemat", {
+    type: "pilgan",
+    content: "Sebuah kota terdapat dua perusahaan taksi, Taksi Sinar dan Taksi Bintang. Perusahaan tersebut menawarkan tarif taksi seperti tabel berikut.",
+    diagram: <SvgTaxiTable />,
+    parts: [{ label: "", text: "Rima ingin pergi ke perpustakaan yang berjarak 9 km dari rumahnya. Agar diperoleh biaya yang lebih hemat, taksi manakah yang sebaiknya digunakan Rima?" }],
+    options: [
+      "Taksi Sinar, karena tarif awalnya lebih kecil sehingga akan terus lebih murah.",
+      "Taksi Bintang, karena tarif per km lebih murah.",
+      "Taksi Sinar, karena lebih hemat Rp 1.500,00.",
+      "Taksi Bintang, karena lebih hemat Rp 1.500,00.",
     ],
   }),
-  Qn(2, "Grafik Fungsi Linear – Titik Potong", {
-    type: "mixed",
-    content: "Fungsi f(x) = 2x − 4.",
-    diagram: <CoordPlane size={260} range={6}
-      pts={[
-        { x: 0, y: -4, label: "(0,−4)", color: "#f472b6", labelPos: "bl" },
-        { x: 2, y: 0, label: "(2,0)", color: "#34d399", labelPos: "top" },
-      ]}
-      segs={[{ x1: -1, y1: -6, x2: 4, y2: 4, color: "#60a5fa" }]}
-    />,
-    parts: [
-      { label: "a.", math: "\\text{Titik potong sumbu-y: } f(0) = \\ldots" },
-      { label: "b.", math: "\\text{Titik potong sumbu-x: } f(x) = 0 \\Rightarrow x = \\ldots" },
-      { label: "c.", text: "Tentukan kemiringan (gradien) grafik tersebut." },
-    ],
+  Qn(6, "Rumus Fungsi dari Grafik Bergradien Negatif", {
+    type: "pilgan",
+    content: "Perhatikan grafik berikut. Rumus fungsi dari grafik di atas adalah ...",
+    diagram: (
+      <CoordPlane size={240} range={6}
+        segs={[{ x1: -3, y1: 2, x2: 2, y2: -8, color: "#f87171" }]}
+        pts={[
+          { x: -2, y: 0, label: "(−2, 0)", color: "#fb923c", labelPos: "top" },
+          { x: 0, y: -4, label: "(0, −4)", color: "#fb923c", labelPos: "bl" },
+        ]}
+      />
+    ),
+    options: ["f(x) = 2x − 4", "f(x) = 2x + 4", "f(x) = −2x − 4", "f(x) = −2x + 4"],
   }),
-  Qn(3, "Grafik Fungsi Konstan", {
-    type: "mixed",
-    content: "Fungsi f(x) = 5 (fungsi konstan).",
-    diagram: <CoordPlane size={260} range={7}
-      segs={[{ x1: -6, y1: 5, x2: 6, y2: 5, color: "#f472b6" }]}
-      pts={[{ x: 0, y: 5, label: "f(x)=5", color: "#f472b6", labelPos: "tl" }]}
-    />,
-    parts: [
-      { label: "a.", text: "Bagaimana bentuk grafik fungsi konstan?" },
-      { label: "b.", text: "Sejajar dengan sumbu apa grafik fungsi konstan?" },
-      { label: "c.", math: "\\text{Apakah grafik } f(x) = 5 \\text{ melewati titik } (3, 5)? \\text{ Cek!}" },
-    ],
-  }),
-  Qn(4, "Tabel Nilai dan Grafik – f(x) = x + 3", {
-    type: "mixed",
-    mathContent: "f(x) = x + 3",
-    parts: [
-      { label: "a.", math: "\\text{Buat tabel untuk } x \\in \\{-4,-2,0,2,4\\}" },
-      { label: "b.", text: "Plot dan gambarkan grafik fungsi tersebut." },
-      { label: "c.", text: "Di mana grafik memotong sumbu-x dan sumbu-y?" },
-    ],
-  }),
-  Qn(5, "Membaca Grafik – Menentukan Nilai Fungsi", {
-    type: "mixed",
-    diagram: <CoordPlane size={260} range={6}
-      segs={[{ x1: -5, y1: -3, x2: 5, y2: 7, color: "#60a5fa" }]}
-      pts={[
-        { x: 0, y: 2, label: "(0,2)", color: "#f472b6", labelPos: "tl" },
-        { x: 3, y: 5, label: "(3,?)", color: "#facc15", labelPos: "tr" },
-        { x: -2, y: 0, label: "(?,0)", color: "#34d399", labelPos: "top" },
-      ]}
-    />,
-    content: "Grafik di atas merupakan grafik fungsi linear.",
-    parts: [
-      { label: "a.", text: "Tentukan nilai f(0) dari grafik." },
-      { label: "b.", text: "Tentukan nilai x jika f(x) = 0 (titik potong sumbu-x)." },
-      { label: "c.", math: "\\text{Tentukan rumus fungsi: } f(x) = \\ldots" },
-    ],
-  }),
-  Qn(6, "Fungsi dengan Gradien Negatif", {
-    type: "mixed",
-    mathContent: "f(x) = -x + 4",
-    diagram: <CoordPlane size={260} range={6}
-      segs={[{ x1: -2, y1: 6, x2: 5, y2: -1, color: "#f87171" }]}
-      pts={[
-        { x: 0, y: 4, label: "(0,4)", color: "#f87171", labelPos: "tl" },
-        { x: 4, y: 0, label: "(4,0)", color: "#fb923c", labelPos: "top" },
-      ]}
-    />,
-    parts: [
-      { label: "a.", text: "Ke arah mana grafik berjalan (naik ke kanan atau turun ke kanan)?" },
-      { label: "b.", text: "Apa yang terjadi pada nilai f(x) ketika x bertambah?" },
-      { label: "c.", math: "f(-2) = \\ldots,\\ f(6) = \\ldots" },
-    ],
-  }),
-  Qn(7, "Dua Grafik pada Satu Bidang", {
-    type: "mixed",
-    content: "Fungsi f(x) = x + 2 dan g(x) = 3x − 2.",
-    diagram: <CoordPlane size={260} range={6}
-      segs={[
-        { x1: -4, y1: -2, x2: 4, y2: 6, color: "#60a5fa", label: "f" },
-        { x1: -1, y1: -5, x2: 4, y2: 10, color: "#f472b6", label: "g" },
-      ]}
-      pts={[{ x: 2, y: 4, label: "(2,4)", color: "#facc15", labelPos: "tl" }]}
-    />,
-    parts: [
-      { label: "a.", math: "\\text{Titik perpotongan: } f(x) = g(x) \\Rightarrow x = \\ldots,\\ y = \\ldots" },
-      { label: "b.", text: "Grafik mana yang lebih curam (gradien lebih besar)?" },
-      { label: "c.", text: "Untuk x > 2, grafik mana yang di atas?" },
-    ],
-  }),
-  Qn(8, "Grafik Fungsi – Sifat Gradien", {
-    type: "mixed",
-    content: "Tentukan sifat grafik fungsi berikut tanpa menggambar:",
-    parts: [
-      { label: "a.", math: "f(x) = 4x + 2 \\quad (\\text{naik/turun?})" },
-      { label: "b.", math: "g(x) = -3x + 5 \\quad (\\text{naik/turun?})" },
-      { label: "c.", math: "h(x) = \\frac{1}{2}x - 3 \\quad (\\text{naik/turun?})" },
-    ],
-  }),
-  Qn(9, "Membaca Grafik – Nilai Positif dan Negatif", {
-    type: "mixed",
-    diagram: <CoordPlane size={260} range={6}
-      segs={[{ x1: -3, y1: 5, x2: 5, y2: -3, color: "#fb923c" }]}
-      pts={[
-        { x: 1, y: 1, label: "(1,1)", color: "#fb923c", labelPos: "tr" },
-        { x: -1, y: 3, label: "(−1,3)", color: "#facc15", labelPos: "tl" },
-      ]}
-      shades={[{ type: 'rect', x1: -6, y1: 0, x2: 1, y2: 6, color: 'rgba(52,211,153,0.08)' }]}
-    />,
-    parts: [
-      { label: "a.", text: "Pada interval x mana nilai f(x) bernilai positif?" },
-      { label: "b.", text: "Pada interval x mana nilai f(x) bernilai negatif?" },
-      { label: "c.", math: "\\text{Titik potong sumbu-x: } f(x) = 0 \\Rightarrow x = \\ldots" },
-    ],
-  }),
-  Qn(10, "Tabel Nilai – f(x) = −2x + 5", {
-    type: "mixed",
-    mathContent: "f(x) = -2x + 5",
-    parts: [
-      { label: "a.", math: "\\text{Buat tabel untuk } x \\in \\{-1, 0, 1, 2, 3\\}" },
-      { label: "b.", text: "Gambarlah grafik. Apakah naik atau turun?" },
-      { label: "c.", math: "\\text{Titik potong sumbu-x: } x = \\ldots \\quad \\text{sumbu-y: } y = \\ldots" },
-    ],
-  }),
-  Qn(11, "Grafik Fungsi – Soal UN", {
-    type: "mixed",
-    content: "Fungsi f(x) = kx + 2 memotong sumbu-x di titik (4, 0).",
-    parts: [
-      { label: "a.", math: "\\text{Substitusi } (4,0) \\to 0 = k(4) + 2 \\Rightarrow k = \\ldots" },
-      { label: "b.", math: "\\text{Rumus lengkap: } f(x) = \\ldots" },
-      { label: "c.", text: "Gambarlah grafik dengan menandai dua titik penting." },
-    ],
-  }),
-  Qn(12, "Perpotongan Dua Grafik", {
-    type: "mixed",
-    content: "Dua fungsi: f(x) = x + 4 dan g(x) = 2x + 1.",
-    parts: [
-      { label: "a.", math: "\\text{Titik potong: } x + 4 = 2x + 1 \\Rightarrow x = \\ldots,\\ y = \\ldots" },
-      { label: "b.", text: "Gambarkan kedua grafik pada satu bidang koordinat." },
-      { label: "c.", text: "Untuk x < 3, grafik mana yang berada di atas?" },
-    ],
-  }),
-  Qn(13, "Grafik Fungsi – Soal Terapan", {
-    type: "mixed",
-    content: "Harga tiket masuk kolam renang: f(x) = 10.000x + 5.000, dengan x = jumlah orang dewasa dan anak anak membayar Rp5.000.",
-    parts: [
-      { label: "a.", math: "f(0) = \\ldots,\\ f(5) = \\ldots,\\ f(10) = \\ldots" },
-      { label: "b.", text: "Gambarlah grafik fungsi ini." },
-      { label: "c.", text: "Apakah grafik ini selalu naik? Mengapa?" },
-    ],
-  }),
-  Qn(14, "Grafik – Soal UN Gabungan", {
-    type: "mixed",
-    content: "Diketahui f(x) = 2x + b memotong sumbu-y di (0, −4) dan sumbu-x di (m, 0).",
-    parts: [
-      { label: "a.", math: "\\text{Dari titik (0,−4): } b = \\ldots" },
-      { label: "b.", math: "\\text{Dari } f(m) = 0:\\ 2m + (-4) = 0 \\Rightarrow m = \\ldots" },
-      { label: "c.", math: "f(5) = \\ldots" },
-    ],
-  }),
-  Qn(15, "Sketsa Grafik – UN/ANBK Style", {
-    type: "mixed",
-    content: "Buatlah sketsa grafik untuk setiap fungsi, tandai titik potong sumbu:",
-    parts: [
-      { label: "a.", math: "f(x) = x - 3 \\quad \\text{(titik potong: } (0,-3) \\text{ dan } (3,0)\\text{)}" },
-      { label: "b.", math: "g(x) = -2x + 4 \\quad \\text{(titik potong: } (0,4) \\text{ dan } (2,0)\\text{)}" },
-      { label: "c.", text: "Tentukan titik perpotongan kedua grafik tersebut." },
-    ],
-  }),
-  Qn(16, "Grafik – Dari Konteks ke Rumus", {
-    type: "mixed",
-    content: "Seorang penjual es krim mendapat keuntungan K(x) = 2.000x − 10.000 rupiah untuk x es krim terjual.",
-    parts: [
-      { label: "a.", math: "K(0) = \\ldots \\text{ (rugi/untung jika tidak ada penjualan)}" },
-      { label: "b.", math: "K(x) = 0 \\Rightarrow x = \\ldots \\text{ (titik impas)}" },
-      { label: "c.", math: "K(20) = \\ldots" },
-    ],
+  Qn(7, "Membaca Grafik Tarif Bertangga", {
+    type: "pilgan",
+    content: "Suatu perusahaan taksi memasang tarif seperti grafik berikut.",
+    diagram: <SvgStepFunction />,
+    parts: [{ label: "", text: "Jika Sari naik taksi tersebut sejauh 16 km, ia harus membayar tarif sebesar ..." }],
+    options: ["Rp 48.000,00", "Rp 54.000,00", "Rp 60.000,00", "Rp 66.000,00"],
   }),
 ];
+
+const optionLabels = ["A", "B", "C", "D"];
 
 const GrafikFungsiPage = () => {
   const navigate = useNavigate();
@@ -223,20 +241,20 @@ const GrafikFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
-            <span className="text-rose-400 text-xs font-bold">📋 16 {t('practice.suffixSoal')}</span>
+            <span className="text-rose-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
         </div>
 
         <div className="mb-5 bg-rose-900/20 border border-rose-500/20 rounded-xl p-4">
-          <p className="text-rose-300 text-xs font-bold mb-2">📌 Tips Grafik Fungsi Linear</p>
+          <p className="text-rose-300 text-xs font-bold mb-2">📌 Tips Membaca Grafik Fungsi</p>
           <div className="grid grid-cols-1 gap-2 text-xs font-body">
             {[
-              "Gradien m > 0: grafik naik ke kanan | m < 0: grafik turun ke kanan",
+              "Grafik naik ke kanan → gradien m > 0 | turun ke kanan → m < 0",
               "Titik potong sumbu-y: set x = 0 → f(0) = b",
               "Titik potong sumbu-x: set f(x) = 0 → x = −b/m",
-              "Uji garis vertikal: grafik fungsi dipotong max 1 kali oleh garis vertikal",
+              "Baca grafik kontekstual: perhatikan satuan dan skala pada setiap sumbu",
             ].map((s, i) => (
               <div key={i} className="bg-white/5 rounded-lg px-3 py-2 flex gap-2">
                 <span className="text-rose-400 font-bold shrink-0">•</span>
@@ -262,22 +280,23 @@ const GrafikFungsiPage = () => {
                     <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
                       {q.title}
                     </span>
-                    {q.mathContent && (
-                      <div className="mb-3 bg-rose-500/10 border border-rose-500/20 rounded-lg px-4 py-2 flex justify-center">
-                        <BlockMath math={q.mathContent} />
-                      </div>
-                    )}
                     {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
                     {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
                     {q.parts && (
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-2 mb-3">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
-                            {p.label && <span className="text-rose-300 text-xs font-bold shrink-0 mt-0.5 min-w-[36px]">{p.label}</span>}
-                            {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
-                            }
+                          p.text ? (
+                            <p key={pi} className="font-body text-sm text-white/90 leading-relaxed">{p.text}</p>
+                          ) : null
+                        ))}
+                      </div>
+                    )}
+                    {q.options && (
+                      <div className="flex flex-col gap-1.5 mt-1">
+                        {q.options.map((opt, oi) => (
+                          <div key={oi} className="flex items-start gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                            <span className="text-rose-300 text-xs font-bold shrink-0 min-w-[20px]">{optionLabels[oi]}.</span>
+                            <span className="font-body text-sm text-white/80">{opt}</span>
                           </div>
                         ))}
                       </div>
