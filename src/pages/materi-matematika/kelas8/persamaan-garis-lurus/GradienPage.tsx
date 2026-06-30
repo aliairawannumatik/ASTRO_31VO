@@ -71,6 +71,43 @@ const T_GRADIEN = {
     horizontal: { judul: "Garis Horizontal", eq: "y = c", m: "m = 0", ket: "Gradien 0, sejajar sumbu-x" },
     vertikal: { judul: "Garis Vertikal", eq: "x = c", m: "m = ∞ (tdk ada)", ket: "Gradien tidak terdefinisi, sejajar sumbu-y" },
     asal: { judul: "Melalui Titik Asal", eq: "y = mx", m: "c = 0", ket: "Melewati titik (0,0), c=0" },
+    persamaanP: "Ada dua bentuk persamaan garis yang sering muncul. Masing-masing punya cara berbeda untuk membaca gradiennya — dan ada alasan matematisnya.",
+    grafik: "GRAFIK",
+    soal: "📝 Soal", pem: "💡 Pembahasan",
+    c1_soal: "Perhatikan dua grafik garis berikut. Tentukan gradien masing-masing garis dengan membaca koordinat dua titik pada grafik!",
+    c1_qa: "a) Tentukan gradien garis di bawah ini:",
+    c1_qb: "b) Tentukan gradien garis di bawah ini:",
+    c1_sa: "a) Garis melalui A(−4, 2) dan B(4, −2)",
+    c1_sa2: "Baca dua titik ujung garis dari grafik: A(−4, 2) dan B(4, −2), lalu substitusi ke rumus gradien:",
+    c1_ans_a: "✅ Gradien = −½  (garis turun landai ke kanan)",
+    c1_sb: "b) Garis melalui P(−3, −4) dan Q(1, 4)",
+    c1_sb2: "Baca dua titik ujung garis dari grafik: P(−3, −4) dan Q(1, 4), lalu substitusi ke rumus gradien:",
+    c1_ans_b: "✅ Gradien = 2  (garis naik curam ke kanan)",
+    c2_soal: "Tentukan gradien garis yang melalui titik A(3, −2) dan B(−1, 6). Gambarkan segitiga gradiennya!",
+    c2_p1: "Gunakan rumus gradien 2 titik:",
+    c2_vis: "Visualisasi segitiga gradien:",
+    c2_ans: "✅ Gradien = −2 (garis turun curam dari kiri ke kanan)",
+    c3_soal: "Tentukan gradien dari persamaan berikut:",
+    c3_items: [
+      { bag: "a) y = −4x + 7", ket: "Koefisien x adalah −4", hasil: "m = −4", color: "text-cyan-300" },
+      { bag: "b) 6x − 3y + 9 = 0", ket: "Ubah: −3y = −6x − 9 → y = 2x + 3", hasil: "m = 2", color: "text-violet-300" },
+      { bag: "c) y = 5", ket: "Garis horizontal → gradien = 0", hasil: "m = 0", color: "text-green-300" },
+    ],
+    c3_ans: "✅ a) m = −4, b) m = 2, c) m = 0",
+    c4_soal: "Titik P(k, 0), Q(0, 2), dan R(2, 4) terletak pada satu garis lurus yang sama (segaris/kolinear). Tentukan nilai k!",
+    c4_l1: "Langkah 1 — Hitung gradien QR (titik yang sudah diketahui nilai pastinya):",
+    c4_l2: "Langkah 2 — Karena P, Q, R segaris, gradien PQ = gradien QR:",
+    c4_l3: "Langkah 3 — Selesaikan persamaan untuk k:",
+    c4_ver: "Verifikasi — Ketiga titik P(−2, 0), Q(0, 2), R(2, 4) pada garis y = x + 2:",
+    c4_ans: "✅ k = −2, sehingga P(−2, 0). Ketiga titik terletak pada garis y = x + 2 dengan gradien m = 1.",
+    rang_items: [
+      ["Gradien (m)", "Ukuran kemiringan garis = Δy/Δx"],
+      ["Dari y=mx+c", "m adalah koefisien x langsung"],
+      ["Dari ax+by+c=0", "Ubah ke y=mx+c dulu, m = −a/b"],
+      ["Dari 2 titik", "m = (y₂−y₁)/(x₂−x₁)"],
+      ["m > 0", "Garis naik; m < 0 = Garis turun; m = 0 = Horizontal"],
+    ],
+    rang_tip: "💡 Trik cepat ax+by+c=0: gradien = m = −a/b. Contoh: 3x − 2y + 1 = 0 → m = −(3)/(−2) = 3/2",
   },
   en: {
     title: "GRADIENT / SLOPE",
@@ -131,6 +168,43 @@ const T_GRADIEN = {
     horizontal: { judul: "Horizontal Line", eq: "y = c", m: "m = 0", ket: "Slope 0, parallel to x-axis" },
     vertikal: { judul: "Vertical Line", eq: "x = c", m: "m = ∞ (undefined)", ket: "Slope undefined, parallel to y-axis" },
     asal: { judul: "Through the Origin", eq: "y = mx", m: "c = 0", ket: "Passes through (0,0), c=0" },
+    persamaanP: "There are two common line equation forms. Each has a different way of reading its gradient — and there is a mathematical reason for it.",
+    grafik: "GRAPH",
+    soal: "📝 Problem", pem: "💡 Solution",
+    c1_soal: "Study the two line graphs below. Find the gradient of each line by reading the coordinates of two points on the graph!",
+    c1_qa: "a) Find the gradient of the line below:",
+    c1_qb: "b) Find the gradient of the line below:",
+    c1_sa: "a) Line through A(−4, 2) and B(4, −2)",
+    c1_sa2: "Read two endpoints from the graph: A(−4, 2) and B(4, −2), then substitute into the gradient formula:",
+    c1_ans_a: "✅ Gradient = −½  (line falls gently to the right)",
+    c1_sb: "b) Line through P(−3, −4) and Q(1, 4)",
+    c1_sb2: "Read two endpoints from the graph: P(−3, −4) and Q(1, 4), then substitute into the gradient formula:",
+    c1_ans_b: "✅ Gradient = 2  (line rises steeply to the right)",
+    c2_soal: "Find the gradient of the line through A(3, −2) and B(−1, 6). Draw the gradient triangle!",
+    c2_p1: "Use the two-point gradient formula:",
+    c2_vis: "Gradient triangle visualization:",
+    c2_ans: "✅ Gradient = −2 (line falls steeply from left to right)",
+    c3_soal: "Find the gradient from the following equations:",
+    c3_items: [
+      { bag: "a) y = −4x + 7", ket: "Coefficient of x is −4", hasil: "m = −4", color: "text-cyan-300" },
+      { bag: "b) 6x − 3y + 9 = 0", ket: "Rearrange: −3y = −6x − 9 → y = 2x + 3", hasil: "m = 2", color: "text-violet-300" },
+      { bag: "c) y = 5", ket: "Horizontal line → gradient = 0", hasil: "m = 0", color: "text-green-300" },
+    ],
+    c3_ans: "✅ a) m = −4, b) m = 2, c) m = 0",
+    c4_soal: "Points P(k, 0), Q(0, 2), and R(2, 4) lie on the same straight line (collinear). Find the value of k!",
+    c4_l1: "Step 1 — Find the gradient of QR (the two points with known values):",
+    c4_l2: "Step 2 — Since P, Q, R are collinear, gradient PQ = gradient QR:",
+    c4_l3: "Step 3 — Solve the equation for k:",
+    c4_ver: "Verification — Three points P(−2, 0), Q(0, 2), R(2, 4) on the line y = x + 2:",
+    c4_ans: "✅ k = −2, so P(−2, 0). All three points lie on y = x + 2 with gradient m = 1.",
+    rang_items: [
+      ["Gradient (m)", "Measure of steepness = Δy/Δx"],
+      ["From y=mx+c", "m is directly the coefficient of x"],
+      ["From ax+by+c=0", "Rearrange to y=mx+c first, m = −a/b"],
+      ["From 2 points", "m = (y₂−y₁)/(x₂−x₁)"],
+      ["m > 0", "Line rises; m < 0 = falls; m = 0 = Horizontal"],
+    ],
+    rang_tip: "💡 Quick trick for ax+by+c=0: gradient = m = −a/b. Example: 3x − 2y + 1 = 0 → m = −(3)/(−2) = 3/2",
   },
   ja: {
     title: "傾き（グラジエン）",
@@ -191,6 +265,43 @@ const T_GRADIEN = {
     horizontal: { judul: "水平線", eq: "y = c", m: "m = 0", ket: "傾き0、x軸に平行" },
     vertikal: { judul: "垂直線", eq: "x = c", m: "m = ∞（未定義）", ket: "傾き未定義、y軸に平行" },
     asal: { judul: "原点を通る直線", eq: "y = mx", m: "c = 0", ket: "点(0,0)を通る、c=0" },
+    persamaanP: "よく使う直線の方程式の形は2つあります。それぞれ傾きの読み取り方が異なります — 数学的な理由があります。",
+    grafik: "グラフ",
+    soal: "📝 問題", pem: "💡 解答",
+    c1_soal: "次の2つの直線グラフをみてください。グラフ上の2点の座標を読み取り、各直線の傾きを求めましょう！",
+    c1_qa: "a) 次の直線の傾きを求めよ：",
+    c1_qb: "b) 次の直線の傾きを求めよ：",
+    c1_sa: "a) A(−4, 2)とB(4, −2)を通る直線",
+    c1_sa2: "グラフから2つの端点A(−4, 2)とB(4, −2)を読み取り、傾きの公式に代入：",
+    c1_ans_a: "✅ 傾き = −½（右に向かって緩やかに下がる直線）",
+    c1_sb: "b) P(−3, −4)とQ(1, 4)を通る直線",
+    c1_sb2: "グラフから2つの端点P(−3, −4)とQ(1, 4)を読み取り、傾きの公式に代入：",
+    c1_ans_b: "✅ 傾き = 2（右に向かって急に上がる直線）",
+    c2_soal: "A(3, −2)とB(−1, 6)を通る直線の傾きを求めよ。傾きの三角形を描け！",
+    c2_p1: "2点傾き公式を使う：",
+    c2_vis: "傾きの三角形の可視化：",
+    c2_ans: "✅ 傾き = −2（左から右へ急に下がる直線）",
+    c3_soal: "次の方程式から傾きを求めよ：",
+    c3_items: [
+      { bag: "a) y = −4x + 7", ket: "xの係数は−4", hasil: "m = −4", color: "text-cyan-300" },
+      { bag: "b) 6x − 3y + 9 = 0", ket: "変形：−3y = −6x − 9 → y = 2x + 3", hasil: "m = 2", color: "text-violet-300" },
+      { bag: "c) y = 5", ket: "水平線 → 傾き = 0", hasil: "m = 0", color: "text-green-300" },
+    ],
+    c3_ans: "✅ a) m = −4, b) m = 2, c) m = 0",
+    c4_soal: "点P(k, 0)、Q(0, 2)、R(2, 4)が同一直線上にある（共線）。kの値を求めよ！",
+    c4_l1: "ステップ1 — QRの傾きを求める（値がわかっている2点）：",
+    c4_l2: "ステップ2 — P、Q、Rが共線なので、PQの傾き＝QRの傾き：",
+    c4_l3: "ステップ3 — kについて方程式を解く：",
+    c4_ver: "確認 — 3点P(−2, 0)、Q(0, 2)、R(2, 4)がy = x + 2上にある：",
+    c4_ans: "✅ k = −2 なので P(−2, 0)。3点すべてが傾きm = 1の直線y = x + 2上にある。",
+    rang_items: [
+      ["傾き（m）", "直線の急さの尺度 = Δy/Δx"],
+      ["y=mx+cから", "mはxの係数がそのまま"],
+      ["ax+by+c=0から", "y=mx+cに変形してm = −a/b"],
+      ["2点から", "m = (y₂−y₁)/(x₂−x₁)"],
+      ["m > 0", "右上がり；m < 0 = 右下がり；m = 0 = 水平"],
+    ],
+    rang_tip: "💡 ax+by+c=0の速攻テクニック：傾きm = −a/b。例：3x − 2y + 1 = 0 → m = −(3)/(−2) = 3/2",
   },
 };
 
@@ -254,7 +365,7 @@ const GradienPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Tanjakan jalan yang curam vs landai, lereng gunung yang terjal vs miring perlahan — semua punya tingkat kemiringan yang berbeda. Dalam matematika, tingkat kemiringan ini disebut <strong className="text-cyan-300">gradien</strong> (atau slope).
+                  {t.introP} <strong className="text-cyan-300">{t.introKW}</strong> {t.introP2}
                 </p>
                 {/* Foto ilustrasi jalan tanjakan */}
                 <figure className="rounded-xl overflow-hidden border border-white/10">
@@ -269,13 +380,9 @@ const GradienPage = () => {
                 </figure>
                 {/* Analogi kemiringan */}
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="text-xs font-bold text-cyan-300 uppercase mb-3">⛰️ Analogi Kemiringan dalam Kehidupan</p>
+                  <p className="text-xs font-bold text-cyan-300 uppercase mb-3">{t.analogyTitle}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-body">
-                    {[
-                      { icon: "🏔️", label: "Lereng Terjal", m: "m = 5", ket: "Naik 5 unit per 1 unit ke kanan", color: "bg-red-900/40 border-red-500/30" },
-                      { icon: "🏕️", label: "Lereng Landai", m: "m = 0.5", ket: "Naik 0.5 unit per 1 unit ke kanan", color: "bg-yellow-900/40 border-yellow-500/30" },
-                      { icon: "🏖️", label: "Jalan Datar", m: "m = 0", ket: "Tidak naik maupun turun", color: "bg-green-900/40 border-green-500/30" },
-                    ].map(({ icon, label, m, ket, color }) => (
+                    {t.analogi.map(({ icon, label, m, ket, color }) => (
                       <div key={label} className={`border ${color} rounded-xl p-3 text-center`}>
                         <div className="text-2xl mb-1">{icon}</div>
                         <p className="font-bold text-white">{label}</p>
@@ -295,11 +402,11 @@ const GradienPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
-                  <p className="text-sm font-semibold text-violet-300 mb-2 font-body">🎯 Ringkasan Intisari</p>
+                  <p className="text-sm font-semibold text-violet-300 mb-2 font-body">{t.defSummary}</p>
                   <p className="text-sm text-white/80 font-body leading-relaxed">
-                    <strong className="text-cyan-300">Gradien (m)</strong> adalah perbandingan antara panjang{" "}
-                    <strong className="text-pink-300">sisi tegak</strong> (jarak naik/turun) dan panjang{" "}
-                    <strong className="text-green-300">sisi datar</strong> (jarak ke kanan) dari segitiga siku-siku yang terbentuk di bawah garis.
+                    <strong className="text-cyan-300">Gradien (m)</strong> {t.defP}{" "}
+                    <strong className="text-pink-300">{t.defSisiTegak}</strong> {t.defP2}{" "}
+                    <strong className="text-green-300">{t.defSisiDatar}</strong> {t.defP3}
                   </p>
                   <div className="bg-violet-900/40 border border-violet-400/30 rounded-xl p-4 mt-3 text-center">
                     <BlockMath math="m = \frac{\Delta y}{\Delta x}" />
@@ -323,8 +430,8 @@ const GradienPage = () => {
                       <text x="55" y="93" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">datar</text>
                       <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">tegak</text>
                     </svg>
-                    <p className="text-xs font-bold text-green-300 font-body text-center">Gradien <span className="text-green-400">POSITIF (+)</span></p>
-                    <p className="text-[10px] text-white/50 font-body text-center">Garis naik ke kanan</p>
+                    <p className="text-xs font-bold text-green-300 font-body text-center">{t.posLabel} <span className="text-green-400">{t.posVal}</span></p>
+                    <p className="text-[10px] text-white/50 font-body text-center">{t.posDesc}</p>
                   </div>
 
                   {/* Gradien Negatif */}
@@ -342,8 +449,8 @@ const GradienPage = () => {
                       <text x="55" y="14" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">datar</text>
                       <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">tegak</text>
                     </svg>
-                    <p className="text-xs font-bold text-red-300 font-body text-center">Gradien <span className="text-red-400">NEGATIF (−)</span></p>
-                    <p className="text-[10px] text-white/50 font-body text-center">Garis turun ke kanan</p>
+                    <p className="text-xs font-bold text-red-300 font-body text-center">{t.posLabel} <span className="text-red-400">{t.negVal}</span></p>
+                    <p className="text-[10px] text-white/50 font-body text-center">{t.negDesc}</p>
                   </div>
                 </div>
 
@@ -360,18 +467,13 @@ const GradienPage = () => {
                   <table className="w-full text-xs font-body border-collapse">
                     <thead>
                       <tr className="bg-cyan-900/40">
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Nilai m</th>
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Arah Garis</th>
-                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Semakin besar |m|</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">{t.tbl_nilaiM}</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">{t.tbl_arah}</th>
+                        <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">{t.tbl_semakin}</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {[
-                        ["m > 0", "↗ Naik dari kiri ke kanan", "Semakin curam ke kanan"],
-                        ["m < 0", "↘ Turun dari kiri ke kanan", "Semakin curam ke kiri"],
-                        ["m = 0", "→ Horizontal (mendatar)", "Tidak berubah"],
-                        ["m tidak ada", "↕ Vertikal (x = konstanta)", "Tidak terdefinisi"],
-                      ].map(([v, a, s], i) => (
+                      {t.tbl_rows.map(([v, a, s], i) => (
                         <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
                           <td className="border border-white/10 px-3 py-2 text-cyan-300 font-mono font-bold text-center">{v}</td>
                           <td className="border border-white/10 px-3 py-2 text-white/70 text-center">{a}</td>
@@ -392,21 +494,9 @@ const GradienPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
-                    {
-                      judul: "Garis Horizontal", eq: "y = c", m: "m = 0",
-                      color: "#4ade80", ket: "Gradien 0, sejajar sumbu-x",
-                      pts: [[-4,2],[0,2],[4,2]],
-                    },
-                    {
-                      judul: "Garis Vertikal", eq: "x = c", m: "m = ∞ (tdk ada)",
-                      color: "#f472b6", ket: "Gradien tidak terdefinisi, sejajar sumbu-y",
-                      pts: [[2,-3],[2,0],[2,3]],
-                    },
-                    {
-                      judul: "Melalui Titik Asal", eq: "y = mx", m: "c = 0",
-                      color: "#a78bfa", ket: "Melewati titik (0,0), c=0",
-                      pts: [[-3,-3],[0,0],[3,3]],
-                    },
+                    { ...t.horizontal, color: "#4ade80", pts: [[-4,2],[0,2],[4,2]] },
+                    { ...t.vertikal,   color: "#f472b6", pts: [[2,-3],[2,0],[2,3]] },
+                    { ...t.asal,       color: "#a78bfa", pts: [[-3,-3],[0,0],[3,3]] },
                   ].map(({ judul, eq, m, color, ket, pts }) => (
                     <div key={judul} className="bg-slate-900/60 border border-white/10 rounded-xl p-3">
                       <p className="text-xs font-bold mb-1" style={{ color }}>{judul}</p>
@@ -434,7 +524,7 @@ const GradienPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/70 leading-relaxed">
-                  Seret kedua titik ke posisi mana pun di grid — gradien selalu bisa dihitung dari <strong className="text-green-300">sisi datar</strong> dan <strong className="text-pink-300">sisi tegak</strong> di antara keduanya.
+                  {t.animP} <strong className="text-green-300">{t.animKW1}</strong> {t.animKW2} <strong className="text-pink-300">{t.animP2}</strong>
                 </p>
                 <GradienInvariantAnimation />
               </div>
@@ -447,26 +537,25 @@ const GradienPage = () => {
             {expandedSections.includes("duatitik") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/70 leading-relaxed">
-                  Jika diketahui dua titik <InlineMath math="P_1(x_1,\, y_1)" /> dan <InlineMath math="P_2(x_2,\, y_2)" />,
-                  gradien garis yang melalui keduanya dihitung dengan rumus:
+                  {t.duaP} <InlineMath math="P_1(x_1,\, y_1)" /> {t.duaHint2} <InlineMath math="P_2(x_2,\, y_2)" />{t.duaP2}
                 </p>
                 <div className="bg-violet-900/30 border border-violet-400/30 rounded-xl p-4 text-center">
                   <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{\Delta y}{\Delta x}" />
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs font-body">
                   <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2.5 text-center">
-                    <p className="text-green-300 font-bold mb-1">Δy = sisi tegak</p>
+                    <p className="text-green-300 font-bold mb-1">{t.dyLabel}</p>
                     <InlineMath math="\Delta y = y_2 - y_1" />
-                    <p className="text-white/40 mt-1">selisih vertikal</p>
+                    <p className="text-white/40 mt-1">{t.dyDesc}</p>
                   </div>
                   <div className="bg-pink-900/20 border border-pink-500/30 rounded-lg p-2.5 text-center">
-                    <p className="text-pink-300 font-bold mb-1">Δx = sisi datar</p>
+                    <p className="text-pink-300 font-bold mb-1">{t.dxLabel}</p>
                     <InlineMath math="\Delta x = x_2 - x_1" />
-                    <p className="text-white/40 mt-1">selisih horizontal</p>
+                    <p className="text-white/40 mt-1">{t.dxDesc}</p>
                   </div>
                 </div>
                 <p className="font-body text-xs text-white/50 leading-relaxed">
-                  Seret titik <span className="text-cyan-300 font-bold">P₁</span> dan <span className="text-yellow-300 font-bold">P₂</span> ke sembarang posisi — rumus akan terisi otomatis langkah demi langkah.
+                  {t.duaHint} <span className="text-cyan-300 font-bold">P₁</span> {t.duaHint2} <span className="text-yellow-300 font-bold">P₂</span> {t.duaHint3}
                 </p>
                 <GradienDuaTitikInteraktif />
               </div>
@@ -478,9 +567,7 @@ const GradienPage = () => {
             <SH id="persamaan" icon={<Sliders className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_persamaan} />
             {expandedSections.includes("persamaan") && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/70 leading-relaxed">
-                  Ada dua bentuk persamaan garis yang sering muncul. Masing-masing punya cara berbeda untuk membaca gradiennya — dan ada alasan matematisnya.
-                </p>
+                <p className="font-body text-sm text-white/70 leading-relaxed">{t.persamaanP}</p>
                 <GradienPersamaanInteraktif />
               </div>
             )}
@@ -488,24 +575,22 @@ const GradienPage = () => {
 
           {/* CONTOH 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title="✏️ Contoh 1 — Membaca Gradien dari Grafik Grid" />
+            <SH id="contoh1" icon={<Target className="w-5 h-5" />} iconColor="text-purple-400" title={t.sh_contoh1} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="GRAFIK" color="bg-purple-700/60 text-purple-200" />
+                <Badge label={t.grafik} color="bg-purple-700/60 text-purple-200" />
 
                 {/* Soal */}
                 <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-purple-300 mb-1 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">
-                    Perhatikan dua grafik garis berikut. Tentukan gradien masing-masing garis dengan membaca koordinat dua titik pada grafik!
-                  </p>
+                  <p className="text-sm font-semibold text-purple-300 mb-1 font-body">{t.soal}</p>
+                  <p className="text-sm text-white/85 font-body">{t.c1_soal}</p>
                 </div>
 
                 {/* Grafik soal — 2 kolom */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* a) y = -½x, ujung di grid corner (-4,2) dan (4,-2) */}
                   <div className="bg-slate-900/60 border border-cyan-500/20 rounded-xl p-3">
-                    <p className="text-xs font-bold text-cyan-300 mb-2 font-body">a) Tentukan gradien garis di bawah ini:</p>
+                    <p className="text-xs font-bold text-cyan-300 mb-2 font-body">{t.c1_qa}</p>
                     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`aq-${v}`}>
@@ -520,7 +605,7 @@ const GradienPage = () => {
 
                   {/* b) y = 2x+2, ujung di grid corner (-3,-4) dan (1,4) */}
                   <div className="bg-slate-900/60 border border-amber-500/20 rounded-xl p-3">
-                    <p className="text-xs font-bold text-amber-300 mb-2 font-body">b) Tentukan gradien garis di bawah ini:</p>
+                    <p className="text-xs font-bold text-amber-300 mb-2 font-body">{t.c1_qb}</p>
                     <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`bq-${v}`}>
@@ -536,12 +621,12 @@ const GradienPage = () => {
 
                 {/* Pembahasan */}
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-5 font-body">
-                  <p className="text-xs font-bold text-white/50 uppercase tracking-wider">💡 Pembahasan</p>
+                  <p className="text-xs font-bold text-white/50 uppercase tracking-wider">{t.pem}</p>
 
                   {/* Solusi a */}
                   <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
-                    <p className="text-cyan-300 font-semibold text-sm">a) Garis melalui A(−4, 2) dan B(4, −2)</p>
-                    <p className="text-white/60 text-xs">Baca dua titik ujung garis dari grafik: A(−4, 2) dan B(4, −2), lalu substitusi ke rumus gradien:</p>
+                    <p className="text-cyan-300 font-semibold text-sm">{t.c1_sa}</p>
+                    <p className="text-white/60 text-xs">{t.c1_sa2}</p>
                     <div className="bg-slate-900/60 rounded-lg p-3">
                       <BlockMath math="m = \frac{y_B - y_A}{x_B - x_A} = \frac{-2 - 2}{4 - (-4)} = \frac{-4}{8} = -\frac{1}{2}" />
                     </div>
@@ -567,14 +652,14 @@ const GradienPage = () => {
                       <text x={MX+4*SC+5}    y={MY-(-2)*SC+4} fill="#67e8f9" fontSize="8">B</text>
                     </svg>
                     <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-lg p-3">
-                      <p className="text-sm font-bold text-cyan-300">✅ Gradien = −½  (garis turun landai ke kanan)</p>
+                      <p className="text-sm font-bold text-cyan-300">{t.c1_ans_a}</p>
                     </div>
                   </div>
 
                   {/* Solusi b */}
                   <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
-                    <p className="text-amber-300 font-semibold text-sm">b) Garis melalui P(−3, −4) dan Q(1, 4)</p>
-                    <p className="text-white/60 text-xs">Baca dua titik ujung garis dari grafik: P(−3, −4) dan Q(1, 4), lalu substitusi ke rumus gradien:</p>
+                    <p className="text-amber-300 font-semibold text-sm">{t.c1_sb}</p>
+                    <p className="text-white/60 text-xs">{t.c1_sb2}</p>
                     <div className="bg-slate-900/60 rounded-lg p-3">
                       <BlockMath math="m = \frac{y_Q - y_P}{x_Q - x_P} = \frac{4 - (-4)}{1 - (-3)} = \frac{8}{4} = 2" />
                     </div>
@@ -600,7 +685,7 @@ const GradienPage = () => {
                       <text x={MX+1*SC+5}    y={MY-4*SC-5}    fill="#fde68a" fontSize="8">Q</text>
                     </svg>
                     <div className="bg-amber-500/10 border border-amber-500/40 rounded-lg p-3">
-                      <p className="text-sm font-bold text-amber-300">✅ Gradien = 2  (garis naik curam ke kanan)</p>
+                      <p className="text-sm font-bold text-amber-300">{t.c1_ans_b}</p>
                     </div>
                   </div>
                 </div>
@@ -611,21 +696,21 @@ const GradienPage = () => {
 
           {/* CONTOH 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title="✏️ Contoh 2 — Tingkat Sedang" />
+            <SH id="contoh2" icon={<Target className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_contoh2} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SEDANG" color="bg-yellow-700/60 text-yellow-200" />
+                <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Tentukan gradien garis yang melalui titik <InlineMath math="A(3, -2)" /> dan <InlineMath math="B(-1, 6)" />. Gambarkan segitiga gradiennya!</p>
+                  <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">{t.soal}</p>
+                  <p className="text-sm text-white/85 font-body">{t.c2_soal}</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-cyan-300 font-semibold mb-2">Gunakan rumus gradien 2 titik:</p>
+                    <p className="text-cyan-300 font-semibold mb-2">{t.c2_p1}</p>
                     <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{6 - (-2)}{-1 - 3} = \frac{8}{-4} = -2" />
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-orange-300 font-semibold mb-2 text-xs">Visualisasi segitiga gradien:</p>
+                    <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c2_vis}</p>
                     {/* Grid diperluas agar B(−1,6) terlihat: W2=200 H2=210 MX2=100 MY2=130 SC2=14 */}
                     <svg viewBox="0 0 200 210" className="w-full sm:w-2/3 mx-auto block rounded-xl" style={{ background: "rgba(15,23,42,0.7)" }}>
                       {[-6,-5,-4,-3,-2,-1,1,2,3,4,5,6].map(v => (
@@ -665,7 +750,7 @@ const GradienPage = () => {
                     </svg>
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-yellow-300">✅ Gradien = −2 (garis turun curam dari kiri ke kanan)</p>
+                    <p className="text-sm font-bold text-yellow-300">{t.c2_ans}</p>
                   </div>
                 </div>
               </div>
@@ -674,20 +759,16 @@ const GradienPage = () => {
 
           {/* CONTOH 3 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title="✏️ Contoh 3 — Tingkat Mudah" />
+            <SH id="contoh3" icon={<Target className="w-5 h-5" />} iconColor="text-green-400" title={t.sh_contoh3} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="MUDAH" color="bg-green-700/60 text-green-200" />
+                <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body">Tentukan gradien dari persamaan berikut: a) <InlineMath math="y = -4x + 7" />, b) <InlineMath math="6x - 3y + 9 = 0" />, c) <InlineMath math="y = 5" /></p>
+                  <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
+                  <p className="text-sm text-white/85 font-body">{t.c3_soal} a) <InlineMath math="y = -4x + 7" />, b) <InlineMath math="6x - 3y + 9 = 0" />, c) <InlineMath math="y = 5" /></p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  {[
-                    { bag: "a) y = −4x + 7", ket: "Koefisien x adalah −4", hasil: "m = −4", color: "text-cyan-300" },
-                    { bag: "b) 6x − 3y + 9 = 0", ket: "Ubah: −3y = −6x − 9 → y = 2x + 3", hasil: "m = 2", color: "text-violet-300" },
-                    { bag: "c) y = 5", ket: "Garis horizontal → gradien = 0", hasil: "m = 0", color: "text-green-300" },
-                  ].map(({ bag, ket, hasil, color }) => (
+                  {t.c3_items.map(({ bag, ket, hasil, color }) => (
                     <div key={bag} className="bg-slate-800/50 rounded-lg p-3">
                       <p className={`${color} font-semibold text-xs mb-1`}>{bag}</p>
                       <p className="text-white/60 text-xs">{ket}</p>
@@ -695,7 +776,7 @@ const GradienPage = () => {
                     </div>
                   ))}
                   <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-green-300">✅ a) m = −4, b) m = 2, c) m = 0</p>
+                    <p className="text-sm font-bold text-green-300">{t.c3_ans}</p>
                   </div>
                 </div>
               </div>
@@ -704,16 +785,16 @@ const GradienPage = () => {
 
           {/* CONTOH 4 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="contoh4" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title="✏️ Contoh 4 — Tingkat Sulit" />
+            <SH id="contoh4" icon={<Target className="w-5 h-5" />} iconColor="text-red-400" title={t.sh_contoh4} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <Badge label="SULIT" color="bg-red-700/60 text-red-200" />
+                <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
 
                 {/* Soal */}
                 <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
-                  <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
+                  <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body leading-relaxed">
-                    Titik <InlineMath math="P(k,\, 0)" />, <InlineMath math="Q(0,\, 2)" />, dan <InlineMath math="R(2,\, 4)" /> terletak pada satu garis lurus yang sama (segaris/kolinear). Tentukan nilai <InlineMath math="k" />!
+                    {t.c4_soal}
                   </p>
                 </div>
 
@@ -722,27 +803,27 @@ const GradienPage = () => {
 
                   {/* Langkah 1 */}
                   <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
-                    <p className="text-cyan-300 font-semibold text-xs mb-2">Langkah 1 — Hitung gradien QR (titik yang sudah diketahui nilai pastinya):</p>
+                    <p className="text-cyan-300 font-semibold text-xs mb-2">{t.c4_l1}</p>
                     <BlockMath math="m_{QR} = \frac{y_R - y_Q}{x_R - x_Q} = \frac{4 - 2}{2 - 0} = \frac{2}{2} = 1" />
                   </div>
 
                   {/* Langkah 2 */}
                   <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
-                    <p className="text-violet-300 font-semibold text-xs mb-2">Langkah 2 — Karena P, Q, R segaris, gradien PQ = gradien QR:</p>
+                    <p className="text-violet-300 font-semibold text-xs mb-2">{t.c4_l2}</p>
                     <BlockMath math="m_{PQ} = \frac{y_Q - y_P}{x_Q - x_P} = \frac{2 - 0}{0 - k} = \frac{2}{-k}" />
                     <BlockMath math="\frac{2}{-k} = 1" />
                   </div>
 
                   {/* Langkah 3 */}
                   <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
-                    <p className="text-orange-300 font-semibold text-xs mb-2">Langkah 3 — Selesaikan persamaan untuk k:</p>
+                    <p className="text-orange-300 font-semibold text-xs mb-2">{t.c4_l3}</p>
                     <BlockMath math="2 = 1 \times (-k)" />
                     <BlockMath math="-k = 2 \implies k = -2" />
                   </div>
 
                   {/* Grafik */}
                   <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-emerald-300 font-semibold text-xs mb-2">Verifikasi — Ketiga titik P(−2, 0), Q(0, 2), R(2, 4) pada garis y = x + 2:</p>
+                    <p className="text-emerald-300 font-semibold text-xs mb-2">{t.c4_ver}</p>
                     <CoordSys w={W} h={H} label="P(−2,0)  Q(0,2)  R(2,4)">
                       {/* Garis y = x+2 */}
                       <polyline
@@ -765,7 +846,7 @@ const GradienPage = () => {
                   </div>
 
                   <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
-                    <p className="text-sm font-bold text-red-300">✅ k = −2, sehingga P(−2, 0). Ketiga titik terletak pada garis <InlineMath math="y = x + 2" /> dengan gradien m = 1.</p>
+                    <p className="text-sm font-bold text-red-300">{t.c4_ans}</p>
                   </div>
                 </div>
               </div>
@@ -774,22 +855,16 @@ const GradienPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title="📌 Rangkuman" />
+            <SH id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_rangkuman} />
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
-                  {[
-                    ["Gradien (m)", "Ukuran kemiringan garis = Δy/Δx"],
-                    ["Dari y=mx+c", "m adalah koefisien x langsung"],
-                    ["Dari ax+by+c=0", "Ubah ke y=mx+c dulu, m = −a/b"],
-                    ["Dari 2 titik", "m = (y₂−y₁)/(x₂−x₁)"],
-                    ["m > 0", "Garis naik; m < 0 = Garis turun; m = 0 = Horizontal"],
-                  ].map(([t,d]) => (
-                    <div key={t} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80"><strong className="text-cyan-300">{t}:</strong> {d}</p></div>
+                  {t.rang_items.map(([term, desc]) => (
+                    <div key={term} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80"><strong className="text-cyan-300">{term}:</strong> {desc}</p></div>
                   ))}
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="text-xs text-yellow-200 font-body"><strong>💡 Trik cepat ax+by+c=0:</strong> gradien = <InlineMath math="m = -\frac{a}{b}" />. Contoh: 3x − 2y + 1 = 0 → m = −(3)/(−2) = 3/2</p>
+                  <p className="text-xs text-yellow-200 font-body">{t.rang_tip} <InlineMath math="m = -\frac{a}{b}" />.</p>
                 </div>
               </div>
             )}
