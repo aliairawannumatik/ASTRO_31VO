@@ -25,42 +25,7 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Hitung nilai fungsi } f \\text{ untuk } x = -4." },
     ],
   }),
-  Qn(2, "Substitusi ke Fungsi – ANBK Style", {
-    type: "mixed",
-    content: "Diketahui f(x) = 5x − 2 dan g(x) = x + 8.",
-    parts: [
-      { label: "a.", math: "f(3) + g(3) = \\ldots" },
-      { label: "b.", math: "f(2) \\times g(1) = \\ldots" },
-    ],
-  }),
-  Qn(3, "Terapan Fungsi – Temperatur", {
-    type: "mixed",
-    content: "Konversi Celsius ke Fahrenheit: F(C) = (9/5)C + 32.",
-    parts: [
-      { label: "a.", math: "F(0) = \\ldots ^\\circ F" },
-      { label: "b.", math: "F(100) = \\ldots ^\\circ F" },
-    ],
-  }),
-  Qn(4, "Bayangan dan Nilai Balik Fungsi", {
-    type: "mixed",
-    content: "Fungsi f didefinisikan sebagai f(x) = 4x − 5.",
-    parts: [
-      { label: "a.", math: "\\text{Tentukan bayangan } x = 3 \\text{ oleh fungsi } f." },
-      { label: "b.", math: "\\text{Tentukan nilai } n \\text{ jika } f(n) = 7." },
-    ],
-  }),
-  Qn(5, "Nilai Fungsi – Berbagai Kasus", {
-    type: "mixed",
-    content: "Diketahui fungsi f: x → 4x + 3 pada himpunan bilangan bulat.",
-    parts: [
-      { label: "a.", math: "f(2) = \\ldots" },
-      { label: "b.", math: "\\text{Bayangan } (-3) \\text{ oleh } f = \\ldots" },
-      { label: "c.", math: "\\text{Nilai } f \\text{ untuk } x = 4 \\text{ adalah} \\ldots" },
-      { label: "d.", math: "\\text{Tentukan nilai } x \\text{ agar } f(x) = 15." },
-      { label: "e.", math: "\\text{Tentukan nilai } k \\text{ jika } f(k) = 27." },
-    ],
-  }),
-  Qn(6, "Menghitung Nilai Fungsi Linear", {
+  Qn(2, "Menghitung Nilai Fungsi Linear", {
     type: "mixed",
     mathContent: "f(x) = 3x - 5",
     parts: [
@@ -71,7 +36,7 @@ const questions: Q[] = [
       { label: "e.", math: "f(2a - 1) = \\ldots" },
     ],
   }),
-  Qn(7, "Menghitung Nilai Fungsi Kuadrat", {
+  Qn(3, "Menghitung Nilai Fungsi Kuadrat", {
     type: "mixed",
     mathContent: "g(x) = x^2 - 2x + 3",
     parts: [
@@ -79,6 +44,41 @@ const questions: Q[] = [
       { label: "b.", math: "g(3) = \\ldots" },
       { label: "c.", math: "g(-2) = \\ldots" },
       { label: "d.", math: "g(1) = \\ldots" },
+    ],
+  }),
+  Qn(4, "Substitusi ke Fungsi – ANBK Style", {
+    type: "mixed",
+    content: "Diketahui f(x) = 5x − 2 dan g(x) = x + 8.",
+    parts: [
+      { label: "a.", math: "f(3) + g(3) = \\ldots" },
+      { label: "b.", math: "f(2) \\times g(1) = \\ldots" },
+    ],
+  }),
+  Qn(5, "Terapan Fungsi – Temperatur", {
+    type: "mixed",
+    content: "Konversi Celsius ke Fahrenheit: F(C) = (9/5)C + 32.",
+    parts: [
+      { label: "a.", math: "F(0) = \\ldots ^\\circ F" },
+      { label: "b.", math: "F(100) = \\ldots ^\\circ F" },
+    ],
+  }),
+  Qn(6, "Bayangan dan Nilai Balik Fungsi", {
+    type: "mixed",
+    content: "Fungsi f didefinisikan sebagai f(x) = 4x − 5.",
+    parts: [
+      { label: "a.", math: "\\text{Tentukan bayangan } x = 3 \\text{ oleh fungsi } f." },
+      { label: "b.", math: "\\text{Tentukan nilai } n \\text{ jika } f(n) = 7." },
+    ],
+  }),
+  Qn(7, "Nilai Fungsi – Berbagai Kasus", {
+    type: "mixed",
+    content: "Diketahui fungsi f: x → 4x + 3 pada himpunan bilangan bulat.",
+    parts: [
+      { label: "a.", math: "f(2) = \\ldots" },
+      { label: "b.", math: "\\text{Bayangan } (-3) \\text{ oleh } f = \\ldots" },
+      { label: "c.", math: "\\text{Nilai } f \\text{ untuk } x = 4 \\text{ adalah} \\ldots" },
+      { label: "d.", math: "\\text{Tentukan nilai } x \\text{ agar } f(x) = 15." },
+      { label: "e.", math: "\\text{Tentukan nilai } k \\text{ jika } f(k) = 27." },
     ],
   }),
   Qn(8, "Soal UN – Notasi dan Rumus Fungsi", {
