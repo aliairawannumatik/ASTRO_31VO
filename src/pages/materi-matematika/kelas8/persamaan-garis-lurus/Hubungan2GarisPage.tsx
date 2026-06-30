@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronUp, Lightbulb, Target, Layers, GitBranch } from "lucide-react";
@@ -84,8 +85,61 @@ const SEJ_OPTS = [-2, -1, -0.5, 0.5, 1, 2, 3];
 const TEK_OPTS = [-3, -2, -1, 1, 2, 3];
 const BER_OPTS = [-2, -1, 1, 2, 3];
 
+const T_HUBUNGAN = {
+  id: {
+    title: "HUBUNGAN DUA GARIS",
+    subtitle: "Sejajar, Tegak Lurus, atau Berpotongan?",
+    breadcrumb: "Kelas 8 · Persamaan Garis Lurus · Materi Matematika",
+    sh_intro: "🌟 Tiga Kemungkinan Hubungan Dua Garis",
+    sh_sejajar: "∥ Garis Sejajar",
+    sh_tegaklurus: "⊥ Garis Tegak Lurus (Saling Berpotongan 90°)",
+    sh_berpotongan: "✕ Garis Berpotongan (Tidak Sejajar, Tidak Tegak Lurus)",
+    sh_visual: "🎨 Galeri Visual: Perbandingan Tiga Hubungan Garis",
+    sh_contoh1: "✏️ Contoh 1 — Tingkat Mudah",
+    sh_contoh2: "✏️ Contoh 2 — Tingkat Sedang",
+    sh_contoh3: "✏️ Contoh 3 — Tingkat Sulit",
+    sh_rangkuman: "📌 Rangkuman",
+    back: "← Kembali ke Persamaan Garis Lurus",
+    mudah: "MUDAH", sedang: "SEDANG", sulit: "SULIT",
+  },
+  en: {
+    title: "RELATIONSHIP BETWEEN TWO LINES",
+    subtitle: "Parallel, Perpendicular, or Intersecting?",
+    breadcrumb: "Grade 8 · Equation of a Line · Mathematics",
+    sh_intro: "🌟 Three Possible Relationships Between Two Lines",
+    sh_sejajar: "∥ Parallel Lines",
+    sh_tegaklurus: "⊥ Perpendicular Lines (Intersect at 90°)",
+    sh_berpotongan: "✕ Intersecting Lines (Not Parallel, Not Perpendicular)",
+    sh_visual: "🎨 Visual Gallery: Comparing Three Line Relationships",
+    sh_contoh1: "✏️ Example 1 — Easy Level",
+    sh_contoh2: "✏️ Example 2 — Medium Level",
+    sh_contoh3: "✏️ Example 3 — Hard Level",
+    sh_rangkuman: "📌 Summary",
+    back: "← Back to Equation of a Line",
+    mudah: "EASY", sedang: "MEDIUM", sulit: "HARD",
+  },
+  ja: {
+    title: "2直線の関係",
+    subtitle: "平行・垂直・交差のどれ？",
+    breadcrumb: "中学2年 · 直線の方程式 · 数学",
+    sh_intro: "🌟 2直線の3つの関係",
+    sh_sejajar: "∥ 平行な直線",
+    sh_tegaklurus: "⊥ 垂直な直線（90°で交わる）",
+    sh_berpotongan: "✕ 交差する直線（平行でも垂直でもない）",
+    sh_visual: "🎨 ビジュアルギャラリー：3つの関係を比較",
+    sh_contoh1: "✏️ 例題1 — 基本レベル",
+    sh_contoh2: "✏️ 例題2 — 標準レベル",
+    sh_contoh3: "✏️ 例題3 — 発展レベル",
+    sh_rangkuman: "📌 まとめ",
+    back: "← 直線の方程式に戻る",
+    mudah: "基本", sedang: "標準", sulit: "発展",
+  },
+};
+
 const Hubungan2GarisPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = T_HUBUNGAN[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "sejajar", "tegaklurus", "berpotongan", "visual-trio", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
@@ -112,14 +166,14 @@ const Hubungan2GarisPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <GitBranch className="w-10 h-10 text-primary mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">HUBUNGAN DUA GARIS</h1>
-        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">Sejajar, Tegak Lurus, atau Berpotongan?</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Persamaan Garis Lurus · Materi Matematika</p>
+        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.title}</h1>
+        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.subtitle}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Tiga Kemungkinan Hubungan Dua Garis" />
+            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">Ketika dua garis lurus ada di bidang yang sama, hanya ada tiga kemungkinan hubungan di antara mereka. Hubungan ini ditentukan oleh nilai gradien masing-masing garis.</p>
@@ -142,7 +196,7 @@ const Hubungan2GarisPage = () => {
 
           {/* SEJAJAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="sejajar" icon={<Layers className="w-5 h-5" />} iconColor="text-cyan-400" title="∥ Garis Sejajar" />
+            <SH id="sejajar" icon={<Layers className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_sejajar} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4">
@@ -226,7 +280,7 @@ const Hubungan2GarisPage = () => {
 
           {/* TEGAK LURUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="tegaklurus" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="⊥ Garis Tegak Lurus (Saling Berpotongan 90°)" />
+            <SH id="tegaklurus" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title={t.sh_tegaklurus} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-900/20 border border-violet-500/40 rounded-xl p-4">

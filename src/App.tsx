@@ -675,6 +675,11 @@ const KoordinatCartesiusMGAK8Page = lazy(() => import("./pages/math-game-arena/k
 const RelasiFungsiMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/RelasiFungsiPage"));
 const SPLDVMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/SPLDVPage"));
 const PersamaanGarisLurusMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/PersamaanGarisLurusPage"));
+const GradienPGLGameK8Page = lazy(() => import("./pages/math-game-arena/kelas8/persamaan-garis-lurus/GradienGamePage"));
+const GrafikPGLGameK8Page = lazy(() => import("./pages/math-game-arena/kelas8/persamaan-garis-lurus/GrafikPGLGamePage"));
+const Hubungan2GarisGameK8Page = lazy(() => import("./pages/math-game-arena/kelas8/persamaan-garis-lurus/Hubungan2GarisGamePage"));
+const MenentukanPGLGameK8Page = lazy(() => import("./pages/math-game-arena/kelas8/persamaan-garis-lurus/MenentukanPGLGamePage"));
+const AplikasiKontekstualPGLGameK8Page = lazy(() => import("./pages/math-game-arena/kelas8/persamaan-garis-lurus/AplikasiKontekstualPGLGamePage"));
 const TeoremaPythagorasMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/TeoremaPythagorasPage"));
 const LingkaranMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/LingkaranPage"));
 const GarisSinggungLingkaranMGAK8Page = lazy(() => import("./pages/math-game-arena/kelas8/GarisSinggungLingkaranPage"));
@@ -987,6 +992,10 @@ const AppInner = () => {
           <Route path="/lkpd/kelas-8/spldv/penyelesaian-masalah" element={<SPLDVPenyelesaianMasalahLKPDPage />} />
           <Route path="/lkpd/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusLKPDMenuPage />} />
           <Route path="/lkpd/kelas-8/persamaan-garis-lurus/lkpd" element={<PersamaanGarisLurusLKPDPage />} />
+          <Route path="/lkpd/kelas-8/persamaan-garis-lurus/gradien" element={<PersamaanGarisLurusLKPDPage />} />
+          <Route path="/lkpd/kelas-8/persamaan-garis-lurus/menentukan-pgl" element={<PersamaanGarisLurusLKPDPage />} />
+          <Route path="/lkpd/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<PersamaanGarisLurusLKPDPage />} />
+          <Route path="/lkpd/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<PersamaanGarisLurusLKPDPage />} />
           <Route path="/lkpd/kelas-8/persamaan-garis-lurus/buku-animasi" element={<BukuAnimasiPGLPage />} />
           <Route path="/lkpd/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasLKPDMenuPage />} />
           <Route path="/lkpd/kelas-8/teorema-pythagoras/lkpd" element={<TeoremaPythagorasLKPDPage />} />
@@ -1514,6 +1523,11 @@ const AppInner = () => {
           <Route path="/math-game-arena/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiMGAK8Page />} />
           <Route path="/math-game-arena/kelas-8/spldv" element={<SPLDVMGAK8Page />} />
           <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusMGAK8Page />} />
+          <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/gradien" element={<GradienPGLGameK8Page />} />
+          <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/grafik-pgl" element={<GrafikPGLGameK8Page />} />
+          <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisGameK8Page />} />
+          <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/menentukan-pgl" element={<MenentukanPGLGameK8Page />} />
+          <Route path="/math-game-arena/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualPGLGameK8Page />} />
           <Route path="/math-game-arena/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasMGAK8Page />} />
           <Route path="/math-game-arena/kelas-8/lingkaran" element={<LingkaranMGAK8Page />} />
           <Route path="/math-game-arena/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMGAK8Page />} />

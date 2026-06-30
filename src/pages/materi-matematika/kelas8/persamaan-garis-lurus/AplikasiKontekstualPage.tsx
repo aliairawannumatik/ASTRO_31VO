@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Globe } from "lucide-react";
@@ -248,18 +249,18 @@ const AplikasiKontekstualPage = () => {
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-cyan-300 font-semibold mb-1">a) Identifikasi titik-titik: (2, 11) dan (5, 17)</p>
                     <p className="text-white/60 text-xs mb-1">Hitung gradien (laju pertumbuhan per hari):</p>
-                    <BlockMath math="m = \frac{17 - 11}{5 - 2} = \frac{6}{3} = 2 \text{ cm/hari}" />
+                    <BlockMath math="m = \frac{17 - 11}{5 - 2} = \frac{6}{3} = 2" />
                     <p className="text-white/60 text-xs mb-1">Gunakan titik (2, 11):</p>
                     <BlockMath math="y - 11 = 2(x - 2) \Rightarrow y = 2x + 7" />
                     <p className="text-green-300 font-bold text-xs">Model: y = 2x + 7 (y = tinggi cm, x = hari)</p>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-violet-300 font-semibold mb-1">b) Tinggi pada hari ke-10:</p>
-                    <BlockMath math="y = 2(10) + 7 = 27 \text{ cm}" />
+                    <BlockMath math="y = 2(10) + 7 = 27" />
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-orange-300 font-semibold mb-1">c) Tinggi awal (x = 0):</p>
-                    <BlockMath math="y = 2(0) + 7 = 7 \text{ cm}" />
+                    <BlockMath math="y = 2(0) + 7 = 7" />
                     <p className="text-green-300 font-bold text-xs">Tinggi awal = 7 cm (nilai c dalam persamaan!)</p>
                   </div>
                   {/* Grafik pertumbuhan */}
@@ -326,7 +327,7 @@ const AplikasiKontekstualPage = () => {
                     <p className="text-cyan-300 font-semibold mb-1">a) Model Persamaan Biaya (dalam Rp ribu):</p>
                     <p className="text-white/60 text-xs mb-1">x = jumlah tas, y = biaya (Rp ribu)</p>
                     <p className="text-white/60 text-xs mb-1">Dua titik: (20, 900) dan (50, 1800)</p>
-                    <BlockMath math="m = \frac{1800 - 900}{50 - 20} = \frac{900}{30} = 30 \text{ (Rp 30.000/tas)}" />
+                    <BlockMath math="m = \frac{1800 - 900}{50 - 20} = \frac{900}{30} = 30" />
                     <BlockMath math="y - 900 = 30(x - 20)" />
                     <BlockMath math="y = 30x + 300" />
                     <p className="text-green-300 font-bold text-xs">Model biaya: y = 30x + 300</p>
@@ -347,7 +348,7 @@ const AplikasiKontekstualPage = () => {
                     <p className="text-green-300 font-semibold mb-1">d) Titik impas (Break Even Point):</p>
                     <p className="text-white/60 text-xs mb-1">Pendapatan = Biaya → 45x = 30x + 300</p>
                     <BlockMath math="45x = 30x + 300" />
-                    <BlockMath math="15x = 300 \Rightarrow x = 20 \text{ tas}" />
+                    <BlockMath math="15x = 300 \Rightarrow x = 20" />
                   </div>
                   {/* Grafik BEP */}
                   <div className="bg-slate-800/50 rounded-lg p-3">

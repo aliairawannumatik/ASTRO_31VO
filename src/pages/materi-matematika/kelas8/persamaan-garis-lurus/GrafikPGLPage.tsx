@@ -7,6 +7,58 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import GeoGebraGrapher from "@/components/GeoGebraGrapher";
 import EquasiGarisLurusAnim from "@/components/EquasiGarisLurusAnim";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const T_GRAFIK = {
+  id: {
+    title: "GRAFIK PERSAMAAN GARIS LURUS",
+    subtitle: "Gambar Garis Lurus di Bidang Koordinat!",
+    breadcrumb: "Kelas 8 · Persamaan Garis Lurus · Materi Matematika",
+    sh_intro: "🌟 Garis Lurus — Ada di Mana-mana!",
+    sh_konsep: "📘 Bentuk Umum Persamaan Garis Lurus",
+    sh_titikpotong: "📌 Menggambar Grafik Persamaan Garis dengan 2 Titik Potong Sumbu X dan Sumbu Y",
+    sh_titikacak: "📐 Cara Menggambar Persamaan Garis dengan Menggunakan Dua Titik Acak",
+    sh_contoh1: "✏️ Contoh 1 — Tingkat Mudah",
+    sh_contoh2: "✏️ Contoh 2 — Tingkat Sedang",
+    sh_contoh3: "✏️ Contoh 3 — Tingkat Sulit",
+    sh_rangkuman: "📌 Rangkuman",
+    back: "← Kembali ke Persamaan Garis Lurus",
+    mudah: "MUDAH", sedang: "SEDANG", sulit: "SULIT",
+    prev: "← Sebelumnya", next: "Selanjutnya →", repeat: "🔄 Ulangi",
+  },
+  en: {
+    title: "GRAPHING LINEAR EQUATIONS",
+    subtitle: "Draw Straight Lines on the Coordinate Plane!",
+    breadcrumb: "Grade 8 · Equation of a Line · Mathematics",
+    sh_intro: "🌟 Straight Lines — They're Everywhere!",
+    sh_konsep: "📘 General Form of a Linear Equation",
+    sh_titikpotong: "📌 Drawing a Line Using x- and y-Intercepts",
+    sh_titikacak: "📐 Drawing a Line Using Any Two Points",
+    sh_contoh1: "✏️ Example 1 — Easy Level",
+    sh_contoh2: "✏️ Example 2 — Medium Level",
+    sh_contoh3: "✏️ Example 3 — Hard Level",
+    sh_rangkuman: "📌 Summary",
+    back: "← Back to Equation of a Line",
+    mudah: "EASY", sedang: "MEDIUM", sulit: "HARD",
+    prev: "← Previous", next: "Next →", repeat: "🔄 Repeat",
+  },
+  ja: {
+    title: "一次方程式のグラフ",
+    subtitle: "座標平面に直線を描こう！",
+    breadcrumb: "中学2年 · 直線の方程式 · 数学",
+    sh_intro: "🌟 直線 — あちこちにある！",
+    sh_konsep: "📘 一次方程式の一般形",
+    sh_titikpotong: "📌 x切片・y切片を使って直線を描く",
+    sh_titikacak: "📐 任意の2点を使って直線を描く",
+    sh_contoh1: "✏️ 例題1 — 基本レベル",
+    sh_contoh2: "✏️ 例題2 — 標準レベル",
+    sh_contoh3: "✏️ 例題3 — 発展レベル",
+    sh_rangkuman: "📌 まとめ",
+    back: "← 直線の方程式に戻る",
+    mudah: "基本", sedang: "標準", sulit: "発展",
+    prev: "← 前へ", next: "次へ →", repeat: "🔄 繰り返す",
+  },
+};
 
 /* ─── SVG helpers ─── */
 const W = 200, H = 160, MX = 100, MY = 80, SC = 16;
@@ -363,6 +415,8 @@ const MCQGrafik1: React.FC = () => {
 
 const GrafikPGLPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = T_GRAFIK[language];
   const SH = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4 border-b border-white/10">
       <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
@@ -378,14 +432,14 @@ const GrafikPGLPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <TrendingUp className="w-10 h-10 text-primary mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">GRAFIK PERSAMAAN GARIS LURUS</h1>
-        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">Gambar Garis Lurus di Bidang Koordinat!</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Persamaan Garis Lurus · Materi Matematika</p>
+        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.title}</h1>
+        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.subtitle}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Garis Lurus — Ada di Mana-mana!" />
+            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -442,7 +496,7 @@ const GrafikPGLPage = () => {
 
           {/* KONSEP */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="konsep" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Bentuk Umum Persamaan Garis Lurus" />
+            <SH id="konsep" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title={t.sh_konsep} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
@@ -639,7 +693,7 @@ const GrafikPGLPage = () => {
 
           {/* METODE 1 — 2 TITIK POTONG SUMBU */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="titik-potong" icon={<BookOpen className="w-5 h-5" />} iconColor="text-orange-400" title="📌 Menggambar Grafik Persamaan Garis dengan 2 Titik Potong Sumbu X dan Sumbu Y" />
+            <SH id="titik-potong" icon={<BookOpen className="w-5 h-5" />} iconColor="text-orange-400" title={t.sh_titikpotong} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">

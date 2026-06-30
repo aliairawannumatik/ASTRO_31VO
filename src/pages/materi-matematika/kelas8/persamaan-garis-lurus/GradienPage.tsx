@@ -9,6 +9,190 @@ import { InlineMath, BlockMath } from "react-katex";
 import GradienInvariantAnimation from "@/components/GradienInvariantAnimation";
 import GradienDuaTitikInteraktif from "@/components/GradienDuaTitikInteraktif";
 import GradienPersamaanInteraktif from "@/components/GradienPersamaanInteraktif";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const T_GRADIEN = {
+  id: {
+    title: "GRADIEN (KEMIRINGAN GARIS)",
+    subtitle: "Seberapa Curam Sebuah Garis?",
+    breadcrumb: "Kelas 8 · Persamaan Garis Lurus · Materi Matematika",
+    sh_intro: "🌟 Gradien — Ukuran Kemiringan Garis",
+    sh_definisi: "📘 Definisi dan Rumus Gradien",
+    sh_tabel: "📊 Tabel Ringkasan Nilai Gradien",
+    sh_animasi: "🎬 Animasi: Gradien Tidak Bergantung Panjang Garis",
+    sh_duatitik: "📍 Gradien Melalui Dua Titik",
+    sh_persamaan: "📐 Gradien dari Persamaan Garis",
+    sh_jenis: "⚡ Garis Horizontal, Vertikal & Melalui Titik Asal",
+    sh_contoh1: "✏️ Contoh 1 — Membaca Gradien dari Grafik Grid",
+    sh_contoh2: "✏️ Contoh 2 — Tingkat Sedang",
+    sh_contoh3: "✏️ Contoh 3 — Tingkat Mudah",
+    sh_contoh4: "✏️ Contoh 4 — Tingkat Sulit",
+    sh_rangkuman: "📌 Rangkuman",
+    back: "← Kembali ke Persamaan Garis Lurus",
+    mudah: "MUDAH", sedang: "SEDANG", sulit: "SULIT",
+    tbl_nilaiM: "Nilai m", tbl_arah: "Arah Garis", tbl_semakin: "Semakin besar |m|",
+    tbl_rows: [
+      ["m > 0", "↗ Naik dari kiri ke kanan", "Semakin curam ke kanan"],
+      ["m < 0", "↘ Turun dari kiri ke kanan", "Semakin curam ke kiri"],
+      ["m = 0", "→ Horizontal (mendatar)", "Tidak berubah"],
+      ["m tidak ada", "↕ Vertikal (x = konstanta)", "Tidak terdefinisi"],
+    ],
+    analogi: [
+      { icon: "🏔️", label: "Lereng Terjal", m: "m = 5", ket: "Naik 5 unit per 1 unit ke kanan", color: "bg-red-900/40 border-red-500/30" },
+      { icon: "🏕️", label: "Lereng Landai", m: "m = 0.5", ket: "Naik 0.5 unit per 1 unit ke kanan", color: "bg-yellow-900/40 border-yellow-500/30" },
+      { icon: "🏖️", label: "Jalan Datar", m: "m = 0", ket: "Tidak naik maupun turun", color: "bg-green-900/40 border-green-500/30" },
+    ],
+    analogyTitle: "⛰️ Analogi Kemiringan dalam Kehidupan",
+    introP: "Tanjakan jalan yang curam vs landai, lereng gunung yang terjal vs miring perlahan — semua punya tingkat kemiringan yang berbeda. Dalam matematika, tingkat kemiringan ini disebut",
+    introKW: "gradien",
+    introP2: "(atau slope).",
+    defSummary: "🎯 Ringkasan Intisari",
+    defP: "adalah perbandingan antara panjang",
+    defSisiTegak: "sisi tegak",
+    defP2: "(jarak naik/turun) dan panjang",
+    defSisiDatar: "sisi datar",
+    defP3: "(jarak ke kanan) dari segitiga siku-siku yang terbentuk di bawah garis.",
+    posLabel: "Gradien",
+    posVal: "POSITIF (+)",
+    posDesc: "Garis naik ke kanan",
+    negVal: "NEGATIF (−)",
+    negDesc: "Garis turun ke kanan",
+    animP: "Seret kedua titik ke posisi mana pun di grid — gradien selalu bisa dihitung dari",
+    animKW1: "sisi datar",
+    animKW2: "sisi tegak",
+    animP2: "di antara keduanya.",
+    duaP: "Jika diketahui dua titik",
+    duaP2: ", gradien garis yang melalui keduanya dihitung dengan rumus:",
+    dyLabel: "Δy = sisi tegak", dxLabel: "Δx = sisi datar",
+    dyDesc: "selisih vertikal", dxDesc: "selisih horizontal",
+    duaHint: "Seret titik",
+    duaHint2: "dan",
+    duaHint3: "ke sembarang posisi — rumus akan terisi otomatis langkah demi langkah.",
+    horizontal: { judul: "Garis Horizontal", eq: "y = c", m: "m = 0", ket: "Gradien 0, sejajar sumbu-x" },
+    vertikal: { judul: "Garis Vertikal", eq: "x = c", m: "m = ∞ (tdk ada)", ket: "Gradien tidak terdefinisi, sejajar sumbu-y" },
+    asal: { judul: "Melalui Titik Asal", eq: "y = mx", m: "c = 0", ket: "Melewati titik (0,0), c=0" },
+  },
+  en: {
+    title: "GRADIENT / SLOPE",
+    subtitle: "How Steep Is a Line?",
+    breadcrumb: "Grade 8 · Equation of a Line · Mathematics",
+    sh_intro: "🌟 Gradient — The Measure of Steepness",
+    sh_definisi: "📘 Definition and Formula",
+    sh_tabel: "📊 Gradient Value Summary Table",
+    sh_animasi: "🎬 Animation: Gradient Is Independent of Line Length",
+    sh_duatitik: "📍 Gradient Through Two Points",
+    sh_persamaan: "📐 Gradient from the Line Equation",
+    sh_jenis: "⚡ Horizontal, Vertical & Lines Through the Origin",
+    sh_contoh1: "✏️ Example 1 — Reading Gradient from a Grid Graph",
+    sh_contoh2: "✏️ Example 2 — Medium Level",
+    sh_contoh3: "✏️ Example 3 — Easy Level",
+    sh_contoh4: "✏️ Example 4 — Hard Level",
+    sh_rangkuman: "📌 Summary",
+    back: "← Back to Equation of a Line",
+    mudah: "EASY", sedang: "MEDIUM", sulit: "HARD",
+    tbl_nilaiM: "m value", tbl_arah: "Line Direction", tbl_semakin: "As |m| increases",
+    tbl_rows: [
+      ["m > 0", "↗ Rising left to right", "Steeper to the right"],
+      ["m < 0", "↘ Falling left to right", "Steeper to the left"],
+      ["m = 0", "→ Horizontal (flat)", "No change"],
+      ["m undefined", "↕ Vertical (x = const)", "Undefined"],
+    ],
+    analogi: [
+      { icon: "🏔️", label: "Steep Slope", m: "m = 5", ket: "Rise 5 units per 1 unit right", color: "bg-red-900/40 border-red-500/30" },
+      { icon: "🏕️", label: "Gentle Slope", m: "m = 0.5", ket: "Rise 0.5 units per 1 unit right", color: "bg-yellow-900/40 border-yellow-500/30" },
+      { icon: "🏖️", label: "Flat Road", m: "m = 0", ket: "No rise or fall", color: "bg-green-900/40 border-green-500/30" },
+    ],
+    analogyTitle: "⛰️ Real-World Analogies for Steepness",
+    introP: "A steep hill vs. a gentle slope — all have different degrees of inclination. In mathematics, this degree of inclination is called the",
+    introKW: "gradient",
+    introP2: "(or slope).",
+    defSummary: "🎯 Key Concept",
+    defP: "is the ratio between the length of the",
+    defSisiTegak: "vertical side",
+    defP2: "(rise) and the length of the",
+    defSisiDatar: "horizontal side",
+    defP3: "(run) of the right triangle formed below the line.",
+    posLabel: "Gradient",
+    posVal: "POSITIVE (+)",
+    posDesc: "Line rises to the right",
+    negVal: "NEGATIVE (−)",
+    negDesc: "Line falls to the right",
+    animP: "Drag both points anywhere on the grid — the gradient can always be computed from the",
+    animKW1: "horizontal side",
+    animKW2: "vertical side",
+    animP2: "between them.",
+    duaP: "Given two points",
+    duaP2: ", the gradient of the line through them is:",
+    dyLabel: "Δy = vertical side", dxLabel: "Δx = horizontal side",
+    dyDesc: "vertical difference", dxDesc: "horizontal difference",
+    duaHint: "Drag point",
+    duaHint2: "and",
+    duaHint3: "to any position — the formula will auto-fill step by step.",
+    horizontal: { judul: "Horizontal Line", eq: "y = c", m: "m = 0", ket: "Slope 0, parallel to x-axis" },
+    vertikal: { judul: "Vertical Line", eq: "x = c", m: "m = ∞ (undefined)", ket: "Slope undefined, parallel to y-axis" },
+    asal: { judul: "Through the Origin", eq: "y = mx", m: "c = 0", ket: "Passes through (0,0), c=0" },
+  },
+  ja: {
+    title: "傾き（グラジエン）",
+    subtitle: "直線の傾きはどれくらい？",
+    breadcrumb: "中学2年 · 直線の方程式 · 数学",
+    sh_intro: "🌟 傾き — 直線の急さの尺度",
+    sh_definisi: "📘 定義と公式",
+    sh_tabel: "📊 傾きの値まとめ表",
+    sh_animasi: "🎬 アニメーション：傾きは直線の長さに依存しない",
+    sh_duatitik: "📍 2点から傾きを求める",
+    sh_persamaan: "📐 方程式から傾きを読む",
+    sh_jenis: "⚡ 水平線・垂直線・原点を通る直線",
+    sh_contoh1: "✏️ 例題1 — グリッドグラフから傾きを読む",
+    sh_contoh2: "✏️ 例題2 — 標準レベル",
+    sh_contoh3: "✏️ 例題3 — 基本レベル",
+    sh_contoh4: "✏️ 例題4 — 発展レベル",
+    sh_rangkuman: "📌 まとめ",
+    back: "← 直線の方程式に戻る",
+    mudah: "基本", sedang: "標準", sulit: "発展",
+    tbl_nilaiM: "m の値", tbl_arah: "直線の方向", tbl_semakin: "|m| が大きくなるほど",
+    tbl_rows: [
+      ["m > 0", "↗ 左から右へ上がる", "右に急になる"],
+      ["m < 0", "↘ 左から右へ下がる", "左に急になる"],
+      ["m = 0", "→ 水平（平ら）", "変化なし"],
+      ["m 未定義", "↕ 垂直（x = 定数）", "未定義"],
+    ],
+    analogi: [
+      { icon: "🏔️", label: "急な斜面", m: "m = 5", ket: "右に1進むと5上がる", color: "bg-red-900/40 border-red-500/30" },
+      { icon: "🏕️", label: "緩やかな斜面", m: "m = 0.5", ket: "右に1進むと0.5上がる", color: "bg-yellow-900/40 border-yellow-500/30" },
+      { icon: "🏖️", label: "平坦な道", m: "m = 0", ket: "上りも下りもなし", color: "bg-green-900/40 border-green-500/30" },
+    ],
+    analogyTitle: "⛰️ 傾きの現実世界のたとえ",
+    introP: "急な坂と緩やかな坂 — どちらも傾きの度合いが違います。数学では、この傾きの度合いを",
+    introKW: "傾き（グラジエン）",
+    introP2: "と呼びます。",
+    defSummary: "🎯 重要概念",
+    defP: "とは、直線の下に作られる直角三角形の",
+    defSidiTegak: "垂直辺",
+    defP2: "（上昇分）と",
+    defSisiDatar: "水平辺",
+    defP3: "（水平距離）の比です。",
+    posLabel: "傾き",
+    posVal: "正（＋）",
+    posDesc: "右上がりの直線",
+    negVal: "負（－）",
+    negDesc: "右下がりの直線",
+    animP: "グリッド上の2点をどこでもドラッグ — 傾きはその間の",
+    animKW1: "水平辺",
+    animKW2: "垂直辺",
+    animP2: "から常に計算できます。",
+    duaP: "2点",
+    duaP2: "を通る直線の傾きは次の公式で求めます：",
+    dyLabel: "Δy = 垂直辺", dxLabel: "Δx = 水平辺",
+    dyDesc: "垂直方向の差", dxDesc: "水平方向の差",
+    duaHint: "点",
+    duaHint2: "と",
+    duaHint3: "をどこへでもドラッグ — 公式がステップごとに自動入力されます。",
+    horizontal: { judul: "水平線", eq: "y = c", m: "m = 0", ket: "傾き0、x軸に平行" },
+    vertikal: { judul: "垂直線", eq: "x = c", m: "m = ∞（未定義）", ket: "傾き未定義、y軸に平行" },
+    asal: { judul: "原点を通る直線", eq: "y = mx", m: "c = 0", ket: "点(0,0)を通る、c=0" },
+  },
+};
 
 const W = 180, H = 150, MX = 90, MY = 75, SC = 14;
 const toX = (x: number) => MX + x * SC;
@@ -37,6 +221,8 @@ const CoordSys = ({ children, label = "", w = W, h = H }: { children?: React.Rea
 
 const GradienPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = T_GRADIEN[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "definisi", "tabelgradien", "animasi", "duatitik", "persamaan", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
@@ -57,14 +243,14 @@ const GradienPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <Sliders className="w-10 h-10 text-primary mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">GRADIEN (KEMIRINGAN GARIS)</h1>
-        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">Seberapa Curam Sebuah Garis?</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Persamaan Garis Lurus · Materi Matematika</p>
+        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.title}</h1>
+        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.subtitle}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Gradien — Ukuran Kemiringan Garis" />
+            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
@@ -105,7 +291,7 @@ const GradienPage = () => {
 
           {/* DEFINISI & RUMUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="definisi" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📘 Definisi dan Rumus Gradien" />
+            <SH id="definisi" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title={t.sh_definisi} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
@@ -116,7 +302,7 @@ const GradienPage = () => {
                     <strong className="text-green-300">sisi datar</strong> (jarak ke kanan) dari segitiga siku-siku yang terbentuk di bawah garis.
                   </p>
                   <div className="bg-violet-900/40 border border-violet-400/30 rounded-xl p-4 mt-3 text-center">
-                    <BlockMath math="m = \frac{\text{panjang sisi tegak}}{\text{panjang sisi datar}}" />
+                    <BlockMath math="m = \frac{\Delta y}{\Delta x}" />
                   </div>
                 </div>
 
@@ -167,7 +353,7 @@ const GradienPage = () => {
 
           {/* TABEL RINGKASAN NILAI GRADIEN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="tabelgradien" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-amber-400" title="📊 Tabel Ringkasan Nilai Gradien" />
+            <SH id="tabelgradien" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-amber-400" title={t.sh_tabel} />
             {expandedSections.includes("tabelgradien") && (
               <div className="px-5 pb-5">
                 <div className="overflow-x-auto">
@@ -201,7 +387,7 @@ const GradienPage = () => {
 
           {/* JENIS GARIS KHUSUS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="jenis" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-cyan-400" title="⚡ Garis Horizontal, Vertikal & Melalui Titik Asal" />
+            <SH id="jenis" icon={<TrendingUp className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_jenis} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -244,7 +430,7 @@ const GradienPage = () => {
 
           {/* ANIMASI INVARIANSI GRADIEN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="animasi" icon={<PlayCircle className="w-5 h-5" />} iconColor="text-cyan-400" title="🎬 Animasi: Gradien Tidak Bergantung Panjang Garis" />
+            <SH id="animasi" icon={<PlayCircle className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_animasi} />
             {true && (
               <div className="px-5 pb-5 space-y-3">
                 <p className="font-body text-sm text-white/70 leading-relaxed">
@@ -257,7 +443,7 @@ const GradienPage = () => {
 
           {/* GRADIEN MELALUI DUA TITIK */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="duatitik" icon={<Target className="w-5 h-5" />} iconColor="text-violet-400" title="📍 Gradien Melalui Dua Titik" />
+            <SH id="duatitik" icon={<Target className="w-5 h-5" />} iconColor="text-violet-400" title={t.sh_duatitik} />
             {expandedSections.includes("duatitik") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/70 leading-relaxed">
@@ -289,7 +475,7 @@ const GradienPage = () => {
 
           {/* GRADIEN DARI PERSAMAAN GARIS */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="persamaan" icon={<Sliders className="w-5 h-5" />} iconColor="text-cyan-400" title="📐 Gradien dari Persamaan Garis" />
+            <SH id="persamaan" icon={<Sliders className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_persamaan} />
             {expandedSections.includes("persamaan") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/70 leading-relaxed">

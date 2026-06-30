@@ -1,21 +1,19 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { InlineMath, BlockMath } from "react-katex";
+import { InlineMath } from "react-katex";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-/* ─── Grid config ─────────────────────────────────────────── */
-const CELL  = 26;   // px per unit
-const HALF  = 5;    // grid extends ±5 in each axis
+const CELL  = 26;
+const HALF  = 5;
 const COLS  = HALF * 2;
 const ROWS  = HALF * 2;
 const PAD   = 18;
-const W     = PAD * 2 + COLS * CELL;   // 18*2 + 10*26 = 296
-const H     = PAD * 2 + ROWS * CELL;   // 18*2 + 10*26 = 296
+const W     = PAD * 2 + COLS * CELL;
+const H     = PAD * 2 + ROWS * CELL;
 
-/* convert math coords → SVG pixels */
 const toSVG = (mx: number, my: number): [number, number] => [
   PAD + (mx + HALF) * CELL,
   PAD + (HALF - my) * CELL,
 ];
-/* convert SVG pixels → math coords (snap to integer) */
 const toMath = (sx: number, sy: number): [number, number] => {
   const mx = Math.round((sx - PAD) / CELL - HALF);
   const my = Math.round(HALF - (sy - PAD) / CELL);
@@ -38,7 +36,7 @@ function simplify(num: number, den: number): [number, number] {
 }
 
 function mLatex(dy: number, dx: number): string {
-  if (dx === 0) return "\\text{tidak terdefinisi}";
+  if (dx === 0) return "\\nexists";
   if (dy === 0) return "0";
   const [n, d] = simplify(dy, dx);
   const sign = n * d > 0 ? "+" : "-";
@@ -48,11 +46,58 @@ function mLatex(dy: number, dx: number): string {
 
 function numStr(v: number): string {
   if (v >= 0) return String(v);
-  return `(${v})`;          // wrap negatives: (−3)
+  return `(${v})`;
 }
 
-/* ─── Component ──────────────────────────────────────────── */
+const labelOffset = (sx: number, sy: number): [number, number] => {
+  const inRight = sx < W / 2;
+  const inTop   = sy > H / 2;
+  return [inRight ? 10 : -10, inTop ? 12 : -8];
+};
+
+const translations = {
+  id: {
+    dragHint: "Seret P₁ dan P₂ ke posisi berbeda",
+    verticalHint: "garis tegak lurus (vertikal)",
+    mUndefined: "tidak terdefinisi",
+    formulaLabel: "Rumus:",
+    subsLabel: "Substitusi:",
+    calcLabel: "Hitung:",
+    resultLabel: "Hasil:",
+    positive: "(positif ↗)",
+    negative: "(negatif ↘)",
+    horizontal: "(horizontal →)",
+  },
+  en: {
+    dragHint: "Drag P₁ and P₂ to different positions",
+    verticalHint: "vertical line (undefined slope)",
+    mUndefined: "undefined",
+    formulaLabel: "Formula:",
+    subsLabel: "Substitute:",
+    calcLabel: "Simplify:",
+    resultLabel: "Result:",
+    positive: "(positive ↗)",
+    negative: "(negative ↘)",
+    horizontal: "(horizontal →)",
+  },
+  ja: {
+    dragHint: "P₁とP₂を別の位置にドラッグ",
+    verticalHint: "垂直線（傾き未定義）",
+    mUndefined: "未定義",
+    formulaLabel: "公式：",
+    subsLabel: "代入：",
+    calcLabel: "計算：",
+    resultLabel: "結果：",
+    positive: "（正 ↗）",
+    negative: "（負 ↘）",
+    horizontal: "（水平 →）",
+  },
+};
+
 export default function GradienDuaTitikInteraktif() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [p1, setP1] = useState<[number, number]>([-3, -1]);
   const [p2, setP2] = useState<[number, number]>([3, 3]);
   const svgRef    = useRef<SVGSVGElement>(null);
@@ -67,8 +112,6 @@ export default function GradienDuaTitikInteraktif() {
     return toMath(sx, sy);
   }, []);
 
-  /* Attach move/up listeners on WINDOW so drag never breaks
-     when the cursor leaves the SVG boundary                  */
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
       if (!dragging.current) return;
@@ -77,12 +120,11 @@ export default function GradienDuaTitikInteraktif() {
       else setP2(pos);
     };
     const onMouseUp = () => { dragging.current = null; };
-
     const onTouchMove = (e: TouchEvent) => {
       if (!dragging.current) return;
       e.preventDefault();
-      const t = e.touches[0];
-      const pos = getMathPos(t.clientX, t.clientY);
+      const touch = e.touches[0];
+      const pos = getMathPos(touch.clientX, touch.clientY);
       if (dragging.current === "p1") setP1(pos);
       else setP2(pos);
     };
@@ -108,10 +150,8 @@ export default function GradienDuaTitikInteraktif() {
   const dy = y2 - y1;
   const samePoint = dx === 0 && dy === 0;
 
-  /* corner of right-angle triangle */
   const [csx, csy] = toSVG(x2, y1);
 
-  /* extended line endpoints */
   const extLine = (() => {
     if (dx === 0) {
       const [ex, ey1] = toSVG(x1, -HALF);
@@ -126,9 +166,7 @@ export default function GradienDuaTitikInteraktif() {
     return { x1: elx, y1: ely, x2: erx, y2: ery };
   })();
 
-  /* LaTeX pieces */
   const mResult   = mLatex(dy, dx);
-  const [n, d]    = simplify(dy, dx);
   const stepSubs  = dx !== 0
     ? `\\frac{${numStr(y2)} - ${numStr(y1)}}{${numStr(x2)} - ${numStr(x1)}}`
     : "";
@@ -136,19 +174,11 @@ export default function GradienDuaTitikInteraktif() {
     ? `\\frac{${dy}}{${dx}}`
     : "";
 
-  /* label offset helper — push label away from point */
-  const labelOffset = (sx: number, sy: number): [number, number] => {
-    const inRight = sx < W / 2;
-    const inTop   = sy > H / 2;
-    return [inRight ? 10 : -10, inTop ? 12 : -8];
-  };
   const [lo1x, lo1y] = labelOffset(sx1, sy1);
   const [lo2x, lo2y] = labelOffset(sx2, sy2);
 
   return (
     <div className="space-y-3">
-
-      {/* ── Grid ── */}
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
@@ -160,7 +190,6 @@ export default function GradienDuaTitikInteraktif() {
           touchAction: "none",
         }}
       >
-        {/* Minor grid */}
         {Array.from({ length: COLS + 1 }, (_, i) => (
           <line key={`vc${i}`}
             x1={PAD + i * CELL} y1={PAD}
@@ -174,7 +203,6 @@ export default function GradienDuaTitikInteraktif() {
             stroke="#1a2744" strokeWidth="1" />
         ))}
 
-        {/* Axes */}
         {(() => {
           const [ox, oy] = toSVG(0, 0);
           return (
@@ -185,31 +213,24 @@ export default function GradienDuaTitikInteraktif() {
           );
         })()}
 
-        {/* Extended faint line */}
         {!samePoint && (
           <line {...extLine}
             stroke="#a78bfa" strokeWidth="1.2" opacity="0.25" strokeLinecap="round" />
         )}
 
-        {/* Right-angle triangle */}
         {!samePoint && dx !== 0 && dy !== 0 && (
           <>
-            {/* sisi datar */}
             <line x1={sx1} y1={sy1} x2={csx} y2={csy}
               stroke="#4ade80" strokeWidth="2" strokeDasharray="5,2.5" opacity="0.9" />
-            {/* sisi tegak */}
             <line x1={csx} y1={csy} x2={sx2} y2={sy2}
               stroke="#f472b6" strokeWidth="2" strokeDasharray="5,2.5" opacity="0.9" />
-            {/* right-angle mark */}
             <polyline
               points={`${csx+(dx>0?-6:6)},${csy} ${csx+(dx>0?-6:6)},${csy+(dy>0?6:-6)} ${csx},${csy+(dy>0?6:-6)}`}
               fill="none" stroke="#ffffff" strokeWidth="1" opacity="0.3" />
-            {/* Δx label */}
             <text x={(sx1+csx)/2} y={csy+(dy>=0?13:-5)}
               fill="#4ade80" fontSize="10" fontWeight="bold" textAnchor="middle">
               Δx = {dx}
             </text>
-            {/* Δy label */}
             <text
               x={csx+(dx>=0?10:-10)} y={(csy+sy2)/2+4}
               fill="#f472b6" fontSize="10" fontWeight="bold"
@@ -219,13 +240,11 @@ export default function GradienDuaTitikInteraktif() {
           </>
         )}
 
-        {/* Segment P1→P2 */}
         {!samePoint && (
           <line x1={sx1} y1={sy1} x2={sx2} y2={sy2}
             stroke="#a78bfa" strokeWidth="3" strokeLinecap="round" />
         )}
 
-        {/* P1 handle */}
         <g style={{ cursor: "grab" }}
           onMouseDown={e => { e.preventDefault(); dragging.current = "p1"; }}
           onTouchStart={e => { e.preventDefault(); dragging.current = "p1"; }}>
@@ -237,7 +256,6 @@ export default function GradienDuaTitikInteraktif() {
           </text>
         </g>
 
-        {/* P2 handle */}
         <g style={{ cursor: "grab" }}
           onMouseDown={e => { e.preventDefault(); dragging.current = "p2"; }}
           onTouchStart={e => { e.preventDefault(); dragging.current = "p2"; }}>
@@ -250,43 +268,40 @@ export default function GradienDuaTitikInteraktif() {
         </g>
       </svg>
 
-      {/* ── Formula Card ── */}
       <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-4 space-y-3">
-
         {samePoint ? (
-          <p className="text-xs text-white/40 font-body text-center">Seret P₁ dan P₂ ke posisi berbeda</p>
+          <p className="text-xs text-white/40 font-body text-center">{t.dragHint}</p>
         ) : dx === 0 ? (
           <div className="text-center space-y-1">
-            <p className="text-xs text-white/60 font-body">Δx = 0 → garis tegak lurus (vertikal)</p>
-            <InlineMath math="m = \text{tidak terdefinisi}" />
+            <p className="text-xs text-white/60 font-body">Δx = 0 → {t.verticalHint}</p>
+            <div className="flex items-center justify-center gap-2">
+              <InlineMath math="m =" />
+              <span className="text-sm font-body text-white/80">{t.mUndefined}</span>
+            </div>
           </div>
         ) : (
           <div className="space-y-2">
-            {/* Step 1 — rumus umum */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] text-white/40 font-body w-14 shrink-0">Rumus:</span>
+              <span className="text-[10px] text-white/40 font-body w-16 shrink-0">{t.formulaLabel}</span>
               <InlineMath math="m = \dfrac{y_2 - y_1}{x_2 - x_1}" />
             </div>
-            {/* Step 2 — substitusi */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] text-white/40 font-body w-14 shrink-0">Substitusi:</span>
+              <span className="text-[10px] text-white/40 font-body w-16 shrink-0">{t.subsLabel}</span>
               <InlineMath math={`m = ${stepSubs}`} />
             </div>
-            {/* Step 3 — simplify */}
             {stepSimp && (
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[10px] text-white/40 font-body w-14 shrink-0">Hitung:</span>
+                <span className="text-[10px] text-white/40 font-body w-16 shrink-0">{t.calcLabel}</span>
                 <InlineMath math={`m = ${stepSimp}`} />
               </div>
             )}
-            {/* Result */}
             <div className="bg-violet-500/15 border border-violet-500/35 rounded-lg px-3 py-2 flex items-center justify-center gap-2">
-              <span className="text-xs text-white/50 font-body">Hasil:</span>
+              <span className="text-xs text-white/50 font-body">{t.resultLabel}</span>
               <span className="text-base font-bold">
                 <InlineMath math={`m = ${mResult}`} />
               </span>
               <span className={`text-xs font-bold font-body ml-1 ${dy / dx > 0 ? "text-green-400" : dy === 0 ? "text-white/50" : "text-red-400"}`}>
-                {dy / dx > 0 ? "(positif ↗)" : dy === 0 ? "(horizontal →)" : "(negatif ↘)"}
+                {dy / dx > 0 ? t.positive : dy === 0 ? t.horizontal : t.negative}
               </span>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Edit } from "lucide-react";
@@ -36,7 +37,7 @@ const _gcd = (a: number, b: number): number => {
   return a || 1;
 };
 const toFrac = (n: number, d: number): string => {
-  if (Math.abs(d) < 1e-9) return "\\text{td}";
+  if (Math.abs(d) < 1e-9) return "\\nexists";
   const ni = Math.round(n), di = Math.round(d);
   if (Math.abs(ni - n) < 1e-4 && Math.abs(di - d) < 1e-4) {
     const g = _gcd(Math.abs(ni), Math.abs(di));
@@ -56,8 +57,58 @@ const gPts = (m: number, c: number) =>
   [-7, -4, -1, 2, 5, 7].map(x => `${toX(x)},${toY(m * x + c)}`).join(' ');
 // ────────────────────────────────────────────────────────────────────────
 
+const T_MENENTUKAN = {
+  id: {
+    title: "MENENTUKAN PERSAMAAN GARIS LURUS",
+    subtitle: "Bangun Persamaan dari Informasi yang Ada!",
+    breadcrumb: "Kelas 8 · Persamaan Garis Lurus · Materi Matematika",
+    sh_intro: "🌟 Dua Skenario Menentukan Persamaan Garis",
+    sh_rumus1: "📐 Skenario 1: Diketahui m dan Satu Titik (x₁, y₁)",
+    sh_rumus2: "📐 Skenario 2: Diketahui Dua Titik",
+    sh_peta: "🗺️ Peta Lengkap: Pilih Rumus yang Tepat!",
+    sh_contoh1: "✏️ Contoh 1 — Tingkat Mudah",
+    sh_contoh2: "✏️ Contoh 2 — Tingkat Sedang",
+    sh_contoh3: "✏️ Contoh 3 — Tingkat Sulit",
+    sh_rangkuman: "📌 Rangkuman",
+    back: "← Kembali ke Persamaan Garis Lurus",
+    mudah: "MUDAH", sedang: "SEDANG", sulit: "SULIT",
+  },
+  en: {
+    title: "FINDING THE EQUATION OF A LINE",
+    subtitle: "Build the Equation from the Given Information!",
+    breadcrumb: "Grade 8 · Equation of a Line · Mathematics",
+    sh_intro: "🌟 Two Scenarios for Finding a Line Equation",
+    sh_rumus1: "📐 Scenario 1: Given m and One Point (x₁, y₁)",
+    sh_rumus2: "📐 Scenario 2: Given Two Points",
+    sh_peta: "🗺️ Complete Map: Choose the Right Formula!",
+    sh_contoh1: "✏️ Example 1 — Easy Level",
+    sh_contoh2: "✏️ Example 2 — Medium Level",
+    sh_contoh3: "✏️ Example 3 — Hard Level",
+    sh_rangkuman: "📌 Summary",
+    back: "← Back to Equation of a Line",
+    mudah: "EASY", sedang: "MEDIUM", sulit: "HARD",
+  },
+  ja: {
+    title: "直線の方程式を求める",
+    subtitle: "与えられた情報から方程式を構築しよう！",
+    breadcrumb: "中学2年 · 直線の方程式 · 数学",
+    sh_intro: "🌟 方程式を求める2つのシナリオ",
+    sh_rumus1: "📐 シナリオ1：傾き m と1点 (x₁, y₁) が与えられた場合",
+    sh_rumus2: "📐 シナリオ2：2点が与えられた場合",
+    sh_peta: "🗺️ 完全マップ：正しい公式を選ぼう！",
+    sh_contoh1: "✏️ 例題1 — 基本レベル",
+    sh_contoh2: "✏️ 例題2 — 標準レベル",
+    sh_contoh3: "✏️ 例題3 — 発展レベル",
+    sh_rangkuman: "📌 まとめ",
+    back: "← 直線の方程式に戻る",
+    mudah: "基本", sedang: "標準", sulit: "発展",
+  },
+};
+
 const MenentukanPGLPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = T_MENENTUKAN[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "rumus1", "rumus2", "peta-rumus", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
@@ -123,14 +174,14 @@ const MenentukanPGLPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <Edit className="w-10 h-10 text-primary mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">MENENTUKAN PERSAMAAN GARIS LURUS</h1>
-        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">Bangun Persamaan dari Informasi yang Ada!</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Persamaan Garis Lurus · Materi Matematika</p>
+        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.title}</h1>
+        <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.subtitle}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title="🌟 Dua Skenario Menentukan Persamaan Garis" />
+            <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">Bergantung pada informasi yang diberikan, ada dua skenario utama untuk menentukan persamaan garis lurus. Pilih rumus yang sesuai dengan data yang tersedia!</p>
@@ -158,7 +209,7 @@ const MenentukanPGLPage = () => {
 
           {/* SKENARIO 1 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rumus1" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title="📐 Skenario 1: Diketahui m dan Satu Titik (x₁, y₁)" />
+            <SH id="rumus1" icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title={t.sh_rumus1} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-900/20 border border-violet-500/40 rounded-xl p-4 text-center">
@@ -277,7 +328,7 @@ const MenentukanPGLPage = () => {
 
           {/* SKENARIO 2 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SH id="rumus2" icon={<Layers className="w-5 h-5" />} iconColor="text-orange-400" title="📐 Skenario 2: Diketahui Dua Titik" />
+            <SH id="rumus2" icon={<Layers className="w-5 h-5" />} iconColor="text-orange-400" title={t.sh_rumus2} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-orange-900/20 border border-orange-500/40 rounded-xl p-4 text-center">
