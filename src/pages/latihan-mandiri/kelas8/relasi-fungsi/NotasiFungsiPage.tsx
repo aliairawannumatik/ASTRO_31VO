@@ -32,7 +32,15 @@ const questions: Q[] = [
       { label: "a.", text: "Tentukan range fungsi f." },
     ],
   }),
-  Qn(3, "Menghitung Nilai Fungsi Kuadrat", {
+  Qn(3, "Substitusi ke Fungsi – ANBK Style", {
+    type: "mixed",
+    content: "Diketahui f(x) = 5x − 2 dan g(x) = x + 8.",
+    parts: [
+      { label: "a.", math: "f(3) + g(3) = \\ldots" },
+      { label: "b.", math: "f(2) \\times g(1) = \\ldots" },
+    ],
+  }),
+  Qn(4, "Menghitung Nilai Fungsi Kuadrat", {
     type: "mixed",
     mathContent: "g(x) = x^2 - 2x + 3",
     parts: [
@@ -41,14 +49,6 @@ const questions: Q[] = [
       { label: "c.", math: "g(-2) = \\ldots" },
       { label: "d.", math: "g(1) = \\ldots" },
       { label: "e.", math: "g(a + 2) = \\ldots" },
-    ],
-  }),
-  Qn(4, "Substitusi ke Fungsi – ANBK Style", {
-    type: "mixed",
-    content: "Diketahui f(x) = 5x − 2 dan g(x) = x + 8.",
-    parts: [
-      { label: "a.", math: "f(3) + g(3) = \\ldots" },
-      { label: "b.", math: "f(2) \\times g(1) = \\ldots" },
     ],
   }),
   Qn(5, "Fungsi dengan Parameter", {
