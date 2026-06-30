@@ -23,7 +23,6 @@ const questions: Q[] = [
     parts: [
       { label: "a.", text: "Tuliskan rumus fungsi f dalam bentuk f(x)." },
       { label: "b.", math: "\\text{Hitung nilai fungsi } f \\text{ untuk } x = -4." },
-      { label: "c.", math: "\\text{Jika } f(k) = 22, \\text{ tentukan nilai } k." },
     ],
   }),
   Qn(2, "Nilai Fungsi – Soal UN Klasik", {
@@ -31,8 +30,7 @@ const questions: Q[] = [
     content: "Diketahui f(x) = 4x + 3.",
     parts: [
       { label: "a.", math: "f(5) = \\ldots" },
-      { label: "b.", math: "\\text{Jika } f(a) = 23,\\ \\text{tentukan } a" },
-      { label: "c.", math: "f(2a - 1) = \\ldots \\text{ (nyatakan dalam } a\\text{)}" },
+      { label: "b.", math: "f(2a - 1) = \\ldots \\text{ (nyatakan dalam } a\\text{)}" },
     ],
   }),
   Qn(3, "Substitusi ke Fungsi – ANBK Style", {
@@ -40,8 +38,7 @@ const questions: Q[] = [
     content: "Diketahui f(x) = 5x − 2 dan g(x) = x + 8.",
     parts: [
       { label: "a.", math: "f(3) + g(3) = \\ldots" },
-      { label: "b.", math: "f(a) = g(a) \\Rightarrow a = \\ldots" },
-      { label: "c.", math: "f(2) \\times g(1) = \\ldots" },
+      { label: "b.", math: "f(2) \\times g(1) = \\ldots" },
     ],
   }),
   Qn(4, "Terapan Fungsi – Temperatur", {
@@ -50,19 +47,9 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "F(0) = \\ldots ^\\circ F" },
       { label: "b.", math: "F(100) = \\ldots ^\\circ F" },
-      { label: "c.", math: "\\text{Jika } F(C) = 95,\\ C = \\ldots ^\\circ C" },
     ],
   }),
-  Qn(5, "Mencari Konstanta Fungsi dari Dua Kondisi", {
-    type: "mixed",
-    content: "Fungsi f didefinisikan f: x → ax + b, dengan a dan b bilangan bulat. Diketahui f(2) = 7 dan f(−3) = −8.",
-    parts: [
-      { label: "a.", text: "Tentukan nilai a dan b." },
-      { label: "b.", text: "Tuliskan rumus fungsi f." },
-      { label: "c.", math: "\\text{Hitung nilai fungsi } f \\text{ untuk } x = 5." },
-    ],
-  }),
-  Qn(6, "Bayangan dan Nilai Balik Fungsi", {
+  Qn(5, "Bayangan dan Nilai Balik Fungsi", {
     type: "mixed",
     content: "Fungsi f didefinisikan sebagai f(x) = 4x − 5.",
     parts: [
@@ -70,7 +57,7 @@ const questions: Q[] = [
       { label: "b.", math: "\\text{Tentukan nilai } n \\text{ jika } f(n) = 7." },
     ],
   }),
-  Qn(7, "Nilai Fungsi – Berbagai Kasus", {
+  Qn(6, "Nilai Fungsi – Berbagai Kasus", {
     type: "mixed",
     content: "Diketahui fungsi f: x → 4x + 3 pada himpunan bilangan bulat.",
     parts: [
@@ -81,7 +68,7 @@ const questions: Q[] = [
       { label: "e.", math: "\\text{Tentukan nilai } k \\text{ jika } f(k) = 27." },
     ],
   }),
-  Qn(8, "Menghitung Nilai Fungsi Linear", {
+  Qn(7, "Menghitung Nilai Fungsi Linear", {
     type: "mixed",
     mathContent: "f(x) = 3x - 5",
     parts: [
@@ -91,7 +78,7 @@ const questions: Q[] = [
       { label: "d.", math: "f\\left(\\frac{1}{3}\\right) = \\ldots" },
     ],
   }),
-  Qn(9, "Menghitung Nilai Fungsi Kuadrat", {
+  Qn(8, "Menghitung Nilai Fungsi Kuadrat", {
     type: "mixed",
     mathContent: "g(x) = x^2 - 2x + 3",
     parts: [
@@ -101,14 +88,14 @@ const questions: Q[] = [
       { label: "d.", math: "g(1) = \\ldots" },
     ],
   }),
-  Qn(10, "Soal UN – Notasi dan Rumus Fungsi", {
+  Qn(9, "Soal UN – Notasi dan Rumus Fungsi", {
     type: "mixed",
     content: "Fungsi f dinyatakan dengan f: x ↦ 3x − 7 dengan domain {−1, 0, 1, 2, 3}.",
     parts: [
       { label: "a.", text: "Tentukan range fungsi f." },
     ],
   }),
-  Qn(11, "Fungsi f(x) = ax + b – Mencari a dan b", {
+  Qn(10, "Fungsi f(x) = ax + b – Mencari a dan b", {
     type: "mixed",
     content: "Diketahui f: x → ax + b dengan f(2) = 7 dan f(5) = 13.",
     parts: [
@@ -117,13 +104,22 @@ const questions: Q[] = [
       { label: "c.", math: "\\text{Tuliskan rumus lengkap fungsi } f(x) = \\ldots" },
     ],
   }),
-  Qn(12, "Fungsi dengan Parameter", {
+  Qn(11, "Fungsi dengan Parameter", {
     type: "mixed",
     content: "Fungsi f(x) = kx − 4. Diketahui f(3) = 11.",
     parts: [
       { label: "a.", math: "\\text{Tentukan nilai } k" },
       { label: "b.", math: "\\text{Hitung } f(6)" },
       { label: "c.", math: "\\text{Jika } f(x) = 31,\\ x = \\ldots" },
+    ],
+  }),
+  Qn(12, "Mencari Konstanta Fungsi dari Dua Kondisi", {
+    type: "mixed",
+    content: "Fungsi f didefinisikan f: x → ax + b, dengan a dan b bilangan bulat. Diketahui f(2) = 7 dan f(−3) = −8.",
+    parts: [
+      { label: "a.", text: "Tentukan nilai a dan b." },
+      { label: "b.", text: "Tuliskan rumus fungsi f." },
+      { label: "c.", math: "\\text{Hitung nilai fungsi } f \\text{ untuk } x = 5." },
     ],
   }),
   Qn(13, "Fungsi dari Soal Cerita – TKA", {
