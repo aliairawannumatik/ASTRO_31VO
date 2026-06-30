@@ -9,6 +9,8 @@ import "katex/dist/katex.min.css";
 import PythagorasRearrangementAnimation from "@/components/PythagorasRearrangementAnimation";
 import PythagorasWaterProof from "@/components/PythagorasWaterProof";
 import PythagorasSquaresAnimation from "@/components/PythagorasSquaresAnimation";
+import PythagorasDiscoveryAnimation from "@/components/PythagorasDiscoveryAnimation";
+import PythagorasStepProof from "@/components/PythagorasStepProof";
 
 /*
   Pembuktian SVG — 4 right-triangles (a=60, b=80, c=100) inside a square (side=140).
@@ -541,6 +543,14 @@ const PembuktianPage = () => {
             </p>
           </div>
 
+          {/* DISCOVERY ANIMATION — Pembuktian 1 */}
+          <div className="bg-card/80 backdrop-blur border border-teal-500/40 rounded-2xl overflow-hidden">
+            <SectionHeader id="discovery" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-teal-400" title={ppt.secProof1}/>
+            <div className="px-4 pb-5">
+              <PythagorasDiscoveryAnimation />
+            </div>
+          </div>
+
           {/* WATER PROOF ANIMATION — Pembuktian 2 */}
           <div className="bg-card/80 backdrop-blur border border-cyan-500/40 rounded-2xl overflow-hidden p-4">
             <PythagorasWaterProof />
@@ -561,6 +571,14 @@ const PembuktianPage = () => {
                 </p>
               </div>
               <PythagorasRearrangementAnimation />
+            </div>
+          </div>
+
+          {/* STEP PROOF — Pembuktian 4 (Step by Step) */}
+          <div className="bg-card/80 backdrop-blur border border-amber-500/40 rounded-2xl overflow-hidden">
+            <SectionHeader id="stepproof" icon={<Target className="w-5 h-5"/>} iconColor="text-amber-400" title={ppt.secProof4}/>
+            <div className="px-4 pb-5">
+              <PythagorasStepProof />
             </div>
           </div>
 
