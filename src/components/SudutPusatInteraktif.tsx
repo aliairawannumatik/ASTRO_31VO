@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const VW = 300, VH = 280;
 const Ox = 150, Oy = 140, R = 105;
@@ -31,19 +32,57 @@ function wedge(cx: number, cy: number, r: number, a1: number, a2: number) {
   return `M ${cx},${cy} L ${f(p1.x)},${f(p1.y)} A ${r},${r} 0 ${large} 0 ${f(p2.x)},${f(p2.y)} Z`;
 }
 
-// Inscribed angle at vertex Cv, looking at arc A→B
-function computeInscribed(cDeg: number, arcDeg: number): number {
-  // By theorem always arcDeg/2 regardless of where C is on major arc
-  return arcDeg / 2;
-}
+const translations = {
+  id: {
+    svgAria: "Animasi interaktif sudut pusat dan sudut keliling",
+    centralBadge: "⭐ Sudut Pusat ∠AOB",
+    inscribedBadge: "🔵 Sudut Keliling ∠ACB",
+    alwaysValid: "✓ selalu berlaku!",
+    dragHint: "geser ✋",
+    sliderLabel: "🎯 Besar Busur AB (Sudut Pusat)",
+    presetLabel: "Coba preset busur:",
+    infoText: (inscribed: number, central: number) =>
+      `Geser titik C ke manapun di sepanjang busur besar — sudut keliling ∠ACB tetap selalu ${inscribed}° (setengah dari sudut pusat ${central}°)! Ini adalah bukti bahwa posisi C tidak mempengaruhi besar sudut keliling, selama menghadap busur yang sama.`,
+    infoC: "Geser titik C",
+    infoPos: "posisi C tidak mempengaruhi besar sudut keliling",
+  },
+  en: {
+    svgAria: "Interactive animation of central and inscribed angles",
+    centralBadge: "⭐ Central Angle ∠AOB",
+    inscribedBadge: "🔵 Inscribed Angle ∠ACB",
+    alwaysValid: "✓ always holds!",
+    dragHint: "drag ✋",
+    sliderLabel: "🎯 Arc AB size (Central Angle)",
+    presetLabel: "Try arc presets:",
+    infoText: (inscribed: number, central: number) =>
+      `Drag point C anywhere along the major arc — the inscribed angle ∠ACB always stays ${inscribed}° (half of central angle ${central}°)! This proves that C's position does not affect the inscribed angle, as long as it faces the same arc.`,
+    infoC: "Drag point C",
+    infoPos: "C's position does not affect the inscribed angle",
+  },
+  ja: {
+    svgAria: "中心角と円周角のインタラクティブアニメーション",
+    centralBadge: "⭐ 中心角 ∠AOB",
+    inscribedBadge: "🔵 円周角 ∠ACB",
+    alwaysValid: "✓ 常に成立！",
+    dragHint: "ドラッグ ✋",
+    sliderLabel: "🎯 弧ABの大きさ（中心角）",
+    presetLabel: "弧のプリセットを試す：",
+    infoText: (inscribed: number, central: number) =>
+      `点Cを大きな弧の任意の場所にドラッグしてください — 円周角∠ACBは常に${inscribed}°（中心角${central}°の半分）のままです！これはCの位置が円周角の大きさに影響しないことを証明しています（同じ弧に向き合う限り）。`,
+    infoC: "点Cをドラッグ",
+    infoPos: "Cの位置は円周角の大きさに影響しない",
+  },
+} as const;
 
 export default function SudutPusatInteraktif() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [arcDeg, setArcDeg] = useState(100);
-  const [cDeg, setCDeg] = useState(250);   // C position on major arc (arcDeg < cDeg < 360)
+  const [cDeg, setCDeg] = useState(250);
   const [dragging, setDragging] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Clamp cDeg to major arc whenever arcDeg changes
   useEffect(() => {
     setCDeg(prev => {
       const min = arcDeg + 5;
@@ -61,7 +100,7 @@ export default function SudutPusatInteraktif() {
     const mx = (clientX - rect.left) * scaleX;
     const my = (clientY - rect.top) * scaleY;
     const dx = mx - Ox;
-    const dy = -(my - Oy); // flip Y for math
+    const dy = -(my - Oy);
     let angle = toDeg(Math.atan2(dy, dx));
     if (angle < 0) angle += 360;
     return angle;
@@ -70,9 +109,7 @@ export default function SudutPusatInteraktif() {
   const clampToMajorArc = useCallback((angle: number): number => {
     const min = arcDeg + 5;
     const max = 355;
-    // Major arc: angle > arcDeg and angle < 360
     if (angle >= min && angle <= max) return angle;
-    // Snap to nearest boundary
     const distMin = Math.abs(angle - min);
     const distMax = Math.abs(angle - max);
     return distMin < distMax ? min : max;
@@ -109,51 +146,39 @@ export default function SudutPusatInteraktif() {
   const centralAngle = arcDeg;
   const inscribedAngle = centralAngle / 2;
 
-  // Minor arc A→B: going CCW from 0° to arcDeg
   const minorLarge: 0|1 = arcDeg > 180 ? 1 : 0;
   const minorArc = arcPath(0, arcDeg, minorLarge, 0);
 
-  // Major arc B→A: going CCW from arcDeg to 360
   const majorSpan = 360 - arcDeg;
   const majorLarge: 0|1 = majorSpan > 180 ? 1 : 0;
   const majorArc = arcPath(arcDeg, 360, majorLarge, 0);
 
-  // Angle arcs
-  // At O: from 0° to arcDeg (central angle sector)
   const centralSector = wedge(Ox, Oy, 26, 0, arcDeg);
 
-  // At C: compute directions of CA and CB from C
   const caDx = A.x - Cv.x, caDy = -(A.y - Cv.y);
   const cbDx = B.x - Cv.x, cbDy = -(B.y - Cv.y);
   const caAngle = toDeg(Math.atan2(caDy, caDx));
   const cbAngle = toDeg(Math.atan2(cbDy, cbDx));
-  // Normalize to 0-360
   const ca = (caAngle + 360) % 360;
   const cb = (cbAngle + 360) % 360;
-  // The inscribed angle sector goes from min to max of ca/cb (CCW direction)
   const inscSectorA = Math.min(ca, cb);
   const inscSectorB = Math.max(ca, cb);
   const inscSpan = inscSectorB - inscSectorA;
-  // Use the smaller span for the angle arc
   const inscribedSector = inscSpan <= 180
     ? wedge(Cv.x, Cv.y, 22, inscSectorA, inscSectorB)
     : wedge(Cv.x, Cv.y, 22, inscSectorB, inscSectorA + 360);
 
-  // Label positions
-  // Central angle label: midpoint direction
   const cMid = arcDeg / 2;
   const cLabelPt = { x: Ox + 38 * Math.cos(toRad(cMid)), y: Oy - 38 * Math.sin(toRad(cMid)) };
 
-  // Inscribed angle label: slightly outside C
   const inscMid = (inscSectorA + inscSectorB) / 2;
   const inscLabelPt = { x: Cv.x + 32 * Math.cos(toRad(inscMid)), y: Cv.y - 32 * Math.sin(toRad(inscMid)) };
 
   return (
     <div className="flex flex-col items-center gap-3 px-1 py-3">
-      {/* Angle display badges */}
       <div className="grid grid-cols-2 gap-3 w-full max-w-sm">
         <div className="bg-amber-900/30 border border-amber-500/40 rounded-xl p-3 text-center">
-          <p className="font-body text-[10px] text-amber-400/80 uppercase tracking-wide mb-1">⭐ Sudut Pusat ∠AOB</p>
+          <p className="font-body text-[10px] text-amber-400/80 uppercase tracking-wide mb-1">{t.centralBadge}</p>
           <motion.p
             key={centralAngle}
             initial={{ scale: 0.85 }}
@@ -165,7 +190,7 @@ export default function SudutPusatInteraktif() {
           <p className="font-body text-[10px] text-amber-400/50 mt-0.5">= α</p>
         </div>
         <div className="bg-purple-900/30 border border-purple-500/40 rounded-xl p-3 text-center">
-          <p className="font-body text-[10px] text-purple-400/80 uppercase tracking-wide mb-1">🔵 Sudut Keliling ∠ACB</p>
+          <p className="font-body text-[10px] text-purple-400/80 uppercase tracking-wide mb-1">{t.inscribedBadge}</p>
           <motion.p
             key={inscribedAngle}
             initial={{ scale: 0.85 }}
@@ -178,15 +203,13 @@ export default function SudutPusatInteraktif() {
         </div>
       </div>
 
-      {/* Ratio indicator */}
       <div className="w-full max-w-sm bg-cyan-900/20 border border-cyan-500/30 rounded-xl px-4 py-2 flex items-center justify-center gap-2">
         <span className="font-display text-sm font-bold text-amber-300">{centralAngle}°</span>
         <span className="font-body text-xs text-white/50">= 2 ×</span>
         <span className="font-display text-sm font-bold text-purple-300">{inscribedAngle}°</span>
-        <span className="font-body text-xs text-cyan-400 ml-1">✓ selalu berlaku!</span>
+        <span className="font-body text-xs text-cyan-400 ml-1">{t.alwaysValid}</span>
       </div>
 
-      {/* SVG */}
       <div className="w-full max-w-xs sm:max-w-sm mx-auto relative">
         <svg
           ref={svgRef}
@@ -197,41 +220,20 @@ export default function SudutPusatInteraktif() {
           onMouseLeave={stopDrag}
           onTouchMove={handleTouchMove}
           onTouchEnd={stopDrag}
-          aria-label="Animasi interaktif sudut pusat dan sudut keliling"
+          aria-label={t.svgAria}
         >
-          {/* Major arc (dim) */}
           <path d={majorArc} fill="none" stroke="#1e3a5f" strokeWidth="6" strokeLinecap="round"/>
-
-          {/* Minor arc (busur AB) */}
           <path d={minorArc} fill="none" stroke="#f59e0b" strokeWidth="5" strokeLinecap="round"/>
-
-          {/* Circle outline */}
           <circle cx={Ox} cy={Oy} r={R} fill="rgba(6,182,212,0.05)" stroke="#06b6d430" strokeWidth="1.5"/>
-
-          {/* Central angle sector at O */}
           <path d={centralSector} fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.3)" strokeWidth="0.5"/>
-
-          {/* Inscribed angle sector at C */}
           <path d={inscribedSector} fill="rgba(168,85,247,0.15)" stroke="rgba(168,85,247,0.3)" strokeWidth="0.5"/>
-
-          {/* Lines: OA, OB */}
           <line x1={Ox} y1={Oy} x2={A.x} y2={A.y} stroke="#22c55e" strokeWidth="2"/>
           <line x1={Ox} y1={Oy} x2={B.x} y2={B.y} stroke="#22c55e" strokeWidth="2"/>
-
-          {/* Lines: CA, CB */}
           <line x1={Cv.x} y1={Cv.y} x2={A.x} y2={A.y} stroke="#a855f7" strokeWidth="2"/>
           <line x1={Cv.x} y1={Cv.y} x2={B.x} y2={B.y} stroke="#a855f7" strokeWidth="2"/>
-
-          {/* Center O */}
           <circle cx={Ox} cy={Oy} r="5" fill="#f59e0b"/>
-
-          {/* Point A (fixed) */}
           <circle cx={A.x} cy={A.y} r="6" fill="#22c55e"/>
-
-          {/* Point B (moves with slider) */}
           <circle cx={B.x} cy={B.y} r="6" fill="#22c55e"/>
-
-          {/* Point C (draggable) */}
           <circle
             cx={Cv.x} cy={Cv.y} r="9"
             fill="#a855f7"
@@ -241,8 +243,6 @@ export default function SudutPusatInteraktif() {
             onTouchStart={handleTouchStart}
             style={{ filter: dragging ? "drop-shadow(0 0 8px rgba(168,85,247,0.8))" : "drop-shadow(0 0 4px rgba(168,85,247,0.5))" }}
           />
-
-          {/* Labels */}
           <text x={Ox + 8} y={Oy - 7} fill="#fbbf24" fontSize="12" fontWeight="bold" fontFamily="monospace">O</text>
           <text
             x={A.x + (A.x > Ox ? 8 : -20)}
@@ -259,36 +259,30 @@ export default function SudutPusatInteraktif() {
             y={Cv.y + (Cv.y < Oy ? -10 : 18)}
             fill="#c084fc" fontSize="12" fontWeight="bold" fontFamily="monospace"
           >C</text>
-
-          {/* Angle value labels */}
           <text
             x={Math.max(10, Math.min(VW - 40, cLabelPt.x - 12))}
             y={Math.max(14, Math.min(VH - 10, cLabelPt.y + 4))}
             fill="#fbbf24" fontSize="11" fontWeight="bold" fontFamily="monospace"
           >{centralAngle}°</text>
-
           <text
             x={Math.max(10, Math.min(VW - 50, inscLabelPt.x - 12))}
             y={Math.max(14, Math.min(VH - 10, inscLabelPt.y + 4))}
             fill="#c084fc" fontSize="11" fontWeight="bold" fontFamily="monospace"
           >{inscribedAngle}°</text>
-
-          {/* Drag hint on C */}
           {!dragging && (
             <text
               x={Cv.x + (Cv.x > Ox ? 13 : -50)}
               y={Cv.y + (Cv.y < Oy ? -22 : 32)}
               fill="#c084fc" fontSize="9" fontFamily="monospace" opacity="0.7"
-            >geser ✋</text>
+            >{t.dragHint}</text>
           )}
         </svg>
       </div>
 
-      {/* Slider */}
       <div className="w-full max-w-sm space-y-1.5">
         <div className="flex items-center justify-between">
           <label className="font-body text-xs text-white/60">
-            🎯 Besar Busur AB (Sudut Pusat)
+            {t.sliderLabel}
           </label>
           <span className="font-display text-xs font-bold text-amber-300">{arcDeg}°</span>
         </div>
@@ -317,9 +311,8 @@ export default function SudutPusatInteraktif() {
         </div>
       </div>
 
-      {/* Quick presets */}
       <div className="w-full max-w-sm">
-        <p className="font-body text-[10px] text-white/40 mb-2">Coba preset busur:</p>
+        <p className="font-body text-[10px] text-white/40 mb-2">{t.presetLabel}</p>
         <div className="grid grid-cols-4 gap-1.5">
           {[60, 90, 120, 180].map(v => (
             <button
@@ -337,13 +330,12 @@ export default function SudutPusatInteraktif() {
         </div>
       </div>
 
-      {/* Info */}
       <div className="w-full max-w-sm bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-3">
         <p className="font-body text-xs text-white/65 leading-relaxed">
-          💡 <strong className="text-cyan-300">Geser titik C</strong> ke manapun di sepanjang busur besar — 
-          sudut keliling ∠ACB tetap selalu <strong className="text-purple-300">{inscribedAngle}°</strong> (setengah dari sudut pusat {centralAngle}°)!
-          Ini adalah bukti bahwa <strong className="text-amber-300">posisi C tidak mempengaruhi besar sudut keliling</strong>, 
-          selama menghadap busur yang sama.
+          💡 <strong className="text-cyan-300">{t.infoC}</strong>{" "}
+          {t.infoText(inscribedAngle, centralAngle).split(t.infoC)[1]?.split(t.infoPos)[0]}
+          <strong className="text-amber-300">{t.infoPos}</strong>
+          {t.infoText(inscribedAngle, centralAngle).split(t.infoPos)[1]}
         </p>
       </div>
     </div>

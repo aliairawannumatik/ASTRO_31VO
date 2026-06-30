@@ -750,7 +750,7 @@ const KelilingLuasPage = () => {
                 <p className="font-body text-sm text-white/80">{t.c1_use}</p>
                 <BlockMath math="K = \pi \times d" />
                 <BlockMath math="K = \frac{22}{7} \times 70" />
-                <BlockMath math="K = 22 \times 10 = 220 \text{ cm}" />
+                <BlockMath math="K = 22 \times 10 = 220 \,\mathrm{cm}" />
                 <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-green-300 text-center">✅ {t.c1_check}</p>
                 </div>
@@ -772,9 +772,9 @@ const KelilingLuasPage = () => {
                 <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c2_sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.c2_step1}</strong> {t.c2_step1desc}</p>
                 <BlockMath math="K = 2\pi r \Rightarrow 88 = 2 \times \frac{22}{7} \times r" />
-                <BlockMath math="88 = \frac{44}{7} \times r \Rightarrow r = 88 \times \frac{7}{44} = 14 \text{ m}" />
+                <BlockMath math="88 = \frac{44}{7} \times r \Rightarrow r = 88 \times \frac{7}{44} = 14 \,\mathrm{m}" />
                 <p className="font-body text-sm text-white/80"><strong>{t.c2_step2}</strong> {t.c2_step2desc}</p>
-                <BlockMath math="L = \pi r^2 = \frac{22}{7} \times 14^2 = \frac{22}{7} \times 196 = 22 \times 28 = 616 \text{ m}^2" />
+                <BlockMath math="L = \pi r^2 = \frac{22}{7} \times 14^2 = \frac{22}{7} \times 196 = 22 \times 28 = 616 \,\mathrm{m}^2" />
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200 text-center">✅ {t.c2_check}</p>
                 </div>
@@ -795,13 +795,13 @@ const KelilingLuasPage = () => {
               <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
                 <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c3_sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.c3_step1}</strong> {t.c3_step1desc}</p>
-                <BlockMath math="R = 10 + 3{,}5 = 13{,}5 \text{ m}" />
+                <BlockMath math="R = 10 + 3{,}5 = 13{,}5 \,\mathrm{m}" />
                 <p className="font-body text-sm text-white/80"><strong>{t.c3_step2}</strong> {t.c3_step2desc}</p>
-                <BlockMath math={`${t.f_Lbesar} = \\pi R^2 = \\frac{22}{7} \\times (13{,}5)^2 = \\frac{22}{7} \\times 182{,}25 \\approx 572{,}79 \\text{ m}^2`} />
+                <BlockMath math={`${t.f_Lbesar} = \\pi R^2 = \\frac{22}{7} \\times (13{,}5)^2 = \\frac{22}{7} \\times 182{,}25 \\approx 572{,}79 \\,\\mathrm{m}^2`} />
                 <p className="font-body text-sm text-white/80"><strong>{t.c3_step3}</strong> {t.c3_step3desc}</p>
-                <BlockMath math={`${t.f_Lkecil} = \\pi r^2 = \\frac{22}{7} \\times 10^2 = \\frac{22}{7} \\times 100 \\approx 314{,}29 \\text{ m}^2`} />
+                <BlockMath math={`${t.f_Lkecil} = \\pi r^2 = \\frac{22}{7} \\times 10^2 = \\frac{22}{7} \\times 100 \\approx 314{,}29 \\,\\mathrm{m}^2`} />
                 <p className="font-body text-sm text-white/80"><strong>{t.c3_step4}</strong> {t.c3_step4desc}</p>
-                <BlockMath math={`${t.f_Ljalur} = 572{,}79 - 314{,}29 = 258{,}5 \\text{ m}^2`} />
+                <BlockMath math={`${t.f_Ljalur} = 572{,}79 - 314{,}29 = 258{,}5 \\,\\mathrm{m}^2`} />
                 <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-red-200 text-center">✅ {t.c3_check}</p>
                 </div>

@@ -681,7 +681,7 @@ const UnsurUnsurPage = () => {
                   <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c1_sol}</p>
                   <p className="font-body text-sm text-white/80">• <strong className="text-green-300">OA, OB</strong>{t.c1_p1}<InlineMath math="r = 7"/> cm.</p>
                   <p className="font-body text-sm text-white/80">• <strong className="text-purple-300">CD</strong>{t.c1_p2}</p>
-                  <BlockMath math="d = 2r = 2 \times 7 = 14 \text{ cm}" />
+                  <BlockMath math="d = 2r = 2 \times 7 = 14 \,\mathrm{cm}" />
                   <p className="font-body text-sm text-white/80">• <strong className="text-orange-300">AB</strong>{t.c1_p3}</p>
                   <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3 mt-2">
                     <p className="font-body text-sm text-green-300 text-center">{t.c1_check}</p>
@@ -708,8 +708,8 @@ const UnsurUnsurPage = () => {
                   <BlockMath math="4x - 2 = 2(x + 5)" />
                   <BlockMath math="4x - 2 = 2x + 10" />
                   <BlockMath math="2x = 12 \Rightarrow x = 6" />
-                  <BlockMath math="r = 6 + 5 = 11 \text{ cm}" />
-                  <BlockMath math="d = 4(6) - 2 = 22 \text{ cm}" />
+                  <BlockMath math="r = 6 + 5 = 11 \,\mathrm{cm}" />
+                  <BlockMath math="d = 4(6) - 2 = 22 \,\mathrm{cm}" />
                   <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
                     <p className="font-body text-sm text-yellow-200 text-center">{t.c2_check}</p>
                   </div>
@@ -737,9 +737,9 @@ const UnsurUnsurPage = () => {
                   <p className="font-body text-sm text-white/80">{t.c3_p3}</p>
                   <BlockMath math="OA^2 = OD^2 + DA^2" />
                   <BlockMath math="13^2 = 5^2 + DA^2" />
-                  <BlockMath math="169 = 25 + DA^2 \Rightarrow DA^2 = 144 \Rightarrow DA = 12 \text{ cm}" />
+                  <BlockMath math="169 = 25 + DA^2 \Rightarrow DA^2 = 144 \Rightarrow DA = 12 \,\mathrm{cm}" />
                   <p className="font-body text-sm text-white/80">{t.c3_p4}</p>
-                  <BlockMath math="AB = 2 \times DA = 2 \times 12 = 24 \text{ cm}" />
+                  <BlockMath math="AB = 2 \times DA = 2 \times 12 = 24 \,\mathrm{cm}" />
                   <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
                     <p className="font-body text-sm text-red-200 text-center">{t.c3_check}</p>
                   </div>
