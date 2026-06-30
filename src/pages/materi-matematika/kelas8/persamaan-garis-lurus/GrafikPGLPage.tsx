@@ -148,6 +148,7 @@ const T_GRAFIK = {
     konsep_lab_desc: "Ketik persamaan apa saja di panel kanan — grafiknya langsung tergambar! Gunakan scroll untuk zoom, drag untuk geser bidang, dan hover untuk melihat koordinat.",
     konsep_lab_coba: "💡 Coba masukkan:",
     konsep_lab_note: "perhatikan titik potong sumbu dan perpotongan antar garis!",
+    konsep_lab_then: "lalu",
     tp_sbx_title: "📍 Titik Potong Sumbu-x",
     tp_sbx_cond: "Syarat: nilai",
     tp_sbx_pt: "Titik:",
@@ -385,6 +386,7 @@ const T_GRAFIK = {
     konsep_lab_desc: "Type any equation in the right panel — the graph is drawn instantly! Use scroll to zoom, drag to pan, and hover to see coordinates.",
     konsep_lab_coba: "💡 Try entering:",
     konsep_lab_note: "observe the intercepts and intersections between lines!",
+    konsep_lab_then: "then",
     tp_sbx_title: "📍 x-intercept",
     tp_sbx_cond: "Condition: value",
     tp_sbx_pt: "Point:",
@@ -622,6 +624,7 @@ const T_GRAFIK = {
     konsep_lab_desc: "右パネルに任意の方程式を入力すると、グラフが即座に描画される！スクロールでズーム、ドラッグで移動、ホバーで座標を確認できる。",
     konsep_lab_coba: "💡 入力してみよう：",
     konsep_lab_note: "軸との交点や直線の交点を観察しよう！",
+    konsep_lab_then: "次に",
     tp_sbx_title: "📍 x 切片",
     tp_sbx_cond: "条件：",
     tp_sbx_pt: "点：",
@@ -1339,7 +1342,7 @@ const GrafikPGLPage = () => {
                   <GeoGebraGrapher />
                   <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-3">
                     <p className="text-xs text-violet-200 font-body">
-                      <strong>{t.konsep_lab_coba}</strong> <span className="font-mono">y = 3x + 2</span> lalu <span className="font-mono">3x - 2y + 6 = 0</span> lalu <span className="font-mono">x/4 + y/3 = 1</span> — {t.konsep_lab_note}
+                      <strong>{t.konsep_lab_coba}</strong> <span className="font-mono">y = 3x + 2</span> {t.konsep_lab_then} <span className="font-mono">3x - 2y + 6 = 0</span> {t.konsep_lab_then} <span className="font-mono">x/4 + y/3 = 1</span> — {t.konsep_lab_note}
                     </p>
                   </div>
                 </div>

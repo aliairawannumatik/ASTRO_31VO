@@ -5,11 +5,11 @@ description: Lessons from wiring all 4 Kelas 8 Persamaan Garis Lurus materi-mate
 
 # K8 Persamaan Garis Lurus — Trilingual Wiring
 
-## Files
+## Files (all complete)
 - `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/GradienPage.tsx` ✅
 - `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/MenentukanPGLPage.tsx` ✅
 - `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/Hubungan2GarisPage.tsx` ✅
-- `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/GrafikPGLPage.tsx` ✅ (largest; took multiple sessions)
+- `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/GrafikPGLPage.tsx` ✅
 
 ## GrafikPGLPage key patterns
 
@@ -47,5 +47,26 @@ Several keys used in JSX were not yet in T_GRAFIK; they needed to be added to al
 ### Sub-component (MCQGrafik1)
 MCQGrafik1 is defined inside GrafikPGLPage.tsx (not a separate file). It calls `useLanguage()` and `const t = T_GRAFIK[language]` at its own top level — consistent with the standard pattern for inlined sub-components.
 
-### c2_nia_yes key reuse
-`c2_nia_yes` is reused as the "Titik / Point / 点" label prefix in both Opsi A sub-cells and all wrong-option cells. The value is "Titik" (id) / (empty for en/ja since the context differs). Check the actual values if extending.
+## Hubungan2GarisPage — hardcoded strings found in TWO passes
+
+First pass fixed the obvious: observation box labels, animation labels, slider labels, CoordSys labels, example step strings.
+
+**Second pass (code review catch) fixed remaining:**
+- Visual gallery card headers: `∥ SEJAJAR`, `⊥ TEGAK LURUS`, `✕ BERPOTONGAN` (lines ~786, ~799, ~814)
+  → Keys: `vis_lbl_sejajar`, `vis_lbl_tegaklurus`, `vis_lbl_berpotongan`
+- Example 3 inline verdict words: `TEGAK LURUS` / `SEJAJAR` inside JSX `<strong>` tags (lines ~955, ~959, ~963)
+  → Keys: `c3_ver_perp`, `c3_ver_par`
+- `ber_anim_perp_at` JA value was `"90°の角、交点"` → changed to `"交点は"` for natural word-order (coordinate appended after)
+- Inline conjunction `"dan"` before ℓ₃ label → replaced with ternary `language === "id" ? "dan" : language === "ja" ? "と" : "and"`
+
+**Why:** Inline badge/label text inside graphic containers is easy to miss — always search for ALL-CAPS Indonesian words (SEJAJAR, TEGAK LURUS, BERPOTONGAN) as a final check on any page with visual relationship diagrams.
+
+## GradienPage SVG text labels
+SVG `<text>` elements inside inline SVG illustrations need their own translation keys. Found "datar" and "tegak" inside positif/negatif slope illustrations.
+→ Keys: `svgDatar` (id: "datar"/en: "run"/ja: "底辺"), `svgTegak` (id: "tegak"/en: "rise"/ja: "高さ")
+
+## MenentukanPGLPage peta-rumus flowchart
+The SVG flowchart (decision tree for choosing scenarios) had 6 hardcoded Indonesian strings rendered as SVG `<text>` elements. Each needed its own translation key.
+→ Keys: `peta_infoGaris`, `peta_mDan1Titik`, `peta_2Titik`, `peta_titikGradien`, `peta_hitungM`, `peta_laluSk1`
+
+**Why:** SVG text elements are invisible to a simple "grep for JSX string literals" scan because they look like `>Info Garis?</text>` not `>Info Garis?</p>`. Always scan SVG sections manually.

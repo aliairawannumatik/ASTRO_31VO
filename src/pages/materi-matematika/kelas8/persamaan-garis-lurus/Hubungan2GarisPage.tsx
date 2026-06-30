@@ -177,6 +177,30 @@ const T_HUBUNGAN = {
       ["Berimpit", "m₁ = m₂, c₁ = c₂"],
     ],
     rang_tip: "💡 Selalu mulai dengan mengubah persamaan ke bentuk y = mx + c untuk mengidentifikasi gradien dengan mudah!",
+    sej_obs_grad_prefix: "Gradien: m₁ = m₂ =",
+    sej_obs_grad_both: "→ kedua garis",
+    tek_obs_maka: ", maka m₂ = −1/m₁ =",
+    ber_ex_title: "Cara menentukan titik potong:",
+    ber_ex_desc: "Selesaikan sistem persamaan kedua garis (SPLDV)",
+    ber_ex_l1: "ℓ₁: y = 2x + 1 dan ℓ₂: y = −x + 4",
+    ber_ex_ans: "Titik potong: (1, 3)",
+    ber_m1_label: "m₁ (ℓ₁ — biru):",
+    ber_m2_label: "m₂ (ℓ₂ — kuning):",
+    ber_lbl_sejajar: "Sejajar!",
+    ber_lbl_titikpotong: "Titik potong",
+    ber_anim_sejajar: "⚠️ SEJAJAR",
+    ber_anim_tegaklurus: "⊥ TEGAK LURUS (90°)",
+    ber_anim_berpotongan: "✕ BERPOTONGAN BIASA",
+    ber_anim_sejajar_note: "m₁ = m₂ → garis sejajar, tidak berpotongan!",
+    ber_anim_perp_at: "sudut 90° di",
+    ber_anim_int_at: "titik potong",
+    c1_steps: ["ℓ₁: y = 3x − 5 → m₁ = 3", "ℓ₂: y = 3x + 2 → m₂ = 3", "m₁ = m₂ = 3, tetapi c₁ = −5 ≠ c₂ = 2"],
+    c2_step1: "m₁ = 4 (dari y = 4x − 3)",
+    vis_lbl_sejajar: "∥ SEJAJAR",
+    vis_lbl_tegaklurus: "⊥ TEGAK LURUS",
+    vis_lbl_berpotongan: "✕ BERPOTONGAN",
+    c3_ver_perp: "TEGAK LURUS",
+    c3_ver_par: "SEJAJAR",
   },
   en: {
     title: "RELATIONSHIP BETWEEN TWO LINES",
@@ -269,6 +293,30 @@ const T_HUBUNGAN = {
       ["Coincident", "m₁ = m₂, c₁ = c₂"],
     ],
     rang_tip: "💡 Always start by converting the equation to y = mx + c form to easily identify the slope!",
+    sej_obs_grad_prefix: "Slope: m₁ = m₂ =",
+    sej_obs_grad_both: "→ both lines",
+    tek_obs_maka: ", so m₂ = −1/m₁ =",
+    ber_ex_title: "How to find the intersection point:",
+    ber_ex_desc: "Solve the system of equations of both lines",
+    ber_ex_l1: "ℓ₁: y = 2x + 1 and ℓ₂: y = −x + 4",
+    ber_ex_ans: "Intersection point: (1, 3)",
+    ber_m1_label: "m₁ (ℓ₁ — blue):",
+    ber_m2_label: "m₂ (ℓ₂ — yellow):",
+    ber_lbl_sejajar: "Parallel!",
+    ber_lbl_titikpotong: "Intersection",
+    ber_anim_sejajar: "⚠️ PARALLEL",
+    ber_anim_tegaklurus: "⊥ PERPENDICULAR (90°)",
+    ber_anim_berpotongan: "✕ REGULAR INTERSECTION",
+    ber_anim_sejajar_note: "m₁ = m₂ → lines are parallel, they never intersect!",
+    ber_anim_perp_at: "90° angle at",
+    ber_anim_int_at: "intersection",
+    c1_steps: ["ℓ₁: y = 3x − 5 → m₁ = 3", "ℓ₂: y = 3x + 2 → m₂ = 3", "m₁ = m₂ = 3, but c₁ = −5 ≠ c₂ = 2"],
+    c2_step1: "m₁ = 4 (from y = 4x − 3)",
+    vis_lbl_sejajar: "∥ PARALLEL",
+    vis_lbl_tegaklurus: "⊥ PERPENDICULAR",
+    vis_lbl_berpotongan: "✕ INTERSECTING",
+    c3_ver_perp: "PERPENDICULAR",
+    c3_ver_par: "PARALLEL",
   },
   ja: {
     title: "2直線の関係",
@@ -361,6 +409,31 @@ const T_HUBUNGAN = {
       ["一致", "m₁ = m₂, c₁ = c₂"],
     ],
     rang_tip: "💡 まずy = mx + cの形に変換して傾きを簡単に確認しよう！",
+    sej_obs_grad_prefix: "傾き: m₁ = m₂ =",
+    sej_obs_grad_both: "→ 2直線は",
+    tek_obs_maka: "、よってm₂ = −1/m₁ =",
+    ber_ex_title: "交点の求め方：",
+    ber_ex_desc: "2直線の連立方程式を解く",
+    ber_ex_l1: "ℓ₁: y = 2x + 1、ℓ₂: y = −x + 4",
+    ber_ex_ans: "交点: (1, 3)",
+    ber_m1_label: "m₁（ℓ₁ — 青）：",
+    ber_m2_label: "m₂（ℓ₂ — 黄）：",
+    ber_lbl_sejajar: "平行！",
+    ber_lbl_titikpotong: "交点",
+    ber_anim_sejajar: "⚠️ 平行",
+    ber_anim_tegaklurus: "⊥ 垂直（90°）",
+    ber_anim_berpotongan: "✕ 通常の交差",
+    ber_anim_sejajar_note: "m₁ = m₂ → 平行線、交わらない！",
+    ber_anim_perp_at: "90°の角、交点",
+    ber_anim_int_at: "交点",
+    c1_steps: ["ℓ₁: y = 3x − 5 → m₁ = 3", "ℓ₂: y = 3x + 2 → m₂ = 3", "m₁ = m₂ = 3、ただしc₁ = −5 ≠ c₂ = 2"],
+    c2_step1: "m₁ = 4（y = 4x − 3より）",
+    vis_lbl_sejajar: "∥ 平行",
+    vis_lbl_tegaklurus: "⊥ 垂直",
+    vis_lbl_berpotongan: "✕ 交差",
+    c3_ver_perp: "垂直",
+    c3_ver_par: "平行",
+    ber_anim_perp_at: "交点は",
   },
 };
 
@@ -496,7 +569,7 @@ const Hubungan2GarisPage = () => {
                   <div className="bg-cyan-900/30 rounded-lg p-3 text-xs font-body space-y-1">
                     <p className="text-cyan-300 font-semibold">{t.sej_obs}</p>
                     <p className="text-white/70">ℓ₁: y = <InlineMath math={`${mTeX(sejM)}x + 2`} />, ℓ₂: y = <InlineMath math={`${mTeX(sejM)}x - 2`} /></p>
-                    <p className="text-white/70">Gradien: m₁ = m₂ = <strong className="text-cyan-300">{mDisp(sejM)}</strong> → kedua garis <strong className="text-cyan-300">{t.sej_obs_sejajar}</strong></p>
+                    <p className="text-white/70">{t.sej_obs_grad_prefix} <strong className="text-cyan-300">{mDisp(sejM)}</strong> {t.sej_obs_grad_both} <strong className="text-cyan-300">{t.sej_obs_sejajar}</strong></p>
                     <p className="text-white/50">{t.sej_obs_jarak}</p>
                   </div>
                 </div>
@@ -590,7 +663,7 @@ const Hubungan2GarisPage = () => {
                   </CoordSys>
                   <div className="bg-violet-900/30 rounded-lg p-3 text-xs font-body space-y-1">
                     <p className="text-violet-300 font-semibold">{t.tek_obs}</p>
-                    <p className="text-white/70">m₁ = <strong className="text-violet-300">{mDisp(tekM1)}</strong>, maka m₂ = −1/m₁ = <strong className="text-pink-300">{mDisp(tekM2)}</strong></p>
+                    <p className="text-white/70">m₁ = <strong className="text-violet-300">{mDisp(tekM1)}</strong>{t.tek_obs_maka} <strong className="text-pink-300">{mDisp(tekM2)}</strong></p>
                     <p className="text-white/70">Verifikasi: <InlineMath math={`m_1 \\times m_2 = ${mTeX(tekM1)} \\times ${mTeX(tekM2)} = -1`} /> ✓</p>
                     <p className="text-white/50">{t.tek_obs_note}</p>
                   </div>
@@ -627,15 +700,15 @@ const Hubungan2GarisPage = () => {
                 </div>
 
                 <div className="bg-slate-800/60 border border-green-500/20 rounded-xl p-3">
-                  <p className="text-xs font-bold text-green-300 mb-2">Cara menentukan titik potong:</p>
-                  <p className="text-xs text-white/60 mb-2">Selesaikan sistem persamaan kedua garis (SPLDV)</p>
+                  <p className="text-xs font-bold text-green-300 mb-2">{t.ber_ex_title}</p>
+                  <p className="text-xs text-white/60 mb-2">{t.ber_ex_desc}</p>
                   <div className="space-y-1 text-xs font-body text-white/70">
-                    <p>ℓ₁: y = 2x + 1 dan ℓ₂: y = −x + 4</p>
+                    <p>{t.ber_ex_l1}</p>
                     <p>→ 2x + 1 = −x + 4</p>
                     <p>→ 3x = 3 → x = 1</p>
                     <p>→ y = 2(1) + 1 = 3</p>
                   </div>
-                  <p className="text-green-300 font-bold text-xs mt-1">Titik potong: (1, 3)</p>
+                  <p className="text-green-300 font-bold text-xs mt-1">{t.ber_ex_ans}</p>
                 </div>
 
                 {/* ANIMASI INTERAKTIF BERPOTONGAN */}
@@ -644,7 +717,7 @@ const Hubungan2GarisPage = () => {
                   <p className="text-xs text-white/60 font-body">{t.ber_anim_desc}</p>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <p className="text-xs text-cyan-300 font-semibold mb-2">m₁ (ℓ₁ — biru):</p>
+                      <p className="text-xs text-cyan-300 font-semibold mb-2">{t.ber_m1_label}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {BER_OPTS.map(v => (
                           <button key={v} onClick={() => { playPopSound(); setBerM1(v); }}
@@ -655,7 +728,7 @@ const Hubungan2GarisPage = () => {
                       </div>
                     </div>
                     <div>
-                      <p className="text-xs text-yellow-300 font-semibold mb-2">m₂ (ℓ₂ — kuning):</p>
+                      <p className="text-xs text-yellow-300 font-semibold mb-2">{t.ber_m2_label}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {BER_OPTS.map(v => (
                           <button key={v} onClick={() => { playPopSound(); setBerM2(v); }}
@@ -672,7 +745,7 @@ const Hubungan2GarisPage = () => {
                     const isPerp = Math.abs(berM1 * berM2 + 1) < 0.001;
                     return (
                       <>
-                        <CoordSys label={isParallel ? "Sejajar!" : `Titik potong ${pt ? `(${Math.round(pt[0]*10)/10}, ${Math.round(pt[1]*10)/10})` : ""}`}>
+                        <CoordSys label={isParallel ? t.ber_lbl_sejajar : `${t.ber_lbl_titikpotong} ${pt ? `(${Math.round(pt[0]*10)/10}, ${Math.round(pt[1]*10)/10})` : ""}`}>
                           <polyline points={gPts(berM1, 1)} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
                           <polyline points={gPts(berM2, -1)} fill="none" stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
                           {pt && !isParallel && (
@@ -687,12 +760,12 @@ const Hubungan2GarisPage = () => {
                         </CoordSys>
                         <div className={`rounded-lg p-3 text-xs font-body space-y-1 border ${isParallel ? "bg-cyan-900/30 border-cyan-500/30" : isPerp ? "bg-red-900/30 border-red-500/30" : "bg-green-900/30 border-green-500/30"}`}>
                           <p className={`font-semibold ${isParallel ? "text-cyan-300" : isPerp ? "text-red-300" : "text-green-300"}`}>
-                            {isParallel ? "⚠️ SEJAJAR" : isPerp ? "⊥ TEGAK LURUS (90°)" : "✕ BERPOTONGAN BIASA"}
+                            {isParallel ? t.ber_anim_sejajar : isPerp ? t.ber_anim_tegaklurus : t.ber_anim_berpotongan}
                           </p>
                           <p className="text-white/70">m₁ = <strong>{mDisp(berM1)}</strong>, m₂ = <strong>{mDisp(berM2)}</strong></p>
-                          {isParallel && <p className="text-white/60">m₁ = m₂ → garis sejajar, tidak berpotongan!</p>}
-                          {isPerp && pt && <p className="text-white/60">m₁ × m₂ = {mDisp(berM1)} × {mDisp(berM2)} = −1 → sudut 90° di ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
-                          {!isParallel && !isPerp && pt && <p className="text-white/60">m₁ ≠ m₂, m₁×m₂ = {Math.round(berM1*berM2*100)/100} ≠ −1 → titik potong ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
+                          {isParallel && <p className="text-white/60">{t.ber_anim_sejajar_note}</p>}
+                          {isPerp && pt && <p className="text-white/60">m₁ × m₂ = {mDisp(berM1)} × {mDisp(berM2)} = −1 → {t.ber_anim_perp_at} ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
+                          {!isParallel && !isPerp && pt && <p className="text-white/60">m₁ ≠ m₂, m₁×m₂ = {Math.round(berM1*berM2*100)/100} ≠ −1 → {t.ber_anim_int_at} ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
                         </div>
                       </>
                     );
@@ -710,7 +783,7 @@ const Hubungan2GarisPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {/* Sejajar */}
                   <div className="bg-slate-900/60 border border-cyan-500/30 rounded-xl p-3">
-                    <p className="text-xs font-bold text-cyan-300 mb-2 text-center">∥ SEJAJAR</p>
+                    <p className="text-xs font-bold text-cyan-300 mb-2 text-center">{t.vis_lbl_sejajar}</p>
                     <CoordSys label="m₁=m₂=2">
                       <polyline points={[[-3,-5],[-2,-3],[-1,-1],[0,1],[1,3]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
                       <polyline points={[[-1,-5],[0,-3],[1,-1],[2,1],[3,3]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#67e8f9" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="5,3" />
@@ -723,7 +796,7 @@ const Hubungan2GarisPage = () => {
                   </div>
                   {/* Tegak lurus — fixed right-angle marker */}
                   <div className="bg-slate-900/60 border border-violet-500/30 rounded-xl p-3">
-                    <p className="text-xs font-bold text-violet-300 mb-2 text-center">⊥ TEGAK LURUS</p>
+                    <p className="text-xs font-bold text-violet-300 mb-2 text-center">{t.vis_lbl_tegaklurus}</p>
                     <CoordSys label="m₁·m₂=−1">
                       {/* ℓ₁: y=2x, ℓ₂: y=-0.5x → intersect at origin (0,0) */}
                       <polyline points={[[-3,-6],[-2,-4],[-1,-2],[0,0],[1,2],[2,4]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
@@ -738,7 +811,7 @@ const Hubungan2GarisPage = () => {
                   </div>
                   {/* Berpotongan */}
                   <div className="bg-slate-900/60 border border-green-500/30 rounded-xl p-3">
-                    <p className="text-xs font-bold text-green-300 mb-2 text-center">✕ BERPOTONGAN</p>
+                    <p className="text-xs font-bold text-green-300 mb-2 text-center">{t.vis_lbl_berpotongan}</p>
                     <CoordSys label="m₁≠m₂">
                       <polyline points={[[-3,-5],[-2,-3],[-1,-1],[0,1],[1,3],[2,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" />
                       <polyline points={[[-3,6],[-2,5],[0,3],[1,2],[2,1],[3,0]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
@@ -788,9 +861,7 @@ const Hubungan2GarisPage = () => {
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-cyan-300 font-semibold mb-1">{t.c1_id_grad}</p>
-                    <p className="text-white/70 text-xs">ℓ₁: y = 3x − 5 → m₁ = 3</p>
-                    <p className="text-white/70 text-xs">ℓ₂: y = 3x + 2 → m₂ = 3</p>
-                    <p className="text-white/70 text-xs mt-1">m₁ = m₂ = 3, tetapi c₁ = −5 ≠ c₂ = 2</p>
+                    {t.c1_steps.map((s, i) => <p key={i} className={`text-white/70 text-xs${i === 2 ? " mt-1" : ""}`}>{s}</p>)}
                   </div>
                   <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-3">
                     <CoordSys label="ℓ₁ ∥ ℓ₂">
@@ -821,7 +892,7 @@ const Hubungan2GarisPage = () => {
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
                   <div className="bg-slate-800/50 rounded-lg p-3">
                     <p className="text-cyan-300 font-semibold mb-1">{t.c2_l1}</p>
-                    <p className="text-white/70 text-xs">m₁ = 4 (dari y = 4x − 3)</p>
+                    <p className="text-white/70 text-xs">{t.c2_step1}</p>
                     <BlockMath math="m_2 = -\frac{1}{m_1} = -\frac{1}{4}" />
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-3">
@@ -881,15 +952,15 @@ const Hubungan2GarisPage = () => {
                     <div className="space-y-1.5 text-xs">
                       <div className="bg-green-900/20 rounded-lg p-2">
                         <p className="text-green-300 font-bold">a) ℓ₁ ⊥ ℓ₂:</p>
-                        <p className="text-white/60">m₁ × m₂ = 2 × (−½) = −1 ✓ → <strong className="text-green-300">TEGAK LURUS</strong></p>
+                        <p className="text-white/60">m₁ × m₂ = 2 × (−½) = −1 ✓ → <strong className="text-green-300">{t.c3_ver_perp}</strong></p>
                       </div>
                       <div className="bg-cyan-900/20 rounded-lg p-2">
                         <p className="text-cyan-300 font-bold">b) ℓ₁ ∥ ℓ₃:</p>
-                        <p className="text-white/60">m₁ = m₃ = 2, c₁ = 4 ≠ c₃ = ½ → <strong className="text-cyan-300">SEJAJAR</strong></p>
+                        <p className="text-white/60">m₁ = m₃ = 2, c₁ = 4 ≠ c₃ = ½ → <strong className="text-cyan-300">{t.c3_ver_par}</strong></p>
                       </div>
                       <div className="bg-orange-900/20 rounded-lg p-2">
-                        <p className="text-orange-300 font-bold">c) ℓ₂ dan ℓ₃:</p>
-                        <p className="text-white/60">m₂ = −½ ≠ m₃ = 2, m₂×m₃ = −1 → <strong className="text-orange-300">TEGAK LURUS</strong></p>
+                        <p className="text-orange-300 font-bold">c) ℓ₂ {language === "id" ? "dan" : language === "ja" ? "と" : "and"} ℓ₃:</p>
+                        <p className="text-white/60">m₂ = −½ ≠ m₃ = 2, m₂×m₃ = −1 → <strong className="text-orange-300">{t.c3_ver_perp}</strong></p>
                       </div>
                     </div>
                   </div>

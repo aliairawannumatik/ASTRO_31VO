@@ -164,6 +164,13 @@ const T_MENENTUKAN = {
     iv3_l5: "Langkah 5 — Persamaan Garis Lurus ✅",
     iv3_l4_prefix: "Langkah 4 — Kumpulkan Suku & Bagi dengan ",
     iv3_l1_cara: "Cara 1 — Menggunakan Rumus",
+    sk2_exLabel: "Melalui A(0,1) dan B(3,7)",
+    peta_infoGaris: "INFO GARIS?",
+    peta_mDan1Titik: "m dan 1 titik",
+    peta_2Titik: "2 titik",
+    peta_titikGradien: "Titik-gradien",
+    peta_hitungM: "Hitung m dulu,",
+    peta_laluSk1: "lalu skenario 1",
   },
   en: {
     title: "FINDING THE EQUATION OF A LINE",
@@ -271,6 +278,13 @@ const T_MENENTUKAN = {
     iv3_l5: "Step 5 — Equation of the Line ✅",
     iv3_l4_prefix: "Step 4 — Collect Terms & Divide by ",
     iv3_l1_cara: "Method 1 — Using the Formula",
+    sk2_exLabel: "Through A(0,1) and B(3,7)",
+    peta_infoGaris: "LINE INFO?",
+    peta_mDan1Titik: "m and 1 point",
+    peta_2Titik: "2 points",
+    peta_titikGradien: "Point-slope",
+    peta_hitungM: "Find m first,",
+    peta_laluSk1: "then scenario 1",
   },
   ja: {
     title: "直線の方程式を求める",
@@ -378,6 +392,13 @@ const T_MENENTUKAN = {
     iv3_l5: "ステップ5 — 直線の方程式 ✅",
     iv3_l4_prefix: "ステップ4 — 項をまとめて で割る ",
     iv3_l1_cara: "方法1 — 公式を使う",
+    sk2_exLabel: "A(0,1)とB(3,7)を通る",
+    peta_infoGaris: "直線情報？",
+    peta_mDan1Titik: "mと1点",
+    peta_2Titik: "2点",
+    peta_titikGradien: "点傾き",
+    peta_hitungM: "まずmを求め、",
+    peta_laluSk1: "次にシナリオ1",
   },
 };
 
@@ -621,7 +642,7 @@ const MenentukanPGLPage = () => {
                 {/* Example visual */}
                 <div className="bg-slate-800/60 border border-orange-500/20 rounded-xl p-3">
                   <p className="text-xs font-bold text-orange-300 mb-2">{t.sk2_example}</p>
-                  <CoordSys label="Melalui A(0,1) dan B(3,7)">
+                  <CoordSys label={t.sk2_exLabel}>
                     <polyline points={[[-1,-1],[0,1],[1,3],[2,5],[3,7],[4,9]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round" />
                     {[[0,1],[3,7]].map(([x,y]) => (
                       <g key={`${x},${y}`}>
@@ -853,7 +874,7 @@ const MenentukanPGLPage = () => {
                   <svg viewBox="0 0 260 200" className="w-full" style={{ maxHeight: 200 }}>
                     {/* Start */}
                     <rect x="80" y="5" width="100" height="30" rx="6" fill="#1e3a5f" stroke="#22d3ee" strokeWidth="1.5" />
-                    <text x="130" y="25" textAnchor="middle" fill="#22d3ee" fontSize="10" fontWeight="bold">INFO GARIS?</text>
+                    <text x="130" y="25" textAnchor="middle" fill="#22d3ee" fontSize="10" fontWeight="bold">{t.peta_infoGaris}</text>
                     {/* Arrow down */}
                     <line x1="130" y1="35" x2="130" y2="52" stroke="#475569" strokeWidth="1.5" />
                     <polygon points="125,50 135,50 130,57" fill="#475569" />
@@ -861,16 +882,16 @@ const MenentukanPGLPage = () => {
                     <line x1="130" y1="57" x2="65" y2="82" stroke="#a78bfa" strokeWidth="1.2" />
                     <line x1="130" y1="57" x2="195" y2="82" stroke="#fb923c" strokeWidth="1.2" />
                     {/* Labels on branches */}
-                    <text x="65" y="74" textAnchor="middle" fill="#a78bfa" fontSize="8">m dan 1 titik</text>
-                    <text x="195" y="74" textAnchor="middle" fill="#fb923c" fontSize="8">2 titik</text>
+                    <text x="65" y="74" textAnchor="middle" fill="#a78bfa" fontSize="8">{t.peta_mDan1Titik}</text>
+                    <text x="195" y="74" textAnchor="middle" fill="#fb923c" fontSize="8">{t.peta_2Titik}</text>
                     {/* Box 1 */}
                     <rect x="10" y="85" width="110" height="40" rx="5" fill="#1a0b3a" stroke="#a78bfa" strokeWidth="1.2" />
                     <text x="65" y="101" textAnchor="middle" fill="#a78bfa" fontSize="8" fontWeight="bold">y−y₁ = m(x−x₁)</text>
-                    <text x="65" y="114" textAnchor="middle" fill="#c4b5fd" fontSize="7">Titik-gradien</text>
+                    <text x="65" y="114" textAnchor="middle" fill="#c4b5fd" fontSize="7">{t.peta_titikGradien}</text>
                     {/* Box 2 */}
                     <rect x="140" y="85" width="110" height="40" rx="5" fill="#1c0d00" stroke="#fb923c" strokeWidth="1.2" />
-                    <text x="195" y="101" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">Hitung m dulu,</text>
-                    <text x="195" y="113" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">lalu skenario 1</text>
+                    <text x="195" y="101" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">{t.peta_hitungM}</text>
+                    <text x="195" y="113" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">{t.peta_laluSk1}</text>
                     {/* Both converge to result */}
                     <line x1="65" y1="125" x2="65" y2="152" stroke="#475569" strokeWidth="1" />
                     <line x1="195" y1="125" x2="195" y2="152" stroke="#475569" strokeWidth="1" />

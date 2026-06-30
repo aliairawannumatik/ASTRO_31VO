@@ -64,6 +64,7 @@ const T_GRADIEN = {
     duaP: "Jika diketahui dua titik",
     duaP2: ", gradien garis yang melalui keduanya dihitung dengan rumus:",
     dyLabel: "Δy = sisi tegak", dxLabel: "Δx = sisi datar",
+    svgDatar: "datar", svgTegak: "tegak",
     dyDesc: "selisih vertikal", dxDesc: "selisih horizontal",
     duaHint: "Seret titik",
     duaHint2: "dan",
@@ -161,6 +162,7 @@ const T_GRADIEN = {
     duaP: "Given two points",
     duaP2: ", the gradient of the line through them is:",
     dyLabel: "Δy = vertical side", dxLabel: "Δx = horizontal side",
+    svgDatar: "run", svgTegak: "rise",
     dyDesc: "vertical difference", dxDesc: "horizontal difference",
     duaHint: "Drag point",
     duaHint2: "and",
@@ -258,6 +260,7 @@ const T_GRADIEN = {
     duaP: "2点",
     duaP2: "を通る直線の傾きは次の公式で求めます：",
     dyLabel: "Δy = 垂直辺", dxLabel: "Δx = 水平辺",
+    svgDatar: "底辺", svgTegak: "高さ",
     dyDesc: "垂直方向の差", dxDesc: "水平方向の差",
     duaHint: "点",
     duaHint2: "と",
@@ -427,8 +430,8 @@ const GradienPage = () => {
                       <line x1="20" y1="80" x2="110" y2="20" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" />
                       <line x1="20" y1="80" x2="110" y2="80" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
                       <line x1="110" y1="80" x2="110" y2="20" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
-                      <text x="55" y="93" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">datar</text>
-                      <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">tegak</text>
+                      <text x="55" y="93" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">{t.svgDatar}</text>
+                      <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">{t.svgTegak}</text>
                     </svg>
                     <p className="text-xs font-bold text-green-300 font-body text-center">{t.posLabel} <span className="text-green-400">{t.posVal}</span></p>
                     <p className="text-[10px] text-white/50 font-body text-center">{t.posDesc}</p>
@@ -446,8 +449,8 @@ const GradienPage = () => {
                       <line x1="20" y1="20" x2="110" y2="80" stroke="#f87171" strokeWidth="3" strokeLinecap="round" />
                       <line x1="20" y1="20" x2="110" y2="20" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
                       <line x1="110" y1="20" x2="110" y2="80" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
-                      <text x="55" y="14" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">datar</text>
-                      <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">tegak</text>
+                      <text x="55" y="14" fill="#4ade80" fontSize="8.5" fontWeight="bold" textAnchor="middle">{t.svgDatar}</text>
+                      <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">{t.svgTegak}</text>
                     </svg>
                     <p className="text-xs font-bold text-red-300 font-body text-center">{t.posLabel} <span className="text-red-400">{t.negVal}</span></p>
                     <p className="text-[10px] text-white/50 font-body text-center">{t.negDesc}</p>
