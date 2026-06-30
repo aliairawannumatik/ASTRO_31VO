@@ -43,6 +43,22 @@ const PP_TRANSLATIONS = {
     secSummary: "📌 Rangkuman Sub-Bab",
     secSquares: "⚡ Hafal Bilangan Kuadrat 1–30",
     backBtn: "← Kembali ke Teorema Pythagoras",
+    introPart1: "Lebih dari 2.500 tahun lalu, seorang matematikawan Yunani bernama ",
+    introPart2: " menemukan sebuah pola yang luar biasa di setiap segitiga siku-siku. Hubungan antar sisi-sisinya selalu berlaku, tanpa terkecuali! Inilah yang kita kenal sebagai ",
+    termPythagoras: "Teorema Pythagoras",
+    introPart3: " — salah satu rumus paling terkenal di dunia matematika.",
+    realWorldTitle: "🏗️ Kegunaan Teorema Pythagoras dalam Kehidupan Nyata",
+    realWorldDesc: "Teorema Pythagoras bukan sekadar rumus di buku teks — ia dipakai setiap hari oleh para profesional di berbagai bidang:",
+    rw1Label: "Konstruksi & Arsitektur",
+    rw1Text: "Para pekerja bangunan menggunakan Teorema Pythagoras untuk memastikan sudut bangunan benar-benar 90° (siku-siku), mengukur diagonal pondasi, dan menghitung panjang rangka atap secara presisi.",
+    rw2Label: "Navigasi & Pemetaan",
+    rw2Text: "Menentukan jarak terpendek antara dua titik di peta, digunakan pada GPS dan sistem navigasi kapal maupun pesawat.",
+    rw3Label: "Teknologi & Sinyal",
+    rw3Text: "Menghitung jangkauan sinyal antena, jarak antar menara telekomunikasi, dan posisi satelit.",
+    rw4Label: "Game & Grafis Komputer",
+    rw4Text: "Menghitung jarak antar objek dalam ruang 2D dan 3D, dipakai dalam rendering dan deteksi tabrakan (collision detection).",
+    rw5Label: "Kedokteran & Imaging",
+    rw5Text: "Digunakan dalam pemrosesan gambar medis seperti CT scan dan MRI untuk menghitung jarak dan ukuran organ.",
   },
   en: {
     pageTitle: "PROVING THE PYTHAGOREAN THEOREM AND CALCULATING SIDE LENGTHS OF RIGHT TRIANGLES",
@@ -73,6 +89,22 @@ const PP_TRANSLATIONS = {
     secSummary: "📌 Section Summary",
     secSquares: "⚡ Memorize Perfect Squares 1–30",
     backBtn: "← Back to Pythagorean Theorem",
+    introPart1: "More than 2,500 years ago, a Greek mathematician named ",
+    introPart2: " discovered a remarkable pattern in every right triangle. The relationship between its sides always holds, without exception! This is what we know as the ",
+    termPythagoras: "Pythagorean Theorem",
+    introPart3: " — one of the most famous formulas in mathematics.",
+    realWorldTitle: "🏗️ Uses of the Pythagorean Theorem in Real Life",
+    realWorldDesc: "The Pythagorean Theorem isn't just a formula in a textbook — it is used every day by professionals across many fields:",
+    rw1Label: "Construction & Architecture",
+    rw1Text: "Construction workers use the Pythagorean Theorem to ensure building corners are exactly 90° (right angles), measure foundation diagonals, and calculate roof frame lengths with precision.",
+    rw2Label: "Navigation & Mapping",
+    rw2Text: "Determining the shortest distance between two points on a map, used in GPS and navigation systems for ships and aircraft.",
+    rw3Label: "Technology & Signals",
+    rw3Text: "Calculating the range of antenna signals, distances between telecommunications towers, and satellite positions.",
+    rw4Label: "Game & Computer Graphics",
+    rw4Text: "Calculating distances between objects in 2D and 3D space, used in rendering and collision detection.",
+    rw5Label: "Medicine & Imaging",
+    rw5Text: "Used in processing medical images such as CT scans and MRI to calculate distances and organ sizes.",
   },
   ja: {
     pageTitle: "三平方の定理の証明と直角三角形の辺の長さの計算",
@@ -103,6 +135,22 @@ const PP_TRANSLATIONS = {
     secSummary: "📌 セクションまとめ",
     secSquares: "⚡ 平方数 1–30 を覚えよう",
     backBtn: "← 三平方の定理に戻る",
+    introPart1: "2,500年以上前、ギリシャの数学者",
+    introPart2: "は、直角三角形に驚くべきパターンを発見しました。辺の間の関係は、例外なく常に成り立ちます！これが私たちが「",
+    termPythagoras: "三平方の定理",
+    introPart3: "」として知るもの — 数学界で最も有名な公式の一つです。",
+    realWorldTitle: "🏗️ 三平方の定理の実生活での利用",
+    realWorldDesc: "三平方の定理は教科書の公式にとどまりません — さまざまな分野の専門家が毎日活用しています：",
+    rw1Label: "建設・建築",
+    rw1Text: "建設作業員は三平方の定理を使って、建物の角が正確に90°（直角）であることを確認し、基礎の対角線を測定し、屋根の骨組みの長さを精密に計算します。",
+    rw2Label: "ナビゲーション・測量",
+    rw2Text: "地図上の2点間の最短距離を求めるため、GPS や船・航空機のナビゲーションシステムで使われています。",
+    rw3Label: "技術・電波",
+    rw3Text: "アンテナの電波到達範囲、通信タワー間の距離、衛星の位置を計算します。",
+    rw4Label: "ゲーム・コンピュータグラフィックス",
+    rw4Text: "2Dおよび3D空間でのオブジェクト間の距離計算に使われ、レンダリングや衝突検出（コリジョン）に応用されています。",
+    rw5Label: "医療・イメージング",
+    rw5Text: "CTスキャンやMRIなどの医療画像処理で、距離や臓器のサイズを計算するために使われます。",
   },
 };
 
@@ -361,34 +409,34 @@ const PembuktianPage = () => {
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title={ppt.secIntro}/>
             <div className="px-5 pb-5 space-y-4">
               <p className="font-body text-sm text-white/80 leading-relaxed">
-                Lebih dari 2.500 tahun lalu, seorang matematikawan Yunani bernama <strong className="text-cyan-300">Pythagoras</strong> menemukan sebuah pola yang luar biasa di setiap segitiga siku-siku. Hubungan antar sisi-sisinya selalu berlaku, tanpa terkecuali! Inilah yang kita kenal sebagai <strong className="text-yellow-300">Teorema Pythagoras</strong> — salah satu rumus paling terkenal di dunia matematika.
+                {ppt.introPart1}<strong className="text-cyan-300">Pythagoras</strong>{ppt.introPart2}<strong className="text-yellow-300">{ppt.termPythagoras}</strong>{ppt.introPart3}
               </p>
 
               <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-3">
-                <p className="text-yellow-300 font-semibold text-sm">🏗️ Kegunaan Teorema Pythagoras dalam Kehidupan Nyata</p>
+                <p className="text-yellow-300 font-semibold text-sm">{ppt.realWorldTitle}</p>
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Teorema Pythagoras bukan sekadar rumus di buku teks — ia dipakai setiap hari oleh para profesional di berbagai bidang:
+                  {ppt.realWorldDesc}
                 </p>
                 <ul className="space-y-2 font-body text-sm text-white/75">
                   <li className="flex gap-2">
                     <span className="text-orange-400 shrink-0">🏗️</span>
-                    <span><strong className="text-orange-300">Konstruksi & Arsitektur</strong> — Para pekerja bangunan menggunakan Teorema Pythagoras untuk memastikan sudut bangunan benar-benar 90° (siku-siku), mengukur diagonal pondasi, dan menghitung panjang rangka atap secara presisi.</span>
+                    <span><strong className="text-orange-300">{ppt.rw1Label}</strong> — {ppt.rw1Text}</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-cyan-400 shrink-0">🗺️</span>
-                    <span><strong className="text-cyan-300">Navigasi & Pemetaan</strong> — Menentukan jarak terpendek antara dua titik di peta, digunakan pada GPS dan sistem navigasi kapal maupun pesawat.</span>
+                    <span><strong className="text-cyan-300">{ppt.rw2Label}</strong> — {ppt.rw2Text}</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-green-400 shrink-0">📡</span>
-                    <span><strong className="text-green-300">Teknologi & Sinyal</strong> — Menghitung jangkauan sinyal antena, jarak antar menara telekomunikasi, dan posisi satelit.</span>
+                    <span><strong className="text-green-300">{ppt.rw3Label}</strong> — {ppt.rw3Text}</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-purple-400 shrink-0">🎮</span>
-                    <span><strong className="text-purple-300">Game & Grafis Komputer</strong> — Menghitung jarak antar objek dalam ruang 2D dan 3D, dipakai dalam rendering dan deteksi tabrakan (collision detection).</span>
+                    <span><strong className="text-purple-300">{ppt.rw4Label}</strong> — {ppt.rw4Text}</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="text-pink-400 shrink-0">⚕️</span>
-                    <span><strong className="text-pink-300">Kedokteran & Imaging</strong> — Digunakan dalam pemrosesan gambar medis seperti CT scan dan MRI untuk menghitung jarak dan ukuran organ.</span>
+                    <span><strong className="text-pink-300">{ppt.rw5Label}</strong> — {ppt.rw5Text}</span>
                   </li>
                 </ul>
 
