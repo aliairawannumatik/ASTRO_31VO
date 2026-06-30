@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // ─── Geometry: 3-4-5 triangle, 40 px/unit ────────────────────────────────────
 // a=120 px, b=160 px, c=200 px
@@ -107,6 +108,71 @@ const NARRATION = [
   { t: 0.83, text: "Langkah 7: Persegi panjang hijau (luas b²) BERGESER masuk mengisi sisa c²..." },
   { t: 0.96, text: "Langkah 8: a² + b² = c²  ✓  Teorema Pythagoras Terbukti secara visual!" },
 ];
+
+const NARRATION_TRANSLATIONS: Record<string, Record<string, string>> = {
+  en: {
+    "Langkah 1: Segitiga siku-siku dengan tiga sisi: a, b, dan c (hipotenusa).": "Step 1: A right triangle with three sides: a, b, and c (hypotenuse).",
+    "Langkah 2: Persegi terbentuk di setiap sisi segitiga — masing-masing luasnya a², b², dan c².": "Step 2: Squares form on each side of the triangle — with areas a², b², and c² respectively.",
+    "Langkah 3: Perhatikan luas masing-masing persegi: a², b², dan c².": "Step 3: Notice the area of each square: a², b², and c².",
+    "Langkah 4: a² berubah bentuk jadi persegi panjang — perhatikan LUAS TETAP sama! Grid tidak hilang.": "Step 4: a² reshapes into a rectangle — notice the AREA STAYS the same! The grid doesn't disappear.",
+    "Langkah 5: b² berubah bentuk jadi persegi panjang — LUAS TETAP sama! Sama banyak kotaknya.": "Step 5: b² reshapes into a rectangle — AREA STAYS the same! Same number of grid cells.",
+    "Langkah 6: Persegi panjang biru (luas a²) BERGESER masuk ke persegi c²...": "Step 6: The blue rectangle (area a²) SLIDES into square c²...",
+    "Langkah 7: Persegi panjang hijau (luas b²) BERGESER masuk mengisi sisa c²...": "Step 7: The green rectangle (area b²) SLIDES in to fill the rest of c²...",
+    "Langkah 8: a² + b² = c²  ✓  Teorema Pythagoras Terbukti secara visual!": "Step 8: a² + b² = c²  ✓  Pythagorean Theorem visually proven!",
+  },
+  ja: {
+    "Langkah 1: Segitiga siku-siku dengan tiga sisi: a, b, dan c (hipotenusa).": "ステップ 1: 直角三角形の 3 辺：a、b、c（斜辺）。",
+    "Langkah 2: Persegi terbentuk di setiap sisi segitiga — masing-masing luasnya a², b², dan c².": "ステップ 2: 三角形の各辺に正方形が形成されます — それぞれの面積は a²、b²、c²。",
+    "Langkah 3: Perhatikan luas masing-masing persegi: a², b², dan c².": "ステップ 3: 各正方形の面積に注目：a²、b²、c²。",
+    "Langkah 4: a² berubah bentuk jadi persegi panjang — perhatikan LUAS TETAP sama! Grid tidak hilang.": "ステップ 4: a² が長方形に変形 — 面積は変わりません！グリッドも消えません。",
+    "Langkah 5: b² berubah bentuk jadi persegi panjang — LUAS TETAP sama! Sama banyak kotaknya.": "ステップ 5: b² が長方形に変形 — 面積は変わりません！マス目の数も同じ。",
+    "Langkah 6: Persegi panjang biru (luas a²) BERGESER masuk ke persegi c²...": "ステップ 6: 青い長方形（面積 a²）が c² の正方形の中に移動...",
+    "Langkah 7: Persegi panjang hijau (luas b²) BERGESER masuk mengisi sisa c²...": "ステップ 7: 緑の長方形（面積 b²）が c² の残りを埋めます...",
+    "Langkah 8: a² + b² = c²  ✓  Teorema Pythagoras Terbukti secara visual!": "ステップ 8: a² + b² = c²  ✓  三平方の定理を視覚的に証明！",
+  },
+};
+
+const SQ_UI_TRANSLATIONS = {
+  id: {
+    title: "🟦 Pembuktian Teorema Pythagoras 3 Animasi persegi bergerak",
+    subtitle: "Persegi berubah bentuk (luas tetap!) lalu masuk dan mengisi tepat seluruh persegi c²",
+    play: "▶ Play",
+    pause: "⏸ Pause",
+    resume: "▶ Lanjut",
+    reset: "🔄 Reset",
+    replay: "🔄 Ulangi",
+    hintIdle: "Tekan ▶ Play — perhatikan bagaimana setiap persegi berubah bentuk (luas tetap!) lalu masuk ke c²!",
+    hintPlaying: "Perhatikan jumlah kotak grid tidak berubah saat persegi jadi persegi panjang…",
+    hintPaused: "Dijeda. Tekan Lanjut untuk melanjutkan.",
+    hintDone: "a² (biru) + b² (hijau) = tepat mengisi c² ✓  Teorema Pythagoras terbukti!",
+  },
+  en: {
+    title: "🟦 Pythagorean Theorem Proof 3 — Moving squares animation",
+    subtitle: "Squares reshape (area unchanged!) then slide in and exactly fill square c²",
+    play: "▶ Play",
+    pause: "⏸ Pause",
+    resume: "▶ Resume",
+    reset: "🔄 Reset",
+    replay: "🔄 Replay",
+    hintIdle: "Press ▶ Play — watch how each square reshapes (area unchanged!) then slides into c²!",
+    hintPlaying: "Notice the number of grid cells doesn't change as the square becomes a rectangle…",
+    hintPaused: "Paused. Press Resume to continue.",
+    hintDone: "a² (blue) + b² (green) = exactly fills c² ✓  Pythagorean Theorem proven!",
+  },
+  ja: {
+    title: "🟦 三平方の定理の証明 3 — 動く正方形のアニメーション",
+    subtitle: "正方形が変形（面積不変！）して c² にぴったり収まります",
+    play: "▶ 再生",
+    pause: "⏸ 一時停止",
+    resume: "▶ 再開",
+    reset: "🔄 リセット",
+    replay: "🔄 くり返す",
+    hintIdle: "▶ 再生を押して — 各正方形が変形（面積不変！）して c² に入る様子を観察しよう！",
+    hintPlaying: "正方形が長方形になってもマス目の数が変わらないことに注目…",
+    hintPaused: "一時停止中。再開を押してください。",
+    hintDone: "a²（青）+ b²（緑）= c² をぴったり満たす ✓  三平方の定理 証明済み！",
+  },
+};
 
 // ─── Easing ───────────────────────────────────────────────────────────────────
 function eO3(t:number) { return 1-Math.pow(1-t,3); }
@@ -407,6 +473,10 @@ type UIState="idle"|"playing"|"paused"|"done";
 const FIXED_SPEED = 0.5;
 
 const PythagorasSquaresAnimation:React.FC=()=>{
+  const { language } = useLanguage();
+  const squi = SQ_UI_TRANSLATIONS[language as keyof typeof SQ_UI_TRANSLATIONS] ?? SQ_UI_TRANSLATIONS.id;
+  const translateNarration = (text: string) =>
+    NARRATION_TRANSLATIONS[language]?.[text] ?? text;
   const canvasRef=useRef<HTMLCanvasElement>(null);
   const anim=useRef({running:false,raf:0,startTs:0,elapsed:0,speed:FIXED_SPEED});
   const stepRef=useRef<(ts:number)=>void>(()=>{});
@@ -456,12 +526,8 @@ const PythagorasSquaresAnimation:React.FC=()=>{
   return (
     <div className="flex flex-col items-center gap-4 select-none">
       <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl px-4 py-2 w-full text-center">
-        <p className="font-display text-xs font-bold text-blue-300 uppercase tracking-widest">
-          🟦 Pembuktian Teorema Pythagoras 3 Animasi persegi bergerak
-        </p>
-        <p className="font-body text-xs text-white/50 mt-0.5">
-          Persegi berubah bentuk (luas tetap!) lalu masuk dan mengisi tepat seluruh persegi c²
-        </p>
+        <p className="font-display text-xs font-bold text-blue-300 uppercase tracking-widest">{squi.title}</p>
+        <p className="font-body text-xs text-white/50 mt-0.5">{squi.subtitle}</p>
       </div>
 
       <div className="w-full max-w-lg mx-auto rounded-xl overflow-hidden border border-slate-700/50" style={{background:COL_BG}}>
@@ -478,33 +544,33 @@ const PythagorasSquaresAnimation:React.FC=()=>{
 
       <div className="flex gap-3 items-center flex-wrap justify-center">
         {uiState==="idle"&&(
-          <button onClick={play} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 transition-all active:scale-95">▶ Play</button>
+          <button onClick={play} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 transition-all active:scale-95">{squi.play}</button>
         )}
         {uiState==="playing"&&(
-          <button onClick={pause} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white transition-all active:scale-95">⏸ Pause</button>
+          <button onClick={pause} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white transition-all active:scale-95">{squi.pause}</button>
         )}
         {uiState==="paused"&&(
           <>
-            <button onClick={play} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 transition-all active:scale-95">▶ Lanjut</button>
-            <button onClick={reset} className="px-5 py-2.5 rounded-xl font-body font-bold text-sm bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white transition-all active:scale-95">🔄 Reset</button>
+            <button onClick={play} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 transition-all active:scale-95">{squi.resume}</button>
+            <button onClick={reset} className="px-5 py-2.5 rounded-xl font-body font-bold text-sm bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white transition-all active:scale-95">{squi.reset}</button>
           </>
         )}
         {uiState==="done"&&(
-          <button onClick={reset} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white transition-all active:scale-95">🔄 Ulangi</button>
+          <button onClick={reset} className="px-6 py-2.5 rounded-xl font-body font-bold text-sm bg-slate-700 hover:bg-slate-600 border border-slate-500 text-white transition-all active:scale-95">{squi.replay}</button>
         )}
       </div>
 
       <div className="w-full max-w-lg mx-auto bg-slate-800/60 border border-slate-600/40 rounded-xl px-4 py-3 min-h-[52px] flex items-center">
-        <p className="font-body text-sm text-white/85 leading-relaxed">{narration}</p>
+        <p className="font-body text-sm text-white/85 leading-relaxed">{translateNarration(narration)}</p>
       </div>
 
       <p className={`text-center font-body text-xs max-w-sm leading-relaxed transition-colors duration-300 ${
         uiState==="done"?"text-yellow-300 font-semibold":uiState==="playing"?"text-cyan-300":"text-white/45"
       }`}>
-        {uiState==="idle"&&"Tekan ▶ Play — perhatikan bagaimana setiap persegi berubah bentuk (luas tetap!) lalu masuk ke c²!"}
-        {uiState==="playing"&&"Perhatikan jumlah kotak grid tidak berubah saat persegi jadi persegi panjang…"}
-        {uiState==="paused"&&"Dijeda. Tekan Lanjut untuk melanjutkan."}
-        {uiState==="done"&&"a² (biru) + b² (hijau) = tepat mengisi c² ✓  Teorema Pythagoras terbukti!"}
+        {uiState==="idle"&&squi.hintIdle}
+        {uiState==="playing"&&squi.hintPlaying}
+        {uiState==="paused"&&squi.hintPaused}
+        {uiState==="done"&&squi.hintDone}
       </p>
     </div>
   );

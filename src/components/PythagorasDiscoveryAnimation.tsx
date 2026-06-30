@@ -1,12 +1,59 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const STEPS = [
-  { label: "Segitiga Siku-Siku", desc: "Perhatikan segitiga siku-siku dengan sisi a, b, dan c (sisi miring)." },
-  { label: "Persegi pada sisi a", desc: "Bangun persegi di sisi a. Luasnya = a² = 9 satuan²." },
-  { label: "Persegi pada sisi b", desc: "Bangun persegi di sisi b. Luasnya = b² = 16 satuan²." },
-  { label: "Persegi pada sisi c", desc: "Bangun persegi di sisi miring c. Luasnya = c² = 25 satuan²." },
-  { label: "Terbukti!", desc: "Luas persegi a + luas persegi b = luas persegi c → a² + b² = c²  ✓" },
-];
+const STEPS_TRANSLATIONS = {
+  id: [
+    { label: "Segitiga Siku-Siku", desc: "Perhatikan segitiga siku-siku dengan sisi a, b, dan c (sisi miring)." },
+    { label: "Persegi pada sisi a", desc: "Bangun persegi di sisi a. Luasnya = a² = 9 satuan²." },
+    { label: "Persegi pada sisi b", desc: "Bangun persegi di sisi b. Luasnya = b² = 16 satuan²." },
+    { label: "Persegi pada sisi c", desc: "Bangun persegi di sisi miring c. Luasnya = c² = 25 satuan²." },
+    { label: "Terbukti!", desc: "Luas persegi a + luas persegi b = luas persegi c → a² + b² = c²  ✓" },
+  ],
+  en: [
+    { label: "Right Triangle", desc: "Observe the right triangle with sides a, b, and c (hypotenuse)." },
+    { label: "Square on side a", desc: "Build a square on side a. Its area = a² = 9 square units." },
+    { label: "Square on side b", desc: "Build a square on side b. Its area = b² = 16 square units." },
+    { label: "Square on side c", desc: "Build a square on hypotenuse c. Its area = c² = 25 square units." },
+    { label: "Proven!", desc: "Area of square a + area of square b = area of square c → a² + b² = c²  ✓" },
+  ],
+  ja: [
+    { label: "直角三角形", desc: "辺 a、b、c（斜辺）の直角三角形を観察しましょう。" },
+    { label: "辺 a の正方形", desc: "辺 a に正方形を作ります。面積 = a² = 9 平方単位。" },
+    { label: "辺 b の正方形", desc: "辺 b に正方形を作ります。面積 = b² = 16 平方単位。" },
+    { label: "辺 c の正方形", desc: "斜辺 c に正方形を作ります。面積 = c² = 25 平方単位。" },
+    { label: "証明完了！", desc: "正方形 a の面積 + 正方形 b の面積 = 正方形 c の面積 → a² + b² = c²  ✓" },
+  ],
+};
+
+const UI_TRANSLATIONS = {
+  id: {
+    ariaLabel: "Animasi Penemuan Teorema Pythagoras",
+    proved: "9 + 16 = 25  ✓  Teorema Pythagoras Terbukti!",
+    replay: "🔄 Ulangi",
+    pause: "⏸ Jeda",
+    start: "▶ Mulai Animasi",
+    resume: "▶ Lanjutkan",
+    nextStep: "Langkah Berikutnya →",
+  },
+  en: {
+    ariaLabel: "Pythagorean Theorem Discovery Animation",
+    proved: "9 + 16 = 25  ✓  Pythagorean Theorem Proven!",
+    replay: "🔄 Replay",
+    pause: "⏸ Pause",
+    start: "▶ Start Animation",
+    resume: "▶ Resume",
+    nextStep: "Next Step →",
+  },
+  ja: {
+    ariaLabel: "三平方の定理の発見アニメーション",
+    proved: "9 + 16 = 25  ✓  三平方の定理 証明済み！",
+    replay: "🔄 くり返す",
+    pause: "⏸ 一時停止",
+    start: "▶ アニメーション開始",
+    resume: "▶ 再開",
+    nextStep: "次のステップ →",
+  },
+};
 
 const SCALE = 35;
 const RX = 220, RY = 275;
@@ -50,6 +97,10 @@ const FadeGroup: React.FC<FadeGroupProps> = ({ visible, children, delay = 0 }) =
 );
 
 const PythagorasDiscoveryAnimation: React.FC = () => {
+  const { language } = useLanguage();
+  const STEPS = STEPS_TRANSLATIONS[language as keyof typeof STEPS_TRANSLATIONS] ?? STEPS_TRANSLATIONS.id;
+  const ui = UI_TRANSLATIONS[language as keyof typeof UI_TRANSLATIONS] ?? UI_TRANSLATIONS.id;
+
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -104,7 +155,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
         <svg
           viewBox="20 0 500 430"
           className="w-full"
-          aria-label="Animasi Penemuan Teorema Pythagoras"
+          aria-label={ui.ariaLabel}
         >
           <defs>
             <filter id="glow-a">
@@ -222,7 +273,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
               a² + b² = c²
             </text>
             <text x="270" y="36" textAnchor="middle" fill="#fbbf24" fontSize="12" fontFamily="monospace">
-              9 + 16 = 25  ✓  Teorema Pythagoras Terbukti!
+              {ui.proved}
             </text>
           </FadeGroup>
 
@@ -279,7 +330,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
             color: playing ? "#fca5a5" : "#7dd3fc",
           }}
         >
-          {finished ? "🔄 Ulangi" : playing ? "⏸ Jeda" : step === 0 ? "▶ Mulai Animasi" : "▶ Lanjutkan"}
+          {finished ? ui.replay : playing ? ui.pause : step === 0 ? ui.start : ui.resume}
         </button>
         {step < STEPS.length - 1 && (
           <button
@@ -291,7 +342,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
               color: "#d8b4fe",
             }}
           >
-            Langkah Berikutnya →
+            {ui.nextStep}
           </button>
         )}
       </div>

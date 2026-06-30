@@ -1,4 +1,77 @@
 import { useState, useRef, useCallback, useMemo } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const CHALLENGES_TRANSLATIONS = {
+  id: [
+    { id: "free",  label: "🎨 Eksplorasi Bebas",       check: () => true, hint: "Geser pegangan oranye atau ungu untuk mengubah panjang sisi." },
+    { id: "t345",  label: "Buat triple 3-4-5",         check: (a:number, b:number, c:number) => (a===3&&b===4&&c===5)||(a===4&&b===3&&c===5), hint: "Atur sisi a = 3 dan sisi b = 4. Hipotenusa c akan menjadi 5." },
+    { id: "t6810", label: "Buat triple 6-8-10",        check: (a:number, b:number, c:number) => (a===6&&b===8&&c===10)||(a===8&&b===6&&c===10), hint: "Kelipatan dari 3-4-5. Atur a = 6 dan b = 8." },
+    { id: "t512",  label: "Buat hipotenusa = 13",      check: (a:number, b:number, c:number) => c===13&&((a===5&&b===12)||(a===12&&b===5)), hint: "Coba sisi 5 dan 12. Itulah triple Pythagoras lainnya!" },
+    { id: "t815",  label: "Buat hipotenusa = 17",      check: (a:number, b:number, c:number) => c===17&&((a===8&&b===15)||(a===15&&b===8)), hint: "Triple 8-15-17 — coba kombinasi tersebut." },
+  ],
+  en: [
+    { id: "free",  label: "🎨 Free Exploration",       check: () => true, hint: "Drag the orange or purple handle to change the side lengths." },
+    { id: "t345",  label: "Make triple 3-4-5",         check: (a:number, b:number, c:number) => (a===3&&b===4&&c===5)||(a===4&&b===3&&c===5), hint: "Set side a = 3 and side b = 4. The hypotenuse c will become 5." },
+    { id: "t6810", label: "Make triple 6-8-10",        check: (a:number, b:number, c:number) => (a===6&&b===8&&c===10)||(a===8&&b===6&&c===10), hint: "A multiple of 3-4-5. Set a = 6 and b = 8." },
+    { id: "t512",  label: "Make hypotenuse = 13",      check: (a:number, b:number, c:number) => c===13&&((a===5&&b===12)||(a===12&&b===5)), hint: "Try sides 5 and 12. That's another Pythagorean triple!" },
+    { id: "t815",  label: "Make hypotenuse = 17",      check: (a:number, b:number, c:number) => c===17&&((a===8&&b===15)||(a===15&&b===8)), hint: "Triple 8-15-17 — try that combination." },
+  ],
+  ja: [
+    { id: "free",  label: "🎨 自由探索",              check: () => true, hint: "オレンジまたは紫のハンドルをドラッグして辺の長さを変えましょう。" },
+    { id: "t345",  label: "3-4-5 を作る",             check: (a:number, b:number, c:number) => (a===3&&b===4&&c===5)||(a===4&&b===3&&c===5), hint: "辺 a = 3、辺 b = 4 に設定してください。斜辺 c は 5 になります。" },
+    { id: "t6810", label: "6-8-10 を作る",            check: (a:number, b:number, c:number) => (a===6&&b===8&&c===10)||(a===8&&b===6&&c===10), hint: "3-4-5 の倍数。a = 6、b = 8 に設定してください。" },
+    { id: "t512",  label: "斜辺 = 13 を作る",         check: (a:number, b:number, c:number) => c===13&&((a===5&&b===12)||(a===12&&b===5)), hint: "辺 5 と 12 を試してください。もう一つのピタゴラス数です！" },
+    { id: "t815",  label: "斜辺 = 17 を作る",         check: (a:number, b:number, c:number) => c===17&&((a===8&&b===15)||(a===15&&b===8)), hint: "8-15-17 の組合せを試してください。" },
+  ],
+};
+
+const INT_TRANSLATIONS = {
+  id: {
+    dragHint: "🖱️ Seret pegangan oranye (kanan) atau ungu (atas). Saksikan luas tiga persegi memenuhi a² + b² = c²!",
+    challenge: "Tantangan",
+    success: "🏆 BERHASIL! Triple Pythagoras tercapai!",
+    hint: "💡",
+    equation: "Persamaan Pythagoras",
+    areaA: "■ Luas a²",
+    areaB: "■ Luas b²",
+    total: "■ Total = Luas c²",
+    isTriple: (a:number, b:number, c:number) => `⭐ Ini Triple Pythagoras: ${a}-${b}-${c}!`,
+    notTriple: (c:number) => `Hipotenusa = bilangan irasional (${c}…)`,
+    showSq: "🟦 Tampilkan ²",
+    hideSq: "🟦 Sembunyikan ²",
+    reset: "🔄 Reset",
+  },
+  en: {
+    dragHint: "🖱️ Drag the orange (right) or purple (top) handle. Watch the three squares satisfy a² + b² = c²!",
+    challenge: "Challenge",
+    success: "🏆 SUCCESS! Pythagorean triple achieved!",
+    hint: "💡",
+    equation: "Pythagorean Equation",
+    areaA: "■ Area a²",
+    areaB: "■ Area b²",
+    total: "■ Total = Area c²",
+    isTriple: (a:number, b:number, c:number) => `⭐ This is a Pythagorean Triple: ${a}-${b}-${c}!`,
+    notTriple: (c:number) => `Hypotenuse = irrational number (${c}…)`,
+    showSq: "🟦 Show squares",
+    hideSq: "🟦 Hide squares",
+    reset: "🔄 Reset",
+  },
+  ja: {
+    dragHint: "🖱️ オレンジ（右）または紫（上）のハンドルをドラッグ。3つの正方形が a² + b² = c² を満たすのを観察しよう！",
+    challenge: "チャレンジ",
+    success: "🏆 成功！ピタゴラス数を達成しました！",
+    hint: "💡",
+    equation: "ピタゴラスの等式",
+    areaA: "■ a² の面積",
+    areaB: "■ b² の面積",
+    total: "■ 合計 = c² の面積",
+    isTriple: (a:number, b:number, c:number) => `⭐ これはピタゴラス数: ${a}-${b}-${c}！`,
+    notTriple: (c:number) => `斜辺 = 無理数 (${c}…)`,
+    showSq: "🟦 正方形を表示",
+    hideSq: "🟦 正方形を非表示",
+    reset: "🔄 リセット",
+  },
+};
 
 const VIEW = 460;
 const PAD = 60;
@@ -13,40 +86,11 @@ type Challenge = {
   hint: string;
 };
 
-const CHALLENGES: Challenge[] = [
-  {
-    id: "free",
-    label: "🎨 Eksplorasi Bebas",
-    check: () => true,
-    hint: "Geser pegangan oranye atau ungu untuk mengubah panjang sisi.",
-  },
-  {
-    id: "t345",
-    label: "Buat triple 3-4-5",
-    check: (a, b, c) => (a === 3 && b === 4 && c === 5) || (a === 4 && b === 3 && c === 5),
-    hint: "Atur sisi a = 3 dan sisi b = 4. Hipotenusa c akan menjadi 5.",
-  },
-  {
-    id: "t6810",
-    label: "Buat triple 6-8-10",
-    check: (a, b, c) => (a === 6 && b === 8 && c === 10) || (a === 8 && b === 6 && c === 10),
-    hint: "Kelipatan dari 3-4-5. Atur a = 6 dan b = 8.",
-  },
-  {
-    id: "t512",
-    label: "Buat hipotenusa = 13",
-    check: (a, b, c) => c === 13 && ((a === 5 && b === 12) || (a === 12 && b === 5)),
-    hint: "Coba sisi 5 dan 12. Itulah triple Pythagoras lainnya!",
-  },
-  {
-    id: "t815",
-    label: "Buat hipotenusa = 17",
-    check: (a, b, c) => c === 17 && ((a === 8 && b === 15) || (a === 15 && b === 8)),
-    hint: "Triple 8-15-17 — coba kombinasi tersebut.",
-  },
-];
-
 export default function PythagorasInteractive() {
+  const { language } = useLanguage();
+  const CHALLENGES = CHALLENGES_TRANSLATIONS[language as keyof typeof CHALLENGES_TRANSLATIONS] ?? CHALLENGES_TRANSLATIONS.id;
+  const ti = INT_TRANSLATIONS[language as keyof typeof INT_TRANSLATIONS] ?? INT_TRANSLATIONS.id;
+
   const [a, setA] = useState(3);
   const [b, setB] = useState(4);
   const [dragging, setDragging] = useState<"a" | "b" | null>(null);
@@ -393,7 +437,7 @@ export default function PythagorasInteractive() {
             />
           </svg>
           <p className="mt-2 text-[11px] text-center text-white/55 font-body italic">
-            🖱️ Seret pegangan oranye (kanan) atau ungu (atas). Saksikan luas tiga persegi memenuhi a² + b² = c²!
+            {ti.dragHint}
           </p>
         </div>
 
@@ -408,17 +452,17 @@ export default function PythagorasInteractive() {
                   : "border-amber-300/30 bg-amber-500/10"
             }`}
           >
-            <p className="text-[10px] uppercase tracking-wider text-white/50 mb-1">Tantangan</p>
+            <p className="text-[10px] uppercase tracking-wider text-white/50 mb-1">{ti.challenge}</p>
             <p className="text-sm font-bold text-white">{challenge.label}</p>
             {challengeIdx !== 0 && (
               <p className="text-xs mt-1 text-white/70 italic">
-                {challengeMet ? "🏆 BERHASIL! Triple Pythagoras tercapai!" : `💡 ${challenge.hint}`}
+                {challengeMet ? ti.success : `${ti.hint} ${challenge.hint}`}
               </p>
             )}
           </div>
 
           <div className="rounded-xl border border-emerald-300/30 bg-emerald-500/10 p-3 text-center">
-            <p className="text-[10px] uppercase tracking-wider text-emerald-200/70 mb-1">Persamaan Pythagoras</p>
+            <p className="text-[10px] uppercase tracking-wider text-emerald-200/70 mb-1">{ti.equation}</p>
             <p className="text-base font-display font-bold text-emerald-100">
               {a}² + {b}² = c²
             </p>
@@ -432,25 +476,25 @@ export default function PythagorasInteractive() {
 
           <div className="rounded-xl border border-white/15 bg-black/30 p-3 space-y-1.5 text-xs">
             <div className="flex justify-between">
-              <span className="text-orange-300">■ Luas a²</span>
+              <span className="text-orange-300">{ti.areaA}</span>
               <span className="font-bold text-white">{a * a}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-violet-300">■ Luas b²</span>
+              <span className="text-violet-300">{ti.areaB}</span>
               <span className="font-bold text-white">{b * b}</span>
             </div>
             <div className="border-t border-white/10 my-1" />
             <div className="flex justify-between text-emerald-200 font-bold">
-              <span>■ Total = Luas c²</span>
+              <span>{ti.total}</span>
               <span>{a * a + b * b}</span>
             </div>
           </div>
 
           <div className="rounded-xl border border-white/15 bg-black/30 p-2.5 text-xs text-white/75 text-center">
             {isTriple ? (
-              <p className="text-yellow-200 font-bold">⭐ Ini Triple Pythagoras: {a}-{b}-{cInt}!</p>
+              <p className="text-yellow-200 font-bold">{ti.isTriple(a, b, cInt)}</p>
             ) : (
-              <p>Hipotenusa = bilangan irasional ({c.toFixed(2)}…)</p>
+              <p>{ti.notTriple(c.toFixed(2))}</p>
             )}
           </div>
 
@@ -460,14 +504,14 @@ export default function PythagorasInteractive() {
               onClick={() => setShowSquares((v) => !v)}
               className="flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors"
             >
-              {showSquares ? "🟦 Sembunyikan ²" : "🟦 Tampilkan ²"}
+              {showSquares ? ti.hideSq : ti.showSq}
             </button>
             <button
               type="button"
               onClick={reset}
               className="flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors"
             >
-              🔄 Reset
+              {ti.reset}
             </button>
           </div>
         </div>

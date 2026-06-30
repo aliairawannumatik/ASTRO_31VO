@@ -1,4 +1,41 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const WP_TRANSLATIONS = {
+  id: {
+    title: "💧 Pembuktian Teorema Pythagoras 2 Animasi air",
+    subtitle: "Jika luas a² dan b² disatukan → tepat memenuhi luas c²",
+    btnStart: "💧 Alirkan Air",
+    btnReplay: "🔄 Ulangi Animasi",
+    statusFlow: "Air sedang mengalir ke c²…",
+    doneBanner: "✓  a² + b² = c²  Terbukti!",
+    hintIdle: ["Persegi ", " dan ", " penuh berisi air — tekan tombol untuk membuktikan Teorema Pythagoras secara visual!"],
+    hintAnim: ["Air dari ", " + ", " mengalir ke ", " — perhatikan apa yang terjadi!"],
+    hintDone: ["Air mengisi ", " dengan ", "tepat", " — tidak kurang, tidak lebih. Inilah bukti visual bahwa ", "! ✓"],
+  },
+  en: {
+    title: "💧 Pythagorean Theorem Proof 2 — Water Animation",
+    subtitle: "If the areas of a² and b² are combined → they exactly fill c²",
+    btnStart: "💧 Flow Water",
+    btnReplay: "🔄 Replay Animation",
+    statusFlow: "Water is flowing into c²…",
+    doneBanner: "✓  a² + b² = c²  Proven!",
+    hintIdle: ["Square ", " and ", " are full of water — press the button to prove the Pythagorean Theorem visually!"],
+    hintAnim: ["Water from ", " + ", " flows into ", " — watch what happens!"],
+    hintDone: ["Water fills ", " ", "exactly", " — no more, no less. This is visual proof that ", "! ✓"],
+  },
+  ja: {
+    title: "💧 三平方の定理の証明 2 — 水アニメーション",
+    subtitle: "a² と b² の面積を合わせると → ちょうど c² を満たす",
+    btnStart: "💧 水を流す",
+    btnReplay: "🔄 もう一度",
+    statusFlow: "水が c² に流れています…",
+    doneBanner: "✓  a² + b² = c²  証明済み！",
+    hintIdle: ["正方形 ", " と ", " は水で満たされています — ボタンを押して三平方の定理を視覚的に証明しましょう！"],
+    hintAnim: ["", " + ", " の水が ", " に流れています — 何が起きるか観察しよう！"],
+    hintDone: ["水が ", " を ", "ぴったり", " 満たします — 多くも少なくもなく。", " の視覚的証明です！ ✓"],
+  },
+};
 
 // ─── Geometry: 3-4-5 triangle, scale 28 px/unit ──────────────────────────────
 // a = 84 px, b = 112 px, c = 140 px
@@ -88,6 +125,9 @@ function streamPath(
 type Phase = "idle" | "animating" | "done";
 
 const PythagorasWaterProof: React.FC = () => {
+  const { language } = useLanguage();
+  const wt = WP_TRANSLATIONS[language as keyof typeof WP_TRANSLATIONS] ?? WP_TRANSLATIONS.id;
+
   const [phase, setPhase]     = useState<Phase>("idle");
   const [progress, setProgress] = useState(0);
   const [tick, setTick]       = useState(0); // continuous wave clock
@@ -204,10 +244,10 @@ const PythagorasWaterProof: React.FC = () => {
       {/* ── Title ── */}
       <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl px-4 py-2 w-full text-center">
         <p className="font-display text-xs font-bold text-cyan-300 uppercase tracking-widest">
-          💧 Pembuktian Teorema Pythagoras 2 Animasi air
+          {wt.title}
         </p>
         <p className="font-body text-xs text-white/50 mt-0.5">
-          Jika luas a² dan b² disatukan → tepat memenuhi luas c²
+          {wt.subtitle}
         </p>
       </div>
 
@@ -422,7 +462,7 @@ const PythagorasWaterProof: React.FC = () => {
                 fill="rgba(234,179,8,0.18)" stroke="#eab308" strokeWidth="1.5"/>
               <text x="215" y="454" textAnchor="middle"
                 fill="#fde047" fontSize="13" fontWeight="bold">
-                ✓  a² + b² = c²  Terbukti!
+                {wt.doneBanner}
               </text>
             </g>
           )}
@@ -440,12 +480,12 @@ const PythagorasWaterProof: React.FC = () => {
                 : "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/40"
             }`}
           >
-            {phase === "done" ? "🔄 Ulangi Animasi" : "💧 Alirkan Air"}
+            {phase === "done" ? wt.btnReplay : wt.btnStart}
           </button>
         ) : (
           <div className="px-5 py-2.5 rounded-xl text-sm text-cyan-300 border border-cyan-500/30 bg-cyan-900/20 flex items-center gap-2 font-body">
             <span className="inline-block animate-bounce">💧</span>
-            Air sedang mengalir ke c²…
+            {wt.statusFlow}
           </div>
         )}
       </div>
@@ -456,16 +496,13 @@ const PythagorasWaterProof: React.FC = () => {
         phase === "animating" ? "text-cyan-300" : "text-white/55"
       }`}>
         {phase === "idle" && (
-          <>Persegi <span className="text-blue-300 font-bold">a²</span> dan <span className="text-green-300 font-bold">b²</span> penuh
-          berisi air — tekan tombol untuk membuktikan Teorema Pythagoras secara visual!</>
+          <>{wt.hintIdle[0]}<span className="text-blue-300 font-bold">a²</span>{wt.hintIdle[1]}<span className="text-green-300 font-bold">b²</span>{wt.hintIdle[2]}</>
         )}
         {phase === "animating" && (
-          <>Air dari <span className="text-blue-300 font-bold">a²</span> + <span className="text-green-300 font-bold">b²</span> mengalir
-          ke <span className="text-orange-300 font-bold">c²</span> — perhatikan apa yang terjadi!</>
+          <>{wt.hintAnim[0]}<span className="text-blue-300 font-bold">a²</span>{wt.hintAnim[1]}<span className="text-green-300 font-bold">b²</span>{wt.hintAnim[2]}<span className="text-orange-300 font-bold">c²</span>{wt.hintAnim[3]}</>
         )}
         {phase === "done" && (
-          <>Air mengisi <span className="text-orange-300">c²</span> dengan <strong>tepat</strong> — tidak kurang, tidak lebih.
-          Inilah bukti visual bahwa <strong>a² + b² = c²</strong>! ✓</>
+          <>{wt.hintDone[0]}<span className="text-orange-300">c²</span>{wt.hintDone[1]}<strong>{wt.hintDone[2]}</strong>{wt.hintDone[3]}<strong>a² + b² = c²</strong>{wt.hintDone[4]}</>
         )}
       </p>
     </div>

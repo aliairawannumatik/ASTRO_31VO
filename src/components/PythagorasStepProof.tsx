@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // ─── Geometry: 3-4-5 triple, 40 px/unit ─────────────────────────────────────
 const SC = 40;
@@ -61,49 +62,87 @@ function cen(v: Pt[]): Pt {
 
 // ── Step metadata ──
 interface StepMeta { label: string; title: string; desc: string; color: string; }
-const STEPS: StepMeta[] = [
-  {
-    label: "1",
-    title: "Segitiga Siku-Siku",
-    desc: "Segitiga siku-siku dengan kaki a = 3 dan b = 4, serta hipotenusa c = 5. Tujuan: buktikan secara visual bahwa a² + b² = c².",
-    color: "#22d3ee",
+
+const STEPS_TRANSLATIONS: Record<string, StepMeta[]> = {
+  id: [
+    { label: "1", title: "Segitiga Siku-Siku", desc: "Segitiga siku-siku dengan kaki a = 3 dan b = 4, serta hipotenusa c = 5. Tujuan: buktikan secara visual bahwa a² + b² = c².", color: "#22d3ee" },
+    { label: "2", title: "Persegi Besar (a+b)²", desc: "Buat persegi besar dengan sisi (a + b) = 7. Luas persegi ini = (a + b)² = 49 satuan² — ini menjadi \"arena\" pembuktian kita!", color: "#818cf8" },
+    { label: "3", title: "Susun 4 Segitiga", desc: "Empat salinan segitiga siku-siku ditempatkan di sudut-sudut persegi besar. Perhatikan ruang kosong berbentuk persegi miring di tengah.", color: "#c084fc" },
+    { label: "4", title: "Ruang Tengah = c²", desc: "Setiap sisi ruang kosong di tengah adalah hipotenusa c. Artinya ruang itu adalah persegi bersisi c → luasnya = c² = 25 satuan²!", color: "#fbbf24" },
+    { label: "5", title: "Geser Segitiga! ▶", desc: "Empat segitiga digeser ke posisi baru di dalam persegi yang sama. Ruang kosong kini terpecah menjadi dua persegi: a² dan b²!", color: "#34d399" },
+    { label: "6", title: "a² + b² = c²  ✓", desc: "Luas persegi besar tetap sama. Dengan dua cara menghitung: c² = a² + b²  →  25 = 9 + 16 = 25 ✓  Teorema Pythagoras TERBUKTI!", color: "#4ade80" },
+  ],
+  en: [
+    { label: "1", title: "Right Triangle", desc: "A right triangle with legs a = 3 and b = 4, and hypotenuse c = 5. Goal: visually prove that a² + b² = c².", color: "#22d3ee" },
+    { label: "2", title: "Large Square (a+b)²", desc: "Create a large square with side (a + b) = 7. Its area = (a + b)² = 49 square units — this becomes our proof \"arena\"!", color: "#818cf8" },
+    { label: "3", title: "Arrange 4 Triangles", desc: "Four copies of the right triangle are placed at the corners of the large square. Notice the tilted square-shaped empty space in the center.", color: "#c084fc" },
+    { label: "4", title: "Center Space = c²", desc: "Every side of the empty center space is hypotenuse c. So that space is a square with side c → its area = c² = 25 square units!", color: "#fbbf24" },
+    { label: "5", title: "Slide Triangles! ▶", desc: "The four triangles slide to new positions inside the same large square. The empty space now splits into two squares: a² and b²!", color: "#34d399" },
+    { label: "6", title: "a² + b² = c²  ✓", desc: "The large square's area stays the same. By two ways of counting: c² = a² + b²  →  25 = 9 + 16 = 25 ✓  Pythagorean Theorem PROVEN!", color: "#4ade80" },
+  ],
+  ja: [
+    { label: "1", title: "直角三角形", desc: "直角三角形：脚 a = 3、b = 4、斜辺 c = 5。目標：a² + b² = c² を視覚的に証明する。", color: "#22d3ee" },
+    { label: "2", title: "大きな正方形 (a+b)²", desc: "一辺 (a + b) = 7 の大きな正方形を作ります。面積 = (a + b)² = 49 平方単位 — これが証明の「舞台」です！", color: "#818cf8" },
+    { label: "3", title: "4 つの三角形を配置", desc: "直角三角形の 4 枚のコピーを大きな正方形の隅に置きます。中央に傾いた正方形の空白ができることに注目。", color: "#c084fc" },
+    { label: "4", title: "中央の空白 = c²", desc: "中央の空白の各辺はすべて斜辺 c です。つまりその空白は一辺 c の正方形 → 面積 = c² = 25 平方単位！", color: "#fbbf24" },
+    { label: "5", title: "三角形を移動！ ▶", desc: "4 つの三角形が同じ大きな正方形の内側の新しい位置に移動します。空白が 2 つの正方形 a² と b² に分かれます！", color: "#34d399" },
+    { label: "6", title: "a² + b² = c²  ✓", desc: "大きな正方形の面積は変わりません。2 通りの数え方：c² = a² + b²  →  25 = 9 + 16 = 25 ✓  三平方の定理 証明済み！", color: "#4ade80" },
+  ],
+};
+
+const SP_UI_TRANSLATIONS = {
+  id: {
+    stepLabel: "LANGKAH",
+    of: "/ 6",
+    autoPlay: "▶ Putar Otomatis",
+    stop: "⏹ Stop",
+    back: "← Kembali",
+    sliding: "⏳ Menggeser…",
+    slideBtn: "▶ Geser Segitiga!",
+    next: "Selanjutnya →",
+    replay: "🔄 Ulangi",
+    prove: "Buktikan: a² + b² = c²",
+    prompt: "▶ Tekan Selanjutnya atau Putar Otomatis",
+    proven: "a² + b² = c²  →  9 + 16 = 25  ✓  TERBUKTI!",
   },
-  {
-    label: "2",
-    title: "Persegi Besar (a+b)²",
-    desc: "Buat persegi besar dengan sisi (a + b) = 7. Luas persegi ini = (a + b)² = 49 satuan² — ini menjadi \"arena\" pembuktian kita!",
-    color: "#818cf8",
+  en: {
+    stepLabel: "STEP",
+    of: "/ 6",
+    autoPlay: "▶ Auto-play",
+    stop: "⏹ Stop",
+    back: "← Back",
+    sliding: "⏳ Sliding…",
+    slideBtn: "▶ Slide Triangles!",
+    next: "Next →",
+    replay: "🔄 Replay",
+    prove: "Prove: a² + b² = c²",
+    prompt: "▶ Press Next or Auto-play",
+    proven: "a² + b² = c²  →  9 + 16 = 25  ✓  PROVEN!",
   },
-  {
-    label: "3",
-    title: "Susun 4 Segitiga",
-    desc: "Empat salinan segitiga siku-siku ditempatkan di sudut-sudut persegi besar. Perhatikan ruang kosong berbentuk persegi miring di tengah.",
-    color: "#c084fc",
+  ja: {
+    stepLabel: "ステップ",
+    of: "/ 6",
+    autoPlay: "▶ 自動再生",
+    stop: "⏹ 停止",
+    back: "← 戻る",
+    sliding: "⏳ 移動中…",
+    slideBtn: "▶ 三角形を移動！",
+    next: "次へ →",
+    replay: "🔄 くり返す",
+    prove: "証明：a² + b² = c²",
+    prompt: "▶ 次へ または 自動再生 を押してください",
+    proven: "a² + b² = c²  →  9 + 16 = 25  ✓  証明済み！",
   },
-  {
-    label: "4",
-    title: "Ruang Tengah = c²",
-    desc: "Setiap sisi ruang kosong di tengah adalah hipotenusa c. Artinya ruang itu adalah persegi bersisi c → luasnya = c² = 25 satuan²!",
-    color: "#fbbf24",
-  },
-  {
-    label: "5",
-    title: "Geser Segitiga! ▶",
-    desc: "Empat segitiga digeser ke posisi baru di dalam persegi yang sama. Ruang kosong kini terpecah menjadi dua persegi: a² dan b²!",
-    color: "#34d399",
-  },
-  {
-    label: "6",
-    title: "a² + b² = c²  ✓",
-    desc: "Luas persegi besar tetap sama. Dengan dua cara menghitung: c² = a² + b²  →  25 = 9 + 16 = 25 ✓  Teorema Pythagoras TERBUKTI!",
-    color: "#4ade80",
-  },
-];
+};
 
 const ANIM_DURATION = 1600;
 
 // ── Component ─────────────────────────────────────────────────────────────────
 const PythagorasStepProof: React.FC = () => {
+  const { language } = useLanguage();
+  const STEPS = STEPS_TRANSLATIONS[language as keyof typeof STEPS_TRANSLATIONS] ?? STEPS_TRANSLATIONS.id;
+  const spui = SP_UI_TRANSLATIONS[language as keyof typeof SP_UI_TRANSLATIONS] ?? SP_UI_TRANSLATIONS.id;
+
   const [step,   setStep  ] = useState(0);
   const [animT,  setAnimT ] = useState(0);
   const [isAnim, setIsAnim] = useState(false);
@@ -502,11 +541,11 @@ const PythagorasStepProof: React.FC = () => {
                 {/* Prompt */}
                 <text x={210} y={210} textAnchor="middle"
                   fill="rgba(251,191,36,0.5)" fontSize="13" fontWeight="bold" fontFamily="monospace">
-                  Buktikan: a² + b² = c²
+                  {spui.prove}
                 </text>
                 <text x={210} y={230} textAnchor="middle"
                   fill="rgba(251,191,36,0.35)" fontSize="11" fontFamily="monospace">
-                  ▶ Tekan Selanjutnya atau Putar Otomatis
+                  {spui.prompt}
                 </text>
               </>
             );
@@ -524,7 +563,7 @@ const PythagorasStepProof: React.FC = () => {
               <text x={210} y={317} textAnchor="middle"
                 fill="#86efac" fontSize="12" fontWeight="bold" fontFamily="monospace"
                 filter="url(#glow-fin)">
-                a² + b² = c²  →  9 + 16 = 25  ✓  TERBUKTI!
+                {spui.proven}
               </text>
             </g>
           )}
@@ -545,7 +584,7 @@ const PythagorasStepProof: React.FC = () => {
             className="text-[10px] font-black px-2 py-0.5 rounded-full font-mono"
             style={{ background: `${info.color}20`, color: info.color }}
           >
-            LANGKAH {info.label} / 6
+            {spui.stepLabel} {info.label} {spui.of}
           </span>
           <span className="text-xs font-bold" style={{ color: info.color }}>
             {info.title}
@@ -566,7 +605,7 @@ const PythagorasStepProof: React.FC = () => {
             color: "#fbbf24",
           }}
         >
-          {autoPlay ? "⏹ Stop" : "▶ Putar Otomatis"}
+          {autoPlay ? spui.stop : spui.autoPlay}
         </button>
 
         {/* Prev */}
@@ -580,7 +619,7 @@ const PythagorasStepProof: React.FC = () => {
             color: "#94a3b8",
           }}
         >
-          ← Kembali
+          {spui.back}
         </button>
 
         {/* Next / Reset */}
@@ -596,10 +635,10 @@ const PythagorasStepProof: React.FC = () => {
             }}
           >
             {isAnim
-              ? "⏳ Menggeser…"
+              ? spui.sliding
               : step === 3
-              ? "▶ Geser Segitiga!"
-              : "Selanjutnya →"}
+              ? spui.slideBtn
+              : spui.next}
           </button>
         ) : (
           <button
@@ -611,7 +650,7 @@ const PythagorasStepProof: React.FC = () => {
               color: "#4ade80",
             }}
           >
-            🔄 Ulangi
+            {spui.replay}
           </button>
         )}
       </div>

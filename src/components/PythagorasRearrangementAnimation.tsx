@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GEOMETRY CONSTANTS  (a=3, b=4, c=5 right triangle, scale=36 px/unit)
@@ -114,37 +115,40 @@ function cen(v: [number,number][]): [number,number] {
 // ─────────────────────────────────────────────────────────────────────────────
 // STEP METADATA — each step has a title, description, and button label
 // ─────────────────────────────────────────────────────────────────────────────
-const STEPS = [
-  {
-    title: "Langkah 1 — Susun 4 segitiga di sudut persegi",
-    desc: "Empat segitiga siku-siku identik (sisi a, b, dan hipotenusa c) ditempatkan di sudut-sudut persegi besar bersisi (a+b). Perhatikan ruang kosong yang terbentuk di tengah.",
-    btn: "Langkah 2: Lihat hipotenusa →",
-    btnColor: "rgba(168,85,247,",
-  },
-  {
-    title: "Langkah 2 — Hipotenusa setiap segitiga panjangnya c",
-    desc: "Perhatikan! Setiap sisi ruang kosong di tengah adalah HIPOTENUSA dari salah satu segitiga. Karena semua hipotenusa panjangnya c, maka sisi ruang kosong = c.",
-    btn: "Langkah 3: Ini adalah c² →",
-    btnColor: "rgba(251,191,36,",
-  },
-  {
-    title: "Langkah 3 — Ruang kosong di tengah = c²",
-    desc: "Ruang kosong berbentuk persegi dengan sisi c, sehingga luasnya = c × c = c². Sekarang kita akan menggeser keempat segitiga untuk melihat apa yang terjadi!",
-    btn: "▶ Geser Segitiga ke Posisi B",
-    btnColor: "rgba(234,179,8,",
-  },
-  {
-    title: "Langkah 4 — Luas kosong = a² + b² = c²  ✓",
-    desc: "Dengan menggeser segitiga, ruang kosong berubah menjadi DUA persegi: a² (= 9) dan b² (= 16). Totalnya 25 = c²! Karena luas persegi besar tidak berubah, a² + b² = c².",
-    btn: "🔄 Ulangi dari Awal",
-    btnColor: "rgba(34,197,94,",
-  },
-];
+const STEPS_TRANSLATIONS = {
+  id: [
+    { title: "Langkah 1 — Susun 4 segitiga di sudut persegi", desc: "Empat segitiga siku-siku identik (sisi a, b, dan hipotenusa c) ditempatkan di sudut-sudut persegi besar bersisi (a+b). Perhatikan ruang kosong yang terbentuk di tengah.", btn: "Langkah 2: Lihat hipotenusa →", btnColor: "rgba(168,85,247," },
+    { title: "Langkah 2 — Hipotenusa setiap segitiga panjangnya c", desc: "Perhatikan! Setiap sisi ruang kosong di tengah adalah HIPOTENUSA dari salah satu segitiga. Karena semua hipotenusa panjangnya c, maka sisi ruang kosong = c.", btn: "Langkah 3: Ini adalah c² →", btnColor: "rgba(251,191,36," },
+    { title: "Langkah 3 — Ruang kosong di tengah = c²", desc: "Ruang kosong berbentuk persegi dengan sisi c, sehingga luasnya = c × c = c². Sekarang kita akan menggeser keempat segitiga untuk melihat apa yang terjadi!", btn: "▶ Geser Segitiga ke Posisi B", btnColor: "rgba(234,179,8," },
+    { title: "Langkah 4 — Luas kosong = a² + b² = c²  ✓", desc: "Dengan menggeser segitiga, ruang kosong berubah menjadi DUA persegi: a² (= 9) dan b² (= 16). Totalnya 25 = c²! Karena luas persegi besar tidak berubah, a² + b² = c².", btn: "🔄 Ulangi dari Awal", btnColor: "rgba(34,197,94," },
+  ],
+  en: [
+    { title: "Step 1 — Place 4 triangles at the square's corners", desc: "Four identical right triangles (sides a, b, and hypotenuse c) are placed at the corners of a large square with side (a+b). Notice the empty space that forms in the center.", btn: "Step 2: See the hypotenuse →", btnColor: "rgba(168,85,247," },
+    { title: "Step 2 — Each triangle's hypotenuse has length c", desc: "Notice! Every side of the empty space in the center is the HYPOTENUSE of one of the triangles. Since all hypotenuses have length c, the empty space's sides = c.", btn: "Step 3: This is c² →", btnColor: "rgba(251,191,36," },
+    { title: "Step 3 — The empty space in the center = c²", desc: "The empty space forms a square with side c, so its area = c × c = c². Now we'll slide the four triangles to see what happens!", btn: "▶ Slide Triangles to Position B", btnColor: "rgba(234,179,8," },
+    { title: "Step 4 — Empty area = a² + b² = c²  ✓", desc: "By sliding the triangles, the empty space splits into TWO squares: a² (= 9) and b² (= 16). Total = 25 = c²! Since the large square's area is unchanged, a² + b² = c².", btn: "🔄 Restart", btnColor: "rgba(34,197,94," },
+  ],
+  ja: [
+    { title: "ステップ 1 — 正方形の隅に 4 つの三角形を配置", desc: "4 つの同じ直角三角形（辺 a、b、斜辺 c）を、一辺が (a+b) の大きな正方形の隅に置きます。中央にできる空白に注目してください。", btn: "ステップ 2: 斜辺を見る →", btnColor: "rgba(168,85,247," },
+    { title: "ステップ 2 — 各三角形の斜辺の長さは c", desc: "注目！中央の空白の各辺は、三角形の 1 つの斜辺です。すべての斜辺の長さが c なので、空白の辺 = c です。", btn: "ステップ 3: これが c² →", btnColor: "rgba(251,191,36," },
+    { title: "ステップ 3 — 中央の空白 = c²", desc: "空白は辺 c の正方形を形成し、面積 = c × c = c²。4 つの三角形をスライドして何が起きるか見てみましょう！", btn: "▶ 三角形を位置 B へ移動", btnColor: "rgba(234,179,8," },
+    { title: "ステップ 4 — 空白面積 = a² + b² = c²  ✓", desc: "三角形をスライドすると、空白が 2 つの正方形に分かれます：a² (= 9) と b² (= 16)。合計 = 25 = c²！大きな正方形の面積は変わらないので、a² + b² = c² です。", btn: "🔄 最初から", btnColor: "rgba(34,197,94," },
+  ],
+};
+
+const RA_UI_TRANSLATIONS = {
+  id: { back: "← Kembali", sliding: "⏳ Menggeser segitiga…" },
+  en: { back: "← Back", sliding: "⏳ Sliding triangles…" },
+  ja: { back: "← 戻る", sliding: "⏳ 三角形を移動中…" },
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN COMPONENT
 // ─────────────────────────────────────────────────────────────────────────────
 const PythagorasRearrangementAnimation: React.FC = () => {
+  const { language } = useLanguage();
+  const STEPS = STEPS_TRANSLATIONS[language as keyof typeof STEPS_TRANSLATIONS] ?? STEPS_TRANSLATIONS.id;
+  const rui = RA_UI_TRANSLATIONS[language as keyof typeof RA_UI_TRANSLATIONS] ?? RA_UI_TRANSLATIONS.id;
 
   // Discrete step (0–3) controls what's shown
   const [step, setStep]         = useState(0);
@@ -511,7 +515,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
             color: "#cbd5e1",
           }}
         >
-          ← Kembali
+          {rui.back}
         </button>
 
         {/* Forward / reset button */}
@@ -525,7 +529,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
             color: step === 1 ? "#fde68a" : step === 2 ? "#fbbf24" : step === 3 && animDone ? "#86efac" : "#d8b4fe",
           }}
         >
-          {isAnimating ? "⏳ Menggeser segitiga…" : info.btn}
+          {isAnimating ? rui.sliding : info.btn}
         </button>
       </div>
 

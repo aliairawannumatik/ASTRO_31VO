@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Lightbulb, Target, FlaskConical, Ruler } from "lucide-react";
@@ -12,7 +13,102 @@ import PythagorasSquaresAnimation from "@/components/PythagorasSquaresAnimation"
 /*
   Pembuktian SVG — 4 right-triangles (a=60, b=80, c=100) inside a square (side=140).
 */
-const PembuktianSVG = () => (
+const PP_TRANSLATIONS = {
+  id: {
+    pageTitle: "PEMBUKTIAN TEOREMA PYTHAGORAS DAN MENGHITUNG PANJANG SISI SEGITIGA SIKU-SIKU",
+    pageSubtitle: "Kelas 8 · Teorema Pythagoras · Materi Matematika",
+    svgDerivation: "PENURUNAN RUMUS",
+    svgMethod1: "🟡 Cara 1 — rumus persegi (a+b)",
+    svgMethod2: "🔵 Cara 2 — 4 segitiga + c²",
+    svgEquate: "↓ samakan → kurangi 2ab",
+    scenario1Label: "Skenario 1",
+    scenario1Title: "Cari hipotenusa c",
+    scenario1Desc: "Diketahui: a dan b  →  Cari: c (sisi miring)",
+    scenario2Label: "Skenario 2",
+    scenario2Title: "Cari kaki pertama a",
+    scenario2Desc: "Diketahui: b dan c  →  Cari: a (kaki 1)",
+    scenario3Label: "Skenario 3",
+    scenario3Title: "Cari kaki kedua b",
+    scenario3Desc: "Diketahui: a dan c  →  Cari: b (kaki 2)",
+    secIntro: "🌟 Selamat Datang di Dunia Teorema Pythagoras!",
+    secProof1: "🎬 Pembuktian 1 — Animasi Penemuan Persegi",
+    secProof2: "💧 Pembuktian 2 — Animasi Air",
+    secProof3: "🟦 Pembuktian 3 — Animasi Persegi Bergerak",
+    secProof4: "🔷 Pembuktian 4 — Langkah demi Langkah",
+    secProof5: "🎮 Pembuktian 5 — Interaktif",
+    secFormula: "📐 Rumus & Variasi Teorema Pythagoras",
+    secEx1: "✏️ Contoh Soal 1 — Bilangan Bulat",
+    secEx2: "✏️ Contoh Soal 2 — Bilangan Irasional",
+    secEx3: "✏️ Contoh Soal 3 — Kapal Berlayar (Soal Cerita)",
+    secSummary: "📌 Rangkuman Sub-Bab",
+    secSquares: "⚡ Hafal Bilangan Kuadrat 1–30",
+    backBtn: "← Kembali ke Teorema Pythagoras",
+  },
+  en: {
+    pageTitle: "PROVING THE PYTHAGOREAN THEOREM AND CALCULATING SIDE LENGTHS OF RIGHT TRIANGLES",
+    pageSubtitle: "Grade 8 · Pythagorean Theorem · Mathematics",
+    svgDerivation: "FORMULA DERIVATION",
+    svgMethod1: "🟡 Method 1 — large square formula (a+b)",
+    svgMethod2: "🔵 Method 2 — 4 triangles + c²",
+    svgEquate: "↓ equate → subtract 2ab",
+    scenario1Label: "Scenario 1",
+    scenario1Title: "Find hypotenuse c",
+    scenario1Desc: "Given: a and b  →  Find: c (hypotenuse)",
+    scenario2Label: "Scenario 2",
+    scenario2Title: "Find leg a",
+    scenario2Desc: "Given: b and c  →  Find: a (leg 1)",
+    scenario3Label: "Scenario 3",
+    scenario3Title: "Find leg b",
+    scenario3Desc: "Given: a and c  →  Find: b (leg 2)",
+    secIntro: "🌟 Welcome to the World of the Pythagorean Theorem!",
+    secProof1: "🎬 Proof 1 — Square Discovery Animation",
+    secProof2: "💧 Proof 2 — Water Animation",
+    secProof3: "🟦 Proof 3 — Moving Squares Animation",
+    secProof4: "🔷 Proof 4 — Step by Step",
+    secProof5: "🎮 Proof 5 — Interactive",
+    secFormula: "📐 Formula & Variations of the Pythagorean Theorem",
+    secEx1: "✏️ Example 1 — Whole Numbers",
+    secEx2: "✏️ Example 2 — Irrational Numbers",
+    secEx3: "✏️ Example 3 — Ship Navigation (Word Problem)",
+    secSummary: "📌 Section Summary",
+    secSquares: "⚡ Memorize Perfect Squares 1–30",
+    backBtn: "← Back to Pythagorean Theorem",
+  },
+  ja: {
+    pageTitle: "三平方の定理の証明と直角三角形の辺の長さの計算",
+    pageSubtitle: "中学2年 · 三平方の定理 · 数学",
+    svgDerivation: "公式の導出",
+    svgMethod1: "🟡 方法 1 — 大きな正方形の公式 (a+b)",
+    svgMethod2: "🔵 方法 2 — 4 つの三角形 + c²",
+    svgEquate: "↓ 等式 → 2ab を引く",
+    scenario1Label: "ケース 1",
+    scenario1Title: "斜辺 c を求める",
+    scenario1Desc: "既知: a と b  →  求: c（斜辺）",
+    scenario2Label: "ケース 2",
+    scenario2Title: "脚 a を求める",
+    scenario2Desc: "既知: b と c  →  求: a（脚 1）",
+    scenario3Label: "ケース 3",
+    scenario3Title: "脚 b を求める",
+    scenario3Desc: "既知: a と c  →  求: b（脚 2）",
+    secIntro: "🌟 三平方の定理の世界へようこそ！",
+    secProof1: "🎬 証明 1 — 正方形発見アニメーション",
+    secProof2: "💧 証明 2 — 水アニメーション",
+    secProof3: "🟦 証明 3 — 動く正方形のアニメーション",
+    secProof4: "🔷 証明 4 — ステップ・バイ・ステップ",
+    secProof5: "🎮 証明 5 — インタラクティブ",
+    secFormula: "📐 三平方の定理の公式と変形",
+    secEx1: "✏️ 例題 1 — 整数",
+    secEx2: "✏️ 例題 2 — 無理数",
+    secEx3: "✏️ 例題 3 — 船の航行（文章題）",
+    secSummary: "📌 セクションまとめ",
+    secSquares: "⚡ 平方数 1–30 を覚えよう",
+    backBtn: "← 三平方の定理に戻る",
+  },
+};
+
+const PembuktianSVG = ({ lang = "id" }: { lang?: string }) => {
+  const t = PP_TRANSLATIONS[lang as keyof typeof PP_TRANSLATIONS] ?? PP_TRANSLATIONS.id;
+  return (
   <svg viewBox="0 0 440 238" className="w-full max-w-2xl mx-auto my-2" aria-label="Pembuktian Teorema Pythagoras - Metode Persegi">
     <defs>
       <style>{`
@@ -71,22 +167,22 @@ const PembuktianSVG = () => (
     <rect x="212" y="12" width="222" height="218" rx="10"
       fill="rgba(15,23,42,0.88)" stroke="rgba(51,65,85,0.8)" strokeWidth="1"/>
 
-    <text x="323" y="30" textAnchor="middle" fill="#64748b" fontSize="9.5" fontWeight="bold" fontFamily="monospace" letterSpacing="0.8">PENURUNAN RUMUS</text>
+    <text x="323" y="30" textAnchor="middle" fill="#64748b" fontSize="9.5" fontWeight="bold" fontFamily="monospace" letterSpacing="0.8">{t.svgDerivation}</text>
     <line x1="219" y1="35" x2="427" y2="35" stroke="rgba(51,65,85,0.8)" strokeWidth="1"/>
 
     <rect x="218" y="39" width="216" height="42" rx="6"
       fill="rgba(234,179,8,0.1)" stroke="rgba(234,179,8,0.35)" strokeWidth="1"/>
-    <text x="226" y="53" fill="#fbbf24" fontSize="9.5" fontWeight="bold" fontFamily="monospace">🟡 Cara 1 — rumus persegi (a+b)</text>
+    <text x="226" y="53" fill="#fbbf24" fontSize="9.5" fontWeight="bold" fontFamily="monospace">{t.svgMethod1}</text>
     <text x="226" y="68" fill="#fde68a" fontSize="11.5" fontWeight="bold" fontFamily="monospace">(a+b)² = a² + 2ab + b²</text>
 
     <text x="323" y="94" textAnchor="middle" fill="#475569" fontSize="13" fontWeight="bold" fontFamily="monospace">=</text>
 
     <rect x="218" y="98" width="216" height="42" rx="6"
       fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.35)" strokeWidth="1"/>
-    <text x="226" y="112" fill="#60a5fa" fontSize="9.5" fontWeight="bold" fontFamily="monospace">🔵 Cara 2 — 4 segitiga + c²</text>
+    <text x="226" y="112" fill="#60a5fa" fontSize="9.5" fontWeight="bold" fontFamily="monospace">{t.svgMethod2}</text>
     <text x="226" y="127" fill="#93c5fd" fontSize="11.5" fontWeight="bold" fontFamily="monospace">4×½ab + c² = 2ab + c²</text>
 
-    <text x="323" y="153" textAnchor="middle" fill="#64748b" fontSize="9" fontFamily="monospace">↓ samakan → kurangi 2ab</text>
+    <text x="323" y="153" textAnchor="middle" fill="#64748b" fontSize="9" fontFamily="monospace">{t.svgEquate}</text>
     <line x1="218" y1="157" x2="434" y2="157" stroke="rgba(71,85,105,0.6)" strokeWidth="1" strokeDasharray="3 2"/>
 
     <text x="226" y="171" fill="#94a3b8" fontSize="10.5" fontFamily="monospace">a² + 2ab + b² = 2ab + c²</text>
@@ -100,7 +196,8 @@ const PembuktianSVG = () => (
       fill="#fca5a5" fontSize="13" fontWeight="bold" fontFamily="monospace"
       filter="url(#psv-glow)" className="c2-anim">∴ a² + b² = c²  ✓</text>
   </svg>
-);
+  );
+};
 
 const SegitigaSikuSVG = () => (
   <svg viewBox="0 0 200 160" className="w-full max-w-xs mx-auto my-2" aria-label="Segitiga siku-siku">
@@ -127,7 +224,9 @@ const SegitigaSikuSVG = () => (
   </svg>
 );
 
-const RumusVariasiSVG = () => (
+const RumusVariasiSVG = ({ lang = "id" }: { lang?: string }) => {
+  const t = PP_TRANSLATIONS[lang as keyof typeof PP_TRANSLATIONS] ?? PP_TRANSLATIONS.id;
+  return (
   <svg viewBox="0 0 420 230" className="w-full max-w-xl mx-auto my-2" aria-label="Tiga skenario variasi rumus Pythagoras">
     <defs>
       <style>{`
@@ -186,9 +285,9 @@ const RumusVariasiSVG = () => (
     {/* SCENARIO 1 — Cari c */}
     <rect x="202" y="8" width="210" height="66" rx="8" fill="rgba(249,115,22,0.09)" stroke="rgba(249,115,22,0.55)" strokeWidth="1.4"/>
     <rect x="207" y="13" width="36" height="16" rx="4" fill="rgba(249,115,22,0.25)"/>
-    <text x="225" y="24" textAnchor="middle" fill="#fb923c" fontSize="9" fontWeight="bold" fontFamily="sans-serif">Skenario 1</text>
-    <text x="250" y="24" fill="#fdba74" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">Cari hipotenusa c</text>
-    <text x="208" y="38" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">Diketahui: a dan b  →  Cari: c (sisi miring)</text>
+    <text x="225" y="24" textAnchor="middle" fill="#fb923c" fontSize="9" fontWeight="bold" fontFamily="sans-serif">{t.scenario1Label}</text>
+    <text x="250" y="24" fill="#fdba74" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">{t.scenario1Title}</text>
+    <text x="208" y="38" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">{t.scenario1Desc}</text>
     {/* Formula box */}
     <rect x="207" y="44" width="199" height="25" rx="5" fill="rgba(0,0,0,0.5)" stroke="rgba(249,115,22,0.4)" strokeWidth="1" className="gl-c"/>
     <text x="306" y="60" textAnchor="middle" fill="#fde68a" fontSize="14" fontWeight="bold" fontFamily="monospace" filter="url(#rvs-glow)" className="gl-c">c² = a² + b²</text>
@@ -196,22 +295,23 @@ const RumusVariasiSVG = () => (
     {/* SCENARIO 2 — Cari a */}
     <rect x="202" y="82" width="210" height="66" rx="8" fill="rgba(59,130,246,0.09)" stroke="rgba(59,130,246,0.55)" strokeWidth="1.4"/>
     <rect x="207" y="87" width="36" height="16" rx="4" fill="rgba(59,130,246,0.25)"/>
-    <text x="225" y="98" textAnchor="middle" fill="#60a5fa" fontSize="9" fontWeight="bold" fontFamily="sans-serif">Skenario 2</text>
-    <text x="250" y="98" fill="#93c5fd" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">Cari kaki pertama a</text>
-    <text x="208" y="112" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">Diketahui: b dan c  →  Cari: a (kaki 1)</text>
+    <text x="225" y="98" textAnchor="middle" fill="#60a5fa" fontSize="9" fontWeight="bold" fontFamily="sans-serif">{t.scenario2Label}</text>
+    <text x="250" y="98" fill="#93c5fd" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">{t.scenario2Title}</text>
+    <text x="208" y="112" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">{t.scenario2Desc}</text>
     <rect x="207" y="118" width="199" height="25" rx="5" fill="rgba(0,0,0,0.5)" stroke="rgba(59,130,246,0.4)" strokeWidth="1" className="gl-a"/>
     <text x="306" y="134" textAnchor="middle" fill="#bfdbfe" fontSize="14" fontWeight="bold" fontFamily="monospace" filter="url(#rvs-glow)" className="gl-a">a² = c² - b²</text>
 
     {/* SCENARIO 3 — Cari b */}
     <rect x="202" y="156" width="210" height="66" rx="8" fill="rgba(34,197,94,0.09)" stroke="rgba(34,197,94,0.55)" strokeWidth="1.4"/>
     <rect x="207" y="161" width="36" height="16" rx="4" fill="rgba(34,197,94,0.25)"/>
-    <text x="225" y="172" textAnchor="middle" fill="#4ade80" fontSize="9" fontWeight="bold" fontFamily="sans-serif">Skenario 3</text>
-    <text x="250" y="172" fill="#86efac" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">Cari kaki kedua b</text>
-    <text x="208" y="186" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">Diketahui: a dan c  →  Cari: b (kaki 2)</text>
+    <text x="225" y="172" textAnchor="middle" fill="#4ade80" fontSize="9" fontWeight="bold" fontFamily="sans-serif">{t.scenario3Label}</text>
+    <text x="250" y="172" fill="#86efac" fontSize="9.5" fontWeight="bold" fontFamily="sans-serif">{t.scenario3Title}</text>
+    <text x="208" y="186" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">{t.scenario3Desc}</text>
     <rect x="207" y="192" width="199" height="25" rx="5" fill="rgba(0,0,0,0.5)" stroke="rgba(34,197,94,0.4)" strokeWidth="1" className="gl-b"/>
     <text x="306" y="208" textAnchor="middle" fill="#bbf7d0" fontSize="14" fontWeight="bold" fontFamily="monospace" filter="url(#rvs-glow)" className="gl-b">b² = c² - a²</text>
   </svg>
-);
+  );
+};
 
 const HitungSVG = ({ a, b, c, cari }: { a: number; b: number; c: number; cari: "a"|"b"|"c" }) => {
   const maxVal = Math.max(a*a, b*b, c*c);
@@ -231,6 +331,8 @@ const HitungSVG = ({ a, b, c, cari }: { a: number; b: number; c: number; cari: "
 
 const PembuktianPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const ppt = PP_TRANSLATIONS[language as keyof typeof PP_TRANSLATIONS] ?? PP_TRANSLATIONS.id;
 
   const SectionHeader = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4">
@@ -248,15 +350,15 @@ const PembuktianPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-xl font-bold text-primary text-glow-cyan mb-2 text-center leading-snug">
-          PEMBUKTIAN TEOREMA PYTHAGORAS DAN MENGHITUNG PANJANG SISI SEGITIGA SIKU-SIKU
+          {ppt.pageTitle}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Teorema Pythagoras · Materi Matematika</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{ppt.pageSubtitle}</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* ══ INTRO ══ */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title="🌟 Selamat Datang di Dunia Teorema Pythagoras!"/>
+            <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title={ppt.secIntro}/>
             <div className="px-5 pb-5 space-y-4">
               <p className="font-body text-sm text-white/80 leading-relaxed">
                 Lebih dari 2.500 tahun lalu, seorang matematikawan Yunani bernama <strong className="text-cyan-300">Pythagoras</strong> menemukan sebuah pola yang luar biasa di setiap segitiga siku-siku. Hubungan antar sisi-sisinya selalu berlaku, tanpa terkecuali! Inilah yang kita kenal sebagai <strong className="text-yellow-300">Teorema Pythagoras</strong> — salah satu rumus paling terkenal di dunia matematika.
@@ -416,7 +518,7 @@ const PembuktianPage = () => {
 
           {/* PEMBUKTIAN VISUAL — Pembuktian 5 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="pembuktian" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title="📐 Pembuktian 5 Teorema Pythagoras : Pembuktian Metode Persegi"/>
+            <SectionHeader id="pembuktian" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title={ppt.secFormula}/>
             <div className="px-5 pb-5 space-y-4">
 
               <div className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-4">
@@ -432,7 +534,7 @@ const PembuktianPage = () => {
                 <p className="text-center text-xs text-slate-400 mb-1 font-body">
                   4 segitiga identik (biru · hijau · oranye · ungu) + persegi <span className="text-red-400 font-bold">c²</span> merah di tengah
                 </p>
-                <PembuktianSVG/>
+                <PembuktianSVG lang={language}/>
               </div>
 
               <div className="space-y-3">
@@ -508,7 +610,7 @@ const PembuktianPage = () => {
               <p className="font-body text-sm text-white/80 leading-relaxed">
                 Dalam sebuah segitiga siku-siku, ada <strong className="text-cyan-300">tiga sisi</strong>: dua kaki (<InlineMath math="a"/> dan <InlineMath math="b"/>) dan satu hipotenusa (<InlineMath math="c"/>). Menggunakan Teorema Pythagoras, kita bisa mencari salah satu sisi <em>jika dua sisi lainnya diketahui</em>. Ada tiga skenario berbeda yang perlu kamu kuasai!
               </p>
-              <RumusVariasiSVG/>
+              <RumusVariasiSVG lang={language}/>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                 <p className="font-body text-sm text-yellow-200">
                   💡 <strong>Strategi mudah:</strong> Sisi yang <em>dicari</em> pindahkan ke kiri dalam bentuk kuadrat, dua sisi yang <em>diketahui</em> tetap di kanan. Jika mencari <strong className="text-orange-300">c²</strong> → tambahkan. Jika mencari <strong className="text-blue-300">a² atau b²</strong> → kurangkan dari <strong className="text-orange-300">c²</strong>.
@@ -620,7 +722,7 @@ const PembuktianPage = () => {
 
           {/* MHG CONTOH SOAL 1 */}
           <div className="bg-card/80 backdrop-blur border border-green-500/30 rounded-xl overflow-hidden">
-            <SectionHeader id="mhg_c1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title="✏️ Contoh Soal 1 — Menghitung Sisi Segitiga Siku-Siku (Jawaban Bulat)"/>
+            <SectionHeader id="mhg_c1" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400" title={ppt.secEx1}/>
             <div className="px-5 pb-5 space-y-5">
               <div className="bg-green-900/20 border border-green-500/30 rounded-lg px-4 py-2">
                 <p className="font-body text-xs text-green-300">🟢 Pada contoh soal ini, semua jawaban berupa <strong>bilangan bulat</strong> (Bilangan Triple Pythagoras).</p>
@@ -743,7 +845,7 @@ const PembuktianPage = () => {
 
           {/* MHG CONTOH SOAL 2 */}
           <div className="bg-card/80 backdrop-blur border border-yellow-500/30 rounded-xl overflow-hidden">
-            <SectionHeader id="mhg_c2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title="✏️ Contoh Soal 2 — Jawaban Bentuk Akar Sederhana"/>
+            <SectionHeader id="mhg_c2" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-yellow-400" title={ppt.secEx2}/>
             <div className="px-5 pb-5 space-y-5">
               <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg px-4 py-2">
                 <p className="font-body text-xs text-yellow-300">🟡 Pada contoh soal ini, jawaban <strong>tidak bisa menjadi bilangan bulat</strong> — harus disederhanakan ke bentuk <InlineMath math="a\sqrt{b}"/>. Jangan ubah ke bentuk desimal!</p>
@@ -859,7 +961,7 @@ const PembuktianPage = () => {
 
           {/* MHG CONTOH SOAL 3 */}
           <div className="bg-card/80 backdrop-blur border border-red-500/30 rounded-xl overflow-hidden">
-            <SectionHeader id="mhg_c3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title="✏️ Contoh Soal 3 — Kapal Berlayar (Soal Cerita)"/>
+            <SectionHeader id="mhg_c3" icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-red-400" title={ppt.secEx3}/>
             <div className="px-5 pb-5 space-y-4">
               {/* Soal */}
               <div className="bg-red-900/20 border border-red-500/40 rounded-xl p-4 space-y-2">
@@ -973,7 +1075,7 @@ const PembuktianPage = () => {
 
           {/* RANGKUMAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5"/>} iconColor="text-violet-400" title="📌 Rangkuman Sub-Bab"/>
+            <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5"/>} iconColor="text-violet-400" title={ppt.secSummary}/>
             <div className="px-5 pb-5 space-y-3">
               <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
                 <p className="font-body text-xs font-bold text-violet-300 uppercase mb-1">📐 Pembuktian</p>
@@ -997,7 +1099,7 @@ const PembuktianPage = () => {
 
           {/* HAFAL BILANGAN KUADRAT 1–30 */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <SectionHeader id="kuadrat" icon={<Target className="w-5 h-5"/>} iconColor="text-yellow-400" title="⚡ Hafal Bilangan Kuadrat 1–30"/>
+            <SectionHeader id="kuadrat" icon={<Target className="w-5 h-5"/>} iconColor="text-yellow-400" title={ppt.secSquares}/>
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 space-y-2">
                 <p className="font-body text-sm font-bold text-yellow-300">🎯 Mengapa Harus Dihafal?</p>
@@ -1074,7 +1176,7 @@ const PembuktianPage = () => {
             onClick={() => navigate("/materi-matematika/kelas-8/teorema-pythagoras")}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Teorema Pythagoras
+            {ppt.backBtn}
           </button>
         </div>
       </div>
