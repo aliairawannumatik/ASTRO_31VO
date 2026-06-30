@@ -38,6 +38,7 @@ const questions: Q[] = [
     parts: [
       { label: "a.", math: "f(3) + g(3) = \\ldots" },
       { label: "b.", math: "f(2) \\times g(1) = \\ldots" },
+      { label: "c.", math: "f(a) - g(a-2) = \\ldots" },
     ],
   }),
   Qn(4, "Menghitung Nilai Fungsi Kuadrat", {
