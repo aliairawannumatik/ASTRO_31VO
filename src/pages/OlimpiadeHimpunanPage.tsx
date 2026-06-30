@@ -76,7 +76,7 @@ const MateriB_H = () => (
       <div className="text-xs text-white/50 text-center">n = jumlah anggota himpunan</div>
     </div>
     <figure className="flex flex-col items-center gap-2 mt-2">
-      <img src="/images/segitiga-pascal-himpunan.png" alt="Segitiga Pascal untuk himpunan bagian"
+      <img src="https://drive.google.com/thumbnail?id=1x2POKGLrO5JkMIktBz1U0ICnyoWHX4ZN&sz=w800" alt="Segitiga Pascal untuk himpunan bagian"
         className="w-full max-w-xl rounded-lg shadow-lg border border-white/10 bg-white p-2"/>
     </figure>
   </div>
@@ -97,7 +97,7 @@ const MateriC_H = () => (
       ))}
     </div>
     <figure className="flex flex-col items-center gap-2 mt-2">
-      <img src="/images/diagram-venn-himpunan.png" alt="Diagram Venn himpunan A dan B dalam semesta S"
+      <img src="https://drive.google.com/thumbnail?id=1mQOifQK96UBJlKeAY1X6vsLDypV66rC5&sz=w800" alt="Diagram Venn himpunan A dan B dalam semesta S"
         className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"/>
     </figure>
     <div className="rounded-xl border border-cyan-400/35 bg-cyan-400/10 p-3 text-center">
@@ -114,12 +114,12 @@ const MateriC_H = () => (
 
 const MateriD_H = () => {
   const ops = [
-    { label:"Irisan", sym:"\\cap", color:"blue", def:"A \\cap B = \\{x \\mid x \\in A \\text{ dan } x \\in B\\}", img:"/images/irisan-himpunan.png", alt:"Diagram irisan" },
-    { label:"Saling Lepas", sym:"", color:"slate", def:"", img:"/images/saling-lepas-himpunan.png", alt:"Diagram saling lepas", note:"Dua himpunan tanpa irisan disebut saling lepas." },
-    { label:"Gabungan", sym:"\\cup", color:"green", def:"A \\cup B = \\{x \\mid x \\in A \\text{ atau } x \\in B\\}", img:"/images/gabungan-himpunan.png", alt:"Diagram gabungan" },
-    { label:"Komplemen", sym:"A^c \\text{ atau } A'", color:"amber", def:"A^c = \\{x \\mid x \\in S \\text{ dan } x \\notin A\\}", img:"/images/komplemen-himpunan.png", alt:"Diagram komplemen" },
-    { label:"Selisih", sym:"A - B", color:"rose", def:"A - B = \\{x \\mid x \\in A \\text{ dan } x \\notin B\\}", img:"/images/selisih-himpunan.png", alt:"Diagram selisih" },
-    { label:"Jumlah", sym:"A + B", color:"violet", def:"A + B = (A - B) \\cup (B - A)", img:"/images/jumlah-himpunan.png", alt:"Diagram jumlah" },
+    { label:"Irisan", sym:"\\cap", color:"blue", def:"A \\cap B = \\{x \\mid x \\in A \\text{ dan } x \\in B\\}", img:"https://drive.google.com/thumbnail?id=1-P3vgodW-fTbmYbxZxnu9hQl2XVMNUIf&sz=w800", alt:"Diagram irisan" },
+    { label:"Saling Lepas", sym:"", color:"slate", def:"", img:"https://drive.google.com/thumbnail?id=1o79DyMADmjU0AbJlh1WwO8xWFyp3aqn7&sz=w800", alt:"Diagram saling lepas", note:"Dua himpunan tanpa irisan disebut saling lepas." },
+    { label:"Gabungan", sym:"\\cup", color:"green", def:"A \\cup B = \\{x \\mid x \\in A \\text{ atau } x \\in B\\}", img:"https://drive.google.com/thumbnail?id=1ipG404E-YYRWGPZKxi826lb4GxY0gjYM&sz=w800", alt:"Diagram gabungan" },
+    { label:"Komplemen", sym:"A^c \\text{ atau } A'", color:"amber", def:"A^c = \\{x \\mid x \\in S \\text{ dan } x \\notin A\\}", img:"https://drive.google.com/thumbnail?id=1Fkbc1OW_Gl2fGe0tIpkfCdeBODnM4rd7&sz=w800", alt:"Diagram komplemen" },
+    { label:"Selisih", sym:"A - B", color:"rose", def:"A - B = \\{x \\mid x \\in A \\text{ dan } x \\notin B\\}", img:"https://drive.google.com/thumbnail?id=1BuXyyCzDdwI3tcld4x7yxtMXlbz0e9er&sz=w800", alt:"Diagram selisih" },
+    { label:"Jumlah", sym:"A + B", color:"violet", def:"A + B = (A - B) \\cup (B - A)", img:"https://drive.google.com/thumbnail?id=1RjVznyTKbAgEVT0MclURmuI-MAoNW2o4&sz=w800", alt:"Diagram jumlah" },
   ];
   return (
     <div className="mt-2 space-y-4">
