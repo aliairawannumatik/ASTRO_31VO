@@ -122,7 +122,16 @@ const questions: Q[] = [
       { label: "c.", text: "Jelaskan arti 25.000 dan 50.000 dalam konteks soal." },
     ],
   }),
-  Qn(13, "Rumus Fungsi – Soal UN", {
+  Qn(13, "Terapan Fungsi – Soal Cerita", {
+    type: "mixed",
+    content: "Sebuah bus pariwisata mengangkut 12 penumpang dewasa dengan berat rata-rata x kg dan 1 bagasi tambahan seberat (5x + 300) kg. Fungsi total beban bus dinyatakan sebagai T(x) = 12x + (5x + 300).",
+    parts: [
+      { label: "a.", math: "\\text{Sederhanakan rumus } T(x)." },
+      { label: "b.", math: "\\text{Hitung } T(65) \\text{ (dalam kg)}." },
+      { label: "c.", text: "Jika kapasitas maksimum bus adalah 1.600 kg, apakah bus kelebihan beban? Jelaskan." },
+    ],
+  }),
+  Qn(14, "Rumus Fungsi – Soal UN", {
     type: "mixed",
     content: "Fungsi f didefinisikan f(2x − 1) = 4x + 5.",
     parts: [
@@ -130,7 +139,7 @@ const questions: Q[] = [
       { label: "b.", math: "f(2) = \\ldots" },
     ],
   }),
-  Qn(14, "Rumus Fungsi dari Notasi Komposit", {
+  Qn(15, "Rumus Fungsi dari Notasi Komposit", {
     type: "mixed",
     content: "Diketahui f(3x − 2) = 9x + 1.",
     parts: [
@@ -159,7 +168,7 @@ const NotasiFungsiPage = () => {
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 rounded-lg px-4 py-2">
-            <span className="text-sky-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
+            <span className="text-sky-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
