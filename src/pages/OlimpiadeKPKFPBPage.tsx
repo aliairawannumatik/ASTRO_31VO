@@ -1071,7 +1071,7 @@ const latihanOlimpiade: OlimpiadeSoal[] = [
   {
     no: 7,
     soal: "OSN Matematika 2007 Tingkat Kota\nPerhatikan gambar berikut. Jika pada setiap persegi ditempatkan bilangan bulat positif sedemikian rupa sehingga perkalian bilangan-bilangan dari sembarang lima persegi yang berurutan menghasilkan 360, maka jumlah bilangan pada semua persegi tersebut adalah ...",
-    image: "/kpk-fpb-soal7-1778374556739.png",
+    image: "https://drive.google.com/thumbnail?id=1itCjZxec92J_z90XzrHrptV56FH9MY4p&sz=w800",
     options: [],
     jawaban: "23",
     pembahasan: {
@@ -1238,7 +1238,7 @@ const latihanOlimpiade: OlimpiadeSoal[] = [
   {
     no: 15,
     soal: "OSN Matematika 2021 Tingkat Kota\nSetiap 12 menit Bus-A dapat menempuh rute P – X – S – X – P, setiap 20 menit, Bus-B dapat menyelesaikan rute Q – X – T – X – Q, setiap 28 menit Bus-C dapat menyelesaikan rute R – X – U – X – R. Pukul 1 siang (13.00), Bus-A berangkat dari P, Bus-B berangkat dari Q dan Bus-C berangkat dari R, menempuh rutenya masing-masing dengan kecepatan konstan dan mengulangi perjalanan sepanjang rutenya hingga pukul 11 malam (23.00). Diantara pukul 5 sore hingga pukul 10 malam (17.00 – 22.00), berapakah kali 2 atau lebih bus tiba di X secara bersamaan?",
-    image: "/kpk-fpb-soal15-1778489488052.png",
+    image: "https://drive.google.com/thumbnail?id=1o2a2m_qojcXEOJt5qAWhPQoHmwnpBJuT&sz=w800",
     options: ["A. 18", "B. 19", "C. 20", "D. 21"],
     jawaban: "A. 18",
     pembahasan: {
