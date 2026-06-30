@@ -76,6 +76,7 @@ const questions: Q[] = [
       { label: "b.", math: "f(-3) = \\ldots" },
       { label: "c.", math: "f(0) = \\ldots" },
       { label: "d.", math: "f\\left(\\frac{1}{3}\\right) = \\ldots" },
+      { label: "e.", math: "f(2a - 1) = \\ldots" },
     ],
   }),
   Qn(8, "Menghitung Nilai Fungsi Kuadrat", {
