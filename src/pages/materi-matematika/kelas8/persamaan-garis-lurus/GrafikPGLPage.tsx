@@ -113,6 +113,139 @@ const T_GRAFIK = {
       "Gunakan minimal 3 titik untuk akurasi yang lebih baik",
     ],
     rang_tip: "💡 Tips: Selalu periksa dengan mensubstitusi titik ke persamaan asal untuk memastikan kebenaran grafik!",
+    ex_label1: "Contoh 1",
+    ex_label2: "Contoh 2",
+    konsep_key_title: "✦ Kunci Utama ✦",
+    konsep_key_dan: "dan",
+    konsep_key_pow: "hanya berpangkat",
+    konsep_key_no: "Tidak ada x², y², xy, √x, atau pangkat lainnya.",
+    konsep_key_no2: "Selama x dan y berpangkat 1, grafiknya",
+    konsep_key_pasti: "pasti garis lurus",
+    konsep_key_check: "Cara cepat mengecek:",
+    konsep_key_check_b: "Lihat pangkat semua x dan y di persamaannya. Kalau",
+    konsep_key_check_em: "semuanya pangkat 1",
+    konsep_key_check_cond: "(tidak ada kuadrat, akar, atau pangkat negatif) →",
+    konsep_key_check_concl: "itu pasti persamaan garis lurus!",
+    konsep_explore_title: "Eksplorasi Lebih Lanjut",
+    konsep_explore_p1a: "Kamu sudah melihat bagaimana berbagai persamaan menghasilkan bentuk kurva yang berbeda-beda — ada yang berupa",
+    konsep_explore_kw1: "garis lurus",
+    konsep_explore_kw2: "parabola",
+    konsep_explore_kw3: "hiperbola",
+    konsep_explore_p1b: ", dan lainnya.",
+    konsep_explore_p2a: "Untuk lebih jelas memahami dan membandingkan berbagai jenis kurva tersebut, kamu bisa",
+    konsep_explore_p2b: "menginput langsung persamaan apa saja",
+    konsep_explore_p2c: "pada",
+    konsep_explore_lab: "Laboratorium Grafik Interaktif",
+    konsep_explore_p2d: "di bawah ini — grafiknya akan tergambar secara real-time sehingga kamu dapat mengamati perbedaan bentuknya secara langsung!",
+    konsep_chips: [
+      { label: "y = 2x + 1", warna: "#22d3ee", ket: "Garis Lurus" },
+      { label: "y = x² − 3", warna: "#a78bfa", ket: "Parabola" },
+      { label: "y = 1/x",    warna: "#f87171", ket: "Hiperbola" },
+      { label: "y = √x",     warna: "#6ee7b7", ket: "Akar" },
+    ],
+    konsep_explore_hint: "↓ Coba masukkan salah satu persamaan di atas ke laboratorium berikut!",
+    konsep_lab_title: "Laboratorium Grafik Interaktif",
+    konsep_lab_desc: "Ketik persamaan apa saja di panel kanan — grafiknya langsung tergambar! Gunakan scroll untuk zoom, drag untuk geser bidang, dan hover untuk melihat koordinat.",
+    konsep_lab_coba: "💡 Coba masukkan:",
+    konsep_lab_note: "perhatikan titik potong sumbu dan perpotongan antar garis!",
+    tp_sbx_title: "📍 Titik Potong Sumbu-x",
+    tp_sbx_cond: "Syarat: nilai",
+    tp_sbx_pt: "Titik:",
+    tp_sby_title: "📍 Titik Potong Sumbu-y",
+    tp_sby_cond: "Syarat: nilai",
+    tp_sby_pt: "Titik:",
+    tp_contoh: "📖 Contoh Soal",
+    tp_pem: "Penyelesaian:",
+    tp_tbl_titik: "Titik",
+    tp_tbl_ket: "Keterangan",
+    tp_tbl_sbx: "Titik potong sumbu-x (y = 0)",
+    tp_tbl_sby: "Titik potong sumbu-y (x = 0)",
+    tp_ex1_soal: "Tentukan grafik fungsi dari",
+    tp_ex2_soal: "Tentukan grafik fungsi dari",
+    tp_ex1_steps: [
+      { label: "Siapkan Grid", desc: "Siapkan bidang koordinat Kartesius. Kita akan menggambar garis y = 2x + 4 menggunakan dua titik potong sumbu." },
+      { label: "Titik Potong Sb-x", desc: "Substitusi y = 0 ke persamaan: 0 = 2x + 4 → 2x = −4 → x = −2. Titik potong sumbu-x adalah (−2, 0). Plot titik ini!" },
+      { label: "Titik Potong Sb-y", desc: "Substitusi x = 0 ke persamaan: y = 2(0) + 4 = 4. Titik potong sumbu-y adalah (0, 4). Plot titik ini!" },
+      { label: "Gambar Garis", desc: "Hubungkan titik (−2, 0) dan (0, 4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = 2x + 4 selesai! 🎉" },
+    ],
+    tp_ex2_steps: [
+      { label: "Siapkan Grid", desc: "Siapkan bidang koordinat Kartesius. Kita akan menggambar garis 3x − 5y = 15 menggunakan dua titik potong sumbu." },
+      { label: "Titik Potong Sb-x", desc: "Substitusi y = 0: 3x − 5(0) = 15 → 3x = 15 → x = 5. Titik potong sumbu-x adalah (5, 0). Plot titik ini!" },
+      { label: "Titik Potong Sb-y", desc: "Substitusi x = 0: 3(0) − 5y = 15 → −5y = 15 → y = −3. Titik potong sumbu-y adalah (0, −3). Plot titik ini!" },
+      { label: "Gambar Garis", desc: "Hubungkan titik (5, 0) dan (0, −3) dengan garis lurus, lalu perpanjang ke kedua arah. Garis 3x − 5y = 15 selesai! 🎉" },
+    ],
+    ta_tip: "💡 Tips: Pilih nilai x yang mudah dihitung, misalnya x = 0, 1, 2, atau 3. Hindari pecahan agar koordinat titiknya bilangan bulat dan mudah diplot di bidang koordinat.",
+    ta_tbl_r1: "Titik pertama",
+    ta_tbl_r2: "Titik kedua",
+    ta_tbl_dipilih: "dipilih",
+    ta_ex1_soal: "Tentukan grafik fungsi dari",
+    ta_ex2_soal: "Tentukan grafik fungsi dari",
+    ta_ex1_steps: [
+      { label: "Siapkan Grid", desc: "Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = x + 2." },
+      { label: "Titik Pertama", desc: "Pilih x = −2: y = (−2) + 2 = 0. Titik pertama adalah (−2, 0). Plot titik ini di bidang koordinat!" },
+      { label: "Titik Kedua", desc: "Pilih x = 2: y = 2 + 2 = 4. Titik kedua adalah (2, 4). Plot titik ini di bidang koordinat!" },
+      { label: "Gambar Garis", desc: "Hubungkan titik (−2, 0) dan (2, 4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = x + 2 selesai! 🎉" },
+    ],
+    ta_ex2_steps: [
+      { label: "Siapkan Grid", desc: "Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = −2x + 4." },
+      { label: "Titik Pertama", desc: "Pilih x = 1: y = −2(1) + 4 = −2 + 4 = 2. Titik pertama adalah (1, 2). Plot titik ini di bidang koordinat!" },
+      { label: "Titik Kedua", desc: "Pilih x = 3: y = −2(3) + 4 = −6 + 4 = −2. Titik kedua adalah (3, −2). Plot titik ini di bidang koordinat!" },
+      { label: "Gambar Garis", desc: "Hubungkan titik (1, 2) dan (3, −2) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = −2x + 4 selesai! 🎉" },
+    ],
+    c1_ubah: "Ubah ke bentuk y = mx + c terlebih dahulu:",
+    c1_sbx: "Potong sb-x (y=0):",
+    c1_sby: "Potong sb-y (x=0):",
+    c1_soal_b: "Tentukan: a) titik potong sumbu-x dan sumbu-y, b) gambarkan grafiknya!",
+    c1_ans_b: "✅ Sb-x = (−2, 0), Sb-y = (0, 3). Gradien m = 3/2, garis naik",
+    mcq1_pem_intro: "Dari grafik, kita dapat membaca dua titik kunci yang sudah ditandai:",
+    mcq1_sbx_label: "Titik potong sumbu-x",
+    mcq1_sby_label: "Titik potong sumbu-y",
+    mcq1_from_sby: "Dari titik potong sb-y →",
+    mcq1_grad_label: "Gradien:",
+    mcq1_thus: "Sehingga:",
+    mcq1_wrong_explain: "Opsi B (y = 2x + 2) salah karena gradiennya 2, bukan 1. Opsi C (y = x − 2) salah karena intercept-y = −2, bukan 2. Opsi D (y = −x + 2) salah karena grafiknya turun ke kanan (gradien negatif).",
+    c2_pem_title: "🔍 Pembahasan Lengkap",
+    c2_l1_title: "📍 Langkah 1 — Baca Dua Titik dari Grafik",
+    c2_l1_desc: "Dari grafik, baca dua titik yang dilalui garis (ditandai dengan titik kuning):",
+    c2_pt1: "Titik 1",
+    c2_pt2: "Titik 2",
+    c2_l2_title: "🔁 Langkah 2 — Substitusi Titik ke Setiap Opsi",
+    c2_l2_desc: "Masukkan kedua titik ke masing-masing persamaan. Persamaan yang",
+    c2_l2_kw: "menghasilkan nilai y yang sama",
+    c2_l2_for: "untuk",
+    c2_l2_both: "kedua",
+    c2_l2_end: "titik = jawaban yang benar.",
+    c2_nia_yes: "Nilai y = 0 ✓",
+    c2_nia_yes2: "Nilai y = 2 ✓",
+    c2_nib: "Nilai y = −2, bukan 0 ✗",
+    c2_nic: "Nilai y = −4, bukan 0 ✗",
+    c2_nid: "Nilai y = 4, bukan 0 ✗",
+    c2_pA_ok: "✅ Kedua titik terpenuhi → Opsi A BENAR",
+    c2_pB_ko: "❌ Titik (−2, 0) tidak terpenuhi → Opsi B SALAH",
+    c2_pC_ko: "❌ Titik (−2, 0) tidak terpenuhi → Opsi C SALAH",
+    c2_pD_ko: "❌ Titik (−2, 0) tidak terpenuhi → Opsi D SALAH",
+    c2_concl_title: "✅ Kesimpulan: Jawaban A —",
+    c2_concl_desc: "Hanya opsi A yang menghasilkan nilai y yang tepat untuk",
+    c2_concl_both: "kedua",
+    c2_concl_end: "titik yang terbaca dari grafik.",
+    c2_tip_title: "💡 Tips Teknik Substitusi",
+    c2_tip_items: [
+      "① Baca 2 titik yang dilalui garis dari grafik",
+      "② Substitusi titik pertama ke semua opsi → eliminasi yang tidak cocok",
+      "③ Jika masih ada 2+ opsi yang lolos, substitusi titik kedua untuk memastikan",
+    ],
+    c1_soal_a: "Persamaan garis:",
+    c3_soal_dan: "dan",
+    c3_soal_end: "digambar pada satu bidang koordinat. Tentukan titik potong kedua garis tersebut, lalu gambarkan!",
+    c3_soal_b: "Dua garis",
+    c3_bantu1: "Titik bantu",
+    c3_bantu2: "Titik bantu",
+    c3_elim_title: "Titik potong — selesaikan dengan eliminasi:",
+    c3_sum: "Jumlahkan (1) dan (2):",
+    c3_sub_eq1: "Substitusi x = 2 ke persamaan (1):",
+    c3_graf_title: "Grafik",
+    c3_graf_dan: "dan",
+    c3_ans_main: "✅ Titik potong kedua garis: (2, 2) — semua koordinat bilangan bulat!",
   },
   en: {
     title: "GRAPHING LINEAR EQUATIONS",
@@ -217,6 +350,139 @@ const T_GRAFIK = {
       "Use at least 3 points for greater accuracy",
     ],
     rang_tip: "💡 Tip: Always verify by substituting points back into the original equation to confirm the graph is correct!",
+    ex_label1: "Example 1",
+    ex_label2: "Example 2",
+    konsep_key_title: "✦ Key Principle ✦",
+    konsep_key_dan: "and",
+    konsep_key_pow: "raised only to the power of",
+    konsep_key_no: "No x², y², xy, √x, or any other power.",
+    konsep_key_no2: "As long as x and y are raised to the power of 1, the graph is",
+    konsep_key_pasti: "always a straight line",
+    konsep_key_check: "Quick check:",
+    konsep_key_check_b: "Look at the powers of all x and y in the equation. If",
+    konsep_key_check_em: "all powers are 1",
+    konsep_key_check_cond: "(no squares, roots, or negative powers) →",
+    konsep_key_check_concl: "it must be a linear equation!",
+    konsep_explore_title: "Explore Further",
+    konsep_explore_p1a: "You've seen how different equations produce different curve shapes — some are",
+    konsep_explore_kw1: "straight lines",
+    konsep_explore_kw2: "parabolas",
+    konsep_explore_kw3: "hyperbolas",
+    konsep_explore_p1b: ", and others.",
+    konsep_explore_p2a: "To better understand and compare these different curve types, you can",
+    konsep_explore_p2b: "directly input any equation",
+    konsep_explore_p2c: "in the",
+    konsep_explore_lab: "Interactive Graph Lab",
+    konsep_explore_p2d: "below — the graph will be drawn in real-time so you can observe the differences directly!",
+    konsep_chips: [
+      { label: "y = 2x + 1", warna: "#22d3ee", ket: "Straight Line" },
+      { label: "y = x² − 3", warna: "#a78bfa", ket: "Parabola" },
+      { label: "y = 1/x",    warna: "#f87171", ket: "Hyperbola" },
+      { label: "y = √x",     warna: "#6ee7b7", ket: "Square Root" },
+    ],
+    konsep_explore_hint: "↓ Try entering one of the equations above into the lab below!",
+    konsep_lab_title: "Interactive Graph Lab",
+    konsep_lab_desc: "Type any equation in the right panel — the graph is drawn instantly! Use scroll to zoom, drag to pan, and hover to see coordinates.",
+    konsep_lab_coba: "💡 Try entering:",
+    konsep_lab_note: "observe the intercepts and intersections between lines!",
+    tp_sbx_title: "📍 x-intercept",
+    tp_sbx_cond: "Condition: value",
+    tp_sbx_pt: "Point:",
+    tp_sby_title: "📍 y-intercept",
+    tp_sby_cond: "Condition: value",
+    tp_sby_pt: "Point:",
+    tp_contoh: "📖 Example Problems",
+    tp_pem: "Solution:",
+    tp_tbl_titik: "Point",
+    tp_tbl_ket: "Description",
+    tp_tbl_sbx: "x-intercept (y = 0)",
+    tp_tbl_sby: "y-intercept (x = 0)",
+    tp_ex1_soal: "Draw the graph of",
+    tp_ex2_soal: "Draw the graph of",
+    tp_ex1_steps: [
+      { label: "Set Up Grid", desc: "Set up a Cartesian coordinate plane. We'll draw the line y = 2x + 4 using the two axis intercepts." },
+      { label: "x-intercept", desc: "Substitute y = 0 into the equation: 0 = 2x + 4 → 2x = −4 → x = −2. The x-intercept is (−2, 0). Plot this point!" },
+      { label: "y-intercept", desc: "Substitute x = 0 into the equation: y = 2(0) + 4 = 4. The y-intercept is (0, 4). Plot this point!" },
+      { label: "Draw the Line", desc: "Connect (−2, 0) and (0, 4) with a straight line, then extend in both directions. Line y = 2x + 4 done! 🎉" },
+    ],
+    tp_ex2_steps: [
+      { label: "Set Up Grid", desc: "Set up a Cartesian coordinate plane. We'll draw the line 3x − 5y = 15 using the two axis intercepts." },
+      { label: "x-intercept", desc: "Substitute y = 0: 3x − 5(0) = 15 → 3x = 15 → x = 5. The x-intercept is (5, 0). Plot this point!" },
+      { label: "y-intercept", desc: "Substitute x = 0: 3(0) − 5y = 15 → −5y = 15 → y = −3. The y-intercept is (0, −3). Plot this point!" },
+      { label: "Draw the Line", desc: "Connect (5, 0) and (0, −3) with a straight line, then extend in both directions. Line 3x − 5y = 15 done! 🎉" },
+    ],
+    ta_tip: "💡 Tip: Choose easy-to-compute x values, such as x = 0, 1, 2, or 3. Avoid fractions so that the point coordinates are integers and easy to plot on the coordinate plane.",
+    ta_tbl_r1: "First point",
+    ta_tbl_r2: "Second point",
+    ta_tbl_dipilih: "chosen",
+    ta_ex1_soal: "Draw the graph of",
+    ta_ex2_soal: "Draw the graph of",
+    ta_ex1_steps: [
+      { label: "Set Up Grid", desc: "Set up the coordinate plane. We can freely choose any two x values to find two points on y = x + 2." },
+      { label: "First Point", desc: "Choose x = −2: y = (−2) + 2 = 0. The first point is (−2, 0). Plot it on the coordinate plane!" },
+      { label: "Second Point", desc: "Choose x = 2: y = 2 + 2 = 4. The second point is (2, 4). Plot it on the coordinate plane!" },
+      { label: "Draw the Line", desc: "Connect (−2, 0) and (2, 4) with a straight line, then extend in both directions. Line y = x + 2 done! 🎉" },
+    ],
+    ta_ex2_steps: [
+      { label: "Set Up Grid", desc: "Set up the coordinate plane. We can freely choose any two x values to find two points on y = −2x + 4." },
+      { label: "First Point", desc: "Choose x = 1: y = −2(1) + 4 = −2 + 4 = 2. The first point is (1, 2). Plot it on the coordinate plane!" },
+      { label: "Second Point", desc: "Choose x = 3: y = −2(3) + 4 = −6 + 4 = −2. The second point is (3, −2). Plot it on the coordinate plane!" },
+      { label: "Draw the Line", desc: "Connect (1, 2) and (3, −2) with a straight line, then extend in both directions. Line y = −2x + 4 done! 🎉" },
+    ],
+    c1_ubah: "Convert to y = mx + c form first:",
+    c1_sbx: "x-intercept (y=0):",
+    c1_sby: "y-intercept (x=0):",
+    c1_soal_b: "Find: a) x-intercept and y-intercept, b) draw the graph!",
+    c1_ans_b: "✅ x-int = (−2, 0), y-int = (0, 3). Slope m = 3/2, line rises",
+    mcq1_pem_intro: "From the graph, we can read two key points that are marked:",
+    mcq1_sbx_label: "x-intercept",
+    mcq1_sby_label: "y-intercept",
+    mcq1_from_sby: "From y-intercept →",
+    mcq1_grad_label: "Slope:",
+    mcq1_thus: "Therefore:",
+    mcq1_wrong_explain: "Option B (y = 2x + 2) is wrong because its slope is 2, not 1. Option C (y = x − 2) is wrong because y-intercept = −2, not 2. Option D (y = −x + 2) is wrong because the graph falls to the right (negative slope).",
+    c2_pem_title: "🔍 Full Solution",
+    c2_l1_title: "📍 Step 1 — Read Two Points from the Graph",
+    c2_l1_desc: "From the graph, read two points on the line (marked with yellow dots):",
+    c2_pt1: "Point 1",
+    c2_pt2: "Point 2",
+    c2_l2_title: "🔁 Step 2 — Substitute Points Into Each Option",
+    c2_l2_desc: "Substitute both points into each equation. The equation that",
+    c2_l2_kw: "gives the same y-value",
+    c2_l2_for: "for",
+    c2_l2_both: "both",
+    c2_l2_end: "points = the correct answer.",
+    c2_nia_yes: "y = 0 ✓",
+    c2_nia_yes2: "y = 2 ✓",
+    c2_nib: "y = −2, not 0 ✗",
+    c2_nic: "y = −4, not 0 ✗",
+    c2_nid: "y = 4, not 0 ✗",
+    c2_pA_ok: "✅ Both points satisfied → Option A CORRECT",
+    c2_pB_ko: "❌ Point (−2, 0) not satisfied → Option B WRONG",
+    c2_pC_ko: "❌ Point (−2, 0) not satisfied → Option C WRONG",
+    c2_pD_ko: "❌ Point (−2, 0) not satisfied → Option D WRONG",
+    c2_concl_title: "✅ Conclusion: Answer A —",
+    c2_concl_desc: "Only option A gives the correct y-values for",
+    c2_concl_both: "both",
+    c2_concl_end: "points read from the graph.",
+    c2_tip_title: "💡 Substitution Technique Tips",
+    c2_tip_items: [
+      "① Read 2 points on the line from the graph",
+      "② Substitute the first point into all options → eliminate those that don't match",
+      "③ If 2+ options remain, substitute the second point to confirm",
+    ],
+    c1_soal_a: "Line equation:",
+    c3_soal_dan: "and",
+    c3_soal_end: "are drawn on the same coordinate plane. Find the intersection point of both lines, then draw the graph!",
+    c3_soal_b: "Two lines",
+    c3_bantu1: "Helper points for",
+    c3_bantu2: "Helper points for",
+    c3_elim_title: "Intersection — solve by elimination:",
+    c3_sum: "Add equations (1) and (2):",
+    c3_sub_eq1: "Substitute x = 2 into equation (1):",
+    c3_graf_title: "Graph of",
+    c3_graf_dan: "and",
+    c3_ans_main: "✅ Intersection of both lines: (2, 2) — all integer coordinates!",
   },
   ja: {
     title: "一次方程式のグラフ",
@@ -321,6 +587,139 @@ const T_GRAFIK = {
       "精度を高めるために最低3点を使う",
     ],
     rang_tip: "💡 ヒント：元の方程式に点を代入して確認し、グラフの正確さを検証しよう！",
+    ex_label1: "例 1",
+    ex_label2: "例 2",
+    konsep_key_title: "✦ 重要原則 ✦",
+    konsep_key_dan: "と",
+    konsep_key_pow: "の指数はすべて",
+    konsep_key_no: "x²、y²、xy、√x、その他の指数は含まない。",
+    konsep_key_no2: "x と y の指数がすべて 1 であれば、グラフは",
+    konsep_key_pasti: "必ず直線",
+    konsep_key_check: "素早い確認方法：",
+    konsep_key_check_b: "方程式内の x と y の指数をすべて確認しよう。もし",
+    konsep_key_check_em: "すべて 1 乗",
+    konsep_key_check_cond: "（2乗・根号・負の指数がない）なら →",
+    konsep_key_check_concl: "それは必ず一次方程式（直線）だ！",
+    konsep_explore_title: "さらに探求しよう",
+    konsep_explore_p1a: "さまざまな方程式がそれぞれ異なる曲線を描くことを見てきた — あるものは",
+    konsep_explore_kw1: "直線",
+    konsep_explore_kw2: "放物線",
+    konsep_explore_kw3: "双曲線",
+    konsep_explore_p1b: "、その他の形になる。",
+    konsep_explore_p2a: "これらのさまざまな曲線をより深く理解・比較するために、",
+    konsep_explore_p2b: "任意の方程式を直接入力",
+    konsep_explore_p2c: "できる",
+    konsep_explore_lab: "インタラクティブグラフ実験室",
+    konsep_explore_p2d: "が下にある — グラフはリアルタイムで描画され、形の違いを直接観察できる！",
+    konsep_chips: [
+      { label: "y = 2x + 1", warna: "#22d3ee", ket: "直線" },
+      { label: "y = x² − 3", warna: "#a78bfa", ket: "放物線" },
+      { label: "y = 1/x",    warna: "#f87171", ket: "双曲線" },
+      { label: "y = √x",     warna: "#6ee7b7", ket: "平方根" },
+    ],
+    konsep_explore_hint: "↓ 上の方程式のどれかを下の実験室に入力してみよう！",
+    konsep_lab_title: "インタラクティブグラフ実験室",
+    konsep_lab_desc: "右パネルに任意の方程式を入力すると、グラフが即座に描画される！スクロールでズーム、ドラッグで移動、ホバーで座標を確認できる。",
+    konsep_lab_coba: "💡 入力してみよう：",
+    konsep_lab_note: "軸との交点や直線の交点を観察しよう！",
+    tp_sbx_title: "📍 x 切片",
+    tp_sbx_cond: "条件：",
+    tp_sbx_pt: "点：",
+    tp_sby_title: "📍 y 切片",
+    tp_sby_cond: "条件：",
+    tp_sby_pt: "点：",
+    tp_contoh: "📖 例題",
+    tp_pem: "解答：",
+    tp_tbl_titik: "点",
+    tp_tbl_ket: "説明",
+    tp_tbl_sbx: "x 切片（y = 0）",
+    tp_tbl_sby: "y 切片（x = 0）",
+    tp_ex1_soal: "のグラフを描け：",
+    tp_ex2_soal: "のグラフを描け：",
+    tp_ex1_steps: [
+      { label: "座標系を準備", desc: "デカルト座標平面を用意する。y = 2x + 4 の直線を 2 つの軸切片を使って描く。" },
+      { label: "x 切片", desc: "y = 0 を代入：0 = 2x + 4 → 2x = −4 → x = −2。x 切片は (−2, 0)。この点をプロット！" },
+      { label: "y 切片", desc: "x = 0 を代入：y = 2(0) + 4 = 4。y 切片は (0, 4)。この点をプロット！" },
+      { label: "直線を引く", desc: "(−2, 0) と (0, 4) を直線で結び、両方向に延長する。y = 2x + 4 完成！🎉" },
+    ],
+    tp_ex2_steps: [
+      { label: "座標系を準備", desc: "デカルト座標平面を用意する。3x − 5y = 15 の直線を 2 つの軸切片を使って描く。" },
+      { label: "x 切片", desc: "y = 0 を代入：3x − 5(0) = 15 → 3x = 15 → x = 5。x 切片は (5, 0)。この点をプロット！" },
+      { label: "y 切片", desc: "x = 0 を代入：3(0) − 5y = 15 → −5y = 15 → y = −3。y 切片は (0, −3)。この点をプロット！" },
+      { label: "直線を引く", desc: "(5, 0) と (0, −3) を直線で結び、両方向に延長する。3x − 5y = 15 完成！🎉" },
+    ],
+    ta_tip: "💡 ヒント：計算しやすい x の値（例：x = 0, 1, 2, 3）を選ぼう。分数を避けることで、座標が整数になり、座標平面にプロットしやすくなる。",
+    ta_tbl_r1: "第1点",
+    ta_tbl_r2: "第2点",
+    ta_tbl_dipilih: "を選択",
+    ta_ex1_soal: "のグラフを描け：",
+    ta_ex2_soal: "のグラフを描け：",
+    ta_ex1_steps: [
+      { label: "座標系を準備", desc: "座標平面を用意する。y = x + 2 上の 2 点を自由に選んで決める。" },
+      { label: "第1点", desc: "x = −2 を選択：y = (−2) + 2 = 0。第1点は (−2, 0)。座標平面にプロット！" },
+      { label: "第2点", desc: "x = 2 を選択：y = 2 + 2 = 4。第2点は (2, 4)。座標平面にプロット！" },
+      { label: "直線を引く", desc: "(−2, 0) と (2, 4) を直線で結び、両方向に延長する。y = x + 2 完成！🎉" },
+    ],
+    ta_ex2_steps: [
+      { label: "座標系を準備", desc: "座標平面を用意する。y = −2x + 4 上の 2 点を自由に選んで決める。" },
+      { label: "第1点", desc: "x = 1 を選択：y = −2(1) + 4 = −2 + 4 = 2。第1点は (1, 2)。座標平面にプロット！" },
+      { label: "第2点", desc: "x = 3 を選択：y = −2(3) + 4 = −6 + 4 = −2。第2点は (3, −2)。座標平面にプロット！" },
+      { label: "直線を引く", desc: "(1, 2) と (3, −2) を直線で結び、両方向に延長する。y = −2x + 4 完成！🎉" },
+    ],
+    c1_ubah: "まず y = mx + c の形に変換：",
+    c1_sbx: "x 切片（y=0）：",
+    c1_sby: "y 切片（x=0）：",
+    c1_soal_b: "求めなさい：a) x切片と y切片、b) グラフを描きなさい！",
+    c1_ans_b: "✅ x切片 = (−2, 0)、y切片 = (0, 3)。傾き m = 3/2、右上がり直線",
+    mcq1_pem_intro: "グラフから、印の付いた 2 つの主要な点を読み取れる：",
+    mcq1_sbx_label: "x 切片",
+    mcq1_sby_label: "y 切片",
+    mcq1_from_sby: "y 切片より →",
+    mcq1_grad_label: "傾き：",
+    mcq1_thus: "よって：",
+    mcq1_wrong_explain: "選択肢 B（y = 2x + 2）は傾きが 2 で 1 ではないため不正解。選択肢 C（y = x − 2）は y 切片が −2 で 2 ではないため不正解。選択肢 D（y = −x + 2）は右下がり（負の傾き）のため不正解。",
+    c2_pem_title: "🔍 完全な解説",
+    c2_l1_title: "📍 ステップ 1 — グラフから 2 点を読み取る",
+    c2_l1_desc: "グラフから、直線が通る 2 点を読み取る（黄色の点で示されている）：",
+    c2_pt1: "点 1",
+    c2_pt2: "点 2",
+    c2_l2_title: "🔁 ステップ 2 — 各選択肢に点を代入する",
+    c2_l2_desc: "両方の点をそれぞれの方程式に代入する。",
+    c2_l2_kw: "同じ y 値が得られる",
+    c2_l2_for: "方程式（",
+    c2_l2_both: "両方",
+    c2_l2_end: "の点について）が正解。",
+    c2_nia_yes: "y = 0 ✓",
+    c2_nia_yes2: "y = 2 ✓",
+    c2_nib: "y = −2（0 ではない）✗",
+    c2_nic: "y = −4（0 ではない）✗",
+    c2_nid: "y = 4（0 ではない）✗",
+    c2_pA_ok: "✅ 両点が成立 → 選択肢 A 正解",
+    c2_pB_ko: "❌ (−2, 0) が成立しない → 選択肢 B 不正解",
+    c2_pC_ko: "❌ (−2, 0) が成立しない → 選択肢 C 不正解",
+    c2_pD_ko: "❌ (−2, 0) が成立しない → 選択肢 D 不正解",
+    c2_concl_title: "✅ 結論：答えは A —",
+    c2_concl_desc: "選択肢 A だけがグラフから読み取った",
+    c2_concl_both: "両方",
+    c2_concl_end: "の点で正しい y 値を与える。",
+    c2_tip_title: "💡 代入テクニックのヒント",
+    c2_tip_items: [
+      "① グラフから直線上の 2 点を読み取る",
+      "② 第1点を全選択肢に代入 → 合わないものを除外",
+      "③ 2つ以上残ったら、第2点を代入して確定",
+    ],
+    c1_soal_a: "直線の方程式：",
+    c3_soal_dan: "と",
+    c3_soal_end: "を同じ座標平面に描く。2 直線の交点を求め、グラフを描け！",
+    c3_soal_b: "2 直線",
+    c3_bantu1: "補助点",
+    c3_bantu2: "補助点",
+    c3_elim_title: "交点 — 加減法で解く：",
+    c3_sum: "(1) と (2) を加える：",
+    c3_sub_eq1: "x = 2 を方程式 (1) に代入：",
+    c3_graf_title: "グラフ",
+    c3_graf_dan: "と",
+    c3_ans_main: "✅ 2 直線の交点：(2, 2) — すべて整数座標！",
   },
 };
 
@@ -531,6 +930,8 @@ const InteractiveStepGraph = ({
 
 /* ── MCQ Contoh 1: Identifikasi Persamaan dari Grafik ── */
 const MCQGrafik1: React.FC = () => {
+  const { language } = useLanguage();
+  const t = T_GRAFIK[language];
   const [pilihan, setPilihan] = React.useState<string | null>(null);
   const [lihatPembahasan, setLihatPembahasan] = React.useState(false);
 
@@ -556,9 +957,9 @@ const MCQGrafik1: React.FC = () => {
     <div className="space-y-4">
       {/* Pertanyaan */}
       <div className="bg-green-900/20 border border-green-500/25 rounded-xl p-4">
-        <p className="text-xs font-bold text-green-300 uppercase tracking-wider mb-1 font-body">📝 Soal</p>
+        <p className="text-xs font-bold text-green-300 uppercase tracking-wider mb-1 font-body">{t.soal}</p>
         <p className="text-sm text-white/90 font-body leading-relaxed">
-          Perhatikan grafik berikut! Persamaan garis yang digambarkan pada grafik di bawah ini adalah…
+          {t.mcq1_soal}
         </p>
       </div>
 
@@ -632,13 +1033,11 @@ const MCQGrafik1: React.FC = () => {
       {/* Feedback setelah jawab */}
       {sudahJawab && (
         <div className={`rounded-xl px-4 py-3 border text-sm font-body ${benar ? "bg-green-900/30 border-green-500/40 text-green-200" : "bg-rose-900/25 border-rose-500/35 text-rose-200"}`}>
-          {benar
-            ? "✅ Benar! Grafik tersebut merupakan garis y = x + 2."
-            : "❌ Jawaban kurang tepat. Perhatikan titik-titik yang ditandai pada grafik dan coba lagi!"}
+          {benar ? t.mcq1_benar : t.mcq1_salah}
           {!benar && (
             <button onClick={() => { setPilihan(null); setLihatPembahasan(false); }}
               className="ml-3 text-xs underline text-rose-300 hover:text-white transition-colors">
-              Coba lagi
+              {t.mcq1_retry}
             </button>
           )}
         </div>
@@ -648,19 +1047,19 @@ const MCQGrafik1: React.FC = () => {
       {sudahJawab && (
         <button onClick={() => setLihatPembahasan(v => !v)}
           className="w-full py-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs font-bold font-body hover:bg-cyan-500/20 transition-all">
-          {lihatPembahasan ? "▲ Sembunyikan Pembahasan" : "▼ Lihat Pembahasan"}
+          {lihatPembahasan ? t.mcq1_tutup : t.mcq1_lihat}
         </button>
       )}
 
       {/* Pembahasan */}
       {lihatPembahasan && (
         <div className="rounded-xl border border-cyan-500/25 bg-slate-800/60 p-4 space-y-3 text-sm font-body" style={{ animation: "slideDown 0.3s ease-out" }}>
-          <p className="text-cyan-300 font-bold">🔍 Pembahasan</p>
-          <p className="text-white/75 leading-relaxed">Dari grafik, kita dapat membaca dua titik kunci yang sudah ditandai:</p>
+          <p className="text-cyan-300 font-bold">{t.mcq1_pem_title}</p>
+          <p className="text-white/75 leading-relaxed">{t.mcq1_pem_intro}</p>
           <div className="grid grid-cols-2 gap-2">
             {[
-              { label: "Titik potong sumbu-x", titik: "(−2, 0)", warna: "text-cyan-300" },
-              { label: "Titik potong sumbu-y", titik: "(0, 2)", warna: "text-violet-300" },
+              { label: t.mcq1_sbx_label, titik: "(−2, 0)", warna: "text-cyan-300" },
+              { label: t.mcq1_sby_label, titik: "(0, 2)", warna: "text-violet-300" },
             ].map(({ label, titik, warna }) => (
               <div key={label} className="bg-slate-900/50 rounded-lg p-2 text-center">
                 <p className="text-[10px] text-white/40 mb-1">{label}</p>
@@ -669,11 +1068,11 @@ const MCQGrafik1: React.FC = () => {
             ))}
           </div>
           <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 text-xs">
-            <p className="text-white/60">Dari titik potong sb-y → <span className="text-yellow-300 font-bold">c = 2</span></p>
-            <p className="text-white/60">Gradien: <InlineMath math="m = \dfrac{0-2}{-2-0} = \dfrac{-2}{-2} = 1" /></p>
-            <p className="text-white/60">Sehingga: <span className="text-green-300 font-bold">y = 1·x + 2 = x + 2</span> ✅</p>
+            <p className="text-white/60">{t.mcq1_from_sby} <span className="text-yellow-300 font-bold">c = 2</span></p>
+            <p className="text-white/60">{t.mcq1_grad_label} <InlineMath math="m = \dfrac{0-2}{-2-0} = \dfrac{-2}{-2} = 1" /></p>
+            <p className="text-white/60">{t.mcq1_thus} <span className="text-green-300 font-bold">y = 1·x + 2 = x + 2</span> ✅</p>
           </div>
-          <p className="text-white/50 text-xs">Opsi B (y = 2x + 2) salah karena gradiennya 2, bukan 1. Opsi C (y = x − 2) salah karena intercept-y = −2, bukan 2. Opsi D (y = −x + 2) salah karena grafiknya turun ke kanan (gradien negatif).</p>
+          <p className="text-white/50 text-xs">{t.mcq1_wrong_explain}</p>
         </div>
       )}
     </div>
@@ -861,20 +1260,20 @@ const GrafikPGLPage = () => {
                     {/* BIG highlight — pangkat 1 */}
                     <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg,rgba(250,204,21,0.12),rgba(234,179,8,0.06))", border: "2px solid rgba(250,204,21,0.45)" }}>
                       <div className="px-4 py-1.5 text-center text-[10px] font-bold tracking-widest uppercase font-body text-yellow-300/70" style={{ background: "rgba(250,204,21,0.10)", borderBottom: "1px solid rgba(250,204,21,0.20)" }}>
-                        ✦ Kunci Utama ✦
+                        {t.konsep_key_title}
                       </div>
                       <div className="px-4 py-5 flex flex-col items-center gap-3 text-center">
                         {/* Big formula */}
                         <div className="flex items-end justify-center gap-1">
                           <span className="font-display font-black text-4xl" style={{ color: "#22d3ee", textShadow: "0 0 20px #22d3ee88" }}>x</span>
-                          <span className="font-display font-black text-2xl mb-1 text-white/40"> dan </span>
+                          <span className="font-display font-black text-2xl mb-1 text-white/40"> {t.konsep_key_dan} </span>
                           <span className="font-display font-black text-4xl" style={{ color: "#a78bfa", textShadow: "0 0 20px #a78bfa88" }}>y</span>
-                          <span className="font-display font-black text-2xl mb-1 text-white/50"> hanya berpangkat </span>
+                          <span className="font-display font-black text-2xl mb-1 text-white/50"> {t.konsep_key_pow} </span>
                           <span className="font-display font-black text-5xl" style={{ color: "#fde047", textShadow: "0 0 24px #fde04799" }}>1</span>
                         </div>
                         <p className="text-xs font-body text-white/60 max-w-xs leading-relaxed">
-                          Tidak ada <span className="text-rose-300 font-bold">x²</span>, <span className="text-rose-300 font-bold">y²</span>, <span className="text-rose-300 font-bold">xy</span>, <span className="text-rose-300 font-bold">√x</span>, atau pangkat lainnya.<br />
-                          Selama x dan y berpangkat 1, grafiknya <span className="text-yellow-200 font-bold">pasti garis lurus</span>.
+                          {t.konsep_key_no} <br />
+                          {t.konsep_key_no2} <span className="text-yellow-200 font-bold">{t.konsep_key_pasti}</span>.
                         </p>
                       </div>
                     </div>
@@ -883,7 +1282,7 @@ const GrafikPGLPage = () => {
                     <div className="rounded-xl px-4 py-3 flex gap-3 items-start" style={{ background: "linear-gradient(135deg,rgba(234,179,8,0.15),rgba(245,158,11,0.08))", border: "1px solid rgba(250,204,21,0.35)" }}>
                       <span className="text-xl shrink-0 mt-0.5">💡</span>
                       <p className="text-xs font-body text-yellow-100 leading-relaxed">
-                        <strong className="text-yellow-300">Cara cepat mengecek:</strong> Lihat pangkat semua x dan y di persamaannya. Kalau <span className="text-yellow-200 font-bold">semuanya pangkat 1</span> (tidak ada kuadrat, akar, atau pangkat negatif) → <span className="underline decoration-yellow-400 underline-offset-2 font-bold">itu pasti persamaan garis lurus!</span>
+                        <strong className="text-yellow-300">{t.konsep_key_check}</strong> {t.konsep_key_check_b} <span className="text-yellow-200 font-bold">{t.konsep_key_check_em}</span> {t.konsep_key_check_cond} <span className="underline decoration-yellow-400 underline-offset-2 font-bold">{t.konsep_key_check_concl}</span>
                       </p>
                     </div>
 
@@ -899,35 +1298,32 @@ const GrafikPGLPage = () => {
                 <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg,rgba(6,182,212,0.08) 0%,rgba(139,92,246,0.08) 50%,rgba(16,185,129,0.06) 100%)", border: "1px solid rgba(6,182,212,0.25)" }}>
                   <div className="px-4 py-3 flex items-center gap-2" style={{ background: "linear-gradient(90deg,rgba(6,182,212,0.15),rgba(139,92,246,0.10))", borderBottom: "1px solid rgba(6,182,212,0.15)" }}>
                     <span className="text-base">🔭</span>
-                    <p className="font-body font-bold text-cyan-200 text-xs tracking-wide uppercase">Eksplorasi Lebih Lanjut</p>
+                    <p className="font-body font-bold text-cyan-200 text-xs tracking-wide uppercase">{t.konsep_explore_title}</p>
                   </div>
                   <div className="px-4 py-4 space-y-2">
                     <p className="text-sm font-body text-white/85 leading-relaxed">
-                      Kamu sudah melihat bagaimana berbagai persamaan menghasilkan bentuk kurva yang berbeda-beda —
-                      ada yang berupa <span className="text-cyan-300 font-semibold">garis lurus</span>,
-                      ada yang melengkung menjadi <span className="text-violet-300 font-semibold">parabola</span>,
-                      ada yang berbentuk <span className="text-emerald-300 font-semibold">hiperbola</span>, dan lainnya.
+                      {t.konsep_explore_p1a}{" "}
+                      <span className="text-cyan-300 font-semibold">{t.konsep_explore_kw1}</span>,{" "}
+                      <span className="text-violet-300 font-semibold">{t.konsep_explore_kw2}</span>,{" "}
+                      <span className="text-emerald-300 font-semibold">{t.konsep_explore_kw3}</span>
+                      {t.konsep_explore_p1b}
                     </p>
                     <p className="text-sm font-body text-white/75 leading-relaxed">
-                      Untuk lebih jelas memahami dan membandingkan berbagai jenis kurva tersebut,
-                      kamu bisa <strong className="text-white">menginput langsung persamaan apa saja</strong> pada
-                      <span className="text-cyan-300 font-semibold"> Laboratorium Grafik Interaktif</span> di bawah ini —
-                      grafiknya akan tergambar secara <em>real-time</em> sehingga kamu dapat mengamati perbedaan bentuknya secara langsung!
+                      {t.konsep_explore_p2a}{" "}
+                      <strong className="text-white">{t.konsep_explore_p2b}</strong>{" "}
+                      {t.konsep_explore_p2c}{" "}
+                      <span className="text-cyan-300 font-semibold"> {t.konsep_explore_lab}</span>{" "}
+                      {t.konsep_explore_p2d}
                     </p>
                     <div className="flex flex-wrap gap-2 pt-1">
-                      {[
-                        { label: "y = 2x + 1",   warna: "#22d3ee", ket: "Garis Lurus" },
-                        { label: "y = x² − 3",   warna: "#a78bfa", ket: "Parabola" },
-                        { label: "y = 1/x",       warna: "#f87171", ket: "Hiperbola" },
-                        { label: "y = √x",        warna: "#6ee7b7", ket: "Akar" },
-                      ].map(({ label, warna, ket }) => (
+                      {(t.konsep_chips as { label: string; warna: string; ket: string }[]).map(({ label, warna, ket }) => (
                         <div key={label} className="flex items-center gap-1.5 px-2.5 py-1 rounded-full" style={{ background: `${warna}15`, border: `1px solid ${warna}35` }}>
                           <span className="font-mono text-[11px] font-bold" style={{ color: warna }}>{label}</span>
                           <span className="text-[10px] text-white/40 font-body">({ket})</span>
                         </div>
                       ))}
                     </div>
-                    <p className="text-[11px] text-white/45 font-body italic">↓ Coba masukkan salah satu persamaan di atas ke laboratorium berikut!</p>
+                    <p className="text-[11px] text-white/45 font-body italic">{t.konsep_explore_hint}</p>
                   </div>
                 </div>
 
@@ -935,15 +1331,15 @@ const GrafikPGLPage = () => {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <span className="text-lg">🖥️</span>
-                    <p className="text-sm font-bold text-cyan-300 font-body">Laboratorium Grafik Interaktif</p>
+                    <p className="text-sm font-bold text-cyan-300 font-body">{t.konsep_lab_title}</p>
                   </div>
                   <p className="text-xs text-white/60 font-body leading-relaxed">
-                    Ketik persamaan apa saja di panel kanan — grafiknya langsung tergambar! Gunakan scroll untuk zoom, drag untuk geser bidang, dan hover untuk melihat koordinat.
+                    {t.konsep_lab_desc}
                   </p>
                   <GeoGebraGrapher />
                   <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-3">
                     <p className="text-xs text-violet-200 font-body">
-                      <strong>💡 Coba masukkan:</strong> <span className="font-mono">y = 3x + 2</span> lalu <span className="font-mono">3x - 2y + 6 = 0</span> lalu <span className="font-mono">x/4 + y/3 = 1</span> — perhatikan titik potong sumbu dan perpotongan antar garis!
+                      <strong>{t.konsep_lab_coba}</strong> <span className="font-mono">y = 3x + 2</span> lalu <span className="font-mono">3x - 2y + 6 = 0</span> lalu <span className="font-mono">x/4 + y/3 = 1</span> — {t.konsep_lab_note}
                     </p>
                   </div>
                 </div>
@@ -961,22 +1357,22 @@ const GrafikPGLPage = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-cyan-900/20 border border-cyan-500/40 rounded-xl p-4">
-                    <p className="text-sm font-bold text-cyan-300 mb-2">📍 Titik Potong Sumbu-x</p>
-                    <p className="text-xs text-white/70 mb-2">Syarat: nilai <strong className="text-white">y = 0</strong></p>
+                    <p className="text-sm font-bold text-cyan-300 mb-2">{t.tp_sbx_title}</p>
+                    <p className="text-xs text-white/70 mb-2">{t.tp_sbx_cond} <strong className="text-white">y = 0</strong></p>
                     <div className="bg-cyan-900/30 rounded-lg p-2 text-xs text-center">
                       <BlockMath math="y = 0 \Rightarrow ax + b(0) = c" />
                       <BlockMath math="x = \frac{c}{a}" />
                     </div>
-                    <p className="text-xs text-white/50 mt-2 text-center">Titik: <InlineMath math="\left(\frac{c}{a},\ 0\right)" /></p>
+                    <p className="text-xs text-white/50 mt-2 text-center">{t.tp_sbx_pt} <InlineMath math="\left(\frac{c}{a},\ 0\right)" /></p>
                   </div>
                   <div className="bg-violet-900/20 border border-violet-500/40 rounded-xl p-4">
-                    <p className="text-sm font-bold text-violet-300 mb-2">📍 Titik Potong Sumbu-y</p>
-                    <p className="text-xs text-white/70 mb-2">Syarat: nilai <strong className="text-white">x = 0</strong></p>
+                    <p className="text-sm font-bold text-violet-300 mb-2">{t.tp_sby_title}</p>
+                    <p className="text-xs text-white/70 mb-2">{t.tp_sby_cond} <strong className="text-white">x = 0</strong></p>
                     <div className="bg-violet-900/30 rounded-lg p-2 text-xs text-center">
                       <BlockMath math="x = 0 \Rightarrow a(0) + by = c" />
                       <BlockMath math="y = \frac{c}{b}" />
                     </div>
-                    <p className="text-xs text-white/50 mt-2 text-center">Titik: <InlineMath math="\left(0,\ \frac{c}{b}\right)" /></p>
+                    <p className="text-xs text-white/50 mt-2 text-center">{t.tp_sby_pt} <InlineMath math="\left(0,\ \frac{c}{b}\right)" /></p>
                   </div>
                 </div>
 
@@ -996,36 +1392,36 @@ const GrafikPGLPage = () => {
                 </div>
 
                 {/* Contoh Metode Titik Potong Sumbu */}
-                <p className="text-sm font-bold text-white/90 font-body">📖 Contoh Soal</p>
+                <p className="text-sm font-bold text-white/90 font-body">{t.tp_contoh}</p>
                 <div className="flex flex-col gap-5">
 
                   {/* Contoh 1 */}
                   <div className="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-cyan-300 font-body uppercase tracking-wide">Contoh 1</p>
+                    <p className="text-xs font-bold text-cyan-300 font-body uppercase tracking-wide">{t.ex_label1}</p>
                     <div className="bg-cyan-900/20 border border-cyan-500/20 rounded-lg p-3">
-                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = 2x + 4" />!</p>
+                      <p className="text-sm text-white font-body">{t.tp_ex1_soal} <InlineMath math="y = 2x + 4" />!</p>
                     </div>
-                    <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
+                    <p className="text-xs font-semibold text-white/70 font-body">{t.tp_pem}</p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-xs font-body border-collapse">
                         <thead><tr className="bg-cyan-900/40">
                           <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">x</th>
                           <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">y</th>
-                          <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">Titik</th>
-                          <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">Keterangan</th>
+                          <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200">{t.tp_tbl_titik}</th>
+                          <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">{t.tp_tbl_ket}</th>
                         </tr></thead>
                         <tbody>
                           <tr className="bg-slate-800/30">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-2</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
                             <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(-2, 0)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-x (y = 0)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">{t.tp_tbl_sbx}</td>
                           </tr>
                           <tr className="bg-slate-700/20">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">4</td>
                             <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(0, 4)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-y (x = 0)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">{t.tp_tbl_sby}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1037,42 +1433,41 @@ const GrafikPGLPage = () => {
                       point2={[0, 4]}
                       lineColor="#22d3ee"
                       navPrev={t.prev} navNext={t.next} navRepeat={t.repeat}
-                      steps={[
-                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat Kartesius. Kita akan menggambar garis y = 2x + 4 menggunakan dua titik potong sumbu." },
-                        { label:"Titik Potong Sb-x", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Substitusi y = 0 ke persamaan: 0 = 2x + 4 → 2x = −4 → x = −2. Titik potong sumbu-x adalah (−2, 0). Plot titik ini!" },
-                        { label:"Titik Potong Sb-y", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Substitusi x = 0 ke persamaan: y = 2(0) + 4 = 4. Titik potong sumbu-y adalah (0, 4). Plot titik ini!" },
-                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (−2, 0) dan (0, 4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = 2x + 4 selesai! 🎉" },
-                      ]}
+                      steps={(t.tp_ex1_steps as { label: string; desc: string }[]).map((s, i) => ({
+                        ...s,
+                        color: ["#94a3b8","#22d3ee","#a78bfa","#4ade80"][i],
+                        bg: ["rgba(148,163,184,0.08)","rgba(34,211,238,0.1)","rgba(167,139,250,0.1)","rgba(74,222,128,0.08)"][i],
+                      }))}
                     />
                   </div>
 
                   {/* Contoh 2 */}
                   <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-violet-300 font-body uppercase tracking-wide">Contoh 2</p>
+                    <p className="text-xs font-bold text-violet-300 font-body uppercase tracking-wide">{t.ex_label2}</p>
                     <div className="bg-violet-900/20 border border-violet-500/20 rounded-lg p-3">
-                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="3x - 5y = 15" />!</p>
+                      <p className="text-sm text-white font-body">{t.tp_ex2_soal} <InlineMath math="3x - 5y = 15" />!</p>
                     </div>
-                    <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
+                    <p className="text-xs font-semibold text-white/70 font-body">{t.tp_pem}</p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-xs font-body border-collapse">
                         <thead><tr className="bg-violet-900/40">
                           <th className="border border-violet-500/30 px-3 py-2 text-violet-200">x</th>
                           <th className="border border-violet-500/30 px-3 py-2 text-violet-200">y</th>
-                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">Titik</th>
-                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">Keterangan</th>
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200">{t.tp_tbl_titik}</th>
+                          <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">{t.tp_tbl_ket}</th>
                         </tr></thead>
                         <tbody>
                           <tr className="bg-slate-800/30">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">5</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
                             <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(5, 0)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-x (y = 0)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">{t.tp_tbl_sbx}</td>
                           </tr>
                           <tr className="bg-slate-700/20">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-3</td>
                             <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(0, -3)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik potong sumbu-y (x = 0)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">{t.tp_tbl_sby}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1084,12 +1479,11 @@ const GrafikPGLPage = () => {
                       point2={[0, -3]}
                       lineColor="#a78bfa"
                       navPrev={t.prev} navNext={t.next} navRepeat={t.repeat}
-                      steps={[
-                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat Kartesius. Kita akan menggambar garis 3x − 5y = 15 menggunakan dua titik potong sumbu." },
-                        { label:"Titik Potong Sb-x", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Substitusi y = 0: 3x − 5(0) = 15 → 3x = 15 → x = 5. Titik potong sumbu-x adalah (5, 0). Plot titik ini!" },
-                        { label:"Titik Potong Sb-y", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Substitusi x = 0: 3(0) − 5y = 15 → −5y = 15 → y = −3. Titik potong sumbu-y adalah (0, −3). Plot titik ini!" },
-                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (5, 0) dan (0, −3) dengan garis lurus, lalu perpanjang ke kedua arah. Garis 3x − 5y = 15 selesai! 🎉" },
-                      ]}
+                      steps={(t.tp_ex2_steps as { label: string; desc: string }[]).map((s, i) => ({
+                        ...s,
+                        color: ["#94a3b8","#22d3ee","#a78bfa","#4ade80"][i],
+                        bg: ["rgba(148,163,184,0.08)","rgba(34,211,238,0.1)","rgba(167,139,250,0.1)","rgba(74,222,128,0.08)"][i],
+                      }))}
                     />
                   </div>
                 </div>
@@ -1120,40 +1514,40 @@ const GrafikPGLPage = () => {
                   </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                  <p className="text-xs text-yellow-200 font-body"><strong>💡 Tips:</strong> Pilih nilai x yang mudah dihitung, misalnya x = 0, 1, 2, atau 3. Hindari pecahan agar koordinat titiknya bilangan bulat dan mudah diplot di bidang koordinat.</p>
+                  <p className="text-xs text-yellow-200 font-body">{t.ta_tip}</p>
                 </div>
 
                 {/* Contoh Metode Dua Titik Acak */}
-                <p className="text-sm font-bold text-white/90 font-body">📖 Contoh Soal</p>
+                <p className="text-sm font-bold text-white/90 font-body">{t.tp_contoh}</p>
                 <div className="flex flex-col gap-5">
 
                   {/* Contoh 1 */}
                   <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-green-300 font-body uppercase tracking-wide">Contoh 1</p>
+                    <p className="text-xs font-bold text-green-300 font-body uppercase tracking-wide">{t.ex_label1}</p>
                     <div className="bg-green-900/20 border border-green-500/20 rounded-lg p-3">
-                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = x + 2" />!</p>
+                      <p className="text-sm text-white font-body">{t.ta_ex1_soal} <InlineMath math="y = x + 2" />!</p>
                     </div>
-                    <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
+                    <p className="text-xs font-semibold text-white/70 font-body">{t.tp_pem}</p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-xs font-body border-collapse">
                         <thead><tr className="bg-green-900/40">
                           <th className="border border-green-500/30 px-3 py-2 text-green-200">x</th>
                           <th className="border border-green-500/30 px-3 py-2 text-green-200">y</th>
-                          <th className="border border-green-500/30 px-3 py-2 text-green-200">Titik</th>
-                          <th className="border border-green-500/30 px-3 py-2 text-green-200 text-left">Keterangan</th>
+                          <th className="border border-green-500/30 px-3 py-2 text-green-200">{t.tp_tbl_titik}</th>
+                          <th className="border border-green-500/30 px-3 py-2 text-green-200 text-left">{t.tp_tbl_ket}</th>
                         </tr></thead>
                         <tbody>
                           <tr className="bg-slate-800/30">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-2</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">0</td>
                             <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(-2, 0)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik pertama (x = -2 dipilih)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">{t.ta_tbl_r1} (x = -2 {t.ta_tbl_dipilih})</td>
                           </tr>
                           <tr className="bg-slate-700/20">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">2</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">4</td>
                             <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(2, 4)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik kedua (x = 2 dipilih)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">{t.ta_tbl_r2} (x = 2 {t.ta_tbl_dipilih})</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1165,42 +1559,41 @@ const GrafikPGLPage = () => {
                       point2={[2, 4]}
                       lineColor="#4ade80"
                       navPrev={t.prev} navNext={t.next} navRepeat={t.repeat}
-                      steps={[
-                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = x + 2." },
-                        { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = −2: y = (−2) + 2 = 0. Titik pertama adalah (−2, 0). Plot titik ini di bidang koordinat!" },
-                        { label:"Titik Kedua", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Pilih x = 2: y = 2 + 2 = 4. Titik kedua adalah (2, 4). Plot titik ini di bidang koordinat!" },
-                        { label:"Gambar Garis", color:"#4ade80", bg:"rgba(74,222,128,0.08)", desc:"Hubungkan titik (−2, 0) dan (2, 4) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = x + 2 selesai! 🎉" },
-                      ]}
+                      steps={(t.ta_ex1_steps as { label: string; desc: string }[]).map((s, i) => ({
+                        ...s,
+                        color: ["#94a3b8","#22d3ee","#a78bfa","#4ade80"][i],
+                        bg: ["rgba(148,163,184,0.08)","rgba(34,211,238,0.1)","rgba(167,139,250,0.1)","rgba(74,222,128,0.08)"][i],
+                      }))}
                     />
                   </div>
 
                   {/* Contoh 2 */}
                   <div className="bg-slate-800/60 border border-orange-500/30 rounded-xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-orange-300 font-body uppercase tracking-wide">Contoh 2</p>
+                    <p className="text-xs font-bold text-orange-300 font-body uppercase tracking-wide">{t.ex_label2}</p>
                     <div className="bg-orange-900/20 border border-orange-500/20 rounded-lg p-3">
-                      <p className="text-sm text-white font-body">Tentukan grafik fungsi dari <InlineMath math="y = -2x + 4" />!</p>
+                      <p className="text-sm text-white font-body">{t.ta_ex2_soal} <InlineMath math="y = -2x + 4" />!</p>
                     </div>
-                    <p className="text-xs font-semibold text-white/70 font-body">Penyelesaian:</p>
+                    <p className="text-xs font-semibold text-white/70 font-body">{t.tp_pem}</p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-xs font-body border-collapse">
                         <thead><tr className="bg-orange-900/40">
                           <th className="border border-orange-500/30 px-3 py-2 text-orange-200">x</th>
                           <th className="border border-orange-500/30 px-3 py-2 text-orange-200">y</th>
-                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200">Titik</th>
-                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200 text-left">Keterangan</th>
+                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200">{t.tp_tbl_titik}</th>
+                          <th className="border border-orange-500/30 px-3 py-2 text-orange-200 text-left">{t.tp_tbl_ket}</th>
                         </tr></thead>
                         <tbody>
                           <tr className="bg-slate-800/30">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">1</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">2</td>
                             <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(1, 2)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik pertama (x = 1 dipilih)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">{t.ta_tbl_r1} (x = 1 {t.ta_tbl_dipilih})</td>
                           </tr>
                           <tr className="bg-slate-700/20">
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">3</td>
                             <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center font-mono">-2</td>
                             <td className="border border-white/10 px-3 py-2 text-green-300 text-center font-bold">(3, -2)</td>
-                            <td className="border border-white/10 px-3 py-2 text-white/50">Titik kedua (x = 3 dipilih)</td>
+                            <td className="border border-white/10 px-3 py-2 text-white/50">{t.ta_tbl_r2} (x = 3 {t.ta_tbl_dipilih})</td>
                           </tr>
                         </tbody>
                       </table>
@@ -1212,12 +1605,11 @@ const GrafikPGLPage = () => {
                       point2={[3, -2]}
                       lineColor="#fb923c"
                       navPrev={t.prev} navNext={t.next} navRepeat={t.repeat}
-                      steps={[
-                        { label:"Siapkan Grid", color:"#94a3b8", bg:"rgba(148,163,184,0.08)", desc:"Siapkan bidang koordinat. Kita bebas memilih dua nilai x sembarang untuk menentukan dua titik pada garis y = −2x + 4." },
-                        { label:"Titik Pertama", color:"#22d3ee", bg:"rgba(34,211,238,0.1)", desc:"Pilih x = 1: y = −2(1) + 4 = −2 + 4 = 2. Titik pertama adalah (1, 2). Plot titik ini di bidang koordinat!" },
-                        { label:"Titik Kedua", color:"#a78bfa", bg:"rgba(167,139,250,0.1)", desc:"Pilih x = 3: y = −2(3) + 4 = −6 + 4 = −2. Titik kedua adalah (3, −2). Plot titik ini di bidang koordinat!" },
-                        { label:"Gambar Garis", color:"#fb923c", bg:"rgba(251,146,60,0.08)", desc:"Hubungkan titik (1, 2) dan (3, −2) dengan garis lurus, lalu perpanjang ke kedua arah. Garis y = −2x + 4 selesai! 🎉" },
-                      ]}
+                      steps={(t.ta_ex2_steps as { label: string; desc: string }[]).map((s, i) => ({
+                        ...s,
+                        color: ["#94a3b8","#22d3ee","#a78bfa","#fb923c"][i],
+                        bg: ["rgba(148,163,184,0.08)","rgba(34,211,238,0.1)","rgba(167,139,250,0.1)","rgba(251,146,60,0.08)"][i],
+                      }))}
                     />
                   </div>
                 </div>
@@ -1233,31 +1625,31 @@ const GrafikPGLPage = () => {
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
-                  <p className="text-sm text-white/85 font-body">Persamaan garis: <InlineMath math="3x - 2y + 6 = 0" />. Tentukan: a) titik potong sumbu-x dan sumbu-y, b) gambarkan grafiknya!</p>
+                  <p className="text-sm text-white/85 font-body">{t.c1_soal_a} <InlineMath math="3x - 2y + 6 = 0" />. {t.c1_soal_b}</p>
                 </div>
                 <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                   <p className="text-sm font-semibold text-cyan-300 font-body">{t.pem}</p>
                   <div className="space-y-3 text-sm font-body">
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-1">Ubah ke bentuk y = mx + c terlebih dahulu:</p>
+                      <p className="text-cyan-300 font-semibold mb-1">{t.c1_ubah}</p>
                       <BlockMath math="3x - 2y + 6 = 0" />
                       <BlockMath math="-2y = -3x - 6" />
                       <BlockMath math="y = \frac{3}{2}x + 3" />
                     </div>
                     <div className="grid grid-cols-2 gap-2">
                       <div className="bg-slate-800/50 rounded-lg p-2 text-xs">
-                        <p className="text-cyan-300 font-semibold mb-1">Potong sb-x (y=0):</p>
+                        <p className="text-cyan-300 font-semibold mb-1">{t.c1_sbx}</p>
                         <BlockMath math="0 = \frac{3}{2}x + 3 \Rightarrow x = -2" />
                         <p className="text-green-300 font-bold">(-2, 0)</p>
                       </div>
                       <div className="bg-slate-800/50 rounded-lg p-2 text-xs">
-                        <p className="text-violet-300 font-semibold mb-1">Potong sb-y (x=0):</p>
+                        <p className="text-violet-300 font-semibold mb-1">{t.c1_sby}</p>
                         <BlockMath math="y = \frac{3}{2}(0) + 3 = 3" />
                         <p className="text-green-300 font-bold">(0, 3)</p>
                       </div>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <p className="text-orange-300 font-semibold mb-2 text-xs">Grafik 3x − 2y + 6 = 0:</p>
+                      <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c3_graf_title} 3x − 2y + 6 = 0:</p>
                       <CoordSystem w={W} h={H} label="3x−2y+6=0">
                         <polyline
                           points={[[-4,-3],[-2,0],[0,3],[2,6]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')}
@@ -1272,7 +1664,7 @@ const GrafikPGLPage = () => {
                       </CoordSystem>
                     </div>
                     <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3">
-                      <p className="text-sm font-bold text-green-300 font-body">✅ Sb-x = (−2, 0), Sb-y = (0, 3). Gradien m = 3/2, garis naik</p>
+                      <p className="text-sm font-bold text-green-300 font-body">{t.c1_ans_b}</p>
                     </div>
                   </div>
                 </div>
@@ -1289,21 +1681,21 @@ const GrafikPGLPage = () => {
 
                   {/* ── PEMBAHASAN ── */}
                   <div className="bg-slate-700/40 border border-yellow-500/25 rounded-xl p-4 space-y-4">
-                    <p className="text-sm font-semibold text-yellow-300 font-body">🔍 Pembahasan Lengkap</p>
+                    <p className="text-sm font-semibold text-yellow-300 font-body">{t.c2_pem_title}</p>
 
                     {/* Langkah 1 — baca titik dari grafik */}
                     <div className="bg-slate-800/60 rounded-xl p-3 space-y-2">
-                      <p className="text-xs font-bold text-cyan-300 font-body">📍 Langkah 1 — Baca Dua Titik dari Grafik</p>
+                      <p className="text-xs font-bold text-cyan-300 font-body">{t.c2_l1_title}</p>
                       <p className="text-xs text-white/70 font-body leading-relaxed">
-                        Dari grafik, baca dua titik yang dilalui garis (ditandai dengan titik kuning):
+                        {t.c2_l1_desc}
                       </p>
                       <div className="grid grid-cols-2 gap-2">
                         <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-lg p-2.5 text-center">
-                          <p className="text-[10px] text-white/50 font-body mb-1">Titik 1</p>
+                          <p className="text-[10px] text-white/50 font-body mb-1">{t.c2_pt1}</p>
                           <p className="text-base font-bold text-cyan-300 font-mono">(−2, 0)</p>
                         </div>
                         <div className="bg-violet-900/30 border border-violet-500/30 rounded-lg p-2.5 text-center">
-                          <p className="text-[10px] text-white/50 font-body mb-1">Titik 2</p>
+                          <p className="text-[10px] text-white/50 font-body mb-1">{t.c2_pt2}</p>
                           <p className="text-base font-bold text-violet-300 font-mono">(0, 2)</p>
                         </div>
                       </div>
@@ -1311,9 +1703,9 @@ const GrafikPGLPage = () => {
 
                     {/* Langkah 2 — substitusi ke tiap opsi */}
                     <div className="bg-slate-800/60 rounded-xl p-3 space-y-3">
-                      <p className="text-xs font-bold text-yellow-300 font-body">🔁 Langkah 2 — Substitusi Titik ke Setiap Opsi</p>
+                      <p className="text-xs font-bold text-yellow-300 font-body">{t.c2_l2_title}</p>
                       <p className="text-xs text-white/65 font-body leading-relaxed">
-                        Masukkan kedua titik ke masing-masing persamaan. Persamaan yang <strong className="text-white">menghasilkan nilai y yang sama</strong> untuk <em>kedua</em> titik = jawaban yang benar.
+                        {t.c2_l2_desc} <strong className="text-white">{t.c2_l2_kw}</strong> {t.c2_l2_for} <em>{t.c2_l2_both}</em> {t.c2_l2_end}
                       </p>
 
                       {/* Opsi A */}
@@ -1324,17 +1716,17 @@ const GrafikPGLPage = () => {
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-xs font-body">
                           <div className="bg-slate-900/50 rounded-lg p-2 space-y-0.5">
-                            <p className="text-white/50">Titik <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
+                            <p className="text-white/50">{t.c2_nia_yes} <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
                             <BlockMath math="y = -2 + 2 = 0 \checkmark" />
-                            <p className="text-green-400 font-bold text-center">Nilai y = 0 ✓</p>
+                            <p className="text-green-400 font-bold text-center">{t.c2_nia_yes2} 0 ✓</p>
                           </div>
                           <div className="bg-slate-900/50 rounded-lg p-2 space-y-0.5">
-                            <p className="text-white/50">Titik <span className="text-violet-300 font-bold">(0, 2)</span>:</p>
+                            <p className="text-white/50">{t.c2_nia_yes} <span className="text-violet-300 font-bold">(0, 2)</span>:</p>
                             <BlockMath math="y = 0 + 2 = 2 \checkmark" />
-                            <p className="text-green-400 font-bold text-center">Nilai y = 2 ✓</p>
+                            <p className="text-green-400 font-bold text-center">{t.c2_nia_yes2} 2 ✓</p>
                           </div>
                         </div>
-                        <p className="text-xs font-bold text-green-300 font-body text-center pt-1">✅ Kedua titik terpenuhi → Opsi A BENAR</p>
+                        <p className="text-xs font-bold text-green-300 font-body text-center pt-1">{t.c2_pA_ok}</p>
                       </div>
 
                       {/* Opsi B */}
@@ -1344,11 +1736,11 @@ const GrafikPGLPage = () => {
                           <InlineMath math="y = 2x + 2" />
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
-                          <p className="text-white/50 mb-0.5">Titik <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
+                          <p className="text-white/50 mb-0.5">{t.c2_nia_yes} <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
                           <BlockMath math="y = 2(-2) + 2 = -4 + 2 = -2 \neq 0" />
-                          <p className="text-red-400 font-bold text-center">Nilai y = −2, bukan 0 ✗</p>
+                          <p className="text-red-400 font-bold text-center">{t.c2_nib}</p>
                         </div>
-                        <p className="text-xs text-red-300/70 font-body text-center">❌ Titik (−2, 0) tidak terpenuhi → Opsi B SALAH</p>
+                        <p className="text-xs text-red-300/70 font-body text-center">{t.c2_pB_ko}</p>
                       </div>
 
                       {/* Opsi C */}
@@ -1358,11 +1750,11 @@ const GrafikPGLPage = () => {
                           <InlineMath math="y = x - 2" />
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
-                          <p className="text-white/50 mb-0.5">Titik <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
+                          <p className="text-white/50 mb-0.5">{t.c2_nia_yes} <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
                           <BlockMath math="y = -2 - 2 = -4 \neq 0" />
-                          <p className="text-red-400 font-bold text-center">Nilai y = −4, bukan 0 ✗</p>
+                          <p className="text-red-400 font-bold text-center">{t.c2_nic}</p>
                         </div>
-                        <p className="text-xs text-red-300/70 font-body text-center">❌ Titik (−2, 0) tidak terpenuhi → Opsi C SALAH</p>
+                        <p className="text-xs text-red-300/70 font-body text-center">{t.c2_pC_ko}</p>
                       </div>
 
                       {/* Opsi D */}
@@ -1372,27 +1764,27 @@ const GrafikPGLPage = () => {
                           <InlineMath math="y = -x + 2" />
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
-                          <p className="text-white/50 mb-0.5">Titik <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
+                          <p className="text-white/50 mb-0.5">{t.c2_nia_yes} <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
                           <BlockMath math="y = -(-2) + 2 = 2 + 2 = 4 \neq 0" />
-                          <p className="text-red-400 font-bold text-center">Nilai y = 4, bukan 0 ✗</p>
+                          <p className="text-red-400 font-bold text-center">{t.c2_nid}</p>
                         </div>
-                        <p className="text-xs text-red-300/70 font-body text-center">❌ Titik (−2, 0) tidak terpenuhi → Opsi D SALAH</p>
+                        <p className="text-xs text-red-300/70 font-body text-center">{t.c2_pD_ko}</p>
                       </div>
                     </div>
 
                     {/* Kesimpulan */}
                     <div className="bg-green-500/10 border border-green-500/35 rounded-xl p-3">
-                      <p className="text-sm font-bold text-green-300 font-body mb-1">✅ Kesimpulan: Jawaban A — <InlineMath math="y = x + 2" /></p>
-                      <p className="text-xs text-white/65 font-body leading-relaxed">Hanya opsi A yang menghasilkan nilai y yang tepat untuk <strong>kedua</strong> titik yang terbaca dari grafik.</p>
+                      <p className="text-sm font-bold text-green-300 font-body mb-1">{t.c2_concl_title} <InlineMath math="y = x + 2" /></p>
+                      <p className="text-xs text-white/65 font-body leading-relaxed">{t.c2_concl_desc} <strong>{t.c2_concl_both}</strong> {t.c2_concl_end}</p>
                     </div>
 
                     {/* Tips */}
                     <div className="bg-yellow-500/10 border border-yellow-500/35 rounded-xl p-3">
-                      <p className="text-xs font-bold text-yellow-300 font-body mb-1">💡 Tips Teknik Substitusi</p>
+                      <p className="text-xs font-bold text-yellow-300 font-body mb-1">{t.c2_tip_title}</p>
                       <div className="space-y-1 text-xs text-white/70 font-body">
-                        <p>① Baca 2 titik yang dilalui garis dari grafik</p>
-                        <p>② Substitusi titik pertama ke semua opsi → eliminasi yang tidak cocok</p>
-                        <p>③ Jika masih ada 2+ opsi yang lolos, substitusi titik kedua untuk memastikan</p>
+                        {(t.c2_tip_items as string[]).map((item, i) => (
+                          <p key={i}>{item}</p>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -1412,7 +1804,7 @@ const GrafikPGLPage = () => {
                   <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
                   <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
                     <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
-                    <p className="text-sm text-white/85 font-body">Dua garis <InlineMath math="\ell_1: x + y = 4" /> dan <InlineMath math="\ell_2: 2x - y = 2" /> digambar pada satu bidang koordinat. Tentukan titik potong kedua garis tersebut, lalu gambarkan!</p>
+                    <p className="text-sm text-white/85 font-body">{t.c3_soal_b} <InlineMath math="\ell_1: x + y = 4" /> {t.c3_soal_dan} <InlineMath math="\ell_2: 2x - y = 2" /> {t.c3_soal_end}</p>
                   </div>
                   <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
                     <p className="text-sm font-semibold text-cyan-300 font-body">{t.pem}</p>
@@ -1420,13 +1812,13 @@ const GrafikPGLPage = () => {
 
                       {/* Tabel titik potong l1 */}
                       <div className="bg-slate-800/50 rounded-lg p-3 space-y-2">
-                        <p className="text-cyan-300 font-semibold text-xs">Titik bantu <InlineMath math="\ell_1: x + y = 4" /> <span className="text-white/50">(y = 4 − x)</span></p>
+                        <p className="text-cyan-300 font-semibold text-xs">{t.c3_bantu1} <InlineMath math="\ell_1: x + y = 4" /> <span className="text-white/50">(y = 4 − x)</span></p>
                         <div className="overflow-x-auto">
                           <table className="text-xs font-body border-collapse w-full">
                             <thead><tr className="bg-cyan-900/40">
                               <th className="border border-cyan-500/30 px-3 py-1.5 text-cyan-200">x</th>
                               <th className="border border-cyan-500/30 px-3 py-1.5 text-cyan-200">y = 4 − x</th>
-                              <th className="border border-cyan-500/30 px-3 py-1.5 text-cyan-200">Titik</th>
+                              <th className="border border-cyan-500/30 px-3 py-1.5 text-cyan-200">{t.tp_tbl_titik}</th>
                             </tr></thead>
                             <tbody>
                               <tr className="bg-slate-800/30">
@@ -1446,13 +1838,13 @@ const GrafikPGLPage = () => {
 
                       {/* Tabel titik potong l2 */}
                       <div className="bg-slate-800/50 rounded-lg p-3 space-y-2">
-                        <p className="text-pink-300 font-semibold text-xs">Titik bantu <InlineMath math="\ell_2: 2x - y = 2" /> <span className="text-white/50">(y = 2x − 2)</span></p>
+                        <p className="text-pink-300 font-semibold text-xs">{t.c3_bantu2} <InlineMath math="\ell_2: 2x - y = 2" /> <span className="text-white/50">(y = 2x − 2)</span></p>
                         <div className="overflow-x-auto">
                           <table className="text-xs font-body border-collapse w-full">
                             <thead><tr className="bg-pink-900/40">
                               <th className="border border-pink-500/30 px-3 py-1.5 text-pink-200">x</th>
                               <th className="border border-pink-500/30 px-3 py-1.5 text-pink-200">y = 2x − 2</th>
-                              <th className="border border-pink-500/30 px-3 py-1.5 text-pink-200">Titik</th>
+                              <th className="border border-pink-500/30 px-3 py-1.5 text-pink-200">{t.tp_tbl_titik}</th>
                             </tr></thead>
                             <tbody>
                               <tr className="bg-slate-800/30">
@@ -1472,18 +1864,18 @@ const GrafikPGLPage = () => {
 
                       {/* Eliminasi */}
                       <div className="bg-slate-800/50 rounded-lg p-3">
-                        <p className="text-cyan-300 font-semibold mb-1 text-xs">Titik potong — selesaikan dengan eliminasi:</p>
+                        <p className="text-cyan-300 font-semibold mb-1 text-xs">{t.c3_elim_title}</p>
                         <BlockMath math="\ell_1:\quad x + y = 4 \quad \cdots (1)" />
                         <BlockMath math="\ell_2:\quad 2x - y = 2 \quad \cdots (2)" />
-                        <p className="text-white/60 text-xs mb-1">Jumlahkan (1) dan (2):</p>
+                        <p className="text-white/60 text-xs mb-1">{t.c3_sum}</p>
                         <BlockMath math="3x = 6 \Rightarrow x = 2" />
-                        <p className="text-white/60 text-xs mb-1">Substitusi x = 2 ke persamaan (1):</p>
+                        <p className="text-white/60 text-xs mb-1">{t.c3_sub_eq1}</p>
                         <BlockMath math="2 + y = 4 \Rightarrow y = 2" />
                       </div>
 
                       {/* Grafik besar */}
                       <div className="bg-slate-800/50 rounded-lg p-3">
-                        <p className="text-orange-300 font-semibold mb-3 text-xs">Grafik <InlineMath math="\ell_1" /> dan <InlineMath math="\ell_2" />:</p>
+                        <p className="text-orange-300 font-semibold mb-3 text-xs">{t.c3_graf_title} <InlineMath math="\ell_1" /> {t.c3_graf_dan} <InlineMath math="\ell_2" />:</p>
                         <svg viewBox={`0 0 ${W3} ${H3}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.97)" }}>
                           {/* grid */}
                           {ticks3.concat([0]).map(v => (
@@ -1543,7 +1935,7 @@ const GrafikPGLPage = () => {
                       </div>
 
                       <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3">
-                        <p className="text-sm font-bold text-red-300 font-body">✅ Titik potong kedua garis: <InlineMath math="(2,\ 2)" /> — semua koordinat bilangan bulat!</p>
+                        <p className="text-sm font-bold text-red-300 font-body">{t.c3_ans_main}</p>
                       </div>
                     </div>
                   </div>

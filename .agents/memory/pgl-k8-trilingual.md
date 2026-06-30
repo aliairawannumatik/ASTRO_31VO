@@ -1,0 +1,51 @@
+---
+name: PGL K8 trilingual complete
+description: Lessons from wiring all 4 Kelas 8 Persamaan Garis Lurus materi-matematika pages (GradienPage, MenentukanPGLPage, Hubungan2GarisPage, GrafikPGLPage) to id/en/ja.
+---
+
+# K8 Persamaan Garis Lurus — Trilingual Wiring
+
+## Files
+- `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/GradienPage.tsx` ✅
+- `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/MenentukanPGLPage.tsx` ✅
+- `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/Hubungan2GarisPage.tsx` ✅
+- `src/pages/materi-matematika/kelas8/persamaan-garis-lurus/GrafikPGLPage.tsx` ✅ (largest; took multiple sessions)
+
+## GrafikPGLPage key patterns
+
+### Step array typing
+InteractiveStepGraph `steps` prop from translation arrays must be cast:
+```tsx
+steps={(t.tp_ex1_steps as { label: string; desc: string }[]).map((s, i) => ({
+  ...s,
+  color: ["#94a3b8","#22d3ee","#a78bfa","#4ade80"][i],
+  bg: ["rgba(148,163,184,0.08)","rgba(34,211,238,0.1)","rgba(167,139,250,0.1)","rgba(74,222,128,0.08)"][i],
+}))}
+```
+
+### konsep_chips typing
+```tsx
+(t.konsep_chips as { label: string; warna: string; ket: string }[]).map(...)
+```
+
+### c2_tip_items typing
+```tsx
+(t.c2_tip_items as string[]).map((item, i) => <p key={i}>{item}</p>)
+```
+
+### Missing keys discovered during wiring
+Several keys used in JSX were not yet in T_GRAFIK; they needed to be added to all 3 language blocks:
+- `ex_label1`, `ex_label2` — example labels ("Contoh 1"/"Example 1"/"例 1")
+- `c1_soal_a` — prefix before equation in contoh1 soal
+- `c3_soal_b` (repurposed from long string → short "Dua garis"/"Two lines"/"2 直線")
+- `c3_soal_dan`, `c3_soal_end` — split the contoh3 soal around InlineMath equations
+- `c3_bantu2` — second helper-point label (same value as c3_bantu1)
+- `c3_graf_dan` — "and"/"and"/"と" between ℓ₁ and ℓ₂ in graf title
+
+**Why:** Some keys were added to T_GRAFIK in one session but the JSX was wired in the next; always grep for each new key before using it in JSX.
+
+### Sub-component (MCQGrafik1)
+MCQGrafik1 is defined inside GrafikPGLPage.tsx (not a separate file). It calls `useLanguage()` and `const t = T_GRAFIK[language]` at its own top level — consistent with the standard pattern for inlined sub-components.
+
+### c2_nia_yes key reuse
+`c2_nia_yes` is reused as the "Titik / Point / 点" label prefix in both Opsi A sub-cells and all wrong-option cells. The value is "Titik" (id) / (empty for en/ja since the context differs). Check the actual values if extending.
