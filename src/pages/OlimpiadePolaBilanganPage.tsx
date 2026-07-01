@@ -229,6 +229,7 @@ const latihanOlimpiade = [
   { no: 35, soal: "OSN Matematika 2025 Tingkat Kota\nEnam bilangan prima kurang dari 160 membentuk barisan aritmetika dengan beda lebih dari 1. Jumlah ke enam bilangan tersebut adalah ...", options: ["A. 240", "B. 300", "C. 492", "D. 926"] },
   { no: 36, soal: "OSN Matematika 2025 Tingkat Kota\nPerhatikan barisan bilangan berikut:\n1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, ...\nSuku-suku barisan tersebut diperoleh dari semua bilangan bulat positif dengan menghilangkan semua kelipatan 5. Suku ke-2025 dari barisan tersebut adalah ...", options: ["A. 2430", "B. 2530", "C. 2531", "D. 2532"] },
   { no: 37, soal: "OSN Matematika 2025 Tingkat Kota\nBilangan segilima ke-n adalah banyaknya titik yang membentuk n segilima. Bilangan segilima ke-0 adalah 1, bilangan segilima ke-1 adalah 5, bilangan segilima ke-2 adalah 12, dan bilangan segilima ke-3 adalah 22. Bilangan segilima yang paling dekat dengan 2025 adalah bilangan segilima ke-...", options: ["A. 30", "B. 33", "C. 36", "D. 39"] },
+  { no: 38, soal: "OSN Matematika 2026 Tingkat Kota\nSuatu barisan bilangan genap positif dapat ditulis sebagai berikut: 2, 4, 2, 4, 6, 4, 2, 4, 6, 8, 6, 4, ... dan dapat dikelompokkan sebagai berikut: $\\{2, 4\\}$, $\\{2, 4, 6, 4\\}$, $\\{2, 4, 6, 8, 6, 4\\}$, .... Suku ke-2026 barisan bilangan tersebut adalah....", options: ["A. 46", "B. 88", "C. 90", "D. 92"] },
 ];
 
 const dotColor = "#5b9ec9";

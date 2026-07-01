@@ -408,4 +408,33 @@ export const polaBilanganOlimpiadePembahasan: Record<number, Pembahasan> = {
     kesimpulan:
       "Bilangan segilima yang paling dekat dengan 2.025 adalah segilima ke-$36$.",
   },
+  38: {
+    jawaban: "D. 92",
+    konsepTrik:
+      "Kelompokkan barisan menjadi grup ke-$n$ yang berisi $2n$ suku: naik dari 2 sampai $2(n+1)$, lalu turun kembali ke 4. " +
+      "Total suku sampai akhir grup ke-$n$ = $2 + 4 + 6 + \\cdots + 2n = n(n+1)$. " +
+      "Temukan grup mana suku ke-2026 berada, lalu tentukan posisinya di dalam grup tersebut.",
+    stepByStep:
+      "Pola tiap grup:\n" +
+      "Grup 1: $\\{2, 4\\}$ → 2 suku, nilai maks = 4\n" +
+      "Grup 2: $\\{2, 4, 6, 4\\}$ → 4 suku, nilai maks = 6\n" +
+      "Grup 3: $\\{2, 4, 6, 8, 6, 4\\}$ → 6 suku, nilai maks = 8\n" +
+      "Grup $n$ → $2n$ suku, nilai maks = $2(n+1)$\n\n" +
+      "Total suku s.d. akhir grup ke-$n$ = $n(n+1)$\n\n" +
+      "Cari grup yang memuat suku ke-2026:\n" +
+      "$n = 44$: $44 \\times 45 = 1980 < 2026$\n" +
+      "$n = 45$: $45 \\times 46 = 2070 \\geq 2026$ ✓\n\n" +
+      "Suku ke-2026 ada di grup ke-45.\n" +
+      "Posisi dalam grup 45: $2026 - 1980 = 46$\n\n" +
+      "Grup 45 terdiri dari 90 suku:\n" +
+      "- Bagian naik (posisi 1–46): $2, 4, 6, \\ldots, 2 \\times 46 = 92$\n" +
+      "- Bagian turun (posisi 47–90): $90, 88, \\ldots, 4$\n\n" +
+      "Posisi ke-46 = suku puncak = $2 \\times (45 + 1) = 2 \\times 46 = \\mathbf{92}$",
+    tips:
+      "Kunci soal ini adalah mengenali bahwa grup ke-$n$ memiliki tepat $2n$ suku dan total suku s.d. grup ke-$n$ = $n(n+1)$. " +
+      "Bagian naik grup ke-$n$ memiliki $n+1$ suku (termasuk puncak), bagian turun memiliki $n-1$ suku. " +
+      "Jika posisi dalam grup ≤ $n+1$, suku berada di bagian naik, nilainya = $2 \\times \\text{posisi}$.",
+    kesimpulan:
+      "Suku ke-2026 berada di posisi ke-46 dalam grup ke-45, yaitu suku puncak bernilai $\\mathbf{92}$ (Jawaban D).",
+  },
 };
