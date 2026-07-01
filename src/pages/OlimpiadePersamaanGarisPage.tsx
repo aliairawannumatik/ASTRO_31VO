@@ -1181,6 +1181,20 @@ const latihanOlimpiade = [
     ],
     rumus: "Rumus jarak titik $(x_0, y_0)$ ke garis $ax + by + c = 0$: $d = \\dfrac{|ax_0 + by_0 + c|}{\\sqrt{a^2 + b^2}}$. Triple Pythagoras 3-4-5 sering muncul di olimpiade!",
   }},
+  { no: 4, soal: "OSN Matematika 2026 Tingkat Kota\nDiberikan persegi $ABCD$ dimana $AB$ sejajar sumbu $X$ dan $AD$ sejajar sumbu $Y$. Jika $B(10, 15)$ dan $D(30, 35)$, persegi tersebut dipotong oleh garis lurus dengan persamaan $3x + 2y = 78$, maka luas segilima yang terbentuk adalah ...", options: ["A. 173", "B. 273", "C. 373", "D. 393"], jawaban: "C. 373", pembahasan: {
+    konsep: "Tentukan koordinat semua titik sudut persegi dari kondisi $AB \\parallel$ sumbu $X$ dan $AD \\parallel$ sumbu $Y$. Cari titik potong garis pemotong dengan sisi-sisi persegi, hitung luas segitiga yang terpotong, lalu kurangi dari luas persegi.",
+    langkah: [
+      "Karena $AB \\parallel$ sumbu $X$, maka $A$ dan $B$ memiliki koordinat $y$ yang sama. Karena $AD \\parallel$ sumbu $Y$, maka $A$ dan $D$ memiliki koordinat $x$ yang sama.",
+      "Dari $B(10, 15)$ dan $D(30, 35)$: titik $A$ memiliki $x = 30$ (sama dengan $D$) dan $y = 15$ (sama dengan $B$), sehingga $A(30, 15)$.",
+      "Titik $C$ berseberangan dengan $A$: $C(10, 35)$. Jadi persegi $ABCD$: $A(30,15)$, $B(10,15)$, $C(10,35)$, $D(30,35)$. Panjang sisi $= 20$, luas $= 20 \\times 20 = 400$.",
+      "Cari titik potong garis $3x + 2y = 78$ dengan sisi $AB$ (y = 15, $10 \\le x \\le 30$): $3x + 2(15) = 78 \\Rightarrow 3x = 48 \\Rightarrow x = 16$. Titik $P_1(16, 15)$.",
+      "Cari titik potong garis $3x + 2y = 78$ dengan sisi $BC$ (x = 10, $15 \\le y \\le 35$): $3(10) + 2y = 78 \\Rightarrow 2y = 48 \\Rightarrow y = 24$. Titik $P_2(10, 24)$.",
+      "Garis memotong sisi $AB$ di $P_1(16,15)$ dan sisi $BC$ di $P_2(10,24)$, sehingga memotong sudut $B$ dan membentuk segitiga $B$-$P_1$-$P_2$.",
+      "Luas segitiga $= \\dfrac{1}{2} \\times alas \\times tinggi = \\dfrac{1}{2} \\times (16-10) \\times (24-15) = \\dfrac{1}{2} \\times 6 \\times 9 = 27$.",
+      "Luas segilima $= $ luas persegi $-$ luas segitiga $= 400 - 27 = 373$.",
+    ],
+    rumus: "Trik penting: periksa titik potong garis dengan setiap sisi persegi satu per satu. Pastikan titik potong berada di dalam rentang sisi tersebut. Jika garis memotong dua sisi yang bertemu di sudut, maka bangun yang terpotong adalah segitiga siku-siku dengan alas dan tinggi yang mudah dihitung.",
+  }},
 ];
 
 const OlimpiadePersamaanGarisPage = () => {
