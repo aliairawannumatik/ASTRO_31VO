@@ -964,6 +964,138 @@ const latihanDasar = [
   { no: 33, soal: "Titik $R(x, 0)$ terletak pada sumbu-x dan berjarak sama dari titik $A(2, 3)$ dan titik $B(5, -2)$. Berapakah koordinat titik R?", options: ["A. $R(4, 0)$", "B. $R(2, 0)$", "C. $R(3, 0)$", "D. $R\\left(\\frac{8}{3}, 0\\right)$"] },
 ];
 
+// SVG: Persegi panjang ABCD dilipat sesuai garis putus-putus - OSN 2026
+const PersegiPanjangLipatSVG = () => {
+  // Left diagram: before fold
+  const Lx = 8, Ly = 12;          // left diagram origin
+  const LW = 130, LH = 98;        // rectangle size (px)
+  const LD = { x: Lx, y: Ly };
+  const LC = { x: Lx + LW, y: Ly };
+  const LB = { x: Lx + LW, y: Ly + LH };
+  const LA = { x: Lx, y: Ly + LH };
+  // Q on DC: QC = LH (≈ BC), so DQ = LW - LH
+  const LQ = { x: Lx + LW - LH, y: Ly };
+  // P on BC: CP = QC * tan30° = LH/√3 ≈ LH*0.577
+  const cpLen = Math.round(LH / Math.sqrt(3));
+  const LP = { x: Lx + LW, y: Ly + cpLen };
+
+  // Right diagram: after fold (offset 168px right)
+  const ox = 168;
+  const RD = { x: LD.x + ox, y: LD.y };
+  const RC = { x: LC.x + ox, y: LC.y };   // ghost original C
+  const RB = { x: LB.x + ox, y: LB.y };
+  const RA = { x: LA.x + ox, y: LA.y };
+  const RQ = { x: LQ.x + ox, y: LQ.y };
+  const RP = { x: LP.x + ox, y: LP.y };
+  // C folded position (reflection of LC across fold line LQ-LP)
+  // Approx: C' ≈ Q + (45, 78) based on the 30-60-90 geometry
+  const RCf = { x: RQ.x + 44, y: RQ.y + 78 };
+
+  // Angle arc at Q (left diagram) showing 30°
+  const arcR = 22;
+  // Direction QC: pure right (angle 0°)
+  // Direction QP: angle = atan2(LP.y - LQ.y, LP.x - LQ.x) = atan2(cpLen, LH) = 30°
+  const angQP = Math.atan2(LP.y - LQ.y, LP.x - LQ.x);
+  const arcStartX = LQ.x + arcR;
+  const arcStartY = LQ.y;
+  const arcEndX = LQ.x + arcR * Math.cos(angQP);
+  const arcEndY = LQ.y + arcR * Math.sin(angQP);
+
+  // Right diagram angle arc at RQ
+  const arcRx = RQ.x + arcR;
+  const arcRy = RQ.y;
+  const arcREndX = RQ.x + arcR * Math.cos(angQP);
+  const arcREndY = RQ.y + arcR * Math.sin(angQP);
+
+  return (
+    <div className="my-3 flex justify-center">
+      <svg viewBox="0 0 328 128" className="w-full max-w-sm sm:max-w-md rounded-lg border border-border/40 bg-white/5">
+        {/* ── LEFT DIAGRAM (before fold) ── */}
+        <text x="68" y="8" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Sebelum dilipat</text>
+
+        {/* Rectangle fill */}
+        <rect x={Lx} y={Ly} width={LW} height={LH} fill="rgba(34,211,238,0.05)" stroke="#22d3ee" strokeWidth="1.8" />
+
+        {/* Right angle mark at C */}
+        <polyline points={`${LC.x},${LC.y+10} ${LC.x-10},${LC.y+10} ${LC.x-10},${LC.y}`} fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+
+        {/* Dashed fold line Q→P */}
+        <line x1={LQ.x} y1={LQ.y} x2={LP.x} y2={LP.y} stroke="#fbbf24" strokeWidth="1.6" strokeDasharray="5 3" />
+        {/* Dashed triangle edge P→C and C→Q */}
+        <line x1={LP.x} y1={LP.y} x2={LC.x} y2={LC.y} stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4 3" opacity="0.5" />
+        <line x1={LC.x} y1={LC.y} x2={LQ.x} y2={LQ.y} stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4 3" opacity="0.5" />
+
+        {/* Angle arc at Q */}
+        <path d={`M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 0 1 ${arcEndX.toFixed(1)} ${arcEndY.toFixed(1)}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        <text x={LQ.x + arcR + 4} y={LQ.y + 12} fill="#fbbf24" fontSize="9" fontWeight="bold">30°</text>
+
+        {/* Corner dots */}
+        {[LD, LC, LB, LA, LQ, LP].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="2.5" fill="#22d3ee" />
+        ))}
+
+        {/* Labels */}
+        <text x={LD.x - 2} y={LD.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">D</text>
+        <text x={LQ.x} y={LQ.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="middle">Q</text>
+        <text x={LC.x + 4} y={LC.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold">C</text>
+        <text x={LA.x - 2} y={LA.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">A</text>
+        <text x={LB.x + 4} y={LB.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
+        <text x={LP.x + 4} y={LP.y + 4} fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
+
+        {/* BC = 9cm label on right side */}
+        <text x={LB.x + 14} y={(LB.y + LC.y) / 2 + 4} fill="#fbbf24" fontSize="9" fontWeight="bold">BC=9</text>
+
+        {/* ── RIGHT DIAGRAM (after fold) ── */}
+        <text x={RD.x + (LW / 2)} y="8" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Setelah dilipat</text>
+
+        {/* Ghost original rectangle */}
+        <rect x={RD.x} y={RD.y} width={LW} height={LH} fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="3 3" />
+
+        {/* Folded triangle Q-P-C' highlighted */}
+        <polygon
+          points={`${RQ.x},${RQ.y} ${RP.x},${RP.y} ${RCf.x},${RCf.y}`}
+          fill="rgba(251,191,36,0.1)"
+          stroke="#fbbf24"
+          strokeWidth="1.5"
+        />
+
+        {/* Solid rectangle edges that remain */}
+        <line x1={RD.x} y1={RD.y} x2={RQ.x} y2={RQ.y} stroke="#22d3ee" strokeWidth="1.8" />
+        <line x1={RD.x} y1={RD.y} x2={RA.x} y2={RA.y} stroke="#22d3ee" strokeWidth="1.8" />
+        <line x1={RA.x} y1={RA.y} x2={RB.x} y2={RB.y} stroke="#22d3ee" strokeWidth="1.8" />
+        <line x1={RB.x} y1={RB.y} x2={RP.x} y2={RP.y} stroke="#22d3ee" strokeWidth="1.8" />
+        <line x1={RQ.x} y1={RQ.y} x2={RP.x} y2={RP.y} stroke="#fbbf24" strokeWidth="1.8" />
+
+        {/* C' to bottom edge dashed */}
+        <line x1={RCf.x} y1={RCf.y} x2={RCf.x} y2={RA.y} stroke="#475569" strokeWidth="1" strokeDasharray="3 2" />
+
+        {/* Angle arc at RQ */}
+        <path d={`M ${arcRx} ${arcRy} A ${arcR} ${arcR} 0 0 1 ${arcREndX.toFixed(1)} ${arcREndY.toFixed(1)}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        <text x={RQ.x + arcR + 4} y={RQ.y + 12} fill="#fbbf24" fontSize="9" fontWeight="bold">30°</text>
+
+        {/* Right angle mark at RC original */}
+        <polyline points={`${RC.x},${RC.y+10} ${RC.x-10},${RC.y+10} ${RC.x-10},${RC.y}`} fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
+
+        {/* Dots */}
+        {[RD, RQ, RP, RB, RA, RCf].map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r="2.5" fill="#22d3ee" />
+        ))}
+
+        {/* Labels */}
+        <text x={RD.x - 2} y={RD.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">D</text>
+        <text x={RQ.x} y={RQ.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="middle">Q</text>
+        <text x={RA.x - 2} y={RA.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">A</text>
+        <text x={RCf.x - 4} y={RCf.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">C</text>
+        <text x={RB.x + 4} y={RB.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
+        <text x={RP.x + 4} y={RP.y + 4} fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
+
+        {/* PQ = ? label */}
+        <text x={(RQ.x + RP.x) / 2 - 14} y={(RQ.y + RP.y) / 2 - 4} fill="#fbbf24" fontSize="9" fontWeight="bold">PQ=?</text>
+      </svg>
+    </div>
+  );
+};
+
 const latihanOlimpiade = [
   { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nPerhatikan gambar berikut. Panjang CP adalah ...", options: [] },
   { no: 2, soal: "OSN Matematika 2006 Tingkat Kota\nJika panjang diagonal suatu persegi adalah 4 cm, maka luas persegi itu (dalam cm$^2$) adalah", options: ["A. 2", "B. 4", "C. 6", "D. 8", "E. 16"] },
@@ -977,6 +1109,7 @@ const latihanOlimpiade = [
   { no: 10, soal: "OSN Matematika 2015 Tingkat Kota\nDiketahui ABCD adalah trapesium, AB sejajar CD, dan $AB + CD = BC$. Jika panjang AD = 12, maka nilai $AB \\times CD$ adalah ...", options: ["A. 46", "B. 42", "C. 38", "D. 36"] },
   { no: 11, soal: "OSN Matematika 2021 Tingkat Kota\nPerbandingan panjang kaki sudut siku-siku sebuah segitiga siku-siku adalah 2 : 3. Jika panjang sisi miring segitiga tersebut $5\\sqrt{13}$, maka luas segitiga siku-siku tersebut adalah ...", options: ["A. 12", "B. 27", "C. 48", "D. 75"] },
   { no: 12, soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui segitiga ABC dengan panjang sisi AB = 20 cm. Titik P berada pada sisi AB sehingga AP = BP = CP. Luas daerah segitiga APC adalah 30 cm$^2$. Jika jarak titik P ke sisi BC adalah d cm, maka nilai terbesar dari $d^2$ yang mungkin adalah ...", options: [] },
+  { no: 13, soal: "OSN Matematika 2026 Tingkat Kota\nABCD adalah sebuah persegi panjang akan dilipat sesuai garis putus-putus. Diketahui $\\angle PQC = 30°$ dan $BC = 9$ cm. Panjang $PQ$ adalah ....", options: ["A. 12 cm", "B. 15 cm", "C. $6\\sqrt{3}$ cm", "D. $9\\sqrt{3}$ cm"] },
 ];
 
 const OlimpiadeTeoremaPage = () => {
@@ -1348,6 +1481,7 @@ const OlimpiadeTeoremaPage = () => {
                     />
                   </div>
                 )}
+                {soal.no === 13 && <PersegiPanjangLipatSVG />}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (

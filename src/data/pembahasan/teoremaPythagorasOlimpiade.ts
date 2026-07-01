@@ -133,6 +133,17 @@ export const teoremaPythagorasOlimpiadePembahasan: Record<number, Pembahasan> = 
     kesimpulan:
       "Nilai terbesar $d^2$ yang mungkin adalah 90.",
   },
+  13: {
+    jawaban: "C. $6\\sqrt{3}$ cm",
+    konsepTrik:
+      "Saat persegi panjang dilipat sepanjang QP sehingga C berpindah ke sisi AB, sifat pelipatan (jarak terjaga dari titik pada garis lipat) memaksa $QC = BC = 9$ cm. Karena $\\angle QCP = 90°$ (sudut pojok persegi panjang) dan $\\angle PQC = 30°$, segitiga $QCP$ adalah segitiga siku-siku dengan sudut $30°$-$60°$-$90°$, sehingga $\\cos 30°= \\dfrac{QC}{QP}$.",
+    stepByStep:
+      "Dari sifat pelipatan: $QC = BC = 9$ cm.\nPada $\\triangle QCP$ dengan $\\angle QCP = 90°$ dan $\\angle PQC = 30°$:\n$\\cos(\\angle PQC) = \\dfrac{QC}{QP}$\n$\\cos 30° = \\dfrac{9}{QP}$\n$\\dfrac{\\sqrt{3}}{2} = \\dfrac{9}{QP}$\n$QP = \\dfrac{9 \\times 2}{\\sqrt{3}} = \\dfrac{18}{\\sqrt{3}} = \\dfrac{18\\sqrt{3}}{3} = 6\\sqrt{3}$ cm",
+    tips:
+      "Pada soal lipatan persegi panjang, identifikasi terlebih dahulu segmen mana yang panjangnya terjaga (QC = BC). Kemudian gunakan hubungan trigonometri pada segitiga siku-siku yang terbentuk dari garis lipat tersebut.",
+    kesimpulan:
+      "Panjang $PQ = 6\\sqrt{3}$ cm (pilihan C).",
+  },
   28: {
     jawaban: "B. $OA = 300$ m, $AB = 80$ m, $BC = 80$ m",
     konsepTrik:
