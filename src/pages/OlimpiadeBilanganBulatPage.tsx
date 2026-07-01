@@ -915,6 +915,27 @@ const latihanOlimpiade: LatihanOlimpiadeSoal[] = [
   { no: 57, soal: "OSN Matematika 2024 Tingkat Kota\nDiketahui $a$, $b$ dan $c$ adalah bilangan ratusan yang satuannya sama dengan ratusannya. Jika $b = 2a + 1$ dan $c = 2b + 1$, maka banyaknya kemungkinan tripel $(a, b, c)$ yang berbeda adalah ...", options: ["A. 1", "B. 2", "C. 3", "D. 4"],
     jawaban: "B. 2",
     pembahasan: { konsep: "Bilangan ratusan dengan satuan sama dengan ratusan berbentuk $\\overline{d e d}$ (digit satuan = digit ratusan).", langkah: ["Bentuk bilangan: $\\overline{dad} = 101d + 10e$ untuk $d \\in \\{1,...,9\\}$, $e \\in \\{0,...,9\\}$", "Coba $a = 101d_a + 10e_a$, $b = 2a+1$, $c = 2b+1 = 4a+3$", "$b$ harus bilangan ratusan (100-999) dengan satuan = ratusan: $b = 101d_b + 10e_b$", "Dari $b = 2a+1$: coba nilai $a$: misal $a = 121$: $b = 243$, satuan(b)=3, ratusan(b)=2 → 3≠2 ✗", "Misal $a = 141$: $b = 283$, satuan=3, ratusan=2 → 3≠2 ✗", "Misal $a = 101$: $b = 203$, satuan=3, ratusan=2 ✗; Misal $a=151$: $b=303$, satuan=ratusan=3 ✓; $c=2(303)+1=607$, satuan=7, ratusan=6 ✗", "Misal $a=171$: $b=343$, satuan=ratusan=3 ✓; $c=687$, satuan=7, ratusan=6 ✗", "Misal $a=191$: $b=383$, satuan=ratusan=3 ✓; $c=767$, satuan=7, ratusan=7 ✓; $c=767$ ✓", "Misal $a=151$: $c=607$ ✗; $a=141$: $b=283$ ✗", "Dua tripel yang mungkin berdasarkan kunci resmi: 2 tripel"], rumus: "$b = 2a+1$, $c = 2b+1$; satuan = ratusan untuk semua bilangan" } },
+  {
+    no: 58,
+    soal: "OSN Matematika 2026 Tingkat Kota\nJika tripel bilangan kubik adalah jumlahan pangkat tiga dari bilangan bulat berurutan. Sebagai contoh $1^3 + 2^3 + 3^3 = 36$ merupakan tripel bilangan kubik terkecil. Maka nilai tripel bilangan kubik 5 digit terkecil yang merupakan kelipatan 10 adalah....",
+    options: ["A. 12240", "B. 24120", "C. 42420", "D. 81810"],
+    jawaban: "B. 24120",
+    pembahasan: {
+      konsep: "Tripel bilangan kubik ke-$n$ adalah $S(n) = n^3 + (n+1)^3 + (n+2)^3$. Sederhanakan menjadi $S(n) = 3(n+1)(n^2+2n+3)$. Cari syarat agar $S(n)$ habis dibagi 10 (habis dibagi 2 dan 5), kemudian cari nilai 5 digit terkecilnya.",
+      langkah: [
+        "$S(n) = n^3 + (n+1)^3 + (n+2)^3 = 3n^3 + 9n^2 + 15n + 9 = 3(n+1)(n^2+2n+3)$",
+        "Syarat $2 \\mid S(n)$: $(n^2+2n+3) = n(n+2)+3$. Jika $n$ genap → $n(n+2)$ genap → $n^2+2n+3$ ganjil; jika $n$ ganjil → $n(n+2)$ ganjil → $n^2+2n+3$ genap. Jadi $S(n)$ genap hanya jika $n$ ganjil.",
+        "Syarat $5 \\mid S(n)$: periksa $n^2+2n+3 \\pmod{5}$ untuk $n=0,1,2,3,4$: hasilnya $3,1,1,3,2$ — tidak ada yang $\\equiv 0$. Jadi $5 \\mid S(n)$ hanya jika $5 \\mid (n+1)$, yaitu $n \\equiv 4 \\pmod{5}$.",
+        "Gabungkan: $n$ harus ganjil DAN $n \\equiv 4 \\pmod{5}$. Modulo 10: $n \\equiv 4 \\pmod{5}$ artinya $n \\equiv 4$ atau $9 \\pmod{10}$. Yang ganjil adalah $n \\equiv 9 \\pmod{10}$.",
+        "Jadi $S(n)$ habis dibagi 10 tepat saat $n = 9, 19, 29, \\ldots$",
+        "$S(9) = 9^3 + 10^3 + 11^3 = 729 + 1000 + 1331 = 3060$ → hanya 4 digit.",
+        "$S(19) = 19^3 + 20^3 + 21^3 = 6859 + 8000 + 9261 = 24120$ → 5 digit, kelipatan 10 ✓",
+        "Verifikasi: $24120 \\div 10 = 2412$ ✓. Tidak ada nilai 5 digit antara $S(9)$ dan $S(19)$ yang memenuhi syarat.",
+        "Jadi nilai tripel bilangan kubik 5 digit terkecil yang merupakan kelipatan 10 adalah $\\mathbf{24120}$."
+      ],
+      rumus: "$S(n) = 3(n+1)(n^2+2n+3)$. Syarat kelipatan 10: $n \\equiv 9 \\pmod{10}$. Nilai 5 digit terkecil: $S(19) = 19^3+20^3+21^3 = 24120$."
+    }
+  },
 ];
 
 const OlimpiadeBilanganBulatPage = () => {
