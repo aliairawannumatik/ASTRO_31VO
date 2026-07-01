@@ -989,8 +989,8 @@ const PersegiPanjangLipatSVG = () => {
   // C' after folding — lands exactly on AB
   const Cf = { x: Q.x + QC / 2, y: dy + LH };    // (≈ dx+LW−QC/2, bottom)
 
-  // ── right diagram: offset so both fit ───────────────────────────────
-  const ox = 152;
+  // ── right diagram: offset so both fit with clear gap ────────────────
+  const ox = 180;
   const rD  = { x: D.x  + ox, y: D.y  };
   const rC  = { x: C.x  + ox, y: C.y  };   // ghost original C position
   const rB  = { x: B.x  + ox, y: B.y  };
@@ -1011,7 +1011,7 @@ const PersegiPanjangLipatSVG = () => {
 
   return (
     <div className="my-3 flex justify-center">
-      <svg viewBox="0 0 310 106" className="w-full max-w-sm sm:max-w-lg rounded-lg border border-border/40 bg-white/5">
+      <svg viewBox="0 0 352 106" className="w-full max-w-sm sm:max-w-lg rounded-lg border border-border/40 bg-white/5">
 
         {/* ═══ LEFT DIAGRAM — sebelum dilipat ═══ */}
         <text x={dx + LW / 2} y="10" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Sebelum dilipat</text>
@@ -1054,8 +1054,13 @@ const PersegiPanjangLipatSVG = () => {
         <text x={A.x-2}  y={A.y+13}     fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">A</text>
         <text x={B.x+4}  y={B.y+13}     fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
         <text x={P.x+4}  y={P.y+4}      fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
-        {/* BC = 9 label */}
-        <text x={B.x+14} y={(B.y+C.y)/2+4} fill="#fbbf24" fontSize="8.5" fontWeight="bold">BC=9</text>
+        {/* BC = 9 label — rotated inside the right edge */}
+        <text
+          x={B.x - 5} y={(B.y + C.y) / 2}
+          fill="#fbbf24" fontSize="8" fontWeight="bold"
+          textAnchor="middle"
+          transform={`rotate(-90, ${B.x - 5}, ${(B.y + C.y) / 2})`}
+        >BC=9 cm</text>
 
         {/* ═══ RIGHT DIAGRAM — setelah dilipat ═══ */}
         <text x={rD.x + LW / 2} y="10" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Setelah dilipat</text>
@@ -1103,8 +1108,6 @@ const PersegiPanjangLipatSVG = () => {
         <text x={rB.x+4}  y={rB.y+13}      fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
         <text x={rP.x+4}  y={rP.y+4}       fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
 
-        {/* PQ = ? label along fold crease */}
-        <text x={(rQ.x+rP.x)/2-18} y={(rQ.y+rP.y)/2-4} fill="#fbbf24" fontSize="8.5" fontWeight="bold">PQ=?</text>
       </svg>
     </div>
   );
