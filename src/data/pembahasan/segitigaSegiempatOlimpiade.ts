@@ -562,6 +562,17 @@ export const segitigaSegiempatOlimpiadePembahasan: Record<number, Pembahasan> = 
     kesimpulan:
       "Perbandingan luas $\\triangle PQR : \\triangle ABC = 1 : 19$.",
   },
+  53: {
+    jawaban: "A. 60",
+    konsepTrik:
+      "Hitung banyaknya cara mewarnai grid $4 \\times 4$ sehingga tepat 2 sel merah di setiap baris DAN setiap kolom (matriks biner $4\\times4$ dengan jumlah baris = jumlah kolom = 2). Bagi dengan total ruang sampel $2^{16}$, sederhanakan, lalu jumlahkan pembilang dan eksponen.",
+    stepByStep:
+      "Total ruang sampel: setiap sel dapat merah/hitam $\\Rightarrow 2^{16}$ kemungkinan.\nHitung kejadian: banyaknya matriks biner $4\\times4$ dengan semua jumlah baris dan jumlah kolom $= 2$.\nHitung dengan pendekatan baris per baris:\nBaris 1: pilih 2 kolom dari 4 $= \\binom{4}{2} = 6$ cara.\nBaris 2: pilih 2 kolom, bergantung pada pilihan baris 1.\nDengan enumerasi lengkap (atau permanensi matriks), diperoleh total $= 90$ matriks.\nSehingga: $P = \\dfrac{90}{2^{16}}$\nSederhanakan: $\\gcd(90, 2^{16}) = 2$, maka $P = \\dfrac{45}{2^{15}}$\nJadi $m = 45$, $n = 15$, dan $m + n = 45 + 15 = 60$.\nVerifikasi: $45 = 9 \\times 5$ (tidak habis dibagi 2), sehingga $\\dfrac{45}{2^{15}}$ sudah bentuk sederhana $\\checkmark$",
+    tips:
+      "Kunci soal ada dua: (1) hitung dengan benar banyaknya matriks biner $4\\times4$ dengan jumlah baris dan kolom masing-masing $= 2$, hasilnya adalah $90$. (2) Jangan lupa menyederhanakan pecahan sebelum membaca $m$ dan $n$ — $90/2^{16}$ belum sederhana karena $90$ genap. Setelah dibagi 2: $45/2^{15}$, baru $m=45$, $n=15$.",
+    kesimpulan:
+      "Peluang yang dimaksud adalah $\\dfrac{45}{2^{15}}$, sehingga $m + n = 45 + 15 = \\mathbf{60}$.",
+  },
   52: {
     jawaban: "A. $\\sqrt{2}$",
     konsepTrik:
