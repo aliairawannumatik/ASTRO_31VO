@@ -122,4 +122,15 @@ export const spldvOlimpiadePembahasan: Record<number, Pembahasan> = {
     kesimpulan:
       "Ana, Bona, dan Cinta sama-sama mendapat 20 lembar uang. Dengan analisis tepat, jawaban yang konsisten adalah opsi D.",
   },
+  12: {
+    jawaban: "C. 8",
+    konsepTrik:
+      "Kuadratkan kedua ruas persamaan pertama, lalu lengkapkan kuadrat untuk mendapatkan persamaan lingkaran $(x-2)^2+(y-2)^2=4$. Titik-titik bilangan bulat pada lingkaran itu hanya ada 4 buah. Agar semua solusi $(x,y)$ bilangan bulat, garis $ax+by=1$ hanya boleh memotong lingkaran di titik-titik bilangan bulat tersebut (tidak boleh ada irisan di titik non-bulat). Ada dua skenario valid: garis melalui 2 titik bilangan bulat (sehingga kedua irisan sudah pasti bulat) atau garis singgung di salah satu titik bilangan bulat (1 irisan, pasti bulat).",
+    stepByStep:
+      "Sederhanakan persamaan 1 (syarat $x+y \\geq 0$):\n$(x+y)^2 = 2xy+4x+4y-4$\n$x^2+2xy+y^2 = 2xy+4x+4y-4$\n$x^2+y^2-4x-4y+4=0$\n$(x-2)^2+(y-2)^2=4$ ← lingkaran pusat $(2,2)$ jari-jari $2$\n\nTitik bilangan bulat pada lingkaran $(u^2+v^2=4,\\;u=x-2,\\;v=y-2)$:\n$(u,v) \\in \\{(\\pm2,0),(0,\\pm2)\\}$ → $(x,y) \\in \\{(0,2),(4,2),(2,0),(2,4)\\}$\n\nGaris $ax+by=1$ harus beririsan dengan lingkaran hanya di titik-titik di atas.\n\n**Kasus 1 — garis melalui 2 titik bulat (semua irisan pasti bulat):**\nPasangan dari 4 titik: $\\binom{4}{2}=6$ garis → 6 pasang $(a,b)$:\n$(0,2)\\&(4,2)$: $y=2$ → $(a,b)=(0,\\tfrac12)$\n$(2,0)\\&(2,4)$: $x=2$ → $(a,b)=(\\tfrac12,0)$\n$(0,2)\\&(2,0)$: $x+y=2$ → $(a,b)=(\\tfrac12,\\tfrac12)$\n$(0,2)\\&(2,4)$: $y-x=2$ → $(a,b)=(-\\tfrac12,\\tfrac12)$\n$(2,0)\\&(4,2)$: $y-x=-2$ → $(a,b)=(\\tfrac12,-\\tfrac12)$\n$(2,4)\\&(4,2)$: $x+y=6$ → $(a,b)=(\\tfrac16,\\tfrac16)$\n\n**Kasus 2 — garis singgung tepat di titik bulat (1 irisan, pasti bulat):**\nGaris singgung = tegak lurus jari-jari di titik itu.\n$(2,4)$: garis singgung $y=4$ → $ax+by=1$ dengan $a=0,b=\\tfrac14$ ✓\n$(4,2)$: garis singgung $x=4$ → $a=\\tfrac14,b=0$ ✓\n$(0,2)$: garis singgung $x=0$ → tidak dapat ditulis $ax+by=1$ ✗\n$(2,0)$: garis singgung $y=0$ → tidak dapat ditulis $ax+by=1$ ✗\n\nTotal: $6+2=\\mathbf{8}$ pasang $(a,b)$.",
+    tips:
+      "Langkah kunci: ubah dulu persamaan akar menjadi bentuk geometri (lingkaran/ellips/dll). Setelah itu cukup hitung titik bulat di kurva dan pikirkan garis yang hanya melewati titik-titik itu. Ingat: garis singgung $x=c$ atau $y=c$ hanya valid sebagai $ax+by=1$ jika konstantanya bukan nol.",
+    kesimpulan:
+      "Banyaknya pasangan $(a,b)$ yang memenuhi adalah $\\mathbf{8}$ (pilihan C).",
+  },
 };
