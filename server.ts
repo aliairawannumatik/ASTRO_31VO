@@ -51,9 +51,14 @@ app.post('/api/chat', async (req, res) => {
       return res.status(400).json({ error: 'Pesan tidak valid.' })
     }
 
-    const clientOptions: { apiKey: string; baseUrl?: string } = { apiKey: geminiApiKey }
-    if (geminiBaseUrl) {
-      clientOptions.baseUrl = geminiBaseUrl
+    const clientOptions: Parameters<typeof GoogleGenAI>[0] = {
+      apiKey: geminiApiKey,
+      ...(geminiBaseUrl && {
+        httpOptions: {
+          baseUrl: geminiBaseUrl,
+          apiVersion: '',
+        },
+      }),
     }
 
     const ai = new GoogleGenAI(clientOptions)
