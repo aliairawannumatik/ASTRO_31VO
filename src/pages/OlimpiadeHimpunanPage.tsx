@@ -853,6 +853,25 @@ const latihanOlimpiade: Soal[] = [
       rumus: "Kenali pola: bilangan 1–20 membentuk 10 pasang sempurna bersum 21. Bila $|A|=10$ dengan 5 pasangan bersum 21 dan tidak ada sisa elemen, gunakan $\\binom{10}{5} = 252$. Cek selalu: banyak elemen = 2 × banyak pasang → tidak ada elemen 'tunggal' yang tersisa."
     }
   },
+  {
+    no: 20,
+    soal: "OSN Matematika 2026 Tingkat Kota\nUntuk setiap himpunan bagian tak kosong dari $S = \\{1, 2, 3, \\ldots, 9\\}$ didefinisikan nilai tok-tik dari himpunan bagian dengan mengikuti ketentuan sebagai berikut: urutkan semua anggotanya dari yang terbesar hingga terkecil; berikan tanda kurang $(-)$ dan tambah $(+)$ secara bergantian di antara setiap 2 angka dimulai dengan tanda kurang setelah angka besar dan hitung hasilnya. Sebagai contoh, nilai tok-tik dari $\\{1, 2, 4, 6, 9\\}$ adalah $9 - 6 + 4 - 2 + 1 = 6$ dan untuk $\\{5\\}$ adalah $5$. Jumlah nilai tok-tik dari semua himpunan bagian tak kosong dari $S$ adalah ....",
+    options: ["A. 9", "B. 512", "C. 2304", "D. 4678"],
+    jawaban: "C. 2304",
+    pembahasan: {
+      konsep: "Hitung kontribusi setiap elemen $k \\in S$ terhadap total jumlah. Tanda elemen $k$ dalam suatu himpunan bagian ditentukan oleh banyaknya elemen yang lebih besar dari $k$ dalam himpunan tersebut: jika ada $j$ elemen lebih besar, tandanya adalah $(-1)^j$. Gunakan teorema binomial untuk menjumlahkan kontribusi dari semua himpunan bagian yang memuat $k$.",
+      langkah: [
+        "Misalkan $k \\in S$. Dalam suatu himpunan bagian $T$ yang memuat $k$, tanda $k$ adalah $(-1)^j$ di mana $j = $ banyak elemen di $T$ yang lebih besar dari $k$.",
+        "Kontribusi total elemen $k$ = $k \\times \\displaystyle\\sum_{\\text{semua } T \\ni k} (-1)^j$.",
+        "Ada $(9-k)$ elemen lebih besar dari $k$ dan $(k-1)$ elemen lebih kecil. Untuk setiap pilihan $j$ elemen dari yang lebih besar: $\\binom{9-k}{j}$ cara; elemen yang lebih kecil bebas dipilih: $2^{k-1}$ cara.",
+        "Kontribusi $k$ = $k \\cdot 2^{k-1} \\cdot \\displaystyle\\sum_{j=0}^{9-k} \\binom{9-k}{j}(-1)^j = k \\cdot 2^{k-1} \\cdot (1-1)^{9-k} = k \\cdot 2^{k-1} \\cdot 0^{9-k}$.",
+        "Untuk $k = 1, 2, \\ldots, 8$: $9-k > 0$, sehingga $0^{9-k} = 0$ → kontribusi = $0$.",
+        "Untuk $k = 9$: tidak ada elemen lebih besar, sehingga $j = 0$ selalu dan $0^0 = 1$ (konvensi binomial) → kontribusi = $9 \\times 2^{8} = 9 \\times 256 = 2304$.",
+        "Total jumlah nilai tok-tik = $0 + 0 + \\cdots + 0 + 2304 = \\mathbf{2304}$."
+      ],
+      rumus: "Trik kunci: gunakan Teorema Binomial $(1-1)^n = 0$ untuk $n > 0$, sehingga kontribusi semua elemen selain elemen terbesar ($k=9$) saling menghilangkan. Hanya elemen terbesar yang selalu bernilai positif dan berkontribusi $9 \\times 2^8 = 2304$."
+    }
+  },
 ];
 
 // ─── Page Component ───────────────────────────────────────────────────────────
