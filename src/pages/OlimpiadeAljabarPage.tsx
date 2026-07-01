@@ -773,6 +773,35 @@ const latihanOlimpiade: SoalOlimpiade[] = [
       rumus: "Trik kunci: kalikan ketiga relasi hasil pengurangan berpasangan sehingga faktor $(a-b)(b-c)(a-c)$ habis dibagi, menyisakan $(abc)^2 = 1$. Strategi ini berguna untuk soal kesamaan berantai."
     }
   },
+  {
+    no: 20,
+    soal: "OSN Matematika 2026 Tingkat Kota\nJumlah bilangan asli $n < 200$ yang mungkin sehingga terdapat bilangan asli $k$ dan $m$ yang memenuhi persamaan $\\dfrac{n^2 + 1}{n + k} = k$ dan $\\dfrac{n^3 - k}{n + k} = m$ dengan $n - k$ ganjil adalah....",
+    options: ["A. 4", "B. 24", "C. 210", "D. 609"],
+    jawaban: "C. 210",
+    pembahasan: {
+      konsep: "Dari persamaan pertama bentuk $k^2 + kn - (n^2 + 1) = 0$. Agar $k$ bilangan asli, diskriminan $5n^2 + 4$ harus berupa bilangan kuadrat sempurna. Ini hanya berlaku untuk barisan Fibonacci indeks genap. Saring nilai $n$ dengan syarat $n - k$ ganjil, lalu jumlahkan nilai $n$ yang valid.",
+      langkah: [
+        "Dari $\\dfrac{n^2+1}{n+k} = k$, maka $n^2 + 1 = k(n+k) = kn + k^2$",
+        "Susun sebagai kuadrat dalam $k$: $k^2 + kn - (n^2 + 1) = 0$",
+        "Agar $k$ bilangan asli, diskriminan harus kuadrat sempurna: $\\Delta = n^2 + 4(n^2+1) = 5n^2 + 4 = t^2$",
+        "Persamaan Pell $t^2 - 5n^2 = 4$ dipenuhi tepat oleh $n$ yang merupakan bilangan Fibonacci indeks genap:",
+        "$n \\in \\{1, 3, 8, 21, 55, 144\\}$ (dengan $F_{14} = 377 > 200$, jadi hanya 6 nilai)",
+        "Nilai $k$ bersesuaian: $k = \\dfrac{t - n}{2}$ → $k \\in \\{1, 2, 5, 13, 34, 89\\}$",
+        "Periksa persamaan kedua: $n^3 - k = n \\cdot n^2 - k = n(kn + k^2 - 1) - k = kn(n+k) - (n+k) = (n+k)(kn-1)$",
+        "Sehingga $\\dfrac{n^3-k}{n+k} = kn - 1 = m$, yang selalu bilangan asli selama $kn \\geq 2$ ✓",
+        "Saring dengan syarat $n - k$ ganjil:",
+        "$n=1, k=1$: $n-k=0$ (genap) ✗",
+        "$n=3, k=2$: $n-k=1$ (ganjil) ✓",
+        "$n=8, k=5$: $n-k=3$ (ganjil) ✓",
+        "$n=21, k=13$: $n-k=8$ (genap) ✗",
+        "$n=55, k=34$: $n-k=21$ (ganjil) ✓",
+        "$n=144, k=89$: $n-k=55$ (ganjil) ✓",
+        "Nilai $n$ yang valid: $3, 8, 55, 144$",
+        "Jumlah = $3 + 8 + 55 + 144 = \\mathbf{210}$"
+      ],
+      rumus: "Kunci: diskriminan $5n^2+4$ harus kuadrat sempurna ↔ $n$ adalah bilangan Fibonacci indeks genap. Setelah menyaring dengan paritas $n-k$, jumlahkan nilai $n$ yang lolos — soal ini menanyakan JUMLAH (sum), bukan BANYAK (count)."
+    }
+  },
 ];
 
 const OlimpiadeAljabarPage = () => {
