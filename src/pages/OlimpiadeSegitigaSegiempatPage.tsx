@@ -33,6 +33,21 @@ const OlimpiadeSoal1Pentagram = () => (
 const olimpiadeFigures: Record<number, JSX.Element> = {
   1: <img src={"/images/image_1777978368698.png"} alt="Gambar bintang pentagram soal olimpiade no. 1" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
   2: <img src={"/images/image_1777980101180.png"} alt="Gambar bangun soal olimpiade no. 2" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  53: (
+    <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" className="max-w-[220px] w-full">
+      <rect x="30" y="20" width="160" height="160" fill="white" stroke="black" strokeWidth="2.5" />
+      <line x1="70"  y1="20"  x2="70"  y2="180" stroke="#888" strokeWidth="0.8" />
+      <line x1="110" y1="20"  x2="110" y2="180" stroke="#888" strokeWidth="0.8" />
+      <line x1="150" y1="20"  x2="150" y2="180" stroke="#888" strokeWidth="0.8" />
+      <line x1="30"  y1="60"  x2="190" y2="60"  stroke="#888" strokeWidth="0.8" />
+      <line x1="30"  y1="100" x2="190" y2="100" stroke="#888" strokeWidth="0.8" />
+      <line x1="30"  y1="140" x2="190" y2="140" stroke="#888" strokeWidth="0.8" />
+      <text x="18"  y="17"  fontSize="13" fontFamily="serif" fontStyle="italic" fill="black">D</text>
+      <text x="192" y="17"  fontSize="13" fontFamily="serif" fontStyle="italic" fill="black">C</text>
+      <text x="18"  y="196" fontSize="13" fontFamily="serif" fontStyle="italic" fill="black">A</text>
+      <text x="192" y="196" fontSize="13" fontFamily="serif" fontStyle="italic" fill="black">B</text>
+    </svg>
+  ),
 };
 
 // Helper function to render text with LaTeX
