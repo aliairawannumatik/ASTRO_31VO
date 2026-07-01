@@ -1322,6 +1322,7 @@ const latihanOlimpiade: OlimpiadeSoal[] = [
   {
     no: 19,
     soal: "OSN Matematika 2026 Tingkat Kota\n$\\text{FPB}(m, n) + \\text{KPK}(m, n) = 26$. Berapa pasangan terurut $(m, n)$ yang memenuhi?",
+
     options: ["A. 4", "B. 5", "C. 6", "D. 7"],
     jawaban: "D. 7",
     pembahasan: {
@@ -1337,6 +1338,27 @@ const latihanOlimpiade: OlimpiadeSoal[] = [
         "Total pasangan terurut: $2 + 4 + 1 = \\mathbf{7}$"
       ],
       rumus: "$d(1 + ab) = 26$, dengan $d = \\text{FPB}(m,n)$, $\\gcd(a,b)=1$, $26 = 2 \\times 13$; enumerate semua faktorisasi"
+    }
+  },
+  {
+    no: 20,
+    soal: "OSN Matematika 2026 Tingkat Kota\nTerdapat $n$ bilangan bulat positif berbeda yang jumlahnya 2026. Setiap bilangan tersebut hanya memiliki tepat satu faktor prima yaitu $p$. Nilai $n$ adalah ...",
+    options: ["A. 7", "B. 8", "C. 9", "D. 10"],
+    jawaban: "B. 8",
+    pembahasan: {
+      konsep: "Bilangan bulat positif yang hanya memiliki tepat satu faktor prima $p$ adalah bilangan berbentuk $p^k$ (pangkat dari $p$) untuk $k \\geq 1$. Karena semua $n$ bilangan berbeda, kita perlu memilih $n$ pangkat berbeda dari $p$ yang jumlahnya tepat 2026. Trik utama: gunakan representasi basis $p$ (analog biner) untuk menentukan nilai $p$ dan $n$.",
+      langkah: [
+        "Bilangan dengan tepat satu faktor prima $p$ berbentuk $p^k$ untuk suatu $k \\geq 1$, contoh: $p, p^2, p^3, p^4, \\ldots$",
+        "Kita perlu memilih $n$ nilai $k$ berbeda sehingga $p^{k_1} + p^{k_2} + \\cdots + p^{k_n} = 2026$",
+        "Coba $p = 2$: representasi biner $2026 = 11111101010_2$",
+        "$2026 = 2^{10} + 2^9 + 2^8 + 2^7 + 2^6 + 2^5 + 2^3 + 2^1$",
+        "Verifikasi: $1024 + 512 + 256 + 128 + 64 + 32 + 8 + 2 = 2026$ ✓ → diperoleh $n = 8$ suku berbeda",
+        "Coba $p = 3$: digit-digit 2026 dalam basis 3. $2026 = 2 \\times 3^6 + 2 \\times 3^5 + \\cdots$ — koefisien bisa melebihi 1, artinya kita butuh pengulangan pangkat yang sama → tidak valid (bilangan harus berbeda-beda)",
+        "Coba $p = 5$: $5 + 25 + 125 + 625 = 780 < 2026$; suku berikutnya $3125 > 2026$, sehingga tidak mungkin mencapai 2026 dengan pangkat berbeda dari 5",
+        "Untuk $p \\geq 3$: $2026$ bukan kelipatan 3, dan jumlah 7 pangkat terkecil dari 3 ($3+9+27+\\cdots+2187 = 3279 \\neq 2026$) tidak bisa pas. Tidak ada $p \\geq 3$ yang memenuhi.",
+        "Satu-satunya solusi valid: $p = 2$, $n = \\mathbf{8}$"
+      ],
+      rumus: "Nyatakan 2026 dalam basis $p$: jika setiap digit adalah 0 atau 1, maka banyak digit '1' adalah nilai $n$. Basis 2 bekerja karena $2026 = 11111101010_2$ memiliki tepat 8 digit '1'. Untuk $p \\geq 3$, jumlah maksimum pangkat berbeda yang tidak melebihi 2026 tidak pas di angka 2026."
     }
   },
 ];
