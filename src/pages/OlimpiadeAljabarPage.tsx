@@ -748,6 +748,31 @@ const latihanOlimpiade: SoalOlimpiade[] = [
       rumus: "Pisahkan indeks ganjil dan genap. Gunakan syarat ratio untuk membatasi nilai, lalu minimasi kubik."
     }
   },
+  {
+    no: 19,
+    soal: "OSN Matematika 2026 Tingkat Kota\nDiketahui $a$, $b$, $c$ adalah bilangan real tak nol berbeda yang memenuhi $a + \\dfrac{1}{b} = b + \\dfrac{1}{c} = c + \\dfrac{1}{a}$. Nilai $(abc)^2$ adalah ...",
+    options: ["A. 0", "B. 0,5", "C. 1", "D. 2"],
+    jawaban: "C. 1",
+    pembahasan: {
+      konsep: "Dari kesamaan tiga ekspresi, bentuk pasangan persamaan untuk mendapat hubungan antara $a$, $b$, $c$. Kalikan ketiga hubungan yang diperoleh untuk mendapatkan nilai $(abc)^2$ tanpa perlu mengetahui nilai masing-masing variabel.",
+      langkah: [
+        "Misalkan $a + \\dfrac{1}{b} = b + \\dfrac{1}{c} = c + \\dfrac{1}{a} = k$",
+        "Dari $a + \\dfrac{1}{b} = b + \\dfrac{1}{c}$: $\\quad a - b = \\dfrac{1}{c} - \\dfrac{1}{b} = \\dfrac{b - c}{bc}$",
+        "Maka: $(a - b) \\cdot bc = b - c \\quad \\cdots (1)$",
+        "Dari $b + \\dfrac{1}{c} = c + \\dfrac{1}{a}$: $\\quad b - c = \\dfrac{1}{a} - \\dfrac{1}{c} = \\dfrac{c - a}{ac}$",
+        "Maka: $(b - c) \\cdot ac = c - a \\quad \\cdots (2)$",
+        "Dari $a + \\dfrac{1}{b} = c + \\dfrac{1}{a}$: $\\quad a - c = \\dfrac{1}{a} - \\dfrac{1}{b} = \\dfrac{b - a}{ab}$",
+        "Maka: $(a - c) \\cdot ab = b - a = -(a - b) \\quad \\cdots (3)$",
+        "Kalikan persamaan (1), (2), dan (3):",
+        "$(a-b)(b-c)(a-c) \\cdot a^2b^2c^2 = (b-c)(c-a)(-(a-b))$",
+        "Perhatikan: $(b-c)(c-a)(-(a-b)) = (b-c)(-(a-c))(-(a-b)) = (a-b)(b-c)(a-c)$",
+        "Sehingga: $(a-b)(b-c)(a-c) \\cdot a^2b^2c^2 = (a-b)(b-c)(a-c)$",
+        "Karena $a, b, c$ berbeda, maka $(a-b)(b-c)(a-c) \\neq 0$, bagi kedua ruas:",
+        "$a^2b^2c^2 = 1$, yaitu $(abc)^2 = \\boxed{1}$"
+      ],
+      rumus: "Trik kunci: kalikan ketiga relasi hasil pengurangan berpasangan sehingga faktor $(a-b)(b-c)(a-c)$ habis dibagi, menyisakan $(abc)^2 = 1$. Strategi ini berguna untuk soal kesamaan berantai."
+    }
+  },
 ];
 
 const OlimpiadeAljabarPage = () => {
