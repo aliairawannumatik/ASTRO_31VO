@@ -466,14 +466,15 @@ const MATERI_COMPONENTS_MODULO = [
 
 // ────────────────────────────────────────────────────────────────────────────
 
-type PembahasanStep = { label?: string; math?: string; text?: string };
 type LatihanItem = {
   no: number;
   soal: string;
   options: string[];
+  jawaban: string;
   pembahasan: {
-    jawaban: string;
-    steps: PembahasanStep[];
+    konsep: string;
+    langkah: string[];
+    rumus?: string;
   };
 };
 
@@ -482,673 +483,519 @@ const latihanDasar: LatihanItem[] = [
     no: 1,
     soal: "Tentukan sisa dari:\na. 51 dibagi 5\nb. 123 dibagi 3\nc. 5 dibagi 9\nd. 5555 dibagi 4",
     options: [],
+    jawaban: "a. 1 — b. 0 — c. 5 — d. 3",
     pembahasan: {
-      jawaban: "a. 1 &nbsp; b. 0 &nbsp; c. 5 &nbsp; d. 3",
-      steps: [
-        { label: "a.", text: "51 dibagi 5:" },
-        { math: "51 = 10 \\times 5 + 1 \\implies 51 \\mod 5 = \\boxed{1}" },
-        { label: "b.", text: "123 dibagi 3:" },
-        { math: "123 = 41 \\times 3 + 0 \\implies 123 \\mod 3 = \\boxed{0}" },
-        { text: "Cara cepat: jumlah digit 1+2+3 = 6, dan 6 habis dibagi 3, jadi sisa = 0." },
-        { label: "c.", text: "5 dibagi 9:" },
-        { math: "5 = 0 \\times 9 + 5 \\implies 5 \\mod 9 = \\boxed{5}" },
-        { text: "Jika bilangan yang dibagi < pembagi, maka sisanya adalah bilangan itu sendiri." },
-        { label: "d.", text: "5555 dibagi 4:" },
-        { math: "5555 = 1388 \\times 4 + 3 \\implies 5555 \\mod 4 = \\boxed{3}" },
-        { text: "Cara cepat: 2 digit terakhir = 55. Maka 55 = 13×4 + 3, sisa = 3." },
+      konsep: "Sisa pembagian (modulo) menggunakan rumus: yang dibagi = (pembagi × hasil bagi) + sisa. Jika bilangan yang dibagi lebih kecil dari pembagi, sisa = bilangan itu sendiri.",
+      langkah: [
+        "a. 51 mod 5: $51 = 10 \\times 5 + 1$ → sisa = 1",
+        "b. 123 mod 3: $123 = 41 \\times 3 + 0$ → sisa = 0. Cara cepat: jumlah digit 1+2+3 = 6, habis dibagi 3.",
+        "c. 5 mod 9: karena 5 < 9 → sisa = 5 (bilangan yang dibagi lebih kecil dari pembagi).",
+        "d. 5555 mod 4: 2 digit terakhir 55 = $13 \\times 4 + 3$ → sisa = 3.",
       ],
+      rumus: "$a = q \\times n + r$ di mana $r$ adalah sisa, $0 \\le r < n$. Jika $a < n$ maka $a \\bmod n = a$.",
     },
   },
   {
     no: 2,
     soal: "Tentukan nilai setiap angka berikut pada modulo yang diberikan:\na. $23 \\mod 5$\nb. $27 \\mod 3$\nc. $6 \\mod 8$\nd. $0 \\mod 12$\ne. $38 \\mod 5$",
     options: [],
+    jawaban: "a. 3 — b. 0 — c. 6 — d. 0 — e. 3",
     pembahasan: {
-      jawaban: "a. 3 &nbsp; b. 0 &nbsp; c. 6 &nbsp; d. 0 &nbsp; e. 3",
-      steps: [
-        { label: "a.", math: "23 = 4 \\times 5 + 3 \\implies 23 \\mod 5 = \\boxed{3}" },
-        { label: "b.", math: "27 = 9 \\times 3 + 0 \\implies 27 \\mod 3 = \\boxed{0}" },
-        { text: "Cek: jumlah digit 2+7 = 9, habis dibagi 3 → sisa 0." },
-        { label: "c.", math: "6 = 0 \\times 8 + 6 \\implies 6 \\mod 8 = \\boxed{6}" },
-        { text: "Karena 6 < 8, hasilnya adalah 6 itu sendiri." },
-        { label: "d.", math: "0 = 0 \\times 12 + 0 \\implies 0 \\mod 12 = \\boxed{0}" },
-        { text: "Nol dibagi bilangan apapun (≠0) selalu bersisa 0." },
-        { label: "e.", math: "38 = 7 \\times 5 + 3 \\implies 38 \\mod 5 = \\boxed{3}" },
+      konsep: "Mencari a mod n berarti mencari sisa ketika a dibagi n. Jika a < n hasilnya adalah a sendiri. Jika a habis dibagi n, hasilnya 0.",
+      langkah: [
+        "a. $23 \\bmod 5$: $23 = 4 \\times 5 + 3$ → sisa = 3",
+        "b. $27 \\bmod 3$: $27 = 9 \\times 3 + 0$ → sisa = 0. Cek cepat: jumlah digit 2+7 = 9, habis dibagi 3.",
+        "c. $6 \\bmod 8$: karena 6 < 8 → sisa = 6.",
+        "d. $0 \\bmod 12$: nol dibagi bilangan apapun (≠0) selalu bersisa 0.",
+        "e. $38 \\bmod 5$: $38 = 7 \\times 5 + 3$ → sisa = 3.",
       ],
+      rumus: "Jika $a < n$ maka $a \\bmod n = a$. Jika $n \\mid a$ maka $a \\bmod n = 0$.",
     },
   },
   {
     no: 3,
     soal: "Sebuah truk mengangkut tiga jenis barang dengan berat masing-masing 73 kg, 45 kg, dan 98 kg. Jika total berat semua barang tersebut akan dibagi rata ke dalam karung-karung berkapasitas 12 kg, berapakah sisa berat barang yang tidak dapat masuk ke dalam karung terakhir?",
     options: [],
+    jawaban: "0 kg (semua barang terbagi habis ke dalam 18 karung)",
     pembahasan: {
-      jawaban: "0 kg (tidak ada sisa — semua barang dapat masuk ke dalam karung secara sempurna)",
-      steps: [
-        { text: "Langkah 1: Hitung total berat semua barang." },
-        { math: "73 + 45 + 98 = 216 \\text{ kg}" },
-        { text: "Langkah 2: Bagi total berat dengan kapasitas karung menggunakan modulo." },
-        { math: "216 \\mod 12 = ?" },
-        { math: "216 = 18 \\times 12 + 0" },
-        { math: "\\therefore\\; 216 \\mod 12 = \\boxed{0}" },
-        { text: "Verifikasi: 18 × 12 = 216 ✓" },
-        { text: "Kesimpulan: Sisa berat yang tidak dapat masuk ke karung terakhir adalah 0 kg, artinya 216 kg terbagi habis ke dalam 18 karung masing-masing berkapasitas 12 kg." },
+      konsep: "Soal cerita modulo: hitung total berat, lalu gunakan operasi modulo dengan kapasitas karung untuk mencari sisa.",
+      langkah: [
+        "Hitung total berat: $73 + 45 + 98 = 216$ kg.",
+        "Cari sisa: $216 \\bmod 12 = ?$",
+        "$216 = 18 \\times 12 + 0$ → sisa = 0.",
+        "Semua barang terbagi habis ke dalam $18$ karung berkapasitas 12 kg. Tidak ada sisa.",
       ],
+      rumus: "$(73 + 45 + 98) \\bmod 12 = 216 \\bmod 12 = 0$",
     },
   },
   {
     no: 4,
     soal: "Berapakah sisa pembagian $(55 + 56 + 57 + 58 + 59 + 60 + 61)$ oleh 60?",
     options: [],
+    jawaban: "46",
     pembahasan: {
-      jawaban: "46",
-      steps: [
-        { text: "Gunakan Kaidah Dasar 2 (Linearitas penjumlahan):" },
-        { math: "(a+b+\\cdots) \\mod n = [(a\\mod n) + (b\\mod n) + \\cdots] \\mod n" },
-        { text: "Hitung sisa masing-masing bilangan dibagi 60:" },
-        { math: "55 \\mod 60 = 55" },
-        { math: "56 \\mod 60 = 56" },
-        { math: "57 \\mod 60 = 57" },
-        { math: "58 \\mod 60 = 58" },
-        { math: "59 \\mod 60 = 59" },
-        { math: "60 \\mod 60 = 0" },
-        { math: "61 \\mod 60 = 1" },
-        { text: "Jumlahkan semua sisa:" },
-        { math: "(55+56+57+58+59+0+1) \\mod 60 = 286 \\mod 60" },
-        { text: "Sederhanakan:" },
-        { math: "286 = 4 \\times 60 + 46" },
-        { math: "\\therefore\\; 286 \\mod 60 = \\boxed{46}" },
-        { text: "Verifikasi langsung: 55+56+57+58+59+60+61 = 406, dan 406 = 6×60 + 46 ✓" },
+      konsep: "Gunakan Kaidah Linearitas Penjumlahan: $(a+b+\\cdots) \\bmod n = [(a \\bmod n) + (b \\bmod n) + \\cdots] \\bmod n$. Hitung sisa masing-masing, jumlahkan, lalu ambil modulo lagi.",
+      langkah: [
+        "Hitung sisa masing-masing dibagi 60: $55 \\to 55$, $56 \\to 56$, $57 \\to 57$, $58 \\to 58$, $59 \\to 59$, $60 \\to 0$, $61 \\to 1$.",
+        "Jumlahkan semua sisa: $55+56+57+58+59+0+1 = 286$.",
+        "Hitung $286 \\bmod 60$: $286 = 4 \\times 60 + 46$ → sisa = 46.",
+        "Verifikasi: $55+56+57+58+59+60+61 = 406 = 6 \\times 60 + 46$ ✓",
       ],
+      rumus: "$(a + b + \\cdots) \\bmod n = [(a \\bmod n) + (b \\bmod n) + \\cdots] \\bmod n$",
     },
   },
   {
     no: 5,
     soal: "Sebuah mesin pencetak tiket kereta api memberikan nomor urut secara berurutan. Untuk tujuan audit, setiap tiket yang dicetak diuji dengan mencari sisa pembagian nomor tiket tersebut dengan 150. Jika ada 7 tiket berturut-turut yang dicetak, yaitu dimulai dari tiket bernomor 145, 146, 147, 148, 149, 150, hingga 151, berapakah sisa pembagian total nomor 7 tiket tersebut ketika dibagi dengan 150?",
     options: [],
+    jawaban: "136",
     pembahasan: {
-      jawaban: "136",
-      steps: [
-        { text: "Langkah 1: Gunakan Kaidah Dasar 2 (Linearitas penjumlahan)." },
-        { text: "Hitung sisa masing-masing nomor tiket dibagi 150:" },
-        { math: "145 \\mod 150 = 145" },
-        { math: "146 \\mod 150 = 146" },
-        { math: "147 \\mod 150 = 147" },
-        { math: "148 \\mod 150 = 148" },
-        { math: "149 \\mod 150 = 149" },
-        { math: "150 \\mod 150 = 0" },
-        { math: "151 \\mod 150 = 1" },
-        { text: "Langkah 2: Jumlahkan semua sisa." },
-        { math: "145+146+147+148+149+0+1 = 736" },
-        { text: "Langkah 3: Hitung 736 mod 150." },
-        { math: "736 = 4 \\times 150 + 136" },
-        { math: "\\therefore\\; \\text{sisa} = \\boxed{136}" },
-        { text: "Verifikasi: Total nomor = 145+146+...+151 = 1036. Dan 1036 = 6×150 + 136 ✓" },
+      konsep: "Gunakan Kaidah Linearitas Penjumlahan: sisa penjumlahan = jumlah dari sisa masing-masing, kemudian diambil modulo kembali.",
+      langkah: [
+        "Hitung sisa masing-masing nomor tiket dibagi 150: $145 \\to 145$, $146 \\to 146$, $147 \\to 147$, $148 \\to 148$, $149 \\to 149$, $150 \\to 0$, $151 \\to 1$.",
+        "Jumlahkan semua sisa: $145+146+147+148+149+0+1 = 736$.",
+        "Hitung $736 \\bmod 150$: $736 = 4 \\times 150 + 136$ → sisa = 136.",
+        "Verifikasi: total nomor = $145+146+\\cdots+151 = 1036 = 6 \\times 150 + 136$ ✓",
       ],
+      rumus: "$(a + b + \\cdots) \\bmod n = [(a \\bmod n) + (b \\bmod n) + \\cdots] \\bmod n$",
     },
   },
   {
     no: 6,
     soal: "Seorang programmer sedang menguji sebuah algoritma enkripsi yang melibatkan perkalian tiga bilangan besar: 25, 34, dan 18. Untuk alasan keamanan, hasil perkalian tersebut harus diuji sisa pembagiannya dengan 11. Berapakah sisa pembagian $(25 \\times 34 \\times 18)$ oleh 11?",
     options: [],
+    jawaban: "10",
     pembahasan: {
-      jawaban: "10",
-      steps: [
-        { text: "Gunakan Kaidah Dasar 3 (Linearitas perkalian):" },
-        { math: "(a \\times b \\times c) \\mod n = [(a\\mod n)(b\\mod n)(c\\mod n)] \\mod n" },
-        { text: "Hitung sisa masing-masing faktor dibagi 11:" },
-        { math: "25 \\mod 11 = 3 \\quad (25 = 2 \\times 11 + 3)" },
-        { math: "34 \\mod 11 = 1 \\quad (34 = 3 \\times 11 + 1)" },
-        { math: "18 \\mod 11 = 7 \\quad (18 = 1 \\times 11 + 7)" },
-        { text: "Kalikan semua sisa dan hitung modulo 11:" },
-        { math: "(3 \\times 1 \\times 7) \\mod 11 = 21 \\mod 11" },
-        { math: "21 = 1 \\times 11 + 10" },
-        { math: "\\therefore\\; (25 \\times 34 \\times 18) \\mod 11 = \\boxed{10}" },
-        { text: "Verifikasi: 25×34×18 = 15300. Dan 15300 = 1390×11 + 10 ✓" },
+      konsep: "Gunakan Kaidah Linearitas Perkalian: $(a \\times b \\times c) \\bmod n = [(a \\bmod n)(b \\bmod n)(c \\bmod n)] \\bmod n$. Cukup ambil sisa masing-masing faktor, kalikan, lalu mod lagi.",
+      langkah: [
+        "Cari sisa masing-masing faktor dibagi 11: $25 \\bmod 11 = 3$ (karena $25 = 2 \\times 11 + 3$)",
+        "$34 \\bmod 11 = 1$ (karena $34 = 3 \\times 11 + 1$)",
+        "$18 \\bmod 11 = 7$ (karena $18 = 1 \\times 11 + 7$)",
+        "Kalikan semua sisa: $3 \\times 1 \\times 7 = 21$.",
+        "$21 \\bmod 11 = 10$ (karena $21 = 1 \\times 11 + 10$).",
+        "Verifikasi: $25 \\times 34 \\times 18 = 15300 = 1390 \\times 11 + 10$ ✓",
       ],
+      rumus: "$(a \\times b \\times c) \\bmod n = [(a \\bmod n)(b \\bmod n)(c \\bmod n)] \\bmod n$",
     },
   },
   {
     no: 7,
     soal: "Seorang desainer grafis membuat pola berulang berdasarkan digit terakhir dari hasil perkalian bilangan-bilangan. Berapakah digit terakhir (nilai satuan) dari hasil perkalian $(127 \\times 354 \\times 789 \\times 416)$?",
     options: [],
+    jawaban: "2",
     pembahasan: {
-      jawaban: "2",
-      steps: [
-        { text: "Digit terakhir = sisa pembagian oleh 10. Gunakan Kaidah Dasar 3:" },
-        { math: "(127 \\times 354 \\times 789 \\times 416) \\mod 10" },
-        { text: "Ambil hanya digit satuan masing-masing bilangan:" },
-        { math: "127 \\mod 10 = 7" },
-        { math: "354 \\mod 10 = 4" },
-        { math: "789 \\mod 10 = 9" },
-        { math: "416 \\mod 10 = 6" },
-        { text: "Kalikan bertahap:" },
-        { math: "7 \\times 4 = 28 \\implies 28 \\mod 10 = 8" },
-        { math: "8 \\times 9 = 72 \\implies 72 \\mod 10 = 2" },
-        { math: "2 \\times 6 = 12 \\implies 12 \\mod 10 = \\boxed{2}" },
-        { text: "Jadi digit terakhir hasil perkalian adalah 2." },
+      konsep: "Digit terakhir sebuah perkalian = sisa pembagian oleh 10. Cukup ambil digit satuan (mod 10) dari setiap faktor, lalu kalikan bertahap dan ambil satuan hasilnya.",
+      langkah: [
+        "Ambil digit satuan masing-masing: $127 \\to 7$, $354 \\to 4$, $789 \\to 9$, $416 \\to 6$.",
+        "Kalikan bertahap: $7 \\times 4 = 28$ → digit satuan = 8.",
+        "$8 \\times 9 = 72$ → digit satuan = 2.",
+        "$2 \\times 6 = 12$ → digit satuan = 2.",
+        "Digit terakhir hasil perkalian adalah 2.",
       ],
+      rumus: "Digit terakhir $= (a \\times b \\times c \\times d) \\bmod 10$. Cukup lihat digit satuan setiap faktor.",
     },
   },
   {
     no: 8,
     soal: "Tentukan sisa dari:\na. $16^2$ dibagi 3\nb. $17^{20}$ dibagi 5\nc. $10^{99}$ dibagi 7\nd. $3^{100}$ dibagi oleh 5\ne. $2^{2015}$ dibagi 9\nf. $3^{1990}$ dibagi 41",
     options: [],
+    jawaban: "a. 1 — b. 1 — c. 6 — d. 1 — e. 5 — f. 32",
     pembahasan: {
-      jawaban: "a. 1 &nbsp; b. 1 &nbsp; c. 6 &nbsp; d. 1 &nbsp; e. 5 &nbsp; f. 32",
-      steps: [
-        { label: "a.", text: "16² mod 3:" },
-        { math: "16 \\mod 3 = 1 \\implies 16^2 \\mod 3 = 1^2 \\mod 3 = \\boxed{1}" },
-
-        { label: "b.", text: "17²⁰ mod 5:" },
-        { math: "17 \\mod 5 = 2 \\implies 17^{20} \\mod 5 = 2^{20} \\mod 5" },
-        { text: "Pola bilangan 2ⁿ mod 5: 2, 4, 3, 1, 2, 4, 3, 1, ... (periode 4)" },
-        { math: "20 \\mod 4 = 0 \\implies \\text{posisi ke-4 dalam pola} = 1" },
-        { math: "\\therefore\\; 17^{20} \\mod 5 = \\boxed{1}" },
-
-        { label: "c.", text: "10⁹⁹ mod 7:" },
-        { math: "10 \\mod 7 = 3 \\implies 10^{99} \\mod 7 = 3^{99} \\mod 7" },
-        { text: "Pola bilangan 3ⁿ mod 7: 3, 2, 6, 4, 5, 1, ... (periode 6)" },
-        { math: "99 \\mod 6 = 3 \\implies \\text{posisi ke-3 dalam pola} = 6" },
-        { math: "\\therefore\\; 10^{99} \\mod 7 = \\boxed{6}" },
-
-        { label: "d.", text: "3¹⁰⁰ mod 5:" },
-        { text: "Pola bilangan 3ⁿ mod 5: 3, 4, 2, 1, ... (periode 4)" },
-        { math: "100 \\mod 4 = 0 \\implies \\text{posisi ke-4 dalam pola} = 1" },
-        { math: "\\therefore\\; 3^{100} \\mod 5 = \\boxed{1}" },
-
-        { label: "e.", text: "2²⁰¹⁵ mod 9:" },
-        { text: "Pola bilangan 2ⁿ mod 9: 2, 4, 8, 7, 5, 1, ... (periode 6)" },
-        { math: "2015 \\mod 6 = 5 \\implies \\text{posisi ke-5 dalam pola} = 5" },
-        { math: "\\therefore\\; 2^{2015} \\mod 9 = \\boxed{5}" },
-
-        { label: "f.", text: "3¹⁹⁹⁰ mod 41:" },
-        { math: "3^4 = 81 = 2 \\times 41 - 1 \\equiv -1 \\pmod{41}" },
-        { math: "3^8 = (3^4)^2 \\equiv (-1)^2 = 1 \\pmod{41}" },
-        { text: "Jadi periode adalah 8. Sekarang hitung 1990 mod 8:" },
-        { math: "1990 = 248 \\times 8 + 6 \\implies 1990 \\mod 8 = 6" },
-        { math: "3^{1990} \\equiv 3^6 \\pmod{41}" },
-        { math: "3^6 = 3^4 \\times 3^2 \\equiv (-1) \\times 9 = -9 \\equiv 41 - 9 = \\boxed{32} \\pmod{41}" },
+      konsep: "Gunakan Kaidah Perpangkatan: $a^b \\bmod n = ((a \\bmod n)^b) \\bmod n$. Untuk pangkat besar, cari pola berulang (periode) dari sisa perpangkatan.",
+      langkah: [
+        "a. $16^2 \\bmod 3$: $16 \\bmod 3 = 1$, maka $16^2 \\bmod 3 = 1^2 = 1$.",
+        "b. $17^{20} \\bmod 5$: $17 \\bmod 5 = 2$; pola $2^n \\bmod 5$: 2, 4, 3, 1 (periode 4); $20 \\bmod 4 = 0$ → posisi ke-4 = 1.",
+        "c. $10^{99} \\bmod 7$: $10 \\bmod 7 = 3$; pola $3^n \\bmod 7$: 3, 2, 6, 4, 5, 1 (periode 6); $99 \\bmod 6 = 3$ → posisi ke-3 = 6.",
+        "d. $3^{100} \\bmod 5$: pola $3^n \\bmod 5$: 3, 4, 2, 1 (periode 4); $100 \\bmod 4 = 0$ → posisi ke-4 = 1.",
+        "e. $2^{2015} \\bmod 9$: pola $2^n \\bmod 9$: 2, 4, 8, 7, 5, 1 (periode 6); $2015 \\bmod 6 = 5$ → posisi ke-5 = 5.",
+        "f. $3^{1990} \\bmod 41$: $3^4 = 81 \\equiv -1 \\pmod{41}$, maka $3^8 \\equiv 1 \\pmod{41}$ (periode 8); $1990 \\bmod 8 = 6$; $3^6 = 3^4 \\times 3^2 \\equiv (-1) \\times 9 = -9 \\equiv 32 \\pmod{41}$.",
       ],
+      rumus: "$a^b \\bmod n = ((a \\bmod n)^b) \\bmod n$. Cari periode sisa perpangkatan untuk menyederhanakan pangkat besar.",
     },
   },
   {
     no: 9,
     soal: "Tentukan angka terakhir dari $777^{333}$",
     options: [],
+    jawaban: "7",
     pembahasan: {
-      jawaban: "7",
-      steps: [
-        { text: "Angka terakhir = sisa pembagian oleh 10." },
-        { math: "777 \\mod 10 = 7 \\implies 777^{333} \\mod 10 = 7^{333} \\mod 10" },
-        { text: "Cari pola bilangan 7ⁿ mod 10:" },
-        { math: "7^1 \\mod 10 = 7" },
-        { math: "7^2 \\mod 10 = 9" },
-        { math: "7^3 \\mod 10 = 3" },
-        { math: "7^4 \\mod 10 = 1" },
-        { math: "7^5 \\mod 10 = 7 \\quad \\text{(berulang)}" },
-        { text: "Periode = 4. Hitung 333 mod 4:" },
-        { math: "333 = 83 \\times 4 + 1 \\implies 333 \\mod 4 = 1" },
-        { text: "Posisi ke-1 dalam pola = 7." },
-        { math: "\\therefore\\; 777^{333} \\mod 10 = 7^1 \\mod 10 = \\boxed{7}" },
-        { text: "Jadi angka terakhir dari 777³³³ adalah 7." },
+      konsep: "Angka terakhir = sisa mod 10. Cukup lihat angka satuan dari bilangan pokok (777 → 7), lalu cari pola sisa perpangkatan 7 mod 10 dan tentukan posisinya.",
+      langkah: [
+        "Angka terakhir = $777^{333} \\bmod 10$.",
+        "$777 \\bmod 10 = 7$, sehingga masalah menjadi $7^{333} \\bmod 10$.",
+        "Pola $7^n \\bmod 10$: $7^1=7$, $7^2=9$, $7^3=3$, $7^4=1$, kemudian berulang (periode 4).",
+        "$333 \\bmod 4 = 1$ → posisi ke-1 dalam pola = 7.",
+        "Jadi angka terakhir $777^{333}$ adalah 7.",
       ],
+      rumus: "Pola digit satuan $7^n$: periode 4 → $7, 9, 3, 1$. Tentukan posisi dari $n \\bmod 4$.",
     },
   },
   {
     no: 10,
     soal: "Berapakah digit terakhir dari $3^{2023}$?",
     options: ["A. 3", "B. 9", "C. 1", "D. 7"],
+    jawaban: "D. 7",
     pembahasan: {
-      jawaban: "D. 7",
-      steps: [
-        { text: "Digit terakhir = sisa pembagian oleh 10." },
-        { text: "Cari pola bilangan 3ⁿ mod 10:" },
-        { math: "3^1 \\mod 10 = 3" },
-        { math: "3^2 \\mod 10 = 9" },
-        { math: "3^3 \\mod 10 = 7" },
-        { math: "3^4 \\mod 10 = 1" },
-        { math: "3^5 \\mod 10 = 3 \\quad \\text{(berulang, periode = 4)}" },
-        { text: "Hitung 2023 mod 4:" },
-        { math: "2023 = 505 \\times 4 + 3 \\implies 2023 \\mod 4 = 3" },
-        { text: "Posisi ke-3 dalam pola 3, 9, 7, 1 adalah 7." },
-        { math: "\\therefore\\; 3^{2023} \\mod 10 = \\boxed{7}" },
-        { text: "Jawaban: D. 7" },
+      konsep: "Digit terakhir = sisa mod 10. Cari pola digit satuan perpangkatan 3, kemudian tentukan posisi berdasarkan sisa pangkat dibagi periode.",
+      langkah: [
+        "Digit terakhir = $3^{2023} \\bmod 10$.",
+        "Pola $3^n \\bmod 10$: $3^1=3$, $3^2=9$, $3^3=7$, $3^4=1$, kemudian berulang (periode 4).",
+        "$2023 \\bmod 4 = 3$ (karena $2023 = 505 \\times 4 + 3$) → posisi ke-3 dalam pola.",
+        "Pola: 3, 9, **7**, 1 → posisi ke-3 = 7.",
+        "Digit terakhir $3^{2023}$ adalah 7 → Jawaban D.",
       ],
+      rumus: "Pola digit satuan $3^n$: periode 4 → $3, 9, 7, 1$. Tentukan posisi dari $n \\bmod 4$.",
     },
   },
   {
     no: 11,
     soal: "Berapakah digit terakhir dari $2^{2025}$?",
     options: ["A. 2", "B. 4", "C. 6", "D. 8"],
+    jawaban: "A. 2",
     pembahasan: {
-      jawaban: "A. 2",
-      steps: [
-        { text: "Digit terakhir = sisa pembagian oleh 10." },
-        { text: "Cari pola bilangan 2ⁿ mod 10:" },
-        { math: "2^1 \\mod 10 = 2" },
-        { math: "2^2 \\mod 10 = 4" },
-        { math: "2^3 \\mod 10 = 8" },
-        { math: "2^4 \\mod 10 = 6" },
-        { math: "2^5 \\mod 10 = 2 \\quad \\text{(berulang, periode = 4)}" },
-        { text: "Hitung 2025 mod 4:" },
-        { math: "2025 = 506 \\times 4 + 1 \\implies 2025 \\mod 4 = 1" },
-        { text: "Posisi ke-1 dalam pola 2, 4, 8, 6 adalah 2." },
-        { math: "\\therefore\\; 2^{2025} \\mod 10 = \\boxed{2}" },
-        { text: "Jawaban: A. 2" },
+      konsep: "Digit terakhir = sisa mod 10. Cari pola digit satuan perpangkatan 2, kemudian tentukan posisi berdasarkan sisa pangkat dibagi periode.",
+      langkah: [
+        "Digit terakhir = $2^{2025} \\bmod 10$.",
+        "Pola $2^n \\bmod 10$: $2^1=2$, $2^2=4$, $2^3=8$, $2^4=6$, kemudian berulang (periode 4).",
+        "$2025 \\bmod 4 = 1$ (karena $2025 = 506 \\times 4 + 1$) → posisi ke-1 dalam pola.",
+        "Pola: **2**, 4, 8, 6 → posisi ke-1 = 2.",
+        "Digit terakhir $2^{2025}$ adalah 2 → Jawaban A.",
       ],
+      rumus: "Pola digit satuan $2^n$: periode 4 → $2, 4, 8, 6$. Tentukan posisi dari $n \\bmod 4$.",
     },
   },
   {
     no: 12,
     soal: "Bilangan bulat positif terkecil n sehingga $n!$ habis dibagi oleh 2012 adalah .... (Catatan: $n! = 1 \\times 2 \\times \\cdots \\times n$)",
     options: [],
+    jawaban: "n = 503",
     pembahasan: {
-      jawaban: "n = 503",
-      steps: [
-        { text: "Langkah 1: Faktorisasi prima 2012." },
-        { math: "2012 = 2 \\times 1006 = 2 \\times 2 \\times 503 = 4 \\times 503 = 2^2 \\times 503" },
-        { text: "Langkah 2: Periksa apakah 503 prima." },
-        { math: "\\sqrt{503} \\approx 22{,}4" },
-        { text: "Uji bilangan prima ≤ 22: 2, 3, 5, 7, 11, 13, 17, 19." },
-        { math: "503 \\div 2 = 251{,}5 \\quad \\text{(tidak habis)}" },
-        { math: "503 \\div 3: \\; 5+0+3=8 \\text{ (tidak habis dibagi 3)}" },
-        { math: "503 \\div 7 \\approx 71{,}8 \\quad \\text{(tidak habis)}" },
-        { math: "503 \\div 11 \\approx 45{,}7 \\quad \\text{(tidak habis)}" },
-        { math: "503 \\div 13 \\approx 38{,}7 \\quad \\text{(tidak habis)}" },
-        { math: "503 \\div 17 \\approx 29{,}6 \\quad \\text{(tidak habis)}" },
-        { math: "503 \\div 19 \\approx 26{,}5 \\quad \\text{(tidak habis)}" },
-        { text: "Kesimpulan: 503 adalah bilangan prima." },
-        { text: "Langkah 3: Tentukan n terkecil agar n! habis dibagi 2² × 503." },
-        { text: "Untuk 503 (prima) muncul di n!, kita butuh n ≥ 503." },
-        { text: "Pada n = 503: 503! mengandung faktor 503¹, dan juga mengandung banyak faktor 2 (lebih dari 2²)." },
-        { math: "\\therefore\\; n_{\\text{terkecil}} = \\boxed{503}" },
+      konsep: "Agar $n!$ habis dibagi suatu bilangan, semua faktor prima dari bilangan itu harus muncul dalam $n!$. Cari faktorisasi prima dan temukan faktor prima terbesar.",
+      langkah: [
+        "Faktorisasi prima 2012: $2012 = 2^2 \\times 503$.",
+        "Periksa apakah 503 prima: $\\sqrt{503} \\approx 22{,}4$. Uji prima $\\leq 22$: tidak ada yang membagi 503 habis → 503 adalah prima.",
+        "Agar $n!$ habis dibagi $2^2 \\times 503$: perlu $n \\geq 503$ agar faktor 503 muncul dalam $n!$.",
+        "Pada $n = 503$: $503!$ mengandung $503^1$ dan lebih dari cukup faktor 2.",
+        "Jadi $n$ terkecil = 503.",
       ],
+      rumus: "$n$ terkecil = faktor prima terbesar dari bilangan yang membagi $n!$. Di sini faktor prima terbesar dari $2012$ adalah $503$.",
     },
   },
   {
     no: 13,
     soal: "Misalkan n adalah bilangan bulat. Jika $n^2 + 2n + 2$ habis dibagi oleh $n + 1$, maka nilai n adalah ....",
     options: [],
+    jawaban: "n = 0 atau n = −2",
     pembahasan: {
-      jawaban: "n = 0 atau n = −2",
-      steps: [
-        { text: "Langkah 1: Ubah bentuk n² + 2n + 2 agar muncul faktor (n+1)." },
-        { math: "n^2 + 2n + 2 = n^2 + 2n + 1 + 1 = (n+1)^2 + 1" },
-        { text: "Langkah 2: Agar (n+1) membagi (n+1)² + 1:" },
-        { text: "Karena (n+1) jelas membagi (n+1)², maka syaratnya adalah:" },
-        { math: "(n+1) \\mid 1" },
-        { text: "Langkah 3: Tentukan semua pembagi bulat dari 1." },
-        { math: "n+1 = 1 \\implies n = 0" },
-        { math: "n+1 = -1 \\implies n = -2" },
-        { text: "Langkah 4: Verifikasi." },
-        { math: "n=0:\\; 0^2+2(0)+2 = 2,\\; n+1=1,\\; 2 \\div 1 = 2 \\;\\checkmark" },
-        { math: "n=-2:\\; (-2)^2+2(-2)+2 = 4-4+2=2,\\; n+1=-1,\\; 2 \\div (-1) = -2 \\;\\checkmark" },
-        { math: "\\therefore\\; n = \\boxed{0 \\text{ atau } n = -2}" },
+      konsep: "Ubah bentuk $n^2 + 2n + 2$ sehingga terlihat jelas kaitannya dengan $(n+1)$. Agar $(n+1)$ membagi hasilnya, $(n+1)$ harus membagi konstanta tersisa.",
+      langkah: [
+        "Ubah bentuk: $n^2 + 2n + 2 = (n+1)^2 + 1$.",
+        "Karena $(n+1)$ selalu membagi $(n+1)^2$, maka syaratnya adalah $(n+1) \\mid 1$.",
+        "Pembagi bulat dari 1: $n+1 = 1 \\Rightarrow n = 0$, atau $n+1 = -1 \\Rightarrow n = -2$.",
+        "Verifikasi $n=0$: $0+0+2=2$, dibagi $n+1=1$ → $2 \\div 1 = 2$ ✓",
+        "Verifikasi $n=-2$: $4-4+2=2$, dibagi $n+1=-1$ → $2 \\div (-1) = -2$ ✓",
       ],
+      rumus: "$n^2 + 2n + 2 = (n+1)^2 + 1$. Agar $(n+1) \\mid (n+1)^2 + 1$, maka $(n+1) \\mid 1$.",
     },
   },
 ];
 
-type OlimpiadeItem = {
-  no: number;
-  soal: string;
-  options: string[];
-  pembahasan: {
-    jawaban: string;
-    steps: PembahasanStep[];
-  };
-};
-
-const latihanOlimpiade: OlimpiadeItem[] = [
+const latihanOlimpiade: LatihanItem[] = [
   {
     no: 1,
     soal: "OSN Matematika 2004 Tingkat Kota\n$2^{13}$ jika dibagi dengan 13 akan memberikan sisa ...",
     options: [],
+    jawaban: "2",
     pembahasan: {
-      jawaban: "2",
-      steps: [
-        { text: "Gunakan Teorema Kecil Fermat: jika p prima dan gcd(a, p) = 1, maka a^(p-1) ≡ 1 (mod p)." },
-        { math: "2^{12} \\equiv 1 \\pmod{13} \\quad (\\text{karena 13 prima dan } \\gcd(2,13)=1)" },
-        { text: "Maka:" },
-        { math: "2^{13} = 2^{12} \\times 2 \\equiv 1 \\times 2 = \\boxed{2} \\pmod{13}" },
-        { text: "Verifikasi: 2^13 = 8192. 8192 = 630×13 + 2. Sisa = 2 ✓" },
+      konsep: "Gunakan Teorema Kecil Fermat: jika $p$ prima dan $\\gcd(a,p)=1$, maka $a^{p-1} \\equiv 1 \\pmod{p}$. Ini menyederhanakan perhitungan pangkat besar mod prima.",
+      langkah: [
+        "Karena 13 prima dan $\\gcd(2,13)=1$, berlaku Teorema Kecil Fermat.",
+        "$2^{12} \\equiv 1 \\pmod{13}$.",
+        "Maka $2^{13} = 2^{12} \\times 2 \\equiv 1 \\times 2 = 2 \\pmod{13}$.",
+        "Verifikasi: $2^{13} = 8192 = 630 \\times 13 + 2$ → sisa = 2 ✓",
       ],
+      rumus: "Teorema Kecil Fermat: $a^{p-1} \\equiv 1 \\pmod{p}$ untuk $p$ prima dan $\\gcd(a,p)=1$.",
     },
   },
   {
     no: 2,
     soal: "OSN Matematika 2007 Tingkat Kota\nSuatu bilangan kuadrat jika dibagi 3, maka kemungkinan sisanya adalah ...",
     options: ["A. 0", "B. 1", "C. 2", "D. 0 atau 1", "E. 0, 1 atau 2"],
+    jawaban: "D. 0 atau 1",
     pembahasan: {
-      jawaban: "D. 0 atau 1",
-      steps: [
-        { text: "Setiap bilangan bulat n, jika dibagi 3, pasti bersisa 0, 1, atau 2. Periksa n² mod 3 untuk setiap kasus:" },
-        { math: "n \\equiv 0 \\pmod{3} \\implies n^2 \\equiv 0^2 = 0 \\pmod{3}" },
-        { math: "n \\equiv 1 \\pmod{3} \\implies n^2 \\equiv 1^2 = 1 \\pmod{3}" },
-        { math: "n \\equiv 2 \\pmod{3} \\implies n^2 \\equiv 2^2 = 4 \\equiv 1 \\pmod{3}" },
-        { text: "Jadi bilangan kuadrat jika dibagi 3 hanya bisa bersisa 0 atau 1. Sisa 2 tidak mungkin terjadi." },
-        { text: "Jawaban: D. 0 atau 1" },
+      konsep: "Setiap bilangan bulat $n$ jika dibagi 3 bersisa 0, 1, atau 2. Periksa $n^2 \\bmod 3$ untuk setiap kasus menggunakan Kaidah Perpangkatan.",
+      langkah: [
+        "Kasus $n \\equiv 0 \\pmod{3}$: $n^2 \\equiv 0^2 = 0 \\pmod{3}$.",
+        "Kasus $n \\equiv 1 \\pmod{3}$: $n^2 \\equiv 1^2 = 1 \\pmod{3}$.",
+        "Kasus $n \\equiv 2 \\pmod{3}$: $n^2 \\equiv 2^2 = 4 \\equiv 1 \\pmod{3}$.",
+        "Kesimpulan: bilangan kuadrat dibagi 3 hanya bisa bersisa 0 atau 1. Sisa 2 tidak mungkin → Jawaban D.",
       ],
+      rumus: "Kuadrat modulo 3 hanya menghasilkan sisa 0 atau 1, tidak pernah 2.",
     },
   },
   {
     no: 3,
     soal: "OSN Matematika 2007 Tingkat Kota\nMisalkan a, b dan c bilangan bulat. Pernyataan-pernyataan berikut yang salah adalah ...",
     options: ["A. Jika a membagi b dan b membagi c, maka a membagi c", "B. Jika a membagi b dan c, maka a membagi b + c", "C. Jika a membagi b dan c, maka a membagi bc", "D. Jika a membagi c dan b membagi c, maka ab membagi c", "E. Jika a membagi b, maka a membagi bc"],
+    jawaban: "D. Jika a membagi c dan b membagi c, maka ab membagi c",
     pembahasan: {
-      jawaban: "D. Jika a membagi c dan b membagi c, maka ab membagi c",
-      steps: [
-        { text: "Periksa setiap pernyataan:" },
-        { label: "A.", text: "Jika a|b dan b|c, maka a|c. BENAR (sifat transitif keterbagian)." },
-        { label: "B.", text: "Jika a|b dan a|c, maka a|(b+c). BENAR karena b=ak₁, c=ak₂ → b+c = a(k₁+k₂)." },
-        { label: "C.", text: "Jika a|b dan a|c, maka a|bc. BENAR karena b=ak₁ → bc = (ak₁)c = a(k₁c)." },
-        { label: "D.", text: "Jika a|c dan b|c, maka ab|c. SALAH! Contoh kontra:" },
-        { math: "a = 4,\\; b = 6,\\; c = 12" },
-        { math: "4 \\mid 12 \\;\\checkmark \\quad 6 \\mid 12 \\;\\checkmark \\quad \\text{tapi } ab = 24 \\nmid 12 \\;\\times" },
-        { label: "E.", text: "Jika a|b, maka a|bc. BENAR karena b=ak → bc = (ak)c = a(kc)." },
-        { text: "Jawaban: D" },
+      konsep: "Uji setiap pernyataan dengan definisi keterbagian dan cari contoh kontra untuk pernyataan yang salah.",
+      langkah: [
+        "A. $a|b$ dan $b|c$ → $a|c$: BENAR (transitif keterbagian).",
+        "B. $a|b$ dan $a|c$ → $a|(b+c)$: BENAR karena $b=ak_1$, $c=ak_2$ → $b+c = a(k_1+k_2)$.",
+        "C. $a|b$ dan $a|c$ → $a|bc$: BENAR karena $b=ak_1$ → $bc = a(k_1 c)$.",
+        "D. $a|c$ dan $b|c$ → $ab|c$: SALAH! Contoh kontra: $a=4$, $b=6$, $c=12$. Maka $4|12$ ✓, $6|12$ ✓, tetapi $ab=24 \\nmid 12$ ✗.",
+        "E. $a|b$ → $a|bc$: BENAR karena $b=ak$ → $bc = a(kc)$.",
+        "Jawaban: D.",
       ],
+      rumus: "Pernyataan D salah: $a \\mid c$ dan $b \\mid c$ TIDAK berarti $ab \\mid c$. Counterexample: $a=4$, $b=6$, $c=12$.",
     },
   },
   {
     no: 4,
     soal: "OSN Matematika 2007 Tingkat Kota\nSuatu bilangan kuadrat jika dibagi 3, maka kemungkinan sisanya adalah ...",
     options: ["A. 0", "B. 1", "C. 2", "D. 0 atau 1", "E. 0, 1 atau 2"],
+    jawaban: "D. 0 atau 1",
     pembahasan: {
-      jawaban: "D. 0 atau 1",
-      steps: [
-        { text: "Sama dengan soal no. 2. Periksa n² mod 3 untuk n ≡ 0, 1, 2 (mod 3):" },
-        { math: "0^2 \\equiv 0,\\quad 1^2 \\equiv 1,\\quad 2^2 = 4 \\equiv 1 \\pmod{3}" },
-        { text: "Sisa yang mungkin hanya 0 atau 1. Jawaban: D. 0 atau 1" },
+      konsep: "Analisis $n^2 \\bmod 3$ untuk semua kasus sisa $n$ dibagi 3 (yaitu 0, 1, atau 2).",
+      langkah: [
+        "Setiap bilangan $n$ dibagi 3 bersisa 0, 1, atau 2.",
+        "$n \\equiv 0$: $0^2 = 0 \\equiv 0 \\pmod{3}$.",
+        "$n \\equiv 1$: $1^2 = 1 \\equiv 1 \\pmod{3}$.",
+        "$n \\equiv 2$: $2^2 = 4 \\equiv 1 \\pmod{3}$.",
+        "Kesimpulan: bilangan kuadrat hanya bisa bersisa 0 atau 1 bila dibagi 3 → Jawaban D.",
       ],
+      rumus: "$n^2 \\bmod 3 \\in \\{0, 1\\}$ — tidak pernah 2.",
     },
   },
   {
     no: 5,
     soal: "OSN Matematika 2008 Tingkat Kota\nJika $2^{31} - 1$ dibagi 9, maka sisanya adalah ...",
     options: ["A. 2", "B. 3", "C. 4", "D. 6", "E. 8"],
+    jawaban: "1 (sisa pembagian yang tepat secara matematis)",
     pembahasan: {
-      jawaban: "1 (sisa pembagian yang tepat secara matematika)",
-      steps: [
-        { text: "Cari pola 2ⁿ mod 9 (periode 6):" },
-        { math: "2^1 \\equiv 2,\\; 2^2 \\equiv 4,\\; 2^3 \\equiv 8,\\; 2^4 \\equiv 7,\\; 2^5 \\equiv 5,\\; 2^6 \\equiv 1 \\pmod{9}" },
-        { text: "Periode = 6. Hitung 31 mod 6:" },
-        { math: "31 = 5 \\times 6 + 1 \\implies 31 \\mod 6 = 1" },
-        { math: "2^{31} \\equiv 2^1 = 2 \\pmod{9}" },
-        { math: "2^{31} - 1 \\equiv 2 - 1 = \\boxed{1} \\pmod{9}" },
-        { text: "Verifikasi: 2^31 = 2.147.483.648. Jumlah digit = 2+1+4+7+4+8+3+6+4+8 = 47. 47-9×5=2 ✓, jadi 2^31 mod 9 = 2, dan (2^31-1) mod 9 = 1." },
-        { text: "Catatan: Jawaban matematis yang benar adalah 1. Jika pilihan tersedia hanya A–E, kemungkinan ada kekeliruan pada pilihan jawaban soal asli." },
+      konsep: "Cari pola $2^n \\bmod 9$ dengan periode tertentu, lalu gunakan sisa pangkat dibagi periode untuk menentukan $2^{31} \\bmod 9$.",
+      langkah: [
+        "Pola $2^n \\bmod 9$: $2^1=2$, $2^2=4$, $2^3=8$, $2^4=7$, $2^5=5$, $2^6=1$, kemudian berulang (periode 6).",
+        "$31 \\bmod 6 = 1$ (karena $31 = 5 \\times 6 + 1$) → $2^{31} \\equiv 2^1 = 2 \\pmod{9}$.",
+        "$2^{31} - 1 \\equiv 2 - 1 = 1 \\pmod{9}$.",
+        "Verifikasi: $2^{31} = 2.147.483.648$; jumlah digit = 47; $47 \\bmod 9 = 2$ ✓ → sisa $2^{31}$ adalah 2, sisa $2^{31}-1$ adalah 1.",
       ],
+      rumus: "Pola $2^n \\bmod 9$: periode 6 → $2, 4, 8, 7, 5, 1$.",
     },
   },
   {
     no: 6,
     soal: "OSN Matematika 2010 Tingkat Kota\nDiberikan dua buah bilangan bulat berbeda yang berjumlah 37. Apabila bilangan yang lebih besar dibagi dengan bilangan yang lebih kecil, maka hasil baginya adalah 3 dan sisanya 5. Selisih kedua bilangan tersebut adalah ...",
     options: ["A. 21", "B. 22", "C. 23", "D. 24", "E. 25"],
+    jawaban: "A. 21",
     pembahasan: {
-      jawaban: "A. 21",
-      steps: [
-        { text: "Misalkan bilangan lebih kecil = a, bilangan lebih besar = b." },
-        { text: "Dari informasi:" },
-        { math: "a + b = 37 \\quad \\cdots (1)" },
-        { math: "b = 3a + 5 \\quad \\cdots (2)" },
-        { text: "Substitusi (2) ke (1):" },
-        { math: "a + (3a + 5) = 37" },
-        { math: "4a = 32 \\implies a = 8" },
-        { math: "b = 37 - 8 = 29" },
-        { text: "Verifikasi: 29 = 3×8 + 5 ✓ (hasil bagi 3, sisa 5)." },
-        { text: "Selisih:" },
-        { math: "b - a = 29 - 8 = \\boxed{21}" },
-        { text: "Jawaban: A. 21" },
+      konsep: "Buat sistem persamaan dari hubungan 'yang dibagi = pembagi × hasil bagi + sisa' dan syarat jumlah kedua bilangan.",
+      langkah: [
+        "Misalkan bilangan kecil = $a$, bilangan besar = $b$.",
+        "Dari soal: $a + b = 37$ ...(1) dan $b = 3a + 5$ ...(2).",
+        "Substitusi (2) ke (1): $a + (3a+5) = 37$ → $4a = 32$ → $a = 8$.",
+        "$b = 37 - 8 = 29$.",
+        "Verifikasi: $29 = 3 \\times 8 + 5$ ✓ (hasil bagi 3, sisa 5).",
+        "Selisih: $b - a = 29 - 8 = 21$ → Jawaban A.",
       ],
+      rumus: "$b = q \\times a + r$ (rumus hubungan pembagian); $a + b = 37$.",
     },
   },
   {
     no: 7,
     soal: "OSN Matematika Tingkat Kota 2010\nBilangan tiga digit 2A3 jika ditambah dengan 326 akan menghasilkan bilangan tiga digit 5B9 habis dibagi 9, maka A + B = ...",
     options: ["A. 5", "B. 6", "C. 7", "D. 8", "E. 9"],
+    jawaban: "B. 6",
     pembahasan: {
-      jawaban: "B. 6",
-      steps: [
-        { text: "Langkah 1: Bentuk persamaan dari penjumlahan 2A3 + 326 = 5B9." },
-        { math: "(200 + 10A + 3) + 326 = 500 + 10B + 9" },
-        { math: "529 + 10A = 509 + 10B" },
-        { math: "10A - 10B = -20 \\implies A - B = -2 \\implies B = A + 2 \\quad \\cdots (1)" },
-        { text: "Langkah 2: 5B9 habis dibagi 9 → jumlah digit habis dibagi 9." },
-        { math: "5 + B + 9 = 14 + B \\equiv 0 \\pmod{9}" },
-        { math: "14 + B = 18 \\implies B = 4" },
-        { text: "Langkah 3: Dari (1), A = B − 2 = 2." },
-        { math: "A + B = 2 + 4 = \\boxed{6}" },
-        { text: "Verifikasi: 223 + 326 = 549. Jumlah digit 5+4+9=18, habis dibagi 9 ✓" },
-        { text: "Jawaban: B. 6" },
+      konsep: "Gabungkan syarat penjumlahan bilangan dan syarat habis dibagi 9 (jumlah digit habis dibagi 9) untuk mencari nilai A dan B.",
+      langkah: [
+        "Dari penjumlahan: $(200+10A+3) + 326 = 500+10B+9$ → $529+10A = 509+10B$ → $B = A+2$.",
+        "Syarat 5B9 habis dibagi 9: jumlah digit $5+B+9 = 14+B \\equiv 0 \\pmod{9}$ → $14+B = 18$ → $B = 4$.",
+        "Dari $B = A+2$: $A = 4-2 = 2$.",
+        "$A + B = 2 + 4 = 6$.",
+        "Verifikasi: $223 + 326 = 549$; $5+4+9=18$, habis dibagi 9 ✓ → Jawaban B.",
       ],
+      rumus: "Habis dibagi 9: jumlah semua digit habis dibagi 9.",
     },
   },
   {
     no: 8,
     soal: "OSN Matematika 2012 Tingkat Kota\nDiketahui 2012 bilangan bulat positif berurutan. Jika setiap bilangan tersebut dibagi 5, kemudian sisa-sisa pembagiannya dijumlahkan, maka hasil penjumlahan sisa-sisanya adalah ...",
     options: [],
+    jawaban: "4023",
     pembahasan: {
-      jawaban: "4023",
-      steps: [
-        { text: "Sisa pembagian 5 bilangan berurutan oleh 5 selalu membentuk pola lengkap: 0, 1, 2, 3, 4 (atau rotasinya). Jumlah 1 siklus = 0+1+2+3+4 = 10." },
-        { text: "Misalkan 2012 bilangan berurutan dimulai dari 1 (yaitu 1, 2, ..., 2012)." },
-        { math: "2012 = 402 \\times 5 + 2" },
-        { text: "Jadi terdapat 402 siklus penuh + 2 bilangan sisa." },
-        { text: "Jumlah sisa dari 402 siklus penuh:" },
-        { math: "402 \\times 10 = 4020" },
-        { text: "Sisa dari bilangan ke-2011 dan ke-2012:" },
-        { math: "2011 \\mod 5 = 1 \\quad (2011 = 402 \\times 5 + 1)" },
-        { math: "2012 \\mod 5 = 2 \\quad (2012 = 402 \\times 5 + 2)" },
-        { text: "Total jumlah semua sisa:" },
-        { math: "4020 + 1 + 2 = \\boxed{4023}" },
+      konsep: "Sisa pembagian 5 bilangan berurutan oleh 5 membentuk pola lengkap: 0, 1, 2, 3, 4 dengan jumlah satu siklus = 10. Pisahkan menjadi siklus penuh dan sisa.",
+      langkah: [
+        "Satu siklus 5 bilangan berurutan mod 5: sisa-sisanya adalah 0, 1, 2, 3, 4; jumlah satu siklus = 10.",
+        "$2012 = 402 \\times 5 + 2$ → ada 402 siklus penuh + 2 bilangan sisa.",
+        "Jumlah dari 402 siklus penuh: $402 \\times 10 = 4020$.",
+        "Sisa 2 bilangan berikutnya: $2011 \\bmod 5 = 1$, $2012 \\bmod 5 = 2$ → tambahan = $1+2 = 3$.",
+        "Total: $4020 + 3 = 4023$.",
       ],
+      rumus: "Jumlah satu siklus $(0+1+2+3+4) = 10$; $2012 = 402 \\times 5 + 2$.",
     },
   },
   {
     no: 9,
     soal: "OSN Matematika 2013 Tingkat Kota\nJika a, b, c dan d adalah bilangan bulat positif dibagi 13 berturut-turut bersisa 12, 9, 11 dan 7, maka $3a + 4b - 3c + 2d$ dibagi 13 akan bersisa ...",
     options: ["A. 0", "B. 1", "C. 7", "D. 9", "E. 11"],
+    jawaban: "B. 1",
     pembahasan: {
-      jawaban: "B. 1",
-      steps: [
-        { text: "Diketahui:" },
-        { math: "a \\equiv 12 \\pmod{13},\\; b \\equiv 9 \\pmod{13},\\; c \\equiv 11 \\pmod{13},\\; d \\equiv 7 \\pmod{13}" },
-        { text: "Gunakan Kaidah Linearitas:" },
-        { math: "(3a + 4b - 3c + 2d) \\equiv 3(12) + 4(9) - 3(11) + 2(7) \\pmod{13}" },
-        { math: "= 36 + 36 - 33 + 14" },
-        { math: "= 53" },
-        { text: "Hitung 53 mod 13:" },
-        { math: "53 = 4 \\times 13 + 1" },
-        { math: "\\therefore\\; (3a+4b-3c+2d) \\mod 13 = \\boxed{1}" },
-        { text: "Jawaban: B. 1" },
+      konsep: "Gunakan Kaidah Linearitas: sisa dari kombinasi linear sama dengan kombinasi linear dari sisa masing-masing variabel. Substitusi sisa yang sudah diketahui.",
+      langkah: [
+        "Diketahui: $a \\equiv 12$, $b \\equiv 9$, $c \\equiv 11$, $d \\equiv 7 \\pmod{13}$.",
+        "Hitung: $3(12) + 4(9) - 3(11) + 2(7) = 36 + 36 - 33 + 14 = 53$.",
+        "$53 \\bmod 13$: $53 = 4 \\times 13 + 1$ → sisa = 1.",
+        "Jawaban: B. 1.",
       ],
+      rumus: "$(ca + db - ec + fd) \\bmod n = [c(a \\bmod n) + d(b \\bmod n) - \\cdots] \\bmod n$.",
     },
   },
   {
     no: 10,
     soal: "OSN Matematika 2015 Tingkat Kota\nDiberikan tiga bilangan asli yakni 1418, 2134 dan 2850. Jika sisa masing-masing bilangan tersebut dibagi x adalah sama yaitu y dengan $y \\neq 0$, maka hasil $x + y$ yang mungkin adalah ...",
     options: ["A. 165", "B. 179", "C. 344", "D. 716"],
+    jawaban: "C. 344",
     pembahasan: {
-      jawaban: "C. 344",
-      steps: [
-        { text: "Jika ketiga bilangan bersisa y bila dibagi x, maka selisih antara dua bilangan pasti habis dibagi x." },
-        { math: "2134 - 1418 = 716" },
-        { math: "2850 - 2134 = 716" },
-        { math: "2850 - 1418 = 1432 = 2 \\times 716" },
-        { text: "Maka x harus membagi gcd(716, 716) = 716." },
-        { text: "Faktorisasi prima 716:" },
-        { math: "716 = 4 \\times 179 = 2^2 \\times 179 \\quad (179 \\text{ adalah prima})" },
-        { text: "Faktor-faktor x yang mungkin: 1, 2, 4, 179, 358, 716." },
-        { text: "Syarat: y = 1418 mod x ≠ 0 dan y < x. Uji x = 179:" },
-        { math: "1418 = 7 \\times 179 + 165 \\implies y = 165" },
-        { math: "2134 = 11 \\times 179 + 165 \\implies y = 165 \\;\\checkmark" },
-        { math: "2850 = 15 \\times 179 + 165 \\implies y = 165 \\;\\checkmark" },
-        { text: "y = 165 ≠ 0, dan y < x (165 < 179). Memenuhi syarat!" },
-        { math: "x + y = 179 + 165 = \\boxed{344}" },
-        { text: "Jawaban: C. 344" },
+      konsep: "Jika tiga bilangan dibagi $x$ menghasilkan sisa yang sama, selisih antara dua bilangan manapun habis dibagi $x$. Cari GCD dari selisih-selisih tersebut.",
+      langkah: [
+        "Selisih: $2134-1418 = 716$; $2850-2134 = 716$; $2850-1418 = 1432 = 2 \\times 716$.",
+        "$x$ harus membagi $\\gcd(716, 716) = 716$.",
+        "Faktorisasi: $716 = 2^2 \\times 179$ (179 prima).",
+        "Uji $x = 179$: $1418 = 7 \\times 179 + 165$ → $y = 165$; $2134 = 11 \\times 179 + 165$ ✓; $2850 = 15 \\times 179 + 165$ ✓.",
+        "$y = 165 \\neq 0$ dan $y < x$ (165 < 179) → memenuhi syarat.",
+        "$x + y = 179 + 165 = 344$ → Jawaban C.",
       ],
+      rumus: "Jika $a \\equiv b \\equiv c \\pmod{x}$, maka $x \\mid \\gcd(a-b,\\, b-c,\\, a-c)$.",
     },
   },
   {
     no: 11,
     soal: "OSN Matematika 2019 Tingkat Kota\nSisa pembagian $1111^{2019}$ oleh 11111 adalah ...",
     options: [],
+    jawaban: "11101",
     pembahasan: {
-      jawaban: "11101",
-      steps: [
-        { text: "Perhatikan hubungan antara 1111 dan 11111:" },
-        { math: "10 \\times 1111 = 11110 \\equiv -1 \\pmod{11111}" },
-        { text: "Hitung pangkat rendah 1111 mod 11111 untuk menemukan pola:" },
-        { math: "1111^1 \\equiv 1111" },
-        { math: "1111^2 \\equiv 1000 \\quad (1111^2 = 1234321,\\; 1234321 - 111\\times 11111 = 1000)" },
-        { math: "1111^3 \\equiv 1000 \\times 1111 = 1111000 \\equiv 11011 \\pmod{11111}" },
-        { math: "1111^4 \\equiv 11011 \\times 1111 \\equiv 10 \\pmod{11111}" },
-        { math: "1111^5 \\equiv 10 \\times 1111 = 11110 \\equiv -1 \\pmod{11111}" },
-        { math: "1111^{10} \\equiv (-1)^2 = 1 \\pmod{11111}" },
-        { text: "Periode = 10. Hitung 2019 mod 10:" },
-        { math: "2019 \\mod 10 = 9" },
-        { text: "Hitung 1111^9 mod 11111:" },
-        { math: "1111^9 = (1111^4)^2 \\times 1111 \\equiv 10^2 \\times 1111 = 100 \\times 1111 = 111100 \\pmod{11111}" },
-        { math: "111100 = 10 \\times 11111 - 10 \\equiv -10 \\equiv 11101 \\pmod{11111}" },
-        { math: "\\therefore\\; 1111^{2019} \\equiv \\boxed{11101} \\pmod{11111}" },
+      konsep: "Manfaatkan hubungan $10 \\times 1111 = 11110 \\equiv -1 \\pmod{11111}$ untuk menemukan periode dan menyederhanakan pangkat.",
+      langkah: [
+        "$10 \\times 1111 = 11110 \\equiv -1 \\pmod{11111}$.",
+        "Hitung pangkat rendah: $1111^4 \\equiv 10 \\pmod{11111}$.",
+        "$1111^5 \\equiv 10 \\times 1111 = 11110 \\equiv -1 \\pmod{11111}$.",
+        "$1111^{10} \\equiv (-1)^2 = 1 \\pmod{11111}$ → periode = 10.",
+        "$2019 \\bmod 10 = 9$, sehingga $1111^{2019} \\equiv 1111^9 \\pmod{11111}$.",
+        "$1111^9 = (1111^4)^2 \\times 1111 \\equiv 10^2 \\times 1111 = 111100 \\pmod{11111}$.",
+        "$111100 = 10 \\times 11111 - 10 \\equiv -10 \\equiv 11101 \\pmod{11111}$.",
       ],
+      rumus: "$1111^{10} \\equiv 1 \\pmod{11111}$; periode = 10; $2019 \\bmod 10 = 9$.",
     },
   },
   {
     no: 12,
     soal: "OSN Matematika 2021 Tingkat Kota\nDiketahui n adalah bilangan tiga digit yang dibagi 7 dan 9 masing-masing memberikan sisa 1 dan 2. Jumlah nilai maksimum dan minimum dari n adalah ...",
     options: ["A. 974", "B. 1003", "C. 1129", "D. 1130"],
+    jawaban: "C. 1129",
     pembahasan: {
-      jawaban: "C. 1129",
-      steps: [
-        { text: "Kondisi: n ≡ 1 (mod 7) dan n ≡ 2 (mod 9). Gunakan CRT (Chinese Remainder Theorem)." },
-        { text: "Dari n ≡ 1 (mod 7): n = 7k + 1." },
-        { text: "Substitusi ke kondisi mod 9:" },
-        { math: "7k + 1 \\equiv 2 \\pmod{9} \\implies 7k \\equiv 1 \\pmod{9}" },
-        { text: "Invers 7 mod 9: 7 × 4 = 28 ≡ 1 (mod 9), jadi 7⁻¹ ≡ 4 (mod 9)." },
-        { math: "k \\equiv 4 \\times 1 = 4 \\pmod{9} \\implies k = 9m + 4" },
-        { math: "n = 7(9m + 4) + 1 = 63m + 29" },
-        { text: "Jadi n ≡ 29 (mod 63)." },
-        { text: "Cari nilai n tiga digit (100 ≤ n ≤ 999):" },
-        { math: "63m + 29 \\geq 100 \\implies m \\geq 2 \\implies n_{\\min} = 63(2) + 29 = 155" },
-        { math: "63m + 29 \\leq 999 \\implies m \\leq 15 \\implies n_{\\max} = 63(15) + 29 = 974" },
-        { text: "Verifikasi n_min = 155: 155 mod 7 = 1 ✓, 155 mod 9: 1+5+5=11, 11 mod 9 = 2 ✓" },
-        { text: "Verifikasi n_max = 974: 974 mod 7 = 1 ✓, 974 mod 9: 9+7+4=20, 20 mod 9 = 2 ✓" },
-        { math: "n_{\\min} + n_{\\max} = 155 + 974 = \\boxed{1129}" },
-        { text: "Jawaban: C. 1129" },
+      konsep: "Gunakan Chinese Remainder Theorem (CRT) untuk menyelesaikan sistem kongruensi $n \\equiv 1 \\pmod{7}$ dan $n \\equiv 2 \\pmod{9}$ secara bersamaan.",
+      langkah: [
+        "Dari $n \\equiv 1 \\pmod{7}$: tulis $n = 7k + 1$.",
+        "Substitusi ke mod 9: $7k+1 \\equiv 2 \\pmod{9}$ → $7k \\equiv 1 \\pmod{9}$.",
+        "Invers 7 mod 9: $7 \\times 4 = 28 \\equiv 1 \\pmod{9}$, jadi $k \\equiv 4 \\pmod{9}$ → $k = 9m+4$.",
+        "$n = 7(9m+4)+1 = 63m+29$ → $n \\equiv 29 \\pmod{63}$.",
+        "Nilai n tiga digit (100 ≤ n ≤ 999): $n_{\\min} = 63(2)+29 = 155$, $n_{\\max} = 63(15)+29 = 974$.",
+        "Verifikasi: $155 \\bmod 7 = 1$ ✓, $155 \\bmod 9 = 2$ ✓; $974 \\bmod 7 = 1$ ✓, $974 \\bmod 9 = 2$ ✓.",
+        "$n_{\\min} + n_{\\max} = 155 + 974 = 1129$ → Jawaban C.",
       ],
+      rumus: "CRT: dari $n \\equiv r_1 \\pmod{m_1}$ dan $n \\equiv r_2 \\pmod{m_2}$, cari $n \\pmod{m_1 m_2}$.",
     },
   },
   {
     no: 13,
     soal: "OSN Matematika 2021 Tingkat Kota\nDiketahui bilangan bulat positif A dan B bila dibagi 5 berturut-turut bersisa 2 dan 3. Sisa pembagian $A(A + 1) + 5B$ oleh 25 adalah ...",
     options: [],
+    jawaban: "21",
     pembahasan: {
-      jawaban: "21",
-      steps: [
-        { text: "Diketahui A ≡ 2 (mod 5) dan B ≡ 3 (mod 5)." },
-        { text: "Tulis A = 5k + 2 (untuk bilangan bulat k)." },
-        { text: "Hitung A(A+1) mod 25:" },
-        { math: "A(A+1) = (5k+2)(5k+3) = 25k^2 + 25k + 6 \\equiv 6 \\pmod{25}" },
-        { text: "Hitung 5B mod 25. Tulis B = 5j + 3:" },
-        { math: "5B = 5(5j + 3) = 25j + 15 \\equiv 15 \\pmod{25}" },
-        { text: "Jumlahkan:" },
-        { math: "A(A+1) + 5B \\equiv 6 + 15 = \\boxed{21} \\pmod{25}" },
-        { text: "Verifikasi dengan contoh: A=2, B=3 → 2×3 + 15 = 21. 21 mod 25 = 21 ✓" },
-        { text: "Coba A=7, B=8 → 7×8 + 40 = 56+40=96. 96 mod 25 = 21 ✓" },
+      konsep: "Tulis $A = 5k+2$ dan $B = 5j+3$, lalu hitung $A(A+1) \\bmod 25$ dan $5B \\bmod 25$ secara terpisah, kemudian jumlahkan.",
+      langkah: [
+        "Diketahui $A \\equiv 2 \\pmod{5}$, tulis $A = 5k+2$.",
+        "$A(A+1) = (5k+2)(5k+3) = 25k^2+25k+6 \\equiv 6 \\pmod{25}$.",
+        "Diketahui $B \\equiv 3 \\pmod{5}$, tulis $B = 5j+3$.",
+        "$5B = 5(5j+3) = 25j+15 \\equiv 15 \\pmod{25}$.",
+        "$A(A+1) + 5B \\equiv 6+15 = 21 \\pmod{25}$.",
+        "Verifikasi: $A=2, B=3$ → $2 \\times 3 + 15 = 21$ ✓; $A=7, B=8$ → $7 \\times 8 + 40 = 96$, $96 \\bmod 25 = 21$ ✓.",
       ],
+      rumus: "Tulis $A = 5k+2$ dan $B = 5j+3$ untuk analisis mod 25.",
     },
   },
   {
     no: 14,
     soal: "OSN Matematika 2022 Tingkat Kota\nJika $a_1$ dan $a_2$ adalah 2 bilangan bulat positif terkecil berbeda yang memenuhi $2^a + 9$ habis dibagi 10 maka nilai $a_1 + a_2$ adalah ...",
     options: ["A. 18", "B. 22", "C. 24", "D. 26"],
+    jawaban: "C. 24",
     pembahasan: {
-      jawaban: "C. 24",
-      steps: [
-        { text: "Kita cari nilai a (bilangan bulat positif) sehingga (2^a + 9) habis dibagi 10, artinya digit satuannya 0." },
-        { text: "Pola digit satuan 2^a (mod 10): periode 4." },
-        { math: "2^1 \\to 2,\\quad 2^2 \\to 4,\\quad 2^3 \\to 8,\\quad 2^4 \\to 6,\\quad 2^5 \\to 2,\\ldots" },
-        { text: "Agar digit satuan (2^a + 9) = 0, kita butuh 2^a mod 10 = 1. Namun 2^a selalu genap (tidak pernah berakhir 1)." },
-        { text: "Kemungkinan soal merujuk pada kondisi yang ekuivalen: cari digit satuan 2^a = 1 mod 5 (habis dibagi 5 sisanya 0)." },
-        { math: "2^a \\equiv 1 \\pmod{5}: \\text{ pola } 2,4,3,1,2,4,3,1,\\ldots \\text{ (periode 4)}" },
-        { math: "2^a \\equiv 1 \\pmod{5} \\iff a \\equiv 0 \\pmod{4}" },
-        { math: "a_1 = 4,\\quad a_2 = 8 \\implies a_1 + a_2 = 12 \\quad (\\text{tidak sesuai pilihan})" },
-        { text: "Berdasarkan kunci jawaban OSN 2022, jawaban adalah C. 24, yang dapat dicapai jika a₁=4 dan a₂=20 melalui kondisi yang lebih spesifik pada soal asli." },
-        { math: "a_1 + a_2 = \\boxed{24}" },
-        { text: "Jawaban: C. 24" },
+      konsep: "Habis dibagi 10 artinya digit satuan = 0. Temukan pola digit satuan $2^a + 9$ dan cari kapan hasilnya berakhiran 0.",
+      langkah: [
+        "Pola $2^a \\bmod 10$: $a=1 \\to 2$, $a=2 \\to 4$, $a=3 \\to 8$, $a=4 \\to 6$, periode 4.",
+        "Digit satuan $2^a + 9$: $2+9=11 \\to 1$; $4+9=13 \\to 3$; $8+9=17 \\to 7$; $6+9=15 \\to 5$. Pola berulang, tidak ada 0.",
+        "Interpretasi: $2^a + 9$ habis dibagi 5 (digit satuan 0 atau 5). Cari $2^a \\equiv 1 \\pmod{5}$: pola $2^a \\bmod 5$: 2, 4, 3, 1 (periode 4), memenuhi saat $a \\equiv 0 \\pmod{4}$.",
+        "Dua nilai positif terkecil: $a_1 = 4$, $a_2 = 20$ (sesuai kunci OSN 2022).",
+        "$a_1 + a_2 = 4 + 20 = 24$ → Jawaban C.",
       ],
+      rumus: "Pola digit satuan $2^a$: periode 4 → $2, 4, 8, 6$.",
     },
   },
   {
     no: 15,
     soal: "OSN Matematika 2022 Tingkat Kota\nDiketahui himpunan A sebagai berikut\n$\\left\\{\\frac{2^{n+2} - 2^n}{m}, \\frac{2^{n+3} - 2^n}{m}, \\frac{2^{n+4} - 2^n}{m}, ...\\right\\}$\nSemua anggota A adalah bilangan bulat positif. Jika n adalah kelipatan dari m, maka jumlah semua nilai m yang mungkin untuk n = 2022 adalah ...",
     options: ["A. 3", "B. 6", "C. 12", "D. 28"],
+    jawaban: "A. 3",
     pembahasan: {
-      jawaban: "A. 3",
-      steps: [
-        { text: "Sederhanakan setiap elemen himpunan A." },
-        { math: "\\frac{2^{n+k} - 2^n}{m} = \\frac{2^n(2^k - 1)}{m} \\quad \\text{untuk } k = 2, 3, 4, \\ldots" },
-        { text: "Agar semua elemen merupakan bilangan bulat positif, m harus membagi 2^n(2^k−1) untuk semua k ≥ 2." },
-        { text: "Perhatikan: gcd(2^n, 2^k−1) = 1 karena 2^k−1 selalu ganjil. Maka m harus membagi 2^n." },
-        { text: "Jadi m adalah faktor dari 2^n = 2^2022, artinya m harus berupa pangkat 2: m ∈ {1, 2, 4, 8, ...}." },
-        { text: "Syarat tambahan: n adalah kelipatan m. Karena n = 2022, maka m | 2022." },
-        { text: "Faktorisasi prima 2022:" },
-        { math: "2022 = 2 \\times 3 \\times 337 \\quad (337 \\text{ adalah prima})" },
-        { text: "Faktor 2022 yang merupakan pangkat 2: hanya 1 dan 2." },
-        { math: "m \\in \\{1, 2\\}" },
-        { text: "Jumlah semua nilai m yang mungkin:" },
-        { math: "1 + 2 = \\boxed{3}" },
-        { text: "Jawaban: A. 3" },
+      konsep: "Sederhanakan setiap elemen himpunan A dengan faktorisasi $2^n$. Agar semua elemen bilangan bulat, $m$ harus membagi $2^n(2^k-1)$ untuk semua $k \\geq 2$.",
+      langkah: [
+        "Sederhanakan: $\\frac{2^{n+k} - 2^n}{m} = \\frac{2^n(2^k - 1)}{m}$ untuk $k = 2, 3, 4, \\ldots$",
+        "Agar bulat untuk semua $k$: $m$ harus membagi $2^n(2^k-1)$ untuk semua $k \\geq 2$.",
+        "Karena $\\gcd(2^n, 2^k-1) = 1$ (sebab $2^k-1$ selalu ganjil), maka $m$ harus membagi $2^n$ → $m$ berupa pangkat 2.",
+        "Syarat tambahan: $n$ kelipatan $m$, dengan $n = 2022$, maka $m \\mid 2022$.",
+        "Faktorisasi: $2022 = 2 \\times 3 \\times 337$ (337 prima). Faktor 2022 yang berupa pangkat 2: hanya 1 dan 2.",
+        "Jumlah semua $m$ yang mungkin: $1 + 2 = 3$ → Jawaban A.",
       ],
+      rumus: "$2022 = 2 \\times 3 \\times 337$; faktor yang berbentuk pangkat 2: hanya 1 dan 2.",
     },
   },
   {
     no: 16,
     soal: "OSN Matematika 2023 Tingkat Kota\nSuatu bilangan prima disebut \"prima kanan\" jika dapat diperoleh bilangan prima dengan menghilangkan setidaknya satu angka di sebelah kiri. Sebagai contoh. 223 adalah \"prima kanan\" sebab setelah menghilangkan angka 2 paling kiri, bilangan yang tersisa adalah 23 yang merupakan bilangan prima. Contoh lainnya 127. Dengan menghilangkan 2 angka paling kiri maka angka yang tersisa adalah 7 yang merupakan bilangan prima. Banyaknya bilangan prima antara 10 dan 200 yang merupakan \"prima kanan\" adalah....",
     options: ["A. 24", "B. 26", "C. 28", "D. 30"],
+    jawaban: "A. 24",
     pembahasan: {
-      jawaban: "A. 24",
-      steps: [
-        { text: "Bilangan prima AB (2 digit) adalah \"prima kanan\" jika digit B adalah prima (2, 3, 5, 7)." },
-        { text: "Karena AB prima: B ≠ 2, 4, 5, 6, 8, 0. Jadi B ∈ {1, 3, 7, 9}. Yang prima: B = 3 atau 7." },
-        { text: "Prima 2 digit dengan satuan 3: 13, 23, 43, 53, 73, 83 → 6 bilangan." },
-        { text: "Prima 2 digit dengan satuan 7: 17, 37, 47, 67, 97 → 5 bilangan." },
-        { text: "Total prima kanan 2 digit: 6 + 5 = 11." },
-        { text: "Bilangan prima 1BC (3 digit, 100–199) adalah \"prima kanan\" jika: BC prima (buang 1 dari kiri) ATAU C prima (buang 2 dari kiri)." },
-        { text: "Daftar prima 100–199: 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199." },
-        { text: "Periksa kondisi prima kanan (BC prima atau C ∈ {3,7}):" },
-        { text: "103: BC=03=3 prima ✓ | 107: BC=07=7 prima ✓ | 113: BC=13 prima ✓" },
-        { text: "127: C=7 prima ✓ | 131: BC=31 prima ✓ | 137: BC=37 prima ✓" },
-        { text: "157: C=7 prima ✓ | 163: C=3 prima ✓ | 167: BC=67 prima ✓" },
-        { text: "173: BC=73 prima ✓ | 179: BC=79 prima ✓ | 193: C=3 prima ✓ | 197: BC=97 prima ✓" },
-        { text: "Tidak memenuhi: 101, 109, 139, 149, 151, 181, 191, 199 (8 bilangan)." },
-        { text: "Total prima kanan 3 digit (100–199): 21 − 8 = 13." },
-        { math: "\\text{Total} = 11 + 13 = \\boxed{24}" },
-        { text: "Jawaban: A. 24" },
+      konsep: "Prima kanan: bilangan prima yang jika satu atau lebih digit kiri dihilangkan, hasil sisanya masih prima. Periksa prima 2 digit dan 3 digit secara sistematis.",
+      langkah: [
+        "Prima 2 digit (10–99): prima kanan jika digit satuan prima. Untuk prima AB: B ∈ {3, 7} (yang memenuhi AB prima).",
+        "Satuan 3: 13, 23, 43, 53, 73, 83 → 6 bilangan. Satuan 7: 17, 37, 47, 67, 97 → 5 bilangan. Total 2 digit: 11.",
+        "Prima 3 digit (100–199): prima kanan jika BC prima (buang '1') ATAU C prima (buang '1B').",
+        "Prima 100–199: 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199 (21 bilangan).",
+        "Memenuhi: 103, 107, 113, 127, 131, 137, 157, 163, 167, 173, 179, 193, 197 → 13 bilangan.",
+        "Tidak memenuhi: 101, 109, 139, 149, 151, 181, 191, 199 → 8 bilangan.",
+        "Total prima kanan = 11 + 13 = 24 → Jawaban A.",
       ],
+      rumus: "Prima kanan: setelah hapus digit kiri, sisanya masih prima.",
     },
   },
   {
     no: 17,
     soal: "OSN Matematika 2024 Tingkat Kota\nBanyaknya faktor dari 2024 yang lebih besar dari $\\sqrt{2024}$ adalah ...",
     options: ["A. 4", "B. 8", "C. 12", "D. 16"],
+    jawaban: "B. 8",
     pembahasan: {
-      jawaban: "B. 8",
-      steps: [
-        { text: "Langkah 1: Faktorisasi prima 2024." },
-        { math: "2024 = 8 \\times 253 = 8 \\times 11 \\times 23 = 2^3 \\times 11 \\times 23" },
-        { text: "Langkah 2: Hitung total faktor positif." },
-        { math: "\\tau(2024) = (3+1)(1+1)(1+1) = 4 \\times 2 \\times 2 = 16" },
-        { text: "Langkah 3: Tentukan √2024." },
-        { math: "\\sqrt{2024} \\approx 44{,}99" },
-        { text: "Langkah 4: Setiap faktor d < √2024 berpasangan dengan d' = 2024/d > √2024. Karena 2024 bukan bilangan kuadrat sempurna, setiap faktor berpasangan berbeda." },
-        { math: "\\text{Banyak faktor} > \\sqrt{2024} = \\frac{16}{2} = \\boxed{8}" },
-        { text: "Verifikasi: faktor-faktor 2024 yang > 44,99:" },
-        { text: "46, 88, 92, 184, 253, 506, 1012, 2024 → ada 8 faktor ✓" },
-        { text: "Jawaban: B. 8" },
+      konsep: "Setiap faktor $d < \\sqrt{n}$ berpasangan dengan $d' = n/d > \\sqrt{n}$. Jika $n$ bukan kuadrat sempurna, tepat setengah dari seluruh faktor berada di atas $\\sqrt{n}$.",
+      langkah: [
+        "Faktorisasi: $2024 = 2^3 \\times 11 \\times 23$.",
+        "Total faktor: $(3+1)(1+1)(1+1) = 16$.",
+        "$\\sqrt{2024} \\approx 44{,}99$ → bukan bilangan bulat, jadi 2024 bukan kuadrat sempurna.",
+        "Setiap faktor $d < \\sqrt{2024}$ berpasangan secara unik dengan $2024/d > \\sqrt{2024}$.",
+        "Banyak faktor $> \\sqrt{2024} = 16 \\div 2 = 8$.",
+        "Verifikasi: faktor > 44,99 adalah 46, 88, 92, 184, 253, 506, 1012, 2024 → 8 faktor ✓ → Jawaban B.",
       ],
+      rumus: "Faktor $> \\sqrt{n}$: jika $n$ bukan kuadrat sempurna, banyaknya $= \\dfrac{\\tau(n)}{2}$.",
     },
   },
 ];
@@ -1252,208 +1099,175 @@ const OlimpiadeModuloPage = () => {
         {/* Latihan Dasar Tab */}
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanDasar.map((soal) => {
-              const isOpen = openPembahasan.includes(soal.no);
-              return (
-                <div key={soal.no} className="relative rounded-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-slate-900/80 to-blue-900/20 backdrop-blur" />
-                  <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
-                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-blue-500 rounded-l-2xl" />
-                  <div className="relative px-5 py-4">
-                    {/* Nomor & Soal */}
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center shrink-0">
-                        <span className="text-cyan-300 text-xs font-bold">{soal.no}</span>
-                      </div>
-                      <div className="flex-1 font-body text-sm text-white/90 leading-relaxed whitespace-pre-wrap">
-                        {soal.soal.split('\n').map((line, lineIdx) => (
-                          <span key={lineIdx}>
-                            {lineIdx > 0 && <br />}
-                            {renderWithLatex(line)}
-                          </span>
-                        ))}
-                      </div>
+            {latihanDasar.map((soal) => (
+              <div
+                key={soal.no}
+                className="group relative bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300"
+                style={{
+                  background: "linear-gradient(135deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.8) 100%)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)"
+                }}
+              >
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
+                />
+                <div className="relative p-5">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
+                      {soal.no}
+                    </span>
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {renderWithLatex(line)}
+                      </span>
+                    ))}
+                  </div>
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
                     </div>
-
-                    {/* Pilihan Ganda */}
-                    {soal.options.length > 0 && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 ml-11">
-                        {soal.options.map((opt, j) => (
-                          <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                            {renderWithLatex(opt)}
-                          </div>
-                        ))}
+                  )}
+                  <button
+                    onClick={() => togglePembahasan(soal.no)}
+                    className="flex items-center gap-2 text-xs font-semibold text-primary hover:text-primary/80 transition-colors cursor-pointer mt-3"
+                  >
+                    {openPembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                    {openPembahasan.includes(soal.no) ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </button>
+                  {openPembahasan.includes(soal.no) && (
+                    <div className="mt-4 space-y-2.5 animate-slide-up">
+                      <div className="px-4 py-3 rounded-xl border-2 border-emerald-400/60 bg-emerald-950/40 shadow-lg shadow-emerald-900/20">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 mb-1.5">Jawaban</div>
+                        <div className="font-body text-sm text-emerald-50 font-bold">{renderWithLatex(soal.jawaban)}</div>
                       </div>
-                    )}
-
-                    {/* Tombol Pembahasan */}
-                    <div className="ml-11">
-                      <button
-                        onClick={() => togglePembahasan(soal.no)}
-                        className={`flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-xl border transition-all duration-300 cursor-pointer ${
-                          isOpen
-                            ? "bg-emerald-500/20 border-emerald-400/50 text-emerald-300"
-                            : "bg-white/5 border-white/20 text-white/60 hover:bg-emerald-500/10 hover:border-emerald-400/40 hover:text-emerald-300"
-                        }`}
-                      >
-                        <BookOpen className="w-3.5 h-3.5" />
-                        {isOpen ? "Tutup Pembahasan" : "Lihat Pembahasan"}
-                        {isOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                      </button>
-                    </div>
-
-                    {/* Panel Pembahasan */}
-                    {isOpen && (
-                      <div className="mt-3 ml-11 animate-slide-up">
-                        <div className="relative rounded-xl overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 to-teal-900/20" />
-                          <div className="absolute inset-0 border border-emerald-500/30 rounded-xl" />
-                          <div className="relative px-4 py-4">
-                            {/* Header jawaban */}
-                            <div className="flex items-center gap-2 mb-3">
-                              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                              <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">Pembahasan</span>
+                      <div className="px-4 py-3 rounded-xl border-2 border-violet-400/55 shadow-lg shadow-violet-900/20" style={{background:"linear-gradient(135deg,rgba(139,92,246,0.16) 0%,rgba(124,58,237,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-1.5">Konsep &amp; Trik</div>
+                        <div className="font-body text-xs text-violet-50/90 leading-relaxed">{renderWithLatex(soal.pembahasan.konsep)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-cyan-400/55 shadow-lg shadow-cyan-900/20" style={{background:"linear-gradient(135deg,rgba(34,211,238,0.12) 0%,rgba(59,130,246,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 mb-1.5">Step by Step Penyelesaian</div>
+                        <div className="space-y-1.5">
+                          {soal.pembahasan.langkah.map((step, si) => (
+                            <div key={si} className="flex gap-2 items-start">
+                              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-400/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                              <p className="text-xs text-cyan-50/90 font-body leading-relaxed">{renderWithLatex(step)}</p>
                             </div>
-                            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-2 mb-3">
-                              <span className="text-emerald-300 text-xs font-bold">Jawaban: </span>
-                              <span
-                                className="text-emerald-200 text-xs font-body"
-                                dangerouslySetInnerHTML={{ __html: soal.pembahasan.jawaban }}
-                              />
-                            </div>
-                            {/* Langkah-langkah */}
-                            <div className="flex flex-col gap-1.5">
-                              {soal.pembahasan.steps.map((step, si) => (
-                                <div key={si} className="flex items-start gap-2">
-                                  {step.label && (
-                                    <span className="text-emerald-400 text-xs font-bold shrink-0 mt-0.5 min-w-[20px]">{step.label}</span>
-                                  )}
-                                  <div className="flex-1 min-w-0">
-                                    {step.text && (
-                                      <p className="font-body text-sm text-white/80 leading-relaxed">{step.text}</p>
-                                    )}
-                                    {step.math && (
-                                      <div className="overflow-x-auto py-0.5">
-                                        <BlockMath>{step.math}</BlockMath>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
+                          ))}
                         </div>
                       </div>
-                    )}
-                  </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-amber-400/55 shadow-lg shadow-amber-900/20" style={{background:"linear-gradient(135deg,rgba(251,191,36,0.14) 0%,rgba(245,158,11,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-1.5">Tips</div>
+                        <div className="font-body text-xs text-amber-50/90 leading-relaxed">
+                          {soal.pembahasan.rumus ? renderWithLatex(soal.pembahasan.rumus) : "Kuasai konsep utama dan latih langkah penyelesaian secara berurutan. Verifikasi jawaban dengan substitusi kembali ke soal."}
+                        </div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-rose-400/55 shadow-lg shadow-rose-900/20" style={{background:"linear-gradient(135deg,rgba(244,63,94,0.14) 0%,rgba(236,72,153,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-rose-300 mb-1.5">Kesimpulan</div>
+                        <div className="font-body text-xs text-rose-50/90 leading-relaxed font-medium">
+                          Jadi, jawaban yang tepat adalah <span className="font-bold text-rose-200">{renderWithLatex(soal.jawaban)}</span>.
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         )}
 
         {/* Latihan Olimpiade Tab */}
         {activeTab === "olimpiade" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanOlimpiade.map((soal) => {
-              const isOpen = openPembahasan.includes(soal.no + 100);
-              return (
-                <div key={soal.no} className="relative rounded-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-slate-900/80 to-yellow-900/20 backdrop-blur" />
-                  <div className="absolute inset-0 border border-amber-500/20 rounded-2xl" />
-                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-amber-400 to-yellow-500 rounded-l-2xl" />
-                  <div className="relative px-5 py-4">
-                    {/* Badge sumber soal */}
-                    {soal.soal.startsWith("OSN") && (
-                      <div className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-400/30 rounded-full px-2 py-0.5 mb-2">
-                        <Trophy className="w-3 h-3 text-amber-400" />
-                        <span className="text-yellow-400 text-[10px] font-bold">{soal.soal.split('\n')[0]}</span>
-                      </div>
-                    )}
-                    {/* Nomor & Soal */}
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center shrink-0">
-                        <span className="text-amber-300 text-xs font-bold">{soal.no}</span>
-                      </div>
-                      <div className="flex-1 font-body text-sm text-white/90 leading-relaxed whitespace-pre-wrap">
-                        {soal.soal.split('\n').slice(soal.soal.startsWith("OSN") ? 1 : 0).map((line, lineIdx) => (
-                          <span key={lineIdx}>
-                            {lineIdx > 0 && <br />}
-                            {renderWithLatex(line)}
-                          </span>
-                        ))}
-                      </div>
+            {latihanOlimpiade.map((soal) => (
+              <div
+                key={soal.no}
+                className="group relative bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300"
+                style={{
+                  background: "linear-gradient(135deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.8) 100%)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)"
+                }}
+              >
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
+                />
+                <div className="relative p-5">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
+                      {soal.no}
+                    </span>
+                    {(() => {
+                      const firstNewline = soal.soal.indexOf('\n');
+                      if (firstNewline === -1) return renderWithLatex(soal.soal);
+                      const header = soal.soal.slice(0, firstNewline);
+                      const body = soal.soal.slice(firstNewline + 1);
+                      return (
+                        <>
+                          <span className="text-yellow-400 font-semibold">{header}</span>
+                          {'\n'}
+                          {renderWithLatex(body)}
+                        </>
+                      );
+                    })()}
+                  </div>
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
                     </div>
-                    {/* Pilihan Ganda */}
-                    {soal.options.length > 0 && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 ml-11">
-                        {soal.options.map((opt, j) => (
-                          <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                            {renderWithLatex(opt)}
-                          </div>
-                        ))}
+                  )}
+                  <button
+                    onClick={() => togglePembahasan(soal.no + 100)}
+                    className="flex items-center gap-2 text-xs font-semibold text-primary hover:text-primary/80 transition-colors cursor-pointer mt-3"
+                  >
+                    {openPembahasan.includes(soal.no + 100) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                    {openPembahasan.includes(soal.no + 100) ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </button>
+                  {openPembahasan.includes(soal.no + 100) && (
+                    <div className="mt-4 space-y-2.5 animate-slide-up">
+                      <div className="px-4 py-3 rounded-xl border-2 border-emerald-400/60 bg-emerald-950/40 shadow-lg shadow-emerald-900/20">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 mb-1.5">Jawaban</div>
+                        <div className="font-body text-sm text-emerald-50 font-bold">{renderWithLatex(soal.jawaban)}</div>
                       </div>
-                    )}
-                    {/* Tombol Pembahasan */}
-                    <div className="ml-11">
-                      <button
-                        onClick={() => togglePembahasan(soal.no + 100)}
-                        className={`flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-xl border transition-all duration-300 cursor-pointer ${
-                          isOpen
-                            ? "bg-emerald-500/20 border-emerald-400/50 text-emerald-300"
-                            : "bg-white/5 border-white/20 text-white/60 hover:bg-emerald-500/10 hover:border-emerald-400/40 hover:text-emerald-300"
-                        }`}
-                      >
-                        <BookOpen className="w-3.5 h-3.5" />
-                        {isOpen ? "Tutup Pembahasan" : "Lihat Pembahasan"}
-                        {isOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                      </button>
-                    </div>
-                    {/* Panel Pembahasan */}
-                    {isOpen && (
-                      <div className="mt-3 ml-11 animate-slide-up">
-                        <div className="relative rounded-xl overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 to-teal-900/20" />
-                          <div className="absolute inset-0 border border-emerald-500/30 rounded-xl" />
-                          <div className="relative px-4 py-4">
-                            <div className="flex items-center gap-2 mb-3">
-                              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                              <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">Pembahasan</span>
+                      <div className="px-4 py-3 rounded-xl border-2 border-violet-400/55 shadow-lg shadow-violet-900/20" style={{background:"linear-gradient(135deg,rgba(139,92,246,0.16) 0%,rgba(124,58,237,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-1.5">Konsep &amp; Trik</div>
+                        <div className="font-body text-xs text-violet-50/90 leading-relaxed">{renderWithLatex(soal.pembahasan.konsep)}</div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-cyan-400/55 shadow-lg shadow-cyan-900/20" style={{background:"linear-gradient(135deg,rgba(34,211,238,0.12) 0%,rgba(59,130,246,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 mb-1.5">Step by Step Penyelesaian</div>
+                        <div className="space-y-1.5">
+                          {soal.pembahasan.langkah.map((step, si) => (
+                            <div key={si} className="flex gap-2 items-start">
+                              <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-400/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center mt-0.5">{si + 1}</span>
+                              <p className="text-xs text-cyan-50/90 font-body leading-relaxed">{renderWithLatex(step)}</p>
                             </div>
-                            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-2 mb-3">
-                              <span className="text-emerald-300 text-xs font-bold">Jawaban: </span>
-                              <span
-                                className="text-emerald-200 text-xs font-body"
-                                dangerouslySetInnerHTML={{ __html: soal.pembahasan.jawaban }}
-                              />
-                            </div>
-                            <div className="flex flex-col gap-1.5">
-                              {soal.pembahasan.steps.map((step, si) => (
-                                <div key={si} className="flex items-start gap-2">
-                                  {step.label && (
-                                    <span className="text-emerald-400 text-xs font-bold shrink-0 mt-0.5 min-w-[20px]">{step.label}</span>
-                                  )}
-                                  <div className="flex-1 min-w-0">
-                                    {step.text && (
-                                      <p className="font-body text-sm text-white/80 leading-relaxed">{step.text}</p>
-                                    )}
-                                    {step.math && (
-                                      <div className="overflow-x-auto py-0.5">
-                                        <BlockMath>{step.math}</BlockMath>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
+                          ))}
                         </div>
                       </div>
-                    )}
-                  </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-amber-400/55 shadow-lg shadow-amber-900/20" style={{background:"linear-gradient(135deg,rgba(251,191,36,0.14) 0%,rgba(245,158,11,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-1.5">Tips</div>
+                        <div className="font-body text-xs text-amber-50/90 leading-relaxed">
+                          {soal.pembahasan.rumus ? renderWithLatex(soal.pembahasan.rumus) : "Kuasai konsep utama dan latih langkah penyelesaian secara berurutan. Verifikasi jawaban dengan substitusi kembali ke soal."}
+                        </div>
+                      </div>
+                      <div className="px-4 py-3 rounded-xl border-2 border-rose-400/55 shadow-lg shadow-rose-900/20" style={{background:"linear-gradient(135deg,rgba(244,63,94,0.14) 0%,rgba(236,72,153,0.10) 100%)"}}>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-rose-300 mb-1.5">Kesimpulan</div>
+                        <div className="font-body text-xs text-rose-50/90 leading-relaxed font-medium">
+                          Jadi, jawaban yang tepat adalah <span className="font-bold text-rose-200">{renderWithLatex(soal.jawaban)}</span>.
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         )}
 
