@@ -1180,6 +1180,28 @@ const latihanOlimpiade: LatihanSoal[] = [
       rumus: "$(-1)^{\\text{genap}} = 1$; $(-1)^{\\text{ganjil}} = -1$; $\\sqrt[3]{1} = 1$"
     }
   },
+  {
+    no: 19,
+    soal: "OSN Matematika 2026 Tingkat Kota\nJika\n$A = \\dfrac{1}{9+\\sqrt{73}} + \\dfrac{1}{\\sqrt{73}+\\sqrt{65}} + \\dfrac{1}{\\sqrt{65}+\\sqrt{57}} + \\dfrac{1}{\\sqrt{57}+\\sqrt{49}}$\ndan\n$B = \\dfrac{1}{81 \\times 73} + \\dfrac{1}{73 \\times 65} + \\dfrac{1}{65 \\times 57} + \\dfrac{1}{57 \\times 49}$\nmaka nilai $(A^2\\sqrt{B})^{-1}$ adalah ...",
+    options: ["A. 504", "B. $504\\sqrt{2}$", "C. 126", "D. $126\\sqrt{2}$"],
+    jawaban: "A. 504",
+    pembahasan: {
+      konsep: "Gunakan dua teknik utama: (1) Rasionalisasi penyebut bentuk $\\frac{1}{\\sqrt{a}+\\sqrt{b}}$ dengan mengalikan dengan $\\frac{\\sqrt{a}-\\sqrt{b}}{\\sqrt{a}-\\sqrt{b}}$ sehingga terjadi penjumlahan teleskopik. (2) Pecahan parsial $\\frac{1}{n(n+k)} = \\frac{1}{k}\\left(\\frac{1}{n}-\\frac{1}{n+k}\\right)$ untuk menyederhanakan B menjadi bentuk teleskopik.",
+      langkah: [
+        "**Hitung A:** Perhatikan $81, 73, 65, 57, 49$ memiliki selisih konstan $= 8$, sehingga $9=\\sqrt{81}$",
+        "Rasionalisasi: $\\frac{1}{\\sqrt{a}+\\sqrt{b}} = \\frac{\\sqrt{a}-\\sqrt{b}}{a-b}$. Karena setiap selisih $= 8$:",
+        "$\\frac{1}{9+\\sqrt{73}} = \\frac{9-\\sqrt{73}}{8}$, $\\frac{1}{\\sqrt{73}+\\sqrt{65}} = \\frac{\\sqrt{73}-\\sqrt{65}}{8}$, $\\frac{1}{\\sqrt{65}+\\sqrt{57}} = \\frac{\\sqrt{65}-\\sqrt{57}}{8}$, $\\frac{1}{\\sqrt{57}+\\sqrt{49}} = \\frac{\\sqrt{57}-7}{8}$",
+        "Jumlah teleskopik: $A = \\dfrac{(9-\\sqrt{73})+(\\sqrt{73}-\\sqrt{65})+(\\sqrt{65}-\\sqrt{57})+(\\sqrt{57}-7)}{8} = \\dfrac{9-7}{8} = \\dfrac{2}{8} = \\dfrac{1}{4}$",
+        "**Hitung B:** Gunakan pecahan parsial: $\\frac{1}{n(n+8)} = \\frac{1}{8}\\left(\\frac{1}{n}-\\frac{1}{n+8}\\right)$",
+        "$B = \\frac{1}{8}\\left[\\left(\\frac{1}{73}-\\frac{1}{81}\\right)+\\left(\\frac{1}{65}-\\frac{1}{73}\\right)+\\left(\\frac{1}{57}-\\frac{1}{65}\\right)+\\left(\\frac{1}{49}-\\frac{1}{57}\\right)\\right]$",
+        "Teleskopik: $B = \\frac{1}{8}\\left(\\frac{1}{49}-\\frac{1}{81}\\right) = \\frac{1}{8} \\cdot \\frac{81-49}{49 \\times 81} = \\frac{1}{8} \\cdot \\frac{32}{3969} = \\frac{4}{3969} = \\frac{4}{63^2}$",
+        "$\\sqrt{B} = \\dfrac{2}{63}$",
+        "**Hitung $(A^2\\sqrt{B})^{-1}$:** $A^2 = \\dfrac{1}{16}$, sehingga $A^2\\sqrt{B} = \\dfrac{1}{16} \\times \\dfrac{2}{63} = \\dfrac{2}{1008} = \\dfrac{1}{504}$",
+        "$(A^2\\sqrt{B})^{-1} = 504$"
+      ],
+      rumus: "Teleskopik: $A = \\frac{\\sqrt{a_0}-\\sqrt{a_n}}{\\Delta}$; Pecahan parsial: $\\frac{1}{n(n+k)} = \\frac{1}{k}\\left(\\frac{1}{n}-\\frac{1}{n+k}\\right)$; $63^2 = 3969$"
+    }
+  },
 ];
 
 const OlimpiadeBilanganIrasionalPage = () => {
