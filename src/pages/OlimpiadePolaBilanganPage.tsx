@@ -536,7 +536,7 @@ const Soal31SVG = () => {
 const soalSVGMap: Record<number, ReactNode> = {
   27: <Soal27SVG />,
   28: <Soal28SVG />,
-  29: <img src="/images/pola-bilangan-latdar-no29.jpg" alt="Pola segitiga" className="my-2 max-w-xs w-full rounded" />,
+  29: <img src="https://drive.google.com/thumbnail?id=1f-EBr1I4CaOwcZbixjEMgb5NxepLfmoM&sz=w800" alt="Pola segitiga" className="my-2 max-w-xs w-full rounded" />,
   30: <Soal30SVG />,
   31: <Soal31SVG />,
 };
@@ -642,7 +642,7 @@ const OlimpiadePolaBilanganPage = () => {
                           <div className="text-xs text-yellow-400 font-semibold uppercase tracking-widest mb-1">Ilustrasi Barisan</div>
                           <div className="bg-white rounded-xl p-3 shadow-lg max-w-sm w-full flex justify-center">
                             <img
-                              src={"/images/image_1777194887222.png"}
+                              src={"https://drive.google.com/thumbnail?id=1U2rSJ-1xHHlXXdJMd6_W1b2ZHCM3pudt&sz=w800"}
                               alt="Ilustrasi barisan U1, U2, U3,... dengan pola selisih"
                               className="max-w-full h-auto object-contain"
                             />
@@ -758,7 +758,7 @@ const OlimpiadePolaBilanganPage = () => {
                       <div className="my-3 flex flex-col items-center gap-1">
                         <div className="bg-white rounded-xl p-3 shadow-md max-w-sm w-full flex justify-center">
                           <img
-                            src="/images/pola-bilangan-olimp-no37.jpg"
+                            src="https://drive.google.com/thumbnail?id=1aWetDopdwKqLIFKFvnlHyHyFEAO7ZFep&sz=w800"
                             alt="Pola segilima ke-1, ke-2, ke-3, ke-4"
                             className="max-w-full h-auto object-contain"
                           />
@@ -782,7 +782,7 @@ const OlimpiadePolaBilanganPage = () => {
                   <div className="my-3 flex flex-col items-center gap-1">
                     <div className="bg-white rounded-xl p-3 shadow-md max-w-sm w-full flex justify-center">
                       <img
-                        src="/images/pola-bilangan-olimp-no1.jpg"
+                        src="https://drive.google.com/thumbnail?id=1KearxAyFrHXOqyOAT_0_TJAw-SLM46iR&sz=w800"
                         alt="Pola bulatan hitam dan putih OSN 2003"
                         className="max-w-full h-auto object-contain"
                       />
