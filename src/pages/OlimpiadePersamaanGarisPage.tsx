@@ -864,6 +864,131 @@ const GrafikSoal24 = () => (
   </svg>
 );
 
+const PrismaSegiEnamSVG = () => {
+  const sv = { strokeWidth: 1.5, fill: "none" };
+  const dsh = { strokeWidth: 1.2, fill: "none", strokeDasharray: "4 3" };
+  const vc = "#94a3b8", hc = "#475569", gc = "#fbbf24";
+  const lbl = (x:number,y:number,txt:string,fill:string,fs=10) => (
+    <text key={txt+x} x={x} y={y} fontSize={fs} fontFamily="serif" fontStyle="italic" fill={fill}>{txt}</text>
+  );
+  const ln = (x1:number,y1:number,x2:number,y2:number,st:object,c:string,k:string) => (
+    <line key={k} x1={x1} y1={y1} x2={x2} y2={y2} stroke={c} {...st}/>
+  );
+
+  // ── Coordinates (all absolute, in SVG space) ──
+  // LEFT FIGURE: base hexagon
+  // A=front-left, B=front-right, C=right, D=back-right(hidden), E=back-left(hidden), F=left
+  const LA=[54,223], LB=[118,223], LC=[150,201], LD=[134,168], LE=[70,168], LF=[38,201];
+  // Left: cutting plane (scale=2.5px/unit, AP=15,BQ=8,CR=17,DS=33,ET=40,FU=31)
+  const LP=[54,185], LQ=[118,203], LR=[150,158], LS=[134,85], LT=[70,68], LU=[38,123];
+  // Left: original full prism top (H=45u=113px above each base y)
+  const LAp=[54,110], LBp=[118,110], LCp=[150,88], LDp=[134,55], LEp=[70,55], LFp=[38,88];
+
+  // RIGHT FIGURE: same offsets +258 on x
+  const RA=[312,223], RB=[376,223], RC=[408,201], RD=[392,168], RE=[328,168], RF=[296,201];
+  const RP=[312,185], RQ=[376,203], RR=[408,158], RS=[392,85], RT=[328,68], RU=[296,123];
+
+  const lpts = (pts:number[][]) => pts.map(p=>p.join(",")).join(" ");
+
+  return (
+    <svg viewBox="0 0 500 265" className="w-full max-w-xl mx-auto my-2" style={{background:"#0f172a",borderRadius:10}}>
+
+      {/* ── LEFT: Full prism with cutting plane inside ── */}
+      {/* Bottom face: visible A-B, B-C, A-F; hidden C-D, D-E, E-F */}
+      {ln(LA[0],LA[1],LB[0],LB[1],sv,vc,"lb1")}
+      {ln(LB[0],LB[1],LC[0],LC[1],sv,vc,"lb2")}
+      {ln(LA[0],LA[1],LF[0],LF[1],sv,vc,"lb3")}
+      {ln(LC[0],LC[1],LD[0],LD[1],dsh,hc,"lb4")}
+      {ln(LD[0],LD[1],LE[0],LE[1],dsh,hc,"lb5")}
+      {ln(LE[0],LE[1],LF[0],LF[1],dsh,hc,"lb6")}
+      {/* Lateral edges to original top: B,C,F visible; A,D,E hidden */}
+      {ln(LB[0],LB[1],LBp[0],LBp[1],sv,vc,"le1")}
+      {ln(LC[0],LC[1],LCp[0],LCp[1],sv,vc,"le2")}
+      {ln(LF[0],LF[1],LFp[0],LFp[1],sv,vc,"le3")}
+      {ln(LA[0],LA[1],LAp[0],LAp[1],dsh,hc,"le4")}
+      {ln(LD[0],LD[1],LDp[0],LDp[1],dsh,hc,"le5")}
+      {ln(LE[0],LE[1],LEp[0],LEp[1],dsh,hc,"le6")}
+      {/* Original top face (all dashed — removed portion) */}
+      {ln(LAp[0],LAp[1],LBp[0],LBp[1],dsh,hc,"lt1")}
+      {ln(LBp[0],LBp[1],LCp[0],LCp[1],dsh,hc,"lt2")}
+      {ln(LCp[0],LCp[1],LDp[0],LDp[1],dsh,hc,"lt3")}
+      {ln(LDp[0],LDp[1],LEp[0],LEp[1],dsh,hc,"lt4")}
+      {ln(LEp[0],LEp[1],LFp[0],LFp[1],dsh,hc,"lt5")}
+      {ln(LFp[0],LFp[1],LAp[0],LAp[1],dsh,hc,"lt6")}
+      {/* Cutting plane PQRSTU — gold fill */}
+      <polygon points={lpts([LP,LQ,LR,LS,LT,LU])} fill="rgba(251,191,36,0.20)" stroke={gc} strokeWidth="1.8"/>
+      {/* Height indicators AP, BQ */}
+      {ln(LA[0]-10,LA[1],LA[0]-10,LP[1],{...dsh,strokeDasharray:"3 2"},"#60a5fa","lhA")}
+      <text x={LA[0]-22} y={(LA[1]+LP[1])/2+4} fontSize="9" fontFamily="serif" fontStyle="italic" fill="#60a5fa">a</text>
+      {ln(LB[0]+10,LB[1],LB[0]+10,LQ[1],{...dsh,strokeDasharray:"3 2"},"#60a5fa","lhB")}
+      <text x={LB[0]+13} y={(LB[1]+LQ[1])/2+4} fontSize="9" fontFamily="serif" fontStyle="italic" fill="#60a5fa">b</text>
+      {ln(LC[0]+10,LC[1],LC[0]+10,LR[1],{...dsh,strokeDasharray:"3 2"},"#60a5fa","lhC")}
+      <text x={LC[0]+13} y={(LC[1]+LR[1])/2+4} fontSize="9" fontFamily="serif" fontStyle="italic" fill="#60a5fa">c</text>
+      {/* Base labels */}
+      {lbl(LA[0]-12,LA[1]+12,"A","#e2e8f0")}
+      {lbl(LB[0]+3,LB[1]+12,"B","#e2e8f0")}
+      {lbl(LC[0]+4,LC[1]+5,"C","#e2e8f0")}
+      {lbl(LD[0]+4,LD[1]+4,"D",hc)}
+      {lbl(LE[0]-14,LE[1]+4,"E",hc)}
+      {lbl(LF[0]-14,LF[1]+4,"F","#e2e8f0")}
+      {/* Original top labels with prime */}
+      {["P","Q","R","S","T","U"].map((v,i)=>{
+        const pts=[LAp,LBp,LCp,LDp,LEp,LFp][i];
+        const ox=i<3?4:-15, oy=4;
+        return (
+          <text key={"lop"+v} x={pts[0]+ox} y={pts[1]+oy} fontSize="9" fontFamily="serif" fontStyle="italic" fill={hc}>
+            {v}<tspan fontSize="6" dy="-4">′</tspan>
+          </text>
+        );
+      })}
+      {/* Cutting-plane labels */}
+      {[LP,LQ,LR,LS,LT,LU].map((p,i)=>{
+        const v=["P","Q","R","S","T","U"][i];
+        const ox=i===0||i>=4?-14:i===3?4:4, oy=-4;
+        return lbl(p[0]+ox,p[1]+oy,v,gc);
+      })}
+
+      {/* Divider */}
+      <line x1="242" y1="30" x2="242" y2="245" stroke="#1e293b" strokeWidth="2"/>
+
+      {/* ── RIGHT: Lower solid ABCDEF.PQRSTU ── */}
+      {/* Bottom face */}
+      {ln(RA[0],RA[1],RB[0],RB[1],sv,vc,"rb1")}
+      {ln(RB[0],RB[1],RC[0],RC[1],sv,vc,"rb2")}
+      {ln(RA[0],RA[1],RF[0],RF[1],sv,vc,"rb3")}
+      {ln(RC[0],RC[1],RD[0],RD[1],dsh,hc,"rb4")}
+      {ln(RD[0],RD[1],RE[0],RE[1],dsh,hc,"rb5")}
+      {ln(RE[0],RE[1],RF[0],RF[1],dsh,hc,"rb6")}
+      {/* Lateral edges: A-P, B-Q, C-R, F-U visible; D-S, E-T hidden */}
+      {ln(RA[0],RA[1],RP[0],RP[1],sv,vc,"re1")}
+      {ln(RB[0],RB[1],RQ[0],RQ[1],sv,vc,"re2")}
+      {ln(RC[0],RC[1],RR[0],RR[1],sv,vc,"re3")}
+      {ln(RF[0],RF[1],RU[0],RU[1],sv,vc,"re4")}
+      {ln(RD[0],RD[1],RS[0],RS[1],dsh,hc,"re5")}
+      {ln(RE[0],RE[1],RT[0],RT[1],dsh,hc,"re6")}
+      {/* Top face PQRSTU — gold */}
+      <polygon points={lpts([RP,RQ,RR,RS,RT,RU])} fill="rgba(251,191,36,0.28)" stroke={gc} strokeWidth="1.9"/>
+      {/* Base labels */}
+      {lbl(RA[0]-12,RA[1]+12,"A","#e2e8f0")}
+      {lbl(RB[0]+3,RB[1]+12,"B","#e2e8f0")}
+      {lbl(RC[0]+4,RC[1]+5,"C","#e2e8f0")}
+      {lbl(RD[0]+4,RD[1]+4,"D",hc)}
+      {lbl(RE[0]-14,RE[1]+4,"E",hc)}
+      {lbl(RF[0]-14,RF[1]+4,"F","#e2e8f0")}
+      {/* Top face labels */}
+      {[RP,RQ,RR,RS,RT,RU].map((p,i)=>{
+        const v=["P","Q","R","S","T","U"][i];
+        const ox=i===0||i>=4?-14:4, oy=-4;
+        return lbl(p[0]+ox,p[1]+oy,v,gc);
+      })}
+
+      {/* Captions */}
+      <text x="121" y="258" fontSize="8.5" fill="#475569" fontFamily="sans-serif" textAnchor="middle">Prisma penuh + bidang potong</text>
+      <text x="355" y="258" fontSize="8.5" fill="#475569" fontFamily="sans-serif" textAnchor="middle">Bangun ABCDEF.PQRSTU</text>
+    </svg>
+  );
+};
+
 const soalSvgMap: Record<string, JSX.Element> = {
   SOAL3: <GrafikSoal3 />,
   SOAL4: <GrafikSoal4 />,
@@ -874,6 +999,7 @@ const soalSvgMap: Record<string, JSX.Element> = {
   SOAL22: <GrafikSoal22 />,
   SOAL23: <GrafikSoal23 />,
   SOAL24: <GrafikSoal24 />,
+  PRISMA_SEGI_ENAM: <PrismaSegiEnamSVG />,
 };
 
 const latihanDasar = [
