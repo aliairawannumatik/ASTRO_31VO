@@ -27,10 +27,10 @@ const materiSection = {
 Misal himpunan A = {1, 2, 4} dan himpunan B = {(1, 1), (1, 2), (1, 4), (2, 2), (2, 4), (4, 4)} mempunyai relasi bahwa himpunan A merupakan faktor dari himpunan B. Relasi himpunan A dan himpunan B dapat dinyatakan dalam tiga cara yaitu Diagram Panah, Pasangan Berurutan dan Diagram Kartesius.
 
 1. Diagram panah
-[IMAGE:/images/relasi-diagram-panah.png]
+[IMAGE:https://drive.google.com/thumbnail?id=1Y-yZAbq_xIkLbcPWkB0FZpNkDaSTovSp&sz=w800]
 2. Himpunan pasangan terurut: {(1, 2), (1, 3), (1, 4), (2, 2), (2, 4), (4, 4)}
 3. Koordinat Kartesius
-[IMAGE:/images/relasi-diagram-kartesius.png]`
+[IMAGE:https://drive.google.com/thumbnail?id=1PbZEtxhMoQidTbTFEsNeMcDTD1-YfONb&sz=w800]`
     },
     {
       heading: "B. Domain, Kodomain, Range",
@@ -41,7 +41,7 @@ Misal himpunan A = {1, 2, 4} dan himpunan B = {(1, 1), (1, 2), (1, 4), (2, 2), (
 3. Range adalah daerah hasil, atau himpunan semua anggota himpunan B yang memiliki pasangan anggota himpunan A.
 
 Contoh:
-[IMAGE:/images/relasi-domain-kodomain-range.png]
+[IMAGE:https://drive.google.com/thumbnail?id=1Z2TXwogxkXGzotL83KVPwia4UJEsdtB6&sz=w800]
 Tentukan Domain, Kodomain dan Range pada diagram panah berikut.
 - Dari diagram panah tersebut didapat domainnya adalah $D_f = \\{a, b, c, d, e\\}$.
 - Dari diagram panah tersebut didapat kodomainnya adalah $K_f = \\{1, 2, 3, 4, 5\\}$.
@@ -57,11 +57,11 @@ Syarat fungsi:
 
 Jika himpunan A adalah Domain (daerah asal) dan himpunan B adalah kodomain (daerah kawan) maka relasi himpunan A ke himpunan B merupakan fungsi saat anggota domain mempunyai pasangan tepat satu pada kodomain.
 
-[IMAGE:/images/relasi-fungsi-pemetaan.png]
+[IMAGE:https://drive.google.com/thumbnail?id=117McnW2tpZK5cqY1U61VE8kAT1HeY8fa&sz=w800]
 [CENTER:Contoh fungsi]
 Relasi himpunan A ke himpunan B di atas adalah contoh relasi yang merupakan fungsi karena anggota pada domain (daerah asal) A mempunyai pasangan tepat satu di kodomain (daerah kawan) B, yaitu {(a, y), (b, z), (c, z)}. Pada diagram panah di atas kita peroleh Range (daerah hasil) yaitu {y, z}
 
-[IMAGE:/images/relasi-bukan-fungsi.png]
+[IMAGE:https://drive.google.com/thumbnail?id=1xp2mUJRi8nJ0yXPPOF4abq3sEmmaxJWz&sz=w800]
 [CENTER:Contoh bukan fungsi]
 Relasi himpunan A ke himpunan B di atas adalah contoh relasi yang bukan fungsi karena anggota pada domain A ada yang mempunyai pasangan di kodomain B lebih dari satu, yaitu {(b, x)} dan {(b, z)}.
 
