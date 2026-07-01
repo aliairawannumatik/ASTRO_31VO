@@ -836,6 +836,23 @@ const latihanOlimpiade: Soal[] = [
       rumus: "$n(P \\cup E \\cup T) = n(P)+n(E)+n(T) - n(P\\cap E) - n(P\\cap T) - n(E\\cap T) + n(P\\cap E\\cap T)$"
     }
   },
+  {
+    no: 19,
+    soal: "OSN Matematika 2026 Tingkat Kota\nHimpunan $A$ adalah himpunan yang beranggota 10 bilangan bulat yang diambil dari bilangan 1 sampai dengan 20, dengan ketentuan: rata-rata anggota himpunan $A$ adalah 10,5; terdapat 5 pasangan anggota $A$ yang masing-masing jumlahnya 21. Banyaknya himpunan $A$ yang mungkin adalah ....",
+    options: ["A. 24", "B. 186", "C. 208", "D. 252"],
+    jawaban: "D. 252",
+    pembahasan: {
+      konsep: "Bilangan bulat 1 sampai 20 membentuk tepat 10 pasangan bersum 21: (1,20), (2,19), (3,18), ..., (10,11). Karena $|A|=10$ dan rata-rata $=10{,}5$, jumlah seluruh anggota $A = 105 = 5 \\times 21$. Syarat 'tepat 5 pasangan bersum 21' dengan tepat 10 anggota berarti $A$ harus terdiri seluruhnya dari 5 pasang lengkap — tidak ada anggota sisa di luar pasangan. Banyak cara memilih 5 pasang dari 10 pasang dihitung dengan kombinasi $\\binom{10}{5}$.",
+      langkah: [
+        "Hitung jumlah semua anggota: $\\text{Jumlah} = 10 \\times 10{,}5 = 105$",
+        "Identifikasi pasangan bersum 21 dari \\{1,...,20\\}: $(1,20),(2,19),(3,18),(4,17),(5,16),(6,15),(7,14),(8,13),(9,12),(10,11)$ → ada 10 pasang",
+        "Karena $|A|=10$ dan tepat 5 pasangan anggota $A$ bersum 21: jika ada 5 pasang lengkap $= 10$ elemen, tidak ada tempat untuk elemen di luar pasangan. Jadi $A$ HARUS terdiri dari tepat 5 pasang lengkap.",
+        "Verifikasi jumlah: $5 \\times 21 = 105$ ✓",
+        "Banyak cara memilih 5 pasang dari 10 pasang yang tersedia: $\\dbinom{10}{5} = \\dfrac{10!}{5! \\cdot 5!} = 252$"
+      ],
+      rumus: "Kenali pola: bilangan 1–20 membentuk 10 pasang sempurna bersum 21. Bila $|A|=10$ dengan 5 pasangan bersum 21 dan tidak ada sisa elemen, gunakan $\\binom{10}{5} = 252$. Cek selalu: banyak elemen = 2 × banyak pasang → tidak ada elemen 'tunggal' yang tersisa."
+    }
+  },
 ];
 
 // ─── Page Component ───────────────────────────────────────────────────────────
