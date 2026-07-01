@@ -448,7 +448,14 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                                 }}>
                                 {letter}
                               </span>
-                              <span className="leading-snug">{renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>
+                              {(() => {
+                                const pipeIdx = opt.indexOf('|');
+                                const isImg = pipeIdx !== -1 && (opt[pipeIdx + 1] === '/' || opt.slice(pipeIdx + 1, pipeIdx + 5) === 'http');
+                                if (isImg) {
+                                  return <img src={opt.slice(pipeIdx + 1)} alt={`Pilihan ${letter}`} className="max-w-[140px] w-full bg-white rounded p-1" />;
+                                }
+                                return <span className="leading-snug">{renderWithLatex(opt.replace(/^[A-E]\.\s*/, ''))}</span>;
+                              })()}
                               {isRevealed && isThisCorrect && (
                                 <CheckCircle2 className="w-3.5 h-3.5 shrink-0 ml-auto text-green-400" />
                               )}

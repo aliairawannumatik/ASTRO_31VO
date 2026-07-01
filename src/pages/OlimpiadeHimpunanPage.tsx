@@ -286,9 +286,11 @@ const OlimpiadeHimpunanPage = () => {
           {soal.options.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
               {soal.options.map((opt, j) => {
-                const isImageOpt = opt.includes('|/images/');
+                const pipeIdx = opt.indexOf('|');
+                const isImageOpt = pipeIdx !== -1 && (opt[pipeIdx + 1] === '/' || opt.slice(pipeIdx + 1, pipeIdx + 5) === 'http');
                 if (isImageOpt) {
-                  const [label, imgSrc] = opt.split('|');
+                  const label = opt.slice(0, pipeIdx);
+                  const imgSrc = opt.slice(pipeIdx + 1);
                   return (
                     <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200 flex flex-col items-center gap-1">
                       <span className="font-semibold self-start">{label}</span>
