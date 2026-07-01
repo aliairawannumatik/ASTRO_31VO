@@ -207,7 +207,7 @@ const OlimpiadePage = () => {
             {[
               { v: "28", l: "Topik", color: "bg-amber-500/15 border-amber-400/30 text-amber-300" },
               { v: "4", l: "Kategori", color: "bg-blue-500/15 border-blue-400/30 text-blue-300" },
-              { v: "OSN", l: "2003–2025", color: "bg-emerald-500/15 border-emerald-400/30 text-emerald-300" },
+              { v: "OSN", l: "2003–2026", color: "bg-emerald-500/15 border-emerald-400/30 text-emerald-300" },
             ].map(({ v, l, color }) => (
               <div key={l} className={`flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full border font-body ${color}`}>
                 <span className="text-sm">{v}</span>
@@ -313,7 +313,7 @@ const OlimpiadePage = () => {
             <p className="font-body text-xs text-white/55 leading-relaxed">
               Setiap topik memuat <span className="text-amber-300 font-semibold">materi ringkas</span>,{" "}
               <span className="text-amber-300 font-semibold">latihan dasar</span>, dan{" "}
-              <span className="text-amber-300 font-semibold">soal OSN 2003–2025</span> dari tingkat kota hingga nasional.
+              <span className="text-amber-300 font-semibold">soal OSN 2003–2026</span> dari tingkat kota hingga nasional.
             </p>
           </div>
           <button
