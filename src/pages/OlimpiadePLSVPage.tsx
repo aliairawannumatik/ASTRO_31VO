@@ -1039,6 +1039,26 @@ const latihanOlimpiade: SoalItem[] = [
       ],
       rumus: "Pada buku lipat, jika total halaman = $4n$, maka jumlah 4 halaman pada satu lembar selalu konstan = $2(4n+1)$. Ini karena halaman-halaman pada satu lembar selalu berpasangan simetris."
     }
+  },
+  {
+    no: 12,
+    soal: "OSN Matematika 2026 Tingkat Kota\nBilangan bulat $x$ dan $y$ memenuhi $-6 \\leq x \\leq 4$ dan $5 \\leq y \\leq 10$. Jika $z = x^2 - y$, maka nilai $z$ yang mungkin adalah ...",
+    options: ["A. $-10 \\leq z \\leq 31$", "B. $-5 \\leq z \\leq 26$", "C. $-46 \\leq z \\leq 11$", "D. $11 \\leq z \\leq 31$"],
+    jawaban: "A. $-10 \\leq z \\leq 31$",
+    pembahasan: {
+      konsep: "Untuk mencari rentang nilai $z = x^2 - y$, tentukan nilai minimum dan maksimum secara terpisah. Nilai minimum $z$ diperoleh saat $x^2$ sekecil mungkin dan $y$ sebesar mungkin. Nilai maksimum $z$ diperoleh saat $x^2$ sebesar mungkin dan $y$ sekecil mungkin.",
+      langkah: [
+        "**Tentukan rentang $x^2$:** $x$ bilangan bulat, $-6 \\leq x \\leq 4$",
+        "$x^2_{\\min} = 0$ (saat $x = 0$); $x^2_{\\max} = 36$ (saat $x = -6$, karena $|-6| > |4|$)",
+        "**Hitung $z_{\\min}$:** $z = x^2 - y$ minimum saat $x^2$ minimum dan $y$ maksimum",
+        "$z_{\\min} = 0 - 10 = -10$ &nbsp;(dengan $x = 0$, $y = 10$)",
+        "**Hitung $z_{\\max}$:** $z = x^2 - y$ maksimum saat $x^2$ maksimum dan $y$ minimum",
+        "$z_{\\max} = 36 - 5 = 31$ &nbsp;(dengan $x = -6$, $y = 5$)",
+        "**Verifikasi:** Karena $x$ dan $y$ adalah bilangan bulat, setiap nilai $z$ dalam $[-10, 31]$ dapat dicapai → rentang nilai $z$ adalah $-10 \\leq z \\leq 31$",
+        "Jawaban: A"
+      ],
+      rumus: "$z_{\\min} = (x^2)_{\\min} - y_{\\max}$; $z_{\\max} = (x^2)_{\\max} - y_{\\min}$; perhatikan $|-6| > |4|$ sehingga $x^2_{\\max} = 36$"
+    }
   }
 ];
 
