@@ -291,4 +291,15 @@ export const lingkaranOlimpiadePembahasan: Record<number, Pembahasan> = {
       "Kuasa titik tengah tali busur: $MA \\cdot MB = MC \\cdot MD$ untuk setiap dua tali busur lewat $M$.",
     kesimpulan: "Panjang $CD = 5\\sqrt{7}$.",
   },
+  30: {
+    jawaban: "B. 14 cm",
+    konsepTrik:
+      "Gunakan sistem koordinat untuk menentukan pusat kedua lingkaran, lalu terapkan syarat singgung luar: jarak antarpusat $= r_p + r_q$. Bentuk persamaan kuadrat untuk mencari panjang sisi yang belum diketahui.",
+    stepByStep:
+      "Tempatkan persegi panjang $ABCD$: $A=(0,0)$, $B=(a,0)$, $C=(a,36)$, $D=(0,36)$ sehingga $AD = 36$ cm (sisi kiri).\nLingkaran $p$ (jari-jari 10) menyinggung $AD$ (garis $x=0$) dan $CD$ (garis $y=36$):\nPusat $p = (10,\\ 36-10) = (10,\\ 26)$\nLingkaran $q$ (jari-jari 16) menyinggung $AB$ (garis $y=0$) dan $BC$ (garis $x=a$):\nPusat $q = (a-16,\\ 16)$\nSyarat menyinggung luar — jarak antarpusat $= r_p + r_q = 26$:\n$\\sqrt{(a-16-10)^2 + (16-26)^2} = 26$\n$\\sqrt{(a-26)^2 + 100} = 26$\n$(a-26)^2 + 100 = 676$\n$(a-26)^2 = 576$\n$a - 26 = 24 \\quad$ (diambil positif karena $a > 26$)\n$a = 50$ cm $= AB$\nSelisih: $|AB - BC| = |50 - 36| = 14$ cm",
+    tips:
+      "Langkah kunci: koordinat pusat tiap lingkaran langsung diperoleh dari jari-jarinya dan sisi mana yang disinggung. Setelah itu, jarak antarpusat untuk dua lingkaran bersinggungan luar $= r_1 + r_2$. Persamaan yang terbentuk adalah kuadrat sederhana.",
+    kesimpulan:
+      "Panjang $AB = 50$ cm dan $BC = 36$ cm, sehingga selisih $AB$ dan $BC$ adalah $\\mathbf{14}$ cm.",
+  },
 };
