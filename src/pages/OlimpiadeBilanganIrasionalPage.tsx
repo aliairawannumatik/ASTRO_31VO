@@ -1202,6 +1202,34 @@ const latihanOlimpiade: LatihanSoal[] = [
       rumus: "Teleskopik: $A = \\frac{\\sqrt{a_0}-\\sqrt{a_n}}{\\Delta}$; Pecahan parsial: $\\frac{1}{n(n+k)} = \\frac{1}{k}\\left(\\frac{1}{n}-\\frac{1}{n+k}\\right)$; $63^2 = 3969$"
     }
   },
+  {
+    no: 20,
+    soal: "OSN Matematika 2026 Tingkat Kota\nJika $a, b, c, d$ adalah empat bilangan real berbeda yang memenuhi persamaan\n$(7 + 4\\sqrt{3})^{x^4-8} + (7 - 4\\sqrt{3})^{x^4-8} = 14$\nNilai dari $\\dfrac{a^2-1}{a^2+1} + \\dfrac{b^2-1}{b^2+1} + \\dfrac{c^2-1}{c^2+1} + \\dfrac{d^2-1}{d^2+1}$ adalah....",
+    options: [
+      "A. $\\dfrac{11 - 2\\sqrt{7}}{3}$",
+      "B. $\\dfrac{13 - 2\\sqrt{7}}{3}$",
+      "C. $\\dfrac{11 + 2\\sqrt{7}}{3}$",
+      "D. $\\dfrac{13 + 2\\sqrt{7}}{3}$"
+    ],
+    jawaban: "A. $\\dfrac{11 - 2\\sqrt{7}}{3}$",
+    pembahasan: {
+      konsep: "Gunakan fakta bahwa $(7+4\\sqrt{3})(7-4\\sqrt{3}) = 49-48 = 1$, sehingga $(7-4\\sqrt{3})^k = (7+4\\sqrt{3})^{-k}$. Substitusi $t = (7+4\\sqrt{3})^{x^4-8}$ mengubah persamaan menjadi $t + \\frac{1}{t} = 14$ (persamaan kuadrat sederhana). Kemudian, untuk fungsi $f(x) = \\frac{x^2-1}{x^2+1}$, perhatikan bahwa $f(x) = f(-x)$ (fungsi genap), sehingga $x$ dan $-x$ memberikan nilai yang sama.",
+      langkah: [
+        "**Sederhanakan persamaan:** Karena $(7+4\\sqrt{3})(7-4\\sqrt{3})=1$, maka $(7-4\\sqrt{3})^{x^4-8} = \\left[(7+4\\sqrt{3})^{x^4-8}\\right]^{-1}$",
+        "Misalkan $t = (7+4\\sqrt{3})^{x^4-8} > 0$, maka persamaan menjadi $t + \\dfrac{1}{t} = 14$",
+        "Kalikan dengan $t$: $t^2 - 14t + 1 = 0$, sehingga $t = \\dfrac{14 \\pm \\sqrt{196-4}}{2} = 7 \\pm 4\\sqrt{3}$",
+        "**Kasus 1:** $t = 7+4\\sqrt{3} = (7+4\\sqrt{3})^1 \\Rightarrow x^4-8 = 1 \\Rightarrow x^4 = 9$",
+        "$x^4 = 9 \\Rightarrow x^2 = 3$ (ambil positif untuk real) $\\Rightarrow x = \\pm\\sqrt{3}$. Jadi dua solusi: $a = \\sqrt{3}$, $b = -\\sqrt{3}$.",
+        "**Kasus 2:** $t = 7-4\\sqrt{3} = (7+4\\sqrt{3})^{-1} \\Rightarrow x^4-8 = -1 \\Rightarrow x^4 = 7$",
+        "$x^4 = 7 \\Rightarrow x^2 = \\sqrt{7}$ (ambil positif) $\\Rightarrow x = \\pm 7^{1/4}$. Jadi dua solusi: $c = 7^{1/4}$, $d = -7^{1/4}$.",
+        "**Hitung nilai ekspresi:** Karena $f(x) = \\frac{x^2-1}{x^2+1}$ adalah fungsi genap, $f(x) = f(-x)$.",
+        "Untuk $x = \\pm\\sqrt{3}$ ($x^2 = 3$): $\\dfrac{3-1}{3+1} = \\dfrac{2}{4} = \\dfrac{1}{2}$",
+        "Untuk $x = \\pm 7^{1/4}$ ($x^2 = \\sqrt{7}$): $\\dfrac{\\sqrt{7}-1}{\\sqrt{7}+1} = \\dfrac{(\\sqrt{7}-1)^2}{(\\sqrt{7}+1)(\\sqrt{7}-1)} = \\dfrac{7-2\\sqrt{7}+1}{7-1} = \\dfrac{8-2\\sqrt{7}}{6} = \\dfrac{4-\\sqrt{7}}{3}$",
+        "Jumlah total: $2 \\times \\dfrac{1}{2} + 2 \\times \\dfrac{4-\\sqrt{7}}{3} = 1 + \\dfrac{8-2\\sqrt{7}}{3} = \\dfrac{3+8-2\\sqrt{7}}{3} = \\dfrac{11-2\\sqrt{7}}{3}$"
+      ],
+      rumus: "$(7+4\\sqrt{3})(7-4\\sqrt{3})=1$; $t+\\frac{1}{t}=14 \\Rightarrow t=7\\pm4\\sqrt{3}$; solusi: $x=\\pm\\sqrt{3}, \\pm 7^{1/4}$; $\\frac{\\sqrt{7}-1}{\\sqrt{7}+1} = \\frac{4-\\sqrt{7}}{3}$"
+    }
+  },
 ];
 
 const OlimpiadeBilanganIrasionalPage = () => {
