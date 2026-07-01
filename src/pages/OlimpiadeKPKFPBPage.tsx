@@ -1319,6 +1319,26 @@ const latihanOlimpiade: OlimpiadeSoal[] = [
       rumus: "$16 = 2^4$, $24 = 2^3 \\times 3$ → FPB $= 2^3 = 8$; KPK $= 2^4 \\times 3 = 48$ ✓"
     }
   },
+  {
+    no: 19,
+    soal: "OSN Matematika 2026 Tingkat Kota\n$\\text{FPB}(m, n) + \\text{KPK}(m, n) = 26$. Berapa pasangan terurut $(m, n)$ yang memenuhi?",
+    options: ["A. 4", "B. 5", "C. 6", "D. 7"],
+    jawaban: "D. 7",
+    pembahasan: {
+      konsep: "Misalkan $d = \\text{FPB}(m, n)$, maka $m = da$ dan $n = db$ dengan $\\gcd(a, b) = 1$. Sehingga $\\text{KPK}(m, n) = dab$. Persamaan menjadi $d + dab = 26$, yaitu $d(1 + ab) = 26$. Faktorisasi 26 menentukan semua kasus yang mungkin.",
+      langkah: [
+        "Misalkan $\\text{FPB}(m, n) = d$, $m = da$, $n = db$ dengan $\\gcd(a, b) = 1$ dan $a, b \\geq 1$",
+        "$\\text{KPK}(m, n) = dab$, sehingga $d + dab = d(1 + ab) = 26$",
+        "Faktorisasi $26 = 1 \\times 26 = 2 \\times 13$. Kasus yang mungkin: $(d, 1+ab) \\in \\{(1,26),\\,(2,13),\\,(13,2),\\,(26,1)\\}$",
+        "**Kasus $d = 1$:** $1 + ab = 26 \\Rightarrow ab = 25$. Pasangan $(a,b)$ dengan $\\gcd(a,b)=1$: hanya $(1, 25)$ dan $(25, 1)$ karena $(5,5)$ memiliki $\\gcd = 5$. Pasangan $(m,n)$: $(1,25)$ dan $(25,1)$ → **2 pasangan**",
+        "**Kasus $d = 2$:** $1 + ab = 13 \\Rightarrow ab = 12$. Pasangan $(a,b)$ dengan $\\gcd(a,b)=1$: $(1,12),(12,1),(3,4),(4,3)$ — periksa: $\\gcd(1,12)=1$ ✓, $\\gcd(3,4)=1$ ✓. Pasangan $(m,n)$: $(2,24),(24,2),(6,8),(8,6)$ → **4 pasangan**",
+        "**Kasus $d = 13$:** $1 + ab = 2 \\Rightarrow ab = 1$. Satu-satunya pasangan: $(a,b) = (1,1)$. Pasangan $(m,n)$: $(13,13)$ → **1 pasangan**",
+        "**Kasus $d = 26$:** $1 + ab = 1 \\Rightarrow ab = 0$. Tidak valid karena $m, n$ harus bilangan bulat positif.",
+        "Total pasangan terurut: $2 + 4 + 1 = \\mathbf{7}$"
+      ],
+      rumus: "$d(1 + ab) = 26$, dengan $d = \\text{FPB}(m,n)$, $\\gcd(a,b)=1$, $26 = 2 \\times 13$; enumerate semua faktorisasi"
+    }
+  },
 ];
 
 const OlimpiadeKPKFPBPage = () => {
