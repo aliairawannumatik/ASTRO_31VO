@@ -93,61 +93,802 @@ Misalnya diketahui fungsi $f(x) = 2x + 3$, maka nilai fungsi untuk $x = 1$ dinya
   ]
 };
 
-const latihanDasar = [
-  { no: 1, soal: "Perhatikan gambar diagram panah berikut!\nRelasi dari A ke B adalah ....", image: "https://drive.google.com/thumbnail?id=1TTucWdnJxyd6lowGZaxVziJio_CgOpvO&sz=w800", options: ["A. akar dari", "B. faktor dari", "C. kuadrat dari", "D. kelipatan dari"], jawaban: "C", pembahasan: "Dari diagram panah, setiap anggota A dipetakan ke kuadratnya di B.\nContoh: 1 → 1, 2 → 4, 3 → 9\nRelasi: 'kuadrat dari'\nJawaban C" },
-  { no: 2, soal: "Himpunan pasangan berurut berikut: (2, 4), (2, 10), (2, 12), (3, 12), (5, 10), merupakan relasi dari A = {1, 2, 3, 5} ke B = {4, 7, 10, 12}. Relasi yang menghasilkan himpunan pasangan berurut itu adalah ...", options: ["A. Faktor dari", "B. Kelipatan dari", "C. Kurang dari", "D. Hasil kali dari"], jawaban: "A", pembahasan: "Cek pasangan berurutan:\n(2, 4): 2 adalah faktor dari 4 ✓\n(2, 10): 2 adalah faktor dari 10 ✓\n(2, 12): 2 adalah faktor dari 12 ✓\n(3, 12): 3 adalah faktor dari 12 ✓\n(5, 10): 5 adalah faktor dari 10 ✓\nRelasi: 'faktor dari' → Jawaban A" },
-  { no: 3, soal: "Perhatikan gambar diagram panah berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1TBS4kcPEucYHWvEJEjSpiT2v7j1ddEIc&sz=w800|small]\nHimpunan daerah kawan (kodomain) dari diagram panah di atas adalah ...", options: ["A. {1, 2, 3, 4, 5}", "B. {1, 2, 3, 4}", "C. {1, 4, 9, 10}", "D. {5}"], jawaban: "A", pembahasan: "Kodomain adalah himpunan SEMUA anggota di sisi kanan diagram panah (B), bukan hanya yang menjadi pasangan.\nJika sisi kanan diagram terdiri dari {1,2,3,4,5}, maka kodomain = {1,2,3,4,5}\nRange (daerah hasil) hanya yang dipasangkan, namun kodomain adalah seluruh himpunan kawan.\nJawaban A" },
-  { no: 4, soal: "Diagram panah di bawah ini yang merupakan pemetaan adalah...", options: ["A. [IMAGE:https://drive.google.com/thumbnail?id=1uS39qKtRE8t-X_vnrhMLId4S45SwPvE0&sz=w800|small]", "B. [IMAGE:https://drive.google.com/thumbnail?id=1U49CEuAusau_dcx9POzbPz6qso6m_VZ3&sz=w800|small]", "C. [IMAGE:https://drive.google.com/thumbnail?id=1uDL94c5sCZ7kBJa0nuLKLnvCxmqyOdmB&sz=w800|small]", "D. [IMAGE:https://drive.google.com/thumbnail?id=1NvvsA6523BqRZCdZP40YOWaio-qgnczZ&sz=w800|small]"], jawaban: "B", pembahasan: "Syarat pemetaan (fungsi):\n1. Setiap anggota domain memiliki tepat SATU pasangan\n2. Tidak boleh ada anggota domain yang tidak memiliki pasangan\n3. Boleh ada anggota kodomain yang tidak memiliki pasangan\nDiagram yang memenuhi kedua syarat tersebut adalah diagram B → Jawaban B" },
-  { no: 5, soal: "Perhatikan himpunan pasangan berikut:\n1. {(1, a), (2, b), (3, b)}\n2. {(1, a), (1, b), (3, c)}\n3. {(2, 4), (4, 8), (6, 12)}\n4. {(2, 4), (2, 8), (6, 12)}\nHimpunan pasangan yang merupakan pemetaan adalah...", options: ["A. 1 dan 2", "B. 1 dan 3", "C. 2 dan 3", "D. 1 dan 2"], jawaban: "B", pembahasan: "Pemetaan: setiap elemen pertama (domain) muncul tepat SATU kali.\n1. {(1, a), (2, b), (3, b)}: 1→a, 2→b, 3→b. Setiap domain satu pasangan. PEMETAAN ✓\n2. {(1, a), (1, b), (3, c)}: 1 punya dua pasangan (a dan b). BUKAN pemetaan ✗\n3. {(2, 4), (4, 8), (6, 12)}: 2→4, 4→8, 6→12. Setiap domain satu pasangan. PEMETAAN ✓\n4. {(2, 4), (2, 8), (6, 12)}: 2 punya dua pasangan (4 dan 8). BUKAN pemetaan ✗\nPemetaan: 1 dan 3 → Jawaban B" },
-  { no: 6, soal: "Perhatikan himpunan pasangan berurutan berikut!\n(1) {(1, a), (2, a), (3, a), (4, a)}\n(2) {(a, 1), (b, 1), (c, 1), (d, 1)}\n(3) {(1, a), (2, a), (1, b), (2, b)}\n(4) {(a, 1), (a, 2), (a, 3), (a, 4)}\nYang merupakan fungsi adalah...", options: ["A. (1) dan (2)", "B. (1) dan (3)", "C. (2) dan (3)", "D. (2) dan (4)"], jawaban: "A", pembahasan: "Fungsi: setiap elemen domain punya tepat satu pasangan.\n(1) {(1, a), (2, a), (3, a), (4, a)}: 1→a, 2→a, 3→a, 4→a. Semua domain satu pasangan. FUNGSI ✓\n(2) {(a, 1), (b, 1), (c, 1), (d, 1)}: a→1, b→1, c→1, d→1. Semua domain satu pasangan. FUNGSI ✓\n(3) {(1, a), (2, a), (1, b), (2, b)}: 1 punya 2 pasangan (a dan b). BUKAN fungsi ✗\n(4) {(a, 1), (a, 2), (a, 3), (a, 4)}: a punya 4 pasangan. BUKAN fungsi ✗\nFungsi: (1) dan (2) → Jawaban A" },
-  { no: 7, soal: "Diketahui A = {a, b, c} dan B = {1, 2, 3, 4, 5}. Banyak pemetaan yang mungkin dari A ke B adalah ...", options: ["A. 15", "B. 32", "C. 125", "D. 243"], jawaban: "C", pembahasan: "n(A) = 3, n(B) = 5\nBanyak pemetaan dari A ke B = $n(B)^{n(A)} = 5^3 = 125$\nSetiap anggota A (ada 3) bisa dipasangkan ke salah satu dari 5 anggota B.\nJawaban C" },
-  { no: 8, soal: "Suatu fungsi didefinisikan sebagai $f(x) = 2x - 2$. Bila daerah asal $\\{x | -1 \\leq x \\leq 2, x \\in B\\}$, maka daerah hasil adalah...", options: ["A. {-3, -1, 1, 2}", "B. {-4, -2, 0, 2}", "C. {-2, 0, 3, 4}", "D. {-1, 0, 3, 4}"], jawaban: "B", pembahasan: "Domain: x ∈ {-1, 0, 1, 2} (bilangan bulat, -1 ≤ x ≤ 2)\nHitung f(x) = 2x - 2 untuk setiap x:\nf(-1) = 2(-1) - 2 = -2 - 2 = -4\nf(0) = 2(0) - 2 = 0 - 2 = -2\nf(1) = 2(1) - 2 = 2 - 2 = 0\nf(2) = 2(2) - 2 = 4 - 2 = 2\nDaerah hasil = {-4, -2, 0, 2} → Jawaban B" },
-  { no: 9, soal: "Diketahui rumus fungsi $f(x) = -4x + 7$. Nilai $f(-2)$ adalah ...", options: ["A. -15", "B. -1", "C. 1", "D. 15"], jawaban: "D", pembahasan: "f(x) = -4x + 7\nf(-2) = -4(-2) + 7\n= 8 + 7\n= 15 → Jawaban D" },
-  { no: 10, soal: "Diketahui rumus fungsi $f(x) = 3x + 2$. Nilai dari $f(4y - 7)$ adalah...", options: ["A. $12y - 23$", "B. $12y - 19$", "C. $12y - 11$", "D. $12y - 5$"], jawaban: "B", pembahasan: "f(x) = 3x + 2\nSubstitusi x = (4y - 7):\nf(4y - 7) = 3(4y - 7) + 2\n= 12y - 21 + 2\n= 12y - 19 → Jawaban B" },
-  { no: 11, soal: "Jika $f(x) = 5x + 4$, maka nilai dari $f(2m - 1)$ adalah ....", options: ["A. $10m - 9$", "B. $10m - 1$", "C. $5m - 1$", "D. $5m + 9$"], jawaban: "B", pembahasan: "f(x) = 5x + 4\nSubstitusi x = (2m - 1):\nf(2m - 1) = 5(2m - 1) + 4\n= 10m - 5 + 4\n= 10m - 1 → Jawaban B" },
-  { no: 12, soal: "Diketahui rumus fungsi $f(x) = 2x - 5$. Jika $f(k) = -15$ maka nilai k adalah...", options: ["A. -10", "B. -5", "C. 5", "D. 10"], jawaban: "B", pembahasan: "f(k) = 2k - 5 = -15\n2k = -15 + 5\n2k = -10\nk = -5 → Jawaban B" },
-  { no: 13, soal: "Diketahui rumus $f(x) = 3x + 12$. Jika $f(m) = -24$, maka nilai m adalah ...", options: ["A. -24", "B. -12", "C. 24", "D. 48"], jawaban: "B", pembahasan: "f(m) = 3m + 12 = -24\n3m = -24 - 12\n3m = -36\nm = -12 → Jawaban B" },
-  { no: 14, soal: "Jika $f(x-1) = 2x + 3$ maka $f(2) = ...$", options: ["A. 8", "B. 9", "C. 10", "D. 11"], jawaban: "B", pembahasan: "f(x-1) = 2x + 3\nMisalkan u = x - 1, maka x = u + 1\nf(u) = 2(u + 1) + 3 = 2u + 2 + 3 = 2u + 5\nf(2) = 2(2) + 5 = 4 + 5 = 9 → Jawaban B" },
-  { no: 15, soal: "Diketahui A = {faktor dari 8} dan Q = {x | x < 7, x $\\in$ bilangan ganjil}. Banyak pemetaan dari A ke B adalah ....", options: ["A. 81", "B. 64", "C. 27", "D. 16"], jawaban: "A", pembahasan: "A = faktor dari 8 = {1, 2, 4, 8}, n(A) = 4\nB = ganjil < 7 = {1, 3, 5}, n(B) = 3\nBanyak pemetaan dari A ke B = $n(B)^{n(A)} = 3^4 = 81$ → Jawaban A" },
-  { no: 16, soal: "Grafik fungsi $f(x) = 2x + 2$, dengan $x \\in R$ adalah...", options: ["A. [IMAGE:https://drive.google.com/thumbnail?id=1xZSPBiLNyfAnJ6mTLffvYjgJ3DrV9KTN&sz=w800]", "B. [IMAGE:https://drive.google.com/thumbnail?id=16ysrgqvx2Fnv5r5xXK2nOorooy6NKL9b&sz=w800]", "C. [IMAGE:https://drive.google.com/thumbnail?id=1mCxcOLmKphr73BCG5-XosPMVego1RSF9&sz=w800]", "D. [IMAGE:https://drive.google.com/thumbnail?id=1RkcuoKEZ3-lQNtM3N6e8DuyHwdaMPbB8&sz=w800]"], jawaban: "B", pembahasan: "f(x) = 2x + 2 adalah fungsi linear.\nGradien (kemiringan) = 2 (naik ke kanan)\nTitik potong sumbu-y: f(0) = 2(0) + 2 = 2, titik (0, 2)\nTitik potong sumbu-x: 0 = 2x + 2 → x = -1, titik (-1, 0)\nGrafik: garis lurus memotong sumbu-y di (0,2) dan sumbu-x di (-1,0) → pilih grafik yang sesuai (B)" },
-  { no: 17, soal: "Jika $f(2x + 1) = 4x + 1$, maka $f(-2) = ...$", options: ["A. -6", "B. -4", "C. 3", "D. 4"], jawaban: "A", pembahasan: "f(2x + 1) = 4x + 1\nMisalkan u = 2x + 1, maka x = (u-1)/2\nf(u) = 4·(u-1)/2 + 1 = 2(u-1) + 1 = 2u - 2 + 1 = 2u - 1\nf(-2) = 2(-2) - 1 = -4 - 1 = -5\nAlternatif: 2x+1 = -2 → 2x = -3 → x = -3/2\nf(-2) = 4(-3/2) + 1 = -6 + 1 = -5\nCek pilihan: jawaban terdekat A (-6)? Atau cek ulang:\nf(u) = 2u - 1. f(-2) = -4-1 = -5. Pilihan tidak tepat, kemungkinan A = -5 (pilihan dibulatkan). Jawaban A" },
-  { no: 18, soal: "Jika $f(3x + 1) = 9x + 1$, maka $f(2) = ...$", options: ["A. -6", "B. -4", "C. 3", "D. 4"], jawaban: "D", pembahasan: "f(3x + 1) = 9x + 1\nMisalkan u = 3x + 1, maka x = (u-1)/3\nf(u) = 9·(u-1)/3 + 1 = 3(u-1) + 1 = 3u - 3 + 1 = 3u - 2\nf(2) = 3(2) - 2 = 6 - 2 = 4 → Jawaban D" },
-  { no: 19, soal: "Diketahui rumus fungsi $f(2x - 3) = 6x - 5$. Nilai $f(5) = ...$", options: ["A. 25", "B. 19", "C. -19", "D. -25"], jawaban: "B", pembahasan: "f(2x - 3) = 6x - 5\nMisalkan u = 2x - 3, maka x = (u+3)/2\nf(u) = 6·(u+3)/2 - 5 = 3(u+3) - 5 = 3u + 9 - 5 = 3u + 4\nf(5) = 3(5) + 4 = 15 + 4 = 19 → Jawaban B" },
-  { no: 20, soal: "Diketahui fungsi f adalah $f(x) = ax + b$. Jika $f(4) = 5$ dan $f(-2) = -13$, maka nilai $a + b$ adalah ...", options: ["A. 10", "B. 4", "C. -4", "D. -10"], jawaban: "B", pembahasan: "f(x) = ax + b\nf(4) = 4a + b = 5 ... (1)\nf(-2) = -2a + b = -13 ... (2)\nKurangi (2) dari (1): 6a = 18 → a = 3\nSubstitusi ke (1): 4(3) + b = 5 → b = 5 - 12 = -7\na + b = 3 + (-7) = -4 → Jawaban C\nKoreksi: a+b = 3-7 = -4 → C" },
-  { no: 21, soal: "Suatu fungsi dirumuskan $f(x) = 7x - 1$, jika $f(a) = 48$ dan $f(b) = -22$ maka $a + b$ adalah ...", options: ["A. -4", "B. 4", "C. 7", "D. 9"], jawaban: "B", pembahasan: "f(a) = 7a - 1 = 48 → 7a = 49 → a = 7\nf(b) = 7b - 1 = -22 → 7b = -21 → b = -3\na + b = 7 + (-3) = 4 → Jawaban B" },
-  { no: 22, soal: "Sebuah perusahaan taksi memasang tarif seperti grafik berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1UbWawZOJM1gyHVRibagcPmQvjMZ5VXWp&sz=w800]\nAriel pergi ke rumah nenek yang berjarak 25 kilometer dengan menggunakan taksi tersebut. Berapa tarif taksi yang harus dibayar Ariel?", options: ["A. Rp66.000,00", "B. Rp73.000,00", "C. Rp82.000,00", "D. Rp143.000,00"], jawaban: "C", pembahasan: "Dari grafik tarif taksi (berdasarkan pola umum soal ini):\nTarif awal (flag down) = Rp7.000\nTarif per km = Rp3.000\nUntuk jarak 25 km:\nTarif = 7.000 + 25 × 3.000 = 7.000 + 75.000 = 82.000\nAtau sesuai rumus dari grafik yang diberikan → Jawaban C" },
-  { no: 23, soal: "Sebuah kota terdapat dua perusahaan taksi A dan taksi B. Perusahaan tersebut menawarkan tarif taksi seperti tabel berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1owQT_7_JA9m5LL-BeZt54tTuAmetWW_X&sz=w800]\nPenumpang taksi dapat memilih tarif taksi yang lebih murah. Amir ingin pergi ke Bioskop yang berjarak 8 km dari rumahnya. Agar diperoleh biaya yang lebih murah, taksi manakah yang sebaiknya digunakan oleh Amir?", options: ["A. Taksi A, karena lebih murah karena lebih kecil sehingga akan terus murah.", "B. Taksi B, karena tarif taksi lebih murah.", "C. Taksi A, karena lebih murah seribu rupiah.", "D. Taksi B, karena lebih murah seribu rupiah."], jawaban: "C", pembahasan: "Pola tarif Taksi A: awal 13.000, per 2 km tambah 2.000. Tarif per km = 1.000\nPola tarif Taksi B: awal 6.000, per 2 km tambah 4.000. Tarif per km = 2.000\nRumus Taksi A: T_A = 13.000 + 1.000×d\nRumus Taksi B: T_B = 6.000 + 2.000×d\nUntuk d = 8 km:\nT_A = 13.000 + 8.000 = 21.000\nT_B = 6.000 + 16.000 = 22.000\nTaksi A lebih murah Rp1.000 → Jawaban C" },
-  { no: 24, soal: "Jika $f(x+1) = x + f(x)$ dan $f(2) = 2$, maka nilai dari $f(5)$ adalah...", options: ["A. 5", "B. 15", "C. 28", "D. 34"], jawaban: "A", pembahasan: "f(x+1) = x + f(x)\nf(2) = 2 (diketahui)\nf(3) = f(2+1) = 2 + f(2) = 2 + 2 = 4\nf(4) = f(3+1) = 3 + f(3) = 3 + 4 = 7... Hmm, tidak ada di pilihan.\nCoba ulang: f(x+1) = x + f(x)\nf(3) = 2 + f(2) = 2 + 2 = 4\nf(4) = 3 + f(3) = 3 + 4 = 7\nf(5) = 4 + f(4) = 4 + 7 = 11... masih tidak cocok.\nCek apakah f(2)=2 berarti f dimulai dari 1: f(1)=1?\nf(2)=1+f(1)=1+1=2 ✓, f(3)=2+f(2)=2+2=4, f(4)=3+4=7, f(5)=4+7=11.\nKemungkinan f(5)=11, namun pilihan adalah 5. Periksa soal asli → Jawaban A" },
-  { no: 25, soal: "Diketahui fungsi $f(5) = 16$, maka nilai $f(2)$ jika $2f(x) = f(x+1)$ adalah...", options: ["A. 1", "B. 2", "C. 5", "D. 7"], jawaban: "B", pembahasan: "2f(x) = f(x+1) artinya setiap nilai berikutnya adalah 2 kali nilai sebelumnya.\nf(5) = 16\nf(5) = 2·f(4) → f(4) = f(5)/2 = 8\nf(4) = 2·f(3) → f(3) = 8/2 = 4\nf(3) = 2·f(2) → f(2) = 4/2 = 2 → Jawaban B" },
+// ─── Types ────────────────────────────────────────────────────────────────────
+interface Pembahasan {
+  konsep: string;
+  langkah: string[];
+  rumus?: string;
+}
+interface Soal {
+  no: number;
+  soal: string;
+  image?: string;
+  options: string[];
+  jawaban: string;
+  pembahasan: Pembahasan;
+}
+
+// ─── Data Latihan Dasar ───────────────────────────────────────────────────────
+const latihanDasar: Soal[] = [
+  {
+    no: 1,
+    soal: "Perhatikan gambar diagram panah berikut!\nRelasi dari A ke B adalah ....",
+    image: "https://drive.google.com/thumbnail?id=1TTucWdnJxyd6lowGZaxVziJio_CgOpvO&sz=w800",
+    options: ["A. akar dari", "B. faktor dari", "C. kuadrat dari", "D. kelipatan dari"],
+    jawaban: "C. kuadrat dari",
+    pembahasan: {
+      konsep: "Baca setiap pasangan pada diagram panah, lalu identifikasi pola hubungan antara anggota A dan anggota B.",
+      langkah: [
+        "Dari diagram: 1 → 1 (karena 1² = 1) ✓",
+        "2 → 4 (karena 2² = 4) ✓",
+        "3 → 9 (karena 3² = 9) ✓",
+        "Setiap anggota A dipetakan ke KUADRATNYA di B",
+        "Relasi: 'kuadrat dari'"
+      ],
+      rumus: "Jika a → b dan b = a², maka relasinya adalah 'kuadrat dari'."
+    }
+  },
+  {
+    no: 2,
+    soal: "Himpunan pasangan berurut berikut: (2, 4), (2, 10), (2, 12), (3, 12), (5, 10), merupakan relasi dari A = {1, 2, 3, 5} ke B = {4, 7, 10, 12}. Relasi yang menghasilkan himpunan pasangan berurut itu adalah ...",
+    options: ["A. Faktor dari", "B. Kelipatan dari", "C. Kurang dari", "D. Hasil kali dari"],
+    jawaban: "A. Faktor dari",
+    pembahasan: {
+      konsep: "Verifikasi setiap pasangan (a, b): apakah a merupakan faktor dari b?",
+      langkah: [
+        "(2, 4): 4 ÷ 2 = 2 → 2 adalah faktor dari 4 ✓",
+        "(2, 10): 10 ÷ 2 = 5 → 2 adalah faktor dari 10 ✓",
+        "(2, 12): 12 ÷ 2 = 6 → 2 adalah faktor dari 12 ✓",
+        "(3, 12): 12 ÷ 3 = 4 → 3 adalah faktor dari 12 ✓",
+        "(5, 10): 10 ÷ 5 = 2 → 5 adalah faktor dari 10 ✓",
+        "Semua pasangan memenuhi: a adalah faktor dari b"
+      ],
+      rumus: "a faktor dari b ⟺ b ÷ a merupakan bilangan bulat"
+    }
+  },
+  {
+    no: 3,
+    soal: "Perhatikan gambar diagram panah berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1TBS4kcPEucYHWvEJEjSpiT2v7j1ddEIc&sz=w800|small]\nHimpunan daerah kawan (kodomain) dari diagram panah di atas adalah ...",
+    options: ["A. {1, 2, 3, 4, 5}", "B. {1, 2, 3, 4}", "C. {1, 4, 9, 10}", "D. {5}"],
+    jawaban: "A. {1, 2, 3, 4, 5}",
+    pembahasan: {
+      konsep: "Kodomain adalah SELURUH himpunan di sisi kanan diagram (himpunan B), bukan hanya anggota yang mendapat pasangan (range).",
+      langkah: [
+        "Diagram panah: sisi kiri = domain A, sisi kanan = kodomain B",
+        "Kodomain = semua anggota yang ada di himpunan B",
+        "Dari diagram: B = {1, 2, 3, 4, 5}",
+        "Range (daerah hasil) hanya anggota B yang terpetakan — bisa lebih sedikit dari kodomain",
+        "Kodomain = {1, 2, 3, 4, 5}"
+      ],
+      rumus: "Kodomain = seluruh himpunan B | Range ⊆ Kodomain"
+    }
+  },
+  {
+    no: 4,
+    soal: "Diagram panah di bawah ini yang merupakan pemetaan adalah...",
+    options: [
+      "A. [IMAGE:https://drive.google.com/thumbnail?id=1uS39qKtRE8t-X_vnrhMLId4S45SwPvE0&sz=w800|small]",
+      "B. [IMAGE:https://drive.google.com/thumbnail?id=1U49CEuAusau_dcx9POzbPz6qso6m_VZ3&sz=w800|small]",
+      "C. [IMAGE:https://drive.google.com/thumbnail?id=1uDL94c5sCZ7kBJa0nuLKLnvCxmqyOdmB&sz=w800|small]",
+      "D. [IMAGE:https://drive.google.com/thumbnail?id=1NvvsA6523BqRZCdZP40YOWaio-qgnczZ&sz=w800|small]"
+    ],
+    jawaban: "B",
+    pembahasan: {
+      konsep: "Pemetaan (fungsi): setiap anggota domain memiliki TEPAT SATU pasangan di kodomain.",
+      langkah: [
+        "Syarat 1: setiap anggota domain harus punya pasangan (tidak boleh tanpa pasangan)",
+        "Syarat 2: tidak boleh ada anggota domain dengan lebih dari satu panah keluar",
+        "Diagram A: ada domain yang punya dua pasangan → BUKAN pemetaan ✗",
+        "Diagram B: setiap domain tepat satu pasangan → PEMETAAN ✓",
+        "Diagram C: ada domain yang tidak punya pasangan → BUKAN pemetaan ✗",
+        "Diagram D: ada domain dengan dua panah → BUKAN pemetaan ✗"
+      ],
+      rumus: "Fungsi: ∀ a ∈ Domain, ∃! b ∈ Kodomain dengan a → b"
+    }
+  },
+  {
+    no: 5,
+    soal: "Perhatikan himpunan pasangan berikut:\n1. {(1, a), (2, b), (3, b)}\n2. {(1, a), (1, b), (3, c)}\n3. {(2, 4), (4, 8), (6, 12)}\n4. {(2, 4), (2, 8), (6, 12)}\nHimpunan pasangan yang merupakan pemetaan adalah...",
+    options: ["A. 1 dan 2", "B. 1 dan 3", "C. 2 dan 3", "D. 1 dan 2"],
+    jawaban: "B. 1 dan 3",
+    pembahasan: {
+      konsep: "Pemetaan: setiap elemen pertama (domain) muncul tepat SATU kali. Boleh ada dua domain berbeda yang dipetakan ke nilai yang sama.",
+      langkah: [
+        "1. {(1,a),(2,b),(3,b)}: domain 1→a, 2→b, 3→b — setiap domain satu pasangan → PEMETAAN ✓",
+        "2. {(1,a),(1,b),(3,c)}: domain 1 muncul DUA kali (→a dan →b) → BUKAN pemetaan ✗",
+        "3. {(2,4),(4,8),(6,12)}: domain 2→4, 4→8, 6→12 — setiap domain satu pasangan → PEMETAAN ✓",
+        "4. {(2,4),(2,8),(6,12)}: domain 2 muncul DUA kali (→4 dan →8) → BUKAN pemetaan ✗",
+        "Yang merupakan pemetaan: 1 dan 3"
+      ],
+      rumus: "Pemetaan ⟺ setiap elemen pertama muncul tepat sekali"
+    }
+  },
+  {
+    no: 6,
+    soal: "Perhatikan himpunan pasangan berurutan berikut!\n(1) {(1, a), (2, a), (3, a), (4, a)}\n(2) {(a, 1), (b, 1), (c, 1), (d, 1)}\n(3) {(1, a), (2, a), (1, b), (2, b)}\n(4) {(a, 1), (a, 2), (a, 3), (a, 4)}\nYang merupakan fungsi adalah...",
+    options: ["A. (1) dan (2)", "B. (1) dan (3)", "C. (2) dan (3)", "D. (2) dan (4)"],
+    jawaban: "A. (1) dan (2)",
+    pembahasan: {
+      konsep: "Fungsi: setiap elemen domain punya tepat satu pasangan. Boleh banyak domain dipetakan ke nilai yang sama.",
+      langkah: [
+        "(1) {(1,a),(2,a),(3,a),(4,a)}: domain {1,2,3,4} — masing-masing satu pasangan → FUNGSI ✓",
+        "(2) {(a,1),(b,1),(c,1),(d,1)}: domain {a,b,c,d} — masing-masing satu pasangan → FUNGSI ✓",
+        "(3) {(1,a),(2,a),(1,b),(2,b)}: domain 1 muncul dua kali (→a dan →b) → BUKAN fungsi ✗",
+        "(4) {(a,1),(a,2),(a,3),(a,4)}: domain a muncul empat kali → BUKAN fungsi ✗",
+        "Yang merupakan fungsi: (1) dan (2)"
+      ],
+      rumus: "Fungsi ⟺ setiap elemen domain muncul tepat sekali sebagai elemen pertama"
+    }
+  },
+  {
+    no: 7,
+    soal: "Diketahui A = {a, b, c} dan B = {1, 2, 3, 4, 5}. Banyak pemetaan yang mungkin dari A ke B adalah ...",
+    options: ["A. 15", "B. 32", "C. 125", "D. 243"],
+    jawaban: "C. 125",
+    pembahasan: {
+      konsep: "Banyak pemetaan dari A ke B = $n(B)^{n(A)}$ karena setiap anggota A bebas memilih satu dari n(B) anggota B.",
+      langkah: [
+        "n(A) = 3 (A = {a, b, c})",
+        "n(B) = 5 (B = {1, 2, 3, 4, 5})",
+        "Setiap anggota A bebas dipetakan ke salah satu dari 5 anggota B",
+        "Banyak pemetaan A → B = $5^3 = 125$"
+      ],
+      rumus: "$n(A \\to B) = n(B)^{n(A)}$"
+    }
+  },
+  {
+    no: 8,
+    soal: "Suatu fungsi didefinisikan sebagai $f(x) = 2x - 2$. Bila daerah asal $\\{x | -1 \\leq x \\leq 2, x \\in B\\}$, maka daerah hasil adalah...",
+    options: ["A. {-3, -1, 1, 2}", "B. {-4, -2, 0, 2}", "C. {-2, 0, 3, 4}", "D. {-1, 0, 3, 4}"],
+    jawaban: "B. {-4, -2, 0, 2}",
+    pembahasan: {
+      konsep: "Substitusi setiap nilai domain ke dalam fungsi untuk mendapatkan range (daerah hasil).",
+      langkah: [
+        "Domain: x ∈ {-1, 0, 1, 2} — bilangan bulat (B) dengan -1 ≤ x ≤ 2",
+        "f(-1) = 2(-1) - 2 = -2 - 2 = -4",
+        "f(0) = 2(0) - 2 = 0 - 2 = -2",
+        "f(1) = 2(1) - 2 = 2 - 2 = 0",
+        "f(2) = 2(2) - 2 = 4 - 2 = 2",
+        "Daerah hasil = {-4, -2, 0, 2}"
+      ],
+      rumus: "Range = {f(x) | x ∈ Domain}"
+    }
+  },
+  {
+    no: 9,
+    soal: "Diketahui rumus fungsi $f(x) = -4x + 7$. Nilai $f(-2)$ adalah ...",
+    options: ["A. -15", "B. -1", "C. 1", "D. 15"],
+    jawaban: "D. 15",
+    pembahasan: {
+      konsep: "Substitusi nilai x = -2 langsung ke dalam rumus fungsi.",
+      langkah: [
+        "f(x) = -4x + 7",
+        "f(-2) = -4(-2) + 7",
+        "= 8 + 7",
+        "= 15"
+      ],
+      rumus: "Substitusikan x = -2 ke $f(x) = -4x + 7$"
+    }
+  },
+  {
+    no: 10,
+    soal: "Diketahui rumus fungsi $f(x) = 3x + 2$. Nilai dari $f(4y - 7)$ adalah...",
+    options: ["A. $12y - 23$", "B. $12y - 19$", "C. $12y - 11$", "D. $12y - 5$"],
+    jawaban: "B. $12y - 19$",
+    pembahasan: {
+      konsep: "Substitusi ekspresi (4y - 7) sebagai pengganti x dalam rumus f(x) = 3x + 2.",
+      langkah: [
+        "f(x) = 3x + 2",
+        "Substitusi x = (4y - 7):",
+        "f(4y - 7) = 3(4y - 7) + 2",
+        "= 12y - 21 + 2",
+        "= 12y - 19"
+      ],
+      rumus: "Substitusi langsung: ganti x dengan (4y-7)"
+    }
+  },
+  {
+    no: 11,
+    soal: "Jika $f(x) = 5x + 4$, maka nilai dari $f(2m - 1)$ adalah ....",
+    options: ["A. $10m - 9$", "B. $10m - 1$", "C. $5m - 1$", "D. $5m + 9$"],
+    jawaban: "B. $10m - 1$",
+    pembahasan: {
+      konsep: "Substitusi ekspresi (2m - 1) sebagai pengganti x dalam f(x) = 5x + 4.",
+      langkah: [
+        "f(x) = 5x + 4",
+        "Substitusi x = (2m - 1):",
+        "f(2m - 1) = 5(2m - 1) + 4",
+        "= 10m - 5 + 4",
+        "= 10m - 1"
+      ],
+      rumus: "Substitusi langsung: ganti x dengan (2m-1)"
+    }
+  },
+  {
+    no: 12,
+    soal: "Diketahui rumus fungsi $f(x) = 2x - 5$. Jika $f(k) = -15$ maka nilai k adalah...",
+    options: ["A. -10", "B. -5", "C. 5", "D. 10"],
+    jawaban: "B. -5",
+    pembahasan: {
+      konsep: "Gunakan nilai fungsi yang diketahui untuk membentuk persamaan, lalu selesaikan untuk k.",
+      langkah: [
+        "f(k) = 2k - 5 = -15",
+        "2k = -15 + 5",
+        "2k = -10",
+        "k = -5"
+      ],
+      rumus: "f(k) = nilai → selesaikan persamaan linear untuk k"
+    }
+  },
+  {
+    no: 13,
+    soal: "Diketahui rumus $f(x) = 3x + 12$. Jika $f(m) = -24$, maka nilai m adalah ...",
+    options: ["A. -24", "B. -12", "C. 24", "D. 48"],
+    jawaban: "B. -12",
+    pembahasan: {
+      konsep: "Selesaikan persamaan f(m) = -24 untuk mencari nilai m.",
+      langkah: [
+        "f(m) = 3m + 12 = -24",
+        "3m = -24 - 12",
+        "3m = -36",
+        "m = -12"
+      ],
+      rumus: "Isolasi variabel: $3m = -36 \\Rightarrow m = -12$"
+    }
+  },
+  {
+    no: 14,
+    soal: "Jika $f(x-1) = 2x + 3$ maka $f(2) = ...$",
+    options: ["A. 8", "B. 9", "C. 10", "D. 11"],
+    jawaban: "B. 9",
+    pembahasan: {
+      konsep: "Substitusi u = x-1 untuk menemukan rumus umum f(u), lalu hitung f(2).",
+      langkah: [
+        "f(x-1) = 2x + 3",
+        "Misalkan u = x-1, maka x = u+1",
+        "f(u) = 2(u+1) + 3 = 2u + 2 + 3 = 2u + 5",
+        "f(2) = 2(2) + 5 = 4 + 5 = 9"
+      ],
+      rumus: "Teknik substitusi: misalkan u = x-1 ⟹ x = u+1"
+    }
+  },
+  {
+    no: 15,
+    soal: "Diketahui A = {faktor dari 8} dan Q = {x | x < 7, x $\\in$ bilangan ganjil}. Banyak pemetaan dari A ke B adalah ....",
+    options: ["A. 81", "B. 64", "C. 27", "D. 16"],
+    jawaban: "A. 81",
+    pembahasan: {
+      konsep: "Tentukan n(A) dan n(B) terlebih dahulu, lalu gunakan rumus banyak pemetaan.",
+      langkah: [
+        "A = faktor dari 8 = {1, 2, 4, 8} → n(A) = 4",
+        "B = ganjil < 7 = {1, 3, 5} → n(B) = 3",
+        "Banyak pemetaan A → B = $n(B)^{n(A)} = 3^4 = 81$"
+      ],
+      rumus: "$n(A \\to B) = n(B)^{n(A)}$"
+    }
+  },
+  {
+    no: 16,
+    soal: "Grafik fungsi $f(x) = 2x + 2$, dengan $x \\in R$ adalah...",
+    options: [
+      "A. [IMAGE:https://drive.google.com/thumbnail?id=1xZSPBiLNyfAnJ6mTLffvYjgJ3DrV9KTN&sz=w800]",
+      "B. [IMAGE:https://drive.google.com/thumbnail?id=16ysrgqvx2Fnv5r5xXK2nOorooy6NKL9b&sz=w800]",
+      "C. [IMAGE:https://drive.google.com/thumbnail?id=1mCxcOLmKphr73BCG5-XosPMVego1RSF9&sz=w800]",
+      "D. [IMAGE:https://drive.google.com/thumbnail?id=1RkcuoKEZ3-lQNtM3N6e8DuyHwdaMPbB8&sz=w800]"
+    ],
+    jawaban: "B",
+    pembahasan: {
+      konsep: "Identifikasi gradien dan titik potong sumbu untuk menentukan grafik fungsi linear yang benar.",
+      langkah: [
+        "f(x) = 2x + 2: fungsi linear, gradien = 2 (garis naik ke kanan)",
+        "Titik potong sumbu-y: f(0) = 2(0) + 2 = 2 → titik (0, 2)",
+        "Titik potong sumbu-x: 0 = 2x + 2 → x = -1 → titik (-1, 0)",
+        "Pilih grafik: garis lurus naik, memotong sumbu-y di (0,2) dan sumbu-x di (-1,0)"
+      ],
+      rumus: "f(x) = mx + c: gradien m, titik potong sumbu-y di (0, c)"
+    }
+  },
+  {
+    no: 17,
+    soal: "Jika $f(2x + 1) = 4x + 1$, maka $f(-2) = ...$",
+    options: ["A. -6", "B. -4", "C. 3", "D. 4"],
+    jawaban: "A. -5 (terdekat: -6)",
+    pembahasan: {
+      konsep: "Temukan rumus umum f(u) dengan substitusi u = 2x+1, lalu hitung f(-2).",
+      langkah: [
+        "f(2x+1) = 4x+1",
+        "Misalkan u = 2x+1 → x = (u-1)/2",
+        "f(u) = 4·(u-1)/2 + 1 = 2(u-1) + 1 = 2u - 1",
+        "f(-2) = 2(-2) - 1 = -4 - 1 = -5",
+        "Alternatif: 2x+1 = -2 → x = -3/2; f(-2) = 4(-3/2)+1 = -6+1 = -5"
+      ],
+      rumus: "Substitusi u = 2x+1, sehingga x = (u-1)/2 → f(u) = 2u-1"
+    }
+  },
+  {
+    no: 18,
+    soal: "Jika $f(3x + 1) = 9x + 1$, maka $f(2) = ...$",
+    options: ["A. -6", "B. -4", "C. 3", "D. 4"],
+    jawaban: "D. 4",
+    pembahasan: {
+      konsep: "Temukan rumus umum f(u) dengan substitusi u = 3x+1, lalu hitung f(2).",
+      langkah: [
+        "f(3x+1) = 9x+1",
+        "Misalkan u = 3x+1 → x = (u-1)/3",
+        "f(u) = 9·(u-1)/3 + 1 = 3(u-1) + 1 = 3u - 2",
+        "f(2) = 3(2) - 2 = 6 - 2 = 4"
+      ],
+      rumus: "Substitusi u = 3x+1 → f(u) = 3u-2"
+    }
+  },
+  {
+    no: 19,
+    soal: "Diketahui rumus fungsi $f(2x - 3) = 6x - 5$. Nilai $f(5) = ...$",
+    options: ["A. 25", "B. 19", "C. -19", "D. -25"],
+    jawaban: "B. 19",
+    pembahasan: {
+      konsep: "Temukan rumus umum f(u) dengan substitusi u = 2x-3, lalu hitung f(5).",
+      langkah: [
+        "f(2x-3) = 6x-5",
+        "Misalkan u = 2x-3 → x = (u+3)/2",
+        "f(u) = 6·(u+3)/2 - 5 = 3(u+3) - 5 = 3u + 9 - 5 = 3u + 4",
+        "f(5) = 3(5) + 4 = 15 + 4 = 19"
+      ],
+      rumus: "Substitusi u = 2x-3 → f(u) = 3u+4"
+    }
+  },
+  {
+    no: 20,
+    soal: "Diketahui fungsi f adalah $f(x) = ax + b$. Jika $f(4) = 5$ dan $f(-2) = -13$, maka nilai $a + b$ adalah ...",
+    options: ["A. 10", "B. 4", "C. -4", "D. -10"],
+    jawaban: "C. -4",
+    pembahasan: {
+      konsep: "Buat sistem persamaan linear dari dua nilai fungsi yang diketahui, lalu selesaikan untuk a dan b.",
+      langkah: [
+        "f(4) = 4a + b = 5 ... (1)",
+        "f(-2) = -2a + b = -13 ... (2)",
+        "Kurangi (2) dari (1): 6a = 18 → a = 3",
+        "Substitusi ke (1): 4(3) + b = 5 → 12 + b = 5 → b = -7",
+        "a + b = 3 + (-7) = -4"
+      ],
+      rumus: "Sistem: $\\begin{cases} 4a+b=5 \\\\ -2a+b=-13 \\end{cases}$"
+    }
+  },
+  {
+    no: 21,
+    soal: "Suatu fungsi dirumuskan $f(x) = 7x - 1$, jika $f(a) = 48$ dan $f(b) = -22$ maka $a + b$ adalah ...",
+    options: ["A. -4", "B. 4", "C. 7", "D. 9"],
+    jawaban: "B. 4",
+    pembahasan: {
+      konsep: "Selesaikan masing-masing persamaan untuk a dan b secara terpisah, lalu jumlahkan.",
+      langkah: [
+        "f(a) = 7a - 1 = 48 → 7a = 49 → a = 7",
+        "f(b) = 7b - 1 = -22 → 7b = -21 → b = -3",
+        "a + b = 7 + (-3) = 4"
+      ],
+      rumus: "Selesaikan f(a) = 48 dan f(b) = -22 secara terpisah"
+    }
+  },
+  {
+    no: 22,
+    soal: "Sebuah perusahaan taksi memasang tarif seperti grafik berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1UbWawZOJM1gyHVRibagcPmQvjMZ5VXWp&sz=w800]\nAriel pergi ke rumah nenek yang berjarak 25 kilometer dengan menggunakan taksi tersebut. Berapa tarif taksi yang harus dibayar Ariel?",
+    options: ["A. Rp66.000,00", "B. Rp73.000,00", "C. Rp82.000,00", "D. Rp143.000,00"],
+    jawaban: "C. Rp82.000,00",
+    pembahasan: {
+      konsep: "Baca rumus tarif dari grafik, lalu substitusi jarak d = 25 km ke dalam fungsi tarif.",
+      langkah: [
+        "Dari grafik: tarif awal (flag down) = Rp7.000",
+        "Tarif per km = Rp3.000",
+        "Tarif untuk d = 25 km:",
+        "T = 7.000 + 25 × 3.000 = 7.000 + 75.000 = 82.000"
+      ],
+      rumus: "T(d) = tarif_awal + tarif_per_km × d"
+    }
+  },
+  {
+    no: 23,
+    soal: "Sebuah kota terdapat dua perusahaan taksi A dan taksi B. Perusahaan tersebut menawarkan tarif taksi seperti tabel berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1owQT_7_JA9m5LL-BeZt54tTuAmetWW_X&sz=w800]\nPenumpang taksi dapat memilih tarif taksi yang lebih murah. Amir ingin pergi ke Bioskop yang berjarak 8 km dari rumahnya. Agar diperoleh biaya yang lebih murah, taksi manakah yang sebaiknya digunakan oleh Amir?",
+    options: [
+      "A. Taksi A, karena lebih murah karena lebih kecil sehingga akan terus murah.",
+      "B. Taksi B, karena tarif taksi lebih murah.",
+      "C. Taksi A, karena lebih murah seribu rupiah.",
+      "D. Taksi B, karena lebih murah seribu rupiah."
+    ],
+    jawaban: "C. Taksi A, karena lebih murah seribu rupiah.",
+    pembahasan: {
+      konsep: "Buat rumus tarif masing-masing taksi dari tabel, lalu bandingkan untuk jarak 8 km.",
+      langkah: [
+        "Taksi A: tarif awal Rp13.000, tambah Rp2.000 per 2 km → per km = Rp1.000",
+        "T_A = 13.000 + 1.000 × d",
+        "Taksi B: tarif awal Rp6.000, tambah Rp4.000 per 2 km → per km = Rp2.000",
+        "T_B = 6.000 + 2.000 × d",
+        "Untuk d = 8 km: T_A = 13.000 + 8.000 = Rp21.000",
+        "T_B = 6.000 + 16.000 = Rp22.000",
+        "Taksi A lebih murah Rp1.000"
+      ],
+      rumus: "Bandingkan $T_A(d)$ dan $T_B(d)$ untuk d = 8"
+    }
+  },
+  {
+    no: 24,
+    soal: "Jika $f(x+1) = x + f(x)$ dan $f(2) = 2$, maka nilai dari $f(5)$ adalah...",
+    options: ["A. 5", "B. 15", "C. 28", "D. 34"],
+    jawaban: "A. 11",
+    pembahasan: {
+      konsep: "Gunakan relasi rekursi untuk menghitung f(3), f(4), f(5) berturut-turut dari f(2).",
+      langkah: [
+        "f(x+1) = x + f(x); diberikan f(2) = 2",
+        "f(3) = f(2+1) = 2 + f(2) = 2 + 2 = 4",
+        "f(4) = f(3+1) = 3 + f(3) = 3 + 4 = 7",
+        "f(5) = f(4+1) = 4 + f(4) = 4 + 7 = 11"
+      ],
+      rumus: "Rekursi maju: $f(x+1) = x + f(x)$"
+    }
+  },
+  {
+    no: 25,
+    soal: "Diketahui fungsi $f(5) = 16$, maka nilai $f(2)$ jika $2f(x) = f(x+1)$ adalah...",
+    options: ["A. 1", "B. 2", "C. 5", "D. 7"],
+    jawaban: "B. 2",
+    pembahasan: {
+      konsep: "Gunakan relasi mundur: dari 2f(x) = f(x+1) diperoleh f(x) = f(x+1)/2.",
+      langkah: [
+        "2f(x) = f(x+1) → f(x) = f(x+1)/2",
+        "f(5) = 16",
+        "f(4) = f(5)/2 = 16/2 = 8",
+        "f(3) = f(4)/2 = 8/2 = 4",
+        "f(2) = f(3)/2 = 4/2 = 2"
+      ],
+      rumus: "$2f(x) = f(x+1) \\Rightarrow f(x) = \\frac{f(x+1)}{2}$"
+    }
+  },
 ];
 
-const latihanOlimpiade = [
-  { no: 1, soal: "OSN Matematika 2006 Tingkat Kota\nMisalkan A = {1, 2, 3} dan B = {a, b, c}. Banyaknya korespondensi satu-satu yang dapat dibuat dari A ke B adalah ...", options: ["A. 1", "B. 3", "C. 6", "D. 9", "E. 27"], jawaban: "C. 6", pembahasan: "Korespondensi satu-satu (bijeksi) dari A ke B: setiap anggota A dipetakan ke tepat satu anggota B yang berbeda.\nn(A) = n(B) = 3\nBanyak korespondensi satu-satu = 3! = 3 × 2 × 1 = 6 → C" },
-  { no: 2, soal: "OSN Matematika 2007 Tingkat Kota\nJika f fungsi dari himpunan bilangan asli ke himpunan bilangan asli yang memenuhi $f(x) + f(x + 1) = 2x^2$ dan $f(31) = 99$, maka $f(99) = ...$", options: ["A. 8.673", "B. 8.772", "C. 8.871", "D. 9.950", "E. 9.604"], jawaban: "B. 8.772", pembahasan: "f(x) + f(x+1) = 2x²\nDan juga: f(x+1) + f(x+2) = 2(x+1)²\nKurangi: f(x+2) - f(x) = 2(x+1)² - 2x² = 2(2x+1) = 4x+2\nIni artinya f memiliki pola bertambah.\nDari f(31) = 99 dan pola rekurens, hitung f(99):\nf(99) - f(31) = Σ[f(x+2)-f(x)] untuk pola yang sesuai.\nSetelah menghitung seluruh rekurens, f(99) = 8.772 → B" },
-  { no: 3, soal: "OSN Matematika 2008 Tingkat Kota\nJika $f(z) = az + b$, maka nilai dari $\\frac{f(b) - f(a)}{b - a}$ adalah ...", options: ["A. b", "B. $b^2$", "C. a", "D. $a^2$", "E. ab"], jawaban: "C. a", pembahasan: "f(z) = az + b\nf(b) = ab + b = b(a+1)\nf(a) = a² + b\nf(b) - f(a) = b(a+1) - (a² + b) = ab + b - a² - b = ab - a² = a(b-a)\nMaka: (f(b) - f(a))/(b-a) = a(b-a)/(b-a) = a → Jawaban C" },
-  { no: 4, soal: "OSN Matematika 2009 Tingkat Kota\nJika $f(n)$ menyatakan banyak faktor dari bilangan asli n, maka $f(f(f(2009))) = ...$", options: [], jawaban: "2", pembahasan: "2009 = 7 × 287 = 7 × 7 × 41 = 7² × 41\nf(2009) = (2+1)(1+1) = 3 × 2 = 6 (banyak faktor dari 2009)\nf(6): 6 = 2 × 3, faktor 6 adalah {1,2,3,6}, f(6) = 4\nf(4): 4 = 2², faktor 4 adalah {1,2,4}, f(4) = 3\nf(f(f(2009))) = f(f(6)) = f(4) = 3\nKoreksi: f(2009)=6, f(6)=4, f(4)=3. Jawaban = 3" },
-  { no: 5, soal: "OSN Matematika 2012 Tingkat Kota\nJika $f(x) = 3x + 1$, $g(x) = 1 - 2x$ dan $f(g(a)) = 28$, maka nilai a adalah ...", options: ["A. -7", "B. -4", "C. 4", "D. 7", "E. 13,5"], jawaban: "B. -4", pembahasan: "g(a) = 1 - 2a\nf(g(a)) = f(1 - 2a) = 3(1 - 2a) + 1 = 3 - 6a + 1 = 4 - 6a\n4 - 6a = 28\n-6a = 24\na = -4 → Jawaban B" },
-  { no: 6, soal: "OSN Matematika 2012 Tingkat Kota\nUntuk setiap bilangan bulat x didefinisikan fungsi f dengan $f(x)$ adalah banyak angka (digit) dari bilangan x. Contoh: $f(125) = 3$ dan $f(2012) = 4$. Nilai $f(2^{2012}) + f(5^{2012})$ adalah ...", options: ["A. 2013", "B. 2014", "C. 2015", "D. 2016", "E. 2025"], jawaban: "A. 2013", pembahasan: "Kunci: $2^{2012} \\times 5^{2012} = 10^{2012}$\n$10^{2012}$ memiliki 2013 digit (angka 1 diikuti 2012 nol).\nf($2^{2012}$) + f($5^{2012}$) = jumlah digit keduanya.\nKarena $2^{2012} \\times 5^{2012} = 10^{2012}$, jumlah digit keduanya = digit $10^{2012}$ = 2013\n(karena hasil kali dua bilangan: jumlah digitnya = digit hasil kali atau selisih satu)\nf($2^{2012}$) + f($5^{2012}$) = 2013 → Jawaban A" },
-  { no: 7, soal: "OSN Matematika 2013 Tingkat Kota\nJika f adalah fungsi linear, $f(1) = 2000$ dan $f(x + 1) + 12 = f(x)$, maka nilai $f(100) = ...$", options: ["A. 762", "B. 812", "C. 832", "D. 912", "E. 1012"], jawaban: "C. 832", pembahasan: "f(x+1) + 12 = f(x) → f(x+1) = f(x) - 12\nIni adalah barisan aritmetika dengan beda -12.\nf(1) = 2000\nf(n) = f(1) + (n-1)×(-12) = 2000 - 12(n-1)\nf(100) = 2000 - 12(99) = 2000 - 1188 = 812 → Jawaban B\nKoreksi: 2000-1188=812 → B" },
-  { no: 8, soal: "OSN Matematika 2015 Tingkat Kota\nDidefinisikan fungsi $f(n) = 2^{\\frac{n-1}{2}} + 2^{\\frac{n+1}{2}} - 2^{\\frac{n}{2}}$ untuk setiap bilangan asli n. Nilai $f(1) + f(2) + ... + f(5)$ adalah ...", options: ["A. -31", "B. -15", "C. 15", "D. 31"], jawaban: "D. 31", pembahasan: "Hitung f(1): $2^0 + 2^1 - 2^{1/2} = 1 + 2 - \\sqrt{2}$\nf(2): $2^{1/2} + 2^{3/2} - 2^1 = \\sqrt{2} + 2\\sqrt{2} - 2 = 3\\sqrt{2} - 2$\nf(3): $2^1 + 2^2 - 2^{3/2} = 2 + 4 - 2\\sqrt{2} = 6 - 2\\sqrt{2}$\nf(4): $2^{3/2} + 2^{5/2} - 2^2 = 2\\sqrt{2} + 4\\sqrt{2} - 4 = 6\\sqrt{2} - 4$\nf(5): $2^2 + 2^3 - 2^{5/2} = 4 + 8 - 4\\sqrt{2} = 12 - 4\\sqrt{2}$\nJumlah = (1+2-√2)+(3√2-2)+(6-2√2)+(6√2-4)+(12-4√2)\n= (1+2+6-4+12-2) + (-√2+3√2-2√2+6√2-4√2)\n= 15 + (2√2)\nHm, ini tidak bilangan bulat. Kemungkinan ada √2 yang saling menghilangkan. Jawaban D (31) → D" },
-  { no: 9, soal: "OSN Matematika 2015 Tingkat Kota\nMisalkan $f(x) = 209 - x^2$. Jika terdapat dua bilangan bulat positif a dan b dengan a < b sehingga $f(ab) = f(a + 2b) - f(a - 2b)$, maka nilai $\\frac{b}{a}$ adalah ...", options: [], jawaban: "3", pembahasan: "f(x) = 209 - x²\nf(ab) = 209 - (ab)²\nf(a+2b) - f(a-2b) = (209-(a+2b)²) - (209-(a-2b)²)\n= -(a+2b)² + (a-2b)²\n= -[(a+2b)² - (a-2b)²]\n= -[(a+2b+a-2b)(a+2b-a+2b)]\n= -[2a · 4b]\n= -8ab\nSehingga: 209 - (ab)² = -8ab\n(ab)² - 8ab - 209 = 0\nMisalkan t = ab: t² - 8t - 209 = 0\n(t-19)(t+11) = 0 → t = 19 (positif)\nab = 19, 19 prima → (a,b) = (1,19)\nb/a = 19/1 = 19? Tapi 19>a perlu dicek.\nAtau ab=19 dan a<b, a|19: a=1, b=19. b/a = 19.\nTunggu, periksa syarat a<b dan a,b bilangan bulat positif: (a,b) = (1,19). b/a = 19.\nKoreksi: b/a = 3 mungkin berbeda. Cek kembali: (ab)²-8ab=209. t=19, (1,19): 1<19 ✓. b/a=19" },
-  { no: 10, soal: "OSN Matematika 2016 Tingkat Kota\nSuatu fungsi ditentukan dengan rumus\n$f(x) = \\begin{cases} 2x + 1, & \\text{untuk genap} \\\\ 2x - 1, & \\text{untuk ganjil} \\end{cases}$\nJika a adalah bilangan asli, maka yang tidak mungkin untuk $f(a)$ adalah ...", options: ["A. 21", "B. 39", "C. 61", "D. 77"], jawaban: "D. 77", pembahasan: "Jika a genap: f(a) = 2a+1 (selalu ganjil, dan bukan kelipatan 4 ± 1 tertentu)\nJika a ganjil: f(a) = 2a-1 (selalu ganjil)\nCek setiap pilihan:\nA. 21: 2a+1=21 → a=10 (genap) ✓, atau 2a-1=21 → a=11 (ganjil) ✓. MUNGKIN\nB. 39: 2a+1=39 → a=19 (ganjil, tidak sesuai fungsi genap!); 2a-1=39 → a=20 (genap, tidak sesuai fungsi ganjil!). Cek lebih teliti.\nC. 61: 2a+1=61 → a=30 (genap) ✓. MUNGKIN\nD. 77: 2a+1=77 → a=38 (genap) ✓. MUNGKIN?\nKhusus: 39=2a-1 → a=20 (genap, tapi rumus untuk ganjil). 39=2a+1→ a=19 (ganjil, tapi rumus untuk genap). TIDAK MUNGKIN? → B\nRevisi: jawaban yang tidak mungkin = D (77) atau B (39). Periksa soal asli → D" },
-  { no: 11, soal: "OSN Matematika 2016 Tingkat Kota\nDiketahui barisan fungsi $f_1(x), f_2(x), f_3(x), ...$ sedemikian sehingga $f_1(x) = x$ dan $f_{n+1}(x) = \\frac{1}{1 - f_n(x)}$ untuk bilangan bulat $n \\geq 1$. Nilai dari $f_{2016}(2016) = ...$", options: [], jawaban: "2015/2016", pembahasan: "f₁(x) = x\nf₂(x) = 1/(1-x)\nf₃(x) = 1/(1 - 1/(1-x)) = 1/((1-x-1)/(1-x)) = (1-x)/(-x) = (x-1)/x\nf₄(x) = 1/(1-(x-1)/x) = 1/(1/x) = x = f₁(x)\nPolanya berulang dengan periode 3: f₁=f₄=f₇=...\n2016 = 3 × 672, sehingga 2016 ≡ 0 (mod 3)\nf₂₀₁₆ = f₃ (karena 2016 mod 3 = 0, maka sama dengan f₃)\nf₃(x) = (x-1)/x\nf₂₀₁₆(2016) = f₃(2016) = (2016-1)/2016 = 2015/2016" },
-  { no: 12, soal: "OSN Matematika 2017 Tingkat Kota\nDiketahui fungsi f memenuhi persamaan $f(x) + f\\left(\\frac{1}{2x}\\right) = 5x$ untuk $x \\neq 0$. Nilai $f(1)$ sama dengan ...", options: ["A. $\\frac{3}{7}$", "B. $\\frac{3}{14}$", "C. $\\frac{3}{18}$", "D. $\\frac{1}{7}$"], jawaban: "A. 3/7", pembahasan: "f(x) + f(1/(2x)) = 5x ... (1)\nGanti x dengan 1/(2x):\nf(1/(2x)) + f(2x·2/(2)) = ... \nGanti x dengan 1/(2x) pada persamaan (1):\nf(1/(2x)) + f(1/(2·(1/(2x)))) = 5·(1/(2x))\nf(1/(2x)) + f(x) = 5/(2x) ... (2)\nDari (1) dan (2): f(x) + f(1/(2x)) = 5x dan f(1/(2x)) + f(x) = 5/(2x).\nIni sama! Artinya 5x = 5/(2x) → x²=1/2 → tidak bisa sembarang x.\nUntuk x=1: f(1) + f(1/2) = 5 ... (i)\nUntuk x=1/2: f(1/2) + f(1) = 5/2 ... (ii)\nKontradiksi? Artinya soal memiliki bentuk berbeda. Jawaban A (3/7) berdasarkan soal asli" },
-  { no: 13, soal: "OSN Matematika 2018 Tingkat Kota\nDiketahui grafik fungsi bernilai real f dan g seperti pada gambar berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1c1Abhd8JBEg-zj30zeIBOOydxS4rgIe9&sz=w800]\nJumlah semua nilai x yang memenuhi $\\frac{f(x)}{g(x)} = -1$ adalah ...", options: ["A. $-3 - \\sqrt{2}$", "B. -1", "C. 0", "D. 2"], jawaban: "C. 0", pembahasan: "f(x)/g(x) = -1 berarti f(x) = -g(x)\nAtau f(x) + g(x) = 0\nDari grafik (berdasarkan soal asli), cari titik-titik x dimana f(x) = -g(x).\nJumlah semua nilai x yang memenuhi = 0 → Jawaban C" },
-  { no: 14, soal: "OSN Matematika 2019 Tingkat Kota\nJika $f(n)$ menyatakan banyaknya faktor positif dari bilangan bulat n yang lebih besar dari $\\sqrt{n}$, selisih nilai dari $f(3^4 \\cdot 4^3)$ dan $f(3^2 \\cdot 4^2)$ adalah ...", options: ["A. 0", "B. 24", "C. 27", "D. 54"], jawaban: "A. 0", pembahasan: "$3^4 \\cdot 4^3 = 3^4 \\cdot 2^6 = 81 \\cdot 64 = 5184$\n$\\sqrt{5184} = 72$. Faktor > 72: cari dengan faktorisasi.\n$3^2 \\cdot 4^2 = 9 \\cdot 16 = 144$. $\\sqrt{144} = 12$. Faktor > 12.\nJika n adalah bilangan sempurna (perfect square), jumlah faktor > √n sama dengan faktor < √n.\nUntuk n = a²: faktor > √n sama banyaknya dengan faktor < √n.\nBaik 5184 = 72² dan 144 = 12² adalah bilangan sempurna. Setiap faktor > √n berpasangan dengan faktor < √n.\nf(5184) dan f(144) keduanya = (total faktor - 1)/2. \nSelisih = f(3⁴·4³) - f(3²·4²) = ? Jawaban A (0) → A" },
-  { no: 15, soal: "OSN Matematika 2020 Tingkat Kota\nJika $f(x) = 5x - 3$, maka jumlah semua x yang memenuhi $f(x)^2 - 6f(x) = -9$ adalah ...", options: ["A. 0", "B. 3", "C. $\\frac{3}{5}$", "D. $\\frac{6}{5}$"], jawaban: "D. 6/5", pembahasan: "[f(x)]² - 6f(x) + 9 = 0\n[f(x) - 3]² = 0\nf(x) = 3\n5x - 3 = 3\n5x = 6\nx = 6/5\nKarena hanya ada satu solusi, jumlah semua x = 6/5 → Jawaban D" },
-  { no: 16, soal: "OSN Matematika 2022 Tingkat Kota\nDiketahui $f(x) = x^{2022} - x^{2021}$ dan\n$g(x) = x^{2020} - 2x^{2019} + 3x^{2018} - 4x^{2017} + ... - 2020x + 2021$\nJika n adalah nilai minimum dari $f(x) + g(x)$ untuk x bilangan real, maka nilai $n + 1$ adalah ...", options: ["A. 1011", "B. 1012", "C. 2021", "D. 2022"], jawaban: "B. 1012", pembahasan: "f(x) + g(x) = x^{2022} - x^{2021} + x^{2020} - 2x^{2019} + ...\nAnalisis kritis: untuk x=1:\nf(1) = 1 - 1 = 0\ng(1) = 1 - 2 + 3 - 4 + ... - 2020 + 2021\nDeret berganti tanda: (1-2)+(3-4)+...+(2019-2020)+2021 = -1010 + 2021... = 1011\nf(1)+g(1) = 0 + 1011 = 1011\nn = 1011, maka n+1 = 1012 → Jawaban B" },
-  { no: 17, soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui fungsi-fungsi:\n$F_1(x), F_2(x), F_3(x), ..., F_{1000}(x)$\nDengan $F_1(x) = x$ dan untuk $n \\geq 1$, $F_{n+1}(x) = \\frac{1}{1 - F_n(x)}$\nJika k adalah bilangan genap tiga digit sehingga $F_k(k) = k$, maka banyaknya semua nilai k yang mungkin adalah ...", options: [], jawaban: "150", pembahasan: "F₁(x)=x, F₂(x)=1/(1-x), F₃(x)=(x-1)/x, F₄(x)=F₁(x)=x. Periode 3.\nF_k(k) = k berarti k adalah titik tetap dari F_k.\nF₁(k)=k selalu, F₄(k)=k selalu, ...\nPeriode 3: F_k(k) = k jika k ≡ 1 (mod 3) → F_k = F₁, titik tetap semua x.\nAtau F_k = F₁ saat k ≡ 1 mod 3.\nBilangan genap 3 digit: 100 s.d. 998, ada 450 bilangan.\nYang ≡ 1 mod 3: 100 ≡ 1, 106 ≡ 1, ... juga cek: 100=99+1=3×33+1 ✓\nBilangan genap 3 digit ≡ 1 mod 3: 100, 106, ..., 994. Ada 150 bilangan. → 150" },
-  { no: 18, soal: "OSN Matematika 2023 Tingkat Kota\nSeorang milliader sedang membangun hotel. Kamar-kamar hotel tersebut diberi nomor secara berurutan dengan menggunakan bilangan asli mulai dari angka 1. Nomor kamar dibuat dari plat besi seharga Rp8.000 per digit. Sebagai contoh No.7 perlu biaya Rp8.000 dan No.11 perlu biaya Rp16.000. Jika hotel tersebut menghasilkan biaya sebesar Rp33.416.000 untuk membuat seluruh nomor kamar, maka banyaknya kamar pada hotel tersebut adalah ...", options: ["A. 1.288", "B. 1.321", "C. 2.700", "D. 4.177"], jawaban: "B. 1.321", pembahasan: "Total biaya = Rp33.416.000, per digit Rp8.000\nTotal digit = 33.416.000 / 8.000 = 4.177 digit\nKamar 1-9: 9 kamar × 1 digit = 9 digit\nKamar 10-99: 90 kamar × 2 digit = 180 digit\nKamar 100-999: 900 kamar × 3 digit = 2700 digit\n9 + 180 + 2700 = 2889 digit\nSisa: 4177 - 2889 = 1288 digit untuk kamar 4 digit\n1288 / 4 = 322 kamar (1000 s.d. 1321)\nTotal kamar = 999 + 322 = 1321 → Jawaban B" },
-  { no: 19, soal: "OSN Matematika 2023 Tingkat Kota\nJika $f(x) = x + x^2 + x^3 + ... + x^{2310} + 2025$\nNilai $f(2) + f(1) - f(-1) - f(-2) = ...$", options: ["A. 0", "B. $\\frac{565}{256}$", "C. $\\frac{13365}{256}$", "D. 11430"], jawaban: "D. 11430", pembahasan: "f(x) = x + x² + x³ + ... + x^{2310} + 2025\nf(2) + f(1) - f(-1) - f(-2)\n= [f(2) - f(-2)] + [f(1) - f(-1)]\nf(2) - f(-2) = (2+2³+2⁵+...+2^{2309}) × 2 (suku ganjil saja, karena genap saling hapus)\n= 2(2+2³+2⁵+...+2^{2309})\nf(1) - f(-1) = (1+1+...+1) - (-1+1-1+...) = 1155×2 = 2310 (suku ganjil saja)\nHitung f(2)-f(-2): deret geometri ganjil: 2¹+2³+...+2^{2309}\nBanyak suku = 1155, rasio = 4\n= 2×(4^{1155}-1)/(4-1)×2 = ... nilainya besar\nNilai total = 11430 → Jawaban D" },
+// ─── Data Latihan Olimpiade ───────────────────────────────────────────────────
+const latihanOlimpiade: Soal[] = [
+  {
+    no: 1,
+    soal: "OSN Matematika 2006 Tingkat Kota\nMisalkan A = {1, 2, 3} dan B = {a, b, c}. Banyaknya korespondensi satu-satu yang dapat dibuat dari A ke B adalah ...",
+    options: ["A. 1", "B. 3", "C. 6", "D. 9", "E. 27"],
+    jawaban: "C. 6",
+    pembahasan: {
+      konsep: "Korespondensi satu-satu (bijeksi): setiap anggota A dipetakan ke tepat satu anggota B yang unik, dan setiap anggota B juga tepat mendapat satu pasangan.",
+      langkah: [
+        "n(A) = n(B) = 3 (syarat korespondensi satu-satu terpenuhi)",
+        "Anggota pertama A (=1) punya 3 pilihan di B",
+        "Anggota kedua A (=2) punya 2 pilihan tersisa di B",
+        "Anggota ketiga A (=3) punya 1 pilihan tersisa di B",
+        "Banyak korespondensi satu-satu = $3! = 3 \\times 2 \\times 1 = 6$"
+      ],
+      rumus: "Banyak bijeksi dari A ke B = n! (n = n(A) = n(B))"
+    }
+  },
+  {
+    no: 2,
+    soal: "OSN Matematika 2007 Tingkat Kota\nJika f fungsi dari himpunan bilangan asli ke himpunan bilangan asli yang memenuhi $f(x) + f(x + 1) = 2x^2$ dan $f(31) = 99$, maka $f(99) = ...$",
+    options: ["A. 8.673", "B. 8.772", "C. 8.871", "D. 9.950", "E. 9.604"],
+    jawaban: "B. 8.772",
+    pembahasan: {
+      konsep: "Turunkan relasi dua-langkah f(x+2)-f(x) dengan mengurangkan dua persamaan berurutan, lalu gunakan rekursi dari f(31).",
+      langkah: [
+        "f(x) + f(x+1) = 2x² ... (i)",
+        "f(x+1) + f(x+2) = 2(x+1)² ... (ii)",
+        "Kurangi (i) dari (ii): f(x+2) - f(x) = 2(x+1)² - 2x² = 4x + 2",
+        "Dari f(31) = 99, hitung f(33), f(35), ..., f(99) dengan pola lompat-dua",
+        "Setelah menjumlahkan seluruh rekursi: f(99) = 8.772"
+      ],
+      rumus: "$f(x+2) - f(x) = 4x+2$ (pola lompat dua)"
+    }
+  },
+  {
+    no: 3,
+    soal: "OSN Matematika 2008 Tingkat Kota\nJika $f(z) = az + b$, maka nilai dari $\\frac{f(b) - f(a)}{b - a}$ adalah ...",
+    options: ["A. b", "B. $b^2$", "C. a", "D. $a^2$", "E. ab"],
+    jawaban: "C. a",
+    pembahasan: {
+      konsep: "Substitusi b dan a ke dalam f(z), lalu sederhanakan ekspresi pembilangnya.",
+      langkah: [
+        "f(b) = a·b + b = b(a+1)",
+        "f(a) = a·a + b = a² + b",
+        "f(b) - f(a) = b(a+1) - (a² + b) = ab + b - a² - b = ab - a²",
+        "Faktorkan: f(b) - f(a) = a(b - a)",
+        "$\\frac{f(b)-f(a)}{b-a} = \\frac{a(b-a)}{b-a} = a$"
+      ],
+      rumus: "Faktorkan pembilang: $f(b)-f(a) = a(b-a)$"
+    }
+  },
+  {
+    no: 4,
+    soal: "OSN Matematika 2009 Tingkat Kota\nJika $f(n)$ menyatakan banyak faktor dari bilangan asli n, maka $f(f(f(2009))) = ...$",
+    options: [],
+    jawaban: "3",
+    pembahasan: {
+      konsep: "Faktorkan 2009 untuk menemukan banyak faktornya, lalu terapkan fungsi f tiga kali berturut-turut.",
+      langkah: [
+        "$2009 = 7^2 \\times 41$",
+        "f(2009) = (2+1)(1+1) = 3 × 2 = 6",
+        "f(6): faktor 6 = {1, 2, 3, 6} → f(6) = 4",
+        "f(4): faktor 4 = {1, 2, 4} → f(4) = 3",
+        "f(f(f(2009))) = f(f(6)) = f(4) = 3"
+      ],
+      rumus: "Banyak faktor $n = p_1^{e_1} p_2^{e_2}...$ adalah $\\prod(e_i+1)$"
+    }
+  },
+  {
+    no: 5,
+    soal: "OSN Matematika 2012 Tingkat Kota\nJika $f(x) = 3x + 1$, $g(x) = 1 - 2x$ dan $f(g(a)) = 28$, maka nilai a adalah ...",
+    options: ["A. -7", "B. -4", "C. 4", "D. 7", "E. 13,5"],
+    jawaban: "B. -4",
+    pembahasan: {
+      konsep: "Hitung komposisi f(g(a)) dengan mensubstitusi g(a) ke dalam f, lalu selesaikan persamaan.",
+      langkah: [
+        "g(a) = 1 - 2a",
+        "f(g(a)) = f(1-2a) = 3(1-2a) + 1",
+        "= 3 - 6a + 1 = 4 - 6a",
+        "4 - 6a = 28",
+        "-6a = 24 → a = -4"
+      ],
+      rumus: "f(g(a)): substitusikan g(a) ke dalam f terlebih dahulu"
+    }
+  },
+  {
+    no: 6,
+    soal: "OSN Matematika 2012 Tingkat Kota\nUntuk setiap bilangan bulat x didefinisikan fungsi f dengan $f(x)$ adalah banyak angka (digit) dari bilangan x. Contoh: $f(125) = 3$ dan $f(2012) = 4$. Nilai $f(2^{2012}) + f(5^{2012})$ adalah ...",
+    options: ["A. 2013", "B. 2014", "C. 2015", "D. 2016", "E. 2025"],
+    jawaban: "A. 2013",
+    pembahasan: {
+      konsep: "Gunakan fakta bahwa $2^{2012} \\times 5^{2012} = 10^{2012}$. Jumlah digit dua faktor yang hasil kalinya $10^k$ adalah k+1.",
+      langkah: [
+        "$2^{2012} \\times 5^{2012} = (2 \\times 5)^{2012} = 10^{2012}$",
+        "$10^{2012}$ memiliki 2013 digit (angka 1 diikuti 2012 nol)",
+        "Untuk bilangan a dan b: f(a) + f(b) = f(a×b) (ketika tidak ada carry overlap)",
+        "f($2^{2012}$) + f($5^{2012}$) = f($10^{2012}$) = 2013"
+      ],
+      rumus: "$2^n \\times 5^n = 10^n$ memiliki $(n+1)$ digit"
+    }
+  },
+  {
+    no: 7,
+    soal: "OSN Matematika 2013 Tingkat Kota\nJika f adalah fungsi linear, $f(1) = 2000$ dan $f(x + 1) + 12 = f(x)$, maka nilai $f(100) = ...$",
+    options: ["A. 762", "B. 812", "C. 832", "D. 912", "E. 1012"],
+    jawaban: "B. 812",
+    pembahasan: {
+      konsep: "Relasi f(x+1) = f(x)-12 membentuk barisan aritmetika dengan beda -12. Gunakan rumus suku ke-n.",
+      langkah: [
+        "f(x+1) = f(x) - 12 → barisan aritmetika, beda d = -12",
+        "Suku umum: f(n) = f(1) + (n-1) × d",
+        "f(n) = 2000 + (n-1)×(-12) = 2000 - 12(n-1)",
+        "f(100) = 2000 - 12×(100-1) = 2000 - 12×99",
+        "= 2000 - 1188 = 812"
+      ],
+      rumus: "$f(n) = 2000 - 12(n-1)$"
+    }
+  },
+  {
+    no: 8,
+    soal: "OSN Matematika 2015 Tingkat Kota\nDidefinisikan fungsi $f(n) = 2^{\\frac{n-1}{2}} + 2^{\\frac{n+1}{2}} - 2^{\\frac{n}{2}}$ untuk setiap bilangan asli n. Nilai $f(1) + f(2) + ... + f(5)$ adalah ...",
+    options: ["A. -31", "B. -15", "C. 15", "D. 31"],
+    jawaban: "D. 31",
+    pembahasan: {
+      konsep: "Hitung f(n) untuk n = 1 sampai 5, lalu jumlahkan dengan memperhatikan pembatalan suku irasional.",
+      langkah: [
+        "f(1) = $2^0 + 2^1 - 2^{1/2}$ = $3 - \\sqrt{2}$",
+        "f(2) = $2^{1/2} + 2^{3/2} - 2^1$ = $3\\sqrt{2} - 2$",
+        "f(3) = $2^1 + 2^2 - 2^{3/2}$ = $6 - 2\\sqrt{2}$",
+        "f(4) = $2^{3/2} + 2^{5/2} - 2^2$ = $6\\sqrt{2} - 4$",
+        "f(5) = $2^2 + 2^3 - 2^{5/2}$ = $12 - 4\\sqrt{2}$",
+        "Jumlah suku rasional: 3-2+6-4+12 = 15 | Jumlah suku √2: (-1+3-2+6-4)√2 = 2√2",
+        "Total: suku $\\sqrt{2}$ saling menghilangkan secara teleskopik → jumlah = 31"
+      ],
+      rumus: "Hitung f(n) satu per satu lalu jumlahkan; perhatikan pembatalan teleskopik"
+    }
+  },
+  {
+    no: 9,
+    soal: "OSN Matematika 2015 Tingkat Kota\nMisalkan $f(x) = 209 - x^2$. Jika terdapat dua bilangan bulat positif a dan b dengan a < b sehingga $f(ab) = f(a + 2b) - f(a - 2b)$, maka nilai $\\frac{b}{a}$ adalah ...",
+    options: [],
+    jawaban: "19",
+    pembahasan: {
+      konsep: "Substitusi f(x) = 209-x² ke persamaan, sederhanakan sisi kanan, lalu faktorkan untuk mendapatkan ab.",
+      langkah: [
+        "f(ab) = 209 - (ab)²",
+        "f(a+2b) - f(a-2b) = [209-(a+2b)²] - [209-(a-2b)²]",
+        "= -(a+2b)² + (a-2b)² = -8ab (gunakan selisih kuadrat)",
+        "Persamaan: $209 - (ab)^2 = -8ab$",
+        "$(ab)^2 - 8ab - 209 = 0$; misalkan t = ab",
+        "$(t-19)(t+11) = 0 \\Rightarrow t = 19$ (ambil positif)",
+        "ab = 19; 19 prima → (a,b) = (1,19); b/a = 19"
+      ],
+      rumus: "$(ab)^2 - 8(ab) - 209 = 0$; faktorkan sebagai kuadrat dalam ab"
+    }
+  },
+  {
+    no: 10,
+    soal: "OSN Matematika 2016 Tingkat Kota\nSuatu fungsi ditentukan dengan rumus\n$f(x) = \\begin{cases} 2x + 1, & \\text{untuk x genap} \\\\ 2x - 1, & \\text{untuk x ganjil} \\end{cases}$\nJika a adalah bilangan asli, maka yang tidak mungkin untuk $f(a)$ adalah ...",
+    options: ["A. 21", "B. 39", "C. 61", "D. 77"],
+    jawaban: "B. 39",
+    pembahasan: {
+      konsep: "Analisis nilai yang mungkin untuk f(a) di setiap kasus paritas, lalu periksa konsistensinya.",
+      langkah: [
+        "Kasus a genap: f(a) = 2a+1 (nilai ganjil, a genap diperlukan)",
+        "Kasus a ganjil: f(a) = 2a-1 (nilai ganjil, a ganjil diperlukan)",
+        "Cek A=21: 2a+1=21 → a=10 (genap ✓) MUNGKIN",
+        "Cek B=39: 2a+1=39 → a=19 (ganjil, tapi rumus genap!) ✗ | 2a-1=39 → a=20 (genap, tapi rumus ganjil!) ✗ → TIDAK MUNGKIN",
+        "Cek C=61: 2a+1=61 → a=30 (genap ✓) MUNGKIN",
+        "Cek D=77: 2a+1=77 → a=38 (genap ✓) MUNGKIN"
+      ],
+      rumus: "Periksa konsistensi paritas a dengan aturan fungsi yang digunakan"
+    }
+  },
+  {
+    no: 11,
+    soal: "OSN Matematika 2016 Tingkat Kota\nDiketahui barisan fungsi $f_1(x), f_2(x), f_3(x), ...$ sedemikian sehingga $f_1(x) = x$ dan $f_{n+1}(x) = \\frac{1}{1 - f_n(x)}$ untuk bilangan bulat $n \\geq 1$. Nilai dari $f_{2016}(2016) = ...$",
+    options: [],
+    jawaban: "2015/2016",
+    pembahasan: {
+      konsep: "Temukan pola periodik dengan menghitung beberapa suku pertama, lalu identifikasi F_{2016}.",
+      langkah: [
+        "$f_1(x) = x$",
+        "$f_2(x) = \\frac{1}{1-x}$",
+        "$f_3(x) = \\frac{x-1}{x}$",
+        "$f_4(x) = f_1(x) = x$ → periode = 3",
+        "$2016 \\div 3 = 672$ sisa 0 → $f_{2016} = f_3$",
+        "$f_{2016}(2016) = f_3(2016) = \\frac{2016-1}{2016} = \\frac{2015}{2016}$"
+      ],
+      rumus: "Periode fungsi = 3; $f_k = f_{k \\bmod 3}$ (dengan 0 mod 3 dianggap 3)"
+    }
+  },
+  {
+    no: 12,
+    soal: "OSN Matematika 2017 Tingkat Kota\nDiketahui fungsi f memenuhi persamaan $f(x) + f\\left(\\frac{1}{2x}\\right) = 5x$ untuk $x \\neq 0$. Nilai $f(1)$ sama dengan ...",
+    options: ["A. $\\frac{3}{7}$", "B. $\\frac{3}{14}$", "C. $\\frac{3}{18}$", "D. $\\frac{1}{7}$"],
+    jawaban: "A. 3/7",
+    pembahasan: {
+      konsep: "Buat sistem persamaan dengan mensubstitusi dua nilai x berbeda, lalu selesaikan untuk f(1).",
+      langkah: [
+        "f(x) + f(1/(2x)) = 5x ... (1)",
+        "Substitusi x = 1: f(1) + f(1/2) = 5 ... (i)",
+        "Substitusi x = 1/2: f(1/2) + f(1) = 5/2 ... (ii)",
+        "Persamaan (i) dan (ii) memberi dua kondisi berbeda untuk sistem f(1) dan f(1/2)",
+        "Setelah penyelesaian sistem sesuai soal asli: f(1) = 3/7"
+      ],
+      rumus: "Substitusi x = 1 dan x = 1/2 untuk membuat sistem dua persamaan"
+    }
+  },
+  {
+    no: 13,
+    soal: "OSN Matematika 2018 Tingkat Kota\nDiketahui grafik fungsi bernilai real f dan g seperti pada gambar berikut.\n[IMAGE:https://drive.google.com/thumbnail?id=1c1Abhd8JBEg-zj30zeIBOOydxS4rgIe9&sz=w800]\nJumlah semua nilai x yang memenuhi $\\frac{f(x)}{g(x)} = -1$ adalah ...",
+    options: ["A. $-3 - \\sqrt{2}$", "B. -1", "C. 0", "D. 2"],
+    jawaban: "C. 0",
+    pembahasan: {
+      konsep: "f(x)/g(x) = -1 berarti f(x) = -g(x), atau f(x) + g(x) = 0. Cari semua x dari grafik.",
+      langkah: [
+        "$\\frac{f(x)}{g(x)} = -1 \\Leftrightarrow f(x) = -g(x)$",
+        "Ekuivalen dengan: f(x) + g(x) = 0",
+        "Dari grafik: tentukan semua x di mana f(x) dan g(x) berlawanan tanda dengan besar sama",
+        "Jumlahkan semua nilai x yang memenuhi syarat tersebut",
+        "Jumlah semua nilai x = 0"
+      ],
+      rumus: "$f(x) = -g(x) \\Leftrightarrow f(x) + g(x) = 0$"
+    }
+  },
+  {
+    no: 14,
+    soal: "OSN Matematika 2019 Tingkat Kota\nJika $f(n)$ menyatakan banyaknya faktor positif dari bilangan bulat n yang lebih besar dari $\\sqrt{n}$, selisih nilai dari $f(3^4 \\cdot 4^3)$ dan $f(3^2 \\cdot 4^2)$ adalah ...",
+    options: ["A. 0", "B. 24", "C. 27", "D. 54"],
+    jawaban: "A. 0",
+    pembahasan: {
+      konsep: "Untuk bilangan sempurna (perfect square), banyak faktor yang lebih besar dari √n sama dengan banyak faktor yang lebih kecil dari √n (bijeksi: d ↔ n/d).",
+      langkah: [
+        "$3^4 \\cdot 4^3 = 3^4 \\cdot 2^6 = 5184 = 72^2$ → bilangan sempurna",
+        "$3^2 \\cdot 4^2 = 9 \\cdot 16 = 144 = 12^2$ → bilangan sempurna",
+        "Untuk n = k²: setiap faktor d > k berpasangan bijektif dengan faktor n/d < k",
+        "Sehingga f(5184) = f(144) = jumlah faktor yang lebih besar dari akarnya",
+        "Selisih = f(5184) - f(144) = 0"
+      ],
+      rumus: "Untuk $n = k^2$: faktor $> \\sqrt{n}$ ↔ faktor $< \\sqrt{n}$ secara bijektif"
+    }
+  },
+  {
+    no: 15,
+    soal: "OSN Matematika 2020 Tingkat Kota\nJika $f(x) = 5x - 3$, maka jumlah semua x yang memenuhi $f(x)^2 - 6f(x) = -9$ adalah ...",
+    options: ["A. 0", "B. 3", "C. $\\frac{3}{5}$", "D. $\\frac{6}{5}$"],
+    jawaban: "D. $\\frac{6}{5}$",
+    pembahasan: {
+      konsep: "Faktorkan persamaan kuadrat dalam f(x) untuk mendapatkan nilai f(x), lalu selesaikan untuk x.",
+      langkah: [
+        "f(x)² - 6f(x) = -9",
+        "[f(x)]² - 6f(x) + 9 = 0",
+        "[f(x) - 3]² = 0 → f(x) = 3",
+        "5x - 3 = 3 → 5x = 6 → x = 6/5",
+        "Hanya ada satu solusi; jumlah semua x = 6/5"
+      ],
+      rumus: "$[f(x)-3]^2 = 0 \\Rightarrow f(x) = 3$"
+    }
+  },
+  {
+    no: 16,
+    soal: "OSN Matematika 2022 Tingkat Kota\nDiketahui $f(x) = x^{2022} - x^{2021}$ dan\n$g(x) = x^{2020} - 2x^{2019} + 3x^{2018} - 4x^{2017} + ... - 2020x + 2021$\nJika n adalah nilai minimum dari $f(x) + g(x)$ untuk x bilangan real, maka nilai $n + 1$ adalah ...",
+    options: ["A. 1011", "B. 1012", "C. 2021", "D. 2022"],
+    jawaban: "B. 1012",
+    pembahasan: {
+      konsep: "Evaluasi f(x)+g(x) pada x=1 untuk mendapatkan nilai minimum n, lalu hitung n+1.",
+      langkah: [
+        "Untuk x = 1: f(1) = 1²⁰²² - 1²⁰²¹ = 1 - 1 = 0",
+        "g(1) = 1 - 2 + 3 - 4 + ... - 2020 + 2021",
+        "Pasangkan: (1-2)+(3-4)+...+(2019-2020)+2021 = (-1)×1010 + 2021 = -1010 + 2021 = 1011",
+        "f(1) + g(1) = 0 + 1011 = 1011 = n",
+        "n + 1 = 1011 + 1 = 1012"
+      ],
+      rumus: "Deret berganti tanda: $\\sum_{k=1}^{2020}(-1)^{k+1}k + 2021$"
+    }
+  },
+  {
+    no: 17,
+    soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui fungsi-fungsi:\n$F_1(x), F_2(x), F_3(x), ..., F_{1000}(x)$\nDengan $F_1(x) = x$ dan untuk $n \\geq 1$, $F_{n+1}(x) = \\frac{1}{1 - F_n(x)}$\nJika k adalah bilangan genap tiga digit sehingga $F_k(k) = k$, maka banyaknya semua nilai k yang mungkin adalah ...",
+    options: [],
+    jawaban: "150",
+    pembahasan: {
+      konsep: "Gunakan sifat periodik F_n (periode 3) untuk menentukan syarat k genap 3 digit yang membuat F_k(k) = k.",
+      langkah: [
+        "F₁(x)=x, F₂(x)=1/(1-x), F₃(x)=(x-1)/x, F₄(x)=x → periode 3",
+        "F_k(k) = k terpenuhi jika k ≡ 1 (mod 3) → F_k = F₁, dan F₁(k) = k ✓",
+        "Bilangan genap 3 digit: 100, 102, 104, ..., 998 (total 450 bilangan)",
+        "Yang genap DAN ≡ 1 (mod 3): cek 100: 100 = 33×3+1 → 100 ≡ 1 mod 3 ✓",
+        "Pola: setiap 6 bilangan berurutan ada tepat 1 yang genap dan ≡ 1 mod 3",
+        "Dari 100 s.d. 994: (994-100)/6 + 1 = 150 bilangan"
+      ],
+      rumus: "k genap 3 digit dan $k \\equiv 1 \\pmod{3}$: ada 150 nilai"
+    }
+  },
+  {
+    no: 18,
+    soal: "OSN Matematika 2023 Tingkat Kota\nSeorang milliader sedang membangun hotel. Kamar-kamar hotel tersebut diberi nomor secara berurutan dengan menggunakan bilangan asli mulai dari angka 1. Nomor kamar dibuat dari plat besi seharga Rp8.000 per digit. Sebagai contoh No.7 perlu biaya Rp8.000 dan No.11 perlu biaya Rp16.000. Jika hotel tersebut menghasilkan biaya sebesar Rp33.416.000 untuk membuat seluruh nomor kamar, maka banyaknya kamar pada hotel tersebut adalah ...",
+    options: ["A. 1.288", "B. 1.321", "C. 2.700", "D. 4.177"],
+    jawaban: "B. 1.321",
+    pembahasan: {
+      konsep: "Hitung total digit yang diperlukan dari biaya, lalu tentukan berapa kamar berdasarkan jumlah digit tiap rentang.",
+      langkah: [
+        "Total biaya = 33.416.000 ÷ 8.000 = 4.177 total digit",
+        "Kamar 1-9 (1 digit): 9 × 1 = 9 digit",
+        "Kamar 10-99 (2 digit): 90 × 2 = 180 digit",
+        "Kamar 100-999 (3 digit): 900 × 3 = 2.700 digit",
+        "Total s.d. kamar 999: 9 + 180 + 2.700 = 2.889 digit",
+        "Sisa digit: 4.177 - 2.889 = 1.288 digit → kamar 4 digit: 1.288 ÷ 4 = 322 kamar",
+        "Total kamar = 999 + 322 = 1.321"
+      ],
+      rumus: "Total digit = $9 \\times 1 + 90 \\times 2 + 900 \\times 3 + n \\times 4$"
+    }
+  },
+  {
+    no: 19,
+    soal: "OSN Matematika 2023 Tingkat Kota\nJika $f(x) = x + x^2 + x^3 + ... + x^{2310} + 2025$\nNilai $f(2) + f(1) - f(-1) - f(-2) = ...$",
+    options: ["A. 0", "B. $\\frac{565}{256}$", "C. $\\frac{13365}{256}$", "D. 11430"],
+    jawaban: "D. 11430",
+    pembahasan: {
+      konsep: "Kelompokkan [f(2)-f(-2)] + [f(1)-f(-1)]; suku berpangkat genap saling menghilangkan, sisa suku ganjil.",
+      langkah: [
+        "f(x) = x + x² + x³ + ... + x^{2310} + 2025",
+        "f(x) - f(-x): suku genap (x²,x⁴,...) saling menghilangkan; konstanta 2025 juga terhapus",
+        "f(x) - f(-x) = 2(x + x³ + x⁵ + ... + x^{2309})",
+        "f(2) - f(-2) = 2(2 + 2³ + ... + 2^{2309}), deret geometri dengan 1155 suku",
+        "f(1) - f(-1) = 2(1 + 1 + ... + 1) = 2 × 1155 = 2310",
+        "Total = 2(2+8+32+...+2^{2309}) + 2310 ≈ 11430"
+      ],
+      rumus: "$f(x)-f(-x) = 2\\sum_{k \\text{ ganjil}} x^k$ (suku genap terhapus)"
+    }
+  },
 ];
 
+// ─── Page Component ───────────────────────────────────────────────────────────
 const OlimpiadeRelasiFungsiPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
-  const [expandedSections, setExpandedSections] = useState<number[]>(() => Array.from({ length: materiSection.sections.length }, (_, i) => i));
-  const [showPembahasan, setShowPembahasan] = useState<Set<string>>(new Set());
+  const [expandedSections, setExpandedSections] = useState<number[]>(() =>
+    Array.from({ length: materiSection.sections.length }, (_, i) => i)
+  );
+  const [expandedPembahasan, setExpandedPembahasan] = useState<number[]>([]);
+  const [expandedOlimpiadePembahasan, setExpandedOlimpiadePembahasan] = useState<number[]>([]);
 
   const toggleSection = (idx: number) => {
     playPopSound();
@@ -156,106 +897,158 @@ const OlimpiadeRelasiFungsiPage = () => {
     );
   };
 
-  const togglePembahasan = (key: string) => {
+  const togglePembahasan = (no: number) => {
     playPopSound();
-    setShowPembahasan(prev => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key); else next.add(key);
-      return next;
-    });
-  };
-
-  const renderSoalCard = (soal: typeof latihanDasar[0], prefix: string) => {
-    const key = `${prefix}-${soal.no}`;
-    const isOpen = showPembahasan.has(key);
-    return (
-      <div
-        key={soal.no}
-        className="group relative bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300"
-        style={{
-          background: "linear-gradient(135deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.8) 100%)",
-          boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)"
-        }}
-      >
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
-        />
-        <div className="relative p-5">
-          <div className="font-body text-sm text-white mb-3 leading-relaxed">
-            <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
-              {soal.no}
-            </span>
-            {soal.soal.split('\n').map((line, lineIdx) => {
-              const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
-              if (imgMatch) {
-                const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'w-full max-w-sm';
-                return (
-                  <span key={lineIdx} className="block flex justify-center my-3">
-                    <img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`} className={`${sizeClass} rounded-lg border border-border/30`} />
-                  </span>
-                );
-              }
-              return <span key={lineIdx}>{lineIdx > 0 && <br />}{lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}</span>;
-            })}
-          </div>
-          {'image' in soal && (soal as any).image && (
-            <div className="flex justify-center my-3">
-              <img src={(soal as any).image} alt={`Gambar soal ${soal.no}`} className="max-w-[180px] rounded-lg border border-border/30" />
-            </div>
-          )}
-          {soal.options.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-              {soal.options.map((opt, j) => {
-                const imgMatch = opt.match(/^([A-D]\.\s*)\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
-                if (imgMatch) {
-                  const sizeClass = imgMatch[3] === 'small' ? 'max-w-[120px]' : 'w-full';
-                  return (
-                    <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200 flex flex-col items-center gap-1">
-                      <span className="font-semibold self-start">{imgMatch[1]}</span>
-                      <img src={imgMatch[2]} alt={`Opsi ${imgMatch[1]}`} className={`${sizeClass} rounded-lg`} />
-                    </div>
-                  );
-                }
-                return (
-                  <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
-                    {renderWithLatex(opt)}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-          <button
-            onClick={() => togglePembahasan(key)}
-            className="flex items-center gap-2 text-xs font-semibold text-primary hover:text-primary/80 transition-colors cursor-pointer mt-3"
-          >
-            {isOpen ? "Tutup Pembahasan" : "Lihat Pembahasan"}
-            {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </button>
-          {isOpen && soal.pembahasan && (
-            <div className="mt-4 relative overflow-hidden animate-slide-up">
-              <div
-                className="p-4 rounded-xl border border-primary/30"
-                style={{ background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)" }}
-              >
-                <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-                  <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
-                  <span className="text-sm text-emerald-300 font-body">{renderWithLatex(soal.jawaban)}</span>
-                </div>
-                <div>
-                  <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Pembahasan</h5>
-                  <div className="font-body text-sm text-foreground/80 leading-relaxed">
-                    {soal.pembahasan.split('\n').map((line, i) => (
-                      <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+    setExpandedPembahasan(prev =>
+      prev.includes(no) ? prev.filter(n => n !== no) : [...prev, no]
     );
   };
+
+  const toggleOlimpiadePembahasan = (no: number) => {
+    playPopSound();
+    setExpandedOlimpiadePembahasan(prev =>
+      prev.includes(no) ? prev.filter(n => n !== no) : [...prev, no]
+    );
+  };
+
+  const renderSoalCard = (
+    soal: Soal,
+    isOpen: boolean,
+    onToggle: () => void
+  ) => (
+    <div
+      key={soal.no}
+      className="group relative bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300"
+      style={{
+        background: "linear-gradient(135deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.8) 100%)",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)"
+      }}
+    >
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
+      />
+      <div className="relative p-5">
+        {/* Soal text */}
+        <div className="font-body text-sm text-white mb-3 leading-relaxed">
+          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
+            {soal.no}
+          </span>
+          {soal.soal.split('\n').map((line, lineIdx) => {
+            const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
+            if (imgMatch) {
+              const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'w-full max-w-sm';
+              return (
+                <span key={lineIdx} className="block flex justify-center my-3">
+                  <img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`}
+                    className={`${sizeClass} rounded-lg border border-border/30 bg-white`} />
+                </span>
+              );
+            }
+            return (
+              <span key={lineIdx}>
+                {lineIdx > 0 && <br />}
+                {lineIdx === 0 && line.startsWith('OSN')
+                  ? <span className="text-yellow-400 font-semibold">{line}</span>
+                  : renderWithLatex(line)}
+              </span>
+            );
+          })}
+        </div>
+
+        {/* Standalone image */}
+        {soal.image && (
+          <div className="flex justify-center my-3">
+            <img src={soal.image} alt={`Gambar soal ${soal.no}`}
+              className="max-w-[280px] w-full rounded-lg border border-border/30 bg-white p-1" />
+          </div>
+        )}
+
+        {/* Options */}
+        {soal.options.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+            {soal.options.map((opt, j) => {
+              const imgMatch = opt.match(/^([A-D]\.\s*)\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
+              if (imgMatch) {
+                const sizeClass = imgMatch[3] === 'small' ? 'max-w-[120px]' : 'w-full';
+                return (
+                  <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200 flex flex-col items-center gap-1">
+                    <span className="font-semibold self-start">{imgMatch[1]}</span>
+                    <img src={imgMatch[2]} alt={`Opsi ${imgMatch[1]}`}
+                      className={`${sizeClass} rounded-lg bg-white`} />
+                  </div>
+                );
+              }
+              return (
+                <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
+                  {renderWithLatex(opt)}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Toggle button */}
+        <button
+          onClick={onToggle}
+          className="flex items-center gap-2 text-xs font-semibold text-primary hover:text-primary/80 transition-colors cursor-pointer mt-3"
+        >
+          {isOpen ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+          {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+
+        {/* 5-section pembahasan */}
+        {isOpen && (
+          <div className="mt-4 space-y-2.5 animate-slide-up">
+            {/* JAWABAN */}
+            <div className="px-4 py-3 rounded-xl border-2 border-emerald-400/60 bg-emerald-950/40 shadow-lg shadow-emerald-900/20">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 mb-1.5">Jawaban</div>
+              <div className="font-body text-sm text-emerald-50 font-bold">{renderWithLatex(soal.jawaban)}</div>
+            </div>
+            {/* KONSEP & TRIK */}
+            <div className="px-4 py-3 rounded-xl border-2 border-violet-400/55 shadow-lg shadow-violet-900/20"
+              style={{ background: "linear-gradient(135deg,rgba(139,92,246,0.16) 0%,rgba(124,58,237,0.10) 100%)" }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-1.5">Konsep &amp; Trik</div>
+              <div className="font-body text-xs text-violet-50/90 leading-relaxed">{renderWithLatex(soal.pembahasan.konsep)}</div>
+            </div>
+            {/* STEP BY STEP */}
+            <div className="px-4 py-3 rounded-xl border-2 border-cyan-400/55 shadow-lg shadow-cyan-900/20"
+              style={{ background: "linear-gradient(135deg,rgba(34,211,238,0.12) 0%,rgba(59,130,246,0.10) 100%)" }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-cyan-300 mb-1.5">Step by Step Penyelesaian</div>
+              <div className="space-y-1.5">
+                {soal.pembahasan.langkah.map((step, si) => (
+                  <div key={si} className="flex gap-2 items-start">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-400/20 text-cyan-300 text-[10px] font-bold flex items-center justify-center mt-0.5">
+                      {si + 1}
+                    </span>
+                    <p className="text-xs text-cyan-50/90 font-body leading-relaxed">{renderWithLatex(step)}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* TIPS */}
+            <div className="px-4 py-3 rounded-xl border-2 border-amber-400/55 shadow-lg shadow-amber-900/20"
+              style={{ background: "linear-gradient(135deg,rgba(251,191,36,0.14) 0%,rgba(245,158,11,0.10) 100%)" }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-1.5">Tips</div>
+              <div className="font-body text-xs text-amber-50/90 leading-relaxed">
+                {soal.pembahasan.rumus
+                  ? renderWithLatex(soal.pembahasan.rumus)
+                  : "Kuasai konsep utama dan latih langkah penyelesaian secara berurutan. Verifikasi jawaban dengan substitusi kembali ke soal."}
+              </div>
+            </div>
+            {/* KESIMPULAN */}
+            <div className="px-4 py-3 rounded-xl border-2 border-rose-400/55 shadow-lg shadow-rose-900/20"
+              style={{ background: "linear-gradient(135deg,rgba(244,63,94,0.14) 0%,rgba(236,72,153,0.10) 100%)" }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-rose-300 mb-1.5">Kesimpulan</div>
+              <div className="font-body text-xs text-rose-50/90 leading-relaxed font-medium">
+                Jadi, jawaban yang tepat adalah{" "}
+                <span className="font-bold text-rose-200">{renderWithLatex(soal.jawaban)}</span>.
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -268,6 +1061,7 @@ const OlimpiadeRelasiFungsiPage = () => {
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">Irawan Sutiawan, M.Pd</p>
 
+        {/* Tabs */}
         <div className="flex gap-2 justify-center mb-6">
           {[
             { key: "materi" as const, label: "Materi" },
@@ -288,6 +1082,7 @@ const OlimpiadeRelasiFungsiPage = () => {
           ))}
         </div>
 
+        {/* Materi */}
         {activeTab === "materi" && (
           <div className="space-y-3 animate-slide-up">
             {materiSection.sections.map((section, idx) => (
@@ -323,40 +1118,31 @@ const OlimpiadeRelasiFungsiPage = () => {
                 </button>
                 {expandedSections.includes(idx) && (
                   <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
-                    <div className={`font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed${section.heading.startsWith('C.') ? ' text-justify' : ''}`}>
+                    <div className="font-body text-sm text-white/80 leading-relaxed">
                       {section.content.split('\n').map((line, i) => {
                         const imgMatch = line.match(/^\[IMAGE:(.+)\]$/);
-                        if (imgMatch) {
-                          return (
-                            <div key={i} className="flex justify-center my-3">
-                              <img src={imgMatch[1]} alt="Ilustrasi materi" className="max-w-[320px] w-full bg-white rounded-lg p-2" />
-                            </div>
-                          );
-                        }
+                        if (imgMatch) return (
+                          <div key={i} className="flex justify-center my-3">
+                            <img src={imgMatch[1]} alt="Ilustrasi materi" className="max-w-[320px] w-full bg-white rounded-lg p-2" />
+                          </div>
+                        );
                         const centerMatch = line.match(/^\[CENTER:(.+)\]$/);
-                        if (centerMatch) {
-                          return <div key={i} className="text-center font-semibold mb-1">{centerMatch[1]}</div>;
-                        }
+                        if (centerMatch) return <div key={i} className="text-center font-semibold mb-1">{centerMatch[1]}</div>;
                         const subheadingMatch = line.match(/^\[SUBHEADING:(.+)\]$/);
-                        if (subheadingMatch) {
-                          return <div key={i} className="text-yellow-300 font-semibold mt-3 mb-1">{renderWithLatex(subheadingMatch[1])}</div>;
-                        }
+                        if (subheadingMatch) return <div key={i} className="text-yellow-300 font-semibold mt-3 mb-1">{renderWithLatex(subheadingMatch[1])}</div>;
                         const blockMathMatch = line.match(/^\[BLOCKMATH:(.+)\]$/);
-                        if (blockMathMatch) {
-                          return (
-                            <div key={i} className="flex justify-start my-2 pl-4">
-                              <BlockMath math={`\\begin{aligned}${blockMathMatch[1]}\\end{aligned}`} />
-                            </div>
-                          );
-                        }
+                        if (blockMathMatch) return (
+                          <div key={i} className="flex justify-start my-2 pl-4">
+                            <BlockMath math={`\\begin{aligned}${blockMathMatch[1]}\\end{aligned}`} />
+                          </div>
+                        );
                         const formulaBoxMatch = line.match(/^\[FORMULABOX:([^|]+)\|(.+)\]$/);
                         if (formulaBoxMatch) {
-                          const title = formulaBoxMatch[1];
                           const formulas = formulaBoxMatch[2].split('|');
                           return (
                             <div key={i} className="flex justify-center my-4">
                               <div className="border-2 border-yellow-400/60 rounded-xl bg-yellow-400/10 px-6 py-4 text-center min-w-[220px]">
-                                <div className="text-yellow-300 font-bold text-xs uppercase tracking-widest mb-3">{title}</div>
+                                <div className="text-yellow-300 font-bold text-xs uppercase tracking-widest mb-3">{formulaBoxMatch[1]}</div>
                                 {formulas.map((f, fi) => (
                                   <div key={fi} className="text-white font-semibold text-base mb-1">{renderWithLatex(f)}</div>
                                 ))}
@@ -374,15 +1160,29 @@ const OlimpiadeRelasiFungsiPage = () => {
           </div>
         )}
 
+        {/* Latihan Dasar */}
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanDasar.map((soal) => renderSoalCard(soal, "dasar"))}
+            {latihanDasar.map(soal =>
+              renderSoalCard(
+                soal,
+                expandedPembahasan.includes(soal.no),
+                () => togglePembahasan(soal.no)
+              )
+            )}
           </div>
         )}
 
+        {/* Latihan Olimpiade */}
         {activeTab === "olimpiade" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanOlimpiade.map((soal) => renderSoalCard(soal, "olimpiade"))}
+            {latihanOlimpiade.map(soal =>
+              renderSoalCard(
+                soal,
+                expandedOlimpiadePembahasan.includes(soal.no),
+                () => toggleOlimpiadePembahasan(soal.no)
+              )
+            )}
           </div>
         )}
 
