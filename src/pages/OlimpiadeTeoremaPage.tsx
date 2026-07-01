@@ -966,131 +966,145 @@ const latihanDasar = [
 
 // SVG: Persegi panjang ABCD dilipat sesuai garis putus-putus - OSN 2026
 const PersegiPanjangLipatSVG = () => {
-  // Left diagram: before fold
-  const Lx = 8, Ly = 12;          // left diagram origin
-  const LW = 130, LH = 98;        // rectangle size (px)
-  const LD = { x: Lx, y: Ly };
-  const LC = { x: Lx + LW, y: Ly };
-  const LB = { x: Lx + LW, y: Ly + LH };
-  const LA = { x: Lx, y: Ly + LH };
-  // Q on DC: QC = LH (≈ BC), so DQ = LW - LH
-  const LQ = { x: Lx + LW - LH, y: Ly };
-  // P on BC: CP = QC * tan30° = LH/√3 ≈ LH*0.577
-  const cpLen = Math.round(LH / Math.sqrt(3));
-  const LP = { x: Lx + LW, y: Ly + cpLen };
+  // ── geometry constants ────────────────────────────────────────────────
+  // Rectangle is clearly landscape: width >> height
+  const LW = 140;               // rectangle width  (px)
+  const LH = 56;                // rectangle height (px)  — "BC = 9 cm"
 
-  // Right diagram: after fold (offset 168px right)
-  const ox = 168;
-  const RD = { x: LD.x + ox, y: LD.y };
-  const RC = { x: LC.x + ox, y: LC.y };   // ghost original C
-  const RB = { x: LB.x + ox, y: LB.y };
-  const RA = { x: LA.x + ox, y: LA.y };
-  const RQ = { x: LQ.x + ox, y: LQ.y };
-  const RP = { x: LP.x + ox, y: LP.y };
-  // C folded position (reflection of LC across fold line LQ-LP)
-  // Approx: C' ≈ Q + (45, 78) based on the 30-60-90 geometry
-  const RCf = { x: RQ.x + 44, y: RQ.y + 78 };
+  // For C to land EXACTLY on AB after folding along QP:
+  //   C' = Q + (QC/2, QC·√3/2)  →  C'.y = Q.y + QC·√3/2 = bottom  →  QC = LH·2/√3
+  const QC = (LH * 2) / Math.sqrt(3);   // ≈ 64.7 px  (horizontal, along top edge)
+  const CP = QC / Math.sqrt(3);         // = LH·2/3 ≈ 37.3 px  (vertical, along right edge)
 
-  // Angle arc at Q (left diagram) showing 30°
-  const arcR = 22;
-  // Direction QC: pure right (angle 0°)
-  // Direction QP: angle = atan2(LP.y - LQ.y, LP.x - LQ.x) = atan2(cpLen, LH) = 30°
-  const angQP = Math.atan2(LP.y - LQ.y, LP.x - LQ.x);
-  const arcStartX = LQ.x + arcR;
-  const arcStartY = LQ.y;
-  const arcEndX = LQ.x + arcR * Math.cos(angQP);
-  const arcEndY = LQ.y + arcR * Math.sin(angQP);
+  // Left diagram origin
+  const dx = 10, dy = 22;
 
-  // Right diagram angle arc at RQ
-  const arcRx = RQ.x + arcR;
-  const arcRy = RQ.y;
-  const arcREndX = RQ.x + arcR * Math.cos(angQP);
-  const arcREndY = RQ.y + arcR * Math.sin(angQP);
+  // Left diagram corners
+  const D  = { x: dx,        y: dy };
+  const C  = { x: dx + LW,   y: dy };
+  const B  = { x: dx + LW,   y: dy + LH };
+  const A  = { x: dx,        y: dy + LH };
+  const Q  = { x: dx + LW - QC, y: dy };          // on top edge DC; QC = ~64.7
+  const P  = { x: dx + LW,   y: dy + CP };        // on right edge BC; CP ≈ 37
+  // C' after folding — lands exactly on AB
+  const Cf = { x: Q.x + QC / 2, y: dy + LH };    // (≈ dx+LW−QC/2, bottom)
+
+  // ── right diagram: offset so both fit ───────────────────────────────
+  const ox = 152;
+  const rD  = { x: D.x  + ox, y: D.y  };
+  const rC  = { x: C.x  + ox, y: C.y  };   // ghost original C position
+  const rB  = { x: B.x  + ox, y: B.y  };
+  const rA  = { x: A.x  + ox, y: A.y  };
+  const rQ  = { x: Q.x  + ox, y: Q.y  };
+  const rP  = { x: P.x  + ox, y: P.y  };
+  const rCf = { x: Cf.x + ox, y: Cf.y };   // C' on AB of right diagram
+
+  // ── angle arc at Q (both diagrams) ──────────────────────────────────
+  const arcR   = 20;
+  const angQP  = Math.atan2(P.y - Q.y, P.x - Q.x);  // = 30° = π/6
+  const arcSx  = Q.x + arcR;   const arcSy  = Q.y;
+  const arcEx  = Q.x + arcR * Math.cos(angQP);
+  const arcEy  = Q.y + arcR * Math.sin(angQP);
+  const rArcSx = rQ.x + arcR;  const rArcSy = rQ.y;
+  const rArcEx = rQ.x + arcR * Math.cos(angQP);
+  const rArcEy = rQ.y + arcR * Math.sin(angQP);
 
   return (
     <div className="my-3 flex justify-center">
-      <svg viewBox="0 0 328 128" className="w-full max-w-sm sm:max-w-md rounded-lg border border-border/40 bg-white/5">
-        {/* ── LEFT DIAGRAM (before fold) ── */}
-        <text x="68" y="8" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Sebelum dilipat</text>
+      <svg viewBox="0 0 310 106" className="w-full max-w-sm sm:max-w-lg rounded-lg border border-border/40 bg-white/5">
 
-        {/* Rectangle fill */}
-        <rect x={Lx} y={Ly} width={LW} height={LH} fill="rgba(34,211,238,0.05)" stroke="#22d3ee" strokeWidth="1.8" />
+        {/* ═══ LEFT DIAGRAM — sebelum dilipat ═══ */}
+        <text x={dx + LW / 2} y="10" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Sebelum dilipat</text>
 
-        {/* Right angle mark at C */}
-        <polyline points={`${LC.x},${LC.y+10} ${LC.x-10},${LC.y+10} ${LC.x-10},${LC.y}`} fill="none" stroke="#22d3ee" strokeWidth="1.2" />
+        {/* Rectangle */}
+        <rect x={dx} y={dy} width={LW} height={LH}
+              fill="rgba(34,211,238,0.05)" stroke="#22d3ee" strokeWidth="1.8" />
 
-        {/* Dashed fold line Q→P */}
-        <line x1={LQ.x} y1={LQ.y} x2={LP.x} y2={LP.y} stroke="#fbbf24" strokeWidth="1.6" strokeDasharray="5 3" />
-        {/* Dashed triangle edge P→C and C→Q */}
-        <line x1={LP.x} y1={LP.y} x2={LC.x} y2={LC.y} stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4 3" opacity="0.5" />
-        <line x1={LC.x} y1={LC.y} x2={LQ.x} y2={LQ.y} stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="4 3" opacity="0.5" />
+        {/* Light fill for the triangle-to-fold (QCP) */}
+        <polygon points={`${Q.x},${Q.y} ${C.x},${C.y} ${P.x},${P.y}`}
+                 fill="rgba(251,191,36,0.08)" stroke="none" />
 
-        {/* Angle arc at Q */}
-        <path d={`M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 0 1 ${arcEndX.toFixed(1)} ${arcEndY.toFixed(1)}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
-        <text x={LQ.x + arcR + 4} y={LQ.y + 12} fill="#fbbf24" fontSize="9" fontWeight="bold">30°</text>
+        {/* Right-angle mark at C */}
+        <polyline points={`${C.x},${C.y+8} ${C.x-8},${C.y+8} ${C.x-8},${C.y}`}
+                  fill="none" stroke="#22d3ee" strokeWidth="1.1" />
 
-        {/* Corner dots */}
-        {[LD, LC, LB, LA, LQ, LP].map((p, i) => (
-          <circle key={i} cx={p.x} cy={p.y} r="2.5" fill="#22d3ee" />
-        ))}
+        {/* Dashed fold line Q → P */}
+        <line x1={Q.x} y1={Q.y} x2={P.x} y2={P.y}
+              stroke="#fbbf24" strokeWidth="1.8" strokeDasharray="5 3" />
+        {/* Dashed triangle edges P→C and C→Q */}
+        <line x1={P.x} y1={P.y} x2={C.x} y2={C.y}
+              stroke="#fbbf24" strokeWidth="1.1" strokeDasharray="4 3" opacity="0.5" />
+        <line x1={C.x} y1={C.y} x2={Q.x} y2={Q.y}
+              stroke="#fbbf24" strokeWidth="1.1" strokeDasharray="4 3" opacity="0.5" />
 
-        {/* Labels */}
-        <text x={LD.x - 2} y={LD.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">D</text>
-        <text x={LQ.x} y={LQ.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="middle">Q</text>
-        <text x={LC.x + 4} y={LC.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold">C</text>
-        <text x={LA.x - 2} y={LA.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">A</text>
-        <text x={LB.x + 4} y={LB.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
-        <text x={LP.x + 4} y={LP.y + 4} fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
-
-        {/* BC = 9cm label on right side */}
-        <text x={LB.x + 14} y={(LB.y + LC.y) / 2 + 4} fill="#fbbf24" fontSize="9" fontWeight="bold">BC=9</text>
-
-        {/* ── RIGHT DIAGRAM (after fold) ── */}
-        <text x={RD.x + (LW / 2)} y="8" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Setelah dilipat</text>
-
-        {/* Ghost original rectangle */}
-        <rect x={RD.x} y={RD.y} width={LW} height={LH} fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="3 3" />
-
-        {/* Folded triangle Q-P-C' highlighted */}
-        <polygon
-          points={`${RQ.x},${RQ.y} ${RP.x},${RP.y} ${RCf.x},${RCf.y}`}
-          fill="rgba(251,191,36,0.1)"
-          stroke="#fbbf24"
-          strokeWidth="1.5"
-        />
-
-        {/* Solid rectangle edges that remain */}
-        <line x1={RD.x} y1={RD.y} x2={RQ.x} y2={RQ.y} stroke="#22d3ee" strokeWidth="1.8" />
-        <line x1={RD.x} y1={RD.y} x2={RA.x} y2={RA.y} stroke="#22d3ee" strokeWidth="1.8" />
-        <line x1={RA.x} y1={RA.y} x2={RB.x} y2={RB.y} stroke="#22d3ee" strokeWidth="1.8" />
-        <line x1={RB.x} y1={RB.y} x2={RP.x} y2={RP.y} stroke="#22d3ee" strokeWidth="1.8" />
-        <line x1={RQ.x} y1={RQ.y} x2={RP.x} y2={RP.y} stroke="#fbbf24" strokeWidth="1.8" />
-
-        {/* C' to bottom edge dashed */}
-        <line x1={RCf.x} y1={RCf.y} x2={RCf.x} y2={RA.y} stroke="#475569" strokeWidth="1" strokeDasharray="3 2" />
-
-        {/* Angle arc at RQ */}
-        <path d={`M ${arcRx} ${arcRy} A ${arcR} ${arcR} 0 0 1 ${arcREndX.toFixed(1)} ${arcREndY.toFixed(1)}`} fill="none" stroke="#fbbf24" strokeWidth="1.2" />
-        <text x={RQ.x + arcR + 4} y={RQ.y + 12} fill="#fbbf24" fontSize="9" fontWeight="bold">30°</text>
-
-        {/* Right angle mark at RC original */}
-        <polyline points={`${RC.x},${RC.y+10} ${RC.x-10},${RC.y+10} ${RC.x-10},${RC.y}`} fill="none" stroke="#475569" strokeWidth="1" strokeDasharray="2 2" />
+        {/* Angle arc ∠PQC = 30° */}
+        <path d={`M ${arcSx.toFixed(1)} ${arcSy} A ${arcR} ${arcR} 0 0 1 ${arcEx.toFixed(1)} ${arcEy.toFixed(1)}`}
+              fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        <text x={Q.x + arcR + 5} y={Q.y + 12} fill="#fbbf24" fontSize="8.5" fontWeight="bold">30°</text>
 
         {/* Dots */}
-        {[RD, RQ, RP, RB, RA, RCf].map((p, i) => (
-          <circle key={i} cx={p.x} cy={p.y} r="2.5" fill="#22d3ee" />
+        {[D, C, B, A, Q, P].map((pt, i) => (
+          <circle key={i} cx={pt.x} cy={pt.y} r="2.4" fill="#22d3ee" />
         ))}
 
         {/* Labels */}
-        <text x={RD.x - 2} y={RD.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">D</text>
-        <text x={RQ.x} y={RQ.y - 4} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="middle">Q</text>
-        <text x={RA.x - 2} y={RA.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">A</text>
-        <text x={RCf.x - 4} y={RCf.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">C</text>
-        <text x={RB.x + 4} y={RB.y + 12} fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
-        <text x={RP.x + 4} y={RP.y + 4} fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
+        <text x={D.x-2}  y={D.y-5}      fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">D</text>
+        <text x={Q.x}    y={Q.y-5}      fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="middle">Q</text>
+        <text x={C.x+4}  y={C.y-5}      fill="#e5e7eb" fontSize="11" fontWeight="bold">C</text>
+        <text x={A.x-2}  y={A.y+13}     fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">A</text>
+        <text x={B.x+4}  y={B.y+13}     fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
+        <text x={P.x+4}  y={P.y+4}      fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
+        {/* BC = 9 label */}
+        <text x={B.x+14} y={(B.y+C.y)/2+4} fill="#fbbf24" fontSize="8.5" fontWeight="bold">BC=9</text>
 
-        {/* PQ = ? label */}
-        <text x={(RQ.x + RP.x) / 2 - 14} y={(RQ.y + RP.y) / 2 - 4} fill="#fbbf24" fontSize="9" fontWeight="bold">PQ=?</text>
+        {/* ═══ RIGHT DIAGRAM — setelah dilipat ═══ */}
+        <text x={rD.x + LW / 2} y="10" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Setelah dilipat</text>
+
+        {/* Ghost original rectangle (dotted outline) */}
+        <rect x={rD.x} y={rD.y} width={LW} height={LH}
+              fill="none" stroke="#334155" strokeWidth="1" strokeDasharray="3 3" />
+
+        {/* Solid remaining edges: D-Q (top), D-A (left), A-B (bottom) */}
+        <line x1={rD.x} y1={rD.y} x2={rQ.x} y2={rQ.y} stroke="#22d3ee" strokeWidth="1.8" />
+        <line x1={rD.x} y1={rD.y} x2={rA.x} y2={rA.y} stroke="#22d3ee" strokeWidth="1.8" />
+        <line x1={rA.x} y1={rA.y} x2={rB.x} y2={rB.y} stroke="#22d3ee" strokeWidth="1.8" />
+        {/* Right edge P-B (below P, still solid) */}
+        <line x1={rP.x} y1={rP.y} x2={rB.x} y2={rB.y} stroke="#22d3ee" strokeWidth="1.8" />
+
+        {/* Fold crease Q-P (bold amber) */}
+        <line x1={rQ.x} y1={rQ.y} x2={rP.x} y2={rP.y} stroke="#fbbf24" strokeWidth="2" />
+
+        {/* Folded triangle Q–P–C' (C' on AB) */}
+        <polygon points={`${rQ.x},${rQ.y} ${rP.x},${rP.y} ${rCf.x},${rCf.y}`}
+                 fill="rgba(251,191,36,0.13)" stroke="#fbbf24" strokeWidth="1.5" />
+
+        {/* Dot on C' where it touches AB */}
+        <circle cx={rCf.x} cy={rCf.y} r="3.5" fill="#fbbf24" opacity="0.9" />
+
+        {/* Angle arc at rQ */}
+        <path d={`M ${rArcSx.toFixed(1)} ${rArcSy} A ${arcR} ${arcR} 0 0 1 ${rArcEx.toFixed(1)} ${rArcEy.toFixed(1)}`}
+              fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+        <text x={rQ.x + arcR + 5} y={rQ.y + 12} fill="#fbbf24" fontSize="8.5" fontWeight="bold">30°</text>
+
+        {/* Right-angle mark at ghost C (original corner) */}
+        <polyline points={`${rC.x},${rC.y+8} ${rC.x-8},${rC.y+8} ${rC.x-8},${rC.y}`}
+                  fill="none" stroke="#334155" strokeWidth="1" strokeDasharray="2 2" />
+
+        {/* Remaining dots */}
+        {[rD, rQ, rP, rB, rA].map((pt, i) => (
+          <circle key={i} cx={pt.x} cy={pt.y} r="2.4" fill="#22d3ee" />
+        ))}
+
+        {/* Labels */}
+        <text x={rD.x-2}  y={rD.y-5}       fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">D</text>
+        <text x={rQ.x}    y={rQ.y-5}       fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="middle">Q</text>
+        <text x={rA.x-2}  y={rA.y+13}      fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">A</text>
+        <text x={rCf.x}   y={rCf.y+13}     fill="#fbbf24" fontSize="11" fontWeight="bold" textAnchor="middle">C</text>
+        <text x={rB.x+4}  y={rB.y+13}      fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
+        <text x={rP.x+4}  y={rP.y+4}       fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
+
+        {/* PQ = ? label along fold crease */}
+        <text x={(rQ.x+rP.x)/2-18} y={(rQ.y+rP.y)/2-4} fill="#fbbf24" fontSize="8.5" fontWeight="bold">PQ=?</text>
       </svg>
     </div>
   );
