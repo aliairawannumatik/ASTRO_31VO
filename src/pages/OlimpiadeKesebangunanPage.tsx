@@ -963,7 +963,7 @@ const OlimpiadeKesebangunanPage = () => {
                       </div>
                       <div className="font-display text-xs text-cyan-300 font-bold mb-2">PEMBAHASAN:</div>
                       <div className="font-body text-xs md:text-sm text-white/85 leading-relaxed whitespace-pre-wrap">
-                        {soal.pembahasan.split('\n').map((line, i) => (
+                        {(soal.pembahasan ?? '').split('\n').map((line, i) => (
                           <div key={i} className="mb-1">{renderWithLatex(line)}</div>
                         ))}
                       </div>
@@ -1033,7 +1033,7 @@ const OlimpiadeKesebangunanPage = () => {
                       </div>
                       <div className="font-display text-xs text-cyan-300 font-bold mb-2">PEMBAHASAN:</div>
                       <div className="font-body text-xs md:text-sm text-white/85 leading-relaxed whitespace-pre-wrap">
-                        {soal.pembahasan.split('\n').map((line, i) => (
+                        {(soal.pembahasan ?? '').split('\n').map((line, i) => (
                           <div key={i} className="mb-1">{renderWithLatex(line)}</div>
                         ))}
                       </div>

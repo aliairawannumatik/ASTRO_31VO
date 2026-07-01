@@ -524,7 +524,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
                           <span className="font-display text-[10px] font-bold tracking-widest uppercase text-amber-400/80">Pembahasan</span>
                         </div>
                         <div className="font-body text-xs text-white/75 leading-relaxed whitespace-pre-wrap">
-                          {soal.pembahasan.split('\n').map((line, i) => (
+                          {(soal.pembahasan ?? '').split('\n').map((line, i) => (
                             <span key={i}>{i > 0 && <br />}{renderWithLatex(line)}</span>
                           ))}
                         </div>
