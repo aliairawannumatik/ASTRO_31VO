@@ -1070,4 +1070,21 @@ export const peluangOlimpiadePembahasan: Record<number, Pembahasan> = {
     tips: "Konversi ternary → desimal → jumlahkan → desimal → ternary. Atau operasi langsung di ternary.",
     kesimpulan: "ABAB + ACAC = ABCAC dalam sistem bilangan ternary soal.",
   },
+  95: {
+    jawaban: "B. $\\dfrac{1}{3}$",
+    konsepTrik:
+      "Waktu nyala $S$ dipilih acak dari 6 pilihan diskret: 18:30, 19:00, 19:30, 20:00, 20:30, 21:00 (masing-masing peluang $\\frac{1}{6}$). Waktu padam $E$ seragam kontinu pada interval [23:00, 01:00] (panjang 2 jam). Durasi $t = E - S$. Untuk setiap $S$, hitung panjang sub-interval $E$ yang membuat $4 \\leq t \\leq 5$, dibagi panjang total (2 jam).",
+    stepByStep:
+      "Nyatakan $E$ sebagai jam setelah 23:00, sehingga $E \\sim \\text{Uniform}[0, 2]$.\n\n" +
+      "Syarat $4 \\leq t \\leq 5$ berarti $4 \\leq E + d \\leq 5$, di mana $d$ = jarak waktu nyala ke 23:00.\n\n" +
+      "• $S = 18{:}30$ → $d = 4{,}5$ jam → $4 \\leq E+4{,}5 \\leq 5$ → $E \\in [-0{,}5;\\, 0{,}5] \\cap [0,2] = [0;\\,0{,}5]$ → $P_1 = \\dfrac{0{,}5}{2} = \\dfrac{1}{4}$\n\n" +
+      "• $S = 19{:}00$ → $d = 4$ jam → $E \\in [0;\\, 1]$ → $P_2 = \\dfrac{1}{2}$\n\n" +
+      "• $S = 19{:}30$ → $d = 3{,}5$ jam → $E \\in [0{,}5;\\, 1{,}5]$ → $P_3 = \\dfrac{1}{2}$\n\n" +
+      "• $S = 20{:}00$ → $d = 3$ jam → $E \\in [1;\\, 2]$ → $P_4 = \\dfrac{1}{2}$\n\n" +
+      "• $S = 20{:}30$ → $d = 2{,}5$ jam → $E \\in [1{,}5;\\, 2{,}5] \\cap [0,2] = [1{,}5;\\,2]$ → $P_5 = \\dfrac{0{,}5}{2} = \\dfrac{1}{4}$\n\n" +
+      "• $S = 21{:}00$ → $d = 2$ jam → $E \\in [2;\\, 3] \\cap [0,2] = \\{2\\}$ → $P_6 = 0$\n\n" +
+      "Total: $P = \\dfrac{1}{6}\\left(\\dfrac{1}{4} + \\dfrac{1}{2} + \\dfrac{1}{2} + \\dfrac{1}{2} + \\dfrac{1}{4} + 0\\right) = \\dfrac{1}{6} \\times 2 = \\dfrac{1}{3}$",
+    tips: "Untuk soal peluang gabungan diskret–kontinu: (1) pisahkan ke setiap kasus diskret, (2) hitung peluang kontinu per kasus menggunakan panjang interval yang memenuhi syarat dibagi panjang total, (3) rata-ratakan dengan bobot peluang diskret.",
+    kesimpulan: "Peluang lampu menyala selama $4 \\leq t \\leq 5$ jam adalah $\\dfrac{1}{3}$.",
+  },
 };
