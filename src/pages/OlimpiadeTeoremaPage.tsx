@@ -1054,13 +1054,6 @@ const PersegiPanjangLipatSVG = () => {
         <text x={A.x-2}  y={A.y+13}     fill="#e5e7eb" fontSize="11" fontWeight="bold" textAnchor="end">A</text>
         <text x={B.x+4}  y={B.y+13}     fill="#e5e7eb" fontSize="11" fontWeight="bold">B</text>
         <text x={P.x+4}  y={P.y+4}      fill="#fbbf24" fontSize="11" fontWeight="bold">P</text>
-        {/* BC = 9 label — rotated inside the right edge */}
-        <text
-          x={B.x - 5} y={(B.y + C.y) / 2}
-          fill="#fbbf24" fontSize="8" fontWeight="bold"
-          textAnchor="middle"
-          transform={`rotate(-90, ${B.x - 5}, ${(B.y + C.y) / 2})`}
-        >BC=9 cm</text>
 
         {/* ═══ RIGHT DIAGRAM — setelah dilipat ═══ */}
         <text x={rD.x + LW / 2} y="10" fill="#94a3b8" fontSize="8" textAnchor="middle" fontStyle="italic">Setelah dilipat</text>
