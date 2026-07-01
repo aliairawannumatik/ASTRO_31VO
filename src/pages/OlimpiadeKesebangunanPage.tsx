@@ -953,22 +953,7 @@ const OlimpiadeKesebangunanPage = () => {
                   </button>
 
                   {/* Konten Pembahasan */}
-                  {isOpen && (
-                    <div className="mt-3 bg-emerald-500/5 border border-emerald-400/20 rounded-lg p-4 animate-slide-up">
-                      <div className="mb-3 flex items-start gap-2">
-                        <span className="font-display text-xs text-emerald-300 font-bold whitespace-nowrap">JAWABAN:</span>
-                        <span className="font-body text-sm text-emerald-200 font-semibold">
-                          {renderWithLatex(soal.jawaban)}
-                        </span>
-                      </div>
-                      <div className="font-display text-xs text-cyan-300 font-bold mb-2">PEMBAHASAN:</div>
-                      <div className="font-body text-xs md:text-sm text-white/85 leading-relaxed whitespace-pre-wrap">
-                        {(soal.pembahasan ?? '').split('\n').map((line, i) => (
-                          <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  {isOpen && renderPembahasan(soal)}
                 </div>
               );
             })}
@@ -1023,22 +1008,7 @@ const OlimpiadeKesebangunanPage = () => {
                   </button>
 
                   {/* Konten Pembahasan */}
-                  {isOpen && (
-                    <div className="mt-3 bg-emerald-500/5 border border-emerald-400/20 rounded-lg p-4 animate-slide-up">
-                      <div className="mb-3 flex items-start gap-2">
-                        <span className="font-display text-xs text-emerald-300 font-bold whitespace-nowrap">JAWABAN:</span>
-                        <span className="font-body text-sm text-emerald-200 font-semibold">
-                          {renderWithLatex(soal.jawaban)}
-                        </span>
-                      </div>
-                      <div className="font-display text-xs text-cyan-300 font-bold mb-2">PEMBAHASAN:</div>
-                      <div className="font-body text-xs md:text-sm text-white/85 leading-relaxed whitespace-pre-wrap">
-                        {(soal.pembahasan ?? '').split('\n').map((line, i) => (
-                          <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  {isOpen && renderPembahasan(soal)}
                 </div>
               );
             })}
