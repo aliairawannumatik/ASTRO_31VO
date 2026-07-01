@@ -562,4 +562,15 @@ export const segitigaSegiempatOlimpiadePembahasan: Record<number, Pembahasan> = 
     kesimpulan:
       "Perbandingan luas $\\triangle PQR : \\triangle ABC = 1 : 19$.",
   },
+  52: {
+    jawaban: "A. $\\sqrt{2}$",
+    konsepTrik:
+      "Gunakan sistem koordinat: letakkan persegi $ABCD$ dengan $A=(0,0)$, $B=(a,0)$, $C=(a,a)$, $D=(0,a)$. Persegi $DEFG$ berbagi titik $D$ dengan rotasi sudut $\\varphi$. Kunci: ekspresikan $BF^2$ dalam bentuk vektor berputar dari $DE$, lalu tunjukkan bahwa $BF^2 = 2 \\cdot AE^2$ untuk semua nilai $a$, $t$, dan $\\varphi$ yang valid.",
+    stepByStep:
+      "Misalkan sisi persegi $ABCD = a$ dan sisi $DEFG = t$, dengan $DEFG$ dirotasi sudut $\\varphi$ ($0 < \\varphi < 90°$) dari $D$.\nTitik-titik: $A=(0,0)$, $B=(a,0)$, $D=(0,a)$.\nKarena $DEFG$ berputar sebesar $\\varphi$ terhadap horizontal:\n$E = (t\\cos\\varphi,\\ a - t\\sin\\varphi)$\n$F = (t(\\cos\\varphi + \\sin\\varphi),\\ a + t(\\cos\\varphi - \\sin\\varphi))$\nHitung $AE^2$:\n$AE^2 = (t\\cos\\varphi)^2 + (a - t\\sin\\varphi)^2 = t^2 + a^2 - 2at\\sin\\varphi$\nHitung $BF^2$:\n$BF^2 = (a - t(\\cos\\varphi+\\sin\\varphi))^2 + (a + t(\\cos\\varphi-\\sin\\varphi))^2$\nGunakan identitas $(x-p)^2 + (x+p)^2 = 2x^2 + 2p^2$ dengan $x = a - t\\sin\\varphi$ dan $p = t\\cos\\varphi$:\n$BF^2 = 2(a - t\\sin\\varphi)^2 + 2t^2\\cos^2\\varphi = 2(a^2 - 2at\\sin\\varphi + t^2) = 2 \\cdot AE^2$\nOleh karena itu: $\\dfrac{BF}{AE} = \\sqrt{\\dfrac{BF^2}{AE^2}} = \\sqrt{2}$\nNilai ini konstan dan tidak bergantung pada $a$, $t$, maupun sudut $\\varphi$.",
+    tips:
+      "Trik utama: tunjukkan $BF^2 = 2 \\cdot AE^2$ secara aljabar menggunakan identitas $(x-p)^2+(x+p)^2 = 2x^2+2p^2$. Informasi $BE = 3$ cm adalah data pengecoh — nilai $\\dfrac{BF}{AE}$ tidak bergantung pada panjang $BE$.",
+    kesimpulan:
+      "Nilai $\\dfrac{BF}{AE} = \\sqrt{2}$, berlaku untuk sembarang ukuran dan orientasi kedua persegi selama $E$ dan $F$ berada di dalam $ABCD$.",
+  },
 };
