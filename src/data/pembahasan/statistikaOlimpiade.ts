@@ -550,4 +550,23 @@ export const statistikaOlimpiadePembahasan: Record<number, Pembahasan> = {
     kesimpulan:
       "$x + y = 37{,}4$ (kunci OSN 2024).",
   },
+  38: {
+    jawaban: "C. $\\frac{19}{30}$",
+    konsepTrik:
+      "Gunakan prinsip inklusi-eksklusi: $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. " +
+      "Himpunan A = kelipatan 3 dari 1−30, Himpunan B = bilangan prima dari 1−30. " +
+      "Irisan $A \\cap B$ = bilangan yang sekaligus kelipatan 3 DAN prima (hanya bilangan 3).",
+    stepByStep:
+      "Total kartu = 30\n" +
+      "Himpunan A (kelipatan 3): 3, 6, 9, 12, 15, 18, 21, 24, 27, 30 → $n(A) = 10$\n" +
+      "Himpunan B (bilangan prima): 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 → $n(B) = 10$\n" +
+      "Irisan $A \\cap B$ (kelipatan 3 sekaligus prima): hanya 3 → $n(A \\cap B) = 1$\n" +
+      "Inklusi-eksklusi: $n(A \\cup B) = 10 + 10 - 1 = 19$\n" +
+      "Peluang doorprize $= \\dfrac{19}{30}$",
+    tips:
+      "Jangan lupa: bilangan 1 BUKAN bilangan prima. Satu-satunya bilangan yang kelipatan 3 sekaligus prima adalah 3 itu sendiri (karena setiap kelipatan 3 lainnya pasti habis dibagi 3, sehingga bukan prima). " +
+      "Selalu gunakan inklusi-eksklusi jika ada kata 'atau' agar tidak menghitung dua kali.",
+    kesimpulan:
+      "Peluang mendapat doorprize = $\\dfrac{19}{30}$ (Jawaban C).",
+  },
 };
