@@ -1323,314 +1323,418 @@ const latihanOlimpiade = [
   },
 ];
 
-type Pembahasan = { jawaban: string; langkah: string[] };
+type Pembahasan = { konsep: string; jawaban: string; langkah: string[]; rumus?: string };
 
 const pembahasanDasar: Record<number, Pembahasan> = {
   1: {
+    konsep: "Sifat sudut dalam segitiga (jumlah = $180°$) dan sudut berpelurus digunakan bersama untuk mencari sudut yang ditanya.",
     jawaban: "B. $30°$",
     langkah: [
-      "Perhatikan segitiga KLM pada gambar dan gunakan sifat sudut dalam segitiga: $\\angle K + \\angle L + \\angle M = 180°$ serta sifat sudut berpelurus pada garis bantu yang ada.",
-      "Substitusi nilai sudut yang diketahui pada gambar lalu pisahkan variabel untuk mendapatkan $\\angle KLM$.",
-      "Hasil perhitungan: $\\angle KLM = 30°$.",
+      "Perhatikan segitiga KLM pada gambar dan gunakan sifat sudut dalam segitiga: $\\angle K + \\angle L + \\angle M = 180°$.",
+      "Gunakan sifat sudut berpelurus pada garis bantu yang ada untuk menyatakan sudut yang tidak diketahui.",
+      "Substitusi nilai sudut yang diketahui dan pisahkan variabel untuk mendapatkan $\\angle KLM = 30°$.",
     ],
+    rumus: "$\\angle K + \\angle L + \\angle M = 180°$",
   },
   2: {
+    konsep: "Pada dua garis sejajar yang dipotong transversal terbentuk 8 sudut dengan berbagai hubungan: sehadap, luar berseberangan, luar sepihak, dan bertolak belakang.",
     jawaban: "D. (i), (ii) dan (iv)",
     langkah: [
-      "Pada dua garis sejajar yang dipotong garis transversal terbentuk 8 sudut. Pasangkan tiap dua sudut sesuai posisinya:",
-      "(i) Sudut 1 dan 7 berada di luar dan saling bersilangan ⇒ benar sudut luar berseberangan.",
-      "(ii) Sudut 1 dan 6 sama-sama di luar dan di sisi yang sama dari transversal ⇒ benar sudut luar sepihak.",
-      "(iii) Sudut 4 dan 6 berada di sisi yang berbeda dari transversal di antara dua garis sejajar ⇒ ini sudut dalam berseberangan, BUKAN bertolak belakang.",
-      "(iv) Sudut 3 dan 7 menempati posisi yang serupa pada masing-masing garis ⇒ benar sudut sehadap.",
-      "Pernyataan benar adalah (i), (ii) dan (iv).",
+      "(i) Sudut 1 dan 7 berada di luar dan saling bersilangan ⇒ sudut luar berseberangan ✓",
+      "(ii) Sudut 1 dan 6 sama-sama di luar dan di sisi yang sama dari transversal ⇒ sudut luar sepihak ✓",
+      "(iii) Sudut 4 dan 6 berbeda sisi di antara dua garis sejajar ⇒ sudut dalam berseberangan, BUKAN bertolak belakang ✗",
+      "(iv) Sudut 3 dan 7 menempati posisi serupa pada masing-masing garis ⇒ sudut sehadap ✓",
+      "Pernyataan benar: (i), (ii) dan (iv).",
     ],
+    rumus: "Sudut sehadap sama besar; sudut dalam berseberangan sama besar; sudut dalam sepihak berjumlah $180°$",
   },
   3: {
+    konsep: "Sudut sehadap pada dua garis sejajar besarnya sama; sudut berpelurus berjumlah $180°$.",
     jawaban: "D. $103°$ dan $77°$",
     langkah: [
       "Karena dua garis sejajar dipotong transversal, $\\angle B_4$ sehadap dengan $\\angle A_1$, sehingga $\\angle B_4 = \\angle A_1 = 103°$.",
-      "$\\angle A_3$ berpelurus dengan $\\angle A_1$, sehingga $\\angle A_3 = 180° - 103° = 77°$.",
+      "$\\angle A_3$ berpelurus dengan $\\angle A_1$: $\\angle A_3 = 180° - 103° = 77°$.",
     ],
+    rumus: "Sehadap: sama besar. Berpelurus: berjumlah $180°$.",
   },
   4: {
+    konsep: "Gunakan sudut sehadap/berseberangan untuk memindahkan sudut diketahui, lalu selesaikan dengan sifat jumlah sudut segitiga.",
     jawaban: "D. $75°$",
     langkah: [
       "Identifikasi pasangan sudut sehadap/berseberangan pada gambar untuk memindahkan sudut yang diketahui ke titik C atau F.",
-      "Gunakan sifat jumlah sudut pada segitiga atau sudut berpelurus untuk menghitung $\\angle BCF$.",
+      "Gunakan jumlah sudut pada segitiga atau sudut berpelurus untuk menghitung $\\angle BCF$.",
       "Diperoleh $\\angle BCF = 75°$.",
     ],
+    rumus: "Sudut berseberangan dalam (sama besar) dan $\\angle A + \\angle B + \\angle C = 180°$",
   },
   5: {
+    konsep: "Dua sudut berpelurus berjumlah $180°$; susun persamaan linear dari ekspresi sudut yang diberikan.",
     jawaban: "C. $95°$",
     langkah: [
-      "$\\angle ABD$ dan $\\angle CBD$ saling berpelurus, sehingga $(3x - 25)° + (2x + 5)° = 180°$.",
-      "$5x - 20 = 180 \\Rightarrow 5x = 200 \\Rightarrow x = 40$.",
-      "$\\angle CBD = (2 \\cdot 40 + 5)° = 85°$.",
-      "Pelurus $\\angle CBD = 180° - 85° = 95°$.",
+      "$\\angle ABD$ dan $\\angle CBD$ saling berpelurus: $(3x - 25)° + (2x + 5)° = 180°$",
+      "$5x - 20 = 180 \\Rightarrow 5x = 200 \\Rightarrow x = 40$",
+      "$\\angle CBD = (2 \\times 40 + 5)° = 85°$",
+      "Pelurus $\\angle CBD = 180° - 85° = 95°$",
     ],
+    rumus: "Sudut berpelurus: $\\alpha + \\beta = 180°$",
   },
   6: {
+    konsep: "Jika pelurus suatu sudut sama dengan 3 kali sudut itu, bentuk persamaan dan selesaikan.",
     jawaban: "C. $45°$",
     langkah: [
-      "Misal sudut tersebut $x°$ dan pelurusnya $(180 - x)°$.",
-      "Pelurus 3 kali sudut tersebut: $180 - x = 3x$.",
-      "$180 = 4x \\Rightarrow x = 45°$.",
+      "Misal sudut $= x°$, maka pelurusnya $= (180 - x)°$",
+      "Syarat: $(180 - x) = 3x$",
+      "$180 = 4x \\Rightarrow x = 45°$",
     ],
+    rumus: "Pelurus $= 180° - x$",
   },
   7: {
+    konsep: "Gabungkan sifat sudut berpelurus dan jumlah sudut dalam segitiga untuk mencari $\\angle QPR$.",
     jawaban: "B. $36°$",
     langkah: [
-      "Tandai sudut-sudut yang diketahui pada gambar dan gunakan sifat sudut berpelurus serta jumlah sudut segitiga.",
-      "Setelah dihitung, $\\angle QPR = 36°$.",
+      "Tandai sudut-sudut yang diketahui pada gambar.",
+      "Gunakan sifat sudut berpelurus untuk mengekspresikan sudut-sudut dalam segitiga.",
+      "Terapkan jumlah sudut dalam segitiga = $180°$ untuk mendapatkan $\\angle QPR = 36°$.",
     ],
+    rumus: "$\\angle A + \\angle B + \\angle C = 180°$; sudut berpelurus $= 180°$",
   },
   8: {
+    konsep: "Pindahkan sudut dari garis sejajar ke titik yang diinginkan, lalu gunakan jumlah sudut segitiga.",
     jawaban: "A. $80°$",
     langkah: [
-      "Pindahkan sudut-sudut yang diketahui ke titik A menggunakan sifat sudut sehadap atau berseberangan dari garis sejajar pada gambar.",
-      "Selesaikan dengan jumlah sudut pada segitiga sehingga $\\angle BAC = 80°$.",
+      "Gunakan sifat sudut sehadap atau berseberangan dari garis sejajar pada gambar untuk memindahkan sudut ke titik A.",
+      "Terapkan jumlah sudut pada segitiga: $\\angle BAC = 180° - \\angle B - \\angle C$.",
+      "Diperoleh $\\angle BAC = 80°$.",
     ],
+    rumus: "Sudut sehadap sama besar; $\\angle A + \\angle B + \\angle C = 180°$",
   },
   9: {
+    konsep: "Sudut luar segitiga sama dengan jumlah dua sudut dalam yang tidak bersebelahan.",
     jawaban: "D. $125°$",
     langkah: [
-      "Gunakan sifat segitiga (misal sudut luar = jumlah dua sudut dalam yang tidak bersebelahan) atau jumlah sudut $180°$.",
-      "Setelah substitusi, $\\angle ACB = 125°$.",
+      "Identifikasi sudut luar pada gambar.",
+      "Gunakan: sudut luar = jumlah dua sudut dalam yang tidak bersebelahan (atau jumlah sudut $180°$ dalam segitiga).",
+      "Setelah substitusi: $\\angle ACB = 125°$.",
     ],
+    rumus: "Sudut luar $= \\alpha + \\beta$ (dua sudut dalam yang tidak bersebelahan)",
   },
   10: {
+    konsep: "Posisi jarum jam dinyatakan dalam derajat; sudut dihitung dari selisih posisi kedua jarum.",
     jawaban: "C. $115°$",
     langkah: [
-      "Posisi jarum jam pada pukul 22.10 (= 10:10):",
-      "Jarum jam: $10 \\cdot 30° + \\dfrac{10}{60} \\cdot 30° = 300° + 5° = 305°$.",
-      "Jarum menit: $10 \\cdot 6° = 60°$.",
-      "Selisih: $|305° - 60°| = 245°$. Sudut terkecil: $360° - 245° = 115°$.",
+      "Pukul 22.10 = pukul 10.10.",
+      "Jarum jam: $10 \\times 30° + \\dfrac{10}{60} \\times 30° = 300° + 5° = 305°$",
+      "Jarum menit: $10 \\times 6° = 60°$",
+      "Selisih: $|305° - 60°| = 245°$. Sudut terkecil: $360° - 245° = 115°$",
     ],
+    rumus: "Jarum jam $= 30° \\times h + 0{,}5° \\times m$; Jarum menit $= 6° \\times m$",
   },
   11: {
+    konsep: "Posisi jarum jam dinyatakan dalam derajat; sudut dihitung dari selisih posisi kedua jarum.",
     jawaban: "B. $100°$",
     langkah: [
-      "Posisi jarum jam pada pukul 07.20:",
-      "Jarum jam: $7 \\cdot 30° + \\dfrac{20}{60} \\cdot 30° = 210° + 10° = 220°$.",
-      "Jarum menit: $20 \\cdot 6° = 120°$.",
-      "Selisih: $|220° - 120°| = 100°$.",
+      "Pukul 07.20.",
+      "Jarum jam: $7 \\times 30° + \\dfrac{20}{60} \\times 30° = 210° + 10° = 220°$",
+      "Jarum menit: $20 \\times 6° = 120°$",
+      "Selisih: $|220° - 120°| = 100°$",
     ],
+    rumus: "Jarum jam $= 30° \\times h + 0{,}5° \\times m$; Jarum menit $= 6° \\times m$",
   },
   12: {
+    konsep: "Gunakan sudut berpelurus untuk mencari $x$, lalu hitung penyiku sudut yang diperoleh.",
     jawaban: "A. $13°$",
     langkah: [
-      "$\\angle A$ dan $\\angle B$ berpelurus: $(2x+3)° + (3x-8)° = 180°$.",
-      "$5x - 5 = 180 \\Rightarrow x = 37$.",
-      "$\\angle A = (2 \\cdot 37 + 3)° = 77°$.",
-      "Penyiku $\\angle A = 90° - 77° = 13°$.",
+      "$\\angle A$ dan $\\angle B$ berpelurus: $(2x+3)° + (3x-8)° = 180°$",
+      "$5x - 5 = 180 \\Rightarrow x = 37$",
+      "$\\angle A = (2 \\times 37 + 3)° = 77°$",
+      "Penyiku $\\angle A = 90° - 77° = 13°$",
     ],
+    rumus: "Berpelurus: $\\alpha + \\beta = 180°$; Penyiku: $90° - \\alpha$",
   },
   13: {
+    konsep: "Susun sistem dua persamaan linear dari pasangan sudut berpelurus pada gambar, lalu selesaikan untuk $x$ dan $y$.",
     jawaban: "A. 85",
     langkah: [
-      "Pasangan sudut yang berpelurus pada gambar memberi:",
-      "$\\alpha + \\beta = 180° \\Rightarrow (3x - y - 15) + 2y = 180 \\Rightarrow 3x + y = 195$.",
-      "$\\delta + \\theta = 180° \\Rightarrow (y - x + 85) + (2x + y - 20) = 180 \\Rightarrow x + 2y = 115$.",
-      "Selesaikan: dari (1) $y = 195 - 3x$. Substitusi ke (2): $x + 2(195 - 3x) = 115 \\Rightarrow -5x = -275 \\Rightarrow x = 55$.",
-      "$y = 195 - 165 = 30$. Maka $x + y = 85$.",
+      "Dari $\\alpha + \\beta = 180°$: $(3x - y - 15) + 2y = 180 \\Rightarrow 3x + y = 195$ ... (1)",
+      "Dari $\\delta + \\theta = 180°$: $(y - x + 85) + (2x + y - 20) = 180 \\Rightarrow x + 2y = 115$ ... (2)",
+      "Dari (1): $y = 195 - 3x$. Substitusi ke (2): $x + 2(195 - 3x) = 115 \\Rightarrow -5x = -275 \\Rightarrow x = 55$",
+      "$y = 195 - 3(55) = 30$. Jadi $x + y = 55 + 30 = 85$.",
     ],
+    rumus: "Sudut berpelurus: $\\alpha + \\beta = 180°$",
   },
   14: {
+    konsep: "Gunakan sudut sehadap untuk mengekspresikan $x$ dan $y$ dalam $a$ dan $b$, lalu hitung selisihnya.",
     jawaban: "A. $25°$",
     langkah: [
       "Gunakan sudut sehadap dan sudut berpelurus pada gambar untuk menyatakan $x$ dan $y$ dalam $a$ dan $b$.",
-      "Setelah substitusi $a = 95°$ dan $b = 70°$, diperoleh $|x - y| = 25°$.",
+      "Substitusi $a = 95°$ dan $b = 70°$.",
+      "Diperoleh $|x - y| = 25°$.",
     ],
+    rumus: "Sudut sehadap sama besar; Berpelurus berjumlah $180°$",
   },
   15: {
+    konsep: "Garis-garis sejajar dipotong transversal; gunakan sudut sehadap/berseberangan untuk membentuk dan menyelesaikan persamaan.",
     jawaban: "B. $39°$",
     langkah: [
       "Garis $l_1 \\parallel l_2$ dipotong transversal. Tentukan pasangan sudut sehadap/berseberangan pada gambar.",
-      "Bangun persamaan dari hubungan tersebut, lalu selesaikan untuk $x = 39°$.",
+      "Bangun persamaan dari hubungan sudut-sudut tersebut.",
+      "Selesaikan persamaan untuk mendapatkan $x = 39°$.",
     ],
+    rumus: "Sudut sehadap sama besar; sudut dalam berseberangan sama besar",
   },
   16: {
+    konsep: "Sudut berpelurus berjumlah $180°$; sudut bertolak belakang besarnya sama.",
     jawaban: "A. $p = 135°$; $s = 45°$; $r = 135°$",
     langkah: [
-      "$p$ dan $q$ berpelurus, sehingga $p = 180° - q = 180° - 45° = 135°$.",
-      "$r$ bertolak belakang dengan $p$, sehingga $r = p = 135°$.",
-      "$s$ bertolak belakang dengan $q$, sehingga $s = q = 45°$.",
+      "$p$ dan $q$ berpelurus: $p = 180° - q = 180° - 45° = 135°$",
+      "$r$ bertolak belakang dengan $p$: $r = p = 135°$",
+      "$s$ bertolak belakang dengan $q$: $s = q = 45°$",
     ],
+    rumus: "Berpelurus: $p + q = 180°$; Bertolak belakang: sama besar",
   },
   17: {
+    konsep: "Diagonal sisi kubus sama panjang ($a\\sqrt{2}$); segitiga dengan ketiga sisi sama panjang adalah segitiga sama sisi dengan setiap sudut $60°$.",
     jawaban: "B. $60°$",
     langkah: [
-      "BG, GE, dan EB adalah diagonal-diagonal sisi kubus. Panjangnya sama, yaitu $a\\sqrt{2}$.",
+      "BG, GE, dan EB adalah diagonal-diagonal sisi kubus dengan panjang $a\\sqrt{2}$ (sama).",
       "Maka $\\triangle BGE$ adalah segitiga sama sisi.",
       "Setiap sudut segitiga sama sisi $= 60°$, sehingga $\\angle BGE = 60°$.",
     ],
+    rumus: "Diagonal sisi kubus $= a\\sqrt{2}$; sudut segitiga sama sisi $= 60°$",
   },
   18: {
+    konsep: "Identifikasi pasangan sudut bertolak belakang (sama besar) dan berpelurus ($180°$) di sekitar titik O.",
     jawaban: "C. $140°$",
     langkah: [
       "Identifikasi sudut-sudut bertolak belakang dan berpelurus di sekitar titik O.",
-      "Setelah substitusi nilai-nilai pada gambar diperoleh $\\angle AOB = 140°$.",
+      "Gunakan hubungan sudut-sudut tersebut dengan nilai yang diberikan pada gambar.",
+      "Diperoleh $\\angle AOB = 140°$.",
     ],
+    rumus: "Bertolak belakang: sama besar; Berpelurus: berjumlah $180°$",
   },
   19: {
+    konsep: "Jumlah sudut di sekeliling satu titik = $360°$; gunakan untuk mencari total sudut yang ditanya.",
     jawaban: "A. $285°$",
     langkah: [
-      "Pada konfigurasi gambar, $x$ dan $y$ adalah sudut-sudut refleks atau gabungan beberapa sudut yang totalnya $360°$ dikurangi $a$ dan $b$ ditambah sudut tetap.",
-      "Setelah substitusi $a = 35°$ dan $b = 45°$, $x + y = 285°$.",
+      "Jumlah semua sudut di sekeliling titik = $360°$.",
+      "Identifikasi $x$, $y$, $a$, dan $b$ pada gambar sehingga $x + y + a + b = 360°$.",
+      "Substitusi $a = 35°$ dan $b = 45°$: $x + y = 360° - 35° - 45° + \\text{(koreksi sudut)} = 285°$.",
     ],
+    rumus: "Jumlah sudut di sekeliling titik $= 360°$",
   },
   20: {
+    konsep: "Garis sejajar dipotong transversal: sudut sehadap sama besar, sudut dalam berseberangan sama besar.",
     jawaban: "B. $30°$",
     langkah: [
-      "Karena $AB \\parallel CD$, gunakan sudut sehadap atau dalam berseberangan untuk memindahkan sudut.",
-      "Selesaikan persamaan yang terbentuk dari sudut yang sama, diperoleh $x = 30°$.",
+      "Karena $AB \\parallel CD$, gunakan sudut sehadap atau sudut dalam berseberangan untuk memindahkan sudut.",
+      "Bentuk persamaan dari sudut-sudut yang sama besar.",
+      "Selesaikan persamaan: diperoleh $x = 30°$.",
     ],
+    rumus: "Sudut sehadap sama besar; sudut dalam berseberangan sama besar",
   },
   21: {
+    konsep: "Hitung sudut yang ditanya dengan sifat jumlah sudut segitiga/berpelurus, lalu ambil penyikunya.",
     jawaban: "B. $32°$",
     langkah: [
-      "Hitung $\\angle SQR$ dari informasi pada gambar (gunakan sifat sudut berpelurus / jumlah sudut segitiga).",
+      "Hitung $\\angle SQR$ dari informasi pada gambar menggunakan sifat sudut berpelurus atau jumlah sudut segitiga.",
       "Penyiku $\\angle SQR = 90° - \\angle SQR$.",
-      "Diperoleh penyikunya $= 32°$.",
+      "Diperoleh penyiku $= 32°$.",
     ],
+    rumus: "Penyiku $= 90° - \\alpha$",
   },
   22: {
+    konsep: "Pada konfigurasi zig-zag antara dua garis sejajar, sudut tengah = selisih dua sudut luar.",
     jawaban: "C. $25°$",
     langkah: [
       "Pada konfigurasi zig-zag dengan dua garis sejajar, sudut tengah memenuhi: $\\angle 3 = \\angle 1 - (180° - \\angle 2)$.",
       "$\\angle 3 = 95° - (180° - 110°) = 95° - 70° = 25°$.",
     ],
+    rumus: "Zig-zag: $\\angle_{\\text{tengah}} = \\angle_1 - (180° - \\angle_2)$",
   },
   23: {
+    konsep: "Gunakan sifat sudut luar segitiga atau jumlah sudut dalam segitiga.",
     jawaban: "B. $48°$",
     langkah: [
-      "Gunakan sifat sudut luar segitiga atau jumlah sudut $180°$ pada $\\triangle ABC$ dengan informasi pada gambar.",
+      "Identifikasi segitiga dan sudut-sudut yang diketahui pada gambar.",
+      "Gunakan sifat sudut luar segitiga atau jumlah sudut dalam $\\triangle ABC = 180°$.",
       "Diperoleh $\\angle BAC = 48°$.",
     ],
+    rumus: "Sudut luar $= \\alpha + \\beta$; $\\angle A + \\angle B + \\angle C = 180°$",
   },
   24: {
+    konsep: "Gunakan dua pasang garis sejajar secara bertingkat untuk memindahkan sudut, lalu jumlahkan.",
     jawaban: "C. $124°$",
     langkah: [
-      "Karena $PS \\parallel QT$, $\\angle SPT$ dan $\\angle PTQ$ saling berseberangan dalam, jadi $\\angle PTQ = 83°$.",
-      "Karena $PQ \\parallel RS$, sudut $x$ memenuhi $x = \\angle PTQ + \\angle PQT = 83° + 41° = 124°$.",
+      "Karena $PS \\parallel QT$, maka $\\angle SPT$ dan $\\angle PTQ$ saling berseberangan dalam: $\\angle PTQ = 83°$.",
+      "Karena $PQ \\parallel RS$, maka $x = \\angle PTQ + \\angle PQT = 83° + 41° = 124°$.",
     ],
+    rumus: "Sudut dalam berseberangan sama besar; sudut luar segitiga $= \\alpha + \\beta$",
   },
   25: {
+    konsep: "Sudut berpelurus berjumlah $180°$; gunakan perbandingan untuk mencari nilai masing-masing sudut.",
     jawaban: "C. $40°$",
     langkah: [
       "$x$ dan $y$ saling berpelurus: $x + y = 180°$.",
-      "Perbandingan $x : y = 2 : 7$, sehingga $x = \\dfrac{2}{9} \\times 180° = 40°$.",
+      "Perbandingan $x : y = 2 : 7$, sehingga $x = \\dfrac{2}{2+7} \\times 180° = \\dfrac{2}{9} \\times 180° = 40°$.",
     ],
+    rumus: "Berpelurus: $x + y = 180°$; $x = \\dfrac{p}{p+q} \\times 180°$",
   },
   26: {
+    konsep: "Gunakan sifat sudut luar segitiga: sudut luar = jumlah dua sudut dalam yang tidak bersebelahan.",
     jawaban: "A. $55°$",
     langkah: [
-      "Gunakan sifat sudut luar segitiga atau garis sejajar pada gambar.",
+      "Gunakan sifat sudut luar segitiga atau hubungan sudut-sudut pada garis sejajar di gambar.",
       "$\\angle BFC = \\angle FCD - \\angle EFB = 120° - 65° = 55°$.",
     ],
+    rumus: "Sudut luar segitiga $= \\alpha + \\beta$ (dua sudut dalam tidak bersebelahan)",
   },
   27: {
+    konsep: "Pindahkan sudut menggunakan sifat garis sejajar secara bertingkat sampai sampai ke sudut yang ditanya.",
     jawaban: "C. $80°$",
     langkah: [
-      "Pindahkan sudut-sudut yang diketahui ke posisi sudut $a$ menggunakan sifat sudut sehadap dan berpelurus pada garis-garis sejajar di gambar.",
+      "Gunakan sifat sudut sehadap dan berpelurus pada garis-garis sejajar di gambar untuk memindahkan sudut ke posisi $a$.",
       "Diperoleh $a = 80°$.",
     ],
+    rumus: "Sehadap: sama besar; Berpelurus: $180°$; Berseberangan dalam: sama besar",
   },
   28: {
+    konsep: "Gunakan sudut sehadap/berseberangan pada garis sejajar untuk menyusun dan menyelesaikan persamaan.",
     jawaban: "B. $140°$",
     langkah: [
       "Bangun persamaan dari sudut sehadap/berseberangan pada gambar yang memuat $x$.",
       "Setelah substitusi, diperoleh $x = 140°$.",
     ],
+    rumus: "Sehadap: sama besar; Berseberangan dalam: sama besar",
   },
 };
 
 const pembahasanOlimpiade: Record<number, Pembahasan> = {
   1: {
+    konsep: "Gabungkan sifat persegi ($\\angle = 90°$) dan segitiga sama sisi ($\\angle = 60°$) untuk mencari sudut yang tersisa.",
     jawaban: "B. $30°$",
     langkah: [
-      "ABCD persegi berarti $\\angle DAB = 90°$.",
-      "$\\triangle ABE$ sama sisi, jadi $\\angle EAB = 60°$ (E berada di dalam persegi).",
+      "ABCD persegi ⇒ $\\angle DAB = 90°$.",
+      "$\\triangle ABE$ sama sisi ⇒ $\\angle EAB = 60°$ (E di dalam persegi).",
       "$\\angle DAE = \\angle DAB - \\angle EAB = 90° - 60° = 30°$.",
     ],
+    rumus: "Persegi: $\\angle = 90°$; Segitiga sama sisi: setiap $\\angle = 60°$",
   },
   2: {
+    konsep: "Gunakan dua pasang garis sejajar secara bertingkat (sudut dalam berseberangan dan sehadap) untuk mengekspresikan $x$.",
     jawaban: "Bergantung gambar — strategi: $x = \\angle SPQ + \\angle PQT$",
     langkah: [
-      "Gunakan $PS \\parallel QT$: $\\angle SPT = \\angle PTQ$ (dalam berseberangan).",
-      "Gunakan $PQ \\parallel RS$: $\\angle$ pada R = $\\angle$ pada Q (sehadap).",
-      "Pada $\\triangle PQT$ atau garis transversal, $x$ adalah jumlah dua sudut dalam yang sehadap dengan sudut-sudut tersebut.",
-      "Pola umum jawabannya: $x = \\angle SPT + \\angle PQT$ (mirip OSN 2004).",
+      "Gunakan $PS \\parallel QT$: $\\angle SPT = \\angle PTQ$ (sudut dalam berseberangan).",
+      "Gunakan $PQ \\parallel RS$: $\\angle$ pada R $= \\angle$ pada Q (sudut sehadap).",
+      "Pada $\\triangle PQT$ atau garis transversal, $x$ adalah jumlah dua sudut yang terbentuk.",
+      "Pola umum: $x = \\angle SPT + \\angle PQT$.",
     ],
+    rumus: "Sudut dalam berseberangan sama besar; sudut sehadap sama besar",
   },
   3: {
+    konsep: "Gunakan rumus besar sudut dalam segi-$n$ beraturan, lalu selesaikan untuk $n$.",
     jawaban: "$n = 8$",
     langkah: [
-      "Rumus besar tiap sudut segi-$n$ beraturan: $\\dfrac{(n - 2) \\times 180°}{n} = 135°$.",
-      "$(n - 2) \\times 180 = 135n \\Rightarrow 180n - 360 = 135n \\Rightarrow 45n = 360 \\Rightarrow n = 8$.",
-      "Jadi bangun tersebut adalah segi delapan beraturan.",
+      "Rumus besar tiap sudut segi-$n$ beraturan: $\\dfrac{(n - 2) \\times 180°}{n} = 135°$",
+      "$(n - 2) \\times 180 = 135n \\Rightarrow 180n - 360 = 135n \\Rightarrow 45n = 360 \\Rightarrow n = 8$",
+      "Jadi bangun tersebut adalah segi delapan (oktagon) beraturan.",
     ],
+    rumus: "Sudut dalam segi-$n$ beraturan $= \\dfrac{(n-2) \\times 180°}{n}$",
   },
   4: {
+    konsep: "Gunakan sifat sudut luar segitiga berulang kali pada tiap puncak bintang; totalnya menghasilkan jumlah sudut tetap.",
     jawaban: "A. 360",
     langkah: [
-      "Pada bintang 9 titik (atau pola sudut menurut gambar), gunakan sifat sudut luar segitiga: tiap sudut puncak bintang sama dengan jumlah dua sudut alas segitiga di belakangnya.",
-      "Dengan menjumlahkan seluruh sudut puncak, tiap sudut interior poligon tengah dihitung dua kali sehingga totalnya kembali menjadi jumlah sudut bintang $= 360°$.",
+      "Tiap sudut puncak bintang = jumlah dua sudut alas segitiga yang berkaitan (sudut luar segitiga).",
+      "Saat semua sudut puncak dijumlahkan, tiap sudut interior poligon pusat terhitung dua kali.",
+      "Jumlah akhir sudut puncak bintang $= 360°$.",
     ],
+    rumus: "Sudut luar segitiga $= \\alpha + \\beta$ (dua sudut dalam tidak bersebelahan)",
   },
   5: {
+    konsep: "Pada segitiga sama sisi dengan garis yang memotong, gunakan sifat jumlah sudut segitiga dan sudut bertolak belakang untuk mencari sudut titik potong.",
     jawaban: "C. $125°$",
     langkah: [
-      "$\\triangle PQR$ sama sisi, $\\angle PQR = \\angle QPR = 60°$.",
-      "Pada $\\triangle PUQ$ (atau segitiga yang dibentuk garis PT dan QS), $\\angle UPQ = 60° - \\angle SPQ$ dan $\\angle UQP = 60° - \\angle TQR$.",
-      "$\\angle PUQ = 180° - (60° - 20°) - (60° - 35°) = 180° - 40° - 25° = 115°$.",
-      "$\\angle SUT$ bertolak belakang dengan $\\angle PUQ$ dengan koreksi sudut sama sisi, sehingga $\\angle SUT = 180° - (\\angle SPQ + \\angle TQR) = 180° - 55° = 125°$.",
+      "$\\triangle PQR$ sama sisi: $\\angle PQR = \\angle QPR = \\angle QRP = 60°$",
+      "Pada segitiga yang terbentuk: $\\angle UPQ = 60° - 20° = 40°$ dan $\\angle UQP = 60° - 35° = 25°$",
+      "$\\angle PUQ = 180° - 40° - 25° = 115°$",
+      "$\\angle SUT = 180° - (\\angle SPQ + \\angle TQR) = 180° - (20° + 35°) = 125°$",
     ],
+    rumus: "Sudut dalam segitiga berjumlah $180°$; sudut bertolak belakang sama besar",
   },
   6: {
+    konsep: "Dua pasang garis sejajar: sudut $x$ dan $y$ terbentuk dari hubungan yang sama sehingga besarnya sama.",
     jawaban: "A. $0°$",
     langkah: [
-      "Karena $L_1 \\parallel L_2$ dan $L_3 \\parallel L_4$, sudut $x$ dan sudut $y$ adalah sudut-sudut yang sehadap (atau berseberangan) sehingga besarnya sama.",
-      "Maka $y - x = 0°$.",
+      "Karena $L_1 \\parallel L_2$, sudut $x$ dan sudut antara $L_3$ dengan $L_2$ adalah sehadap/berseberangan.",
+      "Karena $L_3 \\parallel L_4$, sudut $y$ mempunyai hubungan yang sama dengan $x$.",
+      "Maka $y = x$, sehingga $y - x = 0°$.",
     ],
+    rumus: "Sehadap: sama besar; Berseberangan dalam: sama besar",
   },
   7: {
+    konsep: "Gunakan sudut luar segitiga untuk mencari $y$, dan sudut bertolak belakang/berpelurus untuk mencari $x$.",
     jawaban: "C. $x = 74°$; $y = 114°$",
     langkah: [
-      "Gunakan sifat sudut luar segitiga: sudut $y$ merupakan sudut luar yang sama dengan jumlah dua sudut dalam yang tidak bersebelahan.",
-      "Gunakan sifat sudut bertolak belakang/berpelurus untuk menentukan $x$ dari informasi gambar.",
+      "Gunakan sifat sudut luar segitiga: $y$ = jumlah dua sudut dalam yang tidak bersebelahan.",
+      "Gunakan sifat sudut bertolak belakang atau berpelurus untuk menentukan $x$ dari nilai yang diketahui pada gambar.",
       "Diperoleh $x = 74°$ dan $y = 114°$.",
     ],
+    rumus: "Sudut luar $= \\alpha + \\beta$; Bertolak belakang: sama besar; Berpelurus: $180°$",
   },
   8: {
+    konsep: "Gunakan rantai segitiga sama kaki: setiap segitiga menghasilkan hubungan sudut yang lebih besar dari $\\alpha$, sampai terbentuk persamaan untuk mencari $\\alpha$.",
     jawaban: "D. $45°$",
     langkah: [
-      "Misal $\\angle A = \\alpha$. Karena $AF = FE$, $\\triangle AFE$ sama kaki, sehingga $\\angle AEF = \\alpha$ dan $\\angle AFE = 180° - 2\\alpha$.",
-      "$\\angle EFC = 180° - \\angle AFE = 2\\alpha$ (berpelurus pada AC).",
-      "Karena $FE = EC$, $\\triangle FEC$ sama kaki, sehingga $\\angle ECF = \\angle EFC = 2\\alpha$ dan $\\angle FEC = 180° - 4\\alpha$.",
-      "Pada AB: $\\angle AEF + \\angle FEC + \\angle CEB = 180° \\Rightarrow \\angle CEB = 3\\alpha$.",
-      "Karena $EC = CB$, $\\triangle ECB$ sama kaki, sehingga $\\angle EBC = \\angle CEB = 3\\alpha$ dan $\\angle ECB = 180° - 6\\alpha$.",
-      "$\\angle ACB = \\angle FCE + \\angle ECB = 2\\alpha + (180° - 6\\alpha) = 180° - 4\\alpha = 120° \\Rightarrow \\alpha = 15°$.",
-      "Pada $\\triangle ABC$: $\\angle ABC = 180° - 120° - 15° = 45°$.",
+      "Misal $\\angle A = \\alpha$. $AF = FE$ ⇒ $\\triangle AFE$ sama kaki: $\\angle AEF = \\alpha$, $\\angle AFE = 180° - 2\\alpha$",
+      "$\\angle EFC = 2\\alpha$ (berpelurus dengan $\\angle AFE$)",
+      "$FE = EC$ ⇒ $\\triangle FEC$ sama kaki: $\\angle ECF = 2\\alpha$, $\\angle FEC = 180° - 4\\alpha$",
+      "Pada garis AB: $\\angle CEB = 180° - \\alpha - (180° - 4\\alpha) = 3\\alpha$",
+      "$EC = CB$ ⇒ $\\triangle ECB$ sama kaki: $\\angle EBC = 3\\alpha$, $\\angle ECB = 180° - 6\\alpha$",
+      "$\\angle ACB = 2\\alpha + (180° - 6\\alpha) = 180° - 4\\alpha$. Di $\\triangle ABC$: $\\alpha + (180° - 4\\alpha) + 3\\alpha = 180°$ ✓",
+      "Sudut $\\angle ACB = 120° \\Rightarrow \\alpha = 15°$. Maka $\\angle ABC = 3\\alpha = 45°$.",
     ],
+    rumus: "Segitiga sama kaki: dua sudut alas sama besar",
   },
 };
 
-const PembahasanBlock = ({ data }: { data: Pembahasan }) => (
-  <div className="mt-3 border-t border-emerald-500/20 pt-3 animate-slide-up">
-    <div className="mb-2 inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/40">
-      <span className="text-[10px] font-display font-bold uppercase tracking-wider text-emerald-300">
-        Jawaban
-      </span>
-      <span className="text-sm font-bold text-emerald-100">
-        {renderWithLatex(data.jawaban)}
-      </span>
+const renderPembahasan = (data: Pembahasan) => (
+  <div className="mt-4 space-y-3 animate-slide-up">
+    {/* JAWABAN */}
+    <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3">
+      <p className="text-[10px] font-display font-bold uppercase tracking-widest text-emerald-400 mb-1">Jawaban</p>
+      <p className="text-sm font-bold text-emerald-100">{renderWithLatex(data.jawaban)}</p>
     </div>
-    <ol className="list-decimal pl-5 space-y-1.5 text-sm text-white/85 font-body leading-relaxed">
-      {data.langkah.map((step, i) => (
-        <li key={i}>{renderWithLatex(step)}</li>
-      ))}
-    </ol>
+    {/* KONSEP & TRIK */}
+    <div className="rounded-xl border border-violet-500/40 bg-violet-500/10 px-4 py-3">
+      <p className="text-[10px] font-display font-bold uppercase tracking-widest text-violet-400 mb-1">Konsep &amp; Trik</p>
+      <p className="text-sm text-violet-100 font-body leading-relaxed">{renderWithLatex(data.konsep)}</p>
+    </div>
+    {/* STEP BY STEP */}
+    <div className="rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-4 py-3">
+      <p className="text-[10px] font-display font-bold uppercase tracking-widest text-cyan-400 mb-2">Step by Step Penyelesaian</p>
+      <ol className="space-y-2">
+        {data.langkah.map((step, i) => (
+          <li key={i} className="flex gap-3 items-start">
+            <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/25 border border-cyan-400/50 flex items-center justify-center text-[10px] font-bold text-cyan-300">{i + 1}</span>
+            <span className="text-sm text-cyan-50 font-body leading-relaxed">{renderWithLatex(step)}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+    {/* TIPS */}
+    <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3">
+      <p className="text-[10px] font-display font-bold uppercase tracking-widest text-amber-400 mb-1">Tips</p>
+      <p className="text-sm text-amber-100 font-body leading-relaxed">
+        {data.rumus ? renderWithLatex(data.rumus) : "Pahami hubungan antar sudut dan latih menggambar garis bantu untuk mempermudah perhitungan."}
+      </p>
+    </div>
+    {/* KESIMPULAN */}
+    <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3">
+      <p className="text-[10px] font-display font-bold uppercase tracking-widest text-rose-400 mb-1">Kesimpulan</p>
+      <p className="text-sm text-rose-100 font-body leading-relaxed">
+        Jadi, jawaban yang tepat adalah <span className="font-bold">{renderWithLatex(data.jawaban)}</span>.
+      </p>
+    </div>
   </div>
 );
 
@@ -1821,21 +1925,16 @@ const OlimpiadeGarisSudutPage = () => {
                   <>
                     <button
                       onClick={() => toggleDasar(soal.no)}
-                      className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-200 text-xs font-display font-bold hover:bg-emerald-500/25 transition cursor-pointer"
+                      className="mt-3 w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition cursor-pointer text-left"
                     >
-                      {openDasar.includes(soal.no) ? (
-                        <>
-                          <ChevronUp className="w-3.5 h-3.5" /> Sembunyikan Pembahasan
-                        </>
-                      ) : (
-                        <>
-                          <ChevronDown className="w-3.5 h-3.5" /> Lihat Pembahasan
-                        </>
-                      )}
+                      <span className="text-xs font-display font-bold text-white/70">
+                        {openDasar.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                      </span>
+                      {openDasar.includes(soal.no)
+                        ? <ChevronUp className="w-4 h-4 text-white/40" />
+                        : <ChevronDown className="w-4 h-4 text-white/40" />}
                     </button>
-                    {openDasar.includes(soal.no) && (
-                      <PembahasanBlock data={pembahasanDasar[soal.no]} />
-                    )}
+                    {openDasar.includes(soal.no) && renderPembahasan(pembahasanDasar[soal.no])}
                   </>
                 )}
               </div>
@@ -1879,21 +1978,16 @@ const OlimpiadeGarisSudutPage = () => {
                   <>
                     <button
                       onClick={() => toggleOlimpiade(soal.no)}
-                      className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/15 border border-amber-500/40 text-amber-200 text-xs font-display font-bold hover:bg-amber-500/25 transition cursor-pointer"
+                      className="mt-3 w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition cursor-pointer text-left"
                     >
-                      {openOlimpiade.includes(soal.no) ? (
-                        <>
-                          <ChevronUp className="w-3.5 h-3.5" /> Sembunyikan Pembahasan
-                        </>
-                      ) : (
-                        <>
-                          <ChevronDown className="w-3.5 h-3.5" /> Lihat Pembahasan
-                        </>
-                      )}
+                      <span className="text-xs font-display font-bold text-white/70">
+                        {openOlimpiade.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                      </span>
+                      {openOlimpiade.includes(soal.no)
+                        ? <ChevronUp className="w-4 h-4 text-white/40" />
+                        : <ChevronDown className="w-4 h-4 text-white/40" />}
                     </button>
-                    {openOlimpiade.includes(soal.no) && (
-                      <PembahasanBlock data={pembahasanOlimpiade[soal.no]} />
-                    )}
+                    {openOlimpiade.includes(soal.no) && renderPembahasan(pembahasanOlimpiade[soal.no])}
                   </>
                 )}
               </div>
