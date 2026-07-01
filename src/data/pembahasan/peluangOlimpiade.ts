@@ -1087,4 +1087,30 @@ export const peluangOlimpiadePembahasan: Record<number, Pembahasan> = {
     tips: "Untuk soal peluang gabungan diskret–kontinu: (1) pisahkan ke setiap kasus diskret, (2) hitung peluang kontinu per kasus menggunakan panjang interval yang memenuhi syarat dibagi panjang total, (3) rata-ratakan dengan bobot peluang diskret.",
     kesimpulan: "Peluang lampu menyala selama $4 \\leq t \\leq 5$ jam adalah $\\dfrac{1}{3}$.",
   },
+  96: {
+    jawaban: "A. $\\dfrac{12}{729}$",
+    konsepTrik:
+      "Ruang sampel: mesin dioperasikan 3 kali secara independen, masing-masing menghasilkan bilangan dari $\\{1, 2, \\ldots, 9\\}$. Total kejadian = $9^3 = 729$ (triple terurut). Syarat: hasil kali $a \\times b \\times c$ merupakan bilangan prima. Agar hasil kali tiga bilangan bulat positif bernilai prima, tepat satu faktor harus merupakan bilangan prima dan dua faktor lainnya harus bernilai 1 (karena jika ada faktor $\\geq 2$ selain prima tersebut, hasil kali akan komposit).",
+    stepByStep:
+      "Langkah 1 — Tentukan ruang sampel:\n" +
+      "$n(S) = 9^3 = 729$ (ordered triple $(a, b, c)$ dengan $a, b, c \\in \\{1,2,...,9\\}$)\n\n" +
+      "Langkah 2 — Identifikasi bilangan prima dalam $\\{1, \\ldots, 9\\}$:\n" +
+      "Bilangan prima: $\\{2, 3, 5, 7\\}$ → ada 4 bilangan prima.\n" +
+      "Catatan: 1 bukan bilangan prima, 4=2², 6=2·3, 8=2³, 9=3² adalah komposit.\n\n" +
+      "Langkah 3 — Syarat agar $a \\times b \\times c$ prima:\n" +
+      "Hasil kali tiga bilangan bulat positif bernilai prima $p$ hanya jika:\n" +
+      "• Tepat satu faktor = $p$ (prima)\n" +
+      "• Dua faktor lainnya = 1\n" +
+      "Sebab: jika ada faktor $\\geq 2$ selain $p$, hasil kali $\\geq 2p$ (bukan prima).\n\n" +
+      "Langkah 4 — Hitung kejadian yang menguntungkan:\n" +
+      "Untuk setiap prima $p \\in \\{2, 3, 5, 7\\}$ dan setiap pilihan posisi untuk $p$:\n" +
+      "• $(p, 1, 1)$, $(1, p, 1)$, $(1, 1, p)$ → 3 susunan per prima\n" +
+      "Total kejadian = $4 \\times 3 = 12$\n\n" +
+      "Langkah 5 — Hitung peluang:\n" +
+      "$P = \\dfrac{12}{729}$",
+    tips: "Kunci: hasil kali bilangan bulat positif bernilai prima $\\Leftrightarrow$ tepat satu faktor adalah prima dan semua faktor lain = 1. Jangan tertukar dengan 'ada faktor prima' (yang berarti komposit juga bisa masuk). Gunakan prinsip: jika $p$ prima dan $a \\times b = p$ dengan $a, b$ bilangan bulat positif, maka $\\{a,b\\} = \\{1, p\\}$.",
+    kesimpulan:
+      "Dari $9^3 = 729$ kemungkinan, hanya 12 triple terurut $(a,b,c)$ yang hasil kalinya prima " +
+      "(4 pilihan prima × 3 pilihan posisi). Peluang = $\\dfrac{12}{729}$.",
+  },
 };
