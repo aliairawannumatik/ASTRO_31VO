@@ -878,6 +878,28 @@ const latihanOlimpiade: Soal[] = [
       rumus: "$f(x)-f(-x) = 2\\sum_{k \\text{ ganjil}} x^k$ (suku genap terhapus)"
     }
   },
+  {
+    no: 20,
+    soal: "OSN Matematika 2026 Tingkat Kota\nDiketahui $f(n) = \\begin{cases} 0, & \\text{untuk } n \\text{ kelipatan } 5 \\\\ n^n, & \\text{untuk } n \\text{ yang lain} \\end{cases}$\nTentukan digit satuan dari $f(1) + f(2) + f(3) + \\cdots + f(2026)$.",
+    options: ["A. 2", "B. 4", "C. 6", "D. 8"],
+    jawaban: "D. 8",
+    pembahasan: {
+      konsep: "Digit satuan $n^n$ hanya bergantung pada digit satuan $n$ dan nilai $n \\bmod 4$ (karena siklus digit pangkat bilangan berulang tiap 4). Kelipatan 5 berkontribusi 0. Cari pola berulang setiap 20 suku, lalu kalikan dengan banyak periode penuh dan tambahkan sisa.",
+      langkah: [
+        "Kelipatan 5 → $f=0$. Untuk yang lain, cukup cari digit satuan $n^n$.",
+        "Digit satuan $n^n$ berdasarkan digit satuan $n$: satuan 1 → selalu 1; satuan 2 → siklus 2,4,8,6 (penentu: $n \\bmod 4$); satuan 3 → siklus 3,9,7,1 (penentu: $n \\bmod 4$); satuan 4 → $n$ genap selalu 6; satuan 6 → selalu 6; satuan 7 → siklus 7,9,3,1 (penentu: $n \\bmod 4$); satuan 8 → siklus 8,4,2,6 (penentu: $n \\bmod 4$); satuan 9 → $n$ ganjil selalu 9.",
+        "Hitung digit satuan $f(n)$ untuk $n = 1$ s.d. $10$: $1^1{=}1,\\; 2^2{=}4,\\; 3^3{=}7,\\; 4^4{=}6,\\; f(5){=}0,\\; 6^6{=}6,\\; 7^7{=}3,\\; 8^8{=}6,\\; 9^9{=}9,\\; f(10){=}0$",
+        "Jumlah digit satuan blok $n=1$ s.d. $10$: $1+4+7+6+0+6+3+6+9+0 = 42$",
+        "Hitung digit satuan $f(n)$ untuk $n = 11$ s.d. $20$: $11^{11}{=}1,\\; 12^{12}{=}6,\\; 13^{13}{=}3,\\; 14^{14}{=}6,\\; f(15){=}0,\\; 16^{16}{=}6,\\; 17^{17}{=}7,\\; 18^{18}{=}4,\\; 19^{19}{=}9,\\; f(20){=}0$",
+        "Jumlah digit satuan blok $n=11$ s.d. $20$: $1+6+3+6+0+6+7+4+9+0 = 42$",
+        "Setiap blok 20 suku berjumlah $42+42=84$, digit satuannya $\\mathbf{4}$. Pola ini berulang setiap 20.",
+        "$2026 = 20 \\times 101 + 6$ → ada 101 blok penuh dan sisa $n=2021$ s.d. $2026$.",
+        "Sisa: digit satuan $f(2021){=}1,\\; f(2022){=}4,\\; f(2023){=}7,\\; f(2024){=}6,\\; f(2025){=}0,\\; f(2026){=}6$. Jumlah = $1+4+7+6+0+6=24$, digit satuan $\\mathbf{4}$.",
+        "Total digit satuan: $(101 \\times 84 + 24) \\bmod 10 = (8484 + 24) \\bmod 10 = 8508 \\bmod 10 = \\mathbf{8}$"
+      ],
+      rumus: "Pola berulang setiap 20 suku (jumlah = 84). $2026 = 20 \\times 101 + 6$. Digit satuan total = $(4 + 4) \\bmod 10 = 8$."
+    }
+  },
 ];
 
 // ─── Page Component ───────────────────────────────────────────────────────────
