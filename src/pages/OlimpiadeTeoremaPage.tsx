@@ -1396,17 +1396,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 4 && <SegitigaABC182430SVG />}
                 {soal.no === 5 && <SegitigaABD72425SVG />}
                 {soal.no === 6 && <SegitigaCABD9_15_41_SVG />}
-                {soal.no === 7 && (
-                  <div className="flex flex-col items-center gap-3 my-3">
-                    <img
-                      src={"/images/image_1777785078317.png"}
-                      alt="Bangun ABCDE soal nomor 7"
-                      className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
-                      data-testid="img-soal-pyth-dasar-7"
-                    />
-                    <Soal7ABCDESVG />
-                  </div>
-                )}
+                {soal.no === 7 && <Soal7ABCDESVG />}
                 {soal.no === 11 && <TabelSegitiga11 />}
                 {soal.no === 15 && <SegitigaXSVG />}
                 {soal.no === 23 && <LayangLayangABCDSVG />}
