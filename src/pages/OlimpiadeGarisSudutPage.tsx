@@ -1016,27 +1016,38 @@ const Soal23SVG = () => (
 );
 
 // ── Soal 24: Parallelogram SPQR with PT (through U) and QT to T below; x at U ──
+// Soal 24: parallelogram S(40,180)-P(140,40)-Q(380,40)-R(280,180)
+// QRT collinear: Q→R→T where T=(180,320) [R is midpoint of QT, direction (-100,140) per unit]
+// PT crosses SR at U=(160,180); angle x = ∠RUT ≈ 82° in lower-right area
 const Soal24SVG = () => (
   <svg viewBox="0 0 440 360" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Parallelogram S(40,180) - P(140,40) - Q(380,40) - R(280,180) */}
-    <polygon points="40,180 140,40 380,40 280,180" fill="none" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* PT line through U (on SR). U at (180,180). T at (220,320) */}
-    <line x1="140" y1="40" x2="220" y2="320" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* QT line from Q to T */}
-    <line x1="380" y1="40" x2="220" y2="320" stroke="var(--icon-stroke)" strokeWidth="2" />
+    {/* Top side PQ */}
+    <line x1="140" y1="40" x2="380" y2="40" stroke="var(--icon-stroke)" strokeWidth="2" />
+    {/* Left side PS */}
+    <line x1="140" y1="40" x2="40" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
+    {/* Bottom side SR */}
+    <line x1="40" y1="180" x2="280" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
+    {/* QRT: Q→T passing through R(280,180) — one continuous collinear line */}
+    <line x1="380" y1="40" x2="180" y2="320" stroke="var(--icon-stroke)" strokeWidth="2" />
+    {/* Diagonal PT: P(140,40)→T(180,320) passing through U(160,180) */}
+    <line x1="140" y1="40" x2="180" y2="320" stroke="var(--icon-stroke)" strokeWidth="2" />
 
-    <text x="22" y="194" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
-    <text x="130" y="34" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
-    <text x="384" y="34" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
-    <text x="288" y="194" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
-    <text x="174" y="198" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">U</text>
-    <text x="214" y="338" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">T</text>
+    {/* Labels */}
+    <text x="22"  y="194" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
+    <text x="130" y="34"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
+    <text x="384" y="34"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
+    <text x="284" y="196" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
+    <text x="165" y="338" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">T</text>
+    {/* U: offset upper-right of intersection to avoid SR line and PT line */}
+    <text x="166" y="172" fill="#38bdf8" fontSize="13" fontStyle="italic" fontFamily="serif" fontWeight="bold">U</text>
 
-    {/* arc + x at U (between US going left and UP going up-left) */}
-    <path d="M 158,170 A 22,22 0 0,1 168,144" fill="none" stroke="#fbbf24" strokeWidth="1.6" />
-    <text x="158" y="160" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+    {/* Arc x at U(160,180): ∠RUT in lower-right area */}
+    {/* Start: UR direction → (182,180); End: UT direction → (163,202); clockwise */}
+    <path d="M 182,180 A 22,22 0 0,1 163,202" fill="none" stroke="#fbbf24" strokeWidth="1.8" />
+    {/* Label at bisector ~41° below horizontal from U, r=32 */}
+    <text x="183" y="204" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
 
-    <circle cx="180" cy="180" r="3" fill="#ef4444" />
+    <circle cx="160" cy="180" r="3" fill="#ef4444" />
   </svg>
 );
 
