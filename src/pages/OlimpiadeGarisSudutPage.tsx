@@ -1361,13 +1361,13 @@ const latihanOlimpiade = [
   {
     no: 1,
     soal: "OSN Matematika 2003 Tingkat Kota\n\nPada gambar disamping, ABCD adalah persegi dan ABE adalah segitiga sama sisi. Besar sudut DAE adalah ...",
-    image: "/images/image_1777677600584.png",
+    image: "https://drive.google.com/thumbnail?id=1H7t8YF2-m8QfPbzvnHuZXNXIraZOXt75&sz=w800",
     options: ["A. $15°$", "B. $30°$", "C. $45°$", "D. $60°$", "E. $75°$"]
   },
   {
     no: 2,
     soal: "OSN Matematika 2004 Tingkat Kota\n\nPada gambar berikut, garis PQ dan garis RS sejajar, demikian juga garis PS dan QT sejajar. Nilai x sama dengan ...",
-    image: "/images/image_1777686601334.png",
+    image: "https://drive.google.com/thumbnail?id=1RHJmP6NG0tLGwibFSSDxPOWOLHJ-drLo&sz=w800",
     options: []
   },
   {
@@ -1379,25 +1379,25 @@ const latihanOlimpiade = [
   {
     no: 4,
     soal: "OSN Matematika 2007 Tingkat Kota\n\nPerhatikan gambar berikut.\n\nNilai dari $a + b + c + d + e + f + g + h + i$ adalah ...",
-    image: "/images/image_1777686713928.png",
+    image: "https://drive.google.com/thumbnail?id=1xwQzAe8aMs4oLCeeSrAPs6-Lt1fJCVZL&sz=w800",
     options: ["A. 360", "B. 540", "C. 720", "D. 900", "E. 1.260"]
   },
   {
     no: 5,
     soal: "OSN Matematika 2008 Tingkat Kota\n\nPerhatikan gambar berikut.\n\nSegitiga PQR merupakan segitiga sama sisi. Jika $\\angle SPQ = 20°$ dan $\\angle TQR = 35°$, maka $\\angle SUT = ...$",
-    image: "/images/image_1777687009906.png",
+    image: "https://drive.google.com/thumbnail?id=1HifvjhdMiNP4nnFUeEbumuv37qV_va9j&sz=w800",
     options: ["A. $135°$", "B. $130°$", "C. $125°$", "D. $105°$", "E. $95°$"]
   },
   {
     no: 6,
     soal: "OSN Matematika 2014 Tingkat Kota\n\nDiketahui garis $L_1$ sejajar garis $L_2$ dan garis $L_3$ sejajar garis $L_4$.\n\nBesar sudut $y - x$ adalah ...",
-    image: "/images/image_1777687942709.png",
+    image: "https://drive.google.com/thumbnail?id=1vCWb6TJryjBTGn8_If7pdAJ5_W8TYD3v&sz=w800",
     options: ["A. $0°$", "B. $10°$", "C. $30°$", "D. $50°$"]
   },
   {
     no: 7,
     soal: "OSN Matematika 2018 Tingkat Kota\n\nNilai sudut x dan y pada gambar berikut adalah ...",
-    image: "/images/image_1777688265821.png",
+    image: "https://drive.google.com/thumbnail?id=1Hp2OPGoBaXu1QziA-q2PoqblH3CfqF1o&sz=w800",
     options: [
       "A. $x = 74°$; $y = 104°$",
       "B. $x = 37°$; $y = 104°$",
