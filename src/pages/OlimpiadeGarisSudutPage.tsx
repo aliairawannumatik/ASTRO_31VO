@@ -1289,13 +1289,7 @@ const latihanDasar: {
   {
     no: 21,
     soal: "Perhatikan gambar berikut!\n\nBesar penyiku $\\angle SQR$ adalah ...",
-    image: (
-      <div className="flex flex-col items-center gap-1 w-full">
-        <img src={"/images/image_1777674744629.png"} alt="Gambar Soal 21" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />
-        <p className="text-xs text-white/35 italic">Duplikat SVG ↓</p>
-        <Soal21SVG />
-      </div>
-    ),
+    image: <Soal21SVG />,
     imageCaption: "Gambar Soal 21",
     options: ["A. $9°$", "B. $32°$", "C. $48°$", "D. $58°$"]
   },
