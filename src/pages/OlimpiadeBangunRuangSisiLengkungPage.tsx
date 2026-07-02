@@ -495,7 +495,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
   const tabs = [
     { key: "materi" as const, label: "Materi", icon: <BookOpen className="w-3.5 h-3.5" /> },
     { key: "dasar" as const, label: "Latihan Dasar", icon: <Dumbbell className="w-3.5 h-3.5" /> },
-    { key: "olimpiade" as const, label: "Soal OSN", icon: <Star className="w-3.5 h-3.5" /> },
+    { key: "olimpiade" as const, label: "Soal Olimpiade", icon: <Star className="w-3.5 h-3.5" /> },
   ];
 
   return (
@@ -519,7 +519,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
             BANGUN RUANG<br />
             <span className="text-glow-cyan text-cyan-300">SISI LENGKUNG</span>
           </h1>
-          <p className="font-body text-xs text-white/40">Irawan Sutiawan, M.Pd · Matematika SMP Kelas 9</p>
+          <p className="font-body text-xs text-white/40">Irawan Sutiawan, M.Pd</p>
 
           {/* Shape previews row */}
           <div className="flex justify-center gap-6 mt-5">
