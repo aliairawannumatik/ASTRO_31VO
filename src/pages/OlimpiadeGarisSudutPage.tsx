@@ -842,38 +842,77 @@ const Soal19SVG = () => {
   );
 };
 
-// ── Soal 20: Trapezoid ABCD with extra ray; right angle at A, 2x° below A, 120° at C ──
-const Soal20SVG = () => (
-  <svg viewBox="0 0 400 280" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Top side AB */}
-    <line x1="60" y1="80" x2="360" y2="80" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* Bottom side DC */}
-    <line x1="40" y1="220" x2="320" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* AD */}
-    <line x1="60" y1="80" x2="40" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* BC */}
-    <line x1="360" y1="80" x2="320" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* Inner triangle from A down to a point on DC */}
-    <line x1="60" y1="80" x2="180" y2="220" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* Small ray going up from A creating x */}
-    <line x1="60" y1="80" x2="40" y2="20" stroke="var(--icon-stroke)" strokeWidth="2" />
+// ── Soal 20: AB ∥ CD; right-angle perpendicular + x-ray at A; 2x below AB; 120° at C ──
+// Geometry (viewBox 0 0 480 230):
+//   A=(80,80)  B_actual=(306,80)  C=(240,195)  D=(15,195)
+//   AD: 60° below AB-left → 2x=60°, x=30°  ✓
+//   BC: CB direction (0.5,−0.866) → interior angle at C = 120° CCW to CD-left ✓
+//   Diagonal AC: A(80,80) → C(240,195)
+//   Perpendicular at A: straight up to (80,35); x-ray at 30° from perp → (53,32)
+//   Sectors r=22 at A; r=26 at C
+const Soal20SVG = () => {
+  const { isDark } = useTheme();
+  const lineColor = isDark ? "#93c5fd" : "#1e3a8a";
+  const ptColor   = isDark ? "#f87171" : "#dc2626";
+  const lblColor  = isDark ? "#93c5fd" : "#1e3a8a";
+  const fillG     = isDark ? "rgba(134,239,172,0.55)" : "rgba(21,128,61,0.40)";
+  const strkG     = isDark ? "#86efac" : "#15803d";
+  const txtG      = isDark ? "#86efac" : "#15803d";
+  return (
+    <svg viewBox="0 0 480 230" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+      {/* ── Angle sectors (drawn behind lines) ── */}
 
-    {/* Right angle marker at A (between AB and the ray going up) */}
-    <polyline points="60,68 72,68 72,80" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" />
+      {/* x — 30° CCW from perp-up(80,58) to x-ray(69,61) */}
+      <path d="M 80,58 A 22,22 0 0,0 69,61 L 80,80 Z"
+        fill={fillG} stroke={strkG} strokeWidth="1" />
 
-    <text x="44" y="76" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
-    <text x="364" y="76" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
-    <text x="22" y="240" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
-    <text x="324" y="240" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
+      {/* 2x — 60° CW from AB-left(58,80) to AD-dir(69,100) */}
+      <path d="M 58,80 A 22,22 0 0,1 69,100 L 80,80 Z"
+        fill={fillG} stroke={strkG} strokeWidth="1.2" />
 
-    {/* x label near small ray */}
-    <text x="36" y="14" fill="#fbbf24" fontSize="13" fontStyle="italic" fontFamily="serif">x</text>
-    {/* 2x just below A */}
-    <text x="64" y="116" fill="#fbbf24" fontSize="13" fontFamily="serif">2<tspan fontStyle="italic">x</tspan></text>
-    {/* 120° at C */}
-    <text x="270" y="212" fill="#fbbf24" fontSize="13" fontFamily="serif">120°</text>
-  </svg>
-);
+      {/* 120° — CCW from CB-dir(253,173) through top to CD-left(214,195) */}
+      <path d="M 253,173 A 26,26 0 0,0 214,195 L 240,195 Z"
+        fill={fillG} stroke={strkG} strokeWidth="1.2" />
+
+      {/* ── Lines ── */}
+      {/* Full-width top line AB */}
+      <line x1="0"   y1="80"  x2="480" y2="80"  stroke={lineColor} strokeWidth="2.2" />
+      {/* Full-width bottom line DC */}
+      <line x1="0"   y1="195" x2="480" y2="195" stroke={lineColor} strokeWidth="2.2" />
+      {/* AD: A(80,80) → D(15,195) */}
+      <line x1="80"  y1="80"  x2="15"  y2="195" stroke={lineColor} strokeWidth="2" />
+      {/* BC: B_actual(306,80) → C(240,195) */}
+      <line x1="306" y1="80"  x2="240" y2="195" stroke={lineColor} strokeWidth="2" />
+      {/* Diagonal AC */}
+      <line x1="80"  y1="80"  x2="240" y2="195" stroke={lineColor} strokeWidth="2" />
+      {/* Perpendicular at A going straight up */}
+      <line x1="80"  y1="80"  x2="80"  y2="35"  stroke={lineColor} strokeWidth="2" />
+      {/* x-ray: 30° left of perpendicular, dir=(−0.5,−0.866) */}
+      <line x1="80"  y1="80"  x2="53"  y2="32"  stroke={lineColor} strokeWidth="2" />
+
+      {/* ── Right angle marker at A (between AB-right and perpendicular-up) ── */}
+      <polyline points="92,80 92,68 80,68" fill="none" stroke={lineColor} strokeWidth="1.5" />
+
+      {/* ── Vertex dots ── */}
+      <circle cx="80"  cy="80"  r="3.5" fill={ptColor} />
+      <circle cx="240" cy="195" r="3.5" fill={ptColor} />
+
+      {/* ── Vertex labels ── */}
+      <text x="65"  y="76"  fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">A</text>
+      <text x="462" y="76"  fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">B</text>
+      <text x="6"   y="212" fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">D</text>
+      <text x="244" y="212" fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">C</text>
+
+      {/* ── Angle labels ── */}
+      {/* x: bisector between perp and x-ray above AB */}
+      <text x="62"  y="46"  fill={txtG} fontSize="12" fontStyle="italic" fontFamily="'Times New Roman',serif">x</text>
+      {/* 2x: inside sector below-left of A */}
+      <text x="28"  y="113" fill={txtG} fontSize="13" fontFamily="'Times New Roman',serif">2<tspan fontStyle="italic">x</tspan></text>
+      {/* 120°: inside sector at C */}
+      <text x="205" y="163" fill={txtG} fontSize="12" fontFamily="'Times New Roman',serif">120°</text>
+    </svg>
+  );
+};
 
 // ── Soal 21: Right angle at Q, ray QS between QP (up) and QR (right) ─────────
 const Soal21SVG = () => (
@@ -1240,7 +1279,13 @@ const latihanDasar: {
   {
     no: 20,
     soal: "Perhatikan gambar berikut!\n\nJika diketahui AB sejajar CD, maka nilai x adalah ...",
-    image: <img src={"/images/g_1777646456179.png"} alt="Gambar Soal 20" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />,
+    image: (
+      <div className="flex flex-col items-center gap-1 w-full">
+        <img src={"/images/g_1777646456179.png"} alt="Gambar Soal 20" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />
+        <p className="text-xs text-white/35 italic">Duplikat SVG ↓</p>
+        <Soal20SVG />
+      </div>
+    ),
     imageCaption: "Gambar Soal 20",
     options: ["A. $15°$", "B. $30°$", "C. $40°$", "D. $45°$"]
   },
