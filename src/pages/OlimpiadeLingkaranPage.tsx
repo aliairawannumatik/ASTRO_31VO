@@ -440,7 +440,7 @@ const materiSections: MateriSection[] = [
         <div className="flex justify-center">
           <div className="bg-white rounded-lg p-2 shadow-md max-w-md w-full flex justify-center">
             <img
-              src="/lingkaran-unsur.png"
+              src="https://drive.google.com/thumbnail?id=1SDV0-mTyZom9mq200i-RCHOF0NOucSIS&sz=w400"
               alt="Unsur-unsur Lingkaran"
               className="max-w-full h-auto object-contain rounded"
             />
