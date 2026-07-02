@@ -907,9 +907,9 @@ const Soal20SVG = () => {
 
       {/* ── Angle labels ── */}
       {/* x: bisector between perp and x-ray above AB */}
-      <text x="62"  y="46"  fill={txtG} fontSize="12" fontStyle="italic" fontFamily="'Times New Roman',serif">x</text>
-      {/* 2x: inside right-side sector, bisector 30° below AB-right at r=40 */}
-      <text x="112" y="103" fill={txtG} fontSize="13" fontFamily="'Times New Roman',serif">2<tspan fontStyle="italic">x</tspan></text>
+      <text x="70"  y="57"  fill={txtG} fontSize="12" fontStyle="italic" fontFamily="'Times New Roman',serif">x</text>
+      {/* 2x: inside right-side sector, shifted down toward lower arc */}
+      <text x="97" y="113" fill={txtG} fontSize="13" fontFamily="'Times New Roman',serif">2<tspan fontStyle="italic">x</tspan></text>
       {/* 120°: inside sector at C */}
       <text x="205" y="163" fill={txtG} fontSize="12" fontFamily="'Times New Roman',serif">120°</text>
     </svg>
