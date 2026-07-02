@@ -917,34 +917,35 @@ const Soal20SVG = () => {
 };
 
 // ── Soal 21: Right angle at Q, ray QS between QP (up) and QR (right) ─────────
+// Q=(200,180); P=(200,20) up; R=right; S=298,119 at 32° above horizontal
+// Right-angle marker on LEFT side; arcs at different radii so they look separate
 const Soal21SVG = () => (
   <svg viewBox="0 0 400 290" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* Horizontal line: full width, Q at center-left */}
+    {/* Horizontal line: full width */}
     <line x1="20" y1="180" x2="375" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* Vertical PQ: from P above down to Q */}
+    {/* Vertical PQ */}
     <line x1="200" y1="20" x2="200" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
-    {/* Diagonal QS: exactly 32° above horizontal right — endpoint at Q+115·(cos32°,−sin32°) */}
+    {/* Diagonal QS: 32° above horizontal */}
     <line x1="200" y1="180" x2="298" y2="119" stroke="var(--icon-stroke)" strokeWidth="2" />
 
-    {/* Right-angle marker at Q — upper-right (between QP-up and QR-right) */}
-    <polyline points="200,160 220,160 220,180" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" />
+    {/* Right-angle marker — moved to LEFT side (between QP-up and left-horizontal) */}
+    <polyline points="200,160 180,160 180,180" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" />
 
     {/* Labels */}
-    <text x="192" y="14" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
+    <text x="192" y="14"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">P</text>
     <text x="184" y="202" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
-    {/* R at the far right end of horizontal */}
     <text x="358" y="174" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
     <text x="302" y="113" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
 
-    {/* Arc (3x+5)°: from QR right (0°) up to QS (~32°), radius 40 */}
-    {/* Start: Q+(40,0)=(240,180), End: Q+40·(cos32°,−sin32°)=(234,159) */}
-    <path d="M 240,180 A 40,40 0 0,0 234,159" fill="none" stroke="#a855f7" strokeWidth="1.8" />
-    <text x="242" y="177" fill="#a855f7" fontSize="11" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
+    {/* Arc ∠SQR (3x+5)°: r=35, from QR-right(235,180) → QS-dir(230,162) CCW */}
+    <path d="M 235,180 A 35,35 0 0,0 230,162" fill="none" stroke="#a855f7" strokeWidth="1.8" />
+    {/* Label at bisector ~16° above horizontal, r=58 from Q */}
+    <text x="254" y="170" fill="#a855f7" fontSize="11" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
 
-    {/* Arc (6x+4)°: from QS (~32°) up to QP (90°), radius 40 */}
-    {/* Start: Q+40·(cos32°,−sin32°)=(234,159), End: Q+(0,−40)=(200,140) */}
-    <path d="M 234,159 A 40,40 0 0,0 200,140" fill="none" stroke="#ef4444" strokeWidth="1.8" />
-    <text x="218" y="148" fill="#ef4444" fontSize="11" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
+    {/* Arc ∠PQS (6x+4)°: r=52, from QS-dir(244,152) → QP-up(200,128) CCW */}
+    <path d="M 244,152 A 52,52 0 0,0 200,128" fill="none" stroke="#ef4444" strokeWidth="1.8" />
+    {/* Label at bisector ~61° above horizontal, r=72 from Q */}
+    <text x="232" y="118" fill="#ef4444" fontSize="11" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
 
     {/* Dot at Q */}
     <circle cx="200" cy="180" r="3" fill="#facc15" />
