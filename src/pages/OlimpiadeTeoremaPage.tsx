@@ -1468,7 +1468,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={"/images/image_1777975339863.png"}
+                        src={"https://drive.google.com/thumbnail?id=1n8Xa8AtP4kbTfcmFIFhODHqJuufCyCUg&sz=w400"}
                         alt="Persegi panjang ABCD dengan titik P di dalamnya soal olimpiade nomor 1"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-olim-1"
@@ -1488,7 +1488,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={"/images/Gemini_Generated_Image_f8jg1rf8jg1rf8jg_1777975526537.png"}
+                        src={"https://drive.google.com/thumbnail?id=1egiWK0dqcV2DNzUEg2QzA0VTxxgeYv5Q&sz=w400"}
                         alt="Bangun ABCD dengan titik B, C, D, A soal olimpiade nomor 4"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-olim-4"
@@ -1508,7 +1508,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={"/images/Gemini_Generated_Image_65hwer65hwer65hw_1777975526536.png"}
+                        src={"https://drive.google.com/thumbnail?id=1HUFcR5BXGQ1D-ifyHN_OvxtAsLix3rWa&sz=w400"}
                         alt="Bangun ABCD dengan titik A, B, C, D soal olimpiade nomor 5"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-olim-5"
@@ -1541,7 +1541,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 6 && (
                   <div className="flex justify-center my-3">
                     <img
-                      src={"/images/Gemini_Generated_Image_rgyow7rgyow7rgyo_1777975526535.png"}
+                      src={"https://drive.google.com/thumbnail?id=15Wy9OL2g6JY_VioF50D08gQ-Ko7uqp4N&sz=w400"}
                       alt="Segitiga ABC dengan sisi AB 50 km dan BC 120 km, titik D di tengah AC, soal olimpiade nomor 6"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-olim-6"
@@ -1551,7 +1551,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 10 && (
                   <div className="flex justify-center my-3">
                     <img
-                      src={"/images/Gemini_Generated_Image_ot4vzot4vzot4vzo_1777975526535.png"}
+                      src={"https://drive.google.com/thumbnail?id=1KDSxytE6N8wiyLS1nGkBVosUBwkv-Q2V&sz=w400"}
                       alt="Trapesium ABCD dengan AB sejajar CD soal olimpiade nomor 10"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-olim-10"
