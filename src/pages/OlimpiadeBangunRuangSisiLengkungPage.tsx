@@ -19,11 +19,11 @@ const brslOlimpiadeImages: Record<number, string> = {
 };
 
 const brslDasarImages: Record<number, string> = {
-  3: "/images/3_1778331371127.png",
-  5: "/images/5_1778331371127.png",
-  6: "/images/6_1778331371126.png",
-  36: "/images/37_1778331371124.png",
-  37: "/images/38_1778331371123.png",
+  3: "https://drive.google.com/thumbnail?id=1JKSolP4umjS4zkIFcPjTjXyX11q0fETc&sz=w400",
+  5: "https://drive.google.com/thumbnail?id=1v67ykpMcxuQHQF-z3Y61HmAARB_GWH3L&sz=w400",
+  6: "https://drive.google.com/thumbnail?id=1TW3y2DX8tNKNxKVDFM0SZsgWSQKerrOu&sz=w400",
+  36: "https://drive.google.com/thumbnail?id=1L9qkbyu2NUYzbz7HoP31rtI8grpitjnc&sz=w400",
+  37: "https://drive.google.com/thumbnail?id=1gcGt20jDnqGt1ojHyqAGBwMwnFsRPPte&sz=w400",
 };
 
 /* ─────────────── LaTeX helper ─────────────── */
@@ -582,7 +582,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                         {soal.no === 13 && li === 0 && (
                           <div className="flex justify-center my-3">
                             <img
-                              src={"/images/13_1778331371126.png"}
+                              src={"https://drive.google.com/thumbnail?id=1rLSQ51U-6We_l3AeySU_TRWXqD3lU0KZ&sz=w400"}
                               alt="Gambar soal 13"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
@@ -591,7 +591,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                         {soal.no === 30 && li === 0 && (
                           <div className="flex justify-center my-3">
                             <img
-                              src={"/images/31_1778331371125.png"}
+                              src={"https://drive.google.com/thumbnail?id=1HrfAHJfL03s4PLAh0xArrekt06lk73VD&sz=w400"}
                               alt="Gambar soal 30"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
@@ -600,7 +600,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                         {soal.no === 31 && li === 0 && (
                           <div className="flex justify-center my-3">
                             <img
-                              src={"/images/32_1778331371125.png"}
+                              src={"https://drive.google.com/thumbnail?id=1GddLWn6b_GOQ3fO6TR6lOuKofj5s60_O&sz=w400"}
                               alt="Gambar soal 31"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
@@ -609,7 +609,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                         {soal.no === 32 && li === 0 && (
                           <div className="flex justify-center my-3">
                             <img
-                              src={"/images/33_1778331371123.png"}
+                              src={"https://drive.google.com/thumbnail?id=1aq-RvISMhcuoLqijWbIUEASaCChzAgGK&sz=w400"}
                               alt="Gambar soal 32"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
@@ -618,7 +618,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                         {soal.no === 33 && li === 0 && (
                           <div className="flex justify-center my-3">
                             <img
-                              src={"/images/34_1778331371123.png"}
+                              src={"https://drive.google.com/thumbnail?id=16Dq-RPfoXYFjvhkmpfjpc5QIukxIU34X&sz=w400"}
                               alt="Gambar soal 33"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
@@ -627,7 +627,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                         {soal.no === 34 && li === 0 && (
                           <div className="flex justify-center my-3">
                             <img
-                              src={"/images/35_1778331371124.png"}
+                              src={"https://drive.google.com/thumbnail?id=1FMDYXfLdg37wwpDMhzmC79X8GgCUcTP4&sz=w400"}
                               alt="Gambar soal 34"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
@@ -636,7 +636,7 @@ const OlimpiadeBangunRuangSisiLengkungPage = () => {
                         {soal.no === 35 && li === 0 && (
                           <div className="flex justify-center my-3">
                             <img
-                              src={"/images/36_1778331371124.png"}
+                              src={"https://drive.google.com/thumbnail?id=1HgtlrM_Juf_VaVJa7K-lWHPlkeSTIJGR&sz=w400"}
                               alt="Gambar soal 35"
                               className="max-w-[280px] w-full rounded-lg border border-white/10 bg-white/90 p-2"
                             />
