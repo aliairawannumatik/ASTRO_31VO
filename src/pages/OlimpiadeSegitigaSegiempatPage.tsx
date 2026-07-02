@@ -961,7 +961,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
                         <img
-                          src={"/images/Gemini_Generated_Image_vhhsq3vhhsq3vhhs_1777975910347.png"}
+                          src={"https://drive.google.com/thumbnail?id=1FZ2AoGQ3eaOk2m_1sRzibrtwOC2_TFEU&sz=w400"}
                           alt="Soal No. 1 - Keliling bangun"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -979,7 +979,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                         <img
-                          src={"/images/image_1777975962884.png"}
+                          src={"https://drive.google.com/thumbnail?id=1tiDMGjhTHnJ14nthVibriCOjqyBKjftS&sz=w400"}
                           alt="Soal No. 2 - Keliling bangun"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -997,7 +997,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
                         <img
-                          src="/dasar-soal-3.png"
+                          src="https://drive.google.com/thumbnail?id=1ibLO_IUNkOe4yYggPYRkZqP8-sHE_KbP&sz=w400"
                           alt="Soal No. 3 - Luas gambar"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -1015,7 +1015,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-xs w-full flex justify-center">
                         <img
-                          src="/dasar-soal-4.png"
+                          src="https://drive.google.com/thumbnail?id=1IfrX0BksGxqHmAG0CIoFrGUPmyvsZOqh&sz=w400"
                           alt="Soal No. 4 - Luas huruf kapital"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -1033,7 +1033,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                         <img
-                          src="/dasar-soal-5.png"
+                          src="https://drive.google.com/thumbnail?id=13eTUR0UwxWFDKDERb3eqBdP1X4Rdc1A7&sz=w400"
                           alt="Soal No. 5 - Luas bangun"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -1051,7 +1051,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                         <img
-                          src="/dasar-soal-6.png"
+                          src="https://drive.google.com/thumbnail?id=1omKMtkcPQyuXaxph_7C3BNYK0g39b1m1&sz=w400"
                           alt="Soal No. 6 - Luas bangun AGBCHD"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -1069,7 +1069,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                         <img
-                          src="/dasar-soal-7.png"
+                          src="https://drive.google.com/thumbnail?id=1JwpzVgl6O7qCbzohZXtEchgzXuT62xPz&sz=w400"
                           alt="Soal No. 7 - Luas bangun"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -1087,7 +1087,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                         <img
-                          src="/dasar-soal-8.png"
+                          src="https://drive.google.com/thumbnail?id=1smlxX8PWDjFQnQtQDD6v_EPoot0HRWFu&sz=w400"
                           alt="Soal No. 8 - Luas daerah yang diarsir"
                           className="max-w-full max-h-56 object-contain"
                         />
@@ -1105,7 +1105,7 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     <div className="flex justify-center my-3">
                       <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
                         <img
-                          src="/dasar-soal-9.png"
+                          src="https://drive.google.com/thumbnail?id=1rGPa94rPURdekLuXmtlflgRwkL3mohzP&sz=w400"
                           alt="Soal No. 9 - Persegi ABCD dan persegi panjang BEFG"
                           className="max-w-full max-h-56 object-contain"
                         />
