@@ -938,14 +938,14 @@ const Soal21SVG = () => (
     <text x="302" y="113" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">S</text>
 
     {/* Arc ∠SQR (3x+5)°: r=35, from QR-right(235,180) → QS-dir(230,162) CCW */}
-    <path d="M 235,180 A 35,35 0 0,0 230,162" fill="none" stroke="#a855f7" strokeWidth="1.8" />
-    {/* Label at bisector ~16° above horizontal, r=58 from Q */}
-    <text x="254" y="170" fill="#a855f7" fontSize="11" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
+    <path d="M 235,180 A 35,35 0 0,0 230,162" fill="none" stroke="#a855f7" strokeWidth="2.4" />
+    {/* Label at bisector 16°, r=44 from Q — just outside the arc */}
+    <text x="241" y="169" fill="#a855f7" fontSize="11" fontFamily="serif">(3<tspan fontStyle="italic">x</tspan>+5)°</text>
 
     {/* Arc ∠PQS (6x+4)°: r=52, from QS-dir(244,152) → QP-up(200,128) CCW */}
-    <path d="M 244,152 A 52,52 0 0,0 200,128" fill="none" stroke="#ef4444" strokeWidth="1.8" />
-    {/* Label at bisector ~61° above horizontal, r=72 from Q */}
-    <text x="232" y="118" fill="#ef4444" fontSize="11" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
+    <path d="M 244,152 A 52,52 0 0,0 200,128" fill="none" stroke="#ef4444" strokeWidth="2.4" />
+    {/* Label at bisector 61°, r=63 from Q — just outside the arc */}
+    <text x="224" y="127" fill="#ef4444" fontSize="11" fontFamily="serif">(6<tspan fontStyle="italic">x</tspan>+4)°</text>
 
     {/* Dot at Q */}
     <circle cx="200" cy="180" r="3" fill="#facc15" />
