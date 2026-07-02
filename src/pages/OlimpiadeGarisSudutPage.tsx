@@ -1281,13 +1281,7 @@ const latihanDasar: {
   {
     no: 20,
     soal: "Perhatikan gambar berikut!\n\nJika diketahui AB sejajar CD, maka nilai x adalah ...",
-    image: (
-      <div className="flex flex-col items-center gap-1 w-full">
-        <img src={"/images/g_1777646456179.png"} alt="Gambar Soal 20" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />
-        <p className="text-xs text-white/35 italic">Duplikat SVG ↓</p>
-        <Soal20SVG />
-      </div>
-    ),
+    image: <Soal20SVG />,
     imageCaption: "Gambar Soal 20",
     options: ["A. $15°$", "B. $30°$", "C. $40°$", "D. $45°$"]
   },
