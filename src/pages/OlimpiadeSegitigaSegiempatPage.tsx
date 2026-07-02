@@ -47,7 +47,7 @@ const olimpiadeFigures: Record<number, JSX.Element> = {
   22: <img src={"https://drive.google.com/thumbnail?id=1GmwpxVUcPxxg_Sl5HrQg4GLw5XlHC9-Z&sz=w400"} alt="Gambar soal olimpiade no. 22" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
   23: <img src={"https://drive.google.com/thumbnail?id=1ceAJ3M2cNNjY_UZJAasKBfVvP2tM2fk8&sz=w400"} alt="Gambar soal olimpiade no. 23" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
   24: <img src={"https://drive.google.com/thumbnail?id=1MJsACLdUDd3fiv8CyD6RQOYIjVWtGYle&sz=w400"} alt="Gambar soal olimpiade no. 24" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
-  25: <img src={"https://drive.google.com/thumbnail?id=1kKeL6SMwUZsNZ35tu-_2BTZKmD8ClyxK&sz=w400"} alt="Gambar soal olimpiade no. 25" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  25: <img src={"https://drive.google.com/thumbnail?id=1fbH2cb9Flm6e6ZqjIILsHktiZOV4mUYV&sz=w400"} alt="Gambar soal olimpiade no. 25" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
   26: <img src={"https://drive.google.com/thumbnail?id=10glIsecDdVw_TWetxai240IcbZ1VEDB_&sz=w400"} alt="Gambar soal olimpiade no. 26" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
   27: <img src={"https://drive.google.com/thumbnail?id=1zaseCE3E_gbm7ZAwibDuU4o2onV2dcRF&sz=w400"} alt="Gambar soal olimpiade no. 27" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
   28: <img src={"https://drive.google.com/thumbnail?id=13EhgfOv_tbc7d7LMG2RlVYXR3mAAqN9-&sz=w400"} alt="Gambar soal olimpiade no. 28" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
