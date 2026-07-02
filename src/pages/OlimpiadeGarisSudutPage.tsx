@@ -7,19 +7,20 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
-import gambar2 from "@/assets/Gambar_2_Sudut_Bersebelahan_1773289476314.png";
-import gambar3 from "@/assets/Gambar_3_Jumlah_Sudut_Dalam_1_Putaran_1773289476316.png";
-import gambar4 from "@/assets/Gambar_4_Sudut_Saling_Berpelurus_1773289476316.png";
-import gambar5 from "@/assets/Gambar_5_Sudut_Saling_Berpelurus_2_1773289476317.png";
-import gambar6 from "@/assets/Gambar_6_Sudut_Saling_Berpelurus_3_1773289476317.png";
-import gambar7 from "@/assets/Gambar_7_Sudut_Saling_Berpenyiku_1773289476318.png";
-import gambar8 from "@/assets/Gambar_8_Sudut_Saling_Bertolak_Belakang_1773289476318.png";
-import gambar9 from "@/assets/Gambar_9_sudut_bersebrangan_1773289476319.png";
-import gambar10 from "@/assets/Gambar_10_Sudut_Saling_Sehadap_1773289476320.png";
-import gambar11 from "@/assets/Gambar_11_Sudut_bertolak_belakang_2_1773289509181.png";
-import gambar12 from "@/assets/Gambar_12_Sudut_Saling_sepihak_1773289509182.png";
-import gambar13 from "@/assets/Gambar_13_Jumlah_sudut_pada_segitiga_1773289509182.png";
-import gambar14 from "@/assets/Gambar_14_Sudut-sudut_pada_segitiga_1773289509182.png";
+// Materi images loaded from Google Drive thumbnails (no local asset needed)
+const gambar2  = "https://drive.google.com/thumbnail?id=1WWS1lbImZFDhToj80VtPyzzibMYcKS_A&sz=w800";
+const gambar3  = "https://drive.google.com/thumbnail?id=1vd7QOBgTEIqXKktFDXeYBWFNz0lFvZdj&sz=w800";
+const gambar4  = "https://drive.google.com/thumbnail?id=1xI0V9muTGSih_Qpna2KJM88jVHJpyX9D&sz=w800";
+const gambar5  = "https://drive.google.com/thumbnail?id=1neOkV531-h1fDFifUrbj7NXByNzC-ojL&sz=w800";
+const gambar6  = "https://drive.google.com/thumbnail?id=1oagqYpnJzQlgTLZZE0m2d2zRpPAyBcX4&sz=w800";
+const gambar7  = "https://drive.google.com/thumbnail?id=1UcwNra0dRvuMrCZyg7j6Bz84GA7QJE23&sz=w800";
+const gambar8  = "https://drive.google.com/thumbnail?id=1hvpMIZ7aSxZ5DPCH3JLq2-Q4Wx4ux9bw&sz=w800";
+const gambar9  = "https://drive.google.com/thumbnail?id=1MgtZrHGmNl1maoUCtIV0VskCTd-NYNH1&sz=w800";
+const gambar10 = "https://drive.google.com/thumbnail?id=1j1CV3PAj1_G1z8dnhwKeY0M1V3lUJZZD&sz=w800";
+const gambar11 = "https://drive.google.com/thumbnail?id=1CuCTC1EzP10kOIspa_KWSjFnWz9LFdRD&sz=w800";
+const gambar12 = "https://drive.google.com/thumbnail?id=1DpHlWvzdBSR62ux_X8Uinkpzhko10RjS&sz=w800";
+const gambar13 = "https://drive.google.com/thumbnail?id=1hwdnLPrAGnwNh_uFw72LWyaAoXork&sz=w800";
+const gambar14 = "https://drive.google.com/thumbnail?id=1-tXJ8fspwZJKxkfUC961Z5W8zAjR6a3S&sz=w800";
 import gambar15 from "@/assets/Gambar_15_Jumlah_Sudut_pada_segi-n_1773289509183.png";
 
 const renderWithLatex = (text: string) => {
@@ -81,7 +82,24 @@ const SudutPosNegSVG = () => (
 
 const MateriImage = ({ src, caption }: { src: string; caption: string }) => (
   <div className="my-3 flex flex-col items-center">
-    <img src={src} alt={caption} className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5" />
+    <img
+      src={src}
+      alt={caption}
+      className="w-full max-w-xs sm:max-w-sm rounded-lg border border-border/40 bg-white/5"
+      onError={(e) => {
+        const el = e.currentTarget;
+        el.onerror = null;
+        el.style.display = "none";
+        const placeholder = el.nextElementSibling as HTMLElement | null;
+        if (placeholder) placeholder.style.display = "flex";
+      }}
+    />
+    <div
+      className="hidden w-full max-w-xs sm:max-w-sm items-center justify-center rounded-lg border border-border/40 bg-white/5 text-white/40 text-xs italic py-8"
+      aria-label={caption}
+    >
+      {caption}
+    </div>
     <p className="text-xs text-white/40 mt-1 italic">{caption}</p>
   </div>
 );
