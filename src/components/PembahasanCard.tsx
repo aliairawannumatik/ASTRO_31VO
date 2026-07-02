@@ -37,6 +37,7 @@ export interface Pembahasan {
   stepByStep: string;
   tips: string;
   kesimpulan: string;
+  diagram?: React.ReactNode;
 }
 
 interface Props {
@@ -115,6 +116,11 @@ const PembahasanCard = ({ pembahasan }: Props) => {
             <div className="font-body text-xs text-cyan-50/90 leading-relaxed">
               {renderMultiline(pembahasan.stepByStep)}
             </div>
+            {pembahasan.diagram && (
+              <div className="mt-3 flex justify-center">
+                {pembahasan.diagram}
+              </div>
+            )}
           </div>
 
           {/* TIPS — amber */}

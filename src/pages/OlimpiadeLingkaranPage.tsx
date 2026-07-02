@@ -992,6 +992,102 @@ const olimpiadeImages: Record<number, string> = {
   29: "/images/29_1778279167071.png",
 };
 
+/* ─────────────────────────────────────────────────────────
+   SVG DIAGRAM — Soal Olimpiade 31
+───────────────────────────────────────────────────────── */
+
+const Soal31SVG = () => (
+  /*
+   * Rectangle ABCD: AB = 10√3 ≈ 242px, AD = 5√3 ≈ 121px (scale 14)
+   * A = (35,162), B = (277,162), D = (35,41), C = (277,41)
+   * r₁ = 10(√3−1)×14 ≈ 102  — inner unreachable boundary
+   * r₂ = 10×14 = 140         — outer unreachable boundary
+   * R  = 5√3×14  ≈ 121       — locus of centers (passes through D)
+   *
+   * Outer circle (r₂=140) intersects top side (y=41):
+   *   x_rel = √(140²−121²) = √4959 ≈ 70  →  abs x = 35+70 = 105
+   */
+  <svg viewBox="0 0 315 185" className="w-full max-w-[320px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="cp31rect">
+        <rect x="35" y="41" width="242" height="121" />
+      </clipPath>
+    </defs>
+
+    {/* Rectangle background */}
+    <rect x="35" y="41" width="242" height="121" fill="#0b1121" />
+
+    {/* ── Reachable annulus: outer disk (amber) clipped to rect ── */}
+    <circle cx="35" cy="162" r="140" fill="#f59e0b" fillOpacity="0.20" clipPath="url(#cp31rect)" />
+
+    {/* ── Inner unreachable zone (too close to A) ── */}
+    <path d="M 35,162 L 137,162 A 102,102 0 0 0 35,60 Z"
+      fill="#10b981" fillOpacity="0.28" />
+
+    {/* ── Locus of centers (dashed orange circle, R≈121, passes through D) ── */}
+    <circle cx="35" cy="162" r="121" fill="none"
+      stroke="#fb923c" strokeWidth="1.3" strokeDasharray="5,3"
+      clipPath="url(#cp31rect)" />
+
+    {/* ── r₁ boundary (dashed emerald) ── */}
+    <circle cx="35" cy="162" r="102" fill="none"
+      stroke="#34d399" strokeWidth="1.6" strokeDasharray="5,3"
+      clipPath="url(#cp31rect)" />
+
+    {/* ── r₂ boundary (solid amber) ── */}
+    <circle cx="35" cy="162" r="140" fill="none"
+      stroke="#f59e0b" strokeWidth="1.8"
+      clipPath="url(#cp31rect)" />
+
+    {/* Rectangle border on top of fills */}
+    <rect x="35" y="41" width="242" height="121" fill="none" stroke="#64748b" strokeWidth="1.8" />
+
+    {/* A corner dot */}
+    <circle cx="35" cy="162" r="3" fill="#f8fafc" />
+
+    {/* r₂ = 10 radius line along bottom */}
+    <line x1="35" y1="162" x2="175" y2="162" stroke="#f59e0b" strokeWidth="1.4" />
+    <circle cx="175" cy="162" r="2.5" fill="#fbbf24" />
+    <text x="105" y="178" fill="#fbbf24" fontSize="9" textAnchor="middle" fontFamily="sans-serif">r₂ = 10</text>
+
+    {/* R = 5√3 radius line along left side (to D) */}
+    <line x1="35" y1="162" x2="35" y2="41" stroke="#fb923c" strokeWidth="1.2" strokeDasharray="4,2" />
+    <circle cx="35" cy="41" r="2.5" fill="#fb923c" />
+    <text x="25" y="101" fill="#fb923c" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif"
+      transform="rotate(-90,25,101)">R = 5√3</text>
+
+    {/* r₁ radius tick on left side */}
+    <line x1="35" y1="162" x2="35" y2="60" stroke="#34d399" strokeWidth="1.2" strokeDasharray="3,2" />
+    <circle cx="35" cy="60" r="2.5" fill="#34d399" />
+    <text x="13" y="111" fill="#34d399" fontSize="8" textAnchor="middle" fontFamily="sans-serif"
+      transform="rotate(-90,13,111)">r₁=10(√3−1)</text>
+
+    {/* AB dimension */}
+    <text x="156" y="178" fill="#94a3b8" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">AB = 10√3</text>
+
+    {/* Vertex labels */}
+    <text x="22" y="170" fill="#e2e8f0" fontSize="12" fontFamily="serif" fontStyle="italic" fontWeight="bold">A</text>
+    <text x="280" y="170" fill="#e2e8f0" fontSize="12" fontFamily="serif" fontStyle="italic" fontWeight="bold">B</text>
+    <text x="22" y="40"  fill="#e2e8f0" fontSize="12" fontFamily="serif" fontStyle="italic" fontWeight="bold">D</text>
+    <text x="280" y="40"  fill="#e2e8f0" fontSize="12" fontFamily="serif" fontStyle="italic" fontWeight="bold">C</text>
+
+    {/* Zone labels */}
+    {/* Outer unreachable (dark, top-right of rect) */}
+    <text x="205" y="75"  fill="#94a3b8" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">❌ Tidak mungkin</text>
+    <text x="205" y="85"  fill="#94a3b8" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">|PA| &gt; 10</text>
+
+    {/* Inner unreachable (green quarter near A) */}
+    <text x="67"  y="115" fill="#34d399" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">❌ Tdk mungkin</text>
+    <text x="67"  y="124" fill="#34d399" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">|PA| &lt; r₁</text>
+
+    {/* Reachable annulus */}
+    <text x="115" y="148" fill="#fbbf24" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">✓ Terjangkau</text>
+
+    {/* Locus label */}
+    <text x="105" y="49"  fill="#fb923c" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">Locus pusat (R = 5√3)</text>
+  </svg>
+);
+
 const latihanOlimpiade = [
   { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nDi dalam suatu lingkaran yang berjari-jari 4 cm dibuat persegi ABCD, sehingga titik sudut persegi tersebut berada pada lingkaran. Luas persgi ABCD adalah ...", options: ["A. 64 $cm^2$", "B. 32 $cm^2$", "C. 16 $cm^2$", "D. 8 $cm^2$", "E. 4 $cm^2$"] },
   { no: 2, soal: "OSN Matematika 2005 Tingkat Kota\nMisalkan a dan b menyatakan luas daerah yang diarsir pada gambar di bawah. Kelima lingkaran kecil berjari-jari r. titik-titik pusat empat lingkaran kecil yang menyinggung lingkaran besar merupakan titik-titik sudut persegi. Jika a sama dengan 10 $cm^2$, maka b = ...", options: [] },
@@ -1023,11 +1119,17 @@ const latihanOlimpiade = [
   { no: 28, soal: "OSN Matematika 2023 Tingkat Kota\nEmpat titik berbeda A, B, C dan D terletak pada lingkaran berjari-jari 7 cm. Diketahui AB : BC = 3 : 4, AB = AD dan BC = CD. Titik E adalah perpotongan AC dan BD, melalui titik E dibuat garis k dan l. Garis k tegak lurus BC dan memotong AD di P. Sementara, garis l tegak lurus AD dan memotong BC di Q. Perbandingan luas daerah segitiga AQP dan PDQ adalah 1 : ...", options: [] },
   { no: 29, soal: "OSN Matematika 2025 Tingkat Kota\nDalam suatu lingkaran berpusat di O berjari-jari 7, dibuat segitiga ABC dengan titik A, B dan C terletak pada lingkaran, AC merupakan diameter lingkaran dengan $\\angle ACB = 60^0$.\nMelalui C dan titik Tengah AB, dibuat garis memotong lingkaran di titik D. Panjang CD sama dengan ...", options: ["A. $3\\sqrt{7}$", "B. $5\\sqrt{7}$", "C. $6\\sqrt{7}$", "D. $7\\sqrt{7}$"] },
   { no: 30, soal: "OSN Matematika 2026 Tingkat Kota\nPersegi panjang $ABCD$ dengan $AD = 36$ cm. Lingkaran $p$ dengan jari-jari 10 cm menyinggung sisi $AD$ dan $CD$. Lingkaran $q$ dengan jari-jari 16 cm menyinggung $AB$ dan $BC$ serta menyinggung lingkaran $p$. Selisih panjang sisi $AB$ dan $BC$ adalah....", options: ["A. 10 cm", "B. 14 cm", "C. 16 cm", "D. 24 cm"] },
+  { no: 31, soal: "OSN Matematika 2026 Tingkat Kota\nDiketahui persegi panjang $ABCD$ dengan $AB = 10\\sqrt{3}$ dan $AD = 5\\sqrt{3}$, akan dibuat lingkaran berjari-jari $10 - 5\\sqrt{3}$ yang jarak pusatnya ke titik $A$ adalah $5\\sqrt{3}$. Luas daerah persegi panjang $ABCD$ yang tidak mungkin berada di daerah lingkaran-lingkaran adalah....", options: ["A. $150 - 25\\pi$", "B. $150 - 25\\pi - \\dfrac{25}{2}\\sqrt{3}$", "C. $150 - 25\\pi(2\\sqrt{3} - 3)$", "D. $150 - \\dfrac{25}{2}\\sqrt{3} - 25\\pi\\left(2\\sqrt{3} - 3\\dfrac{1}{3}\\right)$"] },
 ];
 
 /* ─────────────────────────────────────────────────────────
    PAGE COMPONENT
 ───────────────────────────────────────────────────────── */
+
+/* Diagram nodes for pembahasan — keyed by soal olimpiade number */
+const olimpiadeDiagrams: Record<number, React.ReactNode> = {
+  31: <Soal31SVG />,
+};
 
 const OlimpiadeLingkaranPage = () => {
   const navigate = useNavigate();
@@ -1059,7 +1161,7 @@ const OlimpiadeLingkaranPage = () => {
           <p className="text-white/40 text-xs text-center font-body">Irawan Sutiawan, M.Pd</p>
           <div className="flex items-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 font-body">6 Topik Materi</span>
-            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">65 Soal</span>
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">67 Soal</span>
           </div>
         </div>
 
@@ -1222,7 +1324,14 @@ const OlimpiadeLingkaranPage = () => {
                     </div>
                   )}
                   {lingkaranOlimpiadePembahasan[soal.no] && (
-                    <PembahasanCard pembahasanKey={`ling-olim-${soal.no}`} pembahasan={lingkaranOlimpiadePembahasan[soal.no]} />
+                    <PembahasanCard
+                      pembahasanKey={`ling-olim-${soal.no}`}
+                      pembahasan={
+                        olimpiadeDiagrams[soal.no]
+                          ? { ...lingkaranOlimpiadePembahasan[soal.no], diagram: olimpiadeDiagrams[soal.no] }
+                          : lingkaranOlimpiadePembahasan[soal.no]
+                      }
+                    />
                   )}
                 </div>
               </div>

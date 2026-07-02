@@ -291,6 +291,51 @@ export const lingkaranOlimpiadePembahasan: Record<number, Pembahasan> = {
       "Kuasa titik tengah tali busur: $MA \\cdot MB = MC \\cdot MD$ untuk setiap dua tali busur lewat $M$.",
     kesimpulan: "Panjang $CD = 5\\sqrt{7}$.",
   },
+  31: {
+    jawaban: "D. $150 - \\dfrac{25}{2}\\sqrt{3} - 25\\pi\\left(2\\sqrt{3} - 3\\dfrac{1}{3}\\right)$",
+    konsepTrik:
+      "Pusat lingkaran bergerak pada lingkaran berjari-jari $R = 5\\sqrt{3}$ berpusat di $A$. " +
+      "Titik $P$ tidak mungkin terjangkau oleh lingkaran manapun jika jarak minimum dari $P$ ke locus pusat lebih dari $r = 10 - 5\\sqrt{3}$.\n" +
+      "Hal ini terjadi dalam dua kasus:\n" +
+      "• $|PA| < R - r = 10(\\sqrt{3}-1)$ (terlalu dekat $A$, di dalam semua kemungkinan lingkaran)\n" +
+      "• $|PA| > R + r = 10$ (terlalu jauh, di luar semua kemungkinan lingkaran)\n" +
+      "Sehingga daerah tidak mungkin = zona di dalam $r_1 = 10(\\sqrt{3}-1)$ + zona di luar $r_2 = 10$, dipotong persegi panjang.",
+    stepByStep:
+      "Langkah 1: Identifikasi locus pusat\n" +
+      "Pusat $O$ bergerak pada lingkaran pusat $A$, jari-jari $R = 5\\sqrt{3}$.\n" +
+      "Jari-jari setiap lingkaran: $r = 10 - 5\\sqrt{3}$.\n\n" +
+      "Langkah 2: Syarat titik tidak terjangkau\n" +
+      "Jarak minimum dari $P$ ke locus pusat:\n" +
+      "• Jika $|PA| \\leq R$: min-dist $= R - |PA|$. Tidak terjangkau jika $> r$ $\\Rightarrow$ $|PA| < R - r = 10\\sqrt{3} - 10 = 10(\\sqrt{3}-1) =: r_1$\n" +
+      "• Jika $|PA| > R$: min-dist $= |PA| - R$. Tidak terjangkau jika $> r$ $\\Rightarrow$ $|PA| > R + r = 5\\sqrt{3} + (10-5\\sqrt{3}) = 10 =: r_2$\n\n" +
+      "Langkah 3: Luas persegi panjang\n" +
+      "$L_{ABCD} = AB \\times AD = 10\\sqrt{3} \\times 5\\sqrt{3} = 150$ cm²\n\n" +
+      "Langkah 4: Luas zona dalam $r_1 = 10(\\sqrt{3}-1)$\n" +
+      "Cek: $r_1 \\approx 7{,}32 < AD = 5\\sqrt{3} \\approx 8{,}66$ dan $r_1 < AB$ $\\Rightarrow$ seperempat lingkaran masuk penuh ke persegi panjang.\n" +
+      "$L_1 = \\dfrac{\\pi r_1^2}{4} = \\dfrac{\\pi \\cdot 100(\\sqrt{3}-1)^2}{4} = \\dfrac{100\\pi(4-2\\sqrt{3})}{4} = 25\\pi(4-2\\sqrt{3})$\n\n" +
+      "Langkah 5: Luas zona di luar $r_2 = 10$ (dalam persegi panjang)\n" +
+      "Lingkaran $r_2 = 10$ berpusat di $A$ (sudut) melampaui sisi $AD = 5\\sqrt{3} < 10$.\n" +
+      "Perpotongan lingkaran $r_2$ dengan sisi atas ($y = 5\\sqrt{3}$): $x = \\sqrt{100 - 75} = 5$, sudut potong $= 60°$\n" +
+      "Segmen di atas sisi $AD$:\n" +
+      "$L_{\\text{segmen}} = \\dfrac{30°}{360°} \\cdot \\pi(10)^2 - \\dfrac{1}{2}(5)(5\\sqrt{3}) = \\dfrac{25\\pi}{3} - \\dfrac{25\\sqrt{3}}{2}$\n" +
+      "$L_{r_2 \\cap \\text{persegi}} = 25\\pi - \\left(\\dfrac{25\\pi}{3} - \\dfrac{25\\sqrt{3}}{2}\\right) = \\dfrac{50\\pi}{3} + \\dfrac{25\\sqrt{3}}{2}$\n" +
+      "$L_{\\text{luar}} = 150 - \\dfrac{50\\pi}{3} - \\dfrac{25\\sqrt{3}}{2}$\n\n" +
+      "Langkah 6: Total luas daerah tidak mungkin\n" +
+      "$L = L_1 + L_{\\text{luar}} = 25\\pi(4-2\\sqrt{3}) + 150 - \\dfrac{50\\pi}{3} - \\dfrac{25\\sqrt{3}}{2}$\n" +
+      "$= 150 - \\dfrac{25\\sqrt{3}}{2} + \\pi\\!\\left(100 - 50\\sqrt{3} - \\dfrac{50}{3}\\right)$\n" +
+      "$= 150 - \\dfrac{25\\sqrt{3}}{2} + \\dfrac{25\\pi}{3}(10 - 6\\sqrt{3})$\n" +
+      "$= 150 - \\dfrac{25}{2}\\sqrt{3} - 25\\pi\\!\\left(2\\sqrt{3} - \\dfrac{10}{3}\\right)$\n" +
+      "$= 150 - \\dfrac{25}{2}\\sqrt{3} - 25\\pi\\!\\left(2\\sqrt{3} - 3\\dfrac{1}{3}\\right)$",
+    tips:
+      "Kunci: pusat dapat berada di MANA SAJA pada lingkaran berjari-jari $R = 5\\sqrt{3}$ dari $A$, sehingga gunakan konsep 'jarak minimum dari titik ke lingkaran (kurva)'.\n" +
+      "• $r_2 = R + r$ adalah jarak luar: terlalu jauh bahkan dari pusat terdekat.\n" +
+      "• $r_1 = R - r$ adalah jarak dalam: terlalu dekat bahkan dari pusat terjauh.\n" +
+      "• Ingat: $r_1 = 10(\\sqrt{3}-1) < AD = 5\\sqrt{3}$ sehingga kuadran dalam masuk penuh; $r_2 = 10 > AD$ sehingga perlu potong dengan sisi atas.",
+    kesimpulan:
+      "Luas daerah yang tidak mungkin terjangkau lingkaran-lingkaran adalah:\n" +
+      "$150 - \\dfrac{25}{2}\\sqrt{3} - 25\\pi\\!\\left(2\\sqrt{3} - 3\\dfrac{1}{3}\\right)$\n" +
+      "Jawaban: $\\mathbf{D}$.",
+  },
   30: {
     jawaban: "B. 14 cm",
     konsepTrik:
