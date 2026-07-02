@@ -866,8 +866,8 @@ const Soal20SVG = () => {
       <path d="M 80,58 A 22,22 0 0,0 69,61 L 80,80 Z"
         fill={fillG} stroke={strkG} strokeWidth="1" />
 
-      {/* 2x — 60° CW from AB-right(102,80) to diag-dir(91,99) — RIGHT side of A */}
-      <path d="M 102,80 A 22,22 0 0,1 91,99 L 80,80 Z"
+      {/* 2x — 60° CW from x-ray(69,61) to AB-left(58,80) — directly BELOW x */}
+      <path d="M 69,61 A 22,22 0 0,1 58,80 L 80,80 Z"
         fill={fillG} stroke={strkG} strokeWidth="1.2" />
 
       {/* 120° — CCW from CB-dir(253,173) through top to CD-left(214,195) */}
@@ -908,8 +908,8 @@ const Soal20SVG = () => {
       {/* ── Angle labels ── */}
       {/* x: bisector between perp and x-ray above AB */}
       <text x="70"  y="57"  fill={txtG} fontSize="12" fontStyle="italic" fontFamily="'Times New Roman',serif">x</text>
-      {/* 2x: inside right-side sector, shifted down toward lower arc */}
-      <text x="97" y="113" fill={txtG} fontSize="13" fontFamily="'Times New Roman',serif">2<tspan fontStyle="italic">x</tspan></text>
+      {/* 2x: bisector between x-ray and AB-left, directly below x */}
+      <text x="44" y="74"  fill={txtG} fontSize="13" fontFamily="'Times New Roman',serif">2<tspan fontStyle="italic">x</tspan></text>
       {/* 120°: inside sector at C */}
       <text x="205" y="163" fill={txtG} fontSize="12" fontFamily="'Times New Roman',serif">120°</text>
     </svg>
