@@ -1010,7 +1010,7 @@ const Soal7ABCDESVG = () => (
 // Geometri: BC=5cm, ∠A=30°, ∠CDB=45° → DB=5cm, AB=5√3cm, AC=10cm, DC=5√2cm
 // Skala 20px/cm: A(87,240) D(160,240) B(260,240) C(260,140)
 const Soal29ABCDSVG = () => (
-  <svg viewBox="0 0 320 280" className="w-full max-w-xs mx-auto rounded-lg border border-border/40 bg-white/5" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="65 115 245 160" className="w-full max-w-xs mx-auto rounded-lg border border-border/40 bg-white/5" xmlns="http://www.w3.org/2000/svg">
     {/* Fill: segitiga ABC */}
     <polygon points="87,240 260,240 260,140" fill="rgba(251,191,36,0.08)" stroke="none" />
     {/* Sisi AB (bawah) */}
@@ -1404,13 +1404,7 @@ const OlimpiadeTeoremaPage = () => {
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal.split('\n')[0])}
                     </div>
-                    <div className="flex flex-col items-center gap-3 my-3">
-                      <img
-                        src={"/images/image_1777787261364.png"}
-                        alt="Segitiga ABCD dengan sudut 30°, 45° dan tinggi 5 cm soal nomor 29"
-                        className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
-                        data-testid="img-soal-pyth-dasar-29"
-                      />
+                    <div className="flex justify-center my-3">
                       <Soal29ABCDSVG />
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
