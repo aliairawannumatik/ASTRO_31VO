@@ -291,6 +291,44 @@ export const bangunRuangSisiDatarOlimpiadePembahasan: Record<number, Pembahasan>
     kesimpulan:
       "Volume tetrahedron = $\\frac{80\\sqrt{5}}{3}$ cm³. (OSN 2025, pilihan B)",
   },
+  23: {
+    jawaban: "D. 144",
+    konsepTrik:
+      "Potongan bidang datar pada prisma segi enam beraturan memenuhi persamaan linear $h(x,y)=\\alpha x+\\beta y+\\gamma$.\n" +
+      "Karena titik yang berlawanan (A↔D, B↔E, C↔F) berada di ujung diameter:\n" +
+      "$AP + DS = BQ + ET = CR + FU = 2k$\n" +
+      "Dan titik berselang: $AP + CR + ET = BQ + DS + FU = 3k$\n" +
+      "Substitusi $ET = 2k-b$ ke persamaan alternasi: $k = a + c - b$\n" +
+      "Total $S = 6k = 6(a+c-b) = 6(40-2b)$ → maksimalkan dengan meminimalkan $b$.",
+    stepByStep:
+      "Langkah 1: Sifat fungsi linear pada segi enam beraturan\n" +
+      "Bidang potong memenuhi $h(x,y) = \\alpha x + \\beta y + \\gamma$ (linear).\n" +
+      "Titik berlawanan dalam segi enam: koordinatnya berjumlah $2\\times$ pusat.\n\n" +
+      "Langkah 2: Pasangan berlawanan\n" +
+      "$(A,D),\\ (B,E),\\ (C,F)$ berlawanan, sehingga:\n" +
+      "$AP + DS = BQ + ET = CR + FU = 2k$\n\n" +
+      "Langkah 3: Sifat titik berselang\n" +
+      "$AP + CR + ET = 3k$ dan $BQ + DS + FU = 3k$\n" +
+      "Substitusi $ET = 2k - b$: $a + c + (2k-b) = 3k \\Rightarrow k = a+c-b$\n\n" +
+      "Langkah 4: Total jumlah enam rusuk tegak\n" +
+      "$S = (AP+DS) + (BQ+ET) + (CR+FU) = 6k = 6(a+c-b)$\n\n" +
+      "Langkah 5: Maksimalkan $S$ dengan $\\{a,b,c\\} = \\{8,15,17\\}$\n" +
+      "$S = 6(a+c-b) = 6\\bigl((a+b+c)-2b\\bigr) = 6(40-2b)$\n" +
+      "Minimum $b = 8 \\Rightarrow S_{\\max} = 6(40-16) = 6 \\times 24 = \\mathbf{144}$\n\n" +
+      "Langkah 6: Verifikasi ($b=8$, $\\{a,c\\}=\\{15,17\\}$)\n" +
+      "$k = 15+17-8 = 24$\n" +
+      "$DS = 2(24)-15 = 33,\\quad ET = 2(24)-8 = 40,\\quad FU = 2(24)-17 = 31$\n" +
+      "Semua positif ✓\n" +
+      "$S = 15+8+17+33+40+31 = 144$ ✓",
+    tips:
+      "Kunci utama: bidang datar memotong prisma → tinggi di setiap rusuk tegak adalah fungsi linear posisi.\n" +
+      "Untuk segi enam beraturan, gunakan dua sifat:\n" +
+      "1. Titik berlawanan: jumlah dua tingginya konstan (= $2k$)\n" +
+      "2. Total = $6k$ → cukup tentukan $k = a+c-b$\n" +
+      "Ingat: nilai {8, 15, 17} adalah tripel Pythagoras ($8^2+15^2=17^2$) — petunjuk soal kompetisi!",
+    kesimpulan:
+      "Nilai terbesar $AP+BQ+CR+DS+ET+FU = 6(a+c-b)_{\\max} = 6(17+15-8) = \\mathbf{144}$ (Jawaban D).",
+  },
   22: {
     jawaban: "D. 10",
     konsepTrik:

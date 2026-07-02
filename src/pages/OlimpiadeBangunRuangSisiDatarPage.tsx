@@ -621,6 +621,95 @@ const latihanDasar = [
   { no: 46, soal: "Sebuah bak mandi berukuran panjang = 80 cm, lebar = 40 cm, tinggi 60 cm, berisi air setinggi 40 cm, jika 3 buah kubus yang panjang rusuknya 20 cm, dimasukkan ke dalam bak tersebut sehingga tenggelam, tentukan tinggi air sekarang!", options: [] },
 ];
 
+/* ─────────────────────────────────────────────────────────
+   SVG DIAGRAM — Soal Olimpiade 23
+───────────────────────────────────────────────────────── */
+
+const Soal23BRSDSvg = () => (
+  /*
+   * Prisma segi enam beraturan ABCDEF dipotong bidang datar → PQRSTU
+   * Kasus optimal: AP=15(a), BQ=8(b), CR=17(c), DS=33, ET=40, FU=31 → S=144
+   *
+   * Alas hex center (130,198), radius 60, 60·sin60°≈52:
+   *   A(190,198) B(160,146) C(100,146) D(70,198) E(100,250) F(160,250)
+   * Atas (skala 1.8px/satuan):
+   *   P(190,171)[AP=15] Q(160,132)[BQ=8] R(100,115)[CR=17]
+   *   S(70,139)[DS=33]  T(100,178)[ET=40] U(160,194)[FU=31]
+   */
+  <svg viewBox="0 0 290 270" className="w-full max-w-[290px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+
+    {/* Title */}
+    <text x="145" y="12" fill="#94a3b8" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">
+      Kasus optimal: b=8 (min), a=15, c=17 → S = 6×24 = 144
+    </text>
+
+    {/* ── Hidden bottom edges (C-D, D-E, E-F) ── */}
+    <line x1="100" y1="146" x2="70"  y2="198" stroke="#374151" strokeWidth="1.2" strokeDasharray="4,3" />
+    <line x1="70"  y1="198" x2="100" y2="250" stroke="#374151" strokeWidth="1.2" strokeDasharray="4,3" />
+    <line x1="100" y1="250" x2="160" y2="250" stroke="#374151" strokeWidth="1.2" strokeDasharray="4,3" />
+
+    {/* ── Visible bottom edges (A-B, B-C, A-F) ── */}
+    <line x1="190" y1="198" x2="160" y2="146" stroke="#64748b" strokeWidth="1.5" />
+    <line x1="160" y1="146" x2="100" y2="146" stroke="#64748b" strokeWidth="1.5" />
+    <line x1="190" y1="198" x2="160" y2="250" stroke="#64748b" strokeWidth="1.5" />
+
+    {/* ── Hidden lateral edges (C-R, D-S, E-T) ── */}
+    <line x1="100" y1="146" x2="100" y2="115" stroke="#374151" strokeWidth="1.2" strokeDasharray="4,3" />
+    <line x1="70"  y1="198" x2="70"  y2="139" stroke="#374151" strokeWidth="1.2" strokeDasharray="4,3" />
+    <line x1="100" y1="250" x2="100" y2="178" stroke="#374151" strokeWidth="1.2" strokeDasharray="4,3" />
+
+    {/* ── Visible lateral edges (A-P, B-Q, F-U) ── */}
+    <line x1="190" y1="198" x2="190" y2="171" stroke="#e2e8f0" strokeWidth="1.8" />
+    <line x1="160" y1="146" x2="160" y2="132" stroke="#e2e8f0" strokeWidth="1.8" />
+    <line x1="160" y1="250" x2="160" y2="194" stroke="#e2e8f0" strokeWidth="1.8" />
+
+    {/* ── Top hexagon PQRSTU (amber fill = potongan bidang) ── */}
+    <polygon points="190,171 160,132 100,115 70,139 100,178 160,194"
+      fill="#f59e0b" fillOpacity="0.25" stroke="#f59e0b" strokeWidth="1.8" />
+
+    {/* ── Bottom vertex labels ── */}
+    <text x="196" y="203" fill="#94a3b8" fontSize="11" fontFamily="serif" fontStyle="italic">A</text>
+    <text x="156" y="141" fill="#94a3b8" fontSize="11" fontFamily="serif" fontStyle="italic" textAnchor="middle">B</text>
+    <text x="88"  y="141" fill="#94a3b8" fontSize="11" fontFamily="serif" fontStyle="italic">C</text>
+    <text x="54"  y="203" fill="#94a3b8" fontSize="11" fontFamily="serif" fontStyle="italic">D</text>
+    <text x="88"  y="264" fill="#94a3b8" fontSize="11" fontFamily="serif" fontStyle="italic">E</text>
+    <text x="163" y="264" fill="#94a3b8" fontSize="11" fontFamily="serif" fontStyle="italic">F</text>
+
+    {/* ── Top vertex labels ── */}
+    <text x="196" y="170" fill="#fbbf24" fontSize="11" fontFamily="serif" fontStyle="italic">P</text>
+    <text x="163" y="131" fill="#fbbf24" fontSize="11" fontFamily="serif" fontStyle="italic">Q</text>
+    <text x="83"  y="112" fill="#fbbf24" fontSize="11" fontFamily="serif" fontStyle="italic">R</text>
+    <text x="54"  y="138" fill="#fbbf24" fontSize="11" fontFamily="serif" fontStyle="italic">S</text>
+    <text x="83"  y="177" fill="#fbbf24" fontSize="11" fontFamily="serif" fontStyle="italic">T</text>
+    <text x="163" y="193" fill="#fbbf24" fontSize="11" fontFamily="serif" fontStyle="italic">U</text>
+
+    {/* ── Height annotations ── */}
+    {/* AP = a = 15 */}
+    <line x1="200" y1="171" x2="200" y2="198" stroke="#fbbf24" strokeWidth="1" opacity="0.6" />
+    <text x="204" y="187" fill="#fbbf24" fontSize="8.5" fontFamily="sans-serif">AP=a=15</text>
+    {/* BQ = b = 8 (minimum → diarsir hijau) */}
+    <text x="170" y="141" fill="#34d399" fontSize="8.5" fontFamily="sans-serif">BQ=b=8 ←min</text>
+    {/* CR = c = 17 */}
+    <text x="58"  y="107" fill="#a78bfa" fontSize="8.5" fontFamily="sans-serif">CR=c=17</text>
+    {/* DS = 33 (derived) */}
+    <text x="33"  y="168" fill="#fb923c" fontSize="8.5" fontFamily="sans-serif">DS=33</text>
+    {/* ET = 40 */}
+    <text x="108" y="218" fill="#fb923c" fontSize="8.5" fontFamily="sans-serif">ET=40</text>
+    {/* FU = 31 */}
+    <text x="167" y="224" fill="#fb923c" fontSize="8.5" fontFamily="sans-serif">FU=31</text>
+
+    {/* ── Formula box ── */}
+    <text x="145" y="28" fill="#fbbf24" fontSize="9" textAnchor="middle" fontFamily="sans-serif">
+      S = 6k = 6(a+c−b) = 6(15+17−8) = 144
+    </text>
+
+    {/* ── Opposite-pair sums (key insight) ── */}
+    <text x="3" y="244" fill="#60a5fa" fontSize="7.5" fontFamily="sans-serif">AP+DS = 15+33 = 48 = 2k</text>
+    <text x="3" y="255" fill="#60a5fa" fontSize="7.5" fontFamily="sans-serif">BQ+ET =  8+40 = 48 = 2k</text>
+    <text x="3" y="266" fill="#60a5fa" fontSize="7.5" fontFamily="sans-serif">CR+FU = 17+31 = 48 = 2k</text>
+  </svg>
+);
+
 const latihanOlimpiade = [
   { no: 1, soal: "OSN Matematika 2003 Tingkat Kota\nDiketahui sebuah bak berbentuk balok yang terisi penuh dengan air. Bak tersebut akan dikosongkan dengan menggunakan pompa yang mampu menyedot air 0,7 liter per detik. Dalam waktu 30 menit bak dapat dikosongkan tanpa sisa. Jika luas alas bak adalah 10500 $cm^3$, maka tinggi bak tersebut adalah ...", options: [] },
   { no: 2, soal: "OSN Matematika 2005 Tingkat Kota\nSebuah balok memiliki sisi-sisi yang luasnya 24 $cm^2$, 32 $cm^2$ dan 48 $cm^2$. Berapakah jumlah panjang semua rusuk balok tersebut.", options: [] },
@@ -644,7 +733,13 @@ const latihanOlimpiade = [
   { no: 20, soal: "OSN Matematika 2023 Tingkat Provinsi\nSuatu penampung air berbentuk gabungan balok dan limas terpancung dengan ukuran dalam (m) seperti pada gambar berikut.\nPenampung tersebut yang semula kosong diisi air dengan debit 1000 $m^3$/jam. Waktu yang dibutuhkan agar air dalam penampungan setinggi $20 - 5\\sqrt{2}$ m adalah ... jam", options: [] },
   { no: 21, soal: "OSN Matematika 2025 Tingkat Kota\nSuatu bidang empat T.ABC memiliki bidang sisi segitiga TBC, TBA dan ABC yang masing-masing saling tegak lurus seperti pada gambar berikut.\nLuas TBC : Luas TBA : Luas ABC = 1 : 2 : 3 dan panjang AC = 10 cm, maka volume bidang empat T.ABC sama dengan ... $cm^2$", options: ["A. $\\frac{10\\sqrt{5}}{9}$", "B. $\\frac{80\\sqrt{5}}{3}$", "C. $80\\sqrt{5}$", "D. $320\\sqrt{5}$"] },
   { no: 22, soal: "OSN Matematika 2025 Tingkat Kota\nOktahendron adalah bilangan bangun ruang tiga dimensi dengan delapan bidang sisi datar. Berikut ini adalah jaring-jaring suatu octahedron beraturan yang memiliki delapan bidang sisi segitiga sama sisi yang kongruen.\nJika jaring-jaring tersebut dibentuk menjadi octahedron, maka angka pada setiap bidang sisi sama dengan penjumlahan semua bidang sisi yang berbagi rusuk dengan bidang sisi tersebut. (contoh : b = a + c + d). jika a = -4, c = 0 dan g = -10, maka nilai b adalah ...", options: ["A. -10", "B. -8", "C. 8", "D. 10"] },
+  { no: 23, soal: "OSN Matematika 2026 Tingkat Kota\nSebuah prisma segi enam beraturan dipotong oleh bidang datar yang memotong semua sisi tegaknya menjadi bangun $ABCDEF.PQRSTU$. Bagian atasnya adalah segi enam $PQRSTU$ yang belum tentu merupakan segi enam beraturan. Jika $AP = a$, $BQ = b$, $CR = c$ dengan $a$, $b$, $c$ anggota dari himpunan $\\{8, 15, 17\\}$, maka nilai terbesar yang mungkin untuk $AP + BQ + CR + DS + ET + FU$ adalah....", options: ["A. 80", "B. 96", "C. 120", "D. 144"] },
 ];
+
+/* Diagram nodes for olimpiade pembahasan — keyed by soal number */
+const olimpiadeDiagramsBRSD: Record<number, React.ReactNode> = {
+  23: <Soal23BRSDSvg />,
+};
 
 /* ─────────────────────────────────────────────────────────
    PAGE COMPONENT
@@ -680,7 +775,7 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
           <p className="text-white/40 text-xs text-center font-body">Irawan Sutiawan, M.Pd</p>
           <div className="flex items-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-violet-500/10 border border-violet-400/20 text-violet-400 font-body">4 Bangun Ruang</span>
-            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">68 Soal</span>
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">69 Soal</span>
           </div>
         </div>
 
@@ -833,7 +928,14 @@ const OlimpiadeBangunRuangSisiDatarPage = () => {
                     </div>
                   )}
                   {bangunRuangSisiDatarOlimpiadePembahasan[soal.no] && (
-                    <PembahasanCard pembahasanKey={`o-${soal.no}`} pembahasan={bangunRuangSisiDatarOlimpiadePembahasan[soal.no]} />
+                    <PembahasanCard
+                      pembahasanKey={`o-${soal.no}`}
+                      pembahasan={
+                        olimpiadeDiagramsBRSD[soal.no]
+                          ? { ...bangunRuangSisiDatarOlimpiadePembahasan[soal.no], diagram: olimpiadeDiagramsBRSD[soal.no] }
+                          : bangunRuangSisiDatarOlimpiadePembahasan[soal.no]
+                      }
+                    />
                   )}
                 </div>
               </div>
