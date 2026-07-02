@@ -772,10 +772,10 @@ const Soal18SVG = () => (
 //   Diag2 (upper-left ↔ lower-right): (171,15) → (359,265) unit dir=(0.600, 0.800)
 //
 // Angle sectors (r=22):
-//   b  at P — blue,   small upper angle Diag1-upright → Diag2-upleft (CCW, sweep=0)
+//   b  at P — blue,   RIGHT pocket: Diag1-upright(237,66) → Diag2-downright(233,98) CW (sweep=1, ~93°)
 //   x  at L — green,  large angle: horiz-RIGHT (97,200) → Diag1-downleft (58,214) CW (sweep=1, ~140°)
 //   a  at R — pink,   small angle: Diag2-upleft (297,182) → horiz-left (288,200) CCW (sweep=0)
-//   y  at R — purple, angle: horiz-right (332,200) → Diag2-downright (323,218) CW (sweep=1)
+//   y  at R — purple, LEFT-below pocket: Diag2-downright(323,218) → horiz-left(288,200) CW (sweep=1, ~127°)
 const Soal19SVG = () => {
   const { isDark } = useTheme();
 
@@ -800,8 +800,8 @@ const Soal19SVG = () => {
     <svg viewBox="0 0 400 270" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
       {/* ── Filled angle sectors (drawn first, behind lines) ── */}
 
-      {/* b — blue sector at P(220,80): Diag1-upright(237,66) → Diag2-upleft(207,62) CCW */}
-      <path d="M 237,66 A 22,22 0 0,0 207,62 L 220,80 Z"
+      {/* b — blue sector at P(220,80): RIGHT pocket Diag1-upright(237,66) → Diag2-downright(233,98) CW */}
+      <path d="M 237,66 A 22,22 0 0,1 233,98 L 220,80 Z"
         fill={fillB} stroke={lblB} strokeWidth="1.5" />
 
       {/* x — green sector at L(75,200): horiz-right(97,200) → Diag1-downleft(58,214) CW ~140° */}
@@ -812,8 +812,8 @@ const Soal19SVG = () => {
       <path d="M 297,182 A 22,22 0 0,0 288,200 L 310,200 Z"
         fill={fillA} stroke={lblA} strokeWidth="1.5" />
 
-      {/* y — purple sector at R(310,200): horiz-right(332,200) → Diag2-downright(323,218) CW */}
-      <path d="M 332,200 A 22,22 0 0,1 323,218 L 310,200 Z"
+      {/* y — purple sector at R(310,200): LEFT-below pocket Diag2-downright(323,218) → horiz-left(288,200) CW */}
+      <path d="M 323,218 A 22,22 0 0,1 288,200 L 310,200 Z"
         fill={fillY} stroke={lblY} strokeWidth="1.5" />
 
       {/* ── Lines ── */}
@@ -830,10 +830,14 @@ const Soal19SVG = () => {
       <circle cx="310" cy="200" r="4" fill={dotColor} />
 
       {/* ── Labels ── */}
-      <text x="236" y="58"  fill={lblB} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">b</text>
+      {/* b: right of P, inside the right pocket */}
+      <text x="244" y="86"  fill={lblB} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">b</text>
+      {/* x: lower-left, inside the large green sector */}
       <text x="52"  y="228" fill={lblX} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">x</text>
+      {/* a: above the pink sector at R */}
       <text x="277" y="194" fill={lblA} fontSize="14" fontStyle="italic" fontFamily="'Times New Roman',serif">a</text>
-      <text x="319" y="228" fill={lblY} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">y</text>
+      {/* y: lower-left of R, inside the left-below pocket */}
+      <text x="272" y="226" fill={lblY} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">y</text>
     </svg>
   );
 };
