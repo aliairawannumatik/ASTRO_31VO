@@ -31,8 +31,37 @@ const OlimpiadeSoal1Pentagram = () => (
 );
 
 const olimpiadeFigures: Record<number, JSX.Element> = {
-  1: <img src={"/images/image_1777978368698.png"} alt="Gambar bintang pentagram soal olimpiade no. 1" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
-  2: <img src={"/images/image_1777980101180.png"} alt="Gambar bangun soal olimpiade no. 2" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  1: <img src={"https://drive.google.com/thumbnail?id=1IQp0B-07oPfACIW0-FHB8wByOsBe47Wx&sz=w400"} alt="Gambar soal olimpiade no. 1" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  2: <img src={"https://drive.google.com/thumbnail?id=1sFXVfNXYxbopjvZb5rsq4dNjzB1apHgX&sz=w400"} alt="Gambar soal olimpiade no. 2" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  3: <img src={"https://drive.google.com/thumbnail?id=1YdxypEAdZlnqY-bfGB_npTh-yTLD-wqu&sz=w400"} alt="Gambar soal olimpiade no. 3" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  4: <img src={"https://drive.google.com/thumbnail?id=1SKwYkJ1FO5BieDu1TtrvETNw6PKvnVVF&sz=w400"} alt="Gambar soal olimpiade no. 4" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  5: <img src={"https://drive.google.com/thumbnail?id=1bD6esG5N1_63lVPOyqXCjgfvlNfiqNjQ&sz=w400"} alt="Gambar soal olimpiade no. 5" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  6: <img src={"https://drive.google.com/thumbnail?id=1WY3kq-TLc9zQ32n6rTWJIZnp07_n24vI&sz=w400"} alt="Gambar soal olimpiade no. 6" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  8: <img src={"https://drive.google.com/thumbnail?id=1XmcMSVsTD7Scaofxjzmcdefviu1pXkoU&sz=w400"} alt="Gambar soal olimpiade no. 8" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  10: <img src={"https://drive.google.com/thumbnail?id=1xyQFkTyEbrPHatskUkdXiiG424ox3Y55&sz=w400"} alt="Gambar soal olimpiade no. 10" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  11: <img src={"https://drive.google.com/thumbnail?id=1NpeRYFtwBZFbUEp0rsOjuNSsffdLpdIC&sz=w400"} alt="Gambar soal olimpiade no. 11" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  12: <img src={"https://drive.google.com/thumbnail?id=1rTk2hCujNV5rREPRs-rNWSB54G_qtqIy&sz=w400"} alt="Gambar soal olimpiade no. 12" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  13: <img src={"https://drive.google.com/thumbnail?id=1mA5MiQK9zB3-vCzzokedVlueRhXtZnxJ&sz=w400"} alt="Gambar soal olimpiade no. 13" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  15: <img src={"https://drive.google.com/thumbnail?id=1Lr52CONiNv5SaLEmCovu1MLUxmNnxyGe&sz=w400"} alt="Gambar soal olimpiade no. 15" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  20: <img src={"https://drive.google.com/thumbnail?id=1uSPVfInc-2UhTSsQCUJHnuttPIvREwWi&sz=w400"} alt="Gambar soal olimpiade no. 20" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  22: <img src={"https://drive.google.com/thumbnail?id=1GmwpxVUcPxxg_Sl5HrQg4GLw5XlHC9-Z&sz=w400"} alt="Gambar soal olimpiade no. 22" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  23: <img src={"https://drive.google.com/thumbnail?id=1ceAJ3M2cNNjY_UZJAasKBfVvP2tM2fk8&sz=w400"} alt="Gambar soal olimpiade no. 23" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  24: <img src={"https://drive.google.com/thumbnail?id=1MJsACLdUDd3fiv8CyD6RQOYIjVWtGYle&sz=w400"} alt="Gambar soal olimpiade no. 24" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  25: <img src={"https://drive.google.com/thumbnail?id=1fbH2cb9Flm6e6ZqjIILsHktiZOV4mUYV&sz=w400"} alt="Gambar soal olimpiade no. 25" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  26: <img src={"https://drive.google.com/thumbnail?id=10glIsecDdVw_TWetxai240IcbZ1VEDB_&sz=w400"} alt="Gambar soal olimpiade no. 26" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  27: <img src={"https://drive.google.com/thumbnail?id=1zaseCE3E_gbm7ZAwibDuU4o2onV2dcRF&sz=w400"} alt="Gambar soal olimpiade no. 27" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  28: <img src={"https://drive.google.com/thumbnail?id=13EhgfOv_tbc7d7LMG2RlVYXR3mAAqN9-&sz=w400"} alt="Gambar soal olimpiade no. 28" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  29: <img src={"https://drive.google.com/thumbnail?id=1LqYei8jylGnQbu446sFht5uE7vW4YfSP&sz=w400"} alt="Gambar soal olimpiade no. 29" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  30: <img src={"https://drive.google.com/thumbnail?id=1uPx4MZJFJOMUBRS_JVrA6dddKeIHbZLT&sz=w400"} alt="Gambar soal olimpiade no. 30" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  33: <img src={"https://drive.google.com/thumbnail?id=1QAWOiKVYhQhmFIZktP-UcTJG3IujqfJk&sz=w400"} alt="Gambar soal olimpiade no. 33" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  35: <img src={"https://drive.google.com/thumbnail?id=16JcbruU2sw9Qdrf9XsR2SMO3rzP5zLHK&sz=w400"} alt="Gambar soal olimpiade no. 35" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  36: <img src={"https://drive.google.com/thumbnail?id=11RtrvK0jQxjvznHOc0TeMP5cpvgeHV1O&sz=w400"} alt="Gambar soal olimpiade no. 36" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  38: <img src={"https://drive.google.com/thumbnail?id=14G2qCuqNSpppaLC1bIqOYqHIBgaNPuPG&sz=w400"} alt="Gambar soal olimpiade no. 38" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  40: <img src={"https://drive.google.com/thumbnail?id=1hTVxLL79MWqnniDCtJ0_J8BU7uXysLpr&sz=w400"} alt="Gambar soal olimpiade no. 40" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  44: <img src={"https://drive.google.com/thumbnail?id=1LluREkKc08bY7ToaR0jTWm6M5AxlRWdh&sz=w400"} alt="Gambar soal olimpiade no. 44" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  45: <img src={"https://drive.google.com/thumbnail?id=11Ty_S1jrxU5bEZTTOIS6V5J47wWF-h_z&sz=w400"} alt="Gambar soal olimpiade no. 45" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  46: <img src={"https://drive.google.com/thumbnail?id=1iCn_L6ndqVJPPE5vjf3T7P-p-Wx696rS&sz=w400"} alt="Gambar soal olimpiade no. 46" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
+  47: <img src={"https://drive.google.com/thumbnail?id=1mI3dHne9GcUPw6NNGX2sj7SDpf4HF9TG&sz=w400"} alt="Gambar soal olimpiade no. 47" className="max-w-full max-h-56 object-contain bg-white rounded-lg p-2" />,
   53: (
     <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" className="max-w-[220px] w-full">
       <rect x="30" y="20" width="160" height="160" fill="white" stroke="black" strokeWidth="2.5" />
@@ -1155,20 +1184,10 @@ const OlimpiadeSegitigaSegiempatPage = () => {
                     </span>
                   ))}
                 </div>
-                {olimpiadeFigures[soal.no] ? (
+                {olimpiadeFigures[soal.no] && (
                   <div className="flex justify-center my-3">
                     <div className="max-w-[280px] w-full text-white">
                       {olimpiadeFigures[soal.no]}
-                    </div>
-                  </div>
-                ) : ([2,3,4,5,6,8,10,11,12,13,15,20,22,23,24,25,26,27,28,29,30,33,35,36,38,40,44,45,46,47] as number[]).includes(soal.no) && (
-                  <div className="flex justify-center my-3">
-                    <div className="bg-white rounded-lg p-3 shadow-md max-w-sm w-full flex justify-center">
-                      <img
-                        src={`/olimpiade-soal-${soal.no}.png`}
-                        alt={`Gambar soal no. ${soal.no}`}
-                        className="max-w-full max-h-56 object-contain"
-                      />
                     </div>
                   </div>
                 )}
