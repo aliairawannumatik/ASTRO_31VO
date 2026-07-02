@@ -1323,13 +1323,7 @@ const latihanDasar: {
   {
     no: 24,
     soal: "Perhatikan gambar di bawah ini.\n\nDiketahui sudut SPT $= 83°$ dan sudut PQT $= 41°$. Garis PQ dan RS sejajar, demikian juga garis PS dan QT sejajar. Maka besar x = …",
-    image: (
-      <div className="flex flex-col items-center gap-1 w-full">
-        <img src={"/images/image_1777675316904.png"} alt="Gambar Soal 24" className="w-full max-w-md mx-auto" />
-        <p className="text-xs text-white/35 italic">Duplikat SVG ↓</p>
-        <Soal24SVG />
-      </div>
-    ),
+    image: <Soal24SVG />,
     imageCaption: "Gambar Soal 24",
     options: ["A. $41°$", "B. $82°$", "C. $124°$", "D. $139°$"]
   },
