@@ -42,10 +42,10 @@ const formatText = (text: string) => {
 
 const ChatAIPage = () => {
   const navigate = useNavigate();
-  const { theme } = useTheme();
+  const { isDark } = useTheme();
   const { language } = useLanguage();
   const { t } = useTranslation();
-  const isSunset = theme === "sunset";
+  const isLight = !isDark;
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -205,31 +205,31 @@ const ChatAIPage = () => {
   const canSend = (input.trim() || !!attachedFile) && !loading;
 
   return (
-    <div className={`relative min-h-screen flex flex-col overflow-hidden ${isSunset ? "gradient-sunset" : "gradient-space"}`}>
+    <div className="relative min-h-screen flex flex-col overflow-hidden gradient-space">
       <Starfield />
       <PageNavigation prevPath="/menu" />
 
       {/* ── HEADER ── */}
       <div className="relative z-10 shrink-0">
-        <div className={`h-0.5 w-full bg-gradient-to-r ${isSunset ? "from-sky-400 via-yellow-300 to-sky-500" : "from-violet-500 via-cyan-400 to-blue-500"}`} />
+        <div className={`h-0.5 w-full bg-gradient-to-r ${isLight ? "from-sky-400 via-yellow-300 to-sky-500" : "from-violet-500 via-cyan-400 to-blue-500"}`} />
         <div className={`flex items-center gap-3 px-3 py-3 backdrop-blur-md border-b ${
-          isSunset
+          isLight
             ? "bg-white/70 border-sky-200/60"
             : "bg-[#080f22]/90 border-white/6"
         }`}>
           <button
             onClick={() => navigate("/menu")}
             className={`text-sm transition-colors cursor-pointer font-body shrink-0 ${
-              isSunset ? "text-sky-600/70 hover:text-yellow-500" : "text-white/30 hover:text-amber-400"
+              isLight ? "text-sky-600/70 hover:text-yellow-500" : "text-white/30 hover:text-amber-400"
             }`}
           >
             {t("chatAI.backToMenu")}
           </button>
 
           <div className="relative shrink-0">
-            <div className={`absolute inset-0 rounded-full blur-md animate-pulse ${isSunset ? "bg-sky-400/30" : "bg-cyan-400/40"}`} />
+            <div className={`absolute inset-0 rounded-full blur-md animate-pulse ${isLight ? "bg-sky-400/30" : "bg-cyan-400/40"}`} />
             <div className={`relative w-10 h-10 rounded-full border-2 overflow-hidden ${
-              isSunset
+              isLight
                 ? "border-sky-400/70 shadow-[0_0_16px_rgba(14,165,233,0.4)]"
                 : "border-cyan-400/60 shadow-[0_0_16px_rgba(34,211,238,0.4)]"
             }`}>
@@ -239,13 +239,13 @@ const ChatAIPage = () => {
 
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <p className={`font-display text-sm font-black leading-none tracking-wide ${isSunset ? "text-sky-800" : "text-white"}`}>
+              <p className={`font-display text-sm font-black leading-none tracking-wide ${isLight ? "text-sky-800" : "text-white"}`}>
                 NUMATIK AI
               </p>
             </div>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-              <p className={`font-body text-[11px] ${isSunset ? "text-sky-600/70" : "text-white/40"}`}>
+              <p className={`font-body text-[11px] ${isLight ? "text-sky-600/70" : "text-white/40"}`}>
                 {t("chatAI.robotSubtitle")}
               </p>
             </div>
@@ -255,7 +255,7 @@ const ChatAIPage = () => {
             onClick={resetChat}
             title={t("chatAI.newChat")}
             className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all shrink-0 ${
-              isSunset
+              isLight
                 ? "text-sky-500/60 hover:text-sky-700 hover:bg-sky-500/10"
                 : "text-white/40 hover:text-cyan-300 hover:bg-cyan-500/10"
             }`}
@@ -278,9 +278,9 @@ const ChatAIPage = () => {
               className="flex flex-col items-center text-center pt-4 pb-2 px-2"
             >
               <div className="relative mb-4">
-                <div className={`absolute inset-0 rounded-full blur-2xl scale-150 ${isSunset ? "bg-sky-400/20" : "bg-cyan-400/25"}`} />
+                <div className={`absolute inset-0 rounded-full blur-2xl scale-150 ${isLight ? "bg-sky-400/20" : "bg-cyan-400/25"}`} />
                 <div className={`relative w-20 h-20 rounded-full border-2 overflow-hidden ${
-                  isSunset
+                  isLight
                     ? "border-sky-400/60 shadow-[0_0_30px_rgba(14,165,233,0.3)]"
                     : "border-cyan-400/50 shadow-[0_0_30px_rgba(34,211,238,0.35)]"
                 }`}>
@@ -291,15 +291,15 @@ const ChatAIPage = () => {
                 </div>
               </div>
 
-              <h2 className={`font-display text-xl font-black mb-1 ${isSunset ? "text-sky-800" : "text-white"}`}>
-                {t("chatAI.welcomeHeading")} <span className={isSunset ? "text-yellow-500" : "text-cyan-400"}>👋</span>
+              <h2 className={`font-display text-xl font-black mb-1 ${isLight ? "text-sky-800" : "text-white"}`}>
+                {t("chatAI.welcomeHeading")} <span className={isLight ? "text-yellow-500" : "text-cyan-400"}>👋</span>
               </h2>
-              <p className={`font-body text-xs max-w-xs leading-relaxed mb-5 ${isSunset ? "text-sky-700/70" : "text-white/45"}`}>
+              <p className={`font-body text-xs max-w-xs leading-relaxed mb-5 ${isLight ? "text-sky-700/70" : "text-white/45"}`}>
                 {t("chatAI.welcomeDesc")}
               </p>
 
               <div className="w-full max-w-sm">
-                <p className={`text-[10px] font-display font-bold tracking-widest uppercase mb-2.5 ${isSunset ? "text-sky-600/50" : "text-white/30"}`}>
+                <p className={`text-[10px] font-display font-bold tracking-widest uppercase mb-2.5 ${isLight ? "text-sky-600/50" : "text-white/30"}`}>
                   {t("chatAI.popularTopics")}
                 </p>
                 <div className="grid grid-cols-2 gap-2">
@@ -308,13 +308,13 @@ const ChatAIPage = () => {
                       key={topic.label}
                       onClick={() => sendMessage(topic.prompt)}
                       className={`text-left px-3 py-2.5 rounded-xl border transition-all duration-200 group ${
-                        isSunset
+                        isLight
                           ? "border-sky-300/50 bg-white/50 hover:bg-sky-100/70 hover:border-sky-400/60"
                           : "border-white/8 bg-white/4 hover:bg-cyan-500/10 hover:border-cyan-500/30"
                       }`}
                     >
                       <span className={`font-display text-[11px] font-bold transition-colors leading-tight block ${
-                        isSunset
+                        isLight
                           ? "text-sky-700 group-hover:text-sky-900"
                           : "text-white/70 group-hover:text-cyan-300"
                       }`}>
@@ -339,7 +339,7 @@ const ChatAIPage = () => {
           >
             {msg.role === "model" ? (
               <div className={`w-8 h-8 rounded-full shrink-0 overflow-hidden border-2 self-end ${
-                isSunset
+                isLight
                   ? "border-sky-400/50 shadow-[0_0_10px_rgba(14,165,233,0.2)]"
                   : "border-cyan-400/40 shadow-[0_0_10px_rgba(34,211,238,0.2)]"
               }`}>
@@ -353,7 +353,7 @@ const ChatAIPage = () => {
 
             <div className={`max-w-[80%] relative ${msg.role === "model" ? "items-start" : "items-end"} flex flex-col gap-1`}>
               {msg.role === "model" && i === 0 && (
-                <span className={`text-[9px] font-display font-bold px-1 tracking-wide ${isSunset ? "text-sky-500/70" : "text-cyan-400/60"}`}>
+                <span className={`text-[9px] font-display font-bold px-1 tracking-wide ${isLight ? "text-sky-500/70" : "text-cyan-400/60"}`}>
                   NUMATIK AI
                 </span>
               )}
@@ -378,7 +378,7 @@ const ChatAIPage = () => {
 
               <div className={`rounded-2xl px-4 py-3 text-sm font-body leading-relaxed shadow-lg ${
                 msg.role === "model"
-                  ? isSunset
+                  ? isLight
                     ? "bg-white/85 border border-sky-200/60 text-sky-900 rounded-tl-sm shadow-[0_4px_20px_rgba(14,165,233,0.12)]"
                     : "bg-[#0d1627]/95 border border-cyan-500/15 text-white/90 rounded-tl-sm shadow-[0_4px_20px_rgba(6,182,212,0.08)]"
                   : "bg-gradient-to-br from-violet-600 to-blue-600 border border-violet-400/30 text-white rounded-tr-sm shadow-[0_4px_20px_rgba(139,92,246,0.25)]"
@@ -399,26 +399,26 @@ const ChatAIPage = () => {
               className="flex gap-2.5 flex-row"
             >
               <div className={`w-8 h-8 rounded-full shrink-0 overflow-hidden border-2 self-end ${
-                isSunset
+                isLight
                   ? "border-sky-400/50 shadow-[0_0_10px_rgba(14,165,233,0.2)]"
                   : "border-cyan-400/40 shadow-[0_0_10px_rgba(34,211,238,0.2)]"
               }`}>
                 <img src="/numatik-ai-avatar.png" alt="NUMATIK AI" className="w-full h-full object-cover" />
               </div>
               <div className={`rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-2.5 ${
-                isSunset
+                isLight
                   ? "bg-white/85 border border-sky-200/60 shadow-[0_4px_20px_rgba(14,165,233,0.12)]"
                   : "bg-[#0d1627]/95 border border-cyan-500/15 shadow-[0_4px_20px_rgba(6,182,212,0.08)]"
               }`}>
-                <Rocket className={`w-3.5 h-3.5 animate-pulse shrink-0 ${isSunset ? "text-sky-500" : "text-cyan-400"}`} />
-                <span className={`text-xs font-body ${isSunset ? "text-sky-600/60" : "text-white/40"}`}>
+                <Rocket className={`w-3.5 h-3.5 animate-pulse shrink-0 ${isLight ? "text-sky-500" : "text-cyan-400"}`} />
+                <span className={`text-xs font-body ${isLight ? "text-sky-600/60" : "text-white/40"}`}>
                   {t("chatAI.thinking")}
                 </span>
                 <span className="flex gap-1 items-end h-4">
                   {[0, 150, 300].map((delay, j) => (
                     <span
                       key={j}
-                      className={`w-1.5 h-1.5 rounded-full animate-bounce ${isSunset ? "bg-sky-400" : "bg-cyan-400"}`}
+                      className={`w-1.5 h-1.5 rounded-full animate-bounce ${isLight ? "bg-sky-400" : "bg-cyan-400"}`}
                       style={{ animationDelay: `${delay}ms` }}
                     />
                   ))}
@@ -433,15 +433,15 @@ const ChatAIPage = () => {
 
       {/* ── INPUT AREA ── */}
       <div className={`relative z-10 shrink-0 px-3 pb-4 pt-2 backdrop-blur-md border-t ${
-        isSunset
+        isLight
           ? "bg-white/70 border-sky-200/60"
           : "bg-[#080f22]/90 border-white/6"
       }`}>
 
         {/* Tip */}
         <div className="flex items-center gap-1.5 mb-2 px-1">
-          <Rocket className={`w-3 h-3 ${isSunset ? "text-sky-400/60" : "text-cyan-400/50"}`} />
-          <span className={`text-[10px] font-body ${isSunset ? "text-sky-600/40" : "text-white/20"}`}>
+          <Rocket className={`w-3 h-3 ${isLight ? "text-sky-400/60" : "text-cyan-400/50"}`} />
+          <span className={`text-[10px] font-body ${isLight ? "text-sky-600/40" : "text-white/20"}`}>
             {t("chatAI.tip")}
           </span>
         </div>
@@ -475,7 +475,7 @@ const ChatAIPage = () => {
 
         {/* Input box */}
         <div className={`relative flex items-end gap-2 border rounded-2xl px-2 py-2.5 transition-all duration-200 ${
-          isSunset
+          isLight
             ? "bg-white/80 border-sky-200/60 focus-within:border-sky-400/70 focus-within:shadow-[0_0_0_3px_rgba(14,165,233,0.1)]"
             : "bg-[#0d1627] border-white/8 focus-within:border-cyan-500/50 focus-within:shadow-[0_0_0_3px_rgba(6,182,212,0.08)]"
         }`}>
@@ -496,7 +496,7 @@ const ChatAIPage = () => {
             className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
               attachedFile
                 ? "bg-violet-500/30 text-violet-300 border border-violet-500/40"
-                : isSunset
+                : isLight
                   ? "text-sky-400/60 hover:text-violet-500 hover:bg-violet-500/10"
                   : "text-white/30 hover:text-violet-300 hover:bg-violet-500/15"
             }`}
@@ -518,7 +518,7 @@ const ChatAIPage = () => {
             rows={1}
             disabled={loading}
             className={`flex-1 bg-transparent text-sm font-body resize-none outline-none max-h-28 leading-relaxed py-0.5 ${
-              isSunset
+              isLight
                 ? "text-sky-900 placeholder-sky-400/50"
                 : "text-white placeholder-white/25"
             }`}
@@ -533,7 +533,7 @@ const ChatAIPage = () => {
             className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
               isRecording
                 ? "bg-red-500/30 text-red-400 border border-red-500/50 shadow-[0_0_12px_rgba(239,68,68,0.3)] animate-pulse"
-                : isSunset
+                : isLight
                   ? "text-sky-400/60 hover:text-sky-600 hover:bg-sky-500/10"
                   : "text-white/30 hover:text-cyan-300 hover:bg-cyan-500/15"
             }`}
@@ -547,15 +547,15 @@ const ChatAIPage = () => {
             disabled={!canSend}
             className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 active:scale-95 ${
               canSend
-                ? isSunset
+                ? isLight
                   ? "bg-gradient-to-br from-sky-400 to-blue-500 shadow-[0_0_16px_rgba(14,165,233,0.4)] hover:shadow-[0_0_20px_rgba(14,165,233,0.6)] hover:scale-105"
                   : "bg-gradient-to-br from-cyan-500 to-blue-600 shadow-[0_0_16px_rgba(6,182,212,0.4)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)] hover:scale-105"
-                : isSunset
+                : isLight
                   ? "bg-sky-100/50 cursor-not-allowed"
                   : "bg-white/5 cursor-not-allowed"
             }`}
           >
-            <Send className={`w-4 h-4 ${canSend ? "text-white" : isSunset ? "text-sky-300/40" : "text-white/20"}`} />
+            <Send className={`w-4 h-4 ${canSend ? "text-white" : isLight ? "text-sky-300/40" : "text-white/20"}`} />
           </button>
         </div>
 
