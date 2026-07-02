@@ -536,26 +536,26 @@ const materiSections: MateriSection[] = [
 ───────────────────────────────────────────────────────── */
 
 const dasarImages: Record<number, string> = {
-  2:  "/brsd-dasar-2.png",
-  3:  "/brsd-dasar-3.png",
-  9:  "/brsd-dasar-9.png",
-  10: "/brsd-dasar-10.jpg",
-  11: "/brsd-dasar-11.png",
-  17: "/brsd-dasar-17.png",
-  25: "/brsd-dasar-25.png",
-  26: "/brsd-dasar-26.png",
-  30: "/brsd-dasar-30.png",
-  36: "/brsd-dasar-36.png",
-  39: "/brsd-dasar-39.png",
-  43: "/brsd-dasar-43.png",
+  2:  "https://drive.google.com/thumbnail?id=1TtDABIRugcMjPYHQTrF-px-dDQbLdMep&sz=w400",
+  3:  "https://drive.google.com/thumbnail?id=1yqriGhIiWSbjOi2dJIJUAL62xDZrpaLA&sz=w400",
+  9:  "https://drive.google.com/thumbnail?id=1KhnFzUd0gEwKwrczQfayCRJhiU_qUdBB&sz=w400",
+  10: "https://drive.google.com/thumbnail?id=1DJL1UuCm0HUxh3Wb8tK0GLH-NWNkTv-A&sz=w400",
+  11: "https://drive.google.com/thumbnail?id=1m98FEp6ZgVNYZCmXbj68c1frPqKuEGRr&sz=w400",
+  17: "https://drive.google.com/thumbnail?id=1DtOQXoOzI9Dtct6BC2aQ0_AZBDr5_q8u&sz=w400",
+  25: "https://drive.google.com/thumbnail?id=1eedXYvdSO5Ae6ZcP0sdCukxXFWcrzICI&sz=w400",
+  26: "https://drive.google.com/thumbnail?id=14eSPhOINHkKHXOa2lWtjFVmn9gFchdrL&sz=w400",
+  30: "https://drive.google.com/thumbnail?id=14KNDo_DQDp6a0HxOQMcpTbDVA1sZOhsl&sz=w400",
+  36: "https://drive.google.com/thumbnail?id=1mx3YCPfcN9gFNDS8yYjps-JoSBHLCSf6&sz=w400",
+  39: "https://drive.google.com/thumbnail?id=1_kOE5Oj78xbhchPx3ODTl7akYOV_x-td&sz=w400",
+  43: "https://drive.google.com/thumbnail?id=1Hk5h3-41dZtCNt_-pOgKZB8rnN7m8_gm&sz=w400",
 };
 
 const dasarOptionImages: Record<number, Record<string, string>> = {
   1: {
-    A: "/brsd-dasar-1-A.png",
-    B: "/brsd-dasar-1-B.png",
-    C: "/brsd-dasar-1-C.png",
-    D: "/brsd-dasar-1-D.png",
+    A: "https://drive.google.com/thumbnail?id=1K7V3VpTwunpg-9blt7f6lrzkBZRlGGLs&sz=w400",
+    B: "https://drive.google.com/thumbnail?id=1ccgInD2NrvEYOylSeNeI-2yjhkCua5jn&sz=w400",
+    C: "https://drive.google.com/thumbnail?id=1NTRcBOMfLtwge97cSSJiV6NXN0_6El5L&sz=w400",
+    D: "https://drive.google.com/thumbnail?id=1dAfX2tN8k-viz8s1DBOiBRPNlt9URbq6&sz=w400",
   },
 };
 
