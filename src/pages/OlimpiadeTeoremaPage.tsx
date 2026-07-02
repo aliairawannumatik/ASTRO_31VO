@@ -964,6 +964,48 @@ const latihanDasar = [
   { no: 33, soal: "Titik $R(x, 0)$ terletak pada sumbu-x dan berjarak sama dari titik $A(2, 3)$ dan titik $B(5, -2)$. Berapakah koordinat titik R?", options: ["A. $R(4, 0)$", "B. $R(2, 0)$", "C. $R(3, 0)$", "D. $R\\left(\\frac{8}{3}, 0\\right)$"] },
 ];
 
+// SVG Duplikat: Bangun ABCDE (persegi panjang + segitiga siku-siku) — Soal 7 Latihan Dasar
+// Geometri: AB=15cm, BC=EA=10cm, CD=9cm, sudut siku di D, DE=12cm (Pythagoras)
+// Skala 12px/cm: A(40,250) B(220,250) C(220,130) E(40,130) D(155,44)
+const Soal7ABCDESVG = () => (
+  <svg viewBox="0 0 300 290" className="w-full max-w-xs mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+    {/* Sisi AB (bawah) */}
+    <line x1="40" y1="250" x2="220" y2="250" stroke="#22d3ee" strokeWidth="2.2" />
+    {/* Sisi BC (kanan, vertikal) */}
+    <line x1="220" y1="250" x2="220" y2="130" stroke="#22d3ee" strokeWidth="2.2" />
+    {/* Sisi CD (diagonal kanan ke puncak D) */}
+    <line x1="220" y1="130" x2="155" y2="44" stroke="#22d3ee" strokeWidth="2.2" />
+    {/* Sisi DE (diagonal kiri dari puncak D) */}
+    <line x1="155" y1="44" x2="40" y2="130" stroke="#22d3ee" strokeWidth="2.2" />
+    {/* Sisi EA (kiri, vertikal) */}
+    <line x1="40" y1="130" x2="40" y2="250" stroke="#22d3ee" strokeWidth="2.2" />
+    {/* Garis putus-putus EC (internal) */}
+    <line x1="40" y1="130" x2="220" y2="130" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="8,4" opacity="0.7" />
+    {/* Tanda siku-siku di D: P1(159.8,50.4) P2(153.4,55.2) P3(148.6,48.8) */}
+    <polyline points="159.8,50.4 153.4,55.2 148.6,48.8" fill="none" stroke="#22d3ee" strokeWidth="1.5" />
+    {/* Tick mark pada EA (tengah: 40,190) */}
+    <line x1="33" y1="190" x2="47" y2="190" stroke="#22d3ee" strokeWidth="2" />
+    {/* Tick mark pada BC (tengah: 220,190) */}
+    <line x1="213" y1="190" x2="227" y2="190" stroke="#22d3ee" strokeWidth="2" />
+    {/* Titik sudut */}
+    <circle cx="40"  cy="250" r="2.5" fill="#f87171" />
+    <circle cx="220" cy="250" r="2.5" fill="#f87171" />
+    <circle cx="220" cy="130" r="2.5" fill="#f87171" />
+    <circle cx="155" cy="44"  r="2.5" fill="#f87171" />
+    <circle cx="40"  cy="130" r="2.5" fill="#f87171" />
+    {/* Label sudut */}
+    <text x="26"  y="268" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
+    <text x="222" y="268" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+    <text x="224" y="128" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
+    <text x="149" y="34"  fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
+    <text x="20"  y="128" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">E</text>
+    {/* Label ukuran */}
+    <text x="130" y="272" fill="#fbbf24" fontSize="12" fontFamily="sans-serif" textAnchor="middle">15 cm</text>
+    <text x="236" y="196" fill="#fbbf24" fontSize="12" fontFamily="sans-serif">10 cm</text>
+    <text x="198" y="82"  fill="#fbbf24" fontSize="12" fontFamily="sans-serif">9 cm</text>
+  </svg>
+);
+
 // SVG: Persegi panjang ABCD dilipat sesuai garis putus-putus - OSN 2026
 const PersegiPanjangLipatSVG = () => {
   // ── geometry constants ────────────────────────────────────────────────
@@ -1355,13 +1397,14 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 5 && <SegitigaABD72425SVG />}
                 {soal.no === 6 && <SegitigaCABD9_15_41_SVG />}
                 {soal.no === 7 && (
-                  <div className="flex justify-center my-3">
+                  <div className="flex flex-col items-center gap-3 my-3">
                     <img
                       src={"/images/image_1777785078317.png"}
                       alt="Bangun ABCDE soal nomor 7"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-dasar-7"
                     />
+                    <Soal7ABCDESVG />
                   </div>
                 )}
                 {soal.no === 11 && <TabelSegitiga11 />}
