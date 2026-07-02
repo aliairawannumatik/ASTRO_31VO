@@ -19,7 +19,7 @@ const gambar9  = "https://drive.google.com/thumbnail?id=1MgtZrHGmNl1maoUCtIV0Vsk
 const gambar10 = "https://drive.google.com/thumbnail?id=1j1CV3PAj1_G1z8dnhwKeY0M1V3lUJZZD&sz=w800";
 const gambar11 = "https://drive.google.com/thumbnail?id=1CuCTC1EzP10kOIspa_KWSjFnWz9LFdRD&sz=w800";
 const gambar12 = "https://drive.google.com/thumbnail?id=1DpHlWvzdBSR62ux_X8Uinkpzhko10RjS&sz=w800";
-const gambar13 = "https://drive.google.com/thumbnail?id=1hwdnLPrAGnwNh_uFw72LWyaAoXork&sz=w800";
+const gambar13 = "https://drive.google.com/thumbnail?id=1-tXJ8fspwZJKxkfUC961Z5W8zAjR6a3S&sz=w800";
 const gambar14 = "https://drive.google.com/thumbnail?id=1-tXJ8fspwZJKxkfUC961Z5W8zAjR6a3S&sz=w800";
 import gambar15 from "@/assets/Gambar_15_Jumlah_Sudut_pada_segi-n_1773289509183.png";
 
