@@ -1340,7 +1340,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={"/images/image_1777205277003.png"}
+                        src={"https://drive.google.com/thumbnail?id=1esQMfsShmsagj6xBd93KcfnNJuZeJkZo&sz=w400"}
                         alt="Layang-layang menarik kapal pada sudut 45° dan ketinggian 150 m"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-18"
@@ -1362,7 +1362,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={"/images/image_1777785299399.png"}
+                        src={"https://drive.google.com/thumbnail?id=1rm7EQCDS9GF7Fz4UtGreZ2GGgLvk9E3h&sz=w400"}
                         alt="Bangun gabungan soal olimpiade nomor 20"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-20"
@@ -1384,7 +1384,7 @@ const OlimpiadeTeoremaPage = () => {
                     </div>
                     <div className="flex justify-center my-3">
                       <img
-                        src={"/images/image_1777785419675.png"}
+                        src={"https://drive.google.com/thumbnail?id=1Pm7o-z88MQ6qpVRrrCE0JE5GFgghrI21&sz=w400"}
                         alt="Pentagon dengan sisi 16 cm, 12 cm, 5 cm dan 3 cm soal nomor 21"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-21"
@@ -1531,7 +1531,7 @@ const OlimpiadeTeoremaPage = () => {
                 {soal.no === 23 && (
                   <div className="flex justify-center my-3">
                     <img
-                      src={"/images/image_1777785419675.png"}
+                      src={"https://drive.google.com/thumbnail?id=1Pm7o-z88MQ6qpVRrrCE0JE5GFgghrI21&sz=w400"}
                       alt="Layang-layang ABCD soal olimpiade nomor 23"
                       className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                       data-testid="img-soal-pyth-olim-23"
