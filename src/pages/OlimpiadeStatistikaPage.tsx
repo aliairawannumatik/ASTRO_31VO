@@ -11,17 +11,17 @@ import { statistikaDasarPembahasan } from "@/data/pembahasan/statistikaDasar";
 import { statistikaOlimpiadePembahasan } from "@/data/pembahasan/statistikaOlimpiade";
 
 const dasarImages: Record<number, string> = {
-  13: "/images/image_1777276565289.png",
+  13: "https://drive.google.com/thumbnail?id=1lvt_8S3sZ1GRMIPjjbLxTmaG86AyvZDY&sz=w400",
 };
 
 const olimpiadeImages: Record<number, string[]> = {
-  15: ["/images/image_1777276641804.png"],
+  15: ["https://drive.google.com/thumbnail?id=1lqWo5Cc9vHSSHC-WHLnX0ON8F3ylqlkr&sz=w400"],
   18: ["/images/image_1777276668610.png", "/images/image_1777276672599.png"],
-  21: ["/images/21_1777276795043.png"],
-  24: ["/images/24_1777276795043.png"],
-  25: ["/images/25_1777276795044.png"],
-  29: ["/images/29_1777276795044.png"],
-  34: ["/images/34_1777276795044.png"],
+  21: ["https://drive.google.com/thumbnail?id=1ixB2VPBj9P1vqB4CHDCPhAOkUsU_8wTO&sz=w400"],
+  24: ["https://drive.google.com/thumbnail?id=1G8bx3BC6JmIMz-M9jdW3VFTvkGgZvv6v&sz=w400"],
+  25: ["https://drive.google.com/thumbnail?id=1ldPih5qJD5P6L8dsUapU5D9toR6bTvXH&sz=w400"],
+  29: ["https://drive.google.com/thumbnail?id=1BIFPM8N9rigFAQnfgdXMECAe-YIjdHFT&sz=w400"],
+  34: ["https://drive.google.com/thumbnail?id=1L0SSVProDRih_TTboIK7Mm1udrAbg_Pf&sz=w400"],
 };
 
 const renderWithLatex = (text: string) => {
