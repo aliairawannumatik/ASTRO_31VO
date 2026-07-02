@@ -6,6 +6,7 @@ import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import { useTheme } from "@/contexts/ThemeContext";
 
 // Materi images loaded from Google Drive thumbnails (no local asset needed)
 const gambar2  = "https://drive.google.com/thumbnail?id=1WWS1lbImZFDhToj80VtPyzzibMYcKS_A&sz=w800";
@@ -775,50 +776,67 @@ const Soal18SVG = () => (
 //   x  at L — green,  large angle: horiz-RIGHT (97,200) → Diag1-downleft (58,214) CW (sweep=1, ~140°)
 //   a  at R — pink,   small angle: Diag2-upleft (297,182) → horiz-left (288,200) CCW (sweep=0)
 //   y  at R — purple, angle: horiz-right (332,200) → Diag2-downright (323,218) CW (sweep=1)
-const Soal19SVG = () => (
-  <svg viewBox="0 0 400 270" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
-    {/* ── Filled angle sectors (drawn first, behind lines) ── */}
+const Soal19SVG = () => {
+  const { isDark } = useTheme();
 
-    {/* b — blue sector at P(220,80): Diag1-upright(237,66) → Diag2-upleft(207,62) CCW */}
-    <path d="M 237,66 A 22,22 0 0,0 207,62 L 220,80 Z"
-      fill="rgba(59,130,246,0.50)" stroke="#3b82f6" strokeWidth="1.5" />
+  // Lines: bright on space/dark themes, dark navy on light themes
+  const lineColor  = isDark ? "#93c5fd" : "#1e3a8a";
+  const line2Color = isDark ? "#bfdbfe" : "#2563eb";
+  const dotColor   = isDark ? "#f87171" : "#dc2626";
 
-    {/* x — green sector at L(75,200): horiz-right(97,200) → Diag1-downleft(58,214) CW ~140° */}
-    <path d="M 97,200 A 22,22 0 0,1 58,214 L 75,200 Z"
-      fill="rgba(34,197,94,0.45)" stroke="#22c55e" strokeWidth="1.5" />
+  // Labels: light/vivid on dark, deep/saturated on light
+  const lblB = isDark ? "#93c5fd" : "#1d4ed8";
+  const lblX = isDark ? "#86efac" : "#15803d";
+  const lblA = isDark ? "#fca5a5" : "#b91c1c";
+  const lblY = isDark ? "#d8b4fe" : "#7e22ce";
 
-    {/* a — pink sector at R(310,200): Diag2-upleft(297,182) → horiz-left(288,200) CCW */}
-    <path d="M 297,182 A 22,22 0 0,0 288,200 L 310,200 Z"
-      fill="rgba(239,68,68,0.45)" stroke="#ef4444" strokeWidth="1.5" />
+  // Sector fills: lighter tint on dark (more visible against dark bg)
+  const fillB = isDark ? "rgba(147,197,253,0.55)" : "rgba(59,130,246,0.45)";
+  const fillX = isDark ? "rgba(134,239,172,0.50)" : "rgba(34,197,94,0.40)";
+  const fillA = isDark ? "rgba(252,165,165,0.55)" : "rgba(239,68,68,0.40)";
+  const fillY = isDark ? "rgba(216,180,254,0.55)" : "rgba(168,85,247,0.40)";
 
-    {/* y — purple sector at R(310,200): horiz-right(332,200) → Diag2-downright(323,218) CW */}
-    <path d="M 332,200 A 22,22 0 0,1 323,218 L 310,200 Z"
-      fill="rgba(168,85,247,0.45)" stroke="#a855f7" strokeWidth="1.5" />
+  return (
+    <svg viewBox="0 0 400 270" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+      {/* ── Filled angle sectors (drawn first, behind lines) ── */}
 
-    {/* ── Lines ── */}
-    {/* Horizontal baseline — dark navy */}
-    <line x1="15"  y1="200" x2="385" y2="200" stroke="#1e3a8a" strokeWidth="2.5" />
-    {/* Diag1: lower-left → upper-right (through L and P) — dark navy */}
-    <line x1="0"   y1="262" x2="299" y2="15"  stroke="#1e3a8a" strokeWidth="2.5" />
-    {/* Diag2: upper-left → lower-right (through P and R) — medium blue */}
-    <line x1="171" y1="15"  x2="359" y2="265" stroke="#2563eb" strokeWidth="2.5" />
+      {/* b — blue sector at P(220,80): Diag1-upright(237,66) → Diag2-upleft(207,62) CCW */}
+      <path d="M 237,66 A 22,22 0 0,0 207,62 L 220,80 Z"
+        fill={fillB} stroke={lblB} strokeWidth="1.5" />
 
-    {/* ── Vertex dots ── */}
-    <circle cx="220" cy="80"  r="4" fill="#dc2626" />
-    <circle cx="75"  cy="200" r="4" fill="#dc2626" />
-    <circle cx="310" cy="200" r="4" fill="#dc2626" />
+      {/* x — green sector at L(75,200): horiz-right(97,200) → Diag1-downleft(58,214) CW ~140° */}
+      <path d="M 97,200 A 22,22 0 0,1 58,214 L 75,200 Z"
+        fill={fillX} stroke={lblX} strokeWidth="1.5" />
 
-    {/* ── Labels ── */}
-    {/* b: to the right of the blue sector at P */}
-    <text x="236" y="58"  fill="#1d4ed8" fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">b</text>
-    {/* x: inside the large green sector at L */}
-    <text x="52"  y="228" fill="#15803d" fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">x</text>
-    {/* a: above the pink sector at R */}
-    <text x="277" y="194" fill="#b91c1c" fontSize="14" fontStyle="italic" fontFamily="'Times New Roman',serif">a</text>
-    {/* y: inside the purple sector at R */}
-    <text x="319" y="228" fill="#7e22ce" fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">y</text>
-  </svg>
-);
+      {/* a — pink sector at R(310,200): Diag2-upleft(297,182) → horiz-left(288,200) CCW */}
+      <path d="M 297,182 A 22,22 0 0,0 288,200 L 310,200 Z"
+        fill={fillA} stroke={lblA} strokeWidth="1.5" />
+
+      {/* y — purple sector at R(310,200): horiz-right(332,200) → Diag2-downright(323,218) CW */}
+      <path d="M 332,200 A 22,22 0 0,1 323,218 L 310,200 Z"
+        fill={fillY} stroke={lblY} strokeWidth="1.5" />
+
+      {/* ── Lines ── */}
+      {/* Horizontal baseline */}
+      <line x1="15"  y1="200" x2="385" y2="200" stroke={lineColor}  strokeWidth="2.5" />
+      {/* Diag1: lower-left → upper-right (through L and P) */}
+      <line x1="0"   y1="262" x2="299" y2="15"  stroke={lineColor}  strokeWidth="2.5" />
+      {/* Diag2: upper-left → lower-right (through P and R) */}
+      <line x1="171" y1="15"  x2="359" y2="265" stroke={line2Color} strokeWidth="2.5" />
+
+      {/* ── Vertex dots ── */}
+      <circle cx="220" cy="80"  r="4" fill={dotColor} />
+      <circle cx="75"  cy="200" r="4" fill={dotColor} />
+      <circle cx="310" cy="200" r="4" fill={dotColor} />
+
+      {/* ── Labels ── */}
+      <text x="236" y="58"  fill={lblB} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">b</text>
+      <text x="52"  y="228" fill={lblX} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">x</text>
+      <text x="277" y="194" fill={lblA} fontSize="14" fontStyle="italic" fontFamily="'Times New Roman',serif">a</text>
+      <text x="319" y="228" fill={lblY} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">y</text>
+    </svg>
+  );
+};
 
 // ── Soal 20: Trapezoid ABCD with extra ray; right angle at A, 2x° below A, 120° at C ──
 const Soal20SVG = () => (
