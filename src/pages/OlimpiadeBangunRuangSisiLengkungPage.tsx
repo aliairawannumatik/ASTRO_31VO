@@ -12,10 +12,10 @@ import { brslDasarPembahasan } from "@/data/pembahasan/brslDasar";
 import { brslOlimpiadePembahasan } from "@/data/pembahasan/brslOlimpiade";
 
 const brslOlimpiadeImages: Record<number, string> = {
-  1: "/images/1_1778332918941.png",
-  5: "/images/5_1778332923707.png",
-  10: "/images/10_1778332918942.png",
-  15: "/images/15_1778332918942.png",
+  1: "https://drive.google.com/thumbnail?id=1zE-LWGdfZ9CHIZqdn9GxexzPSUN0GfHN&sz=w400",
+  5: "https://drive.google.com/thumbnail?id=1PXdTW2kir9rxWljeBoP8WEGYQZ9uAXsq&sz=w400",
+  10: "https://drive.google.com/thumbnail?id=171LkqpHui1EQFTkzxEm8u3XlkS5pElME&sz=w400",
+  15: "https://drive.google.com/thumbnail?id=1e8C1_ewBTe2mfVRhu1LWhENVS1-OwEXK&sz=w400",
 };
 
 const brslDasarImages: Record<number, string> = {
