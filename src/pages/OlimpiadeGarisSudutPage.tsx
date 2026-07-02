@@ -832,8 +832,8 @@ const Soal19SVG = () => {
       {/* ── Labels ── */}
       {/* b: right of P, inside the right pocket */}
       <text x="244" y="86"  fill={lblB} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">b</text>
-      {/* x: lower-left, inside the large green sector */}
-      <text x="52"  y="228" fill={lblX} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">x</text>
+      {/* x: centered at bisector of the green sector (midpoint ~70° CW from right, r=32 from L) */}
+      <text x="82"  y="232" fill={lblX} fontSize="16" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">x</text>
       {/* a: above the pink sector at R */}
       <text x="277" y="194" fill={lblA} fontSize="14" fontStyle="italic" fontFamily="'Times New Roman',serif">a</text>
       {/* y: lower-left of R, inside the left-below pocket */}
