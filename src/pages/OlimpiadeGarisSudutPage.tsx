@@ -1038,8 +1038,8 @@ const Soal24SVG = () => (
     <text x="384" y="34"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">Q</text>
     <text x="284" y="196" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">R</text>
     <text x="165" y="338" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">T</text>
-    {/* U: offset upper-right of intersection to avoid SR line and PT line */}
-    <text x="166" y="172" fill="#38bdf8" fontSize="13" fontStyle="italic" fontFamily="serif" fontWeight="bold">U</text>
+    {/* U: lower-left of intersection, away from angle x area (upper-right) */}
+    <text x="140" y="196" fill="#38bdf8" fontSize="13" fontStyle="italic" fontFamily="serif" fontWeight="bold">U</text>
 
     {/* Filled wedge for x = ∠PUR at U(160,180) */}
     {/* UR direction: right → (182,180); UP direction: (-20,-140)/141.4 at r=22 → (157,158) */}
