@@ -560,12 +560,12 @@ const dasarOptionImages: Record<number, Record<string, string>> = {
 };
 
 const olimpiadeImages: Record<number, string> = {
-  12: "/images/image_1777741187388.png",
-  14: "/images/image_1777741593708.png",
-  16: "/images/Picture1_1777742388394_nobg.png",
-  20: "/images/image_1777742649812.png",
-  21: "/images/image_1777742747271.png",
-  22: "/images/image_1777742885061.png",
+  12: "https://drive.google.com/thumbnail?id=1kBvUdEoWLVLKQ29rD7w_WwXXXhML-Xdp&sz=w400",
+  14: "https://drive.google.com/thumbnail?id=18WAflkosqwIYOSnhmSIX9vpeV3nSbrF5&sz=w400",
+  16: "https://drive.google.com/thumbnail?id=1tkiYh_6Aj_EhCYVa-tUF-BrCNFExkY0X&sz=w400",
+  20: "https://drive.google.com/thumbnail?id=1f2Ok52Sy7yDcr3wuTwYR_onKp6uxRjc4&sz=w400",
+  21: "https://drive.google.com/thumbnail?id=1zgw9Pbcd4Smx51s_irAUzUpKadT678hC&sz=w400",
+  22: "https://drive.google.com/thumbnail?id=14On9Yv76_ZBerHaYNDcc-VQFl6yv-Iac&sz=w400",
 };
 
 /* ─────────────────────────────────────────────────────────
