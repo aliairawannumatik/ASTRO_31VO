@@ -1233,13 +1233,7 @@ const latihanDasar: {
   {
     no: 19,
     soal: "Perhatikan gambar berikut!\n\nJika besar $\\angle a = 35°$ dan $\\angle b = 45°$ maka jumlah besar sudut x dan y adalah ...",
-    image: (
-      <div className="flex flex-col items-center gap-1 w-full">
-        <img src={"/images/image_1777593919772.png"} alt="Gambar Soal 19" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} />
-        <p className="text-xs text-white/35 italic">Duplikat SVG ↓</p>
-        <Soal19SVG />
-      </div>
-    ),
+    image: <Soal19SVG />,
     imageCaption: "Gambar Soal 19",
     options: ["A. $285°$", "B. $300°$", "C. $315°$", "D. $330°$"]
   },
