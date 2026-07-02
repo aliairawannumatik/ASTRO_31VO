@@ -1041,11 +1041,13 @@ const Soal24SVG = () => (
     {/* U: offset upper-right of intersection to avoid SR line and PT line */}
     <text x="166" y="172" fill="#38bdf8" fontSize="13" fontStyle="italic" fontFamily="serif" fontWeight="bold">U</text>
 
-    {/* Arc x at U(160,180): ∠RUT in lower-right area */}
-    {/* Start: UR direction → (182,180); End: UT direction → (163,202); clockwise */}
-    <path d="M 182,180 A 22,22 0 0,1 163,202" fill="none" stroke="#fbbf24" strokeWidth="1.8" />
-    {/* Label at bisector ~41° below horizontal from U, r=32 */}
-    <text x="183" y="204" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
+    {/* Filled wedge for x = ∠PUR at U(160,180) */}
+    {/* UR direction: right → (182,180); UP direction: (-20,-140)/141.4 at r=22 → (157,158) */}
+    {/* Arc goes CCW on screen (sweep=0) from UR to UP, spanning ≈98°, upper-right area */}
+    <path d="M 160,180 L 182,180 A 22,22 0 0,0 157,158 Z"
+          fill="#fbbf24" fillOpacity="0.25" stroke="#fbbf24" strokeWidth="1.8" />
+    {/* Label at bisector ~49° CCW from UR, r=30 from U */}
+    <text x="178" y="156" fill="#fbbf24" fontSize="14" fontStyle="italic" fontFamily="serif">x</text>
 
     <circle cx="160" cy="180" r="3" fill="#ef4444" />
   </svg>
