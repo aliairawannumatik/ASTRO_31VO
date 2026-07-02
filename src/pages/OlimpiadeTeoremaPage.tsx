@@ -1006,6 +1006,45 @@ const Soal7ABCDESVG = () => (
   </svg>
 );
 
+// SVG Duplikat: Segitiga ABC siku-siku di B dengan titik D pada AB — Soal 29 Latihan Dasar
+// Geometri: BC=5cm, ∠A=30°, ∠CDB=45° → DB=5cm, AB=5√3cm, AC=10cm, DC=5√2cm
+// Skala 20px/cm: A(87,240) D(160,240) B(260,240) C(260,140)
+const Soal29ABCDSVG = () => (
+  <svg viewBox="0 0 320 280" className="w-full max-w-xs mx-auto rounded-lg border border-border/40 bg-white/5" xmlns="http://www.w3.org/2000/svg">
+    {/* Fill: segitiga ABC */}
+    <polygon points="87,240 260,240 260,140" fill="rgba(251,191,36,0.08)" stroke="none" />
+    {/* Sisi AB (bawah) */}
+    <line x1="87" y1="240" x2="260" y2="240" stroke="#22d3ee" strokeWidth="2" />
+    {/* Sisi BC (kanan, vertikal) */}
+    <line x1="260" y1="240" x2="260" y2="140" stroke="#22d3ee" strokeWidth="2" />
+    {/* Sisi AC (hipotenusa besar) */}
+    <line x1="87" y1="240" x2="260" y2="140" stroke="#22d3ee" strokeWidth="2" />
+    {/* Sisi DC (garis interior dari D ke C) */}
+    <line x1="160" y1="240" x2="260" y2="140" stroke="#22d3ee" strokeWidth="1.8" />
+    {/* Tanda siku-siku di B */}
+    <polyline points="248,240 248,228 260,228" fill="none" stroke="#22d3ee" strokeWidth="1.5" />
+    {/* Arc sudut 30° di A */}
+    <path d="M 111,240 A 24 24 0 0 0 107.78,228" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+    {/* Arc sudut 45° di D */}
+    <path d="M 180,240 A 20 20 0 0 0 174.14,225.86" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+    {/* Titik sudut */}
+    <circle cx="87"  cy="240" r="2.5" fill="#f87171" />
+    <circle cx="260" cy="240" r="2.5" fill="#f87171" />
+    <circle cx="260" cy="140" r="2.5" fill="#f87171" />
+    <circle cx="160" cy="240" r="2.5" fill="#f87171" />
+    {/* Label sudut */}
+    <text x="74"  y="258" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
+    <text x="264" y="258" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+    <text x="264" y="140" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">C</text>
+    <text x="154" y="258" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">D</text>
+    {/* Label sudut angka */}
+    <text x="115" y="234" fill="#fbbf24" fontSize="11" fontFamily="sans-serif">30°</text>
+    <text x="182" y="232" fill="#fbbf24" fontSize="11" fontFamily="sans-serif">45°</text>
+    {/* Label ukuran BC = 5 cm */}
+    <text x="268" y="196" fill="#fbbf24" fontSize="12" fontFamily="sans-serif">5 cm</text>
+  </svg>
+);
+
 // SVG: Persegi panjang ABCD dilipat sesuai garis putus-putus - OSN 2026
 const PersegiPanjangLipatSVG = () => {
   // ── geometry constants ────────────────────────────────────────────────
@@ -1365,13 +1404,14 @@ const OlimpiadeTeoremaPage = () => {
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal.split('\n')[0])}
                     </div>
-                    <div className="flex justify-center my-3">
+                    <div className="flex flex-col items-center gap-3 my-3">
                       <img
                         src={"/images/image_1777787261364.png"}
                         alt="Segitiga ABCD dengan sudut 30°, 45° dan tinggi 5 cm soal nomor 29"
                         className="max-w-xs w-full h-auto rounded-lg bg-white p-2"
                         data-testid="img-soal-pyth-dasar-29"
                       />
+                      <Soal29ABCDSVG />
                     </div>
                     <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                       {soal.soal.split('\n').slice(1).map((line, lineIdx) => (
