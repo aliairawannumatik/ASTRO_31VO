@@ -1120,15 +1120,97 @@ const latihanOlimpiade = [
   { no: 29, soal: "OSN Matematika 2025 Tingkat Kota\nDalam suatu lingkaran berpusat di O berjari-jari 7, dibuat segitiga ABC dengan titik A, B dan C terletak pada lingkaran, AC merupakan diameter lingkaran dengan $\\angle ACB = 60^0$.\nMelalui C dan titik Tengah AB, dibuat garis memotong lingkaran di titik D. Panjang CD sama dengan ...", options: ["A. $3\\sqrt{7}$", "B. $5\\sqrt{7}$", "C. $6\\sqrt{7}$", "D. $7\\sqrt{7}$"] },
   { no: 30, soal: "OSN Matematika 2026 Tingkat Kota\nPersegi panjang $ABCD$ dengan $AD = 36$ cm. Lingkaran $p$ dengan jari-jari 10 cm menyinggung sisi $AD$ dan $CD$. Lingkaran $q$ dengan jari-jari 16 cm menyinggung $AB$ dan $BC$ serta menyinggung lingkaran $p$. Selisih panjang sisi $AB$ dan $BC$ adalah....", options: ["A. 10 cm", "B. 14 cm", "C. 16 cm", "D. 24 cm"] },
   { no: 31, soal: "OSN Matematika 2026 Tingkat Kota\nDiketahui persegi panjang $ABCD$ dengan $AB = 10\\sqrt{3}$ dan $AD = 5\\sqrt{3}$, akan dibuat lingkaran berjari-jari $10 - 5\\sqrt{3}$ yang jarak pusatnya ke titik $A$ adalah $5\\sqrt{3}$. Luas daerah persegi panjang $ABCD$ yang tidak mungkin berada di daerah lingkaran-lingkaran adalah....", options: ["A. $150 - 25\\pi$", "B. $150 - 25\\pi - \\dfrac{25}{2}\\sqrt{3}$", "C. $150 - 25\\pi(2\\sqrt{3} - 3)$", "D. $150 - \\dfrac{25}{2}\\sqrt{3} - 25\\pi\\left(2\\sqrt{3} - 3\\dfrac{1}{3}\\right)$"] },
+  { no: 32, soal: "OSN Matematika 2026 Tingkat Kota\nDua buah lingkaran $L_1$ dan $L_2$ tidak berpotongan atau bersinggungan. Diketahui jari-jari $L_1$ lebih besar dari jari-jari $L_2$. Misalkan $L_1$ berpusat di $B$ dan $L_2$ berpusat di $A$. Titik $C$ di luar $L_1$ dan $L_2$ sehingga $BC$ tegak lurus $AC$. Ruas garis $AB$ memotong $L_1$ di $O$ dan memotong $L_2$ di $D$. Garis yang melalui $D$ tegak lurus $AB$ dan memotong pertengahan sisi $AC$ di $E$. Titik $F$ pada $L_2$ sehingga $AF$ sejajar $BC$ dan $BF > BA$. Jika $AO = OB$, $AC = 12$, $BC = 16$, maka $BF$ adalah....", options: ["A. $\\dfrac{2}{5}\\sqrt{3301}$", "B. $\\dfrac{2}{5}\\sqrt{2801}$", "C. $\\dfrac{2}{5}\\sqrt{2581}$", "D. $\\dfrac{2}{5}\\sqrt{1861}$"] },
 ];
 
 /* ─────────────────────────────────────────────────────────
    PAGE COMPONENT
 ───────────────────────────────────────────────────────── */
 
+/* ─────────────────────────────────────────────────────────
+   SVG DIAGRAM — Soal Olimpiade 32
+───────────────────────────────────────────────────────── */
+
+const Soal32LingkaranSVG = () => (
+  /*
+   * Dua lingkaran L₁(B,r₁=10) dan L₂(A,r₂=18/5) tidak berpotongan.
+   * Koordinat (skala 8, A di (90,200) dalam SVG, y-axis dibalik):
+   *   A=(90,200)  B=(250,200)  C=(148,123)
+   *   O=(170,200) D=(119,200)  E=(119,162)  F=(67,183)
+   * AB=20, AO=OB=10=r₁, AD=r₂=18/5, E=midpoint(AC), DE⊥AB
+   * F pada L₂: AF∥BC, BF>BA → F=(-72/25, 54/25) → BF=(2/5)√3301
+   */
+  <svg viewBox="0 0 345 285" className="w-full max-w-[345px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+
+    {/* ── L₁: lingkaran besar centered at B(250,200), r=80 ── */}
+    <circle cx="250" cy="200" r="80" fill="none" stroke="#818cf8" strokeWidth="1.8" opacity="0.7" />
+
+    {/* ── L₂: lingkaran kecil centered at A(90,200), r=29 ── */}
+    <circle cx="90" cy="200" r="29" fill="none" stroke="#22d3ee" strokeWidth="1.8" />
+
+    {/* ── Garis AB (sumbu referensi, dashed) ── */}
+    <line x1="40" y1="200" x2="340" y2="200" stroke="#334155" strokeWidth="1.2" strokeDasharray="5,4" />
+
+    {/* ── Sisi AC ── */}
+    <line x1="90" y1="200" x2="148" y2="123" stroke="#94a3b8" strokeWidth="1.5" />
+    {/* ── Sisi BC ── */}
+    <line x1="250" y1="200" x2="148" y2="123" stroke="#94a3b8" strokeWidth="1.5" />
+
+    {/* ── Sudut siku di C ── */}
+    <path d="M 145,127 L 149,131 L 153,126" fill="none" stroke="#94a3b8" strokeWidth="1.1" />
+
+    {/* ── Garis DE: tegak lurus AB melalui D, ke midpoint E ── */}
+    <line x1="119" y1="200" x2="119" y2="162" stroke="#34d399" strokeWidth="1.5" strokeDasharray="5,3" />
+    {/* Sudut siku di D ── */}
+    <path d="M 119,195 L 114,195 L 114,200" fill="none" stroke="#34d399" strokeWidth="1.1" />
+
+    {/* ── Garis AF (sejajar BC, dari A ke F) ── */}
+    <line x1="90" y1="200" x2="67" y2="183" stroke="#fb923c" strokeWidth="1.5" />
+
+    {/* ── Garis BF (yang dicari) ── */}
+    <line x1="250" y1="200" x2="67" y2="183" stroke="#fbbf24" strokeWidth="2" />
+
+    {/* ── Titik ── */}
+    <circle cx="90"  cy="200" r="3.5" fill="#22d3ee" />   {/* A */}
+    <circle cx="250" cy="200" r="3.5" fill="#818cf8" />   {/* B */}
+    <circle cx="148" cy="123" r="3"   fill="#e2e8f0" />   {/* C */}
+    <circle cx="170" cy="200" r="3"   fill="#818cf8" />   {/* O */}
+    <circle cx="119" cy="200" r="3"   fill="#22d3ee" />   {/* D */}
+    <circle cx="119" cy="162" r="3.5" fill="#34d399" />   {/* E */}
+    <circle cx="67"  cy="183" r="3.5" fill="#fbbf24" />   {/* F */}
+
+    {/* ── Label titik ── */}
+    <text x="82"  y="218" fill="#22d3ee" fontSize="12" fontFamily="serif" fontStyle="italic">A</text>
+    <text x="254" y="218" fill="#818cf8" fontSize="12" fontFamily="serif" fontStyle="italic">B</text>
+    <text x="151" y="115" fill="#e2e8f0" fontSize="12" fontFamily="serif" fontStyle="italic">C</text>
+    <text x="173" y="218" fill="#818cf8" fontSize="12" fontFamily="serif" fontStyle="italic">O</text>
+    <text x="112" y="218" fill="#22d3ee" fontSize="12" fontFamily="serif" fontStyle="italic">D</text>
+    <text x="124" y="160" fill="#34d399" fontSize="12" fontFamily="serif" fontStyle="italic">E</text>
+    <text x="50"  y="181" fill="#fbbf24" fontSize="12" fontFamily="serif" fontStyle="italic">F</text>
+
+    {/* ── Label lingkaran ── */}
+    <text x="90"  y="155" fill="#22d3ee" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">L₂(A, r₂)</text>
+    <text x="250" y="113" fill="#818cf8" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">L₁(B, r₁)</text>
+
+    {/* ── Ukuran yang diketahui ── */}
+    <text x="113"  y="167" fill="#94a3b8" fontSize="8.5" textAnchor="end" fontFamily="sans-serif">AC=12</text>
+    <text x="200"  y="154" fill="#94a3b8" fontSize="8.5" fontFamily="sans-serif">BC=16</text>
+    <text x="130"  y="193" fill="#6ee7b7" fontSize="8" textAnchor="middle" fontFamily="sans-serif">r₂=18/5</text>
+    <text x="210"  y="193" fill="#818cf8" fontSize="8" textAnchor="middle" fontFamily="sans-serif">r₁=OB=10</text>
+    <text x="170"  y="222" fill="#94a3b8" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">AO=OB</text>
+
+    {/* ── Tanda sejajar (AF ∥ BC) ── */}
+    <text x="72"   y="196" fill="#fb923c" fontSize="7.5" textAnchor="middle" fontFamily="sans-serif">∥BC</text>
+
+    {/* ── BF (jawaban) ── */}
+    <text x="162"  y="196" fill="#fbbf24" fontSize="8.5" textAnchor="middle" fontFamily="sans-serif">BF = ²⁄₅√3301</text>
+  </svg>
+);
+
 /* Diagram nodes for pembahasan — keyed by soal olimpiade number */
 const olimpiadeDiagrams: Record<number, React.ReactNode> = {
   31: <Soal31SVG />,
+  32: <Soal32LingkaranSVG />,
 };
 
 const OlimpiadeLingkaranPage = () => {
@@ -1161,7 +1243,7 @@ const OlimpiadeLingkaranPage = () => {
           <p className="text-white/40 text-xs text-center font-body">Irawan Sutiawan, M.Pd</p>
           <div className="flex items-center gap-2 mt-3">
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 font-body">6 Topik Materi</span>
-            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">67 Soal</span>
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">68 Soal</span>
           </div>
         </div>
 

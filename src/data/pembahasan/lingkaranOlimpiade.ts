@@ -291,6 +291,43 @@ export const lingkaranOlimpiadePembahasan: Record<number, Pembahasan> = {
       "Kuasa titik tengah tali busur: $MA \\cdot MB = MC \\cdot MD$ untuk setiap dua tali busur lewat $M$.",
     kesimpulan: "Panjang $CD = 5\\sqrt{7}$.",
   },
+  32: {
+    jawaban: "A. $\\dfrac{2}{5}\\sqrt{3301}$",
+    konsepTrik:
+      "Gunakan koordinat Kartesius. Karena $\\angle ACB = 90°$ dan $AC=12$, $BC=16$:\n" +
+      "$AB = \\sqrt{12^2+16^2} = 20$.\n" +
+      "Dari $AO=OB$ → O adalah titik tengah AB → $r_1 = OB = 10$.\n" +
+      "Dari garis $DE \\perp AB$ melalui D (pada $L_2$) yang memotong titik tengah $E$ dari $AC$ → cari $r_2 = AD$.\n" +
+      "Titik $F$ pada $L_2$ dengan $AF \\parallel BC$ dan $BF > BA = 20$ → pilih arah yang benar dari dua kemungkinan.",
+    stepByStep:
+      "Langkah 1: Sistem koordinat\n" +
+      "Letakkan $A=(0,0)$, $B=(20,0)$. Karena $BC \\perp AC$, $AC=12$, $BC=16$:\n" +
+      "$\\cos(\\angle BAC) = \\dfrac{AC}{AB} = \\dfrac{12}{20} = \\dfrac{3}{5}$, $\\sin(\\angle BAC) = \\dfrac{4}{5}$\n" +
+      "$C = \\left(12 \\cdot \\dfrac{3}{5},\\ 12 \\cdot \\dfrac{4}{5}\\right) = \\left(\\dfrac{36}{5},\\ \\dfrac{48}{5}\\right)$\n\n" +
+      "Langkah 2: Menentukan $r_1$\n" +
+      "$AO = OB \\Rightarrow O = (10,0)$ (titik tengah $AB$). $O$ pada $L_1$ → $r_1 = OB = 10$.\n\n" +
+      "Langkah 3: Menentukan $r_2$\n" +
+      "Titik tengah $AC$: $E = \\left(\\dfrac{18}{5},\\ \\dfrac{24}{5}\\right)$.\n" +
+      "Garis melalui $D \\perp AB$ (vertikal $x = x_D$) memotong $E$ → $x_D = \\dfrac{18}{5}$.\n" +
+      "$D = \\left(\\dfrac{18}{5}, 0\\right)$ ada pada $L_2$, jadi $r_2 = AD = \\dfrac{18}{5}$.\n\n" +
+      "Langkah 4: Menentukan titik $F$\n" +
+      "Arah $BC$: $\\vec{BC} = C - B = \\left(-\\dfrac{64}{5},\\ \\dfrac{48}{5}\\right)$, vektor satuan $= \\left(-\\dfrac{4}{5},\\ \\dfrac{3}{5}\\right)$.\n" +
+      "$AF \\parallel BC$ dan $F$ pada $L_2$ → $F = \\pm\\dfrac{18}{5}\\cdot\\left(-\\dfrac{4}{5},\\ \\dfrac{3}{5}\\right)$\n" +
+      "$F_1 = \\left(-\\dfrac{72}{25},\\ \\dfrac{54}{25}\\right)$,\\quad $F_2 = \\left(\\dfrac{72}{25},\\ -\\dfrac{54}{25}\\right)$\n\n" +
+      "Langkah 5: Pilih $F$ dengan $BF > BA = 20$\n" +
+      "$BF_1 = \\sqrt{\\left(20+\\dfrac{72}{25}\\right)^2+\\left(\\dfrac{54}{25}\\right)^2} = \\dfrac{1}{25}\\sqrt{572^2+54^2} = \\dfrac{\\sqrt{330100}}{25} = \\dfrac{2}{5}\\sqrt{3301} \\approx 22{,}98 > 20$ ✓\n" +
+      "$BF_2 = \\dfrac{1}{25}\\sqrt{428^2+54^2} = \\dfrac{\\sqrt{186100}}{25} = \\dfrac{2}{5}\\sqrt{1861} \\approx 17{,}25 < 20$ ✗\n\n" +
+      "Jadi $BF = \\dfrac{2}{5}\\sqrt{3301}$.",
+    tips:
+      "Kunci strategi:\n" +
+      "1. $AO = OB$ → O titik tengah AB → $r_1 = AB/2$\n" +
+      "2. Garis $\\perp AB$ melalui $D$ ke titik tengah $AC$ → x-koordinat D = x-koordinat titik tengah AC → $r_2 = x_E$\n" +
+      "3. $AF \\parallel BC$ memberi dua pilihan arah; kondisi $BF > BA$ memilih yang benar\n" +
+      "4. $572^2 + 54^2 = 327184 + 2916 = 330100 = 100 \\times 3301$",
+    kesimpulan:
+      "$r_1 = 10$, $r_2 = \\dfrac{18}{5}$, $F = \\left(-\\dfrac{72}{25},\\ \\dfrac{54}{25}\\right)$.\n" +
+      "$BF = \\dfrac{2}{5}\\sqrt{3301}$ (Jawaban A).",
+  },
   31: {
     jawaban: "D. $150 - \\dfrac{25}{2}\\sqrt{3} - 25\\pi\\left(2\\sqrt{3} - 3\\dfrac{1}{3}\\right)$",
     konsepTrik:
