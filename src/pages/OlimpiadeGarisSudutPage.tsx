@@ -842,13 +842,13 @@ const Soal19SVG = () => {
   );
 };
 
-// ── Soal 20: AB ∥ CD; right-angle perpendicular + x-ray at A; 2x below AB; 120° at C ──
+// ── Soal 20: AB ∥ CD; right-angle perpendicular + x-ray at A; 2x RIGHT of A; 120° at C ──
 // Geometry (viewBox 0 0 480 230):
-//   A=(80,80)  B_actual=(306,80)  C=(240,195)  D=(15,195)
-//   AD: 60° below AB-left → 2x=60°, x=30°  ✓
-//   BC: CB direction (0.5,−0.866) → interior angle at C = 120° CCW to CD-left ✓
-//   Diagonal AC: A(80,80) → C(240,195)
-//   Perpendicular at A: straight up to (80,35); x-ray at 30° from perp → (53,32)
+//   A=(80,80)  B_actual=(306,80) [label at B_actual]  C=(240,195)  D=(15,195)
+//   Diagonal: A(80,80) → midpoint of DC (146,195) [dir (0.5,0.866), 60° below AB-right]
+//   2x sector RIGHT side: AB-right(102,80) → diag-dir(91,99) CW 60° → x=30° ✓
+//   BC: CB dir (0.5,−0.866) → interior angle at C = 120° CCW to CD-left ✓
+//   Perpendicular at A: straight up to (80,35); x-ray at 30° left of perp → (53,32)
 //   Sectors r=22 at A; r=26 at C
 const Soal20SVG = () => {
   const { isDark } = useTheme();
@@ -866,8 +866,8 @@ const Soal20SVG = () => {
       <path d="M 80,58 A 22,22 0 0,0 69,61 L 80,80 Z"
         fill={fillG} stroke={strkG} strokeWidth="1" />
 
-      {/* 2x — 60° CW from AB-left(58,80) to AD-dir(69,100) */}
-      <path d="M 58,80 A 22,22 0 0,1 69,100 L 80,80 Z"
+      {/* 2x — 60° CW from AB-right(102,80) to diag-dir(91,99) — RIGHT side of A */}
+      <path d="M 102,80 A 22,22 0 0,1 91,99 L 80,80 Z"
         fill={fillG} stroke={strkG} strokeWidth="1.2" />
 
       {/* 120° — CCW from CB-dir(253,173) through top to CD-left(214,195) */}
@@ -883,8 +883,8 @@ const Soal20SVG = () => {
       <line x1="80"  y1="80"  x2="15"  y2="195" stroke={lineColor} strokeWidth="2" />
       {/* BC: B_actual(306,80) → C(240,195) */}
       <line x1="306" y1="80"  x2="240" y2="195" stroke={lineColor} strokeWidth="2" />
-      {/* Diagonal AC */}
-      <line x1="80"  y1="80"  x2="240" y2="195" stroke={lineColor} strokeWidth="2" />
+      {/* Diagonal A → midpoint of DC (146,195) [60° below AB-right, 2x=60°] */}
+      <line x1="80"  y1="80"  x2="146" y2="195" stroke={lineColor} strokeWidth="2" />
       {/* Perpendicular at A going straight up */}
       <line x1="80"  y1="80"  x2="80"  y2="35"  stroke={lineColor} strokeWidth="2" />
       {/* x-ray: 30° left of perpendicular, dir=(−0.5,−0.866) */}
@@ -898,16 +898,18 @@ const Soal20SVG = () => {
       <circle cx="240" cy="195" r="3.5" fill={ptColor} />
 
       {/* ── Vertex labels ── */}
-      <text x="65"  y="76"  fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">A</text>
-      <text x="462" y="76"  fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">B</text>
+      {/* A: shifted left to avoid collision with lines */}
+      <text x="52"  y="76"  fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">A</text>
+      {/* B: at the B_actual intersection (306,80) */}
+      <text x="308" y="76"  fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">B</text>
       <text x="6"   y="212" fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">D</text>
       <text x="244" y="212" fill={lblColor} fontSize="14" fontStyle="italic" fontWeight="bold" fontFamily="'Times New Roman',serif">C</text>
 
       {/* ── Angle labels ── */}
       {/* x: bisector between perp and x-ray above AB */}
       <text x="62"  y="46"  fill={txtG} fontSize="12" fontStyle="italic" fontFamily="'Times New Roman',serif">x</text>
-      {/* 2x: inside sector below-left of A */}
-      <text x="28"  y="113" fill={txtG} fontSize="13" fontFamily="'Times New Roman',serif">2<tspan fontStyle="italic">x</tspan></text>
+      {/* 2x: inside right-side sector, bisector 30° below AB-right at r=40 */}
+      <text x="112" y="103" fill={txtG} fontSize="13" fontFamily="'Times New Roman',serif">2<tspan fontStyle="italic">x</tspan></text>
       {/* 120°: inside sector at C */}
       <text x="205" y="163" fill={txtG} fontSize="12" fontFamily="'Times New Roman',serif">120°</text>
     </svg>
