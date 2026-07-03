@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "f64ZYLUTAQydiHNqeBYd3"
+uri = "file://unused_images_list.txt"
+type = "text"
+title = "Daftar Lengkap File Gambar Tidak Terpakai (857 file)"
