@@ -50,17 +50,7 @@ const questions: Q[] = [
       { label: "e.", math: "3x - 5y = 0" },
     ],
   }),
-  Q(2, "Kaitan PLDV dan SPLDV", {
-    badge: "UN",
-    type: "mixed",
-    content: "Jelaskan hubungan antara PLDV dan SPLDV dengan menjawab pertanyaan berikut:",
-    parts: [
-      { label: "a.", text: "Berapa banyak PLDV yang membentuk sebuah SPLDV?" },
-      { label: "b.", text: "Apakah setiap PLDV bisa digabungkan menjadi SPLDV?" },
-      { label: "c.", text: "Apa perbedaan mendasar antara PLDV dan SPLDV dalam hal penyelesaian?" },
-    ],
-  }),
-  Q(3, "Identifikasi SPLDV", {
+  Q(2, "Identifikasi SPLDV", {
     badge: "TKA",
     type: "mixed",
     content: "Dari sistem persamaan berikut, manakah yang merupakan SPLDV? Berikan alasanmu!",
@@ -71,7 +61,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\begin{cases} xy = 6 \\\\ x + y = 5 \\end{cases}" },
     ],
   }),
-  Q(4, "Penyelesaian SPLDV", {
+  Q(3, "Penyelesaian SPLDV", {
     badge: "ANBK",
     type: "mixed",
     content: "Diketahui SPLDV:",
@@ -82,7 +72,7 @@ const questions: Q[] = [
       { label: "c.", text: "Ada berapa penyelesaian SPLDV pada umumnya?" },
     ],
   }),
-  Q(5, "Verifikasi Solusi", {
+  Q(4, "Verifikasi Solusi", {
     badge: "UN",
     type: "mixed",
     content: "Periksa apakah setiap pasangan berurutan berikut merupakan penyelesaian SPLDV:",
@@ -94,26 +84,7 @@ const questions: Q[] = [
       { label: "d.", math: "(5, -2)" },
     ],
   }),
-  Q(6, "Bentuk Persamaan", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Ubah setiap kalimat berikut menjadi PLDV:",
-    parts: [
-      { label: "a.", text: "Harga 2 buku dan 3 pensil adalah Rp 13.000." },
-      { label: "b.", text: "Jumlah dua bilangan adalah 25 dan selisihnya adalah 7." },
-      { label: "c.", text: "Lima kali umur Nora ditambah dua kali umur Theo sama dengan 40 tahun." },
-    ],
-  }),
-  Q(7, "Menentukan Variabel", {
-    badge: "UN",
-    type: "mixed",
-    content: "Untuk setiap situasi berikut, tentukan variabel yang tepat dan tuliskan SPLDV-nya:",
-    parts: [
-      { label: "a.", text: "Seorang pedagang menjual jeruk dan apel. Total 50 buah dengan harga total Rp 75.000. Harga jeruk Rp 1.000/buah dan apel Rp 2.000/buah." },
-      { label: "b.", text: "Dua bilangan jika dijumlahkan hasilnya 30, dan jika dikurangkan hasilnya 10." },
-    ],
-  }),
-  Q(8, "Himpunan Penyelesaian", {
+  Q(5, "Himpunan Penyelesaian", {
     badge: "UN",
     type: "mixed",
     content: "Tentukan himpunan penyelesaian dari SPLDV berikut (tanpa mencari solusinya, hanya tentukan apakah ada solusi, tak ada solusi, atau tak hingga solusi):",
@@ -123,17 +94,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\begin{cases} 3x - y = 4 \\\\ 6x - 2y = 8 \\end{cases}" },
     ],
   }),
-  Q(9, "Contoh Nyata SPLDV", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Seorang kasir toko menerima uang dari penjualan 5 kemeja dan 3 celana = Rp 650.000, serta 2 kemeja dan 4 celana = Rp 520.000.",
-    parts: [
-      { label: "a.", text: "Tentukan variabel yang digunakan (misalnya x = harga kemeja, y = harga celana)." },
-      { label: "b.", text: "Tuliskan SPLDV dari permasalahan tersebut." },
-      { label: "c.", text: "Apakah ini termasuk SPLDV? Jelaskan!" },
-    ],
-  }),
-  Q(10, "SPLDV dari Konteks", {
+  Q(6, "SPLDV dari Konteks", {
     badge: "UN",
     type: "mixed",
     content: "Theo membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Remy membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
@@ -143,16 +104,7 @@ const questions: Q[] = [
       { label: "c.", text: "Periksa apakah (12.000, 9.000) merupakan penyelesaiannya." },
     ],
   }),
-  Q(11, "Variabel dalam SPLDV", {
-    badge: "TKA",
-    type: "mixed",
-    content: "Identifikasikan variabel-variabel dari situasi berikut dan tuliskan SPLDV-nya:",
-    parts: [
-      { label: "a.", text: "Umur ayah 30 tahun lebih tua dari umur Rina. Tiga kali umur Rina sama dengan umur ayah ditambah 10." },
-      { label: "b.", text: "Sebuah lapangan berbentuk persegi panjang dengan keliling 60 m. Panjangnya 6 m lebih dari lebarnya." },
-    ],
-  }),
-  Q(12, "Mengubah ke Bentuk Standar", {
+  Q(7, "Mengubah ke Bentuk Standar", {
     badge: "ANBK",
     type: "mixed",
     content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c:",
@@ -163,7 +115,7 @@ const questions: Q[] = [
       { label: "d.", math: "0.5x - 1.5y = 6" },
     ],
   }),
-  Q(13, "Banyak Solusi — Identifikasi", {
+  Q(8, "Banyak Solusi — Identifikasi", {
     badge: "AKM",
     type: "mixed",
     content: "Tanpa menyelesaikan, tentukan jenis penyelesaian SPLDV berikut (satu solusi, tidak ada solusi, atau tak berhingga solusi) dengan cara melihat perbandingan koefisiennya:",
@@ -174,7 +126,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
     ],
   }),
-  Q(14, "Penyelesaian Tunggal", {
+  Q(9, "Penyelesaian Tunggal", {
     badge: "ANBK",
     type: "mixed",
     content: "Diketahui SPLDV:",
@@ -185,7 +137,7 @@ const questions: Q[] = [
       { label: "c.", text: "Adakah pasangan lain yang memenuhi kedua persamaan?" },
     ],
   }),
-  Q(15, "Substitusi Cepat — Verifikasi", {
+  Q(10, "Substitusi Cepat — Verifikasi", {
     badge: "TKA",
     type: "mixed",
     content: "Tanpa menyelesaikan SPLDV, periksa apakah solusi berikut benar:",
@@ -195,7 +147,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\begin{cases} 4x - y = 10 \\\\ x + 3y = 9 \\end{cases} \\Rightarrow (3, 2)?" },
     ],
   }),
-  Q(16, "Soal UN {t('practice.multipleChoice')} Style", {
+  Q(11, "Soal UN {t('practice.multipleChoice')} Style", {
     badge: "UN",
     type: "mixed",
     content: "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:",
@@ -207,36 +159,7 @@ const questions: Q[] = [
       { label: "D.", math: "(3, 4)" },
     ],
   }),
-  Q(17, "Soal Cerita Bilangan", {
-    badge: "UN",
-    type: "mixed",
-    content: "Jumlah dua bilangan adalah 48. Selisih kedua bilangan itu adalah 12. Tuliskan SPLDV untuk situasi tersebut:",
-    parts: [
-      { label: "a.", text: "Misal bilangan pertama = x dan bilangan kedua = y (x > y). Tuliskan SPLDV!" },
-      { label: "b.", text: "Verifikasi apakah (30, 18) adalah solusinya." },
-    ],
-  }),
-  Q(18, "Persamaan Pecahan", {
-    badge: "TKA",
-    type: "mixed",
-    content: "Ubah SPLDV berikut ke bentuk standar (kalikan agar tidak ada pecahan):",
-    parts: [
-      { label: "a.", math: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 4 \\\\ \\frac{x}{4} - \\frac{y}{2} = 1 \\end{cases}" },
-      { label: "b.", math: "\\begin{cases} 0.2x + 0.5y = 3 \\\\ 0.4x - 0.1y = 2 \\end{cases}" },
-    ],
-  }),
-  Q(19, "Syarat Solusi Unik", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Untuk SPLDV",
-    blockMath: "\\begin{cases} ax + by = c \\\\ px + qy = r \\end{cases}",
-    parts: [
-      { label: "a.", text: "Apa syarat agar sistem memiliki solusi unik (berpotongan di satu titik)?" },
-      { label: "b.", math: "\\frac{a}{p} \\neq \\frac{b}{q}" },
-      { label: "c.", text: "Berikan contoh SPLDV yang memenuhi syarat tersebut." },
-    ],
-  }),
-  Q(20, "ANBK — Benar atau Salah", {
+  Q(12, "ANBK — Benar atau Salah", {
     badge: "ANBK",
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S):",
@@ -245,18 +168,6 @@ const questions: Q[] = [
       { label: "(2)", text: "Jika koefisien x dan y pada dua persamaan sebanding tapi konstantanya tidak, maka tidak ada penyelesaian." },
       { label: "(3)", text: "Setiap PLDV dapat dijadikan bagian dari suatu SPLDV." },
       { label: "(4)", text: "Penyelesaian SPLDV berupa pasangan bilangan (x, y) yang memenuhi kedua persamaan." },
-    ],
-  }),
-  Q(21, "Rekap Definisi", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Lengkapi pernyataan berikut dengan jawaban yang tepat:",
-    parts: [
-      { label: "a.", text: "SPLDV adalah sistem yang terdiri dari ... persamaan linear dengan ... variabel." },
-      { label: "b.", text: "Penyelesaian SPLDV adalah pasangan (x, y) yang ... kedua persamaan." },
-      { label: "c.", text: "Jika kedua garis sejajar, maka SPLDV tidak memiliki ..." },
-      { label: "d.", text: "Jika kedua garis berimpit, maka SPLDV memiliki ... penyelesaian." },
-      { label: "e.", text: "Metode untuk mencari penyelesaian SPLDV antara lain: ..., ..., ..., dan ..." },
     ],
   }),
 ];
@@ -280,7 +191,7 @@ const DefinisiSPLDVPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 21 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 12 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
