@@ -98,27 +98,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan nilai x dan y." },
     ],
   }),
-  Q(7, "Soal Bilangan UN", {
-    badge: "UN",
-    type: "mixed",
-    content: "Jumlah dua bilangan adalah 30 dan selisihnya adalah 8.",
-    parts: [
-      { label: "a.", text: "Misal bilangan pertama = x dan kedua = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan metode substitusi." },
-      { label: "c.", text: "Tentukan kedua bilangan tersebut." },
-    ],
-  }),
-  Q(8, "Soal Usia", {
-    badge: "UN",
-    type: "mixed",
-    content: "Umur Ayah 28 tahun lebih tua dari umur Anak. Tiga tahun lagi, umur Ayah dua kali umur Anak.",
-    parts: [
-      { label: "a.", text: "Misal umur Ayah = x dan umur Anak = y. Tuliskan SPLDV!" },
-      { label: "b.", text: "Selesaikan dengan metode substitusi." },
-      { label: "c.", text: "Tentukan umur Ayah dan Anak sekarang." },
-    ],
-  }),
-  Q(9, "Soal Harga Barang", {
+  Q(7, "Soal Harga Barang", {
     badge: "UN",
     type: "mixed",
     content: "Harga 3 buku dan 4 pensil = Rp 29.000. Harga 1 buku dan 2 pensil = Rp 11.000.",
@@ -128,7 +108,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa harga 5 buku dan 3 pensil?" },
     ],
   }),
-  Q(10, "Soal Makanan — ANBK", {
+  Q(8, "Soal Makanan — ANBK", {
     badge: "ANBK",
     type: "mixed",
     content: "Di kantin, 2 porsi nasi goreng dan 1 minuman = Rp 25.000. 1 porsi nasi goreng dan 3 minuman = Rp 23.000.",
@@ -159,7 +139,7 @@ const MetodeSubstitusiPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 10 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
