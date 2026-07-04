@@ -48,34 +48,7 @@ const questions: Q[] = [
       { label: "b.", text: "Substitusikan nilai x ke pers. kedua untuk cari y." },
     ],
   }),
-  Qf(3, "Pecahan — Campuran", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 4 \\\\ \\frac{x}{4} + \\frac{y}{2} = 3 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan pers. pertama dengan 6 dan pers. kedua dengan 4 untuk menghilangkan penyebut." },
-      { label: "b.", text: "Eliminasi y: kurangkan pers. kedua dari pertama untuk mencari x." },
-      { label: "c.", text: "Substitusikan x untuk mencari y, kemudian verifikasi." },
-    ],
-  }),
-  Qf(4, "Campuran — Soal Campuran Kontekstual", {
-    badge: "AKM", type: "mixed",
-    content: "Sebuah parkiran menampung sepeda motor dan mobil. Jumlah kendaraan = 50. Jumlah roda = 136. (Motor = 2 roda, Mobil = 4 roda)",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV (motor = x, mobil = y)." },
-      { label: "b.", text: "Selesaikan dengan campuran." },
-      { label: "c.", text: "Berapa jumlah motor dan mobil?" },
-    ],
-  }),
-  Qf(5, "Soal Beli Online", {
-    badge: "AKM", type: "mixed",
-    content: "Hani membeli 3 buku A dan 2 buku B seharga Rp 78.000. Dani membeli 1 buku A dan 4 buku B seharga Rp 74.000.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan campuran." },
-      { label: "c.", text: "Berapa harga masing-masing buku?" },
-    ],
-  }),
-  Qf(6, "Campuran — Hasil HP", {
+  Qf(3, "Campuran — Hasil HP", {
     badge: "ANBK", type: "mixed",
     blockMath: "\\begin{cases} 5x - 3y = 7 \\\\ 2x + 5y = 19 \\end{cases}",
     parts: [
@@ -84,7 +57,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x dan y." },
     ],
   }),
-  Qf(7, "Campuran — Soal Panjang", {
+  Qf(4, "Campuran — Soal Panjang", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} 11x + 7y = 68 \\\\ 3x - 5y = -6 \\end{cases}",
     parts: [
@@ -93,12 +66,39 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x, lalu y." },
     ],
   }),
-  Qf(8, "Campuran — Ubah Persamaan", {
+  Qf(5, "Campuran — Ubah Persamaan", {
     badge: "ANBK", type: "mixed",
     blockMath: "\\begin{cases} 2(x+y) = 3x + 4 \\\\ 3x - 2y = 6 \\end{cases}",
     parts: [
       { label: "a.", text: "Sederhanakan persamaan pertama terlebih dahulu." },
       { label: "b.", text: "Selesaikan SPLDV yang sudah disederhanakan dengan campuran." },
+    ],
+  }),
+  Qf(6, "Pecahan — Campuran", {
+    badge: "TKA", type: "mixed",
+    blockMath: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 4 \\\\ \\frac{x}{4} + \\frac{y}{2} = 3 \\end{cases}",
+    parts: [
+      { label: "a.", text: "Kalikan pers. pertama dengan 6 dan pers. kedua dengan 4 untuk menghilangkan penyebut." },
+      { label: "b.", text: "Eliminasi y: kurangkan pers. kedua dari pertama untuk mencari x." },
+      { label: "c.", text: "Substitusikan x untuk mencari y, kemudian verifikasi." },
+    ],
+  }),
+  Qf(7, "Campuran — Soal Campuran Kontekstual", {
+    badge: "AKM", type: "mixed",
+    content: "Sebuah parkiran menampung sepeda motor dan mobil. Jumlah kendaraan = 50. Jumlah roda = 136. (Motor = 2 roda, Mobil = 4 roda)",
+    parts: [
+      { label: "a.", text: "Tuliskan SPLDV (motor = x, mobil = y)." },
+      { label: "b.", text: "Selesaikan dengan campuran." },
+      { label: "c.", text: "Berapa jumlah motor dan mobil?" },
+    ],
+  }),
+  Qf(8, "Soal Beli Online", {
+    badge: "AKM", type: "mixed",
+    content: "Hani membeli 3 buku A dan 2 buku B seharga Rp 78.000. Dani membeli 1 buku A dan 4 buku B seharga Rp 74.000.",
+    parts: [
+      { label: "a.", text: "Tuliskan SPLDV." },
+      { label: "b.", text: "Selesaikan dengan campuran." },
+      { label: "c.", text: "Berapa harga masing-masing buku?" },
     ],
   }),
 ];
