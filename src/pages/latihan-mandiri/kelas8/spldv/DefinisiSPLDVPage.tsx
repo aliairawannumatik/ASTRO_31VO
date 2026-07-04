@@ -98,17 +98,7 @@ const questions: Q[] = [
       { label: "g.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
     ],
   }),
-  Q(6, "SPLDV dari Konteks", {
-    badge: "UN",
-    type: "mixed",
-    content: "Theo membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Remy membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
-    parts: [
-      { label: "a.", text: "Misal harga mangga = x dan harga jeruk = y. Tuliskan SPLDV-nya." },
-      { label: "b.", text: "Periksa apakah harga 1 kg mangga adalah Rp10.000 dan harga 1 kg jeruk Rp12.000 merupakan penyelesaian dari permasalahan pada soal." },
-      { label: "c.", text: "Periksa apakah harga 1 kg mangga adalah Rp12.000 dan harga 1 kg jeruk Rp9.000 merupakan penyelesaian dari permasalahan pada soal." },
-    ],
-  }),
-  Q(7, "Mengubah ke Bentuk Standar", {
+  Q(6, "Mengubah ke Bentuk Standar", {
     badge: "ANBK",
     type: "mixed",
     content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c, dengan a, b, dan c berupa bilangan bulat:",
@@ -119,7 +109,7 @@ const questions: Q[] = [
       { label: "d.", math: "0.5x - 1.5y = 6" },
     ],
   }),
-  Q(8, "Penyelesaian Tunggal", {
+  Q(7, "Penyelesaian Tunggal", {
     badge: "ANBK",
     type: "mixed",
     content: "Diketahui SPLDV:",
@@ -130,7 +120,7 @@ const questions: Q[] = [
       { label: "c.", text: "Adakah pasangan lain yang memenuhi kedua persamaan?" },
     ],
   }),
-  Q(9, "Substitusi Cepat — Verifikasi", {
+  Q(8, "Substitusi Cepat — Verifikasi", {
     badge: "TKA",
     type: "mixed",
     content: "Tanpa menyelesaikan SPLDV, periksa apakah solusi berikut benar:",
@@ -140,7 +130,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\begin{cases} 4x - y = 10 \\\\ x + 3y = 9 \\end{cases} \\Rightarrow (3, 2)?" },
     ],
   }),
-  Q(10, "Soal UN {t('practice.multipleChoice')} Style", {
+  Q(9, "Soal UN {t('practice.multipleChoice')} Style", {
     badge: "UN",
     type: "mixed",
     content: "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:",
@@ -150,6 +140,16 @@ const questions: Q[] = [
       { label: "B.", math: "(5, 2)" },
       { label: "C.", math: "(4, 3)" },
       { label: "D.", math: "(3, 4)" },
+    ],
+  }),
+  Q(10, "SPLDV dari Konteks", {
+    badge: "UN",
+    type: "mixed",
+    content: "Theo membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Remy membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
+    parts: [
+      { label: "a.", text: "Misal harga mangga = x dan harga jeruk = y. Tuliskan SPLDV-nya." },
+      { label: "b.", text: "Periksa apakah harga 1 kg mangga adalah Rp10.000 dan harga 1 kg jeruk Rp12.000 merupakan penyelesaian dari permasalahan pada soal." },
+      { label: "c.", text: "Periksa apakah harga 1 kg mangga adalah Rp12.000 dan harga 1 kg jeruk Rp9.000 merupakan penyelesaian dari permasalahan pada soal." },
     ],
   }),
   Q(11, "ANBK — Benar atau Salah", {
