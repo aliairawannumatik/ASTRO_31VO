@@ -88,12 +88,12 @@ const questions: Q[] = [
       { label: "c.", text: "Selesaikan untuk y, lalu cari x." },
     ],
   }),
-  Q(6, "Substitusi — Variabel y", {
+  Q(6, "Substitusi — Tanpa Koefisien 1", {
     badge: "TKA",
     type: "mixed",
-    blockMath: "\\begin{cases} 3x - y = 5 \\\\ x + 2y = 12 \\end{cases}",
+    blockMath: "\\begin{cases} 2x + 3y = 19 \\\\ 3x - 2y = -4 \\end{cases}",
     parts: [
-      { label: "a.", text: "Dari persamaan pertama, nyatakan y dalam x." },
+      { label: "a.", text: "Dari persamaan pertama, nyatakan x dalam y." },
       { label: "b.", text: "Substitusikan ke persamaan kedua." },
       { label: "c.", text: "Tentukan nilai x dan y." },
     ],
