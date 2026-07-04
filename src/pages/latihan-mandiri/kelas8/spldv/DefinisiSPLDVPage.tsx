@@ -104,8 +104,8 @@ const questions: Q[] = [
     content: "Theo membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Remy membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
     parts: [
       { label: "a.", text: "Misal harga mangga = x dan harga jeruk = y. Tuliskan SPLDV-nya." },
-      { label: "b.", text: "Periksa apakah (10.000, 12.000) merupakan penyelesaiannya." },
-      { label: "c.", text: "Periksa apakah (12.000, 9.000) merupakan penyelesaiannya." },
+      { label: "b.", text: "Periksa apakah harga 1 kg mangga adalah Rp10.000 dan harga 1 kg jeruk Rp12.000 merupakan penyelesaian dari permasalahan pada soal." },
+      { label: "c.", text: "Periksa apakah harga 1 kg mangga adalah Rp12.000 dan harga 1 kg jeruk Rp9.000 merupakan penyelesaian dari permasalahan pada soal." },
     ],
   }),
   Q(7, "Mengubah ke Bentuk Standar", {
