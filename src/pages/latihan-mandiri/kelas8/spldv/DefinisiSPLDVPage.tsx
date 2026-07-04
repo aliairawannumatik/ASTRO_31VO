@@ -84,14 +84,18 @@ const questions: Q[] = [
       { label: "d.", math: "(5, -2)" },
     ],
   }),
-  Q(5, "Himpunan Penyelesaian", {
+  Q(5, "Himpunan Penyelesaian — Identifikasi", {
     badge: "UN",
     type: "mixed",
-    content: "Tentukan himpunan penyelesaian dari SPLDV berikut (tanpa mencari solusinya, hanya tentukan apakah ada solusi, tak ada solusi, atau tak hingga solusi):",
+    content: "Tanpa mencari solusinya, tentukan jenis penyelesaian (ada solusi, tidak ada solusi, atau tak hingga solusi) dari setiap SPLDV berikut. Untuk soal (d)–(g), gunakan cara melihat perbandingan koefisiennya:",
     parts: [
       { label: "a.", math: "\\begin{cases} 2x + 4y = 8 \\\\ x + 2y = 4 \\end{cases}" },
       { label: "b.", math: "\\begin{cases} x + y = 5 \\\\ x + y = 7 \\end{cases}" },
       { label: "c.", math: "\\begin{cases} 3x - y = 4 \\\\ 6x - 2y = 8 \\end{cases}" },
+      { label: "d.", math: "\\begin{cases} x + 2y = 6 \\\\ 2x + 4y = 12 \\end{cases}" },
+      { label: "e.", math: "\\begin{cases} 3x - y = 4 \\\\ x + 2y = 5 \\end{cases}" },
+      { label: "f.", math: "\\begin{cases} 2x + 6y = 10 \\\\ x + 3y = 8 \\end{cases}" },
+      { label: "g.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
     ],
   }),
   Q(6, "SPLDV dari Konteks", {
@@ -115,18 +119,7 @@ const questions: Q[] = [
       { label: "d.", math: "0.5x - 1.5y = 6" },
     ],
   }),
-  Q(8, "Banyak Solusi — Identifikasi", {
-    badge: "AKM",
-    type: "mixed",
-    content: "Tanpa menyelesaikan, tentukan jenis penyelesaian SPLDV berikut (satu solusi, tidak ada solusi, atau tak berhingga solusi) dengan cara melihat perbandingan koefisiennya:",
-    parts: [
-      { label: "a.", math: "\\begin{cases} x + 2y = 6 \\\\ 2x + 4y = 12 \\end{cases}" },
-      { label: "b.", math: "\\begin{cases} 3x - y = 4 \\\\ x + 2y = 5 \\end{cases}" },
-      { label: "c.", math: "\\begin{cases} 2x + 6y = 10 \\\\ x + 3y = 8 \\end{cases}" },
-      { label: "d.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
-    ],
-  }),
-  Q(9, "Penyelesaian Tunggal", {
+  Q(8, "Penyelesaian Tunggal", {
     badge: "ANBK",
     type: "mixed",
     content: "Diketahui SPLDV:",
@@ -137,7 +130,7 @@ const questions: Q[] = [
       { label: "c.", text: "Adakah pasangan lain yang memenuhi kedua persamaan?" },
     ],
   }),
-  Q(10, "Substitusi Cepat — Verifikasi", {
+  Q(9, "Substitusi Cepat — Verifikasi", {
     badge: "TKA",
     type: "mixed",
     content: "Tanpa menyelesaikan SPLDV, periksa apakah solusi berikut benar:",
@@ -147,7 +140,7 @@ const questions: Q[] = [
       { label: "c.", math: "\\begin{cases} 4x - y = 10 \\\\ x + 3y = 9 \\end{cases} \\Rightarrow (3, 2)?" },
     ],
   }),
-  Q(11, "Soal UN {t('practice.multipleChoice')} Style", {
+  Q(10, "Soal UN {t('practice.multipleChoice')} Style", {
     badge: "UN",
     type: "mixed",
     content: "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:",
@@ -159,7 +152,7 @@ const questions: Q[] = [
       { label: "D.", math: "(3, 4)" },
     ],
   }),
-  Q(12, "ANBK — Benar atau Salah", {
+  Q(11, "ANBK — Benar atau Salah", {
     badge: "ANBK",
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S):",
@@ -191,7 +184,7 @@ const DefinisiSPLDVPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 12 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 11 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
