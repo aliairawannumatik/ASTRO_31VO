@@ -7,18 +7,118 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import CoordPlane from "../koordinat-cartesius/CoordPlane";
 
+/* ── Grid chart (white background, no axes) ────────────────── */
+const CELL = 20;
+const GCOLS = 11;
+const GROWS = 11;
+const GW = GCOLS * CELL;
+const GH = GROWS * CELL;
+
+const GridLineChart = ({
+  x1, y1, x2, y2, color = "#60a5fa",
+}: { x1: number; y1: number; x2: number; y2: number; color?: string }) => {
+  const sx = x1 * CELL, sy = y1 * CELL;
+  const ex = x2 * CELL, ey = y2 * CELL;
+  const mathDx = x2 - x1;
+  const mathDy = y1 - y2;           // positive = up visually
+  const goingUp = sy > ey;          // SVG: smaller y = higher
+  const cornerX = ex, cornerY = sy; // right-angle at bottom-right (or top-right)
+  const dxMidX = (sx + ex) / 2;
+  const dxLabelY = goingUp ? sy + 15 : sy - 7;
+  const dyLabelX = ex + 7;
+  const dyMidY = (sy + ey) / 2 + 4;
+  return (
+    <svg width={GW} height={GH} className="rounded-xl shadow-md" style={{ border: "1.5px solid #e2e8f0" }}>
+      <rect width={GW} height={GH} fill="#ffffff" rx="10" />
+      {Array.from({ length: GCOLS + 1 }, (_, i) => (
+        <line key={`v${i}`} x1={i * CELL} y1={0} x2={i * CELL} y2={GH} stroke="#e2e8f0" strokeWidth="1" />
+      ))}
+      {Array.from({ length: GROWS + 1 }, (_, i) => (
+        <line key={`h${i}`} x1={0} y1={i * CELL} x2={GW} y2={i * CELL} stroke="#e2e8f0" strokeWidth="1" />
+      ))}
+      {/* Helper triangle */}
+      <line x1={sx} y1={sy} x2={cornerX} y2={cornerY} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="5,3" />
+      <line x1={cornerX} y1={cornerY} x2={ex} y2={ey} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="5,3" />
+      {/* Main line */}
+      <line x1={sx} y1={sy} x2={ex} y2={ey} stroke={color} strokeWidth="2.8" strokeLinecap="round" />
+      {/* Endpoints */}
+      <circle cx={sx} cy={sy} r={5} fill={color} stroke="white" strokeWidth="1.5" />
+      <circle cx={ex} cy={ey} r={5} fill={color} stroke="white" strokeWidth="1.5" />
+      {/* Δx label */}
+      <text x={dxMidX} y={dxLabelY} textAnchor="middle" fill="#475569" fontSize="11" fontFamily="sans-serif" fontWeight="700">
+        {`Δx = ${mathDx}`}
+      </text>
+      {/* Δy label */}
+      <text x={dyLabelX} y={dyMidY} textAnchor="start" fill="#475569" fontSize="11" fontFamily="sans-serif" fontWeight="700">
+        {`Δy = ${mathDy > 0 ? "+" : ""}${mathDy}`}
+      </text>
+    </svg>
+  );
+};
+
+/* ── Types ─────────────────────────────────────────────────── */
 type Part = { label: string; math?: string; text?: string };
 type Diagram = Parameters<typeof CoordPlane>[0];
+type GridLine = { x1: number; y1: number; x2: number; y2: number; color?: string };
 type Q = {
   n: number; title: string;
   content?: string; math?: string;
-  parts?: Part[]; diagram?: Diagram;
+  parts?: Part[];
+  diagram?: Diagram;
+  gridLine?: GridLine;
   type: "essay" | "mixed" | "diagram-only";
 };
 const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
+/* ── Questions ─────────────────────────────────────────────── */
 const questions: Q[] = [
-  Q(1, "Gradien dari Dua Titik", {
+  /* ── 4 soal baru: baca gradien dari grid kotak-kotak ─── */
+  Q(1, "Baca Gradien dari Grid — Garis Naik (1)", {
+    type: "mixed",
+    content: "Perhatikan garis pada grid kotak-kotak di bawah ini (setiap kotak = 1 satuan). Garis bergerak ke kanan atas.",
+    gridLine: { x1: 2, y1: 9, x2: 8, y2: 3, color: "#60a5fa" },
+    parts: [
+      { label: "a.", text: "Hitung Δx = berapa kotak garis bergerak ke kanan?" },
+      { label: "b.", text: "Hitung Δy = berapa kotak garis bergerak ke atas? (atas = positif)" },
+      { label: "c.", math: "\\text{Hitung gradien } m = \\dfrac{\\Delta y}{\\Delta x}" },
+    ],
+  }),
+
+  Q(2, "Baca Gradien dari Grid — Garis Naik (2)", {
+    type: "mixed",
+    content: "Perhatikan garis pada grid kotak-kotak di bawah ini. Garis bergerak ke kanan atas lebih curam.",
+    gridLine: { x1: 3, y1: 10, x2: 7, y2: 2, color: "#34d399" },
+    parts: [
+      { label: "a.", text: "Hitung Δx = berapa kotak garis bergerak ke kanan?" },
+      { label: "b.", text: "Hitung Δy = berapa kotak garis bergerak ke atas?" },
+      { label: "c.", math: "\\text{Hitung gradien } m = \\dfrac{\\Delta y}{\\Delta x}" },
+    ],
+  }),
+
+  Q(3, "Baca Gradien dari Grid — Garis Turun (1)", {
+    type: "mixed",
+    content: "Perhatikan garis pada grid kotak-kotak di bawah ini. Garis bergerak ke kanan bawah.",
+    gridLine: { x1: 2, y1: 2, x2: 8, y2: 8, color: "#f472b6" },
+    parts: [
+      { label: "a.", text: "Hitung Δx = berapa kotak garis bergerak ke kanan?" },
+      { label: "b.", text: "Hitung Δy = berapa kotak garis bergerak ke bawah? (bawah = negatif)" },
+      { label: "c.", math: "\\text{Hitung gradien } m = \\dfrac{\\Delta y}{\\Delta x}" },
+    ],
+  }),
+
+  Q(4, "Baca Gradien dari Grid — Garis Turun (2)", {
+    type: "mixed",
+    content: "Perhatikan garis pada grid kotak-kotak di bawah ini. Garis bergerak ke kanan bawah lebih landai.",
+    gridLine: { x1: 1, y1: 2, x2: 9, y2: 6, color: "#fb923c" },
+    parts: [
+      { label: "a.", text: "Hitung Δx = berapa kotak garis bergerak ke kanan?" },
+      { label: "b.", text: "Hitung Δy = berapa kotak garis bergerak ke bawah?" },
+      { label: "c.", math: "\\text{Hitung gradien } m = \\dfrac{\\Delta y}{\\Delta x}" },
+    ],
+  }),
+
+  /* ── Soal lama (renomor 5–24) ──────────────────────────── */
+  Q(5, "Gradien dari Dua Titik", {
     type: "mixed",
     content: "Hitung gradien garis yang melalui pasangan titik berikut:",
     parts: [
@@ -29,7 +129,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(2, "Gradien dari Persamaan y = mx + c", {
+  Q(6, "Gradien dari Persamaan y = mx + c", {
     type: "mixed",
     content: "Tentukan gradien dari setiap persamaan garis berikut:",
     parts: [
@@ -41,7 +141,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Gradien dari Bentuk Umum ax + by = c", {
+  Q(7, "Gradien dari Bentuk Umum ax + by = c", {
     type: "mixed",
     content: "Ubah ke bentuk y = mx + c lalu tentukan gradiennya:",
     parts: [
@@ -52,7 +152,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(4, "Gradien dari Grafik Menggunakan Segitiga", {
+  Q(8, "Gradien dari Grafik Menggunakan Segitiga", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -77,7 +177,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(5, "Gradien Garis Tegak dan Datar", {
+  Q(9, "Gradien Garis Tegak dan Datar", {
     type: "mixed",
     diagram: {
       size: 260, range: 5,
@@ -93,7 +193,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Mencari Koordinat dari Gradien", {
+  Q(10, "Mencari Koordinat dari Gradien", {
     type: "mixed",
     content: "Gradien garis yang melalui titik P(2, k) dan Q(6, 10) adalah 2. Tentukan nilai k.",
     parts: [
@@ -103,7 +203,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Perbandingan Gradien Dua Garis", {
+  Q(11, "Perbandingan Gradien Dua Garis", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -120,7 +220,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(8, "Gradien dari Titik Potong Sumbu", {
+  Q(12, "Gradien dari Titik Potong Sumbu", {
     type: "mixed",
     content: "Garis memotong sumbu-x di titik (a, 0) dan sumbu-y di titik (0, b). Gunakan kedua titik ini untuk mencari gradien:",
     parts: [
@@ -130,7 +230,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "UN 2018 — Nilai Gradien", {
+  Q(13, "UN 2018 — Nilai Gradien", {
     type: "mixed",
     content: "Persamaan garis adalah 3x + 4y − 24 = 0.",
     parts: [
@@ -140,7 +240,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Hubungan Gradien Garis Naik dan Turun", {
+  Q(14, "Hubungan Gradien Garis Naik dan Turun", {
     type: "mixed",
     content: "Tentukan sifat gradien (positif/negatif/nol/tak terdefinisi) dari setiap deskripsi garis:",
     parts: [
@@ -151,7 +251,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(11, "Gradien Garis y = mx (Melalui O)", {
+  Q(15, "Gradien Garis y = mx (Melalui O)", {
     type: "mixed",
     diagram: {
       size: 260, range: 5,
@@ -168,7 +268,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(12, "Mencari Nilai yang Tidak Diketahui dari Gradien", {
+  Q(16, "Mencari Nilai yang Tidak Diketahui dari Gradien", {
     type: "mixed",
     content: "Tentukan nilai yang belum diketahui:",
     parts: [
@@ -178,7 +278,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(13, "Gradien Garis Paralel", {
+  Q(17, "Gradien Garis Paralel", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -194,7 +294,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(14, "Gradien Garis Tegak Lurus", {
+  Q(18, "Gradien Garis Tegak Lurus", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -210,7 +310,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(15, "Gradien Garis pada Trapesium", {
+  Q(19, "Gradien Garis pada Trapesium", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -234,7 +334,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(16, "Gradien dari Bentuk Pecahan", {
+  Q(20, "Gradien dari Bentuk Pecahan", {
     type: "mixed",
     content: "Tentukan gradien dari persamaan-persamaan berikut:",
     parts: [
@@ -244,7 +344,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(17, "Membuktikan Titik Segaris", {
+  Q(21, "Membuktikan Titik Segaris", {
     type: "mixed",
     content: "Buktikan apakah tiga titik berikut terletak pada satu garis lurus (segaris):",
     parts: [
@@ -254,7 +354,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(18, "UN 2021 — Soal Gradien Terapan", {
+  Q(22, "UN 2021 — Soal Gradien Terapan", {
     type: "mixed",
     content: "Sebuah jalan menanjak membentuk garis lurus. Jika ujung bawah jalan ada di koordinat (0, 10) dan ujung atas di (50, 40):",
     parts: [
@@ -263,7 +363,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(19, "Gradien dari Persamaan Non-Standar", {
+  Q(23, "Gradien dari Persamaan Non-Standar", {
     type: "mixed",
     content: "Tentukan gradien dari setiap persamaan:",
     parts: [
@@ -273,7 +373,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(20, "Tantangan — Gradien Segitiga", {
+  Q(24, "Tantangan — Gradien Segitiga", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -297,6 +397,7 @@ const questions: Q[] = [
   }),
 ];
 
+/* ── Page ───────────────────────────────────────────────────── */
 const GradienPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -338,6 +439,14 @@ const GradienPage = () => {
                 </div>
               </div>
 
+              {/* Grid chart (white, no axes) */}
+              {q.gridLine && (
+                <div className="flex justify-center my-4">
+                  <GridLineChart {...q.gridLine} />
+                </div>
+              )}
+
+              {/* CoordPlane (dark, with axes) */}
               {q.diagram && (
                 <div className="flex justify-center my-4">
                   <div className="rounded-xl border border-white/10 overflow-hidden shadow-lg">
