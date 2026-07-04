@@ -275,7 +275,7 @@ const GrafikPGLPage = () => {
               {q.diagram && (
                 <div className="flex justify-center my-4">
                   <div className="rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                    <CoordPlane {...q.diagram} />
+                    <CoordPlane {...q.diagram} lightBg />
                   </div>
                 </div>
               )}
