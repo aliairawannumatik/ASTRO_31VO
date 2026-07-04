@@ -573,8 +573,8 @@ const PersegipanjangDanLingkaranSVG = ({ t }: { t: T }) => {
 /* ═══════════════════════════════════════════════════════════════════
    SVG C1 – Rectangle 28×14 cm, two semicircles cut (dumbbell shape)
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG1 = () => (
-  <svg viewBox="0 0 320 200" className="w-full max-w-sm mx-auto" aria-label="Dumbbell shaded region">
+const SoalSVG1 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 320 200" className="w-full max-w-sm mx-auto" aria-label={isId ? "Daerah arsiran barbel" : isEn ? "Dumbbell shaded region" : "ダンベル型着色領域"}>
     <defs>
       <style>{`
         @keyframes db1{0%,100%{opacity:.42;}50%{opacity:.75;}}
@@ -600,8 +600,8 @@ const SoalSVG1 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C2 – Quarter circle r = 10 cm (pie slice)
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG2 = () => (
-  <svg viewBox="0 0 240 230" className="w-full max-w-xs mx-auto" aria-label="Quarter circle">
+const SoalSVG2 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 240 230" className="w-full max-w-xs mx-auto" aria-label={isId ? "Seperempat lingkaran" : isEn ? "Quarter circle" : "四分の一円"}>
     <defs>
       <style>{`
         @keyframes qc1{0%,100%{opacity:.4;}50%{opacity:.72;}}
@@ -659,7 +659,7 @@ const SoalSVG4 = ({ t }: { t: T }) => {
   const isId = t.introCats[0].label === "Dikurangi";
   const isEn = t.introCats[0].label === "Subtraction";
   return (
-    <svg viewBox="0 0 310 220" className="w-full max-w-xs mx-auto" aria-label="D-shaped composite figure">
+    <svg viewBox="0 0 310 220" className="w-full max-w-xs mx-auto" aria-label={isId ? "Bangun gabungan bentuk D" : isEn ? "D-shaped composite figure" : "D字型複合図形"}>
       <defs>
         <style>{`
           @keyframes ds4{0%,100%{opacity:.38;}50%{opacity:.68;}}
@@ -686,8 +686,8 @@ const SoalSVG4 = ({ t }: { t: T }) => {
 /* ═══════════════════════════════════════════════════════════════════
    SVG C5 – Half-annulus (large semicircle minus small semicircle)
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG5 = () => (
-  <svg viewBox="0 0 280 180" className="w-full mx-auto" style={{ maxWidth: "480px" }} aria-label="Snail half-annulus">
+const SoalSVG5 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 280 180" className="w-full mx-auto" style={{ maxWidth: "480px" }} aria-label={isId ? "Setengah cincin siput" : isEn ? "Snail half-annulus" : "カタツムリ型半環"}>
     <defs>
       <style>{`
         @keyframes sn5{0%,100%{opacity:.42;}50%{opacity:.75;}}
@@ -749,8 +749,8 @@ const SoalSVG6 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C7 – Triple arch: large arch minus 2 small arches
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG7 = () => (
-  <svg viewBox="0 0 300 200" className="w-full max-w-xs mx-auto" aria-label="Three arch pattern">
+const SoalSVG7 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 300 200" className="w-full max-w-xs mx-auto" aria-label={isId ? "Pola tiga lengkungan" : isEn ? "Three arch pattern" : "三つのアーチ模様"}>
     <defs>
       <style>{`
         @keyframes ar7{0%,100%{opacity:.4;}50%{opacity:.72;}}
@@ -780,8 +780,8 @@ const SoalSVG7 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C8 – Square 14 cm, 4 quarter-circle arcs at corners → shaded center
 ═══════════════════════════════════════════════════════════════════ */
-const ContohDelapanSVG = () => (
-  <svg viewBox="0 0 270 270" className="w-full max-w-xs mx-auto" aria-label="Square with 4 quarter-circle arcs — shaded center region">
+const ContohDelapanSVG = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 270 270" className="w-full max-w-xs mx-auto" aria-label={isId ? "Persegi dengan 4 busur seperempat lingkaran — daerah tengah arsiran" : isEn ? "Square with 4 quarter-circle arcs — shaded center region" : "4つの四分円弧を持つ正方形—中央着色領域"}>
     <defs>
       <style>{`
         @keyframes lf8{0%,100%{opacity:.48;}50%{opacity:.82;}}
@@ -807,8 +807,8 @@ const ContohDelapanSVG = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C8b – Diagonal leaf in square 7 cm
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG8 = () => (
-  <svg viewBox="0 0 250 240" className="w-full max-w-xs mx-auto" aria-label="Diagonal leaf in square">
+const SoalSVG8 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 250 240" className="w-full max-w-xs mx-auto" aria-label={isId ? "Daun diagonal dalam persegi" : isEn ? "Diagonal leaf in square" : "正方形内の対角葉形"}>
     <defs>
       <style>{`
         @keyframes lf8b{0%,100%{opacity:.45;}50%{opacity:.78;}}
@@ -858,8 +858,8 @@ const SoalSVG9 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C10 – Circle r=10 cm, right-angle sector (90°) shaded
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG10 = () => (
-  <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" aria-label="Quarter sector of circle">
+const SoalSVG10 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 240 240" className="w-full max-w-xs mx-auto" aria-label={isId ? "Seperempat juring lingkaran" : isEn ? "Quarter sector of circle" : "四分の一扇形"}>
     <defs>
       <style>{`
         @keyframes sc10{0%,100%{opacity:.4;}50%{opacity:.72;}}
@@ -885,8 +885,8 @@ const SoalSVG10 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C11 – 4 daun bunga dalam persegi 14 cm (2×2 sub-squares)
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG11 = () => (
-  <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label="4 leaf petals in square">
+const SoalSVG11 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label={isId ? "4 kelopak bunga dalam persegi" : isEn ? "4 leaf petals in square" : "正方形内の4枚花びら"}>
     <defs>
       <style>{`
         @keyframes fl11{0%,100%{opacity:.45;}50%{opacity:.78;}}
@@ -921,8 +921,8 @@ const SoalSVG11 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C13 – Ice cream: semicircle + triangle
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG13 = () => (
-  <svg viewBox="0 -20 280 380" className="w-full max-w-xs mx-auto" aria-label="Ice cream shape: semicircle on top of triangle">
+const SoalSVG13 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 -20 280 380" className="w-full max-w-xs mx-auto" aria-label={isId ? "Bentuk es krim: setengah lingkaran di atas segitiga" : isEn ? "Ice cream shape: semicircle on top of triangle" : "アイスクリーム形：三角形の上の半円"}>
     <defs>
       <style>{`
         @keyframes ek13{0%,100%{opacity:.42;}50%{opacity:.72;}}
@@ -954,8 +954,8 @@ const SoalSVG13 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C14 – Trapezoid + quarter circle on left
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG14 = () => (
-  <svg viewBox="0 108 340 115" className="w-full mx-auto" style={{ maxWidth: "576px" }} aria-label="Trapezoid plus quarter circle on left">
+const SoalSVG14 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 108 340 115" className="w-full mx-auto" style={{ maxWidth: "576px" }} aria-label={isId ? "Trapesium dan seperempat lingkaran di kiri" : isEn ? "Trapezoid plus quarter circle on left" : "左に四分円を足した台形"}>
     <defs>
       <style>{`
         @keyframes sv14f{0%,100%{opacity:.42;}50%{opacity:.76;}}
@@ -990,8 +990,8 @@ const SoalSVG14 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C15 – Isosceles right triangle + quarter circle on hypotenuse
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG15 = () => (
-  <svg viewBox="0 0 210 220" className="w-full max-w-xs mx-auto" aria-label="Isosceles right triangle with quarter circle on hypotenuse">
+const SoalSVG15 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 210 220" className="w-full max-w-xs mx-auto" aria-label={isId ? "Segitiga siku-siku sama kaki dengan seperempat lingkaran pada hipotenusa" : isEn ? "Isosceles right triangle with quarter circle on hypotenuse" : "斜辺に四分円の直角二等辺三角形"}>
     <defs>
       <style>{`
         @keyframes sv15f{0%,100%{opacity:.42;}50%{opacity:.76;}}
@@ -1021,8 +1021,8 @@ const SoalSVG15 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C16 – Half-annulus R=14, r=7 cm
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG16 = () => (
-  <svg viewBox="0 0 320 200" className="w-full mx-auto" style={{ maxWidth: "480px" }} aria-label="Half-annulus R=14 r=7">
+const SoalSVG16 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 320 200" className="w-full mx-auto" style={{ maxWidth: "480px" }} aria-label={isId ? "Setengah cincin R=14 r=7" : isEn ? "Half-annulus R=14 r=7" : "半環 R=14 r=7"}>
     <defs>
       <style>{`
         @keyframes ha16{0%,100%{opacity:.42;}50%{opacity:.75;}}
@@ -1052,8 +1052,8 @@ const SoalSVG16 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C18 – Square 14 cm minus two quarter circles
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG18 = () => (
-  <svg viewBox="0 0 235 240" className="w-full max-w-xs mx-auto" aria-label="Square minus two quarter circles">
+const SoalSVG18 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 0 235 240" className="w-full max-w-xs mx-auto" aria-label={isId ? "Persegi dikurangi dua seperempat lingkaran" : isEn ? "Square minus two quarter circles" : "正方形から二つの四分円を引いた形"}>
     <defs>
       <style>{`
         @keyframes sv18f{0%,100%{opacity:.42;}50%{opacity:.74;}}
@@ -1101,8 +1101,8 @@ const SoalSVG18 = () => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C19 – Large semicircle (arch up) + small semicircle (arch down)
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG19 = () => (
-  <svg viewBox="0 55 255 165" className="w-full max-w-xs mx-auto" aria-label="Large semicircle up and small semicircle down">
+const SoalSVG19 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+  <svg viewBox="0 55 255 165" className="w-full max-w-xs mx-auto" aria-label={isId ? "Setengah lingkaran besar ke atas dan kecil ke bawah" : isEn ? "Large semicircle up and small semicircle down" : "大半円上・小半円下"}>
     <defs>
       <style>{`
         @keyframes sv19f{0%,100%{opacity:.42;}50%{opacity:.76;}}
@@ -1135,6 +1135,8 @@ const KaitanBangunDatarLainnyaPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+  const isId = language === 'id';
+  const isEn = language === 'en';
 
   const SectionHeader = ({
     icon, iconColor, title, accent,
@@ -1257,7 +1259,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k2Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
-              <SoalSVG1 />
+              <SoalSVG1 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k2Sol}</p>
                 <p className="font-body text-sm text-white/80">
@@ -1297,7 +1299,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k3Soal} <InlineMath math="(\pi = 3{,}14)"/>
                 </p>
               </div>
-              <SoalSVG5 />
+              <SoalSVG5 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k3Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k3Known}</strong>{t.k3KnownV}</p>
@@ -1335,7 +1337,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k4Soal} <InlineMath math="(\pi = 3{,}14)"/>
                 </p>
               </div>
-              <SoalSVG2 />
+              <SoalSVG2 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k4Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k4Known}</strong>{t.k4KnownV}</p>
@@ -1372,7 +1374,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k5Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
-              <ContohDelapanSVG />
+              <ContohDelapanSVG isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k5Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k5Known}</strong>{t.k5KnownV}</p>
@@ -1403,7 +1405,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k6Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
-              <SoalSVG7 />
+              <SoalSVG7 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k6Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k6Known}</strong>{t.k6KnownV}</p>
@@ -1440,7 +1442,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k7Soal} <InlineMath math="(\pi = 3{,}14)"/>
                 </p>
               </div>
-              <SoalSVG10 />
+              <SoalSVG10 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k7Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k7Known}</strong>{t.k7KnownV}</p>
@@ -1477,7 +1479,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k8Soal} <InlineMath math="(\pi = 3{,}14)"/>
                 </p>
               </div>
-              <SoalSVG13 />
+              <SoalSVG13 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k8Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k8Known}</strong>{t.k8KnownV}</p>
@@ -1517,7 +1519,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k9Soal} <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
-              <SoalSVG14 />
+              <SoalSVG14 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k9Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k9Known}</strong>{t.k9KnownV}</p>
@@ -1547,7 +1549,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k10Soal} <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
-              <SoalSVG15 />
+              <SoalSVG15 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k10Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k10Known}</strong>{t.k10KnownV}</p>
@@ -1581,7 +1583,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k11Soal} <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
-              <SoalSVG16 />
+              <SoalSVG16 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k11Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k11Known}</strong>{t.k11KnownV}</p>
@@ -1617,7 +1619,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k12Soal} <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
-              <SoalSVG18 />
+              <SoalSVG18 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k12Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k12Known}</strong>{t.k12KnownV}</p>
@@ -1647,7 +1649,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k13Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
-              <SoalSVG19 />
+              <SoalSVG19 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k13Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k13Known}</strong>{t.k13KnownV}</p>
@@ -1687,7 +1689,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k14Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
-              <SoalSVG8 />
+              <SoalSVG8 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k14Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k14Known}</strong>{t.k14KnownV}</p>
@@ -1723,7 +1725,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   {t.k15Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
-              <SoalSVG11 />
+              <SoalSVG11 isId={isId} isEn={isEn} />
               <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
                 <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k15Sol}</p>
                 <p className="font-body text-sm text-white/80"><strong>{t.k15Known}</strong>{t.k15KnownV}</p>
