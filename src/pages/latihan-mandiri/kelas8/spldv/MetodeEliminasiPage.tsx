@@ -57,13 +57,13 @@ const questions: Q[] = [
       { label: "c.", text: "Substitusikan kembali untuk mencari x." },
     ],
   }),
-  Qf(4, "Eliminasi — Koefisien Berbeda", {
+  Qf(4, "Eliminasi — Koefisien Negatif", {
     badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 4x + y = 14 \\\\ 2x + 3y = 16 \\end{cases}",
+    blockMath: "\\begin{cases} 4x - y = 10 \\\\ 2x + 3y = 12 \\end{cases}",
     parts: [
-      { label: "a.", text: "Kalikan persamaan kedua dengan 2." },
-      { label: "b.", text: "Eliminasi x, lalu cari y." },
-      { label: "c.", text: "Cari x dan verifikasi." },
+      { label: "a.", text: "Kalikan persamaan pertama dengan 3 agar koefisien y berlawanan." },
+      { label: "b.", text: "Jumlahkan kedua persamaan untuk menghilangkan y, lalu cari x." },
+      { label: "c.", text: "Substitusikan nilai x untuk mencari y, kemudian verifikasi." },
     ],
   }),
   Qf(5, "Eliminasi — Dua Kali Perkalian", {
@@ -84,16 +84,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan harga 1 kemeja dan 1 celana." },
     ],
   }),
-  Qf(7, "Soal Panjang dan Lebar", {
-    badge: "UN", type: "mixed",
-    content: "Keliling persegi panjang = 48 cm. Panjangnya dua kali lebarnya.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV (panjang = p, lebar = l)." },
-      { label: "b.", text: "Selesaikan dengan eliminasi." },
-      { label: "c.", text: "Tentukan luas persegi panjang." },
-    ],
-  }),
-  Qf(8, "Perkalian Berbeda — Eliminasi y", {
+  Qf(7, "Perkalian Berbeda — Eliminasi y", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} 2x + 3y = 20 \\\\ 5x + 4y = 35 \\end{cases}",
     parts: [
@@ -102,32 +93,12 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x, lalu y." },
     ],
   }),
-  Qf(9, "Soal Pembelian Alat Tulis", {
-    badge: "UN", type: "mixed",
-    content: "Reni membeli 4 penggaris dan 3 pena seharga Rp 28.000. Siti membeli 2 penggaris dan 5 pena seharga Rp 26.000.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan eliminasi." },
-      { label: "c.", text: "Berapa harga 1 penggaris dan 1 pena?" },
-    ],
-  }),
-  Qf(10, "Eliminasi — Pecahan", {
+  Qf(8, "Eliminasi — Pecahan", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 2 \\\\ \\frac{x}{3} - \\frac{y}{4} = 1 \\end{cases}",
     parts: [
       { label: "a.", text: "Kalikan persamaan pertama dengan 6 dan persamaan kedua dengan 12." },
       { label: "b.", text: "Selesaikan dengan eliminasi." },
-    ],
-  }),
-  Qf(11, "Rekap — {t('practice.multipleChoice')} UN", {
-    badge: "UN", type: "mixed",
-    content: "Penyelesaian dari SPLDV berikut menggunakan eliminasi adalah:",
-    blockMath: "\\begin{cases} 5x + 3y = 30 \\\\ 2x - y = 6 \\end{cases}",
-    parts: [
-      { label: "A.", math: "x=3,\\ y=5" },
-      { label: "B.", math: "x=6,\\ y=0" },
-      { label: "C.", math: "x=4,\\ y=\\frac{10}{3}" },
-      { label: "D.", math: "x=3,\\ y=\\frac{5}{3}" },
     ],
   }),
 ];
@@ -151,7 +122,7 @@ const MetodeEliminasiPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 11 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
