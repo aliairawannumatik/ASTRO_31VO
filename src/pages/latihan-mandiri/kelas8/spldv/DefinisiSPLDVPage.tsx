@@ -61,18 +61,7 @@ const questions: Q[] = [
       { label: "d.", math: "\\begin{cases} xy = 6 \\\\ x + y = 5 \\end{cases}" },
     ],
   }),
-  Q(3, "Mengubah ke Bentuk Standar", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c, dengan a, b, dan c berupa bilangan bulat:",
-    parts: [
-      { label: "a.", math: "y = 3x - 5" },
-      { label: "b.", math: "\\frac{x}{2} + \\frac{y}{3} = 1" },
-      { label: "c.", math: "2(x+1) = 3(y-2) + 4" },
-      { label: "d.", math: "0.5x - 1.5y = 6" },
-    ],
-  }),
-  Q(4, "Verifikasi Solusi", {
+  Q(3, "Verifikasi Solusi", {
     badge: "UN",
     type: "mixed",
     content: "Periksa apakah setiap pasangan berurutan berikut merupakan penyelesaian SPLDV:",
@@ -84,7 +73,7 @@ const questions: Q[] = [
       { label: "d.", math: "(5, -2)" },
     ],
   }),
-  Q(5, "Himpunan Penyelesaian — Identifikasi", {
+  Q(4, "Himpunan Penyelesaian — Identifikasi", {
     badge: "UN",
     type: "mixed",
     content: "Tanpa mencari solusinya, tentukan jenis penyelesaian (ada solusi, tidak ada solusi, atau tak hingga solusi) dari setiap SPLDV berikut. Untuk soal (d)–(g), gunakan cara melihat perbandingan koefisiennya:",
@@ -98,7 +87,7 @@ const questions: Q[] = [
       { label: "g.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
     ],
   }),
-  Q(6, "Soal UN Style", {
+  Q(5, "Soal UN Style", {
     badge: "UN",
     type: "mixed",
     content: "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:",
@@ -108,6 +97,17 @@ const questions: Q[] = [
       { label: "B.", math: "(5, 2)" },
       { label: "C.", math: "(4, 3)" },
       { label: "D.", math: "(3, 4)" },
+    ],
+  }),
+  Q(6, "Mengubah ke Bentuk Standar", {
+    badge: "ANBK",
+    type: "mixed",
+    content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c, dengan a, b, dan c berupa bilangan bulat:",
+    parts: [
+      { label: "a.", math: "y = 3x - 5" },
+      { label: "b.", math: "\\frac{x}{2} + \\frac{y}{3} = 1" },
+      { label: "c.", math: "2(x+1) = 3(y-2) + 4" },
+      { label: "d.", math: "0.5x - 1.5y = 6" },
     ],
   }),
   Q(7, "SPLDV dari Konteks", {
