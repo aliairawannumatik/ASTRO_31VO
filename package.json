@@ -8,12 +8,12 @@
     "*.scss"
   ],
   "scripts": {
-    "dev": "tsx watch server.ts & vite --port 5000",
-    "server": "tsx watch server.ts",
-    "build": "NODE_ENV=production vite build",
-    "build:dev": "vite build --mode development",
-    "build:analyze": "vite build --mode development",
-    "start": "NODE_ENV=production tsx server.ts",
+    "dev": "./node_modules/.bin/tsx watch server.ts & ./node_modules/.bin/vite --port 5000",
+    "server": "./node_modules/.bin/tsx watch server.ts",
+    "build": "NODE_ENV=production ./node_modules/.bin/vite build",
+    "build:dev": "./node_modules/.bin/vite build --mode development",
+    "build:analyze": "./node_modules/.bin/vite build --mode development",
+    "start": "NODE_ENV=production ./node_modules/.bin/tsx server.ts",
     "lint": "eslint .",
     "preview": "vite preview"
   },
