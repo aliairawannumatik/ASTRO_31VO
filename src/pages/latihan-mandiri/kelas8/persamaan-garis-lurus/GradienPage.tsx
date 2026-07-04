@@ -79,9 +79,16 @@ const MultiGridLineChart = ({
       {segs.map((s, i) => {
         const sx=s.x1*cell, sy=s.y1*cell, ex=s.x2*cell, ey=s.y2*cell;
         const mx=(sx+ex)/2, my=(sy+ey)/2;
+        const isVertical = sx === ex;
         const goingUp = ey < sy;
-        const lx = goingUp ? mx - 14 : mx + 14;
-        const ly = goingUp ? my - 10  : my + 12;
+        let lx: number, ly: number;
+        if (isVertical) {
+          lx = ex + 18;
+          ly = ey;
+        } else {
+          lx = goingUp ? mx - 14 : mx + 14;
+          ly = goingUp ? my - 10  : my + 12;
+        }
         return (
           <g key={i}>
             <line x1={sx} y1={sy} x2={ex} y2={ey} stroke={s.color} strokeWidth="2.8" strokeLinecap="round" />
@@ -119,13 +126,13 @@ const questions: Q[] = [
     type: "mixed",
     content: "Tentukan nilai gradien dari setiap ruas garis a, b, c, d, e, f, dan g yang digambarkan pada kertas berpetak berikut (setiap kotak = 1 satuan)!",
     multiGrid: [
-      { x1:1,  y1:6,  x2:3,  y2:2,  color:"#3b82f6", label:"a" },
-      { x1:7,  y1:5,  x2:11, y2:3,  color:"#10b981", label:"b" },
-      { x1:14, y1:6,  x2:17, y2:3,  color:"#06b6d4", label:"c" },
-      { x1:1,  y1:8,  x2:4,  y2:12, color:"#ec4899", label:"d" },
-      { x1:7,  y1:10, x2:14, y2:10, color:"#f59e0b", label:"e" },
-      { x1:16, y1:7,  x2:19, y2:11, color:"#f97316", label:"f" },
-      { x1:13, y1:1,  x2:13, y2:8,  color:"#8b5cf6", label:"g" },
+      { x1:13, y1:1,  x2:13, y2:8,  color:"#8b5cf6", label:"a" },
+      { x1:1,  y1:6,  x2:3,  y2:2,  color:"#3b82f6", label:"b" },
+      { x1:7,  y1:5,  x2:11, y2:3,  color:"#10b981", label:"c" },
+      { x1:14, y1:6,  x2:17, y2:3,  color:"#06b6d4", label:"d" },
+      { x1:16, y1:7,  x2:19, y2:11, color:"#f97316", label:"e" },
+      { x1:1,  y1:8,  x2:4,  y2:12, color:"#ec4899", label:"f" },
+      { x1:7,  y1:10, x2:14, y2:10, color:"#f59e0b", label:"g" },
     ],
     parts: [
       { label: "a.", math: "m_a = \\ldots" },
