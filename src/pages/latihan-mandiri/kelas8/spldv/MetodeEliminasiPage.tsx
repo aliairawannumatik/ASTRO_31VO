@@ -75,16 +75,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x." },
     ],
   }),
-  Qf(6, "Eliminasi — Penambahan", {
-    badge: "ANBK", type: "mixed",
-    blockMath: "\\begin{cases} 5x - 2y = 16 \\\\ 3x + 2y = 16 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Jumlahkan kedua persamaan untuk menghilangkan y." },
-      { label: "b.", text: "Tentukan x, lalu y." },
-      { label: "c.", text: "Verifikasi dengan mensubstitusi ke salah satu persamaan." },
-    ],
-  }),
-  Qf(7, "Soal UN — Harga Barang", {
+  Qf(6, "Soal UN — Harga Barang", {
     badge: "UN", type: "mixed",
     content: "Harga 2 kemeja dan 3 celana = Rp 340.000. Harga 3 kemeja dan 2 celana = Rp 360.000.",
     parts: [
@@ -93,23 +84,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan harga 1 kemeja dan 1 celana." },
     ],
   }),
-  Qf(8, "Eliminasi — Pengurangan", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} 4x + 9y = 37 \\\\ 4x + 3y = 19 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kurangkan persamaan kedua dari pertama." },
-      { label: "b.", text: "Tentukan y, lalu x." },
-    ],
-  }),
-  Qf(9, "Eliminasi Campuran Positif Negatif", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 7x - 3y = 4 \\\\ 7x + 2y = 14 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kurangkan persamaan pertama dari kedua." },
-      { label: "b.", text: "Tentukan y, lalu x." },
-    ],
-  }),
-  Qf(10, "Soal Panjang dan Lebar", {
+  Qf(7, "Soal Panjang dan Lebar", {
     badge: "UN", type: "mixed",
     content: "Keliling persegi panjang = 48 cm. Panjangnya dua kali lebarnya.",
     parts: [
@@ -118,7 +93,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan luas persegi panjang." },
     ],
   }),
-  Qf(11, "Perkalian Berbeda — Eliminasi y", {
+  Qf(8, "Perkalian Berbeda — Eliminasi y", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} 2x + 3y = 20 \\\\ 5x + 4y = 35 \\end{cases}",
     parts: [
@@ -127,7 +102,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x, lalu y." },
     ],
   }),
-  Qf(12, "Soal Pembelian Alat Tulis", {
+  Qf(9, "Soal Pembelian Alat Tulis", {
     badge: "UN", type: "mixed",
     content: "Reni membeli 4 penggaris dan 3 pena seharga Rp 28.000. Siti membeli 2 penggaris dan 5 pena seharga Rp 26.000.",
     parts: [
@@ -136,16 +111,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa harga 1 penggaris dan 1 pena?" },
     ],
   }),
-  Qf(13, "Eliminasi — Keduanya Negatif", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} -3x + y = -5 \\\\ -x + 2y = 0 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan persamaan pertama dengan 2." },
-      { label: "b.", text: "Kurangkan persamaan kedua dari hasilnya." },
-      { label: "c.", text: "Tentukan x dan y." },
-    ],
-  }),
-  Qf(14, "Eliminasi — Pecahan", {
+  Qf(10, "Eliminasi — Pecahan", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 2 \\\\ \\frac{x}{3} - \\frac{y}{4} = 1 \\end{cases}",
     parts: [
@@ -153,7 +119,7 @@ const questions: Q[] = [
       { label: "b.", text: "Selesaikan dengan eliminasi." },
     ],
   }),
-  Qf(15, "Rekap — {t('practice.multipleChoice')} UN", {
+  Qf(11, "Rekap — {t('practice.multipleChoice')} UN", {
     badge: "UN", type: "mixed",
     content: "Penyelesaian dari SPLDV berikut menggunakan eliminasi adalah:",
     blockMath: "\\begin{cases} 5x + 3y = 30 \\\\ 2x - y = 6 \\end{cases}",
@@ -185,7 +151,7 @@ const MetodeEliminasiPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 15 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 11 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
