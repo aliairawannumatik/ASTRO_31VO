@@ -80,21 +80,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(5, "Garis Melalui Titik Asal", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -5, y1: -5, x2: 5, y2: 5, color: "#f87171", label: "y=x" }],
-      pts: [{ x: 0, y: 0, label: "O", color: "#f87171", labelPos: "br" }],
-    },
-    parts: [
-      { label: "a.", math: "\\text{Lengkapi tabel: } x \\in \\{-3, -1, 0, 2, 4\\} \\text{ untuk } y = x." },
-      { label: "b.", text: "Garis y = x memotong sumbu mana saja? Di titik berapa?" },
-      { label: "c.", math: "\\text{Apakah titik }(−5,\\ −5)\\text{ terletak pada garis } y = x?" },
-    ],
-  }),
-
-  Q(6, "Titik Potong Dua Sumbu", {
+  Q(5, "Titik Potong Dua Sumbu", {
     type: "mixed",
     content: "Tentukan titik potong setiap garis dengan sumbu-x dan sumbu-y:",
     parts: [
@@ -105,128 +91,13 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Grafik Persamaan Umum ax + by = c", {
+  Q(6, "Grafik Persamaan Umum ax + by = c", {
     type: "mixed",
     content: "Gambar grafik persamaan garis berikut menggunakan dua titik:",
     parts: [
       { label: "a.", math: "3x + 2y = 12" },
       { label: "b.", math: "x - 4y = 8" },
       { label: "c.", math: "5x + y = 10" },
-    ],
-  }),
-
-  Q(8, "Grafik y = −x", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -5, y1: 5, x2: 5, y2: -5, color: "#a78bfa", label: "y=−x" }],
-      pts: [{ x: 0, y: 0, label: "O", color: "#a78bfa", labelPos: "br" }],
-    },
-    parts: [
-      { label: "a.", text: "Di mana garis y = −x memotong sumbu-x dan sumbu-y?" },
-      { label: "b.", math: "\\text{Apakah } (3,\\ −3) \\text{ berada pada garis } y = -x?" },
-      { label: "c.", text: "Bandingkan garis y = x dan y = −x. Apa perbedaannya?" },
-    ],
-  }),
-
-  Q(9, "Titik pada Garis / Tidak pada Garis", {
-    type: "mixed",
-    content: "Tentukan apakah titik-titik berikut terletak pada garis y = 3x − 5:",
-    parts: [
-      { label: "a.", math: "A(2,\\ 1)" },
-      { label: "b.", math: "B(3,\\ 4)" },
-      { label: "c.", math: "C(0,\\ -5)" },
-      { label: "d.", math: "D(-1,\\ -7)" },
-      { label: "e.", math: "E(5,\\ 10)" },
-    ],
-  }),
-
-  Q(10, "Dua Grafik Garis Berpotongan", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: -4, y1: -2, x2: 4, y2: 6, color: "#f472b6", label: "y=x+2" },
-        { x1: -3, y1: 6, x2: 5, y2: -2, color: "#60a5fa", label: "y=−x+3" },
-      ],
-      pts: [{ x: 0.5, y: 2.5, label: "P", color: "#facc15", labelPos: "tr" }],
-    },
-    parts: [
-      { label: "a.", text: "Baca koordinat titik potong P dari grafik." },
-      { label: "b.", text: "Verifikasi koordinat P secara aljabar." },
-      { label: "c.", text: "Mana garis yang lebih curam? Jelaskan!" },
-    ],
-  }),
-
-  Q(11, "Mana yang Garis Lurus?", {
-    type: "mixed",
-    content: "Tentukan mana dari persamaan berikut yang membentuk garis lurus:",
-    parts: [
-      { label: "a.", math: "y = 3x^2 + 1" },
-      { label: "b.", math: "y = 5x - 7" },
-      { label: "c.", math: "2x + 3y = 9" },
-      { label: "d.", math: "y = \\frac{4}{x}" },
-      { label: "e.", math: "x + y = 10" },
-    ],
-  }),
-
-  Q(12, "Grafik 4x − y = 8", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 2, y: 0, label: "(2,0)", color: "#fb923c", labelPos: "top" },
-        { x: 0, y: -8, label: "(0,−8)", color: "#fb923c", labelPos: "tr" },
-      ],
-      segs: [{ x1: 0.5, y1: -6, x2: 3.5, y2: 6, color: "#fb923c", label: "4x−y=8" }],
-    },
-    parts: [
-      { label: "a.", text: "Ubah ke bentuk y = mx + c." },
-      { label: "b.", text: "Tentukan titik potong dengan sumbu-x dan sumbu-y." },
-      { label: "c.", text: "Gambarkan garis dan tandai titik-titik penting." },
-    ],
-  }),
-
-  Q(13, "ANBK — Memilih Grafik yang Tepat", {
-    type: "mixed",
-    content: "Persamaan garis: y = 2x − 6. Manakah pernyataan yang BENAR?",
-    parts: [
-      { label: "(1)", text: "Garis memotong sumbu-x di titik (3, 0)." },
-      { label: "(2)", text: "Garis memotong sumbu-y di titik (0, −6)." },
-      { label: "(3)", text: "Titik (4, 2) terletak pada garis ini." },
-      { label: "(4)", text: "Garis bergerak turun dari kiri ke kanan." },
-    ],
-  }),
-
-  Q(14, "Mencocokkan Garis dengan Persamaan", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 5,
-      segs: [
-        { x1: -4, y1: -4, x2: 4, y2: 4, color: "#f472b6", label: "A" },
-        { x1: -4, y1: 4, x2: 4, y2: -4, color: "#60a5fa", label: "B" },
-        { x1: -4, y1: 2, x2: 4, y2: 2, color: "#facc15", label: "C" },
-        { x1: -2, y1: -4, x2: -2, y2: 4, color: "#34d399", label: "D" },
-      ],
-    },
-    parts: [
-      { label: "Pasangkan:", text: "Garis A, B, C, D dengan persamaan: y = x, y = −x, y = 2, x = −2" },
-      { label: "a.", text: "Persamaan garis A adalah ..." },
-      { label: "b.", text: "Persamaan garis B adalah ..." },
-      { label: "c.", text: "Persamaan garis C adalah ..." },
-      { label: "d.", text: "Persamaan garis D adalah ..." },
-    ],
-  }),
-
-  Q(15, "TKA — Koordinat Berdasarkan Persamaan", {
-    type: "mixed",
-    content: "Garis y = −2x + 5 melalui titik-titik berikut. Tentukan nilai yang belum diketahui:",
-    parts: [
-      { label: "a.", math: "A(0,\\ ?)" },
-      { label: "b.", math: "B(?,\\ 0)" },
-      { label: "c.", math: "C(3,\\ ?)" },
-      { label: "d.", math: "D(?,\\ 9)" },
-      { label: "e.", math: "E(-1,\\ ?)" },
     ],
   }),
 ];
