@@ -108,27 +108,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan kedua bilangan tersebut." },
     ],
   }),
-  Q(8, "Koefisien Pecahan", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} \\frac{x}{2} + y = 5 \\\\ x - 2y = 2 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan x dari persamaan kedua." },
-      { label: "b.", text: "Substitusikan ke persamaan pertama." },
-      { label: "c.", text: "Tentukan HP." },
-    ],
-  }),
-  Q(9, "Substitusi dari Persamaan Kompleks", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} 2x + y = 14 \\\\ 3x - 2y = 9 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan y dari persamaan pertama (y = ...)." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua." },
-      { label: "c.", text: "Tentukan x dan y." },
-    ],
-  }),
-  Q(10, "Soal Usia", {
+  Q(8, "Soal Usia", {
     badge: "UN",
     type: "mixed",
     content: "Umur Ayah 28 tahun lebih tua dari umur Anak. Tiga tahun lagi, umur Ayah dua kali umur Anak.",
@@ -138,7 +118,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan umur Ayah dan Anak sekarang." },
     ],
   }),
-  Q(11, "Soal Harga Barang", {
+  Q(9, "Soal Harga Barang", {
     badge: "UN",
     type: "mixed",
     content: "Harga 3 buku dan 4 pensil = Rp 29.000. Harga 1 buku dan 2 pensil = Rp 11.000.",
@@ -148,36 +128,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa harga 5 buku dan 3 pensil?" },
     ],
   }),
-  Q(12, "Soal Tiket Masuk", {
-    badge: "UN",
-    type: "mixed",
-    content: "Harga tiket dewasa = Rp 15.000 dan tiket anak = Rp 8.000. Sekelompok orang membeli 12 tiket seharga Rp 120.000.",
-    parts: [
-      { label: "a.", text: "Misal banyak tiket dewasa = x dan anak = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Berapa tiket dewasa dan anak yang dibeli?" },
-    ],
-  }),
-  Q(13, "Soal Campuran — Berat", {
-    badge: "AKM",
-    type: "mixed",
-    content: "1 kg apel dan 2 kg jeruk beratnya 2,5 kg. 3 kg apel dan 1 kg jeruk beratnya 4 kg.",
-    parts: [
-      { label: "a.", text: "Misal berat 1 kg apel = x dan 1 kg jeruk = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-      { label: "c.", text: "Berapa berat 2 kg apel dan 3 kg jeruk?" },
-    ],
-  }),
-  Q(14, "Soal Perbandingan Usia", {
-    badge: "UN",
-    type: "mixed",
-    content: "Lima tahun yang lalu, umur ibu dua kali umur putrinya. Sekarang, jumlah umur mereka adalah 55 tahun.",
-    parts: [
-      { label: "a.", text: "Misal umur ibu sekarang = x dan putri = y. Susun SPLDV." },
-      { label: "b.", text: "Selesaikan dengan substitusi." },
-    ],
-  }),
-  Q(15, "Soal Makanan — ANBK", {
+  Q(10, "Soal Makanan — ANBK", {
     badge: "ANBK",
     type: "mixed",
     content: "Di kantin, 2 porsi nasi goreng dan 1 minuman = Rp 25.000. 1 porsi nasi goreng dan 3 minuman = Rp 23.000.",
@@ -185,27 +136,6 @@ const questions: Q[] = [
       { label: "a.", text: "Tuliskan SPLDV." },
       { label: "b.", text: "Selesaikan dengan metode substitusi." },
       { label: "c.", text: "Berapa harga nasi goreng dan minuman masing-masing?" },
-    ],
-  }),
-  Q(16, "Substitusi — Hasil Negatif", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} x - 3y = -8 \\\\ 2x + y = 1 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan x dari persamaan pertama." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua." },
-      { label: "c.", text: "Tentukan x dan y (mungkin bernilai negatif)." },
-    ],
-  }),
-  Q(17, "ANBK — Pernyataan Benar/Salah", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang metode substitusi:",
-    parts: [
-      { label: "(1)", text: "Pada metode substitusi, salah satu variabel dinyatakan dalam variabel lainnya dari salah satu persamaan." },
-      { label: "(2)", text: "Hasil substitusi selalu menghasilkan persamaan satu variabel." },
-      { label: "(3)", text: "Metode substitusi hanya berlaku jika koefisien variabelnya adalah 1." },
-      { label: "(4)", text: "Setelah mendapat satu variabel, variabel lainnya diperoleh dengan mensubstitusikan kembali." },
     ],
   }),
 ];
@@ -229,7 +159,7 @@ const MetodeSubstitusiPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 17 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 10 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
