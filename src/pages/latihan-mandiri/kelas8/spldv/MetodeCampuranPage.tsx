@@ -48,41 +48,16 @@ const questions: Q[] = [
       { label: "b.", text: "Substitusikan nilai x ke pers. kedua untuk cari y." },
     ],
   }),
-  Qf(3, "Campuran — Koefisien Negatif", {
-    badge: "ANBK", type: "mixed",
-    blockMath: "\\begin{cases} 2x - 5y = -3 \\\\ 3x + y = 14 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Eliminasi y: kalikan pers. kedua × 5, lalu jumlahkan." },
-      { label: "b.", text: "Substitusikan x ke pers. kedua untuk cari y." },
-    ],
-  }),
-  Qf(4, "Soal Harga — UN Klasik", {
-    badge: "UN", type: "mixed",
-    content: "Harga 4 apel dan 5 mangga = Rp 47.000. Harga 2 apel dan 3 mangga = Rp 27.000.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV (apel = x, mangga = y)." },
-      { label: "b.", text: "Selesaikan dengan metode campuran." },
-      { label: "c.", text: "Berapa harga 1 apel dan 1 mangga?" },
-    ],
-  }),
-  Qf(5, "Campuran — Tiga Langkah", {
+  Qf(3, "Pecahan — Campuran", {
     badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} 6x - y = 20 \\\\ x + 2y = 10 \\end{cases}",
+    blockMath: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 4 \\\\ \\frac{x}{4} + \\frac{y}{2} = 3 \\end{cases}",
     parts: [
-      { label: "a.", text: "Nyatakan y dari pers. pertama: y = 6x − 20 (substitusi)." },
-      { label: "b.", text: "Substitusikan ke pers. kedua." },
-      { label: "c.", text: "Tentukan x, lalu y. Verifikasi." },
+      { label: "a.", text: "Kalikan pers. pertama dengan 6 dan pers. kedua dengan 4 untuk menghilangkan penyebut." },
+      { label: "b.", text: "Eliminasi y: kurangkan pers. kedua dari pertama untuk mencari x." },
+      { label: "c.", text: "Substitusikan x untuk mencari y, kemudian verifikasi." },
     ],
   }),
-  Qf(6, "Pecahan — Campuran", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} \\frac{x}{2} + y = 7 \\\\ 2x - 3y = 4 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Nyatakan x dari pers. pertama: x = 2(7 − y) = 14 − 2y." },
-      { label: "b.", text: "Substitusikan ke pers. kedua dan selesaikan." },
-    ],
-  }),
-  Qf(7, "Campuran — Soal Campuran Kontekstual", {
+  Qf(4, "Campuran — Soal Campuran Kontekstual", {
     badge: "AKM", type: "mixed",
     content: "Sebuah parkiran menampung sepeda motor dan mobil. Jumlah kendaraan = 50. Jumlah roda = 136. (Motor = 2 roda, Mobil = 4 roda)",
     parts: [
@@ -91,24 +66,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa jumlah motor dan mobil?" },
     ],
   }),
-  Qf(8, "Campuran — Hasil Negatif", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} x - 4y = -10 \\\\ 3x + 2y = 2 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Eliminasi y (kalikan pers. pertama × 2, pinjam tanda)." },
-      { label: "b.", text: "Tentukan x, lalu substitusikan untuk cari y." },
-    ],
-  }),
-  Qf(9, "Langkah Eliminasi Pilihan", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 4x + 3y = 23 \\\\ 5x - 6y = 1 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan pers. pertama × 2 agar koefisien y berlawanan." },
-      { label: "b.", text: "Jumlahkan dengan pers. kedua untuk hilangkan y." },
-      { label: "c.", text: "Substitusikan x untuk cari y." },
-    ],
-  }),
-  Qf(10, "Soal Beli Online", {
+  Qf(5, "Soal Beli Online", {
     badge: "AKM", type: "mixed",
     content: "Hani membeli 3 buku A dan 2 buku B seharga Rp 78.000. Dani membeli 1 buku A dan 4 buku B seharga Rp 74.000.",
     parts: [
@@ -117,16 +75,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa harga masing-masing buku?" },
     ],
   }),
-  Qf(11, "Campuran — Soal Standar UN", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 8x + 3y = 40 \\\\ 4x - y = 12 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Eliminasi y (kalikan pers. kedua × 3, jumlahkan)." },
-      { label: "b.", text: "Tentukan x." },
-      { label: "c.", text: "Substitusikan untuk cari y." },
-    ],
-  }),
-  Qf(12, "Campuran — Hasil HP", {
+  Qf(6, "Campuran — Hasil HP", {
     badge: "ANBK", type: "mixed",
     blockMath: "\\begin{cases} 5x - 3y = 7 \\\\ 2x + 5y = 19 \\end{cases}",
     parts: [
@@ -135,7 +84,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x dan y." },
     ],
   }),
-  Qf(13, "Campuran — Soal Panjang", {
+  Qf(7, "Campuran — Soal Panjang", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} 11x + 7y = 68 \\\\ 3x - 5y = -6 \\end{cases}",
     parts: [
@@ -144,7 +93,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x, lalu y." },
     ],
   }),
-  Qf(14, "Campuran — Ubah Persamaan", {
+  Qf(8, "Campuran — Ubah Persamaan", {
     badge: "ANBK", type: "mixed",
     blockMath: "\\begin{cases} 2(x+y) = 3x + 4 \\\\ 3x - 2y = 6 \\end{cases}",
     parts: [
@@ -173,7 +122,7 @@ const MetodeCampuranPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 14 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
