@@ -111,7 +111,7 @@ const questions: Q[] = [
   Q(7, "Mengubah ke Bentuk Standar", {
     badge: "ANBK",
     type: "mixed",
-    content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c:",
+    content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c, dengan a, b, dan c berupa bilangan bulat:",
     parts: [
       { label: "a.", math: "y = 3x - 5" },
       { label: "b.", math: "\\frac{x}{2} + \\frac{y}{3} = 1" },
