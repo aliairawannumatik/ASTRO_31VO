@@ -73,7 +73,19 @@ const questions: Q[] = [
       { label: "d.", math: "(5, -2)" },
     ],
   }),
-  Q(4, "Himpunan Penyelesaian — Identifikasi", {
+  Q(4, "Soal UN Style", {
+    badge: "UN",
+    type: "mixed",
+    content: "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:",
+    blockMath: "\\begin{cases} 2x + 3y = 16 \\\\ x - y = 1 \\end{cases}",
+    parts: [
+      { label: "A.", math: "(1, 4)" },
+      { label: "B.", math: "(5, 2)" },
+      { label: "C.", math: "(4, 3)" },
+      { label: "D.", math: "(3, 4)" },
+    ],
+  }),
+  Q(5, "Himpunan Penyelesaian — Identifikasi", {
     badge: "UN",
     type: "mixed",
     content: "Tanpa mencari solusinya, tentukan jenis penyelesaian (ada solusi, tidak ada solusi, atau tak hingga solusi) dari setiap SPLDV berikut. Untuk soal (d)–(g), gunakan cara melihat perbandingan koefisiennya:",
@@ -85,18 +97,6 @@ const questions: Q[] = [
       { label: "e.", math: "\\begin{cases} 3x - y = 4 \\\\ x + 2y = 5 \\end{cases}" },
       { label: "f.", math: "\\begin{cases} 2x + 6y = 10 \\\\ x + 3y = 8 \\end{cases}" },
       { label: "g.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
-    ],
-  }),
-  Q(5, "Soal UN Style", {
-    badge: "UN",
-    type: "mixed",
-    content: "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:",
-    blockMath: "\\begin{cases} 2x + 3y = 16 \\\\ x - y = 1 \\end{cases}",
-    parts: [
-      { label: "A.", math: "(1, 4)" },
-      { label: "B.", math: "(5, 2)" },
-      { label: "C.", math: "(4, 3)" },
-      { label: "D.", math: "(3, 4)" },
     ],
   }),
   Q(6, "Mengubah ke Bentuk Standar", {
