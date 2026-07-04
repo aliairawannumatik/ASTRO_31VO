@@ -40,25 +40,7 @@ const questions: Q[] = [
       { label: "Langkah 3:", text: "Tulis HP dan verifikasi." },
     ],
   }),
-  Qf(2, "Campuran — Eliminasi dulu", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} x + 3y = 10 \\\\ 4x - y = 15 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Eliminasi x (kalikan pers. pertama × 4, lalu kurangkan)." },
-      { label: "b.", text: "Dari nilai y, substitusikan ke pers. pertama untuk cari x." },
-      { label: "c.", text: "Verifikasi di pers. kedua." },
-    ],
-  }),
-  Qf(3, "Soal Bilangan — Metode Campuran", {
-    badge: "UN", type: "mixed",
-    content: "Jumlah dua bilangan adalah 45. Dua kali bilangan pertama dikurangi bilangan kedua sama dengan 30.",
-    parts: [
-      { label: "a.", text: "Misal bilangan pertama = x dan kedua = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan metode campuran." },
-      { label: "c.", text: "Tentukan kedua bilangan." },
-    ],
-  }),
-  Qf(4, "Koefisien Besar — Campuran", {
+  Qf(2, "Koefisien Besar — Campuran", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} 7x + 4y = 41 \\\\ 3x - 2y = 7 \\end{cases}",
     parts: [
@@ -66,7 +48,7 @@ const questions: Q[] = [
       { label: "b.", text: "Substitusikan nilai x ke pers. kedua untuk cari y." },
     ],
   }),
-  Qf(5, "Campuran — Koefisien Negatif", {
+  Qf(3, "Campuran — Koefisien Negatif", {
     badge: "ANBK", type: "mixed",
     blockMath: "\\begin{cases} 2x - 5y = -3 \\\\ 3x + y = 14 \\end{cases}",
     parts: [
@@ -74,7 +56,7 @@ const questions: Q[] = [
       { label: "b.", text: "Substitusikan x ke pers. kedua untuk cari y." },
     ],
   }),
-  Qf(6, "Soal Harga — UN Klasik", {
+  Qf(4, "Soal Harga — UN Klasik", {
     badge: "UN", type: "mixed",
     content: "Harga 4 apel dan 5 mangga = Rp 47.000. Harga 2 apel dan 3 mangga = Rp 27.000.",
     parts: [
@@ -83,7 +65,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa harga 1 apel dan 1 mangga?" },
     ],
   }),
-  Qf(7, "Campuran — Tiga Langkah", {
+  Qf(5, "Campuran — Tiga Langkah", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} 6x - y = 20 \\\\ x + 2y = 10 \\end{cases}",
     parts: [
@@ -92,7 +74,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x, lalu y. Verifikasi." },
     ],
   }),
-  Qf(8, "Pecahan — Campuran", {
+  Qf(6, "Pecahan — Campuran", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} \\frac{x}{2} + y = 7 \\\\ 2x - 3y = 4 \\end{cases}",
     parts: [
@@ -100,7 +82,7 @@ const questions: Q[] = [
       { label: "b.", text: "Substitusikan ke pers. kedua dan selesaikan." },
     ],
   }),
-  Qf(9, "Campuran — Soal Campuran Kontekstual", {
+  Qf(7, "Campuran — Soal Campuran Kontekstual", {
     badge: "AKM", type: "mixed",
     content: "Sebuah parkiran menampung sepeda motor dan mobil. Jumlah kendaraan = 50. Jumlah roda = 136. (Motor = 2 roda, Mobil = 4 roda)",
     parts: [
@@ -109,7 +91,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa jumlah motor dan mobil?" },
     ],
   }),
-  Qf(10, "Campuran — Hasil Negatif", {
+  Qf(8, "Campuran — Hasil Negatif", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} x - 4y = -10 \\\\ 3x + 2y = 2 \\end{cases}",
     parts: [
@@ -117,7 +99,7 @@ const questions: Q[] = [
       { label: "b.", text: "Tentukan x, lalu substitusikan untuk cari y." },
     ],
   }),
-  Qf(11, "Langkah Eliminasi Pilihan", {
+  Qf(9, "Langkah Eliminasi Pilihan", {
     badge: "UN", type: "mixed",
     blockMath: "\\begin{cases} 4x + 3y = 23 \\\\ 5x - 6y = 1 \\end{cases}",
     parts: [
@@ -126,7 +108,7 @@ const questions: Q[] = [
       { label: "c.", text: "Substitusikan x untuk cari y." },
     ],
   }),
-  Qf(12, "Soal Beli Online", {
+  Qf(10, "Soal Beli Online", {
     badge: "AKM", type: "mixed",
     content: "Hani membeli 3 buku A dan 2 buku B seharga Rp 78.000. Dani membeli 1 buku A dan 4 buku B seharga Rp 74.000.",
     parts: [
@@ -135,7 +117,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa harga masing-masing buku?" },
     ],
   }),
-  Qf(13, "Campuran — Soal Standar UN", {
+  Qf(11, "Campuran — Soal Standar UN", {
     badge: "UN", type: "mixed",
     blockMath: "\\begin{cases} 8x + 3y = 40 \\\\ 4x - y = 12 \\end{cases}",
     parts: [
@@ -144,7 +126,7 @@ const questions: Q[] = [
       { label: "c.", text: "Substitusikan untuk cari y." },
     ],
   }),
-  Qf(14, "Campuran — Hasil HP", {
+  Qf(12, "Campuran — Hasil HP", {
     badge: "ANBK", type: "mixed",
     blockMath: "\\begin{cases} 5x - 3y = 7 \\\\ 2x + 5y = 19 \\end{cases}",
     parts: [
@@ -153,27 +135,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x dan y." },
     ],
   }),
-  Qf(15, "Rekap — Metode Campuran vs Lainnya", {
-    badge: "AKM", type: "mixed",
-    content: "Jelaskan keunggulan metode campuran dibanding metode grafik, substitusi, atau eliminasi saja:",
-    parts: [
-      { label: "a.", text: "Kapan metode campuran lebih efisien dari substitusi saja?" },
-      { label: "b.", text: "Kapan metode campuran lebih efisien dari eliminasi saja?" },
-      { label: "c.", text: "Berikan contoh SPLDV yang paling mudah diselesaikan dengan campuran." },
-    ],
-  }),
-  Qf(16, "Soal {t('practice.multipleChoice')} — UN", {
-    badge: "UN", type: "mixed",
-    content: "Penyelesaian dari SPLDV dengan campuran:",
-    blockMath: "\\begin{cases} 4x + y = 14 \\\\ 2x - 3y = 0 \\end{cases}",
-    parts: [
-      { label: "A.", math: "(3,\\ 2)" },
-      { label: "B.", math: "(2,\\ 6)" },
-      { label: "C.", math: "(3,\\ 2)" },
-      { label: "D.", math: "(4,\\ -2)" },
-    ],
-  }),
-  Qf(17, "Campuran — Soal Panjang", {
+  Qf(13, "Campuran — Soal Panjang", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} 11x + 7y = 68 \\\\ 3x - 5y = -6 \\end{cases}",
     parts: [
@@ -182,22 +144,12 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x, lalu y." },
     ],
   }),
-  Qf(18, "Campuran — Ubah Persamaan", {
+  Qf(14, "Campuran — Ubah Persamaan", {
     badge: "ANBK", type: "mixed",
     blockMath: "\\begin{cases} 2(x+y) = 3x + 4 \\\\ 3x - 2y = 6 \\end{cases}",
     parts: [
       { label: "a.", text: "Sederhanakan persamaan pertama terlebih dahulu." },
       { label: "b.", text: "Selesaikan SPLDV yang sudah disederhanakan dengan campuran." },
-    ],
-  }),
-  Qf(19, "ANBK — Pernyataan B/S", {
-    badge: "ANBK", type: "mixed",
-    content: "Tentukan BENAR (B) atau SALAH (S):",
-    parts: [
-      { label: "(1)", text: "Metode campuran menggunakan eliminasi untuk mendapat nilai satu variabel, lalu substitusi untuk variabel lainnya." },
-      { label: "(2)", text: "Metode campuran selalu lebih cepat dari eliminasi murni." },
-      { label: "(3)", text: "Dalam metode campuran, urutan (eliminasi dulu atau substitusi dulu) tidak mempengaruhi hasil." },
-      { label: "(4)", text: "Metode campuran tidak bisa digunakan jika koefisiennya pecahan." },
     ],
   }),
 ];
@@ -221,7 +173,7 @@ const MetodeCampuranPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 19 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 14 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
