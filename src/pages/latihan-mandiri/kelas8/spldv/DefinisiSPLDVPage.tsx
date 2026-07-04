@@ -61,7 +61,18 @@ const questions: Q[] = [
       { label: "d.", math: "\\begin{cases} xy = 6 \\\\ x + y = 5 \\end{cases}" },
     ],
   }),
-  Q(3, "Penyelesaian SPLDV", {
+  Q(3, "Mengubah ke Bentuk Standar", {
+    badge: "ANBK",
+    type: "mixed",
+    content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c, dengan a, b, dan c berupa bilangan bulat:",
+    parts: [
+      { label: "a.", math: "y = 3x - 5" },
+      { label: "b.", math: "\\frac{x}{2} + \\frac{y}{3} = 1" },
+      { label: "c.", math: "2(x+1) = 3(y-2) + 4" },
+      { label: "d.", math: "0.5x - 1.5y = 6" },
+    ],
+  }),
+  Q(4, "Penyelesaian SPLDV", {
     badge: "ANBK",
     type: "mixed",
     content: "Diketahui SPLDV:",
@@ -72,7 +83,7 @@ const questions: Q[] = [
       { label: "c.", text: "Ada berapa penyelesaian SPLDV pada umumnya?" },
     ],
   }),
-  Q(4, "Verifikasi Solusi", {
+  Q(5, "Verifikasi Solusi", {
     badge: "UN",
     type: "mixed",
     content: "Periksa apakah setiap pasangan berurutan berikut merupakan penyelesaian SPLDV:",
@@ -84,7 +95,7 @@ const questions: Q[] = [
       { label: "d.", math: "(5, -2)" },
     ],
   }),
-  Q(5, "Himpunan Penyelesaian — Identifikasi", {
+  Q(6, "Himpunan Penyelesaian — Identifikasi", {
     badge: "UN",
     type: "mixed",
     content: "Tanpa mencari solusinya, tentukan jenis penyelesaian (ada solusi, tidak ada solusi, atau tak hingga solusi) dari setiap SPLDV berikut. Untuk soal (d)–(g), gunakan cara melihat perbandingan koefisiennya:",
@@ -96,17 +107,6 @@ const questions: Q[] = [
       { label: "e.", math: "\\begin{cases} 3x - y = 4 \\\\ x + 2y = 5 \\end{cases}" },
       { label: "f.", math: "\\begin{cases} 2x + 6y = 10 \\\\ x + 3y = 8 \\end{cases}" },
       { label: "g.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
-    ],
-  }),
-  Q(6, "Mengubah ke Bentuk Standar", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c, dengan a, b, dan c berupa bilangan bulat:",
-    parts: [
-      { label: "a.", math: "y = 3x - 5" },
-      { label: "b.", math: "\\frac{x}{2} + \\frac{y}{3} = 1" },
-      { label: "c.", math: "2(x+1) = 3(y-2) + 4" },
-      { label: "d.", math: "0.5x - 1.5y = 6" },
     ],
   }),
   Q(7, "Penyelesaian Tunggal", {
