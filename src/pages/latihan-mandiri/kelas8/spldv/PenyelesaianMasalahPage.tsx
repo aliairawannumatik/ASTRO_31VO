@@ -84,16 +84,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa lembar uang Rp 50.000 dan Rp 100.000?" },
     ],
   }),
-  Qf(7, "Soal Nilai Ujian Berbobot", {
-    badge: "ANBK", type: "mixed",
-    content: "Nilai ujian Rina: teori = x dan praktik = y. Nilai akhir = 40% teori + 60% praktik = 82. Nilai teori = nilai praktik + 8.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Tentukan nilai teori dan praktik Rina." },
-    ],
-  }),
-  Qf(8, "Soal Ujian Sekolah", {
+  Qf(7, "Soal Ujian Sekolah", {
     badge: "ANBK", type: "mixed",
     content: "Skor benar = 5 dan skor salah = −2. Dino mengerjakan 50 soal. Skor total Dino = 162.",
     parts: [
@@ -102,7 +93,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa soal yang dijawab benar dan salah?" },
     ],
   }),
-  Qf(9, "Soal Pariwisata — ANBK", {
+  Qf(8, "Soal Pariwisata — ANBK", {
     badge: "ANBK", type: "mixed",
     content: "Tiket masuk museum: dewasa Rp 25.000 dan pelajar Rp 15.000. Pada Sabtu terjual 250 tiket dengan total Rp 5.250.000.",
     parts: [
@@ -132,7 +123,7 @@ const PenyelesaianMasalahPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 9 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
