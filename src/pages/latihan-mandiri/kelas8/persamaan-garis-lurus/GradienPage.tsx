@@ -64,7 +64,11 @@ const MultiGridLineChart = ({
 }: { segs: MLSeg[]; cols?: number; rows?: number; cell?: number }) => {
   const W = cols * cell, H = rows * cell;
   return (
-    <svg width={W} height={H} style={{ border:"1.5px solid #e2e8f0", borderRadius:12, display:"block" }}>
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      preserveAspectRatio="xMidYMid meet"
+      style={{ border:"1.5px solid #e2e8f0", borderRadius:12, display:"block", width:"100%", height:"auto", maxWidth: W }}
+    >
       <rect width={W} height={H} fill="white" rx="10" />
       {Array.from({ length: cols + 1 }, (_, i) => (
         <line key={`v${i}`} x1={i*cell} y1={0} x2={i*cell} y2={H} stroke="#e2e8f0" strokeWidth="1" />
@@ -113,7 +117,7 @@ const questions: Q[] = [
   /* ── 4 soal baru: baca gradien dari grid kotak-kotak ─── */
   Q(1, "Gradien dari Kertas Berpetak", {
     type: "mixed",
-    content: "Tentukan nilai gradien dari setiap ruas garis a, b, c, d, e, dan f yang digambarkan pada kertas berpetak berikut (setiap kotak = 1 satuan)!",
+    content: "Tentukan nilai gradien dari setiap ruas garis a, b, c, d, e, f, dan g yang digambarkan pada kertas berpetak berikut (setiap kotak = 1 satuan)!",
     multiGrid: [
       { x1:1,  y1:6,  x2:3,  y2:2,  color:"#3b82f6", label:"a" },
       { x1:7,  y1:5,  x2:11, y2:3,  color:"#10b981", label:"b" },
@@ -121,6 +125,7 @@ const questions: Q[] = [
       { x1:1,  y1:8,  x2:4,  y2:12, color:"#ec4899", label:"d" },
       { x1:7,  y1:10, x2:14, y2:10, color:"#f59e0b", label:"e" },
       { x1:16, y1:7,  x2:19, y2:11, color:"#f97316", label:"f" },
+      { x1:13, y1:1,  x2:13, y2:8,  color:"#8b5cf6", label:"g" },
     ],
     parts: [
       { label: "a.", math: "m_a = \\ldots" },
@@ -129,6 +134,7 @@ const questions: Q[] = [
       { label: "d.", math: "m_d = \\ldots" },
       { label: "e.", math: "m_e = \\ldots" },
       { label: "f.", math: "m_f = \\ldots" },
+      { label: "g.", math: "m_g = \\ldots" },
     ],
   }),
 
@@ -489,8 +495,10 @@ const GradienPage = () => {
 
               {/* Multi-segment grid (white, no axes) */}
               {q.multiGrid && (
-                <div className="flex justify-center my-4 overflow-x-auto">
-                  <MultiGridLineChart segs={q.multiGrid} />
+                <div className="flex justify-center my-4">
+                  <div className="w-full" style={{ maxWidth: 300 }}>
+                    <MultiGridLineChart segs={q.multiGrid} />
+                  </div>
                 </div>
               )}
 
