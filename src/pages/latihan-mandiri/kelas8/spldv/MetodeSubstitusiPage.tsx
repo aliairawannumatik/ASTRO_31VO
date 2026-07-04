@@ -71,9 +71,9 @@ const questions: Q[] = [
   Q(4, "Langkah Substitusi Dasar", {
     badge: "ANBK",
     type: "mixed",
-    blockMath: "\\begin{cases} y = 2x - 1 \\\\ x + y = 8 \\end{cases}",
+    blockMath: "\\begin{cases} x = 2y - 1 \\\\ x + y = 8 \\end{cases}",
     parts: [
-      { label: "a.", text: "Substitusikan y = 2x − 1 ke persamaan x + y = 8." },
+      { label: "a.", text: "Substitusikan x = 2y − 1 ke persamaan x + y = 8." },
       { label: "b.", text: "Selesaikan untuk x." },
       { label: "c.", text: "Tentukan nilai y, lalu tulis HP." },
     ],
