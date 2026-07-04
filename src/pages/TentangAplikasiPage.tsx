@@ -3,10 +3,12 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const TentangAplikasiPage = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -74,7 +76,7 @@ const TentangAplikasiPage = () => {
           <div className="relative rounded-2xl overflow-hidden">
             {/* Animated gradient border */}
             <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-pink-500 rounded-2xl opacity-80 blur-[2px]" />
-            <div className="relative rounded-2xl bg-gradient-to-br from-[#1a0a00] via-[#1a0d00] to-[#0d0d2b] p-5 md:p-6 border border-yellow-500/40">
+            <div className={`relative rounded-2xl p-5 md:p-6 border border-yellow-500/40 ${isDark ? "bg-gradient-to-br from-[#1a0a00] via-[#1a0d00] to-[#0d0d2b]" : "bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50"}`}>
 
               {/* Badge */}
               <div className="flex justify-center mb-3">
@@ -154,7 +156,7 @@ const TentangAplikasiPage = () => {
 
         <div className="animate-slide-up mb-6" style={{ animationDelay: '0.35s' }}>
           <div className="relative rounded-2xl p-[1.5px] bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-500 shadow-[0_0_30px_rgba(0,200,255,0.2)]">
-            <div className="rounded-2xl bg-[#0d0d2b] px-6 py-4 flex items-center gap-4">
+            <div className={`rounded-2xl px-6 py-4 flex items-center gap-4 ${isDark ? "bg-[#0d0d2b]" : "bg-white/90"}`}>
               <div className="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center shrink-0 overflow-hidden">
                 <img src="/logo-numatik-pi.jpeg" alt="NUMATIK" className="w-full h-full object-contain" />
               </div>

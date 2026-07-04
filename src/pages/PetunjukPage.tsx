@@ -750,7 +750,7 @@ const PetunjukPage = () => {
           isDark ? "bg-card/50 border-border/40" : "bg-white/80 border-blue-200/60"
         }`}>
           {/* Slide Top Bar */}
-          <div className={`px-5 py-3 border-b flex items-center gap-3 bg-gradient-to-r ${slide.bgGradient} ${isDark ? "border-border/30" : "border-blue-100"}`}>
+          <div className={`px-5 py-3 border-b flex items-center gap-3 ${isDark ? `bg-gradient-to-r ${slide.bgGradient} border-border/30` : "bg-blue-50/80 border-blue-100"}`}>
             <div className={`${slide.color}`}>{slide.icon}</div>
             <div>
               <p className={`font-display font-bold text-base md:text-lg ${slide.color}`}>{slide.title}</p>

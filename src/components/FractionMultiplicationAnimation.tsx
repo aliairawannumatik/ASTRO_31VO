@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 function gcd(a: number, b: number): number {
   return b === 0 ? a : gcd(b, a % b);
@@ -76,6 +77,7 @@ const STEPS = [
 ];
 
 export default function FractionMultiplicationAnimation() {
+  const { isDark } = useTheme();
   const [preset, setPreset] = useState(0);
   const [step, setStep] = useState(0);
 
@@ -120,7 +122,7 @@ export default function FractionMultiplicationAnimation() {
     : null;
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-cyan-500/30 bg-gradient-to-br from-slate-900/80 to-cyan-950/50 backdrop-blur">
+    <div className={`rounded-2xl overflow-hidden border border-cyan-500/30 backdrop-blur ${isDark ? "bg-gradient-to-br from-slate-900/80 to-cyan-950/50" : "bg-white/90"}`}>
       <style>{`
         @keyframes pulse-scale-mul {
           0% { transform: scale(1); }
@@ -156,7 +158,7 @@ export default function FractionMultiplicationAnimation() {
             className={`text-xs px-3 py-1.5 rounded-full border font-body font-semibold transition-all cursor-pointer ${
               preset === i
                 ? "bg-cyan-600 border-cyan-400 text-white"
-                : "bg-slate-800 border-slate-600 text-white/60 hover:border-cyan-400 hover:text-white"
+                : isDark ? "bg-slate-800 border-slate-600 text-white/60 hover:border-cyan-400 hover:text-white" : "bg-slate-100 border-slate-300 text-slate-500 hover:border-cyan-500 hover:text-slate-800"
             }`}
           >
             {p.label}
@@ -170,7 +172,7 @@ export default function FractionMultiplicationAnimation() {
           <div
             key={s}
             className={`h-1.5 rounded-full transition-all duration-500 ${
-              s === step ? "w-8 bg-cyan-400" : s < step ? "w-4 bg-cyan-700" : "w-4 bg-slate-600"
+              s === step ? "w-8 bg-cyan-400" : s < step ? "w-4 bg-cyan-500" : `w-4 ${isDark ? "bg-slate-600" : "bg-slate-300"}`
             }`}
           />
         ))}
@@ -358,7 +360,7 @@ export default function FractionMultiplicationAnimation() {
         {step > 0 && (
           <button
             onClick={handleReset}
-            className="text-xs px-4 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white/70 font-body transition-all cursor-pointer hover:text-white"
+            className={`text-xs px-4 py-2.5 rounded-xl font-body transition-all cursor-pointer ${isDark ? "bg-slate-700 hover:bg-slate-600 text-white/70 hover:text-white" : "bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900"}`}
           >
             🔄 Ulangi
           </button>

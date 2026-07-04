@@ -2,6 +2,7 @@ import { useState } from "react";
 import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 function gcd(a: number, b: number): number {
   return b === 0 ? a : gcd(b, a % b);
@@ -170,6 +171,7 @@ const ui = {
 
 export default function FractionCircleAnimation() {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = ui[language];
 
   const [preset, setPreset] = useState(0);
@@ -241,7 +243,7 @@ export default function FractionCircleAnimation() {
   const num2Display = step >= 2 ? newN2 : n2;
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-purple-500/30 bg-gradient-to-br from-slate-900/80 to-purple-950/50 backdrop-blur">
+    <div className={`rounded-2xl overflow-hidden border border-purple-500/30 backdrop-blur ${isDark ? "bg-gradient-to-br from-slate-900/80 to-purple-950/50" : "bg-white/90"}`}>
       <style>{`
         @keyframes shake {
           0%, 100% { transform: translateX(0); }

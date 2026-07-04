@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ChevronRight, ArrowLeft, BookOpen, Calculator, RefreshCw } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { BookOpen, Calculator, RefreshCw } from "lucide-react";
 import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
 
 const translations = {
   id: {
@@ -250,20 +252,18 @@ const BentukDesimalPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-4 md:p-6">
-      <div className="max-w-4xl mx-auto">
-        <Link to="/materi-matematika/kelas-7/bilangan-rasional" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-6">
-          <ArrowLeft size={20} />
-          <span>{c.backLink}</span>
-        </Link>
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <Starfield />
+      <PageNavigation />
+      <div className="relative z-10 max-w-4xl w-full px-4 py-10">
 
         <div className="bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl p-6 mb-8 shadow-xl">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2">{c.pageTitle}</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-2 text-white">{c.pageTitle}</h1>
           <p className="text-cyan-100">{c.pageSubtitle}</p>
         </div>
 
         {/* Section 1 */}
-        <div className="bg-slate-800/50 rounded-xl mb-4 overflow-hidden border border-slate-700">
+        <div className="bg-card/80 backdrop-blur rounded-xl mb-4 overflow-hidden border border-border">
           <div className="w-full flex items-center p-4">
             <div className="flex items-center gap-3">
               <BookOpen className="text-cyan-400" size={24} />
@@ -271,14 +271,14 @@ const BentukDesimalPage = () => {
             </div>
           </div>
           {true && (
-            <div className="p-4 border-t border-slate-700 space-y-4">
+            <div className="p-4 border-t border-border space-y-4">
               <div className="bg-cyan-900/30 border-l-4 border-cyan-400 p-4 rounded-r-lg">
                 <p className="font-medium text-cyan-300">{c.summaryLabel}</p>
                 <p className="text-slate-300 mt-1">{c.sec1SummaryBody}</p>
               </div>
-              <div className="bg-slate-700/50 rounded-lg p-4">
+              <div className="bg-card/60 rounded-lg p-4">
                 <p className="font-medium mb-3">{c.sec1PlaceTitle}</p>
-                <p className="text-sm text-slate-300">{c.sec1PlaceExample}</p>
+                <p className="text-sm text-slate-300 mt-1">{c.sec1PlaceExample}</p>
                 <ul className="text-sm mt-2 space-y-1">
                   {c.sec1Place.map((item) => (
                     <li key={item}>{item}</li>
@@ -288,7 +288,7 @@ const BentukDesimalPage = () => {
               <div className="bg-green-900/20 border border-green-700 rounded-lg p-4">
                 <span className="bg-green-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeEasy}</span>
                 <p className="font-medium mb-2">{c.ex1Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <p>{c.ex1Body}</p>
                   <p className="text-cyan-400 font-semibold mt-2">{c.ex1Ans}</p>
@@ -297,7 +297,7 @@ const BentukDesimalPage = () => {
               <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
                 <span className="bg-yellow-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeMedium}</span>
                 <p className="font-medium mb-2">{c.ex2Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <BlockMath math={c.ex2KaTeX} />
                   <p className="text-cyan-400 font-semibold mt-2">{c.ex2Ans}</p>
@@ -306,7 +306,7 @@ const BentukDesimalPage = () => {
               <div className="bg-red-900/20 border border-red-700 rounded-lg p-4">
                 <span className="bg-red-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeHard}</span>
                 <p className="font-medium mb-2">{c.ex3Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <p>{c.ex3Body}</p>
                   <BlockMath math={c.ex3KaTeX} />
@@ -318,7 +318,7 @@ const BentukDesimalPage = () => {
         </div>
 
         {/* Section 2 */}
-        <div className="bg-slate-800/50 rounded-xl mb-4 overflow-hidden border border-slate-700">
+        <div className="bg-card/80 backdrop-blur rounded-xl mb-4 overflow-hidden border border-border">
           <div className="w-full flex items-center p-4">
             <div className="flex items-center gap-3">
               <Calculator className="text-cyan-400" size={24} />
@@ -326,7 +326,7 @@ const BentukDesimalPage = () => {
             </div>
           </div>
           {true && (
-            <div className="p-4 border-t border-slate-700 space-y-4">
+            <div className="p-4 border-t border-border space-y-4">
               <div className="bg-cyan-900/30 border-l-4 border-cyan-400 p-4 rounded-r-lg">
                 <p className="font-medium text-cyan-300">{c.summaryLabel}</p>
                 <p className="text-slate-300 mt-1">{c.sec2SummaryBody}</p>
@@ -338,7 +338,7 @@ const BentukDesimalPage = () => {
               <div className="bg-green-900/20 border border-green-700 rounded-lg p-4">
                 <span className="bg-green-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeEasy}</span>
                 <p className="font-medium mb-2">{c.ex4Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <BlockMath math={c.ex4KaTeX} />
                   <p className="text-cyan-400 font-semibold mt-2">{c.ex4Ans}</p>
@@ -347,7 +347,7 @@ const BentukDesimalPage = () => {
               <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
                 <span className="bg-yellow-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeMedium}</span>
                 <p className="font-medium mb-2">{c.ex5Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <BlockMath math={c.ex5KaTeX} />
                   <p className="text-cyan-400 font-semibold mt-2">{c.ex5Ans}</p>
@@ -356,7 +356,7 @@ const BentukDesimalPage = () => {
               <div className="bg-red-900/20 border border-red-700 rounded-lg p-4">
                 <span className="bg-red-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeHard}</span>
                 <p className="font-medium mb-2">{c.ex6Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <p>{c.ex6Body}</p>
                   <BlockMath math={c.ex6KaTeX} />
@@ -368,7 +368,7 @@ const BentukDesimalPage = () => {
         </div>
 
         {/* Section 3 */}
-        <div className="bg-slate-800/50 rounded-xl mb-4 overflow-hidden border border-slate-700">
+        <div className="bg-card/80 backdrop-blur rounded-xl mb-4 overflow-hidden border border-border">
           <div className="w-full flex items-center p-4">
             <div className="flex items-center gap-3">
               <RefreshCw className="text-cyan-400" size={24} />
@@ -376,12 +376,12 @@ const BentukDesimalPage = () => {
             </div>
           </div>
           {true && (
-            <div className="p-4 border-t border-slate-700 space-y-4">
+            <div className="p-4 border-t border-border space-y-4">
               <div className="bg-cyan-900/30 border-l-4 border-cyan-400 p-4 rounded-r-lg">
                 <p className="font-medium text-cyan-300">{c.summaryLabel}</p>
                 <p className="text-slate-300 mt-1">{c.sec3SummaryBody}</p>
               </div>
-              <div className="bg-slate-700/50 rounded-lg p-4">
+              <div className="bg-card/60 rounded-lg p-4">
                 <p className="font-medium mb-2">{c.sec3RuleTitle}</p>
                 <ul className="space-y-1 text-sm">
                   {c.sec3Rules.map((r) => (
@@ -392,7 +392,7 @@ const BentukDesimalPage = () => {
               <div className="bg-green-900/20 border border-green-700 rounded-lg p-4">
                 <span className="bg-green-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeEasy}</span>
                 <p className="font-medium mb-2">{c.ex7Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <BlockMath math={c.ex7KaTeX} />
                   <p className="text-cyan-400 font-semibold mt-2">{c.ex7Ans}</p>
@@ -401,7 +401,7 @@ const BentukDesimalPage = () => {
               <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
                 <span className="bg-yellow-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeMedium}</span>
                 <p className="font-medium mb-2">{c.ex8Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <BlockMath math={c.ex8KaTeX} />
                   <p className="text-cyan-400 font-semibold mt-2">{c.ex8Ans}</p>
@@ -410,7 +410,7 @@ const BentukDesimalPage = () => {
               <div className="bg-red-900/20 border border-red-700 rounded-lg p-4">
                 <span className="bg-red-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">{c.badgeHard}</span>
                 <p className="font-medium mb-2">{c.ex9Q}</p>
-                <div className="bg-slate-800 rounded p-3 mt-2">
+                <div className="bg-card/90 rounded p-3 mt-2">
                   <p className="text-sm text-slate-400 mb-1">{c.discussLabel}</p>
                   <p>{c.ex9Body}</p>
                   <BlockMath math={c.ex9KaTeX} />
@@ -427,7 +427,7 @@ const BentukDesimalPage = () => {
             <p className="font-display text-lg font-bold text-white tracking-wide">{c.sumTitle}</p>
             <p className="font-body text-xs text-white/80 mt-0.5">{c.sumSubtitle}</p>
           </div>
-          <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+          <div className="bg-card/80 backdrop-blur px-5 py-5 space-y-5">
 
             <div className="space-y-2">
               <p className="font-body text-xs font-bold text-sky-300 uppercase tracking-widest flex items-center gap-2">

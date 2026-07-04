@@ -350,6 +350,7 @@ const translations = {
 const PenjumlahanPenguranganBentukDesimalPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
   const [activeSection, setActiveSection] = useState<number | null>(null);
 
@@ -435,7 +436,7 @@ const PenjumlahanPenguranganBentukDesimalPage = () => {
         </p>
 
         {/* Konsep Awal: Nilai Tempat */}
-        <div className="mb-8 bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-cyan-500/30 rounded-2xl p-5 animate-slide-up">
+        <div className={`mb-8 border border-cyan-500/30 rounded-2xl p-5 animate-slide-up ${isDark ? "bg-gradient-to-br from-slate-800/80 to-slate-900/80" : "bg-card/80 backdrop-blur"}`}>
           <div className="flex items-center gap-2 mb-3">
             <Info className="w-5 h-5 text-cyan-400 shrink-0" />
             <h2 className="font-display text-sm font-bold text-cyan-300">{t.sec0Title}</h2>

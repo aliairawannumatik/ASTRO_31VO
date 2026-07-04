@@ -942,6 +942,18 @@
 .light-mode .bg-slate-900\/80 { background-color: rgba(248,250,252,0.90) !important; }
 .light-mode .bg-slate-900    { background-color: #f8fafc !important; }
 
+/* ── bg-black overrides for light mode ── */
+.light-mode .bg-black\/10 { background-color: rgba(241,245,249,0.30) !important; }
+.light-mode .bg-black\/15 { background-color: rgba(241,245,249,0.40) !important; }
+.light-mode .bg-black\/20 { background-color: rgba(241,245,249,0.50) !important; }
+.light-mode .bg-black\/25 { background-color: rgba(241,245,249,0.55) !important; }
+.light-mode .bg-black\/30 { background-color: rgba(241,245,249,0.65) !important; }
+.light-mode .bg-black\/40 { background-color: rgba(241,245,249,0.75) !important; }
+.light-mode .bg-black\/50 { background-color: rgba(241,245,249,0.85) !important; }
+.light-mode .bg-black\/60 { background-color: rgba(241,245,249,0.90) !important; }
+.light-mode .bg-black\/70 { background-color: rgba(241,245,249,0.92) !important; }
+.light-mode .bg-black\/80 { background-color: rgba(248,250,252,0.94) !important; }
+
 .light-mode .bg-cyan-950\/40  { background-color: rgba(219,234,254,0.65) !important; }
 .light-mode .bg-cyan-950\/50  { background-color: rgba(219,234,254,0.75) !important; }
 .light-mode .bg-cyan-950\/60  { background-color: rgba(219,234,254,0.88) !important; }
