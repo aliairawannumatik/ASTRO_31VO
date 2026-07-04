@@ -98,28 +98,7 @@ const questions: Q[] = [
       { label: "g.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
     ],
   }),
-  Q(6, "Penyelesaian Tunggal", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Diketahui SPLDV:",
-    blockMath: "\\begin{cases} 2x + y = 7 \\\\ x - y = 2 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Berapa banyak penyelesaian SPLDV ini? Jelaskan tanpa menghitung!" },
-      { label: "b.", text: "Periksa apakah (3, 1) memenuhi kedua persamaan tersebut." },
-      { label: "c.", text: "Adakah pasangan lain yang memenuhi kedua persamaan?" },
-    ],
-  }),
-  Q(7, "Substitusi Cepat — Verifikasi", {
-    badge: "TKA",
-    type: "mixed",
-    content: "Tanpa menyelesaikan SPLDV, periksa apakah solusi berikut benar:",
-    parts: [
-      { label: "a.", math: "\\begin{cases} x + y = 5 \\\\ 2x - y = 4 \\end{cases} \\Rightarrow (3, 2)?" },
-      { label: "b.", math: "\\begin{cases} 3x + 2y = 13 \\\\ x - y = 1 \\end{cases} \\Rightarrow (3, 2)?" },
-      { label: "c.", math: "\\begin{cases} 4x - y = 10 \\\\ x + 3y = 9 \\end{cases} \\Rightarrow (3, 2)?" },
-    ],
-  }),
-  Q(8, "Soal UN {t('practice.multipleChoice')} Style", {
+  Q(6, "Soal UN Style", {
     badge: "UN",
     type: "mixed",
     content: "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:",
@@ -131,7 +110,7 @@ const questions: Q[] = [
       { label: "D.", math: "(3, 4)" },
     ],
   }),
-  Q(9, "SPLDV dari Konteks", {
+  Q(7, "SPLDV dari Konteks", {
     badge: "UN",
     type: "mixed",
     content: "Theo membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Remy membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
@@ -141,7 +120,7 @@ const questions: Q[] = [
       { label: "c.", text: "Periksa apakah harga 1 kg mangga adalah Rp12.000 dan harga 1 kg jeruk Rp9.000 merupakan penyelesaian dari permasalahan pada soal." },
     ],
   }),
-  Q(10, "ANBK — Benar atau Salah", {
+  Q(8, "ANBK — Benar atau Salah", {
     badge: "ANBK",
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S):",
@@ -173,7 +152,7 @@ const DefinisiSPLDVPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 10 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
