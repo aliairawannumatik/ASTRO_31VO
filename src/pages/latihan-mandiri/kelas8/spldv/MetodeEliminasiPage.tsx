@@ -75,16 +75,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x." },
     ],
   }),
-  Qf(6, "Soal UN — Harga Barang", {
-    badge: "UN", type: "mixed",
-    content: "Harga 2 kemeja dan 3 celana = Rp 340.000. Harga 3 kemeja dan 2 celana = Rp 360.000.",
-    parts: [
-      { label: "a.", text: "Misal harga kemeja = x dan celana = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan metode eliminasi." },
-      { label: "c.", text: "Tentukan harga 1 kemeja dan 1 celana." },
-    ],
-  }),
-  Qf(7, "Perkalian Berbeda — Eliminasi y", {
+  Qf(6, "Perkalian Berbeda — Eliminasi y", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} 2x + 3y = 20 \\\\ 5x + 4y = 35 \\end{cases}",
     parts: [
@@ -93,12 +84,21 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan x, lalu y." },
     ],
   }),
-  Qf(8, "Eliminasi — Pecahan", {
+  Qf(7, "Eliminasi — Pecahan", {
     badge: "TKA", type: "mixed",
     blockMath: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 2 \\\\ \\frac{x}{3} - \\frac{y}{4} = 1 \\end{cases}",
     parts: [
       { label: "a.", text: "Kalikan persamaan pertama dengan 6 dan persamaan kedua dengan 12." },
       { label: "b.", text: "Selesaikan dengan eliminasi." },
+    ],
+  }),
+  Qf(8, "Soal UN — Harga Barang", {
+    badge: "UN", type: "mixed",
+    content: "Harga 2 kemeja dan 3 celana = Rp 340.000. Harga 3 kemeja dan 2 celana = Rp 360.000.",
+    parts: [
+      { label: "a.", text: "Misal harga kemeja = x dan celana = y. Tuliskan SPLDV." },
+      { label: "b.", text: "Selesaikan dengan metode eliminasi." },
+      { label: "c.", text: "Tentukan harga 1 kemeja dan 1 celana." },
     ],
   }),
 ];
