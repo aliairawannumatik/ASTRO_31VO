@@ -7,13 +7,13 @@ import { BookOpen, ChevronRight, Layers, TrendingUp, Replace, Minus, Shuffle, Fi
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopicBase = [
-  { route: "/latihan-mandiri/kelas-8/spldv/definisi",             icon: Layers,     color: "#a78bfa", bg: "rgba(167,139,250,0.12)", border: "rgba(167,139,250,0.3)", count: "21" },
-  { route: "/latihan-mandiri/kelas-8/spldv/metode-grafik",        icon: TrendingUp, color: "#34d399", bg: "rgba(52,211,153,0.12)",  border: "rgba(52,211,153,0.3)",  count: "21" },
-  { route: "/latihan-mandiri/kelas-8/spldv/metode-substitusi",    icon: Replace,    color: "#60a5fa", bg: "rgba(96,165,250,0.12)",  border: "rgba(96,165,250,0.3)",  count: "17" },
-  { route: "/latihan-mandiri/kelas-8/spldv/metode-eliminasi",     icon: Minus,      color: "#fb923c", bg: "rgba(251,146,60,0.12)",  border: "rgba(251,146,60,0.3)",  count: "15" },
-  { route: "/latihan-mandiri/kelas-8/spldv/metode-campuran",      icon: Shuffle,    color: "#f472b6", bg: "rgba(244,114,182,0.12)", border: "rgba(244,114,182,0.3)", count: "19" },
-  { route: "/latihan-mandiri/kelas-8/spldv/model-spldv",          icon: FileText,   color: "#facc15", bg: "rgba(250,204,21,0.10)",  border: "rgba(250,204,21,0.3)",  count: "16" },
-  { route: "/latihan-mandiri/kelas-8/spldv/penyelesaian-masalah", icon: Rocket,     color: "#a78bfa", bg: "rgba(167,139,250,0.12)", border: "rgba(167,139,250,0.3)", count: "19" },
+  { route: "/latihan-mandiri/kelas-8/spldv/definisi",             icon: Layers,     color: "#a78bfa", bg: "rgba(167,139,250,0.12)", border: "rgba(167,139,250,0.3)", count: "8" },
+  { route: "/latihan-mandiri/kelas-8/spldv/metode-grafik",        icon: TrendingUp, color: "#34d399", bg: "rgba(52,211,153,0.12)",  border: "rgba(52,211,153,0.3)",  count: "11" },
+  { route: "/latihan-mandiri/kelas-8/spldv/metode-substitusi",    icon: Replace,    color: "#60a5fa", bg: "rgba(96,165,250,0.12)",  border: "rgba(96,165,250,0.3)",  count: "8" },
+  { route: "/latihan-mandiri/kelas-8/spldv/metode-eliminasi",     icon: Minus,      color: "#fb923c", bg: "rgba(251,146,60,0.12)",  border: "rgba(251,146,60,0.3)",  count: "8" },
+  { route: "/latihan-mandiri/kelas-8/spldv/metode-campuran",      icon: Shuffle,    color: "#f472b6", bg: "rgba(244,114,182,0.12)", border: "rgba(244,114,182,0.3)", count: "8" },
+  { route: "/latihan-mandiri/kelas-8/spldv/model-spldv",          icon: FileText,   color: "#facc15", bg: "rgba(250,204,21,0.10)",  border: "rgba(250,204,21,0.3)",  count: "10" },
+  { route: "/latihan-mandiri/kelas-8/spldv/penyelesaian-masalah", icon: Rocket,     color: "#a78bfa", bg: "rgba(167,139,250,0.12)", border: "rgba(167,139,250,0.3)", count: "8" },
 ];
 
 const hubUi = {
@@ -83,7 +83,7 @@ const SPLDVPage = () => {
             style={{ color: "#a78bfa", textShadow: "0 0 24px #a78bfa88" }}>
             {hu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 7 {t('practice.suffixSubTopik')} · 128 Soal UN/ANBK/TKA</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 7 {t('practice.suffixSubTopik')} · 61 Soal UN/ANBK/TKA</p>
         </div>
 
         <div className="flex flex-col gap-3 animate-slide-up">
