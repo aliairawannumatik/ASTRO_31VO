@@ -91,16 +91,7 @@ const questions: Q[] = [
       { label: "b.", text: "Tuliskan setiap persamaan secara jelas." },
     ],
   }),
-  Qf(8, "Model Bilangan Dua Angka", {
-    badge: "UN", type: "mixed",
-    content: "Suatu bilangan dua angka. Jumlah digitnya = 11. Jika digit-digitnya dipertukarkan, bilangan baru lebih besar 27 dari bilangan semula.",
-    parts: [
-      { label: "a.", text: "Misal angka puluhan = x dan satuan = y." },
-      { label: "b.", text: "Bilangan semula = 10x + y. Bilangan baru = 10y + x. Tuliskan dua persamaan." },
-      { label: "c.", text: "Tuliskan SPLDV." },
-    ],
-  }),
-  Qf(9, "Model dari Campuran Larutan", {
+  Qf(8, "Model dari Campuran Larutan", {
     badge: "TKA", type: "mixed",
     content: "Larutan A mengandung 20% garam dan larutan B mengandung 50% garam. Dicampurkan x liter A dan y liter B untuk menghasilkan 30 liter larutan 35% garam.",
     parts: [
@@ -109,7 +100,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tuliskan SPLDV." },
     ],
   }),
-  Qf(10, "Model dari Pekerjaan", {
+  Qf(9, "Model dari Pekerjaan", {
     badge: "TKA", type: "mixed",
     content: "Tukang A dapat menyelesaikan pekerjaan dalam x hari. Tukang B dalam y hari. Bersama dapat selesai dalam 4 hari. Tukang A bekerja 6 hari lebih cepat dari Tukang B.",
     parts: [
@@ -118,56 +109,12 @@ const questions: Q[] = [
       { label: "c.", text: "Tuliskan SPLDV (dalam bentuk x dan y)." },
     ],
   }),
-  Qf(11, "Model Geometri — Sudut", {
+  Qf(10, "Model Geometri — Sudut", {
     badge: "ANBK", type: "mixed",
     content: "Dua sudut saling berpelurus (jumlah = 180°). Sudut pertama = 3 kali sudut kedua dikurangi 20°.",
     parts: [
       { label: "a.", text: "Misal sudut pertama = x° dan sudut kedua = y°. Tuliskan dua persamaan." },
       { label: "b.", text: "Susun SPLDV." },
-    ],
-  }),
-  Qf(12, "Model Tenaga Kerja", {
-    badge: "AKM", type: "mixed",
-    content: "Pabrik mempekerjakan pekerja laki-laki (gaji Rp 80.000/hari) dan perempuan (gaji Rp 60.000/hari). Total pekerja 40 orang dan total gaji Rp 2.800.000/hari.",
-    parts: [
-      { label: "a.", text: "Misal pekerja laki-laki = x dan perempuan = y. Susun SPLDV." },
-      { label: "b.", text: "Verifikasi apakah (25, 15) adalah solusinya." },
-    ],
-  }),
-  Qf(13, "Model Campuran Logam", {
-    badge: "TKA", type: "mixed",
-    content: "Campuran emas dan perak seberat 100 gram mengandung 30 gram emas. Perbandingan emas terhadap perak = 3 : 7.",
-    parts: [
-      { label: "a.", text: "Misal berat emas = x dan perak = y. Tuliskan persamaan total berat." },
-      { label: "b.", text: "Tuliskan persamaan dari perbandingan x : y = 3 : 7." },
-      { label: "c.", text: "Susun SPLDV." },
-    ],
-  }),
-  Qf(14, "Model Usia dengan Masa Lalu", {
-    badge: "UN", type: "mixed",
-    content: "Empat tahun yang lalu, jumlah umur Ibu dan Anak = 42 tahun. Sekarang, umur Ibu = 3 kali umur Anak.",
-    parts: [
-      { label: "a.", text: "Misal umur Ibu sekarang = x dan Anak = y." },
-      { label: "b.", text: "Tuliskan persamaan dari kondisi 4 tahun lalu." },
-      { label: "c.", text: "Tuliskan persamaan dari kondisi sekarang. Susun SPLDV." },
-    ],
-  }),
-  Qf(15, "Model dari Konteks Digital", {
-    badge: "AKM", type: "mixed",
-    content: "Sebuah platform streaming memiliki pelanggan premium (Rp 50.000/bulan = x) dan reguler (Rp 20.000/bulan = y). Total 500 pelanggan, total pendapatan Rp 16.000.000/bulan.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV." },
-      { label: "b.", text: "Tentukan banyaknya pelanggan premium dan reguler." },
-    ],
-  }),
-  Qf(16, "Model dari Soal ANBK", {
-    badge: "ANBK", type: "mixed",
-    content: "Tentukan BENAR (B) atau SALAH (S) dari pernyataan dalam pemodelan SPLDV berikut:",
-    parts: [
-      { label: "(1)", text: "Langkah pertama membuat model adalah menentukan variabel yang mewakili besaran yang tidak diketahui." },
-      { label: "(2)", text: "Setiap masalah dengan dua hal yang tidak diketahui pasti bisa dimodelkan sebagai SPLDV." },
-      { label: "(3)", text: "SPLDV membutuhkan tepat dua persamaan linear untuk membentuk sistem." },
-      { label: "(4)", text: "Setelah menemukan solusi, hasilnya perlu diverifikasi terhadap kondisi asli masalah." },
     ],
   }),
 ];
@@ -191,7 +138,7 @@ const ModelSPLDVPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 16 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 10 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
