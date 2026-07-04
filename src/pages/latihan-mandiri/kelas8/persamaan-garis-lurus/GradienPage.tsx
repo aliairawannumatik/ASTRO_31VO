@@ -56,6 +56,43 @@ const GridLineChart = ({
   );
 };
 
+/* ── Multi-segment grid chart ───────────────────────────────── */
+type MLSeg = { x1:number; y1:number; x2:number; y2:number; color:string; label:string };
+
+const MultiGridLineChart = ({
+  segs, cols = 20, rows = 13, cell = 15,
+}: { segs: MLSeg[]; cols?: number; rows?: number; cell?: number }) => {
+  const W = cols * cell, H = rows * cell;
+  return (
+    <svg width={W} height={H} style={{ border:"1.5px solid #e2e8f0", borderRadius:12, display:"block" }}>
+      <rect width={W} height={H} fill="white" rx="10" />
+      {Array.from({ length: cols + 1 }, (_, i) => (
+        <line key={`v${i}`} x1={i*cell} y1={0} x2={i*cell} y2={H} stroke="#e2e8f0" strokeWidth="1" />
+      ))}
+      {Array.from({ length: rows + 1 }, (_, i) => (
+        <line key={`h${i}`} x1={0} y1={i*cell} x2={W} y2={i*cell} stroke="#e2e8f0" strokeWidth="1" />
+      ))}
+      {segs.map((s, i) => {
+        const sx=s.x1*cell, sy=s.y1*cell, ex=s.x2*cell, ey=s.y2*cell;
+        const mx=(sx+ex)/2, my=(sy+ey)/2;
+        const goingUp = ey < sy;
+        const lx = goingUp ? mx - 14 : mx + 14;
+        const ly = goingUp ? my - 10  : my + 12;
+        return (
+          <g key={i}>
+            <line x1={sx} y1={sy} x2={ex} y2={ey} stroke={s.color} strokeWidth="2.8" strokeLinecap="round" />
+            <circle cx={sx} cy={sy} r={4} fill={s.color} stroke="white" strokeWidth="1.5" />
+            <circle cx={ex} cy={ey} r={4} fill={s.color} stroke="white" strokeWidth="1.5" />
+            <rect x={lx-8} y={ly-10} width={16} height={14} rx="3" fill={s.color} />
+            <text x={lx} y={ly} textAnchor="middle" dominantBaseline="middle"
+              fill="white" fontSize="10" fontFamily="sans-serif" fontWeight="800">{s.label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
 /* ── Types ─────────────────────────────────────────────────── */
 type Part = { label: string; math?: string; text?: string };
 type Diagram = Parameters<typeof CoordPlane>[0];
@@ -66,6 +103,7 @@ type Q = {
   parts?: Part[];
   diagram?: Diagram;
   gridLine?: GridLine;
+  multiGrid?: MLSeg[];
   type: "essay" | "mixed" | "diagram-only";
 };
 const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
@@ -73,14 +111,24 @@ const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, t
 /* ── Questions ─────────────────────────────────────────────── */
 const questions: Q[] = [
   /* ── 4 soal baru: baca gradien dari grid kotak-kotak ─── */
-  Q(1, "Baca Gradien dari Grid — Garis Naik (1)", {
+  Q(1, "Gradien dari Kertas Berpetak", {
     type: "mixed",
-    content: "Perhatikan garis pada grid kotak-kotak di bawah ini (setiap kotak = 1 satuan). Garis bergerak ke kanan atas.",
-    gridLine: { x1: 2, y1: 9, x2: 8, y2: 3, color: "#60a5fa" },
+    content: "Tentukan nilai gradien dari setiap ruas garis a, b, c, d, e, dan f yang digambarkan pada kertas berpetak berikut (setiap kotak = 1 satuan)!",
+    multiGrid: [
+      { x1:1,  y1:6,  x2:3,  y2:2,  color:"#3b82f6", label:"a" },
+      { x1:7,  y1:5,  x2:11, y2:3,  color:"#10b981", label:"b" },
+      { x1:14, y1:6,  x2:17, y2:3,  color:"#06b6d4", label:"c" },
+      { x1:1,  y1:8,  x2:4,  y2:12, color:"#ec4899", label:"d" },
+      { x1:7,  y1:10, x2:14, y2:10, color:"#f59e0b", label:"e" },
+      { x1:16, y1:7,  x2:19, y2:11, color:"#f97316", label:"f" },
+    ],
     parts: [
-      { label: "a.", text: "Hitung Δx = berapa kotak garis bergerak ke kanan?" },
-      { label: "b.", text: "Hitung Δy = berapa kotak garis bergerak ke atas? (atas = positif)" },
-      { label: "c.", math: "\\text{Hitung gradien } m = \\dfrac{\\Delta y}{\\Delta x}" },
+      { label: "a.", math: "m_a = \\ldots" },
+      { label: "b.", math: "m_b = \\ldots" },
+      { label: "c.", math: "m_c = \\ldots" },
+      { label: "d.", math: "m_d = \\ldots" },
+      { label: "e.", math: "m_e = \\ldots" },
+      { label: "f.", math: "m_f = \\ldots" },
     ],
   }),
 
@@ -439,7 +487,14 @@ const GradienPage = () => {
                 </div>
               </div>
 
-              {/* Grid chart (white, no axes) */}
+              {/* Multi-segment grid (white, no axes) */}
+              {q.multiGrid && (
+                <div className="flex justify-center my-4 overflow-x-auto">
+                  <MultiGridLineChart segs={q.multiGrid} />
+                </div>
+              )}
+
+              {/* Single-segment grid chart (white, no axes) */}
               {q.gridLine && (
                 <div className="flex justify-center my-4">
                   <GridLineChart {...q.gridLine} />
