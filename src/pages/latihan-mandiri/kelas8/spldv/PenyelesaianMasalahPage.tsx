@@ -48,16 +48,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan umur Ayah dan Anak sekarang." },
     ],
   }),
-  Qf(3, "Soal Bilangan Dua Angka", {
-    badge: "UN", type: "mixed",
-    content: "Suatu bilangan dua angka. Jumlah digitnya = 9. Bilangan tersebut adalah 45 lebih dari bilangan yang digitnya dibalik.",
-    parts: [
-      { label: "a.", text: "Misal digit puluhan = x dan satuan = y. Tuliskan bilangan asli dan bilangan hasil pembalikan." },
-      { label: "b.", text: "Susun SPLDV." },
-      { label: "c.", text: "Tentukan bilangan tersebut." },
-    ],
-  }),
-  Qf(4, "Soal Keliling dan Luas", {
+  Qf(3, "Soal Keliling dan Luas", {
     badge: "ANBK", type: "mixed",
     content: "Keliling sebuah persegi panjang = 70 m. Panjangnya 5 m lebih dari lebarnya.",
     parts: [
@@ -66,7 +57,7 @@ const questions: Q[] = [
       { label: "c.", text: "Hitung luas persegi panjang tersebut." },
     ],
   }),
-  Qf(5, "Soal Ayam dan Kelinci", {
+  Qf(4, "Soal Ayam dan Kelinci", {
     badge: "UN", type: "mixed",
     content: "Dalam sebuah kandang terdapat ayam dan kelinci. Jumlah kepala = 50 dan jumlah kaki = 160.",
     parts: [
@@ -75,34 +66,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa ekor ayam dan kelinci?" },
     ],
   }),
-  Qf(6, "Soal Investasi", {
-    badge: "TKA", type: "mixed",
-    content: "Modal Rp 12.000.000 dibagi ke dua usaha. Usaha A memberikan keuntungan 10%/tahun dan usaha B memberikan 8%/tahun. Total keuntungan Rp 1.080.000.",
-    parts: [
-      { label: "a.", text: "Misal modal usaha A = x dan B = y. Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa modal yang diinvestasikan ke masing-masing usaha?" },
-    ],
-  }),
-  Qf(7, "Soal Campuran Larutan", {
-    badge: "TKA", type: "mixed",
-    content: "x liter larutan 40% asam dicampur dengan y liter larutan 10% asam untuk mendapatkan 15 liter larutan 30% asam.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa liter masing-masing larutan digunakan?" },
-    ],
-  }),
-  Qf(8, "Soal Lahan Pertanian", {
-    badge: "AKM", type: "mixed",
-    content: "Lahan seluas 200 m² ditanami jagung dan kedelai. Keuntungan jagung Rp 30.000/m² dan kedelai Rp 20.000/m². Total keuntungan Rp 5.000.000.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Tentukan luas tanaman jagung dan kedelai." },
-    ],
-  }),
-  Qf(9, "Soal Pipa Air", {
+  Qf(5, "Soal Pipa Air", {
     badge: "TKA", type: "mixed",
     content: "Pipa A dapat mengisi tangki dalam x jam dan pipa B dalam y jam. Bersama-sama mengisi dalam 4 jam. Pipa B membutuhkan waktu 6 jam lebih lama dari pipa A.",
     parts: [
@@ -111,43 +75,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa jam pipa A dan B masing-masing mengisi tangki?" },
     ],
   }),
-  Qf(10, "Soal Gaji Pekerja", {
-    badge: "ANBK", type: "mixed",
-    content: "Gaji x pekerja tetap dan y pekerja kontrak berjumlah Rp 45.000.000/bulan. Setiap pekerja tetap mendapat Rp 3.000.000 dan kontrak Rp 1.500.000. Total pekerja = 20 orang.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa pekerja tetap dan kontrak?" },
-    ],
-  }),
-  Qf(11, "Soal Diskon", {
-    badge: "UN", type: "mixed",
-    content: "Harga kemeja setelah diskon 20% = Rp 80.000. Harga celana setelah diskon 25% = Rp 150.000. Sebelum diskon, total harga kemeja dan celana = ...",
-    parts: [
-      { label: "a.", text: "Tentukan harga asli kemeja (sebelum diskon)." },
-      { label: "b.", text: "Tentukan harga asli celana (sebelum diskon)." },
-      { label: "c.", text: "Berapa total harga asli kemeja dan celana?" },
-    ],
-  }),
-  Qf(12, "Soal Sudut Segitiga", {
-    badge: "UN", type: "mixed",
-    content: "Dalam segitiga, sudut A dan sudut B saling berpelengkap (jumlah = 90°). Sudut A = 3 kali sudut B dikurangi 10°.",
-    parts: [
-      { label: "a.", text: "Misal sudut A = x° dan B = y°. Susun SPLDV." },
-      { label: "b.", text: "Selesaikan dan tentukan besar kedua sudut." },
-      { label: "c.", text: "Jika sudut C = 180° − sudut A − sudut B, tentukan sudut C." },
-    ],
-  }),
-  Qf(13, "Soal Produksi Pabrik", {
-    badge: "TKA", type: "mixed",
-    content: "Pabrik A memproduksi x unit/hari dan pabrik B y unit/hari. Dalam 5 hari pabrik A dan 3 hari pabrik B menghasilkan 1.100 unit. Dalam 2 hari A dan 4 hari B menghasilkan 880 unit.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa produksi per hari masing-masing pabrik?" },
-    ],
-  }),
-  Qf(14, "Soal Uang — UN", {
+  Qf(6, "Soal Uang — UN", {
     badge: "UN", type: "mixed",
     content: "Rudi memiliki lembaran uang Rp 50.000 dan Rp 100.000 sebanyak 30 lembar dengan nilai total Rp 2.100.000.",
     parts: [
@@ -156,16 +84,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa lembar uang Rp 50.000 dan Rp 100.000?" },
     ],
   }),
-  Qf(15, "Soal Populasi Bertumbuh", {
-    badge: "AKM", type: "mixed",
-    content: "Tahun lalu, jumlah siswa di dua sekolah = 1.200. Sekolah A bertambah 10% dan sekolah B bertambah 5% sehingga tahun ini jumlah total = 1.300 siswa.",
-    parts: [
-      { label: "a.", text: "Misal siswa sekolah A tahun lalu = x dan B = y. Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa siswa di setiap sekolah tahun lalu?" },
-    ],
-  }),
-  Qf(16, "Soal Nilai Ujian Berbobot", {
+  Qf(7, "Soal Nilai Ujian Berbobot", {
     badge: "ANBK", type: "mixed",
     content: "Nilai ujian Rina: teori = x dan praktik = y. Nilai akhir = 40% teori + 60% praktik = 82. Nilai teori = nilai praktik + 8.",
     parts: [
@@ -174,16 +93,7 @@ const questions: Q[] = [
       { label: "c.", text: "Tentukan nilai teori dan praktik Rina." },
     ],
   }),
-  Qf(17, "Soal Penerbangan", {
-    badge: "TKA", type: "mixed",
-    content: "Pesawat terbang ke arah timur (searah angin) menempuh 1.500 km dalam 3 jam. Ke arah barat (melawan angin) menempuh 1.500 km dalam 5 jam. Kecepatan pesawat di udara tenang = x km/jam, kecepatan angin = y km/jam.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV dari perjalanan timur dan barat." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa kecepatan pesawat dan angin?" },
-    ],
-  }),
-  Qf(18, "Soal Ujian Sekolah", {
+  Qf(8, "Soal Ujian Sekolah", {
     badge: "ANBK", type: "mixed",
     content: "Skor benar = 5 dan skor salah = −2. Dino mengerjakan 50 soal. Skor total Dino = 162.",
     parts: [
@@ -192,7 +102,7 @@ const questions: Q[] = [
       { label: "c.", text: "Berapa soal yang dijawab benar dan salah?" },
     ],
   }),
-  Qf(19, "Soal Pariwisata — ANBK", {
+  Qf(9, "Soal Pariwisata — ANBK", {
     badge: "ANBK", type: "mixed",
     content: "Tiket masuk museum: dewasa Rp 25.000 dan pelajar Rp 15.000. Pada Sabtu terjual 250 tiket dengan total Rp 5.250.000.",
     parts: [
@@ -222,7 +132,7 @@ const PenyelesaianMasalahPage = () => {
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
             {pu.title}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 19 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 9 Soal</p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
