@@ -3830,3 +3830,21 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
 .light-mode .theme-legend-box text[fill="#94a3b8"] { fill: #475569 !important; }
 
 .theme-ocean .theme-legend-box rect       { fill: rgba(6,31,58,0.75) !important; stroke: #38bdf8 !important; }
+
+/* "Rumus Umum: Jumlah Sudut Segi-n" formula box — was a hardcoded dark
+   pink/violet gradient, unreadable once KaTeX text turns dark on bright
+   themes. Force a bright solid background + matching text colors. */
+.light-mode .formula-box-jumlahsudut {
+  background-image: none !important;
+  background-color: rgba(252,231,243,0.85) !important;
+  border-color: #f9a8d4 !important;
+}
+.light-mode .formula-box-jumlahsudut .text-pink-300 { color: #9d174d !important; }
+.light-mode .formula-box-jumlahsudut .text-white\/60 { color: #6b7280 !important; }
+.light-mode .formula-box-jumlahsudut .katex { color: #1e293b !important; }
+
+.theme-ocean .formula-box-jumlahsudut {
+  background-image: none !important;
+  background-color: rgba(80,7,54,0.45) !important;
+  border-color: #38bdf8 !important;
+}

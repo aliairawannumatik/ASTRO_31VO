@@ -572,7 +572,7 @@ const getSections = (ui: UI): Section[] => [
         <p>
           {ui.s4p1} <strong className="text-pink-300">{ui.s4bold}</strong> {ui.s4p1b}
         </p>
-        <div className="bg-gradient-to-r from-pink-950/80 to-violet-950/80 border border-pink-700/60 rounded-xl p-5 text-center">
+        <div className="formula-box-jumlahsudut bg-gradient-to-r from-pink-950/80 to-violet-950/80 border border-pink-700/60 rounded-xl p-5 text-center">
           <p className="text-pink-300 font-semibold mb-2 text-xs">{ui.s4formulaTitle}</p>
           <BlockMath math="\text{Jumlah Sudut} = (n - 2) \times 180°" />
           <p className="text-white/60 text-xs mt-2">{ui.s4formulaNote} <InlineMath math="n \geq 3" />, <InlineMath math="n" /> = {ui.s4formulaNote2}</p>
