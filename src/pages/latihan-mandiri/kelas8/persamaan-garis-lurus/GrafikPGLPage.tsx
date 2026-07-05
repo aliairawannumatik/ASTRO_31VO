@@ -265,7 +265,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Grafik Persamaan Umum ax + by = c", {
+  Q(10, "", {
     type: "mixed",
     content: "Gambar grafik persamaan garis berikut menggunakan dua titik:",
     parts: [
@@ -308,7 +308,9 @@ const GrafikPGLPage = () => {
                   {q.n}
                 </div>
                 <div className="flex-1">
-                  <p className="text-pink-300 text-xs font-body font-semibold uppercase tracking-wider mb-1">{q.title}</p>
+                  {q.title && (
+                    <p className="text-pink-300 text-xs font-body font-semibold uppercase tracking-wider mb-1">{q.title}</p>
+                  )}
                   {q.content && (
                     <p className="text-white/80 text-sm font-body leading-relaxed">{q.content}</p>
                   )}
