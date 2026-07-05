@@ -469,11 +469,13 @@ const DuaGarisSVGAll = ({ lgSejajar, lgTransversal, lgAtas, lgBawah }: {
     <text x="142" y="197" fill="#f472b6" fontSize="11" fontFamily="monospace">∠B3</text>
     <text x="172" y="197" fill="#f472b6" fontSize="11" fontFamily="monospace">∠B4</text>
     {/* Legend — translated */}
-    <rect x="10" y="215" width="320" height="36" rx="6" fill="rgba(15,23,42,0.7)" stroke="#334155" strokeWidth="1"/>
-    <text x="18" y="229" fill="#22d3ee" fontSize="10" fontFamily="monospace">{lgSejajar}</text>
-    <text x="18" y="244" fill="#fb923c" fontSize="10" fontFamily="monospace">{lgTransversal}</text>
-    <text x="170" y="229" fill="#4ade80" fontSize="10" fontFamily="monospace">{lgAtas}</text>
-    <text x="170" y="244" fill="#f472b6" fontSize="10" fontFamily="monospace">{lgBawah}</text>
+    <g className="theme-legend-box">
+      <rect x="10" y="215" width="320" height="36" rx="6" fill="rgba(15,23,42,0.7)" stroke="#334155" strokeWidth="1"/>
+      <text x="18" y="229" fill="#22d3ee" fontSize="10" fontFamily="monospace">{lgSejajar}</text>
+      <text x="18" y="244" fill="#fb923c" fontSize="10" fontFamily="monospace">{lgTransversal}</text>
+      <text x="170" y="229" fill="#4ade80" fontSize="10" fontFamily="monospace">{lgAtas}</text>
+      <text x="170" y="244" fill="#f472b6" fontSize="10" fontFamily="monospace">{lgBawah}</text>
+    </g>
   </svg>
 );
 

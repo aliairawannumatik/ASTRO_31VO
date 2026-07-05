@@ -3779,3 +3779,54 @@ html.light-mode .bg-slate-900\/90 .bg-red-500\/10,
 html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   background-color: rgba(226, 232, 240, 0.5) !important;
 }
+
+/* ── Garis dan Sudut (Kelas 7) — bright-theme background fixes ──
+   These classes were only styled for the space/dark theme. Add
+   coverage for light, white, forest, sunset (via .light-mode) and
+   ocean (via .theme-ocean) so no dark boxes leak into bright themes. */
+.light-mode .bg-cyan-950\/30   { background-color: rgba(219,234,254,0.55) !important; }
+.light-mode .bg-violet-950\/30 { background-color: rgba(237,233,254,0.55) !important; }
+.light-mode .bg-green-950\/30  { background-color: rgba(220,252,231,0.55) !important; }
+.light-mode .bg-orange-950\/30 { background-color: rgba(255,237,213,0.55) !important; }
+.light-mode .bg-yellow-950\/30 { background-color: rgba(254,252,232,0.65) !important; }
+.light-mode .bg-yellow-950\/40 { background-color: rgba(254,252,232,0.72) !important; }
+.light-mode .bg-red-950\/30    { background-color: rgba(254,226,226,0.55) !important; }
+.light-mode .bg-red-950\/40    { background-color: rgba(254,226,226,0.65) !important; }
+.light-mode .bg-pink-950\/30   { background-color: rgba(252,231,243,0.55) !important; }
+.light-mode .bg-pink-950\/40   { background-color: rgba(252,231,243,0.65) !important; }
+.light-mode .bg-pink-950\/60   { background-color: rgba(252,231,243,0.88) !important; }
+.light-mode .bg-slate-700      { background-color: #e2e8f0 !important; }
+.light-mode .bg-slate-900\/40  { background-color: rgba(248,250,252,0.65) !important; }
+.light-mode .bg-slate-900\/60  { background-color: rgba(248,250,252,0.88) !important; }
+
+.theme-ocean .bg-cyan-950\/30   { background-color: rgba(8,47,73,0.35) !important; }
+.theme-ocean .bg-violet-950\/30 { background-color: rgba(8,145,178,0.16) !important; }
+.theme-ocean .bg-green-950\/30  { background-color: rgba(6,95,70,0.30) !important; }
+.theme-ocean .bg-green-950\/40  { background-color: rgba(6,95,70,0.40) !important; }
+.theme-ocean .bg-green-950\/60  { background-color: rgba(6,95,70,0.55) !important; }
+.theme-ocean .bg-orange-950\/30 { background-color: rgba(124,45,18,0.30) !important; }
+.theme-ocean .bg-orange-950\/40 { background-color: rgba(124,45,18,0.40) !important; }
+.theme-ocean .bg-orange-950\/50 { background-color: rgba(124,45,18,0.48) !important; }
+.theme-ocean .bg-orange-950\/60 { background-color: rgba(124,45,18,0.55) !important; }
+.theme-ocean .bg-yellow-950\/30 { background-color: rgba(113,63,18,0.30) !important; }
+.theme-ocean .bg-yellow-950\/40 { background-color: rgba(113,63,18,0.40) !important; }
+.theme-ocean .bg-yellow-950\/50 { background-color: rgba(113,63,18,0.48) !important; }
+.theme-ocean .bg-yellow-950\/60 { background-color: rgba(113,63,18,0.55) !important; }
+.theme-ocean .bg-red-950\/30    { background-color: rgba(127,29,29,0.30) !important; }
+.theme-ocean .bg-red-950\/40    { background-color: rgba(127,29,29,0.40) !important; }
+.theme-ocean .bg-red-950\/50    { background-color: rgba(127,29,29,0.48) !important; }
+.theme-ocean .bg-red-950\/60    { background-color: rgba(127,29,29,0.55) !important; }
+.theme-ocean .bg-pink-950\/30   { background-color: rgba(80,7,36,0.30) !important; }
+.theme-ocean .bg-pink-950\/40   { background-color: rgba(80,7,36,0.40) !important; }
+.theme-ocean .bg-pink-950\/60   { background-color: rgba(80,7,36,0.55) !important; }
+.theme-ocean .bg-slate-700      { background-color: rgba(7,42,74,0.55) !important; }
+.theme-ocean .bg-slate-900\/40  { background-color: rgba(6,31,58,0.55) !important; }
+.theme-ocean .bg-slate-900\/60  { background-color: rgba(6,31,58,0.70) !important; }
+
+/* Inline SVG legend/pattern boxes on Garis dan Sudut pages that used
+   hardcoded dark rgba fills — recolor for bright themes. */
+.light-mode .theme-legend-box rect       { fill: rgba(226,232,240,0.9) !important; stroke: #94a3b8 !important; }
+.light-mode .theme-legend-box text[fill="#e2e8f0"] { fill: #1e293b !important; }
+.light-mode .theme-legend-box text[fill="#94a3b8"] { fill: #475569 !important; }
+
+.theme-ocean .theme-legend-box rect       { fill: rgba(6,31,58,0.75) !important; stroke: #38bdf8 !important; }

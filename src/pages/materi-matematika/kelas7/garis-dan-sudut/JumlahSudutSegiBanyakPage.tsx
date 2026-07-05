@@ -452,23 +452,25 @@ const SegiLimaSVG = ({ jumlahLabel }: { jumlahLabel: string }) => (
 
 const PolaSegiNSVG = ({ line1, line2 }: { line1: string; line2: string }) => (
   <svg viewBox="0 0 320 120" className="w-full max-w-sm mx-auto my-3">
-    <rect x="5" y="5" width="310" height="110" rx="10" fill="rgba(15,23,42,0.8)" stroke="#334155" strokeWidth="1.5" />
-    <polygon points="45,85 25,95 65,95" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="2" />
-    <text x="28" y="110" fill="#22d3ee" fontSize="9" fontFamily="monospace">n=3</text>
-    <text x="22" y="78" fill="#22d3ee" fontSize="9" fontFamily="monospace">180°</text>
-    <rect x="85" y="72" width="30" height="22" fill="rgba(167,139,250,0.15)" stroke="#a78bfa" strokeWidth="2" />
-    <text x="86" y="110" fill="#a78bfa" fontSize="9" fontFamily="monospace">n=4</text>
-    <text x="81" y="66" fill="#a78bfa" fontSize="9" fontFamily="monospace">360°</text>
-    <polygon points="155,72 170,68 180,80 170,94 145,94" fill="rgba(250,204,21,0.15)" stroke="#facc15" strokeWidth="2" />
-    <text x="148" y="110" fill="#facc15" fontSize="9" fontFamily="monospace">n=5</text>
-    <text x="148" y="62" fill="#facc15" fontSize="9" fontFamily="monospace">540°</text>
-    <polygon points="230,72 242,65 256,72 256,88 242,95 228,88" fill="rgba(74,222,128,0.15)" stroke="#4ade80" strokeWidth="2" />
-    <text x="225" y="110" fill="#4ade80" fontSize="9" fontFamily="monospace">n=6</text>
-    <text x="225" y="59" fill="#4ade80" fontSize="9" fontFamily="monospace">720°</text>
-    <text x="278" y="78" fill="#f472b6" fontSize="9" fontFamily="monospace">segi-n</text>
-    <text x="273" y="92" fill="#f472b6" fontSize="9" fontFamily="monospace">(n-2)×180°</text>
-    <text x="15" y="35" fill="#e2e8f0" fontSize="9" fontFamily="monospace">{line1}</text>
-    <text x="15" y="50" fill="#94a3b8" fontSize="8" fontFamily="monospace">{line2}</text>
+    <g className="theme-legend-box">
+      <rect x="5" y="5" width="310" height="110" rx="10" fill="rgba(15,23,42,0.8)" stroke="#334155" strokeWidth="1.5" />
+      <polygon points="45,85 25,95 65,95" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="2" />
+      <text x="28" y="110" fill="#22d3ee" fontSize="9" fontFamily="monospace">n=3</text>
+      <text x="22" y="78" fill="#22d3ee" fontSize="9" fontFamily="monospace">180°</text>
+      <rect x="85" y="72" width="30" height="22" fill="rgba(167,139,250,0.15)" stroke="#a78bfa" strokeWidth="2" />
+      <text x="86" y="110" fill="#a78bfa" fontSize="9" fontFamily="monospace">n=4</text>
+      <text x="81" y="66" fill="#a78bfa" fontSize="9" fontFamily="monospace">360°</text>
+      <polygon points="155,72 170,68 180,80 170,94 145,94" fill="rgba(250,204,21,0.15)" stroke="#facc15" strokeWidth="2" />
+      <text x="148" y="110" fill="#facc15" fontSize="9" fontFamily="monospace">n=5</text>
+      <text x="148" y="62" fill="#facc15" fontSize="9" fontFamily="monospace">540°</text>
+      <polygon points="230,72 242,65 256,72 256,88 242,95 228,88" fill="rgba(74,222,128,0.15)" stroke="#4ade80" strokeWidth="2" />
+      <text x="225" y="110" fill="#4ade80" fontSize="9" fontFamily="monospace">n=6</text>
+      <text x="225" y="59" fill="#4ade80" fontSize="9" fontFamily="monospace">720°</text>
+      <text x="278" y="78" fill="#f472b6" fontSize="9" fontFamily="monospace">segi-n</text>
+      <text x="273" y="92" fill="#f472b6" fontSize="9" fontFamily="monospace">(n-2)×180°</text>
+      <text x="15" y="35" fill="#e2e8f0" fontSize="9" fontFamily="monospace">{line1}</text>
+      <text x="15" y="50" fill="#94a3b8" fontSize="8" fontFamily="monospace">{line2}</text>
+    </g>
   </svg>
 );
 
