@@ -12,11 +12,13 @@ type Diagram = Parameters<typeof CoordPlane>[0];
 type TableCol = { x: number | string; y: number | string };
 type TableSpec = { equation: string; cols: TableCol[] };
 type Choice = { label: string; math: string };
+type DiagramChoice = { label: string; diagram: Diagram };
 type Q = {
   n: number; title: string;
   content?: string; math?: string;
   parts?: Part[]; diagram?: Diagram;
   table?: TableSpec; choices?: Choice[];
+  diagramChoices?: DiagramChoice[];
   type: "essay" | "mixed" | "diagram-only";
 };
 const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
@@ -56,46 +58,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Garis Horizontal y = 3", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -5.5, y1: 3, x2: 5.5, y2: 3, color: "#facc15", label: "y = 3" }],
-      pts: [{ x: 0, y: 3, label: "(0,3)", color: "#facc15", labelPos: "top" }],
-    },
-    parts: [
-      { label: "a.", text: "Sejajar dengan sumbu manakah garis y = 3?" },
-      { label: "b.", text: "Apakah garis ini memotong sumbu-x? Jelaskan!" },
-      { label: "c.", text: "Berapa jarak garis ini dari sumbu-x?" },
-    ],
-  }),
-
-  Q(4, "Garis Vertikal x = −4", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -4, y1: -5.5, x2: -4, y2: 5.5, color: "#fb923c", label: "x=−4" }],
-      pts: [{ x: -4, y: 0, label: "(−4,0)", color: "#fb923c", labelPos: "tr" }],
-    },
-    parts: [
-      { label: "a.", text: "Sejajar dengan sumbu manakah garis x = −4?" },
-      { label: "b.", text: "Apakah garis ini memotong sumbu-y? Jelaskan!" },
-      { label: "c.", text: "Berapa jarak garis x = −4 dari sumbu-y?" },
-    ],
-  }),
-
-  Q(5, "Titik Potong Dua Sumbu", {
-    type: "mixed",
-    content: "Tentukan titik potong setiap garis dengan sumbu-x dan sumbu-y:",
-    parts: [
-      { label: "a.", math: "y = 4x + 8" },
-      { label: "b.", math: "y = -\\tfrac{1}{2}x + 3" },
-      { label: "c.", math: "2x + 3y = 12" },
-      { label: "d.", math: "5x - 2y = 10" },
-    ],
-  }),
-
-  Q(6, "Grafik Persamaan Umum ax + by = c", {
+  Q(3, "Grafik Persamaan Umum ax + by = c", {
     type: "mixed",
     content: "Gambar grafik persamaan garis berikut menggunakan dua titik:",
     parts: [
@@ -105,7 +68,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Grafik dari Tabel Nilai x — y = 2x − 1", {
+  Q(4, "Grafik dari Tabel Nilai x — y = 2x − 1", {
     type: "mixed",
     content: "Lengkapi tabel nilai y berikut untuk persamaan garis y = 2x − 1, lalu gambarlah grafiknya pada bidang kartesius di bawah.",
     table: {
@@ -126,7 +89,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(8, "Grafik dari Tabel Nilai x — y = −x + 3", {
+  Q(5, "Grafik dari Tabel Nilai x — y = −x + 3", {
     type: "mixed",
     content: "Lengkapi tabel nilai y berikut untuk persamaan garis y = −x + 3, lalu gambarlah grafiknya pada bidang kartesius di bawah.",
     table: {
@@ -147,7 +110,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Menggambar Garis dengan Titik Potong Sumbu — 2x + y = 4", {
+  Q(6, "Menggambar Garis dengan Titik Potong Sumbu — 2x + y = 4", {
     type: "mixed",
     content: "Lengkapi tabel berikut dengan mencari titik potong sumbu-y (saat x = 0) dan titik potong sumbu-x (saat y = 0) dari persamaan 2x + y = 4, lalu gambarlah garisnya.",
     table: {
@@ -165,7 +128,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Menggambar Garis dengan Titik Potong Sumbu — 3x − 2y = 12", {
+  Q(7, "Menggambar Garis dengan Titik Potong Sumbu — 3x − 2y = 12", {
     type: "mixed",
     content: "Lengkapi tabel berikut dengan mencari titik potong sumbu-y (saat x = 0) dan titik potong sumbu-x (saat y = 0) dari persamaan 3x − 2y = 12, lalu gambarlah garisnya.",
     table: {
@@ -183,7 +146,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(11, "Pilih Persamaan yang Sesuai dengan Grafik", {
+  Q(8, "Pilih Persamaan yang Sesuai dengan Grafik", {
     type: "mixed",
     content: "Perhatikan grafik garis berikut. Manakah persamaan garis yang tepat menggambarkan grafik tersebut?",
     diagram: {
@@ -202,6 +165,59 @@ const questions: Q[] = [
     ],
     parts: [
       { label: "Petunjuk:", text: "Hitung gradien garis menggunakan kedua titik pada grafik, lalu cocokkan dengan titik potong sumbu-y untuk menentukan persamaan yang tepat." },
+    ],
+  }),
+
+  Q(9, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
+    type: "mixed",
+    content: "Diketahui persamaan garis y = 2x − 4. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
+    diagramChoices: [
+      {
+        label: "A.",
+        diagram: {
+          size: 150, range: 5,
+          segs: [{ x1: -1, y1: -6, x2: 4, y2: 4, color: "#4ade80" }],
+          pts: [
+            { x: 0, y: -4, label: "(0,-4)", color: "#4ade80", labelPos: "bot" },
+            { x: 2, y: 0, label: "(2,0)", color: "#4ade80", labelPos: "top" },
+          ],
+        },
+      },
+      {
+        label: "B.",
+        diagram: {
+          size: 150, range: 5,
+          segs: [{ x1: -4, y1: 4, x2: 4, y2: -4, color: "#f87171" }],
+          pts: [
+            { x: 0, y: 0, label: "(0,0)", color: "#f87171", labelPos: "top" },
+          ],
+        },
+      },
+      {
+        label: "C.",
+        diagram: {
+          size: 150, range: 5,
+          segs: [{ x1: -3, y1: -1, x2: 3, y2: 3, color: "#f87171" }],
+          pts: [
+            { x: 0, y: 1, label: "(0,1)", color: "#f87171", labelPos: "top" },
+            { x: -2, y: -3, label: "(-2,-3)", color: "#f87171", labelPos: "bl" },
+          ],
+        },
+      },
+      {
+        label: "D.",
+        diagram: {
+          size: 150, range: 5,
+          segs: [{ x1: -2, y1: 4, x2: 4, y2: -4, color: "#f87171" }],
+          pts: [
+            { x: 0, y: 4, label: "(0,4)", color: "#f87171", labelPos: "top" },
+            { x: 2, y: 0, label: "(2,0)", color: "#f87171", labelPos: "bot" },
+          ],
+        },
+      },
+    ],
+    parts: [
+      { label: "Petunjuk:", text: "Substitusikan x = 0 dan y = 0 ke persamaan y = 2x − 4 untuk menemukan titik potong sumbu-y dan sumbu-x, lalu cocokkan dengan grafik yang benar." },
     ],
   }),
 ];
@@ -282,6 +298,19 @@ const GrafikPGLPage = () => {
                     <div key={ci} className="flex items-center gap-2">
                       <span className="text-pink-400 text-xs font-body font-bold shrink-0 min-w-[20px]">{c.label}</span>
                       <div className="text-white/85 text-sm"><InlineMath math={c.math} /></div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {q.diagramChoices && (
+                <div className="grid grid-cols-2 gap-3 mt-3 mb-1">
+                  {q.diagramChoices.map((dc, dci) => (
+                    <div key={dci} className="flex flex-col items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 p-2">
+                      <span className="text-pink-400 text-xs font-body font-bold self-start pl-1">{dc.label}</span>
+                      <div className="rounded-lg overflow-hidden shadow-lg">
+                        <CoordPlane {...dc.diagram} lightBg />
+                      </div>
                     </div>
                   ))}
                 </div>
