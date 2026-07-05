@@ -3848,3 +3848,18 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   background-color: rgba(80,7,54,0.45) !important;
   border-color: #38bdf8 !important;
 }
+
+/* Diagram Venn (Kelas 7 - Himpunan) — hardcoded near-black SVG boxes
+   (#0f172a) and dark circle fills, recolor for bright themes. */
+.light-mode .theme-venn-box .venn-bg { fill: #eef2f7 !important; stroke: #94a3b8 !important; }
+.light-mode .theme-venn-box .venn-muted-text { fill: #475569 !important; }
+.light-mode .theme-venn-box .venn-text-a { fill: #0369a1 !important; }
+.light-mode .theme-venn-box .venn-text-b { fill: #4338ca !important; }
+.light-mode .theme-venn-box .venn-text-both { fill: #b45309 !important; }
+.light-mode .theme-venn-box .venn-circle-a { fill: #bae6fd !important; }
+.light-mode .theme-venn-box .venn-circle-b { fill: #c7d2fe !important; }
+
+.theme-ocean .theme-venn-box .venn-bg { fill: rgba(6,31,58,0.75) !important; stroke: #38bdf8 !important; }
+.theme-ocean .theme-venn-box .venn-muted-text { fill: #7dd3fc !important; }
+.theme-ocean .theme-venn-box .venn-circle-a { fill: #164e63 !important; }
+.theme-ocean .theme-venn-box .venn-circle-b { fill: #1e3a8a !important; }

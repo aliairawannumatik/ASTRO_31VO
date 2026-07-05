@@ -554,10 +554,10 @@ const VennSvg = ({
   return (
     <div className="flex flex-col items-center gap-1">
       <p className="text-xs font-mono text-yellow-300">{title}</p>
-      <svg viewBox="0 0 260 150" className="w-full max-w-[220px]">
+      <svg viewBox="0 0 260 150" className="w-full max-w-[220px] theme-venn-box">
         {/* Universal set */}
-        <rect x="4" y="4" width="252" height="142" rx="8" fill="#0f172a" stroke="#334155" strokeWidth="1.5"/>
-        <text x="240" y="18" fontSize="11" fill="#64748b" fontFamily="monospace">S</text>
+        <rect x="4" y="4" width="252" height="142" rx="8" className="venn-bg" fill="#0f172a" stroke="#334155" strokeWidth="1.5"/>
+        <text x="240" y="18" fontSize="11" className="venn-muted-text" fill="#64748b" fontFamily="monospace">S</text>
         {/* Outer shading */}
         {shadeOuter && <rect x="4" y="4" width="252" height="142" rx="8" fill={outerShade}/>}
         {/* Left circle fill */}
@@ -574,18 +574,18 @@ const VennSvg = ({
         )}
         {/* Remove center when shadeLeft OR shadeRight but not shadeCenter */}
         {(shadeLeft || shadeRight) && !shadeCenter && (
-          <path d="M 130,43 a 48,48 0 0,1 0,64 a 48,48 0 0,1 0,-64 Z" fill="#0f172a" stroke="none"/>
+          <path d="M 130,43 a 48,48 0 0,1 0,64 a 48,48 0 0,1 0,-64 Z" className="venn-bg" fill="#0f172a" stroke="none"/>
         )}
         {/* Remove outer-only circles shading */}
         {shadeOuter && (
           <>
-            <circle cx="100" cy="75" r="48" fill="#0f172a" opacity="0.7"/>
-            <circle cx="160" cy="75" r="48" fill="#0f172a" opacity="0.7"/>
+            <circle cx="100" cy="75" r="48" className="venn-bg" fill="#0f172a" opacity="0.7"/>
+            <circle cx="160" cy="75" r="48" className="venn-bg" fill="#0f172a" opacity="0.7"/>
           </>
         )}
         {/* Labels */}
-        <text x="84" y="72" textAnchor="middle" fontSize="12" fill="#bae6fd" fontFamily="monospace" fontWeight="bold">A</text>
-        <text x="176" y="72" textAnchor="middle" fontSize="12" fill="#c7d2fe" fontFamily="monospace" fontWeight="bold">B</text>
+        <text x="84" y="72" textAnchor="middle" fontSize="12" className="venn-text-a" fill="#bae6fd" fontFamily="monospace" fontWeight="bold">A</text>
+        <text x="176" y="72" textAnchor="middle" fontSize="12" className="venn-text-b" fill="#c7d2fe" fontFamily="monospace" fontWeight="bold">B</text>
       </svg>
     </div>
   );
@@ -594,26 +594,26 @@ const VennSvg = ({
 const VennContextual = ({ t }: { t: T }) => (
   <div className="flex flex-col items-center gap-1">
     <p className="text-xs font-mono text-cyan-300">{t.s1contextTitle}</p>
-    <svg viewBox="0 0 280 170" className="w-full max-w-xs">
-      <rect x="4" y="4" width="272" height="162" rx="8" fill="#0f172a" stroke="#334155" strokeWidth="1.5"/>
-      <text x="258" y="20" fontSize="11" fill="#64748b" fontFamily="monospace">S</text>
+    <svg viewBox="0 0 280 170" className="w-full max-w-xs theme-venn-box">
+      <rect x="4" y="4" width="272" height="162" rx="8" className="venn-bg" fill="#0f172a" stroke="#334155" strokeWidth="1.5"/>
+      <text x="258" y="20" fontSize="11" className="venn-muted-text" fill="#64748b" fontFamily="monospace">S</text>
       {/* Futsal circle */}
-      <circle cx="110" cy="88" r="60" fill="#164e63" stroke="#22d3ee" strokeWidth="2" fillOpacity="0.7"/>
+      <circle cx="110" cy="88" r="60" className="venn-circle-a" fill="#164e63" stroke="#22d3ee" strokeWidth="2" fillOpacity="0.7"/>
       {/* Basket circle */}
-      <circle cx="170" cy="88" r="60" fill="#1e1b4b" stroke="#818cf8" strokeWidth="2" fillOpacity="0.7"/>
+      <circle cx="170" cy="88" r="60" className="venn-circle-b" fill="#1e1b4b" stroke="#818cf8" strokeWidth="2" fillOpacity="0.7"/>
       {/* Labels */}
-      <text x="75" y="70" textAnchor="middle" fontSize="11" fill="#a5f3fc" fontFamily="sans-serif" fontWeight="bold">Futsal</text>
-      <text x="75" y="88" textAnchor="middle" fontSize="11" fill="#a5f3fc" fontFamily="monospace">8 {t.s1studentsLabel}</text>
-      <text x="75" y="103" textAnchor="middle" fontSize="10" fill="#7dd3fc" fontFamily="monospace">→ 8−5=3</text>
-      <text x="205" y="70" textAnchor="middle" fontSize="11" fill="#c7d2fe" fontFamily="sans-serif" fontWeight="bold">
+      <text x="75" y="70" textAnchor="middle" fontSize="11" className="venn-text-a" fill="#a5f3fc" fontFamily="sans-serif" fontWeight="bold">Futsal</text>
+      <text x="75" y="88" textAnchor="middle" fontSize="11" className="venn-text-a" fill="#a5f3fc" fontFamily="monospace">8 {t.s1studentsLabel}</text>
+      <text x="75" y="103" textAnchor="middle" fontSize="10" className="venn-text-a" fill="#7dd3fc" fontFamily="monospace">→ 8−5=3</text>
+      <text x="205" y="70" textAnchor="middle" fontSize="11" className="venn-text-b" fill="#c7d2fe" fontFamily="sans-serif" fontWeight="bold">
         {t.lang === "ja" ? "バスケ" : "Basketball"}
       </text>
-      <text x="205" y="88" textAnchor="middle" fontSize="11" fill="#c7d2fe" fontFamily="monospace">7 {t.s1studentsLabel}</text>
-      <text x="205" y="103" textAnchor="middle" fontSize="10" fill="#a5b4fc" fontFamily="monospace">→ 7−5=2</text>
-      <text x="140" y="82" textAnchor="middle" fontSize="10" fill="#fde68a" fontFamily="sans-serif" fontWeight="bold">{t.s1bothLabel}</text>
-      <text x="140" y="96" textAnchor="middle" fontSize="11" fill="#fde68a" fontFamily="monospace">5 {t.s1studentsLabel}</text>
+      <text x="205" y="88" textAnchor="middle" fontSize="11" className="venn-text-b" fill="#c7d2fe" fontFamily="monospace">7 {t.s1studentsLabel}</text>
+      <text x="205" y="103" textAnchor="middle" fontSize="10" className="venn-text-b" fill="#a5b4fc" fontFamily="monospace">→ 7−5=2</text>
+      <text x="140" y="82" textAnchor="middle" fontSize="10" className="venn-text-both" fill="#fde68a" fontFamily="sans-serif" fontWeight="bold">{t.s1bothLabel}</text>
+      <text x="140" y="96" textAnchor="middle" fontSize="11" className="venn-text-both" fill="#fde68a" fontFamily="monospace">5 {t.s1studentsLabel}</text>
       {/* Outside */}
-      <text x="20" y="155" fontSize="9" fill="#64748b" fontFamily="monospace">{t.s1outsideLabel}: 30−(3+5+2)=20 {t.s1studentsLabel}</text>
+      <text x="20" y="155" fontSize="9" className="venn-muted-text" fill="#64748b" fontFamily="monospace">{t.s1outsideLabel}: 30−(3+5+2)=20 {t.s1studentsLabel}</text>
     </svg>
   </div>
 );
