@@ -932,7 +932,7 @@ export default function GabunganPage() {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
             <BlockMath math="V_k = 6^3 = 216\text{ cm}^3"/>
             <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 6 \times 4 = 12\text{ cm}^2"/>
-            <BlockMath math="V_{\text{prisma}} = 12 \times 6 = 72\text{ cm}^3"/>
+            <BlockMath math="V_p = 12 \times 6 = 72\text{ cm}^3"/>
             <BlockMath math="V_t = 216 + 72 = 288\text{ cm}^3"/>
           </div>
           <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
@@ -1113,7 +1113,10 @@ export default function GabunganPage() {
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "Combined Surface Area Formula:" : lang === "ja" ? "複合表面積の公式:" : "Rumus Luas Permukaan Gabungan:"}
             </p>
-            <BlockMath math="L_{\text{gab}} = (L_A - L_{\text{beririsan}}) + (L_B - L_{\text{beririsan}})"/>
+            <BlockMath math="L_g = (L_A - L_i) + (L_B - L_i)"/>
+            <p className="text-white/40 text-[10px]">
+              {lang === "en" ? "Lᵢ = shared (touching) face area" : lang === "ja" ? "Lᵢ = 共有面の面積" : "Lᵢ = luas bidang yang saling menempel"}
+            </p>
             <p className="text-white/55">
               {lang === "en" ? "Subtract shared faces from each solid before summing."
               : lang === "ja" ? "合計前に各立体から共有面を引く。"
@@ -1158,7 +1161,7 @@ export default function GabunganPage() {
                 ? <><strong className="text-yellow-300">複数の部分を合わせて</strong>立体を作る場合。合計体積 = 各部分の合計。</>
                 : <>Bangun terbentuk dari <strong className="text-yellow-300">beberapa bagian yang disatukan</strong>. Volume total = jumlah semua bagian.</>}
             </p>
-            <BlockMath math="V_{\text{gabungan}} = V_1 + V_2 + V_3 + \ldots"/>
+            <BlockMath math="V_g = V_1 + V_2 + V_3 + \ldots"/>
           </div>
           <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
             <p className="text-cyan-300 font-semibold">
@@ -1175,7 +1178,7 @@ export default function GabunganPage() {
                 <span className="text-amber-300 font-bold text-[11px] min-w-fit">
                   {lang === "en" ? "Cube + Prism △:" : lang === "ja" ? "立方体 + 三角柱:" : "Kubus + Prisma △:"}
                 </span>
-                <BlockMath math="V = s^3 + L_{\triangle} \cdot t_{\text{prisma}}"/>
+                <BlockMath math="V = s^3 + L_{\triangle} \cdot t_p"/>
               </div>
               <div className="flex items-start gap-2 bg-emerald-950/40 rounded p-2">
                 <span className="text-emerald-300 font-bold text-[11px] min-w-fit">
@@ -1196,7 +1199,12 @@ export default function GabunganPage() {
                 ? <><strong className="text-yellow-300">一部を取り除いた完全な立体</strong>として考えると簡単な場合があります。</>
                 : <>Kadang lebih mudah membayangkan bangun sebagai <strong className="text-yellow-300">benda utuh yang sudah diambil sebagian</strong>.</>}
             </p>
-            <BlockMath math="V_{\text{gabungan}} = V_{\text{utuh}} - V_{\text{yang diambil}}"/>
+            <BlockMath math="V_g = V_u - V_d"/>
+            <p className="text-white/40 text-[10px]">
+              {lang === "en" ? "Vᵤ = whole solid volume · V_d = volume of removed part"
+              : lang === "ja" ? "Vᵤ = 全体の体積 · V_d = 取り除いた部分の体積"
+              : "Vᵤ = volume utuh · V_d = volume bagian yang diambil"}
+            </p>
           </div>
           <div className="bg-yellow-950/40 border border-yellow-700/30 rounded-lg p-3 text-xs text-yellow-200 space-y-1">
             <p className="font-semibold">⚠️ {lang === "en" ? "Important:" : lang === "ja" ? "注意:" : "Perhatian:"}</p>
@@ -1226,7 +1234,7 @@ export default function GabunganPage() {
               <p className="text-blue-300 font-semibold">{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
               <BlockMath math="V = p \cdot l \cdot t_1 + \frac{1}{3} \cdot p \cdot l \cdot t_2"/>
               <p className="text-orange-300 font-semibold">{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
-              <BlockMath math="L = L_{\text{alas balok}} + 4 \cdot L_{\text{sisi balok}} + 4 \cdot L_{\triangle}"/>
+              <BlockMath math="L = L_{\text{base}} + 4 \cdot L_{\text{side}} + 4 \cdot L_{\triangle}"/>
               <p className="text-white/50">
                 {lang === "en" ? "Box top (= pyramid base) not counted!"
                 : lang === "ja" ? "直方体の上面（= 角錐の底面）は数えない！"
@@ -1255,9 +1263,9 @@ export default function GabunganPage() {
             </p>
             <div className="space-y-2">
               <p className="text-blue-300 font-semibold">{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
-              <BlockMath math="V = s^3 + L_{\triangle} \times t_{\text{prisma}}"/>
+              <BlockMath math="V = s^3 + L_{\triangle} \times t_p"/>
               <p className="text-orange-300 font-semibold">{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
-              <BlockMath math="L = L_{\text{alas}} + 4 \cdot L_{\text{sisi kubus}} + 2 \cdot L_{\triangle} + 2 \cdot L_{\text{sisi miring}}"/>
+              <BlockMath math="L = L_a + 4 \cdot L_{\text{side}} + 2 \cdot L_{\triangle} + 2 \cdot L_m"/>
               <p className="text-white/50">
                 {lang === "en" ? "Cube top (= prism base) not counted!"
                 : lang === "ja" ? "立方体の上面（= 三角柱の底面）は数えない！"
@@ -1285,7 +1293,7 @@ export default function GabunganPage() {
               : "Dua balok yang disambung (undakan / L-shape):"}
             </p>
             <p className="text-blue-300 font-semibold">{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
-            <BlockMath math="V = V_{\text{balok 1}} + V_{\text{balok 2}}"/>
+            <BlockMath math="V = V_{b_1} + V_{b_2}"/>
             <p className="text-orange-300 font-semibold">{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
             <p className="text-white/70">
               {lang === "en" ? "Sum all visible faces from outside. The junction faces are not counted."
@@ -1302,7 +1310,12 @@ export default function GabunganPage() {
               : lang === "ja" ? "大きな直方体から小さな直方体を引く方法でも計算できます。"
               : "Bisa juga dihitung sebagai satu balok besar dikurangi satu balok kecil (selisih volume)."}
             </p>
-            <BlockMath math="V = V_{\text{besar}} - V_{\text{yang dipotong}}"/>
+            <BlockMath math="V = V_B - V_d"/>
+            <p className="text-white/40 text-[10px]">
+              {lang === "en" ? "V_B = larger box · V_d = portion removed"
+              : lang === "ja" ? "V_B = 大きな直方体 · V_d = 切り取った部分"
+              : "V_B = balok besar · V_d = bagian yang dipotong"}
+            </p>
           </div>
         </div>
       ),
@@ -1337,7 +1350,12 @@ export default function GabunganPage() {
             <p className="text-orange-300 font-semibold">
               {lang === "en" ? "Example Box + Pyramid:" : lang === "ja" ? "例 直方体 + 角錐:" : "Contoh Balok + Limas:"}
             </p>
-            <BlockMath math="L = L_{\text{balok tanpa tutup}} + L_{\text{selimut limas}}"/>
+            <BlockMath math="L = L_{\text{box}} + L_s"/>
+            <p className="text-white/40 text-[10px]">
+              {lang === "en" ? "L_box = box (without top lid) · L_s = pyramid lateral area"
+              : lang === "ja" ? "L_box = 直方体（上面除く）· L_s = 角錐の側面積"
+              : "L_box = selimut balok (tanpa tutup) · L_s = selimut limas"}
+            </p>
             <p className="text-white/50">
               {lang === "en" ? "Pyramid base = box top → not counted!"
               : lang === "ja" ? "角錐底面 = 直方体上面 → 数えない！"
@@ -1364,8 +1382,8 @@ export default function GabunganPage() {
           </div>
           <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
             <p className="text-violet-300 font-semibold">📌 {lang === "en" ? "Summary Formulas:" : lang === "ja" ? "公式まとめ:" : "Rumus Ringkas:"}</p>
-            <BlockMath math="V_{\text{gab}} = \sum V_i"/>
-            <BlockMath math="L_{\text{gab}} = \sum L_{\text{terlihat}}"/>
+            <BlockMath math="V_g = \sum V_i"/>
+            <BlockMath math="L_g = \sum L_{\text{vis}}"/>
           </div>
           <div className="bg-green-950/40 border border-green-700/30 rounded-lg p-3 text-xs text-green-200">
             <p className="font-semibold mb-1">✅ {lang === "en" ? "Always remember:" : lang === "ja" ? "常に覚えよう:" : "Ingat selalu:"}</p>
