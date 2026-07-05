@@ -142,7 +142,7 @@ const QuizGameOverlay = () => {
     <>
       {!activeQuiz && !gameOver && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-40 pointer-events-none">
-          <div className="flex items-center gap-2 bg-slate-950/80 border border-cyan-400/40 rounded-full px-4 py-1.5 shadow-lg backdrop-blur-sm">
+          <div className="game-quiz-panel flex items-center gap-2 bg-slate-950/80 border border-cyan-400/40 rounded-full px-4 py-1.5 shadow-lg backdrop-blur-sm">
             <span className="text-white/60 text-[10px] font-bold tracking-widest font-mono">{t('gameArena.countdownLabel')}</span>
             <span className={`text-sm font-black font-mono ${countdown <= 10 ? "text-red-400 animate-pulse" : "text-cyan-300"}`}>
               {countdown}s
@@ -158,7 +158,7 @@ const QuizGameOverlay = () => {
 
       {activeQuiz && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(2,6,23,0.82)" }}>
-          <div className="w-full max-w-sm bg-slate-950 border-2 border-cyan-400 rounded-2xl p-6 shadow-[0_0_50px_rgba(0,240,255,0.3)]">
+          <div className="game-quiz-panel w-full max-w-sm bg-slate-950 border-2 border-cyan-400 rounded-2xl p-6 shadow-[0_0_50px_rgba(0,240,255,0.3)]">
             <div className="text-center mb-4">
               <div className="inline-flex items-center gap-2 bg-cyan-500/15 border border-cyan-400/40 rounded-full px-3 py-1">
                 <span className="text-cyan-300 text-xs font-bold tracking-widest">❓ {t('gameArena.quizHeader')}</span>
@@ -212,7 +212,7 @@ const QuizGameOverlay = () => {
 
       {gameOver && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(2,6,23,0.90)" }}>
-          <div className="w-full max-w-sm bg-slate-950 border-2 border-red-500 rounded-2xl p-6 text-center shadow-[0_0_50px_rgba(255,80,80,0.3)]">
+          <div className="game-quiz-panel w-full max-w-sm bg-slate-950 border-2 border-red-500 rounded-2xl p-6 text-center shadow-[0_0_50px_rgba(255,80,80,0.3)]">
             <div className="text-5xl mb-3">💀</div>
             <h2 className="text-red-400 text-xl font-black tracking-widest font-display mb-1">{t('gameArena.gameOverTitle')}</h2>
             <p className="text-white/60 text-sm font-body mb-4">{t('gameArena.gameOverDesc')}</p>

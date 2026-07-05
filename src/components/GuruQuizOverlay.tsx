@@ -248,7 +248,7 @@ export default function GuruQuizOverlay({
         style={{ background: "rgba(0,0,0,0.80)", backdropFilter: "blur(4px)" }}
       />
       <div
-        className="relative z-10 flex flex-col gap-4 rounded-3xl border-4 px-6 py-7 shadow-2xl"
+        className="game-quiz-panel relative z-10 flex flex-col gap-4 rounded-3xl border-4 px-6 py-7 shadow-2xl"
         style={{
           background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)",
           borderColor: "#818CF8",
