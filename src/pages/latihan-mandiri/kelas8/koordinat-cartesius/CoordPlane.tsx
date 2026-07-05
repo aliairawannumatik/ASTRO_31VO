@@ -11,6 +11,7 @@ type Seg = {
 type ExtraText = { x: number; y: number; text: string; color?: string; size?: number };
 type ShadeRegion = { type: 'rect'; x1: number; y1: number; x2: number; y2: number; color?: string };
 type Circle = { cx: number; cy: number; r: number; color?: string; dashed?: boolean };
+type RightAngleMark = { points: [[number, number], [number, number], [number, number]]; color?: string };
 
 export type CoordPlaneProps = {
   pts?: Pt[];
@@ -23,6 +24,7 @@ export type CoordPlaneProps = {
   quadrantLabels?: boolean;
   title?: string;
   lightBg?: boolean;
+  rightAngleMarks?: RightAngleMark[];
 };
 
 const CoordPlane = ({
@@ -36,6 +38,7 @@ const CoordPlane = ({
   quadrantLabels = false,
   title,
   lightBg = false,
+  rightAngleMarks = [],
 }: CoordPlaneProps) => {
   const pad = 18;
   const inner = size - 2 * pad;
@@ -160,6 +163,14 @@ const CoordPlane = ({
             </g>
           );
         })}
+
+        {/* Right-angle marks */}
+        {rightAngleMarks.map((m, i) => (
+          <polyline key={i}
+            points={m.points.map(([x, y]) => `${px(x)},${py(y)}`).join(' ')}
+            fill="none" stroke={m.color || axisStroke} strokeWidth="1.5"
+          />
+        ))}
 
         {/* Extra text elements */}
         {extraTexts.map((t, i) => (

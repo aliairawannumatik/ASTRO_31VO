@@ -242,8 +242,11 @@ const questions: Q[] = [
     diagram: {
       size: 260, range: 6,
       segs: [
-        { x1: -4, y1: -2, x2: 4, y2: 6, color: "#34d399", label: "ℓ₁: m=1" },
-        { x1: -2, y1: 6, x2: 6, y2: -2, color: "#fb923c", label: "ℓ₂: m=−1" },
+        { x1: -4, y1: -2, x2: 4, y2: 6, color: "#34d399" },
+        { x1: -2, y1: 6, x2: 6, y2: -2, color: "#fb923c" },
+      ],
+      rightAngleMarks: [
+        { points: [[1.28, 3.28], [1.57, 3], [1.28, 2.72]], color: "rgba(30,30,30,0.6)" },
       ],
     },
     parts: [
@@ -333,11 +336,11 @@ const GradienPage = () => {
                 </div>
               )}
 
-              {/* CoordPlane (dark, with axes) */}
+              {/* CoordPlane (light, with axes) */}
               {q.diagram && (
                 <div className="flex justify-center my-4">
                   <div className="rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                    <CoordPlane {...q.diagram} />
+                    <CoordPlane {...q.diagram} lightBg />
                   </div>
                 </div>
               )}
