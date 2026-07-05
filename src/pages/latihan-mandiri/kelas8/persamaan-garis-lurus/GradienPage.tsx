@@ -145,41 +145,8 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(2, "Baca Gradien dari Grid — Garis Naik (2)", {
-    type: "mixed",
-    content: "Perhatikan garis pada grid kotak-kotak di bawah ini. Garis bergerak ke kanan atas lebih curam.",
-    gridLine: { x1: 3, y1: 10, x2: 7, y2: 2, color: "#34d399" },
-    parts: [
-      { label: "a.", text: "Hitung Δx = berapa kotak garis bergerak ke kanan?" },
-      { label: "b.", text: "Hitung Δy = berapa kotak garis bergerak ke atas?" },
-      { label: "c.", math: "\\text{Hitung gradien } m = \\dfrac{\\Delta y}{\\Delta x}" },
-    ],
-  }),
-
-  Q(3, "Baca Gradien dari Grid — Garis Turun (1)", {
-    type: "mixed",
-    content: "Perhatikan garis pada grid kotak-kotak di bawah ini. Garis bergerak ke kanan bawah.",
-    gridLine: { x1: 2, y1: 2, x2: 8, y2: 8, color: "#f472b6" },
-    parts: [
-      { label: "a.", text: "Hitung Δx = berapa kotak garis bergerak ke kanan?" },
-      { label: "b.", text: "Hitung Δy = berapa kotak garis bergerak ke bawah? (bawah = negatif)" },
-      { label: "c.", math: "\\text{Hitung gradien } m = \\dfrac{\\Delta y}{\\Delta x}" },
-    ],
-  }),
-
-  Q(4, "Baca Gradien dari Grid — Garis Turun (2)", {
-    type: "mixed",
-    content: "Perhatikan garis pada grid kotak-kotak di bawah ini. Garis bergerak ke kanan bawah lebih landai.",
-    gridLine: { x1: 1, y1: 2, x2: 9, y2: 6, color: "#fb923c" },
-    parts: [
-      { label: "a.", text: "Hitung Δx = berapa kotak garis bergerak ke kanan?" },
-      { label: "b.", text: "Hitung Δy = berapa kotak garis bergerak ke bawah?" },
-      { label: "c.", math: "\\text{Hitung gradien } m = \\dfrac{\\Delta y}{\\Delta x}" },
-    ],
-  }),
-
-  /* ── Soal lama (renomor 5–24) ──────────────────────────── */
-  Q(5, "Gradien dari Dua Titik", {
+  /* ── Soal lama (renomor) ──────────────────────────── */
+  Q(2, "Gradien dari Dua Titik", {
     type: "mixed",
     content: "Hitung gradien garis yang melalui pasangan titik berikut:",
     parts: [
@@ -190,7 +157,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Gradien dari Persamaan y = mx + c", {
+  Q(3, "Gradien dari Persamaan y = mx + c", {
     type: "mixed",
     content: "Tentukan gradien dari setiap persamaan garis berikut:",
     parts: [
@@ -202,7 +169,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Gradien dari Bentuk Umum ax + by = c", {
+  Q(4, "Gradien dari Bentuk Umum ax + by = c", {
     type: "mixed",
     content: "Ubah ke bentuk y = mx + c lalu tentukan gradiennya:",
     parts: [
@@ -213,7 +180,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(8, "Gradien dari Grafik Menggunakan Segitiga", {
+  Q(5, "Gradien dari Grafik Menggunakan Segitiga", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -238,7 +205,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Gradien Garis Tegak dan Datar", {
+  Q(6, "Gradien Garis Tegak dan Datar", {
     type: "mixed",
     diagram: {
       size: 260, range: 5,
@@ -254,92 +221,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Mencari Koordinat dari Gradien", {
-    type: "mixed",
-    content: "Gradien garis yang melalui titik P(2, k) dan Q(6, 10) adalah 2. Tentukan nilai k.",
-    parts: [
-      { label: "a.", math: "\\text{Gunakan rumus } m = \\frac{y_2 - y_1}{x_2 - x_1}" },
-      { label: "b.", text: "Substitusikan nilai yang diketahui dan selesaikan untuk k." },
-      { label: "c.", text: "Verifikasi jawaban dengan menghitung ulang gradiennya." },
-    ],
-  }),
-
-  Q(11, "Perbandingan Gradien Dua Garis", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: -5, y1: -5, x2: 5, y2: 5, color: "#f472b6", label: "m=1" },
-        { x1: -3, y1: -6, x2: 3, y2: 6, color: "#60a5fa", label: "m=2" },
-        { x1: -5, y1: -2.5, x2: 5, y2: 2.5, color: "#34d399", label: "m=½" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Mana garis yang paling curam? Mengapa?" },
-      { label: "b.", text: "Mana garis yang paling landai? Mengapa?" },
-      { label: "c.", text: "Apa hubungan antara nilai gradien dan kecuraman garis?" },
-    ],
-  }),
-
-  Q(12, "Gradien dari Titik Potong Sumbu", {
-    type: "mixed",
-    content: "Garis memotong sumbu-x di titik (a, 0) dan sumbu-y di titik (0, b). Gunakan kedua titik ini untuk mencari gradien:",
-    parts: [
-      { label: "a.", math: "\\text{Titik potong: } (4,\\ 0) \\text{ dan } (0,\\ 8)" },
-      { label: "b.", math: "\\text{Titik potong: } (-6,\\ 0) \\text{ dan } (0,\\ 3)" },
-      { label: "c.", math: "\\text{Titik potong: } (5,\\ 0) \\text{ dan } (0,\\ -10)" },
-    ],
-  }),
-
-  Q(13, "UN 2018 — Nilai Gradien", {
-    type: "mixed",
-    content: "Persamaan garis adalah 3x + 4y − 24 = 0.",
-    parts: [
-      { label: "a.", math: "\\text{Ubah ke bentuk } y = mx + c." },
-      { label: "b.", text: "Tentukan gradien, titik potong sumbu-x, dan sumbu-y." },
-      { label: "c.", text: "Gambar grafiknya dengan menandai titik-titik penting." },
-    ],
-  }),
-
-  Q(14, "Hubungan Gradien Garis Naik dan Turun", {
-    type: "mixed",
-    content: "Tentukan sifat gradien (positif/negatif/nol/tak terdefinisi) dari setiap deskripsi garis:",
-    parts: [
-      { label: "a.", text: "Garis yang naik dari kiri ke kanan." },
-      { label: "b.", text: "Garis yang turun dari kiri ke kanan." },
-      { label: "c.", text: "Garis yang sejajar dengan sumbu-x." },
-      { label: "d.", text: "Garis yang tegak lurus dengan sumbu-x." },
-    ],
-  }),
-
-  Q(15, "Gradien Garis y = mx (Melalui O)", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 5,
-      segs: [
-        { x1: -4, y1: -8, x2: 2, y2: 4, color: "#f87171", label: "y=2x" },
-        { x1: -4, y1: 4, x2: 4, y2: -4, color: "#60a5fa", label: "y=−x" },
-      ],
-      pts: [{ x: 0, y: 0, label: "O", color: "var(--text-primary)", labelPos: "br" }],
-    },
-    parts: [
-      { label: "a.", text: "Tentukan gradien garis y = 2x." },
-      { label: "b.", text: "Tentukan gradien garis y = −x." },
-      { label: "c.", math: "\\text{Untuk garis } y = mx \\text{, gradiennya adalah } \\ldots" },
-    ],
-  }),
-
-  Q(16, "Mencari Nilai yang Tidak Diketahui dari Gradien", {
-    type: "mixed",
-    content: "Tentukan nilai yang belum diketahui:",
-    parts: [
-      { label: "a.", math: "\\text{Garis melalui } (3,\\ k) \\text{ dan } (7,\\ 16) \\text{ memiliki } m = 3." },
-      { label: "b.", math: "\\text{Garis melalui } (-2,\\ 5) \\text{ dan } (p,\\ -7) \\text{ memiliki } m = -4." },
-      { label: "c.", math: "\\text{Garis melalui } (a,\\ 3) \\text{ dan } (2a,\\ 9) \\text{ memiliki } m = 2." },
-    ],
-  }),
-
-  Q(17, "Gradien Garis Paralel", {
+  Q(7, "Gradien Garis Paralel", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -355,7 +237,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(18, "Gradien Garis Tegak Lurus", {
+  Q(8, "Gradien Garis Tegak Lurus", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -371,41 +253,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(19, "Gradien Garis pada Trapesium", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: -4, y: -2, label: "A", color: "#f472b6", labelPos: "bl" },
-        { x: 4, y: -2, label: "B", color: "#60a5fa", labelPos: "br" },
-        { x: 2, y: 3, label: "C", color: "#34d399", labelPos: "tr" },
-        { x: -2, y: 3, label: "D", color: "#facc15", labelPos: "tl" },
-      ],
-      segs: [
-        { x1: -4, y1: -2, x2: 4, y2: -2, color: "#f472b6" },
-        { x1: -4, y1: -2, x2: -2, y2: 3, color: "#facc15" },
-        { x1: 4, y1: -2, x2: 2, y2: 3, color: "#60a5fa" },
-        { x1: -2, y1: 3, x2: 2, y2: 3, color: "#34d399" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Hitung gradien sisi AD (dari A ke D)." },
-      { label: "b.", text: "Hitung gradien sisi BC (dari B ke C)." },
-      { label: "c.", text: "Apa yang dapat kamu simpulkan dari nilai kedua gradien tersebut?" },
-    ],
-  }),
-
-  Q(20, "Gradien dari Bentuk Pecahan", {
-    type: "mixed",
-    content: "Tentukan gradien dari persamaan-persamaan berikut:",
-    parts: [
-      { label: "a.", math: "\\frac{x}{3} + \\frac{y}{4} = 1" },
-      { label: "b.", math: "\\frac{2x-4}{3} = y + 1" },
-      { label: "c.", math: "\\frac{y-5}{x+2} = 3" },
-    ],
-  }),
-
-  Q(21, "Membuktikan Titik Segaris", {
+  Q(9, "Membuktikan Titik Segaris", {
     type: "mixed",
     content: "Buktikan apakah tiga titik berikut terletak pada satu garis lurus (segaris):",
     parts: [
@@ -415,26 +263,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(22, "UN 2021 — Soal Gradien Terapan", {
-    type: "mixed",
-    content: "Sebuah jalan menanjak membentuk garis lurus. Jika ujung bawah jalan ada di koordinat (0, 10) dan ujung atas di (50, 40):",
-    parts: [
-      { label: "a.", text: "Berapa gradien kemiringan jalan tersebut?" },
-      { label: "b.", text: "Artinya, setiap 10 meter horizontal, jalan naik berapa meter?" },
-    ],
-  }),
-
-  Q(23, "Gradien dari Persamaan Non-Standar", {
-    type: "mixed",
-    content: "Tentukan gradien dari setiap persamaan:",
-    parts: [
-      { label: "a.", math: "y - 3 = 4(x - 1)" },
-      { label: "b.", math: "y + 2 = -\\tfrac{1}{2}(x - 4)" },
-      { label: "c.", math: "y - 5 = 0" },
-    ],
-  }),
-
-  Q(24, "Tantangan — Gradien Segitiga", {
+  Q(10, "Tantangan — Gradien Segitiga", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
