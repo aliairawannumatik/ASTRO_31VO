@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import { useAudio, playPopSound } from "@/hooks/useAudio";
 import { useSound } from "@/contexts/SoundContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { spaceBg } from "@/assets/placeholder";
 
 const spaceshipImg = "/pesawat.png";
@@ -41,6 +42,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
   const navigate = useNavigate();
   const { playExplosion, playCorrect, playLaser, startBgMusic, stopBgMusic } = useAudio();
   const { soundOn } = useSound();
+  const { isDark } = useTheme();
 
 
   const [started, setStarted] = useState(false);
@@ -626,7 +628,15 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
                     <div className="absolute -inset-2 rounded-full border-2 border-yellow-300/80 animate-pulse pointer-events-none" style={{ boxShadow: "0 0 18px rgba(250,200,0,0.55)" }} />
                   )}
                   <img src={meteorImg} alt="meteor" className={`${isLandscape ? "w-14 h-14" : "w-16 h-16 md:w-20 md:h-20"} drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]`} style={{ mixBlendMode: "screen", background: "transparent" }} />
-                  <span className="absolute inset-0 flex items-center justify-center font-display text-[8px] md:text-[9px] font-bold text-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] px-1 text-center leading-tight">{m.label}</span>
+                  <span className="absolute inset-0 flex items-center justify-center px-1">
+                    <span
+                      className="font-display text-[8px] md:text-[9px] font-bold leading-tight text-center px-1 py-0.5 rounded"
+                      style={isDark
+                        ? { color: "#fff", textShadow: "0 1px 2px rgba(0,0,0,0.8)" }
+                        : { color: "#111", background: "rgba(255,255,255,0.93)", boxShadow: "0 1px 4px rgba(0,0,0,0.55)" }
+                      }
+                    >{m.label}</span>
+                  </span>
                 </div>
                 {m.hit && (
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -687,11 +697,15 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
             onPointerCancel={stopMove}
             onPointerLeave={stopMove}
             onContextMenu={(e) => e.preventDefault()}
-            className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-black text-white border-2 backdrop-blur-md transition-all duration-150 active:scale-90 ${
+            className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-black border-2 backdrop-blur-md transition-all duration-150 active:scale-90 ${
               locked
                 ? "bg-slate-700/50 border-slate-500/40 opacity-40 cursor-not-allowed"
                 : "bg-cyan-500/30 border-cyan-300/70 shadow-[0_0_20px_rgba(0,200,255,0.45)] hover:bg-cyan-500/50 cursor-pointer"
             }`}
+            style={isDark
+              ? { color: "#ffffff" }
+              : { color: "#FFD700", textShadow: "0 0 8px rgba(255,215,0,0.7)" }
+            }
           >
             ◀
           </button>
@@ -704,11 +718,15 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
             onPointerCancel={stopMove}
             onPointerLeave={stopMove}
             onContextMenu={(e) => e.preventDefault()}
-            className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-black text-white border-2 backdrop-blur-md transition-all duration-150 active:scale-90 ${
+            className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-black border-2 backdrop-blur-md transition-all duration-150 active:scale-90 ${
               locked
                 ? "bg-slate-700/50 border-slate-500/40 opacity-40 cursor-not-allowed"
                 : "bg-cyan-500/30 border-cyan-300/70 shadow-[0_0_20px_rgba(0,200,255,0.45)] hover:bg-cyan-500/50 cursor-pointer"
             }`}
+            style={isDark
+              ? { color: "#ffffff" }
+              : { color: "#FFD700", textShadow: "0 0 8px rgba(255,215,0,0.7)" }
+            }
           >
             ▶
           </button>
