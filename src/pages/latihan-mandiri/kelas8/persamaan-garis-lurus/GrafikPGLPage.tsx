@@ -223,7 +223,7 @@ const questions: Q[] = [
 
   Q(10, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
     type: "mixed",
-    content: "Diketahui persamaan garis y = −2x + 4. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
+    content: "Diketahui persamaan garis 2x + y − 4 = 0. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
     diagramChoices: [
       {
         label: "A.",
@@ -271,7 +271,7 @@ const questions: Q[] = [
       },
     ],
     parts: [
-      { label: "Petunjuk:", text: "Substitusikan x = 0 dan y = 0 ke persamaan y = −2x + 4 untuk menemukan titik potong sumbu-y dan sumbu-x, lalu cocokkan dengan grafik yang benar." },
+      { label: "Petunjuk:", text: "Ubah persamaan 2x + y − 4 = 0 menjadi bentuk y = −2x + 4, lalu substitusikan x = 0 dan y = 0 untuk menemukan titik potong sumbu-y dan sumbu-x, kemudian cocokkan dengan grafik yang benar." },
     ],
   }),
 ];
