@@ -29,8 +29,8 @@ const BangunRuangSisiDatarPage = () => {
   const { language } = useLanguage();
   const subtopics  = language === "en" ? subtopicsEn : language === "ja" ? subtopicsJa : subtopicsId;
   const title      = language === "en" ? "SOLID FIGURES WITH FLAT FACES" : language === "ja" ? "平面で囲まれた立体" : "BANGUN RUANG SISI DATAR";
-  const kelas      = language === "en" ? "Grade 8" : language === "ja" ? "8年生" : "Kelas 8";
-  const backLabel  = language === "en" ? "Back to Grade 8" : language === "ja" ? "8年生に戻る" : "Kembali ke Kelas 8";
+  const kelas      = language === "en" ? "Grade 8" : language === "ja" ? "中学2年" : "Kelas 8";
+  const backLabel  = language === "en" ? "Back to Grade 8" : language === "ja" ? "中学2年に戻る" : "Kembali ke Kelas 8";
   return (
     <MateriTopicPage
       title={title}
