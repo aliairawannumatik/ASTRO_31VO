@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const COLORS = {
   alasTutup: "#ef4444",
@@ -62,67 +63,29 @@ const SisiStandingPrisma = ({ n, cx, name, sisiLabel, phase }: PrismaProps) => {
 
   return (
     <g>
-      {/* Back side faces (rendered first, behind everything) */}
       {backFaces.map((f, i) => (
-        <polygon
-          key={`back-${i}`}
-          points={poly(f.pts)}
-          fill={COLORS.tegak}
-          fillOpacity={opT * 0.45}
-          stroke={strokeT}
-          strokeWidth={swT * 0.5}
-        />
+        <polygon key={`back-${i}`} points={poly(f.pts)}
+          fill={COLORS.tegak} fillOpacity={opT * 0.45}
+          stroke={strokeT} strokeWidth={swT * 0.5} />
       ))}
-
-      {/* Alas (bottom polygon) */}
-      <polygon
-        points={poly(bot)}
-        fill={COLORS.alasTutup}
-        fillOpacity={opAT}
-        stroke={strokeAT}
-        strokeWidth={swAT}
-        className={clsAT}
-      />
-
-      {/* Front side faces */}
+      <polygon points={poly(bot)} fill={COLORS.alasTutup} fillOpacity={opAT}
+        stroke={strokeAT} strokeWidth={swAT} className={clsAT} />
       {frontFaces.map((f, i) => (
-        <polygon
-          key={`front-${i}`}
-          points={poly(f.pts)}
-          fill={COLORS.tegak}
-          fillOpacity={opT}
-          stroke={strokeT}
-          strokeWidth={swT}
-          className={clsT}
-        />
+        <polygon key={`front-${i}`} points={poly(f.pts)}
+          fill={COLORS.tegak} fillOpacity={opT}
+          stroke={strokeT} strokeWidth={swT} className={clsT} />
       ))}
-
-      {/* Tutup (top polygon) */}
-      <polygon
-        points={poly(top)}
-        fill={COLORS.alasTutup}
-        fillOpacity={opAT}
-        stroke={strokeAT}
-        strokeWidth={swAT}
-        className={clsAT}
-      />
-
-      {/* Always-on structural edge outlines */}
+      <polygon points={poly(top)} fill={COLORS.alasTutup} fillOpacity={opAT}
+        stroke={strokeAT} strokeWidth={swAT} className={clsAT} />
       {Array.from({ length: n }, (_, i) => (
-        <line
-          key={`v-${i}`}
+        <line key={`v-${i}`}
           x1={bot[i][0].toFixed(1)} y1={bot[i][1].toFixed(1)}
           x2={top[i][0].toFixed(1)} y2={top[i][1].toFixed(1)}
-          stroke="#475569" strokeWidth="0.7"
-        />
+          stroke="#475569" strokeWidth="0.7" />
       ))}
-
-      {/* Vertex dots */}
       {[...top, ...bot].map(([x, y], i) => (
         <circle key={`v-${i}`} cx={x.toFixed(1)} cy={y.toFixed(1)} r="2" fill="#cbd5e1" opacity="0.6" />
       ))}
-
-      {/* Labels */}
       <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0"
         fontFamily="sans-serif" fontWeight="bold">{name}</text>
       <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8"
@@ -131,22 +94,8 @@ const SisiStandingPrisma = ({ n, cx, name, sisiLabel, phase }: PrismaProps) => {
   );
 };
 
-const PHASES = [
-  { key: "alas_tutup", label: "Sisi Alas & Tutup", color: COLORS.alasTutup,
-    desc: "2 sisi segitiga: alas (bawah) dan tutup (atas)" },
-  { key: "tegak",      label: "Sisi Tegak",         color: COLORS.tegak,
-    desc: "sisi-sisi persegi panjang yang menghubungkan alas dan tutup" },
-  { key: "all",        label: "Semua Sisi",          color: "#a78bfa",
-    desc: "total sisi = n + 2  (n = jumlah sisi alas)" },
-];
-
-const PRISMS = [
-  { n: 3, cx: 57,  name: "Prisma Segitiga",  sisiLabel: "3+2 = 5 sisi" },
-  { n: 4, cx: 170, name: "Prisma Segiempat", sisiLabel: "4+2 = 6 sisi" },
-  { n: 5, cx: 283, name: "Prisma Segilima",  sisiLabel: "5+2 = 7 sisi" },
-];
-
 export default function SisiTigaPrismaAnimation() {
+  const { language: lang } = useLanguage();
   const [phase, setPhase] = useState(0);
   const [auto,  setAuto]  = useState(true);
 
@@ -156,15 +105,75 @@ export default function SisiTigaPrismaAnimation() {
     return () => clearInterval(id);
   }, [auto]);
 
+  const PHASES = [
+    {
+      key: "alas_tutup",
+      label: lang === "en" ? "Base & Lid Faces"  : lang === "ja" ? "底面・上面" : "Sisi Alas & Tutup",
+      color: COLORS.alasTutup,
+      desc:  lang === "en"
+        ? "2 congruent polygons: bottom base and top lid"
+        : lang === "ja" ? "合同な多角形2枚：底面（下）と上面（上）"
+        : "2 sisi segitiga: alas (bawah) dan tutup (atas)",
+    },
+    {
+      key: "tegak",
+      label: lang === "en" ? "Lateral Faces"     : lang === "ja" ? "側面"       : "Sisi Tegak",
+      color: COLORS.tegak,
+      desc:  lang === "en"
+        ? "rectangular faces connecting base and lid"
+        : lang === "ja" ? "底面と上面をつなぐ長方形の面"
+        : "sisi-sisi persegi panjang yang menghubungkan alas dan tutup",
+    },
+    {
+      key: "all",
+      label: lang === "en" ? "All Faces"          : lang === "ja" ? "全面"       : "Semua Sisi",
+      color: "#a78bfa",
+      desc:  lang === "en"
+        ? "total faces = n + 2  (n = number of base sides)"
+        : lang === "ja" ? "面の合計 = n + 2（n = 底面の辺の数）"
+        : "total sisi = n + 2  (n = jumlah sisi alas)",
+    },
+  ];
+
+  const PRISMS = [
+    {
+      n: 3, cx: 57,
+      name:      lang === "en" ? "Triangular Prism"    : lang === "ja" ? "三角柱" : "Prisma Segitiga",
+      sisiLabel: lang === "en" ? "3+2 = 5 faces"       : lang === "ja" ? "3+2 = 5面" : "3+2 = 5 sisi",
+    },
+    {
+      n: 4, cx: 170,
+      name:      lang === "en" ? "Quadrilateral Prism" : lang === "ja" ? "四角柱" : "Prisma Segiempat",
+      sisiLabel: lang === "en" ? "4+2 = 6 faces"       : lang === "ja" ? "4+2 = 6面" : "4+2 = 6 sisi",
+    },
+    {
+      n: 5, cx: 283,
+      name:      lang === "en" ? "Pentagonal Prism"    : lang === "ja" ? "五角柱" : "Prisma Segilima",
+      sisiLabel: lang === "en" ? "5+2 = 7 faces"       : lang === "ja" ? "5+2 = 7面" : "5+2 = 7 sisi",
+    },
+  ];
+
+  const caption = lang === "en"
+    ? "Base and Lid are CONGRUENT  ·  Faces = n + 2"
+    : lang === "ja" ? "底面と上面は合同  ·  面 = n + 2"
+    : "Alas dan Tutup SAMA bentuknya  ·  Sisi = n + 2";
+
+  const legendItems = [
+    { color: COLORS.alasTutup, label: lang === "en" ? "Base & Lid Faces" : lang === "ja" ? "底面・上面" : "Sisi Alas & Tutup" },
+    { color: COLORS.tegak,     label: lang === "en" ? "Lateral Faces"    : lang === "ja" ? "側面"       : "Sisi Tegak"        },
+  ];
+
+  const autoLabel = auto
+    ? (lang === "en" ? "⏸ Pause auto-play" : lang === "ja" ? "⏸ 自動停止" : "⏸ Berhenti otomatis")
+    : (lang === "en" ? "▶ Resume auto-play" : lang === "ja" ? "▶ 自動再生" : "▶ Putar otomatis");
+
   const current = PHASES[phase];
 
   return (
     <div className="space-y-3">
-      {/* Phase buttons */}
       <div className="flex flex-wrap gap-1.5 justify-center">
         {PHASES.map((p, i) => (
-          <button
-            key={p.key}
+          <button key={p.key}
             onClick={() => { setPhase(i); setAuto(false); }}
             className="text-xs font-bold py-1.5 px-2.5 rounded-lg border transition-all duration-200 font-body"
             style={{
@@ -179,7 +188,6 @@ export default function SisiTigaPrismaAnimation() {
         ))}
       </div>
 
-      {/* SVG with 3 prisms */}
       <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
         <svg viewBox="0 0 340 218" className="w-full" style={{ maxHeight: 245 }}>
           <defs>
@@ -197,45 +205,30 @@ export default function SisiTigaPrismaAnimation() {
             `}</style>
           </defs>
 
-          {/* Column dividers */}
           <line x1="113.5" y1="5" x2="113.5" y2="160" stroke="#1e293b" strokeWidth="1" />
           <line x1="226.5" y1="5" x2="226.5" y2="160" stroke="#1e293b" strokeWidth="1" />
 
           {PRISMS.map(p => (
-            <SisiStandingPrisma
-              key={p.n}
-              n={p.n}
-              cx={p.cx}
-              name={p.name}
-              sisiLabel={p.sisiLabel}
-              phase={phase}
-            />
+            <SisiStandingPrisma key={p.n} n={p.n} cx={p.cx}
+              name={p.name} sisiLabel={p.sisiLabel} phase={phase} />
           ))}
 
-          {/* Bottom caption */}
           <text x="170" y="213" textAnchor="middle" fontSize="8" fill="#facc15" fontFamily="monospace">
-            Alas dan Tutup SAMA bentuknya  ·  Sisi = n + 2
+            {caption}
           </text>
         </svg>
       </div>
 
-      {/* Active phase description */}
-      <div
-        className="rounded-lg px-4 py-2.5 text-xs font-body border flex items-start gap-2"
-        style={{ borderColor: `${current.color}50`, backgroundColor: `${current.color}12` }}
-      >
+      <div className="rounded-lg px-4 py-2.5 text-xs font-body border flex items-start gap-2"
+        style={{ borderColor: `${current.color}50`, backgroundColor: `${current.color}12` }}>
         <span className="font-bold whitespace-nowrap mt-0.5" style={{ color: current.color }}>
           {current.label}
         </span>
         <span className="text-white/60">— {current.desc}</span>
       </div>
 
-      {/* Legend row */}
       <div className="flex gap-3 justify-center flex-wrap">
-        {[
-          { color: COLORS.alasTutup, label: "Sisi Alas & Tutup" },
-          { color: COLORS.tegak,     label: "Sisi Tegak" },
-        ].map(l => (
+        {legendItems.map(l => (
           <div key={l.label} className="flex items-center gap-1.5 text-xs font-body">
             <div className="w-4 h-4 rounded-sm opacity-80" style={{ backgroundColor: l.color }} />
             <span style={{ color: l.color }}>{l.label}</span>
@@ -243,12 +236,9 @@ export default function SisiTigaPrismaAnimation() {
         ))}
       </div>
 
-      {/* Auto-play toggle */}
-      <button
-        onClick={() => setAuto(a => !a)}
-        className="w-full text-xs font-body py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all"
-      >
-        {auto ? "⏸ Berhenti otomatis" : "▶ Putar otomatis"}
+      <button onClick={() => setAuto(a => !a)}
+        className="w-full text-xs font-body py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all">
+        {autoLabel}
       </button>
     </div>
   );

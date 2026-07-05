@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type V2 = [number, number];
 type V3 = [number, number, number];
@@ -52,23 +53,17 @@ function makeConfig(n: number) {
   const inR  = a / (2 * Math.tan(Math.PI / n));
   const capH = inR + R3D;
   const netCY = 22 + capH + H3D / 2;
-  const label = n === 3 ? "Segitiga" : n === 4 ? "Segiempat" : "Segilima";
-  /* Dihedral angle between adjacent lateral faces of a regular n-gon prism = 2π/n */
   const dihedralRad = (2 * Math.PI) / n;
-  return { a, h: H3D, netCY, label, dihedralRad };
+  return { a, h: H3D, netCY, dihedralRad };
 }
 
-/* ── Unfolding schedule for each face [start, end] in progress [0,1] ──
-   Faces closest to the anchor (centre rect) unfold first; caps last. */
 function schedule(k: number, midK: number, n: number): [number, number] {
-  if (k >= n) return k === n ? [0.46, 0.78] : [0.58, 0.88]; // bottom / top cap
+  if (k >= n) return k === n ? [0.46, 0.78] : [0.58, 0.88];
   const dist = Math.abs(k - midK);
   const s    = dist * 0.20;
   return [s, s + 0.45];
 }
 
-/* Current fold angle for face k.
-   phi0 is the maximum (assembled) angle; returns phi0 at progress=0, 0 at progress=1. */
 function localPhi(
   k: number, midK: number, n: number, phi0: number, p: number
 ): number {
@@ -77,22 +72,12 @@ function localPhi(
   return phi0 * (1 - easeOut(smoothstep(s, e, p)));
 }
 
-/* ─────────────────────────────────────────────────────────────
-   True-3-D cascade hinge:
-   ─ Every face is positioned in world-space 3-D.
-   ─ The "right chain":  each rect extends from its left hinge point
-     in direction  D = (cos(Σφ), 0, sin(Σφ)).
-     Rotating D by φ around the vertical y-axis = changing Σφ.
-   ─ The "left chain":  direction  D = (-cos(Σφ), 0, sin(Σφ)).
-   ─ The caps rotate around a horizontal x-axis hinge.
-   ─ At Σφ = n * (2π/n) the chain closes into the regular n-gon prism. ✓
-───────────────────────────────────────────────────────────── */
-
 export default function JaringPrismaInteraktif() {
+  const { language: lang } = useLanguage();
   const [activeN,     setActiveN]     = useState(3);
   const [rotX,        setRotX]        = useState(-22);
   const [rotY,        setRotY]        = useState(32);
-  const [progress,    setProgress]    = useState(0);   // 0 = assembled, 1 = flat net
+  const [progress,    setProgress]    = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isDragging,  setIsDragging]  = useState(false);
 
@@ -102,22 +87,55 @@ export default function JaringPrismaInteraktif() {
 
   useEffect(() => { progressRef.current = progress; }, [progress]);
 
+  /* ── Translation helpers ── */
+  const typeLabel = (n: number) =>
+    n === 3
+      ? (lang === "en" ? "Triangle" : lang === "ja" ? "三角形" : "Segitiga")
+      : n === 4
+      ? (lang === "en" ? "Quadrilateral" : lang === "ja" ? "四角形" : "Segiempat")
+      : (lang === "en" ? "Pentagon" : lang === "ja" ? "五角形" : "Segilima");
+
+  const faceLabel = (k: number, n: number) =>
+    k < n
+      ? (lang === "en" ? `Face ${k + 1}` : lang === "ja" ? `面 ${k + 1}` : `Sisi ${k + 1}`)
+      : k === n
+      ? (lang === "en" ? "Base" : lang === "ja" ? "底面" : "Alas")
+      : (lang === "en" ? "Lid" : lang === "ja" ? "上面" : "Tutup");
+
+  const tr = {
+    disassemble:  lang === "en" ? "📤 Unfold"        : lang === "ja" ? "📤 展開"     : "📤 Bongkar",
+    assemble:     lang === "en" ? "📥 Fold"           : lang === "ja" ? "📥 組み立て" : "📥 Satukan",
+    resetRot:     lang === "en" ? "↺ Reset Rotation" : lang === "ja" ? "↺ 回転リセット" : "↺ Reset Rotasi",
+    dragHint:     lang === "en"
+      ? "Drag to rotate · press Unfold to see the net"
+      : lang === "ja" ? "ドラッグで回転 · 展開ボタンで展開図表示"
+      : "Drag untuk memutar · tekan Bongkar untuk melihat jaring-jaring",
+    unfolding:    lang === "en" ? "Unfolding…"   : lang === "ja" ? "展開中…"     : "Membongkar…",
+    folding:      lang === "en" ? "Folding…"     : lang === "ja" ? "組み立て中…" : "Menyatukan…",
+    netLabel: (lbl: string, sides: number) =>
+      lang === "en"
+        ? `Prism net (${lbl.toLowerCase()}) — ${sides} faces`
+        : lang === "ja"
+        ? `${lbl}柱の展開図 — ${sides}面`
+        : `Jaring-jaring Prisma ${lbl.toLowerCase()} — ${sides} bidang`,
+    legendBase: lang === "en" ? "Base" : lang === "ja" ? "底面" : "Alas",
+    legendLid:  lang === "en" ? "Lid"  : lang === "ja" ? "上面" : "Tutup",
+    legendFace: (i: number) =>
+      lang === "en" ? `Face ${i + 1}` : lang === "ja" ? `面 ${i + 1}` : `Sisi ${i + 1}`,
+  };
+
   /* ── Geometry constants ── */
   const cfg = makeConfig(activeN);
-  const { a, netCY, dihedralRad } = cfg;
+  const { a, netCY: _netCY, dihedralRad } = cfg;
 
-  /* Centred coords: origin = visual centre of the assembled prism / net */
-  const cx0 = (Math.floor(activeN / 2) - activeN / 2) * a;       // anchor rect left x
-  const cx1 = cx0 + a;                                            // anchor rect right x
-  const cy0 = -H3D / 2;                                           // top  y (negative = up in 3-D)
-  const cy1 =  H3D / 2;                                           // bottom y
-
+  const cx0 = (Math.floor(activeN / 2) - activeN / 2) * a;
+  const cx1 = cx0 + a;
+  const cy0 = -H3D / 2;
+  const cy1 =  H3D / 2;
   const midK = Math.floor(activeN / 2);
 
-  /* Cap net vertices in centred coords (z = 0 = flat net plane) */
   const botNgon = ngonFromEdge(activeN, a, cx0, cy1, false);
   const topNgon = ngonFromEdge(activeN, a, cx0, cy0, true);
-  /* Re-index so vertex midK+i is botNgon[i] */
   const botCapCentred: V3[] = new Array(activeN);
   const topCapCentred: V3[] = new Array(activeN);
   for (let i = 0; i < activeN; i++) {
@@ -125,43 +143,26 @@ export default function JaringPrismaInteraktif() {
     topCapCentred[(midK + i) % activeN] = topNgon[i];
   }
 
-  /* ── Camera angles ──
-     When assembled (progress=0): use live drag angles.
-     During animation: gradually shift to a gentle top-down view that
-     shows the net laid flat at the end.  */
-  const tCam = easeInOut(Math.min(progress, 0.18) / 0.18);   // 0→1 in first 18 %
+  const tCam = easeInOut(Math.min(progress, 0.18) / 0.18);
   const camRxDeg = lerp(rotX, -28, tCam);
   const camRyDeg = lerp(rotY,   0, tCam);
   const camRx = camRxDeg * Math.PI / 180;
   const camRy = camRyDeg * Math.PI / 180;
 
-  /* Project a centred 3-D point to SVG screen coords */
   const proj = (v: V3): V2 => {
     const rv = rotXv(rotYv(v, camRy), camRx);
     const [px, py] = project(rv);
     return [SVG_CX + px, SVG_CY + py];
   };
 
-  /* ── True-3-D cascade vertex computation ──
-     Each rectangular face is described by two 3-D points:
-       • hinge position  H = (hx, *, hz)          (one vertical edge)
-       • extent direction D = (cos Φ, 0, sin Φ)   (Φ = cumulative fold angle)
-     All faces share y-extents cy0..cy1.
-     Cap faces rotate around the horizontal bottom / top edge of the anchor rect.
-  */
   function getCascadeV3D(k: number): V3[] {
-    /* ── Anchor (centre) rect — always flat at z = 0 ── */
     if (k === midK) {
       return [
-        [cx0, cy1, 0],
-        [cx1, cy1, 0],
-        [cx1, cy0, 0],
-        [cx0, cy0, 0],
+        [cx0, cy1, 0], [cx1, cy1, 0],
+        [cx1, cy0, 0], [cx0, cy0, 0],
       ];
     }
-
     if (k < activeN) {
-      /* ── Right chain: k = midK+1, midK+2, … ── */
       if (k > midK) {
         let hx = cx1, hz = 0, cumPhi = 0;
         for (let j = 1; j <= k - midK; j++) {
@@ -178,8 +179,6 @@ export default function JaringPrismaInteraktif() {
           hx = nx; hz = nz;
         }
       }
-
-      /* ── Left chain: k = midK-1, midK-2, … ── */
       let hx = cx0, hz = 0, cumPhi = 0;
       for (let j = 1; j <= midK - k; j++) {
         const phi = localPhi(midK - j, midK, activeN, dihedralRad, progress);
@@ -195,54 +194,41 @@ export default function JaringPrismaInteraktif() {
         hx = nx; hz = nz;
       }
     }
-
-    /* ── Cap faces ──
-       Rotate around the horizontal bottom / top edge of the anchor rect.
-       Hinge axis = X direction.  Positive φ folds the cap inward (into +z). */
     const isBot  = k === activeN;
     const capNet = isBot ? botCapCentred : topCapCentred;
-    const hy     = isBot ? cy1 : cy0;   // hinge y
+    const hy     = isBot ? cy1 : cy0;
     const phi    = localPhi(k, midK, activeN, Math.PI / 2, progress);
-
     return capNet.map(([vx, vy, _]) => {
-      const dy = vy - hy;              // signed offset from hinge
-      const sign = isBot ? 1 : -1;    // bottom folds into +z, top also into +z
-      return [
-        vx,
-        hy + dy * Math.cos(phi),
-        sign * dy * Math.sin(phi),
-      ] as V3;
+      const dy   = vy - hy;
+      const sign = isBot ? 1 : -1;
+      return [vx, hy + dy * Math.cos(phi), sign * dy * Math.sin(phi)] as V3;
     });
   }
 
-  /* ── Build and sort all faces by depth ── */
   const allFaces = Array.from({ length: activeN + 2 }, (_, k) => ({
     k,
     fill:  k < activeN ? RECT_COLORS[k % RECT_COLORS.length]
                        : k === activeN ? "#ef4444" : "#eab308",
-    label: k < activeN ? `Sisi ${k + 1}` : k === activeN ? "Alas" : "Tutup",
+    label: faceLabel(k, activeN),
   }));
 
   const renderedFaces = allFaces
     .map(f => {
       const v3d  = getCascadeV3D(f.k);
       const poly = v3d.map(proj);
-      /* Depth = average z after camera rotation (for painter's sort) */
       const avgZ = v3d.reduce(
         (s, v) => s + rotXv(rotYv(v, camRy), camRx)[2], 0
       ) / v3d.length;
       return { ...f, poly, avgZ };
     })
-    .sort((a, b) => b.avgZ - a.avgZ); // back to front
+    .sort((a, b) => b.avgZ - a.avgZ);
 
-  /* ── Animate to target progress ── */
   const animateTo = (target: number) => {
     if (animRef.current) cancelAnimationFrame(animRef.current);
     const startP = progressRef.current;
     const startT = performance.now();
     const dur    = 1700;
     setIsAnimating(true);
-
     const tick = (now: number) => {
       const raw   = Math.min((now - startT) / dur, 1);
       const eased = easeInOut(raw);
@@ -260,7 +246,6 @@ export default function JaringPrismaInteraktif() {
     animRef.current = requestAnimationFrame(tick);
   };
 
-  /* ── Drag (3-D rotation) — only when assembled ── */
   const onMouseDown = (e: React.MouseEvent) => {
     if (progress > 0.05 || isAnimating) return;
     setIsDragging(true);
@@ -300,7 +285,6 @@ export default function JaringPrismaInteraktif() {
     };
   }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
 
-  /* Reset on prism-type change */
   useEffect(() => {
     if (animRef.current) cancelAnimationFrame(animRef.current);
     setProgress(0); progressRef.current = 0;
@@ -315,46 +299,41 @@ export default function JaringPrismaInteraktif() {
   const isAssembled = progress < 0.05;
   const isFlatNet   = progress > 0.95;
 
-  /* Subtle dashed hinge lines — visible mid-animation */
   const hingeAlpha = Math.min(1, progress * 8, (1 - progress) * 8) * 0.28;
 
-  /* Hinge line SVG coords: project the anchor rect edges */
   const topLeft  = proj([cx0, cy0, 0]);
   const topRight = proj([cx1, cy0, 0]);
   const botLeft  = proj([cx0, cy1, 0]);
   const botRight = proj([cx1, cy1, 0]);
 
-  /* Vertical hinge lines between rects (project midpoints in net plane) */
   const vertHinges: Array<[V2, V2]> = Array.from(
     { length: activeN - 1 },
     (_, i) => {
-      const hx = cx0 - (Math.floor(activeN / 2) - (i + 1)) * a; /* absolute x of hinge */
+      const hx = cx0 - (Math.floor(activeN / 2) - (i + 1)) * a;
       return [proj([hx, cy0, 0]), proj([hx, cy1, 0])];
     }
   );
 
+  const tLabel = typeLabel(activeN);
+
   return (
     <div className="space-y-3">
-
       {/* Prism type selector */}
       <div className="flex gap-2 justify-center">
-        {[3, 4, 5].map(n => {
-          const c = makeConfig(n);
-          return (
-            <button key={n}
-              onClick={() => setActiveN(n)}
-              disabled={isAnimating}
-              className="text-xs font-bold py-1.5 px-3 rounded-lg border transition-all duration-200 font-body"
-              style={{
-                borderColor: "#6366f1",
-                color: activeN === n ? "#0f172a" : "#818cf8",
-                backgroundColor: activeN === n ? "#6366f1" : "transparent",
-                opacity: isAnimating ? 0.45 : activeN === n ? 1 : 0.65,
-              }}>
-              {c.label}
-            </button>
-          );
-        })}
+        {[3, 4, 5].map(n => (
+          <button key={n}
+            onClick={() => setActiveN(n)}
+            disabled={isAnimating}
+            className="text-xs font-bold py-1.5 px-3 rounded-lg border transition-all duration-200 font-body"
+            style={{
+              borderColor: "#6366f1",
+              color: activeN === n ? "#0f172a" : "#818cf8",
+              backgroundColor: activeN === n ? "#6366f1" : "transparent",
+              opacity: isAnimating ? 0.45 : activeN === n ? 1 : 0.65,
+            }}>
+            {typeLabel(n)}
+          </button>
+        ))}
       </div>
 
       {/* SVG canvas */}
@@ -365,8 +344,6 @@ export default function JaringPrismaInteraktif() {
         onTouchStart={onTouchStart}
       >
         <svg viewBox="0 0 400 340" className="w-full" style={{ maxHeight: 360 }}>
-
-          {/* Faces — back to front */}
           {renderedFaces.map((f, fi) => {
             const pts = f.poly.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" ");
             const mx  = f.poly.reduce((s, p) => s + p[0], 0) / f.poly.length;
@@ -374,19 +351,15 @@ export default function JaringPrismaInteraktif() {
             const lAlpha = Math.max(0, (progress - 0.78) / 0.22);
             return (
               <g key={fi}>
-                <polygon
-                  points={pts}
+                <polygon points={pts}
                   fill={f.fill} fillOpacity={0.88}
                   stroke="rgba(255,255,255,0.82)" strokeWidth={1.4}
-                  strokeLinejoin="round"
-                />
+                  strokeLinejoin="round" />
                 {isFlatNet && (
-                  <text
-                    x={mx.toFixed(1)} y={my.toFixed(1)}
+                  <text x={mx.toFixed(1)} y={my.toFixed(1)}
                     textAnchor="middle" dominantBaseline="middle"
                     fill="var(--icon-color)" fontSize="7.5" fontFamily="monospace" fontWeight="bold"
-                    style={{ pointerEvents: "none", opacity: lAlpha }}
-                  >
+                    style={{ pointerEvents: "none", opacity: lAlpha }}>
                     {f.label}
                   </text>
                 )}
@@ -394,46 +367,36 @@ export default function JaringPrismaInteraktif() {
             );
           })}
 
-          {/* Hinge indicator lines (dashed) */}
           {hingeAlpha > 0.01 && (
             <g opacity={hingeAlpha} strokeDasharray="4,3" stroke="var(--icon-stroke)" strokeWidth={1.2}>
-              {/* Vertical hinges between rect faces */}
               {vertHinges.map(([p0, p1], i) => (
                 <line key={`vh${i}`}
                   x1={p0[0].toFixed(1)} y1={p0[1].toFixed(1)}
-                  x2={p1[0].toFixed(1)} y2={p1[1].toFixed(1)}
-                />
+                  x2={p1[0].toFixed(1)} y2={p1[1].toFixed(1)} />
               ))}
-              {/* Horizontal hinge — bottom cap */}
-              <line
-                x1={botLeft[0].toFixed(1)} y1={botLeft[1].toFixed(1)}
-                x2={botRight[0].toFixed(1)} y2={botRight[1].toFixed(1)}
-              />
-              {/* Horizontal hinge — top cap */}
-              <line
-                x1={topLeft[0].toFixed(1)} y1={topLeft[1].toFixed(1)}
-                x2={topRight[0].toFixed(1)} y2={topRight[1].toFixed(1)}
-              />
+              <line x1={botLeft[0].toFixed(1)} y1={botLeft[1].toFixed(1)}
+                    x2={botRight[0].toFixed(1)} y2={botRight[1].toFixed(1)} />
+              <line x1={topLeft[0].toFixed(1)} y1={topLeft[1].toFixed(1)}
+                    x2={topRight[0].toFixed(1)} y2={topRight[1].toFixed(1)} />
             </g>
           )}
 
-          {/* Status text */}
           {isAssembled && (
             <text x="200" y="334" textAnchor="middle" fontSize="8"
               fill="#64748b" fontFamily="monospace">
-              Drag untuk memutar · tekan Bongkar untuk melihat jaring-jaring
+              {tr.dragHint}
             </text>
           )}
           {isFlatNet && (
             <text x="200" y="334" textAnchor="middle" fontSize="8"
               fill="#facc15" fontFamily="monospace">
-              Jaring-jaring Prisma {cfg.label.toLowerCase()} — {activeN + 2} bidang
+              {tr.netLabel(tLabel, activeN + 2)}
             </text>
           )}
           {!isAssembled && !isFlatNet && (
             <text x="200" y="334" textAnchor="middle" fontSize="8"
               fill="#a78bfa" fontFamily="monospace">
-              {progress < 0.5 ? "Membongkar…" : "Menyatukan…"}
+              {progress < 0.5 ? tr.unfolding : tr.folding}
             </text>
           )}
         </svg>
@@ -441,41 +404,38 @@ export default function JaringPrismaInteraktif() {
 
       {/* Controls */}
       <div className="flex gap-2 justify-center flex-wrap">
-        <button
-          onClick={() => animateTo(1)}
+        <button onClick={() => animateTo(1)}
           disabled={isFlatNet || isAnimating}
           className="text-xs font-bold py-1.5 px-4 rounded-lg border transition-all duration-200 font-body"
           style={{
             borderColor: "#f97316", color: "#f97316", backgroundColor: "transparent",
             opacity: (isFlatNet || isAnimating) ? 0.35 : 1,
           }}>
-          📤 Bongkar
+          {tr.disassemble}
         </button>
-        <button
-          onClick={() => { setRotX(-22); setRotY(32); }}
+        <button onClick={() => { setRotX(-22); setRotY(32); }}
           disabled={!isAssembled || isAnimating}
           className="text-xs font-bold py-1.5 px-3 rounded-lg border border-slate-600 text-slate-400 transition-all duration-200 font-body"
           style={{ opacity: (!isAssembled || isAnimating) ? 0.35 : 1 }}>
-          ↺ Reset Rotasi
+          {tr.resetRot}
         </button>
-        <button
-          onClick={() => animateTo(0)}
+        <button onClick={() => animateTo(0)}
           disabled={isAssembled || isAnimating}
           className="text-xs font-bold py-1.5 px-4 rounded-lg border transition-all duration-200 font-body"
           style={{
             borderColor: "#22d3ee", color: "#22d3ee", backgroundColor: "transparent",
             opacity: (isAssembled || isAnimating) ? 0.35 : 1,
           }}>
-          📥 Satukan
+          {tr.assemble}
         </button>
       </div>
 
       {/* Legend */}
       <div className="flex gap-3 justify-center flex-wrap">
         {[
-          { c: "#ef4444", l: "Alas" },
-          { c: "#eab308", l: "Tutup" },
-          ...RECT_COLORS.slice(0, activeN).map((c, i) => ({ c, l: `Sisi ${i + 1}` })),
+          { c: "#ef4444", l: tr.legendBase },
+          { c: "#eab308", l: tr.legendLid },
+          ...RECT_COLORS.slice(0, activeN).map((c, i) => ({ c, l: tr.legendFace(i) })),
         ].map(x => (
           <div key={x.l} className="flex items-center gap-1 text-xs font-body">
             <div className="w-3 h-3 rounded-sm opacity-85" style={{ backgroundColor: x.c }} />

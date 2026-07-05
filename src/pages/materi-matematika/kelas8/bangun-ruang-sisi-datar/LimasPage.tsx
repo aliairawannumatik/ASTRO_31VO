@@ -901,9 +901,9 @@ const PythagorasLimasSegitigaOverview = ({ lang }: { lang: string }) => {
       <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
         <p><span className="text-sky-300 font-semibold">t</span> {legendDesc.split("t")[1]?.split(",")[0] || ""}, <span className="text-orange-300 font-semibold">l</span>, <span className="text-yellow-300 font-semibold">r</span>, <span className="text-white/60 font-semibold">e</span></p>
         <p className="text-white/60">{legendDesc}</p>
-        <BlockMath math="r_{\text{alas}}=\frac{a\sqrt{3}}{6},\quad R_{\text{alas}}=\frac{a\sqrt{3}}{3}"/>
-        <BlockMath math="l^2=t^2+r_{\text{alas}}^2=t^2+\left(\frac{a\sqrt{3}}{6}\right)^2"/>
-        <BlockMath math="e^2=t^2+R_{\text{alas}}^2=t^2+\left(\frac{a\sqrt{3}}{3}\right)^2"/>
+        <BlockMath math="r_a=\frac{a\sqrt{3}}{6},\quad R_a=\frac{a\sqrt{3}}{3}"/>
+        <BlockMath math="l^2=t^2+r_a^2=t^2+\left(\frac{a\sqrt{3}}{6}\right)^2"/>
+        <BlockMath math="e^2=t^2+R_a^2=t^2+\left(\frac{a\sqrt{3}}{3}\right)^2"/>
         <BlockMath math="e^2=l^2+\left(\frac{a}{2}\right)^2"/>
       </div>
     </div>
@@ -1191,8 +1191,8 @@ const LimasSurfaceAreaSection = ({ lang }: { lang: string }) => {
       <p>{intro}</p>
       <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
         <div className="bg-slate-900/60 rounded p-3 space-y-2">
-          <BlockMath math="L_p = L_a + \sum L_{\text{sisi tegak}}"/>
-          <BlockMath math="L_{\text{satu sisi tegak}} = \frac{1}{2} \times \text{rusuk alas} \times l"/>
+          <BlockMath math="L_p = L_a + \sum L_s"/>
+          <BlockMath math="L_s = \frac{1}{2} \times a \times l"/>
         </div>
         <p className="text-xs text-white/55">{laNote}</p>
       </div>
@@ -1764,7 +1764,7 @@ const LimasPage = () => {
               <p className="text-cyan-300 font-semibold text-xs">
                 {lang === "en" ? "General Formula:" : lang === "ja" ? "一般公式:" : "Rumus Umum:"}
               </p>
-              <BlockMath math="\boxed{V = \frac{1}{3} \times L_{\text{alas}} \times t}"/>
+              <BlockMath math="\boxed{V = \frac{1}{3} \times L_a \times t}"/>
               <p className="text-white/50 text-xs">
                 {lang === "en" ? "where t = pyramid height (apex-to-base distance)"
                 : lang === "ja" ? "t = 高さ（頂点から底面）"
@@ -1887,8 +1887,8 @@ const LimasPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
-            <BlockMath math="L_{\text{alas}} = s^2 = 10^2 = 100\text{ cm}^2"/>
-            <BlockMath math="L_{\text{tegak}} = 4 \times \frac{1}{2} \times s \times l = 4 \times \frac{1}{2} \times 10 \times 13 = 260\text{ cm}^2"/>
+            <BlockMath math="L_a = s^2 = 10^2 = 100\text{ cm}^2"/>
+            <BlockMath math="L_s = 4 \times \frac{1}{2} \times s \times l = 4 \times \frac{1}{2} \times 10 \times 13 = 260\text{ cm}^2"/>
             <BlockMath math="L = 100 + 260 = 360\text{ cm}^2"/>
           </div>
           <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
@@ -1919,8 +1919,8 @@ const LimasPage = () => {
           </div>
           <p className="text-yellow-400 font-semibold">(b) {lang === "en" ? "Surface area:" : lang === "ja" ? "表面積:" : "Luas permukaan:"}</p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
-            <BlockMath math="L_{\text{alas}} = 12^2 = 144\text{ cm}^2"/>
-            <BlockMath math="L_{\text{tegak}} = 4 \times \frac{1}{2} \times 12 \times 10 = 240\text{ cm}^2"/>
+            <BlockMath math="L_a = 12^2 = 144\text{ cm}^2"/>
+            <BlockMath math="L_s = 4 \times \frac{1}{2} \times 12 \times 10 = 240\text{ cm}^2"/>
             <BlockMath math="L = 144 + 240 = 384\text{ cm}^2"/>
           </div>
           <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3">
@@ -1951,7 +1951,7 @@ const LimasPage = () => {
           </div>
           <p className="text-red-400 font-semibold">{lang === "en" ? "Step 2 — Fabric area (4 lateral faces only):" : lang === "ja" ? "ステップ2 — 布の面積（側面のみ）:" : "Langkah 2 — Hitung luas kain (hanya 4 sisi tegak):"}</p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
-            <BlockMath math="L_{\text{kain}} = 4 \times \frac{1}{2} \times 3 \times 2{,}5 = 4 \times 3{,}75 = 15\text{ m}^2"/>
+            <BlockMath math="L_k = 4 \times \frac{1}{2} \times 3 \times 2{,}5 = 4 \times 3{,}75 = 15\text{ m}^2"/>
           </div>
           <p className="text-red-400 font-semibold">{lang === "en" ? "Step 3 — Cost:" : lang === "ja" ? "ステップ3 — 費用:" : "Langkah 3 — Hitung biaya:"}</p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
@@ -2019,8 +2019,8 @@ const LimasPage = () => {
           </div>
           <p className="text-yellow-400 font-semibold">(b)</p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
-            <BlockMath math="L_{\text{alas}} = s^2 = 48\text{ cm}^2"/>
-            <BlockMath math="L_{\text{tegak}} = 4 \times \frac{1}{2} \times 4\sqrt{3} \times 10 = 80\sqrt{3} \approx 138{,}6\text{ cm}^2"/>
+            <BlockMath math="L_a = s^2 = 48\text{ cm}^2"/>
+            <BlockMath math="L_s = 4 \times \frac{1}{2} \times 4\sqrt{3} \times 10 = 80\sqrt{3} \approx 138{,}6\text{ cm}^2"/>
             <BlockMath math="L = 48 + 80\sqrt{3} \approx 186{,}6\text{ cm}^2"/>
           </div>
           <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">

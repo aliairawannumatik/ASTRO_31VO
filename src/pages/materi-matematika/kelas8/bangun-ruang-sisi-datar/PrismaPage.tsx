@@ -1700,8 +1700,8 @@ const PrismaPage = () => {
           </p>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
             <div className="bg-slate-900/60 rounded p-3 space-y-2">
-              <BlockMath math={lang === "en" ? "SA = 2 \\times A_{\\text{base}} + A_{\\text{lateral}}" : lang === "ja" ? "表面積 = 2 \\times S_{\\text{底面}} + S_{\\text{側面}}" : "L = 2 \\times L_{\\text{alas}} + L_{\\text{selimut}}"} />
-              <BlockMath math={lang === "en" ? "A_{\\text{lateral}} = \\text{Base perimeter} \\times h" : lang === "ja" ? "S_{\\text{側面}} = \\text{底面周} \\times h" : "L_{\\text{selimut}} = \\text{Keliling alas} \\times t"} />
+              <BlockMath math={lang === "en" ? "SA = 2 \\times A_{\\text{base}} + A_{\\text{lateral}}" : lang === "ja" ? "表面積 = 2 \\times S_{\\text{底面}} + S_{\\text{側面}}" : "L = 2 \\times L_a + L_s"} />
+              <BlockMath math={lang === "en" ? "A_{\\text{lateral}} = \\text{Base perimeter} \\times h" : lang === "ja" ? "S_{\\text{側面}} = \\text{底面周} \\times h" : "L_s = \\text{Keliling alas} \\times t"} />
             </div>
           </div>
           <p className="text-xs text-white/60 text-center">{t.choosePrisma}</p>
@@ -1737,7 +1737,7 @@ const PrismaPage = () => {
           </div>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
             <div className="bg-slate-900/60 rounded p-3">
-              <BlockMath math={lang === "en" ? "V = A_{\\text{base}} \\times h" : lang === "ja" ? "V = S_{\\text{底面}} \\times h" : "V = L_{\\text{alas}} \\times t"} />
+              <BlockMath math={lang === "en" ? "V = A_{\\text{base}} \\times h" : lang === "ja" ? "V = S_{\\text{底面}} \\times h" : "V = L_a \\times t"} />
             </div>
             <p className="text-xs text-white/70">
               {lang === "en" ? "For various base shapes:" : lang === "ja" ? "様々な底面の形:" : "Untuk berbagai jenis alas:"}
@@ -1745,7 +1745,7 @@ const PrismaPage = () => {
             <div className="space-y-1 text-xs text-white/70">
               <p>• {lang === "en" ? "Triangle base:" : lang === "ja" ? "三角形の底面:" : "Alas segitiga:"} <InlineMath math="V = \frac{1}{2} \times a \times t_{\triangle} \times t" /></p>
               <p>• {lang === "en" ? "Rectangle base:" : lang === "ja" ? "長方形の底面:" : "Alas persegi panjang:"} <span className="text-yellow-300 font-mono">V = L□ × t</span>, {lang === "en" ? "where" : lang === "ja" ? "ただし" : "dengan"} <InlineMath math="L_{\square} = p \times l" /></p>
-              <p>• {lang === "en" ? "Trapezoid base:" : lang === "ja" ? "台形の底面:" : "Alas trapesium:"} <InlineMath math="V = \frac{1}{2}(a+b) \times t_{\text{trap}} \times t" /></p>
+              <p>• {lang === "en" ? "Trapezoid base:" : lang === "ja" ? "台形の底面:" : "Alas trapesium:"} <InlineMath math="V = \frac{1}{2}(a+b) \times t_t \times t" /></p>
             </div>
           </div>
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
@@ -1898,7 +1898,7 @@ const PrismaPage = () => {
             {lang === "en" ? "Step 2 — Area of 2 sloped faces:" : lang === "ja" ? "ステップ2 — 斜面2面の面積:" : "Langkah 2 — Luas 2 sisi miring atap:"}
           </p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-            <BlockMath math="L_{\text{miring}} = 2 \times (5 \times 12) = 2 \times 60 = 120\text{ m}^2" />
+            <BlockMath math="L_m = 2 \times (5 \times 12) = 2 \times 60 = 120\text{ m}^2" />
           </div>
           <p className="text-red-400 font-semibold text-xs">
             {lang === "en" ? "Step 3 — Tile cost:" : lang === "ja" ? "ステップ3 — 費用:" : "Langkah 3 — Biaya genteng:"}
@@ -1964,7 +1964,7 @@ const PrismaPage = () => {
       answer: (
         <div className="space-y-2 text-sm font-body">
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
-            <BlockMath math="L_{\text{trap}} = \tfrac{1}{2}(40+20) \times 15 = \tfrac{1}{2} \times 60 \times 15 = 450\text{ cm}^2" />
+            <BlockMath math="L_t = \tfrac{1}{2}(40+20) \times 15 = \tfrac{1}{2} \times 60 \times 15 = 450\text{ cm}^2" />
             <BlockMath math="V = 450 \times 200 = 90.000\text{ cm}^3 = 90\text{ L}" />
           </div>
           <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
@@ -1993,13 +1993,13 @@ const PrismaPage = () => {
           </p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
             <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 1{,}5 \times 2 = 1{,}5\text{ m}^2" />
-            <BlockMath math="V_{\text{total}} = 1{,}5 \times 4 = 6\text{ m}^3" />
+            <BlockMath math="V_t = 1{,}5 \times 4 = 6\text{ m}^3" />
           </div>
           <p className="text-red-400 font-semibold text-xs">
             {lang === "en" ? "Step 2 — Water volume (¾ full):" : lang === "ja" ? "ステップ2 — 水の体積(¾):" : "Langkah 2 — Volume air (¾ penuh):"}
           </p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-            <BlockMath math="V_{\text{air}} = \tfrac{3}{4} \times 6 = 4{,}5\text{ m}^3" />
+            <BlockMath math="V_w = \tfrac{3}{4} \times 6 = 4{,}5\text{ m}^3" />
           </div>
           <p className="text-red-400 font-semibold text-xs">
             {lang === "en" ? "Step 3 — Weight of water:" : lang === "ja" ? "ステップ3 — 水の重さ:" : "Langkah 3 — Berat air:"}

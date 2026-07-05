@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const COLORS = {
   alas:  "#22d3ee",
@@ -55,7 +56,6 @@ const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
 
   return (
     <g>
-      {/* Side faces — front half only for depth illusion */}
       {bot.map((b, i) => {
         const b2 = bot[(i + 1) % n];
         const t  = top[i];
@@ -72,64 +72,46 @@ const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
           />
         );
       })}
-
-      {/* Bottom polygon fill */}
       <polygon points={poly(bot)} fill="rgba(15,23,42,0.7)" stroke="rgba(100,116,139,0.25)" strokeWidth="0.6" />
-
-      {/* Top polygon fill */}
       <polygon points={poly(top)} fill="rgba(30,41,59,0.85)" stroke="rgba(100,116,139,0.25)" strokeWidth="0.6" />
 
-      {/* ─── Rusuk Alas (bottom) ─── */}
       {bot.map((b, i) => {
         const b2 = bot[(i + 1) % n];
         return (
-          <line
-            key={`alas-${i}`}
+          <line key={`alas-${i}`}
             x1={b[0].toFixed(1)} y1={b[1].toFixed(1)}
             x2={b2[0].toFixed(1)} y2={b2[1].toFixed(1)}
             stroke={COLORS.alas} strokeWidth={swAlas} strokeOpacity={opAlas}
-            strokeLinecap="round"
-            className={clsAlas}
+            strokeLinecap="round" className={clsAlas}
           />
         );
       })}
-
-      {/* ─── Rusuk Atas (top) ─── */}
       {top.map((t, i) => {
         const t2 = top[(i + 1) % n];
         return (
-          <line
-            key={`atas-${i}`}
+          <line key={`atas-${i}`}
             x1={t[0].toFixed(1)} y1={t[1].toFixed(1)}
             x2={t2[0].toFixed(1)} y2={t2[1].toFixed(1)}
             stroke={COLORS.atas} strokeWidth={swAtas} strokeOpacity={opAtas}
-            strokeLinecap="round"
-            className={clsAtas}
+            strokeLinecap="round" className={clsAtas}
           />
         );
       })}
-
-      {/* ─── Rusuk Tegak (vertical) ─── */}
       {bot.map((b, i) => {
         const t = top[i];
         return (
-          <line
-            key={`tegak-${i}`}
+          <line key={`tegak-${i}`}
             x1={b[0].toFixed(1)} y1={b[1].toFixed(1)}
             x2={t[0].toFixed(1)} y2={t[1].toFixed(1)}
             stroke={COLORS.tegak} strokeWidth={swTegak} strokeOpacity={opTegak}
-            strokeLinecap="round"
-            className={clsTegak}
+            strokeLinecap="round" className={clsTegak}
           />
         );
       })}
-
-      {/* Vertices */}
       {[...top, ...bot].map(([x, y], i) => (
         <circle key={`v-${i}`} cx={x.toFixed(1)} cy={y.toFixed(1)} r="2.2" fill="#cbd5e1" opacity="0.7" />
       ))}
 
-      {/* Label */}
       <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0"
         fontFamily="sans-serif" fontWeight="bold">{name}</text>
       <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8"
@@ -138,22 +120,10 @@ const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
   );
 };
 
-const PHASES = [
-  { key: "alas",  label: "Rusuk Alas (bawah)", color: COLORS.alas,  desc: "rusuk-rusuk yang membentuk sisi alas (bawah)" },
-  { key: "tegak", label: "Rusuk Tegak",         color: COLORS.tegak, desc: "rusuk yang menghubungkan alas bawah ke alas atas" },
-  { key: "atas",  label: "Rusuk Atas (tutup)",  color: COLORS.atas,  desc: "sama persis bentuknya dengan alas — itulah ciri khas prisma!" },
-  { key: "all",   label: "Semua Rusuk",          color: "#a78bfa",    desc: "total rusuk = 3 × n  (n = jumlah sisi alas)" },
-];
-
-const PRISMS = [
-  { n: 3, cx: 57,  name: "Prisma Segitiga",  rusukLabel: "3×3 = 9 rusuk"  },
-  { n: 4, cx: 170, name: "Prisma Segiempat", rusukLabel: "3×4 = 12 rusuk" },
-  { n: 5, cx: 283, name: "Prisma Segilima",  rusukLabel: "3×5 = 15 rusuk" },
-];
-
 export default function RusukTigaPrismaAnimation() {
-  const [phase, setPhase]     = useState(0);
-  const [auto,  setAuto]      = useState(true);
+  const { language: lang } = useLanguage();
+  const [phase, setPhase] = useState(0);
+  const [auto,  setAuto]  = useState(true);
 
   useEffect(() => {
     if (!auto) return;
@@ -161,11 +131,82 @@ export default function RusukTigaPrismaAnimation() {
     return () => clearInterval(id);
   }, [auto]);
 
+  const PHASES = [
+    {
+      key: "alas",
+      label: lang === "en" ? "Bottom Edges" : lang === "ja" ? "底辺" : "Rusuk Alas (bawah)",
+      color: COLORS.alas,
+      desc:  lang === "en"
+        ? "edges that form the bottom base polygon"
+        : lang === "ja" ? "底面を構成する辺"
+        : "rusuk-rusuk yang membentuk sisi alas (bawah)",
+    },
+    {
+      key: "tegak",
+      label: lang === "en" ? "Lateral Edges" : lang === "ja" ? "側辺" : "Rusuk Tegak",
+      color: COLORS.tegak,
+      desc:  lang === "en"
+        ? "edges connecting bottom base to top base"
+        : lang === "ja" ? "底面と上面を結ぶ辺"
+        : "rusuk yang menghubungkan alas bawah ke alas atas",
+    },
+    {
+      key: "atas",
+      label: lang === "en" ? "Top Edges" : lang === "ja" ? "上辺" : "Rusuk Atas (tutup)",
+      color: COLORS.atas,
+      desc:  lang === "en"
+        ? "identical shape to the bottom — a defining feature of prisms!"
+        : lang === "ja" ? "底面と同じ形 — これが角柱の特徴！"
+        : "sama persis bentuknya dengan alas — itulah ciri khas prisma!",
+    },
+    {
+      key: "all",
+      label: lang === "en" ? "All Edges" : lang === "ja" ? "全辺" : "Semua Rusuk",
+      color: "#a78bfa",
+      desc:  lang === "en"
+        ? "total edges = 3 × n  (n = number of base sides)"
+        : lang === "ja" ? "辺の合計 = 3 × n（n = 底面の辺の数）"
+        : "total rusuk = 3 × n  (n = jumlah sisi alas)",
+    },
+  ];
+
+  const PRISMS = [
+    {
+      n: 3, cx: 57,
+      name:       lang === "en" ? "Triangular Prism"     : lang === "ja" ? "三角柱" : "Prisma Segitiga",
+      rusukLabel: lang === "en" ? "3×3 = 9 edges"        : lang === "ja" ? "3×3 = 9辺" : "3×3 = 9 rusuk",
+    },
+    {
+      n: 4, cx: 170,
+      name:       lang === "en" ? "Quadrilateral Prism"  : lang === "ja" ? "四角柱" : "Prisma Segiempat",
+      rusukLabel: lang === "en" ? "3×4 = 12 edges"       : lang === "ja" ? "3×4 = 12辺" : "3×4 = 12 rusuk",
+    },
+    {
+      n: 5, cx: 283,
+      name:       lang === "en" ? "Pentagonal Prism"     : lang === "ja" ? "五角柱" : "Prisma Segilima",
+      rusukLabel: lang === "en" ? "3×5 = 15 edges"       : lang === "ja" ? "3×5 = 15辺" : "3×5 = 15 rusuk",
+    },
+  ];
+
+  const caption = lang === "en"
+    ? "Top and Bottom are always the SAME shape  ·  Edges = 3n"
+    : lang === "ja" ? "上面と底面は常に同じ形  ·  辺 = 3n"
+    : "Alas dan Tutup selalu SAMA bentuknya  ·  Rusuk = 3n";
+
+  const legendItems = [
+    { color: COLORS.alas,  label: lang === "en" ? "Bottom Edges"  : lang === "ja" ? "底辺"   : "Rusuk Alas"  },
+    { color: COLORS.tegak, label: lang === "en" ? "Lateral Edges" : lang === "ja" ? "側辺"   : "Rusuk Tegak" },
+    { color: COLORS.atas,  label: lang === "en" ? "Top Edges"     : lang === "ja" ? "上辺"   : "Rusuk Atas"  },
+  ];
+
+  const autoLabel = auto
+    ? (lang === "en" ? "⏸ Pause auto-play" : lang === "ja" ? "⏸ 自動停止" : "⏸ Berhenti otomatis")
+    : (lang === "en" ? "▶ Resume auto-play" : lang === "ja" ? "▶ 自動再生" : "▶ Putar otomatis");
+
   const current = PHASES[phase];
 
   return (
     <div className="space-y-3">
-      {/* Phase buttons */}
       <div className="flex flex-wrap gap-1.5 justify-center">
         {PHASES.map((p, i) => (
           <button
@@ -184,7 +225,6 @@ export default function RusukTigaPrismaAnimation() {
         ))}
       </div>
 
-      {/* SVG with 3 prisms */}
       <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
         <svg viewBox="0 0 340 218" className="w-full" style={{ maxHeight: 245 }}>
           <defs>
@@ -207,7 +247,6 @@ export default function RusukTigaPrismaAnimation() {
             `}</style>
           </defs>
 
-          {/* Column dividers */}
           <line x1="113.5" y1="5" x2="113.5" y2="155" stroke="#1e293b" strokeWidth="1" />
           <line x1="226.5" y1="5" x2="226.5" y2="155" stroke="#1e293b" strokeWidth="1" />
 
@@ -222,15 +261,13 @@ export default function RusukTigaPrismaAnimation() {
             />
           ))}
 
-          {/* Bottom caption band */}
           <rect x="0" y="204" width="340" height="14" fill="transparent" />
           <text x="170" y="213" textAnchor="middle" fontSize="8" fill="#facc15" fontFamily="monospace">
-            Alas dan Tutup selalu SAMA bentuknya  ·  Rusuk = 3n
+            {caption}
           </text>
         </svg>
       </div>
 
-      {/* Active phase description */}
       <div
         className="rounded-lg px-4 py-2.5 text-xs font-body border flex items-start gap-2"
         style={{ borderColor: `${current.color}50`, backgroundColor: `${current.color}12` }}
@@ -241,13 +278,8 @@ export default function RusukTigaPrismaAnimation() {
         <span className="text-white/60">— {current.desc}</span>
       </div>
 
-      {/* Legend row */}
       <div className="flex gap-3 justify-center flex-wrap">
-        {[
-          { color: COLORS.alas,  label: "Rusuk Alas" },
-          { color: COLORS.tegak, label: "Rusuk Tegak" },
-          { color: COLORS.atas,  label: "Rusuk Atas" },
-        ].map(l => (
+        {legendItems.map(l => (
           <div key={l.label} className="flex items-center gap-1.5 text-xs font-body">
             <div className="w-5 h-1.5 rounded-full" style={{ backgroundColor: l.color }} />
             <span style={{ color: l.color }}>{l.label}</span>
@@ -255,12 +287,11 @@ export default function RusukTigaPrismaAnimation() {
         ))}
       </div>
 
-      {/* Auto-play toggle */}
       <button
         onClick={() => setAuto(a => !a)}
         className="w-full text-xs font-body py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all"
       >
-        {auto ? "⏸ Berhenti otomatis" : "▶ Putar otomatis"}
+        {autoLabel}
       </button>
     </div>
   );

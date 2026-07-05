@@ -2185,7 +2185,7 @@ const BalokPage = () => {
       answer: (
         <div className="space-y-2 text-sm font-body">
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
-            <BlockMath math="V_{\text{total}} = 25 \times 10 \times 2 = 500\text{ m}^3 = 500{,}000\text{ liters}" />
+            <BlockMath math="V_t = 25 \times 10 \times 2 = 500\text{ m}^3 = 500{,}000\text{ liters}" />
             <BlockMath math="V_{80\%} = 80\% \times 500{,}000 = 400{,}000\text{ liters}" />
           </div>
           <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">

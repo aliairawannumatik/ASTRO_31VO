@@ -903,9 +903,9 @@ export default function GabunganPage() {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
-            <BlockMath math="V_{\text{balok}} = 5 \times 5 \times 8 = 200\text{ m}^3"/>
-            <BlockMath math="V_{\text{limas}} = \tfrac{1}{3} \times 25 \times 3 = 25\text{ m}^3"/>
-            <BlockMath math="V_{\text{total}} = 200 + 25 = 225\text{ m}^3"/>
+            <BlockMath math="V_b = 5 \times 5 \times 8 = 200\text{ m}^3"/>
+            <BlockMath math="V_l = \tfrac{1}{3} \times 25 \times 3 = 25\text{ m}^3"/>
+            <BlockMath math="V_t = 200 + 25 = 225\text{ m}^3"/>
           </div>
           <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
             <p className="text-green-300 font-semibold text-xs">✅ {lang === "en" ? "Total volume" : lang === "ja" ? "合計体積" : "Volume total"} = <InlineMath math="225\text{ m}^3"/></p>
@@ -930,10 +930,10 @@ export default function GabunganPage() {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
-            <BlockMath math="V_{\text{kubus}} = 6^3 = 216\text{ cm}^3"/>
+            <BlockMath math="V_k = 6^3 = 216\text{ cm}^3"/>
             <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 6 \times 4 = 12\text{ cm}^2"/>
             <BlockMath math="V_{\text{prisma}} = 12 \times 6 = 72\text{ cm}^3"/>
-            <BlockMath math="V_{\text{total}} = 216 + 72 = 288\text{ cm}^3"/>
+            <BlockMath math="V_t = 216 + 72 = 288\text{ cm}^3"/>
           </div>
           <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
             <p className="text-yellow-300 font-semibold text-xs">✅ {lang === "en" ? "Total volume" : lang === "ja" ? "合計体積" : "Volume total"} = <InlineMath math="288\text{ cm}^3"/></p>
@@ -968,7 +968,7 @@ export default function GabunganPage() {
             : "Langkah 1 — Sisi balok yang terlihat (tanpa tutup atas):"}
           </p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-            <BlockMath math="L_{\text{alas}} = 10 \times 8 = 80\text{ cm}^2"/>
+            <BlockMath math="L_a = 10 \times 8 = 80\text{ cm}^2"/>
             <BlockMath math="L_{\text{4 sisi}} = 2(10\times6) + 2(8\times6) = 120 + 96 = 216\text{ cm}^2"/>
           </div>
           <p className="text-red-400 font-semibold text-xs">
@@ -977,13 +977,13 @@ export default function GabunganPage() {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
             <BlockMath math="L_{\triangle} = 2 \times \tfrac{1}{2} \times 10 \times 4 = 40\text{ cm}^2"/>
             <p className="text-white/60">{lang === "en" ? "Slope apothem = √(4²+5²) = √41 ≈ 6.4 cm" : lang === "ja" ? "斜面の斜高 = √(4²+5²) = √41 ≈ 6.4 cm" : "Apotema sisi miring atap = √(4²+5²) = √41 ≈ 6,4 cm"}</p>
-            <BlockMath math="L_{\text{miring}} = 2 \times (6{,}4 \times 8) = 102{,}4\text{ cm}^2"/>
+            <BlockMath math="L_m = 2 \times (6{,}4 \times 8) = 102{,}4\text{ cm}^2"/>
           </div>
           <p className="text-red-400 font-semibold text-xs">
             {lang === "en" ? "Step 3 — Total:" : lang === "ja" ? "ステップ3 — 合計:" : "Langkah 3 — Total:"}
           </p>
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-            <BlockMath math="L_{\text{total}} = 80 + 216 + 40 + 102{,}4 = 438{,}4\text{ cm}^2"/>
+            <BlockMath math="L_p = 80 + 216 + 40 + 102{,}4 = 438{,}4\text{ cm}^2"/>
           </div>
           <div className="bg-red-950/60 border border-red-700/40 rounded p-2 text-xs">
             <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"} ≈ <InlineMath math="438{,}4\text{ cm}^2"/></p>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type V2 = [number, number];
 type V3 = [number, number, number];
@@ -44,8 +45,8 @@ function rotAroundAxis(v: V3, axis: V3, angle: number): V3 {
 }
 
 /* ── Constants ── */
-const R3D    = 42;   // base circumscribed radius
-const H_PYR  = 72;   // pyramid height
+const R3D    = 42;
+const H_PYR  = 72;
 const SVG_CX = 200;
 const SVG_CY = 168;
 
@@ -53,17 +54,13 @@ const TRI_COLORS = ["#3b82f6", "#8b5cf6", "#22c55e", "#f97316", "#ec4899"];
 const BASE_COLOR  = "#ef4444";
 
 function makeConfig(n: number) {
-  const a      = 2 * R3D * Math.sin(Math.PI / n);               // edge length
-  const inR    = R3D * Math.cos(Math.PI / n);                    // apothem (inradius of base)
-  const slantH = Math.sqrt(H_PYR * H_PYR + inR * inR);          // slant height
-  // Full fold angle: from assembled (inward+up) to flat (outward in base plane)
-  // = π − atan2(H, inR)
+  const a      = 2 * R3D * Math.sin(Math.PI / n);
+  const inR    = R3D * Math.cos(Math.PI / n);
+  const slantH = Math.sqrt(H_PYR * H_PYR + inR * inR);
   const foldAngle = Math.PI - Math.atan2(H_PYR, inR);
-  const label  = n === 3 ? "Segitiga" : n === 4 ? "Segiempat" : "Segilima";
-  return { a, inR, slantH, foldAngle, label };
+  return { a, inR, slantH, foldAngle };
 }
 
-/* Stagger schedule for face k: which portion of [0,1] progress it uses */
 function getSchedule(k: number, n: number): [number, number] {
   const delay = (k / n) * 0.32;
   return [delay, delay + 0.55];
@@ -71,10 +68,11 @@ function getSchedule(k: number, n: number): [number, number] {
 
 /* ── Main component ── */
 export default function JaringLimasInteraktif() {
+  const { language: lang } = useLanguage();
   const [activeN,     setActiveN]     = useState(4);
   const [rotX,        setRotX]        = useState(-20);
   const [rotY,        setRotY]        = useState(0);
-  const [progress,    setProgress]    = useState(0);   // 0 = assembled, 1 = flat net
+  const [progress,    setProgress]    = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isDragging,  setIsDragging]  = useState(false);
 
@@ -84,22 +82,52 @@ export default function JaringLimasInteraktif() {
 
   useEffect(() => { progressRef.current = progress; }, [progress]);
 
+  /* ── Translation helpers ── */
+  const typeLabel = (n: number) =>
+    n === 3
+      ? (lang === "en" ? "Triangle" : lang === "ja" ? "三角形" : "Segitiga")
+      : n === 4
+      ? (lang === "en" ? "Quadrilateral" : lang === "ja" ? "四角形" : "Segiempat")
+      : (lang === "en" ? "Pentagon" : lang === "ja" ? "五角形" : "Segilima");
+
+  const faceLabel = (k: number) =>
+    k === activeN
+      ? (lang === "en" ? "Base" : lang === "ja" ? "底面" : "Alas")
+      : (lang === "en" ? `Face ${k + 1}` : lang === "ja" ? `面 ${k + 1}` : `Sisi ${k + 1}`);
+
+  const tr = {
+    disassemble: lang === "en" ? "📤 Unfold"         : lang === "ja" ? "📤 展開"      : "📤 Bongkar",
+    assemble:    lang === "en" ? "📥 Fold"            : lang === "ja" ? "📥 組み立て"  : "📥 Satukan",
+    resetRot:    lang === "en" ? "↺ Reset Rotation"  : lang === "ja" ? "↺ 回転リセット" : "↺ Reset Rotasi",
+    dragHint:    lang === "en"
+      ? "Drag to rotate · press Unfold to see the net"
+      : lang === "ja" ? "ドラッグで回転 · 展開ボタンで展開図表示"
+      : "Drag untuk memutar · tekan Bongkar untuk melihat jaring-jaring",
+    unfolding:   lang === "en" ? "Unfolding…"   : lang === "ja" ? "展開中…"      : "Membongkar…",
+    folding:     lang === "en" ? "Folding…"     : lang === "ja" ? "組み立て中…"  : "Menyatukan…",
+    netLabel: (lbl: string, n: number) =>
+      lang === "en"
+        ? `Pyramid net (${lbl.toLowerCase()}) — ${n + 1} faces (${n} triangles + 1 base)`
+        : lang === "ja"
+        ? `${lbl}錐の展開図 — ${n + 1}面（三角形${n}枚 + 底面1枚）`
+        : `Jaring-jaring Limas ${lbl.toLowerCase()} — ${n + 1} bidang (${n} segitiga + 1 alas)`,
+    legendBase: lang === "en" ? "Base" : lang === "ja" ? "底面" : "Alas",
+    legendFace: (i: number) =>
+      lang === "en" ? `Face ${i + 1}` : lang === "ja" ? `面 ${i + 1}` : `Sisi ${i + 1}`,
+  };
+
   /* ── Geometry ── */
   const cfg = makeConfig(activeN);
-  const { inR, slantH, foldAngle, label } = cfg;
+  const { inR, slantH: _slantH, foldAngle } = cfg;
 
-  /* Base polygon vertices — centered vertically so apex ↔ base center spans ±H/2 */
-  /* For n=4: rotate by -π/4 so face midpoints align with N/E/S/W (not diagonals) */
   const baseVerts: V3[] = Array.from({ length: activeN }, (_, k) => {
     const offset = activeN === 4 ? -Math.PI / 4 : 0;
     const angle = (2 * Math.PI * k / activeN) - Math.PI / 2 + offset;
     return [R3D * Math.cos(angle), H_PYR / 2, R3D * Math.sin(angle)] as V3;
   });
 
-  /* Assembled apex — directly above base center */
   const apexAssembled: V3 = [0, -H_PYR / 2, 0];
 
-  /* ── Camera: assembled → flat-net transition ── */
   const tCam     = easeInOut(Math.min(progress, 0.18) / 0.18);
   const camRxDeg = lerp(rotX, -46, tCam);
   const camRyDeg = lerp(rotY,   0, tCam);
@@ -112,51 +140,36 @@ export default function JaringLimasInteraktif() {
     return [SVG_CX + px, SVG_CY + py];
   };
 
-  /* ── Compute 3-D vertices of each triangular face at current progress ──
-     Physics: each face rotates around its hinge edge (a base polygon edge).
-     At progress=0 (assembled): face is folded up to the apex.
-     At progress=1 (flat):      face lies flat in the same plane as the base. */
   function getLateralFaceVerts(k: number): V3[] {
     const v0 = baseVerts[k];
     const v1 = baseVerts[(k + 1) % activeN];
-
-    /* Hinge axis: unit vector along base edge */
     const hdx = v1[0] - v0[0], hdz = v1[2] - v0[2];
-    const hLen = Math.sqrt(hdx * hdx + hdz * hdz); // = edge length a
+    const hLen = Math.sqrt(hdx * hdx + hdz * hdz);
     const hingeAxis: V3 = [hdx / hLen, 0, hdz / hLen];
-
-    /* Hinge midpoint */
     const M: V3 = [(v0[0] + v1[0]) / 2, H_PYR / 2, (v0[2] + v1[2]) / 2];
-
-    /* Vector from hinge midpoint to assembled apex */
     const A_rel: V3 = [
       apexAssembled[0] - M[0],
       apexAssembled[1] - M[1],
       apexAssembled[2] - M[2],
     ];
-
-    /* Rotate A_rel around hingeAxis by foldAngle * easedProgress */
     const [s, e]   = getSchedule(k, activeN);
     const localP   = smoothstep(s, e, progress);
     const angle    = foldAngle * easeOut(localP);
     const A_rot    = rotAroundAxis(A_rel, hingeAxis, angle);
     const apexPos: V3 = [M[0] + A_rot[0], M[1] + A_rot[1], M[2] + A_rot[2]];
-
     return [v0, v1, apexPos];
   }
 
-  /* ── Build all faces ── */
   const allFaces = [
-    { k: activeN, verts: baseVerts,           fill: BASE_COLOR,                       label: "Alas"       },
+    { k: activeN, verts: baseVerts, fill: BASE_COLOR, label: faceLabel(activeN) },
     ...Array.from({ length: activeN }, (_, k) => ({
       k,
       verts: getLateralFaceVerts(k),
       fill:  TRI_COLORS[k % TRI_COLORS.length],
-      label: `Sisi ${k + 1}`,
+      label: faceLabel(k),
     })),
   ];
 
-  /* ── Painter's algorithm: sort faces back-to-front ── */
   const renderedFaces = allFaces
     .map(f => {
       const poly = f.verts.map(proj);
@@ -167,7 +180,6 @@ export default function JaringLimasInteraktif() {
     })
     .sort((a, b) => b.avgZ - a.avgZ);
 
-  /* ── Animation driver ── */
   const animateTo = (target: number) => {
     if (animRef.current) cancelAnimationFrame(animRef.current);
     const startP = progressRef.current;
@@ -190,7 +202,6 @@ export default function JaringLimasInteraktif() {
     animRef.current = requestAnimationFrame(tick);
   };
 
-  /* ── Drag (3-D rotation — only when fully assembled) ── */
   const dragXDirection = activeN === 5 ? -1 : 1;
   const dragYDirection = activeN === 5 ? 1 : -1;
 
@@ -233,7 +244,6 @@ export default function JaringLimasInteraktif() {
     };
   }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
 
-  /* Reset when pyramid type changes */
   useEffect(() => {
     if (animRef.current) cancelAnimationFrame(animRef.current);
     setProgress(0); progressRef.current = 0;
@@ -248,31 +258,27 @@ export default function JaringLimasInteraktif() {
   const isAssembled = progress < 0.05;
   const isFlatNet   = progress > 0.95;
 
-  /* Dashed hinge lines along base edges — visible mid-animation */
   const hingeAlpha = Math.min(1, progress * 8, (1 - progress) * 8) * 0.30;
+  const tLabel = typeLabel(activeN);
 
   return (
     <div className="space-y-3">
-
-      {/* Limas type selector */}
+      {/* Pyramid type selector */}
       <div className="flex gap-2 justify-center">
-        {[3, 4, 5].map(n => {
-          const c = makeConfig(n);
-          return (
-            <button key={n}
-              onClick={() => setActiveN(n)}
-              disabled={isAnimating}
-              className="text-xs font-bold py-1.5 px-3 rounded-lg border transition-all duration-200 font-body"
-              style={{
-                borderColor: "#6366f1",
-                color: activeN === n ? "#0f172a" : "#818cf8",
-                backgroundColor: activeN === n ? "#6366f1" : "transparent",
-                opacity: isAnimating ? 0.45 : activeN === n ? 1 : 0.65,
-              }}>
-              {c.label}
-            </button>
-          );
-        })}
+        {[3, 4, 5].map(n => (
+          <button key={n}
+            onClick={() => setActiveN(n)}
+            disabled={isAnimating}
+            className="text-xs font-bold py-1.5 px-3 rounded-lg border transition-all duration-200 font-body"
+            style={{
+              borderColor: "#6366f1",
+              color: activeN === n ? "#0f172a" : "#818cf8",
+              backgroundColor: activeN === n ? "#6366f1" : "transparent",
+              opacity: isAnimating ? 0.45 : activeN === n ? 1 : 0.65,
+            }}>
+            {typeLabel(n)}
+          </button>
+        ))}
       </div>
 
       {/* SVG canvas */}
@@ -283,8 +289,6 @@ export default function JaringLimasInteraktif() {
         onTouchStart={onTouchStart}
       >
         <svg viewBox="0 0 400 340" className="w-full" style={{ maxHeight: 360 }}>
-
-          {/* Faces — back to front (painter's algorithm) */}
           {renderedFaces.map((f, fi) => {
             const ptStr = f.poly.map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`).join(" ");
             const mx    = f.poly.reduce((s, p) => s + p[0], 0) / f.poly.length;
@@ -292,17 +296,10 @@ export default function JaringLimasInteraktif() {
             const lAlpha = Math.max(0, (progress - 0.80) / 0.20);
             return (
               <g key={fi}>
-                <polygon
-                  points={ptStr}
-                  fill={f.fill}
-                  fillOpacity={0.88}
-                  stroke="rgba(255,255,255,0.82)"
-                  strokeWidth={1.4}
-                  strokeLinejoin="round"
-                />
+                <polygon points={ptStr} fill={f.fill} fillOpacity={0.88}
+                  stroke="rgba(255,255,255,0.82)" strokeWidth={1.4} strokeLinejoin="round" />
                 {isFlatNet && (
-                  <text
-                    x={mx.toFixed(1)} y={my.toFixed(1)}
+                  <text x={mx.toFixed(1)} y={my.toFixed(1)}
                     textAnchor="middle" dominantBaseline="middle"
                     fill="var(--icon-color)" fontSize="7.5" fontFamily="monospace" fontWeight="bold"
                     style={{ pointerEvents: "none", opacity: lAlpha }}>
@@ -313,7 +310,6 @@ export default function JaringLimasInteraktif() {
             );
           })}
 
-          {/* Dashed hinge lines along base edges */}
           {hingeAlpha > 0.01 && Array.from({ length: activeN }, (_, k) => {
             const p0 = proj(baseVerts[k]);
             const p1 = proj(baseVerts[(k + 1) % activeN]);
@@ -322,28 +318,24 @@ export default function JaringLimasInteraktif() {
                 x1={p0[0].toFixed(1)} y1={p0[1].toFixed(1)}
                 x2={p1[0].toFixed(1)} y2={p1[1].toFixed(1)}
                 stroke="var(--icon-stroke)" strokeWidth={1.3}
-                strokeDasharray="4,3" opacity={hingeAlpha}
-              />
+                strokeDasharray="4,3" opacity={hingeAlpha} />
             );
           })}
 
-          {/* Status text */}
           {isAssembled && (
             <text x="200" y="334" textAnchor="middle" fontSize="8"
-              fill="#64748b" fontFamily="monospace">
-              Drag untuk memutar · tekan Bongkar untuk melihat jaring-jaring
-            </text>
+              fill="#64748b" fontFamily="monospace">{tr.dragHint}</text>
           )}
           {isFlatNet && (
             <text x="200" y="334" textAnchor="middle" fontSize="8"
               fill="#facc15" fontFamily="monospace">
-              Jaring-jaring Limas {label.toLowerCase()} — {activeN + 1} bidang ({activeN} segitiga + 1 alas)
+              {tr.netLabel(tLabel, activeN)}
             </text>
           )}
           {!isAssembled && !isFlatNet && (
             <text x="200" y="334" textAnchor="middle" fontSize="8"
               fill="#a78bfa" fontFamily="monospace">
-              {progress < 0.5 ? "Membongkar…" : "Menyatukan…"}
+              {progress < 0.5 ? tr.unfolding : tr.folding}
             </text>
           )}
         </svg>
@@ -351,40 +343,37 @@ export default function JaringLimasInteraktif() {
 
       {/* Controls */}
       <div className="flex gap-2 justify-center flex-wrap">
-        <button
-          onClick={() => animateTo(1)}
+        <button onClick={() => animateTo(1)}
           disabled={isFlatNet || isAnimating}
           className="text-xs font-bold py-1.5 px-4 rounded-lg border transition-all duration-200 font-body"
           style={{
             borderColor: "#f97316", color: "#f97316", backgroundColor: "transparent",
             opacity: (isFlatNet || isAnimating) ? 0.35 : 1,
           }}>
-          📤 Bongkar
+          {tr.disassemble}
         </button>
-        <button
-          onClick={() => { setRotX(-20); setRotY(0); }}
+        <button onClick={() => { setRotX(-20); setRotY(0); }}
           disabled={!isAssembled || isAnimating}
           className="text-xs font-bold py-1.5 px-3 rounded-lg border border-slate-600 text-slate-400 transition-all duration-200 font-body"
           style={{ opacity: (!isAssembled || isAnimating) ? 0.35 : 1 }}>
-          ↺ Reset Rotasi
+          {tr.resetRot}
         </button>
-        <button
-          onClick={() => animateTo(0)}
+        <button onClick={() => animateTo(0)}
           disabled={isAssembled || isAnimating}
           className="text-xs font-bold py-1.5 px-4 rounded-lg border transition-all duration-200 font-body"
           style={{
             borderColor: "#22d3ee", color: "#22d3ee", backgroundColor: "transparent",
             opacity: (isAssembled || isAnimating) ? 0.35 : 1,
           }}>
-          📥 Satukan
+          {tr.assemble}
         </button>
       </div>
 
       {/* Legend */}
       <div className="flex gap-3 justify-center flex-wrap">
         {[
-          { c: BASE_COLOR, l: "Alas" },
-          ...TRI_COLORS.slice(0, activeN).map((c, i) => ({ c, l: `Sisi ${i + 1}` })),
+          { c: BASE_COLOR, l: tr.legendBase },
+          ...TRI_COLORS.slice(0, activeN).map((c, i) => ({ c, l: tr.legendFace(i) })),
         ].map(x => (
           <div key={x.l} className="flex items-center gap-1 text-xs font-body">
             <div className="w-3 h-3 rounded-sm opacity-85" style={{ backgroundColor: x.c }} />
