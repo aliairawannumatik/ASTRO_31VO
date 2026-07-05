@@ -68,7 +68,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(4, "Grafik dari Tabel Nilai x — y = 2x − 1", {
+  Q(4, "x - y", {
     type: "mixed",
     content: "Lengkapi tabel nilai y berikut untuk persamaan garis y = 2x − 1, lalu gambarlah grafiknya pada bidang kartesius di bawah.",
     table: {
