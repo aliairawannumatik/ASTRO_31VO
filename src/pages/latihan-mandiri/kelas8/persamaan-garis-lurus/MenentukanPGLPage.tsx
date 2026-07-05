@@ -39,18 +39,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Mengubah Bentuk Persamaan Garis", {
-    type: "mixed",
-    content: "Ubah setiap persamaan ke bentuk y = mx + c:",
-    parts: [
-      { label: "a.", math: "3x + y = 9" },
-      { label: "b.", math: "4x - 2y = 8" },
-      { label: "c.", math: "5x + 3y - 15 = 0" },
-      { label: "d.", math: "-2x - y + 6 = 0" },
-    ],
-  }),
-
-  Q(4, "Persamaan Garis Sejajar", {
+  Q(3, "Persamaan Garis Sejajar", {
     type: "mixed",
     content: "Tentukan persamaan garis yang sejajar dengan garis yang diberikan dan melalui titik yang ditentukan:",
     parts: [
@@ -70,106 +59,6 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Persamaan dari Gradien Nol atau Tak Terdefinisi", {
-    type: "mixed",
-    content: "Tentukan persamaan garis yang:",
-    parts: [
-      { label: "a.", text: "Sejajar sumbu-x dan melalui titik (3, −5)." },
-      { label: "b.", text: "Sejajar sumbu-y dan melalui titik (7, 2)." },
-      { label: "c.", text: "Sejajar sumbu-x dan melalui titik (−4, 0)." },
-      { label: "d.", text: "Sejajar sumbu-y dan melalui titik (0, 6)." },
-    ],
-  }),
-
-  Q(7, "Persamaan dari Dua Titik Negatif", {
-    type: "mixed",
-    content: "Tentukan persamaan garis yang melalui:",
-    parts: [
-      { label: "a.", math: "P(-3,\\ -1) \\text{ dan } Q(-1,\\ 5)" },
-      { label: "b.", math: "R(-5,\\ 4) \\text{ dan } S(-1,\\ -4)" },
-      { label: "c.", math: "A(-2,\\ -3) \\text{ dan } B(-6,\\ -11)" },
-    ],
-  }),
-
-  Q(8, "Persamaan Garis dari Dua Persamaan Lain", {
-    type: "mixed",
-    content: "Garis g sejajar dengan garis y = 2x − 5 dan melalui titik perpotongan garis y = 3 dan x = 1.",
-    parts: [
-      { label: "a.", text: "Tentukan titik perpotongan y = 3 dan x = 1." },
-      { label: "b.", text: "Tentukan gradien garis g." },
-      { label: "c.", text: "Tentukan persamaan garis g." },
-    ],
-  }),
-
-  Q(9, "Persamaan dari Kondisi Soal UN 2020", {
-    type: "mixed",
-    content: "Garis g melalui titik A(3, 7) dan tegak lurus dengan garis y = −½x + 4.",
-    parts: [
-      { label: "a.", text: "Tentukan gradien garis g." },
-      { label: "b.", text: "Tentukan persamaan garis g." },
-      { label: "c.", text: "Tentukan titik potong garis g dengan sumbu-x." },
-    ],
-  }),
-
-  Q(10, "Persamaan dari Titik dan Gradien Pecahan", {
-    type: "mixed",
-    content: "Tentukan persamaan garis yang melalui titik P dan memiliki gradien m:",
-    parts: [
-      { label: "a.", math: "P(6,\\ -2),\\ m = \\tfrac{2}{3}" },
-      { label: "b.", math: "P(-4,\\ 5),\\ m = -\\tfrac{5}{4}" },
-      { label: "c.", math: "P(10,\\ 0),\\ m = \\tfrac{1}{5}" },
-    ],
-  }),
-
-  Q(11, "Persamaan Garis Sejajar Melalui Titik Sumbu", {
-    type: "mixed",
-    content: "Garis ℓ sejajar dengan y = 3x − 2. Tentukan persamaan ℓ jika:",
-    parts: [
-      { label: "a.", text: "ℓ melalui titik (0, 5)." },
-      { label: "b.", text: "ℓ memotong sumbu-y di (0, −4)." },
-      { label: "c.", math: "\\ell \\text{ melalui titik } (-1,\\ 2)." },
-    ],
-  }),
-
-  Q(12, "Menentukan Persamaan dari Kondisi Titik", {
-    type: "mixed",
-    content: "Garis h melalui titik (−2, 3) dan titik potong dari garis y = 2x + 5 dan y = −x + 2.",
-    parts: [
-      { label: "a.", text: "Tentukan titik potong garis y = 2x + 5 dan y = −x + 2 secara aljabar." },
-      { label: "b.", text: "Gunakan titik potong dan titik (−2, 3) untuk menentukan gradien h." },
-      { label: "c.", text: "Tentukan persamaan garis h." },
-    ],
-  }),
-
-  Q(13, "Persamaan Garis Tegak Lurus dan Titik Perpotongan", {
-    type: "mixed",
-    content: "Dua garis tegak lurus. Garis pertama: y = 2x + 1. Garis kedua melalui (0, 5).",
-    parts: [
-      { label: "a.", text: "Tentukan gradien garis kedua." },
-      { label: "b.", text: "Tentukan persamaan garis kedua." },
-      { label: "c.", text: "Tentukan titik perpotongan kedua garis." },
-    ],
-  }),
-
-  Q(14, "Persamaan Garis Gabungan", {
-    type: "mixed",
-    content: "Tentukan persamaan setiap garis:",
-    parts: [
-      { label: "a.", text: "Melalui titik (0, 0) dan tegak lurus dengan 2x + y = 5." },
-      { label: "b.", text: "Sejajar dengan x − 3y = 6 dan melalui titik (−3, 2)." },
-      { label: "c.", text: "Tegak lurus dengan x = 4 dan melalui titik (1, 5)." },
-    ],
-  }),
-
-  Q(15, "Persamaan Garis Melalui Tiga Titik", {
-    type: "mixed",
-    content: "Tiga buah titik diketahui: P(0, 4), Q(2, k), R(4, 12).",
-    parts: [
-      { label: "a.", text: "Jika ketiga titik segaris, tentukan nilai k." },
-      { label: "b.", text: "Tentukan persamaan garis yang melalui ketiganya." },
-      { label: "c.", math: "\\text{Tentukan nilai } y \\text{ saat } x = 6." },
-    ],
-  }),
 ];
 
 const MenentukanPGLPage = () => {
