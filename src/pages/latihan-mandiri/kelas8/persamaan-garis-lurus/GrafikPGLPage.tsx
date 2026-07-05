@@ -269,10 +269,10 @@ const questions: Q[] = [
     type: "mixed",
     content: "Gambar grafik persamaan garis berikut menggunakan dua titik:",
     parts: [
-      { label: "a.", math: "3x + 2y = 12" },
-      { label: "b.", math: "x - 4y = 8" },
-      { label: "c.", math: "5x + y = 10" },
-      { label: "d.", math: "y = 2x + 3 \\quad \\text{(bentuk } y = mx + c\\text{)}" },
+      { label: "a.", math: "y = 2x + 3" },
+      { label: "b.", math: "3x + 2y = 12" },
+      { label: "c.", math: "x - 4y = 8" },
+      { label: "d.", math: "5x + y = 10" },
     ],
   }),
 ];
