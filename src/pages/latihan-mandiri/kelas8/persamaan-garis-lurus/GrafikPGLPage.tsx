@@ -273,7 +273,6 @@ const questions: Q[] = [
       { label: "b.", math: "y = -3x + 5" },
       { label: "c.", math: "3x + 2y = 12" },
       { label: "d.", math: "x - 4y = 8" },
-      { label: "e.", math: "5x + y = 10" },
     ],
   }),
 ];
