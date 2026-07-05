@@ -628,7 +628,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
                     <div className="absolute -inset-2 rounded-full border-2 border-yellow-300/80 animate-pulse pointer-events-none" style={{ boxShadow: "0 0 18px rgba(250,200,0,0.55)" }} />
                   )}
                   <img src={meteorImg} alt="meteor" className={`${isLandscape ? "w-14 h-14" : "w-16 h-16 md:w-20 md:h-20"} drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]`} style={{ mixBlendMode: "screen", background: "transparent" }} />
-                  <span className="absolute inset-0 flex items-center justify-center px-1">
+                  <span className={`absolute inset-x-0 flex justify-center px-1 ${isDark ? "inset-0 items-center" : "-top-5 bottom-auto"}`}>
                     <span
                       className="font-display text-[8px] md:text-[9px] font-bold leading-tight text-center px-1 py-0.5 rounded"
                       style={isDark
