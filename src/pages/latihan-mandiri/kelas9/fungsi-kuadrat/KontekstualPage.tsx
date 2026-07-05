@@ -247,4 +247,80 @@ const questions: Q[] = [
       <rect x="20" y="15" width="260" height="125" rx="6" fill="none" stroke="#94a3b8" strokeWidth="2"/>
       <rect x="40" y="35" width="220" height="85" rx="4" fill="#1e3a5f" stroke="#38bdf8" strokeWidth="2"/>
       <text x="150" y="82" fill="#38bdf8" fontSize="9" textAnchor="middle">Kolam (panjang × lebar)</text>
-      <text x="150" y="130" fill="#94a3b8" fontSize="8" textAnchor="middle">Tepi jalan = 10 m di kiri-kanan, 10 m atas-bawah
+      <text x="150" y="130" fill="#94a3b8" fontSize="8" textAnchor="middle">Tepi jalan = 10 m di kiri-kanan, 10 m atas-bawah</text>
+    </svg>
+  ),content:"Sebuah kolam renang dikelilingi jalan setapak selebar 10 m di semua sisi. Total luas lahan (kolam + jalan) = 260 × 125 = 32500 m² tetap.",parts:[
+    {label:"a.",text:"Jika lebar kolam = p dan panjang = l, tulis hubungan luas kolam dengan luas lahan total!"},
+    {label:"b.",math:"\\text{Jika keliling kolam tetap } K = 2(p+l) = 100 \\text{ m, tulis } L(p) \\text{ sebagai fungsi kuadrat}"},
+    {label:"c.",math:"\\text{Tentukan ukuran kolam agar luasnya maksimum, dan hitung } L_{maks}"},
+  ]}),
+];
+
+const KontekstualPage = () => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  return (
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <Starfield />
+      <PageNavigation />
+      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+        <div className="flex flex-col items-center mb-6">
+          <div className="w-14 h-14 rounded-full bg-violet-500/20 border-2 border-violet-400/60 flex items-center justify-center mb-3">
+            <span className="text-2xl">🌍</span>
+          </div>
+          <h1 className="font-display text-xl md:text-2xl font-bold text-violet-300 text-center mb-1" style={{textShadow:'0 0 20px rgba(167,139,250,0.7)'}}>
+            SOAL KONTEKSTUAL FUNGSI KUADRAT
+          </h1>
+          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Fungsi Kuadrat · {t('practice.breadcrumb')}</p>
+          <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
+            <span className="text-violet-400 text-xs font-bold">📋 22 {t('practice.suffixSoal')}</span>
+            <span className="text-white/30 text-xs">·</span>
+            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 animate-slide-up">
+          {questions.map((q,i)=>(
+            <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{animationDelay:`${i*0.02}s`}}>
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-slate-900/80 to-purple-900/30 backdrop-blur"/>
+              <div className="absolute inset-0 border border-violet-500/20 rounded-2xl"/>
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-violet-400 to-purple-500 rounded-l-2xl"/>
+              <div className="relative px-5 py-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-violet-500/20 border border-violet-400/50 flex items-center justify-center shrink-0">
+                    <span className="text-violet-300 text-xs font-bold">{q.n}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-violet-400 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
+                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
+                    {q.mathContent && <div className="mb-3 bg-violet-900/20 border border-violet-500/20 rounded-lg px-4 py-3 flex justify-center"><BlockMath math={q.mathContent}/></div>}
+                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3">{q.diagram}</div>}
+                    {q.parts && (
+                      <div className="flex flex-col gap-2">
+                        {q.parts.map((p,pi)=>(
+                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                            <span className="text-violet-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
+                            {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math}/></div>
+                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <button onClick={()=>{playPopSound();navigate("/latihan-mandiri/kelas-9/fungsi-kuadrat");}}
+            className="text-sm text-muted-foreground hover:text-violet-400 transition-colors cursor-pointer font-body">
+            {t('practice.backTo')} Fungsi Kuadrat
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default KontekstualPage;
