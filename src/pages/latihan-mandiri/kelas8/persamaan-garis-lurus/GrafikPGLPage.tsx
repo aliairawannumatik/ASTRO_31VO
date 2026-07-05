@@ -58,17 +58,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Grafik Persamaan Umum ax + by = c", {
-    type: "mixed",
-    content: "Gambar grafik persamaan garis berikut menggunakan dua titik:",
-    parts: [
-      { label: "a.", math: "3x + 2y = 12" },
-      { label: "b.", math: "x - 4y = 8" },
-      { label: "c.", math: "5x + y = 10" },
-    ],
-  }),
-
-  Q(4, "Grafik dari Tabel Nilai x — y = 2x − 1", {
+  Q(3, "Grafik dari Tabel Nilai x — y = 2x − 1", {
     type: "mixed",
     content: "Lengkapi tabel nilai y berikut untuk persamaan garis y = 2x − 1, lalu gambarlah grafiknya pada bidang kartesius di bawah.",
     table: {
@@ -89,7 +79,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(5, "Grafik dari Tabel Nilai x — y = −x + 3", {
+  Q(4, "Grafik dari Tabel Nilai x — y = −x + 3", {
     type: "mixed",
     content: "Lengkapi tabel nilai y berikut untuk persamaan garis y = −x + 3, lalu gambarlah grafiknya pada bidang kartesius di bawah.",
     table: {
@@ -110,7 +100,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Menggambar Garis dengan Titik Potong Sumbu — 2x + y = 4", {
+  Q(5, "Menggambar Garis dengan Titik Potong Sumbu — 2x + y = 4", {
     type: "mixed",
     content: "Lengkapi tabel berikut dengan mencari titik potong sumbu-y (saat x = 0) dan titik potong sumbu-x (saat y = 0) dari persamaan 2x + y = 4, lalu gambarlah garisnya.",
     table: {
@@ -128,7 +118,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Menggambar Garis dengan Titik Potong Sumbu — 3x − 2y = 12", {
+  Q(6, "Menggambar Garis dengan Titik Potong Sumbu — 3x − 2y = 12", {
     type: "mixed",
     content: "Lengkapi tabel berikut dengan mencari titik potong sumbu-y (saat x = 0) dan titik potong sumbu-x (saat y = 0) dari persamaan 3x − 2y = 12, lalu gambarlah garisnya.",
     table: {
@@ -146,7 +136,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(8, "Pilih Persamaan yang Sesuai dengan Grafik", {
+  Q(7, "Pilih Persamaan yang Sesuai dengan Grafik", {
     type: "mixed",
     content: "Perhatikan grafik garis berikut. Manakah persamaan garis yang tepat menggambarkan grafik tersebut?",
     diagram: {
@@ -168,7 +158,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(9, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
+  Q(8, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
     type: "mixed",
     content: "Diketahui persamaan garis y = 2x − 4. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
     diagramChoices: [
@@ -221,7 +211,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
+  Q(9, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
     type: "mixed",
     content: "Diketahui persamaan garis 2x + y − 4 = 0. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
     diagramChoices: [
@@ -272,6 +262,17 @@ const questions: Q[] = [
     ],
     parts: [
       { label: "Petunjuk:", text: "Ubah persamaan 2x + y − 4 = 0 menjadi bentuk y = −2x + 4, lalu substitusikan x = 0 dan y = 0 untuk menemukan titik potong sumbu-y dan sumbu-x, kemudian cocokkan dengan grafik yang benar." },
+    ],
+  }),
+
+  Q(10, "Grafik Persamaan Umum ax + by = c", {
+    type: "mixed",
+    content: "Gambar grafik persamaan garis berikut menggunakan dua titik:",
+    parts: [
+      { label: "a.", math: "3x + 2y = 12" },
+      { label: "b.", math: "x - 4y = 8" },
+      { label: "c.", math: "5x + y = 10" },
+      { label: "d.", math: "y = 2x + 3 \\quad \\text{(bentuk } y = mx + c\\text{)}" },
     ],
   }),
 ];
