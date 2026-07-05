@@ -263,26 +263,14 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Tantangan — Gradien Segitiga", {
+  Q(10, "Menentukan Nilai Variabel dari Titik Segaris", {
     type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: -3, y: -3, label: "P(−3,−3)", color: "#f472b6", labelPos: "bl" },
-        { x: 5, y: 1, label: "Q(5,1)", color: "#60a5fa", labelPos: "br" },
-        { x: 1, y: 5, label: "R(1,5)", color: "#34d399", labelPos: "top" },
-      ],
-      segs: [
-        { x1: -3, y1: -3, x2: 5, y2: 1, color: "#f472b6" },
-        { x1: 5, y1: 1, x2: 1, y2: 5, color: "#60a5fa" },
-        { x1: 1, y1: 5, x2: -3, y2: -3, color: "#34d399" },
-      ],
-    },
+    content: "Pada setiap soal berikut, tiga titik diketahui segaris (terletak pada satu garis lurus). Tentukan nilai variabel yang belum diketahui.",
     parts: [
-      { label: "a.", text: "Hitung gradien sisi PQ." },
-      { label: "b.", text: "Hitung gradien sisi QR." },
-      { label: "c.", text: "Hitung gradien sisi PR." },
-      { label: "d.", text: "Apakah ada dua sisi yang tegak lurus? Periksa dengan m₁ × m₂ = −1." },
+      { label: "a.", math: "A(1,\\ 2),\\ B(3,\\ 6),\\ C(5,\\ k) \\text{ segaris. Tentukan nilai } k." },
+      { label: "b.", math: "P(-2,\\ -1),\\ Q(2,\\ 7),\\ R(m,\\ 11) \\text{ segaris. Tentukan nilai } m." },
+      { label: "c.", math: "K(-2,\\ 1),\\ L(1,\\ n),\\ M(4,\\ 13) \\text{ segaris. Tentukan nilai } n." },
+      { label: "Petunjuk:", text: "Karena ketiga titik segaris, gradien antara dua pasang titik mana pun pada garis tersebut harus sama. Gunakan dua titik yang diketahui lengkap untuk mencari gradien, lalu gunakan gradien itu untuk mencari variabel pada titik ketiga." },
     ],
   }),
 ];
