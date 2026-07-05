@@ -220,6 +220,60 @@ const questions: Q[] = [
       { label: "Petunjuk:", text: "Substitusikan x = 0 dan y = 0 ke persamaan y = 2x − 4 untuk menemukan titik potong sumbu-y dan sumbu-x, lalu cocokkan dengan grafik yang benar." },
     ],
   }),
+
+  Q(10, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
+    type: "mixed",
+    content: "Diketahui persamaan garis y = −2x + 4. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
+    diagramChoices: [
+      {
+        label: "A.",
+        diagram: {
+          size: 150, range: 5,
+          segs: [{ x1: -1, y1: 6, x2: 3, y2: -2, color: "#4ade80" }],
+          pts: [
+            { x: 0, y: 4, label: "(0,4)", color: "#4ade80", labelPos: "top" },
+            { x: 2, y: 0, label: "(2,0)", color: "#4ade80", labelPos: "bot" },
+          ],
+        },
+      },
+      {
+        label: "B.",
+        diagram: {
+          size: 150, range: 5,
+          segs: [{ x1: -2, y1: 0, x2: 2, y2: 8, color: "#f87171" }],
+          pts: [
+            { x: 0, y: 4, label: "(0,4)", color: "#f87171", labelPos: "top" },
+            { x: 1, y: 6, label: "(1,6)", color: "#f87171", labelPos: "tr" },
+          ],
+        },
+      },
+      {
+        label: "C.",
+        diagram: {
+          size: 150, range: 5,
+          segs: [{ x1: -3, y1: 2, x2: 3, y2: -10, color: "#f87171" }],
+          pts: [
+            { x: 0, y: -4, label: "(0,-4)", color: "#f87171", labelPos: "bot" },
+            { x: -2, y: 0, label: "(-2,0)", color: "#f87171", labelPos: "top" },
+          ],
+        },
+      },
+      {
+        label: "D.",
+        diagram: {
+          size: 150, range: 5,
+          segs: [{ x1: -1, y1: -5, x2: 5, y2: 1, color: "#f87171" }],
+          pts: [
+            { x: 0, y: -4, label: "(0,-4)", color: "#f87171", labelPos: "bot" },
+            { x: 4, y: 0, label: "(4,0)", color: "#f87171", labelPos: "top" },
+          ],
+        },
+      },
+    ],
+    parts: [
+      { label: "Petunjuk:", text: "Substitusikan x = 0 dan y = 0 ke persamaan y = −2x + 4 untuk menemukan titik potong sumbu-y dan sumbu-x, lalu cocokkan dengan grafik yang benar." },
+    ],
+  }),
 ];
 
 const GrafikPGLPage = () => {
