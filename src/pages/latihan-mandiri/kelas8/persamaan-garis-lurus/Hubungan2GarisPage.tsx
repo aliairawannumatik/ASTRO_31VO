@@ -66,7 +66,25 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(5, "ANBK — Garis Sejajar Benar atau Salah", {
+  Q(5, "Dua Garis Tegak Lurus — Berpotongan Membentuk Sudut Siku-Siku", {
+    type: "mixed",
+    diagram: {
+      size: 260, range: 6,
+      segs: [
+        { x1: -4, y1: -4, x2: 4, y2: 4, color: "#f472b6", label: "ℓ₁" },
+        { x1: -4, y1: 4, x2: 4, y2: -4, color: "#60a5fa", label: "ℓ₂" },
+      ],
+      pts: [{ x: 0, y: 0, label: "Q", color: "#facc15", labelPos: "bl" }],
+      rightAngleMarks: [{ points: [[-1, 1], [0, 0], [1, 1]] }],
+    },
+    parts: [
+      { label: "a.", text: "Hitung gradien masing-masing garis." },
+      { label: "b.", text: "Buktikan bahwa hasil kali kedua gradien sama dengan −1." },
+      { label: "c.", text: "Tentukan koordinat titik potong Q kedua garis dari grafik." },
+    ],
+  }),
+
+  Q(6, "ANBK — Garis Sejajar Benar atau Salah", {
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S):",
     parts: [
@@ -77,7 +95,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(6, "Nilai k untuk Garis Sejajar", {
+  Q(7, "Nilai k untuk Garis Sejajar", {
     type: "mixed",
     content: "Tentukan nilai k agar setiap pasang garis berikut sejajar:",
     parts: [
@@ -87,7 +105,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "Nilai k untuk Garis Tegak Lurus", {
+  Q(8, "Nilai k untuk Garis Tegak Lurus", {
     type: "mixed",
     content: "Tentukan nilai k agar setiap pasang garis berikut tegak lurus:",
     parts: [
