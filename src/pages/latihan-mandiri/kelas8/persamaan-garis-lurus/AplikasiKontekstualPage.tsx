@@ -35,7 +35,7 @@ const questions: Q[] = [
     },
     content: "Tarif taksi online: Rp10.000 biaya awal ditambah Rp10.000 per km.",
     parts: [
-      { label: "a.", math: "\\text{Tuliskan persamaan tarif: } T = f(x)" },
+      { label: "a.", math: "\\text{Tuliskan persamaan tarif } T = f(x) \\text{ dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa tarif untuk perjalanan 8 km?}" },
       { label: "c.", math: "\\text{Berapa km jika tarif Rp65.000?}" },
     ],
@@ -57,7 +57,7 @@ const questions: Q[] = [
     },
     content: "Harga paket data: Rp5.000 per GB ditambah biaya admin Rp3.000.",
     parts: [
-      { label: "a.", math: "\\text{Tulis persamaan harga } H \\text{ untuk } g \\text{ GB.}" },
+      { label: "a.", math: "\\text{Tulis persamaan harga } H \\text{ untuk } g \\text{ GB dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa harga untuk 10 GB?}" },
       { label: "c.", math: "\\text{Berapa GB yang didapat dengan Rp28.000?}" },
       { label: "d.", text: "Gambarkan grafik hubungan jumlah GB dan harga." },
@@ -80,7 +80,7 @@ const questions: Q[] = [
     },
     content: "Biaya produksi x barang adalah B(x) = 5000x + 200.000 (dalam rupiah).",
     parts: [
-      { label: "a.", text: "Apa yang dimaksud dengan 5000x dalam konteks ini?" },
+      { label: "a.", math: "\\text{Persamaan } B(x) = 5000x + 200.000 \\text{ sudah dalam bentuk persamaan garis } y = mx + c. \\text{ Apa yang dimaksud dengan } 5000x?" },
       { label: "b.", text: "Apa yang dimaksud dengan 200.000 dalam konteks ini?" },
       { label: "c.", math: "\\text{Berapa biaya produksi 100 barang?}" },
       { label: "d.", math: "\\text{Berapa barang yang bisa diproduksi dengan anggaran Rp950.000?}" },
@@ -99,7 +99,7 @@ const questions: Q[] = [
     },
     content: "Riko menabung Rp50.000/bulan. Tabungan awal Rp50.000.",
     parts: [
-      { label: "a.", math: "\\text{Tulis persamaan tabungan } T \\text{ setelah } n \\text{ bulan.}" },
+      { label: "a.", math: "\\text{Tulis persamaan tabungan } T \\text{ setelah } n \\text{ bulan dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa tabungan setelah 1 tahun?}" },
       { label: "c.", math: "\\text{Kapan tabungan mencapai Rp500.000?}" },
     ],
@@ -121,7 +121,7 @@ const questions: Q[] = [
     },
     content: "Nilai sebuah laptop mula-mula Rp8.000.000. Nilainya turun Rp1.000.000 per tahun.",
     parts: [
-      { label: "a.", math: "\\text{Tulis persamaan nilai } V \\text{ setelah } t \\text{ tahun.}" },
+      { label: "a.", math: "\\text{Tulis persamaan nilai } V \\text{ setelah } t \\text{ tahun dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa nilai laptop setelah 3 tahun?}" },
       { label: "c.", math: "\\text{Kapan nilai laptop menjadi Rp2.000.000?}" },
       { label: "d.", text: "Apakah nilai laptop bisa menjadi negatif? Jelaskan batasan modelnya!" },
@@ -140,7 +140,7 @@ const questions: Q[] = [
     },
     content: "Tangki sepeda motor berisi 60 liter. Konsumsi BBM 10 km per liter.",
     parts: [
-      { label: "a.", math: "\\text{Tulis persamaan sisa BBM } S \\text{ setelah menempuh } d \\text{ km.}" },
+      { label: "a.", math: "\\text{Tulis persamaan sisa BBM } S \\text{ setelah menempuh } d \\text{ km dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa sisa BBM setelah 250 km?}" },
       { label: "c.", math: "\\text{Kapan tangki habis (S = 0)?}" },
     ],
@@ -162,7 +162,7 @@ const questions: Q[] = [
     },
     content: "Populasi desa pada tahun 2020 adalah 5.000 jiwa. Bertambah 200 jiwa per tahun.",
     parts: [
-      { label: "a.", math: "\\text{Tulis persamaan populasi } P \\text{ pada tahun ke-} t \\text{ sejak 2020.}" },
+      { label: "a.", math: "\\text{Tulis persamaan populasi } P \\text{ pada tahun ke-} t \\text{ sejak 2020 dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa populasi pada tahun 2030?}" },
       { label: "c.", math: "\\text{Kapan populasi mencapai 8.000 jiwa?}" },
     ],
@@ -184,7 +184,7 @@ const questions: Q[] = [
     },
     content: "Harga tiket masuk taman: Rp5.000 per orang + biaya parkir Rp10.000.",
     parts: [
-      { label: "a.", math: "\\text{Tulis total biaya } C \\text{ untuk } n \\text{ orang.}" },
+      { label: "a.", math: "\\text{Tulis total biaya } C \\text{ untuk } n \\text{ orang dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa total biaya untuk keluarga 5 orang?}" },
       { label: "c.", text: "Jika anggaran keluarga Rp60.000, berapa banyak orang yang bisa masuk?" },
     ],
@@ -206,7 +206,7 @@ const questions: Q[] = [
     },
     content: "Bak air berisi 500 liter. Air keluar dengan kecepatan konstan 25 liter/menit.",
     parts: [
-      { label: "a.", math: "\\text{Tulis persamaan volume } V \\text{ setelah } t \\text{ menit.}" },
+      { label: "a.", math: "\\text{Tulis persamaan volume } V \\text{ setelah } t \\text{ menit dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa volume setelah 10 menit?}" },
       { label: "c.", math: "\\text{Kapan bak kosong?}" },
       { label: "d.", text: "Gambarkan grafik volume vs waktu. Apa jenis gradiennya?" },
@@ -225,7 +225,7 @@ const questions: Q[] = [
     },
     content: "Tarif A: Rp20.000 awal + Rp10.000/km. Tarif B: Rp40.000 awal + Rp5.000/km.",
     parts: [
-      { label: "a.", text: "Tulis persamaan tarif A dan tarif B." },
+      { label: "a.", text: "Tulis persamaan tarif A dan tarif B dalam bentuk persamaan garis y = mx + c." },
       { label: "b.", text: "Pada jarak berapa km kedua tarif sama?" },
       { label: "c.", text: "Untuk jarak lebih dari titik kesamaan, tarif mana yang lebih murah?" },
     ],
@@ -247,7 +247,7 @@ const questions: Q[] = [
     },
     content: "Gaji seorang karyawan: Rp2.000.000 per bulan + bonus Rp50.000 per unit terjual.",
     parts: [
-      { label: "a.", math: "\\text{Tulis persamaan total penghasilan } G \\text{ untuk } u \\text{ unit.}" },
+      { label: "a.", math: "\\text{Tulis persamaan total penghasilan } G \\text{ untuk } u \\text{ unit dalam bentuk persamaan garis } y = mx + c" },
       { label: "b.", math: "\\text{Berapa penghasilan jika menjual 30 unit?}" },
       { label: "c.", math: "\\text{Berapa unit harus dijual agar penghasilan Rp4.500.000?}" },
     ],
@@ -270,7 +270,7 @@ const questions: Q[] = [
     content: "Dinas pertanian mencatat luas panen jagung (hektar) setiap tahun: 2019: 400, 2020: 450, 2021: 500, 2022: 550.",
     parts: [
       { label: "a.", text: "Apakah data ini membentuk pola linier? Jelaskan!" },
-      { label: "b.", math: "\\text{Tuliskan persamaan garis (tahun sebagai } x, \\text{ luas sebagai } y\\text{).}" },
+      { label: "b.", math: "\\text{Tuliskan persamaan garis (tahun sebagai } x, \\text{ luas sebagai } y\\text{) dalam bentuk } y = mx + c" },
       { label: "c.", math: "\\text{Prediksi luas panen tahun 2025.}" },
     ],
   }),
@@ -295,7 +295,7 @@ const questions: Q[] = [
     content: "Tarif telepon: Rp500/menit untuk 10 menit pertama, kemudian Rp300/menit.",
     parts: [
       { label: "a.", text: "Berapa biaya untuk percakapan 10 menit?" },
-      { label: "b.", math: "\\text{Tulis persamaan biaya } B \\text{ untuk } t > 10 \\text{ menit.}" },
+      { label: "b.", math: "\\text{Tulis persamaan biaya } B \\text{ untuk } t > 10 \\text{ menit dalam bentuk persamaan garis } y = mx + c" },
       { label: "c.", math: "\\text{Berapa biaya untuk percakapan 25 menit?}" },
     ],
   }),
@@ -314,7 +314,7 @@ const questions: Q[] = [
     },
     content: "Toko A menjual buah: Rp20.000/kg + Rp20.000 ongkos kirim. Toko B: Rp50.000 flat untuk berapapun kg.",
     parts: [
-      { label: "a.", text: "Tulis persamaan biaya Toko A dan Toko B." },
+      { label: "a.", text: "Tulis persamaan biaya Toko A dan Toko B dalam bentuk persamaan garis y = mx + c." },
       { label: "b.", text: "Pada berapa kg pembelian biaya kedua toko sama?" },
       { label: "c.", text: "Jika membeli 2 kg, mana yang lebih murah? Dan jika 4 kg?" },
       { label: "d.", text: "Gambarkan grafik kedua toko dan beri kesimpulan strategi pembelian." },
