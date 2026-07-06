@@ -6,6 +6,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import CoordPlane from "../koordinat-cartesius/CoordPlane";
+import { contextualIllustrations } from "./ContextualIllustrations";
 
 type Part = { label: string; math?: string; text?: string };
 type Diagram = Parameters<typeof CoordPlane>[0];
@@ -250,6 +251,14 @@ const AplikasiKontekstualPage = () => {
                   )}
                 </div>
               </div>
+
+              {contextualIllustrations[q.n] && (
+                <div className="flex justify-center my-4">
+                  <div className="rounded-xl overflow-hidden shadow-lg border border-white/10">
+                    {contextualIllustrations[q.n]({})}
+                  </div>
+                </div>
+              )}
 
               {q.diagram && (
                 <div className="flex justify-center my-4">
