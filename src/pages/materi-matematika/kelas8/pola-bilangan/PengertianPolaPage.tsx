@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import { ArcPatternPanel } from "@/components/ArcDifferenceAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const SectionHeader = ({ icon, iconColor, title }: {
   icon: React.ReactNode; iconColor?: string; title: string;
@@ -15,7 +16,7 @@ const SectionHeader = ({ icon, iconColor, title }: {
   <div className="w-full flex items-center px-5 py-4">
     <div className="flex items-center gap-3">
       <span className={iconColor}>{icon}</span>
-      <span className="font-body font-semibold text-white">{title}</span>
+      <span className="font-body font-semibold text-foreground">{title}</span>
     </div>
   </div>
 );
@@ -450,15 +451,6 @@ const translations = {
   },
 };
 
-const arcColors = [
-  { arcColor: "#22d3ee", labelColor: "#a5f3fc", bg: "bg-cyan-900/30 border-cyan-500/30", badge: "bg-cyan-500" },
-  { arcColor: "#fb923c", labelColor: "#fed7aa", bg: "bg-orange-900/30 border-orange-500/30", badge: "bg-orange-500" },
-  { arcColor: "#a78bfa", labelColor: "#ddd6fe", bg: "bg-violet-900/30 border-violet-500/30", badge: "bg-violet-500" },
-  { arcColor: "#4ade80", labelColor: "#bbf7d0", bg: "bg-green-900/30 border-green-500/30", badge: "bg-green-500" },
-  { arcColor: "#facc15", labelColor: "#fef08a", bg: "bg-yellow-900/30 border-yellow-500/30", badge: "bg-yellow-500" },
-  { arcColor: "#f472b6", labelColor: "#fbcfe8", bg: "bg-pink-900/30 border-pink-500/30", badge: "bg-pink-500" },
-  { arcColor: "#2dd4bf", labelColor: "#99f6e4", bg: "bg-teal-900/30 border-teal-500/30", badge: "bg-teal-500" },
-];
 
 const arcTerms = [
   [2, 4, 6, 8, 10, 12],
@@ -473,7 +465,73 @@ const arcTerms = [
 const PengertianPolaPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
+
+  const prose = isDark ? "text-white/80" : "text-gray-700";
+  const proseSm = isDark ? "text-white/60" : "text-gray-500";
+  const box = isDark ? "bg-slate-800/50" : "bg-white/80 border border-gray-200";
+  const boxAlt = isDark ? "bg-slate-800/60" : "bg-gray-50/90 border border-gray-200";
+
+  const arcColors = isDark ? [
+    { arcColor: "#22d3ee", labelColor: "#a5f3fc", bg: "bg-cyan-900/30 border-cyan-500/30", badge: "bg-cyan-500", labelClass: "" },
+    { arcColor: "#fb923c", labelColor: "#fed7aa", bg: "bg-orange-900/30 border-orange-500/30", badge: "bg-orange-500", labelClass: "" },
+    { arcColor: "#a78bfa", labelColor: "#ddd6fe", bg: "bg-violet-900/30 border-violet-500/30", badge: "bg-violet-500", labelClass: "" },
+    { arcColor: "#4ade80", labelColor: "#bbf7d0", bg: "bg-green-900/30 border-green-500/30", badge: "bg-green-500", labelClass: "" },
+    { arcColor: "#facc15", labelColor: "#fef08a", bg: "bg-yellow-900/30 border-yellow-500/30", badge: "bg-yellow-500", labelClass: "" },
+    { arcColor: "#f472b6", labelColor: "#fbcfe8", bg: "bg-pink-900/30 border-pink-500/30", badge: "bg-pink-500", labelClass: "" },
+    { arcColor: "#2dd4bf", labelColor: "#99f6e4", bg: "bg-teal-900/30 border-teal-500/30", badge: "bg-teal-500", labelClass: "" },
+  ] : [
+    { arcColor: "#0891b2", labelColor: "", bg: "bg-cyan-50 border-cyan-300", badge: "bg-cyan-600", labelClass: "text-cyan-800" },
+    { arcColor: "#ea580c", labelColor: "", bg: "bg-orange-50 border-orange-300", badge: "bg-orange-500", labelClass: "text-orange-800" },
+    { arcColor: "#7c3aed", labelColor: "", bg: "bg-violet-50 border-violet-300", badge: "bg-violet-600", labelClass: "text-violet-800" },
+    { arcColor: "#16a34a", labelColor: "", bg: "bg-green-50 border-green-300", badge: "bg-green-600", labelClass: "text-green-800" },
+    { arcColor: "#ca8a04", labelColor: "", bg: "bg-yellow-50 border-yellow-300", badge: "bg-yellow-500", labelClass: "text-yellow-800" },
+    { arcColor: "#db2777", labelColor: "", bg: "bg-pink-50 border-pink-300", badge: "bg-pink-600", labelClass: "text-pink-800" },
+    { arcColor: "#0d9488", labelColor: "", bg: "bg-teal-50 border-teal-300", badge: "bg-teal-600", labelClass: "text-teal-800" },
+  ];
+
+  const conceptItemColors = isDark ? [
+    "from-cyan-900/60 to-cyan-800/30 border-cyan-500/40 text-cyan-200",
+    "from-violet-900/60 to-violet-800/30 border-violet-500/40 text-violet-200",
+    "from-pink-900/60 to-pink-800/30 border-pink-500/40 text-pink-200",
+    "from-green-900/60 to-green-800/30 border-green-500/40 text-green-200",
+  ] : [
+    "from-cyan-50 to-cyan-100/60 border-cyan-400 text-cyan-800",
+    "from-violet-50 to-violet-100/60 border-violet-400 text-violet-800",
+    "from-pink-50 to-pink-100/60 border-pink-400 text-pink-800",
+    "from-green-50 to-green-100/60 border-green-400 text-green-800",
+  ];
+
+  const specialItemColors = isDark ? [
+    "bg-cyan-900/50 border-cyan-500/40 text-cyan-200",
+    "bg-orange-900/50 border-orange-500/40 text-orange-200",
+    "bg-violet-900/50 border-violet-500/40 text-violet-200",
+    "bg-green-900/50 border-green-500/40 text-green-200",
+    "bg-yellow-900/50 border-yellow-500/40 text-yellow-200",
+    "bg-pink-900/50 border-pink-500/40 text-pink-200",
+    "bg-teal-900/50 border-teal-500/40 text-teal-200",
+  ] : [
+    "bg-cyan-50 border-cyan-400 text-cyan-800",
+    "bg-orange-50 border-orange-400 text-orange-800",
+    "bg-violet-50 border-violet-400 text-violet-800",
+    "bg-green-50 border-green-400 text-green-800",
+    "bg-yellow-50 border-yellow-400 text-yellow-800",
+    "bg-pink-50 border-pink-400 text-pink-800",
+    "bg-teal-50 border-teal-400 text-teal-800",
+  ];
+
+  const tipsItemColors = isDark ? [
+    "bg-yellow-900/30 border-yellow-500/30",
+    "bg-blue-900/30 border-blue-500/30",
+    "bg-green-900/30 border-green-500/30",
+    "bg-violet-900/30 border-violet-500/30",
+  ] : [
+    "bg-yellow-50 border-yellow-300",
+    "bg-blue-50 border-blue-300",
+    "bg-green-50 border-green-300",
+    "bg-violet-50 border-violet-300",
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
@@ -483,63 +541,63 @@ const PengertianPolaPage = () => {
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.pageTitle}</h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.pageSubtitle}</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
+        <p className="text-muted-foreground text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* ── BAGIAN 1 ── */}
           <div className="bg-cyan-500/10 border border-cyan-500/40 rounded-xl px-4 py-2">
-            <p className="font-display text-sm font-bold text-cyan-300 text-center uppercase tracking-widest">{t.sec1Banner}</p>
+            <p className={`font-display text-sm font-bold text-center uppercase tracking-widest ${isDark ? "text-cyan-300" : "text-cyan-700"}`}>{t.sec1Banner}</p>
           </div>
 
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sec1Title} />
             <div className="px-5 pb-5 space-y-4">
-              <p className="font-body text-sm text-white/80 leading-relaxed">{t.sec1Body}</p>
+              <p className={`font-body text-sm leading-relaxed ${prose}`}>{t.sec1Body}</p>
               <figure className="flex flex-col items-center gap-2">
                 <img src="/batik-sidomukti.png" alt="Batik Sidomukti" className="w-full max-w-sm rounded-xl border border-cyan-500/30 shadow-lg object-cover" />
-                <figcaption className="font-body text-xs text-white/50 italic text-center">{t.figcaption}</figcaption>
+                <figcaption className={`font-body text-xs italic text-center ${proseSm}`}>{t.figcaption}</figcaption>
               </figure>
-              <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
-                <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-3">{t.simplePatternsHeader}</p>
+              <div className={`${boxAlt} border border-cyan-500/20 rounded-xl p-4`}>
+                <p className={`font-body text-xs font-bold uppercase mb-3 ${isDark ? "text-cyan-300" : "text-cyan-700"}`}>{t.simplePatternsHeader}</p>
                 <div className="grid grid-cols-1 gap-3 text-xs font-body">
-                  <div className="border bg-cyan-900/40 border-cyan-500/30 rounded-lg px-3 py-2">
+                  <div className={`border rounded-lg px-3 py-2 ${isDark ? "bg-cyan-900/40 border-cyan-500/30" : "bg-cyan-50 border-cyan-300"}`}>
                     <div className="flex justify-between items-center mb-1">
-                      <span className="font-bold text-cyan-200 tracking-widest">2, 4, 6, 8, 10, ...</span>
-                      <span className="text-white/50 ml-2">{t.addTwo}</span>
+                      <span className={`font-bold tracking-widest ${isDark ? "text-cyan-200" : "text-cyan-800"}`}>2, 4, 6, 8, 10, ...</span>
+                      <span className={`ml-2 ${proseSm}`}>{t.addTwo}</span>
                     </div>
                     <svg viewBox="0 0 248 52" className="w-full">
-                      {[2,4,6,8,10].map((n, i) => { const x = 24 + i * 48; return (<g key={i}><rect x={x-14} y={28} width={28} height={18} rx="3" fill="rgba(8,145,178,0.3)" stroke="#22d3ee" strokeWidth="0.9"/><text x={x} y={41} textAnchor="middle" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text></g>); })}
-                      <text x={236} y={41} fill="rgba(255,255,255,0.3)" fontSize="13" fontFamily="monospace">…</text>
+                      {[2,4,6,8,10].map((n, i) => { const x = 24 + i * 48; return (<g key={i}><rect x={x-14} y={28} width={28} height={18} rx="3" fill={isDark ? "rgba(8,145,178,0.3)" : "rgba(8,145,178,0.15)"} stroke="#22d3ee" strokeWidth="0.9"/><text x={x} y={41} textAnchor="middle" fill={isDark ? "#a5f3fc" : "#164e63"} fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text></g>); })}
+                      <text x={236} y={41} fill={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} fontSize="13" fontFamily="monospace">…</text>
                       {[0,1,2,3].map(i => { const x1 = 24 + i * 48 + 14; const x2 = 24 + (i+1)*48 - 14; const mx = (x1+x2)/2; return (<g key={i}><path d={`M ${x1},28 Q ${mx},10 ${x2},28`} fill="none" stroke="#22d3ee" strokeWidth="1.4" strokeDasharray="3,2"/><text x={mx} y={7} textAnchor="middle" fill="#22d3ee" fontSize="9" fontFamily="monospace" fontWeight="bold">+2</text></g>); })}
                     </svg>
                   </div>
-                  <div className="border bg-violet-900/40 border-violet-500/30 rounded-lg px-3 py-2">
+                  <div className={`border rounded-lg px-3 py-2 ${isDark ? "bg-violet-900/40 border-violet-500/30" : "bg-violet-50 border-violet-300"}`}>
                     <div className="flex justify-between items-center mb-1">
-                      <span className="font-bold text-violet-200 tracking-widest">1, 4, 9, 16, 25, ...</span>
-                      <span className="text-white/50 ml-2">{t.squareNum}</span>
+                      <span className={`font-bold tracking-widest ${isDark ? "text-violet-200" : "text-violet-800"}`}>1, 4, 9, 16, 25, ...</span>
+                      <span className={`ml-2 ${proseSm}`}>{t.squareNum}</span>
                     </div>
                     <svg viewBox="0 0 248 52" className="w-full">
-                      {[1,4,9,16,25].map((n, i) => { const x = 24 + i * 48; return (<g key={i}><rect x={x-15} y={28} width={30} height={18} rx="3" fill="rgba(109,40,217,0.3)" stroke="#a855f7" strokeWidth="0.9"/><text x={x} y={41} textAnchor="middle" fill="#e9d5ff" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text></g>); })}
-                      <text x={236} y={41} fill="rgba(255,255,255,0.3)" fontSize="13" fontFamily="monospace">…</text>
+                      {[1,4,9,16,25].map((n, i) => { const x = 24 + i * 48; return (<g key={i}><rect x={x-15} y={28} width={30} height={18} rx="3" fill={isDark ? "rgba(109,40,217,0.3)" : "rgba(109,40,217,0.12)"} stroke="#a855f7" strokeWidth="0.9"/><text x={x} y={41} textAnchor="middle" fill={isDark ? "#e9d5ff" : "#4c1d95"} fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text></g>); })}
+                      <text x={236} y={41} fill={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} fontSize="13" fontFamily="monospace">…</text>
                       {["+3","+5","+7","+9"].map((d, i) => { const x1 = 24 + i * 48 + 15; const x2 = 24 + (i+1)*48 - 15; const mx = (x1+x2)/2; return (<g key={i}><path d={`M ${x1},28 Q ${mx},10 ${x2},28`} fill="none" stroke="#a855f7" strokeWidth="1.4" strokeDasharray="3,2"/><text x={mx} y={7} textAnchor="middle" fill="#a855f7" fontSize="9" fontFamily="monospace" fontWeight="bold">{d}</text></g>); })}
                     </svg>
                   </div>
-                  <div className="border bg-green-900/40 border-green-500/30 rounded-lg px-3 py-2">
+                  <div className={`border rounded-lg px-3 py-2 ${isDark ? "bg-green-900/40 border-green-500/30" : "bg-green-50 border-green-300"}`}>
                     <div className="flex justify-between items-center mb-1">
-                      <span className="font-bold text-green-200 tracking-widest">3, 6, 12, 24, 48, ...</span>
-                      <span className="text-white/50 ml-2">{t.timesTwo}</span>
+                      <span className={`font-bold tracking-widest ${isDark ? "text-green-200" : "text-green-800"}`}>3, 6, 12, 24, 48, ...</span>
+                      <span className={`ml-2 ${proseSm}`}>{t.timesTwo}</span>
                     </div>
                     <svg viewBox="0 0 248 52" className="w-full">
-                      {[3,6,12,24,48].map((n, i) => { const x = 24 + i * 48; return (<g key={i}><rect x={x-15} y={28} width={30} height={18} rx="3" fill="rgba(22,101,52,0.3)" stroke="#4ade80" strokeWidth="0.9"/><text x={x} y={41} textAnchor="middle" fill="#bbf7d0" fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text></g>); })}
-                      <text x={236} y={41} fill="rgba(255,255,255,0.3)" fontSize="13" fontFamily="monospace">…</text>
+                      {[3,6,12,24,48].map((n, i) => { const x = 24 + i * 48; return (<g key={i}><rect x={x-15} y={28} width={30} height={18} rx="3" fill={isDark ? "rgba(22,101,52,0.3)" : "rgba(22,101,52,0.12)"} stroke="#4ade80" strokeWidth="0.9"/><text x={x} y={41} textAnchor="middle" fill={isDark ? "#bbf7d0" : "#14532d"} fontSize="11" fontFamily="monospace" fontWeight="bold">{n}</text></g>); })}
+                      <text x={236} y={41} fill={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} fontSize="13" fontFamily="monospace">…</text>
                       {[0,1,2,3].map(i => { const x1 = 24 + i * 48 + 15; const x2 = 24 + (i+1)*48 - 15; const mx = (x1+x2)/2; return (<g key={i}><path d={`M ${x1},28 Q ${mx},10 ${x2},28`} fill="none" stroke="#4ade80" strokeWidth="1.4" strokeDasharray="3,2"/><text x={mx} y={7} textAnchor="middle" fill="#4ade80" fontSize="9" fontFamily="monospace" fontWeight="bold">×2</text></g>); })}
                     </svg>
                   </div>
                 </div>
               </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <p className="font-body text-sm text-yellow-200"><strong>{t.whyImportant}</strong> {t.whyImportantBody}</p>
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-800"}`}><strong>{t.whyImportant}</strong> {t.whyImportantBody}</p>
               </div>
             </div>
           </div>
@@ -548,38 +606,38 @@ const PengertianPolaPage = () => {
             <SectionHeader icon={<Layers className="w-5 h-5" />} iconColor="text-violet-400" title={t.sec2Title} />
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
-                <p className="font-body text-sm font-semibold text-violet-300 mb-2">{t.conceptSummaryTitle}</p>
-                <p className="font-body text-sm text-white/80 leading-relaxed">{t.conceptSummaryBody}</p>
+                <p className={`font-body text-sm font-semibold mb-2 ${isDark ? "text-violet-300" : "text-violet-700"}`}>{t.conceptSummaryTitle}</p>
+                <p className={`font-body text-sm leading-relaxed ${prose}`}>{t.conceptSummaryBody}</p>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs font-body border-collapse">
                   <thead>
-                    <tr className="bg-violet-900/40">
-                      <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">{t.tableCol1}</th>
-                      <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">{t.tableCol2}</th>
-                      <th className="border border-violet-500/30 px-3 py-2 text-violet-200 text-left">{t.tableCol3}</th>
+                    <tr className={isDark ? "bg-violet-900/40" : "bg-violet-100"}>
+                      <th className={`border px-3 py-2 text-left ${isDark ? "border-violet-500/30 text-violet-200" : "border-violet-300 text-violet-800"}`}>{t.tableCol1}</th>
+                      <th className={`border px-3 py-2 text-left ${isDark ? "border-violet-500/30 text-violet-200" : "border-violet-300 text-violet-800"}`}>{t.tableCol2}</th>
+                      <th className={`border px-3 py-2 text-left ${isDark ? "border-violet-500/30 text-violet-200" : "border-violet-300 text-violet-800"}`}>{t.tableCol3}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {t.tableRows.map(([term, def, sym], i) => (
-                      <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
-                        <td className="border border-white/10 px-3 py-2 text-cyan-300 font-semibold">{term}</td>
-                        <td className="border border-white/10 px-3 py-2 text-white/70">{def}</td>
-                        <td className="border border-white/10 px-3 py-2 text-green-300 font-mono">{sym}</td>
+                      <tr key={i} className={i % 2 === 0 ? (isDark ? "bg-slate-800/30" : "bg-gray-50") : (isDark ? "bg-slate-700/20" : "bg-white")}>
+                        <td className={`border px-3 py-2 font-semibold ${isDark ? "border-white/10 text-cyan-300" : "border-gray-200 text-cyan-700"}`}>{term}</td>
+                        <td className={`border px-3 py-2 ${isDark ? "border-white/10 text-white/70" : "border-gray-200 text-gray-600"}`}>{def}</td>
+                        <td className={`border px-3 py-2 font-mono ${isDark ? "border-white/10 text-green-300" : "border-gray-200 text-green-700"}`}>{sym}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4 space-y-3">
-                <p className="font-body text-sm font-bold text-white">{t.findRuleHeader}</p>
+              <div className={`${box} border border-white/10 rounded-xl p-4 space-y-3`}>
+                <p className="font-body text-sm font-bold text-foreground">{t.findRuleHeader}</p>
                 <div className="space-y-2 text-sm font-body">
-                  {t.steps.map(({ step, label, desc, color }) => (
-                    <div key={step} className={`border ${color} rounded-lg p-2 flex gap-3`}>
-                      <span className="font-display font-bold text-white bg-white/10 rounded-full w-6 h-6 flex items-center justify-center shrink-0 text-sm">{step}</span>
+                  {t.steps.map(({ step, label, desc }) => (
+                    <div key={step} className={`border rounded-lg p-2 flex gap-3 ${isDark ? "border-cyan-500/30 bg-cyan-900/10" : "border-cyan-300 bg-cyan-50"}`}>
+                      <span className={`font-display font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 text-sm ${isDark ? "text-white bg-white/10" : "text-gray-800 bg-gray-200"}`}>{step}</span>
                       <div>
-                        <p className="text-white font-semibold">{label}</p>
-                        <p className="text-white/60 text-xs mt-0.5">{desc}</p>
+                        <p className="text-foreground font-semibold">{label}</p>
+                        <p className={`text-xs mt-0.5 ${proseSm}`}>{desc}</p>
                       </div>
                     </div>
                   ))}
@@ -596,9 +654,9 @@ const PengertianPolaPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.specialTitle} />
             <div className="px-5 pb-5 space-y-3">
-              <p className="font-body text-sm text-white/80 leading-relaxed">{t.specialBody}</p>
+              <p className={`font-body text-sm leading-relaxed ${prose}`}>{t.specialBody}</p>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <p className="font-body text-sm text-yellow-200"><strong>{language === "id" ? "Fakta menarik:" : language === "en" ? "Interesting fact:" : "興味深い事実："}</strong> {t.factBox.replace(/^Fakta menarik:|^Interesting fact:|^興味深い事実：/, "").trim()}</p>
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-800"}`}><strong>{language === "id" ? "Fakta menarik:" : language === "en" ? "Interesting fact:" : "興味深い事実："}</strong> {t.factBox.replace(/^Fakta menarik:|^Interesting fact:|^興味深い事実：/, "").trim()}</p>
               </div>
             </div>
           </div>
