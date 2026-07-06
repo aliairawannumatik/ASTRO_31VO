@@ -223,6 +223,11 @@ const questions: Q[] = [
       rightAngleMarks: [
         { points: [[-5.72, 0.42], [-5.30, 0.14], [-5.58, -0.28]], color: "#1e293b" },
       ],
+      // tanda panah sejajar pada garis ℓ dan p (slope -2/3, arah sama)
+      arrowMarks: [
+        { x:  3, y:  7, slope: -2/3, color: "#b45309" },
+        { x: -3, y: -2, slope: -2/3, color: "#be185d" },
+      ],
     },
     content: "Perhatikan gambar di bawah ini! Persamaan garis ℓ adalah ….",
     choices: [
