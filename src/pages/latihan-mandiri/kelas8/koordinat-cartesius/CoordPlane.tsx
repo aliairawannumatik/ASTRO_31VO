@@ -12,6 +12,13 @@ type ExtraText = { x: number; y: number; text: string; color?: string; size?: nu
 type ShadeRegion = { type: 'rect'; x1: number; y1: number; x2: number; y2: number; color?: string };
 type Circle = { cx: number; cy: number; r: number; color?: string; dashed?: boolean };
 type RightAngleMark = { points: [[number, number], [number, number], [number, number]]; color?: string };
+/** Arrow mark drawn along a line to indicate parallel lines.
+ *  x, y  — position in math coordinates (tip of arrowhead)
+ *  slope — slope of the line (determines arrowhead direction)
+ *  size  — arrowhead length in coordinate units (default 0.7)
+ *  reverse — flip direction (default false = points toward increasing x)
+ */
+type ArrowMark = { x: number; y: number; slope: number; size?: number; color?: string; reverse?: boolean };
 
 export type CoordPlaneProps = {
   pts?: Pt[];
@@ -25,6 +32,7 @@ export type CoordPlaneProps = {
   title?: string;
   lightBg?: boolean;
   rightAngleMarks?: RightAngleMark[];
+  arrowMarks?: ArrowMark[];
 };
 
 const CoordPlane = ({
@@ -39,6 +47,7 @@ const CoordPlane = ({
   title,
   lightBg = false,
   rightAngleMarks = [],
+  arrowMarks = [],
 }: CoordPlaneProps) => {
   const pad = 18;
   const inner = size - 2 * pad;
@@ -171,6 +180,29 @@ const CoordPlane = ({
             fill="none" stroke={m.color || axisStroke} strokeWidth="1.5"
           />
         ))}
+
+        {/* Arrow marks — indicate parallel lines */}
+        {arrowMarks.map((m, i) => {
+          const dir = m.reverse ? -1 : 1;
+          const len = Math.sqrt(1 + m.slope * m.slope);
+          // SVG direction: x→right, y flipped so dy_svg = -slope
+          const nx = dir / len;
+          const ny = dir * (-m.slope) / len;
+          const s = (m.size ?? 0.7) * sc;
+          const tipX = px(m.x);
+          const tipY = py(m.y);
+          const bx = tipX - nx * s;
+          const by = tipY - ny * s;
+          // perpendicular for wing spread
+          const wx = -ny * s * 0.45;
+          const wy =  nx * s * 0.45;
+          return (
+            <polygon key={i}
+              points={`${tipX},${tipY} ${bx + wx},${by + wy} ${bx - wx},${by - wy}`}
+              fill={m.color || axisStroke}
+            />
+          );
+        })}
 
         {/* Extra text elements */}
         {extraTexts.map((t, i) => (

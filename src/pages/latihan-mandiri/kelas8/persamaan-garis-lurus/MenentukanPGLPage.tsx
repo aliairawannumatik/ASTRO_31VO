@@ -116,7 +116,6 @@ const questions: Q[] = [
   // Soal 7 — dua garis sejajar (slope -3); h melalui (0,4)
   Q(7, "Pilihan Ganda — Garis Sejajar (Grafik)", {
     type: "mc",
-    content: "Perhatikan gambar berikut!",
     diagram: {
       size: 280, range: 8, lightBg: true,
       segs: [
@@ -129,6 +128,11 @@ const questions: Q[] = [
         { x: -2, y: 0,  color: "#7c3aed", labelPos: "tl" },
         { x: 0,  y: -6, color: "#7c3aed", labelPos: "tl" },
         { x: 0,  y: 4,  color: "#b45309", labelPos: "tr" },
+      ],
+      // tanda panah sejajar pada kedua garis (slope -3, arah sama)
+      arrowMarks: [
+        { x: -1.5, y: -1.5, slope: -3, color: "#7c3aed" },
+        { x:  0.5, y:  2.5, slope: -3, color: "#b45309" },
       ],
     },
     content: "Perhatikan gambar berikut! Persamaan garis h adalah ….",
