@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import {
@@ -476,88 +477,88 @@ const translations = {
 ══════════════════════════════════════════════════════════ */
 type T = typeof translations.id;
 
-const VennKardinalitas2 = ({ t }: { t: T }) => (
+const VennKardinalitas2 = ({ t, isDark }: { t: T; isDark: boolean }) => (
   <div className="flex flex-col items-center gap-2">
-    <p className="text-xs font-mono text-cyan-300 tracking-wider">{t.venn2title}</p>
+    <p className={`text-xs font-mono tracking-wider ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>{t.venn2title}</p>
     <svg viewBox="0 0 300 170" className="w-full max-w-xs" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="4" width="292" height="162" rx="10" fill="#0f172a" stroke="#334155" strokeWidth="1.5"/>
-      <text x="278" y="20" textAnchor="middle" fontSize="12" fill="#64748b" fontFamily="monospace">S</text>
-      <circle cx="115" cy="85" r="58" fill="#1e3a5f" stroke="#38bdf8" strokeWidth="2" fillOpacity="0.7"/>
-      <circle cx="185" cy="85" r="58" fill="#1e1f5e" stroke="#818cf8" strokeWidth="2" fillOpacity="0.7"/>
-      <text x="78" y="80" textAnchor="middle" fontSize="11" fill="#bae6fd" fontFamily="monospace" fontWeight="bold">a</text>
-      <text x="78" y="95" textAnchor="middle" fontSize="9" fill="#93c5fd" fontFamily="sans-serif">{t.onlyA}</text>
-      <text x="150" y="80" textAnchor="middle" fontSize="11" fill="#6ee7b7" fontFamily="monospace" fontWeight="bold">b</text>
-      <text x="150" y="95" textAnchor="middle" fontSize="9" fill="#a7f3d0" fontFamily="sans-serif">A∩B</text>
-      <text x="222" y="80" textAnchor="middle" fontSize="11" fill="#c7d2fe" fontFamily="monospace" fontWeight="bold">c</text>
-      <text x="222" y="95" textAnchor="middle" fontSize="9" fill="#a5b4fc" fontFamily="sans-serif">{t.onlyB}</text>
-      <text x="20" y="155" fontSize="9" fill="#475569" fontFamily="monospace">{t.outside}</text>
-      <text x="150" y="155" textAnchor="middle" fontSize="9" fill="#64748b" fontFamily="monospace">n(S) = a+b+c+d</text>
+      <rect x="4" y="4" width="292" height="162" rx="10" fill={isDark ? "#0f172a" : "#f0f9ff"} stroke={isDark ? "#334155" : "#93c5fd"} strokeWidth="1.5"/>
+      <text x="278" y="20" textAnchor="middle" fontSize="12" fill={isDark ? "#64748b" : "#64748b"} fontFamily="monospace">S</text>
+      <circle cx="115" cy="85" r="58" fill={isDark ? "#1e3a5f" : "#bfdbfe"} stroke="#38bdf8" strokeWidth="2" fillOpacity="0.7"/>
+      <circle cx="185" cy="85" r="58" fill={isDark ? "#1e1f5e" : "#c7d2fe"} stroke="#818cf8" strokeWidth="2" fillOpacity="0.7"/>
+      <text x="78" y="80" textAnchor="middle" fontSize="11" fill={isDark ? "#bae6fd" : "#1e40af"} fontFamily="monospace" fontWeight="bold">a</text>
+      <text x="78" y="95" textAnchor="middle" fontSize="9" fill={isDark ? "#93c5fd" : "#1d4ed8"} fontFamily="sans-serif">{t.onlyA}</text>
+      <text x="150" y="80" textAnchor="middle" fontSize="11" fill={isDark ? "#6ee7b7" : "#065f46"} fontFamily="monospace" fontWeight="bold">b</text>
+      <text x="150" y="95" textAnchor="middle" fontSize="9" fill={isDark ? "#a7f3d0" : "#047857"} fontFamily="sans-serif">A∩B</text>
+      <text x="222" y="80" textAnchor="middle" fontSize="11" fill={isDark ? "#c7d2fe" : "#3730a3"} fontFamily="monospace" fontWeight="bold">c</text>
+      <text x="222" y="95" textAnchor="middle" fontSize="9" fill={isDark ? "#a5b4fc" : "#4338ca"} fontFamily="sans-serif">{t.onlyB}</text>
+      <text x="20" y="155" fontSize="9" fill={isDark ? "#475569" : "#64748b"} fontFamily="monospace">{t.outside}</text>
+      <text x="150" y="155" textAnchor="middle" fontSize="9" fill={isDark ? "#64748b" : "#64748b"} fontFamily="monospace">n(S) = a+b+c+d</text>
     </svg>
     <div className="grid grid-cols-2 gap-2 w-full max-w-xs text-xs font-mono">
-      <div className="bg-sky-900/40 border border-sky-500/30 rounded p-2">
-        <span className="text-sky-300 font-bold">n(A) = a + b</span>
+      <div className={`border rounded p-2 ${isDark ? "bg-sky-900/40 border-sky-500/30" : "bg-sky-50 border-sky-300"}`}>
+        <span className={`font-bold ${isDark ? "text-sky-300" : "text-sky-700"}`}>n(A) = a + b</span>
       </div>
-      <div className="bg-indigo-900/40 border border-indigo-500/30 rounded p-2">
-        <span className="text-indigo-300 font-bold">n(B) = b + c</span>
+      <div className={`border rounded p-2 ${isDark ? "bg-indigo-900/40 border-indigo-500/30" : "bg-indigo-50 border-indigo-300"}`}>
+        <span className={`font-bold ${isDark ? "text-indigo-300" : "text-indigo-700"}`}>n(B) = b + c</span>
       </div>
-      <div className="bg-emerald-900/40 border border-emerald-500/30 rounded p-2">
-        <span className="text-emerald-300 font-bold">n(A∩B) = b</span>
+      <div className={`border rounded p-2 ${isDark ? "bg-emerald-900/40 border-emerald-500/30" : "bg-emerald-50 border-emerald-300"}`}>
+        <span className={`font-bold ${isDark ? "text-emerald-300" : "text-emerald-700"}`}>n(A∩B) = b</span>
       </div>
-      <div className="bg-purple-900/40 border border-purple-500/30 rounded p-2">
-        <span className="text-purple-300 font-bold">n(A∪B) = a+b+c</span>
+      <div className={`border rounded p-2 ${isDark ? "bg-purple-900/40 border-purple-500/30" : "bg-purple-50 border-purple-300"}`}>
+        <span className={`font-bold ${isDark ? "text-purple-300" : "text-purple-700"}`}>n(A∪B) = a+b+c</span>
       </div>
     </div>
   </div>
 );
 
-const VennKardinalitas3 = ({ t }: { t: T }) => (
+const VennKardinalitas3 = ({ t, isDark }: { t: T; isDark: boolean }) => (
   <div className="flex flex-col items-center gap-2">
-    <p className="text-xs font-mono text-cyan-300 tracking-wider">{t.venn3title}</p>
+    <p className={`text-xs font-mono tracking-wider ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>{t.venn3title}</p>
     <svg viewBox="0 0 300 200" className="w-full max-w-xs" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4" y="4" width="292" height="192" rx="10" fill="#0f172a" stroke="#334155" strokeWidth="1.5"/>
+      <rect x="4" y="4" width="292" height="192" rx="10" fill={isDark ? "#0f172a" : "#f0f9ff"} stroke={isDark ? "#334155" : "#93c5fd"} strokeWidth="1.5"/>
       <text x="278" y="20" textAnchor="middle" fontSize="11" fill="#64748b" fontFamily="monospace">S</text>
-      <circle cx="130" cy="80" r="55" fill="#1e3a5f" stroke="#38bdf8" strokeWidth="1.8" fillOpacity="0.55"/>
-      <circle cx="170" cy="80" r="55" fill="#1e1f5e" stroke="#818cf8" strokeWidth="1.8" fillOpacity="0.55"/>
-      <circle cx="150" cy="120" r="55" fill="#1a2e1a" stroke="#4ade80" strokeWidth="1.8" fillOpacity="0.55"/>
-      <text x="100" y="62" textAnchor="middle" fontSize="11" fill="#bae6fd" fontWeight="bold" fontFamily="monospace">A</text>
-      <text x="200" y="62" textAnchor="middle" fontSize="11" fill="#c7d2fe" fontWeight="bold" fontFamily="monospace">B</text>
-      <text x="150" y="178" textAnchor="middle" fontSize="11" fill="#bbf7d0" fontWeight="bold" fontFamily="monospace">C</text>
-      <text x="100" y="80" textAnchor="middle" fontSize="9" fill="#7dd3fc" fontFamily="monospace">{t.onlyA}</text>
-      <text x="200" y="80" textAnchor="middle" fontSize="9" fill="#a5b4fc" fontFamily="monospace">{t.onlyB}</text>
-      <text x="150" y="165" textAnchor="middle" fontSize="9" fill="#86efac" fontFamily="monospace">{t.onlyC}</text>
-      <text x="150" y="76" textAnchor="middle" fontSize="9" fill="#fde68a" fontFamily="monospace">A∩B</text>
-      <text x="122" y="125" textAnchor="middle" fontSize="9" fill="#fca5a5" fontFamily="monospace">A∩C</text>
-      <text x="178" y="125" textAnchor="middle" fontSize="9" fill="#6ee7b7" fontFamily="monospace">B∩C</text>
-      <text x="150" y="108" textAnchor="middle" fontSize="9" fill="var(--icon-color)" fontFamily="monospace">A∩B∩C</text>
+      <circle cx="130" cy="80" r="55" fill={isDark ? "#1e3a5f" : "#bfdbfe"} stroke="#38bdf8" strokeWidth="1.8" fillOpacity="0.55"/>
+      <circle cx="170" cy="80" r="55" fill={isDark ? "#1e1f5e" : "#c7d2fe"} stroke="#818cf8" strokeWidth="1.8" fillOpacity="0.55"/>
+      <circle cx="150" cy="120" r="55" fill={isDark ? "#1a2e1a" : "#bbf7d0"} stroke="#4ade80" strokeWidth="1.8" fillOpacity="0.55"/>
+      <text x="100" y="62" textAnchor="middle" fontSize="11" fill={isDark ? "#bae6fd" : "#1e40af"} fontWeight="bold" fontFamily="monospace">A</text>
+      <text x="200" y="62" textAnchor="middle" fontSize="11" fill={isDark ? "#c7d2fe" : "#3730a3"} fontWeight="bold" fontFamily="monospace">B</text>
+      <text x="150" y="178" textAnchor="middle" fontSize="11" fill={isDark ? "#bbf7d0" : "#166534"} fontWeight="bold" fontFamily="monospace">C</text>
+      <text x="100" y="80" textAnchor="middle" fontSize="9" fill={isDark ? "#7dd3fc" : "#1d4ed8"} fontFamily="monospace">{t.onlyA}</text>
+      <text x="200" y="80" textAnchor="middle" fontSize="9" fill={isDark ? "#a5b4fc" : "#4338ca"} fontFamily="monospace">{t.onlyB}</text>
+      <text x="150" y="165" textAnchor="middle" fontSize="9" fill={isDark ? "#86efac" : "#15803d"} fontFamily="monospace">{t.onlyC}</text>
+      <text x="150" y="76" textAnchor="middle" fontSize="9" fill={isDark ? "#fde68a" : "#92400e"} fontFamily="monospace">A∩B</text>
+      <text x="122" y="125" textAnchor="middle" fontSize="9" fill={isDark ? "#fca5a5" : "#991b1b"} fontFamily="monospace">A∩C</text>
+      <text x="178" y="125" textAnchor="middle" fontSize="9" fill={isDark ? "#6ee7b7" : "#065f46"} fontFamily="monospace">B∩C</text>
+      <text x="150" y="108" textAnchor="middle" fontSize="9" fill={isDark ? "#f9a8d4" : "#701a75"} fontFamily="monospace">A∩B∩C</text>
     </svg>
   </div>
 );
 
-const FlowchartLangkah = ({ t }: { t: T }) => (
+const FlowchartLangkah = ({ t, isDark }: { t: T; isDark: boolean }) => (
   <div className="flex flex-col items-center gap-2">
-    <p className="text-xs font-mono text-cyan-300 tracking-wider">{t.flowTitle}</p>
+    <p className={`text-xs font-mono tracking-wider ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>{t.flowTitle}</p>
     <svg viewBox="0 0 260 310" className="w-full max-w-[220px]" xmlns="http://www.w3.org/2000/svg">
-      <rect x="30" y="10" width="200" height="44" rx="8" fill="#164e63" stroke="#22d3ee" strokeWidth="1.5"/>
-      <text x="130" y="29" textAnchor="middle" fontSize="10" fill="#a5f3fc" fontFamily="sans-serif" fontWeight="bold">{t.step1label}</text>
-      <text x="130" y="46" textAnchor="middle" fontSize="9" fill="#cffafe" fontFamily="sans-serif">{t.step1desc}</text>
-      <line x1="130" y1="54" x2="130" y2="72" stroke="#475569" strokeWidth="1.5" markerEnd="url(#arr)"/>
-      <rect x="30" y="72" width="200" height="44" rx="8" fill="#1e1b4b" stroke="#818cf8" strokeWidth="1.5"/>
-      <text x="130" y="91" textAnchor="middle" fontSize="10" fill="#c7d2fe" fontFamily="sans-serif" fontWeight="bold">{t.step2label}</text>
-      <text x="130" y="108" textAnchor="middle" fontSize="9" fill="#e0e7ff" fontFamily="sans-serif">{t.step2desc}</text>
-      <line x1="130" y1="116" x2="130" y2="134" stroke="#475569" strokeWidth="1.5"/>
-      <polygon points="124,132 136,132 130,142" fill="#475569"/>
-      <rect x="30" y="142" width="200" height="44" rx="8" fill="#14532d" stroke="#4ade80" strokeWidth="1.5"/>
-      <text x="130" y="161" textAnchor="middle" fontSize="10" fill="#bbf7d0" fontFamily="sans-serif" fontWeight="bold">{t.step3label}</text>
-      <text x="130" y="178" textAnchor="middle" fontSize="9" fill="#d1fae5" fontFamily="sans-serif">{t.step3desc}</text>
-      <line x1="130" y1="186" x2="130" y2="204" stroke="#475569" strokeWidth="1.5"/>
-      <polygon points="124,202 136,202 130,212" fill="#475569"/>
-      <rect x="30" y="212" width="200" height="44" rx="8" fill="#451a03" stroke="#fb923c" strokeWidth="1.5"/>
-      <text x="130" y="231" textAnchor="middle" fontSize="10" fill="#fed7aa" fontFamily="sans-serif" fontWeight="bold">{t.step4label}</text>
-      <text x="130" y="248" textAnchor="middle" fontSize="9" fill="#ffedd5" fontFamily="sans-serif">{t.step4desc}</text>
-      <line x1="130" y1="256" x2="130" y2="274" stroke="#475569" strokeWidth="1.5"/>
-      <polygon points="124,272 136,272 130,282" fill="#475569"/>
-      <rect x="30" y="282" width="200" height="22" rx="6" fill="#3b0764" stroke="#a855f7" strokeWidth="1.5"/>
-      <text x="130" y="297" textAnchor="middle" fontSize="10" fill="#e9d5ff" fontFamily="sans-serif" fontWeight="bold">{t.step5label}</text>
+      <rect x="30" y="10" width="200" height="44" rx="8" fill={isDark ? "#164e63" : "#cffafe"} stroke="#22d3ee" strokeWidth="1.5"/>
+      <text x="130" y="29" textAnchor="middle" fontSize="10" fill={isDark ? "#a5f3fc" : "#0e7490"} fontFamily="sans-serif" fontWeight="bold">{t.step1label}</text>
+      <text x="130" y="46" textAnchor="middle" fontSize="9" fill={isDark ? "#cffafe" : "#0891b2"} fontFamily="sans-serif">{t.step1desc}</text>
+      <line x1="130" y1="54" x2="130" y2="72" stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5" markerEnd="url(#arr)"/>
+      <rect x="30" y="72" width="200" height="44" rx="8" fill={isDark ? "#1e1b4b" : "#e0e7ff"} stroke="#818cf8" strokeWidth="1.5"/>
+      <text x="130" y="91" textAnchor="middle" fontSize="10" fill={isDark ? "#c7d2fe" : "#3730a3"} fontFamily="sans-serif" fontWeight="bold">{t.step2label}</text>
+      <text x="130" y="108" textAnchor="middle" fontSize="9" fill={isDark ? "#e0e7ff" : "#4338ca"} fontFamily="sans-serif">{t.step2desc}</text>
+      <line x1="130" y1="116" x2="130" y2="134" stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5"/>
+      <polygon points="124,132 136,132 130,142" fill={isDark ? "#475569" : "#94a3b8"}/>
+      <rect x="30" y="142" width="200" height="44" rx="8" fill={isDark ? "#14532d" : "#dcfce7"} stroke="#4ade80" strokeWidth="1.5"/>
+      <text x="130" y="161" textAnchor="middle" fontSize="10" fill={isDark ? "#bbf7d0" : "#166534"} fontFamily="sans-serif" fontWeight="bold">{t.step3label}</text>
+      <text x="130" y="178" textAnchor="middle" fontSize="9" fill={isDark ? "#d1fae5" : "#15803d"} fontFamily="sans-serif">{t.step3desc}</text>
+      <line x1="130" y1="186" x2="130" y2="204" stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5"/>
+      <polygon points="124,202 136,202 130,212" fill={isDark ? "#475569" : "#94a3b8"}/>
+      <rect x="30" y="212" width="200" height="44" rx="8" fill={isDark ? "#451a03" : "#ffedd5"} stroke="#fb923c" strokeWidth="1.5"/>
+      <text x="130" y="231" textAnchor="middle" fontSize="10" fill={isDark ? "#fed7aa" : "#9a3412"} fontFamily="sans-serif" fontWeight="bold">{t.step4label}</text>
+      <text x="130" y="248" textAnchor="middle" fontSize="9" fill={isDark ? "#ffedd5" : "#c2410c"} fontFamily="sans-serif">{t.step4desc}</text>
+      <line x1="130" y1="256" x2="130" y2="274" stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5"/>
+      <polygon points="124,272 136,272 130,282" fill={isDark ? "#475569" : "#94a3b8"}/>
+      <rect x="30" y="282" width="200" height="22" rx="6" fill={isDark ? "#3b0764" : "#f3e8ff"} stroke="#a855f7" strokeWidth="1.5"/>
+      <text x="130" y="297" textAnchor="middle" fontSize="10" fill={isDark ? "#e9d5ff" : "#6b21a8"} fontFamily="sans-serif" fontWeight="bold">{t.step5label}</text>
     </svg>
   </div>
 );
@@ -568,6 +569,7 @@ const FlowchartLangkah = ({ t }: { t: T }) => (
 const PemecahanMasalahHimpunanPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const lang = language as "id" | "en" | "ja";
   const t = translations[lang];
 
@@ -591,7 +593,7 @@ const PemecahanMasalahHimpunanPage = () => {
     >
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{label}</span>
+        <span className="font-body font-semibold text-foreground">{label}</span>
       </div>
       {true ? (
         <ChevronUp className="w-5 h-5 text-primary" />
@@ -601,9 +603,26 @@ const PemecahanMasalahHimpunanPage = () => {
     </button>
   );
 
-  const easyBadge   = <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">{t.easy}</span>;
-  const mediumBadge = <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">{t.medium}</span>;
-  const hardBadge   = <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">{t.hard}</span>;
+  const stepBgDark  = ["bg-cyan-900/30 border-cyan-500/30", "bg-indigo-900/30 border-indigo-500/30", "bg-green-900/30 border-green-500/30", "bg-orange-900/30 border-orange-500/30"];
+  const stepBgLight = ["bg-cyan-50 border-cyan-300",        "bg-indigo-50 border-indigo-300",        "bg-green-50 border-green-300",        "bg-orange-50 border-orange-300"];
+  const stepClrDark = ["text-cyan-300", "text-indigo-300", "text-green-300", "text-orange-300"];
+  const stepClrLight= ["text-cyan-700", "text-indigo-700", "text-green-700", "text-orange-700"];
+
+  const tipBgDark   = ["bg-blue-900/30 border-blue-500/30", "bg-emerald-900/30 border-emerald-500/30", "bg-purple-900/30 border-purple-500/30", "bg-red-900/30 border-red-500/30", "bg-amber-900/30 border-amber-500/30"];
+  const tipBgLight  = ["bg-blue-50 border-blue-300",        "bg-emerald-50 border-emerald-300",         "bg-purple-50 border-purple-300",        "bg-red-50 border-red-300",        "bg-amber-50 border-amber-300"];
+  const tipClrDark  = ["text-blue-300", "text-emerald-300", "text-purple-300", "text-red-300", "text-amber-300"];
+  const tipClrLight = ["text-blue-700", "text-emerald-700", "text-purple-700", "text-red-700", "text-amber-700"];
+
+  const prose   = isDark ? "text-white/80" : "text-gray-700";
+  const proseSm = isDark ? "text-white/70" : "text-gray-600";
+  const box     = isDark ? "bg-slate-900/50" : "bg-white/80";
+  const boxAlt  = isDark ? "bg-slate-800/50" : "bg-gray-50/90";
+  const boxDeep = isDark ? "bg-slate-900/60" : "bg-white/70";
+  const boxCode = isDark ? "bg-slate-800/60" : "bg-gray-100/80";
+
+  const easyBadge   = <span className={`text-xs font-bold px-2 py-1 rounded ${isDark ? "bg-green-500/20 text-green-400" : "bg-green-100 text-green-700"}`}>{t.easy}</span>;
+  const mediumBadge = <span className={`text-xs font-bold px-2 py-1 rounded ${isDark ? "bg-yellow-500/20 text-yellow-400" : "bg-yellow-100 text-yellow-700"}`}>{t.medium}</span>;
+  const hardBadge   = <span className={`text-xs font-bold px-2 py-1 rounded ${isDark ? "bg-red-500/20 text-red-400" : "bg-red-100 text-red-700"}`}>{t.hard}</span>;
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -614,8 +633,8 @@ const PemecahanMasalahHimpunanPage = () => {
         <h1 className="font-display text-base md:text-lg font-bold text-primary text-glow-cyan mb-2 text-center leading-snug">
           {t.title}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-1 font-body">{t.subtitle}</p>
-        <p className="text-white/40 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
+        <p className={`text-xs text-center mb-1 font-body ${isDark ? "text-white/50" : "text-gray-500"}`}>{t.subtitle}</p>
+        <p className={`text-xs text-center mb-6 font-body ${isDark ? "text-white/40" : "text-gray-400"}`}>{t.breadcrumb}</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
@@ -625,62 +644,62 @@ const PemecahanMasalahHimpunanPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-5">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-4">
-                  <p className="font-body text-sm font-semibold text-cyan-300">{t.summary}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    <strong className="text-cyan-300">{t.s1p1}</strong>{" "}
+                  <p className={`font-body text-sm font-semibold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>{t.summary}</p>
+                  <p className={`font-body text-sm leading-relaxed ${prose}`}>
+                    <strong className={isDark ? "text-cyan-300" : "text-cyan-700"}>{t.s1p1}</strong>{" "}
                     <InlineMath math="n(A)" />. {t.s1p2}
                   </p>
-                  <div className="bg-slate-900/60 rounded-xl p-4">
-                    <VennKardinalitas2 t={t} />
+                  <div className={`${boxDeep} rounded-xl p-4`}>
+                    <VennKardinalitas2 t={t} isDark={isDark} />
                   </div>
-                  <div className="bg-slate-900/50 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs font-semibold text-cyan-300">{t.s1rumus2}</p>
+                  <div className={`${box} rounded-lg p-4 space-y-3`}>
+                    <p className={`font-body text-xs font-semibold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>{t.s1rumus2}</p>
                     <div className="overflow-x-auto">
                       <BlockMath math="n(A \cup B) = n(A) + n(B) - n(A \cap B)" />
                     </div>
-                    <div className="h-px bg-slate-700/50" />
-                    <p className="font-body text-xs font-semibold text-purple-300">{t.s1rumus3}</p>
+                    <div className={`h-px ${isDark ? "bg-slate-700/50" : "bg-gray-200"}`} />
+                    <p className={`font-body text-xs font-semibold ${isDark ? "text-purple-300" : "text-purple-600"}`}>{t.s1rumus3}</p>
                     <div className="overflow-x-auto">
                       <BlockMath math="n(A \cup B \cup C) = n(A)+n(B)+n(C) - n(A\cap B) - n(A\cap C) - n(B\cap C) + n(A\cap B\cap C)" />
                     </div>
                   </div>
-                  <div className="bg-slate-900/60 rounded-xl p-4">
-                    <VennKardinalitas3 t={t} />
+                  <div className={`${boxDeep} rounded-xl p-4`}>
+                    <VennKardinalitas3 t={t} isDark={isDark} />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {t.s1sifat.map(([rule, desc]) => (
-                      <div key={rule} className="bg-cyan-950/40 border border-cyan-500/20 rounded p-2">
-                        <p className="font-mono text-xs text-cyan-300 font-bold">{rule}</p>
-                        <p className="font-body text-xs text-white/60 mt-0.5">{desc}</p>
+                      <div key={rule} className={`border rounded p-2 ${isDark ? "bg-cyan-950/40 border-cyan-500/20" : "bg-cyan-50 border-cyan-200"}`}>
+                        <p className={`font-mono text-xs font-bold ${isDark ? "text-cyan-300" : "text-cyan-700"}`}>{rule}</p>
+                        <p className={`font-body text-xs mt-0.5 ${isDark ? "text-white/60" : "text-gray-500"}`}>{desc}</p>
                       </div>
                     ))}
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                    <p className="font-body text-xs text-yellow-200">
+                    <p className={`font-body text-xs ${isDark ? "text-yellow-200" : "text-yellow-800"}`}>
                       {t.s1tip} <InlineMath math="n(A \cap B) = 0" />, {t.s1tip2}{" "}
                       <InlineMath math="n(A \cup B) = n(A) + n(B)" /> {t.s1tip3}
                     </p>
                   </div>
                 </div>
 
-                <p className="font-body text-sm font-semibold text-white">{t.problems}</p>
+                <p className={`font-body text-sm font-semibold text-foreground`}>{t.problems}</p>
 
                 {/* E1 - Easy */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{easyBadge}<span className="font-body font-semibold text-white">{t.example} 1</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white leading-relaxed">{t.s1e1q}</p>
+                  <div className="flex items-center gap-2">{easyBadge}<span className="font-body font-semibold text-foreground">{t.example} 1</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm leading-relaxed text-foreground`}>{t.s1e1q}</p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs font-semibold text-green-400">{t.solution}:</p>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-2 font-body text-sm text-white/80">
+                    <p className="font-body text-xs font-semibold text-green-500">{t.solution}:</p>
+                    <div className={`${box} rounded p-3 space-y-2 font-body text-sm ${prose}`}>
                       <p><strong>{t.known}:</strong> <InlineMath math="n(S)=25" />, <InlineMath math="n(M)=14" />, <InlineMath math="n(B)=11" />, <InlineMath math="n(M\cap B)=4" /></p>
                       <p><strong>{t.s1e1s1}</strong></p>
                       <div className="overflow-x-auto"><BlockMath math="n(M \cup B) = 14 + 11 - 4 = 21" /></div>
                       <p><strong>{t.s1e1s2}</strong></p>
                       <div className="overflow-x-auto"><BlockMath math="n(S) - n(M \cup B) = 25 - 21 = 4" /></div>
                       <div className="bg-green-500/10 border border-green-500/30 rounded p-2">
-                        <p className="text-green-300 font-semibold text-xs">✅ {t.s1e1ans}</p>
+                        <p className={`font-semibold text-xs ${isDark ? "text-green-300" : "text-green-700"}`}>✅ {t.s1e1ans}</p>
                       </div>
                     </div>
                   </div>
@@ -688,19 +707,19 @@ const PemecahanMasalahHimpunanPage = () => {
 
                 {/* E2 - Medium */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{mediumBadge}<span className="font-body font-semibold text-white">{t.example} 2</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white leading-relaxed">{t.s1e2q}</p>
+                  <div className="flex items-center gap-2">{mediumBadge}<span className="font-body font-semibold text-foreground">{t.example} 2</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm leading-relaxed text-foreground`}>{t.s1e2q}</p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs font-semibold text-yellow-400">{t.solution}:</p>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-2 font-body text-sm text-white/80">
+                    <p className="font-body text-xs font-semibold text-yellow-500">{t.solution}:</p>
+                    <div className={`${box} rounded p-3 space-y-2 font-body text-sm ${prose}`}>
                       <p><strong>{t.s1e2s1}</strong></p>
                       <div className="overflow-x-auto"><BlockMath math="n(F \cup K) = n(S) - 8 = 45 - 8 = 37" /></div>
                       <p><strong>{t.s1e2s2}</strong></p>
                       <div className="overflow-x-auto"><BlockMath math="n(F \cap K) = n(F) + n(K) - n(F \cup K) = 20 + 18 - 37 = 1" /></div>
                       <div className="bg-yellow-500/10 border border-yellow-500/30 rounded p-2">
-                        <p className="text-yellow-300 font-semibold text-xs">✅ {t.s1e2ans}</p>
+                        <p className={`font-semibold text-xs ${isDark ? "text-yellow-300" : "text-yellow-700"}`}>✅ {t.s1e2ans}</p>
                       </div>
                     </div>
                   </div>
@@ -708,21 +727,21 @@ const PemecahanMasalahHimpunanPage = () => {
 
                 {/* E3 - Hard */}
                 <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{hardBadge}<span className="font-body font-semibold text-white">{t.example} 3</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white leading-relaxed">{t.s1e3q}</p>
+                  <div className="flex items-center gap-2">{hardBadge}<span className="font-body font-semibold text-foreground">{t.example} 3</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm leading-relaxed text-foreground`}>{t.s1e3q}</p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs font-semibold text-red-400">{t.solution}:</p>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-3 font-body text-sm text-white/80">
+                    <p className="font-body text-xs font-semibold text-red-500">{t.solution}:</p>
+                    <div className={`${box} rounded p-3 space-y-3 font-body text-sm ${prose}`}>
                       <p><strong>{t.s1e3s1}</strong></p>
                       <div className="overflow-x-auto">
                         <BlockMath math="n(I \cup X \cup Y) = 32+27+25 - 15 - 12 - 10 + 5 = 52" />
                       </div>
                       <p><strong>{t.s1e3s2}</strong></p>
                       <div className="overflow-x-auto"><BlockMath math="60 - 52 = 8" /></div>
-                      <div className="bg-slate-800/60 rounded p-3 text-xs space-y-1">
-                        <p className="text-cyan-300 font-semibold">{t.s1e3veri}</p>
+                      <div className={`${boxCode} rounded p-3 text-xs space-y-1`}>
+                        <p className={`font-semibold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>{t.s1e3veri}</p>
                         <p>• {t.s1e3only_i} <InlineMath math="32-15-12+5=10" /></p>
                         <p>• {t.s1e3only_x} <InlineMath math="27-15-10+5=7" /></p>
                         <p>• {t.s1e3only_y} <InlineMath math="25-12-10+5=8" /></p>
@@ -730,10 +749,10 @@ const PemecahanMasalahHimpunanPage = () => {
                         <p>• {t.s1e3iy} <InlineMath math="12-5=7" /></p>
                         <p>• {t.s1e3xy} <InlineMath math="10-5=5" /></p>
                         <p>• {t.s1e3all}</p>
-                        <p className="text-green-400 font-semibold">{t.s1e3total} <InlineMath math="10+7+8+10+7+5+5+8 = 60" /> ✓</p>
+                        <p className="text-green-500 font-semibold">{t.s1e3total} <InlineMath math="10+7+8+10+7+5+5+8 = 60" /> ✓</p>
                       </div>
                       <div className="bg-red-500/10 border border-red-500/30 rounded p-2">
-                        <p className="text-red-300 font-semibold text-xs">✅ {t.s1e3ans}</p>
+                        <p className={`font-semibold text-xs ${isDark ? "text-red-300" : "text-red-700"}`}>✅ {t.s1e3ans}</p>
                       </div>
                     </div>
                   </div>
@@ -748,59 +767,59 @@ const PemecahanMasalahHimpunanPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-5">
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-4">
-                  <p className="font-body text-sm font-semibold text-orange-300">{t.summary}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    {t.s2p1} <strong className="text-orange-300">{t.s2p1b}</strong>. {t.s2p2}
+                  <p className={`font-body text-sm font-semibold ${isDark ? "text-orange-300" : "text-orange-600"}`}>{t.summary}</p>
+                  <p className={`font-body text-sm leading-relaxed ${prose}`}>
+                    {t.s2p1} <strong className={isDark ? "text-orange-300" : "text-orange-600"}>{t.s2p1b}</strong>. {t.s2p2}
                   </p>
-                  <div className="bg-slate-900/60 rounded-xl p-4">
-                    <FlowchartLangkah t={t} />
+                  <div className={`${boxDeep} rounded-xl p-4`}>
+                    <FlowchartLangkah t={t} isDark={isDark} />
                   </div>
                   <div className="space-y-2">
-                    {t.s2steps.map((item) => (
-                      <div key={item.step} className={`${item.bg} border rounded-lg p-3`}>
-                        <p className={`font-mono text-xs font-bold ${item.color} mb-1`}>{item.step}</p>
-                        <p className="font-body text-xs text-white/70">{item.desc}</p>
+                    {t.s2steps.map((item, i) => (
+                      <div key={item.step} className={`${isDark ? stepBgDark[i] : stepBgLight[i]} border rounded-lg p-3`}>
+                        <p className={`font-mono text-xs font-bold ${isDark ? stepClrDark[i] : stepClrLight[i]} mb-1`}>{item.step}</p>
+                        <p className={`font-body text-xs ${proseSm}`}>{item.desc}</p>
                       </div>
                     ))}
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                    <p className="font-body text-xs text-yellow-200">{t.s2tip}</p>
+                    <p className={`font-body text-xs ${isDark ? "text-yellow-200" : "text-yellow-800"}`}>{t.s2tip}</p>
                   </div>
                 </div>
 
-                <p className="font-body text-sm font-semibold text-white">{t.problems}</p>
+                <p className="font-body text-sm font-semibold text-foreground">{t.problems}</p>
 
                 {/* E1 - Easy */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{easyBadge}<span className="font-body font-semibold text-white">{t.example} 1</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white leading-relaxed">{t.s2e1q}</p>
+                  <div className="flex items-center gap-2">{easyBadge}<span className="font-body font-semibold text-foreground">{t.example} 1</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm leading-relaxed text-foreground`}>{t.s2e1q}</p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 space-y-2">
-                    <p className="font-body text-xs font-semibold text-green-400">{t.s2e1title}</p>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-2 font-body text-sm text-white/80">
-                      <div className="bg-cyan-900/20 border border-cyan-500/20 rounded p-2">
-                        <p className="text-cyan-300 text-xs font-bold">{t.step1label}</p>
+                    <p className="font-body text-xs font-semibold text-green-500">{t.s2e1title}</p>
+                    <div className={`${box} rounded p-3 space-y-2 font-body text-sm ${prose}`}>
+                      <div className={`border rounded p-2 ${isDark ? "bg-cyan-900/20 border-cyan-500/20" : "bg-cyan-50 border-cyan-200"}`}>
+                        <p className={`text-xs font-bold ${isDark ? "text-cyan-300" : "text-cyan-700"}`}>{t.step1label}</p>
                         <p className="text-xs mt-1">{t.s2e1_1}</p>
                       </div>
-                      <div className="bg-indigo-900/20 border border-indigo-500/20 rounded p-2">
-                        <p className="text-indigo-300 text-xs font-bold">{t.step2label}</p>
+                      <div className={`border rounded p-2 ${isDark ? "bg-indigo-900/20 border-indigo-500/20" : "bg-indigo-50 border-indigo-200"}`}>
+                        <p className={`text-xs font-bold ${isDark ? "text-indigo-300" : "text-indigo-700"}`}>{t.step2label}</p>
                         <p className="text-xs mt-1">{t.s2e1_2}</p>
                       </div>
-                      <div className="bg-green-900/20 border border-green-500/20 rounded p-2">
-                        <p className="text-green-300 text-xs font-bold">{t.step3label}</p>
+                      <div className={`border rounded p-2 ${isDark ? "bg-green-900/20 border-green-500/20" : "bg-green-50 border-green-200"}`}>
+                        <p className={`text-xs font-bold ${isDark ? "text-green-300" : "text-green-700"}`}>{t.step3label}</p>
                         <p className="text-xs mt-1">{t.s2e1_3}</p>
                       </div>
-                      <div className="bg-orange-900/20 border border-orange-500/20 rounded p-2">
-                        <p className="text-orange-300 text-xs font-bold">{t.step4label}</p>
+                      <div className={`border rounded p-2 ${isDark ? "bg-orange-900/20 border-orange-500/20" : "bg-orange-50 border-orange-200"}`}>
+                        <p className={`text-xs font-bold ${isDark ? "text-orange-300" : "text-orange-700"}`}>{t.step4label}</p>
                         <div className="overflow-x-auto mt-1">
                           <BlockMath math="n(P \cup G) = 20 + 18 - 7 = 31" />
                           <BlockMath math="\text{} = 35 - 31 = 4" />
                         </div>
-                        <p className="text-xs text-green-400">{t.s2e1cek}</p>
+                        <p className="text-xs text-green-500">{t.s2e1cek}</p>
                       </div>
                       <div className="bg-green-500/10 border border-green-500/30 rounded p-2">
-                        <p className="text-green-300 font-semibold text-xs">✅ {t.s2e1ans}</p>
+                        <p className={`font-semibold text-xs ${isDark ? "text-green-300" : "text-green-700"}`}>✅ {t.s2e1ans}</p>
                       </div>
                     </div>
                   </div>
@@ -808,15 +827,15 @@ const PemecahanMasalahHimpunanPage = () => {
 
                 {/* E2 - Medium — BUG FIX: n(K)=22 instead of n(S)=22 */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{mediumBadge}<span className="font-body font-semibold text-white">{t.example} 2</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white leading-relaxed">{t.s2e2q}</p>
+                  <div className="flex items-center gap-2">{mediumBadge}<span className="font-body font-semibold text-foreground">{t.example} 2</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm leading-relaxed text-foreground`}>{t.s2e2q}</p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs font-semibold text-yellow-400">{t.solution}:</p>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-2 font-body text-sm text-white/80">
-                      <div className="bg-cyan-900/20 border border-cyan-500/20 rounded p-2 text-xs">
-                        <p className="text-cyan-300 font-bold">{t.step1label}</p>
+                    <p className="font-body text-xs font-semibold text-yellow-500">{t.solution}:</p>
+                    <div className={`${box} rounded p-3 space-y-2 font-body text-sm ${prose}`}>
+                      <div className={`border rounded p-2 text-xs ${isDark ? "bg-cyan-900/20 border-cyan-500/20" : "bg-cyan-50 border-cyan-200"}`}>
+                        <p className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-700"}`}>{t.step1label}</p>
                         <p>{t.s2e2ident}</p>
                       </div>
                       <p><strong>{t.s2e2kunci}</strong></p>
@@ -824,12 +843,12 @@ const PemecahanMasalahHimpunanPage = () => {
                       <p>{t.s2e2cari}</p>
                       <div className="overflow-x-auto"><BlockMath math="n(M \cap K) = 30 + 22 - 44 = 8" /></div>
                       <p>{t.s2e2isi}</p>
-                      <div className="bg-slate-800/60 rounded p-3 space-y-1 text-xs">
+                      <div className={`${boxCode} rounded p-3 space-y-1 text-xs`}>
                         <p>• {t.s2e2motor} <InlineMath math="30 - 8 = 22" /> {t.s2e2kk}</p>
                         <p>• {t.s2e2sepeda} <InlineMath math="22 - 8 = 14" /> {t.s2e2kk}</p>
                         <p>• {t.s2e2keduanya} <InlineMath math="8" /> {t.s2e2kk}</p>
                         <p>• {t.s2e2luar} <InlineMath math="6" /> {t.s2e2kk}</p>
-                        <p className="text-green-400">{t.s2e2cek}</p>
+                        <p className="text-green-500">{t.s2e2cek}</p>
                       </div>
                     </div>
                   </div>
@@ -837,15 +856,15 @@ const PemecahanMasalahHimpunanPage = () => {
 
                 {/* E3 - Hard */}
                 <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{hardBadge}<span className="font-body font-semibold text-white">{t.example} 3</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white leading-relaxed">{t.s2e3q}</p>
+                  <div className="flex items-center gap-2">{hardBadge}<span className="font-body font-semibold text-foreground">{t.example} 3</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm leading-relaxed text-foreground`}>{t.s2e3q}</p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs font-semibold text-red-400">{t.solution}:</p>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-3 font-body text-sm text-white/80">
-                      <div className="bg-cyan-900/20 border border-cyan-500/20 rounded p-2 text-xs">
-                        <p className="text-cyan-300 font-bold">{t.step1label}</p>
+                    <p className="font-body text-xs font-semibold text-red-500">{t.solution}:</p>
+                    <div className={`${box} rounded p-3 space-y-3 font-body text-sm ${prose}`}>
+                      <div className={`border rounded p-2 text-xs ${isDark ? "bg-cyan-900/20 border-cyan-500/20" : "bg-cyan-50 border-cyan-200"}`}>
+                        <p className={`font-bold ${isDark ? "text-cyan-300" : "text-cyan-700"}`}>{t.step1label}</p>
                         <p>{t.s2e3ident}</p>
                         <p>{t.s2e3ident2}</p>
                       </div>
@@ -855,21 +874,21 @@ const PemecahanMasalahHimpunanPage = () => {
                         <BlockMath math="80 = 66 + n(A\cap B\cap C)" />
                         <BlockMath math="n(A\cap B\cap C) = 80 - 66 = 14" />
                       </div>
-                      <div className="bg-slate-800/60 rounded p-3 space-y-1 text-xs">
-                        <p className="text-cyan-300 font-semibold">{t.s2e3veri}</p>
+                      <div className={`${boxCode} rounded p-3 space-y-1 text-xs`}>
+                        <p className={`font-semibold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>{t.s2e3veri}</p>
                         <p>• {t.s2e3onlyA}</p>
                         <p>• {t.s2e3onlyB}</p>
                         <p>• {t.s2e3onlyC}</p>
                         <p>• {t.s2e3ab}</p>
                         <p>• {t.s2e3ac}</p>
-                        <p>• {t.s2e3bc} <span className="text-red-400">= −2?</span></p>
+                        <p>• {t.s2e3bc} <span className="text-red-500">= −2?</span></p>
                       </div>
                       <div className="bg-amber-500/10 border border-amber-500/30 rounded p-3 text-xs">
-                        <p className="text-amber-300 font-semibold">{t.s2e3warn}</p>
-                        <p className="text-white/70 mt-1">{t.s2e3warnText} <InlineMath math="n(A\cap B\cap C) = 14" />.</p>
+                        <p className={`font-semibold ${isDark ? "text-amber-300" : "text-amber-700"}`}>{t.s2e3warn}</p>
+                        <p className={`mt-1 ${proseSm}`}>{t.s2e3warnText} <InlineMath math="n(A\cap B\cap C) = 14" />.</p>
                       </div>
                       <div className="bg-red-500/10 border border-red-500/30 rounded p-2">
-                        <p className="text-red-300 font-semibold text-xs">✅ {t.s2e3ans}</p>
+                        <p className={`font-semibold text-xs ${isDark ? "text-red-300" : "text-red-700"}`}>✅ {t.s2e3ans}</p>
                       </div>
                     </div>
                   </div>
@@ -884,32 +903,32 @@ const PemecahanMasalahHimpunanPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-5">
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 space-y-4">
-                  <p className="font-body text-sm font-semibold text-yellow-300">{t.summary}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    {t.s3p1} <strong className="text-yellow-300">{t.s3p1b}</strong> {t.s3p2}
+                  <p className={`font-body text-sm font-semibold ${isDark ? "text-yellow-300" : "text-yellow-600"}`}>{t.summary}</p>
+                  <p className={`font-body text-sm leading-relaxed ${prose}`}>
+                    {t.s3p1} <strong className={isDark ? "text-yellow-300" : "text-yellow-600"}>{t.s3p1b}</strong> {t.s3p2}
                   </p>
                   <div className="space-y-3">
-                    {t.s3tips.map((tip) => (
-                      <div key={tip.no} className={`${tip.color} border rounded-lg p-3`}>
-                        <p className="font-mono text-xs font-bold mb-1">{tip.no}: {tip.title}</p>
-                        <p className="font-body text-xs text-white/70">{tip.desc}</p>
+                    {t.s3tips.map((tip, i) => (
+                      <div key={tip.no} className={`${isDark ? tipBgDark[i] : tipBgLight[i]} border rounded-lg p-3`}>
+                        <p className={`font-mono text-xs font-bold mb-1 ${isDark ? tipClrDark[i] : tipClrLight[i]}`}>{tip.no}: {tip.title}</p>
+                        <p className={`font-body text-xs ${proseSm}`}>{tip.desc}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="bg-slate-900/60 rounded-xl p-4 overflow-x-auto">
-                    <p className="font-body text-xs font-semibold text-cyan-300 mb-3">{t.s3tableTitle}</p>
+                  <div className={`${boxDeep} rounded-xl p-4 overflow-x-auto`}>
+                    <p className={`font-body text-xs font-semibold mb-3 ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>{t.s3tableTitle}</p>
                     <table className="w-full text-xs font-body border-collapse">
                       <thead>
-                        <tr className="bg-slate-800/80">
-                          <th className="border border-slate-600/50 px-3 py-2 text-left text-cyan-300">{t.s3tableHead[0]}</th>
-                          <th className="border border-slate-600/50 px-3 py-2 text-left text-cyan-300">{t.s3tableHead[1]}</th>
+                        <tr className={isDark ? "bg-slate-800/80" : "bg-gray-100"}>
+                          <th className={`border px-3 py-2 text-left ${isDark ? "border-slate-600/50 text-cyan-300" : "border-gray-200 text-cyan-700"}`}>{t.s3tableHead[0]}</th>
+                          <th className={`border px-3 py-2 text-left ${isDark ? "border-slate-600/50 text-cyan-300" : "border-gray-200 text-cyan-700"}`}>{t.s3tableHead[1]}</th>
                         </tr>
                       </thead>
-                      <tbody className="text-white/80">
+                      <tbody className={prose}>
                         {t.s3tableRows.map(([cari, rumus]) => (
-                          <tr key={cari} className="hover:bg-slate-800/40">
-                            <td className="border border-slate-600/30 px-3 py-2 font-mono text-yellow-300">{cari}</td>
-                            <td className="border border-slate-600/30 px-3 py-2">{rumus}</td>
+                          <tr key={cari} className={isDark ? "hover:bg-slate-800/40" : "hover:bg-gray-50"}>
+                            <td className={`border px-3 py-2 font-mono ${isDark ? "border-slate-600/30 text-yellow-300" : "border-gray-200 text-yellow-700"}`}>{cari}</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30" : "border-gray-200"}`}>{rumus}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -917,24 +936,24 @@ const PemecahanMasalahHimpunanPage = () => {
                   </div>
                 </div>
 
-                <p className="font-body text-sm font-semibold text-white">{t.problems}</p>
+                <p className="font-body text-sm font-semibold text-foreground">{t.problems}</p>
 
                 {/* E1 - Easy */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{easyBadge}<span className="font-body font-semibold text-white">{t.example} 1</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">{t.s3e1q}</p>
+                  <div className="flex items-center gap-2">{easyBadge}<span className="font-body font-semibold text-foreground">{t.example} 1</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm text-foreground`}>{t.s3e1q}</p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-green-400 mb-2">{t.solution}:</p>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-2 font-body text-sm text-white/80">
+                    <p className="font-body text-xs font-semibold text-green-500 mb-2">{t.solution}:</p>
+                    <div className={`${box} rounded p-3 space-y-2 font-body text-sm ${prose}`}>
                       <p>{t.s3e1p1} <InlineMath math="n(V \cap B) = 0" /></p>
                       <div className="overflow-x-auto">
                         <BlockMath math="n(V \cup B) = 12 + 10 - 0 = 22" />
                         <BlockMath math="30 - 22 = 8" />
                       </div>
-                      <div className="bg-blue-900/20 border border-blue-500/20 rounded p-2">
-                        <p className="text-blue-300 text-xs">{t.s3e1tip}</p>
+                      <div className={`border rounded p-2 ${isDark ? "bg-blue-900/20 border-blue-500/20" : "bg-blue-50 border-blue-200"}`}>
+                        <p className={`text-xs ${isDark ? "text-blue-300" : "text-blue-700"}`}>{t.s3e1tip}</p>
                       </div>
                     </div>
                   </div>
@@ -942,68 +961,68 @@ const PemecahanMasalahHimpunanPage = () => {
 
                 {/* E2 - Medium */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{mediumBadge}<span className="font-body font-semibold text-white">{t.example} 2</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white">
+                  <div className="flex items-center gap-2">{mediumBadge}<span className="font-body font-semibold text-foreground">{t.example} 2</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm text-foreground`}>
                       <InlineMath math="n(S) = 50" />, <InlineMath math="n(A) = 28" />,{" "}
                       <InlineMath math="n(B) = 22" />, <InlineMath math="n(A \cap B) = 10" />. {t.s3e2q}
                     </p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs font-semibold text-yellow-400">{t.s3e2title}</p>
-                    <div className="bg-slate-900/60 rounded-xl p-3 overflow-x-auto">
+                    <p className="font-body text-xs font-semibold text-yellow-500">{t.s3e2title}</p>
+                    <div className={`${boxDeep} rounded-xl p-3 overflow-x-auto`}>
                       <table className="w-full text-xs font-mono border-collapse">
                         <thead>
-                          <tr className="bg-slate-800">
-                            <th className="border border-slate-600/50 px-3 py-2 text-cyan-300"></th>
-                            <th className="border border-slate-600/50 px-3 py-2 text-cyan-300">B</th>
-                            <th className="border border-slate-600/50 px-3 py-2 text-cyan-300">Bᶜ</th>
-                            <th className="border border-slate-600/50 px-3 py-2 text-cyan-300">Total</th>
+                          <tr className={isDark ? "bg-slate-800" : "bg-gray-100"}>
+                            <th className={`border px-3 py-2 ${isDark ? "border-slate-600/50 text-cyan-300" : "border-gray-200 text-cyan-700"}`}></th>
+                            <th className={`border px-3 py-2 ${isDark ? "border-slate-600/50 text-cyan-300" : "border-gray-200 text-cyan-700"}`}>B</th>
+                            <th className={`border px-3 py-2 ${isDark ? "border-slate-600/50 text-cyan-300" : "border-gray-200 text-cyan-700"}`}>Bᶜ</th>
+                            <th className={`border px-3 py-2 ${isDark ? "border-slate-600/50 text-cyan-300" : "border-gray-200 text-cyan-700"}`}>Total</th>
                           </tr>
                         </thead>
-                        <tbody className="text-white/80">
+                        <tbody className={prose}>
                           <tr>
-                            <td className="border border-slate-600/30 px-3 py-2 text-indigo-300 font-bold">A</td>
-                            <td className="border border-slate-600/30 px-3 py-2 text-yellow-300">10</td>
-                            <td className="border border-slate-600/30 px-3 py-2 text-emerald-300">18</td>
-                            <td className="border border-slate-600/30 px-3 py-2">28</td>
+                            <td className={`border px-3 py-2 font-bold ${isDark ? "border-slate-600/30 text-indigo-300" : "border-gray-200 text-indigo-700"}`}>A</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30 text-yellow-300" : "border-gray-200 text-yellow-700"}`}>10</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30 text-emerald-300" : "border-gray-200 text-emerald-700"}`}>18</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30" : "border-gray-200"}`}>28</td>
                           </tr>
                           <tr>
-                            <td className="border border-slate-600/30 px-3 py-2 text-indigo-300 font-bold">Aᶜ</td>
-                            <td className="border border-slate-600/30 px-3 py-2 text-emerald-300">12</td>
-                            <td className="border border-slate-600/30 px-3 py-2 text-red-300">10</td>
-                            <td className="border border-slate-600/30 px-3 py-2">22</td>
+                            <td className={`border px-3 py-2 font-bold ${isDark ? "border-slate-600/30 text-indigo-300" : "border-gray-200 text-indigo-700"}`}>Aᶜ</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30 text-emerald-300" : "border-gray-200 text-emerald-700"}`}>12</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30 text-red-300" : "border-gray-200 text-red-600"}`}>10</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30" : "border-gray-200"}`}>22</td>
                           </tr>
-                          <tr className="bg-slate-800/40">
-                            <td className="border border-slate-600/30 px-3 py-2 font-bold">Total</td>
-                            <td className="border border-slate-600/30 px-3 py-2">22</td>
-                            <td className="border border-slate-600/30 px-3 py-2">28</td>
-                            <td className="border border-slate-600/30 px-3 py-2 text-green-400 font-bold">50 ✓</td>
+                          <tr className={isDark ? "bg-slate-800/40" : "bg-gray-50"}>
+                            <td className={`border px-3 py-2 font-bold ${isDark ? "border-slate-600/30" : "border-gray-200"}`}>Total</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30" : "border-gray-200"}`}>22</td>
+                            <td className={`border px-3 py-2 ${isDark ? "border-slate-600/30" : "border-gray-200"}`}>28</td>
+                            <td className={`border px-3 py-2 font-bold text-green-500 ${isDark ? "border-slate-600/30" : "border-gray-200"}`}>50 ✓</td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-1 font-body text-xs text-white/80">
-                      <p>🟡 {t.s3e2both} <strong className="text-yellow-300">10</strong></p>
-                      <p>🟢 {t.s3e2only_a} <strong className="text-emerald-300">18</strong></p>
-                      <p>🟢 {t.s3e2only_b} <strong className="text-emerald-300">12</strong></p>
-                      <p>🔴 {t.s3e2out} <strong className="text-red-300">10</strong></p>
+                    <div className={`${box} rounded p-3 space-y-1 font-body text-xs ${prose}`}>
+                      <p>🟡 {t.s3e2both} <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>10</strong></p>
+                      <p>🟢 {t.s3e2only_a} <strong className={isDark ? "text-emerald-300" : "text-emerald-700"}>18</strong></p>
+                      <p>🟢 {t.s3e2only_b} <strong className={isDark ? "text-emerald-300" : "text-emerald-700"}>12</strong></p>
+                      <p>🔴 {t.s3e2out} <strong className={isDark ? "text-red-300" : "text-red-600"}>10</strong></p>
                     </div>
                   </div>
                 </div>
 
                 {/* E3 - Hard */}
                 <div className="border-l-4 border-red-500 pl-4 space-y-3">
-                  <div className="flex items-center gap-2">{hardBadge}<span className="font-body font-semibold text-white">{t.example} 3</span></div>
-                  <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white leading-relaxed">{t.s3e3q}</p>
+                  <div className="flex items-center gap-2">{hardBadge}<span className="font-body font-semibold text-foreground">{t.example} 3</span></div>
+                  <div className={`${boxAlt} rounded-lg p-4`}>
+                    <p className={`font-body text-sm leading-relaxed text-foreground`}>{t.s3e3q}</p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-xs font-semibold text-red-400">{t.s3e3title}</p>
-                    <div className="bg-slate-900/50 rounded p-3 space-y-3 font-body text-sm text-white/80">
+                    <p className="font-body text-xs font-semibold text-red-500">{t.s3e3title}</p>
+                    <div className={`${box} rounded p-3 space-y-3 font-body text-sm ${prose}`}>
                       <p><strong>{t.s3e3ident}</strong></p>
-                      <div className="bg-slate-800/60 rounded p-2 text-xs">
-                        <p className="text-cyan-300 font-mono">{t.s3e3formula}</p>
+                      <div className={`${boxCode} rounded p-2 text-xs`}>
+                        <p className={`font-mono ${isDark ? "text-cyan-300" : "text-cyan-700"}`}>{t.s3e3formula}</p>
                       </div>
                       <p>{t.s3e3p1} <InlineMath math="n(M\cup B\cup K)=100" /></p>
                       <div className="overflow-x-auto">
@@ -1011,11 +1030,11 @@ const PemecahanMasalahHimpunanPage = () => {
                         <BlockMath math="n(\text{1}) = 100 - 40 = 60" />
                       </div>
                       <div className="bg-amber-500/10 border border-amber-500/20 rounded p-2 text-xs">
-                        <p className="text-amber-300 font-semibold">{t.s3e3tip_title}</p>
-                        <p className="text-white/70">{t.s3e3tip_desc}</p>
+                        <p className={`font-semibold ${isDark ? "text-amber-300" : "text-amber-700"}`}>{t.s3e3tip_title}</p>
+                        <p className={proseSm}>{t.s3e3tip_desc}</p>
                       </div>
                       <div className="bg-red-500/10 border border-red-500/30 rounded p-2">
-                        <p className="text-red-300 font-semibold text-xs">✅ {t.s3e3ans}</p>
+                        <p className={`font-semibold text-xs ${isDark ? "text-red-300" : "text-red-700"}`}>✅ {t.s3e3ans}</p>
                       </div>
                     </div>
                   </div>
