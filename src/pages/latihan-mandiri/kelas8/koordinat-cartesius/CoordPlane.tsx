@@ -50,10 +50,19 @@ const CoordPlane = ({
   arrowMarks = [],
 }: CoordPlaneProps) => {
   const pad = 18;
+  // Extra margin around the plot so point/segment labels near the edges
+  // (especially the right and top, where "tr"/"top" labels extend outward)
+  // have room to render fully instead of being clipped by the SVG viewBox.
+  const marginLeft = 40;
+  const marginRight = 56;
+  const marginTop = 24;
+  const marginBottom = 18;
+  const totalWidth = size + marginLeft + marginRight;
+  const totalHeight = size + marginTop + marginBottom;
   const inner = size - 2 * pad;
   const sc = inner / (2 * range);
-  const cx = pad + range * sc;
-  const cy = pad + range * sc;
+  const cx = marginLeft + pad + range * sc;
+  const cy = marginTop + pad + range * sc;
   const px = (x: number) => cx + x * sc;
   const py = (y: number) => cy - y * sc;
   const ticks = Array.from({ length: 2 * range - 1 }, (_, i) => i - range + 1).filter(n => n !== 0);
@@ -73,8 +82,8 @@ const CoordPlane = ({
   return (
     <div className="flex flex-col items-center">
       {title && <p className={`${titleColor} text-[10px] text-center mb-1 font-body`}>{title}</p>}
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="rounded-xl overflow-hidden">
-        <rect width={size} height={size} fill={bg} rx="12" />
+      <svg width={totalWidth} height={totalHeight} viewBox={`0 0 ${totalWidth} ${totalHeight}`} className="rounded-xl overflow-hidden">
+        <rect width={totalWidth} height={totalHeight} fill={bg} rx="12" />
 
         {/* Shaded regions */}
         {shades.map((s, i) => (
@@ -90,22 +99,22 @@ const CoordPlane = ({
         {/* Grid lines */}
         {ticks.map(n => (
           <g key={n}>
-            <line x1={px(n)} y1={pad} x2={px(n)} y2={size - pad} stroke={gridLine} strokeWidth="0.5" />
-            <line x1={pad} y1={py(n)} x2={size - pad} y2={py(n)} stroke={gridLine} strokeWidth="0.5" />
+            <line x1={px(n)} y1={marginTop + pad} x2={px(n)} y2={marginTop + size - pad} stroke={gridLine} strokeWidth="0.5" />
+            <line x1={marginLeft + pad} y1={py(n)} x2={marginLeft + size - pad} y2={py(n)} stroke={gridLine} strokeWidth="0.5" />
           </g>
         ))}
 
         {/* Axes */}
-        <line x1={pad} y1={cy} x2={size - pad + 4} y2={cy} stroke={axisStroke} strokeWidth="1.5" />
-        <line x1={cx} y1={size - pad + 4} x2={cx} y2={pad - 4} stroke={axisStroke} strokeWidth="1.5" />
+        <line x1={marginLeft + pad} y1={cy} x2={marginLeft + size - pad + 4} y2={cy} stroke={axisStroke} strokeWidth="1.5" />
+        <line x1={cx} y1={marginTop + size - pad + 4} x2={cx} y2={marginTop + pad - 4} stroke={axisStroke} strokeWidth="1.5" />
 
         {/* Axis arrows */}
-        <polygon points={`${size - pad + 5},${cy} ${size - pad - 3},${cy - 4} ${size - pad - 3},${cy + 4}`} fill={axisStroke} />
-        <polygon points={`${cx},${pad - 5} ${cx - 4},${pad + 3} ${cx + 4},${pad + 3}`} fill={axisStroke} />
+        <polygon points={`${marginLeft + size - pad + 5},${cy} ${marginLeft + size - pad - 3},${cy - 4} ${marginLeft + size - pad - 3},${cy + 4}`} fill={axisStroke} />
+        <polygon points={`${cx},${marginTop + pad - 5} ${cx - 4},${marginTop + pad + 3} ${cx + 4},${marginTop + pad + 3}`} fill={axisStroke} />
 
         {/* Axis labels */}
-        <text x={size - pad + 8} y={cy + 4} fill={axisLabel} fontSize="12" textAnchor="start" fontStyle="italic">x</text>
-        <text x={cx + 6} y={pad - 6} fill={axisLabel} fontSize="12" fontStyle="italic">y</text>
+        <text x={marginLeft + size - pad + 8} y={cy + 4} fill={axisLabel} fontSize="12" textAnchor="start" fontStyle="italic">x</text>
+        <text x={cx + 6} y={marginTop + pad - 6} fill={axisLabel} fontSize="12" fontStyle="italic">y</text>
         <text x={cx + 5} y={cy + 12} fill={originLabel} fontSize="9">O</text>
 
         {/* Tick marks & numbers */}
