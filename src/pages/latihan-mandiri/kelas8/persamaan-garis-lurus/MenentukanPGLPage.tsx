@@ -179,7 +179,7 @@ const questions: Q[] = [
       size: 280, range: 7, lightBg: true,
       segs: [
         // garis a (biru): melalui (0,4) dan (6,0), slope -2/3
-        { x1: -4.5, y1: 7, x2: 7, y2: 0.67, color: "#1d4ed8", label: "a" },
+        { x1: -4.5, y1: 7, x2: 7, y2: -0.67, color: "#1d4ed8", label: "a" },
         // garis b (kuning): melalui O(0,0) dan (2,3), slope 3/2; tegak lurus a
         { x1: -4.67, y1: -7, x2: 4.67, y2: 7, color: "#b45309", label: "b" },
       ],
