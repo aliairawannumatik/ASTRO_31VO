@@ -18,17 +18,7 @@ type Q = {
 const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const questions: Q[] = [
-  Q(1, "Persamaan dari Dua Titik", {
-    type: "mixed",
-    content: "Tentukan persamaan garis yang melalui pasangan titik berikut:",
-    parts: [
-      { label: "a.", math: "A(1,\\ 4) \\text{ dan } B(3,\\ 8)" },
-      { label: "b.", math: "C(-2,\\ 3) \\text{ dan } D(4,\\ 0)" },
-      { label: "c.", math: "E(0,\\ -5) \\text{ dan } F(5,\\ 5)" },
-    ],
-  }),
-
-  Q(2, "Persamaan dari Gradien dan Satu Titik", {
+  Q(1, "Persamaan dari Gradien dan Satu Titik", {
     type: "mixed",
     content: "Tentukan persamaan garis yang melalui titik P dan memiliki gradien m:",
     parts: [
@@ -39,26 +29,52 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(3, "Persamaan Garis Sejajar", {
+  Q(2, "Persamaan dari Dua Titik", {
     type: "mixed",
-    content: "Tentukan persamaan garis yang sejajar dengan garis yang diberikan dan melalui titik yang ditentukan:",
+    content: "Tentukan persamaan garis yang melalui pasangan titik berikut:",
     parts: [
-      { label: "a.", math: "y = 2x + 3 \\text{ melalui } (1,\\ 7)" },
-      { label: "b.", math: "y = -3x + 1 \\text{ melalui } (-2,\\ 8)" },
-      { label: "c.", math: "3x - y = 5 \\text{ melalui } (0,\\ -4)" },
+      { label: "a.", math: "A(1,\\ 4) \\text{ dan } B(3,\\ 8)" },
+      { label: "b.", math: "C(-2,\\ 3) \\text{ dan } D(4,\\ 0)" },
+      { label: "c.", math: "E(0,\\ -5) \\text{ dan } F(5,\\ 5)" },
+      { label: "d.", math: "G(-3,\\ -2) \\text{ dan } H(2,\\ 8)" },
     ],
   }),
 
-  Q(5, "Persamaan Garis Tegak Lurus", {
+  Q(3, "Persamaan Garis dari Titik Potong Sumbu", {
     type: "mixed",
-    content: "Tentukan persamaan garis yang tegak lurus dengan garis yang diberikan dan melalui titik yang ditentukan:",
+    content: "Perhatikan grafik garis berikut. Garis tersebut melalui titik potong sumbu-x dan titik potong sumbu-y.",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 4, y: 0, label: "(4,0)", color: "#fbbf24", labelPos: "bot" },
+        { x: 0, y: 3, label: "(0,3)", color: "#fbbf24", labelPos: "tr" },
+      ],
+      segs: [{ x1: -2, y1: 4.5, x2: 6, y2: -1.5, color: "#fbbf24" }],
+    },
     parts: [
-      { label: "a.", math: "y = 4x - 2 \\text{ melalui } (4,\\ 3)" },
-      { label: "b.", math: "y = -\\tfrac{1}{2}x + 5 \\text{ melalui } (-1,\\ 6)" },
-      { label: "c.", math: "x + 3y = 9 \\text{ melalui } (3,\\ -2)" },
+      { label: "a.", text: "Tentukan koordinat titik potong garis dengan sumbu-x dan sumbu-y berdasarkan grafik." },
+      { label: "b.", text: "Hitung gradien garis tersebut menggunakan kedua titik potong sumbu." },
+      { label: "c.", text: "Tuliskan persamaan garis tersebut." },
     ],
   }),
 
+  Q(4, "Persamaan Garis Melalui Titik Pangkal", {
+    type: "mixed",
+    content: "Perhatikan grafik garis berikut. Garis tersebut melalui titik pangkal O(0, 0) dan satu titik lainnya.",
+    diagram: {
+      size: 260, range: 6,
+      pts: [
+        { x: 0, y: 0, label: "O(0,0)", color: "#38bdf8", labelPos: "bl" },
+        { x: 3, y: 4, label: "(3,4)", color: "#38bdf8", labelPos: "tr" },
+      ],
+      segs: [{ x1: -4.5, y1: -6, x2: 4.5, y2: 6, color: "#38bdf8" }],
+    },
+    parts: [
+      { label: "a.", text: "Tentukan koordinat titik yang dilalui garis selain titik pangkal O." },
+      { label: "b.", text: "Hitung gradien garis tersebut." },
+      { label: "c.", text: "Tuliskan persamaan garis tersebut." },
+    ],
+  }),
 ];
 
 const MenentukanPGLPage = () => {
@@ -72,7 +88,7 @@ const MenentukanPGLPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-1 mb-3">
-            <span className="text-green-400 text-xs font-body">15 Soal Latihan</span>
+            <span className="text-green-400 text-xs font-body">{questions.length} {t('practice.suffixSoal')} Latihan</span>
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
             MENENTUKAN PERSAMAAN GARIS LURUS
