@@ -49,12 +49,12 @@ const questions: Q[] = [
     type: "mixed",
     content: "Perhatikan grafik garis berikut. Garis tersebut melalui titik potong sumbu-x dan titik potong sumbu-y.",
     diagram: {
-      size: 260, range: 6,
+      size: 260, range: 6, lightBg: true,
       pts: [
-        { x: 4, y: 0, label: "(4,0)", color: "#fbbf24", labelPos: "bot" },
-        { x: 0, y: 3, label: "(0,3)", color: "#fbbf24", labelPos: "tr" },
+        { x: 4, y: 0, label: "(4,0)", color: "#b45309", labelPos: "bot" },
+        { x: 0, y: 3, label: "(0,3)", color: "#b45309", labelPos: "tr" },
       ],
-      segs: [{ x1: -2, y1: 4.5, x2: 6, y2: -1.5, color: "#fbbf24" }],
+      segs: [{ x1: -2, y1: 4.5, x2: 6, y2: -1.5, color: "#b45309" }],
     },
     parts: [
       { label: "a.", text: "Tentukan koordinat titik potong garis dengan sumbu-x dan sumbu-y berdasarkan grafik." },
@@ -67,12 +67,12 @@ const questions: Q[] = [
     type: "mixed",
     content: "Perhatikan grafik garis berikut. Garis tersebut melalui titik pangkal O(0, 0) dan satu titik lainnya.",
     diagram: {
-      size: 260, range: 6,
+      size: 260, range: 6, lightBg: true,
       pts: [
-        { x: 0, y: 0, label: "O(0,0)", color: "#38bdf8", labelPos: "bl" },
-        { x: 3, y: 4, label: "(3,4)", color: "#38bdf8", labelPos: "tr" },
+        { x: 0, y: 0, label: "O(0,0)", color: "#0369a1", labelPos: "bl" },
+        { x: 3, y: 4, label: "(3,4)", color: "#0369a1", labelPos: "tr" },
       ],
-      segs: [{ x1: -4.5, y1: -6, x2: 4.5, y2: 6, color: "#38bdf8" }],
+      segs: [{ x1: -4.5, y1: -6, x2: 4.5, y2: 6, color: "#0369a1" }],
     },
     parts: [
       { label: "a.", text: "Tentukan koordinat titik yang dilalui garis selain titik pangkal O." },
@@ -118,17 +118,17 @@ const questions: Q[] = [
     type: "mc",
     content: "Perhatikan gambar berikut!",
     diagram: {
-      size: 280, range: 8,
+      size: 280, range: 8, lightBg: true,
       segs: [
         // garis referensi tanpa label: melalui (-2,0) dan (0,-6), slope -3
-        { x1: -4, y1: 6, x2: 0.67, y2: -8, color: "#a78bfa" },
+        { x1: -4, y1: 6, x2: 0.67, y2: -8, color: "#7c3aed" },
         // garis h: melalui (0,4), slope -3, sejajar garis referensi
-        { x1: -1.33, y1: 8, x2: 3.33, y2: -6, color: "#fbbf24", label: "h" },
+        { x1: -1.33, y1: 8, x2: 3.33, y2: -6, color: "#b45309", label: "h" },
       ],
       pts: [
-        { x: -2, y: 0,  color: "#a78bfa", labelPos: "tl" },
-        { x: 0,  y: -6, color: "#a78bfa", labelPos: "tl" },
-        { x: 0,  y: 4,  color: "#fbbf24", labelPos: "tr" },
+        { x: -2, y: 0,  color: "#7c3aed", labelPos: "tl" },
+        { x: 0,  y: -6, color: "#7c3aed", labelPos: "tl" },
+        { x: 0,  y: 4,  color: "#b45309", labelPos: "tr" },
       ],
     },
     content: "Perhatikan gambar berikut! Persamaan garis h adalah ….",
@@ -144,19 +144,19 @@ const questions: Q[] = [
   Q(8, "Pilihan Ganda — Garis Tegak Lurus (Grafik)", {
     type: "mc",
     diagram: {
-      size: 270, range: 6,
+      size: 270, range: 6, lightBg: true,
       segs: [
         // garis referensi: melalui (0,3) dan (4,0), slope -3/4
-        { x1: -4, y1: 6, x2: 6, y2: -1.5, color: "#a78bfa" },
+        { x1: -4, y1: 6, x2: 6, y2: -1.5, color: "#7c3aed" },
         // garis b: tegak lurus di (4,0), slope 4/3
-        { x1: -0.5, y1: -6, x2: 5, y2: 1.33, color: "#fbbf24", label: "b" },
+        { x1: -0.5, y1: -6, x2: 5, y2: 1.33, color: "#b45309", label: "b" },
       ],
       pts: [
-        { x: 0, y: 3,  label: "3", color: "#a78bfa", labelPos: "tl" },
-        { x: 4, y: 0,  label: "4", color: "#fbbf24", labelPos: "bot" },
+        { x: 0, y: 3,  label: "3", color: "#7c3aed", labelPos: "tl" },
+        { x: 4, y: 0,  label: "4", color: "#b45309", labelPos: "bot" },
       ],
       rightAngleMarks: [
-        { points: [[4.28, -0.21], [4.49, 0.07], [4.21, 0.28]], color: "#94a3b8" },
+        { points: [[4.28, -0.21], [4.49, 0.07], [4.21, 0.28]], color: "#1e293b" },
       ],
     },
     content: "Perhatikan gambar berikut! Persamaan garis b adalah ….",
@@ -168,24 +168,25 @@ const questions: Q[] = [
     ],
   }),
 
-  // Soal 9 — garis a melalui (0,4)&(6,0); garis b tegak lurus a melalui (2,3)
+  // Soal 9 — garis a (biru) melalui (0,4)&(6,0), slope -2/3; garis b (kuning) tegak lurus a melalui (2,3), slope 3/2
   Q(9, "Pilihan Ganda — Garis Sejajar & Tegak Lurus (Grafik)", {
     type: "mc",
     diagram: {
-      size: 280, range: 7,
+      size: 280, range: 7, lightBg: true,
       segs: [
-        // garis a: melalui (0,4) dan (6,0), slope -2/3
-        { x1: -4.5, y1: 7, x2: 7, y2: 0.67, color: "#a78bfa", label: "a" },
-        // garis b: melalui O(0,0) dan (2,3), slope 3/2; tegak lurus a
-        { x1: -4.67, y1: -7, x2: 4.67, y2: 7, color: "#fbbf24", label: "b" },
+        // garis a (biru): melalui (0,4) dan (6,0), slope -2/3
+        { x1: -4.5, y1: 7, x2: 7, y2: 0.67, color: "#1d4ed8", label: "a" },
+        // garis b (kuning): melalui O(0,0) dan (2,3), slope 3/2; tegak lurus a
+        { x1: -4.67, y1: -7, x2: 4.67, y2: 7, color: "#b45309", label: "b" },
       ],
       pts: [
-        { x: 0, y: 4,  label: "4",     color: "#a78bfa", labelPos: "tl" },
-        { x: 6, y: 0,  label: "6",     color: "#a78bfa", labelPos: "br" },
-        { x: 2, y: 3,  label: "(2,3)", color: "#fbbf24", labelPos: "tr" },
+        { x: 0, y: 4,  label: "4",     color: "#1d4ed8", labelPos: "tl" },
+        { x: 6, y: 0,  label: "6",     color: "#1d4ed8", labelPos: "br" },
+        { x: 2, y: 3,  label: "(2,3)", color: "#b45309", labelPos: "tr" },
       ],
       rightAngleMarks: [
-        { points: [[2.14, 2.58], [2.34, 2.87], [2.04, 3.06]], color: "#94a3b8" },
+        // tanda tegak lurus di titik potong (~1.85, 2.77)
+        { points: [[2.10, 2.60], [2.27, 2.85], [2.01, 3.02]], color: "#1e293b" },
       ],
     },
     content: "Perhatikan gambar berikut! Persamaan garis lurus b adalah ….",
@@ -201,22 +202,22 @@ const questions: Q[] = [
   Q(10, "Pilihan Ganda — Tiga Garis (Grafik)", {
     type: "mc",
     diagram: {
-      size: 300, range: 10,
+      size: 300, range: 10, lightBg: true,
       segs: [
         // garis q: melalui (-6,0) dan (0,9), slope 3/2
-        { x1: -10, y1: -6, x2: 0.67, y2: 10, color: "#60a5fa", label: "q" },
+        { x1: -10, y1: -6, x2: 0.67, y2: 10, color: "#1d4ed8", label: "q" },
         // garis ℓ: melalui (0,9), slope -2/3 (sejajar p)
-        { x1: -1.5, y1: 10, x2: 10, y2: 2.33, color: "#fbbf24", label: "ℓ" },
+        { x1: -1.5, y1: 10, x2: 10, y2: 2.33, color: "#b45309", label: "ℓ" },
         // garis p: melalui (-6,0) dan (0,-4), slope -2/3 (tegak lurus q)
-        { x1: -10, y1: 2.67, x2: 9, y2: -10, color: "#f472b6", label: "p" },
+        { x1: -10, y1: 2.67, x2: 9, y2: -10, color: "#be185d", label: "p" },
       ],
       pts: [
-        { x: -6, y: 0, color: "#94a3b8", labelPos: "tl" },
-        { x: 0,  y: 9, color: "#fbbf24", labelPos: "tr" },
-        { x: 0,  y: -4, color: "#f472b6", labelPos: "bl" },
+        { x: -6, y: 0, color: "#475569", labelPos: "tl" },
+        { x: 0,  y: 9, color: "#b45309", labelPos: "tr" },
+        { x: 0,  y: -4, color: "#be185d", labelPos: "bl" },
       ],
       rightAngleMarks: [
-        { points: [[-5.72, 0.42], [-5.30, 0.14], [-5.58, -0.28]], color: "#94a3b8" },
+        { points: [[-5.72, 0.42], [-5.30, 0.14], [-5.58, -0.28]], color: "#1e293b" },
       ],
     },
     content: "Perhatikan gambar di bawah ini! Persamaan garis ℓ adalah ….",
