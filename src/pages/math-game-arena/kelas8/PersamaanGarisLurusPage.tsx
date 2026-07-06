@@ -3,8 +3,8 @@ import GameSubtopicPage from "@/components/GameSubtopicPage";
 const subtopics = [
   { name: "GRAFIK PERSAMAAN GARIS LURUS", path: "/math-game-arena/kelas-8/persamaan-garis-lurus/grafik-pgl" },
   { name: "GRADIEN (KEMIRINGAN GARIS)", path: "/math-game-arena/kelas-8/persamaan-garis-lurus/gradien" },
-  { name: "MENENTUKAN PERSAMAAN GARIS LURUS", path: "/math-game-arena/kelas-8/persamaan-garis-lurus/menentukan-pgl" },
   { name: "HUBUNGAN 2 GARIS", path: "/math-game-arena/kelas-8/persamaan-garis-lurus/hubungan-2-garis" },
+  { name: "MENENTUKAN PERSAMAAN GARIS LURUS", path: "/math-game-arena/kelas-8/persamaan-garis-lurus/menentukan-pgl" },
   { name: "APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL", path: "/math-game-arena/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" },
 ];
 

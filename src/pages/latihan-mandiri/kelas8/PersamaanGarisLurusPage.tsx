@@ -23,20 +23,20 @@ const subtopics = [
     soal: 23,
   },
   {
-    label: "MENENTUKAN PERSAMAAN GARIS LURUS",
-    path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus/menentukan-pgl",
-    icon: PenLine,
-    color: "#34d399",
-    desc: "Bentuk y = mx + c, melalui titik dan gradien",
-    soal: 15,
-  },
-  {
     label: "HUBUNGAN 2 GARIS",
     path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus/hubungan-2-garis",
     icon: GitBranch,
     color: "#fb923c",
     desc: "Sejajar, tegak lurus, dan berpotongan",
     soal: 13,
+  },
+  {
+    label: "MENENTUKAN PERSAMAAN GARIS LURUS",
+    path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus/menentukan-pgl",
+    icon: PenLine,
+    color: "#34d399",
+    desc: "Bentuk y = mx + c, melalui titik dan gradien",
+    soal: 15,
   },
   {
     label: "APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL",
