@@ -22,15 +22,15 @@ const questions: Q[] = [
   Q(1, "Tarif Taksi Online", {
     type: "mixed",
     diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#60a5fa", label: "Tarif" }],
+      size: 260, range: 6, lightBg: true,
+      segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#2563eb", label: "Tarif" }],
       pts: [
-        { x: 0, y: 1, label: "(0,10rb)", color: "#60a5fa", labelPos: "tr" },
-        { x: 5, y: 6, label: "(5km,60rb)", color: "#60a5fa", labelPos: "tr" },
+        { x: 0, y: 1, label: "(0,10rb)", color: "#2563eb", labelPos: "tr" },
+        { x: 5, y: 6, label: "(5km,60rb)", color: "#2563eb", labelPos: "tr" },
       ],
       extraTexts: [
-        { x: 1, y: 5, text: "sumbu-x: jarak (km)", color: "rgba(255,255,255,0.4)", size: 8 },
-        { x: -2, y: 3, text: "sumbu-y: tarif (×10rb)", color: "rgba(255,255,255,0.4)", size: 8 },
+        { x: 1, y: 5, text: "sumbu-x: jarak (km)", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -2, y: 3, text: "sumbu-y: tarif (×10rb)", color: "rgba(0,0,0,0.45)", size: 8 },
       ],
     },
     content: "Tarif taksi online: Rp10.000 biaya awal ditambah Rp10.000 per km.",
@@ -43,6 +43,18 @@ const questions: Q[] = [
 
   Q(2, "Harga Paket Data", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 6, lightBg: true,
+      segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#0ea5e9", label: "Harga" }],
+      pts: [
+        { x: 0, y: 1, label: "(0GB,3rb)", color: "#0ea5e9", labelPos: "tl" },
+        { x: 5, y: 6, label: "(5GB,28rb)", color: "#0ea5e9", labelPos: "tr" },
+      ],
+      extraTexts: [
+        { x: 1, y: 5, text: "sumbu-x: jumlah GB", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -2, y: 3, text: "sumbu-y: harga (×5rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Harga paket data: Rp5.000 per GB ditambah biaya admin Rp3.000.",
     parts: [
       { label: "a.", math: "\\text{Tulis persamaan harga } H \\text{ untuk } g \\text{ GB.}" },
@@ -54,6 +66,18 @@ const questions: Q[] = [
 
   Q(4, "UN 2019 — Biaya Produksi", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 6, lightBg: true,
+      segs: [{ x1: 0, y1: 1, x2: 5, y2: 5.5, color: "#64748b", label: "Biaya" }],
+      pts: [
+        { x: 0, y: 1, label: "(0,200rb)", color: "#64748b", labelPos: "tl" },
+        { x: 5, y: 5.5, label: "(100,700rb)", color: "#64748b", labelPos: "tr" },
+      ],
+      extraTexts: [
+        { x: 1, y: 5, text: "sumbu-x: jumlah barang (×20)", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -2, y: 3, text: "sumbu-y: biaya (×100rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Biaya produksi x barang adalah B(x) = 5000x + 200.000 (dalam rupiah).",
     parts: [
       { label: "a.", text: "Apa yang dimaksud dengan 5000x dalam konteks ini?" },
@@ -66,11 +90,11 @@ const questions: Q[] = [
   Q(5, "Tabungan Bertambah Rutin", {
     type: "mixed",
     diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#facc15", label: "Tabungan" }],
+      size: 260, range: 6, lightBg: true,
+      segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#ca8a04", label: "Tabungan" }],
       pts: [
-        { x: 0, y: 1, label: "(0, 50rb)", color: "#facc15", labelPos: "tr" },
-        { x: 4, y: 5, label: "(4bln, 250rb)", color: "#facc15", labelPos: "tr" },
+        { x: 0, y: 1, label: "(0, 50rb)", color: "#ca8a04", labelPos: "tr" },
+        { x: 4, y: 5, label: "(4bln, 250rb)", color: "#ca8a04", labelPos: "tr" },
       ],
     },
     content: "Riko menabung Rp50.000/bulan. Tabungan awal Rp50.000.",
@@ -83,6 +107,18 @@ const questions: Q[] = [
 
   Q(6, "Penurunan Nilai Barang", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 8, lightBg: true,
+      segs: [{ x1: 0, y1: 8, x2: 6, y2: 2, color: "#dc2626", label: "Nilai" }],
+      pts: [
+        { x: 0, y: 8, label: "(0,8jt)", color: "#dc2626", labelPos: "tl" },
+        { x: 6, y: 2, label: "(6th,2jt)", color: "#dc2626", labelPos: "br" },
+      ],
+      extraTexts: [
+        { x: 2, y: -6, text: "sumbu-x: tahun", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -3, y: 4, text: "sumbu-y: nilai (×1jt)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Nilai sebuah laptop mula-mula Rp8.000.000. Nilainya turun Rp1.000.000 per tahun.",
     parts: [
       { label: "a.", math: "\\text{Tulis persamaan nilai } V \\text{ setelah } t \\text{ tahun.}" },
@@ -95,11 +131,11 @@ const questions: Q[] = [
   Q(7, "Isi Bahan Bakar", {
     type: "mixed",
     diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: 0, y1: 6, x2: 6, y2: 0, color: "#f472b6", label: "BBM" }],
+      size: 260, range: 6, lightBg: true,
+      segs: [{ x1: 0, y1: 6, x2: 6, y2: 0, color: "#db2777", label: "BBM" }],
       pts: [
-        { x: 0, y: 6, label: "(0, 60L)", color: "#f472b6", labelPos: "tr" },
-        { x: 6, y: 0, label: "(600km, 0)", color: "#f472b6", labelPos: "top" },
+        { x: 0, y: 6, label: "(0, 60L)", color: "#db2777", labelPos: "tr" },
+        { x: 6, y: 0, label: "(600km, 0)", color: "#db2777", labelPos: "top" },
       ],
     },
     content: "Tangki sepeda motor berisi 60 liter. Konsumsi BBM 10 km per liter.",
@@ -112,6 +148,18 @@ const questions: Q[] = [
 
   Q(8, "Grafik Populasi Linier", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 8, lightBg: true,
+      segs: [{ x1: 0, y1: 5, x2: 6, y2: 6.2, color: "#16a34a", label: "Populasi" }],
+      pts: [
+        { x: 0, y: 5, label: "(2020,5000)", color: "#16a34a", labelPos: "tl" },
+        { x: 6, y: 6.2, label: "(2026,6200)", color: "#16a34a", labelPos: "tr" },
+      ],
+      extraTexts: [
+        { x: 2, y: -6, text: "sumbu-x: tahun sejak 2020", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -3, y: 3, text: "sumbu-y: populasi (×1000)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Populasi desa pada tahun 2020 adalah 5.000 jiwa. Bertambah 200 jiwa per tahun.",
     parts: [
       { label: "a.", math: "\\text{Tulis persamaan populasi } P \\text{ pada tahun ke-} t \\text{ sejak 2020.}" },
@@ -122,6 +170,18 @@ const questions: Q[] = [
 
   Q(9, "Harga Tiket Masuk", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 8, lightBg: true,
+      segs: [{ x1: 0, y1: 2, x2: 5, y2: 7, color: "#d97706", label: "Biaya" }],
+      pts: [
+        { x: 0, y: 2, label: "(0,10rb)", color: "#d97706", labelPos: "tl" },
+        { x: 5, y: 7, label: "(5org,35rb)", color: "#d97706", labelPos: "tr" },
+      ],
+      extraTexts: [
+        { x: 1, y: -6, text: "sumbu-x: jumlah orang", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -3, y: 4, text: "sumbu-y: biaya (×5rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Harga tiket masuk taman: Rp5.000 per orang + biaya parkir Rp10.000.",
     parts: [
       { label: "a.", math: "\\text{Tulis total biaya } C \\text{ untuk } n \\text{ orang.}" },
@@ -132,6 +192,18 @@ const questions: Q[] = [
 
   Q(10, "Debit Air — Volume dan Waktu", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 12, lightBg: true,
+      segs: [{ x1: 0, y1: 10, x2: 10, y2: 5, color: "#0284c7", label: "Volume" }],
+      pts: [
+        { x: 0, y: 10, label: "(0,500L)", color: "#0284c7", labelPos: "tl" },
+        { x: 10, y: 5, label: "(10mnt,250L)", color: "#0284c7", labelPos: "br" },
+      ],
+      extraTexts: [
+        { x: 3, y: -9, text: "sumbu-x: waktu (menit)", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -6, y: 6, text: "sumbu-y: volume (×50L)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Bak air berisi 500 liter. Air keluar dengan kecepatan konstan 25 liter/menit.",
     parts: [
       { label: "a.", math: "\\text{Tulis persamaan volume } V \\text{ setelah } t \\text{ menit.}" },
@@ -144,12 +216,12 @@ const questions: Q[] = [
   Q(11, "Grafik Dua Tarif — Titik Kesamaan", {
     type: "mixed",
     diagram: {
-      size: 260, range: 6,
+      size: 260, range: 6, lightBg: true,
       segs: [
-        { x1: 0, y1: 2, x2: 5, y2: 7, color: "#f472b6", label: "Tarif A" },
-        { x1: 0, y1: 4, x2: 5, y2: 5.5, color: "#60a5fa", label: "Tarif B" },
+        { x1: 0, y1: 2, x2: 5, y2: 7, color: "#db2777", label: "Tarif A" },
+        { x1: 0, y1: 4, x2: 5, y2: 5.5, color: "#2563eb", label: "Tarif B" },
       ],
-      pts: [{ x: 4, y: 6, label: "Titik sama", color: "#facc15", labelPos: "tl" }],
+      pts: [{ x: 4, y: 6, label: "Titik sama", color: "#ca8a04", labelPos: "tl" }],
     },
     content: "Tarif A: Rp20.000 awal + Rp10.000/km. Tarif B: Rp40.000 awal + Rp5.000/km.",
     parts: [
@@ -161,6 +233,18 @@ const questions: Q[] = [
 
   Q(12, "TKA — Gaji dan Bonus", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 8, lightBg: true,
+      segs: [{ x1: 0, y1: 4, x2: 6, y2: 7, color: "#059669", label: "Gaji" }],
+      pts: [
+        { x: 0, y: 4, label: "(0,2jt)", color: "#059669", labelPos: "tl" },
+        { x: 6, y: 7, label: "(30unit,3.5jt)", color: "#059669", labelPos: "tr" },
+      ],
+      extraTexts: [
+        { x: 1, y: -6, text: "sumbu-x: unit terjual (×5)", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -3, y: 5, text: "sumbu-y: gaji (×500rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Gaji seorang karyawan: Rp2.000.000 per bulan + bonus Rp50.000 per unit terjual.",
     parts: [
       { label: "a.", math: "\\text{Tulis persamaan total penghasilan } G \\text{ untuk } u \\text{ unit.}" },
@@ -171,6 +255,18 @@ const questions: Q[] = [
 
   Q(13, "ANBK — Soal Kontekstual Pilih Garis", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 12, lightBg: true,
+      segs: [{ x1: 0, y1: 8, x2: 3, y2: 11, color: "#65a30d", label: "Luas Panen" }],
+      pts: [
+        { x: 0, y: 8, label: "(2019,400ha)", color: "#65a30d", labelPos: "tl" },
+        { x: 3, y: 11, label: "(2022,550ha)", color: "#65a30d", labelPos: "tr" },
+      ],
+      extraTexts: [
+        { x: 1, y: -9, text: "sumbu-x: tahun sejak 2019", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -6, y: 3, text: "sumbu-y: luas panen (×50ha)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Dinas pertanian mencatat luas panen jagung (hektar) setiap tahun: 2019: 400, 2020: 450, 2021: 500, 2022: 550.",
     parts: [
       { label: "a.", text: "Apakah data ini membentuk pola linier? Jelaskan!" },
@@ -181,6 +277,21 @@ const questions: Q[] = [
 
   Q(14, "Tarif Telepon", {
     type: "mixed",
+    diagram: {
+      size: 260, range: 10, lightBg: true,
+      segs: [
+        { x1: 0, y1: 0, x2: 2, y2: 5, color: "#7c3aed", label: "0–10mnt" },
+        { x1: 2, y1: 5, x2: 5, y2: 9.5, color: "#f97316", label: ">10mnt" },
+      ],
+      pts: [
+        { x: 2, y: 5, label: "(10mnt,5rb)", color: "#7c3aed", labelPos: "tl" },
+        { x: 5, y: 9.5, label: "(25mnt,9.5rb)", color: "#f97316", labelPos: "tr" },
+      ],
+      extraTexts: [
+        { x: 1, y: -8, text: "sumbu-x: menit (×5)", color: "rgba(0,0,0,0.45)", size: 8 },
+        { x: -5, y: 5, text: "sumbu-y: biaya (×1rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+      ],
+    },
     content: "Tarif telepon: Rp500/menit untuk 10 menit pertama, kemudian Rp300/menit.",
     parts: [
       { label: "a.", text: "Berapa biaya untuk percakapan 10 menit?" },
@@ -192,13 +303,13 @@ const questions: Q[] = [
   Q(15, "Tantangan — Model Matematika Dunia Nyata", {
     type: "mixed",
     diagram: {
-      size: 260, range: 6,
+      size: 260, range: 6, lightBg: true,
       segs: [
-        { x1: 0, y1: 2, x2: 4, y2: 6, color: "#34d399", label: "Toko A" },
-        { x1: 0, y1: 5, x2: 4, y2: 5, color: "#f472b6", label: "Toko B" },
+        { x1: 0, y1: 2, x2: 4, y2: 6, color: "#059669", label: "Toko A" },
+        { x1: 0, y1: 5, x2: 4, y2: 5, color: "#db2777", label: "Toko B" },
       ],
       pts: [
-        { x: 3, y: 5, label: "Sama", color: "#facc15", labelPos: "tl" },
+        { x: 3, y: 5, label: "Sama", color: "#ca8a04", labelPos: "tl" },
       ],
     },
     content: "Toko A menjual buah: Rp20.000/kg + Rp20.000 ongkos kirim. Toko B: Rp50.000 flat untuk berapapun kg.",
