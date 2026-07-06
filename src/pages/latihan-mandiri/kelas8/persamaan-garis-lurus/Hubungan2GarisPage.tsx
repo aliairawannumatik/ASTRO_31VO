@@ -50,34 +50,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(4, "Titik Potong — Metode Eliminasi", {
-    type: "mixed",
-    content: "Tentukan titik potong menggunakan metode eliminasi:",
-    parts: [
-      { label: "a.", math: "2x + y = 8 \\text{ dan } x - y = 1" },
-      { label: "b.", math: "3x + 2y = 12 \\text{ dan } x + 2y = 8" },
-      { label: "c.", math: "4x - y = 10 \\text{ dan } 2x + y = 8" },
-    ],
-  }),
-
-  Q(5, "Grafik — Titik Potong Dua Garis", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [
-        { x1: -4, y1: -1, x2: 4, y2: 7, color: "#f472b6", label: "y=x+3" },
-        { x1: -2, y1: 7, x2: 4, y2: 1, color: "#60a5fa", label: "y=−x+5" },
-      ],
-      pts: [{ x: 1, y: 4, label: "P", color: "#facc15", labelPos: "tr" }],
-    },
-    parts: [
-      { label: "a.", text: "Baca koordinat titik potong P dari grafik." },
-      { label: "b.", text: "Verifikasi secara aljabar dengan substitusi P ke kedua persamaan." },
-      { label: "c.", text: "Apakah kedua garis sejajar atau tidak? Jelaskan!" },
-    ],
-  }),
-
-  Q(6, "Dua Garis Sejajar — Tidak Ada Titik Potong", {
+  Q(4, "Dua Garis Sejajar — Tidak Ada Titik Potong", {
     type: "mixed",
     diagram: {
       size: 260, range: 6,
@@ -93,27 +66,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(7, "UN 2018 — Garis Sejajar dengan Garis Lain", {
-    type: "mixed",
-    content: "Garis g sejajar dengan garis y = 3x − 5 dan melalui titik (2, 7).",
-    parts: [
-      { label: "a.", text: "Tentukan gradien garis g." },
-      { label: "b.", text: "Tentukan persamaan garis g." },
-      { label: "c.", text: "Tentukan titik potong garis g dengan sumbu-x." },
-    ],
-  }),
-
-  Q(8, "Titik Potong dengan Sumbu Koordinat", {
-    type: "mixed",
-    content: "Tentukan titik potong setiap garis dengan sumbu-x dan sumbu-y:",
-    parts: [
-      { label: "a.", math: "y = 2x - 8" },
-      { label: "b.", math: "3x - 4y = 24" },
-      { label: "c.", math: "y = -\\tfrac{3}{2}x + 6" },
-    ],
-  }),
-
-  Q(9, "ANBK — Garis Sejajar Benar atau Salah", {
+  Q(5, "ANBK — Garis Sejajar Benar atau Salah", {
     type: "mixed",
     content: "Tentukan pernyataan BENAR (B) atau SALAH (S):",
     parts: [
@@ -124,18 +77,7 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(10, "Perpotongan dengan Garis Khusus", {
-    type: "mixed",
-    content: "Tentukan titik potong garis y = 3x − 6 dengan:",
-    parts: [
-      { label: "a.", text: "Garis y = 0 (sumbu-x)." },
-      { label: "b.", text: "Garis x = 0 (sumbu-y)." },
-      { label: "c.", math: "\\text{Garis } y = 6." },
-      { label: "d.", math: "\\text{Garis } x = 4." },
-    ],
-  }),
-
-  Q(11, "Nilai k untuk Garis Sejajar", {
+  Q(6, "Nilai k untuk Garis Sejajar", {
     type: "mixed",
     content: "Tentukan nilai k agar setiap pasang garis berikut sejajar:",
     parts: [
@@ -145,25 +87,13 @@ const questions: Q[] = [
     ],
   }),
 
-  Q(12, "Nilai k untuk Garis Tegak Lurus", {
+  Q(7, "Nilai k untuk Garis Tegak Lurus", {
     type: "mixed",
     content: "Tentukan nilai k agar setiap pasang garis berikut tegak lurus:",
     parts: [
       { label: "a.", math: "y = kx + 1 \\text{ dan } y = 3x - 2" },
       { label: "b.", math: "y = 4x + 5 \\text{ dan } y = kx + 7" },
       { label: "c.", math: "kx + 2y = 6 \\text{ dan } x - 3y = 9" },
-    ],
-  }),
-
-  Q(13, "ANBK — Soal Pilihan Berganda Hubungan Garis", {
-    type: "mixed",
-    content: "Garis p: 2x + y = 8 dan garis q: x − 2y = 4. Pilih jawaban yang benar:",
-    parts: [
-      { label: "(A)", text: "p dan q sejajar." },
-      { label: "(B)", text: "p dan q tegak lurus." },
-      { label: "(C)", text: "p dan q berpotongan tetapi tidak tegak lurus." },
-      { label: "(D)", text: "p dan q berimpit." },
-      { label: "Buktikan:", text: "Hitung gradien masing-masing garis untuk mendukung jawabanmu." },
     ],
   }),
 ];
@@ -179,7 +109,7 @@ const Hubungan2GarisPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-full px-4 py-1 mb-3">
-            <span className="text-orange-400 text-xs font-body">13 Soal Latihan</span>
+            <span className="text-orange-400 text-xs font-body">{questions.length} {t('practice.suffixSoal')} Latihan</span>
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
             HUBUNGAN DUA GARIS

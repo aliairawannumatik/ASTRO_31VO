@@ -28,7 +28,7 @@ const subtopics = [
     icon: GitBranch,
     color: "#fb923c",
     desc: "Sejajar, tegak lurus, dan berpotongan",
-    soal: 13,
+    soal: 7,
   },
   {
     label: "MENENTUKAN PERSAMAAN GARIS LURUS",
@@ -61,7 +61,7 @@ const PersamaanGarisLurusPage = () => {
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
           PERSAMAAN GARIS LURUS
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · {t('practice.breadcrumb')} · 5 {t('practice.suffixSubTopik')} · 81 {t('practice.suffixSoalTotal')}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · {t('practice.breadcrumb')} · 5 {t('practice.suffixSubTopik')} · 75 {t('practice.suffixSoalTotal')}</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((sub, i) => {
