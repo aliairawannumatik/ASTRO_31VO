@@ -75,7 +75,7 @@ const questions: Q[] = [
         { x1: -4, y1: 4, x2: 4, y2: -4, color: "#60a5fa", label: "ℓ₂" },
       ],
       pts: [{ x: 0, y: 0, label: "Q", color: "#facc15", labelPos: "bl" }],
-      rightAngleMarks: [{ points: [[-1, 1], [0, 0], [1, 1]] }],
+      rightAngleMarks: [{ points: [[0.28, 0.28], [0.57, 0], [0.28, -0.28]], color: "#f87171" }],
     },
     parts: [
       { label: "a.", text: "Hitung gradien masing-masing garis." },
@@ -160,7 +160,7 @@ const Hubungan2GarisPage = () => {
               {q.diagram && (
                 <div className="flex justify-center my-4">
                   <div className="rounded-xl border border-white/10 overflow-hidden shadow-lg">
-                    <CoordPlane {...q.diagram} />
+                    <CoordPlane {...q.diagram} lightBg />
                   </div>
                 </div>
               )}
