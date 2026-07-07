@@ -888,36 +888,36 @@ const PengertianPolaPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title={t.miniSummaryTitle} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
+              <div className={`${isDark ? "bg-cyan-500/10 border-cyan-500/30" : "bg-cyan-50 border-cyan-300"} border rounded-lg p-4 space-y-2 text-sm font-body`}>
                 {t.miniSummaryItems.map(([term, def]) => (
                   <div key={term} className="flex gap-2">
-                    <span className="text-cyan-400 shrink-0">▸</span>
-                    <p className="text-white/80"><strong className="text-cyan-300">{term}:</strong> {def}</p>
+                    <span className={`${isDark ? "text-cyan-400" : "text-cyan-600"} shrink-0`}>▸</span>
+                    <p className={prose}><strong className={isDark ? "text-cyan-300" : "text-cyan-700"}>{term}:</strong> {def}</p>
                   </div>
                 ))}
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs font-body border-collapse">
                   <thead>
-                    <tr className="bg-cyan-900/40">
-                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">{t.summaryTableColName}</th>
-                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">{t.summaryTableColExample}</th>
-                      <th className="border border-cyan-500/30 px-3 py-2 text-cyan-200 text-left">{t.summaryTableColFormula}</th>
+                    <tr className={isDark ? "bg-cyan-900/40" : "bg-cyan-100"}>
+                      <th className={`border ${isDark ? "border-cyan-500/30 text-cyan-200" : "border-cyan-300 text-cyan-800"} px-3 py-2 text-left`}>{t.summaryTableColName}</th>
+                      <th className={`border ${isDark ? "border-cyan-500/30 text-cyan-200" : "border-cyan-300 text-cyan-800"} px-3 py-2 text-left`}>{t.summaryTableColExample}</th>
+                      <th className={`border ${isDark ? "border-cyan-500/30 text-cyan-200" : "border-cyan-300 text-cyan-800"} px-3 py-2 text-left`}>{t.summaryTableColFormula}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {t.summaryTableRows.map(([nama, contoh, rumus], i) => (
-                      <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
-                        <td className="border border-white/10 px-3 py-2 text-cyan-300 font-semibold">{nama}</td>
-                        <td className="border border-white/10 px-3 py-2 text-white/60 font-mono">{contoh}</td>
-                        <td className="border border-white/10 px-3 py-2 text-green-300 font-mono">{rumus}</td>
+                      <tr key={i} className={i % 2 === 0 ? (isDark ? "bg-slate-800/30" : "bg-gray-50") : (isDark ? "bg-slate-700/20" : "bg-white")}>
+                        <td className={`border ${isDark ? "border-white/10 text-cyan-300" : "border-gray-200 text-cyan-700"} px-3 py-2 font-semibold`}>{nama}</td>
+                        <td className={`border ${isDark ? "border-white/10 text-white/60" : "border-gray-200 text-gray-500"} px-3 py-2 font-mono`}>{contoh}</td>
+                        <td className={`border ${isDark ? "border-white/10 text-green-300" : "border-gray-200 text-green-700"} px-3 py-2 font-mono`}>{rumus}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <p className="font-body text-xs text-yellow-200">{t.tipBox}</p>
+              <div className={`${isDark ? "bg-yellow-500/10 border-yellow-500/30" : "bg-yellow-50 border-yellow-300"} border rounded-lg p-3`}>
+                <p className={`font-body text-xs ${isDark ? "text-yellow-200" : "text-yellow-800"}`}>{t.tipBox}</p>
               </div>
             </div>
           </div>
@@ -928,61 +928,61 @@ const PengertianPolaPage = () => {
               <p className="font-display text-lg font-bold text-white tracking-wide">{t.finalSummaryHeader}</p>
               <p className="font-body text-xs text-white/80 mt-0.5">{t.finalSummarySubheader}</p>
             </div>
-            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+            <div className={`${isDark ? "bg-slate-900/90" : "bg-white/95"} backdrop-blur px-5 py-5 space-y-5`}>
               <div className="space-y-2">
-                <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-cyan-500/30 border border-cyan-500 flex items-center justify-center text-[10px]">1</span>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-cyan-300" : "text-cyan-700"} uppercase tracking-widest flex items-center gap-2`}>
+                  <span className={`w-5 h-5 rounded-full ${isDark ? "bg-cyan-500/30 border-cyan-500" : "bg-cyan-100 border-cyan-400"} border flex items-center justify-center text-[10px]`}>1</span>
                   {t.conceptSection}
                 </p>
                 <div className="grid grid-cols-1 gap-2">
-                  {t.conceptItems.map(({ label, desc, color }) => (
-                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                  {t.conceptItems.map(({ label, desc }, idx) => (
+                    <div key={label} className={`bg-gradient-to-r ${conceptItemColors[idx]} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
                       <div className="mt-0.5 w-2 h-2 rounded-full bg-current shrink-0 opacity-70" />
                       <div>
                         <p className="font-body text-xs font-bold">{label}</p>
-                        <p className="font-body text-xs text-white/65 mt-0.5">{desc}</p>
+                        <p className={`font-body text-xs mt-0.5 ${isDark ? "text-white/65" : "text-gray-600"}`}>{desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
               <div className="space-y-2">
-                <p className="font-body text-xs font-bold text-violet-300 uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-violet-500/30 border border-violet-500 flex items-center justify-center text-[10px]">2</span>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-violet-300" : "text-violet-700"} uppercase tracking-widest flex items-center gap-2`}>
+                  <span className={`w-5 h-5 rounded-full ${isDark ? "bg-violet-500/30 border-violet-500" : "bg-violet-100 border-violet-400"} border flex items-center justify-center text-[10px]`}>2</span>
                   {t.specialSection}
                 </p>
                 <div className="grid grid-cols-2 gap-2">
-                  {t.specialItems.map(({ nama, rumus, warna }) => (
-                    <div key={nama} className={`border ${warna} rounded-xl px-3 py-2 text-center`}>
+                  {t.specialItems.map(({ nama, rumus }, idx) => (
+                    <div key={nama} className={`border ${specialItemColors[idx]} rounded-xl px-3 py-2 text-center`}>
                       <p className="font-body text-xs font-bold">{nama}</p>
-                      <p className="font-mono text-[11px] text-white/70 mt-0.5">{rumus}</p>
+                      <p className={`font-mono text-[11px] mt-0.5 ${isDark ? "text-white/70" : "text-gray-600"}`}>{rumus}</p>
                     </div>
                   ))}
                 </div>
               </div>
               <div className="space-y-2">
-                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">3</span>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-yellow-300" : "text-yellow-700"} uppercase tracking-widest flex items-center gap-2`}>
+                  <span className={`w-5 h-5 rounded-full ${isDark ? "bg-yellow-500/30 border-yellow-500" : "bg-yellow-100 border-yellow-400"} border flex items-center justify-center text-[10px]`}>3</span>
                   {t.tipsSection}
                 </p>
                 <div className="space-y-2">
-                  {t.tipsItems.map(({ tip, detail, icon, color }) => (
-                    <div key={tip} className={`${color} border rounded-xl p-3 flex gap-3`}>
+                  {t.tipsItems.map(({ tip, detail, icon }, idx) => (
+                    <div key={tip} className={`${tipsItemColors[idx]} border rounded-xl p-3 flex gap-3`}>
                       <span className="text-xl shrink-0 mt-0.5">{icon}</span>
                       <div>
-                        <p className="font-body text-xs font-bold text-white">{tip}</p>
-                        <p className="font-body text-xs text-white/60 mt-0.5 leading-relaxed">{detail}</p>
+                        <p className={`font-body text-xs font-bold ${isDark ? "text-white" : "text-gray-800"}`}>{tip}</p>
+                        <p className={`font-body text-xs mt-0.5 leading-relaxed ${isDark ? "text-white/60" : "text-gray-600"}`}>{detail}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-cyan-500/20 via-violet-500/15 to-pink-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className={`${isDark ? "bg-gradient-to-br from-cyan-500/20 via-violet-500/15 to-pink-500/20 border-white/20" : "bg-gradient-to-br from-cyan-50 via-violet-50 to-pink-50 border-violet-200"} border rounded-2xl p-5 text-center space-y-3`}>
                 <div className="text-3xl">🌌</div>
-                <p className="font-body text-sm text-white/80 leading-relaxed">{t.conclusionText}</p>
+                <p className={`font-body text-sm leading-relaxed ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.conclusionText}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-1">
                   {t.conclusionTags.map(tag => (
-                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                    <span key={tag} className={`${isDark ? "bg-white/10 border-white/20 text-white/80" : "bg-white border-violet-200 text-gray-700"} border text-xs font-body px-3 py-1 rounded-full`}>{tag}</span>
                   ))}
                 </div>
               </div>
