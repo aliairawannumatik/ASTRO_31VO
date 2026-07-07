@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -437,6 +438,7 @@ function GeometricArcPanel({
 const PolaGeometriPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
 
   const SectionHeader = ({ icon, iconColor, title }: {
@@ -537,8 +539,8 @@ const PolaGeometriPage = () => {
                 <GeometricArcPanel
                   label={language === "id" ? "Barisan Naik: 2, 6, 18, 54, ..." : language === "en" ? "Increasing: 2, 6, 18, 54, ..." : "増加列：2, 6, 18, 54, ..."}
                   terms={[2, 6, 18, 54, 162]}
-                  arcColor="#a78bfa"
-                  labelColor="#ddd6fe"
+                  arcColor={isDark ? "#a78bfa" : "#6d28d9"}
+                  labelColor={isDark ? "#ddd6fe" : "#3b0764"}
                   bgClass="bg-violet-900/40 border-violet-500/50"
                   textClass="text-violet-300"
                   rLabel={language === "id" ? "Rasio tetap = ×3 (setiap suku dikalikan 3)" : language === "en" ? "Constant ratio = ×3 (each term multiplied by 3)" : "公比 = ×3（各項が3倍になる）"}
@@ -546,8 +548,8 @@ const PolaGeometriPage = () => {
                 <GeometricArcPanel
                   label={language === "id" ? "Barisan Turun: 64, 32, 16, 8, 4, ..." : language === "en" ? "Decreasing: 64, 32, 16, 8, 4, ..." : "減少列：64, 32, 16, 8, 4, ..."}
                   terms={[64, 32, 16, 8, 4]}
-                  arcColor="#fb923c"
-                  labelColor="#fed7aa"
+                  arcColor={isDark ? "#fb923c" : "#c2410c"}
+                  labelColor={isDark ? "#fed7aa" : "#7c2d12"}
                   bgClass="bg-orange-900/40 border-orange-500/50"
                   textClass="text-orange-300"
                   rLabel={language === "id" ? "Rasio tetap = ×½ (setiap suku dibagi 2)" : language === "en" ? "Constant ratio = ×½ (each term halved)" : "公比 = ×½（各項が半分になる）"}
@@ -867,15 +869,15 @@ const PolaGeometriPage = () => {
               <p className="font-body text-xs text-white/80 mt-0.5">{t.summarySubheader}</p>
             </div>
 
-            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+            <div className={`${isDark ? "bg-slate-900/90" : "bg-white/97"} backdrop-blur px-5 py-5 space-y-5`}>
 
               <div className="space-y-2">
                 <p className="font-body text-xs font-bold text-violet-300 uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-violet-500/30 border border-violet-500 flex items-center justify-center text-[10px]">1</span>
+                  <span className={`w-5 h-5 rounded-full ${isDark ? "bg-violet-500/30 border-violet-500" : "bg-violet-100 border-violet-400"} border flex items-center justify-center text-[10px]`}>1</span>
                   {t.summarySection1}
                 </p>
                 <div className="grid grid-cols-1 gap-2">
-                  <div className="bg-gradient-to-r from-violet-900/70 to-violet-800/30 border border-violet-500/50 rounded-xl p-3 text-center">
+                  <div className={`${isDark ? "bg-gradient-to-r from-violet-900/70 to-violet-800/30 border-violet-500/50" : "bg-violet-50 border-violet-300"} border rounded-xl p-3 text-center`}>
                     <p className="font-body text-xs text-violet-300 font-bold mb-1">{t.summaryUnLabel}</p>
                     <BlockMath math="U_n = a \cdot r^{n-1}" />
                     <div className="flex justify-center gap-3 text-xs font-body flex-wrap mt-1">
@@ -884,12 +886,12 @@ const PolaGeometriPage = () => {
                       <span className="text-orange-300">{t.nLabel}</span>
                     </div>
                   </div>
-                  <div className="bg-gradient-to-r from-pink-900/70 to-pink-800/30 border border-pink-500/50 rounded-xl p-3 text-center">
+                  <div className={`${isDark ? "bg-gradient-to-r from-pink-900/70 to-pink-800/30 border-pink-500/50" : "bg-pink-50 border-pink-300"} border rounded-xl p-3 text-center`}>
                     <p className="font-body text-xs text-pink-300 font-bold mb-1">{t.summarySnLabel1}</p>
                     <BlockMath math="S_n = \frac{a(r^n - 1)}{r - 1} \quad (r > 1)" />
                     <BlockMath math="S_n = \frac{a(1 - r^n)}{1 - r} \quad (|r| < 1)" />
                   </div>
-                  <div className="bg-gradient-to-r from-teal-900/70 to-teal-800/30 border border-teal-500/50 rounded-xl p-3 text-center">
+                  <div className={`${isDark ? "bg-gradient-to-r from-teal-900/70 to-teal-800/30 border-teal-500/50" : "bg-teal-50 border-teal-300"} border rounded-xl p-3 text-center`}>
                     <p className="font-body text-xs text-teal-300 font-bold mb-1">{t.summarySnLabel2}</p>
                     <BlockMath math="S_\infty = \frac{a}{1 - r} \quad (|r| < 1)" />
                   </div>
@@ -898,14 +900,14 @@ const PolaGeometriPage = () => {
 
               <div className="space-y-2">
                 <p className="font-body text-xs font-bold text-pink-300 uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-pink-500/30 border border-pink-500 flex items-center justify-center text-[10px]">2</span>
+                  <span className={`w-5 h-5 rounded-full ${isDark ? "bg-pink-500/30 border-pink-500" : "bg-pink-100 border-pink-400"} border flex items-center justify-center text-[10px]`}>2</span>
                   {t.summaryRatioLabel}
                 </p>
                 <div className="grid grid-cols-2 gap-2">
                   {t.ratioProps.map(({ cond, efek, color }) => (
                     <div key={cond} className={`${color} border rounded-xl px-3 py-2`}>
                       <p className="font-mono text-xs font-bold">{cond}</p>
-                      <p className="font-body text-xs text-white/60 mt-0.5">{efek}</p>
+                      <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-slate-500"} mt-0.5`}>{efek}</p>
                     </div>
                   ))}
                 </div>
@@ -913,7 +915,7 @@ const PolaGeometriPage = () => {
 
               <div className="space-y-2">
                 <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">3</span>
+                  <span className={`w-5 h-5 rounded-full ${isDark ? "bg-yellow-500/30 border-yellow-500" : "bg-yellow-100 border-yellow-400"} border flex items-center justify-center text-[10px]`}>3</span>
                   {t.tipsSection}
                 </p>
                 <div className="space-y-2">
@@ -929,13 +931,13 @@ const PolaGeometriPage = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-violet-500/20 via-pink-500/15 to-orange-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className={`${isDark ? "bg-gradient-to-br from-violet-500/20 via-pink-500/15 to-orange-500/20 border-white/20" : "bg-gradient-to-br from-violet-50 via-pink-50 to-orange-50 border-pink-200"} border rounded-2xl p-5 text-center space-y-3`}>
                 <div className="text-3xl">🚀</div>
                 <p className="font-display text-base font-bold text-white">{t.conclusionTitle}</p>
                 <p className="font-body text-sm text-white/80 leading-relaxed">{t.conclusionBody}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-1">
                   {t.tags.map(tag => (
-                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                    <span key={tag} className={`${isDark ? "bg-white/10 border-white/20 text-white/80" : "bg-white/80 border-slate-200 text-slate-600"} border text-xs font-body px-3 py-1 rounded-full`}>{tag}</span>
                   ))}
                 </div>
                 <p className="font-display text-sm font-semibold text-yellow-300 mt-2">{t.nextPrompt}</p>

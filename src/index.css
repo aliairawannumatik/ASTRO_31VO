@@ -1085,6 +1085,8 @@
 .light-mode .text-green-200   { color: #15803d !important; }
 .light-mode .text-emerald-200 { color: #047857 !important; }
 .light-mode .text-teal-200    { color: #0f766e !important; }
+.light-mode .text-slate-200   { color: #334155 !important; }
+.light-mode .text-gray-200    { color: #374151 !important; }
 
 /* ── Card and container backgrounds: dark → light ── */
 .light-mode .bg-card\/80     { background-color: rgba(255,255,255,0.88) !important; }
