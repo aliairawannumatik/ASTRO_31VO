@@ -1083,7 +1083,97 @@
 .light-mode .bg-slate-900\/30 { background-color: rgba(248,250,252,0.55) !important; }
 .light-mode .bg-slate-900\/50 { background-color: rgba(248,250,252,0.75) !important; }
 .light-mode .bg-slate-900\/80 { background-color: rgba(248,250,252,0.90) !important; }
+.light-mode .bg-slate-900\/90 { background-color: rgba(248,250,252,0.96) !important; }
 .light-mode .bg-slate-900    { background-color: #f8fafc !important; }
+
+/* bg-slate-700 opacity variants (missing from above) */
+.light-mode .bg-slate-700\/10 { background-color: rgba(226,232,240,0.30) !important; }
+.light-mode .bg-slate-700\/20 { background-color: rgba(226,232,240,0.40) !important; }
+.light-mode .bg-slate-700\/30 { background-color: rgba(226,232,240,0.55) !important; }
+.light-mode .bg-slate-700\/40 { background-color: rgba(226,232,240,0.65) !important; }
+.light-mode .bg-slate-700\/50 { background-color: rgba(226,232,240,0.75) !important; }
+.light-mode .bg-slate-700\/60 { background-color: rgba(226,232,240,0.85) !important; }
+
+/* Colored dark bg-*-900 standalone overrides (light pastel equivalents) */
+.light-mode .bg-cyan-900\/10  { background-color: rgba(207,250,254,0.40) !important; }
+.light-mode .bg-cyan-900\/20  { background-color: rgba(207,250,254,0.55) !important; }
+.light-mode .bg-cyan-900\/30  { background-color: rgba(207,250,254,0.65) !important; }
+.light-mode .bg-cyan-900\/40  { background-color: rgba(207,250,254,0.75) !important; }
+.light-mode .bg-cyan-900\/50  { background-color: rgba(207,250,254,0.85) !important; }
+.light-mode .bg-cyan-900\/60  { background-color: rgba(207,250,254,0.90) !important; }
+.light-mode .bg-cyan-900\/70  { background-color: rgba(207,250,254,0.93) !important; }
+.light-mode .bg-cyan-900      { background-color: #cffafe !important; }
+
+.light-mode .bg-green-900\/10 { background-color: rgba(220,252,231,0.40) !important; }
+.light-mode .bg-green-900\/20 { background-color: rgba(220,252,231,0.55) !important; }
+.light-mode .bg-green-900\/30 { background-color: rgba(220,252,231,0.65) !important; }
+.light-mode .bg-green-900\/40 { background-color: rgba(220,252,231,0.75) !important; }
+.light-mode .bg-green-900\/50 { background-color: rgba(220,252,231,0.85) !important; }
+.light-mode .bg-green-900\/60 { background-color: rgba(220,252,231,0.90) !important; }
+.light-mode .bg-green-900     { background-color: #dcfce7 !important; }
+
+.light-mode .bg-yellow-900\/10{ background-color: rgba(254,249,195,0.40) !important; }
+.light-mode .bg-yellow-900\/20{ background-color: rgba(254,249,195,0.55) !important; }
+.light-mode .bg-yellow-900\/30{ background-color: rgba(254,249,195,0.65) !important; }
+.light-mode .bg-yellow-900\/40{ background-color: rgba(254,249,195,0.75) !important; }
+.light-mode .bg-yellow-900\/50{ background-color: rgba(254,249,195,0.85) !important; }
+.light-mode .bg-yellow-900\/60{ background-color: rgba(254,249,195,0.90) !important; }
+.light-mode .bg-yellow-900    { background-color: #fef9c3 !important; }
+
+.light-mode .bg-red-900\/10   { background-color: rgba(254,226,226,0.40) !important; }
+.light-mode .bg-red-900\/20   { background-color: rgba(254,226,226,0.55) !important; }
+.light-mode .bg-red-900\/30   { background-color: rgba(254,226,226,0.65) !important; }
+.light-mode .bg-red-900\/40   { background-color: rgba(254,226,226,0.75) !important; }
+.light-mode .bg-red-900\/50   { background-color: rgba(254,226,226,0.85) !important; }
+.light-mode .bg-red-900\/60   { background-color: rgba(254,226,226,0.90) !important; }
+.light-mode .bg-red-900       { background-color: #fee2e2 !important; }
+
+.light-mode .bg-orange-900\/10{ background-color: rgba(255,237,213,0.40) !important; }
+.light-mode .bg-orange-900\/20{ background-color: rgba(255,237,213,0.55) !important; }
+.light-mode .bg-orange-900\/30{ background-color: rgba(255,237,213,0.65) !important; }
+.light-mode .bg-orange-900\/40{ background-color: rgba(255,237,213,0.75) !important; }
+.light-mode .bg-orange-900\/50{ background-color: rgba(255,237,213,0.85) !important; }
+.light-mode .bg-orange-900    { background-color: #ffedd5 !important; }
+
+.light-mode .bg-violet-900\/10{ background-color: rgba(237,233,254,0.40) !important; }
+.light-mode .bg-violet-900\/20{ background-color: rgba(237,233,254,0.55) !important; }
+.light-mode .bg-violet-900\/30{ background-color: rgba(237,233,254,0.65) !important; }
+.light-mode .bg-violet-900\/40{ background-color: rgba(237,233,254,0.75) !important; }
+.light-mode .bg-violet-900\/50{ background-color: rgba(237,233,254,0.85) !important; }
+.light-mode .bg-violet-900\/60{ background-color: rgba(237,233,254,0.90) !important; }
+.light-mode .bg-violet-900    { background-color: #ede9fe !important; }
+
+.light-mode .bg-pink-900\/10  { background-color: rgba(252,231,243,0.40) !important; }
+.light-mode .bg-pink-900\/20  { background-color: rgba(252,231,243,0.55) !important; }
+.light-mode .bg-pink-900\/30  { background-color: rgba(252,231,243,0.65) !important; }
+.light-mode .bg-pink-900\/40  { background-color: rgba(252,231,243,0.75) !important; }
+.light-mode .bg-pink-900\/50  { background-color: rgba(252,231,243,0.85) !important; }
+.light-mode .bg-pink-900\/60  { background-color: rgba(252,231,243,0.90) !important; }
+.light-mode .bg-pink-900      { background-color: #fce7f3 !important; }
+
+.light-mode .bg-teal-900\/10  { background-color: rgba(204,251,241,0.40) !important; }
+.light-mode .bg-teal-900\/20  { background-color: rgba(204,251,241,0.55) !important; }
+.light-mode .bg-teal-900\/30  { background-color: rgba(204,251,241,0.65) !important; }
+.light-mode .bg-teal-900\/40  { background-color: rgba(204,251,241,0.75) !important; }
+.light-mode .bg-teal-900\/50  { background-color: rgba(204,251,241,0.85) !important; }
+.light-mode .bg-teal-900\/60  { background-color: rgba(204,251,241,0.90) !important; }
+.light-mode .bg-teal-900      { background-color: #ccfbf1 !important; }
+
+.light-mode .bg-blue-900\/10  { background-color: rgba(219,234,254,0.40) !important; }
+.light-mode .bg-blue-900\/20  { background-color: rgba(219,234,254,0.55) !important; }
+.light-mode .bg-blue-900\/30  { background-color: rgba(219,234,254,0.65) !important; }
+.light-mode .bg-blue-900\/40  { background-color: rgba(219,234,254,0.75) !important; }
+.light-mode .bg-blue-900\/50  { background-color: rgba(219,234,254,0.85) !important; }
+.light-mode .bg-blue-900\/60  { background-color: rgba(219,234,254,0.90) !important; }
+.light-mode .bg-blue-900      { background-color: #dbeafe !important; }
+
+.light-mode .bg-indigo-900\/30{ background-color: rgba(224,231,255,0.65) !important; }
+.light-mode .bg-indigo-900\/40{ background-color: rgba(224,231,255,0.75) !important; }
+.light-mode .bg-indigo-900\/50{ background-color: rgba(224,231,255,0.85) !important; }
+.light-mode .bg-indigo-900    { background-color: #e0e7ff !important; }
+
+/* bg-red-950 (circle pattern in examples) */
+.light-mode .bg-red-950\/60   { background-color: rgba(254,226,226,0.70) !important; }
 
 /* ── bg-black overrides for light mode ── */
 .light-mode .bg-black\/10 { background-color: rgba(241,245,249,0.30) !important; }
