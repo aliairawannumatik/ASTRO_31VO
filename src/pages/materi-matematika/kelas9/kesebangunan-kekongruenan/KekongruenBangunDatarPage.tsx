@@ -4,9 +4,615 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Shapes } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import { DragCongruenceDemo } from "@/components/CongruenceDragDemo";
+
+// ─── Translations ─────────────────────────────────────────────────────────────
+const translations = {
+  id: {
+    pageTitle: "KEKONGRUENAN BANGUN DATAR",
+    pageSub: "Kelas 9 · Kesebangunan dan Kekongruenan · Materi Matematika",
+    sec_intro: "🧱 Apa Itu Kekongruenan?",
+    sec_konsep1: "📘 Sub-Bab 1 — Sifat Dua Segitiga Kongruen",
+    sec_konsep2: "📘 Sub-Bab 2 — Syarat Dua Segitiga Kongruen",
+    sec_bangunLain: "📘 Sub-Bab 3 — Kekongruenan Bangun Datar Lainnya",
+    sec_contoh: "📝 Contoh Soal — Kekongruenan Segitiga & Bangun Lain",
+    intro_p1: "Dua bangun datar dikatakan",
+    intro_k1: "kongruen",
+    intro_p1b: "jika salah satunya dapat ditutupkan",
+    intro_em: "persis",
+    intro_p1c: "di atas yang lain — seperti dua puzzle identik yang saling menutupi tanpa celah. Kekongruenan berlaku untuk",
+    intro_k2: "semua jenis bangun datar",
+    intro_p1d: ", bukan hanya segitiga!",
+    intro_formal: "📌 Definisi Formal",
+    intro_f1: "Dua bangun datar",
+    intro_f2: "dan",
+    intro_f3: "disebut kongruen",
+    intro_f3b: "jika dan hanya jika:",
+    intro_c1: "① Semua sisi yang bersesuaian",
+    intro_c1b: "sama panjang",
+    intro_c2: "② Semua sudut yang bersesuaian",
+    intro_c2b: "sama besar",
+    intro_note: "Bangun yang kongruen bisa saja dibalik (refleksi) atau diputar untuk saling menutupi.",
+    k1_summary: "🎯 Ringkasan Intisari",
+    k1_p1: "Jika",
+    k1_p1b: ", maka berlaku dua sifat sekaligus:",
+    k1_rusuk: "① Rusuk-rusuk bersesuaian sama panjang:",
+    k1_sudut: "② Sudut-sudut bersesuaian sama besar:",
+    k1_diag_label: "🔍 ILUSTRASI SIFAT KEKONGRUENAN SEGITIGA:",
+    fig1: "Gambar 1. Ilustrasi △ABC ≅ △PQR — semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar",
+    k1_warn: "Perhatikan urutan penulisan!",
+    k1_warn2: "berarti A↔P, B↔Q, C↔R. Jadi",
+    k1_warn3: "(bukan",
+    k1_warn3b: "!)",
+    k2_summary: "🎯 Ringkasan Intisari",
+    k2_p1: "Untuk membuktikan dua segitiga kongruen, cukup tunjukkan",
+    k2_p1b: "salah satu",
+    k2_p1c: "dari 4 syarat berikut:",
+    k2_rrr: "① Syarat RRR — Sisi-Sisi-Sisi",
+    fig2: "Gambar 2. Syarat RRR — ketiga pasang sisi bersesuaian sama panjang: AB=PQ, BC=QR, CA=RP",
+    k2_rrr_p: "Ketiga pasang sisi bersesuaian sama panjang.",
+    k2_rar: "② Syarat RAR — Sisi-Sudut-Sisi",
+    fig3: "Gambar 3. Syarat RAR — dua sisi bersesuaian sama panjang dan sudut apitnya sama besar: AB=PQ, ∠A=∠P, AC=PR",
+    k2_rar_p: "Dua sisi bersesuaian sama panjang",
+    k2_rar_pb: "dan sudut apitnya",
+    k2_rar_pc: "sama besar.",
+    k2_ara: "③ Syarat ARA / AAR / RAA — Sudut-Sisi-Sudut / Sudut-Sudut-Sisi / Sisi-Sudut-Sudut",
+    fig4: "Gambar 4. Syarat ARA/AAR/RAA — satu sisi sama panjang dan dua sudut bersesuaian sama besar: ∠A=∠P, AB=PQ, ∠B=∠Q",
+    k2_ara_p: "Satu sisi bersesuaian sama panjang dan dua sudut bersesuaian sama besar (sisi boleh diapit atau dihadapkan ke salah satu sudut).",
+    tbl2_title: "📊 RINGKASAN SYARAT KEKONGRUENAN SEGITIGA:",
+    tbl2_h1: "Kode", tbl2_h2: "Syarat", tbl2_h3: "Yang Dibutuhkan",
+    tbl2_code_rrr: "RRR", tbl2_code_rar: "RAR", tbl2_code_ara: "ARA", tbl2_code_aar: "AAR/RAA",
+    tbl2_rrr_s: "3 pasang sisi sama", tbl2_rrr_e: "3 rusuk",
+    tbl2_rar_s: "2 sisi + sudut apit sama", tbl2_rar_e: "2 rusuk + 1 sudut",
+    tbl2_ara_s: "1 sisi diapit + 2 sudut sama", tbl2_ara_e: "1 rusuk + 2 sudut",
+    tbl2_aar_s: "1 sisi dihadapkan + 2 sudut sama", tbl2_aar_e: "1 rusuk + 2 sudut",
+    k3_intro: "Kekongruenan tidak hanya berlaku pada segitiga. Semua bangun datar — persegi, persegi panjang, jajar genjang, trapesium, belah ketupat, layang-layang, lingkaran, maupun poligon lainnya — dapat bersifat kongruen. Syarat umumnya tetap sama:",
+    k3_intro_k: "semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar.",
+    k3_s1: "① Persegi (Square)",
+    fig5: "Gambar 5. Dua persegi kongruen — Persegi ABCD ≅ Persegi PQRS jika sisinya sama panjang (AB = PQ)",
+    k3_s1_cond_title: "Syarat kekongruenan persegi:",
+    k3_s1_cond: "Dua persegi kongruen jika dan hanya jika",
+    k3_s1_cond_k: "panjang sisinya sama",
+    k3_s1_squareName: "Persegi",
+    k3_s1_note: "Karena semua sudut persegi sudah 90°, hanya 1 syarat sisi yang diperlukan!",
+    k3_s1_prop_title: "Sifat yang berlaku jika kongruen:",
+    k3_s2: "② Persegi Panjang (Rectangle)",
+    fig6: "Gambar 6. Dua persegi panjang kongruen — ABCD ≅ PQRS jika panjang dan lebarnya sama (AB=PQ dan BC=QR)",
+    k3_s2_cond_title: "Syarat kekongruenan persegi panjang:",
+    k3_s2_cond: "Dua persegi panjang kongruen jika",
+    k3_s2_cond_k: "panjang (", k3_s2_cond_kb: ") dan lebarnya (", k3_s2_cond_kc: ") sama",
+    k3_s2_note: "Semua sudut persegi panjang sudah 90°, jadi hanya perlu 2 pasang sisi bersesuaian sama.",
+    k3_s2_ex_title: "Contoh cepat:",
+    k3_s2_ex1: "Persegi panjang 6 cm × 4 cm", k3_s2_ex1b: "persegi panjang 6 cm × 4 cm ✓",
+    k3_s2_ex2: "Persegi panjang 6 cm × 4 cm", k3_s2_ex2b: "persegi panjang 4 cm × 6 cm ✗",
+    k3_s2_ex2c: "(perlu periksa pasangan sisi yang bersesuaian!)",
+    k3_s3: "③ Jajar Genjang (Parallelogram)",
+    fig7: "Gambar 7. Dua jajar genjang kongruen — ABCD ≅ PQRS jika dua sisi bersesuaian sama panjang dan sudut apitnya sama besar (AB=PQ, BC=QR, ∠A=∠P)",
+    k3_s3_cond_title: "Syarat kekongruenan jajar genjang:",
+    k3_s3_cond: "Dua jajar genjang kongruen jika",
+    k3_s3_cond_k: "dua sisi bersesuaian sama panjang DAN sudut apit sama besar",
+    k3_s3_note: "⚠️ Dua jajar genjang dengan sisi sama belum tentu kongruen jika sudutnya berbeda!",
+    k3_s3_prop_title: "Sifat tambahan:",
+    k3_s3_and: "dan", k3_s3_opp_angles: "(sudut-sudut berhadapan)", k3_s3_adj_angles: "(sudut-sudut berdekatan)",
+    k3_s4: "④ Trapesium (Trapezoid)",
+    fig8: "Gambar 8. Dua trapesium kongruen — ABCD ≅ PQRS jika semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar",
+    k3_s4_cond_title: "Syarat kekongruenan trapesium:",
+    k3_s4_cond: "Dua trapesium kongruen jika",
+    k3_s4_cond_k: "semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar",
+    k3_s4_iso_title: "Trapesium Sama Kaki:",
+    k3_s4_iso_p: "Pada trapesium sama kaki yang kongruen, kaki-kakinya bersesuaian sama panjang dan sudut-sudut alasnya sama besar.",
+    k3_s4_legs: "(kaki sama panjang)",
+    k3_s5: "⑤ Belah Ketupat (Rhombus)",
+    fig9: "Gambar 9. Dua belah ketupat kongruen — ABCD ≅ PQRS jika panjang sisinya sama dan salah satu sudut apitnya sama besar (AB=PQ dan ∠A=∠P)",
+    k3_s5_cond_title: "Syarat kekongruenan belah ketupat:",
+    k3_s5_cond: "Dua belah ketupat kongruen jika",
+    k3_s5_cond_k: "panjang sisinya sama DAN salah satu sudut apitnya sama besar",
+    k3_s5_note: "⚠️ Dua belah ketupat dengan sisi sama belum tentu kongruen — sudut apitnya harus sama!",
+    k3_s5_prop_title: "Sifat tambahan:",
+    k3_s5_p1: "✅", k3_s5_p2: "(semua sisi sama)", k3_s5_p3: "dan",
+    k3_s5_p4: "(sudut berhadapan sama)",
+    k3_s5_p5: "✅ Diagonal saling berpotongan tegak lurus dan saling membagi dua sama panjang",
+    k3_s6: "⑥ Layang-layang (Kite)",
+    fig10: "Gambar 10. Dua layang-layang kongruen — ABCD ≅ PQRS jika semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar",
+    k3_s6_cond_title: "Syarat kekongruenan layang-layang:",
+    k3_s6_cond: "Dua layang-layang kongruen jika",
+    k3_s6_cond_k: "semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar",
+    k3_s6_ang_note: "(sudut di antara sisi berbeda panjang)",
+    k3_s6_prop_title: "Sifat layang-layang:",
+    k3_s6_p1: "✅", k3_s6_p1b: "dan", k3_s6_p1c: "(dua pasang sisi berdekatan sama)",
+    k3_s6_p2: "✅", k3_s6_p2b: "(sudut di antara sisi yang berbeda panjang sama besar)",
+    k3_s6_p3: "✅ Diagonal utama (AC) memotong diagonal lainnya (BD) tegak lurus dan membaginya sama panjang",
+    k3_s7: "⑦ Lingkaran (Circle)",
+    fig11: "Gambar 11. Dua lingkaran kongruen — jika jari-jarinya sama panjang (r₁ = r₂)",
+    k3_s7_cond_title: "Syarat kekongruenan lingkaran:",
+    k3_s7_cond: "Dua lingkaran kongruen jika dan hanya jika",
+    k3_s7_cond_k: "jari-jarinya sama panjang",
+    k3_s7_circle1: "Lingkaran₁", k3_s7_circle2: "Lingkaran₂",
+    k3_s7_note: "Lingkaran tidak punya sudut, sehingga syaratnya hanya 1: jari-jari sama!",
+    k3_s7_prop_title: "Akibatnya:",
+    k3_s7_p1: "✅ Keliling sama:", k3_s7_p2: "✅ Luas sama:",
+    tbl3_title: "📊 RINGKASAN SYARAT KEKONGRUENAN BERBAGAI BANGUN DATAR:",
+    tbl3_h1: "Bangun", tbl3_h2: "Syarat Kongruen",
+    tbl3_r1n: "Segitiga", tbl3_r1v: "RRR / RAR / ARA / AAR (salah satu)",
+    tbl3_r2n: "Persegi", tbl3_r2v: "Sisi sama panjang (1 syarat)",
+    tbl3_r3n: "Persegi Panjang", tbl3_r3v: "Panjang dan lebar bersesuaian sama",
+    tbl3_r4n: "Jajar Genjang", tbl3_r4v: "2 sisi bersesuaian + sudut apit sama",
+    tbl3_r5n: "Trapesium", tbl3_r5v: "Semua sisi + semua sudut bersesuaian sama",
+    tbl3_r6n: "Lingkaran", tbl3_r6v: "Jari-jari sama (1 syarat)",
+    tbl3_r7n: "Poligon-n", tbl3_r7v: "Semua n sisi + semua n sudut bersesuaian sama",
+    badge_mudah: "MUDAH", badge_sedang: "SEDANG",
+    c1_title: "Contoh 1 — Segitiga Kongruen",
+    c1_q: "Perhatikan gambar berikut.",
+    fig12: "Gambar 12. Diagram titik-titik P, T, U, S, R, Q — tentukan banyak segitiga yang kongruen",
+    c1_q2: "Banyak segitiga kongruen pada gambar adalah . . . .",
+    c1_discuss_title: "PEMBAHASAN:",
+    c1_discuss_intro: "Identifikasi segitiga-segitiga yang terbentuk pada gambar:",
+    c1_t1: "siku-siku di T", c1_t2: "siku-siku di S", c1_t3: "terbentuk dari T, U, S",
+    c1_discuss_p: "Ketiga segitiga tersebut kongruen satu sama lain karena memenuhi syarat kekongruenan.",
+    c1_answer: "Jawaban: D. 3 buah ✓",
+    c2_title: "Contoh 2 — Aksioma Kekongruenan",
+    c2_q: "Diketahui panjang", c2_q2: "menurut aksioma . . . .",
+    fig13: "Gambar 13. Diagram △CDA dan △CBE dengan BC = CD dan ∠CDA = ∠CBE = 90°",
+    c2_opt_a: "A. \u00a0sisi, sisi, sisi", c2_opt_b: "B. \u00a0sisi, sisi, sudut",
+    c2_opt_c: "C. \u00a0sisi, sudut, sisi", c2_opt_d: "D. \u00a0sudut, sisi, sudut",
+    c2_discuss_title: "PEMBAHASAN:",
+    c2_discuss_intro: "Periksa unsur-unsur yang bersesuaian pada",
+    c2_discuss_introb: "dan",
+    c2_el1: "(sudut C sama, karena A, B, C segaris)",
+    c2_el2: "(diketahui", c2_el2b: ") ← sisi diapit",
+    c2_el3: "(sudut siku-siku)",
+    c2_discuss_p: "Dua sudut + sisi apit sama → aksioma",
+    c2_discuss_pb: "Sudut–Sisi–Sudut (S.Ss.S)",
+    c2_answer: "Jawaban: D. sudut, sisi, sudut ✓",
+    c3_title: "Contoh 3 — Mencari Nilai m",
+    c3_q: "Jika", c3_q2: ", maka nilai", c3_q3: "= . . . .",
+    fig14: "Gambar 14. Diagram △ABC ≅ △PQR — sisi AC = (12 – m) bersesuaian dengan sisi PR = 5, tentukan nilai m",
+    c3_discuss_title: "PEMBAHASAN:",
+    c3_discuss_intro: "Karena", c3_discuss_introb: ", sisi-sisi bersesuaian adalah:",
+    c3_el1: "Sisi AC bersesuaian dengan sisi PR",
+    c3_answer: "Jawaban: D. 7 ✓",
+    rang_title: "📋 Rangkuman — Kekongruenan Bangun Datar",
+    rang_h1: "Bangun", rang_h2: "Syarat Kongruen", rang_h3: "Jumlah Syarat Min.",
+    rang_r1n: "Segitiga", rang_r1v: "RRR, RAR, ARA, atau AAR (salah satu)", rang_r1e: "3 unsur",
+    rang_r2n: "Persegi", rang_r2v: "Sisi yang sama panjang", rang_r2e: "1 unsur",
+    rang_r3n: "Persegi Panjang", rang_r3v: "Panjang dan lebar bersesuaian sama", rang_r3e: "2 unsur",
+    rang_r4n: "Jajar Genjang", rang_r4v: "2 pasang sisi bersesuaian sama + sudut apit sama", rang_r4e: "3 unsur",
+    rang_r5n: "Trapesium & Poligon", rang_r5v: "Semua sisi bersesuaian sama + semua sudut sama", rang_r5e: "Semua unsur",
+    rang_r6n: "Lingkaran", rang_r6v: "Jari-jari sama panjang", rang_r6e: "1 unsur",
+    rang_note1: "Definisi:",
+    rang_note1b: "Dua bangun kongruen (≅) jika semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar",
+    rang_note2: "Notasi penting:",
+    rang_note2b: "berarti A↔P, B↔Q, C↔R. Urutan huruf menentukan pasangan!",
+    rang_note3: "Bangun bisa diputar/dicermin:",
+    rang_note3b: "Kongruen tetap berlaku meski salah satu bangun diputar atau direfleksi (dicermin)",
+    tips_title: "💡 Tips & Trik",
+    tips_1t: "Ingat urutan syarat segitiga (RRR, RAR, ARA, AAR):",
+    tips_1b: "Huruf R = Rusuk, A = sudut (Angle). Syarat tersebut menjamin ketiga sisi dan ketiga sudut otomatis sama — tidak perlu cek semuanya satu per satu!",
+    tips_2t: "Cara cepat menentukan sisi bersesuaian dari notasi:",
+    tips_2b: "Jika", tips_2bb: ", pasangkan huruf-huruf di posisi yang sama:",
+    tips_3t: "Bedakan kongruen dengan sebangun di soal pilihan ganda:",
+    tips_3b: "Jika ada \"faktor skala k ≠ 1\" → sebangun bukan kongruen. Jika \"semua ukurannya sama persis\" → kongruen (k=1).",
+    tips_4t: "Untuk soal \"cari nilai x\":",
+    tips_4b: "Gunakan pasangan sisi bersesuaian yang sama. Jika",
+    tips_4bb: ", tulis persamaan langsung dan selesaikan.",
+    conc_title: "✅ Kesimpulan",
+    conc_p1: "Kekongruenan bangun datar adalah konsep",
+    conc_p1k: "\"berimpit sempurna\"",
+    conc_p1b: "— dua bangun yang bisa saling ditumpuk tanpa celah dan tanpa sisa.",
+    conc_l1: "🔹 Tidak semua bangun memerlukan semua syarat:",
+    conc_l1k: "persegi dan lingkaran", conc_l1b: "hanya butuh 1 syarat",
+    conc_l2: "🔹 Segitiga memiliki", conc_l2k: "4 cara pembuktian",
+    conc_l2b: "kekongruenan (RRR, RAR, ARA, AAR)",
+    conc_l3: "🔹 Bangun yang diputar atau dicermin", conc_l3k: "tetap kongruen",
+    conc_l4: "🔹 Kongruen adalah kasus khusus sebangun:",
+    conc_note: "Kekongruenan adalah fondasi pembuktian geometri — digunakan untuk membuktikan garis sejajar, persamaan sudut, dan sifat-sifat bangun ruang.",
+    back: "← Kembali ke Kesebangunan dan Kekongruenan",
+  },
+  en: {
+    pageTitle: "CONGRUENCE OF PLANE FIGURES",
+    pageSub: "Grade 9 · Congruence & Similarity · Mathematics",
+    sec_intro: "🧱 What Is Congruence?",
+    sec_konsep1: "📘 Sub-Topic 1 — Properties of Two Congruent Triangles",
+    sec_konsep2: "📘 Sub-Topic 2 — Conditions for Two Congruent Triangles",
+    sec_bangunLain: "📘 Sub-Topic 3 — Congruence of Other Plane Figures",
+    sec_contoh: "📝 Practice Problems — Triangle & Figure Congruence",
+    intro_p1: "Two plane figures are said to be",
+    intro_k1: "congruent",
+    intro_p1b: "if one can be placed",
+    intro_em: "exactly",
+    intro_p1c: "on top of the other — like two identical puzzle pieces covering each other without gaps. Congruence applies to",
+    intro_k2: "all types of plane figures",
+    intro_p1d: ", not just triangles!",
+    intro_formal: "📌 Formal Definition",
+    intro_f1: "Two plane figures",
+    intro_f2: "and",
+    intro_f3: "are called congruent",
+    intro_f3b: "if and only if:",
+    intro_c1: "① All corresponding sides are",
+    intro_c1b: "equal in length",
+    intro_c2: "② All corresponding angles are",
+    intro_c2b: "equal in measure",
+    intro_note: "Congruent figures may be flipped (reflected) or rotated to coincide.",
+    k1_summary: "🎯 Key Summary",
+    k1_p1: "If",
+    k1_p1b: ", then two properties hold simultaneously:",
+    k1_rusuk: "① Corresponding sides are equal:",
+    k1_sudut: "② Corresponding angles are equal:",
+    k1_diag_label: "🔍 ILLUSTRATION OF TRIANGLE CONGRUENCE PROPERTIES:",
+    fig1: "Figure 1. Illustration △ABC ≅ △PQR — all corresponding sides equal and all corresponding angles equal",
+    k1_warn: "Watch the order of vertices!",
+    k1_warn2: "means A↔P, B↔Q, C↔R. So",
+    k1_warn3: "(not",
+    k1_warn3b: "!)",
+    k2_summary: "🎯 Key Summary",
+    k2_p1: "To prove two triangles congruent, it suffices to show",
+    k2_p1b: "any one",
+    k2_p1c: "of these 4 conditions:",
+    k2_rrr: "① Condition SSS — Side-Side-Side",
+    fig2: "Figure 2. Condition SSS — all three pairs of corresponding sides equal: AB=PQ, BC=QR, CA=RP",
+    k2_rrr_p: "All three pairs of corresponding sides are equal.",
+    k2_rar: "② Condition SAS — Side-Angle-Side",
+    fig3: "Figure 3. Condition SAS — two sides equal and included angle equal: AB=PQ, ∠A=∠P, AC=PR",
+    k2_rar_p: "Two corresponding sides are equal",
+    k2_rar_pb: "and their included angle",
+    k2_rar_pc: "is equal.",
+    k2_ara: "③ Condition ASA / AAS / SAA — Angle-Side-Angle / Angle-Angle-Side / Side-Angle-Angle",
+    fig4: "Figure 4. Condition ASA/AAS/SAA — one side equal and two corresponding angles equal: ∠A=∠P, AB=PQ, ∠B=∠Q",
+    k2_ara_p: "One corresponding side is equal and two corresponding angles are equal (the side may be between or opposite the angles).",
+    tbl2_title: "📊 SUMMARY OF TRIANGLE CONGRUENCE CONDITIONS:",
+    tbl2_h1: "Code", tbl2_h2: "Condition", tbl2_h3: "Required Elements",
+    tbl2_code_rrr: "SSS", tbl2_code_rar: "SAS", tbl2_code_ara: "ASA", tbl2_code_aar: "AAS/SAA",
+    tbl2_rrr_s: "3 pairs of equal sides", tbl2_rrr_e: "3 sides",
+    tbl2_rar_s: "2 sides + included angle equal", tbl2_rar_e: "2 sides + 1 angle",
+    tbl2_ara_s: "1 side (between) + 2 angles equal", tbl2_ara_e: "1 side + 2 angles",
+    tbl2_aar_s: "1 side (opposite) + 2 angles equal", tbl2_aar_e: "1 side + 2 angles",
+    k3_intro: "Congruence is not limited to triangles. All plane figures — squares, rectangles, parallelograms, trapezoids, rhombuses, kites, circles, and other polygons — can be congruent. The general condition remains the same:",
+    k3_intro_k: "all corresponding sides equal AND all corresponding angles equal.",
+    k3_s1: "① Square",
+    fig5: "Figure 5. Two congruent squares — Square ABCD ≅ Square PQRS if their sides are equal (AB = PQ)",
+    k3_s1_cond_title: "Condition for congruent squares:",
+    k3_s1_cond: "Two squares are congruent if and only if",
+    k3_s1_cond_k: "their side lengths are equal",
+    k3_s1_squareName: "Square",
+    k3_s1_note: "Since all angles of a square are already 90°, only 1 side condition is needed!",
+    k3_s1_prop_title: "Properties when congruent:",
+    k3_s2: "② Rectangle",
+    fig6: "Figure 6. Two congruent rectangles — ABCD ≅ PQRS if length and width are equal (AB=PQ and BC=QR)",
+    k3_s2_cond_title: "Condition for congruent rectangles:",
+    k3_s2_cond: "Two rectangles are congruent if",
+    k3_s2_cond_k: "their length (", k3_s2_cond_kb: ") and width (", k3_s2_cond_kc: ") are equal",
+    k3_s2_note: "All angles of a rectangle are already 90°, so only 2 pairs of corresponding sides need to be equal.",
+    k3_s2_ex_title: "Quick example:",
+    k3_s2_ex1: "Rectangle 6 cm × 4 cm", k3_s2_ex1b: "rectangle 6 cm × 4 cm ✓",
+    k3_s2_ex2: "Rectangle 6 cm × 4 cm", k3_s2_ex2b: "rectangle 4 cm × 6 cm ✗",
+    k3_s2_ex2c: "(check corresponding side pairs!)",
+    k3_s3: "③ Parallelogram",
+    fig7: "Figure 7. Two congruent parallelograms — ABCD ≅ PQRS if two sides equal and included angle equal (AB=PQ, BC=QR, ∠A=∠P)",
+    k3_s3_cond_title: "Condition for congruent parallelograms:",
+    k3_s3_cond: "Two parallelograms are congruent if",
+    k3_s3_cond_k: "two corresponding sides are equal AND the included angle is equal",
+    k3_s3_note: "⚠️ Two parallelograms with equal sides are not necessarily congruent if their angles differ!",
+    k3_s3_prop_title: "Additional properties:",
+    k3_s3_and: "and", k3_s3_opp_angles: "(opposite angles)", k3_s3_adj_angles: "(adjacent angles supplement to 180°)",
+    k3_s4: "④ Trapezoid",
+    fig8: "Figure 8. Two congruent trapezoids — ABCD ≅ PQRS if all corresponding sides and angles are equal",
+    k3_s4_cond_title: "Condition for congruent trapezoids:",
+    k3_s4_cond: "Two trapezoids are congruent if",
+    k3_s4_cond_k: "all corresponding sides are equal AND all corresponding angles are equal",
+    k3_s4_iso_title: "Isosceles Trapezoid:",
+    k3_s4_iso_p: "For congruent isosceles trapezoids, the legs are correspondingly equal and the base angles are equal.",
+    k3_s4_legs: "(legs of equal length)",
+    k3_s5: "⑤ Rhombus",
+    fig9: "Figure 9. Two congruent rhombuses — ABCD ≅ PQRS if sides equal and one included angle equal (AB=PQ and ∠A=∠P)",
+    k3_s5_cond_title: "Condition for congruent rhombuses:",
+    k3_s5_cond: "Two rhombuses are congruent if",
+    k3_s5_cond_k: "their side lengths are equal AND one included angle is equal",
+    k3_s5_note: "⚠️ Two rhombuses with equal sides are not necessarily congruent — the included angles must also be equal!",
+    k3_s5_prop_title: "Additional properties:",
+    k3_s5_p1: "✅", k3_s5_p2: "(all sides equal)", k3_s5_p3: "and",
+    k3_s5_p4: "(opposite angles equal)",
+    k3_s5_p5: "✅ Diagonals bisect each other at right angles",
+    k3_s6: "⑥ Kite",
+    fig10: "Figure 10. Two congruent kites — ABCD ≅ PQRS if all corresponding sides and angles are equal",
+    k3_s6_cond_title: "Condition for congruent kites:",
+    k3_s6_cond: "Two kites are congruent if",
+    k3_s6_cond_k: "all corresponding sides are equal AND all corresponding angles are equal",
+    k3_s6_ang_note: "(angle between the unequal sides)",
+    k3_s6_prop_title: "Properties of kites:",
+    k3_s6_p1: "✅", k3_s6_p1b: "and", k3_s6_p1c: "(two pairs of adjacent sides equal)",
+    k3_s6_p2: "✅", k3_s6_p2b: "(angles between the unequal sides are equal)",
+    k3_s6_p3: "✅ Main diagonal (AC) bisects the other diagonal (BD) at right angles",
+    k3_s7: "⑦ Circle",
+    fig11: "Figure 11. Two congruent circles — if their radii are equal (r₁ = r₂)",
+    k3_s7_cond_title: "Condition for congruent circles:",
+    k3_s7_cond: "Two circles are congruent if and only if",
+    k3_s7_cond_k: "their radii are equal",
+    k3_s7_circle1: "Circle₁", k3_s7_circle2: "Circle₂",
+    k3_s7_note: "Circles have no angles, so only 1 condition is needed: equal radii!",
+    k3_s7_prop_title: "Consequences:",
+    k3_s7_p1: "✅ Equal circumference:", k3_s7_p2: "✅ Equal area:",
+    tbl3_title: "📊 SUMMARY OF CONGRUENCE CONDITIONS FOR PLANE FIGURES:",
+    tbl3_h1: "Figure", tbl3_h2: "Congruence Condition",
+    tbl3_r1n: "Triangle", tbl3_r1v: "SSS / SAS / ASA / AAS (any one)",
+    tbl3_r2n: "Square", tbl3_r2v: "Side lengths equal (1 condition)",
+    tbl3_r3n: "Rectangle", tbl3_r3v: "Corresponding length and width equal",
+    tbl3_r4n: "Parallelogram", tbl3_r4v: "2 corresponding sides + included angle equal",
+    tbl3_r5n: "Trapezoid", tbl3_r5v: "All corresponding sides + angles equal",
+    tbl3_r6n: "Circle", tbl3_r6v: "Radii equal (1 condition)",
+    tbl3_r7n: "n-gon", tbl3_r7v: "All n sides + all n angles correspondingly equal",
+    badge_mudah: "EASY", badge_sedang: "MEDIUM",
+    c1_title: "Example 1 — Congruent Triangles",
+    c1_q: "Look at the figure.",
+    fig12: "Figure 12. Diagram of points P, T, U, S, R, Q — find the number of congruent triangles",
+    c1_q2: "The number of congruent triangles in the figure is . . . .",
+    c1_discuss_title: "SOLUTION:",
+    c1_discuss_intro: "Identify the triangles formed in the figure:",
+    c1_t1: "right-angled at T", c1_t2: "right-angled at S", c1_t3: "formed by T, U, S",
+    c1_discuss_p: "All three triangles are congruent to each other as they satisfy the congruence conditions.",
+    c1_answer: "Answer: D. 3 triangles ✓",
+    c2_title: "Example 2 — Congruence Axiom",
+    c2_q: "Given", c2_q2: "by which axiom? . . . .",
+    fig13: "Figure 13. Diagram △CDA and △CBE with BC = CD and ∠CDA = ∠CBE = 90°",
+    c2_opt_a: "A. \u00a0side, side, side", c2_opt_b: "B. \u00a0side, side, angle",
+    c2_opt_c: "C. \u00a0side, angle, side", c2_opt_d: "D. \u00a0angle, side, angle",
+    c2_discuss_title: "SOLUTION:",
+    c2_discuss_intro: "Check the corresponding elements of",
+    c2_discuss_introb: "and",
+    c2_el1: "(angle C is equal, since A, B, C are collinear)",
+    c2_el2: "(given", c2_el2b: ") ← included side",
+    c2_el3: "(right angles)",
+    c2_discuss_p: "Two angles + included side equal → axiom",
+    c2_discuss_pb: "Angle–Side–Angle (ASA)",
+    c2_answer: "Answer: D. angle, side, angle ✓",
+    c3_title: "Example 3 — Finding the Value of m",
+    c3_q: "If", c3_q2: ", find the value of", c3_q3: ". . . .",
+    fig14: "Figure 14. Diagram △ABC ≅ △PQR — side AC = (12 – m) corresponds to side PR = 5, find m",
+    c3_discuss_title: "SOLUTION:",
+    c3_discuss_intro: "Since", c3_discuss_introb: ", the corresponding sides are:",
+    c3_el1: "Side AC corresponds to side PR",
+    c3_answer: "Answer: D. 7 ✓",
+    rang_title: "📋 Summary — Congruence of Plane Figures",
+    rang_h1: "Figure", rang_h2: "Congruence Condition", rang_h3: "Min. No. of Conditions",
+    rang_r1n: "Triangle", rang_r1v: "SSS, SAS, ASA, or AAS (any one)", rang_r1e: "3 elements",
+    rang_r2n: "Square", rang_r2v: "Equal side length", rang_r2e: "1 element",
+    rang_r3n: "Rectangle", rang_r3v: "Corresponding length and width equal", rang_r3e: "2 elements",
+    rang_r4n: "Parallelogram", rang_r4v: "2 corresponding sides + included angle equal", rang_r4e: "3 elements",
+    rang_r5n: "Trapezoid & Polygon", rang_r5v: "All corresponding sides + all angles equal", rang_r5e: "All elements",
+    rang_r6n: "Circle", rang_r6v: "Equal radii", rang_r6e: "1 element",
+    rang_note1: "Definition:",
+    rang_note1b: "Two figures are congruent (≅) if all corresponding sides are equal AND all corresponding angles are equal",
+    rang_note2: "Important notation:",
+    rang_note2b: "means A↔P, B↔Q, C↔R. Vertex order determines the pairing!",
+    rang_note3: "Figures may be rotated/reflected:",
+    rang_note3b: "Congruence still holds even if one figure is rotated or reflected",
+    tips_title: "💡 Tips & Tricks",
+    tips_1t: "Remember the triangle congruence conditions (SSS, SAS, ASA, AAS):",
+    tips_1b: "S = Side, A = Angle. These conditions guarantee all three sides and three angles are equal — no need to check them one by one!",
+    tips_2t: "Quick way to find corresponding sides from the notation:",
+    tips_2b: "If", tips_2bb: ", match vertices in the same position:",
+    tips_3t: "Distinguish congruence from similarity in multiple-choice:",
+    tips_3b: "If there is a \"scale factor k ≠ 1\" → similar, not congruent. If \"all measurements are exactly equal\" → congruent (k=1).",
+    tips_4t: "For \"find the value of x\" problems:",
+    tips_4b: "Use pairs of corresponding equal sides. If",
+    tips_4bb: ", write the equation directly and solve.",
+    conc_title: "✅ Conclusion",
+    conc_p1: "Congruence of plane figures is the concept of",
+    conc_p1k: "\"perfect overlap\"",
+    conc_p1b: "— two figures that can be stacked on each other with no gaps.",
+    conc_l1: "🔹 Not all figures need all conditions:",
+    conc_l1k: "squares and circles", conc_l1b: "need only 1 condition",
+    conc_l2: "🔹 Triangles have", conc_l2k: "4 proof methods",
+    conc_l2b: "for congruence (SSS, SAS, ASA, AAS)",
+    conc_l3: "🔹 A rotated or reflected figure", conc_l3k: "remains congruent",
+    conc_l4: "🔹 Congruence is a special case of similarity:",
+    conc_note: "Congruence is the foundation of geometric proof — used to prove parallel lines, equal angles, and properties of 3D shapes.",
+    back: "← Back to Congruence and Similarity",
+  },
+  ja: {
+    pageTitle: "平面図形の合同",
+    pageSub: "9年生 · 合同と相似 · 数学",
+    sec_intro: "🧱 合同とは？",
+    sec_konsep1: "📘 第1節 — 合同な2つの三角形の性質",
+    sec_konsep2: "📘 第2節 — 2つの三角形が合同な条件",
+    sec_bangunLain: "📘 第3節 — その他の平面図形の合同",
+    sec_contoh: "📝 練習問題 — 三角形と図形の合同",
+    intro_p1: "2つの平面図形が",
+    intro_k1: "合同",
+    intro_p1b: "であるとは、一方を",
+    intro_em: "ぴったり",
+    intro_p1c: "他方の上に重ねることができることです — まるで同じジグソーパズルのピースのように。合同は",
+    intro_k2: "すべての種類の平面図形",
+    intro_p1d: "に適用されます。三角形だけではありません！",
+    intro_formal: "📌 形式的な定義",
+    intro_f1: "2つの平面図形",
+    intro_f2: "と",
+    intro_f3: "が合同",
+    intro_f3b: "であるのは、次の条件を満たすときかつそのときに限ります：",
+    intro_c1: "① 対応するすべての辺が",
+    intro_c1b: "等しい",
+    intro_c2: "② 対応するすべての角が",
+    intro_c2b: "等しい",
+    intro_note: "合同な図形は、反転（鏡映）または回転して重ね合わせることができます。",
+    k1_summary: "🎯 重要なまとめ",
+    k1_p1: "もし",
+    k1_p1b: "ならば、同時に2つの性質が成立します：",
+    k1_rusuk: "① 対応する辺は等しい：",
+    k1_sudut: "② 対応する角は等しい：",
+    k1_diag_label: "🔍 三角形の合同の性質のイラスト：",
+    fig1: "図1. △ABC ≅ △PQR のイラスト — 対応するすべての辺が等しく、すべての角が等しい",
+    k1_warn: "頂点の順序に注意！",
+    k1_warn2: "はA↔P, B↔Q, C↔Rを意味します。つまり",
+    k1_warn3: "（ではなく",
+    k1_warn3b: "！）",
+    k2_summary: "🎯 重要なまとめ",
+    k2_p1: "2つの三角形の合同を証明するには、次の4つの条件の",
+    k2_p1b: "いずれか1つ",
+    k2_p1c: "を示せば十分です：",
+    k2_rrr: "① 条件SSS — 3辺相等",
+    fig2: "図2. 条件SSS — 3組の対応する辺がすべて等しい：AB=PQ, BC=QR, CA=RP",
+    k2_rrr_p: "3組の対応する辺がすべて等しい。",
+    k2_rar: "② 条件SAS — 2辺夾角",
+    fig3: "図3. 条件SAS — 2辺が等しく挟む角も等しい：AB=PQ, ∠A=∠P, AC=PR",
+    k2_rar_p: "2辺が等しく",
+    k2_rar_pb: "その挟む角も",
+    k2_rar_pc: "等しい。",
+    k2_ara: "③ 条件ASA / AAS / SAA — 2角夾辺 / 2角1辺",
+    fig4: "図4. 条件ASA/AAS/SAA — 1辺が等しく2角が等しい：∠A=∠P, AB=PQ, ∠B=∠Q",
+    k2_ara_p: "1辺が等しく2角が等しい（辺は角に挟まれていても対向していても可）。",
+    tbl2_title: "📊 三角形の合同条件のまとめ：",
+    tbl2_h1: "記号", tbl2_h2: "条件", tbl2_h3: "必要な要素",
+    tbl2_code_rrr: "SSS", tbl2_code_rar: "SAS", tbl2_code_ara: "ASA", tbl2_code_aar: "AAS/SAA",
+    tbl2_rrr_s: "3組の辺が等しい", tbl2_rrr_e: "3辺",
+    tbl2_rar_s: "2辺＋挟む角が等しい", tbl2_rar_e: "2辺＋1角",
+    tbl2_ara_s: "1辺（挟まれた）＋2角が等しい", tbl2_ara_e: "1辺＋2角",
+    tbl2_aar_s: "1辺（対向する）＋2角が等しい", tbl2_aar_e: "1辺＋2角",
+    k3_intro: "合同は三角形に限りません。正方形、長方形、平行四辺形、台形、ひし形、凧形、円、その他の多角形など、すべての平面図形が合同になれます。一般条件は変わりません：",
+    k3_intro_k: "対応するすべての辺が等しく、かつ対応するすべての角が等しい。",
+    k3_s1: "① 正方形",
+    fig5: "図5. 2つの合同な正方形 — 正方形ABCD ≅ 正方形PQRSは辺が等しいとき (AB = PQ)",
+    k3_s1_cond_title: "正方形の合同条件：",
+    k3_s1_cond: "2つの正方形は",
+    k3_s1_cond_k: "辺の長さが等しい",
+    k3_s1_squareName: "正方形",
+    k3_s1_note: "正方形のすべての角はすでに90°なので、条件は辺1つだけ！",
+    k3_s1_prop_title: "合同な場合の性質：",
+    k3_s2: "② 長方形",
+    fig6: "図6. 2つの合同な長方形 — ABCD ≅ PQRSは縦と横が等しいとき (AB=PQ かつ BC=QR)",
+    k3_s2_cond_title: "長方形の合同条件：",
+    k3_s2_cond: "2つの長方形は",
+    k3_s2_cond_k: "縦（", k3_s2_cond_kb: "）と横（", k3_s2_cond_kc: "）が等しい",
+    k3_s2_note: "長方形のすべての角は90°なので、対応する2組の辺が等しければよい。",
+    k3_s2_ex_title: "クイック例：",
+    k3_s2_ex1: "6 cm × 4 cm の長方形", k3_s2_ex1b: "6 cm × 4 cm の長方形 ✓",
+    k3_s2_ex2: "6 cm × 4 cm の長方形", k3_s2_ex2b: "4 cm × 6 cm の長方形 ✗",
+    k3_s2_ex2c: "（対応する辺の組を確認！）",
+    k3_s3: "③ 平行四辺形",
+    fig7: "図7. 2つの合同な平行四辺形 — ABCD ≅ PQRSは2辺と挟む角が等しいとき (AB=PQ, BC=QR, ∠A=∠P)",
+    k3_s3_cond_title: "平行四辺形の合同条件：",
+    k3_s3_cond: "2つの平行四辺形は",
+    k3_s3_cond_k: "2辺が等しくかつ挟む角が等しい",
+    k3_s3_note: "⚠️ 辺が等しい2つの平行四辺形でも、角が異なれば合同ではない！",
+    k3_s3_prop_title: "追加の性質：",
+    k3_s3_and: "かつ", k3_s3_opp_angles: "（対角）", k3_s3_adj_angles: "（隣接する角の和 = 180°）",
+    k3_s4: "④ 台形",
+    fig8: "図8. 2つの合同な台形 — ABCD ≅ PQRSは対応するすべての辺と角が等しいとき",
+    k3_s4_cond_title: "台形の合同条件：",
+    k3_s4_cond: "2つの台形は",
+    k3_s4_cond_k: "対応するすべての辺が等しくかつ対応するすべての角が等しい",
+    k3_s4_iso_title: "等脚台形：",
+    k3_s4_iso_p: "合同な等脚台形では、脚が対応して等しく底角も等しい。",
+    k3_s4_legs: "（脚の長さが等しい）",
+    k3_s5: "⑤ ひし形",
+    fig9: "図9. 2つの合同なひし形 — ABCD ≅ PQRSは辺が等しく挟む角が等しいとき (AB=PQ かつ ∠A=∠P)",
+    k3_s5_cond_title: "ひし形の合同条件：",
+    k3_s5_cond: "2つのひし形は",
+    k3_s5_cond_k: "辺の長さが等しくかつ1つの挟む角が等しい",
+    k3_s5_note: "⚠️ 辺が等しい2つのひし形でも合同とは限りません — 挟む角も等しくなければ！",
+    k3_s5_prop_title: "追加の性質：",
+    k3_s5_p1: "✅", k3_s5_p2: "（すべての辺が等しい）", k3_s5_p3: "かつ",
+    k3_s5_p4: "（対角が等しい）",
+    k3_s5_p5: "✅ 対角線は互いに垂直二等分する",
+    k3_s6: "⑥ 凧形（たこ形）",
+    fig10: "図10. 2つの合同な凧形 — ABCD ≅ PQRSは対応するすべての辺と角が等しいとき",
+    k3_s6_cond_title: "凧形の合同条件：",
+    k3_s6_cond: "2つの凧形は",
+    k3_s6_cond_k: "対応するすべての辺が等しくかつ対応するすべての角が等しい",
+    k3_s6_ang_note: "（等しくない辺の間の角）",
+    k3_s6_prop_title: "凧形の性質：",
+    k3_s6_p1: "✅", k3_s6_p1b: "かつ", k3_s6_p1c: "（隣り合う2組の辺が等しい）",
+    k3_s6_p2: "✅", k3_s6_p2b: "（等しくない辺の間の角が等しい）",
+    k3_s6_p3: "✅ 主対角線（AC）は他の対角線（BD）を垂直二等分する",
+    k3_s7: "⑦ 円",
+    fig11: "図11. 2つの合同な円 — 半径が等しいとき (r₁ = r₂)",
+    k3_s7_cond_title: "円の合同条件：",
+    k3_s7_cond: "2つの円は",
+    k3_s7_cond_k: "半径が等しい",
+    k3_s7_circle1: "円₁", k3_s7_circle2: "円₂",
+    k3_s7_note: "円には角がないので条件は1つだけ：半径が等しい！",
+    k3_s7_prop_title: "結果として：",
+    k3_s7_p1: "✅ 等しい円周：", k3_s7_p2: "✅ 等しい面積：",
+    tbl3_title: "📊 各平面図形の合同条件のまとめ：",
+    tbl3_h1: "図形", tbl3_h2: "合同条件",
+    tbl3_r1n: "三角形", tbl3_r1v: "SSS / SAS / ASA / AAS（いずれか1つ）",
+    tbl3_r2n: "正方形", tbl3_r2v: "辺が等しい（条件1つ）",
+    tbl3_r3n: "長方形", tbl3_r3v: "対応する縦と横が等しい",
+    tbl3_r4n: "平行四辺形", tbl3_r4v: "対応する2辺＋挟む角が等しい",
+    tbl3_r5n: "台形", tbl3_r5v: "対応するすべての辺と角が等しい",
+    tbl3_r6n: "円", tbl3_r6v: "半径が等しい（条件1つ）",
+    tbl3_r7n: "n角形", tbl3_r7v: "n組の辺と角がすべて対応して等しい",
+    badge_mudah: "やさしい", badge_sedang: "ふつう",
+    c1_title: "例題1 — 合同な三角形",
+    c1_q: "次の図を見なさい。",
+    fig12: "図12. 点P, T, U, S, R, Qの図 — 合同な三角形の数を求めよ",
+    c1_q2: "図の中の合同な三角形の数は . . . .",
+    c1_discuss_title: "解説：",
+    c1_discuss_intro: "図の中にできる三角形を特定する：",
+    c1_t1: "Tで直角", c1_t2: "Sで直角", c1_t3: "T, U, Sからなる",
+    c1_discuss_p: "3つの三角形はいずれも合同の条件を満たすため、互いに合同です。",
+    c1_answer: "答え：D. 3個 ✓",
+    c2_title: "例題2 — 合同の公理",
+    c2_q: "辺の長さ", c2_q2: "はどの公理によるか . . . .",
+    fig13: "図13. △CDAと△CBEの図（BC = CD、∠CDA = ∠CBE = 90°）",
+    c2_opt_a: "A. \u00a0辺、辺、辺", c2_opt_b: "B. \u00a0辺、辺、角",
+    c2_opt_c: "C. \u00a0辺、角、辺", c2_opt_d: "D. \u00a0角、辺、角",
+    c2_discuss_title: "解説：",
+    c2_discuss_intro: "対応する要素を確認する：",
+    c2_discuss_introb: "と",
+    c2_el1: "（A, B, Cが同一直線上にあるためCの角は等しい）",
+    c2_el2: "（既知", c2_el2b: "）← 挟む辺",
+    c2_el3: "（直角）",
+    c2_discuss_p: "2角＋挟む辺が等しい → 公理",
+    c2_discuss_pb: "角–辺–角（ASA）",
+    c2_answer: "答え：D. 角、辺、角 ✓",
+    c3_title: "例題3 — mの値を求める",
+    c3_q: "もし", c3_q2: "ならば", c3_q3: "の値は . . . .",
+    fig14: "図14. △ABC ≅ △PQRの図 — 辺AC = (12 – m)が辺PR = 5に対応、mを求めよ",
+    c3_discuss_title: "解説：",
+    c3_discuss_intro: "より", c3_discuss_introb: "、対応する辺は：",
+    c3_el1: "辺ACは辺PRに対応する",
+    c3_answer: "答え：D. 7 ✓",
+    rang_title: "📋 まとめ — 平面図形の合同",
+    rang_h1: "図形", rang_h2: "合同条件", rang_h3: "最小条件数",
+    rang_r1n: "三角形", rang_r1v: "SSS, SAS, ASA, またはAAS（いずれか）", rang_r1e: "3要素",
+    rang_r2n: "正方形", rang_r2v: "等しい辺の長さ", rang_r2e: "1要素",
+    rang_r3n: "長方形", rang_r3v: "対応する縦と横が等しい", rang_r3e: "2要素",
+    rang_r4n: "平行四辺形", rang_r4v: "2辺対応等しい＋挟む角等しい", rang_r4e: "3要素",
+    rang_r5n: "台形・多角形", rang_r5v: "すべての辺が対応等しい＋すべての角等しい", rang_r5e: "全要素",
+    rang_r6n: "円", rang_r6v: "等しい半径", rang_r6e: "1要素",
+    rang_note1: "定義：",
+    rang_note1b: "2つの図形は合同(≅)、すべての対応する辺が等しくかつすべての対応する角が等しいとき",
+    rang_note2: "重要な記法：",
+    rang_note2b: "はA↔P, B↔Q, C↔Rを意味します。頂点の順序が対応を決めます！",
+    rang_note3: "図形は回転・反転可能：",
+    rang_note3b: "一方の図形が回転または鏡映されていても合同は成立します",
+    tips_title: "💡 コツとテクニック",
+    tips_1t: "三角形の合同条件（SSS, SAS, ASA, AAS）を覚える：",
+    tips_1b: "S = 辺（Side）、A = 角（Angle）。これらの条件で3辺と3角がすべて自動的に等しくなります — 一つ一つ確認する必要はありません！",
+    tips_2t: "記法から対応する辺を素早く見つける方法：",
+    tips_2b: "もし", tips_2bb: "なら、同じ位置の頂点を対応させる：",
+    tips_3t: "選択問題で合同と相似を区別する：",
+    tips_3b: "「スケール係数k ≠ 1」があれば → 相似（合同ではない）。「すべての寸法がまったく同じ」なら → 合同（k=1）。",
+    tips_4t: "「xの値を求める」問題：",
+    tips_4b: "等しい対応辺の組を使う。もし",
+    tips_4bb: "なら、直接方程式を立てて解く。",
+    conc_title: "✅ 結論",
+    conc_p1: "平面図形の合同は",
+    conc_p1k: "「完全に重なる」",
+    conc_p1b: "という概念です — 隙間も余りもなく重ねることができる2つの図形。",
+    conc_l1: "🔹 すべての図形がすべての条件を必要とするわけではない：",
+    conc_l1k: "正方形と円", conc_l1b: "は条件が1つだけ",
+    conc_l2: "🔹 三角形には合同の", conc_l2k: "4つの証明方法",
+    conc_l2b: "がある（SSS, SAS, ASA, AAS）",
+    conc_l3: "🔹 回転・鏡映された図形も", conc_l3k: "合同のまま",
+    conc_l4: "🔹 合同は相似の特殊なケース：",
+    conc_note: "合同は幾何学的証明の基礎 — 平行線、等角、立体図形の性質を証明するのに使われます。",
+    back: "← 合同と相似に戻る",
+  },
+};
+type TKey = typeof translations.id;
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SVG DIAGRAMS — TRIANGLE CONGRUENCE
@@ -851,6 +1457,8 @@ const DiagramTrapesium = () => (
 
 const KekongruenBangunDatarPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const t = translations[language as keyof typeof translations] ?? translations.id;
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "konsep1", "konsep2", "bangunLain", "contoh1",
   ]);
@@ -887,37 +1495,35 @@ const KekongruenBangunDatarPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          KEKONGRUENAN BANGUN DATAR
+          {t.pageTitle}
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">
-          Kelas 9 · Kesebangunan dan Kekongruenan · Materi Matematika
+          {t.pageSub}
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* ── INTRO ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" label="🧱 Apa Itu Kekongruenan?" />
+            <Header id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" label={t.sec_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Dua bangun datar dikatakan <strong className="text-cyan-300">kongruen</strong> jika salah satunya dapat
-                  ditutupkan <em>persis</em> di atas yang lain — seperti dua puzzle identik yang saling menutupi tanpa celah.
-                  Kekongruenan berlaku untuk <strong className="text-yellow-300">semua jenis bangun datar</strong>, bukan hanya segitiga!
+                  {t.intro_p1} <strong className="text-cyan-300">{t.intro_k1}</strong> {t.intro_p1b}{" "}
+                  <em>{t.intro_em}</em> {t.intro_p1c}{" "}
+                  <strong className="text-yellow-300">{t.intro_k2}</strong>{t.intro_p1d}
                 </p>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2">
-                  <p className="font-body text-sm font-semibold text-cyan-300">📌 Definisi Formal</p>
+                  <p className="font-body text-sm font-semibold text-cyan-300">{t.intro_formal}</p>
                   <p className="font-body text-sm text-white/80">
-                    Dua bangun datar <InlineMath math="F_1" /> dan <InlineMath math="F_2" /> disebut kongruen
-                    (<InlineMath math="F_1 \cong F_2" />) jika dan hanya jika:
+                    {t.intro_f1} <InlineMath math="F_1" /> {t.intro_f2} <InlineMath math="F_2" /> {t.intro_f3}{" "}
+                    (<InlineMath math="F_1 \cong F_2" />) {t.intro_f3b}
                   </p>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 font-body text-sm text-white/80">
-                    <p>① Semua sisi yang bersesuaian <strong className="text-green-300">sama panjang</strong></p>
-                    <p>② Semua sudut yang bersesuaian <strong className="text-blue-300">sama besar</strong></p>
+                    <p>{t.intro_c1} <strong className="text-green-300">{t.intro_c1b}</strong></p>
+                    <p>{t.intro_c2} <strong className="text-blue-300">{t.intro_c2b}</strong></p>
                   </div>
-                  <p className="font-body text-xs text-white/60 italic">
-                    Bangun yang kongruen bisa saja dibalik (refleksi) atau diputar untuk saling menutupi.
-                  </p>
+                  <p className="font-body text-xs text-white/60 italic">{t.intro_note}</p>
                 </div>
               </div>
             )}
@@ -925,39 +1531,37 @@ const KekongruenBangunDatarPage = () => {
 
           {/* ── SIFAT SEGITIGA ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="konsep1" icon={<Target className="w-5 h-5" />} color="#4ade80" label="📘 Sub-Bab 1 — Sifat Dua Segitiga Kongruen" />
+            <Header id="konsep1" icon={<Target className="w-5 h-5" />} color="#4ade80" label={t.sec_konsep1} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-green-300">🎯 Ringkasan Intisari</p>
+                  <p className="font-body text-sm font-semibold text-green-300">{t.k1_summary}</p>
                   <p className="font-body text-sm text-white/80">
-                    Jika <InlineMath math="\triangle ABC \cong \triangle PQR" />, maka berlaku dua sifat sekaligus:
+                    {t.k1_p1} <InlineMath math="\triangle ABC \cong \triangle PQR" /> {t.k1_p1b}
                   </p>
                   <div className="bg-slate-900/60 rounded-lg p-4 space-y-3">
                     <div>
-                      <p className="font-body text-xs font-semibold text-green-300 mb-1">① Rusuk-rusuk bersesuaian sama panjang:</p>
+                      <p className="font-body text-xs font-semibold text-green-300 mb-1">{t.k1_rusuk}</p>
                       <BlockMath math="AB = PQ, \quad BC = QR, \quad CA = RP" />
                     </div>
                     <div>
-                      <p className="font-body text-xs font-semibold text-blue-300 mb-1">② Sudut-sudut bersesuaian sama besar:</p>
+                      <p className="font-body text-xs font-semibold text-blue-300 mb-1">{t.k1_sudut}</p>
                       <BlockMath math="\angle A = \angle P, \quad \angle B = \angle Q, \quad \angle C = \angle R" />
                     </div>
                   </div>
                 </div>
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
-                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI SIFAT KEKONGRUENAN SEGITIGA:</p>
+                  <p className="font-body text-xs font-semibold text-slate-300 mb-3">{t.k1_diag_label}</p>
                   <figure>
                     <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["○","×","y"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 1. Ilustrasi △ABC ≅ △PQR — semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig1}</figcaption>
                   </figure>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>⚠️ Perhatikan urutan penulisan!</strong>{" "}
-                    <InlineMath math="\triangle ABC \cong \triangle PQR" /> berarti A↔P, B↔Q, C↔R.
-                    Jadi <InlineMath math="AB = PQ" /> (bukan <InlineMath math="AB = PR" />!).
+                    <strong>⚠️ {t.k1_warn}</strong>{" "}
+                    <InlineMath math="\triangle ABC \cong \triangle PQR" /> {t.k1_warn2}{" "}
+                    <InlineMath math="AB = PQ" /> {t.k1_warn3} <InlineMath math="AB = PR" />{t.k1_warn3b}
                   </p>
                 </div>
               </div>
@@ -966,63 +1570,52 @@ const KekongruenBangunDatarPage = () => {
 
           {/* ── SYARAT SEGITIGA ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="konsep2" icon={<Target className="w-5 h-5" />} color="#c084fc" label="📘 Sub-Bab 2 — Syarat Dua Segitiga Kongruen" />
+            <Header id="konsep2" icon={<Target className="w-5 h-5" />} color="#c084fc" label={t.sec_konsep2} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-2">
-                  <p className="font-body text-sm font-semibold text-purple-300">🎯 Ringkasan Intisari</p>
+                  <p className="font-body text-sm font-semibold text-purple-300">{t.k2_summary}</p>
                   <p className="font-body text-sm text-white/80">
-                    Untuk membuktikan dua segitiga kongruen, cukup tunjukkan <strong>salah satu</strong> dari 4 syarat berikut:
+                    {t.k2_p1} <strong>{t.k2_p1b}</strong> {t.k2_p1c}
                   </p>
                 </div>
 
-                {/* RRR */}
+                {/* SSS / RRR */}
                 <div className="bg-slate-800/60 border border-green-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-green-300">① Syarat RRR — Sisi-Sisi-Sisi</p>
+                  <p className="font-body text-sm font-semibold text-green-300">{t.k2_rrr}</p>
                   <figure>
-                    <DragCongruenceDemo shape="triangle" leftLabels={["A", "B", "C"]} rightLabels={["P", "Q", "R"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 2. Syarat RRR — ketiga pasang sisi bersesuaian sama panjang: AB=PQ, BC=QR, CA=RP
-                    </figcaption>
+                    <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} />
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig2}</figcaption>
                   </figure>
-                  <p className="font-body text-sm text-white/80">
-                    Ketiga pasang sisi bersesuaian sama panjang.
-                  </p>
+                  <p className="font-body text-sm text-white/80">{t.k2_rrr_p}</p>
                   <div className="bg-slate-900/50 rounded p-3">
                     <BlockMath math="AB=PQ,\; BC=QR,\; CA=RP \Rightarrow \triangle ABC \cong \triangle PQR" />
                   </div>
                 </div>
 
-                {/* RAR */}
+                {/* SAS / RAR */}
                 <div className="bg-slate-800/60 border border-purple-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-purple-300">② Syarat RAR — Sisi-Sudut-Sisi</p>
+                  <p className="font-body text-sm font-semibold text-purple-300">{t.k2_rar}</p>
                   <figure>
                     <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["○"]} hideTicks={[2]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 3. Syarat RAR — dua sisi bersesuaian sama panjang dan sudut apitnya sama besar: AB=PQ, ∠A=∠P, AC=PR
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig3}</figcaption>
                   </figure>
                   <p className="font-body text-sm text-white/80">
-                    Dua sisi bersesuaian sama panjang <strong>dan sudut apitnya</strong> sama besar.
+                    {t.k2_rar_p} <strong>{t.k2_rar_pb}</strong> {t.k2_rar_pc}
                   </p>
                   <div className="bg-slate-900/50 rounded p-3">
                     <BlockMath math="AB=PQ,\; \angle A=\angle P,\; AC=PR \Rightarrow \triangle ABC \cong \triangle PQR" />
                   </div>
                 </div>
 
-                {/* ARA / AAR */}
+                {/* ASA / ARA / AAR */}
                 <div className="bg-slate-800/60 border border-cyan-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-cyan-300">③ Syarat ARA / AAR / RAA — Sudut-Sisi-Sudut / Sudut-Sudut-Sisi / Sisi-Sudut-Sudut</p>
+                  <p className="font-body text-sm font-semibold text-cyan-300">{t.k2_ara}</p>
                   <figure>
                     <DragCongruenceDemo shape="triangle" leftLabels={["A","B","C"]} rightLabels={["P","Q","R"]} angleMarks={["","×","y"]} hideTicks={[0,2]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 4. Syarat ARA/AAR/RAA — satu sisi sama panjang dan dua sudut bersesuaian sama besar: ∠A=∠P, AB=PQ, ∠B=∠Q
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig4}</figcaption>
                   </figure>
-                  <p className="font-body text-sm text-white/80">
-                    Satu sisi bersesuaian sama panjang dan dua sudut bersesuaian sama besar
-                    (sisi boleh diapit atau dihadapkan ke salah satu sudut).
-                  </p>
+                  <p className="font-body text-sm text-white/80">{t.k2_ara_p}</p>
                   <div className="bg-slate-900/50 rounded p-3">
                     <BlockMath math="\angle A=\angle P,\; AB=PQ,\; \angle B=\angle Q \Rightarrow \triangle ABC \cong \triangle PQR" />
                   </div>
@@ -1030,20 +1623,20 @@ const KekongruenBangunDatarPage = () => {
 
                 {/* Tabel ringkasan */}
                 <div className="bg-slate-900/60 border border-slate-600/40 rounded-lg p-4 overflow-x-auto">
-                  <p className="font-body text-xs font-semibold text-slate-300 mb-2">📊 RINGKASAN SYARAT KEKONGRUENAN SEGITIGA:</p>
+                  <p className="font-body text-xs font-semibold text-slate-300 mb-2">{t.tbl2_title}</p>
                   <table className="w-full font-body text-xs text-white/80">
                     <thead>
                       <tr className="border-b border-slate-600">
-                        <th className="text-left py-2 pr-3 text-cyan-300">Kode</th>
-                        <th className="text-left py-2 pr-3 text-cyan-300">Syarat</th>
-                        <th className="text-left py-2 text-cyan-300">Yang Dibutuhkan</th>
+                        <th className="text-left py-2 pr-3 text-cyan-300">{t.tbl2_h1}</th>
+                        <th className="text-left py-2 pr-3 text-cyan-300">{t.tbl2_h2}</th>
+                        <th className="text-left py-2 text-cyan-300">{t.tbl2_h3}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-700/60">
-                      <tr><td className="py-2 pr-3 text-green-300 font-bold">RRR</td><td className="py-2 pr-3">3 pasang sisi sama</td><td className="py-2">3 rusuk</td></tr>
-                      <tr><td className="py-2 pr-3 text-purple-300 font-bold">RAR</td><td className="py-2 pr-3">2 sisi + sudut apit sama</td><td className="py-2">2 rusuk + 1 sudut</td></tr>
-                      <tr><td className="py-2 pr-3 text-cyan-300 font-bold">ARA</td><td className="py-2 pr-3">1 sisi diapit + 2 sudut sama</td><td className="py-2">1 rusuk + 2 sudut</td></tr>
-                      <tr><td className="py-2 pr-3 text-yellow-300 font-bold">AAR/RAA</td><td className="py-2 pr-3">1 sisi dihadapkan + 2 sudut sama</td><td className="py-2">1 rusuk + 2 sudut</td></tr>
+                      <tr><td className="py-2 pr-3 text-green-300 font-bold">{t.tbl2_code_rrr}</td><td className="py-2 pr-3">{t.tbl2_rrr_s}</td><td className="py-2">{t.tbl2_rrr_e}</td></tr>
+                      <tr><td className="py-2 pr-3 text-purple-300 font-bold">{t.tbl2_code_rar}</td><td className="py-2 pr-3">{t.tbl2_rar_s}</td><td className="py-2">{t.tbl2_rar_e}</td></tr>
+                      <tr><td className="py-2 pr-3 text-cyan-300 font-bold">{t.tbl2_code_ara}</td><td className="py-2 pr-3">{t.tbl2_ara_s}</td><td className="py-2">{t.tbl2_ara_e}</td></tr>
+                      <tr><td className="py-2 pr-3 text-yellow-300 font-bold">{t.tbl2_code_aar}</td><td className="py-2 pr-3">{t.tbl2_aar_s}</td><td className="py-2">{t.tbl2_aar_e}</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -1053,39 +1646,36 @@ const KekongruenBangunDatarPage = () => {
 
           {/* ── KEKONGRUENAN BANGUN SELAIN SEGITIGA ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="bangunLain" icon={<Shapes className="w-5 h-5" />} color="#38bdf8" label="📘 Sub-Bab 3 — Kekongruenan Bangun Datar Lainnya" />
+            <Header id="bangunLain" icon={<Shapes className="w-5 h-5" />} color="#38bdf8" label={t.sec_bangunLain} />
             {true && (
               <div className="px-5 pb-5 space-y-5">
                 <div className="bg-sky-500/10 border border-sky-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-sky-200">
-                    Kekongruenan tidak hanya berlaku pada segitiga. Semua bangun datar — persegi, persegi panjang,
-                    jajar genjang, trapesium, belah ketupat, layang-layang, lingkaran, maupun poligon lainnya — dapat bersifat kongruen.
-                    Syarat umumnya tetap sama: <strong className="text-yellow-300">semua sisi bersesuaian sama panjang
-                    DAN semua sudut bersesuaian sama besar.</strong>
+                    {t.k3_intro}{" "}
+                    <strong className="text-yellow-300">{t.k3_intro_k}</strong>
                   </p>
                 </div>
 
                 {/* Persegi */}
                 <div className="bg-slate-800/60 border border-blue-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-blue-300">① Persegi (Square)</p>
+                  <p className="font-body text-sm font-semibold text-blue-300">{t.k3_s1}</p>
                   <figure>
                     <DragCongruenceDemo shape="square" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 5. Dua persegi kongruen — Persegi ABCD ≅ Persegi PQRS jika sisinya sama panjang (AB = PQ)
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig5}</figcaption>
                   </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
-                    <p className="font-semibold text-blue-200">Syarat kekongruenan persegi:</p>
-                    <p>Dua persegi kongruen jika dan hanya jika <strong className="text-yellow-300">panjang sisinya sama</strong>.</p>
-                    <div className="bg-slate-900/70 rounded p-2 mt-1">
-                      <BlockMath math="\text{Persegi } ABCD \cong \text{Persegi } PQRS \iff AB = PQ" />
+                    <p className="font-semibold text-blue-200">{t.k3_s1_cond_title}</p>
+                    <p>{t.k3_s1_cond} <strong className="text-yellow-300">{t.k3_s1_cond_k}</strong>.</p>
+                    <div className="bg-slate-900/70 rounded p-2 mt-1 text-center">
+                      <span className="font-body text-sm text-white/80 italic">{t.k3_s1_squareName}</span>{" "}
+                      <InlineMath math="ABCD \cong" />{" "}
+                      <span className="font-body text-sm text-white/80 italic">{t.k3_s1_squareName}</span>{" "}
+                      <InlineMath math="PQRS \iff AB = PQ" />
                     </div>
-                    <p className="text-xs text-white/60 italic">
-                      Karena semua sudut persegi sudah 90°, hanya 1 syarat sisi yang diperlukan!
-                    </p>
+                    <p className="text-xs text-white/60 italic">{t.k3_s1_note}</p>
                   </div>
                   <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 font-body text-sm text-white/80 space-y-1">
-                    <p className="font-semibold text-blue-300">Sifat yang berlaku jika kongruen:</p>
+                    <p className="font-semibold text-blue-300">{t.k3_s1_prop_title}</p>
                     <p>✅ <InlineMath math="AB = BC = CD = DA = PQ = QR = RS = SP" /></p>
                     <p>✅ <InlineMath math="\angle A = \angle B = \angle C = \angle D = \angle P = \angle Q = \angle R = \angle S = 90°" /></p>
                   </div>
@@ -1093,181 +1683,171 @@ const KekongruenBangunDatarPage = () => {
 
                 {/* Persegi Panjang */}
                 <div className="bg-slate-800/60 border border-sky-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-sky-300">② Persegi Panjang (Rectangle)</p>
+                  <p className="font-body text-sm font-semibold text-sky-300">{t.k3_s2}</p>
                   <figure>
                     <DragCongruenceDemo shape="rectangle" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 6. Dua persegi panjang kongruen — ABCD ≅ PQRS jika panjang dan lebarnya sama (AB=PQ dan BC=QR)
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig6}</figcaption>
                   </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
-                    <p className="font-semibold text-sky-200">Syarat kekongruenan persegi panjang:</p>
-                    <p>Dua persegi panjang kongruen jika <strong className="text-yellow-300">panjang (<InlineMath math="p" />) dan lebarnya (<InlineMath math="l" />) sama</strong>.</p>
-                    <div className="bg-slate-900/70 rounded p-2 mt-1">
-                      <BlockMath math="ABCD \cong PQRS \iff AB = PQ \text{ dan } BC = QR" />
-                    </div>
-                    <p className="text-xs text-white/60 italic">
-                      Semua sudut persegi panjang sudah 90°, jadi hanya perlu 2 pasang sisi bersesuaian sama.
+                    <p className="font-semibold text-sky-200">{t.k3_s2_cond_title}</p>
+                    <p>
+                      {t.k3_s2_cond}{" "}
+                      <strong className="text-yellow-300">
+                        {t.k3_s2_cond_k}<InlineMath math="p" />{t.k3_s2_cond_kb}<InlineMath math="l" />{t.k3_s2_cond_kc}
+                      </strong>.
                     </p>
+                    <div className="bg-slate-900/70 rounded p-2 mt-1">
+                      <BlockMath math="ABCD \cong PQRS \iff AB = PQ,\; BC = QR" />
+                    </div>
+                    <p className="text-xs text-white/60 italic">{t.k3_s2_note}</p>
                   </div>
                   <div className="bg-sky-500/10 border border-sky-500/20 rounded-lg p-3 font-body text-sm text-white/80 space-y-1">
-                    <p className="font-semibold text-sky-300">Contoh cepat:</p>
-                    <p>Persegi panjang 6 cm × 4 cm <strong className="text-yellow-300">≅</strong> persegi panjang 6 cm × 4 cm ✓</p>
-                    <p>Persegi panjang 6 cm × 4 cm <strong className="text-red-400">≇</strong> persegi panjang 4 cm × 6 cm ✗
-                      <span className="text-xs text-white/50 ml-1">(perlu periksa pasangan sisi yang bersesuaian!)</span>
+                    <p className="font-semibold text-sky-300">{t.k3_s2_ex_title}</p>
+                    <p>{t.k3_s2_ex1} <strong className="text-yellow-300">≅</strong> {t.k3_s2_ex1b}</p>
+                    <p>{t.k3_s2_ex2} <strong className="text-red-400">≇</strong> {t.k3_s2_ex2b}{" "}
+                      <span className="text-xs text-white/50 ml-1">{t.k3_s2_ex2c}</span>
                     </p>
                   </div>
                 </div>
 
                 {/* Jajar Genjang */}
                 <div className="bg-slate-800/60 border border-yellow-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-yellow-300">③ Jajar Genjang (Parallelogram)</p>
+                  <p className="font-body text-sm font-semibold text-yellow-300">{t.k3_s3}</p>
                   <figure>
                     <DragCongruenceDemo shape="parallelogram" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 7. Dua jajar genjang kongruen — ABCD ≅ PQRS jika dua sisi bersesuaian sama panjang dan sudut apitnya sama besar (AB=PQ, BC=QR, ∠A=∠P)
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig7}</figcaption>
                   </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
-                    <p className="font-semibold text-yellow-200">Syarat kekongruenan jajar genjang:</p>
-                    <p>Dua jajar genjang kongruen jika <strong className="text-yellow-300">dua sisi bersesuaian sama panjang DAN sudut apit sama besar</strong>.</p>
+                    <p className="font-semibold text-yellow-200">{t.k3_s3_cond_title}</p>
+                    <p>{t.k3_s3_cond} <strong className="text-yellow-300">{t.k3_s3_cond_k}</strong>.</p>
                     <div className="bg-slate-900/70 rounded p-2 mt-1">
                       <BlockMath math="ABCD \cong PQRS \iff AB=PQ,\; BC=QR,\; \angle A=\angle P" />
                     </div>
-                    <p className="text-xs text-white/60 italic">
-                      ⚠️ Dua jajar genjang dengan sisi sama belum tentu kongruen jika sudutnya berbeda!
-                    </p>
+                    <p className="text-xs text-white/60 italic">{t.k3_s3_note}</p>
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3 font-body text-sm text-white/80 space-y-1">
-                    <p className="font-semibold text-yellow-300">Sifat tambahan:</p>
-                    <p>✅ <InlineMath math="AB = CD = PQ = RS" /> dan <InlineMath math="BC = AD = QR = PS" /></p>
-                    <p>✅ <InlineMath math="\angle A = \angle C = \angle P = \angle R" /> (sudut-sudut berhadapan)</p>
-                    <p>✅ <InlineMath math="\angle A + \angle B = 180°" /> (sudut-sudut berdekatan)</p>
+                    <p className="font-semibold text-yellow-300">{t.k3_s3_prop_title}</p>
+                    <p>✅ <InlineMath math="AB = CD = PQ = RS" /> {t.k3_s3_and} <InlineMath math="BC = AD = QR = PS" /></p>
+                    <p>✅ <InlineMath math="\angle A = \angle C = \angle P = \angle R" /> {t.k3_s3_opp_angles}</p>
+                    <p>✅ <InlineMath math="\angle A + \angle B = 180°" /> {t.k3_s3_adj_angles}</p>
                   </div>
                 </div>
 
                 {/* Trapesium */}
                 <div className="bg-slate-800/60 border border-teal-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-teal-300">④ Trapesium (Trapezoid)</p>
+                  <p className="font-body text-sm font-semibold text-teal-300">{t.k3_s4}</p>
                   <figure>
                     <DragCongruenceDemo shape="trapezoid" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 8. Dua trapesium kongruen — ABCD ≅ PQRS jika semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig8}</figcaption>
                   </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
-                    <p className="font-semibold text-teal-200">Syarat kekongruenan trapesium:</p>
-                    <p>Dua trapesium kongruen jika <strong className="text-yellow-300">semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</strong>.</p>
+                    <p className="font-semibold text-teal-200">{t.k3_s4_cond_title}</p>
+                    <p>{t.k3_s4_cond} <strong className="text-yellow-300">{t.k3_s4_cond_k}</strong>.</p>
                     <div className="bg-slate-900/70 rounded p-2 mt-1">
                       <BlockMath math="ABCD \cong PQRS \iff AB=PQ,\; BC=QR,\; CD=RS,\; DA=SP" />
                       <BlockMath math="\angle A=\angle P,\; \angle B=\angle Q,\; \angle C=\angle R,\; \angle D=\angle S" />
                     </div>
                   </div>
                   <div className="bg-teal-500/10 border border-teal-500/20 rounded-lg p-3 font-body text-sm text-white/80">
-                    <p className="font-semibold text-teal-300 mb-1">Trapesium Sama Kaki:</p>
-                    <p>Pada trapesium sama kaki yang kongruen, kaki-kakinya bersesuaian sama panjang dan sudut-sudut alasnya sama besar.</p>
+                    <p className="font-semibold text-teal-300 mb-1">{t.k3_s4_iso_title}</p>
+                    <p>{t.k3_s4_iso_p}</p>
                     <div className="mt-2">
-                      <BlockMath math="BC = AD = QR = PS \text{ (kaki sama panjang)}" />
+                      <BlockMath math="BC = AD = QR = PS" />
+                      <p className="text-xs text-white/60 italic text-center font-body mt-1">{t.k3_s4_legs}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Belah Ketupat */}
                 <div className="bg-slate-800/60 border border-violet-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-violet-300">⑤ Belah Ketupat (Rhombus)</p>
+                  <p className="font-body text-sm font-semibold text-violet-300">{t.k3_s5}</p>
                   <figure>
                     <DragCongruenceDemo shape="rhombus" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 9. Dua belah ketupat kongruen — ABCD ≅ PQRS jika panjang sisinya sama dan salah satu sudut apitnya sama besar (AB=PQ dan ∠A=∠P)
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig9}</figcaption>
                   </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
-                    <p className="font-semibold text-violet-200">Syarat kekongruenan belah ketupat:</p>
-                    <p>Dua belah ketupat kongruen jika <strong className="text-yellow-300">panjang sisinya sama DAN salah satu sudut apitnya sama besar</strong>.</p>
+                    <p className="font-semibold text-violet-200">{t.k3_s5_cond_title}</p>
+                    <p>{t.k3_s5_cond} <strong className="text-yellow-300">{t.k3_s5_cond_k}</strong>.</p>
                     <div className="bg-slate-900/70 rounded p-2 mt-1">
-                      <BlockMath math="ABCD \cong PQRS \iff AB = PQ \text{ dan } \angle A = \angle P" />
+                      <BlockMath math="ABCD \cong PQRS \iff AB = PQ,\; \angle A = \angle P" />
                     </div>
-                    <p className="text-xs text-white/60 italic">
-                      ⚠️ Dua belah ketupat dengan sisi sama belum tentu kongruen — sudut apitnya harus sama!
-                    </p>
+                    <p className="text-xs text-white/60 italic">{t.k3_s5_note}</p>
                   </div>
                   <div className="bg-violet-500/10 border border-violet-500/20 rounded-lg p-3 font-body text-sm text-white/80 space-y-1">
-                    <p className="font-semibold text-violet-300">Sifat tambahan:</p>
-                    <p>✅ <InlineMath math="AB = BC = CD = DA = PQ = QR = RS = SP" /> (semua sisi sama)</p>
-                    <p>✅ <InlineMath math="\angle A = \angle C" /> dan <InlineMath math="\angle B = \angle D" /> (sudut berhadapan sama)</p>
-                    <p>✅ Diagonal saling berpotongan tegak lurus dan saling membagi dua sama panjang</p>
+                    <p className="font-semibold text-violet-300">{t.k3_s5_prop_title}</p>
+                    <p>{t.k3_s5_p1} <InlineMath math="AB = BC = CD = DA = PQ = QR = RS = SP" /> {t.k3_s5_p2}</p>
+                    <p>{t.k3_s5_p1} <InlineMath math="\angle A = \angle C" /> {t.k3_s5_p3} <InlineMath math="\angle B = \angle D" /> {t.k3_s5_p4}</p>
+                    <p>{t.k3_s5_p5}</p>
                   </div>
                 </div>
 
                 {/* Layang-layang */}
                 <div className="bg-slate-800/60 border border-rose-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-rose-300">⑥ Layang-layang (Kite)</p>
+                  <p className="font-body text-sm font-semibold text-rose-300">{t.k3_s6}</p>
                   <figure>
                     <DragCongruenceDemo shape="kite" leftLabels={["A","B","C","D"]} rightLabels={["P","Q","R","S"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 10. Dua layang-layang kongruen — ABCD ≅ PQRS jika semua sisi bersesuaian sama panjang dan semua sudut bersesuaian sama besar
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig10}</figcaption>
                   </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
-                    <p className="font-semibold text-rose-200">Syarat kekongruenan layang-layang:</p>
-                    <p>Dua layang-layang kongruen jika <strong className="text-yellow-300">semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</strong>.</p>
+                    <p className="font-semibold text-rose-200">{t.k3_s6_cond_title}</p>
+                    <p>{t.k3_s6_cond} <strong className="text-yellow-300">{t.k3_s6_cond_k}</strong>.</p>
                     <div className="bg-slate-900/70 rounded p-2 mt-1">
                       <BlockMath math="ABCD \cong PQRS \iff AB=PQ,\; AD=PS,\; CB=QR,\; CD=RS" />
-                      <BlockMath math="\angle B = \angle Q \text{ (sudut di antara sisi berbeda panjang)}" />
+                      <BlockMath math="\angle B = \angle Q" />
+                      <p className="text-xs text-white/60 italic text-center font-body mt-1">{t.k3_s6_ang_note}</p>
                     </div>
                   </div>
                   <div className="bg-rose-500/10 border border-rose-500/20 rounded-lg p-3 font-body text-sm text-white/80 space-y-1">
-                    <p className="font-semibold text-rose-300">Sifat layang-layang:</p>
-                    <p>✅ <InlineMath math="AB = AD" /> dan <InlineMath math="CB = CD" /> (dua pasang sisi berdekatan sama)</p>
-                    <p>✅ <InlineMath math="\angle B = \angle D" /> (sudut di antara sisi yang berbeda panjang sama besar)</p>
-                    <p>✅ Diagonal utama (AC) memotong diagonal lainnya (BD) tegak lurus dan membaginya sama panjang</p>
+                    <p className="font-semibold text-rose-300">{t.k3_s6_prop_title}</p>
+                    <p>{t.k3_s6_p1} <InlineMath math="AB = AD" /> {t.k3_s6_p1b} <InlineMath math="CB = CD" /> {t.k3_s6_p1c}</p>
+                    <p>{t.k3_s6_p2} <InlineMath math="\angle B = \angle D" /> {t.k3_s6_p2b}</p>
+                    <p>{t.k3_s6_p3}</p>
                   </div>
                 </div>
 
                 {/* Lingkaran */}
                 <div className="bg-slate-800/60 border border-pink-500/30 rounded-lg p-4 space-y-3">
-                  <p className="font-body text-sm font-semibold text-pink-300">⑦ Lingkaran (Circle)</p>
+                  <p className="font-body text-sm font-semibold text-pink-300">{t.k3_s7}</p>
                   <figure>
                     <DragCongruenceDemo shape="circle" leftLabels={["O₁"]} rightLabels={["O₂"]} />
-                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                      Gambar 11. Dua lingkaran kongruen — Lingkaran₁ ≅ Lingkaran₂ jika jari-jarinya sama panjang (r₁ = r₂)
-                    </figcaption>
+                    <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig11}</figcaption>
                   </figure>
                   <div className="bg-slate-900/60 rounded-lg p-3 space-y-2 font-body text-sm text-white/80">
-                    <p className="font-semibold text-pink-200">Syarat kekongruenan lingkaran:</p>
-                    <p>Dua lingkaran kongruen jika dan hanya jika <strong className="text-yellow-300">jari-jarinya sama panjang</strong>.</p>
-                    <div className="bg-slate-900/70 rounded p-2 mt-1">
-                      <BlockMath math="\text{Lingkaran}_1 \cong \text{Lingkaran}_2 \iff r_1 = r_2" />
+                    <p className="font-semibold text-pink-200">{t.k3_s7_cond_title}</p>
+                    <p>{t.k3_s7_cond} <strong className="text-yellow-300">{t.k3_s7_cond_k}</strong>.</p>
+                    <div className="bg-slate-900/70 rounded p-2 mt-1 text-center">
+                      <span className="font-body text-sm text-white/80">{t.k3_s7_circle1}</span>{" "}
+                      <InlineMath math="\cong" />{" "}
+                      <span className="font-body text-sm text-white/80">{t.k3_s7_circle2}</span>{" "}
+                      <InlineMath math="\iff r_1 = r_2" />
                     </div>
-                    <p className="text-xs text-white/60 italic">
-                      Lingkaran tidak punya sudut, sehingga syaratnya hanya 1: jari-jari sama!
-                    </p>
+                    <p className="text-xs text-white/60 italic">{t.k3_s7_note}</p>
                   </div>
                   <div className="bg-pink-500/10 border border-pink-500/20 rounded-lg p-3 font-body text-sm text-white/80 space-y-1">
-                    <p className="font-semibold text-pink-300">Akibatnya:</p>
-                    <p>✅ Keliling sama: <InlineMath math="K_1 = 2\pi r_1 = 2\pi r_2 = K_2" /></p>
-                    <p>✅ Luas sama: <InlineMath math="L_1 = \pi r_1^2 = \pi r_2^2 = L_2" /></p>
+                    <p className="font-semibold text-pink-300">{t.k3_s7_prop_title}</p>
+                    <p>{t.k3_s7_p1} <InlineMath math="K_1 = 2\pi r_1 = 2\pi r_2 = K_2" /></p>
+                    <p>{t.k3_s7_p2} <InlineMath math="A_1 = \pi r_1^2 = \pi r_2^2 = A_2" /></p>
                   </div>
                 </div>
 
                 {/* Tabel umum */}
                 <div className="bg-slate-900/60 border border-slate-600/40 rounded-lg p-4 overflow-x-auto">
-                  <p className="font-body text-xs font-semibold text-slate-300 mb-2">📊 RINGKASAN SYARAT KEKONGRUENAN BERBAGAI BANGUN DATAR:</p>
+                  <p className="font-body text-xs font-semibold text-slate-300 mb-2">{t.tbl3_title}</p>
                   <table className="w-full font-body text-xs text-white/80">
                     <thead>
                       <tr className="border-b border-slate-600">
-                        <th className="text-left py-2 pr-2 text-cyan-300">Bangun</th>
-                        <th className="text-left py-2 text-cyan-300">Syarat Kongruen</th>
+                        <th className="text-left py-2 pr-2 text-cyan-300">{t.tbl3_h1}</th>
+                        <th className="text-left py-2 text-cyan-300">{t.tbl3_h2}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-700/60">
-                      <tr><td className="py-2 pr-2 text-green-300 font-semibold">Segitiga</td><td className="py-2">RRR / RAR / ARA / AAR (salah satu)</td></tr>
-                      <tr><td className="py-2 pr-2 text-blue-300 font-semibold">Persegi</td><td className="py-2">Sisi sama panjang (1 syarat)</td></tr>
-                      <tr><td className="py-2 pr-2 text-sky-300 font-semibold">Persegi Panjang</td><td className="py-2">Panjang dan lebar bersesuaian sama</td></tr>
-                      <tr><td className="py-2 pr-2 text-yellow-300 font-semibold">Jajar Genjang</td><td className="py-2">2 sisi bersesuaian + sudut apit sama</td></tr>
-                      <tr><td className="py-2 pr-2 text-teal-300 font-semibold">Trapesium</td><td className="py-2">Semua sisi + semua sudut bersesuaian sama</td></tr>
-                      <tr><td className="py-2 pr-2 text-pink-300 font-semibold">Lingkaran</td><td className="py-2">Jari-jari sama (1 syarat)</td></tr>
-                      <tr><td className="py-2 pr-2 text-orange-300 font-semibold">Poligon-n</td><td className="py-2">Semua n sisi + semua n sudut bersesuaian sama</td></tr>
+                      <tr><td className="py-2 pr-2 text-green-300 font-semibold">{t.tbl3_r1n}</td><td className="py-2">{t.tbl3_r1v}</td></tr>
+                      <tr><td className="py-2 pr-2 text-blue-300 font-semibold">{t.tbl3_r2n}</td><td className="py-2">{t.tbl3_r2v}</td></tr>
+                      <tr><td className="py-2 pr-2 text-sky-300 font-semibold">{t.tbl3_r3n}</td><td className="py-2">{t.tbl3_r3v}</td></tr>
+                      <tr><td className="py-2 pr-2 text-yellow-300 font-semibold">{t.tbl3_r4n}</td><td className="py-2">{t.tbl3_r4v}</td></tr>
+                      <tr><td className="py-2 pr-2 text-teal-300 font-semibold">{t.tbl3_r5n}</td><td className="py-2">{t.tbl3_r5v}</td></tr>
+                      <tr><td className="py-2 pr-2 text-pink-300 font-semibold">{t.tbl3_r6n}</td><td className="py-2">{t.tbl3_r6v}</td></tr>
+                      <tr><td className="py-2 pr-2 text-orange-300 font-semibold">{t.tbl3_r7n}</td><td className="py-2">{t.tbl3_r7v}</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -1277,22 +1857,20 @@ const KekongruenBangunDatarPage = () => {
 
           {/* ── CONTOH SOAL ── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Header id="contoh1" icon={<Calculator className="w-5 h-5" />} color="#60a5fa" label="📝 Contoh Soal — Kekongruenan Segitiga & Bangun Lain" />
+            <Header id="contoh1" icon={<Calculator className="w-5 h-5" />} color="#60a5fa" label={t.sec_contoh} />
             {true && (
               <div className="px-5 pb-5 space-y-6">
 
                 {/* MUDAH */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
-                    <span className="font-body font-semibold text-white">Contoh 1 — Segitiga Kongruen</span>
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">{t.badge_mudah}</span>
+                    <span className="font-body font-semibold text-white">{t.c1_title}</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
-                    <p className="font-body text-sm text-white">Perhatikan gambar berikut.</p>
-                    {/* Diagram: P(35,135) T(115,83) U(149,136) S(120,183) R(240,18) Q(240,257) */}
+                    <p className="font-body text-sm text-white">{t.c1_q}</p>
                     <figure>
                       <svg viewBox="0 0 280 275" className="w-full max-w-xs mx-auto">
-                        {/* Lines — kuning */}
                         <line x1="35" y1="135" x2="240" y2="18"  stroke="#facc15" strokeWidth="1.6" />
                         <line x1="35" y1="135" x2="240" y2="257" stroke="#facc15" strokeWidth="1.6" />
                         <line x1="35" y1="135" x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
@@ -1300,24 +1878,14 @@ const KekongruenBangunDatarPage = () => {
                         <line x1="149" y1="136" x2="120" y2="183" stroke="#facc15" strokeWidth="1.6" />
                         <line x1="240" y1="18"  x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
                         <line x1="240" y1="257" x2="149" y2="136" stroke="#facc15" strokeWidth="1.6" />
-
-                        {/* Right-angle box at T — kuning */}
-                        <polyline points="121,80 125,86 119,89"
-                          fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
-
-                        {/* Right-angle box at S — kuning */}
-                        <polyline points="126,187 130,181 124,177"
-                          fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
-
-                        {/* Vertex dots — kuning */}
+                        <polyline points="121,80 125,86 119,89" fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
+                        <polyline points="126,187 130,181 124,177" fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
                         <circle cx="35"  cy="135" r="3" fill="#facc15" />
                         <circle cx="115" cy="83"  r="3" fill="#facc15" />
                         <circle cx="149" cy="136" r="3" fill="#facc15" />
                         <circle cx="120" cy="183" r="3" fill="#facc15" />
                         <circle cx="240" cy="18"  r="3" fill="#facc15" />
                         <circle cx="240" cy="257" r="3" fill="#facc15" />
-
-                        {/* Labels — putih */}
                         <text x="16"  y="140" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">P</text>
                         <text x="108" y="74"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">T</text>
                         <text x="153" y="132" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">U</text>
@@ -1325,31 +1893,25 @@ const KekongruenBangunDatarPage = () => {
                         <text x="245" y="22"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">R</text>
                         <text x="245" y="263" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">Q</text>
                       </svg>
-                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                        Gambar 12. Diagram titik-titik P, T, U, S, R, Q — tentukan banyak segitiga yang kongruen
-                      </figcaption>
+                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig12}</figcaption>
                     </figure>
-                    <p className="font-body text-sm text-white">
-                      Banyak segitiga kongruen pada gambar adalah . . . .
-                    </p>
+                    <p className="font-body text-sm text-white">{t.c1_q2}</p>
                     <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
-                      <p>A. &nbsp;8 buah</p>
-                      <p>C. &nbsp;4 buah</p>
-                      <p>B. &nbsp;6 buah</p>
-                      <p>D. &nbsp;3 buah</p>
+                      <p>A. &nbsp;8</p><p>C. &nbsp;4</p>
+                      <p>B. &nbsp;6</p><p>D. &nbsp;3</p>
                     </div>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3">{t.c1_discuss_title}</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Identifikasi segitiga-segitiga yang terbentuk pada gambar:</p>
+                      <p>{t.c1_discuss_intro}</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>① <InlineMath math="\triangle PTU" /> — siku-siku di T (<InlineMath math="\angle PTU = 90°" />)</p>
-                        <p>② <InlineMath math="\triangle PSU" /> — siku-siku di S (<InlineMath math="\angle PSU = 90°" />)</p>
-                        <p>③ <InlineMath math="\triangle TUS" /> — terbentuk dari T, U, S</p>
+                        <p>① <InlineMath math="\triangle PTU" /> — {t.c1_t1} (<InlineMath math="\angle PTU = 90°" />)</p>
+                        <p>② <InlineMath math="\triangle PSU" /> — {t.c1_t2} (<InlineMath math="\angle PSU = 90°" />)</p>
+                        <p>③ <InlineMath math="\triangle TUS" /> — {t.c1_t3}</p>
                       </div>
-                      <p>Ketiga segitiga tersebut kongruen satu sama lain karena memenuhi syarat kekongruenan.</p>
-                      <p><strong className="text-green-300">Jawaban: D. 3 buah ✓</strong></p>
+                      <p>{t.c1_discuss_p}</p>
+                      <p><strong className="text-green-300">{t.c1_answer}</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1357,50 +1919,27 @@ const KekongruenBangunDatarPage = () => {
                 {/* SEDANG */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 2 — Aksioma Kekongruenan</span>
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">{t.badge_sedang}</span>
+                    <span className="font-body font-semibold text-white">{t.c2_title}</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">
-                      Diketahui panjang <InlineMath math="BC = CD" />. <InlineMath math="\triangle CDA \cong \triangle CBE" /> menurut aksioma . . . .
+                      {t.c2_q} <InlineMath math="BC = CD" />. <InlineMath math="\triangle CDA \cong \triangle CBE" /> {t.c2_q2}
                     </p>
-                    {/*
-                      Diagram:
-                        A(20,220)  B(120,220)  C(220,220)  — horizontal base
-                        E(120,20)              — top, directly above B
-                        D(180,140)             — on EC, foot of perpendicular from A·D line
-                        F(120,170)             — intersection of line AD with EB
-                      Lines: A–C base, E–B vertical, E–C diagonal, A–D (passes through F)
-                      Right angle at B: ∠EBC = 90° (EB ⊥ AC)
-                      Right angle at D: ∠CDA = 90°
-                    */}
                     <figure>
                       <svg viewBox="0 0 260 250" className="w-full max-w-xs mx-auto">
-                        {/* Lines — kuning */}
-                        <line x1="20"  y1="220" x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* A–C base */}
-                        <line x1="120" y1="20"  x2="120" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* E–B vertical */}
-                        <line x1="120" y1="20"  x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" /> {/* E–C */}
-                        <line x1="20"  y1="220" x2="180" y2="140" stroke="#facc15" strokeWidth="1.6" /> {/* A–D (through F) */}
-
-                        {/* Right-angle box at B (120,220) — between EB↑ and BC→, box upper-left */}
-                        <polyline points="120,212 112,212 112,220"
-                          fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
-
-                        {/* Right-angle box at D (180,140)
-                            DC unit=(0.447,0.894), DA unit=(-0.894,0.447), box size=7
-                            along DC: (183,146), along DA: (174,143), corner: (177,149) */}
-                        <polyline points="183,146 177,149 174,143"
-                          fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
-
-                        {/* Vertex dots — kuning */}
+                        <line x1="20"  y1="220" x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="120" y1="20"  x2="120" y2="220" stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="120" y1="20"  x2="220" y2="220" stroke="#facc15" strokeWidth="1.6" />
+                        <line x1="20"  y1="220" x2="180" y2="140" stroke="#facc15" strokeWidth="1.6" />
+                        <polyline points="120,212 112,212 112,220" fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
+                        <polyline points="183,146 177,149 174,143" fill="none" stroke="#facc15" strokeWidth="1.4" strokeLinejoin="miter" />
                         <circle cx="20"  cy="220" r="3" fill="#facc15" />
                         <circle cx="120" cy="220" r="3" fill="#facc15" />
                         <circle cx="220" cy="220" r="3" fill="#facc15" />
                         <circle cx="120" cy="20"  r="3" fill="#facc15" />
                         <circle cx="180" cy="140" r="3" fill="#facc15" />
                         <circle cx="120" cy="170" r="3" fill="#facc15" />
-
-                        {/* Labels — putih */}
                         <text x="10"  y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">A</text>
                         <text x="114" y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">B</text>
                         <text x="224" y="238" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">C</text>
@@ -1408,28 +1947,24 @@ const KekongruenBangunDatarPage = () => {
                         <text x="185" y="137" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">D</text>
                         <text x="124" y="168" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">F</text>
                       </svg>
-                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                        Gambar 13. Diagram △CDA dan △CBE dengan BC = CD dan ∠CDA = ∠CBE = 90°
-                      </figcaption>
+                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig13}</figcaption>
                     </figure>
                     <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
-                      <p>A. &nbsp;sisi, sisi, sisi</p>
-                      <p>C. &nbsp;sisi, sudut, sisi</p>
-                      <p>B. &nbsp;sisi, sisi, sudut</p>
-                      <p>D. &nbsp;sudut, sisi, sudut</p>
+                      <p>{t.c2_opt_a}</p><p>{t.c2_opt_c}</p>
+                      <p>{t.c2_opt_b}</p><p>{t.c2_opt_d}</p>
                     </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">{t.c2_discuss_title}</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Periksa unsur-unsur yang bersesuaian pada <InlineMath math="\triangle CDA" /> dan <InlineMath math="\triangle CBE" />:</p>
+                      <p>{t.c2_discuss_intro} <InlineMath math="\triangle CDA" /> {t.c2_discuss_introb} <InlineMath math="\triangle CBE" />:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
-                        <p>① <InlineMath math="\angle DCA = \angle BCE" /> (sudut C sama, karena A, B, C segaris)</p>
-                        <p>② <InlineMath math="CD = CB" /> (diketahui <InlineMath math="BC = CD" />) ← sisi diapit</p>
-                        <p>③ <InlineMath math="\angle CDA = \angle CBE = 90°" /> (sudut siku-siku)</p>
+                        <p>① <InlineMath math="\angle DCA = \angle BCE" /> {t.c2_el1}</p>
+                        <p>② <InlineMath math="CD = CB" /> ({t.c2_el2} <InlineMath math="BC = CD" />) {t.c2_el2b}</p>
+                        <p>③ <InlineMath math="\angle CDA = \angle CBE = 90°" /> {t.c2_el3}</p>
                       </div>
-                      <p>Dua sudut + sisi apit sama → aksioma <strong className="text-yellow-300">Sudut–Sisi–Sudut (S.Ss.S)</strong></p>
-                      <p><strong className="text-yellow-300">Jawaban: D. sudut, sisi, sudut ✓</strong></p>
+                      <p>{t.c2_discuss_p} <strong className="text-yellow-300">{t.c2_discuss_pb}</strong></p>
+                      <p><strong className="text-yellow-300">{t.c2_answer}</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1437,89 +1972,53 @@ const KekongruenBangunDatarPage = () => {
                 {/* SEDANG 2 */}
                 <div className="border-l-4 border-orange-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-orange-500/20 text-orange-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
-                    <span className="font-body font-semibold text-white">Contoh 3 — Mencari Nilai m</span>
+                    <span className="bg-orange-500/20 text-orange-400 text-xs font-bold px-2 py-1 rounded">{t.badge_sedang}</span>
+                    <span className="font-body font-semibold text-white">{t.c3_title}</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                     <p className="font-body text-sm text-white">
-                      Jika <InlineMath math="\triangle ABC \cong \triangle PQR" />, maka nilai <InlineMath math="m" /> = . . . .
+                      {t.c3_q} <InlineMath math="\triangle ABC \cong \triangle PQR" />, {t.c3_q2} <InlineMath math="m" /> {t.c3_q3}
                     </p>
-                    {/*
-                      Left  △ABC : A(20,165) B(120,165) C(55,25)
-                        ∠A=60° (bottom-left), ∠B=70° (bottom-right), ∠C=50°
-                        side AC labeled "12 - m" (left side)
-                      Right △PQR : P(148,165) Q(242,165) R(196,30)
-                        ∠P=60° (bottom-left), ∠R=50° (top), ∠Q=70°
-                        side PR labeled "5" (left side)
-                      Corresponding: A↔P, B↔Q, C↔R  →  AC=PR  →  12-m=5  →  m=7
-                    */}
                     <figure>
                       <svg viewBox="0 0 270 195" className="w-full max-w-sm mx-auto">
-                        {/* ===== Left triangle ABC ===== */}
-                        <polygon points="20,165 120,165 55,25"
-                          fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
-
-                        {/* Side label "12 - m" on AC (left side) */}
+                        <polygon points="20,165 120,165 55,25" fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
                         <text x="12" y="103" fontSize="11" fill="#ffffff" fontFamily="serif" fontStyle="italic"
                           textAnchor="middle" transform="rotate(-57,12,103)">12 – m</text>
-
-                        {/* Angle arc at A (60°) */}
                         <path d="M 32,165 A 12,12 0 0,0 26,154" fill="none" stroke="#facc15" strokeWidth="1" />
                         <text x="33" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">60°</text>
-
-                        {/* Angle arc at B (70°) */}
                         <path d="M 108,165 A 12,12 0 0,1 113,153" fill="none" stroke="#facc15" strokeWidth="1" />
                         <text x="85" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">70°</text>
-
-                        {/* Vertex labels ABC */}
                         <text x="8"   y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">A</text>
                         <text x="118" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">B</text>
                         <text x="48"  y="18"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">C</text>
-
-                        {/* ===== Right triangle PQR ===== */}
-                        <polygon points="148,165 242,165 196,30"
-                          fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
-
-                        {/* Side label "5" on PR (left side) */}
-                        <text x="163" y="105" fontSize="12" fill="#ffffff" fontFamily="serif" fontStyle="italic"
-                          textAnchor="middle">5</text>
-
-                        {/* Angle arc at P (60°) */}
+                        <polygon points="148,165 242,165 196,30" fill="none" stroke="#facc15" strokeWidth="1.6" strokeLinejoin="round" />
+                        <text x="163" y="105" fontSize="12" fill="#ffffff" fontFamily="serif" fontStyle="italic" textAnchor="middle">5</text>
                         <path d="M 160,165 A 12,12 0 0,0 154,154" fill="none" stroke="#facc15" strokeWidth="1" />
                         <text x="161" y="158" fontSize="10" fill="#ffffff" fontFamily="serif">60°</text>
-
-                        {/* Angle arc at R (50°) */}
                         <path d="M 188,42 A 12,12 0 0,1 204,42" fill="none" stroke="#facc15" strokeWidth="1" />
                         <text x="183" y="55"  fontSize="10" fill="#ffffff" fontFamily="serif">50°</text>
-
-                        {/* Vertex labels PQR */}
                         <text x="136" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">P</text>
                         <text x="240" y="180" fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">Q</text>
                         <text x="193" y="22"  fontSize="13" fill="#ffffff" fontWeight="bold" fontFamily="serif">R</text>
                       </svg>
-                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">
-                        Gambar 14. Diagram △ABC ≅ △PQR — sisi AC = (12 – m) bersesuaian dengan sisi PR = 5, tentukan nilai m
-                      </figcaption>
+                      <figcaption className="text-center text-xs text-white/50 italic mt-2 font-body">{t.fig14}</figcaption>
                     </figure>
-
                     <div className="grid grid-cols-2 gap-2 font-body text-sm text-white/90">
-                      <p>A. &nbsp;4</p>
-                      <p>C. &nbsp;6</p>
-                      <p>B. &nbsp;5</p>
-                      <p>D. &nbsp;7</p>
+                      <p>A. &nbsp;4</p><p>C. &nbsp;6</p>
+                      <p>B. &nbsp;5</p><p>D. &nbsp;7</p>
                     </div>
                   </div>
                   <div className="bg-orange-500/5 border border-orange-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-orange-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-orange-400 mb-3">{t.c3_discuss_title}</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
-                      <p>Karena <InlineMath math="\triangle ABC \cong \triangle PQR" />, sisi-sisi bersesuaian adalah:</p>
+                      <p>{t.c3_discuss_intro} <InlineMath math="\triangle ABC \cong \triangle PQR" />{t.c3_discuss_introb}</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-1">
                         <p><InlineMath math="A \leftrightarrow P,\quad B \leftrightarrow Q,\quad C \leftrightarrow R" /></p>
-                        <p>Sisi AC bersesuaian dengan sisi PR</p>
+                        <p>{t.c3_el1}</p>
                         <p><InlineMath math="AC = PR \Rightarrow 12 - m = 5" /></p>
                         <p><InlineMath math="m = 12 - 5 = 7" /></p>
                       </div>
-                      <p><strong className="text-orange-300">Jawaban: D. 7 ✓</strong></p>
+                      <p><strong className="text-orange-300">{t.c3_answer}</strong></p>
                     </div>
                   </div>
                 </div>
@@ -1533,69 +2032,45 @@ const KekongruenBangunDatarPage = () => {
 
             {/* Rangkuman */}
             <div className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-purple-500/30 rounded-xl p-5 space-y-4">
-              <p className="font-body text-base font-bold text-purple-300">📋 Rangkuman — Kekongruenan Bangun Datar</p>
+              <p className="font-body text-base font-bold text-purple-300">{t.rang_title}</p>
               <div className="overflow-x-auto">
                 <table className="w-full font-body text-xs text-white/80">
                   <thead>
                     <tr className="border-b border-purple-500/30">
-                      <th className="text-left py-2 pr-3 text-purple-300">Bangun</th>
-                      <th className="text-left py-2 pr-3 text-purple-300">Syarat Kongruen</th>
-                      <th className="text-left py-2 text-purple-300">Jumlah Syarat Min.</th>
+                      <th className="text-left py-2 pr-3 text-purple-300">{t.rang_h1}</th>
+                      <th className="text-left py-2 pr-3 text-purple-300">{t.rang_h2}</th>
+                      <th className="text-left py-2 text-purple-300">{t.rang_h3}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-700">
-                    <tr>
-                      <td className="py-2 pr-3 text-blue-300 font-semibold">Segitiga</td>
-                      <td className="py-2 pr-3">RRR, RAR, ARA, atau AAR (salah satu)</td>
-                      <td className="py-2 text-yellow-300">3 unsur</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 pr-3 text-green-300 font-semibold">Persegi</td>
-                      <td className="py-2 pr-3">Sisi yang sama panjang</td>
-                      <td className="py-2 text-yellow-300">1 unsur</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 pr-3 text-cyan-300 font-semibold">Persegi Panjang</td>
-                      <td className="py-2 pr-3">Panjang dan lebar bersesuaian sama</td>
-                      <td className="py-2 text-yellow-300">2 unsur</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 pr-3 text-pink-300 font-semibold">Jajar Genjang</td>
-                      <td className="py-2 pr-3">2 pasang sisi bersesuaian sama + sudut apit sama</td>
-                      <td className="py-2 text-yellow-300">3 unsur</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 pr-3 text-orange-300 font-semibold">Trapesium &amp; Poligon</td>
-                      <td className="py-2 pr-3">Semua sisi bersesuaian sama + semua sudut sama</td>
-                      <td className="py-2 text-yellow-300">Semua unsur</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 pr-3 text-red-300 font-semibold">Lingkaran</td>
-                      <td className="py-2 pr-3">Jari-jari sama panjang</td>
-                      <td className="py-2 text-yellow-300">1 unsur</td>
-                    </tr>
+                    <tr><td className="py-2 pr-3 text-blue-300 font-semibold">{t.rang_r1n}</td><td className="py-2 pr-3">{t.rang_r1v}</td><td className="py-2 text-yellow-300">{t.rang_r1e}</td></tr>
+                    <tr><td className="py-2 pr-3 text-green-300 font-semibold">{t.rang_r2n}</td><td className="py-2 pr-3">{t.rang_r2v}</td><td className="py-2 text-yellow-300">{t.rang_r2e}</td></tr>
+                    <tr><td className="py-2 pr-3 text-cyan-300 font-semibold">{t.rang_r3n}</td><td className="py-2 pr-3">{t.rang_r3v}</td><td className="py-2 text-yellow-300">{t.rang_r3e}</td></tr>
+                    <tr><td className="py-2 pr-3 text-pink-300 font-semibold">{t.rang_r4n}</td><td className="py-2 pr-3">{t.rang_r4v}</td><td className="py-2 text-yellow-300">{t.rang_r4e}</td></tr>
+                    <tr><td className="py-2 pr-3 text-orange-300 font-semibold">{t.rang_r5n}</td><td className="py-2 pr-3">{t.rang_r5v}</td><td className="py-2 text-yellow-300">{t.rang_r5e}</td></tr>
+                    <tr><td className="py-2 pr-3 text-red-300 font-semibold">{t.rang_r6n}</td><td className="py-2 pr-3">{t.rang_r6v}</td><td className="py-2 text-yellow-300">{t.rang_r6e}</td></tr>
                   </tbody>
                 </table>
               </div>
               <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 font-body text-xs text-white/75">
-                <p>📌 <strong className="text-purple-300">Definisi:</strong> Dua bangun kongruen (<InlineMath math="\cong" />) jika semua sisi bersesuaian sama panjang DAN semua sudut bersesuaian sama besar</p>
-                <p>📌 <strong className="text-purple-300">Notasi penting:</strong> <InlineMath math="\triangle ABC \cong \triangle PQR" /> berarti A↔P, B↔Q, C↔R. Urutan huruf menentukan pasangan!</p>
-                <p>📌 <strong className="text-purple-300">Bangun bisa diputar/dicermin:</strong> Kongruen tetap berlaku meski salah satu bangun diputar atau direfleksi (dicermin)</p>
+                <p>📌 <strong className="text-purple-300">{t.rang_note1}</strong> {t.rang_note1b}</p>
+                <p>📌 <strong className="text-purple-300">{t.rang_note2}</strong> <InlineMath math="\triangle ABC \cong \triangle PQR" /> {t.rang_note2b}</p>
+                <p>📌 <strong className="text-purple-300">{t.rang_note3}</strong> {t.rang_note3b}</p>
               </div>
             </div>
 
             {/* Tips & Trik */}
             <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 space-y-3">
-              <p className="font-body text-base font-bold text-amber-300">💡 Tips &amp; Trik</p>
+              <p className="font-body text-base font-bold text-amber-300">{t.tips_title}</p>
               <div className="space-y-3 font-body text-sm text-white/80">
                 <div className="flex gap-3">
                   <span className="text-amber-400 font-bold shrink-0">①</span>
-                  <p><strong className="text-amber-300">Ingat urutan syarat segitiga (RRR, RAR, ARA, AAR):</strong> Huruf R = Rusuk, A = sudut (Angle). Syarat tersebut menjamin ketiga sisi dan ketiga sudut otomatis sama — tidak perlu cek semuanya satu per satu!</p>
+                  <p><strong className="text-amber-300">{t.tips_1t}</strong> {t.tips_1b}</p>
                 </div>
                 <div className="flex gap-3">
                   <span className="text-amber-400 font-bold shrink-0">②</span>
                   <div>
-                    <p><strong className="text-amber-300">Cara cepat menentukan sisi bersesuaian dari notasi:</strong> Jika <InlineMath math="\triangle ABC \cong \triangle PQR" />, pasangkan huruf-huruf di posisi yang sama:</p>
+                    <p><strong className="text-amber-300">{t.tips_2t}</strong> {t.tips_2b} <InlineMath math="\triangle ABC \cong \triangle PQR" />{t.tips_2bb}</p>
                     <div className="bg-slate-900/50 rounded p-2 mt-1 text-xs font-mono text-center">
                       <p>A ↔ P &nbsp;|&nbsp; B ↔ Q &nbsp;|&nbsp; C ↔ R</p>
                       <p className="text-white/50 mt-1">AB=PQ &nbsp;|&nbsp; BC=QR &nbsp;|&nbsp; AC=PR</p>
@@ -1604,27 +2079,27 @@ const KekongruenBangunDatarPage = () => {
                 </div>
                 <div className="flex gap-3">
                   <span className="text-amber-400 font-bold shrink-0">③</span>
-                  <p><strong className="text-amber-300">Bedakan kongruen dengan sebangun di soal pilihan ganda:</strong> Jika ada "faktor skala k ≠ 1" → sebangun bukan kongruen. Jika "semua ukurannya sama persis" → kongruen (k=1).</p>
+                  <p><strong className="text-amber-300">{t.tips_3t}</strong> {t.tips_3b}</p>
                 </div>
                 <div className="flex gap-3">
                   <span className="text-amber-400 font-bold shrink-0">④</span>
-                  <p><strong className="text-amber-300">Untuk soal "cari nilai x":</strong> Gunakan pasangan sisi bersesuaian yang sama. Jika <InlineMath math="AB = PQ" />, tulis persamaan langsung dan selesaikan.</p>
+                  <p><strong className="text-amber-300">{t.tips_4t}</strong> {t.tips_4b} <InlineMath math="AB = PQ" />{t.tips_4bb}</p>
                 </div>
               </div>
             </div>
 
             {/* Kesimpulan */}
             <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-5 space-y-3">
-              <p className="font-body text-base font-bold text-green-300">✅ Kesimpulan</p>
+              <p className="font-body text-base font-bold text-green-300">{t.conc_title}</p>
               <div className="space-y-2 font-body text-sm text-white/80">
-                <p>Kekongruenan bangun datar adalah konsep <strong className="text-yellow-300">"berimpit sempurna"</strong> — dua bangun yang bisa saling ditumpuk tanpa celah dan tanpa sisa.</p>
+                <p>{t.conc_p1} <strong className="text-yellow-300">{t.conc_p1k}</strong> {t.conc_p1b}</p>
                 <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
-                  <p>🔹 Tidak semua bangun memerlukan semua syarat: <strong className="text-cyan-300">persegi dan lingkaran</strong> hanya butuh 1 syarat</p>
-                  <p>🔹 Segitiga memiliki <strong className="text-purple-300">4 cara pembuktian</strong> kekongruenan (RRR, RAR, ARA, AAR)</p>
-                  <p>🔹 Bangun yang diputar atau dicermin <strong className="text-green-300">tetap kongruen</strong></p>
-                  <p>🔹 Kongruen adalah kasus khusus sebangun: <InlineMath math="k = 1" /></p>
+                  <p>{t.conc_l1} <strong className="text-cyan-300">{t.conc_l1k}</strong> {t.conc_l1b}</p>
+                  <p>{t.conc_l2} <strong className="text-purple-300">{t.conc_l2k}</strong> {t.conc_l2b}</p>
+                  <p>{t.conc_l3} <strong className="text-green-300">{t.conc_l3k}</strong></p>
+                  <p>{t.conc_l4} <InlineMath math="k = 1" /></p>
                 </div>
-                <p className="text-xs text-white/55 italic">Kekongruenan adalah fondasi pembuktian geometri — digunakan untuk membuktikan garis sejajar, persamaan sudut, dan sifat-sifat bangun ruang.</p>
+                <p className="text-xs text-white/55 italic">{t.conc_note}</p>
               </div>
             </div>
 
@@ -1637,7 +2112,7 @@ const KekongruenBangunDatarPage = () => {
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/kesebangunan-kekongruenan"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Kesebangunan dan Kekongruenan
+            {t.back}
           </button>
         </div>
       </div>
