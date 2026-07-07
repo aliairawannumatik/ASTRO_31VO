@@ -10,3 +10,4 @@
 - [Garis Singgung Lingkaran K8 trilingual complete](gsl-k8-trilingual.md) — all 6 K8 GSL files done; hub follows TeoremaPythagorasPage pattern; SVGs receive full `t` prop for aria-label + in-SVG text; ECT="External Common Tangent", 外接共通接線.
 - [BRSD K8 trilingual complete](brsd-k8-trilingual.md) — hub + 5 animation components + LimasPage/PrismaPage/BalokPage/GabunganPage surgical fixes done; GabunganPage complex phrase subscripts still pending.
 - [Bilangan Berpangkat K9 trilingual complete](bilangan-berpangkat-k9-trilingual.md) — all 5 K9 files done; BentukAkarPage (6 sub-babs) + NotasiIlmiahPage (4 sub-babs) with full id/en/ja; KaTeX unit rule: \,\mathrm{} not \text{}.
+- [SimilarityAnimation lang prop pattern](similarity-animation-lang.md) — shared animation components take `lang?: Language` (imported from LanguageContext, not redefined); page passes `lang={language}` directly without cast.

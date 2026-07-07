@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import SimilarityAnimation from "@/components/SimilarityAnimation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /* ── DIAGRAMS ── */
 
@@ -75,6 +76,7 @@ const DiagramHubungan = () => (
 
 const DefinisiPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3",
   ]);
@@ -208,7 +210,7 @@ const DefinisiPage = () => {
 
                 </div>
                 {/* Interactive Similarity Animation */}
-                <SimilarityAnimation />
+                <SimilarityAnimation lang={language} />
 
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
