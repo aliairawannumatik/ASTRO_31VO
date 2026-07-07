@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -477,6 +478,7 @@ function ArithmeticArcPanel({
 const PolaAritmetikaPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
 
   const SectionHeader = ({ icon, iconColor, title }: {
@@ -572,8 +574,8 @@ const PolaAritmetikaPage = () => {
                   label={t.arcLabel1}
                   terms={[1, 3, 5, 7, 9]}
                   a={1} b={2}
-                  arcColor="#22d3ee"
-                  labelColor="#a5f3fc"
+                  arcColor={isDark ? "#22d3ee" : "#0891b2"}
+                  labelColor={isDark ? "#a5f3fc" : "#155e75"}
                   bgClass="bg-cyan-900/40 border-cyan-500/50"
                   textClass="text-cyan-300"
                   constantDiffLabel={t.arcDiff1}
@@ -582,8 +584,8 @@ const PolaAritmetikaPage = () => {
                   label={t.arcLabel2}
                   terms={[8, 6, 4, 2, 0]}
                   a={8} b={-2}
-                  arcColor="#f97316"
-                  labelColor="#fed7aa"
+                  arcColor={isDark ? "#f97316" : "#c2410c"}
+                  labelColor={isDark ? "#fed7aa" : "#7c2d12"}
                   bgClass="bg-orange-900/40 border-orange-500/50"
                   textClass="text-orange-300"
                   constantDiffLabel={t.arcDiff2}
@@ -977,14 +979,14 @@ const PolaAritmetikaPage = () => {
               <p className="font-body text-xs text-white/80 mt-0.5">{t.summarySubheader}</p>
             </div>
 
-            <div className="bg-slate-900/90 backdrop-blur px-5 py-5 space-y-5">
+            <div className={`${isDark ? "bg-slate-900/90" : "bg-white/97"} backdrop-blur px-5 py-5 space-y-5`}>
               <div className="space-y-2">
                 <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-cyan-500/30 border border-cyan-500 flex items-center justify-center text-[10px]">1</span>
+                  <span className={`w-5 h-5 rounded-full ${isDark ? "bg-cyan-500/30 border-cyan-500" : "bg-cyan-100 border-cyan-400"} border flex items-center justify-center text-[10px]`}>1</span>
                   {t.summarySection1}
                 </p>
                 <div className="grid grid-cols-1 gap-2">
-                  <div className="bg-gradient-to-r from-cyan-900/70 to-cyan-800/30 border border-cyan-500/50 rounded-xl p-3 text-center">
+                  <div className={`${isDark ? "bg-gradient-to-r from-cyan-900/70 to-cyan-800/30 border-cyan-500/50" : "bg-cyan-50 border-cyan-300"} border rounded-xl p-3 text-center`}>
                     <p className="font-body text-xs text-cyan-300 font-bold mb-1">{t.summaryUnLabel}</p>
                     <BlockMath math="U_n = a + (n-1) \cdot b" />
                     <div className="flex justify-center gap-3 text-xs font-body flex-wrap mt-1">
@@ -993,17 +995,17 @@ const PolaAritmetikaPage = () => {
                       <span className="text-violet-300">{t.nLabel}</span>
                     </div>
                   </div>
-                  <div className="bg-gradient-to-r from-green-900/70 to-green-800/30 border border-green-500/50 rounded-xl p-3 text-center">
+                  <div className={`${isDark ? "bg-gradient-to-r from-green-900/70 to-green-800/30 border-green-500/50" : "bg-green-50 border-green-300"} border rounded-xl p-3 text-center`}>
                     <p className="font-body text-xs text-green-300 font-bold mb-1">{t.summarySnLabel}</p>
                     <BlockMath math="S_n = \frac{n}{2}[2a + (n-1)b] = \frac{n}{2}(a + U_n)" />
-                    <p className="font-body text-xs text-white/50">{t.summarySnNote}</p>
+                    <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-slate-500"}`}>{t.summarySnNote}</p>
                   </div>
-                  <div className="bg-gradient-to-r from-violet-900/70 to-violet-800/30 border border-violet-500/50 rounded-xl p-3 text-center">
+                  <div className={`${isDark ? "bg-gradient-to-r from-violet-900/70 to-violet-800/30 border-violet-500/50" : "bg-violet-50 border-violet-300"} border rounded-xl p-3 text-center`}>
                     <p className="font-body text-xs text-violet-300 font-bold mb-1">{t.summaryRelLabel}</p>
                     <BlockMath math="U_n = S_n - S_{n-1} \quad (n \geq 2)" />
-                    <p className="font-body text-xs text-white/50">{t.summaryRelNote}</p>
+                    <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-slate-500"}`}>{t.summaryRelNote}</p>
                   </div>
-                  <div className="bg-gradient-to-r from-orange-900/70 to-orange-800/30 border border-orange-500/50 rounded-xl p-3 text-center">
+                  <div className={`${isDark ? "bg-gradient-to-r from-orange-900/70 to-orange-800/30 border-orange-500/50" : "bg-orange-50 border-orange-300"} border rounded-xl p-3 text-center`}>
                     <p className="font-body text-xs text-orange-300 font-bold mb-1">{t.summaryBLabel}</p>
                     <BlockMath math="b = U_2 - U_1 = U_3 - U_2 = U_n - U_{n-1}" />
                   </div>
@@ -1012,7 +1014,7 @@ const PolaAritmetikaPage = () => {
 
               <div className="space-y-2">
                 <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-yellow-500/30 border border-yellow-500 flex items-center justify-center text-[10px]">2</span>
+                  <span className={`w-5 h-5 rounded-full ${isDark ? "bg-yellow-500/30 border-yellow-500" : "bg-yellow-100 border-yellow-400"} border flex items-center justify-center text-[10px]`}>2</span>
                   {t.tipsSection}
                 </p>
                 <div className="space-y-2">
@@ -1028,13 +1030,13 @@ const PolaAritmetikaPage = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-cyan-500/20 via-green-500/15 to-teal-500/20 border border-white/20 rounded-2xl p-5 text-center space-y-3">
+              <div className={`${isDark ? "bg-gradient-to-br from-cyan-500/20 via-green-500/15 to-teal-500/20 border-white/20" : "bg-gradient-to-br from-cyan-50 via-green-50 to-teal-50 border-teal-200"} border rounded-2xl p-5 text-center space-y-3`}>
                 <div className="text-3xl">🏆</div>
                 <p className="font-display text-base font-bold text-white">{t.conclusionTitle}</p>
                 <p className="font-body text-sm text-white/80 leading-relaxed">{t.conclusionBody}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-1">
                   {t.tags.map(tag => (
-                    <span key={tag} className="bg-white/10 border border-white/20 text-white/80 text-xs font-body px-3 py-1 rounded-full">{tag}</span>
+                    <span key={tag} className={`${isDark ? "bg-white/10 border-white/20 text-white/80" : "bg-white/80 border-slate-200 text-slate-600"} border text-xs font-body px-3 py-1 rounded-full`}>{tag}</span>
                   ))}
                 </div>
                 <p className="font-display text-sm font-semibold text-yellow-300 mt-2">{t.nextPrompt}</p>
