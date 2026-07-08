@@ -10,6 +10,7 @@ import JarakDuaTitikInteraktif from "@/components/JarakDuaTitikInteraktif";
 import { JarakGarisHorizontal, JarakGarisVertikal, JarakGarisMiring } from "@/components/JarakTitikKeGarisInteraktif";
 import { RangkumanSection } from "@/components/RangkumanSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -302,6 +303,7 @@ const translations = {
 const JarakTitikGarisPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "jarakdua", "jarakgaris", "contoh1", "contoh2", "contoh3", "rangkuman",
@@ -422,9 +424,9 @@ const JarakTitikGarisPage = () => {
                   <p className="font-body text-xs text-white/60">{t.pt1FormulaLabel}</p>
                   <BlockMath math="\boxed{d(AB) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}" />
                 </div>
-                <div className="bg-slate-800/60 border border-cyan-500/25 rounded-xl p-4 space-y-3">
-                  <p className="text-cyan-300 font-mono font-bold text-sm">{t.pt1AnimHeader}</p>
-                  <p className="text-white/50 text-xs font-body">{t.pt1AnimBody}</p>
+                <div className={`${isDark ? "bg-slate-800/60 border-cyan-500/25" : "bg-slate-100 border-cyan-400/50"} border rounded-xl p-4 space-y-3`}>
+                  <p className={`${isDark ? "text-cyan-300" : "text-cyan-700"} font-mono font-bold text-sm`}>{t.pt1AnimHeader}</p>
+                  <p className={`${isDark ? "text-white/50" : "text-gray-600"} text-xs font-body`}>{t.pt1AnimBody}</p>
                   <JarakDuaTitikInteraktif />
                 </div>
               </div>
@@ -462,28 +464,28 @@ const JarakTitikGarisPage = () => {
                   </div>
                 </div>
                 <div className="space-y-6 text-xs font-body">
-                  <p className="font-bold text-white text-sm">{t.specialCasesHeader}</p>
+                  <p className={`font-bold ${isDark ? "text-white" : "text-gray-800"} text-sm`}>{t.specialCasesHeader}</p>
                   <div className="space-y-3">
-                    <div className="bg-slate-800/50 border border-cyan-500/30 rounded-lg p-3">
-                      <p className="text-cyan-300 font-semibold mb-1">{t.horzLabel} <InlineMath math="y = k" />:</p>
+                    <div className={`${isDark ? "bg-slate-800/50 border-cyan-500/30" : "bg-cyan-50 border-cyan-400"} border rounded-lg p-3`}>
+                      <p className={`${isDark ? "text-cyan-300" : "text-cyan-700"} font-semibold mb-1`}>{t.horzLabel} <InlineMath math="y = k" />:</p>
                       <BlockMath math="d = |y_P - k|" />
-                      <p className="text-white/60">{t.horzBody}</p>
+                      <p className={isDark ? "text-white/60" : "text-gray-700"}>{t.horzBody}</p>
                     </div>
                     <JarakGarisHorizontal />
                   </div>
                   <div className="space-y-3">
-                    <div className="bg-slate-800/50 border border-green-500/30 rounded-lg p-3">
-                      <p className="text-green-300 font-semibold mb-1">{t.vertLabel} <InlineMath math="x = k" />:</p>
+                    <div className={`${isDark ? "bg-slate-800/50 border-green-500/30" : "bg-green-50 border-green-400"} border rounded-lg p-3`}>
+                      <p className={`${isDark ? "text-green-300" : "text-green-700"} font-semibold mb-1`}>{t.vertLabel} <InlineMath math="x = k" />:</p>
                       <BlockMath math="d = |x_P - k|" />
-                      <p className="text-white/60">{t.vertBody}</p>
+                      <p className={isDark ? "text-white/60" : "text-gray-700"}>{t.vertBody}</p>
                     </div>
                     <JarakGarisVertikal />
                   </div>
                   <div className="space-y-3">
-                    <div className="bg-slate-800/50 border border-violet-500/30 rounded-lg p-3">
-                      <p className="text-violet-300 font-semibold mb-1">{t.slopeLabel} <InlineMath math="ax + by + c = 0" />:</p>
+                    <div className={`${isDark ? "bg-slate-800/50 border-violet-500/30" : "bg-violet-50 border-violet-400"} border rounded-lg p-3`}>
+                      <p className={`${isDark ? "text-violet-300" : "text-violet-700"} font-semibold mb-1`}>{t.slopeLabel} <InlineMath math="ax + by + c = 0" />:</p>
                       <BlockMath math="d = \frac{|ax_P + by_P + c|}{\sqrt{a^2 + b^2}}" />
-                      <p className="text-white/60">{t.slopeBody}</p>
+                      <p className={isDark ? "text-white/60" : "text-gray-700"}>{t.slopeBody}</p>
                     </div>
                     <JarakGarisMiring />
                   </div>
@@ -594,12 +596,20 @@ const JarakTitikGarisPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-3 text-sm font-body">
                 <div className="grid grid-cols-1 gap-3">
-                  {t.rangFormulas.map(({ judul, rumus, color }) => (
-                    <div key={judul} className={`border ${color} rounded-lg p-3 text-center`}>
-                      <p className="text-white/60 text-xs mb-1">{judul}</p>
-                      <BlockMath math={rumus} />
-                    </div>
-                  ))}
+                  {(() => {
+                    const lightColors = [
+                      "bg-cyan-50 border-cyan-400",
+                      "bg-green-50 border-green-400",
+                      "bg-violet-50 border-violet-400",
+                      "bg-orange-50 border-orange-400",
+                    ];
+                    return t.rangFormulas.map(({ judul, rumus, color }, idx) => (
+                      <div key={judul} className={`border ${isDark ? color : lightColors[idx]} rounded-lg p-3 text-center`}>
+                        <p className={`${isDark ? "text-white/60" : "text-gray-600"} text-xs mb-1`}>{judul}</p>
+                        <BlockMath math={rumus} />
+                      </div>
+                    ));
+                  })()}
                 </div>
               </div>
             )}
@@ -607,18 +617,41 @@ const JarakTitikGarisPage = () => {
 
           {/* ═══ RANGKUMAN ═══ */}
           <RangkumanSection
+            isDark={isDark}
             gradientFrom="from-rose-600" gradientVia="via-pink-600" gradientTo="to-red-700"
             borderColor="border-rose-500/30" accentColor="text-rose-200"
             headerIcon="📋" judul={t.rangkumanJudul} subjudul={t.rangkumanSubjudul}
             ringkasan={[
-              { emoji:"📏", judul: t.r1judul, bg:"bg-rose-900/40", border:"border-rose-500/30", textColor:"text-rose-300", isi: t.r1isi },
-              { emoji:"↔️", judul: t.r2judul, bg:"bg-cyan-900/40", border:"border-cyan-500/30", textColor:"text-cyan-300", isi: t.r2isi },
-              { emoji:"↕️", judul: t.r3judul, bg:"bg-green-900/40", border:"border-green-500/30", textColor:"text-green-300", isi: t.r3isi },
-              { emoji:"📐", judul: t.r4judul, bg:"bg-violet-900/40", border:"border-violet-500/30", textColor:"text-violet-300", isi: t.r4isi },
+              { emoji:"📏", judul: t.r1judul,
+                bg:        isDark ? "bg-rose-900/40"   : "bg-rose-100",
+                border:    isDark ? "border-rose-500/30"  : "border-rose-400",
+                textColor: isDark ? "text-rose-300"    : "text-rose-700",
+                isi: t.r1isi },
+              { emoji:"↔️", judul: t.r2judul,
+                bg:        isDark ? "bg-cyan-900/40"   : "bg-cyan-100",
+                border:    isDark ? "border-cyan-500/30"  : "border-cyan-400",
+                textColor: isDark ? "text-cyan-300"    : "text-cyan-700",
+                isi: t.r2isi },
+              { emoji:"↕️", judul: t.r3judul,
+                bg:        isDark ? "bg-green-900/40"  : "bg-green-100",
+                border:    isDark ? "border-green-500/30" : "border-green-400",
+                textColor: isDark ? "text-green-300"   : "text-green-700",
+                isi: t.r3isi },
+              { emoji:"📐", judul: t.r4judul,
+                bg:        isDark ? "bg-violet-900/40" : "bg-violet-100",
+                border:    isDark ? "border-violet-500/30": "border-violet-400",
+                textColor: isDark ? "text-violet-300"  : "text-violet-700",
+                isi: t.r4isi },
             ]}
             rumus={[
-              { label: t.rumusLabel1, rumus:"d(PQ) = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}", bg:"bg-rose-900/30", border:"border-rose-500/25", labelColor:"text-rose-300" },
-              { label: t.rumusLabel2, rumus:"d = \\frac{|ax_P + by_P + c|}{\\sqrt{a^2+b^2}}", bg:"bg-violet-900/30", border:"border-violet-500/25", labelColor:"text-violet-300" },
+              { label: t.rumusLabel1, rumus:"d(PQ) = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}",
+                bg:         isDark ? "bg-rose-900/30"   : "bg-rose-50",
+                border:     isDark ? "border-rose-500/25"  : "border-rose-300",
+                labelColor: isDark ? "text-rose-300"    : "text-rose-700" },
+              { label: t.rumusLabel2, rumus:"d = \\frac{|ax_P + by_P + c|}{\\sqrt{a^2+b^2}}",
+                bg:         isDark ? "bg-violet-900/30" : "bg-violet-50",
+                border:     isDark ? "border-violet-500/25": "border-violet-300",
+                labelColor: isDark ? "text-violet-300"  : "text-violet-700" },
             ]}
             tips={[
               { emoji:"🧠", teks: t.tip1 },
@@ -627,9 +660,11 @@ const JarakTitikGarisPage = () => {
               { emoji:"🎯", teks: t.tip4 },
             ]}
             kesimpulan={t.kesimpulan}
-            kesimpulanBg="bg-gradient-to-r from-rose-600/20 to-pink-600/20"
-            kesimpulanBorder="border-rose-400/40"
-            kesimpulanTextColor="text-rose-100/90"
+            kesimpulanBg={isDark
+              ? "bg-gradient-to-r from-rose-600/20 to-pink-600/20"
+              : "bg-gradient-to-r from-rose-100 to-pink-100"}
+            kesimpulanBorder={isDark ? "border-rose-400/40" : "border-rose-400"}
+            kesimpulanTextColor={isDark ? "text-rose-100/90" : "text-rose-800"}
           />
 
         </div>

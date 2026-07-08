@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const VIEW = 300;
 const RANGE = 6;
@@ -22,7 +23,7 @@ function getSnapped(e: React.PointerEvent, el: SVGSVGElement): [number, number] 
   return [clamp(Math.round(rx), -RANGE, RANGE), clamp(Math.round(ry), -RANGE, RANGE)];
 }
 
-function renderGrid(axisColor: string, gridColor: string): React.ReactNode[] {
+function renderGrid(axisColor: string, gridColor: string, labelFill: string): React.ReactNode[] {
   const nodes: React.ReactNode[] = [];
   for (let i = -RANGE; i <= RANGE; i++) {
     const axis = i === 0;
@@ -35,9 +36,9 @@ function renderGrid(axisColor: string, gridColor: string): React.ReactNode[] {
     if (i !== 0) {
       nodes.push(
         <text key={`lx${i}`} className="geom-axis-label" x={toSX(i)} y={toSY(0) + 13} textAnchor="middle"
-          fill="rgba(255,255,255,0.28)" fontSize={8} fontFamily="monospace">{i}</text>,
+          fill={labelFill} fontSize={8} fontFamily="monospace">{i}</text>,
         <text key={`ly${i}`} className="geom-axis-label" x={toSX(0) - 5} y={toSY(i) + 3} textAnchor="end"
-          fill="rgba(255,255,255,0.28)" fontSize={8} fontFamily="monospace">{i}</text>
+          fill={labelFill} fontSize={8} fontFamily="monospace">{i}</text>
       );
     }
   }
@@ -48,6 +49,7 @@ function renderGrid(axisColor: string, gridColor: string): React.ReactNode[] {
    1. GARIS HORIZONTAL  y = k
 ═══════════════════════════════════════════════════════════════ */
 export function JarakGarisHorizontal() {
+  const { isDark } = useTheme();
   const [ptP, setPtP] = useState<[number, number]>([3, 4]);
   const [k, setK] = useState(1);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -84,7 +86,7 @@ export function JarakGarisHorizontal() {
       </div>
 
       {/* ── SVG ── */}
-      <div className="geom-diagram-bg bg-[#021018] flex justify-center">
+      <div className={`geom-diagram-bg ${isDark ? "bg-[#021018]" : "bg-sky-50"} flex justify-center`}>
         <svg ref={svgRef} width={VIEW} height={VIEW} viewBox={`0 0 ${VIEW} ${VIEW}`}
           style={{ display: "block", maxWidth: "100%", touchAction: "none" }}
           onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}>
@@ -93,8 +95,12 @@ export function JarakGarisHorizontal() {
               <stop offset="0%" stopColor="#0c2030" /><stop offset="100%" stopColor="#021018" />
             </radialGradient>
           </defs>
-          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill="url(#bgH)" />
-          {renderGrid("rgba(34,211,238,0.4)", "rgba(34,211,238,0.08)")}
+          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill={isDark ? "url(#bgH)" : "white"} />
+          {renderGrid(
+            isDark ? "rgba(34,211,238,0.4)"  : "rgba(8,145,178,0.7)",
+            isDark ? "rgba(34,211,238,0.08)" : "rgba(8,145,178,0.15)",
+            isDark ? "rgba(255,255,255,0.28)": "rgba(8,145,178,0.8)"
+          )}
 
           {/* invisible wide hit band for horizontal line */}
           <line x1={0} y1={toSY(k)} x2={VIEW} y2={toSY(k)}
@@ -138,19 +144,19 @@ export function JarakGarisHorizontal() {
       </div>
 
       {/* ── formula panel ── */}
-      <div className="bg-gradient-to-b from-slate-900 to-cyan-950/50 px-4 py-4 space-y-3 border-t border-cyan-500/20">
+      <div className={`${isDark ? "bg-gradient-to-b from-slate-900 to-cyan-950/50 border-cyan-500/20" : "bg-gradient-to-b from-slate-50 to-cyan-50 border-cyan-300"} px-4 py-4 space-y-3 border-t`}>
         <div className="flex flex-wrap gap-2 justify-center text-xs font-mono">
-          <span className="bg-orange-900/50 border border-orange-500/40 rounded-lg px-2.5 py-1 text-orange-200">y<sub>P</sub> = {ptP[1]}</span>
-          <span className="bg-cyan-900/50 border border-cyan-500/40 rounded-lg px-2.5 py-1 text-cyan-200">k = {k}</span>
-          <span className="bg-yellow-900/50 border border-yellow-500/40 rounded-lg px-2.5 py-1 text-yellow-200">|y<sub>P</sub>−k| = {Math.abs(ptP[1]-k)}</span>
+          <span className={`${isDark ? "bg-orange-900/50 border-orange-500/40 text-orange-200" : "bg-orange-100 border-orange-400 text-orange-700"} border rounded-lg px-2.5 py-1`}>y<sub>P</sub> = {ptP[1]}</span>
+          <span className={`${isDark ? "bg-cyan-900/50 border-cyan-500/40 text-cyan-200" : "bg-cyan-100 border-cyan-400 text-cyan-700"} border rounded-lg px-2.5 py-1`}>k = {k}</span>
+          <span className={`${isDark ? "bg-yellow-900/50 border-yellow-500/40 text-yellow-200" : "bg-yellow-100 border-yellow-400 text-yellow-700"} border rounded-lg px-2.5 py-1`}>|y<sub>P</sub>−k| = {Math.abs(ptP[1]-k)}</span>
         </div>
-        <div className="bg-slate-800/70 border border-cyan-500/20 rounded-xl px-3 py-1 overflow-x-auto">
+        <div className={`${isDark ? "bg-slate-800/70 border-cyan-500/20" : "bg-cyan-50 border-cyan-300"} border rounded-xl px-3 py-1 overflow-x-auto`}>
           <BlockMath math={`d = |y_P - k| = |${ptP[1]} - (${k})| = |${ptP[1] - k}| = ${dist}`} />
         </div>
         <div className="flex justify-center">
-          <div className="bg-gradient-to-r from-cyan-600/20 to-sky-600/20 border border-cyan-400/50 rounded-xl px-8 py-3 text-center">
-            <p className="text-cyan-300/60 text-xs font-body mb-0.5">Jarak P ke garis y={k}</p>
-            <p className="font-mono font-bold text-3xl text-cyan-300">d = {dist} <span className="text-sm font-normal text-cyan-300/50">satuan</span></p>
+          <div className={`${isDark ? "bg-gradient-to-r from-cyan-600/20 to-sky-600/20 border-cyan-400/50" : "bg-gradient-to-r from-cyan-100 to-sky-100 border-cyan-400"} border rounded-xl px-8 py-3 text-center`}>
+            <p className={`${isDark ? "text-cyan-300/60" : "text-cyan-600"} text-xs font-body mb-0.5`}>Jarak P ke garis y={k}</p>
+            <p className={`font-mono font-bold text-3xl ${isDark ? "text-cyan-300" : "text-cyan-700"}`}>d = {dist} <span className={`text-sm font-normal ${isDark ? "text-cyan-300/50" : "text-cyan-600"}`}>satuan</span></p>
           </div>
         </div>
       </div>
@@ -162,6 +168,7 @@ export function JarakGarisHorizontal() {
    2. GARIS VERTIKAL  x = k
 ═══════════════════════════════════════════════════════════════ */
 export function JarakGarisVertikal() {
+  const { isDark } = useTheme();
   const [ptP, setPtP] = useState<[number, number]>([-3, 2]);
   const [k, setK] = useState(2);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -196,7 +203,7 @@ export function JarakGarisVertikal() {
         <span className="text-white/75 text-xs font-mono bg-white/10 px-2 py-1 rounded-lg">d = |x<sub>P</sub>−k|</span>
       </div>
 
-      <div className="geom-diagram-bg bg-[#011509] flex justify-center">
+      <div className={`geom-diagram-bg ${isDark ? "bg-[#011509]" : "bg-green-50"} flex justify-center`}>
         <svg ref={svgRef} width={VIEW} height={VIEW} viewBox={`0 0 ${VIEW} ${VIEW}`}
           style={{ display: "block", maxWidth: "100%", touchAction: "none" }}
           onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}>
@@ -205,8 +212,12 @@ export function JarakGarisVertikal() {
               <stop offset="0%" stopColor="#061a0d" /><stop offset="100%" stopColor="#011509" />
             </radialGradient>
           </defs>
-          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill="url(#bgV)" />
-          {renderGrid("rgba(74,222,128,0.4)", "rgba(74,222,128,0.08)")}
+          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill={isDark ? "url(#bgV)" : "white"} />
+          {renderGrid(
+            isDark ? "rgba(74,222,128,0.4)"  : "rgba(22,163,74,0.7)",
+            isDark ? "rgba(74,222,128,0.08)" : "rgba(22,163,74,0.15)",
+            isDark ? "rgba(255,255,255,0.28)": "rgba(22,163,74,0.8)"
+          )}
 
           <line x1={toSX(k)} y1={0} x2={toSX(k)} y2={VIEW}
             stroke="transparent" strokeWidth={24} onPointerDown={onLineDown}
@@ -244,19 +255,19 @@ export function JarakGarisVertikal() {
         </svg>
       </div>
 
-      <div className="bg-gradient-to-b from-slate-900 to-green-950/50 px-4 py-4 space-y-3 border-t border-green-500/20">
+      <div className={`${isDark ? "bg-gradient-to-b from-slate-900 to-green-950/50 border-green-500/20" : "bg-gradient-to-b from-slate-50 to-green-50 border-green-300"} px-4 py-4 space-y-3 border-t`}>
         <div className="flex flex-wrap gap-2 justify-center text-xs font-mono">
-          <span className="bg-pink-900/50 border border-pink-500/40 rounded-lg px-2.5 py-1 text-pink-200">x<sub>P</sub> = {ptP[0]}</span>
-          <span className="bg-green-900/50 border border-green-500/40 rounded-lg px-2.5 py-1 text-green-200">k = {k}</span>
-          <span className="bg-yellow-900/50 border border-yellow-500/40 rounded-lg px-2.5 py-1 text-yellow-200">|x<sub>P</sub>−k| = {Math.abs(ptP[0]-k)}</span>
+          <span className={`${isDark ? "bg-pink-900/50 border-pink-500/40 text-pink-200" : "bg-pink-100 border-pink-400 text-pink-700"} border rounded-lg px-2.5 py-1`}>x<sub>P</sub> = {ptP[0]}</span>
+          <span className={`${isDark ? "bg-green-900/50 border-green-500/40 text-green-200" : "bg-green-100 border-green-400 text-green-700"} border rounded-lg px-2.5 py-1`}>k = {k}</span>
+          <span className={`${isDark ? "bg-yellow-900/50 border-yellow-500/40 text-yellow-200" : "bg-yellow-100 border-yellow-400 text-yellow-700"} border rounded-lg px-2.5 py-1`}>|x<sub>P</sub>−k| = {Math.abs(ptP[0]-k)}</span>
         </div>
-        <div className="bg-slate-800/70 border border-green-500/20 rounded-xl px-3 py-1 overflow-x-auto">
+        <div className={`${isDark ? "bg-slate-800/70 border-green-500/20" : "bg-green-50 border-green-300"} border rounded-xl px-3 py-1 overflow-x-auto`}>
           <BlockMath math={`d = |x_P - k| = |${ptP[0]} - (${k})| = |${ptP[0] - k}| = ${dist}`} />
         </div>
         <div className="flex justify-center">
-          <div className="bg-gradient-to-r from-green-600/20 to-teal-600/20 border border-green-400/50 rounded-xl px-8 py-3 text-center">
-            <p className="text-green-300/60 text-xs font-body mb-0.5">Jarak P ke garis x={k}</p>
-            <p className="font-mono font-bold text-3xl text-green-300">d = {dist} <span className="text-sm font-normal text-green-300/50">satuan</span></p>
+          <div className={`${isDark ? "bg-gradient-to-r from-green-600/20 to-teal-600/20 border-green-400/50" : "bg-gradient-to-r from-green-100 to-teal-100 border-green-400"} border rounded-xl px-8 py-3 text-center`}>
+            <p className={`${isDark ? "text-green-300/60" : "text-green-600"} text-xs font-body mb-0.5`}>Jarak P ke garis x={k}</p>
+            <p className={`font-mono font-bold text-3xl ${isDark ? "text-green-300" : "text-green-700"}`}>d = {dist} <span className={`text-sm font-normal ${isDark ? "text-green-300/50" : "text-green-600"}`}>satuan</span></p>
           </div>
         </div>
       </div>
@@ -268,6 +279,7 @@ export function JarakGarisVertikal() {
    3. GARIS MIRING  ax + by + c = 0
 ═══════════════════════════════════════════════════════════════ */
 export function JarakGarisMiring() {
+  const { isDark } = useTheme();
   const [L1, setL1] = useState<[number, number]>([-4, -2]);
   const [L2, setL2] = useState<[number, number]>([4, 2]);
   const [ptP, setPtP] = useState<[number, number]>([-2, 4]);
@@ -359,7 +371,7 @@ export function JarakGarisMiring() {
         <span className="text-white/75 text-xs font-mono bg-white/10 px-2 py-1 rounded-lg hidden sm:block">d=|ax+by+c|/√(a²+b²)</span>
       </div>
 
-      <div className="geom-diagram-bg bg-[#0a0118] flex justify-center">
+      <div className={`geom-diagram-bg ${isDark ? "bg-[#0a0118]" : "bg-violet-50"} flex justify-center`}>
         <svg ref={svgRef} width={VIEW} height={VIEW} viewBox={`0 0 ${VIEW} ${VIEW}`}
           style={{ display: "block", maxWidth: "100%", touchAction: "none" }}
           onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}>
@@ -368,8 +380,12 @@ export function JarakGarisMiring() {
               <stop offset="0%" stopColor="#180530" /><stop offset="100%" stopColor="#0a0118" />
             </radialGradient>
           </defs>
-          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill="url(#bgM)" />
-          {renderGrid("rgba(167,139,250,0.45)", "rgba(167,139,250,0.08)")}
+          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill={isDark ? "url(#bgM)" : "white"} />
+          {renderGrid(
+            isDark ? "rgba(167,139,250,0.45)" : "rgba(124,58,237,0.7)",
+            isDark ? "rgba(167,139,250,0.08)" : "rgba(124,58,237,0.15)",
+            isDark ? "rgba(255,255,255,0.28)"  : "rgba(124,58,237,0.8)"
+          )}
 
           {!same && <>
             {/* invisible hit area */}
@@ -436,25 +452,25 @@ export function JarakGarisMiring() {
         </svg>
       </div>
 
-      <div className="bg-gradient-to-b from-slate-900 to-violet-950/50 px-4 py-4 space-y-3 border-t border-violet-500/20">
+      <div className={`${isDark ? "bg-gradient-to-b from-slate-900 to-violet-950/50 border-violet-500/20" : "bg-gradient-to-b from-slate-50 to-violet-50 border-violet-300"} px-4 py-4 space-y-3 border-t`}>
         {same ? (
-          <p className="text-yellow-300 text-xs font-mono text-center">⚠️ Pindahkan L₁ dan L₂ ke posisi berbeda!</p>
+          <p className={`${isDark ? "text-yellow-300" : "text-yellow-700"} text-xs font-mono text-center`}>⚠️ Pindahkan L₁ dan L₂ ke posisi berbeda!</p>
         ) : (
           <>
             <div className="flex flex-wrap gap-2 justify-center text-xs font-mono">
-              <span className="bg-violet-900/50 border border-violet-500/40 rounded-lg px-2 py-1 text-violet-200">Garis: {eqStr}</span>
-              <span className="bg-slate-700/60 border border-white/15 rounded-lg px-2 py-1 text-white/60">a={a}, b={b}, c={c}</span>
-              <span className="bg-amber-900/50 border border-amber-500/40 rounded-lg px-2 py-1 text-amber-200">P({ptP[0]},{ptP[1]})</span>
+              <span className={`${isDark ? "bg-violet-900/50 border-violet-500/40 text-violet-200" : "bg-violet-100 border-violet-400 text-violet-700"} border rounded-lg px-2 py-1`}>Garis: {eqStr}</span>
+              <span className={`${isDark ? "bg-slate-700/60 border-white/15 text-white/60" : "bg-gray-100 border-gray-300 text-gray-600"} border rounded-lg px-2 py-1`}>a={a}, b={b}, c={c}</span>
+              <span className={`${isDark ? "bg-amber-900/50 border-amber-500/40 text-amber-200" : "bg-amber-100 border-amber-400 text-amber-700"} border rounded-lg px-2 py-1`}>P({ptP[0]},{ptP[1]})</span>
             </div>
-            <div className="bg-slate-800/70 border border-violet-500/20 rounded-xl px-3 py-1 overflow-x-auto space-y-0.5 text-sm">
-              <div className="text-violet-300/60"><BlockMath math={`d = \\frac{|ax_P + by_P + c|}{\\sqrt{a^2+b^2}}`} /></div>
-              <div className="text-white/80"><BlockMath math={`= \\frac{|${a}(${ptP[0]}) + (${b})(${ptP[1]}) + (${c})|}{\\sqrt{${a}^2+(${b})^2}}`} /></div>
-              <div className="text-white/80"><BlockMath math={`= \\frac{|${num}|}{\\sqrt{${denom}}} = \\frac{${Math.abs(num)}}{\\sqrt{${denom}}}`} /></div>
+            <div className={`${isDark ? "bg-slate-800/70 border-violet-500/20" : "bg-violet-50 border-violet-300"} border rounded-xl px-3 py-1 overflow-x-auto space-y-0.5 text-sm`}>
+              <div className={isDark ? "text-violet-300/60" : "text-violet-400"}><BlockMath math={`d = \\frac{|ax_P + by_P + c|}{\\sqrt{a^2+b^2}}`} /></div>
+              <div className={isDark ? "text-white/80" : "text-gray-800"}><BlockMath math={`= \\frac{|${a}(${ptP[0]}) + (${b})(${ptP[1]}) + (${c})|}{\\sqrt{${a}^2+(${b})^2}}`} /></div>
+              <div className={isDark ? "text-white/80" : "text-gray-800"}><BlockMath math={`= \\frac{|${num}|}{\\sqrt{${denom}}} = \\frac{${Math.abs(num)}}{\\sqrt{${denom}}}`} /></div>
             </div>
             <div className="flex justify-center">
-              <div className="bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 border border-violet-400/50 rounded-xl px-8 py-3 text-center">
-                <p className="text-violet-300/60 text-xs font-body mb-0.5">Jarak P ke garis {eqStr}</p>
-                <p className="font-mono font-bold text-3xl text-violet-300">d {Number.isInteger(dist)?"=":"≈"} {distStr} <span className="text-sm font-normal text-violet-300/50">satuan</span></p>
+              <div className={`${isDark ? "bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20 border-violet-400/50" : "bg-gradient-to-r from-violet-100 to-fuchsia-100 border-violet-400"} border rounded-xl px-8 py-3 text-center`}>
+                <p className={`${isDark ? "text-violet-300/60" : "text-violet-600"} text-xs font-body mb-0.5`}>Jarak P ke garis {eqStr}</p>
+                <p className={`font-mono font-bold text-3xl ${isDark ? "text-violet-300" : "text-violet-700"}`}>d {Number.isInteger(dist)?"=":"≈"} {distStr} <span className={`text-sm font-normal ${isDark ? "text-violet-300/50" : "text-violet-600"}`}>satuan</span></p>
               </div>
             </div>
           </>

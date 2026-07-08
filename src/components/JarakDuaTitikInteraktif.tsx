@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const VIEW = 360;
 const RANGE = 7;
@@ -22,6 +23,7 @@ function getSVGCoords(e: React.PointerEvent, el: SVGSVGElement): [number, number
 }
 
 export default function JarakDuaTitikInteraktif() {
+  const { isDark } = useTheme();
   const [ptA, setPtA] = useState<[number, number]>([-3, -2]);
   const [ptB, setPtB] = useState<[number, number]>([4, 3]);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -58,23 +60,26 @@ export default function JarakDuaTitikInteraktif() {
   const fs5 = isExact ? `= ${distDisplay}` : `\\approx ${distDisplay}`;
 
   /* grid */
+  const axisStroke  = isDark ? "rgba(99,102,241,0.6)"  : "rgba(99,102,241,0.75)";
+  const minorStroke = isDark ? "rgba(99,102,241,0.12)" : "rgba(99,102,241,0.18)";
+  const labelFill   = isDark ? "rgba(167,139,250,0.5)" : "rgba(109,40,217,0.75)";
   const grid: React.ReactNode[] = [];
   for (let i = -RANGE; i <= RANGE; i++) {
     const axis = i === 0;
     grid.push(
       <line key={`v${i}`} x1={toSX(i)} y1={0} x2={toSX(i)} y2={VIEW}
-        stroke={axis ? "rgba(99,102,241,0.6)" : "rgba(99,102,241,0.12)"}
+        stroke={axis ? axisStroke : minorStroke}
         strokeWidth={axis ? 1.5 : 1} />,
       <line key={`h${i}`} x1={0} y1={toSY(i)} x2={VIEW} y2={toSY(i)}
-        stroke={axis ? "rgba(99,102,241,0.6)" : "rgba(99,102,241,0.12)"}
+        stroke={axis ? axisStroke : minorStroke}
         strokeWidth={axis ? 1.5 : 1} />
     );
     if (i !== 0) {
       grid.push(
         <text key={`lx${i}`} x={toSX(i)} y={toSY(0) + 14} textAnchor="middle"
-          fill="rgba(167,139,250,0.5)" fontSize={8} fontFamily="monospace">{i}</text>,
+          fill={labelFill} fontSize={8} fontFamily="monospace">{i}</text>,
         <text key={`ly${i}`} x={toSX(0) - 5} y={toSY(i) + 3} textAnchor="end"
-          fill="rgba(167,139,250,0.5)" fontSize={8} fontFamily="monospace">{i}</text>
+          fill={labelFill} fontSize={8} fontFamily="monospace">{i}</text>
       );
     }
   }
@@ -96,7 +101,7 @@ export default function JarakDuaTitikInteraktif() {
       </div>
 
       {/* ── SVG grid ── */}
-      <div className="geom-diagram-bg bg-[#0d0d1a] flex justify-center">
+      <div className={`geom-diagram-bg ${isDark ? "bg-[#0d0d1a]" : "bg-gray-50"} flex justify-center`}>
         <svg
           ref={svgRef}
           width={VIEW} height={VIEW}
@@ -112,7 +117,7 @@ export default function JarakDuaTitikInteraktif() {
               <stop offset="100%" stopColor="#0d0d1a" />
             </radialGradient>
           </defs>
-          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill="url(#bgGlow)" />
+          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill={isDark ? "url(#bgGlow)" : "white"} />
           {grid}
 
           {!samePoint && (
@@ -186,76 +191,76 @@ export default function JarakDuaTitikInteraktif() {
       </div>
 
       {/* ── legend strip ── */}
-      <div className="bg-indigo-950/80 px-4 py-2 flex flex-wrap gap-x-5 gap-y-1 justify-center border-t border-indigo-500/20">
-        <span className="flex items-center gap-1.5 text-xs font-mono text-pink-300">
+      <div className={`${isDark ? "bg-indigo-950/80 border-indigo-500/20" : "bg-indigo-50 border-indigo-200"} px-4 py-2 flex flex-wrap gap-x-5 gap-y-1 justify-center border-t`}>
+        <span className={`flex items-center gap-1.5 text-xs font-mono ${isDark ? "text-pink-300" : "text-pink-600"}`}>
           <span className="w-3 h-3 rounded-full bg-pink-400" />A(x₁, y₁)
         </span>
-        <span className="flex items-center gap-1.5 text-xs font-mono text-violet-300">
+        <span className={`flex items-center gap-1.5 text-xs font-mono ${isDark ? "text-violet-300" : "text-violet-600"}`}>
           <span className="w-3 h-3 rounded-full bg-violet-400" />B(x₂, y₂)
         </span>
-        <span className="flex items-center gap-1.5 text-xs font-mono text-amber-300">
+        <span className={`flex items-center gap-1.5 text-xs font-mono ${isDark ? "text-amber-300" : "text-amber-600"}`}>
           <span className="inline-block w-6 h-0.5 bg-amber-400 rounded" />jarak d(AB)
         </span>
-        <span className="flex items-center gap-1.5 text-xs font-mono text-cyan-300">
+        <span className={`flex items-center gap-1.5 text-xs font-mono ${isDark ? "text-cyan-300" : "text-cyan-600"}`}>
           <span className="inline-block w-5 border-t-2 border-dashed border-cyan-400" />Δx
         </span>
-        <span className="flex items-center gap-1.5 text-xs font-mono text-green-300">
+        <span className={`flex items-center gap-1.5 text-xs font-mono ${isDark ? "text-green-300" : "text-green-600"}`}>
           <span className="inline-block w-5 border-t-2 border-dashed border-green-400" />Δy
         </span>
       </div>
 
       {/* ── formula panel ── */}
       {samePoint ? (
-        <div className="bg-yellow-950/60 px-5 py-4 text-center border-t border-yellow-500/20">
-          <p className="text-yellow-300 font-mono text-sm">⚠️ Pindahkan A dan B ke posisi yang berbeda!</p>
+        <div className={`${isDark ? "bg-yellow-950/60 border-yellow-500/20" : "bg-yellow-50 border-yellow-400"} px-5 py-4 text-center border-t`}>
+          <p className={`${isDark ? "text-yellow-300" : "text-yellow-700"} font-mono text-sm`}>⚠️ Pindahkan A dan B ke posisi yang berbeda!</p>
         </div>
       ) : (
-        <div className="bg-gradient-to-b from-slate-900 to-indigo-950/60 px-5 py-4 space-y-4 border-t border-indigo-500/20">
+        <div className={`${isDark ? "bg-gradient-to-b from-slate-900 to-indigo-950/60 border-indigo-500/20" : "bg-gradient-to-b from-slate-50 to-indigo-50 border-indigo-200"} px-5 py-4 space-y-4 border-t`}>
           {/* coordinate badges */}
           <div className="flex flex-wrap gap-2 justify-center">
             {[
-              { label: "x₁", val: ptA[0], color: "bg-pink-900/60 border-pink-500/50 text-pink-200" },
-              { label: "y₁", val: ptA[1], color: "bg-pink-900/60 border-pink-500/50 text-pink-200" },
-              { label: "x₂", val: ptB[0], color: "bg-violet-900/60 border-violet-500/50 text-violet-200" },
-              { label: "y₂", val: ptB[1], color: "bg-violet-900/60 border-violet-500/50 text-violet-200" },
-              { label: "Δx", val: dx, color: "bg-cyan-900/60 border-cyan-500/50 text-cyan-200" },
-              { label: "Δy", val: dy, color: "bg-green-900/60 border-green-500/50 text-green-200" },
+              { label: "x₁", val: ptA[0], color: isDark ? "bg-pink-900/60 border-pink-500/50 text-pink-200"   : "bg-pink-100 border-pink-400 text-pink-700" },
+              { label: "y₁", val: ptA[1], color: isDark ? "bg-pink-900/60 border-pink-500/50 text-pink-200"   : "bg-pink-100 border-pink-400 text-pink-700" },
+              { label: "x₂", val: ptB[0], color: isDark ? "bg-violet-900/60 border-violet-500/50 text-violet-200" : "bg-violet-100 border-violet-400 text-violet-700" },
+              { label: "y₂", val: ptB[1], color: isDark ? "bg-violet-900/60 border-violet-500/50 text-violet-200" : "bg-violet-100 border-violet-400 text-violet-700" },
+              { label: "Δx", val: dx,     color: isDark ? "bg-cyan-900/60 border-cyan-500/50 text-cyan-200"   : "bg-cyan-100 border-cyan-400 text-cyan-700" },
+              { label: "Δy", val: dy,     color: isDark ? "bg-green-900/60 border-green-500/50 text-green-200": "bg-green-100 border-green-400 text-green-700" },
             ].map(({ label, val, color }) => (
               <span key={label} className={`border rounded-lg px-3 py-1.5 text-sm font-mono font-bold ${color}`}>
-                {label} = <span className="text-white">{val}</span>
+                {label} = <span className={isDark ? "text-white" : "text-gray-800"}>{val}</span>
               </span>
             ))}
           </div>
 
           {/* step-by-step formula */}
-          <div className="bg-indigo-950/60 border border-indigo-500/25 rounded-xl px-4 py-3 space-y-1 overflow-x-auto">
-            <p className="text-indigo-300 font-mono font-bold text-xs mb-2 uppercase tracking-wide">📐 Langkah Perhitungan</p>
-            <div className="text-indigo-300/60 text-sm">
+          <div className={`${isDark ? "bg-indigo-950/60 border-indigo-500/25" : "bg-indigo-50 border-indigo-300"} border rounded-xl px-4 py-3 space-y-1 overflow-x-auto`}>
+            <p className={`${isDark ? "text-indigo-300" : "text-indigo-600"} font-mono font-bold text-xs mb-2 uppercase tracking-wide`}>📐 Langkah Perhitungan</p>
+            <div className={isDark ? "text-indigo-300/60 text-sm" : "text-indigo-400 text-sm"}>
               <BlockMath math={`d(AB) = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}`} />
             </div>
-            <div className="text-white/80">
+            <div className={isDark ? "text-white/80" : "text-gray-800"}>
               <BlockMath math={fs2} />
             </div>
-            <div className="text-cyan-300">
+            <div className={isDark ? "text-cyan-300" : "text-cyan-700"}>
               <BlockMath math={fs3} />
             </div>
-            <div className="text-amber-300">
+            <div className={isDark ? "text-amber-300" : "text-amber-700"}>
               <BlockMath math={fs4} />
             </div>
-            <div className="text-amber-400 font-bold">
+            <div className={`font-bold ${isDark ? "text-amber-400" : "text-amber-700"}`}>
               <BlockMath math={fs5} />
             </div>
           </div>
 
           {/* result badge */}
           <div className="flex items-center justify-center">
-            <div className="bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-orange-500/20 border border-amber-400/50 rounded-2xl px-8 py-4 flex items-center gap-4 shadow-lg shadow-amber-900/20">
+            <div className={`${isDark ? "bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-orange-500/20 border-amber-400/50 shadow-amber-900/20" : "bg-gradient-to-r from-amber-100 via-yellow-100 to-orange-100 border-amber-400"} border rounded-2xl px-8 py-4 flex items-center gap-4 shadow-lg`}>
               <div className="text-center">
-                <p className="text-amber-300/70 text-xs font-body mb-1">Jarak A ke B</p>
-                <p className="font-mono font-bold text-4xl text-amber-300 leading-none">
+                <p className={`${isDark ? "text-amber-300/70" : "text-amber-600"} text-xs font-body mb-1`}>Jarak A ke B</p>
+                <p className={`font-mono font-bold text-4xl ${isDark ? "text-amber-300" : "text-amber-700"} leading-none`}>
                   {isExact ? distDisplay : `≈${distDisplay}`}
                 </p>
-                <p className="text-amber-300/50 text-xs font-body mt-1">satuan</p>
+                <p className={`${isDark ? "text-amber-300/50" : "text-amber-600"} text-xs font-body mt-1`}>satuan</p>
               </div>
             </div>
           </div>
