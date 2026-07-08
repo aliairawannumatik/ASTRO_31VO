@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import FunctionMachineAnimation from "@/components/FunctionMachineAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -342,6 +343,8 @@ const translations = {
 const NotasiFungsiPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { theme } = useTheme();
+  const isSpaceTheme = theme === "dark";
   const t = translations[language];
 
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -687,40 +690,46 @@ const NotasiFungsiPage = () => {
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sec_rangkuman_title} />
             {expandedSections.includes("rangkuman") && (
               <div className="px-5 pb-6 space-y-4">
-                <p className="font-display text-xs font-bold text-orange-300 uppercase tracking-wider pt-1">{t.sum_title}</p>
+                <p className={`font-display text-xs font-bold uppercase tracking-wider pt-1 ${isSpaceTheme ? "text-orange-300" : "text-orange-600"}`}>{t.sum_title}</p>
                 <div className="grid grid-cols-1 gap-2">
-                  {[
+                  {(isSpaceTheme ? [
                     { ...t.sum_items[0], color: "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300" },
                     { ...t.sum_items[1], color: "from-amber-900/60 to-yellow-900/60 border-amber-500/40 text-amber-300" },
                     { ...t.sum_items[2], color: "from-yellow-900/60 to-lime-900/60 border-yellow-500/40 text-yellow-300" },
                     { ...t.sum_items[3], color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
                     { ...t.sum_items[4], color: "from-blue-900/60 to-indigo-900/60 border-blue-500/40 text-blue-300" },
-                  ].map(({ icon, label, desc, color }) => (
+                  ] : [
+                    { ...t.sum_items[0], color: "from-orange-50 to-amber-50 border-orange-200 text-orange-700" },
+                    { ...t.sum_items[1], color: "from-amber-50 to-yellow-50 border-amber-200 text-amber-700" },
+                    { ...t.sum_items[2], color: "from-yellow-50 to-lime-50 border-yellow-200 text-yellow-700" },
+                    { ...t.sum_items[3], color: "from-green-50 to-emerald-50 border-green-200 text-green-700" },
+                    { ...t.sum_items[4], color: "from-blue-50 to-indigo-50 border-blue-200 text-blue-700" },
+                  ]).map(({ icon, label, desc, color }) => (
                     <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
                       <span className="text-xl shrink-0">{icon}</span>
                       <div>
                         <p className="font-display text-xs font-bold mb-0.5">{label}</p>
-                        <p className="font-body text-xs text-white/80 leading-relaxed">{desc}</p>
+                        <p className={`font-body text-xs leading-relaxed ${isSpaceTheme ? "text-white/80" : "text-gray-600"}`}>{desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">{t.tips_title}</p>
+                <div className={`border rounded-xl p-4 ${isSpaceTheme ? "bg-gradient-to-br from-amber-900/40 to-orange-900/40 border-amber-500/40" : "bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200"}`}>
+                  <p className={`font-display text-xs font-bold uppercase tracking-wider mb-3 ${isSpaceTheme ? "text-amber-300" : "text-amber-700"}`}>{t.tips_title}</p>
                   <div className="space-y-2">
                     {t.tips.map((tip, i) => (
                       <div key={i} className="flex gap-2 items-start">
-                        <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
-                        <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
+                        <span className={`shrink-0 w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] ${isSpaceTheme ? "bg-amber-500/30 text-amber-200" : "bg-amber-200 text-amber-800"}`}>{i + 1}</span>
+                        <p className={`font-body text-xs leading-relaxed ${isSpaceTheme ? "text-amber-100/90" : "text-amber-800"}`}>{tip}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-orange-900/60 to-amber-900/60 border border-orange-400/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-orange-300 uppercase tracking-wider mb-2">{t.concl_title}</p>
-                  <p className="font-body text-sm text-white/90 leading-relaxed">{t.concl_p}</p>
+                <div className={`border rounded-xl p-4 ${isSpaceTheme ? "bg-gradient-to-r from-orange-900/60 to-amber-900/60 border-orange-400/40" : "bg-gradient-to-r from-orange-50 to-amber-50 border-orange-200"}`}>
+                  <p className={`font-display text-xs font-bold uppercase tracking-wider mb-2 ${isSpaceTheme ? "text-orange-300" : "text-orange-700"}`}>{t.concl_title}</p>
+                  <p className={`font-body text-sm leading-relaxed ${isSpaceTheme ? "text-white/90" : "text-gray-700"}`}>{t.concl_p}</p>
                 </div>
               </div>
             )}

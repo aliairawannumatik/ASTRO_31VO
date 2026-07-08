@@ -3,6 +3,7 @@ import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
 import { Pencil, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 type StepLabels = {
   substituteX: string;
@@ -225,8 +226,8 @@ function buildCustomSteps(formula: string, x: number, L: StepLabels): { desc: st
 type Phase = "idle" | "feeding" | "processing" | "outputting" | "done";
 const PRESETS = [-3, -2, -1, 0, 1, 2, 3, 5];
 
-function GearSVG({ size, speed, clockwise, color, spinning }: {
-  size: number; speed: number; clockwise: boolean; color: string; spinning: boolean;
+function GearSVG({ size, speed, clockwise, color, spinning, centerColor }: {
+  size: number; speed: number; clockwise: boolean; color: string; spinning: boolean; centerColor: string;
 }) {
   const teeth = 8;
   const r = size / 2;
@@ -256,31 +257,33 @@ function GearSVG({ size, speed, clockwise, color, spinning }: {
         repeatCount="indefinite"
       />
       <polygon points={points.join(" ")} fill={color} opacity={spinning ? 0.95 : 0.45} />
-      <circle r={r * 0.32} fill="#0f172a" />
+      <circle r={r * 0.32} fill={centerColor} />
       <circle r={r * 0.14} fill={color} opacity={spinning ? 0.9 : 0.4} />
     </svg>
   );
 }
 
-function Ball({ value, color, visible, animClass, label, sublabel }: {
+function Ball({ value, color, visible, animClass, label, sublabel, labelClass, sublabelClass, inactiveBorderColor, inactiveTextColor, inactiveBgColor }: {
   value: string; color: string; visible: boolean; animClass?: string;
   label: string; sublabel: string;
+  labelClass?: string; sublabelClass?: string;
+  inactiveBorderColor?: string; inactiveTextColor?: string; inactiveBgColor?: string;
 }) {
   return (
     <div className="flex flex-col items-center gap-1">
-      <span className="text-[10px] text-white/40 font-body uppercase tracking-widest">{label}</span>
+      <span className={`text-[10px] font-body uppercase tracking-widest ${labelClass ?? "text-white/40"}`}>{label}</span>
       <div
         className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 flex items-center justify-center font-mono font-bold text-lg sm:text-xl transition-all duration-500 ${animClass ?? ""}`}
         style={{
-          borderColor: visible ? color : "rgba(255,255,255,0.15)",
-          color: visible ? color : "rgba(255,255,255,0.2)",
-          background: visible ? `${color}22` : "rgba(255,255,255,0.03)",
+          borderColor: visible ? color : (inactiveBorderColor ?? "rgba(255,255,255,0.15)"),
+          color: visible ? color : (inactiveTextColor ?? "rgba(255,255,255,0.2)"),
+          background: visible ? `${color}22` : (inactiveBgColor ?? "rgba(255,255,255,0.03)"),
           boxShadow: visible ? `0 0 18px ${color}50` : "none",
         }}
       >
         {value}
       </div>
-      <span className="text-[10px] text-white/30 font-body">{sublabel}</span>
+      <span className={`text-[10px] font-body ${sublabelClass ?? "text-white/30"}`}>{sublabel}</span>
     </div>
   );
 }
@@ -318,8 +321,57 @@ function Arrow({ color, active, vertical }: { color: string; active: boolean; ve
 
 export default function FunctionMachineAnimation() {
   const { language } = useLanguage();
+  const { theme } = useTheme();
+  const isSpace = theme === "dark";
   const ui = UI[language as keyof typeof UI] ?? UI.id;
   const stepLabels = STEP_LABELS[language as keyof typeof STEP_LABELS] ?? STEP_LABELS.id;
+
+  // Theme-sensitive colors
+  const tc = {
+    innerBg:          isSpace ? "from-[#0a0515] via-[#0d1220] to-[#050c1a]"  : "from-gray-50 via-white to-gray-50",
+    headerBgStyle:    isSpace
+      ? "linear-gradient(135deg, rgba(124,58,237,0.25) 0%, rgba(6,182,212,0.15) 50%, rgba(236,72,153,0.20) 100%)"
+      : "linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(6,182,212,0.05) 50%, rgba(236,72,153,0.07) 100%)",
+    subtitleText:     isSpace ? "text-white/60"  : "text-gray-500",
+    selectorBorder:   isSpace ? "border-white/[0.06]" : "border-black/[0.07]",
+    selectorBg:       isSpace ? "bg-white/[0.02]"     : "bg-gray-100/60",
+    machineBg:        (color: string) => isSpace
+      ? `linear-gradient(135deg, #0f172a 0%, ${color}1a 100%)`
+      : `linear-gradient(135deg, #f8fafc 0%, ${color}18 100%)`,
+    gearCenter:       isSpace ? "#0f172a"  : "#f8fafc",
+    machineLabelCls:  isSpace ? "text-white/40" : "text-gray-400",
+    ballLabelCls:     isSpace ? "text-white/40" : "text-gray-500",
+    ballSubLabelCls:  isSpace ? "text-white/30" : "text-gray-400",
+    ballInactiveBorder: isSpace ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)",
+    ballInactiveText:   isSpace ? "rgba(255,255,255,0.2)"  : "rgba(0,0,0,0.18)",
+    ballInactiveBg:     isSpace ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
+    stepsBg:          (color: string) => `linear-gradient(135deg, ${color}12 0%, ${isSpace ? "rgba(15,23,42,0.9)" : "rgba(248,250,252,0.97)"} 100%)`,
+    stepsExprCls:     isSpace ? "text-white/90" : "text-gray-800",
+    idleHintCls:      isSpace ? "text-white/30" : "text-gray-400",
+    xInputCls:        isSpace ? "text-white"    : "text-gray-800",
+    selectorUnselected: isSpace
+      ? { border: "1.5px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.5)" }
+      : { border: "1.5px solid rgba(0,0,0,0.12)",       background: "rgba(0,0,0,0.04)",       color: "rgba(0,0,0,0.45)" },
+    resetBtnStyle:    isSpace
+      ? { background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)" }
+      : { background: "rgba(0,0,0,0.05)",        border: "1px solid rgba(0,0,0,0.10)" },
+    resetBtnCls:      isSpace ? "text-white/60 hover:text-white" : "text-gray-500 hover:text-gray-800",
+    runBtnDisabled:   isSpace
+      ? { background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.4)" }
+      : { background: "rgba(0,0,0,0.06)",        border: "1px solid rgba(0,0,0,0.10)",       color: "rgba(0,0,0,0.3)" },
+    presetSelectedText: isSpace ? "#0f172a" : "#ffffff",
+    customPanelCls:   isSpace ? "bg-orange-900/20 border-orange-500/30" : "bg-orange-50 border-orange-300",
+    customInputCls:   isSpace
+      ? "bg-slate-900/60 border border-orange-500/30 text-orange-200 placeholder-white/20 focus:border-orange-400/60 focus:ring-orange-400/30"
+      : "bg-white border border-orange-300 text-orange-700 placeholder-gray-300 focus:border-orange-400 focus:ring-orange-200",
+    quickExLabelCls:  isSpace ? "text-white/30" : "text-gray-400",
+    presetBtnCls:     isSpace
+      ? "border-orange-500/20 bg-orange-900/20 text-orange-300/70 hover:text-orange-200 hover:border-orange-400/40 hover:bg-orange-900/30"
+      : "border-orange-300 bg-orange-50 text-orange-600 hover:text-orange-700 hover:border-orange-400 hover:bg-orange-100",
+    hintTextCls:      isSpace ? "text-white/25" : "text-gray-400",
+    hintCodeCls:      isSpace ? "text-orange-300/60" : "text-orange-500",
+    tryDomainCls:     (color: string) => isSpace ? `${color}90` : color,
+  };
 
   const [fn, setFn] = useState(FUNCTIONS[0]);
   const [isCustom, setIsCustom] = useState(false);
@@ -404,18 +456,18 @@ export default function FunctionMachineAnimation() {
       style={{
         width: size === "sm" ? 148 : undefined,
         borderColor: activeColor,
-        background: `linear-gradient(135deg, #0f172a 0%, ${activeColor}1a 100%)`,
+        background: tc.machineBg(activeColor),
         boxShadow: spinning
           ? `0 0 32px ${activeColor}80, 0 0 64px ${activeColor}30`
           : `0 0 12px ${activeColor}25`,
       }}
     >
       <div className="flex items-center gap-1 mb-2" style={{ opacity: spinning ? 1 : 0.45 }}>
-        <GearSVG size={size === "lg" ? 28 : 26} speed={1.8} clockwise={true}  color={activeColor} spinning={spinning} />
-        <GearSVG size={size === "lg" ? 20 : 18} speed={1.2} clockwise={false} color={activeColor} spinning={spinning} />
-        <GearSVG size={size === "lg" ? 24 : 22} speed={1.5} clockwise={true}  color={activeColor} spinning={spinning} />
+        <GearSVG size={size === "lg" ? 28 : 26} speed={1.8} clockwise={true}  color={activeColor} spinning={spinning} centerColor={tc.gearCenter} />
+        <GearSVG size={size === "lg" ? 20 : 18} speed={1.2} clockwise={false} color={activeColor} spinning={spinning} centerColor={tc.gearCenter} />
+        <GearSVG size={size === "lg" ? 24 : 22} speed={1.5} clockwise={true}  color={activeColor} spinning={spinning} centerColor={tc.gearCenter} />
       </div>
-      <div className="text-[9px] text-white/40 font-body uppercase tracking-wider mb-0.5">{ui.machineLabel}</div>
+      <div className={`text-[9px] font-body uppercase tracking-wider mb-0.5 ${tc.machineLabelCls}`}>{ui.machineLabel}</div>
       <div style={{ color: activeColor }} className={`font-mono font-bold text-center leading-tight ${size === "lg" ? "text-sm" : "text-xs"} max-w-[130px] break-all`}>
         {isCustom
           ? <span>f(x) = <span className="text-orange-300">{customFormula || "..."}</span></span>
@@ -437,7 +489,7 @@ export default function FunctionMachineAnimation() {
 
   return (
     <div className="rounded-2xl overflow-hidden p-[2px]" style={{ background: "linear-gradient(135deg, #7c3aed 0%, #06b6d4 30%, #ec4899 60%, #f59e0b 100%)" }}>
-    <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-[#0a0515] via-[#0d1220] to-[#050c1a] backdrop-blur">
+    <div className={`rounded-2xl overflow-hidden bg-gradient-to-br ${tc.innerBg} backdrop-blur`}>
       <style>{`
         @keyframes fma-ball-enter {
           from { transform: scale(0.5); opacity: 0; }
@@ -468,7 +520,7 @@ export default function FunctionMachineAnimation() {
       `}</style>
 
       {/* Header strip */}
-      <div className="px-4 pt-4 pb-3 text-center" style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.25) 0%, rgba(6,182,212,0.15) 50%, rgba(236,72,153,0.20) 100%)" }}>
+      <div className="px-4 pt-4 pb-3 text-center" style={{ background: tc.headerBgStyle }}>
         <div className="flex items-center justify-center gap-2 mb-1">
           <span className="text-xl">⚙️</span>
           <p className="font-display text-base font-bold" style={{ background: "linear-gradient(90deg, #a78bfa, #22d3ee, #f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
@@ -476,11 +528,11 @@ export default function FunctionMachineAnimation() {
           </p>
           <span className="text-xl">🎯</span>
         </div>
-        <p className="text-xs text-white/60 font-body">{ui.subtitle}</p>
+        <p className={`text-xs font-body ${tc.subtitleText}`}>{ui.subtitle}</p>
       </div>
 
       {/* Function Selector */}
-      <div className="flex flex-wrap gap-2 justify-center px-4 py-3 bg-white/[0.02] border-y border-white/[0.06]">
+      <div className={`flex flex-wrap gap-2 justify-center px-4 py-3 border-y ${tc.selectorBg} ${tc.selectorBorder}`}>
         {FUNCTIONS.map(f => (
           <button
             key={f.id}
@@ -488,7 +540,7 @@ export default function FunctionMachineAnimation() {
             className="text-xs px-3 py-1.5 rounded-full font-mono font-bold transition-all cursor-pointer active:scale-95"
             style={!isCustom && fn.id === f.id
               ? { borderWidth: 2, borderStyle: "solid", borderColor: f.color, color: f.color, background: `${f.color}22`, boxShadow: `0 0 12px ${f.color}50` }
-              : { border: "1.5px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.5)" }
+              : tc.selectorUnselected
             }
           >
             {f.label}
@@ -499,7 +551,7 @@ export default function FunctionMachineAnimation() {
           className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-full font-bold transition-all cursor-pointer active:scale-95"
           style={isCustom
             ? { borderWidth: 2, borderStyle: "solid", borderColor: CUSTOM_COLOR, color: CUSTOM_COLOR, background: `${CUSTOM_COLOR}22`, boxShadow: `0 0 12px ${CUSTOM_COLOR}50` }
-            : { border: "1.5px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.5)" }
+            : tc.selectorUnselected
           }
         >
           <Pencil className="w-3 h-3" /> {ui.custom}
@@ -508,47 +560,47 @@ export default function FunctionMachineAnimation() {
 
       {/* Custom Formula Input Panel */}
       {isCustom && (
-        <div className="mx-4 mb-3 bg-orange-900/20 border border-orange-500/30 rounded-xl p-3 space-y-2">
+        <div className={`mx-4 mb-3 border rounded-xl p-3 space-y-2 ${tc.customPanelCls}`}>
           <div className="flex items-center gap-2">
-            <span className="text-orange-300 text-xs font-bold font-mono shrink-0">f(x) =</span>
+            <span className="text-orange-500 text-xs font-bold font-mono shrink-0">f(x) =</span>
             <input
               type="text"
               value={customFormula}
               onChange={e => handleCustomFormulaChange(e.target.value)}
               placeholder={ui.placeholder}
-              className="flex-1 bg-slate-900/60 border border-orange-500/30 rounded-lg px-3 py-1.5 text-sm font-mono text-orange-200 placeholder-white/20 outline-none focus:border-orange-400/60 focus:ring-1 focus:ring-orange-400/30 transition-all"
+              className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-mono outline-none focus:ring-1 transition-all ${tc.customInputCls}`}
               disabled={isRunning}
             />
             {customFormula && (
               <button onClick={() => { handleCustomFormulaChange(""); reset(); }}
-                className="text-white/30 hover:text-white/60 transition-colors shrink-0">
+                className={`transition-colors shrink-0 ${isSpace ? "text-white/30 hover:text-white/60" : "text-gray-400 hover:text-gray-600"}`}>
                 <X className="w-4 h-4" />
               </button>
             )}
           </div>
           {customError && (
-            <p className="text-[11px] text-red-400 font-body">{customError}</p>
+            <p className="text-[11px] text-red-500 font-body">{customError}</p>
           )}
           {!customError && customFormula && !customFormulaValid && (
-            <p className="text-[11px] text-red-400 font-body">⚠️ {ui.invalidFormula}</p>
+            <p className="text-[11px] text-red-500 font-body">⚠️ {ui.invalidFormula}</p>
           )}
           {!customError && customFormulaValid && customFormula && (
-            <p className="text-[11px] text-green-400 font-body">✅ {ui.validFormula} {customFormula}</p>
+            <p className="text-[11px] text-green-600 font-body">✅ {ui.validFormula} {customFormula}</p>
           )}
           <div>
-            <p className="text-[10px] text-white/30 font-body mb-1.5 uppercase tracking-wider">{ui.quickExamples}</p>
+            <p className={`text-[10px] font-body mb-1.5 uppercase tracking-wider ${tc.quickExLabelCls}`}>{ui.quickExamples}</p>
             <div className="flex flex-wrap gap-1.5">
               {QUICK_PRESETS.map(p => (
                 <button key={p.value}
                   onClick={() => { handleCustomFormulaChange(p.value); }}
-                  className="text-[11px] font-mono px-2 py-1 rounded-lg border border-orange-500/20 bg-orange-900/20 text-orange-300/70 hover:text-orange-200 hover:border-orange-400/40 hover:bg-orange-900/30 transition-all active:scale-95">
+                  className={`text-[11px] font-mono px-2 py-1 rounded-lg border transition-all active:scale-95 ${tc.presetBtnCls}`}>
                   {p.label}
                 </button>
               ))}
             </div>
           </div>
-          <p className="text-[10px] text-white/25 font-body">
-            💡 {ui.hint} <code className="text-orange-300/60">{ui.hintVar}</code> {ui.hintAsPow} <code className="text-orange-300/60">^</code> {ui.hintPow} <code className="text-orange-300/60">x^2</code>{ui.hintBracket} <code className="text-orange-300/60">()</code> {ui.hintJika}
+          <p className={`text-[10px] font-body ${tc.hintTextCls}`}>
+            💡 {ui.hint} <code className={tc.hintCodeCls}>{ui.hintVar}</code> {ui.hintAsPow} <code className={tc.hintCodeCls}>^</code> {ui.hintPow} <code className={tc.hintCodeCls}>x^2</code>{ui.hintBracket} <code className={tc.hintCodeCls}>()</code> {ui.hintJika}
           </p>
         </div>
       )}
@@ -560,22 +612,22 @@ export default function FunctionMachineAnimation() {
         <div className="hidden sm:flex items-center justify-center gap-0">
           <Ball
             value={xValid ? String(x) : "?"}
-            color={activeColor}
-            visible={inputVisible}
+            color={activeColor} visible={inputVisible}
             animClass={phase === "feeding" ? "fma-ball-enter" : ""}
-            label={ui.inputLabel}
-            sublabel={ui.inputSub}
+            label={ui.inputLabel} sublabel={ui.inputSub}
+            labelClass={tc.ballLabelCls} sublabelClass={tc.ballSubLabelCls}
+            inactiveBorderColor={tc.ballInactiveBorder} inactiveTextColor={tc.ballInactiveText} inactiveBgColor={tc.ballInactiveBg}
           />
           <Arrow color={activeColor} active={arrowLeftActive} />
           <MachineBox size="sm" />
           <Arrow color={activeColor} active={arrowRightActive} />
           <Ball
             value={phase === "done" && result !== null ? String(result) : "?"}
-            color={activeColor}
-            visible={outputVisible}
+            color={activeColor} visible={outputVisible}
             animClass={phase === "done" ? "fma-bounce-result" : ""}
-            label={ui.outputLabel}
-            sublabel={ui.outputSub}
+            label={ui.outputLabel} sublabel={ui.outputSub}
+            labelClass={tc.ballLabelCls} sublabelClass={tc.ballSubLabelCls}
+            inactiveBorderColor={tc.ballInactiveBorder} inactiveTextColor={tc.ballInactiveText} inactiveBgColor={tc.ballInactiveBg}
           />
         </div>
 
@@ -583,22 +635,22 @@ export default function FunctionMachineAnimation() {
         <div className="flex sm:hidden flex-col items-center gap-0">
           <Ball
             value={xValid ? String(x) : "?"}
-            color={activeColor}
-            visible={inputVisible}
+            color={activeColor} visible={inputVisible}
             animClass={phase === "feeding" ? "fma-ball-enter" : ""}
-            label={ui.inputLabel}
-            sublabel={ui.inputSub}
+            label={ui.inputLabel} sublabel={ui.inputSub}
+            labelClass={tc.ballLabelCls} sublabelClass={tc.ballSubLabelCls}
+            inactiveBorderColor={tc.ballInactiveBorder} inactiveTextColor={tc.ballInactiveText} inactiveBgColor={tc.ballInactiveBg}
           />
           <Arrow color={activeColor} active={arrowLeftActive} vertical />
           <MachineBox size="lg" />
           <Arrow color={activeColor} active={arrowRightActive} vertical />
           <Ball
             value={phase === "done" && result !== null ? String(result) : "?"}
-            color={activeColor}
-            visible={outputVisible}
+            color={activeColor} visible={outputVisible}
             animClass={phase === "done" ? "fma-bounce-result" : ""}
-            label={ui.outputLabel}
-            sublabel={ui.outputSub}
+            label={ui.outputLabel} sublabel={ui.outputSub}
+            labelClass={tc.ballLabelCls} sublabelClass={tc.ballSubLabelCls}
+            inactiveBorderColor={tc.ballInactiveBorder} inactiveTextColor={tc.ballInactiveText} inactiveBgColor={tc.ballInactiveBg}
           />
         </div>
       </div>
@@ -606,7 +658,7 @@ export default function FunctionMachineAnimation() {
       {/* Step-by-step */}
       <div className="px-4 pb-3">
         <div className="rounded-xl px-4 py-3 transition-all min-h-[80px]" style={{
-          background: `linear-gradient(135deg, ${activeColor}12 0%, rgba(15,23,42,0.9) 100%)`,
+          background: tc.stepsBg(activeColor),
           border: `1.5px solid ${activeColor}40`,
           boxShadow: phase !== "idle" ? `0 0 16px ${activeColor}20` : "none",
         }}>
@@ -615,7 +667,7 @@ export default function FunctionMachineAnimation() {
             <p className="text-[10px] font-bold uppercase tracking-wider font-body" style={{ color: activeColor }}>{ui.stepsTitle}</p>
           </div>
           {visibleSteps === 0 && phase === "idle" && (
-            <p className="text-white/30 text-xs font-body italic">
+            <p className={`text-xs font-body italic ${tc.idleHintCls}`}>
               {isCustom && !customFormulaValid ? ui.invalidHint : ui.idleHint}
             </p>
           )}
@@ -626,7 +678,7 @@ export default function FunctionMachineAnimation() {
                 {i + 1}
               </span>
               <span className="text-[10px] font-semibold font-body shrink-0" style={{ color: activeColor }}>{step.desc}</span>
-              <span className="font-mono text-sm text-white/90 ml-auto">{step.expr}</span>
+              <span className={`font-mono text-sm ml-auto ${tc.stepsExprCls}`}>{step.expr}</span>
             </div>
           ))}
           {phase === "done" && result !== null && (
@@ -651,7 +703,7 @@ export default function FunctionMachineAnimation() {
               type="number"
               value={inputVal}
               onChange={e => { setInputVal(e.target.value); reset(); }}
-              className="w-14 bg-transparent font-mono text-sm font-bold outline-none text-center text-white"
+              className={`w-14 bg-transparent font-mono text-sm font-bold outline-none text-center ${tc.xInputCls}`}
               disabled={isRunning}
             />
           </div>
@@ -660,7 +712,7 @@ export default function FunctionMachineAnimation() {
             disabled={!xValid || isRunning || (isCustom && !customFormulaValid)}
             className="flex-1 min-w-[130px] py-2.5 rounded-xl font-display font-bold text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95 text-white"
             style={!xValid || isRunning || (isCustom && !customFormulaValid)
-              ? { background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.4)" }
+              ? tc.runBtnDisabled
               : { background: `linear-gradient(135deg, ${activeColor} 0%, ${activeColor}cc 100%)`, border: "none", boxShadow: `0 4px 16px ${activeColor}50` }
             }
           >
@@ -668,8 +720,8 @@ export default function FunctionMachineAnimation() {
           </button>
           {phase === "done" && (
             <button onClick={reset}
-              className="px-3 py-2 rounded-xl text-xs font-body transition-all cursor-pointer text-white/60 hover:text-white active:scale-95"
-              style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)" }}>
+              className={`px-3 py-2 rounded-xl text-xs font-body transition-all cursor-pointer active:scale-95 ${tc.resetBtnCls}`}
+              style={tc.resetBtnStyle}>
               🔄
             </button>
           )}
@@ -678,7 +730,7 @@ export default function FunctionMachineAnimation() {
 
       {/* Preset values */}
       <div className="px-4 pb-5">
-        <p className="text-[10px] font-bold uppercase tracking-wider font-body mb-2" style={{ color: `${activeColor}90` }}>
+        <p className="text-[10px] font-bold uppercase tracking-wider font-body mb-2" style={{ color: tc.tryDomainCls(activeColor) }}>
           {ui.tryDomain}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -691,7 +743,7 @@ export default function FunctionMachineAnimation() {
                 onClick={() => { setInputVal(String(v)); reset(); }}
                 className="w-10 h-10 rounded-xl font-mono text-sm font-bold transition-all cursor-pointer hover:scale-110 active:scale-95"
                 style={isSelected
-                  ? { background: pColor, color: "#0f172a", boxShadow: `0 0 12px ${pColor}80`, border: "none" }
+                  ? { background: pColor, color: tc.presetSelectedText, boxShadow: `0 0 12px ${pColor}80`, border: "none" }
                   : { background: `${pColor}15`, borderWidth: 1.5, borderStyle: "solid", borderColor: `${pColor}50`, color: pColor }
                 }
               >
