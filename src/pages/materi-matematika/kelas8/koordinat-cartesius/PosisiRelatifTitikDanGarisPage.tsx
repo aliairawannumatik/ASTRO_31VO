@@ -9,6 +9,7 @@ import { InlineMath, BlockMath } from "react-katex";
 import { InteraktifTitikAcuan, InteraktifGaris } from "@/components/PosisiRelatifInteraktif";
 import { RangkumanSection } from "@/components/RangkumanSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const T = {
   id: {
@@ -553,6 +554,7 @@ const T = {
 const PosisiRelatifTitikDanGarisPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = T[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
@@ -1043,19 +1045,42 @@ const PosisiRelatifTitikDanGarisPage = () => {
 
           {/* ═══ RANGKUMAN AKHIR ═══ */}
           <RangkumanSection
+            isDark={isDark}
             gradientFrom="from-orange-600" gradientVia="via-amber-600" gradientTo="to-yellow-600"
             borderColor="border-amber-500/30" accentColor="text-amber-200"
             headerIcon="📋" judul={t.rangkumanJudul}
             subjudul={t.rangkumanSubjudul}
             ringkasan={[
-              { emoji:"🎯", judul:t.r1judul, bg:"bg-orange-900/40", border:"border-orange-500/30", textColor:"text-orange-300", isi:t.r1isi },
-              { emoji:"📐", judul:t.r2judul, bg:"bg-amber-900/40", border:"border-amber-500/30", textColor:"text-amber-300", isi:t.r2isi },
-              { emoji:"🔗", judul:t.r3judul, bg:"bg-yellow-900/40", border:"border-yellow-500/30", textColor:"text-yellow-300", isi:t.r3isi },
-              { emoji:"🌐", judul:t.r4judul, bg:"bg-lime-900/40", border:"border-lime-500/30", textColor:"text-lime-300", isi:t.r4isi },
+              { emoji:"🎯", judul:t.r1judul,
+                bg:        isDark ? "bg-orange-900/40"  : "bg-orange-100",
+                border:    isDark ? "border-orange-500/30" : "border-orange-400",
+                textColor: isDark ? "text-orange-300"   : "text-orange-700",
+                isi:t.r1isi },
+              { emoji:"📐", judul:t.r2judul,
+                bg:        isDark ? "bg-amber-900/40"   : "bg-amber-100",
+                border:    isDark ? "border-amber-500/30"  : "border-amber-400",
+                textColor: isDark ? "text-amber-300"    : "text-amber-700",
+                isi:t.r2isi },
+              { emoji:"🔗", judul:t.r3judul,
+                bg:        isDark ? "bg-yellow-900/40"  : "bg-yellow-100",
+                border:    isDark ? "border-yellow-500/30" : "border-yellow-400",
+                textColor: isDark ? "text-yellow-300"   : "text-yellow-700",
+                isi:t.r3isi },
+              { emoji:"🌐", judul:t.r4judul,
+                bg:        isDark ? "bg-lime-900/40"    : "bg-lime-100",
+                border:    isDark ? "border-lime-500/30"   : "border-lime-400",
+                textColor: isDark ? "text-lime-300"     : "text-lime-700",
+                isi:t.r4isi },
             ]}
             rumus={[
-              { label:t.rumusLabel1, rumus:"\\Delta x = x_B - x_A \\qquad \\Delta y = y_B - y_A", bg:"bg-orange-900/30", border:"border-orange-500/25", labelColor:"text-orange-300" },
-              { label:t.rumusLabel2, rumus:"f(P) = ax_P + by_P + c \\quad (> 0,\\, = 0,\\, < 0)", bg:"bg-amber-900/30", border:"border-amber-500/25", labelColor:"text-amber-300" },
+              { label:t.rumusLabel1, rumus:"\\Delta x = x_B - x_A \\qquad \\Delta y = y_B - y_A",
+                bg:         isDark ? "bg-orange-900/30" : "bg-orange-50",
+                border:     isDark ? "border-orange-500/25" : "border-orange-300",
+                labelColor: isDark ? "text-orange-300"  : "text-orange-700" },
+              { label:t.rumusLabel2, rumus:"f(P) = ax_P + by_P + c \\quad (> 0,\\, = 0,\\, < 0)",
+                bg:         isDark ? "bg-amber-900/30"  : "bg-amber-50",
+                border:     isDark ? "border-amber-500/25"  : "border-amber-300",
+                labelColor: isDark ? "text-amber-300"   : "text-amber-700" },
             ]}
             tips={[
               { emoji:"🧠", teks:t.tip1 },
@@ -1064,9 +1089,11 @@ const PosisiRelatifTitikDanGarisPage = () => {
               { emoji:"✅", teks:t.tip4 },
             ]}
             kesimpulan={t.kesimpulan}
-            kesimpulanBg="bg-gradient-to-r from-orange-600/20 to-yellow-600/20"
-            kesimpulanBorder="border-amber-400/40"
-            kesimpulanTextColor="text-amber-100/90"
+            kesimpulanBg={isDark
+              ? "bg-gradient-to-r from-orange-600/20 to-yellow-600/20"
+              : "bg-gradient-to-r from-orange-100 to-yellow-100"}
+            kesimpulanBorder={isDark ? "border-amber-400/40" : "border-amber-400"}
+            kesimpulanTextColor={isDark ? "text-amber-100/90" : "text-amber-800"}
           />
 
         </div>
