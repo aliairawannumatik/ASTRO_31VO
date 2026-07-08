@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import { RangkumanSection } from "@/components/RangkumanSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -336,6 +337,7 @@ const translations = {
 const PosisiRelatifGarisPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "konsep", "contoh1", "contoh2", "contoh3", "rangkuman",
@@ -370,8 +372,16 @@ const PosisiRelatifGarisPage = () => {
   }) => {
     const size = 5; const cellPx = 22; const total = size * 2;
     const toCell = (v: number) => (v + size) * cellPx;
-    const sideColors: Record<string, string> = { atas: "bg-cyan-400", bawah: "bg-pink-400", pada: "bg-green-400" };
-    const textColors: Record<string, string> = { atas: "text-cyan-300", bawah: "text-pink-300", pada: "text-green-300" };
+    const sideColors: Record<string, string> = { atas: "bg-cyan-400", bawah: "bg-pink-400", pada: "bg-green-500" };
+    const textColors: Record<string, string> = isDark
+      ? { atas: "text-cyan-300", bawah: "text-pink-300", pada: "text-green-300" }
+      : { atas: "text-cyan-700", bawah: "text-pink-700", pada: "text-green-700" };
+
+    const gridBg      = isDark ? "rgba(15,23,42,0.85)"   : "rgba(255,255,255,0.95)";
+    const axisColor   = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)";
+    const minorColor  = isDark ? "rgba(255,255,255,0.07)": "rgba(0,0,0,0.08)";
+    const lineColor   = isDark ? "#a78bfa"                : "#7c3aed";
+    const dotBorder   = isDark ? "border-white/80"        : "border-gray-600/60";
 
     const linePoints: [number, number][] = [];
     for (let xi = -size; xi <= size; xi++) {
@@ -381,12 +391,12 @@ const PosisiRelatifGarisPage = () => {
 
     return (
       <div className="flex flex-col items-center gap-2">
-        <div className="relative border border-white/20 rounded-lg overflow-hidden"
-          style={{ width: total * cellPx, height: total * cellPx, background: "rgba(15,23,42,0.85)" }}>
+        <div className={`relative rounded-lg overflow-hidden ${isDark ? "border border-white/20" : "border border-gray-300"}`}
+          style={{ width: total * cellPx, height: total * cellPx, background: gridBg }}>
           {Array.from({ length: total + 1 }).map((_, i) => (
             <React.Fragment key={i}>
-              <div className="absolute" style={{ left: i * cellPx, top: 0, width: 1, height: total * cellPx, background: i === size ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.07)" }} />
-              <div className="absolute" style={{ top: i * cellPx, left: 0, height: 1, width: total * cellPx, background: i === size ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.07)" }} />
+              <div className="absolute" style={{ left: i * cellPx, top: 0, width: 1, height: total * cellPx, background: i === size ? axisColor : minorColor }} />
+              <div className="absolute" style={{ top: i * cellPx, left: 0, height: 1, width: total * cellPx, background: i === size ? axisColor : minorColor }} />
             </React.Fragment>
           ))}
           {linePoints.length >= 2 && (() => {
@@ -397,11 +407,11 @@ const PosisiRelatifGarisPage = () => {
             const dx = bx - ax; const dy = by - ay;
             const len = Math.sqrt(dx * dx + dy * dy);
             const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-            return <div className="absolute z-10 origin-left" style={{ left: ax, top: ay, width: len, height: 2, background: "#a78bfa", transform: `rotate(${angle}deg)`, opacity: 0.9 }} />;
+            return <div className="absolute z-10 origin-left" style={{ left: ax, top: ay, width: len, height: 2, background: lineColor, transform: `rotate(${angle}deg)`, opacity: 0.9 }} />;
           })()}
           {points.map(({ x, y, label, side }) => (
             <div key={label}>
-              <div className={`absolute rounded-full ${sideColors[side]} border-2 border-white/80 z-20`}
+              <div className={`absolute rounded-full ${sideColors[side]} border-2 ${dotBorder} z-20`}
                 style={{ width: 8, height: 8, left: toCell(x) - 4, top: toCell(-y) - 4 }} />
               <span className={`absolute font-mono font-bold z-20 ${textColors[side]}`}
                 style={{ fontSize: 8, left: toCell(x) + 5, top: toCell(-y) - 12, whiteSpace: "nowrap" }}>{label}</span>
@@ -409,10 +419,10 @@ const PosisiRelatifGarisPage = () => {
           ))}
         </div>
         <div className="flex gap-3 flex-wrap justify-center text-xs font-mono">
-          <span className="text-violet-300">{t.legendLine}</span>
-          <span className="text-cyan-300">{t.legendAbove}</span>
-          <span className="text-pink-300">{t.legendBelow}</span>
-          <span className="text-green-300">{t.legendOn}</span>
+          <span className={isDark ? "text-violet-300" : "text-violet-600"}>{t.legendLine}</span>
+          <span className={isDark ? "text-cyan-300"   : "text-cyan-700"}>{t.legendAbove}</span>
+          <span className={isDark ? "text-pink-300"   : "text-pink-700"}>{t.legendBelow}</span>
+          <span className={isDark ? "text-green-300"  : "text-green-700"}>{t.legendOn}</span>
         </div>
       </div>
     );
@@ -662,19 +672,42 @@ const PosisiRelatifGarisPage = () => {
 
           {/* ═══ RANGKUMAN ═══ */}
           <RangkumanSection
+            isDark={isDark}
             gradientFrom="from-violet-600" gradientVia="via-purple-600" gradientTo="to-fuchsia-700"
             borderColor="border-violet-500/30" accentColor="text-violet-200"
             headerIcon="📋" judul={t.rangkumanJudul}
             subjudul={t.rangkumanSubjudul}
             ringkasan={[
-              { emoji:"📝", judul: t.r1judul, bg:"bg-violet-900/40", border:"border-violet-500/30", textColor:"text-violet-300", isi: t.r1isi },
-              { emoji:"✅", judul: t.r2judul, bg:"bg-green-900/40", border:"border-green-500/30", textColor:"text-green-300", isi: t.r2isi },
-              { emoji:"➕", judul: t.r3judul, bg:"bg-sky-900/40", border:"border-sky-500/30", textColor:"text-sky-300", isi: t.r3isi },
-              { emoji:"➖", judul: t.r4judul, bg:"bg-pink-900/40", border:"border-pink-500/30", textColor:"text-pink-300", isi: t.r4isi },
+              { emoji:"📝", judul: t.r1judul,
+                bg:        isDark ? "bg-violet-900/40"  : "bg-violet-100",
+                border:    isDark ? "border-violet-500/30" : "border-violet-400",
+                textColor: isDark ? "text-violet-300"   : "text-violet-700",
+                isi: t.r1isi },
+              { emoji:"✅", judul: t.r2judul,
+                bg:        isDark ? "bg-green-900/40"   : "bg-green-100",
+                border:    isDark ? "border-green-500/30"  : "border-green-400",
+                textColor: isDark ? "text-green-300"    : "text-green-700",
+                isi: t.r2isi },
+              { emoji:"➕", judul: t.r3judul,
+                bg:        isDark ? "bg-sky-900/40"     : "bg-sky-100",
+                border:    isDark ? "border-sky-500/30"    : "border-sky-400",
+                textColor: isDark ? "text-sky-300"      : "text-sky-700",
+                isi: t.r3isi },
+              { emoji:"➖", judul: t.r4judul,
+                bg:        isDark ? "bg-pink-900/40"    : "bg-pink-100",
+                border:    isDark ? "border-pink-500/30"   : "border-pink-400",
+                textColor: isDark ? "text-pink-300"     : "text-pink-700",
+                isi: t.r4isi },
             ]}
             rumus={[
-              { label: t.rumusLabel1, rumus:"f(P) = ax_P + by_P + c", bg:"bg-violet-900/30", border:"border-violet-500/25", labelColor:"text-violet-300" },
-              { label: t.rumusLabel2, rumus:"f(P) = y_P - (mx_P + c)", bg:"bg-purple-900/30", border:"border-purple-500/25", labelColor:"text-purple-300" },
+              { label: t.rumusLabel1, rumus:"f(P) = ax_P + by_P + c",
+                bg:         isDark ? "bg-violet-900/30" : "bg-violet-50",
+                border:     isDark ? "border-violet-500/25" : "border-violet-300",
+                labelColor: isDark ? "text-violet-300"  : "text-violet-700" },
+              { label: t.rumusLabel2, rumus:"f(P) = y_P - (mx_P + c)",
+                bg:         isDark ? "bg-purple-900/30" : "bg-purple-50",
+                border:     isDark ? "border-purple-500/25" : "border-purple-300",
+                labelColor: isDark ? "text-purple-300"  : "text-purple-700" },
             ]}
             tips={[
               { emoji:"🧠", teks: t.tip1 },
@@ -683,9 +716,11 @@ const PosisiRelatifGarisPage = () => {
               { emoji:"📐", teks: t.tip4 },
             ]}
             kesimpulan={t.kesimpulan}
-            kesimpulanBg="bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20"
-            kesimpulanBorder="border-violet-400/40"
-            kesimpulanTextColor="text-violet-100/90"
+            kesimpulanBg={isDark
+              ? "bg-gradient-to-r from-violet-600/20 to-fuchsia-600/20"
+              : "bg-gradient-to-r from-violet-100 to-fuchsia-100"}
+            kesimpulanBorder={isDark ? "border-violet-400/40" : "border-violet-400"}
+            kesimpulanTextColor={isDark ? "text-violet-100/90" : "text-violet-800"}
           />
 
         </div>
