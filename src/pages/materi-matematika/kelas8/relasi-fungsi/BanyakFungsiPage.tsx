@@ -5,8 +5,21 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronUp, Lightbulb, Target, Layers, Hash, RotateCcw, Trophy, XCircle, CheckCircle2, ArrowLeftRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+
+function renderWithLatex(text: string): React.ReactNode {
+  const parts = text.split(/(n\(B\)\^n\(A\))/g);
+  if (parts.length === 1) return text;
+  return (
+    <>
+      {parts.map((p, i) =>
+        p === "n(B)^n(A)" ? <InlineMath key={i} math="n(B)^{n(A)}" /> : p
+      )}
+    </>
+  );
+}
 
 /* ══════════════════════════════════════════════════════
    TRANSLATIONS
@@ -634,7 +647,37 @@ const SizeButtons: React.FC<{ label: string; value: number; color: string; membe
 
 const DiagramInteraktifBanyakFungsi: React.FC = () => {
   const { language } = useLanguage();
+  const { theme } = useTheme();
+  const isSpaceTheme = theme === "dark";
   const tr = TR[language];
+
+  const nc = {
+    domFill:      isSpaceTheme ? "#0e4f6e" : "#dbeafe",
+    domFillDrag:  isSpaceTheme ? "#164e63" : "#bfdbfe",
+    domFillHas:   isSpaceTheme ? "#0c4a6e" : "#bfdbfe",
+    domStroke:    isSpaceTheme ? "#22d3ee" : "#3b82f6",
+    domStrokeDrag:isSpaceTheme ? "#fbbf24" : "#f59e0b",
+    domStrokeHas: isSpaceTheme ? "#67e8f9" : "#60a5fa",
+    domText:      isSpaceTheme ? "#e0f2fe" : "#1e3a8a",
+    codFill:      isSpaceTheme ? "#3b1f7a" : "#f3e8ff",
+    codFillHov:   isSpaceTheme ? "#5b21b6" : "#e9d5ff",
+    codStroke:    isSpaceTheme ? "#a78bfa" : "#9333ea",
+    codStrokeHov: isSpaceTheme ? "#c4b5fd" : "#7c3aed",
+    codText:      isSpaceTheme ? "#ede9fe" : "#581c87",
+    svgBg:        isSpaceTheme ? "bg-slate-900/60" : "bg-white/90",
+    svgBorder:    isSpaceTheme ? "border-white/10" : "border-gray-200",
+    divider:      isSpaceTheme ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)",
+    hintColor:    isSpaceTheme ? "text-white/30" : "text-gray-400",
+    hintBlink:    isSpaceTheme ? "text-white/30" : "text-orange-500 font-semibold",
+    badgeBg:      isSpaceTheme ? "bg-fuchsia-900/20 border-fuchsia-500/30" : "bg-fuchsia-50 border-fuchsia-300",
+    titleColor:   isSpaceTheme ? "text-fuchsia-300" : "text-fuchsia-700",
+    ctrlBg:       isSpaceTheme ? "bg-slate-800/60 border-white/10" : "bg-gray-50 border-gray-200",
+    ctrlHint:     isSpaceTheme ? "text-fuchsia-300/70" : "text-fuchsia-600",
+    countMuted:   isSpaceTheme ? "text-white/40" : "text-gray-500",
+    countEq:      isSpaceTheme ? "text-white/50" : "text-gray-400",
+    progressBg:   isSpaceTheme ? "bg-slate-800" : "bg-gray-200",
+    statusDone:   isSpaceTheme ? "text-green-400" : "text-green-600",
+  };
 
   const [domainSize, setDomainSize]     = useState(2);
   const [codomainSize, setCodomainSize] = useState(3);
@@ -720,30 +763,32 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
   const nCodSize = mode === "AtoB" ? codomainSize : domainSize;
 
   return (
-    <div className="bg-fuchsia-900/20 border border-fuchsia-500/30 rounded-xl p-4 space-y-3">
+    <div className={`border rounded-xl p-4 space-y-3 ${nc.badgeBg}`}>
 
       {/* ── Judul + Ganti Mode ── */}
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <p className="font-body text-sm font-bold text-fuchsia-300">{tr.diag_title}</p>
+        <p className={`font-body text-sm font-bold ${nc.titleColor}`}>{tr.diag_title}</p>
         <div className="flex items-center gap-1.5">
-          <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded ${mode==="AtoB"?"bg-cyan-700/60 text-cyan-200 ring-1 ring-cyan-400":"text-white/30"}`}>A→B</span>
+          <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded ${mode==="AtoB"?"bg-cyan-700/60 text-cyan-200 ring-1 ring-cyan-400":isSpaceTheme?"text-white/30":"text-gray-400"}`}>A→B</span>
           <button onClick={() => { playPopSound(); setMode(m => m==="AtoB"?"BtoA":"AtoB"); setCur({}); setDone(false); setMsg(null); }}
-            className="flex items-center gap-1 bg-slate-700/60 hover:bg-slate-600/70 border border-white/20 text-white text-[11px] font-bold px-2.5 py-1 rounded-full transition-all active:scale-95">
+            className={`flex items-center gap-1 border text-[11px] font-bold px-2.5 py-1 rounded-full transition-all active:scale-95 ${isSpaceTheme?"bg-slate-700/60 hover:bg-slate-600/70 border-white/20 text-white":"bg-white hover:bg-gray-100 border-gray-300 text-gray-700"}`}>
             <ArrowLeftRight className="w-3 h-3" /> {tr.diag_switch}
           </button>
-          <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded ${mode==="BtoA"?"bg-violet-700/60 text-violet-200 ring-1 ring-violet-400":"text-white/30"}`}>B→A</span>
+          <span className={`text-[11px] font-bold font-mono px-2 py-0.5 rounded ${mode==="BtoA"?"bg-violet-700/60 text-violet-200 ring-1 ring-violet-400":isSpaceTheme?"text-white/30":"text-gray-400"}`}>B→A</span>
         </div>
       </div>
 
       {/* ── Kontrol Ukuran Himpunan ── */}
-      <div className="bg-slate-800/60 border border-white/10 rounded-xl p-3 space-y-2">
-        <p className="text-[10px] text-fuchsia-300/70 font-bold font-body mb-1">{tr.diag_size_head}</p>
+      <div className={`border rounded-xl p-3 space-y-2 ${nc.ctrlBg}`}>
+        <p className={`text-[10px] font-bold font-body mb-1 ${nc.ctrlHint}`}>{tr.diag_size_head}</p>
         <SizeButtons label="n(A)" value={domainSize}   color="text-cyan-400"   memberLabel={tr.diag_member} onChange={changeDomainSize} />
         <SizeButtons label="n(B)" value={codomainSize} color="text-violet-400" memberLabel={tr.diag_member} onChange={changeCodomainSize} />
-        <div className="pt-2 border-t border-white/5 flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] text-white/40 font-body">{tr.diag_func_count(domLabel, codLabel)}</span>
-          <span className="text-[11px] font-mono text-white/50">n({codLabel})^n({domLabel}) =</span>
-          <span className="text-[13px] font-bold font-mono text-yellow-300">
+        <div className={`pt-2 border-t ${isSpaceTheme?"border-white/5":"border-gray-200"} flex items-center gap-2 flex-wrap`}>
+          <span className={`text-[10px] font-body ${nc.countMuted}`}>{tr.diag_func_count(domLabel, codLabel)}</span>
+          <span className={`text-[11px] font-mono ${nc.countEq}`}>
+            <InlineMath math={`n(${codLabel})^{n(${domLabel})} =`} />
+          </span>
+          <span className="text-[13px] font-bold font-mono text-yellow-500">
             {nCodSize}{SUPERSCRIPTS[nDomSize] ?? `^${nDomSize}`} = {maxF}
           </span>
           {maxF > 100 && <span className="text-[9px] text-orange-400/70 font-body">{tr.diag_too_many}</span>}
@@ -752,20 +797,20 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
 
       {/* ── Progress Bar ── */}
       <div className="flex items-center gap-2">
-        <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+        <div className={`flex-1 h-1.5 rounded-full overflow-hidden ${nc.progressBg}`}>
           <div className="h-full bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-full transition-all duration-500"
             style={{ width: `${maxF > 0 ? (list.length / maxF) * 100 : 0}%` }} />
         </div>
-        <span className="text-[11px] text-white/50 font-mono shrink-0">{tr.diag_progress(list.length, maxF)}</span>
-        {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">{tr.diag_complete}</span>}
+        <span className={`text-[11px] font-mono shrink-0 ${nc.countEq}`}>{tr.diag_progress(list.length, maxF)}</span>
+        {done && <span className={`text-[11px] font-bold animate-pulse ${nc.statusDone}`}>{tr.diag_complete}</span>}
       </div>
 
       {/* ── SVG Diagram ── */}
       <div className="flex justify-center">
-        <div className="bg-slate-900/60 rounded-xl border border-white/10 p-2 select-none w-full" style={{ maxWidth: SVG_W + 16 }}>
+        <div className={`rounded-xl border p-2 select-none w-full ${nc.svgBg} ${nc.svgBorder}`} style={{ maxWidth: SVG_W + 16 }}>
           <div className="flex justify-between px-4 mb-1 text-[10px] font-bold font-mono">
-            <span className="text-cyan-400">{tr.diag_domain(domLabel)}</span>
-            <span className="text-violet-400">{tr.diag_codomain(codLabel)}</span>
+            <span className="text-cyan-500">{tr.diag_domain(domLabel)}</span>
+            <span className="text-violet-500">{tr.diag_codomain(codLabel)}</span>
           </div>
           <svg ref={svgRef} viewBox={`0 0 ${SVG_W} ${H}`} width="100%"
             style={{ cursor: drag ? "crosshair" : "default", touchAction: "none" }}
@@ -773,21 +818,22 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
             onTouchMove={onMove} onTouchEnd={onUp}>
             <defs>
               <marker id="ah2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-                <path d="M0,0 L8,3 L0,6 Z" fill="#f0abfc" />
+                <path d="M0,0 L8,3 L0,6 Z" fill={isSpaceTheme ? "#f0abfc" : "#a855f7"} />
               </marker>
               <marker id="ahd2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-                <path d="M0,0 L8,3 L0,6 Z" fill="#fbbf24" />
+                <path d="M0,0 L8,3 L0,6 Z" fill="#f59e0b" />
               </marker>
             </defs>
-            <line x1={SVG_W/2} y1={8} x2={SVG_W/2} y2={H-8} stroke="rgba(255,255,255,0.05)" strokeWidth={1} strokeDasharray="4 3" />
+            <line x1={SVG_W/2} y1={8} x2={SVG_W/2} y2={H-8} stroke={nc.divider} strokeWidth={1} strokeDasharray="4 3" />
 
             {domain.map(el => {
               const target = cur[el]; if (!target) return null;
-              return <path key={el} d={bezierPath(domPos[el], codPos[target])} fill="none" stroke="#f0abfc" strokeWidth={2.5} markerEnd="url(#ah2)" />;
+              return <path key={el} d={bezierPath(domPos[el], codPos[target])} fill="none"
+                stroke={isSpaceTheme ? "#f0abfc" : "#a855f7"} strokeWidth={2.5} markerEnd="url(#ah2)" />;
             })}
 
             {drag && dragFromPos && (
-              <path d={bezierPath(dragFromPos, mouse, NODE_R, 0)} fill="none" stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 3" markerEnd="url(#ahd2)" />
+              <path d={bezierPath(dragFromPos, mouse, NODE_R, 0)} fill="none" stroke="#f59e0b" strokeWidth={2} strokeDasharray="6 3" markerEnd="url(#ahd2)" />
             )}
 
             {codomain.map((el) => {
@@ -795,8 +841,8 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
               const hover = drag !== null && Math.hypot(mouse.x - p.x, mouse.y - p.y) < NODE_R + 10;
               return (
                 <g key={el}>
-                  <circle cx={p.x} cy={p.y} r={NODE_R} fill={hover?"#5b21b6":"#3b1f7a"} stroke={hover?"#c4b5fd":"#a78bfa"} strokeWidth={hover?2.5:1.5} />
-                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill="#ede9fe" fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
+                  <circle cx={p.x} cy={p.y} r={NODE_R} fill={hover ? nc.codFillHov : nc.codFill} stroke={hover ? nc.codStrokeHov : nc.codStroke} strokeWidth={hover?2.5:1.5} />
+                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill={nc.codText} fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
                 </g>
               );
             })}
@@ -809,15 +855,34 @@ const DiagramInteraktifBanyakFungsi: React.FC = () => {
                 <g key={el} style={{ cursor: "grab" }}
                   onMouseDown={e => startDrag(el, e)} onTouchStart={e => startDrag(el, e)}
                   onDoubleClick={() => hasArr && removeArrow(el)}>
-                  <circle cx={p.x} cy={p.y} r={NODE_R} fill={isDragging?"#164e63":hasArr?"#0c4a6e":"#0e4f6e"} stroke={isDragging?"#fbbf24":hasArr?"#67e8f9":"#22d3ee"} strokeWidth={isDragging?2.5:1.5} />
-                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill="#e0f2fe" fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
+                  <circle cx={p.x} cy={p.y} r={NODE_R}
+                    fill={isDragging ? nc.domFillDrag : hasArr ? nc.domFillHas : nc.domFill}
+                    stroke={isDragging ? nc.domStrokeDrag : hasArr ? nc.domStrokeHas : nc.domStroke}
+                    strokeWidth={isDragging?2.5:1.5} />
+                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill={nc.domText} fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
+                  {!hasArr && !isSpaceTheme && (
+                    <text x={p.x + NODE_R + 6} y={p.y + 1} textAnchor="start" dominantBaseline="middle" fill="#f59e0b" fontSize={11} fontWeight="bold">→</text>
+                  )}
                   {hasArr && <circle cx={p.x+15} cy={p.y-15} r={7} fill="#10b981" stroke="#6ee7b7" strokeWidth={1} />}
                   {hasArr && <text x={p.x+15} y={p.y-14} textAnchor="middle" dominantBaseline="middle" fill="white" fontSize={8} fontWeight="bold">✓</text>}
                 </g>
               );
             })}
           </svg>
-          <p className="text-center text-[10px] text-white/25 mt-1">{tr.diag_drag_hint}</p>
+          {/* Drag hint with blinking delete part */}
+          <p className={`text-center text-[10px] mt-1 ${nc.hintColor}`}>
+            {(() => {
+              const parts = tr.diag_drag_hint.split(" · ");
+              return (
+                <>
+                  {parts[0]}
+                  {parts[1] && (
+                    <> · <span className={`animate-pulse ${nc.hintBlink}`}>{parts[1]}</span></>
+                  )}
+                </>
+              );
+            })()}
+          </p>
         </div>
       </div>
 
@@ -890,7 +955,42 @@ function factorial(x: number): number { return x <= 1 ? 1 : x * factorial(x - 1)
 
 const DiagramInteraktifBijeksi: React.FC = () => {
   const { language } = useLanguage();
+  const { theme } = useTheme();
+  const isSpaceTheme = theme === "dark";
   const tr = TR[language];
+
+  const nc = {
+    domFill:      isSpaceTheme ? "#0e4f6e" : "#dbeafe",
+    domFillDrag:  isSpaceTheme ? "#164e63" : "#bfdbfe",
+    domFillHas:   isSpaceTheme ? "#0c4a6e" : "#bfdbfe",
+    domStroke:    isSpaceTheme ? "#22d3ee" : "#3b82f6",
+    domStrokeDrag:isSpaceTheme ? "#fbbf24" : "#f59e0b",
+    domStrokeHas: isSpaceTheme ? "#6ee7b7" : "#34d399",
+    domStrokeDup: isSpaceTheme ? "#f87171" : "#ef4444",
+    domText:      isSpaceTheme ? "#e0f2fe" : "#1e3a8a",
+    codFill:      isSpaceTheme ? "#3b1f7a" : "#f3e8ff",
+    codFillHov:   isSpaceTheme ? "#5b21b6" : "#e9d5ff",
+    codFillDup:   isSpaceTheme ? "#7f1d1d" : "#fee2e2",
+    codStroke:    isSpaceTheme ? "#a78bfa" : "#9333ea",
+    codStrokeHov: isSpaceTheme ? "#c4b5fd" : "#7c3aed",
+    codStrokeDup: isSpaceTheme ? "#f87171" : "#ef4444",
+    codStrokeHit: isSpaceTheme ? "#6ee7b7" : "#34d399",
+    codText:      isSpaceTheme ? "#ede9fe" : "#581c87",
+    svgBg:        isSpaceTheme ? "bg-slate-900/60" : "bg-white/90",
+    svgBorder:    isSpaceTheme ? "border-white/10" : "border-gray-200",
+    divider:      isSpaceTheme ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.06)",
+    hintColor:    isSpaceTheme ? "text-white/30" : "text-gray-400",
+    hintBlink:    isSpaceTheme ? "text-white/30" : "text-orange-500 font-semibold",
+    badgeBg:      isSpaceTheme ? "bg-green-900/20 border-green-500/30" : "bg-green-50 border-green-300",
+    titleColor:   isSpaceTheme ? "text-green-300" : "text-green-700",
+    ctrlBg:       isSpaceTheme ? "bg-slate-800/60 border-white/10" : "bg-gray-50 border-gray-200",
+    ctrlHint:     isSpaceTheme ? "text-green-300/70" : "text-green-600",
+    countMuted:   isSpaceTheme ? "text-white/40" : "text-gray-500",
+    countEq:      isSpaceTheme ? "text-white/50" : "text-gray-400",
+    progressBg:   isSpaceTheme ? "bg-slate-800" : "bg-gray-200",
+    statusDone:   isSpaceTheme ? "text-green-400" : "text-green-600",
+    countBadge:   isSpaceTheme ? "bg-green-800/40 text-green-200 border-green-500/30" : "bg-green-100 text-green-700 border-green-300",
+  };
 
   const [n, setN]       = useState(2);
   const [cur, setCur]   = useState<Mapping>({});
@@ -974,19 +1074,19 @@ const DiagramInteraktifBijeksi: React.FC = () => {
   })();
 
   return (
-    <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-4 space-y-3">
+    <div className={`border rounded-xl p-4 space-y-3 ${nc.badgeBg}`}>
 
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <p className="font-body text-sm font-bold text-green-300">{tr.bij_title}</p>
-        <span className="text-[11px] font-mono bg-green-800/40 text-green-200 px-2 py-0.5 rounded border border-green-500/30">
+        <p className={`font-body text-sm font-bold ${nc.titleColor}`}>{tr.bij_title}</p>
+        <span className={`text-[11px] font-mono px-2 py-0.5 rounded border ${nc.countBadge}`}>
           {tr.bij_count_lbl(n, maxF)}
         </span>
       </div>
 
       {/* Size selector */}
-      <div className="bg-slate-800/60 border border-white/10 rounded-xl p-3 space-y-2">
-        <p className="text-[10px] text-green-300/70 font-bold font-body mb-1">{tr.bij_size_head}</p>
+      <div className={`border rounded-xl p-3 space-y-2 ${nc.ctrlBg}`}>
+        <p className={`text-[10px] font-bold font-body mb-1 ${nc.ctrlHint}`}>{tr.bij_size_head}</p>
         <div className="flex items-center gap-1.5 flex-wrap">
           <span className="text-[10px] font-bold font-mono w-8 shrink-0 text-green-400">n =</span>
           {[1, 2, 3, 4, 5].map(v => (
@@ -997,12 +1097,12 @@ const DiagramInteraktifBijeksi: React.FC = () => {
                   : "bg-slate-700/50 border-white/10 text-white/40 hover:bg-slate-600/60 hover:text-white/80"
               }`}>{v}</button>
           ))}
-          <span className="text-[10px] text-white/30 font-mono">{tr.bij_member}</span>
+          <span className={`text-[10px] font-mono ${nc.countMuted}`}>{tr.bij_member}</span>
         </div>
-        <div className="pt-2 border-t border-white/5 flex items-center gap-2 flex-wrap">
-          <span className="text-[10px] text-white/40 font-body">{tr.bij_count_eq}</span>
-          <span className="text-[11px] font-mono text-white/50">n! =</span>
-          <span className="text-[13px] font-bold font-mono text-yellow-300">
+        <div className={`pt-2 border-t ${isSpaceTheme ? "border-white/5" : "border-gray-200"} flex items-center gap-2 flex-wrap`}>
+          <span className={`text-[10px] font-body ${nc.countMuted}`}>{tr.bij_count_eq}</span>
+          <span className={`text-[11px] font-mono ${nc.countEq}`}>n! =</span>
+          <span className="text-[13px] font-bold font-mono text-yellow-500">
             {n}! = {maxF}
           </span>
         </div>
@@ -1010,44 +1110,44 @@ const DiagramInteraktifBijeksi: React.FC = () => {
 
       {/* Progress bar */}
       <div className="flex items-center gap-2">
-        <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+        <div className={`flex-1 h-1.5 rounded-full overflow-hidden ${nc.progressBg}`}>
           <div className="h-full bg-gradient-to-r from-green-500 to-emerald-400 rounded-full transition-all duration-500"
             style={{ width: `${maxF > 0 ? (list.length / maxF) * 100 : 0}%` }} />
         </div>
-        <span className="text-[11px] text-white/50 font-mono shrink-0">{list.length}/{maxF}</span>
-        {done && <span className="text-[11px] text-green-400 font-bold animate-pulse">{tr.bij_complete}</span>}
+        <span className={`text-[11px] font-mono shrink-0 ${nc.countEq}`}>{list.length}/{maxF}</span>
+        {done && <span className={`text-[11px] font-bold animate-pulse ${nc.statusDone}`}>{tr.bij_complete}</span>}
       </div>
 
       {/* SVG Diagram */}
       <div className="flex justify-center">
-        <div className="bg-slate-900/60 rounded-xl border border-white/10 p-2 select-none w-full" style={{ maxWidth: SVG_W + 16 }}>
+        <div className={`rounded-xl border p-2 select-none w-full ${nc.svgBg} ${nc.svgBorder}`} style={{ maxWidth: SVG_W + 16 }}>
           <div className="flex justify-between px-4 mb-1 text-[10px] font-bold font-mono">
-            <span className="text-cyan-400">{tr.bij_domain}</span>
-            <span className="text-violet-400">{tr.bij_codomain}</span>
+            <span className="text-cyan-500">{tr.bij_domain}</span>
+            <span className="text-violet-500">{tr.bij_codomain}</span>
           </div>
           <svg ref={svgRef} viewBox={`0 0 ${SVG_W} ${H}`} width="100%"
             style={{ cursor: drag ? "crosshair" : "default", touchAction: "none" }}
             onMouseMove={onMove} onMouseUp={onUp} onMouseLeave={() => setDrag(null)}
             onTouchMove={onMove} onTouchEnd={onUp}>
             <defs>
-              <marker id="ah-bij"     markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#6ee7b7" /></marker>
+              <marker id="ah-bij"     markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill={isSpaceTheme ? "#6ee7b7" : "#10b981"} /></marker>
               <marker id="ah-bij-dup" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#f87171" /></marker>
-              <marker id="ahd-bij"    markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#fbbf24" /></marker>
+              <marker id="ahd-bij"    markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#f59e0b" /></marker>
             </defs>
-            <line x1={SVG_W/2} y1={8} x2={SVG_W/2} y2={H-8} stroke="rgba(255,255,255,0.05)" strokeWidth={1} strokeDasharray="4 3" />
+            <line x1={SVG_W/2} y1={8} x2={SVG_W/2} y2={H-8} stroke={nc.divider} strokeWidth={1} strokeDasharray="4 3" />
 
             {/* Existing arrows */}
             {domain.map(el => {
               const tgt = cur[el]; if (!tgt) return null;
               const isDupArrow = usedTargets.filter(t => t === tgt).length > 1;
               return <path key={el} d={bezierPath(domPos[el], codPos[tgt])} fill="none"
-                stroke={isDupArrow ? "#f87171" : "#6ee7b7"} strokeWidth={2.5}
+                stroke={isDupArrow ? "#f87171" : isSpaceTheme ? "#6ee7b7" : "#10b981"} strokeWidth={2.5}
                 markerEnd={isDupArrow ? "url(#ah-bij-dup)" : "url(#ah-bij)"} />;
             })}
 
             {/* Dragging arrow */}
             {drag && dragFromPos && (
-              <path d={bezierPath(dragFromPos, mouse, NODE_R, 0)} fill="none" stroke="#fbbf24" strokeWidth={2} strokeDasharray="6 3" markerEnd="url(#ahd-bij)" />
+              <path d={bezierPath(dragFromPos, mouse, NODE_R, 0)} fill="none" stroke="#f59e0b" strokeWidth={2} strokeDasharray="6 3" markerEnd="url(#ahd-bij)" />
             )}
 
             {/* Codomain nodes */}
@@ -1059,10 +1159,10 @@ const DiagramInteraktifBijeksi: React.FC = () => {
               return (
                 <g key={el}>
                   <circle cx={p.x} cy={p.y} r={NODE_R}
-                    fill={hover ? "#5b21b6" : isDupTgt ? "#7f1d1d" : "#3b1f7a"}
-                    stroke={hover ? "#c4b5fd" : isDupTgt ? "#f87171" : isHit ? "#6ee7b7" : "#a78bfa"}
+                    fill={hover ? nc.codFillHov : isDupTgt ? nc.codFillDup : nc.codFill}
+                    stroke={hover ? nc.codStrokeHov : isDupTgt ? nc.codStrokeDup : isHit ? nc.codStrokeHit : nc.codStroke}
                     strokeWidth={hover || isDupTgt ? 2.5 : 1.5} />
-                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill="#ede9fe" fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
+                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill={nc.codText} fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
                   {isDupTgt && <text x={p.x} y={p.y+17} textAnchor="middle" fill="#f87171" fontSize={8} fontWeight="bold">×2!</text>}
                 </g>
               );
@@ -1071,7 +1171,7 @@ const DiagramInteraktifBijeksi: React.FC = () => {
             {/* Domain nodes */}
             {domain.map(el => {
               const p = domPos[el];
-              const hasArr    = cur[el] !== undefined;
+              const hasArr     = cur[el] !== undefined;
               const isDragging = drag?.from === el;
               const isDupArrow = hasArr && usedTargets.filter(t => t === cur[el]).length > 1;
               return (
@@ -1079,10 +1179,13 @@ const DiagramInteraktifBijeksi: React.FC = () => {
                   onMouseDown={e => startDrag(el, e)} onTouchStart={e => startDrag(el, e)}
                   onDoubleClick={() => hasArr && removeArrow(el)}>
                   <circle cx={p.x} cy={p.y} r={NODE_R}
-                    fill={isDragging ? "#164e63" : hasArr ? "#0c4a6e" : "#0e4f6e"}
-                    stroke={isDragging ? "#fbbf24" : isDupArrow ? "#f87171" : hasArr ? "#6ee7b7" : "#22d3ee"}
+                    fill={isDragging ? nc.domFillDrag : hasArr ? nc.domFillHas : nc.domFill}
+                    stroke={isDragging ? nc.domStrokeDrag : isDupArrow ? nc.domStrokeDup : hasArr ? nc.domStrokeHas : nc.domStroke}
                     strokeWidth={isDragging ? 2.5 : 1.5} />
-                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill="#e0f2fe" fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
+                  <text x={p.x} y={p.y+1} textAnchor="middle" dominantBaseline="middle" fill={nc.domText} fontSize={13} fontWeight="bold" fontFamily="monospace">{el}</text>
+                  {!hasArr && !isSpaceTheme && (
+                    <text x={p.x + NODE_R + 6} y={p.y + 1} textAnchor="start" dominantBaseline="middle" fill="#f59e0b" fontSize={11} fontWeight="bold">→</text>
+                  )}
                   {hasArr && (
                     <>
                       <circle cx={p.x+15} cy={p.y-15} r={7} fill={isDupArrow ? "#dc2626" : "#10b981"} stroke={isDupArrow ? "#f87171" : "#6ee7b7"} strokeWidth={1} />
@@ -1093,16 +1196,32 @@ const DiagramInteraktifBijeksi: React.FC = () => {
               );
             })}
           </svg>
-          <p className="text-center text-[10px] text-white/25 mt-1">{tr.bij_drag_hint}</p>
+          {/* Drag hint with blinking delete part */}
+          <p className={`text-center text-[10px] mt-1 ${nc.hintColor}`}>
+            {(() => {
+              const parts = tr.bij_drag_hint.split(" · ");
+              return (
+                <>
+                  {parts[0]}
+                  {parts[1] && (
+                    <> · <span className={`animate-pulse ${nc.hintBlink}`}>{parts[1]}</span></>
+                  )}
+                </>
+              );
+            })()}
+          </p>
         </div>
       </div>
 
       {/* Status */}
       <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-body ${
-        isBijective && !isDup ? "bg-green-900/30 border border-green-500/30 text-green-300"
-        : isComplete && !isInjective ? "bg-red-900/30 border border-red-500/30 text-red-300"
-        : isDup ? "bg-orange-900/30 border border-orange-500/30 text-orange-300"
-        : "bg-slate-800/50 border border-white/10 text-white/40"
+        isBijective && !isDup
+          ? isSpaceTheme ? "bg-green-900/30 border border-green-500/30 text-green-300" : "bg-green-50 border border-green-300 text-green-700"
+          : isComplete && !isInjective
+          ? isSpaceTheme ? "bg-red-900/30 border border-red-500/30 text-red-300" : "bg-red-50 border border-red-300 text-red-600"
+          : isDup
+          ? isSpaceTheme ? "bg-orange-900/30 border border-orange-500/30 text-orange-300" : "bg-orange-50 border border-orange-300 text-orange-600"
+          : isSpaceTheme ? "bg-slate-800/50 border border-white/10 text-white/40" : "bg-gray-50 border border-gray-200 text-gray-400"
       }`}>
         {isBijective && !isDup  && <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />}
         {(isComplete && !isInjective || isDup) && <XCircle className="w-3.5 h-3.5 shrink-0" />}
@@ -1172,6 +1291,8 @@ const DiagramInteraktifBijeksi: React.FC = () => {
 const BanyakFungsiPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { theme } = useTheme();
+  const isSpaceTheme = theme === "dark";
   const tr = TR[language];
 
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -1542,42 +1663,50 @@ const BanyakFungsiPage = () => {
               <div className="px-5 pb-6 space-y-4">
 
                 {/* RANGKUMAN */}
-                <p className="font-display text-xs font-bold text-rose-300 uppercase tracking-wider pt-1">{tr.rang_head}</p>
+                <p className={`font-display text-xs font-bold uppercase tracking-wider pt-1 ${isSpaceTheme ? "text-rose-300" : "text-rose-600"}`}>{tr.rang_head}</p>
                 <div className="grid grid-cols-1 gap-2">
                   {(tr.rang_items as { icon: string; label: string; desc: string }[]).map(({ icon, label, desc }) => (
                     <div key={label} className={`bg-gradient-to-r border rounded-xl px-4 py-3 flex gap-3 items-start ${
-                      icon === "🔢" ? "from-rose-900/60 to-red-900/60 border-rose-500/40 text-rose-300" :
-                      icon === "🔄" ? "from-pink-900/60 to-fuchsia-900/60 border-pink-500/40 text-pink-300" :
-                      icon === "⚖️" ? "from-purple-900/60 to-violet-900/60 border-purple-500/40 text-purple-300" :
-                      icon === "🏆" ? "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300" :
-                      "from-amber-900/60 to-yellow-900/60 border-amber-500/40 text-amber-300"
+                      isSpaceTheme
+                        ? icon === "🔢" ? "from-rose-900/60 to-red-900/60 border-rose-500/40 text-rose-300" :
+                          icon === "🔄" ? "from-pink-900/60 to-fuchsia-900/60 border-pink-500/40 text-pink-300" :
+                          icon === "⚖️" ? "from-purple-900/60 to-violet-900/60 border-purple-500/40 text-purple-300" :
+                          icon === "🏆" ? "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300" :
+                          "from-amber-900/60 to-yellow-900/60 border-amber-500/40 text-amber-300"
+                        : icon === "🔢" ? "from-rose-50 to-red-50 border-rose-200 text-rose-700" :
+                          icon === "🔄" ? "from-pink-50 to-fuchsia-50 border-pink-200 text-pink-700" :
+                          icon === "⚖️" ? "from-purple-50 to-violet-50 border-purple-200 text-purple-700" :
+                          icon === "🏆" ? "from-orange-50 to-amber-50 border-orange-200 text-orange-700" :
+                          "from-amber-50 to-yellow-50 border-amber-200 text-amber-700"
                     }`}>
                       <span className="text-xl shrink-0">{icon}</span>
                       <div>
                         <p className="font-display text-xs font-bold mb-0.5">{label}</p>
-                        <p className="font-body text-xs text-white/80 leading-relaxed">{desc}</p>
+                        <p className={`font-body text-xs leading-relaxed ${isSpaceTheme ? "text-white/80" : "text-gray-600"}`}>
+                          {renderWithLatex(desc)}
+                        </p>
                       </div>
                     </div>
                   ))}
                 </div>
 
                 {/* TIPS & TRIK */}
-                <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">{tr.tips_head}</p>
+                <div className={`border rounded-xl p-4 ${isSpaceTheme ? "bg-gradient-to-br from-amber-900/40 to-orange-900/40 border-amber-500/40" : "bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200"}`}>
+                  <p className={`font-display text-xs font-bold uppercase tracking-wider mb-3 ${isSpaceTheme ? "text-amber-300" : "text-amber-700"}`}>{tr.tips_head}</p>
                   <div className="space-y-2">
                     {(tr.tips as string[]).map((tip, i) => (
                       <div key={i} className="flex gap-2 items-start">
-                        <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
-                        <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
+                        <span className={`shrink-0 w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] ${isSpaceTheme ? "bg-amber-500/30 text-amber-200" : "bg-amber-200 text-amber-800"}`}>{i + 1}</span>
+                        <p className={`font-body text-xs leading-relaxed ${isSpaceTheme ? "text-amber-100/90" : "text-amber-800"}`}>{tip}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* KESIMPULAN */}
-                <div className="bg-gradient-to-r from-rose-900/60 to-pink-900/60 border border-rose-400/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-rose-300 uppercase tracking-wider mb-2">{tr.kesimpulan_head}</p>
-                  <p className="font-body text-sm text-white/90 leading-relaxed">
+                <div className={`border rounded-xl p-4 ${isSpaceTheme ? "bg-gradient-to-r from-rose-900/60 to-pink-900/60 border-rose-400/40" : "bg-gradient-to-r from-rose-50 to-pink-50 border-rose-200"}`}>
+                  <p className={`font-display text-xs font-bold uppercase tracking-wider mb-2 ${isSpaceTheme ? "text-rose-300" : "text-rose-700"}`}>{tr.kesimpulan_head}</p>
+                  <p className={`font-body text-sm leading-relaxed ${isSpaceTheme ? "text-white/90" : "text-gray-700"}`}>
                     {tr.kesimpulan_p}
                   </p>
                 </div>
