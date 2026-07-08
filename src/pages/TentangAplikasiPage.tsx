@@ -71,89 +71,6 @@ const TentangAplikasiPage = () => {
           </div>
         </div>
 
-        {/* ── PROMO DESKTOP VERSION ── */}
-        <div className="animate-slide-up mb-6" style={{ animationDelay: '0.25s' }}>
-          <div className="relative rounded-2xl overflow-hidden">
-            {/* Animated gradient border */}
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 via-orange-500 to-pink-500 rounded-2xl opacity-80 blur-[2px]" />
-            <div className={`relative rounded-2xl p-5 md:p-6 border border-yellow-500/40 ${isDark ? "bg-gradient-to-br from-[#1a0a00] via-[#1a0d00] to-[#0d0d2b]" : "bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50"}`}>
-
-              {/* Badge */}
-              <div className="flex justify-center mb-3">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-black tracking-widest uppercase px-4 py-1.5 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 text-black shadow-[0_0_16px_rgba(251,191,36,0.5)]">
-                  🔥 PENAWARAN SPESIAL
-                </span>
-              </div>
-
-              {/* Headline */}
-              <h2 className="font-display text-center text-lg md:text-xl font-black text-white mb-1 leading-snug">
-                Ingin Tampil{" "}
-                <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                  Keren di Kelas?
-                </span>{" "}
-                💻✨
-              </h2>
-              <p className="text-center text-white/70 font-body text-xs md:text-sm mb-4 leading-relaxed">
-                Versi <strong className="text-yellow-300">Desktop / Laptop</strong> NUMATIK kini tersedia — tampil penuh, interaktif, dan siap
-                menggantikan PowerPoint biasa. Buat pembelajaran matematikamu{" "}
-                <strong className="text-orange-300">lebih hidup dan berkesan</strong> di depan kelas!
-              </p>
-
-              {/* Features */}
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                {[
-                  { icon: "🖥️", text: "Tampil Full-screen di proyektor, Twin Mirror & Smart TV Windows" },
-                  { icon: "⚡", text: "Animasi & visualisasi interaktif" },
-                  { icon: "📐", text: "Materi lengkap kelas 7–9" },
-                  { icon: "🎮", text: "Game & kuis siap pakai di kelas" },
-                ].map((f) => (
-                  <div key={f.text} className="flex items-start gap-2 bg-white/5 rounded-xl px-3 py-2 border border-white/10">
-                    <span className="text-base shrink-0">{f.icon}</span>
-                    <span className="text-white/75 font-body text-[11px] leading-snug">{f.text}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Price */}
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="text-center">
-                  <p className="text-white/40 font-body text-xs line-through mb-0.5">Rp 250.000</p>
-                  <p className="font-display text-3xl font-black bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(251,191,36,0.6)]">
-                    Rp 100.000
-                  </p>
-                  <p className="text-yellow-400/80 font-body text-[10px] font-bold tracking-wide">SEKALI BAYAR · MILIK SELAMANYA</p>
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="rounded-xl bg-gradient-to-r from-green-600/30 to-emerald-600/20 border border-green-500/40 p-4 text-center">
-                <p className="text-white/60 font-body text-[11px] mb-1 uppercase tracking-widest font-bold">Hubungi langsung via WhatsApp</p>
-                <p className="font-display text-xl font-black text-white mb-0.5">
-                  📲{" "}
-                  <a
-                    href="https://wa.me/6285722102305"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-                  >
-                    0857-2210-2305
-                  </a>
-                </p>
-                <p className="text-white/50 font-body text-xs">Irawan Sutiawan, M.Pd</p>
-                <a
-                  href="https://wa.me/6285722102305?text=Halo%20Pak%20Irawan%2C%20saya%20tertarik%20dengan%20NUMATIK%20versi%20desktop%20untuk%20di%20kelas.%20Boleh%20info%20lebih%20lanjut%3F"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-display font-black text-sm shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_28px_rgba(16,185,129,0.6)] hover:scale-105 transition-all duration-200"
-                >
-                  💬 Chat Sekarang
-                </a>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
         <div className="animate-slide-up mb-6" style={{ animationDelay: '0.35s' }}>
           <div className="relative rounded-2xl p-[1.5px] bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-500 shadow-[0_0_30px_rgba(0,200,255,0.2)]">
             <div className={`rounded-2xl px-6 py-4 flex items-center gap-4 ${isDark ? "bg-[#0d0d2b]" : "bg-white/90"}`}>
@@ -163,7 +80,7 @@ const TentangAplikasiPage = () => {
               <div className="flex-1">
                 <p className="font-display text-xs font-bold tracking-widest uppercase text-cyan-400 mb-0.5">Versi Aplikasi</p>
                 <p className="font-display text-lg font-black text-white">
-                  NUMATIK <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">v1.4</span>
+                  NUMATIK <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">v1.5</span>
                 </p>
                 <p className="text-white/50 font-body text-xs mt-0.5">Pembaruan konten, fitur, dan tampilan antarmuka</p>
               </div>
@@ -179,7 +96,7 @@ const TentangAplikasiPage = () => {
 
         <div className="text-center space-y-2 animate-slide-up" style={{ animationDelay: '0.40s' }}>
           <p className="text-white/40 font-body text-xs">
-            Edisi Kelima · © 2026 NUMATIK. All rights reserved.
+            Edisi Keenam · © 2026 NUMATIK. All rights reserved.
           </p>
         </div>
 
