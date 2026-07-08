@@ -96,7 +96,7 @@ export default function JarakDuaTitikInteraktif() {
       </div>
 
       {/* ── SVG grid ── */}
-      <div className="bg-[#0d0d1a] flex justify-center">
+      <div className="geom-diagram-bg bg-[#0d0d1a] flex justify-center">
         <svg
           ref={svgRef}
           width={VIEW} height={VIEW}
@@ -112,7 +112,7 @@ export default function JarakDuaTitikInteraktif() {
               <stop offset="100%" stopColor="#0d0d1a" />
             </radialGradient>
           </defs>
-          <rect width={VIEW} height={VIEW} fill="url(#bgGlow)" />
+          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill="url(#bgGlow)" />
           {grid}
 
           {!samePoint && (
@@ -129,6 +129,7 @@ export default function JarakDuaTitikInteraktif() {
                   x={toSX(foot[0]) - (dx > 0 ? 7 : 0)}
                   y={toSY(foot[1]) - (dy > 0 ? 7 : 0)}
                   width={7} height={7}
+                  className="geom-marker-white"
                   fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={1.2} />
               )}
               {/* Δx label */}

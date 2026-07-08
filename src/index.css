@@ -1278,6 +1278,89 @@
 .theme-ocean .from-slate-900\/90 { --tw-gradient-from: rgba(7,42,74,0.85) var(--tw-gradient-from-position) !important; }
 .theme-ocean .to-cyan-950\/30    { --tw-gradient-to: rgba(8,47,73,0.55) var(--tw-gradient-to-position) !important; }
 
+/* ── Koordinat Kartesius sub-materi: formula-panel gradient wrappers
+   (bg-gradient-to-b from-slate-900 to-{color}-950/xx) used by the
+   interactive drag components ── */
+.light-mode .from-slate-900     { --tw-gradient-from: rgba(248,250,252,0.95) var(--tw-gradient-from-position) !important; }
+.theme-ocean .from-slate-900    { --tw-gradient-from: rgba(7,42,74,0.85) var(--tw-gradient-from-position) !important; }
+.light-mode .to-cyan-950\/50    { --tw-gradient-to: rgba(224,242,254,0.7) var(--tw-gradient-to-position) !important; }
+.theme-ocean .to-cyan-950\/50   { --tw-gradient-to: rgba(8,47,73,0.6) var(--tw-gradient-to-position) !important; }
+.light-mode .to-indigo-950\/60  { --tw-gradient-to: rgba(224,231,255,0.7) var(--tw-gradient-to-position) !important; }
+.theme-ocean .to-indigo-950\/60 { --tw-gradient-to: rgba(30,58,138,0.45) var(--tw-gradient-to-position) !important; }
+.light-mode .to-green-950\/50   { --tw-gradient-to: rgba(220,252,231,0.75) var(--tw-gradient-to-position) !important; }
+.theme-ocean .to-green-950\/50  { --tw-gradient-to: rgba(6,95,70,0.4) var(--tw-gradient-to-position) !important; }
+.light-mode .to-violet-950\/50  { --tw-gradient-to: rgba(237,233,254,0.75) var(--tw-gradient-to-position) !important; }
+.theme-ocean .to-violet-950\/50 { --tw-gradient-to: rgba(30,27,75,0.45) var(--tw-gradient-to-position) !important; }
+
+/* ── Koordinat Kartesius sub-materi: extra card-color families not yet covered ── */
+.light-mode .bg-orange-900\/30  { background-color: rgba(255,237,213,0.75) !important; }
+.light-mode .bg-orange-900\/40  { background-color: rgba(255,237,213,0.85) !important; }
+.light-mode .bg-orange-900\/50  { background-color: rgba(255,237,213,0.9) !important; }
+.theme-ocean .bg-orange-900\/30,
+.theme-ocean .bg-orange-900\/40,
+.theme-ocean .bg-orange-900\/50 { background-color: rgba(124,45,18,0.45) !important; }
+
+.light-mode .bg-violet-900\/30  { background-color: rgba(237,233,254,0.75) !important; }
+.light-mode .bg-violet-900\/40  { background-color: rgba(237,233,254,0.85) !important; }
+.light-mode .bg-violet-900\/50  { background-color: rgba(237,233,254,0.9) !important; }
+.light-mode .bg-violet-900\/60  { background-color: rgba(237,233,254,0.92) !important; }
+.theme-ocean .bg-violet-900\/30,
+.theme-ocean .bg-violet-900\/40,
+.theme-ocean .bg-violet-900\/50,
+.theme-ocean .bg-violet-900\/60 { background-color: rgba(37,99,235,0.30) !important; }
+
+.light-mode .bg-emerald-900\/20 { background-color: rgba(209,250,229,0.65) !important; }
+.theme-ocean .bg-emerald-900\/20 { background-color: rgba(6,95,70,0.30) !important; }
+
+.light-mode .bg-rose-900\/30    { background-color: rgba(255,228,230,0.75) !important; }
+.light-mode .bg-rose-900\/40    { background-color: rgba(255,228,230,0.85) !important; }
+.theme-ocean .bg-rose-900\/30,
+.theme-ocean .bg-rose-900\/40   { background-color: rgba(56,189,248,0.20) !important; }
+
+.light-mode .bg-amber-900\/30   { background-color: rgba(254,243,199,0.75) !important; }
+.theme-ocean .bg-amber-900\/30  { background-color: rgba(113,63,18,0.40) !important; }
+
+.light-mode .bg-lime-900\/40    { background-color: rgba(236,252,203,0.8) !important; }
+.theme-ocean .bg-lime-900\/40   { background-color: rgba(6,95,70,0.40) !important; }
+
+.light-mode .bg-indigo-900\/40  { background-color: rgba(224,231,255,0.8) !important; }
+.theme-ocean .bg-indigo-900\/40 { background-color: rgba(37,99,235,0.30) !important; }
+
+.light-mode .bg-blue-900\/40    { background-color: rgba(219,234,254,0.8) !important; }
+.theme-ocean .bg-blue-900\/40   { background-color: rgba(7,89,133,0.45) !important; }
+
+.light-mode .bg-pink-900\/20    { background-color: rgba(252,231,243,0.6) !important; }
+.theme-ocean .bg-pink-900\/20   { background-color: rgba(56,189,248,0.15) !important; }
+
+.light-mode .bg-cyan-900\/20    { background-color: rgba(207,250,254,0.6) !important; }
+.theme-ocean .bg-cyan-900\/20   { background-color: rgba(8,47,73,0.35) !important; }
+
+.light-mode .bg-green-900\/20   { background-color: rgba(220,252,231,0.6) !important; }
+.theme-ocean .bg-green-900\/20  { background-color: rgba(6,95,70,0.30) !important; }
+
+/* ── Kesimpulan text colors used across Koordinat Kartesius sub-materi ── */
+.light-mode .text-rose-100\/90    { color: #9f1239 !important; }
+.theme-ocean .text-rose-100\/90   { color: #fecdd3 !important; }
+.light-mode .text-violet-100\/90  { color: #5b21b6 !important; }
+.theme-ocean .text-violet-100\/90 { color: #ede9fe !important; }
+.light-mode .text-emerald-100\/90 { color: #065f46 !important; }
+.theme-ocean .text-emerald-100\/90 { color: #d1fae5 !important; }
+.light-mode .text-amber-100\/90   { color: #92400e !important; }
+.theme-ocean .text-amber-100\/90  { color: #fef3c7 !important; }
+
+/* ── Shared helper classes for the interactive Kartesius/geometry SVG diagrams
+   (JarakDuaTitikInteraktif, JarakTitikKeGarisInteraktif, PosisiRelatifInteraktif) —
+   these used raw hardcoded hex/white SVG colors that don't respond to Tailwind
+   class overrides, so the components tag them with these helper classes. ── */
+.light-mode .geom-diagram-bg,
+.theme-ocean .geom-diagram-bg      { background: var(--bg-card) !important; }
+.light-mode .geom-diagram-bg-rect,
+.theme-ocean .geom-diagram-bg-rect { fill: var(--bg-card) !important; }
+.light-mode .geom-grid-line        { stroke: rgba(15,23,42,0.10) !important; }
+.light-mode .geom-grid-line-main   { stroke: rgba(15,23,42,0.45) !important; }
+.light-mode .geom-axis-label       { fill: rgba(15,23,42,0.55) !important; }
+.light-mode .geom-marker-white     { stroke: rgba(15,23,42,0.55) !important; fill: rgba(15,23,42,0.55) !important; }
+
 .light-mode .cartesian-diagram-scope .cartesian-grid-line      { stroke: rgba(15,23,42,0.10) !important; }
 .light-mode .cartesian-diagram-scope .cartesian-grid-line-main { stroke: rgba(15,23,42,0.45) !important; }
 .light-mode .cartesian-diagram-scope .cartesian-axis-line      { stroke: rgba(15,23,42,0.55) !important; fill: rgba(15,23,42,0.55) !important; }

@@ -64,15 +64,15 @@ export function InteraktifTitikAcuan() {
   for (let i = -RANGE; i <= RANGE; i++) {
     const isAxis = i === 0;
     gridLines.push(
-      <line key={`v${i}`} x1={toSX(i)} y1={0} x2={toSX(i)} y2={VIEW}
+      <line key={`v${i}`} className={isAxis ? "geom-grid-line-main" : "geom-grid-line"} x1={toSX(i)} y1={0} x2={toSX(i)} y2={VIEW}
         stroke={isAxis ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.07)"} strokeWidth={isAxis ? 1.5 : 1} />,
-      <line key={`h${i}`} x1={0} y1={toSY(i)} x2={VIEW} y2={toSY(i)}
+      <line key={`h${i}`} className={isAxis ? "geom-grid-line-main" : "geom-grid-line"} x1={0} y1={toSY(i)} x2={VIEW} y2={toSY(i)}
         stroke={isAxis ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.07)"} strokeWidth={isAxis ? 1.5 : 1} />
     );
     if (i !== 0 && i % 2 === 0) {
       gridLines.push(
-        <text key={`lx${i}`} x={toSX(i)} y={toSY(0) + 14} textAnchor="middle" fill="rgba(255,255,255,0.3)" fontSize={9} fontFamily="monospace">{i}</text>,
-        <text key={`ly${i}`} x={toSX(0) - 8} y={toSY(i) + 3} textAnchor="end" fill="rgba(255,255,255,0.3)" fontSize={9} fontFamily="monospace">{i}</text>
+        <text key={`lx${i}`} className="geom-axis-label" x={toSX(i)} y={toSY(0) + 14} textAnchor="middle" fill="rgba(255,255,255,0.3)" fontSize={9} fontFamily="monospace">{i}</text>,
+        <text key={`ly${i}`} className="geom-axis-label" x={toSX(0) - 8} y={toSY(i) + 3} textAnchor="end" fill="rgba(255,255,255,0.3)" fontSize={9} fontFamily="monospace">{i}</text>
       );
     }
   }
@@ -327,15 +327,15 @@ export function InteraktifGaris() {
   for (let i = -RANGE; i <= RANGE; i++) {
     const isAxis = i === 0;
     gridLines.push(
-      <line key={`v${i}`} x1={toSX(i)} y1={0} x2={toSX(i)} y2={VIEW}
+      <line key={`v${i}`} className={isAxis ? "geom-grid-line-main" : "geom-grid-line"} x1={toSX(i)} y1={0} x2={toSX(i)} y2={VIEW}
         stroke={isAxis ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.07)"} strokeWidth={isAxis ? 1.5 : 1} />,
-      <line key={`h${i}`} x1={0} y1={toSY(i)} x2={VIEW} y2={toSY(i)}
+      <line key={`h${i}`} className={isAxis ? "geom-grid-line-main" : "geom-grid-line"} x1={0} y1={toSY(i)} x2={VIEW} y2={toSY(i)}
         stroke={isAxis ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.07)"} strokeWidth={isAxis ? 1.5 : 1} />
     );
     if (i !== 0 && i % 2 === 0) {
       gridLines.push(
-        <text key={`lx${i}`} x={toSX(i)} y={toSY(0) + 14} textAnchor="middle" fill="rgba(255,255,255,0.3)" fontSize={9} fontFamily="monospace">{i}</text>,
-        <text key={`ly${i}`} x={toSX(0) - 8} y={toSY(i) + 3} textAnchor="end" fill="rgba(255,255,255,0.3)" fontSize={9} fontFamily="monospace">{i}</text>
+        <text key={`lx${i}`} className="geom-axis-label" x={toSX(i)} y={toSY(0) + 14} textAnchor="middle" fill="rgba(255,255,255,0.3)" fontSize={9} fontFamily="monospace">{i}</text>,
+        <text key={`ly${i}`} className="geom-axis-label" x={toSX(0) - 8} y={toSY(i) + 3} textAnchor="end" fill="rgba(255,255,255,0.3)" fontSize={9} fontFamily="monospace">{i}</text>
       );
     }
   }

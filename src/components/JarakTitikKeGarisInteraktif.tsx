@@ -34,9 +34,9 @@ function renderGrid(axisColor: string, gridColor: string): React.ReactNode[] {
     );
     if (i !== 0) {
       nodes.push(
-        <text key={`lx${i}`} x={toSX(i)} y={toSY(0) + 13} textAnchor="middle"
+        <text key={`lx${i}`} className="geom-axis-label" x={toSX(i)} y={toSY(0) + 13} textAnchor="middle"
           fill="rgba(255,255,255,0.28)" fontSize={8} fontFamily="monospace">{i}</text>,
-        <text key={`ly${i}`} x={toSX(0) - 5} y={toSY(i) + 3} textAnchor="end"
+        <text key={`ly${i}`} className="geom-axis-label" x={toSX(0) - 5} y={toSY(i) + 3} textAnchor="end"
           fill="rgba(255,255,255,0.28)" fontSize={8} fontFamily="monospace">{i}</text>
       );
     }
@@ -84,7 +84,7 @@ export function JarakGarisHorizontal() {
       </div>
 
       {/* ── SVG ── */}
-      <div className="bg-[#021018] flex justify-center">
+      <div className="geom-diagram-bg bg-[#021018] flex justify-center">
         <svg ref={svgRef} width={VIEW} height={VIEW} viewBox={`0 0 ${VIEW} ${VIEW}`}
           style={{ display: "block", maxWidth: "100%", touchAction: "none" }}
           onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}>
@@ -93,7 +93,7 @@ export function JarakGarisHorizontal() {
               <stop offset="0%" stopColor="#0c2030" /><stop offset="100%" stopColor="#021018" />
             </radialGradient>
           </defs>
-          <rect width={VIEW} height={VIEW} fill="url(#bgH)" />
+          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill="url(#bgH)" />
           {renderGrid("rgba(34,211,238,0.4)", "rgba(34,211,238,0.08)")}
 
           {/* invisible wide hit band for horizontal line */}
@@ -117,7 +117,7 @@ export function JarakGarisHorizontal() {
                 stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9}
                 style={{ pointerEvents: "none" }} />
               {/* right-angle square */}
-              <polyline points={`${Fx+S},${Fy} ${Fx+S},${Fy+ny*S} ${Fx},${Fy+ny*S}`}
+              <polyline className="geom-marker-white" points={`${Fx+S},${Fy} ${Fx+S},${Fy+ny*S} ${Fx},${Fy+ny*S}`}
                 fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth={1.5}
                 style={{ pointerEvents: "none" }} />
               <text x={Fx + 7} y={(toSY(ptP[1]) + Fy) / 2 + 4}
@@ -196,7 +196,7 @@ export function JarakGarisVertikal() {
         <span className="text-white/75 text-xs font-mono bg-white/10 px-2 py-1 rounded-lg">d = |x<sub>P</sub>−k|</span>
       </div>
 
-      <div className="bg-[#011509] flex justify-center">
+      <div className="geom-diagram-bg bg-[#011509] flex justify-center">
         <svg ref={svgRef} width={VIEW} height={VIEW} viewBox={`0 0 ${VIEW} ${VIEW}`}
           style={{ display: "block", maxWidth: "100%", touchAction: "none" }}
           onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}>
@@ -205,7 +205,7 @@ export function JarakGarisVertikal() {
               <stop offset="0%" stopColor="#061a0d" /><stop offset="100%" stopColor="#011509" />
             </radialGradient>
           </defs>
-          <rect width={VIEW} height={VIEW} fill="url(#bgV)" />
+          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill="url(#bgV)" />
           {renderGrid("rgba(74,222,128,0.4)", "rgba(74,222,128,0.08)")}
 
           <line x1={toSX(k)} y1={0} x2={toSX(k)} y2={VIEW}
@@ -225,7 +225,7 @@ export function JarakGarisVertikal() {
                 stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9}
                 style={{ pointerEvents: "none" }} />
               {/* right-angle square */}
-              <polyline points={`${Fx},${Fy+S} ${Fx+nx*S},${Fy+S} ${Fx+nx*S},${Fy}`}
+              <polyline className="geom-marker-white" points={`${Fx},${Fy+S} ${Fx+nx*S},${Fy+S} ${Fx+nx*S},${Fy}`}
                 fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth={1.5}
                 style={{ pointerEvents: "none" }} />
               <text x={(toSX(ptP[0]) + Fx) / 2} y={Fy - 7}
@@ -359,7 +359,7 @@ export function JarakGarisMiring() {
         <span className="text-white/75 text-xs font-mono bg-white/10 px-2 py-1 rounded-lg hidden sm:block">d=|ax+by+c|/√(a²+b²)</span>
       </div>
 
-      <div className="bg-[#0a0118] flex justify-center">
+      <div className="geom-diagram-bg bg-[#0a0118] flex justify-center">
         <svg ref={svgRef} width={VIEW} height={VIEW} viewBox={`0 0 ${VIEW} ${VIEW}`}
           style={{ display: "block", maxWidth: "100%", touchAction: "none" }}
           onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp}>
@@ -368,7 +368,7 @@ export function JarakGarisMiring() {
               <stop offset="0%" stopColor="#180530" /><stop offset="100%" stopColor="#0a0118" />
             </radialGradient>
           </defs>
-          <rect width={VIEW} height={VIEW} fill="url(#bgM)" />
+          <rect className="geom-diagram-bg-rect" width={VIEW} height={VIEW} fill="url(#bgM)" />
           {renderGrid("rgba(167,139,250,0.45)", "rgba(167,139,250,0.08)")}
 
           {!same && <>
@@ -395,7 +395,7 @@ export function JarakGarisMiring() {
                 <line x1={toSX(ptP[0])} y1={toSY(ptP[1])} x2={Fx} y2={Fy}
                   stroke="#fbbf24" strokeWidth={2} strokeDasharray="5,3" opacity={0.9} style={{ pointerEvents:"none" }} />
                 {/* right-angle square */}
-                <polyline points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`}
+                <polyline className="geom-marker-white" points={`${Ax},${Ay} ${Bx},${By} ${Cx},${Cy}`}
                   fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth={1.5}
                   style={{ pointerEvents:"none" }} />
                 <circle cx={Fx} cy={Fy} r={4}
