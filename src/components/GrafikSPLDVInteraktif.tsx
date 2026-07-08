@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from "react";
 import { RefreshCw, CheckCircle2, AlertTriangle, Info, Pencil } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
@@ -236,6 +237,7 @@ const ui = {
 /* ─── Component ──────────────────────────── */
 const GrafikSPLDVInteraktif: React.FC = () => {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = ui[language];
 
   /* Use refs for positions so pointer callbacks are always fresh */
@@ -440,16 +442,16 @@ const GrafikSPLDVInteraktif: React.FC = () => {
   const activeColor = phase === "draw1" ? "#22d3ee" : "#a78bfa";
 
   return (
-    <div className="bg-gradient-to-b from-slate-900/95 to-indigo-950/70 border border-indigo-500/30 rounded-2xl overflow-hidden shadow-2xl shadow-indigo-900/30">
+    <div className={`${isDark ? "bg-gradient-to-b from-slate-900/95 to-indigo-950/70 border-indigo-500/30 shadow-indigo-900/30" : "bg-gradient-to-b from-indigo-50 to-blue-50 border-indigo-300 shadow-indigo-100/60"} border rounded-2xl overflow-hidden shadow-2xl`}>
 
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-indigo-500/20 bg-indigo-900/20">
+      <div className={`flex items-center justify-between px-4 py-3 border-b ${isDark ? "border-indigo-500/20 bg-indigo-900/20" : "border-indigo-200 bg-indigo-100"}`}>
         <div>
-          <p className="font-display text-sm font-bold text-cyan-300">{t.headerTitle}</p>
-          <p className="font-body text-xs text-white/40">{t.headerSub}</p>
+          <p className={`font-display text-sm font-bold ${isDark ? "text-cyan-300" : "text-indigo-700"}`}>{t.headerTitle}</p>
+          <p className={`font-body text-xs ${isDark ? "text-white/40" : "text-indigo-500"}`}>{t.headerSub}</p>
         </div>
         <button onClick={reset}
-          className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 text-white/50 hover:text-white transition-all"
+          className={`p-2 rounded-lg ${isDark ? "bg-white/5 border-white/10 hover:border-white/30 text-white/50 hover:text-white" : "bg-white border-indigo-200 hover:border-indigo-400 text-indigo-400 hover:text-indigo-600"} border transition-all`}
           title="Reset">
           <RefreshCw className="w-4 h-4" />
         </button>
@@ -463,9 +465,11 @@ const GrafikSPLDVInteraktif: React.FC = () => {
           const active  = key === phase;
           return (
             <div key={key} className={`flex-1 text-center py-1 rounded text-[10px] font-body font-bold transition-all
-              ${active ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
-              : done   ? "bg-green-900/20 text-green-400 border border-green-500/20"
-              :          "bg-white/5 text-white/25 border border-white/10"}`}>
+              ${active
+                ? isDark ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40" : "bg-cyan-100 text-cyan-700 border border-cyan-400"
+                : done
+                ? isDark ? "bg-green-900/20 text-green-400 border border-green-500/20" : "bg-green-100 text-green-700 border border-green-400"
+                : isDark ? "bg-white/5 text-white/25 border border-white/10" : "bg-gray-100 text-gray-400 border border-gray-200"}`}>
               {done ? "✓ " : ""}{label}
             </div>
           );
@@ -486,7 +490,7 @@ const GrafikSPLDVInteraktif: React.FC = () => {
         >
           <defs>
             <marker id="axArr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-              <path d="M0,1 L5,3.5 L0,6 Z" fill="#475569" />
+              <path d="M0,1 L5,3.5 L0,6 Z" fill={isDark ? "#475569" : "#94a3b8"} />
             </marker>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="4" result="blur"/>
@@ -495,7 +499,8 @@ const GrafikSPLDVInteraktif: React.FC = () => {
           </defs>
 
           {/* Background */}
-          <rect x={PAD} y={PAD} width={SVG_W-2*PAD} height={SVG_H-2*PAD} fill="#0f172a" rx="4" />
+          <rect x={0} y={0} width={SVG_W} height={SVG_H} fill={isDark ? "#0f172a" : "#f8fafc"} rx="8" />
+          <rect x={PAD} y={PAD} width={SVG_W-2*PAD} height={SVG_H-2*PAD} fill={isDark ? "#0f172a" : "#f1f5f9"} rx="4" />
 
           {/* Grid lines */}
           {ticks.map(i => {
@@ -505,22 +510,24 @@ const GrafikSPLDVInteraktif: React.FC = () => {
             return (
               <g key={i}>
                 <line x1={sx} y1={PAD} x2={sx} y2={SVG_H-PAD}
-                  stroke={isAxis ? "#334155" : "#1e293b"} strokeWidth={isAxis ? 1 : 0.7} />
+                  stroke={isDark ? (isAxis ? "#334155" : "#1e293b") : (isAxis ? "#94a3b8" : "#e2e8f0")}
+                  strokeWidth={isAxis ? 1 : 0.7} />
                 <line x1={PAD} y1={sy} x2={SVG_W-PAD} y2={sy}
-                  stroke={isAxis ? "#334155" : "#1e293b"} strokeWidth={isAxis ? 1 : 0.7} />
-                <text x={sx} y={SVG_H-PAD+14} textAnchor="middle" fill="#475569" fontSize="10" fontFamily="monospace">{i}</text>
-                {i > 0 && <text x={PAD-7} y={sy+4} textAnchor="end" fill="#475569" fontSize="10" fontFamily="monospace">{i}</text>}
+                  stroke={isDark ? (isAxis ? "#334155" : "#1e293b") : (isAxis ? "#94a3b8" : "#e2e8f0")}
+                  strokeWidth={isAxis ? 1 : 0.7} />
+                <text x={sx} y={SVG_H-PAD+14} textAnchor="middle" fill={isDark ? "#475569" : "#64748b"} fontSize="10" fontFamily="monospace">{i}</text>
+                {i > 0 && <text x={PAD-7} y={sy+4} textAnchor="end" fill={isDark ? "#475569" : "#64748b"} fontSize="10" fontFamily="monospace">{i}</text>}
               </g>
             );
           })}
 
           {/* Axes with arrows */}
           <line x1={PAD} y1={SVG_H-PAD} x2={SVG_W-8} y2={SVG_H-PAD}
-            stroke="#475569" strokeWidth="1.5" markerEnd="url(#axArr)" />
+            stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5" markerEnd="url(#axArr)" />
           <line x1={PAD} y1={SVG_H-PAD} x2={PAD} y2={8}
-            stroke="#475569" strokeWidth="1.5" markerEnd="url(#axArr)" />
-          <text x={SVG_W-10} y={SVG_H-PAD+4} fill="#64748b" fontSize="12" fontStyle="italic">x</text>
-          <text x={PAD-2} y={14} fill="#64748b" fontSize="12" fontStyle="italic">y</text>
+            stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5" markerEnd="url(#axArr)" />
+          <text x={SVG_W-10} y={SVG_H-PAD+4} fill={isDark ? "#64748b" : "#475569"} fontSize="12" fontStyle="italic">x</text>
+          <text x={PAD-2} y={14} fill={isDark ? "#64748b" : "#475569"} fontSize="12" fontStyle="italic">y</text>
 
           {/* Drawn lines */}
           {line1Drawn && ext1 && (() => {
@@ -625,27 +632,29 @@ const GrafikSPLDVInteraktif: React.FC = () => {
         {/* Hint bar */}
         <div className={`border rounded-xl px-4 py-2.5 flex items-start gap-2
           ${phase==="done" && intersection
-            ? "bg-green-900/25 border-green-500/30"
+            ? isDark ? "bg-green-900/25 border-green-500/30" : "bg-green-50 border-green-400"
             : phase==="done" && !intersection
-            ? "bg-red-900/25 border-red-500/30"
-            : "bg-indigo-900/25 border-indigo-500/20"}`}>
+            ? isDark ? "bg-red-900/25 border-red-500/30"   : "bg-red-50 border-red-400"
+            : isDark ? "bg-indigo-900/25 border-indigo-500/20" : "bg-indigo-50 border-indigo-300"}`}>
           {phase==="done" && intersection
-            ? <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />
+            ? <CheckCircle2 className={`w-4 h-4 ${isDark ? "text-green-400" : "text-green-600"} shrink-0 mt-0.5`} />
             : phase==="done"
-            ? <AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
-            : <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />}
-          <p className="font-body text-xs leading-relaxed text-white/80">{hint}</p>
+            ? <AlertTriangle className={`w-4 h-4 ${isDark ? "text-red-400" : "text-red-600"} shrink-0 mt-0.5`} />
+            : <Info className={`w-4 h-4 ${isDark ? "text-indigo-400" : "text-indigo-600"} shrink-0 mt-0.5`} />}
+          <p className={`font-body text-xs leading-relaxed ${isDark ? "text-white/80" : "text-gray-700"}`}>{hint}</p>
         </div>
 
         {/* Equation panels */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {/* Line 1 */}
           <div className={`border rounded-xl p-3 transition-all space-y-2
-            ${(phase==="draw1"||phase==="arrange") ? "border-cyan-500/50 bg-cyan-900/25" : "border-cyan-500/15 bg-cyan-900/10"}`}>
+            ${(phase==="draw1"||phase==="arrange")
+              ? isDark ? "border-cyan-500/50 bg-cyan-900/25" : "border-cyan-400 bg-cyan-50"
+              : isDark ? "border-cyan-500/15 bg-cyan-900/10" : "border-cyan-200 bg-cyan-50/50"}`}>
             <div className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0" />
-              <p className="font-body text-[10px] text-cyan-400 uppercase font-bold">{t.line1Label}</p>
-              {line1Drawn && <CheckCircle2 className="w-3 h-3 text-green-400 ml-auto" />}
+              <p className={`font-body text-[10px] ${isDark ? "text-cyan-400" : "text-cyan-600"} uppercase font-bold`}>{t.line1Label}</p>
+              {line1Drawn && <CheckCircle2 className={`w-3 h-3 ${isDark ? "text-green-400" : "text-green-600"} ml-auto`} />}
             </div>
             <div className="flex gap-1">
               <input
@@ -654,7 +663,8 @@ const GrafikSPLDVInteraktif: React.FC = () => {
                 onChange={e => { setEq1Input(e.target.value); setEq1Error(false); }}
                 onKeyDown={e => e.key === "Enter" && applyEq(1)}
                 placeholder="e.g. 2x + 3y = 6"
-                className={`flex-1 min-w-0 bg-slate-900/70 border rounded-lg px-2 py-1.5 text-xs font-mono text-white/90 placeholder-white/25 outline-none focus:ring-1 transition-all
+                className={`flex-1 min-w-0 border rounded-lg px-2 py-1.5 text-xs font-mono outline-none focus:ring-1 transition-all
+                  ${isDark ? "bg-slate-900/70 text-white/90 placeholder-white/25" : "bg-white text-gray-800 placeholder-gray-400"}
                   ${eq1Error ? "border-red-500/60 focus:ring-red-500/40" : "border-cyan-500/30 focus:ring-cyan-500/40"}`}
               />
               <button
@@ -668,9 +678,9 @@ const GrafikSPLDVInteraktif: React.FC = () => {
               <p className="text-[10px] text-red-400 font-body">{t.errorFormat}</p>
             )}
             <div className="flex items-center justify-between">
-              <p className="font-body text-[10px] text-white/40">A₁({A1.x},{A1.y}) · B₁({B1.x},{B1.y})</p>
+              <p className={`font-body text-[10px] ${isDark ? "text-white/40" : "text-gray-500"}`}>A₁({A1.x},{A1.y}) · B₁({B1.x},{B1.y})</p>
               {eq1 && (
-                <span className="text-cyan-300 text-xs">
+                <span className={`${isDark ? "text-cyan-300" : "text-cyan-600"} text-xs`}>
                   <InlineMath math={stdFormLatex(eq1)} />
                 </span>
               )}
@@ -679,11 +689,13 @@ const GrafikSPLDVInteraktif: React.FC = () => {
 
           {/* Line 2 */}
           <div className={`border rounded-xl p-3 transition-all space-y-2
-            ${phase==="draw2" ? "border-violet-500/50 bg-violet-900/25" : "border-violet-500/15 bg-violet-900/10"}`}>
+            ${phase==="draw2"
+              ? isDark ? "border-violet-500/50 bg-violet-900/25" : "border-violet-400 bg-violet-50"
+              : isDark ? "border-violet-500/15 bg-violet-900/10" : "border-violet-200 bg-violet-50/50"}`}>
             <div className="flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-violet-400 shrink-0" />
-              <p className="font-body text-[10px] text-violet-400 uppercase font-bold">{t.line2Label}</p>
-              {line2Drawn && <CheckCircle2 className="w-3 h-3 text-green-400 ml-auto" />}
+              <p className={`font-body text-[10px] ${isDark ? "text-violet-400" : "text-violet-600"} uppercase font-bold`}>{t.line2Label}</p>
+              {line2Drawn && <CheckCircle2 className={`w-3 h-3 ${isDark ? "text-green-400" : "text-green-600"} ml-auto`} />}
             </div>
             <div className="flex gap-1">
               <input
@@ -692,7 +704,8 @@ const GrafikSPLDVInteraktif: React.FC = () => {
                 onChange={e => { setEq2Input(e.target.value); setEq2Error(false); }}
                 onKeyDown={e => e.key === "Enter" && applyEq(2)}
                 placeholder="e.g. x - 2y = 4"
-                className={`flex-1 min-w-0 bg-slate-900/70 border rounded-lg px-2 py-1.5 text-xs font-mono text-white/90 placeholder-white/25 outline-none focus:ring-1 transition-all
+                className={`flex-1 min-w-0 border rounded-lg px-2 py-1.5 text-xs font-mono outline-none focus:ring-1 transition-all
+                  ${isDark ? "bg-slate-900/70 text-white/90 placeholder-white/25" : "bg-white text-gray-800 placeholder-gray-400"}
                   ${eq2Error ? "border-red-500/60 focus:ring-red-500/40" : "border-violet-500/30 focus:ring-violet-500/40"}`}
               />
               <button
@@ -706,9 +719,9 @@ const GrafikSPLDVInteraktif: React.FC = () => {
               <p className="text-[10px] text-red-400 font-body">{t.errorFormat}</p>
             )}
             <div className="flex items-center justify-between">
-              <p className="font-body text-[10px] text-white/40">A₂({A2.x},{A2.y}) · B₂({B2.x},{B2.y})</p>
+              <p className={`font-body text-[10px] ${isDark ? "text-white/40" : "text-gray-500"}`}>A₂({A2.x},{A2.y}) · B₂({B2.x},{B2.y})</p>
               {eq2 && (
-                <span className="text-violet-300 text-xs">
+                <span className={`${isDark ? "text-violet-300" : "text-violet-600"} text-xs`}>
                   <InlineMath math={stdFormLatex(eq2)} />
                 </span>
               )}
@@ -722,27 +735,27 @@ const GrafikSPLDVInteraktif: React.FC = () => {
           const ry = Math.round(intersection.y * 100) / 100;
           const isInt = Number.isInteger(rx) && Number.isInteger(ry);
           return (
-            <div className="bg-yellow-900/25 border border-yellow-500/40 rounded-xl p-4 text-center space-y-2">
-              <p className="font-display text-base font-bold text-yellow-300">{t.solutionFound}</p>
+            <div className={`${isDark ? "bg-yellow-900/25 border-yellow-500/40" : "bg-yellow-50 border-yellow-400"} border rounded-xl p-4 text-center space-y-2`}>
+              <p className={`font-display text-base font-bold ${isDark ? "text-yellow-300" : "text-yellow-700"}`}>{t.solutionFound}</p>
               <div className="flex justify-center gap-6">
-                <div className="bg-yellow-900/30 border border-yellow-500/20 rounded-lg px-4 py-2">
-                  <p className="text-yellow-200 text-xs font-body">x</p>
-                  <p className="text-yellow-300 font-bold text-lg font-display">{rx}</p>
+                <div className={`${isDark ? "bg-yellow-900/30 border-yellow-500/20" : "bg-white border-yellow-300"} border rounded-lg px-4 py-2`}>
+                  <p className={`${isDark ? "text-yellow-200" : "text-yellow-600"} text-xs font-body`}>x</p>
+                  <p className={`${isDark ? "text-yellow-300" : "text-yellow-800"} font-bold text-lg font-display`}>{rx}</p>
                 </div>
-                <div className="bg-yellow-900/30 border border-yellow-500/20 rounded-lg px-4 py-2">
-                  <p className="text-yellow-200 text-xs font-body">y</p>
-                  <p className="text-yellow-300 font-bold text-lg font-display">{ry}</p>
+                <div className={`${isDark ? "bg-yellow-900/30 border-yellow-500/20" : "bg-white border-yellow-300"} border rounded-lg px-4 py-2`}>
+                  <p className={`${isDark ? "text-yellow-200" : "text-yellow-600"} text-xs font-body`}>y</p>
+                  <p className={`${isDark ? "text-yellow-300" : "text-yellow-800"} font-bold text-lg font-display`}>{ry}</p>
                 </div>
               </div>
-              <p className="font-body text-xs text-white/50">{t.intersectionNote(isInt)}</p>
+              <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-500"}`}>{t.intersectionNote(isInt)}</p>
             </div>
           );
         })()}
 
         {phase === "done" && !intersection && (
-          <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-3 text-center">
-            <p className="font-display text-sm font-bold text-red-300">{t.noSolutionTitle}</p>
-            <p className="font-body text-xs text-white/50 mt-1">{t.noSolutionNote}</p>
+          <div className={`${isDark ? "bg-red-900/20 border-red-500/30" : "bg-red-50 border-red-400"} border rounded-xl p-3 text-center`}>
+            <p className={`font-display text-sm font-bold ${isDark ? "text-red-300" : "text-red-700"}`}>{t.noSolutionTitle}</p>
+            <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-500"} mt-1`}>{t.noSolutionNote}</p>
           </div>
         )}
 
@@ -757,22 +770,22 @@ const GrafikSPLDVInteraktif: React.FC = () => {
 
         {(phase === "draw1" || phase === "draw2") && (
           <button onClick={() => { playPopSound(); setPhase("arrange"); setHint(t.backToArrange); setDrawCursor(null); }}
-            className="w-full bg-white/5 border border-white/10 hover:border-white/20 text-white/50 hover:text-white/80 font-body text-xs py-2 rounded-xl transition-all">
+            className={`w-full ${isDark ? "bg-white/5 border-white/10 hover:border-white/20 text-white/50 hover:text-white/80" : "bg-gray-100 border-gray-200 hover:border-gray-300 text-gray-500 hover:text-gray-700"} border font-body text-xs py-2 rounded-xl transition-all`}>
             {t.backBtn}
           </button>
         )}
 
         {phase === "done" && (
           <button onClick={reset}
-            className="w-full bg-white/5 border border-white/10 hover:border-white/20 text-white/50 hover:text-white/80 font-body text-xs py-2 rounded-xl transition-all flex items-center justify-center gap-2">
+            className={`w-full ${isDark ? "bg-white/5 border-white/10 hover:border-white/20 text-white/50 hover:text-white/80" : "bg-gray-100 border-gray-200 hover:border-gray-300 text-gray-500 hover:text-gray-700"} border font-body text-xs py-2 rounded-xl transition-all flex items-center justify-center gap-2`}>
             <RefreshCw className="w-3.5 h-3.5" /> {t.tryOtherBtn}
           </button>
         )}
 
         {/* Concept note */}
-        <div className="bg-purple-900/15 border border-purple-500/20 rounded-xl px-4 py-2.5 flex gap-2">
+        <div className={`${isDark ? "bg-purple-900/15 border-purple-500/20" : "bg-purple-50 border-purple-300"} border rounded-xl px-4 py-2.5 flex gap-2`}>
           <span className="text-purple-400 text-sm shrink-0">💡</span>
-          <p className="font-body text-xs text-purple-200 leading-relaxed">
+          <p className={`font-body text-xs ${isDark ? "text-purple-200" : "text-purple-700"} leading-relaxed`}>
             {t.conceptNote(<InlineMath math="(x,y)" />)}
           </p>
         </div>

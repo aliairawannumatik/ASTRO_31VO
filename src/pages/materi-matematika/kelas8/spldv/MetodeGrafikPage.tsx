@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, BarChart2 } from "lucide-react";
@@ -234,6 +235,7 @@ const translations = {
 const MetodeGrafikPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
 
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -272,23 +274,29 @@ const MetodeGrafikPage = () => {
       H - pad - (y / yRange) * (H - 2 * pad),
     ];
     const ticks = [0, 2, 4, 6, 8];
+    const svgBg    = isDark ? "#0f172a" : "#f8fafc";
+    const gridLine = isDark ? "#334155" : "#e2e8f0";
+    const axisLine = isDark ? "#475569" : "#94a3b8";
+    const tickFill = isDark ? "#64748b" : "#64748b";
+    const labelFill = isDark ? "#94a3b8" : "#64748b";
     return (
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs mx-auto">
+        <rect x={0} y={0} width={W} height={H} fill={svgBg} rx="4" />
         {ticks.map((tick) => {
           const [sx] = toSVG2(tick, 0); const [, sy] = toSVG2(0, tick);
           return (
             <g key={tick}>
-              <line x1={sx} y1={pad} x2={sx} y2={H - pad} stroke="#334155" strokeWidth="0.5" />
-              <line x1={pad} y1={sy} x2={W - pad} y2={sy} stroke="#334155" strokeWidth="0.5" />
-              {tick > 0 && <text x={sx} y={H - pad + 12} textAnchor="middle" fill="#64748b" fontSize="8">{tick}</text>}
-              {tick > 0 && <text x={pad - 8} y={sy + 3} textAnchor="end" fill="#64748b" fontSize="8">{tick}</text>}
+              <line x1={sx} y1={pad} x2={sx} y2={H - pad} stroke={gridLine} strokeWidth="0.5" />
+              <line x1={pad} y1={sy} x2={W - pad} y2={sy} stroke={gridLine} strokeWidth="0.5" />
+              {tick > 0 && <text x={sx} y={H - pad + 12} textAnchor="middle" fill={tickFill} fontSize="8">{tick}</text>}
+              {tick > 0 && <text x={pad - 8} y={sy + 3} textAnchor="end" fill={tickFill} fontSize="8">{tick}</text>}
             </g>
           );
         })}
-        <line x1={pad} y1={H - pad} x2={W - pad} y2={H - pad} stroke="#475569" strokeWidth="1.5" />
-        <line x1={pad} y1={H - pad} x2={pad} y2={pad} stroke="#475569" strokeWidth="1.5" />
-        <text x={W - pad + 4} y={H - pad + 4} fill="#94a3b8" fontSize="9">x</text>
-        <text x={pad - 3} y={pad - 4} fill="#94a3b8" fontSize="9">y</text>
+        <line x1={pad} y1={H - pad} x2={W - pad} y2={H - pad} stroke={axisLine} strokeWidth="1.5" />
+        <line x1={pad} y1={H - pad} x2={pad} y2={pad} stroke={axisLine} strokeWidth="1.5" />
+        <text x={W - pad + 4} y={H - pad + 4} fill={labelFill} fontSize="9">x</text>
+        <text x={pad - 3} y={pad - 4} fill={labelFill} fontSize="9">y</text>
         {lines.map(({ points, color, name }) => {
           const svgPoints = points.map(([x, y]) => toSVG2(x, y));
           return (
@@ -450,7 +458,7 @@ const MetodeGrafikPage = () => {
                       </div>
                       <p className="font-body text-xs text-center text-violet-300/60 mt-1">{t.q1Pts2}</p>
                     </div>
-                    <div className="bg-slate-800/40 border border-yellow-500/20 rounded-xl p-3">
+                    <div className={`${isDark ? "bg-slate-800/40 border-yellow-500/20" : "bg-gray-50 border-yellow-400/40"} border rounded-xl p-3`}>
                       <GraphSVG
                         lines={[{ points: [[0, 4], [4, 0]], color: "#22d3ee", name: "P1" }, { points: [[0, 0], [6, 6]], color: "#a78bfa", name: "P2" }]}
                         intersection={[2, 2]}
@@ -492,7 +500,7 @@ const MetodeGrafikPage = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="bg-slate-800/40 border border-yellow-500/20 rounded-xl p-3">
+                    <div className={`${isDark ? "bg-slate-800/40 border-yellow-500/20" : "bg-gray-50 border-yellow-400/40"} border rounded-xl p-3`}>
                       <GraphSVG
                         lines={[{ points: [[0, 6], [3, 0]], color: "#22d3ee", name: "P1" }, { points: [[0, 3], [6, 0]], color: "#a78bfa", name: "P2" }]}
                         intersection={[2, 2]}
@@ -562,35 +570,36 @@ const MetodeGrafikPage = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="bg-slate-800/40 border border-red-500/20 rounded-xl p-3 space-y-2">
-                      <p className="font-body text-xs font-bold text-white text-center">{t.q3GraphTitle}</p>
+                    <div className={`${isDark ? "bg-slate-800/40 border-red-500/20" : "bg-gray-50 border-red-400/40"} border rounded-xl p-3 space-y-2`}>
+                      <p className={`font-body text-xs font-bold ${isDark ? "text-white" : "text-gray-800"} text-center`}>{t.q3GraphTitle}</p>
                       <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto">
                         <defs>
                           <filter id="glowRed"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                          <marker id="arrowR" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,1 L5,3 L0,5 Z" fill="#475569"/></marker>
+                          <marker id="arrowR" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,1 L5,3 L0,5 Z" fill={isDark ? "#475569" : "#94a3b8"}/></marker>
                         </defs>
-                        <rect x="30" y="10" width="240" height="190" fill="#0f172a" rx="4"/>
+                        <rect x="0" y="0" width="280" height="220" fill={isDark ? "#0f172a" : "#f8fafc"} rx="6"/>
+                        <rect x="30" y="10" width="240" height="190" fill={isDark ? "#0f172a" : "#f1f5f9"} rx="4"/>
                         {[0,1,2,3,4,5,6,7,8].map(i => {
                           const sx = 30 + i * 30; const sy = 200 - i * 22.5;
                           return (<g key={i}>
-                            <line x1={sx} y1="10" x2={sx} y2="200" stroke="#1e293b" strokeWidth="0.7"/>
-                            <line x1="30" y1={sy} x2="270" y2={sy} stroke="#1e293b" strokeWidth="0.7"/>
-                            <text x={sx} y="212" textAnchor="middle" fill="#475569" fontSize="9" fontFamily="monospace">{i}</text>
-                            {i > 0 && <text x="22" y={sy + 3} textAnchor="end" fill="#475569" fontSize="9" fontFamily="monospace">{i}</text>}
+                            <line x1={sx} y1="10" x2={sx} y2="200" stroke={isDark ? "#1e293b" : "#e2e8f0"} strokeWidth="0.7"/>
+                            <line x1="30" y1={sy} x2="270" y2={sy} stroke={isDark ? "#1e293b" : "#e2e8f0"} strokeWidth="0.7"/>
+                            <text x={sx} y="212" textAnchor="middle" fill={isDark ? "#475569" : "#64748b"} fontSize="9" fontFamily="monospace">{i}</text>
+                            {i > 0 && <text x="22" y={sy + 3} textAnchor="end" fill={isDark ? "#475569" : "#64748b"} fontSize="9" fontFamily="monospace">{i}</text>}
                           </g>);
                         })}
-                        <line x1="30" y1="200" x2="268" y2="200" stroke="#475569" strokeWidth="1.5" markerEnd="url(#arrowR)"/>
-                        <line x1="30" y1="200" x2="30" y2="12" stroke="#475569" strokeWidth="1.5" markerEnd="url(#arrowR)"/>
-                        <text x="272" y="204" fill="#64748b" fontSize="10" fontStyle="italic">x</text>
-                        <text x="28" y="10" fill="#64748b" fontSize="10" fontStyle="italic">y</text>
+                        <line x1="30" y1="200" x2="268" y2="200" stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5" markerEnd="url(#arrowR)"/>
+                        <line x1="30" y1="200" x2="30" y2="12" stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5" markerEnd="url(#arrowR)"/>
+                        <text x="272" y="204" fill={isDark ? "#64748b" : "#475569"} fontSize="10" fontStyle="italic">x</text>
+                        <text x="28" y="10" fill={isDark ? "#64748b" : "#475569"} fontSize="10" fontStyle="italic">y</text>
                         <line x1="30" y1="132.5" x2="210" y2="200" stroke="#22d3ee" strokeWidth="2.8" strokeLinecap="round" filter="url(#glowRed)" opacity="0.9"/>
                         <line x1="30" y1="87.5" x2="210" y2="155" stroke="#fb923c" strokeWidth="2.8" strokeLinecap="round" filter="url(#glowRed)" opacity="0.9"/>
                         <circle cx="30" cy="132.5" r="4" fill="#22d3ee"/><circle cx="210" cy="200" r="4" fill="#22d3ee"/>
                         <circle cx="30" cy="87.5" r="4" fill="#fb923c"/><circle cx="210" cy="155" r="4" fill="#fb923c"/>
-                        <rect x="82" y="148" width="116" height="20" rx="5" fill="#1c0a0a" fillOpacity="0.9"/>
+                        <rect x="82" y="148" width="116" height="20" rx="5" fill={isDark ? "#1c0a0a" : "#fff1f2"} fillOpacity="0.9"/>
                         <text x="140" y="162" textAnchor="middle" fill="#f87171" fontSize="11" fontFamily="sans-serif" fontWeight="bold">{t.q3ParallelLabel}</text>
                         <text x="220" y="100" fill="#ef4444" fontSize="22" fontFamily="monospace" fontWeight="bold" opacity="0.75">∅</text>
-                        <rect x="32" y="14" width="130" height="38" rx="4" fill="#0f172a" fillOpacity="0.85"/>
+                        <rect x="32" y="14" width="130" height="38" rx="4" fill={isDark ? "#0f172a" : "#f8fafc"} fillOpacity="0.9"/>
                         <line x1="38" y1="27" x2="58" y2="27" stroke="#22d3ee" strokeWidth="2.5"/>
                         <text x="62" y="31" fill="#22d3ee" fontSize="10" fontFamily="monospace">x + 2y = 6</text>
                         <line x1="38" y1="44" x2="58" y2="44" stroke="#fb923c" strokeWidth="2.5"/>
