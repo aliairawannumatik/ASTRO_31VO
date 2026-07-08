@@ -101,7 +101,7 @@ export default function CartesianDragAnimation() {
   const gridLines = Array.from({ length: RANGE * 2 + 1 }, (_, i) => i - RANGE);
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-cyan-500/30 bg-gradient-to-br from-slate-900/90 to-cyan-950/30 backdrop-blur">
+    <div className="cartesian-diagram-scope rounded-2xl overflow-hidden border border-cyan-500/30 bg-card/90 backdrop-blur">
       {/* Header */}
       <div className="px-4 pt-4 pb-2 text-center">
         <p className="font-display text-sm font-bold text-cyan-300 mb-0.5">
@@ -127,11 +127,13 @@ export default function CartesianDragAnimation() {
           {gridLines.map(v => (
             <g key={v}>
               <line
+                className={v === 0 ? "cartesian-grid-line-main" : "cartesian-grid-line"}
                 x1={toSVGX(v)} y1={0} x2={toSVGX(v)} y2={VIEW}
                 stroke={v === 0 ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.06)"}
                 strokeWidth={v === 0 ? 1.5 : 1}
               />
               <line
+                className={v === 0 ? "cartesian-grid-line-main" : "cartesian-grid-line"}
                 x1={0} y1={toSVGY(v)} x2={VIEW} y2={toSVGY(v)}
                 stroke={v === 0 ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.06)"}
                 strokeWidth={v === 0 ? 1.5 : 1}
@@ -142,16 +144,16 @@ export default function CartesianDragAnimation() {
           {/* Axis arrows */}
           <defs>
             <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-              <path d="M 0 0 L 6 3 L 0 6 Z" fill="rgba(255,255,255,0.6)" />
+              <path className="cartesian-axis-line" d="M 0 0 L 6 3 L 0 6 Z" fill="rgba(255,255,255,0.6)" />
             </marker>
           </defs>
-          <line x1={O} y1={VIEW - 6} x2={O} y2={8} stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-          <line x1={6} y1={O} x2={VIEW - 6} y2={O} stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+          <line className="cartesian-axis-line" x1={O} y1={VIEW - 6} x2={O} y2={8} stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+          <line className="cartesian-axis-line" x1={6} y1={O} x2={VIEW - 6} y2={O} stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
 
           {/* Axis labels */}
-          <text x={VIEW - 12} y={O - 6} fill="rgba(255,255,255,0.7)" fontSize="12" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">x</text>
-          <text x={O + 6} y={16} fill="rgba(255,255,255,0.7)" fontSize="12" fontWeight="bold" fontFamily="sans-serif">y</text>
-          <text x={O + 6} y={O + 14} fill="rgba(255,255,255,0.4)" fontSize="10" fontFamily="sans-serif">O</text>
+          <text className="cartesian-axis-label" x={VIEW - 12} y={O - 6} fill="rgba(255,255,255,0.7)" fontSize="12" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">x</text>
+          <text className="cartesian-axis-label" x={O + 6} y={16} fill="rgba(255,255,255,0.7)" fontSize="12" fontWeight="bold" fontFamily="sans-serif">y</text>
+          <text className="cartesian-axis-label-muted" x={O + 6} y={O + 14} fill="rgba(255,255,255,0.4)" fontSize="10" fontFamily="sans-serif">O</text>
 
           {/* Quadrant labels */}
           <text x={O + 18} y={O - 14} fill="rgba(34,211,238,0.35)" fontSize="11" fontWeight="bold" fontFamily="sans-serif">I</text>
@@ -164,10 +166,10 @@ export default function CartesianDragAnimation() {
             const isEven = v % 2 === 0;
             return (
               <g key={v}>
-                <line x1={toSVGX(v)} y1={O - (isEven ? 4 : 2.5)} x2={toSVGX(v)} y2={O + (isEven ? 4 : 2.5)} stroke={isEven ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.25)"} strokeWidth="1" />
-                <text x={toSVGX(v)} y={O + 13} fill={isEven ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.22)"} fontSize={isEven ? 8 : 7} textAnchor="middle" fontFamily="monospace">{v}</text>
-                <line x1={O - (isEven ? 4 : 2.5)} y1={toSVGY(v)} x2={O + (isEven ? 4 : 2.5)} y2={toSVGY(v)} stroke={isEven ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.25)"} strokeWidth="1" />
-                <text x={O - 12} y={toSVGY(v) + 3} fill={isEven ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.22)"} fontSize={isEven ? 8 : 7} textAnchor="middle" fontFamily="monospace">{v}</text>
+                <line className={isEven ? "cartesian-tick-major" : "cartesian-tick-minor"} x1={toSVGX(v)} y1={O - (isEven ? 4 : 2.5)} x2={toSVGX(v)} y2={O + (isEven ? 4 : 2.5)} stroke={isEven ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.25)"} strokeWidth="1" />
+                <text className={isEven ? "cartesian-tick-major" : "cartesian-tick-minor"} x={toSVGX(v)} y={O + 13} fill={isEven ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.22)"} fontSize={isEven ? 8 : 7} textAnchor="middle" fontFamily="monospace">{v}</text>
+                <line className={isEven ? "cartesian-tick-major" : "cartesian-tick-minor"} x1={O - (isEven ? 4 : 2.5)} y1={toSVGY(v)} x2={O + (isEven ? 4 : 2.5)} y2={toSVGY(v)} stroke={isEven ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.25)"} strokeWidth="1" />
+                <text className={isEven ? "cartesian-tick-major" : "cartesian-tick-minor"} x={O - 12} y={toSVGY(v) + 3} fill={isEven ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.22)"} fontSize={isEven ? 8 : 7} textAnchor="middle" fontFamily="monospace">{v}</text>
               </g>
             );
           })}

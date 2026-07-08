@@ -1249,6 +1249,43 @@
 .light-mode .bg-black\/70 { background-color: rgba(241,245,249,0.92) !important; }
 .light-mode .bg-black\/80 { background-color: rgba(248,250,252,0.94) !important; }
 
+/* ── Koordinat Kartesius: bg-sky-900 (rumus "Jarak ke Sumbu Y" dll) ── */
+.light-mode .bg-sky-900\/30 { background-color: rgba(224,242,254,0.65) !important; }
+.light-mode .bg-sky-900\/40 { background-color: rgba(224,242,254,0.75) !important; }
+.light-mode .bg-sky-900\/50 { background-color: rgba(224,242,254,0.85) !important; }
+.theme-ocean .bg-sky-900\/30,
+.theme-ocean .bg-sky-900\/40,
+.theme-ocean .bg-sky-900\/50 { background-color: rgba(7,89,133,0.40) !important; }
+
+/* ── Kesimpulan text (RangkumanSection) — text-cyan-100/90 invisible on bright bg ── */
+.light-mode .text-cyan-100\/90 { color: #0369a1 !important; }
+.theme-ocean .text-cyan-100\/90 { color: #e0f2fe !important; }
+
+/* ── Reset button hover state (CartesianDragAnimation) ── */
+.light-mode .hover\:bg-slate-600:hover { background-color: #cbd5e1 !important; }
+.theme-ocean .hover\:bg-slate-600:hover { background-color: rgba(7,42,74,0.75) !important; }
+
+/* ── Kuadran grid boxes (Koordinat Kartesius) — ocean theme needs its own tones too ── */
+.theme-ocean .bg-cyan-900\/40 { background-color: rgba(8,47,73,0.55) !important; }
+.theme-ocean .bg-green-900\/40 { background-color: rgba(6,95,70,0.40) !important; }
+.theme-ocean .bg-yellow-900\/40 { background-color: rgba(113,63,18,0.40) !important; }
+.theme-ocean .bg-pink-900\/40 { background-color: rgba(56,189,248,0.20) !important; }
+
+/* ── CartesianDragAnimation main diagram: gradient wrapper + SVG grid/axis/ticks
+   were hardcoded white — invisible/black-looking on bright themes ── */
+.light-mode .from-slate-900\/90 { --tw-gradient-from: rgba(248,250,252,0.9) var(--tw-gradient-from-position) !important; }
+.light-mode .to-cyan-950\/30    { --tw-gradient-to: rgba(224,242,254,0.55) var(--tw-gradient-to-position) !important; }
+.theme-ocean .from-slate-900\/90 { --tw-gradient-from: rgba(7,42,74,0.85) var(--tw-gradient-from-position) !important; }
+.theme-ocean .to-cyan-950\/30    { --tw-gradient-to: rgba(8,47,73,0.55) var(--tw-gradient-to-position) !important; }
+
+.light-mode .cartesian-diagram-scope .cartesian-grid-line      { stroke: rgba(15,23,42,0.10) !important; }
+.light-mode .cartesian-diagram-scope .cartesian-grid-line-main { stroke: rgba(15,23,42,0.45) !important; }
+.light-mode .cartesian-diagram-scope .cartesian-axis-line      { stroke: rgba(15,23,42,0.55) !important; fill: rgba(15,23,42,0.55) !important; }
+.light-mode .cartesian-diagram-scope .cartesian-axis-label     { fill: rgba(15,23,42,0.75) !important; }
+.light-mode .cartesian-diagram-scope .cartesian-axis-label-muted { fill: rgba(15,23,42,0.45) !important; }
+.light-mode .cartesian-diagram-scope .cartesian-tick-major     { stroke: rgba(15,23,42,0.45) !important; fill: rgba(15,23,42,0.55) !important; }
+.light-mode .cartesian-diagram-scope .cartesian-tick-minor     { stroke: rgba(15,23,42,0.25) !important; fill: rgba(15,23,42,0.35) !important; }
+
 .light-mode .bg-cyan-950\/40  { background-color: rgba(219,234,254,0.65) !important; }
 .light-mode .bg-cyan-950\/50  { background-color: rgba(219,234,254,0.75) !important; }
 .light-mode .bg-cyan-950\/60  { background-color: rgba(219,234,254,0.88) !important; }
