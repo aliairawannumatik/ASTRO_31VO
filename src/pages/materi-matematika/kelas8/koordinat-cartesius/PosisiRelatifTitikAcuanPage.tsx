@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import { RangkumanSection } from "@/components/RangkumanSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -324,6 +325,7 @@ const translations = {
 const PosisiRelatifTitikAcuanPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "konsep", "contoh1", "contoh2", "contoh3", "rangkuman",
@@ -647,18 +649,38 @@ const PosisiRelatifTitikAcuanPage = () => {
 
           {/* ═══ RANGKUMAN ═══ */}
           <RangkumanSection
+            isDark={isDark}
             gradientFrom="from-emerald-600" gradientVia="via-teal-600" gradientTo="to-cyan-700"
             borderColor="border-emerald-500/30" accentColor="text-emerald-200"
             headerIcon="📋" judul={t.rangkumanJudul}
             subjudul={t.rangkumanSubjudul}
             ringkasan={[
-              { emoji:"🎯", judul: t.r1judul, bg:"bg-emerald-900/40", border:"border-emerald-500/30", textColor:"text-emerald-300", isi: t.r1isi },
-              { emoji:"↔️", judul: t.r2judul, bg:"bg-teal-900/40", border:"border-teal-500/30", textColor:"text-teal-300", isi: t.r2isi },
-              { emoji:"↕️", judul: t.r3judul, bg:"bg-cyan-900/40", border:"border-cyan-500/30", textColor:"text-cyan-300", isi: t.r3isi },
-              { emoji:"🔄", judul: t.r4judul, bg:"bg-green-900/40", border:"border-green-500/30", textColor:"text-green-300", isi: t.r4isi },
+              { emoji:"🎯", judul: t.r1judul,
+                bg:        isDark ? "bg-emerald-900/40"  : "bg-emerald-100",
+                border:    isDark ? "border-emerald-500/30" : "border-emerald-400",
+                textColor: isDark ? "text-emerald-300"   : "text-emerald-700",
+                isi: t.r1isi },
+              { emoji:"↔️", judul: t.r2judul,
+                bg:        isDark ? "bg-teal-900/40"     : "bg-teal-100",
+                border:    isDark ? "border-teal-500/30"    : "border-teal-400",
+                textColor: isDark ? "text-teal-300"      : "text-teal-700",
+                isi: t.r2isi },
+              { emoji:"↕️", judul: t.r3judul,
+                bg:        isDark ? "bg-cyan-900/40"     : "bg-cyan-100",
+                border:    isDark ? "border-cyan-500/30"    : "border-cyan-400",
+                textColor: isDark ? "text-cyan-300"      : "text-cyan-700",
+                isi: t.r3isi },
+              { emoji:"🔄", judul: t.r4judul,
+                bg:        isDark ? "bg-green-900/40"    : "bg-green-100",
+                border:    isDark ? "border-green-500/30"   : "border-green-400",
+                textColor: isDark ? "text-green-300"     : "text-green-700",
+                isi: t.r4isi },
             ]}
             rumus={[
-              { label: t.rumusLabel, rumus:"\\Delta x = x_B - x_A \\qquad \\Delta y = y_B - y_A", bg:"bg-emerald-900/30", border:"border-emerald-500/25", labelColor:"text-emerald-300" },
+              { label: t.rumusLabel, rumus:"\\Delta x = x_B - x_A \\qquad \\Delta y = y_B - y_A",
+                bg:         isDark ? "bg-emerald-900/30" : "bg-emerald-50",
+                border:     isDark ? "border-emerald-500/25" : "border-emerald-300",
+                labelColor: isDark ? "text-emerald-300"  : "text-emerald-700" },
             ]}
             tips={[
               { emoji:"🧠", teks: t.tip1 },
@@ -667,9 +689,11 @@ const PosisiRelatifTitikAcuanPage = () => {
               { emoji:"✅", teks: t.tip4 },
             ]}
             kesimpulan={t.kesimpulan}
-            kesimpulanBg="bg-gradient-to-r from-emerald-600/20 to-cyan-600/20"
-            kesimpulanBorder="border-emerald-400/40"
-            kesimpulanTextColor="text-emerald-100/90"
+            kesimpulanBg={isDark
+              ? "bg-gradient-to-r from-emerald-600/20 to-cyan-600/20"
+              : "bg-gradient-to-r from-emerald-100 to-cyan-100"}
+            kesimpulanBorder={isDark ? "border-emerald-400/40" : "border-emerald-400"}
+            kesimpulanTextColor={isDark ? "text-emerald-100/90" : "text-emerald-800"}
           />
 
         </div>
