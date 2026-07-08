@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 type Phase = "idle" | "feeding" | "processing" | "done";
 
@@ -556,6 +557,7 @@ function TepungJatuh({ color, active }: { color: string; active: boolean }) {
 /* ─── MAIN COMPONENT ─── */
 export default function DiskMillMachine() {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const ui = UI_TEXTS[language as keyof typeof UI_TEXTS] ?? UI_TEXTS.id;
 
   const [selectedId, setSelectedId] = useState(BAHAN[0].id);
@@ -596,7 +598,7 @@ export default function DiskMillMachine() {
   const isRunning = phase === "feeding" || phase === "processing";
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-slate-600/40 bg-gradient-to-br from-slate-900/95 to-slate-800/80 backdrop-blur">
+    <div className={`rounded-2xl overflow-hidden border ${isDark ? "border-slate-600/40 bg-gradient-to-br from-slate-900/95 to-slate-800/80" : "border-gray-200 bg-white"} backdrop-blur`}>
       <style>{`
         @keyframes dmm-appear { from{opacity:0;transform:scale(0.7) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
         @keyframes dmm-shine  { 0%,100%{opacity:0.4} 50%{opacity:1} }
@@ -607,10 +609,10 @@ export default function DiskMillMachine() {
       `}</style>
 
       {/* HEADER */}
-      <div className="px-5 pt-4 pb-3 border-b border-slate-700/50">
-        <p className="font-display text-sm font-bold text-amber-300 text-center">{ui.header}</p>
+      <div className={`px-5 pt-4 pb-3 border-b ${isDark ? "border-slate-700/50" : "border-gray-200"}`}>
+        <p className={`font-display text-sm font-bold ${isDark ? "text-amber-300" : "text-amber-700"} text-center`}>{ui.header}</p>
         <p className="text-xs text-white/50 font-body text-center mt-1">
-          {ui.subtitle1}<strong className="text-amber-200">{ui.subtitleBold}</strong>{ui.subtitle2}
+          {ui.subtitle1}<strong className={isDark ? "text-amber-200" : "text-amber-700"}>{ui.subtitleBold}</strong>{ui.subtitle2}
         </p>
       </div>
 
@@ -625,8 +627,8 @@ export default function DiskMillMachine() {
               <button key={b.id} onClick={() => pilih(b.id)} disabled={isRunning}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold font-body transition-all duration-200 disabled:opacity-50"
                 style={isActive
-                  ? { borderColor: b.warna, color: b.warnaShine, background: `${b.warnaGelap}30`, boxShadow: `0 0 8px ${b.warna}40` }
-                  : { borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.45)", background: "rgba(255,255,255,0.04)" }
+                  ? { borderColor: b.warna, color: isDark ? b.warnaShine : b.warnaGelap, background: `${b.warnaGelap}30`, boxShadow: `0 0 8px ${b.warna}40` }
+                  : (isDark ? { borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.45)", background: "rgba(255,255,255,0.04)" } : { borderColor: "rgba(0,0,0,0.18)", color: "rgba(0,0,0,0.55)", background: "rgba(0,0,0,0.04)" })
                 }>
                 <span>{b.icon}</span>
                 <span>{bText.nama}</span>
@@ -644,7 +646,7 @@ export default function DiskMillMachine() {
 
           {/* Domain card */}
           <div className="flex flex-col items-center gap-1 w-full max-w-[260px]">
-            <span className="text-[9px] font-body uppercase tracking-widest font-bold" style={{ color: selected.warnaShine }}>Domain</span>
+            <span className="text-[9px] font-body uppercase tracking-widest font-bold" style={{ color: isDark ? selected.warnaShine : selected.warnaGelap }}>Domain</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-0.5 w-full"
               style={{ borderColor: selected.warna, background: `linear-gradient(135deg,${selected.bgFrom},${selected.bgTo})`, boxShadow: `0 0 20px ${selected.warna}60` }}>
               <div className="relative" style={{ filter: `drop-shadow(0 0 6px ${selected.warna}80)` }}>
@@ -674,7 +676,7 @@ export default function DiskMillMachine() {
               <MesinSVG spinning={spinning} phase={phase} warnaAktif={selected.warna} size="sm" uid="p"/>
             </div>
             <div className={`h-5 flex items-center transition-opacity duration-300 ${isRunning ? "opacity-100" : "opacity-0"}`}>
-              <span className="text-[9px] font-body font-bold" style={{ color: selected.warnaShine }}>
+              <span className="text-[9px] font-body font-bold" style={{ color: isDark ? selected.warnaShine : selected.warnaGelap }}>
                 {feeding ? ui.feedingShort : ui.grindingShort}
               </span>
             </div>
@@ -720,7 +722,7 @@ export default function DiskMillMachine() {
 
           {/* DOMAIN */}
           <div className="flex flex-col items-center gap-1 min-w-[130px]">
-            <span className="text-[10px] font-body uppercase tracking-widest font-bold" style={{ color: selected.warnaShine }}>Domain</span>
+            <span className="text-[10px] font-body uppercase tracking-widest font-bold" style={{ color: isDark ? selected.warnaShine : selected.warnaGelap }}>Domain</span>
             <div className="rounded-xl border-2 px-3 py-2 flex flex-col items-center gap-1 w-full"
               style={{ borderColor: selected.warna, background: `linear-gradient(135deg,${selected.bgFrom},${selected.bgTo})`, boxShadow: `0 0 20px ${selected.warna}60` }}>
               <div className="relative flex items-center justify-center"
@@ -753,7 +755,7 @@ export default function DiskMillMachine() {
               <MesinSVG spinning={spinning} phase={phase} warnaAktif={selected.warna} uid="l"/>
             </div>
             <div className={`h-6 transition-all duration-300 ${isRunning ? "opacity-100" : "opacity-0"}`}>
-              <span className="text-xs font-body font-bold" style={{ color: selected.warnaShine }}>
+              <span className="text-xs font-body font-bold" style={{ color: isDark ? selected.warnaShine : selected.warnaGelap }}>
                 {feeding ? ui.feedingLong : ui.grindingLong}
               </span>
             </div>
@@ -803,7 +805,7 @@ export default function DiskMillMachine() {
         <div className="mx-4 mb-3 dmm-appear">
           <div className="rounded-xl border px-4 py-2.5 text-center"
             style={{ borderColor: `${selected.warna}40`, background: `${selected.warnaTepung}08` }}>
-            <p className="font-mono text-sm font-bold" style={{ color: selected.warnaShine }}>
+            <p className="font-mono text-sm font-bold" style={{ color: isDark ? selected.warnaShine : selected.warnaGelap }}>
               f({bt.nama}) = {bt.produk}
             </p>
             <p className="text-[11px] text-white/50 font-body mt-0.5">
@@ -822,7 +824,7 @@ export default function DiskMillMachine() {
           style={{
             background: isRunning ? `${selected.warnaGelap}30` : `${selected.warna}25`,
             border: `1.5px solid ${selected.warna}70`,
-            color: selected.warnaShine,
+            color: isDark ? selected.warnaShine : selected.warnaGelap,
             boxShadow: isRunning ? "none" : `0 0 12px ${selected.warna}30`,
           }}
         >
@@ -830,20 +832,20 @@ export default function DiskMillMachine() {
         </button>
         {(done || phase !== "idle") && (
           <button onClick={reset}
-            className="px-4 py-2.5 rounded-xl font-body text-sm transition-all hover:bg-slate-700 active:scale-95 cursor-pointer bg-slate-800 text-white/50 hover:text-white border border-slate-600/40">
+            className={`px-4 py-2.5 rounded-xl font-body text-sm transition-all active:scale-95 cursor-pointer border ${isDark ? "hover:bg-slate-700 bg-slate-800 text-white/50 hover:text-white border-slate-600/40" : "hover:bg-gray-100 bg-gray-50 text-gray-500 hover:text-gray-800 border-gray-300"}`}>
             {ui.resetBtn}
           </button>
         )}
       </div>
 
       {/* INFO STRIP */}
-      <div className="border-t border-slate-700/50 px-4 py-3">
+      <div className={`border-t ${isDark ? "border-slate-700/50" : "border-gray-200"} px-4 py-3`}>
         <div className="flex flex-wrap gap-2 justify-center">
           {BAHAN.map(b => {
             const bText = BAHAN_TEXTS[b.id]?.[language as string] ?? BAHAN_TEXTS[b.id]?.id;
             return (
               <div key={b.id} className="flex items-center gap-1.5 text-[11px] font-body text-white/50">
-                <span className="font-bold" style={{ color: b.warnaShine }}>{bText.nama}</span>
+                <span className="font-bold" style={{ color: isDark ? b.warnaShine : b.warnaGelap }}>{bText.nama}</span>
                 <span className="text-white/25">→</span>
                 <span>{bText.produk}</span>
               </div>

@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import DiskMillMachine from "@/components/DiskMillMachine";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -548,6 +549,34 @@ const PengertianFungsiPage = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
+  const { isDark } = useTheme();
+
+  // SVG fill colours — theme-aware (light-coloured hex values become invisible on light backgrounds)
+  const sEl  = isDark ? "#cffafe" : "#0c4a6e";  // domain set element labels
+  const sKod = isDark ? "#e9d5ff" : "#5b21b6";  // kodomain set element labels
+  const sA   = isDark ? "#06b6d4" : "#0369a1";  // Set A circle label
+  const sB   = isDark ? "#8b5cf6" : "#6d28d9";  // Set B circle label
+  const sErr = isDark ? "#fca5a5" : "#b91c1c";  // error-highlighted element label
+  const sOrg = isDark ? "#fed7aa" : "#c2410c";  // orange/warning element label
+  const sRng = isDark ? "#4ade80" : "#15803d";  // Range bracket label
+
+  // Rangkuman card colours — dark-900 gradients are unreadable on light themes
+  const rangColors = isDark
+    ? [
+        "from-violet-900/60 to-purple-900/60 border-violet-500/40 text-violet-300",
+        "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300",
+        "from-blue-900/60 to-cyan-900/60 border-blue-500/40 text-blue-300",
+        "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300",
+        "from-pink-900/60 to-rose-900/60 border-pink-500/40 text-pink-300",
+      ]
+    : [
+        "from-violet-100 to-purple-100 border-violet-400 text-violet-800",
+        "from-green-100 to-emerald-100 border-green-400 text-green-800",
+        "from-blue-100 to-cyan-100 border-blue-400 text-blue-800",
+        "from-orange-100 to-amber-100 border-orange-400 text-orange-800",
+        "from-pink-100 to-rose-100 border-pink-400 text-pink-800",
+      ];
+
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "konsep", "penyajian", "bukan-fungsi", "contoh1", "contoh2", "contoh3", "contoh4", "rangkuman",
   ]);
@@ -696,16 +725,16 @@ const PengertianFungsiPage = () => {
                       <svg width="230" height="195" viewBox="0 0 230 195">
                         <defs><marker id="fv-ok" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#22c55e"/></marker></defs>
                         <ellipse cx="57" cy="100" rx="50" ry="85" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
-                        <text x="57" y="13" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
-                        <text x="57" y="188" textAnchor="middle" fill="#06b6d4" fontSize="8" opacity="0.55">Domain</text>
+                        <text x="57" y="13" textAnchor="middle" fill={sA} fontSize="13" fontWeight="bold">A</text>
+                        <text x="57" y="188" textAnchor="middle" fill={sA} fontSize="8" opacity="0.55">Domain</text>
                         {([["a",48],["b",100],["c",152]] as [string,number][]).map(([el,y]) => (
-                          <text key={el} x={57} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="12" fontWeight="bold">{el}</text>
+                          <text key={el} x={57} y={y+4} textAnchor="middle" fill={sEl} fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         <ellipse cx="175" cy="103" rx="50" ry="88" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
-                        <text x="175" y="13" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
-                        <text x="175" y="192" textAnchor="middle" fill="#8b5cf6" fontSize="8" opacity="0.55">{t.kodoSvgLabel}</text>
+                        <text x="175" y="13" textAnchor="middle" fill={sB} fontSize="13" fontWeight="bold">B</text>
+                        <text x="175" y="192" textAnchor="middle" fill={sB} fontSize="8" opacity="0.55">{t.kodoSvgLabel}</text>
                         {([["1",44],["2",82],["3",120],["4",158]] as [string,number][]).map(([el,y]) => (
-                          <text key={el} x={175} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
+                          <text key={el} x={175} y={y+4} textAnchor="middle" fill={sKod} fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         <path d="M73,48 C110,48 138,44 159,44" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fv-ok)"/>
                         <path d="M73,100 C100,92 138,62 159,44" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#fv-ok)"/>
@@ -726,14 +755,14 @@ const PengertianFungsiPage = () => {
                           <marker id="bfv-err" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#ef4444"/></marker>
                         </defs>
                         <ellipse cx="57" cy="93" rx="50" ry="80" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
-                        <text x="57" y="11" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
+                        <text x="57" y="11" textAnchor="middle" fill={sA} fontSize="13" fontWeight="bold">A</text>
                         {([["a",48],["b",93],["c",138]] as [string,number][]).map(([el,y]) => (
-                          <text key={el} x={57} y={y+4} textAnchor="middle" fill={el==="b" ? "#fca5a5" : "#cffafe"} fontSize="12" fontWeight="bold">{el}</text>
+                          <text key={el} x={57} y={y+4} textAnchor="middle" fill={el==="b" ? sErr : sEl} fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         <ellipse cx="175" cy="93" rx="50" ry="80" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
-                        <text x="175" y="11" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
+                        <text x="175" y="11" textAnchor="middle" fill={sB} fontSize="13" fontWeight="bold">B</text>
                         {([["1",48],["2",93],["3",138]] as [string,number][]).map(([el,y]) => (
-                          <text key={el} x={175} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
+                          <text key={el} x={175} y={y+4} textAnchor="middle" fill={sKod} fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         <path d="M73,48 C108,48 140,48 159,48" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#bfv-ok)"/>
                         <path d="M73,93 C98,78 138,60 159,48" fill="none" stroke="#ef4444" strokeWidth="2" strokeDasharray="6,3" markerEnd="url(#bfv-err)"/>
@@ -754,17 +783,17 @@ const PengertianFungsiPage = () => {
                       <svg width="230" height="210" viewBox="0 0 230 210">
                         <defs><marker id="bf2-ok" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#22c55e"/></marker></defs>
                         <ellipse cx="57" cy="105" rx="50" ry="95" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
-                        <text x="57" y="10" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
+                        <text x="57" y="10" textAnchor="middle" fill={sA} fontSize="13" fontWeight="bold">A</text>
                         {([["a",38],["b",78],["c",118]] as [string,number][]).map(([el,y]) => (
-                          <text key={el} x={57} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="12" fontWeight="bold">{el}</text>
+                          <text key={el} x={57} y={y+4} textAnchor="middle" fill={sEl} fontSize="12" fontWeight="bold">{el}</text>
                         ))}
-                        <text x="57" y="172" textAnchor="middle" fill="#fed7aa" fontSize="12" fontWeight="bold">d</text>
+                        <text x="57" y="172" textAnchor="middle" fill={sOrg} fontSize="12" fontWeight="bold">d</text>
                         <path d="M68,168 C85,168 105,168 118,168" fill="none" stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" opacity="0.7"/>
                         <text x="122" y="164" fill="#f97316" fontSize="9" fontWeight="bold">?</text>
                         <ellipse cx="178" cy="100" rx="48" ry="80" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
-                        <text x="178" y="18" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
+                        <text x="178" y="18" textAnchor="middle" fill={sB} fontSize="13" fontWeight="bold">B</text>
                         {([["1",50],["2",100],["3",152]] as [string,number][]).map(([el,y]) => (
-                          <text key={el} x={178} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="12" fontWeight="bold">{el}</text>
+                          <text key={el} x={178} y={y+4} textAnchor="middle" fill={sKod} fontSize="12" fontWeight="bold">{el}</text>
                         ))}
                         <path d="M73,38 C108,38 145,85 162,100" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#bf2-ok)"/>
                         <path d="M73,78 C105,72 145,55 162,50" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#bf2-ok)"/>
@@ -793,23 +822,23 @@ const PengertianFungsiPage = () => {
                       <svg width="270" height="262" viewBox="0 0 270 262">
                         <defs><marker id="fp-ok" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#22c55e"/></marker></defs>
                         <ellipse cx="62" cy="122" rx="54" ry="110" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
-                        <text x="62" y="11" textAnchor="middle" fill="#06b6d4" fontSize="12" fontWeight="bold">A</text>
-                        <text x="62" y="252" textAnchor="middle" fill="#06b6d4" fontSize="7.5" opacity="0.6">Domain</text>
+                        <text x="62" y="11" textAnchor="middle" fill={sA} fontSize="12" fontWeight="bold">A</text>
+                        <text x="62" y="252" textAnchor="middle" fill={sA} fontSize="7.5" opacity="0.6">Domain</text>
                         {([
                           ["-2",32],["-1",72],["0",112],["1",152],["2",195]
                         ] as [string,number][]).map(([el,y]) => (
-                          <text key={el} x={62} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">{el}</text>
+                          <text key={el} x={62} y={y+4} textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">{el}</text>
                         ))}
                         <ellipse cx="208" cy="122" rx="54" ry="110" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
-                        <text x="208" y="11" textAnchor="middle" fill="#8b5cf6" fontSize="12" fontWeight="bold">B</text>
-                        <text x="208" y="252" textAnchor="middle" fill="#8b5cf6" fontSize="7.5" opacity="0.6">{t.kodoSvgLabel}</text>
+                        <text x="208" y="11" textAnchor="middle" fill={sB} fontSize="12" fontWeight="bold">B</text>
+                        <text x="208" y="252" textAnchor="middle" fill={sB} fontSize="7.5" opacity="0.6">{t.kodoSvgLabel}</text>
                         {([
                           ["1",32],["2",72],["3",112],["4",152],["5",195]
                         ] as [string,number][]).map(([el,y]) => {
                           const inRange = el==="1"||el==="2"||el==="5";
-                          return <text key={el} x={208} y={y+4} textAnchor="middle" fill={inRange ? "#e9d5ff" : "#64748b"} fontSize="11" fontWeight="bold">{el}</text>;
+                          return <text key={el} x={208} y={y+4} textAnchor="middle" fill={inRange ? sKod : "#64748b"} fontSize="11" fontWeight="bold">{el}</text>;
                         })}
-                        <text x="253" y="29" textAnchor="middle" fill="#4ade80" fontSize="7.5" fontWeight="bold">Range</text>
+                        <text x="253" y="29" textAnchor="middle" fill={sRng} fontSize="7.5" fontWeight="bold">Range</text>
                         <line x1="238" y1="32"  x2="238" y2="195" stroke="#4ade80" strokeWidth="1.2" opacity="0.5"/>
                         <line x1="238" y1="32"  x2="247" y2="32"  stroke="#4ade80" strokeWidth="1.8"/>
                         <line x1="238" y1="72"  x2="247" y2="72"  stroke="#4ade80" strokeWidth="1.8"/>
@@ -933,21 +962,21 @@ const PengertianFungsiPage = () => {
                       </marker>
                     </defs>
                     <ellipse cx="62" cy="115" rx="52" ry="100" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.5"/>
-                    <text x="62" y="14" textAnchor="middle" fill="#06b6d4" fontSize="13" fontWeight="bold">A</text>
+                    <text x="62" y="14" textAnchor="middle" fill={sA} fontSize="13" fontWeight="bold">A</text>
                     {([["1",50],["2",88],["3",126],["4",164]] as [string,number][]).map(([el,y])=>(
-                      <text key={el} x={62} y={y+4} textAnchor="middle" fill="#cffafe" fontSize="13" fontWeight="bold">{el}</text>
+                      <text key={el} x={62} y={y+4} textAnchor="middle" fill={sEl} fontSize="13" fontWeight="bold">{el}</text>
                     ))}
                     <ellipse cx="198" cy="115" rx="52" ry="100" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.5"/>
-                    <text x="198" y="14" textAnchor="middle" fill="#8b5cf6" fontSize="13" fontWeight="bold">B</text>
+                    <text x="198" y="14" textAnchor="middle" fill={sB} fontSize="13" fontWeight="bold">B</text>
                     {([["a",30],["b",66],["c",102],["d",138],["e",174]] as [string,number][]).map(([el,y])=>(
-                      <text key={el} x={198} y={y+4} textAnchor="middle" fill="#e9d5ff" fontSize="13" fontWeight="bold">{el}</text>
+                      <text key={el} x={198} y={y+4} textAnchor="middle" fill={sKod} fontSize="13" fontWeight="bold">{el}</text>
                     ))}
                     <path d="M80,50 C118,50 158,60 180,66" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
                     <path d="M80,88 C112,100 148,128 180,138" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
                     <path d="M80,126 C112,112 148,78 180,66" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
                     <path d="M80,164 C112,164 148,168 180,174" fill="none" stroke="#22c55e" strokeWidth="1.8" markerEnd="url(#c3-arr)"/>
-                    <text x="62" y="220" textAnchor="middle" fill="#06b6d4" fontSize="8" opacity="0.6">Domain</text>
-                    <text x="198" y="220" textAnchor="middle" fill="#8b5cf6" fontSize="8" opacity="0.6">{t.kodoSvgLabel}</text>
+                    <text x="62" y="220" textAnchor="middle" fill={sA} fontSize="8" opacity="0.6">Domain</text>
+                    <text x="198" y="220" textAnchor="middle" fill={sB} fontSize="8" opacity="0.6">{t.kodoSvgLabel}</text>
                   </svg>
                 </div>
 
@@ -1020,15 +1049,15 @@ const PengertianFungsiPage = () => {
                       <svg width="100%" viewBox="0 0 175 158">
                         <defs><marker id="arr-d1" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
                         <ellipse cx="46" cy="79" rx="36" ry="62" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
-                        <text x="46" y="12" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
-                        <text x="46" y="43" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">p</text>
-                        <text x="46" y="82" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">q</text>
-                        <text x="46" y="121" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">r</text>
+                        <text x="46" y="12" textAnchor="middle" fill={sA} fontSize="11" fontWeight="bold">A</text>
+                        <text x="46" y="43" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">p</text>
+                        <text x="46" y="82" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">q</text>
+                        <text x="46" y="121" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">r</text>
                         <ellipse cx="129" cy="79" rx="36" ry="62" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
-                        <text x="129" y="12" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
-                        <text x="129" y="43" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
-                        <text x="129" y="82" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
-                        <text x="129" y="121" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                        <text x="129" y="12" textAnchor="middle" fill={sB} fontSize="11" fontWeight="bold">B</text>
+                        <text x="129" y="43" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">1</text>
+                        <text x="129" y="82" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">2</text>
+                        <text x="129" y="121" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">3</text>
                         <path d="M61,39 C88,39 97,39 113,39" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d1)"/>
                         <path d="M61,78 C88,78 97,78 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d1)"/>
                         <path d="M61,117 C88,117 97,117 113,117" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d1)"/>
@@ -1038,15 +1067,15 @@ const PengertianFungsiPage = () => {
                       <svg width="100%" viewBox="0 0 175 158">
                         <defs><marker id="arr-d2" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
                         <ellipse cx="46" cy="79" rx="36" ry="62" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
-                        <text x="46" y="12" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
-                        <text x="46" y="43" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">a</text>
-                        <text x="46" y="82" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">b</text>
-                        <text x="46" y="121" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">c</text>
+                        <text x="46" y="12" textAnchor="middle" fill={sA} fontSize="11" fontWeight="bold">A</text>
+                        <text x="46" y="43" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">a</text>
+                        <text x="46" y="82" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">b</text>
+                        <text x="46" y="121" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">c</text>
                         <ellipse cx="129" cy="79" rx="36" ry="62" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
-                        <text x="129" y="12" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
-                        <text x="129" y="43" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
-                        <text x="129" y="82" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
-                        <text x="129" y="121" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                        <text x="129" y="12" textAnchor="middle" fill={sB} fontSize="11" fontWeight="bold">B</text>
+                        <text x="129" y="43" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">1</text>
+                        <text x="129" y="82" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">2</text>
+                        <text x="129" y="121" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">3</text>
                         <path d="M61,39 C85,39 97,68 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d2)"/>
                         <path d="M61,78 C88,78 97,78 113,78" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d2)"/>
                         <path d="M61,117 C88,117 97,117 113,117" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d2)"/>
@@ -1059,15 +1088,15 @@ const PengertianFungsiPage = () => {
                           <marker id="arr-d3r" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#ef4444"/></marker>
                         </defs>
                         <ellipse cx="46" cy="79" rx="36" ry="62" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
-                        <text x="46" y="12" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
-                        <text x="46" y="43" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">a</text>
-                        <text x="46" y="82" textAnchor="middle" fill="#fca5a5" fontSize="11" fontWeight="bold">b</text>
-                        <text x="46" y="121" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">c</text>
+                        <text x="46" y="12" textAnchor="middle" fill={sA} fontSize="11" fontWeight="bold">A</text>
+                        <text x="46" y="43" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">a</text>
+                        <text x="46" y="82" textAnchor="middle" fill={sErr} fontSize="11" fontWeight="bold">b</text>
+                        <text x="46" y="121" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">c</text>
                         <ellipse cx="129" cy="79" rx="36" ry="62" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
-                        <text x="129" y="12" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
-                        <text x="129" y="43" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
-                        <text x="129" y="82" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
-                        <text x="129" y="121" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                        <text x="129" y="12" textAnchor="middle" fill={sB} fontSize="11" fontWeight="bold">B</text>
+                        <text x="129" y="43" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">1</text>
+                        <text x="129" y="82" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">2</text>
+                        <text x="129" y="121" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">3</text>
                         <path d="M61,39 C88,39 97,39 113,39" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d3g)"/>
                         <path d="M61,78 C84,65 100,50 113,39" fill="none" stroke="#ef4444" strokeWidth="1.8" markerEnd="url(#arr-d3r)"/>
                         <path d="M61,78 C84,92 100,108 113,117" fill="none" stroke="#ef4444" strokeWidth="1.8" markerEnd="url(#arr-d3r)"/>
@@ -1078,16 +1107,16 @@ const PengertianFungsiPage = () => {
                       <svg width="100%" viewBox="0 0 175 170">
                         <defs><marker id="arr-d4" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
                         <ellipse cx="46" cy="88" rx="36" ry="68" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
-                        <text x="46" y="13" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
-                        <text x="46" y="48" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">p</text>
-                        <text x="46" y="90" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">q</text>
-                        <text x="46" y="134" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">r</text>
+                        <text x="46" y="13" textAnchor="middle" fill={sA} fontSize="11" fontWeight="bold">A</text>
+                        <text x="46" y="48" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">p</text>
+                        <text x="46" y="90" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">q</text>
+                        <text x="46" y="134" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">r</text>
                         <ellipse cx="129" cy="84" rx="36" ry="72" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
-                        <text x="129" y="7" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
-                        <text x="129" y="31" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
-                        <text x="129" y="66" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
-                        <text x="129" y="103" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
-                        <text x="129" y="140" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">4</text>
+                        <text x="129" y="7" textAnchor="middle" fill={sB} fontSize="11" fontWeight="bold">B</text>
+                        <text x="129" y="31" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">1</text>
+                        <text x="129" y="66" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">2</text>
+                        <text x="129" y="103" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">3</text>
+                        <text x="129" y="140" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">4</text>
                         <path d="M61,44 C86,44 100,56 113,62" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d4)"/>
                         <path d="M61,86 C86,72 100,38 113,27" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d4)"/>
                         <path d="M61,130 C86,130 100,106 113,99" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d4)"/>
@@ -1097,16 +1126,16 @@ const PengertianFungsiPage = () => {
                       <svg width="100%" viewBox="0 0 175 170">
                         <defs><marker id="arr-d5" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
                         <ellipse cx="46" cy="85" rx="36" ry="72" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
-                        <text x="46" y="7" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
-                        <text x="46" y="31" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">a</text>
-                        <text x="46" y="66" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">b</text>
-                        <text x="46" y="103" textAnchor="middle" fill="#fed7aa" fontSize="11" fontWeight="bold">c</text>
-                        <text x="46" y="140" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">d</text>
+                        <text x="46" y="7" textAnchor="middle" fill={sA} fontSize="11" fontWeight="bold">A</text>
+                        <text x="46" y="31" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">a</text>
+                        <text x="46" y="66" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">b</text>
+                        <text x="46" y="103" textAnchor="middle" fill={sOrg} fontSize="11" fontWeight="bold">c</text>
+                        <text x="46" y="140" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">d</text>
                         <ellipse cx="129" cy="88" rx="36" ry="68" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
-                        <text x="129" y="13" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
-                        <text x="129" y="48" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">1</text>
-                        <text x="129" y="90" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
-                        <text x="129" y="134" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">3</text>
+                        <text x="129" y="13" textAnchor="middle" fill={sB} fontSize="11" fontWeight="bold">B</text>
+                        <text x="129" y="48" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">1</text>
+                        <text x="129" y="90" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">2</text>
+                        <text x="129" y="134" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">3</text>
                         <path d="M61,27 C86,27 100,80 113,86" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
                         <path d="M61,62 C86,55 100,50 113,44" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
                         <path d="M61,136 C86,136 100,132 113,130" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d5)"/>
@@ -1116,14 +1145,14 @@ const PengertianFungsiPage = () => {
                       <svg width="100%" viewBox="0 0 175 158">
                         <defs><marker id="arr-d6" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#22c55e"/></marker></defs>
                         <ellipse cx="46" cy="79" rx="36" ry="62" fill="rgba(6,182,212,0.07)" stroke="#06b6d4" strokeWidth="1.4"/>
-                        <text x="46" y="12" textAnchor="middle" fill="#06b6d4" fontSize="11" fontWeight="bold">A</text>
-                        <text x="46" y="43" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">x</text>
-                        <text x="46" y="79" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">y</text>
-                        <text x="46" y="117" textAnchor="middle" fill="#cffafe" fontSize="11" fontWeight="bold">z</text>
+                        <text x="46" y="12" textAnchor="middle" fill={sA} fontSize="11" fontWeight="bold">A</text>
+                        <text x="46" y="43" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">x</text>
+                        <text x="46" y="79" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">y</text>
+                        <text x="46" y="117" textAnchor="middle" fill={sEl} fontSize="11" fontWeight="bold">z</text>
                         <ellipse cx="129" cy="79" rx="36" ry="62" fill="rgba(139,92,246,0.07)" stroke="#8b5cf6" strokeWidth="1.4"/>
-                        <text x="129" y="12" textAnchor="middle" fill="#8b5cf6" fontSize="11" fontWeight="bold">B</text>
+                        <text x="129" y="12" textAnchor="middle" fill={sB} fontSize="11" fontWeight="bold">B</text>
                         <text x="129" y="43" textAnchor="middle" fill="#64748b" fontSize="11" fontWeight="bold">1</text>
-                        <text x="129" y="79" textAnchor="middle" fill="#e9d5ff" fontSize="11" fontWeight="bold">2</text>
+                        <text x="129" y="79" textAnchor="middle" fill={sKod} fontSize="11" fontWeight="bold">2</text>
                         <text x="129" y="117" textAnchor="middle" fill="#64748b" fontSize="11" fontWeight="bold">3</text>
                         <path d="M61,39 C88,39 100,60 113,75" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d6)"/>
                         <path d="M61,75 C88,75 97,75 113,75" fill="none" stroke="#22c55e" strokeWidth="1.6" markerEnd="url(#arr-d6)"/>
@@ -1353,8 +1382,8 @@ const PengertianFungsiPage = () => {
 
                 <p className="font-display text-xs font-bold text-violet-300 uppercase tracking-wider pt-1">{t.rangkumanTitle}</p>
                 <div className="grid grid-cols-1 gap-2">
-                  {t.rangItems.map(({ icon, label, desc, color }) => (
-                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                  {t.rangItems.map(({ icon, label, desc }, i) => (
+                    <div key={label} className={`bg-gradient-to-r ${rangColors[i]} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
                       <span className="text-xl shrink-0">{icon}</span>
                       <div>
                         <p className="font-display text-xs font-bold mb-0.5">{label}</p>
@@ -1364,22 +1393,22 @@ const PengertianFungsiPage = () => {
                   ))}
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">{t.tipsTitle}</p>
+                <div className={`${isDark ? "bg-gradient-to-br from-amber-900/40 to-orange-900/40 border-amber-500/40" : "bg-amber-50 border-amber-300"} border rounded-xl p-4`}>
+                  <p className={`font-display text-xs font-bold ${isDark ? "text-amber-300" : "text-amber-700"} uppercase tracking-wider mb-3`}>{t.tipsTitle}</p>
                   <div className="space-y-2">
                     {t.tipItems.map((tip, i) => (
                       <div key={i} className="flex gap-2 items-start">
-                        <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
-                        <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
+                        <span className={`shrink-0 w-5 h-5 rounded-full ${isDark ? "bg-amber-500/30 text-amber-200" : "bg-amber-200 text-amber-800"} flex items-center justify-center font-bold text-[10px]`}>{i + 1}</span>
+                        <p className={`font-body text-xs ${isDark ? "text-amber-100/90" : "text-amber-900"} leading-relaxed`}>{tip}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-violet-900/60 to-purple-900/60 border border-violet-400/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-violet-300 uppercase tracking-wider mb-2">{t.kesimpulanTitle}</p>
+                <div className={`${isDark ? "bg-gradient-to-r from-violet-900/60 to-purple-900/60 border-violet-400/40" : "bg-violet-50 border-violet-300"} border rounded-xl p-4`}>
+                  <p className={`font-display text-xs font-bold ${isDark ? "text-violet-300" : "text-violet-700"} uppercase tracking-wider mb-2`}>{t.kesimpulanTitle}</p>
                   <p className="font-body text-sm text-white/90 leading-relaxed">
-                    {t.kesP} <strong className="text-violet-300">{t.kesBold}</strong>{t.kesP2} <strong className="text-green-300">{t.kesBold2}</strong>{t.kesP3}
+                    {t.kesP} <strong className={isDark ? "text-violet-300" : "text-violet-700"}>{t.kesBold}</strong>{t.kesP2} <strong className={isDark ? "text-green-300" : "text-green-700"}>{t.kesBold2}</strong>{t.kesP3}
                   </p>
                 </div>
 
