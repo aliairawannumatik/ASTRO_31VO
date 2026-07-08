@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -333,6 +334,16 @@ const translations = {
 const GrafikFungsiPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { theme } = useTheme();
+  const isSp = theme === "dark";
+  const sc = {
+    grid:    isSp ? "#1e293b" : "rgba(0,0,0,0.09)",
+    axis:    isSp ? "#475569" : "#94a3b8",
+    arrow:   isSp ? "#475569" : "#94a3b8",
+    label:   isSp ? "#94a3b8" : "#475569",
+    tick:    isSp ? "#64748b" : "#374151",
+    caption: isSp ? "text-white/40" : "text-gray-500",
+  };
   const t = translations[language];
 
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -480,28 +491,28 @@ const GrafikFungsiPage = () => {
                   </div>
                 </div>
                 {/* Ilustrasi 1 */}
-                <div className="bg-slate-900/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="font-body text-xs font-bold text-cyan-300 mb-1 text-center">{t.graph1_title}</p>
-                  <p className="font-body text-xs text-white/40 mb-3 text-center">{t.graph1_sub}</p>
+                <div className={`border rounded-xl p-4 ${isSp ? "bg-slate-900/60 border-cyan-500/20" : "bg-cyan-50/60 border-cyan-300/50"}`}>
+                  <p className={`font-body text-xs font-bold mb-1 text-center ${isSp ? "text-cyan-300" : "text-cyan-700"}`}>{t.graph1_title}</p>
+                  <p className={`font-body text-xs mb-3 text-center ${sc.caption}`}>{t.graph1_sub}</p>
                   <svg viewBox="0 0 260 200" className="w-full max-w-xs mx-auto">
                     {[1,2,3,4].map(v => (
-                      <line key={"gx"+v} x1={40+v*45} y1={20} x2={40+v*45} y2={175} stroke="#1e293b" strokeWidth="1" />
+                      <line key={"gx"+v} x1={40+v*45} y1={20} x2={40+v*45} y2={175} stroke={sc.grid} strokeWidth="1" />
                     ))}
                     {[1,2,3,4,5,6].map(v => (
-                      <line key={"gy"+v} x1={40} y1={175-v*25.83} x2={225} y2={175-v*25.83} stroke="#1e293b" strokeWidth="1" />
+                      <line key={"gy"+v} x1={40} y1={175-v*25.83} x2={225} y2={175-v*25.83} stroke={sc.grid} strokeWidth="1" />
                     ))}
-                    <line x1={40} y1={15} x2={40} y2={180} stroke="#475569" strokeWidth="1.5" />
-                    <line x1={35} y1={175} x2={230} y2={175} stroke="#475569" strokeWidth="1.5" />
-                    <polygon points="230,172 230,178 237,175" fill="#475569" />
-                    <polygon points="37,15 43,15 40,8" fill="#475569" />
-                    <text x={240} y={179} fill="#94a3b8" fontSize="9">x</text>
-                    <text x={44} y={13} fill="#94a3b8" fontSize="9">y</text>
+                    <line x1={40} y1={15} x2={40} y2={180} stroke={sc.axis} strokeWidth="1.5" />
+                    <line x1={35} y1={175} x2={230} y2={175} stroke={sc.axis} strokeWidth="1.5" />
+                    <polygon points="230,172 230,178 237,175" fill={sc.arrow} />
+                    <polygon points="37,15 43,15 40,8" fill={sc.arrow} />
+                    <text x={240} y={179} fill={sc.label} fontSize="9">x</text>
+                    <text x={44} y={13} fill={sc.label} fontSize="9">y</text>
                     {[1,2,3,4].map(v => (
-                      <text key={v} x={40+v*45-3} y={189} fill="#64748b" fontSize="8">{v}</text>
+                      <text key={v} x={40+v*45-3} y={189} fill={sc.tick} fontSize="8">{v}</text>
                     ))}
-                    <text x={33} y={189} fill="#64748b" fontSize="8">0</text>
+                    <text x={33} y={189} fill={sc.tick} fontSize="8">0</text>
                     {[1,2,3,4,5,6].map(v => (
-                      <text key={v} x={28} y={175-v*25.83+3} fill="#64748b" fontSize="8">{v}</text>
+                      <text key={v} x={28} y={175-v*25.83+3} fill={sc.tick} fontSize="8">{v}</text>
                     ))}
                     <line x1={40} y1={149} x2={220} y2={46} stroke="#22d3ee" strokeWidth="2.5" />
                     <line x1={175} y1={175} x2={175} y2={72} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
@@ -511,33 +522,33 @@ const GrafikFungsiPage = () => {
                     <text x={170} y={189} fill="#fb923c" fontSize="8" fontWeight="bold">3</text>
                     <text x={20} y={75} fill="#fb923c" fontSize="8" fontWeight="bold">4</text>
                     <circle cx={40} cy={149} r="4" fill="#22d3ee" opacity="0.7" />
-                    <text x={44} y={146} fill="#94a3b8" fontSize="8">(0,1)</text>
+                    <text x={44} y={146} fill={sc.label} fontSize="8">(0,1)</text>
                   </svg>
                 </div>
 
                 {/* Ilustrasi 2 */}
-                <div className="bg-slate-900/60 border border-violet-500/20 rounded-xl p-4">
-                  <p className="font-body text-xs font-bold text-violet-300 mb-1 text-center">{t.graph2_title}</p>
-                  <p className="font-body text-xs text-white/40 mb-3 text-center">{t.graph2_sub}</p>
+                <div className={`border rounded-xl p-4 ${isSp ? "bg-slate-900/60 border-violet-500/20" : "bg-violet-50/60 border-violet-300/50"}`}>
+                  <p className={`font-body text-xs font-bold mb-1 text-center ${isSp ? "text-violet-300" : "text-violet-700"}`}>{t.graph2_title}</p>
+                  <p className={`font-body text-xs mb-3 text-center ${sc.caption}`}>{t.graph2_sub}</p>
                   <svg viewBox="0 0 260 200" className="w-full max-w-xs mx-auto">
                     {[1,2,3].map(v => (
-                      <line key={"gx"+v} x1={40+v*60} y1={20} x2={40+v*60} y2={175} stroke="#1e293b" strokeWidth="1" />
+                      <line key={"gx"+v} x1={40+v*60} y1={20} x2={40+v*60} y2={175} stroke={sc.grid} strokeWidth="1" />
                     ))}
                     {[1,2,3,4,5,6].map(v => (
-                      <line key={"gy"+v} x1={40} y1={175-v*25.83} x2={225} y2={175-v*25.83} stroke="#1e293b" strokeWidth="1" />
+                      <line key={"gy"+v} x1={40} y1={175-v*25.83} x2={225} y2={175-v*25.83} stroke={sc.grid} strokeWidth="1" />
                     ))}
-                    <line x1={40} y1={15} x2={40} y2={180} stroke="#475569" strokeWidth="1.5" />
-                    <line x1={35} y1={175} x2={230} y2={175} stroke="#475569" strokeWidth="1.5" />
-                    <polygon points="230,172 230,178 237,175" fill="#475569" />
-                    <polygon points="37,15 43,15 40,8" fill="#475569" />
-                    <text x={240} y={179} fill="#94a3b8" fontSize="9">x</text>
-                    <text x={44} y={13} fill="#94a3b8" fontSize="9">y</text>
+                    <line x1={40} y1={15} x2={40} y2={180} stroke={sc.axis} strokeWidth="1.5" />
+                    <line x1={35} y1={175} x2={230} y2={175} stroke={sc.axis} strokeWidth="1.5" />
+                    <polygon points="230,172 230,178 237,175" fill={sc.arrow} />
+                    <polygon points="37,15 43,15 40,8" fill={sc.arrow} />
+                    <text x={240} y={179} fill={sc.label} fontSize="9">x</text>
+                    <text x={44} y={13} fill={sc.label} fontSize="9">y</text>
                     {[1,2,3].map(v => (
-                      <text key={v} x={40+v*60-3} y={189} fill="#64748b" fontSize="8">{v}</text>
+                      <text key={v} x={40+v*60-3} y={189} fill={sc.tick} fontSize="8">{v}</text>
                     ))}
-                    <text x={33} y={189} fill="#64748b" fontSize="8">0</text>
+                    <text x={33} y={189} fill={sc.tick} fontSize="8">0</text>
                     {[1,2,3,4,5,6].map(v => (
-                      <text key={v} x={28} y={175-v*25.83+3} fill="#64748b" fontSize="8">{v}</text>
+                      <text key={v} x={28} y={175-v*25.83+3} fill={sc.tick} fontSize="8">{v}</text>
                     ))}
                     <line x1={40} y1={175} x2={220} y2={20} stroke="#a78bfa" strokeWidth="2.5" />
                     <line x1={160} y1={175} x2={160} y2={72} stroke="#fb923c" strokeWidth="1.5" strokeDasharray="5,3" />
@@ -547,7 +558,7 @@ const GrafikFungsiPage = () => {
                     <text x={155} y={189} fill="#fb923c" fontSize="8" fontWeight="bold">2</text>
                     <text x={20} y={75} fill="#fb923c" fontSize="8" fontWeight="bold">4</text>
                     <circle cx={40} cy={175} r="4" fill="#a78bfa" opacity="0.7" />
-                    <text x={44} y={172} fill="#94a3b8" fontSize="8">(0,0)</text>
+                    <text x={44} y={172} fill={sc.label} fontSize="8">(0,0)</text>
                   </svg>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
@@ -565,32 +576,32 @@ const GrafikFungsiPage = () => {
             {expandedSections.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.badge_read} color="bg-green-700/60 text-green-200" />
-                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-green-300 mb-3">📝 {language === "id" ? "Soal" : language === "en" ? "Problem" : "問題"}</p>
-                  <p className="font-body text-sm text-white/85 leading-relaxed mb-4">{t.c1_soal_p}</p>
-                  <div className="bg-slate-900/70 border border-green-500/20 rounded-xl p-4">
+                <div className={`border rounded-xl p-4 ${isSp ? "bg-slate-800/60 border-green-500/30" : "bg-green-50/70 border-green-300"}`}>
+                  <p className={`font-body text-sm font-semibold mb-3 ${isSp ? "text-green-300" : "text-green-700"}`}>📝 {language === "id" ? "Soal" : language === "en" ? "Problem" : "問題"}</p>
+                  <p className={`font-body text-sm leading-relaxed mb-4 ${isSp ? "text-white/85" : "text-gray-700"}`}>{t.c1_soal_p}</p>
+                  <div className={`border rounded-xl p-4 ${isSp ? "bg-slate-900/70 border-green-500/20" : "bg-white border-green-200"}`}>
                     <svg viewBox="0 0 310 220" className="w-full max-w-sm mx-auto">
                       {[1,2,3,4,5].map(i => (
                         <g key={i}>
-                          <line x1={65+i*40} y1={15} x2={65+i*40} y2={175} stroke="#1e293b" strokeWidth="1" />
-                          <line x1={65} y1={175-i*30} x2={270} y2={175-i*30} stroke="#1e293b" strokeWidth="1" />
+                          <line x1={65+i*40} y1={15} x2={65+i*40} y2={175} stroke={sc.grid} strokeWidth="1" />
+                          <line x1={65} y1={175-i*30} x2={270} y2={175-i*30} stroke={sc.grid} strokeWidth="1" />
                         </g>
                       ))}
-                      <line x1={65} y1={15} x2={65} y2={180} stroke="#475569" strokeWidth="1.5" />
-                      <line x1={60} y1={175} x2={275} y2={175} stroke="#475569" strokeWidth="1.5" />
-                      <polygon points="275,172 275,178 282,175" fill="#475569" />
-                      <polygon points="62,15 68,15 65,8" fill="#475569" />
-                      <text x={283} y={179} fill="#94a3b8" fontSize="9">{t.c1_xLabel}</text>
-                      <text x={2} y={9} fill="#94a3b8" fontSize="8">{t.c1_yLabel}</text>
-                      <text x={2} y={17} fill="#94a3b8" fontSize="8">{t.c1_yUnit}</text>
+                      <line x1={65} y1={15} x2={65} y2={180} stroke={sc.axis} strokeWidth="1.5" />
+                      <line x1={60} y1={175} x2={275} y2={175} stroke={sc.axis} strokeWidth="1.5" />
+                      <polygon points="275,172 275,178 282,175" fill={sc.arrow} />
+                      <polygon points="62,15 68,15 65,8" fill={sc.arrow} />
+                      <text x={283} y={179} fill={sc.label} fontSize="9">{t.c1_xLabel}</text>
+                      <text x={2} y={9} fill={sc.label} fontSize="8">{t.c1_yLabel}</text>
+                      <text x={2} y={17} fill={sc.label} fontSize="8">{t.c1_yUnit}</text>
                       {[10,20,30,40,50].map((v,i) => (
-                        <text key={v} x={65+(i+1)*40-7} y={190} fill="#64748b" fontSize="8">{v}</text>
+                        <text key={v} x={65+(i+1)*40-7} y={190} fill={sc.tick} fontSize="8">{v}</text>
                       ))}
                       {[0.5,1.0,1.5,2.0,2.5].map((v,i) => (
-                        <text key={v} x={18} y={175-(i+1)*30+3} fill="#64748b" fontSize="8">{v}</text>
+                        <text key={v} x={18} y={175-(i+1)*30+3} fill={sc.tick} fontSize="8">{v}</text>
                       ))}
-                      <text x={49} y={179} fill="#64748b" fontSize="8">0</text>
-                      <text x={150} y={207} fill="#94a3b8" fontSize="8">{t.c1_xUnit}</text>
+                      <text x={49} y={179} fill={sc.tick} fontSize="8">0</text>
+                      <text x={150} y={207} fill={sc.label} fontSize="8">{t.c1_xUnit}</text>
                       <line x1={65} y1={175} x2={265} y2={25} stroke="#4ade80" strokeWidth="2.5" />
                       {[[10,0.5],[20,1.0],[30,1.5],[40,2.0],[50,2.5]].map(([x,y]) => (
                         <circle key={x} cx={65+x*4} cy={175-y*60} r="4" fill="#4ade80" stroke="#86efac" strokeWidth="1.5" />
@@ -600,9 +611,9 @@ const GrafikFungsiPage = () => {
                       <circle cx={165} cy={100} r="5" fill="#f97316" stroke="#fdba74" strokeWidth="1.5" />
                       <text x={155} y={191} fill="#f97316" fontSize="9" fontWeight="bold">25</text>
                     </svg>
-                    <p className="text-xs text-center text-white/40 mt-1 font-body">{t.c1_graph_cap}</p>
+                    <p className={`text-xs text-center mt-1 font-body ${sc.caption}`}>{t.c1_graph_cap}</p>
                   </div>
-                  <p className="font-body text-sm text-white/85 mt-4">{t.c1_q}</p>
+                  <p className={`font-body text-sm mt-4 ${isSp ? "text-white/85" : "text-gray-700"}`}>{t.c1_q}</p>
                 </div>
                 <PilihanGanda
                   autoShow
@@ -621,33 +632,33 @@ const GrafikFungsiPage = () => {
             {expandedSections.includes("contoh2") && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.badge_ctx} color="bg-yellow-700/60 text-yellow-200" />
-                <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-yellow-300 mb-3">📝 {language === "id" ? "Soal" : language === "en" ? "Problem" : "問題"}</p>
-                  <p className="font-body text-sm text-white/85 leading-relaxed mb-4">{t.c2_soal_p}</p>
-                  <div className="bg-transparent border border-yellow-500/20 rounded-xl p-4">
+                <div className={`border rounded-xl p-4 ${isSp ? "bg-slate-800/60 border-yellow-500/30" : "bg-yellow-50/70 border-yellow-300"}`}>
+                  <p className={`font-body text-sm font-semibold mb-3 ${isSp ? "text-yellow-300" : "text-yellow-700"}`}>📝 {language === "id" ? "Soal" : language === "en" ? "Problem" : "問題"}</p>
+                  <p className={`font-body text-sm leading-relaxed mb-4 ${isSp ? "text-white/85" : "text-gray-700"}`}>{t.c2_soal_p}</p>
+                  <div className={`border rounded-xl p-4 ${isSp ? "bg-transparent border-yellow-500/20" : "bg-white border-yellow-200"}`}>
                     <svg viewBox="0 0 320 240" className="w-full max-w-sm mx-auto">
                       {[0,5,10,15,20,25,30].map((v) => {
                         const yPx = 195 - v * (170/30);
-                        return <line key={v} x1={70} y1={yPx} x2={250} y2={yPx} stroke="#334155" strokeWidth="0.8" />;
+                        return <line key={v} x1={70} y1={yPx} x2={250} y2={yPx} stroke={sc.grid} strokeWidth="0.8" />;
                       })}
-                      <line x1={70} y1={20} x2={70} y2={198} stroke="#94a3b8" strokeWidth="1.5" />
-                      <line x1={67} y1={195} x2={260} y2={195} stroke="#94a3b8" strokeWidth="1.5" />
+                      <line x1={70} y1={20} x2={70} y2={198} stroke={sc.axis} strokeWidth="1.5" />
+                      <line x1={67} y1={195} x2={260} y2={195} stroke={sc.axis} strokeWidth="1.5" />
                       {[0,5,10,15,20,25,30].map((v) => {
                         const yPx = 195 - v * (170/30);
                         return (
-                          <text key={v} x={58} y={yPx + 3} fill="#94a3b8" fontSize="9" textAnchor="end">{v}</text>
+                          <text key={v} x={58} y={yPx + 3} fill={sc.tick} fontSize="9" textAnchor="end">{v}</text>
                         );
                       })}
-                      <text x={72} y={16} fill="#94a3b8" fontSize="8">{t.c2_yUnit}</text>
+                      <text x={72} y={16} fill={sc.label} fontSize="8">{t.c2_yUnit}</text>
                       {[2,4,6].map((v) => {
                         const xPx = 70 + v * 25;
                         return (
-                          <text key={v} x={xPx} y={210} fill="#94a3b8" fontSize="9" textAnchor="middle">{v}</text>
+                          <text key={v} x={xPx} y={210} fill={sc.tick} fontSize="9" textAnchor="middle">{v}</text>
                         );
                       })}
                       {[2,4,6].map((v) => {
                         const xPx = 70 + v * 25;
-                        return <line key={v} x1={xPx} y1={195} x2={xPx} y2={200} stroke="#94a3b8" strokeWidth="1" />;
+                        return <line key={v} x1={xPx} y1={195} x2={xPx} y2={200} stroke={sc.axis} strokeWidth="1" />;
                       })}
                       <polyline
                         points="120,121 170,87 220,53"
@@ -657,22 +668,22 @@ const GrafikFungsiPage = () => {
                         <g key={cx}>
                           <polygon
                             points={`${cx},${cy-6} ${cx+6},${cy} ${cx},${cy+6} ${cx-6},${cy}`}
-                            fill="#3b82f6" stroke="#e2e8f0" strokeWidth="1"
+                            fill="#3b82f6" stroke={isSp ? "#e2e8f0" : "#1d4ed8"} strokeWidth="1"
                           />
-                          <text x={cx+9} y={cy+4} fill="#f1f5f9" fontSize="10" fontWeight="bold">{label}</text>
+                          <text x={cx+9} y={cy+4} fill={isSp ? "#f1f5f9" : "#1e3a8a"} fontSize="10" fontWeight="bold">{label}</text>
                         </g>
                       ))}
-                      <polygon points="270,60 276,66 270,72 264,66" fill="#3b82f6" stroke="white" strokeWidth="1" />
+                      <polygon points="270,60 276,66 270,72 264,66" fill="#3b82f6" stroke={isSp ? "white" : "#1d4ed8"} strokeWidth="1" />
                       <line x1={258} y1={66} x2={282} y2={66} stroke="#3b82f6" strokeWidth="1.5" />
-                      <text x={285} y={70} fill="#94a3b8" fontSize="9">{t.c2_xLabel}</text>
+                      <text x={285} y={70} fill={sc.label} fontSize="9">{t.c2_xLabel}</text>
                       <line x1={195} y1={195} x2={195} y2={70} stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" />
                       <line x1={70} y1={70} x2={195} y2={70} stroke="#f97316" strokeWidth="1.5" strokeDasharray="4,3" />
                       <circle cx={195} cy={70} r="5" fill="#f97316" stroke="#fdba74" strokeWidth="1.5" />
                       <text x={192} y={210} fill="#f97316" fontSize="9" fontWeight="bold" textAnchor="middle">5</text>
                     </svg>
-                    <p className="text-xs text-center text-slate-400 mt-1 font-body">{t.c2_graph_cap}</p>
+                    <p className={`text-xs text-center mt-1 font-body ${sc.caption}`}>{t.c2_graph_cap}</p>
                   </div>
-                  <p className="font-body text-sm text-white/85 mt-4">{t.c2_q}</p>
+                  <p className={`font-body text-sm mt-4 ${isSp ? "text-white/85" : "text-gray-700"}`}>{t.c2_q}</p>
                 </div>
                 <PilihanGanda
                   autoShow
@@ -691,10 +702,10 @@ const GrafikFungsiPage = () => {
             {expandedSections.includes("contoh3") && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.badge_guess} color="bg-purple-700/60 text-purple-200" />
-                <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
-                  <p className="font-body text-sm font-semibold text-purple-300 mb-3">📝 {language === "id" ? "Soal" : language === "en" ? "Problem" : "問題"}</p>
-                  <p className="font-body text-sm text-white/85 leading-relaxed mb-4">{t.c3_soal_p}</p>
-                  <div className="bg-slate-900/70 border border-purple-500/20 rounded-xl p-4">
+                <div className={`border rounded-xl p-4 ${isSp ? "bg-slate-800/60 border-purple-500/30" : "bg-purple-50/70 border-purple-300"}`}>
+                  <p className={`font-body text-sm font-semibold mb-3 ${isSp ? "text-purple-300" : "text-purple-700"}`}>📝 {language === "id" ? "Soal" : language === "en" ? "Problem" : "問題"}</p>
+                  <p className={`font-body text-sm leading-relaxed mb-4 ${isSp ? "text-white/85" : "text-gray-700"}`}>{t.c3_soal_p}</p>
+                  <div className={`border rounded-xl p-4 ${isSp ? "bg-slate-900/70 border-purple-500/20" : "bg-white border-purple-200"}`}>
                     <svg viewBox="0 0 180 200" className="w-full max-w-[200px] mx-auto">
                       <defs>
                         <marker id="axArr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
@@ -716,12 +727,12 @@ const GrafikFungsiPage = () => {
                       <line x1={80} y1={190} x2={80} y2={12}
                         stroke="#94a3b8" strokeWidth="1.5"
                         markerEnd="url(#axArr)" markerStart="url(#axArrRev)" />
-                      <line x1={118} y1={121} x2={118} y2={129} stroke="#94a3b8" strokeWidth="1.2" />
-                      <text x={114} y={141} fill="#e2e8f0" fontSize="13" fontWeight="bold">1</text>
-                      <line x1={76} y1={49} x2={84} y2={49} stroke="#94a3b8" strokeWidth="1.2" />
-                      <text x={60} y={53} fill="#e2e8f0" fontSize="13" fontWeight="bold">2</text>
-                      <line x1={76} y1={163} x2={84} y2={163} stroke="#94a3b8" strokeWidth="1.2" />
-                      <text x={44} y={167} fill="#e2e8f0" fontSize="12" fontWeight="bold">-1</text>
+                      <line x1={118} y1={121} x2={118} y2={129} stroke={sc.axis} strokeWidth="1.2" />
+                      <text x={114} y={141} fill={sc.tick} fontSize="13" fontWeight="bold">1</text>
+                      <line x1={76} y1={49} x2={84} y2={49} stroke={sc.axis} strokeWidth="1.2" />
+                      <text x={60} y={53} fill={sc.tick} fontSize="13" fontWeight="bold">2</text>
+                      <line x1={76} y1={163} x2={84} y2={163} stroke={sc.axis} strokeWidth="1.2" />
+                      <text x={44} y={167} fill={sc.tick} fontSize="12" fontWeight="bold">-1</text>
                       <line x1={118} y1={125} x2={118} y2={49}
                         stroke="#60a5fa" strokeWidth="1.2" strokeDasharray="4,3" />
                       <line x1={80} y1={49} x2={118} y2={49}
@@ -748,40 +759,46 @@ const GrafikFungsiPage = () => {
             <SectionHeader id="rangkuman" icon={<BookOpen className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sec_rang} />
             {expandedSections.includes("rangkuman") && (
               <div className="px-5 pb-6 space-y-4">
-                <p className="font-display text-xs font-bold text-green-300 uppercase tracking-wider pt-1">{t.sum_title}</p>
+                <p className={`font-display text-xs font-bold uppercase tracking-wider pt-1 ${isSp ? "text-green-300" : "text-green-700"}`}>{t.sum_title}</p>
                 <div className="grid grid-cols-1 gap-2">
-                  {[
+                  {(isSp ? [
                     { ...t.sum_items[0], color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
                     { ...t.sum_items[1], color: "from-teal-900/60 to-cyan-900/60 border-teal-500/40 text-teal-300" },
                     { ...t.sum_items[2], color: "from-blue-900/60 to-indigo-900/60 border-blue-500/40 text-blue-300" },
                     { ...t.sum_items[3], color: "from-violet-900/60 to-purple-900/60 border-violet-500/40 text-violet-300" },
                     { ...t.sum_items[4], color: "from-orange-900/60 to-amber-900/60 border-orange-500/40 text-orange-300" },
-                  ].map(({ icon, label, desc, color }) => (
+                  ] : [
+                    { ...t.sum_items[0], color: "from-green-50 to-emerald-50 border-green-200 text-green-700" },
+                    { ...t.sum_items[1], color: "from-teal-50 to-cyan-50 border-teal-200 text-teal-700" },
+                    { ...t.sum_items[2], color: "from-blue-50 to-indigo-50 border-blue-200 text-blue-700" },
+                    { ...t.sum_items[3], color: "from-violet-50 to-purple-50 border-violet-200 text-violet-700" },
+                    { ...t.sum_items[4], color: "from-orange-50 to-amber-50 border-orange-200 text-orange-700" },
+                  ]).map(({ icon, label, desc, color }) => (
                     <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
                       <span className="text-xl shrink-0">{icon}</span>
                       <div>
                         <p className="font-display text-xs font-bold mb-0.5">{label}</p>
-                        <p className="font-body text-xs text-white/80 leading-relaxed">{desc}</p>
+                        <p className={`font-body text-xs leading-relaxed ${isSp ? "text-white/80" : "text-gray-600"}`}>{desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">{t.tips_title}</p>
+                <div className={`border rounded-xl p-4 ${isSp ? "bg-gradient-to-br from-amber-900/40 to-orange-900/40 border-amber-500/40" : "bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200"}`}>
+                  <p className={`font-display text-xs font-bold uppercase tracking-wider mb-3 ${isSp ? "text-amber-300" : "text-amber-700"}`}>{t.tips_title}</p>
                   <div className="space-y-2">
                     {t.tips.map((tip, i) => (
                       <div key={i} className="flex gap-2 items-start">
-                        <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
-                        <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
+                        <span className={`shrink-0 w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] ${isSp ? "bg-amber-500/30 text-amber-200" : "bg-amber-200 text-amber-800"}`}>{i + 1}</span>
+                        <p className={`font-body text-xs leading-relaxed ${isSp ? "text-amber-100/90" : "text-amber-800"}`}>{tip}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-green-900/60 to-teal-900/60 border border-green-400/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-green-300 uppercase tracking-wider mb-2">{t.concl_title}</p>
-                  <p className="font-body text-sm text-white/90 leading-relaxed">{t.concl_p}</p>
+                <div className={`border rounded-xl p-4 ${isSp ? "bg-gradient-to-r from-green-900/60 to-teal-900/60 border-green-400/40" : "bg-gradient-to-r from-green-50 to-teal-50 border-green-200"}`}>
+                  <p className={`font-display text-xs font-bold uppercase tracking-wider mb-2 ${isSp ? "text-green-300" : "text-green-700"}`}>{t.concl_title}</p>
+                  <p className={`font-body text-sm leading-relaxed ${isSp ? "text-white/90" : "text-gray-700"}`}>{t.concl_p}</p>
                 </div>
               </div>
             )}
