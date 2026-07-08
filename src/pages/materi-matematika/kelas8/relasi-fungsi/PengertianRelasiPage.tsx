@@ -7,6 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -69,7 +70,7 @@ const translations = {
     svgB: "B (Ekskul)",
     svgWrenNote: "Wren tidak memiliki pasangan",
     penyajianIntro: "Relasi dapat disajikan dengan",
-    penyajian4: "4 cara",
+    penyajian4: "3 cara",
     diag1Title: "1️⃣ Diagram Panah",
     diag1Desc: "Dua oval mewakili himpunan A (siswa) dan B (ekskul), dihubungkan dengan anak panah relasi \"mengikuti\".",
     wrenLegend: "Wren (∅)",
@@ -117,7 +118,7 @@ const translations = {
       { icon: "📥", label: "Domain",          desc: "Himpunan asal (himpunan A) — semua nilai yang boleh menjadi input.",                  color: "from-blue-900/60 to-cyan-900/60 border-blue-500/40 text-blue-300" },
       { icon: "📤", label: "Kodomain",        desc: "Himpunan kawan (himpunan B) — semua nilai yang mungkin menjadi output.",             color: "from-violet-900/60 to-purple-900/60 border-violet-500/40 text-violet-300" },
       { icon: "🎯", label: "Range",           desc: "Bagian dari kodomain yang benar-benar dipasangkan. Range ⊆ Kodomain selalu!",        color: "from-pink-900/60 to-rose-900/60 border-pink-500/40 text-pink-300" },
-      { icon: "📊", label: "4 Cara Penyajian", desc: "Diagram panah, pasangan berurutan, tabel, dan grafik Kartesius.",                  color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
+      { icon: "📊", label: "3 Cara Penyajian", desc: "Diagram panah, pasangan berurutan, dan diagram kartesius.",                  color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
     ],
     tipItems: [
       "Range ⊆ Kodomain SELALU benar — range tidak pernah lebih besar dari kodomain.",
@@ -190,7 +191,7 @@ const translations = {
     svgB: "B (Extracurricular)",
     svgWrenNote: "Wren has no partner",
     penyajianIntro: "A relation can be represented in",
-    penyajian4: "4 ways",
+    penyajian4: "3 ways",
     diag1Title: "1️⃣ Arrow Diagram",
     diag1Desc: "Two ovals represent set A (students) and B (extracurricular), connected by arrows for the relation \"joins\".",
     wrenLegend: "Wren (∅)",
@@ -238,7 +239,7 @@ const translations = {
       { icon: "📥", label: "Domain",            desc: "The source set (set A) — all input values allowed by the relation.",             color: "from-blue-900/60 to-cyan-900/60 border-blue-500/40 text-blue-300" },
       { icon: "📤", label: "Codomain",          desc: "The target set (set B) — all values that could possibly be an output.",         color: "from-violet-900/60 to-purple-900/60 border-violet-500/40 text-violet-300" },
       { icon: "🎯", label: "Range",             desc: "The subset of the codomain that is actually paired. Range ⊆ Codomain always!", color: "from-pink-900/60 to-rose-900/60 border-pink-500/40 text-pink-300" },
-      { icon: "📊", label: "4 Representations", desc: "Arrow diagram, ordered pairs, table, and Cartesian graph.",                    color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
+      { icon: "📊", label: "3 Representations", desc: "Arrow diagram, ordered pairs, and Cartesian diagram.",                    color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
     ],
     tipItems: [
       "Range ⊆ Codomain is ALWAYS true — range is never larger than the codomain.",
@@ -311,7 +312,7 @@ const translations = {
     svgB: "B（課外活動）",
     svgWrenNote: "Wrenに対応なし",
     penyajianIntro: "関係は",
-    penyajian4: "4通り",
+    penyajian4: "3通り",
     diag1Title: "1️⃣ 矢印図",
     diag1Desc: "集合A（生徒）とB（課外活動）の2つの楕円を「参加する」という関係の矢印で結びます。",
     wrenLegend: "Wren（∅）",
@@ -359,7 +360,7 @@ const translations = {
       { icon: "📥", label: "定義域 (Domain)", desc: "始集合（集合A）— 入力として使える全ての値。",                   color: "from-blue-900/60 to-cyan-900/60 border-blue-500/40 text-blue-300" },
       { icon: "📤", label: "終域 (Codomain)", desc: "目標集合（集合B）— 出力になり得る全ての値。",                   color: "from-violet-900/60 to-purple-900/60 border-violet-500/40 text-violet-300" },
       { icon: "🎯", label: "値域 (Range)",    desc: "実際に対応している終域の部分。値域 ⊆ 終域 は常に成立！",        color: "from-pink-900/60 to-rose-900/60 border-pink-500/40 text-pink-300" },
-      { icon: "📊", label: "4つの表し方",     desc: "矢印図、順序対、表、座標平面。",                               color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
+      { icon: "📊", label: "3つの表し方",     desc: "矢印図、順序対、座標平面。",                               color: "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300" },
     ],
     tipItems: [
       "値域 ⊆ 終域 は常に成立 — 値域が終域より大きくなることはありません。",
@@ -402,8 +403,44 @@ const PengertianRelasiPage = () => {
     </button>
   );
 
+  const { isDark } = useTheme();
   const isJa = language === "ja";
   const sportFontSize = isJa ? "9" : "10";
+
+  // ── Rangkuman adaptive colors (light vs dark themes) ──
+  const rangColors = isDark
+    ? [
+        "from-cyan-900/60 to-teal-900/60 border-cyan-500/40 text-cyan-300",
+        "from-blue-900/60 to-cyan-900/60 border-blue-500/40 text-blue-300",
+        "from-violet-900/60 to-purple-900/60 border-violet-500/40 text-violet-300",
+        "from-pink-900/60 to-rose-900/60 border-pink-500/40 text-pink-300",
+        "from-green-900/60 to-emerald-900/60 border-green-500/40 text-green-300",
+      ]
+    : [
+        "from-cyan-50 to-teal-50 border-cyan-500 text-cyan-800",
+        "from-blue-50 to-cyan-50 border-blue-500 text-blue-800",
+        "from-violet-50 to-purple-50 border-violet-500 text-violet-800",
+        "from-pink-50 to-rose-50 border-pink-500 text-pink-800",
+        "from-green-50 to-emerald-50 border-green-500 text-green-800",
+      ];
+  const rangDescClass  = isDark ? "text-white/80" : "text-slate-700";
+  const tipsBg         = isDark ? "from-amber-900/40 to-orange-900/40 border-amber-500/40" : "from-amber-50 to-orange-50 border-amber-400";
+  const tipsTitleColor = isDark ? "text-amber-300" : "text-amber-700";
+  const tipTextColor   = isDark ? "text-amber-100/90" : "text-amber-900";
+  const tipNumBg       = isDark ? "bg-amber-500/30 text-amber-200" : "bg-amber-100 text-amber-800";
+  const kesBg          = isDark ? "from-teal-900/60 to-cyan-900/60 border-teal-400/40" : "from-teal-50 to-cyan-50 border-teal-400";
+  const kesTitleColor  = isDark ? "text-teal-300" : "text-teal-700";
+  const kesBodyColor   = isDark ? "text-white/90" : "text-slate-800";
+  const kesTealText    = isDark ? "text-teal-300" : "text-teal-700";
+  const kesCyanText    = isDark ? "text-cyan-300" : "text-cyan-700";
+  const kesVioletText  = isDark ? "text-violet-300" : "text-violet-700";
+  const kesPinkText    = isDark ? "text-pink-300" : "text-pink-700";
+
+  // ── SVG adaptive colors ──
+  const svgGridStroke    = isDark ? "rgba(148,163,184,0.15)" : "rgba(30,41,59,0.22)";
+  const svgAxisStroke    = isDark ? "#94a3b8" : "#475569";
+  const svgAxisLabel     = isDark ? "#64748b" : "#334155";
+  const svgWrenNoteColor = isDark ? "rgba(148,163,184,0.45)" : "#64748b";
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
@@ -567,15 +604,15 @@ const PengertianRelasiPage = () => {
                       <text x="85"  y="18" textAnchor="middle" fill="#22d3ee" fontSize="9" fontWeight="bold">{t.svgA}</text>
                       <text x="265" y="18" textAnchor="middle" fill="#a78bfa" fontSize="9" fontWeight="bold">{t.svgB}</text>
                       {/* Domain items */}
-                      <text x="85" y="76"  textAnchor="middle" fill="#22d3ee" fontSize="11" fontWeight="bold">Enzo</text>
-                      <text x="85" y="111" textAnchor="middle" fill="#4ade80" fontSize="11" fontWeight="bold">Justin</text>
-                      <text x="85" y="146" textAnchor="middle" fill="#fb923c" fontSize="11" fontWeight="bold">Phoenix</text>
-                      <text x="85" y="181" textAnchor="middle" fill="#94a3b8" fontSize="11" fontWeight="bold">Wren</text>
+                      <text x="85" y="76"  textAnchor="middle" fill={isDark ? "#22d3ee" : "#0e7490"} fontSize="11" fontWeight="bold">Enzo</text>
+                      <text x="85" y="111" textAnchor="middle" fill={isDark ? "#4ade80" : "#16a34a"} fontSize="11" fontWeight="bold">Justin</text>
+                      <text x="85" y="146" textAnchor="middle" fill={isDark ? "#fb923c" : "#c2410c"} fontSize="11" fontWeight="bold">Phoenix</text>
+                      <text x="85" y="181" textAnchor="middle" fill={svgAxisStroke} fontSize="11" fontWeight="bold">Wren</text>
                       {/* Kodomain items */}
-                      <text x="265" y="64"  textAnchor="middle" fill="#c4b5fd" fontSize={sportFontSize} fontWeight="bold">{t.sports[0]}</text>
-                      <text x="265" y="97"  textAnchor="middle" fill="#c4b5fd" fontSize={sportFontSize} fontWeight="bold">{t.sports[1]}</text>
-                      <text x="265" y="130" textAnchor="middle" fill="#c4b5fd" fontSize={sportFontSize} fontWeight="bold">{t.sports[2]}</text>
-                      <text x="265" y="163" textAnchor="middle" fill="#c4b5fd" fontSize={sportFontSize} fontWeight="bold">{t.sports[3]}</text>
+                      <text x="265" y="64"  textAnchor="middle" fill={isDark ? "#c4b5fd" : "#7c3aed"} fontSize={sportFontSize} fontWeight="bold">{t.sports[0]}</text>
+                      <text x="265" y="97"  textAnchor="middle" fill={isDark ? "#c4b5fd" : "#7c3aed"} fontSize={sportFontSize} fontWeight="bold">{t.sports[1]}</text>
+                      <text x="265" y="130" textAnchor="middle" fill={isDark ? "#c4b5fd" : "#7c3aed"} fontSize={sportFontSize} fontWeight="bold">{t.sports[2]}</text>
+                      <text x="265" y="163" textAnchor="middle" fill={isDark ? "#c4b5fd" : "#7c3aed"} fontSize={sportFontSize} fontWeight="bold">{t.sports[3]}</text>
                       <text x="265" y="196" textAnchor="middle" fill="#c4b5fd" fontSize={sportFontSize} fontWeight="bold">{t.sports[4]}</text>
                       {/* Enzo → sports[0], sports[1], sports[2] */}
                       <line x1="99" y1="72"  x2="237" y2="60"  stroke="#22d3ee" strokeWidth="1.5" markerEnd="url(#arCyan)"/>
@@ -588,7 +625,7 @@ const PengertianRelasiPage = () => {
                       <line x1="107" y1="142" x2="252" y2="192" stroke="#fb923c" strokeWidth="1.5" markerEnd="url(#arOrange)"/>
                       <line x1="107" y1="142" x2="246" y2="126" stroke="#fb923c" strokeWidth="1.5" markerEnd="url(#arOrange)"/>
                       {/* Wren — no arrow */}
-                      <text x="85" y="248" textAnchor="middle" fill="rgba(148,163,184,0.4)" fontSize="8">{t.svgWrenNote}</text>
+                      <text x="85" y="248" textAnchor="middle" fill={svgWrenNoteColor} fontSize="8">{t.svgWrenNote}</text>
                     </svg>
                   </div>
                   <div className="flex flex-wrap gap-3 justify-center mt-1">
@@ -635,45 +672,45 @@ const PengertianRelasiPage = () => {
                   <div className="bg-slate-900/60 border border-violet-500/20 rounded-xl p-4 flex justify-center">
                     <svg viewBox="0 0 310 240" className="w-full max-w-xs" aria-label="Cartesian diagram relation">
                       {[125,165,205,245].map(gx => (
-                        <line key={gx} x1={gx} y1={20} x2={gx} y2={200} stroke="rgba(148,163,184,0.15)" strokeWidth="1" strokeDasharray="3,3"/>
+                        <line key={gx} x1={gx} y1={20} x2={gx} y2={200} stroke={svgGridStroke} strokeWidth="1" strokeDasharray="3,3"/>
                       ))}
                       {[48,83,118,153,188].map(gy => (
-                        <line key={gy} x1={85} y1={gy} x2={260} y2={gy} stroke="rgba(148,163,184,0.15)" strokeWidth="1" strokeDasharray="3,3"/>
+                        <line key={gy} x1={85} y1={gy} x2={260} y2={gy} stroke={svgGridStroke} strokeWidth="1" strokeDasharray="3,3"/>
                       ))}
-                      <line x1="85" y1="200" x2="263" y2="200" stroke="#94a3b8" strokeWidth="1.8"/>
-                      <line x1="85" y1="200" x2="85"  y2="12"  stroke="#94a3b8" strokeWidth="1.8"/>
-                      <polygon points="260,197 267,200 260,203" fill="#94a3b8"/>
-                      <polygon points="82,12 85,5 88,12"         fill="#94a3b8"/>
+                      <line x1="85" y1="200" x2="263" y2="200" stroke={svgAxisStroke} strokeWidth="1.8"/>
+                      <line x1="85" y1="200" x2="85"  y2="12"  stroke={svgAxisStroke} strokeWidth="1.8"/>
+                      <polygon points="260,197 267,200 260,203" fill={svgAxisStroke}/>
+                      <polygon points="82,12 85,5 88,12"         fill={svgAxisStroke}/>
                       {/* Y-axis sport labels */}
-                      <text x="81" y="51"  textAnchor="end" fill="#a78bfa" fontSize="7.5" fontWeight="bold">{t.sports[4]}</text>
-                      <text x="81" y="86"  textAnchor="end" fill="#a78bfa" fontSize="7.5" fontWeight="bold">{t.sports[3]}</text>
-                      <text x="81" y="121" textAnchor="end" fill="#a78bfa" fontSize="7.5" fontWeight="bold">{t.sports[2]}</text>
-                      <text x="81" y="156" textAnchor="end" fill="#a78bfa" fontSize="7.5" fontWeight="bold">{t.sports[1]}</text>
-                      <text x="81" y="191" textAnchor="end" fill="#a78bfa" fontSize="7.5" fontWeight="bold">{t.sports[0]}</text>
+                      <text x="81" y="51"  textAnchor="end" fill={isDark ? "#a78bfa" : "#7c3aed"} fontSize="7.5" fontWeight="bold">{t.sports[4]}</text>
+                      <text x="81" y="86"  textAnchor="end" fill={isDark ? "#a78bfa" : "#7c3aed"} fontSize="7.5" fontWeight="bold">{t.sports[3]}</text>
+                      <text x="81" y="121" textAnchor="end" fill={isDark ? "#a78bfa" : "#7c3aed"} fontSize="7.5" fontWeight="bold">{t.sports[2]}</text>
+                      <text x="81" y="156" textAnchor="end" fill={isDark ? "#a78bfa" : "#7c3aed"} fontSize="7.5" fontWeight="bold">{t.sports[1]}</text>
+                      <text x="81" y="191" textAnchor="end" fill={isDark ? "#a78bfa" : "#7c3aed"} fontSize="7.5" fontWeight="bold">{t.sports[0]}</text>
                       {[48,83,118,153,188].map(gy => (
-                        <line key={gy} x1="81" y1={gy} x2="85" y2={gy} stroke="#94a3b8" strokeWidth="1.2"/>
+                        <line key={gy} x1="81" y1={gy} x2="85" y2={gy} stroke={svgAxisStroke} strokeWidth="1.2"/>
                       ))}
                       {/* X-axis student labels */}
-                      <text x="125" y="214" textAnchor="middle" fill="#22d3ee" fontSize="8" fontWeight="bold">Enzo</text>
-                      <text x="165" y="214" textAnchor="middle" fill="#4ade80" fontSize="8" fontWeight="bold">Justin</text>
-                      <text x="205" y="214" textAnchor="middle" fill="#fb923c" fontSize="8" fontWeight="bold">Phoenix</text>
-                      <text x="245" y="214" textAnchor="middle" fill="#94a3b8" fontSize="8" fontWeight="bold">Wren</text>
+                      <text x="125" y="214" textAnchor="middle" fill={isDark ? "#22d3ee" : "#0e7490"} fontSize="8" fontWeight="bold">Enzo</text>
+                      <text x="165" y="214" textAnchor="middle" fill={isDark ? "#4ade80" : "#16a34a"} fontSize="8" fontWeight="bold">Justin</text>
+                      <text x="205" y="214" textAnchor="middle" fill={isDark ? "#fb923c" : "#c2410c"} fontSize="8" fontWeight="bold">Phoenix</text>
+                      <text x="245" y="214" textAnchor="middle" fill={svgAxisStroke} fontSize="8" fontWeight="bold">Wren</text>
                       {[125,165,205,245].map(gx => (
-                        <line key={gx} x1={gx} y1="200" x2={gx} y2="204" stroke="#94a3b8" strokeWidth="1.2"/>
+                        <line key={gx} x1={gx} y1="200" x2={gx} y2="204" stroke={svgAxisStroke} strokeWidth="1.2"/>
                       ))}
-                      <text x="175" y="228" textAnchor="middle" fill="#64748b" fontSize="7">{t.domAxis}</text>
-                      <text x="14"  y="110" textAnchor="middle" fill="#64748b" fontSize="7" transform="rotate(-90 14 110)">{t.rangeAxis}</text>
+                      <text x="175" y="228" textAnchor="middle" fill={svgAxisLabel} fontSize="7">{t.domAxis}</text>
+                      <text x="14"  y="110" textAnchor="middle" fill={svgAxisLabel} fontSize="7" transform="rotate(-90 14 110)">{t.rangeAxis}</text>
                       {/* Data points: x: Enzo=125, Justin=165, Phoenix=205; y: sports[4]=48, sports[3]=83, sports[2]=118, sports[1]=153, sports[0]=188 */}
                       {[
-                        {cx:125, cy:188, c:"#22d3ee"},
-                        {cx:125, cy:153, c:"#22d3ee"},
-                        {cx:125, cy:118, c:"#22d3ee"},
-                        {cx:165, cy:153, c:"#4ade80"},
-                        {cx:165, cy:83,  c:"#4ade80"},
-                        {cx:205, cy:48,  c:"#fb923c"},
-                        {cx:205, cy:118, c:"#fb923c"},
-                      ].map(({cx,cy,c},i) => (
-                        <circle key={i} cx={cx} cy={cy} r="5" fill={c} stroke="white" strokeWidth="1.2"/>
+                        {cx:125, cy:188, cd:"#22d3ee", cl:"#0e7490"},
+                        {cx:125, cy:153, cd:"#22d3ee", cl:"#0e7490"},
+                        {cx:125, cy:118, cd:"#22d3ee", cl:"#0e7490"},
+                        {cx:165, cy:153, cd:"#4ade80", cl:"#16a34a"},
+                        {cx:165, cy:83,  cd:"#4ade80", cl:"#16a34a"},
+                        {cx:205, cy:48,  cd:"#fb923c", cl:"#c2410c"},
+                        {cx:205, cy:118, cd:"#fb923c", cl:"#c2410c"},
+                      ].map(({cx,cy,cd,cl},i) => (
+                        <circle key={i} cx={cx} cy={cy} r="5" fill={isDark ? cd : cl} stroke={isDark ? "white" : "#f8fafc"} strokeWidth="1.2"/>
                       ))}
                     </svg>
                   </div>
@@ -820,26 +857,26 @@ const PengertianRelasiPage = () => {
                         <p className="text-violet-300 text-xs font-semibold">{t.cart3}</p>
                         <div className="flex justify-center">
                           <svg viewBox="0 0 210 250" className="w-full max-w-xs" aria-label="Cartesian diagram factor of">
-                            {[1,2,3,4,5].map(p => <line key={p} x1={30+p*30} y1={25} x2={30+p*30} y2={215} stroke="rgba(148,163,184,0.15)" strokeWidth="1" strokeDasharray="3,3"/>)}
-                            {[1,2,3,4,5,6,7,8,9,10].map(q => <line key={q} x1={30} y1={215-q*18} x2={195} y2={215-q*18} stroke="rgba(148,163,184,0.15)" strokeWidth="1" strokeDasharray="3,3"/>)}
-                            <line x1="30" y1="215" x2="197" y2="215" stroke="#94a3b8" strokeWidth="1.8"/>
-                            <line x1="30" y1="215" x2="30"  y2="18"  stroke="#94a3b8" strokeWidth="1.8"/>
-                            <polygon points="194,212 201,215 194,218" fill="#94a3b8"/>
-                            <polygon points="27,18 30,11 33,18"       fill="#94a3b8"/>
-                            {[["1","#22d3ee"],["2","#4ade80"],["3","#fb923c"],["4","#c084fc"],["5","#facc15"]].map(([p,c],i) => (
+                            {[1,2,3,4,5].map(p => <line key={p} x1={30+p*30} y1={25} x2={30+p*30} y2={215} stroke={svgGridStroke} strokeWidth="1" strokeDasharray="3,3"/>)}
+                            {[1,2,3,4,5,6,7,8,9,10].map(q => <line key={q} x1={30} y1={215-q*18} x2={195} y2={215-q*18} stroke={svgGridStroke} strokeWidth="1" strokeDasharray="3,3"/>)}
+                            <line x1="30" y1="215" x2="197" y2="215" stroke={svgAxisStroke} strokeWidth="1.8"/>
+                            <line x1="30" y1="215" x2="30"  y2="18"  stroke={svgAxisStroke} strokeWidth="1.8"/>
+                            <polygon points="194,212 201,215 194,218" fill={svgAxisStroke}/>
+                            <polygon points="27,18 30,11 33,18"       fill={svgAxisStroke}/>
+                            {([["1","#22d3ee","#0e7490"],["2","#4ade80","#16a34a"],["3","#fb923c","#c2410c"],["4","#c084fc","#7c3aed"],["5","#facc15","#ca8a04"]] as [string,string,string][]).map(([p,cd,cl],i) => (
                               <g key={p}>
-                                <line x1={60+i*30} y1="215" x2={60+i*30} y2="219" stroke="#94a3b8" strokeWidth="1.2"/>
-                                <text x={60+i*30} y="229" textAnchor="middle" fill={c} fontSize="8" fontWeight="bold">{p}</text>
+                                <line x1={60+i*30} y1="215" x2={60+i*30} y2="219" stroke={svgAxisStroke} strokeWidth="1.2"/>
+                                <text x={60+i*30} y="229" textAnchor="middle" fill={isDark ? cd : cl} fontSize="8" fontWeight="bold">{p}</text>
                               </g>
                             ))}
                             {[1,2,3,4,5,6,7,8,9,10].map(q => (
                               <g key={q}>
-                                <line x1="26" y1={215-q*18} x2="30" y2={215-q*18} stroke="#94a3b8" strokeWidth="1.2"/>
-                                <text x="23" y={215-q*18+3} textAnchor="end" fill="#a78bfa" fontSize="7.5" fontWeight="bold">{q}</text>
+                                <line x1="26" y1={215-q*18} x2="30" y2={215-q*18} stroke={svgAxisStroke} strokeWidth="1.2"/>
+                                <text x="23" y={215-q*18+3} textAnchor="end" fill={isDark ? "#a78bfa" : "#7c3aed"} fontSize="7.5" fontWeight="bold">{q}</text>
                               </g>
                             ))}
-                            <text x="113" y="243" textAnchor="middle" fill="#64748b" fontSize="7">{t.svgPDom}</text>
-                            <text x="10"  y="115" textAnchor="middle" fill="#64748b" fontSize="7" transform="rotate(-90 10 115)">{t.svgQRange}</text>
+                            <text x="113" y="243" textAnchor="middle" fill={svgAxisLabel} fontSize="7">{t.svgPDom}</text>
+                            <text x="10"  y="115" textAnchor="middle" fill={svgAxisLabel} fontSize="7" transform="rotate(-90 10 115)">{t.svgQRange}</text>
                             {([
                               [1,1],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9],[1,10],
                               [2,2],[2,4],[2,6],[2,8],[2,10],
@@ -847,8 +884,10 @@ const PengertianRelasiPage = () => {
                               [4,4],[4,8],
                               [5,5],[5,10],
                             ] as [number,number][]).map(([p,q]) => {
-                              const colors: Record<number,string> = {1:"#22d3ee",2:"#4ade80",3:"#fb923c",4:"#c084fc",5:"#facc15"};
-                              return <circle key={`${p}-${q}`} cx={30+p*30} cy={215-q*18} r="4" fill={colors[p]} stroke="white" strokeWidth="1"/>;
+                              const darkColors: Record<number,string> = {1:"#22d3ee",2:"#4ade80",3:"#fb923c",4:"#c084fc",5:"#facc15"};
+                              const lightColors: Record<number,string> = {1:"#0e7490",2:"#16a34a",3:"#c2410c",4:"#7c3aed",5:"#ca8a04"};
+                              const dotColor = isDark ? darkColors[p] : lightColors[p];
+                              return <circle key={`${p}-${q}`} cx={30+p*30} cy={215-q*18} r="4" fill={dotColor} stroke={isDark ? "white" : "#ffffff"} strokeWidth="1"/>;
                             })}
                           </svg>
                         </div>
@@ -888,35 +927,35 @@ const PengertianRelasiPage = () => {
             {expandedSections.includes("rangkuman") && (
               <div className="px-5 pb-6 space-y-4">
 
-                <p className="font-display text-xs font-bold text-cyan-300 uppercase tracking-wider pt-1">{t.rangkumanTitle}</p>
+                <p className={`font-display text-xs font-bold ${kesCyanText} uppercase tracking-wider pt-1`}>{t.rangkumanTitle}</p>
                 <div className="grid grid-cols-1 gap-2">
-                  {t.rangItems.map(({ icon, label, desc, color }) => (
-                    <div key={label} className={`bg-gradient-to-r ${color} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
+                  {t.rangItems.map(({ icon, label, desc }, i) => (
+                    <div key={label} className={`bg-gradient-to-r ${rangColors[i]} border rounded-xl px-4 py-3 flex gap-3 items-start`}>
                       <span className="text-xl shrink-0">{icon}</span>
                       <div>
                         <p className="font-display text-xs font-bold mb-0.5">{label}</p>
-                        <p className="font-body text-xs text-white/80 leading-relaxed">{desc}</p>
+                        <p className={`font-body text-xs leading-relaxed ${rangDescClass}`}>{desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-900/40 to-orange-900/40 border border-amber-500/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">{t.tipsTitle}</p>
+                <div className={`bg-gradient-to-br ${tipsBg} border rounded-xl p-4`}>
+                  <p className={`font-display text-xs font-bold ${tipsTitleColor} uppercase tracking-wider mb-3`}>{t.tipsTitle}</p>
                   <div className="space-y-2">
                     {t.tipItems.map((tip, i) => (
                       <div key={i} className="flex gap-2 items-start">
-                        <span className="shrink-0 w-5 h-5 rounded-full bg-amber-500/30 text-amber-200 flex items-center justify-center font-bold text-[10px]">{i + 1}</span>
-                        <p className="font-body text-xs text-amber-100/90 leading-relaxed">{tip}</p>
+                        <span className={`shrink-0 w-5 h-5 rounded-full ${tipNumBg} flex items-center justify-center font-bold text-[10px]`}>{i + 1}</span>
+                        <p className={`font-body text-xs leading-relaxed ${tipTextColor}`}>{tip}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-teal-900/60 to-cyan-900/60 border border-teal-400/40 rounded-xl p-4">
-                  <p className="font-display text-xs font-bold text-teal-300 uppercase tracking-wider mb-2">{t.kesimpulanTitle}</p>
-                  <p className="font-body text-sm text-white/90 leading-relaxed">
-                    {t.kesP1} <strong className="text-teal-300">{t.kes1}</strong> {t.kesP2} <strong className="text-cyan-300">{t.kesDomain}</strong>, <strong className="text-violet-300">{t.kesKodo}</strong>, {language === "ja" ? "" : "dan "}<strong className="text-pink-300">{t.kesRange}</strong>{t.kesEnd}
+                <div className={`bg-gradient-to-r ${kesBg} border rounded-xl p-4`}>
+                  <p className={`font-display text-xs font-bold ${kesTitleColor} uppercase tracking-wider mb-2`}>{t.kesimpulanTitle}</p>
+                  <p className={`font-body text-sm ${kesBodyColor} leading-relaxed`}>
+                    {t.kesP1} <strong className={kesTealText}>{t.kes1}</strong> {t.kesP2} <strong className={kesCyanText}>{t.kesDomain}</strong>, <strong className={kesVioletText}>{t.kesKodo}</strong>, {language === "ja" ? "" : "dan "}<strong className={kesPinkText}>{t.kesRange}</strong>{t.kesEnd}
                   </p>
                 </div>
 
