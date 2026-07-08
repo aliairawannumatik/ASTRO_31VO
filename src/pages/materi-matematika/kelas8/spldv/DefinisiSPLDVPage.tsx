@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers } from "lucide-react";
@@ -488,6 +489,7 @@ const translations = {
 const DefinisiSPLDVPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
 
   const [expandedSections, setExpandedSections] = useState<string[]>([
@@ -733,14 +735,14 @@ const DefinisiSPLDVPage = () => {
                     const chosen = sel !== null ? choices[sel] : null;
                     const isCorrect = chosen ? chosen.p1ok && chosen.p2ok : null;
                     return (
-                      <div className="bg-slate-800/60 border border-amber-500/30 rounded-2xl overflow-hidden">
-                        <div className="px-4 pt-4 pb-3 border-b border-white/10 bg-amber-900/20">
-                          <p className="font-body text-xs font-bold text-amber-300 uppercase tracking-widest mb-2">{t.quiz2Label}</p>
+                      <div className={`${isDark ? "bg-slate-800/60 border-amber-500/30" : "bg-amber-50 border-amber-300"} border rounded-2xl overflow-hidden`}>
+                        <div className={`px-4 pt-4 pb-3 border-b ${isDark ? "border-white/10 bg-amber-900/20" : "border-amber-200 bg-amber-100"}`}>
+                          <p className={`font-body text-xs font-bold ${isDark ? "text-amber-300" : "text-amber-700"} uppercase tracking-widest mb-2`}>{t.quiz2Label}</p>
                           <div className="rounded-xl overflow-hidden border border-white/10 mb-3">
                             <img src="/images/spldv-konteks-warung.png" alt="Food context" className="w-full max-h-36 object-cover" />
                           </div>
-                          <p className="font-body text-sm text-white/85 leading-relaxed mb-2">{t.quiz2Story(t.name1, t.name2)}</p>
-                          <div className="bg-black/30 rounded-xl p-3 text-xs font-body text-white/60 space-y-1">
+                          <p className={`font-body text-sm ${isDark ? "text-white/85" : "text-gray-800"} leading-relaxed mb-2`}>{t.quiz2Story(t.name1, t.name2)}</p>
+                          <div className={`${isDark ? "bg-black/30 text-white/60" : "bg-white border border-amber-200 text-gray-600"} rounded-xl p-3 text-xs font-body space-y-1`}>
                             <p>{t.quiz2Let} <InlineMath math="n" /> = {t.quiz2VarN}, <InlineMath math="m" /> = {t.quiz2VarM}</p>
                             <div className="overflow-x-auto">
                               <BlockMath math="\begin{cases} 2n + m = 25 \quad \cdots (1) \\ n + 2m = 23 \quad \cdots (2) \end{cases}" />
@@ -753,9 +755,15 @@ const DefinisiSPLDVPage = () => {
                             {choices.map((c, i) => {
                               const isSelected = sel === i;
                               const correct = c.p1ok && c.p2ok;
-                              let cls = "border border-white/15 bg-slate-700/40 text-white/70 hover:bg-slate-600/50 hover:border-white/30";
-                              if (isSelected && correct) cls = "border-2 border-emerald-400 bg-emerald-900/30 text-emerald-200 shadow-lg shadow-emerald-900/30";
-                              else if (isSelected && !correct) cls = "border-2 border-red-400 bg-red-900/30 text-red-200";
+                              let cls = isDark
+                                ? "border border-white/15 bg-slate-700/40 text-white/70 hover:bg-slate-600/50 hover:border-white/30"
+                                : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 hover:border-gray-400";
+                              if (isSelected && correct) cls = isDark
+                                ? "border-2 border-emerald-400 bg-emerald-900/30 text-emerald-200 shadow-lg shadow-emerald-900/30"
+                                : "border-2 border-emerald-500 bg-emerald-100 text-emerald-800 shadow-lg shadow-emerald-100";
+                              else if (isSelected && !correct) cls = isDark
+                                ? "border-2 border-red-400 bg-red-900/30 text-red-200"
+                                : "border-2 border-red-500 bg-red-100 text-red-800";
                               return (
                                 <button key={i} onClick={() => { playPopSound(); setJawab2(i); }}
                                   className={`rounded-xl px-3 py-2.5 text-sm font-body font-semibold text-left transition-all ${cls}`}>
@@ -766,26 +774,34 @@ const DefinisiSPLDVPage = () => {
                             })}
                           </div>
                           {chosen && (
-                            <div className={`mt-3 rounded-xl border p-4 space-y-3 transition-all duration-500 ${isCorrect ? "border-emerald-500/40 bg-emerald-900/20" : "border-red-500/40 bg-red-900/20"}`}>
-                              <p className="font-body text-xs font-bold uppercase tracking-widest text-white/50">{t.quiz2ProofTitle}</p>
+                            <div className={`mt-3 rounded-xl border p-4 space-y-3 transition-all duration-500 ${isCorrect
+                              ? isDark ? "border-emerald-500/40 bg-emerald-900/20" : "border-emerald-400 bg-emerald-50"
+                              : isDark ? "border-red-500/40 bg-red-900/20"    : "border-red-400 bg-red-50"}`}>
+                              <p className={`font-body text-xs font-bold uppercase tracking-widest ${isDark ? "text-white/50" : "text-gray-500"}`}>{t.quiz2ProofTitle}</p>
                               <div className="space-y-2">
-                                <div className={`rounded-lg px-3 py-2 border ${chosen.p1ok ? "border-emerald-500/30 bg-emerald-900/20" : "border-red-500/30 bg-red-900/20"}`}>
-                                  <p className="font-body text-xs text-white/50 mb-1">{t.quiz2Eq1Label} <InlineMath math="2n + m = 25" /></p>
+                                <div className={`rounded-lg px-3 py-2 border ${chosen.p1ok
+                                  ? isDark ? "border-emerald-500/30 bg-emerald-900/20" : "border-emerald-400 bg-emerald-50"
+                                  : isDark ? "border-red-500/30 bg-red-900/20"         : "border-red-400 bg-red-50"}`}>
+                                  <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-500"} mb-1`}>{t.quiz2Eq1Label} <InlineMath math="2n + m = 25" /></p>
                                   <div className="overflow-x-auto"><BlockMath math={chosen.p1 + (chosen.p1ok ? " \\checkmark" : " \\times")} /></div>
-                                  <p className={`font-body text-xs font-bold ${chosen.p1ok ? "text-emerald-300" : "text-red-300"}`}>{chosen.p1ok ? t.quiz2Eq1Ok : t.quiz2Eq1No}</p>
+                                  <p className={`font-body text-xs font-bold ${chosen.p1ok ? isDark ? "text-emerald-300" : "text-emerald-700" : isDark ? "text-red-300" : "text-red-700"}`}>{chosen.p1ok ? t.quiz2Eq1Ok : t.quiz2Eq1No}</p>
                                 </div>
-                                <div className={`rounded-lg px-3 py-2 border ${chosen.p2ok ? "border-emerald-500/30 bg-emerald-900/20" : "border-red-500/30 bg-red-900/20"}`}>
-                                  <p className="font-body text-xs text-white/50 mb-1">{t.quiz2Eq2Label} <InlineMath math="n + 2m = 23" /></p>
+                                <div className={`rounded-lg px-3 py-2 border ${chosen.p2ok
+                                  ? isDark ? "border-emerald-500/30 bg-emerald-900/20" : "border-emerald-400 bg-emerald-50"
+                                  : isDark ? "border-red-500/30 bg-red-900/20"         : "border-red-400 bg-red-50"}`}>
+                                  <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-500"} mb-1`}>{t.quiz2Eq2Label} <InlineMath math="n + 2m = 23" /></p>
                                   <div className="overflow-x-auto"><BlockMath math={chosen.p2 + (chosen.p2ok ? " \\checkmark" : " \\times")} /></div>
-                                  <p className={`font-body text-xs font-bold ${chosen.p2ok ? "text-emerald-300" : "text-red-300"}`}>{chosen.p2ok ? t.quiz2Eq2Ok : t.quiz2Eq2No}</p>
+                                  <p className={`font-body text-xs font-bold ${chosen.p2ok ? isDark ? "text-emerald-300" : "text-emerald-700" : isDark ? "text-red-300" : "text-red-700"}`}>{chosen.p2ok ? t.quiz2Eq2Ok : t.quiz2Eq2No}</p>
                                 </div>
                               </div>
-                              <div className={`rounded-xl px-4 py-2.5 text-center font-body font-bold text-sm border ${isCorrect ? "bg-emerald-900/40 border-emerald-400/50 text-emerald-300" : "bg-red-900/40 border-red-400/50 text-red-300"}`}>
+                              <div className={`rounded-xl px-4 py-2.5 text-center font-body font-bold text-sm border ${isCorrect
+                                ? isDark ? "bg-emerald-900/40 border-emerald-400/50 text-emerald-300" : "bg-emerald-100 border-emerald-500 text-emerald-800"
+                                : isDark ? "bg-red-900/40 border-red-400/50 text-red-300"             : "bg-red-100 border-red-500 text-red-800"}`}>
                                 {isCorrect ? t.quiz2Correct(chosen.n, chosen.m) : t.quiz2Wrong}
                               </div>
                             </div>
                           )}
-                          {sel === null && <p className="font-body text-xs text-center text-white/30 italic pt-1">{t.quiz2Hint}</p>}
+                          {sel === null && <p className={`font-body text-xs text-center ${isDark ? "text-white/30" : "text-gray-400"} italic pt-1`}>{t.quiz2Hint}</p>}
                         </div>
                       </div>
                     );
@@ -967,11 +983,11 @@ const DefinisiSPLDVPage = () => {
                     ))}
                   </div>
                 </div>
-                <div className="bg-gradient-to-r from-cyan-900/30 to-purple-900/30 border border-cyan-500/20 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm font-bold text-white">{t.closingTitle}</p>
-                  <p className="font-body text-sm text-white/80">{t.closingDesc}</p>
-                  <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 mt-1">
-                    <p className="font-body text-xs text-white/60 text-center italic">{t.closingQuote}</p>
+                <div className={`${isDark ? "bg-gradient-to-r from-cyan-900/30 to-purple-900/30 border-cyan-500/20" : "bg-gradient-to-r from-cyan-50 to-purple-50 border-cyan-300"} border rounded-xl p-4 space-y-2`}>
+                  <p className={`font-body text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}>{t.closingTitle}</p>
+                  <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.closingDesc}</p>
+                  <div className={`${isDark ? "bg-white/5 border-white/10" : "bg-white border-gray-200"} border rounded-lg px-4 py-2 mt-1`}>
+                    <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} text-center italic`}>{t.closingQuote}</p>
                   </div>
                 </div>
               </div>
