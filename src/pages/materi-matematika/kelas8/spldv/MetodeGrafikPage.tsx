@@ -576,6 +576,10 @@ const MetodeGrafikPage = () => {
                         <defs>
                           <filter id="glowRed"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
                           <marker id="arrowR" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,1 L5,3 L0,5 Z" fill={isDark ? "#475569" : "#94a3b8"}/></marker>
+                          <marker id="arrCyanE" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0,1 L6,3.5 L0,6 Z" fill="#22d3ee"/></marker>
+                          <marker id="arrCyanS" markerWidth="7" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse"><path d="M0,1 L6,3.5 L0,6 Z" fill="#22d3ee"/></marker>
+                          <marker id="arrOrgE"  markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0,1 L6,3.5 L0,6 Z" fill="#fb923c"/></marker>
+                          <marker id="arrOrgS"  markerWidth="7" markerHeight="7" refX="0.5" refY="3.5" orient="auto-start-reverse"><path d="M0,1 L6,3.5 L0,6 Z" fill="#fb923c"/></marker>
                         </defs>
                         <rect x="0" y="0" width="280" height="220" fill={isDark ? "#0f172a" : "#f8fafc"} rx="6"/>
                         <rect x="30" y="10" width="240" height="190" fill={isDark ? "#0f172a" : "#f1f5f9"} rx="4"/>
@@ -592,10 +596,8 @@ const MetodeGrafikPage = () => {
                         <line x1="30" y1="200" x2="30" y2="12" stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.5" markerEnd="url(#arrowR)"/>
                         <text x="272" y="204" fill={isDark ? "#64748b" : "#475569"} fontSize="10" fontStyle="italic">x</text>
                         <text x="28" y="10" fill={isDark ? "#64748b" : "#475569"} fontSize="10" fontStyle="italic">y</text>
-                        <line x1="30" y1="132.5" x2="210" y2="200" stroke="#22d3ee" strokeWidth="2.8" strokeLinecap="round" filter="url(#glowRed)" opacity="0.9"/>
-                        <line x1="30" y1="87.5" x2="210" y2="155" stroke="#fb923c" strokeWidth="2.8" strokeLinecap="round" filter="url(#glowRed)" opacity="0.9"/>
-                        <circle cx="30" cy="132.5" r="4" fill="#22d3ee"/><circle cx="210" cy="200" r="4" fill="#22d3ee"/>
-                        <circle cx="30" cy="87.5" r="4" fill="#fb923c"/><circle cx="210" cy="155" r="4" fill="#fb923c"/>
+                        <line x1="30" y1="132.5" x2="210" y2="200" stroke="#22d3ee" strokeWidth="2.8" filter="url(#glowRed)" opacity="0.9" markerStart="url(#arrCyanS)" markerEnd="url(#arrCyanE)"/>
+                        <line x1="30" y1="87.5"  x2="210" y2="155"  stroke="#fb923c" strokeWidth="2.8" filter="url(#glowRed)" opacity="0.9" markerStart="url(#arrOrgS)"  markerEnd="url(#arrOrgE)"/>
                         <rect x="163" y="13" width="104" height="20" rx="5" fill={isDark ? "#1c0a0a" : "#fff1f2"} fillOpacity="0.92"/>
                         <text x="215" y="27" textAnchor="middle" fill="#f87171" fontSize="11" fontFamily="sans-serif" fontWeight="bold">{t.q3ParallelLabel}</text>
                         <rect x="32" y="14" width="130" height="38" rx="4" fill={isDark ? "#0f172a" : "#f8fafc"} fillOpacity="0.9"/>
