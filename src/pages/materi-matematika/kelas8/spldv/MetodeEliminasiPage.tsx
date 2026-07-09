@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Lightbulb, Target, Minus, FlaskConical } from "lucide-react";
@@ -289,6 +290,8 @@ const translations = {
 const MetodeEliminasiPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { theme } = useTheme();
+  const isSpaceTheme = theme === "dark";
   const t = translations[language];
 
   const SectionHeader = ({
@@ -369,40 +372,40 @@ const MetodeEliminasiPage = () => {
                   </div>
                 </div>
 
-                <div className="bg-slate-900/70 border border-cyan-500/30 rounded-xl overflow-hidden">
-                  <div className="px-4 py-3 border-b border-cyan-500/20 bg-cyan-900/20">
-                    <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest">
+                <div className={`border border-cyan-500/30 rounded-xl overflow-hidden ${isSpaceTheme ? "bg-slate-900/70" : "bg-white/90"}`}>
+                  <div className={`px-4 py-3 border-b border-cyan-500/20 ${isSpaceTheme ? "bg-cyan-900/20" : "bg-cyan-100/70"}`}>
+                    <p className={`font-body text-xs font-bold uppercase tracking-widest ${isSpaceTheme ? "text-cyan-300" : "text-cyan-700"}`}>
                       {language === "id" ? "📐 Format Penulisan Eliminasi" : language === "en" ? "📐 Elimination Format" : "📐 加減法の書き方"}
                     </p>
                   </div>
                   <div className="p-4 overflow-x-auto font-mono text-sm">
-                    <div className="grid grid-cols-[1fr_58px_1fr] text-[10px] text-white/30 uppercase tracking-wider font-body mb-2">
+                    <div className={`grid grid-cols-[1fr_58px_1fr] text-[10px] uppercase tracking-wider font-body mb-2 ${isSpaceTheme ? "text-white/30" : "text-slate-500"}`}>
                       <div className="text-center">{language === "id" ? "Persamaan Asal" : language === "en" ? "Original Equation" : "元の方程式"}</div>
                       <div className="text-center">{language === "id" ? "Pengali" : language === "en" ? "Multiplier" : "倍数"}</div>
                       <div className="text-center">{language === "id" ? "Bentuk Baru" : language === "en" ? "New Form" : "変換後"}</div>
                     </div>
-                    <div className="border border-white/10 rounded-t-lg grid grid-cols-[1fr_58px_1fr]">
+                    <div className={`rounded-t-lg grid grid-cols-[1fr_58px_1fr] border ${isSpaceTheme ? "border-white/10" : "border-slate-200"}`}>
                       <div className="px-3 py-2.5 flex flex-col gap-0.5">
-                        <span className="text-[10px] text-white/30 font-body">{language === "id" ? "PLDV (1)" : language === "en" ? "Eq (1)" : "式 (1)"}</span>
-                        <span className="text-white/70">ax + by = c</span>
+                        <span className={`text-[10px] font-body ${isSpaceTheme ? "text-white/30" : "text-slate-400"}`}>{language === "id" ? "PLDV (1)" : language === "en" ? "Eq (1)" : "式 (1)"}</span>
+                        <span className={isSpaceTheme ? "text-white/70" : "text-slate-700"}>ax + by = c</span>
                       </div>
-                      <div className="flex items-center justify-center border-x border-white/10 bg-amber-900/10"><span className="text-amber-300 font-bold">× k₁</span></div>
-                      <div className="px-3 py-2.5 flex items-center"><span className="text-cyan-200">k₁ax + k₁by = k₁c</span></div>
+                      <div className={`flex items-center justify-center border-x ${isSpaceTheme ? "border-white/10 bg-amber-900/10" : "border-slate-200 bg-amber-50"}`}><span className={`font-bold ${isSpaceTheme ? "text-amber-300" : "text-amber-600"}`}>× k₁</span></div>
+                      <div className="px-3 py-2.5 flex items-center"><span className={isSpaceTheme ? "text-cyan-200" : "text-cyan-700"}>k₁ax + k₁by = k₁c</span></div>
                     </div>
-                    <div className="border-x border-b border-white/10 rounded-b-lg grid grid-cols-[1fr_58px_1fr]">
+                    <div className={`rounded-b-lg grid grid-cols-[1fr_58px_1fr] border-x border-b ${isSpaceTheme ? "border-white/10" : "border-slate-200"}`}>
                       <div className="px-3 py-2.5 flex flex-col gap-0.5">
-                        <span className="text-[10px] text-white/30 font-body">{language === "id" ? "PLDV (2)" : language === "en" ? "Eq (2)" : "式 (2)"}</span>
-                        <span className="text-white/70">dx + ey = f</span>
+                        <span className={`text-[10px] font-body ${isSpaceTheme ? "text-white/30" : "text-slate-400"}`}>{language === "id" ? "PLDV (2)" : language === "en" ? "Eq (2)" : "式 (2)"}</span>
+                        <span className={isSpaceTheme ? "text-white/70" : "text-slate-700"}>dx + ey = f</span>
                       </div>
-                      <div className="flex items-center justify-center border-x border-white/10 bg-amber-900/10"><span className="text-amber-300 font-bold">× k₂</span></div>
-                      <div className="px-3 py-2.5 flex items-center"><span className="text-cyan-200">k₂dx + k₂ey = k₂f</span></div>
+                      <div className={`flex items-center justify-center border-x ${isSpaceTheme ? "border-white/10 bg-amber-900/10" : "border-slate-200 bg-amber-50"}`}><span className={`font-bold ${isSpaceTheme ? "text-amber-300" : "text-amber-600"}`}>× k₂</span></div>
+                      <div className="px-3 py-2.5 flex items-center"><span className={isSpaceTheme ? "text-cyan-200" : "text-cyan-700"}>k₂dx + k₂ey = k₂f</span></div>
                     </div>
-                    <div className="relative border-t-2 border-white/30 mt-1">
-                      <div className="absolute right-0 -top-3.5 bg-slate-900 px-2"><span className="text-red-400 font-bold text-base">(±)</span></div>
+                    <div className={`relative border-t-2 mt-1 ${isSpaceTheme ? "border-white/30" : "border-slate-400"}`}>
+                      <div className={`absolute right-0 -top-3.5 px-2 ${isSpaceTheme ? "bg-slate-900" : "bg-white"}`}><span className={`font-bold text-base ${isSpaceTheme ? "text-red-400" : "text-red-500"}`}>(±)</span></div>
                     </div>
                     <div className="pt-2 space-y-1">
-                      <div className="grid grid-cols-[1fr_58px_1fr]"><div /><div /><div className="px-3 py-0.5"><span className="text-yellow-300 font-bold whitespace-pre">{`         px = q`}</span></div></div>
-                      <div className="grid grid-cols-[1fr_58px_1fr]"><div /><div /><div className="px-3 py-0.5 flex items-center"><span className="text-emerald-300 font-bold whitespace-pre">{`          x = `}</span><span className="text-emerald-300 font-bold"><InlineMath math="\dfrac{q}{p}" /></span></div></div>
+                      <div className="grid grid-cols-[1fr_58px_1fr]"><div /><div /><div className="px-3 py-0.5"><span className={`font-bold whitespace-pre ${isSpaceTheme ? "text-yellow-300" : "text-yellow-600"}`}>{`         px = q`}</span></div></div>
+                      <div className="grid grid-cols-[1fr_58px_1fr]"><div /><div /><div className="px-3 py-0.5 flex items-center"><span className={`font-bold whitespace-pre ${isSpaceTheme ? "text-emerald-300" : "text-emerald-600"}`}>{`          x = `}</span><span className={`font-bold ${isSpaceTheme ? "text-emerald-300" : "text-emerald-600"}`}><InlineMath math="\dfrac{q}{p}" /></span></div></div>
                     </div>
                   </div>
                 </div>
