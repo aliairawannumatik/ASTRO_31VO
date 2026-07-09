@@ -3,7 +3,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Lightbulb, Calculator, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
@@ -81,13 +81,16 @@ function DashLine({ x1, y1, x2, y2, color }: { x1: number; y1: number; x2: numbe
 /* ── Mirror line types ── */
 type MirrorType = "sumbu-x" | "sumbu-y" | "y=x" | "y=-x" | "titik-o";
 
-const MIRRORS: { id: MirrorType; label: string; rule: string; color: string }[] = [
-  { id: "sumbu-x", label: "Sumbu X",  rule: "(x,y)→(x,−y)",   color: "#22d3ee" },
-  { id: "sumbu-y", label: "Sumbu Y",  rule: "(x,y)→(−x,y)",   color: "#f472b6" },
-  { id: "y=x",    label: "y = x",    rule: "(x,y)→(y,x)",     color: "#fbbf24" },
-  { id: "y=-x",   label: "y = −x",   rule: "(x,y)→(−y,−x)",  color: "#a78bfa" },
-  { id: "titik-o", label: "Titik O", rule: "(x,y)→(−x,−y)",  color: "#34d399" },
-];
+function getMirrors(language: Language): { id: MirrorType; label: string; rule: string; color: string }[] {
+  const L = (id: string, en: string, ja: string) => ({ id, en, ja }[language] ?? id);
+  return [
+    { id: "sumbu-x", label: L("Sumbu X", "X-axis", "x軸"), rule: "(x,y)→(x,−y)",   color: "#22d3ee" },
+    { id: "sumbu-y", label: L("Sumbu Y", "Y-axis", "y軸"), rule: "(x,y)→(−x,y)",   color: "#f472b6" },
+    { id: "y=x",    label: "y = x",    rule: "(x,y)→(y,x)",     color: "#fbbf24" },
+    { id: "y=-x",   label: "y = −x",   rule: "(x,y)→(−y,−x)",  color: "#a78bfa" },
+    { id: "titik-o", label: L("Titik O", "Point O", "原点O"), rule: "(x,y)→(−x,−y)",  color: "#34d399" },
+  ];
+}
 
 function reflectMath(x: number, y: number, m: MirrorType): [number, number] {
   switch (m) {
@@ -101,7 +104,8 @@ function reflectMath(x: number, y: number, m: MirrorType): [number, number] {
 
 /* Render the dashed mirror line inside the 220px SVG */
 function MirrorLine({ mirror }: { mirror: MirrorType }) {
-  const m = MIRRORS.find(m => m.id === mirror)!;
+  const { language } = useLanguage();
+  const m = getMirrors(language).find(m => m.id === mirror)!;
   const c = m.color;
   const dash = "5,3";
   const lw = "2";
@@ -110,14 +114,14 @@ function MirrorLine({ mirror }: { mirror: MirrorType }) {
       return (
         <>
           <line x1={4} y1={oy} x2={S-4} y2={oy} stroke={c} strokeWidth={lw} strokeDasharray={dash} />
-          <text x={S-10} y={oy-5} fontSize="8" fill={c} textAnchor="end" fontWeight="bold">Sumbu X</text>
+          <text x={S-10} y={oy-5} fontSize="8" fill={c} textAnchor="end" fontWeight="bold">{m.label}</text>
         </>
       );
     case "sumbu-y":
       return (
         <>
           <line x1={ox} y1={4} x2={ox} y2={S-4} stroke={c} strokeWidth={lw} strokeDasharray={dash} />
-          <text x={ox+4} y={14} fontSize="8" fill={c} fontWeight="bold">Sumbu Y</text>
+          <text x={ox+4} y={14} fontSize="8" fill={c} fontWeight="bold">{m.label}</text>
         </>
       );
     case "y=x":
@@ -147,14 +151,19 @@ function MirrorLine({ mirror }: { mirror: MirrorType }) {
 
 /* Compact mirror selector */
 function MirrorSelector({ value, onChange }: { value: MirrorType; onChange: (m: MirrorType) => void }) {
+  const { language } = useLanguage();
+  const mirrors = getMirrors(language);
+  const pilihCermin = { id: "Pilih Cermin", en: "Choose Mirror", ja: "鏡を選ぶ" }[language];
+  const aturan = { id: "Aturan", en: "Rule", ja: "規則" }[language];
   return (
     <div className="w-full">
-      <p className="text-[10px] text-white/40 uppercase tracking-wider font-body mb-1.5 text-center">Pilih Cermin</p>
+      <p className="text-[10px] text-white/40 uppercase tracking-wider font-body mb-1.5 text-center">{pilihCermin}</p>
       <div className="flex flex-wrap justify-center gap-1.5">
-        {MIRRORS.map(m => (
+        {mirrors.map(m => (
           <button
             key={m.id}
             onClick={() => { playPopSound(); onChange(m.id); }}
+            aria-label={m.label}
             className={`px-2.5 py-1 rounded-lg text-[11px] font-bold font-body border transition-all cursor-pointer ${
               value === m.id
                 ? "text-black scale-105"
@@ -167,10 +176,10 @@ function MirrorSelector({ value, onChange }: { value: MirrorType; onChange: (m: 
         ))}
       </div>
       {(() => {
-        const m = MIRRORS.find(m => m.id === value)!;
+        const m = mirrors.find(m => m.id === value)!;
         return (
           <p className="text-center mt-1.5 font-mono text-[11px]" style={{ color: m.color }}>
-            Aturan: {m.rule}
+            {aturan}: {m.rule}
           </p>
         );
       })()}
@@ -182,9 +191,18 @@ function MirrorSelector({ value, onChange }: { value: MirrorType; onChange: (m: 
 type Dir4 = "up" | "down" | "left" | "right";
 
 function DirPad({ onMove, onReset }: { onMove: (d: Dir4) => void; onReset: () => void }) {
+  const { language } = useLanguage();
+  const dirLabels: Record<Dir4, string> = {
+    up: { id: "Naik", en: "Up", ja: "上" }[language],
+    down: { id: "Turun", en: "Down", ja: "下" }[language],
+    left: { id: "Kiri", en: "Left", ja: "左" }[language],
+    right: { id: "Kanan", en: "Right", ja: "右" }[language],
+  };
+  const resetLabel = { id: "Reset", en: "Reset", ja: "リセット" }[language];
   const Btn = ({ d, label }: { d: Dir4 | null; label: string }) => (
     <button
       onClick={() => { playPopSound(); d ? onMove(d) : onReset(); }}
+      aria-label={d ? dirLabels[d] : resetLabel}
       className="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 font-bold text-base
                  hover:bg-emerald-500/40 hover:border-emerald-300 active:scale-90 transition-all flex items-center justify-center select-none cursor-pointer"
     >{label}</button>
@@ -196,6 +214,7 @@ function DirPad({ onMove, onReset }: { onMove: (d: Dir4) => void; onReset: () =>
         <Btn d="left" label="←" />
         <button
           onClick={() => { playPopSound(); onReset(); }}
+          aria-label={resetLabel}
           className="w-10 h-10 rounded-lg bg-slate-700/60 border border-slate-500/40 text-slate-300 text-sm
                      hover:bg-slate-600 active:scale-90 transition-all flex items-center justify-center select-none cursor-pointer"
         >↺</button>
@@ -226,14 +245,29 @@ function AnimasiRefleksiTitik() {
 
   const reset = () => { setPos({ x: OX, y: OY }); setShow(false); };
 
+  const { language } = useLanguage();
+  const t1 = {
+    title: { id: "📍 Animasi 1 — Refleksi Titik", en: "📍 Animation 1 — Point Reflection", ja: "📍 アニメーション1 — 点の反射" }[language],
+    intro: { id: "Arahkan titik A, pilih cermin, lalu tampilkan bayangannya!", en: "Move point A, choose a mirror, then reveal its image!", ja: "点Aを動かし、鏡を選んで、像を表示しよう!" }[language],
+    hide: { id: "↺ Sembunyikan", en: "↺ Hide", ja: "↺ 隠す" }[language],
+    hideImage: { id: "↺ Sembunyikan Bayangan", en: "↺ Hide Image", ja: "↺ 像を隠す" }[language],
+    showImage: { id: "🪞 Tampilkan\nBayangan A'", en: "🪞 Show\nImage A'", ja: "🪞 像A'を\n表示する" }[language],
+    showImageFull: { id: "🪞 Tampilkan Bayangan A'", en: "🪞 Show Image A'", ja: "🪞 像A'を表示する" }[language],
+    hint: { id: "Tekan ↑ ↓ ← → untuk menggeser titik, lalu tampilkan bayangan!", en: "Press ↑ ↓ ← → to move the point, then show the image!", ja: "↑ ↓ ← → を押して点を動かし、像を表示しよう!" }[language],
+    tip: {
+      id: <>💡 Bayangan A' berjarak <strong>sama</strong> ke garis cermin seperti titik A — dan garis AA' <strong className="text-yellow-300">tegak lurus</strong> garis cermin!</>,
+      en: <>💡 Image A' is the <strong>same</strong> distance from the mirror line as point A — and line AA' is <strong className="text-yellow-300">perpendicular</strong> to the mirror line!</>,
+      ja: <>💡 像A'は点Aと同じように鏡の線から<strong>同じ距離</strong>にあり、直線AA'は鏡の線に<strong className="text-yellow-300">垂直</strong>です!</>,
+    }[language],
+  };
   const [rx, ry] = reflectMath(pos.x, pos.y, mirror);
-  const mc = MIRRORS.find(m => m.id === mirror)!;
+  const mc = getMirrors(language).find(m => m.id === mirror)!;
 
   return (
     <div className="space-y-3">
       <div className="text-center">
-        <p className="text-emerald-300 font-bold text-sm font-body">📍 Animasi 1 — Refleksi Titik</p>
-        <p className="text-white/50 text-[11px] font-body mt-0.5">Arahkan titik A, pilih cermin, lalu tampilkan bayangannya!</p>
+        <p className="text-emerald-300 font-bold text-sm font-body">{t1.title}</p>
+        <p className="text-white/50 text-[11px] font-body mt-0.5">{t1.intro}</p>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
@@ -267,7 +301,7 @@ function AnimasiRefleksiTitik() {
                 : "bg-emerald-500/20 border-emerald-400/50 text-emerald-200 hover:bg-emerald-500/40"
             }`}
           >
-            {show ? "↺ Sembunyikan" : "🪞 Tampilkan\nBayangan A'"}
+            {show ? t1.hide : t1.showImage}
           </button>
         </div>
       </div>
@@ -283,7 +317,7 @@ function AnimasiRefleksiTitik() {
             <span className="font-mono" style={{ color: mc.color }}>{mc.rule}</span>
           </>
         ) : (
-          <span className="text-white/30">Tekan ↑ ↓ ← → untuk menggeser titik, lalu tampilkan bayangan!</span>
+          <span className="text-white/30">{t1.hint}</span>
         )}
       </div>
 
@@ -298,7 +332,7 @@ function AnimasiRefleksiTitik() {
               : "bg-emerald-500/20 border-emerald-400/50 text-emerald-200 hover:bg-emerald-500/40"
           }`}
         >
-          {show ? "↺ Sembunyikan Bayangan" : "🪞 Tampilkan Bayangan A'"}
+          {show ? t1.hideImage : t1.showImageFull}
         </button>
       </div>
 
@@ -307,7 +341,7 @@ function AnimasiRefleksiTitik() {
 
       <div className="bg-emerald-950/40 border border-emerald-500/20 rounded-lg px-4 py-2.5 text-center">
         <p className="text-emerald-300 text-xs font-body">
-          💡 Bayangan A' berjarak <strong>sama</strong> ke garis cermin seperti titik A — dan garis AA' <strong className="text-yellow-300">tegak lurus</strong> garis cermin!
+          {t1.tip}
         </p>
       </div>
     </div>
@@ -365,6 +399,28 @@ function AnimasiRefleksiGarisK() {
   const rx = mode === "x=k" ? 2 * k - ptX : ptX;
   const ry = mode === "x=k" ? ptY : 2 * k - ptY;
 
+  const { language } = useLanguage();
+  const t2 = {
+    title: { id: "📐 Animasi 3 — Refleksi Garis x = k dan y = k", en: "📐 Animation 3 — Reflection over x = k and y = k", ja: "📐 アニメーション3 — 直線x=kとy=kに関する反射" }[language],
+    intro: { id: "Arahkan titik A, atur nilai k, lalu tampilkan bayangannya!", en: "Move point A, set the value of k, then show its image!", ja: "点Aを動かし、kの値を設定して、像を表示しよう!" }[language],
+    line: { id: "Garis", en: "Line", ja: "直線" }[language],
+    hide: { id: "↺ Sembunyikan", en: "↺ Hide", ja: "↺ 隠す" }[language],
+    hideFull: { id: "↺ Sembunyikan Bayangan", en: "↺ Hide Image", ja: "↺ 像を隠す" }[language],
+    showSmall: { id: "🪞 Tampilkan\nBayangan A'", en: "🪞 Show\nImage A'", ja: "🪞 像A'を\n表示する" }[language],
+    showFull: { id: "🪞 Tampilkan Bayangan A'", en: "🪞 Show Image A'", ja: "🪞 像A'を表示する" }[language],
+    kValue: { id: "nilai k", en: "value of k", ja: "kの値" }[language],
+    hint: { id: "Tekan ↑ ↓ ← → untuk menggeser titik, atur k, lalu tampilkan bayangan!", en: "Press ↑ ↓ ← → to move the point, set k, then show the image!", ja: "↑ ↓ ← → を押して点を動かし、kを設定して像を表示しよう!" }[language],
+    infoX: (kv: number) => ({
+      id: <>💡 Rumus: <strong>A(x, y) → A'(2k−x, y)</strong> · y tetap, x dicerminkan terhadap garis vertikal x = {kv}</>,
+      en: <>💡 Formula: <strong>A(x, y) → A'(2k−x, y)</strong> · y stays the same, x is reflected over the vertical line x = {kv}</>,
+      ja: <>💡 公式: <strong>A(x, y) → A'(2k−x, y)</strong> · yはそのまま、xは垂直線x = {kv} に関して反射</>,
+    }[language]),
+    infoY: (kv: number) => ({
+      id: <>💡 Rumus: <strong>A(x, y) → A'(x, 2k−y)</strong> · x tetap, y dicerminkan terhadap garis horizontal y = {kv}</>,
+      en: <>💡 Formula: <strong>A(x, y) → A'(x, 2k−y)</strong> · x stays the same, y is reflected over the horizontal line y = {kv}</>,
+      ja: <>💡 公式: <strong>A(x, y) → A'(x, 2k−y)</strong> · xはそのまま、yは水平線y = {kv} に関して反射</>,
+    }[language]),
+  };
   const accent  = mode === "x=k" ? "#f97316" : "#a78bfa";
   const formula = mode === "x=k"
     ? `(${ptX}, ${ptY}) → (2·${k}−${ptX}, ${ptY}) = (${rx}, ${ry})`
@@ -382,13 +438,13 @@ function AnimasiRefleksiGarisK() {
       }`}
       style={!show ? { background: `${accent}33`, borderColor: `${accent}88`, color: accent } : {}}
     >
-      {show ? (small ? "↺ Sembunyikan" : "↺ Sembunyikan Bayangan") : (small ? "🪞 Tampilkan\nBayangan A'" : "🪞 Tampilkan Bayangan A'")}
+      {show ? (small ? t2.hide : t2.hideFull) : (small ? t2.showSmall : t2.showFull)}
     </button>
   );
 
   const KControl = () => (
     <EditableVal
-      label="nilai k" value={k} min={-4} max={4} color={accent}
+      label={t2.kValue} value={k} min={-4} max={4} color={accent}
       onChange={v => { setK(clamp5(v)); setShow(false); }}
     />
   );
@@ -397,10 +453,10 @@ function AnimasiRefleksiGarisK() {
     <div className="space-y-3">
       <div className="text-center">
         <p className="font-bold text-sm font-body" style={{ color: accent }}>
-          📐 Animasi 3 — Refleksi Garis x = k dan y = k
+          {t2.title}
         </p>
         <p className="text-white/50 text-[11px] font-body mt-0.5">
-          Arahkan titik A, atur nilai k, lalu tampilkan bayangannya!
+          {t2.intro}
         </p>
       </div>
 
@@ -415,7 +471,7 @@ function AnimasiRefleksiGarisK() {
             }`}
             style={mode === m ? { background: accent, borderColor: accent } : {}}
           >
-            Garis {m}
+            {t2.line} {m}
           </button>
         ))}
       </div>
@@ -475,7 +531,7 @@ function AnimasiRefleksiGarisK() {
             <span className="font-bold" style={{ color: accent }}>A'({rx},{ry})</span>
           </>
         ) : (
-          <span className="text-white/30">Tekan ↑ ↓ ← → untuk menggeser titik, atur k, lalu tampilkan bayangan!</span>
+          <span className="text-white/30">{t2.hint}</span>
         )}
       </div>
 
@@ -489,11 +545,7 @@ function AnimasiRefleksiGarisK() {
       {/* Info box */}
       <div className="rounded-lg px-4 py-2.5 text-center border" style={{ background: `${accent}15`, borderColor: `${accent}40` }}>
         <p className="text-xs font-body" style={{ color: accent }}>
-          {mode === "x=k" ? (
-            <>💡 Rumus: <strong>A(x, y) → A'(2k−x, y)</strong> · y tetap, x dicerminkan terhadap garis vertikal x = {k}</>
-          ) : (
-            <>💡 Rumus: <strong>A(x, y) → A'(x, 2k−y)</strong> · x tetap, y dicerminkan terhadap garis horizontal y = {k}</>
-          )}
+          {mode === "x=k" ? t2.infoX(k) : t2.infoY(k)}
         </p>
       </div>
     </div>
@@ -530,14 +582,32 @@ function AnimasiRefleksiBangun() {
 
   const reset = () => { setOff({ dx: 0, dy: 0 }); setShow(false); };
 
+  const { language } = useLanguage();
+  const t3 = {
+    title: { id: "🔺 Animasi 2 — Refleksi Bangun Datar", en: "🔺 Animation 2 — Reflection of a Shape", ja: "🔺 アニメーション2 — 図形の反射" }[language],
+    intro: { id: "Arahkan segitiga △ABC, pilih cermin, lalu tampilkan bayangannya!", en: "Move triangle △ABC, choose a mirror, then reveal its image!", ja: "△ABCを動かし、鏡を選んで、像を表示しよう!" }[language],
+    hide: { id: "↺ Sembunyikan", en: "↺ Hide", ja: "↺ 隠す" }[language],
+    hideFull: { id: "↺ Sembunyikan Bayangan", en: "↺ Hide Image", ja: "↺ 像を隠す" }[language],
+    showSmall: { id: "🪞 Tampilkan\nBayangan △A'B'C'", en: "🪞 Show\nImage △A'B'C'", ja: "🪞 像△A'B'C'を\n表示する" }[language],
+    showFull: { id: "🪞 Tampilkan Bayangan △A'B'C'", en: "🪞 Show Image △A'B'C'", ja: "🪞 像△A'B'C'を表示する" }[language],
+    hintIdle: { id: "Arahkan segitiga lalu tampilkan bayangannya!", en: "Move the triangle then show its image!", ja: "三角形を動かして像を表示しよう!" }[language],
+    tip: {
+      id: <>💡 Semua titik dicerminkan dengan aturan yang <strong>sama</strong>.
+          Bentuk & ukuran segitiga <strong className="text-green-300">tetap</strong> — hanya posisi & orientasinya yang berubah!</>,
+      en: <>💡 Every point is reflected with the <strong>same</strong> rule.
+          The shape & size of the triangle stay <strong className="text-green-300">the same</strong> — only its position & orientation change!</>,
+      ja: <>💡 すべての点は<strong>同じ</strong>規則で反射されます。
+          三角形の形とサイズは<strong className="text-green-300">変わりません</strong> — 位置と向きだけが変わります!</>,
+    }[language],
+  };
   const reflected: Vec2[] = current.map(([x, y]) => reflectMath(x, y, mirror));
-  const mc = MIRRORS.find(m => m.id === mirror)!;
+  const mc = getMirrors(language).find(m => m.id === mirror)!;
 
   return (
     <div className="space-y-3">
       <div className="text-center">
-        <p className="text-pink-300 font-bold text-sm font-body">🔺 Animasi 2 — Refleksi Bangun Datar</p>
-        <p className="text-white/50 text-[11px] font-body mt-0.5">Arahkan segitiga △ABC, pilih cermin, lalu tampilkan bayangannya!</p>
+        <p className="text-pink-300 font-bold text-sm font-body">{t3.title}</p>
+        <p className="text-white/50 text-[11px] font-body mt-0.5">{t3.intro}</p>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
@@ -586,7 +656,7 @@ function AnimasiRefleksiBangun() {
                 : "bg-pink-500/20 border-pink-400/50 text-pink-200 hover:bg-pink-500/40"
             }`}
           >
-            {show ? "↺ Sembunyikan" : "🪞 Tampilkan\nBayangan △A'B'C'"}
+            {show ? t3.hide : t3.showSmall}
           </button>
         </div>
       </div>
@@ -605,7 +675,7 @@ function AnimasiRefleksiBangun() {
             ))}
           </>
         ) : (
-          <span className="text-white/30">Arahkan segitiga lalu tampilkan bayangannya!</span>
+          <span className="text-white/30">{t3.hintIdle}</span>
         )}
       </div>
 
@@ -620,7 +690,7 @@ function AnimasiRefleksiBangun() {
               : "bg-pink-500/20 border-pink-400/50 text-pink-200 hover:bg-pink-500/40"
           }`}
         >
-          {show ? "↺ Sembunyikan Bayangan" : "🪞 Tampilkan Bayangan △A'B'C'"}
+          {show ? t3.hideFull : t3.showFull}
         </button>
       </div>
 
@@ -629,8 +699,7 @@ function AnimasiRefleksiBangun() {
 
       <div className="bg-pink-950/40 border border-pink-500/20 rounded-lg px-4 py-2.5 text-center">
         <p className="text-pink-200 text-xs font-body">
-          💡 Semua titik dicerminkan dengan aturan yang <strong>sama</strong>.
-          Bentuk & ukuran segitiga <strong className="text-green-300">tetap</strong> — hanya posisi & orientasinya yang berubah!
+          {t3.tip}
         </p>
       </div>
     </div>
@@ -669,6 +738,29 @@ function AnimasiRefleksiBangunGarisK() {
 
   const accent = mode === "x=k" ? "#f97316" : "#a78bfa";
 
+  const { language } = useLanguage();
+  const t4 = {
+    title: { id: "🔺 Animasi 4 — Refleksi Bangun Datar terhadap Garis x = k dan y = k", en: "🔺 Animation 4 — Reflection of a Shape over x = k and y = k", ja: "🔺 アニメーション4 — 直線x=kとy=kに関する図形の反射" }[language],
+    intro: { id: "Arahkan segitiga △ABC, atur nilai k, lalu tampilkan bayangannya!", en: "Move triangle △ABC, set the value of k, then show its image!", ja: "△ABCを動かし、kの値を設定して、像を表示しよう!" }[language],
+    line: { id: "Garis", en: "Line", ja: "直線" }[language],
+    hide: { id: "↺ Sembunyikan", en: "↺ Hide", ja: "↺ 隠す" }[language],
+    hideFull: { id: "↺ Sembunyikan Bayangan", en: "↺ Hide Image", ja: "↺ 像を隠す" }[language],
+    showSmall: { id: "🪞 Tampilkan\nBayangan", en: "🪞 Show\nImage", ja: "🪞 像を\n表示する" }[language],
+    showFull: { id: "🪞 Tampilkan Bayangan △A'B'C'", en: "🪞 Show Image △A'B'C'", ja: "🪞 像△A'B'C'を表示する" }[language],
+    kValue: { id: "nilai k", en: "value of k", ja: "kの値" }[language],
+    hintIdle: { id: "Arahkan segitiga dan atur k, lalu tampilkan bayangannya!", en: "Move the triangle and set k, then show its image!", ja: "三角形を動かしてkを設定し、像を表示しよう!" }[language],
+    infoX: (kv: number) => ({
+      id: <>💡 Rumus: <strong>A(x, y) → A'(2k−x, y)</strong> · semua titik dicerminkan terhadap garis vertikal x = {kv}</>,
+      en: <>💡 Formula: <strong>A(x, y) → A'(2k−x, y)</strong> · every point is reflected over the vertical line x = {kv}</>,
+      ja: <>💡 公式: <strong>A(x, y) → A'(2k−x, y)</strong> · すべての点は垂直線x = {kv} に関して反射されます</>,
+    }[language]),
+    infoY: (kv: number) => ({
+      id: <>💡 Rumus: <strong>A(x, y) → A'(x, 2k−y)</strong> · semua titik dicerminkan terhadap garis horizontal y = {kv}</>,
+      en: <>💡 Formula: <strong>A(x, y) → A'(x, 2k−y)</strong> · every point is reflected over the horizontal line y = {kv}</>,
+      ja: <>💡 公式: <strong>A(x, y) → A'(x, 2k−y)</strong> · すべての点は水平線y = {kv} に関して反射されます</>,
+    }[language]),
+  };
+
   const ShowBtn = ({ small }: { small?: boolean }) => (
     <button
       onClick={() => { playPopSound(); setShow(v => !v); }}
@@ -681,14 +773,14 @@ function AnimasiRefleksiBangunGarisK() {
       style={!show ? { background: `${accent}33`, borderColor: `${accent}88`, color: accent } : {}}
     >
       {show
-        ? (small ? "↺ Sembunyikan" : "↺ Sembunyikan Bayangan")
-        : (small ? "🪞 Tampilkan\nBayangan" : "🪞 Tampilkan Bayangan △A'B'C'")}
+        ? (small ? t4.hide : t4.hideFull)
+        : (small ? t4.showSmall : t4.showFull)}
     </button>
   );
 
   const KControl = () => (
     <EditableVal
-      label="nilai k" value={k} min={-4} max={4} color={accent}
+      label={t4.kValue} value={k} min={-4} max={4} color={accent}
       onChange={v => { setK(clamp5(v)); setShow(false); }}
     />
   );
@@ -697,10 +789,10 @@ function AnimasiRefleksiBangunGarisK() {
     <div className="space-y-3">
       <div className="text-center">
         <p className="font-bold text-sm font-body" style={{ color: accent }}>
-          🔺 Animasi 4 — Refleksi Bangun Datar terhadap Garis x = k dan y = k
+          {t4.title}
         </p>
         <p className="text-white/50 text-[11px] font-body mt-0.5">
-          Arahkan segitiga △ABC, atur nilai k, lalu tampilkan bayangannya!
+          {t4.intro}
         </p>
       </div>
 
@@ -715,7 +807,7 @@ function AnimasiRefleksiBangunGarisK() {
             }`}
             style={mode === m ? { background: accent, borderColor: accent } : {}}
           >
-            Garis {m}
+            {t4.line} {m}
           </button>
         ))}
       </div>
@@ -791,7 +883,7 @@ function AnimasiRefleksiBangunGarisK() {
             ))}
           </>
         ) : (
-          <span className="text-white/30">Arahkan segitiga dan atur k, lalu tampilkan bayangannya!</span>
+          <span className="text-white/30">{t4.hintIdle}</span>
         )}
       </div>
 
@@ -805,11 +897,7 @@ function AnimasiRefleksiBangunGarisK() {
       {/* Info box */}
       <div className="rounded-lg px-4 py-2.5 text-center border" style={{ background: `${accent}15`, borderColor: `${accent}40` }}>
         <p className="text-xs font-body" style={{ color: accent }}>
-          {mode === "x=k" ? (
-            <>💡 Rumus: <strong>A(x, y) → A'(2k−x, y)</strong> · semua titik dicerminkan terhadap garis vertikal x = {k}</>
-          ) : (
-            <>💡 Rumus: <strong>A(x, y) → A'(x, 2k−y)</strong> · semua titik dicerminkan terhadap garis horizontal y = {k}</>
-          )}
+          {mode === "x=k" ? t4.infoX(k) : t4.infoY(k)}
         </p>
       </div>
     </div>
@@ -936,7 +1024,7 @@ function AnimasiRefleksiKurva() {
   const parsed    = parseEqR(input);
   const isValid   = parsed !== null;
   const reflected = isValid && parsed ? reflectLinearR(parsed.m, parsed.c, mirror) : null;
-  const mc        = MIRRORS.find(m => m.id === mirror)!;
+  const mc        = getMirrors(language).find(m => m.id === mirror)!;
 
   const tt = {
     title: { id: '🪞 Animasi Interaktif — Refleksi Kurva Linear', en: '🪞 Interactive Animation — Linear Curve Reflection', ja: '🪞 インタラクティブアニメーション — 直線の対称移動' }[language],
@@ -1279,6 +1367,8 @@ const RefleksiPage = () => {
     bayanganLabel: { id: "Bayangan:", en: "Image:", ja: "像：" }[language],
     contohSoalLabel: { id: "Contoh Soal", en: "Example Problems", ja: "例題" }[language],
     verifikasiLabel: { id: "Verifikasi dengan rumus", en: "Verification using the formula", ja: "公式による検証" }[language],
+    altAmbulance: { id: "Tulisan AMBULANCE terbalik di kaca spion", en: "The word AMBULANCE written backward, seen normally in a rear-view mirror", ja: "バックミラーに映ると正しく読める、左右反転した「AMBULANCE」の文字" }[language],
+    altCermin: { id: "Seseorang berdiri di depan cermin — jarak ke cermin sama dengan jarak bayangan", en: "A person standing in front of a mirror — the distance to the mirror equals the distance of the reflection", ja: "鏡の前に立つ人 — 鏡までの距離と鏡像までの距離は等しい" }[language],
 
     // D
     secDTitle: { id: "D. 📌 Contoh 1: Pencerminan terhadap Sumbu Y", en: "D. 📌 Example 1: Reflection across the Y-axis", ja: "D. 📌 例1：y軸に関する対称移動" }[language],
@@ -1406,7 +1496,7 @@ const RefleksiPage = () => {
               <div>
                 <img
                   src="/ambulance-refleksi.png"
-                  alt="Tulisan AMBULANCE terbalik di kaca spion"
+                  alt={g.altAmbulance}
                   className="w-full rounded-xl object-cover"
                 />
                 <a
@@ -1421,7 +1511,7 @@ const RefleksiPage = () => {
               <div>
                 <img
                   src="/cermin-refleksi.png"
-                  alt="Seseorang berdiri di depan cermin — jarak ke cermin sama dengan jarak bayangan"
+                  alt={g.altCermin}
                   className="w-full rounded-xl object-cover"
                 />
                 <p className="text-[10px] text-white/30 text-right mt-1 font-body">gemini.google.com/app</p>
