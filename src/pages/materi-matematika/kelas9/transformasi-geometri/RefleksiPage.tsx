@@ -1460,6 +1460,64 @@ const RefleksiPage = () => {
     bayanganAkhir: { id: "Bayangan Akhir", en: "Final Image", ja: "最終的な像" }[language],
     verifikasiYK: { id: "Verifikasi dengan rumus refleksi y=k", en: "Verification using the y=k reflection formula", ja: "y=kに関する対称移動の公式による検証" }[language],
     garisSetelahTranslasiLbl: { id: "Garis setelah translasi:", en: "Line after translation:", ja: "平行移動後の直線：" }[language],
+
+    // H — Rangkuman, Tips & Kesimpulan
+    secHTitle: { id: "H. 🎯 Rangkuman, Tips & Kesimpulan", en: "H. 🎯 Summary, Tips & Conclusion", ja: "H. 🎯 まとめ、コツと結論" }[language],
+    hRumusKunciTitle: { id: "📐 Rumus Kunci Refleksi", en: "📐 Key Reflection Formulas", ja: "📐 対称移動の重要な公式" }[language],
+    hRumusKunci: [
+      { cermin: { id: "Sumbu-x", en: "X-axis", ja: "x軸" }[language], rumus: "A(x, y) → A'(x, −y)", color: "from-cyan-900/50 to-blue-900/50", border: "border-cyan-500/30", tc: "text-cyan-300" },
+      { cermin: { id: "Sumbu-y", en: "Y-axis", ja: "y軸" }[language], rumus: "A(x, y) → A'(−x, y)", color: "from-green-900/50 to-teal-900/50", border: "border-green-500/30", tc: "text-green-300" },
+      { cermin: { id: "Garis y = x", en: "Line y = x", ja: "直線 y = x" }[language], rumus: "A(x, y) → A'(y, x)", color: "from-purple-900/50 to-pink-900/50", border: "border-purple-500/30", tc: "text-purple-300" },
+      { cermin: { id: "Garis y = −x", en: "Line y = −x", ja: "直線 y = −x" }[language], rumus: "A(x, y) → A'(−y, −x)", color: "from-rose-900/50 to-red-900/50", border: "border-rose-500/30", tc: "text-rose-300" },
+      { cermin: { id: "Titik O(0,0)", en: "Point O(0,0)", ja: "原点O(0,0)" }[language], rumus: "A(x, y) → A'(−x, −y)", color: "from-orange-900/50 to-yellow-900/50", border: "border-orange-500/30", tc: "text-orange-300" },
+      { cermin: { id: "Garis x = h", en: "Line x = h", ja: "直線 x = h" }[language], rumus: "A(x, y) → A'(2h−x, y)", color: "from-indigo-900/50 to-blue-900/50", border: "border-indigo-500/30", tc: "text-indigo-300" },
+    ],
+    hSifatTitle: { id: "📌 Sifat-sifat Refleksi", en: "📌 Properties of Reflection", ja: "📌 対称移動の性質" }[language],
+    hSifat: [
+      { icon: "📐", label: { id: "Bentuk", en: "Shape", ja: "形" }[language], val: { id: "Tetap", en: "Unchanged", ja: "不変" }[language] },
+      { icon: "📏", label: { id: "Ukuran", en: "Size", ja: "大きさ" }[language], val: { id: "Tetap", en: "Unchanged", ja: "不変" }[language] },
+      { icon: "🔄", label: { id: "Orientasi", en: "Orientation", ja: "向き" }[language], val: { id: "Berbalik", en: "Reversed", ja: "反転" }[language] },
+      { icon: "↔️", label: { id: "Jarak ke cermin", en: "Distance to mirror", ja: "鏡までの距離" }[language], val: { id: "Sama", en: "Equal", ja: "等しい" }[language] },
+    ],
+    hTipsTitle: { id: "💡 Tips & Trik", en: "💡 Tips & Tricks", ja: "💡 コツとテクニック" }[language],
+    hTips: [
+      {
+        num: "1",
+        color: "bg-cyan-500/10 border-cyan-500/30 text-cyan-300",
+        title: { id: "Hafal pasangan tukar koordinat", en: "Memorize the coordinate-swap pairs", ja: "座標の入れ替えパターンを覚える" }[language],
+        body: { id: "Sumbu-x → negasikan y. Sumbu-y → negasikan x. Garis y=x → tukar x dan y. Garis y=−x → tukar DAN negasikan keduanya.", en: "X-axis → negate y. Y-axis → negate x. Line y=x → swap x and y. Line y=−x → swap AND negate both.", ja: "x軸 → yの符号を反転。y軸 → xの符号を反転。直線y=x → xとyを入れ替える。直線y=−x → 入れ替えて両方の符号を反転する。" }[language],
+      },
+      {
+        num: "2",
+        color: "bg-green-500/10 border-green-500/30 text-green-300",
+        title: { id: "Refleksi terhadap garis y = k atau x = h", en: "Reflection across the line y = k or x = h", ja: "直線y = kまたはx = hに関する対称移動" }[language],
+        body: { id: "Gunakan rumus umum: y=k → A'(x, 2k−y); x=h → A'(2h−x, y). Substitusikan nilai k atau h langsung.", en: "Use the general formula: y=k → A'(x, 2k−y); x=h → A'(2h−x, y). Substitute the value of k or h directly.", ja: "一般公式を使う：y=k → A'(x, 2k−y)；x=h → A'(2h−x, y)。kまたはhの値を直接代入する。" }[language],
+      },
+      {
+        num: "3",
+        color: "bg-purple-500/10 border-purple-500/30 text-purple-300",
+        title: { id: "Soal terbalik: cari titik asal", en: "Reverse problem: finding the original point", ja: "逆問題：元の点を求める" }[language],
+        body: { id: "Refleksi bersifat simetri — jika A' adalah bayangan A, maka A juga merupakan bayangan dari A'! Gunakan rumus yang sama untuk mencari balik.", en: "Reflection is symmetric — if A' is the image of A, then A is also the image of A'! Use the same formula to work backward.", ja: "対称移動は対称的です — A'がAの像であれば、AもA'の像です！同じ公式を使って逆算できます。" }[language],
+      },
+      {
+        num: "4",
+        color: "bg-rose-500/10 border-rose-500/30 text-rose-300",
+        title: { id: "Refleksi garis ax + by + c = 0", en: "Reflection of the line ax + by + c = 0", ja: "直線 ax + by + c = 0 の対称移動" }[language],
+        body: { id: "Substitusikan invers koordinat refleksi ke persamaan garis bayangan. Contoh: refleksi sumbu-x → ganti y dengan −y di persamaan bayangan.", en: "Substitute the inverse of the reflection coordinates into the image line equation. Example: X-axis reflection → replace y with −y in the image equation.", ja: "対称移動の逆座標を像の直線の方程式に代入する。例：x軸に関する対称移動 → 像の方程式でyを−yに置き換える。" }[language],
+      },
+    ],
+    hKesimpulanTitle: { id: "Kesimpulan", en: "Conclusion", ja: "結論" }[language],
+    hKesimpulanBody: {
+      id: <><strong className="text-green-300">Refleksi</strong> adalah transformasi yang mencerminkan titik terhadap suatu garis (cermin). Hasilnya seperti bayangan di cermin — bentuk dan ukuran sama persis, tetapi <strong className="text-yellow-300">orientasi berbalik</strong>. Kunci sukses refleksi: hafal rumus masing-masing sumbu cermin, dan ingat bahwa refleksi bersifat <strong className="text-cyan-300">simetri sempurna</strong> — jarak titik ke cermin sama sebelum dan sesudah transformasi!</>,
+      en: <><strong className="text-green-300">Reflection</strong> is a transformation that mirrors a point across a line (the mirror). The result is like an image in a mirror — the shape and size stay exactly the same, but the <strong className="text-yellow-300">orientation reverses</strong>. The key to mastering reflection: memorize the formula for each mirror line, and remember that reflection is <strong className="text-cyan-300">perfectly symmetric</strong> — the distance from the point to the mirror is the same before and after the transformation!</>,
+      ja: <><strong className="text-green-300">対称移動</strong>とは、点を直線（鏡）に関して映す変換です。その結果は鏡に映る像のようで、形と大きさはまったく同じですが、<strong className="text-yellow-300">向きは反転</strong>します。対称移動を習得するコツは、それぞれの鏡の直線に対応する公式を覚え、対称移動が<strong className="text-cyan-300">完全な対称性</strong>を持つこと — 変換の前後で点から鏡までの距離が等しいこと — を覚えておくことです！</>,
+    }[language],
+    hTags: [
+      { id: "Isometri ✅", en: "Isometry ✅", ja: "合同変換 ✅" }[language],
+      { id: "Orientasi berbalik", en: "Orientation reversed", ja: "向きが反転" }[language],
+      { id: "6 jenis cermin", en: "6 types of mirrors", ja: "6種類の鏡" }[language],
+      { id: "Simetri sempurna", en: "Perfect symmetry", ja: "完全な対称性" }[language],
+    ],
   };
 
   const badgeColor = (badge: string) => {
@@ -2066,21 +2124,14 @@ const RefleksiPage = () => {
 
           {/* RANGKUMAN, TIPS & KESIMPULAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<Target className="w-5 h-5" />} color="#f97316" title="H. 🎯 Rangkuman, Tips & Kesimpulan" />
+            <Hdr icon={<Target className="w-5 h-5" />} color="#f97316" title={g.secHTitle} />
             <div className="px-5 pb-5 space-y-5">
 
               {/* ── Rumus Kunci ── */}
               <div className="space-y-3">
-                <p className="font-body text-xs font-bold text-green-300 uppercase tracking-widest">📐 Rumus Kunci Refleksi</p>
+                <p className="font-body text-xs font-bold text-green-300 uppercase tracking-widest">{g.hRumusKunciTitle}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {[
-                    { cermin: "Sumbu-x", rumus: "A(x, y) → A'(x, −y)", color: "from-cyan-900/50 to-blue-900/50", border: "border-cyan-500/30", tc: "text-cyan-300" },
-                    { cermin: "Sumbu-y", rumus: "A(x, y) → A'(−x, y)", color: "from-green-900/50 to-teal-900/50", border: "border-green-500/30", tc: "text-green-300" },
-                    { cermin: "Garis y = x", rumus: "A(x, y) → A'(y, x)", color: "from-purple-900/50 to-pink-900/50", border: "border-purple-500/30", tc: "text-purple-300" },
-                    { cermin: "Garis y = −x", rumus: "A(x, y) → A'(−y, −x)", color: "from-rose-900/50 to-red-900/50", border: "border-rose-500/30", tc: "text-rose-300" },
-                    { cermin: "Titik O(0,0)", rumus: "A(x, y) → A'(−x, −y)", color: "from-orange-900/50 to-yellow-900/50", border: "border-orange-500/30", tc: "text-orange-300" },
-                    { cermin: "Garis x = h", rumus: "A(x, y) → A'(2h−x, y)", color: "from-indigo-900/50 to-blue-900/50", border: "border-indigo-500/30", tc: "text-indigo-300" },
-                  ].map(r => (
+                  {g.hRumusKunci.map(r => (
                     <div key={r.cermin} className={`bg-gradient-to-br ${r.color} ${r.border} border rounded-xl p-3`}>
                       <p className={`font-body text-xs font-bold ${r.tc} mb-1.5`}>🪞 {r.cermin}</p>
                       <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-3 py-1.5 text-center">{r.rumus}</p>
@@ -2088,18 +2139,13 @@ const RefleksiPage = () => {
                   ))}
                 </div>
                 <div className="bg-green-900/30 border border-green-500/20 rounded-xl p-3">
-                  <p className="font-body text-xs text-green-400 font-bold mb-2">📌 Sifat-sifat Refleksi</p>
+                  <p className="font-body text-xs text-green-400 font-bold mb-2">{g.hSifatTitle}</p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
-                    {[
-                      { icon: "📐", label: "Bentuk", val: "Tetap" },
-                      { icon: "📏", label: "Ukuran", val: "Tetap" },
-                      { icon: "🔄", label: "Orientasi", val: "Berbalik" },
-                      { icon: "↔️", label: "Jarak ke cermin", val: "Sama" },
-                    ].map(item => (
+                    {g.hSifat.map(item => (
                       <div key={item.label} className="bg-slate-900/50 rounded-lg p-2">
                         <p className="text-base">{item.icon}</p>
                         <p className="font-body text-xs text-white/60">{item.label}</p>
-                        <p className={`font-body text-xs font-bold ${item.val === "Tetap" || item.val === "Sama" ? "text-green-400" : "text-yellow-400"}`}>{item.val}</p>
+                        <p className={`font-body text-xs font-bold ${["Tetap", "Sama", "Unchanged", "Equal", "不変", "等しい"].includes(item.val) ? "text-green-400" : "text-yellow-400"}`}>{item.val}</p>
                       </div>
                     ))}
                   </div>
@@ -2108,34 +2154,9 @@ const RefleksiPage = () => {
 
               {/* ── Tips & Trik ── */}
               <div className="space-y-3">
-                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">💡 Tips & Trik</p>
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">{g.hTipsTitle}</p>
                 <div className="space-y-2">
-                  {[
-                    {
-                      num: "1",
-                      color: "bg-cyan-500/10 border-cyan-500/30 text-cyan-300",
-                      title: "Hafal pasangan tukar koordinat",
-                      body: "Sumbu-x → negasikan y. Sumbu-y → negasikan x. Garis y=x → tukar x dan y. Garis y=−x → tukar DAN negasikan keduanya.",
-                    },
-                    {
-                      num: "2",
-                      color: "bg-green-500/10 border-green-500/30 text-green-300",
-                      title: "Refleksi terhadap garis y = k atau x = h",
-                      body: "Gunakan rumus umum: y=k → A'(x, 2k−y); x=h → A'(2h−x, y). Substitusikan nilai k atau h langsung.",
-                    },
-                    {
-                      num: "3",
-                      color: "bg-purple-500/10 border-purple-500/30 text-purple-300",
-                      title: "Soal terbalik: cari titik asal",
-                      body: "Refleksi bersifat simetri — jika A' adalah bayangan A, maka A juga merupakan bayangan dari A'! Gunakan rumus yang sama untuk mencari balik.",
-                    },
-                    {
-                      num: "4",
-                      color: "bg-rose-500/10 border-rose-500/30 text-rose-300",
-                      title: "Refleksi garis ax + by + c = 0",
-                      body: "Substitusikan invers koordinat refleksi ke persamaan garis bayangan. Contoh: refleksi sumbu-x → ganti y dengan −y di persamaan bayangan.",
-                    },
-                  ].map(tip => (
+                  {g.hTips.map(tip => (
                     <div key={tip.num} className={`flex gap-3 items-start border rounded-xl p-3 ${tip.color.split(" ").slice(0,2).join(" ")}`}>
                       <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border ${tip.color}`}>{tip.num}</span>
                       <div>
@@ -2151,13 +2172,13 @@ const RefleksiPage = () => {
               <div className="bg-gradient-to-r from-green-900/40 via-teal-900/30 to-green-900/40 border border-green-500/30 rounded-2xl p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🏁</span>
-                  <p className="font-body text-sm font-bold text-green-300 uppercase tracking-wide">Kesimpulan</p>
+                  <p className="font-body text-sm font-bold text-green-300 uppercase tracking-wide">{g.hKesimpulanTitle}</p>
                 </div>
                 <p className="font-body text-sm text-white/85 leading-relaxed">
-                  <strong className="text-green-300">Refleksi</strong> adalah transformasi yang mencerminkan titik terhadap suatu garis (cermin). Hasilnya seperti bayangan di cermin — bentuk dan ukuran sama persis, tetapi <strong className="text-yellow-300">orientasi berbalik</strong>. Kunci sukses refleksi: hafal rumus masing-masing sumbu cermin, dan ingat bahwa refleksi bersifat <strong className="text-cyan-300">simetri sempurna</strong> — jarak titik ke cermin sama sebelum dan sesudah transformasi!
+                  {g.hKesimpulanBody}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {["Isometri ✅", "Orientasi berbalik", "6 jenis cermin", "Simetri sempurna"].map(tag => (
+                  {g.hTags.map(tag => (
                     <span key={tag} className="bg-green-500/20 border border-green-500/30 rounded-full px-3 py-0.5 text-xs font-body text-green-200">{tag}</span>
                   ))}
                 </div>
