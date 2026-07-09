@@ -596,9 +596,8 @@ const MetodeGrafikPage = () => {
                         <line x1="30" y1="87.5" x2="210" y2="155" stroke="#fb923c" strokeWidth="2.8" strokeLinecap="round" filter="url(#glowRed)" opacity="0.9"/>
                         <circle cx="30" cy="132.5" r="4" fill="#22d3ee"/><circle cx="210" cy="200" r="4" fill="#22d3ee"/>
                         <circle cx="30" cy="87.5" r="4" fill="#fb923c"/><circle cx="210" cy="155" r="4" fill="#fb923c"/>
-                        <rect x="82" y="148" width="116" height="20" rx="5" fill={isDark ? "#1c0a0a" : "#fff1f2"} fillOpacity="0.9"/>
-                        <text x="140" y="162" textAnchor="middle" fill="#f87171" fontSize="11" fontFamily="sans-serif" fontWeight="bold">{t.q3ParallelLabel}</text>
-                        <text x="220" y="100" fill="#ef4444" fontSize="22" fontFamily="monospace" fontWeight="bold" opacity="0.75">∅</text>
+                        <rect x="163" y="13" width="104" height="20" rx="5" fill={isDark ? "#1c0a0a" : "#fff1f2"} fillOpacity="0.92"/>
+                        <text x="215" y="27" textAnchor="middle" fill="#f87171" fontSize="11" fontFamily="sans-serif" fontWeight="bold">{t.q3ParallelLabel}</text>
                         <rect x="32" y="14" width="130" height="38" rx="4" fill={isDark ? "#0f172a" : "#f8fafc"} fillOpacity="0.9"/>
                         <line x1="38" y1="27" x2="58" y2="27" stroke="#22d3ee" strokeWidth="2.5"/>
                         <text x="62" y="31" fill="#22d3ee" fontSize="10" fontFamily="monospace">x + 2y = 6</text>
