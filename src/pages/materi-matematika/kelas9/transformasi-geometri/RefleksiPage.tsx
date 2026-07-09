@@ -3,6 +3,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Lightbulb, Calculator, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
@@ -1199,6 +1200,46 @@ function AnimasiRefleksiKurvaK() {
 }
 
 const RefleksiPage = () => {
+  const { language } = useLanguage();
+
+  const translations = {
+    id: {
+      pageTitle: "REFLEKSI (PENCERMINAN)",
+      pageSubtitle: "Bayangan di Cermin Matematika!",
+      pageMeta: "Kelas 9 · Transformasi Geometri · Materi Matematika",
+      secA: "A. 🌟 Apa Itu Refleksi?",
+      introText: <>
+        <strong className="text-emerald-300">Refleksi</strong> adalah transformasi yang mencerminkan setiap titik terhadap suatu garis yang disebut <strong className="text-yellow-300">sumbu pencerminan</strong> (garis cermin). Jarak titik dari garis cermin <strong className="text-white">tetap sama</strong>, hanya posisinya yang bercermin.
+      </>,
+    },
+    en: {
+      pageTitle: "REFLECTION",
+      pageSubtitle: "Mirror Images in Math!",
+      pageMeta: "Grade 9 · Geometric Transformation · Math Material",
+      secA: "A. 🌟 What Is Reflection?",
+      introText: <>
+        <strong className="text-emerald-300">Reflection</strong> is a transformation that mirrors every point across a line called the <strong className="text-yellow-300">axis of reflection</strong> (mirror line). The distance from the point to the mirror line <strong className="text-white">stays the same</strong>, only its position is mirrored.
+      </>,
+    },
+    ja: {
+      pageTitle: "対称移動（鏡映）",
+      pageSubtitle: "数学の鏡に映る像！",
+      pageMeta: "中学3年 · 図形の変換 · 数学教材",
+      secA: "A. 🌟 対称移動とは？",
+      introText: <>
+        <strong className="text-emerald-300">対称移動</strong>とは、<strong className="text-yellow-300">対称の軸</strong>（鏡の線）と呼ばれる直線を基準に、すべての点を鏡映させる変換です。点から鏡の線までの距離は<strong className="text-white">変わらず</strong>、位置だけが鏡映されます。
+      </>,
+    },
+  }[language];
+
+  const t = translations;
+
+  const badgeColor = (badge: string) => {
+    if (badge === "MUDAH" || badge === "Easy"   || badge === "基本") return "bg-green-500/20 text-green-400";
+    if (badge === "SEDANG"|| badge === "Medium" || badge === "標準") return "bg-yellow-500/20 text-yellow-400";
+    return "bg-red-500/20 text-red-400";
+  };
+
   const Hdr = ({ icon, color, title }: { icon: React.ReactNode; color: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3"><span style={{ color }}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
@@ -1211,18 +1252,18 @@ const RefleksiPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <div className="text-4xl text-center mb-3">🪞</div>
-        <h1 className="font-display text-xl md:text-2xl font-bold text-emerald-400 text-center mb-1">REFLEKSI (PENCERMINAN)</h1>
-        <p className="font-display text-sm font-semibold text-emerald-300 text-center mb-1">Bayangan di Cermin Matematika!</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Transformasi Geometri · Materi Matematika</p>
+        <h1 className="font-display text-xl md:text-2xl font-bold text-emerald-400 text-center mb-1">{t.pageTitle}</h1>
+        <p className="font-display text-sm font-semibold text-emerald-300 text-center mb-1">{t.pageSubtitle}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.pageMeta}</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* INTRO — paling atas */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title="A. 🌟 Apa Itu Refleksi?" />
+            <Hdr icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title={t.secA} />
             <div className="px-5 pb-5 space-y-4">
               <p className="font-body text-sm text-white/80 leading-relaxed">
-                <strong className="text-emerald-300">Refleksi</strong> adalah transformasi yang mencerminkan setiap titik terhadap suatu garis yang disebut <strong className="text-yellow-300">sumbu pencerminan</strong> (garis cermin). Jarak titik dari garis cermin <strong className="text-white">tetap sama</strong>, hanya posisinya yang bercermin.
+                {t.introText}
               </p>
               <div>
                 <img
