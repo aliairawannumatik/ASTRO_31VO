@@ -1302,6 +1302,64 @@ const rotasiPageTranslations = {
   badgeSulit: { id: "SULIT", en: "Hard", ja: "発展" },
   badgeOlimpiade: { id: "OLIMPIADE", en: "Olympiad", ja: "オリンピック" },
   pembahasanLabel: { id: "PEMBAHASAN:", en: "SOLUTION:", ja: "解説：" },
+  rangkumanTitle: { id: "🎯 Rangkuman, Tips & Kesimpulan", en: "🎯 Summary, Tips & Conclusion", ja: "🎯 まとめ、コツと結論" },
+  rumusKunciTitle: { id: "📐 Rumus Kunci Rotasi (Pusat O)", en: "📐 Key Rotation Formulas (Center O)", ja: "📐 回転の重要な公式（中心O）" },
+  rumusKunci: [
+    { sudut: { id: "90° berlawanan AJ", en: "90° counter-clockwise", ja: "90°反時計回り" }, rumus: "(x, y) → (−y, x)", color: "from-purple-900/50 to-indigo-900/50", border: "border-purple-500/30", tc: "text-purple-300" },
+    { sudut: { id: "90° searah AJ", en: "90° clockwise", ja: "90°時計回り" }, rumus: "(x, y) → (y, −x)", color: "from-blue-900/50 to-cyan-900/50", border: "border-blue-500/30", tc: "text-blue-300" },
+    { sudut: { id: "180° (kedua arah)", en: "180° (either direction)", ja: "180°（どちら向きも同じ）" }, rumus: "(x, y) → (−x, −y)", color: "from-rose-900/50 to-pink-900/50", border: "border-rose-500/30", tc: "text-rose-300" },
+    { sudut: { id: "270° berlawanan AJ", en: "270° counter-clockwise", ja: "270°反時計回り" }, rumus: "(x, y) → (y, −x)", color: "from-orange-900/50 to-amber-900/50", border: "border-orange-500/30", tc: "text-orange-300" },
+  ],
+  pusatPBTitle: { id: "📌 Rotasi pusat P(a, b) — langkah umum", en: "📌 Rotation about center P(a, b) — general steps", ja: "📌 中心P(a, b)の回転 — 一般的な手順" },
+  pusatPBStep1: { id: <>1. Geser titik: <span className="text-yellow-300 font-mono">(x−a, y−b)</span></>, en: <>1. Shift the point: <span className="text-yellow-300 font-mono">(x−a, y−b)</span></>, ja: <>1. 点を平行移動：<span className="text-yellow-300 font-mono">(x−a, y−b)</span></> },
+  pusatPBStep2: { id: "2. Terapkan rotasi pusat O sesuai sudut", en: "2. Apply the rotation about center O for the given angle", ja: "2. 角度に応じて原点Oを中心に回転を適用する" },
+  pusatPBStep3: { id: <>3. Geser balik: tambah <span className="text-yellow-300 font-mono">(a, b)</span> ke hasil</>, en: <>3. Shift back: add <span className="text-yellow-300 font-mono">(a, b)</span> to the result</>, ja: <>3. 元に戻す：結果に<span className="text-yellow-300 font-mono">(a, b)</span>を加える</> },
+  sifatTitle: { id: "📌 Sifat-sifat Rotasi", en: "📌 Properties of Rotation", ja: "📌 回転の性質" },
+  sifatItems: [
+    { icon: "📐", label: { id: "Bentuk", en: "Shape", ja: "形" }, val: { id: "Tetap", en: "Unchanged", ja: "不変" } },
+    { icon: "📏", label: { id: "Ukuran", en: "Size", ja: "大きさ" }, val: { id: "Tetap", en: "Unchanged", ja: "不変" } },
+    { icon: "🔄", label: { id: "Orientasi", en: "Orientation", ja: "向き" }, val: { id: "Berputar", en: "Rotated", ja: "回転する" } },
+    { icon: "📍", label: { id: "Jarak ke pusat", en: "Distance to center", ja: "中心までの距離" }, val: { id: "Tetap", en: "Unchanged", ja: "不変" } },
+  ],
+  tipsTitle: { id: "💡 Tips & Trik", en: "💡 Tips & Tricks", ja: "💡 コツとテクニック" },
+  tips: [
+    {
+      num: "1",
+      color: "bg-purple-500/10 border-purple-500/30 text-purple-300",
+      title: { id: "Jembatan keledai 90° berlawanan AJ", en: "Memory trick for 90° counter-clockwise", ja: "90°反時計回りの覚え方" },
+      body: { id: "Ingat: (x, y) → (−y, x). Cara mudah: tukar posisi x dan y, lalu negasikan yang tadinya x (sekarang jadi elemen pertama).", en: "Remember: (x, y) → (−y, x). Easy way: swap x and y, then negate what used to be x (now the first element).", ja: "覚え方：(x, y) → (−y, x)。xとyの位置を入れ替え、元のxだった値（今は最初の要素）の符号を反転させるだけです。" },
+    },
+    {
+      num: "2",
+      color: "bg-blue-500/10 border-blue-500/30 text-blue-300",
+      title: { id: "270° berlawanan AJ = 90° searah AJ", en: "270° CCW = 90° CW", ja: "270°反時計回り＝90°時計回り" },
+      body: { id: "Hafalkan saja satu rumus! Rotasi 270° berlawanan sama hasilnya dengan 90° searah: (x,y) → (y, −x). Hemat hapalan.", en: "Just memorize one formula! A 270° counter-clockwise rotation gives the same result as 90° clockwise: (x,y) → (y, −x). Saves memorization.", ja: "公式を1つ覚えるだけで済みます！270°反時計回りの回転は90°時計回りと同じ結果になります：(x,y) → (y, −x)。覚える量を減らせます。" },
+    },
+    {
+      num: "3",
+      color: "bg-rose-500/10 border-rose-500/30 text-rose-300",
+      title: { id: "180° = negasikan semua", en: "180° = negate everything", ja: "180°＝すべての符号を反転" },
+      body: { id: "Untuk rotasi 180° (searah atau berlawanan — sama saja): cukup negasikan x dan y. A(x,y) → A'(−x, −y). Paling mudah!", en: "For a 180° rotation (clockwise or counter-clockwise — same result): just negate x and y. A(x,y) → A'(−x, −y). The easiest one!", ja: "180°の回転（時計回りでも反時計回りでも同じ）は、xとyの符号を反転するだけです。A(x,y) → A'(−x, −y)。最も簡単です！" },
+    },
+    {
+      num: "4",
+      color: "bg-amber-500/10 border-amber-500/30 text-amber-300",
+      title: { id: "Rotasi pusat P(a,b) — geser-putar-balik", en: "Rotation about P(a,b) — shift-rotate-shift back", ja: "中心P(a,b)の回転 — 移動・回転・逆移動" },
+      body: { id: "Jangan langsung pakai rumus rumit. Geser ke pusat O dulu, putar, lalu geser balik. Tiga langkah sederhana yang selalu benar.", en: "Don't jump straight to a complicated formula. Shift to center O first, rotate, then shift back. Three simple steps that always work.", ja: "いきなり複雑な公式を使わないこと。まず原点Oに移動し、回転させ、それから元の位置に戻します。常に正しく使える3つのシンプルな手順です。" },
+    },
+  ],
+  kesimpulanTitle: { id: "Kesimpulan", en: "Conclusion", ja: "結論" },
+  kesimpulanBody: {
+    id: <><strong className="text-purple-300">Rotasi</strong> adalah transformasi memutar titik atau bangun sebesar sudut θ terhadap suatu titik pusat. Bentuk dan ukuran <strong className="text-green-300">tetap sama</strong>, hanya posisi dan arah orientasi yang berubah. Kunci sukses: hafal 3 rumus utama (90° BAJ, 90° SAJ, 180°), dan gunakan teknik <strong className="text-yellow-300">geser-putar-balik</strong> untuk rotasi dengan pusat sembarang!</>,
+    en: <><strong className="text-purple-300">Rotation</strong> is a transformation that turns a point or shape by an angle θ about a center point. The shape and size <strong className="text-green-300">stay the same</strong>, only the position and orientation change. Key to success: memorize the 3 main formulas (90° CCW, 90° CW, 180°), and use the <strong className="text-yellow-300">shift-rotate-shift back</strong> technique for rotations about any center!</>,
+    ja: <><strong className="text-purple-300">回転</strong>とは、ある中心点を基準に点や図形を角度θだけ回す変換です。形と大きさは<strong className="text-green-300">変わらず</strong>、位置と向きだけが変化します。成功の鍵：3つの主要な公式（90°反時計回り、90°時計回り、180°）を覚え、任意の中心での回転には<strong className="text-yellow-300">移動・回転・逆移動</strong>のテクニックを使いましょう！</>,
+  },
+  kesimpulanTags: [
+    { id: "Isometri ✅", en: "Isometry ✅", ja: "等長変換 ✅" },
+    { id: "Jarak ke pusat tetap", en: "Distance to center unchanged", ja: "中心までの距離は不変" },
+    { id: "3 rumus utama", en: "3 main formulas", ja: "3つの主要な公式" },
+    { id: "Geser-putar-balik", en: "Shift-rotate-shift back", ja: "移動・回転・逆移動" },
+  ],
 };
 
 const subLabels = {
@@ -1324,6 +1382,20 @@ const RotasiPage = () => {
     badgeSulit: rotasiPageTranslations.badgeSulit[language],
     badgeOlimpiade: rotasiPageTranslations.badgeOlimpiade[language],
     pembahasanLabel: rotasiPageTranslations.pembahasanLabel[language],
+    rangkumanTitle: rotasiPageTranslations.rangkumanTitle[language],
+    rumusKunciTitle: rotasiPageTranslations.rumusKunciTitle[language],
+    rumusKunci: rotasiPageTranslations.rumusKunci.map(r => ({ ...r, sudut: r.sudut[language] })),
+    pusatPBTitle: rotasiPageTranslations.pusatPBTitle[language],
+    pusatPBStep1: rotasiPageTranslations.pusatPBStep1[language],
+    pusatPBStep2: rotasiPageTranslations.pusatPBStep2[language],
+    pusatPBStep3: rotasiPageTranslations.pusatPBStep3[language],
+    sifatTitle: rotasiPageTranslations.sifatTitle[language],
+    sifatItems: rotasiPageTranslations.sifatItems.map(s => ({ icon: s.icon, label: s.label[language], val: s.val[language], isTetap: s.val.id === "Tetap" })),
+    tipsTitle: rotasiPageTranslations.tipsTitle[language],
+    tips: rotasiPageTranslations.tips.map(tp => ({ num: tp.num, color: tp.color, title: tp.title[language], body: tp.body[language] })),
+    kesimpulanTitle: rotasiPageTranslations.kesimpulanTitle[language],
+    kesimpulanBody: rotasiPageTranslations.kesimpulanBody[language],
+    kesimpulanTags: rotasiPageTranslations.kesimpulanTags.map(tag => tag[language]),
   };
   const open = ["intro", "animasi-titik", "animasi", "rumus", "contoh90", "contoh90cw", "contoh180", "kurva-linear", "rangkuman"];
 
@@ -1796,19 +1868,14 @@ const RotasiPage = () => {
 
           {/* RANGKUMAN, TIPS & KESIMPULAN */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr id="rangkuman" icon={<Target className="w-5 h-5" />} color="#f97316" title="🎯 Rangkuman, Tips & Kesimpulan" />
+            <Hdr id="rangkuman" icon={<Target className="w-5 h-5" />} color="#f97316" title={rt.rangkumanTitle} />
             <div className="px-5 pb-5 space-y-5">
 
               {/* ── Rumus Kunci ── */}
               <div className="space-y-3">
-                <p className="font-body text-xs font-bold text-purple-300 uppercase tracking-widest">📐 Rumus Kunci Rotasi (Pusat O)</p>
+                <p className="font-body text-xs font-bold text-purple-300 uppercase tracking-widest">{rt.rumusKunciTitle}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {[
-                    { sudut: "90° berlawanan AJ", rumus: "(x, y) → (−y, x)", color: "from-purple-900/50 to-indigo-900/50", border: "border-purple-500/30", tc: "text-purple-300" },
-                    { sudut: "90° searah AJ", rumus: "(x, y) → (y, −x)", color: "from-blue-900/50 to-cyan-900/50", border: "border-blue-500/30", tc: "text-blue-300" },
-                    { sudut: "180° (kedua arah)", rumus: "(x, y) → (−x, −y)", color: "from-rose-900/50 to-pink-900/50", border: "border-rose-500/30", tc: "text-rose-300" },
-                    { sudut: "270° berlawanan AJ", rumus: "(x, y) → (y, −x)", color: "from-orange-900/50 to-amber-900/50", border: "border-orange-500/30", tc: "text-orange-300" },
-                  ].map(r => (
+                  {rt.rumusKunci.map(r => (
                     <div key={r.sudut} className={`bg-gradient-to-br ${r.color} ${r.border} border rounded-xl p-3`}>
                       <p className={`font-body text-xs font-bold ${r.tc} mb-1.5`}>🔄 {r.sudut}</p>
                       <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-3 py-1.5 text-center">{r.rumus}</p>
@@ -1816,26 +1883,21 @@ const RotasiPage = () => {
                   ))}
                 </div>
                 <div className="bg-purple-900/20 border border-purple-500/20 rounded-xl p-3">
-                  <p className="font-body text-xs text-purple-300 font-bold mb-2">📌 Rotasi pusat P(a, b) — langkah umum</p>
+                  <p className="font-body text-xs text-purple-300 font-bold mb-2">{rt.pusatPBTitle}</p>
                   <div className="font-body text-xs text-white/75 space-y-1">
-                    <p>1. Geser titik: <span className="text-yellow-300 font-mono">(x−a, y−b)</span></p>
-                    <p>2. Terapkan rotasi pusat O sesuai sudut</p>
-                    <p>3. Geser balik: tambah <span className="text-yellow-300 font-mono">(a, b)</span> ke hasil</p>
+                    <p>{rt.pusatPBStep1}</p>
+                    <p>{rt.pusatPBStep2}</p>
+                    <p>{rt.pusatPBStep3}</p>
                   </div>
                 </div>
                 <div className="bg-slate-800/50 rounded-xl p-3">
-                  <p className="font-body text-xs text-slate-300 font-bold mb-2">📌 Sifat-sifat Rotasi</p>
+                  <p className="font-body text-xs text-slate-300 font-bold mb-2">{rt.sifatTitle}</p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
-                    {[
-                      { icon: "📐", label: "Bentuk", val: "Tetap" },
-                      { icon: "📏", label: "Ukuran", val: "Tetap" },
-                      { icon: "🔄", label: "Orientasi", val: "Berputar" },
-                      { icon: "📍", label: "Jarak ke pusat", val: "Tetap" },
-                    ].map(item => (
+                    {rt.sifatItems.map(item => (
                       <div key={item.label} className="bg-slate-900/50 rounded-lg p-2">
                         <p className="text-base">{item.icon}</p>
                         <p className="font-body text-xs text-white/60">{item.label}</p>
-                        <p className={`font-body text-xs font-bold ${item.val === "Tetap" ? "text-green-400" : "text-yellow-400"}`}>{item.val}</p>
+                        <p className={`font-body text-xs font-bold ${item.isTetap ? "text-green-400" : "text-yellow-400"}`}>{item.val}</p>
                       </div>
                     ))}
                   </div>
@@ -1844,34 +1906,9 @@ const RotasiPage = () => {
 
               {/* ── Tips & Trik ── */}
               <div className="space-y-3">
-                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">💡 Tips & Trik</p>
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">{rt.tipsTitle}</p>
                 <div className="space-y-2">
-                  {[
-                    {
-                      num: "1",
-                      color: "bg-purple-500/10 border-purple-500/30 text-purple-300",
-                      title: "Jembatan keledai 90° berlawanan AJ",
-                      body: "Ingat: (x, y) → (−y, x). Cara mudah: tukar posisi x dan y, lalu negasikan yang tadinya x (sekarang jadi elemen pertama).",
-                    },
-                    {
-                      num: "2",
-                      color: "bg-blue-500/10 border-blue-500/30 text-blue-300",
-                      title: "270° berlawanan AJ = 90° searah AJ",
-                      body: "Hafalkan saja satu rumus! Rotasi 270° berlawanan sama hasilnya dengan 90° searah: (x,y) → (y, −x). Hemat hapalan.",
-                    },
-                    {
-                      num: "3",
-                      color: "bg-rose-500/10 border-rose-500/30 text-rose-300",
-                      title: "180° = negasikan semua",
-                      body: "Untuk rotasi 180° (searah atau berlawanan — sama saja): cukup negasikan x dan y. A(x,y) → A'(−x, −y). Paling mudah!",
-                    },
-                    {
-                      num: "4",
-                      color: "bg-amber-500/10 border-amber-500/30 text-amber-300",
-                      title: "Rotasi pusat P(a,b) — geser-putar-balik",
-                      body: "Jangan langsung pakai rumus rumit. Geser ke pusat O dulu, putar, lalu geser balik. Tiga langkah sederhana yang selalu benar.",
-                    },
-                  ].map(tip => (
+                  {rt.tips.map(tip => (
                     <div key={tip.num} className={`flex gap-3 items-start border rounded-xl p-3 ${tip.color.split(" ").slice(0,2).join(" ")}`}>
                       <span className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border ${tip.color}`}>{tip.num}</span>
                       <div>
@@ -1887,13 +1924,13 @@ const RotasiPage = () => {
               <div className="bg-gradient-to-r from-purple-900/40 via-indigo-900/30 to-purple-900/40 border border-purple-500/30 rounded-2xl p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🏁</span>
-                  <p className="font-body text-sm font-bold text-purple-300 uppercase tracking-wide">Kesimpulan</p>
+                  <p className="font-body text-sm font-bold text-purple-300 uppercase tracking-wide">{rt.kesimpulanTitle}</p>
                 </div>
                 <p className="font-body text-sm text-white/85 leading-relaxed">
-                  <strong className="text-purple-300">Rotasi</strong> adalah transformasi memutar titik atau bangun sebesar sudut θ terhadap suatu titik pusat. Bentuk dan ukuran <strong className="text-green-300">tetap sama</strong>, hanya posisi dan arah orientasi yang berubah. Kunci sukses: hafal 3 rumus utama (90° BAJ, 90° SAJ, 180°), dan gunakan teknik <strong className="text-yellow-300">geser-putar-balik</strong> untuk rotasi dengan pusat sembarang!
+                  {rt.kesimpulanBody}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {["Isometri ✅", "Jarak ke pusat tetap", "3 rumus utama", "Geser-putar-balik"].map(tag => (
+                  {rt.kesimpulanTags.map(tag => (
                     <span key={tag} className="bg-purple-500/20 border border-purple-500/30 rounded-full px-3 py-0.5 text-xs font-body text-purple-200">{tag}</span>
                   ))}
                 </div>
