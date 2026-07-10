@@ -4,6 +4,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
@@ -1700,8 +1701,46 @@ function AnimasiDilatasiKurvaLinear() {
    MAIN PAGE COMPONENT
 ────────────────────────────────────────────── */
 
+const dilatasiPageTranslations = {
+  pageTitle: { id: "DILATASI", en: "DILATION", ja: "拡大・縮小" },
+  breadcrumb: { id: "Kelas 9 · Transformasi Geometri · Materi Matematika", en: "Grade 9 · Geometric Transformation · Math Material", ja: "中学3年・図形の変換・数学教材" },
+  introLabel: { id: "🚀 Apa Itu Dilatasi? Kenalan Dulu, Yuk!", en: "🚀 What Is Dilation? Let's Get to Know It!", ja: "🚀 拡大・縮小とは？まずは知ろう！" },
+  introP1: {
+    id: <>Pernah melihat foto yang diperbesar atau diperkecil di HP kamu? Atau mungkin kamu pernah memakai aplikasi maps yang bisa di-zoom in dan zoom out? Nah, konsep di balik itu semua adalah <strong className="text-cyan-300">Dilatasi</strong>!</>,
+    en: <>Have you ever seen a photo zoomed in or out on your phone? Or maybe you've used a maps app that lets you zoom in and out? Well, the concept behind all of that is <strong className="text-cyan-300">Dilation</strong>!</>,
+    ja: <>スマホで写真を拡大したり縮小したりしたことはありますか？地図アプリでズームイン・ズームアウトしたことは？実は、そのすべての背後にある考え方が<strong className="text-cyan-300">拡大・縮小（Dilatasi）</strong>なのです！</>,
+  },
+  introP2: {
+    id: <>Dalam matematika, dilatasi adalah jenis transformasi yang mengubah ukuran bangun (memperbesar atau memperkecil), tetapi <strong>tidak mengubah bentuknya</strong>. Bangun asal dan hasil dilatasi selalu <strong>sebangun (similar)</strong> — sudut-sudutnya tetap sama, hanya sisinya yang berubah panjangnya. 🔭</>,
+    en: <>In mathematics, dilation is a type of transformation that changes the size of a shape (enlarging or shrinking it), but <strong>does not change its form</strong>. The original shape and the dilated result are always <strong>similar</strong> — the angles stay the same, only the side lengths change. 🔭</>,
+    ja: <>数学では、拡大・縮小とは図形の大きさを変える（拡大または縮小する）変換の一種ですが、<strong>形は変わりません</strong>。元の図形と拡大・縮小後の図形は常に<strong>相似</strong>です — 角度は同じままで、辺の長さだけが変わります。🔭</>,
+  },
+  introP3: {
+    id: <><strong>Kata Kunci:</strong> Dilatasi ditentukan oleh dua hal utama:{" "}<strong className="text-yellow-300">Pusat Dilatasi</strong> (titik acuan) dan{" "}<strong className="text-yellow-300">Faktor Skala k</strong> (besar/kecilnya perubahan ukuran).</>,
+    en: <><strong>Key Terms:</strong> Dilation is determined by two main things:{" "}<strong className="text-yellow-300">Center of Dilation</strong> (the reference point) and{" "}<strong className="text-yellow-300">Scale Factor k</strong> (how much the size changes).</>,
+    ja: <><strong>キーワード：</strong>拡大・縮小は2つの要素で決まります：{" "}<strong className="text-yellow-300">拡大・縮小の中心</strong>（基準点）と{" "}<strong className="text-yellow-300">拡大率 k</strong>（大きさの変化の度合い）です。</>,
+  },
+  badgeMudah: { id: "MUDAH", en: "Easy", ja: "基本" },
+  badgeSedang: { id: "SEDANG", en: "Medium", ja: "標準" },
+  badgeSulit: { id: "SULIT", en: "Hard", ja: "発展" },
+  badgeEkstra: { id: "EKSTRA", en: "Extra", ja: "発展問題" },
+};
+
 const DilatasisPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const dt = {
+    pageTitle: dilatasiPageTranslations.pageTitle[language],
+    breadcrumb: dilatasiPageTranslations.breadcrumb[language],
+    introLabel: dilatasiPageTranslations.introLabel[language],
+    introP1: dilatasiPageTranslations.introP1[language],
+    introP2: dilatasiPageTranslations.introP2[language],
+    introP3: dilatasiPageTranslations.introP3[language],
+    badgeMudah: dilatasiPageTranslations.badgeMudah[language],
+    badgeSedang: dilatasiPageTranslations.badgeSedang[language],
+    badgeSulit: dilatasiPageTranslations.badgeSulit[language],
+    badgeEkstra: dilatasiPageTranslations.badgeEkstra[language],
+  };
   const expandedSections = [
     "intro", "animasi-titik", "animasi", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
     "konsep-kurva", "contoh-kurva", "animasi-kurva",
@@ -1725,10 +1764,10 @@ const DilatasisPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          DILATASI
+          {dt.pageTitle}
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">
-          Kelas 9 · Transformasi Geometri · Materi Matematika
+          {dt.breadcrumb}
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
@@ -1739,27 +1778,21 @@ const DilatasisPage = () => {
               id="intro"
               icon={<Lightbulb className="w-5 h-5" />}
               iconColor="#facc15"
-              label="🚀 Apa Itu Dilatasi? Kenalan Dulu, Yuk!"
+              label={dt.introLabel}
             />
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Pernah melihat foto yang diperbesar atau diperkecil di HP kamu? Atau mungkin kamu pernah memakai
-                  aplikasi maps yang bisa di-zoom in dan zoom out? Nah, konsep di balik itu semua adalah <strong className="text-cyan-300">Dilatasi</strong>!
+                  {dt.introP1}
                 </p>
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-cyan-200 leading-relaxed">
-                    Dalam matematika, dilatasi adalah jenis transformasi yang mengubah ukuran bangun (memperbesar
-                    atau memperkecil), tetapi <strong>tidak mengubah bentuknya</strong>. Bangun asal dan hasil
-                    dilatasi selalu <strong>sebangun (similar)</strong> — sudut-sudutnya tetap sama, hanya sisinya
-                    yang berubah panjangnya. 🔭
+                    {dt.introP2}
                   </p>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
-                    <strong>Kata Kunci:</strong> Dilatasi ditentukan oleh dua hal utama:{" "}
-                    <strong className="text-yellow-300">Pusat Dilatasi</strong> (titik acuan) dan{" "}
-                    <strong className="text-yellow-300">Faktor Skala k</strong> (besar/kecilnya perubahan ukuran).
+                    {dt.introP3}
                   </p>
                 </div>
               </div>
@@ -1966,7 +1999,7 @@ const DilatasisPage = () => {
                 {/* Mudah */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeMudah}</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
@@ -2010,7 +2043,7 @@ const DilatasisPage = () => {
                 {/* Sedang */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeSedang}</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
@@ -2052,7 +2085,7 @@ const DilatasisPage = () => {
                 {/* Sulit */}
                 <div className="border-l-4 border-red-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeSulit}</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
@@ -2201,7 +2234,7 @@ const DilatasisPage = () => {
                 {/* Mudah */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeMudah}</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
@@ -2226,7 +2259,7 @@ const DilatasisPage = () => {
                 {/* Sedang */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeSedang}</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
@@ -2324,7 +2357,7 @@ const DilatasisPage = () => {
                 {/* Sulit */}
                 <div className="border-l-4 border-red-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeSulit}</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
@@ -2475,7 +2508,7 @@ const DilatasisPage = () => {
                 {/* ── MUDAH ── */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">MUDAH</span>
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeMudah}</span>
                     <span className="font-body font-semibold text-white">Contoh 1</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
@@ -2517,7 +2550,7 @@ const DilatasisPage = () => {
                 {/* ── SEDANG ── */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">SEDANG</span>
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeSedang}</span>
                     <span className="font-body font-semibold text-white">Contoh 2</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
@@ -2563,7 +2596,7 @@ const DilatasisPage = () => {
                 {/* ── SULIT ── */}
                 <div className="border-l-4 border-red-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">SULIT</span>
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeSulit}</span>
                     <span className="font-body font-semibold text-white">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
@@ -2616,7 +2649,7 @@ const DilatasisPage = () => {
                 {/* ── EKSTRA ── */}
                 <div className="border-l-4 border-purple-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-purple-500/20 text-purple-400 text-xs font-bold px-2 py-1 rounded">EKSTRA</span>
+                    <span className="bg-purple-500/20 text-purple-400 text-xs font-bold px-2 py-1 rounded">{dt.badgeEkstra}</span>
                     <span className="font-body font-semibold text-white">Contoh 4</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
