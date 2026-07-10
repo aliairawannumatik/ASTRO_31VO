@@ -283,17 +283,83 @@ function dilatePt(x: number, y: number, a: number, b: number, k: number): [numbe
   return [a + k * (x - a), b + k * (y - b)];
 }
 
-function kLabel(k: number) {
-  if (k > 1)        return { text: `k = ${k} — Diperbesar`, color: "#4ade80" };
-  if (k === 1)      return { text: `k = 1 — Tidak berubah`, color: "#94a3b8" };
-  if (k > 0)        return { text: `k = ${k} — Diperkecil`, color: "#facc15" };
-  if (k === -1)     return { text: `k = −1 — Dibalik (sama besar)`, color: "#fb923c" };
-  if (k > -1)       return { text: `k = ${k} — Diperkecil & Dibalik`, color: "#fb923c" };
-  return            { text: `k = ${k} — Diperbesar & Dibalik`, color: "#f87171" };
+type DLang = "id" | "en" | "ja";
+
+const ANIM_I18N = {
+  titikDilatasi: { id: "📍 Animasi Interaktif — Dilatasi Titik", en: "📍 Interactive Animation — Dilation of a Point", ja: "📍 インタラクティブアニメーション — 点の拡大縮小" },
+  bangunDilatasi: { id: "🔭 Animasi Interaktif — Dilatasi Bangun Datar", en: "🔭 Interactive Animation — Dilation of a Plane Figure", ja: "🔭 インタラクティブアニメーション — 平面図形の拡大縮小" },
+  kurvaDilatasi: { id: "📈 Animasi Interaktif — Dilatasi Kurva Linear", en: "📈 Interactive Animation — Dilation of a Linear Curve", ja: "📈 インタラクティブアニメーション — 直線の拡大縮小" },
+  titikDidilatasi: { id: "Titik yang Didilatasi", en: "Point to Be Dilated", ja: "拡大縮小する点" },
+  faktorSkalaK: { id: "Faktor Skala k", en: "Scale Factor k", ja: "拡大率 k" },
+  lainnya: { id: "Lainnya…", en: "Other…", ja: "その他…" },
+  pusatDilatasi: { id: "Pusat Dilatasi", en: "Center of Dilation", ja: "拡大縮小の中心" },
+  titikAB: { id: "Titik (a, b)", en: "Point (a, b)", ja: "点 (a, b)" },
+  mendilatasi: { id: "⏳ Mendilatasi…", en: "⏳ Dilating…", ja: "⏳ 拡大縮小中…" },
+  dilatasikan: { id: "🔭 Dilatasikan!", en: "🔭 Dilate!", ja: "🔭 拡大縮小する！" },
+  reset: { id: "Reset", en: "Reset", ja: "リセット" },
+  titikLabel: { id: "Titik:", en: "Point:", ja: "点：" },
+  pusatLabel: { id: "Pusat:", en: "Center:", ja: "中心：" },
+  slowMotionTitik: { id: "⏳ Slow-motion dilatasi titik…", en: "⏳ Slow-motion point dilation…", ja: "⏳ スローモーションで点を拡大縮小中…" },
+  slowMotionBangun: { id: "⏳ Slow-motion dilatasi…", en: "⏳ Slow-motion dilation…", ja: "⏳ スローモーションで拡大縮小中…" },
+  slowMotionGaris: { id: "⏳ Slow-motion dilatasi garis…", en: "⏳ Slow-motion line dilation…", ja: "⏳ スローモーションで直線を拡大縮小中…" },
+  hasilDilatasiTitik: { id: "Hasil Dilatasi Titik:", en: "Point Dilation Result:", ja: "点の拡大縮小の結果：" },
+  hasilDilatasi: { id: "Hasil Dilatasi:", en: "Dilation Result:", ja: "拡大縮小の結果：" },
+  rumusLabel: { id: "Rumus:", en: "Formula:", ja: "公式：" },
+  keteranganVisual: { id: "💡 Keterangan visual:", en: "💡 Visual notes:", ja: "💡 図の説明：" },
+  titikBiruAsli: { id: "Titik biru = P asli (tidak bergerak)", en: "Blue point = original P (does not move)", ja: "青い点 = 元の点 P（動かない）" },
+  titikBerwarnaBayangan: { id: "Titik berwarna = P' bergerak perlahan ke posisi bayangan", en: "Colored point = P' moves slowly to the image position", ja: "色のついた点 = P' がゆっくりと像の位置へ移動する" },
+  garisKuningSinar: { id: "Garis kuning = sinar dari pusat dilatasi", en: "Yellow line = ray from the center of dilation", ja: "黄色い線 = 拡大縮小の中心からの光線" },
+  jarakKePusat: { id: "Jarak ke pusat:", en: "Distance to center:", ja: "中心までの距離：" },
+  asliABC: { id: "Asli (△ABC)", en: "Original (△ABC)", ja: "元の図形 (△ABC)" },
+  bayanganABC: { id: "Bayangan (△A'B'C')", en: "Image (△A'B'C')", ja: "像 (△A'B'C')" },
+  pusatSinarLegend: { id: "Pusat & sinar", en: "Center & rays", ja: "中心と光線" },
+  titikPAsliLegend: { id: "Titik P asli", en: "Original point P", ja: "元の点 P" },
+  titikPBayanganLegend: { id: "Titik P' bayangan", en: "Image point P'", ja: "像の点 P'" },
+  segitigaBiruAsli: { id: "Segitiga biru = △ABC asli", en: "Blue triangle = original △ABC", ja: "青い三角形 = 元の図形 △ABC" },
+  segitigaBerwarnaBayangan: { id: "Segitiga berwarna = △A'B'C' bayangan", en: "Colored triangle = image △A'B'C'", ja: "色のついた三角形 = 像 △A'B'C'" },
+  garisKuningSinarTitik: { id: "Garis kuning = sinar dari pusat ke titik", en: "Yellow line = ray from the center to the point", ja: "黄色い線 = 中心から点への光線" },
+  animasiSlowMotionNote: { id: "Animasi slow-motion: bangun membesar/mengecil perlahan", en: "Slow-motion animation: the shape slowly grows or shrinks", ja: "スローモーションアニメーション：図形がゆっくり拡大・縮小する" },
+  rumusAP: { id: "Rumus:", en: "Formula:", ja: "公式：" },
+  ketikPersamaan: { id: "✏️ Ketik Persamaan Garis", en: "✏️ Type the Line Equation", ja: "✏️ 直線の方程式を入力" },
+  contohPlaceholder: { id: "Contoh: y = 2x + 3  atau  3x + 2y = 6", en: "Example: y = 2x + 3  or  3x + 2y = 6", ja: "例：y = 2x + 3  または  3x + 2y = 6" },
+  terbaca: { id: "✅ Terbaca:", en: "✅ Recognized:", ja: "✅ 認識結果：" },
+  formatTidakDikenali: { id: "❌ Format tidak dikenali. Coba:", en: "❌ Format not recognized. Try:", ja: "❌ 形式が認識できません。次の形式を試してください：" },
+  mendukung: { id: "Mendukung:", en: "Supports:", ja: "対応形式：" },
+  atauInputManual: { id: "atau Input Manual", en: "or Manual Input", ja: "または手動入力" },
+  persamaanTidakValid: { id: "Persamaan tidak valid.", en: "The equation is not valid.", ja: "方程式が無効です。" },
+  garisAsliLegend: { id: "Garis asli", en: "Original line", ja: "元の直線" },
+  pusatDilatasiLegend: { id: "Pusat dilatasi", en: "Center of dilation", ja: "拡大縮小の中心" },
+  bayanganLegend: { id: "Bayangan", en: "Image", ja: "像" },
+  keteranganLabel: { id: "Keterangan:", en: "Notes:", ja: "説明：" },
+  gradienTidakBerubah: { id: "tidak berubah", en: "unchanged", ja: "変化しない" },
+  caraPakai: { id: "💡 Cara pakai:", en: "💡 How to use:", ja: "💡 使い方：" },
+  step1: { id: "1. Masukkan persamaan garis", en: "1. Enter the line equation", ja: "1. 直線の方程式を入力する" },
+  step2: { id: "2. Pilih faktor skala k", en: "2. Choose the scale factor k", ja: "2. 拡大率 k を選ぶ" },
+  step3: { id: "3. Pilih pusat O(0,0) atau titik (a,b)", en: "3. Choose the center O(0,0) or a point (a,b)", ja: "3. 中心 O(0,0) または点 (a,b) を選ぶ" },
+  step4pre: { id: "4. Klik", en: "4. Click", ja: "4. " },
+  gradienTetapNote: { id: "⚡ Gradien selalu tetap — hanya intercept yang berubah!", en: "⚡ The gradient always stays the same — only the intercept changes!", ja: "⚡ 傾きは常に変わらず、切片だけが変化します！" },
+} as const;
+
+function kLabel(k: number, lang: DLang = "id") {
+  const memperbesar = { id: "Diperbesar", en: "Enlarged", ja: "拡大" }[lang];
+  const tidakBerubah = { id: "Tidak berubah", en: "Unchanged", ja: "変化なし" }[lang];
+  const diperkecil = { id: "Diperkecil", en: "Reduced", ja: "縮小" }[lang];
+  const dibalikSamaBesar = { id: "Dibalik (sama besar)", en: "Reflected (same size)", ja: "反転（大きさは同じ）" }[lang];
+  const diperkecilDibalik = { id: "Diperkecil & Dibalik", en: "Reduced & Reflected", ja: "縮小＆反転" }[lang];
+  const diperbesarDibalik = { id: "Diperbesar & Dibalik", en: "Enlarged & Reflected", ja: "拡大＆反転" }[lang];
+
+  if (k > 1)        return { text: `k = ${k} — ${memperbesar}`, color: "#4ade80" };
+  if (k === 1)      return { text: `k = 1 — ${tidakBerubah}`, color: "#94a3b8" };
+  if (k > 0)        return { text: `k = ${k} — ${diperkecil}`, color: "#facc15" };
+  if (k === -1)     return { text: `k = −1 — ${dibalikSamaBesar}`, color: "#fb923c" };
+  if (k > -1)       return { text: `k = ${k} — ${diperkecilDibalik}`, color: "#fb923c" };
+  return            { text: `k = ${k} — ${diperbesarDibalik}`, color: "#f87171" };
 }
 
 /* ── Animasi Interaktif Dilatasi TITIK ── */
 function AnimasiDilatasiTitik() {
+  const { language } = useLanguage();
+  const L = ANIM_I18N;
   const [kPreset, setKPreset] = useState<number | "custom">(2);
   const [inputK, setInputK] = useState("2");
   const [centerType, setCenterType] = useState<"origin" | "custom">("origin");
@@ -318,7 +384,7 @@ function AnimasiDilatasiTitik() {
   const [resX, resY]: [number, number] = [ca + k * (ptX - ca), cb + k * (ptY - cb)];
   const showResult = show || isAnimating;
 
-  const { text: kText, color: kColor } = kLabel(k);
+  const { text: kText, color: kColor } = kLabel(k, language);
   const resultColor = k >= 1 ? "#4ade80" : k > 0 ? "#facc15" : k > -1 ? "#fb923c" : "#f87171";
   const boxFill    = k > 1  ? "#16a34a" : k > 0 ? "#ca8a04" : k > -1 ? "#ea580c" : "#dc2626";
 
@@ -366,11 +432,11 @@ function AnimasiDilatasiTitik() {
 
   return (
     <div className="space-y-4 pt-2">
-      <p className="text-yellow-300 font-bold text-sm font-body">📍 Animasi Interaktif — Dilatasi Titik</p>
+      <p className="text-yellow-300 font-bold text-sm font-body">{L.titikDilatasi[language]}</p>
 
       {/* Input titik P */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Titik yang Didilatasi</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">{L.titikDidilatasi[language]}</p>
         <div className="flex items-center gap-3 flex-wrap">
           <span className="text-sm font-bold font-body text-yellow-300">P =</span>
           <span className="text-sm text-white/60 font-body">(</span>
@@ -395,7 +461,7 @@ function AnimasiDilatasiTitik() {
 
       {/* Pilih k */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Faktor Skala k</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">{L.faktorSkalaK[language]}</p>
         <div className="flex gap-2 flex-wrap">
           {K_PRESETS.map(({ label, value }) => (
             <button key={label}
@@ -413,7 +479,7 @@ function AnimasiDilatasiTitik() {
                 ? "bg-violet-500 border-violet-400 text-white shadow-lg"
                 : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"
             }`}
-          >Lainnya…</button>
+          >{L.lainnya[language]}</button>
         </div>
         {kPreset === "custom" && (
           <div className="flex items-center gap-3 pt-1">
@@ -429,7 +495,7 @@ function AnimasiDilatasiTitik() {
 
       {/* Pilih pusat */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Dilatasi</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">{L.pusatDilatasi[language]}</p>
         <div className="flex gap-2">
           {(["origin", "custom"] as const).map(c => (
             <button key={c}
@@ -439,7 +505,7 @@ function AnimasiDilatasiTitik() {
                   ? "bg-yellow-500/80 border-yellow-400 text-white shadow-md"
                   : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"
               }`}
-            >{c === "origin" ? "O(0, 0)" : "Titik (a, b)"}</button>
+            >{c === "origin" ? "O(0, 0)" : L.titikAB[language]}</button>
           ))}
         </div>
         {centerType === "custom" && (
@@ -521,17 +587,17 @@ function AnimasiDilatasiTitik() {
           <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2 justify-center text-xs font-body">
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-0.5 rounded bg-cyan-400 inline-block" />
-              <span className="text-cyan-300">Titik P asli</span>
+              <span className="text-cyan-300">{L.titikPAsliLegend[language]}</span>
             </div>
             {showResult && (
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-0.5 rounded inline-block" style={{ background: resultColor }} />
-                <span style={{ color: resultColor }}>Titik P' bayangan</span>
+                <span style={{ color: resultColor }}>{L.titikPBayanganLegend[language]}</span>
               </div>
             )}
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-0.5 rounded bg-yellow-400 inline-block" />
-              <span className="text-yellow-300">Pusat & sinar</span>
+              <span className="text-yellow-300">{L.pusatSinarLegend[language]}</span>
             </div>
           </div>
         </div>
@@ -546,29 +612,29 @@ function AnimasiDilatasiTitik() {
                   ? "opacity-50 cursor-not-allowed bg-slate-600"
                   : "bg-yellow-500 hover:bg-yellow-400 text-white shadow-lg shadow-yellow-500/30"
               }`}
-            >{isAnimating ? "⏳ Mendilatasi…" : "🔭 Dilatasikan!"}</button>
+            >{isAnimating ? L.mendilatasi[language] : L.dilatasikan[language]}</button>
             <button onClick={reset}
               className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
-            >Reset</button>
+            >{L.reset[language]}</button>
           </div>
 
           <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
             <p className="font-bold text-sm" style={{ color: kColor }}>{kText}</p>
-            <p className="text-white/50">Titik: P({ptX}, {ptY})</p>
-            <p className="text-white/50">Pusat: {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
-            {isAnimating && <p className="text-yellow-400 font-semibold animate-pulse">⏳ Slow-motion dilatasi titik…</p>}
+            <p className="text-white/50">{L.titikLabel[language]} P({ptX}, {ptY})</p>
+            <p className="text-white/50">{L.pusatLabel[language]} {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
+            {isAnimating && <p className="text-yellow-400 font-semibold animate-pulse">{L.slowMotionTitik[language]}</p>}
           </div>
 
           {show && !isAnimating && (
             <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-3 space-y-2">
-              <p className="text-xs font-bold text-yellow-300 font-body uppercase">Hasil Dilatasi Titik:</p>
+              <p className="text-xs font-bold text-yellow-300 font-body uppercase">{L.hasilDilatasiTitik[language]}</p>
               <div className="flex items-center gap-2 text-sm font-body flex-wrap">
                 <span className="text-cyan-300 font-semibold">P({ptX}, {ptY})</span>
                 <span className="text-white/30 text-lg">→</span>
                 <span className="font-bold text-base" style={{ color: resultColor }}>P'({rx_}, {ry_})</span>
               </div>
               <p className="text-xs text-white/40 font-body">
-                Rumus: <span className="text-white/70">x' = {ca} + {k}×({ptX}−{ca}) = {rx_}</span>
+                {L.rumusLabel[language]} <span className="text-white/70">x' = {ca} + {k}×({ptX}−{ca}) = {rx_}</span>
               </p>
               <p className="text-xs text-white/40 font-body">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -578,11 +644,11 @@ function AnimasiDilatasiTitik() {
           )}
 
           <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5 w-full overflow-hidden">
-            <p className="text-yellow-300 font-semibold">💡 Keterangan visual:</p>
-            <p>— <span className="text-cyan-400">Titik biru</span> = P asli (tidak bergerak)</p>
-            <p>— <span style={{ color: resultColor }}>Titik berwarna</span> = P' bergerak perlahan ke posisi bayangan</p>
-            <p>— <span className="text-yellow-400">Garis kuning</span> = sinar dari pusat dilatasi</p>
-            <p>— Jarak ke pusat: <strong className="text-white/70">k × OP</strong></p>
+            <p className="text-yellow-300 font-semibold">{L.keteranganVisual[language]}</p>
+            <p>— <span className="text-cyan-400">{L.titikBiruAsli[language]}</span></p>
+            <p>— <span style={{ color: resultColor }}>{L.titikBerwarnaBayangan[language]}</span></p>
+            <p>— <span className="text-yellow-400">{L.garisKuningSinar[language]}</span></p>
+            <p>— {L.jarakKePusat[language]} <strong className="text-white/70">k × OP</strong></p>
           </div>
         </div>
       </div>
@@ -591,6 +657,8 @@ function AnimasiDilatasiTitik() {
 }
 
 function AnimasiDilatasi() {
+  const { language } = useLanguage();
+  const L = ANIM_I18N;
   const [kPreset, setKPreset] = useState<number | "custom">(2);
   const [inputK, setInputK] = useState("2");
   const [centerType, setCenterType] = useState<"origin" | "custom">("origin");
@@ -613,7 +681,7 @@ function AnimasiDilatasi() {
   const targetPts  = D_ORIG.map(([x, y]) => dilatePt(x, y, ca, cb, k)    as [number, number]);
   const showResult = show || isAnimating;
 
-  const { text: kText, color: kColor } = kLabel(k);
+  const { text: kText, color: kColor } = kLabel(k, language);
 
   const resultColor = k >= 1 ? "#4ade80" : k > 0 ? "#facc15" : k > -1 ? "#fb923c" : "#f87171";
   const accentColor = resultColor;
@@ -653,11 +721,11 @@ function AnimasiDilatasi() {
 
   return (
     <div className="space-y-4 pt-2">
-      <p className="text-emerald-300 font-bold text-sm font-body">🔭 Animasi Interaktif — Dilatasi Bangun Datar</p>
+      <p className="text-emerald-300 font-bold text-sm font-body">{L.bangunDilatasi[language]}</p>
 
       {/* Pilih faktor k */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Faktor Skala k</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">{L.faktorSkalaK[language]}</p>
         <div className="flex gap-2 flex-wrap">
           {K_PRESETS.map(({ label, value }) => (
             <button key={label}
@@ -676,7 +744,7 @@ function AnimasiDilatasi() {
                 ? "bg-violet-500 border-violet-400 text-white shadow-lg"
                 : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"
             }`}
-          >Lainnya…</button>
+          >{L.lainnya[language]}</button>
         </div>
         {kPreset === "custom" && (
           <div className="flex items-center gap-3 pt-1">
@@ -693,7 +761,7 @@ function AnimasiDilatasi() {
 
       {/* Pilih pusat */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Dilatasi</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">{L.pusatDilatasi[language]}</p>
         <div className="flex gap-2">
           {(["origin", "custom"] as const).map(c => (
             <button key={c}
@@ -703,7 +771,7 @@ function AnimasiDilatasi() {
                   ? "bg-yellow-500/80 border-yellow-400 text-white shadow-md"
                   : "bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90"
               }`}
-            >{c === "origin" ? "O(0, 0)" : "Titik (a, b)"}</button>
+            >{c === "origin" ? "O(0, 0)" : L.titikAB[language]}</button>
           ))}
         </div>
         {centerType === "custom" && (
@@ -789,17 +857,17 @@ function AnimasiDilatasi() {
           <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2 justify-center text-xs font-body">
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-0.5 rounded bg-cyan-400 inline-block" />
-              <span className="text-cyan-300">Asli (△ABC)</span>
+              <span className="text-cyan-300">{L.asliABC[language]}</span>
             </div>
             {showResult && (
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-0.5 rounded inline-block" style={{ background: resultColor }} />
-                <span style={{ color: resultColor }}>Bayangan (△A'B'C')</span>
+                <span style={{ color: resultColor }}>{L.bayanganABC[language]}</span>
               </div>
             )}
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-0.5 rounded bg-yellow-400 inline-block" />
-              <span className="text-yellow-300">Pusat & sinar</span>
+              <span className="text-yellow-300">{L.pusatSinarLegend[language]}</span>
             </div>
           </div>
         </div>
@@ -815,23 +883,23 @@ function AnimasiDilatasi() {
                   ? "opacity-50 cursor-not-allowed bg-slate-600"
                   : "bg-emerald-500 hover:bg-emerald-400 text-white shadow-lg shadow-emerald-500/30"
               }`}
-            >{isAnimating ? "⏳ Mendilatasi…" : "🔭 Dilatasikan!"}</button>
+            >{isAnimating ? L.mendilatasi[language] : L.dilatasikan[language]}</button>
             <button onClick={reset}
               className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all"
-            >Reset</button>
+            >{L.reset[language]}</button>
           </div>
 
           {/* Bingkai info */}
           <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
             <p className="font-bold text-sm" style={{ color: kColor }}>{kText}</p>
-            <p className="text-white/50">Pusat: {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
-            {isAnimating && <p className="text-emerald-400 font-semibold animate-pulse">⏳ Slow-motion dilatasi…</p>}
+            <p className="text-white/50">{L.pusatLabel[language]} {centerType === "origin" ? "O(0, 0)" : `(${ca}, ${cb})`}</p>
+            {isAnimating && <p className="text-emerald-400 font-semibold animate-pulse">{L.slowMotionBangun[language]}</p>}
           </div>
 
           {/* Hasil */}
           {show && !isAnimating && (
             <div className="bg-slate-700/40 rounded-xl p-3 space-y-2">
-              <p className="text-xs font-bold text-white/60 font-body uppercase">Hasil Dilatasi:</p>
+              <p className="text-xs font-bold text-white/60 font-body uppercase">{L.hasilDilatasi[language]}</p>
               {D_ORIG.map(([x, y], i) => {
                 const [rx, ry] = targetPts[i];
                 const rx_ = Math.round(rx * 100) / 100;
@@ -849,12 +917,12 @@ function AnimasiDilatasi() {
 
           {/* Petunjuk */}
           <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5 w-full overflow-hidden">
-            <p className="text-emerald-300 font-semibold">💡 Keterangan visual:</p>
-            <p>— <span className="text-cyan-400">Segitiga biru</span> = △ABC asli</p>
-            <p>— <span style={{ color: resultColor }}>Segitiga berwarna</span> = △A'B'C' bayangan</p>
-            <p>— <span className="text-yellow-400">Garis kuning</span> = sinar dari pusat ke titik</p>
-            <p>— Animasi <strong className="text-white">slow-motion</strong>: bangun membesar/mengecil perlahan</p>
-            <p>— Rumus: <strong className="text-white/70">A'(a+k·(x−a), b+k·(y−b))</strong></p>
+            <p className="text-emerald-300 font-semibold">{L.keteranganVisual[language]}</p>
+            <p>— <span className="text-cyan-400">{L.segitigaBiruAsli[language]}</span></p>
+            <p>— <span style={{ color: resultColor }}>{L.segitigaBerwarnaBayangan[language]}</span></p>
+            <p>— <span className="text-yellow-400">{L.garisKuningSinarTitik[language]}</span></p>
+            <p>— {L.animasiSlowMotionNote[language]}</p>
+            <p>— {L.rumusAP[language]} <strong className="text-white/70">A'(a+k·(x−a), b+k·(y−b))</strong></p>
           </div>
         </div>
       </div>
@@ -1328,6 +1396,8 @@ function parseLineEq(raw: string): { m: number; cLine: number } | null {
 }
 
 function AnimasiDilatasiKurvaLinear() {
+  const { language } = useLanguage();
+  const L = ANIM_I18N;
   const [inputType, setInputType] = useState<'text' | 'slope' | 'general'>('text');
   const [freeText,  setFreeText]  = useState('y = x + 2');
   const [inputM,  setInputM]  = useState('1');
@@ -1384,7 +1454,7 @@ function AnimasiDilatasiKurvaLinear() {
 
   const accentColor = k >= 1 ? '#4ade80' : k > 0 ? '#facc15' : k > -1 ? '#fb923c' : '#f87171';
   const boxFill     = k >  1 ? '#16a34a' : k > 0 ? '#ca8a04' : k > -1 ? '#ea580c' : '#dc2626';
-  const { text: kText, color: kColor } = kLabel(k);
+  const { text: kText, color: kColor } = kLabel(k, language);
 
   const easeOut = (v: number) => 1 - Math.pow(1 - v, 3);
 
@@ -1422,17 +1492,17 @@ function AnimasiDilatasiKurvaLinear() {
 
   return (
     <div className="space-y-4 pt-2">
-      <p className="text-orange-300 font-bold text-sm font-body">📈 Animasi Interaktif — Dilatasi Kurva Linear</p>
+      <p className="text-orange-300 font-bold text-sm font-body">{L.kurvaDilatasi[language]}</p>
 
       {/* ── Input teks bebas ── */}
       <div className="bg-slate-800/70 border border-orange-500/30 rounded-xl p-3 space-y-2">
-        <p className="text-xs font-body font-semibold text-orange-300">✏️ Ketik Persamaan Garis</p>
+        <p className="text-xs font-body font-semibold text-orange-300">{L.ketikPersamaan[language]}</p>
         <input
           type="text"
           value={freeText}
           onChange={e => chg(() => { setFreeText(e.target.value); setInputType('text'); })}
           onFocus={() => chg(() => setInputType('text'))}
-          placeholder="Contoh: y = 2x + 3  atau  3x + 2y = 6"
+          placeholder={L.contohPlaceholder[language]}
           className={`w-full bg-slate-900/80 border rounded-lg px-3 py-2 text-sm text-white font-mono focus:outline-none transition-all ${
             inputType === 'text' && freeText
               ? textParsed
@@ -1445,7 +1515,7 @@ function AnimasiDilatasiKurvaLinear() {
         {inputType === 'text' && freeText && (
           textParsed ? (
             <div className="flex items-center gap-2 text-xs font-body flex-wrap">
-              <span className="text-green-400">✅ Terbaca:</span>
+              <span className="text-green-400">{L.terbaca[language]}</span>
               <span className="font-mono text-white bg-green-500/10 border border-green-500/30 rounded px-2 py-0.5">
                 m = {Math.round(textParsed.m * 1000) / 1000}
               </span>
@@ -1456,18 +1526,18 @@ function AnimasiDilatasiKurvaLinear() {
             </div>
           ) : (
             <p className="text-xs text-red-400 font-body">
-              ❌ Format tidak dikenali. Coba: <span className="font-mono">y = 2x + 3</span> atau <span className="font-mono">3x + 2y = 6</span> atau <span className="font-mono">2x - y + 1 = 0</span>
+              {L.formatTidakDikenali[language]} <span className="font-mono">y = 2x + 3</span> · <span className="font-mono">3x + 2y = 6</span> · <span className="font-mono">2x - y + 1 = 0</span>
             </p>
           )
         )}
         <p className="text-xs text-white/40 font-body">
-          Mendukung: <span className="font-mono text-white/60">y = mx + c</span> · <span className="font-mono text-white/60">ax + by = c</span> · <span className="font-mono text-white/60">ax + by + c = 0</span>
+          {L.mendukung[language]} <span className="font-mono text-white/60">y = mx + c</span> · <span className="font-mono text-white/60">ax + by = c</span> · <span className="font-mono text-white/60">ax + by + c = 0</span>
         </p>
       </div>
 
       {/* Bentuk garis (input angka manual) */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">atau Input Manual</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">{L.atauInputManual[language]}</p>
         <div className="flex gap-2 flex-wrap">
           {(['slope', 'general'] as const).map(tp => (
             <button key={tp} onClick={() => chg(() => setInputType(tp))}
@@ -1501,13 +1571,13 @@ function AnimasiDilatasiKurvaLinear() {
           </div>
         )}
         {!isValid && (inputType === 'slope' || inputType === 'general') && (
-          <p className="text-xs text-red-400 font-body">Persamaan tidak valid.</p>
+          <p className="text-xs text-red-400 font-body">{L.persamaanTidakValid[language]}</p>
         )}
       </div>
 
       {/* Faktor k */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Faktor Skala k</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">{L.faktorSkalaK[language]}</p>
         <div className="flex gap-2 flex-wrap">
           {K_PRESETS.map(({ label, value }) => (
             <button key={label} onClick={() => chg(() => { setKPreset(value); setInputK(String(value)); })}
@@ -1522,7 +1592,7 @@ function AnimasiDilatasiKurvaLinear() {
             className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
               kPreset === 'custom' ? 'bg-violet-500 border-violet-400 text-white shadow-lg' : 'bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90'
             }`}
-          >Lainnya…</button>
+          >{L.lainnya[language]}</button>
         </div>
         {kPreset === 'custom' && (
           <div className="flex items-center gap-3 pt-1">
@@ -1536,14 +1606,14 @@ function AnimasiDilatasiKurvaLinear() {
 
       {/* Pusat dilatasi */}
       <div className="space-y-1.5">
-        <p className="text-xs font-body text-white/50 uppercase tracking-wide">Pusat Dilatasi</p>
+        <p className="text-xs font-body text-white/50 uppercase tracking-wide">{L.pusatDilatasi[language]}</p>
         <div className="flex gap-2">
           {(['origin', 'custom'] as const).map(c => (
             <button key={c} onClick={() => chg(() => setCenterType(c))}
               className={`px-3 py-1.5 rounded-lg text-sm font-bold font-body transition-all border ${
                 centerType === c ? 'bg-yellow-500/80 border-yellow-400 text-white shadow-md' : 'bg-slate-700/60 border-slate-600 text-white/60 hover:text-white/90'
               }`}
-            >{c === 'origin' ? 'O(0, 0)' : 'Titik (a, b)'}</button>
+            >{c === 'origin' ? 'O(0, 0)' : L.titikAB[language]}</button>
           ))}
         </div>
         {centerType === 'custom' && (
@@ -1635,9 +1705,9 @@ function AnimasiDilatasiKurvaLinear() {
 
           {/* Legenda */}
           <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 justify-center text-xs font-body">
-            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">Garis asli</span></div>
-            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" /><span className="text-yellow-300">Pusat dilatasi</span></div>
-            {showingResult && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accentColor }} /><span style={{ color: accentColor }}>Bayangan</span></div>}
+            <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 bg-cyan-400 inline-block rounded" /><span className="text-cyan-300">{L.garisAsliLegend[language]}</span></div>
+            <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-400 inline-block" /><span className="text-yellow-300">{L.pusatDilatasiLegend[language]}</span></div>
+            {showingResult && <div className="flex items-center gap-1.5"><span className="w-4 h-0.5 inline-block rounded" style={{ background: accentColor }} /><span style={{ color: accentColor }}>{L.bayanganLegend[language]}</span></div>}
           </div>
         </div>
 
@@ -1649,19 +1719,19 @@ function AnimasiDilatasiKurvaLinear() {
                 isAnimating || !isValid ? 'opacity-50 cursor-not-allowed bg-slate-600 text-white' : 'text-white shadow-lg'
               }`}
               style={!isAnimating && isValid ? { background: '#f97316', boxShadow: '0 4px 14px #f9731655' } : {}}
-            >{isAnimating ? '⏳ Mendilatasi…' : '🔭 Dilatasikan!'}</button>
-            <button onClick={reset} className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all">Reset</button>
+            >{isAnimating ? L.mendilatasi[language] : L.dilatasikan[language]}</button>
+            <button onClick={reset} className="px-4 py-2.5 rounded-xl font-bold text-sm font-body bg-slate-700 hover:bg-slate-600 text-white/70 transition-all">{L.reset[language]}</button>
           </div>
 
           <div className="bg-slate-700/40 rounded-xl p-3 space-y-1 text-xs font-body">
             <p className="font-bold text-sm" style={{ color: kColor }}>{kText}</p>
-            <p className="text-white/50">Pusat: {centerType === 'origin' ? 'O(0, 0)' : `(${cx}, ${cy})`}</p>
-            {isAnimating && <p className="animate-pulse font-semibold text-orange-300">⏳ Slow-motion dilatasi garis…</p>}
+            <p className="text-white/50">{L.pusatLabel[language]} {centerType === 'origin' ? 'O(0, 0)' : `(${cx}, ${cy})`}</p>
+            {isAnimating && <p className="animate-pulse font-semibold text-orange-300">{L.slowMotionGaris[language]}</p>}
           </div>
 
           {show && !isAnimating && isValid && (
             <div className="bg-slate-700/40 rounded-xl p-3 space-y-2">
-              <p className="text-xs font-bold text-white/60 font-body uppercase">Hasil Dilatasi:</p>
+              <p className="text-xs font-bold text-white/60 font-body uppercase">{L.hasilDilatasi[language]}</p>
               <div className="flex items-center gap-2 text-sm font-body flex-wrap">
                 <span className="text-cyan-300 font-mono text-xs">{inputLabel}</span>
                 <span className="text-white/30">→</span>
@@ -1672,8 +1742,8 @@ function AnimasiDilatasiKurvaLinear() {
               </div>
               {!isVert && (
                 <div className="bg-slate-800/60 rounded-lg p-2 text-xs font-body text-white/60 space-y-0.5">
-                  <p className="text-orange-300 font-semibold">Keterangan:</p>
-                  <p>• Gradien (m) = <span className="text-white">{Math.round(m * 1000) / 1000}</span> <span className="text-green-300">tidak berubah</span></p>
+                  <p className="text-orange-300 font-semibold">{L.keteranganLabel[language]}</p>
+                  <p>• Gradien (m) = <span className="text-white">{Math.round(m * 1000) / 1000}</span> <span className="text-green-300">{L.gradienTidakBerubah[language]}</span></p>
                   <p>• c asli = <span className="text-cyan-300">{Math.round(cLine * 1000) / 1000}</span></p>
                   <p>• c bayangan = k·c + (k−1)·(m·a − b)</p>
                   <p>  = {k}·{Math.round(cLine * 1000) / 1000} + ({k}−1)·({Math.round(m * 1000) / 1000}·{cx} − {cy})</p>
@@ -1684,12 +1754,12 @@ function AnimasiDilatasiKurvaLinear() {
           )}
 
           <div className="bg-slate-800/50 rounded-xl p-3 text-xs font-body text-white/50 space-y-1.5">
-            <p className="text-orange-300 font-semibold">💡 Cara pakai:</p>
-            <p>1. Masukkan persamaan garis</p>
-            <p>2. Pilih faktor skala k</p>
-            <p>3. Pilih pusat O(0,0) atau titik (a,b)</p>
-            <p>4. Klik <strong className="text-white">🔭 Dilatasikan!</strong></p>
-            <p className="text-orange-200/70 pt-1">⚡ Gradien selalu tetap — hanya intercept yang berubah!</p>
+            <p className="text-orange-300 font-semibold">{L.caraPakai[language]}</p>
+            <p>{L.step1[language]}</p>
+            <p>{L.step2[language]}</p>
+            <p>{L.step3[language]}</p>
+            <p>{L.step4pre[language]} <strong className="text-white">{L.dilatasikan[language]}</strong></p>
+            <p className="text-orange-200/70 pt-1">{L.gradienTetapNote[language]}</p>
           </div>
         </div>
       </div>
@@ -1724,6 +1794,7 @@ const dilatasiPageTranslations = {
   badgeSedang: { id: "SEDANG", en: "Medium", ja: "標準" },
   badgeSulit: { id: "SULIT", en: "Hard", ja: "発展" },
   badgeEkstra: { id: "EKSTRA", en: "Extra", ja: "発展問題" },
+  pembahasan: { id: "PEMBAHASAN:", en: "Solution:", ja: "解説：" },
 };
 
 const DilatasisPage = () => {
@@ -1740,6 +1811,7 @@ const DilatasisPage = () => {
     badgeSedang: dilatasiPageTranslations.badgeSedang[language],
     badgeSulit: dilatasiPageTranslations.badgeSulit[language],
     badgeEkstra: dilatasiPageTranslations.badgeEkstra[language],
+    pembahasan: dilatasiPageTranslations.pembahasan[language],
   };
   const expandedSections = [
     "intro", "animasi-titik", "animasi", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
@@ -2027,7 +2099,7 @@ const DilatasisPage = () => {
                     </div>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
                       <p><strong>Diketahui:</strong> <InlineMath math="A(3,\ 5)" />, pusat <InlineMath math="O(0,\ 0)" />, <InlineMath math="k = 2" /></p>
                       <p><strong>Gunakan rumus dilatasi pusat O(0,0):</strong></p>
@@ -2069,7 +2141,7 @@ const DilatasisPage = () => {
                     </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <p><strong>Gunakan rumus:</strong> <InlineMath math="Q'(kx,\ ky)" /></p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-2">
@@ -2139,7 +2211,7 @@ const DilatasisPage = () => {
                     </div>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <p>Perhatikan diagram. Pusat dilatasi adalah titik <InlineMath math="O" />. Bandingkan jarak titik-titik sudut dari pusat <InlineMath math="O" />:</p>
                       <div className="bg-slate-900/50 rounded p-3">
@@ -2244,7 +2316,7 @@ const DilatasisPage = () => {
                     </p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-2 font-body text-sm text-white/80">
                       <p>Diketahui: <InlineMath math="a=1,\ b=2,\ x=5,\ y=4,\ k=2" /></p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-2">
@@ -2270,7 +2342,7 @@ const DilatasisPage = () => {
                     </p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <p>Gunakan rumus dengan <InlineMath math="a=2,\ b=3,\ k=3" />:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-3">
@@ -2368,7 +2440,7 @@ const DilatasisPage = () => {
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <p><strong>Langkah 1:</strong> Tuliskan persamaan dari rumus dilatasi:</p>
                       <div className="bg-slate-900/50 rounded p-3 space-y-2">
@@ -2517,7 +2589,7 @@ const DilatasisPage = () => {
                     </p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-green-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-green-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <p><strong>Diketahui:</strong> <InlineMath math="y = 2x + 3" />, pusat <InlineMath math="O(0,0)" />, <InlineMath math="k = 2" /></p>
 
@@ -2559,7 +2631,7 @@ const DilatasisPage = () => {
                     </p>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-yellow-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-3 font-body text-sm text-white/80">
                       <p><strong>Diketahui:</strong> garis <InlineMath math="3x - y - 4 = 0" />, pusat <InlineMath math="P(2,1)" />, <InlineMath math="k = 3" /></p>
 
@@ -2605,7 +2677,7 @@ const DilatasisPage = () => {
                     </p>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-red-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-4 font-body text-sm text-white/80">
                       <p><strong>Diketahui:</strong> garis <InlineMath math="2x + y - 6 = 0" />, translasi <InlineMath math="T(3,-2)" />, lalu dilatasi <InlineMath math="[O(0,0),\,k=2]" /></p>
 
@@ -2658,7 +2730,7 @@ const DilatasisPage = () => {
                     </p>
                   </div>
                   <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-4">
-                    <p className="font-body text-xs font-semibold text-purple-400 mb-3">PEMBAHASAN:</p>
+                    <p className="font-body text-xs font-semibold text-purple-400 mb-3">{dt.pembahasan}</p>
                     <div className="space-y-4 font-body text-sm text-white/80">
                       <p><strong>Diketahui:</strong> garis <InlineMath math="x - 2y + 4 = 0" />, translasi <InlineMath math="T(-1,3)" />, lalu dilatasi <InlineMath math="[P(2,-1),\,k=3]" /></p>
 
