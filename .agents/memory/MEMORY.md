@@ -13,3 +13,4 @@
 - [SimilarityAnimation lang prop pattern](similarity-animation-lang.md) — shared animation components take `lang?: Language` (imported from LanguageContext, not redefined); page passes `lang={language}` directly without cast.
 - [RefleksiPage two-object translation pitfall](reflection-page-translation-bug.md) — some pages have both `t` (translations) and `g` (flat per-key) objects; add new keys to whichever the surrounding JSX already uses, or it crashes at runtime with no clear error.
 - [EKSTRA badge terminology](ekstra-badge-terminology.md) — EKSTRA (bonus/composite problem tier) translates to Extra/発展問題, distinct from MUDAH/SEDANG/SULIT.
+- [Dilatasi K9 trilingual complete](dilatasi-k9-trilingual.md) — DilatasisPage.tsx (animations, soal/pembahasan, rangkuman/tips/kesimpulan) fully id/en/ja; array items needing translated labels must switch `.map` key from label text to index to avoid duplicate-key warnings.

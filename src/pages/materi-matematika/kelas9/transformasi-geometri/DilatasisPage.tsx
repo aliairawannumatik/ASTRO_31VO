@@ -1795,6 +1795,88 @@ const dilatasiPageTranslations = {
   badgeSulit: { id: "SULIT", en: "Hard", ja: "発展" },
   badgeEkstra: { id: "EKSTRA", en: "Extra", ja: "発展問題" },
   pembahasan: { id: "PEMBAHASAN:", en: "Solution:", ja: "解説：" },
+
+  rangkumanDilatasiTitle: { id: "🌟 Rangkuman Dilatasi", en: "🌟 Dilation Summary", ja: "🌟 拡大・縮小のまとめ" },
+  colJenis: { id: "Jenis", en: "Type", ja: "種類" },
+  colRumusX: { id: "Rumus x'", en: "Formula x'", ja: "公式 x'" },
+  colRumusY: { id: "Rumus y'", en: "Formula y'", ja: "公式 y'" },
+  pusatO: { id: "Pusat O(0,0)", en: "Center O(0,0)", ja: "中心 O(0,0)" },
+  pusatP: { id: "Pusat P(a,b)", en: "Center P(a,b)", ja: "中心 P(a,b)" },
+  ingatRumusUmum: {
+    id: <>Ingat: rumus pusat <InlineMath math="P(a,b)" /> adalah rumus umum — substitusikan <InlineMath math="a=0, b=0" /> untuk mendapatkan rumus pusat <InlineMath math="O(0,0)" />.</>,
+    en: <>Remember: the formula for center <InlineMath math="P(a,b)" /> is the general formula — substitute <InlineMath math="a=0, b=0" /> to get the formula for center <InlineMath math="O(0,0)" />.</>,
+    ja: <>覚えておこう：中心 <InlineMath math="P(a,b)" /> の公式は一般式です — <InlineMath math="a=0, b=0" /> を代入すると中心 <InlineMath math="O(0,0)" /> の公式が得られます。</>,
+  },
+  kurvaLinearTitle: {
+    id: <>📈 Dilatasi Kurva Linear <InlineMath math="y = mx + c" />:</>,
+    en: <>📈 Dilation of Linear Curve <InlineMath math="y = mx + c" />:</>,
+    ja: <>📈 一次関数 <InlineMath math="y = mx + c" /> の拡大・縮小：</>,
+  },
+  colPusat: { id: "Pusat", en: "Center", ja: "中心" },
+  colGradienBayangan: { id: "Gradien bayangan", en: "Image gradient", ja: "像の傾き" },
+  colInterceptBayangan: { id: "Intercept bayangan c'", en: "Image intercept c'", ja: "像の切片 c'" },
+  gradienSelaluTetapNote: { id: "⚡ Gradien selalu tetap — hanya intercept yang berubah. Garis asli dan bayangan selalu sejajar!", en: "⚡ Gradient always stays the same — only the intercept changes. The original line and its image are always parallel!", ja: "⚡ 傾きは常に一定 — 変わるのは切片だけです。元の直線と像は常に平行です！" },
+
+  rangkumanTipsKesimpulanTitle: { id: "🎯 Rangkuman, Tips & Kesimpulan", en: "🎯 Summary, Tips & Conclusion", ja: "🎯 まとめ、コツと結論" },
+  rumusKunciTitle: { id: "📐 Rumus Kunci Dilatasi", en: "📐 Key Dilation Formulas", ja: "📐 拡大・縮小の重要公式" },
+  pusatOO: { id: "📌 Pusat O(0, 0)", en: "📌 Center O(0, 0)", ja: "📌 中心 O(0, 0)" },
+  faktorSkalaKet: { id: "k = faktor skala", en: "k = scale factor", ja: "k = 拡大率" },
+  pusatPab: { id: "📌 Pusat P(a, b)", en: "📌 Center P(a, b)", ja: "📌 中心 P(a, b)" },
+  geserSkalaBalikKet: { id: "Geser-skala-balik", en: "Shift-scale-shift back", ja: "移動→拡大縮小→戻す" },
+  jenisFaktorSkalaTitle: { id: "📌 Jenis faktor skala k", en: "📌 Types of scale factor k", ja: "📌 拡大率 k の種類" },
+  kGt1: { id: "Diperbesar, searah", en: "Enlarged, same direction", ja: "拡大・同じ向き" },
+  k0to1: { id: "Diperkecil, searah", en: "Reduced, same direction", ja: "縮小・同じ向き" },
+  kLt0: { id: "Berubah sisi + dibalik", en: "Side changes + flipped", ja: "反対側＋反転" },
+  kEq1: { id: "Identitas (sama)", en: "Identity (unchanged)", ja: "恒等（変化なし）" },
+  sifatDilatasiTitle: { id: "📌 Sifat-sifat Dilatasi", en: "📌 Properties of Dilation", ja: "📌 拡大・縮小の性質" },
+  sifatBentuk: { id: "Bentuk", en: "Shape", ja: "形" },
+  sifatBentukVal: { id: "Tetap", en: "Unchanged", ja: "変化なし" },
+  sifatUkuran: { id: "Ukuran", en: "Size", ja: "大きさ" },
+  sifatUkuranVal: { id: "Berubah", en: "Changes", ja: "変化する" },
+  sifatOrientasi: { id: "Orientasi", en: "Orientation", ja: "向き" },
+  sifatOrientasiVal: { id: "k>0: Tetap", en: "k>0: Unchanged", ja: "k>0：変化なし" },
+  sifatLuas: { id: "Luas", en: "Area", ja: "面積" },
+  sifatLuasVal: { id: "×k²", en: "×k²", ja: "×k²" },
+
+  tipsTrikTitle: { id: "💡 Tips & Trik", en: "💡 Tips & Tricks", ja: "💡 コツとテクニック" },
+  tip1Title: { id: "Luas bayangan = k² × luas asal", en: "Image area = k² × original area", ja: "像の面積 = k² × 元の面積" },
+  tip1Body: { id: "Jika faktor skala k = 3, maka luas bangun bayangan = 9× luas asli. Sering muncul di soal HOTS — jangan lupa kuadratkan k!", en: "If the scale factor k = 3, then the image's area = 9× the original area. This often appears in HOTS questions — don't forget to square k!", ja: "拡大率 k = 3 のとき、像の面積は元の面積の9倍になります。HOTS問題でよく出るので、kを2乗するのを忘れずに！" },
+  tip2Title: { id: "Dilatasi pusat P(a,b): geser-skala-balik", en: "Dilation with center P(a,b): shift-scale-shift back", ja: "中心 P(a,b) の拡大・縮小：移動→拡大縮小→戻す" },
+  tip2Body: { id: "Geser titik ke pusat O dulu: (x−a, y−b). Kalikan dengan k. Geser balik: tambah (a,b). Langkah ini berlaku untuk semua sudut dan pusat.", en: "First shift the point to center O: (x−a, y−b). Multiply by k. Shift back: add (a,b). This step works for any angle and center.", ja: "まず点を中心Oへ移動：(x−a, y−b)。kを掛ける。元に戻す：(a,b)を加える。この手順はどんな角度・中心でも使えます。" },
+  tip3Title: { id: "Gradien garis tidak berubah!", en: "The line's gradient does not change!", ja: "直線の傾きは変わらない！" },
+  tip3Body: { id: "Dilatasi selalu menghasilkan garis bayangan yang SEJAJAR dengan garis asli (gradien sama). Hanya intercept (c) yang berubah.", en: "Dilation always produces an image line that is PARALLEL to the original line (same gradient). Only the intercept (c) changes.", ja: "拡大・縮小によってできる像の直線は常に元の直線と平行（傾きが同じ）です。変わるのは切片（c）だけです。" },
+  tip4Title: { id: "k negatif: bayangan ada di sisi berlawanan", en: "Negative k: the image is on the opposite side", ja: "kが負：像は反対側にできる" },
+  tip4Body: { id: "Jika k = −2, bayangan berada di sisi berlawanan dari pusat dilatasi. Gunakan rumus yang sama — tanda negatif sudah otomatis mengurus posisinya.", en: "If k = −2, the image is on the opposite side of the center of dilation. Use the same formula — the negative sign automatically handles the position.", ja: "k = −2 のとき、像は拡大・縮小の中心の反対側にできます。同じ公式を使えばよく、マイナス符号が位置を自動的に処理してくれます。" },
+  tip5Title: { id: "Komposisi dilatasi: kalikan faktor skala", en: "Composition of dilations: multiply the scale factors", ja: "拡大・縮小の合成：拡大率を掛け合わせる" },
+  tip5Body: { id: "Dilatasi [O, k₁] lalu [O, k₂] = Dilatasi [O, k₁×k₂]. Kalikan saja kedua faktor skala untuk mendapatkan hasil komposisi.", en: "Dilation [O, k₁] followed by [O, k₂] = Dilation [O, k₁×k₂]. Simply multiply the two scale factors to get the composition result.", ja: "拡大・縮小 [O, k₁] の後に [O, k₂] を行うと [O, k₁×k₂] になります。2つの拡大率を掛け合わせるだけで合成結果が得られます。" },
+
+  perbandingan4Title: { id: "🔍 Perbandingan 4 Transformasi Geometri", en: "🔍 Comparison of 4 Geometric Transformations", ja: "🔍 4つの幾何変換の比較" },
+  colTransformasi: { id: "Transformasi", en: "Transformation", ja: "変換" },
+  colBentuk: { id: "Bentuk", en: "Shape", ja: "形" },
+  colUkuran: { id: "Ukuran", en: "Size", ja: "大きさ" },
+  colOrientasi: { id: "Orientasi", en: "Orientation", ja: "向き" },
+  colIsometri: { id: "Isometri", en: "Isometry", ja: "等長変換" },
+  rowTranslasi: { id: "Translasi ➡️", en: "Translation ➡️", ja: "平行移動 ➡️" },
+  rowRefleksi: { id: "Refleksi 🪞", en: "Reflection 🪞", ja: "対称移動 🪞" },
+  rowRotasi: { id: "Rotasi 🔄", en: "Rotation 🔄", ja: "回転移動 🔄" },
+  rowDilatasi: { id: "Dilatasi 🔍", en: "Dilation 🔍", ja: "拡大・縮小 🔍" },
+  orientasiTetap: { id: "Tetap", en: "Unchanged", ja: "変化なし" },
+  orientasiBerbalik: { id: "Berbalik", en: "Reversed", ja: "反転" },
+  orientasiBerputar: { id: "Berputar", en: "Rotated", ja: "回転する" },
+  orientasiKgt0Tetap: { id: "k>0: Tetap", en: "k>0: Unchanged", ja: "k>0：変化なし" },
+
+  kesimpulanTitle: { id: "Kesimpulan", en: "Conclusion", ja: "結論" },
+  kesimpulanBody: {
+    id: <><strong className="text-cyan-300">Dilatasi</strong> adalah satu-satunya transformasi di antara keempat jenis yang <strong className="text-yellow-300">mengubah ukuran</strong> bangun. Faktor skala k menentukan segalanya: besar/kecil, arah, dan posisi bayangan. Dilatasi <em>bukan isometri</em> karena ukurannya berubah, tetapi bentuk tetap sama (sebangun). Kuasai rumus pusat O dan pusat P(a,b), serta ingat bahwa luas bayangan = <strong className="text-green-300">k² × luas asal</strong>!</>,
+    en: <><strong className="text-cyan-300">Dilation</strong> is the only transformation among the four types that <strong className="text-yellow-300">changes the size</strong> of a shape. The scale factor k determines everything: how much bigger/smaller, direction, and position of the image. Dilation <em>is not an isometry</em> because its size changes, but the shape stays the same (similar). Master the formulas for center O and center P(a,b), and remember that the image's area = <strong className="text-green-300">k² × the original area</strong>!</>,
+    ja: <><strong className="text-cyan-300">拡大・縮小</strong>は、4種類の変換の中で唯一図形の<strong className="text-yellow-300">大きさを変える</strong>変換です。拡大率kがすべてを決定します：大小、向き、像の位置。拡大・縮小は大きさが変わるため<em>等長変換ではありません</em>が、形は変わりません（相似）。中心Oと中心P(a,b)の公式をマスターし、像の面積 = <strong className="text-green-300">k² × 元の面積</strong>であることを忘れずに！</>,
+  },
+  tagBukanIsometri: { id: "Bukan isometri", en: "Not an isometry", ja: "等長変換ではない" },
+  tagBentukTetap: { id: "Bentuk tetap (sebangun)", en: "Shape unchanged (similar)", ja: "形は変化なし（相似）" },
+  tagLuasK2: { id: "Luas × k²", en: "Area × k²", ja: "面積 × k²" },
+  tagGradienTetap: { id: "Gradien garis tetap", en: "Line gradient unchanged", ja: "直線の傾きは変化なし" },
+
+  kembaliTransformasi: { id: "← Kembali ke Transformasi Geometri", en: "← Back to Geometric Transformation", ja: "← 図形の変換に戻る" },
 };
 
 const DilatasisPage = () => {
@@ -1812,6 +1894,70 @@ const DilatasisPage = () => {
     badgeSulit: dilatasiPageTranslations.badgeSulit[language],
     badgeEkstra: dilatasiPageTranslations.badgeEkstra[language],
     pembahasan: dilatasiPageTranslations.pembahasan[language],
+    rangkumanDilatasiTitle: dilatasiPageTranslations.rangkumanDilatasiTitle[language],
+    colJenis: dilatasiPageTranslations.colJenis[language],
+    colRumusX: dilatasiPageTranslations.colRumusX[language],
+    colRumusY: dilatasiPageTranslations.colRumusY[language],
+    pusatO: dilatasiPageTranslations.pusatO[language],
+    pusatP: dilatasiPageTranslations.pusatP[language],
+    ingatRumusUmum: dilatasiPageTranslations.ingatRumusUmum[language],
+    kurvaLinearTitle: dilatasiPageTranslations.kurvaLinearTitle[language],
+    colPusat: dilatasiPageTranslations.colPusat[language],
+    colGradienBayangan: dilatasiPageTranslations.colGradienBayangan[language],
+    colInterceptBayangan: dilatasiPageTranslations.colInterceptBayangan[language],
+    gradienSelaluTetapNote: dilatasiPageTranslations.gradienSelaluTetapNote[language],
+    rangkumanTipsKesimpulanTitle: dilatasiPageTranslations.rangkumanTipsKesimpulanTitle[language],
+    rumusKunciTitle: dilatasiPageTranslations.rumusKunciTitle[language],
+    pusatOO: dilatasiPageTranslations.pusatOO[language],
+    faktorSkalaKet: dilatasiPageTranslations.faktorSkalaKet[language],
+    pusatPab: dilatasiPageTranslations.pusatPab[language],
+    geserSkalaBalikKet: dilatasiPageTranslations.geserSkalaBalikKet[language],
+    jenisFaktorSkalaTitle: dilatasiPageTranslations.jenisFaktorSkalaTitle[language],
+    kGt1: dilatasiPageTranslations.kGt1[language],
+    k0to1: dilatasiPageTranslations.k0to1[language],
+    kLt0: dilatasiPageTranslations.kLt0[language],
+    kEq1: dilatasiPageTranslations.kEq1[language],
+    sifatDilatasiTitle: dilatasiPageTranslations.sifatDilatasiTitle[language],
+    sifatBentuk: dilatasiPageTranslations.sifatBentuk[language],
+    sifatBentukVal: dilatasiPageTranslations.sifatBentukVal[language],
+    sifatUkuran: dilatasiPageTranslations.sifatUkuran[language],
+    sifatUkuranVal: dilatasiPageTranslations.sifatUkuranVal[language],
+    sifatOrientasi: dilatasiPageTranslations.sifatOrientasi[language],
+    sifatOrientasiVal: dilatasiPageTranslations.sifatOrientasiVal[language],
+    sifatLuas: dilatasiPageTranslations.sifatLuas[language],
+    sifatLuasVal: dilatasiPageTranslations.sifatLuasVal[language],
+    tipsTrikTitle: dilatasiPageTranslations.tipsTrikTitle[language],
+    tip1Title: dilatasiPageTranslations.tip1Title[language],
+    tip1Body: dilatasiPageTranslations.tip1Body[language],
+    tip2Title: dilatasiPageTranslations.tip2Title[language],
+    tip2Body: dilatasiPageTranslations.tip2Body[language],
+    tip3Title: dilatasiPageTranslations.tip3Title[language],
+    tip3Body: dilatasiPageTranslations.tip3Body[language],
+    tip4Title: dilatasiPageTranslations.tip4Title[language],
+    tip4Body: dilatasiPageTranslations.tip4Body[language],
+    tip5Title: dilatasiPageTranslations.tip5Title[language],
+    tip5Body: dilatasiPageTranslations.tip5Body[language],
+    perbandingan4Title: dilatasiPageTranslations.perbandingan4Title[language],
+    colTransformasi: dilatasiPageTranslations.colTransformasi[language],
+    colBentuk: dilatasiPageTranslations.colBentuk[language],
+    colUkuran: dilatasiPageTranslations.colUkuran[language],
+    colOrientasi: dilatasiPageTranslations.colOrientasi[language],
+    colIsometri: dilatasiPageTranslations.colIsometri[language],
+    rowTranslasi: dilatasiPageTranslations.rowTranslasi[language],
+    rowRefleksi: dilatasiPageTranslations.rowRefleksi[language],
+    rowRotasi: dilatasiPageTranslations.rowRotasi[language],
+    rowDilatasi: dilatasiPageTranslations.rowDilatasi[language],
+    orientasiTetap: dilatasiPageTranslations.orientasiTetap[language],
+    orientasiBerbalik: dilatasiPageTranslations.orientasiBerbalik[language],
+    orientasiBerputar: dilatasiPageTranslations.orientasiBerputar[language],
+    orientasiKgt0Tetap: dilatasiPageTranslations.orientasiKgt0Tetap[language],
+    kesimpulanTitle: dilatasiPageTranslations.kesimpulanTitle[language],
+    kesimpulanBody: dilatasiPageTranslations.kesimpulanBody[language],
+    tagBukanIsometri: dilatasiPageTranslations.tagBukanIsometri[language],
+    tagBentukTetap: dilatasiPageTranslations.tagBentukTetap[language],
+    tagLuasK2: dilatasiPageTranslations.tagLuasK2[language],
+    tagGradienTetap: dilatasiPageTranslations.tagGradienTetap[language],
+    kembaliTransformasi: dilatasiPageTranslations.kembaliTransformasi[language],
   };
   const expandedSections = [
     "intro", "animasi-titik", "animasi", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3",
@@ -2777,24 +2923,24 @@ const DilatasisPage = () => {
 
           {/* ── RANGKUMAN ── */}
           <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-5 space-y-3">
-            <p className="font-body text-sm font-semibold text-cyan-300">🌟 Rangkuman Dilatasi</p>
+            <p className="font-body text-sm font-semibold text-cyan-300">{dt.rangkumanDilatasiTitle}</p>
             <div className="overflow-x-auto">
               <table className="w-full font-body text-xs text-white/80">
                 <thead>
                   <tr className="border-b border-cyan-500/30">
-                    <th className="text-left py-2 text-cyan-300">Jenis</th>
-                    <th className="text-left py-2 text-cyan-300">Rumus x'</th>
-                    <th className="text-left py-2 text-cyan-300">Rumus y'</th>
+                    <th className="text-left py-2 text-cyan-300">{dt.colJenis}</th>
+                    <th className="text-left py-2 text-cyan-300">{dt.colRumusX}</th>
+                    <th className="text-left py-2 text-cyan-300">{dt.colRumusY}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-700">
                   <tr>
-                    <td className="py-2 text-green-300">Pusat O(0,0)</td>
+                    <td className="py-2 text-green-300">{dt.pusatO}</td>
                     <td className="py-2"><InlineMath math="x' = kx" /></td>
                     <td className="py-2"><InlineMath math="y' = ky" /></td>
                   </tr>
                   <tr>
-                    <td className="py-2 text-purple-300">Pusat P(a,b)</td>
+                    <td className="py-2 text-purple-300">{dt.pusatP}</td>
                     <td className="py-2"><InlineMath math="x' = a + k(x-a)" /></td>
                     <td className="py-2"><InlineMath math="y' = b + k(y-b)" /></td>
                   </tr>
@@ -2802,18 +2948,18 @@ const DilatasisPage = () => {
               </table>
             </div>
             <p className="font-body text-xs text-white/60">
-              Ingat: rumus pusat <InlineMath math="P(a,b)" /> adalah rumus umum — substitusikan <InlineMath math="a=0, b=0" /> untuk mendapatkan rumus pusat <InlineMath math="O(0,0)" />.
+              {dt.ingatRumusUmum}
             </p>
             {/* Kurva Linear */}
             <div className="border-t border-cyan-500/20 pt-3 space-y-2">
-              <p className="font-body text-xs font-semibold text-orange-300">📈 Dilatasi Kurva Linear <InlineMath math="y = mx + c" />:</p>
+              <p className="font-body text-xs font-semibold text-orange-300">{dt.kurvaLinearTitle}</p>
               <div className="overflow-x-auto">
                 <table className="w-full font-body text-xs text-white/80">
                   <thead>
                     <tr className="border-b border-orange-500/20">
-                      <th className="text-left py-2 text-orange-300">Pusat</th>
-                      <th className="text-left py-2 text-orange-300">Gradien bayangan</th>
-                      <th className="text-left py-2 text-orange-300">Intercept bayangan c'</th>
+                      <th className="text-left py-2 text-orange-300">{dt.colPusat}</th>
+                      <th className="text-left py-2 text-orange-300">{dt.colGradienBayangan}</th>
+                      <th className="text-left py-2 text-orange-300">{dt.colInterceptBayangan}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-700">
@@ -2830,7 +2976,7 @@ const DilatasisPage = () => {
                   </tbody>
                 </table>
               </div>
-              <p className="font-body text-xs text-orange-200/70">⚡ Gradien selalu tetap — hanya intercept yang berubah. Garis asli dan bayangan selalu sejajar!</p>
+              <p className="font-body text-xs text-orange-200/70">{dt.gradienSelaluTetapNote}</p>
             </div>
           </div>
 
@@ -2840,43 +2986,43 @@ const DilatasisPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <div className="flex items-center gap-3 px-5 py-4 border-b border-border" style={{ borderLeftColor: "#f97316", borderLeftWidth: 4 }}>
               <Target className="w-5 h-5 text-orange-400" />
-              <p className="font-body font-bold text-sm text-white">🎯 Rangkuman, Tips &amp; Kesimpulan</p>
+              <p className="font-body font-bold text-sm text-white">{dt.rangkumanTipsKesimpulanTitle}</p>
             </div>
             <div className="px-5 pb-5 space-y-5">
 
               {/* ── Rumus Kunci ── */}
               <div className="space-y-3">
-                <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest">📐 Rumus Kunci Dilatasi</p>
+                <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-widest">{dt.rumusKunciTitle}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="bg-gradient-to-br from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-xl p-3">
-                    <p className="font-body text-xs text-cyan-400 font-bold mb-1.5">📌 Pusat O(0, 0)</p>
+                    <p className="font-body text-xs text-cyan-400 font-bold mb-1.5">{dt.pusatOO}</p>
                     <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-3 py-1.5 text-center">A(x,y) → A'(kx, ky)</p>
-                    <p className="font-body text-xs text-white/60 mt-1.5">k = faktor skala</p>
+                    <p className="font-body text-xs text-white/60 mt-1.5">{dt.faktorSkalaKet}</p>
                   </div>
                   <div className="bg-gradient-to-br from-purple-900/50 to-indigo-900/50 border border-purple-500/30 rounded-xl p-3">
-                    <p className="font-body text-xs text-purple-400 font-bold mb-1.5">📌 Pusat P(a, b)</p>
+                    <p className="font-body text-xs text-purple-400 font-bold mb-1.5">{dt.pusatPab}</p>
                     <p className="font-body text-sm text-white font-mono bg-slate-900/60 rounded-lg px-2 py-1.5 text-center text-xs">x'=a+k(x−a), y'=b+k(y−b)</p>
-                    <p className="font-body text-xs text-white/60 mt-1.5">Geser-skala-balik</p>
+                    <p className="font-body text-xs text-white/60 mt-1.5">{dt.geserSkalaBalikKet}</p>
                   </div>
                   <div className="bg-gradient-to-br from-green-900/50 to-teal-900/50 border border-green-500/30 rounded-xl p-3">
-                    <p className="font-body text-xs text-green-400 font-bold mb-2">📌 Jenis faktor skala k</p>
+                    <p className="font-body text-xs text-green-400 font-bold mb-2">{dt.jenisFaktorSkalaTitle}</p>
                     <div className="space-y-1.5 font-body text-xs text-white/80">
-                      <div className="flex justify-between"><span className="text-green-300">k &gt; 1</span><span>Diperbesar, searah</span></div>
-                      <div className="flex justify-between"><span className="text-yellow-300">0 &lt; k &lt; 1</span><span>Diperkecil, searah</span></div>
-                      <div className="flex justify-between"><span className="text-rose-300">k &lt; 0</span><span>Berubah sisi + dibalik</span></div>
-                      <div className="flex justify-between"><span className="text-slate-400">k = 1</span><span>Identitas (sama)</span></div>
+                      <div className="flex justify-between"><span className="text-green-300">k &gt; 1</span><span>{dt.kGt1}</span></div>
+                      <div className="flex justify-between"><span className="text-yellow-300">0 &lt; k &lt; 1</span><span>{dt.k0to1}</span></div>
+                      <div className="flex justify-between"><span className="text-rose-300">k &lt; 0</span><span>{dt.kLt0}</span></div>
+                      <div className="flex justify-between"><span className="text-slate-400">k = 1</span><span>{dt.kEq1}</span></div>
                     </div>
                   </div>
                   <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-500/30 rounded-xl p-3">
-                    <p className="font-body text-xs text-slate-300 font-bold mb-2">📌 Sifat-sifat Dilatasi</p>
+                    <p className="font-body text-xs text-slate-300 font-bold mb-2">{dt.sifatDilatasiTitle}</p>
                     <div className="grid grid-cols-2 gap-2 text-center">
                       {[
-                        { icon: "📐", label: "Bentuk", val: "Tetap" },
-                        { icon: "📏", label: "Ukuran", val: "Berubah" },
-                        { icon: "🔄", label: "Orientasi", val: "k>0: Tetap" },
-                        { icon: "⚖️", label: "Luas", val: "×k²" },
-                      ].map(item => (
-                        <div key={item.label} className="bg-slate-900/50 rounded-lg p-1.5">
+                        { icon: "📐", label: dt.sifatBentuk, val: dt.sifatBentukVal },
+                        { icon: "📏", label: dt.sifatUkuran, val: dt.sifatUkuranVal },
+                        { icon: "🔄", label: dt.sifatOrientasi, val: dt.sifatOrientasiVal },
+                        { icon: "⚖️", label: dt.sifatLuas, val: dt.sifatLuasVal },
+                      ].map((item, idx) => (
+                        <div key={idx} className="bg-slate-900/50 rounded-lg p-1.5">
                           <p className="text-sm">{item.icon}</p>
                           <p className="font-body text-xs text-white/60 leading-tight">{item.label}</p>
                           <p className="font-body text-xs font-bold text-yellow-400 leading-tight">{item.val}</p>
@@ -2889,38 +3035,38 @@ const DilatasisPage = () => {
 
               {/* ── Tips & Trik ── */}
               <div className="space-y-3">
-                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">💡 Tips &amp; Trik</p>
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-widest">{dt.tipsTrikTitle}</p>
                 <div className="space-y-2">
                   {[
                     {
                       num: "1",
                       color: "bg-cyan-500/10 border-cyan-500/30 text-cyan-300",
-                      title: "Luas bayangan = k² × luas asal",
-                      body: "Jika faktor skala k = 3, maka luas bangun bayangan = 9× luas asli. Sering muncul di soal HOTS — jangan lupa kuadratkan k!",
+                      title: dt.tip1Title,
+                      body: dt.tip1Body,
                     },
                     {
                       num: "2",
                       color: "bg-purple-500/10 border-purple-500/30 text-purple-300",
-                      title: "Dilatasi pusat P(a,b): geser-skala-balik",
-                      body: "Geser titik ke pusat O dulu: (x−a, y−b). Kalikan dengan k. Geser balik: tambah (a,b). Langkah ini berlaku untuk semua sudut dan pusat.",
+                      title: dt.tip2Title,
+                      body: dt.tip2Body,
                     },
                     {
                       num: "3",
                       color: "bg-green-500/10 border-green-500/30 text-green-300",
-                      title: "Gradien garis tidak berubah!",
-                      body: "Dilatasi selalu menghasilkan garis bayangan yang SEJAJAR dengan garis asli (gradien sama). Hanya intercept (c) yang berubah.",
+                      title: dt.tip3Title,
+                      body: dt.tip3Body,
                     },
                     {
                       num: "4",
                       color: "bg-rose-500/10 border-rose-500/30 text-rose-300",
-                      title: "k negatif: bayangan ada di sisi berlawanan",
-                      body: "Jika k = −2, bayangan berada di sisi berlawanan dari pusat dilatasi. Gunakan rumus yang sama — tanda negatif sudah otomatis mengurus posisinya.",
+                      title: dt.tip4Title,
+                      body: dt.tip4Body,
                     },
                     {
                       num: "5",
                       color: "bg-amber-500/10 border-amber-500/30 text-amber-300",
-                      title: "Komposisi dilatasi: kalikan faktor skala",
-                      body: "Dilatasi [O, k₁] lalu [O, k₂] = Dilatasi [O, k₁×k₂]. Kalikan saja kedua faktor skala untuk mendapatkan hasil komposisi.",
+                      title: dt.tip5Title,
+                      body: dt.tip5Body,
                     },
                   ].map(tip => (
                     <div key={tip.num} className={`flex gap-3 items-start border rounded-xl p-3 ${tip.color.split(" ").slice(0,2).join(" ")}`}>
@@ -2936,30 +3082,30 @@ const DilatasisPage = () => {
 
               {/* ── Perbandingan 4 Transformasi ── */}
               <div className="space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-widest">🔍 Perbandingan 4 Transformasi Geometri</p>
+                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-widest">{dt.perbandingan4Title}</p>
                 <div className="overflow-x-auto rounded-xl border border-slate-600/30">
                   <table className="w-full text-xs font-body">
                     <thead>
                       <tr className="bg-slate-700/50">
-                        <th className="px-3 py-2 text-left text-slate-200 font-bold">Transformasi</th>
-                        <th className="px-3 py-2 text-center text-slate-200 font-bold">Bentuk</th>
-                        <th className="px-3 py-2 text-center text-slate-200 font-bold">Ukuran</th>
-                        <th className="px-3 py-2 text-center text-slate-200 font-bold">Orientasi</th>
-                        <th className="px-3 py-2 text-center text-slate-200 font-bold">Isometri</th>
+                        <th className="px-3 py-2 text-left text-slate-200 font-bold">{dt.colTransformasi}</th>
+                        <th className="px-3 py-2 text-center text-slate-200 font-bold">{dt.colBentuk}</th>
+                        <th className="px-3 py-2 text-center text-slate-200 font-bold">{dt.colUkuran}</th>
+                        <th className="px-3 py-2 text-center text-slate-200 font-bold">{dt.colOrientasi}</th>
+                        <th className="px-3 py-2 text-center text-slate-200 font-bold">{dt.colIsometri}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-700/30">
                       {[
-                        { t: "Translasi ➡️",   bentuk: "✅", ukuran: "✅", orientasi: "Tetap",    iso: "✅" },
-                        { t: "Refleksi 🪞",    bentuk: "✅", ukuran: "✅", orientasi: "Berbalik",  iso: "✅" },
-                        { t: "Rotasi 🔄",      bentuk: "✅", ukuran: "✅", orientasi: "Berputar",  iso: "✅" },
-                        { t: "Dilatasi 🔍",    bentuk: "✅", ukuran: "❌", orientasi: "k>0: Tetap", iso: "❌" },
+                        { t: dt.rowTranslasi, bentuk: "✅", ukuran: "✅", orientasi: dt.orientasiTetap, orientasiKey: "Tetap",    iso: "✅" },
+                        { t: dt.rowRefleksi,  bentuk: "✅", ukuran: "✅", orientasi: dt.orientasiBerbalik, orientasiKey: "Berbalik",  iso: "✅" },
+                        { t: dt.rowRotasi,    bentuk: "✅", ukuran: "✅", orientasi: dt.orientasiBerputar, orientasiKey: "Berputar",  iso: "✅" },
+                        { t: dt.rowDilatasi,  bentuk: "✅", ukuran: "❌", orientasi: dt.orientasiKgt0Tetap, orientasiKey: "KTetap", iso: "❌" },
                       ].map((row, i) => (
                         <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-900/30"}>
                           <td className="px-3 py-2 text-white font-semibold">{row.t}</td>
                           <td className="px-3 py-2 text-center">{row.bentuk}</td>
                           <td className="px-3 py-2 text-center">{row.ukuran}</td>
-                          <td className={`px-3 py-2 text-center ${row.orientasi === "Tetap" ? "text-green-400" : row.orientasi === "Berbalik" ? "text-rose-400" : row.orientasi === "Berputar" ? "text-purple-400" : "text-yellow-400"}`}>{row.orientasi}</td>
+                          <td className={`px-3 py-2 text-center ${row.orientasiKey === "Tetap" ? "text-green-400" : row.orientasiKey === "Berbalik" ? "text-rose-400" : row.orientasiKey === "Berputar" ? "text-purple-400" : "text-yellow-400"}`}>{row.orientasi}</td>
                           <td className="px-3 py-2 text-center">{row.iso}</td>
                         </tr>
                       ))}
@@ -2972,14 +3118,14 @@ const DilatasisPage = () => {
               <div className="bg-gradient-to-r from-cyan-900/40 via-blue-900/30 to-cyan-900/40 border border-cyan-500/30 rounded-2xl p-5">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🏁</span>
-                  <p className="font-body text-sm font-bold text-cyan-300 uppercase tracking-wide">Kesimpulan</p>
+                  <p className="font-body text-sm font-bold text-cyan-300 uppercase tracking-wide">{dt.kesimpulanTitle}</p>
                 </div>
                 <p className="font-body text-sm text-white/85 leading-relaxed">
-                  <strong className="text-cyan-300">Dilatasi</strong> adalah satu-satunya transformasi di antara keempat jenis yang <strong className="text-yellow-300">mengubah ukuran</strong> bangun. Faktor skala k menentukan segalanya: besar/kecil, arah, dan posisi bayangan. Dilatasi <em>bukan isometri</em> karena ukurannya berubah, tetapi bentuk tetap sama (sebangun). Kuasai rumus pusat O dan pusat P(a,b), serta ingat bahwa luas bayangan = <strong className="text-green-300">k² × luas asal</strong>!
+                  {dt.kesimpulanBody}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {["Bukan isometri", "Bentuk tetap (sebangun)", "Luas × k²", "Gradien garis tetap"].map(tag => (
-                    <span key={tag} className="bg-cyan-500/20 border border-cyan-500/30 rounded-full px-3 py-0.5 text-xs font-body text-cyan-200">{tag}</span>
+                  {[dt.tagBukanIsometri, dt.tagBentukTetap, dt.tagLuasK2, dt.tagGradienTetap].map((tag, idx) => (
+                    <span key={idx} className="bg-cyan-500/20 border border-cyan-500/30 rounded-full px-3 py-0.5 text-xs font-body text-cyan-200">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -2992,7 +3138,7 @@ const DilatasisPage = () => {
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/transformasi-geometri"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Transformasi Geometri
+            {dt.kembaliTransformasi}
           </button>
         </div>
       </div>
