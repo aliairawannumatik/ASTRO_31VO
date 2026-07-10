@@ -8,6 +8,91 @@ import {
 import { compile } from "mathjs";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import { useTheme, Theme } from "@/contexts/ThemeContext";
+
+/* ─── Per-theme canvas colors ─────────────────────────────
+   "dark" (Luar Angkasa) tetap gelap seperti semula.
+   Tema lainnya memakai latar cerah sesuai warna khas masing-masing. */
+interface CanvasTheme {
+  bg: string;
+  gridMinor: string;
+  gridMajor: string;
+  arrow: string;
+  label: string;
+  labelStrong: string;
+  cursorLine: string;
+  cursorBg: string;
+  cursorText: string;
+}
+
+const CANVAS_THEME: Record<Theme, CanvasTheme> = {
+  dark: {
+    bg: "rgb(10,17,32)",
+    gridMinor: "rgba(148,163,184,0.12)",
+    gridMajor: "rgba(148,163,184,0.6)",
+    arrow: "rgba(148,163,184,0.6)",
+    label: "rgba(148,163,184,0.8)",
+    labelStrong: "rgba(148,163,184,0.9)",
+    cursorLine: "rgba(148,163,184,0.25)",
+    cursorBg: "rgba(15,23,42,0.85)",
+    cursorText: "#22d3ee",
+  },
+  white: {
+    bg: "#ffffff",
+    gridMinor: "rgba(100,116,139,0.15)",
+    gridMajor: "rgba(71,85,105,0.55)",
+    arrow: "rgba(71,85,105,0.75)",
+    label: "rgba(71,85,105,0.8)",
+    labelStrong: "rgba(51,65,85,0.9)",
+    cursorLine: "rgba(71,85,105,0.25)",
+    cursorBg: "rgba(255,255,255,0.92)",
+    cursorText: "#0284c7",
+  },
+  light: {
+    bg: "#eff6ff",
+    gridMinor: "rgba(59,130,246,0.14)",
+    gridMajor: "rgba(59,130,246,0.45)",
+    arrow: "rgba(37,99,235,0.7)",
+    label: "rgba(30,64,175,0.75)",
+    labelStrong: "rgba(29,78,216,0.9)",
+    cursorLine: "rgba(59,130,246,0.28)",
+    cursorBg: "rgba(239,246,255,0.92)",
+    cursorText: "#1d4ed8",
+  },
+  forest: {
+    bg: "#f0fdf4",
+    gridMinor: "rgba(34,197,94,0.16)",
+    gridMajor: "rgba(22,163,74,0.5)",
+    arrow: "rgba(21,128,61,0.75)",
+    label: "rgba(21,128,61,0.8)",
+    labelStrong: "rgba(20,83,45,0.9)",
+    cursorLine: "rgba(34,197,94,0.28)",
+    cursorBg: "rgba(240,253,244,0.92)",
+    cursorText: "#15803d",
+  },
+  ocean: {
+    bg: "#ecfeff",
+    gridMinor: "rgba(6,182,212,0.16)",
+    gridMajor: "rgba(8,145,178,0.5)",
+    arrow: "rgba(14,116,144,0.75)",
+    label: "rgba(14,116,144,0.8)",
+    labelStrong: "rgba(12,74,110,0.9)",
+    cursorLine: "rgba(6,182,212,0.28)",
+    cursorBg: "rgba(236,254,255,0.92)",
+    cursorText: "#0e7490",
+  },
+  sunset: {
+    bg: "#f0f9ff",
+    gridMinor: "rgba(56,189,248,0.18)",
+    gridMajor: "rgba(14,165,233,0.5)",
+    arrow: "rgba(3,105,161,0.75)",
+    label: "rgba(3,105,161,0.8)",
+    labelStrong: "rgba(7,89,133,0.9)",
+    cursorLine: "rgba(56,189,248,0.3)",
+    cursorBg: "rgba(240,249,255,0.92)",
+    cursorText: "#0369a1",
+  },
+};
 
 /* ─── Types ─────────────────────────────────────────────── */
 interface LineEntry {
@@ -313,6 +398,7 @@ function drawGrid(
   ctx: CanvasRenderingContext2D, W: number, H: number,
   oX: number, oY: number, unitPx: number,
   showGrid: boolean, showLabels: boolean,
+  ct: CanvasTheme,
 ) {
   ctx.clearRect(0, 0, W, H);
   const step = niceStep(unitPx);
@@ -322,7 +408,7 @@ function drawGrid(
   const eY = Math.floor(oY / unitPx / step) * step;
 
   if (showGrid) {
-    ctx.strokeStyle = "rgba(148,163,184,0.12)"; ctx.lineWidth = 1;
+    ctx.strokeStyle = ct.gridMinor; ctx.lineWidth = 1;
     for (let gx = sX; gx <= eX; gx += step) {
       const px = oX + gx * unitPx;
       ctx.beginPath(); ctx.moveTo(px, 0); ctx.lineTo(px, H); ctx.stroke();
@@ -333,24 +419,24 @@ function drawGrid(
     }
   }
 
-  ctx.strokeStyle = "rgba(148,163,184,0.6)"; ctx.lineWidth = 1.5;
+  ctx.strokeStyle = ct.gridMajor; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(0, oY); ctx.lineTo(W, oY); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(oX, 0); ctx.lineTo(oX, H); ctx.stroke();
 
   const aw = 7, ah = 5;
-  ctx.fillStyle = "rgba(148,163,184,0.6)";
+  ctx.fillStyle = ct.arrow;
   ctx.beginPath(); ctx.moveTo(W, oY); ctx.lineTo(W - aw, oY - ah); ctx.lineTo(W - aw, oY + ah); ctx.closePath(); ctx.fill();
   ctx.beginPath(); ctx.moveTo(oX, 0); ctx.lineTo(oX - ah, aw); ctx.lineTo(oX + ah, aw); ctx.closePath(); ctx.fill();
 
   if (showLabels) {
-    ctx.fillStyle = "rgba(148,163,184,0.8)";
+    ctx.fillStyle = ct.label;
     ctx.font = `${Math.max(9, Math.min(12, unitPx * 0.3))}px monospace`;
     ctx.textAlign = "center";
     for (let gx = sX; gx <= eX; gx += step) {
       if (Math.abs(gx) < 1e-9) continue;
       const px = oX + gx * unitPx;
       ctx.beginPath(); ctx.moveTo(px, oY - 4); ctx.lineTo(px, oY + 4);
-      ctx.strokeStyle = "rgba(148,163,184,0.5)"; ctx.lineWidth = 1; ctx.stroke();
+      ctx.strokeStyle = ct.gridMajor; ctx.lineWidth = 1; ctx.stroke();
       if (px > 8 && px < W - 8) ctx.fillText(fmt(gx), px, oY + 14);
     }
     ctx.textAlign = "right";
@@ -358,10 +444,10 @@ function drawGrid(
       if (Math.abs(gy) < 1e-9) continue;
       const py = oY - gy * unitPx;
       ctx.beginPath(); ctx.moveTo(oX - 4, py); ctx.lineTo(oX + 4, py);
-      ctx.strokeStyle = "rgba(148,163,184,0.5)"; ctx.lineWidth = 1; ctx.stroke();
+      ctx.strokeStyle = ct.gridMajor; ctx.lineWidth = 1; ctx.stroke();
       if (py > 8 && py < H - 8) ctx.fillText(fmt(gy), oX - 7, py + 4);
     }
-    ctx.fillStyle = "rgba(148,163,184,0.9)"; ctx.font = "bold 13px monospace";
+    ctx.fillStyle = ct.labelStrong; ctx.font = "bold 13px monospace";
     ctx.textAlign = "left"; ctx.fillText("x", W - 14, oY - 8);
     ctx.textAlign = "center"; ctx.fillText("y", oX + 10, 12); ctx.fillText("O", oX + 10, oY + 14);
   }
@@ -509,8 +595,9 @@ function drawIntersections(
 function drawCursor(
   ctx: CanvasRenderingContext2D, mx: number, my: number,
   oX: number, oY: number, unitPx: number,
+  ct: CanvasTheme,
 ) {
-  ctx.strokeStyle = "rgba(148,163,184,0.25)"; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = ct.cursorLine; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
   ctx.beginPath(); ctx.moveTo(mx, 0); ctx.lineTo(mx, ctx.canvas.height); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(0, my); ctx.lineTo(ctx.canvas.width, my); ctx.stroke();
   ctx.setLineDash([]);
@@ -520,9 +607,9 @@ function drawCursor(
   let lx = mx + 8, ly = my - 8;
   if (lx + tw + 10 > ctx.canvas.width) lx = mx - tw - 14;
   if (ly - 18 < 0) ly = my + 22;
-  ctx.fillStyle = "rgba(15,23,42,0.85)";
+  ctx.fillStyle = ct.cursorBg;
   ctx.beginPath(); ctx.roundRect(lx - 4, ly - 14, tw + 12, 20, 4); ctx.fill();
-  ctx.fillStyle = "#22d3ee"; ctx.fillText(label, lx + 2, ly);
+  ctx.fillStyle = ct.cursorText; ctx.fillText(label, lx + 2, ly);
 }
 
 /* ─── Math Keyboard ──────────────────────────────────────── */
@@ -637,6 +724,8 @@ function MathKeyboard({ value, onChange, inputRef, onTemplate }: MathKeyboardPro
 const INITIAL_UNIT = 50;
 
 export default function GeoGebraGrapher() {
+  const { theme } = useTheme();
+  const ct = CANVAS_THEME[theme];
   const uid = useId().replace(/:/g, "");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -676,12 +765,12 @@ export default function GeoGebraGrapher() {
     const ctx = canvas.getContext("2d"); if (!ctx) return;
     const { w, h } = size;
     canvas.width = w; canvas.height = h;
-    drawGrid(ctx, w, h, origin.x, origin.y, unitPx, showGrid, showLabels);
+    drawGrid(ctx, w, h, origin.x, origin.y, unitPx, showGrid, showLabels, ct);
     drawEquations(ctx, w, h, origin.x, origin.y, unitPx, lines);
     drawPoints(ctx, origin.x, origin.y, unitPx, lines, showPoints);
     if (showIntersections) drawIntersections(ctx, origin.x, origin.y, unitPx, lines);
-    if (cursor) drawCursor(ctx, cursor.x, cursor.y, origin.x, origin.y, unitPx);
-  }, [size, unitPx, origin, showGrid, showLabels, showPoints, showIntersections, lines, cursor]);
+    if (cursor) drawCursor(ctx, cursor.x, cursor.y, origin.x, origin.y, unitPx, ct);
+  }, [size, unitPx, origin, showGrid, showLabels, showPoints, showIntersections, lines, cursor, ct]);
 
   const onMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -815,7 +904,7 @@ export default function GeoGebraGrapher() {
         <div ref={containerRef} className="flex-1 relative" style={{ minWidth: 0 }}>
           <canvas
             ref={canvasRef} width={size.w} height={size.h}
-            style={{ display: "block", width: "100%", cursor: tool === "pan" ? "grab" : "crosshair", background: "rgb(10,17,32)" }}
+            style={{ display: "block", width: "100%", cursor: tool === "pan" ? "grab" : "crosshair", background: ct.bg }}
             onMouseMove={onMouseMove} onMouseDown={onMouseDown} onMouseUp={onMouseUp}
             onMouseLeave={onMouseLeave} onWheel={onWheel}
             onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}
