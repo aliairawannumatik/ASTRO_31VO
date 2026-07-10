@@ -115,7 +115,7 @@ function rotatePtAround(x: number, y: number, a: number, b: number, deg: number)
 /* ── Animasi Interaktif Rotasi TITIK ── */
 const TITIK_ANIM_DURATION = 1800;
 
-function AnimasiRotasiTitik() {
+function AnimasiRotasiTitik({ lang = "id" }: { lang?: "id" | "en" | "ja" }) {
   const [angle, setAngle] = useState<90 | 180 | 270>(90);
   const [dir, setDir] = useState<"ccw" | "cw">("ccw");
   const [centerType, setCenterType] = useState<"origin" | "custom">("origin");
@@ -139,7 +139,7 @@ function AnimasiRotasiTitik() {
   const [resX, resY] = rotatePtAround(ptX, ptY, ca, cb, actualDeg);
   const showResult = show || isAnimating;
 
-  const dirLabel = dir === "ccw" ? "berlawanan arah jarum jam" : "searah jarum jam";
+  const dirLabel = dir === "ccw" ? subLabels.berlawananJarumJam[lang] : subLabels.searahJarumJam[lang];
   const accentColor = dir === "ccw" ? "#22d3ee" : "#fb923c";
   const resultColor = dir === "ccw" ? "#f472b6" : "#fb923c";
 
@@ -433,7 +433,7 @@ const ORIG_PTS: [number, number][] = [[1, 1], [4, 1], [1, 3]];
 const ORIG_LABELS = ["A(1,1)", "B(4,1)", "C(1,3)"];
 const ANIM_DURATION = 1800; // ms — slow motion
 
-function AnimasiRotasi() {
+function AnimasiRotasi({ lang = "id" }: { lang?: "id" | "en" | "ja" }) {
   const [angle, setAngle] = useState<90 | 180 | 270>(90);
   const [dir, setDir] = useState<"ccw" | "cw">("ccw");
   const [centerType, setCenterType] = useState<"origin" | "custom">("origin");
@@ -453,7 +453,7 @@ function AnimasiRotasi() {
   const rotated = ORIG_PTS.map(([x, y]) => rotatePtAround(x, y, ca, cb, actualDeg) as [number, number]);
   const showRotated = show || isAnimating;
 
-  const dirLabel = dir === "ccw" ? "berlawanan arah jarum jam" : "searah jarum jam";
+  const dirLabel = dir === "ccw" ? subLabels.berlawananJarumJam[lang] : subLabels.searahJarumJam[lang];
   const accentColor = dir === "ccw" ? "#22d3ee" : "#fb923c";
   const resultColor = dir === "ccw" ? "#f472b6" : "#fb923c";
 
@@ -833,7 +833,7 @@ function round2(n: number) { return Math.round(n * 100) / 100; }
 /* ── Animasi Interaktif Rotasi Kurva Linear ── */
 const KURVA_ANIM_DURATION = 1800;
 
-function AnimasiRotasiKurva() {
+function AnimasiRotasiKurva({ lang = "id" }: { lang?: "id" | "en" | "ja" }) {
   const [input, setInput] = useState('y=2x+1');
   const [rotation, setRotation] = useState<'90ccw' | '270cw' | '270ccw' | '90cw' | '180ccw' | '180cw'>('90ccw');
   const [centerType, setCenterType] = useState<'origin' | 'custom'>('origin');
@@ -1301,7 +1301,15 @@ const rotasiPageTranslations = {
   badgeSedang: { id: "SEDANG", en: "Medium", ja: "標準" },
   badgeSulit: { id: "SULIT", en: "Hard", ja: "発展" },
   badgeOlimpiade: { id: "OLIMPIADE", en: "Olympiad", ja: "オリンピック" },
+  pembahasanLabel: { id: "PEMBAHASAN:", en: "SOLUTION:", ja: "解説：" },
 };
+
+const subLabels = {
+  rotasi: { id: "Rotasi", en: "Rotation", ja: "回転移動" },
+  titikPusat: { id: "Titik Pusat", en: "Center of Rotation", ja: "回転の中心" },
+  searahJarumJam: { id: "Searah Jarum Jam", en: "Clockwise", ja: "時計回り" },
+  berlawananJarumJam: { id: "Berlawanan Jarum Jam", en: "Counter-clockwise", ja: "反時計回り" },
+} as const;
 
 const RotasiPage = () => {
   const { language } = useLanguage();
@@ -1315,6 +1323,7 @@ const RotasiPage = () => {
     badgeSedang: rotasiPageTranslations.badgeSedang[language],
     badgeSulit: rotasiPageTranslations.badgeSulit[language],
     badgeOlimpiade: rotasiPageTranslations.badgeOlimpiade[language],
+    pembahasanLabel: rotasiPageTranslations.pembahasanLabel[language],
   };
   const open = ["intro", "animasi-titik", "animasi", "rumus", "contoh90", "contoh90cw", "contoh180", "kurva-linear", "rangkuman"];
 
@@ -1415,7 +1424,7 @@ const RotasiPage = () => {
             <Hdr id="animasi-titik" icon={<span>📍</span>} color="#a78bfa" title="Animasi Interaktif — Rotasi Titik" />
             {open.includes("animasi-titik") && (
               <div className="px-5 pb-5">
-                <AnimasiRotasiTitik />
+                <AnimasiRotasiTitik lang={language} />
               </div>
             )}
           </div>
@@ -1425,7 +1434,7 @@ const RotasiPage = () => {
             <Hdr id="animasi" icon={<span>🎮</span>} color="#34d399" title="Animasi Interaktif — Rotasi Bangun Datar" />
             {open.includes("animasi") && (
               <div className="px-5 pb-5">
-                <AnimasiRotasi />
+                <AnimasiRotasi lang={language} />
               </div>
             )}
           </div>
@@ -1626,7 +1635,7 @@ const RotasiPage = () => {
                 </div>
 
                 {/* Animasi Interaktif */}
-                <AnimasiRotasiKurva />
+                <AnimasiRotasiKurva lang={language} />
 
                 {/* Contoh Soal */}
                 <p className="text-xs font-semibold text-white/50 font-body uppercase tracking-wider">Contoh Soal</p>
@@ -1643,7 +1652,7 @@ const RotasiPage = () => {
                     </p>
                   </div>
                   <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 space-y-2">
-                    <p className="text-xs font-semibold text-green-400 font-body">PEMBAHASAN:</p>
+                    <p className="text-xs font-semibold text-green-400 font-body">{rt.pembahasanLabel}</p>
                     <p className="text-sm text-white/80 font-body">Rotasi 180° memetakan setiap titik <InlineMath math="(x, y) \to (-x, -y)" />. Inversnya:</p>
                     <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
                       <BlockMath math="x = -x', \quad y = -y'" />
@@ -1676,7 +1685,7 @@ const RotasiPage = () => {
                     </div>
                   </div>
                   <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4 space-y-3">
-                    <p className="text-xs font-semibold text-yellow-400 font-body">PEMBAHASAN:</p>
+                    <p className="text-xs font-semibold text-yellow-400 font-body">{rt.pembahasanLabel}</p>
                     <p className="text-sm text-white/80 font-body">
                       Rotasi 90° searah jarum jam terhadap pusat <InlineMath math="(p,q) = (1,-2)" /> memetakan:
                     </p>
@@ -1720,7 +1729,7 @@ const RotasiPage = () => {
                     </div>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 space-y-3">
-                    <p className="text-xs font-semibold text-red-400 font-body">PEMBAHASAN:</p>
+                    <p className="text-xs font-semibold text-red-400 font-body">{rt.pembahasanLabel}</p>
                     <p className="text-sm text-white/80 font-body font-semibold">Langkah 1 — Translasi <InlineMath math="T(3,-1)" />:</p>
                     <p className="text-sm text-white/70 font-body">Invers translasi: <InlineMath math="x = x' - 3,\quad y = y' + 1" />. Substitusi ke <InlineMath math="y = 2x + 1" />:</p>
                     <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
@@ -1759,7 +1768,7 @@ const RotasiPage = () => {
                     </div>
                   </div>
                   <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-4 space-y-3">
-                    <p className="text-xs font-semibold text-purple-300 font-body">PEMBAHASAN:</p>
+                    <p className="text-xs font-semibold text-purple-300 font-body">{rt.pembahasanLabel}</p>
                     <p className="text-sm text-white/80 font-body font-semibold">Langkah 1 — Refleksi terhadap <InlineMath math="y = 1" />:</p>
                     <p className="text-sm text-white/70 font-body">Cermin <InlineMath math="y = k" /> memetakan <InlineMath math="(x,y)\to(x,\, 2k-y)" />. Dengan <InlineMath math="k=1" />: <InlineMath math="(x,y)\to(x,\, 2-y)" />. Invers: <InlineMath math="x = x',\; y = 2 - y'" />. Substitusi ke <InlineMath math="3x - y + 2 = 0" />:</p>
                     <div className="bg-slate-900/60 rounded-lg p-3 space-y-1">
