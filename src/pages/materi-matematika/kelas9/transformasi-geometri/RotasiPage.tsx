@@ -3,6 +3,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
@@ -1286,7 +1287,35 @@ const DiagramR180 = () => {
 };
 
 /* ── Page ── */
+const rotasiPageTranslations = {
+  title: { id: "ROTASI (PERPUTARAN)", en: "ROTATION", ja: "回転" },
+  subtitle: { id: "Memutar Bangun di Sekitar Titik Pusat!", en: "Turning Shapes Around a Center Point!", ja: "図形を中心点の周りに回そう!" },
+  breadcrumb: { id: "Kelas 9 · Transformasi Geometri · Materi Matematika", en: "Grade 9 · Geometric Transformation · Math Material", ja: "中学3年 · 図形の変換 · 数学教材" },
+  introTitle: { id: "🌟 Apa Itu Rotasi?", en: "🌟 What Is Rotation?", ja: "🌟 回転とは?" },
+  introBody: {
+    id: "Rotasi adalah transformasi yang memutar setiap titik sebesar sudut tertentu terhadap sebuah titik pusat. Bentuk dan ukuran bangun tidak berubah, hanya posisi dan orientasinya yang bergeser sesuai sudut putaran.",
+    en: "Rotation is a transformation that turns every point by a certain angle around a center point. The shape's size and form stay the same — only its position and orientation shift according to the angle of rotation.",
+    ja: "回転とは、ある中心点を基準にすべての点を一定の角度だけ回す変換です。図形の形と大きさは変わらず、位置と向きだけが回転角に応じて変化します。",
+  },
+  badgeMudah: { id: "MUDAH", en: "Easy", ja: "基本" },
+  badgeSedang: { id: "SEDANG", en: "Medium", ja: "標準" },
+  badgeSulit: { id: "SULIT", en: "Hard", ja: "発展" },
+  badgeOlimpiade: { id: "OLIMPIADE", en: "Olympiad", ja: "オリンピック" },
+};
+
 const RotasiPage = () => {
+  const { language } = useLanguage();
+  const rt = {
+    title: rotasiPageTranslations.title[language],
+    subtitle: rotasiPageTranslations.subtitle[language],
+    breadcrumb: rotasiPageTranslations.breadcrumb[language],
+    introTitle: rotasiPageTranslations.introTitle[language],
+    introBody: rotasiPageTranslations.introBody[language],
+    badgeMudah: rotasiPageTranslations.badgeMudah[language],
+    badgeSedang: rotasiPageTranslations.badgeSedang[language],
+    badgeSulit: rotasiPageTranslations.badgeSulit[language],
+    badgeOlimpiade: rotasiPageTranslations.badgeOlimpiade[language],
+  };
   const open = ["intro", "animasi-titik", "animasi", "rumus", "contoh90", "contoh90cw", "contoh180", "kurva-linear", "rangkuman"];
 
   const Hdr = ({ id, icon, color, title }: { id: string; icon: React.ReactNode; color: string; title: string }) => (
@@ -1301,19 +1330,19 @@ const RotasiPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <div className="text-4xl text-center mb-3">🔄</div>
-        <h1 className="font-display text-xl md:text-2xl font-bold text-orange-400 text-center mb-1">ROTASI (PERPUTARAN)</h1>
-        <p className="font-display text-sm font-semibold text-orange-300 text-center mb-1">Memutar Bangun di Sekitar Titik Pusat!</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Transformasi Geometri · Materi Matematika</p>
+        <h1 className="font-display text-xl md:text-2xl font-bold text-orange-400 text-center mb-1">{rt.title}</h1>
+        <p className="font-display text-sm font-semibold text-orange-300 text-center mb-1">{rt.subtitle}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{rt.breadcrumb}</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-            <Hdr id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title="🌟 Apa Itu Rotasi?" />
+            <Hdr id="intro" icon={<Lightbulb className="w-5 h-5" />} color="#facc15" title={rt.introTitle} />
             {open.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  <strong className="text-orange-300">Rotasi</strong> adalah transformasi yang memutar setiap titik sebesar sudut tertentu terhadap sebuah <strong className="text-yellow-300">titik pusat</strong>. Bentuk dan ukuran bangun <strong className="text-white">tidak berubah</strong>, hanya posisi dan orientasinya yang bergeser sesuai sudut putaran.
+                  {rt.introBody}
                 </p>
                 <div>
                   <img
@@ -1605,7 +1634,7 @@ const RotasiPage = () => {
                 {/* MUDAH */}
                 <div className="border-l-4 border-green-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded font-body">MUDAH</span>
+                    <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded font-body">{rt.badgeMudah}</span>
                     <span className="font-body font-semibold text-white text-sm">Contoh 1</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
@@ -1632,7 +1661,7 @@ const RotasiPage = () => {
                 {/* SEDANG */}
                 <div className="border-l-4 border-yellow-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded font-body">SEDANG</span>
+                    <span className="bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded font-body">{rt.badgeSedang}</span>
                     <span className="font-body font-semibold text-white text-sm">Contoh 2</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
@@ -1676,7 +1705,7 @@ const RotasiPage = () => {
                 {/* SULIT */}
                 <div className="border-l-4 border-red-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded font-body">SULIT</span>
+                    <span className="bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded font-body">{rt.badgeSulit}</span>
                     <span className="font-body font-semibold text-white text-sm">Contoh 3</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
@@ -1715,7 +1744,7 @@ const RotasiPage = () => {
                 {/* SANGAT SULIT */}
                 <div className="border-l-4 border-purple-500 pl-4 space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2 py-1 rounded font-body">OLIMPIADE</span>
+                    <span className="bg-purple-500/20 text-purple-300 text-xs font-bold px-2 py-1 rounded font-body">{rt.badgeOlimpiade}</span>
                     <span className="font-body font-semibold text-white text-sm">Contoh 4</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
