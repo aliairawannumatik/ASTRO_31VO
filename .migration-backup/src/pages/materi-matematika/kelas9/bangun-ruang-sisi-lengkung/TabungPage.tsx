@@ -2605,7 +2605,7 @@ function getUnsurExamples(language: Language): Ex[] {
   ];
 }
 
-const ExampleCard = ({ ex, idx, prefix, language }: { ex: Ex; idx: number; prefix: string; language: Language }) => {
+const ExampleCard = ({ ex, idx, prefix, language, showLabel, hideLabel }: { ex: Ex; idx: number; prefix: string; language: Language; showLabel: string; hideLabel: string }) => {
   const [show, setShow] = useState(false);
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
@@ -2619,7 +2619,7 @@ const ExampleCard = ({ ex, idx, prefix, language }: { ex: Ex; idx: number; prefi
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
         className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
-        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? "Sembunyikan" : "Lihat Pembahasan"}</span>
+        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLabel : showLabel}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground"/> : <ChevronDown className="w-4 h-4 text-muted-foreground"/>}
       </button>
       {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
@@ -2718,6 +2718,11 @@ const TabungPage = () => {
       prev: "← Sebelumnya",
       next: "Selanjutnya →",
       back: "← Kembali ke Bangun Ruang Sisi Lengkung",
+      unsurPrefix: "SOAL",
+      luasPrefix: "LUAS",
+      volPrefix: "VOLUME",
+      showSolution: "Lihat Pembahasan",
+      hideSolution: "Sembunyikan",
     },
     en: {
       unsurTitle: "Examples — Elements of a Cylinder",
@@ -2731,6 +2736,11 @@ const TabungPage = () => {
       prev: "← Previous",
       next: "Next →",
       back: "← Back to Curved-Surface Solids",
+      unsurPrefix: "PROBLEM",
+      luasPrefix: "SURFACE AREA",
+      volPrefix: "VOLUME",
+      showSolution: "Show Solution",
+      hideSolution: "Hide",
     },
     ja: {
       unsurTitle: "例題 — 円柱の構成要素",
@@ -2744,6 +2754,11 @@ const TabungPage = () => {
       prev: "← 前へ",
       next: "次へ →",
       back: "← 曲面図形に戻る",
+      unsurPrefix: "問題",
+      luasPrefix: "表面積問題",
+      volPrefix: "体積問題",
+      showSolution: "解説を見る",
+      hideSolution: "隠す",
     },
   };
   const cs = contohSoalTrans[language];
@@ -2788,7 +2803,7 @@ const TabungPage = () => {
       content: (
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">{cs.unsurSubtitle}</p>
-          {unsurExamples.map((ex, i) => <ExampleCard key={`u${i}`} ex={ex} idx={i} prefix="SOAL" language={language}/>)}
+          {unsurExamples.map((ex, i) => <ExampleCard key={`u${i}`} ex={ex} idx={i} prefix={cs.unsurPrefix} language={language} showLabel={cs.showSolution} hideLabel={cs.hideSolution}/>)}
         </div>
       ),
     },
@@ -2798,7 +2813,7 @@ const TabungPage = () => {
       content: (
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">{cs.luasSubtitle}</p>
-          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS" language={language}/>)}
+          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix={cs.luasPrefix} language={language} showLabel={cs.showSolution} hideLabel={cs.hideSolution}/>)}
         </div>
       ),
     },
@@ -2808,7 +2823,7 @@ const TabungPage = () => {
       content: (
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">{cs.volSubtitle}</p>
-          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME" language={language}/>)}
+          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix={cs.volPrefix} language={language} showLabel={cs.showSolution} hideLabel={cs.hideSolution}/>)}
         </div>
       ),
     },
