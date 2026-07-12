@@ -1843,33 +1843,82 @@ function getSections(language: Language): Sec[] {
 ───────────────────────────────────────────────────────────── */
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
 
-const luasExamples: Ex[] = [
+const levelLabels: Record<string, Record<Language, string>> = {
+  MUDAH:  { id: "MUDAH",  en: "EASY",   ja: "基本" },
+  SEDANG: { id: "SEDANG", en: "MEDIUM", ja: "標準" },
+  SULIT:  { id: "SULIT",  en: "HARD",   ja: "発展" },
+};
+function levelLabel(level: string, language: Language): string {
+  return levelLabels[level]?.[language] ?? level;
+}
+
+function getLuasExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-2">
-        <p>Sebuah tabung memiliki jari-jari alas <InlineMath math="7 \text{ cm}" /> dan tinggi <InlineMath math="10 \text{ cm}" />.</p>
-        <p>Hitunglah <strong className="text-purple-300">luas selimut</strong> tabung tersebut!</p>
-        <p className="text-xs text-white/50">(gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah tabung memiliki jari-jari alas <InlineMath math="7 \text{ cm}" /> dan tinggi <InlineMath math="10 \text{ cm}" />.</p>
+            <p>Hitunglah <strong className="text-purple-300">luas selimut</strong> tabung tersebut!</p>
+            <p className="text-xs text-white/50">(gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A cylinder has a base radius of <InlineMath math="7 \text{ cm}" /> and a height of <InlineMath math="10 \text{ cm}" />.</p>
+            <p>Calculate the <strong className="text-purple-300">lateral surface area</strong> of the cylinder!</p>
+            <p className="text-xs text-white/50">(use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : (
+          <>
+            <p>底面の半径が<InlineMath math="7 \text{ cm}" />、高さが<InlineMath math="10 \text{ cm}" />の円柱があります。</p>
+            <p>この円柱の<strong className="text-purple-300">側面積</strong>を求めなさい！</p>
+            <p className="text-xs text-white/50">（<InlineMath math="\pi = \frac{22}{7}" /> を使用）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
         <div className="bg-slate-800/60 border border-slate-600/60 rounded p-3 text-xs space-y-1">
-          <p className="text-green-300 font-semibold mb-2">Diketahui:</p>
-          <p className="text-white/70">• Jari-jari: <InlineMath math="r = 7 \text{ cm}" /></p>
-          <p className="text-white/70">• Tinggi: <InlineMath math="t = 10 \text{ cm}" /></p>
-          <p className="text-white/70">• <InlineMath math="\pi = \frac{22}{7}" /></p>
+          {language === "id" ? (
+            <>
+              <p className="text-green-300 font-semibold mb-2">Diketahui:</p>
+              <p className="text-white/70">• Jari-jari: <InlineMath math="r = 7 \text{ cm}" /></p>
+              <p className="text-white/70">• Tinggi: <InlineMath math="t = 10 \text{ cm}" /></p>
+              <p className="text-white/70">• <InlineMath math="\pi = \frac{22}{7}" /></p>
+            </>
+          ) : language === "en" ? (
+            <>
+              <p className="text-green-300 font-semibold mb-2">Given:</p>
+              <p className="text-white/70">• Radius: <InlineMath math="r = 7 \text{ cm}" /></p>
+              <p className="text-white/70">• Height: <InlineMath math="t = 10 \text{ cm}" /></p>
+              <p className="text-white/70">• <InlineMath math="\pi = \frac{22}{7}" /></p>
+            </>
+          ) : (
+            <>
+              <p className="text-green-300 font-semibold mb-2">分かっていること：</p>
+              <p className="text-white/70">• 半径：<InlineMath math="r = 7 \text{ cm}" /></p>
+              <p className="text-white/70">• 高さ：<InlineMath math="t = 10 \text{ cm}" /></p>
+              <p className="text-white/70">• <InlineMath math="\pi = \frac{22}{7}" /></p>
+            </>
+          )}
         </div>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
-          <p className="text-white/60 mb-1">Gunakan rumus luas selimut tabung:</p>
+          <p className="text-white/60 mb-1">
+            {language === "id" ? "Gunakan rumus luas selimut tabung:" : language === "en" ? "Use the cylinder's lateral surface area formula:" : "円柱の側面積の公式を使う："}
+          </p>
           <BlockMath math="L_{\text{selimut}} = 2\pi r t" />
           <BlockMath math="L_{\text{selimut}} = 2 \times \frac{22}{7} \times 7 \times 10" />
           <BlockMath math="L_{\text{selimut}} = 2 \times 22 \times 10" />
           <BlockMath math="L_{\text{selimut}} = 440 \text{ cm}^2" />
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
-          <p className="text-green-300 font-semibold">✅ Luas selimut tabung = <InlineMath math="440 \text{ cm}^2" /></p>
+          <p className="text-green-300 font-semibold">
+            {language === "id" ? "✅ Luas selimut tabung = " : language === "en" ? "✅ Lateral surface area of the cylinder = " : "✅ 円柱の側面積 = "}
+            <InlineMath math="440 \text{ cm}^2" />
+          </p>
         </div>
       </div>
     ),
@@ -1878,30 +1927,54 @@ const luasExamples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah tong air berbentuk tabung terbuka (tanpa tutup atas) dengan diameter <InlineMath math="60 \text{ cm}" /> dan tinggi <InlineMath math="80 \text{ cm}" />.</p>
-        <p>Tong ini akan dicat di seluruh permukaan luarnya (alas + selimut). Jika 1 kaleng cat cukup untuk <InlineMath math="5.000 \text{ cm}^2" />, berapa kaleng cat yang diperlukan?</p>
-        <p className="text-xs text-white/50">(π = 3,14)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah tong air berbentuk tabung terbuka (tanpa tutup atas) dengan diameter <InlineMath math="60 \text{ cm}" /> dan tinggi <InlineMath math="80 \text{ cm}" />.</p>
+            <p>Tong ini akan dicat di seluruh permukaan luarnya (alas + selimut). Jika 1 kaleng cat cukup untuk <InlineMath math="5.000 \text{ cm}^2" />, berapa kaleng cat yang diperlukan?</p>
+            <p className="text-xs text-white/50">(π = 3,14)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>An open cylindrical water tank (without a top lid) has a diameter of <InlineMath math="60 \text{ cm}" /> and a height of <InlineMath math="80 \text{ cm}" />.</p>
+            <p>The tank will be painted on its entire outer surface (base + lateral surface). If one can of paint covers <InlineMath math="5.000 \text{ cm}^2" />, how many cans of paint are needed?</p>
+            <p className="text-xs text-white/50">(π = 3.14)</p>
+          </>
+        ) : (
+          <>
+            <p>上蓋のない円柱形の水槽があり、直径<InlineMath math="60 \text{ cm}" />、高さ<InlineMath math="80 \text{ cm}" />です。</p>
+            <p>この水槽の外側全体（底面＋側面）にペンキを塗ります。1缶で<InlineMath math="5.000 \text{ cm}^2" />塗れるとき、必要なペンキの缶数は何缶ですか？</p>
+            <p className="text-xs text-white/50">（π = 3.14）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">Langkah 1 — Cari jari-jari:</p>
+        <p className="text-yellow-400 font-semibold">
+          {language === "id" ? "Langkah 1 — Cari jari-jari:" : language === "en" ? "Step 1 — Find the radius:" : "ステップ1 — 半径を求める："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
           <BlockMath math="r = \frac{d}{2} = \frac{60}{2} = 30 \text{ cm}" />
         </div>
-        <p className="text-yellow-400 font-semibold">Langkah 2 — Luas permukaan terbuka (alas + selimut):</p>
+        <p className="text-yellow-400 font-semibold">
+          {language === "id" ? "Langkah 2 — Luas permukaan terbuka (alas + selimut):" : language === "en" ? "Step 2 — Open surface area (base + lateral surface):" : "ステップ2 — 開いた表面積（底面＋側面）："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
           <BlockMath math="L = \pi r^2 + 2\pi r \cdot t" />
           <BlockMath math="L = 3{,}14 \times 30^2 + 2 \times 3{,}14 \times 30 \times 80" />
           <BlockMath math="L = 3{,}14 \times 900 + 2 \times 3{,}14 \times 2.400" />
           <BlockMath math="L = 2.826 + 15.072 = 17.898 \text{ cm}^2" />
         </div>
-        <p className="text-yellow-400 font-semibold">Langkah 3 — Hitung kebutuhan cat:</p>
+        <p className="text-yellow-400 font-semibold">
+          {language === "id" ? "Langkah 3 — Hitung kebutuhan cat:" : language === "en" ? "Step 3 — Calculate paint needed:" : "ステップ3 — 必要な缶数を計算："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
           <BlockMath math="\text{Kaleng cat} = \frac{17.898}{5.000} = 3{,}58 \approx 4 \text{ kaleng}" />
         </div>
         <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs">
-          <p className="text-yellow-300 font-semibold">✅ Jawaban: Dibutuhkan <strong>4 kaleng cat</strong> (dibulatkan ke atas)</p>
+          <p className="text-yellow-300 font-semibold">
+            {language === "id" ? <>✅ Jawaban: Dibutuhkan <strong>4 kaleng cat</strong> (dibulatkan ke atas)</> : language === "en" ? <>✅ Answer: <strong>4 cans of paint</strong> are needed (rounded up)</> : <>✅ 答え：ペンキは<strong>4缶</strong>必要（切り上げ）</>}
+          </p>
         </div>
       </div>
     ),
@@ -1910,50 +1983,90 @@ const luasExamples: Ex[] = [
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah pabrik membuat label kertas yang menempel persis di selimut tabung kaleng.</p>
-        <p>Kaleng tersebut memiliki luas permukaan total <InlineMath math="1.507{,}2 \text{ cm}^2" /> dan tinggi <InlineMath math="15 \text{ cm}" />.</p>
-        <p>Tentukan: (a) jari-jari kaleng, (b) luas label kertas yang dibutuhkan untuk satu kaleng.</p>
-        <p className="text-xs text-white/50">(π = 3,14)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah pabrik membuat label kertas yang menempel persis di selimut tabung kaleng.</p>
+            <p>Kaleng tersebut memiliki luas permukaan total <InlineMath math="1.507{,}2 \text{ cm}^2" /> dan tinggi <InlineMath math="15 \text{ cm}" />.</p>
+            <p>Tentukan: (a) jari-jari kaleng, (b) luas label kertas yang dibutuhkan untuk satu kaleng.</p>
+            <p className="text-xs text-white/50">(π = 3,14)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A factory makes paper labels that fit exactly around the lateral surface of a can-shaped cylinder.</p>
+            <p>The can has a total surface area of <InlineMath math="1.507{,}2 \text{ cm}^2" /> and a height of <InlineMath math="15 \text{ cm}" />.</p>
+            <p>Determine: (a) the radius of the can, (b) the paper label area needed for one can.</p>
+            <p className="text-xs text-white/50">(π = 3.14)</p>
+          </>
+        ) : (
+          <>
+            <p>ある工場が、缶型の円柱の側面にぴったり貼る紙のラベルを作っています。</p>
+            <p>この缶の表面積の合計は<InlineMath math="1.507{,}2 \text{ cm}^2" />、高さは<InlineMath math="15 \text{ cm}" />です。</p>
+            <p>次を求めなさい：（a）缶の半径、（b）1缶分に必要な紙ラベルの面積。</p>
+            <p className="text-xs text-white/50">（π = 3.14）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Bentuk persamaan dari luas permukaan:</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 1 — Bentuk persamaan dari luas permukaan:" : language === "en" ? "Step 1 — Form an equation from the surface area:" : "ステップ1 — 表面積から方程式をつくる："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
           <BlockMath math="L = 2\pi r^2 + 2\pi r t" />
           <BlockMath math="1.507{,}2 = 2 \times 3{,}14 \times r^2 + 2 \times 3{,}14 \times r \times 15" />
           <BlockMath math="1.507{,}2 = 6{,}28 r^2 + 94{,}2 r" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Coba nilai r yang masuk akal (r = 10):</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 2 — Coba nilai r yang masuk akal (r = 10):" : language === "en" ? "Step 2 — Try a reasonable value of r (r = 10):" : "ステップ2 — 妥当な r の値を試す（r = 10）："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
           <BlockMath math="6{,}28 \times 100 + 94{,}2 \times 10 = 628 + 942 = 1.570 \neq 1.507{,}2" />
-          <p className="text-white/60">Coba r = 9:</p>
+          <p className="text-white/60">{language === "id" ? "Coba r = 9:" : language === "en" ? "Try r = 9:" : "r = 9 を試す："}</p>
           <BlockMath math="6{,}28 \times 81 + 94{,}2 \times 9 = 508{,}68 + 847{,}8 = 1.356{,}48 \neq 1.507{,}2" />
-          <p className="text-white/60">Coba r = 10 dan sederhanakan dengan faktorisasi:</p>
+          <p className="text-white/60">{language === "id" ? "Coba r = 10 dan sederhanakan dengan faktorisasi:" : language === "en" ? "Try r = 10 and simplify using factorization:" : "r = 10 を試し、因数分解で整理する："}</p>
           <BlockMath math="1.507{,}2 \div 6{,}28 = 240 \Rightarrow r^2 + 15r = 240" />
           <BlockMath math="r^2 + 15r - 240 = 0 \Rightarrow (r-10)(r+24)=0 \Rightarrow r = 10 \text{ cm}" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Hitung luas label (selimut saja):</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 3 — Hitung luas label (selimut saja):" : language === "en" ? "Step 3 — Calculate the label area (lateral surface only):" : "ステップ3 — ラベルの面積（側面のみ）を計算："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="L_{\text{selimut}} = 2\pi r \cdot t = 2 \times 3{,}14 \times 10 \times 15 = 942 \text{ cm}^2" />
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-1">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Jari-jari kaleng = <strong className="text-yellow-300">10 cm</strong></p>
-          <p className="text-white/80">• Luas label kertas = <strong className="text-yellow-300">942 cm²</strong></p>
+          <p className="text-red-300 font-semibold">{language === "id" ? "✅ Jawaban:" : language === "en" ? "✅ Answer:" : "✅ 答え："}</p>
+          <p className="text-white/80">{language === "id" ? "• Jari-jari kaleng = " : language === "en" ? "• Radius of the can = " : "• 缶の半径 = "}<strong className="text-yellow-300">10 cm</strong></p>
+          <p className="text-white/80">{language === "id" ? "• Luas label kertas = " : language === "en" ? "• Paper label area = " : "• 紙ラベルの面積 = "}<strong className="text-yellow-300">942 cm²</strong></p>
         </div>
       </div>
     ),
   },
-];
+  ];
+}
 
-const volExamples: Ex[] = [
+function getVolExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah gelas silindris memiliki jari-jari <InlineMath math="5 \text{ cm}" /> dan tinggi <InlineMath math="12 \text{ cm}" />.</p>
-        <p>Berapa volume gelas tersebut? (π = 3,14)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah gelas silindris memiliki jari-jari <InlineMath math="5 \text{ cm}" /> dan tinggi <InlineMath math="12 \text{ cm}" />.</p>
+            <p>Berapa volume gelas tersebut? (π = 3,14)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A cylindrical glass has a radius of <InlineMath math="5 \text{ cm}" /> and a height of <InlineMath math="12 \text{ cm}" />.</p>
+            <p>What is the volume of the glass? (π = 3.14)</p>
+          </>
+        ) : (
+          <>
+            <p>円柱形のグラスがあり、半径は<InlineMath math="5 \text{ cm}" />、高さは<InlineMath math="12 \text{ cm}" />です。</p>
+            <p>このグラスの体積はいくらですか？（π = 3.14）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
@@ -1963,7 +2076,10 @@ const volExamples: Ex[] = [
           <BlockMath math="V = 3{,}14 \times 25 \times 12 = 3{,}14 \times 300 = 942 \text{ cm}^3" />
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-          <p className="text-green-300 font-semibold text-xs">✅ Volume gelas = <InlineMath math="942 \text{ cm}^3" /></p>
+          <p className="text-green-300 font-semibold text-xs">
+            {language === "id" ? "✅ Volume gelas = " : language === "en" ? "✅ Volume of the glass = " : "✅ グラスの体積 = "}
+            <InlineMath math="942 \text{ cm}^3" />
+          </p>
         </div>
       </div>
     ),
@@ -1972,8 +2088,16 @@ const volExamples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
-        <p>Sebuah drum minyak berbentuk tabung berjari-jari <InlineMath math="35 \text{ cm}" /> dan tinggi <InlineMath math="1{,}2 \text{ m}" />. Jika harga minyak <strong className="text-yellow-300">Rp3.200,00</strong> per liter, maka harga 1 drum minyak adalah ….</p>
-        <p className="text-xs text-white/50">(gunakan π = <sup>22</sup>⁄<sub>7</sub> dan 1 liter = 1.000 cm³)</p>
+        {language === "id" ? (
+          <p>Sebuah drum minyak berbentuk tabung berjari-jari <InlineMath math="35 \text{ cm}" /> dan tinggi <InlineMath math="1{,}2 \text{ m}" />. Jika harga minyak <strong className="text-yellow-300">Rp3.200,00</strong> per liter, maka harga 1 drum minyak adalah ….</p>
+        ) : language === "en" ? (
+          <p>A cylindrical oil drum has a radius of <InlineMath math="35 \text{ cm}" /> and a height of <InlineMath math="1{,}2 \text{ m}" />. If the price of oil is <strong className="text-yellow-300">Rp3.200,00</strong> per liter, then the price of 1 drum of oil is ….</p>
+        ) : (
+          <p>半径<InlineMath math="35 \text{ cm}" />、高さ<InlineMath math="1{,}2 \text{ m}" />の円柱形の石油ドラムがあります。石油の価格が1リットルあたり<strong className="text-yellow-300">Rp3.200,00</strong>のとき、1ドラム分の石油の価格は……。</p>
+        )}
+        <p className="text-xs text-white/50">
+          {language === "id" ? <>(gunakan π = <sup>22</sup>⁄<sub>7</sub> dan 1 liter = 1.000 cm³)</> : language === "en" ? <>(use π = <sup>22</sup>⁄<sub>7</sub> and 1 liter = 1,000 cm³)</> : <>（π = <sup>22</sup>⁄<sub>7</sub>、1リットル = 1,000 cm³ を使用）</>}
+        </p>
         <div className="grid grid-cols-2 gap-2 text-sm">
           {[
             { opt: "A", label: "Rp1.478.400,00" },
@@ -1991,22 +2115,30 @@ const volExamples: Ex[] = [
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">Langkah 1 — Samakan satuan tinggi ke cm:</p>
+        <p className="text-yellow-400 font-semibold">
+          {language === "id" ? "Langkah 1 — Samakan satuan tinggi ke cm:" : language === "en" ? "Step 1 — Convert the height to cm:" : "ステップ1 — 高さの単位をcmにそろえる："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
           <BlockMath math="t = 1{,}2 \text{ m} = 120 \text{ cm}" />
         </div>
-        <p className="text-yellow-400 font-semibold">Langkah 2 — Hitung volume drum:</p>
+        <p className="text-yellow-400 font-semibold">
+          {language === "id" ? "Langkah 2 — Hitung volume drum:" : language === "en" ? "Step 2 — Calculate the drum's volume:" : "ステップ2 — ドラムの体積を計算："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
           <BlockMath math="V = \pi r^2 t = \frac{22}{7} \times 35^2 \times 120" />
           <BlockMath math="V = \frac{22}{7} \times 1.225 \times 120" />
           <BlockMath math="V = 22 \times 175 \times 120" />
           <BlockMath math="V = 462.000 \text{ cm}^3" />
         </div>
-        <p className="text-yellow-400 font-semibold">Langkah 3 — Konversi ke liter:</p>
+        <p className="text-yellow-400 font-semibold">
+          {language === "id" ? "Langkah 3 — Konversi ke liter:" : language === "en" ? "Step 3 — Convert to liters:" : "ステップ3 — リットルに変換："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
           <BlockMath math="V = \frac{462.000}{1.000} = 462 \text{ liter}" />
         </div>
-        <p className="text-yellow-400 font-semibold">Langkah 4 — Hitung harga minyak:</p>
+        <p className="text-yellow-400 font-semibold">
+          {language === "id" ? "Langkah 4 — Hitung harga minyak:" : language === "en" ? "Step 4 — Calculate the price of the oil:" : "ステップ4 — 石油の価格を計算："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-2 text-xs">
           <BlockMath math="\text{Harga} = 462 \times \text{Rp3.200,00} = \text{Rp1.478.400,00}" />
         </div>
@@ -2024,8 +2156,12 @@ const volExamples: Ex[] = [
           ))}
         </div>
         <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs">
-          <p className="text-yellow-300 font-semibold">✅ Jawaban: A. Rp1.478.400,00</p>
-          <p className="text-white/60 mt-1">Volume 462 liter × Rp3.200,00/liter = Rp1.478.400,00</p>
+          <p className="text-yellow-300 font-semibold">
+            {language === "id" ? "✅ Jawaban: A. Rp1.478.400,00" : language === "en" ? "✅ Answer: A. Rp1.478.400,00" : "✅ 答え：A. Rp1.478.400,00"}
+          </p>
+          <p className="text-white/60 mt-1">
+            {language === "id" ? "Volume 462 liter × Rp3.200,00/liter = Rp1.478.400,00" : language === "en" ? "Volume 462 liters × Rp3.200,00/liter = Rp1.478.400,00" : "体積462リットル × Rp3.200,00/リットル = Rp1.478.400,00"}
+          </p>
         </div>
       </div>
     ),
@@ -2037,16 +2173,47 @@ const volExamples: Ex[] = [
         <div className="flex justify-center">
           <img src={"/images/image_1780761862129.png"} alt="Bak mandi tabung" className="max-h-32 object-contain rounded" />
         </div>
-        <p>Sebuah bak mandi terbuat dari drum plastik yang dipotong. Drum tersebut memiliki diameter <InlineMath math="60 \text{ cm}" />, tinggi <InlineMath math="42 \text{ cm}" />, dan berisi air dengan tinggi <strong className="text-red-300">seperempat</strong> dari tinggi tabung.</p>
-        <p>Jika bak tersebut akan diisi dari air keran dengan debit <strong className="text-yellow-300">1,08 liter/menit</strong>, maka waktu yang diperlukan mengisi bak hingga penuh adalah ….</p>
-        <p className="text-xs text-white/50">(gunakan π = <sup>22</sup>⁄<sub>7</sub> dan 1 liter = 1.000 cm³)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah bak mandi terbuat dari drum plastik yang dipotong. Drum tersebut memiliki diameter <InlineMath math="60 \text{ cm}" />, tinggi <InlineMath math="42 \text{ cm}" />, dan berisi air dengan tinggi <strong className="text-red-300">seperempat</strong> dari tinggi tabung.</p>
+            <p>Jika bak tersebut akan diisi dari air keran dengan debit <strong className="text-yellow-300">1,08 liter/menit</strong>, maka waktu yang diperlukan mengisi bak hingga penuh adalah ….</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A bathtub is made from a cut plastic drum. The drum has a diameter of <InlineMath math="60 \text{ cm}" />, a height of <InlineMath math="42 \text{ cm}" />, and holds water at a height of <strong className="text-red-300">one quarter</strong> of the cylinder's height.</p>
+            <p>If the tub is filled from a tap with a flow rate of <strong className="text-yellow-300">1.08 liters/minute</strong>, then the time needed to fill the tub completely is ….</p>
+          </>
+        ) : (
+          <>
+            <p>あるお風呂の浴槽は、切断されたプラスチックドラムで作られています。このドラムは直径<InlineMath math="60 \text{ cm}" />、高さ<InlineMath math="42 \text{ cm}" />で、水の高さは円柱の高さの<strong className="text-red-300">4分の1</strong>です。</p>
+            <p>この浴槽に流量<strong className="text-yellow-300">1.08リットル/分</strong>の水道水を満杯になるまで注ぐとき、必要な時間は……。</p>
+          </>
+        )}
+        <p className="text-xs text-white/50">
+          {language === "id" ? <>(gunakan π = <sup>22</sup>⁄<sub>7</sub> dan 1 liter = 1.000 cm³)</> : language === "en" ? <>(use π = <sup>22</sup>⁄<sub>7</sub> and 1 liter = 1,000 cm³)</> : <>（π = <sup>22</sup>⁄<sub>7</sub>、1リットル = 1,000 cm³ を使用）</>}
+        </p>
         <div className="grid grid-cols-2 gap-2 text-sm">
-          {[
-            { opt: "A", label: "1 jam 2 menit 30 detik" },
-            { opt: "B", label: "1 jam 20 menit 30 detik" },
-            { opt: "C", label: "1 jam 22 menit 30 detik" },
-            { opt: "D", label: "1 jam 50 menit" },
-          ].map(({ opt, label }) => (
+          {(language === "id"
+            ? [
+                { opt: "A", label: "1 jam 2 menit 30 detik" },
+                { opt: "B", label: "1 jam 20 menit 30 detik" },
+                { opt: "C", label: "1 jam 22 menit 30 detik" },
+                { opt: "D", label: "1 jam 50 menit" },
+              ]
+            : language === "en"
+            ? [
+                { opt: "A", label: "1 hour 2 minutes 30 seconds" },
+                { opt: "B", label: "1 hour 20 minutes 30 seconds" },
+                { opt: "C", label: "1 hour 22 minutes 30 seconds" },
+                { opt: "D", label: "1 hour 50 minutes" },
+              ]
+            : [
+                { opt: "A", label: "1時間2分30秒" },
+                { opt: "B", label: "1時間20分30秒" },
+                { opt: "C", label: "1時間22分30秒" },
+                { opt: "D", label: "1時間50分" },
+              ]
+          ).map(({ opt, label }) => (
             <div key={opt} className="flex items-center gap-2 bg-slate-800/60 rounded-lg px-3 py-2">
               <span className="w-6 h-6 flex items-center justify-center rounded-full bg-slate-700 text-white/70 font-bold text-xs shrink-0">{opt}</span>
               <span className="text-white/80 text-xs">{label}</span>
@@ -2057,37 +2224,94 @@ const volExamples: Ex[] = [
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Identifikasi data:</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 1 — Identifikasi data:" : language === "en" ? "Step 1 — Identify the data:" : "ステップ1 — データを確認："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p className="text-white/70">Diameter = 60 cm → <InlineMath math="r = 30 \text{ cm}" /></p>
-          <p className="text-white/70">Tinggi tabung = 42 cm</p>
-          <p className="text-white/70">Tinggi air awal = <InlineMath math="\frac{1}{4} \times 42 = 10{,}5 \text{ cm}" /></p>
-          <p className="text-white/70">Tinggi yang perlu diisi = <InlineMath math="42 - 10{,}5 = 31{,}5 \text{ cm}" /></p>
+          {language === "id" ? (
+            <>
+              <p className="text-white/70">Diameter = 60 cm → <InlineMath math="r = 30 \text{ cm}" /></p>
+              <p className="text-white/70">Tinggi tabung = 42 cm</p>
+              <p className="text-white/70">Tinggi air awal = <InlineMath math="\frac{1}{4} \times 42 = 10{,}5 \text{ cm}" /></p>
+              <p className="text-white/70">Tinggi yang perlu diisi = <InlineMath math="42 - 10{,}5 = 31{,}5 \text{ cm}" /></p>
+            </>
+          ) : language === "en" ? (
+            <>
+              <p className="text-white/70">Diameter = 60 cm → <InlineMath math="r = 30 \text{ cm}" /></p>
+              <p className="text-white/70">Height of cylinder = 42 cm</p>
+              <p className="text-white/70">Initial water height = <InlineMath math="\frac{1}{4} \times 42 = 10{,}5 \text{ cm}" /></p>
+              <p className="text-white/70">Height still needed = <InlineMath math="42 - 10{,}5 = 31{,}5 \text{ cm}" /></p>
+            </>
+          ) : (
+            <>
+              <p className="text-white/70">直径 = 60 cm → <InlineMath math="r = 30 \text{ cm}" /></p>
+              <p className="text-white/70">円柱の高さ = 42 cm</p>
+              <p className="text-white/70">最初の水の高さ = <InlineMath math="\frac{1}{4} \times 42 = 10{,}5 \text{ cm}" /></p>
+              <p className="text-white/70">まだ入れる必要のある高さ = <InlineMath math="42 - 10{,}5 = 31{,}5 \text{ cm}" /></p>
+            </>
+          )}
         </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Hitung volume air yang perlu ditambah:</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 2 — Hitung volume air yang perlu ditambah:" : language === "en" ? "Step 2 — Calculate the volume of water still needed:" : "ステップ2 — 追加が必要な水の体積を計算："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
           <BlockMath math="V = \pi r^2 t = \frac{22}{7} \times 30^2 \times 31{,}5" />
           <BlockMath math="V = \frac{22}{7} \times 900 \times 31{,}5 = 22 \times 900 \times \frac{31{,}5}{7}" />
           <BlockMath math="V = 22 \times 900 \times 4{,}5 = 22 \times 4.050" />
           <BlockMath math="V = 89.100 \text{ cm}^3 = 89{,}1 \text{ liter}" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Hitung waktu pengisian:</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 3 — Hitung waktu pengisian:" : language === "en" ? "Step 3 — Calculate the filling time:" : "ステップ3 — 給水時間を計算："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
           <BlockMath math="\text{Waktu} = \frac{89{,}1 \text{ liter}}{1{,}08 \text{ liter/menit}} = 82{,}5 \text{ menit}" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 4 — Konversi menit ke jam, menit, detik:</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 4 — Konversi menit ke jam, menit, detik:" : language === "en" ? "Step 4 — Convert minutes to hours, minutes, seconds:" : "ステップ4 — 分を時・分・秒に変換："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p className="text-white/70">82,5 menit = <strong>60 menit + 22,5 menit</strong></p>
-          <p className="text-white/70">0,5 menit = 30 detik</p>
-          <p className="text-white/70">∴ Waktu = <strong className="text-green-300">1 jam 22 menit 30 detik</strong></p>
+          {language === "id" ? (
+            <>
+              <p className="text-white/70">82,5 menit = <strong>60 menit + 22,5 menit</strong></p>
+              <p className="text-white/70">0,5 menit = 30 detik</p>
+              <p className="text-white/70">∴ Waktu = <strong className="text-green-300">1 jam 22 menit 30 detik</strong></p>
+            </>
+          ) : language === "en" ? (
+            <>
+              <p className="text-white/70">82.5 minutes = <strong>60 minutes + 22.5 minutes</strong></p>
+              <p className="text-white/70">0.5 minutes = 30 seconds</p>
+              <p className="text-white/70">∴ Time = <strong className="text-green-300">1 hour 22 minutes 30 seconds</strong></p>
+            </>
+          ) : (
+            <>
+              <p className="text-white/70">82.5分 = <strong>60分 + 22.5分</strong></p>
+              <p className="text-white/70">0.5分 = 30秒</p>
+              <p className="text-white/70">∴ 時間 = <strong className="text-green-300">1時間22分30秒</strong></p>
+            </>
+          )}
         </div>
         <div className="grid grid-cols-2 gap-2 text-sm">
-          {[
-            { opt: "A", label: "1 jam 2 menit 30 detik", correct: false },
-            { opt: "B", label: "1 jam 20 menit 30 detik", correct: false },
-            { opt: "C", label: "1 jam 22 menit 30 detik", correct: true },
-            { opt: "D", label: "1 jam 50 menit", correct: false },
-          ].map(({ opt, label, correct }) => (
+          {(language === "id"
+            ? [
+                { opt: "A", label: "1 jam 2 menit 30 detik", correct: false },
+                { opt: "B", label: "1 jam 20 menit 30 detik", correct: false },
+                { opt: "C", label: "1 jam 22 menit 30 detik", correct: true },
+                { opt: "D", label: "1 jam 50 menit", correct: false },
+              ]
+            : language === "en"
+            ? [
+                { opt: "A", label: "1 hour 2 minutes 30 seconds", correct: false },
+                { opt: "B", label: "1 hour 20 minutes 30 seconds", correct: false },
+                { opt: "C", label: "1 hour 22 minutes 30 seconds", correct: true },
+                { opt: "D", label: "1 hour 50 minutes", correct: false },
+              ]
+            : [
+                { opt: "A", label: "1時間2分30秒", correct: false },
+                { opt: "B", label: "1時間20分30秒", correct: false },
+                { opt: "C", label: "1時間22分30秒", correct: true },
+                { opt: "D", label: "1時間50分", correct: false },
+              ]
+          ).map(({ opt, label, correct }) => (
             <div key={opt} className={`flex items-center gap-2 rounded-lg px-3 py-2 border ${correct ? "bg-green-950/60 border-green-600/60" : "bg-slate-800/40 border-slate-700/40 opacity-50"}`}>
               <span className={`w-6 h-6 flex items-center justify-center rounded-full font-bold text-xs shrink-0 ${correct ? "bg-green-600 text-white" : "bg-slate-700 text-white/50"}`}>{opt}</span>
               <span className={`text-xs font-semibold ${correct ? "text-green-300" : "text-white/50"}`}>{label} {correct && "✓"}</span>
@@ -2095,47 +2319,117 @@ const volExamples: Ex[] = [
           ))}
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs">
-          <p className="text-red-300 font-semibold">✅ Jawaban: C. 1 jam 22 menit 30 detik</p>
-          <p className="text-white/60 mt-1">V = 89.100 cm³ = 89,1 liter → 89,1 ÷ 1,08 = 82,5 menit = 1 jam 22 menit 30 detik</p>
+          <p className="text-red-300 font-semibold">
+            {language === "id" ? "✅ Jawaban: C. 1 jam 22 menit 30 detik" : language === "en" ? "✅ Answer: C. 1 hour 22 minutes 30 seconds" : "✅ 答え：C. 1時間22分30秒"}
+          </p>
+          <p className="text-white/60 mt-1">
+            {language === "id"
+              ? "V = 89.100 cm³ = 89,1 liter → 89,1 ÷ 1,08 = 82,5 menit = 1 jam 22 menit 30 detik"
+              : language === "en"
+              ? "V = 89,100 cm³ = 89.1 liters → 89.1 ÷ 1.08 = 82.5 minutes = 1 hour 22 minutes 30 seconds"
+              : "V = 89,100 cm³ = 89.1リットル → 89.1 ÷ 1.08 = 82.5分 = 1時間22分30秒"}
+          </p>
         </div>
       </div>
     ),
   },
-];
+  ];
+}
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────────────────────── */
-const unsurExamples: Ex[] = [
+function getUnsurExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-2">
-        <p>Ada berapa <strong className="text-green-300">sisi</strong>, <strong className="text-amber-300">rusuk</strong>, dan <strong className="text-sky-300">titik sudut</strong> pada sebuah tabung?</p>
+        {language === "id" ? (
+          <p>Ada berapa <strong className="text-green-300">sisi</strong>, <strong className="text-amber-300">rusuk</strong>, dan <strong className="text-sky-300">titik sudut</strong> pada sebuah tabung?</p>
+        ) : language === "en" ? (
+          <p>How many <strong className="text-green-300">faces</strong>, <strong className="text-amber-300">edges</strong>, and <strong className="text-sky-300">vertices</strong> does a cylinder have?</p>
+        ) : (
+          <p>円柱には<strong className="text-green-300">面</strong>、<strong className="text-amber-300">辺</strong>、<strong className="text-sky-300">頂点</strong>がそれぞれいくつありますか？</p>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
         <div className="grid grid-cols-3 gap-2 text-center text-xs">
-          <div className="bg-green-950/60 border border-green-700/40 rounded-lg p-3">
-            <p className="text-3xl font-bold text-green-300 mb-1">3</p>
-            <p className="text-green-200 font-bold">Sisi</p>
-            <p className="text-white/50 text-[10px] mt-1">Selimut + Alas + Tutup</p>
-          </div>
-          <div className="bg-amber-950/60 border border-amber-700/40 rounded-lg p-3">
-            <p className="text-3xl font-bold text-amber-300 mb-1">2</p>
-            <p className="text-amber-200 font-bold">Rusuk</p>
-            <p className="text-white/50 text-[10px] mt-1">Lingkaran atas &amp; bawah</p>
-          </div>
-          <div className="bg-sky-950/60 border border-sky-700/40 rounded-lg p-3">
-            <p className="text-3xl font-bold text-sky-300 mb-1">0</p>
-            <p className="text-sky-200 font-bold">Titik Sudut</p>
-            <p className="text-white/50 text-[10px] mt-1">Tidak ada sama sekali</p>
-          </div>
+          {language === "id" ? (
+            <>
+              <div className="bg-green-950/60 border border-green-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-green-300 mb-1">3</p>
+                <p className="text-green-200 font-bold">Sisi</p>
+                <p className="text-white/50 text-[10px] mt-1">Selimut + Alas + Tutup</p>
+              </div>
+              <div className="bg-amber-950/60 border border-amber-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-amber-300 mb-1">2</p>
+                <p className="text-amber-200 font-bold">Rusuk</p>
+                <p className="text-white/50 text-[10px] mt-1">Lingkaran atas &amp; bawah</p>
+              </div>
+              <div className="bg-sky-950/60 border border-sky-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-sky-300 mb-1">0</p>
+                <p className="text-sky-200 font-bold">Titik Sudut</p>
+                <p className="text-white/50 text-[10px] mt-1">Tidak ada sama sekali</p>
+              </div>
+            </>
+          ) : language === "en" ? (
+            <>
+              <div className="bg-green-950/60 border border-green-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-green-300 mb-1">3</p>
+                <p className="text-green-200 font-bold">Faces</p>
+                <p className="text-white/50 text-[10px] mt-1">Lateral surface + base + top</p>
+              </div>
+              <div className="bg-amber-950/60 border border-amber-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-amber-300 mb-1">2</p>
+                <p className="text-amber-200 font-bold">Edges</p>
+                <p className="text-white/50 text-[10px] mt-1">Top &amp; bottom circles</p>
+              </div>
+              <div className="bg-sky-950/60 border border-sky-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-sky-300 mb-1">0</p>
+                <p className="text-sky-200 font-bold">Vertices</p>
+                <p className="text-white/50 text-[10px] mt-1">None at all</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="bg-green-950/60 border border-green-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-green-300 mb-1">3</p>
+                <p className="text-green-200 font-bold">面</p>
+                <p className="text-white/50 text-[10px] mt-1">側面＋底面＋上面</p>
+              </div>
+              <div className="bg-amber-950/60 border border-amber-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-amber-300 mb-1">2</p>
+                <p className="text-amber-200 font-bold">辺</p>
+                <p className="text-white/50 text-[10px] mt-1">上下の円</p>
+              </div>
+              <div className="bg-sky-950/60 border border-sky-700/40 rounded-lg p-3">
+                <p className="text-3xl font-bold text-sky-300 mb-1">0</p>
+                <p className="text-sky-200 font-bold">頂点</p>
+                <p className="text-white/50 text-[10px] mt-1">まったくない</p>
+              </div>
+            </>
+          )}
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-3 text-xs">
-          <p className="text-green-300 font-semibold">✅ Jawaban: Sisi = <strong>3</strong>, Rusuk = <strong>2</strong>, Titik Sudut = <strong>0</strong></p>
-          <p className="text-white/60 mt-1">💡 Tabung tidak punya rusuk lurus maupun titik sudut — berbeda dengan kubus/balok!</p>
+          {language === "id" ? (
+            <>
+              <p className="text-green-300 font-semibold">✅ Jawaban: Sisi = <strong>3</strong>, Rusuk = <strong>2</strong>, Titik Sudut = <strong>0</strong></p>
+              <p className="text-white/60 mt-1">💡 Tabung tidak punya rusuk lurus maupun titik sudut — berbeda dengan kubus/balok!</p>
+            </>
+          ) : language === "en" ? (
+            <>
+              <p className="text-green-300 font-semibold">✅ Answer: Faces = <strong>3</strong>, Edges = <strong>2</strong>, Vertices = <strong>0</strong></p>
+              <p className="text-white/60 mt-1">💡 A cylinder has no straight edges or vertices — unlike a cube or cuboid!</p>
+            </>
+          ) : (
+            <>
+              <p className="text-green-300 font-semibold">✅ 答え：面 = <strong>3</strong>、辺 = <strong>2</strong>、頂点 = <strong>0</strong></p>
+              <p className="text-white/60 mt-1">💡 円柱には直線の辺も頂点もありません — 立方体や直方体とは違います！</p>
+            </>
+          )}
         </div>
       </div>
     ),
@@ -2144,14 +2438,35 @@ const unsurExamples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
-        <p>Bentuk bangun dari <strong className="text-purple-300">selimut tabung</strong> adalah ….</p>
+        {language === "id" ? (
+          <p>Bentuk bangun dari <strong className="text-purple-300">selimut tabung</strong> adalah ….</p>
+        ) : language === "en" ? (
+          <p>The shape formed by unrolling the <strong className="text-purple-300">lateral surface of a cylinder</strong> is ….</p>
+        ) : (
+          <p><strong className="text-purple-300">円柱の側面</strong>を展開した形は……。</p>
+        )}
         <div className="grid grid-cols-2 gap-2 text-sm">
-          {[
-            { opt: "A", label: "Segi empat" },
-            { opt: "B", label: "Persegi panjang" },
-            { opt: "C", label: "Belah ketupat" },
-            { opt: "D", label: "Bidang lengkung" },
-          ].map(({ opt, label }) => (
+          {(language === "id"
+            ? [
+                { opt: "A", label: "Segi empat" },
+                { opt: "B", label: "Persegi panjang" },
+                { opt: "C", label: "Belah ketupat" },
+                { opt: "D", label: "Bidang lengkung" },
+              ]
+            : language === "en"
+            ? [
+                { opt: "A", label: "Quadrilateral" },
+                { opt: "B", label: "Rectangle" },
+                { opt: "C", label: "Rhombus" },
+                { opt: "D", label: "Curved surface" },
+              ]
+            : [
+                { opt: "A", label: "四角形" },
+                { opt: "B", label: "長方形" },
+                { opt: "C", label: "ひし形" },
+                { opt: "D", label: "曲面" },
+              ]
+          ).map(({ opt, label }) => (
             <div key={opt} className="flex items-center gap-2 bg-slate-800/60 rounded-lg px-3 py-2">
               <span className="w-6 h-6 flex items-center justify-center rounded-full bg-slate-700 text-white/70 font-bold text-xs shrink-0">{opt}</span>
               <span className="text-white/80 text-xs">{label}</span>
@@ -2163,12 +2478,27 @@ const unsurExamples: Ex[] = [
     answer: (
       <div className="space-y-3 text-sm font-body">
         <div className="grid grid-cols-2 gap-2 text-sm">
-          {[
-            { opt: "A", label: "Segi empat", correct: false },
-            { opt: "B", label: "Persegi panjang", correct: true },
-            { opt: "C", label: "Belah ketupat", correct: false },
-            { opt: "D", label: "Bidang lengkung", correct: false },
-          ].map(({ opt, label, correct }) => (
+          {(language === "id"
+            ? [
+                { opt: "A", label: "Segi empat", correct: false },
+                { opt: "B", label: "Persegi panjang", correct: true },
+                { opt: "C", label: "Belah ketupat", correct: false },
+                { opt: "D", label: "Bidang lengkung", correct: false },
+              ]
+            : language === "en"
+            ? [
+                { opt: "A", label: "Quadrilateral", correct: false },
+                { opt: "B", label: "Rectangle", correct: true },
+                { opt: "C", label: "Rhombus", correct: false },
+                { opt: "D", label: "Curved surface", correct: false },
+              ]
+            : [
+                { opt: "A", label: "四角形", correct: false },
+                { opt: "B", label: "長方形", correct: true },
+                { opt: "C", label: "ひし形", correct: false },
+                { opt: "D", label: "曲面", correct: false },
+              ]
+          ).map(({ opt, label, correct }) => (
             <div key={opt} className={`flex items-center gap-2 rounded-lg px-3 py-2 border ${correct ? "bg-green-950/60 border-green-600/60" : "bg-slate-800/40 border-slate-700/40 opacity-50"}`}>
               <span className={`w-6 h-6 flex items-center justify-center rounded-full font-bold text-xs shrink-0 ${correct ? "bg-green-600 text-white" : "bg-slate-700 text-white/50"}`}>{opt}</span>
               <span className={`text-xs font-semibold ${correct ? "text-green-300" : "text-white/50"}`}>{label} {correct && "✓"}</span>
@@ -2176,8 +2506,22 @@ const unsurExamples: Ex[] = [
           ))}
         </div>
         <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-1">
-          <p className="text-yellow-300 font-semibold">✅ Jawaban: B. Persegi Panjang</p>
-          <p className="text-white/70">Ketika selimut tabung "dibuka" dan diratakan, bentuknya adalah <strong className="text-purple-300">persegi panjang</strong> dengan panjang = 2πr (keliling lingkaran) dan lebar = t (tinggi tabung).</p>
+          {language === "id" ? (
+            <>
+              <p className="text-yellow-300 font-semibold">✅ Jawaban: B. Persegi Panjang</p>
+              <p className="text-white/70">Ketika selimut tabung "dibuka" dan diratakan, bentuknya adalah <strong className="text-purple-300">persegi panjang</strong> dengan panjang = 2πr (keliling lingkaran) dan lebar = t (tinggi tabung).</p>
+            </>
+          ) : language === "en" ? (
+            <>
+              <p className="text-yellow-300 font-semibold">✅ Answer: B. Rectangle</p>
+              <p className="text-white/70">When the cylinder's lateral surface is "unrolled" and flattened, its shape is a <strong className="text-purple-300">rectangle</strong> with length = 2πr (the circle's circumference) and width = t (the cylinder's height).</p>
+            </>
+          ) : (
+            <>
+              <p className="text-yellow-300 font-semibold">✅ 答え：B. 長方形</p>
+              <p className="text-white/70">円柱の側面を「開いて」平らにすると、その形は縦 = 2πr（円周）、横 = t（円柱の高さ）の<strong className="text-purple-300">長方形</strong>になります。</p>
+            </>
+          )}
         </div>
       </div>
     ),
@@ -2186,10 +2530,10 @@ const unsurExamples: Ex[] = [
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
-        <p>Perhatikan gambar selimut tabung berikut.</p>
+        <p>{language === "id" ? "Perhatikan gambar selimut tabung berikut." : language === "en" ? "Look at the following picture of a cylinder's lateral surface." : "次の円柱の側面の図を見てください。"}</p>
 
         {/* SVG selimut tabung — persegi panjang dengan keterangan ukuran */}
-        <svg viewBox="0 0 400 180" className="w-full max-w-xs mx-auto block" aria-label="Selimut tabung: lebar 22 cm, tinggi t = 10 cm">
+        <svg viewBox="0 0 400 180" className="w-full max-w-xs mx-auto block" aria-label={language === "id" ? "Selimut tabung: lebar 22 cm, tinggi t = 10 cm" : language === "en" ? "Cylinder lateral surface: width 22 cm, height t = 10 cm" : "円柱の側面：幅22 cm、高さ t = 10 cm"}>
           {/* Persegi panjang selimut */}
           <rect x="30" y="20" width="230" height="120" fill="none" stroke="#e2e8f0" strokeWidth="2"/>
 
@@ -2204,11 +2548,11 @@ const unsurExamples: Ex[] = [
           <line x1="272" y1="20"  x2="284" y2="20"  stroke="#22c55e" strokeWidth="1.5"/>
           <line x1="272" y1="140" x2="284" y2="140" stroke="#22c55e" strokeWidth="1.5"/>
           <text x="290" y="77" fill="#22c55e" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="start">t = 10 cm</text>
-          <text x="290" y="93" fill="#86efac" fontSize="9"  fontFamily="monospace" textAnchor="start">(tinggi)</text>
+          <text x="290" y="93" fill="#86efac" fontSize="9"  fontFamily="monospace" textAnchor="start">{language === "id" ? "(tinggi)" : language === "en" ? "(height)" : "（高さ）"}</text>
         </svg>
 
-        <p>Jari-jari tabung yang terjadi adalah ….</p>
-        <p className="text-white/50 text-xs">(gunakan π = <sup>22</sup>⁄<sub>7</sub>)</p>
+        <p>{language === "id" ? "Jari-jari tabung yang terjadi adalah …." : language === "en" ? "The resulting radius of the cylinder is …." : "このとき円柱の半径は……。"}</p>
+        <p className="text-white/50 text-xs">{language === "id" ? <>(gunakan π = <sup>22</sup>⁄<sub>7</sub>)</> : language === "en" ? <>(use π = <sup>22</sup>⁄<sub>7</sub>)</> : <>（π = <sup>22</sup>⁄<sub>7</sub> を使用）</>}</p>
         <div className="grid grid-cols-2 gap-2 text-sm">
           {[
             { opt: "A", label: "3,5 cm" },
@@ -2226,9 +2570,11 @@ const unsurExamples: Ex[] = [
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Pembahasan:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "Pembahasan:" : language === "en" ? "Solution:" : "解説："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
-          <p className="text-white/70">Lebar selimut = keliling lingkaran alas = 22 cm</p>
+          <p className="text-white/70">
+            {language === "id" ? "Lebar selimut = keliling lingkaran alas = 22 cm" : language === "en" ? "Width of the lateral surface = circumference of the base circle = 22 cm" : "側面の幅 = 底面の円周 = 22 cm"}
+          </p>
           <BlockMath math="2\pi r = 22" />
           <BlockMath math="2 \times \frac{22}{7} \times r = 22" />
           <BlockMath math="\frac{44}{7} \times r = 22" />
@@ -2248,22 +2594,25 @@ const unsurExamples: Ex[] = [
           ))}
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs">
-          <p className="text-red-300 font-semibold">✅ Jawaban: A. 3,5 cm</p>
-          <p className="text-white/60 mt-1">Lebar persegi panjang selimut = keliling lingkaran = 2πr, sehingga r = 3,5 cm</p>
+          <p className="text-red-300 font-semibold">{language === "id" ? "✅ Jawaban: A. 3,5 cm" : language === "en" ? "✅ Answer: A. 3.5 cm" : "✅ 答え：A. 3.5 cm"}</p>
+          <p className="text-white/60 mt-1">
+            {language === "id" ? "Lebar persegi panjang selimut = keliling lingkaran = 2πr, sehingga r = 3,5 cm" : language === "en" ? "Width of the lateral surface rectangle = circle's circumference = 2πr, so r = 3.5 cm" : "側面の長方形の幅 = 円周 = 2πr なので、r = 3.5 cm"}
+          </p>
         </div>
       </div>
     ),
   },
-];
+  ];
+}
 
-const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
+const ExampleCard = ({ ex, idx, prefix, language }: { ex: Ex; idx: number; prefix: string; language: Language }) => {
   const [show, setShow] = useState(false);
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
       <div className={`${ex.bg} px-5 py-4`}>
         <div className="flex items-center gap-2 mb-3">
           <span className={`text-xs font-bold font-display px-2 py-0.5 rounded ${ex.badgeBg} ${ex.color} border ${ex.border}`}>
-            {prefix} {idx + 1} — {ex.level}
+            {prefix} {idx + 1} — {levelLabel(ex.level, language)}
           </span>
         </div>
         {ex.question}
@@ -2352,6 +2701,52 @@ const TabungPage = () => {
   };
 
   const ck = kesimpulanTrans[language];
+  const unsurExamples = getUnsurExamples(language);
+  const luasExamples = getLuasExamples(language);
+  const volExamples = getVolExamples(language);
+
+  const contohSoalTrans = {
+    id: {
+      unsurTitle: "Contoh Soal — Unsur-unsur Tabung",
+      unsurSubtitle: "Uji pemahamanmu tentang unsur-unsur tabung",
+      luasTitle: "Contoh Soal — Luas Permukaan",
+      luasSubtitle: "Latihan bertingkat dari mudah hingga sulit",
+      volTitle: "Contoh Soal — Volume",
+      volSubtitle: "Latihan bertingkat dari mudah hingga sulit",
+      pageSubtitle: "Kelas 9 · Bangun Ruang Sisi Lengkung",
+      slideLabel: "Slide",
+      prev: "← Sebelumnya",
+      next: "Selanjutnya →",
+      back: "← Kembali ke Bangun Ruang Sisi Lengkung",
+    },
+    en: {
+      unsurTitle: "Examples — Elements of a Cylinder",
+      unsurSubtitle: "Test your understanding of the elements of a cylinder",
+      luasTitle: "Examples — Surface Area",
+      luasSubtitle: "Graded practice from easy to hard",
+      volTitle: "Examples — Volume",
+      volSubtitle: "Graded practice from easy to hard",
+      pageSubtitle: "Grade 9 · Curved-Surface Solids",
+      slideLabel: "Slide",
+      prev: "← Previous",
+      next: "Next →",
+      back: "← Back to Curved-Surface Solids",
+    },
+    ja: {
+      unsurTitle: "例題 — 円柱の構成要素",
+      unsurSubtitle: "円柱の構成要素についての理解を確認しよう",
+      luasTitle: "例題 — 表面積",
+      luasSubtitle: "易しい問題から難しい問題までの段階的練習",
+      volTitle: "例題 — 体積",
+      volSubtitle: "易しい問題から難しい問題までの段階的練習",
+      pageSubtitle: "9年生・曲面図形",
+      slideLabel: "スライド",
+      prev: "← 前へ",
+      next: "次へ →",
+      back: "← 曲面図形に戻る",
+    },
+  };
+  const cs = contohSoalTrans[language];
 
   const kesimpulanSlide = {
     title: ck.slideTitle,
@@ -2388,32 +2783,32 @@ const TabungPage = () => {
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
     kesimpulanSlide,
     {
-      title: "Contoh Soal — Unsur-unsur Tabung",
+      title: cs.unsurTitle,
       icon: "🏷️",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Uji pemahamanmu tentang unsur-unsur tabung</p>
-          {unsurExamples.map((ex, i) => <ExampleCard key={`u${i}`} ex={ex} idx={i} prefix="SOAL"/>)}
+          <p className="text-white/40 text-xs text-center font-body">{cs.unsurSubtitle}</p>
+          {unsurExamples.map((ex, i) => <ExampleCard key={`u${i}`} ex={ex} idx={i} prefix="SOAL" language={language}/>)}
         </div>
       ),
     },
     {
-      title: "Contoh Soal — Luas Permukaan",
+      title: cs.luasTitle,
       icon: "🎨",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+          <p className="text-white/40 text-xs text-center font-body">{cs.luasSubtitle}</p>
+          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS" language={language}/>)}
         </div>
       ),
     },
     {
-      title: "Contoh Soal — Volume",
+      title: cs.volTitle,
       icon: "📦",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
+          <p className="text-white/40 text-xs text-center font-body">{cs.volSubtitle}</p>
+          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME" language={language}/>)}
         </div>
       ),
     },
@@ -2435,7 +2830,7 @@ const TabungPage = () => {
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
           TABUNG
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{cs.pageSubtitle}</p>
 
         <div className="flex items-center justify-center gap-1.5 mb-5 flex-wrap">
           {slides.map((_, i) => (
@@ -2456,7 +2851,7 @@ const TabungPage = () => {
             <span className="text-2xl">{slide.icon}</span>
             <div className="flex-1 min-w-0">
               <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
-                Slide {currentSlide + 1} / {totalSlides}
+                {cs.slideLabel} {currentSlide + 1} / {totalSlides}
               </p>
               <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
             </div>
@@ -2472,7 +2867,7 @@ const TabungPage = () => {
             disabled={currentSlide === 0}
             className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body bg-slate-800/60 border border-slate-600 text-white/70 rounded-xl hover:bg-slate-700/60 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            ← Sebelumnya
+            {cs.prev}
           </button>
           <span className="text-white/30 text-xs font-body">{currentSlide + 1} / {totalSlides}</span>
           <button
@@ -2480,14 +2875,14 @@ const TabungPage = () => {
             disabled={currentSlide === totalSlides - 1}
             className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body bg-primary/20 border border-primary/50 text-primary rounded-xl hover:bg-primary/30 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            Selanjutnya →
+            {cs.next}
           </button>
         </div>
 
         <div className="text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Bangun Ruang Sisi Lengkung
+            {cs.back}
           </button>
         </div>
 
