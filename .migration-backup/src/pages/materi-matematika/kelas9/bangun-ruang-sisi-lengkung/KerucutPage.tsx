@@ -6,6 +6,8 @@ import { Triangle, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
+import type { Language } from "@/contexts/LanguageContext";
 
 /* ─────────────────────────────────────────────────────────────
    3D CONE SVG RENDERER — manual projection, painter's algorithm
@@ -1280,46 +1282,117 @@ const UnsurSoalQuiz = () => {
   );
 };
 
-const sections: Sec[] = [
-  {
+/* ── Page-level translations (title / subtitle / nav) ────────── */
+const pageTrans = {
+  id: { title: "KERUCUT", subtitle: "Kelas 9 · Bangun Ruang Sisi Lengkung" },
+  en: { title: "CONE", subtitle: "Grade 9 · Curved-Surface Solids" },
+  ja: { title: "円錐", subtitle: "9年生・曲面図形" },
+};
+
+/* ── Slide 1 translations (Definisi Kerucut / Definition of Cone) ── */
+const slide1Trans = {
+  id: {
     title: "Definisi Kerucut",
+    intro: (
+      <>
+        <strong className="text-cyan-300">Kerucut</strong> adalah bangun ruang sisi lengkung yang terbentuk dari
+        sebuah <strong className="text-yellow-300">alas berbentuk lingkaran</strong> dan sebuah{" "}
+        <strong className="text-yellow-300">selimut melengkung</strong> yang semakin mengecil hingga bertemu di satu titik
+        yang disebut <strong className="text-yellow-300">puncak (titik apex)</strong>. Bayangkan topi ulang tahun, wafer es krim,
+        atau tanda lalu lintas berbentuk kerucut!
+      </>
+    ),
+    propsLabel: "📌 Sifat-sifat Kerucut:",
+    prop1: <>Memiliki <strong className="text-yellow-300">1 sisi lengkung</strong> (selimut) dan <strong className="text-yellow-300">1 sisi datar</strong> (alas lingkaran)</>,
+    prop2: <>Memiliki <strong className="text-yellow-300">1 titik puncak (apex)</strong> dan <strong className="text-yellow-300">1 rusuk lengkung</strong> (keliling alas)</>,
+    prop3: <>Jari-jari alas dilambangkan <InlineMath math="r" /></>,
+    prop4: <>Tinggi kerucut (jarak puncak ke pusat alas) dilambangkan <InlineMath math="t" /></>,
+    prop5: <>Garis pelukis (jarak puncak ke titik tepi alas) dilambangkan <InlineMath math="s" /></>,
+    quoteLabel: "Kerucut vs Tabung:",
+    quoteText: "Keduanya punya alas lingkaran, tapi tabung punya dua alas dan tinggi seragam, sedangkan kerucut hanya punya satu alas dan meruncing ke atas!",
+    realWorldTitle: "Benda Berbentuk Kerucut di Kehidupan Sehari-hari",
+    imgLabels: ["Caping", "Rambu Lalu Lintas", "Wafer Es Krim", "Nasi Tumpeng", "Topi Ulang Tahun", "Corong"],
+  },
+  en: {
+    title: "Definition of a Cone",
+    intro: (
+      <>
+        A <strong className="text-cyan-300">cone</strong> is a curved-surface solid formed by
+        a <strong className="text-yellow-300">circular base</strong> and a{" "}
+        <strong className="text-yellow-300">curved lateral surface</strong> that tapers until it meets at a single point
+        called the <strong className="text-yellow-300">apex</strong>. Think of a birthday hat, an ice cream wafer cone,
+        or a cone-shaped traffic sign!
+      </>
+    ),
+    propsLabel: "📌 Properties of a Cone:",
+    prop1: <>Has <strong className="text-yellow-300">1 curved side</strong> (lateral surface) and <strong className="text-yellow-300">1 flat side</strong> (circular base)</>,
+    prop2: <>Has <strong className="text-yellow-300">1 apex</strong> and <strong className="text-yellow-300">1 curved edge</strong> (the base's circumference)</>,
+    prop3: <>The base radius is denoted <InlineMath math="r" /></>,
+    prop4: <>The cone's height (apex to base center) is denoted <InlineMath math="t" /></>,
+    prop5: <>The slant height (apex to a point on the base rim) is denoted <InlineMath math="s" /></>,
+    quoteLabel: "Cone vs. Cylinder:",
+    quoteText: "Both have a circular base, but a cylinder has two bases and a uniform height, while a cone has only one base and tapers to a point!",
+    realWorldTitle: "Cone-Shaped Objects in Daily Life",
+    imgLabels: ["Conical Hat", "Traffic Sign", "Ice Cream Wafer Cone", "Cone-Shaped Rice (Tumpeng)", "Birthday Hat", "Funnel"],
+  },
+  ja: {
+    title: "円錐の定義",
+    intro: (
+      <>
+        <strong className="text-cyan-300">円錐</strong>とは、<strong className="text-yellow-300">円形の底面</strong>と、
+        次第に細くなって<strong className="text-yellow-300">頂点</strong>と呼ばれる一点に集まる
+        <strong className="text-yellow-300">曲面の側面</strong>からなる曲面図形です。誕生日の帽子、アイスクリームのコーン、
+        円錐形の交通標識を想像してみてください！
+      </>
+    ),
+    propsLabel: "📌 円錐の性質：",
+    prop1: <><strong className="text-yellow-300">1つの曲面</strong>（側面）と<strong className="text-yellow-300">1つの平面</strong>（円形の底面）を持つ</>,
+    prop2: <><strong className="text-yellow-300">1つの頂点</strong>と<strong className="text-yellow-300">1つの曲線の辺</strong>（底面の円周）を持つ</>,
+    prop3: <>底面の半径は <InlineMath math="r" /> で表す</>,
+    prop4: <>円錐の高さ（頂点から底面の中心まで）は <InlineMath math="t" /> で表す</>,
+    prop5: <>母線（頂点から底面の縁までの線）は <InlineMath math="s" /> で表す</>,
+    quoteLabel: "円錐と円柱の違い：",
+    quoteText: "どちらも円形の底面を持ちますが、円柱は底面が2つあり高さが一定なのに対し、円錐は底面が1つで先端に向かって細くなります！",
+    realWorldTitle: "身近にある円錐形のもの",
+    imgLabels: ["編み笠", "交通標識", "アイスクリームコーン", "円錐形のご飯（トゥンペン）", "誕生日帽子", "じょうご"],
+  },
+};
+
+function getSections(language: Language): Sec[] {
+  const s1 = slide1Trans[language];
+  return [
+  {
+    title: s1.title,
     icon: "🔺",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          <strong className="text-cyan-300">Kerucut</strong> adalah bangun ruang sisi lengkung yang terbentuk dari
-          sebuah <strong className="text-yellow-300">alas berbentuk lingkaran</strong> dan sebuah{" "}
-          <strong className="text-yellow-300">selimut melengkung</strong> yang semakin mengecil hingga bertemu di satu titik
-          yang disebut <strong className="text-yellow-300">puncak (titik apex)</strong>. Bayangkan topi ulang tahun, wafer es krim,
-          atau tanda lalu lintas berbentuk kerucut!
-        </p>
+        <p>{s1.intro}</p>
         <div className="bg-cyan-950/60 border border-cyan-700/50 rounded-lg p-4 space-y-2">
-          <p className="text-cyan-300 font-semibold">📌 Sifat-sifat Kerucut:</p>
+          <p className="text-cyan-300 font-semibold">{s1.propsLabel}</p>
           <ul className="space-y-1 text-xs text-white/75">
-            <li>• Memiliki <strong className="text-yellow-300">1 sisi lengkung</strong> (selimut) dan <strong className="text-yellow-300">1 sisi datar</strong> (alas lingkaran)</li>
-            <li>• Memiliki <strong className="text-yellow-300">1 titik puncak (apex)</strong> dan <strong className="text-yellow-300">1 rusuk lengkung</strong> (keliling alas)</li>
-            <li>• Jari-jari alas dilambangkan <InlineMath math="r" /></li>
-            <li>• Tinggi kerucut (jarak puncak ke pusat alas) dilambangkan <InlineMath math="t" /></li>
-            <li>• Garis pelukis (jarak puncak ke titik tepi alas) dilambangkan <InlineMath math="s" /></li>
+            <li>• {s1.prop1}</li>
+            <li>• {s1.prop2}</li>
+            <li>• {s1.prop3}</li>
+            <li>• {s1.prop4}</li>
+            <li>• {s1.prop5}</li>
           </ul>
         </div>
         <blockquote className="border-l-4 border-cyan-500 pl-3 text-cyan-200 text-xs italic">
-          💡 <strong>Kerucut vs Tabung:</strong> Keduanya punya alas lingkaran, tapi tabung punya dua alas dan tinggi seragam,
-          sedangkan kerucut hanya punya satu alas dan meruncing ke atas!
+          💡 <strong>{s1.quoteLabel}</strong> {s1.quoteText}
         </blockquote>
         <InteractiveCone3D />
 
         {/* ── Foto Benda Berbentuk Kerucut — slide 2 ── */}
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
-          <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Kerucut di Kehidupan Sehari-hari</p>
+          <p className="text-cyan-300 font-bold text-sm text-center">{s1.realWorldTitle}</p>
           <div className="grid grid-cols-3 gap-2">
             {[
-              { src: "/images/image_1780701179640.png",    label: "Caping" },
-              { src: "/images/image_1780701419978.png",      label: "Rambu Lalu Lintas" },
-              { src: "/images/image_1780701492837.png",     label: "Wafer Es Krim" },
-              { src: "/images/image_1780701574690.png",   label: "Nasi Tumpeng" },
-              { src: "/images/image_1780701763127.png", label: "Topi Ulang Tahun" },
-              { src: "/images/image_1780701892436.png",    label: "Corong" },
+              { src: "/images/image_1780701179640.png",    label: s1.imgLabels[0] },
+              { src: "/images/image_1780701419978.png",      label: s1.imgLabels[1] },
+              { src: "/images/image_1780701492837.png",     label: s1.imgLabels[2] },
+              { src: "/images/image_1780701574690.png",   label: s1.imgLabels[3] },
+              { src: "/images/image_1780701763127.png", label: s1.imgLabels[4] },
+              { src: "/images/image_1780701892436.png",    label: s1.imgLabels[5] },
             ].map(({ src, label }) => (
               <div key={label} className="flex flex-col items-center gap-1">
                 <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
@@ -1631,12 +1704,22 @@ const sections: Sec[] = [
       </div>
     ),
   },
-];
+  ];
+}
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE PROBLEMS
 ───────────────────────────────────────────────────────────── */
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
+
+const levelLabels: Record<string, Record<Language, string>> = {
+  MUDAH:  { id: "MUDAH",  en: "EASY",   ja: "基本" },
+  SEDANG: { id: "SEDANG", en: "MEDIUM", ja: "標準" },
+  SULIT:  { id: "SULIT",  en: "HARD",   ja: "発展" },
+};
+function levelLabel(level: string, language: Language): string {
+  return levelLabels[level]?.[language] ?? level;
+}
 
 const gpExamples: Ex[] = [
   {
@@ -1885,14 +1968,14 @@ const volExamples: Ex[] = [
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────────────────────── */
-const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
+const ExampleCard = ({ ex, idx, prefix, language }: { ex: Ex; idx: number; prefix: string; language: Language }) => {
   const [show, setShow] = useState(false);
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
       <div className={`${ex.bg} px-5 py-4`}>
         <div className="flex items-center gap-2 mb-3">
           <span className={`text-xs font-bold font-display px-2 py-0.5 rounded ${ex.badgeBg} ${ex.color} border ${ex.border}`}>
-            {prefix} {idx + 1} — {ex.level}
+            {prefix} {idx + 1} — {levelLabel(ex.level, language)}
           </span>
         </div>
         {ex.question}
@@ -1912,7 +1995,10 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
 ───────────────────────────────────────────────────────────── */
 const KerucutPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const pt = pageTrans[language];
+  const sections = getSections(language);
 
   const slides = [
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
@@ -1938,7 +2024,7 @@ const KerucutPage = () => {
       content: (
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS" language={language}/>)}
         </div>
       ),
     },
@@ -1948,7 +2034,7 @@ const KerucutPage = () => {
       content: (
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
+          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME" language={language}/>)}
         </div>
       ),
     },
@@ -1968,9 +2054,9 @@ const KerucutPage = () => {
 
         <Triangle className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
-          KERUCUT
+          {pt.title}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{pt.subtitle}</p>
 
         <div className="flex items-center justify-center gap-1.5 mb-5 flex-wrap">
           {slides.map((_, i) => (
