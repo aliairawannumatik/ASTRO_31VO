@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Numatik"
+version = "1.0.0"
+id = "artifacts/numatik"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 5000
+
+[services.development]
+run = "cd /home/runner/workspace/.migration-backup && npm run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/numatik", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/numatik/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "3001"
+BASE_PATH = "/"

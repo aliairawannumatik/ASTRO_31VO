@@ -1,0 +1,1 @@
+- [Numatik artifact setup](numatik-artifact-setup.md) — how .migration-backup is wired as a registered artifact; port/PATH gotchas that caused proxy failures
