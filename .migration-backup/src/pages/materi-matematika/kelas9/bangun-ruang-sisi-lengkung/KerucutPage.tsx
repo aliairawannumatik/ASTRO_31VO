@@ -2388,170 +2388,523 @@ const gpExamples: Ex[] = [
   },
 ];
 
-const luasExamples: Ex[] = [
-  {
-    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah kerucut memiliki jari-jari <InlineMath math="7 \text{ cm}" /> dan garis pelukis <InlineMath math="25 \text{ cm}" />.</p>
-        <p>Hitung luas permukaan kerucut tersebut! (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-2 text-sm font-body">
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
-          <BlockMath math="L = \pi r (r + s) = \frac{22}{7} \times 7 \times (7 + 25)" />
-          <BlockMath math="= 22 \times 32 = 704 \text{ cm}^2" />
-        </div>
-        <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-          <p className="text-green-300 font-semibold text-xs">✅ Luas permukaan = <InlineMath math="704 \text{ cm}^2" /></p>
-        </div>
-      </div>
-    ),
+const exampleSlidesTrans: Record<Language, { luasTitle: string; volTitle: string; subtitle: string }> = {
+  id: {
+    luasTitle: "Contoh Soal — Luas Permukaan",
+    volTitle: "Contoh Soal — Volume",
+    subtitle: "Latihan bertingkat dari mudah hingga sulit",
   },
-  {
-    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah corong berbentuk kerucut (tanpa alas) memiliki diameter <InlineMath math="20 \text{ cm}" /> dan tinggi <InlineMath math="24 \text{ cm}" />.</p>
-        <p>Berapa luas selimut corong tersebut? (Gunakan <InlineMath math="\pi = 3{,}14" />)</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">Langkah 1 — Tentukan r dan cari s:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p className="text-white/70"><InlineMath math="r = \frac{d}{2} = \frac{20}{2} = 10 \text{ cm}" /></p>
-          <BlockMath math="s = \sqrt{r^2+t^2} = \sqrt{10^2+24^2} = \sqrt{100+576} = \sqrt{676} = 26 \text{ cm}" />
-        </div>
-        <p className="text-yellow-400 font-semibold">Langkah 2 — Hitung luas selimut:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="L_{\text{selimut}} = \pi r s = 3{,}14 \times 10 \times 26 = 816{,}4 \text{ cm}^2" />
-        </div>
-        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
-          <p className="text-yellow-300 font-semibold text-xs">✅ Luas selimut corong = <strong>816,4 cm²</strong></p>
-        </div>
-      </div>
-    ),
+  en: {
+    luasTitle: "Example Problems — Surface Area",
+    volTitle: "Example Problems — Volume",
+    subtitle: "Progressive practice from easy to hard",
   },
-  {
-    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah pabrik membuat wadah es krim berbentuk kerucut dari kertas karton. Luas selimut kerucut adalah <InlineMath math="550 \text{ cm}^2" /> dan jari-jari alas <InlineMath math="7 \text{ cm}" />.</p>
-        <p>Tentukan: (a) garis pelukis, (b) tinggi kerucut, (c) luas permukaan total. (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">(a) Cari garis pelukis dari luas selimut:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="\pi r s = 550 \Rightarrow \frac{22}{7} \times 7 \times s = 550" />
-          <BlockMath math="22s = 550 \Rightarrow s = 25 \text{ cm}" />
-        </div>
-        <p className="text-red-400 font-semibold">(b) Cari tinggi kerucut:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{25^2 - 7^2} = \sqrt{625-49} = \sqrt{576} = 24 \text{ cm}" />
-        </div>
-        <p className="text-red-400 font-semibold">(c) Luas permukaan total:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="L = \pi r s + \pi r^2 = 550 + \frac{22}{7} \times 49 = 550 + 154 = 704 \text{ cm}^2" />
-        </div>
-        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Garis pelukis = <strong className="text-yellow-300">25 cm</strong></p>
-          <p className="text-white/80">• Tinggi = <strong className="text-yellow-300">24 cm</strong></p>
-          <p className="text-white/80">• Luas permukaan = <strong className="text-yellow-300">704 cm²</strong></p>
-        </div>
-      </div>
-    ),
+  ja: {
+    luasTitle: "例題 — 表面積",
+    volTitle: "例題 — 体積",
+    subtitle: "易しい問題から難しい問題までの練習",
   },
+};
+
+type ExMeta = { level: string; color: string; bg: string; border: string; badgeBg: string };
+type ExContent = { question: React.ReactNode; answer: React.ReactNode };
+
+const luasExamplesMeta: ExMeta[] = [
+  { level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60" },
+  { level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60" },
+  { level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60" },
 ];
 
-const volExamples: Ex[] = [
-  {
-    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah kerucut memiliki jari-jari <InlineMath math="9 \text{ cm}" /> dan tinggi <InlineMath math="14 \text{ cm}" />.</p>
-        <p>Hitung volume kerucut tersebut! (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-2 text-sm font-body">
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
-          <BlockMath math="V = \frac{1}{3}\pi r^2 t = \frac{1}{3} \times \frac{22}{7} \times 9^2 \times 14" />
-          <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times 81 \times 14 = \frac{1}{3} \times 22 \times 81 \times 2 = \frac{3.564}{3} = 1.188 \text{ cm}^3" />
+const luasExamplesTrans: Record<Language, ExContent[]> = {
+  id: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Sebuah kerucut memiliki jari-jari <InlineMath math="7 \text{ cm}" /> dan garis pelukis <InlineMath math="25 \text{ cm}" />.</p>
+          <p>Hitung luas permukaan kerucut tersebut! (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
         </div>
-        <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-          <p className="text-green-300 font-semibold text-xs">✅ Volume = <InlineMath math="1.188 \text{ cm}^3" /></p>
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
+            <BlockMath math="L = \pi r (r + s) = \frac{22}{7} \times 7 \times (7 + 25)" />
+            <BlockMath math="= 22 \times 32 = 704 \text{ cm}^2" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ Luas permukaan = <InlineMath math="704 \text{ cm}^2" /></p>
+          </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Volume sebuah kerucut adalah <InlineMath math="1.540 \text{ cm}^3" />. Jika tingginya <InlineMath math="30 \text{ cm}" />,</p>
-        <p>tentukan jari-jari dan keliling alasnya! (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">Langkah 1 — Cari jari-jari:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <BlockMath math="V = \frac{1}{3}\pi r^2 t \Rightarrow 1.540 = \frac{1}{3} \times \frac{22}{7} \times r^2 \times 30" />
-          <BlockMath math="1.540 = \frac{22 \times 30}{21} \times r^2 = \frac{660}{21} \times r^2" />
-          <BlockMath math="r^2 = \frac{1.540 \times 21}{660} = \frac{32.340}{660} = 49 \Rightarrow r = 7 \text{ cm}" />
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Sebuah corong berbentuk kerucut (tanpa alas) memiliki diameter <InlineMath math="20 \text{ cm}" /> dan tinggi <InlineMath math="24 \text{ cm}" />.</p>
+          <p>Berapa luas selimut corong tersebut? (Gunakan <InlineMath math="\pi = 3{,}14" />)</p>
         </div>
-        <p className="text-yellow-400 font-semibold">Langkah 2 — Keliling alas:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="K = 2\pi r = 2 \times \frac{22}{7} \times 7 = 44 \text{ cm}" />
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">Langkah 1 — Tentukan r dan cari s:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <p className="text-white/70"><InlineMath math="r = \frac{d}{2} = \frac{20}{2} = 10 \text{ cm}" /></p>
+            <BlockMath math="s = \sqrt{r^2+t^2} = \sqrt{10^2+24^2} = \sqrt{100+576} = \sqrt{676} = 26 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">Langkah 2 — Hitung luas selimut:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="L_s = \pi r s = 3{,}14 \times 10 \times 26 = 816{,}4 \text{ cm}^2" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+            <p className="text-yellow-300 font-semibold text-xs">✅ Luas selimut corong = <strong>816,4 cm²</strong></p>
+          </div>
         </div>
-        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
-          <p className="text-yellow-300 font-semibold text-xs">✅ Jari-jari = 7 cm, Keliling alas = 44 cm</p>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Sebuah pabrik membuat wadah es krim berbentuk kerucut dari kertas karton. Luas selimut kerucut adalah <InlineMath math="550 \text{ cm}^2" /> dan jari-jari alas <InlineMath math="7 \text{ cm}" />.</p>
+          <p>Tentukan: (a) garis pelukis, (b) tinggi kerucut, (c) luas permukaan total. (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
         </div>
-      </div>
-    ),
-  },
-  {
-    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah ember berbentuk kerucut terbalik memiliki diameter atas <InlineMath math="28 \text{ cm}" /> dan kedalaman (tinggi) <InlineMath math="30 \text{ cm}" />.</p>
-        <p>Ember diisi pasir setinggi <InlineMath math="20 \text{ cm}" /> dari bawah (puncak kerucut). Berapa volume pasir di dalam ember?</p>
-        <p className="text-xs text-white/50">(Ingat: jika kerucut terbalik dengan tinggi total T, air setinggi h dari puncak membentuk kerucut kecil yang sebangun. Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Jari-jari kerucut penuh:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="r_{\text{penuh}} = \frac{28}{2} = 14 \text{ cm}, \quad t_{\text{penuh}} = 30 \text{ cm}" />
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">(a) Cari garis pelukis dari luas selimut:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="\pi r s = 550 \Rightarrow \frac{22}{7} \times 7 \times s = 550" />
+            <BlockMath math="22s = 550 \Rightarrow s = 25 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">(b) Cari tinggi kerucut:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{25^2 - 7^2} = \sqrt{625-49} = \sqrt{576} = 24 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">(c) Luas permukaan total:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="L = \pi r s + \pi r^2 = 550 + \frac{22}{7} \times 49 = 550 + 154 = 704 \text{ cm}^2" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+            <p className="text-white/80">• Garis pelukis = <strong className="text-yellow-300">25 cm</strong></p>
+            <p className="text-white/80">• Tinggi = <strong className="text-yellow-300">24 cm</strong></p>
+            <p className="text-white/80">• Luas permukaan = <strong className="text-yellow-300">704 cm²</strong></p>
+          </div>
         </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Jari-jari kerucut pasir (sebangun):</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p className="text-white/70">Pasir setinggi 20 cm dari puncak membentuk kerucut kecil sebangun:</p>
-          <BlockMath math="\frac{r_{\text{pasir}}}{r_{\text{penuh}}} = \frac{t_{\text{pasir}}}{t_{\text{penuh}}} = \frac{20}{30} = \frac{2}{3}" />
-          <BlockMath math="r_{\text{pasir}} = 14 \times \frac{2}{3} = \frac{28}{3} \text{ cm}" />
+      ),
+    },
+  ],
+  en: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>A cone has a base radius of <InlineMath math="7 \text{ cm}" /> and a slant height of <InlineMath math="25 \text{ cm}" />.</p>
+          <p>Calculate the surface area of the cone! (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Volume pasir:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="V_{\text{pasir}} = \frac{1}{3}\pi r_{\text{pasir}}^2 \times t_{\text{pasir}} = \frac{1}{3} \times \frac{22}{7} \times \left(\frac{28}{3}\right)^2 \times 20" />
-          <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times \frac{784}{9} \times 20 = \frac{22 \times 784 \times 20}{3 \times 7 \times 9}" />
-          <BlockMath math="= \frac{344.960}{189} \approx 1.825{,}7 \text{ cm}^3" />
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
+            <BlockMath math="L = \pi r (r + s) = \frac{22}{7} \times 7 \times (7 + 25)" />
+            <BlockMath math="= 22 \times 32 = 704 \text{ cm}^2" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ Surface area = <InlineMath math="704 \text{ cm}^2" /></p>
+          </div>
         </div>
-        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Jari-jari pasir = <strong className="text-yellow-300">28/3 ≈ 9,33 cm</strong></p>
-          <p className="text-white/80">• Volume pasir ≈ <strong className="text-yellow-300">1.825,7 cm³</strong></p>
-          <p className="text-cyan-300 mt-1">💡 Kunci: gunakan sifat kesebangunan kerucut!</p>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>A cone-shaped funnel (with no base) has a diameter of <InlineMath math="20 \text{ cm}" /> and a height of <InlineMath math="24 \text{ cm}" />.</p>
+          <p>What is the lateral surface area of the funnel? (Use <InlineMath math="\pi = 3.14" />)</p>
         </div>
-      </div>
-    ),
-  },
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">Step 1 — Find r and calculate s:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <p className="text-white/70"><InlineMath math="r = \frac{d}{2} = \frac{20}{2} = 10 \text{ cm}" /></p>
+            <BlockMath math="s = \sqrt{r^2+t^2} = \sqrt{10^2+24^2} = \sqrt{100+576} = \sqrt{676} = 26 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">Step 2 — Calculate the lateral surface area:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="L_s = \pi r s = 3.14 \times 10 \times 26 = 816.4 \text{ cm}^2" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+            <p className="text-yellow-300 font-semibold text-xs">✅ Lateral surface area of the funnel = <strong>816.4 cm²</strong></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>A factory makes cone-shaped ice cream cups from cardboard. The lateral surface area of the cone is <InlineMath math="550 \text{ cm}^2" /> and the base radius is <InlineMath math="7 \text{ cm}" />.</p>
+          <p>Determine: (a) the slant height, (b) the height of the cone, (c) the total surface area. (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">(a) Find the slant height from the lateral surface area:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="\pi r s = 550 \Rightarrow \frac{22}{7} \times 7 \times s = 550" />
+            <BlockMath math="22s = 550 \Rightarrow s = 25 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">(b) Find the height of the cone:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{25^2 - 7^2} = \sqrt{625-49} = \sqrt{576} = 24 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">(c) Total surface area:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="L = \pi r s + \pi r^2 = 550 + \frac{22}{7} \times 49 = 550 + 154 = 704 \text{ cm}^2" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ Answer:</p>
+            <p className="text-white/80">• Slant height = <strong className="text-yellow-300">25 cm</strong></p>
+            <p className="text-white/80">• Height = <strong className="text-yellow-300">24 cm</strong></p>
+            <p className="text-white/80">• Surface area = <strong className="text-yellow-300">704 cm²</strong></p>
+          </div>
+        </div>
+      ),
+    },
+  ],
+  ja: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>底面の半径が <InlineMath math="7 \text{ cm}" />、母線が <InlineMath math="25 \text{ cm}" /> の円錐があります。</p>
+          <p>この円錐の表面積を求めなさい！（<InlineMath math="\pi = \frac{22}{7}" /> を使用）</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
+            <BlockMath math="L = \pi r (r + s) = \frac{22}{7} \times 7 \times (7 + 25)" />
+            <BlockMath math="= 22 \times 32 = 704 \text{ cm}^2" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ 表面積 = <InlineMath math="704 \text{ cm}^2" /></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>底面のない円錐形の漏斗があり、直径 <InlineMath math="20 \text{ cm}" />、高さ <InlineMath math="24 \text{ cm}" /> です。</p>
+          <p>この漏斗の側面積はいくらですか？（<InlineMath math="\pi = 3.14" /> を使用）</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">ステップ1 — rを求めてsを計算する：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <p className="text-white/70"><InlineMath math="r = \frac{d}{2} = \frac{20}{2} = 10 \text{ cm}" /></p>
+            <BlockMath math="s = \sqrt{r^2+t^2} = \sqrt{10^2+24^2} = \sqrt{100+576} = \sqrt{676} = 26 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">ステップ2 — 側面積を計算する：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="L_s = \pi r s = 3.14 \times 10 \times 26 = 816.4 \text{ cm}^2" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+            <p className="text-yellow-300 font-semibold text-xs">✅ 漏斗の側面積 = <strong>816.4 cm²</strong></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>ある工場では厚紙で円錐形のアイスクリームカップを作っています。円錐の側面積は <InlineMath math="550 \text{ cm}^2" />、底面の半径は <InlineMath math="7 \text{ cm}" /> です。</p>
+          <p>次を求めなさい：(a) 母線、(b) 円錐の高さ、(c) 表面積の合計。（<InlineMath math="\pi = \frac{22}{7}" /> を使用）</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">(a) 側面積から母線を求める：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="\pi r s = 550 \Rightarrow \frac{22}{7} \times 7 \times s = 550" />
+            <BlockMath math="22s = 550 \Rightarrow s = 25 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">(b) 円錐の高さを求める：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{25^2 - 7^2} = \sqrt{625-49} = \sqrt{576} = 24 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">(c) 表面積の合計：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="L = \pi r s + \pi r^2 = 550 + \frac{22}{7} \times 49 = 550 + 154 = 704 \text{ cm}^2" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ 解答：</p>
+            <p className="text-white/80">• 母線 = <strong className="text-yellow-300">25 cm</strong></p>
+            <p className="text-white/80">• 高さ = <strong className="text-yellow-300">24 cm</strong></p>
+            <p className="text-white/80">• 表面積 = <strong className="text-yellow-300">704 cm²</strong></p>
+          </div>
+        </div>
+      ),
+    },
+  ],
+};
+
+function getLuasExamples(language: Language): Ex[] {
+  return luasExamplesMeta.map((m, i) => ({ ...m, ...luasExamplesTrans[language][i] }));
+}
+
+const volExamplesMeta: ExMeta[] = [
+  { level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60" },
+  { level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60" },
+  { level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60" },
 ];
+
+const volExamplesTrans: Record<Language, ExContent[]> = {
+  id: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Sebuah kerucut memiliki jari-jari <InlineMath math="9 \text{ cm}" /> dan tinggi <InlineMath math="14 \text{ cm}" />.</p>
+          <p>Hitung volume kerucut tersebut! (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t = \frac{1}{3} \times \frac{22}{7} \times 9^2 \times 14" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times 81 \times 14 = \frac{1}{3} \times 22 \times 81 \times 2 = \frac{3.564}{3} = 1.188 \text{ cm}^3" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ Volume = <InlineMath math="1.188 \text{ cm}^3" /></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Volume sebuah kerucut adalah <InlineMath math="1.540 \text{ cm}^3" />. Jika tingginya <InlineMath math="30 \text{ cm}" />,</p>
+          <p>tentukan jari-jari dan keliling alasnya! (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">Langkah 1 — Cari jari-jari:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t \Rightarrow 1.540 = \frac{1}{3} \times \frac{22}{7} \times r^2 \times 30" />
+            <BlockMath math="1.540 = \frac{22 \times 30}{21} \times r^2 = \frac{660}{21} \times r^2" />
+            <BlockMath math="r^2 = \frac{1.540 \times 21}{660} = \frac{32.340}{660} = 49 \Rightarrow r = 7 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">Langkah 2 — Keliling alas:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="K = 2\pi r = 2 \times \frac{22}{7} \times 7 = 44 \text{ cm}" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+            <p className="text-yellow-300 font-semibold text-xs">✅ Jari-jari = 7 cm, Keliling alas = 44 cm</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Sebuah ember berbentuk kerucut terbalik memiliki diameter atas <InlineMath math="28 \text{ cm}" /> dan kedalaman (tinggi) <InlineMath math="30 \text{ cm}" />.</p>
+          <p>Ember diisi pasir setinggi <InlineMath math="20 \text{ cm}" /> dari bawah (puncak kerucut). Berapa volume pasir di dalam ember?</p>
+          <p className="text-xs text-white/50">(Ingat: jika kerucut terbalik dengan tinggi total T, air setinggi h dari puncak membentuk kerucut kecil yang sebangun. Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">Langkah 1 — Jari-jari & tinggi kerucut penuh:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="r_1 = \frac{28}{2} = 14 \text{ cm}, \quad t_1 = 30 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">Langkah 2 — Jari-jari kerucut pasir (sebangun):</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <p className="text-white/70">Pasir setinggi 20 cm dari puncak membentuk kerucut kecil sebangun:</p>
+            <BlockMath math="\frac{r_2}{r_1} = \frac{t_2}{t_1} = \frac{20}{30} = \frac{2}{3}" />
+            <BlockMath math="r_2 = 14 \times \frac{2}{3} = \frac{28}{3} \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">Langkah 3 — Volume pasir:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="V_2 = \frac{1}{3}\pi r_2^2 \times t_2 = \frac{1}{3} \times \frac{22}{7} \times \left(\frac{28}{3}\right)^2 \times 20" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times \frac{784}{9} \times 20 = \frac{22 \times 784 \times 20}{3 \times 7 \times 9}" />
+            <BlockMath math="= \frac{344.960}{189} \approx 1.825{,}7 \text{ cm}^3" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+            <p className="text-white/80">• Jari-jari pasir = <strong className="text-yellow-300">28/3 ≈ 9,33 cm</strong></p>
+            <p className="text-white/80">• Volume pasir ≈ <strong className="text-yellow-300">1.825,7 cm³</strong></p>
+            <p className="text-cyan-300 mt-1">💡 Kunci: gunakan sifat kesebangunan kerucut!</p>
+          </div>
+        </div>
+      ),
+    },
+  ],
+  en: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>A cone has a radius of <InlineMath math="9 \text{ cm}" /> and a height of <InlineMath math="14 \text{ cm}" />.</p>
+          <p>Calculate the volume of the cone! (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t = \frac{1}{3} \times \frac{22}{7} \times 9^2 \times 14" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times 81 \times 14 = \frac{1}{3} \times 22 \times 81 \times 2 = \frac{3,564}{3} = 1,188 \text{ cm}^3" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ Volume = <InlineMath math="1{,}188 \text{ cm}^3" /></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>The volume of a cone is <InlineMath math="1{,}540 \text{ cm}^3" />. If its height is <InlineMath math="30 \text{ cm}" />,</p>
+          <p>find its radius and base circumference! (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">Step 1 — Find the radius:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t \Rightarrow 1{,}540 = \frac{1}{3} \times \frac{22}{7} \times r^2 \times 30" />
+            <BlockMath math="1{,}540 = \frac{22 \times 30}{21} \times r^2 = \frac{660}{21} \times r^2" />
+            <BlockMath math="r^2 = \frac{1{,}540 \times 21}{660} = \frac{32{,}340}{660} = 49 \Rightarrow r = 7 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">Step 2 — Base circumference:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="K = 2\pi r = 2 \times \frac{22}{7} \times 7 = 44 \text{ cm}" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+            <p className="text-yellow-300 font-semibold text-xs">✅ Radius = 7 cm, base circumference = 44 cm</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>An inverted cone-shaped bucket has a top diameter of <InlineMath math="28 \text{ cm}" /> and a depth (height) of <InlineMath math="30 \text{ cm}" />.</p>
+          <p>The bucket is filled with sand to a height of <InlineMath math="20 \text{ cm}" /> from the bottom (the cone's apex). What is the volume of sand inside the bucket?</p>
+          <p className="text-xs text-white/50">(Remember: for an inverted cone with total height T, liquid at height h from the apex forms a similar smaller cone. Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">Step 1 — Radius and height of the full cone:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="r_1 = \frac{28}{2} = 14 \text{ cm}, \quad t_1 = 30 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">Step 2 — Radius of the sand cone (similar triangles):</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <p className="text-white/70">Sand at a height of 20 cm from the apex forms a similar smaller cone:</p>
+            <BlockMath math="\frac{r_2}{r_1} = \frac{t_2}{t_1} = \frac{20}{30} = \frac{2}{3}" />
+            <BlockMath math="r_2 = 14 \times \frac{2}{3} = \frac{28}{3} \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">Step 3 — Volume of the sand:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="V_2 = \frac{1}{3}\pi r_2^2 \times t_2 = \frac{1}{3} \times \frac{22}{7} \times \left(\frac{28}{3}\right)^2 \times 20" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times \frac{784}{9} \times 20 = \frac{22 \times 784 \times 20}{3 \times 7 \times 9}" />
+            <BlockMath math="= \frac{344{,}960}{189} \approx 1{,}825.7 \text{ cm}^3" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ Answer:</p>
+            <p className="text-white/80">• Sand cone radius = <strong className="text-yellow-300">28/3 ≈ 9.33 cm</strong></p>
+            <p className="text-white/80">• Volume of sand ≈ <strong className="text-yellow-300">1,825.7 cm³</strong></p>
+            <p className="text-cyan-300 mt-1">💡 Key: use the similarity property of cones!</p>
+          </div>
+        </div>
+      ),
+    },
+  ],
+  ja: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>半径 <InlineMath math="9 \text{ cm}" />、高さ <InlineMath math="14 \text{ cm}" /> の円錐があります。</p>
+          <p>この円錐の体積を求めなさい！（<InlineMath math="\pi = \frac{22}{7}" /> を使用）</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t = \frac{1}{3} \times \frac{22}{7} \times 9^2 \times 14" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times 81 \times 14 = \frac{1}{3} \times 22 \times 81 \times 2 = \frac{3,564}{3} = 1,188 \text{ cm}^3" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ 体積 = <InlineMath math="1{,}188 \text{ cm}^3" /></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>ある円錐の体積は <InlineMath math="1{,}540 \text{ cm}^3" /> です。高さが <InlineMath math="30 \text{ cm}" /> のとき、</p>
+          <p>半径と底面の周を求めなさい！（<InlineMath math="\pi = \frac{22}{7}" /> を使用）</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">ステップ1 — 半径を求める：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t \Rightarrow 1{,}540 = \frac{1}{3} \times \frac{22}{7} \times r^2 \times 30" />
+            <BlockMath math="1{,}540 = \frac{22 \times 30}{21} \times r^2 = \frac{660}{21} \times r^2" />
+            <BlockMath math="r^2 = \frac{1{,}540 \times 21}{660} = \frac{32{,}340}{660} = 49 \Rightarrow r = 7 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">ステップ2 — 底面の周：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="K = 2\pi r = 2 \times \frac{22}{7} \times 7 = 44 \text{ cm}" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+            <p className="text-yellow-300 font-semibold text-xs">✅ 半径 = 7 cm、底面の周 = 44 cm</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>上部の直径 <InlineMath math="28 \text{ cm}" />、深さ（高さ）<InlineMath math="30 \text{ cm}" /> の逆円錐形のバケツがあります。</p>
+          <p>このバケツに底（円錐の頂点）から <InlineMath math="20 \text{ cm}" /> の高さまで砂を入れました。バケツの中の砂の体積はいくらですか？</p>
+          <p className="text-xs text-white/50">（ヒント：総高さTの逆円錐において、頂点から高さhまで満たされた液体は相似な小さな円錐を形成します。<InlineMath math="\pi = \frac{22}{7}" /> を使用）</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">ステップ1 — 元の円錐（全体）の半径と高さ：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="r_1 = \frac{28}{2} = 14 \text{ cm}, \quad t_1 = 30 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">ステップ2 — 砂の円錐の半径（相似）：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+            <p className="text-white/70">頂点から20cmの高さの砂は、相似な小さい円錐を形成します：</p>
+            <BlockMath math="\frac{r_2}{r_1} = \frac{t_2}{t_1} = \frac{20}{30} = \frac{2}{3}" />
+            <BlockMath math="r_2 = 14 \times \frac{2}{3} = \frac{28}{3} \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">ステップ3 — 砂の体積：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="V_2 = \frac{1}{3}\pi r_2^2 \times t_2 = \frac{1}{3} \times \frac{22}{7} \times \left(\frac{28}{3}\right)^2 \times 20" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times \frac{784}{9} \times 20 = \frac{22 \times 784 \times 20}{3 \times 7 \times 9}" />
+            <BlockMath math="= \frac{344{,}960}{189} \approx 1{,}825.7 \text{ cm}^3" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ 解答：</p>
+            <p className="text-white/80">• 砂の円錐の半径 = <strong className="text-yellow-300">28/3 ≈ 9.33 cm</strong></p>
+            <p className="text-white/80">• 砂の体積 ≈ <strong className="text-yellow-300">1,825.7 cm³</strong></p>
+            <p className="text-cyan-300 mt-1">💡 ポイント：円錐の相似の性質を使う！</p>
+          </div>
+        </div>
+      ),
+    },
+  ],
+};
+
+function getVolExamples(language: Language): Ex[] {
+  return volExamplesMeta.map((m, i) => ({ ...m, ...volExamplesTrans[language][i] }));
+}
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD COMPONENT
@@ -2612,22 +2965,22 @@ const KerucutPage = () => {
       ),
     },
     {
-      title: "Contoh Soal — Luas Permukaan",
+      title: exampleSlidesTrans[language].luasTitle,
       icon: "🎨",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS" language={language}/>)}
+          <p className="text-white/40 text-xs text-center font-body">{exampleSlidesTrans[language].subtitle}</p>
+          {getLuasExamples(language).map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS" language={language}/>)}
         </div>
       ),
     },
     {
-      title: "Contoh Soal — Volume",
+      title: exampleSlidesTrans[language].volTitle,
       icon: "📦",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME" language={language}/>)}
+          <p className="text-white/40 text-xs text-center font-body">{exampleSlidesTrans[language].subtitle}</p>
+          {getVolExamples(language).map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME" language={language}/>)}
         </div>
       ),
     },
