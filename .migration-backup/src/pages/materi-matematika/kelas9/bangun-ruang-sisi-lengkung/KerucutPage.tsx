@@ -1160,56 +1160,187 @@ const SoalHubunganSVG = () => (
   </svg>
 );
 
-const soalUnsur: {
+type SoalUnsurItem = {
   no: number;
   soal: string;
-  gambar: React.ReactNode;
   pilihan: { key: string; text: string }[];
-  jawaban: string;
   pembahasan: string;
-}[] = [
-  {
-    no: 1,
-    soal: "Nomor yang menunjukkan rusuk pada kerucut berikut adalah ….",
-    gambar: <SoalRusukSVG />,
-    pilihan: [
-      { key: "A", text: "1" },
-      { key: "B", text: "2" },
-      { key: "C", text: "3" },
-      { key: "D", text: "4" },
-    ],
-    jawaban: "C",
-    pembahasan: "Rusuk kerucut adalah tepi/keliling alas (lingkaran alas), yaitu nomor 3. Nomor 1 = puncak, nomor 2 = garis pelukis/selimut, nomor 4 = alas.",
-  },
-  {
-    no: 2,
-    soal: "Bentuk bangun dari selimut kerucut adalah ….",
-    gambar: null,
-    pilihan: [
-      { key: "A", text: "tembereng" },
-      { key: "B", text: "segitiga" },
-      { key: "C", text: "lingkaran" },
-      { key: "D", text: "juring lingkaran" },
-    ],
-    jawaban: "D",
-    pembahasan: "Selimut kerucut, jika dibuka (diratakan), berbentuk juring lingkaran (sektor lingkaran) dengan jari-jari = garis pelukis (s) dan panjang busur = keliling alas (2πr).",
-  },
-  {
-    no: 3,
-    soal: "Diketahui sebuah kerucut dengan ukuran tinggi t, jari-jari r, dan garis pelukis s.\nHubungan r, s, dan t pada kerucut tersebut adalah ….",
-    gambar: <SoalHubunganSVG />,
-    pilihan: [
-      { key: "A", text: "r² = s² + t²" },
-      { key: "B", text: "t² – s² = r²" },
-      { key: "C", text: "r² = t² – s²" },
-      { key: "D", text: "s² = r² + t²" },
-    ],
-    jawaban: "D",
-    pembahasan: "Berdasarkan Teorema Pythagoras pada segitiga siku-siku yang dibentuk oleh t, r, dan s: s² = r² + t² (s adalah hipotenusa/garis pelukis).",
-  },
+};
+
+const soalUnsurTrans: Record<Language, SoalUnsurItem[]> = {
+  id: [
+    {
+      no: 1,
+      soal: "Nomor yang menunjukkan rusuk pada kerucut berikut adalah ….",
+      pilihan: [
+        { key: "A", text: "1" },
+        { key: "B", text: "2" },
+        { key: "C", text: "3" },
+        { key: "D", text: "4" },
+      ],
+      pembahasan: "Rusuk kerucut adalah tepi/keliling alas (lingkaran alas), yaitu nomor 3. Nomor 1 = puncak, nomor 2 = garis pelukis/selimut, nomor 4 = alas.",
+    },
+    {
+      no: 2,
+      soal: "Bentuk bangun dari selimut kerucut adalah ….",
+      pilihan: [
+        { key: "A", text: "tembereng" },
+        { key: "B", text: "segitiga" },
+        { key: "C", text: "lingkaran" },
+        { key: "D", text: "juring lingkaran" },
+      ],
+      pembahasan: "Selimut kerucut, jika dibuka (diratakan), berbentuk juring lingkaran (sektor lingkaran) dengan jari-jari = garis pelukis (s) dan panjang busur = keliling alas (2πr).",
+    },
+    {
+      no: 3,
+      soal: "Diketahui sebuah kerucut dengan ukuran tinggi t, jari-jari r, dan garis pelukis s.\nHubungan r, s, dan t pada kerucut tersebut adalah ….",
+      pilihan: [
+        { key: "A", text: "r² = s² + t²" },
+        { key: "B", text: "t² – s² = r²" },
+        { key: "C", text: "r² = t² – s²" },
+        { key: "D", text: "s² = r² + t²" },
+      ],
+      pembahasan: "Berdasarkan Teorema Pythagoras pada segitiga siku-siku yang dibentuk oleh t, r, dan s: s² = r² + t² (s adalah hipotenusa/garis pelukis).",
+    },
+  ],
+  en: [
+    {
+      no: 1,
+      soal: "The number that indicates the edge of the following cone is ….",
+      pilihan: [
+        { key: "A", text: "1" },
+        { key: "B", text: "2" },
+        { key: "C", text: "3" },
+        { key: "D", text: "4" },
+      ],
+      pembahasan: "The edge of a cone is the rim/circumference of the base (the base circle), which is number 3. Number 1 = apex, number 2 = slant height/lateral surface, number 4 = base.",
+    },
+    {
+      no: 2,
+      soal: "The shape formed by unfolding the lateral surface of a cone is ….",
+      pilihan: [
+        { key: "A", text: "circular segment" },
+        { key: "B", text: "triangle" },
+        { key: "C", text: "circle" },
+        { key: "D", text: "circular sector" },
+      ],
+      pembahasan: "When unfolded (flattened), the lateral surface of a cone forms a circular sector with radius = slant height (s) and arc length = base circumference (2πr).",
+    },
+    {
+      no: 3,
+      soal: "A cone has height t, radius r, and slant height s.\nThe relationship between r, s, and t for this cone is ….",
+      pilihan: [
+        { key: "A", text: "r² = s² + t²" },
+        { key: "B", text: "t² – s² = r²" },
+        { key: "C", text: "r² = t² – s²" },
+        { key: "D", text: "s² = r² + t²" },
+      ],
+      pembahasan: "Based on the Pythagorean theorem applied to the right triangle formed by t, r, and s: s² = r² + t² (s is the hypotenuse/slant height).",
+    },
+  ],
+  ja: [
+    {
+      no: 1,
+      soal: "次の円錐で、辺（りんかく）を示す番号は……。",
+      pilihan: [
+        { key: "A", text: "1" },
+        { key: "B", text: "2" },
+        { key: "C", text: "3" },
+        { key: "D", text: "4" },
+      ],
+      pembahasan: "円錐の辺は底面（円）の縁・周であり、番号3です。番号1＝頂点、番号2＝母線／側面、番号4＝底面です。",
+    },
+    {
+      no: 2,
+      soal: "円錐の側面を広げた形は……。",
+      pilihan: [
+        { key: "A", text: "弓形" },
+        { key: "B", text: "三角形" },
+        { key: "C", text: "円" },
+        { key: "D", text: "扇形" },
+      ],
+      pembahasan: "円錐の側面を開く（平らにする）と、半径＝母線（s）、弧の長さ＝底面の周（2πr）の扇形になります。",
+    },
+    {
+      no: 3,
+      soal: "高さ t、半径 r、母線 s を持つ円錐があります。\nこの円錐における r、s、t の関係は……。",
+      pilihan: [
+        { key: "A", text: "r² = s² + t²" },
+        { key: "B", text: "t² – s² = r²" },
+        { key: "C", text: "r² = t² – s²" },
+        { key: "D", text: "s² = r² + t²" },
+      ],
+      pembahasan: "t、r、s によって作られる直角三角形にピタゴラスの定理を適用すると：s² = r² + t²（s は斜辺／母線）。",
+    },
+  ],
+};
+
+const soalUnsurMeta: { no: number; gambar: React.ReactNode; jawaban: string }[] = [
+  { no: 1, gambar: <SoalRusukSVG />, jawaban: "C" },
+  { no: 2, gambar: null, jawaban: "D" },
+  { no: 3, gambar: <SoalHubunganSVG />, jawaban: "D" },
 ];
 
-const UnsurSoalQuiz = () => {
+const unsurQuizUiTrans: Record<Language, {
+  slideTitle: string; headerTitle: string; headerSub: string;
+  showPembahasan: string; hidePembahasan: string;
+  benarLabel: string; salahPrefix: string; pembahasanLabel: string;
+  periksaBtn: string; ulangiBtn: string; skorLabel: string;
+  perfectMsg: string; goodMsg: string; tryAgainMsg: string;
+}> = {
+  id: {
+    slideTitle: "Soal — Unsur-unsur Kerucut",
+    headerTitle: "Uji Pemahaman — Unsur-unsur Kerucut",
+    headerSub: "Pilih jawaban yang paling tepat, lalu klik Periksa Jawaban",
+    showPembahasan: "Lihat Pembahasan",
+    hidePembahasan: "Sembunyikan Pembahasan",
+    benarLabel: "✅ Benar!",
+    salahPrefix: "❌ Jawaban yang benar:",
+    pembahasanLabel: "📖 Pembahasan:",
+    periksaBtn: "Periksa Jawaban ✓",
+    ulangiBtn: "🔄 Ulangi Soal",
+    skorLabel: "Skor kamu",
+    perfectMsg: "🎉 Sempurna!",
+    goodMsg: "👍 Bagus, terus semangat!",
+    tryAgainMsg: "📚 Pelajari lagi unsur-unsur kerucut ya!",
+  },
+  en: {
+    slideTitle: "Practice — Elements of a Cone",
+    headerTitle: "Comprehension Check — Elements of a Cone",
+    headerSub: "Choose the best answer, then click Check Answers",
+    showPembahasan: "View Explanation",
+    hidePembahasan: "Hide Explanation",
+    benarLabel: "✅ Correct!",
+    salahPrefix: "❌ Correct answer:",
+    pembahasanLabel: "📖 Explanation:",
+    periksaBtn: "Check Answers ✓",
+    ulangiBtn: "🔄 Try Again",
+    skorLabel: "Your score",
+    perfectMsg: "🎉 Perfect!",
+    goodMsg: "👍 Good job, keep it up!",
+    tryAgainMsg: "📚 Review the elements of a cone again!",
+  },
+  ja: {
+    slideTitle: "問題 — 円錐の要素",
+    headerTitle: "理解度チェック — 円錐の要素",
+    headerSub: "最も適切な答えを選び、「解答を確認」をクリックしてください",
+    showPembahasan: "解説を見る",
+    hidePembahasan: "解説を隠す",
+    benarLabel: "✅ 正解！",
+    salahPrefix: "❌ 正解は：",
+    pembahasanLabel: "📖 解説：",
+    periksaBtn: "解答を確認 ✓",
+    ulangiBtn: "🔄 もう一度",
+    skorLabel: "あなたのスコア",
+    perfectMsg: "🎉 満点！",
+    goodMsg: "👍 よくできました、その調子！",
+    tryAgainMsg: "📚 円錐の要素をもう一度復習しましょう！",
+  },
+};
+
+const UnsurSoalQuiz = ({ language }: { language: Language }) => {
+  const ui = unsurQuizUiTrans[language];
+  const soalUnsur = soalUnsurMeta.map((m, i) => ({ ...m, ...soalUnsurTrans[language][i] }));
   const [pilihan, setPilihan] = useState<Record<number, string>>({});
   const [selesai, setSelesai] = useState(false);
   const [showPembahasan, setShowPembahasan] = useState<Record<number, boolean>>({});
@@ -1322,7 +1453,7 @@ const UnsurSoalQuiz = () => {
                 className="flex items-center gap-1.5 text-xs font-semibold text-amber-400/80 hover:text-amber-300 transition-colors cursor-pointer"
               >
                 <span>{pembahasanOpen ? "▲" : "▼"}</span>
-                <span>{pembahasanOpen ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}</span>
+                <span>{pembahasanOpen ? ui.hidePembahasan : ui.showPembahasan}</span>
               </button>
 
               {pembahasanOpen && (
@@ -1335,10 +1466,10 @@ const UnsurSoalQuiz = () => {
                 }`}>
                   {selesai && (
                     <p className={`font-bold ${benar ? "text-green-300" : "text-red-300"}`}>
-                      {benar ? "✅ Benar!" : `❌ Jawaban yang benar: ${s.jawaban}`}
+                      {benar ? ui.benarLabel : `${ui.salahPrefix} ${s.jawaban}`}
                     </p>
                   )}
-                  <p className="font-semibold text-amber-300">📖 Pembahasan:</p>
+                  <p className="font-semibold text-amber-300">{ui.pembahasanLabel}</p>
                   <p className="text-white/75 leading-relaxed">{s.pembahasan}</p>
                 </div>
               )}
@@ -1355,24 +1486,24 @@ const UnsurSoalQuiz = () => {
             disabled={!semuaDijawab}
             className="px-6 py-2.5 text-sm font-bold bg-primary/20 border border-primary/50 text-primary rounded-xl hover:bg-primary/30 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            Periksa Jawaban ✓
+            {ui.periksaBtn}
           </button>
         ) : (
           <div className="w-full space-y-3">
             <div className="text-center bg-slate-800/70 border border-slate-600/40 rounded-xl p-4">
-              <p className="text-white/50 text-xs mb-1">Skor kamu</p>
+              <p className="text-white/50 text-xs mb-1">{ui.skorLabel}</p>
               <p className={`text-4xl font-bold font-display ${skor === soalUnsur.length ? "text-green-400" : skor >= 2 ? "text-yellow-400" : "text-red-400"}`}>
                 {skor} / {soalUnsur.length}
               </p>
               <p className="text-white/40 text-xs mt-1">
-                {skor === soalUnsur.length ? "🎉 Sempurna!" : skor >= 2 ? "👍 Bagus, terus semangat!" : "📚 Pelajari lagi unsur-unsur kerucut ya!"}
+                {skor === soalUnsur.length ? ui.perfectMsg : skor >= 2 ? ui.goodMsg : ui.tryAgainMsg}
               </p>
             </div>
             <button
               onClick={handleUlang}
               className="w-full py-2.5 text-sm font-bold bg-slate-700/60 border border-slate-500 text-white/80 rounded-xl hover:bg-slate-600/60 transition-colors cursor-pointer"
             >
-              🔄 Ulangi Soal
+              {ui.ulangiBtn}
             </button>
           </div>
         )}
@@ -1786,6 +1917,55 @@ const slide6Trans = {
   },
 };
 
+/* ── Slide 7 translations (Kesimpulan — Rumus Lengkap Kerucut) ── */
+const slide7Trans = {
+  id: {
+    title: "Kesimpulan — Rumus Lengkap Kerucut",
+    thBesaran: "Besaran", thRumus: "Rumus", thCatatan: "Catatan",
+    rows: [
+      ["Garis pelukis", "s = √(r² + t²)", "Pythagoras"],
+      ["Keliling alas", "K = 2πr", "lingkaran"],
+      ["Luas alas", "L_alas = πr²", "lingkaran"],
+      ["Luas selimut", "L_selimut = πrs", "juring"],
+      ["Luas permukaan", "L = πr(r + s)", "alas + selimut"],
+      ["Volume", "V = ⅓πr²t", "1/3 tabung"],
+    ] as [string, string, string][],
+    keyLabel: "Kunci utama:",
+    keyText: <>Tiga variabel yang saling berkaitan: <strong className="text-yellow-300">r, t, dan s</strong>.</>,
+    tipText: <>Selalu cari dulu <InlineMath math="s = \sqrt{r^2+t^2}" /> sebelum menghitung luas permukaan!</>,
+  },
+  en: {
+    title: "Summary — Complete Cone Formulas",
+    thBesaran: "Quantity", thRumus: "Formula", thCatatan: "Note",
+    rows: [
+      ["Slant height", "s = √(r² + t²)", "Pythagoras"],
+      ["Base circumference", "K = 2πr", "circle"],
+      ["Base area", "L_base = πr²", "circle"],
+      ["Lateral surface area", "L_lateral = πrs", "sector"],
+      ["Surface area", "L = πr(r + s)", "base + lateral"],
+      ["Volume", "V = ⅓πr²t", "1/3 of cylinder"],
+    ] as [string, string, string][],
+    keyLabel: "Key insight:",
+    keyText: <>Three variables are all connected: <strong className="text-yellow-300">r, t, and s</strong>.</>,
+    tipText: <>Always find <InlineMath math="s = \sqrt{r^2+t^2}" /> first before calculating the surface area!</>,
+  },
+  ja: {
+    title: "まとめ — 円錐の公式一覧",
+    thBesaran: "量", thRumus: "公式", thCatatan: "備考",
+    rows: [
+      ["母線", "s = √(r² + t²)", "ピタゴラスの定理"],
+      ["底面の周", "K = 2πr", "円"],
+      ["底面積", "L_底面 = πr²", "円"],
+      ["側面積", "L_側面 = πrs", "扇形"],
+      ["表面積", "L = πr(r + s)", "底面 + 側面"],
+      ["体積", "V = ⅓πr²t", "円柱の1/3"],
+    ] as [string, string, string][],
+    keyLabel: "重要ポイント：",
+    keyText: <>r、t、s の3つの変数はすべて関連しています。</>,
+    tipText: <>表面積を計算する前に、必ず <InlineMath math="s = \sqrt{r^2+t^2}" /> を先に求めましょう！</>,
+  },
+};
+
 function getSections(language: Language): Sec[] {
   const s1 = slide1Trans[language];
   const s2 = slide2Trans[language];
@@ -1793,6 +1973,7 @@ function getSections(language: Language): Sec[] {
   const s4 = slide4Trans[language];
   const s5 = slide5Trans[language];
   const s6 = slide6Trans[language];
+  const s7 = slide7Trans[language];
   return [
   {
     title: s1.title,
@@ -2082,26 +2263,19 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Kesimpulan — Rumus Lengkap Kerucut",
+    title: s7.title,
     icon: "📊",
     content: (
       <div className="space-y-3 font-body">
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Besaran</th>
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Rumus</th>
-              <th className="px-3 py-2 text-cyan-300">Catatan</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s7.thBesaran}</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">{s7.thRumus}</th>
+              <th className="px-3 py-2 text-cyan-300">{s7.thCatatan}</th>
             </tr></thead>
             <tbody>
-              {[
-                ["Garis pelukis","s = √(r² + t²)","Pythagoras"],
-                ["Keliling alas","K = 2πr","lingkaran"],
-                ["Luas alas","L_alas = πr²","lingkaran"],
-                ["Luas selimut","L_selimut = πrs","juring"],
-                ["Luas permukaan","L = πr(r + s)","alas + selimut"],
-                ["Volume","V = ⅓πr²t","1/3 tabung"],
-              ].map(([b,r,c],i)=>(
+              {s7.rows.map(([b,r,c],i)=>(
                 <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
                   <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
                   <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
@@ -2112,8 +2286,8 @@ function getSections(language: Language): Sec[] {
           </table>
         </div>
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-          <p>🚀 <strong>Kunci utama:</strong> Tiga variabel yang saling berkaitan: <strong className="text-yellow-300">r, t, dan s</strong>.</p>
-          <p>Selalu cari dulu <InlineMath math="s = \sqrt{r^2+t^2}" /> sebelum menghitung luas permukaan!</p>
+          <p>🚀 <strong>{s7.keyLabel}</strong> {s7.keyText}</p>
+          <p>{s7.tipText}</p>
         </div>
       </div>
     ),
@@ -2422,18 +2596,18 @@ const KerucutPage = () => {
   const slides = [
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
     {
-      title: "Soal — Unsur-unsur Kerucut",
+      title: unsurQuizUiTrans[language].slideTitle,
       icon: "📝",
       content: (
         <div className="space-y-4">
           <div className="flex items-center gap-3 bg-indigo-950/50 border border-indigo-700/40 rounded-xl px-4 py-3">
             <span className="text-2xl">📝</span>
             <div>
-              <p className="text-indigo-300 font-bold text-sm">Uji Pemahaman — Unsur-unsur Kerucut</p>
-              <p className="text-white/50 text-xs">Pilih jawaban yang paling tepat, lalu klik Periksa Jawaban</p>
+              <p className="text-indigo-300 font-bold text-sm">{unsurQuizUiTrans[language].headerTitle}</p>
+              <p className="text-white/50 text-xs">{unsurQuizUiTrans[language].headerSub}</p>
             </div>
           </div>
-          <UnsurSoalQuiz />
+          <UnsurSoalQuiz language={language} />
         </div>
       ),
     },
