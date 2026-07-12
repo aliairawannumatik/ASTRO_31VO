@@ -1639,11 +1639,61 @@ const slide4Trans = {
   },
 };
 
+/* ── Slide 5 translations (Luas Permukaan Kerucut / Surface Area of a Cone) ── */
+const slide5Trans = {
+  id: {
+    title: "Luas Permukaan Kerucut",
+    intro: (
+      <>
+        <strong className="text-orange-300">Luas permukaan kerucut</strong> adalah jumlah total luas selimut dan luas alas.
+        Bayangkan kamu ingin melapis seluruh permukaan topi ulang tahun — berapa luas kertas yang dibutuhkan?
+      </>
+    ),
+    derivLabel: "📌 Penurunan Rumus:",
+    line1: <>• <strong>Luas selimut</strong> = luas juring dengan jari-jari <InlineMath math="s" /> dan busur <InlineMath math="2\pi r" /></>,
+    line2: <>• <strong>Luas juring</strong> = <InlineMath math="\frac{b}{K} \times \pi s^2 = \frac{2\pi r}{2\pi s} \times \pi s^2 = \pi r s" /></>,
+    line3: <>• <strong>Luas alas</strong> = <InlineMath math="\pi r^2" /></>,
+    note: <>Di mana <InlineMath math="s = \sqrt{r^2 + t^2}" /> adalah garis pelukis.</>,
+    reminder: <>💡 <strong>Ingat:</strong> Jika soal hanya menanyakan luas selimut saja (tanpa alas), gunakan <InlineMath math="L_s = \pi r s" />.</>,
+  },
+  en: {
+    title: "Surface Area of a Cone",
+    intro: (
+      <>
+        The <strong className="text-orange-300">surface area of a cone</strong> is the total area of its lateral surface and base.
+        Imagine covering an entire birthday hat with paper — how much paper would you need?
+      </>
+    ),
+    derivLabel: "📌 Deriving the Formula:",
+    line1: <>• <strong>Lateral surface area</strong> = area of a sector with radius <InlineMath math="s" /> and arc <InlineMath math="2\pi r" /></>,
+    line2: <>• <strong>Sector area</strong> = <InlineMath math="\frac{b}{K} \times \pi s^2 = \frac{2\pi r}{2\pi s} \times \pi s^2 = \pi r s" /></>,
+    line3: <>• <strong>Base area</strong> = <InlineMath math="\pi r^2" /></>,
+    note: <>Where <InlineMath math="s = \sqrt{r^2 + t^2}" /> is the slant height.</>,
+    reminder: <>💡 <strong>Remember:</strong> If the question only asks for the lateral surface area (without the base), use <InlineMath math="L_s = \pi r s" />.</>,
+  },
+  ja: {
+    title: "円錐の表面積",
+    intro: (
+      <>
+        <strong className="text-orange-300">円錐の表面積</strong>は、側面積と底面積の合計です。
+        誕生日用の帽子全体を紙で覆うには、どれくらいの紙が必要か想像してみましょう。
+      </>
+    ),
+    derivLabel: "📌 公式の導出：",
+    line1: <>• <strong>側面積</strong> = 半径 <InlineMath math="s" />、弧 <InlineMath math="2\pi r" /> の扇形の面積</>,
+    line2: <>• <strong>扇形の面積</strong> = <InlineMath math="\frac{b}{K} \times \pi s^2 = \frac{2\pi r}{2\pi s} \times \pi s^2 = \pi r s" /></>,
+    line3: <>• <strong>底面積</strong> = <InlineMath math="\pi r^2" /></>,
+    note: <>ここで <InlineMath math="s = \sqrt{r^2 + t^2}" /> は母線です。</>,
+    reminder: <>💡 <strong>覚えておこう：</strong>側面積のみ（底面を除く）を求める場合は <InlineMath math="L_s = \pi r s" /> を使います。</>,
+  },
+};
+
 function getSections(language: Language): Sec[] {
   const s1 = slide1Trans[language];
   const s2 = slide2Trans[language];
   const s3 = slide3Trans[language];
   const s4 = slide4Trans[language];
+  const s5 = slide5Trans[language];
   return [
   {
     title: s1.title,
@@ -1871,30 +1921,27 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Luas Permukaan Kerucut",
+    title: s5.title,
     icon: "🎨",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          <strong className="text-orange-300">Luas permukaan kerucut</strong> adalah jumlah total luas selimut dan luas alas.
-          Bayangkan kamu ingin melapis seluruh permukaan topi ulang tahun — berapa luas kertas yang dibutuhkan?
-        </p>
+        <p>{s5.intro}</p>
         <LuasKerucutSVG />
         <div className="bg-orange-950/60 border border-orange-700/50 rounded-lg p-4 space-y-3">
-          <p className="text-orange-300 font-semibold">📌 Penurunan Rumus:</p>
+          <p className="text-orange-300 font-semibold">{s5.derivLabel}</p>
           <div className="text-xs text-white/70 space-y-1">
-            <p>• <strong>Luas selimut</strong> = luas juring dengan jari-jari <InlineMath math="s" /> dan busur <InlineMath math="2\pi r" /></p>
-            <p>• <strong>Luas juring</strong> = <InlineMath math="\frac{b}{K} \times \pi s^2 = \frac{2\pi r}{2\pi s} \times \pi s^2 = \pi r s" /></p>
-            <p>• <strong>Luas alas</strong> = <InlineMath math="\pi r^2" /></p>
+            <p>{s5.line1}</p>
+            <p>{s5.line2}</p>
+            <p>{s5.line3}</p>
           </div>
           <div className="bg-slate-800/60 rounded p-3">
             <BlockMath math="L = \pi r s + \pi r^2" />
             <BlockMath math="\boxed{L = \pi r(r + s)}" />
           </div>
-          <p className="text-white/60 text-xs">Di mana <InlineMath math="s = \sqrt{r^2 + t^2}" /> adalah garis pelukis.</p>
+          <p className="text-white/60 text-xs">{s5.note}</p>
         </div>
         <blockquote className="border-l-4 border-orange-500 pl-3 text-orange-200 text-xs italic">
-          💡 <strong>Ingat:</strong> Jika soal hanya menanyakan luas selimut saja (tanpa alas), gunakan <InlineMath math="L_{\text{selimut}} = \pi r s" />.
+          {s5.reminder}
         </blockquote>
       </div>
     ),
@@ -2267,7 +2314,12 @@ const ExampleCard = ({ ex, idx, prefix, language }: { ex: Ex; idx: number; prefi
 const KerucutPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const initialSlide = (() => {
+    const raw = new URLSearchParams(window.location.search).get("slide");
+    const n = raw ? parseInt(raw, 10) : 0;
+    return Number.isFinite(n) && n >= 0 ? n : 0;
+  })();
+  const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const pt = pageTrans[language];
   const sections = getSections(language);
 
