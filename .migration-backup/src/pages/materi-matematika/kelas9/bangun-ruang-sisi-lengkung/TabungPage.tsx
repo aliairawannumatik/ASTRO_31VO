@@ -6,6 +6,7 @@ import { Database, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /* ─────────────────────────────────────────────────────────────
    3D CYLINDER SVG RENDERER — style mirrors InteractiveCone3D
@@ -1380,43 +1381,6 @@ const sections: Sec[] = [
       </div>
     ),
   },
-  {
-    title: "Kesimpulan — Rumus Lengkap Tabung",
-    icon: "📊",
-    content: (
-      <div className="space-y-3 font-body">
-        <div className="overflow-x-auto rounded-lg border border-slate-700">
-          <table className="w-full text-xs text-center">
-            <thead><tr className="bg-slate-800">
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Besaran</th>
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Rumus</th>
-              <th className="px-3 py-2 text-cyan-300">Catatan</th>
-            </tr></thead>
-            <tbody>
-              {[
-                ["Keliling alas / tutup","K = 2πr","Lingkaran"],
-                ["Luas alas / tutup","L₀ = πr²","Lingkaran"],
-                ["Luas selimut","Ls = 2πrt","Persegi panjang yang digulung"],
-                ["Luas permukaan (tertutup)","L = 2πr² + 2πrt","Semua sisi"],
-                ["Luas permukaan (terbuka)","L = πr² + 2πrt","Tanpa tutup atas"],
-                ["Volume","V = πr²t","Luas alas × tinggi"],
-              ].map(([b,r,c],i)=>(
-                <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
-                  <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
-                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
-                  <td className="px-3 py-2 text-white/55 text-left">{c}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-          <p>🚀 <strong>Kunci utama tabung:</strong> Semua rumus bergantung pada <strong className="text-yellow-300">r (jari-jari)</strong> dan <strong className="text-green-300">t (tinggi)</strong>.</p>
-          <p>Ingat: <InlineMath math="\pi \approx 3{,}14" /> atau <InlineMath math="\frac{22}{7}" /> (gunakan sesuai petunjuk soal!)</p>
-        </div>
-      </div>
-    ),
-  },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -1865,9 +1829,108 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
 const TabungPage = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { language } = useLanguage();
+
+  /* ── Kesimpulan / Rangkuman / Tips — trilingual ── */
+  const kesimpulanTrans = {
+    id: {
+      slideTitle: "Kesimpulan — Rumus Lengkap Tabung",
+      hBesaran: "Besaran", hRumus: "Rumus", hCatatan: "Catatan",
+      rows: [
+        ["Keliling alas / tutup",     "K = 2πr",           "Lingkaran"],
+        ["Luas alas / tutup",         "L₀ = πr²",          "Lingkaran"],
+        ["Luas selimut",              "Ls = 2πrt",          "Persegi panjang yang digulung"],
+        ["Luas permukaan (tertutup)", "L = 2πr² + 2πrt",   "Semua sisi"],
+        ["Luas permukaan (terbuka)",  "L = πr² + 2πrt",    "Tanpa tutup atas"],
+        ["Volume",                    "V = πr²t",           "Luas alas × tinggi"],
+      ] as [string, string, string][],
+      tipKey:  "Kunci utama tabung:",
+      tipBody: "Semua rumus bergantung pada",
+      tipR:    "r (jari-jari)",
+      tipAnd:  "dan",
+      tipT:    "t (tinggi)",
+      tipPi:   "Ingat:",
+      tipPiOr: "atau",
+      tipNote: "(gunakan sesuai petunjuk soal!)",
+    },
+    en: {
+      slideTitle: "Summary — Complete Cylinder Formulas",
+      hBesaran: "Quantity", hRumus: "Formula", hCatatan: "Notes",
+      rows: [
+        ["Base / top circumference",    "K = 2πr",         "Circle"],
+        ["Base / top area",             "L₀ = πr²",        "Circle"],
+        ["Lateral surface area",        "Ls = 2πrt",        "Rectangle rolled up"],
+        ["Total surface area (closed)", "L = 2πr² + 2πrt", "All sides"],
+        ["Total surface area (open)",   "L = πr² + 2πrt",  "Without top cap"],
+        ["Volume",                      "V = πr²t",         "Base area × height"],
+      ] as [string, string, string][],
+      tipKey:  "Key to the cylinder:",
+      tipBody: "All formulas depend on",
+      tipR:    "r (radius)",
+      tipAnd:  "and",
+      tipT:    "t (height)",
+      tipPi:   "Remember:",
+      tipPiOr: "or",
+      tipNote: "(use as directed in the problem!)",
+    },
+    ja: {
+      slideTitle: "まとめ — 円柱の完全な公式",
+      hBesaran: "量", hRumus: "公式", hCatatan: "備考",
+      rows: [
+        ["底面・頂面の周長",   "K = 2πr",           "円"],
+        ["底面・頂面の面積",   "L₀ = πr²",          "円"],
+        ["側面積",             "Ls = 2πrt",          "丸めた長方形"],
+        ["全表面積（蓋あり）", "L = 2πr² + 2πrt",   "全面"],
+        ["全表面積（蓋なし）", "L = πr² + 2πrt",    "上蓋なし"],
+        ["体積",               "V = πr²t",           "底面積×高さ"],
+      ] as [string, string, string][],
+      tipKey:  "円柱のポイント：",
+      tipBody: "すべての公式は",
+      tipR:    "r（半径）",
+      tipAnd:  "と",
+      tipT:    "t（高さ）に依存します",
+      tipPi:   "覚えておこう：",
+      tipPiOr: "または",
+      tipNote: "（問題の指示に従って使いましょう！）",
+    },
+  };
+
+  const ck = kesimpulanTrans[language];
+
+  const kesimpulanSlide = {
+    title: ck.slideTitle,
+    icon: "📊",
+    content: (
+      <div className="space-y-3 font-body">
+        <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <table className="w-full text-xs text-center">
+            <thead><tr className="bg-slate-800">
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{ck.hBesaran}</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">{ck.hRumus}</th>
+              <th className="px-3 py-2 text-cyan-300">{ck.hCatatan}</th>
+            </tr></thead>
+            <tbody>
+              {ck.rows.map(([b, fml, cat], i) => (
+                <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
+                  <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
+                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{fml}</td>
+                  <td className="px-3 py-2 text-white/55 text-left">{cat}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+          <p>🚀 <strong>{ck.tipKey}</strong> {ck.tipBody} <strong className="text-yellow-300">{ck.tipR}</strong> {ck.tipAnd} <strong className="text-green-300">{ck.tipT}</strong>.</p>
+          <p>{ck.tipPi} <InlineMath math="\pi \approx 3{,}14" /> {ck.tipPiOr} <InlineMath math="\frac{22}{7}" /> {ck.tipNote}</p>
+        </div>
+      </div>
+    ),
+  };
 
   const slides = [
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
+    kesimpulanSlide,
     {
       title: "Contoh Soal — Unsur-unsur Tabung",
       icon: "🏷️",
