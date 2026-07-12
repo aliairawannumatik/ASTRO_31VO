@@ -36,7 +36,37 @@ function proj(p: { x: number; y: number; z: number }) {
   return { x: CX + p.x * s, y: CY + p.y * s };
 }
 
-const InteractiveCone3D = () => {
+const cone3DLabels: Record<Language, {
+  drag: string; apex: string; selimutLabel: string; selimutSub: string;
+  alasLabel: string; alasSub: string; netFooter: string; btnCone: string;
+}> = {
+  id: {
+    drag: "Drag untuk memutar · Klik dan geser untuk eksplorasi",
+    apex: "T (puncak)",
+    selimutLabel: "SELIMUT", selimutSub: "(juring lingkaran, r=s)",
+    alasLabel: "ALAS", alasSub: "(lingkaran, r=r)",
+    netFooter: "Jaring-jaring Kerucut: Alas (lingkaran) + Selimut (juring)",
+    btnCone: "🔺 Kerucut 3D",
+  },
+  en: {
+    drag: "Drag to rotate · Click and drag to explore",
+    apex: "T (apex)",
+    selimutLabel: "LATERAL", selimutSub: "(circular sector, r=s)",
+    alasLabel: "BASE", alasSub: "(circle, r=r)",
+    netFooter: "Net of a Cone: Base (circle) + Lateral surface (sector)",
+    btnCone: "🔺 3D Cone",
+  },
+  ja: {
+    drag: "ドラッグして回転 · クリック&ドラッグで操作",
+    apex: "T（頂点）",
+    selimutLabel: "側面", selimutSub: "（扇形、r=s）",
+    alasLabel: "底面", alasSub: "（円、r=r）",
+    netFooter: "円錐の展開図：底面（円）＋側面（扇形）",
+    btnCone: "🔺 円錐3D",
+  },
+};
+const InteractiveCone3D = ({ language }: { language: Language }) => {
+  const L = cone3DLabels[language];
   const [rotX, setRotX] = useState(-22);
   const [rotY, setRotY] = useState(28);
   const [isDragging, setIsDragging] = useState(false);
@@ -147,7 +177,7 @@ const InteractiveCone3D = () => {
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Drag untuk memutar · Klik dan geser untuk eksplorasi
+        {L.drag}
       </p>
 
       {!showNet ? (
@@ -172,7 +202,7 @@ const InteractiveCone3D = () => {
             )
           )}
           <circle cx={apex2D.x} cy={apex2D.y} r="5" fill="#facc15" opacity="0.9" />
-          <text x={apex2D.x + 8} y={apex2D.y + 4} fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">T (puncak)</text>
+          <text x={apex2D.x + 8} y={apex2D.y + 4} fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">{L.apex}</text>
           <text x="10" y={SVG_H - 12} fill="#94a3b8" fontSize="9" fontFamily="monospace">r={CR}px  t={CH}px</text>
           <text x={SVG_W - 80} y={SVG_H - 12} fill="#22d3ee" fontSize="9" fontFamily="monospace">s=√(r²+t²)</text>
         </svg>
@@ -201,8 +231,8 @@ const InteractiveCone3D = () => {
                     d={`M 0,0 L ${x1},${y1} A ${sR},${sR} 0 ${lg},1 ${x2},${y2} Z`}
                     fill="rgba(6,182,212,0.35)" stroke="#22d3ee" strokeWidth="2" className="ng"
                   />
-                  <text x="0" y="-60" fill="#22d3ee" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">SELIMUT</text>
-                  <text x="0" y="-46" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">(juring lingkaran, r=s)</text>
+                  <text x="0" y="-60" fill="#22d3ee" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">{L.selimutLabel}</text>
+                  <text x="0" y="-46" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">{L.selimutSub}</text>
                   <line x1="0" y1="0" x2={x1} y2={y1} stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5,3"/>
                   <text x={x1 / 2 - 18} y={y1 / 2} fill="#facc15" fontSize="9" fontFamily="monospace">s</text>
                 </g>
@@ -211,10 +241,10 @@ const InteractiveCone3D = () => {
           </g>
           {/* Base circle */}
           <circle cx="64" cy="245" r="42" fill="rgba(99,102,241,0.35)" stroke="#a5b4fc" strokeWidth="2" className="ng"/>
-          <text x="64" y="248" fill="#a5b4fc" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ALAS</text>
-          <text x="64" y="260" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">(lingkaran, r=r)</text>
+          <text x="64" y="248" fill="#a5b4fc" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">{L.alasLabel}</text>
+          <text x="64" y="260" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">{L.alasSub}</text>
           <text x="64" y="272" fill="#facc15" fontSize="9" fontFamily="monospace" textAnchor="middle">r</text>
-          <text x="170" y="295" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">Jaring-jaring Kerucut: Alas (lingkaran) + Selimut (juring)</text>
+          <text x="170" y="295" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">{L.netFooter}</text>
         </svg>
       )}
 
@@ -223,7 +253,7 @@ const InteractiveCone3D = () => {
           onClick={() => { playPopSound(); setShowNet(false); }}
           className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer font-body ${!showNet ? "bg-cyan-700/60 border-cyan-500 text-cyan-200" : "bg-slate-800/60 border-slate-600 text-slate-300 hover:bg-slate-700/60"}`}
         >
-          🔺 Kerucut 3D
+          {L.btnCone}
         </button>
       </div>
 
@@ -309,7 +339,13 @@ const GarisPelukisSVG = () => (
   </svg>
 );
 
-const LuasKerucutSVG = () => {
+const luasKerucutSvgLabels: Record<Language, { selimut: string; alas: string }> = {
+  id: { selimut: "SELIMUT", alas: "ALAS" },
+  en: { selimut: "LATERAL", alas: "BASE" },
+  ja: { selimut: "側面", alas: "底面" },
+};
+const LuasKerucutSVG = ({ language }: { language: Language }) => {
+  const L = luasKerucutSvgLabels[language];
   /* Sector geometry: apex at (140,55), R=90, sector angle=150°
      half-angle=75°, opening downward
      x1=140+90·cos15°≈227, y1=55+90·sin15°≈78
@@ -347,7 +383,7 @@ const LuasKerucutSVG = () => {
       {/* s label on left arm */}
       <text x={midSx} y={midSy} fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold">s</text>
       {/* SELIMUT labels — centroid at ≈y=100 */}
-      <text x={cx} y="100" fill="#ffffff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">SELIMUT</text>
+      <text x={cx} y="100" fill="#ffffff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">{L.selimut}</text>
       <text x={cx} y="114" fill="#e0f2fe" fontSize="9" fontFamily="monospace" textAnchor="middle">πrs</text>
 
       {/* ── + sign between sector and alas ── */}
@@ -358,13 +394,17 @@ const LuasKerucutSVG = () => {
       {/* r line */}
       <line x1={cx} y1="215" x2={cx + 42} y2="215" stroke="#facc15" strokeWidth="1.2" strokeDasharray="3,2"/>
       <text x={cx + 21} y="210" fill="#facc15" fontSize="9" fontFamily="monospace" textAnchor="middle">r</text>
-      <text x={cx} y="218" fill="#ffffff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">ALAS</text>
+      <text x={cx} y="218" fill="#ffffff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">{L.alas}</text>
       <text x={cx} y="231" fill="#e0e7ff" fontSize="9" fontFamily="monospace" textAnchor="middle">πr²</text>
     </svg>
   );
 };
 
-const VolumeKerucutSVG = () => (
+// Note: VolumeKerucutSVG's only text is the symbolic "V = ⅓πr²t" formula and
+// single-letter r/t labels, which are language-neutral math notation. The
+// `language` prop is still accepted (and threaded through by callers) for API
+// consistency with the other diagram components and to support future labels.
+const VolumeKerucutSVG = ({ language: _language }: { language: Language }) => (
   <svg viewBox="0 0 300 260" className="w-full max-w-sm mx-auto my-2" aria-label="Volume kerucut">
     <defs>
       <style>{`
@@ -1688,12 +1728,71 @@ const slide5Trans = {
   },
 };
 
+/* ── Slide 6 translations (Volume Kerucut / Volume of a Cone) ── */
+const slide6Trans = {
+  id: {
+    title: "Volume Kerucut",
+    intro: (
+      <>
+        <strong className="text-blue-300">Volume kerucut</strong> adalah besar ruang yang ditempati kerucut.
+        Fakta menarik: volume kerucut tepat <strong className="text-yellow-300">⅓ dari volume tabung</strong> yang memiliki alas dan tinggi yang sama!
+      </>
+    ),
+    waterCaption: "🌊 Kerucut diisi air — dari kosong hingga penuh",
+    waterNote: "Persentase menunjukkan proporsi volume terisi terhadap volume total",
+    derivLabel: "📌 Penurunan Rumus:",
+    line1: <>• Volume tabung (alas &amp; tinggi sama) = <InlineMath math="\pi r^2 t" /></>,
+    line2: <>• Secara eksperimen &amp; integral, kerucut = <InlineMath math="\frac{1}{3}" /> × volume tabung</>,
+    note: <><InlineMath math="r" /> = jari-jari alas, <InlineMath math="t" /> = tinggi kerucut</>,
+    relLabel: "🚀 Hubungan Volume:",
+    relFormula: <InlineMath math="V_k = \frac{1}{3} \times V_{tb}" />,
+    relText: "Artinya, 3 kerucut = 1 tabung (dengan r dan t yang sama)!",
+  },
+  en: {
+    title: "Volume of a Cone",
+    intro: (
+      <>
+        The <strong className="text-blue-300">volume of a cone</strong> is the amount of space it occupies.
+        Interesting fact: the volume of a cone is exactly <strong className="text-yellow-300">⅓ the volume of a cylinder</strong> with the same base and height!
+      </>
+    ),
+    waterCaption: "🌊 Filling the cone with water — from empty to full",
+    waterNote: "The percentage shows the proportion of filled volume relative to the total volume",
+    derivLabel: "📌 Deriving the Formula:",
+    line1: <>• Volume of a cylinder (same base &amp; height) = <InlineMath math="\pi r^2 t" /></>,
+    line2: <>• Experimentally &amp; via integration, a cone = <InlineMath math="\frac{1}{3}" /> × the volume of a cylinder</>,
+    note: <><InlineMath math="r" /> = base radius, <InlineMath math="t" /> = height of the cone</>,
+    relLabel: "🚀 Volume Relationship:",
+    relFormula: <InlineMath math="V_k = \frac{1}{3} \times V_{tb}" />,
+    relText: "In other words, 3 cones = 1 cylinder (with the same r and t)!",
+  },
+  ja: {
+    title: "円錐の体積",
+    intro: (
+      <>
+        <strong className="text-blue-300">円錐の体積</strong>は、円錐が占める空間の大きさです。
+        面白い事実：円錐の体積は、同じ底面と高さを持つ<strong className="text-yellow-300">円柱の体積のちょうど⅓</strong>です！
+      </>
+    ),
+    waterCaption: "🌊 円錐に水を注ぐ — 空から満杯まで",
+    waterNote: "パーセントは、全体の体積に対する満たされた体積の割合を示します",
+    derivLabel: "📌 公式の導出：",
+    line1: <>• 円柱の体積（底面と高さが同じ） = <InlineMath math="\pi r^2 t" /></>,
+    line2: <>• 実験と積分により、円錐 = 円柱の体積 × <InlineMath math="\frac{1}{3}" /></>,
+    note: <><InlineMath math="r" /> = 底面の半径、<InlineMath math="t" /> = 円錐の高さ</>,
+    relLabel: "🚀 体積の関係：",
+    relFormula: <InlineMath math="V_k = \frac{1}{3} \times V_{tb}" />,
+    relText: "つまり、円錐3個 = 円柱1個（rとtが同じ場合）！",
+  },
+};
+
 function getSections(language: Language): Sec[] {
   const s1 = slide1Trans[language];
   const s2 = slide2Trans[language];
   const s3 = slide3Trans[language];
   const s4 = slide4Trans[language];
   const s5 = slide5Trans[language];
+  const s6 = slide6Trans[language];
   return [
   {
     title: s1.title,
@@ -1714,7 +1813,7 @@ function getSections(language: Language): Sec[] {
         <blockquote className="border-l-4 border-cyan-500 pl-3 text-cyan-200 text-xs italic">
           💡 <strong>{s1.quoteLabel}</strong> {s1.quoteText}
         </blockquote>
-        <InteractiveCone3D />
+        <InteractiveCone3D language={language} />
 
         {/* ── Foto Benda Berbentuk Kerucut — slide 2 ── */}
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
@@ -1926,7 +2025,7 @@ function getSections(language: Language): Sec[] {
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
         <p>{s5.intro}</p>
-        <LuasKerucutSVG />
+        <LuasKerucutSVG language={language} />
         <div className="bg-orange-950/60 border border-orange-700/50 rounded-lg p-4 space-y-3">
           <p className="text-orange-300 font-semibold">{s5.derivLabel}</p>
           <div className="text-xs text-white/70 space-y-1">
@@ -1947,40 +2046,37 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Volume Kerucut",
+    title: s6.title,
     icon: "📦",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          <strong className="text-blue-300">Volume kerucut</strong> adalah besar ruang yang ditempati kerucut.
-          Fakta menarik: volume kerucut tepat <strong className="text-yellow-300">⅓ dari volume tabung</strong> yang memiliki alas dan tinggi yang sama!
-        </p>
+        <p>{s6.intro}</p>
 
         <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1">
           <p className="text-cyan-300 text-xs font-semibold font-body text-center">
-            🌊 Kerucut diisi air — dari kosong hingga penuh
+            {s6.waterCaption}
           </p>
           <WaterKerucutAnimation />
           <p className="text-white/45 text-[10px] font-body text-center">
-            Persentase menunjukkan proporsi volume terisi terhadap volume total
+            {s6.waterNote}
           </p>
         </div>
 
         <div className="bg-blue-950/60 border border-blue-700/50 rounded-lg p-4 space-y-3">
-          <p className="text-blue-300 font-semibold">📌 Penurunan Rumus:</p>
+          <p className="text-blue-300 font-semibold">{s6.derivLabel}</p>
           <div className="text-xs text-white/70 space-y-1">
-            <p>• Volume tabung (alas & tinggi sama) = <InlineMath math="\pi r^2 t" /></p>
-            <p>• Secara eksperimen & integral, kerucut = <InlineMath math="\frac{1}{3}" /> × volume tabung</p>
+            <p>{s6.line1}</p>
+            <p>{s6.line2}</p>
           </div>
           <div className="bg-slate-800/60 rounded p-3">
             <BlockMath math="\boxed{V = \frac{1}{3} \pi r^2 t}" />
           </div>
-          <p className="text-white/60 text-xs"><InlineMath math="r" /> = jari-jari alas, <InlineMath math="t" /> = tinggi kerucut</p>
+          <p className="text-white/60 text-xs">{s6.note}</p>
         </div>
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs space-y-1">
-          <p className="text-cyan-300 font-semibold">🚀 Hubungan Volume:</p>
-          <p className="text-white/70"><InlineMath math="V_{\text{kerucut}} = \frac{1}{3} \times V_{\text{tabung}}" /></p>
-          <p className="text-white/70">Artinya, 3 kerucut = 1 tabung (dengan r dan t yang sama)!</p>
+          <p className="text-cyan-300 font-semibold">{s6.relLabel}</p>
+          <p className="text-white/70">{s6.relFormula}</p>
+          <p className="text-white/70">{s6.relText}</p>
         </div>
       </div>
     ),
