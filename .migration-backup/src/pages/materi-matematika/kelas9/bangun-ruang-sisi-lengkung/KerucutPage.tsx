@@ -234,7 +234,14 @@ const InteractiveCone3D = () => {
 /* ─────────────────────────────────────────────────────────────
    ANIMATED SVGs — UNSUR-UNSUR KERUCUT
 ───────────────────────────────────────────────────────────── */
-const UnsurSVG = () => (
+const unsurSvgLabels: Record<Language, string[]> = {
+  id: ["T = puncak", "t = tinggi", "r = jari-jari", "s = garis pelukis", "O = pusat alas"],
+  en: ["T = apex", "t = height", "r = radius", "s = slant height", "O = base center"],
+  ja: ["T = 頂点", "t = 高さ", "r = 半径", "s = 母線", "O = 底面の中心"],
+};
+const UnsurSVG = ({ language }: { language: Language }) => {
+  const L = unsurSvgLabels[language];
+  return (
   <svg viewBox="0 0 300 240" className="w-full max-w-sm mx-auto my-2" aria-label="Unsur-unsur kerucut">
     <defs>
       <style>{`
@@ -264,16 +271,17 @@ const UnsurSVG = () => (
     <line x1="150" y1="20" x2="240" y2="200" stroke="#f87171" strokeWidth="2.5" strokeDasharray="6,3" className="kr" style={{color:"#f87171"}}/>
     <text x="204" y="105" fill="#f87171" fontSize="11" fontFamily="monospace" fontWeight="bold">s</text>
     {/* Labels */}
-    <text x="8" y="30" fill="#facc15" fontSize="10" fontFamily="monospace">T = puncak</text>
-    <text x="8" y="48" fill="#f97316" fontSize="10" fontFamily="monospace">t = tinggi</text>
-    <text x="8" y="64" fill="#4ade80" fontSize="10" fontFamily="monospace">r = jari-jari</text>
-    <text x="8" y="80" fill="#f87171" fontSize="10" fontFamily="monospace">s = garis pelukis</text>
-    <text x="8" y="96" fill="#a5b4fc" fontSize="10" fontFamily="monospace">O = pusat alas</text>
+    <text x="8" y="30" fill="#facc15" fontSize="10" fontFamily="monospace">{L[0]}</text>
+    <text x="8" y="48" fill="#f97316" fontSize="10" fontFamily="monospace">{L[1]}</text>
+    <text x="8" y="64" fill="#4ade80" fontSize="10" fontFamily="monospace">{L[2]}</text>
+    <text x="8" y="80" fill="#f87171" fontSize="10" fontFamily="monospace">{L[3]}</text>
+    <text x="8" y="96" fill="#a5b4fc" fontSize="10" fontFamily="monospace">{L[4]}</text>
     <circle cx="150" cy="200" r="4" fill="#a5b4fc" className="kp"/>
     <text x="155" y="215" fill="#a5b4fc" fontSize="9" fontFamily="monospace">O</text>
     <text x="148" y="15" fill="#facc15" fontSize="9" fontFamily="monospace">T</text>
   </svg>
-);
+  );
+};
 
 const GarisPelukisSVG = () => (
   <svg viewBox="0 0 300 240" className="w-full max-w-sm mx-auto my-2" aria-label="Garis pelukis kerucut">
@@ -852,7 +860,14 @@ const ConeNetAnimation = () => {
 };
 
 /* Unsur kerucut — sisi / rusuk / titik sudut menyala bergantian */
-const KerucutUnsurCountSVG = () => (
+const kerucutCountSvgLabels: Record<Language, string[]> = {
+  id: ["SISI ① — Selimut (lengkung)", "SISI ② — Alas (datar)", "RUSUK ① — Keliling alas", "TITIK SUDUT ① — Puncak", "2 Sisi · 1 Rusuk · 1 Titik Sudut"],
+  en: ["FACE ① — Lateral surface (curved)", "FACE ② — Base (flat)", "EDGE ① — Base circumference", "VERTEX ① — Apex", "2 Faces · 1 Edge · 1 Vertex"],
+  ja: ["面① — 側面（曲面）", "面② — 底面（平面）", "辺① — 底面の円周", "頂点① — 頂点", "2つの面・1つの辺・1つの頂点"],
+};
+const KerucutUnsurCountSVG = ({ language }: { language: Language }) => {
+  const L = kerucutCountSvgLabels[language];
+  return (
   <svg viewBox="0 0 280 215" className="w-full max-w-xs mx-auto my-2" aria-label="Sisi rusuk titik sudut kerucut">
     <defs>
       <style>{`
@@ -888,17 +903,25 @@ const KerucutUnsurCountSVG = () => (
     <ellipse cx="140" cy="158" rx="65" ry="16" fill="none" stroke="#1e293b" strokeWidth="0.8"/>
     <circle cx="140" cy="28" r="3" fill="#475569"/>
     {/* Label bergantian — satu posisi, muncul bergantian */}
-    <text x="140" y="193" fill="#e9d5ff" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="kla">SISI ① — Selimut (lengkung)</text>
-    <text x="140" y="193" fill="#a5b4fc" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="klb">SISI ② — Alas (datar)</text>
-    <text x="140" y="193" fill="#fcd34d" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="klc">RUSUK ① — Keliling alas</text>
-    <text x="140" y="193" fill="#fef08a" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="kld">TITIK SUDUT ① — Puncak</text>
+    <text x="140" y="193" fill="#e9d5ff" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="kla">{L[0]}</text>
+    <text x="140" y="193" fill="#a5b4fc" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="klb">{L[1]}</text>
+    <text x="140" y="193" fill="#fcd34d" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="klc">{L[2]}</text>
+    <text x="140" y="193" fill="#fef08a" fontSize="9.5" fontFamily="monospace" textAnchor="middle" fontWeight="700" className="kld">{L[3]}</text>
     {/* Ringkasan statis */}
-    <text x="140" y="209" fill="#475569" fontSize="8" fontFamily="monospace" textAnchor="middle">2 Sisi · 1 Rusuk · 1 Titik Sudut</text>
+    <text x="140" y="209" fill="#475569" fontSize="8" fontFamily="monospace" textAnchor="middle">{L[4]}</text>
   </svg>
-);
+  );
+};
 
 /* Selimut kerucut dibuka → juring lingkaran */
-const SelimutJuringAnimSVG = () => (
+const selimutJuringSvgLabels: Record<Language, { kerucut: string; dibuka: string; busur: string; theta: string; selimut: string; juring: string }> = {
+  id: { kerucut: "kerucut", dibuka: "dibuka", busur: "busur = keliling alas", theta: "θ = (r ÷ s) × 360°", selimut: "SELIMUT", juring: "= juring lingkaran" },
+  en: { kerucut: "cone", dibuka: "unfold", busur: "arc = base circumference", theta: "θ = (r ÷ s) × 360°", selimut: "LATERAL", juring: "= circular sector" },
+  ja: { kerucut: "円錐", dibuka: "展開", busur: "弧 = 底面の円周", theta: "θ = (r ÷ s) × 360°", selimut: "側面", juring: "= 扇形" },
+};
+const SelimutJuringAnimSVG = ({ language }: { language: Language }) => {
+  const L = selimutJuringSvgLabels[language];
+  return (
   <svg viewBox="0 0 315 195" className="w-full max-w-sm mx-auto my-2" aria-label="Selimut kerucut dibuka menjadi juring">
     <defs>
       <style>{`
@@ -919,14 +942,14 @@ const SelimutJuringAnimSVG = () => (
       {/* Garis pelukis s */}
       <line x1="58" y1="18" x2="18" y2="128" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="3,2"/>
       <text x="25" y="75" fill="#fcd34d" fontSize="8" fontFamily="monospace" fontWeight="700">s</text>
-      <text x="58" y="150" fill="#a78bfa" fontSize="7.5" fontFamily="monospace" textAnchor="middle">kerucut</text>
+      <text x="58" y="150" fill="#a78bfa" fontSize="7.5" fontFamily="monospace" textAnchor="middle">{L.kerucut}</text>
     </g>
 
     {/* Panah tengah */}
     <g className="kjap">
       <line x1="108" y1="73" x2="133" y2="73" stroke="#475569" strokeWidth="1.8"/>
       <polygon points="131,69 139,73 131,77" fill="#475569"/>
-      <text x="124" y="86" fill="#64748b" fontSize="7" fontFamily="monospace" textAnchor="middle">dibuka</text>
+      <text x="124" y="86" fill="#64748b" fontSize="7" fontFamily="monospace" textAnchor="middle">{L.dibuka}</text>
     </g>
 
     {/* RIGHT: juring lingkaran */}
@@ -940,7 +963,7 @@ const SelimutJuringAnimSVG = () => (
       <text x="191" y="146" fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">s</text>
       <text x="265" y="146" fill="#fcd34d" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="700">s</text>
       {/* Arc label: busur = keliling alas — placed above the arc (arc top y=86) */}
-      <text x="228" y="46" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="700">busur = keliling alas</text>
+      <text x="228" y="46" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="700">{L.busur}</text>
       {/* Arrow from label down toward arc */}
       <line x1="228" y1="49" x2="228" y2="82" stroke="#fde68a" strokeWidth="1" strokeDasharray="3,2" markerEnd="url(#arrowY)"/>
       <defs>
@@ -953,13 +976,14 @@ const SelimutJuringAnimSVG = () => (
       {/* Sudut θ — arc indicator near vertex, lower than arms */}
       <path d="M 252 148 Q 228 130 204 148" fill="none" stroke="#22c55e" strokeWidth="1.4"/>
       <text x="228" y="144" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">θ</text>
-      <text x="228" y="178" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">θ = (r ÷ s) × 360°</text>
+      <text x="228" y="178" fill="#86efac" fontSize="7.5" fontFamily="monospace" textAnchor="middle">{L.theta}</text>
       {/* Label juring */}
-      <text x="228" y="110" fill="#e9d5ff" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="700">SELIMUT</text>
-      <text x="228" y="120" fill="#c4b5fd" fontSize="7" fontFamily="monospace" textAnchor="middle">= juring lingkaran</text>
+      <text x="228" y="110" fill="#e9d5ff" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="700">{L.selimut}</text>
+      <text x="228" y="120" fill="#c4b5fd" fontSize="7" fontFamily="monospace" textAnchor="middle">{L.juring}</text>
     </g>
   </svg>
-);
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    SECTIONS
@@ -1286,7 +1310,7 @@ const UnsurSoalQuiz = () => {
 const pageTrans = {
   id: { title: "KERUCUT", subtitle: "Kelas 9 · Bangun Ruang Sisi Lengkung" },
   en: { title: "CONE", subtitle: "Grade 9 · Curved-Surface Solids" },
-  ja: { title: "円錐", subtitle: "9年生・曲面図形" },
+  ja: { title: "円錐", subtitle: "中学3年・曲面図形" },
 };
 
 /* ── Slide 1 translations (Definisi Kerucut / Definition of Cone) ── */
@@ -1358,8 +1382,124 @@ const slide1Trans = {
   },
 };
 
+/* ── Slide 2 translations (Unsur-unsur Kerucut / Elements of a Cone) ── */
+const slide2Trans = {
+  id: {
+    title: "Unsur-unsur Kerucut (Interaktif)",
+    card1Title: "① Puncak / Apex (T)",
+    card1Body: <>Titik ujung runcing kerucut tempat semua garis pelukis bertemu. Hanya ada <strong>1 puncak</strong>.</>,
+    card2Title: <>② Tinggi (<InlineMath math="t" />)</>,
+    card2Body: <>Jarak tegak lurus dari puncak ke pusat alas lingkaran. Merupakan <strong>sumbu kerucut</strong>.</>,
+    card3Title: <>③ Jari-jari Alas (<InlineMath math="r" />)</>,
+    card3Body: "Jari-jari lingkaran alas kerucut. Juga merupakan kaki segitiga siku-siku bersama tinggi dan garis pelukis.",
+    card4Title: <>④ Garis Pelukis / Apotema (<InlineMath math="s" />)</>,
+    card4Body: "Garis dari puncak ke titik mana saja di tepi lingkaran alas. Semua garis pelukis sama panjang.",
+    card5Title: "⑤ Alas (Lingkaran)",
+    card5Body: <>Satu-satunya sisi datar kerucut berbentuk lingkaran dengan jari-jari <InlineMath math="r" />. Luas alas = <InlineMath math="\pi r^2" />.</>,
+    card6Title: "⑥ Selimut (Sisi Lengkung)",
+    card6Body: <>Bidang lengkung yang menghubungkan tepi alas ke puncak. Jika dibuka, berbentuk <strong>juring (sektor) lingkaran</strong> dengan jari-jari = <InlineMath math="s" />.</>,
+    animTitle: "Sisi, Rusuk & Titik Sudut Kerucut",
+    animSub: "Setiap bagian menyala satu per satu",
+    sideLabel: "Sisi", sideDesc: "selimut + alas",
+    edgeLabel: "Rusuk", edgeDesc: "keliling alas",
+    vertexLabel: "Titik Sudut", vertexDesc: "puncak", vertexDesc2: "puncak (T)",
+    netTitle: "Selimut Kerucut → Juring Lingkaran",
+    netSub: "Jika selimut dibuka dan diratakan",
+    netLine1: <>• Selimut kerucut jika dibuka → berbentuk <strong className="text-purple-300">juring lingkaran</strong> dengan:</>,
+    netLine2: <>— jari-jari juring = <strong className="text-yellow-300">s</strong> (garis pelukis)</>,
+    netLine3: <>— panjang busur = <strong className="text-yellow-300">2πr</strong> (keliling alas)</>,
+    netLine4: <>— sudut juring <strong className="text-green-300">θ = (r ÷ s) × 360°</strong></>,
+    netLine5: <>• Luas selimut = luas juring = <strong className="text-yellow-300">πrs</strong></>,
+    summaryTitle: "📋 Kesimpulan — Sisi, Rusuk & Titik Sudut Kerucut",
+    thUnsur: "Unsur", thSimbol: "Simbol", thKeterangan: "Keterangan",
+    rows: [
+      ["Puncak", "T", "1 buah titik"],
+      ["Tinggi", "t", "puncak → pusat alas"],
+      ["Jari-jari alas", "r", "lingkaran alas"],
+      ["Garis pelukis", "s", "puncak → tepi alas"],
+      ["Alas", "—", "lingkaran, luas = πr²"],
+      ["Selimut", "—", "juring lingkaran, r = s"],
+    ] as [string, string, string][],
+  },
+  en: {
+    title: "Elements of a Cone (Interactive)",
+    card1Title: "① Apex (T)",
+    card1Body: <>The pointed tip of the cone where all slant heights meet. There is only <strong>1 apex</strong>.</>,
+    card2Title: <>② Height (<InlineMath math="t" />)</>,
+    card2Body: <>The perpendicular distance from the apex to the center of the base. It forms the <strong>cone's axis</strong>.</>,
+    card3Title: <>③ Base Radius (<InlineMath math="r" />)</>,
+    card3Body: "The radius of the cone's circular base. Also one leg of the right triangle formed with the height and the slant height.",
+    card4Title: <>④ Slant Height (<InlineMath math="s" />)</>,
+    card4Body: "The line from the apex to any point on the rim of the base. All slant heights are equal in length.",
+    card5Title: "⑤ Base (Circle)",
+    card5Body: <>The cone's only flat side — a circle with radius <InlineMath math="r" />. Base area = <InlineMath math="\pi r^2" />.</>,
+    card6Title: "⑥ Lateral Surface (Curved Side)",
+    card6Body: <>The curved surface connecting the base rim to the apex. When unfolded, it forms a <strong>circular sector</strong> with radius = <InlineMath math="s" />.</>,
+    animTitle: "Faces, Edges & Vertices of a Cone",
+    animSub: "Each part lights up one at a time",
+    sideLabel: "Face", sideDesc: "lateral + base",
+    edgeLabel: "Edge", edgeDesc: "base circumference",
+    vertexLabel: "Vertex", vertexDesc: "apex", vertexDesc2: "apex (T)",
+    netTitle: "Lateral Surface → Circular Sector",
+    netSub: "When the lateral surface is unfolded and flattened",
+    netLine1: <>• When unfolded, a cone's lateral surface forms a <strong className="text-purple-300">circular sector</strong> with:</>,
+    netLine2: <>— sector radius = <strong className="text-yellow-300">s</strong> (slant height)</>,
+    netLine3: <>— arc length = <strong className="text-yellow-300">2πr</strong> (base circumference)</>,
+    netLine4: <>— sector angle <strong className="text-green-300">θ = (r ÷ s) × 360°</strong></>,
+    netLine5: <>• Lateral surface area = sector area = <strong className="text-yellow-300">πrs</strong></>,
+    summaryTitle: "📋 Summary — Faces, Edges & Vertices of a Cone",
+    thUnsur: "Element", thSimbol: "Symbol", thKeterangan: "Description",
+    rows: [
+      ["Apex", "T", "1 point"],
+      ["Height", "t", "apex → base center"],
+      ["Base radius", "r", "radius of the base circle"],
+      ["Slant height", "s", "apex → base rim"],
+      ["Base", "—", "circle, area = πr²"],
+      ["Lateral surface", "—", "circular sector, r = s"],
+    ] as [string, string, string][],
+  },
+  ja: {
+    title: "円錐の構成要素（インタラクティブ）",
+    card1Title: "①頂点（T）",
+    card1Body: <>すべての母線が集まる円錐の先端の点。頂点は<strong>1つだけ</strong>。</>,
+    card2Title: <>②高さ（<InlineMath math="t" />）</>,
+    card2Body: <>頂点から底面の中心までの垂直距離。<strong>円錐の軸</strong>となる。</>,
+    card3Title: <>③底面の半径（<InlineMath math="r" />）</>,
+    card3Body: "円錐の底面（円）の半径。高さ・母線とともに直角三角形の一辺を成す。",
+    card4Title: <>④母線（<InlineMath math="s" />）</>,
+    card4Body: "頂点から底面の縁上の任意の点までの線。すべての母線の長さは等しい。",
+    card5Title: "⑤底面（円）",
+    card5Body: <>円錐の唯一の平面で、半径 <InlineMath math="r" /> の円。底面積 = <InlineMath math="\pi r^2" />。</>,
+    card6Title: "⑥側面（曲面）",
+    card6Body: <>底面の縁と頂点をつなぐ曲面。広げると、半径 = <InlineMath math="s" /> の<strong>扇形</strong>になる。</>,
+    animTitle: "円錐の面・辺・頂点",
+    animSub: "各部分が順番に光ります",
+    sideLabel: "面", sideDesc: "側面＋底面",
+    edgeLabel: "辺", edgeDesc: "底面の円周",
+    vertexLabel: "頂点", vertexDesc: "頂点", vertexDesc2: "頂点（T）",
+    netTitle: "側面 → 扇形",
+    netSub: "側面を広げて平らにすると",
+    netLine1: <>• 円錐の側面を広げると、<strong className="text-purple-300">扇形</strong>になり：</>,
+    netLine2: <>— 扇形の半径 = <strong className="text-yellow-300">s</strong>（母線）</>,
+    netLine3: <>— 弧の長さ = <strong className="text-yellow-300">2πr</strong>（底面の円周）</>,
+    netLine4: <>— 扇形の中心角 <strong className="text-green-300">θ = (r ÷ s) × 360°</strong></>,
+    netLine5: <>• 側面積 = 扇形の面積 = <strong className="text-yellow-300">πrs</strong></>,
+    summaryTitle: "📋 まとめ — 円錐の面・辺・頂点",
+    thUnsur: "要素", thSimbol: "記号", thKeterangan: "説明",
+    rows: [
+      ["頂点", "T", "1個の点"],
+      ["高さ", "t", "頂点→底面の中心"],
+      ["底面の半径", "r", "底面の円の半径"],
+      ["母線", "s", "頂点→底面の縁"],
+      ["底面", "—", "円、面積 = πr²"],
+      ["側面", "—", "扇形、r = s"],
+    ] as [string, string, string][],
+  },
+};
+
 function getSections(language: Language): Sec[] {
   const s1 = slide1Trans[language];
+  const s2 = slide2Trans[language];
   return [
   {
     title: s1.title,
@@ -1407,38 +1547,38 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Unsur-unsur Kerucut (Interaktif)",
+    title: s2.title,
     icon: "🔍",
     content: (
       <div className="space-y-5 text-sm text-white/85 font-body leading-relaxed">
-        <UnsurSVG />
+        <UnsurSVG language={language} />
         <div className="grid grid-cols-1 gap-3">
           <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-yellow-300 font-semibold">① Puncak / Apex (T)</p>
-            <p className="text-xs text-white/70">Titik ujung runcing kerucut tempat semua garis pelukis bertemu. Hanya ada <strong>1 puncak</strong>.</p>
+            <p className="text-yellow-300 font-semibold">{s2.card1Title}</p>
+            <p className="text-xs text-white/70">{s2.card1Body}</p>
           </div>
           <div className="bg-orange-950/40 border border-orange-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-orange-300 font-semibold">② Tinggi (<InlineMath math="t" />)</p>
-            <p className="text-xs text-white/70">Jarak tegak lurus dari puncak ke pusat alas lingkaran. Merupakan <strong>sumbu kerucut</strong>.</p>
+            <p className="text-orange-300 font-semibold">{s2.card2Title}</p>
+            <p className="text-xs text-white/70">{s2.card2Body}</p>
           </div>
           <div className="bg-green-950/40 border border-green-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-green-300 font-semibold">③ Jari-jari Alas (<InlineMath math="r" />)</p>
-            <p className="text-xs text-white/70">Jari-jari lingkaran alas kerucut. Juga merupakan kaki segitiga siku-siku bersama tinggi dan garis pelukis.</p>
+            <p className="text-green-300 font-semibold">{s2.card3Title}</p>
+            <p className="text-xs text-white/70">{s2.card3Body}</p>
           </div>
           <div className="bg-red-950/40 border border-red-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-red-300 font-semibold">④ Garis Pelukis / Apotema (<InlineMath math="s" />)</p>
-            <p className="text-xs text-white/70">Garis dari puncak ke titik mana saja di tepi lingkaran alas. Semua garis pelukis sama panjang.</p>
+            <p className="text-red-300 font-semibold">{s2.card4Title}</p>
+            <p className="text-xs text-white/70">{s2.card4Body}</p>
             <div className="bg-slate-800/60 rounded p-2 text-center">
               <BlockMath math="s = \sqrt{r^2 + t^2}" />
             </div>
           </div>
           <div className="bg-indigo-950/40 border border-indigo-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-indigo-300 font-semibold">⑤ Alas (Lingkaran)</p>
-            <p className="text-xs text-white/70">Satu-satunya sisi datar kerucut berbentuk lingkaran dengan jari-jari <InlineMath math="r" />. Luas alas = <InlineMath math="\pi r^2" />.</p>
+            <p className="text-indigo-300 font-semibold">{s2.card5Title}</p>
+            <p className="text-xs text-white/70">{s2.card5Body}</p>
           </div>
           <div className="bg-cyan-950/40 border border-cyan-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-cyan-300 font-semibold">⑥ Selimut (Sisi Lengkung)</p>
-            <p className="text-xs text-white/70">Bidang lengkung yang menghubungkan tepi alas ke puncak. Jika dibuka, berbentuk <strong>juring (sektor) lingkaran</strong> dengan jari-jari = <InlineMath math="s" />.</p>
+            <p className="text-cyan-300 font-semibold">{s2.card6Title}</p>
+            <p className="text-xs text-white/70">{s2.card6Body}</p>
           </div>
         </div>
 
@@ -1447,26 +1587,26 @@ function getSections(language: Language): Sec[] {
           <div className="flex items-center gap-3 px-4 py-2 bg-slate-800/60">
             <span className="text-lg">✨</span>
             <div>
-              <p className="text-white font-bold text-sm">Sisi, Rusuk & Titik Sudut Kerucut</p>
-              <p className="text-white/50 text-xs">Setiap bagian menyala satu per satu</p>
+              <p className="text-white font-bold text-sm">{s2.animTitle}</p>
+              <p className="text-white/50 text-xs">{s2.animSub}</p>
             </div>
           </div>
-          <KerucutUnsurCountSVG />
+          <KerucutUnsurCountSVG language={language} />
           <div className="px-4 pb-3 grid grid-cols-3 gap-2 text-center text-xs">
             <div className="bg-purple-950/50 border border-purple-700/40 rounded-lg p-2">
               <p className="text-purple-300 font-bold text-base">2</p>
-              <p className="text-white/60 text-[10px]">Sisi</p>
-              <p className="text-white/40 text-[9px]">selimut + alas</p>
+              <p className="text-white/60 text-[10px]">{s2.sideLabel}</p>
+              <p className="text-white/40 text-[9px]">{s2.sideDesc}</p>
             </div>
             <div className="bg-amber-950/50 border border-amber-700/40 rounded-lg p-2">
               <p className="text-amber-300 font-bold text-base">1</p>
-              <p className="text-white/60 text-[10px]">Rusuk</p>
-              <p className="text-white/40 text-[9px]">keliling alas</p>
+              <p className="text-white/60 text-[10px]">{s2.edgeLabel}</p>
+              <p className="text-white/40 text-[9px]">{s2.edgeDesc}</p>
             </div>
             <div className="bg-yellow-950/50 border border-yellow-700/40 rounded-lg p-2">
               <p className="text-yellow-300 font-bold text-base">1</p>
-              <p className="text-white/60 text-[10px]">Titik Sudut</p>
-              <p className="text-white/40 text-[9px]">puncak</p>
+              <p className="text-white/60 text-[10px]">{s2.vertexLabel}</p>
+              <p className="text-white/40 text-[9px]">{s2.vertexDesc}</p>
             </div>
           </div>
         </div>
@@ -1476,38 +1616,38 @@ function getSections(language: Language): Sec[] {
           <div className="flex items-center gap-3 px-4 py-2 bg-purple-900/40">
             <span className="text-lg">🌀</span>
             <div>
-              <p className="text-purple-300 font-bold text-sm">Selimut Kerucut → Juring Lingkaran</p>
-              <p className="text-purple-200/60 text-xs">Jika selimut dibuka dan diratakan</p>
+              <p className="text-purple-300 font-bold text-sm">{s2.netTitle}</p>
+              <p className="text-purple-200/60 text-xs">{s2.netSub}</p>
             </div>
           </div>
-          <SelimutJuringAnimSVG />
+          <SelimutJuringAnimSVG language={language} />
           <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
-            <p>• Selimut kerucut jika dibuka → berbentuk <strong className="text-purple-300">juring lingkaran</strong> dengan:</p>
-            <p className="pl-3">— jari-jari juring = <strong className="text-yellow-300">s</strong> (garis pelukis)</p>
-            <p className="pl-3">— panjang busur = <strong className="text-yellow-300">2πr</strong> (keliling alas)</p>
-            <p className="pl-3">— sudut juring <strong className="text-green-300">θ = (r ÷ s) × 360°</strong></p>
-            <p>• Luas selimut = luas juring = <strong className="text-yellow-300">πrs</strong></p>
+            <p>{s2.netLine1}</p>
+            <p className="pl-3">{s2.netLine2}</p>
+            <p className="pl-3">{s2.netLine3}</p>
+            <p className="pl-3">{s2.netLine4}</p>
+            <p>{s2.netLine5}</p>
           </div>
         </div>
 
         {/* ── Kesimpulan: Sisi, Rusuk & Titik Sudut ── */}
         <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-3">
-          <p className="text-white font-bold text-sm text-center">📋 Kesimpulan — Sisi, Rusuk &amp; Titik Sudut Kerucut</p>
+          <p className="text-white font-bold text-sm text-center">{s2.summaryTitle}</p>
           <div className="grid grid-cols-3 gap-3 text-center">
             <div className="bg-purple-950/60 border border-purple-700/50 rounded-xl p-3">
               <p className="text-purple-300 font-bold text-3xl leading-tight">2</p>
-              <p className="text-white/80 text-xs font-semibold mt-1">Sisi</p>
-              <p className="text-white/45 text-[9px] mt-0.5">selimut + alas</p>
+              <p className="text-white/80 text-xs font-semibold mt-1">{s2.sideLabel}</p>
+              <p className="text-white/45 text-[9px] mt-0.5">{s2.sideDesc}</p>
             </div>
             <div className="bg-amber-950/60 border border-amber-700/50 rounded-xl p-3">
               <p className="text-amber-300 font-bold text-3xl leading-tight">1</p>
-              <p className="text-white/80 text-xs font-semibold mt-1">Rusuk</p>
-              <p className="text-white/45 text-[9px] mt-0.5">keliling alas</p>
+              <p className="text-white/80 text-xs font-semibold mt-1">{s2.edgeLabel}</p>
+              <p className="text-white/45 text-[9px] mt-0.5">{s2.edgeDesc}</p>
             </div>
             <div className="bg-yellow-950/60 border border-yellow-700/50 rounded-xl p-3">
               <p className="text-yellow-300 font-bold text-3xl leading-tight">1</p>
-              <p className="text-white/80 text-xs font-semibold mt-1">Titik Sudut</p>
-              <p className="text-white/45 text-[9px] mt-0.5">puncak (T)</p>
+              <p className="text-white/80 text-xs font-semibold mt-1">{s2.vertexLabel}</p>
+              <p className="text-white/45 text-[9px] mt-0.5">{s2.vertexDesc2}</p>
             </div>
           </div>
         </div>
@@ -1515,19 +1655,12 @@ function getSections(language: Language): Sec[] {
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Unsur</th>
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Simbol</th>
-              <th className="px-3 py-2 text-cyan-300">Keterangan</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s2.thUnsur}</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">{s2.thSimbol}</th>
+              <th className="px-3 py-2 text-cyan-300">{s2.thKeterangan}</th>
             </tr></thead>
             <tbody>
-              {[
-                ["Puncak","T","1 buah titik"],
-                ["Tinggi","t","puncak → pusat alas"],
-                ["Jari-jari alas","r","lingkaran alas"],
-                ["Garis pelukis","s","puncak → tepi alas"],
-                ["Alas","—","lingkaran, luas = πr²"],
-                ["Selimut","—","juring lingkaran, r = s"],
-              ].map(([u,s,k],i)=>(
+              {s2.rows.map(([u,s,k],i)=>(
                 <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
                   <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{u}</td>
                   <td className="px-3 py-2 text-yellow-300 border-r border-slate-700 font-mono">{s}</td>
