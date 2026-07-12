@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import type { Language } from "@/contexts/LanguageContext";
 
 /* ─────────────────────────────────────────────────────────────
    3D CYLINDER SVG RENDERER — style mirrors InteractiveCone3D
@@ -865,44 +866,343 @@ const CylinderNetAnimation = () => {
   );
 };
 
+/* ── Slide 1 translations ─────────────────────────────────── */
+const slide1Trans = {
+  id: {
+    title: "Pengertian Tabung",
+    intro1: "Bayangkan kaleng minuman, drum musik, atau pipa air — semuanya punya bentuk yang sama: dua lingkaran di atas dan bawah, dihubungkan oleh satu permukaan melengkung. Itulah yang disebut",
+    introBold: "tabung",
+    intro2: "(atau silinder)!",
+    defLabel: "📌 Definisi Tabung:",
+    defText1: "Tabung adalah bangun ruang tiga dimensi yang dibentuk oleh",
+    defBold1: "dua lingkaran sejajar dan kongruen",
+    defText2: "(sama besar) sebagai alas dan tutup, yang dihubungkan oleh sebuah permukaan melengkung yang disebut",
+    defBold2: "selimut tabung",
+    defText3: ".",
+    realWorldTitle: "Benda Berbentuk Tabung di Kehidupan Sehari-hari",
+    imgLabels: ["Kaleng Sarden", "Kaleng Biskuit", "Kaleng Susu", "Kendang", "Bedug", "Tong / Drum", "Gelas Silindris", "Gedung Silindris"],
+  },
+  en: {
+    title: "Definition of Cylinder",
+    intro1: "Imagine a beverage can, a musical drum, or a water pipe — they all share the same shape: two circles on top and bottom, connected by a curved surface. That's what we call a",
+    introBold: "cylinder",
+    intro2: "!",
+    defLabel: "📌 Definition of Cylinder:",
+    defText1: "A cylinder is a three-dimensional solid formed by",
+    defBold1: "two parallel and congruent circles",
+    defText2: "(equal in size) as its base and top, connected by a curved surface called the",
+    defBold2: "lateral surface",
+    defText3: ".",
+    realWorldTitle: "Cylinder-Shaped Objects in Daily Life",
+    imgLabels: ["Sardine Can", "Biscuit Tin", "Milk Can", "Kendang Drum", "Bedug Drum", "Barrel / Drum", "Cylindrical Glass", "Cylindrical Building"],
+  },
+  ja: {
+    title: "円柱の定義",
+    intro1: "飲み物の缶、太鼓、水道管を想像してください。すべて同じ形です：上下に二つの円があり、曲面でつながっています。これが",
+    introBold: "円柱",
+    intro2: "（シリンダー）です！",
+    defLabel: "📌 円柱の定義：",
+    defText1: "円柱は、底面と頂面として",
+    defBold1: "二つの平行で合同な円",
+    defText2: "（同じ大きさ）を持ち、",
+    defBold2: "側面",
+    defText3: "と呼ばれる曲面でつなぐ三次元の立体です。",
+    realWorldTitle: "身近にある円柱形のもの",
+    imgLabels: ["いわし缶", "ビスケット缶", "ミルク缶", "クンダン太鼓", "ブドゥック太鼓", "たる・ドラム缶", "円筒形グラス", "円筒形ビル"],
+  },
+};
+
+/* ── Slide 2 translations ─────────────────────────────────── */
+const slide2Trans = {
+  id: {
+    title: "Unsur-Unsur Tabung",
+    intro: "Sebelum menghitung luas dan volume, kita perlu mengenal bagian-bagian tabung terlebih dahulu. Setiap unsur punya nama dan peran penting dalam rumus!",
+    diagramTitle: "📌 Diagram Unsur-Unsur Tabung",
+    svgRadiusSub: "(jari-jari)",
+    svgHeightSub: "(tinggi)",
+    svgTopLabel: "TUTUP",
+    svgTopSub: "(atas)",
+    svgBaseLabel: "ALAS",
+    svgBaseSub: "(bawah)",
+    svgMantleLabel: "SELIMUT",
+    svgMantleSub: "(lengkung)",
+    sisiTitle: "Sisi Tabung —",
+    sisiCount: "3 sisi",
+    sisiSub: "Permukaan yang membungkus tabung",
+    sisiItem1: "Selimut",
+    sisiItem1desc: "permukaan lengkung (kulit tabung)",
+    sisiItem2: "Alas",
+    sisiItem2desc: "lingkaran di bagian bawah",
+    sisiItem3: "Tutup",
+    sisiItem3desc: "lingkaran di bagian atas",
+    sisiTotalLabel: "Total sisi =",
+    rusukTitle: "Rusuk Tabung —",
+    rusukCount: "2 rusuk",
+    rusukSub: "Tepi / batas pertemuan antar sisi",
+    rusukItem1: "Rusuk atas",
+    rusukItem1desc: "lingkaran tepi tutup",
+    rusukItem2: "Rusuk bawah",
+    rusukItem2desc: "lingkaran tepi alas",
+    rusukNote1: "💡 Tabung",
+    rusukNoteBold: "tidak punya rusuk lurus",
+    rusukNote2: "— berbeda dengan kubus/balok!",
+    rusukTotalLabel: "Total rusuk =",
+    rusukVerticesLabel: "Titik sudut =",
+    rTitle: "Jari-jari (r)",
+    rSub: "Setengah diameter lingkaran alas/tutup",
+    rDesc1a: "• Diukur dari",
+    rDesc1b: "titik pusat",
+    rDesc1c: "hingga tepi lingkaran.",
+    rDesc2a: "• Bersama tinggi, menentukan",
+    rDesc2b: "semua rumus tabung",
+    rDesc2c: ".",
+    rRelLabel: "• Hubungan:",
+    tTitle: "Tinggi (t)",
+    tSub: "Jarak tegak lurus antara alas dan tutup",
+    tDesc1a: "• Selalu",
+    tDesc1b: "tegak lurus",
+    tDesc1c: "terhadap alas dan tutup.",
+    tDesc2: "• Digunakan di rumus luas selimut dan volume.",
+    selTitle: "Selimut Tabung",
+    selSub: "Permukaan lengkung yang membungkus sisi tabung",
+    selUnfold: "↓ Jika dibuka dan diratakan:",
+    selDesc1a: "• Dibuka → berbentuk",
+    selDesc1b: "persegi panjang",
+    selDesc1c: "dengan:",
+    selDesc2: "— panjang = keliling lingkaran =",
+    selDesc3: "— lebar = tinggi tabung =",
+    selDesc4: "• Luas selimut =",
+    alasTitle: "Alas",
+    alasDesc1: "Lingkaran di bagian",
+    alasDesc2: "bawah",
+    tutupTitle: "Tutup",
+    tutupDesc1: "Lingkaran di bagian",
+    tutupDesc2: "atas",
+    thUnsur: "Unsur",
+    thNilai: "Nilai / Simbol",
+    thKet: "Keterangan",
+    rows: [
+      ["Sisi",        "3",         "Selimut + Alas + Tutup"],
+      ["Rusuk",       "2",         "Lingkaran atas & bawah"],
+      ["Titik sudut", "0",         "Tidak ada titik sudut"],
+      ["Jari-jari",   "r",         "Pusat → tepi lingkaran"],
+      ["Diameter",    "d = 2r",    "Garis tengah lingkaran"],
+      ["Tinggi",      "t",         "Jarak tegak lurus alas ke tutup"],
+      ["Alas/Tutup",  "L₀ = πr²", "Luas tiap lingkaran"],
+      ["Selimut",     "Ls = 2πrt", "Permukaan lengkung (kulit)"],
+    ] as [string, string, string][],
+    tipBold: "💡 Kunci:",
+    tipText1: "Semua rumus tabung hanya butuh",
+    tipAnd: "dan",
+    tipText2: "Ingat:",
+    tipCount: "3 sisi, 2 rusuk, 0 titik sudut",
+  },
+  en: {
+    title: "Elements of a Cylinder",
+    intro: "Before calculating surface area and volume, we need to know the parts of a cylinder. Each element has a name and plays an important role in the formulas!",
+    diagramTitle: "📌 Diagram of Cylinder Elements",
+    svgRadiusSub: "(radius)",
+    svgHeightSub: "(height)",
+    svgTopLabel: "TOP",
+    svgTopSub: "(cap)",
+    svgBaseLabel: "BASE",
+    svgBaseSub: "(bottom)",
+    svgMantleLabel: "LATERAL",
+    svgMantleSub: "(curved)",
+    sisiTitle: "Cylinder Faces —",
+    sisiCount: "3 faces",
+    sisiSub: "Surfaces enclosing the cylinder",
+    sisiItem1: "Lateral surface",
+    sisiItem1desc: "curved surface (skin)",
+    sisiItem2: "Base",
+    sisiItem2desc: "circle at the bottom",
+    sisiItem3: "Top",
+    sisiItem3desc: "circle at the top",
+    sisiTotalLabel: "Total faces =",
+    rusukTitle: "Cylinder Edges —",
+    rusukCount: "2 edges",
+    rusukSub: "Edge / boundary between faces",
+    rusukItem1: "Top edge",
+    rusukItem1desc: "circle at top rim",
+    rusukItem2: "Bottom edge",
+    rusukItem2desc: "circle at base rim",
+    rusukNote1: "💡 A cylinder",
+    rusukNoteBold: "has no straight edges",
+    rusukNote2: "— unlike a cube or cuboid!",
+    rusukTotalLabel: "Total edges =",
+    rusukVerticesLabel: "Vertices =",
+    rTitle: "Radius (r)",
+    rSub: "Half the diameter of the base/top circle",
+    rDesc1a: "• Measured from the",
+    rDesc1b: "center",
+    rDesc1c: "to the edge of the circle.",
+    rDesc2a: "• Together with height, it determines",
+    rDesc2b: "all cylinder formulas",
+    rDesc2c: ".",
+    rRelLabel: "• Relationship:",
+    tTitle: "Height (t)",
+    tSub: "Perpendicular distance between base and top",
+    tDesc1a: "• Always",
+    tDesc1b: "perpendicular",
+    tDesc1c: "to the base and top.",
+    tDesc2: "• Used in the lateral surface area and volume formulas.",
+    selTitle: "Lateral Surface",
+    selSub: "Curved surface wrapping the cylinder",
+    selUnfold: "↓ If unrolled and flattened:",
+    selDesc1a: "• Unrolled → forms a",
+    selDesc1b: "rectangle",
+    selDesc1c: "with:",
+    selDesc2: "— length = circumference =",
+    selDesc3: "— width = cylinder height =",
+    selDesc4: "• Lateral area =",
+    alasTitle: "Base",
+    alasDesc1: "Circle at the",
+    alasDesc2: "bottom",
+    tutupTitle: "Top",
+    tutupDesc1: "Circle at the",
+    tutupDesc2: "top",
+    thUnsur: "Element",
+    thNilai: "Value / Symbol",
+    thKet: "Description",
+    rows: [
+      ["Faces",       "3",         "Lateral + Base + Top"],
+      ["Edges",       "2",         "Top & bottom circles"],
+      ["Vertices",    "0",         "No vertices"],
+      ["Radius",      "r",         "Center → edge of circle"],
+      ["Diameter",    "d = 2r",    "Diameter of circle"],
+      ["Height",      "t",         "Perpendicular dist. base to top"],
+      ["Base/Top",    "L₀ = πr²", "Area of each circle"],
+      ["Lateral",     "Ls = 2πrt", "Curved surface (skin)"],
+    ] as [string, string, string][],
+    tipBold: "💡 Key:",
+    tipText1: "All cylinder formulas only need",
+    tipAnd: "and",
+    tipText2: "Remember:",
+    tipCount: "3 faces, 2 edges, 0 vertices",
+  },
+  ja: {
+    title: "円柱の要素",
+    intro: "面積と体積を計算する前に、円柱の各部位を知る必要があります。それぞれの要素には名前があり、公式で重要な役割を持っています！",
+    diagramTitle: "📌 円柱の要素図",
+    svgRadiusSub: "（半径）",
+    svgHeightSub: "（高さ）",
+    svgTopLabel: "頂面",
+    svgTopSub: "（上）",
+    svgBaseLabel: "底面",
+    svgBaseSub: "（下）",
+    svgMantleLabel: "側面",
+    svgMantleSub: "（曲面）",
+    sisiTitle: "円柱の面 —",
+    sisiCount: "3面",
+    sisiSub: "円柱を包む面",
+    sisiItem1: "側面",
+    sisiItem1desc: "曲面（外皮）",
+    sisiItem2: "底面",
+    sisiItem2desc: "下の円",
+    sisiItem3: "頂面",
+    sisiItem3desc: "上の円",
+    sisiTotalLabel: "面の合計 =",
+    rusukTitle: "円柱の辺 —",
+    rusukCount: "2辺",
+    rusukSub: "面と面の境界",
+    rusukItem1: "上の辺",
+    rusukItem1desc: "頂面縁の円",
+    rusukItem2: "下の辺",
+    rusukItem2desc: "底面縁の円",
+    rusukNote1: "💡 円柱には",
+    rusukNoteBold: "直線の辺がない",
+    rusukNote2: "— 立方体や直方体とは異なります！",
+    rusukTotalLabel: "辺の合計 =",
+    rusukVerticesLabel: "頂点の合計 =",
+    rTitle: "半径 (r)",
+    rSub: "底面・頂面の円の直径の半分",
+    rDesc1a: "•",
+    rDesc1b: "中心点",
+    rDesc1c: "から円の端まで測ります。",
+    rDesc2a: "• 高さとともに、",
+    rDesc2b: "すべての円柱の公式",
+    rDesc2c: "を決定します。",
+    rRelLabel: "• 関係：",
+    tTitle: "高さ (t)",
+    tSub: "底面と頂面の間の垂直距離",
+    tDesc1a: "• 常に底面と頂面に対して",
+    tDesc1b: "垂直",
+    tDesc1c: "です。",
+    tDesc2: "• 側面積と体積の公式で使われます。",
+    selTitle: "側面（円柱）",
+    selSub: "円柱を包む曲面",
+    selUnfold: "↓ 展開すると：",
+    selDesc1a: "• 展開すると →",
+    selDesc1b: "長方形",
+    selDesc1c: "になります：",
+    selDesc2: "— 縦 = 円周 =",
+    selDesc3: "— 横 = 円柱の高さ =",
+    selDesc4: "• 側面積 =",
+    alasTitle: "底面",
+    alasDesc1: "下の",
+    alasDesc2: "円",
+    tutupTitle: "頂面",
+    tutupDesc1: "上の",
+    tutupDesc2: "円",
+    thUnsur: "要素",
+    thNilai: "値 / 記号",
+    thKet: "説明",
+    rows: [
+      ["面の数",    "3",         "側面 + 底面 + 頂面"],
+      ["辺の数",    "2",         "上下の円"],
+      ["頂点の数",  "0",         "頂点なし"],
+      ["半径",      "r",         "中心 → 円の端"],
+      ["直径",      "d = 2r",    "円の直径"],
+      ["高さ",      "t",         "底面から頂面の垂直距離"],
+      ["底面/頂面", "L₀ = πr²", "各円の面積"],
+      ["側面",      "Ls = 2πrt", "曲面（外皮）"],
+    ] as [string, string, string][],
+    tipBold: "💡 ポイント：",
+    tipText1: "円柱のすべての公式は",
+    tipAnd: "と",
+    tipText2: "覚えておこう：",
+    tipCount: "3面、2辺、0頂点",
+  },
+};
+
 /* ─────────────────────────────────────────────────────────────
    SECTIONS DATA
 ───────────────────────────────────────────────────────────── */
 type Sec = { title: string; icon: string; content: React.ReactNode };
 
-const sections: Sec[] = [
+function getSections(language: Language): Sec[] {
+  const s1 = slide1Trans[language];
+  const s2 = slide2Trans[language];
+  return [
   {
-    title: "Pengertian Tabung",
+    title: s1.title,
     icon: "🔵",
     content: (
       <div className="space-y-4 font-body">
         <p className="text-white/80 text-sm leading-relaxed">
-          Bayangkan kaleng minuman, drum musik, atau pipa air — semuanya punya bentuk yang sama: dua lingkaran
-          di atas dan bawah, dihubungkan oleh satu permukaan melengkung. Itulah yang disebut <strong className="text-cyan-300">tabung</strong>
-          (atau silinder)!
+          {s1.intro1} <strong className="text-cyan-300">{s1.introBold}</strong>{s1.intro2}
         </p>
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-4 text-sm text-cyan-100 space-y-2">
-          <p className="font-semibold text-cyan-300">📌 Definisi Tabung:</p>
+          <p className="font-semibold text-cyan-300">{s1.defLabel}</p>
           <p>
-            Tabung adalah bangun ruang tiga dimensi yang dibentuk oleh <strong>dua lingkaran sejajar dan kongruen</strong> (sama
-            besar) sebagai alas dan tutup, yang dihubungkan oleh sebuah permukaan melengkung yang disebut <strong className="text-purple-300">selimut tabung</strong>.
+            {s1.defText1} <strong>{s1.defBold1}</strong> {s1.defText2} <strong className="text-purple-300">{s1.defBold2}</strong>{s1.defText3}
           </p>
         </div>
         <InteractiveCylinder3D />
 
-        {/* ── Foto Benda Berbentuk Tabung — hanya slide 1 ── */}
+        {/* ── Real-world examples ── */}
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
-          <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Tabung di Kehidupan Sehari-hari</p>
+          <p className="text-cyan-300 font-bold text-sm text-center">{s1.realWorldTitle}</p>
           <div className="grid grid-cols-4 gap-2">
             {[
-              { src: "/images/image_1780450794282.png",   label: "Kaleng Sarden" },
-              { src: "/images/image_1780450814436.png",  label: "Kaleng Biskuit" },
-              { src: "/images/image_1780450845492.png", label: "Kaleng Susu" },
-              { src: "/images/image_1780450861720.png",     label: "Kendang" },
-              { src: "/images/image_1780450884364.png",    label: "Bedug" },
-              { src: "/images/image_1780450893223.png",     label: "Tong / Drum" },
-              { src: "/images/image_1780450901986.png",    label: "Gelas Silindris" },
-              { src: "/images/image_1780450906978.png",   label: "Gedung Silindris" },
+              { src: "/images/image_1780450794282.png", label: s1.imgLabels[0] },
+              { src: "/images/image_1780450814436.png", label: s1.imgLabels[1] },
+              { src: "/images/image_1780450845492.png", label: s1.imgLabels[2] },
+              { src: "/images/image_1780450861720.png", label: s1.imgLabels[3] },
+              { src: "/images/image_1780450884364.png", label: s1.imgLabels[4] },
+              { src: "/images/image_1780450893223.png", label: s1.imgLabels[5] },
+              { src: "/images/image_1780450901986.png", label: s1.imgLabels[6] },
+              { src: "/images/image_1780450906978.png", label: s1.imgLabels[7] },
             ].map(({ src, label }) => (
               <div key={label} className="flex flex-col items-center gap-1">
                 <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
@@ -917,18 +1217,17 @@ const sections: Sec[] = [
     ),
   },
   {
-    title: "Unsur-Unsur Tabung",
+    title: s2.title,
     icon: "🏷️",
     content: (
       <div className="space-y-4 font-body">
         <p className="text-white/80 text-sm leading-relaxed">
-          Sebelum menghitung luas dan volume, kita perlu mengenal bagian-bagian tabung terlebih dahulu.
-          Setiap unsur punya nama dan peran penting dalam rumus!
+          {s2.intro}
         </p>
 
-        {/* ── Labeled diagram — diperbaiki ── */}
+        {/* ── Labeled diagram ── */}
         <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4">
-          <p className="text-cyan-300 font-bold text-xs text-center mb-3">📌 Diagram Unsur-Unsur Tabung</p>
+          <p className="text-cyan-300 font-bold text-xs text-center mb-3">{s2.diagramTitle}</p>
           <svg viewBox="0 0 380 260" className="w-full max-w-sm mx-auto block">
             <defs>
               <style>{`
@@ -943,57 +1242,54 @@ const sections: Sec[] = [
             <line x1="92"  y1="70" x2="92"  y2="188" stroke="#0891b2" strokeWidth="1.8"/>
             <line x1="238" y1="70" x2="238" y2="188" stroke="#0891b2" strokeWidth="1.8"/>
 
-            {/* TUTUP — berkedip indigo */}
+            {/* TUTUP */}
             <ellipse cx="165" cy="70"  rx="73" ry="18" fill="rgba(99,102,241,0.30)" stroke="#818cf8" strokeWidth="1.8" className="u-blink"/>
-            {/* ALAS — berkedip hijau */}
+            {/* ALAS */}
             <ellipse cx="165" cy="188" rx="73" ry="18" fill="rgba(52,211,153,0.20)" stroke="#34d399" strokeWidth="1.8" className="u-blink"/>
             {/* Selimut tint */}
             <rect x="92" y="70" width="146" height="118" fill="rgba(168,85,247,0.09)" stroke="none"/>
 
-            {/* === r — garis putus dari pusat ke tepi tutup === */}
+            {/* === r === */}
             <line x1="165" y1="70" x2="238" y2="70" stroke="#f59e0b" strokeWidth="2.5" strokeDasharray="5,3"/>
             <circle cx="165" cy="70" r="3.5" fill="#f59e0b"/>
             <circle cx="238" cy="70" r="3.5" fill="#f59e0b"/>
-            {/* Leader vertikal naik ke atas tabung → label di luar */}
             <line x1="202" y1="70" x2="202" y2="46" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="3,2"/>
             <text x="202" y="41" fill="#f59e0b" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="middle">r</text>
-            <text x="242" y="74" fill="#fde68a" fontSize="7"  fontFamily="monospace" textAnchor="start">(jari-jari)</text>
+            <text x="242" y="74" fill="#fde68a" fontSize="7"  fontFamily="monospace" textAnchor="start">{s2.svgRadiusSub}</text>
 
-            {/* === d — indikator di bawah elips bawah, mirip gaya panah t === */}
-            {/* Konektor dari elips bawah ke garis d */}
+            {/* === d === */}
             <line x1="92"  y1="196" x2="92"  y2="212" stroke="#fde68a" strokeWidth="1" strokeDasharray="2,2" opacity="0.55"/>
             <line x1="238" y1="196" x2="238" y2="212" stroke="#fde68a" strokeWidth="1" strokeDasharray="2,2" opacity="0.55"/>
-            {/* Garis d dengan tick di ujung */}
             <line x1="92"  y1="212" x2="238" y2="212" stroke="#fde68a" strokeWidth="1.8"/>
             <line x1="92"  y1="207" x2="92"  y2="217" stroke="#fde68a" strokeWidth="1.8"/>
             <line x1="238" y1="207" x2="238" y2="217" stroke="#fde68a" strokeWidth="1.8"/>
             <text x="165" y="230" fill="#fde68a" fontSize="9" fontFamily="monospace" fontWeight="700" textAnchor="middle">d = 2r</text>
 
-            {/* === t — panah vertikal di kanan === */}
+            {/* === t === */}
             <line x1="256" y1="70"  x2="256" y2="188" stroke="#22c55e" strokeWidth="2.2"/>
             <line x1="250" y1="70"  x2="262" y2="70"  stroke="#22c55e" strokeWidth="2"/>
             <line x1="250" y1="188" x2="262" y2="188" stroke="#22c55e" strokeWidth="2"/>
             <text x="270" y="133" fill="#22c55e" fontSize="12" fontFamily="monospace" fontWeight="700" textAnchor="middle">t</text>
-            <text x="270" y="147" fill="#86efac" fontSize="8"  fontFamily="monospace" textAnchor="middle">(tinggi)</text>
+            <text x="270" y="147" fill="#86efac" fontSize="8"  fontFamily="monospace" textAnchor="middle">{s2.svgHeightSub}</text>
 
-            {/* === TUTUP label kanan atas === */}
+            {/* === TUTUP label === */}
             <line x1="238" y1="63" x2="318" y2="38" stroke="#818cf8" strokeWidth="1.2" strokeDasharray="3,2"/>
-            <text x="320" y="34" fill="#818cf8" fontSize="9" fontFamily="monospace" fontWeight="700">TUTUP</text>
-            <text x="320" y="44" fill="#818cf8" fontSize="7" fontFamily="monospace">(atas)</text>
+            <text x="320" y="34" fill="#818cf8" fontSize="9" fontFamily="monospace" fontWeight="700">{s2.svgTopLabel}</text>
+            <text x="320" y="44" fill="#818cf8" fontSize="7" fontFamily="monospace">{s2.svgTopSub}</text>
 
-            {/* === ALAS label kanan bawah === */}
+            {/* === ALAS label === */}
             <line x1="238" y1="194" x2="318" y2="218" stroke="#34d399" strokeWidth="1.2" strokeDasharray="3,2"/>
-            <text x="320" y="214" fill="#34d399" fontSize="9" fontFamily="monospace" fontWeight="700">ALAS</text>
-            <text x="320" y="224" fill="#34d399" fontSize="7" fontFamily="monospace">(bawah)</text>
+            <text x="320" y="214" fill="#34d399" fontSize="9" fontFamily="monospace" fontWeight="700">{s2.svgBaseLabel}</text>
+            <text x="320" y="224" fill="#34d399" fontSize="7" fontFamily="monospace">{s2.svgBaseSub}</text>
 
-            {/* === SELIMUT label kiri === */}
+            {/* === SELIMUT label === */}
             <line x1="92" y1="129" x2="52" y2="129" stroke="#c084fc" strokeWidth="1.2" strokeDasharray="3,2"/>
-            <text x="50" y="123" fill="#c084fc" fontSize="9" fontFamily="monospace" fontWeight="700" textAnchor="end">SELIMUT</text>
-            <text x="50" y="134" fill="#c084fc" fontSize="7" fontFamily="monospace" textAnchor="end">(lengkung)</text>
+            <text x="50" y="123" fill="#c084fc" fontSize="9" fontFamily="monospace" fontWeight="700" textAnchor="end">{s2.svgMantleLabel}</text>
+            <text x="50" y="134" fill="#c084fc" fontSize="7" fontFamily="monospace" textAnchor="end">{s2.svgMantleSub}</text>
           </svg>
         </div>
 
-        {/* ── Kartu-kartu unsur ── */}
+        {/* ── Component cards ── */}
         <div className="grid grid-cols-1 gap-3">
 
           {/* ── SISI ── */}
@@ -1001,17 +1297,17 @@ const sections: Sec[] = [
             <div className="flex items-center gap-3 px-4 py-2 bg-purple-900/40">
               <span className="text-lg">🔲</span>
               <div>
-                <p className="text-purple-300 font-bold text-sm">Sisi Tabung — <span className="text-yellow-300">3 sisi</span></p>
-                <p className="text-purple-200/70 text-xs">Permukaan yang membungkus tabung</p>
+                <p className="text-purple-300 font-bold text-sm">{s2.sisiTitle} <span className="text-yellow-300">{s2.sisiCount}</span></p>
+                <p className="text-purple-200/70 text-xs">{s2.sisiSub}</p>
               </div>
             </div>
             <SisiAnimSVG />
             <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
-              <p>① <strong className="text-purple-300">Selimut</strong> — permukaan lengkung (kulit tabung)</p>
-              <p>② <strong className="text-green-300">Alas</strong> — lingkaran di bagian bawah</p>
-              <p>③ <strong className="text-indigo-300">Tutup</strong> — lingkaran di bagian atas</p>
+              <p>① <strong className="text-purple-300">{s2.sisiItem1}</strong> — {s2.sisiItem1desc}</p>
+              <p>② <strong className="text-green-300">{s2.sisiItem2}</strong> — {s2.sisiItem2desc}</p>
+              <p>③ <strong className="text-indigo-300">{s2.sisiItem3}</strong> — {s2.sisiItem3desc}</p>
               <div className="mt-2 bg-purple-900/40 rounded p-2 text-center font-mono text-purple-200">
-                Total sisi = <strong className="text-yellow-300">3</strong>
+                {s2.sisiTotalLabel} <strong className="text-yellow-300">3</strong>
               </div>
             </div>
           </div>
@@ -1021,17 +1317,17 @@ const sections: Sec[] = [
             <div className="flex items-center gap-3 px-4 py-2 bg-amber-900/40">
               <span className="text-lg">〇</span>
               <div>
-                <p className="text-amber-300 font-bold text-sm">Rusuk Tabung — <span className="text-yellow-300">2 rusuk</span></p>
-                <p className="text-amber-200/70 text-xs">Tepi / batas pertemuan antar sisi</p>
+                <p className="text-amber-300 font-bold text-sm">{s2.rusukTitle} <span className="text-yellow-300">{s2.rusukCount}</span></p>
+                <p className="text-amber-200/70 text-xs">{s2.rusukSub}</p>
               </div>
             </div>
             <RusukAnimSVG />
             <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
-              <p>① <strong className="text-amber-300">Rusuk atas</strong> — lingkaran tepi tutup</p>
-              <p>② <strong className="text-sky-300">Rusuk bawah</strong> — lingkaran tepi alas</p>
-              <p className="text-white/50 text-[11px]">💡 Tabung <strong>tidak punya rusuk lurus</strong> — berbeda dengan kubus/balok!</p>
+              <p>① <strong className="text-amber-300">{s2.rusukItem1}</strong> — {s2.rusukItem1desc}</p>
+              <p>② <strong className="text-sky-300">{s2.rusukItem2}</strong> — {s2.rusukItem2desc}</p>
+              <p className="text-white/50 text-[11px]">{s2.rusukNote1} <strong>{s2.rusukNoteBold}</strong> {s2.rusukNote2}</p>
               <div className="mt-2 bg-amber-900/40 rounded p-2 text-center font-mono text-amber-200">
-                Total rusuk = <strong className="text-yellow-300">2</strong> &nbsp;|&nbsp; Titik sudut = <strong className="text-yellow-300">0</strong>
+                {s2.rusukTotalLabel} <strong className="text-yellow-300">2</strong> &nbsp;|&nbsp; {s2.rusukVerticesLabel} <strong className="text-yellow-300">0</strong>
               </div>
             </div>
           </div>
@@ -1041,16 +1337,16 @@ const sections: Sec[] = [
             <div className="flex items-center gap-3 px-4 py-2 bg-amber-900/30">
               <span className="text-lg">📏</span>
               <div>
-                <p className="text-amber-300 font-bold text-sm">Jari-jari (r)</p>
-                <p className="text-amber-200/70 text-xs">Setengah diameter lingkaran alas/tutup</p>
+                <p className="text-amber-300 font-bold text-sm">{s2.rTitle}</p>
+                <p className="text-amber-200/70 text-xs">{s2.rSub}</p>
               </div>
             </div>
             <JariJariAnimSVG />
             <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
-              <p>• Diukur dari <strong className="text-amber-300">titik pusat</strong> hingga tepi lingkaran.</p>
-              <p>• Bersama tinggi, menentukan <strong>semua rumus tabung</strong>.</p>
+              <p>{s2.rDesc1a} <strong className="text-amber-300">{s2.rDesc1b}</strong> {s2.rDesc1c}</p>
+              <p>{s2.rDesc2a} <strong>{s2.rDesc2b}</strong>{s2.rDesc2c}</p>
               <div className="flex items-center gap-2 mt-1">
-                <span>• Hubungan:</span>
+                <span>{s2.rRelLabel}</span>
                 <span className="text-yellow-300 font-mono">d = 2r</span>
                 <span className="text-white/40">→</span>
                 <InlineMath math="r = \dfrac{d}{2}" />
@@ -1063,14 +1359,14 @@ const sections: Sec[] = [
             <div className="flex items-center gap-3 px-4 py-2 bg-green-900/30">
               <span className="text-lg">📐</span>
               <div>
-                <p className="text-green-300 font-bold text-sm">Tinggi (t)</p>
-                <p className="text-green-200/70 text-xs">Jarak tegak lurus antara alas dan tutup</p>
+                <p className="text-green-300 font-bold text-sm">{s2.tTitle}</p>
+                <p className="text-green-200/70 text-xs">{s2.tSub}</p>
               </div>
             </div>
             <TinggiAnimSVG />
             <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
-              <p>• Selalu <strong className="text-green-300">tegak lurus</strong> terhadap alas dan tutup.</p>
-              <p>• Digunakan di rumus luas selimut dan volume.</p>
+              <p>{s2.tDesc1a} <strong className="text-green-300">{s2.tDesc1b}</strong> {s2.tDesc1c}</p>
+              <p>{s2.tDesc2}</p>
             </div>
           </div>
 
@@ -1079,18 +1375,18 @@ const sections: Sec[] = [
             <div className="flex items-center gap-3 px-4 py-2 bg-purple-900/30">
               <span className="text-lg">🌀</span>
               <div>
-                <p className="text-purple-300 font-bold text-sm">Selimut Tabung</p>
-                <p className="text-purple-200/70 text-xs">Permukaan lengkung yang membungkus sisi tabung</p>
+                <p className="text-purple-300 font-bold text-sm">{s2.selTitle}</p>
+                <p className="text-purple-200/70 text-xs">{s2.selSub}</p>
               </div>
             </div>
             <SelimutAnimSVG />
-            <p className="text-center text-purple-300 font-bold text-xs mt-1 px-4">↓ Jika dibuka dan diratakan:</p>
+            <p className="text-center text-purple-300 font-bold text-xs mt-1 px-4">{s2.selUnfold}</p>
             <SelimutRectAnimSVG />
             <div className="px-4 pb-3 space-y-1 text-xs text-white/75">
-              <p>• Dibuka → berbentuk <strong className="text-purple-300">persegi panjang</strong> dengan:</p>
-              <p className="pl-3">— panjang = keliling lingkaran = <strong className="text-yellow-300">2πr</strong></p>
-              <p className="pl-3">— lebar = tinggi tabung = <strong className="text-green-300">t</strong></p>
-              <p>• Luas selimut = <strong className="text-yellow-300">2πr × t</strong></p>
+              <p>{s2.selDesc1a} <strong className="text-purple-300">{s2.selDesc1b}</strong> {s2.selDesc1c}</p>
+              <p className="pl-3">{s2.selDesc2} <strong className="text-yellow-300">2πr</strong></p>
+              <p className="pl-3">{s2.selDesc3} <strong className="text-green-300">t</strong></p>
+              <p>{s2.selDesc4} <strong className="text-yellow-300">2πr × t</strong></p>
             </div>
           </div>
 
@@ -1098,16 +1394,16 @@ const sections: Sec[] = [
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-indigo-950/40 border border-indigo-700/50 rounded-xl p-4 space-y-2">
               <p className="text-xl text-center">⭕</p>
-              <p className="text-indigo-300 font-bold text-sm text-center">Alas</p>
-              <p className="text-white/65 text-xs text-center">Lingkaran di bagian <strong>bawah</strong></p>
+              <p className="text-indigo-300 font-bold text-sm text-center">{s2.alasTitle}</p>
+              <p className="text-white/65 text-xs text-center">{s2.alasDesc1} <strong>{s2.alasDesc2}</strong></p>
               <div className="bg-indigo-900/40 rounded p-2 text-center text-xs text-indigo-200">
                 <InlineMath math="L_{alas} = \pi r^2" />
               </div>
             </div>
             <div className="bg-cyan-950/40 border border-cyan-700/50 rounded-xl p-4 space-y-2">
               <p className="text-xl text-center">⭕</p>
-              <p className="text-cyan-300 font-bold text-sm text-center">Tutup</p>
-              <p className="text-white/65 text-xs text-center">Lingkaran di bagian <strong>atas</strong></p>
+              <p className="text-cyan-300 font-bold text-sm text-center">{s2.tutupTitle}</p>
+              <p className="text-white/65 text-xs text-center">{s2.tutupDesc1} <strong>{s2.tutupDesc2}</strong></p>
               <div className="bg-cyan-900/40 rounded p-2 text-center text-xs text-cyan-200">
                 <InlineMath math="L_{tutup} = \pi r^2" />
               </div>
@@ -1115,30 +1411,21 @@ const sections: Sec[] = [
           </div>
         </div>
 
-        {/* ── Tabel ringkasan ── */}
+        {/* ── Summary table ── */}
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead>
               <tr className="bg-slate-800">
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Unsur</th>
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Nilai / Simbol</th>
-                <th className="px-3 py-2 text-cyan-300 text-left">Keterangan</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s2.thUnsur}</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">{s2.thNilai}</th>
+                <th className="px-3 py-2 text-cyan-300 text-left">{s2.thKet}</th>
               </tr>
             </thead>
             <tbody>
-              {[
-                ["Sisi",      "3",        "Selimut + Alas + Tutup"],
-                ["Rusuk",     "2",        "Lingkaran atas & bawah"],
-                ["Titik sudut","0",       "Tidak ada titik sudut"],
-                ["Jari-jari", "r",        "Pusat → tepi lingkaran"],
-                ["Diameter",  "d = 2r",   "Garis tengah lingkaran"],
-                ["Tinggi",    "t",        "Jarak tegak lurus alas ke tutup"],
-                ["Alas/Tutup","L alas = πr²",      "Luas tiap lingkaran"],
-                ["Selimut",   "L selimut = 2πrt",  "Permukaan lengkung (kulit)"],
-              ].map(([u, s, k], i) => (
+              {s2.rows.map(([u, sym, k], i) => (
                 <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
                   <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{u}</td>
-                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{s}</td>
+                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{sym}</td>
                   <td className="px-3 py-2 text-white/60 text-left">{k}</td>
                 </tr>
               ))}
@@ -1147,8 +1434,8 @@ const sections: Sec[] = [
         </div>
 
         <blockquote className="border-l-4 border-cyan-500 pl-3 text-sm text-cyan-200">
-          <strong>💡 Kunci:</strong> Semua rumus tabung hanya butuh <strong className="text-amber-300">r</strong> dan <strong className="text-green-300">t</strong>.
-          Ingat: <strong>3 sisi, 2 rusuk, 0 titik sudut</strong>!
+          <strong>{s2.tipBold}</strong> {s2.tipText1} <strong className="text-amber-300">r</strong> {s2.tipAnd} <strong className="text-green-300">t</strong>.
+          {" "}{s2.tipText2} <strong>{s2.tipCount}</strong>!
         </blockquote>
       </div>
     ),
@@ -1381,7 +1668,8 @@ const sections: Sec[] = [
       </div>
     ),
   },
-];
+  ];
+}
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE PROBLEMS
@@ -1830,6 +2118,7 @@ const TabungPage = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const { language } = useLanguage();
+  const sections = getSections(language);
 
   /* ── Kesimpulan / Rangkuman / Tips — trilingual ── */
   const kesimpulanTrans = {
