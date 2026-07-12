@@ -1283,7 +1283,6 @@ const soalUnsurMeta: { no: number; gambar: React.ReactNode; jawaban: string }[] 
 
 const unsurQuizUiTrans: Record<Language, {
   slideTitle: string; headerTitle: string; headerSub: string;
-  showPembahasan: string; hidePembahasan: string;
   benarLabel: string; salahPrefix: string; pembahasanLabel: string;
   periksaBtn: string; ulangiBtn: string; skorLabel: string;
   perfectMsg: string; goodMsg: string; tryAgainMsg: string;
@@ -1292,8 +1291,6 @@ const unsurQuizUiTrans: Record<Language, {
     slideTitle: "Soal — Unsur-unsur Kerucut",
     headerTitle: "Uji Pemahaman — Unsur-unsur Kerucut",
     headerSub: "Pilih jawaban yang paling tepat, lalu klik Periksa Jawaban",
-    showPembahasan: "Lihat Pembahasan",
-    hidePembahasan: "Sembunyikan Pembahasan",
     benarLabel: "✅ Benar!",
     salahPrefix: "❌ Jawaban yang benar:",
     pembahasanLabel: "📖 Pembahasan:",
@@ -1308,8 +1305,6 @@ const unsurQuizUiTrans: Record<Language, {
     slideTitle: "Practice — Elements of a Cone",
     headerTitle: "Comprehension Check — Elements of a Cone",
     headerSub: "Choose the best answer, then click Check Answers",
-    showPembahasan: "View Explanation",
-    hidePembahasan: "Hide Explanation",
     benarLabel: "✅ Correct!",
     salahPrefix: "❌ Correct answer:",
     pembahasanLabel: "📖 Explanation:",
@@ -1324,8 +1319,6 @@ const unsurQuizUiTrans: Record<Language, {
     slideTitle: "問題 — 円錐の要素",
     headerTitle: "理解度チェック — 円錐の要素",
     headerSub: "最も適切な答えを選び、「解答を確認」をクリックしてください",
-    showPembahasan: "解説を見る",
-    hidePembahasan: "解説を隠す",
     benarLabel: "✅ 正解！",
     salahPrefix: "❌ 正解は：",
     pembahasanLabel: "📖 解説：",
@@ -1453,7 +1446,7 @@ const UnsurSoalQuiz = ({ language }: { language: Language }) => {
                 className="flex items-center gap-1.5 text-xs font-semibold text-amber-400/80 hover:text-amber-300 transition-colors cursor-pointer"
               >
                 <span>{pembahasanOpen ? "▲" : "▼"}</span>
-                <span>{pembahasanOpen ? ui.hidePembahasan : ui.showPembahasan}</span>
+                <span>{pembahasanOpen ? toggleLabelsTrans[language].hide : toggleLabelsTrans[language].show}</span>
               </button>
 
               {pembahasanOpen && (
@@ -2309,105 +2302,286 @@ function levelLabel(level: string, language: Language): string {
   return levelLabels[level]?.[language] ?? level;
 }
 
-const gpExamples: Ex[] = [
-  {
-    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah kerucut memiliki jari-jari alas <InlineMath math="6 \text{ cm}" /> dan tinggi <InlineMath math="8 \text{ cm}" />.</p>
-        <p>Tentukan panjang garis pelukisnya!</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-2 text-sm font-body">
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
-          <BlockMath math="s = \sqrt{r^2 + t^2} = \sqrt{6^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 \text{ cm}" />
-        </div>
-        <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-          <p className="text-green-300 font-semibold text-xs">✅ Garis pelukis = <InlineMath math="10 \text{ cm}" /></p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah kerucut memiliki garis pelukis <InlineMath math="13 \text{ cm}" /> dan jari-jari alas <InlineMath math="5 \text{ cm}" />.</p>
-        <p>Tentukan: (a) tinggi kerucut, (b) luas selimut. (Gunakan <InlineMath math="\pi = 3{,}14" />)</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">(a) Tinggi kerucut:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
-          <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{13^2 - 5^2} = \sqrt{169 - 25} = \sqrt{144} = 12 \text{ cm}" />
-        </div>
-        <p className="text-yellow-400 font-semibold">(b) Luas selimut:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
-          <BlockMath math="L_{\text{selimut}} = \pi r s = 3{,}14 \times 5 \times 13 = 204{,}1 \text{ cm}^2" />
-        </div>
-        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs">
-          <p className="text-yellow-300 font-semibold">✅ Tinggi = 12 cm, Luas selimut = 204,1 cm²</p>
-        </div>
-      </div>
-    ),
-  },
-  {
-    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
-    question: (
-      <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah topi ulang tahun berbentuk kerucut memiliki keliling alas <InlineMath math="44 \text{ cm}" /> dan garis pelukis <InlineMath math="25 \text{ cm}" />.</p>
-        <p>Tentukan: (a) jari-jari alas, (b) tinggi topi, (c) volume topi. (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
-      </div>
-    ),
-    answer: (
-      <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Cari jari-jari dari keliling:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="K = 2\pi r \Rightarrow 44 = 2 \times \frac{22}{7} \times r" />
-          <BlockMath math="r = \frac{44 \times 7}{2 \times 22} = \frac{308}{44} = 7 \text{ cm}" />
-        </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Cari tinggi:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{25^2 - 7^2} = \sqrt{625 - 49} = \sqrt{576} = 24 \text{ cm}" />
-        </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Volume topi:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="V = \frac{1}{3}\pi r^2 t = \frac{1}{3} \times \frac{22}{7} \times 7^2 \times 24" />
-          <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times 49 \times 24 = \frac{1}{3} \times 22 \times 7 \times 24 = \frac{3.696}{3} = 1.232 \text{ cm}^3" />
-        </div>
-        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Jari-jari = <strong className="text-yellow-300">7 cm</strong></p>
-          <p className="text-white/80">• Tinggi topi = <strong className="text-yellow-300">24 cm</strong></p>
-          <p className="text-white/80">• Volume = <strong className="text-yellow-300">1.232 cm³</strong></p>
-        </div>
-      </div>
-    ),
-  },
-];
-
-const exampleSlidesTrans: Record<Language, { luasTitle: string; volTitle: string; subtitle: string }> = {
+const exampleSlidesTrans: Record<Language, {
+  gpTitle: string; luasTitle: string; volTitle: string; subtitle: string;
+  gpPrefix: string; luasPrefix: string; volPrefix: string;
+}> = {
   id: {
+    gpTitle: "Contoh Soal — Garis Pelukis",
     luasTitle: "Contoh Soal — Luas Permukaan",
     volTitle: "Contoh Soal — Volume",
     subtitle: "Latihan bertingkat dari mudah hingga sulit",
+    gpPrefix: "GARIS PELUKIS",
+    luasPrefix: "LUAS",
+    volPrefix: "VOLUME",
   },
   en: {
+    gpTitle: "Example Problems — Slant Height",
     luasTitle: "Example Problems — Surface Area",
     volTitle: "Example Problems — Volume",
     subtitle: "Progressive practice from easy to hard",
+    gpPrefix: "SLANT HEIGHT",
+    luasPrefix: "SURFACE AREA",
+    volPrefix: "VOLUME",
   },
   ja: {
+    gpTitle: "例題 — 母線",
     luasTitle: "例題 — 表面積",
     volTitle: "例題 — 体積",
     subtitle: "易しい問題から難しい問題までの練習",
+    gpPrefix: "母線問題",
+    luasPrefix: "表面積問題",
+    volPrefix: "体積問題",
   },
+};
+
+/* ── Shared toggle labels — used by BOTH ExampleCard and UnsurSoalQuiz ── */
+const toggleLabelsTrans: Record<Language, { show: string; hide: string }> = {
+  id: { show: "Lihat Pembahasan", hide: "Sembunyikan" },
+  en: { show: "Show Solution", hide: "Hide" },
+  ja: { show: "解説を見る", hide: "隠す" },
 };
 
 type ExMeta = { level: string; color: string; bg: string; border: string; badgeBg: string };
 type ExContent = { question: React.ReactNode; answer: React.ReactNode };
+
+const gpExamplesMeta: ExMeta[] = [
+  { level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60" },
+  { level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60" },
+  { level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60" },
+];
+
+const gpExamplesTrans: Record<Language, ExContent[]> = {
+  id: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Sebuah kerucut memiliki jari-jari alas <InlineMath math="6 \text{ cm}" /> dan tinggi <InlineMath math="8 \text{ cm}" />.</p>
+          <p>Tentukan panjang garis pelukisnya!</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="s = \sqrt{r^2 + t^2} = \sqrt{6^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 \text{ cm}" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ Garis pelukis = <InlineMath math="10 \text{ cm}" /></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Sebuah kerucut memiliki garis pelukis <InlineMath math="13 \text{ cm}" /> dan jari-jari alas <InlineMath math="5 \text{ cm}" />.</p>
+          <p>Tentukan: (a) tinggi kerucut, (b) luas selimut. (Gunakan <InlineMath math="\pi = 3{,}14" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">(a) Tinggi kerucut:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{13^2 - 5^2} = \sqrt{169 - 25} = \sqrt{144} = 12 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">(b) Luas selimut:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="L_s = \pi r s = 3{,}14 \times 5 \times 13 = 204{,}1 \text{ cm}^2" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs">
+            <p className="text-yellow-300 font-semibold">✅ Tinggi = 12 cm, Luas selimut = 204,1 cm²</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>Sebuah topi ulang tahun berbentuk kerucut memiliki keliling alas <InlineMath math="44 \text{ cm}" /> dan garis pelukis <InlineMath math="25 \text{ cm}" />.</p>
+          <p>Tentukan: (a) jari-jari alas, (b) tinggi topi, (c) volume topi. (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">Langkah 1 — Cari jari-jari dari keliling:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="K = 2\pi r \Rightarrow 44 = 2 \times \frac{22}{7} \times r" />
+            <BlockMath math="r = \frac{44 \times 7}{2 \times 22} = \frac{308}{44} = 7 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">Langkah 2 — Cari tinggi:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{25^2 - 7^2} = \sqrt{625 - 49} = \sqrt{576} = 24 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">Langkah 3 — Volume topi:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t = \frac{1}{3} \times \frac{22}{7} \times 7^2 \times 24" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times 49 \times 24 = \frac{1}{3} \times 22 \times 7 \times 24 = \frac{3.696}{3} = 1.232 \text{ cm}^3" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+            <p className="text-white/80">• Jari-jari = <strong className="text-yellow-300">7 cm</strong></p>
+            <p className="text-white/80">• Tinggi topi = <strong className="text-yellow-300">24 cm</strong></p>
+            <p className="text-white/80">• Volume = <strong className="text-yellow-300">1.232 cm³</strong></p>
+          </div>
+        </div>
+      ),
+    },
+  ],
+  en: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>A cone has a base radius of <InlineMath math="6 \text{ cm}" /> and a height of <InlineMath math="8 \text{ cm}" />.</p>
+          <p>Find the length of its slant height!</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="s = \sqrt{r^2 + t^2} = \sqrt{6^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 \text{ cm}" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ Slant height = <InlineMath math="10 \text{ cm}" /></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>A cone has a slant height of <InlineMath math="13 \text{ cm}" /> and a base radius of <InlineMath math="5 \text{ cm}" />.</p>
+          <p>Determine: (a) the height of the cone, (b) the lateral surface area. (Use <InlineMath math="\pi = 3.14" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">(a) Height of the cone:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{13^2 - 5^2} = \sqrt{169 - 25} = \sqrt{144} = 12 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">(b) Lateral surface area:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="L_s = \pi r s = 3.14 \times 5 \times 13 = 204.1 \text{ cm}^2" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs">
+            <p className="text-yellow-300 font-semibold">✅ Height = 12 cm, lateral surface area = 204.1 cm²</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>A cone-shaped birthday party hat has a base circumference of <InlineMath math="44 \text{ cm}" /> and a slant height of <InlineMath math="25 \text{ cm}" />.</p>
+          <p>Determine: (a) the base radius, (b) the height of the hat, (c) the volume of the hat. (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">Step 1 — Find the radius from the circumference:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="K = 2\pi r \Rightarrow 44 = 2 \times \frac{22}{7} \times r" />
+            <BlockMath math="r = \frac{44 \times 7}{2 \times 22} = \frac{308}{44} = 7 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">Step 2 — Find the height:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{25^2 - 7^2} = \sqrt{625 - 49} = \sqrt{576} = 24 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">Step 3 — Volume of the hat:</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t = \frac{1}{3} \times \frac{22}{7} \times 7^2 \times 24" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times 49 \times 24 = \frac{1}{3} \times 22 \times 7 \times 24 = \frac{3,696}{3} = 1,232 \text{ cm}^3" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ Answer:</p>
+            <p className="text-white/80">• Radius = <strong className="text-yellow-300">7 cm</strong></p>
+            <p className="text-white/80">• Height of the hat = <strong className="text-yellow-300">24 cm</strong></p>
+            <p className="text-white/80">• Volume = <strong className="text-yellow-300">1,232 cm³</strong></p>
+          </div>
+        </div>
+      ),
+    },
+  ],
+  ja: [
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>底面の半径が <InlineMath math="6 \text{ cm}" />、高さが <InlineMath math="8 \text{ cm}" /> の円錐があります。</p>
+          <p>母線の長さを求めなさい！</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-2 text-sm font-body">
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="s = \sqrt{r^2 + t^2} = \sqrt{6^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10 \text{ cm}" />
+          </div>
+          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+            <p className="text-green-300 font-semibold text-xs">✅ 母線 = <InlineMath math="10 \text{ cm}" /></p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>母線が <InlineMath math="13 \text{ cm}" />、底面の半径が <InlineMath math="5 \text{ cm}" /> の円錐があります。</p>
+          <p>次を求めなさい：(a) 円錐の高さ、(b) 側面積。（<InlineMath math="\pi = 3.14" /> を使用）</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-yellow-400 font-semibold">(a) 円錐の高さ：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{13^2 - 5^2} = \sqrt{169 - 25} = \sqrt{144} = 12 \text{ cm}" />
+          </div>
+          <p className="text-yellow-400 font-semibold">(b) 側面積：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+            <BlockMath math="L_s = \pi r s = 3.14 \times 5 \times 13 = 204.1 \text{ cm}^2" />
+          </div>
+          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs">
+            <p className="text-yellow-300 font-semibold">✅ 高さ = 12 cm、側面積 = 204.1 cm²</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      question: (
+        <div className="text-sm text-white/85 font-body space-y-1">
+          <p>円錐形のパーティーハットがあり、底面の周は <InlineMath math="44 \text{ cm}" />、母線は <InlineMath math="25 \text{ cm}" /> です。</p>
+          <p>次を求めなさい：(a) 底面の半径、(b) ハットの高さ、(c) ハットの体積。（<InlineMath math="\pi = \frac{22}{7}" /> を使用）</p>
+        </div>
+      ),
+      answer: (
+        <div className="space-y-3 text-sm font-body">
+          <p className="text-red-400 font-semibold">ステップ1 — 周から半径を求める：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="K = 2\pi r \Rightarrow 44 = 2 \times \frac{22}{7} \times r" />
+            <BlockMath math="r = \frac{44 \times 7}{2 \times 22} = \frac{308}{44} = 7 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">ステップ2 — 高さを求める：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="t = \sqrt{s^2 - r^2} = \sqrt{25^2 - 7^2} = \sqrt{625 - 49} = \sqrt{576} = 24 \text{ cm}" />
+          </div>
+          <p className="text-red-400 font-semibold">ステップ3 — ハットの体積：</p>
+          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+            <BlockMath math="V = \frac{1}{3}\pi r^2 t = \frac{1}{3} \times \frac{22}{7} \times 7^2 \times 24" />
+            <BlockMath math="= \frac{1}{3} \times \frac{22}{7} \times 49 \times 24 = \frac{1}{3} \times 22 \times 7 \times 24 = \frac{3,696}{3} = 1,232 \text{ cm}^3" />
+          </div>
+          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+            <p className="text-red-300 font-semibold">✅ 解答：</p>
+            <p className="text-white/80">• 半径 = <strong className="text-yellow-300">7 cm</strong></p>
+            <p className="text-white/80">• ハットの高さ = <strong className="text-yellow-300">24 cm</strong></p>
+            <p className="text-white/80">• 体積 = <strong className="text-yellow-300">1,232 cm³</strong></p>
+          </div>
+        </div>
+      ),
+    },
+  ],
+};
+
+function getGpExamples(language: Language): Ex[] {
+  return gpExamplesMeta.map((m, i) => ({ ...m, ...gpExamplesTrans[language][i] }));
+}
 
 const luasExamplesMeta: ExMeta[] = [
   { level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60" },
@@ -2911,6 +3085,7 @@ function getVolExamples(language: Language): Ex[] {
 ───────────────────────────────────────────────────────────── */
 const ExampleCard = ({ ex, idx, prefix, language }: { ex: Ex; idx: number; prefix: string; language: Language }) => {
   const [show, setShow] = useState(false);
+  const tl = toggleLabelsTrans[language];
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
       <div className={`${ex.bg} px-5 py-4`}>
@@ -2923,7 +3098,7 @@ const ExampleCard = ({ ex, idx, prefix, language }: { ex: Ex; idx: number; prefi
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
         className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
-        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? "Sembunyikan" : "Lihat Pembahasan"}</span>
+        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? tl.hide : tl.show}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground"/> : <ChevronDown className="w-4 h-4 text-muted-foreground"/>}
       </button>
       {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
@@ -2965,12 +3140,22 @@ const KerucutPage = () => {
       ),
     },
     {
+      title: exampleSlidesTrans[language].gpTitle,
+      icon: "📏",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">{exampleSlidesTrans[language].subtitle}</p>
+          {getGpExamples(language).map((ex, i) => <ExampleCard key={`g${i}`} ex={ex} idx={i} prefix={exampleSlidesTrans[language].gpPrefix} language={language}/>)}
+        </div>
+      ),
+    },
+    {
       title: exampleSlidesTrans[language].luasTitle,
       icon: "🎨",
       content: (
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">{exampleSlidesTrans[language].subtitle}</p>
-          {getLuasExamples(language).map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS" language={language}/>)}
+          {getLuasExamples(language).map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix={exampleSlidesTrans[language].luasPrefix} language={language}/>)}
         </div>
       ),
     },
@@ -2980,7 +3165,7 @@ const KerucutPage = () => {
       content: (
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">{exampleSlidesTrans[language].subtitle}</p>
-          {getVolExamples(language).map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME" language={language}/>)}
+          {getVolExamples(language).map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix={exampleSlidesTrans[language].volPrefix} language={language}/>)}
         </div>
       ),
     },
