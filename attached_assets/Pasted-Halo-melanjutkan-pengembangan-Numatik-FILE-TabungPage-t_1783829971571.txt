@@ -1,0 +1,29 @@
+Halo, melanjutkan pengembangan Numatik.
+
+FILE: TabungPage.tsx (materi-matematika/kelas9/bangun-ruang-sisi-lengkung/, di .migration-backup/)
+
+STATUS TERAKHIR (terverifikasi, sudah di-push ke GitHub commit f626792):
+- Refactor struktur "sections" dari module-level constant → function getSections(language) SUDAH SELESAI
+- Slide 1 (Pengertian Tabung) dan Slide 2 (Unsur-unsur Tabung) SUDAH trilingual (id/en/ja), termasuk SVG label, tabel, tip kunci
+- Slide 6 (Kesimpulan) sudah trilingual dari sebelumnya
+- Slide 3, 4, 5, 7, 8, 9 MASIH hardcoded Indonesia
+- TypeScript: 0 error
+
+KONVENSI PROJECT:
+- Subscript KaTeX kata bahasa alami → huruf Latin (L_{\text{selimut}} → L_s), BUKAN diterjemahkan
+- Bug wajib dihindari: key ditambah di object translations A tapi direferensikan dari object B di JSX → blank screen
+- Pola yang sudah dipakai: key "s1" untuk slide 1, "s2" untuk slide 2 — lanjutkan pola serupa (s3, s4, s5) untuk konsistensi
+
+TUGAS TAHAP B (HANYA INI, JANGAN LEBIH):
+1. Terjemahkan SLIDE 3 — Jaring-jaring Tabung (baris ~1157-1198): judul, intro, komponen label, komponen cards (Tutup ATAS, SELIMUT, Tutup BAWAH, dll), tip penting, ukuran bagian
+2. Terjemahkan SLIDE 4 — Luas Permukaan Tabung (baris ~1204-1329): judul, intro, SVG title, SVG labels (tutup atas, SELIMUT, tutup bawah), penurunan rumus, tabel jenis tabung
+3. Terjemahkan SLIDE 5 — Volume Tabung (baris ~1343-1379): judul, intro, animasi label, ide dasar, rumus label, satuan
+4. Pastikan key direferensikan dari object yang BENAR (gunakan pola s3/s4/s5 sesuai section masing-masing)
+5. TypeScript check
+6. Laporkan, BERHENTI, buat checkpoint
+
+PENTING — SETELAH CHECKPOINT: 
+1. Commit perubahan ke git lokal
+2. Coba push ke GitHub (git push origin main)
+3. Kalau push GAGAL/timeout, JANGAN diam saja — laporkan eksplisit ke saya bahwa push gagal, supaya saya bisa push manual sebelum pindah akun (seperti sebelumnya)
+4. Konfirmasi status: "commit [hash] berhasil di-push ke GitHub" atau "commit [hash] gagal push, perlu push manual"
