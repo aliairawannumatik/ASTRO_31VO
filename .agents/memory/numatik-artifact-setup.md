@@ -34,3 +34,8 @@ A fresh import ships zero `node_modules` in both the pnpm workspace root and `.m
 **Why:** git doesn't track node_modules; import doesn't auto-install either project since `.migration-backup` isn't part of the pnpm workspace.
 
 **How to apply:** run `pnpm install` at the workspace root AND `npm install` inside `.migration-backup` separately before restarting workflows — one install does not cover the other.
+
+## Screenshot verification limitation on heavy pages
+Some Numatik pages (e.g. KerucutPage, TabungPage — large files with 100+ KaTeX elements, mathjs, framer-motion, canvas animations) frequently fail to render in time for the externalUrl Screenshot tool: it captures either the "MEMUAT..." splash or a blank white frame, even after clearing Vite's dep-optimizer cache and confirming the server responds fast with no console/workflow errors. Root page also failed most attempts and only succeeded once.
+**Why:** appears to be a screenshot-tool timing/headless-browser characteristic for this specific heavy dev-mode SPA, not a code bug — reproduces identically on pages that were never touched in a session.
+**How to apply:** don't burn many retries chasing a screenshot on these pages. After a handful of attempts, fall back to code-level verification (tsc --noEmit, grep the source for expected translated strings, confirm HMR applies cleanly with no error in workflow logs) and report that visual screenshot capture was inconclusive for this specific heavy page.

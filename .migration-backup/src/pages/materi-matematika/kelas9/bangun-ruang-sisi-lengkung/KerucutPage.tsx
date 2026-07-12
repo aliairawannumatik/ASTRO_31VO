@@ -552,7 +552,42 @@ const WaterKerucutAnimation = () => {
    Geometry: r=55, h=120, s≈132, sector angle≈150°
    N=60 triangular strips peel in a wave from left→right
 ───────────────────────────────────────────────────────────── */
-const ConeNetAnimation = () => {
+const coneNetAnimTrans: Record<Language, {
+  cutLine: string; alasLabel: string; alasSub: string; apexLabel: string;
+  selimutLabel: string; selimutSub: string; rJuring: string; busur: string; success: string;
+  caption: string; btnStart: string; btnPlaying: string; btnReplay: string; btnReset: string;
+  legendSelimut: string; legendAlas: string; legendApex: string; footer: string;
+}> = {
+  id: {
+    cutLine: "← garis potong", alasLabel: "ALAS", alasSub: "lingkaran (r)", apexLabel: "T (puncak)",
+    selimutLabel: "SELIMUT", selimutSub: "juring lingkaran", rJuring: "r_juring = s", busur: "busur = 2πr",
+    success: "✓ Jaring-jaring = SELIMUT + ALAS",
+    caption: "Animasi slow motion — kerucut dikupas lembaran demi lembaran menjadi jaring-jaringnya",
+    btnStart: "▶ Mulai Animasi", btnPlaying: "⏳ Mengupas...", btnReplay: "▶ Putar Ulang", btnReset: "↺ Reset",
+    legendSelimut: "Selimut (juring)", legendAlas: "Alas (lingkaran)", legendApex: "Puncak T",
+    footer: "Jaring-jaring kerucut: 1 selimut (juring, r_juring = s) + 1 alas (lingkaran, r_lingkaran = r)",
+  },
+  en: {
+    cutLine: "← cut line", alasLabel: "BASE", alasSub: "circle (r)", apexLabel: "T (apex)",
+    selimutLabel: "LATERAL", selimutSub: "circular sector", rJuring: "r_sector = s", busur: "arc = 2πr",
+    success: "✓ Net = LATERAL SURFACE + BASE",
+    caption: "Slow-motion animation — the cone is peeled sheet by sheet into its net",
+    btnStart: "▶ Start Animation", btnPlaying: "⏳ Peeling...", btnReplay: "▶ Replay", btnReset: "↺ Reset",
+    legendSelimut: "Lateral surface (sector)", legendAlas: "Base (circle)", legendApex: "Apex T",
+    footer: "Net of a cone: 1 lateral surface (sector, r_sector = s) + 1 base (circle, r_circle = r)",
+  },
+  ja: {
+    cutLine: "← 切り込み線", alasLabel: "底面", alasSub: "円（r）", apexLabel: "T（頂点）",
+    selimutLabel: "側面", selimutSub: "扇形", rJuring: "扇形の半径 = s", busur: "弧 = 2πr",
+    success: "✓ 展開図 = 側面 + 底面",
+    caption: "スローモーションアニメーション — 円錐が一枚ずつ剥がされて展開図になります",
+    btnStart: "▶ アニメーション開始", btnPlaying: "⏳ 展開中...", btnReplay: "▶ もう一度再生", btnReset: "↺ リセット",
+    legendSelimut: "側面（扇形）", legendAlas: "底面（円）", legendApex: "頂点T",
+    footer: "円錐の展開図：側面1つ（扇形、扇形の半径 = s）＋底面1つ（円、円の半径 = r）",
+  },
+};
+const ConeNetAnimation = ({ language }: { language: Language }) => {
+  const L = coneNetAnimTrans[language];
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animFrameRef = useRef<number>(0);
   const startTimeRef = useRef<number>(0);
@@ -671,7 +706,7 @@ const ConeNetAnimation = () => {
       ctx.fillStyle = ylw(ca * 0.85);
       ctx.font = 'bold 9px monospace';
       ctx.textAlign = 'left';
-      ctx.fillText('← garis potong', CX + r + 4, BASE_Y - 10);
+      ctx.fillText(L.cutLine, CX + r + 4, BASE_Y - 10);
     }
 
     // Assembled base ellipse (fades out as peeling starts)
@@ -708,10 +743,10 @@ const ConeNetAnimation = () => {
         ctx.fillStyle = ylw(la);
         ctx.font = 'bold 11px monospace';
         ctx.textAlign = 'left';
-        ctx.fillText('ALAS', CX + r + 12, alasY - 5);
+        ctx.fillText(L.alasLabel, CX + r + 12, alasY - 5);
         ctx.fillStyle = ylw(la * 0.8);
         ctx.font = '8px monospace';
-        ctx.fillText('lingkaran (r)', CX + r + 12, alasY + 8);
+        ctx.fillText(L.alasSub, CX + r + 12, alasY + 8);
         // r radius line
         if (la > 0.3) {
           const la2 = clamp((la - 0.3) / 0.7);
@@ -746,7 +781,7 @@ const ConeNetAnimation = () => {
       ctx.fillStyle = ylw(la);
       ctx.font = 'bold 9px monospace';
       ctx.textAlign = 'left';
-      ctx.fillText('T (puncak)', CX + 9, APEX_Y + 4);
+      ctx.fillText(L.apexLabel, CX + 9, APEX_Y + 4);
 
       // "s" slant-edge label (on left edge of sector, already upper-right)
       const midS = s * 0.47;
@@ -759,17 +794,17 @@ const ConeNetAnimation = () => {
       ctx.textAlign = 'left';
       ctx.fillStyle = ylw(la);
       ctx.font = 'bold 12px monospace';
-      ctx.fillText('SELIMUT', LX, APEX_Y + s / 2 - 8);
+      ctx.fillText(L.selimutLabel, LX, APEX_Y + s / 2 - 8);
       ctx.fillStyle = ylw(la * 0.85);
       ctx.font = '8px monospace';
-      ctx.fillText('juring lingkaran', LX, APEX_Y + s / 2 + 6);
-      ctx.fillText('r_juring = s', LX, APEX_Y + s / 2 + 18);
-      ctx.fillText(`busur = 2πr`, LX, APEX_Y + s / 2 + 30);
+      ctx.fillText(L.selimutSub, LX, APEX_Y + s / 2 + 6);
+      ctx.fillText(L.rJuring, LX, APEX_Y + s / 2 + 18);
+      ctx.fillText(L.busur, LX, APEX_Y + s / 2 + 30);
       // Final success text — above the alas, not colliding
       ctx.textAlign = 'center';
       ctx.fillStyle = ylw(la);
       ctx.font = 'bold 10px monospace';
-      ctx.fillText('✓ Jaring-jaring = SELIMUT + ALAS', CX, APEX_Y + s - 14);
+      ctx.fillText(L.success, CX, APEX_Y + s - 14);
     }
 
     // Progress bar
@@ -780,7 +815,7 @@ const ConeNetAnimation = () => {
       ctx.fillStyle = 'rgba(34,211,238,0.88)';
       ctx.fillRect(10, barY, (canvas.width - 20) * t, 3);
     }
-  }, [CX, APEX_Y, BASE_Y, RY, ALAS_CY, N, r, hh, s, THETA, SECTOR_START_ANGLE]);
+  }, [CX, APEX_Y, BASE_Y, RY, ALAS_CY, N, r, hh, s, THETA, SECTOR_START_ANGLE, L]);
 
   useEffect(() => {
     drawFrame(0);
@@ -810,7 +845,7 @@ const ConeNetAnimation = () => {
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Animasi <span className="text-cyan-300 font-bold">slow motion</span> — kerucut dikupas lembaran demi lembaran menjadi jaring-jaringnya
+        {L.caption}
       </p>
 
       <div style={{ maxWidth: 400, margin: '0 auto' }}>
@@ -828,22 +863,22 @@ const ConeNetAnimation = () => {
           disabled={animState === 'playing'}
           className="px-4 py-2 text-sm font-bold bg-cyan-700/60 border border-cyan-500 text-cyan-200 rounded-lg hover:bg-cyan-600/60 transition-colors cursor-pointer font-body disabled:opacity-40"
         >
-          {animState === 'idle' ? '▶ Mulai Animasi' : animState === 'playing' ? '⏳ Mengupas...' : '▶ Putar Ulang'}
+          {animState === 'idle' ? L.btnStart : animState === 'playing' ? L.btnPlaying : L.btnReplay}
         </button>
         <button
           onClick={resetAnimation}
           disabled={animState === 'idle'}
           className="px-4 py-2 text-sm font-bold bg-slate-700/60 border border-slate-500 text-slate-200 rounded-lg hover:bg-slate-600/60 transition-colors cursor-pointer font-body disabled:opacity-40"
         >
-          ↺ Reset
+          {L.btnReset}
         </button>
       </div>
 
       <div className="flex flex-wrap gap-3 justify-center text-[10px] font-body">
         {[
-          { color: '#22d3ee', label: 'Selimut (juring)' },
-          { color: '#a5b4fc', label: 'Alas (lingkaran)' },
-          { color: '#facc15', label: 'Puncak T' },
+          { color: '#22d3ee', label: L.legendSelimut },
+          { color: '#a5b4fc', label: L.legendAlas },
+          { color: '#facc15', label: L.legendApex },
         ].map(({ color, label }) => (
           <span key={label} className="flex items-center gap-1">
             <span className="w-3 h-3 rounded-sm inline-block" style={{ background: color }} />
@@ -853,7 +888,7 @@ const ConeNetAnimation = () => {
       </div>
 
       <p className="text-white/25 text-[9px] text-center font-body">
-        Jaring-jaring kerucut: 1 selimut (juring, r_juring = s) + 1 alas (lingkaran, r_lingkaran = r)
+        {L.footer}
       </p>
     </div>
   );
@@ -1497,9 +1532,118 @@ const slide2Trans = {
   },
 };
 
+/* ── Slide 3 translations (Jaring-jaring Kerucut / Net of a Cone) ── */
+const slide3Trans = {
+  id: {
+    title: "Jaring-jaring Kerucut",
+    intro: (
+      <>
+        Kalau kerucut "dikupas" dan dibentangkan di permukaan datar, akan terbentuk{" "}
+        <strong className="text-cyan-300">jaring-jaring kerucut</strong> yang terdiri dari <strong>2 bagian</strong>:
+      </>
+    ),
+    card1Title: "① Selimut",
+    card1Body1: <>Juring lingkaran dengan jari-jari = <InlineMath math="s" /></>,
+    card1Body2: <>Sudut juring = <InlineMath math="\frac{r}{s} \times 360°" /></>,
+    card2Title: "② Alas",
+    card2Body1: <>Lingkaran dengan jari-jari = <InlineMath math="r" /></>,
+    card2Body2: <>Keliling = <InlineMath math="2\pi r" /></>,
+    relLabel: <>🔑 <strong className="text-white">Hubungan penting:</strong> Arc selimut = Keliling alas</>,
+    relLine: <>Arc juring = <InlineMath math="2\pi r" /> → Sudut juring = <InlineMath math="\dfrac{r}{s} \times 360°" /></>,
+    checkQuote: "💡 Cek: Keliling alas lingkaran harus sama dengan panjang busur juring selimut!",
+  },
+  en: {
+    title: "Net of a Cone",
+    intro: (
+      <>
+        When a cone is "peeled" and unfolded onto a flat surface, it forms the{" "}
+        <strong className="text-cyan-300">net of a cone</strong>, made up of <strong>2 parts</strong>:
+      </>
+    ),
+    card1Title: "① Lateral Surface",
+    card1Body1: <>Circular sector with radius = <InlineMath math="s" /></>,
+    card1Body2: <>Sector angle = <InlineMath math="\frac{r}{s} \times 360°" /></>,
+    card2Title: "② Base",
+    card2Body1: <>Circle with radius = <InlineMath math="r" /></>,
+    card2Body2: <>Circumference = <InlineMath math="2\pi r" /></>,
+    relLabel: <>🔑 <strong className="text-white">Key relationship:</strong> Lateral arc = Base circumference</>,
+    relLine: <>Sector arc = <InlineMath math="2\pi r" /> → Sector angle = <InlineMath math="\dfrac{r}{s} \times 360°" /></>,
+    checkQuote: "💡 Check: The base circle's circumference must equal the arc length of the lateral sector!",
+  },
+  ja: {
+    title: "円錐の展開図",
+    intro: (
+      <>
+        円錐を「剥がして」平面に広げると、<strong className="text-cyan-300">2つの部分</strong>からなる
+        <strong className="text-cyan-300">円錐の展開図</strong>ができます：
+      </>
+    ),
+    card1Title: "①側面",
+    card1Body1: <>半径 = <InlineMath math="s" /> の扇形</>,
+    card1Body2: <>扇形の中心角 = <InlineMath math="\frac{r}{s} \times 360°" /></>,
+    card2Title: "②底面",
+    card2Body1: <>半径 = <InlineMath math="r" /> の円</>,
+    card2Body2: <>円周 = <InlineMath math="2\pi r" /></>,
+    relLabel: <>🔑 <strong className="text-white">重要な関係：</strong>側面の弧 = 底面の円周</>,
+    relLine: <>扇形の弧 = <InlineMath math="2\pi r" /> → 扇形の中心角 = <InlineMath math="\dfrac{r}{s} \times 360°" /></>,
+    checkQuote: "💡 確認：底面の円の円周は、側面（扇形）の弧の長さと等しくなければなりません！",
+  },
+};
+
+/* ── Slide 4 translations (Rumus Garis Pelukis / Slant Height Formula) ── */
+const slide4Trans = {
+  id: {
+    title: "Rumus Garis Pelukis (Apotema)",
+    intro: (
+      <>
+        Garis pelukis, tinggi, dan jari-jari alas membentuk <strong className="text-cyan-300">segitiga siku-siku</strong> di pusat alas.
+        Dengan Teorema Pythagoras, kita dapat mencari salah satu unsur jika dua lainnya diketahui.
+      </>
+    ),
+    derivLabel: "📌 Penurunan Rumus Garis Pelukis:",
+    derivBody: "Karena OT (tinggi) tegak lurus OA (jari-jari), maka segitiga TOA siku-siku di O:",
+    findLabel: <>🎯 <strong className="text-white">Dari rumus ini kita bisa cari:</strong></>,
+    findLine1: <>• Jika tahu <InlineMath math="r" /> dan <InlineMath math="t" /> → cari <InlineMath math="s = \sqrt{r^2+t^2}" /></>,
+    findLine2: <>• Jika tahu <InlineMath math="s" /> dan <InlineMath math="t" /> → cari <InlineMath math="r = \sqrt{s^2-t^2}" /></>,
+    findLine3: <>• Jika tahu <InlineMath math="s" /> dan <InlineMath math="r" /> → cari <InlineMath math="t = \sqrt{s^2-r^2}" /></>,
+  },
+  en: {
+    title: "Slant Height Formula",
+    intro: (
+      <>
+        The slant height, height, and base radius form a <strong className="text-cyan-300">right triangle</strong> at the center of the base.
+        Using the Pythagorean Theorem, we can find one element if the other two are known.
+      </>
+    ),
+    derivLabel: "📌 Deriving the Slant Height Formula:",
+    derivBody: "Since OT (height) is perpendicular to OA (radius), triangle TOA is a right triangle at O:",
+    findLabel: <>🎯 <strong className="text-white">From this formula we can find:</strong></>,
+    findLine1: <>• If <InlineMath math="r" /> and <InlineMath math="t" /> are known → find <InlineMath math="s = \sqrt{r^2+t^2}" /></>,
+    findLine2: <>• If <InlineMath math="s" /> and <InlineMath math="t" /> are known → find <InlineMath math="r = \sqrt{s^2-t^2}" /></>,
+    findLine3: <>• If <InlineMath math="s" /> and <InlineMath math="r" /> are known → find <InlineMath math="t = \sqrt{s^2-r^2}" /></>,
+  },
+  ja: {
+    title: "母線の公式",
+    intro: (
+      <>
+        母線・高さ・底面の半径は、底面の中心で<strong className="text-cyan-300">直角三角形</strong>を作ります。
+        ピタゴラスの定理を使えば、2つの値がわかれば残り1つを求められます。
+      </>
+    ),
+    derivLabel: "📌 母線の公式の導出：",
+    derivBody: "OT（高さ）はOA（半径）に垂直なので、三角形TOAはOで直角三角形になります：",
+    findLabel: <>🎯 <strong className="text-white">この公式から求められること：</strong></>,
+    findLine1: <>• <InlineMath math="r" /> と <InlineMath math="t" /> がわかれば → <InlineMath math="s = \sqrt{r^2+t^2}" /> を求める</>,
+    findLine2: <>• <InlineMath math="s" /> と <InlineMath math="t" /> がわかれば → <InlineMath math="r = \sqrt{s^2-t^2}" /> を求める</>,
+    findLine3: <>• <InlineMath math="s" /> と <InlineMath math="r" /> がわかれば → <InlineMath math="t = \sqrt{s^2-r^2}" /> を求める</>,
+  },
+};
+
 function getSections(language: Language): Sec[] {
   const s1 = slide1Trans[language];
   const s2 = slide2Trans[language];
+  const s3 = slide3Trans[language];
+  const s4 = slide4Trans[language];
   return [
   {
     title: s1.title,
@@ -1674,60 +1818,54 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Jaring-jaring Kerucut",
+    title: s3.title,
     icon: "📋",
     content: (
       <div className="space-y-4 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          Kalau kerucut "dikupas" dan dibentangkan di permukaan datar, akan terbentuk{" "}
-          <strong className="text-cyan-300">jaring-jaring kerucut</strong> yang terdiri dari <strong>2 bagian</strong>:
-        </p>
+        <p>{s3.intro}</p>
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-center space-y-1">
-            <p className="text-cyan-300 font-semibold text-xs">① Selimut</p>
-            <p className="text-white/60 text-xs">Juring lingkaran dengan jari-jari = <InlineMath math="s" /></p>
-            <p className="text-cyan-200 text-xs">Sudut juring = <InlineMath math="\frac{r}{s} \times 360°" /></p>
+            <p className="text-cyan-300 font-semibold text-xs">{s3.card1Title}</p>
+            <p className="text-white/60 text-xs">{s3.card1Body1}</p>
+            <p className="text-cyan-200 text-xs">{s3.card1Body2}</p>
           </div>
           <div className="bg-indigo-950/50 border border-indigo-700/40 rounded-lg p-3 text-center space-y-1">
-            <p className="text-indigo-300 font-semibold text-xs">② Alas</p>
-            <p className="text-white/60 text-xs">Lingkaran dengan jari-jari = <InlineMath math="r" /></p>
-            <p className="text-indigo-200 text-xs">Keliling = <InlineMath math="2\pi r" /></p>
+            <p className="text-indigo-300 font-semibold text-xs">{s3.card2Title}</p>
+            <p className="text-white/60 text-xs">{s3.card2Body1}</p>
+            <p className="text-indigo-200 text-xs">{s3.card2Body2}</p>
           </div>
         </div>
-        <ConeNetAnimation />
+        <ConeNetAnimation language={language} />
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-          <p>🔑 <strong className="text-white">Hubungan penting:</strong> Arc selimut = Keliling alas</p>
-          <p>Arc juring = <InlineMath math="2\pi r" /> → Sudut juring = <InlineMath math="\dfrac{r}{s} \times 360°" /></p>
+          <p>{s3.relLabel}</p>
+          <p>{s3.relLine}</p>
         </div>
         <blockquote className="border-l-4 border-yellow-500 pl-3 text-yellow-200 text-xs italic">
-          💡 Cek: Keliling alas lingkaran harus sama dengan panjang busur juring selimut!
+          {s3.checkQuote}
         </blockquote>
       </div>
     ),
   },
   {
-    title: "Rumus Garis Pelukis (Apotema)",
+    title: s4.title,
     icon: "📐",
     content: (
       <div className="space-y-4 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          Garis pelukis, tinggi, dan jari-jari alas membentuk <strong className="text-cyan-300">segitiga siku-siku</strong> di pusat alas.
-          Dengan Teorema Pythagoras, kita dapat mencari salah satu unsur jika dua lainnya diketahui.
-        </p>
+        <p>{s4.intro}</p>
         <GarisPelukisSVG />
         <div className="bg-red-950/50 border border-red-700/40 rounded-lg p-4 space-y-3">
-          <p className="text-red-300 font-semibold">📌 Penurunan Rumus Garis Pelukis:</p>
-          <p className="text-xs text-white/70">Karena OT (tinggi) tegak lurus OA (jari-jari), maka segitiga TOA siku-siku di O:</p>
+          <p className="text-red-300 font-semibold">{s4.derivLabel}</p>
+          <p className="text-xs text-white/70">{s4.derivBody}</p>
           <div className="bg-slate-800/60 rounded p-3">
             <BlockMath math="s^2 = r^2 + t^2" />
             <BlockMath math="\boxed{s = \sqrt{r^2 + t^2}}" />
           </div>
         </div>
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-          <p>🎯 <strong className="text-white">Dari rumus ini kita bisa cari:</strong></p>
-          <p>• Jika tahu <InlineMath math="r" /> dan <InlineMath math="t" /> → cari <InlineMath math="s = \sqrt{r^2+t^2}" /></p>
-          <p>• Jika tahu <InlineMath math="s" /> dan <InlineMath math="t" /> → cari <InlineMath math="r = \sqrt{s^2-t^2}" /></p>
-          <p>• Jika tahu <InlineMath math="s" /> dan <InlineMath math="r" /> → cari <InlineMath math="t = \sqrt{s^2-r^2}" /></p>
+          <p>{s4.findLabel}</p>
+          <p>{s4.findLine1}</p>
+          <p>{s4.findLine2}</p>
+          <p>{s4.findLine3}</p>
         </div>
       </div>
     ),
@@ -1746,7 +1884,7 @@ function getSections(language: Language): Sec[] {
           <p className="text-orange-300 font-semibold">📌 Penurunan Rumus:</p>
           <div className="text-xs text-white/70 space-y-1">
             <p>• <strong>Luas selimut</strong> = luas juring dengan jari-jari <InlineMath math="s" /> dan busur <InlineMath math="2\pi r" /></p>
-            <p>• <strong>Luas juring</strong> = <InlineMath math="\frac{\text{busur}}{\text{keliling}} \times \pi s^2 = \frac{2\pi r}{2\pi s} \times \pi s^2 = \pi r s" /></p>
+            <p>• <strong>Luas juring</strong> = <InlineMath math="\frac{b}{K} \times \pi s^2 = \frac{2\pi r}{2\pi s} \times \pi s^2 = \pi r s" /></p>
             <p>• <strong>Luas alas</strong> = <InlineMath math="\pi r^2" /></p>
           </div>
           <div className="bg-slate-800/60 rounded p-3">
