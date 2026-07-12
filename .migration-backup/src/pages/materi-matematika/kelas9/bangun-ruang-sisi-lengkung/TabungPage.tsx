@@ -1165,6 +1165,204 @@ const slide2Trans = {
   },
 };
 
+/* ── Slide 3 translations ─────────────────────────────────── */
+const slide3Trans = {
+  id: {
+    title: "Jaring-jaring Tabung",
+    intro1: 'Kalau kita "bongkar" dan bentangkan semua permukaan tabung menjadi datar, itulah yang disebut',
+    introBold: "jaring-jaring tabung",
+    kompLabel: "🗺️ Komponen Jaring-jaring Tabung:",
+    card1Title: "Tutup ATAS",
+    card1Desc: "Lingkaran jari-jari r",
+    card2Title: "SELIMUT",
+    card2Desc: "Persegi panjang",
+    card2Sub: "p = 2πr, l = t",
+    card3Title: "Tutup BAWAH",
+    card3Desc: "Lingkaran jari-jari r",
+    tipBold: "💡 Tips Penting:",
+    tipText1: "Perhatikan bahwa panjang sisi persegi panjang (selimut) harus sama persis dengan keliling lingkaran alas/tutup (",
+    tipText2: '). Inilah kunci kenapa jaring-jaring bisa "menyambung" sempurna!',
+    sizeTitle: "📏 Ukuran Masing-masing Bagian:",
+    size1: "• Luas tutup atas = Luas tutup bawah =",
+    size2: "• Panjang selimut (dibuka) =",
+    size3: "• Tinggi selimut (dibuka) =",
+    size4: "• Luas selimut =",
+  },
+  en: {
+    title: "Cylinder Net",
+    intro1: 'If we "unfold" and flatten all surfaces of a cylinder, that is called a',
+    introBold: "cylinder net",
+    kompLabel: "🗺️ Components of a Cylinder Net:",
+    card1Title: "TOP Cap",
+    card1Desc: "Circle of radius r",
+    card2Title: "LATERAL",
+    card2Desc: "Rectangle",
+    card2Sub: "l = 2πr, w = t",
+    card3Title: "BOTTOM Cap",
+    card3Desc: "Circle of radius r",
+    tipBold: "💡 Important Tip:",
+    tipText1: "The length of the rectangle (lateral surface) must exactly equal the circumference of the base/top circle (",
+    tipText2: "). This is why the net fits together perfectly!",
+    sizeTitle: "📏 Dimensions of Each Part:",
+    size1: "• Top area = Bottom area =",
+    size2: "• Lateral length (unrolled) =",
+    size3: "• Lateral height (unrolled) =",
+    size4: "• Lateral area =",
+  },
+  ja: {
+    title: "円柱の展開図",
+    intro1: "円柱のすべての面を「分解」して平らに広げると、これが",
+    introBold: "円柱の展開図",
+    kompLabel: "🗺️ 円柱の展開図の構成要素：",
+    card1Title: "上蓋",
+    card1Desc: "半径 r の円",
+    card2Title: "側面",
+    card2Desc: "長方形",
+    card2Sub: "縦 = 2πr、横 = t",
+    card3Title: "下蓋",
+    card3Desc: "半径 r の円",
+    tipBold: "💡 重要なヒント：",
+    tipText1: "長方形（側面）の辺の長さが、底面・頂面の円周（",
+    tipText2: "）と等しくなければなりません。これが展開図がぴったり合う理由です！",
+    sizeTitle: "📏 各部分の寸法：",
+    size1: "• 上蓋の面積 = 下蓋の面積 =",
+    size2: "• 側面の長さ（展開後）=",
+    size3: "• 側面の高さ（展開後）=",
+    size4: "• 側面積 =",
+  },
+};
+
+/* ── Slide 4 translations ─────────────────────────────────── */
+const slide4Trans = {
+  id: {
+    title: "Luas Permukaan Tabung",
+    intro1: "Luas permukaan tabung adalah",
+    introBold: "total seluruh luas",
+    intro2: "semua bagian yang membungkus tabung — termasuk dua tutup lingkaran dan selimutnya.",
+    svgTitle: "Tabung Dibongkar → Komponen Luas Permukaan",
+    svgTopLabel: "tutup atas",
+    svgMantleLabel: "SELIMUT",
+    svgMantleSub: "(Persegi Panjang)",
+    svgBotLabel: "tutup bawah",
+    derLabel: "🧮 Penurunan Rumus:",
+    derStep: "Tutup Atas + Tutup Bawah + Selimut",
+    derFormLabel: "✨ Rumus Luas Permukaan Tabung:",
+    derAlt: "Atau bisa juga ditulis:",
+    noteLabel: "🚀 Catatan:",
+    noteText: "Kalau tabung tidak punya tutup (seperti pipa atau ember tanpa dasar), kamu hanya menghitung selimut ditambah satu lingkaran. Sesuaikan rumus dengan kebutuhan soal!",
+    thType: "Jenis Tabung",
+    thFormula: "Rumus Luas",
+    rows: [
+      ["Tabung tertutup (ada alas & tutup)", "L = 2\\pi r^2 + 2\\pi r t"],
+      ["Tabung terbuka (tanpa tutup atas)",  "L = \\pi r^2 + 2\\pi r t"],
+      ["Selimut saja",                       "L_s = 2\\pi r t"],
+    ] as [string, string][],
+  },
+  en: {
+    title: "Surface Area of a Cylinder",
+    intro1: "The surface area of a cylinder is the",
+    introBold: "total area",
+    intro2: "of all parts enclosing the cylinder — including two circular caps and the lateral surface.",
+    svgTitle: "Cylinder Exploded → Surface Area Components",
+    svgTopLabel: "top cap",
+    svgMantleLabel: "LATERAL",
+    svgMantleSub: "(Rectangle)",
+    svgBotLabel: "bottom cap",
+    derLabel: "🧮 Formula Derivation:",
+    derStep: "Top Cap + Bottom Cap + Lateral Surface",
+    derFormLabel: "✨ Cylinder Surface Area Formula:",
+    derAlt: "Can also be written as:",
+    noteLabel: "🚀 Note:",
+    noteText: "If the cylinder has no top cap (like a pipe or a bucket without a base), you only calculate the lateral surface plus one circle. Adjust the formula to suit the problem!",
+    thType: "Cylinder Type",
+    thFormula: "Surface Area Formula",
+    rows: [
+      ["Closed cylinder (base & cap)",  "L = 2\\pi r^2 + 2\\pi r t"],
+      ["Open cylinder (no top cap)",    "L = \\pi r^2 + 2\\pi r t"],
+      ["Lateral surface only",          "L_s = 2\\pi r t"],
+    ] as [string, string][],
+  },
+  ja: {
+    title: "円柱の表面積",
+    intro1: "円柱の表面積は、円柱を包む",
+    introBold: "すべての部分の面積の合計",
+    intro2: "です — 2枚の円形の蓋と側面を含みます。",
+    svgTitle: "円柱を展開 → 表面積の構成要素",
+    svgTopLabel: "上蓋",
+    svgMantleLabel: "側面",
+    svgMantleSub: "（長方形）",
+    svgBotLabel: "下蓋",
+    derLabel: "🧮 公式の導出：",
+    derStep: "上蓋 + 下蓋 + 側面",
+    derFormLabel: "✨ 円柱の表面積の公式：",
+    derAlt: "次のようにも書けます：",
+    noteLabel: "🚀 備考：",
+    noteText: "円柱に蓋がない場合（パイプや底のないバケツなど）、側面と一つの円だけを計算します。問題に合わせて公式を調整しましょう！",
+    thType: "円柱の種類",
+    thFormula: "表面積の公式",
+    rows: [
+      ["閉じた円柱（蓋あり）",   "L = 2\\pi r^2 + 2\\pi r t"],
+      ["開いた円柱（上蓋なし）", "L = \\pi r^2 + 2\\pi r t"],
+      ["側面のみ",               "L_s = 2\\pi r t"],
+    ] as [string, string][],
+  },
+};
+
+/* ── Slide 5 translations ─────────────────────────────────── */
+const slide5Trans = {
+  id: {
+    title: "Volume Tabung",
+    intro1: "Volume tabung adalah",
+    introBold: "seberapa banyak isi",
+    intro2: "yang bisa ditampung di dalamnya — bayangkan berapa liter air yang masuk ke dalam kaleng!",
+    animLabel: "🌊 Tabung diisi air — dari kosong hingga penuh",
+    animSub: "Persentase menunjukkan proporsi volume terisi terhadap volume total",
+    ideLabel: "💡 Ide Dasar:",
+    ideText: "Volume = Luas alas × Tinggi. Karena alas tabung adalah lingkaran:",
+    formulaDer: "V = \\text{Luas Alas} \\times t = \\pi r^2 \\times t",
+    formulaLabel: "✨ Rumus Volume Tabung:",
+    satuanBold: "Satuan volume:",
+    sat1a: "• Jika",
+    sat1b: "dan",
+    sat1c: "dalam cm → Volume dalam",
+    sat2c: "dalam m → Volume dalam",
+  },
+  en: {
+    title: "Volume of a Cylinder",
+    intro1: "The volume of a cylinder is",
+    introBold: "how much it can hold",
+    intro2: "inside — imagine how many liters of water fit into a can!",
+    animLabel: "🌊 Cylinder filling with water — from empty to full",
+    animSub: "Percentage shows the proportion of filled volume to total volume",
+    ideLabel: "💡 Core Idea:",
+    ideText: "Volume = Base Area × Height. Since the base of a cylinder is a circle:",
+    formulaDer: "V = \\text{Base Area} \\times t = \\pi r^2 \\times t",
+    formulaLabel: "✨ Cylinder Volume Formula:",
+    satuanBold: "Volume units:",
+    sat1a: "• If",
+    sat1b: "and",
+    sat1c: "are in cm → Volume in",
+    sat2c: "are in m → Volume in",
+  },
+  ja: {
+    title: "円柱の体積",
+    intro1: "円柱の体積は、中に",
+    introBold: "どれだけ入るか",
+    intro2: "を表します — 缶に何リットルの水が入るか想像してみてください！",
+    animLabel: "🌊 円柱に水が満たされる — 空から満杯まで",
+    animSub: "パーセンテージは総体積に対する充填体積の割合を示します",
+    ideLabel: "💡 基本概念：",
+    ideText: "体積 = 底面積 × 高さ。円柱の底面は円なので：",
+    formulaDer: "V = \\text{底面積} \\times t = \\pi r^2 \\times t",
+    formulaLabel: "✨ 円柱の体積の公式：",
+    satuanBold: "体積の単位：",
+    sat1a: "•",
+    sat1b: "と",
+    sat1c: "がcm → 体積：",
+    sat2c: "がm → 体積：",
+  },
+};
+
 /* ─────────────────────────────────────────────────────────────
    SECTIONS DATA
 ───────────────────────────────────────────────────────────── */
@@ -1173,6 +1371,9 @@ type Sec = { title: string; icon: string; content: React.ReactNode };
 function getSections(language: Language): Sec[] {
   const s1 = slide1Trans[language];
   const s2 = slide2Trans[language];
+  const s3 = slide3Trans[language];
+  const s4 = slide4Trans[language];
+  const s5 = slide5Trans[language];
   return [
   {
     title: s1.title,
@@ -1441,137 +1642,109 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Jaring-jaring Tabung",
+    title: s3.title,
     icon: "📐",
     content: (
       <div className="space-y-4 font-body">
         <p className="text-white/80 text-sm leading-relaxed">
-          Kalau kita "bongkar" dan bentangkan semua permukaan tabung menjadi datar, itulah yang disebut <strong className="text-purple-300">jaring-jaring tabung</strong>.
+          {s3.intro1} <strong className="text-purple-300">{s3.introBold}</strong>.
         </p>
 
         <CylinderNetAnimation />
         <div className="bg-purple-950/40 border border-purple-700/40 rounded-xl p-4">
-          <p className="text-purple-200 text-sm font-bold mb-3">🗺️ Komponen Jaring-jaring Tabung:</p>
+          <p className="text-purple-200 text-sm font-bold mb-3">{s3.kompLabel}</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
             <div className="bg-cyan-950/60 border border-cyan-700/40 rounded-lg p-3">
               <p className="text-2xl mb-1">⭕</p>
-              <p className="text-cyan-300 text-xs font-bold">Tutup ATAS</p>
-              <p className="text-white/60 text-xs">Lingkaran jari-jari r</p>
+              <p className="text-cyan-300 text-xs font-bold">{s3.card1Title}</p>
+              <p className="text-white/60 text-xs">{s3.card1Desc}</p>
             </div>
             <div className="bg-purple-950/60 border border-purple-700/40 rounded-lg p-3">
               <p className="text-2xl mb-1">▭</p>
-              <p className="text-purple-300 text-xs font-bold">SELIMUT</p>
-              <p className="text-white/60 text-xs">Persegi panjang<br/>p = 2πr, l = t</p>
+              <p className="text-purple-300 text-xs font-bold">{s3.card2Title}</p>
+              <p className="text-white/60 text-xs">{s3.card2Desc}<br/>{s3.card2Sub}</p>
             </div>
             <div className="bg-green-950/60 border border-green-700/40 rounded-lg p-3">
               <p className="text-2xl mb-1">⭕</p>
-              <p className="text-green-300 text-xs font-bold">Tutup BAWAH</p>
-              <p className="text-white/60 text-xs">Lingkaran jari-jari r</p>
+              <p className="text-green-300 text-xs font-bold">{s3.card3Title}</p>
+              <p className="text-white/60 text-xs">{s3.card3Desc}</p>
             </div>
           </div>
         </div>
         <blockquote className="border-l-4 border-yellow-500 pl-3 text-sm text-yellow-200">
-          <strong>💡 Tips Penting:</strong> Perhatikan bahwa panjang sisi persegi panjang (selimut)
-          harus sama persis dengan keliling lingkaran alas/tutup (<InlineMath math="2\pi r" />).
-          Inilah kunci kenapa jaring-jaring bisa "menyambung" sempurna!
+          <strong>{s3.tipBold}</strong> {s3.tipText1}<InlineMath math="2\pi r" />{s3.tipText2}
         </blockquote>
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2 text-sm text-white/80">
-          <p className="font-bold text-white">📏 Ukuran Masing-masing Bagian:</p>
+          <p className="font-bold text-white">{s3.sizeTitle}</p>
           <div className="bg-slate-900/60 rounded p-3 space-y-1 text-xs font-mono">
-            <p>• Luas tutup atas = Luas tutup bawah = <InlineMath math="\pi r^2" /></p>
-            <p>• Panjang selimut (dibuka) = <InlineMath math="2\pi r" /></p>
-            <p>• Tinggi selimut (dibuka) = <InlineMath math="t" /></p>
-            <p>• Luas selimut = <InlineMath math="2\pi r \times t" /></p>
+            <p>{s3.size1} <InlineMath math="\pi r^2" /></p>
+            <p>{s3.size2} <InlineMath math="2\pi r" /></p>
+            <p>{s3.size3} <InlineMath math="t" /></p>
+            <p>{s3.size4} <InlineMath math="2\pi r \times t" /></p>
           </div>
         </div>
       </div>
     ),
   },
   {
-    title: "Luas Permukaan Tabung",
+    title: s4.title,
     icon: "🎨",
     content: (
       <div className="space-y-4 font-body">
         <p className="text-white/80 text-sm">
-          Luas permukaan tabung adalah <strong>total seluruh luas</strong> semua bagian yang membungkus tabung —
-          termasuk dua tutup lingkaran dan selimutnya.
+          {s4.intro1} <strong>{s4.introBold}</strong> {s4.intro2}
         </p>
 
-        {/* ── Diagram: hasil pembongkaran tabung (vertikal) ── */}
+        {/* ── Diagram: exploded cylinder ── */}
         <div className="rounded-xl overflow-hidden border border-purple-700/40">
           <svg viewBox="0 0 400 250" style={{ width:"100%", display:"block" }} xmlns="http://www.w3.org/2000/svg">
             <rect width="400" height="250" fill="rgba(8,12,30,0.92)"/>
 
             {/* TITLE */}
             <text x="200" y="15" fill="#a78bfa" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
-              Tabung Dibongkar → Komponen Luas Permukaan
+              {s4.svgTitle}
             </text>
 
-            {/* ══════════════════════════════════════
-                TOP CIRCLE — tutup atas
-                cx=200 cy=48 r=28
-            ══════════════════════════════════════ */}
+            {/* TOP CIRCLE */}
             <circle cx="200" cy="48" r="28" fill="rgba(99,102,241,0.42)" stroke="#818cf8" strokeWidth="1.8"/>
-            {/* r-line inside */}
             <line x1="200" y1="48" x2="228" y2="48" stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
             <circle cx="200" cy="48" r="2" fill="#f59e0b"/>
             <circle cx="228" cy="48" r="2" fill="#f59e0b"/>
             <text x="214" y="42" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
-            {/* label — moved below r-line to avoid collision */}
-            <text x="200" y="60" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup atas</text>
-            {/* area annotation — right of circle */}
+            <text x="200" y="60" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">{s4.svgTopLabel}</text>
             <text x="242" y="51" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="start">= πr²</text>
 
-            {/* "+" sign — left, between top circle and rect */}
             <text x="28" y="86" fill="#64748b" fontSize="13" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
-            {/* dashed vertical connector */}
             <line x1="200" y1="76" x2="200" y2="87" stroke="rgba(168,85,247,0.35)" strokeWidth="1" strokeDasharray="2,2"/>
 
-            {/* 2πr dimension — moved down to avoid overlap with circle */}
             <line x1="106" y1="87" x2="294" y2="87" stroke="#a855f7" strokeWidth="1"/>
             <line x1="106" y1="83" x2="106" y2="91" stroke="#a855f7" strokeWidth="1"/>
             <line x1="294" y1="83" x2="294" y2="91" stroke="#a855f7" strokeWidth="1"/>
             <text x="200" y="83" fill="#d8b4fe" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">← 2πr →</text>
 
-            {/* ══════════════════════════════════════
-                RECTANGLE — selimut
-                x=106 y=90 w=188 h=62
-            ══════════════════════════════════════ */}
+            {/* RECTANGLE */}
             <rect x="106" y="90" width="188" height="62" rx="4" fill="rgba(168,85,247,0.32)" stroke="#a855f7" strokeWidth="1.8"/>
-            {/* t dimension — right of rect */}
             <line x1="302" y1="90"  x2="302" y2="152" stroke="#22c55e" strokeWidth="1.4"/>
             <line x1="298" y1="90"  x2="306" y2="90"  stroke="#22c55e" strokeWidth="1.2"/>
             <line x1="298" y1="152" x2="306" y2="152" stroke="#22c55e" strokeWidth="1.2"/>
             <text x="314" y="125" fill="#22c55e" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">t</text>
-            {/* labels inside rect */}
-            <text x="200" y="117" fill="#e9d5ff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">SELIMUT</text>
-            <text x="200" y="129" fill="#c4b5fd" fontSize="7.5" fontFamily="monospace" textAnchor="middle">(Persegi Panjang)</text>
-            {/* area annotation — right of rect */}
+            <text x="200" y="117" fill="#e9d5ff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{s4.svgMantleLabel}</text>
+            <text x="200" y="129" fill="#c4b5fd" fontSize="7.5" fontFamily="monospace" textAnchor="middle">{s4.svgMantleSub}</text>
             <text x="322" y="147" fill="#a855f7" fontSize="9.5" fontFamily="monospace" textAnchor="start">= 2πr·t</text>
 
-            {/* "+" sign — left, between rect and bottom circle */}
             <text x="28" y="170" fill="#64748b" fontSize="13" fontFamily="monospace" textAnchor="middle" fontWeight="bold">+</text>
-            {/* dashed vertical connector */}
             <line x1="200" y1="152" x2="200" y2="160" stroke="rgba(168,85,247,0.35)" strokeWidth="1" strokeDasharray="2,2"/>
 
-            {/* ══════════════════════════════════════
-                BOTTOM CIRCLE — tutup bawah
-                cx=200 cy=188 r=28
-            ══════════════════════════════════════ */}
+            {/* BOTTOM CIRCLE */}
             <circle cx="200" cy="188" r="28" fill="rgba(99,102,241,0.42)" stroke="#818cf8" strokeWidth="1.8"/>
-            {/* r-line inside */}
             <line x1="200" y1="188" x2="228" y2="188" stroke="#f59e0b" strokeWidth="1.4" strokeDasharray="3,2"/>
             <circle cx="200" cy="188" r="2" fill="#f59e0b"/>
             <circle cx="228" cy="188" r="2" fill="#f59e0b"/>
             <text x="214" y="183" fill="#f59e0b" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
-            {/* label — moved below circle to avoid collision with r */}
-            <text x="200" y="222" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">tutup bawah</text>
-            {/* area annotation — right of circle */}
+            <text x="200" y="222" fill="#c7d2fe" fontSize="7" fontFamily="monospace" textAnchor="middle" fontWeight="bold">{s4.svgBotLabel}</text>
             <text x="242" y="195" fill="#818cf8" fontSize="9.5" fontFamily="monospace" textAnchor="start">= πr²</text>
 
-            {/* ══════════════════════════════════════
-                TOTAL FORMULA BAR
-            ══════════════════════════════════════ */}
+            {/* TOTAL FORMULA BAR */}
             <rect x="20" y="226" width="360" height="18" rx="5"
               fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.36)" strokeWidth="1"/>
             <text x="200" y="239" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
@@ -1581,40 +1754,35 @@ function getSections(language: Language): Sec[] {
         </div>
 
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
-          <p className="text-orange-300 font-bold text-sm">🧮 Penurunan Rumus:</p>
+          <p className="text-orange-300 font-bold text-sm">{s4.derLabel}</p>
           <div className="space-y-2 text-sm text-white/80">
             <div className="bg-slate-900/60 rounded p-2 text-xs">
-              <p className="text-white/60 mb-1">Tutup Atas + Tutup Bawah + Selimut</p>
+              <p className="text-white/60 mb-1">{s4.derStep}</p>
               <BlockMath math="L = \pi r^2 + \pi r^2 + 2\pi r \cdot t" />
             </div>
             <div className="bg-orange-950/50 border border-orange-700/40 rounded p-3">
-              <p className="text-orange-300 font-bold text-center text-xs mb-2">✨ Rumus Luas Permukaan Tabung:</p>
+              <p className="text-orange-300 font-bold text-center text-xs mb-2">{s4.derFormLabel}</p>
               <BlockMath math="L = 2\pi r^2 + 2\pi r \cdot t" />
             </div>
             <div className="bg-slate-900/60 rounded p-2 text-xs text-white/60">
-              <p>Atau bisa juga ditulis:</p>
+              <p>{s4.derAlt}</p>
               <BlockMath math="L = 2\pi r \left( r + t \right)" />
             </div>
           </div>
         </div>
 
         <blockquote className="border-l-4 border-orange-500 pl-3 text-sm text-orange-200">
-          <strong>🚀 Catatan:</strong> Kalau tabung tidak punya tutup (seperti pipa atau ember tanpa dasar),
-          kamu hanya menghitung selimut ditambah satu lingkaran. Sesuaikan rumus dengan kebutuhan soal!
+          <strong>{s4.noteLabel}</strong> {s4.noteText}
         </blockquote>
 
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Jenis Tabung</th>
-              <th className="px-3 py-2 text-cyan-300">Rumus Luas</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s4.thType}</th>
+              <th className="px-3 py-2 text-cyan-300">{s4.thFormula}</th>
             </tr></thead>
             <tbody>
-              {[
-                ["Tabung tertutup (ada alas & tutup)","L = 2\\pi r^2 + 2\\pi r t"],
-                ["Tabung terbuka (tanpa tutup atas)","L = \\pi r^2 + 2\\pi r t"],
-                ["Selimut saja","L_{selimut} = 2\\pi r t"],
-              ].map(([b,r],i)=>(
+              {s4.rows.map(([b, r], i) => (
                 <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
                   <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
                   <td className="px-3 py-2 text-yellow-300 font-mono"><InlineMath math={r}/></td>
@@ -1627,41 +1795,40 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Volume Tabung",
+    title: s5.title,
     icon: "📦",
     content: (
       <div className="space-y-4 font-body">
         <p className="text-white/80 text-sm leading-relaxed">
-          Volume tabung adalah <strong>seberapa banyak isi</strong> yang bisa ditampung di dalamnya —
-          bayangkan berapa liter air yang masuk ke dalam kaleng!
+          {s5.intro1} <strong>{s5.introBold}</strong> {s5.intro2}
         </p>
 
         <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1">
           <p className="text-cyan-300 text-xs font-semibold font-body text-center">
-            🌊 Tabung diisi air — dari kosong hingga penuh
+            {s5.animLabel}
           </p>
           <WaterTabungAnimation />
           <p className="text-white/45 text-[10px] font-body text-center">
-            Persentase menunjukkan proporsi volume terisi terhadap volume total
+            {s5.animSub}
           </p>
         </div>
 
         <div className="bg-blue-950/50 border border-blue-700/40 rounded-lg p-4 space-y-3">
-          <p className="text-blue-300 font-bold text-sm">💡 Ide Dasar:</p>
-          <p className="text-white/75 text-sm">Volume = Luas alas × Tinggi. Karena alas tabung adalah lingkaran:</p>
+          <p className="text-blue-300 font-bold text-sm">{s5.ideLabel}</p>
+          <p className="text-white/75 text-sm">{s5.ideText}</p>
           <div className="bg-slate-900/60 rounded p-3 space-y-2">
-            <BlockMath math="V = \text{Luas Alas} \times t = \pi r^2 \times t" />
+            <BlockMath math={s5.formulaDer} />
           </div>
           <div className="bg-blue-950/70 border border-blue-600/40 rounded p-3 text-center">
-            <p className="text-blue-200 font-bold text-xs mb-1">✨ Rumus Volume Tabung:</p>
+            <p className="text-blue-200 font-bold text-xs mb-1">{s5.formulaLabel}</p>
             <BlockMath math="V = \pi r^2 \cdot t" />
           </div>
         </div>
 
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-          <p>🎯 <strong className="text-white">Satuan volume:</strong></p>
-          <p>• Jika <InlineMath math="r" /> dan <InlineMath math="t" /> dalam cm → Volume dalam <InlineMath math="\text{cm}^3" /></p>
-          <p>• Jika <InlineMath math="r" /> dan <InlineMath math="t" /> dalam m → Volume dalam <InlineMath math="\text{m}^3" /></p>
+          <p>🎯 <strong className="text-white">{s5.satuanBold}</strong></p>
+          <p>{s5.sat1a} <InlineMath math="r" /> {s5.sat1b} <InlineMath math="t" /> {s5.sat1c} <InlineMath math="\text{cm}^3" /></p>
+          <p>{s5.sat1a} <InlineMath math="r" /> {s5.sat1b} <InlineMath math="t" /> {s5.sat2c} <InlineMath math="\text{m}^3" /></p>
           <p>• <InlineMath math="1 \text{ m}^3 = 1.000.000 \text{ cm}^3" /></p>
           <p>• <InlineMath math="1 \text{ liter} = 1.000 \text{ cm}^3" /></p>
         </div>
