@@ -18,3 +18,11 @@ It is registered as a `kind = "web"` artifact at `artifacts/numatik/` with:
 **Why absolute path:** Artifact workflow runs from a different working directory, so `cd .migration-backup` fails. Must use `/home/runner/workspace/.migration-backup`.
 
 The scaffold files at `artifacts/numatik/src/` are unused stubs (from createArtifact bootstrap). Do not delete them — the artifact system expects them. The real app is entirely in `.migration-backup/`.
+
+## GitHub re-import loses artifact registration
+
+After a fresh GitHub import of this repo (2026-07-12), `artifacts/*/.replit-artifact/artifact.toml` files were present on disk (numatik, api-server, mockup-sandbox) but `listArtifacts()` and `listWorkflows()` both came back empty — the artifact-managed workflows referenced in this file (`artifacts/numatik: web`, `artifacts/api-server: API Server`) did not exist and `WorkflowsRestart`/`createArtifact` couldn't recreate them (createArtifact refuses when the slug directory already exists).
+
+**Why:** artifact registration/workflow state lives outside the git-tracked files and isn't reconstructed automatically from `artifact.toml` on import.
+
+**How to apply:** if this happens again, don't fight it — use the plain `configureWorkflow` callback to start the same dev commands directly (e.g. `cd .../.migration-backup && PORT=3001 npm run dev` waiting on port 5000; `PORT=8080 pnpm --filter @workspace/api-server run dev` waiting on port 8080). Screenshot via `externalUrl` against `$REPLIT_DEV_DOMAIN` instead of `appPreview` (which requires a registered artifact). If artifact-managed workflows later reappear in `listWorkflows()`, switch back to those and remove the manual ones.

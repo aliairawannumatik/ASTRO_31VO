@@ -4,8 +4,9 @@ Numatik (Numerasi Aktif dengan Teknologi Informasi dan Komunikasi) is an educati
 
 ## Run & Operate
 
-- **Frontend** — workflow `artifacts/numatik: web` starts the React/Vite app from `.migration-backup/` on port 5000 (`cd /home/runner/workspace/.migration-backup && npm run dev`)
-- **API server** — workflow `artifacts/api-server: API Server` starts the Express 5 backend (`pnpm --filter @workspace/api-server run dev`); requires `DATABASE_URL`
+- **Frontend** — workflow `Numatik Web` starts the React/Vite app from `.migration-backup/` on port 5000 (`cd /home/runner/workspace/.migration-backup && PORT=3001 npm run dev`; Vite serves the UI on 5000, its embedded Express server serves `/api` on 3001 via Vite's dev proxy)
+- **API server** — workflow `Numatik API Server` starts the separate Express 5 backend package (`PORT=8080 pnpm --filter @workspace/api-server run dev`); requires `DATABASE_URL`. Note: the live app currently talks to the Express server bundled inside `.migration-backup/server.ts` (port 3001), not yet this `@workspace/api-server` package — see Gotchas.
+- Registered `artifact.toml` files exist for `numatik`, `api-server`, and `mockup-sandbox` under `artifacts/*/.replit-artifact/`, but on this import `listArtifacts()`/`listWorkflows()` came back empty — the artifact registration wasn't preserved across the GitHub import, so plain `configureWorkflow` workflows (`Numatik Web`, `Numatik API Server`) were created instead. If artifact-managed workflows (`artifacts/numatik: web`, etc.) ever appear in `listWorkflows()`, prefer those and remove the manual ones.
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
@@ -39,7 +40,8 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The live Numatik frontend calls its own bundled Express server (`.migration-backup/server.ts`, port 3001) for `/api/chat`, not the `@workspace/api-server` workspace package. The two are separate backends; reconcile before assuming one API surface.
+- The AI tutor chat endpoint (`/api/chat` in `.migration-backup/server.ts`) needs `GROQ_API_KEY`. Without it the endpoint returns a friendly 503 but the rest of the app works fine — this secret has not been set yet.
 
 ## Pointers
 
