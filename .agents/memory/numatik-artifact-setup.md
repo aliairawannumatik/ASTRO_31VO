@@ -3,6 +3,10 @@ name: Numatik artifact setup
 description: How .migration-backup is wired as a registered artifact; port/PATH gotchas that caused proxy failures; trilingual (id/en/ja) page pattern and progress.
 ---
 
+## Fresh import / re-clone checklist
+- After a fresh GitHub import (or any time node_modules is missing), two separate installs are needed: `pnpm install` at the workspace root (covers `artifacts/*`, `lib/*`), AND a separate `npm install` inside `.migration-backup/` — it is deliberately excluded from `pnpm-workspace.yaml`'s `packages:` list and uses its own npm-based scripts (`./node_modules/.bin/tsx`, `./node_modules/.bin/vite`), so pnpm install alone leaves it broken (`sh: tsx: No such file or directory`).
+- No artifact is registered for this project (`listArtifacts()` returns empty, confirmed again on a later import) — screenshot via `externalUrl` on the repl's dev domain root, not the `appPreview` source (which requires a registered artifactDirName).
+
 ## Artifact wiring
 - The `numatik` web artifact serves from `.migration-backup/` (not a fresh `artifacts/` dir) via the manually-configured `Numatik Web` workflow (`PORT=3001`). This is the one that actually works for previews/screenshots.
 - The system periodically auto-re-registers duplicate workflows (`artifacts/numatik: web`, `Numatik API Server`, `artifacts/api-server: API Server`) that collide on the same ports and fail (`EADDRINUSE` / "Port already in use"). This is a recurring, harmless-so-far environment quirk — `Numatik Web` keeps running fine regardless. Not something the user has asked to fix; leave alone unless it starts affecting the working workflow.
