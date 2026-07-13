@@ -580,7 +580,7 @@ const SC_3D = {
   BR: { grad:"sc-g3d-BR", fx: SC_SR*0.22, fy: SC_SR*0.28, c0:"#f0fdf4", c1:"#4ade80", c2:"#052e16" },
 } as const;
 
-const SphereFruitCutAnimation = () => {
+const SphereFruitCutAnimation = ({ language }: { language: Language }) => {
   const [phase,    setPhase]    = useState<"idle"|"running"|"done">("idle");
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number|null>(null);
@@ -740,7 +740,7 @@ const SphereFruitCutAnimation = () => {
             {phase === "idle" && (
               <text x={SC_SCX} y={SC_SCY + SC_SR + 20}
                 fill="#c4b5fd" fontSize="8.5" fontFamily="monospace" textAnchor="middle">
-                Bola 3D — tekan tombol untuk memotong
+                {language === "id" ? "Bola 3D — tekan tombol untuk memotong" : language === "en" ? "3D Sphere — press the button to cut" : "3D球体 — ボタンを押して切断"}
               </text>
             )}
           </g>
@@ -846,13 +846,13 @@ const SphereFruitCutAnimation = () => {
             color:"#4ade80", fontSize:12, fontWeight:"bold",
             cursor: phase !== "idle" ? "not-allowed" : "pointer",
             opacity: phase !== "idle" ? .35 : 1, fontFamily:"inherit", transition:"opacity .2s" }}>
-          🍊 Potong Bola 3D → 4 Lingkaran
+          {language === "id" ? "🍊 Potong Bola 3D → 4 Lingkaran" : language === "en" ? "🍊 Cut 3D Sphere → 4 Circles" : "🍊 3D球を切る → 4つの円"}
         </button>
         <button onClick={doReset}
           style={{ padding:"6px 18px", borderRadius:8, border:"1px solid #475569",
             background:"transparent", color:"#94a3b8", fontSize:12, fontWeight:"bold",
             cursor:"pointer", fontFamily:"inherit" }}>
-          ↺ Reset
+          {language === "id" ? "↺ Reset" : language === "en" ? "↺ Reset" : "↺ リセット"}
         </button>
       </div>
     </div>
@@ -925,7 +925,7 @@ const VolumeBolaSVG = () => (
 /* ─────────────────────────────────────────────────────────────
    VOLUME BOLA — animated water-fill visualization
 ───────────────────────────────────────────────────────────── */
-const WaterBolaAnimation = () => {
+const WaterBolaAnimation = ({ language }: { language: Language }) => {
   const [fill, setFill] = useState(0);
   const [wave, setWave] = useState(0);
 
@@ -975,7 +975,7 @@ const WaterBolaAnimation = () => {
 
   return (
     <svg viewBox="0 0 280 235" className="w-full max-w-sm mx-auto my-2"
-      aria-label="Animasi bola diisi air">
+      aria-label={language === "id" ? "Animasi bola diisi air" : language === "en" ? "Animation of a sphere filling with water" : "球体に水が満たされるアニメーション"}>
       <defs>
         <clipPath id="sphereClipWater">
           <circle cx={CX} cy={CY} r={R}/>
@@ -1079,7 +1079,11 @@ const WaterBolaAnimation = () => {
         fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
         fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle"
         filter="url(#wBloomB)">
-        {isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`}
+        {isFull
+          ? (language === "id" ? "🌊 Penuh!" : language === "en" ? "🌊 Full!" : "🌊 満水！")
+          : isEmpty
+          ? (language === "id" ? "⬛ Kosong" : language === "en" ? "⬛ Empty" : "⬛ 空")
+          : (language === "id" ? `🔵 Mengisi... ${pct}%` : language === "en" ? `🔵 Filling... ${pct}%` : `🔵 注入中... ${pct}%`)}
       </text>
       <text x={CX} y={CY + R + 38}
         fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
@@ -1584,7 +1588,7 @@ function getSections(language: Language): Sec[] {
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
         <p>{s3.intro}</p>
-        <SphereFruitCutAnimation />
+        <SphereFruitCutAnimation language={language} />
         <div className="bg-orange-950/60 border border-orange-700/50 rounded-lg p-4 space-y-3">
           <p className="text-orange-300 font-semibold">{s3.derivationTitle}</p>
           <div className="text-xs text-white/70 space-y-1">
@@ -1614,7 +1618,7 @@ function getSections(language: Language): Sec[] {
         <p>{s4.intro}</p>
         <div className="bg-slate-900/70 border border-violet-700/40 rounded-xl p-3">
           <p className="text-violet-300 font-semibold text-xs text-center mb-2 font-body">{s4.waterAnimTitle}</p>
-          <WaterBolaAnimation />
+          <WaterBolaAnimation language={language} />
           <p className="text-white/45 text-[10px] text-center font-body mt-1">{s4.waterAnimCaption}</p>
         </div>
         <div className="bg-blue-950/60 border border-blue-700/50 rounded-lg p-4 space-y-3">
@@ -1676,12 +1680,28 @@ function getSections(language: Language): Sec[] {
 ───────────────────────────────────────────────────────────── */
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
 
-const unsurExamples: Ex[] = [
+const levelLabels: Record<string, Record<Language, string>> = {
+  MUDAH:  { id: "MUDAH",  en: "EASY",   ja: "基本" },
+  SEDANG: { id: "SEDANG", en: "MEDIUM", ja: "標準" },
+  SULIT:  { id: "SULIT",  en: "HARD",   ja: "発展" },
+};
+function levelLabel(level: string, language: Language): string {
+  return levelLabels[level]?.[language] ?? level;
+}
+
+function getUnsurExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
-        <p>Perhatikan gambar bola berikut. Jari-jari bola adalah <strong className="text-yellow-300">10 cm</strong>.</p>
+        {language === "id" ? (
+          <p>Perhatikan gambar bola berikut. Jari-jari bola adalah <strong className="text-yellow-300">10 cm</strong>.</p>
+        ) : language === "en" ? (
+          <p>Look at the sphere below. The sphere's radius is <strong className="text-yellow-300">10 cm</strong>.</p>
+        ) : (
+          <p>下の球を見てください。球の半径は<strong className="text-yellow-300">10 cm</strong>です。</p>
+        )}
         <svg viewBox="0 0 200 200" className="w-44 h-44 mx-auto block">
           <defs>
             <radialGradient id="uq1grad" cx="38%" cy="35%" r="60%">
@@ -1696,40 +1716,60 @@ const unsurExamples: Ex[] = [
           <text x="130" y="95" fill="#f97316" fontSize="12" fontWeight="bold">r = 10 cm</text>
           <text x="95" y="116" fill="#f97316" fontSize="10">O</text>
         </svg>
-        <p>Tentukan:</p>
+        <p>{language === "id" ? "Tentukan:" : language === "en" ? "Determine:" : "次を求めなさい："}</p>
         <ul className="list-none space-y-1 text-sm text-white/80 pl-2">
-          <li>a) Panjang diameter bola</li>
-          <li>b) Berapa jumlah sisi bola?</li>
-          <li>c) Berapa jumlah rusuk bola?</li>
-          <li>d) Berapa jumlah titik sudut bola?</li>
+          {language === "id" ? (
+            <>
+              <li>a) Panjang diameter bola</li>
+              <li>b) Berapa jumlah sisi bola?</li>
+              <li>c) Berapa jumlah rusuk bola?</li>
+              <li>d) Berapa jumlah titik sudut bola?</li>
+            </>
+          ) : language === "en" ? (
+            <>
+              <li>a) The length of the sphere's diameter</li>
+              <li>b) How many faces does the sphere have?</li>
+              <li>c) How many edges does the sphere have?</li>
+              <li>d) How many vertices does the sphere have?</li>
+            </>
+          ) : (
+            <>
+              <li>a) 球の直径の長さ</li>
+              <li>b) 球の面はいくつありますか？</li>
+              <li>c) 球の辺はいくつありますか？</li>
+              <li>d) 球の頂点はいくつありますか？</li>
+            </>
+          )}
         </ul>
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-green-400 font-semibold">(a) Diameter:</p>
+        <p className="text-green-400 font-semibold">{language === "id" ? "(a) Diameter:" : language === "en" ? "(a) Diameter:" : "(a) 直径："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="d = 2r = 2 \times 10 = 20 \text{ cm}" />
         </div>
         <div className="grid grid-cols-3 gap-2 text-xs text-center">
           <div className="bg-green-950/50 border border-green-700/40 rounded p-2 space-y-1">
             <p className="text-green-300 font-bold text-base">1</p>
-            <p className="text-white/70">(b) Sisi</p>
-            <p className="text-white/40 text-[10px]">sisi lengkung</p>
+            <p className="text-white/70">{language === "id" ? "(b) Sisi" : language === "en" ? "(b) Faces" : "(b) 面"}</p>
+            <p className="text-white/40 text-[10px]">{language === "id" ? "sisi lengkung" : language === "en" ? "curved face" : "曲面"}</p>
           </div>
           <div className="bg-slate-900/50 border border-slate-600/40 rounded p-2 space-y-1">
             <p className="text-white/40 font-bold text-base">0</p>
-            <p className="text-white/70">(c) Rusuk</p>
-            <p className="text-white/40 text-[10px]">tidak ada</p>
+            <p className="text-white/70">{language === "id" ? "(c) Rusuk" : language === "en" ? "(c) Edges" : "(c) 辺"}</p>
+            <p className="text-white/40 text-[10px]">{language === "id" ? "tidak ada" : language === "en" ? "none" : "なし"}</p>
           </div>
           <div className="bg-slate-900/50 border border-slate-600/40 rounded p-2 space-y-1">
             <p className="text-white/40 font-bold text-base">0</p>
-            <p className="text-white/70">(d) Titik Sudut</p>
-            <p className="text-white/40 text-[10px]">tidak ada</p>
+            <p className="text-white/70">{language === "id" ? "(d) Titik Sudut" : language === "en" ? "(d) Vertices" : "(d) 頂点"}</p>
+            <p className="text-white/40 text-[10px]">{language === "id" ? "tidak ada" : language === "en" ? "none" : "なし"}</p>
           </div>
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-2 text-xs">
-          <p className="text-green-300 font-semibold">✅ d = 20 cm · Sisi = 1 · Rusuk = 0 · Titik Sudut = 0</p>
+          <p className="text-green-300 font-semibold">
+            {language === "id" ? "✅ d = 20 cm · Sisi = 1 · Rusuk = 0 · Titik Sudut = 0" : language === "en" ? "✅ d = 20 cm · Faces = 1 · Edges = 0 · Vertices = 0" : "✅ d = 20 cm · 面 = 1 · 辺 = 0 · 頂点 = 0"}
+          </p>
         </div>
       </div>
     ),
@@ -1738,7 +1778,13 @@ const unsurExamples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
-        <p>Sebuah bola berdiameter <strong className="text-yellow-300">42 cm</strong> dipotong tepat melalui titik pusatnya sehingga terbentuk dua belahan bola (hemisphere).</p>
+        {language === "id" ? (
+          <p>Sebuah bola berdiameter <strong className="text-yellow-300">42 cm</strong> dipotong tepat melalui titik pusatnya sehingga terbentuk dua belahan bola (hemisphere).</p>
+        ) : language === "en" ? (
+          <p>A sphere with a diameter of <strong className="text-yellow-300">42 cm</strong> is cut exactly through its center, forming two hemispheres.</p>
+        ) : (
+          <p>直径<strong className="text-yellow-300">42 cm</strong>の球を、中心を通るようにちょうど半分に切り、2つの半球を作ります。</p>
+        )}
         <svg viewBox="0 0 220 160" className="w-52 h-40 mx-auto block">
           <defs>
             <radialGradient id="uq2grad" cx="38%" cy="30%" r="60%">
@@ -1758,31 +1804,59 @@ const unsurExamples: Ex[] = [
           <line x1="110" y1="90" x2="110" y2="25" stroke="#f97316" strokeWidth="1.5"/>
           <text x="113" y="60" fill="#f97316" fontSize="10">r = ?</text>
         </svg>
-        <p>Tentukan:</p>
+        <p>{language === "id" ? "Tentukan:" : language === "en" ? "Determine:" : "次を求めなさい："}</p>
         <ul className="list-none space-y-1 text-sm text-white/80 pl-2">
-          <li>a) Jari-jari belahan bola</li>
-          <li>b) Panjang garis tengah alas lingkaran belahan bola</li>
-          <li>c) Berapa jumlah sisi datar yang dimiliki belahan bola?</li>
+          {language === "id" ? (
+            <>
+              <li>a) Jari-jari belahan bola</li>
+              <li>b) Panjang garis tengah alas lingkaran belahan bola</li>
+              <li>c) Berapa jumlah sisi datar yang dimiliki belahan bola?</li>
+            </>
+          ) : language === "en" ? (
+            <>
+              <li>a) The radius of the hemisphere</li>
+              <li>b) The diameter of the hemisphere's circular base</li>
+              <li>c) How many flat faces does the hemisphere have?</li>
+            </>
+          ) : (
+            <>
+              <li>a) 半球の半径</li>
+              <li>b) 半球の底面である円の直径</li>
+              <li>c) 半球には平らな面がいくつありますか？</li>
+            </>
+          )}
         </ul>
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">(a) Jari-jari belahan bola:</p>
+        <p className="text-yellow-400 font-semibold">{language === "id" ? "(a) Jari-jari belahan bola:" : language === "en" ? "(a) Radius of the hemisphere:" : "(a) 半球の半径："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="r = \frac{d}{2} = \frac{42}{2} = 21 \text{ cm}" />
         </div>
-        <p className="text-yellow-400 font-semibold">(b) Garis tengah alas lingkaran:</p>
+        <p className="text-yellow-400 font-semibold">{language === "id" ? "(b) Garis tengah alas lingkaran:" : language === "en" ? "(b) Diameter of the circular base:" : "(b) 底面の円の直径："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <p className="text-white/70">Alas belahan bola berupa lingkaran dengan jari-jari = r bola.</p>
-          <BlockMath math="d_{\text{alas}} = 2r = 2 \times 21 = 42 \text{ cm}" />
+          <p className="text-white/70">
+            {language === "id" ? "Alas belahan bola berupa lingkaran dengan jari-jari = r bola." : language === "en" ? "The base of the hemisphere is a circle whose radius equals the sphere's radius." : "半球の底面は、球の半径と同じ半径を持つ円です。"}
+          </p>
+          <BlockMath math="d_a = 2r = 2 \times 21 = 42 \text{ cm}" />
         </div>
-        <p className="text-yellow-400 font-semibold">(c) Jumlah sisi datar:</p>
+        <p className="text-yellow-400 font-semibold">{language === "id" ? "(c) Jumlah sisi datar:" : language === "en" ? "(c) Number of flat faces:" : "(c) 平らな面の数："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <p className="text-white/70">Belahan bola memiliki <strong className="text-cyan-300">1 sisi datar</strong> (berupa lingkaran di alasnya) dan <strong className="text-cyan-300">1 sisi lengkung</strong> di bagian atas.</p>
+          <p className="text-white/70">
+            {language === "id" ? (
+              <>Belahan bola memiliki <strong className="text-cyan-300">1 sisi datar</strong> (berupa lingkaran di alasnya) dan <strong className="text-cyan-300">1 sisi lengkung</strong> di bagian atas.</>
+            ) : language === "en" ? (
+              <>The hemisphere has <strong className="text-cyan-300">1 flat face</strong> (the circle at its base) and <strong className="text-cyan-300">1 curved face</strong> on top.</>
+            ) : (
+              <>半球には、底面に<strong className="text-cyan-300">1つの平らな面</strong>（円）と、上部に<strong className="text-cyan-300">1つの曲面</strong>があります。</>
+            )}
+          </p>
         </div>
         <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs">
-          <p className="text-yellow-300 font-semibold">✅ r = 21 cm · d alas = 42 cm · Sisi datar = 1 lingkaran</p>
+          <p className="text-yellow-300 font-semibold">
+            {language === "id" ? "✅ r = 21 cm · d alas = 42 cm · Sisi datar = 1 lingkaran" : language === "en" ? "✅ r = 21 cm · Base diameter = 42 cm · Flat faces = 1 circle" : "✅ r = 21 cm · 底面の直径 = 42 cm · 平らな面 = 円1つ"}
+          </p>
         </div>
       </div>
     ),
@@ -1791,7 +1865,7 @@ const unsurExamples: Ex[] = [
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
-        <p>Perhatikan gambar bola berikut.</p>
+        <p>{language === "id" ? "Perhatikan gambar bola berikut." : language === "en" ? "Look at the sphere below." : "下の球を見てください。"}</p>
         <svg viewBox="0 0 240 200" className="w-56 h-48 mx-auto block">
           <defs>
             <radialGradient id="uq3grad" cx="38%" cy="35%" r="60%">
@@ -1816,56 +1890,138 @@ const unsurExamples: Ex[] = [
           <text x="179" y="156" fill="#60a5fa" fontSize="10">D</text>
           <text x="78" y="90" fill="#f97316" fontSize="10" fontStyle="italic">50 cm</text>
         </svg>
-        <p>Garis <strong className="text-orange-300">AB</strong> melewati pusat O dengan panjang <strong className="text-yellow-300">50 cm</strong>. Garis <strong className="text-purple-300">OC</strong> dan garis <strong className="text-blue-300">OD</strong> memiliki arah yang berbeda, masing-masing dari pusat ke permukaan bola.</p>
-        <p>Tentukan:</p>
+        {language === "id" ? (
+          <p>Garis <strong className="text-orange-300">AB</strong> melewati pusat O dengan panjang <strong className="text-yellow-300">50 cm</strong>. Garis <strong className="text-purple-300">OC</strong> dan garis <strong className="text-blue-300">OD</strong> memiliki arah yang berbeda, masing-masing dari pusat ke permukaan bola.</p>
+        ) : language === "en" ? (
+          <p>Line <strong className="text-orange-300">AB</strong> passes through center O with a length of <strong className="text-yellow-300">50 cm</strong>. Lines <strong className="text-purple-300">OC</strong> and <strong className="text-blue-300">OD</strong> point in different directions, each running from the center to the sphere's surface.</p>
+        ) : (
+          <p>線分<strong className="text-orange-300">AB</strong>は中心Oを通り、長さは<strong className="text-yellow-300">50 cm</strong>です。線分<strong className="text-purple-300">OC</strong>と<strong className="text-blue-300">OD</strong>はそれぞれ異なる方向を向いており、中心から球の表面までを結んでいます。</p>
+        )}
+        <p>{language === "id" ? "Tentukan:" : language === "en" ? "Determine:" : "次を求めなさい："}</p>
         <ul className="list-none space-y-1 text-sm text-white/80 pl-2">
-          <li>a) Nama unsur bola yang diwakili garis AB</li>
-          <li>b) Nama unsur bola yang diwakili garis OC dan OD</li>
-          <li>c) Panjang OC dan OD</li>
-          <li>d) Apakah OC = OD? Jelaskan!</li>
+          {language === "id" ? (
+            <>
+              <li>a) Nama unsur bola yang diwakili garis AB</li>
+              <li>b) Nama unsur bola yang diwakili garis OC dan OD</li>
+              <li>c) Panjang OC dan OD</li>
+              <li>d) Apakah OC = OD? Jelaskan!</li>
+            </>
+          ) : language === "en" ? (
+            <>
+              <li>a) The name of the sphere element represented by line AB</li>
+              <li>b) The name of the sphere element represented by lines OC and OD</li>
+              <li>c) The length of OC and OD</li>
+              <li>d) Is OC = OD? Explain!</li>
+            </>
+          ) : (
+            <>
+              <li>a) 線分ABが表す球の要素の名前</li>
+              <li>b) 線分OCとODが表す球の要素の名前</li>
+              <li>c) OCとODの長さ</li>
+              <li>d) OC = ODですか？説明しなさい！</li>
+            </>
+          )}
         </ul>
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">(a) Garis AB:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "(a) Garis AB:" : language === "en" ? "(a) Line AB:" : "(a) 線分AB："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <p className="text-white/80">Garis AB menghubungkan dua titik di permukaan bola dan <strong className="text-yellow-300">melewati pusat O</strong>.</p>
-          <p className="text-cyan-300 mt-1">→ Garis AB adalah <strong>Diameter (d)</strong> bola.</p>
+          <p className="text-white/80">
+            {language === "id" ? (
+              <>Garis AB menghubungkan dua titik di permukaan bola dan <strong className="text-yellow-300">melewati pusat O</strong>.</>
+            ) : language === "en" ? (
+              <>Line AB connects two points on the sphere's surface and <strong className="text-yellow-300">passes through center O</strong>.</>
+            ) : (
+              <>線分ABは球の表面上の2点を結び、<strong className="text-yellow-300">中心Oを通ります</strong>。</>
+            )}
+          </p>
+          <p className="text-cyan-300 mt-1">
+            {language === "id" ? <>→ Garis AB adalah <strong>Diameter (d)</strong> bola.</> : language === "en" ? <>→ Line AB is the sphere's <strong>Diameter (d)</strong>.</> : <>→ 線分ABは球の<strong>直径（d）</strong>です。</>}
+          </p>
         </div>
-        <p className="text-red-400 font-semibold">(b) Garis OC dan OD:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "(b) Garis OC dan OD:" : language === "en" ? "(b) Lines OC and OD:" : "(b) 線分OCとOD："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <p className="text-white/80">Garis OC dan OD menghubungkan <strong className="text-yellow-300">pusat O ke titik di permukaan bola</strong>.</p>
-          <p className="text-cyan-300 mt-1">→ Garis OC dan OD adalah <strong>Jari-jari (r)</strong> bola.</p>
+          <p className="text-white/80">
+            {language === "id" ? (
+              <>Garis OC dan OD menghubungkan <strong className="text-yellow-300">pusat O ke titik di permukaan bola</strong>.</>
+            ) : language === "en" ? (
+              <>Lines OC and OD connect <strong className="text-yellow-300">center O to a point on the sphere's surface</strong>.</>
+            ) : (
+              <>線分OCとODは、<strong className="text-yellow-300">中心Oから球の表面上の点</strong>を結びます。</>
+            )}
+          </p>
+          <p className="text-cyan-300 mt-1">
+            {language === "id" ? <>→ Garis OC dan OD adalah <strong>Jari-jari (r)</strong> bola.</> : language === "en" ? <>→ Lines OC and OD are the sphere's <strong>Radius (r)</strong>.</> : <>→ 線分OCとODは球の<strong>半径（r）</strong>です。</>}
+          </p>
         </div>
-        <p className="text-red-400 font-semibold">(c) Panjang OC dan OD:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "(c) Panjang OC dan OD:" : language === "en" ? "(c) Length of OC and OD:" : "(c) OCとODの長さ："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="r = \frac{d}{2} = \frac{50}{2} = 25 \text{ cm}" />
           <p className="text-cyan-300">OC = OD = <strong>25 cm</strong></p>
         </div>
-        <p className="text-red-400 font-semibold">(d) Apakah OC = OD?</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "(d) Apakah OC = OD?" : language === "en" ? "(d) Is OC = OD?" : "(d) OC = ODですか？"}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <p className="text-white/80"><strong className="text-green-300">Ya, OC = OD</strong> meskipun arahnya berbeda.</p>
-          <p className="text-white/70 mt-1">Karena <strong className="text-yellow-300">semua jari-jari bola panjangnya sama</strong> — itulah sifat utama bola: setiap titik di permukaannya berjarak sama (= r) dari pusat O.</p>
+          <p className="text-white/80">
+            {language === "id" ? <><strong className="text-green-300">Ya, OC = OD</strong> meskipun arahnya berbeda.</> : language === "en" ? <><strong className="text-green-300">Yes, OC = OD</strong> even though their directions differ.</> : <>はい、方向は異なりますが<strong className="text-green-300">OC = OD</strong>です。</>}
+          </p>
+          <p className="text-white/70 mt-1">
+            {language === "id" ? (
+              <>Karena <strong className="text-yellow-300">semua jari-jari bola panjangnya sama</strong> — itulah sifat utama bola: setiap titik di permukaannya berjarak sama (= r) dari pusat O.</>
+            ) : language === "en" ? (
+              <>Because <strong className="text-yellow-300">all radii of a sphere have the same length</strong> — this is the sphere's key property: every point on its surface is the same distance (= r) from center O.</>
+            ) : (
+              <>なぜなら、<strong className="text-yellow-300">球のすべての半径は同じ長さ</strong>だからです — これが球の重要な性質で、表面上のすべての点は中心Oから同じ距離（= r）にあります。</>
+            )}
+          </p>
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• AB = Diameter = <strong className="text-yellow-300">50 cm</strong></p>
-          <p className="text-white/80">• OC, OD = Jari-jari = <strong className="text-yellow-300">25 cm</strong></p>
-          <p className="text-white/80">• OC = OD karena semua jari-jari bola <strong className="text-cyan-300">selalu sama panjang</strong></p>
+          <p className="text-red-300 font-semibold">{language === "id" ? "✅ Jawaban:" : language === "en" ? "✅ Answer:" : "✅ 答え："}</p>
+          <p className="text-white/80">
+            {language === "id" ? <>• AB = Diameter = <strong className="text-yellow-300">50 cm</strong></> : language === "en" ? <>• AB = Diameter = <strong className="text-yellow-300">50 cm</strong></> : <>• AB = 直径 = <strong className="text-yellow-300">50 cm</strong></>}
+          </p>
+          <p className="text-white/80">
+            {language === "id" ? <>• OC, OD = Jari-jari = <strong className="text-yellow-300">25 cm</strong></> : language === "en" ? <>• OC, OD = Radius = <strong className="text-yellow-300">25 cm</strong></> : <>• OC, OD = 半径 = <strong className="text-yellow-300">25 cm</strong></>}
+          </p>
+          <p className="text-white/80">
+            {language === "id" ? (
+              <>• OC = OD karena semua jari-jari bola <strong className="text-cyan-300">selalu sama panjang</strong></>
+            ) : language === "en" ? (
+              <>• OC = OD because all radii of a sphere are <strong className="text-cyan-300">always the same length</strong></>
+            ) : (
+              <>• 球のすべての半径は<strong className="text-cyan-300">常に同じ長さ</strong>なので OC = OD</>
+            )}
+          </p>
         </div>
       </div>
     ),
   },
-];
+  ];
+}
 
-const luasExamples: Ex[] = [
+function getLuasExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah bola basket memiliki jari-jari <InlineMath math="12 \text{ cm}" />.</p>
-        <p>Hitung luas permukaan bola tersebut! (Gunakan <InlineMath math="\pi = 3{,}14" />)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah bola basket memiliki jari-jari <InlineMath math="12 \text{ cm}" />.</p>
+            <p>Hitung luas permukaan bola tersebut! (Gunakan <InlineMath math="\pi = 3{,}14" />)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A basketball has a radius of <InlineMath math="12 \text{ cm}" />.</p>
+            <p>Calculate the surface area of the ball! (Use <InlineMath math="\pi = 3{,}14" />)</p>
+          </>
+        ) : (
+          <>
+            <p>バスケットボールの半径は<InlineMath math="12 \text{ cm}" />です。</p>
+            <p>このボールの表面積を求めなさい！（<InlineMath math="\pi = 3{,}14" />を使用）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
@@ -1874,7 +2030,10 @@ const luasExamples: Ex[] = [
           <BlockMath math="L = 4\pi r^2 = 4 \times 3{,}14 \times 12^2 = 4 \times 3{,}14 \times 144 = 1.808{,}64 \text{ cm}^2" />
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-          <p className="text-green-300 font-semibold text-xs">✅ Luas permukaan = <InlineMath math="1.808{,}64 \text{ cm}^2" /></p>
+          <p className="text-green-300 font-semibold text-xs">
+            {language === "id" ? "✅ Luas permukaan = " : language === "en" ? "✅ Surface area = " : "✅ 表面積 = "}
+            <InlineMath math="1.808{,}64 \text{ cm}^2" />
+          </p>
         </div>
       </div>
     ),
@@ -1883,22 +2042,36 @@ const luasExamples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Luas permukaan sebuah bola adalah <InlineMath math="1.386 \text{ cm}^2" />.</p>
-        <p>Tentukan: (a) jari-jari bola, (b) diameter, (c) volume bola. (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        {language === "id" ? (
+          <>
+            <p>Luas permukaan sebuah bola adalah <InlineMath math="1.386 \text{ cm}^2" />.</p>
+            <p>Tentukan: (a) jari-jari bola, (b) diameter, (c) volume bola. (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>The surface area of a sphere is <InlineMath math="1.386 \text{ cm}^2" />.</p>
+            <p>Determine: (a) the sphere's radius, (b) diameter, (c) volume. (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : (
+          <>
+            <p>球の表面積は<InlineMath math="1.386 \text{ cm}^2" />です。</p>
+            <p>次を求めなさい：（a）球の半径、（b）直径、（c）体積。（<InlineMath math="\pi = \frac{22}{7}" />を使用）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">(a) Jari-jari:</p>
+        <p className="text-yellow-400 font-semibold">{language === "id" ? "(a) Jari-jari:" : language === "en" ? "(a) Radius:" : "(a) 半径："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="4\pi r^2 = 1.386 \Rightarrow 4 \times \frac{22}{7} \times r^2 = 1.386" />
           <BlockMath math="r^2 = \frac{1.386 \times 7}{4 \times 22} = \frac{9.702}{88} = 110{,}25 \Rightarrow r = 10{,}5 \text{ cm}" />
         </div>
-        <p className="text-yellow-400 font-semibold">(b) Diameter:</p>
+        <p className="text-yellow-400 font-semibold">{language === "id" ? "(b) Diameter:" : language === "en" ? "(b) Diameter:" : "(b) 直径："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="d = 2r = 2 \times 10{,}5 = 21 \text{ cm}" />
         </div>
-        <p className="text-yellow-400 font-semibold">(c) Volume:</p>
+        <p className="text-yellow-400 font-semibold">{language === "id" ? "(c) Volume:" : language === "en" ? "(c) Volume:" : "(c) 体積："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="V = \frac{4}{3}\pi r^3 = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3" />
           <BlockMath math="= \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = \frac{4 \times 22 \times 1.157{,}625}{21} = \frac{101.871}{21} = 4.851 \text{ cm}^3" />
@@ -1913,7 +2086,13 @@ const luasExamples: Ex[] = [
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-3">
-        <p>Sebuah kubah masjid berbentuk <strong className="text-yellow-300">setengah bola</strong> dengan diameter <strong className="text-yellow-300">14 m</strong>. Seluruh permukaan luar kubah (sisi lengkung saja) akan dicat.</p>
+        {language === "id" ? (
+          <p>Sebuah kubah masjid berbentuk <strong className="text-yellow-300">setengah bola</strong> dengan diameter <strong className="text-yellow-300">14 m</strong>. Seluruh permukaan luar kubah (sisi lengkung saja) akan dicat.</p>
+        ) : language === "en" ? (
+          <p>A mosque dome is shaped like a <strong className="text-yellow-300">hemisphere</strong> with a diameter of <strong className="text-yellow-300">14 m</strong>. The entire outer surface of the dome (the curved side only) will be painted.</p>
+        ) : (
+          <p>モスクのドームは<strong className="text-yellow-300">半球</strong>の形をしており、直径は<strong className="text-yellow-300">14 m</strong>です。ドームの外側全体（曲面のみ）にペンキを塗ります。</p>
+        )}
         <svg viewBox="0 0 240 180" className="w-56 h-44 mx-auto block">
           <defs>
             <radialGradient id="domeGrad" cx="40%" cy="30%" r="65%">
@@ -1938,57 +2117,131 @@ const luasExamples: Ex[] = [
           <rect x="100" y="120" width="40" height="38" rx="2" fill="#0f172a" stroke="#475569" strokeWidth="1"/>
         </svg>
         <div className="bg-slate-800/50 border border-slate-600/40 rounded-lg p-3 text-xs space-y-1 text-white/70">
-          <p>📋 <strong className="text-white/90">Informasi:</strong></p>
-          <p>• 1 kaleng cat dapat mengecat <strong className="text-cyan-300">4 m²</strong></p>
-          <p>• Harga 1 kaleng cat = <strong className="text-yellow-300">Rp 250.000</strong></p>
+          {language === "id" ? (
+            <>
+              <p>📋 <strong className="text-white/90">Informasi:</strong></p>
+              <p>• 1 kaleng cat dapat mengecat <strong className="text-cyan-300">4 m²</strong></p>
+              <p>• Harga 1 kaleng cat = <strong className="text-yellow-300">Rp 250.000</strong></p>
+            </>
+          ) : language === "en" ? (
+            <>
+              <p>📋 <strong className="text-white/90">Information:</strong></p>
+              <p>• 1 can of paint covers <strong className="text-cyan-300">4 m²</strong></p>
+              <p>• Price of 1 can of paint = <strong className="text-yellow-300">$250.000</strong></p>
+            </>
+          ) : (
+            <>
+              <p>📋 <strong className="text-white/90">情報：</strong></p>
+              <p>• ペンキ1缶で<strong className="text-cyan-300">4 m²</strong>塗れる</p>
+              <p>• ペンキ1缶の価格 = <strong className="text-yellow-300">$250.000</strong></p>
+            </>
+          )}
         </div>
-        <p>Tentukan:</p>
+        <p>{language === "id" ? "Tentukan:" : language === "en" ? "Determine:" : "次を求めなさい："}</p>
         <ul className="list-none space-y-1 text-sm text-white/80 pl-2">
-          <li>a) Luas permukaan luar kubah yang dicat</li>
-          <li>b) Jumlah kaleng cat yang dibutuhkan</li>
-          <li>c) Total biaya pengecatan</li>
+          {language === "id" ? (
+            <>
+              <li>a) Luas permukaan luar kubah yang dicat</li>
+              <li>b) Jumlah kaleng cat yang dibutuhkan</li>
+              <li>c) Total biaya pengecatan</li>
+            </>
+          ) : language === "en" ? (
+            <>
+              <li>a) The painted outer surface area of the dome</li>
+              <li>b) The number of paint cans needed</li>
+              <li>c) The total painting cost</li>
+            </>
+          ) : (
+            <>
+              <li>a) 塗装するドーム外側の曲面の面積</li>
+              <li>b) 必要なペンキの缶数</li>
+              <li>c) 塗装費用の合計</li>
+            </>
+          )}
         </ul>
-        <p className="text-xs text-white/50">(Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        <p className="text-xs text-white/50">
+          {language === "id" ? <>(Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</> : language === "en" ? <>(Use <InlineMath math="\pi = \frac{22}{7}" />)</> : <>（<InlineMath math="\pi = \frac{22}{7}" />を使用）</>}
+        </p>
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Tentukan jari-jari:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "Langkah 1 — Tentukan jari-jari:" : language === "en" ? "Step 1 — Determine the radius:" : "ステップ1 — 半径を求める："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="r = \frac{d}{2} = \frac{14}{2} = 7 \text{ m}" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Luas sisi lengkung setengah bola (bagian yang dicat):</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 2 — Luas sisi lengkung setengah bola (bagian yang dicat):" : language === "en" ? "Step 2 — Curved surface area of the hemisphere (the part being painted):" : "ステップ2 — 半球の曲面積（塗装される部分）："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p className="text-white/70">Hanya sisi lengkung, bukan alas (kubah menempel ke bangunan):</p>
-          <BlockMath math="L_{\text{lengkung}} = 2\pi r^2 = 2 \times \frac{22}{7} \times 7^2" />
+          <p className="text-white/70">
+            {language === "id" ? "Hanya sisi lengkung, bukan alas (kubah menempel ke bangunan):" : language === "en" ? "Only the curved side, not the base (the dome is attached to the building):" : "曲面のみで、底面は含まれません（ドームは建物に接しているため）："}
+          </p>
+          <BlockMath math="L_l = 2\pi r^2 = 2 \times \frac{22}{7} \times 7^2" />
           <BlockMath math="= 2 \times \frac{22}{7} \times 49 = 2 \times 22 \times 7 = 308 \text{ m}^2" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Jumlah kaleng cat:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "Langkah 3 — Jumlah kaleng cat:" : language === "en" ? "Step 3 — Number of paint cans:" : "ステップ3 — ペンキの缶数："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="\text{Kaleng} = \frac{L}{4} = \frac{308}{4} = 77 \text{ kaleng}" />
+          <BlockMath math="n = \frac{L}{4} = \frac{308}{4} = 77" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 4 — Total biaya:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "Langkah 4 — Total biaya:" : language === "en" ? "Step 4 — Total cost:" : "ステップ4 — 合計費用："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="\text{Biaya} = 77 \times 250.000 = Rp\,19.250.000" />
+          {language === "id" ? (
+            <BlockMath math="H = 77 \times 250.000 = Rp\,19.250.000" />
+          ) : (
+            <BlockMath math="H = 77 \times 250.000 = \$\,19.250.000" />
+          )}
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Luas kubah yang dicat = <strong className="text-yellow-300">308 m²</strong></p>
-          <p className="text-white/80">• Jumlah kaleng = <strong className="text-yellow-300">77 kaleng</strong></p>
-          <p className="text-white/80">• Total biaya = <strong className="text-yellow-300">Rp 19.250.000</strong></p>
+          <p className="text-red-300 font-semibold">{language === "id" ? "✅ Jawaban:" : language === "en" ? "✅ Answer:" : "✅ 答え："}</p>
+          {language === "id" ? (
+            <>
+              <p className="text-white/80">• Luas kubah yang dicat = <strong className="text-yellow-300">308 m²</strong></p>
+              <p className="text-white/80">• Jumlah kaleng = <strong className="text-yellow-300">77 kaleng</strong></p>
+              <p className="text-white/80">• Total biaya = <strong className="text-yellow-300">Rp 19.250.000</strong></p>
+            </>
+          ) : language === "en" ? (
+            <>
+              <p className="text-white/80">• Painted dome area = <strong className="text-yellow-300">308 m²</strong></p>
+              <p className="text-white/80">• Number of cans = <strong className="text-yellow-300">77 cans</strong></p>
+              <p className="text-white/80">• Total cost = <strong className="text-yellow-300">$19.250.000</strong></p>
+            </>
+          ) : (
+            <>
+              <p className="text-white/80">• 塗装するドームの面積 = <strong className="text-yellow-300">308 m²</strong></p>
+              <p className="text-white/80">• 缶の数 = <strong className="text-yellow-300">77缶</strong></p>
+              <p className="text-white/80">• 合計費用 = <strong className="text-yellow-300">$19.250.000</strong></p>
+            </>
+          )}
         </div>
       </div>
     ),
   },
-];
+  ];
+}
 
-const volExamples: Ex[] = [
+function getVolExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah bola plastik memiliki diameter <InlineMath math="21 \text{ cm}" />.</p>
-        <p>Hitung volume bola tersebut! (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah bola plastik memiliki diameter <InlineMath math="21 \text{ cm}" />.</p>
+            <p>Hitung volume bola tersebut! (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A plastic ball has a diameter of <InlineMath math="21 \text{ cm}" />.</p>
+            <p>Calculate the volume of the ball! (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : (
+          <>
+            <p>プラスチックボールの直径は<InlineMath math="21 \text{ cm}" />です。</p>
+            <p>このボールの体積を求めなさい！（<InlineMath math="\pi = \frac{22}{7}" />を使用）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
@@ -1999,7 +2252,10 @@ const volExamples: Ex[] = [
           <BlockMath math="= \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = 4.851 \text{ cm}^3" />
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-          <p className="text-green-300 font-semibold text-xs">✅ Volume = <InlineMath math="4.851 \text{ cm}^3" /></p>
+          <p className="text-green-300 font-semibold text-xs">
+            {language === "id" ? "✅ Volume = " : language === "en" ? "✅ Volume = " : "✅ 体積 = "}
+            <InlineMath math="4.851 \text{ cm}^3" />
+          </p>
         </div>
       </div>
     ),
@@ -2008,20 +2264,34 @@ const volExamples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Volume sebuah bola adalah <InlineMath math="38.808 \text{ cm}^3" />.</p>
-        <p>Tentukan: (a) jari-jari bola, (b) luas permukaan bola. (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        {language === "id" ? (
+          <>
+            <p>Volume sebuah bola adalah <InlineMath math="38.808 \text{ cm}^3" />.</p>
+            <p>Tentukan: (a) jari-jari bola, (b) luas permukaan bola. (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>The volume of a sphere is <InlineMath math="38.808 \text{ cm}^3" />.</p>
+            <p>Determine: (a) the sphere's radius, (b) surface area. (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : (
+          <>
+            <p>球の体積は<InlineMath math="38.808 \text{ cm}^3" />です。</p>
+            <p>次を求めなさい：（a）球の半径、（b）表面積。（<InlineMath math="\pi = \frac{22}{7}" />を使用）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">(a) Jari-jari dari volume:</p>
+        <p className="text-yellow-400 font-semibold">{language === "id" ? "(a) Jari-jari dari volume:" : language === "en" ? "(a) Radius from the volume:" : "(a) 体積から半径を求める："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
           <BlockMath math="\frac{4}{3}\pi r^3 = 38.808" />
           <BlockMath math="\frac{4}{3} \times \frac{22}{7} \times r^3 = 38.808" />
           <BlockMath math="\frac{88}{21} \times r^3 = 38.808 \Rightarrow r^3 = \frac{38.808 \times 21}{88} = \frac{814.968}{88} = 9.261" />
           <BlockMath math="r = \sqrt[3]{9.261} = 21 \text{ cm}" />
         </div>
-        <p className="text-yellow-400 font-semibold">(b) Luas permukaan:</p>
+        <p className="text-yellow-400 font-semibold">{language === "id" ? "(b) Luas permukaan:" : language === "en" ? "(b) Surface area:" : "(b) 表面積："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
           <BlockMath math="L = 4\pi r^2 = 4 \times \frac{22}{7} \times 21^2 = 4 \times \frac{22}{7} \times 441 = 4 \times 22 \times 63 = 5.544 \text{ cm}^2" />
         </div>
@@ -2035,57 +2305,94 @@ const volExamples: Ex[] = [
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah akuarium berbentuk tabung berdiameter <InlineMath math="42 \text{ cm}" /> dan tinggi <InlineMath math="60 \text{ cm}" /> diisi penuh air.</p>
-        <p>Kemudian dimasukkan sebuah bola padat berdiameter <InlineMath math="21 \text{ cm}" /> ke dalamnya.</p>
-        <p>Berapa cm air yang tumpah dari akuarium? (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah akuarium berbentuk tabung berdiameter <InlineMath math="42 \text{ cm}" /> dan tinggi <InlineMath math="60 \text{ cm}" /> diisi penuh air.</p>
+            <p>Kemudian dimasukkan sebuah bola padat berdiameter <InlineMath math="21 \text{ cm}" /> ke dalamnya.</p>
+            <p>Berapa cm³ air yang tumpah dari akuarium? (Gunakan <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A cylindrical aquarium with a diameter of <InlineMath math="42 \text{ cm}" /> and a height of <InlineMath math="60 \text{ cm}" /> is filled completely with water.</p>
+            <p>A solid ball with a diameter of <InlineMath math="21 \text{ cm}" /> is then placed into it.</p>
+            <p>How much water (in cm³) overflows from the aquarium? (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
+          </>
+        ) : (
+          <>
+            <p>直径<InlineMath math="42 \text{ cm}" />、高さ<InlineMath math="60 \text{ cm}" />の円柱形の水槽に、水がいっぱいに入っています。</p>
+            <p>そこへ直径<InlineMath math="21 \text{ cm}" />の中身の詰まったボールを入れます。</p>
+            <p>水槽からあふれる水の体積は何cm³ですか？（<InlineMath math="\pi = \frac{22}{7}" />を使用）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Volume bola:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "Langkah 1 — Volume bola:" : language === "en" ? "Step 1 — Volume of the ball:" : "ステップ1 — ボールの体積："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="r_{\text{bola}} = \frac{21}{2} = 10{,}5 \text{ cm}" />
-          <BlockMath math="V_{\text{bola}} = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3 = \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = 4.851 \text{ cm}^3" />
+          <BlockMath math="r_b = \frac{21}{2} = 10{,}5 \text{ cm}" />
+          <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3 = \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = 4.851 \text{ cm}^3" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Volume tabung akuarium:</p>
+        <p className="text-red-400 font-semibold">{language === "id" ? "Langkah 2 — Volume tabung akuarium:" : language === "en" ? "Step 2 — Volume of the cylindrical aquarium:" : "ステップ2 — 円柱形水槽の体積："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="r_{\text{tab}} = 21 \text{ cm}, \quad V_{\text{tab}} = \pi r^2 t = \frac{22}{7} \times 441 \times 60 = 83.160 \text{ cm}^3" />
+          <BlockMath math="r_{tb} = 21 \text{ cm}, \quad V_{tb} = \pi r^2 t = \frac{22}{7} \times 441 \times 60 = 83.160 \text{ cm}^3" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Air yang tumpah = Volume bola (akuarium penuh):</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 3 — Air yang tumpah = Volume bola (akuarium penuh):" : language === "en" ? "Step 3 — Overflowed water = Volume of the ball (aquarium already full):" : "ステップ3 — あふれた水 = ボールの体積（水槽はすでに満水）："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="V_{\text{tumpah}} = V_{\text{bola}} = 4.851 \text{ cm}^3" />
-          <p className="text-white/60 mt-1">Karena akuarium sudah penuh, air tumpah = seluruh volume bola yang masuk.</p>
+          <BlockMath math="V_o = V_b = 4.851 \text{ cm}^3" />
+          <p className="text-white/60 mt-1">
+            {language === "id" ? "Karena akuarium sudah penuh, air tumpah = seluruh volume bola yang masuk." : language === "en" ? "Because the aquarium is already full, the overflowed water equals the entire volume of the ball that goes in." : "水槽はすでに満水なので、あふれる水の量は入ったボールの体積全体と等しくなります。"}
+          </p>
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Volume bola = <strong className="text-yellow-300">4.851 cm³</strong></p>
-          <p className="text-white/80">• Air yang tumpah = <strong className="text-yellow-300">4.851 cm³ = 4,851 liter</strong></p>
-          <p className="text-cyan-300 mt-1">💡 Prinsip Archimedes: Volume benda yang dicelupkan = Volume air yang tumpah!</p>
+          <p className="text-red-300 font-semibold">{language === "id" ? "✅ Jawaban:" : language === "en" ? "✅ Answer:" : "✅ 答え："}</p>
+          {language === "id" ? (
+            <>
+              <p className="text-white/80">• Volume bola = <strong className="text-yellow-300">4.851 cm³</strong></p>
+              <p className="text-white/80">• Air yang tumpah = <strong className="text-yellow-300">4.851 cm³ = 4,851 liter</strong></p>
+              <p className="text-cyan-300 mt-1">💡 Prinsip Archimedes: Volume benda yang dicelupkan = Volume air yang tumpah!</p>
+            </>
+          ) : language === "en" ? (
+            <>
+              <p className="text-white/80">• Volume of the ball = <strong className="text-yellow-300">4.851 cm³</strong></p>
+              <p className="text-white/80">• Overflowed water = <strong className="text-yellow-300">4.851 cm³ = 4.851 liters</strong></p>
+              <p className="text-cyan-300 mt-1">💡 Archimedes' Principle: Volume of the submerged object = Volume of the water that overflows!</p>
+            </>
+          ) : (
+            <>
+              <p className="text-white/80">• ボールの体積 = <strong className="text-yellow-300">4.851 cm³</strong></p>
+              <p className="text-white/80">• あふれた水 = <strong className="text-yellow-300">4.851 cm³ = 4.851リットル</strong></p>
+              <p className="text-cyan-300 mt-1">💡 アルキメデスの原理：沈めた物体の体積 = あふれた水の体積！</p>
+            </>
+          )}
         </div>
       </div>
     ),
   },
-];
+  ];
+}
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────────────────────── */
 
-const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
+const ExampleCard = ({ ex, idx, prefix, language, showLabel, hideLabel }: { ex: Ex; idx: number; prefix: string; language: Language; showLabel: string; hideLabel: string }) => {
   const [show, setShow] = useState(false);
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
       <div className={`${ex.bg} px-5 py-4`}>
         <div className="flex items-center gap-2 mb-3">
           <span className={`text-xs font-bold font-display px-2 py-0.5 rounded ${ex.badgeBg} ${ex.color} border ${ex.border}`}>
-            {prefix} {idx + 1} — {ex.level}
+            {prefix} {idx + 1} — {levelLabel(ex.level, language)}
           </span>
         </div>
         {ex.question}
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
         className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
-        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? "Sembunyikan" : "Lihat Pembahasan"}</span>
+        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLabel : showLabel}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground"/> : <ChevronDown className="w-4 h-4 text-muted-foreground"/>}
       </button>
       {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
@@ -2096,47 +2403,97 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
 /* ─────────────────────────────────────────────────────────────
    MAIN PAGE
 ───────────────────────────────────────────────────────────── */
+/* ── Example-problem slide chrome (titles, badges, nav) — trilingual ── */
+const contohSoalTrans = {
+  id: {
+    unsurTitle: "Contoh Soal — Unsur-unsur Bola",
+    luasTitle: "Contoh Soal — Luas Permukaan",
+    volTitle: "Contoh Soal — Volume",
+    subtitle: "Latihan bertingkat dari mudah hingga sulit",
+    unsurPrefix: "UNSUR",
+    luasPrefix: "LUAS",
+    volPrefix: "VOLUME",
+    showSolution: "Lihat Pembahasan",
+    hideSolution: "Sembunyikan",
+    prev: "Sebelumnya",
+    next: "Selanjutnya",
+    back: "← Kembali ke Bangun Ruang Sisi Lengkung",
+  },
+  en: {
+    unsurTitle: "Examples — Elements of a Sphere",
+    luasTitle: "Examples — Surface Area",
+    volTitle: "Examples — Volume",
+    subtitle: "Graded practice from easy to hard",
+    unsurPrefix: "ELEMENTS",
+    luasPrefix: "SURFACE AREA",
+    volPrefix: "VOLUME",
+    showSolution: "Show Solution",
+    hideSolution: "Hide",
+    prev: "Previous",
+    next: "Next",
+    back: "← Back to Curved-Surface Solids",
+  },
+  ja: {
+    unsurTitle: "例題 — 球の構成要素",
+    luasTitle: "例題 — 表面積",
+    volTitle: "例題 — 体積",
+    subtitle: "易しい問題から難しい問題までの段階的練習",
+    unsurPrefix: "要素",
+    luasPrefix: "表面積問題",
+    volPrefix: "体積問題",
+    showSolution: "解説を見る",
+    hideSolution: "隠す",
+    prev: "前へ",
+    next: "次へ",
+    back: "← 曲面図形に戻る",
+  },
+} as const;
+
 const BolaPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const pt = pageTrans[language];
   const sections = getSections(language);
+  const cs = contohSoalTrans[language];
+  const unsurExamples = getUnsurExamples(language);
+  const luasExamples = getLuasExamples(language);
+  const volExamples = getVolExamples(language);
 
   const slides = [
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
     {
-      title: "Contoh Soal — Unsur-unsur Bola",
+      title: cs.unsurTitle,
       icon: "🔎",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          <p className="text-white/40 text-xs text-center font-body">{cs.subtitle}</p>
           <div className="flex flex-col gap-4">
-            {unsurExamples.map((ex, i) => <ExampleCard key={`u${i}`} ex={ex} idx={i} prefix="UNSUR"/>)}
+            {unsurExamples.map((ex, i) => <ExampleCard key={`u${i}`} ex={ex} idx={i} prefix={cs.unsurPrefix} language={language} showLabel={cs.showSolution} hideLabel={cs.hideSolution}/>)}
           </div>
         </div>
       ),
     },
     {
-      title: "Contoh Soal — Luas Permukaan",
+      title: cs.luasTitle,
       icon: "🎨",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          <p className="text-white/40 text-xs text-center font-body">{cs.subtitle}</p>
           <div className="flex flex-col gap-4">
-            {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+            {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix={cs.luasPrefix} language={language} showLabel={cs.showSolution} hideLabel={cs.hideSolution}/>)}
           </div>
         </div>
       ),
     },
     {
-      title: "Contoh Soal — Volume",
+      title: cs.volTitle,
       icon: "📦",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          <p className="text-white/40 text-xs text-center font-body">{cs.subtitle}</p>
           <div className="flex flex-col gap-4">
-            {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
+            {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix={cs.volPrefix} language={language} showLabel={cs.showSolution} hideLabel={cs.hideSolution}/>)}
           </div>
         </div>
       ),
@@ -2193,21 +2550,21 @@ const BolaPage = () => {
             disabled={currentSlide === 0}
             className="flex items-center gap-1.5 px-4 py-2 text-sm font-body border border-border rounded-lg disabled:opacity-30 hover:bg-white/5 transition-colors cursor-pointer disabled:cursor-default"
           >
-            <ChevronLeft className="w-4 h-4" /> Sebelumnya
+            <ChevronLeft className="w-4 h-4" /> {cs.prev}
           </button>
           <button
             onClick={goNext}
             disabled={currentSlide === total - 1}
             className="flex items-center gap-1.5 px-4 py-2 text-sm font-body border border-border rounded-lg disabled:opacity-30 hover:bg-white/5 transition-colors cursor-pointer disabled:cursor-default"
           >
-            Selanjutnya <ChevronRight className="w-4 h-4" />
+            {cs.next} <ChevronRight className="w-4 h-4" />
           </button>
         </div>
 
         <div className="text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Bangun Ruang Sisi Lengkung
+            {cs.back}
           </button>
         </div>
       </div>
