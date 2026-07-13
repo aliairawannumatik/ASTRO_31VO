@@ -1301,9 +1301,123 @@ const slide2Trans = {
   },
 } as const;
 
+/* ── Slide 3 translations (Luas Permukaan Bola / Surface Area of a Sphere) ── */
+const slide3Trans = {
+  id: {
+    title: "Luas Permukaan Bola",
+    intro: (
+      <>
+        <strong className="text-orange-300">Luas permukaan bola</strong> adalah total luas bidang lengkung yang membungkus bola.
+        Fakta mengagumkan: luas permukaan bola tepat sama dengan luas{" "}
+        <strong className="text-yellow-300">4 lingkaran</strong> dengan jari-jari yang sama!
+      </>
+    ),
+    derivationTitle: "📌 Penurunan Rumus:",
+    derivation1: (<>Luas permukaan bola = 4 × luas lingkaran = <InlineMath math="4 \times \pi r^2" /></>),
+    note: (<>Di mana <InlineMath math="r" /> adalah jari-jari bola.</>),
+    hemisphereBoxTitle: (<><strong className="text-white">Belahan bola:</strong></>),
+    hemisphereBullet1: (<>Luas lengkung setengah bola = <InlineMath math="2\pi r^2" /> (setengah dari <InlineMath math="4\pi r^2" />)</>),
+    hemisphereBullet2: (<>Luas total setengah bola (termasuk alas) = <InlineMath math="2\pi r^2 + \pi r^2 = 3\pi r^2" /></>),
+    trick: (<><strong>Trik mengingat:</strong> Luas bola = 4 × luas "lingkaran penampangnya". Mudah!</>),
+  },
+  en: {
+    title: "Surface Area of a Sphere",
+    intro: (
+      <>
+        The <strong className="text-orange-300">surface area of a sphere</strong> is the total area of the curved surface wrapping around it.
+        Amazing fact: a sphere's surface area is exactly equal to the area of{" "}
+        <strong className="text-yellow-300">4 circles</strong> with the same radius!
+      </>
+    ),
+    derivationTitle: "📌 Deriving the Formula:",
+    derivation1: (<>Surface area of a sphere = 4 × area of a circle = <InlineMath math="4 \times \pi r^2" /></>),
+    note: (<>Where <InlineMath math="r" /> is the radius of the sphere.</>),
+    hemisphereBoxTitle: (<><strong className="text-white">Hemisphere:</strong></>),
+    hemisphereBullet1: (<>Curved surface area of a hemisphere = <InlineMath math="2\pi r^2" /> (half of <InlineMath math="4\pi r^2" />)</>),
+    hemisphereBullet2: (<>Total surface area of a hemisphere (including the base) = <InlineMath math="2\pi r^2 + \pi r^2 = 3\pi r^2" /></>),
+    trick: (<><strong>Memory trick:</strong> Sphere surface area = 4 × area of its "cross-section circle". Easy!</>),
+  },
+  ja: {
+    title: "球の表面積",
+    intro: (
+      <>
+        <strong className="text-orange-300">球の表面積</strong>は、球を包む曲面の総面積です。
+        驚くべき事実：球の表面積は、同じ半径を持つ<strong className="text-yellow-300">円4つ</strong>の面積とちょうど等しい！
+      </>
+    ),
+    derivationTitle: "📌 公式の導出：",
+    derivation1: (<>球の表面積 = 4 × 円の面積 = <InlineMath math="4 \times \pi r^2" /></>),
+    note: (<><InlineMath math="r" /> は球の半径です。</>),
+    hemisphereBoxTitle: (<><strong className="text-white">半球：</strong></>),
+    hemisphereBullet1: (<>半球の曲面の面積 = <InlineMath math="2\pi r^2" />（<InlineMath math="4\pi r^2" />の半分）</>),
+    hemisphereBullet2: (<>半球の全表面積（底面を含む） = <InlineMath math="2\pi r^2 + \pi r^2 = 3\pi r^2" /></>),
+    trick: (<><strong>覚え方のコツ：</strong>球の表面積 = 4 ×「切断面の円」の面積。簡単！</>),
+  },
+} as const;
+
+/* ── Slide 4 translations (Volume Bola / Volume of a Sphere) ── */
+const slide4Trans = {
+  id: {
+    title: "Volume Bola",
+    intro: (
+      <>
+        <strong className="text-blue-300">Volume bola</strong> menyatakan besarnya ruang yang ditempati oleh bola.
+        Rumus volume bola pertama kali ditemukan oleh <strong className="text-yellow-300">Archimedes</strong> dari Yunani kuno!
+      </>
+    ),
+    waterAnimTitle: "💧 Animasi Pengisian Air — Bola",
+    waterAnimCaption: (<>Bayangkan bola transparan diisi air dari bawah — volumenya adalah <strong className="text-violet-300">⁴⁄₃πr³</strong></>),
+    derivationTitle: "📌 Penurunan Rumus:",
+    derivationP1: "Bayangkan bola dipecah menjadi banyak kerucut kecil dengan puncak di pusat bola dan alas di permukaan bola:",
+    derivationBullet1: (<>Setiap kerucut kecil: <InlineMath math="V = \frac{1}{3} \times \Delta L \times r" /></>),
+    derivationBullet2: (<>Jumlah semua kerucut = <InlineMath math="\frac{1}{3} \times L_b \times r = \frac{1}{3} \times 4\pi r^2 \times r" /></>),
+    archimedesTitle: "🚀 Hubungan dengan Tabung:",
+    archimedesP1: "Bola yang masuk pas dalam tabung (r & t = 2r sama):",
+    archimedesP2: "(Rumus Archimedes yang terkenal!)",
+  },
+  en: {
+    title: "Volume of a Sphere",
+    intro: (
+      <>
+        The <strong className="text-blue-300">volume of a sphere</strong> represents the amount of space it occupies.
+        The formula for the volume of a sphere was first discovered by <strong className="text-yellow-300">Archimedes</strong> of ancient Greece!
+      </>
+    ),
+    waterAnimTitle: "💧 Water-Filling Animation — Sphere",
+    waterAnimCaption: (<>Imagine a transparent sphere being filled with water from below — its volume is <strong className="text-violet-300">⁴⁄₃πr³</strong></>),
+    derivationTitle: "📌 Deriving the Formula:",
+    derivationP1: "Imagine the sphere is broken into many tiny cones, each with its apex at the sphere's center and its base on the sphere's surface:",
+    derivationBullet1: (<>Each tiny cone: <InlineMath math="V = \frac{1}{3} \times \Delta L \times r" /></>),
+    derivationBullet2: (<>Sum of all the cones = <InlineMath math="\frac{1}{3} \times L_b \times r = \frac{1}{3} \times 4\pi r^2 \times r" /></>),
+    archimedesTitle: "🚀 Relationship with a Cylinder:",
+    archimedesP1: "A sphere that fits exactly inside a cylinder (with r and t = 2r equal):",
+    archimedesP2: "(Archimedes' famous formula!)",
+  },
+  ja: {
+    title: "球の体積",
+    intro: (
+      <>
+        <strong className="text-blue-300">球の体積</strong>は、球が占める空間の大きさを表します。
+        球の体積の公式は、古代ギリシャの<strong className="text-yellow-300">アルキメデス</strong>によって最初に発見されました！
+      </>
+    ),
+    waterAnimTitle: "💧 水入れアニメーション — 球",
+    waterAnimCaption: (<>透明な球に下から水を入れると想像してみよう——その体積は <strong className="text-violet-300">⁴⁄₃πr³</strong></>),
+    derivationTitle: "📌 公式の導出：",
+    derivationP1: "球が、頂点を球の中心に、底面を球の表面に持つ小さな円錐にたくさん分割されると想像してみよう：",
+    derivationBullet1: (<>それぞれの小さな円錐：<InlineMath math="V = \frac{1}{3} \times \Delta L \times r" /></>),
+    derivationBullet2: (<>すべての円錐の合計 = <InlineMath math="\frac{1}{3} \times L_b \times r = \frac{1}{3} \times 4\pi r^2 \times r" /></>),
+    archimedesTitle: "🚀 円柱との関係：",
+    archimedesP1: "円柱にぴったり収まる球（r と t = 2r が等しい場合）：",
+    archimedesP2: "（有名なアルキメデスの公式！）",
+  },
+} as const;
+
 function getSections(language: Language): Sec[] {
   const s1 = slide1Trans[language];
   const s2 = slide2Trans[language];
+  const s3 = slide3Trans[language];
+  const s4 = slide4Trans[language];
   return [
   {
     title: s1.title,
@@ -1416,57 +1530,50 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Luas Permukaan Bola",
+    title: s3.title,
     icon: "🎨",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          <strong className="text-orange-300">Luas permukaan bola</strong> adalah total luas bidang lengkung yang membungkus bola.
-          Fakta mengagumkan: luas permukaan bola tepat sama dengan luas{" "}
-          <strong className="text-yellow-300">4 lingkaran</strong> dengan jari-jari yang sama!
-        </p>
+        <p>{s3.intro}</p>
         <SphereFruitCutAnimation />
         <div className="bg-orange-950/60 border border-orange-700/50 rounded-lg p-4 space-y-3">
-          <p className="text-orange-300 font-semibold">📌 Penurunan Rumus:</p>
+          <p className="text-orange-300 font-semibold">{s3.derivationTitle}</p>
           <div className="text-xs text-white/70 space-y-1">
-            <p>Luas permukaan bola = 4 × luas lingkaran = <InlineMath math="4 \times \pi r^2" /></p>
+            <p>{s3.derivation1}</p>
           </div>
           <div className="bg-slate-800/60 rounded p-3">
             <BlockMath math="\boxed{L = 4\pi r^2}" />
           </div>
-          <p className="text-white/60 text-xs">Di mana <InlineMath math="r" /> adalah jari-jari bola.</p>
+          <p className="text-white/60 text-xs">{s3.note}</p>
         </div>
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-          <p>🎯 <strong className="text-white">Belahan bola:</strong></p>
-          <p>• Luas lengkung setengah bola = <InlineMath math="2\pi r^2" /> (setengah dari <InlineMath math="4\pi r^2" />)</p>
-          <p>• Luas total setengah bola (termasuk alas) = <InlineMath math="2\pi r^2 + \pi r^2 = 3\pi r^2" /></p>
+          <p>🎯 {s3.hemisphereBoxTitle}</p>
+          <p>• {s3.hemisphereBullet1}</p>
+          <p>• {s3.hemisphereBullet2}</p>
         </div>
         <blockquote className="border-l-4 border-orange-500 pl-3 text-orange-200 text-xs italic">
-          💡 <strong>Trik mengingat:</strong> Luas bola = 4 × luas "lingkaran penampangnya". Mudah!
+          💡 {s3.trick}
         </blockquote>
       </div>
     ),
   },
   {
-    title: "Volume Bola",
+    title: s4.title,
     icon: "📦",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          <strong className="text-blue-300">Volume bola</strong> menyatakan besarnya ruang yang ditempati oleh bola.
-          Rumus volume bola pertama kali ditemukan oleh <strong className="text-yellow-300">Archimedes</strong> dari Yunani kuno!
-        </p>
+        <p>{s4.intro}</p>
         <div className="bg-slate-900/70 border border-violet-700/40 rounded-xl p-3">
-          <p className="text-violet-300 font-semibold text-xs text-center mb-2 font-body">💧 Animasi Pengisian Air — Bola</p>
+          <p className="text-violet-300 font-semibold text-xs text-center mb-2 font-body">{s4.waterAnimTitle}</p>
           <WaterBolaAnimation />
-          <p className="text-white/45 text-[10px] text-center font-body mt-1">Bayangkan bola transparan diisi air dari bawah — volumenya adalah <strong className="text-violet-300">⁴⁄₃πr³</strong></p>
+          <p className="text-white/45 text-[10px] text-center font-body mt-1">{s4.waterAnimCaption}</p>
         </div>
         <div className="bg-blue-950/60 border border-blue-700/50 rounded-lg p-4 space-y-3">
-          <p className="text-blue-300 font-semibold">📌 Penurunan Rumus:</p>
+          <p className="text-blue-300 font-semibold">{s4.derivationTitle}</p>
           <div className="text-xs text-white/70 space-y-1">
-            <p>Bayangkan bola dipecah menjadi banyak kerucut kecil dengan puncak di pusat bola dan alas di permukaan bola:</p>
-            <p>• Setiap kerucut kecil: <InlineMath math="V = \frac{1}{3} \times \text{luas kecil} \times r" /></p>
-            <p>• Jumlah semua kerucut = <InlineMath math="\frac{1}{3} \times L_{\text{bola}} \times r = \frac{1}{3} \times 4\pi r^2 \times r" /></p>
+            <p>{s4.derivationP1}</p>
+            <p>• {s4.derivationBullet1}</p>
+            <p>• {s4.derivationBullet2}</p>
           </div>
           <div className="bg-slate-800/60 rounded p-3">
             <BlockMath math="V = \frac{1}{3} \times 4\pi r^2 \times r" />
@@ -1474,10 +1581,10 @@ function getSections(language: Language): Sec[] {
           </div>
         </div>
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs space-y-1">
-          <p className="text-cyan-300 font-semibold">🚀 Hubungan dengan Tabung:</p>
-          <p className="text-white/70">Bola yang masuk pas dalam tabung (r & t = 2r sama):</p>
-          <p className="text-white/70"><InlineMath math="V_{\text{bola}} = \frac{2}{3} \times V_{\text{tabung}}" /></p>
-          <p className="text-white/70">(Rumus Archimedes yang terkenal!)</p>
+          <p className="text-cyan-300 font-semibold">{s4.archimedesTitle}</p>
+          <p className="text-white/70">{s4.archimedesP1}</p>
+          <p className="text-white/70"><InlineMath math="V_b = \frac{2}{3} \times V_{tb}" /></p>
+          <p className="text-white/70">{s4.archimedesP2}</p>
         </div>
       </div>
     ),
