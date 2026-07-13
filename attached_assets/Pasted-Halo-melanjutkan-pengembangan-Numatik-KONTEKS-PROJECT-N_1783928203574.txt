@@ -1,0 +1,41 @@
+Halo, melanjutkan pengembangan Numatik.
+
+KONTEKS PROJECT:
+Numatik adalah aplikasi pembelajaran matematika trilingual (id/en/ja) dengan beberapa menu: Buku Animasi Matematika, Latihan Mandiri, LKPD, Math Game Arena. Topik yang sama bisa ada di beberapa menu dengan file berbeda — pastikan kerja di file yang benar.
+
+MENU: BUKU ANIMASI MATEMATIKA
+TOPIK: BANGUN RUANG SISI LENGKUNG (BRSL) KELAS 9
+
+STATUS:
+✅ TabungPage.tsx — 100% SELESAI trilingual, semua bug fixed (termasuk subtitle "9年生"→"中学3年")
+✅ KerucutPage.tsx — 100% SELESAI trilingual (11 slide, termasuk kuis interaktif, SVG custom, slide baru Garis Pelukis)
+⏳ FILE BERIKUTNYA: BolaPage.tsx (materi-matematika/kelas9/bangun-ruang-sisi-lengkung/, 1.848 baris)
+
+PELAJARAN DARI FILE-FILE SEBELUMNYA — WAJIB diterapkan:
+1. Struktur "sections" HARUS jadi fungsi getSections(language), bukan module-level constant
+2. Cek elemen kecil yang mudah terlewat: prefix badge soal, tombol toggle jawaban (pastikan konsisten teksnya di semua komponen, jangan ada 2 versi beda kata)
+3. Cek komponen SVG/animasi interaktif — sering ada yang hardcode total dan gak nerima prop language sama sekali (kejadian di KerucutPage: InteractiveCone3D, LuasKerucutSVG)
+4. Cek komponen kuis interaktif kalau ada (seperti UnsurSoalQuiz di KerucutPage) — biasanya paling kompleks, punya state, skor, banyak teks tersembunyi
+5. Cek subtitle "Kelas 9" — WAJIB "Grade 9"/"中学3年", JANGAN "9年生"
+6. Cek apakah ada data soal yang didefinisikan tapi tidak pernah dipakai di slides manapun (kejadian: gpExamples di KerucutPage)
+7. Setiap key translation WAJIB direferensikan dari object yang BENAR
+8. Verifikasi WAJIB screenshot visual NYATA — kalau tooling timeout (kadang terjadi di file besar), verifikasi via kode dan laporkan jelas itu keterbatasan tooling bukan bug
+
+Konvensi:
+- Subscript KaTeX kata bahasa alami → huruf Latin, contoh: L_{\text{lengkung}}→L_l atau sesuai konteks, V_{\text{bola}}→V_b, V_{\text{tabung}}→V_{tb} (skema disesuaikan biar gak tabrakan sama variabel lain di file ini)
+- Notasi universal & unit (\text{cm}, dst.) dikecualikan
+
+TUGAS TAHAP 1 — AUDIT DULU, JANGAN TULIS KODE:
+1. Baca BolaPage.tsx penuh
+2. Cek status struktur bahasa (apakah ada useLanguage/translations sama sekali)
+3. Identifikasi: berapa slide/section, berapa soal latihan, ada komponen kuis interaktif atau tidak, ada SVG/animasi custom apa saja
+4. Scan SEMUA \text{} violations di KaTeX (baris berapa, konteksnya subscript atau bagian dari pecahan seperti kasus busur/keliling di KerucutPage)
+5. Cek elemen kecil: prefix badge, tombol toggle (apakah ada inkonsistensi teks)
+6. Cek subtitle "Kelas 9" — pastikan formatnya benar
+7. Laporkan hasil audit dalam tabel lengkap, BERHENTI dan buat checkpoint — jangan mulai menulis kode dulu
+
+Istilah untuk Bola:
+- "Bola" → "Sphere" / 球
+- "Luas Permukaan Bola" → "Surface Area of a Sphere" / 球の表面積
+- "Volume Bola" → "Volume of a Sphere" / 球の体積
+- "Jari-jari Bola" → "Radius of a Sphere" / 球の半径
