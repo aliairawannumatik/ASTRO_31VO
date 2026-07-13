@@ -1413,11 +1413,60 @@ const slide4Trans = {
   },
 } as const;
 
+const slide5Trans = {
+  id: {
+    title: "Kesimpulan — Rumus Lengkap Bola",
+    tableHead: { besaran: "Besaran", rumus: "Rumus", catatan: "Catatan" },
+    rows: [
+      ["Diameter", "d = 2r", "dua kali jari-jari"],
+      ["Luas permukaan", "L = 4πr²", "4 lingkaran"],
+      ["Luas ½ bola (lengkung)", "L = 2πr²", "setengah permukaan"],
+      ["Luas ½ bola (total)", "L = 3πr²", "+ alas lingkaran"],
+      ["Volume", "V = ⁴⁄₃πr³", "Archimedes"],
+    ] as [string, string, string][],
+    keyPointLabel: "Kunci utama bola:",
+    keyPoint: (<>Semua rumus bergantung pada <strong className="text-yellow-300">satu variabel saja: r (jari-jari)</strong>!</>),
+    remember: "Ingat dua rumus utama:",
+    and: "dan",
+  },
+  en: {
+    title: "Summary — Complete Sphere Formulas",
+    tableHead: { besaran: "Quantity", rumus: "Formula", catatan: "Note" },
+    rows: [
+      ["Diameter", "d = 2r", "twice the radius"],
+      ["Surface area", "L = 4πr²", "4 circles"],
+      ["½ sphere surface area (curved)", "L = 2πr²", "half the surface"],
+      ["½ sphere surface area (total)", "L = 3πr²", "+ circular base"],
+      ["Volume", "V = ⁴⁄₃πr³", "Archimedes"],
+    ] as [string, string, string][],
+    keyPointLabel: "Key point about the sphere:",
+    keyPoint: (<>All formulas depend on <strong className="text-yellow-300">just one variable: r (radius)</strong>!</>),
+    remember: "Remember the two main formulas:",
+    and: "and",
+  },
+  ja: {
+    title: "まとめ — 球の公式全体",
+    tableHead: { besaran: "量", rumus: "公式", catatan: "メモ" },
+    rows: [
+      ["直径", "d = 2r", "半径の2倍"],
+      ["表面積", "L = 4πr²", "4つの円"],
+      ["半球の表面積（曲面）", "L = 2πr²", "表面の半分"],
+      ["半球の表面積（全体）", "L = 3πr²", "+円形の底面"],
+      ["体積", "V = ⁴⁄₃πr³", "アルキメデス"],
+    ] as [string, string, string][],
+    keyPointLabel: "球の重要ポイント：",
+    keyPoint: (<>すべての公式は<strong className="text-yellow-300">たった一つの変数 r（半径）</strong>だけで決まります！</>),
+    remember: "重要な2つの公式を覚えましょう：",
+    and: "、",
+  },
+} as const;
+
 function getSections(language: Language): Sec[] {
   const s1 = slide1Trans[language];
   const s2 = slide2Trans[language];
   const s3 = slide3Trans[language];
   const s4 = slide4Trans[language];
+  const s5 = slide5Trans[language];
   return [
   {
     title: s1.title,
@@ -1590,25 +1639,19 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Kesimpulan — Rumus Lengkap Bola",
+    title: s5.title,
     icon: "📊",
     content: (
       <div className="space-y-3 font-body">
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Besaran</th>
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Rumus</th>
-              <th className="px-3 py-2 text-cyan-300">Catatan</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s5.tableHead.besaran}</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">{s5.tableHead.rumus}</th>
+              <th className="px-3 py-2 text-cyan-300">{s5.tableHead.catatan}</th>
             </tr></thead>
             <tbody>
-              {[
-                ["Diameter","d = 2r","dua kali jari-jari"],
-                ["Luas permukaan","L = 4πr²","4 lingkaran"],
-                ["Luas ½ bola (lengkung)","L = 2πr²","setengah permukaan"],
-                ["Luas ½ bola (total)","L = 3πr²","+ alas lingkaran"],
-                ["Volume","V = ⁴⁄₃πr³","Archimedes"],
-              ].map(([b,r,c],i)=>(
+              {s5.rows.map(([b,r,c],i)=>(
                 <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
                   <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
                   <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
@@ -1619,8 +1662,8 @@ function getSections(language: Language): Sec[] {
           </table>
         </div>
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-          <p>🚀 <strong>Kunci utama bola:</strong> Semua rumus bergantung pada <strong className="text-yellow-300">satu variabel saja: r (jari-jari)</strong>!</p>
-          <p>Ingat dua rumus utama: <InlineMath math="L = 4\pi r^2" /> dan <InlineMath math="V = \frac{4}{3}\pi r^3" /></p>
+          <p>🚀 <strong>{s5.keyPointLabel}</strong> {s5.keyPoint}</p>
+          <p>{s5.remember} <InlineMath math="L = 4\pi r^2" /> {s5.and} <InlineMath math="V = \frac{4}{3}\pi r^3" /></p>
         </div>
       </div>
     ),
