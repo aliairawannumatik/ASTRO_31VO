@@ -6,6 +6,8 @@ import { Circle, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucid
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
+import type { Language } from "@/contexts/LanguageContext";
 
 /* ─────────────────────────────────────────────────────────────
    INTERACTIVE 3D SPHERE — CSS gradient + SVG latitude/longitude
@@ -14,7 +16,38 @@ const SPHERE_R = 90;
 const SVG_W = 300;
 const SVG_H = 300;
 
-const InteractiveSphere3D = () => {
+const sphere3DTrans = {
+  id: {
+    instructions: "Drag untuk memutar bola · Klik tombol untuk menampilkan/menyembunyikan label",
+    showLabels: "🔵 Sembunyikan Label",
+    hideLabels: "🔵 Tampilkan Label",
+    reset: "↺ Reset Posisi",
+    equator: "Khatulistiwa",
+    latLon: "Lintang/Bujur",
+    radius: "Jari-jari (r)",
+  },
+  en: {
+    instructions: "Drag to rotate the sphere · Click the button to show/hide labels",
+    showLabels: "🔵 Hide Labels",
+    hideLabels: "🔵 Show Labels",
+    reset: "↺ Reset Position",
+    equator: "Equator",
+    latLon: "Latitude/Longitude",
+    radius: "Radius (r)",
+  },
+  ja: {
+    instructions: "ドラッグして球を回転 · ボタンをクリックしてラベルの表示/非表示を切り替え",
+    showLabels: "🔵 ラベルを隠す",
+    hideLabels: "🔵 ラベルを表示",
+    reset: "↺ 位置をリセット",
+    equator: "赤道",
+    latLon: "緯度/経度",
+    radius: "半径（r）",
+  },
+} as const;
+
+const InteractiveSphere3D = ({ language }: { language: Language }) => {
+  const t = sphere3DTrans[language];
   const [spinY, setSpinY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [showLabels, setShowLabels] = useState(true);
@@ -75,7 +108,7 @@ const InteractiveSphere3D = () => {
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Drag untuk memutar bola · Klik tombol untuk menampilkan/menyembunyikan label
+        {t.instructions}
       </p>
 
       <svg
@@ -171,20 +204,20 @@ const InteractiveSphere3D = () => {
           onClick={() => { playPopSound(); setShowLabels(v => !v); }}
           className="px-3 py-1.5 text-xs font-bold bg-blue-900/60 border border-blue-600 text-blue-300 rounded-lg hover:bg-blue-800/60 transition-colors cursor-pointer font-body"
         >
-          {showLabels ? "🔵 Sembunyikan Label" : "🔵 Tampilkan Label"}
+          {showLabels ? t.showLabels : t.hideLabels}
         </button>
         <button
           onClick={() => { playPopSound(); setSpinY(0); }}
           className="px-3 py-1.5 text-xs font-bold bg-slate-800/60 border border-slate-600 text-slate-300 rounded-lg hover:bg-slate-700/60 transition-colors cursor-pointer font-body"
         >
-          ↺ Reset Posisi
+          {t.reset}
         </button>
       </div>
 
       <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
-        <span className="flex items-center gap-1"><span className="inline-block w-4 h-0.5 bg-yellow-400"/><span className="text-white/50">Khatulistiwa</span></span>
-        <span className="flex items-center gap-1"><span className="inline-block w-4 h-0.5 bg-white opacity-40"/><span className="text-white/50">Lintang/Bujur</span></span>
-        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full inline-block bg-orange-400"/><span className="text-white/50">Jari-jari (r)</span></span>
+        <span className="flex items-center gap-1"><span className="inline-block w-4 h-0.5 bg-yellow-400"/><span className="text-white/50">{t.equator}</span></span>
+        <span className="flex items-center gap-1"><span className="inline-block w-4 h-0.5 bg-white opacity-40"/><span className="text-white/50">{t.latLon}</span></span>
+        <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full inline-block bg-orange-400"/><span className="text-white/50">{t.radius}</span></span>
       </div>
     </div>
   );
@@ -234,7 +267,29 @@ const HS_W = 300;
 const HS_CX = 150;
 const HS_CY = 130;
 
-const InteractiveHalfSphere3D = () => {
+const halfSphere3DTrans = {
+  id: {
+    instructions: "Drag untuk memutar setengah bola",
+    title: "Setengah Bola (Hemisphere)",
+    curved: "Sisi lengkung = 2πr²",
+    base: "Alas lingkaran = πr²",
+  },
+  en: {
+    instructions: "Drag to rotate the hemisphere",
+    title: "Hemisphere (Half of a Sphere)",
+    curved: "Curved surface = 2πr²",
+    base: "Circular base = πr²",
+  },
+  ja: {
+    instructions: "ドラッグして半球を回転",
+    title: "半球（球の半分）",
+    curved: "曲面 = 2πr²",
+    base: "円形の底面 = πr²",
+  },
+} as const;
+
+const InteractiveHalfSphere3D = ({ language }: { language: Language }) => {
+  const t = halfSphere3DTrans[language];
   const [spinY, setSpinY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef({ sx: 0, base: 0 });
@@ -264,7 +319,7 @@ const InteractiveHalfSphere3D = () => {
 
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-3">
-      <p className="text-white/60 text-xs text-center font-body">Drag untuk memutar setengah bola</p>
+      <p className="text-white/60 text-xs text-center font-body">{t.instructions}</p>
       <svg
         viewBox={`0 0 ${HS_W} 200`}
         width="100%"
@@ -321,9 +376,9 @@ const InteractiveHalfSphere3D = () => {
           fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
 
         {/* Info labels */}
-        <text x="10" y="20" fill="#7dd3fc" fontSize="9" fontFamily="monospace">Setengah Bola (Hemisphere)</text>
-        <text x="10" y="34" fill="#c4b5fd" fontSize="9" fontFamily="monospace">Sisi lengkung = 2πr²</text>
-        <text x="10" y="48" fill="#4ade80" fontSize="9" fontFamily="monospace">Alas lingkaran = πr²</text>
+        <text x="10" y="20" fill="#7dd3fc" fontSize="9" fontFamily="monospace">{t.title}</text>
+        <text x="10" y="34" fill="#c4b5fd" fontSize="9" fontFamily="monospace">{t.curved}</text>
+        <text x="10" y="48" fill="#4ade80" fontSize="9" fontFamily="monospace">{t.base}</text>
       </svg>
     </div>
   );
@@ -1069,40 +1124,208 @@ const SeparasiBolaSegitigaSVG = () => (
 ───────────────────────────────────────────────────────────── */
 type Sec = { title: string; icon: string; content: React.ReactNode };
 
-const sections: Sec[] = [
-  {
+/* ── Page-level translations (title / subtitle) ────────── */
+const pageTrans = {
+  id: { title: "BOLA", subtitle: "Kelas 9 · Bangun Ruang Sisi Lengkung" },
+  en: { title: "SPHERE", subtitle: "Grade 9 · Curved-Surface Solids" },
+  ja: { title: "球", subtitle: "中学3年・曲面図形" },
+} as const;
+
+/* ── Slide 1 translations (Definisi Bola / Definition of a Sphere) ── */
+const slide1Trans = {
+  id: {
     title: "Definisi Bola",
+    intro: (
+      <>
+        <strong className="text-cyan-300">Bola</strong> adalah bangun ruang sisi lengkung yang terbentuk dari{" "}
+        <strong className="text-yellow-300">sekumpulan titik yang semuanya berjarak sama</strong> terhadap satu titik pusat.
+        Jarak itu disebut <strong className="text-yellow-300">jari-jari (r)</strong>.
+        Bola adalah bentuk paling sempurna di alam — dari buah jeruk, gelembung sabun, hingga planet-planet di antariksa!
+      </>
+    ),
+    sifatTitle: "📌 Sifat-sifat Bola:",
+    sifat1: (<>Memiliki <strong className="text-yellow-300">1 sisi lengkung</strong> (permukaan) dan <strong className="text-yellow-300">tidak memiliki rusuk maupun titik sudut</strong></>),
+    sifat2: (<>Setiap titik pada permukaan berjarak <strong className="text-yellow-300">sama</strong> terhadap pusat (<InlineMath math="= r" />)</>),
+    sifat3: (<>Bola adalah <strong className="text-yellow-300">bangun simetri sempurna</strong> — tampak sama dari semua arah</>),
+    sifat4: (<>Diameter bola <InlineMath math="d = 2r" /></>),
+    galleryTitle: "Benda Berbentuk Bola di Kehidupan Sehari-hari",
+    gallery: [
+      { src: "/images/image_1780702385381.png", label: "Bola Sepak" },
+      { src: "/images/image_1780702495642.png", label: "Bola Dunia" },
+      { src: "/images/image_1780702529187.png", label: "Semangka" },
+      { src: "/images/image_1780702647131.png", label: "Buah Jeruk" },
+      { src: "/images/image_1780702682181.png", label: "Kelereng" },
+      { src: "/images/image_1780702856357.png", label: "Bola Bowling" },
+    ],
+  },
+  en: {
+    title: "Definition of a Sphere",
+    intro: (
+      <>
+        A <strong className="text-cyan-300">Sphere</strong> is a curved-surface solid formed by a{" "}
+        <strong className="text-yellow-300">set of points that are all equidistant</strong> from a single center point.
+        That distance is called the <strong className="text-yellow-300">radius (r)</strong>.
+        A sphere is the most perfect shape in nature — from an orange, a soap bubble, to planets in space!
+      </>
+    ),
+    sifatTitle: "📌 Properties of a Sphere:",
+    sifat1: (<>Has <strong className="text-yellow-300">1 curved side</strong> (surface) and <strong className="text-yellow-300">no edges or vertices at all</strong></>),
+    sifat2: (<>Every point on the surface is <strong className="text-yellow-300">equidistant</strong> from the center (<InlineMath math="= r" />)</>),
+    sifat3: (<>A sphere is a <strong className="text-yellow-300">perfectly symmetrical shape</strong> — it looks the same from every direction</>),
+    sifat4: (<>Diameter of a sphere <InlineMath math="d = 2r" /></>),
+    galleryTitle: "Everyday Objects Shaped Like a Sphere",
+    gallery: [
+      { src: "/images/image_1780702385381.png", label: "Soccer Ball" },
+      { src: "/images/image_1780702495642.png", label: "Globe" },
+      { src: "/images/image_1780702529187.png", label: "Watermelon" },
+      { src: "/images/image_1780702647131.png", label: "Orange" },
+      { src: "/images/image_1780702682181.png", label: "Marble" },
+      { src: "/images/image_1780702856357.png", label: "Bowling Ball" },
+    ],
+  },
+  ja: {
+    title: "球の定義",
+    intro: (
+      <>
+        <strong className="text-cyan-300">球</strong>は、1つの中心点から
+        <strong className="text-yellow-300">すべて等しい距離にある点の集合</strong>によって形成される曲面立体です。
+        その距離を<strong className="text-yellow-300">半径（r）</strong>と呼びます。
+        球は自然界で最も完璧な形です——オレンジ、シャボン玉から、宇宙の惑星まで！
+      </>
+    ),
+    sifatTitle: "📌 球の性質：",
+    sifat1: (<><strong className="text-yellow-300">1つの曲面</strong>（表面）を持ち、<strong className="text-yellow-300">辺も頂点もまったくない</strong></>),
+    sifat2: (<>表面上のすべての点は中心から<strong className="text-yellow-300">等距離</strong>（<InlineMath math="= r" />）</>),
+    sifat3: (<>球は<strong className="text-yellow-300">完全に対称な図形</strong>——どの方向から見ても同じに見える</>),
+    sifat4: (<>球の直径 <InlineMath math="d = 2r" /></>),
+    galleryTitle: "日常生活にある球形の物体",
+    gallery: [
+      { src: "/images/image_1780702385381.png", label: "サッカーボール" },
+      { src: "/images/image_1780702495642.png", label: "地球儀" },
+      { src: "/images/image_1780702529187.png", label: "スイカ" },
+      { src: "/images/image_1780702647131.png", label: "オレンジ" },
+      { src: "/images/image_1780702682181.png", label: "ビー玉" },
+      { src: "/images/image_1780702856357.png", label: "ボウリングの球" },
+    ],
+  },
+} as const;
+
+/* ── Slide 2 translations (Unsur-unsur Bola / Elements of a Sphere) ── */
+const slide2Trans = {
+  id: {
+    title: "Unsur-unsur Bola (Interaktif)",
+    el1Title: "① Titik Pusat (O)",
+    el1Desc: (<>Titik di tengah bola. Setiap titik pada permukaan bola berjarak <strong>r</strong> dari pusat ini.</>),
+    el2Title: (<>② Jari-jari (<InlineMath math="r" />)</>),
+    el2Desc: "Jarak dari pusat bola ke titik mana saja di permukaan bola. Semua jari-jari panjangnya sama.",
+    el3Title: (<>③ Diameter (<InlineMath math="d" />)</>),
+    el3Desc: (<>Tali busur terpanjang yang melewati pusat bola. Sama dengan dua kali jari-jari: <InlineMath math="d = 2r" />.</>),
+    el4Title: "④ Permukaan Bola",
+    el4Desc: "Satu-satunya sisi bola, seluruhnya berupa bidang lengkung. Tidak ada sisi datar, rusuk, maupun sudut.",
+    el5Title: "⑤ Setengah Bola (Belahan Bola)",
+    el5Desc: "Jika bola dipotong melalui pusat, terbentuk dua belahan bola (hemisphere), masing-masing memiliki:",
+    el5Bullet1: "Sisi datar berupa lingkaran (jari-jari = r)",
+    el5Bullet2: (<>Sisi lengkung = ½ permukaan bola = <InlineMath math="2\pi r^2" /></>),
+    summaryTitle: "📋 Kesimpulan Unsur-unsur Bola",
+    sisiLabel: "Sisi", sisiNote: "(sisi lengkung)",
+    rusukLabel: "Rusuk", rusukNote: "(tidak ada)",
+    vertexLabel: "Titik Sudut", vertexNote: "(tidak ada)",
+    summaryClosing: (<>Bola adalah satu-satunya bangun ruang yang hanya memiliki <strong className="text-cyan-300">1 sisi</strong> tanpa rusuk maupun titik sudut sama sekali.</>),
+    tableHeaders: ["Unsur", "Simbol", "Keterangan"] as [string, string, string],
+    tableRows: [
+      ["Titik pusat", "O", "pusat bola"],
+      ["Jari-jari", "r", "pusat → permukaan"],
+      ["Diameter", "d = 2r", "melewati pusat"],
+      ["Permukaan", "—", "sisi lengkung tunggal"],
+      ["Rusuk", "0", "tidak ada!"],
+      ["Titik sudut", "0", "tidak ada!"],
+    ] as [string, string, string][],
+  },
+  en: {
+    title: "Elements of a Sphere (Interactive)",
+    el1Title: "① Center Point (O)",
+    el1Desc: (<>The point at the center of the sphere. Every point on the sphere's surface is <strong>r</strong> away from this center.</>),
+    el2Title: (<>② Radius (<InlineMath math="r" />)</>),
+    el2Desc: "The distance from the center of the sphere to any point on its surface. All radii have the same length.",
+    el3Title: (<>③ Diameter (<InlineMath math="d" />)</>),
+    el3Desc: (<>The longest chord passing through the center of the sphere. Equal to twice the radius: <InlineMath math="d = 2r" />.</>),
+    el4Title: "④ Surface of the Sphere",
+    el4Desc: "The sphere's only side, entirely a curved surface. There are no flat faces, edges, or vertices.",
+    el5Title: "⑤ Hemisphere (Half of a Sphere)",
+    el5Desc: "If a sphere is cut through its center, two hemispheres are formed, each having:",
+    el5Bullet1: "A flat circular face (radius = r)",
+    el5Bullet2: (<>Curved surface = ½ the sphere's surface = <InlineMath math="2\pi r^2" /></>),
+    summaryTitle: "📋 Summary of the Elements of a Sphere",
+    sisiLabel: "Face", sisiNote: "(curved surface)",
+    rusukLabel: "Edges", rusukNote: "(none)",
+    vertexLabel: "Vertices", vertexNote: "(none)",
+    summaryClosing: (<>A sphere is the only 3D shape that has only <strong className="text-cyan-300">1 face</strong> with no edges or vertices at all.</>),
+    tableHeaders: ["Element", "Symbol", "Description"] as [string, string, string],
+    tableRows: [
+      ["Center point", "O", "center of the sphere"],
+      ["Radius", "r", "center → surface"],
+      ["Diameter", "d = 2r", "through the center"],
+      ["Surface", "—", "single curved side"],
+      ["Edges", "0", "none!"],
+      ["Vertices", "0", "none!"],
+    ] as [string, string, string][],
+  },
+  ja: {
+    title: "球の構成要素（インタラクティブ）",
+    el1Title: "① 中心点（O）",
+    el1Desc: (<>球の中心にある点。球の表面上のすべての点はこの中心から<strong>r</strong>の距離にあります。</>),
+    el2Title: (<>② 半径（<InlineMath math="r" />）</>),
+    el2Desc: "球の中心から表面上の任意の点までの距離。すべての半径の長さは等しい。",
+    el3Title: (<>③ 直径（<InlineMath math="d" />）</>),
+    el3Desc: (<>球の中心を通る最も長い弦。半径の2倍に等しい：<InlineMath math="d = 2r" />。</>),
+    el4Title: "④ 球の表面",
+    el4Desc: "球の唯一の面で、すべてが曲面です。平らな面、辺、頂点はありません。",
+    el5Title: "⑤ 半球（球の半分）",
+    el5Desc: "球を中心を通るように切ると、2つの半球ができ、それぞれ次のものを持ちます：",
+    el5Bullet1: "平らな円形の面（半径 = r）",
+    el5Bullet2: (<>曲面 = 球の表面積の½ = <InlineMath math="2\pi r^2" /></>),
+    summaryTitle: "📋 球の構成要素のまとめ",
+    sisiLabel: "面", sisiNote: "（曲面）",
+    rusukLabel: "辺", rusukNote: "（なし）",
+    vertexLabel: "頂点", vertexNote: "（なし）",
+    summaryClosing: (<>球は辺も頂点もまったく持たず、<strong className="text-cyan-300">1つの面</strong>だけを持つ唯一の立体図形です。</>),
+    tableHeaders: ["構成要素", "記号", "説明"] as [string, string, string],
+    tableRows: [
+      ["中心点", "O", "球の中心"],
+      ["半径", "r", "中心→表面"],
+      ["直径", "d = 2r", "中心を通る"],
+      ["表面", "—", "単一の曲面"],
+      ["辺", "0", "なし！"],
+      ["頂点", "0", "なし！"],
+    ] as [string, string, string][],
+  },
+} as const;
+
+function getSections(language: Language): Sec[] {
+  const s1 = slide1Trans[language];
+  const s2 = slide2Trans[language];
+  return [
+  {
+    title: s1.title,
     icon: "⚽",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
-        <p>
-          <strong className="text-cyan-300">Bola</strong> adalah bangun ruang sisi lengkung yang terbentuk dari{" "}
-          <strong className="text-yellow-300">sekumpulan titik yang semuanya berjarak sama</strong> terhadap satu titik pusat.
-          Jarak itu disebut <strong className="text-yellow-300">jari-jari (r)</strong>.
-          Bola adalah bentuk paling sempurna di alam — dari buah jeruk, gelembung sabun, hingga planet-planet di antariksa!
-        </p>
-        <InteractiveSphere3D />
+        <p>{s1.intro}</p>
+        <InteractiveSphere3D language={language} />
         <div className="bg-cyan-950/60 border border-cyan-700/50 rounded-lg p-4 space-y-2">
-          <p className="text-cyan-300 font-semibold">📌 Sifat-sifat Bola:</p>
+          <p className="text-cyan-300 font-semibold">{s1.sifatTitle}</p>
           <ul className="space-y-1 text-xs text-white/75">
-            <li>• Memiliki <strong className="text-yellow-300">1 sisi lengkung</strong> (permukaan) dan <strong className="text-yellow-300">tidak memiliki rusuk maupun titik sudut</strong></li>
-            <li>• Setiap titik pada permukaan berjarak <strong className="text-yellow-300">sama</strong> terhadap pusat (<InlineMath math="= r" />)</li>
-            <li>• Bola adalah <strong className="text-yellow-300">bangun simetri sempurna</strong> — tampak sama dari semua arah</li>
-            <li>• Diameter bola <InlineMath math="d = 2r" /></li>
+            <li>• {s1.sifat1}</li>
+            <li>• {s1.sifat2}</li>
+            <li>• {s1.sifat3}</li>
+            <li>• {s1.sifat4}</li>
           </ul>
         </div>
-        {/* ── Foto Benda Berbentuk Bola — slide 2 ── */}
+        {/* ── Foto Benda Berbentuk Bola ── */}
         <div className="bg-slate-800/60 border border-cyan-700/30 rounded-xl p-4 space-y-3">
-          <p className="text-cyan-300 font-bold text-sm text-center">Benda Berbentuk Bola di Kehidupan Sehari-hari</p>
+          <p className="text-cyan-300 font-bold text-sm text-center">{s1.galleryTitle}</p>
           <div className="grid grid-cols-3 gap-2">
-            {[
-              { src: "/images/image_1780702385381.png", label: "Bola Sepak" },
-              { src: "/images/image_1780702495642.png",     label: "Bola Dunia" },
-              { src: "/images/image_1780702529187.png",  label: "Semangka" },
-              { src: "/images/image_1780702647131.png",     label: "Buah Jeruk" },
-              { src: "/images/image_1780702682181.png",  label: "Kelereng" },
-              { src: "/images/image_1780702856357.png",   label: "Bola Bowling" },
-            ].map(({ src, label }) => (
+            {s1.gallery.map(({ src, label }) => (
               <div key={label} className="flex flex-col items-center gap-1">
                 <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/60 bg-slate-900/60">
                   <img src={src} alt={label} className="w-full h-full object-cover" />
@@ -1116,77 +1339,70 @@ const sections: Sec[] = [
     ),
   },
   {
-    title: "Unsur-unsur Bola (Interaktif)",
+    title: s2.title,
     icon: "🔍",
     content: (
       <div className="space-y-5 text-sm text-white/85 font-body leading-relaxed">
-        <InteractiveSphere3D />
+        <InteractiveSphere3D language={language} />
         <div className="grid grid-cols-1 gap-3">
           <div className="bg-orange-950/40 border border-orange-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-orange-300 font-semibold">① Titik Pusat (O)</p>
-            <p className="text-xs text-white/70">Titik di tengah bola. Setiap titik pada permukaan bola berjarak <strong>r</strong> dari pusat ini.</p>
+            <p className="text-orange-300 font-semibold">{s2.el1Title}</p>
+            <p className="text-xs text-white/70">{s2.el1Desc}</p>
           </div>
           <div className="bg-green-950/40 border border-green-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-green-300 font-semibold">② Jari-jari (<InlineMath math="r" />)</p>
-            <p className="text-xs text-white/70">Jarak dari pusat bola ke titik mana saja di permukaan bola. Semua jari-jari panjangnya sama.</p>
+            <p className="text-green-300 font-semibold">{s2.el2Title}</p>
+            <p className="text-xs text-white/70">{s2.el2Desc}</p>
           </div>
           <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-yellow-300 font-semibold">③ Diameter (<InlineMath math="d" />)</p>
-            <p className="text-xs text-white/70">Tali busur terpanjang yang melewati pusat bola. Sama dengan dua kali jari-jari: <InlineMath math="d = 2r" />.</p>
+            <p className="text-yellow-300 font-semibold">{s2.el3Title}</p>
+            <p className="text-xs text-white/70">{s2.el3Desc}</p>
           </div>
           <div className="bg-cyan-950/40 border border-cyan-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-cyan-300 font-semibold">④ Permukaan Bola</p>
-            <p className="text-xs text-white/70">Satu-satunya sisi bola, seluruhnya berupa bidang lengkung. Tidak ada sisi datar, rusuk, maupun sudut.</p>
+            <p className="text-cyan-300 font-semibold">{s2.el4Title}</p>
+            <p className="text-xs text-white/70">{s2.el4Desc}</p>
           </div>
           <div className="bg-violet-950/40 border border-violet-700/40 rounded-lg p-3 space-y-1">
-            <p className="text-violet-300 font-semibold">⑤ Setengah Bola (Belahan Bola)</p>
-            <p className="text-xs text-white/70">Jika bola dipotong melalui pusat, terbentuk dua belahan bola (hemisphere), masing-masing memiliki:</p>
+            <p className="text-violet-300 font-semibold">{s2.el5Title}</p>
+            <p className="text-xs text-white/70">{s2.el5Desc}</p>
             <ul className="text-xs text-white/60 mt-1 space-y-0.5">
-              <li>• Sisi datar berupa lingkaran (jari-jari = r)</li>
-              <li>• Sisi lengkung = ½ permukaan bola = <InlineMath math="2\pi r^2" /></li>
+              <li>• {s2.el5Bullet1}</li>
+              <li>• {s2.el5Bullet2}</li>
             </ul>
           </div>
         </div>
-        <InteractiveHalfSphere3D />
+        <InteractiveHalfSphere3D language={language} />
         <div className="bg-slate-800/60 border border-cyan-700/40 rounded-xl p-4 space-y-3">
-          <p className="text-cyan-300 font-semibold text-sm">📋 Kesimpulan Unsur-unsur Bola</p>
+          <p className="text-cyan-300 font-semibold text-sm">{s2.summaryTitle}</p>
           <div className="grid grid-cols-3 gap-3 text-center">
             <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 space-y-1">
               <p className="text-3xl font-bold text-cyan-300">1</p>
-              <p className="text-xs text-white/70 font-body">Sisi</p>
-              <p className="text-[10px] text-cyan-400/70 font-body">(sisi lengkung)</p>
+              <p className="text-xs text-white/70 font-body">{s2.sisiLabel}</p>
+              <p className="text-[10px] text-cyan-400/70 font-body">{s2.sisiNote}</p>
             </div>
             <div className="bg-slate-900/50 border border-slate-600/40 rounded-lg p-3 space-y-1">
               <p className="text-3xl font-bold text-white/40">0</p>
-              <p className="text-xs text-white/70 font-body">Rusuk</p>
-              <p className="text-[10px] text-white/30 font-body">(tidak ada)</p>
+              <p className="text-xs text-white/70 font-body">{s2.rusukLabel}</p>
+              <p className="text-[10px] text-white/30 font-body">{s2.rusukNote}</p>
             </div>
             <div className="bg-slate-900/50 border border-slate-600/40 rounded-lg p-3 space-y-1">
               <p className="text-3xl font-bold text-white/40">0</p>
-              <p className="text-xs text-white/70 font-body">Titik Sudut</p>
-              <p className="text-[10px] text-white/30 font-body">(tidak ada)</p>
+              <p className="text-xs text-white/70 font-body">{s2.vertexLabel}</p>
+              <p className="text-[10px] text-white/30 font-body">{s2.vertexNote}</p>
             </div>
           </div>
           <p className="text-xs text-white/55 font-body text-center">
-            Bola adalah satu-satunya bangun ruang yang hanya memiliki <strong className="text-cyan-300">1 sisi</strong> tanpa rusuk maupun titik sudut sama sekali.
+            {s2.summaryClosing}
           </p>
         </div>
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="w-full text-xs text-center">
             <thead><tr className="bg-slate-800">
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Unsur</th>
-              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Simbol</th>
-              <th className="px-3 py-2 text-cyan-300">Keterangan</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s2.tableHeaders[0]}</th>
+              <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">{s2.tableHeaders[1]}</th>
+              <th className="px-3 py-2 text-cyan-300">{s2.tableHeaders[2]}</th>
             </tr></thead>
             <tbody>
-              {[
-                ["Titik pusat","O","pusat bola"],
-                ["Jari-jari","r","pusat → permukaan"],
-                ["Diameter","d = 2r","melewati pusat"],
-                ["Permukaan","—","sisi lengkung tunggal"],
-                ["Rusuk","0","tidak ada!"],
-                ["Titik sudut","0","tidak ada!"],
-              ].map(([u,s,k],i)=>(
+              {s2.tableRows.map(([u,s,k],i)=>(
                 <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
                   <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{u}</td>
                   <td className="px-3 py-2 text-yellow-300 border-r border-slate-700 font-mono">{s}</td>
@@ -1302,7 +1518,8 @@ const sections: Sec[] = [
       </div>
     ),
   },
-];
+  ];
+}
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE PROBLEMS
@@ -1731,7 +1948,10 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
 ───────────────────────────────────────────────────────────── */
 const BolaPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const pt = pageTrans[language];
+  const sections = getSections(language);
 
   const slides = [
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
@@ -1786,9 +2006,9 @@ const BolaPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <Circle className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
-          BOLA
+          {pt.title}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{pt.subtitle}</p>
 
         <div className="flex items-center justify-center gap-1.5 mb-5 flex-wrap">
           {slides.map((_, i) => (
