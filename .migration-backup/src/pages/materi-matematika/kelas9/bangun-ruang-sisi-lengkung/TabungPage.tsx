@@ -2749,7 +2749,7 @@ const TabungPage = () => {
       luasSubtitle: "易しい問題から難しい問題までの段階的練習",
       volTitle: "例題 — 体積",
       volSubtitle: "易しい問題から難しい問題までの段階的練習",
-      pageSubtitle: "9年生・曲面図形",
+      pageSubtitle: "中学3年・曲面図形",
       slideLabel: "スライド",
       prev: "← 前へ",
       next: "次へ →",
