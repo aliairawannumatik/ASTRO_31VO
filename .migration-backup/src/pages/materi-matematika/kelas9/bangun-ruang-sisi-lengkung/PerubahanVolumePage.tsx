@@ -303,6 +303,141 @@ const sec0Trans = {
 };
 
 /* ─────────────────────────────────────────────────────────────
+   SECTION 1 — PERUBAHAN PADA TABUNG
+───────────────────────────────────────────────────────────── */
+const sec1Trans = {
+  id: {
+    intro: (<p className="text-white/80 text-sm">Tabung memiliki dua variabel: <strong className="text-yellow-300">r (jari-jari)</strong> dan <strong className="text-green-300">t (tinggi)</strong>. Perubahan masing-masing memberi efek yang berbeda!</p>),
+    originalFormula: "Rumus asli:",
+    case1Title: "1. Jika Jari-jari (r) Diperbesar k kali (tinggi tetap)",
+    case1Conclusion: (<>→ Volume menjadi <strong>k²</strong> kali volume semula</>),
+    case1Note: "→ Luas tidak bisa disederhanakan menjadi k² × L kecuali t juga turut berubah",
+    case2Title: "2. Jika Tinggi (t) Diperbesar k kali (jari-jari tetap)",
+    case2Conclusion: (<>→ Volume menjadi <strong>k</strong> kali volume semula</>),
+    case2LateralNote: "Luas selimut:",
+    case2LateralResult: "→ selimut menjadi k kali",
+    case3Title: "3. Jika Semua Dimensi Diperbesar k kali (r → kr, t → kt)",
+    conclLabel: "✨ Kesimpulan:",
+    conclText: (<>Jika semua dimensi × k: <strong className="text-yellow-300">L × k²</strong> dan <strong className="text-yellow-300">V × k³</strong></>),
+    tableHeaders: ["Perubahan", "Volume", "Luas Permukaan"],
+    tableRows: [
+      ["r → kr (t tetap)", "V_n = k² × V", "Tidak proporsional"],
+      ["t → kt (r tetap)", "V_n = k × V", "Selimut = k × L_s"],
+      ["r → kr, t → kt", "V_n = k³ × V", "L_n = k² × L"],
+    ],
+  },
+  en: {
+    intro: (<p className="text-white/80 text-sm">A cylinder has two variables: <strong className="text-yellow-300">r (radius)</strong> and <strong className="text-green-300">t (height)</strong>. Each change produces a different effect!</p>),
+    originalFormula: "Original formula:",
+    case1Title: "1. If Radius (r) Is Scaled by k (t fixed)",
+    case1Conclusion: (<>→ Volume becomes <strong>k²</strong> times the original</>),
+    case1Note: "→ Surface area cannot be simplified to k² × L unless t also changes",
+    case2Title: "2. If Height (t) Is Scaled by k (r fixed)",
+    case2Conclusion: (<>→ Volume becomes <strong>k</strong> times the original</>),
+    case2LateralNote: "Lateral surface:",
+    case2LateralResult: "→ lateral area becomes k times",
+    case3Title: "3. If All Dimensions Are Scaled by k (r → kr, t → kt)",
+    conclLabel: "✨ Conclusion:",
+    conclText: (<>If all dimensions × k: <strong className="text-yellow-300">A × k²</strong> and <strong className="text-yellow-300">V × k³</strong></>),
+    tableHeaders: ["Change", "Volume", "Surface Area"],
+    tableRows: [
+      ["r → kr (t fixed)", "V_n = k² × V", "Not proportional"],
+      ["t → kt (r fixed)", "V_n = k × V", "Lateral = k × L_s"],
+      ["r → kr, t → kt", "V_n = k³ × V", "L_n = k² × L"],
+    ],
+  },
+  ja: {
+    intro: (<p className="text-white/80 text-sm">円柱には2つの変数があります：<strong className="text-yellow-300">r（半径）</strong>と<strong className="text-green-300">t（高さ）</strong>。それぞれの変化が異なる効果をもたらします！</p>),
+    originalFormula: "元の公式：",
+    case1Title: "1. 半径（r）を k 倍にした場合（t 固定）",
+    case1Conclusion: (<>→ 体積は元の <strong>k²</strong> 倍になる</>),
+    case1Note: "→ t も変化しない限り、表面積は k² × L とは単純にならない",
+    case2Title: "2. 高さ（t）を k 倍にした場合（r 固定）",
+    case2Conclusion: (<>→ 体積は元の <strong>k</strong> 倍になる</>),
+    case2LateralNote: "側面積：",
+    case2LateralResult: "→ 側面積は k 倍",
+    case3Title: "3. 全ての寸法を k 倍にした場合（r → kr、t → kt）",
+    conclLabel: "✨ まとめ：",
+    conclText: (<>全寸法 × k のとき：<strong className="text-yellow-300">面積 × k²</strong> かつ <strong className="text-yellow-300">体積 × k³</strong></>),
+    tableHeaders: ["変化", "体積", "表面積"],
+    tableRows: [
+      ["r → kr（t 固定）", "V_n = k² × V", "比例しない"],
+      ["t → kt（r 固定）", "V_n = k × V", "側面 = k × L_s"],
+      ["r → kr, t → kt", "V_n = k³ × V", "L_n = k² × L"],
+    ],
+  },
+};
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 2 — PERUBAHAN PADA KERUCUT
+───────────────────────────────────────────────────────────── */
+const sec2Trans = {
+  id: {
+    intro: (<p className="text-white/80 text-sm">Kerucut memiliki <strong className="text-yellow-300">r (jari-jari)</strong>, <strong className="text-green-300">t (tinggi)</strong>, dan{" "}<strong className="text-purple-300">s (garis pelukis)</strong> di mana <InlineMath math="s = \sqrt{r^2 + t^2}" />.</p>),
+    formulaTitle: "📐 Rumus Kerucut (Asal):",
+    case1Title: "Jika Jari-jari (r) → kr (tinggi tetap)",
+    case1SlantNote: "Garis pelukis baru:",
+    case1Conclusion: "→ Volume menjadi k² kali; luas permukaan tidak sederhana karena s berubah berbeda",
+    case2Title: "Jika Semua Dimensi → k kali (r → kr, t → kt, s → ks)",
+    principle: "✨ Prinsip yang sama: Semua dimensi × k → L × k², V × k³",
+  },
+  en: {
+    intro: (<p className="text-white/80 text-sm">A cone has <strong className="text-yellow-300">r (radius)</strong>, <strong className="text-green-300">t (height)</strong>, and{" "}<strong className="text-purple-300">s (slant height)</strong> where <InlineMath math="s = \sqrt{r^2 + t^2}" />.</p>),
+    formulaTitle: "📐 Cone Formulas (Original):",
+    case1Title: "If Radius (r) → kr (t fixed)",
+    case1SlantNote: "New slant height:",
+    case1Conclusion: "→ Volume becomes k² times; surface area is not simple because s changes differently",
+    case2Title: "If All Dimensions → k times (r → kr, t → kt, s → ks)",
+    principle: "✨ Same principle: All dimensions × k → A × k², V × k³",
+  },
+  ja: {
+    intro: (<p className="text-white/80 text-sm">円錐には <strong className="text-yellow-300">r（半径）</strong>、<strong className="text-green-300">t（高さ）</strong>、<strong className="text-purple-300">s（母線）</strong> があり、<InlineMath math="s = \sqrt{r^2 + t^2}" /> です。</p>),
+    formulaTitle: "📐 円錐の公式（元）：",
+    case1Title: "半径（r）→ kr の場合（t 固定）",
+    case1SlantNote: "新しい母線：",
+    case1Conclusion: "→ 体積は k² 倍；s の変化が異なるため表面積は単純にならない",
+    case2Title: "全ての寸法が k 倍の場合（r → kr、t → kt、s → ks）",
+    principle: "✨ 同じ原則：全寸法 × k → 面積 × k²、体積 × k³",
+  },
+};
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION 3 — PERUBAHAN PADA BOLA
+───────────────────────────────────────────────────────────── */
+const sec3Trans = {
+  id: {
+    intro: (<p className="text-white/80 text-sm">Bola hanya punya satu variabel: <strong className="text-yellow-300">r (jari-jari)</strong>. Sehingga perubahan jari-jari langsung berpengaruh ke semua!</p>),
+    formulaTitle: "📐 Rumus Bola (Asal):",
+    caseTitle: "Jika r → kr:",
+    memoLabel: "✨ Untuk bola, sangat mudah diingat:",
+    memo1: (<>• r diperbesar <strong className="text-yellow-300">2×</strong> → V menjadi <strong className="text-blue-300">8×</strong>, L menjadi <strong className="text-orange-300">4×</strong></>),
+    memo2: (<>• r diperbesar <strong className="text-yellow-300">3×</strong> → V menjadi <strong className="text-blue-300">27×</strong>, L menjadi <strong className="text-orange-300">9×</strong></>),
+    tableHeaders: ["r diperbesar", "L menjadi", "V menjadi"],
+    tableKTimes: (k: number) => `${k}× lebih besar`,
+  },
+  en: {
+    intro: (<p className="text-white/80 text-sm">A sphere has only one variable: <strong className="text-yellow-300">r (radius)</strong>. So any change in radius directly affects everything!</p>),
+    formulaTitle: "📐 Sphere Formulas (Original):",
+    caseTitle: "If r → kr:",
+    memoLabel: "✨ For a sphere, easy to remember:",
+    memo1: (<>• r enlarged <strong className="text-yellow-300">2×</strong> → V becomes <strong className="text-blue-300">8×</strong>, A becomes <strong className="text-orange-300">4×</strong></>),
+    memo2: (<>• r enlarged <strong className="text-yellow-300">3×</strong> → V becomes <strong className="text-blue-300">27×</strong>, A becomes <strong className="text-orange-300">9×</strong></>),
+    tableHeaders: ["r enlarged", "A becomes", "V becomes"],
+    tableKTimes: (k: number) => `${k}×`,
+  },
+  ja: {
+    intro: (<p className="text-white/80 text-sm">球の変数は <strong className="text-yellow-300">r（半径）</strong> のみ。半径を変えるだけで全てが変わります！</p>),
+    formulaTitle: "📐 球の公式（元）：",
+    caseTitle: "r → kr の場合：",
+    memoLabel: "✨ 球は覚えやすい：",
+    memo1: (<>• r を <strong className="text-yellow-300">2倍</strong> → V は <strong className="text-blue-300">8倍</strong>、面積は <strong className="text-orange-300">4倍</strong></>),
+    memo2: (<>• r を <strong className="text-yellow-300">3倍</strong> → V は <strong className="text-blue-300">27倍</strong>、面積は <strong className="text-orange-300">9倍</strong></>),
+    tableHeaders: ["r の拡大倍率", "面積の変化", "体積の変化"],
+    tableKTimes: (k: number) => `${k}×`,
+  },
+};
+
+/* ─────────────────────────────────────────────────────────────
    SECTION TITLES (all 5 sections, all languages)
 ───────────────────────────────────────────────────────────── */
 const secTitles: Record<Language, [string, string, string, string, string]> = {
@@ -337,6 +472,9 @@ type Sec = { title: string; icon: string; content: React.ReactNode };
 function getSections(language: Language): Sec[] {
   const t = secTitles[language];
   const s0 = sec0Trans[language];
+  const s1 = sec1Trans[language];
+  const s2 = sec2Trans[language];
+  const s3 = sec3Trans[language];
   return [
     {
       title: t[0],
@@ -375,54 +513,47 @@ function getSections(language: Language): Sec[] {
       icon: "🔵",
       content: (
         <div className="space-y-4 font-body">
-          <p className="text-white/80 text-sm">
-            Tabung memiliki dua variabel: <strong className="text-yellow-300">r (jari-jari)</strong> dan <strong className="text-green-300">t (tinggi)</strong>.
-            Perubahan masing-masing memberi efek yang berbeda!
-          </p>
+          {s1.intro}
           <div className="space-y-3">
             <div className="bg-amber-950/40 border border-amber-700/40 rounded-xl p-4 space-y-2">
-              <p className="text-amber-300 font-bold text-sm">1. Jika Jari-jari (r) Diperbesar k kali (tinggi tetap)</p>
+              <p className="text-amber-300 font-bold text-sm">{s1.case1Title}</p>
               <div className="bg-slate-900/60 rounded p-3 text-xs space-y-1">
-                <p className="text-white/60 mb-1">Rumus asli: <InlineMath math="V = \pi r^2 t" />, <InlineMath math="L = 2\pi r^2 + 2\pi r t" /></p>
+                <p className="text-white/60 mb-1">{s1.originalFormula} <InlineMath math="V = \pi r^2 t" />, <InlineMath math="L = 2\pi r^2 + 2\pi r t" /></p>
                 <BlockMath math="V_n = \pi (kr)^2 t = k^2 \cdot \pi r^2 t = k^2 \cdot V" />
-                <p className="text-orange-300 font-semibold">→ Volume menjadi <strong>k²</strong> kali volume semula</p>
+                <p className="text-orange-300 font-semibold">{s1.case1Conclusion}</p>
                 <BlockMath math="L_n = 2\pi (kr)^2 + 2\pi (kr) t = k^2 \cdot 2\pi r^2 + k \cdot 2\pi r t" />
-                <p className="text-orange-300 text-xs">→ Luas tidak bisa disederhanakan menjadi k² × L kecuali t juga turut berubah</p>
+                <p className="text-orange-300 text-xs">{s1.case1Note}</p>
               </div>
             </div>
             <div className="bg-green-950/40 border border-green-700/40 rounded-xl p-4 space-y-2">
-              <p className="text-green-300 font-bold text-sm">2. Jika Tinggi (t) Diperbesar k kali (jari-jari tetap)</p>
+              <p className="text-green-300 font-bold text-sm">{s1.case2Title}</p>
               <div className="bg-slate-900/60 rounded p-3 text-xs space-y-1">
                 <BlockMath math="V_n = \pi r^2 \cdot (kt) = k \cdot \pi r^2 t = k \cdot V" />
-                <p className="text-green-300 font-semibold">→ Volume menjadi <strong>k</strong> kali volume semula</p>
-                <p className="text-white/60 text-xs">Luas selimut: <InlineMath math="L_s = 2\pi r \cdot kt = k \cdot 2\pi rt" /> → selimut menjadi k kali</p>
+                <p className="text-green-300 font-semibold">{s1.case2Conclusion}</p>
+                <p className="text-white/60 text-xs">{s1.case2LateralNote} <InlineMath math="L_s = 2\pi r \cdot kt = k \cdot 2\pi rt" /> {s1.case2LateralResult}</p>
               </div>
             </div>
             <div className="bg-blue-950/40 border border-blue-700/40 rounded-xl p-4 space-y-2">
-              <p className="text-blue-300 font-bold text-sm">3. Jika Semua Dimensi Diperbesar k kali (r → kr, t → kt)</p>
+              <p className="text-blue-300 font-bold text-sm">{s1.case3Title}</p>
               <div className="bg-slate-900/60 rounded p-3 text-xs space-y-1">
                 <BlockMath math="V_n = \pi (kr)^2 (kt) = k^3 \cdot \pi r^2 t = k^3 \cdot V" />
                 <BlockMath math="L_n = 2\pi (kr)^2 + 2\pi (kr)(kt) = k^2(2\pi r^2 + 2\pi rt) = k^2 \cdot L" />
               </div>
               <div className="bg-blue-950/70 border border-blue-600/40 rounded p-2 text-xs">
-                <p className="text-blue-200 font-semibold">✨ Kesimpulan:</p>
-                <p className="text-white/80">Jika semua dimensi × k: <strong className="text-yellow-300">L × k²</strong> dan <strong className="text-yellow-300">V × k³</strong></p>
+                <p className="text-blue-200 font-semibold">{s1.conclLabel}</p>
+                <p className="text-white/80">{s1.conclText}</p>
               </div>
             </div>
           </div>
           <div className="overflow-x-auto rounded-lg border border-slate-700">
             <table className="w-full text-xs text-center">
               <thead><tr className="bg-slate-800">
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Perubahan</th>
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Volume</th>
-                <th className="px-3 py-2 text-cyan-300">Luas Permukaan</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s1.tableHeaders[0]}</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">{s1.tableHeaders[1]}</th>
+                <th className="px-3 py-2 text-cyan-300">{s1.tableHeaders[2]}</th>
               </tr></thead>
               <tbody>
-                {[
-                  ["r → kr (t tetap)","V_baru = k² × V","Tidak proporsional"],
-                  ["t → kt (r tetap)","V_baru = k × V","Selimut = k × L_s"],
-                  ["r → kr, t → kt","V_baru = k³ × V","L_baru = k² × L"],
-                ].map(([b, r, c], i) => (
+                {s1.tableRows.map(([b, r, c], i) => (
                   <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
                     <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
                     <td className="px-3 py-2 text-blue-300 font-mono border-r border-slate-700">{r}</td>
@@ -440,12 +571,9 @@ function getSections(language: Language): Sec[] {
       icon: "🔺",
       content: (
         <div className="space-y-4 font-body">
-          <p className="text-white/80 text-sm">
-            Kerucut memiliki <strong className="text-yellow-300">r (jari-jari)</strong>, <strong className="text-green-300">t (tinggi)</strong>, dan{" "}
-            <strong className="text-purple-300">s (garis pelukis)</strong> di mana <InlineMath math="s = \sqrt{r^2 + t^2}" />.
-          </p>
+          {s2.intro}
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
-            <p className="text-orange-300 font-bold text-sm">📐 Rumus Kerucut (Asal):</p>
+            <p className="text-orange-300 font-bold text-sm">{s2.formulaTitle}</p>
             <div className="bg-slate-900/60 rounded p-3 text-xs space-y-1">
               <p><InlineMath math="V = \frac{1}{3} \pi r^2 t" /></p>
               <p><InlineMath math="L = \pi r^2 + \pi r s" /></p>
@@ -453,21 +581,21 @@ function getSections(language: Language): Sec[] {
           </div>
           <div className="space-y-3">
             <div className="bg-amber-950/40 border border-amber-700/40 rounded-xl p-4 space-y-2">
-              <p className="text-amber-300 font-bold text-sm">Jika Jari-jari (r) → kr (tinggi tetap)</p>
+              <p className="text-amber-300 font-bold text-sm">{s2.case1Title}</p>
               <div className="bg-slate-900/60 rounded p-3 text-xs space-y-1">
                 <BlockMath math="V_n = \frac{1}{3}\pi (kr)^2 t = k^2 \cdot \frac{1}{3}\pi r^2 t = k^2 \cdot V" />
-                <p className="text-white/60">Garis pelukis baru: <InlineMath math="s_n = \sqrt{(kr)^2 + t^2} \neq k \cdot s" /></p>
-                <p className="text-amber-300 font-semibold">→ Volume menjadi k² kali; luas permukaan tidak sederhana karena s berubah berbeda</p>
+                <p className="text-white/60">{s2.case1SlantNote} <InlineMath math="s_n = \sqrt{(kr)^2 + t^2} \neq k \cdot s" /></p>
+                <p className="text-amber-300 font-semibold">{s2.case1Conclusion}</p>
               </div>
             </div>
             <div className="bg-blue-950/40 border border-blue-700/40 rounded-xl p-4 space-y-2">
-              <p className="text-blue-300 font-bold text-sm">Jika Semua Dimensi → k kali (r → kr, t → kt, s → ks)</p>
+              <p className="text-blue-300 font-bold text-sm">{s2.case2Title}</p>
               <div className="bg-slate-900/60 rounded p-3 text-xs space-y-1">
                 <BlockMath math="V_n = \frac{1}{3}\pi (kr)^2(kt) = k^3 \cdot V" />
                 <BlockMath math="L_n = \pi (kr)^2 + \pi (kr)(ks) = k^2(\pi r^2 + \pi rs) = k^2 \cdot L" />
               </div>
               <div className="bg-blue-950/70 border border-blue-600/40 rounded p-2 text-xs text-blue-200 font-semibold">
-                ✨ Prinsip yang sama: Semua dimensi × k → L × k², V × k³
+                {s2.principle}
               </div>
             </div>
           </div>
@@ -479,40 +607,38 @@ function getSections(language: Language): Sec[] {
       icon: "⚽",
       content: (
         <div className="space-y-4 font-body">
-          <p className="text-white/80 text-sm">
-            Bola hanya punya satu variabel: <strong className="text-yellow-300">r (jari-jari)</strong>. Sehingga perubahan jari-jari langsung berpengaruh ke semua!
-          </p>
+          {s3.intro}
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
-            <p className="text-orange-300 font-bold text-sm">📐 Rumus Bola (Asal):</p>
+            <p className="text-orange-300 font-bold text-sm">{s3.formulaTitle}</p>
             <div className="bg-slate-900/60 rounded p-3 text-xs space-y-1">
               <p><InlineMath math="V = \frac{4}{3} \pi r^3" /></p>
               <p><InlineMath math="L = 4 \pi r^2" /></p>
             </div>
           </div>
           <div className="bg-purple-950/40 border border-purple-700/40 rounded-xl p-4 space-y-3">
-            <p className="text-purple-300 font-bold text-sm">Jika r → kr:</p>
+            <p className="text-purple-300 font-bold text-sm">{s3.caseTitle}</p>
             <div className="bg-slate-900/60 rounded p-3 text-xs space-y-2">
               <BlockMath math="V_n = \frac{4}{3}\pi (kr)^3 = k^3 \cdot \frac{4}{3}\pi r^3 = k^3 \cdot V" />
               <BlockMath math="L_n = 4\pi (kr)^2 = k^2 \cdot 4\pi r^2 = k^2 \cdot L" />
             </div>
             <div className="bg-purple-950/70 border border-purple-600/40 rounded p-3 text-xs">
-              <p className="text-purple-200 font-semibold">✨ Untuk bola, sangat mudah diingat:</p>
-              <p className="text-white/80 mt-1">• r diperbesar <strong className="text-yellow-300">2×</strong> → V menjadi <strong className="text-blue-300">8×</strong>, L menjadi <strong className="text-orange-300">4×</strong></p>
-              <p className="text-white/80">• r diperbesar <strong className="text-yellow-300">3×</strong> → V menjadi <strong className="text-blue-300">27×</strong>, L menjadi <strong className="text-orange-300">9×</strong></p>
+              <p className="text-purple-200 font-semibold">{s3.memoLabel}</p>
+              <p className="text-white/80 mt-1">{s3.memo1}</p>
+              <p className="text-white/80">{s3.memo2}</p>
             </div>
           </div>
           <BolaPerubahanSVG />
           <div className="overflow-x-auto rounded-lg border border-slate-700">
             <table className="w-full text-xs text-center">
               <thead><tr className="bg-slate-800">
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">r diperbesar</th>
-                <th className="px-3 py-2 text-orange-300 border-r border-slate-700">L menjadi</th>
-                <th className="px-3 py-2 text-blue-300">V menjadi</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">{s3.tableHeaders[0]}</th>
+                <th className="px-3 py-2 text-orange-300 border-r border-slate-700">{s3.tableHeaders[1]}</th>
+                <th className="px-3 py-2 text-blue-300">{s3.tableHeaders[2]}</th>
               </tr></thead>
               <tbody>
                 {[[2,4,8],[3,9,27],[4,16,64],[5,25,125]].map(([k,l,v],i) => (
                   <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
-                    <td className="px-3 py-2 text-yellow-300 font-bold border-r border-slate-700">{k}× lebih besar</td>
+                    <td className="px-3 py-2 text-yellow-300 font-bold border-r border-slate-700">{s3.tableKTimes(k)}</td>
                     <td className="px-3 py-2 text-orange-300 font-mono border-r border-slate-700">{l}× L</td>
                     <td className="px-3 py-2 text-blue-300 font-mono">{v}× V</td>
                   </tr>
