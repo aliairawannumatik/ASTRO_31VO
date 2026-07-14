@@ -196,6 +196,7 @@ const CompositeShapeViewer = ({ language }: { language: Language }) => {
 type Sec = { title: string; icon: string; content: React.ReactNode };
 
 function getSections(language: Language): Sec[] {
+  const tt = tipsTrans[language];
   return [
   {
     title: "Konsep Bangun Gabungan",
@@ -346,42 +347,34 @@ function getSections(language: Language): Sec[] {
     ),
   },
   {
-    title: "Tips & Strategi Mengerjakan Soal",
+    title: tt.title,
     icon: "💡",
     content: (
       <div className="space-y-4 font-body">
         <div className="space-y-3">
           <div className="bg-green-950/40 border border-green-700/40 rounded-xl p-4 space-y-2">
-            <p className="text-green-300 font-bold text-sm">✅ Strategi Luas Permukaan:</p>
+            <p className="text-green-300 font-bold text-sm">{tt.luasHeading}</p>
             <ol className="space-y-2 text-sm text-white/80 text-xs">
-              <li>1. <strong className="text-white">Gambar sketsanya!</strong> Visualisasi sangat membantu.</li>
-              <li>2. Identifikasi semua bagian permukaan yang <strong>terlihat dari luar</strong>.</li>
-              <li>3. Permukaan yang <strong>"tertutup" oleh bangun lain</strong> → dikurangi (tidak dihitung).</li>
-              <li>4. Hitung setiap komponen permukaan secara terpisah, lalu jumlahkan.</li>
+              {tt.luasSteps.map((step, i) => <li key={i}>{step}</li>)}
             </ol>
           </div>
           <div className="bg-blue-950/40 border border-blue-700/40 rounded-xl p-4 space-y-2">
-            <p className="text-blue-300 font-bold text-sm">✅ Strategi Volume:</p>
+            <p className="text-blue-300 font-bold text-sm">{tt.volumeHeading}</p>
             <ol className="space-y-2 text-sm text-white/80 text-xs">
-              <li>1. <strong>Selalu jumlahkan</strong> volume setiap bangun penyusun.</li>
-              <li>2. Pastikan satuan semua dimensi <strong>sama</strong> sebelum menghitung.</li>
-              <li>3. Perhatikan apakah bangun "berlubang" (misalnya pipa) — kalau ada lubang, volume berkurang.</li>
+              {tt.volumeSteps.map((step, i) => <li key={i}>{step}</li>)}
             </ol>
           </div>
           <div className="bg-amber-950/40 border border-amber-700/40 rounded-xl p-4 space-y-2">
-            <p className="text-amber-300 font-bold text-sm">⚠️ Kesalahan Umum:</p>
+            <p className="text-amber-300 font-bold text-sm">{tt.mistakesHeading}</p>
             <ul className="space-y-1 text-xs text-white/80">
-              <li>❌ Lupa mengurangi bidang persekutuan pada luas permukaan</li>
-              <li>❌ Mengurangi volume (volume tidak pernah dikurangi kecuali ada rongga)</li>
-              <li>❌ Menggunakan jari-jari yang berbeda untuk dua bangun yang terhubung</li>
-              <li>❌ Lupa bahwa luas setengah bola = 2πr² (bukan 2πr²/2)</li>
+              {tt.mistakes.map((m, i) => <li key={i}>{m}</li>)}
             </ul>
           </div>
         </div>
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-          <p>🚀 <strong>Kunci sukses:</strong></p>
-          <p>• Luas: Gambar → Identifikasi sisi luar → Kurangi sisi tersembunyi → Jumlahkan</p>
-          <p>• Volume: Jumlahkan langsung semua V penyusun</p>
+          <p>🚀 <strong>{tt.keyHeading}</strong></p>
+          <p>{tt.keyLuas}</p>
+          <p>{tt.keyVolume}</p>
         </div>
       </div>
     ),
@@ -572,6 +565,87 @@ const pageTrans = {
   id: { title: "BANGUN RUANG SISI LENGKUNG GABUNGAN", subtitle: "Kelas 9 · Bangun Ruang Sisi Lengkung" },
   en: { title: "COMPOSITE CURVED-SURFACE SOLIDS", subtitle: "Grade 9 · Curved-Surface Solids" },
   ja: { title: "複合曲面図形", subtitle: "中学3年・曲面図形" },
+} as const;
+
+const tipsTrans = {
+  id: {
+    title: "Tips & Strategi Mengerjakan Soal",
+    luasHeading: "✅ Strategi Luas Permukaan:",
+    luasSteps: [
+      <>1. <strong className="text-white">Gambar sketsanya!</strong> Visualisasi sangat membantu.</>,
+      <>2. Identifikasi semua bagian permukaan yang <strong>terlihat dari luar</strong>.</>,
+      <>3. Permukaan yang <strong>"tertutup" oleh bangun lain</strong> → dikurangi (tidak dihitung).</>,
+      <>4. Hitung setiap komponen permukaan secara terpisah, lalu jumlahkan.</>,
+    ],
+    volumeHeading: "✅ Strategi Volume:",
+    volumeSteps: [
+      <>1. <strong>Selalu jumlahkan</strong> volume setiap bangun penyusun.</>,
+      <>2. Pastikan satuan semua dimensi <strong>sama</strong> sebelum menghitung.</>,
+      <>3. Perhatikan apakah bangun "berlubang" (misalnya pipa) — kalau ada lubang, volume berkurang.</>,
+    ],
+    mistakesHeading: "⚠️ Kesalahan Umum:",
+    mistakes: [
+      "❌ Lupa mengurangi bidang persekutuan pada luas permukaan",
+      "❌ Mengurangi volume (volume tidak pernah dikurangi kecuali ada rongga)",
+      "❌ Menggunakan jari-jari yang berbeda untuk dua bangun yang terhubung",
+      "❌ Lupa bahwa luas setengah bola = 2πr² (bukan 2πr²/2)",
+    ],
+    keyHeading: "🚀 Kunci sukses:",
+    keyLuas: "• Luas: Gambar → Identifikasi sisi luar → Kurangi sisi tersembunyi → Jumlahkan",
+    keyVolume: "• Volume: Jumlahkan langsung semua V penyusun",
+  },
+  en: {
+    title: "Tips & Problem-Solving Strategies",
+    luasHeading: "✅ Surface Area Strategy:",
+    luasSteps: [
+      <>1. <strong className="text-white">Draw a sketch!</strong> Visualization helps a lot.</>,
+      <>2. Identify every surface part <strong>visible from the outside</strong>.</>,
+      <>3. Surfaces <strong>"covered" by another shape</strong> → subtract them (don't count them).</>,
+      <>4. Calculate each surface component separately, then add them up.</>,
+    ],
+    volumeHeading: "✅ Volume Strategy:",
+    volumeSteps: [
+      <>1. <strong>Always add up</strong> the volume of every component shape.</>,
+      <>2. Make sure all dimension units are <strong>the same</strong> before calculating.</>,
+      <>3. Check whether the shape is "hollow" (e.g. a pipe) — if there's a cavity, the volume decreases.</>,
+    ],
+    mistakesHeading: "⚠️ Common Mistakes:",
+    mistakes: [
+      "❌ Forgetting to subtract the shared (touching) surface area",
+      "❌ Subtracting volume (volume is never subtracted unless there's a cavity)",
+      "❌ Using different radii for two connected shapes",
+      "❌ Forgetting that a half-sphere's surface area = 2πr² (not 2πr²/2)",
+    ],
+    keyHeading: "🚀 Key to success:",
+    keyLuas: "• Surface area: Sketch → Identify outer surfaces → Subtract hidden surfaces → Add up",
+    keyVolume: "• Volume: Directly add up all the component volumes",
+  },
+  ja: {
+    title: "問題を解くヒントと戦略",
+    luasHeading: "✅ 表面積の戦略：",
+    luasSteps: [
+      <>1. <strong className="text-white">スケッチを描こう！</strong>可視化はとても役立ちます。</>,
+      <>2. 外から<strong>見える表面部分</strong>をすべて特定する。</>,
+      <>3. 他の図形に<strong>「隠れている」表面</strong> → 引く（計算しない）。</>,
+      <>4. 各表面部分を個別に計算し、最後に合計する。</>,
+    ],
+    volumeHeading: "✅ 体積の戦略：",
+    volumeSteps: [
+      <>1. 各構成図形の体積を<strong>常に足し合わせる</strong>。</>,
+      <>2. 計算前にすべての寸法の単位を<strong>揃える</strong>。</>,
+      <>3. 図形が「空洞」になっていないか確認する（例：パイプ）。空洞があれば体積は減る。</>,
+    ],
+    mistakesHeading: "⚠️ よくある間違い：",
+    mistakes: [
+      "❌ 表面積で共通部分（接触面）を引き忘れる",
+      "❌ 体積を引いてしまう（空洞がない限り体積は引かない）",
+      "❌ 接続された2つの図形で異なる半径を使う",
+      "❌ 半球の表面積 = 2πr² であることを忘れる（2πr²/2ではない）",
+    ],
+    keyHeading: "🚀 成功の鍵：",
+    keyLuas: "• 表面積：スケッチ → 外側の面を特定 → 隠れた面を引く → 合計する",
+    keyVolume: "• 体積：構成する体積をそのまま合計する",
+  },
 } as const;
 
 const slide1Trans = {
