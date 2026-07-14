@@ -6,6 +6,8 @@ import { Layers, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucid
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
+import type { Language } from "@/contexts/LanguageContext";
 
 /* ─────────────────────────────────────────────────────────────
    ANIMATED SVGs — COMPOSITE SHAPES
@@ -137,25 +139,50 @@ const KerucutBolaSVG = () => (
 /* ─────────────────────────────────────────────────────────────
    INTERACTIVE SHAPE EXPLORER
 ───────────────────────────────────────────────────────────── */
-const CompositeShapeViewer = () => {
+const compositeViewerTrans = {
+  id: {
+    label: "🔍 Eksplorasi Bangun Gabungan",
+    tabungKerucut: "Tabung + Kerucut",
+    tabungBola: "Tabung + ½ Bola",
+    hideSurface: "🎨 Sembunyikan Luas",
+    showSurface: "🎨 Sorot Luas Permukaan",
+  },
+  en: {
+    label: "🔍 Explore Composite Shapes",
+    tabungKerucut: "Cylinder + Cone",
+    tabungBola: "Cylinder + ½ Sphere",
+    hideSurface: "🎨 Hide Surface",
+    showSurface: "🎨 Highlight Surface Area",
+  },
+  ja: {
+    label: "🔍 複合図形を探る",
+    tabungKerucut: "円柱 + 円錐",
+    tabungBola: "円柱 + 半球",
+    hideSurface: "🎨 表面を隠す",
+    showSurface: "🎨 表面積をハイライト",
+  },
+} as const;
+
+const CompositeShapeViewer = ({ language }: { language: Language }) => {
+  const t = compositeViewerTrans[language];
   const [config, setConfig] = useState<"tabung-kerucut" | "tabung-bola">("tabung-kerucut");
   const [showSurface, setShowSurface] = useState(false);
 
   return (
     <div className="bg-slate-800/70 border border-slate-600/40 rounded-xl p-4 space-y-4 font-body">
-      <p className="text-cyan-300 font-bold text-sm">🔍 Eksplorasi Bangun Gabungan</p>
+      <p className="text-cyan-300 font-bold text-sm">{t.label}</p>
       <div className="flex flex-wrap gap-2">
         <button onClick={() => { playPopSound(); setConfig("tabung-kerucut"); }}
           className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer ${config === "tabung-kerucut" ? "bg-cyan-800/80 border-cyan-500 text-cyan-200" : "bg-slate-900/60 border-slate-600 text-slate-300"}`}>
-          Tabung + Kerucut
+          {t.tabungKerucut}
         </button>
         <button onClick={() => { playPopSound(); setConfig("tabung-bola"); }}
           className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer ${config === "tabung-bola" ? "bg-purple-800/80 border-purple-500 text-purple-200" : "bg-slate-900/60 border-slate-600 text-slate-300"}`}>
-          Tabung + ½ Bola
+          {t.tabungBola}
         </button>
         <button onClick={() => { playPopSound(); setShowSurface(v => !v); }}
           className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer ${showSurface ? "bg-orange-800/80 border-orange-500 text-orange-200" : "bg-slate-900/60 border-slate-600 text-slate-300"}`}>
-          {showSurface ? "🎨 Sembunyikan Luas" : "🎨 Sorot Luas Permukaan"}
+          {showSurface ? t.hideSurface : t.showSurface}
         </button>
       </div>
       {config === "tabung-kerucut" ? <TabungKerucutSVG showSurface={showSurface}/> : <TabungBolaSVG showSurface={showSurface}/>}
@@ -168,7 +195,8 @@ const CompositeShapeViewer = () => {
 ───────────────────────────────────────────────────────────── */
 type Sec = { title: string; icon: string; content: React.ReactNode };
 
-const sections: Sec[] = [
+function getSections(language: Language): Sec[] {
+  return [
   {
     title: "Konsep Bangun Gabungan",
     icon: "🧩",
@@ -223,7 +251,7 @@ const sections: Sec[] = [
             <li className="flex gap-2"><span className="text-orange-400 font-bold shrink-0">4.</span><span>Jumlahkan semua bagian yang masih terlihat</span></li>
           </ol>
         </div>
-        <CompositeShapeViewer />
+        <CompositeShapeViewer language={language} />
         <div className="space-y-3">
           <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-4 space-y-2">
             <p className="text-cyan-300 font-bold text-sm">🔵 Tabung + Kerucut (alas di bawah)</p>
@@ -358,7 +386,8 @@ const sections: Sec[] = [
       </div>
     ),
   },
-];
+  ];
+}
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE PROBLEMS
@@ -539,26 +568,69 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
   );
 };
 
+const pageTrans = {
+  id: { title: "BANGUN RUANG SISI LENGKUNG GABUNGAN", subtitle: "Kelas 9 · Bangun Ruang Sisi Lengkung" },
+  en: { title: "COMPOSITE CURVED-SURFACE SOLIDS", subtitle: "Grade 9 · Curved-Surface Solids" },
+  ja: { title: "複合曲面図形", subtitle: "中学3年・曲面図形" },
+} as const;
+
+const slide1Trans = {
+  id: {
+    title: "Pengantar: Bangun Gabungan",
+    intro: (
+      <>
+        Silo penyimpanan padi, kapsul roket, atau es krim cone — semua adalah contoh{" "}
+        <strong className="text-cyan-300">bangun gabungan</strong> dalam kehidupan nyata! Di sini kamu akan belajar
+        cara menghitung <strong className="text-orange-300">luas permukaan</strong> dan{" "}
+        <strong className="text-blue-300">volume</strong> ketika dua atau lebih bangun sisi lengkung digabungkan menjadi satu.
+      </>
+    ),
+  },
+  en: {
+    title: "Introduction: Composite Shapes",
+    intro: (
+      <>
+        A grain silo, a medicine capsule, or an ice-cream cone — these are all real-life examples of{" "}
+        <strong className="text-cyan-300">composite shapes</strong>! Here you'll learn
+        how to calculate the <strong className="text-orange-300">surface area</strong> and{" "}
+        <strong className="text-blue-300">volume</strong> when two or more curved-surface solids are combined into one shape.
+      </>
+    ),
+  },
+  ja: {
+    title: "はじめに：複合図形",
+    intro: (
+      <>
+        穀物サイロ、カプセル薬、アイスクリームコーン — これらはすべて{" "}
+        <strong className="text-cyan-300">複合図形</strong>の身近な例です！ここでは、2つ以上の曲面図形を組み合わせたときの{" "}
+        <strong className="text-orange-300">表面積</strong>と<strong className="text-blue-300">体積</strong>の求め方を学びます。
+      </>
+    ),
+  },
+} as const;
+
 /* ─────────────────────────────────────────────────────────────
    MAIN PAGE
 ───────────────────────────────────────────────────────────── */
 const GabunganPage = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const pt = pageTrans[language];
+  const s1 = slide1Trans[language];
+  const sections = getSections(language);
 
   const slides = [
     {
-      title: "Pengantar: Bangun Gabungan",
+      title: s1.title,
       icon: "🧩",
       content: (
         <div className="space-y-4 font-body">
           <p className="text-white/80 text-sm leading-relaxed">
-            Silo penyimpanan padi, kapsul roket, atau es krim cone — semua adalah contoh{" "}
-            <strong className="text-cyan-300">bangun gabungan</strong> dalam kehidupan nyata! Di sini kamu akan belajar
-            cara menghitung <strong className="text-orange-300">luas permukaan</strong> dan{" "}
-            <strong className="text-blue-300">volume</strong> ketika dua atau lebih bangun sisi lengkung digabungkan menjadi satu.
+            {s1.intro}
           </p>
-          <CompositeShapeViewer />
+          <CompositeShapeViewer language={language} />
         </div>
       ),
     },
@@ -602,9 +674,9 @@ const GabunganPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <Layers className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
-          BANGUN RUANG SISI LENGKUNG GABUNGAN
+          {pt.title}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">{pt.subtitle}</p>
 
         <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
           {slides.map((_, i) => (
