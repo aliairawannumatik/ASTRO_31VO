@@ -197,6 +197,9 @@ const pageTrans = {
     slide0Title: "Pengantar: Perubahan Luas & Volume",
     examplesTitle: "Contoh Soal — Perubahan Volume & Luas",
     examplesSubtitle: "Latihan bertingkat dari mudah hingga sulit",
+    examplesPrefix: "SOAL",
+    showSolution: "Lihat Pembahasan",
+    hideSolution: "Sembunyikan",
   },
   en: {
     title: "SURFACE AREA AND VOLUME CHANGES OF CURVED SURFACE SOLIDS",
@@ -207,6 +210,9 @@ const pageTrans = {
     slide0Title: "Introduction: Surface Area & Volume Changes",
     examplesTitle: "Example Problems — Volume & Surface Area Changes",
     examplesSubtitle: "Tiered exercises from easy to challenging",
+    examplesPrefix: "Problem",
+    showSolution: "Show Solution",
+    hideSolution: "Hide Solution",
   },
   ja: {
     title: "曲面体の表面積・体積の変化",
@@ -217,6 +223,9 @@ const pageTrans = {
     slide0Title: "はじめに：表面積・体積の変化",
     examplesTitle: "例題 — 体積・表面積の変化",
     examplesSubtitle: "易しいものから難しいものまで段階的な演習",
+    examplesPrefix: "問題",
+    showSolution: "解説を見る",
+    hideSolution: "解説を隠す",
   },
 };
 
@@ -777,26 +786,54 @@ function getSections(language: Language): Sec[] {
 ───────────────────────────────────────────────────────────── */
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
 
-const examples: Ex[] = [
+const levelLabels: Record<string, Record<Language, string>> = {
+  MUDAH:  { id: "MUDAH",  en: "EASY",   ja: "基本" },
+  SEDANG: { id: "SEDANG", en: "MEDIUM", ja: "標準" },
+  SULIT:  { id: "SULIT",  en: "HARD",   ja: "発展" },
+};
+function levelLabel(level: string, language: Language): string {
+  return levelLabels[level]?.[language] ?? level;
+}
+
+function getExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah bola memiliki jari-jari <InlineMath math="5 \text{ cm}" /> dan volume <InlineMath math="V" />.</p>
-        <p>Jika jari-jari bola diperbesar menjadi <InlineMath math="10 \text{ cm}" />, berapa kali volume bola yang baru dibanding volume semula?</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah bola memiliki jari-jari <InlineMath math="5 \text{ cm}" /> dan volume <InlineMath math="V" />.</p>
+            <p>Jika jari-jari bola diperbesar menjadi <InlineMath math="10 \text{ cm}" />, berapa kali volume bola yang baru dibanding volume semula?</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A sphere has a radius of <InlineMath math="5 \text{ cm}" /> and volume <InlineMath math="V" />.</p>
+            <p>If the sphere's radius is enlarged to <InlineMath math="10 \text{ cm}" />, how many times the original volume is the new volume?</p>
+          </>
+        ) : (
+          <>
+            <p>ある球の半径は<InlineMath math="5 \text{ cm}" />で、体積は<InlineMath math="V" />です。</p>
+            <p>球の半径を<InlineMath math="10 \text{ cm}" />に拡大すると、新しい体積は元の体積の何倍になりますか。</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-green-400 font-semibold">Analisis: r diperbesar dari 5 cm → 10 cm</p>
+        <p className="text-green-400 font-semibold">
+          {language === "id" ? "Analisis: r diperbesar dari 5 cm → 10 cm" : language === "en" ? "Analysis: r is enlarged from 5 cm → 10 cm" : "分析：半径 r が 5 cm → 10 cm に拡大"}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p>Faktor perubahan:</p>
+          <p>{language === "id" ? "Faktor perubahan:" : language === "en" ? "Scale factor:" : "変化の割合："}</p>
           <BlockMath math="k = \frac{r_n}{r_0} = \frac{10}{5} = 2" />
-          <p>Karena <InlineMath math="V = \frac{4}{3}\pi r^3" />, maka:</p>
+          <p>{language === "id" ? <>Karena <InlineMath math="V = \frac{4}{3}\pi r^3" />, maka:</> : language === "en" ? <>Since <InlineMath math="V = \frac{4}{3}\pi r^3" />, then:</> : <><InlineMath math="V = \frac{4}{3}\pi r^3" /> なので：</>}</p>
           <BlockMath math="V_n = \frac{4}{3}\pi (2r)^3 = 2^3 \cdot V = 8V" />
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
-          <p className="text-green-300 font-semibold">✅ Volume bola baru = <strong>8 kali</strong> volume semula</p>
+          <p className="text-green-300 font-semibold">
+            {language === "id" ? <>✅ Volume bola baru = <strong>8 kali</strong> volume semula</> : language === "en" ? <>✅ The new sphere's volume = <strong>8 times</strong> the original volume</> : <>✅ 新しい球の体積 = 元の体積の<strong>8倍</strong></>}
+          </p>
         </div>
       </div>
     ),
@@ -805,21 +842,41 @@ const examples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah tabung memiliki jari-jari <InlineMath math="r" /> dan tinggi <InlineMath math="t" />.</p>
-        <p>Jika jari-jari diperbesar <strong>3 kali</strong> dan tinggi <strong>diperkecil menjadi setengahnya</strong>, bagaimana perbandingan volume baru terhadap volume lama?</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah tabung memiliki jari-jari <InlineMath math="r" /> dan tinggi <InlineMath math="t" />.</p>
+            <p>Jika jari-jari diperbesar <strong>3 kali</strong> dan tinggi <strong>diperkecil menjadi setengahnya</strong>, bagaimana perbandingan volume baru terhadap volume lama?</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A cylinder has radius <InlineMath math="r" /> and height <InlineMath math="t" />.</p>
+            <p>If the radius is enlarged <strong>3 times</strong> and the height is <strong>reduced to half</strong>, what is the ratio of the new volume to the old volume?</p>
+          </>
+        ) : (
+          <>
+            <p>ある円柱の半径は<InlineMath math="r" />、高さは<InlineMath math="t" />です。</p>
+            <p>半径を<strong>3倍</strong>に拡大し、高さを<strong>半分に縮小</strong>すると、新しい体積と元の体積の比はどうなりますか。</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">Diketahui: <InlineMath math="r_n = 3r" />, <InlineMath math="t_n = \frac{t}{2}" /></p>
+        <p className="text-yellow-400 font-semibold">
+          {language === "id" ? <>Diketahui: <InlineMath math="r_n = 3r" />, <InlineMath math="t_n = \frac{t}{2}" /></> : language === "en" ? <>Given: <InlineMath math="r_n = 3r" />, <InlineMath math="t_n = \frac{t}{2}" /></> : <>条件：<InlineMath math="r_n = 3r" />、<InlineMath math="t_n = \frac{t}{2}" /></>}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
           <BlockMath math="V_0 = \pi r^2 t" />
           <BlockMath math="V_n = \pi (3r)^2 \cdot \frac{t}{2} = \pi \cdot 9r^2 \cdot \frac{t}{2} = \frac{9}{2} \pi r^2 t" />
-          <BlockMath math="\frac{V_n}{V_0} = \frac{\frac{9}{2}\pi r^2 t}{\pi r^2 t} = \frac{9}{2} = 4{,}5" />
+          <BlockMath math={language === "id" ? "\\frac{V_n}{V_0} = \\frac{\\frac{9}{2}\\pi r^2 t}{\\pi r^2 t} = \\frac{9}{2} = 4{,}5" : "\\frac{V_n}{V_0} = \\frac{\\frac{9}{2}\\pi r^2 t}{\\pi r^2 t} = \\frac{9}{2} = 4.5"} />
         </div>
         <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs">
-          <p className="text-yellow-300 font-semibold">✅ Volume baru = <strong>4,5 kali</strong> volume lama</p>
-          <p className="text-white/60 mt-1">Meskipun tinggi diperkecil ½, perbesaran r³ lebih mendominasi</p>
+          <p className="text-yellow-300 font-semibold">
+            {language === "id" ? <>✅ Volume baru = <strong>4,5 kali</strong> volume lama</> : language === "en" ? <>✅ New volume = <strong>4.5 times</strong> the old volume</> : <>✅ 新しい体積 = 元の体積の<strong>4.5倍</strong></>}
+          </p>
+          <p className="text-white/60 mt-1">
+            {language === "id" ? "Meskipun tinggi diperkecil ½, perbesaran r³ lebih mendominasi" : language === "en" ? "Even though the height is halved, the r³ growth dominates" : "高さが半分になっても、半径の3乗の増加の影響がより大きい"}
+          </p>
         </div>
       </div>
     ),
@@ -828,66 +885,91 @@ const examples: Ex[] = [
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah tabung A memiliki jari-jari <InlineMath math="6 \text{ cm}" /> dan tinggi <InlineMath math="10 \text{ cm}" />.</p>
-        <p>Tabung B memiliki luas permukaan <strong>4 kali</strong> tabung A dan tinggi yang sama dengan tabung A.</p>
-        <p>Tentukan: (a) jari-jari tabung B, (b) perbandingan volume tabung B terhadap tabung A.</p>
-        <p className="text-xs text-white/50">(π = 3,14)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah tabung A memiliki jari-jari <InlineMath math="6 \text{ cm}" /> dan tinggi <InlineMath math="10 \text{ cm}" />.</p>
+            <p>Tabung B memiliki luas permukaan <strong>4 kali</strong> tabung A dan tinggi yang sama dengan tabung A.</p>
+            <p>Tentukan: (a) jari-jari tabung B, (b) perbandingan volume tabung B terhadap tabung A.</p>
+            <p className="text-xs text-white/50">(π = 3,14)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>Cylinder A has radius <InlineMath math="6 \text{ cm}" /> and height <InlineMath math="10 \text{ cm}" />.</p>
+            <p>Cylinder B has a surface area <strong>4 times</strong> that of cylinder A and the same height as cylinder A.</p>
+            <p>Determine: (a) the radius of cylinder B, (b) the ratio of cylinder B's volume to cylinder A's volume.</p>
+            <p className="text-xs text-white/50">(π = 3.14)</p>
+          </>
+        ) : (
+          <>
+            <p>円柱Aの半径は<InlineMath math="6 \text{ cm}" />、高さは<InlineMath math="10 \text{ cm}" />です。</p>
+            <p>円柱Bの表面積は円柱Aの<strong>4倍</strong>で、高さは円柱Aと同じです。</p>
+            <p>次を求めなさい：(a) 円柱Bの半径、(b) 円柱Bの体積と円柱Aの体積の比。</p>
+            <p className="text-xs text-white/50">(π = 3.14)</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Langkah 1 — Hitung luas permukaan tabung A:</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 1 — Hitung luas permukaan tabung A:" : language === "en" ? "Step 1 — Calculate cylinder A's surface area:" : "手順1 — 円柱Aの表面積を計算："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
           <BlockMath math="L_A = 2\pi r_A^2 + 2\pi r_A t = 2\pi (6)^2 + 2\pi (6)(10)" />
-          <BlockMath math="L_A = 2 \times 3{,}14 \times 36 + 2 \times 3{,}14 \times 60" />
-          <BlockMath math="L_A = 226{,}08 + 376{,}8 = 602{,}88 \text{ cm}^2" />
+          <BlockMath math={language === "id" ? "L_A = 2 \\times 3{,}14 \\times 36 + 2 \\times 3{,}14 \\times 60" : "L_A = 2 \\times 3.14 \\times 36 + 2 \\times 3.14 \\times 60"} />
+          <BlockMath math={language === "id" ? "L_A = 226{,}08 + 376{,}8 = 602{,}88 \\text{ cm}^2" : "L_A = 226.08 + 376.8 = 602.88 \\text{ cm}^2"} />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 2 — Cari jari-jari tabung B (L_B = 4 × L_A, t sama):</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 2 — Cari jari-jari tabung B (L_B = 4 × L_A, t sama):" : language === "en" ? "Step 2 — Find cylinder B's radius (L_B = 4 × L_A, same t):" : "手順2 — 円柱Bの半径を求める（L_B = 4 × L_A、高さは同じ）："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <BlockMath math="L_B = 4 \times L_A = 4 \times 602{,}88 = 2411{,}52 \text{ cm}^2" />
-          <BlockMath math="2\pi r_B^2 + 2\pi r_B (10) = 2411{,}52" />
-          <BlockMath math="6{,}28 r_B^2 + 62{,}8 r_B - 2411{,}52 = 0" />
-          <p className="text-white/60">Bagi dengan 6,28:</p>
+          <BlockMath math={language === "id" ? "L_B = 4 \\times L_A = 4 \\times 602{,}88 = 2411{,}52 \\text{ cm}^2" : "L_B = 4 \\times L_A = 4 \\times 602.88 = 2411.52 \\text{ cm}^2"} />
+          <BlockMath math={language === "id" ? "2\\pi r_B^2 + 2\\pi r_B (10) = 2411{,}52" : "2\\pi r_B^2 + 2\\pi r_B (10) = 2411.52"} />
+          <BlockMath math={language === "id" ? "6{,}28 r_B^2 + 62{,}8 r_B - 2411{,}52 = 0" : "6.28 r_B^2 + 62.8 r_B - 2411.52 = 0"} />
+          <p className="text-white/60">{language === "id" ? "Bagi dengan 6,28:" : language === "en" ? "Divide by 6.28:" : "6.28で割る："}</p>
           <BlockMath math="r_B^2 + 10 r_B - 384 = 0" />
           <BlockMath math="(r_B - 16)(r_B + 24) = 0 \Rightarrow r_B = 16 \text{ cm}" />
         </div>
-        <p className="text-red-400 font-semibold">Langkah 3 — Perbandingan volume:</p>
+        <p className="text-red-400 font-semibold">
+          {language === "id" ? "Langkah 3 — Perbandingan volume:" : language === "en" ? "Step 3 — Volume ratio:" : "手順3 — 体積の比："}
+        </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <BlockMath math="\frac{V_B}{V_A} = \frac{\pi r_B^2 t}{\pi r_A^2 t} = \frac{r_B^2}{r_A^2} = \frac{16^2}{6^2} = \frac{256}{36} = \frac{64}{9} \approx 7{,}11" />
+          <BlockMath math={language === "id" ? "\\frac{V_B}{V_A} = \\frac{\\pi r_B^2 t}{\\pi r_A^2 t} = \\frac{r_B^2}{r_A^2} = \\frac{16^2}{6^2} = \\frac{256}{36} = \\frac{64}{9} \\approx 7{,}11" : "\\frac{V_B}{V_A} = \\frac{\\pi r_B^2 t}{\\pi r_A^2 t} = \\frac{r_B^2}{r_A^2} = \\frac{16^2}{6^2} = \\frac{256}{36} = \\frac{64}{9} \\approx 7.11"} />
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-1">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Jari-jari tabung B = <strong className="text-yellow-300">16 cm</strong></p>
-          <p className="text-white/80">• Volume B : Volume A = <strong className="text-yellow-300">64 : 9</strong> ≈ 7,11 kali lebih besar</p>
+          <p className="text-red-300 font-semibold">{language === "id" ? "✅ Jawaban:" : language === "en" ? "✅ Answer:" : "✅ 答え："}</p>
+          <p className="text-white/80">
+            {language === "id" ? <>• Jari-jari tabung B = <strong className="text-yellow-300">16 cm</strong></> : language === "en" ? <>• Cylinder B's radius = <strong className="text-yellow-300">16 cm</strong></> : <>• 円柱Bの半径 = <strong className="text-yellow-300">16 cm</strong></>}
+          </p>
+          <p className="text-white/80">
+            {language === "id" ? <>• Volume B : Volume A = <strong className="text-yellow-300">64 : 9</strong> ≈ 7,11 kali lebih besar</> : language === "en" ? <>• Volume B : Volume A = <strong className="text-yellow-300">64 : 9</strong> ≈ 7.11 times larger</> : <>• 体積B : 体積A = <strong className="text-yellow-300">64 : 9</strong> ≈ 約7.11倍</>}
+          </p>
         </div>
       </div>
     ),
   },
-];
-
-function getExamples(_language: Language): Ex[] {
-  return examples;
+  ];
 }
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────────────────────── */
 
-const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
+const ExampleCard = ({ ex, idx, prefix, language, showLabel, hideLabel }: { ex: Ex; idx: number; prefix: string; language: Language; showLabel: string; hideLabel: string }) => {
   const [show, setShow] = useState(false);
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
       <div className={`${ex.bg} px-5 py-4`}>
         <div className="flex items-center gap-2 mb-3">
           <span className={`text-xs font-bold font-display px-2 py-0.5 rounded ${ex.badgeBg} ${ex.color} border ${ex.border}`}>
-            {prefix} {idx + 1} — {ex.level}
+            {prefix} {idx + 1} — {levelLabel(ex.level, language)}
           </span>
         </div>
         {ex.question}
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
         className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
-        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? "Sembunyikan" : "Lihat Pembahasan"}</span>
+        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLabel : showLabel}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground"/> : <ChevronDown className="w-4 h-4 text-muted-foreground"/>}
       </button>
       {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
@@ -932,7 +1014,7 @@ const PerubahanVolumePage = () => {
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">{pt.examplesSubtitle}</p>
           <div className="flex flex-col gap-4">
-            {exampleList.map((ex, i) => <ExampleCard key={`e${i}`} ex={ex} idx={i} prefix="SOAL"/>)}
+            {exampleList.map((ex, i) => <ExampleCard key={`e${i}`} ex={ex} idx={i} prefix={pt.examplesPrefix} language={language} showLabel={pt.showSolution} hideLabel={pt.hideSolution}/>)}
           </div>
         </div>
       ),
