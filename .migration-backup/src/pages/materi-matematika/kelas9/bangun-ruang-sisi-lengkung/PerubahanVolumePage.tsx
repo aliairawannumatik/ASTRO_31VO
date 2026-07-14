@@ -79,9 +79,49 @@ const BolaPerubahanSVG = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
+   SCALE CALCULATOR TRANSLATIONS
+───────────────────────────────────────────────────────────── */
+const calcTrans = {
+  id: {
+    title: "🧮 Kalkulator Perubahan Skala Interaktif",
+    shapeLabels: { tabung: "Tabung", kerucut: "Kerucut", bola: "Bola" },
+    radiusLabel: "Perubahan jari-jari (k_r):",
+    heightLabel: "Perubahan tinggi (k_t):",
+    volumeCardTitle: "📦 Volume menjadi",
+    volumeCardNote: "dari volume asal",
+    luasCardTitle: "🎨 Luas Permukaan",
+    luasCardNote: "dari luas asal",
+    footnote: "* Hasil berlaku jika hanya jari-jari dan/atau tinggi yang diubah secara proporsional",
+  },
+  en: {
+    title: "🧮 Interactive Scale Change Calculator",
+    shapeLabels: { tabung: "Cylinder", kerucut: "Cone", bola: "Sphere" },
+    radiusLabel: "Radius change (k_r):",
+    heightLabel: "Height change (k_t):",
+    volumeCardTitle: "📦 Volume becomes",
+    volumeCardNote: "of the original volume",
+    luasCardTitle: "🎨 Surface Area",
+    luasCardNote: "of the original area",
+    footnote: "* Results apply only when the radius and/or height are changed proportionally",
+  },
+  ja: {
+    title: "🧮 スケール変化インタラクティブ計算機",
+    shapeLabels: { tabung: "円柱", kerucut: "円錐", bola: "球" },
+    radiusLabel: "半径の変化（k_r）：",
+    heightLabel: "高さの変化（k_t）：",
+    volumeCardTitle: "📦 体積は",
+    volumeCardNote: "元の体積に対して",
+    luasCardTitle: "🎨 表面積",
+    luasCardNote: "元の面積に対して",
+    footnote: "※ この結果は、半径や高さを比例的に変化させた場合にのみ適用されます",
+  },
+};
+
+/* ─────────────────────────────────────────────────────────────
    INTERACTIVE SCALE CALCULATOR
 ───────────────────────────────────────────────────────────── */
-const ScaleCalculator = () => {
+const ScaleCalculator = ({ language }: { language: Language }) => {
+  const ct = calcTrans[language];
   const [shape, setShape] = useState<"tabung" | "kerucut" | "bola">("tabung");
   const [kR, setKR] = useState(2);
   const [kT, setKT] = useState(1);
@@ -102,25 +142,25 @@ const ScaleCalculator = () => {
 
   return (
     <div className="bg-slate-800/70 border border-slate-600/40 rounded-xl p-4 space-y-4 font-body">
-      <p className="text-cyan-300 font-bold text-sm">🧮 Kalkulator Perubahan Skala Interaktif</p>
+      <p className="text-cyan-300 font-bold text-sm">{ct.title}</p>
       <div className="flex flex-wrap gap-2">
         {(["tabung","kerucut","bola"] as const).map(s => (
           <button key={s} onClick={() => { playPopSound(); setShape(s); }}
             className={`px-3 py-1.5 text-xs font-bold border rounded-lg transition-colors cursor-pointer ${shape === s ? "bg-cyan-800/80 border-cyan-500 text-cyan-200" : "bg-slate-900/60 border-slate-600 text-slate-300"}`}>
-            {s.charAt(0).toUpperCase() + s.slice(1)}
+            {ct.shapeLabels[s]}
           </button>
         ))}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label className="text-xs text-white/60 mb-1 block">Perubahan jari-jari (k_r): <strong className="text-yellow-300">{kR}×</strong></label>
+          <label className="text-xs text-white/60 mb-1 block">{ct.radiusLabel} <strong className="text-yellow-300">{kR}×</strong></label>
           <input type="range" min={1} max={5} step={0.5} value={kR}
             onChange={e => setKR(parseFloat(e.target.value))}
             className="w-full accent-cyan-400"/>
         </div>
         {shape !== "bola" && (
           <div>
-            <label className="text-xs text-white/60 mb-1 block">Perubahan tinggi (k_t): <strong className="text-green-300">{kT}×</strong></label>
+            <label className="text-xs text-white/60 mb-1 block">{ct.heightLabel} <strong className="text-green-300">{kT}×</strong></label>
             <input type="range" min={1} max={5} step={0.5} value={kT}
               onChange={e => setKT(parseFloat(e.target.value))}
               className="w-full accent-green-400"/>
@@ -129,17 +169,17 @@ const ScaleCalculator = () => {
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-blue-950/60 border border-blue-700/40 rounded-lg p-3 text-center">
-          <p className="text-blue-300 text-xs font-bold mb-1">📦 Volume menjadi</p>
+          <p className="text-blue-300 text-xs font-bold mb-1">{ct.volumeCardTitle}</p>
           <p className="text-white text-2xl font-bold font-mono">{vRatio}×</p>
-          <p className="text-blue-200 text-xs">dari volume asal</p>
+          <p className="text-blue-200 text-xs">{ct.volumeCardNote}</p>
         </div>
         <div className="bg-orange-950/60 border border-orange-700/40 rounded-lg p-3 text-center">
-          <p className="text-orange-300 text-xs font-bold mb-1">🎨 Luas Permukaan</p>
+          <p className="text-orange-300 text-xs font-bold mb-1">{ct.luasCardTitle}</p>
           <p className="text-white text-2xl font-bold font-mono">{lRatio}×</p>
-          <p className="text-orange-200 text-xs">dari luas asal</p>
+          <p className="text-orange-200 text-xs">{ct.luasCardNote}</p>
         </div>
       </div>
-      <p className="text-white/40 text-xs">* Hasil berlaku jika hanya jari-jari dan/atau tinggi yang diubah secara proporsional</p>
+      <p className="text-white/40 text-xs">{ct.footnote}</p>
     </div>
   );
 };
@@ -438,6 +478,51 @@ const sec3Trans = {
 };
 
 /* ─────────────────────────────────────────────────────────────
+   SECTION 4 — KALKULATOR & RINGKASAN
+───────────────────────────────────────────────────────────── */
+const sec4Trans = {
+  id: {
+    tableHeaders: ["Bangun", "Perubahan", "Luas Permukaan", "Volume"],
+    tableRows: [
+      ["Tabung", "r→kr, t→kt", "× k²", "× k³"],
+      ["Tabung", "r→kr (t tetap)", "Tidak sederhana", "× k²"],
+      ["Tabung", "t→kt (r tetap)", "Selimut × k", "× k"],
+      ["Kerucut", "r→kr, t→kt, s→ks", "× k²", "× k³"],
+      ["Bola", "r→kr", "× k²", "× k³"],
+    ],
+    tipTitle: "🚀 Cara cepat mengingat:",
+    tip1: "Dimensi linier × k → Luas (2D) × k² → Volume (3D) × k³",
+    tip2: "Bayangkan seperti: memperbesar panjang sisi kubus — luas sisi jadi k², volume jadi k³!",
+  },
+  en: {
+    tableHeaders: ["Solid", "Change", "Surface Area", "Volume"],
+    tableRows: [
+      ["Cylinder", "r→kr, t→kt", "× k²", "× k³"],
+      ["Cylinder", "r→kr (t fixed)", "Not simple", "× k²"],
+      ["Cylinder", "t→kt (r fixed)", "Lateral × k", "× k"],
+      ["Cone", "r→kr, t→kt, s→ks", "× k²", "× k³"],
+      ["Sphere", "r→kr", "× k²", "× k³"],
+    ],
+    tipTitle: "🚀 Quick way to remember:",
+    tip1: "Linear dimension × k → Surface Area (2D) × k² → Volume (3D) × k³",
+    tip2: "Think of it like enlarging a cube's side length — face area becomes k², volume becomes k³!",
+  },
+  ja: {
+    tableHeaders: ["立体", "変化", "表面積", "体積"],
+    tableRows: [
+      ["円柱", "r→kr, t→kt", "× k²", "× k³"],
+      ["円柱", "r→kr（t 固定）", "単純でない", "× k²"],
+      ["円柱", "t→kt（r 固定）", "側面 × k", "× k"],
+      ["円錐", "r→kr, t→kt, s→ks", "× k²", "× k³"],
+      ["球", "r→kr", "× k²", "× k³"],
+    ],
+    tipTitle: "🚀 覚え方のコツ：",
+    tip1: "線形寸法 × k → 面積（2D）× k² → 体積（3D）× k³",
+    tip2: "立方体の辺を拡大するイメージ：面積は k²、体積は k³ になる！",
+  },
+};
+
+/* ─────────────────────────────────────────────────────────────
    SECTION TITLES (all 5 sections, all languages)
 ───────────────────────────────────────────────────────────── */
 const secTitles: Record<Language, [string, string, string, string, string]> = {
@@ -475,6 +560,7 @@ function getSections(language: Language): Sec[] {
   const s1 = sec1Trans[language];
   const s2 = sec2Trans[language];
   const s3 = sec3Trans[language];
+  const s4 = sec4Trans[language];
   return [
     {
       title: t[0],
@@ -654,23 +740,17 @@ function getSections(language: Language): Sec[] {
       icon: "📊",
       content: (
         <div className="space-y-4 font-body">
-          <ScaleCalculator />
+          <ScaleCalculator language={language} />
           <div className="overflow-x-auto rounded-lg border border-slate-700">
             <table className="w-full text-xs text-center">
               <thead><tr className="bg-slate-800">
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Bangun</th>
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Perubahan</th>
-                <th className="px-3 py-2 text-orange-300 border-r border-slate-700">Luas Permukaan</th>
-                <th className="px-3 py-2 text-blue-300">Volume</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s4.tableHeaders[0]}</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">{s4.tableHeaders[1]}</th>
+                <th className="px-3 py-2 text-orange-300 border-r border-slate-700">{s4.tableHeaders[2]}</th>
+                <th className="px-3 py-2 text-blue-300">{s4.tableHeaders[3]}</th>
               </tr></thead>
               <tbody>
-                {[
-                  ["Tabung","r→kr, t→kt","× k²","× k³"],
-                  ["Tabung","r→kr (t tetap)","Tidak sederhana","× k²"],
-                  ["Tabung","t→kt (r tetap)","Selimut × k","× k"],
-                  ["Kerucut","r→kr, t→kt, s→ks","× k²","× k³"],
-                  ["Bola","r→kr","× k²","× k³"],
-                ].map(([b, p, l, v], i) => (
+                {s4.tableRows.map(([b, p, l, v], i) => (
                   <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
                     <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
                     <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700 text-left">{p}</td>
@@ -682,9 +762,9 @@ function getSections(language: Language): Sec[] {
             </table>
           </div>
           <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-            <p>🚀 <strong>Cara cepat mengingat:</strong></p>
-            <p>• Dimensi linier × k → Luas (2D) × k² → Volume (3D) × k³</p>
-            <p>• Bayangkan seperti: memperbesar panjang sisi kubus — luas sisi jadi k², volume jadi k³!</p>
+            <p>{s4.tipTitle}</p>
+            <p>• {s4.tip1}</p>
+            <p>• {s4.tip2}</p>
           </div>
         </div>
       ),

@@ -30,3 +30,9 @@ When a user names a specific SVG/animation component to fix as part of a slide r
 - The example-problem arrays (`unsurExamples`/`luasExamples`/`volExamples`) were converted from module-level consts to `get*Examples(language)` functions, mirroring TabungPage's pattern.
 - Confirmed dead code (defined but never rendered anywhere in the file, so their hardcoded-Indonesian text is harmless): `UnsurBolaSVG`, `HalfSphereTo3CirclesAnimation`, `LuasBolaSVG`, `VolumeBolaSVG`, `SeparasiBolaSegitigaSVG`.
 - Caught mid-task: `SphereFruitCutAnimation` and `WaterBolaAnimation` (used live in Slides 3–4) had hardcoded Indonesian button/status text not covered by the earlier "Slide 3/4 done" note — added a `language` prop to both and gated their text, confirming the general lesson above about animation sub-components not inheriting page-level language state automatically.
+
+## PerubahanVolumePage.tsx progress (BRSL, materi-matematika/kelas9)
+- Note: this filename exists in BOTH `materi-matematika/kelas9/...` and `latihan-mandiri/kelas9/...` — always confirm which one the task refers to (menu context: "Buku Animasi Matematika" = materi-matematika) before editing.
+- Tahap 2A/2B done previously (structure, Slide 0, Sections 0–3 trilingual).
+- Tahap 2C done: Section 4 (Kalkulator & Ringkasan) — table/tip trilingual via new `sec4Trans`; `ScaleCalculator` given a `language` prop + new `calcTrans` object (title, shape button labels incl. Tabung/Kerucut/Bola → Cylinder/Cone/Sphere → 円柱/円錐/球, slider labels, result-card labels, footnote).
+- Still hardcoded Indonesian (out of scope for 2C, left for a later increment): the `examples`/`getExamples` array (3 example problems), level badges (MUDAH/SEDANG/SULIT), "SOAL" prefix, and the show/hide toggle text in `ExampleCard` for this specific file — these need the same `levelLabel()` + `showLabel`/`hideLabel` prop pattern already established in BolaPage.tsx.
