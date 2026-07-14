@@ -674,28 +674,81 @@ function getLuasExamples(language: Language): Ex[] {
   ];
 }
 
-const volExamples: Ex[] = [
+const volSlideTrans = {
+  id: { title: "Contoh Soal — Volume Gabungan", subtitle: "Latihan bertingkat dari mudah hingga sulit" },
+  en: { title: "Examples — Composite Volume", subtitle: "Graded practice from easy to hard" },
+  ja: { title: "例題 — 複合図形の体積", subtitle: "易しい問題から難しい問題までの段階的練習" },
+} as const;
+
+function getVolExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah ember berbentuk tabung memiliki jari-jari <InlineMath math="14 \text{ cm}" /> dan tinggi <InlineMath math="20 \text{ cm}" />.</p>
-        <p>Di atas ember, diletakkan sebuah bola plastik (padat) dengan jari-jari <InlineMath math="7 \text{ cm}" /> yang sedikit tenggelam ke dalam ember.</p>
-        <p>Hitung volume total bola + ember. (π = 22/7)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah ember berbentuk tabung memiliki jari-jari <InlineMath math="14 \text{ cm}" /> dan tinggi <InlineMath math="20 \text{ cm}" />.</p>
+            <p>Di atas ember, diletakkan sebuah bola plastik (padat) dengan jari-jari <InlineMath math="7 \text{ cm}" /> yang sedikit tenggelam ke dalam ember.</p>
+            <p>Hitung volume total bola + ember. (π = 22/7)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A bucket shaped like a cylinder has a radius of <InlineMath math="14 \text{ cm}" /> and a height of <InlineMath math="20 \text{ cm}" />.</p>
+            <p>A solid plastic ball with a radius of <InlineMath math="7 \text{ cm}" /> is placed on top of the bucket, sinking slightly into it.</p>
+            <p>Calculate the total volume of the ball + bucket. (π = 22/7)</p>
+          </>
+        ) : (
+          <>
+            <p>半径<InlineMath math="14 \text{ cm}" />、高さ<InlineMath math="20 \text{ cm}" />の円柱形のバケツがあります。</p>
+            <p>バケツの上に、半径<InlineMath math="7 \text{ cm}" />の（中身が詰まった）プラスチック製のボールが少し沈んだ状態で置かれています。</p>
+            <p>ボール + バケツの体積の合計を求めなさい。（π = 22/7）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-2 text-sm font-body">
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p className="text-white/70">V tabung = πr²t = (22/7) × 14² × 20</p>
-          <BlockMath math="V_{\text{tabung}} = \frac{22}{7} \times 196 \times 20 = 12.320 \text{ cm}^3" />
-          <p className="text-white/70">V bola = (4/3)πr³ = (4/3) × (22/7) × 7³</p>
-          <BlockMath math="V_{\text{bola}} = \frac{4}{3} \times \frac{22}{7} \times 343 = \frac{4}{3} \times 22 \times 49 = \frac{4312}{3} \approx 1.437{,}3 \text{ cm}^3" />
-          <BlockMath math="V_{\text{total}} = 12.320 + 1.437{,}3 = 13.757{,}3 \text{ cm}^3" />
-        </div>
-        <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-          <p className="text-green-300 font-semibold text-xs">✅ Volume total ≈ <strong>13.757,3 cm³</strong></p>
-        </div>
+        {language === "id" ? (
+          <>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+              <p className="text-white/70">V tabung = πr²t = (22/7) × 14² × 20</p>
+              <BlockMath math="V_t = \frac{22}{7} \times 196 \times 20 = 12.320 \text{ cm}^3" />
+              <p className="text-white/70">V bola = (4/3)πr³ = (4/3) × (22/7) × 7³</p>
+              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times 343 = \frac{4}{3} \times 22 \times 49 = \frac{4312}{3} \approx 1.437{,}3 \text{ cm}^3" />
+              <BlockMath math="V_{\text{tot}} = 12.320 + 1.437{,}3 = 13.757{,}3 \text{ cm}^3" />
+            </div>
+            <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+              <p className="text-green-300 font-semibold text-xs">✅ Volume total ≈ <strong>13.757,3 cm³</strong></p>
+            </div>
+          </>
+        ) : language === "en" ? (
+          <>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+              <p className="text-white/70">V cylinder = πr²t = (22/7) × 14² × 20</p>
+              <BlockMath math="V_t = \frac{22}{7} \times 196 \times 20 = 12.320 \text{ cm}^3" />
+              <p className="text-white/70">V ball = (4/3)πr³ = (4/3) × (22/7) × 7³</p>
+              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times 343 = \frac{4}{3} \times 22 \times 49 = \frac{4312}{3} \approx 1.437{,}3 \text{ cm}^3" />
+              <BlockMath math="V_{\text{tot}} = 12.320 + 1.437{,}3 = 13.757{,}3 \text{ cm}^3" />
+            </div>
+            <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+              <p className="text-green-300 font-semibold text-xs">✅ Total volume ≈ <strong>13,757.3 cm³</strong></p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+              <p className="text-white/70">V 円柱 = πr²t = (22/7) × 14² × 20</p>
+              <BlockMath math="V_t = \frac{22}{7} \times 196 \times 20 = 12.320 \text{ cm}^3" />
+              <p className="text-white/70">V ボール = (4/3)πr³ = (4/3) × (22/7) × 7³</p>
+              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times 343 = \frac{4}{3} \times 22 \times 49 = \frac{4312}{3} \approx 1.437{,}3 \text{ cm}^3" />
+              <BlockMath math="V_{\text{tot}} = 12.320 + 1.437{,}3 = 13.757{,}3 \text{ cm}^3" />
+            </div>
+            <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+              <p className="text-green-300 font-semibold text-xs">✅ 体積の合計 ≈ <strong>13,757.3 cm³</strong></p>
+            </div>
+          </>
+        )}
       </div>
     ),
   },
@@ -703,47 +756,109 @@ const volExamples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah tangki air berbentuk <strong>tabung dengan tutup atas berupa setengah bola</strong> (seperti tanki roket).</p>
-        <p>Jari-jari = <InlineMath math="0{,}5 \text{ m}" />, tinggi bagian tabung = <InlineMath math="1{,}5 \text{ m}" />.</p>
-        <p>Jika tangki terisi penuh, berapa liter air yang tersimpan? (π = 3,14 ; 1 m³ = 1000 liter)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah tangki air berbentuk <strong>tabung dengan tutup atas berupa setengah bola</strong> (seperti tanki roket).</p>
+            <p>Jari-jari = <InlineMath math="0{,}5 \text{ m}" />, tinggi bagian tabung = <InlineMath math="1{,}5 \text{ m}" />.</p>
+            <p>Jika tangki terisi penuh, berapa liter air yang tersimpan? (π = 3,14 ; 1 m³ = 1000 liter)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A water tank is shaped like <strong>a cylinder with a half-sphere cap on top</strong> (like a rocket tank).</p>
+            <p>Radius = <InlineMath math="0{,}5 \text{ m}" />, height of the cylinder part = <InlineMath math="1{,}5 \text{ m}" />.</p>
+            <p>If the tank is completely full, how many liters of water does it hold? (π = 3.14 ; 1 m³ = 1000 liters)</p>
+          </>
+        ) : (
+          <>
+            <p>給水タンクは、<strong>上部が半球のふたになっている円柱</strong>（ロケットのタンクのような形）をしています。</p>
+            <p>半径 = <InlineMath math="0{,}5 \text{ m}" />、円柱部分の高さ = <InlineMath math="1{,}5 \text{ m}" />。</p>
+            <p>タンクが満水のとき、何リットルの水が入っていますか。（π = 3.14 ； 1 m³ = 1000 リットル）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-2 text-sm font-body">
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
-          <p className="text-white/70">V tabung = πr²t = 3,14 × 0,25 × 1,5</p>
-          <BlockMath math="V_{\text{tabung}} = 3{,}14 \times 0{,}25 \times 1{,}5 = 1{,}1775 \text{ m}^3" />
-          <p className="text-white/70">V ½ bola = (2/3)πr³ = (2/3) × 3,14 × 0,125</p>
-          <BlockMath math="V_{\frac{1}{2}\text{bola}} = \frac{2}{3} \times 3{,}14 \times 0{,}125 = \frac{0{,}785}{3} \approx 0{,}2617 \text{ m}^3" />
-          <BlockMath math="V_{\text{total}} = 1{,}1775 + 0{,}2617 = 1{,}4392 \text{ m}^3 \approx 1.439{,}2 \text{ liter}" />
-        </div>
-        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
-          <p className="text-yellow-300 font-semibold text-xs">✅ Tangki menampung ≈ <strong>1.439 liter</strong> air</p>
-        </div>
+        {language === "id" ? (
+          <>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-white/70">V tabung = πr²t = 3,14 × 0,25 × 1,5</p>
+              <BlockMath math="V_t = 3{,}14 \times 0{,}25 \times 1{,}5 = 1{,}1775 \text{ m}^3" />
+              <p className="text-white/70">V ½ bola = (2/3)πr³ = (2/3) × 3,14 × 0,125</p>
+              <BlockMath math="V_{\text{½b}} = \frac{2}{3} \times 3{,}14 \times 0{,}125 = \frac{0{,}785}{3} \approx 0{,}2617 \text{ m}^3" />
+              <BlockMath math="V_{\text{tot}} = 1{,}1775 + 0{,}2617 = 1{,}4392 \text{ m}^3 \approx 1.439{,}2 \text{ liter}" />
+            </div>
+            <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+              <p className="text-yellow-300 font-semibold text-xs">✅ Tangki menampung ≈ <strong>1.439 liter</strong> air</p>
+            </div>
+          </>
+        ) : language === "en" ? (
+          <>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-white/70">V cylinder = πr²t = 3.14 × 0.25 × 1.5</p>
+              <BlockMath math="V_t = 3{,}14 \times 0{,}25 \times 1{,}5 = 1{,}1775 \text{ m}^3" />
+              <p className="text-white/70">V ½ sphere = (2/3)πr³ = (2/3) × 3.14 × 0.125</p>
+              <BlockMath math="V_{\text{½b}} = \frac{2}{3} \times 3{,}14 \times 0{,}125 = \frac{0{,}785}{3} \approx 0{,}2617 \text{ m}^3" />
+              <BlockMath math="V_{\text{tot}} = 1{,}1775 + 0{,}2617 = 1{,}4392 \text{ m}^3 \approx 1,439.2 \text{ liters}" />
+            </div>
+            <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+              <p className="text-yellow-300 font-semibold text-xs">✅ The tank holds ≈ <strong>1,439 liters</strong> of water</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-white/70">V 円柱 = πr²t = 3.14 × 0.25 × 1.5</p>
+              <BlockMath math="V_t = 3{,}14 \times 0{,}25 \times 1{,}5 = 1{,}1775 \text{ m}^3" />
+              <p className="text-white/70">V 半球 = (2/3)πr³ = (2/3) × 3.14 × 0.125</p>
+              <BlockMath math="V_{\text{½b}} = \frac{2}{3} \times 3{,}14 \times 0{,}125 = \frac{0{,}785}{3} \approx 0{,}2617 \text{ m}^3" />
+              <BlockMath math="V_{\text{tot}} = 1{,}1775 + 0{,}2617 = 1{,}4392 \text{ m}^3 \approx 1,439.2 \text{ リットル}" />
+            </div>
+            <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+              <p className="text-yellow-300 font-semibold text-xs">✅ タンクの容量 ≈ <strong>1,439リットル</strong>の水</p>
+            </div>
+          </>
+        )}
       </div>
     ),
   },
-];
+  ];
+}
 
 /* ─────────────────────────────────────────────────────────────
    EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────────────────────── */
 
-const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
+const levelLabels: Record<string, Record<Language, string>> = {
+  MUDAH:  { id: "MUDAH",  en: "EASY",   ja: "基本" },
+  SEDANG: { id: "SEDANG", en: "MEDIUM", ja: "標準" },
+  SULIT:  { id: "SULIT",  en: "HARD",   ja: "発展" },
+};
+function levelLabel(level: string, language: Language): string {
+  return levelLabels[level]?.[language] ?? level;
+}
+
+const exampleUiTrans = {
+  id: { luasPrefix: "LUAS", volPrefix: "VOLUME", showSolution: "Lihat Pembahasan", hideSolution: "Sembunyikan" },
+  en: { luasPrefix: "SURFACE AREA", volPrefix: "VOLUME", showSolution: "Show Solution", hideSolution: "Hide" },
+  ja: { luasPrefix: "表面積問題", volPrefix: "体積問題", showSolution: "解説を見る", hideSolution: "隠す" },
+} as const;
+
+const ExampleCard = ({ ex, idx, prefix, language, showLabel, hideLabel }: { ex: Ex; idx: number; prefix: string; language: Language; showLabel: string; hideLabel: string }) => {
   const [show, setShow] = useState(false);
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
       <div className={`${ex.bg} px-5 py-4`}>
         <div className="flex items-center gap-2 mb-3">
           <span className={`text-xs font-bold font-display px-2 py-0.5 rounded ${ex.badgeBg} ${ex.color} border ${ex.border}`}>
-            {prefix} {idx + 1} — {ex.level}
+            {prefix} {idx + 1} — {levelLabel(ex.level, language)}
           </span>
         </div>
         {ex.question}
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
         className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
-        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? "Sembunyikan" : "Lihat Pembahasan"}</span>
+        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLabel : showLabel}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground"/> : <ChevronDown className="w-4 h-4 text-muted-foreground"/>}
       </button>
       {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
@@ -886,6 +1001,9 @@ const GabunganPage = () => {
   const sections = getSections(language);
   const lst = luasSlideTrans[language];
   const luasExamples = getLuasExamples(language);
+  const vst = volSlideTrans[language];
+  const volExamples = getVolExamples(language);
+  const eu = exampleUiTrans[language];
 
   const slides = [
     {
@@ -908,19 +1026,19 @@ const GabunganPage = () => {
         <div className="space-y-4">
           <p className="text-white/40 text-xs text-center font-body">{lst.subtitle}</p>
           <div className="flex flex-col gap-4">
-            {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+            {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix={eu.luasPrefix} language={language} showLabel={eu.showSolution} hideLabel={eu.hideSolution}/>)}
           </div>
         </div>
       ),
     },
     {
-      title: "Contoh Soal — Volume Gabungan",
+      title: vst.title,
       icon: "📦",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          <p className="text-white/40 text-xs text-center font-body">{vst.subtitle}</p>
           <div className="flex flex-col gap-4">
-            {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOL"/>)}
+            {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix={eu.volPrefix} language={language} showLabel={eu.showSolution} hideLabel={eu.hideSolution}/>)}
           </div>
         </div>
       ),
