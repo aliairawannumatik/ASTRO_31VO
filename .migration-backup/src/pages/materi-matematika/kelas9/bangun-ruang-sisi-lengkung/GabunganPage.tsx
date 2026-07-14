@@ -387,28 +387,81 @@ function getSections(language: Language): Sec[] {
 ───────────────────────────────────────────────────────────── */
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
 
-const luasExamples: Ex[] = [
+const luasSlideTrans = {
+  id: { title: "Contoh Soal — Luas Permukaan Gabungan", subtitle: "Latihan bertingkat dari mudah hingga sulit" },
+  en: { title: "Examples — Composite Surface Area", subtitle: "Graded practice from easy to hard" },
+  ja: { title: "例題 — 複合図形の表面積", subtitle: "易しい問題から難しい問題までの段階的練習" },
+} as const;
+
+function getLuasExamples(language: Language): Ex[] {
+  return [
   {
     level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah topi ulang tahun berbentuk <strong>kerucut</strong> dengan jari-jari alas <InlineMath math="7 \text{ cm}" /> dan garis pelukis <InlineMath math="25 \text{ cm}" /> diletakkan di atas <strong>kepala boneka berbentuk setengah bola</strong> dengan jari-jari yang sama.</p>
-        <p>Hitung luas permukaan total bentuk gabungan tersebut! (π = 22/7)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah topi ulang tahun berbentuk <strong>kerucut</strong> dengan jari-jari alas <InlineMath math="7 \text{ cm}" /> dan garis pelukis <InlineMath math="25 \text{ cm}" /> diletakkan di atas <strong>kepala boneka berbentuk setengah bola</strong> dengan jari-jari yang sama.</p>
+            <p>Hitung luas permukaan total bentuk gabungan tersebut! (π = 22/7)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A birthday party hat shaped like a <strong>cone</strong> has a base radius of <InlineMath math="7 \text{ cm}" /> and a slant height of <InlineMath math="25 \text{ cm}" />, placed on top of <strong>a doll's head shaped like a half-sphere</strong> with the same radius.</p>
+            <p>Calculate the total surface area of this composite shape! (π = 22/7)</p>
+          </>
+        ) : (
+          <>
+            <p>底面の半径が<InlineMath math="7 \text{ cm}" />、母線が<InlineMath math="25 \text{ cm}" />の<strong>円錐</strong>形の誕生日帽子が、同じ半径の<strong>半球形の人形の頭</strong>の上に乗っています。</p>
+            <p>この複合図形の表面積の合計を求めなさい！（π = 22/7）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-green-400 font-semibold">Diketahui: r = 7 cm, s = 25 cm</p>
-        <p className="text-white/70 text-xs">Kerucut + ½ bola: alas kerucut = lingkaran datar setengah bola → keduanya tersembunyi!</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <p className="text-white/60">Luas = Selimut kerucut + Luas setengah bola</p>
-          <BlockMath math="L_{\text{selimut kerucut}} = \pi r s = \frac{22}{7} \times 7 \times 25 = 550 \text{ cm}^2" />
-          <BlockMath math="L_{\text{setengah bola}} = 2\pi r^2 = 2 \times \frac{22}{7} \times 7^2 = 2 \times \frac{22}{7} \times 49 = 308 \text{ cm}^2" />
-          <BlockMath math="L_{\text{total}} = 550 + 308 = 858 \text{ cm}^2" />
-        </div>
-        <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
-          <p className="text-green-300 font-semibold">✅ Luas permukaan gabungan = <strong>858 cm²</strong></p>
-        </div>
+        {language === "id" ? (
+          <>
+            <p className="text-green-400 font-semibold">Diketahui: r = 7 cm, s = 25 cm</p>
+            <p className="text-white/70 text-xs">Kerucut + ½ bola: alas kerucut = lingkaran datar setengah bola → keduanya tersembunyi!</p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+              <p className="text-white/60">Luas = Selimut kerucut + Luas setengah bola</p>
+              <BlockMath math="L_{s_k} = \pi r s = \frac{22}{7} \times 7 \times 25 = 550 \text{ cm}^2" />
+              <BlockMath math="L_{\text{½b}} = 2\pi r^2 = 2 \times \frac{22}{7} \times 7^2 = 2 \times \frac{22}{7} \times 49 = 308 \text{ cm}^2" />
+              <BlockMath math="L_{\text{tot}} = 550 + 308 = 858 \text{ cm}^2" />
+            </div>
+            <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
+              <p className="text-green-300 font-semibold">✅ Luas permukaan gabungan = <strong>858 cm²</strong></p>
+            </div>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p className="text-green-400 font-semibold">Given: r = 7 cm, s = 25 cm</p>
+            <p className="text-white/70 text-xs">Cone + ½ sphere: the cone's base circle coincides with the half-sphere's flat circle → both are hidden!</p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+              <p className="text-white/60">Surface area = Cone's lateral surface + Half-sphere's surface</p>
+              <BlockMath math="L_{s_k} = \pi r s = \frac{22}{7} \times 7 \times 25 = 550 \text{ cm}^2" />
+              <BlockMath math="L_{\text{½b}} = 2\pi r^2 = 2 \times \frac{22}{7} \times 7^2 = 2 \times \frac{22}{7} \times 49 = 308 \text{ cm}^2" />
+              <BlockMath math="L_{\text{tot}} = 550 + 308 = 858 \text{ cm}^2" />
+            </div>
+            <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
+              <p className="text-green-300 font-semibold">✅ Combined surface area = <strong>858 cm²</strong></p>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="text-green-400 font-semibold">分かっていること：r = 7 cm, s = 25 cm</p>
+            <p className="text-white/70 text-xs">円錐 + 半球：円錐の底面と半球の平らな面が重なる → どちらも隠れる！</p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+              <p className="text-white/60">表面積 = 円錐の側面積 + 半球の表面積</p>
+              <BlockMath math="L_{s_k} = \pi r s = \frac{22}{7} \times 7 \times 25 = 550 \text{ cm}^2" />
+              <BlockMath math="L_{\text{½b}} = 2\pi r^2 = 2 \times \frac{22}{7} \times 7^2 = 2 \times \frac{22}{7} \times 49 = 308 \text{ cm}^2" />
+              <BlockMath math="L_{\text{tot}} = 550 + 308 = 858 \text{ cm}^2" />
+            </div>
+            <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
+              <p className="text-green-300 font-semibold">✅ 複合図形の表面積の合計 = <strong>858 cm²</strong></p>
+            </div>
+          </>
+        )}
       </div>
     ),
   },
@@ -416,31 +469,93 @@ const luasExamples: Ex[] = [
     level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah silo (tempat penyimpanan biji-bijian) berbentuk <strong>tabung dengan tutup atas berbentuk kerucut</strong>.</p>
-        <p>Jari-jari = <InlineMath math="3 \text{ m}" />, tinggi tabung = <InlineMath math="8 \text{ m}" />, tinggi kerucut = <InlineMath math="4 \text{ m}" />.</p>
-        <p>Hitung: (a) luas permukaan luar silo, (b) volume silo. (π = 3,14)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah silo (tempat penyimpanan biji-bijian) berbentuk <strong>tabung dengan tutup atas berbentuk kerucut</strong>.</p>
+            <p>Jari-jari = <InlineMath math="3 \text{ m}" />, tinggi tabung = <InlineMath math="8 \text{ m}" />, tinggi kerucut = <InlineMath math="4 \text{ m}" />.</p>
+            <p>Hitung: (a) luas permukaan luar silo, (b) volume silo. (π = 3,14)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A silo (grain storage container) is shaped like <strong>a cylinder with a cone-shaped cap on top</strong>.</p>
+            <p>Radius = <InlineMath math="3 \text{ m}" />, cylinder height = <InlineMath math="8 \text{ m}" />, cone height = <InlineMath math="4 \text{ m}" />.</p>
+            <p>Calculate: (a) the silo's outer surface area, (b) the silo's volume. (π = 3.14)</p>
+          </>
+        ) : (
+          <>
+            <p>サイロ（穀物貯蔵タンク）は、<strong>上部が円錐形のふたになっている円柱</strong>の形をしています。</p>
+            <p>半径 = <InlineMath math="3 \text{ m}" />、円柱の高さ = <InlineMath math="8 \text{ m}" />、円錐の高さ = <InlineMath math="4 \text{ m}" />。</p>
+            <p>次を求めなさい：（a）サイロの外側の表面積、（b）サイロの体積。（π = 3.14）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-yellow-400 font-semibold">Diketahui: r = 3 m, t_tab = 8 m, t_ker = 4 m</p>
-        <p className="text-white/70 text-xs">Garis pelukis kerucut: <InlineMath math="s = \sqrt{r^2 + t^2} = \sqrt{9 + 16} = \sqrt{25} = 5 \text{ m}" /></p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
-          <p className="text-orange-300 font-semibold">(a) Luas Permukaan:</p>
-          <p className="text-white/60">= Alas tabung + Selimut tabung + Selimut kerucut (tutup tabung tertutup kerucut)</p>
-          <BlockMath math="L = \pi r^2 + 2\pi r t_{\text{tab}} + \pi r s" />
-          <BlockMath math="L = 3{,}14 \times 9 + 2 \times 3{,}14 \times 3 \times 8 + 3{,}14 \times 3 \times 5" />
-          <BlockMath math="L = 28{,}26 + 150{,}72 + 47{,}1 = 226{,}08 \text{ m}^2" />
-          <p className="text-blue-300 font-semibold mt-2">(b) Volume:</p>
-          <BlockMath math="V = \pi r^2 t_{\text{tab}} + \frac{1}{3}\pi r^2 t_{\text{ker}}" />
-          <BlockMath math="V = 3{,}14 \times 9 \times 8 + \frac{1}{3} \times 3{,}14 \times 9 \times 4" />
-          <BlockMath math="V = 226{,}08 + 37{,}68 = 263{,}76 \text{ m}^3" />
-        </div>
-        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-1">
-          <p className="text-yellow-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Luas permukaan = <strong className="text-orange-300">226,08 m²</strong></p>
-          <p className="text-white/80">• Volume = <strong className="text-blue-300">263,76 m³</strong></p>
-        </div>
+        {language === "id" ? (
+          <>
+            <p className="text-yellow-400 font-semibold">Diketahui: <InlineMath math="r = 3 \text{ m}, t_t = 8 \text{ m}, t_k = 4 \text{ m}" /></p>
+            <p className="text-white/70 text-xs">Garis pelukis kerucut: <InlineMath math="s = \sqrt{r^2 + t_k^2} = \sqrt{9 + 16} = \sqrt{25} = 5 \text{ m}" /></p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-orange-300 font-semibold">(a) Luas Permukaan:</p>
+              <p className="text-white/60">= Alas tabung + Selimut tabung + Selimut kerucut (tutup tabung tertutup kerucut)</p>
+              <BlockMath math="L = \pi r^2 + 2\pi r t_t + \pi r s" />
+              <BlockMath math="L = 3{,}14 \times 9 + 2 \times 3{,}14 \times 3 \times 8 + 3{,}14 \times 3 \times 5" />
+              <BlockMath math="L = 28{,}26 + 150{,}72 + 47{,}1 = 226{,}08 \text{ m}^2" />
+              <p className="text-blue-300 font-semibold mt-2">(b) Volume:</p>
+              <BlockMath math="V = \pi r^2 t_t + \frac{1}{3}\pi r^2 t_k" />
+              <BlockMath math="V = 3{,}14 \times 9 \times 8 + \frac{1}{3} \times 3{,}14 \times 9 \times 4" />
+              <BlockMath math="V = 226{,}08 + 37{,}68 = 263{,}76 \text{ m}^3" />
+            </div>
+            <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-1">
+              <p className="text-yellow-300 font-semibold">✅ Jawaban:</p>
+              <p className="text-white/80">• Luas permukaan = <strong className="text-orange-300">226,08 m²</strong></p>
+              <p className="text-white/80">• Volume = <strong className="text-blue-300">263,76 m³</strong></p>
+            </div>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p className="text-yellow-400 font-semibold">Given: <InlineMath math="r = 3 \text{ m}, t_t = 8 \text{ m}, t_k = 4 \text{ m}" /></p>
+            <p className="text-white/70 text-xs">Cone's slant height: <InlineMath math="s = \sqrt{r^2 + t_k^2} = \sqrt{9 + 16} = \sqrt{25} = 5 \text{ m}" /></p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-orange-300 font-semibold">(a) Surface Area:</p>
+              <p className="text-white/60">= Cylinder's base + Cylinder's lateral surface + Cone's lateral surface (the cylinder's top is covered by the cone)</p>
+              <BlockMath math="L = \pi r^2 + 2\pi r t_t + \pi r s" />
+              <BlockMath math="L = 3.14 \times 9 + 2 \times 3.14 \times 3 \times 8 + 3.14 \times 3 \times 5" />
+              <BlockMath math="L = 28.26 + 150.72 + 47.1 = 226.08 \text{ m}^2" />
+              <p className="text-blue-300 font-semibold mt-2">(b) Volume:</p>
+              <BlockMath math="V = \pi r^2 t_t + \frac{1}{3}\pi r^2 t_k" />
+              <BlockMath math="V = 3.14 \times 9 \times 8 + \frac{1}{3} \times 3.14 \times 9 \times 4" />
+              <BlockMath math="V = 226.08 + 37.68 = 263.76 \text{ m}^3" />
+            </div>
+            <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-1">
+              <p className="text-yellow-300 font-semibold">✅ Answer:</p>
+              <p className="text-white/80">• Surface area = <strong className="text-orange-300">226.08 m²</strong></p>
+              <p className="text-white/80">• Volume = <strong className="text-blue-300">263.76 m³</strong></p>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="text-yellow-400 font-semibold">分かっていること：<InlineMath math="r = 3 \text{ m}, t_t = 8 \text{ m}, t_k = 4 \text{ m}" /></p>
+            <p className="text-white/70 text-xs">円錐の母線：<InlineMath math="s = \sqrt{r^2 + t_k^2} = \sqrt{9 + 16} = \sqrt{25} = 5 \text{ m}" /></p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-orange-300 font-semibold">（a）表面積：</p>
+              <p className="text-white/60">= 円柱の底面 + 円柱の側面 + 円錐の側面（円柱の上部は円錐で覆われている）</p>
+              <BlockMath math="L = \pi r^2 + 2\pi r t_t + \pi r s" />
+              <BlockMath math="L = 3.14 \times 9 + 2 \times 3.14 \times 3 \times 8 + 3.14 \times 3 \times 5" />
+              <BlockMath math="L = 28.26 + 150.72 + 47.1 = 226.08 \text{ m}^2" />
+              <p className="text-blue-300 font-semibold mt-2">（b）体積：</p>
+              <BlockMath math="V = \pi r^2 t_t + \frac{1}{3}\pi r^2 t_k" />
+              <BlockMath math="V = 3.14 \times 9 \times 8 + \frac{1}{3} \times 3.14 \times 9 \times 4" />
+              <BlockMath math="V = 226.08 + 37.68 = 263.76 \text{ m}^3" />
+            </div>
+            <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-1">
+              <p className="text-yellow-300 font-semibold">✅ 答え：</p>
+              <p className="text-white/80">• 表面積 = <strong className="text-orange-300">226.08 m²</strong></p>
+              <p className="text-white/80">• 体積 = <strong className="text-blue-300">263.76 m³</strong></p>
+            </div>
+          </>
+        )}
       </div>
     ),
   },
@@ -448,41 +563,116 @@ const luasExamples: Ex[] = [
     level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
     question: (
       <div className="text-sm text-white/85 font-body space-y-1">
-        <p>Sebuah kapsul obat berbentuk <strong>tabung dengan dua ujung setengah bola</strong> (tabung di tengah, setengah bola di kiri dan kanan).</p>
-        <p>Panjang total kapsul = <InlineMath math="14 \text{ mm}" />, jari-jari = <InlineMath math="2 \text{ mm}" />.</p>
-        <p>Hitung: (a) luas permukaan kapsul, (b) volume kapsul. (π = 22/7)</p>
+        {language === "id" ? (
+          <>
+            <p>Sebuah kapsul obat berbentuk <strong>tabung dengan dua ujung setengah bola</strong> (tabung di tengah, setengah bola di kiri dan kanan).</p>
+            <p>Panjang total kapsul = <InlineMath math="14 \text{ mm}" />, jari-jari = <InlineMath math="2 \text{ mm}" />.</p>
+            <p>Hitung: (a) luas permukaan kapsul, (b) volume kapsul. (π = 22/7)</p>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p>A medicine capsule is shaped like <strong>a cylinder with a half-sphere at each end</strong> (cylinder in the middle, half-spheres on the left and right).</p>
+            <p>Total capsule length = <InlineMath math="14 \text{ mm}" />, radius = <InlineMath math="2 \text{ mm}" />.</p>
+            <p>Calculate: (a) the capsule's surface area, (b) the capsule's volume. (π = 22/7)</p>
+          </>
+        ) : (
+          <>
+            <p>カプセル薬は、<strong>中央が円柱で両端が半球</strong>になっている形をしています（中央に円柱、左右に半球）。</p>
+            <p>カプセルの全長 = <InlineMath math="14 \text{ mm}" />、半径 = <InlineMath math="2 \text{ mm}" />。</p>
+            <p>次を求めなさい：（a）カプセルの表面積、（b）カプセルの体積。（π = 22/7）</p>
+          </>
+        )}
       </div>
     ),
     answer: (
       <div className="space-y-3 text-sm font-body">
-        <p className="text-red-400 font-semibold">Analisis bentuk kapsul:</p>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
-          <p className="text-white/70">Kapsul = Tabung + 2 × setengah bola = Tabung + 1 Bola Penuh</p>
-          <p className="text-white/70">Tinggi tabung: panjang total - 2r = 14 - 2(2) = 14 - 4 = 10 mm</p>
-          <p className="text-white/70">r = 2 mm, t_tabung = 10 mm</p>
-        </div>
-        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
-          <p className="text-orange-300 font-semibold">(a) Luas Permukaan:</p>
-          <p className="text-white/60">= Selimut tabung + Luas 1 bola penuh (dua ujung setengah bola = 1 bola)</p>
-          <p className="text-white/60">Catatan: kedua lingkaran "sambungan" tersembunyi di dalam</p>
-          <BlockMath math="L = 2\pi r t + 4\pi r^2" />
-          <BlockMath math="L = 2 \times \frac{22}{7} \times 2 \times 10 + 4 \times \frac{22}{7} \times 4" />
-          <BlockMath math="L = \frac{880}{7} + \frac{352}{7} = \frac{1232}{7} = 176 \text{ mm}^2" />
-          <p className="text-blue-300 font-semibold mt-2">(b) Volume:</p>
-          <BlockMath math="V = \pi r^2 t + \frac{4}{3}\pi r^3" />
-          <BlockMath math="V = \frac{22}{7} \times 4 \times 10 + \frac{4}{3} \times \frac{22}{7} \times 8" />
-          <BlockMath math="V = \frac{880}{7} + \frac{704}{21} = \frac{2640}{21} + \frac{704}{21} = \frac{3344}{21} \approx 159{,}24 \text{ mm}^3" />
-        </div>
-        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-1">
-          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
-          <p className="text-white/80">• Luas permukaan kapsul = <strong className="text-orange-300">176 mm²</strong></p>
-          <p className="text-white/80">• Volume kapsul ≈ <strong className="text-blue-300">159,24 mm³</strong></p>
-          <p className="text-cyan-300 mt-1">💡 Trik: 2 × setengah bola = 1 bola penuh → gunakan rumus bola 4πr²</p>
-        </div>
+        {language === "id" ? (
+          <>
+            <p className="text-red-400 font-semibold">Analisis bentuk kapsul:</p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-white/70">Kapsul = Tabung + 2 × setengah bola = Tabung + 1 Bola Penuh</p>
+              <p className="text-white/70">Tinggi tabung: panjang total - 2r = 14 - 2(2) = 14 - 4 = 10 mm</p>
+              <p className="text-white/70"><InlineMath math="r = 2 \text{ mm}, t_t = 10 \text{ mm}" /></p>
+            </div>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-orange-300 font-semibold">(a) Luas Permukaan:</p>
+              <p className="text-white/60">= Selimut tabung + Luas 1 bola penuh (dua ujung setengah bola = 1 bola)</p>
+              <p className="text-white/60">Catatan: kedua lingkaran "sambungan" tersembunyi di dalam</p>
+              <BlockMath math="L = 2\pi r t_t + 4\pi r^2" />
+              <BlockMath math="L = 2 \times \frac{22}{7} \times 2 \times 10 + 4 \times \frac{22}{7} \times 4" />
+              <BlockMath math="L = \frac{880}{7} + \frac{352}{7} = \frac{1232}{7} = 176 \text{ mm}^2" />
+              <p className="text-blue-300 font-semibold mt-2">(b) Volume:</p>
+              <BlockMath math="V = \pi r^2 t_t + \frac{4}{3}\pi r^3" />
+              <BlockMath math="V = \frac{22}{7} \times 4 \times 10 + \frac{4}{3} \times \frac{22}{7} \times 8" />
+              <BlockMath math="V = \frac{880}{7} + \frac{704}{21} = \frac{2640}{21} + \frac{704}{21} = \frac{3344}{21} \approx 159{,}24 \text{ mm}^3" />
+            </div>
+            <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-1">
+              <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+              <p className="text-white/80">• Luas permukaan kapsul = <strong className="text-orange-300">176 mm²</strong></p>
+              <p className="text-white/80">• Volume kapsul ≈ <strong className="text-blue-300">159,24 mm³</strong></p>
+              <p className="text-cyan-300 mt-1">💡 Trik: 2 × setengah bola = 1 bola penuh → gunakan rumus bola 4πr²</p>
+            </div>
+          </>
+        ) : language === "en" ? (
+          <>
+            <p className="text-red-400 font-semibold">Analyzing the capsule's shape:</p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-white/70">Capsule = Cylinder + 2 × half-sphere = Cylinder + 1 full sphere</p>
+              <p className="text-white/70">Cylinder height: total length - 2r = 14 - 2(2) = 14 - 4 = 10 mm</p>
+              <p className="text-white/70"><InlineMath math="r = 2 \text{ mm}, t_t = 10 \text{ mm}" /></p>
+            </div>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-orange-300 font-semibold">(a) Surface Area:</p>
+              <p className="text-white/60">= Cylinder's lateral surface + 1 full sphere's surface (the two half-sphere ends form 1 sphere)</p>
+              <p className="text-white/60">Note: both "joint" circles are hidden inside</p>
+              <BlockMath math="L = 2\pi r t_t + 4\pi r^2" />
+              <BlockMath math="L = 2 \times \frac{22}{7} \times 2 \times 10 + 4 \times \frac{22}{7} \times 4" />
+              <BlockMath math="L = \frac{880}{7} + \frac{352}{7} = \frac{1232}{7} = 176 \text{ mm}^2" />
+              <p className="text-blue-300 font-semibold mt-2">(b) Volume:</p>
+              <BlockMath math="V = \pi r^2 t_t + \frac{4}{3}\pi r^3" />
+              <BlockMath math="V = \frac{22}{7} \times 4 \times 10 + \frac{4}{3} \times \frac{22}{7} \times 8" />
+              <BlockMath math="V = \frac{880}{7} + \frac{704}{21} = \frac{2640}{21} + \frac{704}{21} = \frac{3344}{21} \approx 159.24 \text{ mm}^3" />
+            </div>
+            <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-1">
+              <p className="text-red-300 font-semibold">✅ Answer:</p>
+              <p className="text-white/80">• Capsule surface area = <strong className="text-orange-300">176 mm²</strong></p>
+              <p className="text-white/80">• Capsule volume ≈ <strong className="text-blue-300">159.24 mm³</strong></p>
+              <p className="text-cyan-300 mt-1">💡 Trick: 2 × half-sphere = 1 full sphere → use the sphere formula 4πr²</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="text-red-400 font-semibold">カプセルの形を分析する：</p>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-white/70">カプセル = 円柱 + 半球 × 2 = 円柱 + 完全な球1個</p>
+              <p className="text-white/70">円柱の高さ：全長 - 2r = 14 - 2(2) = 14 - 4 = 10 mm</p>
+              <p className="text-white/70"><InlineMath math="r = 2 \text{ mm}, t_t = 10 \text{ mm}" /></p>
+            </div>
+            <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+              <p className="text-orange-300 font-semibold">（a）表面積：</p>
+              <p className="text-white/60">= 円柱の側面 + 完全な球1個の表面積（両端の半球2つ = 球1個）</p>
+              <p className="text-white/60">注：2つの「接合部」の円は内部に隠れている</p>
+              <BlockMath math="L = 2\pi r t_t + 4\pi r^2" />
+              <BlockMath math="L = 2 \times \frac{22}{7} \times 2 \times 10 + 4 \times \frac{22}{7} \times 4" />
+              <BlockMath math="L = \frac{880}{7} + \frac{352}{7} = \frac{1232}{7} = 176 \text{ mm}^2" />
+              <p className="text-blue-300 font-semibold mt-2">（b）体積：</p>
+              <BlockMath math="V = \pi r^2 t_t + \frac{4}{3}\pi r^3" />
+              <BlockMath math="V = \frac{22}{7} \times 4 \times 10 + \frac{4}{3} \times \frac{22}{7} \times 8" />
+              <BlockMath math="V = \frac{880}{7} + \frac{704}{21} = \frac{2640}{21} + \frac{704}{21} = \frac{3344}{21} \approx 159.24 \text{ mm}^3" />
+            </div>
+            <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-1">
+              <p className="text-red-300 font-semibold">✅ 答え：</p>
+              <p className="text-white/80">• カプセルの表面積 = <strong className="text-orange-300">176 mm²</strong></p>
+              <p className="text-white/80">• カプセルの体積 ≈ <strong className="text-blue-300">159.24 mm³</strong></p>
+              <p className="text-cyan-300 mt-1">💡 コツ：半球2個 = 球1個 → 球の公式 4πr² を使う</p>
+            </div>
+          </>
+        )}
       </div>
     ),
   },
-];
+  ];
+}
 
 const volExamples: Ex[] = [
   {
@@ -694,6 +884,8 @@ const GabunganPage = () => {
   const pt = pageTrans[language];
   const s1 = slide1Trans[language];
   const sections = getSections(language);
+  const lst = luasSlideTrans[language];
+  const luasExamples = getLuasExamples(language);
 
   const slides = [
     {
@@ -710,11 +902,11 @@ const GabunganPage = () => {
     },
     ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
     {
-      title: "Contoh Soal — Luas Permukaan Gabungan",
+      title: lst.title,
       icon: "🎨",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          <p className="text-white/40 text-xs text-center font-body">{lst.subtitle}</p>
           <div className="flex flex-col gap-4">
             {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
           </div>
