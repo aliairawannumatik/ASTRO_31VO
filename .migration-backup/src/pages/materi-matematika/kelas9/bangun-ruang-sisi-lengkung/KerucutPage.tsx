@@ -3208,7 +3208,7 @@ const KerucutPage = () => {
             <span className="text-2xl">{slide.icon}</span>
             <div className="flex-1 min-w-0">
               <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
-                Slide {currentSlide + 1} / {totalSlides}
+                {language === "ja" ? "スライド" : "Slide"} {currentSlide + 1} / {totalSlides}
               </p>
               <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
             </div>
@@ -3224,7 +3224,7 @@ const KerucutPage = () => {
             disabled={currentSlide === 0}
             className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body bg-slate-800/60 border border-slate-600 text-white/70 rounded-xl hover:bg-slate-700/60 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            ← Sebelumnya
+            {language === "id" ? "← Sebelumnya" : language === "ja" ? "← 前へ" : "← Previous"}
           </button>
           <span className="text-white/30 text-xs font-body">{currentSlide + 1} / {totalSlides}</span>
           <button
@@ -3232,14 +3232,14 @@ const KerucutPage = () => {
             disabled={currentSlide === totalSlides - 1}
             className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body bg-primary/20 border border-primary/50 text-primary rounded-xl hover:bg-primary/30 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            Selanjutnya →
+            {language === "id" ? "Selanjutnya →" : language === "ja" ? "次へ →" : "Next →"}
           </button>
         </div>
 
         <div className="text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-            ← Kembali ke Bangun Ruang Sisi Lengkung
+            {language === "id" ? "← Kembali ke Bangun Ruang Sisi Lengkung" : language === "ja" ? "← 曲面体に戻る" : "← Back to Curved Surface Solids"}
           </button>
         </div>
       </div>
