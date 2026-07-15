@@ -31,6 +31,12 @@ After a GitHub re-import, `node_modules` are wiped in both the pnpm workspace ro
 - Curling `/api/chat` (or any `/api/*` POST/GET) against the external `$REPLIT_DEV_DOMAIN` root returns a plain 404 ("Cannot GET/POST ...") even though the identical request against `localhost:5000` correctly returns the expected 503 (missing `GROQ_API_KEY`) — an external-domain proxy quirk for this non-artifact-registered project, not an app bug. Don't chase it; verify real behavior via `localhost:<port>` curl or an actual browser Screenshot instead.
 - A first `externalUrl` Screenshot right after workflow restart can catch the SPA mid-hydration (blank white page) even though `curl` shows 200 OK. Retake the screenshot before concluding the app is broken.
 
+## Statistika Kelas 9 — 100% complete (2026-07-15)
+`PenyajianDataPage.tsx` (materi-matematika, 2917 lines — largest page, 5 interactive builders incl. frequency table) is now trilingual and tsc-clean, confirmed via id/en/ja screenshots. This was the last Statistika Kelas 9 materi page; all 7 are now done. Delegated the full rewrite to a `general` subagent (large well-specified single-file task) — worked well; verify with `npx tsc --noEmit` and screenshots after it returns rather than re-reading the whole file yourself.
+
+## Artifact auto-registration (2026-07-15)
+Mid-session, the platform automatically added `artifact.toml`-based artifacts (`numatik` web, `api-server`, `mockup-sandbox`) and new `artifacts/*: ...` workflows, without any action from the agent. The pre-existing manual workflows (`Numatik Web`, `Numatik API Server`) kept running fine alongside the new (unstarted) artifact-managed ones — no immediate conflict. Don't assume you need to migrate workflows just because artifact-managed ones appear; only reconcile if the user's task actually touches run configuration.
+
 Notes for future pages:
 - Inline calculator sub-components (MeanCalculator, CombinedMeanCalculator) can call `useLanguage()` directly since they are defined in the same file — no need for a `language` prop.
 - Calculator components with `useLanguage()` directly must rebuild their label strings at render time. The `groups` useState initial label should be language-neutral (e.g. `""`) or set outside state, not derived from `tc` (which is language-aware). Use the tc label only in display, or re-initialize labels on language change.
