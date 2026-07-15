@@ -2014,12 +2014,12 @@ function getLuasExamples(language: Language): Ex[] {
         ) : language === "en" ? (
           <>
             <p>A basketball has a radius of <InlineMath math="12 \text{ cm}" />.</p>
-            <p>Calculate the surface area of the ball! (Use <InlineMath math="\pi = 3{,}14" />)</p>
+            <p>Calculate the surface area of the ball! (Use <InlineMath math="\pi = 3.14" />)</p>
           </>
         ) : (
           <>
             <p>バスケットボールの半径は<InlineMath math="12 \text{ cm}" />です。</p>
-            <p>このボールの表面積を求めなさい！（<InlineMath math="\pi = 3{,}14" />を使用）</p>
+            <p>このボールの表面積を求めなさい！（<InlineMath math="\pi = 3.14" />を使用）</p>
           </>
         )}
       </div>
@@ -2027,12 +2027,16 @@ function getLuasExamples(language: Language): Ex[] {
     answer: (
       <div className="space-y-2 text-sm font-body">
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
-          <BlockMath math="L = 4\pi r^2 = 4 \times 3{,}14 \times 12^2 = 4 \times 3{,}14 \times 144 = 1.808{,}64 \text{ cm}^2" />
+          {language === "id" ? (
+            <BlockMath math="L = 4\pi r^2 = 4 \times 3{,}14 \times 12^2 = 4 \times 3{,}14 \times 144 = 1.808{,}64 \text{ cm}^2" />
+          ) : (
+            <BlockMath math="L = 4\pi r^2 = 4 \times 3.14 \times 12^2 = 4 \times 3.14 \times 144 = 1{,}808.64 \text{ cm}^2" />
+          )}
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
           <p className="text-green-300 font-semibold text-xs">
             {language === "id" ? "✅ Luas permukaan = " : language === "en" ? "✅ Surface area = " : "✅ 表面積 = "}
-            <InlineMath math="1.808{,}64 \text{ cm}^2" />
+            {language === "id" ? <InlineMath math="1.808{,}64 \text{ cm}^2" /> : <InlineMath math="1{,}808.64 \text{ cm}^2" />}
           </p>
         </div>
       </div>
@@ -2049,12 +2053,12 @@ function getLuasExamples(language: Language): Ex[] {
           </>
         ) : language === "en" ? (
           <>
-            <p>The surface area of a sphere is <InlineMath math="1.386 \text{ cm}^2" />.</p>
+            <p>The surface area of a sphere is <InlineMath math="1{,}386 \text{ cm}^2" />.</p>
             <p>Determine: (a) the sphere's radius, (b) diameter, (c) volume. (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
           </>
         ) : (
           <>
-            <p>球の表面積は<InlineMath math="1.386 \text{ cm}^2" />です。</p>
+            <p>球の表面積は<InlineMath math="1{,}386 \text{ cm}^2" />です。</p>
             <p>次を求めなさい：（a）球の半径、（b）直径、（c）体積。（<InlineMath math="\pi = \frac{22}{7}" />を使用）</p>
           </>
         )}
@@ -2064,20 +2068,44 @@ function getLuasExamples(language: Language): Ex[] {
       <div className="space-y-3 text-sm font-body">
         <p className="text-yellow-400 font-semibold">{language === "id" ? "(a) Jari-jari:" : language === "en" ? "(a) Radius:" : "(a) 半径："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="4\pi r^2 = 1.386 \Rightarrow 4 \times \frac{22}{7} \times r^2 = 1.386" />
-          <BlockMath math="r^2 = \frac{1.386 \times 7}{4 \times 22} = \frac{9.702}{88} = 110{,}25 \Rightarrow r = 10{,}5 \text{ cm}" />
+          {language === "id" ? (
+            <>
+              <BlockMath math="4\pi r^2 = 1.386 \Rightarrow 4 \times \frac{22}{7} \times r^2 = 1.386" />
+              <BlockMath math="r^2 = \frac{1.386 \times 7}{4 \times 22} = \frac{9.702}{88} = 110{,}25 \Rightarrow r = 10{,}5 \text{ cm}" />
+            </>
+          ) : (
+            <>
+              <BlockMath math="4\pi r^2 = 1{,}386 \Rightarrow 4 \times \frac{22}{7} \times r^2 = 1{,}386" />
+              <BlockMath math="r^2 = \frac{1{,}386 \times 7}{4 \times 22} = \frac{9{,}702}{88} = 110.25 \Rightarrow r = 10.5 \text{ cm}" />
+            </>
+          )}
         </div>
         <p className="text-yellow-400 font-semibold">{language === "id" ? "(b) Diameter:" : language === "en" ? "(b) Diameter:" : "(b) 直径："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="d = 2r = 2 \times 10{,}5 = 21 \text{ cm}" />
+          {language === "id" ? (
+            <BlockMath math="d = 2r = 2 \times 10{,}5 = 21 \text{ cm}" />
+          ) : (
+            <BlockMath math="d = 2r = 2 \times 10.5 = 21 \text{ cm}" />
+          )}
         </div>
         <p className="text-yellow-400 font-semibold">{language === "id" ? "(c) Volume:" : language === "en" ? "(c) Volume:" : "(c) 体積："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="V = \frac{4}{3}\pi r^3 = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3" />
-          <BlockMath math="= \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = \frac{4 \times 22 \times 1.157{,}625}{21} = \frac{101.871}{21} = 4.851 \text{ cm}^3" />
+          {language === "id" ? (
+            <>
+              <BlockMath math="V = \frac{4}{3}\pi r^3 = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3" />
+              <BlockMath math="= \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = \frac{4 \times 22 \times 1.157{,}625}{21} = \frac{101.871}{21} = 4.851 \text{ cm}^3" />
+            </>
+          ) : (
+            <>
+              <BlockMath math="V = \frac{4}{3}\pi r^3 = \frac{4}{3} \times \frac{22}{7} \times (10.5)^3" />
+              <BlockMath math="= \frac{4}{3} \times \frac{22}{7} \times 1{,}157.625 = \frac{4 \times 22 \times 1{,}157.625}{21} = \frac{101{,}871}{21} = 4{,}851 \text{ cm}^3" />
+            </>
+          )}
         </div>
         <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs">
-          <p className="text-yellow-300 font-semibold">✅ r = 10,5 cm, d = 21 cm, V = 4.851 cm³</p>
+          <p className="text-yellow-300 font-semibold">
+            {language === "id" ? "✅ r = 10,5 cm, d = 21 cm, V = 4.851 cm³" : language === "en" ? "✅ r = 10.5 cm, d = 21 cm, V = 4,851 cm³" : "✅ r = 10.5 cm, d = 21 cm, V = 4,851 cm³"}
+          </p>
         </div>
       </div>
     ),
@@ -2127,13 +2155,13 @@ function getLuasExamples(language: Language): Ex[] {
             <>
               <p>📋 <strong className="text-white/90">Information:</strong></p>
               <p>• 1 can of paint covers <strong className="text-cyan-300">4 m²</strong></p>
-              <p>• Price of 1 can of paint = <strong className="text-yellow-300">$250.000</strong></p>
+              <p>• Price of 1 can of paint = <strong className="text-yellow-300">$250,000</strong></p>
             </>
           ) : (
             <>
               <p>📋 <strong className="text-white/90">情報：</strong></p>
               <p>• ペンキ1缶で<strong className="text-cyan-300">4 m²</strong>塗れる</p>
-              <p>• ペンキ1缶の価格 = <strong className="text-yellow-300">$250.000</strong></p>
+              <p>• ペンキ1缶の価格 = <strong className="text-yellow-300">$250,000</strong></p>
             </>
           )}
         </div>
@@ -2189,7 +2217,7 @@ function getLuasExamples(language: Language): Ex[] {
           {language === "id" ? (
             <BlockMath math="H = 77 \times 250.000 = Rp\,19.250.000" />
           ) : (
-            <BlockMath math="H = 77 \times 250.000 = \$\,19.250.000" />
+            <BlockMath math="H = 77 \times 250{,}000 = \$\,19{,}250{,}000" />
           )}
         </div>
         <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
@@ -2204,13 +2232,13 @@ function getLuasExamples(language: Language): Ex[] {
             <>
               <p className="text-white/80">• Painted dome area = <strong className="text-yellow-300">308 m²</strong></p>
               <p className="text-white/80">• Number of cans = <strong className="text-yellow-300">77 cans</strong></p>
-              <p className="text-white/80">• Total cost = <strong className="text-yellow-300">$19.250.000</strong></p>
+              <p className="text-white/80">• Total cost = <strong className="text-yellow-300">$19,250,000</strong></p>
             </>
           ) : (
             <>
               <p className="text-white/80">• 塗装するドームの面積 = <strong className="text-yellow-300">308 m²</strong></p>
               <p className="text-white/80">• 缶の数 = <strong className="text-yellow-300">77缶</strong></p>
-              <p className="text-white/80">• 合計費用 = <strong className="text-yellow-300">$19.250.000</strong></p>
+              <p className="text-white/80">• 合計費用 = <strong className="text-yellow-300">$19,250,000</strong></p>
             </>
           )}
         </div>
@@ -2247,14 +2275,24 @@ function getVolExamples(language: Language): Ex[] {
     answer: (
       <div className="space-y-2 text-sm font-body">
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
-          <p className="text-white/70 text-xs"><InlineMath math="r = \frac{21}{2} = 10{,}5 \text{ cm}" /></p>
-          <BlockMath math="V = \frac{4}{3}\pi r^3 = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3" />
-          <BlockMath math="= \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = 4.851 \text{ cm}^3" />
+          {language === "id" ? (
+            <>
+              <p className="text-white/70 text-xs"><InlineMath math="r = \frac{21}{2} = 10{,}5 \text{ cm}" /></p>
+              <BlockMath math="V = \frac{4}{3}\pi r^3 = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3" />
+              <BlockMath math="= \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = 4.851 \text{ cm}^3" />
+            </>
+          ) : (
+            <>
+              <p className="text-white/70 text-xs"><InlineMath math="r = \frac{21}{2} = 10.5 \text{ cm}" /></p>
+              <BlockMath math="V = \frac{4}{3}\pi r^3 = \frac{4}{3} \times \frac{22}{7} \times (10.5)^3" />
+              <BlockMath math="= \frac{4}{3} \times \frac{22}{7} \times 1{,}157.625 = 4{,}851 \text{ cm}^3" />
+            </>
+          )}
         </div>
         <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
           <p className="text-green-300 font-semibold text-xs">
             {language === "id" ? "✅ Volume = " : language === "en" ? "✅ Volume = " : "✅ 体積 = "}
-            <InlineMath math="4.851 \text{ cm}^3" />
+            {language === "id" ? <InlineMath math="4.851 \text{ cm}^3" /> : <InlineMath math="4{,}851 \text{ cm}^3" />}
           </p>
         </div>
       </div>
@@ -2271,12 +2309,12 @@ function getVolExamples(language: Language): Ex[] {
           </>
         ) : language === "en" ? (
           <>
-            <p>The volume of a sphere is <InlineMath math="38.808 \text{ cm}^3" />.</p>
+            <p>The volume of a sphere is <InlineMath math="38{,}808 \text{ cm}^3" />.</p>
             <p>Determine: (a) the sphere's radius, (b) surface area. (Use <InlineMath math="\pi = \frac{22}{7}" />)</p>
           </>
         ) : (
           <>
-            <p>球の体積は<InlineMath math="38.808 \text{ cm}^3" />です。</p>
+            <p>球の体積は<InlineMath math="38{,}808 \text{ cm}^3" />です。</p>
             <p>次を求めなさい：（a）球の半径、（b）表面積。（<InlineMath math="\pi = \frac{22}{7}" />を使用）</p>
           </>
         )}
@@ -2286,17 +2324,37 @@ function getVolExamples(language: Language): Ex[] {
       <div className="space-y-3 text-sm font-body">
         <p className="text-yellow-400 font-semibold">{language === "id" ? "(a) Jari-jari dari volume:" : language === "en" ? "(a) Radius from the volume:" : "(a) 体積から半径を求める："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-          <BlockMath math="\frac{4}{3}\pi r^3 = 38.808" />
-          <BlockMath math="\frac{4}{3} \times \frac{22}{7} \times r^3 = 38.808" />
-          <BlockMath math="\frac{88}{21} \times r^3 = 38.808 \Rightarrow r^3 = \frac{38.808 \times 21}{88} = \frac{814.968}{88} = 9.261" />
-          <BlockMath math="r = \sqrt[3]{9.261} = 21 \text{ cm}" />
+          {language === "id" ? (
+            <>
+              <BlockMath math="\frac{4}{3}\pi r^3 = 38.808" />
+              <BlockMath math="\frac{4}{3} \times \frac{22}{7} \times r^3 = 38.808" />
+              <BlockMath math="\frac{88}{21} \times r^3 = 38.808 \Rightarrow r^3 = \frac{38.808 \times 21}{88} = \frac{814.968}{88} = 9.261" />
+            </>
+          ) : (
+            <>
+              <BlockMath math="\frac{4}{3}\pi r^3 = 38{,}808" />
+              <BlockMath math="\frac{4}{3} \times \frac{22}{7} \times r^3 = 38{,}808" />
+              <BlockMath math="\frac{88}{21} \times r^3 = 38{,}808 \Rightarrow r^3 = \frac{38{,}808 \times 21}{88} = \frac{814{,}968}{88} = 9{,}261" />
+            </>
+          )}
+          {language === "id" ? (
+            <BlockMath math="r = \sqrt[3]{9.261} = 21 \text{ cm}" />
+          ) : (
+            <BlockMath math="r = \sqrt[3]{9{,}261} = 21 \text{ cm}" />
+          )}
         </div>
         <p className="text-yellow-400 font-semibold">{language === "id" ? "(b) Luas permukaan:" : language === "en" ? "(b) Surface area:" : "(b) 表面積："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="L = 4\pi r^2 = 4 \times \frac{22}{7} \times 21^2 = 4 \times \frac{22}{7} \times 441 = 4 \times 22 \times 63 = 5.544 \text{ cm}^2" />
+          {language === "id" ? (
+            <BlockMath math="L = 4\pi r^2 = 4 \times \frac{22}{7} \times 21^2 = 4 \times \frac{22}{7} \times 441 = 4 \times 22 \times 63 = 5.544 \text{ cm}^2" />
+          ) : (
+            <BlockMath math="L = 4\pi r^2 = 4 \times \frac{22}{7} \times 21^2 = 4 \times \frac{22}{7} \times 441 = 4 \times 22 \times 63 = 5{,}544 \text{ cm}^2" />
+          )}
         </div>
         <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
-          <p className="text-yellow-300 font-semibold text-xs">✅ r = 21 cm, L = 5.544 cm²</p>
+          <p className="text-yellow-300 font-semibold text-xs">
+            {language === "id" ? "✅ r = 21 cm, L = 5.544 cm²" : "✅ r = 21 cm, L = 5,544 cm²"}
+          </p>
         </div>
       </div>
     ),
@@ -2330,18 +2388,35 @@ function getVolExamples(language: Language): Ex[] {
       <div className="space-y-3 text-sm font-body">
         <p className="text-red-400 font-semibold">{language === "id" ? "Langkah 1 — Volume bola:" : language === "en" ? "Step 1 — Volume of the ball:" : "ステップ1 — ボールの体積："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="r_b = \frac{21}{2} = 10{,}5 \text{ cm}" />
-          <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3 = \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = 4.851 \text{ cm}^3" />
+          {language === "id" ? (
+            <>
+              <BlockMath math="r_b = \frac{21}{2} = 10{,}5 \text{ cm}" />
+              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times (10{,}5)^3 = \frac{4}{3} \times \frac{22}{7} \times 1.157{,}625 = 4.851 \text{ cm}^3" />
+            </>
+          ) : (
+            <>
+              <BlockMath math="r_b = \frac{21}{2} = 10.5 \text{ cm}" />
+              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times (10.5)^3 = \frac{4}{3} \times \frac{22}{7} \times 1{,}157.625 = 4{,}851 \text{ cm}^3" />
+            </>
+          )}
         </div>
         <p className="text-red-400 font-semibold">{language === "id" ? "Langkah 2 — Volume tabung akuarium:" : language === "en" ? "Step 2 — Volume of the cylindrical aquarium:" : "ステップ2 — 円柱形水槽の体積："}</p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="r_{tb} = 21 \text{ cm}, \quad V_{tb} = \pi r^2 t = \frac{22}{7} \times 441 \times 60 = 83.160 \text{ cm}^3" />
+          {language === "id" ? (
+            <BlockMath math="r_{tb} = 21 \text{ cm}, \quad V_{tb} = \pi r^2 t = \frac{22}{7} \times 441 \times 60 = 83.160 \text{ cm}^3" />
+          ) : (
+            <BlockMath math="r_{tb} = 21 \text{ cm}, \quad V_{tb} = \pi r^2 t = \frac{22}{7} \times 441 \times 60 = 83{,}160 \text{ cm}^3" />
+          )}
         </div>
         <p className="text-red-400 font-semibold">
           {language === "id" ? "Langkah 3 — Air yang tumpah = Volume bola (akuarium penuh):" : language === "en" ? "Step 3 — Overflowed water = Volume of the ball (aquarium already full):" : "ステップ3 — あふれた水 = ボールの体積（水槽はすでに満水）："}
         </p>
         <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
-          <BlockMath math="V_o = V_b = 4.851 \text{ cm}^3" />
+          {language === "id" ? (
+            <BlockMath math="V_o = V_b = 4.851 \text{ cm}^3" />
+          ) : (
+            <BlockMath math="V_o = V_b = 4{,}851 \text{ cm}^3" />
+          )}
           <p className="text-white/60 mt-1">
             {language === "id" ? "Karena akuarium sudah penuh, air tumpah = seluruh volume bola yang masuk." : language === "en" ? "Because the aquarium is already full, the overflowed water equals the entire volume of the ball that goes in." : "水槽はすでに満水なので、あふれる水の量は入ったボールの体積全体と等しくなります。"}
           </p>
@@ -2356,14 +2431,14 @@ function getVolExamples(language: Language): Ex[] {
             </>
           ) : language === "en" ? (
             <>
-              <p className="text-white/80">• Volume of the ball = <strong className="text-yellow-300">4.851 cm³</strong></p>
-              <p className="text-white/80">• Overflowed water = <strong className="text-yellow-300">4.851 cm³ = 4.851 liters</strong></p>
+              <p className="text-white/80">• Volume of the ball = <strong className="text-yellow-300">4,851 cm³</strong></p>
+              <p className="text-white/80">• Overflowed water = <strong className="text-yellow-300">4,851 cm³ = 4.851 liters</strong></p>
               <p className="text-cyan-300 mt-1">💡 Archimedes' Principle: Volume of the submerged object = Volume of the water that overflows!</p>
             </>
           ) : (
             <>
-              <p className="text-white/80">• ボールの体積 = <strong className="text-yellow-300">4.851 cm³</strong></p>
-              <p className="text-white/80">• あふれた水 = <strong className="text-yellow-300">4.851 cm³ = 4.851リットル</strong></p>
+              <p className="text-white/80">• ボールの体積 = <strong className="text-yellow-300">4,851 cm³</strong></p>
+              <p className="text-white/80">• あふれた水 = <strong className="text-yellow-300">4,851 cm³ = 4.851リットル</strong></p>
               <p className="text-cyan-300 mt-1">💡 アルキメデスの原理：沈めた物体の体積 = あふれた水の体積！</p>
             </>
           )}
