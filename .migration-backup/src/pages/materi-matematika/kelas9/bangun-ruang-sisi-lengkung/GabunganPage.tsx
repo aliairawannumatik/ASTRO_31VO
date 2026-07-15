@@ -1087,14 +1087,14 @@ const GabunganPage = () => {
             disabled={currentSlide === 0}
             className="flex items-center gap-1.5 px-4 py-2 text-sm font-body border border-border rounded-lg disabled:opacity-30 hover:bg-white/5 transition-colors cursor-pointer disabled:cursor-default"
           >
-            <ChevronLeft className="w-4 h-4" /> Sebelumnya
+            <ChevronLeft className="w-4 h-4" /> {language === "id" ? "Sebelumnya" : language === "en" ? "Previous" : "前へ"}
           </button>
           <button
             onClick={goNext}
             disabled={currentSlide === total - 1}
             className="flex items-center gap-1.5 px-4 py-2 text-sm font-body border border-border rounded-lg disabled:opacity-30 hover:bg-white/5 transition-colors cursor-pointer disabled:cursor-default"
           >
-            Selanjutnya <ChevronRight className="w-4 h-4" />
+            {language === "id" ? "Selanjutnya" : language === "en" ? "Next" : "次へ"} <ChevronRight className="w-4 h-4" />
           </button>
         </div>
 
@@ -1103,7 +1103,7 @@ const GabunganPage = () => {
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            ← Kembali ke Bangun Ruang Sisi Lengkung
+            {language === "id" ? "← Kembali ke Bangun Ruang Sisi Lengkung" : language === "en" ? "← Back to Curved Surface Solids" : "← 曲面体に戻る"}
           </button>
         </div>
       </div>
