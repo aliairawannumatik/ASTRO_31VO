@@ -1,9 +1,104 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import type { Language } from "@/contexts/LanguageContext";
 
 type Phase = "input" | "scanning" | "found" | "calculating" | "done";
 
-export default function JangkauanAnimasi() {
+const trans = {
+  id: {
+    title: "Kalkulator Jangkauan Interaktif",
+    subtitle: "Jangkauan = Nilai Terbesar − Nilai Terkecil",
+    instruction: "Ketik nilai data dipisah ",
+    instructionBold: "koma",
+    example: "Contoh: 45, 72, 38, 91, 56, 63",
+    placeholder: "Masukkan nilai, pisahkan dengan koma…",
+    scanButton: "Cari Min & Max 🔍",
+    errMin: "Masukkan minimal 2 angka!",
+    errInvalid: "Pastikan semua nilai adalah angka yang valid.",
+    scanning: "🔍 Memindai data…",
+    found: "✅ Nilai terbesar dan terkecil ditemukan!",
+    calculating: "⚡ Menghitung jangkauan…",
+    done: "🎉 Jangkauan berhasil ditentukan!",
+    reset: "Reset",
+    min: "min",
+    max: "max",
+    minMax: "min&max",
+    smallestValue: "Nilai Terkecil",
+    largestValue: "Nilai Terbesar",
+    calcButton: "Tentukan Jangkauan 📐",
+    formulaLabel: "Rumus Jangkauan:",
+    formulaWord: "Jangkauan",
+    resultLabel: "JANGKAUAN (J)",
+    tip: "Semakin besar jangkauan, semakin tersebar datanya. Semakin kecil, data semakin seragam/terpusat.",
+    tryAgain: "Coba data lain →",
+    legendMin: "Nilai Terkecil (min)",
+    legendMax: "Nilai Terbesar (max)",
+    legendRange: "Jangkauan (max−min)",
+  },
+  en: {
+    title: "Interactive Range Calculator",
+    subtitle: "Range = Largest Value − Smallest Value",
+    instruction: "Type data values separated by a ",
+    instructionBold: "comma",
+    example: "Example: 45, 72, 38, 91, 56, 63",
+    placeholder: "Enter values, separated by commas…",
+    scanButton: "Find Min & Max 🔍",
+    errMin: "Enter at least 2 numbers!",
+    errInvalid: "Make sure all values are valid numbers.",
+    scanning: "🔍 Scanning data…",
+    found: "✅ Largest and smallest values found!",
+    calculating: "⚡ Calculating the range…",
+    done: "🎉 Range successfully determined!",
+    reset: "Reset",
+    min: "min",
+    max: "max",
+    minMax: "min&max",
+    smallestValue: "Smallest Value",
+    largestValue: "Largest Value",
+    calcButton: "Determine the Range 📐",
+    formulaLabel: "Range Formula:",
+    formulaWord: "Range",
+    resultLabel: "RANGE (J)",
+    tip: "The larger the range, the more spread out the data. The smaller it is, the more uniform/concentrated the data.",
+    tryAgain: "Try other data →",
+    legendMin: "Smallest Value (min)",
+    legendMax: "Largest Value (max)",
+    legendRange: "Range (max−min)",
+  },
+  ja: {
+    title: "範囲インタラクティブ計算機",
+    subtitle: "範囲 = 最大値 − 最小値",
+    instruction: "データの値を",
+    instructionBold: "カンマ",
+    example: "例：45, 72, 38, 91, 56, 63",
+    placeholder: "値を入力し、カンマで区切ってください…",
+    scanButton: "最小値・最大値を探す 🔍",
+    errMin: "少なくとも2つの数値を入力してください！",
+    errInvalid: "すべての値が有効な数値であることを確認してください。",
+    scanning: "🔍 データをスキャン中…",
+    found: "✅ 最大値と最小値が見つかりました！",
+    calculating: "⚡ 範囲を計算中…",
+    done: "🎉 範囲が決定しました！",
+    reset: "リセット",
+    min: "最小",
+    max: "最大",
+    minMax: "最小&最大",
+    smallestValue: "最小値",
+    largestValue: "最大値",
+    calcButton: "範囲を求める 📐",
+    formulaLabel: "範囲の公式：",
+    formulaWord: "範囲",
+    resultLabel: "範囲（J）",
+    tip: "範囲が大きいほどデータの散らばりが大きく、小さいほどデータは均一・集中しています。",
+    tryAgain: "他のデータを試す →",
+    legendMin: "最小値（min）",
+    legendMax: "最大値（max）",
+    legendRange: "範囲（max−min）",
+  },
+} as const;
+
+export default function JangkauanAnimasi({ language = "id" }: { language?: Language }) {
+  const t = trans[language] ?? trans.id;
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [phase, setPhase] = useState<Phase>("input");
@@ -28,8 +123,8 @@ export default function JangkauanAnimasi() {
   const handleScan = () => {
     const parts = input.split(/[,;\s]+/).map(s => s.replace(",", ".").trim()).filter(Boolean);
     const parsed = parts.map(Number);
-    if (parts.length < 2) { setError("Masukkan minimal 2 angka!"); return; }
-    if (parsed.some(isNaN)) { setError("Pastikan semua nilai adalah angka yang valid."); return; }
+    if (parts.length < 2) { setError(t.errMin); return; }
+    if (parsed.some(isNaN)) { setError(t.errInvalid); return; }
     setError("");
     setNums(parsed);
     setPhase("scanning");
@@ -102,9 +197,9 @@ export default function JangkauanAnimasi() {
       <div className="flex items-center gap-2 mb-4">
         <span className="text-xl">📏</span>
         <div>
-          <h2 className="text-sm font-black text-emerald-200 tracking-wide leading-none">Kalkulator Jangkauan Interaktif</h2>
+          <h2 className="text-sm font-black text-emerald-200 tracking-wide leading-none">{t.title}</h2>
           <p className="text-[10px] text-emerald-400/60 mt-0.5">
-            Jangkauan = Nilai Terbesar − Nilai Terkecil
+            {t.subtitle}
           </p>
         </div>
         <span className="ml-auto text-[10px] text-emerald-400/50 bg-emerald-900/30 px-2 py-0.5 rounded-full font-mono">x<sub>max</sub> − x<sub>min</sub></span>
@@ -116,13 +211,13 @@ export default function JangkauanAnimasi() {
         {phase === "input" && (
           <motion.div key="input" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-3">
             <p className="text-sm text-slate-300">
-              Ketik nilai data dipisah <span className="font-bold text-emerald-300">koma</span>.
-              <span className="text-slate-500 ml-2 text-xs">Contoh: 45, 72, 38, 91, 56, 63</span>
+              {t.instruction}<span className="font-bold text-emerald-300">{t.instructionBold}</span>.
+              <span className="text-slate-500 ml-2 text-xs">{t.example}</span>
             </p>
             <div className="flex gap-2">
               <input
                 className="flex-1 rounded-xl border border-emerald-500/40 bg-slate-900/60 px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono"
-                placeholder="Masukkan nilai, pisahkan dengan koma…"
+                placeholder={t.placeholder}
                 value={input}
                 onChange={e => { setInput(e.target.value); setError(""); }}
                 onKeyDown={e => e.key === "Enter" && handleScan()}
@@ -132,7 +227,7 @@ export default function JangkauanAnimasi() {
                 onClick={handleScan}
                 className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-sm shadow-lg shadow-emerald-900/50 hover:from-emerald-500 hover:to-teal-500 transition-all whitespace-nowrap"
               >
-                Cari Min &amp; Max 🔍
+                {t.scanButton}
               </motion.button>
             </div>
             {error && <p className="text-rose-400 text-xs font-medium">⚠️ {error}</p>}
@@ -148,14 +243,14 @@ export default function JangkauanAnimasi() {
               <p className="text-xs font-medium">
                 {phase === "scanning" && (
                   <span className="text-amber-300 animate-pulse">
-                    🔍 Memindai data… {scanIdx >= 0 ? `(${scanIdx + 1}/${nums.length})` : ""}
+                    {t.scanning} {scanIdx >= 0 ? `(${scanIdx + 1}/${nums.length})` : ""}
                   </span>
                 )}
-                {phase === "found" && <span className="text-emerald-400">✅ Nilai terbesar dan terkecil ditemukan!</span>}
-                {phase === "calculating" && <span className="text-violet-300 animate-pulse">⚡ Menghitung jangkauan…</span>}
-                {phase === "done" && <span className="text-emerald-400">🎉 Jangkauan berhasil ditentukan!</span>}
+                {phase === "found" && <span className="text-emerald-400">{t.found}</span>}
+                {phase === "calculating" && <span className="text-violet-300 animate-pulse">{t.calculating}</span>}
+                {phase === "done" && <span className="text-emerald-400">{t.done}</span>}
               </p>
-              <button onClick={reset} className="text-xs text-slate-600 hover:text-rose-400 transition-colors underline underline-offset-2">Reset</button>
+              <button onClick={reset} className="text-xs text-slate-600 hover:text-rose-400 transition-colors underline underline-offset-2">{t.reset}</button>
             </div>
 
             {/* Data tiles */}
@@ -180,7 +275,7 @@ export default function JangkauanAnimasi() {
                         initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
                         className="absolute -top-4 left-1/2 -translate-x-1/2 text-[8px] font-black text-emerald-300 whitespace-nowrap"
                       >
-                        min
+                        {t.min}
                       </motion.span>
                     )}
                     {labelVisible && isMax && !isMin && (
@@ -188,7 +283,7 @@ export default function JangkauanAnimasi() {
                         initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
                         className="absolute -top-4 left-1/2 -translate-x-1/2 text-[8px] font-black text-rose-300 whitespace-nowrap"
                       >
-                        max
+                        {t.max}
                       </motion.span>
                     )}
                     {labelVisible && isMin && isMax && (
@@ -196,7 +291,7 @@ export default function JangkauanAnimasi() {
                         initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
                         className="absolute -top-4 left-1/2 -translate-x-1/2 text-[8px] font-black text-violet-300 whitespace-nowrap"
                       >
-                        min&amp;max
+                        {t.minMax}
                       </motion.span>
                     )}
                     {num}
@@ -215,7 +310,7 @@ export default function JangkauanAnimasi() {
                   initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
                   className="rounded-2xl border-2 border-emerald-500/60 bg-emerald-950/50 p-3 text-center"
                 >
-                  <div className="text-[11px] font-bold text-emerald-400 mb-0.5">Nilai Terkecil</div>
+                  <div className="text-[11px] font-bold text-emerald-400 mb-0.5">{t.smallestValue}</div>
                   <motion.div
                     initial={{ scale: 0.5 }} animate={{ scale: [0.5, 1.2, 1] }} transition={{ duration: 0.5 }}
                     className="text-3xl font-black text-emerald-300 drop-shadow-lg"
@@ -229,7 +324,7 @@ export default function JangkauanAnimasi() {
                   initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                   className="rounded-2xl border-2 border-rose-500/60 bg-rose-950/50 p-3 text-center"
                 >
-                  <div className="text-[11px] font-bold text-rose-400 mb-0.5">Nilai Terbesar</div>
+                  <div className="text-[11px] font-bold text-rose-400 mb-0.5">{t.largestValue}</div>
                   <motion.div
                     initial={{ scale: 0.5 }} animate={{ scale: [0.5, 1.2, 1] }} transition={{ duration: 0.5, delay: 0.1 }}
                     className="text-3xl font-black text-rose-300 drop-shadow-lg"
@@ -249,7 +344,7 @@ export default function JangkauanAnimasi() {
                 onClick={handleCalc}
                 className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 via-violet-600 to-emerald-600 text-white font-bold text-sm shadow-lg hover:opacity-90 transition-all"
               >
-                Tentukan Jangkauan 📐
+                {t.calcButton}
               </motion.button>
             )}
 
@@ -265,9 +360,9 @@ export default function JangkauanAnimasi() {
                       transition={{ type: "spring", stiffness: 200, damping: 16 }}
                       className="rounded-xl border border-violet-500/40 bg-violet-950/40 px-5 py-4"
                     >
-                      <p className="text-[11px] text-violet-400 font-bold mb-3 uppercase tracking-wide">Rumus Jangkauan:</p>
+                      <p className="text-[11px] text-violet-400 font-bold mb-3 uppercase tracking-wide">{t.formulaLabel}</p>
                       <div className="flex items-center justify-center gap-2 text-lg font-black flex-wrap">
-                        <span className="text-slate-300">Jangkauan</span>
+                        <span className="text-slate-300">{t.formulaWord}</span>
                         <span className="text-violet-400">=</span>
                         <motion.span
                           initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }}
@@ -301,7 +396,7 @@ export default function JangkauanAnimasi() {
                       transition={{ type: "spring", stiffness: 160, damping: 12 }}
                       className="rounded-2xl border-2 border-amber-500/60 bg-gradient-to-br from-amber-950/70 to-amber-900/20 p-4 text-center shadow-xl shadow-amber-900/30"
                     >
-                      <div className="text-xs font-bold text-amber-400 mb-1">JANGKAUAN (J)</div>
+                      <div className="text-xs font-bold text-amber-400 mb-1">{t.resultLabel}</div>
                       <motion.div
                         initial={{ scale: 0.3 }} animate={{ scale: [0.3, 1.3, 1] }} transition={{ duration: 0.7 }}
                         className="text-5xl font-black text-amber-300 drop-shadow-lg"
@@ -323,9 +418,8 @@ export default function JangkauanAnimasi() {
               >
                 <span className="mt-0.5">💡</span>
                 <div className="leading-relaxed">
-                  Semakin besar jangkauan, semakin <strong>tersebar</strong> datanya.
-                  Semakin kecil, data semakin <strong>seragam/terpusat</strong>.
-                  <button onClick={reset} className="ml-3 underline underline-offset-2 text-emerald-400 hover:text-white transition-colors text-xs">Coba data lain →</button>
+                  {t.tip}
+                  <button onClick={reset} className="ml-3 underline underline-offset-2 text-emerald-400 hover:text-white transition-colors text-xs">{t.tryAgain}</button>
                 </div>
               </motion.div>
             )}
@@ -336,9 +430,9 @@ export default function JangkauanAnimasi() {
       {/* Legend */}
       <div className="flex flex-wrap gap-4 mt-4 pt-3 border-t border-emerald-800/25">
         {[
-          { cls: "bg-emerald-500/50 border-emerald-400/60", label: "Nilai Terkecil (min)" },
-          { cls: "bg-rose-500/50 border-rose-400/60",     label: "Nilai Terbesar (max)" },
-          { cls: "bg-amber-500/50 border-amber-400/60",   label: "Jangkauan (max−min)" },
+          { cls: "bg-emerald-500/50 border-emerald-400/60", label: t.legendMin },
+          { cls: "bg-rose-500/50 border-rose-400/60",     label: t.legendMax },
+          { cls: "bg-amber-500/50 border-amber-400/60",   label: t.legendRange },
         ].map(({ cls, label }) => (
           <div key={label} className="flex items-center gap-1.5">
             <span className={`w-3 h-3 rounded border inline-block ${cls}`} />
