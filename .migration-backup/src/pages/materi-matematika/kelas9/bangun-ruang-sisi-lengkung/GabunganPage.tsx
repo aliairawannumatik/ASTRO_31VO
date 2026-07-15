@@ -411,7 +411,7 @@ function getLuasExamples(language: Language): Ex[] {
           </>
         ) : (
           <>
-            <p>底面の半径が<InlineMath math="7 \text{ cm}" />、母線が<InlineMath math="25 \text{ cm}" />の<strong>円錐</strong>形の誕生日帽子が、同じ半径の<strong>半球形の人形の頭</strong>の上に乗っています。</p>
+            <p>底面の半径が<InlineMath math="7 \text{ cm}" />、母線が<InlineMath math="25 \text{ cm}" />の<strong>円錐</strong>形のパーティーハットが、同じ半径の<strong>半球形の人形の頭</strong>の上に乗っています。</p>
             <p>この複合図形の表面積の合計を求めなさい！（π = 22/7）</p>
           </>
         )}
@@ -726,10 +726,10 @@ function getVolExamples(language: Language): Ex[] {
           <>
             <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
               <p className="text-white/70">V cylinder = πr²t = (22/7) × 14² × 20</p>
-              <BlockMath math="V_t = \frac{22}{7} \times 196 \times 20 = 12.320 \text{ cm}^3" />
+              <BlockMath math="V_t = \frac{22}{7} \times 196 \times 20 = 12{,}320 \text{ cm}^3" />
               <p className="text-white/70">V ball = (4/3)πr³ = (4/3) × (22/7) × 7³</p>
-              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times 343 = \frac{4}{3} \times 22 \times 49 = \frac{4312}{3} \approx 1.437{,}3 \text{ cm}^3" />
-              <BlockMath math="V_{\text{tot}} = 12.320 + 1.437{,}3 = 13.757{,}3 \text{ cm}^3" />
+              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times 343 = \frac{4}{3} \times 22 \times 49 = \frac{4312}{3} \approx 1{,}437.3 \text{ cm}^3" />
+              <BlockMath math="V_{\text{tot}} = 12{,}320 + 1{,}437.3 = 13{,}757.3 \text{ cm}^3" />
             </div>
             <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
               <p className="text-green-300 font-semibold text-xs">✅ Total volume ≈ <strong>13,757.3 cm³</strong></p>
@@ -739,10 +739,10 @@ function getVolExamples(language: Language): Ex[] {
           <>
             <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
               <p className="text-white/70">V 円柱 = πr²t = (22/7) × 14² × 20</p>
-              <BlockMath math="V_t = \frac{22}{7} \times 196 \times 20 = 12.320 \text{ cm}^3" />
+              <BlockMath math="V_t = \frac{22}{7} \times 196 \times 20 = 12{,}320 \text{ cm}^3" />
               <p className="text-white/70">V ボール = (4/3)πr³ = (4/3) × (22/7) × 7³</p>
-              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times 343 = \frac{4}{3} \times 22 \times 49 = \frac{4312}{3} \approx 1.437{,}3 \text{ cm}^3" />
-              <BlockMath math="V_{\text{tot}} = 12.320 + 1.437{,}3 = 13.757{,}3 \text{ cm}^3" />
+              <BlockMath math="V_b = \frac{4}{3} \times \frac{22}{7} \times 343 = \frac{4}{3} \times 22 \times 49 = \frac{4312}{3} \approx 1{,}437.3 \text{ cm}^3" />
+              <BlockMath math="V_{\text{tot}} = 12{,}320 + 1{,}437.3 = 13{,}757.3 \text{ cm}^3" />
             </div>
             <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
               <p className="text-green-300 font-semibold text-xs">✅ 体積の合計 ≈ <strong>13,757.3 cm³</strong></p>
@@ -796,10 +796,10 @@ function getVolExamples(language: Language): Ex[] {
           <>
             <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
               <p className="text-white/70">V cylinder = πr²t = 3.14 × 0.25 × 1.5</p>
-              <BlockMath math="V_t = 3{,}14 \times 0{,}25 \times 1{,}5 = 1{,}1775 \text{ m}^3" />
+              <BlockMath math="V_t = 3.14 \times 0.25 \times 1.5 = 1.1775 \text{ m}^3" />
               <p className="text-white/70">V ½ sphere = (2/3)πr³ = (2/3) × 3.14 × 0.125</p>
-              <BlockMath math="V_{\text{½b}} = \frac{2}{3} \times 3{,}14 \times 0{,}125 = \frac{0{,}785}{3} \approx 0{,}2617 \text{ m}^3" />
-              <BlockMath math="V_{\text{tot}} = 1{,}1775 + 0{,}2617 = 1{,}4392 \text{ m}^3 \approx 1,439.2 \text{ liters}" />
+              <BlockMath math="V_{\text{½b}} = \frac{2}{3} \times 3.14 \times 0.125 = \frac{0.785}{3} \approx 0.2617 \text{ m}^3" />
+              <BlockMath math="V_{\text{tot}} = 1.1775 + 0.2617 = 1.4392 \text{ m}^3 \approx 1{,}439.2 \text{ liters}" />
             </div>
             <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
               <p className="text-yellow-300 font-semibold text-xs">✅ The tank holds ≈ <strong>1,439 liters</strong> of water</p>
@@ -809,10 +809,10 @@ function getVolExamples(language: Language): Ex[] {
           <>
             <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
               <p className="text-white/70">V 円柱 = πr²t = 3.14 × 0.25 × 1.5</p>
-              <BlockMath math="V_t = 3{,}14 \times 0{,}25 \times 1{,}5 = 1{,}1775 \text{ m}^3" />
+              <BlockMath math="V_t = 3.14 \times 0.25 \times 1.5 = 1.1775 \text{ m}^3" />
               <p className="text-white/70">V 半球 = (2/3)πr³ = (2/3) × 3.14 × 0.125</p>
-              <BlockMath math="V_{\text{½b}} = \frac{2}{3} \times 3{,}14 \times 0{,}125 = \frac{0{,}785}{3} \approx 0{,}2617 \text{ m}^3" />
-              <BlockMath math="V_{\text{tot}} = 1{,}1775 + 0{,}2617 = 1{,}4392 \text{ m}^3 \approx 1,439.2 \text{ リットル}" />
+              <BlockMath math="V_{\text{½b}} = \frac{2}{3} \times 3.14 \times 0.125 = \frac{0.785}{3} \approx 0.2617 \text{ m}^3" />
+              <BlockMath math="V_{\text{tot}} = 1.1775 + 0.2617 = 1.4392 \text{ m}^3 \approx 1{,}439.2 \text{ リットル}" />
             </div>
             <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
               <p className="text-yellow-300 font-semibold text-xs">✅ タンクの容量 ≈ <strong>1,439リットル</strong>の水</p>
