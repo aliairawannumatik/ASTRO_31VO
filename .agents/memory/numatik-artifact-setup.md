@@ -18,12 +18,13 @@ description: .migration-backup wiring, port gotchas, trilingual page pattern, St
 - Verification bar: `npx tsc --noEmit` in `.migration-backup` must report 0 errors after a rewrite, then screenshot `?lang=en` and `?lang=ja` via the externalUrl method above to visually confirm.
 
 ## Status (as of 2026-07-15)
-All five Statistika materi pages confirmed trilingual and screenshot-verified:
+All six Statistika materi pages confirmed trilingual and screenshot-verified:
 - `StatistikaPage.tsx` (hub)
 - `KuartilPage.tsx` ✅
 - `PenyebaranDataPage.tsx` ✅ (plus embedded `JangkauanAnimasi.tsx`, `JIKdanSKAnimasi.tsx`)
 - `PengantarStatistikaPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/pengantar`)
 - `RataRataPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/rata-rata`)
+- `MedianModusPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/median-modus`) — includes two embedded interactive animators (`MedianAnimator`, `ModusAnimator`) that each call `useLanguage()` directly (defined in the same file, so no `language` prop needed, same pattern as the calculator sub-components below). Sibling `latihan-mandiri/kelas9/statistika/MedianModusPage.tsx` (practice-exercise page) is a **separate file** and was intentionally left untouched — always double check whether "soal" in a request refers to worked examples in the materi page vs. the separate latihan-mandiri exercise file before assuming scope.
 
 ## Re-import setup (2026-07-15)
 After a GitHub re-import, `node_modules` are wiped in both the pnpm workspace root and `.migration-backup` (its own plain-npm project, not committed). Fix: `pnpm install` at root **and** `npm install` inside `.migration-backup` separately, then restart both workflows.
