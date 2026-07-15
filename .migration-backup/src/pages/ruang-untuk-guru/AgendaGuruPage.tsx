@@ -10,6 +10,7 @@ import {
   Trash2,
   Printer,
   Eraser,
+  FileDown,
 } from "lucide-react";
 
 type AgendaEntry = {
@@ -117,6 +118,45 @@ const AgendaGuruPage = () => {
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownloadWord = () => {
+    playPopSound();
+    const rows = state.entries.map((e, i) => `
+      <tr>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center;">${i + 1}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.tanggal || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.jamKe || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.kelas || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.uraian || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.tujuan || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center;">${e.tidakHadir || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.keterangan || ""}</td>
+      </tr>`).join("");
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm}
+h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 4pt 0}
+table{width:100%;border-collapse:collapse;margin-top:12pt}
+th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;font-size:10pt}
+</style></head><body>
+<h1>AGENDA GURU</h1>
+<p style="text-align:center;font-size:10pt;margin:2pt 0">Satuan Pendidikan: ${state.satuanPendidikan || "____________________________"} | Tahun Pelajaran: ${state.tahunPelajaran || "____"}</p>
+<table>
+<thead><tr>
+<th style="width:4%">No</th><th>Tanggal</th><th>Jam ke-</th><th>Kelas</th><th>Uraian Kegiatan</th><th>Tujuan Pembelajaran</th><th>Tidak Hadir</th><th>Keterangan</th>
+</tr></thead>
+<tbody>${rows}</tbody>
+</table>
+</body></html>`;
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Agenda_Guru.doc";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -284,11 +324,22 @@ const AgendaGuruPage = () => {
           </table>
         </section>
 
-        <p className="text-xs text-white/55 text-center mb-8 print:hidden">
-          Catatan: Semua isian otomatis tersimpan di perangkat ini. Gunakan tombol{" "}
-          <span className="text-cyan-200 font-semibold">Cetak / Simpan PDF</span>{" "}
-          untuk mencetak atau menyimpan agenda sebagai dokumen PDF.
-        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 print:hidden">
+          <button
+            onClick={() => { playPopSound(); handlePrint(); }}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <Printer className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={handleDownloadWord}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
+        </div>
 
         <div className="text-center print:hidden">
           <button

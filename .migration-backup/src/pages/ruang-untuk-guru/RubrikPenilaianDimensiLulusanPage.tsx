@@ -7,6 +7,8 @@ import {
   ClipboardCheck,
   GraduationCap,
   Award,
+  Printer,
+  FileDown,
 } from "lucide-react";
 
 const dimensiList = [
@@ -98,6 +100,47 @@ const kategoriList = [
 
 const RubrikPenilaianDimensiLulusanPage = () => {
   const navigate = useNavigate();
+
+  const handlePrintPDF = () => {
+    playPopSound();
+    window.print();
+  };
+
+  const handleDownloadWord = () => {
+    playPopSound();
+    const rows = dimensiList.map((d, i) => `
+      <tr>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;text-align:center;">${i + 1}</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;font-weight:bold;">${d.dimensi}</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">${d.aspek}</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">4</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">3</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">2</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">1</td>
+      </tr>`).join("");
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm}
+h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 6pt 0}
+table{width:100%;border-collapse:collapse;margin-top:12pt}
+th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
+</style></head><body>
+<h1>RUBRIK PENILAIAN DIMENSI LULUSAN</h1>
+<p style="text-align:center;font-size:10pt;margin:2pt 0 14pt 0">Mata Pelajaran Matematika — SMP/MTs Fase D</p>
+<table>
+<thead><tr><th style="width:4%">No</th><th style="width:22%">Dimensi</th><th>Aspek yang Diamati</th><th style="width:7%">Skor 4</th><th style="width:7%">Skor 3</th><th style="width:7%">Skor 2</th><th style="width:7%">Skor 1</th></tr></thead>
+<tbody>${rows}</tbody>
+</table>
+</body></html>`;
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Rubrik_Penilaian_Dimensi_Lulusan.doc";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
@@ -259,6 +302,23 @@ const RubrikPenilaianDimensiLulusanPage = () => {
             ))}
           </div>
         </section>
+
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+          <button
+            onClick={handlePrintPDF}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <Printer className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={handleDownloadWord}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
+        </div>
 
         <div className="text-center">
           <button

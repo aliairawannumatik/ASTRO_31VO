@@ -14,6 +14,8 @@ import {
   Wrench,
   Target,
   ListChecks,
+  Printer,
+  FileDown,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -874,6 +876,32 @@ const KokulikulerPage = () => {
           <p>• Aktivitas bisa dimodifikasi sesuai kondisi sekolah, jumlah siswa, dan ketersediaan alat.</p>
           <p>• Hasil kokulikuler dapat dijadikan <strong className="text-white/70">portofolio</strong> peserta didik dalam asesmen Kurikulum Merdeka.</p>
           <p>• Jenis Olimpiade direkomendasikan untuk peserta didik yang berminat mengikuti OSN/KSN Matematika.</p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+          <button
+            onClick={() => { playPopSound(); window.print(); }}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <Printer className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={() => {
+              playPopSound();
+              const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm}h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 6pt 0}h2{font-size:12pt;font-weight:bold;margin:14pt 0 4pt 0}p{font-size:10pt;margin:3pt 0;text-align:justify}</style></head><body><h1>KOKULIKULER MATEMATIKA</h1><p style="text-align:center;font-size:10pt;margin:2pt 0 14pt 0">Kegiatan Kokulikuler Mata Pelajaran Matematika SMP — Fase D</p><p>Dokumen ini dicetak dari Aplikasi NUMATIK. Kokulikuler matematika mencakup berbagai kegiatan pengayaan seperti olimpiade, eksplorasi ilmiah, karya seni matematika, dan proyek berbasis masalah yang mendukung capaian pembelajaran Fase D.</p></body></html>`;
+              const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url; a.download = "Kokulikuler_Matematika.doc";
+              document.body.appendChild(a); a.click();
+              document.body.removeChild(a); URL.revokeObjectURL(url);
+            }}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
         </div>
 
         <div className="text-center">

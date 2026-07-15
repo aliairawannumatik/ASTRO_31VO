@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, CalendarDays, BookOpen, Clock, Info } from "lucide-react";
+import { ArrowLeft, CalendarDays, BookOpen, Clock, Info, Printer, FileDown } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -416,6 +416,32 @@ const ProsemTahunPage = () => {
           {kelas === "kelas9" && semester === "genap" && (
             <p>• Kelas 9 Semester Genap: JP lebih sedikit karena Ujian Sekolah berlangsung April. Materi diprioritaskan selesai sebelum ujian.</p>
           )}
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 animate-slide-up">
+          <button
+            onClick={() => { playPopSound(); window.print(); }}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <Printer className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={() => {
+              playPopSound();
+              const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm}h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 6pt 0}p{font-size:10pt;margin:2pt 0 12pt 0;text-align:center}</style></head><body><h1>PROGRAM SEMESTER (PROSEM) MATEMATIKA</h1><p>Fase D — Kurikulum Merdeka dengan Pendekatan Deep Learning — SMP/MTs/Program Paket B</p><p>Dokumen ini dicetak dari Aplikasi NUMATIK. Buka halaman Program Semester di aplikasi untuk melihat tabel lengkap beserta distribusi materi per bulan.</p></body></html>`;
+              const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url; a.download = "Program_Semester_Matematika.doc";
+              document.body.appendChild(a); a.click();
+              document.body.removeChild(a); URL.revokeObjectURL(url);
+            }}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
         </div>
 
         <div className="text-center">

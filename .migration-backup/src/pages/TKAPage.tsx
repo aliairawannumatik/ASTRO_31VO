@@ -526,12 +526,25 @@ const TKAPage = () => {
 
         {/* ── Paket Latihan (toggle) ── */}
         <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.20s" }}>
-          <SectionToggleHeader
-            label="Try Out"
-            color="text-white/40"
-            open={showPaket}
-            onToggle={() => setShowPaket(v => !v)}
-          />
+          <button
+            onClick={() => { playPopSound(); setShowPaket(v => !v); }}
+            className={`w-full flex items-center justify-between gap-3 px-5 py-3.5 rounded-xl border transition-all duration-200 cursor-pointer mb-3
+              ${showPaket
+                ? "bg-cyan-500/20 border-cyan-400/60 shadow-md shadow-cyan-500/10"
+                : "bg-cyan-500/10 border-cyan-400/30 hover:bg-cyan-500/15 hover:border-cyan-400/50"
+              }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center shrink-0">
+                <FileText className="w-4 h-4 text-cyan-300" />
+              </div>
+              <span className="font-display text-sm font-bold text-cyan-200 tracking-wide uppercase">Try Out</span>
+              <span className="text-[10px] font-body text-cyan-400/70 bg-cyan-500/10 border border-cyan-400/20 px-2 py-0.5 rounded-full">5 Paket</span>
+            </div>
+            {showPaket
+              ? <ChevronUp className="w-4 h-4 text-cyan-300" />
+              : <ChevronDown className="w-4 h-4 text-cyan-300/60" />}
+          </button>
 
           {showPaket && (
             <div className="flex flex-col gap-2.5">
@@ -568,12 +581,25 @@ const TKAPage = () => {
 
         {/* ── Tips & Panduan ── */}
         <div className="animate-slide-up" style={{ animationDelay: "0.30s" }}>
-          <SectionToggleHeader
-            label="Tips &amp; Panduan"
-            color="text-amber-400/60"
-            open={showTips}
-            onToggle={() => setShowTips(v => !v)}
-          />
+          <button
+            onClick={() => { playPopSound(); setShowTips(v => !v); }}
+            className={`w-full flex items-center justify-between gap-3 px-5 py-3.5 rounded-xl border transition-all duration-200 cursor-pointer mb-3
+              ${showTips
+                ? "bg-amber-500/20 border-amber-400/60 shadow-md shadow-amber-500/10"
+                : "bg-amber-500/10 border-amber-400/30 hover:bg-amber-500/15 hover:border-amber-400/50"
+              }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/40 flex items-center justify-center shrink-0">
+                <Lightbulb className="w-4 h-4 text-amber-300" />
+              </div>
+              <span className="font-display text-sm font-bold text-amber-200 tracking-wide uppercase">Tips &amp; Panduan</span>
+              <span className="text-[10px] font-body text-amber-400/70 bg-amber-500/10 border border-amber-400/20 px-2 py-0.5 rounded-full">10 Tips</span>
+            </div>
+            {showTips
+              ? <ChevronUp className="w-4 h-4 text-amber-300" />
+              : <ChevronDown className="w-4 h-4 text-amber-300/60" />}
+          </button>
 
           {showTips && (
             <div className="flex flex-col gap-3">

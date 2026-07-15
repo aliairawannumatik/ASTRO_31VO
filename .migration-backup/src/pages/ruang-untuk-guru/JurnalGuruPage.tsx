@@ -10,6 +10,7 @@ import {
   Trash2,
   Printer,
   Eraser,
+  FileDown,
 } from "lucide-react";
 
 type JurnalEntry = {
@@ -111,6 +112,42 @@ const JurnalGuruPage = () => {
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownloadWord = () => {
+    playPopSound();
+    const rows = state.entries.map((e, i) => `
+      <tr>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center;">${i + 1}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.waktu || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.nama || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.kejadian || ""}</td>
+        <td style="border:1px solid #ccc;padding:4pt 6pt;">${e.tindakLanjut || ""}</td>
+      </tr>`).join("");
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm}
+h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 4pt 0}
+table{width:100%;border-collapse:collapse;margin-top:12pt}
+th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;font-size:10pt}
+</style></head><body>
+<h1>JURNAL GURU</h1>
+<p style="text-align:center;font-size:10pt;margin:2pt 0">Satuan Pendidikan: ${state.satuanPendidikan || "____________________________"} | ${state.kelasSemester || ""}</p>
+<table>
+<thead><tr>
+<th style="width:4%">No</th><th>Waktu/Tanggal</th><th>Nama Siswa</th><th>Kejadian/Catatan</th><th>Tindak Lanjut</th>
+</tr></thead>
+<tbody>${rows}</tbody>
+</table>
+</body></html>`;
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Jurnal_Guru.doc";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -256,11 +293,22 @@ const JurnalGuruPage = () => {
           </table>
         </section>
 
-        <p className="text-xs text-white/55 text-center mb-8 print:hidden">
-          Catatan: Semua isian otomatis tersimpan di perangkat ini. Gunakan tombol{" "}
-          <span className="text-cyan-200 font-semibold">Cetak / Simpan PDF</span>{" "}
-          untuk mencetak atau menyimpan jurnal sebagai dokumen PDF.
-        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 print:hidden">
+          <button
+            onClick={() => { playPopSound(); handlePrint(); }}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <Printer className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={handleDownloadWord}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
+        </div>
 
         <div className="text-center print:hidden">
           <button

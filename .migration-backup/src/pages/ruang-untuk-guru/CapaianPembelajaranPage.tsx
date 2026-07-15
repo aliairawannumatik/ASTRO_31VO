@@ -299,6 +299,23 @@ const CapaianPembelajaranPage = () => {
           ))}
         </section>
 
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+          <button
+            onClick={handlePrintPDF}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={handlePrintWord}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileText className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
+        </div>
+
         <div className="text-center">
           <button
             onClick={() => {
