@@ -18,4 +18,14 @@ description: .migration-backup wiring, port gotchas, trilingual page pattern, St
 - Verification bar: `npx tsc --noEmit` in `.migration-backup` must report 0 errors after a rewrite, then screenshot `?lang=en` and `?lang=ja` via the externalUrl method above to visually confirm.
 
 ## Status (as of 2026-07-15)
-All three Statistika materi pages now confirmed trilingual and verified via screenshot: `StatistikaPage.tsx` (hub), `KuartilPage.tsx`, `PenyebaranDataPage.tsx` (plus its embedded `JangkauanAnimasi.tsx` and `JIKdanSKAnimasi.tsx`). Do not assume other materi pages elsewhere in the app are trilingual without grepping for `useLanguage` first — prior claims about translation status were unreliable and required a fresh audit.
+All five Statistika materi pages confirmed trilingual and screenshot-verified:
+- `StatistikaPage.tsx` (hub)
+- `KuartilPage.tsx` ✅
+- `PenyebaranDataPage.tsx` ✅ (plus embedded `JangkauanAnimasi.tsx`, `JIKdanSKAnimasi.tsx`)
+- `PengantarStatistikaPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/pengantar`)
+- `RataRataPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/rata-rata`)
+
+Notes for future pages:
+- Inline calculator sub-components (MeanCalculator, CombinedMeanCalculator) can call `useLanguage()` directly since they are defined in the same file — no need for a `language` prop.
+- Calculator components with `useLanguage()` directly must rebuild their label strings at render time. The `groups` useState initial label should be language-neutral (e.g. `""`) or set outside state, not derived from `tc` (which is language-aware). Use the tc label only in display, or re-initialize labels on language change.
+- Do not assume other materi pages elsewhere are trilingual without grepping for `useLanguage` first.
