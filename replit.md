@@ -12,6 +12,7 @@ Numatik (Numerasi Aktif dengan Teknologi Informasi dan Komunikasi) is an educati
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string (needed for backend only)
+- First-time setup after import: run `pnpm install` at the repo root (workspace packages) **and** `npm install` inside `.migration-backup/` separately — `.migration-backup` is a plain npm project with its own `node_modules`, not a pnpm workspace member, and its `node_modules` isn't committed.
 
 ## Stack
 
