@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import type { Language } from "@/contexts/LanguageContext";
 
 type Phase = "input" | "sorting" | "sorted" | "calculating" | "done";
 
@@ -33,6 +34,87 @@ function fmtPos(pos: number) {
   if (Number.isInteger(pos)) return String(pos);
   return pos.toFixed(2).replace(/0+$/, "").replace(".", ",");
 }
+
+const kalkTrans = {
+  id: {
+    title: "Kalkulator Kuartil Interaktif",
+    formulaPrefix: "Rumus posisi: Q",
+    formulaSuffix: " pada posisi ke-",
+    inputHintA: "Ketik nilai data dipisah ",
+    inputHintB: "koma",
+    inputHintExample: "Contoh: 72, 65, 80, 88, 74, 91, 69",
+    placeholder: "Masukkan nilai, pisahkan dengan koma…",
+    sortBtn: "Urutkan 🔢",
+    errMin: "Masukkan minimal 4 angka!",
+    errInvalid: "Pastikan semua nilai adalah angka yang valid.",
+    sorting: "⏳ Mengurutkan dari kecil ke besar…",
+    sortedStatus: (n: number) => `✅ Terurut — ${n} data siap dihitung!`,
+    calculatingStatus: "🔍 Menghitung kuartil dengan rumus posisi…",
+    doneStatus: "🎉 Ketiga kuartil ditemukan!",
+    reset: "Reset",
+    formulaPreviewLabel: (n: number) => `🧮 Rumus yang akan dipakai (n = ${n}):`,
+    posQ1: "Posisi Q₁ =", posQ2: "Posisi Q₂ =", posQ3: "Posisi Q₃ =",
+    findBtn: "Tentukan Kuartil 📊",
+    kuartilBawah: "Kuartil Bawah", median: "Median", kuartilAtas: "Kuartil Atas",
+    jikLabel: "Jangkauan Antarkuartil (JAK) = Q₃ − Q₁ = ",
+    jikSuffix: "· sebaran 50% data tengah",
+    tryOther: "Coba data lain →",
+    legendQ1: "Posisi Q₁", legendQ2: "Posisi Q₂", legendQ3: "Posisi Q₃",
+    badge: "Q₁·Q₂·Q₃",
+  },
+  en: {
+    title: "Interactive Quartile Calculator",
+    formulaPrefix: "Position formula: Q",
+    formulaSuffix: " at position ",
+    inputHintA: "Type your data values separated by ",
+    inputHintB: "commas",
+    inputHintExample: "Example: 72, 65, 80, 88, 74, 91, 69",
+    placeholder: "Enter values, separated by commas…",
+    sortBtn: "Sort 🔢",
+    errMin: "Enter at least 4 numbers!",
+    errInvalid: "Make sure every value is a valid number.",
+    sorting: "⏳ Sorting from smallest to largest…",
+    sortedStatus: (n: number) => `✅ Sorted — ${n} data points ready to calculate!`,
+    calculatingStatus: "🔍 Calculating quartiles using the position formula…",
+    doneStatus: "🎉 All three quartiles found!",
+    reset: "Reset",
+    formulaPreviewLabel: (n: number) => `🧮 Formula to be used (n = ${n}):`,
+    posQ1: "Position Q₁ =", posQ2: "Position Q₂ =", posQ3: "Position Q₃ =",
+    findBtn: "Find Quartiles 📊",
+    kuartilBawah: "Lower Quartile", median: "Median", kuartilAtas: "Upper Quartile",
+    jikLabel: "Interquartile Range (IQR) = Q₃ − Q₁ = ",
+    jikSuffix: "· spread of the middle 50% of data",
+    tryOther: "Try other data →",
+    legendQ1: "Q₁ position", legendQ2: "Q₂ position", legendQ3: "Q₃ position",
+    badge: "Q₁·Q₂·Q₃",
+  },
+  ja: {
+    title: "四分位数インタラクティブ計算機",
+    formulaPrefix: "位置の公式：Q",
+    formulaSuffix: " は第",
+    inputHintA: "データの値を",
+    inputHintB: "カンマ",
+    inputHintExample: "例：72, 65, 80, 88, 74, 91, 69",
+    placeholder: "値をカンマで区切って入力…",
+    sortBtn: "並べ替え 🔢",
+    errMin: "少なくとも4つの数値を入力してください！",
+    errInvalid: "すべての値が有効な数値であることを確認してください。",
+    sorting: "⏳ 小さい順に並べ替え中…",
+    sortedStatus: (n: number) => `✅ 並べ替え完了 — ${n}個のデータが計算準備完了！`,
+    calculatingStatus: "🔍 位置の公式で四分位数を計算中…",
+    doneStatus: "🎉 3つの四分位数がすべて見つかりました！",
+    reset: "リセット",
+    formulaPreviewLabel: (n: number) => `🧮 使用する公式（n = ${n}）：`,
+    posQ1: "Q₁の位置 =", posQ2: "Q₂の位置 =", posQ3: "Q₃の位置 =",
+    findBtn: "四分位数を求める 📊",
+    kuartilBawah: "第1四分位数（下位）", median: "中央値", kuartilAtas: "第3四分位数（上位）",
+    jikLabel: "四分位範囲（IQR）= Q₃ − Q₁ = ",
+    jikSuffix: "· データ中央50%の広がり",
+    tryOther: "他のデータを試す →",
+    legendQ1: "Q₁の位置", legendQ2: "Q₂の位置", legendQ3: "Q₃の位置",
+    badge: "Q₁·Q₂·Q₃",
+  },
+} as const;
 
 interface CardProps {
   label: string;
@@ -88,7 +170,8 @@ function QuartilCard({ label, sublabel, colorClass, borderClass, q, show, sorted
   );
 }
 
-export default function KuartilAnimasiMateri() {
+export default function KuartilAnimasiMateri({ language }: { language: Language }) {
+  const t = kalkTrans[language];
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [phase, setPhase] = useState<Phase>("input");
@@ -111,16 +194,16 @@ export default function KuartilAnimasiMateri() {
   const handleSort = () => {
     const parts = input.split(/[,;\s]+/).map(s => s.replace(",", ".").trim()).filter(Boolean);
     const nums = parts.map(Number);
-    if (parts.length < 4) { setError("Masukkan minimal 4 angka!"); return; }
-    if (nums.some(isNaN)) { setError("Pastikan semua nilai adalah angka yang valid."); return; }
+    if (parts.length < 4) { setError(t.errMin); return; }
+    if (nums.some(isNaN)) { setError(t.errInvalid); return; }
     setError("");
     setRawNums(nums);
     setPhase("sorting");
-    const t = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setSorted([...nums].sort((a, b) => a - b));
       setPhase("sorted");
     }, 1400);
-    timers.current.push(t);
+    timers.current.push(timeoutId);
   };
 
   const handleFindQ = () => {
@@ -175,12 +258,12 @@ export default function KuartilAnimasiMateri() {
       <div className="flex items-center gap-2 mb-4">
         <span className="text-xl">✨</span>
         <div>
-          <h2 className="text-sm font-black text-violet-200 tracking-wide leading-none">Kalkulator Kuartil Interaktif</h2>
+          <h2 className="text-sm font-black text-violet-200 tracking-wide leading-none">{t.title}</h2>
           <p className="text-[10px] text-violet-400/60 mt-0.5">
-            Rumus posisi: Q<sub>k</sub> pada posisi ke-<span className="font-mono">k(n+1)/4</span>
+            {t.formulaPrefix}<sub>k</sub>{t.formulaSuffix}<span className="font-mono">k(n+1)/4</span>
           </p>
         </div>
-        <span className="ml-auto text-[10px] text-violet-400/50 bg-violet-900/30 px-2 py-0.5 rounded-full font-mono">Q₁·Q₂·Q₃</span>
+        <span className="ml-auto text-[10px] text-violet-400/50 bg-violet-900/30 px-2 py-0.5 rounded-full font-mono">{t.badge}</span>
       </div>
 
       <AnimatePresence mode="wait">
@@ -189,13 +272,13 @@ export default function KuartilAnimasiMateri() {
         {phase === "input" && (
           <motion.div key="input" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-3">
             <p className="text-sm text-slate-300">
-              Ketik nilai data dipisah <span className="font-bold text-violet-300">koma</span>.
-              <span className="text-slate-500 ml-2 text-xs">Contoh: 72, 65, 80, 88, 74, 91, 69</span>
+              {t.inputHintA}<span className="font-bold text-violet-300">{t.inputHintB}</span>.
+              <span className="text-slate-500 ml-2 text-xs">{t.inputHintExample}</span>
             </p>
             <div className="flex gap-2">
               <input
                 className="flex-1 rounded-xl border border-violet-500/40 bg-slate-900/60 px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-violet-500 font-mono"
-                placeholder="Masukkan nilai, pisahkan dengan koma…"
+                placeholder={t.placeholder}
                 value={input}
                 onChange={e => { setInput(e.target.value); setError(""); }}
                 onKeyDown={e => e.key === "Enter" && handleSort()}
@@ -205,7 +288,7 @@ export default function KuartilAnimasiMateri() {
                 onClick={handleSort}
                 className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold text-sm shadow-lg shadow-violet-900/50 hover:from-violet-500 hover:to-indigo-500 transition-all whitespace-nowrap"
               >
-                Urutkan 🔢
+                {t.sortBtn}
               </motion.button>
             </div>
             {error && <p className="text-rose-400 text-xs font-medium">⚠️ {error}</p>}
@@ -215,7 +298,7 @@ export default function KuartilAnimasiMateri() {
         {/* ── SORTING ANIMATION ── */}
         {phase === "sorting" && (
           <motion.div key="sorting" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-3">
-            <p className="text-sm text-amber-300 font-semibold animate-pulse">⏳ Mengurutkan dari kecil ke besar…</p>
+            <p className="text-sm text-amber-300 font-semibold animate-pulse">{t.sorting}</p>
             <div className="flex flex-wrap gap-2">
               {rawNums.map((num, i) => (
                 <motion.div
@@ -239,11 +322,11 @@ export default function KuartilAnimasiMateri() {
             {/* Status */}
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium">
-                {phase === "sorted" && <span className="text-emerald-400">✅ Terurut — {n} data siap dihitung!</span>}
-                {phase === "calculating" && <span className="text-violet-300 animate-pulse">🔍 Menghitung kuartil dengan rumus posisi…</span>}
-                {phase === "done" && <span className="text-emerald-400">🎉 Ketiga kuartil ditemukan!</span>}
+                {phase === "sorted" && <span className="text-emerald-400">{t.sortedStatus(n)}</span>}
+                {phase === "calculating" && <span className="text-violet-300 animate-pulse">{t.calculatingStatus}</span>}
+                {phase === "done" && <span className="text-emerald-400">{t.doneStatus}</span>}
               </p>
-              <button onClick={reset} className="text-xs text-slate-600 hover:text-rose-400 transition-colors underline underline-offset-2">Reset</button>
+              <button onClick={reset} className="text-xs text-slate-600 hover:text-rose-400 transition-colors underline underline-offset-2">{t.reset}</button>
             </div>
 
             {/* Data tiles */}
@@ -281,10 +364,10 @@ export default function KuartilAnimasiMateri() {
                 initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
                 className="rounded-xl border border-slate-700/50 bg-slate-900/40 px-4 py-3 font-mono text-xs space-y-1"
               >
-                <p className="text-slate-300 font-sans font-semibold text-[11px] mb-2">🧮 Rumus yang akan dipakai (n = {n}):</p>
-                <p className="text-slate-400">Posisi Q₁ = 1×({n}+1)÷4 = <span className="text-cyan-300 font-bold">{fmtPos(q1.pos)}</span></p>
-                <p className="text-slate-400">Posisi Q₂ = 2×({n}+1)÷4 = <span className="text-amber-300 font-bold">{fmtPos(q2.pos)}</span></p>
-                <p className="text-slate-400">Posisi Q₃ = 3×({n}+1)÷4 = <span className="text-pink-300 font-bold">{fmtPos(q3.pos)}</span></p>
+                <p className="text-slate-300 font-sans font-semibold text-[11px] mb-2">{t.formulaPreviewLabel(n)}</p>
+                <p className="text-slate-400">{t.posQ1} 1×({n}+1)÷4 = <span className="text-cyan-300 font-bold">{fmtPos(q1.pos)}</span></p>
+                <p className="text-slate-400">{t.posQ2} 2×({n}+1)÷4 = <span className="text-amber-300 font-bold">{fmtPos(q2.pos)}</span></p>
+                <p className="text-slate-400">{t.posQ3} 3×({n}+1)÷4 = <span className="text-pink-300 font-bold">{fmtPos(q3.pos)}</span></p>
               </motion.div>
             )}
 
@@ -296,20 +379,20 @@ export default function KuartilAnimasiMateri() {
                 onClick={handleFindQ}
                 className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-violet-600 text-white font-bold text-sm shadow-lg shadow-cyan-900/40 hover:from-cyan-500 hover:to-violet-500 transition-all"
               >
-                Tentukan Kuartil 📊
+                {t.findBtn}
               </motion.button>
             )}
 
             {/* Quartile cards */}
             {(phase === "calculating" || phase === "done") && (
               <div className="grid grid-cols-3 gap-3 mt-1">
-                <QuartilCard label="Q₁" sublabel="Kuartil Bawah" colorClass="text-cyan-300"
+                <QuartilCard label="Q₁" sublabel={t.kuartilBawah} colorClass="text-cyan-300"
                   borderClass="border-cyan-600/60 bg-gradient-to-br from-cyan-950/70 to-cyan-900/20"
                   q={q1} show={showQ1} sorted={sorted} />
-                <QuartilCard label="Q₂" sublabel="Median"        colorClass="text-amber-300"
+                <QuartilCard label="Q₂" sublabel={t.median}        colorClass="text-amber-300"
                   borderClass="border-amber-600/60 bg-gradient-to-br from-amber-950/70 to-amber-900/20"
                   q={q2} show={showQ2} sorted={sorted} />
-                <QuartilCard label="Q₃" sublabel="Kuartil Atas"  colorClass="text-pink-300"
+                <QuartilCard label="Q₃" sublabel={t.kuartilAtas}  colorClass="text-pink-300"
                   borderClass="border-pink-600/60 bg-gradient-to-br from-pink-950/70 to-pink-900/20"
                   q={q3} show={showQ3} sorted={sorted} />
               </div>
@@ -323,10 +406,10 @@ export default function KuartilAnimasiMateri() {
               >
                 <span className="mt-0.5">💡</span>
                 <div className="leading-relaxed">
-                  <span className="font-bold">Jangkauan Antarkuartil (JAK) = Q₃ − Q₁ = </span>
+                  <span className="font-bold">{t.jikLabel}</span>
                   <span className="font-mono text-emerald-200">{fmtNum(q3.value - q1.value)}</span>
-                  <span className="ml-2 text-emerald-500 text-xs">· sebaran 50% data tengah</span>
-                  <button onClick={reset} className="ml-3 underline underline-offset-2 text-emerald-400 hover:text-white transition-colors text-xs">Coba data lain →</button>
+                  <span className="ml-2 text-emerald-500 text-xs">{t.jikSuffix}</span>
+                  <button onClick={reset} className="ml-3 underline underline-offset-2 text-emerald-400 hover:text-white transition-colors text-xs">{t.tryOther}</button>
                 </div>
               </motion.div>
             )}
@@ -337,9 +420,9 @@ export default function KuartilAnimasiMateri() {
       {/* Legend */}
       <div className="flex flex-wrap gap-4 mt-4 pt-3 border-t border-violet-800/25">
         {[
-          { cls: "bg-cyan-500/50 border-cyan-400/60", label: "Posisi Q₁" },
-          { cls: "bg-amber-500/50 border-amber-400/60", label: "Posisi Q₂" },
-          { cls: "bg-pink-500/50 border-pink-400/60",  label: "Posisi Q₃" },
+          { cls: "bg-cyan-500/50 border-cyan-400/60", label: t.legendQ1 },
+          { cls: "bg-amber-500/50 border-amber-400/60", label: t.legendQ2 },
+          { cls: "bg-pink-500/50 border-pink-400/60",  label: t.legendQ3 },
         ].map(({ cls, label }) => (
           <div key={label} className="flex items-center gap-1.5">
             <span className={`w-3 h-3 rounded border inline-block ${cls}`} />
