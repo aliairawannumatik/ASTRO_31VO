@@ -25,6 +25,11 @@ All five Statistika materi pages confirmed trilingual and screenshot-verified:
 - `PengantarStatistikaPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/pengantar`)
 - `RataRataPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/rata-rata`)
 
+## Re-import setup (2026-07-15)
+After a GitHub re-import, `node_modules` are wiped in both the pnpm workspace root and `.migration-backup` (its own plain-npm project, not committed). Fix: `pnpm install` at root **and** `npm install` inside `.migration-backup` separately, then restart both workflows.
+- Curling `/api/chat` (or any `/api/*` POST/GET) against the external `$REPLIT_DEV_DOMAIN` root returns a plain 404 ("Cannot GET/POST ...") even though the identical request against `localhost:5000` correctly returns the expected 503 (missing `GROQ_API_KEY`) — an external-domain proxy quirk for this non-artifact-registered project, not an app bug. Don't chase it; verify real behavior via `localhost:<port>` curl or an actual browser Screenshot instead.
+- A first `externalUrl` Screenshot right after workflow restart can catch the SPA mid-hydration (blank white page) even though `curl` shows 200 OK. Retake the screenshot before concluding the app is broken.
+
 Notes for future pages:
 - Inline calculator sub-components (MeanCalculator, CombinedMeanCalculator) can call `useLanguage()` directly since they are defined in the same file — no need for a `language` prop.
 - Calculator components with `useLanguage()` directly must rebuild their label strings at render time. The `groups` useState initial label should be language-neutral (e.g. `""`) or set outside state, not derived from `tc` (which is language-aware). Use the tc label only in display, or re-initialize labels on language change.
