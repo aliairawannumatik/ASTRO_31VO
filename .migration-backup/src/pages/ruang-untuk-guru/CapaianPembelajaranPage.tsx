@@ -69,21 +69,21 @@ type CpElement = { no: string; element: string; cp: string };
 type FaseInfo = { fase: string; jenjang: string; pengantar: string };
 
 const dokumenStyle = `
-  @page { size: 21.5cm 33cm; margin: 3cm; }
+  @page { size: 21.5cm 33cm; margin: 3cm 3cm 3cm 3cm; }
   * { box-sizing: border-box; }
-  body { font-family: Arial, sans-serif; font-size: 12pt; line-height: 1.5; color: #000; background: #fff; margin: 0; padding: 0; text-align: justify; }
-  h1 { text-align: center; font-size: 16pt; font-weight: bold; margin: 0 0 6pt 0; font-family: Arial, sans-serif; }
-  h2 { font-size: 13pt; font-weight: bold; margin: 14pt 0 6pt 0; font-family: Arial, sans-serif; }
-  .header { text-align: center; margin-bottom: 18pt; border-bottom: 2px solid #000; padding-bottom: 10pt; }
-  .subtitle { font-size: 11pt; margin: 3pt 0; text-align: center; }
-  .identitas { border: 1px solid #aaa; padding: 10pt; margin-bottom: 14pt; }
-  .identitas p { margin: 4pt 0; text-align: left; }
-  .pengantar { margin-bottom: 14pt; text-align: justify; }
-  .elemen { border: 1px solid #aaa; padding: 10pt 12pt; margin-bottom: 10pt; }
-  .elemen-no { font-size: 10pt; color: #555; margin: 0 0 3pt 0; }
-  .elemen-judul { font-weight: bold; font-size: 12pt; margin: 0 0 6pt 0; }
+  body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #000; background: #fff; margin: 0; padding: 0; text-align: justify; }
+  h1 { text-align: center; font-size: 12pt; font-weight: bold; margin: 0 0 6pt 0; font-family: Arial, sans-serif; }
+  h2 { font-size: 11pt; font-weight: bold; margin: 12pt 0 5pt 0; font-family: Arial, sans-serif; text-align: left; }
+  .header { text-align: center; margin-bottom: 14pt; border-bottom: 2px solid #000; padding-bottom: 8pt; }
+  .subtitle { font-size: 11pt; margin: 2pt 0; text-align: center; }
+  .identitas { border: 1px solid #aaa; padding: 8pt; margin-bottom: 12pt; }
+  .identitas p { margin: 3pt 0; text-align: left; }
+  .pengantar { margin-bottom: 12pt; text-align: justify; }
+  .elemen { border: 1px solid #aaa; padding: 8pt 10pt; margin-bottom: 8pt; }
+  .elemen-no { font-size: 11pt; color: #555; margin: 0 0 2pt 0; }
+  .elemen-judul { font-weight: bold; font-size: 11pt; margin: 0 0 5pt 0; }
   .cp-text { text-align: justify; margin: 0; }
-  .footer { text-align: center; margin-top: 18pt; font-size: 9pt; color: #666; border-top: 1px solid #ccc; padding-top: 8pt; }
+  .footer { text-align: center; margin-top: 14pt; font-size: 9pt; color: #666; border-top: 1px solid #ccc; padding-top: 6pt; }
 `;
 
 const CapaianPembelajaranPage = () => {
@@ -154,12 +154,12 @@ const CapaianPembelajaranPage = () => {
       ]);
       const styleNoPage = dokumenStyle.replace(/@page\s*\{[^}]*\}/g, "");
       const container = document.createElement("div");
-      container.style.cssText = "position:fixed;top:-9999px;left:0;width:794px;background:#fff;color:#000;";
-      container.innerHTML = `<style>${styleNoPage}</style><div style="padding:60px 80px;font-family:Arial,sans-serif;font-size:12pt;line-height:1.5;">${buildDokumenBody()}</div>`;
+      container.style.cssText = "position:fixed;top:-9999px;left:0;width:813px;background:#fff;color:#000;";
+      container.innerHTML = `<style>${styleNoPage}</style><div style="padding:113px;font-family:Arial,sans-serif;font-size:11pt;line-height:1.5;text-align:justify;">${buildDokumenBody()}</div>`;
       document.body.appendChild(container);
       try {
-        const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#fff", windowWidth: 794 });
-        const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+        const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#fff", windowWidth: 813 });
+        const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: [215, 330] });
         const pdfW = pdf.internal.pageSize.getWidth();
         const pdfH = pdf.internal.pageSize.getHeight();
         const imgData = canvas.toDataURL("image/png");
