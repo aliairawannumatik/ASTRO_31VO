@@ -26,11 +26,13 @@ All six Statistika materi pages confirmed trilingual and screenshot-verified:
 - `RataRataPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/rata-rata`)
 - `MedianModusPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/median-modus`) — includes two embedded interactive animators (`MedianAnimator`, `ModusAnimator`) that each call `useLanguage()` directly (defined in the same file, so no `language` prop needed, same pattern as the calculator sub-components below). Sibling `latihan-mandiri/kelas9/statistika/MedianModusPage.tsx` (practice-exercise page) is a **separate file** and was intentionally left untouched — always double check whether "soal" in a request refers to worked examples in the materi page vs. the separate latihan-mandiri exercise file before assuming scope.
 
-## Correct workflow to start (2026-07-16)
-Preview pane routes through the artifact system. The workflow that must be running is `artifacts/numatik: web` (NOT the manual `Numatik Web` workflow). Both run the same command but only the artifact-managed one is wired to the preview path `/`. If the app is blank, stop `Numatik Web` and restart `artifacts/numatik: web`.
+## Correct workflow to start
+Preview pane routes through the artifact system. The workflow that must be running is `artifacts/numatik: web` (NOT the manual `Numatik Web` workflow). The manual workflow conflicts on port 5001 and bypasses preview routing. If the app is blank, stop all manual workflows first (`Numatik Web`, `Numatik API Server`) then restart `artifacts/numatik: web`.
 
-## Port architecture (2026-07-16)
-Express is the public-facing server on PORT=5000 (injected by artifact system). Vite dev server runs internally on port 5001 (VITE_PORT=5001). Express proxies all non-/server requests to Vite via http-proxy-middleware (including WebSocket HMR). This avoids the double-proxy 502 bug where Replit proxy → Vite proxy → Express caused POST bodies to fail.
+## Port architecture
+Express is the public-facing server on PORT=5000 (injected by artifact system via `services.env.PORT = "5000"`). Vite dev server runs internally on port 5001 (`VITE_PORT=5001` in `services.env`). Express proxies all non-`/server` requests to Vite via http-proxy-middleware (including WebSocket HMR). This avoids the double-proxy 502 bug where Replit proxy → Vite proxy → Express caused POST bodies to fail.
+
+**artifact.toml must have `PORT = "5000"` in `[services.env]` to match `localPort = 5000`.** If these disagree, Express binds the wrong port and the preview shows blank. Fix via `verifyAndReplaceArtifactToml`.
 
 **Why this matters:** Artifact `api-server` claims `paths=["/api"]` at localPort 8080 (not running). Any fetch to `/api/*` from the browser returns 502. All .migration-backup server endpoints use `/server/*` prefix instead: `/server/pdf` (Puppeteer PDF), `/server/chat` (AI chat). Never use `/api/` for .migration-backup endpoints.
 
