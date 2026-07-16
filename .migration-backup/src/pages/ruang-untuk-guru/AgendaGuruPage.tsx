@@ -218,13 +218,6 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;fon
             Simpan sebagai Word
           </button>
           <button
-            onClick={addEntry}
-            className="inline-flex items-center gap-2 rounded-xl border border-emerald-400/40 bg-emerald-500/15 px-4 py-2 text-sm font-semibold text-emerald-100 hover:bg-emerald-500/25 transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            Tambah Baris
-          </button>
-          <button
             onClick={resetAgenda}
             className="inline-flex items-center gap-2 rounded-xl border border-rose-400/40 bg-rose-500/15 px-4 py-2 text-sm font-semibold text-rose-100 hover:bg-rose-500/25 transition-colors"
           >
@@ -265,7 +258,7 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;fon
         </section>
 
         {/* Tabel Agenda */}
-        <section className="rounded-3xl border border-border bg-card/85 backdrop-blur overflow-x-auto mb-8 print:bg-white print:border-black print:rounded-none">
+        <section className="rounded-3xl border border-border bg-card/85 backdrop-blur overflow-x-auto mb-0 print:bg-white print:border-black print:rounded-none">
           <table className="w-full text-sm border-collapse min-w-[1100px]">
             <thead>
               <tr className="bg-black/30 print:bg-gray-200">
@@ -358,6 +351,16 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;fon
             </tbody>
           </table>
         </section>
+
+        <div className="mb-8 print:hidden">
+          <button
+            onClick={addEntry}
+            className="inline-flex items-center gap-2 w-full justify-center rounded-b-3xl border border-t-0 border-border bg-card/60 hover:bg-emerald-500/15 px-4 py-3 text-sm font-semibold text-emerald-200 hover:text-emerald-100 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            Tambah Baris
+          </button>
+        </div>
 
         <div className="text-center print:hidden">
           <button

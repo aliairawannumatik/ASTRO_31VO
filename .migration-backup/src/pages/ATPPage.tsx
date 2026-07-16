@@ -212,6 +212,16 @@ const ATPPage = () => {
     setSaved(false);
   };
 
+  const handleCpChange = (elIdx: number, value: string) => {
+    setAtpData((prev) => prev.map((el, i) => i === elIdx ? { ...el, cp: value } : el));
+    setSaved(false);
+  };
+
+  const handleElementChange = (elIdx: number, field: "element" | "no", value: string) => {
+    setAtpData((prev) => prev.map((el, i) => i === elIdx ? { ...el, [field]: value } : el));
+    setSaved(false);
+  };
+
   const handleSave = () => {
     playPopSound();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(atpData));
@@ -390,19 +400,30 @@ const ATPPage = () => {
             <div key={item.element} className="rounded-3xl border border-cyan-200/25 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-violet-500/10 backdrop-blur p-5 md:p-6">
               <div className="mb-5">
                 <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/20 text-xl font-display font-bold text-primary shrink-0">
-                    {item.no}
-                  </div>
+                  <input
+                    value={item.no}
+                    onChange={e => handleElementChange(elIdx, "no", e.target.value)}
+                    className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/20 text-xl font-display font-bold text-primary shrink-0 bg-transparent border border-primary/30 text-center focus:outline-none focus:border-primary/70 transition-colors"
+                  />
                   <div className="flex-1">
-                    <h3 className="font-display text-xl md:text-2xl font-bold text-white">{item.element}</h3>
-                    <p className="text-xs md:text-sm text-white/60">{item.tp.length} tujuan pembelajaran</p>
+                    <input
+                      value={item.element}
+                      onChange={e => handleElementChange(elIdx, "element", e.target.value)}
+                      className="w-full bg-transparent border-b border-white/20 focus:border-white/50 outline-none font-display text-xl md:text-2xl font-bold text-white pb-0.5 transition-colors"
+                    />
+                    <p className="text-xs md:text-sm text-white/60 mt-1">{item.tp.length} tujuan pembelajaran</p>
                   </div>
                 </div>
               </div>
               <div className="grid lg:grid-cols-[1fr_1.2fr] gap-5">
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
                   <h4 className="font-display font-bold text-yellow-100 mb-3">Capaian Pembelajaran</h4>
-                  <p className="text-sm leading-relaxed text-white/75 font-body">{item.cp}</p>
+                  <textarea
+                    value={item.cp}
+                    onChange={e => handleCpChange(elIdx, e.target.value)}
+                    rows={6}
+                    className="w-full bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-sm text-white/85 font-body leading-relaxed resize-y focus:outline-none focus:border-yellow-400/60 focus:bg-white/10 transition-all"
+                  />
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
                   <h4 className="font-display font-bold text-emerald-100 mb-3">Tujuan Pembelajaran</h4>

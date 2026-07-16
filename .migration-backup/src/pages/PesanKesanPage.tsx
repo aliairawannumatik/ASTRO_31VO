@@ -25,6 +25,7 @@ const PesanKesanPage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState<FormData>(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [savedOk, setSavedOk] = useState(false);
 
   const updateForm = (field: keyof FormData, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -40,6 +41,13 @@ const PesanKesanPage = () => {
     saved.push({ ...form, waktu: new Date().toISOString() });
     localStorage.setItem("numatik-pesan-kesan", JSON.stringify(saved));
     setSubmitted(true);
+  };
+
+  const handleSave = () => {
+    playPopSound();
+    localStorage.setItem("numatik-pesan-kesan-draft", JSON.stringify(form));
+    setSavedOk(true);
+    setTimeout(() => setSavedOk(false), 2500);
   };
 
   const resetForm = () => {
@@ -90,7 +98,7 @@ td{border:1px solid #ccc;padding:6pt 8pt;vertical-align:top}
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
-      <PageNavigation prevPath="/menu" />
+      <PageNavigation prevPath="/ruang-untuk-guru" />
       <div className="relative z-10 max-w-4xl mx-auto px-4 pt-20 pb-14">
         <div className="text-center mb-8 animate-slide-up">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
@@ -104,6 +112,13 @@ td{border:1px solid #ccc;padding:6pt 8pt;vertical-align:top}
             Tuliskan pengalamanmu setelah menggunakan aplikasi NUMATIK. Masukanmu membantu aplikasi ini menjadi lebih baik.
           </p>
           <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handleSave}
+              className={`inline-flex items-center gap-2 rounded-full px-7 py-3 font-bold text-white transition-all hover:scale-105 ${savedOk ? "bg-emerald-400" : "bg-emerald-600 hover:bg-emerald-500"}`}
+            >
+              <Save className="w-5 h-5" />
+              {savedOk ? "Tersimpan!" : "Simpan"}
+            </button>
             <button
               onClick={handlePrintPDF}
               className="inline-flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 px-7 py-3 font-bold text-white transition-all hover:scale-105"

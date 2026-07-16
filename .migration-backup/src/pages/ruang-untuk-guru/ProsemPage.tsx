@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, CalendarDays, BookOpen, Clock, Info, Printer, FileDown } from "lucide-react";
+import { ArrowLeft, CalendarDays, BookOpen, Clock, Info, Printer, FileDown, Save } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
-// ── Data 2026/2027 ──────────────────────────────────────────────────────────
+// ── Types ─────────────────────────────────────────────────────────────────────
 
 type Row = {
   no: string;
@@ -26,6 +26,9 @@ type SemData = {
 };
 
 type KelasData = { ganjil: SemData; genap: SemData };
+type KelasKey = "kelas7" | "kelas8" | "kelas9";
+
+// ── Static defaults ───────────────────────────────────────────────────────────
 
 const TAHUN_AWAL = "2026";
 const TAHUN_AKHIR = "2027";
@@ -42,7 +45,6 @@ const ganjilKeyDates = [
   { label: "Pembagian Rapor Semester 1", waktu: "20 Desember 2026", warna: "text-teal-300" },
   { label: "Libur Akhir Semester 1", waktu: "22 Des 2026 – 2 Jan 2027", warna: "text-slate-400" },
 ];
-
 const genapBulan = ["Jan 2027", "Feb 2027", "Mar 2027", "Apr 2027", "Mei 2027", "Jun 2027"];
 const genapKeyDates = [
   { label: "Masuk Sekolah Semester 2", waktu: "5 Januari 2027", warna: "text-teal-300" },
@@ -55,7 +57,7 @@ const genapKeyDates = [
   { label: "Pembagian Rapor / Kenaikan Kelas", waktu: "19 Jun 2027", warna: "text-teal-300" },
 ];
 
-const allData: Record<"kelas7" | "kelas8" | "kelas9", KelasData> = {
+const defaultAllData: Record<KelasKey, KelasData> = {
   kelas7: {
     ganjil: {
       bulan: ganjilBulan, keyDates: ganjilKeyDates, totalJP: 80, mingguEfektif: 16, mingguNonEfektif: 4,
@@ -125,7 +127,7 @@ const allData: Record<"kelas7" | "kelas8" | "kelas9", KelasData> = {
     genap: {
       bulan: genapBulan, keyDates: genapKeyDates, totalJP: 60, mingguEfektif: 12, mingguNonEfektif: 12,
       rows: [
-        { no: "1", materi: "Kesebangunan & Kekongruenan", tp: "Memahami konsep kesebangunan dan kekongruenan bangun datar serta penerapannya dalam pemecahan masalah", jp: 15, alokasi: [15, null, null, null, null, null] },
+        { no: "1", materi: "Kesebangunan & Kekongruenan", tp: "Memahami konsep kesebangunan dan kekongruenan bangun datar serta penerapannya", jp: 15, alokasi: [15, null, null, null, null, null] },
         { no: "2", materi: "Bangun Ruang Sisi Lengkung", tp: "Memahami luas permukaan dan volume tabung, kerucut, bola, dan gabungannya", jp: 20, alokasi: [5, 15, null, null, null, null] },
         { no: "3", materi: "Statistika", tp: "Memahami penyajian data, ukuran pemusatan (mean, median, modus), dan ukuran penyebaran", jp: 15, alokasi: [null, 5, 5, 5, null, null] },
         { no: "–", materi: "Penilaian Tengah Semester (PTS)", tp: "", jp: 0, alokasi: [null, null, null, null, null, null], type: "pts" },
@@ -137,7 +139,7 @@ const allData: Record<"kelas7" | "kelas8" | "kelas9", KelasData> = {
   },
 };
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────────
 
 const rowStyle: Record<string, string> = {
   pts: "bg-amber-500/20 border-amber-500/40 text-amber-200",
@@ -154,7 +156,25 @@ const specialIcon: Record<string, string> = {
   ujian: "🎓",
 };
 
-const ProsemTable = ({ data }: { data: SemData }) => {
+const STORAGE_KEY = "numatik:prosem:v1";
+const kelasLabels: { key: KelasKey; label: string }[] = [
+  { key: "kelas7", label: "Kelas 7" },
+  { key: "kelas8", label: "Kelas 8" },
+  { key: "kelas9", label: "Kelas 9" },
+];
+
+// ── Editable ProsemTable ──────────────────────────────────────────────────────
+
+type ProsemTableProps = {
+  data: SemData;
+  onRowChange: (rowIdx: number, field: keyof Row, value: string | number) => void;
+  onAlokasiChange: (rowIdx: number, colIdx: number, value: number | null) => void;
+};
+
+const inpCell = "w-full bg-transparent border-b border-white/15 focus:border-teal-400/60 outline-none text-xs text-white/85 font-body py-0.5 transition-colors resize-none";
+const inpNormal = "w-full bg-transparent outline-none text-xs text-white/85 font-body resize-none";
+
+const ProsemTable = ({ data, onRowChange, onAlokasiChange }: ProsemTableProps) => {
   const colTotals = Array(6).fill(0);
   data.rows.forEach(r => {
     if (!r.type || r.type === "normal" || r.type === "cadangan") {
@@ -190,7 +210,14 @@ const ProsemTable = ({ data }: { data: SemData }) => {
                 <tr key={ri} className={`border ${cls}`}>
                   <td className="border border-white/10 px-2 py-2 text-center opacity-60">{row.no}</td>
                   <td colSpan={2} className="border border-white/10 px-3 py-2 font-semibold">
-                    {icon} {row.materi}
+                    <div className="flex items-center gap-2">
+                      <span>{icon}</span>
+                      <input
+                        value={row.materi}
+                        onChange={e => onRowChange(ri, "materi", e.target.value)}
+                        className={inpNormal + " font-semibold"}
+                      />
+                    </div>
                   </td>
                   <td className="border border-white/10 px-2 py-2 text-center opacity-50">–</td>
                   {data.bulan.map((b, bi) => (
@@ -204,22 +231,54 @@ const ProsemTable = ({ data }: { data: SemData }) => {
             }
             return (
               <tr key={ri} className={`border ${ri % 2 === 0 ? "bg-white/3" : "bg-white/0"} hover:bg-white/8 transition-colors`}>
-                <td className="border border-white/10 px-2 py-2 text-center text-white/60">{row.no}</td>
-                <td className="border border-white/10 px-3 py-2 font-semibold text-white">{row.materi}</td>
-                <td className="border border-white/10 px-3 py-2 text-white/70 leading-relaxed">{row.tp}</td>
-                <td className="border border-white/10 px-2 py-2 text-center font-bold text-teal-300">{row.jp}</td>
+                <td className="border border-white/10 px-2 py-1.5">
+                  <input
+                    value={row.no}
+                    onChange={e => onRowChange(ri, "no", e.target.value)}
+                    className={inpCell + " text-center text-white/60 w-8"}
+                  />
+                </td>
+                <td className="border border-white/10 px-2 py-1.5">
+                  <textarea
+                    value={row.materi}
+                    onChange={e => onRowChange(ri, "materi", e.target.value)}
+                    rows={2}
+                    className={inpCell + " font-semibold text-white"}
+                  />
+                </td>
+                <td className="border border-white/10 px-2 py-1.5">
+                  <textarea
+                    value={row.tp}
+                    onChange={e => onRowChange(ri, "tp", e.target.value)}
+                    rows={2}
+                    className={inpCell + " text-white/70 leading-relaxed"}
+                  />
+                </td>
+                <td className="border border-white/10 px-2 py-1.5 text-center">
+                  <input
+                    type="number"
+                    min={0}
+                    value={row.jp}
+                    onChange={e => onRowChange(ri, "jp", parseInt(e.target.value) || 0)}
+                    className={inpCell + " text-center text-teal-300 font-bold w-10"}
+                  />
+                </td>
                 {row.alokasi.map((v, ai) => (
-                  <td key={ai} className="border border-white/10 px-2 py-2 text-center">
-                    {v ? (
-                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full font-bold text-[11px] ${
-                        t === "cadangan" ? "bg-slate-500/40 text-slate-200" : "bg-teal-500/30 text-teal-200"
-                      }`}>{v}</span>
-                    ) : (
-                      <span className="text-white/15">–</span>
-                    )}
+                  <td key={ai} className="border border-white/10 px-2 py-1.5 text-center">
+                    <input
+                      type="number"
+                      min={0}
+                      value={v ?? ""}
+                      onChange={e => {
+                        const n = e.target.value === "" ? null : parseInt(e.target.value) || 0;
+                        onAlokasiChange(ri, ai, n);
+                      }}
+                      className={inpCell + " text-center text-teal-200 font-bold w-10"}
+                      placeholder="–"
+                    />
                   </td>
                 ))}
-                <td className="border border-white/10 px-2 py-2 text-center text-[10px] text-white/40">
+                <td className="border border-white/10 px-2 py-1.5 text-center text-[10px] text-white/40">
                   {t === "cadangan" ? "Fleksibel" : ""}
                 </td>
               </tr>
@@ -247,21 +306,71 @@ const ProsemTable = ({ data }: { data: SemData }) => {
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
-type KelasKey = "kelas7" | "kelas8" | "kelas9";
-
-const kelasLabels: { key: KelasKey; label: string }[] = [
-  { key: "kelas7", label: "Kelas 7" },
-  { key: "kelas8", label: "Kelas 8" },
-  { key: "kelas9", label: "Kelas 9" },
-];
-
 const ProsemPage = () => {
   const navigate = useNavigate();
   const [kelas, setKelas] = useState<KelasKey>("kelas7");
   const [semester, setSemester] = useState<"ganjil" | "genap">("ganjil");
+  const [saved, setSaved] = useState(false);
+  const [guru, setGuru] = useState("");
+  const [pageData, setPageData] = useState<Record<KelasKey, KelasData>>(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(defaultAllData));
+    } catch { return JSON.parse(JSON.stringify(defaultAllData)); }
+  });
 
-  const semData = allData[kelas][semester];
+  const semData = pageData[kelas][semester];
   const kelasNum = kelas.replace("kelas", "");
+  const kelasRom = kelasNum === "7" ? "VII" : kelasNum === "8" ? "VIII" : "IX";
+
+  const handleRowChange = (rowIdx: number, field: keyof Row, value: string | number) => {
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, KelasData>;
+      (next[kelas][semester].rows[rowIdx] as Record<string, unknown>)[field as string] = value;
+      return next;
+    });
+  };
+
+  const handleAlokasiChange = (rowIdx: number, colIdx: number, value: number | null) => {
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, KelasData>;
+      next[kelas][semester].rows[rowIdx].alokasi[colIdx] = value;
+      return next;
+    });
+  };
+
+  const handleSave = () => {
+    playPopSound();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(pageData));
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  };
+
+  const handlePDF = () => {
+    playPopSound();
+    const prevTitle = document.title;
+    document.title = `PROSEM Kelas ${kelasNum} Semester ${semester === "ganjil" ? "Ganjil" : "Genap"} - numatik`;
+    window.print();
+    window.addEventListener("afterprint", () => { document.title = prevTitle; }, { once: true });
+  };
+
+  const handleWord = () => {
+    playPopSound();
+    const rows = semData.rows.map(r => {
+      const t = r.type ?? "normal";
+      if (t !== "normal" && t !== "cadangan") {
+        return `<tr style="background:#fff3cd"><td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center">${r.no}</td><td colspan="2" style="border:1px solid #ccc;padding:4pt 6pt;font-weight:bold">${specialIcon[t] ?? ""} ${r.materi}</td><td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center">–</td>${r.alokasi.map(v => `<td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center">–</td>`).join("")}<td style="border:1px solid #ccc;padding:4pt 6pt"></td></tr>`;
+      }
+      return `<tr><td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center">${r.no}</td><td style="border:1px solid #ccc;padding:4pt 6pt;font-weight:bold">${r.materi}</td><td style="border:1px solid #ccc;padding:4pt 6pt">${r.tp}</td><td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center;font-weight:bold;color:#0d7c66">${r.jp}</td>${r.alokasi.map(v => `<td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center">${v ?? "–"}</td>`).join("")}<td style="border:1px solid #ccc;padding:4pt 6pt;text-align:center;font-size:9pt;color:#666">${t === "cadangan" ? "Fleksibel" : ""}</td></tr>`;
+    }).join("");
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;font-size:10pt;margin:1.5cm}h1{text-align:center;font-size:13pt;font-weight:bold;margin:0 0 4pt}h2{text-align:center;font-size:11pt;margin:0 0 12pt}table{width:100%;border-collapse:collapse;margin-top:10pt}th{background:#0d7c66;color:#fff;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;text-align:center}</style></head><body><h1>PROGRAM SEMESTER (PROSEM) MATEMATIKA</h1><h2>Kelas ${kelasRom} | Semester ${semester === "ganjil" ? "Ganjil" : "Genap"} | Tahun Pelajaran ${LABEL}</h2><table><thead><tr><th style="width:4%">No</th><th style="width:16%">Materi Pokok</th><th>Tujuan Pembelajaran</th><th style="width:5%">JP</th>${semData.bulan.map(b => `<th style="width:8%">${b}</th>`).join("")}<th style="width:8%">Ket</th></tr></thead><tbody>${rows}</tbody></table><p style="margin-top:10pt;font-size:8pt;color:#888;text-align:center">Dicetak dari Aplikasi NUMATIK — Guru: ${guru || "___________________________"}</p></body></html>`;
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = `PROSEM_Kelas${kelasNum}_${semester}_${TAHUN_AWAL}-${TAHUN_AKHIR}.doc`;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
@@ -281,20 +390,37 @@ const ProsemPage = () => {
           <p className="mt-3 text-sm text-white/60 font-body max-w-2xl mx-auto">
             Distribusi materi pembelajaran Matematika SMP berdasarkan Kurikulum Merdeka (Fase D) sesuai kalender akademik Tahun Pelajaran {LABEL}.
           </p>
+          {/* Top buttons */}
+          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handleSave}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+            >
+              <Save className="w-4 h-4" />
+              {saved ? "Tersimpan!" : "Simpan"}
+            </button>
+            <button
+              onClick={handlePDF}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+            >
+              <Printer className="w-4 h-4" />
+              Simpan sebagai PDF
+            </button>
+            <button
+              onClick={handleWord}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 border border-blue-400/60 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Simpan sebagai Word
+            </button>
+          </div>
         </div>
 
         {/* Kelas Tabs */}
         <div className="flex justify-center gap-2 mb-5 animate-slide-up">
           {kelasLabels.map(k => (
-            <button
-              key={k.key}
-              onClick={() => { playPopSound(); setKelas(k.key); }}
-              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
-                kelas === k.key
-                  ? "bg-teal-500 text-white shadow-lg shadow-teal-500/30"
-                  : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"
-              }`}
-            >
+            <button key={k.key} onClick={() => { playPopSound(); setKelas(k.key); }}
+              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${kelas === k.key ? "bg-teal-500 text-white shadow-lg shadow-teal-500/30" : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10"}`}>
               {k.label}
             </button>
           ))}
@@ -303,15 +429,8 @@ const ProsemPage = () => {
         {/* Semester Tabs */}
         <div className="flex justify-center gap-2 mb-7 animate-slide-up">
           {(["ganjil", "genap"] as const).map(s => (
-            <button
-              key={s}
-              onClick={() => { playPopSound(); setSemester(s); }}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                semester === s
-                  ? "bg-cyan-600 text-white"
-                  : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
-              }`}
-            >
+            <button key={s} onClick={() => { playPopSound(); setSemester(s); }}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${semester === s ? "bg-cyan-600 text-white" : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"}`}>
               Semester {s === "ganjil" ? "Ganjil" : "Genap"}
             </button>
           ))}
@@ -321,7 +440,7 @@ const ProsemPage = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 animate-slide-up">
           {[
             { icon: BookOpen, label: "Mata Pelajaran", value: "Matematika" },
-            { icon: CalendarDays, label: "Kelas / Semester", value: `${kelasNum === "7" ? "VII" : kelasNum === "8" ? "VIII" : "IX"} / ${semester === "ganjil" ? "Ganjil" : "Genap"}` },
+            { icon: CalendarDays, label: "Kelas / Semester", value: `${kelasRom} / ${semester === "ganjil" ? "Ganjil" : "Genap"}` },
             { icon: Clock, label: "JP Tersedia", value: `${semData.mingguEfektif} mgg × 5 JP` },
             { icon: Info, label: "Total JP Efektif", value: `${semData.totalJP} JP` },
           ].map((card, i) => (
@@ -335,26 +454,34 @@ const ProsemPage = () => {
           ))}
         </div>
 
-        {/* Identitas Prosem */}
+        {/* Identitas — editable */}
         <div className="bg-teal-900/20 border border-teal-500/20 rounded-xl p-4 mb-5 animate-slide-up">
           <p className="text-teal-300 text-xs font-bold mb-3 uppercase tracking-wider">📄 Identitas Program Semester</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1.5 text-xs font-body">
-            {[
-              ["Satuan Pendidikan", "SMP / MTs"],
-              ["Mata Pelajaran", "Matematika"],
-              ["Kelas / Semester", `${kelasNum} (${kelasNum === "7" ? "Tujuh" : kelasNum === "8" ? "Delapan" : "Sembilan"}) / ${semester === "ganjil" ? "Ganjil" : "Genap"}`],
-              ["Tahun Pelajaran", LABEL],
-              ["Alokasi Waktu", "5 JP / Minggu (1 JP = 40 menit)"],
-              ["Minggu Efektif", `${semData.mingguEfektif} Minggu`],
-              ["Total JP Efektif", `${semData.totalJP} Jam Pelajaran`],
-              ["Guru Mata Pelajaran", "___________________________"],
-            ].map(([k, v]) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-xs font-body">
+            {([
+              ["Satuan Pendidikan", "SMP / MTs", false],
+              ["Mata Pelajaran", "Matematika", false],
+              ["Kelas / Semester", `${kelasNum} (${kelasRom === "VII" ? "Tujuh" : kelasRom === "VIII" ? "Delapan" : "Sembilan"}) / ${semester === "ganjil" ? "Ganjil" : "Genap"}`, false],
+              ["Tahun Pelajaran", LABEL, false],
+              ["Alokasi Waktu", "5 JP / Minggu (1 JP = 40 menit)", false],
+              ["Minggu Efektif", `${semData.mingguEfektif} Minggu`, false],
+            ] as [string, string, boolean][]).map(([k, v]) => (
               <div key={k} className="flex gap-2">
                 <span className="text-white/50 w-40 shrink-0">{k}</span>
                 <span className="text-white/20 shrink-0">:</span>
                 <span className="text-white/80">{v}</span>
               </div>
             ))}
+            <div className="flex gap-2 items-center">
+              <span className="text-white/50 w-40 shrink-0">Guru Mata Pelajaran</span>
+              <span className="text-white/20 shrink-0">:</span>
+              <input
+                value={guru}
+                onChange={e => setGuru(e.target.value)}
+                placeholder="Tulis nama guru..."
+                className="flex-1 bg-transparent border-b border-white/20 focus:border-teal-400/60 outline-none text-white/80 py-0.5 transition-colors"
+              />
+            </div>
           </div>
         </div>
 
@@ -374,12 +501,13 @@ const ProsemPage = () => {
           </div>
         </div>
 
-        {/* PROSEM Table */}
+        {/* PROSEM Table — editable */}
         <div className="animate-slide-up mb-8">
           <h2 className="text-sm font-bold text-teal-300 uppercase tracking-wider mb-3">
             📊 Tabel Program Semester — Kelas {kelasNum} | Semester {semester === "ganjil" ? "Ganjil" : "Genap"} {LABEL}
           </h2>
-          <ProsemTable data={semData} />
+          <p className="text-xs text-cyan-300/60 mb-3">✏️ Klik sel untuk mengedit langsung. Klik <strong>Simpan</strong> setelah selesai.</p>
+          <ProsemTable data={semData} onRowChange={handleRowChange} onAlokasiChange={handleAlokasiChange} />
         </div>
 
         {/* Notes */}
@@ -395,38 +523,9 @@ const ProsemPage = () => {
           )}
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 animate-slide-up">
-          <button
-            onClick={() => { playPopSound(); window.print(); }}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <Printer className="w-4 h-4" />
-            Simpan sebagai PDF
-          </button>
-          <button
-            onClick={() => {
-              playPopSound();
-              const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm}h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 6pt 0}p{font-size:10pt;margin:2pt 0 12pt 0;text-align:center}</style></head><body><h1>PROGRAM SEMESTER (PROSEM) MATEMATIKA</h1><p>Tahun Pelajaran ${LABEL} — Fase D — Kurikulum Merdeka — SMP/MTs/Program Paket B</p><p>Dokumen ini dicetak dari Aplikasi NUMATIK. Buka halaman Program Semester di aplikasi untuk melihat tabel lengkap beserta distribusi materi per bulan.</p></body></html>`;
-              const blob = new Blob(["\ufeff", html], { type: "application/msword" });
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url; a.download = `PROSEM_Matematika_${TAHUN_AWAL}-${TAHUN_AKHIR}.doc`;
-              document.body.appendChild(a); a.click();
-              document.body.removeChild(a); URL.revokeObjectURL(url);
-            }}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <FileDown className="w-4 h-4" />
-            Simpan sebagai Word
-          </button>
-        </div>
-
         <div className="text-center">
-          <button
-            onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
-            className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"
-          >
+          <button onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
+            className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body">
             <ArrowLeft className="w-4 h-4" />
             Kembali ke Ruang Untuk Guru
           </button>

@@ -6,15 +6,16 @@ import { playPopSound } from "@/hooks/useAudio";
 import {
   ArrowLeft,
   ClipboardCheck,
-  GraduationCap,
   Award,
   Printer,
   FileDown,
   Save,
-  FileText,
 } from "lucide-react";
 
-const dimensiList = [
+type SkorMap = { 4: string; 3: string; 2: string; 1: string };
+type DimensiItem = { dimensi: string; aspek: string; skor: SkorMap };
+
+const defaultDimensiList: DimensiItem[] = [
   {
     dimensi: "Keimanan dan Ketakwaan",
     aspek: "Menunjukkan sikap religius dalam pembelajaran",
@@ -88,10 +89,10 @@ const dimensiList = [
 ];
 
 const skorHeader = [
-  { value: 4, label: "Sangat Baik", color: "from-emerald-500/30 to-emerald-700/20", text: "text-emerald-100", border: "border-emerald-300/40" },
-  { value: 3, label: "Baik", color: "from-cyan-500/30 to-cyan-700/20", text: "text-cyan-100", border: "border-cyan-300/40" },
-  { value: 2, label: "Cukup", color: "from-yellow-500/30 to-yellow-700/20", text: "text-yellow-100", border: "border-yellow-300/40" },
-  { value: 1, label: "Perlu Bimbingan", color: "from-rose-500/30 to-rose-700/20", text: "text-rose-100", border: "border-rose-300/40" },
+  { value: 4 as const, label: "Sangat Baik", color: "from-emerald-500/30 to-emerald-700/20", text: "text-emerald-100", border: "border-emerald-300/40" },
+  { value: 3 as const, label: "Baik", color: "from-cyan-500/30 to-cyan-700/20", text: "text-cyan-100", border: "border-cyan-300/40" },
+  { value: 2 as const, label: "Cukup", color: "from-yellow-500/30 to-yellow-700/20", text: "text-yellow-100", border: "border-yellow-300/40" },
+  { value: 1 as const, label: "Perlu Bimbingan", color: "from-rose-500/30 to-rose-700/20", text: "text-rose-100", border: "border-rose-300/40" },
 ];
 
 const kategoriList = [
@@ -101,12 +102,31 @@ const kategoriList = [
   { totalSkor: "≤ 16", nilai: "< 70", kategori: "Perlu Bimbingan", color: "text-rose-200", bg: "bg-rose-500/10", border: "border-rose-300/30" },
 ];
 
+const STORAGE_KEY = "numatik:rubrik-dimensi:v1";
+
+const inp = "w-full bg-white/5 border border-white/15 rounded-lg px-2 py-1.5 text-sm text-white/85 font-body leading-relaxed resize-y focus:outline-none focus:border-cyan-400/50 focus:bg-white/10 transition-all";
+
 const RubrikPenilaianDimensiLulusanPage = () => {
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
+  const [dimensiData, setDimensiData] = useState<DimensiItem[]>(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : defaultDimensiList;
+    } catch { return defaultDimensiList; }
+  });
+
+  const updateDimensi = (idx: number, field: "dimensi" | "aspek", value: string) => {
+    setDimensiData(prev => prev.map((d, i) => i === idx ? { ...d, [field]: value } : d));
+  };
+
+  const updateSkor = (idx: number, s: 1 | 2 | 3 | 4, value: string) => {
+    setDimensiData(prev => prev.map((d, i) => i === idx ? { ...d, skor: { ...d.skor, [s]: value } } : d));
+  };
 
   const handleSave = () => {
     playPopSound();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(dimensiData));
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
@@ -121,15 +141,15 @@ const RubrikPenilaianDimensiLulusanPage = () => {
 
   const handleDownloadWord = () => {
     playPopSound();
-    const rows = dimensiList.map((d, i) => `
+    const rows = dimensiData.map((d, i) => `
       <tr>
         <td style="border:1px solid #ccc;padding:5pt 8pt;text-align:center;">${i + 1}</td>
         <td style="border:1px solid #ccc;padding:5pt 8pt;font-weight:bold;">${d.dimensi}</td>
         <td style="border:1px solid #ccc;padding:5pt 8pt;">${d.aspek}</td>
-        <td style="border:1px solid #ccc;padding:5pt 8pt;">4</td>
-        <td style="border:1px solid #ccc;padding:5pt 8pt;">3</td>
-        <td style="border:1px solid #ccc;padding:5pt 8pt;">2</td>
-        <td style="border:1px solid #ccc;padding:5pt 8pt;">1</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">${d.skor[4]}</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">${d.skor[3]}</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">${d.skor[2]}</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">${d.skor[1]}</td>
       </tr>`).join("");
     const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
 body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm}
@@ -140,7 +160,7 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
 <h1>RUBRIK PENILAIAN DIMENSI LULUSAN</h1>
 <p style="text-align:center;font-size:10pt;margin:2pt 0 14pt 0">Mata Pelajaran Matematika — SMP/MTs Fase D</p>
 <table>
-<thead><tr><th style="width:4%">No</th><th style="width:22%">Dimensi</th><th>Aspek yang Diamati</th><th style="width:7%">Skor 4</th><th style="width:7%">Skor 3</th><th style="width:7%">Skor 2</th><th style="width:7%">Skor 1</th></tr></thead>
+<thead><tr><th style="width:4%">No</th><th style="width:18%">Dimensi</th><th style="width:20%">Aspek yang Diamati</th><th>Skor 4 (Sangat Baik)</th><th>Skor 3 (Baik)</th><th>Skor 2 (Cukup)</th><th>Skor 1 (Perlu Bimbingan)</th></tr></thead>
 <tbody>${rows}</tbody>
 </table>
 </body></html>`;
@@ -196,17 +216,13 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
           </div>
         </div>
 
-        {/* Tabel Versi Desktop */}
+        {/* Tabel Versi Desktop — seluruhnya editable */}
         <section className="hidden lg:block rounded-3xl border border-cyan-200/25 bg-card/85 backdrop-blur p-5 mb-8 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr>
-                <th className="text-left p-3 font-display text-cyan-100 border-b border-white/10 bg-black/30 rounded-tl-xl w-[14%]">
-                  Dimensi
-                </th>
-                <th className="text-left p-3 font-display text-cyan-100 border-b border-white/10 bg-black/30 w-[18%]">
-                  Aspek yang Dinilai
-                </th>
+                <th className="text-left p-3 font-display text-cyan-100 border-b border-white/10 bg-black/30 rounded-tl-xl w-[14%]">Dimensi</th>
+                <th className="text-left p-3 font-display text-cyan-100 border-b border-white/10 bg-black/30 w-[18%]">Aspek yang Dinilai</th>
                 {skorHeader.map((s, i) => (
                   <th
                     key={s.value}
@@ -219,23 +235,32 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
               </tr>
             </thead>
             <tbody>
-              {dimensiList.map((row, idx) => (
-                <tr
-                  key={row.dimensi}
-                  className={idx % 2 === 0 ? "bg-white/5" : "bg-transparent"}
-                >
-                  <td className="p-3 align-top font-semibold text-yellow-100 border-b border-white/5 font-body">
-                    {row.dimensi}
+              {dimensiData.map((row, idx) => (
+                <tr key={idx} className={idx % 2 === 0 ? "bg-white/5" : "bg-transparent"}>
+                  <td className="p-2 align-top border-b border-white/5">
+                    <textarea
+                      value={row.dimensi}
+                      onChange={e => updateDimensi(idx, "dimensi", e.target.value)}
+                      rows={2}
+                      className={inp + " font-semibold text-yellow-100"}
+                    />
                   </td>
-                  <td className="p-3 align-top text-white/85 border-b border-white/5 font-body">
-                    {row.aspek}
+                  <td className="p-2 align-top border-b border-white/5">
+                    <textarea
+                      value={row.aspek}
+                      onChange={e => updateDimensi(idx, "aspek", e.target.value)}
+                      rows={2}
+                      className={inp}
+                    />
                   </td>
-                  {skorHeader.map((s) => (
-                    <td
-                      key={s.value}
-                      className="p-3 align-top text-white/80 border-b border-white/5 leading-relaxed font-body"
-                    >
-                      {row.skor[s.value as 1 | 2 | 3 | 4]}
+                  {skorHeader.map(s => (
+                    <td key={s.value} className="p-2 align-top border-b border-white/5">
+                      <textarea
+                        value={row.skor[s.value]}
+                        onChange={e => updateSkor(idx, s.value, e.target.value)}
+                        rows={3}
+                        className={inp}
+                      />
                     </td>
                   ))}
                 </tr>
@@ -246,33 +271,37 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
 
         {/* Versi Mobile/Tablet — Card per Dimensi */}
         <section className="lg:hidden space-y-4 mb-8">
-          {dimensiList.map((row, idx) => (
+          {dimensiData.map((row, idx) => (
             <article
-              key={row.dimensi}
+              key={idx}
               className="rounded-3xl border border-cyan-200/25 bg-card/85 backdrop-blur p-5 animate-slide-up"
               style={{ animationDelay: `${idx * 0.05}s` }}
             >
-              <div className="mb-4">
-                <h3 className="font-display text-lg font-bold text-yellow-100 mb-1">
-                  {row.dimensi}
-                </h3>
-                <p className="text-xs text-white/60 font-body">{row.aspek}</p>
+              <div className="mb-4 space-y-2">
+                <input
+                  value={row.dimensi}
+                  onChange={e => updateDimensi(idx, "dimensi", e.target.value)}
+                  className="w-full bg-transparent border-b border-white/20 focus:border-yellow-400/50 outline-none font-display text-lg font-bold text-yellow-100 pb-0.5 transition-colors"
+                />
+                <input
+                  value={row.aspek}
+                  onChange={e => updateDimensi(idx, "aspek", e.target.value)}
+                  className="w-full bg-white/5 border border-white/15 rounded-lg px-2 py-1.5 text-xs text-white/70 font-body focus:outline-none focus:border-cyan-400/50 transition-colors"
+                />
               </div>
               <div className="grid sm:grid-cols-2 gap-3">
-                {skorHeader.map((s) => (
-                  <div
-                    key={s.value}
-                    className={`rounded-2xl border ${s.border} bg-gradient-to-br ${s.color} p-4`}
-                  >
+                {skorHeader.map(s => (
+                  <div key={s.value} className={`rounded-2xl border ${s.border} bg-gradient-to-br ${s.color} p-4`}>
                     <div className="flex items-center gap-2 mb-2">
-                      <span className={`flex h-8 w-8 items-center justify-center rounded-lg bg-black/40 font-display font-bold ${s.text}`}>
-                        {s.value}
-                      </span>
+                      <span className={`flex h-8 w-8 items-center justify-center rounded-lg bg-black/40 font-display font-bold ${s.text}`}>{s.value}</span>
                       <span className={`text-xs font-semibold ${s.text}`}>{s.label}</span>
                     </div>
-                    <p className="text-xs text-white/85 leading-relaxed font-body">
-                      {row.skor[s.value as 1 | 2 | 3 | 4]}
-                    </p>
+                    <textarea
+                      value={row.skor[s.value]}
+                      onChange={e => updateSkor(idx, s.value, e.target.value)}
+                      rows={3}
+                      className="w-full bg-black/10 border border-white/10 rounded-lg px-2 py-1.5 text-xs text-white/85 font-body leading-relaxed resize-none focus:outline-none focus:border-white/30 transition-colors"
+                    />
                   </div>
                 ))}
               </div>
@@ -285,15 +314,10 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
           <div className="flex items-start gap-3 mb-5">
             <Award className="w-8 h-8 text-fuchsia-200 shrink-0" />
             <div>
-              <h2 className="font-display text-xl md:text-2xl font-bold text-fuchsia-100">
-                Konversi Total Skor (dari 28)
-              </h2>
-              <p className="text-sm text-white/65 mt-1 font-body">
-                Total skor tujuh dimensi dikonversi ke nilai skala 100 dan kategori berikut.
-              </p>
+              <h2 className="font-display text-xl md:text-2xl font-bold text-fuchsia-100">Konversi Total Skor (dari 28)</h2>
+              <p className="text-sm text-white/65 mt-1 font-body">Total skor tujuh dimensi dikonversi ke nilai skala 100 dan kategori berikut.</p>
             </div>
           </div>
-
           <div className="hidden md:block overflow-x-auto rounded-2xl border border-white/10">
             <table className="w-full text-sm">
               <thead className="bg-black/40">
@@ -314,26 +338,12 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
               </tbody>
             </table>
           </div>
-
           <div className="md:hidden grid sm:grid-cols-2 gap-3">
-            {kategoriList.map((k) => (
-              <div
-                key={k.kategori}
-                className={`rounded-2xl border ${k.border} ${k.bg} p-4`}
-              >
-                <p className={`font-display text-lg font-bold ${k.color} mb-2`}>
-                  {k.kategori}
-                </p>
-                <div className="space-y-1 text-xs text-white/80 font-body">
-                  <p>
-                    <span className="text-white/55">Total Skor:</span>{" "}
-                    <span className="text-white font-semibold">{k.totalSkor}</span>
-                  </p>
-                  <p>
-                    <span className="text-white/55">Nilai Skala 100:</span>{" "}
-                    <span className="text-white font-semibold">{k.nilai}</span>
-                  </p>
-                </div>
+            {kategoriList.map(k => (
+              <div key={k.kategori} className={`rounded-2xl border ${k.border} ${k.bg} p-4`}>
+                <p className={`font-display text-lg font-bold ${k.color} mb-2`}>{k.kategori}</p>
+                <p className="text-white font-semibold text-sm font-body">{k.totalSkor}</p>
+                <p className="text-white/55 text-xs font-body">{k.nilai}</p>
               </div>
             ))}
           </div>
@@ -341,10 +351,7 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
 
         <div className="text-center">
           <button
-            onClick={() => {
-              playPopSound();
-              navigate("/ruang-untuk-guru");
-            }}
+            onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"
           >
             <ArrowLeft className="w-4 h-4" />
