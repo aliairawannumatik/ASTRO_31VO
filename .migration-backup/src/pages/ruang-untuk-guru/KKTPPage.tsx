@@ -887,7 +887,7 @@ const KKTPPage = () => {
           <div className="flex items-center gap-3">
             <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-xs">
               <span className="text-white/50">Kelas {kelasNum} · </span>
-              <span className="text-teal-300 font-bold">{filtered.length} Materi</span>
+              <span className="text-teal-300 font-bold">{filteredWithIdx.length} Materi</span>
               <span className="text-white/50"> · </span>
               <span className="text-cyan-300 font-bold">{totalTP} Tujuan Pembelajaran</span>
             </div>
