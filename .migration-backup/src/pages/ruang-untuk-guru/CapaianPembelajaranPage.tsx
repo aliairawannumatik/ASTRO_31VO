@@ -149,7 +149,7 @@ const CapaianPembelajaranPage = () => {
     setPdfLoading(true);
     try {
       const fullHtml = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Capaian Pembelajaran Matematika Fase D</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
-      const res = await fetch("/api/generate-pdf", {
+      const res = await fetch("/server/pdf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ html: fullHtml, filename: "Capaian_Pembelajaran_Matematika_Fase_D" }),

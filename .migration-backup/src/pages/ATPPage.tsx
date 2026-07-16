@@ -256,7 +256,7 @@ const ATPPage = () => {
     setPdfLoading(true);
     try {
       const fullHtml = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
-      const res = await fetch("/api/generate-pdf", {
+      const res = await fetch("/server/pdf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ html: fullHtml, filename: "Alur_Tujuan_Pembelajaran_Matematika" }),

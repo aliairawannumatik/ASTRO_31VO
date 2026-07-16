@@ -3,12 +3,17 @@ import cors from 'cors'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import puppeteer from 'puppeteer'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express()
-const PORT = Number(process.env.PORT) || (process.env.NODE_ENV === 'production' ? 5000 : 3001)
+// Express is the primary server on PORT (5000 in dev, injected by artifact system).
+// In dev, Vite runs on VITE_PORT (5001). Express proxies all non-/api requests to Vite.
+// In production, Express serves the built dist/ directly.
+const PORT = Number(process.env.PORT) || 5000
+const VITE_PORT = Number(process.env.VITE_PORT) || 5001
 
 function getSystemPrompt(language: string): string {
   switch (language) {
@@ -121,7 +126,7 @@ Sapa pengguna dengan ramah dan perkenalkan diri sebagai NUMATIK AI buatan Irawan
 app.use(cors())
 app.use(express.json())
 
-app.post('/api/generate-pdf', async (req, res) => {
+app.post('/server/pdf', async (req, res) => {
   try {
     const { html, filename } = req.body as { html?: string; filename?: string }
     if (!html) return res.status(400).json({ error: 'Parameter html diperlukan.' })
@@ -154,7 +159,7 @@ app.post('/api/generate-pdf', async (req, res) => {
   }
 })
 
-app.post('/api/chat', async (req, res) => {
+app.post('/server/chat', async (req, res) => {
   try {
     const messages = req.body?.messages
     const language = req.body?.language ?? 'id'
@@ -221,8 +226,17 @@ if (process.env.NODE_ENV === 'production') {
   app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'))
   })
+} else {
+  // In development: proxy everything that isn't /api to Vite's dev server
+  app.use(
+    createProxyMiddleware({
+      target: `http://localhost:${VITE_PORT}`,
+      changeOrigin: true,
+      ws: true, // forward WebSocket (Vite HMR)
+    })
+  )
 }
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT} (Vite dev on port ${VITE_PORT})`)
 })

@@ -1,0 +1,56 @@
+Saya ingin membatalkan migrasi ke Puppeteer untuk fitur "Simpan sebagai PDF di menu RUANGGURU – CP/ATP" karena 
+bermasalah di environment Replit. Tolong kembalikan ke pendekatan yang lebih 
+sederhana yaitu menggunakan fitur print bawaan browser (window.print()), 
+dengan ketentuan berikut:
+
+1. Hapus/nonaktifkan endpoint backend /api/generate-pdf dan semua kode 
+   Puppeteer yang terkait (termasuk dependency "puppeteer" di package.json 
+   kalau tidak dipakai fitur lain).
+
+2. Pada tombol "Simpan sebagai PDF" di frontend, ubah fungsinya menjadi 
+   memanggil window.print() langsung. Saat tombol diklik, browser akan 
+   otomatis memunculkan dialog print, di mana user bisa pilih tujuan cetak 
+   "Save as PDF".
+
+3. Tambahkan CSS khusus untuk halaman cetak (media query @media print) 
+   pada dokumen/halaman yang akan dicetak, dengan ketentuan:
+   - Ukuran kertas custom F4: @page { size: 21.5cm 33cm; margin: 3cm; }
+   - Saat mode print aktif, sembunyikan elemen UI yang tidak perlu 
+     ikut tercetak (misalnya navbar, sidebar, tombol-tombol, header 
+     aplikasi) menggunakan class seperti ".no-print { display: none; }"
+   - Pastikan konten dokumen utama (yang mau dijadikan PDF) tetap 
+     terlihat penuh dan rapi saat print
+
+4. Contoh referensi kode CSS:
+
+@media print {
+  @page {
+    size: 21.5cm 33cm;
+    margin: 3cm;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+5. Contoh referensi kode tombol (React/JS):
+
+<button className="no-print" onClick={() => window.print()}>
+  Simpan sebagai PDF
+</button>
+
+6. Tolong tandai elemen-elemen non-konten (navbar, sidebar, tombol aksi, 
+   dll) dengan class "no-print" supaya tidak ikut tercetak ke PDF.
+
+7. Setelah selesai, beri saya ringkasan file yang diubah supaya saya 
+   bisa cek satu per satu.
+
+Catatan: dengan pendekatan ini, saat user klik tombol, akan muncul dialog 
+print bawaan browser, lalu user perlu memilih "Save as PDF" sebagai 
+destination/printer secara manual (bukan otomatis download seperti Puppeteer).

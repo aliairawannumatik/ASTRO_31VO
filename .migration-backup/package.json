@@ -8,7 +8,7 @@
     "*.scss"
   ],
   "scripts": {
-    "dev": "./node_modules/.bin/tsx watch server.ts & ./node_modules/.bin/vite --port 5000",
+    "dev": "./node_modules/.bin/tsx watch server.ts & VITE_PORT=5001 ./node_modules/.bin/vite --port 5001",
     "server": "./node_modules/.bin/tsx watch server.ts",
     "build": "NODE_ENV=production ./node_modules/.bin/vite build",
     "build:dev": "./node_modules/.bin/vite build --mode development",
@@ -54,6 +54,7 @@
     "drizzle-zod": "^0.8.3",
     "express": "^5.2.1",
     "framer-motion": "^12.42.0",
+    "http-proxy-middleware": "^3.0.7",
     "i18next": "^26.3.4",
     "katex": "^0.16.47",
     "lucide-react": "^0.462.0",

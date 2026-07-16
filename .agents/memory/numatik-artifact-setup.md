@@ -27,7 +27,15 @@ All six Statistika materi pages confirmed trilingual and screenshot-verified:
 - `MedianModusPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/median-modus`) — includes two embedded interactive animators (`MedianAnimator`, `ModusAnimator`) that each call `useLanguage()` directly (defined in the same file, so no `language` prop needed, same pattern as the calculator sub-components below). Sibling `latihan-mandiri/kelas9/statistika/MedianModusPage.tsx` (practice-exercise page) is a **separate file** and was intentionally left untouched — always double check whether "soal" in a request refers to worked examples in the materi page vs. the separate latihan-mandiri exercise file before assuming scope.
 
 ## Correct workflow to start (2026-07-16)
-Preview pane routes through the artifact system. The workflow that must be running is `artifacts/numatik: web` (NOT the manual `Numatik Web` workflow). Both run the same command (`cd /home/runner/workspace/.migration-backup && npm run dev`) but only the artifact-managed one is wired to the preview path `/`. If the app is blank, stop `Numatik Web` and restart `artifacts/numatik: web`.
+Preview pane routes through the artifact system. The workflow that must be running is `artifacts/numatik: web` (NOT the manual `Numatik Web` workflow). Both run the same command but only the artifact-managed one is wired to the preview path `/`. If the app is blank, stop `Numatik Web` and restart `artifacts/numatik: web`.
+
+## Port architecture (2026-07-16)
+Express is the public-facing server on PORT=5000 (injected by artifact system). Vite dev server runs internally on port 5001 (VITE_PORT=5001). Express proxies all non-/server requests to Vite via http-proxy-middleware (including WebSocket HMR). This avoids the double-proxy 502 bug where Replit proxy → Vite proxy → Express caused POST bodies to fail.
+
+**Why this matters:** Artifact `api-server` claims `paths=["/api"]` at localPort 8080 (not running). Any fetch to `/api/*` from the browser returns 502. All .migration-backup server endpoints use `/server/*` prefix instead: `/server/pdf` (Puppeteer PDF), `/server/chat` (AI chat). Never use `/api/` for .migration-backup endpoints.
+
+## Screenshot tool limitation (confirmed 2026-07-16)
+The `externalUrl` Screenshot tool always catches the React Suspense loading screen (MEMUAT) for this app because the headless browser takes the snapshot before lazy chunks load. Use `npx tsc --noEmit` + code audit instead of screenshots to verify trilingual completeness. If the user reports "app not showing", check browser_console logs first — they confirm if the app is actually running (Vite connecting/connected messages + user interactions).
 
 ## Re-import setup (2026-07-15)
 After a GitHub re-import, `node_modules` are wiped in both the pnpm workspace root and `.migration-backup` (its own plain-npm project, not committed). Fix: `pnpm install` at root **and** `npm install` inside `.migration-backup` separately, then restart both workflows.
