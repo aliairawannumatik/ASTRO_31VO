@@ -42,7 +42,7 @@ const guruMenuItems = [
     label: "PROTA",
     icon: CalendarRange,
     path: "/ruang-untuk-guru/prota",
-    desc: "Program tahunan matematika SMP 2025-2026 & 2026-2027",
+    desc: "Program tahunan matematika SMP",
   },
   {
     label: "ANALISIS ALOKASI WAKTU",
