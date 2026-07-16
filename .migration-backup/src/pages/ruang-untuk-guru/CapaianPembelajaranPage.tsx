@@ -91,7 +91,6 @@ const CapaianPembelajaranPage = () => {
   const [faseInfo, setFaseInfo] = useState<FaseInfo>(defaultFaseInfo);
   const [cpElements, setCpElements] = useState<CpElement[]>(defaultCpElements);
   const [savedOk, setSavedOk] = useState(false);
-  const [pdfLoading, setPdfLoading] = useState(false);
 
   useEffect(() => {
     try {
@@ -144,27 +143,9 @@ const CapaianPembelajaranPage = () => {
     </div>
   `;
 
-  const handlePrintPDF = async () => {
+  const handlePrintPDF = () => {
     playPopSound();
-    setPdfLoading(true);
-    try {
-      const fullHtml = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Capaian Pembelajaran Matematika Fase D</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
-      const res = await fetch("/server/pdf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ html: fullHtml, filename: "Capaian_Pembelajaran_Matematika_Fase_D" }),
-      });
-      if (!res.ok) throw new Error("Gagal membuat PDF.");
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Capaian_Pembelajaran_Matematika_Fase_D.pdf";
-      a.click();
-      URL.revokeObjectURL(url);
-    } finally {
-      setPdfLoading(false);
-    }
+    window.print();
   };
 
   const handlePrintWord = () => {
@@ -181,8 +162,27 @@ const CapaianPembelajaranPage = () => {
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
-      <Starfield />
-      <PageNavigation prevPath="/ruang-untuk-guru" />
+      {/* ── Print styles ── */}
+      <style>{`
+        @media print {
+          @page { size: 21.5cm 33cm; margin: 3cm; }
+          .no-print { display: none !important; }
+          body, .gradient-space { background: white !important; color: black !important; }
+          *, *::before, *::after {
+            background-color: transparent !important;
+            color: black !important;
+            box-shadow: none !important;
+            text-shadow: none !important;
+          }
+          textarea, input {
+            border: 1px solid #aaa !important;
+            background: transparent !important;
+            color: black !important;
+          }
+        }
+      `}</style>
+      <div className="no-print"><Starfield /></div>
+      <div className="no-print"><PageNavigation prevPath="/ruang-untuk-guru" /></div>
       <div className="relative z-10 max-w-6xl mx-auto px-4 pt-20 pb-14">
 
         {/* Header */}
@@ -200,7 +200,7 @@ const CapaianPembelajaranPage = () => {
         </div>
 
         {/* ── TOP ACTION BUTTONS ── */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-8 animate-slide-up">
+        <div className="no-print flex flex-wrap items-center justify-center gap-3 mb-8 animate-slide-up">
           <button
             onClick={handleSave}
             className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${savedOk ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
@@ -210,11 +210,10 @@ const CapaianPembelajaranPage = () => {
           </button>
           <button
             onClick={handlePrintPDF}
-            disabled={pdfLoading}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg disabled:opacity-60 disabled:cursor-wait disabled:scale-100"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
           >
             <FileDown className="w-4 h-4" />
-            {pdfLoading ? "Membuat PDF..." : "Simpan sebagai PDF"}
+            Simpan sebagai PDF
           </button>
           <button
             onClick={handlePrintWord}
@@ -326,7 +325,7 @@ const CapaianPembelajaranPage = () => {
         </section>
 
         {/* ── BOTTOM BUTTONS (mirror of top) ── */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+        <div className="no-print flex flex-wrap items-center justify-center gap-3 mb-6">
           <button
             onClick={handleSave}
             className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${savedOk ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
@@ -336,11 +335,10 @@ const CapaianPembelajaranPage = () => {
           </button>
           <button
             onClick={handlePrintPDF}
-            disabled={pdfLoading}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg disabled:opacity-60 disabled:cursor-wait disabled:scale-100"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
           >
             <FileDown className="w-4 h-4" />
-            {pdfLoading ? "Membuat PDF..." : "Simpan sebagai PDF"}
+            Simpan sebagai PDF
           </button>
           <button
             onClick={handlePrintWord}
@@ -351,7 +349,7 @@ const CapaianPembelajaranPage = () => {
           </button>
         </div>
 
-        <div className="text-center">
+        <div className="no-print text-center">
           <button
             onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"

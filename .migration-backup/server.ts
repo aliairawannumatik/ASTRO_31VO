@@ -2,7 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import puppeteer from 'puppeteer'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -126,38 +125,6 @@ Sapa pengguna dengan ramah dan perkenalkan diri sebagai NUMATIK AI buatan Irawan
 app.use(cors())
 app.use(express.json())
 
-app.post('/server/pdf', async (req, res) => {
-  try {
-    const { html, filename } = req.body as { html?: string; filename?: string }
-    if (!html) return res.status(400).json({ error: 'Parameter html diperlukan.' })
-
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    })
-    try {
-      const page = await browser.newPage()
-      await page.setContent(html, { waitUntil: 'networkidle0' })
-      const pdfBuffer = await page.pdf({
-        width: '21.5cm',
-        height: '33cm',
-        margin: { top: '3cm', bottom: '3cm', left: '3cm', right: '3cm' },
-        printBackground: true,
-      })
-      await browser.close()
-
-      const outName = (filename ?? 'dokumen').replace(/[^\w\-. ]/g, '_') + '.pdf'
-      res.setHeader('Content-Type', 'application/pdf')
-      res.setHeader('Content-Disposition', `attachment; filename="${outName}"`)
-      return res.send(Buffer.from(pdfBuffer))
-    } catch (err) {
-      await browser.close()
-      throw err
-    }
-  } catch (error) {
-    console.error('generate-pdf error:', error)
-    return res.status(500).json({ error: 'Gagal membuat PDF.' })
-  }
-})
 
 app.post('/server/chat', async (req, res) => {
   try {

@@ -181,7 +181,6 @@ const ATPPage = () => {
     }
   });
   const [saved, setSaved] = useState(false);
-  const [pdfLoading, setPdfLoading] = useState(false);
 
   const totalTp = atpData.reduce((acc, el) => acc + el.tp.length, 0);
 
@@ -251,27 +250,15 @@ const ATPPage = () => {
     </div>
   `;
 
-  const handlePrintPDF = async () => {
+  const handlePrintPDF = () => {
     playPopSound();
-    setPdfLoading(true);
-    try {
-      const fullHtml = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
-      const res = await fetch("/server/pdf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ html: fullHtml, filename: "Alur_Tujuan_Pembelajaran_Matematika" }),
-      });
-      if (!res.ok) throw new Error("Gagal membuat PDF.");
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Alur_Tujuan_Pembelajaran_Matematika.pdf";
-      a.click();
-      URL.revokeObjectURL(url);
-    } finally {
-      setPdfLoading(false);
-    }
+    // Buka semua <details> agar TP ikut tercetak
+    const details = document.querySelectorAll<HTMLDetailsElement>('details');
+    details.forEach(d => { d.open = true; });
+    window.print();
+    window.addEventListener('afterprint', () => {
+      details.forEach(d => { d.open = false; });
+    }, { once: true });
   };
 
   const handlePrintWord = () => {
@@ -288,8 +275,29 @@ const ATPPage = () => {
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
-      <Starfield />
-      <PageNavigation prevPath="/ruang-untuk-guru" />
+      {/* ── Print styles ── */}
+      <style>{`
+        @media print {
+          @page { size: 21.5cm 33cm; margin: 3cm; }
+          .no-print { display: none !important; }
+          body, .gradient-space { background: white !important; color: black !important; }
+          *, *::before, *::after {
+            background-color: transparent !important;
+            color: black !important;
+            box-shadow: none !important;
+            text-shadow: none !important;
+          }
+          textarea, input {
+            border: 1px solid #aaa !important;
+            background: transparent !important;
+            color: black !important;
+          }
+          details, details > * { display: block !important; }
+          details > summary { display: none !important; }
+        }
+      `}</style>
+      <div className="no-print"><Starfield /></div>
+      <div className="no-print"><PageNavigation prevPath="/ruang-untuk-guru" /></div>
       <div className="relative z-10 max-w-6xl mx-auto px-4 pt-20 pb-14">
         <div className="text-center mb-8 animate-slide-up">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
@@ -302,7 +310,7 @@ const ATPPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
             Konten ATP ini disusun dari dokumen Analisis Capaian Pembelajaran ke Tujuan Pembelajaran Matematika SMPN 28 Bandung.
           </p>
-          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+          <div className="no-print flex items-center justify-center gap-3 mt-6 flex-wrap">
             <button
               onClick={handleSave}
               className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
@@ -312,11 +320,10 @@ const ATPPage = () => {
             </button>
             <button
               onClick={handlePrintPDF}
-              disabled={pdfLoading}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg disabled:opacity-60 disabled:cursor-wait disabled:scale-100"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
             >
               <FileDown className="w-4 h-4" />
-              {pdfLoading ? "Membuat PDF..." : "Simpan sebagai PDF"}
+              Simpan sebagai PDF
             </button>
             <button
               onClick={handlePrintWord}
@@ -433,7 +440,7 @@ const ATPPage = () => {
           ))}
         </section>
 
-        <div className="text-center">
+        <div className="no-print text-center">
           <button
             onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"
