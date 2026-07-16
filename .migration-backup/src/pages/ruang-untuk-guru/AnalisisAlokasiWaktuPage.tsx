@@ -441,6 +441,29 @@ const AnalisisAlokasiWaktuPage = () => {
           <p className="mt-3 text-sm text-white/60 font-body max-w-2xl mx-auto">
             Perhitungan minggu efektif dan distribusi alokasi waktu pembelajaran Matematika SMP berdasarkan kalender pendidikan.
           </p>
+          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handleSave}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg ${savedOk ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+            >
+              <Save className="w-4 h-4" />
+              {savedOk ? "Tersimpan!" : "Simpan"}
+            </button>
+            <button
+              onClick={handlePDF}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Simpan sebagai PDF
+            </button>
+            <button
+              onClick={handleWord}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 border border-blue-400/60 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+            >
+              <FileText className="w-4 h-4" />
+              Simpan sebagai Word
+            </button>
+          </div>
         </div>
 
 

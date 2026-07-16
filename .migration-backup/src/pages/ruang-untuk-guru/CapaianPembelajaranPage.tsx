@@ -327,31 +327,6 @@ const CapaianPembelajaranPage = () => {
           })}
         </section>
 
-        {/* ── BOTTOM BUTTONS (mirror of top) ── */}
-        <div className="no-print flex flex-wrap items-center justify-center gap-3 mb-6">
-          <button
-            onClick={handleSave}
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${savedOk ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
-          >
-            <Save className="w-4 h-4" />
-            {savedOk ? "Tersimpan!" : "Simpan"}
-          </button>
-          <button
-            onClick={handlePrintPDF}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
-          >
-            <FileDown className="w-4 h-4" />
-            Simpan sebagai PDF
-          </button>
-          <button
-            onClick={handlePrintWord}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 border border-blue-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
-          >
-            <FileText className="w-4 h-4" />
-            Simpan sebagai Word
-          </button>
-        </div>
-
         <div className="no-print text-center">
           <button
             onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}

@@ -186,7 +186,28 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;fon
         </div>
 
         {/* Action bar */}
-        <div className="flex flex-wrap items-center justify-end gap-3 mb-5 print:hidden">
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-5 print:hidden">
+          <button
+            onClick={handleSave}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+          >
+            <Save className="w-4 h-4" />
+            {saved ? "Tersimpan!" : "Simpan"}
+          </button>
+          <button
+            onClick={() => { playPopSound(); handlePrint(); }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+          >
+            <Printer className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={handleDownloadWord}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
           <button
             onClick={addEntry}
             className="inline-flex items-center gap-2 rounded-xl border border-emerald-400/40 bg-emerald-500/15 px-4 py-2 text-sm font-semibold text-emerald-100 hover:bg-emerald-500/25 transition-colors"
@@ -306,30 +327,6 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;fon
             </tbody>
           </table>
         </section>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 print:hidden">
-          <button
-            onClick={handleSave}
-            className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
-          >
-            <Save className="w-4 h-4" />
-            {saved ? "Tersimpan!" : "Simpan"}
-          </button>
-          <button
-            onClick={() => { playPopSound(); handlePrint(); }}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <Printer className="w-4 h-4" />
-            Simpan sebagai PDF
-          </button>
-          <button
-            onClick={handleDownloadWord}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <FileDown className="w-4 h-4" />
-            Simpan sebagai Word
-          </button>
-        </div>
 
         <div className="text-center print:hidden">
           <button

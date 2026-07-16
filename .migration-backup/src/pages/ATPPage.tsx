@@ -384,11 +384,11 @@ const ATPPage = () => {
         <section className="space-y-4 mb-8">
           <div className="text-center mb-4">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-cyan-100">Analisis CP ke TP</h2>
-            <p className="text-sm text-white/65 mt-2">Klik setiap elemen untuk membuka dan mengedit tujuan pembelajaran.</p>
+            <p className="text-sm text-white/65 mt-2">Edit langsung tujuan pembelajaran di setiap elemen di bawah ini.</p>
           </div>
           {atpData.map((item, elIdx) => (
-            <details key={item.element} className="group rounded-3xl border border-cyan-200/25 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-violet-500/10 backdrop-blur p-5 md:p-6">
-              <summary className="cursor-pointer list-none">
+            <div key={item.element} className="rounded-3xl border border-cyan-200/25 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-violet-500/10 backdrop-blur p-5 md:p-6">
+              <div className="mb-5">
                 <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/20 text-xl font-display font-bold text-primary shrink-0">
                     {item.no}
@@ -397,12 +397,9 @@ const ATPPage = () => {
                     <h3 className="font-display text-xl md:text-2xl font-bold text-white">{item.element}</h3>
                     <p className="text-xs md:text-sm text-white/60">{item.tp.length} tujuan pembelajaran</p>
                   </div>
-                  <span className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold text-cyan-100 group-open:bg-cyan-400/15">
-                    Buka Detail
-                  </span>
                 </div>
-              </summary>
-              <div className="mt-5 grid lg:grid-cols-[1fr_1.2fr] gap-5">
+              </div>
+              <div className="grid lg:grid-cols-[1fr_1.2fr] gap-5">
                 <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
                   <h4 className="font-display font-bold text-yellow-100 mb-3">Capaian Pembelajaran</h4>
                   <p className="text-sm leading-relaxed text-white/75 font-body">{item.cp}</p>
@@ -439,7 +436,7 @@ const ATPPage = () => {
                   </button>
                 </div>
               </div>
-            </details>
+            </div>
           ))}
         </section>
 

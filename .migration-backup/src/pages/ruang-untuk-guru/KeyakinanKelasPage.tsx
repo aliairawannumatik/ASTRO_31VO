@@ -66,6 +66,39 @@ const KeyakinanKelasPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-2xl mx-auto font-body">
             Nilai-nilai yang kita yakini dan kita laksanakan bersama agar kelas menjadi tempat belajar yang aman, nyaman, dan menyenangkan.
           </p>
+          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handleSave}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+            >
+              <Save className="w-4 h-4" />
+              {saved ? "Tersimpan!" : "Simpan"}
+            </button>
+            <button
+              onClick={() => { playPopSound(); const t = document.title; document.title = "KEYAKINAN KELAS - numatik"; window.print(); window.addEventListener("afterprint", () => { document.title = t; }, { once: true }); }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+            >
+              <Printer className="w-4 h-4" />
+              Simpan sebagai PDF
+            </button>
+            <button
+              onClick={() => {
+                playPopSound();
+                const rows = keyakinan.map((k, i) => `<tr><td style="border:1px solid #ccc;padding:5pt 8pt;text-align:center;">${i + 1}</td><td style="border:1px solid #ccc;padding:5pt 8pt;font-weight:bold;">${k.title}</td><td style="border:1px solid #ccc;padding:5pt 8pt;">${k.desc}</td></tr>`).join("");
+                const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;font-size:11pt;margin:2cm}h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 6pt 0}table{width:100%;border-collapse:collapse;margin-top:12pt}th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}</style></head><body><h1>KEYAKINAN KELAS</h1><p style="text-align:center;font-size:10pt;margin:2pt 0 14pt 0">Mata Pelajaran Matematika</p><table><thead><tr><th style="width:5%">No</th><th style="width:35%">Keyakinan</th><th>Deskripsi</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
+                const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url; a.download = "KEYAKINAN KELAS - numatik.doc";
+                document.body.appendChild(a); a.click();
+                document.body.removeChild(a); URL.revokeObjectURL(url);
+              }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Simpan sebagai Word
+            </button>
+          </div>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-5 mb-10">
@@ -99,40 +132,6 @@ const KeyakinanKelasPage = () => {
           <p className="text-sm md:text-base text-white/80 font-body italic">
             "Keyakinan kelas adalah janji bersama — bukan aturan yang dipaksakan, melainkan nilai yang kita pegang dengan sepenuh hati."
           </p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-          <button
-            onClick={handleSave}
-            className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
-          >
-            <Save className="w-4 h-4" />
-            {saved ? "Tersimpan!" : "Simpan"}
-          </button>
-          <button
-            onClick={() => { playPopSound(); const t = document.title; document.title = "KEYAKINAN KELAS - numatik"; window.print(); window.addEventListener("afterprint", () => { document.title = t; }, { once: true }); }}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <Printer className="w-4 h-4" />
-            Simpan sebagai PDF
-          </button>
-          <button
-            onClick={() => {
-              playPopSound();
-              const rows = keyakinan.map((k, i) => `<tr><td style="border:1px solid #ccc;padding:5pt 8pt;text-align:center;">${i + 1}</td><td style="border:1px solid #ccc;padding:5pt 8pt;font-weight:bold;">${k.title}</td><td style="border:1px solid #ccc;padding:5pt 8pt;">${k.desc}</td></tr>`).join("");
-              const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;font-size:11pt;margin:2cm}h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 6pt 0}table{width:100%;border-collapse:collapse;margin-top:12pt}th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}</style></head><body><h1>KEYAKINAN KELAS</h1><p style="text-align:center;font-size:10pt;margin:2pt 0 14pt 0">Mata Pelajaran Matematika</p><table><thead><tr><th style="width:5%">No</th><th style="width:35%">Keyakinan</th><th>Deskripsi</th></tr></thead><tbody>${rows}</tbody></table></body></html>`;
-              const blob = new Blob(["\ufeff", html], { type: "application/msword" });
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url; a.download = "KEYAKINAN KELAS - numatik.doc";
-              document.body.appendChild(a); a.click();
-              document.body.removeChild(a); URL.revokeObjectURL(url);
-            }}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <FileDown className="w-4 h-4" />
-            Simpan sebagai Word
-          </button>
         </div>
 
         <div className="text-center">

@@ -744,6 +744,29 @@ const KKTPPage = () => {
           <p className="mt-3 text-sm text-white/60 font-body max-w-3xl mx-auto">
             KKTP menggantikan KKM dalam Kurikulum Merdeka. Kriteria ini mendeskripsikan kemampuan minimal yang harus dicapai peserta didik untuk setiap Tujuan Pembelajaran (TP), menggunakan interval nilai dan deskripsi capaian.
           </p>
+          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handleSave}
+              className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+            >
+              <Save className="w-4 h-4" />
+              {saved ? "Tersimpan!" : "Simpan"}
+            </button>
+            <button
+              onClick={handlePrintPDF}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+            >
+              <Printer className="w-4 h-4" />
+              Simpan sebagai PDF
+            </button>
+            <button
+              onClick={handleDownloadWord}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Simpan sebagai Word
+            </button>
+          </div>
         </div>
 
         {/* Konsep Box */}
@@ -969,30 +992,6 @@ const KKTPPage = () => {
           <p>• Peserta didik dengan nilai ≥ 86 (Sangat Baik) diberikan program pengayaan untuk memperluas wawasan matematis.</p>
           <p>• Guru dapat menambah/memodifikasi deskripsi KKTP sesuai konteks pembelajaran dan kondisi sekolah masing-masing.</p>
           <p>• Dasar hukum: Permendikbudristek No. 21 Tahun 2022 tentang Standar Penilaian Pendidikan pada PAUD, Jenjang Dikdas, dan Dikmen.</p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-          <button
-            onClick={handleSave}
-            className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
-          >
-            <Save className="w-4 h-4" />
-            {saved ? "Tersimpan!" : "Simpan"}
-          </button>
-          <button
-            onClick={handlePrintPDF}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <Printer className="w-4 h-4" />
-            Simpan sebagai PDF
-          </button>
-          <button
-            onClick={handleDownloadWord}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <FileDown className="w-4 h-4" />
-            Simpan sebagai Word
-          </button>
         </div>
 
         <div className="text-center">

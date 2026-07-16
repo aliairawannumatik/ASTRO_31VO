@@ -155,29 +155,6 @@ const RPPPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
             Dokumen perencanaan pembelajaran yang memuat tujuan, langkah-langkah kegiatan, serta asesmen sebagai panduan guru menjalankan proses belajar mengajar di kelas.
           </p>
-          <div className="no-print flex items-center justify-center gap-3 mt-6 flex-wrap">
-            <button
-              onClick={handleSave}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
-            >
-              <Save className="w-4 h-4" />
-              {saved ? "Tersimpan!" : "Simpan"}
-            </button>
-            <button
-              onClick={handlePrintPDF}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
-            >
-              <FileDown className="w-4 h-4" />
-              Simpan sebagai PDF
-            </button>
-            <button
-              onClick={handlePrintWord}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 border border-blue-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
-            >
-              <FileText className="w-4 h-4" />
-              Simpan sebagai Word
-            </button>
-          </div>
         </div>
 
         {/* ── RANCANG RPP OTOMATIS ── */}

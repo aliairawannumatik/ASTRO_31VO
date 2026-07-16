@@ -103,6 +103,22 @@ td{border:1px solid #ccc;padding:6pt 8pt;vertical-align:top}
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-2xl mx-auto font-body">
             Tuliskan pengalamanmu setelah menggunakan aplikasi NUMATIK. Masukanmu membantu aplikasi ini menjadi lebih baik.
           </p>
+          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handlePrintPDF}
+              className="inline-flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 px-7 py-3 font-bold text-white transition-all hover:scale-105"
+            >
+              <FileDown className="w-5 h-5" />
+              Simpan sebagai PDF
+            </button>
+            <button
+              onClick={handlePrintWord}
+              className="inline-flex items-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3 font-bold text-white transition-all hover:scale-105"
+            >
+              <FileText className="w-5 h-5" />
+              Simpan sebagai Word
+            </button>
+          </div>
         </div>
 
         <div className="rounded-3xl border border-cyan-200/30 bg-card/90 backdrop-blur p-5 md:p-8 shadow-2xl mb-6">
@@ -169,20 +185,6 @@ td{border:1px solid #ccc;padding:6pt 8pt;vertical-align:top}
               Kirim Pesan dan Kesan
             </button>
             <button
-              onClick={handlePrintPDF}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 hover:bg-red-500 px-7 py-3 font-bold text-white transition-all hover:scale-105"
-            >
-              <FileDown className="w-5 h-5" />
-              Simpan sebagai PDF
-            </button>
-            <button
-              onClick={handlePrintWord}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3 font-bold text-white transition-all hover:scale-105"
-            >
-              <FileText className="w-5 h-5" />
-              Simpan sebagai Word
-            </button>
-            <button
               onClick={resetForm}
               className="rounded-full border border-white/20 bg-white/10 px-7 py-3 font-bold text-white hover:bg-white/15 transition-colors"
             >
@@ -221,7 +223,7 @@ td{border:1px solid #ccc;padding:6pt 8pt;vertical-align:top}
 
         <div className="text-center">
           <button
-            onClick={() => { playPopSound(); navigate("/menu"); }}
+            onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"
           >
             <ArrowLeft className="w-4 h-4" />

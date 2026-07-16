@@ -260,6 +260,29 @@ ${signBlock}
             <p className="mt-2 text-sm text-white/60 font-body max-w-xl mx-auto">
               Daftar hadir peserta didik per pertemuan. Klik sel status untuk mengubah: Hadir → Izin → Sakit → Alfa.
             </p>
+            <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
+              <button
+                onClick={() => { playPopSound(); try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* ignore */ } }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 border border-emerald-500/60 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+              >
+                <Save className="w-4 h-4" />
+                Simpan
+              </button>
+              <button
+                onClick={handlePrintPDF}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+              >
+                <Printer className="w-4 h-4" />
+                Simpan sebagai PDF
+              </button>
+              <button
+                onClick={handleDownloadWord}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all hover:scale-105 shadow-lg"
+              >
+                <FileText className="w-4 h-4" />
+                Simpan sebagai Word
+              </button>
+            </div>
           </div>
 
 
