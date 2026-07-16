@@ -4,7 +4,7 @@ Numatik (Numerasi Aktif dengan Teknologi Informasi dan Komunikasi) is an educati
 
 ## Run & Operate
 
-- **Frontend** — workflow `Numatik Web` starts the React/Vite app from `.migration-backup/` on port 5000 (`cd /home/runner/workspace/.migration-backup && PORT=3001 npm run dev`; Vite serves the UI on 5000, its embedded Express server serves `/api` on 3001 via Vite's dev proxy)
+- **Frontend** — workflow `Numatik Web` starts the React/Vite app from `.migration-backup/` (`cd .migration-backup && PORT=5000 npm run dev`; Express serves on port 5000, Vite dev server runs internally on port 5001, Express proxies non-`/server` requests to Vite)
 - **API server** — workflow `Numatik API Server` starts the separate Express 5 backend package (`PORT=8080 pnpm --filter @workspace/api-server run dev`); requires `DATABASE_URL`. Note: the live app currently talks to the Express server bundled inside `.migration-backup/server.ts` (port 3001), not yet this `@workspace/api-server` package — see Gotchas.
 - Registered `artifact.toml` files exist for `numatik`, `api-server`, and `mockup-sandbox` under `artifacts/*/.replit-artifact/`, but on this import `listArtifacts()`/`listWorkflows()` came back empty — the artifact registration wasn't preserved across the GitHub import, so plain `configureWorkflow` workflows (`Numatik Web`, `Numatik API Server`) were created instead. If artifact-managed workflows (`artifacts/numatik: web`, etc.) ever appear in `listWorkflows()`, prefer those and remove the manual ones.
 - `pnpm run typecheck` — full typecheck across all packages
