@@ -181,6 +181,7 @@ const ATPPage = () => {
     }
   });
   const [saved, setSaved] = useState(false);
+  const [pdfLoading, setPdfLoading] = useState(false);
 
   const totalTp = atpData.reduce((acc, el) => acc + el.tp.length, 0);
 
@@ -250,22 +251,42 @@ const ATPPage = () => {
     </div>
   `;
 
-  const handlePrintPDF = () => {
+  const handlePrintPDF = async () => {
     playPopSound();
-    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
-    const iframe = document.createElement("iframe");
-    iframe.style.cssText = "position:fixed;top:-9999px;left:-9999px;width:210mm;height:297mm;border:none;";
-    document.body.appendChild(iframe);
-    const iDoc = iframe.contentDocument || iframe.contentWindow?.document;
-    if (iDoc) {
-      iDoc.open();
-      iDoc.write(html);
-      iDoc.close();
-      setTimeout(() => {
-        iframe.contentWindow?.focus();
-        iframe.contentWindow?.print();
-        setTimeout(() => document.body.removeChild(iframe), 1000);
-      }, 400);
+    setPdfLoading(true);
+    try {
+      const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
+        import("jspdf"),
+        import("html2canvas"),
+      ]);
+      const styleNoPage = dokumenStyle.replace(/@page\s*\{[^}]*\}/g, "");
+      const container = document.createElement("div");
+      container.style.cssText = "position:fixed;top:-9999px;left:0;width:794px;background:#fff;color:#000;";
+      container.innerHTML = `<style>${styleNoPage}</style><div style="padding:60px 80px;font-family:Arial,sans-serif;font-size:12pt;line-height:1.5;">${buildDokumenBody()}</div>`;
+      document.body.appendChild(container);
+      try {
+        const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#fff", windowWidth: 794 });
+        const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+        const pdfW = pdf.internal.pageSize.getWidth();
+        const pdfH = pdf.internal.pageSize.getHeight();
+        const imgData = canvas.toDataURL("image/png");
+        const imgH = (canvas.height * pdfW) / canvas.width;
+        let heightLeft = imgH;
+        let yPos = 0;
+        pdf.addImage(imgData, "PNG", 0, yPos, pdfW, imgH);
+        heightLeft -= pdfH;
+        while (heightLeft > 0) {
+          yPos -= pdfH;
+          pdf.addPage();
+          pdf.addImage(imgData, "PNG", 0, yPos, pdfW, imgH);
+          heightLeft -= pdfH;
+        }
+        pdf.save("Alur_Tujuan_Pembelajaran_Matematika.pdf");
+      } finally {
+        document.body.removeChild(container);
+      }
+    } finally {
+      setPdfLoading(false);
     }
   };
 
@@ -307,10 +328,11 @@ const ATPPage = () => {
             </button>
             <button
               onClick={handlePrintPDF}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+              disabled={pdfLoading}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg disabled:opacity-60 disabled:cursor-wait disabled:scale-100"
             >
               <FileDown className="w-4 h-4" />
-              Simpan sebagai PDF
+              {pdfLoading ? "Membuat PDF..." : "Simpan sebagai PDF"}
             </button>
             <button
               onClick={handlePrintWord}
