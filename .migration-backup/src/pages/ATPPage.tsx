@@ -253,12 +253,19 @@ const ATPPage = () => {
   const handlePrintPDF = () => {
     playPopSound();
     const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
-    const win = window.open("", "_blank");
-    if (win) {
-      win.document.write(html);
-      win.document.close();
-      win.focus();
-      setTimeout(() => { win.print(); win.close(); }, 500);
+    const iframe = document.createElement("iframe");
+    iframe.style.cssText = "position:fixed;top:-9999px;left:-9999px;width:210mm;height:297mm;border:none;";
+    document.body.appendChild(iframe);
+    const iDoc = iframe.contentDocument || iframe.contentWindow?.document;
+    if (iDoc) {
+      iDoc.open();
+      iDoc.write(html);
+      iDoc.close();
+      setTimeout(() => {
+        iframe.contentWindow?.focus();
+        iframe.contentWindow?.print();
+        setTimeout(() => document.body.removeChild(iframe), 1000);
+      }, 400);
     }
   };
 
@@ -277,7 +284,7 @@ const ATPPage = () => {
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
       <Starfield />
-      <PageNavigation prevPath="/menu" />
+      <PageNavigation prevPath="/ruang-untuk-guru" />
       <div className="relative z-10 max-w-6xl mx-auto px-4 pt-20 pb-14">
         <div className="text-center mb-8 animate-slide-up">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
@@ -293,21 +300,21 @@ const ATPPage = () => {
           <div className="flex items-center justify-center gap-3 mt-6 flex-wrap">
             <button
               onClick={handleSave}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${saved ? "bg-emerald-500 border-emerald-400/60" : "bg-emerald-500 hover:bg-emerald-400 border-emerald-400/60"}`}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
             >
               <Save className="w-4 h-4" />
               {saved ? "Tersimpan!" : "Simpan"}
             </button>
             <button
               onClick={handlePrintPDF}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
             >
               <FileDown className="w-4 h-4" />
               Simpan sebagai PDF
             </button>
             <button
               onClick={handlePrintWord}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 border border-blue-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
             >
               <FileText className="w-4 h-4" />
               Simpan sebagai Word
@@ -422,11 +429,11 @@ const ATPPage = () => {
 
         <div className="text-center">
           <button
-            onClick={() => { playPopSound(); navigate("/menu"); }}
+            onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"
           >
             <ArrowLeft className="w-4 h-4" />
-            Kembali ke Menu Utama
+            Kembali ke Ruang Untuk Guru
           </button>
         </div>
       </div>
