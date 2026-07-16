@@ -18,23 +18,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Numatik Web"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "Numatik API Server"
-
-[[workflows.workflow]]
-name = "Numatik Web"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd /home/runner/workspace/.migration-backup && PORT=3001 npm run dev"
-waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [[workflows.workflow]]
 name = "Numatik API Server"
