@@ -255,20 +255,23 @@ const ATPPage = () => {
     // Buka semua <details> agar TP ikut tercetak
     const details = document.querySelectorAll<HTMLDetailsElement>('details');
     details.forEach(d => { d.open = true; });
+    const prevTitle = document.title;
+    document.title = "ATP - numatik";
     window.print();
     window.addEventListener('afterprint', () => {
       details.forEach(d => { d.open = false; });
+      document.title = prevTitle;
     }, { once: true });
   };
 
   const handlePrintWord = () => {
     playPopSound();
-    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP - numatik</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
     const blob = new Blob([html], { type: "application/msword" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Alur_Tujuan_Pembelajaran_Matematika.doc";
+    a.download = "ATP - numatik.doc";
     a.click();
     URL.revokeObjectURL(url);
   };

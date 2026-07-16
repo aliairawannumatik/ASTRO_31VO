@@ -145,17 +145,20 @@ const CapaianPembelajaranPage = () => {
 
   const handlePrintPDF = () => {
     playPopSound();
+    const prevTitle = document.title;
+    document.title = "CP - numatik";
     window.print();
+    window.addEventListener("afterprint", () => { document.title = prevTitle; }, { once: true });
   };
 
   const handlePrintWord = () => {
     playPopSound();
-    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Capaian Pembelajaran Matematika Fase D</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>CP - numatik</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
     const blob = new Blob([html], { type: "application/msword" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Capaian_Pembelajaran_Matematika_Fase_D.doc";
+    a.download = "CP - numatik.doc";
     a.click();
     URL.revokeObjectURL(url);
   };
