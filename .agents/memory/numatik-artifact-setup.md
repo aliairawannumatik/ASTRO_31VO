@@ -34,6 +34,9 @@ After a GitHub re-import, `node_modules` are wiped in both the pnpm workspace ro
 - Curling `/api/chat` (or any `/api/*` POST/GET) against the external `$REPLIT_DEV_DOMAIN` root returns a plain 404 ("Cannot GET/POST ...") even though the identical request against `localhost:5000` correctly returns the expected 503 (missing `GROQ_API_KEY`) — an external-domain proxy quirk for this non-artifact-registered project, not an app bug. Don't chase it; verify real behavior via `localhost:<port>` curl or an actual browser Screenshot instead.
 - A first `externalUrl` Screenshot right after workflow restart can catch the SPA mid-hydration (blank white page) even though `curl` shows 200 OK. Retake the screenshot before concluding the app is broken.
 
+## Bola & Kerucut — 100% complete (2026-07-16)
+Both `BolaPage.tsx` and `KerucutPage.tsx` (materi-matematika/kelas9/bangun-ruang-sisi-lengkung/) are 100% trilingual and tsc-clean as of this session. Confirmed via deep code audit (all Trans objects + example generators have complete id/en/ja keys). Screenshot tool catches loading screen for these pages consistently — verify via code audit + `npx tsc --noEmit` instead. No remaining work on these pages.
+
 ## Statistika Kelas 9 — 100% complete (2026-07-15)
 `PenyajianDataPage.tsx` (materi-matematika, 2917 lines — largest page, 5 interactive builders incl. frequency table) is now trilingual and tsc-clean, confirmed via id/en/ja screenshots. This was the last Statistika Kelas 9 materi page; all 7 are now done. Delegated the full rewrite to a `general` subagent (large well-specified single-file task) — worked well; verify with `npx tsc --noEmit` and screenshots after it returns rather than re-reading the whole file yourself.
 
