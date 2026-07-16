@@ -27,7 +27,11 @@ All six Statistika materi pages confirmed trilingual and screenshot-verified:
 - `MedianModusPage.tsx` ✅ (route: `/materi-matematika/kelas-9/statistika/median-modus`) — includes two embedded interactive animators (`MedianAnimator`, `ModusAnimator`) that each call `useLanguage()` directly (defined in the same file, so no `language` prop needed, same pattern as the calculator sub-components below). Sibling `latihan-mandiri/kelas9/statistika/MedianModusPage.tsx` (practice-exercise page) is a **separate file** and was intentionally left untouched — always double check whether "soal" in a request refers to worked examples in the materi page vs. the separate latihan-mandiri exercise file before assuming scope.
 
 ## Correct workflow to start
-The only workflow that should run the app is `artifacts/numatik: web`. The manual `Numatik Web` and `Numatik API Server` workflows have been permanently removed — they conflicted on ports 5000/5001/8080. If the artifact fails, check for any manual workflows still running and stop/remove them first, then restart `artifacts/numatik: web`.
+The only workflow that should run the app is `artifacts/numatik: web`. Any manual workflow using the same command (`cd .migration-backup && npm run dev`) will hold ports 5000/5001 and cause the artifact workflow to fail with "Port 5001 is already in use". Fix sequence:
+1. `removeWorkflow({ name: "Numatik" })` (or whichever manual workflow is running)
+2. `lsof -ti :5001 -ti :5000 | xargs kill -9` to clear lingering processes
+3. `WorkflowsRestart({ name: "artifacts/numatik: web" })`
+On re-import the platform may auto-create a new `Numatik` manual workflow alongside the artifact one — always check for and remove it first.
 
 ## Port architecture
 Express is the public-facing server on PORT=5000 (injected by artifact system via `services.env.PORT = "5000"`). Vite dev server runs internally on port 5001 (`VITE_PORT=5001` in `services.env`). Express proxies all non-`/server` requests to Vite via http-proxy-middleware (including WebSocket HMR). This avoids the double-proxy 502 bug where Replit proxy → Vite proxy → Express caused POST bodies to fail.
