@@ -672,29 +672,71 @@ const elemenColor: Record<string, string> = {
   "Analisis Data dan Peluang": "border-pink-400/40 bg-pink-500/10 text-pink-300",
 };
 
+const STORAGE_KEY_KKTP = "numatik:kktp:v1";
+
 const KKTPPage = () => {
   const navigate = useNavigate();
   const [kelas, setKelas] = useState<KelasKey>("kelas7");
   const [filterSem, setFilterSem] = useState<"semua" | "1" | "2">("semua");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState(false);
+  const [pageData, setPageData] = useState<Record<KelasKey, MateriKKTP[]>>(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_KKTP);
+      return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(allData));
+    } catch { return JSON.parse(JSON.stringify(allData)); }
+  });
 
   const kelasNum = kelas.replace("kelas", "");
   const kelasRom = kelasNum === "7" ? "VII" : kelasNum === "8" ? "VIII" : "IX";
-  const data = allData[kelas];
+  const data = pageData[kelas];
 
-  const filtered = data.filter(m =>
-    filterSem === "semua" ? true : m.semester === parseInt(filterSem)
-  );
+  // Pairs of (original index mi, materiKKTP) to survive filter while keeping stable update index
+  const filteredWithIdx = data
+    .map((m, mi) => ({ m, mi }))
+    .filter(({ m }) => filterSem === "semua" ? true : m.semester === parseInt(filterSem));
 
   const toggleAll = (open: boolean) => {
     const next: Record<string, boolean> = {};
-    filtered.forEach(m => m.tpList.forEach(tp => { next[tp.kode] = open; }));
+    filteredWithIdx.forEach(({ mi, m }) => m.tpList.forEach((_, ti) => { next[`${mi}-${ti}`] = open; }));
     setExpanded(next);
+  };
+
+  const updateMateri = (mi: number, field: "materi" | "elemen", value: string) => {
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, MateriKKTP[]>;
+      (next[kelas][mi] as Record<string, unknown>)[field] = value;
+      return next;
+    });
+  };
+
+  const updateSemester = (mi: number, value: 1 | 2) => {
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, MateriKKTP[]>;
+      next[kelas][mi].semester = value;
+      return next;
+    });
+  };
+
+  const updateTP = (mi: number, ti: number, field: "kode" | "tp", value: string) => {
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, MateriKKTP[]>;
+      (next[kelas][mi].tpList[ti] as Record<string, unknown>)[field] = value;
+      return next;
+    });
+  };
+
+  const updateLevel = (mi: number, ti: number, li: number, field: "deskripsi" | "rentang", value: string) => {
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, MateriKKTP[]>;
+      (next[kelas][mi].tpList[ti].levels[li] as Record<string, unknown>)[field] = value;
+      return next;
+    });
   };
 
   const handleSave = () => {
     playPopSound();
+    localStorage.setItem(STORAGE_KEY_KKTP, JSON.stringify(pageData));
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
@@ -723,7 +765,7 @@ const KKTPPage = () => {
     URL.revokeObjectURL(url);
   };
 
-  const totalTP = filtered.reduce((s, m) => s + m.tpList.length, 0);
+  const totalTP = filteredWithIdx.reduce((s, { m }) => s + m.tpList.length, 0);
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
@@ -891,85 +933,109 @@ const KKTPPage = () => {
 
         {/* KKTP Cards */}
         <div className="space-y-5 mb-10">
-          {filtered.map((materi, mi) => {
+          {filteredWithIdx.map(({ m: materi, mi }, fi) => {
             const elCol = elemenColor[materi.elemen] ?? "border-white/20 bg-white/5 text-white/70";
             return (
               <div
-                key={materi.materi + materi.semester}
+                key={`${kelas}-${mi}`}
                 className="bg-card/70 backdrop-blur border border-white/10 rounded-2xl overflow-hidden animate-slide-up"
-                style={{ animationDelay: `${mi * 0.05}s` }}
+                style={{ animationDelay: `${fi * 0.05}s` }}
               >
-                {/* Materi Header */}
+                {/* Materi Header — fully editable */}
                 <div className="bg-white/5 border-b border-white/10 px-5 py-4 flex items-center gap-3">
                   <BookOpen className="w-5 h-5 text-teal-400 shrink-0" />
-                  <div className="flex-1 min-w-0">
+                  <div className="flex-1 min-w-0 space-y-1.5">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h2 className="font-display font-bold text-white text-base">{materi.materi}</h2>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${elCol}`}>
-                        {materi.elemen}
-                      </span>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        materi.semester === 1 ? "bg-cyan-500/15 text-cyan-300" : "bg-violet-500/15 text-violet-300"
-                      }`}>
-                        Sem. {materi.semester === 1 ? "Ganjil" : "Genap"}
-                      </span>
+                      <input
+                        value={materi.materi}
+                        onChange={e => updateMateri(mi, "materi", e.target.value)}
+                        className="font-display font-bold text-white text-base bg-transparent border-b border-transparent hover:border-white/20 focus:border-teal-400/60 outline-none flex-1 min-w-[120px] transition-colors"
+                      />
+                      <input
+                        value={materi.elemen}
+                        onChange={e => updateMateri(mi, "elemen", e.target.value)}
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full border bg-transparent outline-none w-40 text-center ${elCol}`}
+                      />
+                      <select
+                        value={materi.semester}
+                        onChange={e => updateSemester(mi, parseInt(e.target.value) as 1 | 2)}
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/20 border outline-none cursor-pointer ${
+                          materi.semester === 1 ? "text-cyan-300 border-cyan-500/30" : "text-violet-300 border-violet-500/30"
+                        }`}
+                      >
+                        <option value={1}>Sem. Ganjil</option>
+                        <option value={2}>Sem. Genap</option>
+                      </select>
                     </div>
-                    <p className="text-[10px] text-white/40 mt-0.5">{materi.tpList.length} Tujuan Pembelajaran</p>
+                    <p className="text-[10px] text-white/40">{materi.tpList.length} Tujuan Pembelajaran</p>
                   </div>
                 </div>
 
                 {/* TP List */}
                 <div className="divide-y divide-white/5">
-                  {materi.tpList.map((tp) => {
-                    const isOpen = expanded[tp.kode] ?? false;
+                  {materi.tpList.map((tp, ti) => {
+                    const key = `${mi}-${ti}`;
+                    const isOpen = expanded[key] ?? false;
                     return (
-                      <div key={tp.kode} className="px-5 py-4">
-                        {/* TP Header (clickable) */}
-                        <button
-                          className="w-full text-left group"
-                          onClick={() => {
-                            playPopSound();
-                            setExpanded(prev => ({ ...prev, [tp.kode]: !prev[tp.kode] }));
-                          }}
-                        >
-                          <div className="flex items-start gap-3">
-                            <span className="inline-block bg-teal-500/20 text-teal-300 text-[10px] font-bold px-2 py-1 rounded-lg shrink-0 mt-0.5">
-                              {tp.kode}
+                      <div key={ti} className="px-5 py-4">
+                        {/* TP Header — editable kode & tp, separate expand toggle */}
+                        <div className="flex items-start gap-3">
+                          <input
+                            value={tp.kode}
+                            onChange={e => updateTP(mi, ti, "kode", e.target.value)}
+                            className="bg-teal-500/20 text-teal-300 text-[10px] font-bold px-2 py-1 rounded-lg shrink-0 mt-0.5 outline-none border border-transparent focus:border-teal-400/50 w-16 text-center"
+                            title="Edit kode TP"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <textarea
+                              value={tp.tp}
+                              onChange={e => updateTP(mi, ti, "tp", e.target.value)}
+                              rows={2}
+                              className="w-full bg-transparent text-sm text-white/85 font-body leading-relaxed resize-none outline-none border-b border-transparent hover:border-white/15 focus:border-teal-400/50 transition-colors"
+                            />
+                          </div>
+                          <button
+                            className={`shrink-0 ml-2 mt-1 transition-transform duration-200 hover:text-white/60 ${isOpen ? "rotate-180" : ""}`}
+                            onClick={() => { playPopSound(); setExpanded(prev => ({ ...prev, [key]: !prev[key] })); }}
+                            title={isOpen ? "Tutup detail" : "Lihat & edit detail KKTP"}
+                          >
+                            <svg className="w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                        </div>
+
+                        {/* Level pills (always visible) */}
+                        <div className="flex gap-2 mt-3 ml-[4.5rem] flex-wrap">
+                          {tp.levels.map((lv, li) => (
+                            <span key={li} className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-full border ${levelColors[li].bg} ${levelColors[li].text}`}>
+                              <span className={`w-1.5 h-1.5 rounded-full ${levelColors[li].dot}`} />
+                              {lv.label} ({lv.rentang})
                             </span>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm text-white/85 font-body leading-relaxed group-hover:text-white transition-colors">
-                                {tp.tp}
-                              </p>
-                            </div>
-                            <div className={`shrink-0 ml-2 mt-1 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>
-                              <svg className="w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                              </svg>
-                            </div>
-                          </div>
+                          ))}
+                        </div>
 
-                          {/* Level pills (always visible) */}
-                          <div className="flex gap-2 mt-3 ml-10 flex-wrap">
-                            {tp.levels.map((lv, li) => (
-                              <span key={li} className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-full border ${levelColors[li].bg} ${levelColors[li].text}`}>
-                                <span className={`w-1.5 h-1.5 rounded-full ${levelColors[li].dot}`} />
-                                {lv.label} ({lv.rentang})
-                              </span>
-                            ))}
-                          </div>
-                        </button>
-
-                        {/* Expanded: KKTP Detail */}
+                        {/* Expanded: KKTP Detail — fully editable */}
                         {isOpen && (
-                          <div className="mt-4 ml-10 grid grid-cols-1 md:grid-cols-2 gap-3">
+                          <div className="mt-4 ml-[4.5rem] grid grid-cols-1 md:grid-cols-2 gap-3">
                             {tp.levels.map((lv, li) => (
                               <div key={li} className={`rounded-xl border p-3 ${levelColors[li].bg}`}>
                                 <div className="flex items-center gap-2 mb-2">
                                   <span className={`w-2 h-2 rounded-full shrink-0 ${levelColors[li].dot}`} />
                                   <span className={`text-[11px] font-bold ${levelColors[li].text}`}>{lv.label}</span>
-                                  <span className={`text-[10px] font-semibold ml-auto px-2 py-0.5 rounded-full ${levelColors[li].badge}`}>{lv.rentang}</span>
+                                  <input
+                                    value={lv.rentang}
+                                    onChange={e => updateLevel(mi, ti, li, "rentang", e.target.value)}
+                                    className={`text-[10px] font-semibold ml-auto px-2 py-0.5 rounded-full bg-transparent border border-white/15 focus:border-white/40 outline-none ${levelColors[li].text} w-20 text-center`}
+                                    title="Edit rentang nilai"
+                                  />
                                 </div>
-                                <p className="text-xs text-white/70 font-body leading-relaxed">{lv.deskripsi}</p>
+                                <textarea
+                                  value={lv.deskripsi}
+                                  onChange={e => updateLevel(mi, ti, li, "deskripsi", e.target.value)}
+                                  rows={3}
+                                  className="w-full bg-black/10 border border-white/10 rounded-lg px-2 py-1.5 text-xs text-white/70 font-body leading-relaxed resize-y focus:outline-none focus:border-white/25 transition-colors"
+                                />
                               </div>
                             ))}
                           </div>

@@ -171,7 +171,9 @@ const MODEL_PEMBELAJARAN = [
   },
 ];
 
-const ATP_ELEMEN = [
+const STORAGE_KEY_ATP = "numatik:atp-elemen:v1";
+
+const defaultATP_ELEMEN = [
   {
     elemen: "Bilangan",
     color: "border-blue-400/40 bg-blue-500/10 text-blue-300",
@@ -561,9 +563,17 @@ const buildPrintHTML = (s: RPPState): string => {
 
 /* ─────────────── MAIN ─────────────── */
 
+type AtpElemen = { elemen: string; color: string; tp: string[] };
+
 const RancangRPPPage = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<RPPState>(defaultState);
+  const [atpData, setAtpData] = useState<AtpElemen[]>(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_ATP);
+      return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(defaultATP_ELEMEN));
+    } catch { return JSON.parse(JSON.stringify(defaultATP_ELEMEN)); }
+  });
   const [saved, setSaved] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -600,9 +610,54 @@ const RancangRPPPage = () => {
     }));
   };
 
+  const updateAtpTP = (ei: number, ti: number, value: string) => {
+    setAtpData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as AtpElemen[];
+      const oldValue = next[ei].tp[ti];
+      next[ei].tp[ti] = value;
+      // Keep selectedTP in sync
+      setState(p => ({
+        ...p,
+        selectedTP: p.selectedTP.map(t => t === oldValue ? value : t),
+      }));
+      return next;
+    });
+  };
+
+  const updateAtpElemen = (ei: number, value: string) => {
+    setAtpData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as AtpElemen[];
+      next[ei].elemen = value;
+      return next;
+    });
+  };
+
+  const addAtpTP = (ei: number) => {
+    playPopSound();
+    setAtpData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as AtpElemen[];
+      next[ei].tp.push("Tujuan pembelajaran baru...");
+      return next;
+    });
+  };
+
+  const removeAtpTP = (ei: number, ti: number) => {
+    playPopSound();
+    setAtpData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as AtpElemen[];
+      const removed = next[ei].tp[ti];
+      next[ei].tp.splice(ti, 1);
+      setState(p => ({ ...p, selectedTP: p.selectedTP.filter(t => t !== removed) }));
+      return next;
+    });
+  };
+
   const handleSave = () => {
     playPopSound();
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(STORAGE_KEY_ATP, JSON.stringify(atpData));
+    } catch { /* ignore */ }
     setSaved(true);
     if (saveTimer.current) clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => setSaved(false), 3000);
@@ -712,26 +767,58 @@ const RancangRPPPage = () => {
           )}
         </Section>
 
-        {/* ── SECTION C: TUJUAN PEMBELAJARAN (ATP) ── */}
+        {/* ── SECTION C: TUJUAN PEMBELAJARAN (ATP) — fully editable ── */}
         <Section title="C · Tujuan Pembelajaran (dari ATP)" icon={Target} accent="amber">
-          <p className="text-white/40 text-[11px] mt-3 mb-3">Pilih satu atau lebih TP sesuai materi pertemuan ini. Dikelompokkan berdasarkan elemen Fase D.</p>
-          {ATP_ELEMEN.map(el => (
-            <div key={el.elemen} className="mb-4">
-              <p className={`text-xs font-bold px-3 py-1.5 rounded-full border inline-block mb-2 ${el.color}`}>{el.elemen}</p>
+          <p className="text-white/40 text-[11px] mt-3 mb-3">Pilih satu atau lebih TP sesuai materi pertemuan ini. Klik teks TP untuk mengedit, atau gunakan tombol + / × untuk menambah/hapus.</p>
+          {atpData.map((el, ei) => (
+            <div key={ei} className="mb-5">
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
+                <input
+                  value={el.elemen}
+                  onChange={e => updateAtpElemen(ei, e.target.value)}
+                  className={`text-xs font-bold px-3 py-1.5 rounded-full border bg-transparent outline-none ${el.color}`}
+                  style={{ minWidth: "80px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => addAtpTP(ei)}
+                  className="text-[10px] font-bold px-2 py-1 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-300 hover:bg-amber-500/20 transition-colors"
+                >
+                  + TP
+                </button>
+              </div>
               <div className="space-y-1.5">
-                {el.tp.map(tp => {
+                {el.tp.map((tp, ti) => {
                   const sel = state.selectedTP.includes(tp);
                   return (
-                    <button key={tp} type="button"
-                      onClick={() => { playPopSound(); toggleArr("selectedTP", tp); }}
-                      className={`w-full text-left text-xs px-4 py-2.5 rounded-xl border transition-all ${
-                        sel ? "bg-teal-500/20 border-teal-400/50 text-white" : "bg-white/3 border-white/8 text-white/60 hover:bg-white/8 hover:text-white/85"
-                      }`}>
-                      <span className={`inline-block w-4 h-4 rounded border mr-2 align-middle ${sel ? "bg-teal-500 border-teal-400" : "border-white/20"}`}>
-                        {sel && <CheckCircle className="w-4 h-4 text-white" />}
-                      </span>
-                      {tp}
-                    </button>
+                    <div key={ti} className={`flex items-start gap-2 rounded-xl border transition-all ${
+                      sel ? "bg-teal-500/20 border-teal-400/50" : "bg-white/3 border-white/8"
+                    }`}>
+                      <button
+                        type="button"
+                        onClick={() => { playPopSound(); toggleArr("selectedTP", tp); }}
+                        className="shrink-0 mt-2.5 ml-3"
+                        title={sel ? "Batalkan pilihan" : "Pilih TP ini"}
+                      >
+                        <span className={`inline-flex items-center justify-center w-4 h-4 rounded border ${sel ? "bg-teal-500 border-teal-400" : "border-white/20"}`}>
+                          {sel && <CheckCircle className="w-4 h-4 text-white" />}
+                        </span>
+                      </button>
+                      <textarea
+                        value={tp}
+                        onChange={e => updateAtpTP(ei, ti, e.target.value)}
+                        rows={2}
+                        className="flex-1 bg-transparent text-xs text-white/85 font-body leading-relaxed resize-none outline-none py-2 border-b border-transparent hover:border-white/10 focus:border-amber-400/40 transition-colors"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeAtpTP(ei, ti)}
+                        className="shrink-0 mt-2 mr-2 text-rose-400/50 hover:text-rose-300 text-xs font-bold transition-colors"
+                        title="Hapus TP ini"
+                      >
+                        ×
+                      </button>
+                    </div>
                   );
                 })}
               </div>

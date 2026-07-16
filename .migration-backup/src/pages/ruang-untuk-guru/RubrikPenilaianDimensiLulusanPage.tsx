@@ -14,6 +14,7 @@ import {
 
 type SkorMap = { 4: string; 3: string; 2: string; 1: string };
 type DimensiItem = { dimensi: string; aspek: string; skor: SkorMap };
+type KategoriItem = { totalSkor: string; nilai: string; kategori: string };
 
 const defaultDimensiList: DimensiItem[] = [
   {
@@ -88,6 +89,21 @@ const defaultDimensiList: DimensiItem[] = [
   },
 ];
 
+const defaultKategoriList: KategoriItem[] = [
+  { totalSkor: "25 – 28", nilai: "90 – 100", kategori: "Sangat Baik" },
+  { totalSkor: "21 – 24", nilai: "80 – 89", kategori: "Baik" },
+  { totalSkor: "17 – 20", nilai: "70 – 79", kategori: "Cukup" },
+  { totalSkor: "≤ 16", nilai: "< 70", kategori: "Perlu Bimbingan" },
+];
+
+// Fixed per-row colors (index-based, never edited)
+const kategoriColors = [
+  { color: "text-emerald-200", bg: "bg-emerald-500/10", border: "border-emerald-300/30" },
+  { color: "text-cyan-200", bg: "bg-cyan-500/10", border: "border-cyan-300/30" },
+  { color: "text-yellow-200", bg: "bg-yellow-500/10", border: "border-yellow-300/30" },
+  { color: "text-rose-200", bg: "bg-rose-500/10", border: "border-rose-300/30" },
+];
+
 const skorHeader = [
   { value: 4 as const, label: "Sangat Baik", color: "from-emerald-500/30 to-emerald-700/20", text: "text-emerald-100", border: "border-emerald-300/40" },
   { value: 3 as const, label: "Baik", color: "from-cyan-500/30 to-cyan-700/20", text: "text-cyan-100", border: "border-cyan-300/40" },
@@ -95,25 +111,29 @@ const skorHeader = [
   { value: 1 as const, label: "Perlu Bimbingan", color: "from-rose-500/30 to-rose-700/20", text: "text-rose-100", border: "border-rose-300/40" },
 ];
 
-const kategoriList = [
-  { totalSkor: "25 – 28", nilai: "90 – 100", kategori: "Sangat Baik", color: "text-emerald-200", bg: "bg-emerald-500/10", border: "border-emerald-300/30" },
-  { totalSkor: "21 – 24", nilai: "80 – 89", kategori: "Baik", color: "text-cyan-200", bg: "bg-cyan-500/10", border: "border-cyan-300/30" },
-  { totalSkor: "17 – 20", nilai: "70 – 79", kategori: "Cukup", color: "text-yellow-200", bg: "bg-yellow-500/10", border: "border-yellow-300/30" },
-  { totalSkor: "≤ 16", nilai: "< 70", kategori: "Perlu Bimbingan", color: "text-rose-200", bg: "bg-rose-500/10", border: "border-rose-300/30" },
-];
-
-const STORAGE_KEY = "numatik:rubrik-dimensi:v1";
+const STORAGE_KEY = "numatik:rubrik-dimensi:v2";
 
 const inp = "w-full bg-white/5 border border-white/15 rounded-lg px-2 py-1.5 text-sm text-white/85 font-body leading-relaxed resize-y focus:outline-none focus:border-cyan-400/50 focus:bg-white/10 transition-all";
+const inpInline = "bg-transparent border-b border-transparent hover:border-white/20 focus:border-teal-400/60 outline-none transition-colors text-center";
 
 const RubrikPenilaianDimensiLulusanPage = () => {
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
+
   const [dimensiData, setDimensiData] = useState<DimensiItem[]>(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : defaultDimensiList;
+      const parsed = raw ? JSON.parse(raw) : null;
+      return parsed?.dimensi ?? defaultDimensiList;
     } catch { return defaultDimensiList; }
+  });
+
+  const [kategoriData, setKategoriData] = useState<KategoriItem[]>(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : null;
+      return parsed?.kategori ?? defaultKategoriList;
+    } catch { return defaultKategoriList; }
   });
 
   const updateDimensi = (idx: number, field: "dimensi" | "aspek", value: string) => {
@@ -124,9 +144,13 @@ const RubrikPenilaianDimensiLulusanPage = () => {
     setDimensiData(prev => prev.map((d, i) => i === idx ? { ...d, skor: { ...d.skor, [s]: value } } : d));
   };
 
+  const updateKategori = (idx: number, field: keyof KategoriItem, value: string) => {
+    setKategoriData(prev => prev.map((k, i) => i === idx ? { ...k, [field]: value } : k));
+  };
+
   const handleSave = () => {
     playPopSound();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dimensiData));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ dimensi: dimensiData, kategori: kategoriData }));
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
@@ -151,10 +175,17 @@ const RubrikPenilaianDimensiLulusanPage = () => {
         <td style="border:1px solid #ccc;padding:5pt 8pt;">${d.skor[2]}</td>
         <td style="border:1px solid #ccc;padding:5pt 8pt;">${d.skor[1]}</td>
       </tr>`).join("");
+    const konversiRows = kategoriData.map((k, i) => `
+      <tr style="${i % 2 === 0 ? "background:#f9f9f9;" : ""}">
+        <td style="border:1px solid #ccc;padding:5pt 8pt;font-weight:bold;">${k.totalSkor}</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;">${k.nilai}</td>
+        <td style="border:1px solid #ccc;padding:5pt 8pt;font-weight:bold;">${k.kategori}</td>
+      </tr>`).join("");
     const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
 body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm}
 h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 6pt 0}
-table{width:100%;border-collapse:collapse;margin-top:12pt}
+h2{font-size:12pt;font-weight:bold;margin:18pt 0 6pt 0}
+table{width:100%;border-collapse:collapse;margin-top:8pt}
 th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
 </style></head><body>
 <h1>RUBRIK PENILAIAN DIMENSI LULUSAN</h1>
@@ -162,6 +193,11 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
 <table>
 <thead><tr><th style="width:4%">No</th><th style="width:18%">Dimensi</th><th style="width:20%">Aspek yang Diamati</th><th>Skor 4 (Sangat Baik)</th><th>Skor 3 (Baik)</th><th>Skor 2 (Cukup)</th><th>Skor 1 (Perlu Bimbingan)</th></tr></thead>
 <tbody>${rows}</tbody>
+</table>
+<h2>Konversi Total Skor</h2>
+<table>
+<thead><tr><th>Total Skor (dari 28)</th><th>Nilai Skala 100</th><th>Kategori</th></tr></thead>
+<tbody>${konversiRows}</tbody>
 </table>
 </body></html>`;
     const blob = new Blob(["\ufeff", html], { type: "application/msword" });
@@ -309,43 +345,80 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 8pt}
           ))}
         </section>
 
-        {/* Konversi Skor */}
+        {/* Konversi Skor — fully editable */}
         <section className="rounded-3xl border border-fuchsia-200/25 bg-gradient-to-br from-fuchsia-500/10 via-purple-500/10 to-violet-500/10 backdrop-blur p-5 md:p-7 mb-8">
           <div className="flex items-start gap-3 mb-5">
             <Award className="w-8 h-8 text-fuchsia-200 shrink-0" />
             <div>
-              <h2 className="font-display text-xl md:text-2xl font-bold text-fuchsia-100">Konversi Total Skor (dari 28)</h2>
-              <p className="text-sm text-white/65 mt-1 font-body">Total skor tujuh dimensi dikonversi ke nilai skala 100 dan kategori berikut.</p>
+              <h2 className="font-display text-xl md:text-2xl font-bold text-fuchsia-100">Konversi Total Skor</h2>
+              <p className="text-sm text-white/65 mt-1 font-body">Klik sel untuk mengedit rentang skor, nilai, atau kategori.</p>
             </div>
           </div>
           <div className="hidden md:block overflow-x-auto rounded-2xl border border-white/10">
             <table className="w-full text-sm">
               <thead className="bg-black/40">
                 <tr>
-                  <th className="text-left p-3 font-display text-cyan-100">Total Skor (dari 28)</th>
+                  <th className="text-left p-3 font-display text-cyan-100">Total Skor</th>
                   <th className="text-left p-3 font-display text-cyan-100">Nilai Skala 100</th>
                   <th className="text-left p-3 font-display text-cyan-100">Kategori</th>
                 </tr>
               </thead>
               <tbody>
-                {kategoriList.map((k, idx) => (
-                  <tr key={k.kategori} className={idx % 2 === 0 ? "bg-white/5" : "bg-transparent"}>
-                    <td className="p-3 font-semibold text-white font-body">{k.totalSkor}</td>
-                    <td className="p-3 text-white/85 font-body">{k.nilai}</td>
-                    <td className={`p-3 font-display font-bold ${k.color}`}>{k.kategori}</td>
-                  </tr>
-                ))}
+                {kategoriData.map((k, idx) => {
+                  const col = kategoriColors[idx] ?? kategoriColors[0];
+                  return (
+                    <tr key={idx} className={idx % 2 === 0 ? "bg-white/5" : "bg-transparent"}>
+                      <td className="p-2">
+                        <input
+                          value={k.totalSkor}
+                          onChange={e => updateKategori(idx, "totalSkor", e.target.value)}
+                          className={`${inpInline} font-semibold text-white w-full font-body text-sm px-1`}
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          value={k.nilai}
+                          onChange={e => updateKategori(idx, "nilai", e.target.value)}
+                          className={`${inpInline} text-white/85 w-full font-body text-sm px-1`}
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          value={k.kategori}
+                          onChange={e => updateKategori(idx, "kategori", e.target.value)}
+                          className={`${inpInline} font-display font-bold ${col.color} w-full text-sm px-1`}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
+          {/* Mobile cards */}
           <div className="md:hidden grid sm:grid-cols-2 gap-3">
-            {kategoriList.map(k => (
-              <div key={k.kategori} className={`rounded-2xl border ${k.border} ${k.bg} p-4`}>
-                <p className={`font-display text-lg font-bold ${k.color} mb-2`}>{k.kategori}</p>
-                <p className="text-white font-semibold text-sm font-body">{k.totalSkor}</p>
-                <p className="text-white/55 text-xs font-body">{k.nilai}</p>
-              </div>
-            ))}
+            {kategoriData.map((k, idx) => {
+              const col = kategoriColors[idx] ?? kategoriColors[0];
+              return (
+                <div key={idx} className={`rounded-2xl border ${col.border} ${col.bg} p-4 space-y-2`}>
+                  <input
+                    value={k.kategori}
+                    onChange={e => updateKategori(idx, "kategori", e.target.value)}
+                    className={`font-display text-lg font-bold ${col.color} bg-transparent border-b border-white/10 outline-none w-full`}
+                  />
+                  <input
+                    value={k.totalSkor}
+                    onChange={e => updateKategori(idx, "totalSkor", e.target.value)}
+                    className="text-white font-semibold text-sm bg-transparent border-b border-white/10 outline-none w-full font-body"
+                  />
+                  <input
+                    value={k.nilai}
+                    onChange={e => updateKategori(idx, "nilai", e.target.value)}
+                    className="text-white/55 text-xs bg-transparent border-b border-white/10 outline-none w-full font-body"
+                  />
+                </div>
+              );
+            })}
           </div>
         </section>
 

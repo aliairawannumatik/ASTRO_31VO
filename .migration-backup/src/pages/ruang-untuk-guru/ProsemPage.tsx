@@ -169,16 +169,19 @@ type ProsemTableProps = {
   data: SemData;
   onRowChange: (rowIdx: number, field: keyof Row, value: string | number) => void;
   onAlokasiChange: (rowIdx: number, colIdx: number, value: number | null) => void;
+  onRemoveRow: (rowIdx: number) => void;
+  onBulanChange: (colIdx: number, value: string) => void;
 };
 
 const inpCell = "w-full bg-transparent border-b border-white/15 focus:border-teal-400/60 outline-none text-xs text-white/85 font-body py-0.5 transition-colors resize-none";
 const inpNormal = "w-full bg-transparent outline-none text-xs text-white/85 font-body resize-none";
 
-const ProsemTable = ({ data, onRowChange, onAlokasiChange }: ProsemTableProps) => {
-  const colTotals = Array(6).fill(0);
+const ProsemTable = ({ data, onRowChange, onAlokasiChange, onRemoveRow, onBulanChange }: ProsemTableProps) => {
+  const numCols = data.bulan.length;
+  const colTotals = Array(numCols).fill(0);
   data.rows.forEach(r => {
     if (!r.type || r.type === "normal" || r.type === "cadangan") {
-      r.alokasi.forEach((v, i) => { if (v) colTotals[i] += v; });
+      r.alokasi.forEach((v, i) => { if (v) colTotals[i] = (colTotals[i] ?? 0) + v; });
     }
   });
 
@@ -191,10 +194,17 @@ const ProsemTable = ({ data, onRowChange, onAlokasiChange }: ProsemTableProps) =
             <th className="border border-white/10 px-3 py-2 text-teal-300 font-bold text-left min-w-[140px]">Materi Pokok</th>
             <th className="border border-white/10 px-3 py-2 text-teal-300 font-bold text-left min-w-[200px]">Tujuan Pembelajaran</th>
             <th className="border border-white/10 px-2 py-2 text-teal-300 font-bold text-center w-10">JP</th>
-            {data.bulan.map(b => (
-              <th key={b} className="border border-white/10 px-2 py-2 text-teal-300 font-bold text-center w-14">{b}</th>
+            {data.bulan.map((b, bi) => (
+              <th key={bi} className="border border-white/10 px-1 py-1 text-center w-14">
+                <input
+                  value={b}
+                  onChange={e => onBulanChange(bi, e.target.value)}
+                  className="w-full bg-transparent text-teal-300 font-bold text-center text-[10px] outline-none border-b border-transparent hover:border-teal-400/40 focus:border-teal-400/70 transition-colors"
+                />
+              </th>
             ))}
-            <th className="border border-white/10 px-2 py-2 text-teal-300 font-bold text-center min-w-[80px]">Ket</th>
+            <th className="border border-white/10 px-2 py-2 text-teal-300 font-bold text-center min-w-[60px]">Ket</th>
+            <th className="border border-white/10 px-1 py-2 w-6" title="Hapus baris" />
           </tr>
         </thead>
         <tbody>
@@ -205,7 +215,7 @@ const ProsemTable = ({ data, onRowChange, onAlokasiChange }: ProsemTableProps) =
               const icon = specialIcon[t] ?? "📌";
               const ptsBulan = t === "pts"
                 ? data.bulan[2] ?? data.bulan[1]
-                : t === "ujian" ? data.bulan[3] : data.bulan[5];
+                : t === "ujian" ? data.bulan[3] : data.bulan[numCols - 1];
               return (
                 <tr key={ri} className={`border ${cls}`}>
                   <td className="border border-white/10 px-2 py-2 text-center opacity-60">{row.no}</td>
@@ -226,6 +236,9 @@ const ProsemTable = ({ data, onRowChange, onAlokasiChange }: ProsemTableProps) =
                     </td>
                   ))}
                   <td className="border border-white/10 px-2 py-2 text-center text-[10px] opacity-70">{ptsBulan}</td>
+                  <td className="border border-white/10 px-1 py-2 text-center">
+                    <button onClick={() => onRemoveRow(ri)} className="text-rose-400/60 hover:text-rose-300 text-[10px] font-bold transition-colors" title="Hapus">×</button>
+                  </td>
                 </tr>
               );
             }
@@ -263,12 +276,12 @@ const ProsemTable = ({ data, onRowChange, onAlokasiChange }: ProsemTableProps) =
                     className={inpCell + " text-center text-teal-300 font-bold w-10"}
                   />
                 </td>
-                {row.alokasi.map((v, ai) => (
+                {Array.from({ length: numCols }).map((_, ai) => (
                   <td key={ai} className="border border-white/10 px-2 py-1.5 text-center">
                     <input
                       type="number"
                       min={0}
-                      value={v ?? ""}
+                      value={row.alokasi[ai] ?? ""}
                       onChange={e => {
                         const n = e.target.value === "" ? null : parseInt(e.target.value) || 0;
                         onAlokasiChange(ri, ai, n);
@@ -280,6 +293,9 @@ const ProsemTable = ({ data, onRowChange, onAlokasiChange }: ProsemTableProps) =
                 ))}
                 <td className="border border-white/10 px-2 py-1.5 text-center text-[10px] text-white/40">
                   {t === "cadangan" ? "Fleksibel" : ""}
+                </td>
+                <td className="border border-white/10 px-1 py-1.5 text-center">
+                  <button onClick={() => onRemoveRow(ri)} className="text-rose-400/60 hover:text-rose-300 text-[10px] font-bold transition-colors" title="Hapus baris">×</button>
                 </td>
               </tr>
             );
@@ -297,6 +313,7 @@ const ProsemTable = ({ data, onRowChange, onAlokasiChange }: ProsemTableProps) =
               </td>
             ))}
             <td className="border border-white/10 px-2 py-2 text-center text-teal-200">{data.totalJP} JP</td>
+            <td className="border border-white/10 px-1 py-2" />
           </tr>
         </tfoot>
       </table>
@@ -335,6 +352,67 @@ const ProsemPage = () => {
     setPageData(prev => {
       const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, KelasData>;
       next[kelas][semester].rows[rowIdx].alokasi[colIdx] = value;
+      return next;
+    });
+  };
+
+  const handleBulanChange = (colIdx: number, value: string) => {
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, KelasData>;
+      next[kelas][semester].bulan[colIdx] = value;
+      return next;
+    });
+  };
+
+  const handleAddRow = () => {
+    playPopSound();
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, KelasData>;
+      const numCols = next[kelas][semester].bulan.length;
+      const existingNums = next[kelas][semester].rows
+        .map(r => parseInt(r.no))
+        .filter(n => !isNaN(n));
+      const nextNo = existingNums.length > 0 ? String(Math.max(...existingNums) + 1) : "1";
+      next[kelas][semester].rows.push({
+        no: nextNo,
+        materi: "Materi Baru",
+        tp: "Deskripsi tujuan pembelajaran...",
+        jp: 0,
+        alokasi: Array(numCols).fill(null),
+        type: "normal",
+      });
+      return next;
+    });
+  };
+
+  const handleRemoveRow = (rowIdx: number) => {
+    playPopSound();
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, KelasData>;
+      next[kelas][semester].rows.splice(rowIdx, 1);
+      return next;
+    });
+  };
+
+  const handleAddColumn = () => {
+    playPopSound();
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, KelasData>;
+      const sem = next[kelas][semester];
+      sem.bulan.push("Bulan Baru");
+      sem.rows = sem.rows.map(r => ({ ...r, alokasi: [...r.alokasi, null] }));
+      return next;
+    });
+  };
+
+  const handleRemoveColumn = () => {
+    playPopSound();
+    setPageData(prev => {
+      const next = JSON.parse(JSON.stringify(prev)) as Record<KelasKey, KelasData>;
+      const sem = next[kelas][semester];
+      if (sem.bulan.length <= 1) return prev;
+      sem.bulan.pop();
+      sem.rows = sem.rows.map(r => ({ ...r, alokasi: r.alokasi.slice(0, -1) }));
       return next;
     });
   };
@@ -507,7 +585,33 @@ const ProsemPage = () => {
             📊 Tabel Program Semester — Kelas {kelasNum} | Semester {semester === "ganjil" ? "Ganjil" : "Genap"} {LABEL}
           </h2>
           <p className="text-xs text-cyan-300/60 mb-3">✏️ Klik sel untuk mengedit langsung. Klik <strong>Simpan</strong> setelah selesai.</p>
-          <ProsemTable data={semData} onRowChange={handleRowChange} onAlokasiChange={handleAlokasiChange} />
+          <div className="flex flex-wrap gap-2 mb-3">
+            <button
+              onClick={handleAddRow}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-600/70 hover:bg-teal-500/80 border border-teal-400/40 text-white text-xs font-semibold transition-all hover:scale-105"
+            >
+              + Tambah Baris
+            </button>
+            <button
+              onClick={handleAddColumn}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600/70 hover:bg-cyan-500/80 border border-cyan-400/40 text-white text-xs font-semibold transition-all hover:scale-105"
+            >
+              + Tambah Kolom Bulan
+            </button>
+            <button
+              onClick={handleRemoveColumn}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-600/50 hover:bg-rose-500/60 border border-rose-400/30 text-white text-xs font-semibold transition-all hover:scale-105"
+            >
+              − Hapus Kolom Terakhir
+            </button>
+          </div>
+          <ProsemTable
+            data={semData}
+            onRowChange={handleRowChange}
+            onAlokasiChange={handleAlokasiChange}
+            onRemoveRow={handleRemoveRow}
+            onBulanChange={handleBulanChange}
+          />
         </div>
 
         {/* Notes */}
