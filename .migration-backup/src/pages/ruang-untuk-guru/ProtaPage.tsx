@@ -367,6 +367,31 @@ const ProtaPage = () => {
           </p>
         </div>
 
+        {/* ── TOP ACTION BUTTONS ── */}
+        <div className="no-print flex flex-wrap items-center justify-center gap-3 mb-8 animate-slide-up">
+          <button
+            onClick={handleSave}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${savedOk ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+          >
+            <Save className="w-4 h-4" />
+            {savedOk ? "Tersimpan!" : "Simpan"}
+          </button>
+          <button
+            onClick={handlePrintPDF}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={handlePrintWord}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 border border-blue-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+          >
+            <FileText className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
+        </div>
+
         {/* Kelas Tabs */}
         <div className="flex justify-center gap-2 mb-5 animate-slide-up">
           {([
@@ -654,31 +679,6 @@ const ProtaPage = () => {
           {kelas === "kelas9" && (
             <p>• Kelas 9 Semester Genap: JP lebih sedikit karena Ujian Sekolah berlangsung di bulan April.</p>
           )}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 animate-slide-up">
-          <button
-            onClick={handlePrintPDF}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <FileDown className="w-4 h-4" />
-            Simpan sebagai PDF
-          </button>
-          <button
-            onClick={handlePrintWord}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
-          >
-            <FileText className="w-4 h-4" />
-            Simpan sebagai Word
-          </button>
-          <button
-            onClick={handleSave}
-            className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all ${savedOk ? "bg-emerald-500 border-emerald-400/60" : "bg-emerald-600/80 hover:bg-emerald-500/90 border-emerald-400/40"}`}
-          >
-            <Save className="w-4 h-4" />
-            {savedOk ? "Tersimpan!" : "Simpan"}
-          </button>
         </div>
 
         <div className="text-center">
