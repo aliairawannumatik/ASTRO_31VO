@@ -255,35 +255,20 @@ const ATPPage = () => {
     playPopSound();
     setPdfLoading(true);
     try {
-      const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
-        import("jspdf"),
-        import("html2canvas"),
-      ]);
-      const styleNoPage = dokumenStyle.replace(/@page\s*\{[^}]*\}/g, "");
-      const container = document.createElement("div");
-      container.style.cssText = "position:fixed;top:-9999px;left:0;width:813px;background:#fff;color:#000;";
-      container.innerHTML = `<style>${styleNoPage}</style><div style="padding:0 113px;font-family:Arial,sans-serif;font-size:11pt;line-height:1.5;text-align:justify;">${buildDokumenBody()}</div>`;
-      document.body.appendChild(container);
-      try {
-        const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#fff", windowWidth: 813 });
-        const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: [215, 330] });
-        const pdfW = pdf.internal.pageSize.getWidth();
-        const pdfH = pdf.internal.pageSize.getHeight();
-        const margin = 30; // 3cm in mm
-        const contentH = pdfH - margin * 2; // 270mm usable per page
-        const imgData = canvas.toDataURL("image/png");
-        const totalImgH = (canvas.height * pdfW) / canvas.width;
-        let imgOffset = 0;
-        for (let page = 0; ; page++) {
-          if (page > 0) pdf.addPage();
-          pdf.addImage(imgData, "PNG", 0, margin - imgOffset, pdfW, totalImgH);
-          imgOffset += contentH;
-          if (imgOffset >= totalImgH) break;
-        }
-        pdf.save("Alur_Tujuan_Pembelajaran_Matematika.pdf");
-      } finally {
-        document.body.removeChild(container);
-      }
+      const fullHtml = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>ATP (NUMATIK)</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
+      const res = await fetch("/api/generate-pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ html: fullHtml, filename: "Alur_Tujuan_Pembelajaran_Matematika" }),
+      });
+      if (!res.ok) throw new Error("Gagal membuat PDF.");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Alur_Tujuan_Pembelajaran_Matematika.pdf";
+      a.click();
+      URL.revokeObjectURL(url);
     } finally {
       setPdfLoading(false);
     }

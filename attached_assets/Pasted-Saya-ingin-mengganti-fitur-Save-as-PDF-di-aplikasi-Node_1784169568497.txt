@@ -1,0 +1,70 @@
+Saya ingin mengganti fitur "Save as PDF" di aplikasi Node.js ini. 
+Saat ini kemungkinan menggunakan html2canvas + jsPDF (screenshot-based), 
+dan hasilnya bermasalah: margin atas-bawah menjadi 0 (terpotong) dan 
+teks di PDF tidak bisa di-select/copy karena berupa gambar.
+
+Saya minta diganti total ke pendekatan PUPPETEER agar PDF berisi teks 
+asli (selectable) dan margin presisi. Ikuti spesifikasi ini persis:
+
+1. Install dependency:
+   npm install puppeteer
+
+2. Buat endpoint backend baru, misalnya POST /api/generate-pdf, yang:
+   - Menerima HTML/konten dokumen dari frontend (atau ambil dari template 
+     server-side, sesuaikan dengan struktur project ini)
+   - Menggunakan Puppeteer untuk merender HTML tersebut jadi PDF
+   - Ukuran kertas HARUS custom F4: width: '21.5cm', height: '33cm' 
+     (BUKAN preset 'A4' atau 'Legal' bawaan Puppeteer, karena F4 
+     ukurannya beda)
+   - Margin semua sisi (top, bottom, left, right) = '3cm'
+   - printBackground: true supaya warna/background ikut tercetak
+   - Gunakan page.setContent(html, { waitUntil: 'networkidle0' }) 
+     sebelum generate PDF, supaya font dan CSS selesai load dulu
+
+3. Contoh kode referensi untuk fungsi generate PDF-nya:
+
+const puppeteer = require('puppeteer');
+
+async function generatePDF(htmlContent) {
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+  const page = await browser.newPage();
+  await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+  
+  const pdfBuffer = await page.pdf({
+    width: '21.5cm',
+    height: '33cm',
+    margin: {
+      top: '3cm',
+      bottom: '3cm',
+      left: '3cm',
+      right: '3cm'
+    },
+    printBackground: true
+  });
+  
+  await browser.close();
+  return pdfBuffer;
+}
+
+4. PENTING: jangan pakai CSS margin/padding tambahan di HTML konten 
+   untuk mensimulasikan margin halaman — margin PDF cukup diatur lewat 
+   parameter page.pdf() di atas saja. Kalau ada CSS margin manual dari 
+   implementasi sebelumnya (html2canvas), hapus supaya tidak double margin.
+
+5. Tolong juga cek dan hapus dependency html2canvas dan jsPDF dari 
+   package.json serta kode frontend yang memanggilnya, karena sudah 
+   tidak dipakai lagi setelah migrasi ke Puppeteer.
+
+6. Frontend: tombol "Save as PDF" tetap sama, tapi sekarang harus 
+   memanggil endpoint /api/generate-pdf (via fetch/axios), menerima 
+   response sebagai blob, lalu trigger download otomatis dengan nama 
+   file sesuai konteks dokumen.
+
+7. Setelah selesai, tolong beri saya ringkasan file apa saja yang 
+   diubah, supaya saya bisa cek satu-satu.
+
+Catatan: karena Replit menjalankan environment terbatas (mirip container), 
+pastikan Puppeteer bisa jalan dengan args ['--no-sandbox', '--disable-setuid-sandbox'] 
+seperti di contoh, supaya tidak error saat launch browser di Replit.
