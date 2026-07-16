@@ -1,0 +1,60 @@
+Konteks: Aplikasi Numatik React + Capacitor, 6 tema.
+HANYA ubah tema "white". Tema lain jangan disentuh.
+
+Ada beberapa komponen yang masih gelap di tema white.
+Perbaiki semuanya:
+
+1. KALKULATOR SCIENTIFIC:
+   - Tombol angka (0-9) yang hitam → background: var(--bg-secondary), 
+     color: var(--text-primary)
+   - Display/layar kalkulator yang gelap → background: var(--bg-card)
+   - Tombol operator dan fungsi yang gelap → var(--bg-secondary)
+   - Cari file CalculatorPage atau ScientificCalculator
+
+2. TENTANG APLIKASI:
+   - Section "Versi Aplikasi" dan "Jadwal Pembaruan" 
+     background gelap navy → var(--bg-card)
+   - Teks di dalamnya → var(--text-primary)
+   - Cari file AboutPage atau TentangPage
+
+3. BIOGRAFI:
+   - Frame/border foto yang hitam gelap → var(--border)
+     atau border: 2px solid var(--accent)
+   - Cari file BiografiPage atau BiographyPage
+
+4. BANK SOAL:
+   - Area soal background abu gelap → var(--bg-card)
+   - Pilihan jawaban yang gelap → var(--bg-secondary)
+   - Teks soal dan jawaban → var(--text-primary)
+   - Cari file BankSoalPage atau QuestionPage
+
+5. VIDEO PEMBELAJARAN:
+   - Ada efek salju (snow) yang muncul di tema white
+   - Efek salju seharusnya TIDAK muncul di tema white
+   - Cari komponen SnowEffect, Snowfall, atau 
+     efek partikel yang dipanggil di VideoPage
+   - Tambahkan kondisi: hanya tampilkan snow jika 
+     tema BUKAN white
+   - Contoh: {currentTheme !== 'white' && <SnowEffect />}
+
+6. KUMPULAN RUMUS:
+   - Baris tabel rumus background abu gelap → 
+     background: var(--bg-card) untuk baris ganjil,
+     var(--bg-secondary) untuk baris genap
+   - Header tabel → var(--bg-secondary)
+   - Teks → var(--text-primary)
+   - Cari file RumusPage atau FormulaPage
+
+7. TES KEMAMPUAN AKADEMIK (TKA):
+   - Card modul "Kelas 7, 8, 9" background coklat/gelap
+     → background: var(--bg-card)
+   - List topik di dalam card → var(--bg-secondary)
+   - Teks → var(--text-primary)
+   - Cari file TKAPage atau AkademikPage
+
+ATURAN UMUM:
+- Semua perbaikan hanya berlaku di [data-theme="white"]
+- Tema dark, light, forest, ocean, sunset 
+  TIDAK BOLEH berubah sama sekali
+- Teks di atas background terang → var(--text-primary)
+- Teks sekunder/label → var(--text-secondary)
