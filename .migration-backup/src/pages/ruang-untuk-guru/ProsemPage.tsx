@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, CalendarDays, ChevronRight } from "lucide-react";
+import { ArrowLeft, CalendarDays, ChevronRight, Save, FileDown, FileText } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -25,15 +26,86 @@ const tahunList = [
   },
 ];
 
+const dokumenStyle = `
+  @page { size: A4; margin: 3cm; }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #000; margin: 0; padding: 0; }
+  h1 { text-align: center; font-size: 14pt; font-weight: bold; margin: 0 0 6pt 0; }
+  .header { text-align: center; margin-bottom: 16pt; border-bottom: 2px solid #000; padding-bottom: 8pt; }
+  .subtitle { font-size: 11pt; margin: 2pt 0; text-align: center; }
+  .card { border: 1px solid #aaa; border-radius: 4pt; padding: 10pt; margin-bottom: 10pt; }
+  .badge { font-weight: bold; font-size: 10pt; color: #555; margin: 0 0 4pt 0; }
+  .tahun { font-size: 14pt; font-weight: bold; margin: 0 0 8pt 0; }
+  .kelas { display: flex; gap: 8pt; margin-top: 6pt; }
+  .kelas span { border: 1px solid #aaa; padding: 2pt 6pt; font-size: 9pt; }
+  .footer { text-align: center; margin-top: 14pt; font-size: 9pt; color: #666; border-top: 1px solid #ccc; padding-top: 6pt; }
+`;
+
+const buildDokumenBody = () => `
+  <div class="header">
+    <h1>PROGRAM SEMESTER (PROSEM)</h1>
+    <p class="subtitle">Mata Pelajaran Matematika — Fase D — Kurikulum Merdeka</p>
+    <p class="subtitle">SMP/MTs/Program Paket B</p>
+  </div>
+  ${tahunList.map(t => `
+    <div class="card">
+      <p class="badge">TAHUN PELAJARAN</p>
+      <p class="tahun">${t.label}</p>
+      <p style="margin:2pt 0;font-size:11pt;">📅 Semester Ganjil: ${t.sem1}</p>
+      <p style="margin:2pt 0;font-size:11pt;">📅 Semester Genap: ${t.sem2}</p>
+      <div class="kelas"><span>Kelas 7</span><span>Kelas 8</span><span>Kelas 9</span></div>
+    </div>
+  `).join("")}
+  <div class="footer">
+    <p>Dokumen ini dicetak dari Aplikasi NUMATIK — Numerasi Aktif dengan Teknologi Informasi dan Komunikasi</p>
+  </div>
+`;
+
 const ProsemPage = () => {
   const navigate = useNavigate();
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = () => {
+    playPopSound();
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  };
+
+  const handlePrintPDF = () => {
+    playPopSound();
+    const prevTitle = document.title;
+    document.title = "PROSEM - numatik";
+    window.print();
+    window.addEventListener("afterprint", () => { document.title = prevTitle; }, { once: true });
+  };
+
+  const handlePrintWord = () => {
+    playPopSound();
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>PROSEM - numatik</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
+    const blob = new Blob([html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "PROSEM - numatik.doc";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
-      <Starfield />
-      <PageNavigation prevPath="/ruang-untuk-guru" />
+      <style>{`
+        @media print {
+          @page { size: A4; margin: 3cm; }
+          .no-print { display: none !important; }
+          body, .gradient-space { background: white !important; color: black !important; }
+          *, *::before, *::after { background-color: transparent !important; color: black !important; box-shadow: none !important; }
+        }
+      `}</style>
+      <div className="no-print"><Starfield /></div>
+      <div className="no-print"><PageNavigation prevPath="/ruang-untuk-guru" /></div>
       <div className="relative z-10 max-w-3xl mx-auto px-4 pt-20 pb-14">
         <div className="text-center mb-10 animate-slide-up">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
+          <div className="no-print inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
             <CalendarDays className="w-4 h-4" />
             Perangkat Pembelajaran
           </div>
@@ -43,6 +115,29 @@ const ProsemPage = () => {
           <p className="mt-4 text-sm text-white/70 max-w-2xl mx-auto font-body">
             Rencana distribusi materi pembelajaran matematika SMP per semester berdasarkan kalender akademik yang berlaku. Pilih tahun pelajaran untuk melihat program semester.
           </p>
+          <div className="no-print flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handleSave}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+            >
+              <Save className="w-4 h-4" />
+              {saved ? "Tersimpan!" : "Simpan"}
+            </button>
+            <button
+              onClick={handlePrintPDF}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Simpan sebagai PDF
+            </button>
+            <button
+              onClick={handlePrintWord}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 border border-blue-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileText className="w-4 h-4" />
+              Simpan sebagai Word
+            </button>
+          </div>
         </div>
 
         <div className="grid gap-5 mb-10">
@@ -82,7 +177,7 @@ const ProsemPage = () => {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="no-print text-center">
           <button
             onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"

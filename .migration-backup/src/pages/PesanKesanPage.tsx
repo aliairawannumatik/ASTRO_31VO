@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { ArrowLeft, CheckCircle2, MessageSquareHeart, Send, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, MessageSquareHeart, Send, Sparkles, Save, FileDown, FileText } from "lucide-react";
 
 type FormData = {
   nama: string;
@@ -46,6 +46,45 @@ const PesanKesanPage = () => {
     playPopSound();
     setForm(initialForm);
     setSubmitted(false);
+  };
+
+  const handlePrintPDF = () => {
+    playPopSound();
+    const prevTitle = document.title;
+    document.title = "PESAN DAN KESAN - numatik";
+    window.print();
+    window.addEventListener("afterprint", () => { document.title = prevTitle; }, { once: true });
+  };
+
+  const handlePrintWord = () => {
+    playPopSound();
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>PESAN DAN KESAN - numatik</title><style>
+body{font-family:Arial,sans-serif;font-size:11pt;margin:2cm;line-height:1.6;color:#000}
+h1{text-align:center;font-size:14pt;font-weight:bold;margin:0 0 6pt 0}
+.subtitle{text-align:center;font-size:10pt;color:#555;margin:2pt 0 16pt 0}
+table{width:100%;border-collapse:collapse;margin-top:12pt}
+td{border:1px solid #ccc;padding:6pt 8pt;vertical-align:top}
+.label{font-weight:bold;width:30%;background:#eaf4fb}
+.footer{text-align:center;margin-top:14pt;font-size:9pt;color:#666;border-top:1px solid #ccc;padding-top:6pt}
+</style></head><body>
+<h1>PESAN DAN KESAN PENGGUNAAN APLIKASI</h1>
+<p class="subtitle">Aplikasi NUMATIK — Numerasi Aktif dengan Teknologi Informasi dan Komunikasi</p>
+<table>
+  <tr><td class="label">Nama</td><td>${form.nama || "—"}</td></tr>
+  <tr><td class="label">Kelas</td><td>${form.kelas || "—"}</td></tr>
+  <tr><td class="label">Kesan</td><td>${(form.kesan || "—").replace(/\n/g, "<br>")}</td></tr>
+  <tr><td class="label">Pesan</td><td>${(form.pesan || "—").replace(/\n/g, "<br>")}</td></tr>
+  <tr><td class="label">Saran</td><td>${(form.saran || "—").replace(/\n/g, "<br>")}</td></tr>
+</table>
+<div class="footer">Dicetak dari Aplikasi NUMATIK</div>
+</body></html>`;
+    const blob = new Blob([html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "PESAN DAN KESAN - numatik.doc";
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -120,7 +159,7 @@ const PesanKesanPage = () => {
             </label>
           </div>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
             <button
               onClick={handleSubmit}
               disabled={!isComplete}
@@ -128,6 +167,20 @@ const PesanKesanPage = () => {
             >
               <Send className="w-5 h-5" />
               Kirim Pesan dan Kesan
+            </button>
+            <button
+              onClick={handlePrintPDF}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 hover:bg-red-500 px-7 py-3 font-bold text-white transition-all hover:scale-105"
+            >
+              <FileDown className="w-5 h-5" />
+              Simpan sebagai PDF
+            </button>
+            <button
+              onClick={handlePrintWord}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3 font-bold text-white transition-all hover:scale-105"
+            >
+              <FileText className="w-5 h-5" />
+              Simpan sebagai Word
             </button>
             <button
               onClick={resetForm}

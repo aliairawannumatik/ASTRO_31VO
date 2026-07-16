@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, FileText, Target, Layers, ClipboardCheck, Users, Wand2, Sparkles } from "lucide-react";
+import { ArrowLeft, BookOpen, FileText, Target, Layers, ClipboardCheck, Users, Wand2, Sparkles, Save, FileDown } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -68,16 +69,83 @@ const materiRPP: { label: string; path: string; available: boolean }[] = [
   { label: "PELUANG", path: "/ruang-untuk-guru/rpp/peluang", available: false },
 ];
 
+const dokumenStyle = `
+  @page { size: A4; margin: 3cm; }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #000; margin: 0; padding: 0; }
+  h1 { text-align: center; font-size: 14pt; font-weight: bold; margin: 0 0 6pt 0; }
+  h2 { font-size: 12pt; font-weight: bold; margin: 14pt 0 6pt 0; }
+  .header { text-align: center; margin-bottom: 16pt; border-bottom: 2px solid #000; padding-bottom: 8pt; }
+  .subtitle { font-size: 11pt; margin: 2pt 0; text-align: center; }
+  ol { margin: 0; padding-left: 18pt; }
+  ol li { margin-bottom: 3pt; }
+  .footer { text-align: center; margin-top: 14pt; font-size: 9pt; color: #666; border-top: 1px solid #ccc; padding-top: 6pt; }
+`;
+
+const buildDokumenBody = () => `
+  <div class="header">
+    <h1>RPP — RENCANA PELAKSANAAN PEMBELAJARAN</h1>
+    <p class="subtitle">Mata Pelajaran Matematika — Fase D — Kurikulum Merdeka</p>
+    <p class="subtitle">SMP/MTs/Program Paket B</p>
+  </div>
+  <h2>Daftar Materi RPP Tersedia</h2>
+  <ol>
+    ${materiRPP.filter(m => m.available).map(m => `<li>${m.label}</li>`).join("")}
+  </ol>
+  <h2>Segera Hadir</h2>
+  <ol>
+    ${materiRPP.filter(m => !m.available).map(m => `<li>${m.label}</li>`).join("")}
+  </ol>
+  <div class="footer">
+    <p>Dokumen ini dicetak dari Aplikasi NUMATIK — Numerasi Aktif dengan Teknologi Informasi dan Komunikasi</p>
+  </div>
+`;
+
 const RPPPage = () => {
   const navigate = useNavigate();
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = () => {
+    playPopSound();
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  };
+
+  const handlePrintPDF = () => {
+    playPopSound();
+    const prevTitle = document.title;
+    document.title = "RPP - numatik";
+    window.print();
+    window.addEventListener("afterprint", () => { document.title = prevTitle; }, { once: true });
+  };
+
+  const handlePrintWord = () => {
+    playPopSound();
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>RPP - numatik</title><style>${dokumenStyle}</style></head><body>${buildDokumenBody()}</body></html>`;
+    const blob = new Blob([html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "RPP - numatik.doc";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
-      <Starfield />
-      <PageNavigation prevPath="/ruang-untuk-guru" />
+      <style>{`
+        @media print {
+          @page { size: A4; margin: 3cm; }
+          .no-print { display: none !important; }
+          body, .gradient-space { background: white !important; color: black !important; }
+          *, *::before, *::after { background-color: transparent !important; color: black !important; box-shadow: none !important; }
+        }
+      `}</style>
+      <div className="no-print"><Starfield /></div>
+      <div className="no-print"><PageNavigation prevPath="/ruang-untuk-guru" /></div>
       <div className="relative z-10 max-w-4xl mx-auto px-4 pt-20 pb-14">
         <div className="text-center mb-8 animate-slide-up">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
+          <div className="no-print inline-flex items-center gap-2 rounded-full border border-cyan-300/40 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-100 mb-4">
             <BookOpen className="w-4 h-4" />
             Perangkat Pembelajaran
           </div>
@@ -87,6 +155,29 @@ const RPPPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
             Dokumen perencanaan pembelajaran yang memuat tujuan, langkah-langkah kegiatan, serta asesmen sebagai panduan guru menjalankan proses belajar mengajar di kelas.
           </p>
+          <div className="no-print flex items-center justify-center gap-3 mt-6 flex-wrap">
+            <button
+              onClick={handleSave}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+            >
+              <Save className="w-4 h-4" />
+              {saved ? "Tersimpan!" : "Simpan"}
+            </button>
+            <button
+              onClick={handlePrintPDF}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 border border-red-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileDown className="w-4 h-4" />
+              Simpan sebagai PDF
+            </button>
+            <button
+              onClick={handlePrintWord}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 border border-blue-400/60 text-white text-sm font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+            >
+              <FileText className="w-4 h-4" />
+              Simpan sebagai Word
+            </button>
+          </div>
         </div>
 
         {/* ── RANCANG RPP OTOMATIS ── */}
@@ -160,7 +251,7 @@ const RPPPage = () => {
           </p>
         </div>
 
-        <div className="text-center">
+        <div className="no-print text-center">
           <button
             onClick={() => { playPopSound(); navigate("/ruang-untuk-guru"); }}
             className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-primary transition-colors font-body"

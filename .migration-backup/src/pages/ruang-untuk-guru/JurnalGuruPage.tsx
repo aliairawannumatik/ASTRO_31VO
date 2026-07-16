@@ -11,6 +11,8 @@ import {
   Printer,
   Eraser,
   FileDown,
+  Save,
+  FileText,
 } from "lucide-react";
 
 type JurnalEntry = {
@@ -50,6 +52,7 @@ const initialState: JurnalState = {
 const JurnalGuruPage = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<JurnalState>(initialState);
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     try {
@@ -110,8 +113,19 @@ const JurnalGuruPage = () => {
     }
   };
 
+  const handleSave = () => {
+    playPopSound();
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* ignore */ }
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  };
+
   const handlePrint = () => {
+    playPopSound();
+    const prevTitle = document.title;
+    document.title = "JURNAL GURU - numatik";
     window.print();
+    window.addEventListener("afterprint", () => { document.title = prevTitle; }, { once: true });
   };
 
   const handleDownloadWord = () => {
@@ -143,7 +157,7 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;fon
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Jurnal_Guru.doc";
+    a.download = "JURNAL GURU - numatik.doc";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -294,6 +308,13 @@ th{background:#eaf4fb;font-weight:bold;border:1px solid #ccc;padding:5pt 6pt;fon
         </section>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6 print:hidden">
+          <button
+            onClick={handleSave}
+            className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+          >
+            <Save className="w-4 h-4" />
+            {saved ? "Tersimpan!" : "Simpan"}
+          </button>
           <button
             onClick={() => { playPopSound(); handlePrint(); }}
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"

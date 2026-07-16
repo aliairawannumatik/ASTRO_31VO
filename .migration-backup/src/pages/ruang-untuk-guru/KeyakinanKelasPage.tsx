@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, HeartHandshake, Sparkles, Smartphone, ClipboardCheck, ShieldCheck, Printer, FileDown } from "lucide-react";
+import { ArrowLeft, HeartHandshake, Sparkles, Smartphone, ClipboardCheck, ShieldCheck, Printer, FileDown, Save, FileText } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -41,6 +42,13 @@ const keyakinan = [
 
 const KeyakinanKelasPage = () => {
   const navigate = useNavigate();
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = () => {
+    playPopSound();
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  };
 
   return (
     <div className="relative min-h-screen gradient-space overflow-x-hidden text-white">
@@ -95,7 +103,14 @@ const KeyakinanKelasPage = () => {
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
           <button
-            onClick={() => { playPopSound(); window.print(); }}
+            onClick={handleSave}
+            className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+          >
+            <Save className="w-4 h-4" />
+            {saved ? "Tersimpan!" : "Simpan"}
+          </button>
+          <button
+            onClick={() => { playPopSound(); const t = document.title; document.title = "KEYAKINAN KELAS - numatik"; window.print(); window.addEventListener("afterprint", () => { document.title = t; }, { once: true }); }}
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
           >
             <Printer className="w-4 h-4" />
@@ -109,7 +124,7 @@ const KeyakinanKelasPage = () => {
               const blob = new Blob(["\ufeff", html], { type: "application/msword" });
               const url = URL.createObjectURL(blob);
               const a = document.createElement("a");
-              a.href = url; a.download = "Keyakinan_Kelas.doc";
+              a.href = url; a.download = "KEYAKINAN KELAS - numatik.doc";
               document.body.appendChild(a); a.click();
               document.body.removeChild(a); URL.revokeObjectURL(url);
             }}

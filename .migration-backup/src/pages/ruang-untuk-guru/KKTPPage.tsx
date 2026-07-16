@@ -7,6 +7,8 @@ import {
   FileText,
   Info,
   BookOpen,
+  Save,
+  FileDown,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -675,6 +677,7 @@ const KKTPPage = () => {
   const [kelas, setKelas] = useState<KelasKey>("kelas7");
   const [filterSem, setFilterSem] = useState<"semua" | "1" | "2">("semua");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [saved, setSaved] = useState(false);
 
   const kelasNum = kelas.replace("kelas", "");
   const kelasRom = kelasNum === "7" ? "VII" : kelasNum === "8" ? "VIII" : "IX";
@@ -688,6 +691,12 @@ const KKTPPage = () => {
     const next: Record<string, boolean> = {};
     filtered.forEach(m => m.tpList.forEach(tp => { next[tp.kode] = open; }));
     setExpanded(next);
+  };
+
+  const handleSave = () => {
+    playPopSound();
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
   };
 
   const handlePrintPDF = () => {
@@ -709,7 +718,7 @@ const KKTPPage = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `KKTP_Matematika_Kelas${kelasNum}.doc`;
+    a.download = `KKTP - numatik.doc`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -960,6 +969,30 @@ const KKTPPage = () => {
           <p>• Peserta didik dengan nilai ≥ 86 (Sangat Baik) diberikan program pengayaan untuk memperluas wawasan matematis.</p>
           <p>• Guru dapat menambah/memodifikasi deskripsi KKTP sesuai konteks pembelajaran dan kondisi sekolah masing-masing.</p>
           <p>• Dasar hukum: Permendikbudristek No. 21 Tahun 2022 tentang Standar Penilaian Pendidikan pada PAUD, Jenjang Dikdas, dan Dikmen.</p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+          <button
+            onClick={handleSave}
+            className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border text-white text-sm font-semibold font-body transition-all ${saved ? "bg-emerald-400 border-emerald-300/60" : "bg-emerald-600 hover:bg-emerald-500 border-emerald-500/60"}`}
+          >
+            <Save className="w-4 h-4" />
+            {saved ? "Tersimpan!" : "Simpan"}
+          </button>
+          <button
+            onClick={handlePrintPDF}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600/80 hover:bg-cyan-500/90 border border-cyan-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <Printer className="w-4 h-4" />
+            Simpan sebagai PDF
+          </button>
+          <button
+            onClick={handleDownloadWord}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600/80 hover:bg-violet-500/90 border border-violet-400/40 text-white text-sm font-semibold font-body transition-all"
+          >
+            <FileDown className="w-4 h-4" />
+            Simpan sebagai Word
+          </button>
         </div>
 
         <div className="text-center">
