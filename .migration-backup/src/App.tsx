@@ -158,7 +158,6 @@ const RubrikPenilaianDimensiLulusanPage = lazy(() => import("./pages/ruang-untuk
 const JurnalGuruPage = lazy(() => import("./pages/ruang-untuk-guru/JurnalGuruPage"));
 const AgendaGuruPage = lazy(() => import("./pages/ruang-untuk-guru/AgendaGuruPage"));
 const ProsemPage = lazy(() => import("./pages/ruang-untuk-guru/ProsemPage"));
-const ProsemTahunPage = lazy(() => import("./pages/ruang-untuk-guru/ProsemTahunPage"));
 const ProtaPage = lazy(() => import("./pages/ruang-untuk-guru/ProtaPage"));
 const ProtaTahunPage = lazy(() => import("./pages/ruang-untuk-guru/ProtaTahunPage"));
 const AnalisisAlokasiWaktuPage = lazy(() => import("./pages/ruang-untuk-guru/AnalisisAlokasiWaktuPage"));
@@ -1069,7 +1068,6 @@ const AppInner = () => {
             <Route path="/ruang-untuk-guru/jurnal-guru" element={<JurnalGuruPage />} />
             <Route path="/ruang-untuk-guru/agenda-guru" element={<AgendaGuruPage />} />
             <Route path="/ruang-untuk-guru/prosem" element={<ProsemPage />} />
-            <Route path="/ruang-untuk-guru/prosem/:tahun" element={<ProsemTahunPage />} />
             <Route path="/ruang-untuk-guru/kktp" element={<KKTPPage />} />
             <Route path="/ruang-untuk-guru/absensi-siswa" element={<AbsensiSiswaPage />} />
             <Route path="/ruang-untuk-guru/penilaian-siswa" element={<PenilaianSiswaPage />} />
