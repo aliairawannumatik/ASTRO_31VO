@@ -94,6 +94,13 @@ Notes for future pages:
 - KaTeX \text{} violations: PemfaktoranPage baris 96/125 (Jika, atau, cari, faktorkan); DiskriminanPage baris 200 (atau)
 - PenerapanKontekstualPage: soal cerita "pedagang jeruk Rp.96.000" + "kolam renang 8×6 m" + "bilangan bulat berurutan" — tidak ada nama tokoh, tapi konteks & mata uang perlu dilokalisasi
 
+## PenerapanKontekstual Kelas 9 — 100% complete (2026-07-17)
+`PenerapanKontekstualPage.tsx` trilingual, tsc 0 error, screenshot-verified EN+JA.
+- Title EN: "QUADRATIC EQUATION APPLICATIONS" / JA: "二次方程式の文脈的応用"
+- No \text{} violations — \div in BlockMath is a standard KaTeX operator, not \text{}
+- Currency localization Soal 4: Rp 96.000 / (20-x) ribu rupiah → $96 / $(20-x) per orange (EN+JA). Equation x(20-x)=96 stays identical — math is consistent. JA also uses dollars, not yen, to keep the equation unchanged.
+- TOPIK PERSAMAAN KUADRAT KELAS 9 (Buku Animasi Matematika) = 100% SELESAI: Hub + BentukUmum + PelengkapKuadrat + RumusKuadratik + MenyusunPKBaru + Pemfaktoran + Diskriminan + PenerapanKontekstual (8 file total)
+
 ## Pemfaktoran + Diskriminan Kelas 9 — 100% complete (2026-07-17)
 Kedua file trilingual, tsc 0 error, screenshot-verified EN+JA.
 - `PemfaktoranPage.tsx`: "QUADRATIC EQUATION ROOTS — FACTORING"/"二次方程式の解 — 因数分解"
