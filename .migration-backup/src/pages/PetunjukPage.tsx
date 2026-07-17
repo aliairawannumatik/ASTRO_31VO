@@ -159,42 +159,64 @@ const MateriMockup = () => {
 };
 
 /* ── SLIDES 5-17 MOCKUPS: Unchanged (next phases) ── */
-const LatihanMockup = () => (
-  <MockupFrame title="TUGAS - LATIHAN MANDIRI" accentColor="text-yellow-400">
-    <div className="p-3 space-y-2">
-      <p className="text-[9px] text-yellow-300 font-bold text-center">TUGAS - LATIHAN MANDIRI</p>
-      {["KELAS 7", "KELAS 8", "KELAS 9"].map((k) => (
-        <div key={k} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
-          <div className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-yellow-400/40" />
-            <span className="text-[8px] text-white/70">{k}</span>
+/* ── SLIDE 5 MOCKUP: Latihan Mandiri ── */
+const LatihanMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: { frameTitle: "TUGAS - LATIHAN MANDIRI", sectionTitle: "TUGAS - LATIHAN MANDIRI", grades: ["KELAS 7", "KELAS 8", "KELAS 9"], action: "BUKA" },
+    en: { frameTitle: "PRACTICE TASKS",          sectionTitle: "PRACTICE TASKS",          grades: ["GRADE 7", "GRADE 8", "GRADE 9"], action: "OPEN" },
+    ja: { frameTitle: "練習課題",                  sectionTitle: "練習課題",                  grades: ["中学1年",  "中学2年",  "中学3年"],  action: "開く" },
+  }[language];
+  return (
+    <MockupFrame title={m.frameTitle} accentColor="text-yellow-400">
+      <div className="p-3 space-y-2">
+        <p className="text-[9px] text-yellow-300 font-bold text-center">{m.sectionTitle}</p>
+        {m.grades.map((k) => (
+          <div key={k} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-yellow-400/40" />
+              <span className="text-[8px] text-white/70">{k}</span>
+            </div>
+            <span className="text-[7px] text-yellow-400">{m.action}</span>
           </div>
-          <span className="text-[7px] text-yellow-400">BUKA</span>
-        </div>
-      ))}
-    </div>
-  </MockupFrame>
-);
+        ))}
+      </div>
+    </MockupFrame>
+  );
+};
 
-const GameMockup = () => (
-  <MockupFrame title="MATH GAME ARENA" accentColor="text-orange-400">
-    <div className="p-3 space-y-2">
-      <p className="text-[9px] text-orange-300 font-bold text-center">MATH GAME ARENA</p>
-      {["KELAS 7", "KELAS 8", "KELAS 9"].map((k) => (
-        <div key={k} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
-          <div className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-orange-400/40" />
-            <span className="text-[8px] text-white/70">{k}</span>
+/* ── SLIDE 7 MOCKUP: Math Game Arena ── */
+const GameMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: { grades: ["KELAS 7", "KELAS 8", "KELAS 9"], action: "MAIN" },
+    en: { grades: ["GRADE 7", "GRADE 8", "GRADE 9"], action: "PLAY" },
+    ja: { grades: ["中学1年",  "中学2年",  "中学3年"],  action: "プレイ" },
+  }[language];
+  return (
+    <MockupFrame title="MATH GAME ARENA" accentColor="text-orange-400">
+      <div className="p-3 space-y-2">
+        <p className="text-[9px] text-orange-300 font-bold text-center">MATH GAME ARENA</p>
+        {m.grades.map((k) => (
+          <div key={k} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-orange-400/40" />
+              <span className="text-[8px] text-white/70">{k}</span>
+            </div>
+            <span className="text-[7px] text-orange-400">{m.action}</span>
           </div>
-          <span className="text-[7px] text-orange-400">MAIN</span>
-        </div>
-      ))}
-    </div>
-  </MockupFrame>
-);
+        ))}
+      </div>
+    </MockupFrame>
+  );
+};
 
-const KalkulatorMockup = () => (
-  <MockupFrame title="KALKULATOR SCIENTIFIC" accentColor="text-purple-400">
+/* ── SLIDE 8 MOCKUP: Kalkulator Scientific ── */
+const KalkulatorMockup = () => {
+  const { language } = useLanguage();
+  const frameTitle = { id: "KALKULATOR SCIENTIFIC", en: "SCIENTIFIC CALCULATOR", ja: "関数電卓" }[language];
+  return (
+  <MockupFrame title={frameTitle} accentColor="text-purple-400">
     <div className="p-2">
       <div className="bg-white/5 rounded mb-2 h-8 flex items-end justify-end pr-2">
         <span className="text-[10px] text-white/80">0</span>
@@ -211,7 +233,8 @@ const KalkulatorMockup = () => (
       </div>
     </div>
   </MockupFrame>
-);
+  );
+};
 
 const OlimpiadeMockup = () => (
   <MockupFrame title="OLIMPIADE MATEMATIKA" accentColor="text-yellow-400">
@@ -454,23 +477,32 @@ const RuangGuruMockup = () => {
   );
 };
 
-const LKPDMockup = () => (
-  <MockupFrame title="LKPD" accentColor="text-cyan-400">
-    <div className="p-3 space-y-2">
-      <p className="text-[8px] text-cyan-300 font-bold text-center">📋 LEMBAR KERJA PESERTA DIDIK</p>
-      {["KELAS 7", "KELAS 8", "KELAS 9"].map((k) => (
-        <div key={k} className="flex items-center gap-2 bg-white/5 border border-cyan-400/20 rounded px-2 py-1.5">
-          <div className="w-4 h-4 rounded bg-cyan-500/30 flex items-center justify-center text-[8px]">🎓</div>
-          <div className="flex-1">
-            <p className="text-[8px] text-white/80 font-semibold">{k}</p>
-            <p className="text-[5.5px] text-white/40">LKPD matematika SMP</p>
+/* ── SLIDE 6 MOCKUP: LKPD ── */
+const LKPDMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: { sectionTitle: "📋 LEMBAR KERJA PESERTA DIDIK", grades: ["KELAS 7", "KELAS 8", "KELAS 9"], subtitle: "LKPD matematika SMP",        action: "BUKA" },
+    en: { sectionTitle: "📋 STUDENT WORKSHEETS",          grades: ["GRADE 7", "GRADE 8", "GRADE 9"], subtitle: "Junior high math worksheet",   action: "OPEN" },
+    ja: { sectionTitle: "📋 学習ワークシート",              grades: ["中学1年",  "中学2年",  "中学3年"],  subtitle: "中学数学ワークシート",           action: "開く" },
+  }[language];
+  return (
+    <MockupFrame title="LKPD" accentColor="text-cyan-400">
+      <div className="p-3 space-y-2">
+        <p className="text-[8px] text-cyan-300 font-bold text-center">{m.sectionTitle}</p>
+        {m.grades.map((k) => (
+          <div key={k} className="flex items-center gap-2 bg-white/5 border border-cyan-400/20 rounded px-2 py-1.5">
+            <div className="w-4 h-4 rounded bg-cyan-500/30 flex items-center justify-center text-[8px]">🎓</div>
+            <div className="flex-1">
+              <p className="text-[8px] text-white/80 font-semibold">{k}</p>
+              <p className="text-[5.5px] text-white/40">{m.subtitle}</p>
+            </div>
+            <span className="text-[6px] text-cyan-400 font-bold">{m.action}</span>
           </div>
-          <span className="text-[6px] text-cyan-400 font-bold">BUKA</span>
-        </div>
-      ))}
-    </div>
-  </MockupFrame>
-);
+        ))}
+      </div>
+    </MockupFrame>
+  );
+};
 
 /* ── SLIDE 2 MOCKUP: Navigasi Aplikasi ── */
 const NavPetunjukMockup = () => {
@@ -764,78 +796,214 @@ function getSlides(language: Language): Slide[] {
       mockup: <MateriMockup />,
     },
     /* ══════════════════════════════════════════════════════════
-       SLIDES 5-17 — Unchanged (still Indonesian; next phases)
+       SLIDES 5-8 — Trilingual ✅  |  9-17 — Next phases
     ══════════════════════════════════════════════════════════ */
-    {
-      id: 4,
-      title: "Tugas - Latihan Mandiri",
-      icon: <ClipboardList className="w-8 h-8" />,
-      color: "text-yellow-400",
-      bgGradient: "from-yellow-900/20 to-amber-900/20",
-      description: "Latihan soal per topik untuk menguji pemahaman kamu. Tersedia soal latihan untuk setiap bab dengan langsung diberikan jawaban dan pembahasannya.",
-      steps: [
-        "Pilih 'TUGAS - LATIHAN MANDIRI' dari Menu Utama",
-        "Pilih kelas (7, 8, atau 9) yang sesuai",
-        "Pilih topik/bab yang ingin dilatih",
-        "Kerjakan soal dan periksa jawabanmu",
-      ],
-      submenus: ["Kelas 7 — soal latihan tiap bab", "Kelas 8 — soal latihan tiap bab", "Kelas 9 — soal latihan tiap bab"],
-      mockup: <LatihanMockup />,
-    },
-    {
-      id: 18,
-      title: "LKPD (Lembar Kerja Peserta Didik)",
-      icon: <ClipboardCheck className="w-8 h-8" />,
-      color: "text-cyan-400",
-      bgGradient: "from-cyan-900/30 to-teal-900/30",
-      description: "Lembar Kerja Peserta Didik (LKPD) interaktif yang dirancang untuk membantu siswa memahami konsep matematika melalui aktivitas belajar terstruktur. Setiap LKPD dilengkapi dengan kegiatan eksplorasi, latihan soal, serta refleksi pembelajaran.",
-      steps: [
-        "Pilih 'LKPD' dari Menu Utama",
-        "Pilih kelas (7, 8, atau 9) sesuai dengan jenjangmu",
-        "Pilih topik/materi LKPD yang ingin dikerjakan",
-        "Ikuti petunjuk dan kerjakan setiap aktivitas dengan seksama",
-        "Refleksikan hasil pembelajaran di bagian akhir LKPD",
-      ],
-      submenus: [
-        "LKPD Kelas 7 — sesuai materi kelas 7 SMP",
-        "LKPD Kelas 8 — sesuai materi kelas 8 SMP",
-        "LKPD Kelas 9 — sesuai materi kelas 9 SMP",
-      ],
-      mockup: <LKPDMockup />,
-    },
-    {
-      id: 5,
-      title: "Math Game Arena",
-      icon: <Gamepad2 className="w-8 h-8" />,
-      color: "text-orange-400",
-      bgGradient: "from-orange-900/20 to-red-900/20",
-      description: "Belajar matematika sambil bermain! Math Game Arena menghadirkan game interaktif bertema matematika yang seru dan menantang untuk setiap jenjang kelas.",
-      steps: [
-        "Pilih 'MATH GAME ARENA' dari Menu Utama",
-        "Pilih kelas yang sesuai (7, 8, atau 9)",
-        "Pilih jenis game yang ingin dimainkan",
-        "Kerjakan soal matematika dalam format game yang menyenangkan dengan cara menekan meteor pada jawaban yang benar maka pesawat otomatis akan menembak dan keluar notif benar, namun jika menekan meteor dengan jawaban yang salah maka akan keluar notif salah",
-      ],
-      submenus: ["Kelas 7 - Game Materi Kelas 7", "Kelas 8 - Game Materi Kelas 8", "Kelas 9 - Game Materi Kelas 9"],
-      mockup: <GameMockup />,
-    },
-    {
-      id: 6,
-      title: "Kalkulator Scientific",
-      icon: <Calculator className="w-8 h-8" />,
-      color: "text-purple-400",
-      bgGradient: "from-purple-900/20 to-violet-900/20",
-      description: "Kalkulator ilmiah lengkap dengan fungsi trigonometri, logaritma, akar, pangkat, dan banyak lagi. Cocok untuk membantu mengerjakan soal matematika yang kompleks.",
-      steps: [
-        "Pilih 'KALKULATOR SCIENTIFIC' dari Menu Utama",
-        "Ketik angka menggunakan tombol angka di layar",
-        "Pilih fungsi matematika (sin, cos, tan, log, dll)",
-        "Tekan '=' untuk mendapatkan hasil perhitungan",
-        "Gunakan tombol 'AC' untuk menghapus semua / 'DEL' untuk hapus satu digit",
-      ],
-      submenus: ["Mode NORM — perhitungan normal", "Mode MATH — tampilan matematika", "Mode FRAC — perhitungan pecahan", "Mode DEG/RAD — sudut derajat/radian"],
-      mockup: <KalkulatorMockup />,
-    },
+
+    /* ── 5: Latihan Mandiri (id 4) ── */
+    (() => {
+      const s5 = {
+        id: {
+          title: "Tugas - Latihan Mandiri",
+          desc: "Latihan soal per topik untuk menguji pemahaman kamu. Tersedia soal latihan untuk setiap bab dengan langsung diberikan jawaban dan pembahasannya.",
+          steps: [
+            "Pilih 'TUGAS - LATIHAN MANDIRI' dari Menu Utama",
+            "Pilih kelas (7, 8, atau 9) yang sesuai",
+            "Pilih topik/bab yang ingin dilatih",
+            "Kerjakan soal dan periksa jawabanmu",
+          ],
+          submenus: ["Kelas 7 — soal latihan tiap bab", "Kelas 8 — soal latihan tiap bab", "Kelas 9 — soal latihan tiap bab"],
+        },
+        en: {
+          title: "Practice Tasks — Independent Exercises",
+          desc: "Topic-by-topic practice questions to test your understanding. Practice problems are available for every chapter, with answers and explanations provided immediately.",
+          steps: [
+            "Select 'PRACTICE TASKS' from the Main Menu",
+            "Choose the appropriate grade (7, 8, or 9)",
+            "Select the topic or chapter you want to practice",
+            "Work through the problems and check your answers",
+          ],
+          submenus: ["Grade 7 — practice problems for each chapter", "Grade 8 — practice problems for each chapter", "Grade 9 — practice problems for each chapter"],
+        },
+        ja: {
+          title: "練習課題 — 自主演習",
+          desc: "理解度をテストするためのトピック別練習問題。各章の練習問題に解答と解説がすぐに確認できます。",
+          steps: [
+            "メインメニューから「練習課題」を選択",
+            "学年（中学1・2・3年）を選択",
+            "練習したいトピックまたは章を選択",
+            "問題を解いて答えを確認しよう",
+          ],
+          submenus: ["中学1年 — 各章の練習問題", "中学2年 — 各章の練習問題", "中学3年 — 各章の練習問題"],
+        },
+      }[language];
+      return {
+        id: 4,
+        title: s5.title,
+        icon: <ClipboardList className="w-8 h-8" />,
+        color: "text-yellow-400",
+        bgGradient: "from-yellow-900/20 to-amber-900/20",
+        description: s5.desc,
+        steps: s5.steps,
+        submenus: s5.submenus,
+        mockup: <LatihanMockup />,
+      };
+    })(),
+
+    /* ── 6: LKPD (id 18) ── */
+    (() => {
+      const s6 = {
+        id: {
+          title: "LKPD (Lembar Kerja Peserta Didik)",
+          desc: "Lembar Kerja Peserta Didik (LKPD) interaktif yang dirancang untuk membantu siswa memahami konsep matematika melalui aktivitas belajar terstruktur. Setiap LKPD dilengkapi dengan kegiatan eksplorasi, latihan soal, serta refleksi pembelajaran.",
+          steps: [
+            "Pilih 'LKPD' dari Menu Utama",
+            "Pilih kelas (7, 8, atau 9) sesuai dengan jenjangmu",
+            "Pilih topik/materi LKPD yang ingin dikerjakan",
+            "Ikuti petunjuk dan kerjakan setiap aktivitas dengan seksama",
+            "Refleksikan hasil pembelajaran di bagian akhir LKPD",
+          ],
+          submenus: ["LKPD Kelas 7 — sesuai materi kelas 7 SMP", "LKPD Kelas 8 — sesuai materi kelas 8 SMP", "LKPD Kelas 9 — sesuai materi kelas 9 SMP"],
+        },
+        en: {
+          title: "LKPD (Student Worksheets)",
+          desc: "Interactive Student Worksheets (LKPD) designed to help students understand math concepts through structured learning activities. Each LKPD includes exploration activities, practice problems, and learning reflection.",
+          steps: [
+            "Select 'LKPD' from the Main Menu",
+            "Choose your grade (7, 8, or 9)",
+            "Select the LKPD topic or material you want to work on",
+            "Follow the instructions and complete each activity carefully",
+            "Reflect on your learning in the final section of the LKPD",
+          ],
+          submenus: ["LKPD Grade 7 — for Grade 7 junior high materials", "LKPD Grade 8 — for Grade 8 junior high materials", "LKPD Grade 9 — for Grade 9 junior high materials"],
+        },
+        ja: {
+          title: "LKPD（学習ワークシート）",
+          desc: "構造化された学習活動を通じて数学の概念を理解するためのインタラクティブな学習ワークシート（LKPD）。各LKPDには探究活動、練習問題、学習の振り返りが含まれています。",
+          steps: [
+            "メインメニューから「LKPD」を選択",
+            "学年（中学1・2・3年）を選択",
+            "取り組みたいLKPDのトピックまたは教材を選択",
+            "指示に従い、各アクティビティを丁寧に進める",
+            "LKPDの最後のセクションで学習を振り返ろう",
+          ],
+          submenus: ["LKPD 中学1年 — 中学1年の教材に対応", "LKPD 中学2年 — 中学2年の教材に対応", "LKPD 中学3年 — 中学3年の教材に対応"],
+        },
+      }[language];
+      return {
+        id: 18,
+        title: s6.title,
+        icon: <ClipboardCheck className="w-8 h-8" />,
+        color: "text-cyan-400",
+        bgGradient: "from-cyan-900/30 to-teal-900/30",
+        description: s6.desc,
+        steps: s6.steps,
+        submenus: s6.submenus,
+        mockup: <LKPDMockup />,
+      };
+    })(),
+
+    /* ── 7: Math Game Arena (id 5) ── */
+    (() => {
+      const s7 = {
+        id: {
+          title: "Math Game Arena",
+          desc: "Belajar matematika sambil bermain! Math Game Arena menghadirkan game interaktif bertema matematika yang seru dan menantang untuk setiap jenjang kelas.",
+          steps: [
+            "Pilih 'MATH GAME ARENA' dari Menu Utama",
+            "Pilih kelas yang sesuai (7, 8, atau 9)",
+            "Pilih jenis game yang ingin dimainkan",
+            "Kerjakan soal matematika dalam format game yang menyenangkan dengan cara menekan meteor pada jawaban yang benar maka pesawat otomatis akan menembak dan keluar notif benar, namun jika menekan meteor dengan jawaban yang salah maka akan keluar notif salah",
+          ],
+          submenus: ["Kelas 7 - Game Materi Kelas 7", "Kelas 8 - Game Materi Kelas 8", "Kelas 9 - Game Materi Kelas 9"],
+        },
+        en: {
+          title: "Math Game Arena",
+          desc: "Learn math while playing! Math Game Arena offers fun and challenging interactive math-themed games for every grade level.",
+          steps: [
+            "Select 'MATH GAME ARENA' from the Main Menu",
+            "Choose the appropriate grade (7, 8, or 9)",
+            "Select the game you want to play",
+            "Solve math problems in a fun game format — tap the meteor with the correct answer and the spaceship fires automatically; tapping a wrong answer shows an incorrect notification",
+          ],
+          submenus: ["Grade 7 — Grade 7 Math Games", "Grade 8 — Grade 8 Math Games", "Grade 9 — Grade 9 Math Games"],
+        },
+        ja: {
+          title: "Math Game Arena",
+          desc: "遊びながら数学を学ぼう！Math Game Arenaは、各学年向けの楽しくて挑戦的なインタラクティブ数学ゲームを提供します。",
+          steps: [
+            "メインメニューから「MATH GAME ARENA」を選択",
+            "学年（中学1・2・3年）を選択",
+            "遊びたいゲームを選択",
+            "ゲーム形式で数学の問題を解こう — 正しい答えの隕石をタップすると宇宙船が自動発射し正解通知が表示される。誤った答えをタップすると不正解通知が表示されます",
+          ],
+          submenus: ["中学1年 — 中学1年の数学ゲーム", "中学2年 — 中学2年の数学ゲーム", "中学3年 — 中学3年の数学ゲーム"],
+        },
+      }[language];
+      return {
+        id: 5,
+        title: s7.title,
+        icon: <Gamepad2 className="w-8 h-8" />,
+        color: "text-orange-400",
+        bgGradient: "from-orange-900/20 to-red-900/20",
+        description: s7.desc,
+        steps: s7.steps,
+        submenus: s7.submenus,
+        mockup: <GameMockup />,
+      };
+    })(),
+
+    /* ── 8: Kalkulator Scientific (id 6) ── */
+    (() => {
+      const s8 = {
+        id: {
+          title: "Kalkulator Scientific",
+          desc: "Kalkulator ilmiah lengkap dengan fungsi trigonometri, logaritma, akar, pangkat, dan banyak lagi. Cocok untuk membantu mengerjakan soal matematika yang kompleks.",
+          steps: [
+            "Pilih 'KALKULATOR SCIENTIFIC' dari Menu Utama",
+            "Ketik angka menggunakan tombol angka di layar",
+            "Pilih fungsi matematika (sin, cos, tan, log, dll)",
+            "Tekan '=' untuk mendapatkan hasil perhitungan",
+            "Gunakan tombol 'AC' untuk menghapus semua / 'DEL' untuk hapus satu digit",
+          ],
+          submenus: ["Mode NORM — perhitungan normal", "Mode MATH — tampilan matematika", "Mode FRAC — perhitungan pecahan", "Mode DEG/RAD — sudut derajat/radian"],
+        },
+        en: {
+          title: "Scientific Calculator",
+          desc: "A complete scientific calculator with trigonometric functions, logarithms, square roots, powers, and much more. Perfect for solving complex math problems.",
+          steps: [
+            "Select 'SCIENTIFIC CALCULATOR' from the Main Menu",
+            "Enter numbers using the digit buttons on screen",
+            "Select a math function (sin, cos, tan, log, etc.)",
+            "Press '=' to get the calculation result",
+            "Use 'AC' to clear everything / 'DEL' to delete one digit",
+          ],
+          submenus: ["Mode NORM — normal calculation", "Mode MATH — math display format", "Mode FRAC — fraction calculation", "Mode DEG/RAD — degrees / radians"],
+        },
+        ja: {
+          title: "関数電卓",
+          desc: "三角関数、対数、平方根、べき乗など多彩な機能を備えた完全な関数電卓。複雑な数学の問題を解くのに最適です。",
+          steps: [
+            "メインメニューから「関数電卓」を選択",
+            "画面の数字ボタンで数値を入力",
+            "数学関数（sin、cos、tan、logなど）を選択",
+            "「=」を押して計算結果を表示",
+            "「AC」で全消去 / 「DEL」で1桁削除",
+          ],
+          submenus: ["Mode NORM — 通常計算", "Mode MATH — 数式表示", "Mode FRAC — 分数計算", "Mode DEG/RAD — 度／ラジアン"],
+        },
+      }[language];
+      return {
+        id: 6,
+        title: s8.title,
+        icon: <Calculator className="w-8 h-8" />,
+        color: "text-purple-400",
+        bgGradient: "from-purple-900/20 to-violet-900/20",
+        description: s8.desc,
+        steps: s8.steps,
+        submenus: s8.submenus,
+        mockup: <KalkulatorMockup />,
+      };
+    })(),
     {
       id: 7,
       title: "Olimpiade Matematika",
