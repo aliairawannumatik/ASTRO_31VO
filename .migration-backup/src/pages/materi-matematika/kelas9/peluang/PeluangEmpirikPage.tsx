@@ -211,14 +211,18 @@ const PeluangEmpirikPage = () => {
   const th_sep = language === "id" ? "." : "{,}";       // thousands separator
 
   const pMata4  = language === "id" ? "P(\\text{mata 4})"    : language === "en" ? "P(\\text{face 4})"  : "P(\\text{4の目})";
-  const fCacat  = language === "id" ? "f_{\\text{cacat}}"    : language === "en" ? "f_{\\text{def}}"    : "f_{\\text{不良}}";
-  const fBaik   = language === "id" ? "f_{\\text{baik}}"     : language === "en" ? "f_{\\text{good}}"   : "f_{\\text{良}}";
-  const pCacat  = language === "id" ? "P(\\text{cacat})"     : language === "en" ? "P(\\text{def})"     : "P(\\text{不良})";
-  const pBaik   = language === "id" ? "P(\\text{baik})"      : language === "en" ? "P(\\text{good})"   : "P(\\text{良})";
+  const fCacat  = language === "id" ? "f_{\\text{cacat}}"       : language === "en" ? "f_{\\text{defective}}" : "f_{\\text{不良品}}";
+  const fBaik   = language === "id" ? "f_{\\text{baik}}"        : language === "en" ? "f_{\\text{good}}"      : "f_{\\text{良品}}";
+  const pCacat  = language === "id" ? "P(\\text{cacat})"        : language === "en" ? "P(\\text{defective})"  : "P(\\text{不良品})";
+  const pBaik   = language === "id" ? "P(\\text{baik})"         : language === "en" ? "P(\\text{good})"       : "P(\\text{良品})";
   const n1200   = language === "id" ? "1.200"  : "1{,}200";
   const n5000   = language === "id" ? "5.000"  : "5{,}000";
   const n1164   = language === "id" ? "1.164"  : "1{,}164";
   const lampu   = language === "id" ? "\\,\\mathrm{lampu}" : language === "en" ? "\\,\\mathrm{bulbs}" : "\\,\\mathrm{個}";
+
+  /* coin labels for Soal 2 (language-adaptive) */
+  const coinA = language === "id" ? "A" : language === "en" ? "H" : "表";
+  const coinG = language === "id" ? "G" : language === "en" ? "T" : "裏";
 
   /* formula Soal 1 */
   const formulaS1 = `${pMata4} = \\frac{8}{50} = \\frac{4}{25} = 0${dc}16`;
@@ -535,15 +539,15 @@ const PeluangEmpirikPage = () => {
                     </p>
                     <div>
                       <p className="font-body text-sm text-white/80 mb-1">{t.s2a}</p>
-                      <BlockMath math={`P(A) = \\frac{94}{200} = \\frac{47}{100} = 0${dc}47`} />
+                      <BlockMath math={`P(${coinA}) = \\frac{94}{200} = \\frac{47}{100} = 0${dc}47`} />
                     </div>
                     <div>
                       <p className="font-body text-sm text-white/80 mb-1">{t.s2b}</p>
-                      <BlockMath math={`P(G) = \\frac{106}{200} = \\frac{53}{100} = 0${dc}53`} />
+                      <BlockMath math={`P(${coinG}) = \\frac{106}{200} = \\frac{53}{100} = 0${dc}53`} />
                     </div>
                     <div>
                       <p className="font-body text-sm text-white/80 mb-1">{t.s2c}</p>
-                      <BlockMath math={`P(A) + P(G) = 0${dc}47 + 0${dc}53 = 1 \\checkmark`} />
+                      <BlockMath math={`P(${coinA}) + P(${coinG}) = 0${dc}47 + 0${dc}53 = 1 \\checkmark`} />
                     </div>
                     <div className="bg-yellow-900/20 border border-yellow-500/20 rounded p-2">
                       <p className="font-body text-xs text-yellow-300">{t.s2tip}</p>

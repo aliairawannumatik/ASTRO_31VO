@@ -48,6 +48,10 @@ After a GitHub re-import, `node_modules` are wiped in both the pnpm workspace ro
 - Curling `/api/chat` (or any `/api/*` POST/GET) against the external `$REPLIT_DEV_DOMAIN` root returns a plain 404 ("Cannot GET/POST ...") even though the identical request against `localhost:5000` correctly returns the expected 503 (missing `GROQ_API_KEY`) — an external-domain proxy quirk for this non-artifact-registered project, not an app bug. Don't chase it; verify real behavior via `localhost:<port>` curl or an actual browser Screenshot instead.
 - A first `externalUrl` Screenshot right after workflow restart can catch the SPA mid-hydration (blank white page) even though `curl` shows 200 OK. Retake the screenshot before concluding the app is broken.
 
+## Peluang Empirik Kelas 9 — 100% complete (2026-07-17)
+`PeluangEmpirikPage.tsx` (materi-matematika/kelas9/peluang/) + `LabPercobaanEmpirik.tsx` trilingual and tsc-clean.
+Key fixes applied: `\text{def}`→`\text{defective}`, `\text{不良}`→`\text{不良品}`, `\text{良}`→`\text{良品}` in fCacat/fBaik/pCacat/pBaik KaTeX vars; Soal 2 coin labels now language-adaptive (`coinA`/`coinG` vars: ID→A/G, EN→H/T, JA→表/裏). `lampu` unit already used `\,\mathrm{}` correctly. LabPercobaanEmpirik already had `useLanguage()` direct + full trilingual from a prior session.
+
 ## Bola & Kerucut — 100% complete (2026-07-16)
 Both `BolaPage.tsx` and `KerucutPage.tsx` (materi-matematika/kelas9/bangun-ruang-sisi-lengkung/) are 100% trilingual and tsc-clean as of this session. Confirmed via deep code audit (all Trans objects + example generators have complete id/en/ja keys). Screenshot tool catches loading screen for these pages consistently — verify via code audit + `npx tsc --noEmit` instead. No remaining work on these pages.
 
