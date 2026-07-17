@@ -22,7 +22,7 @@ type Q = {
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 const SimilarRightTrianglesPQRXYZ = () => (
-  <svg viewBox="0 0 275 148" width="275" height="148" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 275 148" width="275" height="148" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
     {/* Y axis */}
     <line x1="18" y1="6" x2="18" y2="128" stroke="#64748b" strokeWidth="1.5"/>
     <polygon points="18,4 14,12 22,12" fill="#64748b"/>
@@ -172,7 +172,7 @@ const DefinisiKesebangunanPage = () => {
           </div>
         </div>
 
-        <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4">
+        <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4 lm-kkg-hint">
           <p className="text-cyan-300 text-xs font-bold mb-2">📌 Ingat — Syarat Dua Bangun Sebangun</p>
           <div className="grid grid-cols-2 gap-2 text-xs font-body">
             {[
@@ -192,7 +192,7 @@ const DefinisiKesebangunanPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur lm-kkg-overlay" />
               <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-teal-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">

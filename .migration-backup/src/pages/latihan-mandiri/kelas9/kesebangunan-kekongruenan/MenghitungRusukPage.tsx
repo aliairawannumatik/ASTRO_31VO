@@ -13,7 +13,7 @@ type Q = { n: number; title: string; content?: string; math?: string; parts?: Pa
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 const TrapezoidABCDPQRSSVG = () => (
-  <svg viewBox="0 0 295 130" width="295" height="130" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 295 130" width="295" height="130" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
     <polygon points="25,108 115,108 97,48 47,48" fill="rgba(251,146,60,0.15)" stroke="#fb923c" strokeWidth="1.5"/>
     <text x="11" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
     <text x="116" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
@@ -32,7 +32,7 @@ const TrapezoidABCDPQRSSVG = () => (
 );
 
 const SimilarQuadNSVG = () => (
-  <svg viewBox="0 0 290 130" width="290" height="130" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 290 130" width="290" height="130" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
     <polygon points="25,108 100,108 80,48 25,55" fill="rgba(251,146,60,0.15)" stroke="#fb923c" strokeWidth="1.5"/>
     <polyline points="25,98 35,98 35,108" fill="none" stroke="#fb923c" strokeWidth="1"/>
     <text x="51" y="84" fill="#64748b" fontSize="15">✕</text>
@@ -47,7 +47,7 @@ const SimilarQuadNSVG = () => (
 );
 
 const SimilarRectRatioSVG = () => (
-  <svg viewBox="0 0 265 130" width="265" height="130" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 265 130" width="265" height="130" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
     <rect x="15" y="22" width="100" height="62" fill="rgba(251,146,60,0.15)" stroke="#fb923c" strokeWidth="1.5"/>
     <text x="4" y="19" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
     <text x="116" y="19" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
@@ -174,7 +174,7 @@ const MenghitungRusukPage = () => {
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
         </div>
-        <div className="mb-5 bg-orange-900/20 border border-orange-500/20 rounded-xl p-4">
+        <div className="mb-5 bg-orange-900/20 border border-orange-500/20 rounded-xl p-4 lm-kkg-hint">
           <p className="text-orange-300 text-xs font-bold mb-2">{t('practice.keyFormula')}</p>
           <div className="grid grid-cols-2 gap-2">
             {[
@@ -192,7 +192,7 @@ const MenghitungRusukPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-slate-900/80 to-amber-900/30 backdrop-blur" />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-slate-900/80 to-amber-900/30 backdrop-blur lm-kkg-overlay" />
               <div className="absolute inset-0 border border-orange-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-orange-400 to-amber-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">

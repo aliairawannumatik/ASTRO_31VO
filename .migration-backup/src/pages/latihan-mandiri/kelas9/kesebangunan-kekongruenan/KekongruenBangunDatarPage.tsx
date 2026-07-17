@@ -113,7 +113,7 @@ const KekongruenBangunDatarPage = () => {
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
         </div>
-        <div className="mb-5 bg-rose-900/20 border border-rose-500/20 rounded-xl p-4">
+        <div className="mb-5 bg-rose-900/20 border border-rose-500/20 rounded-xl p-4 lm-kkg-hint">
           <p className="text-rose-300 text-xs font-bold mb-2">📌 Empat Aksioma Kekongruenan Segitiga</p>
           <div className="grid grid-cols-4 gap-2 text-xs">
             {[
@@ -133,7 +133,7 @@ const KekongruenBangunDatarPage = () => {
           {questions.map((q, i) => (
             <div key={i} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.05}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
+              <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur lm-kkg-overlay" />
               <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
