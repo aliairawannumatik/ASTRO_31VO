@@ -1361,6 +1361,42 @@
 .light-mode .bg-amber-900\/20     { background-color: rgba(254,243,199,0.65) !important; }
 .light-mode .bg-rose-900\/20      { background-color: rgba(255,228,230,0.65) !important; }
 
+/* ── Kesebangunan/Kekongruenan latihan-mandiri: missing gradient + bg overrides ──
+   These pages use bg-gradient-to-br from-{color}-900/30 via-slate-900/80 to-{color2}-900/30.
+   The via-slate-900/80 is the dominant dark middle stop — must be overridden first.
+   Additionally, cyan and orange from/to stops and their concept-box bg-*-900/20 are missing. ── */
+
+/* via-slate-900/80 middle gradient stop → near-white in all light themes */
+.light-mode .via-slate-900\/80 {
+  --tw-gradient-via: rgba(248,250,252,0.80) var(--tw-gradient-via-position) !important;
+}
+
+/* gradient-from stops not yet covered */
+.light-mode .from-cyan-900\/30 {
+  --tw-gradient-from: rgba(207,250,254,0.55) var(--tw-gradient-from-position) !important;
+}
+.light-mode .from-orange-900\/30 {
+  --tw-gradient-from: rgba(255,237,213,0.55) var(--tw-gradient-from-position) !important;
+}
+
+/* gradient-to stops not yet covered */
+.light-mode .to-amber-900\/30 {
+  --tw-gradient-to: rgba(254,243,199,0.55) var(--tw-gradient-to-position) !important;
+}
+
+/* concept-box bg-*-900/20 missing from existing overrides */
+.light-mode .bg-cyan-900\/20    { background-color: rgba(207,250,254,0.70) !important; }
+.light-mode .bg-orange-900\/20  { background-color: rgba(255,237,213,0.70) !important; }
+.light-mode .bg-violet-900\/20  { background-color: rgba(237,233,254,0.70) !important; }
+.light-mode .bg-emerald-900\/20 { background-color: rgba(209,250,229,0.70) !important; }
+
+/* border-*-500/20 on light bg: make them a touch more visible */
+.light-mode .border-cyan-500\/20    { border-color: rgba(6,182,212,0.35) !important; }
+.light-mode .border-orange-500\/20  { border-color: rgba(249,115,22,0.35) !important; }
+.light-mode .border-violet-500\/20  { border-color: rgba(139,92,246,0.35) !important; }
+.light-mode .border-emerald-500\/20 { border-color: rgba(16,185,129,0.35) !important; }
+.light-mode .border-rose-500\/20    { border-color: rgba(244,63,94,0.35) !important; }
+
 /* ── Kesimpulan text colors used across Koordinat Kartesius sub-materi ── */
 .light-mode .text-rose-100\/90    { color: #9f1239 !important; }
 .theme-ocean .text-rose-100\/90   { color: #fecdd3 !important; }
