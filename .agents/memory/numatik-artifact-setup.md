@@ -94,17 +94,16 @@ Notes for future pages:
 - KaTeX \text{} violations: PemfaktoranPage baris 96/125 (Jika, atau, cari, faktorkan); DiskriminanPage baris 200 (atau)
 - PenerapanKontekstualPage: soal cerita "pedagang jeruk Rp.96.000" + "kolam renang 8×6 m" + "bilangan bulat berurutan" — tidak ada nama tokoh, tapi konteks & mata uang perlu dilokalisasi
 
-## Fungsi Kuadrat Kelas 9 — progress (2026-07-17)
-Hub ✅ · TitikPotong ✅ · MenyusunFungsi ✅ · BentukUmumKarakteristik ✅ · SumbuSimetri ✅ · MenggambarGrafik ⏳ · PenerapanNilaiMaksMin ⏳ · AngryBirdParabola ⏳
+## Fungsi Kuadrat Kelas 9 — 100% SELESAI (2026-07-17)
+Hub ✅ · TitikPotong ✅ · MenyusunFungsi ✅ · BentukUmumKarakteristik ✅ · SumbuSimetri ✅ · MenggambarGrafik ✅ · PenerapanNilaiMaksMin ✅ · AngryBirdParabola ✅
 - TitikPotong: EN "INTERCEPTS WITH THE AXES" / JA "軸との切片" — tsc 0, screenshot ✅
 - MenyusunFungsi: EN "FORMING QUADRATIC FUNCTIONS" / JA "二次関数の作成" — tsc 0, screenshot ✅
 - BentukUmumKarakteristik: EN "GENERAL FORM & GRAPH CHARACTERISTICS" / JA "一般形とグラフの特徴" — tsc 0, JA screenshot ✅ (EN loading screen — Suspense timing, normal). SVG labels lang-adaptive: "Opens Upward ↑"/"上に開く ↑", "Opens Downward ↓"/"下に開く ↓". kAnd fix: `\text{dan}` → kAnd template literal.
 - SumbuSimetri: EN "AXIS OF SYMMETRY & VERTEX (OPTIMUM)" / JA "対称軸と頂点（最適値）" — tsc 0, screenshot EN+JA ✅. SVG labels lang-adaptive: "Vertex (xp, yp)"/"頂点 (xp, yp)", "Axis of Symmetry"/"対称軸".
-- MenggambarGrafik: EN "GRAPHING QUADRATIC FUNCTIONS" / JA "二次関数のグラフの描き方" — tsc 0, screenshots EN+JA ✅. kAnd/kOr fix pattern: `"\\text{ dan }"/"\\text{ and }"/"\\text{と}"` dan `"\\text{ atau }"/"\\text{ or }"/"\\text{または}"`.
-- PenerapanNilaiMaksMinPage (6A DONE): EN "APPLICATIONS OF QUADRATIC FUNCTIONS" / JA "二次関数の応用" — tsc 0, screenshots EN+JA ✅. kSec/kMeter fix; soal 3+6 currency: ID Rp→EN/JA `\$75`/`\$11{,}250` dan `\$30`/`\$600` (KaTeX `\---
-name: Numatik artifact setup
-description: .migration-backup wiring, port gotchas, trilingual page pattern, Statistika materi translation status
----
+- MenggambarGrafik: EN "GRAPHING QUADRATIC FUNCTIONS" / JA "二次関数のグラフの描き方" — tsc 0, screenshots EN+JA ✅. kAnd/kOr fix pattern.
+- PenerapanNilaiMaksMin: EN "APPLICATIONS OF QUADRATIC FUNCTIONS" / JA "二次関数の応用" — tsc 0, screenshots EN+JA ✅.
+- AngryBirdParabola (6B DONE): `src/components/AngryBirdParabola.tsx` — useLanguage() internal via langRef (memoized loop pattern). getTrans(lang) dict covers all 20+ strings: hints, HUD shots, canvas overlay won/lost/score, header, eq_label, peak_label, peak_horiz, peak_height, pull_hint, coeff_a/b/c, won_title, won_replay, concept paragraph. tsc 0 error. No prop change needed in PenerapanNilaiMaksMinPage.tsx — component is self-contained.
+- TOPIK FUNGSI KUADRAT KELAS 9 = 100% SELESAI (7 halaman materi + 1 komponen AngryBirdParabola)
 
 ## Environment / infra
 - This project (`numatik`) has an `artifacts/numatik` directory but **no `artifact.toml`** — predates/bypasses the standard artifacts registration system. The `Screenshot` tool's `appPreview` mode cannot target it via `artifactDirName` ("Artifact not found").
