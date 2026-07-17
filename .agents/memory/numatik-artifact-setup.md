@@ -52,6 +52,14 @@ After a GitHub re-import, `node_modules` are wiped in both the pnpm workspace ro
 `PeluangTeoretikPage.tsx` (materi-matematika/kelas9/peluang/) rewritten from ID-only to full trilingual.
 KaTeX \text{} vars (language-adaptive): kGenap (genap/even/偶数), kAs (As/Ace/エース), kMerah (merah/red/赤), kKingHitam (King hitam/Black King/黒のキング), kJumlah7 (jumlah=7/sum=7/和=7), kSelisih2 (selisih=2/difference=2/差=2), kJumlahP (jumlah prima/prime sum/素数の和). Badges: MUDAH/SEDANG/SULIT → EASY/MEDIUM/HARD → 基本/標準/発展. RangkumanSection trilingual. Both EN+JA screenshots rendered fully (no loading screen).
 
+## Peluang Kejadian Majemuk Kelas 9 — 100% complete (2026-07-17)
+`PeluangKejadianMajemukPage.tsx` rewritten to full trilingual. FILE TERAKHIR topik Peluang — Peluang Kelas 9 100% done.
+\mathrm{} vars: kAce (As/Ace/エース), kDuaMerah, kDuaBiru (both blue/両方青), kMin1Merah (at least 1 red/少なくとも1つ赤).
+indDesc uses dangerouslySetInnerHTML (has <strong> tag inline).
+condAnalogyText uses dangerouslySetInnerHTML (has <em> tag inline).
+expandedSections.includes(id) fixed in SectionHeader (was `true` in original).
+Remaining Kelas 9 TODOs: Kesebangunan (3 materi + hub), Persamaan Kuadrat (7 materi + hub).
+
 ## Ruang Sampel Kelas 9 — 100% complete (2026-07-17)
 `RuangSampelPage.tsx` (materi-matematika/kelas9/peluang/) rewritten to full trilingual.
 Coin labels language-adaptive: coinH (A/H/表), coinT (G/T/裏) — used in all BlockMath via template literals and table data.
