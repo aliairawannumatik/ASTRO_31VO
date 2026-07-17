@@ -95,10 +95,12 @@ Notes for future pages:
 - PenerapanKontekstualPage: soal cerita "pedagang jeruk Rp.96.000" + "kolam renang 8×6 m" + "bilangan bulat berurutan" — tidak ada nama tokoh, tapi konteks & mata uang perlu dilokalisasi
 
 ## Fungsi Kuadrat Kelas 9 — progress (2026-07-17)
-Hub ✅ · TitikPotong ✅ · MenyusunFungsi ✅ · BentukUmumKarakteristik ⏳ · SumbuSimetri ⏳ · MenggambarGrafik ⏳ · PenerapanNilaiMaksMin ⏳ · AngryBirdParabola ⏳
+Hub ✅ · TitikPotong ✅ · MenyusunFungsi ✅ · BentukUmumKarakteristik ✅ · SumbuSimetri ✅ · MenggambarGrafik ⏳ · PenerapanNilaiMaksMin ⏳ · AngryBirdParabola ⏳
 - TitikPotong: EN "INTERCEPTS WITH THE AXES" / JA "軸との切片" — tsc 0, screenshot ✅
 - MenyusunFungsi: EN "FORMING QUADRATIC FUNCTIONS" / JA "二次関数の作成" — tsc 0, screenshot ✅
-- Sisa 4 sub-materi: BentukUmum (1 \text{dan} + 2 SVG label), SumbuSimetri (2 SVG label), MenggambarGrafik (2 \text{}), PenerapanNilaiMaksMin (9 \text{} + Rp + AngryBirdParabola trilingual)
+- BentukUmumKarakteristik: EN "GENERAL FORM & GRAPH CHARACTERISTICS" / JA "一般形とグラフの特徴" — tsc 0, JA screenshot ✅ (EN loading screen — Suspense timing, normal). SVG labels lang-adaptive: "Opens Upward ↑"/"上に開く ↑", "Opens Downward ↓"/"下に開く ↓". kAnd fix: `\text{dan}` → kAnd template literal.
+- SumbuSimetri: EN "AXIS OF SYMMETRY & VERTEX (OPTIMUM)" / JA "対称軸と頂点（最適値）" — tsc 0, screenshot EN+JA ✅. SVG labels lang-adaptive: "Vertex (xp, yp)"/"頂点 (xp, yp)", "Axis of Symmetry"/"対称軸".
+- Sisa 2 sub-materi: MenggambarGrafik, PenerapanNilaiMaksMin (+ AngryBirdParabola component 581 baris)
 
 ## Fungsi Kuadrat Kelas 9 — Hub selesai (2026-07-17)
 `FungsiKuadratPage.tsx` (hub) trilingual, tsc 0 error, screenshot-verified EN+JA.
