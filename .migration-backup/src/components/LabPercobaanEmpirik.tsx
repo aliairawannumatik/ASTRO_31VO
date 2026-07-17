@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FlaskConical, RotateCcw, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
 import { InlineMath } from "react-katex";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /* ─── DICE FACE (SVG dots) ─────────────────────────────── */
 const DOTS: Record<number, [number, number][]> = {
@@ -34,14 +35,14 @@ const DiceFace = ({ value, size = 96 }: { value: number; size?: number }) => (
 );
 
 /* ─── COIN FACE ─────────────────────────────────────────── */
-const CoinFace = ({ side, size = 96 }: { side: "angka" | "gambar"; size?: number }) => (
+const CoinFace = ({ side, size = 96, alt }: { side: "angka" | "gambar"; size?: number; alt?: string }) => (
   <div
     style={{ width: size, height: size }}
     className="rounded-full overflow-hidden border-2 border-yellow-400/60 shadow-lg shadow-yellow-900/40 shrink-0"
   >
     <img
       src={"/images/koin_fix_1776223721630.png"}
-      alt={side === "angka" ? "Angka" : "Gambar"}
+      alt={alt ?? (side === "angka" ? "Angka" : "Gambar")}
       style={{
         width: size * 2,
         height: size,
@@ -63,6 +64,8 @@ const BATCH_OPTIONS = [1, 5, 10, 50];
 
 /* ─── MAIN COMPONENT ────────────────────────────────────── */
 const LabPercobaanEmpirik: React.FC = () => {
+  const { language } = useLanguage();
+
   const [mode, setMode] = useState<Mode>("koin");
   const [isThrown, setIsThrown] = useState(false);
   const [spinning, setSpinning] = useState(false);
@@ -78,6 +81,124 @@ const LabPercobaanEmpirik: React.FC = () => {
       historyEndRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }, [history.length, showHistory]);
+
+  /* ── translations ── */
+  const t = {
+    id: {
+      headerTitle: "🧪 Laboratorium Peluang Empirik",
+      headerSub: "Lempar & buktikan sendiri — semakin banyak percobaan, semakin akurat!",
+      modeKoin: "🪙 Koin",
+      modeDadu: "🎲 Dadu",
+      batchLabel: "Jumlah lemparan sekaligus:",
+      throwing: "⏳ Melempar...",
+      throwBtn: (b: number) => b > 1 ? `🚀 LEMPAR (${b}×)` : "🚀 LEMPAR",
+      totalLabel: "Total percobaan:",
+      convergenceTitle: "Konvergensi ke Peluang Teoretik",
+      convergenceNote: "(garis putih = nilai teori)",
+      empLabel: "Emp:",
+      theoryLabel: "Teor:",
+      historyLabel: (n: number) => `Riwayat (${n} lemparan)`,
+      notYetThrown: "Belum dilempar",
+      spinning: "Melempar...",
+      resultAngka: "🪙 ANGKA",
+      resultGambar: "🪙 GAMBAR",
+      resultFace: (v: number | string) => `🎲 Mata ${v}`,
+      coinAngka: "angka",
+      coinGambar: "gambar",
+      barAngka: "🪙 Angka",
+      barGambar: "🪙 Gambar",
+      barFace: (v: number) => `🎲 Mata ${v}`,
+      formulaLabel: "Rumus yang sedang dihitung:",
+      moreTossesNote: "Coba lempar makin banyak — lihat bagaimana nilainya mendekati peluang teoritis!",
+      insightCoin: (n: number, pct: string) =>
+        `Peluang empirik Angka = ${pct} (mendekati 0,5 — peluang teoritisnya). Semakin banyak lemparan, semakin akurat!`,
+      insightDice: () =>
+        "Lihat bagaimana setiap mata dadu mendekati nilai 0,167 (= 1/6). Itulah Hukum Bilangan Besar!",
+      youThrew: (n: number) => `Kamu sudah melempar ${n} kali!`,
+      altAngka: "Angka",
+      altGambar: "Gambar",
+      formulaCoinKatex: (fA: number, n: number, pct: string) =>
+        `P(\\text{Angka}) = \\dfrac{${fA}}{${n}} = ${pct}`,
+      formulaDiceKatex: (n: number) =>
+        `P(\\text{Mata }k) = \\dfrac{f_k}{${n}}`,
+    },
+    en: {
+      headerTitle: "🧪 Empirical Probability Lab",
+      headerSub: "Toss & prove it yourself — more trials = more accurate!",
+      modeKoin: "🪙 Coin",
+      modeDadu: "🎲 Die",
+      batchLabel: "Throws per round:",
+      throwing: "⏳ Throwing...",
+      throwBtn: (b: number) => b > 1 ? `🚀 TOSS (${b}×)` : "🚀 TOSS",
+      totalLabel: "Total trials:",
+      convergenceTitle: "Convergence to Theoretical Probability",
+      convergenceNote: "(white line = theoretical value)",
+      empLabel: "Emp:",
+      theoryLabel: "Th:",
+      historyLabel: (n: number) => `History (${n} throws)`,
+      notYetThrown: "Not yet thrown",
+      spinning: "Throwing...",
+      resultAngka: "🪙 HEADS",
+      resultGambar: "🪙 TAILS",
+      resultFace: (v: number | string) => `🎲 Face ${v}`,
+      coinAngka: "heads",
+      coinGambar: "tails",
+      barAngka: "🪙 Heads",
+      barGambar: "🪙 Tails",
+      barFace: (v: number) => `🎲 Face ${v}`,
+      formulaLabel: "Formula being calculated:",
+      moreTossesNote: "Keep throwing — see how the values approach the theoretical probability!",
+      insightCoin: (n: number, pct: string) =>
+        `Empirical probability of Heads = ${pct} (approaching 0.5 — the theoretical value). More throws = more accurate!`,
+      insightDice: () =>
+        "See how each die face approaches 0.167 (= 1/6). That's the Law of Large Numbers!",
+      youThrew: (n: number) => `You've thrown ${n} times!`,
+      altAngka: "Heads",
+      altGambar: "Tails",
+      formulaCoinKatex: (fA: number, n: number, pct: string) =>
+        `P(\\text{Heads}) = \\dfrac{${fA}}{${n}} = ${pct}`,
+      formulaDiceKatex: (n: number) =>
+        `P(\\text{Face }k) = \\dfrac{f_k}{${n}}`,
+    },
+    ja: {
+      headerTitle: "🧪 経験的確率ラボ",
+      headerSub: "投げて自分で証明しよう — 試行回数が多いほど正確！",
+      modeKoin: "🪙 コイン",
+      modeDadu: "🎲 サイコロ",
+      batchLabel: "一度の投てき数：",
+      throwing: "⏳ 投げ中...",
+      throwBtn: (b: number) => b > 1 ? `🚀 投げる (${b}×)` : "🚀 投げる",
+      totalLabel: "総試行回数：",
+      convergenceTitle: "理論的確率への収束",
+      convergenceNote: "（白線 = 理論値）",
+      empLabel: "実験：",
+      theoryLabel: "理論：",
+      historyLabel: (n: number) => `履歴（${n}回）`,
+      notYetThrown: "まだ投げていない",
+      spinning: "投げ中...",
+      resultAngka: "🪙 表",
+      resultGambar: "🪙 裏",
+      resultFace: (v: number | string) => `🎲 ${v}の目`,
+      coinAngka: "表",
+      coinGambar: "裏",
+      barAngka: "🪙 表",
+      barGambar: "🪙 裏",
+      barFace: (v: number) => `🎲 ${v}の目`,
+      formulaLabel: "計算中の公式：",
+      moreTossesNote: "もっと投げてみよう — 値が理論的確率に近づく様子を見てください！",
+      insightCoin: (n: number, pct: string) =>
+        `表の経験的確率 = ${pct}（理論値0.5に近づいています）。投げるほど正確になります！`,
+      insightDice: () =>
+        "各目の確率が0.167（= 1/6）に近づく様子を見てください。これが大数の法則です！",
+      youThrew: (n: number) => `${n}回投げました！`,
+      altAngka: "表",
+      altGambar: "裏",
+      formulaCoinKatex: (fA: number, n: number, pct: string) =>
+        `P(\\text{表}) = \\dfrac{${fA}}{${n}} = ${pct}`,
+      formulaDiceKatex: (n: number) =>
+        `P(\\text{目}k) = \\dfrac{f_k}{${n}}`,
+    },
+  }[language];
 
   const resetLab = useCallback(() => {
     playPopSound();
@@ -138,7 +259,7 @@ const LabPercobaanEmpirik: React.FC = () => {
       <div className="space-y-1">
         <div className="flex justify-between text-xs font-body">
           <span className="text-white/70">{label}</span>
-          <span className={color}>Emp: {empirical.toFixed(3)} | Teor: {theoretical.toFixed(3)}</span>
+          <span className={color}>{t.empLabel} {empirical.toFixed(3)} | {t.theoryLabel} {theoretical.toFixed(3)}</span>
         </div>
         <div className="relative h-3 bg-white/10 rounded-full overflow-hidden">
           <motion.div
@@ -149,7 +270,7 @@ const LabPercobaanEmpirik: React.FC = () => {
           <div
             className="absolute top-0 h-full w-0.5 bg-white/60"
             style={{ left: `${theoretical * 100}%` }}
-            title={`Teoritik: ${theoretical}`}
+            title={`${t.theoryLabel} ${theoretical}`}
           />
         </div>
       </div>
@@ -173,8 +294,8 @@ const LabPercobaanEmpirik: React.FC = () => {
       <div className="flex items-center gap-3 px-5 py-4 border-b border-cyan-500/20 bg-cyan-900/20">
         <FlaskConical className="w-5 h-5 text-cyan-400 shrink-0" />
         <div>
-          <p className="font-display text-sm font-bold text-cyan-300">🧪 Laboratorium Peluang Empirik</p>
-          <p className="font-body text-xs text-white/50">Lempar & buktikan sendiri — semakin banyak percobaan, semakin akurat!</p>
+          <p className="font-display text-sm font-bold text-cyan-300">{t.headerTitle}</p>
+          <p className="font-body text-xs text-white/50">{t.headerSub}</p>
         </div>
       </div>
 
@@ -192,7 +313,7 @@ const LabPercobaanEmpirik: React.FC = () => {
                   : "bg-white/5 border-white/10 text-white/50 hover:border-white/30"
               }`}
             >
-              {m === "koin" ? "🪙 Koin" : "🎲 Dadu"}
+              {m === "koin" ? t.modeKoin : t.modeDadu}
             </button>
           ))}
         </div>
@@ -218,6 +339,7 @@ const LabPercobaanEmpirik: React.FC = () => {
                       : "angka"
                   }
                   size={96}
+                  alt={spinning ? t.altAngka : currentResult === "gambar" ? t.altGambar : t.altAngka}
                 />
               ) : (
                 <DiceFace value={spinning ? 3 : (currentResult as DiceResult) || 1} size={96} />
@@ -235,8 +357,8 @@ const LabPercobaanEmpirik: React.FC = () => {
                   className="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/50 text-cyan-200 font-display font-bold text-sm text-center"
                 >
                   {mode === "koin"
-                    ? currentResult === "angka" ? "🪙 ANGKA" : "🪙 GAMBAR"
-                    : `🎲 Mata ${currentResult}`}
+                    ? currentResult === "angka" ? t.resultAngka : t.resultGambar
+                    : t.resultFace(currentResult)}
                 </motion.div>
               )}
               {spinning && (
@@ -246,11 +368,11 @@ const LabPercobaanEmpirik: React.FC = () => {
                   animate={{ opacity: 1 }}
                   className="text-xs text-white/50 font-body animate-pulse"
                 >
-                  Melempar...
+                  {t.spinning}
                 </motion.div>
               )}
               {!spinning && currentResult === null && (
-                <p className="text-xs text-white/30 font-body">Belum dilempar</p>
+                <p className="text-xs text-white/30 font-body">{t.notYetThrown}</p>
               )}
             </AnimatePresence>
           </div>
@@ -259,7 +381,7 @@ const LabPercobaanEmpirik: React.FC = () => {
           <div className="flex-1 w-full space-y-3">
             {/* Batch selector */}
             <div className="space-y-1">
-              <p className="font-body text-xs text-white/50">Jumlah lemparan sekaligus:</p>
+              <p className="font-body text-xs text-white/50">{t.batchLabel}</p>
               <div className="flex gap-1.5 flex-wrap">
                 {BATCH_OPTIONS.map((b) => (
                   <button
@@ -285,7 +407,7 @@ const LabPercobaanEmpirik: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-display font-bold text-sm shadow-lg shadow-cyan-900/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:brightness-110"
               >
-                {spinning ? "⏳ Melempar..." : `🚀 LEMPAR${batch > 1 ? ` (${batch}×)` : ""}`}
+                {spinning ? t.throwing : t.throwBtn(batch)}
               </motion.button>
               <button
                 onClick={resetLab}
@@ -298,7 +420,7 @@ const LabPercobaanEmpirik: React.FC = () => {
 
             {/* Total counter */}
             <div className="flex items-center justify-between">
-              <p className="font-body text-xs text-white/40">Total percobaan:</p>
+              <p className="font-body text-xs text-white/40">{t.totalLabel}</p>
               <motion.span
                 key={n}
                 initial={{ scale: 1.3, color: "#22d3ee" }}
@@ -323,8 +445,10 @@ const LabPercobaanEmpirik: React.FC = () => {
               <div className="grid grid-cols-2 gap-2">
                 {(["angka", "gambar"] as CoinResult[]).map((side) => (
                   <div key={side} className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 text-center">
-                    <CoinFace side={side} size={36} />
-                    <p className="font-display text-xs font-bold text-white mt-1 capitalize">{side}</p>
+                    <CoinFace side={side} size={36} alt={side === "angka" ? t.altAngka : t.altGambar} />
+                    <p className="font-display text-xs font-bold text-white mt-1 capitalize">
+                      {side === "angka" ? t.coinAngka : t.coinGambar}
+                    </p>
                     <p className="font-body text-xl font-bold text-cyan-300">{coinStats[side]}</p>
                     <p className="font-body text-xs text-white/50">
                       P = {pct(coinStats[side])}
@@ -348,13 +472,13 @@ const LabPercobaanEmpirik: React.FC = () => {
             <div className="bg-slate-900/60 border border-white/10 rounded-xl p-3 space-y-2">
               <div className="flex items-center gap-2 mb-2">
                 <TrendingUp className="w-4 h-4 text-cyan-400" />
-                <p className="font-body text-xs font-semibold text-cyan-300">Konvergensi ke Peluang Teoretik</p>
-                <span className="text-xs text-white/30 font-body">(garis putih = nilai teori)</span>
+                <p className="font-body text-xs font-semibold text-cyan-300">{t.convergenceTitle}</p>
+                <span className="text-xs text-white/30 font-body">{t.convergenceNote}</span>
               </div>
               {mode === "koin" ? (
                 <div className="space-y-2">
-                  <ConvergenceBar freq={coinStats.angka} total={n} theoretical={0.5} label="🪙 Angka" color="text-cyan-400" />
-                  <ConvergenceBar freq={coinStats.gambar} total={n} theoretical={0.5} label="🪙 Gambar" color="text-green-400" />
+                  <ConvergenceBar freq={coinStats.angka} total={n} theoretical={0.5} label={t.barAngka} color="text-cyan-400" />
+                  <ConvergenceBar freq={coinStats.gambar} total={n} theoretical={0.5} label={t.barGambar} color="text-green-400" />
                 </div>
               ) : (
                 <div className="space-y-1.5">
@@ -366,7 +490,7 @@ const LabPercobaanEmpirik: React.FC = () => {
                         freq={diceStats[v]}
                         total={n}
                         theoretical={1 / 6}
-                        label={`🎲 Mata ${v}`}
+                        label={t.barFace(v)}
                         color={colors[i]}
                       />
                     );
@@ -374,20 +498,20 @@ const LabPercobaanEmpirik: React.FC = () => {
                 </div>
               )}
               <p className="font-body text-xs text-white/30 text-center pt-1">
-                Coba lempar makin banyak — lihat bagaimana nilainya mendekati peluang teoritis!
+                {t.moreTossesNote}
               </p>
             </div>
 
             {/* Rumus live */}
             <div className="bg-cyan-900/20 border border-cyan-500/20 rounded-xl px-4 py-3 text-center space-y-1">
-              <p className="font-body text-xs text-white/50">Rumus yang sedang dihitung:</p>
+              <p className="font-body text-xs text-white/50">{t.formulaLabel}</p>
               {mode === "koin" ? (
                 <div className="font-body text-sm text-cyan-200">
-                  <InlineMath math={`P(\\text{Angka}) = \\dfrac{${coinStats.angka}}{${n}} = ${pct(coinStats.angka)}`} />
+                  <InlineMath math={t.formulaCoinKatex(coinStats.angka, n, pct(coinStats.angka))} />
                 </div>
               ) : (
                 <div className="font-body text-sm text-yellow-200">
-                  <InlineMath math={`P(\\text{Mata }k) = \\dfrac{f_k}{${n}}`} />
+                  <InlineMath math={t.formulaDiceKatex(n)} />
                 </div>
               )}
             </div>
@@ -402,7 +526,7 @@ const LabPercobaanEmpirik: React.FC = () => {
               className="flex items-center gap-2 text-xs font-body text-white/50 hover:text-white/80 transition-colors"
             >
               {showHistory ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-              Riwayat ({history.length} lemparan)
+              {t.historyLabel(history.length)}
             </button>
             <AnimatePresence>
               {showHistory && (
@@ -430,7 +554,7 @@ const LabPercobaanEmpirik: React.FC = () => {
                             }`}
                           >
                             {mode === "koin"
-                              ? entry.result === "angka" ? "A" : "G"
+                              ? entry.result === "angka" ? t.coinAngka[0].toUpperCase() : t.coinGambar[0].toUpperCase()
                               : String(entry.result)}
                           </motion.span>
                         ))}
@@ -452,10 +576,10 @@ const LabPercobaanEmpirik: React.FC = () => {
             className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3"
           >
             <p className="font-body text-xs text-yellow-200 leading-relaxed">
-              💡 <strong>Kamu sudah melempar {n} kali!</strong>{" "}
+              💡 <strong>{t.youThrew(n)}</strong>{" "}
               {mode === "koin"
-                ? `Peluang empirik Angka = ${pct(coinStats.angka)} (mendekati 0,5 — peluang teoritisnya). Semakin banyak lemparan, semakin akurat!`
-                : `Lihat bagaimana setiap mata dadu mendekati nilai 0,167 (= 1/6). Itulah Hukum Bilangan Besar!`}
+                ? t.insightCoin(n, pct(coinStats.angka))
+                : t.insightDice()}
             </p>
           </motion.div>
         )}
