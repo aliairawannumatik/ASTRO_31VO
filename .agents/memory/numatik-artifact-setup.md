@@ -101,3 +101,10 @@ Kedua file trilingual, tsc-clean (0 error), screenshot-verified EN+JA.
 - Pola: satu objek `t` (language ternary id/en/ja) di atas komponen; ExampleBlock tutup `language` via closure; level badges MUDAH→EASY/基本, SEDANG→MEDIUM/標準, SULIT→HARD/発展; back label shared via t.backLabel
 - Screenshot JA pertama untuk PelengkapKuadrat bisa blank (Suspense timing) — selalu retake sekali sebelum menyimpulkan error
 - Sisa sub-materi (masih ID-only): Pemfaktoran, RumusKuadratik, Diskriminan, MenyusunPKBaru, PenerapanKontekstual
+
+## RumusKuadratik + MenyusunPKBaru selesai (2026-07-17)
+Kedua file trilingual, tsc 0 error, screenshot-verified EN+JA.
+- `RumusKuadratikPage.tsx`: "QUADRATIC EQUATION ROOTS — QUADRATIC FORMULA"/"二次方程式の解 — 二次方程式の解の公式" — intro cyan+yellow, teori rumus utama + grid x₁/x₂ cards + 5-langkah ordered list, 6 contoh soal (2 EASY, 2 MEDIUM, 2 HARD)
+- `MenyusunPKBaruPage.tsx`: "FORMING NEW QUADRATIC EQUATIONS"/"新しい二次方程式の作成" — intro 2-metode (Direct/Vieta's Formula), teori Vieta sum+product + forming formula, 6 contoh soal termasuk x₁²+x₂² dan 1/x₁,1/x₂
+- Route slug materi-matematika MenyusunPKBaru = `/menyusun-baru` (BUKAN /menyusun-pk-baru) — selalu cek App.tsx sebelum screenshot
+- Sisa sub-materi (masih ID-only): Pemfaktoran, Diskriminan, PenerapanKontekstual
