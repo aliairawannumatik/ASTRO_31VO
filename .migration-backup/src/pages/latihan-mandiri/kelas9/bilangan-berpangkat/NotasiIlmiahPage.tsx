@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
@@ -77,9 +78,12 @@ const questions: Q[] = [
 const NotasiIlmiahPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
+  const cardBg = isDark ? "bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30" : "bg-rose-50/95";
+  const rowBg  = isDark ? "bg-white/5" : "bg-rose-100/70";
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
-      <Starfield />
+      {isDark && <Starfield />}
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <div className="flex flex-col items-center mb-6">
@@ -87,7 +91,7 @@ const NotasiIlmiahPage = () => {
             <span className="text-2xl">🔭</span>
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-rose-300 text-center mb-1"
-            style={{ textShadow: '0 0 20px rgba(251,113,133,0.7)' }}>
+            style={{ textShadow: isDark ? '0 0 20px rgba(251,113,133,0.7)' : 'none' }}>
             NOTASI ILMIAH
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Bilangan Berpangkat · {t('practice.breadcrumb')}</p>
@@ -100,7 +104,7 @@ const NotasiIlmiahPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 backdrop-blur ${cardBg}`} />
               <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -114,7 +118,7 @@ const NotasiIlmiahPage = () => {
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${rowBg}`}>
                             <span className="text-rose-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
                             {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
                               : <p className="font-body text-sm text-white/80">{p.text}</p>}
