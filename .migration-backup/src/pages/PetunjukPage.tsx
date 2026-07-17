@@ -236,72 +236,112 @@ const KalkulatorMockup = () => {
   );
 };
 
-const OlimpiadeMockup = () => (
-  <MockupFrame title="OLIMPIADE MATEMATIKA" accentColor="text-yellow-400">
-    <div className="p-3 space-y-1.5">
-      <p className="text-[9px] text-yellow-300 font-bold text-center">OLIMPIADE MATEMATIKA</p>
-      {["Bilangan Bulat","Bilangan Rasional","Bilangan Berpangkat","KPK dan FPB","Himpunan"].map((t) => (
-        <div key={t} className="flex items-center justify-between bg-white/5 border border-yellow-400/20 rounded px-2 py-1">
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 text-yellow-400">🏆</div>
-            <span className="text-[7px] text-white/70">{t}</span>
-          </div>
-          <span className="text-[6px] text-yellow-400">BUKA</span>
-        </div>
-      ))}
-    </div>
-  </MockupFrame>
-);
-
-const RumusMockup = () => (
-  <MockupFrame title="KUMPULAN RUMUS" accentColor="text-green-400">
-    <div className="p-3 space-y-1.5">
-      <p className="text-[9px] text-green-300 font-bold text-center">KUMPULAN RUMUS</p>
-      {["Aljabar","Geometri","Statistika","Trigonometri"].map((t) => (
-        <div key={t} className="bg-white/5 border border-green-400/20 rounded px-2 py-1.5">
-          <p className="text-[8px] text-green-300">{t}</p>
-          <p className="text-[6px] text-white/40 mt-0.5">L = π × r²  |  A = ½bh</p>
-        </div>
-      ))}
-    </div>
-  </MockupFrame>
-);
-
-const KonversiMockup = () => (
-  <MockupFrame title="KONVERSI SATUAN" accentColor="text-blue-400">
-    <div className="p-3 space-y-2">
-      <p className="text-[9px] text-blue-300 font-bold text-center">KONVERSI SATUAN</p>
-      <div className="grid grid-cols-2 gap-1">
-        {["Panjang","Berat","Suhu","Waktu","Luas","Volume"].map((t) => (
-          <div key={t} className="bg-white/5 border border-blue-400/20 rounded p-1 text-center">
-            <p className="text-[7px] text-blue-300">{t}</p>
+/* ── SLIDE 9 MOCKUP: Olimpiade Matematika ── */
+const OlimpiadeMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: { frameTitle: "OLIMPIADE MATEMATIKA",  sectionTitle: "OLIMPIADE MATEMATIKA",  action: "BUKA" },
+    en: { frameTitle: "MATH OLYMPIAD",          sectionTitle: "MATH OLYMPIAD",          action: "OPEN" },
+    ja: { frameTitle: "数学オリンピック",         sectionTitle: "数学オリンピック",         action: "開く" },
+  }[language];
+  /* Math topic names kept as-is per convention */
+  const topics = ["Bilangan Bulat","Bilangan Rasional","Bilangan Berpangkat","KPK dan FPB","Himpunan"];
+  return (
+    <MockupFrame title={m.frameTitle} accentColor="text-yellow-400">
+      <div className="p-3 space-y-1.5">
+        <p className="text-[9px] text-yellow-300 font-bold text-center">{m.sectionTitle}</p>
+        {topics.map((t) => (
+          <div key={t} className="flex items-center justify-between bg-white/5 border border-yellow-400/20 rounded px-2 py-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-2 text-yellow-400">🏆</div>
+              <span className="text-[7px] text-white/70">{t}</span>
+            </div>
+            <span className="text-[6px] text-yellow-400">{m.action}</span>
           </div>
         ))}
       </div>
-      <div className="bg-white/5 rounded px-2 py-1.5 flex items-center gap-1">
-        <div className="flex-1 bg-white/10 rounded text-[6px] text-white/50 px-1 py-0.5">1 km</div>
-        <span className="text-[8px] text-blue-400">⇄</span>
-        <div className="flex-1 bg-white/10 rounded text-[6px] text-white/50 px-1 py-0.5">1000 m</div>
-      </div>
-    </div>
-  </MockupFrame>
-);
+    </MockupFrame>
+  );
+};
 
-const VideoMockup = () => (
-  <MockupFrame title="VIDEO PEMBELAJARAN" accentColor="text-pink-400">
-    <div className="p-3 space-y-2">
-      <p className="text-[9px] text-pink-300 font-bold text-center">VIDEO PEMBELAJARAN</p>
-      {["Kelas 7","Kelas 8","Kelas 9"].map((k) => (
-        <div key={k} className="flex items-center gap-2 bg-white/5 border border-pink-400/20 rounded px-2 py-1.5">
-          <div className="w-5 h-5 rounded bg-pink-500/30 flex items-center justify-center">
-            <div className="w-0 h-0 border-t-[3px] border-t-transparent border-l-[6px] border-l-pink-300 border-b-[3px] border-b-transparent ml-0.5" />
+/* ── SLIDE 10 MOCKUP: Kumpulan Rumus ── */
+const RumusMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: { frameTitle: "KUMPULAN RUMUS",    sectionTitle: "KUMPULAN RUMUS" },
+    en: { frameTitle: "FORMULA COLLECTION", sectionTitle: "FORMULA COLLECTION" },
+    ja: { frameTitle: "数式集",              sectionTitle: "数式集" },
+  }[language];
+  /* Math category names kept as-is per convention */
+  const categories = ["Aljabar","Geometri","Statistika","Trigonometri"];
+  return (
+    <MockupFrame title={m.frameTitle} accentColor="text-green-400">
+      <div className="p-3 space-y-1.5">
+        <p className="text-[9px] text-green-300 font-bold text-center">{m.sectionTitle}</p>
+        {categories.map((t) => (
+          <div key={t} className="bg-white/5 border border-green-400/20 rounded px-2 py-1.5">
+            <p className="text-[8px] text-green-300">{t}</p>
+            <p className="text-[6px] text-white/40 mt-0.5">L = π × r²  |  A = ½bh</p>
           </div>
-          <p className="text-[8px] text-white/70">{k} — Video Materi</p>
+        ))}
+      </div>
+    </MockupFrame>
+  );
+};
+
+/* ── SLIDE 11 MOCKUP: Konversi Satuan ── */
+const KonversiMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: { frameTitle: "KONVERSI SATUAN", sectionTitle: "KONVERSI SATUAN", units: ["Panjang","Berat","Suhu","Waktu","Luas","Volume"] },
+    en: { frameTitle: "UNIT CONVERTER",  sectionTitle: "UNIT CONVERTER",  units: ["Length","Weight","Temperature","Time","Area","Volume"] },
+    ja: { frameTitle: "単位変換",          sectionTitle: "単位変換",          units: ["長さ","重さ","温度","時間","面積","体積"] },
+  }[language];
+  return (
+    <MockupFrame title={m.frameTitle} accentColor="text-blue-400">
+      <div className="p-3 space-y-2">
+        <p className="text-[9px] text-blue-300 font-bold text-center">{m.sectionTitle}</p>
+        <div className="grid grid-cols-2 gap-1">
+          {m.units.map((t) => (
+            <div key={t} className="bg-white/5 border border-blue-400/20 rounded p-1 text-center">
+              <p className="text-[7px] text-blue-300">{t}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  </MockupFrame>
-);
+        <div className="bg-white/5 rounded px-2 py-1.5 flex items-center gap-1">
+          <div className="flex-1 bg-white/10 rounded text-[6px] text-white/50 px-1 py-0.5">1 km</div>
+          <span className="text-[8px] text-blue-400">⇄</span>
+          <div className="flex-1 bg-white/10 rounded text-[6px] text-white/50 px-1 py-0.5">1000 m</div>
+        </div>
+      </div>
+    </MockupFrame>
+  );
+};
+
+/* ── SLIDE 12 MOCKUP: Video Pembelajaran ── */
+const VideoMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: { frameTitle: "VIDEO PEMBELAJARAN", sectionTitle: "VIDEO PEMBELAJARAN", grades: ["Kelas 7","Kelas 8","Kelas 9"], subtitle: "Video Materi" },
+    en: { frameTitle: "LEARNING VIDEOS",    sectionTitle: "LEARNING VIDEOS",    grades: ["Grade 7","Grade 8","Grade 9"], subtitle: "Learning Materials" },
+    ja: { frameTitle: "学習動画",             sectionTitle: "学習動画",             grades: ["中学1年", "中学2年", "中学3年"], subtitle: "学習教材" },
+  }[language];
+  return (
+    <MockupFrame title={m.frameTitle} accentColor="text-pink-400">
+      <div className="p-3 space-y-2">
+        <p className="text-[9px] text-pink-300 font-bold text-center">{m.sectionTitle}</p>
+        {m.grades.map((k) => (
+          <div key={k} className="flex items-center gap-2 bg-white/5 border border-pink-400/20 rounded px-2 py-1.5">
+            <div className="w-5 h-5 rounded bg-pink-500/30 flex items-center justify-center">
+              <div className="w-0 h-0 border-t-[3px] border-t-transparent border-l-[6px] border-l-pink-300 border-b-[3px] border-b-transparent ml-0.5" />
+            </div>
+            <p className="text-[8px] text-white/70">{k} — {m.subtitle}</p>
+          </div>
+        ))}
+      </div>
+    </MockupFrame>
+  );
+};
 
 const PerigkatMockup = () => (
   <MockupFrame title="PAPAN PERINGKAT" accentColor="text-yellow-400">
@@ -796,7 +836,7 @@ function getSlides(language: Language): Slide[] {
       mockup: <MateriMockup />,
     },
     /* ══════════════════════════════════════════════════════════
-       SLIDES 5-8 — Trilingual ✅  |  9-17 — Next phases
+       SLIDES 5-8 — Trilingual ✅  |  SLIDES 9-12 — Trilingual ✅  |  13-17 — Next phase
     ══════════════════════════════════════════════════════════ */
 
     /* ── 5: Latihan Mandiri (id 4) ── */
@@ -1004,72 +1044,212 @@ function getSlides(language: Language): Slide[] {
         mockup: <KalkulatorMockup />,
       };
     })(),
-    {
-      id: 7,
-      title: "Olimpiade Matematika",
-      icon: <Trophy className="w-8 h-8" />,
-      color: "text-yellow-400",
-      bgGradient: "from-yellow-900/20 to-orange-900/20",
-      description: "Soal-soal olimpiade matematika tingkat SMP untuk kamu yang suka tantangan! Berisi soal-soal tingkat kesulitan tinggi dari berbagai topik matematika.",
-      steps: [
-        "Pilih 'OLIMPIADE MATEMATIKA' dari Menu Utama",
-        "Pilih topik olimpiade yang ingin dicoba",
-        "Kerjakan soal dengan seksama — tingkat kesulitannya lebih tinggi",
-        "Pelajari pembahasannya untuk meningkatkan kemampuan",
-      ],
-      submenus: ["Bilangan Bulat & Rasional", "Bilangan Berpangkat & Irasional", "KPK, FPB & Modulo", "Himpunan & Relasi Fungsi", "Dan masih banyak topik lainnya"],
-      mockup: <OlimpiadeMockup />,
-    },
-    {
-      id: 8,
-      title: "Kumpulan Rumus",
-      icon: <BookMarked className="w-8 h-8" />,
-      color: "text-green-400",
-      bgGradient: "from-green-900/20 to-emerald-900/20",
-      description: "Kumpulan rumus matematika SMP yang lengkap dan terorganisir. Bisa digunakan sebagai referensi cepat saat belajar atau mengerjakan soal.",
-      steps: [
-        "Pilih 'KUMPULAN RUMUS' dari Menu Utama",
-        "Cari kategori rumus yang dibutuhkan",
-        "Baca dan pelajari rumus beserta keterangannya",
-        "Gunakan sebagai referensi saat mengerjakan latihan soal",
-      ],
-      submenus: ["Seluruh Materi Kelas 7, Kelas 8, Kelas 9"],
-      mockup: <RumusMockup />,
-    },
-    {
-      id: 9,
-      title: "Konversi Satuan",
-      icon: <ArrowLeftRight className="w-8 h-8" />,
-      color: "text-blue-400",
-      bgGradient: "from-blue-900/20 to-indigo-900/20",
-      description: "Alat konversi satuan yang lengkap untuk mengubah berbagai macam satuan pengukuran secara cepat dan akurat.",
-      steps: [
-        "Pilih 'KONVERSI SATUAN' dari Menu Utama",
-        "Pilih jenis satuan (Panjang, Berat, Suhu, Waktu, dll)",
-        "Masukkan nilai yang ingin dikonversi",
-        "Pilih satuan asal dan satuan tujuan",
-        "Hasil konversi ditampilkan secara otomatis",
-      ],
-      submenus: ["Panjang (km, m, cm, mm, inci, kaki)", "Berat (kg, gram, ons, pound)", "Suhu (Celsius, Fahrenheit, Kelvin)", "Waktu (jam, menit, detik)", "Luas & Volume"],
-      mockup: <KonversiMockup />,
-    },
-    {
-      id: 10,
-      title: "Video Pembelajaran",
-      icon: <PlayCircle className="w-8 h-8" />,
-      color: "text-pink-400",
-      bgGradient: "from-pink-900/20 to-rose-900/20",
-      description: "Belajar melalui video pembelajaran yang interaktif dan mudah dipahami. Video diorganisir berdasarkan kelas dan topik materi.",
-      steps: [
-        "Pilih 'VIDEO PEMBELAJARAN' dari Menu Utama",
-        "Pilih kelas yang sesuai (7, 8, atau 9)",
-        "Pilih topik video yang ingin ditonton",
-        "Tonton video pembelajaran dengan seksama",
-        "Pause atau putar ulang jika ada bagian yang belum dipahami",
-      ],
-      submenus: ["Kelas 7 : Seluruh Materi Kelas 7", "Kelas 8 : Seluruh Materi Kelas 8", "Kelas 9 : Seluruh Materi Kelas 9"],
-      mockup: <VideoMockup />,
-    },
+    /* ── 9: Olimpiade Matematika (id 7) ── */
+    (() => {
+      const s9 = {
+        id: {
+          title: "Olimpiade Matematika",
+          desc: "Soal-soal olimpiade matematika tingkat SMP untuk kamu yang suka tantangan! Berisi soal-soal tingkat kesulitan tinggi dari berbagai topik matematika.",
+          steps: [
+            "Pilih 'OLIMPIADE MATEMATIKA' dari Menu Utama",
+            "Pilih topik olimpiade yang ingin dicoba",
+            "Kerjakan soal dengan seksama — tingkat kesulitannya lebih tinggi",
+            "Pelajari pembahasannya untuk meningkatkan kemampuan",
+          ],
+          /* Math topic names kept as-is; only the trailing descriptor is translated */
+          submenus: ["Bilangan Bulat & Rasional", "Bilangan Berpangkat & Irasional", "KPK, FPB & Modulo", "Himpunan & Relasi Fungsi", "Dan masih banyak topik lainnya"],
+        },
+        en: {
+          title: "Mathematics Olympiad",
+          desc: "Junior high level math olympiad problems for those who love a challenge! Contains high-difficulty problems from various math topics.",
+          steps: [
+            "Select 'MATHEMATICS OLYMPIAD' from the Main Menu",
+            "Select the olympiad topic you want to try",
+            "Work through the problems carefully — the difficulty level is higher",
+            "Study the solutions to improve your skills",
+          ],
+          submenus: ["Bilangan Bulat & Rasional", "Bilangan Berpangkat & Irasional", "KPK, FPB & Modulo", "Himpunan & Relasi Fungsi", "And many more topics"],
+        },
+        ja: {
+          title: "数学オリンピック",
+          desc: "挑戦が好きな人向けの中学数学オリンピックの問題！様々な数学トピックから高難度の問題を収録しています。",
+          steps: [
+            "メインメニューから「数学オリンピック」を選択",
+            "挑戦したいトピックを選択",
+            "問題を丁寧に解こう — 難易度は高め",
+            "解説を読んで実力アップを図ろう",
+          ],
+          submenus: ["Bilangan Bulat & Rasional", "Bilangan Berpangkat & Irasional", "KPK, FPB & Modulo", "Himpunan & Relasi Fungsi", "その他多数のトピック"],
+        },
+      }[language];
+      return {
+        id: 7,
+        title: s9.title,
+        icon: <Trophy className="w-8 h-8" />,
+        color: "text-yellow-400",
+        bgGradient: "from-yellow-900/20 to-orange-900/20",
+        description: s9.desc,
+        steps: s9.steps,
+        submenus: s9.submenus,
+        mockup: <OlimpiadeMockup />,
+      };
+    })(),
+
+    /* ── 10: Kumpulan Rumus (id 8) ── */
+    (() => {
+      const s10 = {
+        id: {
+          title: "Kumpulan Rumus",
+          desc: "Kumpulan rumus matematika SMP yang lengkap dan terorganisir. Bisa digunakan sebagai referensi cepat saat belajar atau mengerjakan soal.",
+          steps: [
+            "Pilih 'KUMPULAN RUMUS' dari Menu Utama",
+            "Cari kategori rumus yang dibutuhkan",
+            "Baca dan pelajari rumus beserta keterangannya",
+            "Gunakan sebagai referensi saat mengerjakan latihan soal",
+          ],
+          submenus: ["Seluruh Materi Kelas 7, Kelas 8, Kelas 9"],
+        },
+        en: {
+          title: "Formula Collection",
+          desc: "A complete and organized collection of junior high math formulas. Can be used as a quick reference while studying or solving problems.",
+          steps: [
+            "Select 'FORMULA COLLECTION' from the Main Menu",
+            "Find the formula category you need",
+            "Read and study the formulas with their explanations",
+            "Use as a reference when working on practice problems",
+          ],
+          submenus: ["All Materials for Grade 7, Grade 8, Grade 9"],
+        },
+        ja: {
+          title: "数式集",
+          desc: "中学数学の公式を網羅した整理されたコレクション。学習中や問題を解く際のクイックリファレンスとして活用できます。",
+          steps: [
+            "メインメニューから「数式集」を選択",
+            "必要な公式のカテゴリを探す",
+            "公式と解説をよく読んで学ぼう",
+            "練習問題を解く際の参考に活用しよう",
+          ],
+          submenus: ["中学1・2・3年の全教材"],
+        },
+      }[language];
+      return {
+        id: 8,
+        title: s10.title,
+        icon: <BookMarked className="w-8 h-8" />,
+        color: "text-green-400",
+        bgGradient: "from-green-900/20 to-emerald-900/20",
+        description: s10.desc,
+        steps: s10.steps,
+        submenus: s10.submenus,
+        mockup: <RumusMockup />,
+      };
+    })(),
+
+    /* ── 11: Konversi Satuan (id 9) ── */
+    (() => {
+      const s11 = {
+        id: {
+          title: "Konversi Satuan",
+          desc: "Alat konversi satuan yang lengkap untuk mengubah berbagai macam satuan pengukuran secara cepat dan akurat.",
+          steps: [
+            "Pilih 'KONVERSI SATUAN' dari Menu Utama",
+            "Pilih jenis satuan (Panjang, Berat, Suhu, Waktu, dll)",
+            "Masukkan nilai yang ingin dikonversi",
+            "Pilih satuan asal dan satuan tujuan",
+            "Hasil konversi ditampilkan secara otomatis",
+          ],
+          submenus: ["Panjang (km, m, cm, mm, inci, kaki)", "Berat (kg, gram, ons, pound)", "Suhu (Celsius, Fahrenheit, Kelvin)", "Waktu (jam, menit, detik)", "Luas & Volume"],
+        },
+        en: {
+          title: "Unit Converter",
+          desc: "A complete unit conversion tool for quickly and accurately converting various units of measurement.",
+          steps: [
+            "Select 'UNIT CONVERTER' from the Main Menu",
+            "Choose the unit type (Length, Weight, Temperature, Time, etc.)",
+            "Enter the value you want to convert",
+            "Select the source and target unit",
+            "The conversion result is displayed automatically",
+          ],
+          submenus: ["Length (km, m, cm, mm, inch, feet)", "Weight (kg, gram, ounce, pound)", "Temperature (Celsius, Fahrenheit, Kelvin)", "Time (hours, minutes, seconds)", "Area & Volume"],
+        },
+        ja: {
+          title: "単位変換",
+          desc: "様々な計量単位を素早く正確に変換するための完全な単位変換ツール。",
+          steps: [
+            "メインメニューから「単位変換」を選択",
+            "単位の種類を選択（長さ、重さ、温度、時間など）",
+            "変換したい値を入力",
+            "変換元と変換先の単位を選択",
+            "変換結果が自動的に表示されます",
+          ],
+          submenus: ["長さ（km、m、cm、mm、インチ、フィート）", "重さ（kg、グラム、オンス、ポンド）", "温度（摂氏、華氏、ケルビン）", "時間（時、分、秒）", "面積・体積"],
+        },
+      }[language];
+      return {
+        id: 9,
+        title: s11.title,
+        icon: <ArrowLeftRight className="w-8 h-8" />,
+        color: "text-blue-400",
+        bgGradient: "from-blue-900/20 to-indigo-900/20",
+        description: s11.desc,
+        steps: s11.steps,
+        submenus: s11.submenus,
+        mockup: <KonversiMockup />,
+      };
+    })(),
+
+    /* ── 12: Video Pembelajaran (id 10) ── */
+    (() => {
+      const s12 = {
+        id: {
+          title: "Video Pembelajaran",
+          desc: "Belajar melalui video pembelajaran yang interaktif dan mudah dipahami. Video diorganisir berdasarkan kelas dan topik materi.",
+          steps: [
+            "Pilih 'VIDEO PEMBELAJARAN' dari Menu Utama",
+            "Pilih kelas yang sesuai (7, 8, atau 9)",
+            "Pilih topik video yang ingin ditonton",
+            "Tonton video pembelajaran dengan seksama",
+            "Pause atau putar ulang jika ada bagian yang belum dipahami",
+          ],
+          submenus: ["Kelas 7 : Seluruh Materi Kelas 7", "Kelas 8 : Seluruh Materi Kelas 8", "Kelas 9 : Seluruh Materi Kelas 9"],
+        },
+        en: {
+          title: "Learning Videos",
+          desc: "Learn through interactive and easy-to-understand educational videos. Videos are organized by grade and topic.",
+          steps: [
+            "Select 'LEARNING VIDEOS' from the Main Menu",
+            "Choose the appropriate grade (7, 8, or 9)",
+            "Select the video topic you want to watch",
+            "Watch the educational video carefully",
+            "Pause or replay if there are parts you haven't understood",
+          ],
+          submenus: ["Grade 7 : All Grade 7 Materials", "Grade 8 : All Grade 8 Materials", "Grade 9 : All Grade 9 Materials"],
+        },
+        ja: {
+          title: "学習動画",
+          desc: "わかりやすいインタラクティブな教育動画で学ぼう。動画は学年と教科別に整理されています。",
+          steps: [
+            "メインメニューから「学習動画」を選択",
+            "学年（中学1・2・3年）を選択",
+            "見たい動画のトピックを選択",
+            "教育動画を注意深く視聴しよう",
+            "わからない部分は一時停止または巻き戻して確認しよう",
+          ],
+          submenus: ["中学1年：中学1年の全教材", "中学2年：中学2年の全教材", "中学3年：中学3年の全教材"],
+        },
+      }[language];
+      return {
+        id: 10,
+        title: s12.title,
+        icon: <PlayCircle className="w-8 h-8" />,
+        color: "text-pink-400",
+        bgGradient: "from-pink-900/20 to-rose-900/20",
+        description: s12.desc,
+        steps: s12.steps,
+        submenus: s12.submenus,
+        mockup: <VideoMockup />,
+      };
+    })(),
     {
       id: 12,
       title: "Bank Soal",
