@@ -1338,6 +1338,29 @@
 .light-mode .bg-green-900\/20   { background-color: rgba(220,252,231,0.6) !important; }
 .theme-ocean .bg-green-900\/20  { background-color: rgba(6,95,70,0.30) !important; }
 
+/* ── Bilangan Berpangkat latihan-mandiri: card gradient + bg overrides ──
+   Pages use bg-gradient-to-br from-{color}-900/30 via-slate-900/80 to-{color2}-900/30.
+   via-slate-900/80 is already handled; the from-* and to-* gradient stops need overrides.
+   bg-white/5 (question-part rows) needs a dark-tint equivalent for light bg.         ── */
+/* gradient-from stops */
+.light-mode .from-sky-900\/30     { --tw-gradient-from: rgba(224,242,254,0.55) var(--tw-gradient-from-position) !important; }
+.light-mode .from-emerald-900\/30 { --tw-gradient-from: rgba(209,250,229,0.55) var(--tw-gradient-from-position) !important; }
+.light-mode .from-violet-900\/30  { --tw-gradient-from: rgba(237,233,254,0.55) var(--tw-gradient-from-position) !important; }
+.light-mode .from-amber-900\/30   { --tw-gradient-from: rgba(254,243,199,0.55) var(--tw-gradient-from-position) !important; }
+.light-mode .from-rose-900\/30    { --tw-gradient-from: rgba(255,228,230,0.55) var(--tw-gradient-from-position) !important; }
+/* gradient-to stops */
+.light-mode .to-cyan-900\/30      { --tw-gradient-to: rgba(207,250,254,0.55) var(--tw-gradient-to-position) !important; }
+.light-mode .to-teal-900\/30      { --tw-gradient-to: rgba(204,251,241,0.55) var(--tw-gradient-to-position) !important; }
+.light-mode .to-purple-900\/30    { --tw-gradient-to: rgba(243,232,255,0.55) var(--tw-gradient-to-position) !important; }
+.light-mode .to-yellow-900\/30    { --tw-gradient-to: rgba(254,249,195,0.55) var(--tw-gradient-to-position) !important; }
+.light-mode .to-pink-900\/30      { --tw-gradient-to: rgba(252,231,243,0.55) var(--tw-gradient-to-position) !important; }
+/* bg-white/5 row backgrounds → subtle dark tint on light bg */
+.light-mode .bg-white\/5          { background-color: rgba(0,0,0,0.05) !important; }
+/* missing bg-*-900/20 concept-box overrides */
+.light-mode .bg-sky-900\/20       { background-color: rgba(224,242,254,0.65) !important; }
+.light-mode .bg-amber-900\/20     { background-color: rgba(254,243,199,0.65) !important; }
+.light-mode .bg-rose-900\/20      { background-color: rgba(255,228,230,0.65) !important; }
+
 /* ── Kesimpulan text colors used across Koordinat Kartesius sub-materi ── */
 .light-mode .text-rose-100\/90    { color: #9f1239 !important; }
 .theme-ocean .text-rose-100\/90   { color: #fecdd3 !important; }
