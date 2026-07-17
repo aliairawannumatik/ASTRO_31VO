@@ -52,6 +52,12 @@ After a GitHub re-import, `node_modules` are wiped in both the pnpm workspace ro
 `PeluangTeoretikPage.tsx` (materi-matematika/kelas9/peluang/) rewritten from ID-only to full trilingual.
 KaTeX \text{} vars (language-adaptive): kGenap (genap/even/偶数), kAs (As/Ace/エース), kMerah (merah/red/赤), kKingHitam (King hitam/Black King/黒のキング), kJumlah7 (jumlah=7/sum=7/和=7), kSelisih2 (selisih=2/difference=2/差=2), kJumlahP (jumlah prima/prime sum/素数の和). Badges: MUDAH/SEDANG/SULIT → EASY/MEDIUM/HARD → 基本/標準/発展. RangkumanSection trilingual. Both EN+JA screenshots rendered fully (no loading screen).
 
+## Ruang Sampel Kelas 9 — 100% complete (2026-07-17)
+`RuangSampelPage.tsx` (materi-matematika/kelas9/peluang/) rewritten to full trilingual.
+Coin labels language-adaptive: coinH (A/H/表), coinT (G/T/裏) — used in all BlockMath via template literals and table data.
+KaTeX \text{} fixed: kKartu, kSuit, kPasanganTerurut, kMajemuk all use `\mathrm{}` variants per language.
+Remaining TODO in peluang: PeluangKejadianMajemukPage.tsx only.
+
 ## Peluang Empirik Kelas 9 — 100% complete (2026-07-17)
 `PeluangEmpirikPage.tsx` (materi-matematika/kelas9/peluang/) + `LabPercobaanEmpirik.tsx` trilingual and tsc-clean.
 Key fixes applied: `\text{def}`→`\text{defective}`, `\text{不良}`→`\text{不良品}`, `\text{良}`→`\text{良品}` in fCacat/fBaik/pCacat/pBaik KaTeX vars; Soal 2 coin labels now language-adaptive (`coinA`/`coinG` vars: ID→A/G, EN→H/T, JA→表/裏). `lampu` unit already used `\,\mathrm{}` correctly. LabPercobaanEmpirik already had `useLanguage()` direct + full trilingual from a prior session.
