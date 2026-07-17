@@ -93,3 +93,11 @@ Notes for future pages:
 - Sisa 7 sub-materi masih ID-only: BentukUmum, Pemfaktoran, PelengkapKuadrat, RumusKuadratik, Diskriminan, MenyusunPKBaru, PenerapanKontekstual
 - KaTeX \text{} violations: PemfaktoranPage baris 96/125 (Jika, atau, cari, faktorkan); DiskriminanPage baris 200 (atau)
 - PenerapanKontekstualPage: soal cerita "pedagang jeruk Rp.96.000" + "kolam renang 8×6 m" + "bilangan bulat berurutan" — tidak ada nama tokoh, tapi konteks & mata uang perlu dilokalisasi
+
+## Persamaan Kuadrat — BentukUmum + PelengkapKuadrat selesai (2026-07-17)
+Kedua file trilingual, tsc-clean (0 error), screenshot-verified EN+JA.
+- `BentukUmumPage.tsx`: "GENERAL FORM OF A QUADRATIC EQUATION"/"二次方程式の一般形" — definisi, tabel koefisien (Coefficient a/b/c → 係数a/b/定数c), 6 contoh soal MUDAH/MUDAH/SEDANG/SEDANG/SULIT/SULIT
+- `PelengkapKuadratPage.tsx`: "QUADRATIC EQUATION ROOTS — COMPLETING THE SQUARE"/"二次方程式の解 — 平方完成" — intro + identitas kunci + 5-langkah ordered list + 6 contoh soal
+- Pola: satu objek `t` (language ternary id/en/ja) di atas komponen; ExampleBlock tutup `language` via closure; level badges MUDAH→EASY/基本, SEDANG→MEDIUM/標準, SULIT→HARD/発展; back label shared via t.backLabel
+- Screenshot JA pertama untuk PelengkapKuadrat bisa blank (Suspense timing) — selalu retake sekali sebelum menyimpulkan error
+- Sisa sub-materi (masih ID-only): Pemfaktoran, RumusKuadratik, Diskriminan, MenyusunPKBaru, PenerapanKontekstual
