@@ -94,6 +94,12 @@ Notes for future pages:
 - KaTeX \text{} violations: PemfaktoranPage baris 96/125 (Jika, atau, cari, faktorkan); DiskriminanPage baris 200 (atau)
 - PenerapanKontekstualPage: soal cerita "pedagang jeruk Rp.96.000" + "kolam renang 8×6 m" + "bilangan bulat berurutan" — tidak ada nama tokoh, tapi konteks & mata uang perlu dilokalisasi
 
+## Fungsi Kuadrat Kelas 9 — progress (2026-07-17)
+Hub ✅ · TitikPotong ✅ · MenyusunFungsi ✅ · BentukUmumKarakteristik ⏳ · SumbuSimetri ⏳ · MenggambarGrafik ⏳ · PenerapanNilaiMaksMin ⏳ · AngryBirdParabola ⏳
+- TitikPotong: EN "INTERCEPTS WITH THE AXES" / JA "軸との切片" — tsc 0, screenshot ✅
+- MenyusunFungsi: EN "FORMING QUADRATIC FUNCTIONS" / JA "二次関数の作成" — tsc 0, screenshot ✅
+- Sisa 4 sub-materi: BentukUmum (1 \text{dan} + 2 SVG label), SumbuSimetri (2 SVG label), MenggambarGrafik (2 \text{}), PenerapanNilaiMaksMin (9 \text{} + Rp + AngryBirdParabola trilingual)
+
 ## Fungsi Kuadrat Kelas 9 — Hub selesai (2026-07-17)
 `FungsiKuadratPage.tsx` (hub) trilingual, tsc 0 error, screenshot-verified EN+JA.
 - EN title: "QUADRATIC FUNCTION (ENRICHMENT)" / JA: "二次関数（発展）"
