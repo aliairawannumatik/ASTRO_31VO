@@ -83,3 +83,13 @@ Notes for future pages:
 - Inline calculator sub-components (MeanCalculator, CombinedMeanCalculator) can call `useLanguage()` directly since they are defined in the same file — no need for a `language` prop.
 - Calculator components with `useLanguage()` directly must rebuild their label strings at render time. The `groups` useState initial label should be language-neutral (e.g. `""`) or set outside state, not derived from `tc` (which is language-aware). Use the tc label only in display, or re-initialize labels on language change.
 - Do not assume other materi pages elsewhere are trilingual without grepping for `useLanguage` first.
+
+## Persamaan Kuadrat Kelas 9 — Hub selesai (2026-07-17)
+`PersamaanKuadratPage.tsx` (materi-matematika/kelas9/) → trilingual, tsc-clean, screenshot-verified.
+- EN: QUADRATIC EQUATIONS (ENRICHMENT) | JA: 二次方程式（発展）
+- 7 subtopik EN/JA: General Form/一般形, Factoring/因数分解, Quadratic Formula/二次方程式の解の公式, Completing the Square/平方完成, Discriminant/判別式, Forming New QE/新しい二次方程式の作成, Contextual Apps/文脈的応用
+- Pola identik PeluangPage.tsx: subtopicsId/En/Ja + language-switched title/kelas/backLabel → MateriTopicPage
+- Hub page TIDAK kena Suspense loading screen — screenshot langsung penuh (berbeda dgn halaman materi konten-berat)
+- Sisa 7 sub-materi masih ID-only: BentukUmum, Pemfaktoran, PelengkapKuadrat, RumusKuadratik, Diskriminan, MenyusunPKBaru, PenerapanKontekstual
+- KaTeX \text{} violations: PemfaktoranPage baris 96/125 (Jika, atau, cari, faktorkan); DiskriminanPage baris 200 (atau)
+- PenerapanKontekstualPage: soal cerita "pedagang jeruk Rp.96.000" + "kolam renang 8×6 m" + "bilangan bulat berurutan" — tidak ada nama tokoh, tapi konteks & mata uang perlu dilokalisasi
