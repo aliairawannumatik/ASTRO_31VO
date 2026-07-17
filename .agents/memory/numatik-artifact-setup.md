@@ -94,6 +94,18 @@ Notes for future pages:
 - KaTeX \text{} violations: PemfaktoranPage baris 96/125 (Jika, atau, cari, faktorkan); DiskriminanPage baris 200 (atau)
 - PenerapanKontekstualPage: soal cerita "pedagang jeruk Rp.96.000" + "kolam renang 8×6 m" + "bilangan bulat berurutan" — tidak ada nama tokoh, tapi konteks & mata uang perlu dilokalisasi
 
+## Pemfaktoran + Diskriminan Kelas 9 — 100% complete (2026-07-17)
+Kedua file trilingual, tsc 0 error, screenshot-verified EN+JA.
+- `PemfaktoranPage.tsx`: "QUADRATIC EQUATION ROOTS — FACTORING"/"二次方程式の解 — 因数分解"
+  - \text{} fix baris 96: `\text{Jika}/\text{atau}` → JSX words + InlineMath (If/or/もし/または)
+  - \text{} fix baris 125: `\text{cari}/\text{faktorkan}` → `kFind`/`kFactor` vars (\text{find}/\text{factor}/\text{探す}/\text{因数分解})
+  - Pola 1/2/3 → Pattern 1/2/3 → パターン1/2/3; Syarat → Condition/条件; Metode AC → AC Method/AC法
+- `DiskriminanPage.tsx`: "DISCRIMINANT OF A QUADRATIC EQUATION"/"二次方程式の判別式"
+  - \text{} fix baris 200: `\text{ atau }` → `kOr` var (\text{ or }/\text{または})
+  - Theory boxes: Jika D>0/D=0/D<0 → If D>0/D=0/D<0 → D>0/D=0/D<0の場合 (all in JSX, not KaTeX)
+  - Akar kembar → repeated root/重解; akar real → real roots/実数解
+- Sisa sub-materi (masih ID-only): PenerapanKontekstual
+
 ## Persamaan Kuadrat — BentukUmum + PelengkapKuadrat selesai (2026-07-17)
 Kedua file trilingual, tsc-clean (0 error), screenshot-verified EN+JA.
 - `BentukUmumPage.tsx`: "GENERAL FORM OF A QUADRATIC EQUATION"/"二次方程式の一般形" — definisi, tabel koefisien (Coefficient a/b/c → 係数a/b/定数c), 6 contoh soal MUDAH/MUDAH/SEDANG/SEDANG/SULIT/SULIT
