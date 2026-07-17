@@ -1,6 +1,6 @@
 ---
 name: Numatik artifact setup
-description: .migration-backup wiring, port gotchas, trilingual page pattern, Statistika materi translation status
+description: .migration-backup wiring, port gotchas, trilingual page pattern, PetunjukPage completion status
 ---
 
 ## Environment / infra

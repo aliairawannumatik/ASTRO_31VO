@@ -374,81 +374,162 @@ const BankSoalMockup = () => (
   </MockupFrame>
 );
 
-const ChatMockup = () => (
-  <MockupFrame title="NUMATIK AI" accentColor="text-purple-400">
-    <div className="p-2 flex flex-col h-full">
-      <p className="text-[8px] text-purple-300 font-bold text-center mb-1.5">NUMATIK AI 🤖</p>
-      <div className="flex-1 space-y-1 overflow-hidden">
-        <div className="flex gap-1">
-          <div className="w-4 h-4 rounded-full bg-purple-500/50 shrink-0 mt-0.5" />
-          <div className="bg-purple-900/40 border border-purple-500/20 rounded px-1.5 py-1 max-w-[80%]">
-            <p className="text-[6px] text-white/70">Halo Sobat Numatik! 🚀 Ada yang bisa aku bantu?</p>
+const ChatMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: {
+      greeting: "Halo Sobat Numatik! 🚀 Ada yang bisa aku bantu?",
+      userQ: "Bagaimana cara menghitung luas lingkaran?",
+      aiReply: "L = π × r² dimana r adalah jari-jari lingkaran...",
+      placeholder: "Ketik pertanyaan...",
+    },
+    en: {
+      greeting: "Hello! 🚀 How can I help you?",
+      userQ: "How do you calculate the area of a circle?",
+      aiReply: "A = π × r² where r is the radius of the circle...",
+      placeholder: "Type your question...",
+    },
+    ja: {
+      greeting: "こんにちは！🚀 何かお手伝いできますか？",
+      userQ: "円の面積はどうやって計算しますか？",
+      aiReply: "A = π × r²（rは円の半径）...",
+      placeholder: "質問を入力...",
+    },
+  }[language];
+  return (
+    <MockupFrame title="NUMATIK AI" accentColor="text-purple-400">
+      <div className="p-2 flex flex-col h-full">
+        <p className="text-[8px] text-purple-300 font-bold text-center mb-1.5">NUMATIK AI 🤖</p>
+        <div className="flex-1 space-y-1 overflow-hidden">
+          <div className="flex gap-1">
+            <div className="w-4 h-4 rounded-full bg-purple-500/50 shrink-0 mt-0.5" />
+            <div className="bg-purple-900/40 border border-purple-500/20 rounded px-1.5 py-1 max-w-[80%]">
+              <p className="text-[6px] text-white/70">{m.greeting}</p>
+            </div>
+          </div>
+          <div className="flex gap-1 justify-end">
+            <div className="bg-blue-900/40 border border-blue-500/20 rounded px-1.5 py-1 max-w-[80%]">
+              <p className="text-[6px] text-white/70">{m.userQ}</p>
+            </div>
+          </div>
+          <div className="flex gap-1">
+            <div className="w-4 h-4 rounded-full bg-purple-500/50 shrink-0 mt-0.5" />
+            <div className="bg-purple-900/40 border border-purple-500/20 rounded px-1.5 py-1 max-w-[80%]">
+              <p className="text-[6px] text-white/70">{m.aiReply}</p>
+            </div>
           </div>
         </div>
-        <div className="flex gap-1 justify-end">
-          <div className="bg-blue-900/40 border border-blue-500/20 rounded px-1.5 py-1 max-w-[80%]">
-            <p className="text-[6px] text-white/70">Bagaimana cara menghitung luas lingkaran?</p>
+        <div className="flex gap-1 mt-1">
+          <div className="flex-1 bg-white/10 rounded px-1.5 py-1">
+            <p className="text-[6px] text-white/30">{m.placeholder}</p>
           </div>
-        </div>
-        <div className="flex gap-1">
-          <div className="w-4 h-4 rounded-full bg-purple-500/50 shrink-0 mt-0.5" />
-          <div className="bg-purple-900/40 border border-purple-500/20 rounded px-1.5 py-1 max-w-[80%]">
-            <p className="text-[6px] text-white/70">L = π × r² dimana r adalah jari-jari lingkaran...</p>
+          <div className="w-5 h-5 rounded bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center">
+            <div className="w-2 h-2 text-white text-[8px]">→</div>
           </div>
         </div>
       </div>
-      <div className="flex gap-1 mt-1">
-        <div className="flex-1 bg-white/10 rounded px-1.5 py-1">
-          <p className="text-[6px] text-white/30">Ketik pertanyaan...</p>
-        </div>
-        <div className="w-5 h-5 rounded bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center">
-          <div className="w-2 h-2 text-white text-[8px]">→</div>
-        </div>
-      </div>
-    </div>
-  </MockupFrame>
-);
+    </MockupFrame>
+  );
+};
 
-const TKAMockup = () => (
-  <MockupFrame title="TES KEMAMPUAN AKADEMIK" accentColor="text-indigo-400">
-    <div className="p-3 space-y-2">
-      <p className="text-[8px] text-indigo-300 font-bold text-center">TES KEMAMPUAN AKADEMIK</p>
-      <div className="bg-white/5 rounded px-2 py-2 border border-indigo-400/20">
-        <p className="text-[7px] text-white/70 mb-1.5">Soal No. 1 dari 20</p>
-        <p className="text-[6px] text-white/60">Jika x² + 5x + 6 = 0, maka nilai x adalah...</p>
-        {["A. x = -2 dan x = -3","B. x = 2 dan x = 3"].map((o) => (
-          <div key={o} className="mt-1 bg-white/5 rounded px-1.5 py-0.5">
-            <p className="text-[5.5px] text-white/50">{o}</p>
+const TKAMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: {
+      sectionTitle: "TES KEMAMPUAN AKADEMIK",
+      questionNo: "Soal No. 1 dari 20",
+      question: "Jika x² + 5x + 6 = 0, maka nilai x adalah...",
+      optA: "A. x = -2 dan x = -3",
+      optB: "B. x = 2 dan x = 3",
+      answered: "12/20 dijawab",
+    },
+    en: {
+      sectionTitle: "ACADEMIC ABILITY TEST",
+      questionNo: "Question No. 1 of 20",
+      question: "If x² + 5x + 6 = 0, then the values of x are...",
+      optA: "A. x = -2 and x = -3",
+      optB: "B. x = 2 and x = 3",
+      answered: "12/20 answered",
+    },
+    ja: {
+      sectionTitle: "学力テスト（TKA）",
+      questionNo: "問題 1 / 20",
+      question: "x² + 5x + 6 = 0 のとき、xの値は...",
+      optA: "A. x = -2 と x = -3",
+      optB: "B. x = 2 と x = 3",
+      answered: "12/20 回答済み",
+    },
+  }[language];
+  return (
+    <MockupFrame title="TES KEMAMPUAN AKADEMIK" accentColor="text-indigo-400">
+      <div className="p-3 space-y-2">
+        <p className="text-[8px] text-indigo-300 font-bold text-center">{m.sectionTitle}</p>
+        <div className="bg-white/5 rounded px-2 py-2 border border-indigo-400/20">
+          <p className="text-[7px] text-white/70 mb-1.5">{m.questionNo}</p>
+          <p className="text-[6px] text-white/60">{m.question}</p>
+          {[m.optA, m.optB].map((o) => (
+            <div key={o} className="mt-1 bg-white/5 rounded px-1.5 py-0.5">
+              <p className="text-[5.5px] text-white/50">{o}</p>
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-between">
+          <div className="bg-indigo-500/20 rounded px-2 py-0.5">
+            <p className="text-[6px] text-indigo-300">⏱ 45:00</p>
           </div>
-        ))}
-      </div>
-      <div className="flex justify-between">
-        <div className="bg-indigo-500/20 rounded px-2 py-0.5">
-          <p className="text-[6px] text-indigo-300">⏱ 45:00</p>
-        </div>
-        <div className="bg-indigo-500/20 rounded px-2 py-0.5">
-          <p className="text-[6px] text-indigo-300">12/20 dijawab</p>
+          <div className="bg-indigo-500/20 rounded px-2 py-0.5">
+            <p className="text-[6px] text-indigo-300">{m.answered}</p>
+          </div>
         </div>
       </div>
-    </div>
-  </MockupFrame>
-);
+    </MockupFrame>
+  );
+};
 
-const PengaturanMockup = () => (
-  <MockupFrame title="PENGATURAN" accentColor="text-gray-400">
-    <div className="p-3 space-y-2">
-      <p className="text-[9px] text-gray-300 font-bold text-center">⚙️ PENGATURAN</p>
-      <div className="space-y-1.5">
-        {[["Mode Tampilan","🌙 Gelap / ☀️ Terang"],["Suara Latar","ON / OFF"],["Efek Suara","ON / OFF"]].map(([label, val]) => (
-          <div key={label} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
-            <span className="text-[7px] text-white/60">{label}</span>
-            <span className="text-[7px] text-cyan-400">{val}</span>
-          </div>
-        ))}
+const PengaturanMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: {
+      sectionTitle: "⚙️ PENGATURAN",
+      items: [
+        ["Mode Tampilan", "🌙 Gelap / ☀️ Terang"],
+        ["Suara Latar", "ON / OFF"],
+        ["Efek Suara", "ON / OFF"],
+      ] as [string, string][],
+    },
+    en: {
+      sectionTitle: "⚙️ SETTINGS",
+      items: [
+        ["Display Mode", "🌙 Dark / ☀️ Light"],
+        ["Background Music", "ON / OFF"],
+        ["Sound Effects", "ON / OFF"],
+      ] as [string, string][],
+    },
+    ja: {
+      sectionTitle: "⚙️ 設定",
+      items: [
+        ["表示モード", "🌙 ダーク / ☀️ ライト"],
+        ["BGM", "ON / OFF"],
+        ["効果音", "ON / OFF"],
+      ] as [string, string][],
+    },
+  }[language];
+  return (
+    <MockupFrame title="PENGATURAN" accentColor="text-gray-400">
+      <div className="p-3 space-y-2">
+        <p className="text-[9px] text-gray-300 font-bold text-center">{m.sectionTitle}</p>
+        <div className="space-y-1.5">
+          {m.items.map(([label, val]) => (
+            <div key={label} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
+              <span className="text-[7px] text-white/60">{label}</span>
+              <span className="text-[7px] text-cyan-400">{val}</span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </MockupFrame>
-);
+    </MockupFrame>
+  );
+};
 
 /* ── SLIDE 3 MOCKUP: Ruang Untuk Guru ── */
 const RuangGuruMockup = () => {
@@ -836,7 +917,7 @@ function getSlides(language: Language): Slide[] {
       mockup: <MateriMockup />,
     },
     /* ══════════════════════════════════════════════════════════
-       SLIDES 5-8 — Trilingual ✅  |  SLIDES 9-12 — Trilingual ✅  |  13-17 — Next phase
+       SLIDES 5-8 — Trilingual ✅  |  SLIDES 9-12 — Trilingual ✅  |  SLIDES 13-17 — Trilingual ✅
     ══════════════════════════════════════════════════════════ */
 
     /* ── 5: Latihan Mandiri (id 4) ── */
@@ -1250,104 +1331,300 @@ function getSlides(language: Language): Slide[] {
         mockup: <VideoMockup />,
       };
     })(),
-    {
-      id: 12,
-      title: "Bank Soal",
-      icon: <FileText className="w-8 h-8" />,
-      color: "text-cyan-400",
-      bgGradient: "from-cyan-900/20 to-blue-900/20",
-      description: "Koleksi lengkap soal-soal matematika SMP dari berbagai topik. Cocok untuk latihan intensif dan persiapan ujian.",
-      steps: [
-        "Pilih 'BANK SOAL' dari Menu Utama",
-        "Pilih topik soal yang ingin dikerjakan",
-        "Kerjakan soal-soal yang tersedia",
-        "Periksa jawabanmu dan pelajari pembahasannya",
-      ],
-      submenus: ["Seluruh Materi Kelas 7, 8 dan 9"],
-      mockup: <BankSoalMockup />,
-    },
-    {
-      id: 13,
-      title: "Chat dengan NUMATIK AI",
-      icon: <MessageCircle className="w-8 h-8" />,
-      color: "text-purple-400",
-      bgGradient: "from-purple-900/20 to-indigo-900/20",
-      description: "NUMATIK AI adalah asisten matematika cerdas berbasis kecerdasan buatan (AI). Tanyakan soal matematika apapun dan dapatkan penjelasan langkah demi langkah!",
-      steps: [
-        "Pilih 'NUMATIK ARTIFICIAL INTELLIGENCE (AI)' dari Menu Utama",
-        "Ketik pertanyaan matematikamu di kolom chat",
-        "Klik tombol kirim atau tekan Enter",
-        "NUMATIK AI akan menjawab dengan penjelasan detail step-by-step",
-        "Klik pertanyaan contoh untuk memulai percakapan dengan cepat",
-      ],
-      submenus: ["Bisa menjelaskan konsep matematika", "Bisa membantu mengerjakan soal", "Bisa memberikan contoh-contoh tambahan", "Mendukung format rumus matematika (LaTeX)"],
-      mockup: <ChatMockup />,
-    },
-    {
-      id: 14,
-      title: "Tes Kemampuan Akademik (TKA)",
-      icon: <Brain className="w-8 h-8" />,
-      color: "text-indigo-400",
-      bgGradient: "from-indigo-900/20 to-violet-900/20",
-      description: "Uji kemampuan akademik matematikamu dengan soal-soal TKA yang mirip dengan ujian masuk perguruan tinggi. Cocok untuk siswa kelas 9 yang ingin persiapan lebih.",
-      steps: [
-        "Pilih 'TES KEMAMPUAN AKADEMIK' dari Menu Utama",
-        "Baca petunjuk tes dengan seksama sebelum mulai",
-        "Ketika jawaban di klik akan muncul apakah jawabanmu benar/salah",
-        "Boleh dilihat pembahasannya agar kamu lebih mengerti",
-      ],
-      mockup: <TKAMockup />,
-    },
-    {
-      id: 15,
-      title: "Pengaturan",
-      icon: <Settings className="w-8 h-8" />,
-      color: "text-gray-400",
-      bgGradient: "from-slate-900/30 to-gray-900/30",
-      description: "Sesuaikan tampilan dan pengalaman menggunakan aplikasi NUMATIK sesuai preferensimu.",
-      steps: [
-        "Pilih 'PENGATURAN' dari Menu Utama",
-        "Aktifkan Mode Gelap/Terang sesuai selera",
-        "Atur suara latar (ambient music) ON/OFF",
-        "Atur efek suara (tombol pop) ON/OFF",
-      ],
-      submenus: ["Mode Gelap — background galaxy biru gelap", "Mode Terang — background salju putih bersih", "Suara Latar — musik galaksi ambient", "Efek Suara — suara klik tombol"],
-      mockup: <PengaturanMockup />,
-    },
-    {
-      id: 16,
-      title: "Donasi, Biografi & Referensi",
-      icon: <Heart className="w-8 h-8" />,
-      color: "text-red-400",
-      bgGradient: "from-red-900/20 to-pink-900/20",
-      description: "Informasi pendukung tentang aplikasi NUMATIK, termasuk cara mendukung pengembangan app, profil pembuat, dan daftar pustaka yang digunakan.",
-      steps: [
-        "Menu DONASI — dukung pengembangan NUMATIK agar terus berkembang",
-        "Menu BIOGRAFI — kenali profil dan latar belakang pembuat aplikasi",
-        "Menu SUMBER REFERENSI — lihat daftar pustaka yang digunakan",
-        "Menu TENTANG APLIKASI — informasi versi dan deskripsi aplikasi",
-      ],
-      mockup: (
-        <MockupFrame title="INFO APLIKASI" accentColor="text-red-400">
-          <div className="p-3 space-y-2">
-            {[
-              { icon: "❤️", label: "DONASI",          desc: "Dukung pengembangan", color: "text-red-400" },
-              { icon: "👤", label: "BIOGRAFI",         desc: "Profil pembuat",      color: "text-blue-400" },
-              { icon: "📚", label: "SUMBER REFERENSI", desc: "Daftar pustaka",      color: "text-green-400" },
-              { icon: "ℹ️", label: "TENTANG",          desc: "Info aplikasi",       color: "text-cyan-400" },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded px-2 py-1.5">
-                <span className="text-sm">{item.icon}</span>
-                <div>
-                  <p className={`text-[8px] font-bold ${item.color}`}>{item.label}</p>
-                  <p className="text-[6px] text-white/40">{item.desc}</p>
+    /* ── 13: Bank Soal (id 12) ── */
+    (() => {
+      const s13 = {
+        id: {
+          title: "Bank Soal",
+          desc: "Koleksi lengkap soal-soal matematika SMP dari berbagai topik. Cocok untuk latihan intensif dan persiapan ujian.",
+          steps: [
+            "Pilih 'BANK SOAL' dari Menu Utama",
+            "Pilih topik soal yang ingin dikerjakan",
+            "Kerjakan soal-soal yang tersedia",
+            "Periksa jawabanmu dan pelajari pembahasannya",
+          ],
+          submenus: ["Seluruh Materi Kelas 7, 8 dan 9"],
+        },
+        en: {
+          title: "Question Bank",
+          desc: "A complete collection of junior high math problems from various topics. Perfect for intensive practice and exam preparation.",
+          steps: [
+            "Select 'QUESTION BANK' from the Main Menu",
+            "Select the topic you want to practice",
+            "Work through the available problems",
+            "Check your answers and study the solutions",
+          ],
+          submenus: ["All Materials for Grade 7, 8, and 9"],
+        },
+        ja: {
+          title: "問題バンク",
+          desc: "様々なトピックの中学数学問題を網羅したコレクション。集中的な練習と試験準備に最適です。",
+          steps: [
+            "メインメニューから「問題バンク」を選択",
+            "練習したいトピックを選択",
+            "問題を解こう",
+            "答えを確認し解説を学ぼう",
+          ],
+          submenus: ["中学1・2・3年の全教材"],
+        },
+      }[language];
+      return {
+        id: 12,
+        title: s13.title,
+        icon: <FileText className="w-8 h-8" />,
+        color: "text-cyan-400",
+        bgGradient: "from-cyan-900/20 to-blue-900/20",
+        description: s13.desc,
+        steps: s13.steps,
+        submenus: s13.submenus,
+        mockup: <BankSoalMockup />,
+      };
+    })(),
+
+    /* ── 14: Chat dengan NUMATIK AI (id 13) ── */
+    (() => {
+      const s14 = {
+        id: {
+          title: "Chat dengan NUMATIK AI",
+          desc: "NUMATIK AI adalah asisten matematika cerdas berbasis kecerdasan buatan (AI). Tanyakan soal matematika apapun dan dapatkan penjelasan langkah demi langkah!",
+          steps: [
+            "Pilih 'NUMATIK ARTIFICIAL INTELLIGENCE (AI)' dari Menu Utama",
+            "Ketik pertanyaan matematikamu di kolom chat",
+            "Klik tombol kirim atau tekan Enter",
+            "NUMATIK AI akan menjawab dengan penjelasan detail step-by-step",
+            "Klik pertanyaan contoh untuk memulai percakapan dengan cepat",
+          ],
+          submenus: ["Bisa menjelaskan konsep matematika", "Bisa membantu mengerjakan soal", "Bisa memberikan contoh-contoh tambahan", "Mendukung format rumus matematika (LaTeX)"],
+        },
+        en: {
+          title: "Chat with NUMATIK AI",
+          desc: "NUMATIK AI is an intelligent math assistant powered by artificial intelligence. Ask any math question and get step-by-step explanations!",
+          steps: [
+            "Select 'NUMATIK ARTIFICIAL INTELLIGENCE (AI)' from the Main Menu",
+            "Type your math question in the chat field",
+            "Click the send button or press Enter",
+            "NUMATIK AI will answer with detailed step-by-step explanations",
+            "Click example questions to start a conversation quickly",
+          ],
+          submenus: ["Can explain math concepts", "Can help solve problems", "Can provide additional examples", "Supports mathematical formula format (LaTeX)"],
+        },
+        ja: {
+          title: "NUMATIK AIとチャット",
+          desc: "NUMATIK AIは人工知能（AI）を活用したスマートな数学アシスタント。どんな数学の質問でも、ステップごとの解説で答えてくれます！",
+          steps: [
+            "メインメニューから「NUMATIK ARTIFICIAL INTELLIGENCE (AI)」を選択",
+            "チャット欄に数学の質問を入力",
+            "送信ボタンをクリックまたはEnterを押す",
+            "NUMATIK AIが詳しいステップごとの解説で回答",
+            "例文の質問をクリックして素早く会話を始めよう",
+          ],
+          submenus: ["数学の概念を説明できる", "問題解決をサポートできる", "追加の例を提供できる", "数学式フォーマット（LaTeX）に対応"],
+        },
+      }[language];
+      return {
+        id: 13,
+        title: s14.title,
+        icon: <MessageCircle className="w-8 h-8" />,
+        color: "text-purple-400",
+        bgGradient: "from-purple-900/20 to-indigo-900/20",
+        description: s14.desc,
+        steps: s14.steps,
+        submenus: s14.submenus,
+        mockup: <ChatMockup />,
+      };
+    })(),
+
+    /* ── 15: Tes Kemampuan Akademik (id 14) ── */
+    (() => {
+      const s15 = {
+        id: {
+          title: "Tes Kemampuan Akademik (TKA)",
+          desc: "Uji kemampuan akademik matematikamu dengan soal-soal TKA yang mirip dengan ujian masuk perguruan tinggi. Cocok untuk siswa kelas 9 yang ingin persiapan lebih.",
+          steps: [
+            "Pilih 'TES KEMAMPUAN AKADEMIK' dari Menu Utama",
+            "Baca petunjuk tes dengan seksama sebelum mulai",
+            "Ketika jawaban di klik akan muncul apakah jawabanmu benar/salah",
+            "Boleh dilihat pembahasannya agar kamu lebih mengerti",
+          ],
+        },
+        en: {
+          title: "Academic Ability Test (TKA)",
+          desc: "Test your math academic skills with TKA-style questions similar to college entrance exams. Great for Grade 9 students who want extra preparation.",
+          steps: [
+            "Select 'ACADEMIC ABILITY TEST' from the Main Menu",
+            "Read the test instructions carefully before starting",
+            "Click an answer to see immediately if it is correct or wrong",
+            "Review the solutions to deepen your understanding",
+          ],
+        },
+        ja: {
+          title: "学力テスト（TKA）",
+          desc: "大学入試に似たTKA形式の問題で数学の学力を試そう。さらなる準備をしたい中学3年生に最適です。",
+          steps: [
+            "メインメニューから「学力テスト」を選択",
+            "始める前にテストの説明をよく読もう",
+            "答えをクリックすると正誤がすぐわかる",
+            "解説を読んでより深く理解しよう",
+          ],
+        },
+      }[language];
+      return {
+        id: 14,
+        title: s15.title,
+        icon: <Brain className="w-8 h-8" />,
+        color: "text-indigo-400",
+        bgGradient: "from-indigo-900/20 to-violet-900/20",
+        description: s15.desc,
+        steps: s15.steps,
+        mockup: <TKAMockup />,
+      };
+    })(),
+
+    /* ── 16: Pengaturan (id 15) ── */
+    (() => {
+      const s16 = {
+        id: {
+          title: "Pengaturan",
+          desc: "Sesuaikan tampilan dan pengalaman menggunakan aplikasi NUMATIK sesuai preferensimu.",
+          steps: [
+            "Pilih 'PENGATURAN' dari Menu Utama",
+            "Aktifkan Mode Gelap/Terang sesuai selera",
+            "Atur suara latar (ambient music) ON/OFF",
+            "Atur efek suara (tombol pop) ON/OFF",
+          ],
+          submenus: [
+            "Mode Gelap — background galaxy biru gelap",
+            "Mode Terang — background salju putih bersih",
+            "Suara Latar — musik galaksi ambient",
+            "Efek Suara — suara klik tombol",
+          ],
+        },
+        en: {
+          title: "Settings",
+          desc: "Customize the appearance and experience of using the NUMATIK app to your preference.",
+          steps: [
+            "Select 'SETTINGS' from the Main Menu",
+            "Enable Dark/Light Mode to your preference",
+            "Toggle background music (ambient) ON/OFF",
+            "Toggle sound effects (button pop) ON/OFF",
+          ],
+          submenus: [
+            "Dark Mode — dark galaxy blue background",
+            "Light Mode — clean white snow background",
+            "Background Music — galaxy ambient music",
+            "Sound Effects — button click sound",
+          ],
+        },
+        ja: {
+          title: "設定",
+          desc: "NUMATIKアプリの外観と使用体験を好みに合わせてカスタマイズしよう。",
+          steps: [
+            "メインメニューから「設定」を選択",
+            "ダーク/ライトモードを好みに合わせて切り替える",
+            "BGM（アンビエントミュージック）をON/OFFに設定",
+            "効果音（ボタンポップ）をON/OFFに設定",
+          ],
+          submenus: [
+            "ダークモード — 深い宇宙ブルーの背景",
+            "ライトモード — 清潔な白い雪の背景",
+            "BGM — 銀河アンビエントミュージック",
+            "効果音 — ボタンクリック音",
+          ],
+        },
+      }[language];
+      return {
+        id: 15,
+        title: s16.title,
+        icon: <Settings className="w-8 h-8" />,
+        color: "text-gray-400",
+        bgGradient: "from-slate-900/30 to-gray-900/30",
+        description: s16.desc,
+        steps: s16.steps,
+        submenus: s16.submenus,
+        mockup: <PengaturanMockup />,
+      };
+    })(),
+
+    /* ── 17: Donasi, Biografi & Referensi (id 16) ── */
+    (() => {
+      const s17 = {
+        id: {
+          title: "Donasi, Biografi & Referensi",
+          desc: "Informasi pendukung tentang aplikasi NUMATIK, termasuk cara mendukung pengembangan app, profil pembuat, dan daftar pustaka yang digunakan.",
+          steps: [
+            "Menu DONASI — dukung pengembangan NUMATIK agar terus berkembang",
+            "Menu BIOGRAFI — kenali profil dan latar belakang pembuat aplikasi",
+            "Menu SUMBER REFERENSI — lihat daftar pustaka yang digunakan",
+            "Menu TENTANG APLIKASI — informasi versi dan deskripsi aplikasi",
+          ],
+          mockupTitle: "INFO APLIKASI",
+          items: [
+            { icon: "❤️", label: "DONASI",          desc: "Dukung pengembangan", color: "text-red-400" },
+            { icon: "👤", label: "BIOGRAFI",         desc: "Profil pembuat",      color: "text-blue-400" },
+            { icon: "📚", label: "SUMBER REFERENSI", desc: "Daftar pustaka",      color: "text-green-400" },
+            { icon: "ℹ️", label: "TENTANG",          desc: "Info aplikasi",       color: "text-cyan-400" },
+          ],
+        },
+        en: {
+          title: "Donation, Biography & References",
+          desc: "Supporting information about the NUMATIK app, including how to support its development, the creator's profile, and references used.",
+          steps: [
+            "DONATION menu — support NUMATIK's development so it keeps growing",
+            "BIOGRAPHY menu — learn about the app creator's profile and background",
+            "REFERENCE SOURCES menu — see the list of references used",
+            "ABOUT APP menu — version information and app description",
+          ],
+          mockupTitle: "APP INFO",
+          items: [
+            { icon: "❤️", label: "DONATION",   desc: "Support development", color: "text-red-400" },
+            { icon: "👤", label: "BIOGRAPHY",  desc: "Creator's profile",   color: "text-blue-400" },
+            { icon: "📚", label: "REFERENCES", desc: "Bibliography",        color: "text-green-400" },
+            { icon: "ℹ️", label: "ABOUT",      desc: "App info",            color: "text-cyan-400" },
+          ],
+        },
+        ja: {
+          title: "寄付・略歴・参考文献",
+          desc: "NUMATIKアプリに関するサポート情報。開発支援の方法、作成者のプロフィール、使用した参考文献などを掲載しています。",
+          steps: [
+            "寄付メニュー — NUMATIKの開発を支援して成長を続けさせよう",
+            "略歴メニュー — アプリ作成者のプロフィールと背景を知ろう",
+            "参考文献メニュー — 使用した参考文献リストを見る",
+            "アプリについてメニュー — バージョン情報とアプリの説明",
+          ],
+          mockupTitle: "アプリ情報",
+          items: [
+            { icon: "❤️", label: "寄付",         desc: "開発を支援",         color: "text-red-400" },
+            { icon: "👤", label: "略歴",         desc: "作成者プロフィール",  color: "text-blue-400" },
+            { icon: "📚", label: "参考文献",     desc: "参考文献リスト",     color: "text-green-400" },
+            { icon: "ℹ️", label: "アプリについて", desc: "アプリ情報",         color: "text-cyan-400" },
+          ],
+        },
+      }[language];
+      return {
+        id: 16,
+        title: s17.title,
+        icon: <Heart className="w-8 h-8" />,
+        color: "text-red-400",
+        bgGradient: "from-red-900/20 to-pink-900/20",
+        description: s17.desc,
+        steps: s17.steps,
+        mockup: (
+          <MockupFrame title={s17.mockupTitle} accentColor="text-red-400">
+            <div className="p-3 space-y-2">
+              {s17.items.map((item) => (
+                <div key={item.label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded px-2 py-1.5">
+                  <span className="text-sm">{item.icon}</span>
+                  <div>
+                    <p className={`text-[8px] font-bold ${item.color}`}>{item.label}</p>
+                    <p className="text-[6px] text-white/40">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </MockupFrame>
-      ),
-    },
+              ))}
+            </div>
+          </MockupFrame>
+        ),
+      };
+    })(),
   ];
 }
 
