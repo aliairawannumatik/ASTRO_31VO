@@ -94,6 +94,13 @@ Notes for future pages:
 - KaTeX \text{} violations: PemfaktoranPage baris 96/125 (Jika, atau, cari, faktorkan); DiskriminanPage baris 200 (atau)
 - PenerapanKontekstualPage: soal cerita "pedagang jeruk Rp.96.000" + "kolam renang 8×6 m" + "bilangan bulat berurutan" — tidak ada nama tokoh, tapi konteks & mata uang perlu dilokalisasi
 
+## Fungsi Kuadrat Kelas 9 — Hub selesai (2026-07-17)
+`FungsiKuadratPage.tsx` (hub) trilingual, tsc 0 error, screenshot-verified EN+JA.
+- EN title: "QUADRATIC FUNCTION (ENRICHMENT)" / JA: "二次関数（発展）"
+- EN kelas: "Grade 9" / JA: "中学3年" (bukan "9年生")
+- 6 subtopik: BentukUmumKarakteristik, TitikPotong, SumbuSimetri, MenggambarGrafik, MenyusunFungsi, PenerapanNilaiMaksMin — semua masih ID-only, belum diterjemahkan
+- `AngryBirdParabola` (581 baris) dipakai hanya di PenerapanNilaiMaksMin, perlu `useLanguage` internal
+
 ## PenerapanKontekstual Kelas 9 — 100% complete (2026-07-17)
 `PenerapanKontekstualPage.tsx` trilingual, tsc 0 error, screenshot-verified EN+JA.
 - Title EN: "QUADRATIC EQUATION APPLICATIONS" / JA: "二次方程式の文脈的応用"
