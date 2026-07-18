@@ -4376,3 +4376,48 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
 .theme-sunset .lm-kkg-svg rect:first-child {
   fill: #f1f5f9 !important;
 }
+
+/* 5. Vertex circles with dark fill (#0b1733) → light on bright themes */
+.light-mode .lm-kkg-svg circle[fill="#0b1733"],
+.theme-white .lm-kkg-svg circle[fill="#0b1733"],
+.theme-forest .lm-kkg-svg circle[fill="#0b1733"],
+.theme-sunset .lm-kkg-svg circle[fill="#0b1733"] {
+  fill: #e0f2fe !important;
+}
+
+/* 6. Near-white and rgba-white text inside SVG diagrams → dark on light themes
+      Covers: vertex labels (#e2e8f0), side labels and ≅ symbols (rgba white) */
+.light-mode .lm-kkg-svg text[fill="#e2e8f0"],
+.light-mode .lm-kkg-svg text[fill="rgba(255,255,255,0.5)"],
+.light-mode .lm-kkg-svg text[fill="rgba(255,255,255,0.7)"],
+.light-mode .lm-kkg-svg text[fill="rgba(255,255,255,0.8)"],
+.light-mode .lm-kkg-svg text[fill="rgba(255,255,255,0.9)"],
+.theme-white .lm-kkg-svg text[fill="#e2e8f0"],
+.theme-white .lm-kkg-svg text[fill="rgba(255,255,255,0.5)"],
+.theme-white .lm-kkg-svg text[fill="rgba(255,255,255,0.7)"],
+.theme-white .lm-kkg-svg text[fill="rgba(255,255,255,0.8)"],
+.theme-white .lm-kkg-svg text[fill="rgba(255,255,255,0.9)"],
+.theme-forest .lm-kkg-svg text[fill="#e2e8f0"],
+.theme-forest .lm-kkg-svg text[fill="rgba(255,255,255,0.5)"],
+.theme-forest .lm-kkg-svg text[fill="rgba(255,255,255,0.7)"],
+.theme-forest .lm-kkg-svg text[fill="rgba(255,255,255,0.8)"],
+.theme-forest .lm-kkg-svg text[fill="rgba(255,255,255,0.9)"],
+.theme-sunset .lm-kkg-svg text[fill="#e2e8f0"],
+.theme-sunset .lm-kkg-svg text[fill="rgba(255,255,255,0.5)"],
+.theme-sunset .lm-kkg-svg text[fill="rgba(255,255,255,0.7)"],
+.theme-sunset .lm-kkg-svg text[fill="rgba(255,255,255,0.8)"],
+.theme-sunset .lm-kkg-svg text[fill="rgba(255,255,255,0.9)"] {
+  fill: rgba(15,23,42,0.82) !important;
+}
+
+/* 7. Axis/grid stroke lines that use near-white strokes → subtle dark on light themes */
+.light-mode .lm-kkg-svg line[stroke="rgba(255,255,255,0.15)"],
+.light-mode .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"],
+.theme-white .lm-kkg-svg line[stroke="rgba(255,255,255,0.15)"],
+.theme-white .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"],
+.theme-forest .lm-kkg-svg line[stroke="rgba(255,255,255,0.15)"],
+.theme-forest .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"],
+.theme-sunset .lm-kkg-svg line[stroke="rgba(255,255,255,0.15)"],
+.theme-sunset .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"] {
+  stroke: rgba(15,23,42,0.12) !important;
+}
