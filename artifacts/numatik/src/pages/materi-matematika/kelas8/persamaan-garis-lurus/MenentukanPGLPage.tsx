@@ -6,29 +6,38 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Edit } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
+import { useTheme } from "@/contexts/ThemeContext";
 import { InlineMath, BlockMath } from "react-katex";
 
 const W = 180, H = 150, MX = 90, MY = 75, SC = 14;
 const toX = (x: number) => MX + x * SC;
 const toY = (y: number) => MY - y * SC;
 
-const CoordSys = ({ children, label = "" }: { children?: React.ReactNode; label?: string }) => (
-  <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ maxHeight: 170, background: "rgba(15,23,42,0.7)" }}>
-    {[-5,-4,-3,-2,-1,1,2,3,4,5].map(v => (
-      <g key={v}>
-        <line x1={MX+v*SC*0.7} y1={4} x2={MX+v*SC*0.7} y2={H-4} stroke="#1e293b" strokeWidth="0.7" />
-        <line x1={4} y1={MY-v*SC*0.7} x2={W-4} y2={MY-v*SC*0.7} stroke="#1e293b" strokeWidth="0.7" />
-      </g>
-    ))}
-    <line x1={4} y1={MY} x2={W-4} y2={MY} stroke="#475569" strokeWidth="1.5" />
-    <line x1={MX} y1={H-4} x2={MX} y2={4} stroke="#475569" strokeWidth="1.5" />
-    <text x={W-10} y={MY+11} fill="#64748b" fontSize="8">x</text>
-    <text x={MX+3} y={11} fill="#64748b" fontSize="8">y</text>
-    <text x={MX+2} y={MY+10} fill="#475569" fontSize="7">O</text>
-    {label && <text x={5} y={13} fill="#94a3b8" fontSize="8">{label}</text>}
-    {children}
-  </svg>
-);
+const CoordSys = ({ children, label = "" }: { children?: React.ReactNode; label?: string }) => {
+  const { isDark } = useTheme();
+  const gridS  = isDark ? "#1e293b" : "#cbd5e1";
+  const axisS  = isDark ? "#475569" : "#64748b";
+  const lblFil = isDark ? "#64748b" : "#475569";
+  const oriF   = isDark ? "#475569" : "#334155";
+  const svgBg  = isDark ? "rgba(15,23,42,0.7)" : "rgba(241,245,249,0.9)";
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ maxHeight: 170, background: svgBg }}>
+      {[-5,-4,-3,-2,-1,1,2,3,4,5].map(v => (
+        <g key={v}>
+          <line x1={MX+v*SC*0.7} y1={4} x2={MX+v*SC*0.7} y2={H-4} stroke={gridS} strokeWidth="0.7" />
+          <line x1={4} y1={MY-v*SC*0.7} x2={W-4} y2={MY-v*SC*0.7} stroke={gridS} strokeWidth="0.7" />
+        </g>
+      ))}
+      <line x1={4} y1={MY} x2={W-4} y2={MY} stroke={axisS} strokeWidth="1.5" />
+      <line x1={MX} y1={H-4} x2={MX} y2={4} stroke={axisS} strokeWidth="1.5" />
+      <text x={W-10} y={MY+11} fill={lblFil} fontSize="8">x</text>
+      <text x={MX+3} y={11} fill={lblFil} fontSize="8">y</text>
+      <text x={MX+2} y={MY+10} fill={oriF} fontSize="7">O</text>
+      {label && <text x={5} y={13} fill={isDark ? "#94a3b8" : "#64748b"} fontSize="8">{label}</text>}
+      {children}
+    </svg>
+  );
+};
 
 // ── Interactive calculator helpers ──────────────────────────────────────
 const _gcd = (a: number, b: number): number => {
@@ -406,6 +415,7 @@ const MenentukanPGLPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = T_MENENTUKAN[language];
+  const { isDark } = useTheme();
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "rumus1", "rumus2", "peta-rumus", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
@@ -483,7 +493,7 @@ const MenentukanPGLPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">{t.introP}</p>
                 {/* Peta skenario */}
-                <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-cyan-500/20 rounded-xl p-4`}>
                   <p className="text-xs font-bold text-cyan-300 uppercase mb-3">{t.petaTitle}</p>
                   <div className="space-y-2">
                     {t.skenarios.map(({ no, info, rumus }) => {
@@ -514,7 +524,7 @@ const MenentukanPGLPage = () => {
                   <p className="text-xs text-white/60 mt-1">{t.sk1_rumusLabel}</p>
                 </div>
                 {/* Step visual */}
-                <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/50' : 'bg-gray-100/70'} border border-white/10 rounded-xl p-4`}>
                   <p className="text-xs font-bold text-violet-300 mb-2">{t.sk1_stepsTitle}</p>
                   <div className="space-y-2">
                     {t.sk1_steps.map(({ t: stepText }, idx) => {
@@ -529,7 +539,7 @@ const MenentukanPGLPage = () => {
                   </div>
                 </div>
                 {/* Example visual */}
-                <div className="bg-slate-800/60 border border-violet-500/20 rounded-xl p-3">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-violet-500/20 rounded-xl p-3`}>
                   <p className="text-xs font-bold text-violet-300 mb-2">{t.sk1_example}</p>
                   <CoordSys label="y = 3x − 1">
                     <polyline points={[[-2,-7],[-1,-4],[0,-1],[1,2],[2,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
@@ -554,7 +564,7 @@ const MenentukanPGLPage = () => {
                           value={val}
                           onChange={e => { playPopSound(); onChange(e.target.value); }}
                           placeholder="0"
-                          className="w-full bg-slate-900/60 border border-slate-600 hover:border-violet-500/60 focus:border-violet-400 rounded-lg px-2 py-2 text-white text-sm text-center font-mono focus:outline-none transition-colors"
+                          className={`w-full ${isDark ? 'bg-slate-900/60 border-slate-600 text-white' : 'bg-white border-gray-300 text-gray-900'} border hover:border-violet-500/60 focus:border-violet-400 rounded-lg px-2 py-2 text-sm text-center font-mono focus:outline-none transition-colors`}
                         />
                       </div>
                     ))}
@@ -610,7 +620,7 @@ const MenentukanPGLPage = () => {
                         )}
                         {iv1.step >= steps.length && (
                           <button onClick={() => { playPopSound(); setIv1({ m:"", x1:"", y1:"", step:0, error:"" }); setIv1Off(10000); }}
-                            className="w-full bg-slate-700/60 hover:bg-slate-600 border border-slate-500/30 text-white/70 hover:text-white py-2 rounded-lg text-sm transition-all cursor-pointer font-body">
+                            className={`w-full ${isDark ? 'bg-slate-700/60 hover:bg-slate-600 border-slate-500/30 text-white/70 hover:text-white' : 'bg-gray-200 hover:bg-gray-300 border-gray-300 text-gray-600 hover:text-gray-900'} border py-2 rounded-lg text-sm transition-all cursor-pointer font-body`}>
                             🔄 {t.btnReset}
                           </button>
                         )}
@@ -631,7 +641,7 @@ const MenentukanPGLPage = () => {
                   <BlockMath math="\frac{y - y_1}{y_2 - y_1} = \frac{x - x_1}{x_2 - x_1}" />
                   <p className="text-xs text-white/60 mt-1">{t.sk2_rumusLabel}</p>
                 </div>
-                <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/50' : 'bg-gray-100/70'} border border-white/10 rounded-xl p-4`}>
                   <p className="text-xs font-bold text-orange-300 mb-2">{t.sk2_altTitle}</p>
                   <div className="space-y-1 text-xs font-body text-white/70">
                     {t.sk2_alt.map((step, idx) => (
@@ -640,7 +650,7 @@ const MenentukanPGLPage = () => {
                   </div>
                 </div>
                 {/* Example visual */}
-                <div className="bg-slate-800/60 border border-orange-500/20 rounded-xl p-3">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-orange-500/20 rounded-xl p-3`}>
                   <p className="text-xs font-bold text-orange-300 mb-2">{t.sk2_example}</p>
                   <CoordSys label={t.sk2_exLabel}>
                     <polyline points={[[-1,-1],[0,1],[1,3],[2,5],[3,7],[4,9]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#fb923c" strokeWidth="2.5" strokeLinecap="round" />
@@ -673,7 +683,7 @@ const MenentukanPGLPage = () => {
                           value={val}
                           onChange={e => { playPopSound(); onChange(e.target.value); }}
                           placeholder="0"
-                          className="w-full bg-slate-900/60 border border-slate-600 hover:border-cyan-500/60 focus:border-cyan-400 rounded-lg px-2 py-2 text-white text-sm text-center font-mono focus:outline-none transition-colors"
+                          className={`w-full ${isDark ? 'bg-slate-900/60 border-slate-600 text-white' : 'bg-white border-gray-300 text-gray-900'} border hover:border-cyan-500/60 focus:border-cyan-400 rounded-lg px-2 py-2 text-sm text-center font-mono focus:outline-none transition-colors`}
                         />
                       </div>
                     ))}
@@ -757,7 +767,7 @@ const MenentukanPGLPage = () => {
                         )}
                         {iv3.step >= steps.length && (
                           <button onClick={() => { playPopSound(); setIv3({ x1:"", y1:"", x2:"", y2:"", step:0, error:"" }); setIv3Off(10000); }}
-                            className="w-full bg-slate-700/60 hover:bg-slate-600 border border-slate-500/30 text-white/70 hover:text-white py-2 rounded-lg text-sm transition-all cursor-pointer font-body">
+                            className={`w-full ${isDark ? 'bg-slate-700/60 hover:bg-slate-600 border-slate-500/30 text-white/70 hover:text-white' : 'bg-gray-200 hover:bg-gray-300 border-gray-300 text-gray-600 hover:text-gray-900'} border py-2 rounded-lg text-sm transition-all cursor-pointer font-body`}>
                             🔄 {t.btnReset}
                           </button>
                         )}
@@ -783,7 +793,7 @@ const MenentukanPGLPage = () => {
                           value={val}
                           onChange={e => { playPopSound(); onChange(e.target.value); }}
                           placeholder="0"
-                          className="w-full bg-slate-900/60 border border-slate-600 hover:border-orange-500/60 focus:border-orange-400 rounded-lg px-2 py-2 text-white text-sm text-center font-mono focus:outline-none transition-colors"
+                          className={`w-full ${isDark ? 'bg-slate-900/60 border-slate-600 text-white' : 'bg-white border-gray-300 text-gray-900'} border hover:border-orange-500/60 focus:border-orange-400 rounded-lg px-2 py-2 text-sm text-center font-mono focus:outline-none transition-colors`}
                         />
                       </div>
                     ))}
@@ -853,7 +863,7 @@ const MenentukanPGLPage = () => {
                         )}
                         {iv2.step >= steps.length && (
                           <button onClick={() => { playPopSound(); setIv2({ x1:"", y1:"", x2:"", y2:"", step:0, error:"" }); setIv2Off(10000); }}
-                            className="w-full bg-slate-700/60 hover:bg-slate-600 border border-slate-500/30 text-white/70 hover:text-white py-2 rounded-lg text-sm transition-all cursor-pointer font-body">
+                            className={`w-full ${isDark ? 'bg-slate-700/60 hover:bg-slate-600 border-slate-500/30 text-white/70 hover:text-white' : 'bg-gray-200 hover:bg-gray-300 border-gray-300 text-gray-600 hover:text-gray-900'} border py-2 rounded-lg text-sm transition-all cursor-pointer font-body`}>
                             🔄 {t.btnReset}
                           </button>
                         )}
@@ -870,10 +880,10 @@ const MenentukanPGLPage = () => {
             <SH id="peta-rumus" icon={<BookOpen className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_peta} />
             {true && (
               <div className="px-5 pb-5 space-y-3">
-                <div className="bg-slate-800/60 border border-yellow-500/20 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-yellow-500/20 rounded-xl p-4`}>
                   <svg viewBox="0 0 260 200" className="w-full" style={{ maxHeight: 200 }}>
                     {/* Start */}
-                    <rect x="80" y="5" width="100" height="30" rx="6" fill="#1e3a5f" stroke="#22d3ee" strokeWidth="1.5" />
+                    <rect x="80" y="5" width="100" height="30" rx="6" fill={isDark ? "#1e3a5f" : "#eff6ff"} stroke="#22d3ee" strokeWidth="1.5" />
                     <text x="130" y="25" textAnchor="middle" fill="#22d3ee" fontSize="10" fontWeight="bold">{t.peta_infoGaris}</text>
                     {/* Arrow down */}
                     <line x1="130" y1="35" x2="130" y2="52" stroke="#475569" strokeWidth="1.5" />
@@ -885,11 +895,11 @@ const MenentukanPGLPage = () => {
                     <text x="65" y="74" textAnchor="middle" fill="#a78bfa" fontSize="8">{t.peta_mDan1Titik}</text>
                     <text x="195" y="74" textAnchor="middle" fill="#fb923c" fontSize="8">{t.peta_2Titik}</text>
                     {/* Box 1 */}
-                    <rect x="10" y="85" width="110" height="40" rx="5" fill="#1a0b3a" stroke="#a78bfa" strokeWidth="1.2" />
+                    <rect x="10" y="85" width="110" height="40" rx="5" fill={isDark ? "#1a0b3a" : "#f5f3ff"} stroke="#a78bfa" strokeWidth="1.2" />
                     <text x="65" y="101" textAnchor="middle" fill="#a78bfa" fontSize="8" fontWeight="bold">y−y₁ = m(x−x₁)</text>
                     <text x="65" y="114" textAnchor="middle" fill="#c4b5fd" fontSize="7">{t.peta_titikGradien}</text>
                     {/* Box 2 */}
-                    <rect x="140" y="85" width="110" height="40" rx="5" fill="#1c0d00" stroke="#fb923c" strokeWidth="1.2" />
+                    <rect x="140" y="85" width="110" height="40" rx="5" fill={isDark ? "#1c0d00" : "#fff7ed"} stroke="#fb923c" strokeWidth="1.2" />
                     <text x="195" y="101" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">{t.peta_hitungM}</text>
                     <text x="195" y="113" textAnchor="middle" fill="#fb923c" fontSize="7" fontWeight="bold">{t.peta_laluSk1}</text>
                     {/* Both converge to result */}
@@ -898,7 +908,7 @@ const MenentukanPGLPage = () => {
                     <line x1="65" y1="152" x2="195" y2="152" stroke="#475569" strokeWidth="1" />
                     <line x1="130" y1="152" x2="130" y2="165" stroke="#475569" strokeWidth="1" />
                     <polygon points="125,163 135,163 130,170" fill="#4ade80" />
-                    <rect x="70" y="170" width="120" height="26" rx="5" fill="#064e3b" stroke="#4ade80" strokeWidth="1.5" />
+                    <rect x="70" y="170" width="120" height="26" rx="5" fill={isDark ? "#064e3b" : "#f0fdf4"} stroke="#4ade80" strokeWidth="1.5" />
                     <text x="130" y="187" textAnchor="middle" fill="#4ade80" fontSize="10" fontWeight="bold">y = mx + c ✅</text>
                   </svg>
                 </div>
@@ -912,18 +922,18 @@ const MenentukanPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
-                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-green-500/30 rounded-xl p-4`}>
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c1_soal}</p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`${isDark ? 'bg-slate-700/40' : 'bg-gray-50'} border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body`}>
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-cyan-300 font-semibold mb-1">{t.c1_p1}</p>
                     <BlockMath math="y - (-3) = 4(x - 0)" />
                     <BlockMath math="y + 3 = 4x" />
                     <BlockMath math="y = 4x - 3" />
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c1_vis}</p>
                     <CoordSys label="y = 4x − 3">
                       <polyline points={[[-2,-11],[-1,-7],[0,-3],[1,1],[2,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" />
@@ -945,18 +955,18 @@ const MenentukanPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
-                <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-yellow-500/30 rounded-xl p-4`}>
                   <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c2_soal}</p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`${isDark ? 'bg-slate-700/40' : 'bg-gray-50'} border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body`}>
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-cyan-300 font-semibold mb-1">{t.c2_p1}</p>
                     <BlockMath math="y - 1 = -\frac{1}{2}(x - 4)" />
                     <BlockMath math="y - 1 = -\frac{1}{2}x + 2" />
                     <BlockMath math="y = -\frac{1}{2}x + 3" />
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-violet-300 font-semibold mb-2 text-xs">{t.c2_vis}</p>
                     <CoordSys label="y = −½x + 3">
                       <polyline points={[[-4,5],[-2,4],[0,3],[2,2],[4,1],[6,0]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
@@ -982,11 +992,11 @@ const MenentukanPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
-                <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-red-500/30 rounded-xl p-4`}>
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c3_soal}</p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
+                <div className={`${isDark ? 'bg-slate-700/40' : 'bg-gray-50'} border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body`}>
 
                   {/* ── CARA 1 ── */}
                   <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
@@ -994,27 +1004,27 @@ const MenentukanPGLPage = () => {
                     <p className="text-xs text-white/60 mt-1">{t.c3_cara1desc}</p>
                   </div>
 
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-cyan-300 font-semibold mb-1">{t.c3_l1}</p>
                     <p className="text-xs text-white/50 mb-2 font-body">{t.c3_l1note}</p>
                     <BlockMath math="\frac{y - 5}{-1 - 5} = \frac{x - (-2)}{4 - (-2)}" />
                     <BlockMath math="\frac{y - 5}{-6} = \frac{x + 2}{6}" />
                   </div>
 
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-violet-300 font-semibold mb-1">{t.c3_l2}</p>
                     <BlockMath math="6(y - 5) = -6(x + 2)" />
                     <BlockMath math="6y - 30 = -6x - 12" />
                   </div>
 
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-green-300 font-semibold mb-1">{t.c3_l3}</p>
                     <BlockMath math="6y = -6x - 12 + 30" />
                     <BlockMath math="6y = -6x + 18" />
                     <BlockMath math="y = -x + 3" />
                   </div>
 
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-pink-300 font-semibold mb-1">{t.c3_l4}</p>
                     <BlockMath math="y = -x + 3 \implies x + y - 3 = 0" />
                   </div>
@@ -1037,14 +1047,14 @@ const MenentukanPGLPage = () => {
                   </div>
 
                   {/* Langkah 1b */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-cyan-300 font-semibold mb-1">{t.c3_l1b}</p>
                     <p className="text-xs text-white/50 mb-2 font-body">{t.c3_l1bnote}</p>
                     <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{-1 - 5}{4 - (-2)} = \frac{-6}{6} = -1" />
                   </div>
 
                   {/* Langkah 2b */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-violet-300 font-semibold mb-1">{t.c3_l2b}</p>
                     <p className="text-xs text-white/50 mb-2 font-body">{t.c3_l2bnote}</p>
                     <BlockMath math="y - 5 = -1\bigl(x - (-2)\bigr)" />
@@ -1052,7 +1062,7 @@ const MenentukanPGLPage = () => {
                   </div>
 
                   {/* Langkah 3b */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-green-300 font-semibold mb-1">{t.c3_l3b}</p>
                     <BlockMath math="y - 5 = -x - 2" />
                     <BlockMath math="y = -x - 2 + 5" />
@@ -1060,13 +1070,13 @@ const MenentukanPGLPage = () => {
                   </div>
 
                   {/* Langkah 4b */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-pink-300 font-semibold mb-1">{t.c3_l4b}</p>
                     <BlockMath math="y = -x + 3 \implies x + y - 3 = 0" />
                   </div>
 
                   {/* Grafik */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                     <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c3_vis}</p>
                     <CoordSys label="x + y − 3 = 0">
                       <polyline points={[[-2,5],[-1,4],[0,3],[1,2],[2,1],[3,0],[4,-1]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />

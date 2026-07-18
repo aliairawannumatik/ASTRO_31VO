@@ -8,6 +8,7 @@ import { InlineMath, BlockMath } from "react-katex";
 import GeoGebraGrapher from "@/components/GeoGebraGrapher";
 import EquasiGarisLurusAnim from "@/components/EquasiGarisLurusAnim";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const T_GRAFIK = {
   id: {
@@ -742,32 +743,37 @@ const CoordSystem = ({ children, w = W, h = H, label = "", showNumbers = false }
   const uid = React.useId().replace(/:/g, "");
   const xStep = w / 12, yStep = h / 10;
   const ticks = [-4, -2, 2, 4];
+  const { isDark } = useTheme();
+  const cGridS = isDark ? "#1e293b" : "#cbd5e1";
+  const cAxisS = isDark ? "#475569" : "#64748b";
+  const cLblF  = isDark ? "#64748b" : "#475569";
+  const cSvgBg = isDark ? "rgba(15,23,42,0.7)" : "rgba(241,245,249,0.9)";
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full rounded-xl" style={{ maxHeight: showNumbers ? 220 : 180, background: "rgba(15,23,42,0.7)" }}>
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full rounded-xl" style={{ maxHeight: showNumbers ? 220 : 180, background: cSvgBg }}>
       {/* grid */}
       {[-5,-4,-3,-2,-1,1,2,3,4,5].map(v => (
         <g key={v}>
-          <line x1={mx + v*xStep} y1={4} x2={mx + v*xStep} y2={h-4} stroke="#1e293b" strokeWidth="1" />
-          <line x1={4} y1={my - v*yStep} x2={w-4} y2={my - v*yStep} stroke="#1e293b" strokeWidth="1" />
+          <line x1={mx + v*xStep} y1={4} x2={mx + v*xStep} y2={h-4} stroke={cGridS} strokeWidth="1" />
+          <line x1={4} y1={my - v*yStep} x2={w-4} y2={my - v*yStep} stroke={cGridS} strokeWidth="1" />
         </g>
       ))}
       {/* axes */}
-      <line x1={4} y1={my} x2={w-4} y2={my} stroke="#475569" strokeWidth="1.5" markerEnd={`url(#arr-${uid})`} />
-      <line x1={mx} y1={h-4} x2={mx} y2={4} stroke="#475569" strokeWidth="1.5" markerEnd={`url(#arr-${uid})`} />
+      <line x1={4} y1={my} x2={w-4} y2={my} stroke={cAxisS} strokeWidth="1.5" markerEnd={`url(#arr-${uid})`} />
+      <line x1={mx} y1={h-4} x2={mx} y2={4} stroke={cAxisS} strokeWidth="1.5" markerEnd={`url(#arr-${uid})`} />
       <defs>
         <marker id={`arr-${uid}`} markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto">
-          <path d="M0,0 L5,2.5 L0,5 Z" fill="#475569" />
+          <path d="M0,0 L5,2.5 L0,5 Z" fill={cAxisS} />
         </marker>
       </defs>
-      <text x={w-10} y={my+12} fill="#64748b" fontSize="9">x</text>
-      <text x={mx+4} y={12} fill="#64748b" fontSize="9">y</text>
-      <text x={mx+3} y={my+11} fill="#475569" fontSize="7">O</text>
-      {label && <text x={6} y={14} fill="#94a3b8" fontSize="8">{label}</text>}
+      <text x={w-10} y={my+12} fill={cLblF} fontSize="9">x</text>
+      <text x={mx+4} y={12} fill={cLblF} fontSize="9">y</text>
+      <text x={mx+3} y={my+11} fill={isDark ? "#475569" : "#334155"} fontSize="7">O</text>
+      {label && <text x={6} y={14} fill={isDark ? "#94a3b8" : "#64748b"} fontSize="8">{label}</text>}
       {/* axis numbers */}
       {showNumbers && [-4,-3,-2,-1,1,2,3,4].map(v => (
         <g key={`num-${v}`}>
-          <text x={mx + v*xStep - (v < -9 ? 9 : v < 0 ? 6 : 3)} y={my + 11} fill="#64748b" fontSize="7">{v}</text>
-          <text x={mx - 15} y={my - v*yStep + 3} fill="#64748b" fontSize="7">{v}</text>
+          <text x={mx + v*xStep - (v < -9 ? 9 : v < 0 ? 6 : 3)} y={my + 11} fill={cLblF} fontSize="7">{v}</text>
+          <text x={mx - 15} y={my - v*yStep + 3} fill={cLblF} fontSize="7">{v}</text>
         </g>
       ))}
       {children}
@@ -797,6 +803,16 @@ const InteractiveStepGraph = ({
   navRepeat: string;
 }) => {
   const [step, setStep] = React.useState(0);
+  const { isDark } = useTheme();
+  const isgBg       = isDark ? "rgba(6,12,30,0.97)"  : "rgba(248,250,252,0.97)";
+  const isgGridMain  = isDark ? "#334155"             : "#94a3b8";
+  const isgGridSub   = isDark ? "#0f1f3d"             : "#cbd5e1";
+  const isgAxisS     = isDark ? "#475569"             : "#64748b";
+  const isgLbl       = isDark ? "#64748b"             : "#475569";
+  const isgTick      = isDark ? "#4b5563"             : "#6b7280";
+  const isgBadgeBg   = isDark ? "rgba(30,41,59,0.9)" : "rgba(255,255,255,0.9)";
+  const isgBadgeFill = isDark ? "#94a3b8"             : "#475569";
+  const isgPtBg      = isDark ? "rgba(6,12,30,0.85)" : "rgba(255,255,255,0.85)";
 
   const ptLabelPos = (x: number, y: number, above: boolean): [number,number] => {
     const px = iax(x), py = iay(y);
@@ -841,41 +857,41 @@ const InteractiveStepGraph = ({
 
       {/* SVG Graph */}
       <div className="relative">
-        <svg viewBox={`0 0 ${ISG_W} ${ISG_H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.97)", maxHeight: 380 }}>
+        <svg viewBox={`0 0 ${ISG_W} ${ISG_H}`} className="w-full rounded-xl" style={{ background: isgBg, maxHeight: 380 }}>
           {/* grid lines */}
           {[-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6].map(v => (
             <g key={v}>
-              <line x1={iax(v)} y1={3} x2={iax(v)} y2={ISG_H-3} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.8"}/>
-              <line x1={3} y1={iay(v)} x2={ISG_W-3} y2={iay(v)} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.8"}/>
+              <line x1={iax(v)} y1={3} x2={iax(v)} y2={ISG_H-3} stroke={v===0?isgGridMain:isgGridSub} strokeWidth={v===0?"1":"0.8"}/>
+              <line x1={3} y1={iay(v)} x2={ISG_W-3} y2={iay(v)} stroke={v===0?isgGridMain:isgGridSub} strokeWidth={v===0?"1":"0.8"}/>
             </g>
           ))}
           {/* axes */}
-          <line x1={6} y1={ISG_MY} x2={ISG_W-6} y2={ISG_MY} stroke="#475569" strokeWidth="2"/>
-          <line x1={ISG_MX} y1={ISG_H-6} x2={ISG_MX} y2={6} stroke="#475569" strokeWidth="2"/>
+          <line x1={6} y1={ISG_MY} x2={ISG_W-6} y2={ISG_MY} stroke={isgAxisS} strokeWidth="2"/>
+          <line x1={ISG_MX} y1={ISG_H-6} x2={ISG_MX} y2={6} stroke={isgAxisS} strokeWidth="2"/>
           {/* axis arrow tips */}
-          <polygon points={`${ISG_W-6},${ISG_MY} ${ISG_W-12},${ISG_MY-4} ${ISG_W-12},${ISG_MY+4}`} fill="#475569"/>
-          <polygon points={`${ISG_MX},6 ${ISG_MX-4},12 ${ISG_MX+4},12`} fill="#475569"/>
+          <polygon points={`${ISG_W-6},${ISG_MY} ${ISG_W-12},${ISG_MY-4} ${ISG_W-12},${ISG_MY+4}`} fill={isgAxisS}/>
+          <polygon points={`${ISG_MX},6 ${ISG_MX-4},12 ${ISG_MX+4},12`} fill={isgAxisS}/>
           {/* axis labels */}
-          <text x={ISG_W-14} y={ISG_MY+13} fill="#64748b" fontSize="10" fontWeight="bold">x</text>
-          <text x={ISG_MX+6} y={15} fill="#64748b" fontSize="10" fontWeight="bold">y</text>
-          <text x={ISG_MX+3} y={ISG_MY+13} fill="#475569" fontSize="8">O</text>
+          <text x={ISG_W-14} y={ISG_MY+13} fill={isgLbl} fontSize="10" fontWeight="bold">x</text>
+          <text x={ISG_MX+6} y={15} fill={isgLbl} fontSize="10" fontWeight="bold">y</text>
+          <text x={ISG_MX+3} y={ISG_MY+13} fill={isgAxisS} fontSize="8">O</text>
           {/* tick numbers - x axis */}
           {ISG_TICKS.map(v => (
             <g key={`xn${v}`}>
-              <line x1={iax(v)} y1={ISG_MY-3} x2={iax(v)} y2={ISG_MY+3} stroke="#475569" strokeWidth="1"/>
-              <text x={iax(v)-(v<=-10?10:v<0?7:3)} y={ISG_MY+13} fill="#4b5563" fontSize="7.5">{v}</text>
+              <line x1={iax(v)} y1={ISG_MY-3} x2={iax(v)} y2={ISG_MY+3} stroke={isgAxisS} strokeWidth="1"/>
+              <text x={iax(v)-(v<=-10?10:v<0?7:3)} y={ISG_MY+13} fill={isgTick} fontSize="7.5">{v}</text>
             </g>
           ))}
           {/* tick numbers - y axis */}
           {ISG_TICKS.map(v => (
             <g key={`yn${v}`}>
-              <line x1={ISG_MX-3} y1={iay(v)} x2={ISG_MX+3} y2={iay(v)} stroke="#475569" strokeWidth="1"/>
-              <text x={ISG_MX-16} y={iay(v)+3} fill="#4b5563" fontSize="7.5">{v}</text>
+              <line x1={ISG_MX-3} y1={iay(v)} x2={ISG_MX+3} y2={iay(v)} stroke={isgAxisS} strokeWidth="1"/>
+              <text x={ISG_MX-16} y={iay(v)+3} fill={isgTick} fontSize="7.5">{v}</text>
             </g>
           ))}
           {/* equation label badge */}
-          <rect x={6} y={6} width={equationLabel.length*6+10} height={14} rx="3" fill="rgba(30,41,59,0.9)"/>
-          <text x={11} y={16} fill="#94a3b8" fontSize="8.5" fontWeight="bold">{equationLabel}</text>
+          <rect x={6} y={6} width={equationLabel.length*6+10} height={14} rx="3" fill={isgBadgeBg}/>
+          <text x={11} y={16} fill={isgBadgeFill} fontSize="8.5" fontWeight="bold">{equationLabel}</text>
 
           {/* Step 3: draw line */}
           {step >= 3 && (
@@ -890,7 +906,7 @@ const InteractiveStepGraph = ({
             <g>
               <circle cx={iax(point1[0])} cy={iay(point1[1])} r="7" fill="#22d3ee" stroke="#cffafe" strokeWidth="2"/>
               <circle cx={iax(point1[0])} cy={iay(point1[1])} r="11" fill="none" stroke="#22d3ee" strokeWidth="1" strokeOpacity="0.4"/>
-              <rect x={p1lx-1} y={p1ly-9} width={`${String(point1).replace(',',' ').length*5+16}px`} height="12" rx="2" fill="rgba(6,12,30,0.85)"/>
+              <rect x={p1lx-1} y={p1ly-9} width={`${String(point1).replace(',',' ').length*5+16}px`} height="12" rx="2" fill={isgPtBg}/>
               <text x={p1lx} y={p1ly} fill="#22d3ee" fontSize="9" fontWeight="bold">({point1[0]}, {point1[1]})</text>
             </g>
           )}
@@ -900,7 +916,7 @@ const InteractiveStepGraph = ({
             <g>
               <circle cx={iax(point2[0])} cy={iay(point2[1])} r="7" fill="#a78bfa" stroke="#ede9fe" strokeWidth="2"/>
               <circle cx={iax(point2[0])} cy={iay(point2[1])} r="11" fill="none" stroke="#a78bfa" strokeWidth="1" strokeOpacity="0.4"/>
-              <rect x={p2lx-1} y={p2ly-9} width={`${String(point2).replace(',',' ').length*5+16}px`} height="12" rx="2" fill="rgba(6,12,30,0.85)"/>
+              <rect x={p2lx-1} y={p2ly-9} width={`${String(point2).replace(',',' ').length*5+16}px`} height="12" rx="2" fill={isgPtBg}/>
               <text x={p2lx} y={p2ly} fill="#a78bfa" fontSize="9" fontWeight="bold">({point2[0]}, {point2[1]})</text>
             </g>
           )}
@@ -943,6 +959,11 @@ const MCQGrafik1: React.FC = () => {
   const t = T_GRAFIK[language];
   const [pilihan, setPilihan] = React.useState<string | null>(null);
   const [lihatPembahasan, setLihatPembahasan] = React.useState(false);
+  const { isDark } = useTheme();
+  const mcqBg   = isDark ? "rgba(6,12,30,0.95)"  : "rgba(248,250,252,0.95)";
+  const mcqGrid = isDark ? "#0f1f3d"              : "#cbd5e1";
+  const mcqAxis = isDark ? "#2d3f5e"              : "#94a3b8";
+  const mcqLbl  = isDark ? "#3d5275"              : "#64748b";
 
   const opsi = [
     { kode: "A", rumus: "y = x + 2",  katex: "y = x + 2",  benar: true  },
@@ -974,29 +995,29 @@ const MCQGrafik1: React.FC = () => {
 
       {/* Grafik SVG */}
       <div className="flex justify-center">
-        <div className="rounded-xl overflow-hidden border border-white/15" style={{ background: "rgba(6,12,30,0.95)", maxWidth: 240 }}>
+        <div className="rounded-xl overflow-hidden border border-white/15" style={{ background: mcqBg, maxWidth: 240 }}>
           <svg viewBox={`0 0 ${GW} ${GH}`} width={GW} height={GH}>
             {/* Grid */}
             {[-4,-3,-2,-1,1,2,3,4].map(v => (
               <g key={v}>
-                <line x1={gx(v)} y1={4} x2={gx(v)} y2={GH-4} stroke="#0f1f3d" strokeWidth="0.7"/>
-                <line x1={4} y1={gy(v)} x2={GW-4} y2={gy(v)} stroke="#0f1f3d" strokeWidth="0.7"/>
+                <line x1={gx(v)} y1={4} x2={gx(v)} y2={GH-4} stroke={mcqGrid} strokeWidth="0.7"/>
+                <line x1={4} y1={gy(v)} x2={GW-4} y2={gy(v)} stroke={mcqGrid} strokeWidth="0.7"/>
               </g>
             ))}
             {/* Axes */}
-            <line x1={4} y1={GMY} x2={GW-4} y2={GMY} stroke="#2d3f5e" strokeWidth="1.5"/>
-            <line x1={GMX} y1={GH-4} x2={GMX} y2={4} stroke="#2d3f5e" strokeWidth="1.5"/>
+            <line x1={4} y1={GMY} x2={GW-4} y2={GMY} stroke={mcqAxis} strokeWidth="1.5"/>
+            <line x1={GMX} y1={GH-4} x2={GMX} y2={4} stroke={mcqAxis} strokeWidth="1.5"/>
             {/* Arrows */}
-            <polygon points={`${GW-4},${GMY} ${GW-9},${GMY-3} ${GW-9},${GMY+3}`} fill="#2d3f5e"/>
-            <polygon points={`${GMX},4 ${GMX-3},9 ${GMX+3},9`} fill="#2d3f5e"/>
+            <polygon points={`${GW-4},${GMY} ${GW-9},${GMY-3} ${GW-9},${GMY+3}`} fill={mcqAxis}/>
+            <polygon points={`${GMX},4 ${GMX-3},9 ${GMX+3},9`} fill={mcqAxis}/>
             {/* Axis labels */}
-            <text x={GW-13} y={GMY+10} fill="#3d5275" fontSize="8" fontWeight="bold">x</text>
-            <text x={GMX+3} y={13} fill="#3d5275" fontSize="8" fontWeight="bold">y</text>
+            <text x={GW-13} y={GMY+10} fill={mcqLbl} fontSize="8" fontWeight="bold">x</text>
+            <text x={GMX+3} y={13} fill={mcqLbl} fontSize="8" fontWeight="bold">y</text>
             {/* Tick labels */}
             {[-4,-2,2,4].map(v => (
               <g key={v}>
-                <text x={gx(v)-3} y={GMY+12} fill="#3d5275" fontSize="7">{v}</text>
-                <text x={GMX+3} y={gy(v)+3} fill="#3d5275" fontSize="7">{v}</text>
+                <text x={gx(v)-3} y={GMY+12} fill={mcqLbl} fontSize="7">{v}</text>
+                <text x={GMX+3} y={gy(v)+3} fill={mcqLbl} fontSize="7">{v}</text>
               </g>
             ))}
             {/* The line — hidden before answered */}
@@ -1014,7 +1035,7 @@ const MCQGrafik1: React.FC = () => {
       <div className="grid grid-cols-1 gap-2">
         {opsi.map(({ kode, katex, benar: isBenar }) => {
           const dipilih = pilihan === kode;
-          let style = "bg-slate-800/60 border-white/15 text-white/80";
+          let style = isDark ? "bg-slate-800/60 border-white/15 text-white/80" : "bg-gray-50 border-gray-200 text-gray-800";
           if (sudahJawab && dipilih && isBenar)  style = "bg-green-800/50 border-green-400/60 text-green-200";
           if (sudahJawab && dipilih && !isBenar) style = "bg-rose-800/40 border-rose-400/50 text-rose-200";
           if (sudahJawab && !dipilih && isBenar) style = "bg-green-900/30 border-green-500/40 text-green-300";
@@ -1062,7 +1083,7 @@ const MCQGrafik1: React.FC = () => {
 
       {/* Pembahasan */}
       {lihatPembahasan && (
-        <div className="rounded-xl border border-cyan-500/25 bg-slate-800/60 p-4 space-y-3 text-sm font-body" style={{ animation: "slideDown 0.3s ease-out" }}>
+        <div className={`rounded-xl border border-cyan-500/25 ${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} p-4 space-y-3 text-sm font-body`} style={{ animation: "slideDown 0.3s ease-out" }}>
           <p className="text-cyan-300 font-bold">{t.mcq1_pem_title}</p>
           <p className="text-white/75 leading-relaxed">{t.mcq1_pem_intro}</p>
           <div className="grid grid-cols-2 gap-2">
@@ -1070,13 +1091,13 @@ const MCQGrafik1: React.FC = () => {
               { label: t.mcq1_sbx_label, titik: "(−2, 0)", warna: "text-cyan-300" },
               { label: t.mcq1_sby_label, titik: "(0, 2)", warna: "text-violet-300" },
             ].map(({ label, titik, warna }) => (
-              <div key={label} className="bg-slate-900/50 rounded-lg p-2 text-center">
+              <div key={label} className={`${isDark ? 'bg-slate-900/50' : 'bg-gray-100'} rounded-lg p-2 text-center`}>
                 <p className="text-[10px] text-white/40 mb-1">{label}</p>
                 <p className={`font-bold text-sm ${warna}`}>{titik}</p>
               </div>
             ))}
           </div>
-          <div className="bg-slate-900/60 rounded-lg p-3 space-y-1 text-xs">
+          <div className={`${isDark ? 'bg-slate-900/60' : 'bg-gray-100'} rounded-lg p-3 space-y-1 text-xs`}>
             <p className="text-white/60">{t.mcq1_from_sby} <span className="text-yellow-300 font-bold">c = 2</span></p>
             <p className="text-white/60">{t.mcq1_grad_label} <InlineMath math="m = \dfrac{0-2}{-2-0} = \dfrac{-2}{-2} = 1" /></p>
             <p className="text-white/60">{t.mcq1_thus} <span className="text-green-300 font-bold">y = 1·x + 2 = x + 2</span> ✅</p>
@@ -1092,6 +1113,7 @@ const GrafikPGLPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = T_GRAFIK[language];
+  const { isDark } = useTheme();
   const SH = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4 border-b border-white/10">
       <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
@@ -1153,7 +1175,7 @@ const GrafikPGLPage = () => {
                     { label: "y = 3", color: "#4ade80", pts: [[-3,3],[-1,3],[0,3],[1,3],[3,3]], desc: t.intro_panel_descs[2] },
                     { label: "x = 2", color: "#fb923c", pts: [[2,-4],[2,-2],[2,0],[2,2],[2,4]], desc: t.intro_panel_descs[3] },
                   ].map(({ label, color, pts, desc }) => (
-                    <div key={label} className="bg-slate-900/60 border border-white/10 rounded-xl p-2">
+                    <div key={label} className={`${isDark ? 'bg-slate-900/60' : 'bg-gray-100'} border border-white/10 rounded-xl p-2`}>
                       <CoordSystem w={140} h={120} label={label}>
                         <polyline points={pts.map(([x,y])=>`${70+x*14},${60-y*11}`).join(' ')} fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
                         {pts.map(([x,y], pi) => <circle key={pi} cx={70+x*14} cy={60-y*11} r="2.5" fill={color} />)}
@@ -1193,7 +1215,7 @@ const GrafikPGLPage = () => {
                 </div>
 
                 {/* Anatomy visual */}
-                <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-cyan-500/20 rounded-xl p-4`}>
                   <p className="text-xs font-bold text-cyan-300 mb-3">{t.konsep_anat}</p>
                   <div className="relative flex flex-col items-center">
                     <div className="text-3xl font-bold font-mono text-white tracking-widest">y = mx + c</div>
@@ -1221,7 +1243,7 @@ const GrafikPGLPage = () => {
                     </tr></thead>
                     <tbody>
                       {t.konsep_tabel_rows.map(([p,m,sx,sy,a]: string[], i: number) => (
-                        <tr key={i} className={i%2===0?"bg-slate-800/30":"bg-slate-700/20"}>
+                        <tr key={i} className={i%2===0?(isDark?"bg-slate-800/30":"bg-blue-50/50"):(isDark?"bg-slate-700/20":"bg-gray-50")}>
                           <td className="border border-white/10 px-3 py-2 text-cyan-300 font-mono">{p}</td>
                           <td className="border border-white/10 px-3 py-2 text-yellow-300 text-center">{m}</td>
                           <td className="border border-white/10 px-3 py-2 text-orange-300 text-center">{sx}</td>
@@ -1234,7 +1256,7 @@ const GrafikPGLPage = () => {
                 </div>
 
                 {/* ── Ciri Khas Persamaan Garis Lurus ── */}
-                <div className="rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg,#0d1b3e 0%,#0c1a2e 40%,#130d2e 100%)", border: "1px solid rgba(139,92,246,0.35)" }}>
+                <div className="rounded-2xl overflow-hidden" style={{ background: isDark ? "linear-gradient(135deg,#0d1b3e 0%,#0c1a2e 40%,#130d2e 100%)" : "linear-gradient(135deg,#f5f3ff 0%,#eff6ff 40%,#f0fdf4 100%)", border: "1px solid rgba(139,92,246,0.35)" }}>
 
                   {/* Header gradien */}
                   <div className="px-5 py-4 flex items-center gap-3" style={{ background: "linear-gradient(90deg,rgba(139,92,246,0.35) 0%,rgba(6,182,212,0.25) 60%,rgba(16,185,129,0.15) 100%)" }}>
@@ -1299,7 +1321,7 @@ const GrafikPGLPage = () => {
                 </div>
 
                 {/* ── Animasi Interaktif: Persamaan Garis Lurus vs Bukan ── */}
-                <div className="rounded-xl border border-violet-500/25 bg-slate-900/50 px-4 pb-4 pt-3">
+                <div className={`rounded-xl border border-violet-500/25 ${isDark ? 'bg-slate-900/50' : 'bg-gray-50'} px-4 pb-4 pt-3`}>
                   <EquasiGarisLurusAnim />
                 </div>
 
@@ -1385,7 +1407,7 @@ const GrafikPGLPage = () => {
                   </div>
                 </div>
 
-                <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/50' : 'bg-gray-100/70'} border border-white/10 rounded-xl p-4`}>
                   <p className="text-sm font-bold text-white mb-3">🖊️</p>
                   <div className="space-y-2">
                     {t.titikpotong_steps.map(({ label, desc }: { label: string; desc: string }, idx: number) => {
@@ -1405,7 +1427,7 @@ const GrafikPGLPage = () => {
                 <div className="flex flex-col gap-5">
 
                   {/* Contoh 1 */}
-                  <div className="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+                  <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-cyan-500/30 rounded-xl p-4 space-y-3`}>
                     <p className="text-xs font-bold text-cyan-300 font-body uppercase tracking-wide">{t.ex_label1}</p>
                     <div className="bg-cyan-900/20 border border-cyan-500/20 rounded-lg p-3">
                       <p className="text-sm text-white font-body">{t.tp_ex1_soal} <InlineMath math="y = 2x + 4" />!</p>
@@ -1451,7 +1473,7 @@ const GrafikPGLPage = () => {
                   </div>
 
                   {/* Contoh 2 */}
-                  <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-4 space-y-3">
+                  <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-violet-500/30 rounded-xl p-4 space-y-3`}>
                     <p className="text-xs font-bold text-violet-300 font-body uppercase tracking-wide">{t.ex_label2}</p>
                     <div className="bg-violet-900/20 border border-violet-500/20 rounded-lg p-3">
                       <p className="text-sm text-white font-body">{t.tp_ex2_soal} <InlineMath math="3x - 5y = 15" />!</p>
@@ -1508,7 +1530,7 @@ const GrafikPGLPage = () => {
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-white/80 leading-relaxed">{t.titikacak_p1}</p>
                 </div>
-                <div className="bg-slate-800/50 border border-white/10 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/50' : 'bg-gray-100/70'} border border-white/10 rounded-xl p-4`}>
                   <p className="text-sm font-bold text-white mb-3">🖊️</p>
                   <div className="space-y-2">
                     {t.titikacak_steps.map(({ label, desc }: { label: string; desc: string }, idx: number) => {
@@ -1531,7 +1553,7 @@ const GrafikPGLPage = () => {
                 <div className="flex flex-col gap-5">
 
                   {/* Contoh 1 */}
-                  <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4 space-y-3">
+                  <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-green-500/30 rounded-xl p-4 space-y-3`}>
                     <p className="text-xs font-bold text-green-300 font-body uppercase tracking-wide">{t.ex_label1}</p>
                     <div className="bg-green-900/20 border border-green-500/20 rounded-lg p-3">
                       <p className="text-sm text-white font-body">{t.ta_ex1_soal} <InlineMath math="y = x + 2" />!</p>
@@ -1577,7 +1599,7 @@ const GrafikPGLPage = () => {
                   </div>
 
                   {/* Contoh 2 */}
-                  <div className="bg-slate-800/60 border border-orange-500/30 rounded-xl p-4 space-y-3">
+                  <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-orange-500/30 rounded-xl p-4 space-y-3`}>
                     <p className="text-xs font-bold text-orange-300 font-body uppercase tracking-wide">{t.ex_label2}</p>
                     <div className="bg-orange-900/20 border border-orange-500/20 rounded-lg p-3">
                       <p className="text-sm text-white font-body">{t.ta_ex2_soal} <InlineMath math="y = -2x + 4" />!</p>
@@ -1632,32 +1654,32 @@ const GrafikPGLPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
-                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
+                <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-green-500/30 rounded-xl p-4`}>
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c1_soal_a} <InlineMath math="3x - 2y + 6 = 0" />. {t.c1_soal_b}</p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
+                <div className={`${isDark ? 'bg-slate-700/40' : 'bg-gray-50'} border border-white/10 rounded-xl p-4 space-y-3`}>
                   <p className="text-sm font-semibold text-cyan-300 font-body">{t.pem}</p>
                   <div className="space-y-3 text-sm font-body">
-                    <div className="bg-slate-800/50 rounded-lg p-3">
+                    <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                       <p className="text-cyan-300 font-semibold mb-1">{t.c1_ubah}</p>
                       <BlockMath math="3x - 2y + 6 = 0" />
                       <BlockMath math="-2y = -3x - 6" />
                       <BlockMath math="y = \frac{3}{2}x + 3" />
                     </div>
                     <div className="grid grid-cols-2 gap-2">
-                      <div className="bg-slate-800/50 rounded-lg p-2 text-xs">
+                      <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-2 text-xs`}>
                         <p className="text-cyan-300 font-semibold mb-1">{t.c1_sbx}</p>
                         <BlockMath math="0 = \frac{3}{2}x + 3 \Rightarrow x = -2" />
                         <p className="text-green-300 font-bold">(-2, 0)</p>
                       </div>
-                      <div className="bg-slate-800/50 rounded-lg p-2 text-xs">
+                      <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-2 text-xs`}>
                         <p className="text-violet-300 font-semibold mb-1">{t.c1_sby}</p>
                         <BlockMath math="y = \frac{3}{2}(0) + 3 = 3" />
                         <p className="text-green-300 font-bold">(0, 3)</p>
                       </div>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
+                    <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                       <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c3_graf_title} 3x − 2y + 6 = 0:</p>
                       <CoordSystem w={W} h={H} label="3x−2y+6=0">
                         <polyline
@@ -1689,11 +1711,11 @@ const GrafikPGLPage = () => {
               <MCQGrafik1 />
 
                   {/* ── PEMBAHASAN ── */}
-                  <div className="bg-slate-700/40 border border-yellow-500/25 rounded-xl p-4 space-y-4">
+                  <div className={`${isDark ? 'bg-slate-700/40' : 'bg-gray-50'} border border-yellow-500/25 rounded-xl p-4 space-y-4`}>
                     <p className="text-sm font-semibold text-yellow-300 font-body">{t.c2_pem_title}</p>
 
                     {/* Langkah 1 — baca titik dari grafik */}
-                    <div className="bg-slate-800/60 rounded-xl p-3 space-y-2">
+                    <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} rounded-xl p-3 space-y-2`}>
                       <p className="text-xs font-bold text-cyan-300 font-body">{t.c2_l1_title}</p>
                       <p className="text-xs text-white/70 font-body leading-relaxed">
                         {t.c2_l1_desc}
@@ -1711,7 +1733,7 @@ const GrafikPGLPage = () => {
                     </div>
 
                     {/* Langkah 2 — substitusi ke tiap opsi */}
-                    <div className="bg-slate-800/60 rounded-xl p-3 space-y-3">
+                    <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} rounded-xl p-3 space-y-3`}>
                       <p className="text-xs font-bold text-yellow-300 font-body">{t.c2_l2_title}</p>
                       <p className="text-xs text-white/65 font-body leading-relaxed">
                         {t.c2_l2_desc} <strong className="text-white">{t.c2_l2_kw}</strong> {t.c2_l2_for} <em>{t.c2_l2_both}</em> {t.c2_l2_end}
@@ -1724,12 +1746,12 @@ const GrafikPGLPage = () => {
                           <InlineMath math="y = x + 2" />
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-xs font-body">
-                          <div className="bg-slate-900/50 rounded-lg p-2 space-y-0.5">
+                          <div className={`${isDark ? 'bg-slate-900/50' : 'bg-gray-100'} rounded-lg p-2 space-y-0.5`}>
                             <p className="text-white/50">{t.c2_nia_yes} <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
                             <BlockMath math="y = -2 + 2 = 0 \checkmark" />
                             <p className="text-green-400 font-bold text-center">{t.c2_nia_yes2} 0 ✓</p>
                           </div>
-                          <div className="bg-slate-900/50 rounded-lg p-2 space-y-0.5">
+                          <div className={`${isDark ? 'bg-slate-900/50' : 'bg-gray-100'} rounded-lg p-2 space-y-0.5`}>
                             <p className="text-white/50">{t.c2_nia_yes} <span className="text-violet-300 font-bold">(0, 2)</span>:</p>
                             <BlockMath math="y = 0 + 2 = 2 \checkmark" />
                             <p className="text-green-400 font-bold text-center">{t.c2_nia_yes2} 2 ✓</p>
@@ -1744,7 +1766,7 @@ const GrafikPGLPage = () => {
                           <span className="w-6 h-6 rounded-full bg-red-700/70 text-white text-xs font-bold flex items-center justify-center shrink-0">B</span>
                           <InlineMath math="y = 2x + 2" />
                         </div>
-                        <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
+                        <div className={`${isDark ? 'bg-slate-900/50' : 'bg-gray-100'} rounded-lg p-2 text-xs font-body`}>
                           <p className="text-white/50 mb-0.5">{t.c2_nia_yes} <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
                           <BlockMath math="y = 2(-2) + 2 = -4 + 2 = -2 \neq 0" />
                           <p className="text-red-400 font-bold text-center">{t.c2_nib}</p>
@@ -1758,7 +1780,7 @@ const GrafikPGLPage = () => {
                           <span className="w-6 h-6 rounded-full bg-red-700/70 text-white text-xs font-bold flex items-center justify-center shrink-0">C</span>
                           <InlineMath math="y = x - 2" />
                         </div>
-                        <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
+                        <div className={`${isDark ? 'bg-slate-900/50' : 'bg-gray-100'} rounded-lg p-2 text-xs font-body`}>
                           <p className="text-white/50 mb-0.5">{t.c2_nia_yes} <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
                           <BlockMath math="y = -2 - 2 = -4 \neq 0" />
                           <p className="text-red-400 font-bold text-center">{t.c2_nic}</p>
@@ -1772,7 +1794,7 @@ const GrafikPGLPage = () => {
                           <span className="w-6 h-6 rounded-full bg-red-700/70 text-white text-xs font-bold flex items-center justify-center shrink-0">D</span>
                           <InlineMath math="y = -x + 2" />
                         </div>
-                        <div className="bg-slate-900/50 rounded-lg p-2 text-xs font-body">
+                        <div className={`${isDark ? 'bg-slate-900/50' : 'bg-gray-100'} rounded-lg p-2 text-xs font-body`}>
                           <p className="text-white/50 mb-0.5">{t.c2_nia_yes} <span className="text-cyan-300 font-bold">(−2, 0)</span>:</p>
                           <BlockMath math="y = -(-2) + 2 = 2 + 2 = 4 \neq 0" />
                           <p className="text-red-400 font-bold text-center">{t.c2_nid}</p>
@@ -1811,16 +1833,16 @@ const GrafikPGLPage = () => {
               return (
                 <div className="px-5 pb-5 space-y-4">
                   <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
-                  <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
+                  <div className={`${isDark ? 'bg-slate-800/60' : 'bg-gray-100'} border border-red-500/30 rounded-xl p-4`}>
                     <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
                     <p className="text-sm text-white/85 font-body">{t.c3_soal_b} <InlineMath math="\ell_1: x + y = 4" /> {t.c3_soal_dan} <InlineMath math="\ell_2: 2x - y = 2" /> {t.c3_soal_end}</p>
                   </div>
-                  <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3">
+                  <div className={`${isDark ? 'bg-slate-700/40' : 'bg-gray-50'} border border-white/10 rounded-xl p-4 space-y-3`}>
                     <p className="text-sm font-semibold text-cyan-300 font-body">{t.pem}</p>
                     <div className="space-y-3 text-sm font-body">
 
                       {/* Tabel titik potong l1 */}
-                      <div className="bg-slate-800/50 rounded-lg p-3 space-y-2">
+                      <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3 space-y-2`}>
                         <p className="text-cyan-300 font-semibold text-xs">{t.c3_bantu1} <InlineMath math="\ell_1: x + y = 4" /> <span className="text-white/50">(y = 4 − x)</span></p>
                         <div className="overflow-x-auto">
                           <table className="text-xs font-body border-collapse w-full">
@@ -1830,12 +1852,12 @@ const GrafikPGLPage = () => {
                               <th className="border border-cyan-500/30 px-3 py-1.5 text-cyan-200">{t.tp_tbl_titik}</th>
                             </tr></thead>
                             <tbody>
-                              <tr className="bg-slate-800/30">
+                              <tr className={isDark ? "bg-slate-800/30" : "bg-blue-50/50"}>
                                 <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">0</td>
                                 <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">4</td>
                                 <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">(0, 4)</td>
                               </tr>
-                              <tr className="bg-slate-700/20">
+                              <tr className={isDark ? "bg-slate-700/20" : "bg-gray-50"}>
                                 <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">4</td>
                                 <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">0</td>
                                 <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">(4, 0)</td>
@@ -1846,7 +1868,7 @@ const GrafikPGLPage = () => {
                       </div>
 
                       {/* Tabel titik potong l2 */}
-                      <div className="bg-slate-800/50 rounded-lg p-3 space-y-2">
+                      <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3 space-y-2`}>
                         <p className="text-pink-300 font-semibold text-xs">{t.c3_bantu2} <InlineMath math="\ell_2: 2x - y = 2" /> <span className="text-white/50">(y = 2x − 2)</span></p>
                         <div className="overflow-x-auto">
                           <table className="text-xs font-body border-collapse w-full">
@@ -1856,12 +1878,12 @@ const GrafikPGLPage = () => {
                               <th className="border border-pink-500/30 px-3 py-1.5 text-pink-200">{t.tp_tbl_titik}</th>
                             </tr></thead>
                             <tbody>
-                              <tr className="bg-slate-800/30">
+                              <tr className={isDark ? "bg-slate-800/30" : "bg-blue-50/50"}>
                                 <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">0</td>
                                 <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">−2</td>
                                 <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">(0, −2)</td>
                               </tr>
-                              <tr className="bg-slate-700/20">
+                              <tr className={isDark ? "bg-slate-700/20" : "bg-gray-50"}>
                                 <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">1</td>
                                 <td className="border border-white/10 px-3 py-1.5 text-yellow-300 text-center font-mono">0</td>
                                 <td className="border border-white/10 px-3 py-1.5 text-green-300 text-center font-bold">(1, 0)</td>
@@ -1872,7 +1894,7 @@ const GrafikPGLPage = () => {
                       </div>
 
                       {/* Eliminasi */}
-                      <div className="bg-slate-800/50 rounded-lg p-3">
+                      <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                         <p className="text-cyan-300 font-semibold mb-1 text-xs">{t.c3_elim_title}</p>
                         <BlockMath math="\ell_1:\quad x + y = 4 \quad \cdots (1)" />
                         <BlockMath math="\ell_2:\quad 2x - y = 2 \quad \cdots (2)" />
@@ -1883,32 +1905,32 @@ const GrafikPGLPage = () => {
                       </div>
 
                       {/* Grafik besar */}
-                      <div className="bg-slate-800/50 rounded-lg p-3">
+                      <div className={`${isDark ? 'bg-slate-800/50' : 'bg-white/80'} rounded-lg p-3`}>
                         <p className="text-orange-300 font-semibold mb-3 text-xs">{t.c3_graf_title} <InlineMath math="\ell_1" /> {t.c3_graf_dan} <InlineMath math="\ell_2" />:</p>
-                        <svg viewBox={`0 0 ${W3} ${H3}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.97)" }}>
+                        <svg viewBox={`0 0 ${W3} ${H3}`} className="w-full rounded-xl" style={{ background: isDark ? "rgba(6,12,30,0.97)" : "rgba(248,250,252,0.97)" }}>
                           {/* grid */}
                           {ticks3.concat([0]).map(v => (
                             <g key={v}>
-                              <line x1={tx(v)} y1={4} x2={tx(v)} y2={H3-4} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.8"}/>
-                              <line x1={4} y1={ty(v)} x2={W3-4} y2={ty(v)} stroke={v===0?"#334155":"#0f1f3d"} strokeWidth={v===0?"1":"0.8"}/>
+                              <line x1={tx(v)} y1={4} x2={tx(v)} y2={H3-4} stroke={v===0?(isDark?"#334155":"#94a3b8"):(isDark?"#0f1f3d":"#cbd5e1")} strokeWidth={v===0?"1":"0.8"}/>
+                              <line x1={4} y1={ty(v)} x2={W3-4} y2={ty(v)} stroke={v===0?(isDark?"#334155":"#94a3b8"):(isDark?"#0f1f3d":"#cbd5e1")} strokeWidth={v===0?"1":"0.8"}/>
                             </g>
                           ))}
                           {/* axes */}
-                          <line x1={6} y1={MY3} x2={W3-6} y2={MY3} stroke="#475569" strokeWidth="2"/>
-                          <line x1={MX3} y1={H3-6} x2={MX3} y2={6} stroke="#475569" strokeWidth="2"/>
-                          <polygon points={`${W3-6},${MY3} ${W3-12},${MY3-4} ${W3-12},${MY3+4}`} fill="#475569"/>
-                          <polygon points={`${MX3},6 ${MX3-4},12 ${MX3+4},12`} fill="#475569"/>
+                          <line x1={6} y1={MY3} x2={W3-6} y2={MY3} stroke={isDark?"#475569":"#64748b"} strokeWidth="2"/>
+                          <line x1={MX3} y1={H3-6} x2={MX3} y2={6} stroke={isDark?"#475569":"#64748b"} strokeWidth="2"/>
+                          <polygon points={`${W3-6},${MY3} ${W3-12},${MY3-4} ${W3-12},${MY3+4}`} fill={isDark?"#475569":"#64748b"}/>
+                          <polygon points={`${MX3},6 ${MX3-4},12 ${MX3+4},12`} fill={isDark?"#475569":"#64748b"}/>
                           {/* axis labels */}
-                          <text x={W3-16} y={MY3+13} fill="#64748b" fontSize="11" fontWeight="bold">x</text>
-                          <text x={MX3+6} y={16} fill="#64748b" fontSize="11" fontWeight="bold">y</text>
-                          <text x={MX3+4} y={MY3+13} fill="#475569" fontSize="9">O</text>
+                          <text x={W3-16} y={MY3+13} fill={isDark?"#64748b":"#475569"} fontSize="11" fontWeight="bold">x</text>
+                          <text x={MX3+6} y={16} fill={isDark?"#64748b":"#475569"} fontSize="11" fontWeight="bold">y</text>
+                          <text x={MX3+4} y={MY3+13} fill={isDark?"#475569":"#334155"} fontSize="9">O</text>
                           {/* tick numbers */}
                           {[-5,-4,-3,-2,-1,1,2,3,4,5].map(v => (
                             <g key={`t${v}`}>
-                              <line x1={tx(v)} y1={MY3-3} x2={tx(v)} y2={MY3+3} stroke="#475569" strokeWidth="1"/>
-                              <text x={tx(v)-(v<-9?11:v<0?8:4)} y={MY3+14} fill="#4b5563" fontSize="9">{v}</text>
-                              <line x1={MX3-3} y1={ty(v)} x2={MX3+3} y2={ty(v)} stroke="#475569" strokeWidth="1"/>
-                              <text x={MX3-18} y={ty(v)+4} fill="#4b5563" fontSize="9">{v}</text>
+                              <line x1={tx(v)} y1={MY3-3} x2={tx(v)} y2={MY3+3} stroke={isDark?"#475569":"#64748b"} strokeWidth="1"/>
+                              <text x={tx(v)-(v<-9?11:v<0?8:4)} y={MY3+14} fill={isDark?"#4b5563":"#6b7280"} fontSize="9">{v}</text>
+                              <line x1={MX3-3} y1={ty(v)} x2={MX3+3} y2={ty(v)} stroke={isDark?"#475569":"#64748b"} strokeWidth="1"/>
+                              <text x={MX3-18} y={ty(v)+4} fill={isDark?"#4b5563":"#6b7280"} fontSize="9">{v}</text>
                             </g>
                           ))}
                           {/* ℓ1: x+y=4 → y=4-x, points: (-1,5)→(5,-1) */}
@@ -1936,9 +1958,9 @@ const GrafikPGLPage = () => {
                           <circle cx={tx(2)} cy={ty(2)} r="14" fill="none" stroke="#facc1566" strokeWidth="1.5"/>
                           <text x={tx(2)+13} y={ty(2)-6} fill="#fde047" fontSize="11" fontWeight="bold">(2, 2)</text>
                           {/* line labels */}
-                          <rect x={tx(-0.8)-2} y={ty(4.8)-10} width={22} height={14} rx="3" fill="rgba(6,12,30,0.8)"/>
+                          <rect x={tx(-0.8)-2} y={ty(4.8)-10} width={22} height={14} rx="3" fill={isDark?"rgba(6,12,30,0.8)":"rgba(248,250,252,0.8)"}/>
                           <text x={tx(-0.8)} y={ty(4.8)} fill="#22d3ee" fontSize="11" fontWeight="bold">ℓ₁</text>
-                          <rect x={tx(2.6)-2} y={ty(3.2)-10} width={22} height={14} rx="3" fill="rgba(6,12,30,0.8)"/>
+                          <rect x={tx(2.6)-2} y={ty(3.2)-10} width={22} height={14} rx="3" fill={isDark?"rgba(6,12,30,0.8)":"rgba(248,250,252,0.8)"}/>
                           <text x={tx(2.6)} y={ty(3.2)} fill="#f472b6" fontSize="11" fontWeight="bold">ℓ₂</text>
                         </svg>
                       </div>
