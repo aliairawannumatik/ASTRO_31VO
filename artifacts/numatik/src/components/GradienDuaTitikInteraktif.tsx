@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { InlineMath } from "react-katex";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const CELL  = 26;
 const HALF  = 5;
@@ -96,6 +97,7 @@ const translations = {
 
 export default function GradienDuaTitikInteraktif() {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
 
   const [p1, setP1] = useState<[number, number]>([-3, -1]);
@@ -184,7 +186,7 @@ export default function GradienDuaTitikInteraktif() {
         viewBox={`0 0 ${W} ${H}`}
         width="100%"
         style={{
-          background: "rgba(10,18,35,0.90)",
+          background: isDark ? "rgba(10,18,35,0.90)" : "rgba(241,245,249,0.95)",
           borderRadius: 12,
           userSelect: "none",
           touchAction: "none",
@@ -194,21 +196,21 @@ export default function GradienDuaTitikInteraktif() {
           <line key={`vc${i}`}
             x1={PAD + i * CELL} y1={PAD}
             x2={PAD + i * CELL} y2={H - PAD}
-            stroke="#1a2744" strokeWidth="1" />
+            stroke={isDark ? "#1a2744" : "#e2e8f0"} strokeWidth="1" />
         ))}
         {Array.from({ length: ROWS + 1 }, (_, i) => (
           <line key={`hr${i}`}
             x1={PAD} y1={PAD + i * CELL}
             x2={W - PAD} y2={PAD + i * CELL}
-            stroke="#1a2744" strokeWidth="1" />
+            stroke={isDark ? "#1a2744" : "#e2e8f0"} strokeWidth="1" />
         ))}
 
         {(() => {
           const [ox, oy] = toSVG(0, 0);
           return (
             <>
-              <line x1={PAD} y1={oy} x2={W - PAD} y2={oy} stroke="#334155" strokeWidth="1.5" />
-              <line x1={ox} y1={PAD} x2={ox}      y2={H - PAD} stroke="#334155" strokeWidth="1.5" />
+              <line x1={PAD} y1={oy} x2={W - PAD} y2={oy} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.5" />
+              <line x1={ox} y1={PAD} x2={ox}      y2={H - PAD} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.5" />
             </>
           );
         })()}
@@ -268,39 +270,39 @@ export default function GradienDuaTitikInteraktif() {
         </g>
       </svg>
 
-      <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-4 space-y-3">
+      <div className={`border border-violet-500/30 rounded-xl p-4 space-y-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
         {samePoint ? (
-          <p className="text-xs text-white/40 font-body text-center">{t.dragHint}</p>
+          <p className={`text-xs ${isDark ? "text-white/40" : "text-slate-400"} font-body text-center`}>{t.dragHint}</p>
         ) : dx === 0 ? (
           <div className="text-center space-y-1">
-            <p className="text-xs text-white/60 font-body">Δx = 0 → {t.verticalHint}</p>
+            <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} font-body`}>Δx = 0 → {t.verticalHint}</p>
             <div className="flex items-center justify-center gap-2">
               <InlineMath math="m =" />
-              <span className="text-sm font-body text-white/80">{t.mUndefined}</span>
+              <span className={`text-sm font-body ${isDark ? "text-white/80" : "text-slate-700"}`}>{t.mUndefined}</span>
             </div>
           </div>
         ) : (
           <div className="space-y-2">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] text-white/40 font-body w-16 shrink-0">{t.formulaLabel}</span>
+              <span className={`text-[10px] ${isDark ? "text-white/40" : "text-slate-400"} font-body w-16 shrink-0`}>{t.formulaLabel}</span>
               <InlineMath math="m = \dfrac{y_2 - y_1}{x_2 - x_1}" />
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] text-white/40 font-body w-16 shrink-0">{t.subsLabel}</span>
+              <span className={`text-[10px] ${isDark ? "text-white/40" : "text-slate-400"} font-body w-16 shrink-0`}>{t.subsLabel}</span>
               <InlineMath math={`m = ${stepSubs}`} />
             </div>
             {stepSimp && (
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[10px] text-white/40 font-body w-16 shrink-0">{t.calcLabel}</span>
+                <span className={`text-[10px] ${isDark ? "text-white/40" : "text-slate-400"} font-body w-16 shrink-0`}>{t.calcLabel}</span>
                 <InlineMath math={`m = ${stepSimp}`} />
               </div>
             )}
             <div className="bg-violet-500/15 border border-violet-500/35 rounded-lg px-3 py-2 flex items-center justify-center gap-2">
-              <span className="text-xs text-white/50 font-body">{t.resultLabel}</span>
+              <span className={`text-xs ${isDark ? "text-white/50" : "text-slate-400"} font-body`}>{t.resultLabel}</span>
               <span className="text-base font-bold">
                 <InlineMath math={`m = ${mResult}`} />
               </span>
-              <span className={`text-xs font-bold font-body ml-1 ${dy / dx > 0 ? "text-green-400" : dy === 0 ? "text-white/50" : "text-red-400"}`}>
+              <span className={`text-xs font-bold font-body ml-1 ${dy / dx > 0 ? "text-green-400" : dy === 0 ? (isDark ? "text-white/50" : "text-slate-400") : "text-red-400"}`}>
                 {dy / dx > 0 ? t.positive : dy === 0 ? t.horizontal : t.negative}
               </span>
             </div>

@@ -3,6 +3,7 @@ import { CheckCircle, XCircle, Eye, EyeOff } from "lucide-react";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface EqEntry {
   id: number;
@@ -287,6 +288,7 @@ const gx = (x: number) => GMX + x * GSC;
 const gy = (y: number) => GMY - y * GSC;
 
 const MiniGraph: React.FC<{ eq: EqEntry; animKey: number }> = ({ eq, animKey }) => {
+  const { isDark } = useTheme();
   const [prog, setProg] = useState(0);
   const rafRef = useRef<number | null>(null);
   const startRef = useRef<number | null>(null);
@@ -343,22 +345,26 @@ const MiniGraph: React.FC<{ eq: EqEntry; animKey: number }> = ({ eq, animKey }) 
     }
   };
 
+  const svgBg   = isDark ? "rgba(6,12,30,0.95)"  : "rgba(248,250,252,0.97)";
+  const gridS   = isDark ? "#0f1f3d" : "#e2e8f0";
+  const axisS   = isDark ? "#2d3f5e" : "#94a3b8";
+  const eqBg    = isDark ? "rgba(6,12,30,0.88)" : "rgba(241,245,249,0.9)";
   return (
-    <svg viewBox={`0 0 ${GW} ${GH}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
+    <svg viewBox={`0 0 ${GW} ${GH}`} className="w-full rounded-xl" style={{ background: svgBg }}>
       {[-4,-3,-2,-1,1,2,3,4].map(v => (
         <g key={v}>
-          <line x1={gx(v)} y1={3} x2={gx(v)} y2={GH-3} stroke="#0f1f3d" strokeWidth="0.7" />
-          <line x1={3} y1={gy(v)} x2={GW-3} y2={gy(v)} stroke="#0f1f3d" strokeWidth="0.7" />
+          <line x1={gx(v)} y1={3} x2={gx(v)} y2={GH-3} stroke={gridS} strokeWidth="0.7" />
+          <line x1={3} y1={gy(v)} x2={GW-3} y2={gy(v)} stroke={gridS} strokeWidth="0.7" />
         </g>
       ))}
-      <line x1={4} y1={GMY} x2={GW-4} y2={GMY} stroke="#2d3f5e" strokeWidth="1.5" />
-      <line x1={GMX} y1={GH-4} x2={GMX} y2={4} stroke="#2d3f5e" strokeWidth="1.5" />
-      <polygon points={`${GW-4},${GMY} ${GW-9},${GMY-3} ${GW-9},${GMY+3}`} fill="#2d3f5e" />
-      <polygon points={`${GMX},4 ${GMX-3},9 ${GMX+3},9`} fill="#2d3f5e" />
-      <text x={GW-12} y={GMY+10} fill="#3d5275" fontSize="8" fontWeight="bold">x</text>
-      <text x={GMX+3} y={12} fill="#3d5275" fontSize="8" fontWeight="bold">y</text>
+      <line x1={4} y1={GMY} x2={GW-4} y2={GMY} stroke={axisS} strokeWidth="1.5" />
+      <line x1={GMX} y1={GH-4} x2={GMX} y2={4} stroke={axisS} strokeWidth="1.5" />
+      <polygon points={`${GW-4},${GMY} ${GW-9},${GMY-3} ${GW-9},${GMY+3}`} fill={axisS} />
+      <polygon points={`${GMX},4 ${GMX-3},9 ${GMX+3},9`} fill={axisS} />
+      <text x={GW-12} y={GMY+10} fill={isDark ? "#3d5275" : "#64748b"} fontSize="8" fontWeight="bold">x</text>
+      <text x={GMX+3} y={12} fill={isDark ? "#3d5275" : "#64748b"} fontSize="8" fontWeight="bold">y</text>
       {renderPath()}
-      <rect x={3} y={3} width={eq.raw.length * 5.2 + 6} height={12} rx="2" fill="rgba(6,12,30,0.88)" />
+      <rect x={3} y={3} width={eq.raw.length * 5.2 + 6} height={12} rx="2" fill={eqBg} />
       <text x={6} y={12} fill={c} fontSize="7.5" fontWeight="bold" fontFamily="monospace">{eq.raw}</text>
     </svg>
   );
@@ -367,7 +373,7 @@ const MiniGraph: React.FC<{ eq: EqEntry; animKey: number }> = ({ eq, animKey }) 
 const UI_STRINGS = {
   id: {
     header: "Persamaan Garis Lurus vs. Bukan — Interaktif",
-    instruction: (s: string) => <>Klik nomor <strong className="text-white/80">1–10</strong>, amati persamaan dan grafiknya, lalu tekan <strong className="text-white/80">"{s}"</strong> untuk melihat jawabannya.</>,
+    instruction: (s: string, dk: boolean) => <>Klik nomor <strong className={`${dk ? "text-white/80" : "text-slate-700"}`}>1–10</strong>, amati persamaan dan grafiknya, lalu tekan <strong className={`${dk ? "text-white/80" : "text-slate-700"}`}>"{s}"</strong> untuk melihat jawabannya.</>,
     showBtn: "Tampilkan Grafik & Penjelasan",
     hideBtn: "Sembunyikan",
     observeHint: "Amati persamaannya, lalu ungkap grafiknya…",
@@ -386,7 +392,7 @@ const UI_STRINGS = {
   },
   en: {
     header: "Straight Lines vs. Non-lines — Interactive",
-    instruction: (s: string) => <>Click a number <strong className="text-white/80">1–10</strong>, observe the equation and its graph, then press <strong className="text-white/80">"{s}"</strong> to reveal the answer.</>,
+    instruction: (s: string, dk: boolean) => <>Click a number <strong className={`${dk ? "text-white/80" : "text-slate-700"}`}>1–10</strong>, observe the equation and its graph, then press <strong className={`${dk ? "text-white/80" : "text-slate-700"}`}>"{s}"</strong> to reveal the answer.</>,
     showBtn: "Show Graph & Explanation",
     hideBtn: "Hide",
     observeHint: "Study the equation, then reveal its graph…",
@@ -405,7 +411,7 @@ const UI_STRINGS = {
   },
   ja: {
     header: "直線 vs 非直線 — インタラクティブ",
-    instruction: (s: string) => <>数字 <strong className="text-white/80">1–10</strong> をクリックして方程式とグラフを観察し、<strong className="text-white/80">「{s}」</strong> を押して答えを確認しよう。</>,
+    instruction: (s: string, dk: boolean) => <>数字 <strong className={`${dk ? "text-white/80" : "text-slate-700"}`}>1–10</strong> をクリックして方程式とグラフを観察し、<strong className={`${dk ? "text-white/80" : "text-slate-700"}`}>「{s}」</strong> を押して答えを確認しよう。</>,
     showBtn: "グラフと解説を表示",
     hideBtn: "非表示",
     observeHint: "方程式を観察して、グラフを表示しよう…",
@@ -426,6 +432,7 @@ const UI_STRINGS = {
 
 const EquasiGarisLurusAnim: React.FC = () => {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const ui = UI_STRINGS[language];
   const EQUATIONS = language === "en" ? EQUATIONS_EN : language === "ja" ? EQUATIONS_JA : EQUATIONS_ID;
 
@@ -453,8 +460,8 @@ const EquasiGarisLurusAnim: React.FC = () => {
         <span className="text-lg">🎬</span>
         <p className="text-sm font-bold text-cyan-300 font-body">{ui.header}</p>
       </div>
-      <p className="text-xs text-white/60 font-body leading-relaxed">
-        {ui.instruction(ui.showBtn)}
+      <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} font-body leading-relaxed`}>
+        {ui.instruction(ui.showBtn, isDark)}
       </p>
 
       <div className="flex gap-2 flex-wrap">
@@ -463,7 +470,7 @@ const EquasiGarisLurusAnim: React.FC = () => {
             key={e.id}
             onClick={() => pick(e.id)}
             className={`relative w-9 h-9 rounded-full text-xs font-bold font-body border-2 transition-all duration-200 select-none
-              ${sel === e.id ? "scale-110 z-10" : "bg-slate-800/70 border-white/10 text-white/50 hover:scale-105 hover:border-white/25"}`}
+              ${sel === e.id ? "scale-110 z-10" : `${isDark ? "bg-slate-800/70 border-white/10 text-white/50" : "bg-gray-100 border-slate-200 text-slate-500"} hover:scale-105 hover:border-white/25`}`}
             style={sel === e.id ? {
               background: "linear-gradient(135deg,#1e3a5f,#1e4d6b)",
               borderColor: e.color,
@@ -482,14 +489,14 @@ const EquasiGarisLurusAnim: React.FC = () => {
         ))}
       </div>
 
-      <div key={animKey} className="rounded-xl border border-white/15 overflow-hidden">
-        <div className="flex items-center gap-3 px-4 py-3 bg-slate-800/60 border-b border-white/8">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0 bg-slate-600/80 text-white">
+      <div key={animKey} className={`rounded-xl border ${isDark ? "border-white/15" : "border-slate-200"} overflow-hidden`}>
+        <div className={`flex items-center gap-3 px-4 py-3 border-b ${isDark ? "bg-slate-800/60 border-white/8" : "bg-gray-100 border-slate-200"}`}>
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${isDark ? "bg-slate-600/80 text-white" : "bg-slate-200 text-slate-700"}`}>
             {eq.id}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] text-white/35 font-body leading-none mb-0.5">{eq.label}</p>
-            <span className="font-display font-bold text-lg text-white">
+            <p className={`text-[10px] ${isDark ? "text-white/35" : "text-slate-400"} font-body leading-none mb-0.5`}>{eq.label}</p>
+            <span className={`font-display font-bold text-lg ${isDark ? "text-white" : "text-slate-800"}`}>
               <InlineMath math={eq.katex} />
             </span>
           </div>
@@ -507,8 +514,8 @@ const EquasiGarisLurusAnim: React.FC = () => {
         </div>
 
         {!revealed ? (
-          <div className="px-4 pb-5 pt-4 bg-slate-900/50 flex flex-col items-center gap-3">
-            <p className="text-xs text-white/40 font-body italic">{ui.observeHint}</p>
+          <div className={`px-4 pb-5 pt-4 flex flex-col items-center gap-3 ${isDark ? "bg-slate-900/50" : "bg-white/90"}`}>
+            <p className={`text-xs ${isDark ? "text-white/40" : "text-slate-400"} font-body italic`}>{ui.observeHint}</p>
             <button
               onClick={handleReveal}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-body font-bold text-sm
@@ -522,24 +529,24 @@ const EquasiGarisLurusAnim: React.FC = () => {
           </div>
         ) : (
           <div
-            className="px-4 pb-4 pt-1 bg-slate-900/50 space-y-2"
+            className={`px-4 pb-4 pt-1 space-y-2 ${isDark ? "bg-slate-900/50" : "bg-white/90"}`}
             style={{ animation: "slideDown 0.35s ease-out" }}
           >
             <div className="flex justify-end mb-1">
               <button
                 onClick={() => setRevealed(false)}
-                className="flex items-center gap-1.5 text-[11px] font-body text-white/35 hover:text-white/60 transition-colors"
+                className={`flex items-center gap-1.5 text-[11px] font-body ${isDark ? "text-white/35" : "text-slate-400"} hover:${isDark ? "text-white/60" : "text-slate-500"} transition-colors`}
               >
                 <EyeOff className="w-3.5 h-3.5" /> {ui.hideBtn}
               </button>
             </div>
             <div className="space-y-1">
-              <p className="text-[10px] font-bold text-white/35 uppercase tracking-wider">{ui.graph}</p>
+              <p className={`text-[10px] font-bold ${isDark ? "text-white/35" : "text-slate-400"} uppercase tracking-wider`}>{ui.graph}</p>
               <MiniGraph eq={eq} animKey={animKey} />
             </div>
-            <div className="rounded-lg p-3 bg-white/5 border border-white/8">
-              <p className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-1">{ui.desc}</p>
-              <p className="text-xs font-body text-white/80 leading-relaxed">{eq.description}</p>
+            <div className={`rounded-lg p-3 border ${isDark ? "bg-white/5 border-white/8" : "bg-gray-50 border-slate-200"}`}>
+              <p className={`text-[10px] font-bold ${isDark ? "text-white/40" : "text-slate-400"} uppercase tracking-wider mb-1`}>{ui.desc}</p>
+              <p className={`text-xs font-body ${isDark ? "text-white/80" : "text-slate-700"} leading-relaxed`}>{eq.description}</p>
             </div>
             <div className="rounded-lg p-3 border"
               style={{ background: eq.isLinear ? "rgba(8,145,178,0.07)" : "rgba(190,18,60,0.07)", borderColor: eq.isLinear ? "#0891b228" : "#be123c28" }}>
@@ -547,7 +554,7 @@ const EquasiGarisLurusAnim: React.FC = () => {
                 style={{ color: eq.isLinear ? "#67e8f9" : "#fda4af" }}>
                 {eq.isLinear ? ui.whyLinear : ui.whyNotLinear}
               </p>
-              <p className="text-xs font-body text-white/80 leading-relaxed">{eq.reason}</p>
+              <p className={`text-xs font-body ${isDark ? "text-white/80" : "text-slate-700"} leading-relaxed`}>{eq.reason}</p>
             </div>
             <div className="rounded-lg px-3 py-2 bg-yellow-500/8 border border-yellow-500/25">
               <p className="text-[11px] font-body text-yellow-200">
@@ -568,18 +575,18 @@ const EquasiGarisLurusAnim: React.FC = () => {
 
       <div className="flex items-center justify-between gap-2">
         <button onClick={() => pick(Math.max(1, sel - 1))} disabled={sel === 1}
-          className="px-3 py-1.5 rounded-lg text-xs font-semibold font-body bg-white/8 border border-white/10 text-white/60 disabled:opacity-25 hover:bg-white/15 active:scale-95 transition-all">
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-body ${isDark ? "bg-white/8" : "bg-slate-100"} border ${isDark ? "border-white/10" : "border-slate-200"} ${isDark ? "text-white/60" : "text-slate-500"} disabled:opacity-25 hover:${isDark ? "bg-white/15" : "bg-slate-100"} active:scale-95 transition-all`}>
           {ui.prev}
         </button>
-        <span className="text-xs text-white/30 font-body">{sel} / {EQUATIONS.length}</span>
+        <span className={`text-xs ${isDark ? "text-white/30" : "text-slate-400"} font-body`}>{sel} / {EQUATIONS.length}</span>
         <button onClick={() => pick(Math.min(EQUATIONS.length, sel + 1))} disabled={sel === EQUATIONS.length}
-          className="px-3 py-1.5 rounded-lg text-xs font-semibold font-body bg-white/8 border border-white/10 text-white/60 disabled:opacity-25 hover:bg-white/15 active:scale-95 transition-all">
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-body ${isDark ? "bg-white/8" : "bg-slate-100"} border ${isDark ? "border-white/10" : "border-slate-200"} ${isDark ? "text-white/60" : "text-slate-500"} disabled:opacity-25 hover:${isDark ? "bg-white/15" : "bg-slate-100"} active:scale-95 transition-all`}>
           {ui.next}
         </button>
       </div>
 
-      <div className="rounded-xl border border-white/8 overflow-hidden">
-        <div className="grid grid-cols-10 bg-slate-800/60">
+      <div className={`rounded-xl border ${isDark ? "border-white/8" : "border-slate-200"} overflow-hidden`}>
+        <div className={`grid grid-cols-10 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
           {EQUATIONS.map(e => (
             <button key={e.id} onClick={() => pick(e.id)}
               className={`py-2 text-[10px] font-bold font-body text-center transition-all border-r border-white/5 last:border-0 ${
@@ -598,7 +605,7 @@ const EquasiGarisLurusAnim: React.FC = () => {
                   ? <CheckCircle className="w-3 h-3 text-cyan-400/70" />
                   : <XCircle className="w-3 h-3 text-rose-400/70" />
               ) : (
-                <span className="w-3 h-3 rounded-full border border-white/15 block" />
+                <span className={`w-3 h-3 rounded-full border ${isDark ? "border-white/15" : "border-slate-200"} block`} />
               )}
             </div>
           ))}

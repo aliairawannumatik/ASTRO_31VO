@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useMemo } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const VIEW = 400;
 const RANGE = 8;
@@ -138,6 +139,7 @@ const UI = {
 
 export default function PGLGradientInteractive() {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const ui = UI[language];
 
   const [pA, setPA] = useState({ x: -2, y: -1 });
@@ -239,7 +241,7 @@ export default function PGLGradientInteractive() {
   };
 
   return (
-    <div className="rounded-2xl bg-slate-950/60 border border-emerald-300/20 p-3 md:p-4">
+    <div className={`rounded-2xl border border-emerald-300/20 p-3 md:p-4 ${isDark ? "bg-slate-950/60" : "bg-gray-50"}`}>
       <div className="flex flex-wrap gap-2 mb-3 justify-center">
         {CHALLENGES.map((ch, i) => (
           <button
@@ -249,7 +251,7 @@ export default function PGLGradientInteractive() {
             className={`rounded-full px-3 py-1.5 text-[11px] font-bold transition-all border ${
               i === challengeIdx
                 ? "bg-emerald-500 text-slate-900 border-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.5)]"
-                : "border-white/20 text-white/70 bg-white/5 hover:bg-white/10"
+                : (isDark ? "border-white/20 text-white/70 bg-white/5 hover:bg-white/10" : "border-slate-200 text-slate-600 bg-slate-100 hover:bg-slate-200")
             }`}
           >
             {ch.label[language]}
@@ -262,7 +264,7 @@ export default function PGLGradientInteractive() {
           <svg
             ref={svgRef}
             viewBox={`0 0 ${VIEW} ${VIEW}`}
-            className="w-full h-auto rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-white/10 touch-none"
+            className={`w-full h-auto rounded-xl border touch-none ${isDark ? "bg-gradient-to-br from-slate-900 to-slate-950 border-white/10" : "bg-gradient-to-br from-slate-50 to-slate-100 border-slate-200"}`}
             onPointerMove={handleMove}
           >
             {Array.from({ length: RANGE * 2 + 1 }).map((_, i) => {
@@ -270,20 +272,20 @@ export default function PGLGradientInteractive() {
               return (
                 <g key={`g${i}`}>
                   <line x1={toSVGX(v)} y1={0} x2={toSVGX(v)} y2={VIEW}
-                    stroke={v === 0 ? "#64748b" : "#1e293b"} strokeWidth={v === 0 ? 1.5 : 0.6} />
+                    stroke={v === 0 ? (isDark ? "#64748b" : "#94a3b8") : (isDark ? "#1e293b" : "#e2e8f0")} strokeWidth={v === 0 ? 1.5 : 0.6} />
                   <line x1={0} y1={toSVGY(v)} x2={VIEW} y2={toSVGY(v)}
-                    stroke={v === 0 ? "#64748b" : "#1e293b"} strokeWidth={v === 0 ? 1.5 : 0.6} />
+                    stroke={v === 0 ? (isDark ? "#64748b" : "#94a3b8") : (isDark ? "#1e293b" : "#e2e8f0")} strokeWidth={v === 0 ? 1.5 : 0.6} />
                 </g>
               );
             })}
             {[-6, -4, -2, 2, 4, 6].map((v) => (
               <g key={`lbl${v}`}>
-                <text x={toSVGX(v)} y={O + 12} fill="#64748b" fontSize="9" textAnchor="middle">{v}</text>
-                <text x={O - 6} y={toSVGY(v) + 3} fill="#64748b" fontSize="9" textAnchor="end">{v}</text>
+                <text x={toSVGX(v)} y={O + 12} fill={isDark ? "#64748b" : "#94a3b8"} fontSize="9" textAnchor="middle">{v}</text>
+                <text x={O - 6} y={toSVGY(v) + 3} fill={isDark ? "#64748b" : "#94a3b8"} fontSize="9" textAnchor="end">{v}</text>
               </g>
             ))}
-            <text x={VIEW - 8} y={O - 4} fill="#94a3b8" fontSize="11" fontWeight="bold" textAnchor="end">x</text>
-            <text x={O + 4} y={12} fill="#94a3b8" fontSize="11" fontWeight="bold">y</text>
+            <text x={VIEW - 8} y={O - 4} fill={isDark ? "#94a3b8" : "#64748b"} fontSize="11" fontWeight="bold" textAnchor="end">x</text>
+            <text x={O + 4} y={12} fill={isDark ? "#94a3b8" : "#64748b"} fontSize="11" fontWeight="bold">y</text>
 
             {lineEnds.length === 2 && (
               <line
@@ -347,7 +349,7 @@ export default function PGLGradientInteractive() {
               B({pB.x}, {pB.y})
             </text>
           </svg>
-          <p className="mt-2 text-[11px] text-center text-white/55 font-body italic">
+          <p className={`mt-2 text-[11px] text-center ${isDark ? "text-white/55" : "text-slate-500"} font-body italic`}>
             {ui.dragHint}
           </p>
         </div>
@@ -360,10 +362,10 @@ export default function PGLGradientInteractive() {
                 ? "border-yellow-300/60 bg-gradient-to-br from-yellow-400/20 to-amber-500/20 animate-pulse"
                 : "border-amber-300/30 bg-amber-500/10"
           }`}>
-            <p className="text-[10px] uppercase tracking-wider text-white/50 mb-1">{ui.challenge}</p>
-            <p className="text-sm font-bold text-white">{challenge.label[language]}</p>
+            <p className={`text-[10px] uppercase tracking-wider ${isDark ? "text-white/50" : "text-slate-400"} mb-1`}>{ui.challenge}</p>
+            <p className={`text-sm font-bold ${isDark ? "text-white" : "text-slate-800"}`}>{challenge.label[language]}</p>
             {challengeIdx !== 0 && (
-              <p className="text-xs mt-1 text-white/70 italic">
+              <p className={`text-xs mt-1 ${isDark ? "text-white/70" : "text-slate-600"} italic`}>
                 {challengeMet ? ui.success : `💡 ${challenge.hint[language]}`}
               </p>
             )}
@@ -374,31 +376,31 @@ export default function PGLGradientInteractive() {
             <p className="text-xl font-display font-bold text-emerald-100">{formatEquation()}</p>
           </div>
 
-          <div className="rounded-xl border border-white/15 bg-black/30 p-3 space-y-2">
+          <div className={`rounded-xl border p-3 space-y-2 ${isDark ? "border-white/15 bg-black/30" : "border-slate-200 bg-white/80"}`}>
             <div>
-              <p className="text-[10px] uppercase tracking-wider text-white/50">{ui.gradient}</p>
+              <p className={`text-[10px] uppercase tracking-wider ${isDark ? "text-white/50" : "text-slate-400"}`}>{ui.gradient}</p>
               <div className="flex items-baseline gap-2 mt-0.5">
                 <span className="text-2xl font-bold" style={{ color: lineColor }}>
                   {m === null ? "∞" : m % 1 === 0 ? m : m.toFixed(2)}
                 </span>
-                <span className="text-[11px] text-white/60">
+                <span className={`text-[11px] ${isDark ? "text-white/60" : "text-slate-500"}`}>
                   = Δy/Δx = {dy}/{isVertical ? "0" : dx}
                 </span>
               </div>
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-wider text-white/50">{ui.constant}</p>
+              <p className={`text-[10px] uppercase tracking-wider ${isDark ? "text-white/50" : "text-slate-400"}`}>{ui.constant}</p>
               <div className="flex items-baseline gap-2 mt-0.5">
                 <span className="text-2xl font-bold text-yellow-200">
                   {c === null ? "—" : c % 1 === 0 ? c : c.toFixed(2)}
                 </span>
-                <span className="text-[11px] text-white/60">{ui.yIntercept}</span>
+                <span className={`text-[11px] ${isDark ? "text-white/60" : "text-slate-500"}`}>{ui.yIntercept}</span>
               </div>
             </div>
           </div>
 
-          <div className="rounded-xl border border-white/15 bg-black/30 p-3 text-xs text-white/75">
-            <p className="font-bold text-white/85 mb-1">{ui.lineType}</p>
+          <div className={`rounded-xl border p-3 text-xs ${isDark ? "border-white/15 bg-black/30 text-white/75" : "border-slate-200 bg-white/80 text-slate-600"}`}>
+            <p className={`font-bold ${isDark ? "text-white/85" : "text-slate-700"} mb-1`}>{ui.lineType}</p>
             {m === null && <p>{ui.vertical}</p>}
             {m !== null && m === 0 && <p>{ui.horizontal}</p>}
             {m !== null && m > 0 && <p className="text-emerald-300">{ui.rising}</p>}
@@ -409,14 +411,14 @@ export default function PGLGradientInteractive() {
             <button
               type="button"
               onClick={() => setShowRiseRun((v) => !v)}
-              className="flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors"
+              className={`flex-1 rounded-lg border ${isDark ? "border-white/20" : "border-slate-200"} ${isDark ? "bg-white/5" : "bg-slate-100"} hover:bg-white/10 ${isDark ? "text-white" : "text-slate-800"} text-[11px] font-bold py-2 transition-colors`}
             >
               {showRiseRun ? ui.hideD : ui.showD}
             </button>
             <button
               type="button"
               onClick={reset}
-              className="flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors"
+              className={`flex-1 rounded-lg border ${isDark ? "border-white/20" : "border-slate-200"} ${isDark ? "bg-white/5" : "bg-slate-100"} hover:bg-white/10 ${isDark ? "text-white" : "text-slate-800"} text-[11px] font-bold py-2 transition-colors`}
             >
               {ui.reset}
             </button>

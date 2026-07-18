@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const CELL = 24;
 const HALF = 5;
@@ -48,24 +49,28 @@ function clipLine(slope: number | null, yInt: number): { x1: number; y1: number;
 }
 
 function GridBase() {
+  const { isDark } = useTheme();
+  const gridS = isDark ? "#1a2744" : "#e2e8f0";
+  const axisS = isDark ? "#334155" : "#94a3b8";
+  const lblF  = isDark ? "#475569" : "#64748b";
   return (
     <>
       {Array.from({ length: HALF * 2 + 1 }, (_, i) => (
         <g key={i}>
-          <line x1={PAD + i * CELL} y1={PAD} x2={PAD + i * CELL} y2={GH - PAD} stroke="#1a2744" strokeWidth="1" />
-          <line x1={PAD} y1={PAD + i * CELL} x2={GW - PAD} y2={PAD + i * CELL} stroke="#1a2744" strokeWidth="1" />
+          <line x1={PAD + i * CELL} y1={PAD} x2={PAD + i * CELL} y2={GH - PAD} stroke={gridS} strokeWidth="1" />
+          <line x1={PAD} y1={PAD + i * CELL} x2={GW - PAD} y2={PAD + i * CELL} stroke={gridS} strokeWidth="1" />
         </g>
       ))}
-      <line x1={PAD} y1={toSY(0)} x2={GW - PAD} y2={toSY(0)} stroke="#334155" strokeWidth="1.5" />
-      <line x1={toSX(0)} y1={PAD} x2={toSX(0)} y2={GH - PAD} stroke="#334155" strokeWidth="1.5" />
+      <line x1={PAD} y1={toSY(0)} x2={GW - PAD} y2={toSY(0)} stroke={axisS} strokeWidth="1.5" />
+      <line x1={toSX(0)} y1={PAD} x2={toSX(0)} y2={GH - PAD} stroke={axisS} strokeWidth="1.5" />
       {[-4,-3,-2,-1,1,2,3,4].map(v => (
         <g key={v}>
-          <text x={toSX(v)} y={toSY(0) + 11} fill="#475569" fontSize="7.5" textAnchor="middle">{v}</text>
-          <text x={toSX(0) - 7} y={toSY(v) + 3} fill="#475569" fontSize="7.5" textAnchor="end">{v}</text>
+          <text x={toSX(v)} y={toSY(0) + 11} fill={lblF} fontSize="7.5" textAnchor="middle">{v}</text>
+          <text x={toSX(0) - 7} y={toSY(v) + 3} fill={lblF} fontSize="7.5" textAnchor="end">{v}</text>
         </g>
       ))}
-      <text x={GW - PAD + 2} y={toSY(0) + 4} fill="#475569" fontSize="8">x</text>
-      <text x={toSX(0) + 3}  y={PAD - 4}     fill="#475569" fontSize="8">y</text>
+      <text x={GW - PAD + 2} y={toSY(0) + 4} fill={lblF} fontSize="8">x</text>
+      <text x={toSX(0) + 3}  y={PAD - 4}     fill={lblF} fontSize="8">y</text>
     </>
   );
 }
@@ -176,6 +181,7 @@ const T_AXBY = {
 };
 
 function TabYMXC({ language }: { language: "id" | "en" | "ja" }) {
+  const { isDark } = useTheme();
   const [m, setM] = useState(1.5);
   const [c, setC] = useState(1);
   const tl = T_YMXC[language];
@@ -190,40 +196,40 @@ function TabYMXC({ language }: { language: "id" | "en" | "ja" }) {
 
   return (
     <div className="space-y-4">
-      <div className="space-y-2 text-sm font-body text-white/75 leading-relaxed">
+      <div className={`space-y-2 text-sm font-body ${isDark ? "text-white/75" : "text-slate-600"} leading-relaxed`}>
         <p>
           {tl.why1} <InlineMath math="y = mx + c" /> {tl.why2}{" "}
           <InlineMath math="\Delta y / \Delta x" /> {tl.why3} <em>{tl.why4}</em> {tl.why5}
         </p>
-        <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 space-y-1 text-xs">
-          <p className="text-white/50">{tl.proof}</p>
+        <div className={`border border-cyan-500/20 rounded-xl p-3 space-y-1 text-xs ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
+          <p className={`${isDark ? "text-white/50" : "text-slate-400"}`}>{tl.proof}</p>
           <BlockMath math="\frac{y_2 - y_1}{x_2 - x_1} = \frac{(mx_2+c)-(mx_1+c)}{x_2-x_1} = \frac{m(x_2-x_1)}{x_2-x_1} = m \checkmark" />
         </div>
-        <p className="text-xs text-white/50">
+        <p className={`text-xs ${isDark ? "text-white/50" : "text-slate-400"}`}>
           {tl.note} <InlineMath math="c" /> {tl.note2}
         </p>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-slate-800/50 rounded-xl p-3 space-y-1">
+        <div className={`rounded-xl p-3 space-y-1 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
           <div className="flex justify-between items-center">
             <span className="text-xs text-cyan-300 font-bold font-body">{tl.mLabel}</span>
-            <span className="text-xs font-bold text-white"><InlineMath math={mDisplay} /></span>
+            <span className={`text-xs font-bold ${isDark ? "text-white" : "text-slate-800"}`}><InlineMath math={mDisplay} /></span>
           </div>
           <input type="range" min={-3} max={3} step={0.5} value={m}
             onChange={e => setM(Number(e.target.value))}
             className="w-full accent-cyan-400 cursor-pointer" />
-          <div className="flex justify-between text-[10px] text-white/30"><span>-3</span><span>3</span></div>
+          <div className={`flex justify-between text-[10px] ${isDark ? "text-white/30" : "text-slate-400"}`}><span>-3</span><span>3</span></div>
         </div>
-        <div className="bg-slate-800/50 rounded-xl p-3 space-y-1">
+        <div className={`rounded-xl p-3 space-y-1 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
           <div className="flex justify-between items-center">
             <span className="text-xs text-amber-300 font-bold font-body">{tl.cLabel}</span>
-            <span className="text-xs font-bold text-white">{c}</span>
+            <span className={`text-xs font-bold ${isDark ? "text-white" : "text-slate-800"}`}>{c}</span>
           </div>
           <input type="range" min={-4} max={4} step={1} value={c}
             onChange={e => setC(Number(e.target.value))}
             className="w-full accent-amber-400 cursor-pointer" />
-          <div className="flex justify-between text-[10px] text-white/30"><span>-4</span><span>4</span></div>
+          <div className={`flex justify-between text-[10px] ${isDark ? "text-white/30" : "text-slate-400"}`}><span>-4</span><span>4</span></div>
         </div>
       </div>
 
@@ -235,7 +241,7 @@ function TabYMXC({ language }: { language: "id" | "en" | "ja" }) {
       </div>
 
       <svg viewBox={`0 0 ${GW} ${GH}`} width="100%"
-        style={{ background: "rgba(10,18,35,0.90)", borderRadius: 12 }}>
+        style={{ background: isDark ? "rgba(10,18,35,0.90)" : "rgba(241,245,249,0.95)", borderRadius: 12 }}>
         <GridBase />
         {line && (
           <line x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2}
@@ -265,6 +271,7 @@ function TabYMXC({ language }: { language: "id" | "en" | "ja" }) {
 }
 
 function TabAxBy({ language }: { language: "id" | "en" | "ja" }) {
+  const { isDark } = useTheme();
   const [a, setA] = useState(2);
   const [b, setB] = useState(3);
   const [c, setC] = useState(6);
@@ -287,15 +294,15 @@ function TabAxBy({ language }: { language: "id" | "en" | "ja" }) {
 
   return (
     <div className="space-y-4">
-      <div className="space-y-2 text-sm font-body text-white/75 leading-relaxed">
+      <div className={`space-y-2 text-sm font-body ${isDark ? "text-white/75" : "text-slate-600"} leading-relaxed`}>
         <p>
           {tl.why1} <InlineMath math="ax + by = c" /> {tl.why2}{" "}
           <strong className="text-violet-300">{tl.why3}</strong>.
         </p>
-        <div className="bg-slate-800/60 border border-violet-500/20 rounded-xl p-3 text-xs space-y-1">
+        <div className={`border border-violet-500/20 rounded-xl p-3 text-xs space-y-1 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
           <BlockMath math="ax + by = c \;\Rightarrow\; by = -ax + c \;\Rightarrow\; y = \underbrace{-\frac{a}{b}}_{m}x + \frac{c}{b}" />
         </div>
-        <p className="text-xs text-white/50">
+        <p className={`text-xs ${isDark ? "text-white/50" : "text-slate-400"}`}>
           {tl.proof} <InlineMath math="m = -\dfrac{a}{b}" /> {tl.proof2}{" "}
           <em>{tl.proof3}</em> {tl.proof4} <InlineMath math="a" />.
         </p>
@@ -307,10 +314,10 @@ function TabAxBy({ language }: { language: "id" | "en" | "ja" }) {
           { label: tl.sliderB, val: b, set: setB, color: "text-violet-300", accent: "accent-violet-400", key: "b" },
           { label: tl.sliderC, val: c, set: setC, color: "text-teal-300",   accent: "accent-teal-400",   key: "c" },
         ].map(({ label, val, set, color, accent, key }) => (
-          <div key={key} className="bg-slate-800/50 rounded-xl p-2.5 space-y-1">
+          <div key={key} className={`rounded-xl p-2.5 space-y-1 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
             <div className="flex justify-between">
               <span className={`text-xs font-bold font-body ${color}`}>{label}</span>
-              <span className="text-xs font-bold text-white">{val}</span>
+              <span className={`text-xs font-bold ${isDark ? "text-white" : "text-slate-800"}`}>{val}</span>
             </div>
             <input type="range" min={key === "b" ? -4 : -6} max={key === "b" ? 4 : 6} step={1} value={val}
               onChange={e => set(Number(e.target.value))}
@@ -319,21 +326,21 @@ function TabAxBy({ language }: { language: "id" | "en" | "ja" }) {
         ))}
       </div>
 
-      <div className="bg-slate-800/60 border border-violet-500/30 rounded-xl p-3 space-y-2">
-        <p className="text-[10px] text-white/40 font-body uppercase tracking-wide">{tl.convTitle}</p>
+      <div className={`border border-violet-500/30 rounded-xl p-3 space-y-2 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
+        <p className={`text-[10px] ${isDark ? "text-white/40" : "text-slate-400"} font-body uppercase tracking-wide`}>{tl.convTitle}</p>
         <div className="space-y-1 text-sm">
           <div className="flex gap-2 items-center">
-            <span className="text-[10px] text-white/35 w-16 shrink-0">{tl.stepInit}</span>
+            <span className={`text-[10px] ${isDark ? "text-white/35" : "text-slate-400"} w-16 shrink-0`}>{tl.stepInit}</span>
             <InlineMath math={`${a}x + (${b})y = ${c}`} />
           </div>
           {!bZero && (
             <>
               <div className="flex gap-2 items-center">
-                <span className="text-[10px] text-white/35 w-16 shrink-0">{tl.stepMove}</span>
+                <span className={`text-[10px] ${isDark ? "text-white/35" : "text-slate-400"} w-16 shrink-0`}>{tl.stepMove}</span>
                 <InlineMath math={`(${b})y = ${-a}x + ${c}`} />
               </div>
               <div className="flex gap-2 items-center">
-                <span className="text-[10px] text-white/35 w-16 shrink-0">{tl.stepDiv}</span>
+                <span className={`text-[10px] ${isDark ? "text-white/35" : "text-slate-400"} w-16 shrink-0`}>{tl.stepDiv}</span>
                 <InlineMath math={step4} />
               </div>
             </>
@@ -355,7 +362,7 @@ function TabAxBy({ language }: { language: "id" | "en" | "ja" }) {
       )}
 
       <svg viewBox={`0 0 ${GW} ${GH}`} width="100%"
-        style={{ background: "rgba(10,18,35,0.90)", borderRadius: 12 }}>
+        style={{ background: isDark ? "rgba(10,18,35,0.90)" : "rgba(241,245,249,0.95)", borderRadius: 12 }}>
         <GridBase />
         {line && !bZero && (
           <line x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2}
@@ -387,6 +394,7 @@ function TabAxBy({ language }: { language: "id" | "en" | "ja" }) {
 
 export default function GradienPersamaanInteraktif() {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const [tab, setTab] = useState<"ymxc" | "axby">("ymxc");
 
   return (
@@ -397,7 +405,7 @@ export default function GradienPersamaanInteraktif() {
           className={`flex-1 py-2.5 text-sm font-body font-semibold transition-colors ${
             tab === "ymxc"
               ? "bg-cyan-600/30 text-cyan-300 border-r border-slate-700"
-              : "bg-slate-800/40 text-white/40 border-r border-slate-700 hover:text-white/70"
+              : `${isDark ? "bg-slate-800/40 text-white/40" : "bg-gray-100 text-slate-500"} border-r border-slate-700 hover:text-white/70`
           }`}
         >
           y = mx + c
@@ -407,7 +415,7 @@ export default function GradienPersamaanInteraktif() {
           className={`flex-1 py-2.5 text-sm font-body font-semibold transition-colors ${
             tab === "axby"
               ? "bg-violet-600/30 text-violet-300"
-              : "bg-slate-800/40 text-white/40 hover:text-white/70"
+              : `${isDark ? "bg-slate-800/40 text-white/40" : "bg-gray-100 text-slate-500"} hover:text-white/70`
           }`}
         >
           ax + by = c
