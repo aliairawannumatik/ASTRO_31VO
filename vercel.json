@@ -1,7 +1,7 @@
 {
   "framework": null,
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm --filter @workspace/numatik run build",
+  "buildCommand": "NODE_OPTIONS=\"--max-old-space-size=3072\" pnpm --filter @workspace/numatik run build",
   "outputDirectory": "artifacts/numatik/dist/public",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
