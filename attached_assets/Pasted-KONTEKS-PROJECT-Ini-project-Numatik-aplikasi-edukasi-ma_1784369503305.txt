@@ -1,0 +1,47 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika SMP, menggunakan sistem 
+tema (useTheme() dari ThemeContext, ada tema dark/luar-angkasa dan 
+5 tema lain). Source aktif ada di artifacts/numatik/src/.
+
+MASALAH:
+Banyak komponen diagram/tabel/ilustrasi (baik berupa SVG maupun 
+div/table HTML biasa) di halaman-halaman materi menggunakan warna 
+background HARDCODED (misal hitam pekat, abu-abu terang, dll — 
+bukan mengikuti tema aktif). Akibatnya saat pengguna ganti ke tema 
+selain dark/luar-angkasa, kotak-kotak ini tetap warna aslinya dan 
+terlihat nyeleneh/nggak nyambung dengan tema, kadang bikin teks 
+di dalamnya susah dibaca.
+
+Contoh konkret yang sudah ditemukan (screenshot terlampir secara terpisah):
+1. Halaman "Pola Gambar Persegi" — kotak berisi pola gambar kotak-kotak 
+   biru punya background abu-abu terang hardcoded
+2. Halaman "Diskriminan dan Jenis Akar" — tabel diskriminan punya 
+   background hitam/navy hardcoded dengan teks warna-warni (kuning, hijau, magenta)
+
+TUGAS SEKARANG — HANYA AUDIT, JANGAN UBAH KODE APAPUN DULU:
+
+1. Scan seluruh src/pages/materi-matematika/ (dan folder komponen terkait 
+   seperti src/components/) untuk mencari pola:
+   - Background hardcoded: hex color langsung (#000, #ffffff, dst), 
+     nama warna CSS langsung (black, white, gray-900, dst) yang 
+     TIDAK menggunakan variabel tema/useTheme()/isDark, KHUSUSNYA 
+     di komponen yang berbentuk kotak diagram, tabel referensi, 
+     ilustrasi pola, atau card pembungkus visual/gambar
+   - Baik dalam file .tsx (className Tailwind hardcoded seperti 
+     bg-black, bg-gray-900) maupun dalam SVG inline (attribute fill/style)
+
+2. Kelompokkan hasil temuan ke dalam kategori:
+   a. Komponen yang PALING SERING dipakai berulang di banyak halaman 
+      (misal komponen shared seperti TabelDiskriminan, PolaGambarBox, 
+      dst) — perbaikan di sini akan otomatis memperbaiki banyak halaman sekaligus
+   b. Komponen yang hardcode-nya unik per halaman (satu-satu, tidak reusable)
+
+3. Untuk kategori (a), sebutkan nama file, lokasi, dan berapa banyak 
+   halaman yang memakainya.
+   Untuk kategori (b), cukup sebutkan jumlah total file yang terdampak 
+   dan berikan 3-5 contoh nama file representatif.
+
+4. JANGAN ubah kode apapun di tahap ini. Cukup laporkan temuan 
+   dalam bentuk ringkas dan terstruktur.
+
+Laporkan hasilnya.
