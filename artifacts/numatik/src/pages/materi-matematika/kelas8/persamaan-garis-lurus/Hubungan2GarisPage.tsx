@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronUp, Lightbulb, Target, Layers, GitBranch } from "lucide-react";
@@ -12,23 +13,31 @@ const W = 180, H = 150, MX = 90, MY = 75, SC = 14;
 const toX = (x: number) => MX + x * SC;
 const toY = (y: number) => MY - y * SC;
 
-const CoordSys = ({ children, label = "" }: { children?: React.ReactNode; label?: string }) => (
-  <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ maxHeight: 170, background: "rgba(15,23,42,0.7)" }}>
-    {[-5,-4,-3,-2,-1,1,2,3,4,5].map(v => (
-      <g key={v}>
-        <line x1={MX+v*SC*0.7} y1={4} x2={MX+v*SC*0.7} y2={H-4} stroke="#1e293b" strokeWidth="0.7" />
-        <line x1={4} y1={MY-v*SC*0.7} x2={W-4} y2={MY-v*SC*0.7} stroke="#1e293b" strokeWidth="0.7" />
-      </g>
-    ))}
-    <line x1={4} y1={MY} x2={W-4} y2={MY} stroke="#475569" strokeWidth="1.5" />
-    <line x1={MX} y1={H-4} x2={MX} y2={4} stroke="#475569" strokeWidth="1.5" />
-    <text x={W-10} y={MY+11} fill="#64748b" fontSize="8">x</text>
-    <text x={MX+3} y={11} fill="#64748b" fontSize="8">y</text>
-    <text x={MX+2} y={MY+10} fill="#475569" fontSize="7">O</text>
-    {label && <text x={5} y={13} fill="#94a3b8" fontSize="8">{label}</text>}
-    {children}
-  </svg>
-);
+const CoordSys = ({ children, label = "" }: { children?: React.ReactNode; label?: string }) => {
+  const { isDark } = useTheme();
+  const svgBg  = isDark ? "rgba(15,23,42,0.7)"  : "rgba(241,245,249,0.9)";
+  const gridS  = isDark ? "#1e293b" : "#cbd5e1";
+  const axisS  = isDark ? "#475569" : "#64748b";
+  const lblFil = isDark ? "#64748b" : "#475569";
+  const oriF   = isDark ? "#475569" : "#334155";
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ maxHeight: 170, background: svgBg }}>
+      {[-5,-4,-3,-2,-1,1,2,3,4,5].map(v => (
+        <g key={v}>
+          <line x1={MX+v*SC*0.7} y1={4} x2={MX+v*SC*0.7} y2={H-4} stroke={gridS} strokeWidth="0.7" />
+          <line x1={4} y1={MY-v*SC*0.7} x2={W-4} y2={MY-v*SC*0.7} stroke={gridS} strokeWidth="0.7" />
+        </g>
+      ))}
+      <line x1={4} y1={MY} x2={W-4} y2={MY} stroke={axisS} strokeWidth="1.5" />
+      <line x1={MX} y1={H-4} x2={MX} y2={4} stroke={axisS} strokeWidth="1.5" />
+      <text x={W-10} y={MY+11} fill={lblFil} fontSize="8">x</text>
+      <text x={MX+3} y={11} fill={lblFil} fontSize="8">y</text>
+      <text x={MX+2} y={MY+10} fill={oriF} fontSize="7">O</text>
+      {label && <text x={5} y={13} fill={isDark ? "#94a3b8" : "#64748b"} fontSize="8">{label}</text>}
+      {children}
+    </svg>
+  );
+};
 
 const gPts = (m: number, c: number) =>
   [-7, -4, -1, 2, 5, 7].map(x => `${toX(x)},${toY(m * x + c)}`).join(' ');
@@ -439,6 +448,7 @@ const T_HUBUNGAN = {
 const Hubungan2GarisPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = T_HUBUNGAN[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "sejajar", "tegaklurus", "berpotongan", "visual-trio", "contoh1", "contoh2", "contoh3", "rangkuman",
@@ -508,7 +518,7 @@ const Hubungan2GarisPage = () => {
                 </div>
 
                 {/* Penjelasan MENGAPA */}
-                <div className="bg-slate-800/50 border border-cyan-500/20 rounded-xl p-4 space-y-2">
+                <div className={`border border-cyan-500/20 rounded-xl p-4 space-y-2 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                   <p className="text-xs font-bold text-cyan-300 uppercase tracking-wide">{t.sej_why}</p>
                   <p className="text-xs text-white/70 font-body leading-relaxed">{t.sej_p1}</p>
                   <p className="text-xs text-white/70 font-body leading-relaxed">
@@ -520,7 +530,7 @@ const Hubungan2GarisPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3">
+                  <div className={`border border-cyan-500/20 rounded-xl p-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                     <p className="text-xs font-bold text-cyan-300 mb-2">{t.sej_vis}</p>
                     <CoordSys label="ℓ₁ ∥ ℓ₂">
                       <polyline points={[[-3,-5],[-2,-3],[-1,-1],[0,1],[1,3],[2,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
@@ -554,7 +564,7 @@ const Hubungan2GarisPage = () => {
                   <div className="flex flex-wrap gap-2">
                     {SEJ_OPTS.map(v => (
                       <button key={v} onClick={() => { playPopSound(); setSejM(v); }}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${sejM === v ? "bg-cyan-500 text-white" : "bg-slate-700/60 text-white/60 hover:bg-slate-600"}`}>
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${sejM === v ? "bg-cyan-500 text-white" : isDark ? "bg-slate-700/60 text-white/60 hover:bg-slate-600" : "bg-gray-200 text-slate-700 hover:bg-gray-300"}`}>
                         m = {mDisp(v)}
                       </button>
                     ))}
@@ -595,7 +605,7 @@ const Hubungan2GarisPage = () => {
                 </div>
 
                 {/* Penjelasan MENGAPA */}
-                <div className="bg-slate-800/50 border border-violet-500/20 rounded-xl p-4 space-y-2">
+                <div className={`border border-violet-500/20 rounded-xl p-4 space-y-2 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                   <p className="text-xs font-bold text-violet-300 uppercase tracking-wide">{t.tek_why}</p>
                   <p className="text-xs text-white/70 font-body leading-relaxed">{t.tek_p1}</p>
                   <p className="text-xs text-white/70 font-body leading-relaxed">{t.tek_p2}</p>
@@ -611,7 +621,7 @@ const Hubungan2GarisPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="bg-slate-800/60 border border-violet-500/20 rounded-xl p-3">
+                  <div className={`border border-violet-500/20 rounded-xl p-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                     <p className="text-xs font-bold text-violet-300 mb-2">{t.tek_vis}</p>
                     <CoordSys label="ℓ₁ ⊥ ℓ₂">
                       <polyline points={[[-3,-6],[-2,-4],[-1,-2],[0,0],[1,2],[2,4],[3,6]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" />
@@ -647,7 +657,7 @@ const Hubungan2GarisPage = () => {
                   <div className="flex flex-wrap gap-2">
                     {TEK_OPTS.map(v => (
                       <button key={v} onClick={() => { playPopSound(); setTekM1(v); }}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${tekM1 === v ? "bg-violet-500 text-white" : "bg-slate-700/60 text-white/60 hover:bg-slate-600"}`}>
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${tekM1 === v ? "bg-violet-500 text-white" : isDark ? "bg-slate-700/60 text-white/60 hover:bg-slate-600" : "bg-gray-200 text-slate-700 hover:bg-gray-300"}`}>
                         m₁ = {mDisp(v)}
                       </button>
                     ))}
@@ -684,7 +694,7 @@ const Hubungan2GarisPage = () => {
                 </div>
 
                 {/* Penjelasan MENGAPA */}
-                <div className="bg-slate-800/50 border border-green-500/20 rounded-xl p-4 space-y-2">
+                <div className={`border border-green-500/20 rounded-xl p-4 space-y-2 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                   <p className="text-xs font-bold text-green-300 uppercase tracking-wide">{t.ber_why}</p>
                   <p className="text-xs text-white/70 font-body leading-relaxed">{t.ber_p1}</p>
                   <p className="text-xs text-white/70 font-body leading-relaxed">
@@ -698,7 +708,7 @@ const Hubungan2GarisPage = () => {
                   </div>
                 </div>
 
-                <div className="bg-slate-800/60 border border-green-500/20 rounded-xl p-3">
+                <div className={`border border-green-500/20 rounded-xl p-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-xs font-bold text-green-300 mb-2">{t.ber_ex_title}</p>
                   <p className="text-xs text-white/60 mb-2">{t.ber_ex_desc}</p>
                   <div className="space-y-1 text-xs font-body text-white/70">
@@ -720,7 +730,7 @@ const Hubungan2GarisPage = () => {
                       <div className="flex flex-wrap gap-1.5">
                         {BER_OPTS.map(v => (
                           <button key={v} onClick={() => { playPopSound(); setBerM1(v); }}
-                            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${berM1 === v ? "bg-cyan-500 text-white" : "bg-slate-700/60 text-white/60 hover:bg-slate-600"}`}>
+                            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${berM1 === v ? "bg-cyan-500 text-white" : isDark ? "bg-slate-700/60 text-white/60 hover:bg-slate-600" : "bg-gray-200 text-slate-700 hover:bg-gray-300"}`}>
                             {mDisp(v)}
                           </button>
                         ))}
@@ -731,7 +741,7 @@ const Hubungan2GarisPage = () => {
                       <div className="flex flex-wrap gap-1.5">
                         {BER_OPTS.map(v => (
                           <button key={v} onClick={() => { playPopSound(); setBerM2(v); }}
-                            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${berM2 === v ? "bg-yellow-500 text-slate-900" : "bg-slate-700/60 text-white/60 hover:bg-slate-600"}`}>
+                            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer font-display ${berM2 === v ? "bg-yellow-500 text-slate-900" : isDark ? "bg-slate-700/60 text-white/60 hover:bg-slate-600" : "bg-gray-200 text-slate-700 hover:bg-gray-300"}`}>
                             {mDisp(v)}
                           </button>
                         ))}
@@ -781,7 +791,7 @@ const Hubungan2GarisPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {/* Sejajar */}
-                  <div className="bg-slate-900/60 border border-cyan-500/30 rounded-xl p-3">
+                  <div className={`border border-cyan-500/30 rounded-xl p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                     <p className="text-xs font-bold text-cyan-300 mb-2 text-center">{t.vis_lbl_sejajar}</p>
                     <CoordSys label="m₁=m₂=2">
                       <polyline points={[[-3,-5],[-2,-3],[-1,-1],[0,1],[1,3]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
@@ -794,7 +804,7 @@ const Hubungan2GarisPage = () => {
                     </div>
                   </div>
                   {/* Tegak lurus — fixed right-angle marker */}
-                  <div className="bg-slate-900/60 border border-violet-500/30 rounded-xl p-3">
+                  <div className={`border border-violet-500/30 rounded-xl p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                     <p className="text-xs font-bold text-violet-300 mb-2 text-center">{t.vis_lbl_tegaklurus}</p>
                     <CoordSys label="m₁·m₂=−1">
                       {/* ℓ₁: y=2x, ℓ₂: y=-0.5x → intersect at origin (0,0) */}
@@ -809,7 +819,7 @@ const Hubungan2GarisPage = () => {
                     </div>
                   </div>
                   {/* Berpotongan */}
-                  <div className="bg-slate-900/60 border border-green-500/30 rounded-xl p-3">
+                  <div className={`border border-green-500/30 rounded-xl p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                     <p className="text-xs font-bold text-green-300 mb-2 text-center">{t.vis_lbl_berpotongan}</p>
                     <CoordSys label="m₁≠m₂">
                       <polyline points={[[-3,-5],[-2,-3],[-1,-1],[0,1],[1,3],[2,5]].map(([x,y])=>`${toX(x)},${toY(y)}`).join(' ')} fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" />
@@ -827,14 +837,14 @@ const Hubungan2GarisPage = () => {
                 {/* Summary table */}
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-body border-collapse">
-                    <thead><tr className="bg-slate-700/60">
+                    <thead><tr className={isDark ? "bg-slate-700/60" : "bg-gray-200"}>
                       {t.vis_tabel_h.map((h: string) => (
                         <th key={h} className="border border-white/10 px-3 py-2 text-white">{h}</th>
                       ))}
                     </tr></thead>
                     <tbody>
                       {t.vis_tabel_rows.map(([h,s,p]: string[], i: number) => (
-                        <tr key={i} className={i%2===0?"bg-slate-800/30":"bg-slate-700/20"}>
+                        <tr key={i} className={i%2===0?(isDark?"bg-slate-800/30":"bg-blue-50/50"):(isDark?"bg-slate-700/20":"bg-gray-50")}>
                           <td className="border border-white/10 px-3 py-2 text-cyan-300 font-semibold">{h}</td>
                           <td className="border border-white/10 px-3 py-2 text-yellow-300 font-mono">{s}</td>
                           <td className="border border-white/10 px-3 py-2 text-white/60">{p}</td>
@@ -853,12 +863,12 @@ const Hubungan2GarisPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
-                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
+                <div className={`border border-green-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c1_soal} <InlineMath math="\ell_1: y = 3x - 5" /> dan <InlineMath math="\ell_2: y = 3x + 2" />!</p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">{t.c1_id_grad}</p>
                     {t.c1_steps.map((s, i) => <p key={i} className={`text-white/70 text-xs${i === 2 ? " mt-1" : ""}`}>{s}</p>)}
                   </div>
@@ -884,22 +894,22 @@ const Hubungan2GarisPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
-                <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
+                <div className={`border border-yellow-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c2_soal} <InlineMath math="(2, 5)" /> <InlineMath math="y = 4x - 3" /></p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">{t.c2_l1}</p>
                     <p className="text-white/70 text-xs">{t.c2_step1}</p>
                     <BlockMath math="m_2 = -\frac{1}{m_1} = -\frac{1}{4}" />
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-violet-300 font-semibold mb-1">{t.c2_l2}</p>
                     <BlockMath math="y - 5 = -\frac{1}{4}(x - 2)" />
                     <BlockMath math="y = -\frac{1}{4}x + \frac{1}{2} + 5 = -\frac{1}{4}x + \frac{11}{2}" />
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c2_vis}</p>
                     <CoordSys label="⊥ di (2,5)">
                       {/* ℓ₁: y=4x-3, ℓ₂: y=-¼x+5.5, intersect at (2,5) */}
@@ -924,12 +934,12 @@ const Hubungan2GarisPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
-                <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
+                <div className={`border border-red-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c3_soal} <InlineMath math="\ell_1: 2x - y + 4 = 0" />, <InlineMath math="\ell_2: x + 2y - 6 = 0" />, <InlineMath math="\ell_3: 4x - 2y + 1 = 0" />.</p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-2">{t.c3_l1}</p>
                     <div className="space-y-2 text-xs">
                       <div className="bg-cyan-900/20 rounded-lg p-2">
@@ -946,7 +956,7 @@ const Hubungan2GarisPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-violet-300 font-semibold mb-2">{t.c3_l2}</p>
                     <div className="space-y-1.5 text-xs">
                       <div className="bg-green-900/20 rounded-lg p-2">

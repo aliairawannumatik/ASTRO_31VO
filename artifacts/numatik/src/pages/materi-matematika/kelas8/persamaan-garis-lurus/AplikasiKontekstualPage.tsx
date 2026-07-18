@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Globe } from "lucide-react";
@@ -12,30 +13,38 @@ const W = 220, H = 160, MX = 30, MY = 130, SC = 25;
 const toX = (x: number) => MX + x * SC;
 const toY = (y: number) => MY - y * SC;
 
-const Chart = ({ children, label = "", xLabel = "x", yLabel = "y" }: { children?: React.ReactNode; label?: string; xLabel?: string; yLabel?: string }) => (
-  <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ maxHeight: 180, background: "rgba(15,23,42,0.7)" }}>
-    {[1,2,3,4,5,6].map(v => (
-      <g key={v}>
-        <line x1={toX(v)} y1={MY} x2={toX(v)} y2={10} stroke="#1e293b" strokeWidth="0.7" strokeDasharray="3,3" />
-        <line x1={MX} y1={toY(v)} x2={W-5} y2={toY(v)} stroke="#1e293b" strokeWidth="0.7" strokeDasharray="3,3" />
-        <text x={toX(v)-3} y={MY+12} fill="#475569" fontSize="7">{v}</text>
-        <text x={MX-15} y={toY(v)+3} fill="#475569" fontSize="7">{v}</text>
-      </g>
-    ))}
-    <line x1={MX} y1={MY} x2={W-5} y2={MY} stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrC)" />
-    <line x1={MX} y1={MY} x2={MX} y2={10} stroke="#64748b" strokeWidth="1.5" markerEnd="url(#arrC)" />
-    <defs>
-      <marker id="arrC" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto">
-        <path d="M0,0 L4,2 L0,4 Z" fill="#64748b" />
-      </marker>
-    </defs>
-    <text x={W-12} y={MY+12} fill="#64748b" fontSize="8">{xLabel}</text>
-    <text x={MX+3} y={12} fill="#64748b" fontSize="8">{yLabel}</text>
-    <text x={MX+2} y={MY+12} fill="#475569" fontSize="7">0</text>
-    {label && <text x={MX+5} y={22} fill="#94a3b8" fontSize="8">{label}</text>}
-    {children}
-  </svg>
-);
+const Chart = ({ children, label = "", xLabel = "x", yLabel = "y" }: { children?: React.ReactNode; label?: string; xLabel?: string; yLabel?: string }) => {
+  const { isDark } = useTheme();
+  const svgBg  = isDark ? "rgba(15,23,42,0.7)"  : "rgba(241,245,249,0.9)";
+  const gridS  = isDark ? "#1e293b" : "#cbd5e1";
+  const axisS  = isDark ? "#64748b" : "#475569";
+  const tickF  = isDark ? "#475569" : "#64748b";
+  const lblF   = isDark ? "#64748b" : "#475569";
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ maxHeight: 180, background: svgBg }}>
+      {[1,2,3,4,5,6].map(v => (
+        <g key={v}>
+          <line x1={toX(v)} y1={MY} x2={toX(v)} y2={10} stroke={gridS} strokeWidth="0.7" strokeDasharray="3,3" />
+          <line x1={MX} y1={toY(v)} x2={W-5} y2={toY(v)} stroke={gridS} strokeWidth="0.7" strokeDasharray="3,3" />
+          <text x={toX(v)-3} y={MY+12} fill={tickF} fontSize="7">{v}</text>
+          <text x={MX-15} y={toY(v)+3} fill={tickF} fontSize="7">{v}</text>
+        </g>
+      ))}
+      <line x1={MX} y1={MY} x2={W-5} y2={MY} stroke={axisS} strokeWidth="1.5" markerEnd="url(#arrC)" />
+      <line x1={MX} y1={MY} x2={MX} y2={10} stroke={axisS} strokeWidth="1.5" markerEnd="url(#arrC)" />
+      <defs>
+        <marker id="arrC" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto">
+          <path d="M0,0 L4,2 L0,4 Z" fill={axisS} />
+        </marker>
+      </defs>
+      <text x={W-12} y={MY+12} fill={axisS} fontSize="8">{xLabel}</text>
+      <text x={MX+3} y={12} fill={axisS} fontSize="8">{yLabel}</text>
+      <text x={MX+2} y={MY+12} fill={lblF} fontSize="7">0</text>
+      {label && <text x={MX+5} y={22} fill={isDark ? "#94a3b8" : "#64748b"} fontSize="8">{label}</text>}
+      {children}
+    </svg>
+  );
+};
 
 const T_APLIKASI = {
   id: {
@@ -86,6 +95,7 @@ type LangKey = keyof typeof T_APLIKASI;
 const AplikasiKontekstualPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = T_APLIKASI[language as LangKey] ?? T_APLIKASI.id;
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "langkah", "konteks-list", "contoh1", "contoh2", "contoh3", "rangkuman",
@@ -125,7 +135,7 @@ const AplikasiKontekstualPage = () => {
                     { icon: "🌱", label: "Pertumbuhan", ket: "Tinggi vs waktu" },
                     { icon: "💰", label: "Tabungan", ket: "Saldo vs waktu" },
                   ].map(({ icon, label, ket }) => (
-                    <div key={label} className="bg-slate-800/60 border border-white/10 rounded-xl p-3 text-center">
+                    <div key={label} className={`border border-white/10 rounded-xl p-3 text-center ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                       <div className="text-2xl mb-1">{icon}</div>
                       <p className="text-xs font-bold text-white">{label}</p>
                       <p className="text-xs text-white/40 mt-0.5">{ket}</p>
@@ -185,7 +195,7 @@ const AplikasiKontekstualPage = () => {
                         ["Tabungan", "Waktu (bulan)", "Saldo (Rp)", "Tabungan per bulan", "Saldo awal"],
                         ["Produksi", "Unit diproduksi", "Biaya produksi", "Biaya per unit", "Biaya tetap"],
                       ].map(([k,x,y,m,c],i) => (
-                        <tr key={i} className={i%2===0?"bg-slate-800/30":"bg-slate-700/20"}>
+                        <tr key={i} className={i%2===0?(isDark?"bg-slate-800/30":"bg-blue-50/50"):(isDark?"bg-slate-700/20":"bg-gray-50")}>
                           <td className="border border-white/10 px-3 py-2 text-cyan-300 font-semibold">{k}</td>
                           <td className="border border-white/10 px-3 py-2 text-white/70">{x}</td>
                           <td className="border border-white/10 px-3 py-2 text-white/70">{y}</td>
@@ -209,7 +219,7 @@ const AplikasiKontekstualPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
-                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
+                <div className={`border border-green-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
                   <p className="text-sm text-white/85 font-body leading-relaxed">
                     🚖 Sebuah taksi online mengenakan tarif dasar Rp 8.000 saat penumpang naik, ditambah Rp 4.000 untuk setiap kilometer perjalanan.
@@ -218,26 +228,26 @@ const AplikasiKontekstualPage = () => {
                     <br />c) Jika tarif Rp 32.000, berapa jarak tempuhnya?
                   </p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">a) Model Persamaan:</p>
                     <p className="text-white/60 text-xs mb-1">Misalkan x = jarak (km), y = tarif (Rp ribu)</p>
                     <p className="text-white/60 text-xs">m = 4 (tarif per km), c = 8 (tarif dasar)</p>
                     <BlockMath math="y = 4x + 8" />
                     <p className="text-xs text-white/50">Atau: Tarif = 4.000 × jarak + 8.000</p>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-violet-300 font-semibold mb-1">b) Tarif untuk 5 km:</p>
                     <BlockMath math="y = 4(5) + 8 = 20 + 8 = 28" />
                     <p className="text-green-300 font-bold text-xs">Tarif = Rp 28.000</p>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-orange-300 font-semibold mb-1">c) Jarak jika tarif = Rp 32.000 (y = 32):</p>
                     <BlockMath math="32 = 4x + 8 \Rightarrow 4x = 24 \Rightarrow x = 6" />
                     <p className="text-green-300 font-bold text-xs">Jarak = 6 km</p>
                   </div>
                   {/* Grafik tarif */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-2 text-xs">Grafik Tarif Taksi:</p>
                     <Chart label="y = 4x + 8" xLabel="km" yLabel="Rb Rp">
                       {/* y = 4x + 8, scaled: x in km (0-6), y in Rp/1000 (0-32) */}
@@ -284,7 +294,7 @@ const AplikasiKontekstualPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
-                <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
+                <div className={`border border-yellow-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">📝 Soal</p>
                   <p className="text-sm text-white/85 font-body leading-relaxed">
                     🌱 Sebuah tanaman diukur tingginya setiap hari. Pada hari ke-2, tingginya 11 cm. Pada hari ke-5, tingginya 17 cm. Asumsikan pertumbuhan linier.
@@ -293,8 +303,8 @@ const AplikasiKontekstualPage = () => {
                     <br />c) Berapa tinggi awal tanaman (hari ke-0)?
                   </p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">a) Identifikasi titik-titik: (2, 11) dan (5, 17)</p>
                     <p className="text-white/60 text-xs mb-1">Hitung gradien (laju pertumbuhan per hari):</p>
                     <BlockMath math="m = \frac{17 - 11}{5 - 2} = \frac{6}{3} = 2" />
@@ -302,17 +312,17 @@ const AplikasiKontekstualPage = () => {
                     <BlockMath math="y - 11 = 2(x - 2) \Rightarrow y = 2x + 7" />
                     <p className="text-green-300 font-bold text-xs">Model: y = 2x + 7 (y = tinggi cm, x = hari)</p>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-violet-300 font-semibold mb-1">b) Tinggi pada hari ke-10:</p>
                     <BlockMath math="y = 2(10) + 7 = 27" />
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-orange-300 font-semibold mb-1">c) Tinggi awal (x = 0):</p>
                     <BlockMath math="y = 2(0) + 7 = 7" />
                     <p className="text-green-300 font-bold text-xs">Tinggi awal = 7 cm (nilai c dalam persamaan!)</p>
                   </div>
                   {/* Grafik pertumbuhan */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-2 text-xs">Grafik Pertumbuhan Tanaman:</p>
                     <Chart label="y = 2x + 7" xLabel="hari" yLabel="cm">
                       {(() => {
@@ -360,7 +370,7 @@ const AplikasiKontekstualPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
-                <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
+                <div className={`border border-red-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
                   <p className="text-sm text-white/85 font-body leading-relaxed">
                     🏭 Sebuah UMKM memproduksi tas. Biaya produksi untuk 20 tas adalah Rp 900.000, sedangkan untuk 50 tas adalah Rp 1.800.000 (biaya bersifat linear).
@@ -370,8 +380,8 @@ const AplikasiKontekstualPage = () => {
                     <br />d) Jika harga jual per tas Rp 45.000, berapa jumlah tas minimum yang harus dijual agar tidak rugi?
                   </p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">a) Model Persamaan Biaya (dalam Rp ribu):</p>
                     <p className="text-white/60 text-xs mb-1">x = jumlah tas, y = biaya (Rp ribu)</p>
                     <p className="text-white/60 text-xs mb-1">Dua titik: (20, 900) dan (50, 1800)</p>
@@ -381,25 +391,25 @@ const AplikasiKontekstualPage = () => {
                     <p className="text-green-300 font-bold text-xs">Model biaya: y = 30x + 300</p>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-slate-800/50 rounded-lg p-3">
+                    <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                       <p className="text-violet-300 font-semibold mb-1 text-xs">b) Biaya Tetap (x=0):</p>
                       <BlockMath math="y = 30(0) + 300 = 300" />
                       <p className="text-green-300 font-bold text-xs">Rp 300.000 (nilai c!)</p>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
+                    <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                       <p className="text-orange-300 font-semibold mb-1 text-xs">c) Biaya per unit:</p>
                       <p className="text-white/70 text-xs">= m = 30</p>
                       <p className="text-green-300 font-bold text-xs">Rp 30.000 per tas</p>
                     </div>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-green-300 font-semibold mb-1">d) Titik impas (Break Even Point):</p>
                     <p className="text-white/60 text-xs mb-1">Pendapatan = Biaya → 45x = 30x + 300</p>
                     <BlockMath math="45x = 30x + 300" />
                     <BlockMath math="15x = 300 \Rightarrow x = 20" />
                   </div>
                   {/* Grafik BEP */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-2 text-xs">Grafik Biaya vs Pendapatan (BEP):</p>
                     <Chart label="BEP Analysis" xLabel="tas" yLabel="Rb Rp">
                       {(() => {

@@ -10,6 +10,7 @@ import GradienInvariantAnimation from "@/components/GradienInvariantAnimation";
 import GradienDuaTitikInteraktif from "@/components/GradienDuaTitikInteraktif";
 import GradienPersamaanInteraktif from "@/components/GradienPersamaanInteraktif";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const T_GRADIEN = {
   id: {
@@ -316,21 +317,27 @@ const toX = (x: number) => MX + x * SC;
 const toY = (y: number) => MY - y * SC;
 
 const CoordSys = ({ children, label = "", w = W, h = H }: { children?: React.ReactNode; label?: string; w?: number; h?: number }) => {
+  const { isDark } = useTheme();
   const mx = w / 2, my = h / 2;
+  const svgBg  = isDark ? "rgba(15,23,42,0.7)"  : "rgba(241,245,249,0.9)";
+  const gridS  = isDark ? "#1e293b" : "#cbd5e1";
+  const axisS  = isDark ? "#475569" : "#64748b";
+  const lblFil = isDark ? "#64748b" : "#475569";
+  const oriF   = isDark ? "#475569" : "#334155";
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full rounded-xl" style={{ maxHeight: 170, background: "rgba(15,23,42,0.7)" }}>
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full rounded-xl" style={{ maxHeight: 170, background: svgBg }}>
       {[-4,-3,-2,-1,1,2,3,4].map(v => (
         <g key={v}>
-          <line x1={mx+v*(w/10)} y1={4} x2={mx+v*(w/10)} y2={h-4} stroke="#1e293b" strokeWidth="0.8" />
-          <line x1={4} y1={my-v*(h/10)} x2={w-4} y2={my-v*(h/10)} stroke="#1e293b" strokeWidth="0.8" />
+          <line x1={mx+v*(w/10)} y1={4} x2={mx+v*(w/10)} y2={h-4} stroke={gridS} strokeWidth="0.8" />
+          <line x1={4} y1={my-v*(h/10)} x2={w-4} y2={my-v*(h/10)} stroke={gridS} strokeWidth="0.8" />
         </g>
       ))}
-      <line x1={4} y1={my} x2={w-4} y2={my} stroke="#475569" strokeWidth="1.5" />
-      <line x1={mx} y1={h-4} x2={mx} y2={4} stroke="#475569" strokeWidth="1.5" />
-      <text x={w-9} y={my+11} fill="#64748b" fontSize="8">x</text>
-      <text x={mx+3} y={11} fill="#64748b" fontSize="8">y</text>
-      <text x={mx+2} y={my+10} fill="#475569" fontSize="7">O</text>
-      {label && <text x={5} y={13} fill="#94a3b8" fontSize="8">{label}</text>}
+      <line x1={4} y1={my} x2={w-4} y2={my} stroke={axisS} strokeWidth="1.5" />
+      <line x1={mx} y1={h-4} x2={mx} y2={4} stroke={axisS} strokeWidth="1.5" />
+      <text x={w-9} y={my+11} fill={lblFil} fontSize="8">x</text>
+      <text x={mx+3} y={11} fill={lblFil} fontSize="8">y</text>
+      <text x={mx+2} y={my+10} fill={oriF} fontSize="7">O</text>
+      {label && <text x={5} y={13} fill={isDark ? "#94a3b8" : "#64748b"} fontSize="8">{label}</text>}
       {children}
     </svg>
   );
@@ -339,6 +346,7 @@ const CoordSys = ({ children, label = "", w = W, h = H }: { children?: React.Rea
 const GradienPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = T_GRADIEN[language];
   const [expandedSections, setExpandedSections] = useState<string[]>([
     "intro", "definisi", "tabelgradien", "animasi", "duatitik", "persamaan", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
@@ -380,20 +388,20 @@ const GradienPage = () => {
                     alt={t.intro_img_alt}
                     className="w-full object-cover"
                   />
-                  <figcaption className="text-center text-[10px] text-white/40 font-body py-1.5 bg-slate-900/60">
+                  <figcaption className={`text-center text-[10px] font-body py-1.5 ${isDark ? "text-white/40 bg-slate-900/60" : "text-slate-500 bg-gray-100"}`}>
                     bing.com/images/create
                   </figcaption>
                 </figure>
                 {/* Analogi kemiringan */}
-                <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
+                <div className={`border border-cyan-500/20 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-xs font-bold text-cyan-300 uppercase mb-3">{t.analogyTitle}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-body">
                     {t.analogi.map(({ icon, label, m, ket, color }) => (
                       <div key={label} className={`border ${color} rounded-xl p-3 text-center`}>
                         <div className="text-2xl mb-1">{icon}</div>
-                        <p className="font-bold text-white">{label}</p>
+                        <p className={`font-bold ${isDark ? "text-white" : "text-slate-800"}`}>{label}</p>
                         <p className="text-cyan-300 font-mono font-bold mt-1">{m}</p>
-                        <p className="text-white/40 text-xs mt-0.5">{ket}</p>
+                        <p className={`text-xs mt-0.5 ${isDark ? "text-white/40" : "text-slate-500"}`}>{ket}</p>
                       </div>
                     ))}
                   </div>
@@ -422,13 +430,13 @@ const GradienPage = () => {
                 {/* Positif vs Negatif — SVG illustrations */}
                 <div className="grid grid-cols-2 gap-3">
                   {/* Gradien Positif */}
-                  <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-3 flex flex-col items-center gap-2">
-                    <svg viewBox="0 0 150 100" className="w-full max-w-[160px]" style={{ background: "rgba(15,23,42,0.7)", borderRadius: 8 }}>
+                  <div className={`border border-green-500/40 rounded-xl p-3 flex flex-col items-center gap-2 ${isDark ? "bg-green-900/30" : "bg-green-50"}`}>
+                    <svg viewBox="0 0 150 100" className="w-full max-w-[160px]" style={{ background: isDark ? "rgba(15,23,42,0.7)" : "rgba(241,245,249,0.9)", borderRadius: 8 }}>
                       {[20,40,60,80].map(v => (
-                        <line key={`gh${v}`} x1="10" y1={v} x2="120" y2={v} stroke="#1e293b" strokeWidth="1" />
+                        <line key={`gh${v}`} x1="10" y1={v} x2="120" y2={v} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="1" />
                       ))}
                       {[30,50,70,90,110].map(v => (
-                        <line key={`gv${v}`} x1={v} y1="10" x2={v} y2="90" stroke="#1e293b" strokeWidth="1" />
+                        <line key={`gv${v}`} x1={v} y1="10" x2={v} y2="90" stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="1" />
                       ))}
                       <line x1="20" y1="80" x2="110" y2="20" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" />
                       <line x1="20" y1="80" x2="110" y2="80" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
@@ -437,17 +445,17 @@ const GradienPage = () => {
                       <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">{t.svgTegak}</text>
                     </svg>
                     <p className="text-xs font-bold text-green-300 font-body text-center">{t.posLabel} <span className="text-green-400">{t.posVal}</span></p>
-                    <p className="text-[10px] text-white/50 font-body text-center">{t.posDesc}</p>
+                    <p className={`text-[10px] font-body text-center ${isDark ? "text-white/50" : "text-slate-500"}`}>{t.posDesc}</p>
                   </div>
 
                   {/* Gradien Negatif */}
-                  <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-3 flex flex-col items-center gap-2">
-                    <svg viewBox="0 0 150 100" className="w-full max-w-[160px]" style={{ background: "rgba(15,23,42,0.7)", borderRadius: 8 }}>
+                  <div className={`border border-red-500/40 rounded-xl p-3 flex flex-col items-center gap-2 ${isDark ? "bg-red-900/30" : "bg-red-50"}`}>
+                    <svg viewBox="0 0 150 100" className="w-full max-w-[160px]" style={{ background: isDark ? "rgba(15,23,42,0.7)" : "rgba(241,245,249,0.9)", borderRadius: 8 }}>
                       {[20,40,60,80].map(v => (
-                        <line key={`rh${v}`} x1="10" y1={v} x2="120" y2={v} stroke="#1e293b" strokeWidth="1" />
+                        <line key={`rh${v}`} x1="10" y1={v} x2="120" y2={v} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="1" />
                       ))}
                       {[30,50,70,90,110].map(v => (
-                        <line key={`rv${v}`} x1={v} y1="10" x2={v} y2="90" stroke="#1e293b" strokeWidth="1" />
+                        <line key={`rv${v}`} x1={v} y1="10" x2={v} y2="90" stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="1" />
                       ))}
                       <line x1="20" y1="20" x2="110" y2="80" stroke="#f87171" strokeWidth="3" strokeLinecap="round" />
                       <line x1="20" y1="20" x2="110" y2="20" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" opacity="0.7" />
@@ -456,7 +464,7 @@ const GradienPage = () => {
                       <text x="123" y="53" fill="#f472b6" fontSize="8.5" fontWeight="bold" textAnchor="start" transform="rotate(-90,123,53)">{t.svgTegak}</text>
                     </svg>
                     <p className="text-xs font-bold text-red-300 font-body text-center">{t.posLabel} <span className="text-red-400">{t.negVal}</span></p>
-                    <p className="text-[10px] text-white/50 font-body text-center">{t.negDesc}</p>
+                    <p className={`text-[10px] font-body text-center ${isDark ? "text-white/50" : "text-slate-500"}`}>{t.negDesc}</p>
                   </div>
                 </div>
 
@@ -480,7 +488,7 @@ const GradienPage = () => {
                     </thead>
                     <tbody>
                       {t.tbl_rows.map(([v, a, s], i) => (
-                        <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>
+                        <tr key={i} className={i % 2 === 0 ? (isDark ? "bg-slate-800/30" : "bg-blue-50/50") : (isDark ? "bg-slate-700/20" : "bg-gray-50")}>
                           <td className="border border-white/10 px-3 py-2 text-cyan-300 font-mono font-bold text-center">{v}</td>
                           <td className="border border-white/10 px-3 py-2 text-white/70 text-center">{a}</td>
                           <td className="border border-white/10 px-3 py-2 text-white/60 text-center">{s}</td>
@@ -504,7 +512,7 @@ const GradienPage = () => {
                     { ...t.vertikal,   color: "#f472b6", pts: [[2,-3],[2,0],[2,3]] },
                     { ...t.asal,       color: "#a78bfa", pts: [[-3,-3],[0,0],[3,3]] },
                   ].map(({ judul, eq, m, color, ket, pts }) => (
-                    <div key={judul} className="bg-slate-900/60 border border-white/10 rounded-xl p-3">
+                    <div key={judul} className={`border border-white/10 rounded-xl p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                       <p className="text-xs font-bold mb-1" style={{ color }}>{judul}</p>
                       <CoordSys w={130} h={100} label={eq}>
                         {pts[0][0] === pts[1][0] ? (
@@ -516,7 +524,7 @@ const GradienPage = () => {
                         <circle cx={65+pts[1][0]*13} cy={50-pts[1][1]*13} r="3.5" fill={color} />
                       </CoordSys>
                       <p className="text-xs font-mono mt-1" style={{ color }}>{m}</p>
-                      <p className="text-xs text-white/40 mt-0.5">{ket}</p>
+                      <p className={`text-xs mt-0.5 ${isDark ? "text-white/40" : "text-slate-500"}`}>{ket}</p>
                     </div>
                   ))}
                 </div>
@@ -587,7 +595,7 @@ const GradienPage = () => {
                 <Badge label={t.grafik} color="bg-purple-700/60 text-purple-200" />
 
                 {/* Soal */}
-                <div className="bg-slate-800/60 border border-purple-500/30 rounded-xl p-4">
+                <div className={`border border-purple-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-purple-300 mb-1 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c1_soal}</p>
                 </div>
@@ -595,13 +603,13 @@ const GradienPage = () => {
                 {/* Grafik soal — 2 kolom */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* a) y = -½x, ujung di grid corner (-4,2) dan (4,-2) */}
-                  <div className="bg-slate-900/60 border border-cyan-500/20 rounded-xl p-3">
+                  <div className={`border border-cyan-500/20 rounded-xl p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                     <p className="text-xs font-bold text-cyan-300 mb-2 font-body">{t.c1_qa}</p>
-                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
+                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: isDark ? "rgba(6,12,30,0.95)" : "rgba(248,250,252,0.97)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`aq-${v}`}>
-                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke="#1e293b" strokeWidth="0.9" />
-                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke="#1e293b" strokeWidth="0.9" />
+                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.9" />
+                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.9" />
                         </g>
                       ))}
                       <line x1={MX+(-4)*SC} y1={MY-2*SC} x2={MX+4*SC} y2={MY-(-2)*SC}
@@ -610,13 +618,13 @@ const GradienPage = () => {
                   </div>
 
                   {/* b) y = 2x+2, ujung di grid corner (-3,-4) dan (1,4) */}
-                  <div className="bg-slate-900/60 border border-amber-500/20 rounded-xl p-3">
+                  <div className={`border border-amber-500/20 rounded-xl p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                     <p className="text-xs font-bold text-amber-300 mb-2 font-body">{t.c1_qb}</p>
-                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
+                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl" style={{ background: isDark ? "rgba(6,12,30,0.95)" : "rgba(248,250,252,0.97)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`bq-${v}`}>
-                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke="#1e293b" strokeWidth="0.9" />
-                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke="#1e293b" strokeWidth="0.9" />
+                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.9" />
+                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.9" />
                         </g>
                       ))}
                       <line x1={MX+(-3)*SC} y1={MY-(-4)*SC} x2={MX+1*SC} y2={MY-4*SC}
@@ -626,21 +634,21 @@ const GradienPage = () => {
                 </div>
 
                 {/* Pembahasan */}
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-5 font-body">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-5 font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   <p className="text-xs font-bold text-white/50 uppercase tracking-wider">{t.pem}</p>
 
                   {/* Solusi a */}
-                  <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                  <div className={`rounded-xl p-4 space-y-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                     <p className="text-cyan-300 font-semibold text-sm">{t.c1_sa}</p>
                     <p className="text-white/60 text-xs">{t.c1_sa2}</p>
-                    <div className="bg-slate-900/60 rounded-lg p-3">
+                    <div className={`rounded-lg p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                       <BlockMath math="m = \frac{y_B - y_A}{x_B - x_A} = \frac{-2 - 2}{4 - (-4)} = \frac{-4}{8} = -\frac{1}{2}" />
                     </div>
-                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full sm:w-1/2 mx-auto block rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
+                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full sm:w-1/2 mx-auto block rounded-xl" style={{ background: isDark ? "rgba(6,12,30,0.95)" : "rgba(248,250,252,0.97)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`sa-${v}`}>
-                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke="#1e293b" strokeWidth="0.9" />
-                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke="#1e293b" strokeWidth="0.9" />
+                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.9" />
+                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.9" />
                         </g>
                       ))}
                       <line x1={MX+(-4)*SC} y1={MY-2*SC} x2={MX+4*SC} y2={MY-(-2)*SC}
@@ -663,17 +671,17 @@ const GradienPage = () => {
                   </div>
 
                   {/* Solusi b */}
-                  <div className="bg-slate-800/60 rounded-xl p-4 space-y-3">
+                  <div className={`rounded-xl p-4 space-y-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                     <p className="text-amber-300 font-semibold text-sm">{t.c1_sb}</p>
                     <p className="text-white/60 text-xs">{t.c1_sb2}</p>
-                    <div className="bg-slate-900/60 rounded-lg p-3">
+                    <div className={`rounded-lg p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                       <BlockMath math="m = \frac{y_Q - y_P}{x_Q - x_P} = \frac{4 - (-4)}{1 - (-3)} = \frac{8}{4} = 2" />
                     </div>
-                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full sm:w-1/2 mx-auto block rounded-xl" style={{ background: "rgba(6,12,30,0.95)" }}>
+                    <svg viewBox={`0 0 ${W} ${H}`} className="w-full sm:w-1/2 mx-auto block rounded-xl" style={{ background: isDark ? "rgba(6,12,30,0.95)" : "rgba(248,250,252,0.97)" }}>
                       {[-4,-3,-2,-1,0,1,2,3,4].map(v => (
                         <g key={`sb-${v}`}>
-                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke="#1e293b" strokeWidth="0.9" />
-                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke="#1e293b" strokeWidth="0.9" />
+                          <line x1={MX+v*SC} y1={2} x2={MX+v*SC} y2={H-2} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.9" />
+                          <line x1={2} y1={MY-v*SC} x2={W-2} y2={MY-v*SC} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.9" />
                         </g>
                       ))}
                       <line x1={MX+(-3)*SC} y1={MY-(-4)*SC} x2={MX+1*SC} y2={MY-4*SC}
@@ -706,23 +714,23 @@ const GradienPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
-                <div className="bg-slate-800/60 border border-yellow-500/30 rounded-xl p-4">
+                <div className={`border border-yellow-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c2_soal}</p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-2">{t.c2_p1}</p>
                     <BlockMath math="m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{6 - (-2)}{-1 - 3} = \frac{8}{-4} = -2" />
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-orange-300 font-semibold mb-2 text-xs">{t.c2_vis}</p>
                     {/* Grid diperluas agar B(−1,6) terlihat: W2=200 H2=210 MX2=100 MY2=130 SC2=14 */}
-                    <svg viewBox="0 0 200 210" className="w-full sm:w-2/3 mx-auto block rounded-xl" style={{ background: "rgba(15,23,42,0.7)" }}>
+                    <svg viewBox="0 0 200 210" className="w-full sm:w-2/3 mx-auto block rounded-xl" style={{ background: isDark ? "rgba(15,23,42,0.7)" : "rgba(241,245,249,0.9)" }}>
                       {[-6,-5,-4,-3,-2,-1,1,2,3,4,5,6].map(v => (
                         <g key={`g2-${v}`}>
-                          <line x1={100+v*14} y1={4} x2={100+v*14} y2={206} stroke="#1e293b" strokeWidth="0.8" />
-                          <line x1={4} y1={130-v*14} x2={196} y2={130-v*14} stroke="#1e293b" strokeWidth="0.8" />
+                          <line x1={100+v*14} y1={4} x2={100+v*14} y2={206} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.8" />
+                          <line x1={4} y1={130-v*14} x2={196} y2={130-v*14} stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="0.8" />
                         </g>
                       ))}
                       {/* Sumbu */}
@@ -769,13 +777,13 @@ const GradienPage = () => {
             {true && (
               <div className="px-5 pb-5 space-y-4">
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
-                <div className="bg-slate-800/60 border border-green-500/30 rounded-xl p-4">
+                <div className={`border border-green-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body">{t.c3_soal} a) <InlineMath math="y = -4x + 7" />, b) <InlineMath math="6x - 3y + 9 = 0" />, c) <InlineMath math="y = 5" /></p>
                 </div>
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   {t.c3_items.map(({ bag, ket, hasil, color }) => (
-                    <div key={bag} className="bg-slate-800/50 rounded-lg p-3">
+                    <div key={bag} className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                       <p className={`${color} font-semibold text-xs mb-1`}>{bag}</p>
                       <p className="text-white/60 text-xs">{ket}</p>
                       <p className="text-green-300 font-bold text-sm mt-1">→ {hasil}</p>
@@ -797,7 +805,7 @@ const GradienPage = () => {
                 <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
 
                 {/* Soal */}
-                <div className="bg-slate-800/60 border border-red-500/30 rounded-xl p-4">
+                <div className={`border border-red-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
                   <p className="text-sm text-white/85 font-body leading-relaxed">
                     {t.c4_soal}
@@ -805,30 +813,30 @@ const GradienPage = () => {
                 </div>
 
                 {/* Pembahasan */}
-                <div className="bg-slate-700/40 border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body">
+                <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
 
                   {/* Langkah 1 */}
-                  <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
+                  <div className={`rounded-lg p-3 space-y-1 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold text-xs mb-2">{t.c4_l1}</p>
                     <BlockMath math="m_{QR} = \frac{y_R - y_Q}{x_R - x_Q} = \frac{4 - 2}{2 - 0} = \frac{2}{2} = 1" />
                   </div>
 
                   {/* Langkah 2 */}
-                  <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
+                  <div className={`rounded-lg p-3 space-y-1 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-violet-300 font-semibold text-xs mb-2">{t.c4_l2}</p>
                     <BlockMath math="m_{PQ} = \frac{y_Q - y_P}{x_Q - x_P} = \frac{2 - 0}{0 - k} = \frac{2}{-k}" />
                     <BlockMath math="\frac{2}{-k} = 1" />
                   </div>
 
                   {/* Langkah 3 */}
-                  <div className="bg-slate-800/50 rounded-lg p-3 space-y-1">
+                  <div className={`rounded-lg p-3 space-y-1 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-orange-300 font-semibold text-xs mb-2">{t.c4_l3}</p>
                     <BlockMath math="2 = 1 \times (-k)" />
                     <BlockMath math="-k = 2 \implies k = -2" />
                   </div>
 
                   {/* Grafik */}
-                  <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-emerald-300 font-semibold text-xs mb-2">{t.c4_ver}</p>
                     <CoordSys w={W} h={H} label="P(−2,0)  Q(0,2)  R(2,4)">
                       {/* Garis y = x+2 */}
