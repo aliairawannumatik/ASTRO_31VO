@@ -1,6 +1,7 @@
 import React from "react";
-import { BlockMath, InlineMath } from "react-katex";
+import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface RingkasanItem { emoji: string; judul: string; isi: string; bg: string; border: string; textColor: string; }
 interface TipsItem { emoji: string; teks: React.ReactNode; }
@@ -22,7 +23,7 @@ interface RangkumanSectionProps {
   kesimpulanBg: string;
   kesimpulanBorder: string;
   kesimpulanTextColor: string;
-  /** Pass false on light themes so internal text/bg adapts. Defaults to true (dark). */
+  /** Optional override. When omitted, reads from ThemeContext automatically. */
   isDark?: boolean;
 }
 
@@ -31,14 +32,20 @@ export const RangkumanSection: React.FC<RangkumanSectionProps> = ({
   judul, subjudul, headerIcon,
   ringkasan, rumus, tips,
   kesimpulan, kesimpulanBg, kesimpulanBorder, kesimpulanTextColor,
-  isDark = true,
+  isDark: isDarkProp,
 }) => {
-  const heading     = isDark ? "text-white"     : "text-gray-900";
-  const bodyText    = isDark ? "text-white/70"  : "text-gray-700";
-  const sectionLbl  = isDark ? "text-white"     : "text-gray-800";
-  const tipsBg      = isDark ? "bg-amber-500/10 border-amber-500/30" : "bg-amber-50 border-amber-400";
-  const tipsText    = isDark ? "text-amber-100" : "text-amber-900";
-  const rumusLabel  = isDark ? "text-white"     : "text-gray-800";
+  const { isDark: themeIsDark } = useTheme();
+  // Prefer explicit prop (for callers that manage their own theme state);
+  // fall back to the global ThemeContext so the component is never stuck in dark mode.
+  const isDark = isDarkProp ?? themeIsDark;
+
+  const heading    = isDark ? "text-white"     : "text-gray-900";
+  const bodyText   = isDark ? "text-white/70"  : "text-gray-600";
+  const sectionLbl = isDark ? "text-white"     : "text-gray-800";
+  const tipsBg     = isDark ? "bg-amber-500/10 border-amber-500/30" : "bg-amber-50 border-amber-400";
+  const tipsText   = isDark ? "text-amber-100" : "text-amber-900";
+  // Header badge: readable on both dark and light gradient backgrounds
+  const badgeBg    = isDark ? "bg-white/10"    : "bg-white/40";
 
   return (
     <div className={`bg-card/80 backdrop-blur border ${borderColor} rounded-xl overflow-hidden`}>
@@ -50,7 +57,7 @@ export const RangkumanSection: React.FC<RangkumanSectionProps> = ({
             <p className="font-heading font-bold text-white text-base sm:text-lg tracking-wide">{judul}</p>
             <p className="text-white/65 text-xs font-body">{subjudul}</p>
           </div>
-          <span className={`ml-auto text-xs font-mono ${accentColor} bg-white/10 px-3 py-1 rounded-full hidden sm:block`}>
+          <span className={`ml-auto text-xs font-mono ${accentColor} ${badgeBg} px-3 py-1 rounded-full hidden sm:block`}>
             📖 Buku Animasi Matematika
           </span>
         </div>
