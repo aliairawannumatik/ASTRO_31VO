@@ -1,0 +1,43 @@
+KONTEKS PROJECT:
+Project Numatik (edukasi matematika SMP), source aktif artifacts/numatik/src/. 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean). 
+Sudah diperbaiki sebelumnya dengan pola konsisten: RangkumanSection.tsx, 
+MateriTopicPage.tsx, DiskriminanPage.tsx, PolaKhususPage.tsx, dan 
+GrafikPGLPage.tsx + MenentukanPGLPage.tsx (baru saja) — gunakan pola 
+conditional isDark di file-file ini sebagai REFERENSI warna (jangan 
+bikin skema warna baru, ikuti yang sudah ada).
+
+TUGAS: Perbaiki SEMUA hardcoded background gelap (bg-slate-8xx/9xx, 
+fill="#..." hex gelap di SVG, backgroundColor inline hex gelap) di 
+file-file berikut:
+
+Halaman (src/pages/materi-matematika/kelas8/persamaan-garis-lurus/):
+- GradienPage.tsx (27 baris)
+- Hubungan2GarisPage.tsx (23 baris)
+- AplikasiKontekstualPage.tsx (18 baris)
+
+Komponen shared (src/components/):
+- EquasiGarisLurusAnim.tsx (12 baris)
+- GradienPersamaanInteraktif.tsx (8 baris)
+- GradienDuaTitikInteraktif.tsx (4 baris)
+- PGLGradientInteractive.tsx (4 baris)
+
+ATURAN PERBAIKAN:
+1. Untuk Tailwind className (bg-slate-8xx/9xx dst): tambahkan conditional 
+   isDark, gunakan warna terang yang serasi (pastel/soft), ikuti pola 
+   dari file referensi di atas.
+2. Untuk SVG fill/stroke hex gelap: buat conditional juga, sesuaikan 
+   supaya kontras tetap baik di kedua tema. Warna aksen/highlight yang 
+   sudah cerah dan kontras baik di kedua tema boleh dibiarkan.
+3. Komponen shared (4 file terakhir) dipakai di beberapa halaman — 
+   pastikan perbaikan tidak merusak tampilan di halaman lain yang 
+   memakainya.
+4. JANGAN ubah logika interaktif (gradien, kalkulasi) — HANYA warna.
+5. JANGAN sentuh file lain di luar 7 file ini.
+
+Setelah selesai:
+6. Jalankan TypeScript check dan build lokal, pastikan 0 error.
+7. Commit dan push ke branch main dengan pesan jelas.
+
+Laporkan hasilnya per file (ringkas), dan sebutkan 1-2 halaman yang 
+paling representatif untuk saya cek visual dari seluruh Kategori 1 ini.
