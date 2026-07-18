@@ -1,0 +1,47 @@
+KONTEKS:
+File src/pages/ChatAIPage.tsx saat ini memanggil Groq API langsung dari 
+frontend (browser), dengan API key hardcoded di kode (GROQ_API_KEY). 
+Ini aman-aman saja di APK Android (perlu decompile untuk lihat key), 
+tapi SANGAT tidak aman di website karena siapa saja bisa lihat key 
+lewat View Source atau DevTools dalam hitungan detik.
+
+TUGAS: Pindahkan pemanggilan Groq API dari frontend ke Vercel Serverless 
+Function, TANPA mengubah sifat/karakter/persona AI sedikit pun. 
+Lakukan berurutan:
+
+1. Buat file baru di api/chat.ts (root project, folder api/ dibaca 
+   otomatis oleh Vercel sebagai serverless function). File ini harus:
+   - Menerima POST request berisi array messages dari frontend
+   - Menyimpan SYSTEM_PROMPT persis sama seperti yang ada di 
+     ChatAIPage.tsx saat ini (jangan diubah satu kata pun — itu 
+     karakter "NUMATIK AI" robot astronot matematika)
+   - Memanggil Groq API (model llama-3.3-70b-versatile) menggunakan 
+     API key dari environment variable process.env.GROQ_API_KEY 
+     (BUKAN hardcoded di kode)
+   - Mengembalikan response dari Groq ke frontend
+
+2. Update src/pages/ChatAIPage.tsx:
+   - Hapus baris const GROQ_API_KEY = "rahasia" sepenuhnya
+   - Ganti pemanggilan fetch yang tadinya langsung ke 
+     https://api.groq.com/openai/v1/chat/completions menjadi fetch 
+     ke endpoint sendiri /api/chat
+   - JANGAN ubah tampilan UI, animasi, formatText, quick topics, 
+     atau elemen visual lainnya — hanya bagian pemanggilan API saja 
+     yang diubah
+   - Pastikan SYSTEM_PROMPT tidak lagi dikirim dari frontend (karena 
+     sekarang sudah ada di server), cukup kirim messages dari user saja
+
+3. Cek apakah ada file .env atau .env.example di project — kalau ada, 
+   tambahkan baris GROQ_API_KEY=isi_key_disini sebagai contoh (tanpa 
+   key asli, cuma placeholder), dan pastikan file .env ada di .gitignore
+
+4. Jalankan TypeScript check dan build lokal untuk memastikan tidak 
+   ada error setelah perubahan ini.
+
+5. Commit dan push ke branch main.
+
+JANGAN commit API key asli ke GitHub dalam bentuk apapun. Key hanya 
+akan saya set manual di Vercel Environment Variables setelah ini selesai.
+
+Laporkan hasil tiap langkah, terutama nama environment variable persis 
+yang harus saya set di Vercel.
