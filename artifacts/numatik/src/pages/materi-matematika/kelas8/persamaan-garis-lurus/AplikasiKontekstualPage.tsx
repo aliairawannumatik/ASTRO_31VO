@@ -103,7 +103,7 @@ const AplikasiKontekstualPage = () => {
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
-      <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
+      <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className={`font-body font-semibold ${isDark ? "text-white" : "text-slate-800"}`}>{title}</span></div>
       <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
@@ -119,7 +119,7 @@ const AplikasiKontekstualPage = () => {
         <Globe className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.title}</h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.subtitle}</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
+        <p className={`${isDark ? "text-white/50" : "text-slate-400"} text-xs text-center mb-6 font-body`}>{t.breadcrumb}</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
@@ -127,7 +127,7 @@ const AplikasiKontekstualPage = () => {
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">Persamaan garis lurus bukan hanya soal di buku pelajaran — ia hadir dalam banyak situasi nyata: tarif taksi, pertumbuhan tanaman, pemakaian listrik, hingga harga jual-beli. Memahami aplikasinya membantu kita membuat prediksi dan keputusan yang lebih baik!</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-slate-700"} leading-relaxed`}>Persamaan garis lurus bukan hanya soal di buku pelajaran — ia hadir dalam banyak situasi nyata: tarif taksi, pertumbuhan tanaman, pemakaian listrik, hingga harga jual-beli. Memahami aplikasinya membantu kita membuat prediksi dan keputusan yang lebih baik!</p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {[
                     { icon: "🚖", label: "Tarif Taksi", ket: "Tarif dasar + per km" },
@@ -137,8 +137,8 @@ const AplikasiKontekstualPage = () => {
                   ].map(({ icon, label, ket }) => (
                     <div key={label} className={`border border-white/10 rounded-xl p-3 text-center ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                       <div className="text-2xl mb-1">{icon}</div>
-                      <p className="text-xs font-bold text-white">{label}</p>
-                      <p className="text-xs text-white/40 mt-0.5">{ket}</p>
+                      <p className={`text-xs font-bold ${isDark ? "text-white" : "text-slate-800"}`}>{label}</p>
+                      <p className={`text-xs ${isDark ? "text-white/40" : "text-slate-400"} mt-0.5`}>{ket}</p>
                     </div>
                   ))}
                 </div>
@@ -153,7 +153,7 @@ const AplikasiKontekstualPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
                   <p className="text-sm font-semibold text-violet-300 mb-2 font-body">🎯 Ringkasan Intisari</p>
-                  <p className="text-sm text-white/80 font-body leading-relaxed">Soal kontekstual persamaan garis lurus umumnya berbentuk: diketahui hubungan linear antara dua besaran (x dan y), diminta membuat model persamaan dan memprediksi nilai tertentu.</p>
+                  <p className={`text-sm ${isDark ? "text-white/80" : "text-slate-700"} font-body leading-relaxed`}>Soal kontekstual persamaan garis lurus umumnya berbentuk: diketahui hubungan linear antara dua besaran (x dan y), diminta membuat model persamaan dan memprediksi nilai tertentu.</p>
                 </div>
                 <div className="space-y-2">
                   {[
@@ -164,8 +164,8 @@ const AplikasiKontekstualPage = () => {
                     { n:"5", t:"Verifikasi & interpretasi", d:"Pastikan jawaban logis dalam konteks soal. Cek satuan dan makna hasilnya", c:"border-yellow-500/30 bg-yellow-900/10" },
                   ].map(({ n,t,d,c }) => (
                     <div key={n} className={`border ${c} rounded-xl p-3 flex gap-3 text-sm font-body`}>
-                      <span className="bg-white/10 rounded-full w-7 h-7 flex items-center justify-center font-bold text-white font-display shrink-0">{n}</span>
-                      <div><p className="text-white font-semibold">{t}</p><p className="text-white/60 text-xs">{d}</p></div>
+                      <span className={`${isDark ? "bg-white/10" : "bg-slate-200"} rounded-full w-7 h-7 flex items-center justify-center font-bold ${isDark ? "text-white" : "text-slate-800"} font-display shrink-0`}>{n}</span>
+                      <div><p className={`${isDark ? "text-white" : "text-slate-800"} font-semibold`}>{t}</p><p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs`}>{d}</p></div>
                     </div>
                   ))}
                 </div>
@@ -196,11 +196,11 @@ const AplikasiKontekstualPage = () => {
                         ["Produksi", "Unit diproduksi", "Biaya produksi", "Biaya per unit", "Biaya tetap"],
                       ].map(([k,x,y,m,c],i) => (
                         <tr key={i} className={i%2===0?(isDark?"bg-slate-800/30":"bg-blue-50/50"):(isDark?"bg-slate-700/20":"bg-gray-50")}>
-                          <td className="border border-white/10 px-3 py-2 text-cyan-300 font-semibold">{k}</td>
-                          <td className="border border-white/10 px-3 py-2 text-white/70">{x}</td>
-                          <td className="border border-white/10 px-3 py-2 text-white/70">{y}</td>
-                          <td className="border border-white/10 px-3 py-2 text-yellow-300">{m}</td>
-                          <td className="border border-white/10 px-3 py-2 text-green-300">{c}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 text-cyan-300 font-semibold`}>{k}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 ${isDark ? "text-white/70" : "text-slate-600"}`}>{x}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 ${isDark ? "text-white/70" : "text-slate-600"}`}>{y}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 text-yellow-300`}>{m}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 text-green-300`}>{c}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -221,7 +221,7 @@ const AplikasiKontekstualPage = () => {
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className={`border border-green-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body leading-relaxed">
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body leading-relaxed`}>
                     🚖 Sebuah taksi online mengenakan tarif dasar Rp 8.000 saat penumpang naik, ditambah Rp 4.000 untuk setiap kilometer perjalanan.
                     <br />a) Buat model persamaan garis lurusnya!
                     <br />b) Berapa tarif untuk perjalanan 5 km?
@@ -231,10 +231,10 @@ const AplikasiKontekstualPage = () => {
                 <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">a) Model Persamaan:</p>
-                    <p className="text-white/60 text-xs mb-1">Misalkan x = jarak (km), y = tarif (Rp ribu)</p>
-                    <p className="text-white/60 text-xs">m = 4 (tarif per km), c = 8 (tarif dasar)</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs mb-1`}>Misalkan x = jarak (km), y = tarif (Rp ribu)</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs`}>m = 4 (tarif per km), c = 8 (tarif dasar)</p>
                     <BlockMath math="y = 4x + 8" />
-                    <p className="text-xs text-white/50">Atau: Tarif = 4.000 × jarak + 8.000</p>
+                    <p className={`text-xs ${isDark ? "text-white/50" : "text-slate-400"}`}>Atau: Tarif = 4.000 × jarak + 8.000</p>
                   </div>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-violet-300 font-semibold mb-1">b) Tarif untuk 5 km:</p>
@@ -296,7 +296,7 @@ const AplikasiKontekstualPage = () => {
                 <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
                 <div className={`border border-yellow-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body leading-relaxed">
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body leading-relaxed`}>
                     🌱 Sebuah tanaman diukur tingginya setiap hari. Pada hari ke-2, tingginya 11 cm. Pada hari ke-5, tingginya 17 cm. Asumsikan pertumbuhan linier.
                     <br />a) Buat model persamaan pertumbuhan!
                     <br />b) Berapa tinggi tanaman pada hari ke-10?
@@ -306,9 +306,9 @@ const AplikasiKontekstualPage = () => {
                 <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">a) Identifikasi titik-titik: (2, 11) dan (5, 17)</p>
-                    <p className="text-white/60 text-xs mb-1">Hitung gradien (laju pertumbuhan per hari):</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs mb-1`}>Hitung gradien (laju pertumbuhan per hari):</p>
                     <BlockMath math="m = \frac{17 - 11}{5 - 2} = \frac{6}{3} = 2" />
-                    <p className="text-white/60 text-xs mb-1">Gunakan titik (2, 11):</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs mb-1`}>Gunakan titik (2, 11):</p>
                     <BlockMath math="y - 11 = 2(x - 2) \Rightarrow y = 2x + 7" />
                     <p className="text-green-300 font-bold text-xs">Model: y = 2x + 7 (y = tinggi cm, x = hari)</p>
                   </div>
@@ -372,7 +372,7 @@ const AplikasiKontekstualPage = () => {
                 <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
                 <div className={`border border-red-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">📝 Soal</p>
-                  <p className="text-sm text-white/85 font-body leading-relaxed">
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body leading-relaxed`}>
                     🏭 Sebuah UMKM memproduksi tas. Biaya produksi untuk 20 tas adalah Rp 900.000, sedangkan untuk 50 tas adalah Rp 1.800.000 (biaya bersifat linear).
                     <br />a) Tentukan model persamaan biaya produksi!
                     <br />b) Berapa biaya tetap (biaya jika tidak ada produksi)?
@@ -383,8 +383,8 @@ const AplikasiKontekstualPage = () => {
                 <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">a) Model Persamaan Biaya (dalam Rp ribu):</p>
-                    <p className="text-white/60 text-xs mb-1">x = jumlah tas, y = biaya (Rp ribu)</p>
-                    <p className="text-white/60 text-xs mb-1">Dua titik: (20, 900) dan (50, 1800)</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs mb-1`}>x = jumlah tas, y = biaya (Rp ribu)</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs mb-1`}>Dua titik: (20, 900) dan (50, 1800)</p>
                     <BlockMath math="m = \frac{1800 - 900}{50 - 20} = \frac{900}{30} = 30" />
                     <BlockMath math="y - 900 = 30(x - 20)" />
                     <BlockMath math="y = 30x + 300" />
@@ -398,13 +398,13 @@ const AplikasiKontekstualPage = () => {
                     </div>
                     <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                       <p className="text-orange-300 font-semibold mb-1 text-xs">c) Biaya per unit:</p>
-                      <p className="text-white/70 text-xs">= m = 30</p>
+                      <p className={`${isDark ? "text-white/70" : "text-slate-600"} text-xs`}>= m = 30</p>
                       <p className="text-green-300 font-bold text-xs">Rp 30.000 per tas</p>
                     </div>
                   </div>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-green-300 font-semibold mb-1">d) Titik impas (Break Even Point):</p>
-                    <p className="text-white/60 text-xs mb-1">Pendapatan = Biaya → 45x = 30x + 300</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs mb-1`}>Pendapatan = Biaya → 45x = 30x + 300</p>
                     <BlockMath math="45x = 30x + 300" />
                     <BlockMath math="15x = 300 \Rightarrow x = 20" />
                   </div>
@@ -462,7 +462,7 @@ const AplikasiKontekstualPage = () => {
                     ["Model Linear", "y = mx + c: m = biaya/pertambahan per unit, c = nilai awal/biaya tetap"],
                     ["Break Even", "Titik di mana pendapatan = biaya → selesaikan persamaan pendapatan = biaya"],
                   ].map(([t,d]) => (
-                    <div key={t} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80"><strong className="text-cyan-300">{t}:</strong> {d}</p></div>
+                    <div key={t} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className={`${isDark ? "text-white/80" : "text-slate-700"}`}><strong className="text-cyan-300">{t}:</strong> {d}</p></div>
                   ))}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

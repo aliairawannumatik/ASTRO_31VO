@@ -456,7 +456,7 @@ const Hubungan2GarisPage = () => {
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
-      <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
+      <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className={`font-body font-semibold ${isDark ? "text-white" : "text-slate-800"}`}>{title}</span></div>
       <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
@@ -478,7 +478,7 @@ const Hubungan2GarisPage = () => {
         <GitBranch className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.title}</h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.subtitle}</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
+        <p className={`${isDark ? "text-white/50" : "text-slate-400"} text-xs text-center mb-6 font-body`}>{t.breadcrumb}</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
@@ -486,7 +486,7 @@ const Hubungan2GarisPage = () => {
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">{t.introP}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-slate-700"} leading-relaxed`}>{t.introP}</p>
                 <div className="grid grid-cols-3 gap-3">
                   {[
                     { ...t.cards[0], icon: "∥", color: "#22d3ee", bg: "border-cyan-500/40 bg-cyan-900/20" },
@@ -495,8 +495,8 @@ const Hubungan2GarisPage = () => {
                   ].map(({ label, icon, color, bg, ket }) => (
                     <div key={label} className={`border ${bg} rounded-xl p-3 text-center`}>
                       <div className="text-3xl mb-1" style={{ color }}>{icon}</div>
-                      <p className="text-xs font-bold text-white">{label}</p>
-                      <p className="text-xs text-white/40 mt-1">{ket}</p>
+                      <p className={`text-xs font-bold ${isDark ? "text-white" : "text-slate-800"}`}>{label}</p>
+                      <p className={`text-xs ${isDark ? "text-white/40" : "text-slate-400"} mt-1`}>{ket}</p>
                     </div>
                   ))}
                 </div>
@@ -514,14 +514,14 @@ const Hubungan2GarisPage = () => {
                   <div className="text-center">
                     <BlockMath math="m_1 = m_2 \quad \wedge \quad c_1 \neq c_2" />
                   </div>
-                  <p className="text-xs text-white/60 text-center mt-1">{t.sej_sub}</p>
+                  <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} text-center mt-1`}>{t.sej_sub}</p>
                 </div>
 
                 {/* Penjelasan MENGAPA */}
                 <div className={`border border-cyan-500/20 rounded-xl p-4 space-y-2 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                   <p className="text-xs font-bold text-cyan-300 uppercase tracking-wide">{t.sej_why}</p>
-                  <p className="text-xs text-white/70 font-body leading-relaxed">{t.sej_p1}</p>
-                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                  <p className={`text-xs ${isDark ? "text-white/70" : "text-slate-600"} font-body leading-relaxed`}>{t.sej_p1}</p>
+                  <p className={`text-xs ${isDark ? "text-white/70" : "text-slate-600"} font-body leading-relaxed`}>
                     {t.sej_p2} <InlineMath math="|c_1 - c_2|" />,
                   </p>
                   <div className="bg-cyan-900/30 rounded-lg p-2 text-xs font-body">
@@ -538,7 +538,7 @@ const Hubungan2GarisPage = () => {
                       <text x={toX(-2.5)} y={toY(4)} fill="#22d3ee" fontSize="8">ℓ₁: y=2x+1</text>
                       <text x={toX(0)} y={toY(-4)} fill="#67e8f9" fontSize="8">ℓ₂: y=2x−3</text>
                     </CoordSys>
-                    <p className="text-xs text-white/40 text-center mt-1">{t.sej_vis_note}</p>
+                    <p className={`text-xs ${isDark ? "text-white/40" : "text-slate-400"} text-center mt-1`}>{t.sej_vis_note}</p>
                   </div>
                   <div className="bg-cyan-900/10 border border-cyan-500/20 rounded-xl p-3">
                     <p className="text-xs font-bold text-cyan-300 mb-2">{t.sej_pairs}</p>
@@ -550,7 +550,7 @@ const Hubungan2GarisPage = () => {
                       ].map(([l1, l2, m]) => (
                         <div key={l1} className="bg-cyan-900/30 rounded-lg p-2">
                           <p className="text-cyan-300">{l1} ∥ {l2}</p>
-                          <p className="text-white/40">{m} (sama)</p>
+                          <p className={`${isDark ? "text-white/40" : "text-slate-400"}`}>{m} (sama)</p>
                         </div>
                       ))}
                     </div>
@@ -560,7 +560,7 @@ const Hubungan2GarisPage = () => {
                 {/* ANIMASI INTERAKTIF SEJAJAR */}
                 <div className="bg-cyan-900/10 border border-cyan-500/30 rounded-xl p-4 space-y-3">
                   <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider">{t.sej_anim}</p>
-                  <p className="text-xs text-white/60 font-body">{t.sej_anim_desc}</p>
+                  <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} font-body`}>{t.sej_anim_desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {SEJ_OPTS.map(v => (
                       <button key={v} onClick={() => { playPopSound(); setSejM(v); }}
@@ -577,9 +577,9 @@ const Hubungan2GarisPage = () => {
                   </CoordSys>
                   <div className="bg-cyan-900/30 rounded-lg p-3 text-xs font-body space-y-1">
                     <p className="text-cyan-300 font-semibold">{t.sej_obs}</p>
-                    <p className="text-white/70">ℓ₁: y = <InlineMath math={`${mTeX(sejM)}x + 2`} />, ℓ₂: y = <InlineMath math={`${mTeX(sejM)}x - 2`} /></p>
-                    <p className="text-white/70">{t.sej_obs_grad_prefix} <strong className="text-cyan-300">{mDisp(sejM)}</strong> {t.sej_obs_grad_both} <strong className="text-cyan-300">{t.sej_obs_sejajar}</strong></p>
-                    <p className="text-white/50">{t.sej_obs_jarak}</p>
+                    <p className={`${isDark ? "text-white/70" : "text-slate-600"}`}>ℓ₁: y = <InlineMath math={`${mTeX(sejM)}x + 2`} />, ℓ₂: y = <InlineMath math={`${mTeX(sejM)}x - 2`} /></p>
+                    <p className={`${isDark ? "text-white/70" : "text-slate-600"}`}>{t.sej_obs_grad_prefix} <strong className="text-cyan-300">{mDisp(sejM)}</strong> {t.sej_obs_grad_both} <strong className="text-cyan-300">{t.sej_obs_sejajar}</strong></p>
+                    <p className={`${isDark ? "text-white/50" : "text-slate-400"}`}>{t.sej_obs_jarak}</p>
                   </div>
                 </div>
               </div>
@@ -595,24 +595,24 @@ const Hubungan2GarisPage = () => {
                   <p className="text-sm font-semibold text-violet-300 mb-2 font-body">{t.tek_syarat}</p>
                   <div className="text-center">
                     <BlockMath math="m_1 \times m_2 = -1" />
-                    <p className="text-xs text-white/60 mt-1">{t.tek_sub}</p>
+                    <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} mt-1`}>{t.tek_sub}</p>
                   </div>
                   <div className="bg-violet-900/30 rounded-lg p-3 mt-2">
                     <p className="text-xs text-violet-300 font-semibold mb-1">{t.tek_m2}</p>
                     <BlockMath math="m_2 = -\frac{1}{m_1}" />
-                    <p className="text-xs text-white/50">{t.tek_m2_sub}</p>
+                    <p className={`text-xs ${isDark ? "text-white/50" : "text-slate-400"}`}>{t.tek_m2_sub}</p>
                   </div>
                 </div>
 
                 {/* Penjelasan MENGAPA */}
                 <div className={`border border-violet-500/20 rounded-xl p-4 space-y-2 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                   <p className="text-xs font-bold text-violet-300 uppercase tracking-wide">{t.tek_why}</p>
-                  <p className="text-xs text-white/70 font-body leading-relaxed">{t.tek_p1}</p>
-                  <p className="text-xs text-white/70 font-body leading-relaxed">{t.tek_p2}</p>
+                  <p className={`text-xs ${isDark ? "text-white/70" : "text-slate-600"} font-body leading-relaxed`}>{t.tek_p1}</p>
+                  <p className={`text-xs ${isDark ? "text-white/70" : "text-slate-600"} font-body leading-relaxed`}>{t.tek_p2}</p>
                   <div className="text-center">
                     <BlockMath math="m_2 = \frac{1}{-m_1} = -\frac{1}{m_1}" />
                   </div>
-                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                  <p className={`text-xs ${isDark ? "text-white/70" : "text-slate-600"} font-body leading-relaxed`}>
                     <InlineMath math="m_1 \times m_2 = m_1 \times \left(-\frac{1}{m_1}\right) = -1" /> ✓
                   </p>
                   <div className="bg-violet-900/30 rounded-lg p-2 text-xs font-body">
@@ -631,7 +631,7 @@ const Hubungan2GarisPage = () => {
                       <text x={toX(-2)} y={toY(5)} fill="#a78bfa" fontSize="8">ℓ₁: y=2x</text>
                       <text x={toX(1)} y={toY(-2)} fill="#f472b6" fontSize="8">ℓ₂: y=−½x+2</text>
                     </CoordSys>
-                    <p className="text-xs text-white/40 text-center mt-1">{t.tek_vis_note}</p>
+                    <p className={`text-xs ${isDark ? "text-white/40" : "text-slate-400"} text-center mt-1`}>{t.tek_vis_note}</p>
                   </div>
                   <div className="bg-violet-900/10 border border-violet-500/20 rounded-xl p-3">
                     <p className="text-xs font-bold text-violet-300 mb-2">{t.tek_pairs}</p>
@@ -643,7 +643,7 @@ const Hubungan2GarisPage = () => {
                       ].map(({ l1, l2, ket }) => (
                         <div key={l1} className="bg-violet-900/30 rounded-lg p-2">
                           <p className="text-violet-300">{l1} ⊥ {l2}</p>
-                          <p className="text-white/40">{ket}</p>
+                          <p className={`${isDark ? "text-white/40" : "text-slate-400"}`}>{ket}</p>
                         </div>
                       ))}
                     </div>
@@ -653,7 +653,7 @@ const Hubungan2GarisPage = () => {
                 {/* ANIMASI INTERAKTIF TEGAK LURUS */}
                 <div className="bg-violet-900/10 border border-violet-500/30 rounded-xl p-4 space-y-3">
                   <p className="text-xs font-bold text-violet-300 uppercase tracking-wider">{t.tek_anim}</p>
-                  <p className="text-xs text-white/60 font-body">{t.tek_anim_desc} <InlineMath math="m_2 = -\frac{1}{m_1}" /></p>
+                  <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} font-body`}>{t.tek_anim_desc} <InlineMath math="m_2 = -\frac{1}{m_1}" /></p>
                   <div className="flex flex-wrap gap-2">
                     {TEK_OPTS.map(v => (
                       <button key={v} onClick={() => { playPopSound(); setTekM1(v); }}
@@ -672,9 +672,9 @@ const Hubungan2GarisPage = () => {
                   </CoordSys>
                   <div className="bg-violet-900/30 rounded-lg p-3 text-xs font-body space-y-1">
                     <p className="text-violet-300 font-semibold">{t.tek_obs}</p>
-                    <p className="text-white/70">m₁ = <strong className="text-violet-300">{mDisp(tekM1)}</strong>{t.tek_obs_maka} <strong className="text-pink-300">{mDisp(tekM2)}</strong></p>
-                    <p className="text-white/70">Verifikasi: <InlineMath math={`m_1 \\times m_2 = ${mTeX(tekM1)} \\times ${mTeX(tekM2)} = -1`} /> ✓</p>
-                    <p className="text-white/50">{t.tek_obs_note}</p>
+                    <p className={`${isDark ? "text-white/70" : "text-slate-600"}`}>m₁ = <strong className="text-violet-300">{mDisp(tekM1)}</strong>{t.tek_obs_maka} <strong className="text-pink-300">{mDisp(tekM2)}</strong></p>
+                    <p className={`${isDark ? "text-white/70" : "text-slate-600"}`}>Verifikasi: <InlineMath math={`m_1 \\times m_2 = ${mTeX(tekM1)} \\times ${mTeX(tekM2)} = -1`} /> ✓</p>
+                    <p className={`${isDark ? "text-white/50" : "text-slate-400"}`}>{t.tek_obs_note}</p>
                   </div>
                 </div>
               </div>
@@ -689,15 +689,15 @@ const Hubungan2GarisPage = () => {
                 <div className="bg-green-900/20 border border-green-500/40 rounded-xl p-4">
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.ber_syarat}</p>
                   <BlockMath math="m_1 \neq m_2" />
-                  <p className="text-xs text-white/60 mt-1">{t.ber_sub}</p>
-                  <p className="text-xs text-white/50 mt-1">{t.ber_sub2} <InlineMath math="m_1 \times m_2 \neq -1" /></p>
+                  <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} mt-1`}>{t.ber_sub}</p>
+                  <p className={`text-xs ${isDark ? "text-white/50" : "text-slate-400"} mt-1`}>{t.ber_sub2} <InlineMath math="m_1 \times m_2 \neq -1" /></p>
                 </div>
 
                 {/* Penjelasan MENGAPA */}
                 <div className={`border border-green-500/20 rounded-xl p-4 space-y-2 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                   <p className="text-xs font-bold text-green-300 uppercase tracking-wide">{t.ber_why}</p>
-                  <p className="text-xs text-white/70 font-body leading-relaxed">{t.ber_p1}</p>
-                  <p className="text-xs text-white/70 font-body leading-relaxed">
+                  <p className={`text-xs ${isDark ? "text-white/70" : "text-slate-600"} font-body leading-relaxed`}>{t.ber_p1}</p>
+                  <p className={`text-xs ${isDark ? "text-white/70" : "text-slate-600"} font-body leading-relaxed`}>
                     {t.ber_p2} <InlineMath math="y = m_1 x + c_1" /> dan <InlineMath math="y = m_2 x + c_2" /> dengan <InlineMath math="m_1 \neq m_2" />:
                   </p>
                   <div className="text-center">
@@ -710,8 +710,8 @@ const Hubungan2GarisPage = () => {
 
                 <div className={`border border-green-500/20 rounded-xl p-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-xs font-bold text-green-300 mb-2">{t.ber_ex_title}</p>
-                  <p className="text-xs text-white/60 mb-2">{t.ber_ex_desc}</p>
-                  <div className="space-y-1 text-xs font-body text-white/70">
+                  <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} mb-2`}>{t.ber_ex_desc}</p>
+                  <div className={`space-y-1 text-xs font-body ${isDark ? "text-white/70" : "text-slate-600"}`}>
                     <p>{t.ber_ex_l1}</p>
                     <p>→ 2x + 1 = −x + 4</p>
                     <p>→ 3x = 3 → x = 1</p>
@@ -723,7 +723,7 @@ const Hubungan2GarisPage = () => {
                 {/* ANIMASI INTERAKTIF BERPOTONGAN */}
                 <div className="bg-green-900/10 border border-green-500/30 rounded-xl p-4 space-y-3">
                   <p className="text-xs font-bold text-green-300 uppercase tracking-wider">{t.ber_anim}</p>
-                  <p className="text-xs text-white/60 font-body">{t.ber_anim_desc}</p>
+                  <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"} font-body`}>{t.ber_anim_desc}</p>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <p className="text-xs text-cyan-300 font-semibold mb-2">{t.ber_m1_label}</p>
@@ -771,10 +771,10 @@ const Hubungan2GarisPage = () => {
                           <p className={`font-semibold ${isParallel ? "text-cyan-300" : isPerp ? "text-red-300" : "text-green-300"}`}>
                             {isParallel ? t.ber_anim_sejajar : isPerp ? t.ber_anim_tegaklurus : t.ber_anim_berpotongan}
                           </p>
-                          <p className="text-white/70">m₁ = <strong>{mDisp(berM1)}</strong>, m₂ = <strong>{mDisp(berM2)}</strong></p>
-                          {isParallel && <p className="text-white/60">{t.ber_anim_sejajar_note}</p>}
-                          {isPerp && pt && <p className="text-white/60">m₁ × m₂ = {mDisp(berM1)} × {mDisp(berM2)} = −1 → {t.ber_anim_perp_at} ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
-                          {!isParallel && !isPerp && pt && <p className="text-white/60">m₁ ≠ m₂, m₁×m₂ = {Math.round(berM1*berM2*100)/100} ≠ −1 → {t.ber_anim_int_at} ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
+                          <p className={`${isDark ? "text-white/70" : "text-slate-600"}`}>m₁ = <strong>{mDisp(berM1)}</strong>, m₂ = <strong>{mDisp(berM2)}</strong></p>
+                          {isParallel && <p className={`${isDark ? "text-white/60" : "text-slate-500"}`}>{t.ber_anim_sejajar_note}</p>}
+                          {isPerp && pt && <p className={`${isDark ? "text-white/60" : "text-slate-500"}`}>m₁ × m₂ = {mDisp(berM1)} × {mDisp(berM2)} = −1 → {t.ber_anim_perp_at} ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
+                          {!isParallel && !isPerp && pt && <p className={`${isDark ? "text-white/60" : "text-slate-500"}`}>m₁ ≠ m₂, m₁×m₂ = {Math.round(berM1*berM2*100)/100} ≠ −1 → {t.ber_anim_int_at} ({Math.round(pt[0]*10)/10}, {Math.round(pt[1]*10)/10})</p>}
                         </div>
                       </>
                     );
@@ -800,7 +800,7 @@ const Hubungan2GarisPage = () => {
                     <div className="mt-2 space-y-1 text-xs">
                       <p className="text-cyan-300 font-mono">ℓ₁: y = 2x + 1</p>
                       <p className="text-cyan-200/60 font-mono">ℓ₂: y = 2x − 3</p>
-                      <p className="text-white/40">m₁ = m₂ = 2</p>
+                      <p className={`${isDark ? "text-white/40" : "text-slate-400"}`}>m₁ = m₂ = 2</p>
                     </div>
                   </div>
                   {/* Tegak lurus — fixed right-angle marker */}
@@ -815,7 +815,7 @@ const Hubungan2GarisPage = () => {
                     <div className="mt-2 space-y-1 text-xs">
                       <p className="text-violet-300 font-mono">ℓ₁: y = 2x</p>
                       <p className="text-pink-400 font-mono">ℓ₂: y = −½x</p>
-                      <p className="text-white/40">2 × (−½) = −1 ✓</p>
+                      <p className={`${isDark ? "text-white/40" : "text-slate-400"}`}>2 × (−½) = −1 ✓</p>
                     </div>
                   </div>
                   {/* Berpotongan */}
@@ -829,7 +829,7 @@ const Hubungan2GarisPage = () => {
                     <div className="mt-2 space-y-1 text-xs">
                       <p className="text-green-300 font-mono">ℓ₁: y = 2x + 1</p>
                       <p className="text-yellow-300 font-mono">ℓ₂: y = −x + 2</p>
-                      <p className="text-white/40">m₁=2 ≠ m₂=−1</p>
+                      <p className={`${isDark ? "text-white/40" : "text-slate-400"}`}>m₁=2 ≠ m₂=−1</p>
                     </div>
                   </div>
                 </div>
@@ -839,15 +839,15 @@ const Hubungan2GarisPage = () => {
                   <table className="w-full text-xs font-body border-collapse">
                     <thead><tr className={isDark ? "bg-slate-700/60" : "bg-gray-200"}>
                       {t.vis_tabel_h.map((h: string) => (
-                        <th key={h} className="border border-white/10 px-3 py-2 text-white">{h}</th>
+                        <th key={h} className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 ${isDark ? "text-white" : "text-slate-800"}`}>{h}</th>
                       ))}
                     </tr></thead>
                     <tbody>
                       {t.vis_tabel_rows.map(([h,s,p]: string[], i: number) => (
                         <tr key={i} className={i%2===0?(isDark?"bg-slate-800/30":"bg-blue-50/50"):(isDark?"bg-slate-700/20":"bg-gray-50")}>
-                          <td className="border border-white/10 px-3 py-2 text-cyan-300 font-semibold">{h}</td>
-                          <td className="border border-white/10 px-3 py-2 text-yellow-300 font-mono">{s}</td>
-                          <td className="border border-white/10 px-3 py-2 text-white/60">{p}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 text-cyan-300 font-semibold`}>{h}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 text-yellow-300 font-mono`}>{s}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 ${isDark ? "text-white/60" : "text-slate-500"}`}>{p}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -865,12 +865,12 @@ const Hubungan2GarisPage = () => {
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className={`border border-green-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
-                  <p className="text-sm text-white/85 font-body">{t.c1_soal} <InlineMath math="\ell_1: y = 3x - 5" /> dan <InlineMath math="\ell_2: y = 3x + 2" />!</p>
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body`}>{t.c1_soal} <InlineMath math="\ell_1: y = 3x - 5" /> dan <InlineMath math="\ell_2: y = 3x + 2" />!</p>
                 </div>
                 <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">{t.c1_id_grad}</p>
-                    {t.c1_steps.map((s, i) => <p key={i} className={`text-white/70 text-xs${i === 2 ? " mt-1" : ""}`}>{s}</p>)}
+                    {t.c1_steps.map((s, i) => <p key={i} className={`${isDark ? "text-white/70" : "text-slate-600"} text-xs${i === 2 ? " mt-1" : ""}`}>{s}</p>)}
                   </div>
                   <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl p-3">
                     <CoordSys label="ℓ₁ ∥ ℓ₂">
@@ -896,12 +896,12 @@ const Hubungan2GarisPage = () => {
                 <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
                 <div className={`border border-yellow-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">{t.soal}</p>
-                  <p className="text-sm text-white/85 font-body">{t.c2_soal} <InlineMath math="(2, 5)" /> <InlineMath math="y = 4x - 3" /></p>
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body`}>{t.c2_soal} <InlineMath math="(2, 5)" /> <InlineMath math="y = 4x - 3" /></p>
                 </div>
                 <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                     <p className="text-cyan-300 font-semibold mb-1">{t.c2_l1}</p>
-                    <p className="text-white/70 text-xs">{t.c2_step1}</p>
+                    <p className={`${isDark ? "text-white/70" : "text-slate-600"} text-xs`}>{t.c2_step1}</p>
                     <BlockMath math="m_2 = -\frac{1}{m_1} = -\frac{1}{4}" />
                   </div>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
@@ -936,7 +936,7 @@ const Hubungan2GarisPage = () => {
                 <Badge label={t.sulit} color="bg-red-700/60 text-red-200" />
                 <div className={`border border-red-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
-                  <p className="text-sm text-white/85 font-body">{t.c3_soal} <InlineMath math="\ell_1: 2x - y + 4 = 0" />, <InlineMath math="\ell_2: x + 2y - 6 = 0" />, <InlineMath math="\ell_3: 4x - 2y + 1 = 0" />.</p>
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body`}>{t.c3_soal} <InlineMath math="\ell_1: 2x - y + 4 = 0" />, <InlineMath math="\ell_2: x + 2y - 6 = 0" />, <InlineMath math="\ell_3: 4x - 2y + 1 = 0" />.</p>
                 </div>
                 <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
@@ -944,15 +944,15 @@ const Hubungan2GarisPage = () => {
                     <div className="space-y-2 text-xs">
                       <div className="bg-cyan-900/20 rounded-lg p-2">
                         <p className="text-cyan-300 font-semibold">ℓ₁: 2x − y + 4 = 0</p>
-                        <p className="text-white/70">y = 2x + 4 → <strong className="text-yellow-300">m₁ = 2</strong></p>
+                        <p className={`${isDark ? "text-white/70" : "text-slate-600"}`}>y = 2x + 4 → <strong className="text-yellow-300">m₁ = 2</strong></p>
                       </div>
                       <div className="bg-violet-900/20 rounded-lg p-2">
                         <p className="text-violet-300 font-semibold">ℓ₂: x + 2y − 6 = 0</p>
-                        <p className="text-white/70">2y = −x + 6 → y = −½x + 3 → <strong className="text-yellow-300">m₂ = −½</strong></p>
+                        <p className={`${isDark ? "text-white/70" : "text-slate-600"}`}>2y = −x + 6 → y = −½x + 3 → <strong className="text-yellow-300">m₂ = −½</strong></p>
                       </div>
                       <div className="bg-orange-900/20 rounded-lg p-2">
                         <p className="text-orange-300 font-semibold">ℓ₃: 4x − 2y + 1 = 0</p>
-                        <p className="text-white/70">2y = 4x + 1 → y = 2x + ½ → <strong className="text-yellow-300">m₃ = 2</strong></p>
+                        <p className={`${isDark ? "text-white/70" : "text-slate-600"}`}>2y = 4x + 1 → y = 2x + ½ → <strong className="text-yellow-300">m₃ = 2</strong></p>
                       </div>
                     </div>
                   </div>
@@ -961,15 +961,15 @@ const Hubungan2GarisPage = () => {
                     <div className="space-y-1.5 text-xs">
                       <div className="bg-green-900/20 rounded-lg p-2">
                         <p className="text-green-300 font-bold">a) ℓ₁ ⊥ ℓ₂:</p>
-                        <p className="text-white/60">m₁ × m₂ = 2 × (−½) = −1 ✓ → <strong className="text-green-300">{t.c3_ver_perp}</strong></p>
+                        <p className={`${isDark ? "text-white/60" : "text-slate-500"}`}>m₁ × m₂ = 2 × (−½) = −1 ✓ → <strong className="text-green-300">{t.c3_ver_perp}</strong></p>
                       </div>
                       <div className="bg-cyan-900/20 rounded-lg p-2">
                         <p className="text-cyan-300 font-bold">b) ℓ₁ ∥ ℓ₃:</p>
-                        <p className="text-white/60">m₁ = m₃ = 2, c₁ = 4 ≠ c₃ = ½ → <strong className="text-cyan-300">{t.c3_ver_par}</strong></p>
+                        <p className={`${isDark ? "text-white/60" : "text-slate-500"}`}>m₁ = m₃ = 2, c₁ = 4 ≠ c₃ = ½ → <strong className="text-cyan-300">{t.c3_ver_par}</strong></p>
                       </div>
                       <div className="bg-orange-900/20 rounded-lg p-2">
                         <p className="text-orange-300 font-bold">c) ℓ₂ {language === "id" ? "dan" : language === "ja" ? "と" : "and"} ℓ₃:</p>
-                        <p className="text-white/60">m₂ = −½ ≠ m₃ = 2, m₂×m₃ = −1 → <strong className="text-orange-300">{t.c3_ver_perp}</strong></p>
+                        <p className={`${isDark ? "text-white/60" : "text-slate-500"}`}>m₂ = −½ ≠ m₃ = 2, m₂×m₃ = −1 → <strong className="text-orange-300">{t.c3_ver_perp}</strong></p>
                       </div>
                     </div>
                   </div>
@@ -988,7 +988,7 @@ const Hubungan2GarisPage = () => {
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {t.rang_items.map(([label, desc]: string[]) => (
-                    <div key={label} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80"><strong className="text-cyan-300">{label}:</strong> {desc}</p></div>
+                    <div key={label} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className={`${isDark ? "text-white/80" : "text-slate-700"}`}><strong className="text-cyan-300">{label}:</strong> {desc}</p></div>
                   ))}
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">

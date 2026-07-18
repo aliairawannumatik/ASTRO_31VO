@@ -354,7 +354,7 @@ const GradienPage = () => {
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
-      <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className="font-body font-semibold text-white">{title}</span></div>
+      <div className="flex items-center gap-3"><span className={iconColor}>{icon}</span><span className={`font-body font-semibold ${isDark ? "text-white" : "text-slate-800"}`}>{title}</span></div>
       <ChevronUp className="w-5 h-5 text-primary" />
     </button>
   );
@@ -370,7 +370,7 @@ const GradienPage = () => {
         <Sliders className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.title}</h1>
         <p className="font-display text-sm font-semibold text-cyan-400 text-center mb-1">{t.subtitle}</p>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.breadcrumb}</p>
+        <p className={`${isDark ? "text-white/50" : "text-slate-400"} text-xs text-center mb-6 font-body`}>{t.breadcrumb}</p>
         <div className="flex flex-col gap-4 animate-slide-up">
 
           {/* PENGANTAR */}
@@ -378,11 +378,11 @@ const GradienPage = () => {
             <SH id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.sh_intro} />
             {true && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-slate-700"} leading-relaxed`}>
                   {t.introP} <strong className="text-cyan-300">{t.introKW}</strong> {t.introP2}
                 </p>
                 {/* Foto ilustrasi jalan tanjakan */}
-                <figure className="rounded-xl overflow-hidden border border-white/10">
+                <figure className={`rounded-xl overflow-hidden border ${isDark ? "border-white/10" : "border-slate-200"}`}>
                   <img
                     src="/jalan-tanjakan.png"
                     alt={t.intro_img_alt}
@@ -417,7 +417,7 @@ const GradienPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
                   <p className="text-sm font-semibold text-violet-300 mb-2 font-body">{t.defSummary}</p>
-                  <p className="text-sm text-white/80 font-body leading-relaxed">
+                  <p className={`text-sm ${isDark ? "text-white/80" : "text-slate-700"} font-body leading-relaxed`}>
                     <strong className="text-cyan-300">Gradien (m)</strong> {t.defP}{" "}
                     <strong className="text-pink-300">{t.defSisiTegak}</strong> {t.defP2}{" "}
                     <strong className="text-green-300">{t.defSisiDatar}</strong> {t.defP3}
@@ -489,9 +489,9 @@ const GradienPage = () => {
                     <tbody>
                       {t.tbl_rows.map(([v, a, s], i) => (
                         <tr key={i} className={i % 2 === 0 ? (isDark ? "bg-slate-800/30" : "bg-blue-50/50") : (isDark ? "bg-slate-700/20" : "bg-gray-50")}>
-                          <td className="border border-white/10 px-3 py-2 text-cyan-300 font-mono font-bold text-center">{v}</td>
-                          <td className="border border-white/10 px-3 py-2 text-white/70 text-center">{a}</td>
-                          <td className="border border-white/10 px-3 py-2 text-white/60 text-center">{s}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 text-cyan-300 font-mono font-bold text-center`}>{v}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 ${isDark ? "text-white/70" : "text-slate-600"} text-center`}>{a}</td>
+                          <td className={`border ${isDark ? "border-white/10" : "border-slate-200"} px-3 py-2 ${isDark ? "text-white/60" : "text-slate-500"} text-center`}>{s}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -537,7 +537,7 @@ const GradienPage = () => {
             <SH id="animasi" icon={<PlayCircle className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_animasi} />
             {true && (
               <div className="px-5 pb-5 space-y-3">
-                <p className="font-body text-sm text-white/70 leading-relaxed">
+                <p className={`font-body text-sm ${isDark ? "text-white/70" : "text-slate-600"} leading-relaxed`}>
                   {t.animP} <strong className="text-green-300">{t.animKW1}</strong> {t.animKW2} <strong className="text-pink-300">{t.animP2}</strong>
                 </p>
                 <GradienInvariantAnimation />
@@ -550,7 +550,7 @@ const GradienPage = () => {
             <SH id="duatitik" icon={<Target className="w-5 h-5" />} iconColor="text-violet-400" title={t.sh_duatitik} />
             {expandedSections.includes("duatitik") && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/70 leading-relaxed">
+                <p className={`font-body text-sm ${isDark ? "text-white/70" : "text-slate-600"} leading-relaxed`}>
                   {t.duaP} <InlineMath math="P_1(x_1,\, y_1)" /> {t.duaHint2} <InlineMath math="P_2(x_2,\, y_2)" />{t.duaP2}
                 </p>
                 <div className="bg-violet-900/30 border border-violet-400/30 rounded-xl p-4 text-center">
@@ -560,15 +560,15 @@ const GradienPage = () => {
                   <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2.5 text-center">
                     <p className="text-green-300 font-bold mb-1">{t.dyLabel}</p>
                     <InlineMath math="\Delta y = y_2 - y_1" />
-                    <p className="text-white/40 mt-1">{t.dyDesc}</p>
+                    <p className={`${isDark ? "text-white/40" : "text-slate-400"} mt-1`}>{t.dyDesc}</p>
                   </div>
                   <div className="bg-pink-900/20 border border-pink-500/30 rounded-lg p-2.5 text-center">
                     <p className="text-pink-300 font-bold mb-1">{t.dxLabel}</p>
                     <InlineMath math="\Delta x = x_2 - x_1" />
-                    <p className="text-white/40 mt-1">{t.dxDesc}</p>
+                    <p className={`${isDark ? "text-white/40" : "text-slate-400"} mt-1`}>{t.dxDesc}</p>
                   </div>
                 </div>
-                <p className="font-body text-xs text-white/50 leading-relaxed">
+                <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-slate-400"} leading-relaxed`}>
                   {t.duaHint} <span className="text-cyan-300 font-bold">P₁</span> {t.duaHint2} <span className="text-yellow-300 font-bold">P₂</span> {t.duaHint3}
                 </p>
                 <GradienDuaTitikInteraktif />
@@ -581,7 +581,7 @@ const GradienPage = () => {
             <SH id="persamaan" icon={<Sliders className="w-5 h-5" />} iconColor="text-cyan-400" title={t.sh_persamaan} />
             {expandedSections.includes("persamaan") && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/70 leading-relaxed">{t.persamaanP}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/70" : "text-slate-600"} leading-relaxed`}>{t.persamaanP}</p>
                 <GradienPersamaanInteraktif />
               </div>
             )}
@@ -597,7 +597,7 @@ const GradienPage = () => {
                 {/* Soal */}
                 <div className={`border border-purple-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-purple-300 mb-1 font-body">{t.soal}</p>
-                  <p className="text-sm text-white/85 font-body">{t.c1_soal}</p>
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body`}>{t.c1_soal}</p>
                 </div>
 
                 {/* Grafik soal — 2 kolom */}
@@ -635,12 +635,12 @@ const GradienPage = () => {
 
                 {/* Pembahasan */}
                 <div className={`border border-white/10 rounded-xl p-4 space-y-5 font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
-                  <p className="text-xs font-bold text-white/50 uppercase tracking-wider">{t.pem}</p>
+                  <p className={`text-xs font-bold ${isDark ? "text-white/50" : "text-slate-400"} uppercase tracking-wider`}>{t.pem}</p>
 
                   {/* Solusi a */}
                   <div className={`rounded-xl p-4 space-y-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                     <p className="text-cyan-300 font-semibold text-sm">{t.c1_sa}</p>
-                    <p className="text-white/60 text-xs">{t.c1_sa2}</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs`}>{t.c1_sa2}</p>
                     <div className={`rounded-lg p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                       <BlockMath math="m = \frac{y_B - y_A}{x_B - x_A} = \frac{-2 - 2}{4 - (-4)} = \frac{-4}{8} = -\frac{1}{2}" />
                     </div>
@@ -673,7 +673,7 @@ const GradienPage = () => {
                   {/* Solusi b */}
                   <div className={`rounded-xl p-4 space-y-3 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                     <p className="text-amber-300 font-semibold text-sm">{t.c1_sb}</p>
-                    <p className="text-white/60 text-xs">{t.c1_sb2}</p>
+                    <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs`}>{t.c1_sb2}</p>
                     <div className={`rounded-lg p-3 ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                       <BlockMath math="m = \frac{y_Q - y_P}{x_Q - x_P} = \frac{4 - (-4)}{1 - (-3)} = \frac{8}{4} = 2" />
                     </div>
@@ -716,7 +716,7 @@ const GradienPage = () => {
                 <Badge label={t.sedang} color="bg-yellow-700/60 text-yellow-200" />
                 <div className={`border border-yellow-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-yellow-300 mb-2 font-body">{t.soal}</p>
-                  <p className="text-sm text-white/85 font-body">{t.c2_soal}</p>
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body`}>{t.c2_soal}</p>
                 </div>
                 <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   <div className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
@@ -779,13 +779,13 @@ const GradienPage = () => {
                 <Badge label={t.mudah} color="bg-green-700/60 text-green-200" />
                 <div className={`border border-green-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-green-300 mb-2 font-body">{t.soal}</p>
-                  <p className="text-sm text-white/85 font-body">{t.c3_soal} a) <InlineMath math="y = -4x + 7" />, b) <InlineMath math="6x - 3y + 9 = 0" />, c) <InlineMath math="y = 5" /></p>
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body`}>{t.c3_soal} a) <InlineMath math="y = -4x + 7" />, b) <InlineMath math="6x - 3y + 9 = 0" />, c) <InlineMath math="y = 5" /></p>
                 </div>
                 <div className={`border border-white/10 rounded-xl p-4 space-y-3 text-sm font-body ${isDark ? "bg-slate-700/40" : "bg-gray-50"}`}>
                   {t.c3_items.map(({ bag, ket, hasil, color }) => (
                     <div key={bag} className={`rounded-lg p-3 ${isDark ? "bg-slate-800/50" : "bg-white/80"}`}>
                       <p className={`${color} font-semibold text-xs mb-1`}>{bag}</p>
-                      <p className="text-white/60 text-xs">{ket}</p>
+                      <p className={`${isDark ? "text-white/60" : "text-slate-500"} text-xs`}>{ket}</p>
                       <p className="text-green-300 font-bold text-sm mt-1">→ {hasil}</p>
                     </div>
                   ))}
@@ -807,7 +807,7 @@ const GradienPage = () => {
                 {/* Soal */}
                 <div className={`border border-red-500/30 rounded-xl p-4 ${isDark ? "bg-slate-800/60" : "bg-gray-100"}`}>
                   <p className="text-sm font-semibold text-red-300 mb-2 font-body">{t.soal}</p>
-                  <p className="text-sm text-white/85 font-body leading-relaxed">
+                  <p className={`text-sm ${isDark ? "text-white/85" : "text-slate-700"} font-body leading-relaxed`}>
                     {t.c4_soal}
                   </p>
                 </div>
@@ -874,7 +874,7 @@ const GradienPage = () => {
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-2 text-sm font-body">
                   {t.rang_items.map(([term, desc]) => (
-                    <div key={term} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className="text-white/80"><strong className="text-cyan-300">{term}:</strong> {desc}</p></div>
+                    <div key={term} className="flex gap-2"><span className="text-cyan-400 shrink-0">▸</span><p className={`${isDark ? "text-white/80" : "text-slate-700"}`}><strong className="text-cyan-300">{term}:</strong> {desc}</p></div>
                   ))}
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
