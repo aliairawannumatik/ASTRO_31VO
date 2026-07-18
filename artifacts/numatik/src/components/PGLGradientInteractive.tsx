@@ -264,7 +264,8 @@ export default function PGLGradientInteractive() {
           <svg
             ref={svgRef}
             viewBox={`0 0 ${VIEW} ${VIEW}`}
-            className={`w-full h-auto rounded-xl border touch-none ${isDark ? "bg-gradient-to-br from-slate-900 to-slate-950 border-white/10" : "bg-gradient-to-br from-slate-50 to-slate-100 border-slate-200"}`}
+            className={`w-full h-auto rounded-xl border touch-none ${isDark ? "border-white/10" : "border-slate-200"}`}
+            style={{ background: isDark ? "rgba(10,18,35,0.90)" : "rgba(241,245,249,0.95)" }}
             onPointerMove={handleMove}
           >
             {Array.from({ length: RANGE * 2 + 1 }).map((_, i) => {
