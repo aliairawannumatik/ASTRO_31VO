@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
-import { InlineMath, BlockMath } from "react-katex";
-import { RefreshCw, Info, Trophy, Target } from "lucide-react";
+import { InlineMath } from "react-katex";
+import { RefreshCw, Info, Target } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useLanguage } from "@/contexts/LanguageContext";
+import type { Language } from "@/contexts/LanguageContext";
 import "katex/dist/katex.min.css";
 
 /* ─── Canvas constants ─────────────────────────────────── */
@@ -37,6 +39,85 @@ function initLevel() {
       { x:537, y:GY-126,w:52, h:61, kind:"stone", hp:3, maxHp:3 },
       { x:615, y:GY-50, w:26, h:50, kind:"stone", hp:2, maxHp:2 },
     ] as Block[],
+  };
+}
+
+/* ─── Translations ─────────────────────────────────────── */
+function getTrans(lang: Language) {
+  return {
+    hint_ready:   lang === "id" ? "🏹 Tarik burung ke belakang, lalu lepaskan!"
+                : lang === "en" ? "🏹 Pull the bird back, then release!"
+                :                 "🏹 鳥を後ろに引いて、離してください！",
+    hint_lost:    lang === "id" ? "😢 Percobaan habis! Klik Reset untuk coba lagi."
+                : lang === "en" ? "😢 Out of attempts! Click Reset to try again."
+                :                 "😢 試行回数がなくなりました！リセットをクリックしてもう一度。",
+    hint_again:   lang === "id" ? "🏹 Tarik lagi!"
+                : lang === "en" ? "🏹 Pull again!"
+                :                 "🏹 もう一度引いて！",
+    hint_won:     lang === "id" ? "🎉 Semua babi terkalahkan! Fungsi kuadrat terbukti!"
+                : lang === "en" ? "🎉 All pigs defeated! Quadratic function proven!"
+                :                 "🎉 全ての豚を倒した！二次関数の証明！",
+    hint_release: lang === "id" ? "🔓 Lepaskan untuk meluncurkan!"
+                : lang === "en" ? "🔓 Release to launch!"
+                :                 "🔓 離して発射！",
+    launching:    (a: number, b: string, c: string) =>
+                  lang === "id" ? `Meluncur! a=${a}, b=${b}, c=${c}`
+                : lang === "en" ? `Launched! a=${a}, b=${b}, c=${c}`
+                :                 `発射！a=${a}, b=${b}, c=${c}`,
+    hud_shots:    (n: number) =>
+                  lang === "id" ? `🏹 ${n} lemparan`
+                : lang === "en" ? `🏹 ${n} shots`
+                :                 `🏹 ${n} 発`,
+    overlay_won:  lang === "id" ? "🎉 LEVEL SELESAI!"
+                : lang === "en" ? "🎉 LEVEL CLEAR!"
+                :                 "🎉 レベルクリア！",
+    overlay_lost: lang === "id" ? "😢 COBA LAGI!"
+                : lang === "en" ? "😢 TRY AGAIN!"
+                :                 "😢 もう一度！",
+    overlay_score: (s: number) =>
+                  lang === "id" ? `Skor: ${s}`
+                : lang === "en" ? `Score: ${s}`
+                :                 `スコア: ${s}`,
+    overlay_noshots: lang === "id" ? "Semua lemparan habis!"
+                   : lang === "en" ? "All throws used up!"
+                   :                 "すべての投球を使い切りました！",
+    header_title: lang === "id" ? "🐦 Laboratorium Parabola — Angry Math Bird"
+                : lang === "en" ? "🐦 Parabola Lab — Angry Math Bird"
+                :                 "🐦 放物線ラボ — アングリーマスバード",
+    header_sub:   lang === "id" ? "Lintasan burung mengikuti fungsi kuadrat h(x) = ax² + bx + c"
+                : lang === "en" ? "The bird's trajectory follows the quadratic function h(x) = ax² + bx + c"
+                :                 "鳥の軌道は二次関数 h(x) = ax² + bx + c に従います",
+    eq_label:     lang === "id" ? "Persamaan Lintasan"
+                : lang === "en" ? "Trajectory Equation"
+                :                 "軌道の方程式",
+    peak_label:   lang === "id" ? "📐 Titik Puncak (Maks)"
+                : lang === "en" ? "📐 Vertex (Max)"
+                :                 "📐 頂点（最大値）",
+    peak_horiz:   lang === "id" ? "Jarak horizontal:"
+                : lang === "en" ? "Horizontal distance:"
+                :                 "水平距離：",
+    peak_height:  lang === "id" ? "Tinggi maksimum:"
+                : lang === "en" ? "Max height:"
+                :                 "最大高さ：",
+    pull_hint:    lang === "id" ? "Tarik burung untuk melihat persamaan lintasannya! 🎯"
+                : lang === "en" ? "Pull the bird to see its trajectory equation! 🎯"
+                :                 "鳥を引いて軌道の方程式を見よう！🎯",
+    coeff_a:      lang === "id" ? "a (buka bawah)"
+                : lang === "en" ? "a (opens down)"
+                :                 "a (下に開く)",
+    coeff_b:      lang === "id" ? "b (sudut)"
+                : lang === "en" ? "b (angle)"
+                :                 "b (角度)",
+    coeff_c:      lang === "id" ? "c (tinggi awal)"
+                : lang === "en" ? "c (init height)"
+                :                 "c (初期高さ)",
+    won_title:    (s: number) =>
+                  lang === "id" ? `🎉 Level Selesai! Skor: ${s}`
+                : lang === "en" ? `🎉 Level Clear! Score: ${s}`
+                :                 `🎉 レベルクリア！スコア: ${s}`,
+    won_replay:   lang === "id" ? "Klik reset untuk main lagi dengan sudut berbeda!"
+                : lang === "en" ? "Click reset to play again with a different angle!"
+                :                 "リセットをクリックして別の角度で再挑戦！",
   };
 }
 
@@ -175,6 +256,11 @@ function drawBlock(ctx: CanvasRenderingContext2D, b: Block) {
 
 /* ─── Main component ──────────────────────────────────── */
 const AngryBirdParabola: React.FC = () => {
+  const { language } = useLanguage();
+  // ref so the memoized loop callback always reads the current language
+  const langRef = useRef<Language>(language);
+  useEffect(() => { langRef.current = language; }, [language]);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef    = useRef(0);
   const lastTRef  = useRef(0);
@@ -196,12 +282,15 @@ const AngryBirdParabola: React.FC = () => {
     happyTimer: 0,
   });
 
-  const [ui, setUi] = useState({
-    phase:"ready" as Phase,
-    shots:5, score:0,
-    eq: null as null|{a:number;b:number;c:number},
-    peak: null as null|{xm:number;hm:number},
-    hint:"🏹 Tarik burung ke belakang, lalu lepaskan!",
+  const [ui, setUi] = useState(() => {
+    const t0 = getTrans("id");
+    return {
+      phase:"ready" as Phase,
+      shots:5, score:0,
+      eq: null as null|{a:number;b:number;c:number},
+      peak: null as null|{xm:number;hm:number},
+      hint: t0.hint_ready,
+    };
   });
 
   /* Convert canvas coords → equation coefficients */
@@ -279,6 +368,8 @@ const AngryBirdParabola: React.FC = () => {
     const cv=canvasRef.current;
     if(!cv) return;
     const ctx=cv.getContext("2d")!;
+    // use langRef so this memoized callback always gets the current language
+    const tl = getTrans(langRef.current);
 
     /* ── Physics update (parametric — exact match with preview) ── */
     if(s.phase==="flying"){
@@ -297,7 +388,7 @@ const AngryBirdParabola: React.FC = () => {
       else if(s.by>GY+50||s.bx>CW+50){
         if(s.shots>1){ s.shots--; s.bx=REST_X; s.by=REST_Y; s.vx=0; s.vy=0; s.trail=[]; s.phase="ready"; }
         else { s.phase="lost"; }
-        setUi(u=>({...u,phase:s.phase,shots:s.shots,hint:s.phase==="lost"?"😢 Percobaan habis! Klik Reset untuk coba lagi.":"🏹 Tarik lagi!"}));
+        setUi(u=>({...u,phase:s.phase,shots:s.shots,hint:s.phase==="lost"? tl.hint_lost : tl.hint_again}));
       }
     }
 
@@ -308,7 +399,7 @@ const AngryBirdParabola: React.FC = () => {
     if(s.phase==="celebrating"){
       s.happyTimer-=dt;
       if(s.happyTimer<=0){ s.phase="won";
-        setUi(u=>({...u,phase:"won",score:s.score,hint:"🎉 Semua babi terkalahkan! Fungsi kuadrat terbukti!"})); }
+        setUi(u=>({...u,phase:"won",score:s.score,hint:tl.hint_won})); }
     }
 
     /* ── Stars/particles ── */
@@ -387,7 +478,7 @@ const AngryBirdParabola: React.FC = () => {
 
     // HUD: shots remaining
     ctx.fillStyle="rgba(0,0,0,0.45)"; ctx.beginPath(); ctx.roundRect(8,8,110,34,8); ctx.fill();
-    ctx.fillStyle="#fff"; ctx.font="bold 14px sans-serif"; ctx.fillText(`🏹 ${s.shots} lemparan`,16,30);
+    ctx.fillStyle="#fff"; ctx.font="bold 14px sans-serif"; ctx.fillText(tl.hud_shots(s.shots),16,30);
 
     // Score
     ctx.fillStyle="rgba(0,0,0,0.45)"; ctx.beginPath(); ctx.roundRect(CW-120,8,112,34,8); ctx.fill();
@@ -398,8 +489,9 @@ const AngryBirdParabola: React.FC = () => {
       ctx.fillStyle=s.phase==="won"?"rgba(0,80,0,0.6)":"rgba(80,0,0,0.6)";
       ctx.fillRect(0,0,CW,CH);
       ctx.fillStyle="#fff"; ctx.font="bold 36px sans-serif"; ctx.textAlign="center";
-      ctx.fillText(s.phase==="won"?"🎉 LEVEL SELESAI!":"😢 COBA LAGI!",CW/2,CH/2-20);
-      ctx.font="20px sans-serif"; ctx.fillText(s.phase==="won"?`Skor: ${s.score}`:"Semua lemparan habis!",CW/2,CH/2+20);
+      ctx.fillText(s.phase==="won"? tl.overlay_won : tl.overlay_lost, CW/2,CH/2-20);
+      ctx.font="20px sans-serif";
+      ctx.fillText(s.phase==="won"? tl.overlay_score(s.score) : tl.overlay_noshots, CW/2,CH/2+20);
       ctx.textAlign="left";
     }
 
@@ -428,7 +520,8 @@ const AngryBirdParabola: React.FC = () => {
     const dx=REST_X-clamped.x, dy=REST_Y-clamped.y;
     if(Math.sqrt(dx*dx+dy*dy)>8){
       const res=calcEquation(dx*POWER,dy*POWER,REST_X,REST_Y);
-      if(res) setUi(u=>({...u,eq:{a:res.a,b:res.b,c:res.c},peak:res.peak,hint:"🔓 Lepaskan untuk meluncurkan!"}));
+      const t = getTrans(language);
+      if(res) setUi(u=>({...u,eq:{a:res.a,b:res.b,c:res.c},peak:res.peak,hint:t.hint_release}));
     }
   }
   function endDrag(){
@@ -445,27 +538,30 @@ const AngryBirdParabola: React.FC = () => {
     s.phase="flying"; s.trail=[];
     playPopSound();
     const res=calcEquation(s.vx0,s.vy0,s.lx,s.ly);
+    const t = getTrans(language);
     if(res) setUi(u=>({...u,phase:"flying",shots:s.shots,eq:{a:res.a,b:res.b,c:res.c},peak:res.peak,
-      hint:`Meluncur! a=${res.a}, b=${res.b.toFixed(2)}, c=${res.c.toFixed(1)}`}));
+      hint:t.launching(res.a, res.b.toFixed(2), res.c.toFixed(1))}));
   }
 
   const onMouseDown=(e:React.MouseEvent)=>{ const {cx,cy}=toCanvas(e.clientX,e.clientY); startDrag(cx,cy); };
   const onMouseMove=(e:React.MouseEvent)=>{ const {cx,cy}=toCanvas(e.clientX,e.clientY); moveDrag(cx,cy); };
   const onMouseUp=()=>endDrag();
-  const onTouchStart=(e:React.TouchEvent)=>{ e.preventDefault(); const t=e.touches[0]; const {cx,cy}=toCanvas(t.clientX,t.clientY); startDrag(cx,cy); };
-  const onTouchMove=(e:React.TouchEvent)=>{ e.preventDefault(); const t=e.touches[0]; const {cx,cy}=toCanvas(t.clientX,t.clientY); moveDrag(cx,cy); };
+  const onTouchStart=(e:React.TouchEvent)=>{ e.preventDefault(); const touch=e.touches[0]; const {cx,cy}=toCanvas(touch.clientX,touch.clientY); startDrag(cx,cy); };
+  const onTouchMove=(e:React.TouchEvent)=>{ e.preventDefault(); const touch=e.touches[0]; const {cx,cy}=toCanvas(touch.clientX,touch.clientY); moveDrag(cx,cy); };
   const onTouchEnd=(e:React.TouchEvent)=>{ e.preventDefault(); endDrag(); };
 
   function reset(){
     playPopSound();
     const lv=initLevel();
     const s=g.current;
+    const t = getTrans(language);
     Object.assign(s,{ phase:"ready",bx:REST_X,by:REST_Y,vx:0,vy:0,vx0:0,vy0:0,elapsed:0,
       dragX:REST_X,dragY:REST_Y,dragging:false,trail:[],stars:[],pigs:lv.pigs,blocks:lv.blocks,
       shots:5,score:0,happyTimer:0 });
-    setUi({ phase:"ready",shots:5,score:0,eq:null,peak:null,hint:"🏹 Tarik burung ke belakang, lalu lepaskan!" });
+    setUi({ phase:"ready",shots:5,score:0,eq:null,peak:null,hint:t.hint_ready });
   }
 
+  const t = getTrans(language);
   const { eq, peak, hint, phase, score } = ui;
   const fmt=(n:number)=>n>=0?`+${n.toFixed(2)}`:`${n.toFixed(2)}`;
 
@@ -477,8 +573,8 @@ const AngryBirdParabola: React.FC = () => {
         <div className="flex items-center gap-2">
           <Target className="w-5 h-5 text-orange-400" />
           <div>
-            <p className="font-display text-sm font-bold text-orange-300">🐦 Laboratorium Parabola — Angry Math Bird</p>
-            <p className="font-body text-xs text-white/40">Lintasan burung mengikuti fungsi kuadrat h(x) = ax² + bx + c</p>
+            <p className="font-display text-sm font-bold text-orange-300">{t.header_title}</p>
+            <p className="font-body text-xs text-white/40">{t.header_sub}</p>
           </div>
         </div>
         <button onClick={reset} className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/30 text-white/50 hover:text-white transition-all" title="Reset">
@@ -507,7 +603,7 @@ const AngryBirdParabola: React.FC = () => {
             {/* Equation */}
             <div className="bg-slate-900/70 border border-cyan-500/30 rounded-xl p-3 space-y-2">
               <p className="font-body text-xs font-bold text-cyan-300 uppercase tracking-wide flex items-center gap-1">
-                <Info className="w-3 h-3" /> Persamaan Lintasan
+                <Info className="w-3 h-3" /> {t.eq_label}
               </p>
               <div className="text-center">
                 <InlineMath math={`h(x) = ${eq.a}x^2 ${fmt(eq.b)}x ${fmt(eq.c)}`} />
@@ -515,15 +611,15 @@ const AngryBirdParabola: React.FC = () => {
               <div className="grid grid-cols-3 gap-1 text-xs font-body">
                 <div className="bg-red-900/30 border border-red-500/20 rounded-lg p-1.5 text-center">
                   <p className="text-red-300 font-bold">{eq.a}</p>
-                  <p className="text-white/40 text-[10px]">a (buka bawah)</p>
+                  <p className="text-white/40 text-[10px]">{t.coeff_a}</p>
                 </div>
                 <div className="bg-green-900/30 border border-green-500/20 rounded-lg p-1.5 text-center">
                   <p className="text-green-300 font-bold">{eq.b.toFixed(2)}</p>
-                  <p className="text-white/40 text-[10px]">b (sudut)</p>
+                  <p className="text-white/40 text-[10px]">{t.coeff_b}</p>
                 </div>
                 <div className="bg-yellow-900/30 border border-yellow-500/20 rounded-lg p-1.5 text-center">
                   <p className="text-yellow-300 font-bold">{eq.c.toFixed(1)}</p>
-                  <p className="text-white/40 text-[10px]">c (tinggi awal)</p>
+                  <p className="text-white/40 text-[10px]">{t.coeff_c}</p>
                 </div>
               </div>
             </div>
@@ -531,14 +627,14 @@ const AngryBirdParabola: React.FC = () => {
             {/* Peak info */}
             {peak && (
               <div className="bg-slate-900/70 border border-yellow-500/30 rounded-xl p-3 space-y-2">
-                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-wide">📐 Titik Puncak (Maks)</p>
+                <p className="font-body text-xs font-bold text-yellow-300 uppercase tracking-wide">{t.peak_label}</p>
                 <div className="space-y-1 font-body text-sm">
                   <div className="flex justify-between items-center">
-                    <span className="text-white/60 text-xs">Jarak horizontal:</span>
+                    <span className="text-white/60 text-xs">{t.peak_horiz}</span>
                     <span className="text-cyan-300 font-bold">{peak.xm.toFixed(2)} m</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-white/60 text-xs">Tinggi maksimum:</span>
+                    <span className="text-white/60 text-xs">{t.peak_height}</span>
                     <span className="text-yellow-300 font-bold">{Math.max(0,peak.hm).toFixed(2)} m</span>
                   </div>
                   <div className="bg-yellow-900/20 border border-yellow-500/20 rounded-lg px-2 py-1 text-center text-xs">
@@ -550,7 +646,7 @@ const AngryBirdParabola: React.FC = () => {
           </div>
         ) : (
           <div className="bg-slate-900/40 border border-white/5 rounded-xl p-3 text-center">
-            <p className="font-body text-xs text-white/30">Tarik burung untuk melihat persamaan lintasannya! 🎯</p>
+            <p className="font-body text-xs text-white/30">{t.pull_hint}</p>
             <div className="mt-2 text-center opacity-40">
               <InlineMath math="h(x) = ax^2 + bx + c" />
             </div>
@@ -561,16 +657,26 @@ const AngryBirdParabola: React.FC = () => {
         <div className="bg-purple-900/20 border border-purple-500/20 rounded-xl px-4 py-2 flex gap-2">
           <span className="text-purple-400 text-sm shrink-0">💡</span>
           <p className="font-body text-xs text-purple-200 leading-relaxed">
-            Lintasan benda yang dilempar selalu berbentuk <strong>parabola</strong> karena pengaruh gravitasi.
-            Nilai <strong className="text-red-300">a&lt;0</strong> → parabola terbuka ke bawah → ada nilai <strong className="text-yellow-300">maksimum</strong> (ketinggian puncak).
-            Inilah penerapan fungsi kuadrat di fisika!
+            {language === "id" ? (
+              <>Lintasan benda yang dilempar selalu berbentuk <strong>parabola</strong> karena pengaruh gravitasi.
+              Nilai <strong className="text-red-300">a&lt;0</strong> → parabola terbuka ke bawah → ada nilai <strong className="text-yellow-300">maksimum</strong> (ketinggian puncak).
+              Inilah penerapan fungsi kuadrat di fisika!</>
+            ) : language === "en" ? (
+              <>The trajectory of a thrown object always forms a <strong>parabola</strong> due to gravity.
+              Value <strong className="text-red-300">a&lt;0</strong> → parabola opens downward → there is a <strong className="text-yellow-300">maximum</strong> value (peak height).
+              This is the quadratic function applied in physics!</>
+            ) : (
+              <>投げられた物体の軌道は、重力の影響で常に<strong>放物線</strong>を描きます。
+              <strong className="text-red-300">a&lt;0</strong> → 放物線は下に開く → <strong className="text-yellow-300">最大値</strong>（頂点の高さ）が存在します。
+              これが物理における二次関数の応用です！</>
+            )}
           </p>
         </div>
 
         {phase==="won" && (
           <div className="bg-green-900/30 border border-green-400/40 rounded-xl p-3 text-center">
-            <p className="font-display text-sm font-bold text-green-300">🎉 Level Selesai! Skor: {score}</p>
-            <p className="font-body text-xs text-white/50 mt-1">Klik reset untuk main lagi dengan sudut berbeda!</p>
+            <p className="font-display text-sm font-bold text-green-300">{t.won_title(score)}</p>
+            <p className="font-body text-xs text-white/50 mt-1">{t.won_replay}</p>
           </div>
         )}
       </div>

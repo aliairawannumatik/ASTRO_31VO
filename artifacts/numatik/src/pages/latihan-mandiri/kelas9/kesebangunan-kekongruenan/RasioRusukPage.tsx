@@ -13,7 +13,7 @@ type Q = { n: number; title: string; content?: string; math?: string; parts?: Pa
 const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, title, ...rest });
 
 const SvgQ1 = () => (
-  <svg width={270} height={185} viewBox="0 0 270 185" style={{display:'block'}}>
+  <svg width={270} height={185} viewBox="0 0 270 185" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="270" height="185" fill="#0b1733" rx="14"/>
     <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
     <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
@@ -34,7 +34,7 @@ const SvgQ1 = () => (
 );
 
 const SvgQ2 = () => (
-  <svg width={270} height={185} viewBox="0 0 270 185" style={{display:'block'}}>
+  <svg width={270} height={185} viewBox="0 0 270 185" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="270" height="185" fill="#0b1733" rx="14"/>
     <polygon points="42,30 208,30 42,155" fill="rgba(34,211,238,0.08)"/>
     <line x1="42" y1="30" x2="208" y2="30" stroke="#22d3ee" strokeWidth="2.5"/>
@@ -55,7 +55,7 @@ const SvgQ2 = () => (
 );
 
 const SvgQ3 = () => (
-  <svg width={270} height={185} viewBox="0 0 270 185" style={{display:'block'}}>
+  <svg width={270} height={185} viewBox="0 0 270 185" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="270" height="185" fill="#0b1733" rx="14"/>
     <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
     <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
@@ -76,7 +76,7 @@ const SvgQ3 = () => (
 );
 
 const SvgQ4 = () => (
-  <svg width={270} height={185} viewBox="0 0 270 185" style={{display:'block'}}>
+  <svg width={270} height={185} viewBox="0 0 270 185" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="270" height="185" fill="#0b1733" rx="14"/>
     <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
     <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
@@ -102,7 +102,7 @@ const SvgQ4 = () => (
 );
 
 const SvgQ5a = () => (
-  <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
+  <svg width={255} height={185} viewBox="0 0 255 185" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="255" height="185" fill="#0b1733" rx="14"/>
     {/* Triangle: C at top-centre, A bottom-left, B bottom-right, right-angle at C */}
     <polygon points="127,18 22,150 215,150" fill="rgba(16,185,129,0.08)"/>
@@ -137,7 +137,7 @@ const SvgQ5a = () => (
 );
 
 const SvgQ5b = () => (
-  <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
+  <svg width={255} height={185} viewBox="0 0 255 185" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="255" height="185" fill="#0b1733" rx="14"/>
     <polygon points="100,18 20,150 215,150" fill="rgba(129,140,248,0.08)"/>
     <line x1="100" y1="18" x2="20" y2="150" stroke="#818cf8" strokeWidth="2.5"/>
@@ -160,7 +160,7 @@ const SvgQ5b = () => (
 );
 
 const SvgQ5c = () => (
-  <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
+  <svg width={255} height={185} viewBox="0 0 255 185" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="255" height="185" fill="#0b1733" rx="14"/>
     <polygon points="55,18 20,150 215,150" fill="rgba(168,85,247,0.08)"/>
     <line x1="55" y1="18" x2="20" y2="150" stroke="#a855f7" strokeWidth="2.5"/>
@@ -183,7 +183,7 @@ const SvgQ5c = () => (
 );
 
 const SvgQ5d = () => (
-  <svg width={255} height={185} viewBox="0 0 255 185" style={{display:'block'}}>
+  <svg width={255} height={185} viewBox="0 0 255 185" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="255" height="185" fill="#0b1733" rx="14"/>
     <polygon points="52,22 52,158 210,158" fill="rgba(248,113,113,0.08)"/>
     <line x1="52" y1="22" x2="52" y2="158" stroke="#f87171" strokeWidth="2.5"/>
@@ -335,7 +335,7 @@ const RasioRusukPage = () => {
             <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
           </div>
         </div>
-        <div className="mb-5 bg-emerald-900/20 border border-emerald-500/20 rounded-xl p-4">
+        <div className="mb-5 bg-emerald-900/20 border border-emerald-500/20 rounded-xl p-4 lm-kkg-hint">
           <p className="text-emerald-300 text-xs font-bold mb-2">{t('practice.keyFormula')} – Garis Tinggi Siku-Siku</p>
           <div className="grid grid-cols-3 gap-2">
             {[
@@ -354,7 +354,7 @@ const RasioRusukPage = () => {
           {questions.map((q, i) => (
             <div key={i} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur lm-kkg-overlay" />
               <div className="absolute inset-0 border border-emerald-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-teal-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">

@@ -9,18 +9,18 @@ import { Sigma, Star } from "lucide-react";
 
 // ─── SVG Illustrations ────────────────────────────────────────────────────────
 
+/** Soal 1 – Pola persegi panjang: pola ke-n memiliki (n+1) kolom × n baris = n(n+1) persegi kecil
+ *  Pola ke-1: 2×1=2 | Pola ke-2: 3×2=6 | Pola ke-3: 4×3=12 */
 const SvgPolaGambar1 = () => {
-  const sq = 22, gap = 3;
+  const sq = 18, gap = 3;
   const svgH = 96, svgW = 310;
-  const bottomY = 68;
-  const configs = [
-    { cols: 1, rows: 1, label: "Pola ke-1", cx: 45 },
-    { cols: 1, rows: 2, label: "Pola ke-2", cx: 140 },
-    { cols: 3, rows: 2, label: "Pola ke-3", cx: 245 },
-  ];
+  const bottomY = 70;
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
-      {configs.map(({ cols, rows, label, cx }, gi) => {
+      {[1, 2, 3].map((n, gi) => {
+        const cols = n + 1;
+        const rows = n;
+        const cx = 52 + gi * 100;
         const gridW = cols * sq + (cols - 1) * gap;
         const gridH = rows * sq + (rows - 1) * gap;
         const startX = cx - gridW / 2;
@@ -36,7 +36,7 @@ const SvgPolaGambar1 = () => {
               ))
             )}
             <text x={cx} y={svgH - 6} textAnchor="middle"
-              fill="#7dd3fc" fontSize="9" fontFamily="sans-serif">{label}</text>
+              fill="#7dd3fc" fontSize="9" fontFamily="sans-serif">Pola ke-{n}</text>
           </g>
         );
       })}

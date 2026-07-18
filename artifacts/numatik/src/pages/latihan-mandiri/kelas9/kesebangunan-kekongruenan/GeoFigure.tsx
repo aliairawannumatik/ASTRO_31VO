@@ -29,7 +29,7 @@ export const SimilarTriangles = ({
   const mid = (a: [number, number], b: [number, number]): [number, number] => [(a[0]+b[0])/2, (a[1]+b[1])/2];
   const toPath = (pts: [number, number][]) => pts.map((p,i) => `${i===0?'M':'L'}${p[0]},${p[1]}`).join(' ')+'Z';
   return (
-    <svg width={260} height={155} viewBox="0 0 260 155" style={{display:'block'}}>
+    <svg width={260} height={155} viewBox="0 0 260 155" className="lm-kkg-svg" style={{display:'block'}}>
       <rect width="260" height="155" fill="rgba(2,8,23,0.85)" rx="12"/>
       <path d={toPath(pts1)} fill={`${color1}18`} stroke={color1} strokeWidth="1.8"/>
       <path d={toPath(pts2)} fill={`${color2}18`} stroke={color2} strokeWidth="1.8"/>
@@ -64,7 +64,7 @@ export const SimilarRects = ({
 }: SimilarRectsProps) => {
   const x1=15, y1=30, x2=x1+w1+45, y2=30;
   return (
-    <svg width={x2+w2+20} height={Math.max(h1,h2)+60} viewBox={`0 0 ${x2+w2+20} ${Math.max(h1,h2)+60}`} style={{display:'block'}}>
+    <svg width={x2+w2+20} height={Math.max(h1,h2)+60} viewBox={`0 0 ${x2+w2+20} ${Math.max(h1,h2)+60}`} className="lm-kkg-svg" style={{display:'block'}}>
       <rect width={x2+w2+20} height={Math.max(h1,h2)+60} fill="rgba(2,8,23,0.85)" rx="12"/>
       <rect x={x1} y={y1} width={w1} height={h1} fill={`${color1}18`} stroke={color1} strokeWidth="1.8" rx="2"/>
       <rect x={x2} y={y2} width={w2} height={h2} fill={`${color2}18`} stroke={color2} strokeWidth="1.8" rx="2"/>
@@ -101,7 +101,7 @@ export const TriangleAltitude = ({
   altLabel="AD",
   rightAngleAtTop=false,
 }: TriangleAltitudeProps) => (
-  <svg width={240} height={150} viewBox="0 0 240 150" style={{display:'block'}}>
+  <svg width={240} height={150} viewBox="0 0 240 150" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="240" height="150" fill="rgba(2,8,23,0.85)" rx="12"/>
     <line x1={30} y1={130} x2={210} y2={130} stroke={color1} strokeWidth="1.8"/>
     <line x1={30} y1={130} x2={120} y2={20} stroke={color2} strokeWidth="1.8"/>
@@ -162,7 +162,7 @@ export const CongruentTriangles = ({
     });
   };
   return (
-    <svg width={240} height={140} viewBox="0 0 240 140" style={{display:'block'}}>
+    <svg width={240} height={140} viewBox="0 0 240 140" className="lm-kkg-svg" style={{display:'block'}}>
       <rect width="240" height="140" fill="rgba(2,8,23,0.85)" rx="12"/>
       <path d={toPath(p1)} fill={`${color1}18`} stroke={color1} strokeWidth="1.8"/>
       <path d={toPath(p2)} fill={`${color2}18`} stroke={color2} strokeWidth="1.8"/>
@@ -194,7 +194,7 @@ export const ParallelLinesTriangle = ({
   topSide="DE=5", botSide="BC=15",
   color1="#38bdf8", color2="#f472b6",
 }: ParallelLinesTriangleProps) => (
-  <svg width={240} height={160} viewBox="0 0 240 160" style={{display:'block'}}>
+  <svg width={240} height={160} viewBox="0 0 240 160" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="240" height="160" fill="rgba(2,8,23,0.85)" rx="12"/>
     <line x1={120} y1={15} x2={20} y2={145} stroke={color1} strokeWidth="1.8"/>
     <line x1={120} y1={15} x2={220} y2={145} stroke={color1} strokeWidth="1.8"/>
@@ -225,7 +225,7 @@ export const RightTriangleRatio = ({
   labelA="A", labelB="B", labelC="C", labelH="D",
   color1="#f472b6", color2="#38bdf8", color3="#34d399",
 }: RightTriangleRatioProps) => (
-  <svg width={240} height={155} viewBox="0 0 240 155" style={{display:'block'}}>
+  <svg width={240} height={155} viewBox="0 0 240 155" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="240" height="155" fill="rgba(2,8,23,0.85)" rx="12"/>
     <line x1={20} y1={130} x2={220} y2={130} stroke={color1} strokeWidth="2"/>
     <line x1={20} y1={130} x2={120} y2={20} stroke={color2} strokeWidth="1.8"/>
@@ -263,7 +263,7 @@ export const TwoShapesCongruent = ({
   const w1=70, h1=48, w2=70, h2=48;
   const x1=18, y1=28, x2=148, y2=28;
   if (shape==="rect") return (
-    <svg width={240} height={115} viewBox="0 0 240 115" style={{display:'block'}}>
+    <svg width={240} height={115} viewBox="0 0 240 115" className="lm-kkg-svg" style={{display:'block'}}>
       <rect width="240" height="115" fill="rgba(2,8,23,0.85)" rx="12"/>
       <rect x={x1} y={y1} width={w1} height={h1} fill={`${color1}18`} stroke={color1} strokeWidth="1.8" rx="2"/>
       <rect x={x2} y={y2} width={w2} height={h2} fill={`${color2}18`} stroke={color2} strokeWidth="1.8" rx="2"/>
@@ -289,7 +289,7 @@ export const TwoShapesCongruent = ({
   const toPath = (pts:[number,number][]) => pts.map((p,i)=>`${i===0?'M':'L'}${p[0]},${p[1]}`).join(' ')+'Z';
   const mid = (a:[number,number],b:[number,number]):[number,number] => [(a[0]+b[0])/2,(a[1]+b[1])/2];
   return (
-    <svg width={240} height={130} viewBox="0 0 240 130" style={{display:'block'}}>
+    <svg width={240} height={130} viewBox="0 0 240 130" className="lm-kkg-svg" style={{display:'block'}}>
       <rect width="240" height="130" fill="rgba(2,8,23,0.85)" rx="12"/>
       <path d={toPath(t1)} fill={`${color1}18`} stroke={color1} strokeWidth="1.8"/>
       <path d={toPath(t2)} fill={`${color2}18`} stroke={color2} strokeWidth="1.8"/>
@@ -315,7 +315,7 @@ export const ScaleFigure = ({
   origSides=["4","3"], newSides=["?","?"],
   color="#60a5fa",
 }: ScaleFigureProps) => (
-  <svg width={220} height={110} viewBox="0 0 220 110" style={{display:'block'}}>
+  <svg width={220} height={110} viewBox="0 0 220 110" className="lm-kkg-svg" style={{display:'block'}}>
     <rect width="220" height="110" fill="rgba(2,8,23,0.85)" rx="12"/>
     <rect x={15} y={25} width={50} height={35} fill={`${color}18`} stroke={color} strokeWidth="1.8" rx="2"/>
     <rect x={105} y={15} width={85} height={70} fill={`${color}30`} stroke="#f472b6" strokeWidth="1.8" rx="2"/>

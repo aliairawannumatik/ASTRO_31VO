@@ -51,23 +51,24 @@ const SvgPersegi = () => {
   );
 };
 
-/** Soal BARU – Pola persegi: 1×2, 2×2, 3×2 (pola ke-n = 2n persegi) */
-const SvgPersegiDua = () => {
-  const sq = 20, gap = 3;
+/** Soal 1 – Pola persegi panjang: pola ke-n memiliki (n+1) kolom × n baris = n(n+1) persegi kecil
+ *  Pola ke-1: 2×1=2 | Pola ke-2: 3×2=6 | Pola ke-3: 4×3=12 */
+const SvgPersegiPanjang = () => {
+  const sq = 16, gap = 3;
   const groupW = 90;
   const svgW = 3 * groupW + 10;
-  const svgH = 90;
-  const topY = 10;
+  const svgH = 92;
+  const bottomY = 68;
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" xmlns="http://www.w3.org/2000/svg">
       {[1, 2, 3].map((n, gi) => {
-        const cols = n;
-        const rows = 2;
+        const cols = n + 1;
+        const rows = n;
         const cx = 5 + gi * groupW + groupW / 2;
         const gridW = cols * sq + (cols - 1) * gap;
         const gridH = rows * sq + (rows - 1) * gap;
         const startX = cx - gridW / 2;
-        const startY = topY;
+        const startY = bottomY - gridH;
         return (
           <g key={gi}>
             {Array.from({ length: rows }, (_, row) =>
@@ -79,13 +80,13 @@ const SvgPersegiDua = () => {
                   width={sq}
                   height={sq}
                   rx={2}
-                  fill="rgba(96,165,250,0.45)"
-                  stroke="rgba(147,197,253,0.9)"
+                  fill="rgba(59,130,246,0.55)"
+                  stroke="rgba(96,165,250,0.95)"
                   strokeWidth="1.5"
                 />
               ))
             )}
-            <text x={cx} y={topY + gridH + 14} textAnchor="middle" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="600">
+            <text x={cx} y={svgH - 10} textAnchor="middle" fill="#93c5fd" fontSize="9" fontFamily="sans-serif" fontWeight="600">
               Pola ke-{n}
             </text>
           </g>
@@ -355,7 +356,7 @@ const questions: QuestionItem[] = [
     number: 1,
     content: "Perhatikan pola berikut.",
     type: "mixed",
-    svgNode: <SvgPersegiDua />,
+    svgNode: <SvgPersegiPanjang />,
     parts: [
       { label: "a.", text: "Tuliskan banyaknya persegi pada setiap pola di atas." },
       { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },

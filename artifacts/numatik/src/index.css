@@ -1338,6 +1338,65 @@
 .light-mode .bg-green-900\/20   { background-color: rgba(220,252,231,0.6) !important; }
 .theme-ocean .bg-green-900\/20  { background-color: rgba(6,95,70,0.30) !important; }
 
+/* ── Bilangan Berpangkat latihan-mandiri: card gradient + bg overrides ──
+   Pages use bg-gradient-to-br from-{color}-900/30 via-slate-900/80 to-{color2}-900/30.
+   via-slate-900/80 is already handled; the from-* and to-* gradient stops need overrides.
+   bg-white/5 (question-part rows) needs a dark-tint equivalent for light bg.         ── */
+/* gradient-from stops */
+.light-mode .from-sky-900\/30     { --tw-gradient-from: rgba(224,242,254,0.55) var(--tw-gradient-from-position) !important; }
+.light-mode .from-emerald-900\/30 { --tw-gradient-from: rgba(209,250,229,0.55) var(--tw-gradient-from-position) !important; }
+.light-mode .from-violet-900\/30  { --tw-gradient-from: rgba(237,233,254,0.55) var(--tw-gradient-from-position) !important; }
+.light-mode .from-amber-900\/30   { --tw-gradient-from: rgba(254,243,199,0.55) var(--tw-gradient-from-position) !important; }
+.light-mode .from-rose-900\/30    { --tw-gradient-from: rgba(255,228,230,0.55) var(--tw-gradient-from-position) !important; }
+/* gradient-to stops */
+.light-mode .to-cyan-900\/30      { --tw-gradient-to: rgba(207,250,254,0.55) var(--tw-gradient-to-position) !important; }
+.light-mode .to-teal-900\/30      { --tw-gradient-to: rgba(204,251,241,0.55) var(--tw-gradient-to-position) !important; }
+.light-mode .to-purple-900\/30    { --tw-gradient-to: rgba(243,232,255,0.55) var(--tw-gradient-to-position) !important; }
+.light-mode .to-yellow-900\/30    { --tw-gradient-to: rgba(254,249,195,0.55) var(--tw-gradient-to-position) !important; }
+.light-mode .to-pink-900\/30      { --tw-gradient-to: rgba(252,231,243,0.55) var(--tw-gradient-to-position) !important; }
+/* bg-white/5 row backgrounds → subtle dark tint on light bg */
+.light-mode .bg-white\/5          { background-color: rgba(0,0,0,0.05) !important; }
+/* missing bg-*-900/20 concept-box overrides */
+.light-mode .bg-sky-900\/20       { background-color: rgba(224,242,254,0.65) !important; }
+.light-mode .bg-amber-900\/20     { background-color: rgba(254,243,199,0.65) !important; }
+.light-mode .bg-rose-900\/20      { background-color: rgba(255,228,230,0.65) !important; }
+
+/* ── Kesebangunan/Kekongruenan latihan-mandiri: missing gradient + bg overrides ──
+   These pages use bg-gradient-to-br from-{color}-900/30 via-slate-900/80 to-{color2}-900/30.
+   The via-slate-900/80 is the dominant dark middle stop — must be overridden first.
+   Additionally, cyan and orange from/to stops and their concept-box bg-*-900/20 are missing. ── */
+
+/* via-slate-900/80 middle gradient stop → near-white in all light themes */
+.light-mode .via-slate-900\/80 {
+  --tw-gradient-via: rgba(248,250,252,0.80) var(--tw-gradient-via-position) !important;
+}
+
+/* gradient-from stops not yet covered */
+.light-mode .from-cyan-900\/30 {
+  --tw-gradient-from: rgba(207,250,254,0.55) var(--tw-gradient-from-position) !important;
+}
+.light-mode .from-orange-900\/30 {
+  --tw-gradient-from: rgba(255,237,213,0.55) var(--tw-gradient-from-position) !important;
+}
+
+/* gradient-to stops not yet covered */
+.light-mode .to-amber-900\/30 {
+  --tw-gradient-to: rgba(254,243,199,0.55) var(--tw-gradient-to-position) !important;
+}
+
+/* concept-box bg-*-900/20 missing from existing overrides */
+.light-mode .bg-cyan-900\/20    { background-color: rgba(207,250,254,0.70) !important; }
+.light-mode .bg-orange-900\/20  { background-color: rgba(255,237,213,0.70) !important; }
+.light-mode .bg-violet-900\/20  { background-color: rgba(237,233,254,0.70) !important; }
+.light-mode .bg-emerald-900\/20 { background-color: rgba(209,250,229,0.70) !important; }
+
+/* border-*-500/20 on light bg: make them a touch more visible */
+.light-mode .border-cyan-500\/20    { border-color: rgba(6,182,212,0.35) !important; }
+.light-mode .border-orange-500\/20  { border-color: rgba(249,115,22,0.35) !important; }
+.light-mode .border-violet-500\/20  { border-color: rgba(139,92,246,0.35) !important; }
+.light-mode .border-emerald-500\/20 { border-color: rgba(16,185,129,0.35) !important; }
+.light-mode .border-rose-500\/20    { border-color: rgba(244,63,94,0.35) !important; }
+
 /* ── Kesimpulan text colors used across Koordinat Kartesius sub-materi ── */
 .light-mode .text-rose-100\/90    { color: #9f1239 !important; }
 .theme-ocean .text-rose-100\/90   { color: #fecdd3 !important; }
@@ -4278,3 +4337,87 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
 .theme-ocean .theme-venn-box .venn-muted-text { fill: #7dd3fc !important; }
 .theme-ocean .theme-venn-box .venn-circle-a { fill: #164e63 !important; }
 .theme-ocean .theme-venn-box .venn-circle-b { fill: #1e3a8a !important; }
+
+/* ══════════════════════════════════════════════════════════════════
+   Latihan Mandiri Kesebangunan & Kekongruenan — light-theme fixes
+   Cards use hardcoded dark overlays; override them for bright themes.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* 1. Dark gradient card overlay → bright card background */
+.light-mode .lm-kkg-overlay,
+.theme-white .lm-kkg-overlay,
+.theme-forest .lm-kkg-overlay,
+.theme-sunset .lm-kkg-overlay {
+  background: var(--bg-card) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 2. Hint / summary box → semi-transparent white */
+.light-mode .lm-kkg-hint,
+.theme-white .lm-kkg-hint,
+.theme-forest .lm-kkg-hint,
+.theme-sunset .lm-kkg-hint {
+  background-color: rgba(255,255,255,0.75) !important;
+}
+
+/* 3. SVGs with inline dark background (background CSS property) */
+.light-mode .lm-kkg-svg,
+.theme-white .lm-kkg-svg,
+.theme-forest .lm-kkg-svg,
+.theme-sunset .lm-kkg-svg {
+  background: rgba(248,250,252,0.95) !important;
+}
+
+/* 4. SVGs where background is an inner <rect fill="#0b1733"> */
+.light-mode .lm-kkg-svg rect:first-child,
+.theme-white .lm-kkg-svg rect:first-child,
+.theme-forest .lm-kkg-svg rect:first-child,
+.theme-sunset .lm-kkg-svg rect:first-child {
+  fill: #f1f5f9 !important;
+}
+
+/* 5. Vertex circles with dark fill (#0b1733) → light on bright themes */
+.light-mode .lm-kkg-svg circle[fill="#0b1733"],
+.theme-white .lm-kkg-svg circle[fill="#0b1733"],
+.theme-forest .lm-kkg-svg circle[fill="#0b1733"],
+.theme-sunset .lm-kkg-svg circle[fill="#0b1733"] {
+  fill: #e0f2fe !important;
+}
+
+/* 6. Near-white and rgba-white text inside SVG diagrams → dark on light themes
+      Covers: vertex labels (#e2e8f0), side labels and ≅ symbols (rgba white) */
+.light-mode .lm-kkg-svg text[fill="#e2e8f0"],
+.light-mode .lm-kkg-svg text[fill="rgba(255,255,255,0.5)"],
+.light-mode .lm-kkg-svg text[fill="rgba(255,255,255,0.7)"],
+.light-mode .lm-kkg-svg text[fill="rgba(255,255,255,0.8)"],
+.light-mode .lm-kkg-svg text[fill="rgba(255,255,255,0.9)"],
+.theme-white .lm-kkg-svg text[fill="#e2e8f0"],
+.theme-white .lm-kkg-svg text[fill="rgba(255,255,255,0.5)"],
+.theme-white .lm-kkg-svg text[fill="rgba(255,255,255,0.7)"],
+.theme-white .lm-kkg-svg text[fill="rgba(255,255,255,0.8)"],
+.theme-white .lm-kkg-svg text[fill="rgba(255,255,255,0.9)"],
+.theme-forest .lm-kkg-svg text[fill="#e2e8f0"],
+.theme-forest .lm-kkg-svg text[fill="rgba(255,255,255,0.5)"],
+.theme-forest .lm-kkg-svg text[fill="rgba(255,255,255,0.7)"],
+.theme-forest .lm-kkg-svg text[fill="rgba(255,255,255,0.8)"],
+.theme-forest .lm-kkg-svg text[fill="rgba(255,255,255,0.9)"],
+.theme-sunset .lm-kkg-svg text[fill="#e2e8f0"],
+.theme-sunset .lm-kkg-svg text[fill="rgba(255,255,255,0.5)"],
+.theme-sunset .lm-kkg-svg text[fill="rgba(255,255,255,0.7)"],
+.theme-sunset .lm-kkg-svg text[fill="rgba(255,255,255,0.8)"],
+.theme-sunset .lm-kkg-svg text[fill="rgba(255,255,255,0.9)"] {
+  fill: rgba(15,23,42,0.82) !important;
+}
+
+/* 7. Axis/grid stroke lines that use near-white strokes → subtle dark on light themes */
+.light-mode .lm-kkg-svg line[stroke="rgba(255,255,255,0.15)"],
+.light-mode .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"],
+.theme-white .lm-kkg-svg line[stroke="rgba(255,255,255,0.15)"],
+.theme-white .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"],
+.theme-forest .lm-kkg-svg line[stroke="rgba(255,255,255,0.15)"],
+.theme-forest .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"],
+.theme-sunset .lm-kkg-svg line[stroke="rgba(255,255,255,0.15)"],
+.theme-sunset .lm-kkg-svg line[stroke="rgba(255,255,255,0.1)"] {
+  stroke: rgba(15,23,42,0.12) !important;
+}
