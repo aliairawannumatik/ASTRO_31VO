@@ -4,9 +4,11 @@ description: Key wiring details, port quirks, and coding patterns for the Numati
 ---
 
 ## Runtime wiring
-- Source of truth: `artifacts/numatik/src/`
-- Workflow: `artifacts/numatik: web` runs `cd .migration-backup && npm run dev`
-- Express on port 5000, Vite on 5001; workflow must be running before preview works.
+- Source of truth: **`artifacts/numatik/src/`** — only edit here.
+- Workflow `artifacts/numatik: web` runs `pnpm --filter @workspace/numatik run dev` from `artifacts/numatik/`; Vite binds on `PORT=5000` directly (no Express proxy).
+- First-time setup: `pnpm install` at workspace root (not `npm install` in `.migration-backup/`).
+- `.migration-backup/` is gitignored but its files are **already tracked** in git (committed before gitignore rule). Do not treat it as the active source; it is dead code.
+- `listArtifacts()` returns empty after GitHub import — artifact registration is not preserved. Workflow is manually configured via `configureWorkflow` to match `artifact.toml` intent.
 
 ## Theme system
 - Hook: `import { useTheme } from "@/contexts/ThemeContext"` → `const { isDark } = useTheme()`

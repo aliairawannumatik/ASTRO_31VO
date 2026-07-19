@@ -24,13 +24,13 @@ args = "artifacts/numatik: web"
 name = "artifacts/numatik: web"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd /home/runner/workspace/.migration-backup && npm run dev"
-waitForPort = 5000
-
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pnpm --filter @workspace/numatik run dev"
+waitForPort = 5000
 
 [agent]
 stack = "PNPM_WORKSPACE"

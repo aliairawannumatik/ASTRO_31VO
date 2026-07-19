@@ -4,15 +4,15 @@ Numatik (Numerasi Aktif dengan Teknologi Informasi dan Komunikasi) is an educati
 
 ## Run & Operate
 
-- **Frontend** — workflow `artifacts/numatik: web` (artifact-managed) starts the React/Vite app from `.migration-backup/` with `PORT=5000`; Express serves on port 5000, Vite dev server runs internally on port 5001, Express proxies non-`/server` requests to Vite. **Always use the artifact-managed workflow** — the manual `Numatik Web` workflow conflicts on port 5001 and bypasses preview routing.
-- **API server** — workflow `Numatik API Server` starts the separate Express 5 backend package (`PORT=8080 pnpm --filter @workspace/api-server run dev`); requires `DATABASE_URL`. Note: the live app currently talks to the Express server bundled inside `.migration-backup/server.ts` (port 3001), not yet this `@workspace/api-server` package — see Gotchas.
-- Registered `artifact.toml` files exist for `numatik`, `api-server`, and `mockup-sandbox` under `artifacts/*/.replit-artifact/`, but on this import `listArtifacts()`/`listWorkflows()` came back empty — the artifact registration wasn't preserved across the GitHub import, so plain `configureWorkflow` workflows (`Numatik Web`, `Numatik API Server`) were created instead. If artifact-managed workflows (`artifacts/numatik: web`, etc.) ever appear in `listWorkflows()`, prefer those and remove the manual ones.
+- **Frontend** — workflow `artifacts/numatik: web` runs `pnpm --filter @workspace/numatik run dev` directly from `artifacts/numatik/` with Vite on `PORT=5000`. **Source of truth: `artifacts/numatik/src/`** — this is the only location to edit; Vercel build also uses this package.
+- **API server** — workflow `Numatik API Server` starts the separate Express 5 backend package (`PORT=8080 pnpm --filter @workspace/api-server run dev`); requires `DATABASE_URL`.
+- `artifact.toml` files exist under `artifacts/*/.replit-artifact/` but artifact registration is not preserved across GitHub imports — `listArtifacts()` returns empty. The workflow is manually configured via `configureWorkflow` to match what `artifact.toml` specifies.
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string (needed for backend only)
-- First-time setup after import: run `pnpm install` at the repo root (workspace packages) **and** `npm install` inside `.migration-backup/` separately — `.migration-backup` is a plain npm project with its own `node_modules`, not a pnpm workspace member, and its `node_modules` isn't committed.
+- First-time setup after import: run `pnpm install` at the repo root — this installs all workspace packages including `artifacts/numatik`.
 
 ## Stack
 
@@ -41,8 +41,8 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-- The live Numatik frontend calls its own bundled Express server (`.migration-backup/server.ts`, port 3001) for `/api/chat`, not the `@workspace/api-server` workspace package. The two are separate backends; reconcile before assuming one API surface.
-- The AI tutor chat endpoint (`/api/chat` in `.migration-backup/server.ts`) needs `GROQ_API_KEY`. Without it the endpoint returns a friendly 503 but the rest of the app works fine — this secret has not been set yet.
+- `.migration-backup/` is git-ignored but its files are **already tracked** in git (committed before the `.gitignore` rule was added). Any changes to component files must be made in `artifacts/numatik/src/` only — `.migration-backup/` is no longer the active source.
+- The AI tutor `/api/chat` endpoint (originally in `.migration-backup/server.ts`) is not wired in the current `artifacts/numatik` setup. Needs `GROQ_API_KEY` and backend wiring if revived.
 
 ## Pointers
 
