@@ -614,18 +614,25 @@ const NetGallery = ({ lang }: { lang: string }) => {
 /* ─────────────────────────────────────────────────────────────
    UNSUR KUBUS — ANIMATED SVGs
 ───────────────────────────────────────────────────────────── */
-const RusukAnimSVG = ({ lang }: { lang: string }) => (
+const RusukAnimSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
+  const fA = isDark ? "rgba(30,41,59,0.6)" : "rgba(241,245,249,0.85)";
+  const fB = isDark ? "rgba(30,41,59,0.8)" : "rgba(226,232,240,0.9)";
+  const ws = isDark ? "#334155" : "#94a3b8";
+  const vFill = isDark ? "#e0f2fe" : "#0ea5e9";
+  const lbl = isDark ? "#f8fafc" : "#1e293b";
+  return (
   <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2"
     aria-label={lang==="en" ? "Animated cube edges" : lang==="ja" ? "立方体の辺アニメーション" : "Rusuk kubus beranimasi"}>
     <defs>
       <style>{`@keyframes rusukGlow{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 5px #22d3ee);}50%{stroke-opacity:0.25;filter:drop-shadow(0 0 0 #22d3ee);}}.rusuk-a{animation:rusukGlow 1.4s ease-in-out infinite;}`}</style>
     </defs>
-    <polygon points="80,30 200,30 200,130 80,130" fill="rgba(30,41,59,0.6)" stroke="#334155" strokeWidth="1.5"/>
-    <polygon points="40,60 160,60 160,160 40,160" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1.5"/>
-    <line x1="40" y1="60" x2="80" y2="30" stroke="#334155" strokeWidth="1.5"/>
-    <line x1="160" y1="60" x2="200" y2="30" stroke="#334155" strokeWidth="1.5"/>
-    <line x1="40" y1="160" x2="80" y2="130" stroke="#334155" strokeWidth="1.5"/>
-    <line x1="160" y1="160" x2="200" y2="130" stroke="#334155" strokeWidth="1.5"/>
+    <polygon points="80,30 200,30 200,130 80,130" fill={fA} stroke={ws} strokeWidth="1.5"/>
+    <polygon points="40,60 160,60 160,160 40,160" fill={fB} stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="60" x2="80" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="60" x2="200" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="160" x2="80" y2="130" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="160" x2="200" y2="130" stroke={ws} strokeWidth="1.5"/>
     <line x1="40" y1="60" x2="160" y2="60" stroke="#22d3ee" strokeWidth="3.5" className="rusuk-a"/>
     <line x1="160" y1="60" x2="160" y2="160" stroke="#22d3ee" strokeWidth="3.5" className="rusuk-a"/>
     <line x1="40" y1="160" x2="160" y2="160" stroke="#22d3ee" strokeWidth="3.5" className="rusuk-a"/>
@@ -641,22 +648,27 @@ const RusukAnimSVG = ({ lang }: { lang: string }) => (
     {[
       [40,60,"E",-14,-4],[160,60,"F",7,-4],[160,160,"B",7,13],[40,160,"A",-14,13],
       [80,30,"H",-4,-8],[200,30,"G",7,-4],[200,130,"C",7,7],[80,130,"D",-16,7],
-    ].map(([x,y,lbl,dx,dy]) => (
-      <g key={lbl}>
-        <circle cx={x as number} cy={y as number} r="4" fill="#e0f2fe" stroke="#22d3ee" strokeWidth="1.5"/>
-        <text x={(x as number)+(dx as number)} y={(y as number)+(dy as number)} fill="#f8fafc" fontSize="11" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+    ].map(([x,y,l,dx,dy]) => (
+      <g key={l}>
+        <circle cx={x as number} cy={y as number} r="4" fill={vFill} stroke="#22d3ee" strokeWidth="1.5"/>
+        <text x={(x as number)+(dx as number)} y={(y as number)+(dy as number)} fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">{l}</text>
       </g>
     ))}
-    <text x="88" y="184" fill="#e0f2fe" fontSize="11" fontFamily="monospace" fontWeight="bold">Cube ABCD.EFGH</text>
+    <text x="88" y="184" fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">Cube ABCD.EFGH</text>
     <text x="98" y="46" fill="#22d3ee" fontSize="10" fontFamily="monospace">s</text>
-    <text x="210" y="175" fill="#ffffff" fontSize="10" fontFamily="monospace">
+    <text x="210" y="175" fill={lbl} fontSize="10" fontFamily="monospace">
       {lang==="en" ? "12 edges" : lang==="ja" ? "12 辺" : "12 rusuk"}
     </text>
     <text x="210" y="188" fill="#22d3ee" fontSize="10" fontFamily="monospace">= s</text>
   </svg>
-);
+  );
+};
 
-const SisiAnimSVG = ({ lang }: { lang: string }) => (
+const SisiAnimSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
+  const ws = isDark ? "#ffffff" : "#475569";
+  const lbl = isDark ? "#ffffff" : "#0f172a";
+  return (
   <svg viewBox="0 0 280 210" className="w-full max-w-xs mx-auto my-2"
     aria-label={lang==="en" ? "Animated cube faces" : lang==="ja" ? "立方体の面アニメーション" : "Sisi kubus beranimasi"}>
     <defs>
@@ -668,38 +680,42 @@ const SisiAnimSVG = ({ lang }: { lang: string }) => (
     <polygon points="40,60 80,30 80,130 40,160" fill="#22c55e" className="sisi-b" fillOpacity="0.5"/>
     <polygon points="40,160 80,130 200,130 160,160" fill="#ef4444" className="sisi-a"/>
     <polygon points="160,60 200,30 200,130 160,160" fill="#f97316" className="sisi-c" fillOpacity="0.5"/>
-    <polygon points="40,60 160,60 160,160 40,160" fill="none" stroke="#ffffff" strokeWidth="1.5"/>
-    <polygon points="80,30 200,30 200,130 80,130" fill="none" stroke="#ffffff" strokeWidth="1.5"/>
-    <line x1="40" y1="60" x2="80" y2="30" stroke="#ffffff" strokeWidth="1.5"/>
-    <line x1="160" y1="60" x2="200" y2="30" stroke="#ffffff" strokeWidth="1.5"/>
-    <line x1="40" y1="160" x2="80" y2="130" stroke="#ffffff" strokeWidth="1.5"/>
-    <line x1="160" y1="160" x2="200" y2="130" stroke="#ffffff" strokeWidth="1.5"/>
+    <polygon points="40,60 160,60 160,160 40,160" fill="none" stroke={ws} strokeWidth="1.5"/>
+    <polygon points="80,30 200,30 200,130 80,130" fill="none" stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="60" x2="80" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="60" x2="200" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="160" x2="80" y2="130" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="160" x2="200" y2="130" stroke={ws} strokeWidth="1.5"/>
     {([[40,160],[160,160],[200,130],[80,130],[40,60],[160,60],[200,30],[80,30]] as [number,number][]).map(([x,y],i)=>(
       <circle key={i} cx={x} cy={y} r={3} fill="#facc15" opacity={0.9}/>
     ))}
-    <text x="25"  y="177" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="163" y="177" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="204" y="134" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="62"  y="127" fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">D</text>
-    <text x="25"  y="56"  fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">E</text>
-    <text x="163" y="56"  fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">F</text>
-    <text x="204" y="28"  fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">G</text>
-    <text x="65"  y="25"  fill="#ffffff" fontSize="12" fontFamily="monospace" fontWeight="bold">H</text>
+    <text x="25"  y="177" fill={lbl} fontSize="12" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="163" y="177" fill={lbl} fontSize="12" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="204" y="134" fill={lbl} fontSize="12" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="62"  y="127" fill={lbl} fontSize="12" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="25"  y="56"  fill={lbl} fontSize="12" fontFamily="monospace" fontWeight="bold">E</text>
+    <text x="163" y="56"  fill={lbl} fontSize="12" fontFamily="monospace" fontWeight="bold">F</text>
+    <text x="204" y="28"  fill={lbl} fontSize="12" fontFamily="monospace" fontWeight="bold">G</text>
+    <text x="65"  y="25"  fill={lbl} fontSize="12" fontFamily="monospace" fontWeight="bold">H</text>
   </svg>
-);
+  );
+};
 
-const TitikSudutAnimSVG = ({ lang }: { lang: string }) => (
+const TitikSudutAnimSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
+  const ws = isDark ? "#334155" : "#94a3b8";
+  return (
   <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2"
     aria-label={lang==="en" ? "Animated cube vertices" : lang==="ja" ? "立方体の頂点アニメーション" : "Titik sudut kubus beranimasi"}>
     <defs>
       <style>{`@keyframes dotPulse{0%,100%{r:6;opacity:1;filter:drop-shadow(0 0 6px #facc15);}50%{r:3;opacity:0.3;filter:drop-shadow(0 0 0 #facc15);}}.dot-a{animation:dotPulse 1.2s ease-in-out infinite;}`}</style>
     </defs>
-    <polygon points="40,60 160,60 160,160 40,160" fill="none" stroke="#334155" strokeWidth="1.5"/>
-    <polygon points="80,30 200,30 200,130 80,130" fill="none" stroke="#334155" strokeWidth="1.5"/>
-    <line x1="40" y1="60" x2="80" y2="30" stroke="#334155" strokeWidth="1.5"/>
-    <line x1="160" y1="60" x2="200" y2="30" stroke="#334155" strokeWidth="1.5"/>
-    <line x1="40" y1="160" x2="80" y2="130" stroke="#334155" strokeWidth="1.5"/>
-    <line x1="160" y1="160" x2="200" y2="130" stroke="#334155" strokeWidth="1.5"/>
+    <polygon points="40,60 160,60 160,160 40,160" fill="none" stroke={ws} strokeWidth="1.5"/>
+    <polygon points="80,30 200,30 200,130 80,130" fill="none" stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="60" x2="80" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="60" x2="200" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="160" x2="80" y2="130" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="160" x2="200" y2="130" stroke={ws} strokeWidth="1.5"/>
     {[[40,60],[160,60],[40,160],[160,160],[80,30],[200,30],[80,130],[200,130]].map(([x,y],i)=>(
       <circle key={i} cx={x} cy={y} fill="#facc15" className="dot-a" style={{animationDelay:`${i*0.15}s`}} r={6}/>
     ))}
@@ -715,20 +731,26 @@ const TitikSudutAnimSVG = ({ lang }: { lang: string }) => (
       {lang==="en" ? "8 vertices" : lang==="ja" ? "8 頂点" : "8 titik sudut"}
     </text>
   </svg>
-);
+  );
+};
 
-const DiagonalBidangSVG = ({ lang }: { lang: string }) => (
+const DiagonalBidangSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
+  const fA = isDark ? "rgba(30,41,59,0.7)" : "rgba(241,245,249,0.85)";
+  const fB = isDark ? "rgba(30,41,59,0.5)" : "rgba(226,232,240,0.7)";
+  const ws = isDark ? "#475569" : "#94a3b8";
+  return (
   <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2"
     aria-label={lang==="en" ? "Cube face diagonal" : lang==="ja" ? "立方体の面対角線" : "Diagonal bidang kubus"}>
     <defs>
       <style>{`@keyframes diagBidang{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 6px #4ade80);}50%{stroke-opacity:0.2;filter:drop-shadow(0 0 0 #4ade80);}}.db-a{animation:diagBidang 1.5s ease-in-out infinite;}`}</style>
     </defs>
-    <polygon points="40,60 160,60 160,160 40,160" fill="rgba(30,41,59,0.7)" stroke="#475569" strokeWidth="1.5"/>
-    <polygon points="80,30 200,30 200,130 80,130" fill="rgba(30,41,59,0.5)" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="40" y1="60" x2="80" y2="30" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="160" y1="60" x2="200" y2="30" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="40" y1="160" x2="80" y2="130" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="160" y1="160" x2="200" y2="130" stroke="#475569" strokeWidth="1.5"/>
+    <polygon points="40,60 160,60 160,160 40,160" fill={fA} stroke={ws} strokeWidth="1.5"/>
+    <polygon points="80,30 200,30 200,130 80,130" fill={fB} stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="60" x2="80" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="60" x2="200" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="160" x2="80" y2="130" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="160" x2="200" y2="130" stroke={ws} strokeWidth="1.5"/>
     <line x1="40" y1="60" x2="160" y2="160" stroke="#4ade80" strokeWidth="2.5" strokeDasharray="6,3" className="db-a"/>
     <line x1="80" y1="30" x2="200" y2="130" stroke="#4ade80" strokeWidth="2.5" strokeDasharray="6,3" className="db-a" style={{animationDelay:"0.6s"}}/>
     <circle cx="40" cy="60" r="4" fill="#4ade80"/>
@@ -739,7 +761,8 @@ const DiagonalBidangSVG = ({ lang }: { lang: string }) => (
     </text>
     <text x="182" y="188" fill="#4ade80" fontSize="10" fontFamily="monospace">s√2</text>
   </svg>
-);
+  );
+};
 
 const AllDiagonalBidangSVG = ({ lang }: { lang: string }) => {
   const { isDark } = useTheme();
@@ -787,12 +810,12 @@ const AllDiagonalBidangSVG = ({ lang }: { lang: string }) => {
           <div key={d.key} className={isDark ? "bg-slate-900/55 border border-slate-700/70 rounded-lg p-3 space-y-2" : "bg-white border border-gray-200 rounded-lg p-3 space-y-2"}>
             <svg viewBox="0 0 240 190" className="w-full mx-auto" aria-label={`${lang==="en"?"Face diagonal":"面対角線"} ${d.key}`}>
               <defs><style>{`@keyframes diagBidangGlow{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
-              <polygon points="40,55 150,55 150,145 40,145" fill="rgba(20,30,50,0.76)" stroke="#475569" strokeWidth="1.4"/>
-              <polygon points="75,28 185,28 185,118 75,118" fill="rgba(20,30,50,0.44)" stroke="#475569" strokeWidth="1.4"/>
-              <line x1="40" y1="55" x2="75" y2="28" stroke="#475569" strokeWidth="1.4"/>
-              <line x1="150" y1="55" x2="185" y2="28" stroke="#475569" strokeWidth="1.4"/>
-              <line x1="40" y1="145" x2="75" y2="118" stroke="#475569" strokeWidth="1.4"/>
-              <line x1="150" y1="145" x2="185" y2="118" stroke="#475569" strokeWidth="1.4"/>
+              <polygon points="40,55 150,55 150,145 40,145" fill={isDark?"rgba(20,30,50,0.76)":"rgba(241,245,249,0.85)"} stroke={isDark?"#475569":"#94a3b8"} strokeWidth="1.4"/>
+              <polygon points="75,28 185,28 185,118 75,118" fill={isDark?"rgba(20,30,50,0.44)":"rgba(226,232,240,0.65)"} stroke={isDark?"#475569":"#94a3b8"} strokeWidth="1.4"/>
+              <line x1="40" y1="55" x2="75" y2="28" stroke={isDark?"#475569":"#94a3b8"} strokeWidth="1.4"/>
+              <line x1="150" y1="55" x2="185" y2="28" stroke={isDark?"#475569":"#94a3b8"} strokeWidth="1.4"/>
+              <line x1="40" y1="145" x2="75" y2="118" stroke={isDark?"#475569":"#94a3b8"} strokeWidth="1.4"/>
+              <line x1="150" y1="145" x2="185" y2="118" stroke={isDark?"#475569":"#94a3b8"} strokeWidth="1.4"/>
               <line
                 x1={d.x1===160?150:d.x1===200?185:d.x1===80?75:d.x1}
                 y1={d.y1===160?145:d.y1===60?55:d.y1===130?118:d.y1}
@@ -806,8 +829,8 @@ const AllDiagonalBidangSVG = ({ lang }: { lang: string }) => {
                 const sy = y===160?145:y===60?55:y===130?118:y;
                 return (
                   <g key={lbl}>
-                    <circle cx={sx} cy={sy} r="3.2" fill="#e2e8f0"/>
-                    <text x={sx+dx} y={sy+dy} fill="#f8fafc" fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+                    <circle cx={sx} cy={sy} r="3.2" fill={isDark?"#e2e8f0":"#64748b"}/>
+                    <text x={sx+dx} y={sy+dy} fill={isDark?"#f8fafc":"#1e293b"} fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
                   </g>
                 );
               })}
@@ -824,18 +847,23 @@ const AllDiagonalBidangSVG = ({ lang }: { lang: string }) => {
   );
 };
 
-const DiagonalRuangSVG = ({ lang }: { lang: string }) => (
+const DiagonalRuangSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
+  const fA = isDark ? "rgba(30,41,59,0.7)" : "rgba(241,245,249,0.85)";
+  const fB = isDark ? "rgba(30,41,59,0.5)" : "rgba(226,232,240,0.7)";
+  const ws = isDark ? "#475569" : "#94a3b8";
+  return (
   <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2"
     aria-label={lang==="en" ? "Cube space diagonal" : lang==="ja" ? "立方体の空間対角線" : "Diagonal ruang kubus"}>
     <defs>
       <style>{`@keyframes diagRuang{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 8px #f87171);}50%{stroke-opacity:0.15;filter:drop-shadow(0 0 0 #f87171);}}.dr-a{animation:diagRuang 1.4s ease-in-out infinite;}`}</style>
     </defs>
-    <polygon points="40,60 160,60 160,160 40,160" fill="rgba(30,41,59,0.7)" stroke="#475569" strokeWidth="1.5"/>
-    <polygon points="80,30 200,30 200,130 80,130" fill="rgba(30,41,59,0.5)" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="40" y1="60" x2="80" y2="30" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="160" y1="60" x2="200" y2="30" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="40" y1="160" x2="80" y2="130" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="160" y1="160" x2="200" y2="130" stroke="#475569" strokeWidth="1.5"/>
+    <polygon points="40,60 160,60 160,160 40,160" fill={fA} stroke={ws} strokeWidth="1.5"/>
+    <polygon points="80,30 200,30 200,130 80,130" fill={fB} stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="60" x2="80" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="60" x2="200" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="160" x2="80" y2="130" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="160" x2="200" y2="130" stroke={ws} strokeWidth="1.5"/>
     <line x1="40" y1="60" x2="200" y2="130" stroke="#f87171" strokeWidth="3" className="dr-a"/>
     <line x1="160" y1="60" x2="80" y2="130" stroke="#f87171" strokeWidth="3" className="dr-a" style={{animationDelay:"0.7s"}}/>
     <circle cx="40" cy="60" r="5" fill="#f87171"/>
@@ -846,9 +874,11 @@ const DiagonalRuangSVG = ({ lang }: { lang: string }) => (
     </text>
     <text x="182" y="188" fill="#f87171" fontSize="10" fontFamily="monospace">s√3</text>
   </svg>
-);
+  );
+};
 
 const AllDiagonalRuangSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const diags = [
     { x1:20,y1:195,x2:250,y2:10, color:"#f44336", key:"AG", desc:"A → G" },
     { x1:195,y1:195,x2:75,y2:10, color:"#4caf50", key:"BH", desc:"B → H" },
@@ -860,17 +890,23 @@ const AllDiagonalRuangSVG = ({ lang }: { lang: string }) => {
     [75,10,"H",-5,-6],[250,10,"G",5,-6],[250,153,"C",6,5],[75,153,"D",-16,5],
   ];
   const legendTitle = lang==="en" ? "Key (4 space diagonals):" : lang==="ja" ? "凡例（4本の空間対角線）:" : "Keterangan (4 diagonal ruang):";
+  const fA = isDark ? "rgba(20,30,50,0.75)" : "rgba(241,245,249,0.85)";
+  const fB = isDark ? "rgba(20,30,50,0.4)"  : "rgba(226,232,240,0.65)";
+  const ws  = isDark ? "#334155" : "#94a3b8";
+  const vCircle = isDark ? "#94a3b8" : "#64748b";
+  const vLabel  = isDark ? "#f1f5f9" : "#1e293b";
+  const lgText  = isDark ? "#94a3b8" : "#475569";
 
   return (
     <svg viewBox="0 0 278 255" className="w-full max-w-sm mx-auto my-2"
       aria-label={lang==="en" ? "4 cube space diagonals" : lang==="ja" ? "立方体の4本の空間対角線" : "4 diagonal ruang kubus"}>
       <defs><style>{`@keyframes drGlow{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
-      <polygon points="20,52 195,52 195,195 20,195" fill="rgba(20,30,50,0.75)" stroke="#334155" strokeWidth="1.8"/>
-      <polygon points="75,10 250,10 250,153 75,153" fill="rgba(20,30,50,0.4)" stroke="#334155" strokeWidth="1.8"/>
-      <line x1="20" y1="52" x2="75" y2="10" stroke="#334155" strokeWidth="1.8"/>
-      <line x1="195" y1="52" x2="250" y2="10" stroke="#334155" strokeWidth="1.8"/>
-      <line x1="20" y1="195" x2="75" y2="153" stroke="#334155" strokeWidth="1.8"/>
-      <line x1="195" y1="195" x2="250" y2="153" stroke="#334155" strokeWidth="1.8"/>
+      <polygon points="20,52 195,52 195,195 20,195" fill={fA} stroke={ws} strokeWidth="1.8"/>
+      <polygon points="75,10 250,10 250,153 75,153" fill={fB} stroke={ws} strokeWidth="1.8"/>
+      <line x1="20" y1="52" x2="75" y2="10" stroke={ws} strokeWidth="1.8"/>
+      <line x1="195" y1="52" x2="250" y2="10" stroke={ws} strokeWidth="1.8"/>
+      <line x1="20" y1="195" x2="75" y2="153" stroke={ws} strokeWidth="1.8"/>
+      <line x1="195" y1="195" x2="250" y2="153" stroke={ws} strokeWidth="1.8"/>
       {diags.map((d,i)=>(
         <line key={i} x1={d.x1} y1={d.y1} x2={d.x2} y2={d.y2}
           stroke={d.color} strokeWidth="3.5" strokeLinecap="round"
@@ -879,11 +915,11 @@ const AllDiagonalRuangSVG = ({ lang }: { lang: string }) => {
       ))}
       {verts.map(([x,y,lbl,dx,dy],i)=>(
         <g key={i}>
-          <circle cx={x} cy={y} r="4" fill="#94a3b8"/>
-          <text x={x+dx} y={y+dy} fill="#f1f5f9" fontSize="11" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+          <circle cx={x} cy={y} r="4" fill={vCircle}/>
+          <text x={x+dx} y={y+dy} fill={vLabel} fontSize="11" fontFamily="monospace" fontWeight="bold">{lbl}</text>
         </g>
       ))}
-      <text x="10" y="215" fill="#94a3b8" fontSize="9" fontFamily="monospace">{legendTitle}</text>
+      <text x="10" y="215" fill={lgText} fontSize="9" fontFamily="monospace">{legendTitle}</text>
       {diags.map((d,i)=>{
         const col = i % 2; const row = Math.floor(i/2);
         const x = 14 + col*140; const y = 228 + row*20;
@@ -900,18 +936,23 @@ const AllDiagonalRuangSVG = ({ lang }: { lang: string }) => {
   );
 };
 
-const BidangDiagonalSVG = ({ lang }: { lang: string }) => (
+const BidangDiagonalSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
+  const fA = isDark ? "rgba(30,41,59,0.7)" : "rgba(241,245,249,0.85)";
+  const fB = isDark ? "rgba(30,41,59,0.5)" : "rgba(226,232,240,0.7)";
+  const ws = isDark ? "#475569" : "#94a3b8";
+  return (
   <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto my-2"
     aria-label={lang==="en" ? "Cube diagonal plane" : lang==="ja" ? "立方体の対角面" : "Bidang diagonal kubus"}>
     <defs>
       <style>{`@keyframes bdGlow{0%,100%{fill-opacity:0.55;filter:drop-shadow(0 0 5px #a78bfa);}50%{fill-opacity:0.1;filter:drop-shadow(0 0 0 #a78bfa);}}.bd-a{animation:bdGlow 1.6s ease-in-out infinite;}`}</style>
     </defs>
-    <polygon points="40,60 160,60 160,160 40,160" fill="rgba(30,41,59,0.7)" stroke="#475569" strokeWidth="1.5"/>
-    <polygon points="80,30 200,30 200,130 80,130" fill="rgba(30,41,59,0.5)" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="40" y1="60" x2="80" y2="30" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="160" y1="60" x2="200" y2="30" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="40" y1="160" x2="80" y2="130" stroke="#475569" strokeWidth="1.5"/>
-    <line x1="160" y1="160" x2="200" y2="130" stroke="#475569" strokeWidth="1.5"/>
+    <polygon points="40,60 160,60 160,160 40,160" fill={fA} stroke={ws} strokeWidth="1.5"/>
+    <polygon points="80,30 200,30 200,130 80,130" fill={fB} stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="60" x2="80" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="60" x2="200" y2="30" stroke={ws} strokeWidth="1.5"/>
+    <line x1="40" y1="160" x2="80" y2="130" stroke={ws} strokeWidth="1.5"/>
+    <line x1="160" y1="160" x2="200" y2="130" stroke={ws} strokeWidth="1.5"/>
     <polygon points="40,60 200,30 200,130 40,160" fill="#a78bfa" className="bd-a"/>
     <polygon points="40,60 200,30 200,130 40,160" fill="none" stroke="#a78bfa" strokeWidth="2"/>
     <text x="95" y="105" fill="#a78bfa" fontSize="11" fontFamily="monospace" fontWeight="bold">EACG</text>
@@ -922,7 +963,8 @@ const BidangDiagonalSVG = ({ lang }: { lang: string }) => (
       {lang==="en" ? "diagonal" : lang==="ja" ? "" : "diagonal"}
     </text>
   </svg>
-);
+  );
+};
 
 type BidangDiagonalVariant = { title: string; points: string; color: string; label: string; note: string; };
 
@@ -950,12 +992,12 @@ const BidangDiagonalVariantCube = ({ variant, idx=0 }: { variant: BidangDiagonal
   <div className={isDark ? "rounded-lg border border-slate-700/70 bg-slate-900/55 p-3 space-y-2" : "rounded-lg border border-gray-200 bg-white p-3 space-y-2"}>
     <svg viewBox="0 0 240 190" className="w-full mx-auto" aria-label={`Diagonal plane ${variant.label}`}>
       <defs><style>{`@keyframes bdPulse{0%,100%{fill-opacity:0.52;stroke-opacity:1;}50%{fill-opacity:0.08;stroke-opacity:0.25;}}.bd-pulse{animation:bdPulse 2s ease-in-out infinite;}`}</style></defs>
-      <polygon points="40,55 150,55 150,145 40,145" fill="rgba(30,41,59,0.72)" stroke="#64748b" strokeWidth="1.4"/>
-      <polygon points="75,28 185,28 185,118 75,118" fill="rgba(30,41,59,0.45)" stroke="#64748b" strokeWidth="1.4"/>
-      <line x1="40" y1="55" x2="75" y2="28" stroke="#64748b" strokeWidth="1.4"/>
-      <line x1="150" y1="55" x2="185" y2="28" stroke="#64748b" strokeWidth="1.4"/>
-      <line x1="40" y1="145" x2="75" y2="118" stroke="#64748b" strokeWidth="1.4"/>
-      <line x1="150" y1="145" x2="185" y2="118" stroke="#64748b" strokeWidth="1.4"/>
+      <polygon points="40,55 150,55 150,145 40,145" fill={isDark?"rgba(30,41,59,0.72)":"rgba(241,245,249,0.85)"} stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="1.4"/>
+      <polygon points="75,28 185,28 185,118 75,118" fill={isDark?"rgba(30,41,59,0.45)":"rgba(226,232,240,0.65)"} stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="1.4"/>
+      <line x1="40" y1="55" x2="75" y2="28" stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="1.4"/>
+      <line x1="150" y1="55" x2="185" y2="28" stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="1.4"/>
+      <line x1="40" y1="145" x2="75" y2="118" stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="1.4"/>
+      <line x1="150" y1="145" x2="185" y2="118" stroke={isDark?"#64748b":"#94a3b8"} strokeWidth="1.4"/>
       <polygon
         points={variant.points.replaceAll("160","150").replaceAll("200","185").replaceAll("80","75").replaceAll("60","55").replaceAll("130","118")}
         fill={variant.color} stroke={variant.color} strokeWidth="2.4" strokeLinejoin="round"
@@ -964,13 +1006,13 @@ const BidangDiagonalVariantCube = ({ variant, idx=0 }: { variant: BidangDiagonal
         [75,28,"H",-3,-8],[185,28,"G",5,-5],[185,118,"C",6,4],[75,118,"D",-14,5]
       ].map(([x,y,lbl,dx,dy]) => (
         <g key={lbl}>
-          <circle cx={x as number} cy={y as number} r="3" fill="#e2e8f0"/>
-          <text x={(x as number)+(dx as number)} y={(y as number)+(dy as number)} fill="#f8fafc" fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
+          <circle cx={x as number} cy={y as number} r="3" fill={isDark?"#e2e8f0":"#64748b"}/>
+          <text x={(x as number)+(dx as number)} y={(y as number)+(dy as number)} fill={isDark?"#f8fafc":"#1e293b"} fontSize="9" fontFamily="monospace" fontWeight="bold">{lbl}</text>
         </g>
       ))}
       <text x="112" y="90" fill={variant.color} fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{variant.label}</text>
       <text x="95" y="178" fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity="0.75">ABCD</text>
-      <text x="130" y="16" fill="#94a3b8" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity="0.75">EFGH</text>
+      <text x="130" y="16" fill={isDark?"#94a3b8":"#475569"} fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity="0.75">EFGH</text>
     </svg>
     <div>
       <p className="text-xs font-semibold" style={{ color:variant.color }}>{variant.title}</p>
@@ -1038,7 +1080,9 @@ const LuasPermukaanSVG = ({ lang }: { lang: string }) => {
 /* ─────────────────────────────────────────────────────────────
    VOLUME SVG
 ───────────────────────────────────────────────────────────── */
-const VolumeSVG = ({ lang }: { lang: string }) => (
+const VolumeSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
+  return (
   <svg viewBox="0 0 300 230" className="w-full max-w-sm mx-auto my-2"
     aria-label={lang==="en" ? "Cube volume animation — glowing solid cube" : lang==="ja" ? "立方体の体積アニメーション" : "Animasi volume kubus — kubus utuh bersinar"}>
     <defs>
@@ -1070,10 +1114,11 @@ const VolumeSVG = ({ lang }: { lang: string }) => (
     <text x="148" y="220" fill="#fbbf24" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
     <text x="8" y="160" fill="#fbbf24" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
     <text x="258" y="66" fill="#fbbf24" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
-    <text x="150" y="224" fill="#e0e7ff" fontSize="14" fontFamily="monospace" fontWeight="bold"
+    <text x="150" y="224" fill={isDark?"#e0e7ff":"#1e1b4b"} fontSize="14" fontFamily="monospace" fontWeight="bold"
       textAnchor="middle" filter="url(#volBloom)" className="vol-lbl">V = s³</text>
   </svg>
-);
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    WATER FILL ANIMATION
@@ -1081,6 +1126,7 @@ const VolumeSVG = ({ lang }: { lang: string }) => (
 type V2k = [number, number];
 
 const WaterKubusAnimation = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [fill, setFill] = useState(0);
 
   useEffect(() => {
@@ -1124,12 +1170,12 @@ const WaterKubusAnimation = ({ lang }: { lang: string }) => {
     <svg viewBox="0 0 280 215" className="w-full max-w-sm mx-auto my-2"
       aria-label={lang==="en" ? "Cube filling with water animation" : lang==="ja" ? "立方体に水を注ぐアニメーション" : "Animasi kubus diisi air"}>
       <defs><filter id="wBloomK"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-      <line x1={BkL[0]} y1={BkL[1]} x2={BkTL[0]} y2={BkTL[1]} stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
-      <line x1={FL[0]} y1={FL[1]} x2={BkL[0]} y2={BkL[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-      <line x1={FTL[0]} y1={FTL[1]} x2={BkTL[0]} y2={BkTL[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-      <line x1={BkTL[0]} y1={BkTL[1]} x2={BkTR[0]} y2={BkTR[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-      <polygon points={pp(FR,BkR,BkTR,FTR)} fill="#0f172a" fillOpacity={0.22} stroke="#334155" strokeWidth="0.8"/>
-      <polygon points={pp(FL,FR,FTR,FTL)} fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+      <line x1={BkL[0]} y1={BkL[1]} x2={BkTL[0]} y2={BkTL[1]} stroke={isDark?"#334155":"#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
+      <line x1={FL[0]} y1={FL[1]} x2={BkL[0]} y2={BkL[1]} stroke={isDark?"#334155":"#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+      <line x1={FTL[0]} y1={FTL[1]} x2={BkTL[0]} y2={BkTL[1]} stroke={isDark?"#334155":"#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+      <line x1={BkTL[0]} y1={BkTL[1]} x2={BkTR[0]} y2={BkTR[1]} stroke={isDark?"#334155":"#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+      <polygon points={pp(FR,BkR,BkTR,FTR)} fill={isDark?"#0f172a":"rgba(226,232,240,0.4)"} fillOpacity={0.22} stroke={isDark?"#334155":"#94a3b8"} strokeWidth="0.8"/>
+      <polygon points={pp(FL,FR,FTR,FTL)} fill={isDark?"#0f172a":"rgba(226,232,240,0.3)"} fillOpacity={0.15} stroke={isDark?"#334155":"#94a3b8"} strokeWidth="0.8"/>
       {!isEmpty && (<>
         <polygon points={pp(FL,FR,BkR,BkL)} fill="#1e3a8a" fillOpacity={0.90}/>
         <polygon points={pp(FR,BkR,WBkR,WFR)} fill="#1d4ed8" fillOpacity={0.80}/>
@@ -1141,18 +1187,18 @@ const WaterKubusAnimation = ({ lang }: { lang: string }) => {
       </>)}
       <polygon points={pp(FL,FR,FTR,FTL)} fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"/>
       <polygon points={pp(FR,BkR,BkTR,FTR)} fill="none" stroke="#a5b4fc" strokeWidth="1.8" strokeLinejoin="round"/>
-      <polygon points={pp(FTL,FTR,BkTR,BkTL)} fill="#0f172a" fillOpacity={isFull?0.7:0.2} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
+      <polygon points={pp(FTL,FTR,BkTR,BkTL)} fill={isDark?"#0f172a":"rgba(226,232,240,0.5)"} fillOpacity={isFull?0.7:0.2} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
       <text x={(FL[0]+FR[0])/2} y={FL[1]+12} fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
       <text x={FL[0]-13} y={(FL[1]+FTL[1])/2+4} fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
       <line x1={FL[0]-7} y1={FL[1]} x2={FL[0]-7} y2={FTL[1]} stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" strokeOpacity={0.6}/>
       <text x={(FTR[0]+BkTR[0])/2+4} y={(FTR[1]+BkTR[1])/2-6} fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
       <text x={(FTL[0]+FTR[0])/2} y={FTL[1]-6} fill="#c4b5fd" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{topLabel}</text>
-      <rect x={barX} y={barY} width={barW} height={barH} fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+      <rect x={barX} y={barY} width={barW} height={barH} fill={isDark?"#0f172a":"#e2e8f0"} stroke={isDark?"#334155":"#94a3b8"} strokeWidth="1.2" rx="3"/>
       {!isEmpty && (<rect x={barX} y={barY+barH-filledH} width={barW} height={filledH} fill="#2563eb" fillOpacity={0.88} rx="3"/>)}
-      <text x={barX+barW/2} y={barY-5} fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
+      <text x={barX+barW/2} y={barY-5} fill={isDark?"#94a3b8":"#475569"} fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
       <text x={barX+barW/2} y={barY+barH+12} fill={isFull?"#4ade80":isEmpty?"#64748b":"#7dd3fc"} fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{pct}%</text>
       <text x="118" y="198" fill={isFull?"#4ade80":isEmpty?"#64748b":"#7dd3fc"} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomK)">{statusText}</text>
-      <text x="118" y="212" fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomK)">V = s³</text>
+      <text x="118" y="212" fill={isDark?"#e0e7ff":"#1e1b4b"} fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomK)">V = s³</text>
     </svg>
   );
 };
@@ -2264,20 +2310,20 @@ const KubusPage = () => {
                 </p>
                 <svg className="w-full" viewBox="0 0 100 108">
                   <defs><style>{`@keyframes ${anim}{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
-                  <polygon points="8,95 62,95 84,77 30,77" fill="#14532d22" stroke="#475569" strokeWidth="0.8"/>
-                  <polygon points="8,95 62,95 62,44 8,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
-                  <polygon points="62,95 84,77 84,26 62,44" fill="#0f172a" stroke="#475569" strokeWidth="0.8"/>
-                  <polygon points="8,44 62,44 84,26 30,26" fill="#1e293b" stroke="#475569" strokeWidth="0.8"/>
-                  <line x1="30" y1="77" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
-                  <line x1="30" y1="77" x2="84" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
-                  <line x1="8" y1="44" x2="30" y2="26" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
-                  <line x1="8" y1="95" x2="30" y2="77" stroke="#475569" strokeWidth="0.6" strokeDasharray="3,2"/>
+                  <polygon points="8,95 62,95 84,77 30,77" fill={isDark?"#14532d22":"rgba(241,245,249,0.6)"} stroke={isDark?"#475569":"#94a3b8"} strokeWidth="0.8"/>
+                  <polygon points="8,95 62,95 62,44 8,44" fill={isDark?"#0f172a":"rgba(241,245,249,0.85)"} stroke={isDark?"#475569":"#94a3b8"} strokeWidth="0.8"/>
+                  <polygon points="62,95 84,77 84,26 62,44" fill={isDark?"#0f172a":"rgba(241,245,249,0.85)"} stroke={isDark?"#475569":"#94a3b8"} strokeWidth="0.8"/>
+                  <polygon points="8,44 62,44 84,26 30,26" fill={isDark?"#1e293b":"rgba(226,232,240,0.7)"} stroke={isDark?"#475569":"#94a3b8"} strokeWidth="0.8"/>
+                  <line x1="30" y1="77" x2="30" y2="26" stroke={isDark?"#475569":"#94a3b8"} strokeWidth="0.6" strokeDasharray="3,2"/>
+                  <line x1="30" y1="77" x2="84" y2="77" stroke={isDark?"#475569":"#94a3b8"} strokeWidth="0.6" strokeDasharray="3,2"/>
+                  <line x1="8" y1="44" x2="30" y2="26" stroke={isDark?"#475569":"#94a3b8"} strokeWidth="0.6" strokeDasharray="3,2"/>
+                  <line x1="8" y1="95" x2="30" y2="77" stroke={isDark?"#475569":"#94a3b8"} strokeWidth="0.6" strokeDasharray="3,2"/>
                   {key==="AG" && <line x1="8" y1="95" x2="84" y2="26" stroke={color} strokeWidth="2.2" style={{filter:`drop-shadow(0 0 6px ${color})`,animation:`${anim} 1.5s ease-in-out infinite`}}/>}
                   {key==="BH" && <line x1="62" y1="95" x2="30" y2="26" stroke={color} strokeWidth="2.2" style={{filter:`drop-shadow(0 0 6px ${color})`,animation:`${anim} 1.5s ease-in-out infinite 0.37s`}}/>}
                   {key==="CE" && <line x1="84" y1="77" x2="8" y2="44" stroke={color} strokeWidth="2.2" style={{filter:`drop-shadow(0 0 6px ${color})`,animation:`${anim} 1.5s ease-in-out infinite 0.74s`}}/>}
                   {key==="DF" && <line x1="30" y1="77" x2="62" y2="44" stroke={color} strokeWidth="2.2" style={{filter:`drop-shadow(0 0 6px ${color})`,animation:`${anim} 1.5s ease-in-out infinite 1.11s`}}/>}
                   {[["A",8,95],["B",62,95],["C",84,77],["D",30,77],["E",8,44],["F",62,44],["G",84,26],["H",30,26]].map(([l,x,y])=>(
-                    <text key={l as string} x={(x as number)+2} y={(y as number)-3} fill={[key[0],key[1]].includes(l as string)?"#fbbf24":"#94a3b8"} fontSize="7" fontFamily="monospace" fontWeight="bold">{l}</text>
+                    <text key={l as string} x={(x as number)+2} y={(y as number)-3} fill={[key[0],key[1]].includes(l as string)?(isDark?"#fbbf24":"#b45309"):(isDark?"#94a3b8":"#475569")} fontSize="7" fontFamily="monospace" fontWeight="bold">{l}</text>
                   ))}
                 </svg>
               </div>
