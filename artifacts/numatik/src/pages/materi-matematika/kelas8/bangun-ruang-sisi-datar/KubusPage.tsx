@@ -1751,7 +1751,7 @@ const KubusPage = () => {
 
   const luasExamples: Ex[] = [
     {
-      level: easyLabel, color:"text-green-400", bg:"bg-green-950/30", border:"border-green-700/50", badgeBg:"bg-green-900/60",
+      level: easyLabel, color:"text-green-400", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100",
       question: (
         <div className="text-sm text-white/85 font-body space-y-1">
           {lang==="en" ? <>
@@ -1771,14 +1771,14 @@ const KubusPage = () => {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
             <BlockMath math="L = 6s^2 = 6 \times 8^2 = 6 \times 64 = 384 \text{ cm}^2" />
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
-            <p className="text-green-300 font-semibold">✅ {lang==="en"?"Answer":"答え"}: <InlineMath math="384 \text{ cm}^2" /></p>
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-3" : "bg-green-50 border border-green-300 rounded p-3"}>
+            <p className={isDark ? "text-green-300 font-semibold" : "text-green-700 font-semibold"}>✅ {lang==="en"?"Answer":"答え"}: <InlineMath math="384 \text{ cm}^2" /></p>
           </div>
         </div>
       ),
     },
     {
-      level: medLabel, color:"text-yellow-400", bg:"bg-yellow-950/30", border:"border-yellow-700/50", badgeBg:"bg-yellow-900/60",
+      level: medLabel, color:"text-yellow-400", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100",
       question: (
         <div className="text-sm text-white/85 font-body space-y-1">
           {lang==="en" ? <>
@@ -1814,7 +1814,7 @@ const KubusPage = () => {
       ),
     },
     {
-      level: hardLabel, color:"text-red-400", bg:"bg-red-950/30", border:"border-red-700/50", badgeBg:"bg-red-900/60",
+      level: hardLabel, color:"text-red-400", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100",
       question: (
         <div className="text-sm text-white/85 font-body space-y-1">
           {lang==="en" ? <>
@@ -1849,8 +1849,8 @@ const KubusPage = () => {
               ? <BlockMath math="\text{Biaya} = 1{,}25 \times 120.000 = Rp\,150.000" />
               : <BlockMath math="1{,}25 \times 120{,}000 = \$150{,}000" />}
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-            <p className="text-red-300 font-semibold">✅ {lang==="en"?"Answer:":lang==="ja"?"答え：":"Jawaban:"}</p>
+          <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
+            <p className={isDark ? "text-red-300 font-semibold" : "text-red-700 font-semibold"}>✅ {lang==="en"?"Answer:":lang==="ja"?"答え：":"Jawaban:"}</p>
             <p className="text-white/80">• {lang==="en"?"Edge = 50 cm = 0.5 m":lang==="ja"?"辺 = 50 cm = 0.5 m":"Rusuk akuarium = 50 cm = 0,5 m"}</p>
             <p className="text-white/80">• {lang==="en"?"Glass area = 1.25 m²":lang==="ja"?"ガラス面積 = 1.25 m²":"Luas kaca = 1,25 m²"}</p>
             <p className="text-white/80">• {lang==="en"?"Total cost = ":lang==="ja"?"合計費用 = ":"Total biaya = "}<strong className="text-yellow-300">{lang==="id"?"Rp 150.000":"$150,000"}</strong></p>
@@ -1862,7 +1862,7 @@ const KubusPage = () => {
 
   const volExamples: Ex[] = [
     {
-      level: easyLabel, color:"text-green-400", bg:"bg-green-950/30", border:"border-green-700/50", badgeBg:"bg-green-900/60",
+      level: easyLabel, color:"text-green-400", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100",
       question: (
         <div className="text-sm text-white/85 font-body">
           {lang==="en"
@@ -1877,14 +1877,14 @@ const KubusPage = () => {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
             <BlockMath math="V = s^3 = 2^3 = 8 \text{ cm}^3" />
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-            <p className="text-green-300 font-semibold text-xs">✅ {lang==="en"?"Volume":"体積" } = <InlineMath math="8 \text{ cm}^3" /></p>
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-2" : "bg-green-50 border border-green-300 rounded p-2"}>
+            <p className={isDark ? "text-green-300 font-semibold text-xs" : "text-green-700 font-semibold text-xs"}>✅ {lang==="en"?"Volume":"体積" } = <InlineMath math="8 \text{ cm}^3" /></p>
           </div>
         </div>
       ),
     },
     {
-      level: medLabel, color:"text-yellow-400", bg:"bg-yellow-950/30", border:"border-yellow-700/50", badgeBg:"bg-yellow-900/60",
+      level: medLabel, color:"text-yellow-400", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100",
       question: (
         <div className="text-sm text-white/85 font-body space-y-1">
           {lang==="en" ? <>
@@ -1908,14 +1908,14 @@ const KubusPage = () => {
             <BlockMath math="V_t = 1 \text{ m}^3 = 1{,}000 \text{ L}" />
             <BlockMath math="V_{75\%} = 75\% \times 1{,}000 = 750 \text{ L}" />
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
-            <p className="text-yellow-300 font-semibold text-xs">✅ {lang==="en"?"Volume of water = 750 L":lang==="ja"?"水の体積 = 750 L":"Volume air = 750 liter"}</p>
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-2" : "bg-yellow-50 border border-yellow-300 rounded p-2"}>
+            <p className={isDark ? "text-yellow-300 font-semibold text-xs" : "text-yellow-700 font-semibold text-xs"}>✅ {lang==="en"?"Volume of water = 750 L":lang==="ja"?"水の体積 = 750 L":"Volume air = 750 liter"}</p>
           </div>
         </div>
       ),
     },
     {
-      level: hardLabel, color:"text-red-400", bg:"bg-red-950/30", border:"border-red-700/50", badgeBg:"bg-red-900/60",
+      level: hardLabel, color:"text-red-400", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100",
       question: (
         <div className="text-sm text-white/85 font-body space-y-1">
           {lang==="en" ? <>
@@ -1938,8 +1938,8 @@ const KubusPage = () => {
             <BlockMath math="n = \frac{1{,}728}{8} = 216" />
             <BlockMath math="W = 216 \times 4 = 864 \text{ g}" />
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-            <p className="text-red-300 font-semibold">✅ {lang==="en"?"Answer:":lang==="ja"?"答え：":"Jawaban:"}</p>
+          <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
+            <p className={isDark ? "text-red-300 font-semibold" : "text-red-700 font-semibold"}>✅ {lang==="en"?"Answer:":lang==="ja"?"答え：":"Jawaban:"}</p>
             <p className="text-white/80">• {lang==="en"?"Small cubes =":lang==="ja"?"小立方体の数 =":"Banyak kubus kecil ="} <strong className="text-yellow-300">216</strong></p>
             <p className="text-white/80">• {lang==="en"?"Total weight =":lang==="ja"?"合計重量 =":"Total berat ="} <strong className="text-yellow-300">864 g</strong></p>
           </div>
@@ -1953,7 +1953,7 @@ const KubusPage = () => {
 
   const kerangkaExamples: Ex[] = [
     {
-      level: easyLabel, color:"text-green-400", bg:"bg-green-950/30", border:"border-green-700/50", badgeBg:"bg-green-900/60",
+      level: easyLabel, color:"text-green-400", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100",
       question: (
         <div className="text-sm text-white/85 font-body space-y-1">
           {lang==="en" ? <>
@@ -1976,14 +1976,14 @@ const KubusPage = () => {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
             <BlockMath math="K = 12 \times s = 12 \times 9 = 108 \text{ cm}" />
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
-            <p className="text-green-300 font-semibold">✅ {lang==="en"?"Wire length = ":lang==="ja"?"針金の長さ = ":"Panjang kawat = "}<InlineMath math="108 \text{ cm}" /></p>
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-3" : "bg-green-50 border border-green-300 rounded p-3"}>
+            <p className={isDark ? "text-green-300 font-semibold" : "text-green-700 font-semibold"}>✅ {lang==="en"?"Wire length = ":lang==="ja"?"針金の長さ = ":"Panjang kawat = "}<InlineMath math="108 \text{ cm}" /></p>
           </div>
         </div>
       ),
     },
     {
-      level: medLabel, color:"text-yellow-400", bg:"bg-yellow-950/30", border:"border-yellow-700/50", badgeBg:"bg-yellow-900/60",
+      level: medLabel, color:"text-yellow-400", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100",
       question: (
         <div className="text-sm text-white/85 font-body space-y-1">
           {lang==="en" ? <>
@@ -2021,7 +2021,7 @@ const KubusPage = () => {
       ),
     },
     {
-      level: hardLabel, color:"text-red-400", bg:"bg-red-950/30", border:"border-red-700/50", badgeBg:"bg-red-900/60",
+      level: hardLabel, color:"text-red-400", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100",
       question: (
         <div className="text-sm text-white/85 font-body space-y-1">
           {lang==="en" ? <>
