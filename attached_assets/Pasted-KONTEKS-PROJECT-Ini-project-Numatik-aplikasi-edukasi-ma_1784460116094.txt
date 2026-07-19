@@ -1,0 +1,45 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/). 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+Sudah diperbaiki sebelumnya dengan pola conditional isDark yang konsisten, 
+termasuk LimasPage.tsx, KubusPage.tsx, dan BalokPage.tsx di topik Bangun 
+Ruang Sisi Datar. Buka salah satu file ini sebagai REFERENSI pola warna 
+yang benar — jangan bikin skema warna baru.
+
+CATATAN PENTING — bagian yang paling sering terlewat di file-file 
+sebelumnya:
+"Answer result boxes" / kotak soal-jawaban berdasarkan level kesulitan 
+(Mudah/Sedang/Sulit) — biasanya berupa objek data (misal *Examples[0/1/2] 
+atau easy_props/med_props/hard_props) dengan properti bg, border, badgeBg 
+berwarna hijau/kuning/merah hardcoded TANPA isDark. PERHATIAN KHUSUS: 
+cek juga teks di dalam <strong> tag dan body text yang bersarang (nested) 
+di dalam kotak jawaban — ini sering terlewat di scan pertama (text-white/80, 
+text-yellow-300, text-red-400, dst).
+
+TUGAS: Di file src/pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/PrismaPage.tsx:
+
+1. Cari SECARA EKSPLISIT semua objek data contoh/soal untuk level 
+   Mudah/Sedang/Sulit.
+
+2. Perbaiki semua objek data ini dengan conditional isDark, ikuti pola 
+   persis seperti di BalokPage.tsx/KubusPage.tsx.
+
+3. Cari dan perbaiki semua "answer result box" teks, TERMASUK teks 
+   bersarang di dalam <strong> tag dan body text di dalam kotak jawaban.
+
+4. Lakukan SCAN ULANG KEDUA setelah edit pertama, khusus untuk elemen 
+   bersarang (nested spans/strong tags) yang mungkin terlewat.
+
+5. JANGAN sentuh bagian lain dulu (SVG diagram 3D, className umum 
+   lainnya) — dikerjakan di sesi terpisah.
+
+6. Verifikasi TypeScript check per-file (0 error).
+
+7. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya, sebutkan berapa banyak objek data dan teks yang 
+diperbaiki, dan konfirmasi sudah melakukan scan ulang kedua.
