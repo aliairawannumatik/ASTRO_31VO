@@ -47,6 +47,7 @@ const KK_EDGES: KubusEdgeSpec[] = [
 ];
 
 const InteractiveKerangkaKubus = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [bongkar, setBongkar] = useState(false);
   const [rotX, setRotX] = useState(-18);
   const [rotY, setRotY] = useState(28);
@@ -153,8 +154,8 @@ const InteractiveKerangkaKubus = ({ lang }: { lang: string }) => {
   const edgeLabel = lang === "en" ? "12 edges · all equal length (s)" : lang === "ja" ? "12辺 · すべて同じ長さ (s)" : "12 rusuk · semua sama panjang (s)";
 
   return (
-    <div ref={containerRef} className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
-      <p className="text-white/60 text-xs text-center font-body">{hint}</p>
+    <div ref={containerRef} className={isDark ? "bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4" : "bg-white/90 border border-gray-200 rounded-xl p-4 space-y-4"}>
+      <p className={isDark ? "text-white/60 text-xs text-center font-body" : "text-slate-600 text-xs text-center font-body"}>{hint}</p>
       <div className="relative mx-auto flex items-center justify-center select-none overflow-visible"
         style={{ width:"100%", height: bongkar ? Math.round(360*kScale) : Math.round(280*kScale),
           cursor: isDragging ? "grabbing" : "grab", touchAction:"none", transition:"height 0.6s ease" }}
@@ -178,13 +179,13 @@ const InteractiveKerangkaKubus = ({ lang }: { lang: string }) => {
           {bongkar ? btnAssemble : btnDisassemble}
         </button>
       </div>
-      <div className="bg-slate-800/60 border border-cyan-700/40 rounded p-2 text-center text-[11px] font-body">
+      <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-cyan-700/40 rounded p-2 text-center text-[11px] font-body`}>
         <div className="inline-flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-sm" style={{ background:KK_COLOR, boxShadow:`0 0 4px ${KK_COLOR}` }} />
           <span className="text-cyan-300 font-semibold">{edgeLabel}</span>
         </div>
       </div>
-      <div className="bg-slate-900/60 border border-slate-700 rounded-lg p-3 text-center">
+      <div className={isDark ? "bg-slate-900/60 border border-slate-700 rounded-lg p-3 text-center" : "bg-white/90 border border-gray-200 rounded-lg p-3 text-center"}>
         {bongkar ? (
           <BlockMath math={lang==="en" ? "K = \\underbrace{s + s + \\cdots + s}_{12 \\text{ edges}} = 12 \\times s"
             : lang==="ja" ? "K = \\underbrace{s + s + \\cdots + s}_{12 \\text{ 辺}} = 12 \\times s"
@@ -216,6 +217,7 @@ const FACE_TRANSFORMS: Record<FName, string> = {
 };
 
 const SimpleRotatableCube = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [rotX, setRotX] = useState(-22);
   const [rotY, setRotY] = useState(35);
   const [isDragging, setIsDragging] = useState(false);
@@ -282,10 +284,10 @@ const SimpleRotatableCube = ({ lang }: { lang: string }) => {
     : "Berputar otomatis · Drag untuk memutar sendiri";
 
   return (
-    <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl select-none"
+    <div className={isDark ? "bg-slate-900/70 border border-slate-700/50 rounded-xl select-none" : "bg-gray-100 border border-gray-200 rounded-xl select-none"}
       style={{ padding:"12px 0 8px", cursor: isDragging ? "grabbing" : "grab", touchAction:"none" }}
       onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
-      <p className="text-center text-white/40 font-body mb-1" style={{ fontSize:9 }}>{autoHint}</p>
+      <p className={`text-center font-body mb-1 ${isDark ? "text-white/40" : "text-slate-500"}`} style={{ fontSize:9 }}>{autoHint}</p>
       <div className="mx-auto flex items-center justify-center overflow-visible"
         style={{ width:CUBE_S, height:CUBE_S, margin:"0 auto", marginTop:28, marginBottom:28 }}>
         <div style={{ width:CUBE_S, height:CUBE_S, position:"relative", transformStyle:"preserve-3d",
@@ -361,6 +363,7 @@ const FacePanel = ({
 };
 
 const InteractiveCube3D = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [openFaces, setOpenFaces] = useState<Set<FName>>(new Set());
   const [seqStep, setSeqStep] = useState(-1);
   const [rotX, setRotX] = useState(-22);
@@ -463,8 +466,8 @@ const InteractiveCube3D = ({ lang }: { lang: string }) => {
   });
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
-      <p className="text-white/60 text-xs text-center font-body">{hint}</p>
+    <div className={isDark ? "bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4" : "bg-white/90 border border-gray-200 rounded-xl p-4 space-y-4"}>
+      <p className={isDark ? "text-white/60 text-xs text-center font-body" : "text-slate-600 text-xs text-center font-body"}>{hint}</p>
       <div className="relative mx-auto flex items-center justify-center select-none overflow-visible"
         style={{ width:"100%", height:360, cursor: isDragging ? "grabbing" : "grab", touchAction:"none" }}
         onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
@@ -543,11 +546,11 @@ const InteractiveCube3D = ({ lang }: { lang: string }) => {
         {ALL_FACES.map(f => (
           <div key={f} className="flex items-center gap-1">
             <div className="w-3 h-3 rounded-sm" style={{ background: FACE_COLORS[f] }} />
-            <span className="text-white/50 text-[10px] font-body">{FACE_LABELS[f]}{f==="back"?" ★":""}</span>
+            <span className={isDark ? "text-white/50 text-[10px] font-body" : "text-slate-500 text-[10px] font-body"}>{FACE_LABELS[f]}{f==="back"?" ★":""}</span>
           </div>
         ))}
       </div>
-      <p className="text-white/30 text-[9px] text-center font-body">{baseNote}</p>
+      <p className={isDark ? "text-white/30 text-[9px] text-center font-body" : "text-slate-400 text-[9px] text-center font-body"}>{baseNote}</p>
     </div>
   );
 };
@@ -592,12 +595,13 @@ const NetSVG = ({ cells }: { cells: [number, number][] }) => {
 };
 
 const NetGallery = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const netLabel = lang === "en" ? "Net" : lang === "ja" ? "展開図" : "Jaring";
   return (
     <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
       {NET_PATTERNS.map((cells, i) => (
-        <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-2">
-          <span className="text-white/50 text-[10px] font-body font-bold">{netLabel} #{i+1}</span>
+        <div key={i} className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-2" : "bg-gray-100 border border-gray-200 rounded-lg p-3 flex flex-col items-center gap-2"}>
+          <span className={isDark ? "text-white/50 text-[10px] font-body font-bold" : "text-slate-500 text-[10px] font-body font-bold"}>{netLabel} #{i+1}</span>
           <div className="flex items-center justify-center" style={{ minHeight:80 }}>
             <NetSVG cells={cells}/>
           </div>
@@ -738,6 +742,7 @@ const DiagonalBidangSVG = ({ lang }: { lang: string }) => (
 );
 
 const AllDiagonalBidangSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const faceOf = (name: string) => {
     if (lang === "en") {
       const m: Record<string,string> = { Depan:"Front",Belakang:"Back",Kiri:"Left",Kanan:"Right",Atas:"Top",Alas:"Base" };
@@ -776,10 +781,10 @@ const AllDiagonalBidangSVG = ({ lang }: { lang: string }) => {
 
   return (
     <div className="space-y-3 my-3">
-      <p className="text-xs text-green-100/80 bg-green-950/50 border border-green-700/40 rounded-lg p-3">{descText}</p>
+      <p className={isDark ? "text-xs text-green-100/80 bg-green-950/50 border border-green-700/40 rounded-lg p-3" : "text-xs text-green-800 bg-green-50 border border-green-300 rounded-lg p-3"}>{descText}</p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {diags.map((d, i) => (
-          <div key={d.key} className="bg-slate-900/55 border border-slate-700/70 rounded-lg p-3 space-y-2">
+          <div key={d.key} className={isDark ? "bg-slate-900/55 border border-slate-700/70 rounded-lg p-3 space-y-2" : "bg-white border border-gray-200 rounded-lg p-3 space-y-2"}>
             <svg viewBox="0 0 240 190" className="w-full mx-auto" aria-label={`${lang==="en"?"Face diagonal":"面対角線"} ${d.key}`}>
               <defs><style>{`@keyframes diagBidangGlow{0%,100%{stroke-opacity:1;}50%{stroke-opacity:0.1;}}`}</style></defs>
               <polygon points="40,55 150,55 150,145 40,145" fill="rgba(20,30,50,0.76)" stroke="#475569" strokeWidth="1.4"/>
@@ -810,7 +815,7 @@ const AllDiagonalBidangSVG = ({ lang }: { lang: string }) => {
             </svg>
             <div>
               <p className="text-xs font-semibold" style={{ color:d.color }}>{`${i+1}. ${lang==="en"?"Diagonal":"対角線"} ${d.key}`}</p>
-              <p className="text-[11px] text-white/55">{`${faceLabel} ${d.face}`}</p>
+              <p className={isDark ? "text-[11px] text-white/55" : "text-[11px] text-slate-500"}>{`${faceLabel} ${d.face}`}</p>
             </div>
           </div>
         ))}
@@ -939,8 +944,10 @@ const getBidangDiagonalVariants = (lang: string): BidangDiagonalVariant[] => {
   ];
 };
 
-const BidangDiagonalVariantCube = ({ variant, idx=0 }: { variant: BidangDiagonalVariant; idx?: number }) => (
-  <div className="rounded-lg border border-slate-700/70 bg-slate-900/55 p-3 space-y-2">
+const BidangDiagonalVariantCube = ({ variant, idx=0 }: { variant: BidangDiagonalVariant; idx?: number }) => {
+  const { isDark } = useTheme();
+  return (
+  <div className={isDark ? "rounded-lg border border-slate-700/70 bg-slate-900/55 p-3 space-y-2" : "rounded-lg border border-gray-200 bg-white p-3 space-y-2"}>
     <svg viewBox="0 0 240 190" className="w-full mx-auto" aria-label={`Diagonal plane ${variant.label}`}>
       <defs><style>{`@keyframes bdPulse{0%,100%{fill-opacity:0.52;stroke-opacity:1;}50%{fill-opacity:0.08;stroke-opacity:0.25;}}.bd-pulse{animation:bdPulse 2s ease-in-out infinite;}`}</style></defs>
       <polygon points="40,55 150,55 150,145 40,145" fill="rgba(30,41,59,0.72)" stroke="#64748b" strokeWidth="1.4"/>
@@ -967,12 +974,14 @@ const BidangDiagonalVariantCube = ({ variant, idx=0 }: { variant: BidangDiagonal
     </svg>
     <div>
       <p className="text-xs font-semibold" style={{ color:variant.color }}>{variant.title}</p>
-      <p className="text-[11px] text-white/55">{variant.note}</p>
+      <p className={isDark ? "text-[11px] text-white/55" : "text-[11px] text-slate-500"}>{variant.note}</p>
     </div>
   </div>
-);
+  );
+};
 
 const BidangDiagonalVariasiGallery = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const variants = getBidangDiagonalVariants(lang);
   const desc = lang==="en"
     ? "All 6 diagonal planes in cube ABCD.EFGH. Each color shows a different diagonal plane."
@@ -981,8 +990,8 @@ const BidangDiagonalVariasiGallery = ({ lang }: { lang: string }) => {
     : "Keenam (6) bidang diagonal pada kubus ABCD.EFGH. Setiap warna menunjukkan satu bidang diagonal yang berbeda.";
   return (
     <div className="space-y-3">
-      <div className="rounded-lg bg-slate-900/60 border border-violet-700/30 p-3">
-        <p className="text-xs text-violet-200">{desc}</p>
+      <div className={isDark ? "rounded-lg bg-slate-900/60 border border-violet-700/30 p-3" : "rounded-lg bg-violet-50 border border-violet-300/60 p-3"}>
+        <p className={isDark ? "text-xs text-violet-200" : "text-xs text-violet-700"}>{desc}</p>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {variants.map((variant, i) => (
@@ -1154,6 +1163,7 @@ const WaterKubusAnimation = ({ lang }: { lang: string }) => {
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
 
 const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: string; lang: string }) => {
+  const { isDark } = useTheme();
   const [show, setShow] = useState(false);
   const showLabel = lang==="en" ? "Show Solution" : lang==="ja" ? "解説を見る" : "Lihat Pembahasan";
   const hideLabel = lang==="en" ? "Hide" : lang==="ja" ? "隠す" : "Sembunyikan";
@@ -1168,11 +1178,11 @@ const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: s
         {ex.question}
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
-        className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
+        className={`w-full flex items-center justify-between px-5 py-3 transition-colors cursor-pointer border-t ${isDark ? "bg-slate-800/60 hover:bg-slate-800/90 border-slate-700/50" : "bg-gray-100 hover:bg-gray-200 border-gray-200"}`}>
         <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLabel : showLabel}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground"/> : <ChevronDown className="w-4 h-4 text-muted-foreground"/>}
       </button>
-      {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
+      {show && <div className={`px-5 py-4 border-t ${isDark ? "bg-slate-900/60 border-slate-700/30" : "bg-white border-gray-200"}`}>{ex.answer}</div>}
     </div>
   );
 };
@@ -1434,13 +1444,13 @@ const KubusPage = () => {
               <BlockMath math="L_d = s \times s\sqrt{2} = s^2\sqrt{2}" />
             </div>
           </div>
-          <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <div className={isDark ? "overflow-x-auto rounded-lg border border-slate-700" : "overflow-x-auto rounded-lg border border-gray-200"}>
             <table className="w-full text-xs text-center">
-              <thead><tr className="bg-slate-800">
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">
+              <thead><tr className={isDark ? "bg-slate-800" : "bg-gray-100"}>
+                <th className={`px-3 py-2 text-cyan-300 text-left ${isDark ? "border-r border-slate-700" : "border-r border-gray-200"}`}>
                   {lang==="en" ? "Element" : lang==="ja" ? "要素" : "Unsur"}
                 </th>
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">
+                <th className={`px-3 py-2 text-cyan-300 ${isDark ? "border-r border-slate-700" : "border-r border-gray-200"}`}>
                   {lang==="en" ? "Count" : lang==="ja" ? "数" : "Jumlah"}
                 </th>
                 <th className="px-3 py-2 text-cyan-300">
@@ -1449,9 +1459,9 @@ const KubusPage = () => {
               </tr></thead>
               <tbody>
                 {unsurTableRows.map(([u,j,uk],i)=>(
-                  <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
-                    <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{u}</td>
-                    <td className="px-3 py-2 text-yellow-300 border-r border-slate-700">{j}</td>
+                  <tr key={i} className={`${isDark ? "border-t border-slate-700" : "border-t border-gray-200"} ${i%2===0 ? (isDark?"bg-slate-900/40":"bg-blue-50/50") : (isDark?"bg-slate-800/30":"bg-gray-50")}`}>
+                    <td className={`px-3 py-2 font-semibold text-left ${isDark ? "text-white/90 border-r border-slate-700" : "text-slate-700 border-r border-gray-200"}`}>{u}</td>
+                    <td className={`px-3 py-2 text-yellow-300 ${isDark ? "border-r border-slate-700" : "border-r border-gray-200"}`}>{j}</td>
                     <td className="px-3 py-2 text-cyan-300">{uk}</td>
                   </tr>
                 ))}
@@ -1476,7 +1486,7 @@ const KubusPage = () => {
                 ? <span>一辺<InlineMath math="s" />の正方形の面を取ります。面対角線はその正方形の対角線です：</span>
                 : <span>Ambil satu sisi kubus berbentuk persegi sisi <InlineMath math="s" />. Diagonal bidang adalah diagonal persegi tersebut:</span>}
             </p>
-            <div className="bg-slate-800/60 rounded p-3">
+            <div className={isDark ? "bg-slate-800/60 rounded p-3" : "bg-gray-100 rounded p-3"}>
               <BlockMath math="d_b^2 = s^2 + s^2 = 2s^2" />
               <BlockMath math="\boxed{d_b = s\sqrt{2}}" />
             </div>
@@ -1492,7 +1502,7 @@ const KubusPage = () => {
                 ? <span>空間対角線は、底辺（<InlineMath math="s" />）、底面の面対角線（<InlineMath math="s\sqrt{2}" />）、空間対角線を辺とする直角三角形の斜辺です：</span>
                 : <span>Diagonal ruang adalah sisi miring dari segitiga siku-siku yang dibentuk oleh satu sisi alas (<InlineMath math="s" />), diagonal bidang alas (<InlineMath math="s\sqrt{2}" />), dan diagonal ruang sendiri:</span>}
             </p>
-            <div className="bg-slate-800/60 rounded p-3">
+            <div className={isDark ? "bg-slate-800/60 rounded p-3" : "bg-gray-100 rounded p-3"}>
               <BlockMath math="d_r^2 = s^2 + (s\sqrt{2})^2 = s^2 + 2s^2 = 3s^2" />
               <BlockMath math="\boxed{d_r = s\sqrt{3}}" />
             </div>
@@ -1515,7 +1525,7 @@ const KubusPage = () => {
                 ? <span>対角面は長方形：縦＝面対角線（<InlineMath math="s\sqrt{2}" />）、横＝辺（<InlineMath math="s" />）：</span>
                 : <span>Bidang diagonal berbentuk persegi panjang dengan ukuran: panjang = diagonal bidang (<InlineMath math="s\sqrt{2}" />), lebar = sisi kubus (<InlineMath math="s" />):</span>}
             </p>
-            <div className="bg-slate-800/60 rounded p-3">
+            <div className={isDark ? "bg-slate-800/60 rounded p-3" : "bg-gray-100 rounded p-3"}>
               <BlockMath math="\boxed{L_d = s \times s\sqrt{2} = s^2\sqrt{2}}" />
             </div>
           </div>
@@ -1544,8 +1554,8 @@ const KubusPage = () => {
             </p>
             <NetGallery lang={lang} />
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p>🔑 <strong className="text-white">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-600 space-y-1"}>
+            <p>🔑 <strong className={isDark ? "text-white" : "text-slate-700"}>
               {lang==="en" ? "How to verify a net:" : lang==="ja" ? "展開図の確認方法：" : "Cara memverifikasi jaring-jaring:"}
             </strong></p>
             <p>
@@ -1584,7 +1594,7 @@ const KubusPage = () => {
                   : <span>Kubus punya <strong>6 sisi</strong>, masing-masing berbentuk <strong>persegi dengan luas <InlineMath math="s^2" /></strong>.</span>}
               </p>
             </div>
-            <div className="bg-slate-800/60 rounded p-3">
+            <div className={isDark ? "bg-slate-800/60 rounded p-3" : "bg-gray-100 rounded p-3"}>
               <BlockMath math="L_p = 6 \times s^2" />
               <BlockMath math="\boxed{L = 6s^2}" />
             </div>
@@ -1610,14 +1620,14 @@ const KubusPage = () => {
               ? <span><strong className="text-blue-300">体積</strong>は立方体が占める空間の大きさを表します。小さな単位立方体をぎっしり詰め込んだものをイメージしてください：</span>
               : <span><strong className="text-blue-300">Volume kubus</strong> menyatakan seberapa besar "isi" atau "ruang" yang ditempati kubus. Bayangkan kubus terdiri dari lapisan-lapisan kecil berbentuk kubus satuan yang disusun rapat:</span>}
           </p>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1" : "bg-white/90 border border-gray-200 rounded-xl p-3 space-y-1"}>
             <p className="text-cyan-300 text-xs font-semibold font-body text-center">
               {lang==="en" ? "🌊 Cube filling with water — from empty to full"
                 : lang==="ja" ? "🌊 立方体に水を注ぐ — 空から満水まで"
                 : "🌊 Kubus diisi air — dari kosong hingga penuh"}
             </p>
             <WaterKubusAnimation lang={lang} />
-            <p className="text-white/45 text-[10px] font-body text-center mt-4">
+            <p className={isDark ? "text-white/45 text-[10px] font-body text-center mt-4" : "text-slate-500 text-[10px] font-body text-center mt-4"}>
               {lang==="en" ? "Percentage shows the ratio of filled volume to total volume"
                 : lang==="ja" ? "パーセントは全体積に対する充填体積の割合を示す"
                 : "Persentase menunjukkan proporsi volume terisi terhadap volume total"}
@@ -1643,8 +1653,8 @@ const KubusPage = () => {
                   : <span>• Volume = Luas alas × tinggi = <InlineMath math="s^2 \times s = s^3" /></span>}
               </p>
             </div>
-            <div className="bg-slate-800/60 rounded p-3"><BlockMath math="\boxed{V = s^3}" /></div>
-            <p className="text-white/60 text-xs">
+            <div className={isDark ? "bg-slate-800/60 rounded p-3" : "bg-gray-100 rounded p-3"}><BlockMath math="\boxed{V = s^3}" /></div>
+            <p className={isDark ? "text-white/60 text-xs" : "text-slate-600 text-xs"}>
               {lang==="en"
                 ? <span>Where <InlineMath math="s" /> is the edge length of the cube.</span>
                 : lang==="ja"
@@ -1652,8 +1662,8 @@ const KubusPage = () => {
                 : <span>Di mana <InlineMath math="s" /> adalah panjang satu rusuk kubus.</span>}
             </p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p>🎯 <strong className="text-white">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-600 space-y-1"}>
+            <p>🎯 <strong className={isDark ? "text-white" : "text-slate-700"}>
               {lang==="en" ? "Volume units:" : lang==="ja" ? "体積の単位：" : "Satuan volume:"}
             </strong></p>
             <p>
@@ -1702,19 +1712,19 @@ const KubusPage = () => {
               { icon:"🔀", label:"4 Diagonal Ruang", color:"text-red-300" },
               { icon:"🔲", label:"6 Bidang Diagonal", color:"text-violet-300" },
             ]).map(({ icon, label, color }) => (
-              <div key={label} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-1">
+              <div key={label} className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-1" : "bg-gray-100 border border-gray-200 rounded-lg p-3 flex flex-col items-center gap-1"}>
                 <span className="text-2xl">{icon}</span>
                 <span className={`text-xs font-semibold font-body text-center ${color}`}>{label}</span>
               </div>
             ))}
           </div>
-          <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <div className={isDark ? "overflow-x-auto rounded-lg border border-slate-700" : "overflow-x-auto rounded-lg border border-gray-200"}>
             <table className="w-full text-xs text-center">
-              <thead><tr className="bg-slate-800">
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">
+              <thead><tr className={isDark ? "bg-slate-800" : "bg-gray-100"}>
+                <th className={`px-3 py-2 text-cyan-300 text-left ${isDark ? "border-r border-slate-700" : "border-r border-gray-200"}`}>
                   {lang==="en" ? "Quantity" : lang==="ja" ? "量" : "Besaran"}
                 </th>
-                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">
+                <th className={`px-3 py-2 text-cyan-300 ${isDark ? "border-r border-slate-700" : "border-r border-gray-200"}`}>
                   {lang==="en" ? "Formula" : lang==="ja" ? "公式" : "Rumus"}
                 </th>
                 <th className="px-3 py-2 text-cyan-300">
@@ -1723,10 +1733,10 @@ const KubusPage = () => {
               </tr></thead>
               <tbody>
                 {summaryTableRows.map(([b,r,c],i)=>(
-                  <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
-                    <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
-                    <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
-                    <td className="px-3 py-2 text-white/55 text-left">{c}</td>
+                  <tr key={i} className={`${isDark ? "border-t border-slate-700" : "border-t border-gray-200"} ${i%2===0 ? (isDark?"bg-slate-900/40":"bg-blue-50/50") : (isDark?"bg-slate-800/30":"bg-gray-50")}`}>
+                    <td className={`px-3 py-2 font-semibold text-left ${isDark ? "text-white/90 border-r border-slate-700" : "text-slate-700 border-r border-gray-200"}`}>{b}</td>
+                    <td className={`px-3 py-2 text-yellow-300 font-mono ${isDark ? "border-r border-slate-700" : "border-r border-gray-200"}`}>{r}</td>
+                    <td className={`px-3 py-2 text-left ${isDark ? "text-white/55" : "text-slate-500"}`}>{c}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1755,7 +1765,7 @@ const KubusPage = () => {
     {
       level: easyLabel, color:"text-green-400", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm font-body space-y-1 ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en" ? <>
             <p>A cube-shaped gift box has an edge length of <InlineMath math="8 \text{ cm}" />.</p>
             <p>What is the minimum area of wrapping paper needed to cover the entire box?</p>
@@ -1770,7 +1780,7 @@ const KubusPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="L = 6s^2 = 6 \times 8^2 = 6 \times 64 = 384 \text{ cm}^2" />
           </div>
           <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-3" : "bg-green-50 border border-green-300 rounded p-3"}>
@@ -1782,7 +1792,7 @@ const KubusPage = () => {
     {
       level: medLabel, color:"text-yellow-400", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm font-body space-y-1 ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en" ? <>
             <p>The surface area of a cube is <InlineMath math="600 \text{ cm}^2" />.</p>
             <p>Find: (a) edge length, (b) face diagonal length, (c) space diagonal length.</p>
@@ -1798,15 +1808,15 @@ const KubusPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-yellow-400 font-semibold">(a) {lang==="en"?"Edge length:":lang==="ja"?"辺の長さ：":"Panjang rusuk:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="6s^2 = 600 \Rightarrow s^2 = 100 \Rightarrow s = 10 \text{ cm}" />
           </div>
           <p className="text-yellow-400 font-semibold">(b) {lang==="en"?"Face diagonal:":lang==="ja"?"面対角線：":"Diagonal bidang:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="d_b = s\sqrt{2} = 10\sqrt{2} \approx 14{,}14 \text{ cm}" />
           </div>
           <p className="text-yellow-400 font-semibold">(c) {lang==="en"?"Space diagonal:":lang==="ja"?"空間対角線：":"Diagonal ruang:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="d_r = s\sqrt{3} = 10\sqrt{3} \approx 17{,}32 \text{ cm}" />
           </div>
           <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs text-white/80 space-y-0.5" : "bg-yellow-50 border border-yellow-300 rounded p-3 text-xs text-slate-700 space-y-0.5"}>
@@ -1818,7 +1828,7 @@ const KubusPage = () => {
     {
       level: hardLabel, color:"text-red-400", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm font-body space-y-1 ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en" ? <>
             <p>A cube-shaped aquarium has a capacity of <InlineMath math="125 \text{ liters}" />.</p>
             <p>If all sides (except the top) are made of glass at <InlineMath math="\$120{,}000/\text{m}^2" />,</p>
@@ -1837,16 +1847,16 @@ const KubusPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-red-400 font-semibold">{t.step} 1 — {lang==="en"?"Find edge from volume:":lang==="ja"?"体積から辺を求める：":"Cari panjang rusuk dari volume:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs text-white/70 space-y-1">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 text-xs text-white/70 space-y-1" : "bg-gray-100 border border-gray-200 rounded p-3 text-xs text-slate-600 space-y-1"}>
             <p><InlineMath math="125 \text{ L} = 125{,}000 \text{ cm}^3" /></p>
             <BlockMath math="s^3 = 125{,}000 \Rightarrow s = \sqrt[3]{125{,}000} = 50 \text{ cm} = 0{,}5 \text{ m}" />
           </div>
           <p className="text-red-400 font-semibold">{t.step} 2 — {lang==="en"?"Calculate glass area (5 sides, no top):":lang==="ja"?"ガラス面積を計算（5面、上面なし）：":"Hitung luas kaca (5 sisi, tanpa tutup atas):"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="L = 5 \times s^2 = 5 \times (0{,}5)^2 = 5 \times 0{,}25 = 1{,}25 \text{ m}^2" />
           </div>
           <p className="text-red-400 font-semibold">{t.step} 3 — {lang==="en"?"Calculate cost:":lang==="ja"?"費用を計算：":"Hitung biaya:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             {lang==="id"
               ? <BlockMath math="\text{Biaya} = 1{,}25 \times 120.000 = Rp\,150.000" />
               : <BlockMath math="1{,}25 \times 120{,}000 = \$150{,}000" />}
@@ -1866,7 +1876,7 @@ const KubusPage = () => {
     {
       level: easyLabel, color:"text-green-400", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100",
       question: (
-        <div className="text-sm text-white/85 font-body">
+        <div className={`text-sm font-body ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en"
             ? <p>A cube-shaped die has an edge length of <InlineMath math="2 \text{ cm}" />. What is the volume?</p>
             : lang==="ja"
@@ -1876,7 +1886,7 @@ const KubusPage = () => {
       ),
       answer: (
         <div className="space-y-2 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="V = s^3 = 2^3 = 8 \text{ cm}^3" />
           </div>
           <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-2" : "bg-green-50 border border-green-300 rounded p-2"}>
@@ -1888,25 +1898,25 @@ const KubusPage = () => {
     {
       level: medLabel, color:"text-yellow-400", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm font-body space-y-1 ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en" ? <>
             <p>A cube-shaped bathtub can hold <InlineMath math="1 \text{ m}^3" /> of water.</p>
             <p>If filled to <InlineMath math="75\%" /> capacity, how many liters of water are inside?</p>
-            <p className="text-xs text-white/60">(<InlineMath math="1 \text{ m}^3 = 1{,}000 \text{ liters}" />)</p>
+            <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"}`}>(<InlineMath math="1 \text{ m}^3 = 1{,}000 \text{ liters}" />)</p>
           </> : lang==="ja" ? <>
             <p>立方体形の浴槽が<InlineMath math="1 \text{ m}^3" />の水を入れられます。</p>
             <p><InlineMath math="75\%" />まで水を入れると、何リットルになりますか？</p>
-            <p className="text-xs text-white/60">（<InlineMath math="1 \text{ m}^3 = 1{,}000 \text{ L}" />）</p>
+            <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"}`}>（<InlineMath math="1 \text{ m}^3 = 1{,}000 \text{ L}" />）</p>
           </> : <>
             <p>Sebuah bak mandi berbentuk kubus dapat menampung <InlineMath math="1 \text{ m}^3" /> air.</p>
             <p>Jika bak diisi air hingga <InlineMath math="75\%" /> kapasitasnya, berapa liter air di dalamnya?</p>
-            <p className="text-xs text-white/60">(<InlineMath math="1 \text{ m}^3 = 1.000 \text{ liter}" />)</p>
+            <p className={`text-xs ${isDark ? "text-white/60" : "text-slate-500"}`}>(<InlineMath math="1 \text{ m}^3 = 1.000 \text{ liter}" />)</p>
           </>}
         </div>
       ),
       answer: (
         <div className="space-y-2 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2" : "bg-gray-100 border border-gray-200 rounded p-3 space-y-2"}>
             <BlockMath math="V_t = 1 \text{ m}^3 = 1{,}000 \text{ L}" />
             <BlockMath math="V_{75\%} = 75\% \times 1{,}000 = 750 \text{ L}" />
           </div>
@@ -1919,7 +1929,7 @@ const KubusPage = () => {
     {
       level: hardLabel, color:"text-red-400", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm font-body space-y-1 ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en" ? <>
             <p>A large cube with edge <InlineMath math="12 \text{ cm}" /> is filled with small cubes of edge <InlineMath math="2 \text{ cm}" />.</p>
             <p>How many small cubes fit? If each small cube weighs <InlineMath math="4 \text{ g}" />, what is the total weight?</p>
@@ -1934,7 +1944,7 @@ const KubusPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs" : "bg-gray-100 border border-gray-200 rounded p-3 space-y-2 text-xs"}>
             <BlockMath math="V_b = 12^3 = 1{,}728 \text{ cm}^3" />
             <BlockMath math="V_k = 2^3 = 8 \text{ cm}^3" />
             <BlockMath math="n = \frac{1{,}728}{8} = 216" />
@@ -1957,7 +1967,7 @@ const KubusPage = () => {
     {
       level: easyLabel, color:"text-green-400", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm font-body space-y-1 ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en" ? <>
             <p>A cube wire frame has an edge length of <InlineMath math="9 \text{ cm}" />.</p>
             <p>What is the minimum length of wire needed?</p>
@@ -1972,10 +1982,10 @@ const KubusPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs text-white/70">
-            <p>{lang==="en"?"A cube has ":lang==="ja"?"立方体には":"Kubus memiliki "}<strong className="text-white">{lang==="en"?"12 edges":lang==="ja"?"12本の辺":"12 rusuk"}</strong>, {lang==="en"?"all equal.":lang==="ja"?"すべて同じ長さ。":"semuanya sama panjang."}</p>
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs text-white/70" : "bg-gray-100 border border-gray-200 rounded p-3 space-y-1 text-xs text-slate-600"}>
+            <p>{lang==="en"?"A cube has ":lang==="ja"?"立方体には":"Kubus memiliki "}<strong className={isDark ? "text-white" : "text-slate-700"}>{lang==="en"?"12 edges":lang==="ja"?"12本の辺":"12 rusuk"}</strong>, {lang==="en"?"all equal.":lang==="ja"?"すべて同じ長さ。":"semuanya sama panjang."}</p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="K = 12 \times s = 12 \times 9 = 108 \text{ cm}" />
           </div>
           <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-3" : "bg-green-50 border border-green-300 rounded p-3"}>
@@ -1987,7 +1997,7 @@ const KubusPage = () => {
     {
       level: medLabel, color:"text-yellow-400", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm font-body space-y-1 ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en" ? <>
             <p>A cube wire frame uses <InlineMath math="144 \text{ cm}" /> of wire.</p>
             <p>Find: (a) edge length, (b) surface area, (c) volume.</p>
@@ -2003,15 +2013,15 @@ const KubusPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-yellow-400 font-semibold">(a) {lang==="en"?"Edge:":lang==="ja"?"辺：":"Panjang rusuk:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="K = 12s \Rightarrow 144 = 12s \Rightarrow s = \frac{144}{12} = 12 \text{ cm}" />
           </div>
           <p className="text-yellow-400 font-semibold">(b) {lang==="en"?"Surface area:":lang==="ja"?"表面積：":"Luas permukaan:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="L = 6s^2 = 6 \times 12^2 = 6 \times 144 = 864 \text{ cm}^2" />
           </div>
           <p className="text-yellow-400 font-semibold">(c) {lang==="en"?"Volume:":lang==="ja"?"体積：":"Volume:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="V = s^3 = 12^3 = 1{,}728 \text{ cm}^3" />
           </div>
           <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs text-white/80 space-y-0.5" : "bg-yellow-50 border border-yellow-300 rounded p-3 text-xs text-slate-700 space-y-0.5"}>
@@ -2025,7 +2035,7 @@ const KubusPage = () => {
     {
       level: hardLabel, color:"text-red-400", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm font-body space-y-1 ${isDark ? "text-white/85" : "text-slate-700"}`}>
           {lang==="en" ? <>
             <p>Three cube frames are made. Their edges are three consecutive integers (in cm).</p>
             <p>Total wire used = <InlineMath math="432 \text{ cm}" />. Find:</p>
@@ -2044,25 +2054,25 @@ const KubusPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-red-400 font-semibold">{t.step} 1</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs text-white/70">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs text-white/70" : "bg-gray-100 border border-gray-200 rounded p-3 space-y-1 text-xs text-slate-600"}>
             <p>{lang==="en"?"Let edges be n, n+1, n+2 (cm)":lang==="ja"?"辺をn, n+1, n+2（cm）とおく":"Misalkan rusuk: n, n+1, n+2 (cm)"}</p>
           </div>
           <p className="text-red-400 font-semibold">{t.step} 2</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="12n + 12(n+1) + 12(n+2) = 432" />
             <BlockMath math="12(3n + 3) = 432" />
             <BlockMath math="3n + 3 = 36 \Rightarrow n = 11" />
           </div>
           <p className="text-red-400 font-semibold">(a)</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs text-white/80 space-y-0.5">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 text-xs text-white/80 space-y-0.5" : "bg-gray-100 border border-gray-200 rounded p-3 text-xs text-slate-700 space-y-0.5"}>
             <p>s₁ = <InlineMath math="11 \text{ cm}" />, s₂ = <InlineMath math="12 \text{ cm}" />, s₃ = <InlineMath math="13 \text{ cm}" /></p>
           </div>
           <p className="text-red-400 font-semibold">(b) s = 13 cm</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="V = 13^3 = 2{,}197 \text{ cm}^3" />
           </div>
           <p className="text-red-400 font-semibold">(c) s = 11 cm</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-200 rounded p-3"}>
             <BlockMath math="L = 6 \times 11^2 = 6 \times 121 = 726 \text{ cm}^2" />
           </div>
           <div className="bg-cyan-950/40 border border-cyan-700/30 rounded p-2 text-xs text-cyan-200">
@@ -2089,7 +2099,7 @@ const KubusPage = () => {
                 : <span>Dari kotak pembungkus kado hingga dadu permainan, kubus ada di mana-mana! Pelajari semua tentang <strong className="text-cyan-300">kubus</strong> — mulai dari unsur-unsurnya, jaring-jaring interaktif 3D, hingga cara menghitung <strong className="text-yellow-300">luas permukaan</strong> dan <strong className="text-green-300">volume</strong>-nya.</span>}
             </p>
           </div>
-          <div className="bg-slate-800/50 border border-slate-600/40 rounded-xl p-3">
+          <div className={isDark ? "bg-slate-800/50 border border-slate-600/40 rounded-xl p-3" : "bg-gray-100 border border-gray-200 rounded-xl p-3"}>
             <p className="text-xs text-cyan-300 font-semibold mb-2 text-center">
               {lang==="en" ? "📦 Examples of Cube-shaped Objects in Daily Life"
                 : lang==="ja" ? "📦 日常生活の立方体形の物の例"
@@ -2108,10 +2118,10 @@ const KubusPage = () => {
                 { src:"/images/image_1776472196508.png", label:lang==="en"?"Bathtub":lang==="ja"?"浴槽":"Bak Mandi" },
               ].map(({ src, label }) => (
                 <div key={label} className="flex flex-col items-center gap-1">
-                  <div className="w-full aspect-square rounded-lg overflow-hidden border border-slate-600/50 bg-slate-900/40">
+                  <div className={`w-full aspect-square rounded-lg overflow-hidden ${isDark ? "border border-slate-600/50 bg-slate-900/40" : "border border-gray-200 bg-gray-100"}`}>
                     <img src={src} alt={label} className="w-full h-full object-cover" />
                   </div>
-                  <span className="text-[10px] text-white/65 text-center leading-tight">{label}</span>
+                  <span className={`text-[10px] text-center leading-tight ${isDark ? "text-white/65" : "text-slate-600"}`}>{label}</span>
                 </div>
               ))}
             </div>
@@ -2145,14 +2155,14 @@ const KubusPage = () => {
                 { label: lang==="en"?"Top edges EFGH":lang==="ja"?"上面辺EFGH":"Rusuk atas EFGH", val:"EF, FG, GH, HE" },
                 { label: lang==="en"?"Lateral edges":lang==="ja"?"側面辺":"Rusuk tegak", val:"AE, BF, CG, DH" },
               ].map(({label,val}) => (
-                <div key={label} className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <div key={label} className={isDark ? "rounded-lg bg-slate-900/60 border border-slate-700/60 p-3" : "rounded-lg bg-gray-100 border border-gray-200 p-3"}>
                   <p className="text-cyan-300 font-semibold mb-1">{label}</p>
-                  <p className="text-white/75">{val}</p>
+                  <p className={isDark ? "text-white/75" : "text-gray-700"}>{val}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-600"}>
             <p>🔑 <strong className="text-cyan-300">
               {lang==="en"?"12 edges, all length s":lang==="ja"?"12辺、すべて長さs":"Jumlah rusuk kubus = 12, semuanya memiliki panjang sama s"}
             </strong></p>
@@ -2182,9 +2192,9 @@ const KubusPage = () => {
               ? [["底面","ABCD"],["上面","EFGH"],["前面","ABFE"],["後面","DCGH"],["左面","ADHE"],["右面","BCGF"]]
               : [["Sisi Alas","ABCD"],["Sisi Atas","EFGH"],["Sisi Depan","ABFE"],["Sisi Belakang","DCGH"],["Sisi Kiri","ADHE"],["Sisi Kanan","BCGF"]]
             ).map(([label, val]) => (
-              <div key={label} className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <div key={label} className={isDark ? "rounded-lg bg-slate-900/60 border border-slate-700/60 p-3" : "rounded-lg bg-gray-100 border border-gray-200 p-3"}>
                 <p className="text-blue-300 font-semibold mb-1">{label}</p>
-                <p className="text-white/75">{val}</p>
+                <p className={isDark ? "text-white/75" : "text-gray-700"}>{val}</p>
               </div>
             ))}
           </div>
@@ -2248,7 +2258,7 @@ const KubusPage = () => {
               { key:"AG", color:"#ef4444", anim:"drGlow1" }, { key:"BH", color:"#f59e0b", anim:"drGlow2" },
               { key:"CE", color:"#22c55e", anim:"drGlow3" }, { key:"DF", color:"#a855f7", anim:"drGlow4" },
             ].map(({ key, color, anim }) => (
-              <div key={key} className="bg-slate-900/70 rounded-xl p-3 flex flex-col items-center gap-1" style={{ border:`1px solid ${color}80` }}>
+              <div key={key} className={isDark ? "bg-slate-900/70 rounded-xl p-3 flex flex-col items-center gap-1" : "bg-gray-100 rounded-xl p-3 flex flex-col items-center gap-1"} style={{ border:`1px solid ${color}80` }}>
                 <p className="font-bold text-xs font-body" style={{ color }}>
                   {lang==="en"?"Diagonal ":lang==="ja"?"対角線 ":"Diagonal "}{key}
                 </p>
@@ -2273,27 +2283,27 @@ const KubusPage = () => {
               </div>
             ))}
           </div>
-          <div className="bg-slate-900/70 border border-amber-600/40 rounded-lg p-4 space-y-3">
+          <div className={isDark ? "bg-slate-900/70 border border-amber-600/40 rounded-lg p-4 space-y-3" : "bg-white/90 border border-amber-600/40 rounded-lg p-4 space-y-3"}>
             <p className="text-amber-300 font-semibold text-xs">
               {lang==="en" ? "📐 Why space diagonal = s√3? — 2-step Pythagoras (sample: BH)"
                 : lang==="ja" ? "📐 なぜ空間対角線 = s√3？ — 2段階の三平方の定理（例：BH）"
                 : "📐 Mengapa diagonal ruang = s√3? — Pembuktian 2 langkah (sampel: BH)"}
             </p>
-            <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs">
-              <p className="text-white/80 font-semibold">
+            <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs" : "bg-gray-100 border border-gray-200 rounded-lg p-3 space-y-2 text-xs"}>
+              <p className={isDark ? "text-white/80 font-semibold" : "text-slate-700 font-semibold"}>
                 {lang==="en"?"2-step proof:":lang==="ja"?"2段階の証明：":"Langkah pembuktian (2 tahap):"}
               </p>
-              <div className="space-y-1 text-white/70">
+              <div className={`space-y-1 ${isDark ? "text-white/70" : "text-slate-600"}`}>
                 <p><strong className="text-orange-400">{t.step} 1</strong> — {lang==="en"?"Find face diagonal BD (base ABCD):":lang==="ja"?"面対角線BD（底面ABCD）を求める：":"Cari diagonal bidang BD (pada sisi alas ABCD):"}</p>
               </div>
-              <div className="bg-slate-900/60 rounded p-2 text-center space-y-1">
+              <div className={isDark ? "bg-slate-900/60 rounded p-2 text-center space-y-1" : "bg-white/90 rounded p-2 text-center space-y-1"}>
                 <BlockMath math="BD^2 = AB^2 + AD^2 = s^2 + s^2 = 2s^2"/>
                 <BlockMath math="BD = s\sqrt{2}"/>
               </div>
-              <div className="space-y-1 text-white/70">
+              <div className={`space-y-1 ${isDark ? "text-white/70" : "text-slate-600"}`}>
                 <p><strong className="text-purple-400">{t.step} 2</strong> — {lang==="en"?"Find space diagonal BH (right triangle BDH, right angle at D):":lang==="ja"?"空間対角線BH（BDHの直角三角形、Dで直角）を求める：":"Cari diagonal ruang BH dengan segitiga BDH siku-siku di D:"}</p>
               </div>
-              <div className="bg-slate-900/60 rounded p-2 text-center space-y-1">
+              <div className={isDark ? "bg-slate-900/60 rounded p-2 text-center space-y-1" : "bg-white/90 rounded p-2 text-center space-y-1"}>
                 <BlockMath math="BH^2 = BD^2 + DH^2"/>
                 <BlockMath math="BH^2 = (s\sqrt{2})^2 + s^2 = 2s^2 + s^2 = 3s^2"/>
                 <BlockMath math="\boxed{BH = s\sqrt{3}}"/>
@@ -2351,8 +2361,8 @@ const KubusPage = () => {
               : <span>Ada tepat <strong className="text-yellow-300">11 pola jaring-jaring</strong> yang berbeda dan valid untuk sebuah kubus:</span>}
           </p>
           <NetGallery lang={lang} />
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p>🔑 <strong className="text-white">{lang==="en"?"How to verify:":lang==="ja"?"確認方法：":"Cara memverifikasi:"}</strong></p>
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-600 space-y-1"}>
+            <p>🔑 <strong className={isDark ? "text-white" : "text-slate-700"}>{lang==="en"?"How to verify:":lang==="ja"?"確認方法：":"Cara memverifikasi:"}</strong></p>
             <p>
               {lang==="en"?"Fold each square mentally. If 6 squares cover all faces without overlap or gaps, it's a valid net!"
                 :lang==="ja"?"各正方形を頭の中で折り畳む。重なりや隙間なく6面を覆えれば有効な展開図！"
@@ -2366,14 +2376,14 @@ const KubusPage = () => {
       title: t.slideKerangka, icon: "🪡",
       content: (
         <div className="space-y-4">
-          <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2" : "bg-white/90 border border-gray-200 rounded-xl p-4 space-y-2"}>
             <p className="text-cyan-300 font-semibold text-sm font-display">🪡 {t.slideKerangka}</p>
-            <p className="text-white/70 text-xs font-body leading-relaxed">
+            <p className={isDark ? "text-white/70 text-xs font-body leading-relaxed" : "text-slate-600 text-xs font-body leading-relaxed"}>
               {lang==="en"
                 ? <span>A cube frame is the skeleton of all 12 edges. Since all edges are <strong className="text-cyan-300">equal length (s)</strong>, total wire = <strong className="text-yellow-300">12 × s</strong>:</span>
                 : lang==="ja"
                 ? <span>立方体の枠は12本の辺の骨格。すべての辺が<strong className="text-cyan-300">同じ長さ(s)</strong>なので、合計針金 = <strong className="text-yellow-300">12 × s</strong>：</span>
-                : <span>Kerangka kubus adalah rangka yang terbentuk dari semua rusuknya. Kubus memiliki <strong className="text-white">12 rusuk</strong> yang <strong className="text-cyan-300">semuanya sama panjang</strong>. Total panjang rusuk = <strong className="text-yellow-300">12 × s</strong>:</span>}
+                : <span>Kerangka kubus adalah rangka yang terbentuk dari semua rusuknya. Kubus memiliki <strong className={isDark ? "text-white" : "text-slate-700"}>12 rusuk</strong> yang <strong className="text-cyan-300">semuanya sama panjang</strong>. Total panjang rusuk = <strong className="text-yellow-300">12 × s</strong>:</span>}
             </p>
           </div>
           <InteractiveKerangkaKubus lang={lang} />
@@ -2398,9 +2408,9 @@ const KubusPage = () => {
       title: t.slideContohKerangka, icon: "🪡",
       content: (
         <div className="space-y-4">
-          <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2" : "bg-white/90 border border-gray-200 rounded-xl p-4 space-y-2"}>
             <p className="text-cyan-300 font-semibold text-sm font-display">🪡 {t.slideKerangka}</p>
-            <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+            <div className={isDark ? "bg-slate-900/60 rounded-lg p-3 text-center" : "bg-gray-100 rounded-lg p-3 text-center"}>
               <BlockMath math="K_k = 12 \times s" />
             </div>
             <div className="grid grid-cols-3 gap-2 text-center text-xs font-body">
@@ -2412,7 +2422,7 @@ const KubusPage = () => {
               ).map(([label, sub], i) => (
                 <div key={i} className={`${["bg-blue-950/50 border-blue-700/40","bg-purple-950/50 border-purple-700/40","bg-teal-950/50 border-teal-700/40"][i]} border rounded p-2`}>
                   <p className={`${["text-blue-300","text-purple-300","text-teal-300"][i]} font-semibold`}>{label}</p>
-                  <p className="text-white/60">{sub}</p>
+                  <p className={isDark ? "text-white/60" : "text-slate-600"}>{sub}</p>
                 </div>
               ))}
             </div>
@@ -2465,23 +2475,23 @@ const KubusPage = () => {
           ))}
         </div>
         <div className="bg-card/80 backdrop-blur border border-border rounded-2xl overflow-hidden mb-5">
-          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
+          <div className={`flex items-center gap-3 px-5 py-4 border-b border-border/50 ${isDark ? "bg-slate-800/40" : "bg-gray-100/80"}`}>
             <span className="text-2xl">{slide.icon}</span>
             <div className="flex-1 min-w-0">
-              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+              <p className={`text-[10px] font-body uppercase tracking-widest ${isDark ? "text-white/40" : "text-slate-500"}`}>
                 {t.slideLabel} {currentSlide + 1} / {totalSlides}
               </p>
-              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+              <h2 className={`font-display text-sm font-bold ${isDark ? "text-white" : "text-slate-800"}`}>{slide.title}</h2>
             </div>
           </div>
           <div className="px-5 py-5">{slide.content}</div>
         </div>
         <div className="flex items-center justify-between gap-3 mb-8">
           <button onClick={goPrev} disabled={currentSlide === 0}
-            className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body bg-slate-800/60 border border-slate-600 text-white/70 rounded-xl hover:bg-slate-700/60 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed">
+            className={`flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body rounded-xl transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed ${isDark ? "bg-slate-800/60 border border-slate-600 text-white/70 hover:bg-slate-700/60" : "bg-gray-100 border border-gray-300 text-slate-600 hover:bg-gray-200"}`}>
             {t.prev}
           </button>
-          <span className="text-white/30 text-xs font-body">{currentSlide + 1} / {totalSlides}</span>
+          <span className={`text-xs font-body ${isDark ? "text-white/30" : "text-slate-400"}`}>{currentSlide + 1} / {totalSlides}</span>
           <button onClick={goNext} disabled={currentSlide === totalSlides - 1}
             className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body bg-primary/20 border border-primary/50 text-primary rounded-xl hover:bg-primary/30 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed">
             {t.next}
