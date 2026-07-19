@@ -1,0 +1,41 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/). 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+Sebelumnya sudah diperbaiki: semua "answer result boxes" dan objek data 
+soal (easy/med/hard props, kerangkaExamples, dst) di BalokPage.tsx sudah 
+conditional isDark, termasuk teks di dalam <strong> tag dan body text 
+di dalamnya. Sekarang lanjutkan perbaikan bagian JSX umum lainnya 
+(BUKAN SVG diagram 3D — itu akan dikerjakan di sesi terpisah).
+
+Sudah diperbaiki sebelumnya dengan pola konsisten, termasuk LimasPage.tsx 
+dan KubusPage.tsx. Buka salah satu file ini sebagai REFERENSI pola 
+warna yang benar.
+
+TUGAS: Di file src/pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/BalokPage.tsx, 
+perbaiki HANYA bagian berikut (skip elemen <svg> dulu):
+1. Semua className bg-slate-8xx/9xx di JSX umum halaman (card, section, 
+   wrapper, kotak penjelasan, rangkuman, tips) yang BELUM diperbaiki 
+   sebelumnya — tambahkan conditional isDark.
+2. Semua text-white/* atau text-*-200 di dalam container yang baru 
+   diterangi — ganti ke text-gray-700/800 dst. PERHATIAN KHUSUS: cek 
+   juga teks di dalam <strong> tag dan kalimat body yang bersarang 
+   (nested) di dalam kotak penjelasan — bagian ini sering terlewat 
+   di scan pertama (seperti yang terjadi sebelumnya di bagian answer boxes).
+3. JANGAN sentuh elemen <svg> sama sekali di tahap ini.
+4. JANGAN ubah logika interaktif — HANYA warna.
+5. JANGAN sentuh file lain.
+
+Setelah selesai:
+6. Verifikasi TypeScript check per-file (0 error).
+7. Lakukan scan ulang KEDUA setelah edit pertama selesai — khusus cari 
+   text-white atau text-*-300 yang tersisa di dalam elemen bersarang 
+   (nested spans, strong tags) yang mungkin terlewat di scan awal.
+8. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya (ringkas, jumlah baris yang diperbaiki), dan 
+konfirmasi eksplisit sudah melakukan scan ulang kedua untuk elemen 
+bersarang.
