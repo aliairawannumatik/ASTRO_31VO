@@ -2277,7 +2277,7 @@ const BalokPage = () => {
             <BlockMath math="K = 4(12 + 8 + 5) = 4 \times 25 = 100\text{ cm}" />
           </div>
           <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-2" : "bg-green-50 border border-green-300 rounded p-2"}>
-            <p className={`${isDark ? "text-green-300" : "text-green-700"} font-semibold text-xs`}>✅ {lang === "en" ? "Wire length" : lang === "ja" ? "針金の長さ" : "Panjang kawat"} = <strong className="text-yellow-300">100 cm</strong></p>
+            <p className={`${isDark ? "text-green-300" : "text-green-700"} font-semibold text-xs`}>✅ {lang === "en" ? "Wire length" : lang === "ja" ? "針金の長さ" : "Panjang kawat"} = <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>100 cm</strong></p>
           </div>
         </div>
       ),
