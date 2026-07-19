@@ -1917,7 +1917,7 @@ const LimasPage = () => {
             <BlockMath math="L_s = 4 \times \frac{1}{2} \times s \times l = 4 \times \frac{1}{2} \times 10 \times 13 = 260\text{ cm}^2"/>
             <BlockMath math="L = 100 + 260 = 360\text{ cm}^2"/>
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-3" : "bg-green-50 border border-green-300/60 rounded p-3"}>
             <p className="text-green-300 font-semibold">✅ {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"} = <InlineMath math="360\text{ cm}^2"/></p>
           </div>
         </div>
@@ -1985,7 +1985,7 @@ const LimasPage = () => {
               ? <BlockMath math="\text{Cost} = 15 \times 85{,}000 = \$1{,}275{,}000"/>
               : <BlockMath math="\text{Biaya} = 15 \times 85.000 = Rp\,1.275.000"/>}
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+          <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300/60 rounded p-3 text-xs space-y-0.5"}>
             <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Apothem" : lang === "ja" ? "斜高" : "Apotema"} = 2,5 m</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Fabric area" : lang === "ja" ? "布の面積" : "Luas kain"} = 15 m²</p>
@@ -2016,7 +2016,7 @@ const LimasPage = () => {
           <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             <BlockMath math="V = \frac{1}{3} \times s^2 \times t = \frac{1}{3} \times 6^2 \times 8 = \frac{1}{3} \times 36 \times 8 = 96\text{ cm}^3"/>
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-2" : "bg-green-50 border border-green-300/60 rounded p-2"}>
             <p className="text-green-300 font-semibold text-xs">✅ {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} = <InlineMath math="96\text{ cm}^3"/></p>
           </div>
         </div>
@@ -2084,7 +2084,7 @@ const LimasPage = () => {
           <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             <BlockMath math="m = 274{,}6 \times 2{,}5 \approx 686{,}5\text{ gram}"/>
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+          <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300/60 rounded p-3 text-xs space-y-0.5"}>
             <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Height" : lang === "ja" ? "高さ" : "Tinggi"} ≈ 10,17 cm</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} ≈ 274,6 cm³</p>
