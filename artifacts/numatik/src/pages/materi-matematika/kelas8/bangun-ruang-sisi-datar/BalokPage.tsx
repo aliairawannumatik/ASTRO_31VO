@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ─────────────────────────────────────────────────────────────
    SVG 3D MATH UTILITIES
@@ -1512,6 +1513,7 @@ const WaterBalokAnimation = () => {
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
 
 const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: string; lang: string }) => {
+  const { isDark } = useTheme();
   const [show, setShow] = useState(false);
   const showLabel = lang === "en" ? "Show Solution" : lang === "ja" ? "解説を見る" : "Lihat Pembahasan";
   const hideLabel = lang === "en" ? "Hide" : lang === "ja" ? "隠す" : "Sembunyikan";
@@ -1526,11 +1528,11 @@ const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: s
         {ex.question}
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
-        className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
+        className={`w-full flex items-center justify-between px-5 py-3 transition-colors cursor-pointer border-t ${isDark ? "bg-slate-800/60 hover:bg-slate-800/90 border-slate-700/50" : "bg-gray-100 hover:bg-gray-200 border-gray-200"}`}>
         <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLabel : showLabel}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
       </button>
-      {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
+      {show && <div className={`px-5 py-4 border-t ${isDark ? "bg-slate-900/60 border-slate-700/30" : "bg-white border-gray-200"}`}>{ex.answer}</div>}
     </div>
   );
 };
@@ -1541,6 +1543,7 @@ const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: s
 const BalokPage = () => {
   const navigate = useNavigate();
   const { language: lang } = useLanguage();
+  const { isDark } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const translations = {
@@ -1961,9 +1964,9 @@ const BalokPage = () => {
 
   /* ── example problems ─────────────────────────────────── */
   const E = t.easy, M = t.medium, H = t.hard;
-  const easy_props = { level: E, color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60" };
-  const med_props  = { level: M, color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60" };
-  const hard_props = { level: H, color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60" };
+  const easy_props = { level: E, color: isDark ? "text-green-400" : "text-green-700", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100" };
+  const med_props  = { level: M, color: isDark ? "text-yellow-400" : "text-yellow-700", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100" };
+  const hard_props = { level: H, color: isDark ? "text-red-400" : "text-red-700", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100" };
 
   const step1 = lang === "en" ? "Step 1" : lang === "ja" ? "ステップ1" : "Langkah 1";
   const step2 = lang === "en" ? "Step 2" : lang === "ja" ? "ステップ2" : "Langkah 2";
@@ -2004,8 +2007,8 @@ const BalokPage = () => {
             <BlockMath math="L = 2(20\times15 + 20\times10 + 15\times10)" />
             <BlockMath math="L = 2(300 + 200 + 150) = 2 \times 650 = 1{,}300\text{ cm}^2" />
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
-            <p className="text-green-300 font-semibold">✅ {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"} = <InlineMath math="1{,}300\text{ cm}^2" /></p>
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-3" : "bg-green-50 border border-green-300 rounded p-3"}>
+            <p className={`${isDark ? "text-green-300" : "text-green-700"} font-semibold`}>✅ {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"} = <InlineMath math="1{,}300\text{ cm}^2" /></p>
           </div>
         </div>
       ),
@@ -2044,8 +2047,8 @@ const BalokPage = () => {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
             <BlockMath math="d = \sqrt{10^2 + 8^2 + 6^2} = \sqrt{100+64+36} = \sqrt{200} = 10\sqrt{2} \approx 14{,}14\text{ cm}" />
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-0.5">
-            <p className="text-yellow-300">✅ t = 6 cm, d_r = <InlineMath math="10\sqrt{2} \approx 14{,}14\text{ cm}" /></p>
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-0.5" : "bg-yellow-50 border border-yellow-300 rounded p-3 text-xs space-y-0.5"}>
+            <p className={isDark ? "text-yellow-300" : "text-yellow-700"}>✅ t = 6 cm, d_r = <InlineMath math="10\sqrt{2} \approx 14{,}14\text{ cm}" /></p>
           </div>
         </div>
       ),
@@ -2111,8 +2114,8 @@ const BalokPage = () => {
               </>
             )}
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-            <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
+          <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
+            <p className={`${isDark ? "text-red-300" : "text-red-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
             <p className="text-white/80">• {lang === "en" ? "Paint area = 84 m²" : lang === "ja" ? "塗装面積 = 84 m²" : "Luas yang dicat = 84 m²"}</p>
             <p className="text-white/80">• {lang === "en" ? "Cans needed = 7" : lang === "ja" ? "必要な缶数 = 7缶" : "Kaleng cat = 7 buah"}</p>
             <p className="text-white/80">• {lang === "en" ? "Total cost = " : lang === "ja" ? "合計費用 = " : "Total biaya = "}<strong className="text-yellow-300">{lang === "en" ? "$59.50" : lang === "ja" ? "¥5,950" : "Rp 595.000"}</strong></p>
@@ -2151,8 +2154,8 @@ const BalokPage = () => {
             <BlockMath math="V = p \times l \times t = 1.2 \times 0.6 \times 2 = 1.44\text{ m}^3" />
             <BlockMath math="1.44\text{ m}^3 = 1.44 \times 1{,}000{,}000 = 1{,}440{,}000\text{ cm}^3" />
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-            <p className="text-green-300 font-semibold text-xs">✅ V = 1.44 m³ = 1,440,000 cm³</p>
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-2" : "bg-green-50 border border-green-300 rounded p-2"}>
+            <p className={`${isDark ? "text-green-300" : "text-green-700"} font-semibold text-xs`}>✅ V = 1.44 m³ = 1,440,000 cm³</p>
           </div>
         </div>
       ),
@@ -2188,8 +2191,8 @@ const BalokPage = () => {
             <BlockMath math="V_t = 25 \times 10 \times 2 = 500\text{ m}^3 = 500{,}000\text{ liters}" />
             <BlockMath math="V_{80\%} = 80\% \times 500{,}000 = 400{,}000\text{ liters}" />
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
-            <p className="text-yellow-300 font-semibold text-xs">✅ {lang === "en" ? "Water volume" : lang === "ja" ? "水の体積" : "Volume air"} = 400,000 {lang === "en" || lang === "ja" ? "liters" : "liter"} = 400 m³</p>
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-2" : "bg-yellow-50 border border-yellow-300 rounded p-2"}>
+            <p className={`${isDark ? "text-yellow-300" : "text-yellow-700"} font-semibold text-xs`}>✅ {lang === "en" ? "Water volume" : lang === "ja" ? "水の体積" : "Volume air"} = 400,000 {lang === "en" || lang === "ja" ? "liters" : "liter"} = 400 m³</p>
           </div>
         </div>
       ),
@@ -2233,8 +2236,8 @@ const BalokPage = () => {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
             <BlockMath math="24\text{ t} - 20\text{ t} = 4\text{ t (excess)}" />
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-            <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
+          <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
+            <p className={`${isDark ? "text-red-300" : "text-red-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
             <p className="text-white/80">• {lang === "en" ? "Sand volume = 15 m³" : lang === "ja" ? "砂の体積 = 15 m³" : "Volume pasir = 15 m³"}</p>
             <p className="text-white/80">• {lang === "en" ? "Sand mass = 24 tonnes" : lang === "ja" ? "砂の質量 = 24トン" : "Massa pasir = 24 ton"}</p>
             <p className="text-white/80">• {lang === "en" ? "Truck is" : lang === "ja" ? "トラックは" : "Truk"} <strong className="text-red-400">{lang === "en" ? "overloaded" : lang === "ja" ? "過積載" : "kelebihan muatan"}</strong> {lang === "en" ? "by" : lang === "ja" ? "で" : "sebesar"} <strong className="text-yellow-300">4 {lang === "en" ? "tonnes" : lang === "ja" ? "トン" : "ton"}</strong></p>
@@ -2273,8 +2276,8 @@ const BalokPage = () => {
             <BlockMath math="K = 4(p + l + t)" />
             <BlockMath math="K = 4(12 + 8 + 5) = 4 \times 25 = 100\text{ cm}" />
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-            <p className="text-green-300 font-semibold text-xs">✅ {lang === "en" ? "Wire length" : lang === "ja" ? "針金の長さ" : "Panjang kawat"} = <strong className="text-yellow-300">100 cm</strong></p>
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-2" : "bg-green-50 border border-green-300 rounded p-2"}>
+            <p className={`${isDark ? "text-green-300" : "text-green-700"} font-semibold text-xs`}>✅ {lang === "en" ? "Wire length" : lang === "ja" ? "針金の長さ" : "Panjang kawat"} = <strong className="text-yellow-300">100 cm</strong></p>
           </div>
         </div>
       ),
@@ -2319,8 +2322,8 @@ const BalokPage = () => {
             <BlockMath math="L = 2(pl + pt + lt) = 2(15\times8 + 15\times7 + 8\times7)" />
             <BlockMath math="= 2(120 + 105 + 56) = 2 \times 281 = 562\text{ cm}^2" />
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs space-y-0.5">
-            <p className="text-yellow-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs space-y-0.5" : "bg-yellow-50 border border-yellow-300 rounded p-2 text-xs space-y-0.5"}>
+            <p className={`${isDark ? "text-yellow-300" : "text-yellow-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
             <p className="text-white/80">• t = <strong className="text-yellow-300">7 cm</strong></p>
             <p className="text-white/80">• L = <strong className="text-yellow-300">562 cm²</strong></p>
           </div>
@@ -2375,8 +2378,8 @@ const BalokPage = () => {
             <BlockMath math="L = 2(18\times12 + 18\times6 + 12\times6) = 2(216+108+72) = 792\text{ cm}^2" />
             <BlockMath math="V = 18 \times 12 \times 6 = 1{,}296\text{ cm}^3" />
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-2 text-xs space-y-0.5">
-            <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
+          <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-2 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-2 text-xs space-y-0.5"}>
+            <p className={`${isDark ? "text-red-300" : "text-red-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
             <p className="text-white/80">• {lang === "en" ? "Dimensions" : lang === "ja" ? "寸法" : "Dimensi"}: <strong className="text-yellow-300">18 cm × 12 cm × 6 cm</strong></p>
             <p className="text-white/80">• {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"}: <strong className="text-yellow-300">792 cm²</strong></p>
             <p className="text-white/80">• {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"}: <strong className="text-yellow-300">1,296 cm³</strong></p>
