@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const VW = 300, VH = 280;
 const Ox = 150, Oy = 140, R = 105;
@@ -77,6 +78,7 @@ const translations = {
 export default function SudutPusatInteraktif() {
   const { language } = useLanguage();
   const t = translations[language];
+  const { isDark } = useTheme();
 
   const [arcDeg, setArcDeg] = useState(100);
   const [cDeg, setCDeg] = useState(250);
@@ -299,7 +301,7 @@ export default function SudutPusatInteraktif() {
           }}
           className="w-full h-2 rounded-full appearance-none cursor-pointer"
           style={{
-            background: `linear-gradient(to right, #f59e0b ${((arcDeg-10)/340)*100}%, rgba(255,255,255,0.15) ${((arcDeg-10)/340)*100}%)`,
+            background: `linear-gradient(to right, #f59e0b ${((arcDeg-10)/340)*100}%, ${isDark ? "rgba(255,255,255,0.15)" : "rgba(100,116,139,0.25)"} ${((arcDeg-10)/340)*100}%)`,
           }}
         />
         <div className="flex justify-between font-body text-[10px] text-white/30">
@@ -330,8 +332,8 @@ export default function SudutPusatInteraktif() {
         </div>
       </div>
 
-      <div className="w-full max-w-sm bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-3">
-        <p className="font-body text-xs text-white/65 leading-relaxed">
+      <div className={`w-full max-w-sm border border-cyan-500/20 rounded-xl p-3 ${isDark ? "bg-cyan-900/20" : "bg-cyan-50"}`}>
+        <p className={`font-body text-xs leading-relaxed ${isDark ? "text-white/65" : "text-gray-600"}`}>
           💡 <strong className="text-cyan-300">{t.infoC}</strong>{" "}
           {t.infoText(inscribedAngle, centralAngle).split(t.infoC)[1]?.split(t.infoPos)[0]}
           <strong className="text-amber-300">{t.infoPos}</strong>

@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useMemo } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const VIEW = 460;
 const CX = VIEW / 2;
@@ -60,6 +61,7 @@ const CHALLENGES: Challenge[] = [
 ];
 
 export default function LingkaranInteractive() {
+  const { isDark } = useTheme();
   const [angA, setAngA] = useState(20);
   const [angB, setAngB] = useState(110);
   const [angC, setAngC] = useState(225);
@@ -179,7 +181,7 @@ export default function LingkaranInteractive() {
   }, [angA, angB]);
 
   return (
-    <div className="rounded-2xl bg-slate-950/60 border border-rose-300/20 p-3 md:p-4">
+    <div className={`rounded-2xl border border-rose-300/20 p-3 md:p-4 ${isDark ? "bg-slate-950/60" : "bg-gray-50"}`}>
       {/* Challenge selector */}
       <div className="flex flex-wrap gap-2 mb-3 justify-center">
         {CHALLENGES.map((ch, i) => (
@@ -190,7 +192,7 @@ export default function LingkaranInteractive() {
             className={`rounded-full px-3 py-1.5 text-[11px] font-bold transition-all border ${
               i === challengeIdx
                 ? "bg-rose-400 text-slate-900 border-rose-200 shadow-[0_0_15px_rgba(251,113,133,0.6)]"
-                : "border-white/20 text-white/70 bg-white/5 hover:bg-white/10"
+                : isDark ? "border-white/20 text-white/70 bg-white/5 hover:bg-white/10" : "border-gray-300 text-gray-600 bg-white hover:bg-gray-100"
             }`}
           >
             {ch.label}
@@ -204,7 +206,8 @@ export default function LingkaranInteractive() {
           <svg
             ref={svgRef}
             viewBox={`0 0 ${VIEW} ${VIEW}`}
-            className="w-full h-auto rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-white/10 touch-none"
+            className="w-full h-auto rounded-xl border touch-none"
+            style={{ background: isDark ? "rgba(10,18,35,0.90)" : "rgba(241,245,249,0.95)", borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(203,213,225,0.8)" }}
             onPointerMove={handleMove}
           >
             {/* Sector (juring) for sudut pusat */}
@@ -215,7 +218,7 @@ export default function LingkaranInteractive() {
 
             {/* Center O */}
             <circle cx={CX} cy={CY} r={4} fill="#fde047" stroke="#facc15" strokeWidth="1.5" />
-            <text x={CX + 7} y={CY + 14} fill="#fde047" fontSize="12" fontWeight="bold">O</text>
+            <text x={CX + 7} y={CY + 14} fill={isDark ? "#fde047" : "#b45309"} fontSize="12" fontWeight="bold">O</text>
 
             {/* Lines OA, OB (jari-jari) */}
             <line x1={CX} y1={CY} x2={A.x} y2={A.y} stroke="#fbbf24" strokeWidth="2" strokeDasharray="3 3" />
@@ -232,7 +235,7 @@ export default function LingkaranInteractive() {
             <text
               x={(CX + A.x) / 2 + 6}
               y={(CY + A.y) / 2 - 6}
-              fill="#fbbf24"
+              fill={isDark ? "#fbbf24" : "#b45309"}
               fontSize="10"
               fontWeight="bold"
               style={{ pointerEvents: "none" }}
@@ -272,7 +275,7 @@ export default function LingkaranInteractive() {
               onPointerUp={handleUp}
               style={{ cursor: dragging === "A" ? "grabbing" : "grab", filter: "drop-shadow(0 0 8px rgba(251,113,133,0.7))" }}
             />
-            <text x={A.x} y={A.y - 16} fill="#fda4af" fontSize="13" fontWeight="bold" textAnchor="middle" style={{ pointerEvents: "none" }}>A</text>
+            <text x={A.x} y={A.y - 16} fill={isDark ? "#fda4af" : "#be123c"} fontSize="13" fontWeight="bold" textAnchor="middle" style={{ pointerEvents: "none" }}>A</text>
 
             <circle
               cx={B.x}
@@ -285,7 +288,7 @@ export default function LingkaranInteractive() {
               onPointerUp={handleUp}
               style={{ cursor: dragging === "B" ? "grabbing" : "grab", filter: "drop-shadow(0 0 8px rgba(34,211,238,0.7))" }}
             />
-            <text x={B.x} y={B.y - 16} fill="#67e8f9" fontSize="13" fontWeight="bold" textAnchor="middle" style={{ pointerEvents: "none" }}>B</text>
+            <text x={B.x} y={B.y - 16} fill={isDark ? "#67e8f9" : "#0e7490"} fontSize="13" fontWeight="bold" textAnchor="middle" style={{ pointerEvents: "none" }}>B</text>
 
             <circle
               cx={C.x}
@@ -298,9 +301,9 @@ export default function LingkaranInteractive() {
               onPointerUp={handleUp}
               style={{ cursor: dragging === "C" ? "grabbing" : "grab", filter: "drop-shadow(0 0 8px rgba(52,211,153,0.7))" }}
             />
-            <text x={C.x} y={C.y - 16} fill="#6ee7b7" fontSize="13" fontWeight="bold" textAnchor="middle" style={{ pointerEvents: "none" }}>C</text>
+            <text x={C.x} y={C.y - 16} fill={isDark ? "#6ee7b7" : "#065f46"} fontSize="13" fontWeight="bold" textAnchor="middle" style={{ pointerEvents: "none" }}>C</text>
           </svg>
-          <p className="mt-2 text-[11px] text-center text-white/55 font-body italic">
+          <p className={`mt-2 text-[11px] text-center font-body italic ${isDark ? "text-white/55" : "text-gray-500"}`}>
             🖱️ Seret titik A (merah), B (biru), atau C (hijau) di sepanjang lingkaran. Saksikan ∠ACB selalu = ½ × ∠AOB!
           </p>
         </div>
@@ -316,29 +319,29 @@ export default function LingkaranInteractive() {
                   : "border-amber-300/30 bg-amber-500/10"
             }`}
           >
-            <p className="text-[10px] uppercase tracking-wider text-white/50 mb-1">Tantangan</p>
-            <p className="text-sm font-bold text-white">{challenge.label}</p>
+            <p className={`text-[10px] uppercase tracking-wider mb-1 ${isDark ? "text-white/50" : "text-gray-500"}`}>Tantangan</p>
+            <p className={`text-sm font-bold ${isDark ? "text-white" : "text-gray-800"}`}>{challenge.label}</p>
             {challengeIdx !== 0 && (
-              <p className="text-xs mt-1 text-white/70 italic">
+              <p className={`text-xs mt-1 italic ${isDark ? "text-white/70" : "text-gray-600"}`}>
                 {challengeMet ? "🏆 BERHASIL!" : `💡 ${challenge.hint}`}
               </p>
             )}
           </div>
 
           <div className="rounded-xl border border-emerald-300/30 bg-emerald-500/10 p-3 text-center">
-            <p className="text-[10px] uppercase tracking-wider text-emerald-200/70 mb-1">Hubungan Sudut</p>
-            <p className="text-sm font-display font-bold text-orange-200">∠AOB (pusat) = {minorArc}°</p>
-            <p className="text-sm font-display font-bold text-emerald-200">∠ACB (keliling) = {Math.round(inscribedAngle)}°</p>
-            <div className="mt-1.5 pt-1.5 border-t border-white/10">
-              <p className="text-xs text-yellow-200">
+            <p className={`text-[10px] uppercase tracking-wider mb-1 ${isDark ? "text-emerald-200/70" : "text-emerald-700"}`}>Hubungan Sudut</p>
+            <p className={`text-sm font-display font-bold ${isDark ? "text-orange-200" : "text-orange-600"}`}>∠AOB (pusat) = {minorArc}°</p>
+            <p className={`text-sm font-display font-bold ${isDark ? "text-emerald-200" : "text-emerald-700"}`}>∠ACB (keliling) = {Math.round(inscribedAngle)}°</p>
+            <div className={`mt-1.5 pt-1.5 border-t ${isDark ? "border-white/10" : "border-emerald-300/40"}`}>
+              <p className={`text-xs ${isDark ? "text-yellow-200" : "text-amber-700"}`}>
                 ✨ {minorArc} ÷ 2 = {(minorArc / 2).toFixed(1)} → ∠ACB = ½ × ∠AOB
               </p>
             </div>
           </div>
 
-          <div className="rounded-xl border border-white/15 bg-black/30 p-3 space-y-2">
+          <div className={`rounded-xl border p-3 space-y-2 ${isDark ? "border-white/15 bg-black/30" : "border-gray-200 bg-gray-100"}`}>
             <div>
-              <label className="text-[10px] uppercase tracking-wider text-white/50">Jari-jari (r)</label>
+              <label className={`text-[10px] uppercase tracking-wider ${isDark ? "text-white/50" : "text-gray-500"}`}>Jari-jari (r)</label>
               <div className="flex items-center gap-2 mt-1">
                 <input
                   type="range"
@@ -351,27 +354,27 @@ export default function LingkaranInteractive() {
                 <span className="text-sm font-bold text-cyan-200 w-12 text-right">{r} cm</span>
               </div>
             </div>
-            <div className="text-xs space-y-0.5 text-white/85">
+            <div className={`text-xs space-y-0.5 ${isDark ? "text-white/85" : "text-gray-700"}`}>
               <p>Keliling = 2πr = <span className="font-bold text-cyan-200">{keliling.toFixed(2)} cm</span></p>
               <p>Luas = πr² = <span className="font-bold text-cyan-200">{luas.toFixed(2)} cm²</span></p>
               <p className="text-orange-200">Busur AB = <span className="font-bold">{panjangBusurMinor.toFixed(2)} cm</span></p>
               <p className="text-orange-200">Juring AOB = <span className="font-bold">{luasJuringMinor.toFixed(2)} cm²</span></p>
             </div>
-            <p className="text-[10px] text-white/40 italic">π ≈ 22/7</p>
+            <p className={`text-[10px] italic ${isDark ? "text-white/40" : "text-gray-400"}`}>π ≈ 22/7</p>
           </div>
 
           <div className="flex gap-2">
             <button
               type="button"
               onClick={() => setShowAngles((v) => !v)}
-              className="flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors"
+              className={`flex-1 rounded-lg border text-[11px] font-bold py-2 transition-colors ${isDark ? "border-white/20 bg-white/5 hover:bg-white/10 text-white" : "border-gray-300 bg-white hover:bg-gray-100 text-gray-700"}`}
             >
               {showAngles ? "🔢 Sembunyikan ∠" : "🔢 Tampilkan ∠"}
             </button>
             <button
               type="button"
               onClick={reset}
-              className="flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors"
+              className={`flex-1 rounded-lg border text-[11px] font-bold py-2 transition-colors ${isDark ? "border-white/20 bg-white/5 hover:bg-white/10 text-white" : "border-gray-300 bg-white hover:bg-gray-100 text-gray-700"}`}
             >
               🔄 Reset
             </button>

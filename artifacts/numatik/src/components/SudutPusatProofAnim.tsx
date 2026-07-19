@@ -5,6 +5,7 @@ import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ── Fixed geometry (viewBox 0 0 300 290) ── */
 const Ox = 152, Oy = 148, R = 108;
@@ -164,6 +165,7 @@ const STEP_FORMULAS: (string | null)[] = [
 export default function SudutPusatProofAnim() {
   const { language } = useLanguage();
   const t = translations[language];
+  const { isDark } = useTheme();
 
   const [step, setStep] = useState(0);
   const total = t.steps.length;
@@ -320,15 +322,15 @@ export default function SudutPusatProofAnim() {
           transition={{ duration: 0.25 }}
           className="w-full max-w-sm"
         >
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-xl p-3.5 space-y-2">
+          <div className={`rounded-xl p-3.5 space-y-2 border ${isDark ? "bg-slate-800/60 border-slate-600/40" : "bg-gray-100 border-gray-200"}`}>
             <p className={`font-display text-sm font-bold ${STEP_COLORS[step]}`}>
               {t.steps[step].title}
             </p>
-            <p className="font-body text-xs text-white/75 leading-relaxed">
+            <p className={`font-body text-xs leading-relaxed ${isDark ? "text-white/75" : "text-gray-700"}`}>
               {t.steps[step].desc}
             </p>
             {STEP_FORMULAS[step] && (
-              <div className="bg-slate-900/60 rounded-lg px-3 py-1 text-center overflow-x-auto">
+              <div className={`rounded-lg px-3 py-1 text-center overflow-x-auto ${isDark ? "bg-slate-900/60" : "bg-white/90"}`}>
                 <BlockMath math={STEP_FORMULAS[step]!} />
               </div>
             )}
@@ -340,7 +342,7 @@ export default function SudutPusatProofAnim() {
         <button
           onClick={() => go(step - 1)}
           disabled={step === 0}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/8 hover:bg-white/15 disabled:opacity-30 transition cursor-pointer disabled:cursor-default font-display text-xs font-bold text-white/80"
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-xl disabled:opacity-30 transition cursor-pointer disabled:cursor-default font-display text-xs font-bold ${isDark ? "bg-white/8 hover:bg-white/15 text-white/80" : "bg-gray-200 hover:bg-gray-300 text-gray-700"}`}
         >
           <ChevronLeft className="w-4 h-4" /> {t.prev}
         </button>
@@ -349,7 +351,7 @@ export default function SudutPusatProofAnim() {
           {t.steps.map((_, i) => (
             <button key={i} onClick={() => go(i)} className="cursor-pointer">
               <div className={`rounded-full transition-all duration-200 ${
-                i === step ? "w-5 h-2.5 bg-cyan-400" : "w-2.5 h-2.5 bg-white/25 hover:bg-white/50"
+                i === step ? "w-5 h-2.5 bg-cyan-400" : `w-2.5 h-2.5 ${isDark ? "bg-white/25 hover:bg-white/50" : "bg-gray-400/60 hover:bg-gray-500"}`
               }`} />
             </button>
           ))}
@@ -358,13 +360,13 @@ export default function SudutPusatProofAnim() {
         <button
           onClick={() => go(step + 1)}
           disabled={step === total - 1}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/8 hover:bg-white/15 disabled:opacity-30 transition cursor-pointer disabled:cursor-default font-display text-xs font-bold text-white/80"
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-xl disabled:opacity-30 transition cursor-pointer disabled:cursor-default font-display text-xs font-bold ${isDark ? "bg-white/8 hover:bg-white/15 text-white/80" : "bg-gray-200 hover:bg-gray-300 text-gray-700"}`}
         >
           {t.next} <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 
-      <p className="font-body text-[10px] text-white/30">
+      <p className={`font-body text-[10px] ${isDark ? "text-white/30" : "text-gray-400"}`}>
         {t.stepOf(step + 1, total)}
       </p>
     </div>
