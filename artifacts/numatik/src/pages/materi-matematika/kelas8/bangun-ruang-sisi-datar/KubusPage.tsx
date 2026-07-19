@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ─────────────────────────────────────────────────────────────
    FACE LABEL HELPERS
@@ -1182,6 +1183,7 @@ const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: s
 const KubusPage = () => {
   const navigate = useNavigate();
   const { language: lang } = useLanguage();
+  const { isDark } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const translations = {
@@ -1807,7 +1809,7 @@ const KubusPage = () => {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
             <BlockMath math="d_r = s\sqrt{3} = 10\sqrt{3} \approx 17{,}32 \text{ cm}" />
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs text-white/80 space-y-0.5">
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs text-white/80 space-y-0.5" : "bg-yellow-50 border border-yellow-300 rounded p-3 text-xs text-slate-700 space-y-0.5"}>
             <p>✅ <InlineMath math="s = 10 \text{ cm}" />, <InlineMath math="d_b = 10\sqrt{2} \text{ cm}" />, <InlineMath math="d_r = 10\sqrt{3} \text{ cm}" /></p>
           </div>
         </div>
@@ -2012,7 +2014,7 @@ const KubusPage = () => {
           <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
             <BlockMath math="V = s^3 = 12^3 = 1{,}728 \text{ cm}^3" />
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs text-white/80 space-y-0.5">
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs text-white/80 space-y-0.5" : "bg-yellow-50 border border-yellow-300 rounded p-3 text-xs text-slate-700 space-y-0.5"}>
             <p>• s = <InlineMath math="12 \text{ cm}" /></p>
             <p>• L = <InlineMath math="864 \text{ cm}^2" /></p>
             <p>• V = <InlineMath math="1{,}728 \text{ cm}^3" /></p>
