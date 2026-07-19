@@ -42,6 +42,23 @@ When using replaceAll on SVG stroke patterns, the same pattern string can appear
 ## Trilingual page pattern
 Each page exports a `T_PAGENAME` translation object keyed by `"id" | "en" | "ms"`. Pages access it with `const t = T_PAGENAME[language]` where `language` comes from `useLanguage()`.
 
+## SVG color mapping (PrismaPage / water-animation pattern)
+| Dark SVG value | Light SVG value |
+|---|---|
+| wireframe face `rgba(30,41,59,0.8)` | `rgba(241,245,249,0.9)` |
+| wireframe face `rgba(30,41,59,0.5)` | `rgba(241,245,249,0.7)` |
+| structural stroke `#334155` | `#94a3b8` |
+| bg face fill `#0f172a` opacity 0.22 | `rgba(241,245,249,0.9)` opacity 1 |
+| bg face fill `#0f172a` opacity 0.15 | `rgba(241,245,249,0.9)` opacity 1 |
+| top cap `#0f172a` (isFull conditional) | `rgba(241,245,249,0.9)` opacity 1 |
+| gauge bar bg `#0f172a` | `rgba(241,245,249,0.9)` |
+| formula text `#e0e7ff` | `#1e293b` |
+- Dimension labels `#94a3b8` (slate-400) and bright hue fills are visible on both themes — leave unchanged.
+- `fill="white"` inside `<mask>` elements is SVG semantic — do not change.
+- Bright face-color fills (#ef4444, #eab308, #3b82f6, etc.) are fine on both themes.
+- `stroke="rgba(255,255,255,0.5)"` on bright-colored rotating 3D polygons is intentional (BalokPage same pattern).
+
 ## Translation progress
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
+- PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.
 - Kelas 9 Kesebangunan: trilingual support incomplete (task proposed).
