@@ -7,6 +7,7 @@ import { BookOpen, Lightbulb, Target, FlaskConical } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ─── Translations ─────────────────────────────────────── */
 const translations = {
@@ -679,12 +680,13 @@ const KelilingLuasPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+  const { isDark } = useTheme();
 
   const SectionHeader = ({ icon, iconColor, title }: { icon: React.ReactNode; iconColor?: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4 text-left">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
+        <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</span>
       </div>
     </div>
   );
@@ -696,7 +698,7 @@ const KelilingLuasPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.h1}</h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.subtitle}</p>
+        <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>{t.subtitle}</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
@@ -704,7 +706,7 @@ const KelilingLuasPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.piSectionTitle} />
             <div className="px-5 pb-5 space-y-4">
-              <p className="font-body text-sm text-white/80 leading-relaxed">
+              <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} leading-relaxed`}>
                 {t.piIntro}<strong className="text-cyan-300">{t.piName}</strong>{t.piIntro2}
                 <strong className="text-yellow-300">{t.piVal}</strong>{t.piIntro3}
               </p>
@@ -725,7 +727,7 @@ const KelilingLuasPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                 <p className="font-body text-sm font-semibold text-cyan-300 mb-3">{t.formulaIntroTitle}</p>
-                <p className="font-body text-sm text-white/80 mb-2">{t.formulaIntro}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} mb-2`}>{t.formulaIntro}</p>
               </div>
               <KelilingLuasCirclesSVG t={t} />
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
@@ -744,10 +746,10 @@ const KelilingLuasPage = () => {
                   {t.c1_q}<InlineMath math="\pi = \frac{22}{7}"/>.
                 </p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c1_sol}</p>
-                <p className="font-body text-sm text-white/80">{t.c1_known}<InlineMath math="d = 70"/> cm, <InlineMath math="\pi = \frac{22}{7}"/></p>
-                <p className="font-body text-sm text-white/80">{t.c1_use}</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c1_sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c1_known}<InlineMath math="d = 70"/> cm, <InlineMath math="\pi = \frac{22}{7}"/></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c1_use}</p>
                 <BlockMath math="K = \pi \times d" />
                 <BlockMath math="K = \frac{22}{7} \times 70" />
                 <BlockMath math="K = 22 \times 10 = 220 \,\mathrm{cm}" />
@@ -768,12 +770,12 @@ const KelilingLuasPage = () => {
                   {t.c2_q}<InlineMath math="\pi = \frac{22}{7}"/>{t.c2_q2}
                 </p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c2_sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.c2_step1}</strong> {t.c2_step1desc}</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c2_sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2_step1}</strong> {t.c2_step1desc}</p>
                 <BlockMath math="K = 2\pi r \Rightarrow 88 = 2 \times \frac{22}{7} \times r" />
                 <BlockMath math="88 = \frac{44}{7} \times r \Rightarrow r = 88 \times \frac{7}{44} = 14 \,\mathrm{m}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.c2_step2}</strong> {t.c2_step2desc}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2_step2}</strong> {t.c2_step2desc}</p>
                 <BlockMath math="L = \pi r^2 = \frac{22}{7} \times 14^2 = \frac{22}{7} \times 196 = 22 \times 28 = 616 \,\mathrm{m}^2" />
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200 text-center">✅ {t.c2_check}</p>
@@ -792,15 +794,15 @@ const KelilingLuasPage = () => {
                   {t.c3_q}<InlineMath math="\pi = \frac{22}{7}"/>{t.c3_q2}
                 </p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c3_sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.c3_step1}</strong> {t.c3_step1desc}</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c3_sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3_step1}</strong> {t.c3_step1desc}</p>
                 <BlockMath math="R = 10 + 3{,}5 = 13{,}5 \,\mathrm{m}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.c3_step2}</strong> {t.c3_step2desc}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3_step2}</strong> {t.c3_step2desc}</p>
                 <BlockMath math={`${t.f_Lbesar} = \\pi R^2 = \\frac{22}{7} \\times (13{,}5)^2 = \\frac{22}{7} \\times 182{,}25 \\approx 572{,}79 \\,\\mathrm{m}^2`} />
-                <p className="font-body text-sm text-white/80"><strong>{t.c3_step3}</strong> {t.c3_step3desc}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3_step3}</strong> {t.c3_step3desc}</p>
                 <BlockMath math={`${t.f_Lkecil} = \\pi r^2 = \\frac{22}{7} \\times 10^2 = \\frac{22}{7} \\times 100 \\approx 314{,}29 \\,\\mathrm{m}^2`} />
-                <p className="font-body text-sm text-white/80"><strong>{t.c3_step4}</strong> {t.c3_step4desc}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3_step4}</strong> {t.c3_step4desc}</p>
                 <BlockMath math={`${t.f_Ljalur} = 572{,}79 - 314{,}29 = 258{,}5 \\,\\mathrm{m}^2`} />
                 <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-red-200 text-center">✅ {t.c3_check}</p>
@@ -814,10 +816,10 @@ const KelilingLuasPage = () => {
             <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title={t.rangkuman_header} />
             <div className="px-5 pb-5 space-y-3">
               <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                <p className="font-body text-sm text-white/80">• <strong className="text-cyan-300">{t.r_pi}</strong> {t.r_pi_desc}</p>
-                <p className="font-body text-sm text-white/80">• <strong className="text-green-300">{t.r_K}</strong> <InlineMath math="K = \pi d = 2\pi r"/></p>
-                <p className="font-body text-sm text-white/80">• <strong className="text-orange-300">{t.r_L}</strong> <InlineMath math="L = \pi r^2"/></p>
-                <p className="font-body text-sm text-white/80">• {t.r_ring} <InlineMath math="L = \pi(R^2 - r^2)"/></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className={isDark ? "text-cyan-300" : "text-cyan-700"}>{t.r_pi}</strong> {t.r_pi_desc}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className={isDark ? "text-green-300" : "text-green-700"}>{t.r_K}</strong> <InlineMath math="K = \pi d = 2\pi r"/></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className={isDark ? "text-orange-300" : "text-orange-700"}>{t.r_L}</strong> <InlineMath math="L = \pi r^2"/></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• {t.r_ring} <InlineMath math="L = \pi(R^2 - r^2)"/></p>
               </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                 <p className="font-body text-sm text-yellow-200">{t.tips}</p>

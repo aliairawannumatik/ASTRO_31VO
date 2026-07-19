@@ -7,6 +7,7 @@ import { BookOpen, Lightbulb, Target, FlaskConical } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -322,6 +323,7 @@ const KaitanBangunDatarPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+  const { isDark } = useTheme();
 
   const SH = ({
     icon, iconColor, title, gradFrom, borderColor,
@@ -337,7 +339,7 @@ const KaitanBangunDatarPage = () => {
       }}
     >
       <span className={iconColor}>{icon}</span>
-      <span className="font-body font-semibold text-white ml-3">{title}</span>
+      <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"} ml-3`}>{title}</span>
     </div>
   );
 
@@ -366,12 +368,12 @@ const KaitanBangunDatarPage = () => {
 
           {/* INTRO */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(6,182,212,.25)",backdropFilter:"blur(12px)"}}>
+            style={{background: isDark ? "rgba(15,23,42,.7)" : "rgba(248,250,252,.95)", borderColor:"rgba(6,182,212,.25)",backdropFilter:"blur(12px)"}}>
             <SH icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400"
               title={t.introTitle}
               gradFrom="rgba(234,179,8,.12)" borderColor="rgba(234,179,8,.3)"/>
             <div className="px-5 pb-5 pt-4 space-y-4">
-              <p className="font-body text-sm text-white/80 leading-relaxed">
+              <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} leading-relaxed`}>
                 {t.introP.split(t.introIn)[0]}
                 <strong className="text-green-300">{t.introIn}</strong>
                 {t.introP.split(t.introIn)[1]?.split(t.introOut)[0]}
@@ -395,7 +397,7 @@ const KaitanBangunDatarPage = () => {
 
           {/* KAITAN */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(168,85,247,.25)",backdropFilter:"blur(12px)"}}>
+            style={{background: isDark ? "rgba(15,23,42,.7)" : "rgba(248,250,252,.95)", borderColor:"rgba(168,85,247,.25)",backdropFilter:"blur(12px)"}}>
             <SH icon={<Target className="w-5 h-5"/>} iconColor="text-violet-400"
               title={t.kaitanTitle}
               gradFrom="rgba(168,85,247,.12)" borderColor="rgba(168,85,247,.3)"/>
@@ -412,12 +414,12 @@ const KaitanBangunDatarPage = () => {
                   <LingkaranDalamSegitigaSVG t={t} />
                   <div className="rounded-xl p-4 mt-2 space-y-2 border"
                     style={{background:"rgba(34,197,94,.08)",borderColor:"rgba(34,197,94,.2)"}}>
-                    <p className="font-body text-sm text-white/80">
+                    <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                       {t.sec1Desc}<strong className="text-green-300">{t.sec1Bold}</strong>
                       {t.sec1Sub}<strong className="text-yellow-300">{t.sec1Sub2}</strong>{t.sec1Sub3}
                     </p>
                     <BlockMath math="r = \dfrac{L_{\triangle}}{s} \qquad s = \dfrac{a+b+c}{2}" />
-                    <p className="text-white/50 text-xs">{t.sec1FormulaNote}</p>
+                    <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>{t.sec1FormulaNote}</p>
                   </div>
                 </div>
               </div>
@@ -433,12 +435,12 @@ const KaitanBangunDatarPage = () => {
                   <LingkaranLuarSegitigaSVG t={t} />
                   <div className="rounded-xl p-4 mt-2 space-y-2 border"
                     style={{background:"rgba(249,115,22,.08)",borderColor:"rgba(249,115,22,.2)"}}>
-                    <p className="font-body text-sm text-white/80">
+                    <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                       {t.sec2Desc}<strong className="text-orange-300">{t.sec2Bold}</strong>
                       {t.sec2Sub}<strong className="text-yellow-300">{t.sec2Sub2}</strong>{t.sec2Sub3}
                     </p>
                     <BlockMath math="R = \dfrac{AB \times AC \times BC}{4 \times L_{\triangle}}" />
-                    <p className="text-white/50 text-xs">{t.sec2FormulaNote}</p>
+                    <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>{t.sec2FormulaNote}</p>
                     <div className="rounded-lg p-3 mt-1 border"
                       style={{background:"rgba(251,191,36,.08)",borderColor:"rgba(251,191,36,.25)"}}>
                       <p className="text-yellow-200 text-xs">
@@ -455,7 +457,7 @@ const KaitanBangunDatarPage = () => {
 
           {/* CONTOH 1 */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(34,197,94,.25)",backdropFilter:"blur(12px)"}}>
+            style={{background: isDark ? "rgba(15,23,42,.7)" : "rgba(248,250,252,.95)", borderColor:"rgba(34,197,94,.25)",backdropFilter:"blur(12px)"}}>
             <SH icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-green-400"
               title={t.c1Title}
               gradFrom="rgba(34,197,94,.12)" borderColor="rgba(34,197,94,.3)"/>
@@ -468,15 +470,15 @@ const KaitanBangunDatarPage = () => {
                 </p>
               </div>
               <div className="rounded-xl p-4 space-y-3 border"
-                style={{background:"rgba(15,23,42,.6)",borderColor:"rgba(100,116,139,.35)"}}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.c1Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.c1s1}</strong> {t.c1s1T}</p>
+                style={{background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.95)", borderColor:"rgba(100,116,139,.35)"}}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.c1Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c1s1}</strong> {t.c1s1T}</p>
                 <BlockMath math="AB = \sqrt{AC^2 + BC^2} = \sqrt{25 + 144} = \sqrt{169} = 13 \,\mathrm{cm}"/>
-                <p className="font-body text-sm text-white/80"><strong>{t.c1s2}</strong> {t.c1s2T}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c1s2}</strong> {t.c1s2T}</p>
                 <BlockMath math="L = \tfrac{1}{2} \times AC \times BC = \tfrac{1}{2} \times 5 \times 12 = 30 \,\mathrm{cm}^2"/>
-                <p className="font-body text-sm text-white/80"><strong>{t.c1s3}</strong> {t.c1s3T}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c1s3}</strong> {t.c1s3T}</p>
                 <BlockMath math="s = \dfrac{5 + 12 + 13}{2} = 15 \,\mathrm{cm}"/>
-                <p className="font-body text-sm text-white/80"><strong>{t.c1s4}</strong> {t.c1s4T}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c1s4}</strong> {t.c1s4T}</p>
                 <BlockMath math="r = \dfrac{L}{s} = \dfrac{30}{15} = 2 \,\mathrm{cm}"/>
                 <div className="rounded-lg p-3 border" style={{background:"rgba(34,197,94,.1)",borderColor:"rgba(34,197,94,.35)"}}>
                   <p className="font-body text-sm text-green-300 text-center">{t.c1Result}</p>
@@ -487,7 +489,7 @@ const KaitanBangunDatarPage = () => {
 
           {/* CONTOH 2 */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(249,115,22,.25)",backdropFilter:"blur(12px)"}}>
+            style={{background: isDark ? "rgba(15,23,42,.7)" : "rgba(248,250,252,.95)", borderColor:"rgba(249,115,22,.25)",backdropFilter:"blur(12px)"}}>
             <SH icon={<FlaskConical className="w-5 h-5"/>} iconColor="text-orange-400"
               title={t.c2Title}
               gradFrom="rgba(249,115,22,.12)" borderColor="rgba(249,115,22,.3)"/>
@@ -500,14 +502,14 @@ const KaitanBangunDatarPage = () => {
                 </p>
               </div>
               <div className="rounded-xl p-4 space-y-3 border"
-                style={{background:"rgba(15,23,42,.6)",borderColor:"rgba(100,116,139,.35)"}}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.c2Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.c2s1}</strong> {t.c2s1T}</p>
+                style={{background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.95)", borderColor:"rgba(100,116,139,.35)"}}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.c2Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2s1}</strong> {t.c2s1T}</p>
                 <BlockMath math="L = \tfrac{1}{2} \times AC \times BC = \tfrac{1}{2} \times 5 \times 12 = 30 \,\mathrm{cm}^2"/>
-                <p className="font-body text-sm text-white/80"><strong>{t.c2s2}</strong> {t.c2s2T}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2s2}</strong> {t.c2s2T}</p>
                 <BlockMath math="R = \dfrac{AB \times AC \times BC}{4 \times L} = \dfrac{13 \times 5 \times 12}{4 \times 30}"/>
                 <BlockMath math="R = \dfrac{780}{120} = 6{,}5 \,\mathrm{cm}"/>
-                <p className="font-body text-sm text-white/60 text-xs">
+                <p className={`font-body text-sm ${isDark ? "text-white/60" : "text-gray-500"} text-xs`}>
                   {t.c2Shortcut} <InlineMath math="R = \frac{AB}{2} = \frac{13}{2} = 6{,}5 \,\mathrm{cm}"/> ✓
                 </p>
                 <div className="rounded-lg p-3 border" style={{background:"rgba(249,115,22,.1)",borderColor:"rgba(249,115,22,.35)"}}>
@@ -519,7 +521,7 @@ const KaitanBangunDatarPage = () => {
 
           {/* RANGKUMAN */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{background:"rgba(15,23,42,.7)",borderColor:"rgba(168,85,247,.25)",backdropFilter:"blur(12px)"}}>
+            style={{background: isDark ? "rgba(15,23,42,.7)" : "rgba(248,250,252,.95)", borderColor:"rgba(168,85,247,.25)",backdropFilter:"blur(12px)"}}>
             <SH icon={<BookOpen className="w-5 h-5"/>} iconColor="text-violet-400"
               title={t.rTitle}
               gradFrom="rgba(168,85,247,.12)" borderColor="rgba(168,85,247,.3)"/>
@@ -528,7 +530,7 @@ const KaitanBangunDatarPage = () => {
                 <div className="rounded-xl p-4 border space-y-2"
                   style={{background:"linear-gradient(135deg,rgba(34,197,94,.12),rgba(6,182,212,.06))",borderColor:"rgba(34,197,94,.3)"}}>
                   <p className="text-green-300 text-sm font-bold">{t.rIn}</p>
-                  <div className="text-white/70 text-xs space-y-1">
+                  <div className={`${isDark ? "text-white/70" : "text-gray-600"} text-xs space-y-1`}>
                     <p>{t.rInB1}</p>
                     <p>{t.rInB2}</p>
                   </div>
@@ -538,7 +540,7 @@ const KaitanBangunDatarPage = () => {
                 <div className="rounded-xl p-4 border space-y-2"
                   style={{background:"linear-gradient(135deg,rgba(249,115,22,.12),rgba(251,191,36,.06))",borderColor:"rgba(249,115,22,.3)"}}>
                   <p className="text-orange-300 text-sm font-bold">{t.rOut}</p>
-                  <div className="text-white/70 text-xs space-y-1">
+                  <div className={`${isDark ? "text-white/70" : "text-gray-600"} text-xs space-y-1`}>
                     <p>{t.rOutB1}</p>
                     <p>{t.rOutB2}</p>
                   </div>

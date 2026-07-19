@@ -7,6 +7,7 @@ import { BookOpen, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, FlaskConic
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ─── Translations ─────────────────────────────────────── */
 const translations = {
@@ -548,6 +549,7 @@ function makeSlides(t: T) {
 
 /* ─── Slide Carousel ─────────────────────────────────────── */
 const SlideCarousel = ({ t }: { t: T }) => {
+  const { isDark } = useTheme();
   const [idx, setIdx] = useState(0);
   const slides = makeSlides(t);
   const slide = slides[idx];
@@ -576,7 +578,7 @@ const SlideCarousel = ({ t }: { t: T }) => {
           <p className="font-body text-xs text-white/75">{slide.keyFact}</p>
         </div>
         {slide.formula && (
-          <div className="bg-slate-800/60 border border-slate-600/50 rounded-lg p-3 text-center">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/50" : "bg-gray-100 border-gray-200"} border rounded-lg p-3 text-center`}>
             <p className="text-white/40 text-[10px] font-mono mb-1 uppercase tracking-wide">{t.formulaLabel}</p>
             {slide.formulaPrefix && (
               <p className="text-white/70 text-xs mb-1 font-body">{slide.formulaPrefix} =</p>
@@ -588,7 +590,7 @@ const SlideCarousel = ({ t }: { t: T }) => {
 
       <div className="px-5 pb-4 flex items-center justify-between">
         <button onClick={prev}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800/70 border border-slate-600 text-white/60 hover:text-white hover:border-white/30 transition-all text-xs font-body cursor-pointer">
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl ${isDark ? "bg-slate-800/70 border-slate-600 text-white/60 hover:text-white hover:border-white/30" : "bg-gray-100 border-gray-300 text-gray-600 hover:text-gray-900 hover:border-gray-400"} border transition-all text-xs font-body cursor-pointer`}>
           <ChevronLeft className="w-4 h-4" /> {t.prev}
         </button>
         <div className="flex gap-1.5">
@@ -598,7 +600,7 @@ const SlideCarousel = ({ t }: { t: T }) => {
           ))}
         </div>
         <button onClick={next}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800/70 border border-slate-600 text-white/60 hover:text-white hover:border-white/30 transition-all text-xs font-body cursor-pointer">
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl ${isDark ? "bg-slate-800/70 border-slate-600 text-white/60 hover:text-white hover:border-white/30" : "bg-gray-100 border-gray-300 text-gray-600 hover:text-gray-900 hover:border-gray-400"} border transition-all text-xs font-body cursor-pointer`}>
           {t.next} <ChevronRight className="w-4 h-4" />
         </button>
       </div>
@@ -627,6 +629,7 @@ const UnsurUnsurPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+  const { isDark } = useTheme();
   const [open, setOpen] = useState<string[]>(["contoh1"]);
   const toggle = (id: string) => { playPopSound(); setOpen(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]); };
 
@@ -634,7 +637,7 @@ const UnsurUnsurPage = () => {
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
+        <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</span>
       </div>
       {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary" /> : <ChevronDown className="w-5 h-5 text-primary" />}
     </button>
@@ -677,12 +680,12 @@ const UnsurUnsurPage = () => {
                     {t.c1_q}<InlineMath math="OA = 7"/>{t.c1_q2}
                   </p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c1_sol}</p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-green-300">OA, OB</strong>{t.c1_p1}<InlineMath math="r = 7"/> cm.</p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-purple-300">CD</strong>{t.c1_p2}</p>
+                <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-2`}>
+                  <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c1_sol}</p>
+                  <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-green-300">OA, OB</strong>{t.c1_p1}<InlineMath math="r = 7"/> cm.</p>
+                  <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-purple-300">CD</strong>{t.c1_p2}</p>
                   <BlockMath math="d = 2r = 2 \times 7 = 14 \,\mathrm{cm}" />
-                  <p className="font-body text-sm text-white/80">• <strong className="text-orange-300">AB</strong>{t.c1_p3}</p>
+                  <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-orange-300">AB</strong>{t.c1_p3}</p>
                   <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3 mt-2">
                     <p className="font-body text-sm text-green-300 text-center">{t.c1_check}</p>
                   </div>
@@ -702,9 +705,9 @@ const UnsurUnsurPage = () => {
                     {t.c2_q}<InlineMath math="d = 4x - 2"/>{t.c2_q2}<InlineMath math="r = x + 5"/>{t.c2_q3}
                   </p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c2_sol}</p>
-                  <p className="font-body text-sm text-white/80">{t.c2_p1}<strong className="text-cyan-300">{t.c2_rel}</strong></p>
+                <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                  <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c2_sol}</p>
+                  <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c2_p1}<strong className="text-cyan-300">{t.c2_rel}</strong></p>
                   <BlockMath math="4x - 2 = 2(x + 5)" />
                   <BlockMath math="4x - 2 = 2x + 10" />
                   <BlockMath math="2x = 12 \Rightarrow x = 6" />
@@ -729,16 +732,16 @@ const UnsurUnsurPage = () => {
                     {t.c3_q}<InlineMath math="OD = 5"/>{t.c3_q2}
                   </p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c3_sol}</p>
-                  <p className="font-body text-sm text-white/80">
+                <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                  <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c3_sol}</p>
+                  <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                     {t.c3_p1}<strong className="text-cyan-300">{t.c3_apo}</strong>{t.c3_p2}
                   </p>
-                  <p className="font-body text-sm text-white/80">{t.c3_p3}</p>
+                  <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c3_p3}</p>
                   <BlockMath math="OA^2 = OD^2 + DA^2" />
                   <BlockMath math="13^2 = 5^2 + DA^2" />
                   <BlockMath math="169 = 25 + DA^2 \Rightarrow DA^2 = 144 \Rightarrow DA = 12 \,\mathrm{cm}" />
-                  <p className="font-body text-sm text-white/80">{t.c3_p4}</p>
+                  <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c3_p4}</p>
                   <BlockMath math="AB = 2 \times DA = 2 \times 12 = 24 \,\mathrm{cm}" />
                   <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
                     <p className="font-body text-sm text-red-200 text-center">{t.c3_check}</p>

@@ -7,6 +7,7 @@ import { BookOpen, Lightbulb, Target, FlaskConical, Microscope, Joystick } from 
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import SudutPusatProofAnim from "@/components/SudutPusatProofAnim";
 import SudutPusatInteraktif from "@/components/SudutPusatInteraktif";
 
@@ -370,11 +371,12 @@ const SudutPusatKelilingPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
+  const { isDark } = useTheme();
 
   const SectionHeader = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4">
       <span className={iconColor}>{icon}</span>
-      <span className="font-body font-semibold text-white ml-3">{title}</span>
+      <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"} ml-3`}>{title}</span>
     </div>
   );
 
@@ -385,7 +387,7 @@ const SudutPusatKelilingPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">{t.h1}</h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.subtitle}</p>
+        <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>{t.subtitle}</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
 
@@ -393,7 +395,7 @@ const SudutPusatKelilingPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400" title={t.introTitle} />
             <div className="px-5 pb-5 space-y-4">
-              <p className="font-body text-sm text-white/80 leading-relaxed">
+              <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} leading-relaxed`}>
                 {t.introP.split(t.introPusat)[0]}
                 <strong className="text-yellow-300">{t.introPusat}</strong>
                 {t.introP.split(t.introPusat)[1]?.split(t.introKeliling)[0]}
@@ -428,19 +430,19 @@ const SudutPusatKelilingPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                 <p className="font-body text-sm font-semibold text-cyan-300 mb-2">{t.teoremasummaryTitle}</p>
-                <p className="font-body text-sm text-white/80">{t.teoremaSummaryP}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.teoremaSummaryP}</p>
               </div>
 
               <SudutKelilingVsPusatSVG t={t} />
 
               <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                 <p className="font-body text-sm font-bold text-yellow-300 mb-2">{t.t1Title}</p>
-                <p className="font-body text-sm text-white/80 mb-2">
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} mb-2`}>
                   {t.t1P.split(t.t1Bold)[0]}
                   <strong className="text-cyan-300">{t.t1Bold}</strong>
                   {t.t1P.split(t.t1Bold)[1]}
                 </p>
-                <p className="font-body text-xs text-white/50 mb-1 font-mono">{t.t1FormulaLabel}:</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-500"} mb-1 font-mono`}>{t.t1FormulaLabel}:</p>
                 <BlockMath math="\angle AOB = 2 \times \angle ACB" />
               </div>
 
@@ -448,14 +450,14 @@ const SudutPusatKelilingPage = () => {
 
               <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                 <p className="font-body text-sm font-bold text-green-300 mb-2">{t.t2Title}</p>
-                <p className="font-body text-sm text-white/80 mb-2">{t.t2P}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} mb-2`}>{t.t2P}</p>
                 <BlockMath math="\angle ACB = 90°" />
-                <p className="font-body text-xs text-white/60">{t.t2Note}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.t2Note}</p>
               </div>
 
               <div className="bg-purple-900/30 border border-purple-500/40 rounded-xl p-4">
                 <p className="font-body text-sm font-bold text-purple-300 mb-2">{t.t3Title}</p>
-                <p className="font-body text-sm text-white/80 mb-2">{t.t3P}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} mb-2`}>{t.t3P}</p>
                 <BlockMath math="\angle ACB = \angle ADB = \angle AEB" />
               </div>
             </div>
@@ -511,9 +513,9 @@ const SudutPusatKelilingPage = () => {
                   {t.c1Q} <InlineMath math="\angle AOB = 110°"/>. {t.c1Q2.replace("!", "")} <InlineMath math="\angle ACB"/>{t.c1Q2.includes("!") ? "!" : ""}
                 </p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c1Sol}</p>
-                <p className="font-body text-sm text-white/80">{t.c1Method}</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c1Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c1Method}</p>
                 <BlockMath math="\angle ACB = \frac{1}{2} \times \angle AOB" />
                 <BlockMath math="\angle ACB = \frac{1}{2} \times 110° = 55°" />
                 <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
@@ -533,10 +535,10 @@ const SudutPusatKelilingPage = () => {
                   {t.c2Q} <InlineMath math="\angle ABD = 35°"/> {t.c2Q2} <InlineMath math="\angle ACD = 35°"/>{t.c2Q3} <InlineMath math="\angle AOD"/>{t.c2Q4}
                 </p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c2Sol}</p>
-                <p className="font-body text-sm text-white/80">{t.c2P}</p>
-                <p className="font-body text-sm text-white/80">{t.c2Step}</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c2Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c2P}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c2Step}</p>
                 <BlockMath math="\angle AOD = 2 \times \angle ABD = 2 \times 35° = 70°" />
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200 text-center">{t.c2Check} <InlineMath math="\angle AOD = \textbf{70°}"/>{t.c2Check2}</p>
@@ -555,17 +557,17 @@ const SudutPusatKelilingPage = () => {
                   {t.c3Q} <InlineMath math="\angle A = 3x + 10°"/> {t.c3Q2} <InlineMath math="\angle C = 2x - 5°"/>{t.c3Q3} <InlineMath math="\angle A"/> {t.c3Q4} <InlineMath math="\angle C"/>{t.c3Q5}
                 </p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c3Sol}</p>
-                <p className="font-body text-sm text-white/80">{t.c3Cyclic}</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c3Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c3Cyclic}</p>
                 <BlockMath math="\angle A + \angle C = 180°" />
                 <BlockMath math="(3x + 10°) + (2x - 5°) = 180°" />
                 <BlockMath math="5x + 5° = 180°" />
                 <BlockMath math="5x = 175° \Rightarrow x = 35°" />
-                <p className="font-body text-sm text-white/80">{t.c3AngleLabel}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c3AngleLabel}</p>
                 <BlockMath math="\angle A = 3(35°) + 10° = 115°" />
                 <BlockMath math="\angle C = 2(35°) - 5° = 65°" />
-                <p className="font-body text-sm text-white/80">{t.c3Check} <InlineMath math="115° + 65° = 180° ✓"/></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c3Check} <InlineMath math="115° + 65° = 180° ✓"/></p>
                 <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-red-200 text-center">
                     {t.c3Result} <InlineMath math="\angle A = \textbf{115°}"/>{t.c3Result2} <InlineMath math="\angle C = \textbf{65°}"/>{t.c3Result3}
@@ -580,10 +582,10 @@ const SudutPusatKelilingPage = () => {
             <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title={t.rangkTitle} />
             <div className="px-5 pb-5 space-y-3">
               <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                <p className="font-body text-sm text-white/80">• <strong className="text-yellow-300">{t.rT1}</strong> {t.rT1rest}</p>
-                <p className="font-body text-sm text-white/80">• <strong className="text-green-300">{t.rT2}</strong> {t.rT2rest}</p>
-                <p className="font-body text-sm text-white/80">• <strong className="text-purple-300">{t.rT3}</strong> {t.rT3rest}</p>
-                <p className="font-body text-sm text-white/80">• <strong className="text-cyan-300">{t.rSiklis}</strong> {t.rSiklisRest}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-yellow-500">{t.rT1}</strong> {t.rT1rest}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-green-600">{t.rT2}</strong> {t.rT2rest}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-purple-600">{t.rT3}</strong> {t.rT3rest}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-cyan-600">{t.rSiklis}</strong> {t.rSiklisRest}</p>
               </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                 <p className="font-body text-sm text-yellow-200">{t.tips}</p>
