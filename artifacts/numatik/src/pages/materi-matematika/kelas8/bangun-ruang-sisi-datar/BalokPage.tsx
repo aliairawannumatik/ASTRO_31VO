@@ -861,17 +861,20 @@ const NetSVG = ({ cells }: { cells: BalokCell[] }) => {
   );
 };
 
-const NetGallery = () => (
-  <div className="grid grid-cols-5 gap-1.5">
-    {balokNets.map((cells, i) => (
-      <div key={i}
-        className={`${isDark ? "bg-slate-950/60 border-slate-700/50" : "bg-white border-gray-200"} border rounded p-1`}
-        style={{ aspectRatio: "1/1.1" }}>
-        <NetSVG cells={cells} />
-      </div>
-    ))}
-  </div>
-);
+const NetGallery = () => {
+  const { isDark } = useTheme();
+  return (
+    <div className="grid grid-cols-5 gap-1.5">
+      {balokNets.map((cells, i) => (
+        <div key={i}
+          className={`${isDark ? "bg-slate-950/60 border-slate-700/50" : "bg-white border-gray-200"} border rounded p-1`}
+          style={{ aspectRatio: "1/1.1" }}>
+          <NetSVG cells={cells} />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    RUSUK BALOK SVG
