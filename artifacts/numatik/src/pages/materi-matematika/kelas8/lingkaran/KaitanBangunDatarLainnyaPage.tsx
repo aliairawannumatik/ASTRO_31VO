@@ -7,6 +7,7 @@ import { BookOpen, Lightbulb, FlaskConical, Star } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -626,6 +627,7 @@ const SoalSVG2 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
    SVG C3 – Square 14 cm, two diagonal arcs forming a lens
 ═══════════════════════════════════════════════════════════════════ */
 const SoalSVG3 = ({ t }: { t: T }) => {
+  const { isDark } = useTheme();
   const isId = t.introCats[0].label === "Dikurangi";
   const isEn = t.introCats[0].label === "Subtraction";
   const shade = isId ? "Arsiran" : isEn ? "Shaded" : "着色";
@@ -640,7 +642,7 @@ const SoalSVG3 = ({ t }: { t: T }) => {
         `}</style>
       </defs>
       <rect x="20" y="20" width="220" height="220" fill="#a855f7" className="sq3-fill"/>
-      <path d="M240,20 A220,220,0,0,0,20,240 A220,220,0,0,0,240,20 Z" fill="rgba(15,23,42,.92)"/>
+      <path d="M240,20 A220,220,0,0,0,20,240 A220,220,0,0,0,240,20 Z" fill={isDark ? "rgba(15,23,42,.92)" : "rgba(248,250,252,.95)"}/>
       <rect x="20" y="20" width="220" height="220" fill="none" stroke="#c084fc" strokeWidth="2.5" className="sq3-out"/>
       <path d="M240,20 A220,220,0,0,0,20,240" fill="none" stroke="#22d3ee" strokeWidth="2"/>
       <path d="M240,20 A220,220,0,0,1,20,240" fill="none" stroke="#22d3ee" strokeWidth="2"/>
@@ -780,7 +782,10 @@ const SoalSVG7 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C8 – Square 14 cm, 4 quarter-circle arcs at corners → shaded center
 ═══════════════════════════════════════════════════════════════════ */
-const ContohDelapanSVG = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+const ContohDelapanSVG = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => {
+  const { isDark } = useTheme();
+  const cornerFill = isDark ? "rgba(15,23,42,.85)" : "rgba(248,250,252,.95)";
+  return (
   <svg viewBox="0 0 270 270" className="w-full max-w-xs mx-auto" aria-label={isId ? "Persegi dengan 4 busur seperempat lingkaran — daerah tengah arsiran" : isEn ? "Square with 4 quarter-circle arcs — shaded center region" : "4つの四分円弧を持つ正方形—中央着色領域"}>
     <defs>
       <style>{`
@@ -790,10 +795,10 @@ const ContohDelapanSVG = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
         .lf8-out{animation:lf8g 2.4s ease-in-out infinite;}
       `}</style>
     </defs>
-    <path d="M20,20 L130,20 A110,110,0,0,1,20,130 Z" fill="rgba(15,23,42,.85)" stroke="none"/>
-    <path d="M240,20 L130,20 A110,110,0,0,0,240,130 Z" fill="rgba(15,23,42,.85)" stroke="none"/>
-    <path d="M20,240 L20,130 A110,110,0,0,1,130,240 Z" fill="rgba(15,23,42,.85)" stroke="none"/>
-    <path d="M240,240 L130,240 A110,110,0,0,0,240,130 Z" fill="rgba(15,23,42,.85)" stroke="none"/>
+    <path d="M20,20 L130,20 A110,110,0,0,1,20,130 Z" fill={cornerFill} stroke="none"/>
+    <path d="M240,20 L130,20 A110,110,0,0,0,240,130 Z" fill={cornerFill} stroke="none"/>
+    <path d="M20,240 L20,130 A110,110,0,0,1,130,240 Z" fill={cornerFill} stroke="none"/>
+    <path d="M240,240 L130,240 A110,110,0,0,0,240,130 Z" fill={cornerFill} stroke="none"/>
     <path d="M130,20 A110,110,0,0,1,20,130 A110,110,0,0,1,130,240 A110,110,0,0,1,240,130 A110,110,0,0,1,130,20 Z"
       fill="#f59e0b" className="lf8-fill"/>
     <path d="M130,20 A110,110,0,0,1,20,130 A110,110,0,0,1,130,240 A110,110,0,0,1,240,130 A110,110,0,0,1,130,20 Z"
@@ -802,7 +807,8 @@ const ContohDelapanSVG = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
     <text x="130" y="258" fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
     <text x="6" y="130" fill="#f59e0b" fontSize="10" fontFamily="monospace" transform="rotate(-90,6,130)">14 cm</text>
   </svg>
-);
+  );
+};
 
 /* ═══════════════════════════════════════════════════════════════════
    SVG C8b – Diagonal leaf in square 7 cm
@@ -1137,6 +1143,7 @@ const KaitanBangunDatarLainnyaPage = () => {
   const t = translations[language];
   const isId = language === 'id';
   const isEn = language === 'en';
+  const { isDark } = useTheme();
 
   const SectionHeader = ({
     icon, iconColor, title, accent,
@@ -1147,7 +1154,7 @@ const KaitanBangunDatarLainnyaPage = () => {
         borderBottom: `1px solid ${accent ? accent.replace(", .12)", ", .3)") : "rgba(6,182,212,.3)"}`,
       }}>
       <span className={iconColor}>{icon}</span>
-      <span className="font-body font-semibold text-white text-sm leading-snug ml-3">{title}</span>
+      <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"} text-sm leading-snug ml-3`}>{title}</span>
     </div>
   );
 
@@ -1167,7 +1174,7 @@ const KaitanBangunDatarLainnyaPage = () => {
             style={{ background: "linear-gradient(135deg,#4ade80,#22d3ee,#a78bfa,#f97316)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
             {t.h1.split("\n").map((line, i) => <React.Fragment key={i}>{line}{i === 0 && <br/>}</React.Fragment>)}
           </h1>
-          <p className="text-white/40 text-xs font-body">{t.subtitle}</p>
+          <p className={`${isDark ? "text-white/40" : "text-gray-500"} text-xs font-body`}>{t.subtitle}</p>
           <div className="flex justify-center gap-2 mt-3">
             {["#f97316","#22d3ee","#a78bfa","#4ade80","#fbbf24"].map((c,i) => (
               <Star key={i} className="w-3 h-3" style={{ color: c, fill: c, opacity: .6 }} />
@@ -1179,11 +1186,11 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── INTRO ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(251,191,36,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(251,191,36,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5" />} iconColor="text-yellow-400"
               title={t.introTitle} accent="rgba(251,191,36,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
-              <p className="font-body text-sm text-white/85 leading-relaxed">
+              <p className={`font-body text-sm ${isDark ? "text-white/85" : "text-gray-700"} leading-relaxed`}>
                 {t.introP.split(t.introEmphasis)[0]}
                 <strong className="text-yellow-300">{t.introEmphasis}</strong>
                 {t.introP.split(t.introEmphasis)[1]?.split(t.introEmphasis2)[0]}
@@ -1195,7 +1202,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                   <div key={i} className="rounded-xl p-3 border text-center"
                     style={{ background: `${c.color}15`, borderColor: `${c.color}40` }}>
                     <p className="text-xs font-bold mb-1" style={{ color: c.color }}>✦ {c.label}</p>
-                    <p className="text-white/55 text-xs">{c.desc}</p>
+                    <p className={`${isDark ? "text-white/55" : "text-gray-500"} text-xs`}>{c.desc}</p>
                   </div>
                 ))}
               </div>
@@ -1210,37 +1217,37 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 1 – Rectangle + Semicircle ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(6,182,212,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(6,182,212,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-cyan-400"
               title={t.k1Title} accent="rgba(6,182,212,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
                 <p className="text-cyan-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k1Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k1Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
               <SoalSVG4 t={t} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k1Sol}</p>
-                <p className="font-body text-sm text-white/80">
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k1Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                   <strong>{t.k1Known}</strong>{t.k1KnownV} <InlineMath math="r = \tfrac{21}{2} = 10{,}5"/> cm
                 </p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k1a}</strong></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k1a}</strong></p>
                 <BlockMath math="L = p \times l + \tfrac{1}{2}\pi r^2 = 21 \times 21 + \tfrac{1}{2} \times \tfrac{22}{7} \times (10{,}5)^2" />
                 <BlockMath math="= 441 + \tfrac{11}{7} \times 110{,}25 = 441 + 173{,}25 \approx \boxed{614{,}25 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k1b}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k1bNote}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k1b}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k1bNote}</p>
                 <BlockMath math="K = 21 + 21 + 21 + \pi r = 63 + \tfrac{22}{7} \times 10{,}5" />
                 <BlockMath math="= 63 + 33 = \boxed{96 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(6,182,212,.1)", borderColor: "rgba(6,182,212,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k1ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k1ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k1ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k1ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k1ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k1ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1249,38 +1256,38 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 2 – Dumbbell ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
               title={t.k2Title} accent="rgba(249,115,22,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                 <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k2Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k2Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
               <SoalSVG1 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k2Sol}</p>
-                <p className="font-body text-sm text-white/80">
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k2Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                   <strong>{t.k2Known}</strong>{t.k2KnownV} <InlineMath math="r = 7"/>{t.k2KnownV2}
                 </p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k2a}</strong></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k2a}</strong></p>
                 <BlockMath math="L_a = L_{pp} - L_c" />
                 <BlockMath math="= 28 \times 14 - \pi r^2 = 392 - \tfrac{22}{7} \times 49" />
                 <BlockMath math="= 392 - 154 = \boxed{238 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k2b}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k2bNote} (<InlineMath math="\pi r"/>) + {t.k2bNote2} (<InlineMath math="\pi r"/>):</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k2b}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k2bNote} (<InlineMath math="\pi r"/>) + {t.k2bNote2} (<InlineMath math="\pi r"/>):</p>
                 <BlockMath math="K_a = 2 \times 28 + 2 \times \pi r = 56 + 2 \times \tfrac{22}{7} \times 7" />
                 <BlockMath math="= 56 + 44 = \boxed{100 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                     <p className="text-orange-300 text-xs font-bold">{t.k2ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k2ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k2ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k2ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k2ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k2ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1289,36 +1296,36 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 3 – Half-annulus ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(236,72,153,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(236,72,153,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-pink-400"
               title={t.k3Title} accent="rgba(236,72,153,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(236,72,153,.1)", borderColor: "rgba(236,72,153,.35)" }}>
                 <p className="text-pink-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k3Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k3Soal} <InlineMath math="(\pi = 3{,}14)"/>
                 </p>
               </div>
               <SoalSVG5 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k3Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k3Known}</strong>{t.k3KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k3a}</strong></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k3Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k3Known}</strong>{t.k3KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k3a}</strong></p>
                 <BlockMath math="L = \tfrac{1}{2}\pi R^2 - \tfrac{1}{2}\pi r^2 = \tfrac{1}{2}\pi(R^2 - r^2)" />
                 <BlockMath math="= \tfrac{1}{2} \times 3{,}14 \times (100 - 25) = \tfrac{1}{2} \times 3{,}14 \times 75" />
                 <BlockMath math="= \tfrac{1}{2} \times 235{,}5 = \boxed{117{,}75 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k3b}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k3bNote}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k3b}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k3bNote}</p>
                 <BlockMath math="K = \pi R + \pi r + 2(R - r) = 3{,}14 \times 10 + 3{,}14 \times 5 + 2(10-5)" />
                 <BlockMath math="= 31{,}4 + 15{,}7 + 10 = \boxed{57{,}1 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(236,72,153,.1)", borderColor: "rgba(236,72,153,.35)" }}>
                     <p className="text-pink-300 text-xs font-bold">{t.k3ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k3ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k3ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k3ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k3ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k3ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1327,35 +1334,35 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 4 – Quarter circle r=10 ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(34,197,94,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(34,197,94,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400"
               title={t.k4Title} accent="rgba(34,197,94,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(34,197,94,.1)", borderColor: "rgba(34,197,94,.35)" }}>
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k4Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k4Soal} <InlineMath math="(\pi = 3{,}14)"/>
                 </p>
               </div>
               <SoalSVG2 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k4Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k4Known}</strong>{t.k4KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k4a}</strong></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k4Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k4Known}</strong>{t.k4KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k4a}</strong></p>
                 <BlockMath math="L = \tfrac{1}{4}\pi r^2 = \tfrac{1}{4} \times 3{,}14 \times 10^2" />
                 <BlockMath math="= \tfrac{1}{4} \times 314 = \boxed{78{,}5 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k4b}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k4bNote}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k4b}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k4bNote}</p>
                 <BlockMath math="K = 2r + \tfrac{1}{4}(2\pi r) = 2(10) + \tfrac{1}{2} \times 3{,}14 \times 10" />
                 <BlockMath math="= 20 + 15{,}7 = \boxed{35{,}7 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,197,94,.1)", borderColor: "rgba(34,197,94,.35)" }}>
                     <p className="text-green-300 text-xs font-bold">{t.k4ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k4ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k4ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k4ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k4ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k4ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1364,30 +1371,30 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 5 – 4-Pointed Star ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(245,158,11,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(245,158,11,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-amber-400"
               title={t.k5Title} accent="rgba(245,158,11,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(245,158,11,.1)", borderColor: "rgba(245,158,11,.35)" }}>
                 <p className="text-amber-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k5Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k5Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
               <ContohDelapanSVG isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k5Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k5Known}</strong>{t.k5KnownV}</p>
-                <p className="font-body text-xs text-white/60">{t.k5Hint}</p>
-                <p className="font-body text-xs text-white/60">{t.k5Hint2}</p>
-                <p className="font-body text-sm text-white/80">{t.k5Use} <InlineMath math="L_b = (\pi - 2) \times r^2"/></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k5Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k5Known}</strong>{t.k5KnownV}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k5Hint}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k5Hint2}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.k5Use} <InlineMath math="L_b = (\pi - 2) \times r^2"/></p>
                 <BlockMath math="L_b = \left(\tfrac{22}{7} - 2\right) \times 14^2 = \tfrac{8}{7} \times 196 = \boxed{224 \,\mathrm{cm}^2}" />
                 <div className="rounded-xl p-3 border mt-1" style={{ background: "rgba(245,158,11,.07)", borderColor: "rgba(245,158,11,.25)" }}>
                   <p className="text-amber-200 text-xs font-body">{t.k5AltNote} <InlineMath math="L = 4 \times L_s - 2 \times L_p = 4 \times \tfrac{1}{4}\pi r^2 - 2r^2 = r^2(\pi-2)"/></p>
                 </div>
                 <div className="rounded-lg p-3 border text-center mt-2" style={{ background: "rgba(245,158,11,.1)", borderColor: "rgba(245,158,11,.35)" }}>
                   <p className="text-amber-300 text-xs font-bold">{t.k5Result}</p>
-                  <p className="text-white text-sm font-bold mt-1">{t.k5ResultV}</p>
+                  <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k5ResultV}</p>
                 </div>
               </div>
             </div>
@@ -1395,35 +1402,35 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 6 – Triple arch ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(14,165,233,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(14,165,233,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
               title={t.k6Title} accent="rgba(14,165,233,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
                 <p className="text-sky-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k6Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k6Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
               <SoalSVG7 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k6Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k6Known}</strong>{t.k6KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k6a}</strong></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k6Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k6Known}</strong>{t.k6KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k6a}</strong></p>
                 <BlockMath math="L = \tfrac{1}{2}\pi R^2 - 2 \times \tfrac{1}{2}\pi r^2 = \tfrac{1}{2}\pi(R^2 - 2r^2)" />
                 <BlockMath math="= \tfrac{1}{2} \times \tfrac{22}{7} \times (196 - 98) = \tfrac{11}{7} \times 98 = \boxed{154 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k6b}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k6bNote}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k6b}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k6bNote}</p>
                 <BlockMath math="K = \pi R + 2\pi r = \tfrac{22}{7} \times 14 + 2 \times \tfrac{22}{7} \times 7" />
                 <BlockMath math="= 44 + 44 = \boxed{88 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
                     <p className="text-sky-300 text-xs font-bold">{t.k6ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k6ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k6ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k6ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k6ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k6ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1432,35 +1439,35 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 7 – Quarter sector 90° ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(139,92,246,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(139,92,246,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-violet-400"
               title={t.k7Title} accent="rgba(139,92,246,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(139,92,246,.1)", borderColor: "rgba(139,92,246,.35)" }}>
                 <p className="text-violet-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k7Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k7Soal} <InlineMath math="(\pi = 3{,}14)"/>
                 </p>
               </div>
               <SoalSVG10 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k7Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k7Known}</strong>{t.k7KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k7a}</strong></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k7Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k7Known}</strong>{t.k7KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k7a}</strong></p>
                 <BlockMath math="L_s = \tfrac{90°}{360°} \times \pi r^2 = \tfrac{1}{4} \times 3{,}14 \times 100" />
                 <BlockMath math="= \tfrac{314}{4} = \boxed{78{,}5 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k7b}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k7bNote}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k7b}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k7bNote}</p>
                 <BlockMath math="K = 2r + \tfrac{1}{4}(2\pi r) = 2(10) + \tfrac{1}{2} \times 3{,}14 \times 10" />
                 <BlockMath math="= 20 + 15{,}7 = \boxed{35{,}7 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(139,92,246,.1)", borderColor: "rgba(139,92,246,.35)" }}>
                     <p className="text-violet-300 text-xs font-bold">{t.k7ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k7ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k7ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k7ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k7ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k7ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1469,38 +1476,38 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 8 – Ice cream ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
               title={t.k8Title} accent="rgba(249,115,22,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                 <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k8Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k8Soal} <InlineMath math="(\pi = 3{,}14)"/>
                 </p>
               </div>
               <SoalSVG13 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k8Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k8Known}</strong>{t.k8KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k8a}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k8aNote}</p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k8Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k8Known}</strong>{t.k8KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k8a}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k8aNote}</p>
                 <BlockMath math="L = \tfrac{1}{2}\pi r^2 + \tfrac{1}{2} \times a \times h" />
                 <BlockMath math="= \tfrac{1}{2} \times 3{,}14 \times 10^2 + \tfrac{1}{2} \times 20 \times 24" />
                 <BlockMath math="= 157 + 240 = \boxed{397 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k8b}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k8bNote}</p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k8bNote2}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k8b}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k8bNote}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k8bNote2}</p>
                 <BlockMath math="K = \pi r + 2s = 3{,}14 \times 10 + 2 \times 26" />
                 <BlockMath math="= 31{,}4 + 52 = \boxed{83{,}4 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                     <p className="text-orange-300 text-xs font-bold">{t.k8ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k8ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k8ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k8ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k8ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k8ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1509,29 +1516,29 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 9 – Trapezoid + quarter circle ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(14,165,233,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(14,165,233,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-sky-400"
               title={t.k9Title} accent="rgba(14,165,233,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
                 <p className="text-sky-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k9Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k9Soal} <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
               <SoalSVG14 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k9Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k9Known}</strong>{t.k9KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k9LT}</strong></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k9Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k9Known}</strong>{t.k9KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k9LT}</strong></p>
                 <BlockMath math="L_T = \tfrac{1}{2}(a_1 + a_2) \times h = \tfrac{1}{2}(28 + 42) \times 14 = 490 \,\mathrm{cm}^2" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k9LQ}</strong></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k9LQ}</strong></p>
                 <BlockMath math="L_{qc} = \tfrac{1}{4}\pi r^2 = \tfrac{1}{4} \times \tfrac{22}{7} \times 196 = 154 \,\mathrm{cm}^2" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k9LTotal}</strong></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k9LTotal}</strong></p>
                 <BlockMath math="L = L_T + L_{qc} = 490 + 154 = \boxed{644 \,\mathrm{cm}^2}" />
                 <div className="rounded-lg p-3 border text-center mt-2" style={{ background: "rgba(14,165,233,.1)", borderColor: "rgba(14,165,233,.35)" }}>
                   <p className="text-sky-300 text-xs font-bold">{t.k9Result}</p>
-                  <p className="text-white text-sm font-bold mt-1">{t.k9ResultV}</p>
+                  <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k9ResultV}</p>
                 </div>
               </div>
             </div>
@@ -1539,32 +1546,32 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 10 – Quarter circle r=14 ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(168,85,247,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(168,85,247,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-purple-400"
               title={t.k10Title} accent="rgba(168,85,247,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
                 <p className="text-purple-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k10Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k10Soal} <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
               <SoalSVG15 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k10Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k10Known}</strong>{t.k10KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k10a}</strong></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k10Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k10Known}</strong>{t.k10KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k10a}</strong></p>
                 <BlockMath math="L = \tfrac{1}{4}\pi r^2 = \tfrac{1}{4} \times \tfrac{22}{7} \times 196 = \boxed{154 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k10b}</strong> {t.k10bV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k10b}</strong> {t.k10bV}</p>
                 <BlockMath math="K = 2r + \tfrac{1}{4}(2\pi r) = 28 + \tfrac{1}{2} \times \tfrac{22}{7} \times 14 = 28 + 22 = \boxed{50 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
                     <p className="text-purple-300 text-xs font-bold">{t.k10ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k10ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k10ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k10ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k10ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k10ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1573,34 +1580,34 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 11 – Half-annulus R=14, r=7 ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
               title={t.k11Title} accent="rgba(249,115,22,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                 <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k11Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k11Soal} <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
               <SoalSVG16 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k11Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k11Known}</strong>{t.k11KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k11a}</strong></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k11Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k11Known}</strong>{t.k11KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k11a}</strong></p>
                 <BlockMath math="L = \tfrac{1}{2}\pi(R^2 - r^2) = \tfrac{1}{2} \times \tfrac{22}{7} \times (196 - 49)" />
                 <BlockMath math="= \tfrac{1}{2} \times \tfrac{22}{7} \times 147 = \tfrac{1}{2} \times 462 = \boxed{231 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k11b}</strong> {t.k11bV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k11b}</strong> {t.k11bV}</p>
                 <BlockMath math="K = \pi R + \pi r + 2(R - r) = \tfrac{22}{7}(14 + 7) + 2(7)" />
                 <BlockMath math="= \tfrac{22}{7} \times 21 + 14 = 66 + 14 = \boxed{80 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                     <p className="text-orange-300 text-xs font-bold">{t.k11ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k11ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k11ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k11ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k11ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k11ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1609,29 +1616,29 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 12 – Square minus two quarter circles ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(20,184,166,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(20,184,166,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-teal-400"
               title={t.k12Title} accent="rgba(20,184,166,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
                 <p className="text-teal-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k12Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k12Soal} <InlineMath math="(\pi = \tfrac{22}{7})"/>
                 </p>
               </div>
               <SoalSVG18 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k12Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k12Known}</strong>{t.k12KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k12LP}</strong></p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k12Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k12Known}</strong>{t.k12KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k12LP}</strong></p>
                 <BlockMath math="L_p = 14^2 = 196 \,\mathrm{cm}^2" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k12LQ}</strong> {t.k12LQV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k12LQ}</strong> {t.k12LQV}</p>
                 <BlockMath math="L_{hc} = 2 \times \tfrac{1}{4}\pi r^2 = \tfrac{1}{2} \times \tfrac{22}{7} \times 49 = \tfrac{1}{2} \times 154 = 77 \,\mathrm{cm}^2" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k12LA}</strong></p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k12LA}</strong></p>
                 <BlockMath math="L_a = L_p - L_{hc} = 196 - 77 = \boxed{119 \,\mathrm{cm}^2}" />
                 <div className="rounded-lg p-3 border text-center mt-2" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
                   <p className="text-teal-300 text-xs font-bold">{t.k12Result}</p>
-                  <p className="text-white text-sm font-bold mt-1">{t.k12ResultV}</p>
+                  <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k12ResultV}</p>
                 </div>
               </div>
             </div>
@@ -1639,26 +1646,26 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 13 – Two semicircles union ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(99,102,241,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(99,102,241,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-indigo-400"
               title={t.k13Title} accent="rgba(99,102,241,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(99,102,241,.1)", borderColor: "rgba(99,102,241,.35)" }}>
                 <p className="text-indigo-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k13Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k13Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
               <SoalSVG19 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k13Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k13Known}</strong>{t.k13KnownV}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k13a}</strong></p>
-                <p className="font-body text-xs text-white/60">{t.k13aNote}</p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k13Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k13Known}</strong>{t.k13KnownV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k13a}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k13aNote}</p>
                 <BlockMath math="L = \tfrac{1}{2}\pi R^2 + \tfrac{1}{2}\pi r^2 = \tfrac{1}{2}\pi(R^2 + r^2)" />
                 <BlockMath math="= \tfrac{11}{7} \times (169 + 49) = \tfrac{11}{7} \times 218 = \boxed{\tfrac{2398}{7} = 342\tfrac{4}{7} \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80 pt-1"><strong>{t.k13b}</strong></p>
-                <p className="font-body text-xs text-white/60">{t.k13bNote}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} pt-1`}><strong>{t.k13b}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k13bNote}</p>
                 <BlockMath math="K = \pi R + \pi r = \tfrac{22}{7} \times (13 + 7) = \tfrac{22}{7} \times 20 = \boxed{\tfrac{440}{7} = 62\tfrac{6}{7} \,\mathrm{cm}}" />
                 <div className="rounded-xl p-3 border mt-1" style={{ background: "rgba(99,102,241,.07)", borderColor: "rgba(99,102,241,.25)" }}>
                   <p className="text-indigo-200 text-xs font-body">{t.k13Tip}</p>
@@ -1666,11 +1673,11 @@ const KaitanBangunDatarLainnyaPage = () => {
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(99,102,241,.1)", borderColor: "rgba(99,102,241,.35)" }}>
                     <p className="text-indigo-300 text-xs font-bold">{t.k13ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k13ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k13ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(99,102,241,.1)", borderColor: "rgba(99,102,241,.35)" }}>
                     <p className="text-indigo-300 text-xs font-bold">{t.k13ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k13ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k13ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1679,34 +1686,34 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 14 – Diagonal leaf in 7 cm square ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(20,184,166,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(20,184,166,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-teal-400"
               title={t.k14Title} accent="rgba(20,184,166,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
                 <p className="text-teal-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k14Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k14Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
               <SoalSVG8 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k14Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k14Known}</strong>{t.k14KnownV}</p>
-                <p className="font-body text-xs text-white/60">{t.k14LNote}</p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k14Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k14Known}</strong>{t.k14KnownV}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k14LNote}</p>
                 <BlockMath math="L_d = 2\left(\tfrac{1}{4}\pi r^2 - \tfrac{1}{2}r^2\right) = r^2\left(\tfrac{\pi}{2} - 1\right)" />
                 <BlockMath math="= 49 \times \left(\tfrac{22}{14} - 1\right) = 49 \times \tfrac{4}{7} = \boxed{28 \,\mathrm{cm}^2}" />
-                <p className="font-body text-sm text-white/80"><strong>{t.k14KNote}</strong></p>
-                <p className="font-body text-xs text-white/60 mb-1">{t.k14KNoteV}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k14KNote}</strong></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.k14KNoteV}</p>
                 <BlockMath math="K = 2 \times \tfrac{1}{4}(2\pi r) = \pi r = \tfrac{22}{7} \times 7 = \boxed{22 \,\mathrm{cm}}" />
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(20,184,166,.1)", borderColor: "rgba(20,184,166,.35)" }}>
                     <p className="text-teal-300 text-xs font-bold">{t.k14ResultL}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k14ResultLV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k14ResultLV}</p>
                   </div>
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(34,211,238,.1)", borderColor: "rgba(34,211,238,.35)" }}>
                     <p className="text-cyan-300 text-xs font-bold">{t.k14ResultK}</p>
-                    <p className="text-white text-sm font-bold mt-1">{t.k14ResultKV}</p>
+                    <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k14ResultKV}</p>
                   </div>
                 </div>
               </div>
@@ -1715,29 +1722,29 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── KASUS 15 – 4-Petal flower in 14 cm square ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(249,115,22,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-orange-400"
               title={t.k15Title} accent="rgba(249,115,22,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
               <div className="rounded-xl p-4 border" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                 <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">{t.k15Badge}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.k15Soal} <InlineMath math="\left(\pi = \tfrac{22}{7}\right)"/>
                 </p>
               </div>
               <SoalSVG11 isId={isId} isEn={isEn} />
-              <div className="rounded-xl p-4 space-y-3 border" style={{ background: "rgba(15,23,42,.6)", borderColor: "rgba(100,116,139,.3)" }}>
-                <p className="text-xs font-bold text-slate-300 uppercase tracking-wide">{t.k15Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.k15Known}</strong>{t.k15KnownV}</p>
-                <p className="font-body text-xs text-white/60">{t.k15Note1}</p>
-                <p className="font-body text-xs text-white/60">{t.k15Note2} <InlineMath math="r^2\!\left(\tfrac{\pi}{2}-1\right)"/> {t.k15Note2V}</p>
+              <div className="rounded-xl p-4 space-y-3 border" style={{ background: isDark ? "rgba(15,23,42,.6)" : "rgba(241,245,249,.9)", borderColor: "rgba(100,116,139,.3)" }}>
+                <p className={`text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.k15Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.k15Known}</strong>{t.k15KnownV}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k15Note1}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k15Note2} <InlineMath math="r^2\!\left(\tfrac{\pi}{2}-1\right)"/> {t.k15Note2V}</p>
                 <BlockMath math="L_k = r^2\!\left(\tfrac{\pi}{2}-1\right) = 196 \times \tfrac{4}{7} = 112 \,\mathrm{cm}^2" />
-                <p className="font-body text-xs text-white/60">{t.k15Note3}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k15Note3}</p>
                 <BlockMath math="L_{4k} = 4 \times 28 = \boxed{112 \,\mathrm{cm}^2}" />
-                <p className="font-body text-xs text-white/50 italic">{t.k15Note4}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-400"} italic`}>{t.k15Note4}</p>
                 <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(249,115,22,.1)", borderColor: "rgba(249,115,22,.35)" }}>
                   <p className="text-orange-300 text-xs font-bold">{t.k15Result}</p>
-                  <p className="text-white text-sm font-bold mt-1">{t.k15ResultV}</p>
+                  <p className={`${isDark ? "text-white" : "text-gray-900"} text-sm font-bold mt-1`}>{t.k15ResultV}</p>
                 </div>
               </div>
             </div>
@@ -1745,7 +1752,7 @@ const KaitanBangunDatarLainnyaPage = () => {
 
           {/* ── RANGKUMAN ── */}
           <div className="rounded-2xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.75)", borderColor: "rgba(251,191,36,.25)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.75)" : "rgba(248,250,252,.97)", borderColor: "rgba(251,191,36,.25)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-yellow-400"
               title={t.rangkumanTitle} accent="rgba(251,191,36,.12)" />
             <div className="px-5 pb-5 pt-3 space-y-4">
@@ -1757,9 +1764,9 @@ const KaitanBangunDatarLainnyaPage = () => {
                     <div key={i} className="rounded-xl p-3 border space-y-2"
                       style={{ background: `${col}12`, borderColor: `${col}38` }}>
                       <p className="font-bold text-xs" style={{ color: col }}>{c.emoji} {c.title}</p>
-                      <div className="text-[11px] text-white/50">{t.rangkumanLuas}</div>
+                      <div className={`text-[11px] ${isDark ? "text-white/50" : "text-gray-500"}`}>{t.rangkumanLuas}</div>
                       <BlockMath math={c.luas} />
-                      <div className="text-[11px] text-white/50">{t.rangkumanKeliling}</div>
+                      <div className={`text-[11px] ${isDark ? "text-white/50" : "text-gray-500"}`}>{t.rangkumanKeliling}</div>
                       <BlockMath math={c.keliling} />
                     </div>
                   );

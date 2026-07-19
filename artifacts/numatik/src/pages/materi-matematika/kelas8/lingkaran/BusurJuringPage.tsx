@@ -7,6 +7,7 @@ import { BookOpen, Lightbulb, Target, FlaskConical, Zap } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ─── Translations ─────────────────────────────────────── */
 const translations = {
@@ -459,6 +460,7 @@ const ptOnCircle = (r: number, deg: number) => ({
    ANIMASI 1 — Panjang Busur (drag A & B)
 ═══════════════════════════════════════════════════════════════════ */
 const AnimasiBusur = ({ t }: { t: T }) => {
+  const { isDark } = useTheme();
   const [angleA, setAngleA] = useState(0);
   const [angleB, setAngleB] = useState(120);
   const [radius, setRadius] = useState(7);
@@ -596,14 +598,14 @@ const AnimasiBusur = ({ t }: { t: T }) => {
       </svg>
 
       <div className="px-1">
-        <div className="flex justify-between text-xs font-body text-white/70 mb-1">
+        <div className={`flex justify-between text-xs font-body ${isDark ? "text-white/70" : "text-gray-600"} mb-1`}>
           <span>{t.anim1RadiusLabel}</span>
           <span className="text-green-300 font-bold">{radius} cm</span>
         </div>
         <input type="range" min="1" max="14" step="1" value={radius}
           onChange={e => { setRadius(Number(e.target.value)); playPopSound(); }}
           className="w-full accent-green-400 cursor-pointer h-2"/>
-        <div className="flex justify-between text-[10px] text-white/30 font-mono mt-0.5">
+        <div className={`flex justify-between text-[10px] ${isDark ? "text-white/30" : "text-gray-400"} font-mono mt-0.5`}>
           <span>1</span><span>14</span>
         </div>
       </div>
@@ -611,7 +613,7 @@ const AnimasiBusur = ({ t }: { t: T }) => {
       <div className="rounded-xl p-3 border"
         style={{ background: "rgba(251,191,36,.1)", borderColor: "rgba(251,191,36,.35)" }}>
         <div className="flex items-center justify-center gap-2 mb-1">
-          <p className="text-xs text-white/55 font-body">{t.anim1FormulaTitle}</p>
+          <p className={`text-xs ${isDark ? "text-white/55" : "text-gray-500"} font-body`}>{t.anim1FormulaTitle}</p>
           <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full"
             style={{ background: radius % 7 === 0 ? "rgba(74,222,128,.15)" : "rgba(148,163,184,.12)",
                      color: radius % 7 === 0 ? "#4ade80" : "#94a3b8" }}>
@@ -621,7 +623,7 @@ const AnimasiBusur = ({ t }: { t: T }) => {
         <p className="text-amber-300 text-xs font-mono text-center">
           = ({arcSpan}/360) × 2 × π × {radius}
         </p>
-        <p className="text-white font-bold text-xl text-center mt-1">{arcLen} cm</p>
+        <p className={`${isDark ? "text-white" : "text-gray-900"} font-bold text-xl text-center mt-1`}>{arcLen} cm</p>
       </div>
     </div>
   );
@@ -631,6 +633,7 @@ const AnimasiBusur = ({ t }: { t: T }) => {
    ANIMASI 2 — Luas Juring (drag A & B)
 ═══════════════════════════════════════════════════════════════════ */
 const AnimasiJuring = ({ t }: { t: T }) => {
+  const { isDark } = useTheme();
   const [angleA, setAngleA] = useState(0);
   const [angleB, setAngleB] = useState(120);
   const [radius, setRadius] = useState(7);
@@ -779,14 +782,14 @@ const AnimasiJuring = ({ t }: { t: T }) => {
       </svg>
 
       <div className="px-1">
-        <div className="flex justify-between text-xs font-body text-white/70 mb-1">
+        <div className={`flex justify-between text-xs font-body ${isDark ? "text-white/70" : "text-gray-600"} mb-1`}>
           <span>{t.anim2RadiusLabel}</span>
           <span className="text-violet-300 font-bold">{radius} cm</span>
         </div>
         <input type="range" min="1" max="14" step="1" value={radius}
           onChange={e => { setRadius(Number(e.target.value)); playPopSound(); }}
           className="w-full accent-violet-400 cursor-pointer h-2"/>
-        <div className="flex justify-between text-[10px] text-white/30 font-mono mt-0.5">
+        <div className={`flex justify-between text-[10px] ${isDark ? "text-white/30" : "text-gray-400"} font-mono mt-0.5`}>
           <span>1</span><span>14</span>
         </div>
       </div>
@@ -794,7 +797,7 @@ const AnimasiJuring = ({ t }: { t: T }) => {
       <div className="rounded-xl p-3 border"
         style={{ background: "rgba(168,85,247,.1)", borderColor: "rgba(168,85,247,.35)" }}>
         <div className="flex items-center justify-center gap-2 mb-1">
-          <p className="text-xs text-white/55 font-body">{t.anim2FormulaTitle}</p>
+          <p className={`text-xs ${isDark ? "text-white/55" : "text-gray-500"} font-body`}>{t.anim2FormulaTitle}</p>
           <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full"
             style={{ background: radius % 7 === 0 ? "rgba(74,222,128,.15)" : "rgba(148,163,184,.12)",
                      color: radius % 7 === 0 ? "#4ade80" : "#94a3b8" }}>
@@ -804,7 +807,7 @@ const AnimasiJuring = ({ t }: { t: T }) => {
         <p className="text-purple-300 text-xs font-mono text-center">
           = ({arcSpan}/360) × π × {radius}²
         </p>
-        <p className="text-white font-bold text-xl text-center mt-1">{sectorArea} cm²</p>
+        <p className={`${isDark ? "text-white" : "text-gray-900"} font-bold text-xl text-center mt-1`}>{sectorArea} cm²</p>
       </div>
     </div>
   );
@@ -873,7 +876,9 @@ const PizzaJuringSVG = ({ t }: { t: T }) => (
   </svg>
 );
 
-const PizzaAnalogiDua = ({ t }: { t: T }) => (
+const PizzaAnalogiDua = ({ t }: { t: T }) => {
+  const { isDark } = useTheme();
+  return (
   <div className="space-y-2">
     <div className="grid grid-cols-2 gap-3">
       <div className="rounded-xl border border-amber-500/30 bg-amber-950/20 p-2">
@@ -883,11 +888,12 @@ const PizzaAnalogiDua = ({ t }: { t: T }) => (
         <PizzaJuringSVG t={t} />
       </div>
     </div>
-    <p className="text-center text-[10px] text-white/40 font-mono">
+    <p className={`text-center text-[10px] ${isDark ? "text-white/40" : "text-gray-400"} font-mono`}>
       {t.pizzaCaption}
     </p>
   </div>
-);
+  );
+};
 
 const TemberengLengkapSVG = ({ t }: { t: T }) => (
   <svg viewBox="0 0 280 225" className="w-full max-w-xs mx-auto my-2" aria-label={t.tembAria}>
@@ -963,6 +969,7 @@ const SvgPerbandingan = ({ t }: { t: T }) => (
 const BusurJuringPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language];
 
   const SectionHeader = ({ icon, iconColor, title }: {
@@ -970,7 +977,7 @@ const BusurJuringPage = () => {
   }) => (
     <div className="w-full flex items-center px-5 py-4">
       <span className={iconColor}>{icon}</span>
-      <span className="font-body font-semibold text-white ml-3">{title}</span>
+      <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"} ml-3`}>{title}</span>
     </div>
   );
 
@@ -983,7 +990,7 @@ const BusurJuringPage = () => {
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
           {t.h1}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">
+        <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>
           {t.subtitle}
         </p>
 
@@ -994,7 +1001,7 @@ const BusurJuringPage = () => {
             <SectionHeader icon={<Lightbulb className="w-5 h-5" />}
               iconColor="text-yellow-400" title={t.introTitle} />
             <div className="px-5 pb-5 space-y-4">
-              <p className="font-body text-sm text-white/80 leading-relaxed">
+              <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} leading-relaxed`}>
                 {t.introP.split(t.introPizJuring)[0]}
                 <strong className="text-yellow-300">{t.introPizJuring}</strong>
                 {t.introP.split(t.introPizJuring)[1]?.split(t.introPizBusur)[0]}
@@ -1012,7 +1019,7 @@ const BusurJuringPage = () => {
 
           {/* ANIMASI 1 */}
           <div className="rounded-xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.8)", borderColor: "rgba(251,191,36,.3)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.8)" : "rgba(248,250,252,.97)", borderColor: "rgba(251,191,36,.3)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<Zap className="w-5 h-5" />}
               iconColor="text-amber-400" title={t.anim1Title} />
             <div className="px-5 pb-5 pt-2 space-y-4">
@@ -1028,7 +1035,7 @@ const BusurJuringPage = () => {
 
           {/* ANIMASI 2 */}
           <div className="rounded-xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.8)", borderColor: "rgba(168,85,247,.3)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.8)" : "rgba(248,250,252,.97)", borderColor: "rgba(168,85,247,.3)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<Zap className="w-5 h-5" />}
               iconColor="text-purple-400" title={t.anim2Title} />
             <div className="px-5 pb-5 pt-2 space-y-4">
@@ -1049,7 +1056,7 @@ const BusurJuringPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                 <p className="font-body text-sm font-semibold text-cyan-300 mb-2">{t.rumusSummaryTitle}</p>
-                <p className="font-body text-sm text-white/80">
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                   {t.rumusSummaryP.split(t.rumusSummaryBold)[0]}
                   <strong className="text-yellow-300">{t.rumusSummaryBold}</strong>
                   {t.rumusSummaryP.split(t.rumusSummaryBold)[1]}
@@ -1059,7 +1066,7 @@ const BusurJuringPage = () => {
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="font-body text-sm font-bold text-yellow-300 mb-1">{t.rumusBusurTitle}</p>
                   <BlockMath math="\frac{\alpha}{360°} \times 2\pi r" />
-                  <p className="font-body text-xs text-white/60">{t.rumusBusurAlpha}</p>
+                  <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.rumusBusurAlpha}</p>
                 </div>
                 <div className="bg-orange-900/30 border border-orange-500/40 rounded-xl p-4">
                   <p className="font-body text-sm font-bold text-orange-300 mb-1">{t.rumusJuringTitle}</p>
@@ -1076,13 +1083,13 @@ const BusurJuringPage = () => {
 
           {/* KONSEP PERBANDINGAN */}
           <div className="rounded-xl overflow-hidden border"
-            style={{ background: "rgba(15,23,42,.85)", borderColor: "rgba(6,182,212,.35)", backdropFilter: "blur(12px)" }}>
+            style={{ background: isDark ? "rgba(15,23,42,.85)" : "rgba(248,250,252,.97)", borderColor: "rgba(6,182,212,.35)", backdropFilter: "blur(12px)" }}>
             <SectionHeader icon={<Target className="w-5 h-5" />}
               iconColor="text-cyan-400" title={t.perbTitle} />
             <div className="px-5 pb-6 pt-1 space-y-5">
 
               <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4">
-                <p className="font-body text-sm text-white/85 leading-relaxed">
+                <p className={`font-body text-sm ${isDark ? "text-white/85" : "text-gray-700"} leading-relaxed`}>
                   {t.perbHook}{" "}
                   <em>{t.perbHookEm}</em>{" "}
                   {t.perbHook.includes(t.perbHookEm) ? "" : ""}{t.perbHook.split(t.perbHookEm).length > 1 ? "" : ""}
@@ -1099,44 +1106,44 @@ const BusurJuringPage = () => {
                     <div className="w-3 h-3 rounded-full bg-cyan-400"/>
                     <p className="text-cyan-300 text-xs font-bold font-body">{t.perbLegendCyan}</p>
                   </div>
-                  <p className="text-white/60 text-[11px] font-body">{t.perbLegendCyanSub}</p>
+                  <p className={`${isDark ? "text-white/60" : "text-gray-500"} text-[11px] font-body`}>{t.perbLegendCyanSub}</p>
                 </div>
                 <div className="rounded-lg p-3 border border-orange-500/30 bg-orange-500/10">
                   <div className="flex items-center gap-2 mb-1">
                     <div className="w-3 h-3 rounded-full bg-orange-400"/>
                     <p className="text-orange-300 text-xs font-bold font-body">{t.perbLegendOrange}</p>
                   </div>
-                  <p className="text-white/60 text-[11px] font-body">{t.perbLegendOrangeSub}</p>
+                  <p className={`${isDark ? "text-white/60" : "text-gray-500"} text-[11px] font-body`}>{t.perbLegendOrangeSub}</p>
                 </div>
               </div>
 
               <div className="space-y-1">
-                <p className="text-white/70 text-xs font-body font-semibold uppercase tracking-wider">{t.perbIdePokokLabel}</p>
-                <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm text-white/85 leading-relaxed">
+                <p className={`${isDark ? "text-white/70" : "text-gray-600"} text-xs font-body font-semibold uppercase tracking-wider`}>{t.perbIdePokokLabel}</p>
+                <div className={`${isDark ? "bg-slate-800/70 border-slate-600/50" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-2`}>
+                  <p className={`font-body text-sm ${isDark ? "text-white/85" : "text-gray-700"} leading-relaxed`}>
                     {t.perbIdeP1.split(t.perbIdeP1Bold)[0]}
                     <strong className="text-yellow-300">{t.perbIdeP1Bold}</strong>
                     {t.perbIdeP1.split(t.perbIdeP1Bold)[1]}
                   </p>
-                  <p className="font-body text-sm text-white/70 leading-relaxed">
+                  <p className={`font-body text-sm ${isDark ? "text-white/70" : "text-gray-600"} leading-relaxed`}>
                     {t.perbIdeP2}
                   </p>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <p className="text-white/70 text-xs font-body font-semibold uppercase tracking-wider">{t.perbRumusLabel}</p>
+                <p className={`${isDark ? "text-white/70" : "text-gray-600"} text-xs font-body font-semibold uppercase tracking-wider`}>{t.perbRumusLabel}</p>
 
-                <div className="rounded-xl p-4 border border-white/20 bg-slate-800/60 text-center">
-                  <p className="font-body text-xs text-white/60 mb-1">{t.perbGabNote}</p>
-                  <p className="font-body text-[10px] text-white/40 mb-2 font-mono">{t.perbGabLegend}</p>
+                <div className={`rounded-xl p-4 border ${isDark ? "border-white/20 bg-slate-800/60" : "border-gray-200 bg-gray-100"} text-center`}>
+                  <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"} mb-1`}>{t.perbGabNote}</p>
+                  <p className={`font-body text-[10px] ${isDark ? "text-white/40" : "text-gray-400"} mb-2 font-mono`}>{t.perbGabLegend}</p>
                   <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{\ell_{AB}}{\ell_{CD}} = \frac{L_{AOB}}{L_{COD}}" />
                 </div>
 
                 <div className="rounded-xl p-4 border border-cyan-500/40 bg-cyan-900/20">
                   <p className="font-body text-xs font-bold text-cyan-300 mb-2">{t.perbBusurTitle}</p>
                   <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{\ell_{AB}}{\ell_{CD}}" />
-                  <p className="text-white/55 text-xs font-body mt-1">
+                  <p className={`${isDark ? "text-white/55" : "text-gray-500"} text-xs font-body mt-1`}>
                     {t.perbBusurNote}
                   </p>
                 </div>
@@ -1144,7 +1151,7 @@ const BusurJuringPage = () => {
                 <div className="rounded-xl p-4 border border-orange-500/40 bg-orange-900/20">
                   <p className="font-body text-xs font-bold text-orange-300 mb-2">{t.perbJuringTitle}</p>
                   <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{L_{AOB}}{L_{COD}}" />
-                  <p className="text-white/55 text-xs font-body mt-1">
+                  <p className={`${isDark ? "text-white/55" : "text-gray-500"} text-xs font-body mt-1`}>
                     {t.perbJuringNote}
                   </p>
                 </div>
@@ -1164,7 +1171,7 @@ const BusurJuringPage = () => {
                   {t.perbKapanItems.map((item, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="text-violet-400 mt-0.5">✦</span>
-                      <p className="font-body text-xs text-white/75">{item}</p>
+                      <p className={`font-body text-xs ${isDark ? "text-white/75" : "text-gray-600"}`}>{item}</p>
                     </li>
                   ))}
                 </ul>
@@ -1172,15 +1179,15 @@ const BusurJuringPage = () => {
 
               <div className="rounded-xl border border-emerald-500/40 bg-emerald-900/20 p-4 space-y-3">
                 <p className="font-body text-xs font-bold text-emerald-300 uppercase tracking-wide">{t.perbContohLabel}</p>
-                <p className="font-body text-sm text-white/85">
+                <p className={`font-body text-sm ${isDark ? "text-white/85" : "text-gray-700"}`}>
                   {t.perbContohQ.split(t.perbContohQBold)[0]}
                   <strong className="text-emerald-300">{t.perbContohQBold}</strong>
                   {t.perbContohQ.split(t.perbContohQBold)[1]}
                 </p>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-lg p-3 space-y-2">
-                  <p className="text-slate-300 text-xs font-mono font-bold">{t.perbContohSol}</p>
+                <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-lg p-3 space-y-2`}>
+                  <p className={`${isDark ? "text-slate-300" : "text-gray-600"} text-xs font-mono font-bold`}>{t.perbContohSol}</p>
                   <BlockMath math="\frac{\ell_{CD}}{\ell_{AB}} = \frac{\beta}{\alpha} = \frac{45°}{60°} = \frac{3}{4}" />
-                  <p className="font-body text-xs text-white/70">{t.perbGabLegend}</p>
+                  <p className={`font-body text-xs ${isDark ? "text-white/70" : "text-gray-500"}`}>{t.perbGabLegend}</p>
                   <BlockMath math="\ell_{CD} = \frac{3}{4} \times 33 = 24{,}75 \,\mathrm{cm}" />
                   <div className="bg-emerald-900/40 border border-emerald-500/30 rounded-lg p-2 mt-1">
                     <p className="font-body text-sm text-emerald-300 text-center font-bold">
@@ -1209,12 +1216,12 @@ const BusurJuringPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1Level}</p>
-                <p className="font-body text-sm text-white/90">{t.c1Q}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c1Q}</p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c1Sol}</p>
-                <p className="font-body text-sm text-white/80">{t.c1Known} <InlineMath math="r = 21"/> cm, <InlineMath math="\alpha = 120°"/></p>
-                <p className="font-body text-xs text-white/55 font-mono">{t.c1PanjangBusur} =</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c1Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c1Known} <InlineMath math="r = 21"/> cm, <InlineMath math="\alpha = 120°"/></p>
+                <p className={`font-body text-xs ${isDark ? "text-white/55" : "text-gray-500"} font-mono`}>{t.c1PanjangBusur} =</p>
                 <BlockMath math="\frac{120}{360} \times 2 \times \frac{22}{7} \times 21" />
                 <BlockMath math="= \frac{1}{3} \times 2 \times \frac{22}{7} \times 21" />
                 <BlockMath math="= \frac{1}{3} \times 132 = 44 \,\mathrm{cm}" />
@@ -1232,20 +1239,20 @@ const BusurJuringPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                 <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2Level}</p>
-                <p className="font-body text-sm text-white/90">{t.c2Q}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c2Q}</p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c2Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.c2Step1}</strong> {t.c2Step1desc}</p>
-                <p className="font-body text-xs text-white/55 font-mono">{t.c2PanjangBusur} =</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c2Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2Step1}</strong> {t.c2Step1desc}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/55" : "text-gray-500"} font-mono`}>{t.c2PanjangBusur} =</p>
                 <BlockMath math="\frac{\alpha}{360°} \times 2\pi r" />
                 <BlockMath math="33 = \frac{\alpha}{360} \times 2 \times \frac{22}{7} \times 63 = \frac{\alpha}{360} \times 396" />
                 <BlockMath math="\alpha = \frac{33 \times 360}{396} = 30°" />
-                <p className="font-body text-sm text-white/80"><strong>{t.c2Step2}</strong> {t.c2Step2desc}</p>
-                <p className="font-body text-xs text-white/55 font-mono">{t.c2LuasJuring} =</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2Step2}</strong> {t.c2Step2desc}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/55" : "text-gray-500"} font-mono`}>{t.c2LuasJuring} =</p>
                 <BlockMath math="\frac{30}{360} \times \frac{22}{7} \times 63^2 = \frac{1}{12} \times \frac{22}{7} \times 3969" />
                 <BlockMath math="= \frac{1}{12} \times 12474 = 1039{,}5 \,\mathrm{cm}^2" />
-                <p className="font-body text-sm text-white/80"><strong>{t.c2Shortcut}</strong> {t.c2ShortcutDesc}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2Shortcut}</strong> {t.c2ShortcutDesc}</p>
                 <BlockMath math="= \frac{1}{2} \times 63 \times 33 = 1039{,}5 \,\mathrm{cm}^2 \checkmark" />
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200 text-center">{t.c2Check}</p>
@@ -1261,20 +1268,20 @@ const BusurJuringPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                 <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3Level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c3Q}<InlineMath math="\sqrt{3} \approx 1{,}732"/>{t.c3Q2}
                 </p>
               </div>
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide mb-2">{t.c3Sol}</p>
-                <p className="font-body text-sm text-white/80"><strong>{t.c3Step1}</strong> {t.c3Step1desc}</p>
-                <p className="font-body text-xs text-white/55 font-mono">{t.c3LuasJuring} =</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+                <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c3Sol}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3Step1}</strong> {t.c3Step1desc}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/55" : "text-gray-500"} font-mono`}>{t.c3LuasJuring} =</p>
                 <BlockMath math="\frac{60}{360} \times 3{,}14 \times 10^2 = \frac{1}{6} \times 314 \approx 52{,}33 \,\mathrm{cm}^2" />
-                <p className="font-body text-sm text-white/80"><strong>{t.c3Step2}</strong> {t.c3Step2desc}</p>
-                <p className="font-body text-sm text-white/80">{t.c3Step2Note}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3Step2}</strong> {t.c3Step2desc}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c3Step2Note}</p>
                 <BlockMath math="L_{\triangle OAB} = \frac{\sqrt{3}}{4} \times s^2 = \frac{1{,}732}{4} \times 100 = 43{,}3 \,\mathrm{cm}^2" />
-                <p className="font-body text-sm text-white/80"><strong>{t.c3Step3}</strong> {t.c3Step3desc}</p>
-                <p className="font-body text-xs text-white/55 font-mono">{t.c3LuasTembereng} =</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3Step3}</strong> {t.c3Step3desc}</p>
+                <p className={`font-body text-xs ${isDark ? "text-white/55" : "text-gray-500"} font-mono`}>{t.c3LuasTembereng} =</p>
                 <BlockMath math="52{,}33 - 43{,}3 = 9{,}03 \,\mathrm{cm}^2" />
                 <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
                   <p className="font-body text-sm text-red-200 text-center">{t.c3Check}</p>
@@ -1289,18 +1296,18 @@ const BusurJuringPage = () => {
               iconColor="text-violet-400" title={t.rangkTitle} />
             <div className="px-5 pb-5 space-y-3">
               <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                <p className="font-body text-sm text-white/80">
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                   • <strong className="text-yellow-300">{t.rBusur}</strong> ={" "}
                   <InlineMath math="\frac{\alpha}{360°} \times 2\pi r"/>
                 </p>
-                <p className="font-body text-sm text-white/80">
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                   • <strong className="text-orange-300">{t.rJuring}</strong> ={" "}
                   <InlineMath math="\frac{\alpha}{360°} \times \pi r^2"/>{" "}
                   {t.rJuringOr}{" "}
                   <InlineMath math="\frac{1}{2} \times r \times \ell"/>
-                  <span className="text-white/50 text-[11px] ml-1">({t.rJuringShortcut})</span>
+                  <span className={`${isDark ? "text-white/50" : "text-gray-400"} text-[11px] ml-1`}>({t.rJuringShortcut})</span>
                 </p>
-                <p className="font-body text-sm text-white/80">
+                <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                   • <strong className="text-purple-300">{t.rTembereng}</strong> {t.rTemberengVal}
                 </p>
               </div>
