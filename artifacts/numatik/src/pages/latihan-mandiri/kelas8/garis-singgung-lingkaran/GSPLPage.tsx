@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -18,7 +19,6 @@ type Q = {
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const C = "#38bdf8";
-const BG = "rgba(2,8,23,0.97)";
 
 const DiagramGSPLDuaLingkaran = ({
   r1px, r2px, labelP, labelQ, labelA, labelB, labelAB = "AB", labelPA, labelQB, labelPQ,
@@ -28,6 +28,8 @@ const DiagramGSPLDuaLingkaran = ({
   labelP?: string; labelQ?: string; labelA?: string; labelB?: string;
   labelAB?: string; labelPA?: string; labelQB?: string; labelPQ?: string;
 }) => {
+  const { isDark } = useTheme();
+  const bgFill = isDark ? "rgba(2,8,23,0.97)" : "rgba(241,245,249,0.97)";
   const cx1 = r1px + 14;
   const cx2 = size - r2px - 14;
   const cy = size / 2;
@@ -45,7 +47,7 @@ const DiagramGSPLDuaLingkaran = ({
   const by2 = cy + r2px * cosA;
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <rect width={size} height={size} fill={BG} rx="12" />
+      <rect width={size} height={size} fill={bgFill} rx="12" />
       <circle cx={cx1} cy={cy} r={r1px} fill="rgba(56,189,248,0.07)" stroke={C} strokeWidth="2" />
       <circle cx={cx2} cy={cy} r={r2px} fill="rgba(251,146,60,0.07)" stroke="#fb923c" strokeWidth="2" />
       <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#34d399" strokeWidth="2.2" />
@@ -80,6 +82,8 @@ const DiagramGSPLDuaLingkaran = ({
 };
 
 const DiagramBersinggungLuar = ({ size = 240 }: { size?: number }) => {
+  const { isDark } = useTheme();
+  const bgFill = isDark ? "rgba(2,8,23,0.97)" : "rgba(241,245,249,0.97)";
   const r1 = 36;
   const r2 = 20;
   const cx1 = 70;
@@ -101,7 +105,7 @@ const DiagramBersinggungLuar = ({ size = 240 }: { size?: number }) => {
   const ty = cy;
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <rect width={size} height={size} fill={BG} rx="12" />
+      <rect width={size} height={size} fill={bgFill} rx="12" />
       <circle cx={cx1} cy={cy} r={r1} fill="rgba(56,189,248,0.07)" stroke={C} strokeWidth="2" />
       <circle cx={cx2} cy={cy} r={r2} fill="rgba(251,146,60,0.07)" stroke="#fb923c" strokeWidth="2" />
       <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#34d399" strokeWidth="2.2" />
@@ -126,6 +130,8 @@ const DiagramBersinggungLuar = ({ size = 240 }: { size?: number }) => {
 };
 
 const DiagramGir = ({ size = 280 }: { size?: number }) => {
+  const { isDark } = useTheme();
+  const bgFill = isDark ? "rgba(2,8,23,0.97)" : "rgba(241,245,249,0.97)";
   const r1 = 52;
   const r2 = 26;
   const cx1 = r1 + 16;
@@ -165,7 +171,7 @@ const DiagramGir = ({ size = 280 }: { size?: number }) => {
   };
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <rect width={size} height={size} fill={BG} rx="12" />
+      <rect width={size} height={size} fill={bgFill} rx="12" />
       <line x1={ax} y1={ay} x2={bx} y2={by} stroke="#94a3b8" strokeWidth="3" strokeLinecap="round" />
       <line x1={ax2} y1={ay2} x2={bx2} y2={by2} stroke="#94a3b8" strokeWidth="3" strokeLinecap="round" />
       <path d={`M ${ax2} ${ay2} A ${r1} ${r1} 0 0 0 ${ax} ${ay}`} fill="none" stroke="#94a3b8" strokeWidth="3" />
@@ -308,6 +314,7 @@ const diffColor: Record<string, string> = {
 const GSPLPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -321,15 +328,15 @@ const GSPLPage = () => {
             style={{ textShadow: '0 0 20px rgba(56,189,248,0.7)' }}>
             GARIS SINGGUNG PERSEKUTUAN LUAR (GSPL)
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Garis Singgung Lingkaran · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Garis Singgung Lingkaran · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
             <span className="text-cyan-400 text-xs font-bold">📋 11 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / Terapan</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / Terapan</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-cyan-900/20" : "bg-cyan-50"} border border-cyan-500/20 rounded-xl p-4`}>
           <p className="text-cyan-300 text-xs font-bold mb-2">📌 Rumus Garis Singgung Persekutuan</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2">
             <div className="bg-white/5 rounded-lg px-3 py-3">
@@ -352,9 +359,9 @@ const GSPLPage = () => {
               { l: "r", v: "Jari-jari lingkaran kecil" },
               { l: "d", v: "Panjang garis singgung" },
             ].map(x => (
-              <div key={x.l} className="bg-white/5 rounded-lg px-2 py-2">
+              <div key={x.l} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-2 py-2`}>
                 <span className="text-cyan-400 font-bold">{x.l}: </span>
-                <span className="text-white/60">{x.v}</span>
+                <span className={isDark ? "text-white/60" : "text-gray-600"}>{x.v}</span>
               </div>
             ))}
           </div>
@@ -364,7 +371,7 @@ const GSPLPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.05}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-cyan-900/30 via-slate-900/80 to-blue-900/30" : "from-cyan-50/60 via-white/80 to-blue-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-blue-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -383,7 +390,7 @@ const GSPLPage = () => {
                         </span>
                       )}
                     </div>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3 whitespace-pre-line">{q.content}</p>}
+                    {q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} leading-relaxed mb-3 whitespace-pre-line`}>{q.content}</p>}
                     {q.mathContent && (
                       <div className="mb-3 bg-cyan-500/10 border border-cyan-500/20 rounded-lg px-4 py-2 flex justify-center">
                         <BlockMath math={q.mathContent} />
@@ -393,11 +400,11 @@ const GSPLPage = () => {
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? (isDark ? 'bg-white/5' : 'bg-gray-50') : 'bg-transparent px-0'}`}>
                             {p.label && <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
                             {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>
+                              ? <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}><InlineMath math={p.math} /></div>
+                              : <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{p.text}</p>
                             }
                           </div>
                         ))}

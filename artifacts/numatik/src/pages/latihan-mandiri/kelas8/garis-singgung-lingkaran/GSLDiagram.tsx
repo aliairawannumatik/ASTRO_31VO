@@ -1,3 +1,5 @@
+import { useTheme } from "@/contexts/ThemeContext";
+
 type GSLVariant =
   | "tangent-basic"
   | "tangent-two"
@@ -20,6 +22,8 @@ type GSLDiagramProps = {
 };
 
 const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#38bdf8", title }: GSLDiagramProps) => {
+  const { isDark } = useTheme();
+  const svgBg = isDark ? "rgba(2,8,23,0.95)" : "rgba(241,245,249,0.97)";
   const r = values.r ?? 65;
   const R = values.R ?? 80;
   const r2 = values.r2 ?? 40;
@@ -40,7 +44,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const tpy = cy - r * cosA * sinA;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <circle cx={cx} cy={cy} r={r} fill="rgba(56,189,248,0.06)" stroke={color} strokeWidth="2" />
             <line x1={cx} y1={cy} x2={tangentX} y2={cy} stroke="#60a5fa" strokeWidth="1.8" />
             <line x1={tangentX} y1={cy - r * 1.6} x2={tangentX} y2={cy + r * 1.6} stroke="#f472b6" strokeWidth="2.5" strokeLinecap="round" />
@@ -71,7 +75,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const ty2 = cy + r * cosA * sinA;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <circle cx={cx} cy={cy} r={r} fill="rgba(56,189,248,0.06)" stroke={color} strokeWidth="2" />
             <line x1={px} y1={py} x2={tx1} y2={ty1} stroke="#34d399" strokeWidth="2" />
             <line x1={px} y1={py} x2={tx2} y2={ty2} stroke="#fb923c" strokeWidth="2" />
@@ -102,7 +106,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const ty = cy - r * cosA * sinA;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <circle cx={cx} cy={cy} r={r} fill="rgba(56,189,248,0.06)" stroke={color} strokeWidth="2" />
             <line x1={px} y1={py} x2={tx} y2={ty} stroke="#34d399" strokeWidth="2" />
             <line x1={cx} y1={cy} x2={tx} y2={ty} stroke="#60a5fa" strokeWidth="1.8" />
@@ -136,7 +140,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const ty2 = cy + r * cosA * sinA;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <circle cx={cx} cy={cy} r={r} fill="rgba(56,189,248,0.06)" stroke={color} strokeWidth="2" />
             <line x1={px} y1={py} x2={tx1} y2={ty1} stroke="#34d399" strokeWidth="2.2" />
             <line x1={px} y1={py} x2={tx2} y2={ty2} stroke="#34d399" strokeWidth="2.2" />
@@ -179,7 +183,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const tx4 = cx2 + rB * sinA;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <circle cx={cx1} cy={cy1} r={rA} fill="rgba(56,189,248,0.06)" stroke={color} strokeWidth="2" />
             <circle cx={cx2} cy={cy2} r={rB} fill="rgba(251,146,60,0.06)" stroke="#fb923c" strokeWidth="2" />
             <line x1={tx1} y1={ty1} x2={tx2} y2={ty2} stroke="#34d399" strokeWidth="2" />
@@ -220,7 +224,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const crossY = cy1;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <circle cx={cx1} cy={cy1} r={rA} fill="rgba(167,139,250,0.06)" stroke="#a78bfa" strokeWidth="2" />
             <circle cx={cx2} cy={cy2} r={rB} fill="rgba(251,146,60,0.06)" stroke="#fb923c" strokeWidth="2" />
             <line x1={tx1} y1={ty1} x2={tx2} y2={ty2} stroke="#f472b6" strokeWidth="2" />
@@ -248,7 +252,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const d = cx2 - cx1;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <path d={`M ${cx1} ${cy - rr} L ${cx2} ${cy - rr}`} stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
             <path d={`M ${cx1} ${cy + rr} L ${cx2} ${cy + rr}`} stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
             <path d={`M ${cx1} ${cy - rr} A ${rr} ${rr} 0 0 0 ${cx1} ${cy + rr}`} stroke="#facc15" strokeWidth="2.5" fill="none" />
@@ -288,7 +292,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const halfAngle1 = Math.acos(cosA) * 180 / Math.PI;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <line x1={tx1} y1={ty1} x2={tx2} y2={ty2} stroke="#facc15" strokeWidth="2.5" />
             <line x1={tx3} y1={ty3} x2={tx4} y2={ty4} stroke="#facc15" strokeWidth="2.5" />
             <path d={`M ${tx1} ${ty1} A ${rA} ${rA} 0 0 0 ${tx3} ${ty3}`} stroke="#facc15" strokeWidth="2.5" fill="none" />
@@ -321,7 +325,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const c2y = cy - rr * Math.sin(chord2 * Math.PI / 180);
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <circle cx={cx} cy={cy} r={rr} fill="rgba(56,189,248,0.06)" stroke={color} strokeWidth="2" />
             <line x1={tx} y1={cy - rr * 1.3} x2={tx} y2={cy + rr * 1.3} stroke="#f472b6" strokeWidth="2.5" />
             <line x1={c1x} y1={c1y} x2={tx} y2={cy} stroke="#34d399" strokeWidth="2" />
@@ -352,7 +356,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
         const alphaDeg = Math.asin(sinA) * 180 / Math.PI;
         return (
           <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-            <rect width={size} height={size} fill="rgba(2,8,23,0.95)" rx="12" />
+            <rect width={size} height={size} fill={svgBg} rx="12" />
             <circle cx={cx} cy={cy} r={rr} fill="rgba(56,189,248,0.06)" stroke={color} strokeWidth="2" />
             <line x1={px} y1={py} x2={tx} y2={ty} stroke="#34d399" strokeWidth="2" />
             <line x1={cx} y1={cy} x2={tx} y2={ty} stroke="#60a5fa" strokeWidth="1.8" strokeDasharray="4,3" />
@@ -377,7 +381,7 @@ const GSLDiagram = ({ variant, size = 240, labels = {}, values = {}, color = "#3
 
   return (
     <div className="flex flex-col items-center">
-      {title && <p className="text-white/50 text-[10px] text-center mb-1 font-body">{title}</p>}
+      {title && <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-[10px] text-center mb-1 font-body`}>{title}</p>}
       <div className="rounded-xl overflow-hidden">{renderDiagram()}</div>
     </div>
   );
