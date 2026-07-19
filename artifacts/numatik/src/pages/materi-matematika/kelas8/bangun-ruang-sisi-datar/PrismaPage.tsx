@@ -65,6 +65,7 @@ const cross2d = (ax: number, ay: number, bx: number, by: number) => ax * by - ay
 const FACE_COLORS = ["#ef4444", "#eab308", "#3b82f6", "#22c55e", "#f97316"];
 
 const InteractivePrisma3D = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [rotX, setRotX] = useState(-28);
   const [rotY, setRotY] = useState(30);
   const [isDragging, setIsDragging] = useState(false);
@@ -161,8 +162,8 @@ const InteractivePrisma3D = ({ lang }: { lang: string }) => {
   const btnRst = lang === "en" ? "↺ Reset View" : lang === "ja" ? "↺ リセット" : "↺ Reset Tampilan";
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
-      <p className="text-white/60 text-xs text-center font-body">{caption}</p>
+    <div className={`${isDark ? "bg-slate-900/80 border-slate-700" : "bg-white border-gray-200"} border rounded-xl p-4 space-y-4`}>
+      <p className={`${isDark ? "text-white/60" : "text-gray-500"} text-xs text-center font-body`}>{caption}</p>
 
       <div className="relative mx-auto select-none overflow-visible"
         style={{ width: "100%", height: 300, cursor: isDragging ? "grabbing" : "grab" }}
@@ -203,7 +204,7 @@ const InteractivePrisma3D = ({ lang }: { lang: string }) => {
         </button>
         {!showNet && (
           <button onClick={() => { setRotX(-28); setRotY(30); }}
-            className="px-3 py-1.5 text-xs font-bold bg-slate-700/60 border border-slate-500 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors cursor-pointer font-body">
+            className={`px-3 py-1.5 text-xs font-bold ${isDark ? "bg-slate-700/60 border-slate-500 text-slate-300 hover:bg-slate-700" : "bg-gray-200 border-gray-300 text-gray-600 hover:bg-gray-300"} border rounded-lg transition-colors cursor-pointer font-body`}>
             {btnRst}
           </button>
         )}
@@ -213,7 +214,7 @@ const InteractivePrisma3D = ({ lang }: { lang: string }) => {
         {FACE_COLORS.map((c, i) => (
           <div key={i} className="flex items-center gap-1">
             <div className="w-3 h-3 rounded-sm" style={{ background: c }} />
-            <span className="text-white/50 text-[10px] font-body">{fl[i]}</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-[10px] font-body`}>{fl[i]}</span>
           </div>
         ))}
       </div>
@@ -249,6 +250,7 @@ const makePrismaFaces = (n: number, faceLabel: string) => {
 };
 
 const RotatingPrisma3D = ({ n, label, r = 38, h = 60, faceLabel = "▲" }: { n: number; label: string; r?: number; h?: number; faceLabel?: string }) => {
+  const { isDark } = useTheme();
   const [rotX, setRotX] = useState(-22);
   const [rotY, setRotY] = useState(n * 30);
   const [isDragging, setIsDragging] = useState(false);
@@ -326,11 +328,11 @@ const RotatingPrisma3D = ({ n, label, r = 38, h = 60, faceLabel = "▲" }: { n: 
 
   return (
     <div
-      className="flex flex-col items-center bg-slate-900/60 border border-slate-700/50 rounded-xl py-2 px-1 select-none"
+      className={`flex flex-col items-center ${isDark ? "bg-slate-900/60 border-slate-700/50" : "bg-white border-gray-200"} border rounded-xl py-2 px-1 select-none`}
       style={{ cursor: isDragging ? "grabbing" : "grab", flex:1, minWidth:0 }}
       onMouseDown={onMouseDown} onTouchStart={onTouchStart}
     >
-      <span className="text-white/70 font-body font-semibold mb-1" style={{ fontSize:10 }}>{label}</span>
+      <span className={`${isDark ? "text-white/70" : "text-gray-600"} font-body font-semibold mb-1`} style={{ fontSize:10 }}>{label}</span>
       <svg viewBox="0 0 170 180" style={{ width:"100%", maxWidth:160, overflow:"visible" }}>
         {facesWithDepth.map((f, i) => {
           const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
@@ -352,6 +354,7 @@ const RotatingPrisma3D = ({ n, label, r = 38, h = 60, faceLabel = "▲" }: { n: 
 };
 
 const ThreePrismas = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const types = getPrismaTypeLabels(lang);
   const fl = getFaceLabels(lang);
   const hint = lang === "en" ? "Auto-rotating · Drag to rotate manually"
@@ -363,8 +366,8 @@ const ThreePrismas = ({ lang }: { lang: string }) => {
     ["#3b82f6", lang === "en" ? "FACE" : lang === "ja" ? "側面" : "SISI"],
   ];
   return (
-    <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2">
-      <p className="text-center text-white/40 font-body" style={{ fontSize:9 }}>{hint}</p>
+    <div className={`${isDark ? "bg-slate-900/70 border-slate-700/50" : "bg-white border-gray-200"} border rounded-xl p-3 space-y-2`}>
+      <p className={`text-center ${isDark ? "text-white/40" : "text-gray-400"} font-body`} style={{ fontSize:9 }}>{hint}</p>
       <div className="flex gap-2">
         <RotatingPrisma3D n={3} label={`Prisma ${types[0]}`} r={38} h={60} faceLabel={fl[0]}/>
         <RotatingPrisma3D n={4} label={`Prisma ${types[1]}`} r={34} h={58} faceLabel={fl[0]}/>
@@ -374,7 +377,7 @@ const ThreePrismas = ({ lang }: { lang: string }) => {
         {legend.map(([c,l])=>(
           <div key={l} className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-sm" style={{ background: c as string }}/>
-            <span className="text-white/45 font-body" style={{ fontSize:9 }}>{l}</span>
+            <span className={`${isDark ? "text-white/45" : "text-gray-500"} font-body`} style={{ fontSize:9 }}>{l}</span>
           </div>
         ))}
       </div>
@@ -733,6 +736,7 @@ const JaringSegilimaSVG = ({ lang }: { lang: string }) => {
    LUAS PERMUKAAN — tab selector (3 jenis prisma)
 ───────────────────────────────────────────────────────────── */
 const JaringTabSelector = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [tab, setTab] = useState<"segitiga" | "segiempat" | "segilima">("segitiga");
   const types = getPrismaTypeLabels(lang);
   const tabs = [
@@ -750,14 +754,14 @@ const JaringTabSelector = ({ lang }: { lang: string }) => {
 
   return (
     <div className="space-y-3">
-      <div className="flex rounded-lg overflow-hidden border border-slate-600 w-full">
+      <div className={`flex rounded-lg overflow-hidden border ${isDark ? "border-slate-600" : "border-gray-300"} w-full`}>
         {tabs.map(t => (
           <button key={t.id}
             onClick={() => { playPopSound(); setTab(t.id); }}
             className={`flex-1 py-1.5 text-xs font-bold font-body transition-colors cursor-pointer
               ${tab === t.id
                 ? "bg-cyan-800/80 text-cyan-200 border-b-2 border-cyan-400"
-                : "bg-slate-800/60 text-white/50 hover:text-white/80 hover:bg-slate-700/60"}`}>
+                : isDark ? "bg-slate-800/60 text-white/50 hover:text-white/80 hover:bg-slate-700/60" : "bg-gray-100 text-gray-500 hover:text-gray-700 hover:bg-gray-200"}`}>
             {t.label}
           </button>
         ))}
@@ -772,15 +776,15 @@ const JaringTabSelector = ({ lang }: { lang: string }) => {
                : lang === "ja" ? "表面積 = 2·底面積 + 底面周 × h"
                : "L permukaan = 2·L_a + K_a × t"}
             </p>
-            <p className="text-[10px] text-white/60 mt-1 italic">{genSubA}</p>
+            <p className={`text-[10px] ${isDark ? "text-white/60" : "text-gray-500"} mt-1 italic`}>{genSubA}</p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 space-y-2 text-xs`}>
             <p className="text-cyan-300 font-semibold">
               {keyTitle} {lang === "en" ? "Triangular Prism:" : lang === "ja" ? "三角柱:" : "Prisma Segitiga:"}
             </p>
             <p>• {lang === "en" ? "Base/top area:" : lang === "ja" ? "底面積:" : "Luas alas/tutup:"} <span className="text-yellow-300">L△ = ½ × a × t△</span></p>
             <p>• {lang === "en" ? "Base perimeter:" : lang === "ja" ? "底面周:" : "Keliling alas:"} <span className="text-yellow-300">K = a + b + c</span></p>
-            <p className="text-white/90 font-semibold font-mono">L = 2×L△ + (a+b+c)×t</p>
+            <p className={`${isDark ? "text-white/90" : "text-gray-900"} font-semibold font-mono`}>L = 2×L△ + (a+b+c)×t</p>
           </div>
         </div>
       )}
@@ -794,15 +798,15 @@ const JaringTabSelector = ({ lang }: { lang: string }) => {
                : lang === "ja" ? "表面積 = 2·底面積 + 底面周 × h"
                : "L permukaan = 2·L_a + K_a × t"}
             </p>
-            <p className="text-[10px] text-white/60 mt-1 italic">{genSubA}</p>
+            <p className={`text-[10px] ${isDark ? "text-white/60" : "text-gray-500"} mt-1 italic`}>{genSubA}</p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 space-y-2 text-xs`}>
             <p className="text-cyan-300 font-semibold">
               {keyTitle} {lang === "en" ? "Rectangular Prism:" : lang === "ja" ? "四角柱:" : "Prisma Segiempat (Balok):"}
             </p>
             <p>• {lang === "en" ? "Base area:" : lang === "ja" ? "底面積:" : "Luas alas/tutup:"} <span className="text-yellow-300">L□ = p × l</span></p>
             <p>• {lang === "en" ? "Base perimeter:" : lang === "ja" ? "底面周:" : "Keliling alas:"} <span className="text-yellow-300">K = 2(p + l)</span></p>
-            <p className="text-white/90 font-semibold font-mono">L = 2(pl) + 2(p+l)×t</p>
+            <p className={`${isDark ? "text-white/90" : "text-gray-900"} font-semibold font-mono`}>L = 2(pl) + 2(p+l)×t</p>
           </div>
         </div>
       )}
@@ -816,15 +820,15 @@ const JaringTabSelector = ({ lang }: { lang: string }) => {
                : lang === "ja" ? "表面積 = 2·底面積 + 底面周 × h"
                : "L permukaan = 2·L_a + K_a × t"}
             </p>
-            <p className="text-[10px] text-white/60 mt-1 italic">{genSubA}</p>
+            <p className={`text-[10px] ${isDark ? "text-white/60" : "text-gray-500"} mt-1 italic`}>{genSubA}</p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 space-y-2 text-xs`}>
             <p className="text-cyan-300 font-semibold">
               {keyTitle} {lang === "en" ? "Pentagonal Prism (side a):" : lang === "ja" ? "五角柱(一辺a):" : "Prisma Segilima (alas sama sisi a):"}
             </p>
             <p>• {lang === "en" ? "Pentagon area:" : lang === "ja" ? "五角形面積:" : "Luas segi-5:"} <span className="text-yellow-300">L△₅ = ½ × {lang === "en" ? "perimeter" : lang === "ja" ? "周" : "keliling"} × apotema</span></p>
             <p>• {lang === "en" ? "Base perimeter:" : lang === "ja" ? "底面周:" : "Keliling alas:"} <span className="text-yellow-300">K = 5 × a</span></p>
-            <p className="text-white/90 font-semibold font-mono">L = 2×L△₅ + 5a×t</p>
+            <p className={`${isDark ? "text-white/90" : "text-gray-900"} font-semibold font-mono`}>L = 2×L△₅ + 5a×t</p>
           </div>
         </div>
       )}
@@ -1278,6 +1282,7 @@ const WaterSegilimAnimation = ({ lang }: { lang: string }) => {
    VOLUME TAB SELECTOR (3 jenis prisma)
 ───────────────────────────────────────────────────────────── */
 const VolumeTabSelector = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [tab, setTab] = useState<"segitiga" | "segiempat" | "segilima">("segitiga");
   const types = getPrismaTypeLabels(lang);
   const tabs = [
@@ -1288,14 +1293,14 @@ const VolumeTabSelector = ({ lang }: { lang: string }) => {
   const formulaKey = lang === "en" ? "📐 Formula —" : lang === "ja" ? "📐 公式 —" : "📐 Rumus —";
   return (
     <div className="space-y-3">
-      <div className="flex rounded-lg overflow-hidden border border-slate-600 w-full">
+      <div className={`flex rounded-lg overflow-hidden border ${isDark ? "border-slate-600" : "border-gray-300"} w-full`}>
         {tabs.map(t => (
           <button key={t.id}
             onClick={() => { playPopSound(); setTab(t.id); }}
             className={`flex-1 py-1.5 text-xs font-bold font-body transition-colors cursor-pointer
               ${tab === t.id
                 ? "bg-cyan-800/80 text-cyan-200 border-b-2 border-cyan-400"
-                : "bg-slate-800/60 text-white/50 hover:text-white/80 hover:bg-slate-700/60"}`}>
+                : isDark ? "bg-slate-800/60 text-white/50 hover:text-white/80 hover:bg-slate-700/60" : "bg-gray-100 text-gray-500 hover:text-gray-700 hover:bg-gray-200"}`}>
             {t.label}
           </button>
         ))}
@@ -1303,36 +1308,36 @@ const VolumeTabSelector = ({ lang }: { lang: string }) => {
       {tab === "segitiga" && (
         <div>
           <WaterPrismaAnimation lang={lang} />
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-1 text-xs text-white/70">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 space-y-1 text-xs`}>
             <p className="text-cyan-300 font-semibold">
               {formulaKey} {lang === "en" ? "Triangular Prism:" : lang === "ja" ? "三角柱:" : "Prisma Segitiga:"}
             </p>
             <p>• {lang === "en" ? "Base area:" : lang === "ja" ? "底面積:" : "Luas alas:"} <span className="text-yellow-300">L△ = ½ × a × t△</span></p>
-            <p className="text-white/90 font-semibold font-mono">V = L△ × t</p>
+            <p className={`${isDark ? "text-white/90" : "text-gray-900"} font-semibold font-mono`}>V = L△ × t</p>
           </div>
         </div>
       )}
       {tab === "segiempat" && (
         <div>
           <WaterSegiempatAnimation lang={lang} />
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-1 text-xs text-white/70">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 space-y-1 text-xs`}>
             <p className="text-cyan-300 font-semibold">
               {formulaKey} {lang === "en" ? "Rectangular Prism:" : lang === "ja" ? "四角柱:" : "Prisma Segiempat (Balok):"}
             </p>
             <p>• {lang === "en" ? "Base area:" : lang === "ja" ? "底面積:" : "Luas alas:"} <span className="text-yellow-300">L□ = p × l</span></p>
-            <p className="text-white/90 font-semibold font-mono">V = L□ × t</p>
+            <p className={`${isDark ? "text-white/90" : "text-gray-900"} font-semibold font-mono`}>V = L□ × t</p>
           </div>
         </div>
       )}
       {tab === "segilima" && (
         <div>
           <WaterSegilimAnimation lang={lang} />
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-1 text-xs text-white/70">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 space-y-1 text-xs`}>
             <p className="text-cyan-300 font-semibold">
               {formulaKey} {lang === "en" ? "Pentagonal Prism:" : lang === "ja" ? "五角柱:" : "Prisma Segilima:"}
             </p>
             <p>• {lang === "en" ? "Pentagon area:" : lang === "ja" ? "五角形面積:" : "Luas alas segi-5:"} <span className="text-yellow-300">L⬟ = ½ × {lang === "en" ? "perimeter" : lang === "ja" ? "周" : "keliling"} × apotema</span></p>
-            <p className="text-white/90 font-semibold font-mono">V = L⬟ × t</p>
+            <p className={`${isDark ? "text-white/90" : "text-gray-900"} font-semibold font-mono`}>V = L⬟ × t</p>
           </div>
         </div>
       )}
@@ -1506,7 +1511,7 @@ const PrismaPage = () => {
       title: t.def,
       icon: "🔷",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body leading-relaxed`}>
           <p>
             {lang === "en"
               ? (<>A prism is a <strong className="text-cyan-300">polyhedron</strong> with two congruent parallel polygonal bases connected by <strong className="text-yellow-300">rectangular lateral faces</strong>.</>)
@@ -1519,7 +1524,7 @@ const PrismaPage = () => {
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "📌 Properties of a Prism:" : lang === "ja" ? "📌 角柱の性質:" : "📌 Sifat-sifat Prisma:"}
             </p>
-            <ul className="space-y-1 text-xs text-white/75">
+            <ul className={`space-y-1 text-xs ${isDark ? "text-white/75" : "text-gray-700"}`}>
               <li>• {lang === "en" ? (<>Two <strong className="text-yellow-300">congruent and parallel</strong> n-gon bases</>)
                     : lang === "ja" ? (<>合同で平行な<strong className="text-yellow-300">n角形</strong>の底面2枚</>)
                     : (<>Dua alas berbentuk segi-<InlineMath math="n" /> yang <strong className="text-yellow-300">kongruen dan sejajar</strong></>)}</li>
@@ -1534,7 +1539,7 @@ const PrismaPage = () => {
                     : (<>Nama prisma ditentukan oleh <strong className="text-yellow-300">bentuk alasnya</strong></>)}</li>
             </ul>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
             <p className="text-cyan-300 font-semibold mb-1">
               {lang === "en" ? "Types of Prisms:" : lang === "ja" ? "角柱の種類:" : "Jenis-jenis Prisma:"}
             </p>
@@ -1553,7 +1558,7 @@ const PrismaPage = () => {
                  ["Prisma Segilima","alas segilima","7 sisi, 15 rusuk, 10 titik sudut"],
                  ["Prisma Segienam","alas segienam","8 sisi, 18 rusuk, 12 titik sudut"]]
             ).map(([nama, alas, detail], i) => (
-              <p key={i}>• <strong className="text-white">{nama}</strong> ({alas}): {detail}</p>
+              <p key={i}>• <strong className={isDark ? "text-white" : "text-gray-900"}>{nama}</strong> ({alas}): {detail}</p>
             ))}
           </div>
           <blockquote className="border-l-4 border-cyan-500 pl-3 text-cyan-200 text-xs italic">
@@ -1571,20 +1576,20 @@ const PrismaPage = () => {
       title: t.elem,
       icon: "🔍",
       content: (
-        <div className="space-y-5 text-sm text-white/85 font-body leading-relaxed">
-          <p className="text-xs text-white/60">
+        <div className={`space-y-5 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body leading-relaxed`}>
+          <p className={`text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>
             {lang === "en" ? "Example: triangular prism (n = 3)"
               : lang === "ja" ? "例: 三角柱 (n = 3)"
               : "Contoh: prisma segitiga (n = 3)"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-cyan-300 font-semibold mb-2">
               {lang === "en" ? "⬛ Edges of a Triangular Prism (9 edges)"
                 : lang === "ja" ? "⬛ 三角柱の辺（9辺）"
                 : "⬛ Rusuk Prisma Segitiga (9 rusuk)"}
             </p>
             <RusukPrismaSVG lang={lang} />
-            <div className="text-xs text-white/70 space-y-1 mt-2">
+            <div className={`text-xs ${isDark ? "text-white/70" : "text-gray-600"} space-y-1 mt-2`}>
               <p>• <strong className="text-cyan-300">{elLabels.rusukAlas}</strong>{" "}
                 {lang === "en" ? "forming the bottom triangle"
                   : lang === "ja" ? "下の三角形を形成"
@@ -1597,38 +1602,38 @@ const PrismaPage = () => {
                 {lang === "en" ? "connecting top and bottom bases"
                   : lang === "ja" ? "上下の底面を繋ぐ"
                   : "menghubungkan alas atas dan bawah"}</p>
-              <div className="bg-slate-700/60 rounded p-2 mt-2">
+              <div className={`${isDark ? "bg-slate-700/60" : "bg-gray-200"} rounded p-2 mt-2`}>
                 <BlockMath math="\text{n edges} = 3n = 3 \times 3 = 9" />
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-green-300 font-semibold mb-2">
               {lang === "en" ? "⬜ Faces of a Triangular Prism (5 faces)"
                 : lang === "ja" ? "⬜ 三角柱の面（5面）"
                 : "⬜ Sisi Prisma Segitiga (5 sisi)"}
             </p>
             <SisiPrismaSVG lang={lang} />
-            <div className="text-xs text-white/70 space-y-1 mt-2">
+            <div className={`text-xs ${isDark ? "text-white/70" : "text-gray-600"} space-y-1 mt-2`}>
               <p>• 2 <strong className="text-yellow-300">{elLabels.sisiAlasTutup}</strong>:{" "}
                 {lang === "en" ? "triangular" : lang === "ja" ? "三角形" : "berbentuk segitiga"}</p>
               <p>• {elLabels.sisiTegak} <strong className="text-blue-300">
                 {lang === "en" ? "LATERAL" : lang === "ja" ? "側面" : "TEGAK"}
               </strong>:{" "}
                 {lang === "en" ? "rectangular (a × h)" : lang === "ja" ? "長方形 (a × h)" : "berbentuk persegi panjang (a × t)"}</p>
-              <div className="bg-slate-700/60 rounded p-2 mt-2">
+              <div className={`${isDark ? "bg-slate-700/60" : "bg-gray-200"} rounded p-2 mt-2`}>
                 <BlockMath math="\text{n faces} = n + 2 = 3 + 2 = 5" />
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-yellow-300 font-semibold mb-2">
               {lang === "en" ? "● Vertices (6 vertices)"
                 : lang === "ja" ? "● 頂点（6頂点）"
                 : "● Titik Sudut (6 titik)"}
             </p>
             <TitikSudutPrismaSVG lang={lang} />
-            <div className="bg-slate-700/60 rounded p-2 mt-2 text-xs text-white/70">
+            <div className={`${isDark ? "bg-slate-700/60 text-white/70" : "bg-gray-200 text-gray-600"} rounded p-2 mt-2 text-xs`}>
               <BlockMath math="\text{vertices} = 2n = 2 \times 3 = 6" />
             </div>
           </div>
@@ -1663,7 +1668,7 @@ const PrismaPage = () => {
       title: t.net3d,
       icon: "🔲",
       content: (
-        <div className="space-y-5 text-sm text-white/85 font-body">
+        <div className={`space-y-5 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <p>
             {lang === "en"
               ? (<>The net of a triangular prism is a <strong className="text-cyan-300">2D shape that folds into the prism</strong>. It consists of <strong className="text-yellow-300">2 triangles</strong> (base and top) and <strong className="text-blue-300">3 rectangles</strong> (lateral faces).</>)
@@ -1673,7 +1678,7 @@ const PrismaPage = () => {
             }
           </p>
           <InteractivePrisma3D lang={lang} />
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
             <p className="text-cyan-300 font-semibold mb-2">
               {lang === "en" ? "📐 Triangular Prism Net Layout:"
                 : lang === "ja" ? "📐 三角柱の展開図の構成:"
@@ -1696,7 +1701,7 @@ const PrismaPage = () => {
       title: t.luas,
       icon: "🎨",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <p>
             {lang === "en"
               ? (<><strong className="text-blue-300">Surface area of a prism</strong> is the total area of all faces enclosing the prism — two base/top faces plus all lateral faces (lateral surface).</>)
@@ -1705,13 +1710,13 @@ const PrismaPage = () => {
               : (<><strong className="text-blue-300">Luas permukaan prisma</strong> adalah jumlah luas seluruh sisi yang membungkus prisma — dua sisi alas/tutup ditambah seluruh sisi tegak (selimut).</>)
             }
           </p>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
-            <div className="bg-slate-900/60 rounded p-3 space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40" : "bg-gray-100 border-gray-200"} border rounded-lg p-4 space-y-2`}>
+            <div className={`${isDark ? "bg-slate-900/60" : "bg-white/90"} rounded p-3 space-y-2`}>
               <BlockMath math={lang === "en" ? "SA = 2 \\times A_{\\text{base}} + A_{\\text{lateral}}" : lang === "ja" ? "表面積 = 2 \\times S_{\\text{底面}} + S_{\\text{側面}}" : "L = 2 \\times L_a + L_s"} />
               <BlockMath math={lang === "en" ? "A_{\\text{lateral}} = \\text{Base perimeter} \\times h" : lang === "ja" ? "S_{\\text{側面}} = \\text{底面周} \\times h" : "L_s = \\text{Keliling alas} \\times t"} />
             </div>
           </div>
-          <p className="text-xs text-white/60 text-center">{t.choosePrisma}</p>
+          <p className={`text-xs ${isDark ? "text-white/60" : "text-gray-500"} text-center`}>{t.choosePrisma}</p>
           <JaringTabSelector lang={lang} />
           <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
             <p>{t.keyHint} {lang === "en" ? "Lateral area = Base perimeter × prism height (h)"
@@ -1728,7 +1733,7 @@ const PrismaPage = () => {
       title: t.vol,
       icon: "📐",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <p>
             {lang === "en"
               ? (<><strong className="text-green-300">Volume of a prism</strong> represents how much space the prism occupies. The formula is simple: base area multiplied by height.</>)
@@ -1737,26 +1742,26 @@ const PrismaPage = () => {
               : (<><strong className="text-green-300">Volume prisma</strong> menyatakan seberapa besar "isi" ruang yang ditempati prisma. Rumusnya sangat sederhana: luas alas dikalikan tinggi.</>)
             }
           </p>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-xl p-3 space-y-2`}>
             <p className="text-cyan-300 text-xs font-semibold font-body text-center">{t.waterFill}</p>
             <VolumeTabSelector lang={lang} />
-            <p className="text-white/45 text-[10px] font-body text-center">{t.waterPct}</p>
+            <p className={`${isDark ? "text-white/45" : "text-gray-500"} text-[10px] font-body text-center`}>{t.waterPct}</p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
-            <div className="bg-slate-900/60 rounded p-3">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40" : "bg-gray-100 border-gray-200"} border rounded-lg p-4 space-y-2`}>
+            <div className={`${isDark ? "bg-slate-900/60" : "bg-white/90"} rounded p-3`}>
               <BlockMath math={lang === "en" ? "V = A_{\\text{base}} \\times h" : lang === "ja" ? "V = S_{\\text{底面}} \\times h" : "V = L_a \\times t"} />
             </div>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-600"}`}>
               {lang === "en" ? "For various base shapes:" : lang === "ja" ? "様々な底面の形:" : "Untuk berbagai jenis alas:"}
             </p>
-            <div className="space-y-1 text-xs text-white/70">
+            <div className={`space-y-1 text-xs ${isDark ? "text-white/70" : "text-gray-600"}`}>
               <p>• {lang === "en" ? "Triangle base:" : lang === "ja" ? "三角形の底面:" : "Alas segitiga:"} <InlineMath math="V = \frac{1}{2} \times a \times t_{\triangle} \times t" /></p>
               <p>• {lang === "en" ? "Rectangle base:" : lang === "ja" ? "長方形の底面:" : "Alas persegi panjang:"} <span className="text-yellow-300 font-mono">V = L□ × t</span>, {lang === "en" ? "where" : lang === "ja" ? "ただし" : "dengan"} <InlineMath math="L_{\square} = p \times l" /></p>
               <p>• {lang === "en" ? "Trapezoid base:" : lang === "ja" ? "台形の底面:" : "Alas trapesium:"} <InlineMath math="V = \frac{1}{2}(a+b) \times t_t \times t" /></p>
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p>🎯 <strong className="text-white">{lang === "en" ? "Volume units:" : lang === "ja" ? "体積の単位:" : "Satuan volume:"}</strong></p>
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
+            <p>🎯 <strong className={isDark ? "text-white" : "text-gray-900"}>{lang === "en" ? "Volume units:" : lang === "ja" ? "体積の単位:" : "Satuan volume:"}</strong></p>
             <p>• {lang === "en" ? "If dimensions in cm → Volume in" : lang === "ja" ? "寸法がcm → 体積は" : "Jika dimensi dalam cm → Volume dalam"} <InlineMath math="\text{cm}^3" /></p>
             <p>• {lang === "en" ? "If dimensions in m → Volume in" : lang === "ja" ? "寸法がm → 体積は" : "Jika dimensi dalam m → Volume dalam"} <InlineMath math="\text{m}^3" /></p>
           </div>
@@ -1768,15 +1773,15 @@ const PrismaPage = () => {
       icon: "📊",
       content: (
         <div className="space-y-3 font-body">
-          <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <div className={`overflow-x-auto rounded-lg border ${isDark ? "border-slate-700" : "border-gray-200"}`}>
             <table className="w-full text-xs text-center">
               <thead>
-                <tr className="bg-slate-800">
+                <tr className={isDark ? "bg-slate-800" : "bg-gray-100"}>
                   {(lang === "en" ? ["Quantity", "Formula", "Notes"]
                     : lang === "ja" ? ["量", "公式", "備考"]
                     : ["Besaran", "Rumus", "Keterangan"]
                   ).map((h, i) => (
-                    <th key={i} className={`px-3 py-2 text-cyan-300 ${i<2?"border-r border-slate-700":""} ${i===0?"text-left":""}`}>{h}</th>
+                    <th key={i} className={`px-3 py-2 text-cyan-300 ${i<2?`border-r ${isDark?"border-slate-700":"border-gray-200"}`:""} ${i===0?"text-left":""}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -1793,10 +1798,10 @@ const PrismaPage = () => {
                      ["Luas alas (△ sama sisi)","L△ = ½ × a × t△","t△ = tinggi segitiga"],["Luas selimut","K × t","K = keliling alas"],
                      ["Luas permukaan","L = 2L△ + K × t","total semua sisi"],["Volume","V = L△ × t","luas alas × tinggi"]]
                 ).map(([b, r, c], i) => (
-                  <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
-                    <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
-                    <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
-                    <td className="px-3 py-2 text-white/55 text-left">{c}</td>
+                  <tr key={i} className={`border-t ${isDark?"border-slate-700":"border-gray-200"} ${i%2===0?(isDark?"bg-slate-900/40":"bg-blue-50/50"):(isDark?"bg-slate-800/30":"bg-gray-50")}`}>
+                    <td className={`px-3 py-2 ${isDark?"text-white/90":"text-gray-900"} font-semibold border-r ${isDark?"border-slate-700":"border-gray-200"} text-left`}>{b}</td>
+                    <td className={`px-3 py-2 text-yellow-300 font-mono border-r ${isDark?"border-slate-700":"border-gray-200"}`}>{r}</td>
+                    <td className={`px-3 py-2 ${isDark?"text-white/55":"text-gray-500"} text-left`}>{c}</td>
                   </tr>
                 ))}
               </tbody>
@@ -2051,7 +2056,7 @@ const PrismaPage = () => {
       icon: "🔷",
       title: t.intro,
       content: (
-        <div className="text-sm font-body text-white/75 leading-relaxed space-y-3">
+        <div className={`text-sm font-body ${isDark ? "text-white/75" : "text-gray-700"} leading-relaxed space-y-3`}>
           <ThreePrismas lang={lang} />
           <p>
             {lang === "en"
@@ -2061,7 +2066,7 @@ const PrismaPage = () => {
               : (<>Dari kemasan cokelat batang hingga atap rumah berbentuk segitiga — prisma ada di mana-mana! Pelajari semua tentang <strong className="text-cyan-300">prisma</strong> — mulai dari unsur-unsurnya, jaring-jaring interaktif 3D, hingga cara menghitung{" "}<strong className="text-yellow-300">luas permukaan</strong> dan{" "}<strong className="text-green-300">volume</strong>-nya.</>)
             }
           </p>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700 text-white/60" : "bg-gray-100 border-gray-200 text-gray-500"} border rounded-lg p-3 text-xs space-y-1`}>
             <p className="text-cyan-300 font-semibold mb-1">
               {lang === "en" ? "📋 Topics in this chapter:" : lang === "ja" ? "📋 本章の内容:" : "📋 Materi dalam bab ini:"}
             </p>
@@ -2071,7 +2076,7 @@ const PrismaPage = () => {
             <p>• {lang === "en" ? "Surface area and volume" : lang === "ja" ? "表面積と体積" : "Luas permukaan dan volume"}</p>
             <p>• {lang === "en" ? "Multi-level practice problems" : lang === "ja" ? "レベル別練習問題" : "Contoh soal bertingkat"}</p>
           </div>
-          <div className="bg-slate-800/60 border border-cyan-700/40 rounded-xl p-3">
+          <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-cyan-700/40 rounded-xl p-3`}>
             <p className="text-cyan-300 font-semibold text-xs mb-3 text-center">{galTitle}</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {objectImages.map((src, i) => (
@@ -2094,14 +2099,14 @@ const PrismaPage = () => {
       icon: "⬛",
       title: t.slideRusuk,
       content: (
-        <div className="space-y-4 text-sm text-white/85 font-body">
-          <div className="bg-slate-800/60 border border-cyan-700/40 rounded-xl p-4">
+        <div className={`space-y-4 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
+          <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-cyan-700/40 rounded-xl p-4`}>
             <p className="text-cyan-300 font-semibold mb-1">
               {lang === "en" ? "🎬 Edge Comparison — 3 Prism Types"
                 : lang === "ja" ? "🎬 辺の比較 — 3種の角柱"
                 : "🎬 Perbandingan Rusuk — 3 Jenis Prisma Berdiri"}
             </p>
-            <p className="text-xs text-white/55 mb-3 font-body">
+            <p className={`text-xs ${isDark ? "text-white/55" : "text-gray-500"} mb-3 font-body`}>
               {lang === "en"
                 ? (<>Notice: all three prisms stand <strong className="text-yellow-300">upright</strong>. Base and top are always the same shape. Press button to see edge groups!</>)
                 : lang === "ja"
@@ -2117,14 +2122,14 @@ const PrismaPage = () => {
       icon: "⬜",
       title: t.slideSisi,
       content: (
-        <div className="space-y-4 text-sm text-white/85 font-body">
-          <div className="bg-slate-800/60 border border-green-700/40 rounded-xl p-4">
+        <div className={`space-y-4 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
+          <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-green-700/40 rounded-xl p-4`}>
             <p className="text-green-300 font-semibold mb-1">
               {lang === "en" ? "🎬 Face Comparison — 3 Prism Types"
                 : lang === "ja" ? "🎬 面の比較 — 3種の角柱"
                 : "🎬 Perbandingan Sisi — 3 Jenis Prisma Berdiri"}
             </p>
-            <p className="text-xs text-white/55 mb-3 font-body">
+            <p className={`text-xs ${isDark ? "text-white/55" : "text-gray-500"} mb-3 font-body`}>
               {lang === "en"
                 ? (<>Observe the face groups on each prism. Press button to see <strong className="text-red-300">Base &amp; Top Faces</strong> or <strong className="text-blue-300">Lateral Faces</strong>!</>)
                 : lang === "ja"
@@ -2133,10 +2138,10 @@ const PrismaPage = () => {
             </p>
             <SisiTigaPrismaAnimation />
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4 text-xs text-white/70 space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-4 text-xs space-y-1`}>
             <p>• <strong className="text-red-300">2 {lang === "en" ? "Base & Top faces" : lang === "ja" ? "底面・上面" : "sisi Alas & Tutup"}</strong>: {lang === "en" ? "triangular (identical)" : lang === "ja" ? "三角形（同一）" : "berbentuk segitiga (sama persis)"}</p>
             <p>• <strong className="text-blue-300">3 {lang === "en" ? "Lateral faces" : lang === "ja" ? "側面" : "sisi Tegak"}</strong>: {lang === "en" ? "rectangular (a × h)" : lang === "ja" ? "長方形 (a × h)" : "berbentuk persegi panjang (a × t)"}</p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
+            <div className={`${isDark ? "bg-slate-700/60" : "bg-gray-200"} rounded p-2 mt-2`}>
               <BlockMath math="\text{n faces} = n + 2 = 3 + 2 = 5" />
             </div>
           </div>
@@ -2147,14 +2152,14 @@ const PrismaPage = () => {
       icon: "●",
       title: t.slideTitik,
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
-          <div className="bg-slate-800/60 border border-yellow-700/40 rounded-xl p-4">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
+          <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-yellow-700/40 rounded-xl p-4`}>
             <p className="text-yellow-300 font-semibold mb-1">
               {lang === "en" ? "🎬 Vertex Comparison — 3 Prism Types"
                 : lang === "ja" ? "🎬 頂点の比較 — 3種の角柱"
                 : "🎬 Perbandingan Titik Sudut — 3 Jenis Prisma Berdiri"}
             </p>
-            <p className="text-xs text-white/55 mb-3 font-body">
+            <p className={`text-xs ${isDark ? "text-white/55" : "text-gray-500"} mb-3 font-body`}>
               {lang === "en"
                 ? (<>Observe vertices on each prism. Press button to see <strong className="text-cyan-300">Bottom Vertices</strong> or <strong className="text-yellow-300">Top Vertices</strong>!</>)
                 : lang === "ja"
@@ -2163,12 +2168,12 @@ const PrismaPage = () => {
             </p>
             <TitikSudutTigaPrismaAnimation />
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
             <p>• <strong className="text-cyan-300">{elLabels.nTitikAlas}</strong>{" "}
               {lang === "en" ? "at the bottom" : lang === "ja" ? "（下）" : "di bawah"}</p>
             <p>• <strong className="text-yellow-300">{elLabels.nTitikAtas}</strong>{" "}
               {lang === "en" ? "at the top — same number" : lang === "ja" ? "（上）同数" : "di atas — sama banyak"}</p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
+            <div className={`${isDark ? "bg-slate-700/60" : "bg-gray-200"} rounded p-2 mt-2`}>
               <BlockMath math="\text{vertices} = 2n = 2 \times 3 = 6" />
             </div>
           </div>
@@ -2203,14 +2208,14 @@ const PrismaPage = () => {
       icon: "🔲",
       title: t.slideNet,
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
-          <div className="bg-slate-800/60 border border-violet-700/40 rounded-xl p-4">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
+          <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-violet-700/40 rounded-xl p-4`}>
             <p className="text-violet-300 font-semibold mb-1">
               {lang === "en" ? "🎬 Interactive Net — 3 Prism Types"
                 : lang === "ja" ? "🎬 インタラクティブ展開図 — 3種の角柱"
                 : "🎬 Jaring-jaring Interaktif — 3 Jenis Prisma"}
             </p>
-            <p className="text-xs text-white/55 mb-3 font-body">
+            <p className={`text-xs ${isDark ? "text-white/55" : "text-gray-500"} mb-3 font-body`}>
               {lang === "en"
                 ? (<><strong className="text-orange-300">Drag</strong> to rotate the 3D prism. Press <strong className="text-orange-300">Unfold</strong> to open the net, then <strong className="text-cyan-300">Fold</strong> to assemble it back!</>)
                 : lang === "ja"
@@ -2219,8 +2224,8 @@ const PrismaPage = () => {
             </p>
             <JaringPrismaInteraktif />
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
-            <p>• {lang === "en" ? "A net is a" : lang === "ja" ? "展開図は" : "Jaring-jaring adalah"} <strong className="text-white">{lang === "en" ? "flat shape" : lang === "ja" ? "平面図形" : "bangun datar"}</strong> {lang === "en" ? "that folds into a prism" : lang === "ja" ? "を折り畳むと角柱になる" : "yang jika dilipat membentuk prisma"}</p>
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700 text-white/70" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
+            <p>• {lang === "en" ? "A net is a" : lang === "ja" ? "展開図は" : "Jaring-jaring adalah"} <strong className={isDark ? "text-white" : "text-gray-900"}>{lang === "en" ? "flat shape" : lang === "ja" ? "平面図形" : "bangun datar"}</strong> {lang === "en" ? "that folds into a prism" : lang === "ja" ? "を折り畳むと角柱になる" : "yang jika dilipat membentuk prisma"}</p>
             <p>• {lang === "en" ? "Every n-gon prism has" : lang === "ja" ? "n角柱は" : "Setiap prisma segi-n memiliki"} <strong className="text-violet-300">n {lang === "en" ? "lateral faces" : lang === "ja" ? "側面" : "sisi tegak"}</strong> ({lang === "en" ? "rectangles" : lang === "ja" ? "長方形" : "persegi panjang"}) + <strong className="text-yellow-300">2 {lang === "en" ? "base/top faces" : lang === "ja" ? "底面・上面" : "sisi alas/tutup"}</strong> (n-{lang === "en" ? "gon" : lang === "ja" ? "角形" : "gon"})</p>
             <p>• {lang === "en" ? "Total faces = n + 2" : lang === "ja" ? "全面数 = n + 2" : "Total bidang = n + 2"}</p>
           </div>
@@ -2265,7 +2270,7 @@ const PrismaPage = () => {
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
           {lang === "en" ? "PRISM" : lang === "ja" ? "角柱" : "PRISMA"}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.subtitle}</p>
+        <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>{t.subtitle}</p>
 
         <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
           {slides.map((_, i) => (
@@ -2275,20 +2280,20 @@ const PrismaPage = () => {
               className={`transition-all duration-300 rounded-full cursor-pointer ${
                 i === currentSlide
                   ? "w-6 h-2.5 bg-primary"
-                  : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"
+                  : isDark ? "w-2.5 h-2.5 bg-white/20 hover:bg-white/40" : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400"
               }`}
             />
           ))}
         </div>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-4">
-          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
+          <div className={`flex items-center gap-3 px-5 py-4 border-b border-border/50 ${isDark ? "bg-slate-800/40" : "bg-gray-50"}`}>
             <span className="text-2xl">{slide.icon}</span>
             <div className="flex-1 min-w-0">
-              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+              <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-[10px] font-body uppercase tracking-widest`}>
                 {t.slideLabel} {currentSlide + 1} / {total}
               </p>
-              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+              <h2 className={`font-display text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}>{slide.title}</h2>
             </div>
           </div>
           <div className="px-5 py-5">{slide.content}</div>
@@ -2298,9 +2303,9 @@ const PrismaPage = () => {
           <button
             onClick={goPrev}
             disabled={currentSlide === 0}
-            className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display
-              text-white/70 hover:text-white hover:border-primary/60 hover:bg-primary/10
-              disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+            className={`flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display
+              ${isDark ? "text-white/70 hover:text-white" : "text-gray-600 hover:text-gray-900"} hover:border-primary/60 hover:bg-primary/10
+              disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer`}
           >
             {t.prev}
           </button>
