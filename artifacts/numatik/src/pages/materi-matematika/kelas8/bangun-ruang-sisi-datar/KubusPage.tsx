@@ -1853,9 +1853,9 @@ const KubusPage = () => {
           </div>
           <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
             <p className={isDark ? "text-red-300 font-semibold" : "text-red-700 font-semibold"}>✅ {lang==="en"?"Answer:":lang==="ja"?"答え：":"Jawaban:"}</p>
-            <p className="text-white/80">• {lang==="en"?"Edge = 50 cm = 0.5 m":lang==="ja"?"辺 = 50 cm = 0.5 m":"Rusuk akuarium = 50 cm = 0,5 m"}</p>
-            <p className="text-white/80">• {lang==="en"?"Glass area = 1.25 m²":lang==="ja"?"ガラス面積 = 1.25 m²":"Luas kaca = 1,25 m²"}</p>
-            <p className="text-white/80">• {lang==="en"?"Total cost = ":lang==="ja"?"合計費用 = ":"Total biaya = "}<strong className="text-yellow-300">{lang==="id"?"Rp 150.000":"$150,000"}</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang==="en"?"Edge = 50 cm = 0.5 m":lang==="ja"?"辺 = 50 cm = 0.5 m":"Rusuk akuarium = 50 cm = 0,5 m"}</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang==="en"?"Glass area = 1.25 m²":lang==="ja"?"ガラス面積 = 1.25 m²":"Luas kaca = 1,25 m²"}</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang==="en"?"Total cost = ":lang==="ja"?"合計費用 = ":"Total biaya = "}<strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>{lang==="id"?"Rp 150.000":"$150,000"}</strong></p>
           </div>
         </div>
       ),
@@ -1942,8 +1942,8 @@ const KubusPage = () => {
           </div>
           <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
             <p className={isDark ? "text-red-300 font-semibold" : "text-red-700 font-semibold"}>✅ {lang==="en"?"Answer:":lang==="ja"?"答え：":"Jawaban:"}</p>
-            <p className="text-white/80">• {lang==="en"?"Small cubes =":lang==="ja"?"小立方体の数 =":"Banyak kubus kecil ="} <strong className="text-yellow-300">216</strong></p>
-            <p className="text-white/80">• {lang==="en"?"Total weight =":lang==="ja"?"合計重量 =":"Total berat ="} <strong className="text-yellow-300">864 g</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang==="en"?"Small cubes =":lang==="ja"?"小立方体の数 =":"Banyak kubus kecil ="} <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>216</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang==="en"?"Total weight =":lang==="ja"?"合計重量 =":"Total berat ="} <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>864 g</strong></p>
           </div>
           <div className="bg-cyan-950/40 border border-cyan-700/30 rounded p-2 text-xs text-cyan-200">
             💡 <strong>{lang==="en"?"Check:":lang==="ja"?"確認：":"Cek:"}</strong> <InlineMath math="\frac{12}{2} = 6" /> {lang==="en"?"per dimension → ":lang==="ja"?"（各辺）→ ":""} <InlineMath math="6^3 = 216" /> ✓
