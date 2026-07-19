@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
@@ -244,62 +245,62 @@ const SoalDelapan = () => (
   </div>
 );
 
-/* ── Card config ──────────────────────────────────────── */
-const cards = [
-  {
-    num: 1, tag: "Satu Variabel", tagColor: "bg-sky-500/20 text-sky-300 border-sky-400/40",
-    gradient: "from-sky-900/50 to-cyan-900/30", border: "border-sky-500/25",
-    bar: "from-sky-400 to-cyan-500", numBg: "bg-sky-500/30 text-sky-200",
-    custom: <SoalSatu />,
-  },
-  {
-    num: 2, tag: "Dua Variabel", tagColor: "bg-teal-500/20 text-teal-300 border-teal-400/40",
-    gradient: "from-teal-900/40 to-emerald-900/25", border: "border-teal-500/25",
-    bar: "from-teal-400 to-emerald-500", numBg: "bg-teal-500/30 text-teal-200",
-    custom: <SoalDua />,
-  },
-  {
-    num: 3, tag: "Tiga Variabel", tagColor: "bg-violet-500/20 text-violet-300 border-violet-400/40",
-    gradient: "from-violet-900/40 to-purple-900/25", border: "border-violet-500/25",
-    bar: "from-violet-400 to-purple-500", numBg: "bg-violet-500/30 text-violet-200",
-    custom: <SoalTiga />,
-  },
-  {
-    num: 4, tag: "Bangun Datar", tagColor: "bg-sky-500/20 text-sky-300 border-sky-400/40",
-    gradient: "from-sky-900/40 to-blue-900/25", border: "border-sky-500/25",
-    bar: "from-sky-400 to-blue-500", numBg: "bg-sky-500/30 text-sky-200",
-    custom: <SoalEmpat />,
-  },
-  {
-    num: 5, tag: "Multi Variabel", tagColor: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40",
-    gradient: "from-indigo-900/40 to-violet-900/25", border: "border-indigo-500/25",
-    bar: "from-indigo-400 to-violet-500", numBg: "bg-indigo-500/30 text-indigo-200",
-    custom: <SoalLima />,
-  },
-  {
-    num: 6, tag: "Kontekstual", tagColor: "bg-amber-500/20 text-amber-300 border-amber-400/40",
-    gradient: "from-amber-900/35 to-orange-900/20", border: "border-amber-500/25",
-    bar: "from-amber-400 to-orange-500", numBg: "bg-amber-500/30 text-amber-200",
-    custom: <SoalEnam />,
-  },
-  {
-    num: 7, tag: "Soal Cerita", tagColor: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
-    gradient: "from-emerald-900/40 to-teal-900/25", border: "border-emerald-500/25",
-    bar: "from-emerald-400 to-teal-500", numBg: "bg-emerald-500/30 text-emerald-200",
-    custom: <SoalTujuh />,
-  },
-  {
-    num: 8, tag: "Pola Bilangan", tagColor: "bg-rose-500/20 text-rose-300 border-rose-400/40",
-    gradient: "from-rose-900/40 to-pink-900/25", border: "border-rose-500/25",
-    bar: "from-rose-400 to-pink-500", numBg: "bg-rose-500/30 text-rose-200",
-    custom: <SoalDelapan />,
-  },
-];
-
 /* ── Page ─────────────────────────────────────────────── */
 const SubstitusiBilanganAljabarPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
+
+  const cards = [
+    {
+      num: 1, tag: "Satu Variabel", tagColor: "bg-sky-500/20 text-sky-300 border-sky-400/40",
+      gradient: isDark ? "from-sky-900/50 to-cyan-900/30" : "from-sky-50/80 to-cyan-50/60", border: "border-sky-500/25",
+      bar: "from-sky-400 to-cyan-500", numBg: "bg-sky-500/30 text-sky-200",
+      custom: <SoalSatu />,
+    },
+    {
+      num: 2, tag: "Dua Variabel", tagColor: "bg-teal-500/20 text-teal-300 border-teal-400/40",
+      gradient: isDark ? "from-teal-900/40 to-emerald-900/25" : "from-teal-50/80 to-emerald-50/60", border: "border-teal-500/25",
+      bar: "from-teal-400 to-emerald-500", numBg: "bg-teal-500/30 text-teal-200",
+      custom: <SoalDua />,
+    },
+    {
+      num: 3, tag: "Tiga Variabel", tagColor: "bg-violet-500/20 text-violet-300 border-violet-400/40",
+      gradient: isDark ? "from-violet-900/40 to-purple-900/25" : "from-violet-50/80 to-purple-50/60", border: "border-violet-500/25",
+      bar: "from-violet-400 to-purple-500", numBg: "bg-violet-500/30 text-violet-200",
+      custom: <SoalTiga />,
+    },
+    {
+      num: 4, tag: "Bangun Datar", tagColor: "bg-sky-500/20 text-sky-300 border-sky-400/40",
+      gradient: isDark ? "from-sky-900/40 to-blue-900/25" : "from-sky-50/80 to-blue-50/60", border: "border-sky-500/25",
+      bar: "from-sky-400 to-blue-500", numBg: "bg-sky-500/30 text-sky-200",
+      custom: <SoalEmpat />,
+    },
+    {
+      num: 5, tag: "Multi Variabel", tagColor: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40",
+      gradient: isDark ? "from-indigo-900/40 to-violet-900/25" : "from-indigo-50/80 to-violet-50/60", border: "border-indigo-500/25",
+      bar: "from-indigo-400 to-violet-500", numBg: "bg-indigo-500/30 text-indigo-200",
+      custom: <SoalLima />,
+    },
+    {
+      num: 6, tag: "Kontekstual", tagColor: "bg-amber-500/20 text-amber-300 border-amber-400/40",
+      gradient: isDark ? "from-amber-900/35 to-orange-900/20" : "from-amber-50/80 to-orange-50/60", border: "border-amber-500/25",
+      bar: "from-amber-400 to-orange-500", numBg: "bg-amber-500/30 text-amber-200",
+      custom: <SoalEnam />,
+    },
+    {
+      num: 7, tag: "Soal Cerita", tagColor: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
+      gradient: isDark ? "from-emerald-900/40 to-teal-900/25" : "from-emerald-50/80 to-teal-50/60", border: "border-emerald-500/25",
+      bar: "from-emerald-400 to-teal-500", numBg: "bg-emerald-500/30 text-emerald-200",
+      custom: <SoalTujuh />,
+    },
+    {
+      num: 8, tag: "Pola Bilangan", tagColor: "bg-rose-500/20 text-rose-300 border-rose-400/40",
+      gradient: isDark ? "from-rose-900/40 to-pink-900/25" : "from-rose-50/80 to-pink-50/60", border: "border-rose-500/25",
+      bar: "from-rose-400 to-pink-500", numBg: "bg-rose-500/30 text-rose-200",
+      custom: <SoalDelapan />,
+    },
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">

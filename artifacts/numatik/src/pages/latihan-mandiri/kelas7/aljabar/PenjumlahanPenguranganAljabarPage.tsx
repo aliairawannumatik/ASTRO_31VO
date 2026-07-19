@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
@@ -169,44 +170,44 @@ const SoalLima = () => (
   </div>
 );
 
-/* ── Card config ──────────────────────────────────────── */
-const cards = [
-  {
-    num: 1, tag: "Sederhanakan", tagColor: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
-    gradient: "from-emerald-900/40 to-green-900/25", border: "border-emerald-500/25",
-    bar: "from-emerald-400 to-green-500", numBg: "bg-emerald-500/30 text-emerald-200",
-    custom: <SoalSatu />,
-  },
-  {
-    num: 2, tag: "Keliling Bangun", tagColor: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40",
-    gradient: "from-indigo-900/40 to-violet-900/25", border: "border-indigo-500/25",
-    bar: "from-indigo-400 to-violet-500", numBg: "bg-indigo-500/30 text-indigo-200",
-    custom: <SoalDua />,
-  },
-  {
-    num: 3, tag: "Penjumlahan", tagColor: "bg-rose-500/20 text-rose-300 border-rose-400/40",
-    gradient: "from-rose-900/40 to-pink-900/25", border: "border-rose-500/25",
-    bar: "from-rose-400 to-pink-500", numBg: "bg-rose-500/30 text-rose-200",
-    custom: <SoalTiga />,
-  },
-  {
-    num: 4, tag: "Operasi P & Q", tagColor: "bg-amber-500/20 text-amber-300 border-amber-400/40",
-    gradient: "from-amber-900/35 to-yellow-900/20", border: "border-amber-500/25",
-    bar: "from-amber-400 to-yellow-500", numBg: "bg-amber-500/30 text-amber-200",
-    custom: <SoalEmpat />,
-  },
-  {
-    num: 5, tag: "Kontekstual", tagColor: "bg-teal-500/20 text-teal-300 border-teal-400/40",
-    gradient: "from-teal-900/40 to-cyan-900/25", border: "border-teal-500/25",
-    bar: "from-teal-400 to-cyan-500", numBg: "bg-teal-500/30 text-teal-200",
-    custom: <SoalLima />,
-  },
-];
-
 /* ── Page ─────────────────────────────────────────────── */
 const PenjumlahanPenguranganAljabarPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
+
+  const cards = [
+    {
+      num: 1, tag: "Sederhanakan", tagColor: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
+      gradient: isDark ? "from-emerald-900/40 to-green-900/25" : "from-emerald-50/80 to-green-50/60", border: "border-emerald-500/25",
+      bar: "from-emerald-400 to-green-500", numBg: "bg-emerald-500/30 text-emerald-200",
+      custom: <SoalSatu />,
+    },
+    {
+      num: 2, tag: "Keliling Bangun", tagColor: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40",
+      gradient: isDark ? "from-indigo-900/40 to-violet-900/25" : "from-indigo-50/80 to-violet-50/60", border: "border-indigo-500/25",
+      bar: "from-indigo-400 to-violet-500", numBg: "bg-indigo-500/30 text-indigo-200",
+      custom: <SoalDua />,
+    },
+    {
+      num: 3, tag: "Penjumlahan", tagColor: "bg-rose-500/20 text-rose-300 border-rose-400/40",
+      gradient: isDark ? "from-rose-900/40 to-pink-900/25" : "from-rose-50/80 to-pink-50/60", border: "border-rose-500/25",
+      bar: "from-rose-400 to-pink-500", numBg: "bg-rose-500/30 text-rose-200",
+      custom: <SoalTiga />,
+    },
+    {
+      num: 4, tag: "Operasi P & Q", tagColor: "bg-amber-500/20 text-amber-300 border-amber-400/40",
+      gradient: isDark ? "from-amber-900/35 to-yellow-900/20" : "from-amber-50/80 to-yellow-50/60", border: "border-amber-500/25",
+      bar: "from-amber-400 to-yellow-500", numBg: "bg-amber-500/30 text-amber-200",
+      custom: <SoalEmpat />,
+    },
+    {
+      num: 5, tag: "Kontekstual", tagColor: "bg-teal-500/20 text-teal-300 border-teal-400/40",
+      gradient: isDark ? "from-teal-900/40 to-cyan-900/25" : "from-teal-50/80 to-cyan-50/60", border: "border-teal-500/25",
+      bar: "from-teal-400 to-cyan-500", numBg: "bg-teal-500/30 text-teal-200",
+      custom: <SoalLima />,
+    },
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">

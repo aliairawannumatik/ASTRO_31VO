@@ -4,6 +4,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import "katex/dist/katex.min.css";
 
 /* ─────────────────────────────────────────────
@@ -325,6 +326,7 @@ const questions: Question[] = [
 const GarisBeratBagiTinggiLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -335,7 +337,7 @@ const GarisBeratBagiTinggiLatihanPage = () => {
         <h1 className="font-display text-lg md:text-xl font-bold text-primary text-glow-cyan mb-2 text-center">
           GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">
+        <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>
           Kelas 7 – Latihan Mandiri – Segitiga dan Segiempat
         </p>
 
@@ -343,11 +345,11 @@ const GarisBeratBagiTinggiLatihanPage = () => {
           <h2 className="text-lg font-bold text-accent mb-4 font-display">
             Latihan Mandiri
           </h2>
-          <p className="text-white/70 text-sm mb-6 font-body">
+          <p className={`${isDark ? "text-white/70" : "text-gray-600"} text-sm mb-6 font-body`}>
             Pilihlah jawaban yang benar.
           </p>
 
-          <div className="space-y-8 text-white/90 font-body text-sm leading-relaxed">
+          <div className={`space-y-8 ${isDark ? "text-white/90" : "text-gray-800"} font-body text-sm leading-relaxed`}>
             {questions.map((q) => (
               <div key={q.id} className="flex gap-3 items-start">
                 <span className="shrink-0 font-bold text-accent text-sm min-w-[28px] pt-0.5 text-right">{q.id}.</span>
@@ -360,8 +362,8 @@ const GarisBeratBagiTinggiLatihanPage = () => {
 
                   <div className="grid grid-cols-1 gap-2">
                     {q.options.map((opt, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-white/80">
-                        <span className="font-semibold text-white/60 shrink-0 w-5 mt-0.5">
+                      <div key={idx} className={`flex items-start gap-2 ${isDark ? "text-white/80" : "text-gray-700"}`}>
+                        <span className={`font-semibold ${isDark ? "text-white/60" : "text-gray-500"} shrink-0 w-5 mt-0.5`}>
                           {OPTION_LABELS[idx]}.
                         </span>
                         <span className="flex-1">{opt}</span>
