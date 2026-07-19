@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { TrendingUp } from "lucide-react";
 import CoordPlane from "../koordinat-cartesius/CoordPlane";
@@ -80,38 +81,45 @@ const SvgTaxiLinear = () => (
   </svg>
 );
 
-const SvgTaxiTable = () => (
-  <div className="w-full text-xs border border-white/20 rounded-lg overflow-hidden">
-    <div className="bg-white/10 px-3 py-1.5 text-center text-white/70 font-bold text-[10px] tracking-wider">"Tarif Taksi"</div>
-    <table className="w-full border-collapse">
-      <thead>
-        <tr className="bg-white/5">
-          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-left text-[10px]">Jarak (km)</th>
-          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-center text-[10px]">Awal (0)</th>
-          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-center text-[10px]">2</th>
-          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-center text-[10px]">4</th>
-          <th className="border border-white/10 px-2 py-1.5 text-white/60 font-semibold text-center text-[10px]">...</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-[10px]">Taksi Sinar</td>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">10.000</td>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">13.000</td>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">16.000</td>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">...</td>
-        </tr>
-        <tr>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-[10px]">Taksi Bintang</td>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">4.000</td>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">8.000</td>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">12.000</td>
-          <td className="border border-white/10 px-2 py-1.5 text-white/80 text-center text-[10px]">...</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-);
+const SvgTaxiTable = () => {
+  const { isDark } = useTheme();
+  const bdr = isDark ? "border-white/10" : "border-gray-200";
+  const cell = `border ${bdr} px-2 py-1.5 text-[10px]`;
+  const cellVal = `${cell} ${isDark ? "text-white/80" : "text-gray-700"}`;
+  const cellHdr = `${cell} ${isDark ? "text-white/60" : "text-gray-500"} font-semibold`;
+  return (
+    <div className="w-full text-xs border border-white/20 rounded-lg overflow-hidden">
+      <div className={`${isDark ? "bg-white/10" : "bg-gray-100"} px-3 py-1.5 text-center ${isDark ? "text-white/70" : "text-gray-600"} font-bold text-[10px] tracking-wider`}>&ldquo;Tarif Taksi&rdquo;</div>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className={isDark ? "bg-white/5" : "bg-gray-50"}>
+            <th className={`${cellHdr} text-left`}>Jarak (km)</th>
+            <th className={`${cellHdr} text-center`}>Awal (0)</th>
+            <th className={`${cellHdr} text-center`}>2</th>
+            <th className={`${cellHdr} text-center`}>4</th>
+            <th className={`${cellHdr} text-center`}>...</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className={cellVal}>Taksi Sinar</td>
+            <td className={`${cellVal} text-center`}>10.000</td>
+            <td className={`${cellVal} text-center`}>13.000</td>
+            <td className={`${cellVal} text-center`}>16.000</td>
+            <td className={`${cellVal} text-center`}>...</td>
+          </tr>
+          <tr>
+            <td className={cellVal}>Taksi Bintang</td>
+            <td className={`${cellVal} text-center`}>4.000</td>
+            <td className={`${cellVal} text-center`}>8.000</td>
+            <td className={`${cellVal} text-center`}>12.000</td>
+            <td className={`${cellVal} text-center`}>...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 const SvgStepFunction = () => (
   <svg viewBox="0 0 260 200" width="100%" style={{ maxWidth: 300 }}>
@@ -226,6 +234,7 @@ const optionLabels = ["A", "B", "C", "D"];
 const GrafikFungsiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -239,15 +248,15 @@ const GrafikFungsiPage = () => {
             style={{ textShadow: '0 0 20px rgba(251,113,133,0.7)' }}>
             GRAFIK FUNGSI (PENGAYAAN)
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
             <span className="text-rose-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-rose-900/20 border border-rose-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-rose-900/20" : "bg-rose-50"} border border-rose-500/20 rounded-xl p-4`}>
           <p className="text-rose-300 text-xs font-bold mb-2">📌 Tips Membaca Grafik Fungsi</p>
           <div className="grid grid-cols-1 gap-2 text-xs font-body">
             {[
@@ -258,7 +267,7 @@ const GrafikFungsiPage = () => {
             ].map((s, i) => (
               <div key={i} className="bg-white/5 rounded-lg px-3 py-2 flex gap-2">
                 <span className="text-rose-400 font-bold shrink-0">•</span>
-                <span className="text-white/60">{s}</span>
+                <span className={isDark ? "text-white/60" : "text-gray-600"}>{s}</span>
               </div>
             ))}
           </div>
@@ -268,7 +277,7 @@ const GrafikFungsiPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-rose-900/30 via-slate-900/80 to-pink-900/30" : "from-rose-50/60 via-white/80 to-pink-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -280,13 +289,13 @@ const GrafikFungsiPage = () => {
                     <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">
                       {q.title}
                     </span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                    {q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-3`}>{q.content}</p>}
                     {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2 mb-3">
                         {q.parts.map((p, pi) => (
                           p.text ? (
-                            <p key={pi} className="font-body text-sm text-white/90 leading-relaxed">{p.text}</p>
+                            <p key={pi} className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} leading-relaxed`}>{p.text}</p>
                           ) : null
                         ))}
                       </div>
@@ -296,7 +305,7 @@ const GrafikFungsiPage = () => {
                         {q.options.map((opt, oi) => (
                           <div key={oi} className="flex items-start gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
                             <span className="text-rose-300 text-xs font-bold shrink-0 min-w-[20px]">{optionLabels[oi]}.</span>
-                            <span className="font-body text-sm text-white/80">{opt}</span>
+                            <span className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{opt}</span>
                           </div>
                         ))}
                       </div>

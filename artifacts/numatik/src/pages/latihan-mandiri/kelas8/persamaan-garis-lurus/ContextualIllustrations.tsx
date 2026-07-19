@@ -1,19 +1,39 @@
 import type { ReactElement, ReactNode } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 type IconProps = { className?: string };
 
-const Frame = ({ children }: { children: ReactNode }) => (
-  <svg
-    viewBox="0 0 260 160"
-    width="260"
-    height="160"
-    className="rounded-xl"
-    style={{ background: "#ffffff" }}
-  >
-    <rect x="0" y="0" width="260" height="160" fill="#ffffff" />
-    {children}
-  </svg>
-);
+const Frame = ({ children }: { children: ReactNode }) => {
+  const { isDark } = useTheme();
+  const bg = isDark ? "#1e293b" : "#ffffff";
+  return (
+    <svg
+      viewBox="0 0 260 160"
+      width="260"
+      height="160"
+      className="rounded-xl"
+      style={{ background: bg }}
+    >
+      <rect x="0" y="0" width="260" height="160" fill={bg} />
+      {children}
+    </svg>
+  );
+};
+
+type CapProps = {
+  x?: number | string; y?: number | string;
+  fontSize?: string; fontWeight?: string; transform?: string;
+  children: ReactNode;
+};
+const CaptionText = ({ x = 130, y = 150, fontSize = "10", fontWeight = "bold", transform, children }: CapProps) => {
+  const { isDark } = useTheme();
+  return (
+    <text x={x} y={y} fontSize={fontSize} fill={isDark ? "#e2e8f0" : "#334155"}
+      textAnchor="middle" fontWeight={fontWeight} transform={transform}>
+      {children}
+    </text>
+  );
+};
 
 // Q1 — Tarif Taksi Online
 export const TaksiIllustration = (_: IconProps) => (
@@ -30,7 +50,7 @@ export const TaksiIllustration = (_: IconProps) => (
     <circle cx="85" cy="122" r="5" fill="#94a3b8" />
     <circle cx="155" cy="122" r="12" fill="#1e293b" />
     <circle cx="155" cy="122" r="5" fill="#94a3b8" />
-    <text x="130" y="145" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">Rp10.000 + Rp10.000/km</text>
+    <CaptionText y={145}>Rp10.000 + Rp10.000/km</CaptionText>
   </Frame>
 );
 
@@ -45,7 +65,7 @@ export const PaketDataIllustration = (_: IconProps) => (
     <rect x="136" y="45" width="8" height="40" fill="#0ea5e9" />
     <path d="M118 100 h24" stroke="#0ea5e9" strokeWidth="3" strokeLinecap="round" />
     <path d="M122 108 h16" stroke="#0ea5e9" strokeWidth="3" strokeLinecap="round" />
-    <text x="130" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">Rp5.000/GB + admin Rp3.000</text>
+    <CaptionText>Rp5.000/GB + admin Rp3.000</CaptionText>
   </Frame>
 );
 
@@ -63,7 +83,7 @@ export const ProduksiIllustration = (_: IconProps) => (
     <rect x="100" y="85" width="18" height="18" fill="#e2e8f0" />
     <rect x="135" y="85" width="18" height="18" fill="#e2e8f0" />
     <rect x="170" y="85" width="18" height="18" fill="#e2e8f0" />
-    <text x="130" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">B(x) = 5000x + 200.000</text>
+    <CaptionText>B(x) = 5000x + 200.000</CaptionText>
   </Frame>
 );
 
@@ -79,7 +99,7 @@ export const TabunganIllustration = (_: IconProps) => (
     <rect x="115" y="115" width="10" height="12" fill="#eab308" />
     <rect x="145" y="115" width="10" height="12" fill="#eab308" />
     <text x="130" y="95" fontSize="26" textAnchor="middle" fill="#a16207" fontWeight="bold">Rp</text>
-    <text x="130" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">Awal Rp50rb + Rp50rb/bulan</text>
+    <CaptionText>Awal Rp50rb + Rp50rb/bulan</CaptionText>
   </Frame>
 );
 
@@ -97,7 +117,7 @@ export const LaptopIllustration = (_: IconProps) => (
     </defs>
     <text x="215" y="70" fontSize="10" fill="#ef4444" fontWeight="bold">−Rp1jt</text>
     <text x="215" y="82" fontSize="8" fill="#ef4444">/tahun</text>
-    <text x="120" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">Rp8.000.000 → turun</text>
+    <CaptionText x={120}>Rp8.000.000 → turun</CaptionText>
   </Frame>
 );
 
@@ -113,7 +133,7 @@ export const BbmIllustration = (_: IconProps) => (
     <rect x="200" y="60" width="35" height="30" rx="3" fill="#e2e8f0" />
     <rect x="203" y="63" width="12" height="24" fill="#22c55e" />
     <text x="217" y="100" fontSize="8" fill="#e2e8f0" textAnchor="middle">BBM</text>
-    <text x="130" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">60L tangki, 10 km/liter</text>
+    <CaptionText>60L tangki, 10 km/liter</CaptionText>
   </Frame>
 );
 
@@ -128,7 +148,7 @@ export const PopulasiIllustration = (_: IconProps) => (
         <rect x={x + 15} y="105" width="10" height="20" fill="#78350f" />
       </g>
     ))}
-    <text x="130" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">5.000 jiwa, +200/tahun</text>
+    <CaptionText>5.000 jiwa, +200/tahun</CaptionText>
   </Frame>
 );
 
@@ -146,7 +166,7 @@ export const TiketIllustration = (_: IconProps) => (
     <rect x="142" y="112" width="16" height="22" fill="#f472b6" />
     <rect x="80" y="95" width="26" height="18" rx="2" fill="#facc15" stroke="#a16207" />
     <text x="93" y="107" fontSize="6" fill="#a16207" textAnchor="middle">TIKET</text>
-    <text x="130" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">Rp5.000/org + parkir Rp10.000</text>
+    <CaptionText>Rp5.000/org + parkir Rp10.000</CaptionText>
   </Frame>
 );
 
@@ -159,7 +179,7 @@ export const DebitAirIllustration = (_: IconProps) => (
     <rect x="115" y="115" width="30" height="6" fill="#475569" />
     <circle cx="130" cy="135" r="4" fill="#38bdf8" />
     <circle cx="130" cy="148" r="3" fill="#7dd3fc" />
-    <text x="130" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold" transform="translate(0,-2)">500L, keluar 25L/menit</text>
+    <CaptionText transform="translate(0,-2)">500L, keluar 25L/menit</CaptionText>
   </Frame>
 );
 
@@ -185,7 +205,7 @@ export const DuaTarifIllustration = (_: IconProps) => (
       <circle cx="220" cy="116" r="9" fill="#1e293b" />
       <text x="195" y="135" fontSize="8" fill="#60a5fa" textAnchor="middle" fontWeight="bold">B: 40rb+5rb/km</text>
     </g>
-    <text x="130" y="150" fontSize="9" fill="#334155" textAnchor="middle">Bandingkan tarif A dan B</text>
+    <CaptionText fontSize="9" fontWeight={undefined}>Bandingkan tarif A dan B</CaptionText>
   </Frame>
 );
 
@@ -201,7 +221,7 @@ export const GajiIllustration = (_: IconProps) => (
     <text x="220" y="94" fontSize="9" textAnchor="middle" fill="#a16207" fontWeight="bold">Rp</text>
     <circle cx="55" cy="100" r="11" fill="#facc15" stroke="#a16207" strokeWidth="2" />
     <text x="55" y="104" fontSize="9" textAnchor="middle" fill="#a16207" fontWeight="bold">Rp</text>
-    <text x="130" y="150" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">Gaji 2jt + bonus 50rb/unit</text>
+    <CaptionText>Gaji 2jt + bonus 50rb/unit</CaptionText>
   </Frame>
 );
 
@@ -215,7 +235,7 @@ export const JagungIllustration = (_: IconProps) => (
         <ellipse cx={x + 3} cy={100 - i * 3} rx="8" ry="16" fill="#eab308" />
       </g>
     ))}
-    <text x="130" y="150" fontSize="9" fill="#334155" textAnchor="middle" fontWeight="bold">Luas panen jagung naik tiap tahun</text>
+    <CaptionText fontSize="9">Luas panen jagung naik tiap tahun</CaptionText>
   </Frame>
 );
 
@@ -228,7 +248,7 @@ export const TeleponIllustration = (_: IconProps) => (
       fill="#1e3a8a"
       transform="translate(4,4) scale(0.95)"
     />
-    <text x="130" y="140" fontSize="10" fill="#334155" textAnchor="middle" fontWeight="bold">500/menit (10 mnt) lalu 300/menit</text>
+    <CaptionText y={140}>500/menit (10 mnt) lalu 300/menit</CaptionText>
   </Frame>
 );
 
@@ -241,7 +261,7 @@ export const TokoBuahIllustration = (_: IconProps) => (
       <circle cx="45" cy="90" r="9" fill="#ef4444" />
       <circle cx="65" cy="95" r="9" fill="#f97316" />
       <circle cx="85" cy="88" r="9" fill="#22c55e" />
-      <text x="65" y="128" fontSize="8" fill="#334155" textAnchor="middle">20rb/kg + kirim 20rb</text>
+      <CaptionText x={65} y={128} fontSize="8" fontWeight={undefined}>20rb/kg + kirim 20rb</CaptionText>
     </g>
     <g>
       <rect x="150" y="70" width="90" height="45" rx="4" fill="#bfdbfe" stroke="#1d4ed8" strokeWidth="2" />
@@ -249,7 +269,7 @@ export const TokoBuahIllustration = (_: IconProps) => (
       <circle cx="175" cy="90" r="9" fill="#ef4444" />
       <circle cx="195" cy="95" r="9" fill="#f97316" />
       <circle cx="215" cy="88" r="9" fill="#22c55e" />
-      <text x="195" y="128" fontSize="8" fill="#334155" textAnchor="middle">Flat Rp50rb</text>
+      <CaptionText x={195} y={128} fontSize="8" fontWeight={undefined}>Flat Rp50rb</CaptionText>
     </g>
   </Frame>
 );

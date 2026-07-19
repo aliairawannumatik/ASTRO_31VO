@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { GitMerge } from "lucide-react";
@@ -27,7 +28,7 @@ const questions: Q[] = [
     diagram: (
       <div className="flex flex-col items-center my-2">
         <svg width="320" height="298" viewBox="0 0 320 298">
-          <rect width="320" height="298" fill="white" rx="14" stroke="#e2e8f0" strokeWidth="1" />
+          <rect width="320" height="298" style={{ fill: "var(--card)" }} rx="14" stroke="#e2e8f0" strokeWidth="1" />
           {/* Oval A */}
           <ellipse cx="70" cy="160" rx="50" ry="92" fill="#f472b622" stroke="#f472b6" strokeWidth="1.5" strokeOpacity="0.8" />
           {/* Oval B */}
@@ -37,11 +38,11 @@ const questions: Q[] = [
           <text x="250" y="40" fill="#60a5fa" fontSize="12" fontWeight="bold" textAnchor="middle">B</text>
           {/* A elements: centers at y=88,124,160,196,232 */}
           {[1,2,3,4,5].map((v,i) => (
-            <text key={v} x="70" y={92+i*36} fill="rgba(20,20,20,0.9)" fontSize="12" fontWeight="bold" textAnchor="middle">{v}</text>
+            <text key={v} x="70" y={92+i*36} style={{ fill: "var(--card-foreground)" }} fontSize="12" fontWeight="bold" textAnchor="middle">{v}</text>
           ))}
           {/* B elements: centers at y=70,106,142,178,214,250 */}
           {[1,4,9,16,25,36].map((v,i) => (
-            <text key={v} x="250" y={74+i*36} fill="rgba(20,20,20,0.9)" fontSize="12" fontWeight="bold" textAnchor="middle">{v}</text>
+            <text key={v} x="250" y={74+i*36} style={{ fill: "var(--card-foreground)" }} fontSize="12" fontWeight="bold" textAnchor="middle">{v}</text>
           ))}
           {/* Arrows touching numbers: from right of A number to left of B number */}
           <defs>
@@ -109,7 +110,7 @@ const questions: Q[] = [
     diagram: (
       <div className="flex flex-col items-center my-2">
         <svg width="280" height="250" viewBox="0 0 280 250">
-          <rect width="280" height="250" fill="white" rx="14" stroke="#e2e8f0" strokeWidth="1" />
+          <rect width="280" height="250" style={{ fill: "var(--card)" }} rx="14" stroke="#e2e8f0" strokeWidth="1" />
           {/* grid lines */}
           {[1,2,3,4,5].map(x => (
             <line key={`gx${x}`} x1={45+x*44} y1={15} x2={45+x*44} y2={215} stroke="#f0f0f0" strokeWidth="1" />
@@ -118,11 +119,11 @@ const questions: Q[] = [
             <line key={`gy${y}`} x1={45} y1={215-y*20} x2={265} y2={215-y*20} stroke="#f0f0f0" strokeWidth="1" />
           ))}
           {/* axes */}
-          <line x1="45" y1="215" x2="268" y2="215" stroke="#334155" strokeWidth="2" markerEnd="url(#axHead)" />
-          <line x1="45" y1="215" x2="45" y2="12" stroke="#334155" strokeWidth="2" markerEnd="url(#axHead)" />
+          <line x1="45" y1="215" x2="268" y2="215" style={{ stroke: "var(--card-foreground)" }} strokeWidth="2" markerEnd="url(#axHead)" />
+          <line x1="45" y1="215" x2="45" y2="12" style={{ stroke: "var(--card-foreground)" }} strokeWidth="2" markerEnd="url(#axHead)" />
           <defs>
             <marker id="axHead" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-              <polygon points="0 0, 6 3, 0 6" fill="#334155" />
+              <polygon points="0 0, 6 3, 0 6" style={{ fill: "var(--card-foreground)" }} />
             </marker>
           </defs>
           {/* x-axis labels */}
@@ -134,8 +135,8 @@ const questions: Q[] = [
             <text key={`yl${y}`} x={36} y={215-y*20+4} fill="#64748b" fontSize="9" textAnchor="middle" fontWeight="bold">{y}</text>
           ))}
           {/* axis name */}
-          <text x="270" y="219" fill="#334155" fontSize="11" fontWeight="bold">x</text>
-          <text x="48" y="10" fill="#334155" fontSize="11" fontWeight="bold">y</text>
+          <text x="270" y="219" style={{ fill: "var(--card-foreground)" }} fontSize="11" fontWeight="bold">x</text>
+          <text x="48" y="10" style={{ fill: "var(--card-foreground)" }} fontSize="11" fontWeight="bold">y</text>
           {/* data points: (1,3),(2,5),(3,7),(4,9) */}
           {[[1,3],[2,5],[3,7],[4,9]].map(([x,y], i) => (
             <circle key={i} cx={45+x*44} cy={215-y*20} r="6" fill="#fb923c" stroke="#ea580c" strokeWidth="1.5" opacity="0.9" />
@@ -163,7 +164,7 @@ const questions: Q[] = [
     diagram: (
       <div className="flex flex-col items-center my-2">
         <svg width="320" height="370" viewBox="0 0 320 370">
-          <rect width="320" height="370" fill="white" rx="14" stroke="#e2e8f0" strokeWidth="1" />
+          <rect width="320" height="370" style={{ fill: "var(--card)" }} rx="14" stroke="#e2e8f0" strokeWidth="1" />
           {/* Domain oval A */}
           <ellipse cx="75" cy="200" rx="50" ry="150" fill="#f472b622" stroke="#f472b6" strokeWidth="1.5" strokeOpacity="0.8" />
           {/* Kodomain oval B */}
@@ -173,11 +174,11 @@ const questions: Q[] = [
           <text x="252" y="54" fill="#60a5fa" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
           {/* Domain elements: y = 64 + i*34 */}
           {[1,2,3,4,5,6,7,8,9].map((v,i) => (
-            <text key={v} x="75" y={64+i*34} fill="rgba(20,20,20,0.9)" fontSize="13" fontWeight="bold" textAnchor="middle">{v}</text>
+            <text key={v} x="75" y={64+i*34} style={{ fill: "var(--card-foreground)" }} fontSize="13" fontWeight="bold" textAnchor="middle">{v}</text>
           ))}
           {/* Kodomain elements: y = 80 + j*60 */}
           {[1,2,3,4,5].map((v,i) => (
-            <text key={v} x="252" y={80+i*60} fill="rgba(20,20,20,0.9)" fontSize="13" fontWeight="bold" textAnchor="middle">{v}</text>
+            <text key={v} x="252" y={80+i*60} style={{ fill: "var(--card-foreground)" }} fontSize="13" fontWeight="bold" textAnchor="middle">{v}</text>
           ))}
           {/* Arrow marker */}
           <defs>
@@ -225,7 +226,7 @@ const questions: Q[] = [
           {/* (9→3): i=8 y=336, j=2 y=200 */}
           <line x1="90" y1="336" x2="235" y2="201" stroke="#34d399" strokeWidth="1.5" opacity="0.85" markerEnd="url(#arr-kl8)" />
         </svg>
-        <p className="text-white/40 text-[10px] mt-1 font-body">Relasi: "kelipatan dari" (A → B)</p>
+        <p className="text-muted-foreground/60 text-[10px] mt-1 font-body">Relasi: &ldquo;kelipatan dari&rdquo; (A → B)</p>
       </div>
     ),
     parts: [
@@ -238,6 +239,7 @@ const questions: Q[] = [
 const PengertianRelasiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -251,15 +253,15 @@ const PengertianRelasiPage = () => {
             style={{ textShadow: '0 0 20px rgba(167,139,250,0.7)' }}>
             PENGERTIAN RELASI DAN PENYAJIANNYA
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
             <span className="text-violet-400 text-xs font-bold">📋 8 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-violet-900/20 border border-violet-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-violet-900/20" : "bg-violet-50"} border border-violet-500/20 rounded-xl p-4`}>
           <p className="text-violet-300 text-xs font-bold mb-2">📌 Ingat — Tiga Cara Menyatakan Relasi</p>
           <div className="grid grid-cols-3 gap-2 text-xs font-body">
             {[
@@ -269,7 +271,7 @@ const PengertianRelasiPage = () => {
             ].map(r => (
               <div key={r.name} className="bg-white/5 rounded-lg px-2 py-2 text-center">
                 <div className="text-lg mb-1">{r.emoji}</div>
-                <span className="text-white/60 text-[10px]">{r.name}</span>
+                <span className={`${isDark ? "text-white/60" : "text-gray-600"} text-[10px]`}>{r.name}</span>
               </div>
             ))}
           </div>
@@ -279,7 +281,7 @@ const PengertianRelasiPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-slate-900/80 to-purple-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-violet-900/30 via-slate-900/80 to-purple-900/30" : "from-violet-50/60 via-white/80 to-purple-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-violet-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-violet-400 to-purple-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -291,7 +293,7 @@ const PengertianRelasiPage = () => {
                     <span className="text-violet-400 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 px-2 py-0.5 rounded inline-block mb-2">
                       {q.title}
                     </span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                    {q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-3`}>{q.content}</p>}
                     {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
@@ -299,8 +301,8 @@ const PengertianRelasiPage = () => {
                           <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
                             {p.label && <span className="text-violet-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
                             {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80 whitespace-pre-line">{p.text}</p>
+                              ? <div className={`${isDark ? "text-white" : "text-gray-800"} text-sm overflow-x-auto`}><InlineMath math={p.math} /></div>
+                              : <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} whitespace-pre-line`}>{p.text}</p>
                             }
                           </div>
                         ))}
