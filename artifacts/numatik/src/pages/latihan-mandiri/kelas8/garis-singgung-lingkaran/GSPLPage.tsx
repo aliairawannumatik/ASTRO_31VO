@@ -339,13 +339,13 @@ const GSPLPage = () => {
         <div className={`mb-5 ${isDark ? "bg-cyan-900/20" : "bg-cyan-50"} border border-cyan-500/20 rounded-xl p-4`}>
           <p className="text-cyan-300 text-xs font-bold mb-2">📌 Rumus Garis Singgung Persekutuan</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2">
-            <div className="bg-white/5 rounded-lg px-3 py-3">
+            <div className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-3`}>
               <p className="text-cyan-300 text-[10px] font-bold mb-1">GSPL (Luar)</p>
               <div className="flex justify-center">
                 <BlockMath math="d_{\text{GSPL}} = \sqrt{p^2 - (R - r)^2}" />
               </div>
             </div>
-            <div className="bg-white/5 rounded-lg px-3 py-3">
+            <div className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-3`}>
               <p className="text-violet-300 text-[10px] font-bold mb-1">GSPD (Dalam)</p>
               <div className="flex justify-center">
                 <BlockMath math="d_{\text{GSPD}} = \sqrt{p^2 - (R + r)^2}" />
