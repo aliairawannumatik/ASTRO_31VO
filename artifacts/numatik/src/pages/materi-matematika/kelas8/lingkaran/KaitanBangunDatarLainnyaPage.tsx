@@ -475,7 +475,9 @@ type T = typeof translations.id;
 /* ═══════════════════════════════════════════════════════════════════
    SVG 1 – Circle inside square (4 shaded corners)
 ═══════════════════════════════════════════════════════════════════ */
-const LingkaranDalamPersegiSVG = ({ t }: { t: T }) => (
+const LingkaranDalamPersegiSVG = ({ t }: { t: T }) => {
+  const { isDark } = useTheme();
+  return (
   <svg viewBox="0 0 280 250" className="w-full max-w-xs mx-auto"
     aria-label={t.badge.includes("KELAS") ? "Lingkaran di dalam persegi" : t.badge.includes("GRADE") ? "Circle inside square" : "円の中の正方形"}>
     <defs>
@@ -496,10 +498,11 @@ const LingkaranDalamPersegiSVG = ({ t }: { t: T }) => (
     <line x1="140" y1="120" x2="230" y2="120" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="6 3" className="a1-dash" opacity=".8"/>
     <text x="184" y="114" fill="#67e8f9" fontSize="11" fontFamily="monospace" fontWeight="bold">r</text>
     <text x="136" y="224" fill="#fb923c" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">a = 2r</text>
-    <text x="62" y="50" fill="#fde68a" fontSize="9" fontFamily="monospace" opacity=".9">{t.introCats[0].label === "Dikurangi" ? "Arsiran" : t.introCats[0].label === "Subtraction" ? "Shaded" : "着色"}</text>
-    <text x="62" y="62" fill="#fde68a" fontSize="9" fontFamily="monospace" opacity=".9">{t.introCats[0].label === "Dikurangi" ? "= Sudut" : t.introCats[0].label === "Subtraction" ? "= Corner" : "= 角"}</text>
+    <text x="62" y="50" fill={isDark ? "#fde68a" : "#a16207"} fontSize="9" fontFamily="monospace" opacity=".9">{t.introCats[0].label === "Dikurangi" ? "Arsiran" : t.introCats[0].label === "Subtraction" ? "Shaded" : "着色"}</text>
+    <text x="62" y="62" fill={isDark ? "#fde68a" : "#a16207"} fontSize="9" fontFamily="monospace" opacity=".9">{t.introCats[0].label === "Dikurangi" ? "= Sudut" : t.introCats[0].label === "Subtraction" ? "= Corner" : "= 角"}</text>
   </svg>
-);
+  );
+};
 
 /* ═══════════════════════════════════════════════════════════════════
    SVG 2 – Composite: Rectangle + Semicircle
@@ -543,6 +546,7 @@ const BangunGabunganSVG = ({ t }: { t: T }) => {
 const PersegipanjangDanLingkaranSVG = ({ t }: { t: T }) => {
   const isId = t.introCats[0].label === "Dikurangi";
   const isEn = t.introCats[0].label === "Subtraction";
+  const { isDark } = useTheme();
   return (
     <svg viewBox="0 0 280 240" className="w-full max-w-xs mx-auto"
       aria-label={isId ? "Persegi panjang dan lingkaran" : isEn ? "Rectangle and circle" : "長方形と円"}>
@@ -566,7 +570,7 @@ const PersegipanjangDanLingkaranSVG = ({ t }: { t: T }) => {
       <text x="170" y="114" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold">r</text>
       <text x="133" y="228" fill="#4ade80" fontSize="10" fontFamily="monospace" textAnchor="middle">{isId ? "p (panjang)" : isEn ? "p (length)" : "p（長さ）"}</text>
       <text x="18"  y="124" fill="#4ade80" fontSize="10" fontFamily="monospace" textAnchor="middle" transform="rotate(-90 18 124)">{isId ? "l (lebar)" : isEn ? "l (width)" : "l（幅）"}</text>
-      <text x="46" y="56" fill="#fde68a" fontSize="9" fontFamily="monospace">{isId ? "Arsiran" : isEn ? "Shaded" : "着色"}</text>
+      <text x="46" y="56" fill={isDark ? "#fde68a" : "#a16207"} fontSize="9" fontFamily="monospace">{isId ? "Arsiran" : isEn ? "Shaded" : "着色"}</text>
     </svg>
   );
 };
@@ -648,8 +652,8 @@ const SoalSVG3 = ({ t }: { t: T }) => {
       <path d="M240,20 A220,220,0,0,1,20,240" fill="none" stroke="#22d3ee" strokeWidth="2"/>
       <text x="128" y="256" fill="#c084fc" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
       <text x="7" y="134" fill="#c084fc" fontSize="10" fontFamily="monospace" transform="rotate(-90,7,134)">14 cm</text>
-      <text x="42" y="52" fill="#fde68a" fontSize="9" fontFamily="monospace">{shade}</text>
-      <text x="172" y="232" fill="#fde68a" fontSize="9" fontFamily="monospace">{shade}</text>
+      <text x="42" y="52" fill={isDark ? "#fde68a" : "#a16207"} fontSize="9" fontFamily="monospace">{shade}</text>
+      <text x="172" y="232" fill={isDark ? "#fde68a" : "#a16207"} fontSize="9" fontFamily="monospace">{shade}</text>
     </svg>
   );
 };
@@ -660,6 +664,7 @@ const SoalSVG3 = ({ t }: { t: T }) => {
 const SoalSVG4 = ({ t }: { t: T }) => {
   const isId = t.introCats[0].label === "Dikurangi";
   const isEn = t.introCats[0].label === "Subtraction";
+  const { isDark } = useTheme();
   return (
     <svg viewBox="0 0 310 220" className="w-full max-w-xs mx-auto" aria-label={isId ? "Bangun gabungan bentuk D" : isEn ? "D-shaped composite figure" : "D字型複合図形"}>
       <defs>
@@ -677,8 +682,8 @@ const SoalSVG4 = ({ t }: { t: T }) => {
       <text x="238" y="104" fill="#fbbf24" fontSize="10" fontFamily="monospace">r</text>
       <text x="107" y="215" fill="#22d3ee" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">21 cm</text>
       <text x="6" y="114" fill="#22d3ee" fontSize="10" fontFamily="monospace" transform="rotate(-90,6,114)">21 cm</text>
-      <text x="100" y="107" fill="#e0f2fe" fontSize="9" fontFamily="monospace" textAnchor="middle">{isId ? "Persegi" : isEn ? "Rect-" : "長方"}</text>
-      <text x="100" y="118" fill="#e0f2fe" fontSize="9" fontFamily="monospace" textAnchor="middle">{isId ? "Panjang" : isEn ? "angle" : "形"}</text>
+      <text x="100" y="107" fill={isDark ? "#e0f2fe" : "#0369a1"} fontSize="9" fontFamily="monospace" textAnchor="middle">{isId ? "Persegi" : isEn ? "Rect-" : "長方"}</text>
+      <text x="100" y="118" fill={isDark ? "#e0f2fe" : "#0369a1"} fontSize="9" fontFamily="monospace" textAnchor="middle">{isId ? "Panjang" : isEn ? "angle" : "形"}</text>
       <text x="260" y="107" fill="#fbbf24" fontSize="8" fontFamily="monospace">{isId ? "½ ling." : isEn ? "½ circ." : "半円"}</text>
       <circle cx="200" cy="110" r="3.5" fill="#22d3ee"/>
     </svg>
@@ -716,7 +721,9 @@ const SoalSVG5 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C6 – Square 14 cm, 4-pointed star from corner arcs
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG6 = () => (
+const SoalSVG6 = () => {
+  const { isDark } = useTheme();
+  return (
   <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label="4-pointed star from corner arcs">
     <defs>
       <style>{`
@@ -733,20 +740,21 @@ const SoalSVG6 = () => (
     <path d="M240,20 A220,220,0,0,0,20,240" fill="none" stroke="#fde68a" strokeWidth="1.4" opacity=".38"/>
     <path d="M130,49.5 A220,220,0,0,1,210.5,130 A220,220,0,0,1,130,210.5 A220,220,0,0,1,49.5,130 A220,220,0,0,1,130,49.5 Z"
       fill="#f59e0b" className="st6-fill"/>
-    <circle cx="20"  cy="20"  r="3" fill="#fde68a" opacity=".7"/>
-    <circle cx="240" cy="20"  r="3" fill="#fde68a" opacity=".7"/>
-    <circle cx="20"  cy="240" r="3" fill="#fde68a" opacity=".7"/>
-    <circle cx="240" cy="240" r="3" fill="#fde68a" opacity=".7"/>
-    <circle cx="130"   cy="49.5"  r="2.5" fill="#fff" opacity=".75"/>
-    <circle cx="210.5" cy="130"   r="2.5" fill="#fff" opacity=".75"/>
-    <circle cx="130"   cy="210.5" r="2.5" fill="#fff" opacity=".75"/>
-    <circle cx="49.5"  cy="130"   r="2.5" fill="#fff" opacity=".75"/>
+    <circle cx="20"  cy="20"  r="3" fill={isDark ? "#fde68a" : "#a16207"} opacity=".7"/>
+    <circle cx="240" cy="20"  r="3" fill={isDark ? "#fde68a" : "#a16207"} opacity=".7"/>
+    <circle cx="20"  cy="240" r="3" fill={isDark ? "#fde68a" : "#a16207"} opacity=".7"/>
+    <circle cx="240" cy="240" r="3" fill={isDark ? "#fde68a" : "#a16207"} opacity=".7"/>
+    <circle cx="130"   cy="49.5"  r="2.5" fill={isDark ? "#fff" : "#475569"} opacity=".75"/>
+    <circle cx="210.5" cy="130"   r="2.5" fill={isDark ? "#fff" : "#475569"} opacity=".75"/>
+    <circle cx="130"   cy="210.5" r="2.5" fill={isDark ? "#fff" : "#475569"} opacity=".75"/>
+    <circle cx="49.5"  cy="130"   r="2.5" fill={isDark ? "#fff" : "#475569"} opacity=".75"/>
     <text x="130" y="257" fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
     <text x="6" y="130" fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(-90,6,130)">14 cm</text>
     <line x1="20" y1="13" x2="240" y2="13" stroke="#fde68a" strokeWidth="1" opacity=".5"/>
-    <text x="130" y="11" fill="#fde68a" fontSize="8" fontFamily="monospace" textAnchor="middle">r = 14 cm</text>
+    <text x="130" y="11" fill={isDark ? "#fde68a" : "#a16207"} fontSize="8" fontFamily="monospace" textAnchor="middle">r = 14 cm</text>
   </svg>
-);
+  );
+};
 
 /* ═══════════════════════════════════════════════════════════════════
    SVG C7 – Triple arch: large arch minus 2 small arches
@@ -891,7 +899,9 @@ const SoalSVG10 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C11 – 4 daun bunga dalam persegi 14 cm (2×2 sub-squares)
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG11 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+const SoalSVG11 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => {
+  const { isDark } = useTheme();
+  return (
   <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto" aria-label={isId ? "4 kelopak bunga dalam persegi" : isEn ? "4 leaf petals in square" : "正方形内の4枚花びら"}>
     <defs>
       <style>{`
@@ -912,17 +922,18 @@ const SoalSVG11 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
     <path d="M240,20 A110,110,0,0,0,130,130 A110,110,0,0,0,240,20 Z" fill="none" stroke="#2dd4bf" strokeWidth="2"/>
     <path d="M20,240 A110,110,0,0,0,130,130 A110,110,0,0,0,20,240 Z" fill="none" stroke="#2dd4bf" strokeWidth="2"/>
     <path d="M240,240 A110,110,0,0,1,130,130 A110,110,0,0,1,240,240 Z" fill="none" stroke="#2dd4bf" strokeWidth="2"/>
-    <circle cx="20"  cy="20"  r="3.5" fill="#fde68a"/>
-    <circle cx="240" cy="20"  r="3.5" fill="#fde68a"/>
-    <circle cx="20"  cy="240" r="3.5" fill="#fde68a"/>
-    <circle cx="240" cy="240" r="3.5" fill="#fde68a"/>
+    <circle cx="20"  cy="20"  r="3.5" fill={isDark ? "#fde68a" : "#a16207"}/>
+    <circle cx="240" cy="20"  r="3.5" fill={isDark ? "#fde68a" : "#a16207"}/>
+    <circle cx="20"  cy="240" r="3.5" fill={isDark ? "#fde68a" : "#a16207"}/>
+    <circle cx="240" cy="240" r="3.5" fill={isDark ? "#fde68a" : "#a16207"}/>
     <circle cx="130" cy="130" r="4" fill="#2dd4bf"/>
     <text x="128" y="257" fill="#2dd4bf" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
     <text x="6" y="134" fill="#2dd4bf" fontSize="10" fontFamily="monospace" transform="rotate(-90,6,134)">14 cm</text>
-    <text x="75"  y="14" fill="#fde68a" fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
-    <text x="185" y="14" fill="#fde68a" fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
+    <text x="75"  y="14" fill={isDark ? "#fde68a" : "#a16207"} fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
+    <text x="185" y="14" fill={isDark ? "#fde68a" : "#a16207"} fontSize="8.5" fontFamily="monospace" textAnchor="middle">7 cm</text>
   </svg>
-);
+  );
+};
 
 /* ═══════════════════════════════════════════════════════════════════
    SVG C13 – Ice cream: semicircle + triangle
@@ -960,7 +971,9 @@ const SoalSVG13 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C14 – Trapezoid + quarter circle on left
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG14 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+const SoalSVG14 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => {
+  const { isDark } = useTheme();
+  return (
   <svg viewBox="0 108 340 115" className="w-full mx-auto" style={{ maxWidth: "576px" }} aria-label={isId ? "Trapesium dan seperempat lingkaran di kiri" : isEn ? "Trapezoid plus quarter circle on left" : "左に四分円を足した台形"}>
     <defs>
       <style>{`
@@ -976,7 +989,7 @@ const SoalSVG14 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
     <line x1="20" y1="195" x2="90" y2="195" stroke="#fda4af" strokeWidth="1.5" strokeDasharray="5 3" opacity=".85"/>
     <line x1="90" y1="125" x2="90" y2="195" stroke="#fda4af" strokeWidth="1.5" strokeDasharray="5 3" opacity=".85"/>
     <polyline points="90,195 90,182 77,182 77,195" fill="none" stroke="#fda4af" strokeWidth="1.2" opacity=".9"/>
-    <circle cx="90" cy="195" r="3.5" fill="white" opacity=".9"/>
+    <circle cx="90" cy="195" r="3.5" fill={isDark ? "white" : "#475569"} opacity=".9"/>
     <text x="160" y="117" fill="#fbbf24" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">28 cm</text>
     <line x1="90" y1="121" x2="230" y2="121" stroke="#fbbf24" strokeWidth="1" opacity=".55"/>
     <line x1="90" y1="117" x2="90" y2="125" stroke="#fbbf24" strokeWidth="1" opacity=".55"/>
@@ -991,7 +1004,8 @@ const SoalSVG14 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
     <line x1="90" y1="203" x2="90" y2="211" stroke="#fb7185" strokeWidth="1" opacity=".55"/>
     <line x1="300" y1="203" x2="300" y2="211" stroke="#fb7185" strokeWidth="1" opacity=".55"/>
   </svg>
-);
+  );
+};
 
 /* ═══════════════════════════════════════════════════════════════════
    SVG C15 – Isosceles right triangle + quarter circle on hypotenuse
@@ -1107,7 +1121,9 @@ const SoalSVG18 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
 /* ═══════════════════════════════════════════════════════════════════
    SVG C19 – Large semicircle (arch up) + small semicircle (arch down)
 ═══════════════════════════════════════════════════════════════════ */
-const SoalSVG19 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
+const SoalSVG19 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => {
+  const { isDark } = useTheme();
+  return (
   <svg viewBox="0 55 255 165" className="w-full max-w-xs mx-auto" aria-label={isId ? "Setengah lingkaran besar ke atas dan kecil ke bawah" : isEn ? "Large semicircle up and small semicircle down" : "大半円上・小半円下"}>
     <defs>
       <style>{`
@@ -1126,13 +1142,14 @@ const SoalSVG19 = ({ isId, isEn }: { isId: boolean; isEn: boolean }) => (
     <line x1="25"  y1="143" x2="155" y2="143" stroke="#fbbf24" strokeWidth="1.3" opacity=".85"/>
     <line x1="25"  y1="139" x2="25"  y2="147" stroke="#fbbf24" strokeWidth="1.2" opacity=".85"/>
     <line x1="155" y1="139" x2="155" y2="147" stroke="#fbbf24" strokeWidth="1.2" opacity=".85"/>
-    <text x="90" y="159" fill="#fde68a" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">26 cm</text>
+    <text x="90" y="159" fill={isDark ? "#fde68a" : "#a16207"} fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">26 cm</text>
     <line x1="120" y1="143" x2="190" y2="143" stroke="#67e8f9" strokeWidth="1.3" opacity=".85"/>
     <line x1="120" y1="139" x2="120" y2="147" stroke="#67e8f9" strokeWidth="1.2" opacity=".85"/>
     <line x1="190" y1="139" x2="190" y2="147" stroke="#67e8f9" strokeWidth="1.2" opacity=".85"/>
-    <text x="155" y="159" fill="#a5f3fc" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
+    <text x="155" y="159" fill={isDark ? "#a5f3fc" : "#0e7490"} fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">14 cm</text>
   </svg>
-);
+  );
+};
 
 /* ═══════════════════════════════════════════════════════════════════
    MAIN PAGE
@@ -1208,7 +1225,7 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
               <div className="rounded-xl p-3 border"
                 style={{ background: "rgba(251,191,36,.08)", borderColor: "rgba(251,191,36,.3)" }}>
-                <p className="font-body text-sm text-yellow-200">
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"}`}>
                   <strong>{t.introKeyBold}</strong>{t.introKeyRest}
                 </p>
               </div>
@@ -1390,7 +1407,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.k5Use} <InlineMath math="L_b = (\pi - 2) \times r^2"/></p>
                 <BlockMath math="L_b = \left(\tfrac{22}{7} - 2\right) \times 14^2 = \tfrac{8}{7} \times 196 = \boxed{224 \,\mathrm{cm}^2}" />
                 <div className="rounded-xl p-3 border mt-1" style={{ background: "rgba(245,158,11,.07)", borderColor: "rgba(245,158,11,.25)" }}>
-                  <p className="text-amber-200 text-xs font-body">{t.k5AltNote} <InlineMath math="L = 4 \times L_s - 2 \times L_p = 4 \times \tfrac{1}{4}\pi r^2 - 2r^2 = r^2(\pi-2)"/></p>
+                  <p className={`${isDark ? "text-amber-200" : "text-amber-700"} text-xs font-body`}>{t.k5AltNote} <InlineMath math="L = 4 \times L_s - 2 \times L_p = 4 \times \tfrac{1}{4}\pi r^2 - 2r^2 = r^2(\pi-2)"/></p>
                 </div>
                 <div className="rounded-lg p-3 border text-center mt-2" style={{ background: "rgba(245,158,11,.1)", borderColor: "rgba(245,158,11,.35)" }}>
                   <p className="text-amber-300 text-xs font-bold">{t.k5Result}</p>
@@ -1668,7 +1685,7 @@ const KaitanBangunDatarLainnyaPage = () => {
                 <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.k13bNote}</p>
                 <BlockMath math="K = \pi R + \pi r = \tfrac{22}{7} \times (13 + 7) = \tfrac{22}{7} \times 20 = \boxed{\tfrac{440}{7} = 62\tfrac{6}{7} \,\mathrm{cm}}" />
                 <div className="rounded-xl p-3 border mt-1" style={{ background: "rgba(99,102,241,.07)", borderColor: "rgba(99,102,241,.25)" }}>
-                  <p className="text-indigo-200 text-xs font-body">{t.k13Tip}</p>
+                  <p className={`${isDark ? "text-indigo-200" : "text-indigo-700"} text-xs font-body`}>{t.k13Tip}</p>
                 </div>
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="rounded-lg p-3 border text-center" style={{ background: "rgba(99,102,241,.1)", borderColor: "rgba(99,102,241,.35)" }}>
@@ -1774,7 +1791,7 @@ const KaitanBangunDatarLainnyaPage = () => {
               </div>
               <div className="rounded-xl p-4 border"
                 style={{ background: "linear-gradient(135deg,rgba(251,191,36,.1),rgba(249,115,22,.08))", borderColor: "rgba(251,191,36,.3)" }}>
-                <p className="font-body text-sm text-yellow-200 leading-relaxed">
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"} leading-relaxed`}>
                   {t.rangkumanTip}<br/>
                   <span className="text-cyan-300">{t.rangkumanStep1}</span> →
                   <span className="text-green-300"> {t.rangkumanStep2}</span> →

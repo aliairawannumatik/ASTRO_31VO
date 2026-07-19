@@ -1,0 +1,51 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/ — 
+dev workflow sudah dikonfirmasi jalan dari artifacts/numatik/). Sistem 
+tema pakai useTheme() dari ThemeContext (isDark boolean), dengan tema 
+dark/luar-angkasa dan 5 tema terang lainnya.
+
+MASALAH: Banyak halaman punya background hardcoded gelap/hitam 
+(bg-slate-800/900, fill hex gelap di SVG, backgroundColor inline hex 
+gelap, atau className bg-gradient-to-br dengan warna gelap yang tidak 
+efektif di elemen SVG) yang tidak berubah mengikuti tema, sehingga di 
+tema terang teks dan elemen jadi susah dibaca.
+
+Sudah diperbaiki sebelumnya dengan pola conditional isDark yang konsisten, 
+termasuk topik Persamaan Garis Lurus, Teorema Pythagoras lengkap, dan 
+3 komponen shared Lingkaran (SudutPusatProofAnim.tsx, 
+LingkaranInteractive.tsx, SudutPusatInteraktif.tsx). Buka salah satu 
+file ini sebagai REFERENSI pola warna yang benar — jangan bikin skema 
+warna baru.
+
+CATATAN PENTING dari perbaikan sebelumnya:
+1. Tailwind gradient className (bg-gradient-to-br) TIDAK reliable di 
+   elemen <svg> — kalau menemukan pola ini di dalam SVG, ganti ke inline 
+   style seperti: style={{ background: isDark ? "rgba(10,18,35,0.90)" : 
+   "rgba(241,245,249,0.95)" }}
+2. Cek juga fill warna SVG label (misal blue-100/green-100/orange-100) 
+   yang kontras di dark tapi INVISIBLE di background putih — ganti ke 
+   shade lebih pekat (blue-700/green-700/orange-700) di tema terang.
+
+TUGAS: Perbaiki SEMUA hardcoded background gelap di 2 halaman berikut 
+(src/pages/materi-matematika/kelas8/lingkaran/):
+- KaitanBangunDatarLainnyaPage.tsx (30 baris bermasalah)
+- BusurJuringPage.tsx (14 baris bermasalah)
+
+ATURAN PERBAIKAN:
+1. Untuk Tailwind className (bg-slate-8xx/9xx dst): tambahkan conditional 
+   isDark, gunakan warna terang yang serasi (pastel/soft).
+2. Untuk SVG fill/stroke/background hex gelap: buat conditional, ikuti 
+   catatan penting di atas.
+3. Cek text-white/* di dalam container yang baru diterangi — ganti ke 
+   warna teks gelap yang kontras (text-gray-700/800, dst).
+4. JANGAN ubah logika interaktif (kalkulasi busur, juring, dst) — 
+   HANYA warna.
+5. JANGAN sentuh file lain di luar 2 file ini.
+
+Setelah selesai:
+6. Jalankan TypeScript check dan build lokal, pastikan 0 error.
+7. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya per file (ringkas).

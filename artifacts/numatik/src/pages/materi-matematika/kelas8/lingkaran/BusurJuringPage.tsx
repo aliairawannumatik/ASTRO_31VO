@@ -881,10 +881,10 @@ const PizzaAnalogiDua = ({ t }: { t: T }) => {
   return (
   <div className="space-y-2">
     <div className="grid grid-cols-2 gap-3">
-      <div className="rounded-xl border border-amber-500/30 bg-amber-950/20 p-2">
+      <div className={`rounded-xl border border-amber-500/30 ${isDark ? "bg-amber-950/20" : "bg-amber-50"} p-2`}>
         <PizzaBusurSVG t={t} />
       </div>
-      <div className="rounded-xl border border-purple-500/30 bg-purple-950/20 p-2">
+      <div className={`rounded-xl border border-purple-500/30 ${isDark ? "bg-purple-950/20" : "bg-purple-50"} p-2`}>
         <PizzaJuringSVG t={t} />
       </div>
     </div>
@@ -1010,7 +1010,7 @@ const BusurJuringPage = () => {
               </p>
               <PizzaAnalogiDua t={t} />
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <p className="font-body text-sm text-yellow-200">
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"}`}>
                   {t.keyIdeaLabel} {t.keyIdeaText}
                 </p>
               </div>
@@ -1025,7 +1025,7 @@ const BusurJuringPage = () => {
             <div className="px-5 pb-5 pt-2 space-y-4">
               <div className="rounded-xl p-3 border"
                 style={{ background: "rgba(251,191,36,.08)", borderColor: "rgba(251,191,36,.25)" }}>
-                <p className="text-amber-200 text-xs font-body leading-relaxed">
+                <p className={`${isDark ? "text-amber-200" : "text-amber-700"} text-xs font-body leading-relaxed`}>
                   {t.anim1Instr}
                 </p>
               </div>
@@ -1041,7 +1041,7 @@ const BusurJuringPage = () => {
             <div className="px-5 pb-5 pt-2 space-y-4">
               <div className="rounded-xl p-3 border"
                 style={{ background: "rgba(168,85,247,.08)", borderColor: "rgba(168,85,247,.25)" }}>
-                <p className="text-purple-200 text-xs font-body leading-relaxed">
+                <p className={`${isDark ? "text-purple-200" : "text-purple-700"} text-xs font-body leading-relaxed`}>
                   {t.anim2Instr}
                 </p>
               </div>
@@ -1063,16 +1063,16 @@ const BusurJuringPage = () => {
                 </p>
               </div>
               <div className="space-y-3">
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
+                <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-xl p-4`}>
                   <p className="font-body text-sm font-bold text-yellow-300 mb-1">{t.rumusBusurTitle}</p>
                   <BlockMath math="\frac{\alpha}{360°} \times 2\pi r" />
                   <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.rumusBusurAlpha}</p>
                 </div>
-                <div className="bg-orange-900/30 border border-orange-500/40 rounded-xl p-4">
+                <div className={`${isDark ? "bg-orange-900/30" : "bg-orange-50"} border border-orange-500/40 rounded-xl p-4`}>
                   <p className="font-body text-sm font-bold text-orange-300 mb-1">{t.rumusJuringTitle}</p>
                   <BlockMath math="\frac{\alpha}{360°} \times \pi r^2" />
                 </div>
-                <div className="bg-purple-900/30 border border-purple-500/40 rounded-xl p-4">
+                <div className={`${isDark ? "bg-purple-900/30" : "bg-purple-50"} border border-purple-500/40 rounded-xl p-4`}>
                   <p className="font-body text-sm font-bold text-purple-300 mb-2">{t.rumusTembTitle}</p>
                   <BlockMath math="L_{\triangle} = L_J - L_{\triangle OAB}" />
                   <TemberengLengkapSVG t={t} />
@@ -1140,7 +1140,7 @@ const BusurJuringPage = () => {
                   <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{\ell_{AB}}{\ell_{CD}} = \frac{L_{AOB}}{L_{COD}}" />
                 </div>
 
-                <div className="rounded-xl p-4 border border-cyan-500/40 bg-cyan-900/20">
+                <div className={`rounded-xl p-4 border border-cyan-500/40 ${isDark ? "bg-cyan-900/20" : "bg-cyan-50"}`}>
                   <p className="font-body text-xs font-bold text-cyan-300 mb-2">{t.perbBusurTitle}</p>
                   <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{\ell_{AB}}{\ell_{CD}}" />
                   <p className={`${isDark ? "text-white/55" : "text-gray-500"} text-xs font-body mt-1`}>
@@ -1148,7 +1148,7 @@ const BusurJuringPage = () => {
                   </p>
                 </div>
 
-                <div className="rounded-xl p-4 border border-orange-500/40 bg-orange-900/20">
+                <div className={`rounded-xl p-4 border border-orange-500/40 ${isDark ? "bg-orange-900/20" : "bg-orange-50"}`}>
                   <p className="font-body text-xs font-bold text-orange-300 mb-2">{t.perbJuringTitle}</p>
                   <BlockMath math="\frac{\angle AOB}{\angle COD} = \frac{L_{AOB}}{L_{COD}}" />
                   <p className={`${isDark ? "text-white/55" : "text-gray-500"} text-xs font-body mt-1`}>
@@ -1156,16 +1156,16 @@ const BusurJuringPage = () => {
                   </p>
                 </div>
 
-                <div className="rounded-xl p-4 border border-yellow-500/40 bg-yellow-900/20">
+                <div className={`rounded-xl p-4 border border-yellow-500/40 ${isDark ? "bg-yellow-900/20" : "bg-yellow-50"}`}>
                   <p className="font-body text-xs font-bold text-yellow-300 mb-2">{t.perbBusJurTitle}</p>
                   <BlockMath math="\frac{\ell_{AB}}{\ell_{CD}} = \frac{L_{AOB}}{L_{COD}}" />
-                  <p className="text-yellow-200/70 text-xs font-body mt-1">
+                  <p className={`${isDark ? "text-yellow-200/70" : "text-yellow-600"} text-xs font-body mt-1`}>
                     {t.perbBusJurNote}
                   </p>
                 </div>
               </div>
 
-              <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
+              <div className={`${isDark ? "bg-violet-900/30" : "bg-violet-50"} border border-violet-500/30 rounded-xl p-4 space-y-2`}>
                 <p className="font-body text-xs font-bold text-violet-300 uppercase tracking-wide">{t.perbKapanLabel}</p>
                 <ul className="space-y-1.5">
                   {t.perbKapanItems.map((item, i) => (
@@ -1177,7 +1177,7 @@ const BusurJuringPage = () => {
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-emerald-500/40 bg-emerald-900/20 p-4 space-y-3">
+              <div className={`rounded-xl border border-emerald-500/40 ${isDark ? "bg-emerald-900/20" : "bg-emerald-50"} p-4 space-y-3`}>
                 <p className="font-body text-xs font-bold text-emerald-300 uppercase tracking-wide">{t.perbContohLabel}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/85" : "text-gray-700"}`}>
                   {t.perbContohQ.split(t.perbContohQBold)[0]}
@@ -1189,7 +1189,7 @@ const BusurJuringPage = () => {
                   <BlockMath math="\frac{\ell_{CD}}{\ell_{AB}} = \frac{\beta}{\alpha} = \frac{45°}{60°} = \frac{3}{4}" />
                   <p className={`font-body text-xs ${isDark ? "text-white/70" : "text-gray-500"}`}>{t.perbGabLegend}</p>
                   <BlockMath math="\ell_{CD} = \frac{3}{4} \times 33 = 24{,}75 \,\mathrm{cm}" />
-                  <div className="bg-emerald-900/40 border border-emerald-500/30 rounded-lg p-2 mt-1">
+                  <div className={`${isDark ? "bg-emerald-900/40" : "bg-emerald-100"} border border-emerald-500/30 rounded-lg p-2 mt-1`}>
                     <p className="font-body text-sm text-emerald-300 text-center font-bold">
                       {t.perbContohCheck}
                     </p>
@@ -1197,8 +1197,8 @@ const BusurJuringPage = () => {
                 </div>
               </div>
 
-              <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-3">
-                <p className="font-body text-xs text-red-200">
+              <div className={`${isDark ? "bg-red-900/20" : "bg-red-50"} border border-red-500/30 rounded-lg p-3`}>
+                <p className={`font-body text-xs ${isDark ? "text-red-200" : "text-red-700"}`}>
                   <strong>{t.perbWarningBold1}</strong>{" "}
                   {t.perbWarning.split(t.perbWarningBold1)[1]?.split(t.perbWarningBold2)[0]}
                   <strong>{t.perbWarningBold2}</strong>
@@ -1214,7 +1214,7 @@ const BusurJuringPage = () => {
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />}
               iconColor="text-green-400" title={t.c1Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-xl p-4`}>
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c1Q}</p>
               </div>
@@ -1225,7 +1225,7 @@ const BusurJuringPage = () => {
                 <BlockMath math="\frac{120}{360} \times 2 \times \frac{22}{7} \times 21" />
                 <BlockMath math="= \frac{1}{3} \times 2 \times \frac{22}{7} \times 21" />
                 <BlockMath math="= \frac{1}{3} \times 132 = 44 \,\mathrm{cm}" />
-                <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-lg p-3`}>
                   <p className="font-body text-sm text-green-300 text-center">{t.c1Check}</p>
                 </div>
               </div>
@@ -1237,7 +1237,7 @@ const BusurJuringPage = () => {
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />}
               iconColor="text-yellow-400" title={t.c2Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-xl p-4`}>
                 <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c2Q}</p>
               </div>
@@ -1254,8 +1254,8 @@ const BusurJuringPage = () => {
                 <BlockMath math="= \frac{1}{12} \times 12474 = 1039{,}5 \,\mathrm{cm}^2" />
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2Shortcut}</strong> {t.c2ShortcutDesc}</p>
                 <BlockMath math="= \frac{1}{2} \times 63 \times 33 = 1039{,}5 \,\mathrm{cm}^2 \checkmark" />
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                  <p className="font-body text-sm text-yellow-200 text-center">{t.c2Check}</p>
+                <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-lg p-3`}>
+                  <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"} text-center`}>{t.c2Check}</p>
                 </div>
               </div>
             </div>
@@ -1266,7 +1266,7 @@ const BusurJuringPage = () => {
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />}
               iconColor="text-red-400" title={t.c3Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/40 rounded-xl p-4`}>
                 <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c3Q}<InlineMath math="\sqrt{3} \approx 1{,}732"/>{t.c3Q2}
@@ -1283,8 +1283,8 @@ const BusurJuringPage = () => {
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3Step3}</strong> {t.c3Step3desc}</p>
                 <p className={`font-body text-xs ${isDark ? "text-white/55" : "text-gray-500"} font-mono`}>{t.c3LuasTembereng} =</p>
                 <BlockMath math="52{,}33 - 43{,}3 = 9{,}03 \,\mathrm{cm}^2" />
-                <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                  <p className="font-body text-sm text-red-200 text-center">{t.c3Check}</p>
+                <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/40 rounded-lg p-3`}>
+                  <p className={`font-body text-sm ${isDark ? "text-red-200" : "text-red-700"} text-center`}>{t.c3Check}</p>
                 </div>
               </div>
             </div>
@@ -1295,7 +1295,7 @@ const BusurJuringPage = () => {
             <SectionHeader icon={<BookOpen className="w-5 h-5" />}
               iconColor="text-violet-400" title={t.rangkTitle} />
             <div className="px-5 pb-5 space-y-3">
-              <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
+              <div className={`${isDark ? "bg-violet-900/30" : "bg-violet-50"} border border-violet-500/30 rounded-xl p-4 space-y-2`}>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>
                   • <strong className="text-yellow-300">{t.rBusur}</strong> ={" "}
                   <InlineMath math="\frac{\alpha}{360°} \times 2\pi r"/>
@@ -1312,7 +1312,7 @@ const BusurJuringPage = () => {
                 </p>
               </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <p className="font-body text-sm text-yellow-200">{t.tips}</p>
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"}`}>{t.tips}</p>
               </div>
             </div>
           </div>
