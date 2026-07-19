@@ -1834,13 +1834,13 @@ const LimasPage = () => {
       icon: "📊",
       content: (
         <div className="space-y-3 font-body">
-          <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <div className={isDark ? "overflow-x-auto rounded-lg border border-slate-700" : "overflow-x-auto rounded-lg border border-gray-200"}>
             <table className="w-full text-xs text-center">
               <thead><tr className={isDark ? "bg-slate-800" : "bg-gray-100"}>
-                <th className="px-3 py-2 text-violet-300 border-r border-slate-700 text-left">
+                <th className={isDark ? "px-3 py-2 text-violet-300 border-r border-slate-700 text-left" : "px-3 py-2 text-violet-700 border-r border-gray-200 text-left"}>
                   {lang === "en" ? "Quantity" : lang === "ja" ? "量" : "Besaran"}
                 </th>
-                <th className="px-3 py-2 text-violet-300 border-r border-slate-700">
+                <th className={isDark ? "px-3 py-2 text-violet-300 border-r border-slate-700" : "px-3 py-2 text-violet-700 border-r border-gray-200"}>
                   {lang === "en" ? "Formula (Regular Square Pyramid)" : lang === "ja" ? "公式（正四角錐）" : "Rumus (Limas Segiempat Beraturan)"}
                 </th>
                 <th className="px-3 py-2 text-violet-300">
@@ -1865,7 +1865,7 @@ const LimasPage = () => {
                 ).map(([b,r,c],i)=>(
                   <tr key={i} className={`border-t border-slate-700 ${i%2===0 ? (isDark ? "bg-slate-900/40" : "bg-blue-50/50") : (isDark ? "bg-slate-800/30" : "")}`}>
                     <td className={isDark ? "px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left" : "px-3 py-2 text-slate-800 font-semibold border-r border-gray-200 text-left"}>{b}</td>
-                    <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
+                    <td className={isDark ? "px-3 py-2 text-yellow-300 font-mono border-r border-slate-700" : "px-3 py-2 text-yellow-600 font-mono border-r border-gray-200"}>{r}</td>
                     <td className={isDark ? "px-3 py-2 text-white/55 text-left" : "px-3 py-2 text-slate-500 text-left"}>{c}</td>
                   </tr>
                 ))}
