@@ -473,6 +473,8 @@ const PenerapanKontekstualPage = () => {
   );
 
   const cardColors = ["yellow", "green", "blue"] as const;
+  const cardBgLight = ["bg-yellow-50", "bg-green-50", "bg-blue-50"] as const;
+  const stepBgLight: Record<string, string> = { blue: "bg-blue-50", green: "bg-green-50", yellow: "bg-yellow-50", orange: "bg-orange-50" };
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
@@ -497,10 +499,10 @@ const PenerapanKontekstualPage = () => {
           </p>
           <BanMenggelindingSVG t={t} />
           <div className="mt-3 flex flex-wrap justify-center gap-3">
-            <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg px-3 py-1.5">
+            <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/30 rounded-lg px-3 py-1.5`}>
               <p className="text-yellow-300 text-xs font-mono font-bold">{t.heroTrail}</p>
             </div>
-            <div className="bg-red-900/30 border border-red-500/30 rounded-lg px-3 py-1.5">
+            <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/30 rounded-lg px-3 py-1.5`}>
               <p className="text-red-300 text-xs font-mono font-bold">{t.heroDot}</p>
             </div>
           </div>
@@ -519,7 +521,7 @@ const PenerapanKontekstualPage = () => {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-body">
                 {t.cards.map(({ emoji, label, hint }, i) => (
-                  <div key={label} className={`bg-${cardColors[i]}-900/30 border border-${cardColors[i]}-500/30 rounded-lg p-3 text-center`}>
+                  <div key={label} className={`${isDark ? `bg-${cardColors[i]}-900/30` : cardBgLight[i]} border border-${cardColors[i]}-500/30 rounded-lg p-3 text-center`}>
                     <p className="text-2xl mb-1">{emoji}</p>
                     <p className={`text-${cardColors[i]}-300 font-bold`}>{label}</p>
                     <p className={`${isDark ? "text-white/50" : "text-gray-600"} mt-1`}>{hint}</p>
@@ -544,7 +546,7 @@ const PenerapanKontekstualPage = () => {
               <JamDindingSVG t={t} />
               <div className="space-y-2">
                 {t.steps.map(({ step, color, title, desc }) => (
-                  <div key={step} className={`flex gap-3 bg-${color}-900/20 border border-${color}-500/20 rounded-lg p-3`}>
+                  <div key={step} className={`flex gap-3 ${isDark ? `bg-${color}-900/20` : stepBgLight[color]} border border-${color}-500/20 rounded-lg p-3`}>
                     <span className={`bg-${color}-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5`}>{step}</span>
                     <div>
                       <p className={`font-body text-sm font-bold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</p>
@@ -560,7 +562,7 @@ const PenerapanKontekstualPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400" title={t.c1Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-xl p-4`}>
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c1Q}</p>
               </div>
@@ -571,7 +573,7 @@ const PenerapanKontekstualPage = () => {
                 <BlockMath math="K = \pi \times d = \frac{22}{7} \times 56 = 176 \,\mathrm{cm}" />
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c1s2}</strong> {t.c1s2T}</p>
                 <BlockMath math="= 500 \times 176 = 88{.}000 \,\mathrm{cm} = 880 \,\mathrm{m}" />
-                <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-lg p-3`}>
                   <p className="font-body text-sm text-green-300 text-center">{t.c1Result}</p>
                 </div>
               </div>
@@ -582,7 +584,7 @@ const PenerapanKontekstualPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH icon={<FlaskConical className="w-5 h-5" />} iconColor="text-yellow-400" title={t.c2Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-xl p-4`}>
                 <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c2Q}</p>
               </div>
@@ -598,8 +600,8 @@ const PenerapanKontekstualPage = () => {
                 <BlockMath math="L_{rumput} = L_1 - L_2 = 616 - 38{,}5 = 577{,}5 \,\mathrm{m}^2" />
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c2s5}</strong> {t.c2s5T}</p>
                 <BlockMath math="= 577{,}5 \times 15.000 = \mathrm{Rp}\ 8.662.500" />
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                  <p className="font-body text-sm text-yellow-200 text-center">{t.c2Result}</p>
+                <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-lg p-3`}>
+                  <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"} text-center`}>{t.c2Result}</p>
                 </div>
               </div>
             </div>
@@ -609,7 +611,7 @@ const PenerapanKontekstualPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title={t.c3Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/40 rounded-xl p-4`}>
                 <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c3Q}</p>
               </div>
@@ -624,8 +626,8 @@ const PenerapanKontekstualPage = () => {
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3s3}</strong> {t.c3s3T}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}><strong>{t.c3s4}</strong> {t.c3s4T}</p>
                 <BlockMath math="Q = A \times v = 50{,}24 \times 200 = 10{.}048 \,\mathrm{cm}^3/\mathrm{s}" />
-                <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                  <p className="font-body text-sm text-red-200 text-center">{t.c3Result}</p>
+                <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/40 rounded-lg p-3`}>
+                  <p className={`font-body text-sm ${isDark ? "text-red-200" : "text-red-700"} text-center`}>{t.c3Result}</p>
                 </div>
               </div>
             </div>
@@ -635,14 +637,14 @@ const PenerapanKontekstualPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SH icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title={t.rTitle} />
             <div className="px-5 pb-5 space-y-3">
-              <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
+              <div className={`${isDark ? "bg-violet-900/30" : "bg-violet-50"} border border-violet-500/30 rounded-xl p-4 space-y-2`}>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className={isDark ? "text-green-300" : "text-green-700"}>{t.rB1}</strong> {t.rB1rest}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className={isDark ? "text-orange-300" : "text-orange-700"}>{t.rB2}</strong> = <InlineMath math="\pi(R^2 - r^2)"/></p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>{t.rB3}</strong> {t.rB3rest}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className={isDark ? "text-cyan-300" : "text-cyan-700"}>{t.rB4}</strong> {t.rB4rest}</p>
               </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <p className="font-body text-sm text-yellow-200">{t.tips}</p>
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"}`}>{t.tips}</p>
               </div>
               <RodaGigiSVG t={t} />
             </div>

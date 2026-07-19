@@ -443,7 +443,7 @@ const KaitanBangunDatarPage = () => {
                     <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>{t.sec2FormulaNote}</p>
                     <div className="rounded-lg p-3 mt-1 border"
                       style={{background:"rgba(251,191,36,.08)",borderColor:"rgba(251,191,36,.25)"}}>
-                      <p className="text-yellow-200 text-xs">
+                      <p className={`${isDark ? "text-yellow-200" : "text-yellow-700"} text-xs`}>
                         💡 <strong>{t.sec2TipBold}</strong>{t.sec2TipRest}
                         <InlineMath math={t.sec2TipFormula}/>.
                       </p>
@@ -550,7 +550,7 @@ const KaitanBangunDatarPage = () => {
               </div>
               <div className="rounded-xl p-3 border"
                 style={{background:"rgba(251,191,36,.08)",borderColor:"rgba(251,191,36,.25)"}}>
-                <p className="font-body text-sm text-yellow-200">{t.tips}</p>
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"}`}>{t.tips}</p>
               </div>
             </div>
           </div>

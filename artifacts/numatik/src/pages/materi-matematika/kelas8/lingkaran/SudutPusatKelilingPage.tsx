@@ -404,7 +404,7 @@ const SudutPusatKelilingPage = () => {
               </p>
               <SudutPusatSVG t={t} />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
+                <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/30 rounded-lg p-3`}>
                   <p className="font-body text-xs font-bold text-yellow-300">{t.centralLabel}</p>
                   <p className={`font-body text-xs ${isDark ? "text-white/70" : "text-gray-700"} mt-1`}>
                     {t.centralDesc.split(t.centralDescBold)[0]}
@@ -412,7 +412,7 @@ const SudutPusatKelilingPage = () => {
                     {t.centralDesc.split(t.centralDescBold)[1]}
                   </p>
                 </div>
-                <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
+                <div className={`${isDark ? "bg-purple-900/30" : "bg-purple-50"} border border-purple-500/30 rounded-lg p-3`}>
                   <p className="font-body text-xs font-bold text-purple-300">{t.inscribedLabel}</p>
                   <p className={`font-body text-xs ${isDark ? "text-white/70" : "text-gray-700"} mt-1`}>
                     {t.inscribedDesc.split(t.inscribedDescBold)[0]}
@@ -435,7 +435,7 @@ const SudutPusatKelilingPage = () => {
 
               <SudutKelilingVsPusatSVG t={t} />
 
-              <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-xl p-4`}>
                 <p className="font-body text-sm font-bold text-yellow-300 mb-2">{t.t1Title}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} mb-2`}>
                   {t.t1P.split(t.t1Bold)[0]}
@@ -448,14 +448,14 @@ const SudutPusatKelilingPage = () => {
 
               <SudutDiameterSVG t={t} />
 
-              <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-xl p-4`}>
                 <p className="font-body text-sm font-bold text-green-300 mb-2">{t.t2Title}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} mb-2`}>{t.t2P}</p>
                 <BlockMath math="\angle ACB = 90°" />
                 <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>{t.t2Note}</p>
               </div>
 
-              <div className="bg-purple-900/30 border border-purple-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-purple-900/30" : "bg-purple-50"} border border-purple-500/40 rounded-xl p-4`}>
                 <p className="font-body text-sm font-bold text-purple-300 mb-2">{t.t3Title}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} mb-2`}>{t.t3P}</p>
                 <BlockMath math="\angle ACB = \angle ADB = \angle AEB" />
@@ -472,7 +472,7 @@ const SudutPusatKelilingPage = () => {
             />
             <div className="px-4 pb-4">
               <div className="bg-cyan-500/8 border border-cyan-500/20 rounded-lg px-4 py-2.5 mb-3">
-                <p className="font-body text-xs text-cyan-200/80 leading-relaxed">
+                <p className={`font-body text-xs ${isDark ? "text-cyan-200/80" : "text-cyan-700"} leading-relaxed`}>
                   <strong className="text-cyan-300">{t.anim1Bold1}</strong>
                   {t.anim1Desc.split(t.anim1Bold1)[1]?.split(t.anim1Bold2)[0]}
                   <strong className={isDark ? "text-white/80" : "text-gray-700"}>{t.anim1Bold2}</strong>
@@ -492,7 +492,7 @@ const SudutPusatKelilingPage = () => {
             />
             <div className="px-4 pb-4">
               <div className="bg-purple-500/8 border border-purple-500/20 rounded-lg px-4 py-2.5 mb-3">
-                <p className="font-body text-xs text-purple-200/80 leading-relaxed">
+                <p className={`font-body text-xs ${isDark ? "text-purple-200/80" : "text-purple-700"} leading-relaxed`}>
                   <strong className="text-amber-300">{t.anim2Bold1}</strong>
                   {t.anim2Desc.split(t.anim2Bold1)[1]?.split(t.anim2Bold2)[0]}
                   <strong className="text-purple-300">{t.anim2Bold2}</strong>
@@ -507,7 +507,7 @@ const SudutPusatKelilingPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400" title={t.c1Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-xl p-4`}>
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c1Q} <InlineMath math="\angle AOB = 110°"/>. {t.c1Q2.replace("!", "")} <InlineMath math="\angle ACB"/>{t.c1Q2.includes("!") ? "!" : ""}
@@ -518,7 +518,7 @@ const SudutPusatKelilingPage = () => {
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c1Method}</p>
                 <BlockMath math="\angle ACB = \frac{1}{2} \times \angle AOB" />
                 <BlockMath math="\angle ACB = \frac{1}{2} \times 110° = 55°" />
-                <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
+                <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-lg p-3`}>
                   <p className="font-body text-sm text-green-300 text-center">{t.c1Check} <InlineMath math="\angle ACB = \textbf{55°}"/>{t.c1Check2}</p>
                 </div>
               </div>
@@ -529,7 +529,7 @@ const SudutPusatKelilingPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-yellow-400" title={t.c2Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-xl p-4`}>
                 <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c2Q} <InlineMath math="\angle ABD = 35°"/> {t.c2Q2} <InlineMath math="\angle ACD = 35°"/>{t.c2Q3} <InlineMath math="\angle AOD"/>{t.c2Q4}
@@ -540,8 +540,8 @@ const SudutPusatKelilingPage = () => {
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c2P}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c2Step}</p>
                 <BlockMath math="\angle AOD = 2 \times \angle ABD = 2 \times 35° = 70°" />
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                  <p className="font-body text-sm text-yellow-200 text-center">{t.c2Check} <InlineMath math="\angle AOD = \textbf{70°}"/>{t.c2Check2}</p>
+                <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-lg p-3`}>
+                  <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"} text-center`}>{t.c2Check} <InlineMath math="\angle AOD = \textbf{70°}"/>{t.c2Check2}</p>
                 </div>
               </div>
             </div>
@@ -551,7 +551,7 @@ const SudutPusatKelilingPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title={t.c3Title} />
             <div className="px-5 pb-5 space-y-4">
-              <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
+              <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/40 rounded-xl p-4`}>
                 <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3Level}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c3Q} <InlineMath math="\angle A = 3x + 10°"/> {t.c3Q2} <InlineMath math="\angle C = 2x - 5°"/>{t.c3Q3} <InlineMath math="\angle A"/> {t.c3Q4} <InlineMath math="\angle C"/>{t.c3Q5}
@@ -568,8 +568,8 @@ const SudutPusatKelilingPage = () => {
                 <BlockMath math="\angle A = 3(35°) + 10° = 115°" />
                 <BlockMath math="\angle C = 2(35°) - 5° = 65°" />
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c3Check} <InlineMath math="115° + 65° = 180° ✓"/></p>
-                <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                  <p className="font-body text-sm text-red-200 text-center">
+                <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/40 rounded-lg p-3`}>
+                  <p className={`font-body text-sm ${isDark ? "text-red-200" : "text-red-700"} text-center`}>
                     {t.c3Result} <InlineMath math="\angle A = \textbf{115°}"/>{t.c3Result2} <InlineMath math="\angle C = \textbf{65°}"/>{t.c3Result3}
                   </p>
                 </div>
@@ -581,14 +581,14 @@ const SudutPusatKelilingPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader icon={<BookOpen className="w-5 h-5" />} iconColor="text-violet-400" title={t.rangkTitle} />
             <div className="px-5 pb-5 space-y-3">
-              <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
+              <div className={`${isDark ? "bg-violet-900/30" : "bg-violet-50"} border border-violet-500/30 rounded-xl p-4 space-y-2`}>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-yellow-500">{t.rT1}</strong> {t.rT1rest}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-green-600">{t.rT2}</strong> {t.rT2rest}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-purple-600">{t.rT3}</strong> {t.rT3rest}</p>
                 <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-cyan-600">{t.rSiklis}</strong> {t.rSiklisRest}</p>
               </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                <p className="font-body text-sm text-yellow-200">{t.tips}</p>
+                <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"}`}>{t.tips}</p>
               </div>
             </div>
           </div>

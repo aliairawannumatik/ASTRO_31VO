@@ -477,44 +477,45 @@ const ApotemaDetailSVG = ({ caption, ariaLabel }: { caption: string; ariaLabel: 
 );
 
 /* ─── Slide factory ──────────────────────────────────────── */
-function makeSlides(t: T) {
+function makeSlides(t: T, isDark: boolean) {
+  const bg = (dark: string, light: string) => isDark ? dark : light;
   return [
     {
       id: "pusat", emoji: "⭐", symbol: "O", color: "yellow",
-      borderColor: "border-yellow-500/40", bgColor: "bg-yellow-900/20",
-      textColor: "text-yellow-300", badgeColor: "bg-yellow-500/20 text-yellow-200",
+      borderColor: "border-yellow-500/40", bgColor: bg("bg-yellow-900/20", "bg-yellow-50"),
+      textColor: "text-yellow-300", badgeColor: bg("bg-yellow-500/20 text-yellow-200", "bg-yellow-100 text-yellow-700"),
       title: t.pusat_title, desc: t.pusat_desc, keyFact: t.pusat_keyFact,
       svg: <PusatSVG caption={t.pusat_caption} ariaLabel={t.pusat_aria} />,
       formulaPrefix: null, formula: null,
     },
     {
       id: "jari-jari", emoji: "📏", symbol: "r", color: "green",
-      borderColor: "border-green-500/40", bgColor: "bg-green-900/20",
-      textColor: "text-green-300", badgeColor: "bg-green-500/20 text-green-200",
+      borderColor: "border-green-500/40", bgColor: bg("bg-green-900/20", "bg-green-50"),
+      textColor: "text-green-300", badgeColor: bg("bg-green-500/20 text-green-200", "bg-green-100 text-green-700"),
       title: t.jari_title, desc: t.jari_desc, keyFact: t.jari_keyFact,
       svg: <JariJariSVG caption={t.jari_caption} ariaLabel={t.jari_aria} />,
       formulaPrefix: null, formula: "r = \\frac{d}{2}",
     },
     {
       id: "diameter", emoji: "↔️", symbol: "d", color: "purple",
-      borderColor: "border-purple-500/40", bgColor: "bg-purple-900/20",
-      textColor: "text-purple-300", badgeColor: "bg-purple-500/20 text-purple-200",
+      borderColor: "border-purple-500/40", bgColor: bg("bg-purple-900/20", "bg-purple-50"),
+      textColor: "text-purple-300", badgeColor: bg("bg-purple-500/20 text-purple-200", "bg-purple-100 text-purple-700"),
       title: t.diam_title, desc: t.diam_desc, keyFact: t.diam_keyFact,
       svg: <DiameterSVG caption={t.diam_caption} ariaLabel={t.diam_aria} />,
       formulaPrefix: null, formula: "d = 2r",
     },
     {
       id: "tali-busur", emoji: "📐", symbol: "AB", color: "orange",
-      borderColor: "border-orange-500/40", bgColor: "bg-orange-900/20",
-      textColor: "text-orange-300", badgeColor: "bg-orange-500/20 text-orange-200",
+      borderColor: "border-orange-500/40", bgColor: bg("bg-orange-900/20", "bg-orange-50"),
+      textColor: "text-orange-300", badgeColor: bg("bg-orange-500/20 text-orange-200", "bg-orange-100 text-orange-700"),
       title: t.tali_title, desc: t.tali_desc, keyFact: t.tali_keyFact,
       svg: <TaliBusurSVG caption={t.tali_caption} ariaLabel={t.tali_aria} />,
       formulaPrefix: null, formula: null,
     },
     {
       id: "busur", emoji: "🌈", symbol: "⌢AB", color: "cyan",
-      borderColor: "border-cyan-500/40", bgColor: "bg-cyan-900/20",
-      textColor: "text-cyan-300", badgeColor: "bg-cyan-500/20 text-cyan-200",
+      borderColor: "border-cyan-500/40", bgColor: bg("bg-cyan-900/20", "bg-cyan-50"),
+      textColor: "text-cyan-300", badgeColor: bg("bg-cyan-500/20 text-cyan-200", "bg-cyan-100 text-cyan-700"),
       title: t.busur_title, desc: t.busur_desc, keyFact: t.busur_keyFact,
       svg: <BusurSVG caption={t.busur_caption} ariaLabel={t.busur_aria} />,
       formulaPrefix: t.busur_formulaPrefix,
@@ -522,24 +523,24 @@ function makeSlides(t: T) {
     },
     {
       id: "juring", emoji: "🍕", symbol: "OAB", color: "pink",
-      borderColor: "border-pink-500/40", bgColor: "bg-pink-900/20",
-      textColor: "text-pink-300", badgeColor: "bg-pink-500/20 text-pink-200",
+      borderColor: "border-pink-500/40", bgColor: bg("bg-pink-900/20", "bg-pink-50"),
+      textColor: "text-pink-300", badgeColor: bg("bg-pink-500/20 text-pink-200", "bg-pink-100 text-pink-700"),
       title: t.juring_title, desc: t.juring_desc, keyFact: t.juring_keyFact,
       svg: <JuringSVG caption={t.juring_caption} ariaLabel={t.juring_aria} />,
       formulaPrefix: null, formula: "L_{sector} = \\frac{\\alpha}{360°} \\times \\pi r^2",
     },
     {
       id: "tembereng", emoji: "🌙", symbol: "—", color: "red",
-      borderColor: "border-red-500/40", bgColor: "bg-red-900/20",
-      textColor: "text-red-300", badgeColor: "bg-red-500/20 text-red-200",
+      borderColor: "border-red-500/40", bgColor: bg("bg-red-900/20", "bg-red-50"),
+      textColor: "text-red-300", badgeColor: bg("bg-red-500/20 text-red-200", "bg-red-100 text-red-700"),
       title: t.temb_title, desc: t.temb_desc, keyFact: t.temb_keyFact,
       svg: <TemberengSVG caption={t.temb_caption} ariaLabel={t.temb_aria} />,
       formulaPrefix: null, formula: "L_{seg} = L_{sector} - L_{\\triangle OAB}",
     },
     {
       id: "apotema", emoji: "📍", symbol: "OD ⊥ AB", color: "rose",
-      borderColor: "border-rose-500/40", bgColor: "bg-rose-900/20",
-      textColor: "text-rose-300", badgeColor: "bg-rose-500/20 text-rose-200",
+      borderColor: "border-rose-500/40", bgColor: bg("bg-rose-900/20", "bg-rose-50"),
+      textColor: "text-rose-300", badgeColor: bg("bg-rose-500/20 text-rose-200", "bg-rose-100 text-rose-700"),
       title: t.apo_title, desc: t.apo_desc, keyFact: t.apo_keyFact,
       svg: <ApotemaDetailSVG caption={t.apo_caption} ariaLabel={t.apo_aria} />,
       formulaPrefix: null, formula: "a^2 + \\left(\\frac{AB}{2}\\right)^2 = r^2",
@@ -551,7 +552,7 @@ function makeSlides(t: T) {
 const SlideCarousel = ({ t }: { t: T }) => {
   const { isDark } = useTheme();
   const [idx, setIdx] = useState(0);
-  const slides = makeSlides(t);
+  const slides = makeSlides(t, isDark);
   const slide = slides[idx];
 
   const prev = () => { playPopSound(); setIdx(i => (i - 1 + slides.length) % slides.length); };
@@ -650,12 +651,12 @@ const UnsurUnsurPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 pt-20 pb-12">
         <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">{t.h1}</h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.subtitle}</p>
+        <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>{t.subtitle}</p>
 
         <div className="flex flex-col gap-5 animate-slide-up">
 
           {/* Intro Banner */}
-          <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-xl px-5 py-4 flex items-start gap-3">
+          <div className={`${isDark ? "bg-cyan-900/20" : "bg-cyan-50"} border border-cyan-500/30 rounded-xl px-5 py-4 flex items-start gap-3`}>
             <Lightbulb className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
             <div>
               <p className="font-body text-sm font-semibold text-cyan-300 mb-1">{t.introTitle}</p>
@@ -674,7 +675,7 @@ const UnsurUnsurPage = () => {
             <SectionHeader id="contoh1" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-green-400" title={t.c1_header} />
             {open.includes("contoh1") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
+                <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-xl p-4`}>
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1_level}</p>
                   <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                     {t.c1_q}<InlineMath math="OA = 7"/>{t.c1_q2}
@@ -686,7 +687,7 @@ const UnsurUnsurPage = () => {
                   <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-purple-300">CD</strong>{t.c1_p2}</p>
                   <BlockMath math="d = 2r = 2 \times 7 = 14 \,\mathrm{cm}" />
                   <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>• <strong className="text-orange-300">AB</strong>{t.c1_p3}</p>
-                  <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3 mt-2">
+                  <div className={`${isDark ? "bg-green-900/30" : "bg-green-50"} border border-green-500/40 rounded-lg p-3 mt-2`}>
                     <p className="font-body text-sm text-green-300 text-center">{t.c1_check}</p>
                   </div>
                 </div>
@@ -699,7 +700,7 @@ const UnsurUnsurPage = () => {
             <SectionHeader id="contoh2" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-yellow-400" title={t.c2_header} />
             {open.includes("contoh2") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
+                <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-xl p-4`}>
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2_level}</p>
                   <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                     {t.c2_q}<InlineMath math="d = 4x - 2"/>{t.c2_q2}<InlineMath math="r = x + 5"/>{t.c2_q3}
@@ -713,8 +714,8 @@ const UnsurUnsurPage = () => {
                   <BlockMath math="2x = 12 \Rightarrow x = 6" />
                   <BlockMath math="r = 6 + 5 = 11 \,\mathrm{cm}" />
                   <BlockMath math="d = 4(6) - 2 = 22 \,\mathrm{cm}" />
-                  <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-yellow-200 text-center">{t.c2_check}</p>
+                  <div className={`${isDark ? "bg-yellow-900/30" : "bg-yellow-50"} border border-yellow-500/40 rounded-lg p-3`}>
+                    <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"} text-center`}>{t.c2_check}</p>
                   </div>
                 </div>
               </div>
@@ -726,7 +727,7 @@ const UnsurUnsurPage = () => {
             <SectionHeader id="contoh3" icon={<FlaskConical className="w-5 h-5" />} iconColor="text-red-400" title={t.c3_header} />
             {open.includes("contoh3") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
+                <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/40 rounded-xl p-4`}>
                   <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3_level}</p>
                   <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                     {t.c3_q}<InlineMath math="OD = 5"/>{t.c3_q2}
@@ -743,8 +744,8 @@ const UnsurUnsurPage = () => {
                   <BlockMath math="169 = 25 + DA^2 \Rightarrow DA^2 = 144 \Rightarrow DA = 12 \,\mathrm{cm}" />
                   <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{t.c3_p4}</p>
                   <BlockMath math="AB = 2 \times DA = 2 \times 12 = 24 \,\mathrm{cm}" />
-                  <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
-                    <p className="font-body text-sm text-red-200 text-center">{t.c3_check}</p>
+                  <div className={`${isDark ? "bg-red-900/30" : "bg-red-50"} border border-red-500/40 rounded-lg p-3`}>
+                    <p className={`font-body text-sm ${isDark ? "text-red-200" : "text-red-700"} text-center`}>{t.c3_check}</p>
                   </div>
                 </div>
               </div>
@@ -757,7 +758,7 @@ const UnsurUnsurPage = () => {
             {open.includes("rangkuman") && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {makeSlides(t).map(s => (
+                  {makeSlides(t, isDark).map(s => (
                     <div key={s.id} className={`rounded-lg p-3 border ${s.borderColor} ${s.bgColor}`}>
                       <p className={`font-body text-xs font-bold ${isDark ? "text-white" : "text-gray-800"}`}>{s.emoji} {s.title} <span className={`font-mono ${s.textColor}`}>({s.symbol})</span></p>
                       <p className={`font-body text-[11px] ${isDark ? "text-white/55" : "text-gray-600"} mt-0.5 leading-relaxed`}>{s.keyFact}</p>
@@ -765,7 +766,7 @@ const UnsurUnsurPage = () => {
                   ))}
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 mt-2">
-                  <p className="font-body text-sm text-yellow-200">{t.tips}</p>
+                  <p className={`font-body text-sm ${isDark ? "text-yellow-200" : "text-yellow-700"}`}>{t.tips}</p>
                 </div>
               </div>
             )}
