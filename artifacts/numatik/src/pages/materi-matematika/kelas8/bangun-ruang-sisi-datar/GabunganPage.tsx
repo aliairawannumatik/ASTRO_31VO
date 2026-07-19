@@ -1183,13 +1183,13 @@ export default function GabunganPage() {
                 </span>
                 <BlockMath math="V = p \cdot l \cdot t_1 + \tfrac{1}{3} \cdot p \cdot l \cdot t_2"/>
               </div>
-              <div className="flex items-start gap-2 bg-amber-950/40 rounded p-2">
-                <span className="text-amber-300 font-bold text-[11px] min-w-fit">
+              <div className={`flex items-start gap-2 ${isDark?"bg-amber-950/40":"bg-amber-50"} rounded p-2`}>
+                <span className={`${isDark?"text-amber-300":"text-amber-700"} font-bold text-[11px] min-w-fit`}>
                   {lang === "en" ? "Cube + Prism △:" : lang === "ja" ? "立方体 + 三角柱:" : "Kubus + Prisma △:"}
                 </span>
                 <BlockMath math="V = s^3 + L_{\triangle} \cdot t_p"/>
               </div>
-              <div className="flex items-start gap-2 bg-emerald-950/40 rounded p-2">
+              <div className={`flex items-start gap-2 ${isDark?"bg-emerald-950/40":"bg-emerald-50"} rounded p-2`}>
                 <span className={`${isDark?"text-emerald-300":"text-emerald-700"} font-bold text-[11px] min-w-fit`}>
                   {lang === "en" ? "2 Boxes:" : lang === "ja" ? "2つの直方体:" : "2 Balok:"}
                 </span>
@@ -1240,7 +1240,7 @@ export default function GabunganPage() {
               : "Diketahui: Balok (p × l × t₁) + Limas segiempat (alas sama, tinggi t₂)"}
             </p>
             <div className="space-y-2">
-              <p className="text-blue-300 font-semibold">{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
+              <p className={`${isDark?"text-blue-300":"text-blue-700"} font-semibold`}>{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
               <BlockMath math="V = p \cdot l \cdot t_1 + \frac{1}{3} \cdot p \cdot l \cdot t_2"/>
               <p className={`${isDark?"text-orange-300":"text-orange-600"} font-semibold`}>{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
               <BlockMath math="L = L_{\text{base}} + 4 \cdot L_{\text{side}} + 4 \cdot L_{\triangle}"/>
@@ -1271,7 +1271,7 @@ export default function GabunganPage() {
               : "Diketahui: Kubus (s) + Atap Prisma Segitiga"}
             </p>
             <div className="space-y-2">
-              <p className="text-blue-300 font-semibold">{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
+              <p className={`${isDark?"text-blue-300":"text-blue-700"} font-semibold`}>{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
               <BlockMath math="V = s^3 + L_{\triangle} \times t_p"/>
               <p className={`${isDark?"text-orange-300":"text-orange-600"} font-semibold`}>{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
               <BlockMath math="L = L_a + 4 \cdot L_{\text{side}} + 2 \cdot L_{\triangle} + 2 \cdot L_m"/>
@@ -1301,7 +1301,7 @@ export default function GabunganPage() {
               : lang === "ja" ? "2つの直方体（段差形 / L字形）:"
               : "Dua balok yang disambung (undakan / L-shape):"}
             </p>
-            <p className="text-blue-300 font-semibold">{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
+            <p className={`${isDark?"text-blue-300":"text-blue-700"} font-semibold`}>{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
             <BlockMath math="V = V_{b_1} + V_{b_2}"/>
             <p className={`${isDark?"text-orange-300":"text-orange-600"} font-semibold`}>{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
             <p className={isDark ? "text-white/70" : "text-gray-700"}>
