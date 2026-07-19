@@ -561,7 +561,9 @@ const PiAnimationSVG = ({ t }: { t: T }) => {
 };
 
 /* ─── Keliling Luas Circles SVG ──────────────────────────── */
-const KelilingLuasCirclesSVG = ({ t }: { t: T }) => (
+const KelilingLuasCirclesSVG = ({ t }: { t: T }) => {
+  const { isDark } = useTheme();
+  return (
   <div className="w-full">
     <style>{`
       @keyframes kelilingPulse {
@@ -673,7 +675,8 @@ const KelilingLuasCirclesSVG = ({ t }: { t: T }) => (
 
     </div>
   </div>
-);
+  );
+};
 
 /* ─── Main Page ──────────────────────────────────────────── */
 const KelilingLuasPage = () => {
