@@ -11,6 +11,7 @@ import SisiTigaPrismaAnimation from "@/components/SisiTigaPrismaAnimation";
 import TitikSudutTigaPrismaAnimation from "@/components/TitikSudutTigaPrismaAnimation";
 import JaringPrismaInteraktif from "@/components/JaringPrismaInteraktif";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ─────────────────────────────────────────────────────────────
    FACE LABEL HELPERS
@@ -1346,6 +1347,7 @@ type Ex = { level: string; color: string; bg: string; border: string; badgeBg: s
 
 const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: string; lang: string }) => {
   const [show, setShow] = useState(false);
+  const { isDark } = useTheme();
   const showLabel = lang === "en" ? "View Solution" : lang === "ja" ? "解答を見る" : "Lihat Pembahasan";
   const hideLabel = lang === "en" ? "Hide" : lang === "ja" ? "隠す" : "Sembunyikan";
   return (
@@ -1359,11 +1361,11 @@ const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: s
         {ex.question}
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
-        className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
+        className={`w-full flex items-center justify-between px-5 py-3 transition-colors cursor-pointer border-t ${isDark ? "bg-slate-800/60 hover:bg-slate-800/90 border-slate-700/50" : "bg-gray-100 hover:bg-gray-200 border-gray-200"}`}>
         <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLabel : showLabel}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
       </button>
-      {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
+      {show && <div className={`px-5 py-4 border-t ${isDark ? "bg-slate-900/60 border-slate-700/30" : "bg-white border-gray-200"}`}>{ex.answer}</div>}
     </div>
   );
 };
@@ -1374,6 +1376,7 @@ const ExampleCard = ({ ex, idx, prefix, lang }: { ex: Ex; idx: number; prefix: s
 const PrismaPage = () => {
   const navigate = useNavigate();
   const { language: lang } = useLanguage();
+  const { isDark } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   /* ── Translations ── */
@@ -1471,6 +1474,10 @@ const PrismaPage = () => {
   } as const;
 
   const t = translations[lang as keyof typeof translations] ?? translations.id;
+
+  const easy_props = { level: t.easy, color: isDark ? "text-green-400" : "text-green-700", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100" };
+  const med_props  = { level: t.medium, color: isDark ? "text-yellow-400" : "text-yellow-700", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100" };
+  const hard_props = { level: t.hard, color: isDark ? "text-red-400" : "text-red-700", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100" };
 
   /* ── Table data ── */
   const tableTypes = lang === "en"
@@ -1813,9 +1820,9 @@ const PrismaPage = () => {
   /* ── Example problems ── */
   const luasExamples: Ex[] = [
     {
-      level: t.easy, color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
+      ...easy_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <><p>A right triangular prism has legs of <InlineMath math="6\text{ cm}" /> and <InlineMath math="8\text{ cm}" />, and prism height <InlineMath math="10\text{ cm}" />.</p><p>Find the surface area!</p></>
           ) : lang === "ja" ? (
@@ -1827,30 +1834,30 @@ const PrismaPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <p className="text-green-400 font-semibold text-xs">
+          <p className={isDark ? "text-green-400 font-semibold text-xs" : "text-green-700 font-semibold text-xs"}>
             {lang === "en" ? "Step 1 — Identify the base triangle:" : lang === "ja" ? "ステップ1 — 底面の三角形:" : "Langkah 1 — Identifikasi alas segitiga:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
-            <p className="text-white/70">{lang === "en" ? "Sides: a=6, b=8, c=√(36+64)=10 cm" : lang === "ja" ? "辺: a=6, b=8, c=√(36+64)=10 cm" : "Sisi: a = 6, b = 8, c = √(6²+8²) = √100 = 10 cm"}</p>
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs space-y-1`}>
+            <p className={isDark ? "text-white/70" : "text-gray-700"}>{lang === "en" ? "Sides: a=6, b=8, c=√(36+64)=10 cm" : lang === "ja" ? "辺: a=6, b=8, c=√(36+64)=10 cm" : "Sisi: a = 6, b = 8, c = √(6²+8²) = √100 = 10 cm"}</p>
             <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 6 \times 8 = 24\text{ cm}^2" />
             <BlockMath math="K = 6 + 8 + 10 = 24\text{ cm}" />
           </div>
-          <p className="text-green-400 font-semibold text-xs">
+          <p className={isDark ? "text-green-400 font-semibold text-xs" : "text-green-700 font-semibold text-xs"}>
             {lang === "en" ? "Step 2 — Surface area:" : lang === "ja" ? "ステップ2 — 表面積:" : "Langkah 2 — Luas permukaan:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="L = 2 \times 24 + 24 \times 10 = 48 + 240 = 288\text{ cm}^2" />
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
-            <p className="text-green-300 font-semibold">✅ {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"} = <InlineMath math="288\text{ cm}^2" /></p>
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-3" : "bg-green-50 border border-green-300 rounded p-3"}>
+            <p className={`${isDark ? "text-green-300" : "text-green-700"} font-semibold`}>✅ {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"} = <InlineMath math="288\text{ cm}^2" /></p>
           </div>
         </div>
       ),
     },
     {
-      level: t.medium, color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+      ...med_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <><p>A camping tent is a triangular prism with equilateral triangular base of side <InlineMath math="4\text{ m}" />, triangle height <InlineMath math="3.46\text{ m}" />, and tent length <InlineMath math="6\text{ m}" />.</p><p>How much fabric is needed to cover the entire tent (including both ends)?</p></>
           ) : lang === "ja" ? (
@@ -1862,21 +1869,21 @@ const PrismaPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs space-y-2`}>
             <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 4 \times 3{,}46 = 6{,}92\text{ m}^2" />
             <BlockMath math="K = 3 \times 4 = 12\text{ m}" />
             <BlockMath math="L = 2 \times 6{,}92 + 12 \times 6 = 13{,}84 + 72 = 85{,}84\text{ m}^2" />
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3">
-            <p className="text-yellow-300 font-semibold">✅ {lang === "en" ? "Fabric area" : lang === "ja" ? "布の面積" : "Luas kain"} = <InlineMath math="85{,}84\text{ m}^2" /></p>
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3" : "bg-yellow-50 border border-yellow-300 rounded p-3"}>
+            <p className={`${isDark ? "text-yellow-300" : "text-yellow-700"} font-semibold`}>✅ {lang === "en" ? "Fabric area" : lang === "ja" ? "布の面積" : "Luas kain"} = <InlineMath math="85{,}84\text{ m}^2" /></p>
           </div>
         </div>
       ),
     },
     {
-      level: t.hard, color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
+      ...hard_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <><p>A house roof is a triangular prism with an isosceles triangular cross-section: base <InlineMath math="8\text{ m}" />, slant side <InlineMath math="5\text{ m}" />, prism length <InlineMath math="12\text{ m}" />.</p><p>If 1 m² of tile costs <InlineMath math="\$20" />, find the cost for <strong>both sloped sides only</strong>.</p></>
           ) : lang === "ja" ? (
@@ -1888,32 +1895,32 @@ const PrismaPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <p className="text-red-400 font-semibold text-xs">
+          <p className={isDark ? "text-red-400 font-semibold text-xs" : "text-red-700 font-semibold text-xs"}>
             {lang === "en" ? "Step 1 — Triangle height:" : lang === "ja" ? "ステップ1 — 三角形の高さ:" : "Langkah 1 — Tinggi segitiga alas:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="t_{\triangle} = \sqrt{5^2 - 4^2} = \sqrt{25-16} = 3\text{ m}" />
           </div>
-          <p className="text-red-400 font-semibold text-xs">
+          <p className={isDark ? "text-red-400 font-semibold text-xs" : "text-red-700 font-semibold text-xs"}>
             {lang === "en" ? "Step 2 — Area of 2 sloped faces:" : lang === "ja" ? "ステップ2 — 斜面2面の面積:" : "Langkah 2 — Luas 2 sisi miring atap:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="L_m = 2 \times (5 \times 12) = 2 \times 60 = 120\text{ m}^2" />
           </div>
-          <p className="text-red-400 font-semibold text-xs">
+          <p className={isDark ? "text-red-400 font-semibold text-xs" : "text-red-700 font-semibold text-xs"}>
             {lang === "en" ? "Step 3 — Tile cost:" : lang === "ja" ? "ステップ3 — 費用:" : "Langkah 3 — Biaya genteng:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math={
               lang === "en" ? "\\text{Cost} = 120 \\times 20 = \\$2{,}400"
               : lang === "ja" ? "\\text{費用} = 120 \\times 2{,}500 = ¥300{,}000"
               : "\\text{Biaya} = 120 \\times 180.000 = Rp\\,21.600.000"
             } />
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-            <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Sloped area" : lang === "ja" ? "斜面積" : "Luas kedua sisi miring"} = 120 m²</p>
-            <p className="text-white/80">• {lang === "en" ? "Tile cost" : lang === "ja" ? "瓦費用" : "Biaya genteng"} = <strong className="text-yellow-300">
+          <div className={`${isDark ? "bg-red-950/60 border-red-700/40" : "bg-red-50 border-red-300"} border rounded p-3 text-xs space-y-0.5`}>
+            <p className={`${isDark ? "text-red-300" : "text-red-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Sloped area" : lang === "ja" ? "斜面積" : "Luas kedua sisi miring"} = 120 m²</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Tile cost" : lang === "ja" ? "瓦費用" : "Biaya genteng"} = <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>
               {cur("Rp 21.600.000", "$2,400", "¥300,000")}
             </strong></p>
           </div>
@@ -1924,9 +1931,9 @@ const PrismaPage = () => {
 
   const volExamples: Ex[] = [
     {
-      level: t.easy, color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
+      ...easy_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <><p>A chocolate bar is a triangular prism with equilateral triangle base: side <InlineMath math="3\text{ cm}" />, triangle height <InlineMath math="2.6\text{ cm}" />, length <InlineMath math="15\text{ cm}" />.</p><p>Find the volume of the chocolate!</p></>
           ) : lang === "ja" ? (
@@ -1938,45 +1945,45 @@ const PrismaPage = () => {
       ),
       answer: (
         <div className="space-y-2 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs space-y-2`}>
             <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 3 \times 2{,}6 = 3{,}9\text{ cm}^2" />
             <BlockMath math="V = L_{\triangle} \times t = 3{,}9 \times 15 = 58{,}5\text{ cm}^3" />
           </div>
-          <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
-            <p className="text-green-300 font-semibold text-xs">✅ {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} = <InlineMath math="58{,}5\text{ cm}^3" /></p>
+          <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-2" : "bg-green-50 border border-green-300 rounded p-2"}>
+            <p className={`${isDark ? "text-green-300" : "text-green-700"} font-semibold text-xs`}>✅ {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} = <InlineMath math="58{,}5\text{ cm}^3" /></p>
           </div>
         </div>
       ),
     },
     {
-      level: t.medium, color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+      ...med_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <><p>A water channel is a prism with a trapezoidal base: parallel sides <InlineMath math="40\text{ cm}" /> and <InlineMath math="20\text{ cm}" />, trap height <InlineMath math="15\text{ cm}" />, channel length <InlineMath math="200\text{ cm}" />.</p><p>How many liters can it hold when full? (1 L = 1,000 cm³)</p></>
           ) : lang === "ja" ? (
             <><p>水路が台形柱で、平行辺 <InlineMath math="40\text{ cm}" /> と <InlineMath math="20\text{ cm}" />、台形高さ <InlineMath math="15\text{ cm}" />、長さ <InlineMath math="200\text{ cm}" />。</p><p>満杯で何リットル? (1 L = 1,000 cm³)</p></>
           ) : (
-            <><p>Sebuah saluran air berbentuk prisma dengan alas trapesium: sisi sejajar <InlineMath math="40\text{ cm}" /> dan <InlineMath math="20\text{ cm}" />, tinggi trapesium <InlineMath math="15\text{ cm}" />, panjang saluran <InlineMath math="200\text{ cm}" />.</p><p>Berapa liter air yang dapat ditampung saluran tersebut jika penuh?</p><p className="text-xs text-white/60">(1 liter = 1.000 cm³)</p></>
+            <><p>Sebuah saluran air berbentuk prisma dengan alas trapesium: sisi sejajar <InlineMath math="40\text{ cm}" /> dan <InlineMath math="20\text{ cm}" />, tinggi trapesium <InlineMath math="15\text{ cm}" />, panjang saluran <InlineMath math="200\text{ cm}" />.</p><p>Berapa liter air yang dapat ditampung saluran tersebut jika penuh?</p><p className={`text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>(1 liter = 1.000 cm³)</p></>
           )}
         </div>
       ),
       answer: (
         <div className="space-y-2 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs space-y-2`}>
             <BlockMath math="L_t = \tfrac{1}{2}(40+20) \times 15 = \tfrac{1}{2} \times 60 \times 15 = 450\text{ cm}^2" />
             <BlockMath math="V = 450 \times 200 = 90.000\text{ cm}^3 = 90\text{ L}" />
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
-            <p className="text-yellow-300 font-semibold text-xs">✅ {lang === "en" ? "Water volume" : lang === "ja" ? "水の体積" : "Volume air"} = 90 {lang === "en" ? "liters" : lang === "ja" ? "リットル" : "liter"}</p>
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-2" : "bg-yellow-50 border border-yellow-300 rounded p-2"}>
+            <p className={`${isDark ? "text-yellow-300" : "text-yellow-700"} font-semibold text-xs`}>✅ {lang === "en" ? "Water volume" : lang === "ja" ? "水の体積" : "Volume air"} = 90 {lang === "en" ? "liters" : lang === "ja" ? "リットル" : "liter"}</p>
           </div>
         </div>
       ),
     },
     {
-      level: t.hard, color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
+      ...hard_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <><p>A fish pond is a right triangular prism with legs <InlineMath math="1.5\text{ m}" /> and <InlineMath math="2\text{ m}" />, and pond length <InlineMath math="4\text{ m}" />.</p><p>The pond is filled to <InlineMath math="\frac{3}{4}" /> full. If water density is <InlineMath math="1{,}000\text{ kg/m}^3" />, how many tons does the water weigh?</p></>
           ) : lang === "ja" ? (
@@ -1988,29 +1995,29 @@ const PrismaPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <p className="text-red-400 font-semibold text-xs">
+          <p className={isDark ? "text-red-400 font-semibold text-xs" : "text-red-700 font-semibold text-xs"}>
             {lang === "en" ? "Step 1 — Total volume:" : lang === "ja" ? "ステップ1 — 全体積:" : "Langkah 1 — Volume total:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 1{,}5 \times 2 = 1{,}5\text{ m}^2" />
             <BlockMath math="V_t = 1{,}5 \times 4 = 6\text{ m}^3" />
           </div>
-          <p className="text-red-400 font-semibold text-xs">
+          <p className={isDark ? "text-red-400 font-semibold text-xs" : "text-red-700 font-semibold text-xs"}>
             {lang === "en" ? "Step 2 — Water volume (¾ full):" : lang === "ja" ? "ステップ2 — 水の体積(¾):" : "Langkah 2 — Volume air (¾ penuh):"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="V_w = \tfrac{3}{4} \times 6 = 4{,}5\text{ m}^3" />
           </div>
-          <p className="text-red-400 font-semibold text-xs">
+          <p className={isDark ? "text-red-400 font-semibold text-xs" : "text-red-700 font-semibold text-xs"}>
             {lang === "en" ? "Step 3 — Weight of water:" : lang === "ja" ? "ステップ3 — 水の重さ:" : "Langkah 3 — Berat air:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-50 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="m = \rho \times V = 1.000 \times 4{,}5 = 4.500\text{ kg} = 4{,}5\text{ ton}" />
           </div>
-          <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
-            <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Water volume" : lang === "ja" ? "水の体積" : "Volume air"} = 4.5 m³</p>
-            <p className="text-white/80">• {lang === "en" ? "Water weight" : lang === "ja" ? "水の重さ" : "Berat air"} = <strong className="text-yellow-300">4.5 {lang === "en" ? "tons" : lang === "ja" ? "トン" : "ton"}</strong></p>
+          <div className={`${isDark ? "bg-red-950/60 border-red-700/40" : "bg-red-50 border-red-300"} border rounded p-3 text-xs space-y-0.5`}>
+            <p className={`${isDark ? "text-red-300" : "text-red-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Water volume" : lang === "ja" ? "水の体積" : "Volume air"} = 4.5 m³</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Water weight" : lang === "ja" ? "水の重さ" : "Berat air"} = <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>4.5 {lang === "en" ? "tons" : lang === "ja" ? "トン" : "ton"}</strong></p>
           </div>
         </div>
       ),
