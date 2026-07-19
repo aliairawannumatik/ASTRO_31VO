@@ -1,0 +1,50 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/. 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+MASALAH: Banyak halaman punya background hardcoded gelap/hitam 
+(bg-slate-800/900, fill hex gelap di SVG, backgroundColor inline hex 
+gelap, atau className bg-gradient-to-br dengan warna gelap yang tidak 
+efektif di elemen SVG) yang tidak berubah mengikuti tema, sehingga di 
+tema terang teks dan elemen jadi susah dibaca.
+
+Sudah diperbaiki sebelumnya dengan pola conditional isDark yang konsisten 
+di banyak file, termasuk topik Persamaan Garis Lurus secara lengkap. 
+CATATAN PENTING dari perbaikan sebelumnya: Tailwind gradient className 
+(bg-gradient-to-br) TIDAK reliable di elemen <svg> — kalau menemukan pola 
+ini di dalam SVG, ganti ke inline style seperti: 
+style={{ background: isDark ? "rgba(10,18,35,0.90)" : "rgba(241,245,249,0.95)" }}
+
+Buka salah satu file yang sudah diperbaiki (misal PGLGradientInteractive.tsx 
+atau GrafikPGLPage.tsx) sebagai REFERENSI pola warna yang benar — jangan 
+bikin skema warna baru, ikuti yang sudah ada.
+
+TUGAS: Perbaiki SEMUA hardcoded background gelap di 6 halaman berikut 
+(src/pages/materi-matematika/kelas8/teorema-pythagoras/):
+- PembuktianPage.tsx (43 baris bermasalah)
+- TriplePythagorasPage.tsx (27 baris bermasalah)
+- JenisSegitigaPage.tsx (11 baris bermasalah)
+- SudutKhususPage.tsx (10 baris bermasalah)
+- MasalahKontekstualPage.tsx (9 baris bermasalah)
+- MenghitungPanjangPage.tsx (5 baris bermasalah)
+
+ATURAN PERBAIKAN:
+1. Untuk Tailwind className (bg-slate-8xx/9xx dst): tambahkan conditional 
+   isDark, gunakan warna terang yang serasi (pastel/soft).
+2. Untuk SVG fill/stroke/background hex gelap: buat conditional juga, 
+   PERHATIKAN kalau ada bg-gradient-to-br di dalam SVG — ganti ke inline 
+   style seperti contoh di atas, jangan pakai Tailwind gradient class.
+3. Cek juga text-white/* di dalam container yang baru dilterangi — ganti 
+   ke warna teks gelap yang kontras (seperti text-gray-800, text-sky-900, 
+   dst sesuai konteks).
+4. JANGAN ubah logika interaktif (pembuktian, kalkulasi tripel Pythagoras) 
+   — HANYA warna.
+5. JANGAN sentuh file lain di luar 6 file ini.
+
+Setelah selesai:
+6. Jalankan TypeScript check dan build lokal, pastikan 0 error.
+7. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya per file (ringkas).
