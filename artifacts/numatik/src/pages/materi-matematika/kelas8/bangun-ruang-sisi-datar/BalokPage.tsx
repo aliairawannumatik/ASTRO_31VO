@@ -2116,9 +2116,9 @@ const BalokPage = () => {
           </div>
           <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
             <p className={`${isDark ? "text-red-300" : "text-red-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Paint area = 84 m²" : lang === "ja" ? "塗装面積 = 84 m²" : "Luas yang dicat = 84 m²"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Cans needed = 7" : lang === "ja" ? "必要な缶数 = 7缶" : "Kaleng cat = 7 buah"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Total cost = " : lang === "ja" ? "合計費用 = " : "Total biaya = "}<strong className="text-yellow-300">{lang === "en" ? "$59.50" : lang === "ja" ? "¥5,950" : "Rp 595.000"}</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Paint area = 84 m²" : lang === "ja" ? "塗装面積 = 84 m²" : "Luas yang dicat = 84 m²"}</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Cans needed = 7" : lang === "ja" ? "必要な缶数 = 7缶" : "Kaleng cat = 7 buah"}</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Total cost = " : lang === "ja" ? "合計費用 = " : "Total biaya = "}<strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>{lang === "en" ? "$59.50" : lang === "ja" ? "¥5,950" : "Rp 595.000"}</strong></p>
           </div>
         </div>
       ),
@@ -2238,9 +2238,9 @@ const BalokPage = () => {
           </div>
           <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
             <p className={`${isDark ? "text-red-300" : "text-red-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Sand volume = 15 m³" : lang === "ja" ? "砂の体積 = 15 m³" : "Volume pasir = 15 m³"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Sand mass = 24 tonnes" : lang === "ja" ? "砂の質量 = 24トン" : "Massa pasir = 24 ton"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Truck is" : lang === "ja" ? "トラックは" : "Truk"} <strong className="text-red-400">{lang === "en" ? "overloaded" : lang === "ja" ? "過積載" : "kelebihan muatan"}</strong> {lang === "en" ? "by" : lang === "ja" ? "で" : "sebesar"} <strong className="text-yellow-300">4 {lang === "en" ? "tonnes" : lang === "ja" ? "トン" : "ton"}</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Sand volume = 15 m³" : lang === "ja" ? "砂の体積 = 15 m³" : "Volume pasir = 15 m³"}</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Sand mass = 24 tonnes" : lang === "ja" ? "砂の質量 = 24トン" : "Massa pasir = 24 ton"}</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Truck is" : lang === "ja" ? "トラックは" : "Truk"} <strong className={isDark ? "text-red-400" : "text-red-700"}>{lang === "en" ? "overloaded" : lang === "ja" ? "過積載" : "kelebihan muatan"}</strong> {lang === "en" ? "by" : lang === "ja" ? "で" : "sebesar"} <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>4 {lang === "en" ? "tonnes" : lang === "ja" ? "トン" : "ton"}</strong></p>
           </div>
         </div>
       ),
@@ -2324,8 +2324,8 @@ const BalokPage = () => {
           </div>
           <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-2 text-xs space-y-0.5" : "bg-yellow-50 border border-yellow-300 rounded p-2 text-xs space-y-0.5"}>
             <p className={`${isDark ? "text-yellow-300" : "text-yellow-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
-            <p className="text-white/80">• t = <strong className="text-yellow-300">7 cm</strong></p>
-            <p className="text-white/80">• L = <strong className="text-yellow-300">562 cm²</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• t = <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>7 cm</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• L = <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>562 cm²</strong></p>
           </div>
         </div>
       ),
@@ -2380,9 +2380,9 @@ const BalokPage = () => {
           </div>
           <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-2 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-2 text-xs space-y-0.5"}>
             <p className={`${isDark ? "text-red-300" : "text-red-700"} font-semibold`}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え：" : "Jawaban:"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Dimensions" : lang === "ja" ? "寸法" : "Dimensi"}: <strong className="text-yellow-300">18 cm × 12 cm × 6 cm</strong></p>
-            <p className="text-white/80">• {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"}: <strong className="text-yellow-300">792 cm²</strong></p>
-            <p className="text-white/80">• {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"}: <strong className="text-yellow-300">1,296 cm³</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Dimensions" : lang === "ja" ? "寸法" : "Dimensi"}: <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>18 cm × 12 cm × 6 cm</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"}: <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>792 cm²</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"}: <strong className={isDark ? "text-yellow-300" : "text-yellow-700"}>1,296 cm³</strong></p>
           </div>
           <div className="bg-cyan-950/40 border border-cyan-700/30 rounded p-2 text-xs text-cyan-200">
             💡 <strong>{lang === "en" ? "Check:" : lang === "ja" ? "確認：" : "Cek:"}</strong> <InlineMath math="4(18+12+6) = 4 \times 36 = 144\text{ cm}" /> ✓
