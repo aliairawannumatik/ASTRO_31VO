@@ -1,0 +1,45 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/). 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+Sudah diperbaiki sebelumnya dengan pola conditional isDark yang konsisten, 
+termasuk LimasPage.tsx di topik Bangun Ruang Sisi Datar (file paling mirip 
+strukturnya). Buka LimasPage.tsx sebagai REFERENSI pola warna yang benar.
+
+CATATAN PENTING — INI BAGIAN YANG PALING SERING TERLEWAT (di LimasPage 
+butuh 2 sesi karena bagian ini kelewat di scan pertama):
+"Answer result boxes" / kotak soal-jawaban berdasarkan level kesulitan 
+(Mudah/Sedang/Sulit) — biasanya berupa objek data (misal namaVariabel[0], 
+[1], [2] untuk tiap level) dengan properti bg, border, badgeBg berwarna 
+hijau/kuning/merah hardcoded (bg-green-950/900, bg-red-950/900, dst) 
+TANPA isDark. Juga cek teks warna hasil jawaban (text-green-300, 
+text-yellow-300, text-red-300) yang terlalu terang untuk background 
+terang — perlu jadi text-*-700 di tema terang.
+
+TUGAS: Di file src/pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/KubusPage.tsx:
+
+1. Cari SECARA EKSPLISIT semua objek data contoh/soal (bukan scan 
+   className JSX biasa dulu) — biasanya nama variabel seperti 
+   *Examples[0], *Examples[1], *Examples[2] atau serupa, yang berisi 
+   properti bg/border/badgeBg untuk level Mudah/Sedang/Sulit.
+
+2. Perbaiki semua objek data ini dengan conditional isDark, ikuti pola 
+   persis yang dipakai di luasExamples/volExamples pada LimasPage.tsx 
+   (green untuk Mudah, warna tengah untuk Sedang, red untuk Sulit).
+
+3. Cari dan perbaiki semua "answer result box" teks (text-green-300, 
+   text-yellow-300, text-red-300, dst) yang muncul di bagian hasil 
+   jawaban soal — jadi text-*-700 di tema terang.
+
+4. JANGAN sentuh bagian lain dari file ini dulu (SVG diagram 3D, 
+   className umum lainnya) — itu akan dikerjakan di sesi terpisah.
+
+5. Verifikasi TypeScript check per-file (0 error).
+
+6. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya, sebutkan berapa banyak objek data dan teks yang 
+diperbaiki.
