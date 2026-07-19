@@ -1,0 +1,48 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/). 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+Sudah diperbaiki sebelumnya dengan pola conditional isDark yang konsisten 
+di semua file topik Bangun Ruang Sisi Datar (LimasPage.tsx, KubusPage.tsx, 
+BalokPage.tsx, PrismaPage.tsx — semua tuntas). Buka salah satu file ini 
+sebagai REFERENSI pola warna yang benar — jangan bikin skema warna baru.
+
+CATATAN PENTING dari pengalaman file-file sebelumnya:
+1. "Answer result boxes" / kotak soal-jawaban level Mudah/Sedang/Sulit 
+   (objek data seperti *Examples[0/1/2] atau easy/med/hard_props) paling 
+   sering terlewat di scan pertama — cari SECARA EKSPLISIT dulu sebelum 
+   scan className JSX biasa.
+2. Teks bersarang di dalam <strong> tag dan body text di dalam kotak 
+   jawaban sering terlewat juga — lakukan scan ulang kedua khusus 
+   untuk ini.
+3. Tailwind gradient className (bg-gradient-to-br) TIDAK reliable di 
+   elemen <svg> — ganti ke inline style: style={{ background: isDark 
+   ? "rgba(10,18,35,0.90)" : "rgba(241,245,249,0.95)" }}
+4. Fill warna SVG label kontras di dark tapi INVISIBLE di background 
+   putih — ganti ke shade lebih pekat di tema terang.
+5. Fill "white" di dalam elemen <mask> SVG adalah semantik mask — 
+   JANGAN diubah.
+
+TUGAS: Perbaiki SEMUA hardcoded background gelap (27 baris bermasalah) 
+di file src/pages/materi-matematika/kelas8/bangun-ruang-sisi-datar-gabungan/GabunganPage.tsx 
+(atau bangun-ruang-sisi-datar/GabunganPage.tsx — sesuaikan lokasi file 
+yang sebenarnya di project).
+
+Kerjakan berurutan dalam 1 sesi (file ini kecil, ~27 baris):
+1. Cari dan perbaiki objek data soal/answer boxes dulu (poin 1-2 di atas).
+2. Perbaiki className JSX umum lainnya.
+3. Perbaiki elemen <svg> diagram 3D gabungan bangun ruang (kalau ada).
+4. Lakukan scan ulang untuk elemen bersarang yang mungkin terlewat.
+
+Setelah selesai:
+5. Verifikasi brace balance, TypeScript check per-file (0 error), dan 
+   render dev server bersih.
+6. Scan final menyeluruh: pastikan tidak ada hardcode warna gelap 
+   tersisa di seluruh file.
+7. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya, dan konfirmasi eksplisit "seluruh GabunganPage.tsx 
+sudah bersih, tidak ada hardcode tersisa".
