@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import JaringLimasInteraktif from "@/components/JaringLimasInteraktif";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ─────────────────────────────────────────────────────────────
    SVG 3D MATH UTILITIES
@@ -41,6 +42,7 @@ const makeLimasFaces = (n: number, baseLabel: string) => {
 };
 
 const RotatingLimas3D = ({ n, label, r = 40, h = 65, baseLabel }: { n: number; label: string; r?: number; h?: number; baseLabel: string }) => {
+  const { isDark } = useTheme();
   const [rotX, setRotX] = useState(-22);
   const [rotY, setRotY] = useState(n * 40);
   const [isDragging, setIsDragging] = useState(false);
@@ -118,11 +120,11 @@ const RotatingLimas3D = ({ n, label, r = 40, h = 65, baseLabel }: { n: number; l
 
   return (
     <div
-      className="flex flex-col items-center bg-slate-900/60 border border-slate-700/50 rounded-xl py-2 px-1 select-none"
+      className={`flex flex-col items-center ${isDark ? "bg-slate-900/60 border border-slate-700/50" : "bg-gray-100 border border-gray-200"} rounded-xl py-2 px-1 select-none`}
       style={{ cursor: isDragging ? "grabbing" : "grab", flex:1, minWidth:0 }}
       onMouseDown={onMouseDown} onTouchStart={onTouchStart}
     >
-      <span className="text-white/70 font-body font-semibold mb-1" style={{ fontSize:10 }}>{label}</span>
+      <span className={isDark ? "text-white/70 font-body font-semibold mb-1" : "text-slate-600 font-body font-semibold mb-1"} style={{ fontSize:10 }}>{label}</span>
       <svg viewBox="0 0 170 176" style={{ width:"100%", maxWidth:160, overflow:"visible" }}>
         {facesWithDepth.map((f, i) => {
           const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
@@ -131,7 +133,7 @@ const RotatingLimas3D = ({ n, label, r = 40, h = 65, baseLabel }: { n: number; l
           return (
             <g key={i}>
               <polygon points={pts} fill={f.color} fillOpacity={1}
-                stroke="rgba(255,255,255,0.5)" strokeWidth={1.2} strokeLinejoin="round"/>
+                stroke={isDark ? "rgba(255,255,255,0.5)" : "rgba(30,41,59,0.35)"} strokeWidth={1.2} strokeLinejoin="round"/>
               <text x={cx+mx} y={cy+my+3} fill="var(--icon-color)" fontSize={7} fontFamily="monospace"
                 fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
                 style={{ pointerEvents:"none" }}>{f.label}</text>
@@ -144,6 +146,7 @@ const RotatingLimas3D = ({ n, label, r = 40, h = 65, baseLabel }: { n: number; l
 };
 
 const ThreeLimas = () => {
+  const { isDark } = useTheme();
   const { language: lang } = useLanguage();
   const autoHint = lang === "en" ? "Auto-rotating · Drag to rotate"
     : lang === "ja" ? "自動回転 · ドラッグで回転"
@@ -156,8 +159,8 @@ const ThreeLimas = () => {
   const baseLabel = lang === "en" ? "BASE" : lang === "ja" ? "底面" : "ALAS";
   const lateralLabel = lang === "en" ? "FACE Δ" : lang === "ja" ? "側面 Δ" : "SISI Δ";
   return (
-    <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2">
-      <p className="text-center text-white/40 font-body" style={{ fontSize:9 }}>{autoHint}</p>
+    <div className={isDark ? "bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2" : "bg-gray-100 border border-gray-200 rounded-xl p-3 space-y-2"}>
+      <p className={isDark ? "text-center text-white/40 font-body" : "text-center text-slate-500 font-body"} style={{ fontSize:9 }}>{autoHint}</p>
       <div className="flex gap-2">
         <RotatingLimas3D n={3} label={names[0]} r={38} h={65} baseLabel={baseLabel}/>
         <RotatingLimas3D n={4} label={names[1]} r={36} h={65} baseLabel={baseLabel}/>
@@ -167,7 +170,7 @@ const ThreeLimas = () => {
         {[["#3b82f6", baseLabel],["#ef4444", lateralLabel]].map(([c,l])=>(
           <div key={l} className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-sm" style={{ background:c }}/>
-            <span className="text-white/45 font-body" style={{ fontSize:9 }}>{l}</span>
+            <span className={isDark ? "text-white/45 font-body" : "text-slate-500 font-body"} style={{ fontSize:9 }}>{l}</span>
           </div>
         ))}
       </div>
@@ -195,6 +198,7 @@ const limasNgon = (cx: number, cy: number, rx: number, ry: number, n: number): L
 const limasPoly = (pts: Limas2DPoint[]) => pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
 
 const StandingLimasRusuk = ({ n, cx, name, rusukLabel, phase }: { n: number; cx: number; name: string; rusukLabel: string; phase: number }) => {
+  const { isDark } = useTheme();
   const base = limasNgon(cx, 148, 31, 13, n);
   const apex: Limas2DPoint = [cx, 42];
   const showAlas = phase === 0 || phase === 2;
@@ -210,7 +214,7 @@ const StandingLimasRusuk = ({ n, cx, name, rusukLabel, phase }: { n: number; cx:
         const fill = i % 2 === 0 ? "rgba(139,92,246,0.20)" : "rgba(59,130,246,0.16)";
         return <polygon key={`face-${i}`} points={limasPoly([p, p2, apex])} fill={fill} stroke="rgba(100,116,139,0.35)" strokeWidth="0.6" />;
       })}
-      <polygon points={limasPoly(base)} fill="rgba(15,23,42,0.65)" stroke="rgba(100,116,139,0.3)" strokeWidth="0.7" />
+      <polygon points={limasPoly(base)} fill={isDark ? "rgba(15,23,42,0.65)" : "rgba(241,245,249,0.90)"} stroke="rgba(100,116,139,0.3)" strokeWidth="0.7" />
       {base.map((p, i) => {
         const p2 = base[(i + 1) % n];
         return (
@@ -229,13 +233,14 @@ const StandingLimasRusuk = ({ n, cx, name, rusukLabel, phase }: { n: number; cx:
           strokeLinecap="round" className={showTegak ? "limas-rusuk-glow-tegak" : ""}/>
       ))}
       {[...base, apex].map(([x, y], i) => <circle key={`v-${i}`} cx={x.toFixed(1)} cy={y.toFixed(1)} r="2.2" fill="#cbd5e1" opacity="0.7" />)}
-      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0" fontFamily="sans-serif" fontWeight="bold">{name}</text>
-      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="monospace">{rusukLabel}</text>
+      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill={isDark ? "#e2e8f0" : "#1e293b"} fontFamily="sans-serif" fontWeight="bold">{name}</text>
+      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill={isDark ? "#94a3b8" : "#475569"} fontFamily="monospace">{rusukLabel}</text>
     </g>
   );
 };
 
 const StandingLimasSisi = ({ n, cx, name, sisiLabel, phase }: { n: number; cx: number; name: string; sisiLabel: string; phase: number }) => {
+  const { isDark } = useTheme();
   const base = limasNgon(cx, 148, 31, 13, n);
   const apex: Limas2DPoint = [cx, 42];
   const showAlas = phase === 0 || phase === 2;
@@ -261,23 +266,24 @@ const StandingLimasSisi = ({ n, cx, name, sisiLabel, phase }: { n: number; cx: n
         stroke={strokeAlas} strokeWidth={showAlas ? 1.5 : 0.6}
         className={showAlas ? "limas-sisi-glow-alas" : ""}/>
       {[...base, apex].map(([x, y], i) => <circle key={`v-${i}`} cx={x.toFixed(1)} cy={y.toFixed(1)} r="2" fill="#cbd5e1" opacity="0.6" />)}
-      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0" fontFamily="sans-serif" fontWeight="bold">{name}</text>
-      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="monospace">{sisiLabel}</text>
+      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill={isDark ? "#e2e8f0" : "#1e293b"} fontFamily="sans-serif" fontWeight="bold">{name}</text>
+      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill={isDark ? "#94a3b8" : "#475569"} fontFamily="monospace">{sisiLabel}</text>
     </g>
   );
 };
 
 const StandingLimasTitik = ({ n, cx, name, titikLabel, phase }: { n: number; cx: number; name: string; titikLabel: string; phase: number }) => {
+  const { isDark } = useTheme();
   const base = limasNgon(cx, 148, 31, 13, n);
   const apex: Limas2DPoint = [cx, 42];
   const showAlas = phase === 0 || phase === 2;
   const showPuncak = phase === 1 || phase === 2;
   return (
     <g>
-      {base.map((p, i) => <polygon key={`face-${i}`} points={limasPoly([p, base[(i + 1) % n], apex])} fill="rgba(51,65,85,0.30)" stroke="rgba(100,116,139,0.28)" strokeWidth="0.5" />)}
-      <polygon points={limasPoly(base)} fill="rgba(15,23,42,0.55)" stroke="#334155" strokeWidth="0.8" />
+      {base.map((p, i) => <polygon key={`face-${i}`} points={limasPoly([p, base[(i + 1) % n], apex])} fill={isDark ? "rgba(51,65,85,0.30)" : "rgba(148,163,184,0.20)"} stroke="rgba(100,116,139,0.28)" strokeWidth="0.5" />)}
+      <polygon points={limasPoly(base)} fill={isDark ? "rgba(15,23,42,0.55)" : "rgba(241,245,249,0.85)"} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8" />
       {base.map((p, i) => (
-        <line key={`e-${i}`} x1={p[0].toFixed(1)} y1={p[1].toFixed(1)} x2={apex[0].toFixed(1)} y2={apex[1].toFixed(1)} stroke="#334155" strokeWidth="0.8" />
+        <line key={`e-${i}`} x1={p[0].toFixed(1)} y1={p[1].toFixed(1)} x2={apex[0].toFixed(1)} y2={apex[1].toFixed(1)} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8" />
       ))}
       {base.map(([x, y], i) => (
         <circle key={`alas-${i}`} cx={x.toFixed(1)} cy={y.toFixed(1)}
@@ -288,8 +294,8 @@ const StandingLimasTitik = ({ n, cx, name, titikLabel, phase }: { n: number; cx:
       <circle cx={apex[0].toFixed(1)} cy={apex[1].toFixed(1)}
         r={showPuncak ? 6 : 2.8} fill={LIMAS_COMPARISON_COLORS.puncak}
         opacity={showPuncak ? 1 : 0.18} className={showPuncak ? "limas-titik-glow-puncak" : ""}/>
-      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0" fontFamily="sans-serif" fontWeight="bold">{name}</text>
-      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8" fontFamily="monospace">{titikLabel}</text>
+      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill={isDark ? "#e2e8f0" : "#1e293b"} fontFamily="sans-serif" fontWeight="bold">{name}</text>
+      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill={isDark ? "#94a3b8" : "#475569"} fontFamily="monospace">{titikLabel}</text>
     </g>
   );
 };
@@ -302,6 +308,7 @@ const LimasComparisonFrame = ({
   auto: boolean; setAuto: (auto: boolean) => void;
   children: React.ReactNode; caption: string;
 }) => {
+  const { isDark } = useTheme();
   const { language: lang } = useLanguage();
   const stopAuto = lang === "en" ? "⏸ Stop auto" : lang === "ja" ? "⏸ 自動停止" : "⏸ Berhenti otomatis";
   const startAuto = lang === "en" ? "▶ Auto play" : lang === "ja" ? "▶ 自動再生" : "▶ Putar otomatis";
@@ -321,7 +328,7 @@ const LimasComparisonFrame = ({
           </button>
         ))}
       </div>
-      <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
+      <div className={isDark ? "bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden" : "bg-white/90 border border-gray-200 rounded-xl overflow-hidden"}>
         <svg viewBox="0 0 340 218" className="w-full" style={{ maxHeight: 245 }}>
           <defs>
             <style>{`
@@ -339,8 +346,8 @@ const LimasComparisonFrame = ({
               .limas-titik-glow-puncak{animation:limasTitikPuncak 1.6s ease-in-out infinite 0.5s;}
             `}</style>
           </defs>
-          <line x1="113.5" y1="5" x2="113.5" y2="160" stroke="#1e293b" strokeWidth="1" />
-          <line x1="226.5" y1="5" x2="226.5" y2="160" stroke="#1e293b" strokeWidth="1" />
+          <line x1="113.5" y1="5" x2="113.5" y2="160" stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="1" />
+          <line x1="226.5" y1="5" x2="226.5" y2="160" stroke={isDark ? "#1e293b" : "#cbd5e1"} strokeWidth="1" />
           {children}
           <text x="170" y="213" textAnchor="middle" fontSize="8" fill="#facc15" fontFamily="monospace">{caption}</text>
         </svg>
@@ -348,10 +355,10 @@ const LimasComparisonFrame = ({
       <div className="rounded-lg px-4 py-2.5 text-xs font-body border flex items-start gap-2"
         style={{ borderColor: `${current.color}50`, backgroundColor: `${current.color}12` }}>
         <span className="font-bold whitespace-nowrap mt-0.5" style={{ color: current.color }}>{current.label}</span>
-        <span className="text-white/60">— {current.desc}</span>
+        <span className={isDark ? "text-white/60" : "text-slate-600"}>— {current.desc}</span>
       </div>
       <button onClick={() => setAuto(!auto)}
-        className="w-full text-xs font-body py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all">
+        className={isDark ? "w-full text-xs font-body py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all" : "w-full text-xs font-body py-1.5 rounded-lg border border-gray-300 text-slate-500 hover:text-slate-700 hover:border-gray-400 transition-all"}>
         {auto ? stopAuto : startAuto}
       </button>
     </div>
@@ -498,6 +505,7 @@ const TitikSudutTigaLimasAnimation = () => {
    INTERACTIVE LIMAS 3D
 ───────────────────────────────────────────────────────────── */
 const InteractiveLimas = () => {
+  const { isDark } = useTheme();
   const { language: lang } = useLanguage();
   const [rotX, setRotX] = useState(-28);
   const [rotY, setRotY] = useState(38);
@@ -553,8 +561,8 @@ const InteractiveLimas = () => {
   }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
-      <p className="text-white/60 text-xs text-center font-body">{dragHint}</p>
+    <div className={isDark ? "bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4" : "bg-white/90 border border-gray-200 rounded-xl p-4 space-y-4"}>
+      <p className={isDark ? "text-white/60 text-xs text-center font-body" : "text-slate-600 text-xs text-center font-body"}>{dragHint}</p>
       <div className="relative mx-auto flex items-center justify-center select-none overflow-visible"
         style={{ width: "100%", height: 300, cursor: isDragging ? "grabbing" : "grab" }}
         onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
@@ -608,7 +616,7 @@ const InteractiveLimas = () => {
         ].map(({ label, color }) => (
           <div key={label} className="flex items-center gap-1">
             <div className="w-3 h-3 rounded-sm" style={{ background: color }} />
-            <span className="text-white/50 text-[10px] font-body">{label}</span>
+            <span className={isDark ? "text-white/50 text-[10px] font-body" : "text-slate-500 text-[10px] font-body"}>{label}</span>
           </div>
         ))}
       </div>
@@ -620,6 +628,7 @@ const InteractiveLimas = () => {
    ANIMATED SVGs — UNSUR LIMAS
 ───────────────────────────────────────────────────────────── */
 const TitikSudutLimasSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const count  = lang === "en" ? "5 vertices"  : lang === "ja" ? "5 頂点" : "5 titik sudut";
   const apex   = lang === "en" ? "T = apex"    : lang === "ja" ? "T = 頂上" : "T = puncak";
   return (
@@ -649,13 +658,14 @@ const TitikSudutLimasSVG = ({ lang }: { lang: string }) => {
       <text x="86" y="116" fill="#f97316" fontSize="9" fontFamily="monospace">D</text>
       <text x="224" y="116" fill="#f97316" fontSize="9" fontFamily="monospace">C</text>
       <text x="145" y="46" fill="#eab308" fontSize="9" fontFamily="monospace" fontWeight="bold">T</text>
-      <text x="200" y="185" fill="#ffffff" fontSize="9" fontFamily="monospace">{count}</text>
+      <text x="200" y="185" fill={isDark ? "#ffffff" : "#1e293b"} fontSize="9" fontFamily="monospace">{count}</text>
       <text x="200" y="197" fill="#eab308" fontSize="9" fontFamily="monospace">{apex}</text>
     </svg>
   );
 };
 
 const RusukLimasSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const baseEdge  = lang === "en" ? "— Base edges (4)"   : lang === "ja" ? "— 底面の辺 (4)" : "— Rusuk alas (4)";
   const latEdge   = lang === "en" ? "— Lateral edges (4)": lang === "ja" ? "— 側面の辺 (4)" : "— Rusuk tegak (4)";
   const total     = lang === "en" ? "Total:"              : lang === "ja" ? "合計："         : "Total:";
@@ -678,17 +688,18 @@ const RusukLimasSVG = ({ lang }: { lang: string }) => {
       <line x1="180" y1="150" x2="140" y2="50" stroke="#f97316" strokeWidth="3" className="rt"/>
       <line x1="100" y1="120" x2="140" y2="50" stroke="#f97316" strokeWidth="3" className="rt"/>
       <line x1="220" y1="120" x2="140" y2="50" stroke="#f97316" strokeWidth="3" className="rt"/>
-      <polygon points="60,150 180,150 220,120 100,120" fill="rgba(30,41,59,0.6)" stroke="none"/>
+      <polygon points="60,150 180,150 220,120 100,120" fill={isDark ? "rgba(30,41,59,0.6)" : "rgba(241,245,249,0.90)"} stroke="none"/>
       <circle cx="140" cy="50" r="5" fill="#eab308"/>
       <text x="5" y="185" fill="#22d3ee" fontSize="9" fontFamily="monospace">{baseEdge}</text>
       <text x="5" y="197" fill="#f97316" fontSize="9" fontFamily="monospace">{latEdge}</text>
-      <text x="200" y="185" fill="#ffffff" fontSize="9" fontFamily="monospace">{total}</text>
+      <text x="200" y="185" fill={isDark ? "#ffffff" : "#1e293b"} fontSize="9" fontFamily="monospace">{total}</text>
       <text x="200" y="197" fill="#22d3ee" fontSize="9" fontFamily="monospace">{totalVal}</text>
     </svg>
   );
 };
 
 const SisiLimasSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const baseFace = lang === "en" ? "■ Base (quad)"    : lang === "ja" ? "■ 底面（四角形）" : "■ Alas segi-4";
   const latFaces = lang === "en" ? "▲ 4 lateral faces": lang === "ja" ? "▲ 4枚の側面"     : "▲ 4 bidang tegak";
   const total    = lang === "en" ? "Total:"            : lang === "ja" ? "合計："          : "Total:";
@@ -712,7 +723,7 @@ const SisiLimasSVG = ({ lang }: { lang: string }) => {
       <polygon points="100,120 60,150 140,50" fill="#eab308" className="se" fillOpacity="0.55"/>
       <text x="5" y="185" fill="#3b82f6" fontSize="9" fontFamily="monospace">{baseFace}</text>
       <text x="5" y="197" fill="#8b5cf6" fontSize="9" fontFamily="monospace">{latFaces}</text>
-      <text x="190" y="185" fill="#ffffff" fontSize="9" fontFamily="monospace">{total}</text>
+      <text x="190" y="185" fill={isDark ? "#ffffff" : "#1e293b"} fontSize="9" fontFamily="monospace">{total}</text>
       <text x="190" y="197" fill="#22d3ee" fontSize="9" fontFamily="monospace">{totalVal}</text>
     </svg>
   );
@@ -752,6 +763,7 @@ const ApotemaLimasSVG = ({ lang }: { lang: string }) => {
 };
 
 const PythagorasLimasSegitigaDetailSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const T = { x: 130, y: 32 }, A = { x: 100, y: 175 }, B = { x: 62, y: 112 }, C = { x: 196, y: 112 }, O = { x: 119, y: 133 }, M = { x: 148, y: 143 };
   const raMark = (Vx: number, Vy: number, d1x: number, d1y: number, d2x: number, d2y: number, sz = 8) => {
     const p1x = Vx + sz * d1x, p1y = Vy + sz * d1y, cx = p1x + sz * d2x, cy = p1y + sz * d2y, p2x = Vx + sz * d2x, p2y = Vy + sz * d2y;
@@ -783,10 +795,10 @@ const PythagorasLimasSegitigaDetailSVG = ({ lang }: { lang: string }) => {
     <div className="space-y-3">
       <div>
         <p className="text-cyan-300 font-semibold text-xs">{twoTriTitle}</p>
-        <p className="text-white/50 text-[11px]">{centDesc} <span className="text-sky-300 font-semibold">O</span></p>
+        <p className={isDark ? "text-white/50 text-[11px]" : "text-slate-500 text-[11px]"}>{centDesc} <span className="text-sky-300 font-semibold">O</span></p>
       </div>
       <div className="grid md:grid-cols-2 gap-3">
-        <div className="bg-slate-900/70 border border-pink-700/40 rounded-xl p-3 space-y-2">
+        <div className={isDark ? "bg-slate-900/70 border border-pink-700/40 rounded-xl p-3 space-y-2" : "bg-pink-50 border border-pink-300/60 rounded-xl p-3 space-y-2"}>
           <p className="text-pink-300 font-semibold text-[11px]">{fig1Title}</p>
           <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras e in pyramid">
             <defs><filter id="triGlow1" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
@@ -797,26 +809,26 @@ const PythagorasLimasSegitigaDetailSVG = ({ lang }: { lang: string }) => {
             <line x1={O.x} y1={O.y} x2={C.x} y2={C.y} stroke="#f472b6" strokeWidth="2.6" filter="url(#triGlow1)"/>
             <line x1={T.x} y1={T.y} x2={C.x} y2={C.y} stroke="#fb923c" strokeWidth="3" filter="url(#triGlow1)"/>
             <line x1={T.x} y1={T.y} x2={O.x} y2={O.y} stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7,4"/>
-            <line x1={T.x} y1={T.y} x2={A.x} y2={A.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
-            <line x1={T.x} y1={T.y} x2={B.x} y2={B.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
+            <line x1={T.x} y1={T.y} x2={A.x} y2={A.y} stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
+            <line x1={T.x} y1={T.y} x2={B.x} y2={B.y} stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
             <path d={raMark(O.x,O.y,tu.x,tu.y,Ru.x,Ru.y,9)} stroke="var(--icon-stroke)" fill="none" strokeWidth="1.5"/>
-            <circle cx={T.x} cy={T.y} r="4" fill="#facc15"/><circle cx={A.x} cy={A.y} r="3" fill="#e5e7eb"/><circle cx={B.x} cy={B.y} r="3" fill="#e5e7eb"/>
+            <circle cx={T.x} cy={T.y} r="4" fill="#facc15"/><circle cx={A.x} cy={A.y} r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/><circle cx={B.x} cy={B.y} r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/>
             <circle cx={C.x} cy={C.y} r="3.5" fill="#f472b6"/><circle cx={O.x} cy={O.y} r="3.5" fill="#38bdf8"/>
             <text x={T.x+4} y={T.y-2} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">T</text>
-            <text x={A.x-18} y={A.y+6} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-            <text x={B.x-16} y={B.y+4} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+            <text x={A.x-18} y={A.y+6} fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+            <text x={B.x-16} y={B.y+4} fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
             <text x={C.x+4} y={C.y+4} fill="#f472b6" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
             <text x={O.x-17} y={O.y+4} fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
             <text x={T.x+5} y={(T.y+O.y)/2} fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
           </svg>
-          <div className="bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-1">
+          <div className={isDark ? "bg-pink-950/35 border border-pink-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-1" : "bg-pink-50 border border-pink-300/40 rounded-lg p-2 text-[11px] text-slate-700 space-y-1"}>
             <p className="font-semibold text-pink-300">{tri1}</p>
             <p>{to1}</p><p>{oc1}</p><p>{tc1}</p>
             <BlockMath math="TC^2 = TO^2 + OC^2"/>
             <BlockMath math="\boxed{TC^2 = t^2 + \left(\frac{a\sqrt{3}}{3}\right)^2}"/>
           </div>
         </div>
-        <div className="bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-2">
+        <div className={isDark ? "bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-2" : "bg-emerald-50 border border-emerald-300/60 rounded-xl p-3 space-y-2"}>
           <p className="text-emerald-300 font-semibold text-[11px]">{fig2Title}</p>
           <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras l in pyramid">
             <defs><filter id="triGlow2" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
@@ -827,21 +839,21 @@ const PythagorasLimasSegitigaDetailSVG = ({ lang }: { lang: string }) => {
             <line x1={O.x} y1={O.y} x2={M.x} y2={M.y} stroke="#facc15" strokeWidth="2.6" filter="url(#triGlow2)"/>
             <line x1={T.x} y1={T.y} x2={M.x} y2={M.y} stroke="#fb923c" strokeWidth="3" filter="url(#triGlow2)"/>
             <line x1={T.x} y1={T.y} x2={O.x} y2={O.y} stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7,4"/>
-            <line x1={T.x} y1={T.y} x2={A.x} y2={A.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
-            <line x1={T.x} y1={T.y} x2={B.x} y2={B.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
-            <line x1={T.x} y1={T.y} x2={C.x} y2={C.y} stroke="#e5e7eb" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
+            <line x1={T.x} y1={T.y} x2={A.x} y2={A.y} stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
+            <line x1={T.x} y1={T.y} x2={B.x} y2={B.y} stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
+            <line x1={T.x} y1={T.y} x2={C.x} y2={C.y} stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.35"/>
             <path d={raMark(O.x,O.y,tu.x,tu.y,ru.x,ru.y,9)} stroke="var(--icon-stroke)" fill="none" strokeWidth="1.5"/>
-            <circle cx={T.x} cy={T.y} r="4" fill="#facc15"/><circle cx={A.x} cy={A.y} r="3" fill="#e5e7eb"/><circle cx={B.x} cy={B.y} r="3" fill="#e5e7eb"/>
-            <circle cx={C.x} cy={C.y} r="3" fill="#e5e7eb"/><circle cx={O.x} cy={O.y} r="3.5" fill="#38bdf8"/><circle cx={M.x} cy={M.y} r="3.5" fill="#facc15"/>
+            <circle cx={T.x} cy={T.y} r="4" fill="#facc15"/><circle cx={A.x} cy={A.y} r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/><circle cx={B.x} cy={B.y} r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/>
+            <circle cx={C.x} cy={C.y} r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/><circle cx={O.x} cy={O.y} r="3.5" fill="#38bdf8"/><circle cx={M.x} cy={M.y} r="3.5" fill="#facc15"/>
             <text x={T.x+4} y={T.y-2} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">T</text>
-            <text x={A.x-18} y={A.y+6} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-            <text x={B.x-16} y={B.y+4} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-            <text x={C.x+4} y={C.y+4} fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+            <text x={A.x-18} y={A.y+6} fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+            <text x={B.x-16} y={B.y+4} fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+            <text x={C.x+4} y={C.y+4} fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
             <text x={O.x-17} y={O.y+4} fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
             <text x={M.x+4} y={M.y+4} fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">E</text>
             <text x={T.x+5} y={(T.y+O.y)/2} fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
           </svg>
-          <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-1">
+          <div className={isDark ? "bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 text-[11px] text-white/75 space-y-1" : "bg-emerald-50 border border-emerald-300/40 rounded-lg p-2 text-[11px] text-slate-700 space-y-1"}>
             <p className="font-semibold text-emerald-300">{tri2}</p>
             <p>{to2}</p><p>{oe2}</p><p>{te2}</p>
             <BlockMath math="TE^2 = TO^2 + OE^2"/>
@@ -854,6 +866,7 @@ const PythagorasLimasSegitigaDetailSVG = ({ lang }: { lang: string }) => {
 };
 
 const PythagorasLimasSegitigaOverview = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const title = lang === "en" ? "Regular Triangular Pyramid" : lang === "ja" ? "正三角錐" : "Limas Segitiga Beraturan";
   const desc  = lang === "en"
     ? "Equilateral triangle base with side a. Apothem l drops to midpoint M of edge AC."
@@ -866,10 +879,10 @@ const PythagorasLimasSegitigaOverview = ({ lang }: { lang: string }) => {
     ? "t 高さ、l 斜高、r 内接円半径、e 側面辺。"
     : "t tinggi limas, l apotema sisi tegak, r jari-jari dalam alas, e rusuk tegak.";
   return (
-    <div className="bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-3">
+    <div className={isDark ? "bg-slate-900/70 border border-emerald-700/40 rounded-xl p-3 space-y-3" : "bg-emerald-50 border border-emerald-300/60 rounded-xl p-3 space-y-3"}>
       <div>
         <p className="text-emerald-300 font-semibold text-xs">{title}</p>
-        <p className="text-white/45 text-[11px]">{desc}</p>
+        <p className={isDark ? "text-white/45 text-[11px]" : "text-slate-500 text-[11px]"}>{desc}</p>
       </div>
       <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras in triangular pyramid">
         <defs><filter id="triGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
@@ -881,26 +894,26 @@ const PythagorasLimasSegitigaOverview = ({ lang }: { lang: string }) => {
         <line x1="130" y1="32" x2="148" y2="143" stroke="#fb923c" strokeWidth="3" filter="url(#triGlow)"/>
         <line x1="119" y1="133" x2="148" y2="143" stroke="#facc15" strokeWidth="2.5"/>
         <line x1="119" y1="133" x2="196" y2="112" stroke="#f472b6" strokeWidth="1.8" strokeDasharray="5,3"/>
-        <line x1="130" y1="32" x2="196" y2="112" stroke="#e5e7eb" strokeWidth="1.6" strokeDasharray="4,3"/>
-        <line x1="130" y1="32" x2="62" y2="112" stroke="#e5e7eb" strokeWidth="1.1" strokeDasharray="4,3" strokeOpacity="0.45"/>
-        <line x1="130" y1="32" x2="100" y2="175" stroke="#e5e7eb" strokeWidth="1.1" strokeDasharray="4,3" strokeOpacity="0.45"/>
-        <circle cx="130" cy="32" r="4" fill="#facc15"/><circle cx="100" cy="175" r="3" fill="#e5e7eb"/>
-        <circle cx="62" cy="112" r="3" fill="#e5e7eb"/><circle cx="196" cy="112" r="3" fill="#e5e7eb"/>
+        <line x1="130" y1="32" x2="196" y2="112" stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1.6" strokeDasharray="4,3"/>
+        <line x1="130" y1="32" x2="62" y2="112" stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3" strokeOpacity="0.45"/>
+        <line x1="130" y1="32" x2="100" y2="175" stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3" strokeOpacity="0.45"/>
+        <circle cx="130" cy="32" r="4" fill="#facc15"/><circle cx="100" cy="175" r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/>
+        <circle cx="62" cy="112" r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/><circle cx="196" cy="112" r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/>
         <circle cx="119" cy="133" r="3.5" fill="#38bdf8"/><circle cx="148" cy="143" r="3.5" fill="#fb923c"/>
         <text x="134" y="30" fill="#facc15" fontSize="10" fontFamily="monospace">T</text>
-        <text x="84" y="183" fill="#e5e7eb" fontSize="9" fontFamily="monospace">A</text>
-        <text x="45" y="112" fill="#e5e7eb" fontSize="9" fontFamily="monospace">B</text>
-        <text x="199" y="112" fill="#e5e7eb" fontSize="9" fontFamily="monospace">C</text>
+        <text x="84" y="183" fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="9" fontFamily="monospace">A</text>
+        <text x="45" y="112" fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="9" fontFamily="monospace">B</text>
+        <text x="199" y="112" fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="9" fontFamily="monospace">C</text>
         <text x="104" y="136" fill="#38bdf8" fontSize="9" fontFamily="monospace">E</text>
         <text x="151" y="155" fill="#fb923c" fontSize="9" fontFamily="monospace">F</text>
         <text x="131" y="86" fill="#38bdf8" fontSize="10" fontFamily="monospace">t</text>
         <text x="144" y="82" fill="#fb923c" fontSize="10" fontFamily="monospace">l</text>
         <text x="128" y="145" fill="#facc15" fontSize="10" fontFamily="monospace">r</text>
-        <text x="168" y="68" fill="#e5e7eb" fontSize="10" fontFamily="monospace">e</text>
+        <text x="168" y="68" fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="10" fontFamily="monospace">e</text>
       </svg>
-      <div className="bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
-        <p><span className="text-sky-300 font-semibold">t</span> {legendDesc.split("t")[1]?.split(",")[0] || ""}, <span className="text-orange-300 font-semibold">l</span>, <span className="text-yellow-300 font-semibold">r</span>, <span className="text-white/60 font-semibold">e</span></p>
-        <p className="text-white/60">{legendDesc}</p>
+      <div className={isDark ? "bg-emerald-950/35 border border-emerald-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75" : "bg-emerald-50 border border-emerald-300/40 rounded-lg p-2 space-y-1 text-[11px] text-slate-700"}>
+        <p><span className="text-sky-300 font-semibold">t</span> {legendDesc.split("t")[1]?.split(",")[0] || ""}, <span className="text-orange-300 font-semibold">l</span>, <span className="text-yellow-300 font-semibold">r</span>, <span className={isDark ? "text-white/60 font-semibold" : "text-slate-500 font-semibold"}>e</span></p>
+        <p className={isDark ? "text-white/60" : "text-slate-500"}>{legendDesc}</p>
         <BlockMath math="r_a=\frac{a\sqrt{3}}{6},\quad R_a=\frac{a\sqrt{3}}{3}"/>
         <BlockMath math="l^2=t^2+r_a^2=t^2+\left(\frac{a\sqrt{3}}{6}\right)^2"/>
         <BlockMath math="e^2=t^2+R_a^2=t^2+\left(\frac{a\sqrt{3}}{3}\right)^2"/>
@@ -911,6 +924,7 @@ const PythagorasLimasSegitigaOverview = ({ lang }: { lang: string }) => {
 };
 
 const PythagorasLimasSegiempatOverview = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const title = lang === "en" ? "Fig 3 — Pyramid Height & Lateral Face Height (square pyramid)"
     : lang === "ja" ? "図3 — 高さと側面の高さ（四角錐）"
     : "Gambar 3 — Tinggi limas & Tinggi Sisi Tegak pada limas segiempat";
@@ -920,10 +934,10 @@ const PythagorasLimasSegiempatOverview = ({ lang }: { lang: string }) => {
     ? "一辺 s の正方形の底面。右の側面 T–B–C: 斜高 l が辺の中点 M に下ります。"
     : "Alas persegi dengan sisi s. Sisi tegak kanan T–B–C disorot: apotema l turun ke titik tengah M rusuk kanan.";
   return (
-    <div className="bg-slate-900/70 border border-orange-700/40 rounded-xl p-3 space-y-3">
+    <div className={isDark ? "bg-slate-900/70 border border-orange-700/40 rounded-xl p-3 space-y-3" : "bg-orange-50 border border-orange-300/60 rounded-xl p-3 space-y-3"}>
       <div>
         <p className="text-orange-300 font-semibold text-xs">{title}</p>
-        <p className="text-white/45 text-[11px]">{desc} <InlineMath math="s"/> <InlineMath math="M"/></p>
+        <p className={isDark ? "text-white/45 text-[11px]" : "text-slate-500 text-[11px]"}>{desc} <InlineMath math="s"/> <InlineMath math="M"/></p>
       </div>
       <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Pythagoras in square pyramid">
         <defs><filter id="quadGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
@@ -935,25 +949,25 @@ const PythagorasLimasSegiempatOverview = ({ lang }: { lang: string }) => {
         <line x1="132" y1="42" x2="132" y2="146" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7,4"/>
         <line x1="132" y1="42" x2="188" y2="146" stroke="#fb923c" strokeWidth="3" filter="url(#quadGlow)"/>
         <line x1="132" y1="146" x2="188" y2="146" stroke="#facc15" strokeWidth="2.5"/>
-        <line x1="132" y1="42" x2="214" y2="126" stroke="#e5e7eb" strokeWidth="1.8" strokeDasharray="4,3"/>
+        <line x1="132" y1="42" x2="214" y2="126" stroke={isDark ? "#e5e7eb" : "#94a3b8"} strokeWidth="1.8" strokeDasharray="4,3"/>
         <line x1="48" y1="166" x2="214" y2="126" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="5,3"/>
         <path d="M 132 138 L 140 138 L 140 146" stroke="var(--icon-stroke)" fill="none" strokeWidth="1.5"/>
-        <circle cx="132" cy="42" r="4" fill="#facc15"/><circle cx="48" cy="166" r="3" fill="#e5e7eb"/>
-        <circle cx="162" cy="166" r="3" fill="#e5e7eb"/><circle cx="214" cy="126" r="3" fill="#e5e7eb"/>
-        <circle cx="100" cy="126" r="3" fill="#e5e7eb"/><circle cx="132" cy="146" r="3.5" fill="#38bdf8"/>
+        <circle cx="132" cy="42" r="4" fill="#facc15"/><circle cx="48" cy="166" r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/>
+        <circle cx="162" cy="166" r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/><circle cx="214" cy="126" r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/>
+        <circle cx="100" cy="126" r="3" fill={isDark ? "#e5e7eb" : "#64748b"}/><circle cx="132" cy="146" r="3.5" fill="#38bdf8"/>
         <circle cx="188" cy="146" r="3.5" fill="#fb923c"/>
         <text x="137" y="39" fill="#facc15" fontSize="13" fontFamily="monospace" fontWeight="bold">T</text>
-        <text x="20" y="172" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-        <text x="164" y="172" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-        <text x="216" y="122" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
-        <text x="82" y="122" fill="#e5e7eb" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
+        <text x="20" y="172" fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+        <text x="164" y="172" fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+        <text x="216" y="122" fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+        <text x="82" y="122" fill={isDark ? "#e5e7eb" : "#1e293b"} fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
         <text x="116" y="149" fill="#38bdf8" fontSize="13" fontFamily="monospace" fontWeight="bold">O</text>
         <text x="190" y="149" fill="#fb923c" fontSize="13" fontFamily="monospace" fontWeight="bold">M</text>
         <text x="126" y="90" fill="#38bdf8" fontSize="12" fontFamily="monospace">t</text>
         <text x="162" y="88" fill="#fb923c" fontSize="12" fontFamily="monospace">l</text>
         <text x="157" y="150" fill="#facc15" fontSize="10" fontFamily="monospace">s/2</text>
       </svg>
-      <div className="bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
+      <div className={isDark ? "bg-orange-950/35 border border-orange-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75" : "bg-orange-50 border border-orange-300/40 rounded-lg p-2 space-y-1 text-[11px] text-slate-700"}>
         <BlockMath math="l^2 = t^2 + \left(\frac{s}{2}\right)^2"/>
         <BlockMath math="\boxed{l = \sqrt{t^2 + \frac{s^2}{4}}}"/>
       </div>
@@ -962,8 +976,10 @@ const PythagorasLimasSegiempatOverview = ({ lang }: { lang: string }) => {
 };
 
 /* Diagonal SVG placeholder – geometry only, no localized text */
-const PythagorasLimasSegiempatDiagonalSVG = () => (
-  <div className="bg-slate-900/70 border border-violet-700/40 rounded-xl p-3 space-y-3">
+const PythagorasLimasSegiempatDiagonalSVG = () => {
+  const { isDark } = useTheme();
+  return (
+  <div className={isDark ? "bg-slate-900/70 border border-violet-700/40 rounded-xl p-3 space-y-3" : "bg-violet-50 border border-violet-300/60 rounded-xl p-3 space-y-3"}>
     <svg viewBox="0 0 260 210" className="w-full max-w-sm mx-auto" aria-label="Square pyramid diagonal">
       <polygon points="48,166 162,166 214,126 100,126" fill="#3b82f6" fillOpacity="0.22" stroke="#60a5fa" strokeWidth="2"/>
       <polygon points="48,166 162,166 132,42" fill="#8b5cf6" fillOpacity="0.15" stroke="#c4b5fd" strokeWidth="1.2"/>
@@ -979,17 +995,19 @@ const PythagorasLimasSegiempatDiagonalSVG = () => (
       <text x="174" y="88" fill="#fb923c" fontSize="12" fontFamily="monospace">e</text>
       <text x="120" y="160" fill="#a78bfa" fontSize="9" fontFamily="monospace">d/2</text>
     </svg>
-    <div className="bg-violet-950/35 border border-violet-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75">
+    <div className={isDark ? "bg-violet-950/35 border border-violet-700/30 rounded-lg p-2 space-y-1 text-[11px] text-white/75" : "bg-violet-50 border border-violet-300/40 rounded-lg p-2 space-y-1 text-[11px] text-slate-700"}>
       <BlockMath math="e^2 = t^2 + \left(\frac{d}{2}\right)^2 = t^2 + \left(\frac{s\sqrt{2}}{2}\right)^2 = t^2 + \frac{s^2}{2}"/>
       <BlockMath math="\boxed{e = \sqrt{t^2 + \frac{s^2}{2}}}"/>
     </div>
   </div>
-);
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    LIMAS NET SVGs
 ───────────────────────────────────────────────────────────── */
 const LimasNetSegitigaSVG = ({ baseLabel }: { baseLabel: string }) => {
+  const { isDark } = useTheme();
   const colors = ["#ef4444","#22c55e","#f97316"];
   const n = 3;
   const R = 60, cx0 = 130, cy0 = 110;
@@ -1022,12 +1040,13 @@ const LimasNetSegitigaSVG = ({ baseLabel }: { baseLabel: string }) => {
       })}
       <polygon points={pointString} fill="#3b82f6" stroke="var(--icon-stroke)" strokeWidth="1.6" className="lnet-e"/>
       <text x="130" y="124" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{baseLabel}</text>
-      <text x="130" y="20" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 3 × L△</text>
+      <text x="130" y="20" fill={isDark ? "#e0e7ff" : "#3730a3"} fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 3 × L△</text>
     </svg>
   );
 };
 
 const LimasNetSegiempatSVG = ({ baseLabel }: { baseLabel: string }) => {
+  const { isDark } = useTheme();
   const colors = ["#8b5cf6","#22c55e","#f97316","#eab308"];
   return (
     <svg viewBox="0 0 260 260" className="w-full max-w-xs mx-auto my-2" aria-label="Square pyramid net">
@@ -1051,12 +1070,13 @@ const LimasNetSegiempatSVG = ({ baseLabel }: { baseLabel: string }) => {
       ))}
       <rect x="80" y="130" width="80" height="80" fill="#3b82f6" fillOpacity="0.85" stroke="var(--icon-stroke)" strokeWidth="1.5" rx="1" className="lnet4-e"/>
       <text x="120" y="175" fill="var(--icon-color)" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{baseLabel}</text>
-      <text x="130" y="20" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 4 × L△</text>
+      <text x="130" y="20" fill={isDark ? "#e0e7ff" : "#3730a3"} fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 4 × L△</text>
     </svg>
   );
 };
 
 const LimasNetSegilimaSVG = ({ baseLabel }: { baseLabel: string }) => {
+  const { isDark } = useTheme();
   const colors = ["#ef4444","#22c55e","#f97316","#eab308","#ec4899"];
   const n=5, R=52, cx0=130, cy0=130;
   const baseVerts = Array.from({length:n},(_,i)=>{
@@ -1088,12 +1108,13 @@ const LimasNetSegilimaSVG = ({ baseLabel }: { baseLabel: string }) => {
       })}
       <polygon points={pointString} fill="#3b82f6" stroke="var(--icon-stroke)" strokeWidth="1.6" className="lnet5-e"/>
       <text x="130" y="124" fill="var(--icon-color)" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{baseLabel}</text>
-      <text x="130" y="20" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 5 × L△</text>
+      <text x="130" y="20" fill={isDark ? "#e0e7ff" : "#3730a3"} fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">Lₚ = Lₐ + 5 × L△</text>
     </svg>
   );
 };
 
 const LimasSurfaceNetSelector = () => {
+  const { isDark } = useTheme();
   const { language: lang } = useLanguage();
   const [tab, setTab] = useState<"segitiga"|"segiempat"|"segilima">("segitiga");
   const baseLabel = lang === "en" ? "BASE" : lang === "ja" ? "底面" : "ALAS";
@@ -1121,12 +1142,12 @@ const LimasSurfaceNetSelector = () => {
 
   return (
     <div className="space-y-3">
-      <div className="flex rounded-lg overflow-hidden border border-slate-600 w-full">
+      <div className={isDark ? "flex rounded-lg overflow-hidden border border-slate-600 w-full" : "flex rounded-lg overflow-hidden border border-gray-300 w-full"}>
         {tabs.map(t => (
           <button key={t.id}
             onClick={() => { playPopSound(); setTab(t.id); }}
             className={`flex-1 py-1.5 text-xs font-bold font-body transition-colors cursor-pointer
-              ${tab === t.id ? "bg-cyan-800/80 text-cyan-200 border-b-2 border-cyan-400" : "bg-slate-800/60 text-white/50 hover:text-white/80 hover:bg-slate-700/60"}`}>
+              ${tab === t.id ? "bg-cyan-800/80 text-cyan-200 border-b-2 border-cyan-400" : isDark ? "bg-slate-800/60 text-white/50 hover:text-white/80 hover:bg-slate-700/60" : "bg-gray-100 text-slate-500 hover:text-slate-700 hover:bg-gray-200"}`}>
             {t.label}
           </button>
         ))}
@@ -1134,33 +1155,33 @@ const LimasSurfaceNetSelector = () => {
       {tab === "segitiga" && (
         <div>
           <LimasNetSegitigaSVG baseLabel={baseLabel}/>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70" : "bg-gray-100 border border-gray-200 rounded-lg p-3 space-y-2 text-xs text-slate-700"}>
             <p className="text-cyan-300 font-semibold">{fmtTri.title}</p>
             <p>{fmtTri.base} <span className="text-yellow-300">{fmtTri.baseVal}</span></p>
             <p>{fmtTri.side} <span className="text-yellow-300">{fmtTri.sideVal}</span></p>
-            <p className="text-white/90 font-semibold font-mono">{fmtTri.formula}</p>
+            <p className={isDark ? "text-white/90 font-semibold font-mono" : "text-slate-800 font-semibold font-mono"}>{fmtTri.formula}</p>
           </div>
         </div>
       )}
       {tab === "segiempat" && (
         <div>
           <LimasNetSegiempatSVG baseLabel={baseLabel}/>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70" : "bg-gray-100 border border-gray-200 rounded-lg p-3 space-y-2 text-xs text-slate-700"}>
             <p className="text-cyan-300 font-semibold">{fmtQuad.title}</p>
             <p>{fmtQuad.base} <span className="text-yellow-300">{fmtQuad.baseVal}</span></p>
             <p>{fmtQuad.side} <span className="text-yellow-300">{fmtQuad.sideVal}</span></p>
-            <p className="text-white/90 font-semibold font-mono">{fmtQuad.formula}</p>
+            <p className={isDark ? "text-white/90 font-semibold font-mono" : "text-slate-800 font-semibold font-mono"}>{fmtQuad.formula}</p>
           </div>
         </div>
       )}
       {tab === "segilima" && (
         <div>
           <LimasNetSegilimaSVG baseLabel={baseLabel}/>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70" : "bg-gray-100 border border-gray-200 rounded-lg p-3 space-y-2 text-xs text-slate-700"}>
             <p className="text-cyan-300 font-semibold">{fmtPent.title}</p>
             <p>{fmtPent.base} <span className="text-yellow-300">{fmtPent.baseVal}</span></p>
             <p>{fmtPent.side} <span className="text-yellow-300">{fmtPent.sideVal}</span></p>
-            <p className="text-white/90 font-semibold font-mono">{fmtPent.formula}</p>
+            <p className={isDark ? "text-white/90 font-semibold font-mono" : "text-slate-800 font-semibold font-mono"}>{fmtPent.formula}</p>
           </div>
         </div>
       )}
@@ -1169,6 +1190,7 @@ const LimasSurfaceNetSelector = () => {
 };
 
 const LimasSurfaceAreaSection = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const intro = lang === "en"
     ? <><strong className="text-blue-300">Surface area of a pyramid</strong> is the sum of all face areas: one base plus all triangular lateral faces.</>
     : lang === "ja"
@@ -1187,18 +1209,18 @@ const LimasSurfaceAreaSection = ({ lang }: { lang: string }) => {
   const k2 = lang === "en" ? "• Square pyramid: Lp = La + 4 × L△"    : lang === "ja" ? "• 四角錐: Lp = La + 4 × L△" : "• Limas segiempat: Lp = La + 4 × L△tegak";
   const k3 = lang === "en" ? "• Pentagonal pyramid: Lp = La + 5 × L△" : lang === "ja" ? "• 五角錐: Lp = La + 5 × L△" : "• Limas segilima: Lp = La + 5 × L△tegak";
   return (
-    <div className="space-y-3 text-sm text-white/85 font-body">
+    <div className={isDark ? "space-y-3 text-sm text-white/85 font-body" : "space-y-3 text-sm text-slate-800 font-body"}>
       <p>{intro}</p>
-      <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
-        <div className="bg-slate-900/60 rounded p-3 space-y-2">
+      <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2" : "bg-gray-100 border border-gray-200 rounded-lg p-4 space-y-2"}>
+        <div className={isDark ? "bg-slate-900/60 rounded p-3 space-y-2" : "bg-white/90 rounded p-3 space-y-2"}>
           <BlockMath math="L_p = L_a + \sum L_s"/>
           <BlockMath math="L_s = \frac{1}{2} \times a \times l"/>
         </div>
-        <p className="text-xs text-white/55">{laNote}</p>
+        <p className={isDark ? "text-xs text-white/55" : "text-xs text-slate-500"}>{laNote}</p>
       </div>
-      <p className="text-xs text-white/60 text-center">{tabHint}</p>
+      <p className={isDark ? "text-xs text-white/60 text-center" : "text-xs text-slate-500 text-center"}>{tabHint}</p>
       <LimasSurfaceNetSelector/>
-      <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+      <div className={isDark ? "bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1" : "bg-cyan-50 border border-cyan-300/60 rounded-lg p-3 text-xs text-cyan-800 space-y-1"}>
         <p><strong>{keyTitle}</strong> <span className="text-yellow-300">Lp = La + {lang === "en" ? "lateral faces" : lang === "ja" ? "側面" : "sisi tegak"}</span></p>
         <p>{k1}</p><p>{k2}</p><p>{k3}</p>
       </div>
@@ -1210,6 +1232,7 @@ const LimasSurfaceAreaSection = ({ lang }: { lang: string }) => {
    NET GALLERY
 ───────────────────────────────────────────────────────────── */
 const NetLimasGallery = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const baseLabel = lang === "en" ? "BASE" : lang === "ja" ? "底面" : "ALAS";
   const nets = lang === "en"
     ? [
@@ -1256,10 +1279,10 @@ const NetLimasGallery = ({ lang }: { lang: string }) => {
   return (
     <div className="grid grid-cols-3 gap-3">
       {nets.map((n, i) => (
-        <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-2">
-          <span className="text-white/50 text-[9px] font-body font-bold text-center">{n.label}</span>
+        <div key={i} className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-2" : "bg-gray-100 border border-gray-200 rounded-lg p-3 flex flex-col items-center gap-2"}>
+          <span className={isDark ? "text-white/50 text-[9px] font-body font-bold text-center" : "text-slate-500 text-[9px] font-body font-bold text-center"}>{n.label}</span>
           <div className="flex items-center justify-center" style={{ minHeight: 80 }}>{svgs[i]}</div>
-          <span className="text-white/30 text-[8px] font-body text-center">{n.desc}</span>
+          <span className={isDark ? "text-white/30 text-[8px] font-body text-center" : "text-slate-400 text-[8px] font-body text-center"}>{n.desc}</span>
         </div>
       ))}
     </div>
@@ -1273,6 +1296,7 @@ type V2L = [number, number];
 type LimasWaterType = "segitiga" | "segiempat" | "segilima";
 
 const WaterLimasAnimation = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [fill, setFill] = useState(0);
   const [limasType, setLimasType] = useState<LimasWaterType>("segiempat");
 
@@ -1321,7 +1345,7 @@ const WaterLimasAnimation = ({ lang }: { lang: string }) => {
     const barW = 12, filledH = barH * fill;
     return (
       <>
-        <rect x={barX} y={barY} width={barW} height={barH} fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+        <rect x={barX} y={barY} width={barW} height={barH} fill={isDark ? "#0f172a" : "#f1f5f9"} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" rx="3"/>
         {!isEmpty && <rect x={barX} y={barY+barH-filledH} width={barW} height={filledH} fill="#2563eb" fillOpacity={0.88} rx="3"/>}
         <text x={barX+barW/2} y={barY-5} fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
         <text x={barX+barW/2} y={barY+barH+12} fill={statusColor} fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{pct}%</text>
@@ -1334,10 +1358,10 @@ const WaterLimasAnimation = ({ lang }: { lang: string }) => {
     const WFL=lerp2(FL,apex,fill),WFR=lerp2(FR,apex,fill),WBkR=lerp2(BkR,apex,fill),WBkL=lerp2(BkL,apex,fill);
     return (
       <>
-        <line x1={BkL[0]} y1={BkL[1]} x2={apex[0]} y2={apex[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-        <line x1={FL[0]} y1={FL[1]} x2={BkL[0]} y2={BkL[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-        <polygon points={pts(FR,BkR,apex)} fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
-        <polygon points={pts(FL,FR,apex)} fill="#0f172a" fillOpacity={0.10} stroke="#334155" strokeWidth="0.8"/>
+        <line x1={BkL[0]} y1={BkL[1]} x2={apex[0]} y2={apex[1]} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+        <line x1={FL[0]} y1={FL[1]} x2={BkL[0]} y2={BkL[1]} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+        <polygon points={pts(FR,BkR,apex)} fill={isDark ? "#0f172a" : "#e2e8f0"} fillOpacity={0.15} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
+        <polygon points={pts(FL,FR,apex)} fill={isDark ? "#0f172a" : "#e2e8f0"} fillOpacity={0.10} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
         {!isEmpty && <>
           <polygon points={pts(FL,FR,BkR,BkL)} fill="#1e3a8a" fillOpacity={0.90}/>
           <polygon points={pts(FR,BkR,WBkR,WFR)} fill="#1d4ed8" fillOpacity={0.80}/>
@@ -1355,7 +1379,7 @@ const WaterLimasAnimation = ({ lang }: { lang: string }) => {
         <text x={apex[0]} y={apex[1]-8} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">T</text>
         <BarWidget barX={205} barY={70} barH={114}/>
         <text x="120" y="200" fill={statusColor} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">{statusText}</text>
-        <text x="120" y="214" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅓ × s² × t</text>
+        <text x="120" y="214" fill={isDark ? "#e0e7ff" : "#3730a3"} fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅓ × s² × t</text>
       </>
     );
   };
@@ -1365,9 +1389,9 @@ const WaterLimasAnimation = ({ lang }: { lang: string }) => {
     const WFV=lerp2(FV,apex,fill),WBkL=lerp2(BkL,apex,fill),WBkR=lerp2(BkR,apex,fill);
     return (
       <>
-        <line x1={BkL[0]} y1={BkL[1]} x2={FV[0]} y2={FV[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-        <line x1={BkL[0]} y1={BkL[1]} x2={apex[0]} y2={apex[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-        <polygon points={pts(FV,BkR,apex)} fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+        <line x1={BkL[0]} y1={BkL[1]} x2={FV[0]} y2={FV[1]} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+        <line x1={BkL[0]} y1={BkL[1]} x2={apex[0]} y2={apex[1]} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+        <polygon points={pts(FV,BkR,apex)} fill={isDark ? "#0f172a" : "#e2e8f0"} fillOpacity={0.15} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
         {!isEmpty && <>
           <polygon points={pts(FV,BkL,BkR)} fill="#1e3a8a" fillOpacity={0.90}/>
           <polygon points={pts(FV,BkR,WBkR,WFV)} fill="#1d4ed8" fillOpacity={0.80}/>
@@ -1388,7 +1412,7 @@ const WaterLimasAnimation = ({ lang }: { lang: string }) => {
         <text x={apex[0]} y={apex[1]-8} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">T</text>
         <BarWidget barX={205} barY={70} barH={114}/>
         <text x="112" y="200" fill={statusColor} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">{statusText}</text>
-        <text x="112" y="214" fill="#e0e7ff" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅙ × a × t₀ × t</text>
+        <text x="112" y="214" fill={isDark ? "#e0e7ff" : "#3730a3"} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅙ × a × t₀ × t</text>
       </>
     );
   };
@@ -1398,11 +1422,11 @@ const WaterLimasAnimation = ({ lang }: { lang: string }) => {
     const WP1=lerp2(P1,apex,fill),WP2=lerp2(P2,apex,fill),WP3=lerp2(P3,apex,fill),WP4=lerp2(P4,apex,fill),WP5=lerp2(P5,apex,fill);
     return (
       <>
-        <line x1={P4[0]} y1={P4[1]} x2={P3[0]} y2={P3[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-        <line x1={P4[0]} y1={P4[1]} x2={P5[0]} y2={P5[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-        <line x1={P4[0]} y1={P4[1]} x2={apex[0]} y2={apex[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
-        <polygon points={pts(P1,P2,apex)} fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
-        <polygon points={pts(P2,P3,apex)} fill="#0f172a" fillOpacity={0.12} stroke="#334155" strokeWidth="0.8"/>
+        <line x1={P4[0]} y1={P4[1]} x2={P3[0]} y2={P3[1]} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+        <line x1={P4[0]} y1={P4[1]} x2={P5[0]} y2={P5[1]} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+        <line x1={P4[0]} y1={P4[1]} x2={apex[0]} y2={apex[1]} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
+        <polygon points={pts(P1,P2,apex)} fill={isDark ? "#0f172a" : "#e2e8f0"} fillOpacity={0.15} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
+        <polygon points={pts(P2,P3,apex)} fill={isDark ? "#0f172a" : "#e2e8f0"} fillOpacity={0.12} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
         {!isEmpty && <>
           <polygon points={pts(P1,P2,P3,P4,P5)} fill="#1e3a8a" fillOpacity={0.90}/>
           <polygon points={pts(P2,P3,WP3,WP2)} fill="#1d4ed8" fillOpacity={0.75}/>
@@ -1426,14 +1450,14 @@ const WaterLimasAnimation = ({ lang }: { lang: string }) => {
         <text x={apex[0]} y={apex[1]-8} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">T</text>
         <BarWidget barX={205} barY={68} barH={118}/>
         <text x="112" y="202" fill={statusColor} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">{statusText}</text>
-        <text x="112" y="216" fill="#e0e7ff" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅓ × L_alas × t</text>
+        <text x="112" y="216" fill={isDark ? "#e0e7ff" : "#3730a3"} fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅓ × L_alas × t</text>
       </>
     );
   };
 
   return (
     <div className="space-y-2">
-      <div className="flex gap-1 bg-slate-800/60 rounded-lg p-1">
+      <div className={isDark ? "flex gap-1 bg-slate-800/60 rounded-lg p-1" : "flex gap-1 bg-gray-100 rounded-lg p-1"}>
         {tabLabels.map(({ key, label }) => (
           <button key={key} onClick={() => setLimasType(key)}
             className={`flex-1 text-xs py-1.5 px-1 rounded-md font-semibold transition-all font-body ${limasType === key ? "bg-blue-600 text-white shadow" : "text-slate-400 hover:text-white"}`}>
@@ -1462,6 +1486,7 @@ const WaterLimasAnimation = ({ lang }: { lang: string }) => {
 type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
 
 const ExampleCard = ({ ex, idx, prefix, showLbl, hideLbl }: { ex: Ex; idx: number; prefix: string; showLbl: string; hideLbl: string }) => {
+  const { isDark } = useTheme();
   const [show, setShow] = useState(false);
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
@@ -1474,11 +1499,11 @@ const ExampleCard = ({ ex, idx, prefix, showLbl, hideLbl }: { ex: Ex; idx: numbe
         {ex.question}
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
-        className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
+        className={isDark ? "w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50" : "w-full flex items-center justify-between px-5 py-3 bg-gray-100 hover:bg-gray-200/80 transition-colors cursor-pointer border-t border-gray-200"}>
         <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLbl : showLbl}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground"/> : <ChevronDown className="w-4 h-4 text-muted-foreground"/>}
       </button>
-      {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
+      {show && <div className={isDark ? "px-5 py-4 bg-slate-900/60 border-t border-slate-700/30" : "px-5 py-4 bg-white/90 border-t border-gray-200"}>{ex.answer}</div>}
     </div>
   );
 };
@@ -1487,6 +1512,7 @@ const ExampleCard = ({ ex, idx, prefix, showLbl, hideLbl }: { ex: Ex; idx: numbe
    MAIN PAGE
 ───────────────────────────────────────────────────────────── */
 const LimasPage = () => {
+  const { isDark } = useTheme();
   const navigate = useNavigate();
   const { language: lang } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -1532,7 +1558,7 @@ const LimasPage = () => {
       icon: "🏔️",
       content: (
         <div className="space-y-4 font-body">
-          <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-sm text-white/85 leading-relaxed">
+          <div className={isDark ? "bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-sm text-white/85 leading-relaxed" : "bg-violet-50 border border-violet-300/60 rounded-lg p-3 text-sm text-slate-800 leading-relaxed"}>
             <p>
               {lang === "en"
                 ? <><strong className="text-violet-300">A pyramid</strong> is a polyhedron with one polygonal base and triangular lateral faces that all meet at a single point called the <strong className="text-yellow-300">apex (T)</strong>.</>
@@ -1541,7 +1567,7 @@ const LimasPage = () => {
                 : <><strong className="text-violet-300">Limas</strong> adalah bangun ruang sisi datar yang memiliki sebuah sisi alas berbentuk segi-n dan sisi-sisi tegak berbentuk segitiga yang bertemu di satu titik yang disebut <strong className="text-yellow-300">titik puncak (T)</strong>.</>}
             </p>
           </div>
-          <p className="text-white/60 text-xs">
+          <p className={isDark ? "text-white/60 text-xs" : "text-slate-500 text-xs"}>
             {lang === "en" ? "Pyramids are named by their base shape:"
             : lang === "ja" ? "角錐は底面の形で名前が決まります："
             : "Limas diberi nama berdasarkan bentuk alasnya:"}
@@ -1562,8 +1588,8 @@ const LimasPage = () => {
                  { nama:"Limas Segilima",  alas:"Segilima", titik:6, rusuk:10, sisi:6, icon:"⬠" },
                  { nama:"Limas Segienam",  alas:"Segienam", titik:7, rusuk:12, sisi:7, icon:"⬡" }]
             ).map((j,i)=>(
-              <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-1">
-                <p className="text-white font-semibold">{j.icon} {j.nama}</p>
+              <div key={i} className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-1" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs space-y-1"}>
+                <p className={isDark ? "text-white font-semibold" : "text-slate-800 font-semibold"}>{j.icon} {j.nama}</p>
                 <p className="text-slate-400">{lang === "en" ? "Base:" : lang === "ja" ? "底面:" : "Alas:"} {j.alas}</p>
                 <p className="text-cyan-300">{lang === "en" ? "Vertices:" : lang === "ja" ? "頂点:" : "Titik sudut:"} {j.titik}</p>
                 <p className="text-orange-300">{lang === "en" ? "Edges:" : lang === "ja" ? "辺:" : "Rusuk:"} {j.rusuk}</p>
@@ -1571,7 +1597,7 @@ const LimasPage = () => {
               </div>
             ))}
           </div>
-          <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 text-xs text-white/80 space-y-1">
+          <div className={isDark ? "bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 text-xs text-white/80 space-y-1" : "bg-cyan-50 border border-cyan-300/40 rounded-lg p-3 text-xs text-slate-700 space-y-1"}>
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "📐 General pattern for an n-gon pyramid:"
               : lang === "ja" ? "📐 n角錐の一般的なパターン:"
@@ -1589,39 +1615,39 @@ const LimasPage = () => {
       icon: "🔍",
       content: (
         <div className="space-y-4 font-body">
-          <p className="text-white/65 text-xs">
+          <p className={isDark ? "text-white/65 text-xs" : "text-slate-500 text-xs"}>
             {lang === "en" ? "We focus on Square Pyramid T.ABCD as the main model."
             : lang === "ja" ? "四角錐 T.ABCD を主なモデルとして扱います。"
             : "Kita akan fokus pada Limas Segiempat T.ABCD sebagai model utama."}
           </p>
           <div className="space-y-3">
-            <div className="bg-slate-800/60 border border-orange-700/30 rounded-lg p-3">
+            <div className={isDark ? "bg-slate-800/60 border border-orange-700/30 rounded-lg p-3" : "bg-orange-50 border border-orange-300/40 rounded-lg p-3"}>
               <p className="text-orange-300 font-semibold text-xs mb-2">
                 {lang === "en" ? "1. Vertices (5)" : lang === "ja" ? "1. 頂点（5つ）" : "1. Titik Sudut (5 buah)"}
               </p>
               <TitikSudutLimasSVG lang={lang}/>
-              <p className="text-white/65 text-xs">
+              <p className={isDark ? "text-white/65 text-xs" : "text-slate-500 text-xs"}>
                 {lang === "en" ? "Four base vertices (A, B, C, D) and one apex T."
                 : lang === "ja" ? "4つの底面頂点（A, B, C, D）と頂上T。"
                 : "Empat titik sudut alas (A, B, C, D) dan satu titik puncak T."}
               </p>
             </div>
-            <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3">
+            <div className={isDark ? "bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3" : "bg-cyan-50 border border-cyan-300/40 rounded-lg p-3"}>
               <p className="text-cyan-300 font-semibold text-xs mb-2">
                 {lang === "en" ? "2. Edges (8)" : lang === "ja" ? "2. 辺（8本）" : "2. Rusuk (8 buah)"}
               </p>
               <RusukLimasSVG lang={lang}/>
-              <div className="mt-2 space-y-1 text-xs text-white/70">
+              <div className={isDark ? "mt-2 space-y-1 text-xs text-white/70" : "mt-2 space-y-1 text-xs text-slate-600"}>
                 <p>• <strong className="text-cyan-300">{lang === "en" ? "Base edges (4):" : lang === "ja" ? "底面の辺（4）:" : "Rusuk alas (4):"}</strong> AB, BC, CD, DA</p>
                 <p>• <strong className="text-orange-300">{lang === "en" ? "Lateral edges (4):" : lang === "ja" ? "側面の辺（4）:" : "Rusuk tegak (4):"}</strong> TA, TB, TC, TD</p>
               </div>
             </div>
-            <div className="bg-slate-800/60 border border-green-700/30 rounded-lg p-3">
+            <div className={isDark ? "bg-slate-800/60 border border-green-700/30 rounded-lg p-3" : "bg-green-50 border border-green-300/40 rounded-lg p-3"}>
               <p className="text-green-300 font-semibold text-xs mb-2">
                 {lang === "en" ? "3. Faces (5)" : lang === "ja" ? "3. 面（5枚）" : "3. Sisi / Bidang (5 buah)"}
               </p>
               <SisiLimasSVG lang={lang}/>
-              <div className="mt-2 space-y-1 text-xs text-white/70">
+              <div className={isDark ? "mt-2 space-y-1 text-xs text-white/70" : "mt-2 space-y-1 text-xs text-slate-600"}>
                 <p>• <strong className="text-blue-300">{lang === "en" ? "Base face (1):" : lang === "ja" ? "底面（1）:" : "Sisi alas (1):"}</strong> ABCD</p>
                 <p>• <strong className="text-purple-300">{lang === "en" ? "Lateral faces (4):" : lang === "ja" ? "側面（4）:" : "Sisi tegak (4):"}</strong> TAB, TBC, TCD, TDA</p>
               </div>
@@ -1637,38 +1663,38 @@ const LimasPage = () => {
         <div className="space-y-4 font-body">
           <ApotemaLimasSVG lang={lang}/>
           <div className="space-y-3">
-            <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 text-xs space-y-2">
+            <div className={isDark ? "bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 text-xs space-y-2" : "bg-cyan-50 border border-cyan-300/40 rounded-lg p-3 text-xs space-y-2"}>
               <p className="text-cyan-300 font-semibold">
                 {lang === "en" ? "Pyramid Height (t)" : lang === "ja" ? "角錐の高さ（t）" : "Tinggi Limas (t)"}
               </p>
-              <p className="text-white/75">
+              <p className={isDark ? "text-white/75" : "text-slate-700"}>
                 {lang === "en" ? "Perpendicular distance from apex T to the base plane. Always perpendicular (⊥) to the base; foot is center O."
                 : lang === "ja" ? "頂点Tから底面への垂直距離。底面に⊥で、足はO（中心）。"
                 : "Jarak tegak lurus dari titik puncak T ke bidang alas. Garis ini selalu tegak lurus (⊥) dengan alas dan titik kakinya disebut titik O (pusat alas)."}
               </p>
             </div>
-            <div className="bg-slate-800/60 border border-orange-700/30 rounded-lg p-3 text-xs space-y-2">
+            <div className={isDark ? "bg-slate-800/60 border border-orange-700/30 rounded-lg p-3 text-xs space-y-2" : "bg-orange-50 border border-orange-300/40 rounded-lg p-3 text-xs space-y-2"}>
               <p className="text-orange-300 font-semibold">
                 {lang === "en" ? "Lateral Face Apothem (l)" : lang === "ja" ? "斜高（l）" : "Apotema Sisi Tegak (l)"}
               </p>
-              <p className="text-white/75">
+              <p className={isDark ? "text-white/75" : "text-slate-700"}>
                 {lang === "en" ? "Height of a triangular face, measured from apex T to midpoint of a base edge. Relation to pyramid height:"
                 : lang === "ja" ? "三角形の側面の高さ（T→底辺中点）。高さとの関係式："
                 : "Tinggi segitiga pada bidang tegak, diukur dari puncak T ke titik tengah rusuk alas. Hubungannya dengan tinggi limas:"}
               </p>
-              <div className="bg-slate-900/60 rounded p-2">
+              <div className={isDark ? "bg-slate-900/60 rounded p-2" : "bg-white/90 rounded p-2"}>
                 <BlockMath math="l = \sqrt{t^2 + \left(\frac{s}{2}\right)^2}"/>
               </div>
-              <p className="text-white/50">
+              <p className={isDark ? "text-white/50" : "text-slate-500"}>
                 {lang === "en" ? "where s = base side length" : lang === "ja" ? "s = 底面の辺の長さ" : "di mana s = panjang sisi alas"}
               </p>
             </div>
-            <div className="bg-yellow-950/40 border border-yellow-700/30 rounded-lg p-3 text-xs space-y-1">
+            <div className={isDark ? "bg-yellow-950/40 border border-yellow-700/30 rounded-lg p-3 text-xs space-y-1" : "bg-yellow-50 border border-yellow-300/40 rounded-lg p-3 text-xs space-y-1"}>
               <p className="text-yellow-300 font-semibold">
                 {lang === "en" ? "💡 Remember the difference!" : lang === "ja" ? "💡 違いを覚えよう！" : "💡 Ingat perbedaannya!"}
               </p>
-              <p className="text-white/70">• <strong className="text-cyan-300">t</strong> = {lang === "en" ? "height → used for Volume" : lang === "ja" ? "高さ → 体積に使う" : "tinggi limas → dipakai untuk menghitung Volume"}</p>
-              <p className="text-white/70">• <strong className="text-orange-300">l</strong> = {lang === "en" ? "apothem → used for Surface Area" : lang === "ja" ? "斜高 → 表面積に使う" : "apotema → dipakai untuk menghitung Luas Permukaan"}</p>
+              <p className={isDark ? "text-white/70" : "text-slate-700"}>• <strong className="text-cyan-300">t</strong> = {lang === "en" ? "height → used for Volume" : lang === "ja" ? "高さ → 体積に使う" : "tinggi limas → dipakai untuk menghitung Volume"}</p>
+              <p className={isDark ? "text-white/70" : "text-slate-700"}>• <strong className="text-orange-300">l</strong> = {lang === "en" ? "apothem → used for Surface Area" : lang === "ja" ? "斜高 → 表面積に使う" : "apotema → dipakai untuk menghitung Luas Permukaan"}</p>
             </div>
           </div>
         </div>
@@ -1679,7 +1705,7 @@ const LimasPage = () => {
       icon: "📐",
       content: (
         <div className="space-y-4 font-body">
-          <p className="text-white/65 text-xs">
+          <p className={isDark ? "text-white/65 text-xs" : "text-slate-500 text-xs"}>
             {lang === "en"
               ? "A net is a flat arrangement that folds into a pyramid. Select a type and press Unfold!"
               : lang === "ja"
@@ -1687,8 +1713,8 @@ const LimasPage = () => {
               : "Jaring-jaring adalah rangkaian bidang datar yang jika dilipat membentuk sebuah limas. Pilih jenis limas lalu tekan Bongkar!"}
           </p>
           <JaringLimasInteraktif/>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-white/70 space-y-1.5">
-            <p className="text-white/85 font-semibold">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-white/70 space-y-1.5" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-700 space-y-1.5"}>
+            <p className={isDark ? "text-white/85 font-semibold" : "text-slate-800 font-semibold"}>
               {lang === "en" ? "Net faces of a pyramid:"
               : lang === "ja" ? "角錐の展開図の面:"
               : "Susunan bidang pada jaring-jaring limas:"}
@@ -1696,7 +1722,7 @@ const LimasPage = () => {
             <p>✓ <strong className="text-blue-300">{lang === "en" ? "Triangular Pyramid" : lang === "ja" ? "三角錐" : "Limas Segitiga"}</strong> — {lang === "en" ? "1 triangle base + 3 triangular faces = 4 faces" : lang === "ja" ? "三角形の底面1 + 三角形3 = 4面" : "1 alas segitiga + 3 sisi segitiga = 4 bidang"}</p>
             <p>✓ <strong className="text-purple-300">{lang === "en" ? "Square Pyramid" : lang === "ja" ? "四角錐" : "Limas Segiempat"}</strong> — {lang === "en" ? "1 square base + 4 triangular faces = 5 faces" : lang === "ja" ? "正方形の底面1 + 三角形4 = 5面" : "1 alas persegi + 4 sisi segitiga = 5 bidang"}</p>
             <p>✓ <strong className="text-green-300">{lang === "en" ? "Pentagonal Pyramid" : lang === "ja" ? "五角錐" : "Limas Segilima"}</strong> — {lang === "en" ? "1 pentagon base + 5 triangular faces = 6 faces" : lang === "ja" ? "五角形の底面1 + 三角形5 = 6面" : "1 alas segilima + 5 sisi segitiga = 6 bidang"}</p>
-            <p className="text-white/50 pt-0.5">
+            <p className={isDark ? "text-white/50 pt-0.5" : "text-slate-500 pt-0.5"}>
               {lang === "en" ? "All triangular faces share one base edge and meet at the apex when folded."
               : lang === "ja" ? "すべての三角形の面は底辺を共有し、折ると頂点で交わります。"
               : "Semua segitiga sisi terhubung ke satu rusuk alas dan bertemu di titik puncak saat dilipat."}
@@ -1710,7 +1736,7 @@ const LimasPage = () => {
       icon: "📏",
       content: (
         <div className="space-y-4 font-body">
-          <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-sm text-white/85">
+          <div className={isDark ? "bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-sm text-white/85" : "bg-violet-50 border border-violet-300/60 rounded-lg p-3 text-sm text-slate-800"}>
             <p>
               {lang === "en"
                 ? <>In a pyramid, the <strong className="text-cyan-300">height</strong>, <strong className="text-orange-300">apothem</strong>, <strong className="text-pink-300">lateral edge</strong>, and base dimensions are linked via right triangles — making the Pythagorean theorem essential for surface area calculations.</>
@@ -1719,14 +1745,14 @@ const LimasPage = () => {
                 : <>Pada limas, <strong className="text-cyan-300">tinggi limas</strong>, <strong className="text-orange-300">apotema sisi tegak</strong>, <strong className="text-pink-300">rusuk tegak</strong>, dan ukuran alas saling terhubung melalui segitiga siku-siku.</>}
             </p>
           </div>
-          <div className="bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3">
+          <div className={isDark ? "bg-slate-800/60 border border-cyan-700/30 rounded-lg p-3 space-y-3" : "bg-cyan-50 border border-cyan-300/40 rounded-lg p-3 space-y-3"}>
             <PythagorasLimasSegitigaDetailSVG lang={lang}/>
           </div>
           <PythagorasLimasSegitigaOverview lang={lang}/>
           <PythagorasLimasSegiempatOverview lang={lang}/>
           <PythagorasLimasSegiempatDiagonalSVG/>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1.5">
-            <p className="text-white font-semibold">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1.5" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-600 space-y-1.5"}>
+            <p className={isDark ? "text-white font-semibold" : "text-slate-800 font-semibold"}>
               {lang === "en" ? "Summary of element relationships:"
               : lang === "ja" ? "要素の関係のまとめ:"
               : "Ringkasan hubungan unsur:"}
@@ -1745,7 +1771,7 @@ const LimasPage = () => {
       content: (
         <div className="space-y-4 font-body">
           <WaterLimasAnimation lang={lang}/>
-          <div className="bg-blue-950/50 border border-blue-700/40 rounded-lg p-3 text-sm text-white/85 leading-relaxed">
+          <div className={isDark ? "bg-blue-950/50 border border-blue-700/40 rounded-lg p-3 text-sm text-white/85 leading-relaxed" : "bg-blue-50 border border-blue-300/60 rounded-lg p-3 text-sm text-slate-800 leading-relaxed"}>
             <p>
               {lang === "en"
                 ? <>Volume of a pyramid = <strong className="text-cyan-300">one-third</strong> of the volume of a prism with the same base and height.</>
@@ -1753,38 +1779,38 @@ const LimasPage = () => {
                 ? <>角錐の体積 = 底面と高さが同じ角柱の体積の<strong className="text-cyan-300">1/3</strong>。</>
                 : <>Volume limas = <strong className="text-cyan-300">sepertiga</strong> dari volume prisma dengan alas dan tinggi yang sama.</>}
             </p>
-            <p className="text-xs text-white/50 mt-1">
+            <p className={isDark ? "text-xs text-white/50 mt-1" : "text-xs text-slate-500 mt-1"}>
               {lang === "en" ? "Provable by filling: 3 pyramids fill 1 prism."
               : lang === "ja" ? "3つの角錐で角柱1つが満たされます。"
               : "Dapat dibuktikan dengan mengisi limas ke dalam prisma: dibutuhkan 3 limas untuk mengisi 1 prisma."}
             </p>
           </div>
           <div className="space-y-3 text-sm">
-            <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2">
+            <div className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2" : "bg-gray-100 border border-gray-200 rounded-lg p-3 space-y-2"}>
               <p className="text-cyan-300 font-semibold text-xs">
                 {lang === "en" ? "General Formula:" : lang === "ja" ? "一般公式:" : "Rumus Umum:"}
               </p>
               <BlockMath math="\boxed{V = \frac{1}{3} \times L_a \times t}"/>
-              <p className="text-white/50 text-xs">
+              <p className={isDark ? "text-white/50 text-xs" : "text-slate-500 text-xs"}>
                 {lang === "en" ? "where t = pyramid height (apex-to-base distance)"
                 : lang === "ja" ? "t = 高さ（頂点から底面）"
                 : "dengan t = tinggi limas (jarak puncak ke alas)"}
               </p>
             </div>
-            <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2">
+            <div className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2" : "bg-gray-100 border border-gray-200 rounded-lg p-3 space-y-2"}>
               <p className="text-yellow-300 font-semibold text-xs">
                 {lang === "en" ? "For various base types:" : lang === "ja" ? "底面の種類別:" : "Untuk berbagai jenis alas:"}
               </p>
-              <div className="space-y-2 text-xs text-white/80">
-                <div className="flex justify-between border-b border-slate-700 pb-1">
+              <div className={isDark ? "space-y-2 text-xs text-white/80" : "space-y-2 text-xs text-slate-700"}>
+                <div className={isDark ? "flex justify-between border-b border-slate-700 pb-1" : "flex justify-between border-b border-gray-200 pb-1"}>
                   <span>{lang === "en" ? "Square base (s×s):" : lang === "ja" ? "正方形の底面 (s×s):" : "Alas persegi (s × s):"}</span>
                   <InlineMath math="V = \frac{1}{3}s^2 t"/>
                 </div>
-                <div className="flex justify-between border-b border-slate-700 pb-1">
+                <div className={isDark ? "flex justify-between border-b border-slate-700 pb-1" : "flex justify-between border-b border-gray-200 pb-1"}>
                   <span>{lang === "en" ? "Rectangle base (p×l):" : lang === "ja" ? "長方形の底面 (p×l):" : "Alas persegi panjang (p × l):"}</span>
                   <InlineMath math="V = \frac{1}{3}plt"/>
                 </div>
-                <div className="flex justify-between border-b border-slate-700 pb-1">
+                <div className={isDark ? "flex justify-between border-b border-slate-700 pb-1" : "flex justify-between border-b border-gray-200 pb-1"}>
                   <span>{lang === "en" ? "Triangle base (½×a×t₀):" : lang === "ja" ? "三角形の底面 (½×a×t₀):" : "Alas segitiga (½ × a × t₀):"}</span>
                   <InlineMath math="V = \frac{1}{6}a \cdot t_0 \cdot t"/>
                 </div>
@@ -1794,7 +1820,7 @@ const LimasPage = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
+            <div className={isDark ? "bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-600 space-y-1"}>
               <p>🎯 <strong className="text-white">{lang === "en" ? "Volume units:" : lang === "ja" ? "体積の単位:" : "Satuan volume:"}</strong></p>
               <p>• {lang === "en" ? "If s and t in cm → Volume in" : lang === "ja" ? "s と t が cm → 体積は" : "Jika s dan t dalam cm → Volume dalam"} <InlineMath math="\text{cm}^3"/></p>
               <p>• <InlineMath math="1 \text{ m}^3 = 1.000.000 \text{ cm}^3 = 10^6 \text{ cm}^3"/></p>
@@ -1810,7 +1836,7 @@ const LimasPage = () => {
         <div className="space-y-3 font-body">
           <div className="overflow-x-auto rounded-lg border border-slate-700">
             <table className="w-full text-xs text-center">
-              <thead><tr className="bg-slate-800">
+              <thead><tr className={isDark ? "bg-slate-800" : "bg-gray-100"}>
                 <th className="px-3 py-2 text-violet-300 border-r border-slate-700 text-left">
                   {lang === "en" ? "Quantity" : lang === "ja" ? "量" : "Besaran"}
                 </th>
@@ -1837,16 +1863,16 @@ const LimasPage = () => {
                      ["Luas alas","L_a = s²","persegi"],["Luas satu Δ tegak","L_Δ = ½ × s × l","segitiga"],
                      ["Luas permukaan","L = s² + 2sl","alas + 4 segitiga"],["Volume","V = ⅓ × s² × t","sepertiga prisma"]]
                 ).map(([b,r,c],i)=>(
-                  <tr key={i} className={`border-t border-slate-700 ${i%2===0?"bg-slate-900/40":"bg-slate-800/30"}`}>
-                    <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
+                  <tr key={i} className={`border-t border-slate-700 ${i%2===0 ? (isDark ? "bg-slate-900/40" : "bg-blue-50/50") : (isDark ? "bg-slate-800/30" : "")}`}>
+                    <td className={isDark ? "px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left" : "px-3 py-2 text-slate-800 font-semibold border-r border-gray-200 text-left"}>{b}</td>
                     <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
-                    <td className="px-3 py-2 text-white/55 text-left">{c}</td>
+                    <td className={isDark ? "px-3 py-2 text-white/55 text-left" : "px-3 py-2 text-slate-500 text-left"}>{c}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs text-violet-200 space-y-1">
+          <div className={isDark ? "bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs text-violet-200 space-y-1" : "bg-violet-50 border border-violet-300/60 rounded-lg p-3 text-xs text-violet-800 space-y-1"}>
             <p>🚀 <strong>
               {lang === "en" ? "Key: two important variables — s (base side) and t (height)."
               : lang === "ja" ? "重要な変数: s（底辺の辺）と t（高さ）の2つ。"
@@ -1874,7 +1900,7 @@ const LimasPage = () => {
       level: t.easy,
       color:"text-green-400", bg:"bg-green-950/30", border:"border-green-700/50", badgeBg:"bg-green-900/60",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
             {lang === "en"
               ? <>A regular square pyramid has a square base with side <InlineMath math="10\text{ cm}"/> and lateral face apothem <InlineMath math="13\text{ cm}"/>. Find the surface area.</>
@@ -1886,7 +1912,7 @@ const LimasPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2" : "bg-gray-100 border border-gray-300 rounded p-3 space-y-2"}>
             <BlockMath math="L_a = s^2 = 10^2 = 100\text{ cm}^2"/>
             <BlockMath math="L_s = 4 \times \frac{1}{2} \times s \times l = 4 \times \frac{1}{2} \times 10 \times 13 = 260\text{ cm}^2"/>
             <BlockMath math="L = 100 + 260 = 360\text{ cm}^2"/>
@@ -1899,9 +1925,9 @@ const LimasPage = () => {
     },
     {
       level: t.medium,
-      color:"text-yellow-400", bg:"bg-yellow-950/30", border:"border-yellow-700/50", badgeBg:"bg-yellow-900/60",
+      color:"text-yellow-400", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
             {lang === "en"
               ? <>Regular square pyramid T.ABCD has base side <InlineMath math="12\text{ cm}"/> and height <InlineMath math="8\text{ cm}"/>. Find: (a) the apothem, (b) the surface area.</>
@@ -1914,16 +1940,16 @@ const LimasPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-yellow-400 font-semibold">(a) {lang === "en" ? "Apothem:" : lang === "ja" ? "斜高:" : "Apotema sisi tegak:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             <BlockMath math="l = \sqrt{t^2 + \left(\frac{s}{2}\right)^2} = \sqrt{8^2 + 6^2} = \sqrt{64 + 36} = \sqrt{100} = 10\text{ cm}"/>
           </div>
           <p className="text-yellow-400 font-semibold">(b) {lang === "en" ? "Surface area:" : lang === "ja" ? "表面積:" : "Luas permukaan:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2" : "bg-gray-100 border border-gray-300 rounded p-3 space-y-2"}>
             <BlockMath math="L_a = 12^2 = 144\text{ cm}^2"/>
             <BlockMath math="L_s = 4 \times \frac{1}{2} \times 12 \times 10 = 240\text{ cm}^2"/>
             <BlockMath math="L = 144 + 240 = 384\text{ cm}^2"/>
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3">
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3" : "bg-yellow-50 border border-yellow-300/60 rounded p-3"}>
             <p className="text-yellow-300 font-semibold text-sm">✅ <InlineMath math="l = 10\text{ cm}"/>, <InlineMath math="L = 384\text{ cm}^2"/></p>
           </div>
         </div>
@@ -1933,7 +1959,7 @@ const LimasPage = () => {
       level: t.hard,
       color:"text-red-400", bg:"bg-red-950/30", border:"border-red-700/50", badgeBg:"bg-red-900/60",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
             {lang === "en"
               ? <>A scout tent shaped as a regular square pyramid has a square base with side <InlineMath math="3\text{ m}"/> and height <InlineMath math="2\text{ m}"/>. The lateral faces use fabric costing {lang === "en" ? "$" : "Rp"}85,000/m². The base has no fabric. What is the total fabric cost?</>
@@ -1946,24 +1972,24 @@ const LimasPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-red-400 font-semibold">{lang === "en" ? "Step 1 — Apothem:" : lang === "ja" ? "ステップ1 — 斜高:" : "Langkah 1 — Cari apotema sisi tegak:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             <BlockMath math="l = \sqrt{2^2 + \left(\frac{3}{2}\right)^2} = \sqrt{4 + 2{,}25} = \sqrt{6{,}25} = 2{,}5\text{ m}"/>
           </div>
           <p className="text-red-400 font-semibold">{lang === "en" ? "Step 2 — Fabric area (4 lateral faces only):" : lang === "ja" ? "ステップ2 — 布の面積（側面のみ）:" : "Langkah 2 — Hitung luas kain (hanya 4 sisi tegak):"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             <BlockMath math="L_k = 4 \times \frac{1}{2} \times 3 \times 2{,}5 = 4 \times 3{,}75 = 15\text{ m}^2"/>
           </div>
           <p className="text-red-400 font-semibold">{lang === "en" ? "Step 3 — Cost:" : lang === "ja" ? "ステップ3 — 費用:" : "Langkah 3 — Hitung biaya:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             {lang === "en" || lang === "ja"
               ? <BlockMath math="\text{Cost} = 15 \times 85{,}000 = \$1{,}275{,}000"/>
               : <BlockMath math="\text{Biaya} = 15 \times 85.000 = Rp\,1.275.000"/>}
           </div>
           <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
             <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Apothem" : lang === "ja" ? "斜高" : "Apotema"} = 2,5 m</p>
-            <p className="text-white/80">• {lang === "en" ? "Fabric area" : lang === "ja" ? "布の面積" : "Luas kain"} = 15 m²</p>
-            <p className="text-white/80">• {lang === "en" ? "Total cost" : lang === "ja" ? "合計費用" : "Total biaya"} = <strong className="text-yellow-300">{lang === "en" || lang === "ja" ? "$1,275,000" : "Rp 1.275.000"}</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Apothem" : lang === "ja" ? "斜高" : "Apotema"} = 2,5 m</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Fabric area" : lang === "ja" ? "布の面積" : "Luas kain"} = 15 m²</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Total cost" : lang === "ja" ? "合計費用" : "Total biaya"} = <strong className="text-yellow-300">{lang === "en" || lang === "ja" ? "$1,275,000" : "Rp 1.275.000"}</strong></p>
           </div>
         </div>
       ),
@@ -1975,7 +2001,7 @@ const LimasPage = () => {
       level: t.easy,
       color:"text-green-400", bg:"bg-green-950/30", border:"border-green-700/50", badgeBg:"bg-green-900/60",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
             {lang === "en"
               ? <>A regular square pyramid has base side <InlineMath math="6\text{ cm}"/> and height <InlineMath math="8\text{ cm}"/>. Find the volume.</>
@@ -1987,7 +2013,7 @@ const LimasPage = () => {
       ),
       answer: (
         <div className="space-y-2 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             <BlockMath math="V = \frac{1}{3} \times s^2 \times t = \frac{1}{3} \times 6^2 \times 8 = \frac{1}{3} \times 36 \times 8 = 96\text{ cm}^3"/>
           </div>
           <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
@@ -1998,9 +2024,9 @@ const LimasPage = () => {
     },
     {
       level: t.medium,
-      color:"text-yellow-400", bg:"bg-yellow-950/30", border:"border-yellow-700/50", badgeBg:"bg-yellow-900/60",
+      color:"text-yellow-400", bg: isDark ? "bg-yellow-950/30" : "bg-yellow-50", border: isDark ? "border-yellow-700/50" : "border-yellow-300", badgeBg: isDark ? "bg-yellow-900/60" : "bg-yellow-100",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
             {lang === "en"
               ? <>The volume of a regular square pyramid is <InlineMath math="192\text{ cm}^3"/> and height is <InlineMath math="12\text{ cm}"/>. Find: (a) base side length, (b) surface area if apothem is <InlineMath math="10\text{ cm}"/>.</>
@@ -2013,17 +2039,17 @@ const LimasPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-yellow-400 font-semibold">(a)</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1" : "bg-gray-100 border border-gray-300 rounded p-3 space-y-1"}>
             <BlockMath math="V = \frac{1}{3} s^2 t \Rightarrow 192 = \frac{1}{3} \times s^2 \times 12"/>
             <BlockMath math="192 = 4s^2 \Rightarrow s^2 = 48 \Rightarrow s = 4\sqrt{3} \approx 6{,}93\text{ cm}"/>
           </div>
           <p className="text-yellow-400 font-semibold">(b)</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2" : "bg-gray-100 border border-gray-300 rounded p-3 space-y-2"}>
             <BlockMath math="L_a = s^2 = 48\text{ cm}^2"/>
             <BlockMath math="L_s = 4 \times \frac{1}{2} \times 4\sqrt{3} \times 10 = 80\sqrt{3} \approx 138{,}6\text{ cm}^2"/>
             <BlockMath math="L = 48 + 80\sqrt{3} \approx 186{,}6\text{ cm}^2"/>
           </div>
-          <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+          <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-2" : "bg-yellow-50 border border-yellow-300/60 rounded p-2"}>
             <p className="text-yellow-300 font-semibold text-xs">✅ <InlineMath math="s = 4\sqrt{3}\text{ cm}"/>, <InlineMath math="L \approx 186{,}6\text{ cm}^2"/></p>
           </div>
         </div>
@@ -2033,7 +2059,7 @@ const LimasPage = () => {
       level: t.hard,
       color:"text-red-400", bg:"bg-red-950/30", border:"border-red-700/50", badgeBg:"bg-red-900/60",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
             {lang === "en"
               ? <>A clay pyramid toy (regular square pyramid) has base side <InlineMath math="9\text{ cm}"/> and lateral edge <InlineMath math="12\text{ cm}"/>. Find (a) height, (b) volume, (c) weight if clay density is <InlineMath math="2{,}5\text{ g/cm}^3"/>.</>
@@ -2046,23 +2072,23 @@ const LimasPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-red-400 font-semibold">(a) {lang === "en" ? "Height:" : lang === "ja" ? "高さ:" : "Tinggi limas:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1" : "bg-gray-100 border border-gray-300 rounded p-3 text-xs space-y-1"}>
             <BlockMath math="t = \sqrt{TA^2 - OA^2} = \sqrt{12^2 - \left(\frac{9\sqrt{2}}{2}\right)^2}"/>
             <BlockMath math="= \sqrt{144 - 40{,}5} = \sqrt{103{,}5} \approx 10{,}17\text{ cm}"/>
           </div>
           <p className="text-red-400 font-semibold">(b) {lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             <BlockMath math="V = \frac{1}{3} \times 9^2 \times \sqrt{103{,}5} \approx \frac{1}{3} \times 81 \times 10{,}17 \approx 274{,}6\text{ cm}^3"/>
           </div>
           <p className="text-red-400 font-semibold">(c) {lang === "en" ? "Weight:" : lang === "ja" ? "重さ:" : "Berat:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded p-3" : "bg-gray-100 border border-gray-300 rounded p-3"}>
             <BlockMath math="m = 274{,}6 \times 2{,}5 \approx 686{,}5\text{ gram}"/>
           </div>
           <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
             <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
-            <p className="text-white/80">• {lang === "en" ? "Height" : lang === "ja" ? "高さ" : "Tinggi"} ≈ 10,17 cm</p>
-            <p className="text-white/80">• {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} ≈ 274,6 cm³</p>
-            <p className="text-white/80">• {lang === "en" ? "Weight" : lang === "ja" ? "重さ" : "Berat"} ≈ <strong className="text-yellow-300">686,5 gram</strong></p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Height" : lang === "ja" ? "高さ" : "Tinggi"} ≈ 10,17 cm</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} ≈ 274,6 cm³</p>
+            <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Weight" : lang === "ja" ? "重さ" : "Berat"} ≈ <strong className="text-yellow-300">686,5 gram</strong></p>
           </div>
         </div>
       ),
@@ -2076,7 +2102,7 @@ const LimasPage = () => {
       icon: "🏔️",
       title: lang === "en" ? "Introduction" : lang === "ja" ? "はじめに" : "Pengantar",
       content: (
-        <div className="space-y-4 text-sm font-body text-white/75 leading-relaxed">
+        <div className={isDark ? "space-y-4 text-sm font-body text-white/75 leading-relaxed" : "space-y-4 text-sm font-body text-slate-700 leading-relaxed"}>
           <ThreeLimas/>
           <p>
             {lang === "en"
@@ -2085,7 +2111,7 @@ const LimasPage = () => {
               ? <>古代エジプトのピラミッドから尖った屋根まで、<strong className="text-violet-300">角錐</strong>はいたるところにあります！要素、展開図、<strong className="text-yellow-300">表面積</strong>と<strong className="text-green-300">体積</strong>の計算を学びましょう。</>
               : <>Dari piramida Mesir kuno hingga atap rumah yang runcing, bentuk <strong className="text-violet-300">limas</strong> ada di mana-mana! Pelajari semua tentang limas — mulai dari unsur-unsurnya, jaring-jaring interaktif, hingga cara menghitung <strong className="text-yellow-300">luas permukaan</strong> dan <strong className="text-green-300">volume</strong>-nya.</>}
           </p>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-600 space-y-1"}>
             <p className="text-violet-300 font-semibold mb-1">📋 {lang === "en" ? "Topics in this chapter:" : lang === "ja" ? "この章のトピック:" : "Materi dalam bab ini:"}</p>
             <p>• {lang === "en" ? "Definition & types of pyramids" : lang === "ja" ? "角錐の定義と種類" : "Pengertian & jenis-jenis limas"}</p>
             <p>• {lang === "en" ? "Elements: edges, faces, vertices" : lang === "ja" ? "要素: 辺、面、頂点" : "Unsur-unsur: rusuk, sisi, titik sudut"}</p>
@@ -2093,7 +2119,7 @@ const LimasPage = () => {
             <p>• {lang === "en" ? "Surface area and volume" : lang === "ja" ? "表面積と体積" : "Luas permukaan dan volume"}</p>
             <p>• {lang === "en" ? "Graded examples" : lang === "ja" ? "段階的な例題" : "Contoh soal bertingkat"}</p>
           </div>
-          <div className="bg-slate-800/60 border border-violet-700/40 rounded-xl p-3">
+          <div className={isDark ? "bg-slate-800/60 border border-violet-700/40 rounded-xl p-3" : "bg-violet-50 border border-violet-300/40 rounded-xl p-3"}>
             <p className="text-violet-300 font-semibold text-xs mb-3 text-center">
               📷 {lang === "en" ? "Pyramids Around Us" : lang === "ja" ? "身の回りの角錐" : "Contoh Benda Berbentuk Limas di Sekitar Kita"}
             </p>
@@ -2123,12 +2149,12 @@ const LimasPage = () => {
       icon:"⬛",
       title: lang === "en" ? "Element — Pyramid Edges" : lang === "ja" ? "要素 — 辺" : "Unsur — Rusuk Limas",
       content: (
-        <div className="space-y-4 text-sm text-white/85 font-body">
-          <div className="bg-slate-800/60 border border-cyan-700/40 rounded-xl p-4">
+        <div className={isDark ? "space-y-4 text-sm text-white/85 font-body" : "space-y-4 text-sm text-slate-800 font-body"}>
+          <div className={isDark ? "bg-slate-800/60 border border-cyan-700/40 rounded-xl p-4" : "bg-cyan-50 border border-cyan-300/40 rounded-xl p-4"}>
             <p className="text-cyan-300 font-semibold mb-1">
               🎬 {lang === "en" ? "Comparing Edges — 3 Pyramid Types" : lang === "ja" ? "辺の比較 — 3種類の角錐" : "Perbandingan Rusuk — 3 Jenis Limas"}
             </p>
-            <p className="text-xs text-white/55 mb-3 font-body">
+            <p className={isDark ? "text-xs text-white/55 mb-3 font-body" : "text-xs text-slate-500 mb-3 font-body"}>
               {lang === "en" ? "Pyramids have only base edges and lateral edges — no top/lid edges because all lateral edges meet at one apex."
               : lang === "ja" ? "角錐には底面の辺と側面の辺だけあります。すべての側面の辺が一点に集まるため、上面の辺はありません。"
               : "Perhatikan: limas hanya memiliki rusuk alas dan rusuk tegak. Tidak ada rusuk atas/tutup seperti pada prisma karena semua rusuk tegak bertemu di satu puncak."}
@@ -2142,22 +2168,22 @@ const LimasPage = () => {
       icon:"⬜",
       title: lang === "en" ? "Element — Pyramid Faces" : lang === "ja" ? "要素 — 面" : "Unsur — Sisi Limas",
       content: (
-        <div className="space-y-4 text-sm text-white/85 font-body">
-          <div className="bg-slate-800/60 border border-green-700/40 rounded-xl p-4">
+        <div className={isDark ? "space-y-4 text-sm text-white/85 font-body" : "space-y-4 text-sm text-slate-800 font-body"}>
+          <div className={isDark ? "bg-slate-800/60 border border-green-700/40 rounded-xl p-4" : "bg-green-50 border border-green-300/40 rounded-xl p-4"}>
             <p className="text-green-300 font-semibold mb-1">
               🎬 {lang === "en" ? "Comparing Faces — 3 Pyramid Types" : lang === "ja" ? "面の比較 — 3種類の角錐" : "Perbandingan Sisi — 3 Jenis Limas"}
             </p>
-            <p className="text-xs text-white/55 mb-3 font-body">
+            <p className={isDark ? "text-xs text-white/55 mb-3 font-body" : "text-xs text-slate-500 mb-3 font-body"}>
               {lang === "en" ? "Click to see Base Face or Triangular Lateral Faces!"
               : lang === "ja" ? "「底面」または「側面」ボタンで確認！"
               : "Tekan tombol untuk melihat Sisi Alas atau Sisi Tegak Segitiga!"}
             </p>
             <SisiTigaLimasAnimation/>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4 text-xs text-white/70 space-y-1">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-4 text-xs text-white/70 space-y-1" : "bg-gray-100 border border-gray-200 rounded-lg p-4 text-xs text-slate-600 space-y-1"}>
             <p>• <strong className="text-blue-300">{lang === "en" ? "1 base face" : lang === "ja" ? "底面1枚" : "1 sisi alas"}</strong>: {lang === "en" ? "shape matches pyramid name" : lang === "ja" ? "形は底面の名前と一致" : "bentuknya mengikuti nama limas"}</p>
             <p>• <strong className="text-violet-300">{lang === "en" ? "n lateral faces" : lang === "ja" ? "側面n枚" : "n sisi tegak"}</strong>: {lang === "en" ? "all triangles meeting at apex" : lang === "ja" ? "すべて頂点で交わる三角形" : "semuanya berbentuk segitiga dan bertemu di puncak"}</p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
+            <div className={isDark ? "bg-slate-700/60 rounded p-2 mt-2" : "bg-gray-200 rounded p-2 mt-2"}>
               <BlockMath math="\text{{Faces}} = n + 1"/>
             </div>
           </div>
@@ -2168,26 +2194,26 @@ const LimasPage = () => {
       icon:"●",
       title: lang === "en" ? "Element — Vertices & Table" : lang === "ja" ? "要素 — 頂点と一覧表" : "Unsur — Titik Sudut & Tabel",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
-          <div className="bg-slate-800/60 border border-yellow-700/40 rounded-xl p-4">
+        <div className={isDark ? "space-y-3 text-sm text-white/85 font-body" : "space-y-3 text-sm text-slate-800 font-body"}>
+          <div className={isDark ? "bg-slate-800/60 border border-yellow-700/40 rounded-xl p-4" : "bg-yellow-50 border border-yellow-300/40 rounded-xl p-4"}>
             <p className="text-yellow-300 font-semibold mb-1">
               🎬 {lang === "en" ? "Comparing Vertices — 3 Pyramid Types" : lang === "ja" ? "頂点の比較 — 3種類の角錐" : "Perbandingan Titik Sudut — 3 Jenis Limas"}
             </p>
-            <p className="text-xs text-white/55 mb-3 font-body">
+            <p className={isDark ? "text-xs text-white/55 mb-3 font-body" : "text-xs text-slate-500 mb-3 font-body"}>
               {lang === "en" ? "Click to see Base Vertices or Apex!"
               : lang === "ja" ? "「底面の頂点」または「頂上」ボタンで確認！"
               : "Tekan tombol untuk melihat Titik Sudut Alas atau Titik Puncak!"}
             </p>
             <TitikSudutTigaLimasAnimation/>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <div className={isDark ? "bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1" : "bg-gray-100 border border-gray-200 rounded-lg p-3 text-xs text-slate-600 space-y-1"}>
             <p>• <strong className="text-cyan-300">{lang === "en" ? "n base vertices" : lang === "ja" ? "底面のn頂点" : "n titik sudut alas"}</strong></p>
             <p>• <strong className="text-yellow-300">{lang === "en" ? "1 apex" : lang === "ja" ? "頂上1点" : "1 titik puncak"}</strong></p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
+            <div className={isDark ? "bg-slate-700/60 rounded p-2 mt-2" : "bg-gray-200 rounded p-2 mt-2"}>
               <BlockMath math="\text{{Vertices}} = n + 1"/>
             </div>
           </div>
-          <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs text-violet-200 space-y-1">
+          <div className={isDark ? "bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs text-violet-200 space-y-1" : "bg-violet-50 border border-violet-300/60 rounded-lg p-3 text-xs text-violet-800 space-y-1"}>
             <p className="text-violet-300 font-semibold">📋 {lang === "en" ? "Pyramid element table:" : lang === "ja" ? "角錐の要素一覧表:" : "Tabel Unsur Limas Segi-n:"}</p>
             <div className="overflow-x-auto mt-2">
               <table className="w-full text-xs text-center">
@@ -2204,7 +2230,7 @@ const LimasPage = () => {
                     ? [["三角形 (n=3)",4,6,4],["四角形 (n=4)",5,8,5],["五角形 (n=5)",6,10,6],["六角形 (n=6)",7,12,7]]
                     : [["Segitiga (n=3)",4,6,4],["Segiempat (n=4)",5,8,5],["Segilima (n=5)",6,10,6],["Segienam (n=6)",7,12,7]]
                   ).map(([n,s,r,ts],i)=>(
-                    <tr key={i} className={`border-t border-violet-900 ${i%2===0?"bg-violet-950/30":""}`}>
+                    <tr key={i} className={`border-t border-violet-900 ${i%2===0 ? (isDark ? "bg-violet-950/30" : "bg-violet-50/50") : ""}`}>
                       <td className="px-2 py-1 text-left">{n}</td>
                       <td className="px-2 py-1 text-yellow-300">{s}</td>
                       <td className="px-2 py-1 text-yellow-300">{r}</td>
@@ -2291,7 +2317,7 @@ const LimasPage = () => {
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
           {lang === "en" ? "PYRAMID" : lang === "ja" ? "角錐" : "LIMAS"}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.subtitle}</p>
+        <p className={isDark ? "text-white/50 text-xs text-center mb-6 font-body" : "text-slate-500 text-xs text-center mb-6 font-body"}>{t.subtitle}</p>
 
         <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
           {slides.map((_,i)=>(
@@ -2302,13 +2328,13 @@ const LimasPage = () => {
         </div>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-4">
-          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
+          <div className={isDark ? "flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40" : "flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-gray-100"}>
             <span className="text-2xl">{slide.icon}</span>
             <div className="flex-1 min-w-0">
-              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+              <p className={isDark ? "text-white/40 text-[10px] font-body uppercase tracking-widest" : "text-slate-400 text-[10px] font-body uppercase tracking-widest"}>
                 {t.slideLabel} {currentSlide+1} / {total}
               </p>
-              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+              <h2 className={isDark ? "font-display text-sm font-bold text-white" : "font-display text-sm font-bold text-slate-800"}>{slide.title}</h2>
             </div>
           </div>
           <div className="px-5 py-5">{slide.content}</div>
@@ -2316,7 +2342,7 @@ const LimasPage = () => {
 
         <div className="flex items-center justify-between gap-3 mb-6">
           <button onClick={goPrev} disabled={currentSlide===0}
-            className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display text-white/70 hover:text-white hover:border-primary/60 hover:bg-primary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer">
+            className={isDark ? "flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display text-white/70 hover:text-white hover:border-primary/60 hover:bg-primary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer" : "flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display text-slate-600 hover:text-slate-800 hover:border-primary/60 hover:bg-primary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"}>
             {t.prev}
           </button>
           <button onClick={goNext} disabled={currentSlide===total-1}
