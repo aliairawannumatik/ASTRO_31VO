@@ -886,7 +886,11 @@ const DB_VERTS: Record<DBVKey, [number,number,number?,number?]> = {
 };
 const DB_ALL_KEYS: DBVKey[] = ["A","B","C","D","E","F","G","H"];
 
-const RusukBalokSVG = () => (
+const RusukBalokSVG = () => {
+  const { isDark } = useTheme();
+  const vFill = isDark ? "#e2e8f0" : "#64748b";
+  const lbl   = isDark ? "#ffffff" : "#0f172a";
+  return (
   <svg viewBox="0 0 200 154" className="w-full max-w-xs mx-auto my-2" aria-label="Rusuk balok ABCD.EFGH">
     <defs>
       <style>{`
@@ -915,14 +919,15 @@ const RusukBalokSVG = () => (
     })}
     {DB_ALL_KEYS.map(k=>{
       const [cx,cy,lx=0,ly=0]=DB_VERTS[k];
-      return <circle key={k} cx={cx} cy={cy} r={3} fill="#e2e8f0"/>;
+      return <circle key={k} cx={cx} cy={cy} r={3} fill={vFill}/>;
     })}
     {DB_ALL_KEYS.map(k=>{
       const [cx,cy,lx=0,ly=0]=DB_VERTS[k];
-      return <text key={k} x={cx+(lx as number)} y={cy+(ly as number)} fill="white" fontSize="10" fontFamily="monospace" fontWeight="bold">{k}</text>;
+      return <text key={k} x={cx+(lx as number)} y={cy+(ly as number)} fill={lbl} fontSize="10" fontFamily="monospace" fontWeight="bold">{k}</text>;
     })}
   </svg>
-);
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    SISI BALOK SVG — rotating face highlights
@@ -936,30 +941,39 @@ const SISI_FACES: {verts:[DBVKey,DBVKey,DBVKey,DBVKey]; color:string; anim:strin
   {verts:["A","B","C","D"],color:"#ef4444",anim:"siBot"},
 ];
 
-const SisiBalokSVG = () => (
+const SisiBalokSVG = () => {
+  const { isDark } = useTheme();
+  const fA    = isDark ? "rgba(15,23,42,0.7)"  : "rgba(241,245,249,0.85)";
+  const fB    = isDark ? "rgba(15,23,42,0.45)" : "rgba(241,245,249,0.65)";
+  const ws    = isDark ? "#475569" : "#94a3b8";
+  const wsDash = isDark ? "#64748b" : "#94a3b8";
+  const vFill = isDark ? "#e2e8f0" : "#64748b";
+  const lbl   = isDark ? "white"   : "#0f172a";
+  return (
   <svg viewBox="0 0 200 154" className="w-full max-w-xs mx-auto my-2" aria-label="Sisi balok ABCD.EFGH">
     <defs>
       <style>{SISI_FACES.map((f,i)=>`@keyframes ${f.anim}{0%,100%{fill-opacity:0.55;filter:drop-shadow(0 0 8px ${f.color});}50%{fill-opacity:0.08;filter:none;}}.${f.anim}{animation:${f.anim} 2.2s ease-in-out infinite ${(i*0.36).toFixed(2)}s;}`).join("")}</style>
     </defs>
-    <polygon points="14,126 134,126 134,56 14,56" fill="rgba(15,23,42,0.7)" stroke="#475569" strokeWidth="1"/>
-    <polygon points="46,96 166,96 166,22 46,22" fill="rgba(15,23,42,0.45)" stroke="#475569" strokeWidth="1"/>
-    <line x1="14" y1="126" x2="46" y2="96" stroke="#475569" strokeWidth="1"/>
-    <line x1="134" y1="126" x2="166" y2="96" stroke="#475569" strokeWidth="1"/>
-    <line x1="14" y1="56" x2="46" y2="22" stroke="#475569" strokeWidth="1"/>
-    <line x1="134" y1="56" x2="166" y2="22" stroke="#475569" strokeWidth="1"/>
-    <line x1="46" y1="96" x2="46" y2="22" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
-    <line x1="46" y1="96" x2="166" y2="96" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
-    <line x1="46" y1="22" x2="14" y2="56" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
+    <polygon points="14,126 134,126 134,56 14,56" fill={fA} stroke={ws} strokeWidth="1"/>
+    <polygon points="46,96 166,96 166,22 46,22" fill={fB} stroke={ws} strokeWidth="1"/>
+    <line x1="14" y1="126" x2="46" y2="96" stroke={ws} strokeWidth="1"/>
+    <line x1="134" y1="126" x2="166" y2="96" stroke={ws} strokeWidth="1"/>
+    <line x1="14" y1="56" x2="46" y2="22" stroke={ws} strokeWidth="1"/>
+    <line x1="134" y1="56" x2="166" y2="22" stroke={ws} strokeWidth="1"/>
+    <line x1="46" y1="96" x2="46" y2="22" stroke={wsDash} strokeWidth="0.8" strokeDasharray="4,3"/>
+    <line x1="46" y1="96" x2="166" y2="96" stroke={wsDash} strokeWidth="0.8" strokeDasharray="4,3"/>
+    <line x1="46" y1="22" x2="14" y2="56" stroke={wsDash} strokeWidth="0.8" strokeDasharray="4,3"/>
     {SISI_FACES.map((f,i)=>{
       const pts = f.verts.map(k => { const [x,y]=DB_VERTS[k]; return `${x},${y}`; }).join(" ");
       return <polygon key={i} points={pts} fill={f.color} stroke={f.color} strokeWidth="2" strokeLinejoin="round" className={f.anim}/>;
     })}
     {DB_ALL_KEYS.map(k=>{
       const [cx,cy,lx=0,ly=0]=DB_VERTS[k];
-      return <g key={k}><circle cx={cx} cy={cy} r={2.5} fill="#e2e8f0"/><text x={cx+(lx as number)} y={cy+(ly as number)} fill="white" fontSize="9.5" fontFamily="monospace" fontWeight="bold">{k}</text></g>;
+      return <g key={k}><circle cx={cx} cy={cy} r={2.5} fill={vFill}/><text x={cx+(lx as number)} y={cy+(ly as number)} fill={lbl} fontSize="9.5" fontFamily="monospace" fontWeight="bold">{k}</text></g>;
     })}
   </svg>
-);
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    DIAGONAL BIDANG BALOK — 12 total, shown one per card
@@ -1013,6 +1027,11 @@ const ALL_DB_DIAGS_RAW: {key:string;v1:DBVKey;v2:DBVKey;color:string;labelId:str
 
 const BalokDiagCard = ({d,idx,lang}:{d:typeof ALL_DB_DIAGS_RAW[0];idx:number;lang:string}) => {
   const { isDark } = useTheme();
+  const svgFa = isDark ? "rgba(15,23,42,0.85)" : "rgba(241,245,249,0.95)";
+  const svgFb = isDark ? "rgba(15,23,42,0.5)"  : "rgba(241,245,249,0.70)";
+  const svgWs = isDark ? "#475569" : "#94a3b8";
+  const svgWd = isDark ? "#64748b" : "#94a3b8";
+  const svgDimText = isDark ? "rgba(255,255,255,0.3)" : "rgba(15,23,42,0.35)";
   const aId = `dbg${idx}`;
   const aCls = `dbc${idx}`;
   const [x1,y1] = DB_VERTS[d.v1];
@@ -1027,15 +1046,15 @@ const BalokDiagCard = ({d,idx,lang}:{d:typeof ALL_DB_DIAGS_RAW[0];idx:number;lan
             .${aCls}{animation:${aId} 1.8s ease-in-out infinite ${(idx*0.18).toFixed(1)}s;}
           `}</style>
         </defs>
-        <polygon points="14,126 134,126 134,56 14,56" fill="rgba(15,23,42,0.85)" stroke="#475569" strokeWidth="1"/>
-        <polygon points="46,96 166,96 166,22 46,22" fill="rgba(15,23,42,0.5)" stroke="#475569" strokeWidth="1"/>
-        <line x1="14" y1="126" x2="46" y2="96" stroke="#475569" strokeWidth="1"/>
-        <line x1="134" y1="126" x2="166" y2="96" stroke="#475569" strokeWidth="1"/>
-        <line x1="14" y1="56" x2="46" y2="22" stroke="#475569" strokeWidth="1"/>
-        <line x1="134" y1="56" x2="166" y2="22" stroke="#475569" strokeWidth="1"/>
-        <line x1="46" y1="96" x2="46" y2="22" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
-        <line x1="46" y1="96" x2="166" y2="96" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
-        <line x1="46" y1="22" x2="14" y2="56" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
+        <polygon points="14,126 134,126 134,56 14,56" fill={svgFa} stroke={svgWs} strokeWidth="1"/>
+        <polygon points="46,96 166,96 166,22 46,22" fill={svgFb} stroke={svgWs} strokeWidth="1"/>
+        <line x1="14" y1="126" x2="46" y2="96" stroke={svgWs} strokeWidth="1"/>
+        <line x1="134" y1="126" x2="166" y2="96" stroke={svgWs} strokeWidth="1"/>
+        <line x1="14" y1="56" x2="46" y2="22" stroke={svgWs} strokeWidth="1"/>
+        <line x1="134" y1="56" x2="166" y2="22" stroke={svgWs} strokeWidth="1"/>
+        <line x1="46" y1="96" x2="46" y2="22" stroke={svgWd} strokeWidth="0.8" strokeDasharray="4,3"/>
+        <line x1="46" y1="96" x2="166" y2="96" stroke={svgWd} strokeWidth="0.8" strokeDasharray="4,3"/>
+        <line x1="46" y1="22" x2="14" y2="56" stroke={svgWd} strokeWidth="0.8" strokeDasharray="4,3"/>
         <line x1={x1} y1={y1} x2={x2} y2={y2}
           stroke={d.color} strokeWidth="3" strokeLinecap="round" className={aCls}/>
         {DB_ALL_KEYS.map(k=>{
@@ -1046,7 +1065,7 @@ const BalokDiagCard = ({d,idx,lang}:{d:typeof ALL_DB_DIAGS_RAW[0];idx:number;lan
         {DB_ALL_KEYS.map(k=>{
           const [cx,cy,lx=0,ly=0]=DB_VERTS[k];
           const isEnd=k===d.v1||k===d.v2;
-          return <text key={k} x={cx+(lx as number)} y={cy+(ly as number)} fill={isEnd?d.color:"rgba(255,255,255,0.3)"} fontSize={isEnd?"10":"8.5"} fontFamily="monospace" fontWeight={isEnd?"bold":"normal"}>{k}</text>;
+          return <text key={k} x={cx+(lx as number)} y={cy+(ly as number)} fill={isEnd?d.color:svgDimText} fontSize={isEnd?"10":"8.5"} fontFamily="monospace" fontWeight={isEnd?"bold":"normal"}>{k}</text>;
         })}
         <text x="90" y="148" fill={d.color} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{d.key}</text>
       </svg>
@@ -1085,6 +1104,10 @@ const ALL_DR_DIAGS_RAW: {key:string;v1:DBVKey;v2:DBVKey;color:string;labelId:str
 
 const BalokRuangCard = ({d,idx,lang}:{d:typeof ALL_DR_DIAGS_RAW[0];idx:number;lang:string}) => {
   const { isDark } = useTheme();
+  const svgFa = isDark ? "rgba(15,23,42,0.85)" : "rgba(241,245,249,0.95)";
+  const svgFb = isDark ? "rgba(15,23,42,0.5)"  : "rgba(241,245,249,0.70)";
+  const svgWs = isDark ? "#475569" : "#94a3b8";
+  const svgDimText = isDark ? "rgba(255,255,255,0.3)" : "rgba(15,23,42,0.35)";
   const aId = `drg${idx}`;
   const aCls = `drc${idx}`;
   const [x1,y1] = DB_VERTS[d.v1];
@@ -1099,12 +1122,12 @@ const BalokRuangCard = ({d,idx,lang}:{d:typeof ALL_DR_DIAGS_RAW[0];idx:number;la
             .${aCls}{animation:${aId} 1.8s ease-in-out infinite ${(idx*0.4).toFixed(1)}s;}
           `}</style>
         </defs>
-        <polygon points="14,126 134,126 134,56 14,56"  fill="rgba(15,23,42,0.85)" stroke="#475569" strokeWidth="1"/>
-        <polygon points="46,96 166,96 166,22 46,22"   fill="rgba(15,23,42,0.5)"  stroke="#475569" strokeWidth="1"/>
-        <line x1="14"  y1="126" x2="46"  y2="96"  stroke="#475569" strokeWidth="1"/>
-        <line x1="134" y1="126" x2="166" y2="96"  stroke="#475569" strokeWidth="1"/>
-        <line x1="14"  y1="56"  x2="46"  y2="22"  stroke="#475569" strokeWidth="1"/>
-        <line x1="134" y1="56"  x2="166" y2="22"  stroke="#475569" strokeWidth="1"/>
+        <polygon points="14,126 134,126 134,56 14,56"  fill={svgFa} stroke={svgWs} strokeWidth="1"/>
+        <polygon points="46,96 166,96 166,22 46,22"   fill={svgFb} stroke={svgWs} strokeWidth="1"/>
+        <line x1="14"  y1="126" x2="46"  y2="96"  stroke={svgWs} strokeWidth="1"/>
+        <line x1="134" y1="126" x2="166" y2="96"  stroke={svgWs} strokeWidth="1"/>
+        <line x1="14"  y1="56"  x2="46"  y2="22"  stroke={svgWs} strokeWidth="1"/>
+        <line x1="134" y1="56"  x2="166" y2="22"  stroke={svgWs} strokeWidth="1"/>
         <line x1={x1} y1={y1} x2={x2} y2={y2}
           stroke={d.color} strokeWidth="3.2" strokeLinecap="round"
           className={aCls}/>
@@ -1119,7 +1142,7 @@ const BalokRuangCard = ({d,idx,lang}:{d:typeof ALL_DR_DIAGS_RAW[0];idx:number;la
           const isEnd = k===d.v1||k===d.v2;
           return (
             <text key={k} x={cx+(lx as number)} y={cy+(ly as number)}
-              fill={isEnd ? d.color : "rgba(255,255,255,0.3)"}
+              fill={isEnd ? d.color : svgDimText}
               fontSize={isEnd ? "10" : "8.5"} fontFamily="monospace"
               fontWeight={isEnd ? "bold" : "normal"}>{k}</text>
           );
@@ -1144,38 +1167,47 @@ const AllDiagonalRuangBalok = ({ lang }: { lang: string }) => (
 const TS_BALOK_VERTS: [number,number][] = [
   [30,170],[170,170],[210,130],[70,130],[30,70],[170,70],[210,30],[70,30]
 ];
-const TitikSudutBalokSVG = () => (
+const TitikSudutBalokSVG = () => {
+  const { isDark } = useTheme();
+  const fA    = isDark ? "rgba(30,41,59,0.8)" : "rgba(241,245,249,0.85)";
+  const fB    = isDark ? "rgba(30,41,59,0.5)" : "rgba(241,245,249,0.60)";
+  const ws    = isDark ? "#334155" : "#94a3b8";
+  const wsDash = isDark ? "#475569" : "#94a3b8";
+  const lbl   = isDark ? "#ffffff" : "#1e293b";
+  return (
   <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2" aria-label="Vertices of cuboid ABCD.EFGH">
     <defs>
       <style>{`@keyframes tsB{0%,100%{r:4;opacity:0.9;}50%{r:6;opacity:0.5;}} .tsb{animation:tsB 1.8s ease-in-out infinite;}`}</style>
     </defs>
-    <polygon points="30,70 170,70 170,170 30,170" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1.2"/>
-    <polygon points="70,30 210,30 210,130 70,130" fill="rgba(30,41,59,0.5)" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="30" y1="70" x2="70" y2="30" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="170" y1="70" x2="210" y2="30" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="30" y1="170" x2="70" y2="130" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="170" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1.2"/>
-    <line x1="70" y1="130" x2="70" y2="30"  stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2"/>
-    <line x1="70" y1="130" x2="210" y2="130" stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2"/>
-    <line x1="70" y1="30"  x2="30" y2="70"  stroke="#475569" strokeWidth="0.8" strokeDasharray="3,2"/>
+    <polygon points="30,70 170,70 170,170 30,170" fill={fA} stroke={ws} strokeWidth="1.2"/>
+    <polygon points="70,30 210,30 210,130 70,130" fill={fB} stroke={ws} strokeWidth="1.2"/>
+    <line x1="30" y1="70" x2="70" y2="30" stroke={ws} strokeWidth="1.2"/>
+    <line x1="170" y1="70" x2="210" y2="30" stroke={ws} strokeWidth="1.2"/>
+    <line x1="30" y1="170" x2="70" y2="130" stroke={ws} strokeWidth="1.2"/>
+    <line x1="170" y1="170" x2="210" y2="130" stroke={ws} strokeWidth="1.2"/>
+    <line x1="70" y1="130" x2="70" y2="30"  stroke={wsDash} strokeWidth="0.8" strokeDasharray="3,2"/>
+    <line x1="70" y1="130" x2="210" y2="130" stroke={wsDash} strokeWidth="0.8" strokeDasharray="3,2"/>
+    <line x1="70" y1="30"  x2="30" y2="70"  stroke={wsDash} strokeWidth="0.8" strokeDasharray="3,2"/>
     {TS_BALOK_VERTS.map(([x,y],i)=>(
       <circle key={i} cx={x} cy={y} r={4} fill="#facc15" className="tsb" style={{animationDelay:`${i*0.22}s`}}/>
     ))}
-    <text x="16"  y="182" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="173" y="182" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="213" y="135" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="55"  y="135" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">D</text>
-    <text x="16"  y="65"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">E</text>
-    <text x="173" y="65"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">F</text>
-    <text x="213" y="28"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">G</text>
-    <text x="55"  y="28"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">H</text>
+    <text x="16"  y="182" fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="173" y="182" fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="213" y="135" fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="55"  y="135" fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="16"  y="65"  fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">E</text>
+    <text x="173" y="65"  fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">F</text>
+    <text x="213" y="28"  fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">G</text>
+    <text x="55"  y="28"  fill={lbl} fontSize="11" fontFamily="monospace" fontWeight="bold">H</text>
   </svg>
-);
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    LUAS PERMUKAAN SVG
 ───────────────────────────────────────────────────────────── */
 const LuasSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const pp = 84, lp = 52, tp = 46;
   const ox = 55, oy = 8;
   const fl = getFaceLabels(lang);
@@ -1236,7 +1268,7 @@ const LuasSVG = ({ lang }: { lang: string }) => {
       <line x1={ox + lp - 5} y1={oy} x2={ox + lp - 5} y2={oy + lp} stroke="#facc15" strokeWidth={1}/>
       <text x={ox + lp - 10} y={oy + lp / 2 + 3} fill="#facc15" fontSize={8} fontFamily="monospace" textAnchor="middle">l</text>
 
-      <text x={125} y={218} fill="#e0e7ff" fontSize={13} fontFamily="monospace" fontWeight="bold"
+      <text x={125} y={218} fill={isDark ? "#e0e7ff" : "#3730a3"} fontSize={13} fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#jnBloom)">
         L = 2(pl + pt + lt)
       </text>
@@ -1248,6 +1280,7 @@ const LuasSVG = ({ lang }: { lang: string }) => {
    VOLUME BALOK SVG
 ───────────────────────────────────────────────────────────── */
 const VolumeBalokSVG = () => {
+  const { isDark } = useTheme();
   const dx = 44, dy = -26;
   const fBL = [28, 162], fBR = [178, 162], fTR = [178, 90], fTL = [28, 90];
   const bBL = [fBL[0]+dx, fBL[1]+dy], bBR = [fBR[0]+dx, fBR[1]+dy];
@@ -1288,9 +1321,9 @@ const VolumeBalokSVG = () => {
       <line x1={fTL[0]} y1={fTL[1]} x2={bTL[0]} y2={bTL[1]} stroke="#c4b5fd" strokeWidth="2" className="vb2-edge"/>
       <line x1={fTR[0]} y1={fTR[1]} x2={bTR[0]} y2={bTR[1]} stroke="#c4b5fd" strokeWidth="2" className="vb2-edge"/>
       <line x1={fBR[0]} y1={fBR[1]} x2={bBR[0]} y2={bBR[1]} stroke="#a5b4fc" strokeWidth="2" className="vb2-edge"/>
-      <line x1={fBL[0]} y1={fBL[1]} x2={bBL[0]} y2={bBL[1]} stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3"/>
-      <line x1={bBL[0]} y1={bBL[1]} x2={bBR[0]} y2={bBR[1]} stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3"/>
-      <line x1={bBL[0]} y1={bBL[1]} x2={bTL[0]} y2={bTL[1]} stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3"/>
+      <line x1={fBL[0]} y1={fBL[1]} x2={bBL[0]} y2={bBL[1]} stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
+      <line x1={bBL[0]} y1={bBL[1]} x2={bBR[0]} y2={bBR[1]} stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
+      <line x1={bBL[0]} y1={bBL[1]} x2={bTL[0]} y2={bTL[1]} stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
 
       <line x1={fBL[0]} y1={fBL[1]+8} x2={fBR[0]} y2={fBR[1]+8} stroke="#93c5fd" strokeWidth="1"/>
       <text x={(fBL[0]+fBR[0])/2} y={fBL[1]+18} fill="#93c5fd" fontSize="11"
@@ -1301,7 +1334,7 @@ const VolumeBalokSVG = () => {
       <text x={fTR[0]+dx/2+6} y={fTR[1]+dy/2-4} fill="#c4b5fd" fontSize="11"
         fontFamily="monospace" fontWeight="bold" className="vb2-lbl">l</text>
 
-      <text x="135" y="192" fill="#e0e7ff" fontSize="14" fontFamily="monospace" fontWeight="bold"
+      <text x="135" y="192" fill={isDark ? "#e0e7ff" : "#3730a3"} fontSize="14" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#vb2Bloom)" className="vb2-lbl">V = p × l × t</text>
     </svg>
   );
@@ -1312,6 +1345,11 @@ const VolumeBalokSVG = () => {
 ───────────────────────────────────────────────────────────── */
 const BidangDiagonalBalokSVG = ({ lang }: { lang: string }) => {
   const { isDark } = useTheme();
+  const svgFa = isDark ? "rgba(15,23,42,0.82)" : "rgba(241,245,249,0.95)";
+  const svgFb = isDark ? "rgba(15,23,42,0.42)" : "rgba(241,245,249,0.70)";
+  const svgWs = isDark ? "#475569" : "#94a3b8";
+  const svgWd = isDark ? "#64748b" : "#94a3b8";
+  const svgDimText = isDark ? "rgba(255,255,255,0.6)" : "rgba(15,23,42,0.55)";
   const typeLabel = lang === "en" ? "Type" : lang === "ja" ? "タイプ" : "Tipe";
   const planeLabel = lang === "en" ? "Plane" : lang === "ja" ? "対角面" : "Bidang";
   const areaLabel = lang === "en" ? "Plane area:" : lang === "ja" ? "面積:" : "Luas bidang:";
@@ -1352,14 +1390,14 @@ const BidangDiagonalBalokSVG = ({ lang }: { lang: string }) => {
                   .${aCls}{animation:${aId} 2s ease-in-out infinite ${(idx * 0.22).toFixed(2)}s;}
                 `}</style>
               </defs>
-              <polygon points="14,126 134,126 134,56 14,56" fill="rgba(15,23,42,0.82)" stroke="#475569" strokeWidth="1"/>
-              <polygon points="46,96 166,96 166,22 46,22" fill="rgba(15,23,42,0.42)" stroke="#475569" strokeWidth="1"/>
-              <line x1="14" y1="126" x2="46" y2="96" stroke="#475569" strokeWidth="1"/>
-              <line x1="134" y1="126" x2="166" y2="96" stroke="#475569" strokeWidth="1"/>
-              <line x1="14" y1="56" x2="46" y2="22" stroke="#475569" strokeWidth="1"/>
-              <line x1="134" y1="56" x2="166" y2="22" stroke="#475569" strokeWidth="1"/>
-              <line x1="46" y1="96" x2="46" y2="22" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
-              <line x1="46" y1="96" x2="166" y2="96" stroke="#64748b" strokeWidth="0.8" strokeDasharray="4,3"/>
+              <polygon points="14,126 134,126 134,56 14,56" fill={svgFa} stroke={svgWs} strokeWidth="1"/>
+              <polygon points="46,96 166,96 166,22 46,22" fill={svgFb} stroke={svgWs} strokeWidth="1"/>
+              <line x1="14" y1="126" x2="46" y2="96" stroke={svgWs} strokeWidth="1"/>
+              <line x1="134" y1="126" x2="166" y2="96" stroke={svgWs} strokeWidth="1"/>
+              <line x1="14" y1="56" x2="46" y2="22" stroke={svgWs} strokeWidth="1"/>
+              <line x1="134" y1="56" x2="166" y2="22" stroke={svgWs} strokeWidth="1"/>
+              <line x1="46" y1="96" x2="46" y2="22" stroke={svgWd} strokeWidth="0.8" strokeDasharray="4,3"/>
+              <line x1="46" y1="96" x2="166" y2="96" stroke={svgWd} strokeWidth="0.8" strokeDasharray="4,3"/>
               <polygon points={points} fill={plane.color} stroke={plane.color} strokeWidth="2" strokeLinejoin="round" className={aCls}/>
               {DB_ALL_KEYS.map(k => {
                 const [cx, cy] = DB_VERTS[k];
@@ -1371,7 +1409,7 @@ const BidangDiagonalBalokSVG = ({ lang }: { lang: string }) => {
                 const active = plane.verts.includes(k);
                 return (
                   <text key={k} x={cx + (lx as number)} y={cy + (ly as number)}
-                    fill={active ? plane.color : "rgba(255,255,255,0.6)"}
+                    fill={active ? plane.color : svgDimText}
                     fontSize={active ? "10" : "8.5"} fontFamily="monospace" fontWeight="bold">
                     {k}
                   </text>
@@ -1398,6 +1436,7 @@ const BidangDiagonalBalokSVG = ({ lang }: { lang: string }) => {
 type V2b = [number, number];
 
 const WaterBalokAnimation = () => {
+  const { isDark } = useTheme();
   const [fill, setFill] = useState(0);
 
   useEffect(() => {
@@ -1461,18 +1500,18 @@ const WaterBalokAnimation = () => {
       </defs>
 
       <line x1={BkL[0]} y1={BkL[1]} x2={BkTL[0]} y2={BkTL[1]}
-        stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
       <line x1={FL[0]} y1={FL[1]} x2={BkL[0]} y2={BkL[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <line x1={FTL[0]} y1={FTL[1]} x2={BkTL[0]} y2={BkTL[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <line x1={BkTL[0]} y1={BkTL[1]} x2={BkTR[0]} y2={BkTR[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
 
       <polygon points={pp(FR, BkR, BkTR, FTR)}
-        fill="#0f172a" fillOpacity={0.22} stroke="#334155" strokeWidth="0.8"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? 0.22 : 1} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
       <polygon points={pp(FL, FR, FTR, FTL)}
-        fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? 0.15 : 1} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
 
       {!isEmpty && (
         <>
@@ -1497,7 +1536,7 @@ const WaterBalokAnimation = () => {
       <line x1={BkTL[0]} y1={BkTL[1]} x2={BkTR[0]} y2={BkTR[1]} stroke="#60a5fa" strokeWidth="1.8"/>
 
       <rect x={barX} y={barY} width={barW} height={barH}
-        fill="none" stroke="#475569" strokeWidth="1" rx={2}/>
+        fill="none" stroke={isDark ? "#475569" : "#94a3b8"} strokeWidth="1" rx={2}/>
       <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
         fill="#2563eb" fillOpacity={0.8} rx={2}/>
       <text x={barX + barW/2} y={barY - 4} fill="#94a3b8" fontSize="8"
