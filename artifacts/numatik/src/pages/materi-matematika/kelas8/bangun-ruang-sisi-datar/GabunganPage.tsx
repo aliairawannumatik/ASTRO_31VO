@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 /* ─────────────────────────────────────────────────────────────
    SVG 3D MATH UTILITIES
@@ -107,6 +108,7 @@ const RotatingGabungan3D = ({
 }: {
   verts: GV3[]; faces: GFace[]; label: string; initRy?: number; speed?: number;
 }) => {
+  const { isDark } = useTheme();
   const [rotX, setRotX] = useState(-22);
   const [rotY, setRotY] = useState(initRy);
   const [isDragging, setIsDragging] = useState(false);
@@ -183,11 +185,11 @@ const RotatingGabungan3D = ({
 
   return (
     <div
-      className="flex flex-col items-center bg-slate-900/60 border border-slate-700/50 rounded-xl py-2 px-1 select-none"
+      className={`flex flex-col items-center ${isDark ? "bg-slate-900/60 border-slate-700/50" : "bg-white/90 border-gray-200"} border rounded-xl py-2 px-1 select-none`}
       style={{ cursor: isDragging ? "grabbing" : "grab", flex:1, minWidth:0 }}
       onMouseDown={onMouseDown} onTouchStart={onTouchStart}
     >
-      <span className="text-white/85 font-body font-bold text-center leading-tight mb-1" style={{ fontSize:13 }}>{label}</span>
+      <span className={`${isDark ? "text-white/85" : "text-gray-800"} font-body font-bold text-center leading-tight mb-1`} style={{ fontSize:13 }}>{label}</span>
       <svg viewBox="0 0 170 200" style={{ width:"100%", maxWidth:220, overflow:"visible" }}>
         {sorted.map((f, i) => {
           const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
@@ -211,6 +213,7 @@ const RotatingGabungan3D = ({
 };
 
 const ThreeGabungan3D = () => {
+  const { isDark } = useTheme();
   const { language: lang } = useLanguage();
   const autoHint = lang === "en" ? "Auto-rotating · Drag to rotate"
     : lang === "ja" ? "自動回転 · ドラッグで回転"
@@ -234,7 +237,7 @@ const ThreeGabungan3D = () => {
   const { verts: klVerts, faces: klFaces } = makeKubusLimasData(54, 40, { kubus: lbl.kubus, limas: lbl.limas });
   const { verts: dbVerts, faces: dbFaces } = makeDuaBalokData(70, 48, 40, 46, 30, { besar: lbl.besar, kecil: lbl.kecil });
   return (
-    <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2">
+    <div className={`${isDark ? "bg-slate-900/70 border-slate-700/50" : "bg-white/90 border-gray-200"} border rounded-xl p-3 space-y-2`}>
       <p className="text-center text-yellow-300 font-body font-semibold" style={{ fontSize:13 }}>{autoHint}</p>
       <div className="flex gap-2">
         <RotatingGabungan3D verts={blVerts} faces={blFaces} label={names[0]} initRy={35}/>
@@ -245,7 +248,7 @@ const ThreeGabungan3D = () => {
         {legend.map(([c,l])=>(
           <div key={l} className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-sm" style={{ background:c }}/>
-            <span className="text-white/45 font-body" style={{ fontSize:9 }}>{l}</span>
+            <span className={`${isDark ? "text-white/45" : "text-gray-500"} font-body`} style={{ fontSize:9 }}>{l}</span>
           </div>
         ))}
       </div>
@@ -305,6 +308,7 @@ function useDrag3D(initRx: number, initRy: number) {
    INTERACTIVE 3D — BALOK + LIMAS
 ───────────────────────────────────────────────────────────── */
 const InteractiveBalokLimas = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const { rotX, rotY, isDragging, onMouseDown, onTouchStart } = useDrag3D(-28, 38);
   const BW = 100, BD = 55, BH = 52, LH = 50;
   const TRANS = "transform 0.4s ease";
@@ -329,8 +333,8 @@ const InteractiveBalokLimas = ({ lang }: { lang: string }) => {
   );
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-3 space-y-3">
-      <p className="text-white/50 text-[10px] text-center font-body">{dragHint}</p>
+    <div className={`${isDark ? "bg-slate-900/80 border-slate-700" : "bg-white/90 border-gray-200"} border rounded-xl p-3 space-y-3`}>
+      <p className={`${isDark ? "text-white/50" : "text-gray-600"} text-[10px] text-center font-body`}>{dragHint}</p>
       <div className="relative mx-auto select-none overflow-visible flex items-center justify-center"
         style={{ height:200, cursor:isDragging?"grabbing":"grab" }}
         onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
@@ -364,7 +368,7 @@ const InteractiveBalokLimas = ({ lang }: { lang: string }) => {
         {legendItems.map(({ label, color }) => (
           <div key={label} className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-sm" style={{ background:color }}/>
-            <span className="text-white/50 text-[9px] font-body">{label}</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-600"} text-[9px] font-body`}>{label}</span>
           </div>
         ))}
       </div>
@@ -376,6 +380,7 @@ const InteractiveBalokLimas = ({ lang }: { lang: string }) => {
    INTERACTIVE 3D — KUBUS + PRISMA (RUMAH)
 ───────────────────────────────────────────────────────────── */
 const InteractiveRumah = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const { rotX, rotY, isDragging, onMouseDown, onTouchStart } = useDrag3D(-25, 42);
   const S = 72, PH = 44;
   const TRANS = "transform 0.4s ease";
@@ -388,8 +393,8 @@ const InteractiveRumah = ({ lang }: { lang: string }) => {
     ? [{ label:"立方体", color:"#6366f1" }, { label:"三角柱の屋根", color:"#f59e0b" }]
     : [{ label:"Kubus", color:"#6366f1" }, { label:"Atap Prisma", color:"#f59e0b" }];
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-3 space-y-3">
-      <p className="text-white/50 text-[10px] text-center font-body">{dragHint}</p>
+    <div className={`${isDark ? "bg-slate-900/80 border-slate-700" : "bg-white/90 border-gray-200"} border rounded-xl p-3 space-y-3`}>
+      <p className={`${isDark ? "text-white/50" : "text-gray-600"} text-[10px] text-center font-body`}>{dragHint}</p>
       <div className="relative mx-auto select-none overflow-visible flex items-center justify-center"
         style={{ height:200, cursor:isDragging?"grabbing":"grab" }}
         onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
@@ -414,7 +419,7 @@ const InteractiveRumah = ({ lang }: { lang: string }) => {
         {legendItems.map(({ label, color }) => (
           <div key={label} className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-sm" style={{ background:color }}/>
-            <span className="text-white/50 text-[9px] font-body">{label}</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-600"} text-[9px] font-body`}>{label}</span>
           </div>
         ))}
       </div>
@@ -426,6 +431,7 @@ const InteractiveRumah = ({ lang }: { lang: string }) => {
    INTERACTIVE 3D — DUA BALOK
 ───────────────────────────────────────────────────────────── */
 const InteractiveDuaBalok = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const { rotX, rotY, isDragging, onMouseDown, onTouchStart } = useDrag3D(-22, 35);
   const TRANS = "transform 0.4s ease";
   const BW = 88, BD = 46, BH = 50, SW = 50, SH = 40;
@@ -453,8 +459,8 @@ const InteractiveDuaBalok = ({ lang }: { lang: string }) => {
   );
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-3 space-y-3">
-      <p className="text-white/50 text-[10px] text-center font-body">{dragHint}</p>
+    <div className={`${isDark ? "bg-slate-900/80 border-slate-700" : "bg-white/90 border-gray-200"} border rounded-xl p-3 space-y-3`}>
+      <p className={`${isDark ? "text-white/50" : "text-gray-600"} text-[10px] text-center font-body`}>{dragHint}</p>
       <div className="relative mx-auto select-none overflow-visible flex items-center justify-center"
         style={{ height:200, cursor:isDragging?"grabbing":"grab" }}
         onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
@@ -472,7 +478,7 @@ const InteractiveDuaBalok = ({ lang }: { lang: string }) => {
         {legendItems.map(({ label, color }) => (
           <div key={label} className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-sm" style={{ background:color }}/>
-            <span className="text-white/50 text-[9px] font-body">{label}</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-600"} text-[9px] font-body`}>{label}</span>
           </div>
         ))}
       </div>
@@ -660,6 +666,7 @@ const RusukGabunganSVG = ({ lang }: { lang: string }) => {
    JARING-JARING GABUNGAN INTERAKTIF
 ───────────────────────────────────────────────────────────── */
 const JaringGabunganInteraktif = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [progress, setProgress] = useState(0);
   const [isNet, setIsNet]       = useState(false);
   const animRef    = useRef<number | null>(null);
@@ -743,7 +750,7 @@ const JaringGabunganInteraktif = ({ lang }: { lang: string }) => {
     : [{ c:"#f59e0b", l:"4 Segitiga Limas" }, { c:"#6366f1", l:"5 Sisi Balok (tanpa tutup)" }, { c:"#ef4444", l:"Bidang Beririsan ✗" }];
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl p-3 space-y-2">
+    <div className={`${isDark ? "bg-slate-900/80 border-slate-700/50" : "bg-white/90 border-gray-200"} border rounded-xl p-3 space-y-2`}>
       <div className="relative" style={{ height:305 }}>
         <svg viewBox="0 0 400 305" style={{ position:"absolute", top:0, left:0, width:"100%", height:"100%", opacity:1-progress, pointerEvents:progress>0.4?"none":"auto" }}>
           {sorted3.map((f,i)=>{
@@ -805,7 +812,7 @@ const JaringGabunganInteraktif = ({ lang }: { lang: string }) => {
         {legendItems.map(({c,l})=>(
           <div key={l} className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-sm" style={{ background:c }}/>
-            <span className="text-white/55 font-body" style={{ fontSize:9 }}>{l}</span>
+            <span className={`${isDark ? "text-white/55" : "text-gray-600"} font-body`} style={{ fontSize:9 }}>{l}</span>
           </div>
         ))}
       </div>
@@ -821,6 +828,7 @@ type Ex = { level: string; color: string; bg: string; border: string; badgeBg: s
 const ExampleCard = ({ ex, idx, prefix, showLbl, hideLbl }: {
   ex: Ex; idx: number; prefix: string; showLbl: string; hideLbl: string;
 }) => {
+  const { isDark } = useTheme();
   const [show, setShow] = useState(false);
   return (
     <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
@@ -833,11 +841,11 @@ const ExampleCard = ({ ex, idx, prefix, showLbl, hideLbl }: {
         {ex.question}
       </div>
       <button onClick={() => { playPopSound(); setShow(v => !v); }}
-        className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
+        className={`w-full flex items-center justify-between px-5 py-3 ${isDark ? "bg-slate-800/60 hover:bg-slate-800/90 border-slate-700/50" : "bg-gray-100 hover:bg-gray-200 border-gray-200"} transition-colors cursor-pointer border-t`}>
         <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? hideLbl : showLbl}</span>
         {show ? <ChevronUp className="w-4 h-4 text-muted-foreground"/> : <ChevronDown className="w-4 h-4 text-muted-foreground"/>}
       </button>
-      {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
+      {show && <div className={`px-5 py-4 ${isDark ? "bg-slate-900/60 border-slate-700/30" : "bg-gray-50 border-gray-200"} border-t`}>{ex.answer}</div>}
     </div>
   );
 };
@@ -847,6 +855,7 @@ const ExampleCard = ({ ex, idx, prefix, showLbl, hideLbl }: {
 ───────────────────────────────────────────────────────────── */
 export default function GabunganPage() {
   const navigate = useNavigate();
+  const { isDark } = useTheme();
   const { language: lang } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -890,7 +899,7 @@ export default function GabunganPage() {
       level: t.easy,
       color:"text-green-400", bg:"bg-green-950/30", border:"border-green-700/50", badgeBg:"bg-green-900/60",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           <p>
             {lang === "en"
               ? <>A monument shaped as a box <InlineMath math="5 \times 5 \times 8"/> m with a square pyramid on top (same base, pyramid height 3 m). Find the <strong>total volume</strong>.</>
@@ -902,7 +911,7 @@ export default function GabunganPage() {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-300"} border rounded p-3 space-y-2 text-xs`}>
             <BlockMath math="V_b = 5 \times 5 \times 8 = 200\text{ m}^3"/>
             <BlockMath math="V_l = \tfrac{1}{3} \times 25 \times 3 = 25\text{ m}^3"/>
             <BlockMath math="V_t = 200 + 25 = 225\text{ m}^3"/>
@@ -917,7 +926,7 @@ export default function GabunganPage() {
       level: t.medium,
       color:"text-yellow-400", bg:"bg-yellow-950/30", border:"border-yellow-700/50", badgeBg:"bg-yellow-900/60",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           <p>
             {lang === "en"
               ? <>A house model consists of a cube (s = 6 cm) as body and a triangular prism as roof (base 6 cm, triangle height 4 cm, roof length 6 cm). Find the <strong>total volume</strong>.</>
@@ -929,7 +938,7 @@ export default function GabunganPage() {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-300"} border rounded p-3 space-y-2 text-xs`}>
             <BlockMath math="V_k = 6^3 = 216\text{ cm}^3"/>
             <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 6 \times 4 = 12\text{ cm}^2"/>
             <BlockMath math="V_p = 12 \times 6 = 72\text{ cm}^3"/>
@@ -945,7 +954,7 @@ export default function GabunganPage() {
       level: t.hard,
       color:"text-red-400", bg:"bg-red-950/30", border:"border-red-700/50", badgeBg:"bg-red-900/60",
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           <p>
             {lang === "en"
               ? <>A house model: box (<InlineMath math="10 \times 8 \times 6"/> cm) + triangular prism roof (base 10 cm, triangle height 4 cm, length 8 cm). Find the <strong>visible surface area</strong> (box base, 4 box sides, 2 gable triangles, 2 sloped sides).</>
@@ -953,7 +962,7 @@ export default function GabunganPage() {
               ? <>家の模型：直方体（<InlineMath math="10 \times 8 \times 6"/>cm）＋三角柱の屋根（底辺10cm、三角形の高さ4cm、長さ8cm）。<strong>見える表面積</strong>（底面、4つの側面、2つの妻三角形、2つの斜面）を求めよ。</>
               : <>Rumah miniatur terdiri dari balok (<InlineMath math="10 \times 8 \times 6"/> cm) dan atap prisma segitiga sama kaki (alas 10 cm, tinggi segitiga 4 cm, panjang 8 cm). Hitung <strong>luas permukaan yang terlihat dari luar</strong>.</>}
           </p>
-          <p className="text-xs text-white/60">
+          <p className={`text-xs ${isDark ? "text-white/60" : "text-gray-500"}`}>
             {lang === "en" ? "Note: box top is covered by roof — not counted."
             : lang === "ja" ? "注: 直方体の上面は屋根で隠れているので数えない。"
             : "Sisi atas balok tertutup atap, tidak dihitung."}
@@ -967,22 +976,22 @@ export default function GabunganPage() {
             : lang === "ja" ? "ステップ1 — 見える直方体の面（上面なし）:"
             : "Langkah 1 — Sisi balok yang terlihat (tanpa tutup atas):"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-300"} border rounded p-3 text-xs space-y-1`}>
             <BlockMath math="L_a = 10 \times 8 = 80\text{ cm}^2"/>
             <BlockMath math="L_{\text{4 sisi}} = 2(10\times6) + 2(8\times6) = 120 + 96 = 216\text{ cm}^2"/>
           </div>
           <p className="text-red-400 font-semibold text-xs">
             {lang === "en" ? "Step 2 — Prism roof:" : lang === "ja" ? "ステップ2 — 三角柱の屋根:" : "Langkah 2 — Atap prisma:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-300"} border rounded p-3 text-xs space-y-1`}>
             <BlockMath math="L_{\triangle} = 2 \times \tfrac{1}{2} \times 10 \times 4 = 40\text{ cm}^2"/>
-            <p className="text-white/60">{lang === "en" ? "Slope apothem = √(4²+5²) = √41 ≈ 6.4 cm" : lang === "ja" ? "斜面の斜高 = √(4²+5²) = √41 ≈ 6.4 cm" : "Apotema sisi miring atap = √(4²+5²) = √41 ≈ 6,4 cm"}</p>
+            <p className={isDark ? "text-white/60" : "text-gray-500"}>{lang === "en" ? "Slope apothem = √(4²+5²) = √41 ≈ 6.4 cm" : lang === "ja" ? "斜面の斜高 = √(4²+5²) = √41 ≈ 6.4 cm" : "Apotema sisi miring atap = √(4²+5²) = √41 ≈ 6,4 cm"}</p>
             <BlockMath math="L_m = 2 \times (6{,}4 \times 8) = 102{,}4\text{ cm}^2"/>
           </div>
           <p className="text-red-400 font-semibold text-xs">
             {lang === "en" ? "Step 3 — Total:" : lang === "ja" ? "ステップ3 — 合計:" : "Langkah 3 — Total:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-300"} border rounded p-3 text-xs`}>
             <BlockMath math="L_p = 80 + 216 + 40 + 102{,}4 = 438{,}4\text{ cm}^2"/>
           </div>
           <div className="bg-red-950/60 border border-red-700/40 rounded p-2 text-xs">
@@ -1000,7 +1009,7 @@ export default function GabunganPage() {
       icon: "🏗️",
       title: lang === "en" ? "Introduction" : lang === "ja" ? "はじめに" : "Pengantar",
       content: (
-        <div className="space-y-3 text-sm font-body text-white/75 leading-relaxed">
+        <div className={`space-y-3 text-sm font-body ${isDark ? "text-white/75" : "text-gray-700"} leading-relaxed`}>
           <p>
             {lang === "en"
               ? <><strong className="text-cyan-300">Composite solid figures</strong> are formed by combining two or more basic solid shapes. Real examples: houses (cube + prism roof), monuments (box + pyramid), multi-story buildings (stacked boxes), and more.</>
@@ -1009,7 +1018,7 @@ export default function GabunganPage() {
               : <><strong className="text-cyan-300">Bangun ruang gabungan</strong> adalah bangun ruang yang terbentuk dari dua atau lebih bangun ruang dasar yang digabungkan. Contoh nyata: rumah (kubus + prisma atap), tugu (balok + limas), gedung bertingkat (beberapa balok), dan lain-lain.</>}
           </p>
           <ThreeGabungan3D/>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700 text-white/60" : "bg-gray-100 border-gray-300 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
             <p className="text-cyan-300 font-semibold mb-1">📋 {lang === "en" ? "Topics:" : lang === "ja" ? "トピック:" : "Materi dalam bab ini:"}</p>
             <p>• {lang === "en" ? "Edges & vertices of composite solids" : lang === "ja" ? "複合立体の辺と頂点" : "Rusuk & titik sudut gabungan"}</p>
             <p>• {lang === "en" ? "Surface area + interactive net" : lang === "ja" ? "表面積 + インタラクティブ展開図" : "Luas permukaan gabungan + jaring-jaring interaktif"}</p>
@@ -1026,12 +1035,12 @@ export default function GabunganPage() {
       icon: "📐",
       title: lang === "en" ? "Edges & Vertices of Composite Solids" : lang === "ja" ? "複合立体の辺と頂点" : "Rusuk & Titik Sudut Gabungan",
       content: (
-        <div className="space-y-3 text-sm font-body text-white/85">
+        <div className={`space-y-3 text-sm font-body ${isDark ? "text-white/85" : "text-gray-800"}`}>
           <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs space-y-1">
             <p className="text-violet-300 font-semibold">
               💡 {lang === "en" ? "Key Concept:" : lang === "ja" ? "重要概念:" : "Konsep Dasar:"}
             </p>
-            <p className="text-white/75">
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>
               {lang === "en"
                 ? <>When two solids are joined, <strong className="text-yellow-300">shared edges & vertices are counted only once</strong>. Internal edges (inside the joint) are not external edges.</>
                 : lang === "ja"
@@ -1040,7 +1049,7 @@ export default function GabunganPage() {
             </p>
           </div>
           <RusukGabunganSVG lang={lang}/>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-2`}>
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "Example: Box + Square Pyramid" : lang === "ja" ? "例: 直方体 + 四角錐" : "Contoh: Balok + Limas Segiempat"}
             </p>
@@ -1048,7 +1057,7 @@ export default function GabunganPage() {
               <table className="w-full text-center text-[10px] border-collapse">
                 <thead>
                   <tr>
-                    <th className="border border-slate-600 px-2 py-1 text-white/60">{lang === "en" ? "Shape" : lang === "ja" ? "立体" : "Bangun"}</th>
+                    <th className={`border ${isDark ? "border-slate-600 text-white/60" : "border-gray-300 text-gray-500"} px-2 py-1`}>{lang === "en" ? "Shape" : lang === "ja" ? "立体" : "Bangun"}</th>
                     <th className="border border-slate-600 px-2 py-1 text-indigo-300">{lang === "en" ? "Edges" : lang === "ja" ? "辺" : "Rusuk"}</th>
                     <th className="border border-slate-600 px-2 py-1 text-emerald-300">{lang === "en" ? "Vertices" : lang === "ja" ? "頂点" : "Titik Sudut"}</th>
                     <th className="border border-slate-600 px-2 py-1 text-orange-300">{lang === "en" ? "Outer Faces" : lang === "ja" ? "外面" : "Sisi Luar"}</th>
@@ -1056,24 +1065,24 @@ export default function GabunganPage() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="border border-slate-600 px-2 py-1">{lang === "en" ? "Box" : lang === "ja" ? "直方体" : "Balok"}</td>
+                    <td className={`border ${isDark ? "border-slate-600" : "border-gray-300"} px-2 py-1`}>{lang === "en" ? "Box" : lang === "ja" ? "直方体" : "Balok"}</td>
                     <td className="border border-slate-600 px-2 py-1 text-indigo-300">12</td>
                     <td className="border border-slate-600 px-2 py-1 text-emerald-300">8</td>
                     <td className="border border-slate-600 px-2 py-1 text-orange-300">6</td>
                   </tr>
                   <tr>
-                    <td className="border border-slate-600 px-2 py-1">{lang === "en" ? "Square Pyramid" : lang === "ja" ? "四角錐" : "Limas Segiempat"}</td>
+                    <td className={`border ${isDark ? "border-slate-600" : "border-gray-300"} px-2 py-1`}>{lang === "en" ? "Square Pyramid" : lang === "ja" ? "四角錐" : "Limas Segiempat"}</td>
                     <td className="border border-slate-600 px-2 py-1 text-indigo-300">8</td>
                     <td className="border border-slate-600 px-2 py-1 text-emerald-300">5</td>
                     <td className="border border-slate-600 px-2 py-1 text-orange-300">5</td>
                   </tr>
-                  <tr className="bg-slate-700/40">
+                  <tr className={isDark ? "bg-slate-700/40" : "bg-yellow-50"}>
                     <td className="border border-slate-600 px-2 py-1 text-yellow-300 font-bold">{lang === "en" ? "Shared" : lang === "ja" ? "共有" : "Rusuk bersama"}</td>
                     <td className="border border-slate-600 px-2 py-1 text-yellow-300">−4</td>
                     <td className="border border-slate-600 px-2 py-1 text-yellow-300">−4</td>
                     <td className="border border-slate-600 px-2 py-1 text-yellow-300">−2</td>
                   </tr>
-                  <tr className="bg-cyan-950/40">
+                  <tr className={isDark ? "bg-cyan-950/40" : "bg-cyan-50"}>
                     <td className="border border-slate-600 px-2 py-1 text-cyan-300 font-bold">{lang === "en" ? "Combined" : lang === "ja" ? "合計" : "Gabungan"}</td>
                     <td className="border border-slate-600 px-2 py-1 text-cyan-300 font-bold">16</td>
                     <td className="border border-slate-600 px-2 py-1 text-cyan-300 font-bold">9</td>
@@ -1096,12 +1105,12 @@ export default function GabunganPage() {
       icon: "🔲",
       title: lang === "en" ? "Surface Area & Net" : lang === "ja" ? "表面積と展開図" : "Luas Permukaan & Jaring-jaring",
       content: (
-        <div className="space-y-3 text-sm font-body text-white/85">
+        <div className={`space-y-3 text-sm font-body ${isDark ? "text-white/85" : "text-gray-800"}`}>
           <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs">
             <p className="text-violet-300 font-semibold mb-1">
               ⚠️ {lang === "en" ? "Main Rule:" : lang === "ja" ? "主なルール:" : "Aturan Utama:"}
             </p>
-            <p className="text-white/75">
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>
               {lang === "en"
                 ? <>Faces that <strong className="text-red-400">touch (shared faces)</strong> between two solids are <strong className="text-red-400">NOT counted</strong> in the combined surface area.</>
                 : lang === "ja"
@@ -1109,34 +1118,34 @@ export default function GabunganPage() {
                 : <>Bidang yang <strong className="text-red-400">beririsan (saling menempel)</strong> antara dua bangun <strong className="text-red-400">TIDAK dihitung</strong> dalam luas permukaan gabungan.</>}
             </p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-2`}>
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "Combined Surface Area Formula:" : lang === "ja" ? "複合表面積の公式:" : "Rumus Luas Permukaan Gabungan:"}
             </p>
             <BlockMath math="L_g = (L_A - L_i) + (L_B - L_i)"/>
-            <p className="text-white/40 text-[10px]">
+            <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-[10px]`}>
               {lang === "en" ? "Lᵢ = shared (touching) face area" : lang === "ja" ? "Lᵢ = 共有面の面積" : "Lᵢ = luas bidang yang saling menempel"}
             </p>
-            <p className="text-white/55">
+            <p className={isDark ? "text-white/55" : "text-gray-600"}>
               {lang === "en" ? "Subtract shared faces from each solid before summing."
               : lang === "ja" ? "合計前に各立体から共有面を引く。"
               : "Setiap bangun dikurangi bidang yang menempel sebelum dijumlahkan."}
             </p>
           </div>
-          <p className="text-white/55 text-xs text-center">
+          <p className={`${isDark ? "text-white/55" : "text-gray-600"} text-xs text-center`}>
             {lang === "en" ? "Press the button to unfold the Box + Pyramid net!"
             : lang === "ja" ? "ボタンを押して直方体＋角錐の展開図を開いてください！"
             : "Tekan tombol untuk membongkar jaring-jaring Balok + Limas!"}
           </p>
           <JaringGabunganInteraktif lang={lang}/>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-1`}>
             <p className="text-orange-300 font-semibold">
               {lang === "en" ? "Example — Box (p×l×t₁) + Square Pyramid (height t₂):"
               : lang === "ja" ? "例 — 直方体（p×l×t₁）+ 四角錐（高さt₂）:"
               : "Contoh Balok (p×l×t₁) + Limas segiempat (tinggi t₂):"}
             </p>
             <BlockMath math="L = \underbrace{(p \cdot l + 2pl' + 2ll')}_{\text{box without top}} + \underbrace{4 \cdot L_{\triangle}}_{\text{pyramid faces}}"/>
-            <p className="text-white/50">
+            <p className={isDark ? "text-white/50" : "text-gray-500"}>
               {lang === "en" ? "Pyramid base = box top → shared, not counted twice!"
               : lang === "ja" ? "角錐の底面 = 直方体の上面 → 共有、2回数えない！"
               : "Alas limas = tutup balok → bidang beririsan, tidak dihitung dua kali!"}
@@ -1149,12 +1158,12 @@ export default function GabunganPage() {
       icon: "📦",
       title: lang === "en" ? "Volume of Composite Solids" : lang === "ja" ? "複合立体の体積" : "Volume Gabungan",
       content: (
-        <div className="space-y-3 text-sm font-body text-white/85">
+        <div className={`space-y-3 text-sm font-body ${isDark ? "text-white/85" : "text-gray-800"}`}>
           <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs space-y-2">
             <p className="text-cyan-300 font-semibold">
               💡 {lang === "en" ? "Method 1 — Addition:" : lang === "ja" ? "方法1 — 足し算:" : "Cara 1 — Penjumlahan (Penggabungan):"}
             </p>
-            <p className="text-white/75">
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>
               {lang === "en"
                 ? <>The solid is formed by <strong className="text-yellow-300">joining several parts</strong>. Total volume = sum of all parts.</>
                 : lang === "ja"
@@ -1163,7 +1172,7 @@ export default function GabunganPage() {
             </p>
             <BlockMath math="V_g = V_1 + V_2 + V_3 + \ldots"/>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-2`}>
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "Popular combinations:" : lang === "ja" ? "よく使う組み合わせ:" : "Contoh kombinasi populer:"}
             </p>
@@ -1192,7 +1201,7 @@ export default function GabunganPage() {
             <p className="text-rose-300 font-semibold">
               ✂️ {lang === "en" ? "Method 2 — Subtraction:" : lang === "ja" ? "方法2 — 引き算:" : "Cara 2 — Pengurangan (Pemotongan):"}
             </p>
-            <p className="text-white/75">
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>
               {lang === "en"
                 ? <>Sometimes it is easier to imagine the solid as a <strong className="text-yellow-300">whole body with a piece removed</strong>.</>
                 : lang === "ja"
@@ -1200,7 +1209,7 @@ export default function GabunganPage() {
                 : <>Kadang lebih mudah membayangkan bangun sebagai <strong className="text-yellow-300">benda utuh yang sudah diambil sebagian</strong>.</>}
             </p>
             <BlockMath math="V_g = V_u - V_d"/>
-            <p className="text-white/40 text-[10px]">
+            <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-[10px]`}>
               {lang === "en" ? "Vᵤ = whole solid volume · V_d = volume of removed part"
               : lang === "ja" ? "Vᵤ = 全体の体積 · V_d = 取り除いた部分の体積"
               : "Vᵤ = volume utuh · V_d = volume bagian yang diambil"}
@@ -1221,10 +1230,10 @@ export default function GabunganPage() {
       icon: "🏢",
       title: lang === "en" ? "Example: Box + Pyramid" : lang === "ja" ? "例: 直方体 + 角錐" : "Contoh: Balok + Limas",
       content: (
-        <div className="space-y-3 text-sm font-body text-white/85">
+        <div className={`space-y-3 text-sm font-body ${isDark ? "text-white/85" : "text-gray-800"}`}>
           <BalokLimasSVG lang={lang}/>
           <InteractiveBalokLimas lang={lang}/>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-2`}>
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "Given: Box (p × l × t₁) + Square Pyramid (same base, height t₂)"
               : lang === "ja" ? "直方体（p × l × t₁）+ 四角錐（底面同じ、高さt₂）"
@@ -1235,7 +1244,7 @@ export default function GabunganPage() {
               <BlockMath math="V = p \cdot l \cdot t_1 + \frac{1}{3} \cdot p \cdot l \cdot t_2"/>
               <p className="text-orange-300 font-semibold">{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
               <BlockMath math="L = L_{\text{base}} + 4 \cdot L_{\text{side}} + 4 \cdot L_{\triangle}"/>
-              <p className="text-white/50">
+              <p className={isDark ? "text-white/50" : "text-gray-500"}>
                 {lang === "en" ? "Box top (= pyramid base) not counted!"
                 : lang === "ja" ? "直方体の上面（= 角錐の底面）は数えない！"
                 : "Tutup balok (= alas limas) tidak dihitung!"}
@@ -1252,10 +1261,10 @@ export default function GabunganPage() {
       icon: "🏠",
       title: lang === "en" ? "Example: Cube/Box + Prism (House)" : lang === "ja" ? "例: 立方体/直方体 + 三角柱（家）" : "Contoh: Kubus/Balok + Prisma (Rumah)",
       content: (
-        <div className="space-y-3 text-sm font-body text-white/85">
+        <div className={`space-y-3 text-sm font-body ${isDark ? "text-white/85" : "text-gray-800"}`}>
           <KubusPrismaSVG lang={lang}/>
           <InteractiveRumah lang={lang}/>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-2`}>
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "Given: Cube (s) + Triangular Prism Roof"
               : lang === "ja" ? "立方体（s）+ 三角柱の屋根"
@@ -1266,7 +1275,7 @@ export default function GabunganPage() {
               <BlockMath math="V = s^3 + L_{\triangle} \times t_p"/>
               <p className="text-orange-300 font-semibold">{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
               <BlockMath math="L = L_a + 4 \cdot L_{\text{side}} + 2 \cdot L_{\triangle} + 2 \cdot L_m"/>
-              <p className="text-white/50">
+              <p className={isDark ? "text-white/50" : "text-gray-500"}>
                 {lang === "en" ? "Cube top (= prism base) not counted!"
                 : lang === "ja" ? "立方体の上面（= 三角柱の底面）は数えない！"
                 : "Tutup kubus (= alas prisma) tidak dihitung!"}
@@ -1283,10 +1292,10 @@ export default function GabunganPage() {
       icon: "🏗️",
       title: lang === "en" ? "Example: Two Boxes Combined" : lang === "ja" ? "例: 2つの直方体" : "Contoh: Dua Balok Gabungan",
       content: (
-        <div className="space-y-3 text-sm font-body text-white/85">
+        <div className={`space-y-3 text-sm font-body ${isDark ? "text-white/85" : "text-gray-800"}`}>
           <DuaBalokSVG lang={lang}/>
           <InteractiveDuaBalok lang={lang}/>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-2`}>
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "Two boxes joined (step shape / L-shape):"
               : lang === "ja" ? "2つの直方体（段差形 / L字形）:"
@@ -1295,23 +1304,23 @@ export default function GabunganPage() {
             <p className="text-blue-300 font-semibold">{lang === "en" ? "Volume:" : lang === "ja" ? "体積:" : "Volume:"}</p>
             <BlockMath math="V = V_{b_1} + V_{b_2}"/>
             <p className="text-orange-300 font-semibold">{lang === "en" ? "Surface Area:" : lang === "ja" ? "表面積:" : "Luas Permukaan:"}</p>
-            <p className="text-white/70">
+            <p className={isDark ? "text-white/70" : "text-gray-700"}>
               {lang === "en" ? "Sum all visible faces from outside. The junction faces are not counted."
               : lang === "ja" ? "外から見えるすべての面を合計する。接合部の面は数えない。"
               : "Jumlahkan luas semua bidang yang terlihat dari luar. Bidang sambungan antar balok tidak dihitung."}
             </p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-1`}>
             <p className="text-yellow-300 font-semibold">
               💡 {lang === "en" ? "Tip for L-shape:" : lang === "ja" ? "L字形のヒント:" : "Tips untuk bangun L-shape:"}
             </p>
-            <p className="text-white/70">
+            <p className={isDark ? "text-white/70" : "text-gray-700"}>
               {lang === "en" ? "Can also be calculated as one large box minus one small box (subtraction method)."
               : lang === "ja" ? "大きな直方体から小さな直方体を引く方法でも計算できます。"
               : "Bisa juga dihitung sebagai satu balok besar dikurangi satu balok kecil (selisih volume)."}
             </p>
             <BlockMath math="V = V_B - V_d"/>
-            <p className="text-white/40 text-[10px]">
+            <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-[10px]`}>
               {lang === "en" ? "V_B = larger box · V_d = portion removed"
               : lang === "ja" ? "V_B = 大きな直方体 · V_d = 切り取った部分"
               : "V_B = balok besar · V_d = bagian yang dipotong"}
@@ -1324,12 +1333,12 @@ export default function GabunganPage() {
       icon: "🎨",
       title: lang === "en" ? "Surface Area Concept" : lang === "ja" ? "表面積の概念" : "Konsep Luas Permukaan Gabungan",
       content: (
-        <div className="space-y-3 text-sm font-body text-white/85">
+        <div className={`space-y-3 text-sm font-body ${isDark ? "text-white/85" : "text-gray-800"}`}>
           <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3">
             <p className="text-violet-300 font-semibold mb-1">
               ⚠️ {lang === "en" ? "Important Key:" : lang === "ja" ? "重要なポイント:" : "Kunci Penting:"}
             </p>
-            <p className="text-sm text-white/75">
+            <p className={`text-sm ${isDark ? "text-white/75" : "text-gray-700"}`}>
               {lang === "en"
                 ? <>Combined surface area is <strong className="text-red-300">NOT</strong> the sum of all individual surface areas. Shared (touching) faces <strong className="text-yellow-300">are not counted</strong>!</>
                 : lang === "ja"
@@ -1338,7 +1347,7 @@ export default function GabunganPage() {
             </p>
           </div>
           <LuasGabunganSVG lang={lang}/>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 space-y-2 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 space-y-2 text-xs`}>
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "Steps:" : lang === "ja" ? "手順:" : "Langkah-langkah:"}
             </p>
@@ -1346,17 +1355,17 @@ export default function GabunganPage() {
             <p>2. {lang === "en" ? "Identify hidden faces (shared between solids)" : lang === "ja" ? "隠れた面（共有面）を特定する" : "Identifikasi bidang yang tersembunyi (saling menempel antar bangun)"}</p>
             <p>3. {lang === "en" ? "Calculate area of all visible faces only" : lang === "ja" ? "見える面だけの面積を計算する" : "Hitung luas semua bidang yang terlihat saja"}</p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-1`}>
             <p className="text-orange-300 font-semibold">
               {lang === "en" ? "Example Box + Pyramid:" : lang === "ja" ? "例 直方体 + 角錐:" : "Contoh Balok + Limas:"}
             </p>
             <BlockMath math="L = L_{\text{box}} + L_s"/>
-            <p className="text-white/40 text-[10px]">
+            <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-[10px]`}>
               {lang === "en" ? "L_box = box (without top lid) · L_s = pyramid lateral area"
               : lang === "ja" ? "L_box = 直方体（上面除く）· L_s = 角錐の側面積"
               : "L_box = selimut balok (tanpa tutup) · L_s = selimut limas"}
             </p>
-            <p className="text-white/50">
+            <p className={isDark ? "text-white/50" : "text-gray-500"}>
               {lang === "en" ? "Pyramid base = box top → not counted!"
               : lang === "ja" ? "角錐底面 = 直方体上面 → 数えない！"
               : "Alas limas = tutup balok → bidang ini tidak dihitung!"}
@@ -1374,13 +1383,13 @@ export default function GabunganPage() {
             <p className="text-cyan-300 font-semibold text-sm">
               🎯 {lang === "en" ? "Strategy for Composite Solid Problems" : lang === "ja" ? "複合立体の問題を解く戦略" : "Strategi Menyelesaikan Soal Bangun Gabungan"}
             </p>
-            <p className="text-white/75">1. <strong className="text-yellow-300">{lang === "en" ? "Identify" : lang === "ja" ? "特定する" : "Identifikasi"}</strong> {lang === "en" ? "each component solid" : lang === "ja" ? "各構成立体" : "setiap bangun penyusun"}</p>
-            <p className="text-white/75">2. <strong className="text-yellow-300">{lang === "en" ? "Note dimensions" : lang === "ja" ? "寸法を記録" : "Catat dimensi"}</strong> {lang === "en" ? "of each solid" : lang === "ja" ? "各立体の" : "masing-masing bangun"}</p>
-            <p className="text-white/75">3. <strong className="text-yellow-300">{lang === "en" ? "Find shared faces" : lang === "ja" ? "共有面を探す" : "Tentukan bidang yang bersentuhan"}</strong> {lang === "en" ? "(for surface area)" : lang === "ja" ? "（表面積用）" : "(untuk luas permukaan)"}</p>
-            <p className="text-white/75">4. <strong className="text-yellow-300">{lang === "en" ? "Calculate" : lang === "ja" ? "計算する" : "Hitung"}</strong> {lang === "en" ? "volume/area of each" : lang === "ja" ? "各立体の体積/面積" : "volume/luas masing-masing"}</p>
-            <p className="text-white/75">5. <strong className="text-yellow-300">{lang === "en" ? "Sum" : lang === "ja" ? "合計する" : "Jumlahkan"}</strong> {lang === "en" ? "(volume) or identify visible faces (surface area)" : lang === "ja" ? "（体積）または見える面を特定する（表面積）" : "(volume) atau identifikasi bidang terlihat (luas permukaan)"}</p>
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>1. <strong className="text-yellow-300">{lang === "en" ? "Identify" : lang === "ja" ? "特定する" : "Identifikasi"}</strong> {lang === "en" ? "each component solid" : lang === "ja" ? "各構成立体" : "setiap bangun penyusun"}</p>
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>2. <strong className="text-yellow-300">{lang === "en" ? "Note dimensions" : lang === "ja" ? "寸法を記録" : "Catat dimensi"}</strong> {lang === "en" ? "of each solid" : lang === "ja" ? "各立体の" : "masing-masing bangun"}</p>
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>3. <strong className="text-yellow-300">{lang === "en" ? "Find shared faces" : lang === "ja" ? "共有面を探す" : "Tentukan bidang yang bersentuhan"}</strong> {lang === "en" ? "(for surface area)" : lang === "ja" ? "（表面積用）" : "(untuk luas permukaan)"}</p>
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>4. <strong className="text-yellow-300">{lang === "en" ? "Calculate" : lang === "ja" ? "計算する" : "Hitung"}</strong> {lang === "en" ? "volume/area of each" : lang === "ja" ? "各立体の体積/面積" : "volume/luas masing-masing"}</p>
+            <p className={isDark ? "text-white/75" : "text-gray-700"}>5. <strong className="text-yellow-300">{lang === "en" ? "Sum" : lang === "ja" ? "合計する" : "Jumlahkan"}</strong> {lang === "en" ? "(volume) or identify visible faces (surface area)" : lang === "ja" ? "（体積）または見える面を特定する（表面積）" : "(volume) atau identifikasi bidang terlihat (luas permukaan)"}</p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-300"} border rounded-lg p-3 text-xs space-y-2`}>
             <p className="text-violet-300 font-semibold">📌 {lang === "en" ? "Summary Formulas:" : lang === "ja" ? "公式まとめ:" : "Rumus Ringkas:"}</p>
             <BlockMath math="V_g = \sum V_i"/>
             <BlockMath math="L_g = \sum L_{\text{vis}}"/>
@@ -1421,7 +1430,7 @@ export default function GabunganPage() {
         <h1 className="font-display text-lg md:text-2xl font-bold text-violet-300 text-glow-cyan mb-1 text-center">
           {t.title}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.subtitle}</p>
+        <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>{t.subtitle}</p>
 
         <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
           {slides.map((_,i)=>(
@@ -1432,13 +1441,13 @@ export default function GabunganPage() {
         </div>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-4">
-          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
+          <div className={`flex items-center gap-3 px-5 py-4 border-b border-border/50 ${isDark ? "bg-slate-800/40" : "bg-gray-100"}`}>
             <span className="text-2xl">{slide.icon}</span>
             <div className="flex-1 min-w-0">
-              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+              <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-[10px] font-body uppercase tracking-widest`}>
                 {t.slideLabel} {currentSlide + 1} / {total}
               </p>
-              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+              <h2 className={`font-display text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}>{slide.title}</h2>
             </div>
           </div>
           <div className="px-5 py-5">{slide.content}</div>
@@ -1446,7 +1455,7 @@ export default function GabunganPage() {
 
         <div className="flex items-center justify-between gap-3 mb-6">
           <button onClick={goPrev} disabled={currentSlide === 0}
-            className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display text-white/70 hover:text-white hover:border-violet-400/60 hover:bg-violet-400/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer">
+            className={`flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display ${isDark ? "text-white/70 hover:text-white" : "text-gray-600 hover:text-gray-900"} hover:border-violet-400/60 hover:bg-violet-400/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer`}>
             {t.prev}
           </button>
           <button onClick={goNext} disabled={currentSlide === total - 1}
