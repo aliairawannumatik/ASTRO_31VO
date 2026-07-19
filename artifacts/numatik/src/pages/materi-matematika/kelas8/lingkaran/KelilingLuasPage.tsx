@@ -620,15 +620,15 @@ const KelilingLuasCirclesSVG = ({ t }: { t: T }) => (
             stroke="#64748b" strokeWidth="1.5" strokeDasharray="4 3" opacity=".6" />
           <text x="110" y="74" fill="#94a3b8" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" opacity=".8">r</text>
         </svg>
-        <p className="font-body text-[10px] text-white/45 leading-snug">
+        <p className={`font-body text-[10px] ${isDark ? "text-white/45" : "text-gray-500"} leading-snug`}>
           {t.circEdge}<span className="text-cyan-300 font-semibold">{t.circEdgeBold}</span>{t.circEdge2}
         </p>
         <div className="w-full bg-green-900/30 border border-green-500/40 rounded-xl p-3 text-center">
           <p className="font-body text-xs font-bold text-green-300 mb-1">{t.circFormTitle}</p>
           <BlockMath math="K = \pi \times d" />
-          <p className="font-body text-[10px] text-white/50">{t.circFormOr}</p>
+          <p className={`font-body text-[10px] ${isDark ? "text-white/50" : "text-gray-500"}`}>{t.circFormOr}</p>
           <BlockMath math="K = 2\pi r" />
-          <p className="font-body text-[10px] text-white/40 mt-1">{t.circNote}</p>
+          <p className={`font-body text-[10px] ${isDark ? "text-white/40" : "text-gray-400"} mt-1`}>{t.circNote}</p>
         </div>
       </div>
 
@@ -659,15 +659,15 @@ const KelilingLuasCirclesSVG = ({ t }: { t: T }) => (
           <circle cx="80" cy="80" r="3.5" fill="#fdba74" opacity=".9"
             style={{ filter: 'drop-shadow(0 0 5px #fb923c)' }} />
         </svg>
-        <p className="font-body text-[10px] text-white/45 leading-snug">
+        <p className={`font-body text-[10px] ${isDark ? "text-white/45" : "text-gray-500"} leading-snug`}>
           {t.areaInner}<span className="text-orange-300 font-semibold">{t.areaInnerBold}</span>{t.areaInner2}
         </p>
         <div className="w-full bg-orange-900/30 border border-orange-500/40 rounded-xl p-3 text-center">
           <p className="font-body text-xs font-bold text-orange-300 mb-1">{t.areaFormTitle}</p>
           <BlockMath math="L = \pi \times r^2" />
-          <p className="font-body text-[10px] text-white/50">{t.areaFormOr}</p>
+          <p className={`font-body text-[10px] ${isDark ? "text-white/50" : "text-gray-500"}`}>{t.areaFormOr}</p>
           <BlockMath math="L = \frac{1}{4}\pi d^2" />
-          <p className="font-body text-[10px] text-white/40 mt-1">{t.areaNote}</p>
+          <p className={`font-body text-[10px] ${isDark ? "text-white/40" : "text-gray-400"} mt-1`}>{t.areaNote}</p>
         </div>
       </div>
 
@@ -742,7 +742,7 @@ const KelilingLuasPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1_level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c1_q}<InlineMath math="\pi = \frac{22}{7}"/>.
                 </p>
               </div>
@@ -766,7 +766,7 @@ const KelilingLuasPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                 <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2_level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c2_q}<InlineMath math="\pi = \frac{22}{7}"/>{t.c2_q2}
                 </p>
               </div>
@@ -790,7 +790,7 @@ const KelilingLuasPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                 <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3_level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c3_q}<InlineMath math="\pi = \frac{22}{7}"/>{t.c3_q2}
                 </p>
               </div>

@@ -406,7 +406,7 @@ const SudutPusatKelilingPage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="bg-yellow-900/30 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-xs font-bold text-yellow-300">{t.centralLabel}</p>
-                  <p className="font-body text-xs text-white/70 mt-1">
+                  <p className={`font-body text-xs ${isDark ? "text-white/70" : "text-gray-700"} mt-1`}>
                     {t.centralDesc.split(t.centralDescBold)[0]}
                     <strong>{t.centralDescBold}</strong>
                     {t.centralDesc.split(t.centralDescBold)[1]}
@@ -414,7 +414,7 @@ const SudutPusatKelilingPage = () => {
                 </div>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3">
                   <p className="font-body text-xs font-bold text-purple-300">{t.inscribedLabel}</p>
-                  <p className="font-body text-xs text-white/70 mt-1">
+                  <p className={`font-body text-xs ${isDark ? "text-white/70" : "text-gray-700"} mt-1`}>
                     {t.inscribedDesc.split(t.inscribedDescBold)[0]}
                     <strong>{t.inscribedDescBold}</strong>
                     {t.inscribedDesc.split(t.inscribedDescBold)[1]}
@@ -475,7 +475,7 @@ const SudutPusatKelilingPage = () => {
                 <p className="font-body text-xs text-cyan-200/80 leading-relaxed">
                   <strong className="text-cyan-300">{t.anim1Bold1}</strong>
                   {t.anim1Desc.split(t.anim1Bold1)[1]?.split(t.anim1Bold2)[0]}
-                  <strong className="text-white/80">{t.anim1Bold2}</strong>
+                  <strong className={isDark ? "text-white/80" : "text-gray-700"}>{t.anim1Bold2}</strong>
                   {t.anim1Desc.split(t.anim1Bold2)[1]}
                 </p>
               </div>
@@ -509,7 +509,7 @@ const SudutPusatKelilingPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1Level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c1Q} <InlineMath math="\angle AOB = 110°"/>. {t.c1Q2.replace("!", "")} <InlineMath math="\angle ACB"/>{t.c1Q2.includes("!") ? "!" : ""}
                 </p>
               </div>
@@ -531,7 +531,7 @@ const SudutPusatKelilingPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                 <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2Level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c2Q} <InlineMath math="\angle ABD = 35°"/> {t.c2Q2} <InlineMath math="\angle ACD = 35°"/>{t.c2Q3} <InlineMath math="\angle AOD"/>{t.c2Q4}
                 </p>
               </div>
@@ -553,7 +553,7 @@ const SudutPusatKelilingPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                 <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3Level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c3Q} <InlineMath math="\angle A = 3x + 10°"/> {t.c3Q2} <InlineMath math="\angle C = 2x - 5°"/>{t.c3Q3} <InlineMath math="\angle A"/> {t.c3Q4} <InlineMath math="\angle C"/>{t.c3Q5}
                 </p>
               </div>

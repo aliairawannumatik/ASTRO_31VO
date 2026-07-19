@@ -566,22 +566,22 @@ const SlideCarousel = ({ t }: { t: T }) => {
           <span className={`font-display font-bold text-base ${slide.textColor}`}>{slide.title}</span>
           <span className={`text-xs font-mono px-2 py-0.5 rounded-full ${slide.badgeColor}`}>{slide.symbol}</span>
         </div>
-        <span className="text-xs text-white/40 font-mono">{idx + 1} / {slides.length}</span>
+        <span className={`text-xs ${isDark ? "text-white/40" : "text-gray-500"} font-mono`}>{idx + 1} / {slides.length}</span>
       </div>
 
       <div className="px-4 pt-5 pb-2">{slide.svg}</div>
 
       <div className="px-5 pb-4 space-y-3">
-        <p className="font-body text-sm text-white/80 leading-relaxed">{slide.desc}</p>
+        <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} leading-relaxed`}>{slide.desc}</p>
         <div className={`rounded-lg p-3 border ${slide.borderColor} ${slide.bgColor}`}>
           <p className={`font-body text-xs font-semibold ${slide.textColor} mb-1`}>{t.keyFactLabel}</p>
-          <p className="font-body text-xs text-white/75">{slide.keyFact}</p>
+          <p className={`font-body text-xs ${isDark ? "text-white/75" : "text-gray-600"}`}>{slide.keyFact}</p>
         </div>
         {slide.formula && (
           <div className={`${isDark ? "bg-slate-800/60 border-slate-600/50" : "bg-gray-100 border-gray-200"} border rounded-lg p-3 text-center`}>
-            <p className="text-white/40 text-[10px] font-mono mb-1 uppercase tracking-wide">{t.formulaLabel}</p>
+            <p className={`${isDark ? "text-white/40" : "text-gray-500"} text-[10px] font-mono mb-1 uppercase tracking-wide`}>{t.formulaLabel}</p>
             {slide.formulaPrefix && (
-              <p className="text-white/70 text-xs mb-1 font-body">{slide.formulaPrefix} =</p>
+              <p className={`${isDark ? "text-white/70" : "text-gray-600"} text-xs mb-1 font-body`}>{slide.formulaPrefix} =</p>
             )}
             <BlockMath math={slide.formula} />
           </div>
@@ -606,14 +606,14 @@ const SlideCarousel = ({ t }: { t: T }) => {
       </div>
 
       <div className="px-5 pb-5">
-        <p className="text-white/30 text-[10px] font-mono mb-2 uppercase tracking-wide">{t.jumpTo}</p>
+        <p className={`${isDark ? "text-white/30" : "text-gray-500"} text-[10px] font-mono mb-2 uppercase tracking-wide`}>{t.jumpTo}</p>
         <div className="flex flex-wrap gap-1.5">
           {slides.map((s, i) => (
             <button key={s.id} onClick={() => goTo(i)}
               className={`text-[10px] px-2.5 py-1 rounded-full font-body font-semibold border transition-all cursor-pointer ${
                 i === idx
                   ? `${s.borderColor} ${s.bgColor} ${s.textColor}`
-                  : "border-white/10 text-white/40 hover:border-white/30 hover:text-white/70"
+                  : isDark ? "border-white/10 text-white/40 hover:border-white/30 hover:text-white/70" : "border-gray-300 text-gray-500 hover:border-gray-400 hover:text-gray-700"
               }`}>
               {s.emoji} {s.title}
             </button>
@@ -659,7 +659,7 @@ const UnsurUnsurPage = () => {
             <Lightbulb className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
             <div>
               <p className="font-body text-sm font-semibold text-cyan-300 mb-1">{t.introTitle}</p>
-              <p className="font-body text-xs text-white/70 leading-relaxed">
+              <p className={`font-body text-xs ${isDark ? "text-white/70" : "text-gray-700"} leading-relaxed`}>
                 {t.introP1}<strong className="text-yellow-300">{t.introPusat}</strong>{t.introP2}
                 <strong className="text-green-300">{t.introJari}</strong>{t.introP3}
               </p>
@@ -676,7 +676,7 @@ const UnsurUnsurPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1_level}</p>
-                  <p className="font-body text-sm text-white/90">
+                  <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                     {t.c1_q}<InlineMath math="OA = 7"/>{t.c1_q2}
                   </p>
                 </div>
@@ -701,7 +701,7 @@ const UnsurUnsurPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2_level}</p>
-                  <p className="font-body text-sm text-white/90">
+                  <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                     {t.c2_q}<InlineMath math="d = 4x - 2"/>{t.c2_q2}<InlineMath math="r = x + 5"/>{t.c2_q3}
                   </p>
                 </div>
@@ -728,7 +728,7 @@ const UnsurUnsurPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                   <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3_level}</p>
-                  <p className="font-body text-sm text-white/90">
+                  <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                     {t.c3_q}<InlineMath math="OD = 5"/>{t.c3_q2}
                   </p>
                 </div>
@@ -759,8 +759,8 @@ const UnsurUnsurPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {makeSlides(t).map(s => (
                     <div key={s.id} className={`rounded-lg p-3 border ${s.borderColor} ${s.bgColor}`}>
-                      <p className="font-body text-xs font-bold text-white">{s.emoji} {s.title} <span className={`font-mono ${s.textColor}`}>({s.symbol})</span></p>
-                      <p className="font-body text-[11px] text-white/55 mt-0.5 leading-relaxed">{s.keyFact}</p>
+                      <p className={`font-body text-xs font-bold ${isDark ? "text-white" : "text-gray-800"}`}>{s.emoji} {s.title} <span className={`font-mono ${s.textColor}`}>({s.symbol})</span></p>
+                      <p className={`font-body text-[11px] ${isDark ? "text-white/55" : "text-gray-600"} mt-0.5 leading-relaxed`}>{s.keyFact}</p>
                     </div>
                   ))}
                 </div>

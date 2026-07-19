@@ -486,8 +486,8 @@ const PenerapanKontekstualPage = () => {
         {/* Hero */}
         <div className="rounded-xl border mb-4 px-4 pt-4 pb-5 text-center"
           style={{ background: isDark ? "rgba(15,23,42,.85)" : "rgba(241,245,249,.95)", borderColor: "rgba(6,182,212,.3)", backdropFilter: "blur(12px)" }}>
-          <p className="font-body text-xs text-white/55 mb-1 uppercase tracking-widest">{t.heroLabel}</p>
-          <p className="font-body text-sm text-white/85 mb-3 leading-relaxed">
+          <p className={`font-body text-xs ${isDark ? "text-white/55" : "text-gray-600"} mb-1 uppercase tracking-widest`}>{t.heroLabel}</p>
+          <p className={`font-body text-sm ${isDark ? "text-white/85" : "text-gray-700"} mb-3 leading-relaxed`}>
             {t.heroP.split(t.heroBold1)[0]}
             <strong className="text-cyan-300">{t.heroBold1}</strong>
             {t.heroP.split(t.heroBold1)[1]?.split(t.heroBold2)[0]}
@@ -522,7 +522,7 @@ const PenerapanKontekstualPage = () => {
                   <div key={label} className={`bg-${cardColors[i]}-900/30 border border-${cardColors[i]}-500/30 rounded-lg p-3 text-center`}>
                     <p className="text-2xl mb-1">{emoji}</p>
                     <p className={`text-${cardColors[i]}-300 font-bold`}>{label}</p>
-                    <p className="text-white/50 mt-1">{hint}</p>
+                    <p className={`${isDark ? "text-white/50" : "text-gray-600"} mt-1`}>{hint}</p>
                   </div>
                 ))}
               </div>
@@ -547,8 +547,8 @@ const PenerapanKontekstualPage = () => {
                   <div key={step} className={`flex gap-3 bg-${color}-900/20 border border-${color}-500/20 rounded-lg p-3`}>
                     <span className={`bg-${color}-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5`}>{step}</span>
                     <div>
-                      <p className="font-body text-sm font-bold text-white">{title}</p>
-                      <p className="font-body text-xs text-white/60">{desc}</p>
+                      <p className={`font-body text-sm font-bold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</p>
+                      <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-600"}`}>{desc}</p>
                     </div>
                   </div>
                 ))}
@@ -562,7 +562,7 @@ const PenerapanKontekstualPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1Level}</p>
-                <p className="font-body text-sm text-white/90">{t.c1Q}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c1Q}</p>
               </div>
               <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
                 <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c1Sol}</p>
@@ -584,7 +584,7 @@ const PenerapanKontekstualPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                 <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2Level}</p>
-                <p className="font-body text-sm text-white/90">{t.c2Q}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c2Q}</p>
               </div>
               <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
                 <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c2Sol}</p>
@@ -611,7 +611,7 @@ const PenerapanKontekstualPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                 <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c3Level}</p>
-                <p className="font-body text-sm text-white/90">{t.c3Q}</p>
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>{t.c3Q}</p>
               </div>
               <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
                 <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide mb-2`}>{t.c3Sol}</p>

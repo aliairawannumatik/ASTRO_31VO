@@ -384,12 +384,12 @@ const KaitanBangunDatarPage = () => {
                 <div className="rounded-xl p-4 border"
                   style={{background:"linear-gradient(135deg,rgba(34,197,94,.15),rgba(6,182,212,.08))",borderColor:"rgba(34,197,94,.35)"}}>
                   <p className="text-green-300 text-sm font-bold mb-1">{t.inLabel}</p>
-                  <p className="text-white/60 text-xs leading-relaxed">{t.inDesc}<em>{t.inDescEm}</em>.</p>
+                  <p className={`${isDark ? "text-white/60" : "text-gray-600"} text-xs leading-relaxed`}>{t.inDesc}<em>{t.inDescEm}</em>.</p>
                 </div>
                 <div className="rounded-xl p-4 border"
                   style={{background:"linear-gradient(135deg,rgba(249,115,22,.15),rgba(251,191,36,.08))",borderColor:"rgba(249,115,22,.35)"}}>
                   <p className="text-orange-300 text-sm font-bold mb-1">{t.outLabel}</p>
-                  <p className="text-white/60 text-xs leading-relaxed">{t.outDesc}<em>{t.outDescEm}</em>.</p>
+                  <p className={`${isDark ? "text-white/60" : "text-gray-600"} text-xs leading-relaxed`}>{t.outDesc}<em>{t.outDescEm}</em>.</p>
                 </div>
               </div>
             </div>
@@ -465,7 +465,7 @@ const KaitanBangunDatarPage = () => {
               <div className="rounded-xl p-4 border"
                 style={{background:"rgba(34,197,94,.1)",borderColor:"rgba(34,197,94,.35)"}}>
                 <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c1Level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c1Q}<InlineMath math="AC = 5"/>{t.c1Q2}<InlineMath math="BC = 12"/>{t.c1Q3}
                 </p>
               </div>
@@ -497,7 +497,7 @@ const KaitanBangunDatarPage = () => {
               <div className="rounded-xl p-4 border"
                 style={{background:"rgba(249,115,22,.1)",borderColor:"rgba(249,115,22,.35)"}}>
                 <p className="text-orange-300 font-bold text-xs uppercase tracking-wide mb-2">{t.c2Level}</p>
-                <p className="font-body text-sm text-white/90">
+                <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"}`}>
                   {t.c2Q}<InlineMath math="AB = 13"/>{t.c2Q2}<InlineMath math="AC = 5"/>{t.c2Q3}<InlineMath math="BC = 12"/>{t.c2Q4}
                 </p>
               </div>
@@ -535,7 +535,7 @@ const KaitanBangunDatarPage = () => {
                     <p>{t.rInB2}</p>
                   </div>
                   <BlockMath math="r = \dfrac{L_\triangle}{s}"/>
-                  <p className="text-white/40 text-[10px]">{t.rInSub}</p>
+                  <p className={`${isDark ? "text-white/40" : "text-gray-500"} text-[10px]`}>{t.rInSub}</p>
                 </div>
                 <div className="rounded-xl p-4 border space-y-2"
                   style={{background:"linear-gradient(135deg,rgba(249,115,22,.12),rgba(251,191,36,.06))",borderColor:"rgba(249,115,22,.3)"}}>
@@ -545,7 +545,7 @@ const KaitanBangunDatarPage = () => {
                     <p>{t.rOutB2}</p>
                   </div>
                   <BlockMath math="R = \dfrac{AB \cdot AC \cdot BC}{4L_\triangle}"/>
-                  <p className="text-white/40 text-[10px]">{t.rOutSub}</p>
+                  <p className={`${isDark ? "text-white/40" : "text-gray-500"} text-[10px]`}>{t.rOutSub}</p>
                 </div>
               </div>
               <div className="rounded-xl p-3 border"
