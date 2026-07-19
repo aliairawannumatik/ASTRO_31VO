@@ -1,0 +1,39 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/). 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+Sebelumnya sudah diperbaiki: semua "answer result boxes", objek data 
+soal (luasExamples/volExamples easy/med/hard props), dan teks bersarang 
+(strong tags, body text) di PrismaPage.tsx sudah conditional isDark. 
+Sekarang lanjutkan perbaikan bagian JSX umum lainnya (BUKAN SVG diagram 
+3D — itu akan dikerjakan di sesi terpisah).
+
+Sudah diperbaiki sebelumnya dengan pola konsisten, termasuk LimasPage.tsx, 
+KubusPage.tsx, dan BalokPage.tsx. Buka salah satu file ini sebagai 
+REFERENSI pola warna yang benar.
+
+TUGAS: Di file src/pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/PrismaPage.tsx, 
+perbaiki HANYA bagian berikut (skip elemen <svg> dulu):
+1. Semua className bg-slate-8xx/9xx di JSX umum halaman yang BELUM 
+   diperbaiki sebelumnya — termasuk section/card penjelasan, rangkuman, 
+   tips, tabel ringkasan rumus, slide-slide interaktif (kalau ada, mirip 
+   struktur di BalokPage.tsx — Vertices, Diagonal, Net/Jaring-jaring, 
+   Frame, Summary).
+2. Semua text-white/* atau text-*-200 di dalam container yang baru 
+   diterangi — termasuk teks bersarang di dalam elemen nested (spans, 
+   strong tags) yang mungkin terlewat di scan pertama.
+3. JANGAN sentuh elemen <svg> sama sekali di tahap ini.
+4. JANGAN ubah logika interaktif — HANYA warna.
+5. JANGAN sentuh file lain.
+
+Setelah selesai:
+6. Verifikasi TypeScript check per-file (0 error).
+7. Lakukan scan ulang KEDUA setelah edit pertama selesai — khusus cari 
+   elemen bersarang yang mungkin terlewat.
+8. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya (ringkas, jumlah baris yang diperbaiki), dan 
+konfirmasi eksplisit sudah melakukan scan ulang kedua.
