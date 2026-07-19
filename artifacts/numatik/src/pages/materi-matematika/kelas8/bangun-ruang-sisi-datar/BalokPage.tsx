@@ -50,6 +50,7 @@ const getObjectExamples = (lang: string) => {
    SIMPLE AUTO-ROTATING BALOK
 ───────────────────────────────────────────────────────────── */
 const SimpleRotatingBalok = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [rotX, setRotX] = useState(-22);
   const [rotY, setRotY] = useState(35);
   const [isDragging, setIsDragging] = useState(false);
@@ -144,12 +145,12 @@ const SimpleRotatingBalok = ({ lang }: { lang: string }) => {
 
   return (
     <div
-      className="bg-slate-900/70 border border-slate-700/50 rounded-xl select-none"
+      className={`${isDark ? "bg-slate-900/70 border-slate-700/50" : "bg-white border-gray-200"} border rounded-xl select-none`}
       style={{ padding: "10px 0 8px", cursor: isDragging ? "grabbing" : "grab" }}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
     >
-      <p className="text-center text-white/40 font-body mb-1" style={{ fontSize: 9 }}>
+      <p className={`text-center ${isDark ? "text-white/40" : "text-gray-400"} font-body mb-1`} style={{ fontSize: 9 }}>
         {autoHint}
       </p>
       <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-1" style={{ display:"block", overflow:"visible" }}>
@@ -174,7 +175,7 @@ const SimpleRotatingBalok = ({ lang }: { lang: string }) => {
         {faceDefs.map(f => (
           <div key={f.label} className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-sm" style={{ background: f.color }}/>
-            <span className="text-white/45 font-body" style={{ fontSize:9 }}>{f.label}</span>
+            <span className={`${isDark ? "text-white/45" : "text-gray-500"} font-body`} style={{ fontSize:9 }}>{f.label}</span>
           </div>
         ))}
       </div>
@@ -257,6 +258,7 @@ const FaceRect = ({
 const TRANS = "transform 1.6s cubic-bezier(0.4, 0, 0.2, 1)";
 
 const InteractiveBalok3D = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [openFaces, setOpenFaces] = useState<Set<FName>>(new Set());
   const [seqStep, setSeqStep] = useState(-1);
   const [rotX, setRotX] = useState(-22);
@@ -391,8 +393,8 @@ const InteractiveBalok3D = ({ lang }: { lang: string }) => {
     : f === "left" || f === "right" ? "l×t" : "p×l";
 
   return (
-    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
-      <p className="text-white/60 text-xs text-center font-body">{dragHint}</p>
+    <div className={`${isDark ? "bg-slate-900/80 border-slate-700" : "bg-white border-gray-200"} border rounded-xl p-4 space-y-4`}>
+      <p className={`${isDark ? "text-white/60" : "text-gray-600"} text-xs text-center font-body`}>{dragHint}</p>
 
       <div className="relative mx-auto flex items-center justify-center select-none overflow-visible"
         style={{ width: "100%", height: 380, cursor: isDragging ? "grabbing" : "grab", touchAction: "none" }}
@@ -494,14 +496,14 @@ const InteractiveBalok3D = ({ lang }: { lang: string }) => {
         {faceKeys.map(f => (
           <div key={f} className="flex items-center gap-1">
             <div className="w-3 h-3 rounded-sm" style={{ background: FACE_COLORS[f] }} />
-            <span className="text-white/50 text-[10px] font-body">
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-[10px] font-body`}>
               {fl[f]}{f === "back" ? " ★" : ""}{" "}
-              <span className="text-white/30">({faceDimLabel(f)})</span>
+              <span className={isDark ? "text-white/30" : "text-gray-400"}>({faceDimLabel(f)})</span>
             </span>
           </div>
         ))}
       </div>
-      <p className="text-white/30 text-[9px] text-center font-body">{anchorNote}</p>
+      <p className={`${isDark ? "text-white/30" : "text-gray-400"} text-[9px] text-center font-body`}>{anchorNote}</p>
     </div>
   );
 };
@@ -534,6 +536,7 @@ const KERANGKA_COLORS: Record<EdgeAxis, string> = {
 };
 
 const InteractiveKerangkaBalok = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [bongkar, setBongkar] = useState(false);
   const [rotX, setRotX] = useState(-18);
   const [rotY, setRotY] = useState(28);
@@ -661,8 +664,8 @@ const InteractiveKerangkaBalok = ({ lang }: { lang: string }) => {
   const tLabel = lang === "en" ? "4 × t (height)" : lang === "ja" ? "4 × t（高さ）" : "4 × t (tinggi)";
 
   return (
-    <div ref={containerRef} className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
-      <p className="text-white/60 text-xs text-center font-body">{dragHint}</p>
+    <div ref={containerRef} className={`${isDark ? "bg-slate-900/80 border-slate-700" : "bg-white border-gray-200"} border rounded-xl p-4 space-y-4`}>
+      <p className={`${isDark ? "text-white/60" : "text-gray-600"} text-xs text-center font-body`}>{dragHint}</p>
 
       <div
         className="relative mx-auto flex items-center justify-center select-none overflow-visible"
@@ -711,21 +714,21 @@ const InteractiveKerangkaBalok = ({ lang }: { lang: string }) => {
       </div>
 
       <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-body">
-        <div className="bg-slate-800/60 border border-cyan-700/40 rounded p-2 flex items-center justify-center gap-1.5">
+        <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-cyan-700/40 rounded p-2 flex items-center justify-center gap-1.5`}>
           <div className="w-3 h-3 rounded-sm" style={{ background: KERANGKA_COLORS.p, boxShadow: `0 0 4px ${KERANGKA_COLORS.p}` }} />
           <span className="text-cyan-300 font-semibold">{pLabel}</span>
         </div>
-        <div className="bg-slate-800/60 border border-orange-700/40 rounded p-2 flex items-center justify-center gap-1.5">
+        <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-orange-700/40 rounded p-2 flex items-center justify-center gap-1.5`}>
           <div className="w-3 h-3 rounded-sm" style={{ background: KERANGKA_COLORS.l, boxShadow: `0 0 4px ${KERANGKA_COLORS.l}` }} />
           <span className="text-orange-300 font-semibold">{lLabel}</span>
         </div>
-        <div className="bg-slate-800/60 border border-yellow-700/40 rounded p-2 flex items-center justify-center gap-1.5">
+        <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border border-yellow-700/40 rounded p-2 flex items-center justify-center gap-1.5`}>
           <div className="w-3 h-3 rounded-sm" style={{ background: KERANGKA_COLORS.t, boxShadow: `0 0 4px ${KERANGKA_COLORS.t}` }} />
           <span className="text-yellow-300 font-semibold">{tLabel}</span>
         </div>
       </div>
 
-      <div className="bg-slate-900/60 border border-slate-700 rounded-lg p-3 text-center">
+      <div className={`${isDark ? "bg-slate-900/60 border-slate-700" : "bg-white/90 border-gray-200"} border rounded-lg p-3 text-center`}>
         {bongkar ? (
           <BlockMath math="K = \underbrace{4p}_{\text{p}} + \underbrace{4l}_{\text{l}} + \underbrace{4t}_{\text{t}} = 4(p + l + t)" />
         ) : (
@@ -862,7 +865,7 @@ const NetGallery = () => (
   <div className="grid grid-cols-5 gap-1.5">
     {balokNets.map((cells, i) => (
       <div key={i}
-        className="bg-slate-950/60 border border-slate-700/50 rounded p-1"
+        className={`${isDark ? "bg-slate-950/60 border-slate-700/50" : "bg-white border-gray-200"} border rounded p-1`}
         style={{ aspectRatio: "1/1.1" }}>
         <NetSVG cells={cells} />
       </div>
@@ -1006,13 +1009,14 @@ const ALL_DB_DIAGS_RAW: {key:string;v1:DBVKey;v2:DBVKey;color:string;labelId:str
 ];
 
 const BalokDiagCard = ({d,idx,lang}:{d:typeof ALL_DB_DIAGS_RAW[0];idx:number;lang:string}) => {
+  const { isDark } = useTheme();
   const aId = `dbg${idx}`;
   const aCls = `dbc${idx}`;
   const [x1,y1] = DB_VERTS[d.v1];
   const [x2,y2] = DB_VERTS[d.v2];
   const label = lang === "en" ? d.labelEn : lang === "ja" ? d.labelJa : d.labelId;
   return (
-    <div className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-2 flex flex-col items-center gap-1">
+    <div className={`${isDark ? "bg-slate-900/60 border-slate-700/50" : "bg-white/90 border-gray-200"} border rounded-lg p-2 flex flex-col items-center gap-1`}>
       <svg viewBox="0 0 200 154" className="w-full" aria-label={`Diagonal ${d.key}`}>
         <defs>
           <style>{`
@@ -1043,7 +1047,7 @@ const BalokDiagCard = ({d,idx,lang}:{d:typeof ALL_DB_DIAGS_RAW[0];idx:number;lan
         })}
         <text x="90" y="148" fill={d.color} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{d.key}</text>
       </svg>
-      <p className="text-[9px] text-white/45 text-center leading-tight font-body">{label}</p>
+      <p className={`text-[9px] ${isDark ? "text-white/45" : "text-gray-500"} text-center leading-tight font-body`}>{label}</p>
     </div>
   );
 };
@@ -1077,13 +1081,14 @@ const ALL_DR_DIAGS_RAW: {key:string;v1:DBVKey;v2:DBVKey;color:string;labelId:str
 ];
 
 const BalokRuangCard = ({d,idx,lang}:{d:typeof ALL_DR_DIAGS_RAW[0];idx:number;lang:string}) => {
+  const { isDark } = useTheme();
   const aId = `drg${idx}`;
   const aCls = `drc${idx}`;
   const [x1,y1] = DB_VERTS[d.v1];
   const [x2,y2] = DB_VERTS[d.v2];
   const label = lang === "en" ? d.labelEn : lang === "ja" ? d.labelJa : d.labelId;
   return (
-    <div className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-3 flex flex-col items-center gap-1">
+    <div className={`${isDark ? "bg-slate-900/60 border-slate-700/50" : "bg-white/90 border-gray-200"} border rounded-lg p-3 flex flex-col items-center gap-1`}>
       <svg viewBox="0 0 200 154" className="w-full" aria-label={`Space diagonal ${d.key}`}>
         <defs>
           <style>{`
@@ -1119,7 +1124,7 @@ const BalokRuangCard = ({d,idx,lang}:{d:typeof ALL_DR_DIAGS_RAW[0];idx:number;la
         <text x="90" y="148" fill={d.color} fontSize="10.5" fontFamily="monospace"
           fontWeight="bold" textAnchor="middle">{d.key}</text>
       </svg>
-      <p className="text-[9px] text-white/45 text-center leading-tight font-body">{label}</p>
+      <p className={`text-[9px] ${isDark ? "text-white/45" : "text-gray-500"} text-center leading-tight font-body`}>{label}</p>
     </div>
   );
 };
@@ -1303,6 +1308,7 @@ const VolumeBalokSVG = () => {
    BIDANG DIAGONAL BALOK — 6 planes, 3 types
 ───────────────────────────────────────────────────────────── */
 const BidangDiagonalBalokSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const typeLabel = lang === "en" ? "Type" : lang === "ja" ? "タイプ" : "Tipe";
   const planeLabel = lang === "en" ? "Plane" : lang === "ja" ? "対角面" : "Bidang";
   const areaLabel = lang === "en" ? "Plane area:" : lang === "ja" ? "面積:" : "Luas bidang:";
@@ -1331,10 +1337,10 @@ const BidangDiagonalBalokSVG = ({ lang }: { lang: string }) => {
         }).join(" ");
 
         return (
-          <div key={plane.key} className="bg-slate-900/60 border border-slate-700/50 rounded-lg p-3">
+          <div key={plane.key} className={`${isDark ? "bg-slate-900/60 border-slate-700/50" : "bg-white/90 border-gray-200"} border rounded-lg p-3`}>
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold" style={{ color: plane.color }}>{planeLabel} {plane.key}</span>
-              <span className="text-[10px] text-white/50 font-body">{plane.type}</span>
+              <span className={`text-[10px] ${isDark ? "text-white/50" : "text-gray-500"} font-body`}>{plane.type}</span>
             </div>
             <svg viewBox="0 0 200 154" className="w-full" aria-label={`Diagonal plane ${plane.key}`}>
               <defs>
@@ -1372,9 +1378,9 @@ const BidangDiagonalBalokSVG = ({ lang }: { lang: string }) => {
                 ABCD.EFGH
               </text>
             </svg>
-            <div className="mt-2 rounded-lg bg-slate-950/50 border border-slate-700/50 px-3 py-2 text-xs">
+            <div className={`mt-2 rounded-lg ${isDark ? "bg-slate-950/50 border-slate-700/50" : "bg-gray-50 border-gray-200"} border px-3 py-2 text-xs`}>
               <p className="font-semibold" style={{ color: plane.color }}>{areaLabel} <span className="font-mono">{plane.dims}</span></p>
-              <p className="text-white/45 text-[10px]">{passLabel(plane.verts)}</p>
+              <p className={`${isDark ? "text-white/45" : "text-gray-500"} text-[10px]`}>{passLabel(plane.verts)}</p>
             </div>
           </div>
         );
@@ -1602,7 +1608,7 @@ const BalokPage = () => {
       title: lang === "en" ? "Definition of a Cuboid" : lang === "ja" ? "直方体の定義" : "Definisi Balok",
       icon: "📦",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body leading-relaxed`}>
           <p>
             {lang === "en" ? (
               <>A <strong className="text-cyan-300">cuboid</strong> (rectangular prism) is a 3D solid with 6 rectangular faces. Unlike a cube, a cuboid has <strong className="text-yellow-300">three different dimensions</strong>: length (p), width (l), and height (t).</>
@@ -1616,7 +1622,7 @@ const BalokPage = () => {
             <p className="text-cyan-300 font-semibold">
               {lang === "en" ? "📌 Properties of a Cuboid:" : lang === "ja" ? "📌 直方体の性質：" : "📌 Sifat-sifat Balok:"}
             </p>
-            <ul className="space-y-1 text-xs text-white/75">
+            <ul className={`space-y-1 text-xs ${isDark ? "text-white/75" : "text-gray-700"}`}>
               {lang === "en" ? (
                 <>
                   <li>• Has <strong className="text-yellow-300">6 faces</strong> (all rectangles — 3 pairs of congruent faces)</li>
@@ -1660,13 +1666,13 @@ const BalokPage = () => {
       title: lang === "en" ? "Cuboid Elements (Interactive)" : lang === "ja" ? "直方体の要素（インタラクティブ）" : "Unsur-unsur Balok (Interaktif)",
       icon: "🔍",
       content: (
-        <div className="space-y-5 text-sm text-white/85 font-body leading-relaxed">
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+        <div className={`space-y-5 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body leading-relaxed`}>
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-cyan-300 font-semibold mb-2">
               {lang === "en" ? "⬛ Edges (12 edges)" : lang === "ja" ? "⬛ 辺（12本）" : "⬛ Rusuk Balok (12 rusuk)"}
             </p>
             <RusukBalokSVG />
-            <div className="text-xs text-white/70 space-y-1 mt-2">
+            <div className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"} space-y-1 mt-2`}>
               {lang === "en" ? (
                 <>
                   <p>• <strong className="text-cyan-300">4 length edges (p):</strong> parallel along length direction</p>
@@ -1686,17 +1692,17 @@ const BalokPage = () => {
                   <p>• <strong className="text-yellow-300">4 rusuk tinggi (t):</strong> rusuk sejajar arah tinggi</p>
                 </>
               )}
-              <div className="bg-slate-700/60 rounded p-2 mt-2">
+              <div className={`${isDark ? "bg-slate-700/60" : "bg-gray-200"} rounded p-2 mt-2`}>
                 <BlockMath math="K = 4(p + l + t)" />
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-green-300 font-semibold mb-2">
               {lang === "en" ? "⬜ Faces (6 faces, 3 pairs)" : lang === "ja" ? "⬜ 面（6面、3組）" : "⬜ Sisi Balok (6 sisi, 3 pasang)"}
             </p>
             <SisiBalokSVG />
-            <div className="text-xs text-white/70 space-y-1 mt-2">
+            <div className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"} space-y-1 mt-2`}>
               {lang === "en" ? (
                 <>
                   <p>• 2 faces <strong className="text-blue-300">FRONT &amp; BACK</strong>: size p × t</p>
@@ -1718,34 +1724,34 @@ const BalokPage = () => {
               )}
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-yellow-300 font-semibold mb-2">
               {lang === "en" ? "● Vertices (8 vertices)" : lang === "ja" ? "● 頂点（8個）" : "● Titik Sudut (8 titik)"}
             </p>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               {lang === "en" ? "Each vertex is the meeting point of 3 mutually perpendicular edges. Total: 8 vertices — same as a cube."
                : lang === "ja" ? "各頂点は互いに垂直な3辺の交点です。合計8頂点 — 立方体と同じ数です。"
                : "Setiap sudut balok adalah pertemuan 3 rusuk yang saling tegak lurus. Total 8 titik sudut — sama seperti kubus."}
             </p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-orange-300 font-semibold mb-2">
               {lang === "en" ? "↗ Face Diagonals (12 diagonals)" : lang === "ja" ? "↗ 面対角線（12本）" : "↗ Diagonal Bidang (12 diagonal)"}
             </p>
             <AllDiagonalBidangBalok lang={lang} />
-            <div className="text-xs text-white/70 space-y-1 mt-2">
+            <div className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"} space-y-1 mt-2`}>
               <p>• {sideFrontBack}: <InlineMath math="d = \sqrt{p^2 + t^2}" /> (× 4)</p>
               <p>• {sideTB}: <InlineMath math="d = \sqrt{p^2 + l^2}" /> (× 4)</p>
               <p>• {sideLR}: <InlineMath math="d = \sqrt{l^2 + t^2}" /> (× 4)</p>
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-yellow-300 font-semibold mb-2">
               {lang === "en" ? "⟋ Space Diagonals (4 diagonals)" : lang === "ja" ? "⟋ 空間対角線（4本）" : "⟋ Diagonal Ruang (4 diagonal)"}
             </p>
             <AllDiagonalRuangBalok lang={lang} />
-            <div className="text-xs text-white/70 mt-2">
-              <div className="bg-slate-700/60 rounded p-2">
+            <div className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"} mt-2`}>
+              <div className={`${isDark ? "bg-slate-700/60" : "bg-gray-200"} rounded p-2`}>
                 <BlockMath math="d_r = \sqrt{p^2 + l^2 + t^2}" />
               </div>
             </div>
@@ -1757,7 +1763,7 @@ const BalokPage = () => {
       title: lang === "en" ? "Cuboid Net — Interactive 3D" : lang === "ja" ? "直方体の展開図 — 3Dインタラクティブ" : "Jaring-jaring Balok Interaktif 3D",
       icon: "🔲",
       content: (
-        <div className="space-y-5 text-sm text-white/85 font-body">
+        <div className={`space-y-5 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <p>
             {lang === "en" ? (
               <>A <strong className="text-cyan-300">cuboid net</strong> is a 2D shape that folds into a cuboid. Each net consists of 6 rectangles — 3 pairs of different sizes. The <strong className="text-violet-300">BACK (purple)</strong> face is the fixed anchor.</>
@@ -1768,14 +1774,14 @@ const BalokPage = () => {
             )}
           </p>
           <InteractiveBalok3D lang={lang} />
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-cyan-300 font-semibold mb-3 text-xs">
               {lang === "en" ? "📐 Example Cuboid Net Patterns:" : lang === "ja" ? "📐 展開図の例：" : "📐 Contoh Pola Jaring-jaring Balok:"}
             </p>
             <NetGallery />
             <div className="mt-3 flex flex-wrap gap-2">
               {(["p×t","l×t","p×l"] as const).map((label, i) => (
-                <div key={i} className="flex items-center gap-1 text-[10px] text-white/60 font-body">
+                <div key={i} className={`flex items-center gap-1 text-[10px] ${isDark ? "text-white/60" : "text-gray-600"} font-body`}>
                   <div className="w-3 h-3 rounded-sm" style={{ background: ["#8b5cf6","#22c55e","#eab308"][i] }}/>
                   <span>
                     {label === "p×t" ? t.netLegend.front : label === "l×t" ? t.netLegend.side : t.netLegend.top} ({label})
@@ -1791,7 +1797,7 @@ const BalokPage = () => {
       title: lang === "en" ? "Surface Area of a Cuboid" : lang === "ja" ? "直方体の表面積" : "Luas Permukaan Balok",
       icon: "🎨",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <p>
             {lang === "en" ? (
               <><strong className="text-blue-300">Surface area</strong> is the total area of all 6 faces enclosing the cuboid.</>
@@ -1802,11 +1808,11 @@ const BalokPage = () => {
             )}
           </p>
           <LuasSVG lang={lang} />
-          <div className="mt-5 bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
-            <p className="text-white/70 text-xs">
+          <div className={`mt-5 ${isDark ? "bg-slate-800/60 border-slate-600/40" : "bg-gray-100 border-gray-200"} border rounded-lg p-4 space-y-2`}>
+            <p className={`${isDark ? "text-white/70" : "text-gray-700"} text-xs`}>
               {lang === "en" ? "Sum of 3 pairs of faces:" : lang === "ja" ? "3組の面の面積の合計：" : "Penjumlahan luas 3 pasang sisi:"}
             </p>
-            <div className="bg-slate-900/60 rounded p-2 text-xs space-y-1">
+            <div className={`${isDark ? "bg-slate-900/60" : "bg-white/90"} rounded p-2 text-xs space-y-1`}>
               <BlockMath math="L = 2(p \times l) + 2(p \times t) + 2(l \times t)" />
               <BlockMath math="L = 2(pl + pt + lt)" />
             </div>
@@ -1829,8 +1835,8 @@ const BalokPage = () => {
               </>
             )}
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p>🎯 <strong className="text-white">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
+            <p>🎯 <strong className={isDark ? "text-white" : "text-gray-900"}>
               {lang === "en" ? "Units of surface area:" : lang === "ja" ? "表面積の単位：" : "Satuan luas permukaan:"}
             </strong></p>
             <p>• {lang === "en" ? "If p, l, t in cm → area in" : lang === "ja" ? "p, l, t が cm → 面積は" : "Jika p, l, t dalam cm → Luas dalam"} <InlineMath math="\text{cm}^2" /></p>
@@ -1843,7 +1849,7 @@ const BalokPage = () => {
       title: lang === "en" ? "Volume of a Cuboid" : lang === "ja" ? "直方体の体積" : "Volume Balok",
       icon: "📦",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <p>
             {lang === "en" ? (
               <><strong className="text-green-300">Volume</strong> measures how much space the cuboid occupies. Volume = base area × height.</>
@@ -1853,32 +1859,32 @@ const BalokPage = () => {
               <><strong className="text-green-300">Volume balok</strong> menyatakan seberapa besar "isi" atau "ruang" yang ditempati balok. Volume = Luas alas × tinggi.</>
             )}
           </p>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-xl px-3 pt-2 pb-3">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-xl px-3 pt-2 pb-3`}>
             <p className="text-cyan-300 text-xs font-semibold font-body text-center mb-1">
               {lang === "en" ? "🌊 Cuboid filling with water — empty to full"
                : lang === "ja" ? "🌊 直方体に水を注ぐアニメーション"
                : "🌊 Balok diisi air — dari kosong hingga penuh"}
             </p>
             <WaterBalokAnimation />
-            <p className="text-white/45 text-[10px] font-body text-center mt-1">
+            <p className={`${isDark ? "text-white/45" : "text-gray-500"} text-[10px] font-body text-center mt-1`}>
               {lang === "en" ? "Percentage shows the proportion of volume filled relative to total volume"
                : lang === "ja" ? "パーセントは全体積に対する充填割合を示します"
                : "Persentase menunjukkan proporsi volume terisi terhadap volume total"}
             </p>
           </div>
-          <div className="mt-5 bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
-            <div className="bg-slate-900/60 rounded p-2">
+          <div className={`mt-5 ${isDark ? "bg-slate-800/60 border-slate-600/40" : "bg-gray-100 border-gray-200"} border rounded-lg p-4 space-y-2`}>
+            <div className={`${isDark ? "bg-slate-900/60" : "bg-white/90"} rounded p-2`}>
               <BlockMath math="V = p \times l \times t" />
             </div>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               • {lang === "en" ? "Volume = base area (p × l) × height (t)" : lang === "ja" ? "体積 = 底面積 (p × l) × 高さ (t)" : "Volume = Luas alas (p × l) × tinggi (t)"}
             </p>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               • {lang === "en" ? "Or: Volume = length × width × height" : lang === "ja" ? "または：体積 = 縦 × 横 × 高さ" : "Atau: Volume = panjang × lebar × tinggi"}
             </p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
-            <p>🎯 <strong className="text-white">{lang === "en" ? "Volume units:" : lang === "ja" ? "体積の単位：" : "Satuan volume:"}</strong></p>
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
+            <p>🎯 <strong className={isDark ? "text-white" : "text-gray-900"}>{lang === "en" ? "Volume units:" : lang === "ja" ? "体積の単位：" : "Satuan volume:"}</strong></p>
             <p>• {lang === "en" ? "If p, l, t in cm → volume in" : lang === "ja" ? "p, l, t が cm → 体積は" : "Jika p, l, t dalam cm → Volume dalam"} <InlineMath math="\text{cm}^3" /></p>
             <p>• {lang === "en" ? "If p, l, t in m → volume in" : lang === "ja" ? "p, l, t が m → 体積は" : "Jika p, l, t dalam m → Volume dalam"} <InlineMath math="\text{m}^3" /></p>
             <p>• <InlineMath math="1 \text{ m}^3 = 1{,}000{,}000 \text{ cm}^3" /></p>
@@ -1891,14 +1897,14 @@ const BalokPage = () => {
       icon: "📊",
       content: (
         <div className="space-y-3 font-body">
-          <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <div className={`overflow-x-auto rounded-lg border ${isDark ? "border-slate-700" : "border-gray-200"}`}>
             <table className="w-full text-xs text-center">
               <thead>
-                <tr className="bg-slate-800">
-                  <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">
+                <tr className={isDark ? "bg-slate-800" : "bg-gray-100"}>
+                  <th className={`px-3 py-2 text-cyan-300 border-r ${isDark ? "border-slate-700" : "border-gray-200"} text-left`}>
                     {lang === "en" ? "Quantity" : lang === "ja" ? "量" : "Besaran"}
                   </th>
-                  <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">
+                  <th className={`px-3 py-2 text-cyan-300 border-r ${isDark ? "border-slate-700" : "border-gray-200"}`}>
                     {lang === "en" ? "Formula" : lang === "ja" ? "公式" : "Rumus"}
                   </th>
                   <th className="px-3 py-2 text-cyan-300">
@@ -1935,10 +1941,10 @@ const BalokPage = () => {
                   ["Diagonal ruang","d = √(p²+l²+t²)","4 buah"],
                   ["Volume","V = p×l×t","isi balok"],
                 ]).map(([b, r, c], i) => (
-                  <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
-                    <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
-                    <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
-                    <td className="px-3 py-2 text-white/55 text-left">{c}</td>
+                  <tr key={i} className={`border-t ${isDark ? "border-slate-700" : "border-gray-200"} ${i % 2 === 0 ? (isDark ? "bg-slate-900/40" : "bg-blue-50/50") : (isDark ? "bg-slate-800/30" : "bg-gray-50")}`}>
+                    <td className={`px-3 py-2 ${isDark ? "text-white/90" : "text-gray-800"} font-semibold border-r ${isDark ? "border-slate-700" : "border-gray-200"} text-left`}>{b}</td>
+                    <td className={`px-3 py-2 text-yellow-300 font-mono border-r ${isDark ? "border-slate-700" : "border-gray-200"}`}>{r}</td>
+                    <td className={`px-3 py-2 ${isDark ? "text-white/55" : "text-gray-500"} text-left`}>{c}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1976,7 +1982,7 @@ const BalokPage = () => {
     {
       ...easy_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A gift box (cuboid) has length <InlineMath math="20\text{ cm}" />, width <InlineMath math="15\text{ cm}" />, and height <InlineMath math="10\text{ cm}" />.</p>
@@ -1997,8 +2003,8 @@ const BalokPage = () => {
       ),
       answer: (
         <div className="space-y-3 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
-            <p className="text-white/70">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 space-y-2 text-xs`}>
+            <p className={isDark ? "text-white/70" : "text-gray-700"}>
               {lang === "en" ? "Given: p = 20 cm, l = 15 cm, t = 10 cm"
                : lang === "ja" ? "p = 20 cm, l = 15 cm, t = 10 cm"
                : "Diketahui: p = 20 cm, l = 15 cm, t = 10 cm"}
@@ -2016,7 +2022,7 @@ const BalokPage = () => {
     {
       ...med_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A cuboid has surface area <InlineMath math="376\text{ cm}^2" />.</p>
@@ -2038,13 +2044,13 @@ const BalokPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-yellow-400 font-semibold text-xs">{step1} — {lang === "en" ? "Find height:" : lang === "ja" ? "高さを求める：" : "Cari tinggi:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 space-y-1 text-xs`}>
             <BlockMath math="376 = 2(10\times8 + 10\times t + 8\times t)" />
             <BlockMath math="188 = 80 + 10t + 8t = 80 + 18t" />
             <BlockMath math="18t = 108 \Rightarrow t = 6\text{ cm}" />
           </div>
           <p className="text-yellow-400 font-semibold text-xs">{step2} — {lang === "en" ? "Space diagonal:" : lang === "ja" ? "空間対角線：" : "Diagonal ruang:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="d = \sqrt{10^2 + 8^2 + 6^2} = \sqrt{100+64+36} = \sqrt{200} = 10\sqrt{2} \approx 14{,}14\text{ cm}" />
           </div>
           <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3 text-xs space-y-0.5" : "bg-yellow-50 border border-yellow-300 rounded p-3 text-xs space-y-0.5"}>
@@ -2056,7 +2062,7 @@ const BalokPage = () => {
     {
       ...hard_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A room (cuboid) measures length 6 m, width 4 m, height 3 m.</p>
@@ -2083,12 +2089,12 @@ const BalokPage = () => {
           <p className="text-red-400 font-semibold text-xs">
             {step1} — {lang === "en" ? "Area to paint (excluding floor):" : lang === "ja" ? "塗装面積（床除く）：" : "Luas yang dicat (tanpa lantai):"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs">
-            <p className="text-white/70">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 space-y-1 text-xs`}>
+            <p className={isDark ? "text-white/70" : "text-gray-700"}>
               {lang === "en" ? "Full surface area = 2(pl + pt + lt)" : lang === "ja" ? "全表面積 = 2(pl + pt + lt)" : "Luas permukaan penuh = 2(pl + pt + lt)"}
             </p>
             <BlockMath math="L_{\text{full}} = 2(6\times4 + 6\times3 + 4\times3) = 2(24+18+12) = 108\text{ m}^2" />
-            <p className="text-white/70">
+            <p className={isDark ? "text-white/70" : "text-gray-700"}>
               {lang === "en" ? "Subtract 1 floor (p×l):" : lang === "ja" ? "床1面（p×l）を引く：" : "Kurangi 1 lantai (p×l):"}
             </p>
             <BlockMath math="L_{\text{paint}} = 108 - 6\times4 = 108 - 24 = 84\text{ m}^2" />
@@ -2096,7 +2102,7 @@ const BalokPage = () => {
           <p className="text-red-400 font-semibold text-xs">
             {step2} — {lang === "en" ? "Number of cans & cost:" : lang === "ja" ? "缶数と費用：" : "Jumlah kaleng & biaya:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 space-y-1 text-xs`}>
             {lang === "en" ? (
               <>
                 <BlockMath math="\text{Cans} = \lceil 84 \div 12 \rceil = 7\text{ cans}" />
@@ -2129,7 +2135,7 @@ const BalokPage = () => {
     {
       ...easy_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A wardrobe (cuboid) has length <InlineMath math="1.2\text{ m}" />, width <InlineMath math="0.6\text{ m}" />, and height <InlineMath math="2\text{ m}" />.</p>
@@ -2150,7 +2156,7 @@ const BalokPage = () => {
       ),
       answer: (
         <div className="space-y-2 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 space-y-2 text-xs`}>
             <BlockMath math="V = p \times l \times t = 1.2 \times 0.6 \times 2 = 1.44\text{ m}^3" />
             <BlockMath math="1.44\text{ m}^3 = 1.44 \times 1{,}000{,}000 = 1{,}440{,}000\text{ cm}^3" />
           </div>
@@ -2163,31 +2169,31 @@ const BalokPage = () => {
     {
       ...med_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A swimming pool (cuboid) measures length 25 m, width 10 m, depth 2 m.</p>
               <p>If the pool is filled to <InlineMath math="80\%" /> capacity, how many liters of water does it hold?</p>
-              <p className="text-xs text-white/60">(Note: <InlineMath math="1\text{ m}^3 = 1{,}000\text{ liters}" />)</p>
+              <p className={`text-xs ${isDark ? "text-white/60" : "text-gray-600"}`}>(Note: <InlineMath math="1\text{ m}^3 = 1{,}000\text{ liters}" />)</p>
             </>
           ) : lang === "ja" ? (
             <>
               <p>縦25 m、横10 m、深さ2 m のプールがあります。</p>
               <p>容量の <InlineMath math="80\%" /> まで水を満たすと、水の量は何リットルですか？</p>
-              <p className="text-xs text-white/60">（<InlineMath math="1\text{ m}^3 = 1{,}000\text{ リットル}" />）</p>
+              <p className={`text-xs ${isDark ? "text-white/60" : "text-gray-600"}`}>（<InlineMath math="1\text{ m}^3 = 1{,}000\text{ リットル}" />）</p>
             </>
           ) : (
             <>
               <p>Sebuah kolam renang berbentuk balok berukuran panjang 25 m, lebar 10 m, dan kedalaman 2 m.</p>
               <p>Jika kolam diisi air hingga <InlineMath math="80\%" /> kapasitasnya, berapa liter air di dalamnya?</p>
-              <p className="text-xs text-white/60">(Ingat: <InlineMath math="1\text{ m}^3 = 1.000\text{ liter}" />)</p>
+              <p className={`text-xs ${isDark ? "text-white/60" : "text-gray-600"}`}>(Ingat: <InlineMath math="1\text{ m}^3 = 1.000\text{ liter}" />)</p>
             </>
           )}
         </div>
       ),
       answer: (
         <div className="space-y-2 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-2 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 space-y-2 text-xs`}>
             <BlockMath math="V_t = 25 \times 10 \times 2 = 500\text{ m}^3 = 500{,}000\text{ liters}" />
             <BlockMath math="V_{80\%} = 80\% \times 500{,}000 = 400{,}000\text{ liters}" />
           </div>
@@ -2200,7 +2206,7 @@ const BalokPage = () => {
     {
       ...hard_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A truck bed (cuboid) measures length 5 m, width 2 m, height 1.5 m.</p>
@@ -2225,15 +2231,15 @@ const BalokPage = () => {
       answer: (
         <div className="space-y-3 text-sm font-body">
           <p className="text-red-400 font-semibold text-xs">{step1} — {lang === "en" ? "Volume of truck bed:" : lang === "ja" ? "荷台の体積：" : "Volume bak:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="V = 5 \times 2 \times 1.5 = 15\text{ m}^3" />
           </div>
           <p className="text-red-400 font-semibold text-xs">{step2} — {lang === "en" ? "Mass of sand:" : lang === "ja" ? "砂の質量：" : "Massa pasir:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="m = \rho \times V = 1{,}600 \times 15 = 24{,}000\text{ kg} = 24\text{ t}" />
           </div>
           <p className="text-red-400 font-semibold text-xs">{step3} — {lang === "en" ? "Compare:" : lang === "ja" ? "比較：" : "Bandingkan:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="24\text{ t} - 20\text{ t} = 4\text{ t (excess)}" />
           </div>
           <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300 rounded p-3 text-xs space-y-0.5"}>
@@ -2251,7 +2257,7 @@ const BalokPage = () => {
     {
       ...easy_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A wire cuboid frame has length <InlineMath math="12\text{ cm}" />, width <InlineMath math="8\text{ cm}" />, and height <InlineMath math="5\text{ cm}" />.</p>
@@ -2272,7 +2278,7 @@ const BalokPage = () => {
       ),
       answer: (
         <div className="space-y-2 text-sm font-body">
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 space-y-1 text-xs`}>
             <BlockMath math="K = 4(p + l + t)" />
             <BlockMath math="K = 4(12 + 8 + 5) = 4 \times 25 = 100\text{ cm}" />
           </div>
@@ -2285,7 +2291,7 @@ const BalokPage = () => {
     {
       ...med_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A wire cuboid frame uses <InlineMath math="120\text{ cm}" /> of wire.</p>
@@ -2311,14 +2317,14 @@ const BalokPage = () => {
           <p className="text-yellow-400 font-semibold text-xs">
             {step1} — {lang === "en" ? "Find height from wire length:" : lang === "ja" ? "針金の長さから高さを求める：" : "Cari tinggi dari panjang kawat:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 space-y-1 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 space-y-1 text-xs`}>
             <BlockMath math="4(15 + 8 + t) = 120" />
             <BlockMath math="23 + t = 30 \Rightarrow t = 7\text{ cm}" />
           </div>
           <p className="text-yellow-400 font-semibold text-xs">
             {step2} — {lang === "en" ? "Calculate surface area:" : lang === "ja" ? "表面積を計算する：" : "Hitung luas permukaan:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="L = 2(pl + pt + lt) = 2(15\times8 + 15\times7 + 8\times7)" />
             <BlockMath math="= 2(120 + 105 + 56) = 2 \times 281 = 562\text{ cm}^2" />
           </div>
@@ -2333,7 +2339,7 @@ const BalokPage = () => {
     {
       ...hard_props,
       question: (
-        <div className="text-sm text-white/85 font-body space-y-1">
+        <div className={`text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body space-y-1`}>
           {lang === "en" ? (
             <>
               <p>A cuboid's length, width, and height are in the ratio <InlineMath math="3 : 2 : 1" />.</p>
@@ -2363,18 +2369,18 @@ const BalokPage = () => {
           <p className="text-red-400 font-semibold text-xs">
             {step1} — {lang === "en" ? "Let p=3x, l=2x, t=x:" : lang === "ja" ? "p=3x, l=2x, t=x とおく：" : "Misalkan p=3x, l=2x, t=x:"}
           </p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="4(3x + 2x + x) = 144" />
             <BlockMath math="4 \times 6x = 144 \Rightarrow 24x = 144 \Rightarrow x = 6" />
           </div>
           <p className="text-red-400 font-semibold text-xs">(a) {lang === "en" ? "Dimensions:" : lang === "ja" ? "寸法：" : "Dimensi balok:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-0.5">
-            <p className="text-white/80">• p = 3 × 6 = <strong className="text-yellow-300">18 cm</strong></p>
-            <p className="text-white/80">• l = 2 × 6 = <strong className="text-yellow-300">12 cm</strong></p>
-            <p className="text-white/80">• t = 1 × 6 = <strong className="text-yellow-300">6 cm</strong></p>
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 text-xs space-y-0.5`}>
+            <p className={isDark ? "text-white/80" : "text-gray-700"}>• p = 3 × 6 = <strong className="text-yellow-300">18 cm</strong></p>
+            <p className={isDark ? "text-white/80" : "text-gray-700"}>• l = 2 × 6 = <strong className="text-yellow-300">12 cm</strong></p>
+            <p className={isDark ? "text-white/80" : "text-gray-700"}>• t = 1 × 6 = <strong className="text-yellow-300">6 cm</strong></p>
           </div>
           <p className="text-red-400 font-semibold text-xs">(b) {lang === "en" ? "Surface area and volume:" : lang === "ja" ? "表面積と体積：" : "Luas permukaan dan volume:"}</p>
-          <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded p-3 text-xs`}>
             <BlockMath math="L = 2(18\times12 + 18\times6 + 12\times6) = 2(216+108+72) = 792\text{ cm}^2" />
             <BlockMath math="V = 18 \times 12 \times 6 = 1{,}296\text{ cm}^3" />
           </div>
@@ -2417,22 +2423,22 @@ const BalokPage = () => {
       content: (
         <div className="space-y-4 font-body">
           <SimpleRotatingBalok lang={lang} />
-          <div className="bg-card/60 border border-border rounded-xl p-4 text-sm text-white/75 leading-relaxed">
+          <div className={`bg-card/60 border border-border rounded-xl p-4 text-sm ${isDark ? "text-white/75" : "text-gray-700"} leading-relaxed`}>
             <p>{introDesc}</p>
           </div>
-          <div className="bg-slate-800/50 border border-slate-600/40 rounded-xl p-3">
+          <div className={`${isDark ? "bg-slate-800/50 border-slate-600/40" : "bg-white/80 border-gray-200"} border rounded-xl p-3`}>
             <p className="text-xs text-cyan-300 font-semibold mb-2 text-center">{examplesInDailyLife}</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {objExamples.map(({ src, label }) => (
-                <div key={label} className="flex flex-col items-center gap-1 bg-slate-900/40 rounded-lg border border-slate-600/30 p-2">
+                <div key={label} className={`flex flex-col items-center gap-1 ${isDark ? "bg-slate-900/40 border-slate-600/30" : "bg-gray-50 border-gray-200"} rounded-lg border p-2`}>
                   <div className="w-full h-20 rounded-md overflow-hidden bg-white flex items-center justify-center">
                     <img src={src} alt={`${label}`} className="w-full h-full object-contain" />
                   </div>
-                  <span className="text-[10px] text-white/65 text-center leading-tight">{label}</span>
+                  <span className={`text-[10px] ${isDark ? "text-white/65" : "text-gray-600"} text-center leading-tight`}>{label}</span>
                 </div>
               ))}
             </div>
-            <p className="mt-2 text-[10px] text-white/45 text-center">
+            <p className={`mt-2 text-[10px] ${isDark ? "text-white/45" : "text-gray-500"} text-center`}>
               {imgSrcLabel}{" "}
               <a href="https://salamadian.com/benda-berbentuk-balok/" target="_blank" rel="noreferrer" className="text-cyan-300 hover:text-cyan-200 underline">
                 https://salamadian.com/benda-berbentuk-balok/
@@ -2447,12 +2453,12 @@ const BalokPage = () => {
       icon: "📏",
       title: lang === "en" ? "Cuboid Elements — Edges" : lang === "ja" ? "直方体の要素 — 辺" : "Unsur Balok — Rusuk",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <div className="bg-cyan-950/40 border border-cyan-700/40 rounded-lg p-4 space-y-2">
             <p className="text-cyan-300 font-semibold">
               ① {lang === "en" ? "Edges (12 total)" : lang === "ja" ? "辺（12本）" : "Rusuk (12 buah)"}
             </p>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               {lang === "en" ? <>An edge is a <strong>line segment where two faces meet</strong>. Cuboid <strong className="text-cyan-300">ABCD.EFGH</strong> has 3 groups of edges with different lengths: <InlineMath math="p,\ l,\ t" />.</>
                : lang === "ja" ? <>辺は<strong>2面が交わる線分</strong>です。<strong className="text-cyan-300">ABCD.EFGH</strong>には長さが異なる3グループの辺があります：<InlineMath math="p,\ l,\ t" />。</>
                : <>Rusuk adalah <strong>ruas garis pertemuan dua sisi</strong>. Balok <strong className="text-cyan-300">ABCD.EFGH</strong> memiliki 3 kelompok rusuk berbeda panjang: <InlineMath math="p,\ l,\ t" />.</>}
@@ -2466,21 +2472,21 @@ const BalokPage = () => {
                : "Penamaan 12 rusuk pada balok ABCD.EFGH:"}
             </p>
             <div className="grid sm:grid-cols-3 gap-2 text-xs">
-              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <div className={`rounded-lg ${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border p-3`}>
                 <p className="text-cyan-300 font-semibold mb-1">{lang === "en" ? "4 Length Edges (p)" : lang === "ja" ? "縦の辺4本 (p)" : "4 Rusuk Panjang (p)"}</p>
-                <p className="text-white/75">AB, CD, EF, GH</p>
+                <p className={isDark ? "text-white/75" : "text-gray-700"}>AB, CD, EF, GH</p>
               </div>
-              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <div className={`rounded-lg ${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border p-3`}>
                 <p className="text-orange-300 font-semibold mb-1">{lang === "en" ? "4 Width Edges (l)" : lang === "ja" ? "横の辺4本 (l)" : "4 Rusuk Lebar (l)"}</p>
-                <p className="text-white/75">BC, AD, FG, EH</p>
+                <p className={isDark ? "text-white/75" : "text-gray-700"}>BC, AD, FG, EH</p>
               </div>
-              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <div className={`rounded-lg ${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border p-3`}>
                 <p className="text-yellow-300 font-semibold mb-1">{lang === "en" ? "4 Height Edges (t)" : lang === "ja" ? "高さの辺4本 (t)" : "4 Rusuk Tinggi (t)"}</p>
-                <p className="text-white/75">AE, BF, CG, DH</p>
+                <p className={isDark ? "text-white/75" : "text-gray-700"}>AE, BF, CG, DH</p>
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs`}>
             <p>🔑 <strong className="text-cyan-300">{lang === "en" ? "Total edges = 12" : lang === "ja" ? "辺の合計 = 12" : "Jumlah rusuk = 12"}</strong>. {lang === "en" ? "Wire frame:" : lang === "ja" ? "骨組み：" : "Kerangka balok:"} <InlineMath math="K = 4(p + l + t)" /></p>
           </div>
         </div>
@@ -2490,12 +2496,12 @@ const BalokPage = () => {
       icon: "🟦",
       title: lang === "en" ? "Cuboid Elements — Faces" : lang === "ja" ? "直方体の要素 — 面" : "Unsur Balok — Sisi / Bidang",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <div className="bg-blue-950/40 border border-blue-700/40 rounded-lg p-4 space-y-2">
             <p className="text-blue-300 font-semibold">
               ② {lang === "en" ? "Faces (6 faces — 3 pairs)" : lang === "ja" ? "面（6面 — 3組）" : "Sisi / Bidang (6 buah — 3 pasang)"}
             </p>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               {lang === "en" ? <>A face is a <strong>flat surface bounding</strong> the cuboid. Each pair of opposite faces is congruent and parallel.</>
                : lang === "ja" ? <>面は直方体を<strong>囲む平面</strong>です。向き合う面の各ペアは合同で平行です。</>
                : <>Sisi adalah <strong>bidang yang membatasi</strong> balok. Setiap pasang sisi berhadapan memiliki ukuran dan bentuk yang sama.</>}
@@ -2515,14 +2521,14 @@ const BalokPage = () => {
                 [fl.top, "EFGH", "p × l"],
                 [lang === "en" ? "Bottom (Base)" : lang === "ja" ? "下面（底面）" : "Bawah (Alas)", "ABCD", "p × l"],
               ].map(([name, verts, dim]) => (
-                <div key={verts} className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+                <div key={verts} className={`rounded-lg ${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border p-3`}>
                   <p className="text-blue-300 font-semibold mb-1">{name}</p>
-                  <p className="text-white/75">{verts} &nbsp;({dim})</p>
+                  <p className={isDark ? "text-white/75" : "text-gray-700"}>{verts} &nbsp;({dim})</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs`}>
             <p>🔑 <strong className="text-blue-300">{lang === "en" ? "3 pairs of faces" : lang === "ja" ? "3組の面" : "3 pasang sisi"}</strong> → {lang === "en" ? "each pair congruent & parallel. Total area" : lang === "ja" ? "各ペアは合同で平行。合計面積" : "tiap pasang kongruen dan sejajar. Luas total"} = <InlineMath math="2(pl+pt+lt)" /></p>
           </div>
         </div>
@@ -2532,12 +2538,12 @@ const BalokPage = () => {
       icon: "🔷",
       title: lang === "en" ? "Cuboid Elements — Vertices" : lang === "ja" ? "直方体の要素 — 頂点" : "Unsur Balok — Titik Sudut",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-4 space-y-2">
             <p className="text-yellow-300 font-semibold">
               ③ {lang === "en" ? "Vertices (8 vertices)" : lang === "ja" ? "頂点（8個）" : "Titik Sudut (8 buah)"}
             </p>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               {lang === "en" ? <>A vertex is the <strong>meeting point of three mutually perpendicular edges</strong>.</>
                : lang === "ja" ? <>頂点は<strong>互いに垂直な3辺が交わる点</strong>です。</>
                : <>Titik sudut adalah <strong>titik pertemuan tiga rusuk</strong> yang saling tegak lurus.</>}
@@ -2565,14 +2571,14 @@ const BalokPage = () => {
                 ["E","Atas — depan kiri"],["F","Atas — depan kanan"],
                 ["G","Atas — belakang kanan"],["H","Atas — belakang kiri"],
               ]).map(([v,desc])=>(
-                <div key={v} className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-2">
+                <div key={v} className={`rounded-lg ${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border p-2`}>
                   <p className="text-yellow-300 font-semibold mb-0.5">{lang === "en" ? "Vertex" : lang === "ja" ? "頂点" : "Titik"} {v}</p>
-                  <p className="text-white/65">{desc}</p>
+                  <p className={isDark ? "text-white/65" : "text-gray-600"}>{desc}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs`}>
             <p>🔑 <strong className="text-yellow-300">
               {lang === "en" ? "Total vertices = 8" : lang === "ja" ? "頂点の合計 = 8" : "Jumlah titik sudut = 8"}
             </strong>{lang === "en" ? ", each vertex is the meeting of 3 mutually perpendicular edges."
@@ -2586,12 +2592,12 @@ const BalokPage = () => {
       icon: "📐",
       title: lang === "en" ? "Cuboid Elements — Face Diagonals" : lang === "ja" ? "直方体の要素 — 面対角線" : "Unsur Balok — Diagonal Bidang",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <div className="bg-orange-950/40 border border-orange-700/40 rounded-lg p-4 space-y-2">
             <p className="text-orange-300 font-semibold">
               ④ {lang === "en" ? "Face Diagonals (12 total — 3 types)" : lang === "ja" ? "面対角線（12本 — 3種類）" : "Diagonal Bidang (12 buah — 3 jenis)"}
             </p>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               {lang === "en" ? <>A face diagonal connects two opposite vertices within <strong>one face</strong>. There are 3 types of faces, hence 3 formula types. Each cuboid below shows <strong>one face diagonal</strong>:</>
                : lang === "ja" ? <>面対角線は<strong>1つの面の中</strong>で2つの対角頂点を結びます。3種類の面があるため、3種類の公式があります：</>
                : <>Diagonal bidang menghubungkan dua titik sudut berhadapan dalam <strong>satu sisi</strong>. Karena ada 3 jenis sisi, ada 3 jenis rumus. Setiap balok di bawah menampilkan <strong>satu diagonal bidang</strong>:</>}
@@ -2603,21 +2609,21 @@ const BalokPage = () => {
               {lang === "en" ? "Face diagonal formulas (Pythagoras):" : lang === "ja" ? "面対角線の公式（ピタゴラス）：" : "Rumus diagonal bidang (Pythagoras):"}
             </p>
             <div className="grid gap-2 text-xs">
-              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <div className={`rounded-lg ${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border p-3`}>
                 <p className="text-blue-300 font-semibold mb-1">{sideFrontBack} (p × t) — 4</p>
                 <BlockMath math="d_1 = \sqrt{p^2 + t^2}" />
               </div>
-              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <div className={`rounded-lg ${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border p-3`}>
                 <p className="text-yellow-300 font-semibold mb-1">{sideTB} (p × l) — 4</p>
                 <BlockMath math="d_2 = \sqrt{p^2 + l^2}" />
               </div>
-              <div className="rounded-lg bg-slate-900/60 border border-slate-700/60 p-3">
+              <div className={`rounded-lg ${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border p-3`}>
                 <p className="text-green-300 font-semibold mb-1">{sideLR} (l × t) — 4</p>
                 <BlockMath math="d_3 = \sqrt{l^2 + t^2}" />
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs`}>
             <p>🔑 <strong className="text-orange-300">{lang === "en" ? "Total face diagonals = 12" : lang === "ja" ? "面対角線の合計 = 12" : "Total diagonal bidang = 12"}</strong> ({lang === "en" ? "2 diagonals per face × 6 faces" : lang === "ja" ? "各面2本 × 6面" : "setiap sisi memiliki 2 diagonal × 6 sisi"}).</p>
           </div>
         </div>
@@ -2627,12 +2633,12 @@ const BalokPage = () => {
       icon: "🔀",
       title: lang === "en" ? "Cuboid Elements — Space Diagonals" : lang === "ja" ? "直方体の要素 — 空間対角線" : "Unsur Balok — Diagonal Ruang",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-4 space-y-2">
             <p className="text-yellow-300 font-semibold">
               ⑤ {lang === "en" ? "Space Diagonals (4 total)" : lang === "ja" ? "空間対角線（4本）" : "Diagonal Ruang (4 buah)"}
             </p>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               {lang === "en" ? <>A space diagonal connects two opposite vertices and <strong>passes through the interior</strong>. All 4 space diagonals of a cuboid have equal length.</>
                : lang === "ja" ? <>空間対角線は2つの対角頂点を結び、<strong>立体の内部を通ります</strong>。直方体の4本の空間対角線はすべて等しい長さです。</>
                : <>Diagonal ruang menghubungkan dua titik sudut berhadapan dan <strong>melewati bagian dalam balok</strong>. Semua 4 diagonal ruang pada balok memiliki panjang yang sama.</>}
@@ -2642,26 +2648,26 @@ const BalokPage = () => {
               <BlockMath math="d_r = \sqrt{p^2 + l^2 + t^2}" />
             </div>
           </div>
-          <div className="bg-slate-900/70 border border-amber-600/40 rounded-lg p-4 space-y-3">
+          <div className={`${isDark ? "bg-slate-900/70 border-amber-600/40" : "bg-white/90 border-amber-300/40"} border rounded-lg p-4 space-y-3`}>
             <p className="text-amber-300 font-semibold text-xs">
               📐 {lang === "en" ? "Proof using 2-step Pythagoras:" : lang === "ja" ? "2段階ピタゴラスによる証明：" : "Pembuktian dengan 2 langkah Pythagoras:"}
             </p>
-            <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs">
-              <p className="text-white/80 font-semibold">
+            <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40" : "bg-gray-100 border-gray-200"} border rounded-lg p-3 space-y-2 text-xs`}>
+              <p className={`${isDark ? "text-white/80" : "text-gray-700"} font-semibold`}>
                 {lang === "en" ? "Example: find AG in cuboid ABCD.EFGH"
                  : lang === "ja" ? "例：直方体 ABCD.EFGH の AG を求める"
                  : "Contoh: cari AG pada balok ABCD.EFGH"}
               </p>
-              <div className="space-y-1 text-white/70">
+              <div className={`space-y-1 ${isDark ? "text-white/70" : "text-gray-700"}`}>
                 <p><strong className="text-orange-400">{lang === "en" ? "Phase 1" : lang === "ja" ? "段階1" : "Tahap 1"}</strong> — {lang === "en" ? "Base face diagonal AC:" : lang === "ja" ? "底面の対角線 AC：" : "Diagonal bidang alas AC:"}</p>
               </div>
-              <div className="bg-slate-900/60 rounded p-2 text-center">
+              <div className={`${isDark ? "bg-slate-900/60" : "bg-white/90"} rounded p-2 text-center`}>
                 <BlockMath math="AC = \sqrt{p^2 + l^2}"/>
               </div>
-              <div className="space-y-1 text-white/70">
+              <div className={`space-y-1 ${isDark ? "text-white/70" : "text-gray-700"}`}>
                 <p><strong className="text-purple-400">{lang === "en" ? "Phase 2" : lang === "ja" ? "段階2" : "Tahap 2"}</strong> — {lang === "en" ? "Space diagonal AG (right angle at C):" : lang === "ja" ? "空間対角線 AG（Cで直角）：" : "Diagonal ruang AG (siku-siku di C):"}</p>
               </div>
-              <div className="bg-slate-900/60 rounded p-2 text-center">
+              <div className={`${isDark ? "bg-slate-900/60" : "bg-white/90"} rounded p-2 text-center`}>
                 <BlockMath math="AG^2 = AC^2 + CG^2 = (p^2+l^2) + t^2"/>
                 <BlockMath math="\boxed{AG = \sqrt{p^2 + l^2 + t^2}}"/>
               </div>
@@ -2670,7 +2676,7 @@ const BalokPage = () => {
               </p>
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs`}>
             <p>💡 <strong className="text-orange-300">{lang === "en" ? "Face Diagonal" : lang === "ja" ? "面対角線" : "Diagonal Bidang"}</strong> = 2D ({lang === "en" ? "within one face" : lang === "ja" ? "1面の中" : "dalam satu sisi"}) · <strong className="text-yellow-300">{lang === "en" ? "Space Diagonal" : lang === "ja" ? "空間対角線" : "Diagonal Ruang"}</strong> = 3D ({lang === "en" ? "through the solid" : lang === "ja" ? "立体を貫通" : "menembus balok"})</p>
           </div>
         </div>
@@ -2680,19 +2686,19 @@ const BalokPage = () => {
       icon: "🔲",
       title: lang === "en" ? "Cuboid Elements — Diagonal Planes" : lang === "ja" ? "直方体の要素 — 対角面" : "Unsur Balok — Bidang Diagonal",
       content: (
-        <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className={`space-y-3 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <div className="bg-violet-950/40 border border-violet-700/40 rounded-lg p-4 space-y-2">
             <p className="text-violet-300 font-semibold">
               ⑥ {lang === "en" ? "Diagonal Planes (6 total — 3 types)" : lang === "ja" ? "対角面（6面 — 3種類）" : "Bidang Diagonal (6 buah — 3 jenis)"}
             </p>
-            <p className="text-xs text-white/70">
+            <p className={`text-xs ${isDark ? "text-white/70" : "text-gray-700"}`}>
               {lang === "en" ? <>A diagonal plane passes through <strong>4 vertices and 2 space diagonals</strong>. Each diagonal plane is a <strong>rectangle</strong>. There are 3 types:</>
                : lang === "ja" ? <>対角面は<strong>4頂点と2本の空間対角線</strong>を通ります。各対角面は<strong>長方形</strong>です。3種類あります：</>
                : <>Bidang diagonal melewati <strong>4 titik sudut dan 2 diagonal ruang</strong> balok. Setiap bidang diagonal berbentuk <strong>persegi panjang</strong>. Karena ada 3 arah irisan, ada 3 jenis rumus luas:</>}
             </p>
           </div>
           <BidangDiagonalBalokSVG lang={lang} />
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs space-y-1`}>
             <p>🔑 <strong className="text-violet-300">{lang === "en" ? "Total diagonal planes = 6" : lang === "ja" ? "対角面の合計 = 6" : "Total bidang diagonal = 6"}</strong> (3 {lang === "en" ? "types × 2 planes each" : lang === "ja" ? "種類 × 2面" : "jenis × 2 bidang per jenis"}).</p>
             <p>
               {lang === "en" ? "Unlike a cube (all diagonal planes congruent), a cuboid has 3 different diagonal plane sizes."
@@ -2707,7 +2713,7 @@ const BalokPage = () => {
       icon: "🧊",
       title: lang === "en" ? "Cuboid Net — 3D Interactive" : lang === "ja" ? "直方体の展開図 — 3Dインタラクティブ" : "Jaring-jaring Balok — 3D Interaktif",
       content: (
-        <div className="space-y-4 text-sm text-white/85 font-body leading-relaxed">
+        <div className={`space-y-4 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body leading-relaxed`}>
           <p>
             {lang === "en" ? (
               <><strong className="text-cyan-300">A cuboid net</strong> is a 2D pattern that folds into a cuboid. Each net consists of <strong>6 rectangles in 3 pairs of sizes</strong>. The <strong className="text-violet-300">BACK (purple)</strong> face is the fixed anchor.</>
@@ -2725,28 +2731,28 @@ const BalokPage = () => {
       icon: "🗂️",
       title: lang === "en" ? "Net Pattern Examples" : lang === "ja" ? "展開図パターンの例" : "Contoh Pola Jaring-jaring Balok",
       content: (
-        <div className="space-y-4 text-sm text-white/85 font-body">
-          <p className="text-white/70 text-xs text-center">
+        <div className={`space-y-4 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
+          <p className={`${isDark ? "text-white/70" : "text-gray-700"} text-xs text-center`}>
             {lang === "en" ? <>There are <strong className="text-yellow-300">54 valid net patterns</strong> for a cuboid:</>
              : lang === "ja" ? <>直方体には<strong className="text-yellow-300">54種類の有効な展開図</strong>があります：</>
              : <>Ada <strong className="text-yellow-300">54 pola jaring-jaring</strong> berbeda yang valid untuk sebuah balok:</>}
           </p>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-4`}>
             <p className="text-cyan-300 font-semibold mb-3 text-xs">
               📐 {lang === "en" ? "Example 10 Net Patterns:" : lang === "ja" ? "10種類の展開図の例：" : "Contoh 10 Pola Jaring-jaring Balok:"}
             </p>
             <NetGallery />
             <div className="mt-3 flex flex-wrap gap-2">
               {(["p×t","l×t","p×l"] as const).map((label, i) => (
-                <div key={i} className="flex items-center gap-1 text-[10px] text-white/60 font-body">
+                <div key={i} className={`flex items-center gap-1 text-[10px] ${isDark ? "text-white/60" : "text-gray-600"} font-body`}>
                   <div className="w-3 h-3 rounded-sm" style={{ background: ["#8b5cf6","#22c55e","#eab308"][i] }}/>
                   <span>{label === "p×t" ? t.netLegend.front : label === "l×t" ? t.netLegend.side : t.netLegend.top} ({label})</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
-            <p>🔑 <strong className="text-white">{lang === "en" ? "How to verify:" : lang === "ja" ? "確認方法：" : "Cara verifikasi:"}</strong> {lang === "en" ? "Mentally fold. If 6 faces cover all cuboid surfaces without overlap → valid net." : lang === "ja" ? "頭の中で折る。6面が重なりなく直方体の全面を覆えば→有効な展開図。" : "Bayangkan melipat. Jika 6 sisi menutup semua permukaan balok tanpa tumpang tindih → jaring-jaring valid."}</p>
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-600/40 text-slate-300" : "bg-gray-100 border-gray-200 text-gray-600"} border rounded-lg p-3 text-xs`}>
+            <p>🔑 <strong className={isDark ? "text-white" : "text-gray-900"}>{lang === "en" ? "How to verify:" : lang === "ja" ? "確認方法：" : "Cara verifikasi:"}</strong> {lang === "en" ? "Mentally fold. If 6 faces cover all cuboid surfaces without overlap → valid net." : lang === "ja" ? "頭の中で折る。6面が重なりなく直方体の全面を覆えば→有効な展開図。" : "Bayangkan melipat. Jika 6 sisi menutup semua permukaan balok tanpa tumpang tindih → jaring-jaring valid."}</p>
           </div>
         </div>
       ),
@@ -2756,17 +2762,17 @@ const BalokPage = () => {
       title: lang === "en" ? "Cuboid Frame — Explode 12 Edges" : lang === "ja" ? "直方体の骨組み — 12辺を分解" : "Kerangka Balok — Bongkar 12 Rusuk",
       content: (
         <div className="space-y-4">
-          <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-2`}>
             <p className="text-cyan-300 font-semibold text-sm font-display">
               🪡 {lang === "en" ? "Cuboid Frame" : lang === "ja" ? "直方体の骨組み" : "Kerangka Balok"}
             </p>
-            <p className="text-white/70 text-xs font-body leading-relaxed">
+            <p className={`${isDark ? "text-white/70" : "text-gray-700"} text-xs font-body leading-relaxed`}>
               {lang === "en" ? (
-                <>Explode the frame to see all <strong className="text-white">12 edges</strong> in 3 groups: <strong className="text-cyan-300">4 length (p)</strong>, <strong className="text-orange-300">4 width (l)</strong>, and <strong className="text-yellow-300">4 height (t)</strong>. Total frame length = <strong className="text-yellow-300">4(p + l + t)</strong>.</>
+                <>Explode the frame to see all <strong className={isDark ? "text-white" : "text-gray-900"}>12 edges</strong> in 3 groups: <strong className="text-cyan-300">4 length (p)</strong>, <strong className="text-orange-300">4 width (l)</strong>, and <strong className="text-yellow-300">4 height (t)</strong>. Total frame length = <strong className="text-yellow-300">4(p + l + t)</strong>.</>
               ) : lang === "ja" ? (
-                <>骨組みを分解して<strong className="text-white">12本の辺</strong>を3グループで見てみましょう：<strong className="text-cyan-300">縦4本 (p)</strong>、<strong className="text-orange-300">横4本 (l)</strong>、<strong className="text-yellow-300">高さ4本 (t)</strong>。骨組みの合計長 = <strong className="text-yellow-300">4(p + l + t)</strong>。</>
+                <>骨組みを分解して<strong className={isDark ? "text-white" : "text-gray-900"}>12本の辺</strong>を3グループで見てみましょう：<strong className="text-cyan-300">縦4本 (p)</strong>、<strong className="text-orange-300">横4本 (l)</strong>、<strong className="text-yellow-300">高さ4本 (t)</strong>。骨組みの合計長 = <strong className="text-yellow-300">4(p + l + t)</strong>。</>
               ) : (
-                <>Mari bongkar kerangka balok untuk melihat <strong className="text-white">12 rusuk</strong>{" "}yang terbagi dalam 3 kelompok:{" "}<strong className="text-cyan-300">4 panjang (p)</strong>,{" "}<strong className="text-orange-300">4 lebar (l)</strong>, dan{" "}<strong className="text-yellow-300">4 tinggi (t)</strong>. Sehingga total panjang kerangka = <strong className="text-yellow-300">4(p + l + t)</strong>.</>
+                <>Mari bongkar kerangka balok untuk melihat <strong className={isDark ? "text-white" : "text-gray-900"}>12 rusuk</strong>{" "}yang terbagi dalam 3 kelompok:{" "}<strong className="text-cyan-300">4 panjang (p)</strong>,{" "}<strong className="text-orange-300">4 lebar (l)</strong>, dan{" "}<strong className="text-yellow-300">4 tinggi (t)</strong>. Sehingga total panjang kerangka = <strong className="text-yellow-300">4(p + l + t)</strong>.</>
               )}
             </p>
           </div>
@@ -2790,17 +2796,17 @@ const BalokPage = () => {
       icon: "📋",
       title: lang === "en" ? "Full Formula Summary" : lang === "ja" ? "公式まとめ" : "Rangkuman Lengkap Rumus Balok",
       content: (
-        <div className="space-y-4 text-sm text-white/85 font-body">
+        <div className={`space-y-4 text-sm ${isDark ? "text-white/85" : "text-gray-800"} font-body`}>
           <div className="bg-gradient-to-r from-cyan-950/60 to-violet-950/60 border border-cyan-700/40 rounded-xl p-4">
             <p className="text-cyan-300 font-display font-bold text-sm mb-1">
               📋 {lang === "en" ? "All Cuboid Formulas" : lang === "ja" ? "直方体の全公式" : "Ringkasan Semua Rumus Balok"}
             </p>
-            <p className="text-white/70 text-xs leading-relaxed">
+            <p className={`${isDark ? "text-white/70" : "text-gray-700"} text-xs leading-relaxed`}>
               {lang === "en" ? "Where" : lang === "ja" ? "ここで"  : "Dengan"} <InlineMath math="p" /> = {lang === "en" ? "length" : lang === "ja" ? "縦" : "panjang"}, <InlineMath math="l" /> = {lang === "en" ? "width" : lang === "ja" ? "横" : "lebar"}, {lang === "en" ? "and" : lang === "ja" ? "," : "dan"} <InlineMath math="t" /> = {lang === "en" ? "height" : lang === "ja" ? "高さ" : "tinggi"}.
             </p>
           </div>
 
-          <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3">
+          <div className={`${isDark ? "bg-slate-800/60 border-slate-700" : "bg-gray-100 border-gray-200"} border rounded-lg p-3`}>
             <p className="text-yellow-300 font-display font-bold text-xs mb-2">
               🔢 {lang === "en" ? "Cuboid Elements" : lang === "ja" ? "直方体の要素数" : "Unsur-Unsur Balok"}
             </p>
@@ -2815,22 +2821,22 @@ const BalokPage = () => {
                 ["Sisi","6"],["Rusuk","12"],["Titik sudut","8"],
                 ["Diagonal bidang","12"],["Diagonal ruang","4"],["Bidang diagonal","6"],
               ]).map(([n, v], i) => (
-                <div key={i} className="bg-slate-900/60 border border-slate-700/60 rounded p-2 flex items-center justify-between">
-                  <span className="text-white/70">{n}</span>
+                <div key={i} className={`${isDark ? "bg-slate-900/60 border-slate-700/60" : "bg-white/90 border-gray-200"} border rounded p-2 flex items-center justify-between`}>
+                  <span className={isDark ? "text-white/70" : "text-gray-700"}>{n}</span>
                   <span className="text-cyan-300 font-bold font-mono">{v}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <div className={`overflow-x-auto rounded-lg border ${isDark ? "border-slate-700" : "border-gray-200"}`}>
             <table className="w-full text-[11px]">
               <thead>
-                <tr className="bg-slate-800">
-                  <th className="px-2 py-2 text-cyan-300 border-r border-slate-700 text-left">
+                <tr className={isDark ? "bg-slate-800" : "bg-gray-100"}>
+                  <th className={`px-2 py-2 text-cyan-300 border-r ${isDark ? "border-slate-700" : "border-gray-200"} text-left`}>
                     {lang === "en" ? "Quantity" : lang === "ja" ? "量" : "Besaran"}
                   </th>
-                  <th className="px-2 py-2 text-cyan-300 border-r border-slate-700">
+                  <th className={`px-2 py-2 text-cyan-300 border-r ${isDark ? "border-slate-700" : "border-gray-200"}`}>
                     {lang === "en" ? "Formula" : lang === "ja" ? "公式" : "Rumus"}
                   </th>
                   <th className="px-2 py-2 text-cyan-300 text-left">
@@ -2851,12 +2857,12 @@ const BalokPage = () => {
                   ["L_{bd2} = l \\cdot \\sqrt{p^2 + t^2}", lang === "en" ? "2 planes" : lang === "ja" ? "2面" : "2 buah", lang === "en" ? "Diagonal plane area 2" : lang === "ja" ? "対角面の面積2" : "Luas bidang diagonal 2"],
                   ["L_{bd3} = t \\cdot \\sqrt{p^2 + l^2}", lang === "en" ? "2 planes" : lang === "ja" ? "2面" : "2 buah", lang === "en" ? "Diagonal plane area 3" : lang === "ja" ? "対角面の面積3" : "Luas bidang diagonal 3"],
                 ].map(([rumus, ket, besaran], i) => (
-                  <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
-                    <td className="px-2 py-2 text-white/85 font-sans border-r border-slate-700 text-left align-top">{besaran}</td>
-                    <td className="px-2 py-2 text-yellow-300 border-r border-slate-700 text-center align-middle">
+                  <tr key={i} className={`border-t ${isDark ? "border-slate-700" : "border-gray-200"} ${i % 2 === 0 ? (isDark ? "bg-slate-900/40" : "bg-blue-50/50") : (isDark ? "bg-slate-800/30" : "bg-gray-50")}`}>
+                    <td className={`px-2 py-2 ${isDark ? "text-white/85" : "text-gray-800"} font-sans border-r ${isDark ? "border-slate-700" : "border-gray-200"} text-left align-top`}>{besaran}</td>
+                    <td className={`px-2 py-2 text-yellow-300 border-r ${isDark ? "border-slate-700" : "border-gray-200"} text-center align-middle`}>
                       <InlineMath math={rumus as string} />
                     </td>
-                    <td className="px-2 py-2 text-white/55 font-sans text-left align-top">{ket}</td>
+                    <td className={`px-2 py-2 ${isDark ? "text-white/55" : "text-gray-500"} font-sans text-left align-top`}>{ket}</td>
                   </tr>
                 ))}
               </tbody>
@@ -2903,7 +2909,7 @@ const BalokPage = () => {
       title: lang === "en" ? "Practice — Frame" : lang === "ja" ? "練習問題 — 骨組み" : "Contoh Soal — Kerangka",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">
+          <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-xs text-center font-body`}>
             {lang === "en" ? "Graded practice from easy to hard" : lang === "ja" ? "基本から発展まで段階的な練習" : "Latihan bertingkat dari mudah hingga sulit"}
           </p>
           {kerangkaExamples.map((ex, i) => <ExampleCard key={`k${i}`} ex={ex} idx={i} prefix={t.prefixKerangka} lang={lang}/>)}
@@ -2915,7 +2921,7 @@ const BalokPage = () => {
       title: lang === "en" ? "Practice — Surface Area" : lang === "ja" ? "練習問題 — 表面積" : "Contoh Soal — Luas Permukaan",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">
+          <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-xs text-center font-body`}>
             {lang === "en" ? "Graded practice from easy to hard" : lang === "ja" ? "基本から発展まで段階的な練習" : "Latihan bertingkat dari mudah hingga sulit"}
           </p>
           {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix={t.prefixLuas} lang={lang}/>)}
@@ -2927,7 +2933,7 @@ const BalokPage = () => {
       title: lang === "en" ? "Practice — Volume" : lang === "ja" ? "練習問題 — 体積" : "Contoh Soal — Volume",
       content: (
         <div className="space-y-4">
-          <p className="text-white/40 text-xs text-center font-body">
+          <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-xs text-center font-body`}>
             {lang === "en" ? "Graded practice from easy to hard" : lang === "ja" ? "基本から発展まで段階的な練習" : "Latihan bertingkat dari mudah hingga sulit"}
           </p>
           {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix={t.prefixVol} lang={lang}/>)}
@@ -2951,7 +2957,7 @@ const BalokPage = () => {
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
           {t.title}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">{t.subtitle}</p>
+        <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>{t.subtitle}</p>
 
         <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
           {slides.map((_, i) => (
@@ -2968,13 +2974,13 @@ const BalokPage = () => {
         </div>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-4">
-          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
+          <div className={`flex items-center gap-3 px-5 py-4 border-b border-border/50 ${isDark ? "bg-slate-800/40" : "bg-gray-100/80"}`}>
             <span className="text-2xl">{slide.icon}</span>
             <div className="flex-1 min-w-0">
-              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+              <p className={`${isDark ? "text-white/40" : "text-gray-400"} text-[10px] font-body uppercase tracking-widest`}>
                 {t.slideOf} {currentSlide + 1} / {total}
               </p>
-              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+              <h2 className={`font-display text-sm font-bold ${isDark ? "text-white" : "text-gray-900"}`}>{slide.title}</h2>
             </div>
           </div>
           <div className="px-5 py-5">{slide.content}</div>
@@ -2984,9 +2990,9 @@ const BalokPage = () => {
           <button
             onClick={goPrev}
             disabled={currentSlide === 0}
-            className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display
-              text-white/70 hover:text-white hover:border-primary/60 hover:bg-primary/10
-              disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+            className={`flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display
+              ${isDark ? "text-white/70 hover:text-white" : "text-gray-600 hover:text-gray-900"} hover:border-primary/60 hover:bg-primary/10
+              disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer`}
           >
             {t.prev}
           </button>
