@@ -463,6 +463,7 @@ const JaringPrismaSVGInner = ({
    ANIMATED SVGs — Unsur-unsur Prisma
 ───────────────────────────────────────────────────────────── */
 const RusukPrismaSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const el = getEdgeLabels(lang);
   return (
     <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2">
@@ -476,11 +477,11 @@ const RusukPrismaSVG = ({ lang }: { lang: string }) => {
           .rp3{animation:rusukP3 1.6s ease-in-out infinite 1s;stroke:#f97316;}
         `}</style>
       </defs>
-      <polygon points="60,170 180,170 120,110" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1.2"/>
-      <polygon points="90,130 210,130 150,70" fill="rgba(30,41,59,0.5)" stroke="#334155" strokeWidth="1.2"/>
-      <line x1="60" y1="170" x2="90" y2="130" stroke="#334155" strokeWidth="1.2"/>
-      <line x1="180" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1.2"/>
-      <line x1="120" y1="110" x2="150" y2="70" stroke="#334155" strokeWidth="1.2"/>
+      <polygon points="60,170 180,170 120,110" fill={isDark ? "rgba(30,41,59,0.8)" : "rgba(241,245,249,0.9)"} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
+      <polygon points="90,130 210,130 150,70" fill={isDark ? "rgba(30,41,59,0.5)" : "rgba(241,245,249,0.7)"} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
+      <line x1="60" y1="170" x2="90" y2="130" stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
+      <line x1="180" y1="170" x2="210" y2="130" stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
+      <line x1="120" y1="110" x2="150" y2="70" stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
       <line x1="60" y1="170" x2="180" y2="170" strokeWidth="3.5" className="rp1"/>
       <line x1="180" y1="170" x2="120" y2="110" strokeWidth="3.5" className="rp1"/>
       <line x1="120" y1="110" x2="60" y2="170" strokeWidth="3.5" className="rp1"/>
@@ -534,6 +535,7 @@ const SisiPrismaSVG = ({ lang }: { lang: string }) => {
 };
 
 const TitikSudutPrismaSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const label1 = lang === "en" ? "6 vertices" : lang === "ja" ? "6頂点" : "6 titik";
   const label2 = lang === "en" ? "" : lang === "ja" ? "" : "sudut";
   const label3 = "(2n = 6)";
@@ -545,11 +547,11 @@ const TitikSudutPrismaSVG = ({ lang }: { lang: string }) => {
           .dp-a{animation:dotP 1.4s ease-in-out infinite;}
         `}</style>
       </defs>
-      <polygon points="60,170 180,170 120,110" fill="none" stroke="#334155" strokeWidth="1.2"/>
-      <polygon points="90,130 210,130 150,70" fill="none" stroke="#334155" strokeWidth="1.2"/>
-      <line x1="60" y1="170" x2="90" y2="130" stroke="#334155" strokeWidth="1.2"/>
-      <line x1="180" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1.2"/>
-      <line x1="120" y1="110" x2="150" y2="70" stroke="#334155" strokeWidth="1.2"/>
+      <polygon points="60,170 180,170 120,110" fill="none" stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
+      <polygon points="90,130 210,130 150,70" fill="none" stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
+      <line x1="60" y1="170" x2="90" y2="130" stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
+      <line x1="180" y1="170" x2="210" y2="130" stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
+      <line x1="120" y1="110" x2="150" y2="70" stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2"/>
       {[
         [60,170],[180,170],[120,110],
         [90,130],[210,130],[150,70]
@@ -568,6 +570,7 @@ const TitikSudutPrismaSVG = ({ lang }: { lang: string }) => {
    LUAS PERMUKAAN — animated jaring-jaring net
 ───────────────────────────────────────────────────────────── */
 const LuasPrismaSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const ariaLabel = lang === "en" ? "Triangular prism net — surface area"
     : lang === "ja" ? "三角柱の展開図 — 表面積"
     : "Jaring-jaring prisma — luas permukaan";
@@ -589,7 +592,7 @@ const LuasPrismaSVG = ({ lang }: { lang: string }) => {
         </filter>
       </defs>
       <JaringPrismaSVGInner cx={150} cy={105} animated lang={lang} />
-      <text x="150" y="205" fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+      <text x="150" y="205" fill={isDark ? "#e0e7ff" : "#1e293b"} fontSize="12" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#lpBloom)">L = 2×L△ + (a+b+c)×t</text>
     </svg>
   );
@@ -599,6 +602,7 @@ const LuasPrismaSVG = ({ lang }: { lang: string }) => {
    JARING-JARING PRISMA SEGIEMPAT (persegi panjang)
 ───────────────────────────────────────────────────────────── */
 const JaringSegiempatSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const dl = getDirectionLabels(lang);
   const ariaLabel = lang === "en" ? "Rectangular prism net — surface area"
     : lang === "ja" ? "四角柱の展開図 — 表面積"
@@ -646,7 +650,7 @@ const JaringSegiempatSVG = ({ lang }: { lang: string }) => {
       <text x={127.5} y={79} fill="var(--icon-color)" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×l</text>
       <text x={127.5} y={87} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">p</text>
       <text x={43} y={121} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">t</text>
-      <text x="170" y="218" fill="#e0e7ff" fontSize={11} fontFamily="monospace" fontWeight="bold"
+      <text x="170" y="218" fill={isDark ? "#e0e7ff" : "#1e293b"} fontSize={11} fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#jsqBloom)">L = 2(pl) + 2(p+l)×t</text>
     </svg>
   );
@@ -656,6 +660,7 @@ const JaringSegiempatSVG = ({ lang }: { lang: string }) => {
    JARING-JARING PRISMA SEGILIMA (pentagon)
 ───────────────────────────────────────────────────────────── */
 const JaringSegilimaSVG = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const penta = (cx: number, cy: number, r: number, startDeg: number) =>
     Array.from({ length: 5 }, (_, i) => {
       const angle = ((startDeg + i * 72) * Math.PI) / 180;
@@ -726,7 +731,7 @@ const JaringSegilimaSVG = ({ lang }: { lang: string }) => {
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">{dl.top}</text>
       <text x={startX + sw / 2} y={oy - 5} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">a</text>
       <text x={startX - 10} y={oy + rh / 2 + 4} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">t</text>
-      <text x="185" y="243" fill="#e0e7ff" fontSize={10} fontFamily="monospace" fontWeight="bold"
+      <text x="185" y="243" fill={isDark ? "#e0e7ff" : "#1e293b"} fontSize={10} fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#jsgBloom)">L = 2×L△₅ + 5a×t</text>
     </svg>
   );
@@ -840,6 +845,7 @@ const JaringTabSelector = ({ lang }: { lang: string }) => {
    VOLUME PRISMA — animated water-fill visualization
 ───────────────────────────────────────────────────────────── */
 const WaterPrismaAnimation = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [fill, setFill] = useState(0);
 
   useEffect(() => {
@@ -907,15 +913,15 @@ const WaterPrismaAnimation = ({ lang }: { lang: string }) => {
         </filter>
       </defs>
       <line x1={BB[0]} y1={BB[1]} x2={TB[0]} y2={TB[1]}
-        stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
       <line x1={BL[0]} y1={BL[1]} x2={BB[0]} y2={BB[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <line x1={BR[0]} y1={BR[1]} x2={BB[0]} y2={BB[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <polygon points={pp(BR, BB, TB, TR)}
-        fill="#0f172a" fillOpacity={0.22} stroke="#334155" strokeWidth="0.8"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? 0.22 : 1} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
       <polygon points={pp(BL, BR, TR, TL)}
-        fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? 0.15 : 1} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
       {!isEmpty && (
         <>
           <polygon points={pp(BL, BR, BB)} fill="#1e3a8a" fillOpacity={0.90}/>
@@ -937,7 +943,7 @@ const WaterPrismaAnimation = ({ lang }: { lang: string }) => {
       <polygon points={pp(BR, BB, TB, TR)}
         fill="none" stroke="#a5b4fc" strokeWidth="1.8" strokeLinejoin="round"/>
       <polygon points={pp(TL, TR, TB)}
-        fill="#0f172a" fillOpacity={isFull ? 0.7 : 0.2} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? (isFull ? 0.7 : 0.2) : 1} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
       <line x1={TL[0]} y1={TL[1]} x2={TB[0]} y2={TB[1]} stroke="#c4b5fd" strokeWidth="1.8"/>
       <line x1={TR[0]} y1={TR[1]} x2={TB[0]} y2={TB[1]} stroke="#c4b5fd" strokeWidth="1.8"/>
       <text x={(BL[0]+BR[0])/2} y={BL[1]+13}
@@ -953,7 +959,7 @@ const WaterPrismaAnimation = ({ lang }: { lang: string }) => {
       <line x1={BL[0]-8} y1={BL[1]} x2={BL[0]-8} y2={TL[1]}
         stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" strokeOpacity={0.6}/>
       <rect x={barX} y={barY} width={barW} height={barH}
-        fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" rx="3"/>
       {!isEmpty && (
         <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
           fill="#2563eb" fillOpacity={0.88} rx="3"/>
@@ -972,7 +978,7 @@ const WaterPrismaAnimation = ({ lang }: { lang: string }) => {
         {isFull ? statusFull : isEmpty ? statusEmpty : statusFill}
       </text>
       <text x="122" y="217"
-        fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+        fill={isDark ? "#e0e7ff" : "#1e293b"} fontSize="12" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#wBloom)">
         V = L△ × t
       </text>
@@ -984,6 +990,7 @@ const WaterPrismaAnimation = ({ lang }: { lang: string }) => {
    VOLUME PRISMA SEGIEMPAT — animated water-fill visualization
 ───────────────────────────────────────────────────────────── */
 const WaterSegiempatAnimation = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [fill, setFill] = useState(0);
 
   useEffect(() => {
@@ -1053,15 +1060,15 @@ const WaterSegiempatAnimation = ({ lang }: { lang: string }) => {
         </filter>
       </defs>
       <line x1={BkL[0]} y1={BkL[1]} x2={BkTL[0]} y2={BkTL[1]}
-        stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
       <line x1={FL[0]} y1={FL[1]} x2={BkL[0]} y2={BkL[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <line x1={FTL[0]} y1={FTL[1]} x2={BkTL[0]} y2={BkTL[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <polygon points={pp(FR, BkR, BkTR, FTR)}
-        fill="#0f172a" fillOpacity={0.22} stroke="#334155" strokeWidth="0.8"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? 0.22 : 1} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
       <polygon points={pp(FL, FR, FTR, FTL)}
-        fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? 0.15 : 1} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
       {!isEmpty && (
         <>
           <polygon points={pp(FL, FR, BkR, BkL)} fill="#1e3a8a" fillOpacity={0.90}/>
@@ -1083,7 +1090,7 @@ const WaterSegiempatAnimation = ({ lang }: { lang: string }) => {
       <polygon points={pp(FR, BkR, BkTR, FTR)}
         fill="none" stroke="#a5b4fc" strokeWidth="1.8" strokeLinejoin="round"/>
       <polygon points={pp(FTL, FTR, BkTR, BkTL)}
-        fill="#0f172a" fillOpacity={isFull ? 0.7 : 0.2} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? (isFull ? 0.7 : 0.2) : 1} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
       <text x={(FL[0] + FR[0]) / 2} y={FL[1] + 13}
         fill="#4ade80" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
         {dl.base} (p×l)
@@ -1097,7 +1104,7 @@ const WaterSegiempatAnimation = ({ lang }: { lang: string }) => {
       <line x1={FL[0] - 8} y1={FL[1]} x2={FL[0] - 8} y2={FTL[1]}
         stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" strokeOpacity={0.6}/>
       <rect x={barX} y={barY} width={barW} height={barH}
-        fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" rx="3"/>
       {!isEmpty && (
         <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
           fill="#2563eb" fillOpacity={0.88} rx="3"/>
@@ -1116,7 +1123,7 @@ const WaterSegiempatAnimation = ({ lang }: { lang: string }) => {
         {isFull ? statusFull : isEmpty ? statusEmpty : statusFill}
       </text>
       <text x="125" y="217"
-        fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+        fill={isDark ? "#e0e7ff" : "#1e293b"} fontSize="12" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#wBloom2)">
         V = L□ × t
       </text>
@@ -1128,6 +1135,7 @@ const WaterSegiempatAnimation = ({ lang }: { lang: string }) => {
    VOLUME PRISMA SEGILIMA — animated water-fill visualization
 ───────────────────────────────────────────────────────────── */
 const WaterSegilimAnimation = ({ lang }: { lang: string }) => {
+  const { isDark } = useTheme();
   const [fill, setFill] = useState(0);
 
   useEffect(() => {
@@ -1199,21 +1207,21 @@ const WaterSegilimAnimation = ({ lang }: { lang: string }) => {
         </filter>
       </defs>
       <line x1={BC[0]} y1={BC[1]} x2={TC[0]} y2={TC[1]}
-        stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
       <line x1={LB[0]} y1={LB[1]} x2={TL2[0]} y2={TL2[1]}
-        stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" strokeDasharray="4,3"/>
       <line x1={BL[0]} y1={BL[1]} x2={LB[0]} y2={LB[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <line x1={LB[0]} y1={LB[1]} x2={BC[0]} y2={BC[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <line x1={TL[0]} y1={TL[1]} x2={TL2[0]} y2={TL2[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <line x1={TL2[0]} y1={TL2[1]} x2={TC[0]} y2={TC[1]}
-        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.1" strokeDasharray="4,3"/>
       <polygon points={pp(BR, RB, TR2, TR)}
-        fill="#0f172a" fillOpacity={0.22} stroke="#334155" strokeWidth="0.8"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? 0.22 : 1} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
       <polygon points={pp(BL, BR, TR, TL)}
-        fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? 0.15 : 1} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="0.8"/>
       {!isEmpty && (
         <>
           <polygon points={pp(BL, BR, RB, BC, LB)} fill="#1e3a8a" fillOpacity={0.90}/>
@@ -1235,7 +1243,7 @@ const WaterSegilimAnimation = ({ lang }: { lang: string }) => {
       <polygon points={pp(BR, RB, TR2, TR)}
         fill="none" stroke="#a5b4fc" strokeWidth="1.8" strokeLinejoin="round"/>
       <polygon points={pp(TL, TR, TR2, TC, TL2)}
-        fill="#0f172a" fillOpacity={isFull ? 0.7 : 0.2} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} fillOpacity={isDark ? (isFull ? 0.7 : 0.2) : 1} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
       <line x1={TR[0]} y1={TR[1]} x2={TR2[0]} y2={TR2[1]} stroke="#c4b5fd" strokeWidth="1.8"/>
       <line x1={TR2[0]} y1={TR2[1]} x2={TC[0]} y2={TC[1]} stroke="#c4b5fd" strokeWidth="1.8"/>
       <text x={(BL[0] + BR[0]) / 2} y={BL[1] + 13}
@@ -1251,7 +1259,7 @@ const WaterSegilimAnimation = ({ lang }: { lang: string }) => {
       <line x1={BL[0] - 8} y1={BL[1]} x2={BL[0] - 8} y2={TL[1]}
         stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" strokeOpacity={0.6}/>
       <rect x={barX} y={barY} width={barW} height={barH}
-        fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+        fill={isDark ? "#0f172a" : "rgba(241,245,249,0.9)"} stroke={isDark ? "#334155" : "#94a3b8"} strokeWidth="1.2" rx="3"/>
       {!isEmpty && (
         <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
           fill="#2563eb" fillOpacity={0.88} rx="3"/>
@@ -1270,7 +1278,7 @@ const WaterSegilimAnimation = ({ lang }: { lang: string }) => {
         {isFull ? statusFull : isEmpty ? statusEmpty : statusFill}
       </text>
       <text x="113" y="217"
-        fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+        fill={isDark ? "#e0e7ff" : "#1e293b"} fontSize="12" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#wBloom3)">
         V = L⬟ × t
       </text>
