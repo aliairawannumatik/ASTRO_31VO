@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // ─── Geometry: 3-4-5 triangle, 40 px/unit ────────────────────────────────────
 // a=120 px, b=160 px, c=200 px
@@ -474,6 +475,7 @@ const FIXED_SPEED = 0.5;
 
 const PythagorasSquaresAnimation:React.FC=()=>{
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const squi = SQ_UI_TRANSLATIONS[language as keyof typeof SQ_UI_TRANSLATIONS] ?? SQ_UI_TRANSLATIONS.id;
   const translateNarration = (text: string) =>
     NARRATION_TRANSLATIONS[language]?.[text] ?? text;
@@ -527,14 +529,14 @@ const PythagorasSquaresAnimation:React.FC=()=>{
     <div className="flex flex-col items-center gap-4 select-none">
       <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl px-4 py-2 w-full text-center">
         <p className="font-display text-xs font-bold text-blue-300 uppercase tracking-widest">{squi.title}</p>
-        <p className="font-body text-xs text-white/50 mt-0.5">{squi.subtitle}</p>
+        <p className={isDark ? "font-body text-xs text-white/50 mt-0.5" : "font-body text-xs text-gray-500 mt-0.5"}>{squi.subtitle}</p>
       </div>
 
       <div className="w-full max-w-lg mx-auto rounded-xl overflow-hidden border border-slate-700/50" style={{background:COL_BG}}>
         <canvas ref={canvasRef} width={W} height={H} className="w-full h-auto block"/>
       </div>
 
-      <div className="w-full max-w-lg mx-auto bg-slate-800 rounded-full h-1.5 overflow-hidden">
+      <div className={isDark ? "w-full max-w-lg mx-auto bg-slate-800 rounded-full h-1.5 overflow-hidden" : "w-full max-w-lg mx-auto bg-gray-200 rounded-full h-1.5 overflow-hidden"}>
         <div className="h-full rounded-full" style={{
           width:`${prog*100}%`,
           background:"linear-gradient(to right,#4fc3f7,#81c784,#ffb74d)",
@@ -560,8 +562,8 @@ const PythagorasSquaresAnimation:React.FC=()=>{
         )}
       </div>
 
-      <div className="w-full max-w-lg mx-auto bg-slate-800/60 border border-slate-600/40 rounded-xl px-4 py-3 min-h-[52px] flex items-center">
-        <p className="font-body text-sm text-white/85 leading-relaxed">{translateNarration(narration)}</p>
+      <div className={isDark ? "w-full max-w-lg mx-auto bg-slate-800/60 border border-slate-600/40 rounded-xl px-4 py-3 min-h-[52px] flex items-center" : "w-full max-w-lg mx-auto bg-gray-100 border border-gray-200 rounded-xl px-4 py-3 min-h-[52px] flex items-center"}>
+        <p className={isDark ? "font-body text-sm text-white/85 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>{translateNarration(narration)}</p>
       </div>
 
       <p className={`text-center font-body text-xs max-w-sm leading-relaxed transition-colors duration-300 ${

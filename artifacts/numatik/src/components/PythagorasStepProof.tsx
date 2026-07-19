@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // ─── Geometry: 3-4-5 triple, 40 px/unit ─────────────────────────────────────
 const SC = 40;
@@ -140,6 +141,7 @@ const ANIM_DURATION = 1600;
 // ── Component ─────────────────────────────────────────────────────────────────
 const PythagorasStepProof: React.FC = () => {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const STEPS = STEPS_TRANSLATIONS[language as keyof typeof STEPS_TRANSLATIONS] ?? STEPS_TRANSLATIONS.id;
   const spui = SP_UI_TRANSLATIONS[language as keyof typeof SP_UI_TRANSLATIONS] ?? SP_UI_TRANSLATIONS.id;
 
@@ -324,7 +326,7 @@ const PythagorasStepProof: React.FC = () => {
         className="w-full overflow-hidden rounded-2xl border shadow-2xl"
         style={{
           maxWidth: 420,
-          background: "linear-gradient(160deg,#0f172a 0%,#0d1728 100%)",
+          background: isDark ? "linear-gradient(160deg,#0f172a 0%,#0d1728 100%)" : "linear-gradient(160deg,#f8fafc 0%,#f1f5f9 100%)",
           borderColor: `${info.color}40`,
           boxShadow: `0 0 24px ${info.color}18`,
         }}
@@ -575,7 +577,7 @@ const PythagorasStepProof: React.FC = () => {
         className="w-full rounded-xl px-4 py-3 border transition-all duration-500"
         style={{
           maxWidth: 420,
-          background: "rgba(15,23,42,0.85)",
+          background: isDark ? "rgba(15,23,42,0.85)" : "rgba(248,250,252,0.95)",
           borderColor: `${info.color}40`,
         }}
       >
@@ -590,7 +592,7 @@ const PythagorasStepProof: React.FC = () => {
             {info.title}
           </span>
         </div>
-        <p className="text-xs text-white/70 font-body leading-relaxed">{info.desc}</p>
+        <p className={isDark ? "text-xs text-white/70 font-body leading-relaxed" : "text-xs text-gray-700 font-body leading-relaxed"}>{info.desc}</p>
       </div>
 
       {/* ── Controls ──────────────────────────────────────────────────────── */}

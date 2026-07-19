@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const STEPS_TRANSLATIONS = {
   id: [
@@ -98,6 +99,7 @@ const FadeGroup: React.FC<FadeGroupProps> = ({ visible, children, delay = 0 }) =
 
 const PythagorasDiscoveryAnimation: React.FC = () => {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const STEPS = STEPS_TRANSLATIONS[language as keyof typeof STEPS_TRANSLATIONS] ?? STEPS_TRANSLATIONS.id;
   const ui = UI_TRANSLATIONS[language as keyof typeof UI_TRANSLATIONS] ?? UI_TRANSLATIONS.id;
 
@@ -149,7 +151,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
     <div className="w-full flex flex-col items-center gap-3">
 
       <div
-        className="w-full overflow-hidden rounded-xl border border-cyan-500/30 bg-slate-900/70"
+        className={isDark ? "w-full overflow-hidden rounded-xl border border-cyan-500/30 bg-slate-900/70" : "w-full overflow-hidden rounded-xl border border-cyan-500/30 bg-gray-50"}
         style={{ maxWidth: 540 }}
       >
         <svg
@@ -187,7 +189,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
               filter={showFinal ? "url(#glow-a)" : undefined}
               style={{ transition: "fill-opacity 0.5s" }}
             />
-            <text x={cAx} y={cAy - 8} textAnchor="middle" fill="#bfdbfe" fontSize="16" fontWeight="bold" fontFamily="monospace">a²</text>
+            <text x={cAx} y={cAy - 8} textAnchor="middle" fill={isDark ? "#bfdbfe" : "#1d4ed8"} fontSize="16" fontWeight="bold" fontFamily="monospace">a²</text>
             <text x={cAx} y={cAy + 10} textAnchor="middle" fill="#93c5fd" fontSize="12" fontFamily="monospace">= 9</text>
           </FadeGroup>
 
@@ -202,7 +204,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
               filter={showFinal ? "url(#glow-b)" : undefined}
               style={{ transition: "fill-opacity 0.5s" }}
             />
-            <text x={cBx} y={cBy - 8} textAnchor="middle" fill="#bbf7d0" fontSize="16" fontWeight="bold" fontFamily="monospace">b²</text>
+            <text x={cBx} y={cBy - 8} textAnchor="middle" fill={isDark ? "#bbf7d0" : "#15803d"} fontSize="16" fontWeight="bold" fontFamily="monospace">b²</text>
             <text x={cBx} y={cBy + 10} textAnchor="middle" fill="#86efac" fontSize="12" fontFamily="monospace">= 16</text>
           </FadeGroup>
 
@@ -217,7 +219,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
               filter={showFinal ? "url(#glow-c)" : undefined}
               style={{ transition: "fill-opacity 0.5s" }}
             />
-            <text x={cCx} y={cCy - 8} textAnchor="middle" fill="#fed7aa" fontSize="16" fontWeight="bold" fontFamily="monospace">c²</text>
+            <text x={cCx} y={cCy - 8} textAnchor="middle" fill={isDark ? "#fed7aa" : "#c2410c"} fontSize="16" fontWeight="bold" fontFamily="monospace">c²</text>
             <text x={cCx} y={cCy + 10} textAnchor="middle" fill="#fdba74" fontSize="12" fontFamily="monospace">= 25</text>
           </FadeGroup>
 
@@ -225,7 +227,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
           <FadeGroup visible={showTriangle}>
             <polygon
               points={`${RX},${RY} ${BX},${BY} ${AX},${AY}`}
-              fill="#1e3a5f"
+              fill={isDark ? "#1e3a5f" : "#dbeafe"}
               fillOpacity="0.85"
               stroke="#7dd3fc"
               strokeWidth="2.5"
@@ -263,7 +265,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
             <rect
               x="100" y="1" width="340" height="44"
               rx="10"
-              fill="#1e293b"
+              fill={isDark ? "#1e293b" : "rgba(241,245,249,0.95)"}
               fillOpacity="0.92"
               stroke="#eab308"
               strokeWidth="2"
@@ -297,7 +299,7 @@ const PythagorasDiscoveryAnimation: React.FC = () => {
           style={{ color: showFinal ? "#fbbf24" : "#7dd3fc" }}>
           {STEPS[step].label}
         </p>
-        <p className="text-sm text-white/80 font-body leading-relaxed">{STEPS[step].desc}</p>
+        <p className={isDark ? "text-sm text-white/80 font-body leading-relaxed" : "text-sm text-gray-700 font-body leading-relaxed"}>{STEPS[step].desc}</p>
       </div>
 
       {/* Step dots */}

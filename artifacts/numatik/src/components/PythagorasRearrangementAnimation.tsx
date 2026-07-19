@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GEOMETRY CONSTANTS  (a=3, b=4, c=5 right triangle, scale=36 px/unit)
@@ -147,6 +148,7 @@ const RA_UI_TRANSLATIONS = {
 // ─────────────────────────────────────────────────────────────────────────────
 const PythagorasRearrangementAnimation: React.FC = () => {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const STEPS = STEPS_TRANSLATIONS[language as keyof typeof STEPS_TRANSLATIONS] ?? STEPS_TRANSLATIONS.id;
   const rui = RA_UI_TRANSLATIONS[language as keyof typeof RA_UI_TRANSLATIONS] ?? RA_UI_TRANSLATIONS.id;
 
@@ -285,7 +287,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
 
       {/* ── SVG Canvas ──────────────────────────────────────────────────── */}
       <div
-        className="w-full overflow-hidden rounded-xl border bg-slate-900/70"
+        className={isDark ? "w-full overflow-hidden rounded-xl border bg-slate-900/70" : "w-full overflow-hidden rounded-xl border bg-slate-50"}
         style={{ maxWidth: 420, borderColor: "rgba(168,85,247,0.35)" }}
       >
         <svg viewBox="0 0 380 340" className="w-full" aria-label="Animasi Rearrangement Pythagoras">
@@ -499,7 +501,7 @@ const PythagorasRearrangementAnimation: React.FC = () => {
           style={{ color: step >= 3 && animDone ? "#86efac" : step >= 2 ? "#fbbf24" : "#d8b4fe" }}>
           {info.title}
         </p>
-        <p className="text-xs text-white/75 font-body leading-relaxed">{info.desc}</p>
+        <p className={isDark ? "text-xs text-white/75 font-body leading-relaxed" : "text-xs text-gray-700 font-body leading-relaxed"}>{info.desc}</p>
       </div>
 
       {/* ── Action buttons ───────────────────────────────────────────────── */}

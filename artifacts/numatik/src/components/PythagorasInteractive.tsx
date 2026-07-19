@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useMemo } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const CHALLENGES_TRANSLATIONS = {
   id: [
@@ -88,6 +89,7 @@ type Challenge = {
 
 export default function PythagorasInteractive() {
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const CHALLENGES = CHALLENGES_TRANSLATIONS[language as keyof typeof CHALLENGES_TRANSLATIONS] ?? CHALLENGES_TRANSLATIONS.id;
   const ti = INT_TRANSLATIONS[language as keyof typeof INT_TRANSLATIONS] ?? INT_TRANSLATIONS.id;
 
@@ -199,7 +201,7 @@ export default function PythagorasInteractive() {
   const sqC4y = horizEndY + ny * hypLen * sign;
 
   return (
-    <div className="rounded-2xl bg-slate-950/60 border border-cyan-300/20 p-3 md:p-4">
+    <div className={isDark ? "rounded-2xl bg-slate-950/60 border border-cyan-300/20 p-3 md:p-4" : "rounded-2xl bg-gray-50 border border-cyan-300/20 p-3 md:p-4"}>
       {/* Challenge selector */}
       <div className="flex flex-wrap gap-2 mb-3 justify-center">
         {CHALLENGES.map((ch, i) => (
@@ -210,7 +212,7 @@ export default function PythagorasInteractive() {
             className={`rounded-full px-3 py-1.5 text-[11px] font-bold transition-all border ${
               i === challengeIdx
                 ? "bg-cyan-400 text-slate-900 border-cyan-200 shadow-[0_0_15px_rgba(34,211,238,0.6)]"
-                : "border-white/20 text-white/70 bg-white/5 hover:bg-white/10"
+                : isDark ? "border-white/20 text-white/70 bg-white/5 hover:bg-white/10" : "border-gray-300 text-gray-600 bg-gray-100 hover:bg-gray-200"
             }`}
           >
             {ch.label}
@@ -224,7 +226,8 @@ export default function PythagorasInteractive() {
           <svg
             ref={svgRef}
             viewBox={`-50 -100 ${VIEW + 100} ${VIEW + 100}`}
-            className="w-full h-auto rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-white/10 touch-none"
+            className="w-full h-auto rounded-xl touch-none"
+            style={{ background: isDark ? "linear-gradient(to bottom right,#0f172a,#020617)" : "linear-gradient(to bottom right,#f8fafc,#f1f5f9)", border: isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.1)" }}
             onPointerMove={handleMove}
           >
             {/* Background grid (subtle) */}
@@ -436,7 +439,7 @@ export default function PythagorasInteractive() {
               style={{ cursor: dragging === "b" ? "grabbing" : "grab", filter: "drop-shadow(0 0 8px rgba(167,139,250,0.7))" }}
             />
           </svg>
-          <p className="mt-2 text-[11px] text-center text-white/55 font-body italic">
+          <p className={isDark ? "mt-2 text-[11px] text-center text-white/55 font-body italic" : "mt-2 text-[11px] text-center text-gray-500 font-body italic"}>
             {ti.dragHint}
           </p>
         </div>
@@ -452,10 +455,10 @@ export default function PythagorasInteractive() {
                   : "border-amber-300/30 bg-amber-500/10"
             }`}
           >
-            <p className="text-[10px] uppercase tracking-wider text-white/50 mb-1">{ti.challenge}</p>
-            <p className="text-sm font-bold text-white">{challenge.label}</p>
+            <p className={isDark ? "text-[10px] uppercase tracking-wider text-white/50 mb-1" : "text-[10px] uppercase tracking-wider text-gray-500 mb-1"}>{ti.challenge}</p>
+            <p className={isDark ? "text-sm font-bold text-white" : "text-sm font-bold text-gray-800"}>{challenge.label}</p>
             {challengeIdx !== 0 && (
-              <p className="text-xs mt-1 text-white/70 italic">
+              <p className={isDark ? "text-xs mt-1 text-white/70 italic" : "text-xs mt-1 text-gray-600 italic"}>
                 {challengeMet ? ti.success : `${ti.hint} ${challenge.hint}`}
               </p>
             )}
@@ -474,14 +477,14 @@ export default function PythagorasInteractive() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-white/15 bg-black/30 p-3 space-y-1.5 text-xs">
+          <div className={isDark ? "rounded-xl border border-white/15 bg-black/30 p-3 space-y-1.5 text-xs" : "rounded-xl border border-gray-200 bg-gray-50 p-3 space-y-1.5 text-xs"}>
             <div className="flex justify-between">
               <span className="text-orange-300">{ti.areaA}</span>
-              <span className="font-bold text-white">{a * a}</span>
+              <span className={isDark ? "font-bold text-white" : "font-bold text-gray-800"}>{a * a}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-violet-300">{ti.areaB}</span>
-              <span className="font-bold text-white">{b * b}</span>
+              <span className={isDark ? "font-bold text-white" : "font-bold text-gray-800"}>{b * b}</span>
             </div>
             <div className="border-t border-white/10 my-1" />
             <div className="flex justify-between text-emerald-200 font-bold">
@@ -490,7 +493,7 @@ export default function PythagorasInteractive() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-white/15 bg-black/30 p-2.5 text-xs text-white/75 text-center">
+          <div className={isDark ? "rounded-xl border border-white/15 bg-black/30 p-2.5 text-xs text-white/75 text-center" : "rounded-xl border border-gray-200 bg-gray-50 p-2.5 text-xs text-gray-600 text-center"}>
             {isTriple ? (
               <p className="text-yellow-200 font-bold">{ti.isTriple(a, b, cInt)}</p>
             ) : (
@@ -502,14 +505,14 @@ export default function PythagorasInteractive() {
             <button
               type="button"
               onClick={() => setShowSquares((v) => !v)}
-              className="flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors"
+              className={isDark ? "flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors" : "flex-1 rounded-lg border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] font-bold py-2 transition-colors"}
             >
               {showSquares ? ti.hideSq : ti.showSq}
             </button>
             <button
               type="button"
               onClick={reset}
-              className="flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors"
+              className={isDark ? "flex-1 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 text-white text-[11px] font-bold py-2 transition-colors" : "flex-1 rounded-lg border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] font-bold py-2 transition-colors"}
             >
               {ti.reset}
             </button>
