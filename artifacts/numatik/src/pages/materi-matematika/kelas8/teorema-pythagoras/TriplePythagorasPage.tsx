@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -386,6 +387,7 @@ const CheckerTriangleSVG = ({
 const TriplePythagorasPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language as Lang];
   const limaLabels = LIMA_TIPE_LABELS[language] ?? LIMA_TIPE_LABELS.id;
   const LIMA_TIPE = LIMA_TIPE_DATA.map((item, i) => ({ ...item, label: limaLabels[i] }));
@@ -400,7 +402,7 @@ const TriplePythagorasPage = () => {
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
+        <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</span>
       </div>
       {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary"/> : <ChevronDown className="w-5 h-5 text-primary"/>}
     </button>
@@ -424,8 +426,8 @@ const TriplePythagorasPage = () => {
     };
 
     return (
-      <div className="bg-slate-800/70 border border-slate-600 rounded-xl p-4 space-y-3">
-        <div className="rounded-xl bg-slate-900/60 border border-slate-600/50 px-3 pt-3 pb-1">
+      <div className={`${isDark ? "bg-slate-800/70 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+        <div className={`rounded-xl ${isDark ? "bg-slate-900/60 border-slate-600/50" : "bg-white/90 border-gray-200"} border px-3 pt-3 pb-1`}>
           <svg viewBox="0 0 320 150" className="w-full max-w-xs mx-auto block" aria-label="Right triangle illustration">
             <defs>
               <filter id="ck-glow"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -442,13 +444,13 @@ const TriplePythagorasPage = () => {
             <text x="118" y="142" fill="#93c5fd" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{t.sideLabel} 1</text>
             <text x="158" y="66" fill="#fde047" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" transform="rotate(-27,158,66)">{t.sideLabel} 3</text>
             <text x="62" y="122" fill="#86efac" fontSize="9" fontFamily="monospace" fontWeight="bold">90°</text>
-            <rect x="248" y="38" width="66" height="34" rx="8" fill="#1e293b" stroke="#6366f1" strokeWidth="1.5" opacity="0.95"/>
+            <rect x="248" y="38" width="66" height="34" rx="8" fill={isDark ? "#1e293b" : "#f1f5f9"} stroke="#6366f1" strokeWidth="1.5" opacity="0.95"/>
             <text x="281" y="54" fill="#a5b4fc" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{t.sideLabel}1²+{t.sideLabel}2²</text>
             <text x="281" y="66" fill="#facc15" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">= {t.sideLabel}3² ?</text>
           </svg>
           <p className="text-center text-[10px] text-white/30 font-body pb-1">{t.checkerHint}</p>
         </div>
-        <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.checkerTitle}</p>
+        <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.checkerTitle}</p>
         <div className="flex gap-2 items-center flex-wrap">
           {[
             { val: a, set: setA, label: `${t.sideLabel} 1`, col: "border-blue-500" },
@@ -456,10 +458,10 @@ const TriplePythagorasPage = () => {
             { val: c, set: setC, label: `${t.sideLabel} 3`, col: "border-orange-500" },
           ].map(({ val, set, label, col }) => (
             <div key={label} className="flex flex-col gap-1">
-              <label className="font-body text-xs text-white/50">{label}</label>
+              <label className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-500"}`}>{label}</label>
               <input type="number" min="1" value={val}
                 onChange={e => { set(e.target.value); setResult(null); setChecked(null); }}
-                className={`w-20 bg-slate-900/60 border ${col} rounded-lg px-3 py-2 text-white text-sm font-body focus:outline-none`}
+                className={`w-20 ${isDark ? "bg-slate-900/60" : "bg-white"} border ${col} rounded-lg px-3 py-2 ${isDark ? "text-white" : "text-gray-800"} text-sm font-body focus:outline-none`}
                 placeholder="..."/>
             </div>
           ))}
@@ -521,11 +523,11 @@ const TriplePythagorasPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-1">{t.intisari}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                  <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                     <strong className="text-cyan-300">{t.title}</strong> {t.introDesc} <InlineMath math="a^2 + b^2 = c^2"/>{t.introDesc2}
                   </p>
                 </div>
-                <p className="font-body text-sm text-white/80 leading-relaxed">
+                <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                   {t.introPic} <strong className="text-yellow-300">5-12-13</strong>{t.introPicEnd}
                 </p>
                 <div className="relative rounded-2xl overflow-hidden border border-yellow-500/30 bg-gradient-to-br from-slate-900/90 via-indigo-950/60 to-slate-900/90 p-4">
@@ -602,7 +604,7 @@ const TriplePythagorasPage = () => {
                       </div>
                     </div>
                     <div className="px-4 py-3 bg-slate-900/30 space-y-3">
-                      <div className="bg-slate-800/70 rounded-lg px-3 py-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono">
+                      <div className={`${isDark ? "bg-slate-800/70" : "bg-gray-100"} rounded-lg px-3 py-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-mono`}>
                         <span className="text-blue-300">{a}²</span><span className="text-white/30">+</span>
                         <span className="text-green-300">{b}²</span><span className="text-white/30">=</span>
                         <span className="text-blue-300">{a*a}</span><span className="text-white/30">+</span>
@@ -632,7 +634,7 @@ const TriplePythagorasPage = () => {
                   <p className="font-body text-xs text-white/70">
                     {t.whyDesc} <InlineMath math="(a, b, c)"/> {t.whyDesc2} <InlineMath math="k > 0"/>:
                   </p>
-                  <div className="bg-slate-900/60 rounded-lg p-3">
+                  <div className={isDark ? "bg-slate-900/60 rounded-lg p-3" : "bg-gray-50 rounded-lg p-3"}>
                     <BlockMath math="(ka)^2 + (kb)^2 = k^2(a^2+b^2) = k^2c^2 = (kc)^2 \checkmark"/>
                   </div>
                 </div>
@@ -745,13 +747,13 @@ const TriplePythagorasPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.easy}</p>
-                  <p className="font-body text-sm text-white/90">
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>
                     {t.c1Desc} <strong className="text-yellow-300">{t.c1Bold}</strong> {t.c1End}
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {/* (a) Triple 3-4-5 */}
-                  <div className="bg-slate-800/60 border border-cyan-500/30 rounded-xl p-3 flex flex-col gap-2">
+                  <div className={isDark ? "bg-slate-800/60 border border-cyan-500/30 rounded-xl p-3 flex flex-col gap-2" : "bg-gray-100 border border-cyan-500/30 rounded-xl p-3 flex flex-col gap-2"}>
                     <p className="text-cyan-300 font-bold text-xs font-body text-center">(a) {t.c1RightB}</p>
                     <svg viewBox="0 0 130 130" className="w-full max-w-[130px] mx-auto" aria-label="Triangle a">
                       <defs><filter id="g1"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
@@ -767,7 +769,7 @@ const TriplePythagorasPage = () => {
                       <text x="10" y="118" fill="#94a3b8" fontSize="9" fontFamily="monospace">B</text>
                       <text x="88" y="118" fill="#94a3b8" fontSize="9" fontFamily="monospace">C</text>
                     </svg>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1" : "bg-gray-50 rounded-lg px-2 py-1.5 space-y-1"}>
                       <p className="text-[10px] text-white/50 font-body">{t.c1PattA} <span className="text-yellow-300 font-bold">3–4–5</span></p>
                       <p className="text-[11px] text-green-300 font-mono font-bold text-center">AC = 5 cm ✓</p>
                     </div>
@@ -789,7 +791,7 @@ const TriplePythagorasPage = () => {
                       <text x="8"   y="118" fill="#94a3b8" fontSize="9" fontFamily="monospace">Q</text>
                       <text x="108" y="118" fill="#94a3b8" fontSize="9" fontFamily="monospace">R</text>
                     </svg>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1" : "bg-gray-50 rounded-lg px-2 py-1.5 space-y-1"}>
                       <p className="text-[10px] text-white/50 font-body">{t.c1PattA} <span className="text-violet-300 font-bold">7–24–25</span></p>
                       <p className="text-[11px] text-green-300 font-mono font-bold text-center">PQ = 25 cm ✓</p>
                     </div>
@@ -811,7 +813,7 @@ const TriplePythagorasPage = () => {
                       <text x="8"  y="108" fill="#94a3b8" fontSize="9" fontFamily="monospace">D</text>
                       <text x="54" y="14" fill="#94a3b8" fontSize="9" fontFamily="monospace">F</text>
                     </svg>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-1.5 space-y-1" : "bg-gray-50 rounded-lg px-2 py-1.5 space-y-1"}>
                       <p className="text-[10px] text-white/50 font-body">{t.c1PattA} <span className="text-pink-300 font-bold">8–15–17</span></p>
                       <p className="text-[11px] text-green-300 font-mono font-bold text-center">DF = 17 cm ✓</p>
                     </div>
@@ -833,15 +835,15 @@ const TriplePythagorasPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.medium}</p>
-                  <p className="font-body text-sm text-white/90">
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>
                     {t.c2Desc} <strong className="text-cyan-300">PQ = 15 cm</strong> {t.c2Desc2} <strong className="text-green-300">QR = 36 cm</strong>. {t.c2Desc3} <strong className="text-yellow-300">PR</strong> {t.c2Desc4}
                   </p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
                   <p className="font-body text-sm text-white/80 font-semibold">{t.c2Step1}</p>
                   <BlockMath math="15 = 3 \times 5, \quad 36 = 3 \times 12"/>
-                  <p className="font-body text-sm text-white/80">GCF/FPB = <strong className="text-cyan-300">3</strong>:</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>GCF/FPB = <strong className="text-cyan-300">3</strong>:</p>
                   <BlockMath math="\frac{15}{3} = 5 \qquad \frac{36}{3} = 12"/>
                   <p className="font-body text-sm text-white/80 font-semibold">{t.c2Step2}</p>
                   <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg px-3 py-2 text-center">
@@ -875,8 +877,8 @@ const TriplePythagorasPage = () => {
                     </p>
                   </div>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
                   <p className="font-body text-sm text-white/80 font-semibold">{t.c3Step1}</p>
                   <BlockMath math="560 = 70 \times 8 \qquad 1050 = 70 \times 15"/>
                   <p className="font-body text-sm text-white/80 font-semibold">{t.c3Step2}</p>
@@ -907,10 +909,10 @@ const TriplePythagorasPage = () => {
             {open.includes("rangkuman") && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm text-white/80">• {t.r1} <InlineMath math="a, b, c"/> {t.r1b} <InlineMath math="a^2+b^2=c^2"/>.</p>
-                  <p className="font-body text-sm text-white/80">• {t.r2} <strong className="text-yellow-300">3-4-5, 5-12-13, 8-15-17, 7-24-25</strong>.</p>
-                  <p className="font-body text-sm text-white/80">• {t.r3} <InlineMath math="(ka, kb, kc)"/> {t.r3b} <InlineMath math="k > 0"/>.</p>
-                  <p className="font-body text-sm text-white/80">• {t.r4}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r1} <InlineMath math="a, b, c"/> {t.r1b} <InlineMath math="a^2+b^2=c^2"/>.</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r2} <strong className="text-yellow-300">3-4-5, 5-12-13, 8-15-17, 7-24-25</strong>.</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r3} <InlineMath math="(ka, kb, kc)"/> {t.r3b} <InlineMath math="k > 0"/>.</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r4}</p>
                 </div>
               </div>
             )}

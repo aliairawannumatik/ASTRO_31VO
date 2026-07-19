@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -315,6 +316,7 @@ type Lang = keyof typeof translations;
 const JenisSegitigaPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language as Lang];
   const [open, setOpen] = useState<string[]>(["intro","interaktif","jenis","contoh1","contoh2","contoh3","rangkuman"]);
 
@@ -327,7 +329,7 @@ const JenisSegitigaPage = () => {
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
+        <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</span>
       </div>
       {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary"/> : <ChevronDown className="w-5 h-5 text-primary"/>}
     </button>
@@ -347,13 +349,13 @@ const JenisSegitigaPage = () => {
       <text x="33" y="148" fill="#4ade80" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t.svgAcute}</text>
       <text x="33" y="158" fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">a²+b² {'>'} c²</text>
       <text x="33" y="50" fill="#4ade80" fontSize="8" textAnchor="middle" fontFamily="monospace">{t.svgAcuteDesc}</text>
-      <line x1="115" y1="55" x2="115" y2="140" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
+      <line x1="115" y1="55" x2="115" y2="140" stroke={isDark ? "#334155" : "#e2e8f0"} strokeWidth="1" strokeDasharray="3 2"/>
       <polygon points="205,130 130,130 130,60" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" strokeWidth="2" className="t2"/>
       <polyline points="130,110 150,110 150,130" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.5" opacity="0.8"/>
       <text x="167" y="148" fill="#60a5fa" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t.svgRight}</text>
       <text x="167" y="158" fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">a²+b² = c²</text>
       <text x="167" y="50" fill="#60a5fa" fontSize="8" textAnchor="middle" fontFamily="monospace">{t.svgRightDesc}</text>
-      <line x1="225" y1="55" x2="225" y2="140" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
+      <line x1="225" y1="55" x2="225" y2="140" stroke={isDark ? "#334155" : "#e2e8f0"} strokeWidth="1" strokeDasharray="3 2"/>
       <polygon points="320,130 235,130 268,75" fill="rgba(249,115,22,0.25)" stroke="#f97316" strokeWidth="2" className="t3"/>
       <text x="278" y="148" fill="#fb923c" fontSize="9" textAnchor="middle" fontFamily="monospace" fontWeight="bold">{t.svgObtuse}</text>
       <text x="278" y="158" fill="#94a3b8" fontSize="8" textAnchor="middle" fontFamily="monospace">a²+b² {'<'} c²</text>
@@ -382,15 +384,15 @@ const JenisSegitigaPage = () => {
     };
 
     return (
-      <div className="bg-slate-800/70 border border-slate-600 rounded-xl p-4 space-y-3">
-        <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.checkerTitle}</p>
+      <div className={`${isDark ? "bg-slate-800/70 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
+        <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.checkerTitle}</p>
         <div className="flex gap-2 flex-wrap">
           {[{val:a,set:setA,label:t.checkerA},{val:b,set:setB,label:t.checkerB},{val:c,set:setC,label:t.checkerC}].map(({val,set,label})=>(
             <div key={label} className="flex flex-col gap-1">
               <label className="font-body text-xs text-white/50">{label}</label>
               <input type="number" min="0.1" step="0.1" value={val}
                 onChange={e=>{set(e.target.value);setResult(null);}}
-                className="w-24 bg-slate-900/60 border border-slate-500 rounded-lg px-3 py-2 text-white text-sm font-body focus:outline-none"
+                className={`w-24 ${isDark ? "bg-slate-900/60 border-slate-500 text-white" : "bg-white border-gray-400 text-gray-800"} border rounded-lg px-3 py-2 text-sm font-body focus:outline-none`}
                 placeholder="..."/>
             </div>
           ))}
@@ -400,7 +402,7 @@ const JenisSegitigaPage = () => {
           </button>
         </div>
         {result && (
-          <div className="bg-slate-900/60 border border-slate-600 rounded-lg p-3">
+          <div className={`${isDark ? "bg-slate-900/60 border-slate-600" : "bg-gray-50 border-gray-300"} border rounded-lg p-3`}>
             <p className={`font-body text-sm font-bold ${color}`}>{result}</p>
             {a && b && c && !isNaN(parseFloat(a)) && !isNaN(parseFloat(b)) && !isNaN(parseFloat(c)) && (
               <p className="font-body text-xs text-white/50 mt-1">
@@ -452,7 +454,7 @@ const JenisSegitigaPage = () => {
     const SK = { stroke:'rgba(2,6,23,0.85)', strokeWidth:2.5, paintOrder:'stroke' as const };
 
     return (
-      <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
+      <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-4"}>
         <div className="grid grid-cols-3 gap-2">
           {[
             { label:t.presetAcute,  t:60,  cls:'bg-green-700/80 border-green-600' },
@@ -490,7 +492,7 @@ const JenisSegitigaPage = () => {
         </svg>
         <div className="space-y-2 px-1">
           <div className="flex items-center justify-between">
-            <span className="font-body text-xs text-white/60">{t.sliderLabel}</span>
+            <span className={isDark ? "font-body text-xs text-white/60" : "font-body text-xs text-gray-500"}>{t.sliderLabel}</span>
             <span className={`text-sm font-bold px-2 py-0.5 rounded font-mono bg-slate-700/60 ${COL.text}`}>θ = {theta}°</span>
           </div>
           <input type="range" min="1" max="179" step="1" value={theta} onChange={e => setTheta(+e.target.value)} className="w-full cursor-pointer" style={{ accentColor: COL.stroke }}/>
@@ -501,7 +503,7 @@ const JenisSegitigaPage = () => {
         <div className={`${COL.bg} border ${COL.bd} rounded-xl p-4 space-y-3`}>
           <p className={`font-mono text-base font-bold text-center ${COL.text}`}>{COL.tag}</p>
           <div className="grid grid-cols-3 gap-2 text-center items-center">
-            <div className="bg-slate-900/60 rounded-lg p-2 space-y-1">
+            <div className={isDark ? "bg-slate-900/60 rounded-lg p-2 space-y-1" : "bg-gray-50 rounded-lg p-2 space-y-1"}>
               <p className="text-xs text-white/40">a² + b²</p>
               <p className="text-blue-300 font-bold text-xl font-mono">{abSq}</p>
               <p className="text-xs text-slate-500">{t.cardFixed}</p>
@@ -512,7 +514,7 @@ const JenisSegitigaPage = () => {
                 {COL.op === '=' ? t.colOpEq : COL.op === '>' ? t.colOpGt : t.colOpLt}
               </p>
             </div>
-            <div className="bg-slate-900/60 rounded-lg p-2 space-y-1">
+            <div className={isDark ? "bg-slate-900/60 rounded-lg p-2 space-y-1" : "bg-gray-50 rounded-lg p-2 space-y-1"}>
               <p className="text-xs text-white/40">c²</p>
               <p className="text-orange-300 font-bold text-xl font-mono">{cSq}</p>
               <p className="text-xs text-slate-500">{t.cardDynamic}</p>
@@ -542,7 +544,7 @@ const JenisSegitigaPage = () => {
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title={t.sec_intro}/>
             {open.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">
+                <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                   {t.introDesc1} <strong className="text-cyan-300">{t.introDesc2}</strong> {t.introDesc3}
                 </p>
                 <TigaSegitigaSVG/>
@@ -559,21 +561,21 @@ const JenisSegitigaPage = () => {
                       <span className="text-blue-300 text-lg">▪</span>
                       <div>
                         <p className="font-body text-sm text-blue-300 font-bold">{t.right} <InlineMath math="a^2 + b^2 = c^2"/></p>
-                        <p className="font-body text-xs text-white/60">{t.rightDesc}</p>
+                        <p className={isDark ? "font-body text-xs text-white/60" : "font-body text-xs text-gray-500"}>{t.rightDesc}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 bg-green-900/30 rounded-lg px-3 py-2">
                       <span className="text-green-300 text-lg">▲</span>
                       <div>
                         <p className="font-body text-sm text-green-300 font-bold">{t.acute} <InlineMath math="a^2 + b^2 > c^2"/></p>
-                        <p className="font-body text-xs text-white/60">{t.acuteDesc}</p>
+                        <p className={isDark ? "font-body text-xs text-white/60" : "font-body text-xs text-gray-500"}>{t.acuteDesc}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 bg-orange-900/30 rounded-lg px-3 py-2">
                       <span className="text-orange-300 text-lg">▶</span>
                       <div>
                         <p className="font-body text-sm text-orange-300 font-bold">{t.obtuse} <InlineMath math="a^2 + b^2 < c^2"/></p>
-                        <p className="font-body text-xs text-white/60">{t.obtuseDesc}</p>
+                        <p className={isDark ? "font-body text-xs text-white/60" : "font-body text-xs text-gray-500"}>{t.obtuseDesc}</p>
                       </div>
                     </div>
                   </div>
@@ -602,7 +604,7 @@ const JenisSegitigaPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-1">{t.intisari}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                  <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                     {t.jenisSummary} <InlineMath math="a^2 + b^2"/> {t.jenisSummary2} <InlineMath math="c^2"/>{t.jenisSummary3}<strong className="text-cyan-300">{t.jenisSummary4}</strong>{t.jenisSummary5}
                   </p>
                 </div>
@@ -623,11 +625,11 @@ const JenisSegitigaPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.easy}</p>
-                  <p className="font-body text-sm text-white/90">{t.c1Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c1Problem}</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">{t.c1Sol} <InlineMath math="a=6, b=8, c=10"/>. {t.c1Sol2} <InlineMath math="a^2+b^2"/> {t.c1Sol3} <InlineMath math="c^2"/>:</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.c1Sol} <InlineMath math="a=6, b=8, c=10"/>. {t.c1Sol2} <InlineMath math="a^2+b^2"/> {t.c1Sol3} <InlineMath math="c^2"/>:</p>
                   <BlockMath math="a^2 + b^2 = 6^2 + 8^2 = 36 + 64 = 100"/>
                   <BlockMath math="c^2 = 10^2 = 100"/>
                   <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
@@ -645,14 +647,14 @@ const JenisSegitigaPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.medium}</p>
-                  <p className="font-body text-sm text-white/90">{t.c2Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c2Problem}</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">{t.c2Sol} <InlineMath math="a=5, b=7, c=9"/>.</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.c2Sol} <InlineMath math="a=5, b=7, c=9"/>.</p>
                   <BlockMath math="a^2 + b^2 = 25 + 49 = 74"/>
                   <BlockMath math="c^2 = 81"/>
-                  <p className="font-body text-sm text-white/80">{t.c2Sol3} <InlineMath math="74 < 81"/></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.c2Sol3} <InlineMath math="74 < 81"/></p>
                   <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
                     <p className="font-body text-sm text-yellow-200 text-center">{t.c2Ans}</p>
                   </div>
@@ -676,7 +678,7 @@ const JenisSegitigaPage = () => {
                       { no: "(3)", sisi: "4 cm, 5 cm, 6 cm" },
                       { no: "(4)", sisi: "6 cm, 8 cm, 12 cm" },
                     ].map(({ no, sisi }) => (
-                      <p key={no} className="font-body text-sm text-white/90">
+                      <p key={no} className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>
                         <span className="text-red-300 font-bold">{no}</span> {sisi}
                       </p>
                     ))}
@@ -697,8 +699,8 @@ const JenisSegitigaPage = () => {
                     ))}
                   </div>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-4"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
                   <p className="font-body text-sm text-white/70">{t.c3Syarat} <strong className="text-orange-300"><InlineMath math="a^2 + b^2 < c^2"/></strong> {t.c3SyaratDesc} <InlineMath math="c"/> {t.c3SyaratDesc2}</p>
                   {[
                     { label: "(1) 3, 4, 5", math: "3^2 + 4^2 = 9 + 16 = 25 \\quad;\\quad 5^2 = 25", result: "25 = 25", type: t.c3RightLabel, color: "bg-blue-900/30 border-blue-500/30 text-blue-300" },
@@ -728,7 +730,7 @@ const JenisSegitigaPage = () => {
             {open.includes("rangkuman") && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm text-white/80">• {t.r_note} <InlineMath math="a \leq b \leq c"/> {t.r_note2} <InlineMath math="a^2+b^2"/> {t.r_note3} <InlineMath math="c^2"/>.</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r_note} <InlineMath math="a \leq b \leq c"/> {t.r_note2} <InlineMath math="a^2+b^2"/> {t.r_note3} <InlineMath math="c^2"/>.</p>
                   <div className="grid grid-cols-3 gap-2 text-xs font-body mt-2">
                     <div className="bg-blue-900/40 rounded-lg p-2 text-center"><p className="text-blue-300 font-bold">{t.r_equal}</p><p className="text-white/60">{t.r_equalLabel}</p></div>
                     <div className="bg-green-900/40 rounded-lg p-2 text-center"><p className="text-green-300 font-bold">{t.r_greater}</p><p className="text-white/60">{t.r_greaterLabel}</p></div>

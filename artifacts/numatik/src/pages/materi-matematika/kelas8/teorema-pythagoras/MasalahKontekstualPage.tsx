@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -227,16 +228,18 @@ const DiagonalSVG = ({ svgLength, svgWidth }: { svgLength: string; svgWidth: str
   </svg>
 );
 
-const JarakTitikSVG = ({ svgVertical, svgDistance }: { svgVertical: string; svgDistance: string }) => (
+const JarakTitikSVG = ({ svgVertical, svgDistance, isDark }: { svgVertical: string; svgDistance: string; isDark?: boolean }) => {
+  const gridStroke = isDark ? "#1e293b" : "#cbd5e1";
+  return (
   <svg viewBox="0 0 240 180" className="w-full max-w-sm mx-auto my-2" aria-label="Distance between two points">
     <defs>
       <style>{`@keyframes pathGlow{0%,100%{opacity:1;}50%{opacity:0.3;}}.pg{animation:pathGlow 2.5s ease-in-out infinite;}`}</style>
     </defs>
     {[0,1,2,3,4].map(i=>(
-      <line key={"h"+i} x1="20" y1={20+i*35} x2="220" y2={20+i*35} stroke="#1e293b" strokeWidth="1"/>
+      <line key={"h"+i} x1="20" y1={20+i*35} x2="220" y2={20+i*35} stroke={gridStroke} strokeWidth="1"/>
     ))}
     {[0,1,2,3,4,5].map(i=>(
-      <line key={"v"+i} x1={20+i*40} y1="20" x2={20+i*40} y2="160" stroke="#1e293b" strokeWidth="1"/>
+      <line key={"v"+i} x1={20+i*40} y1="20" x2={20+i*40} y2="160" stroke={gridStroke} strokeWidth="1"/>
     ))}
     <line x1="40" y1="130" x2="180" y2="130" stroke="#22c55e" strokeWidth="2.5" className="pg"/>
     <line x1="180" y1="130" x2="180" y2="50" stroke="#3b82f6" strokeWidth="2.5" className="pg"/>
@@ -252,11 +255,13 @@ const JarakTitikSVG = ({ svgVertical, svgDistance }: { svgVertical: string; svgD
     <text x="95" y="82" fill="#fb923c" fontSize="9" fontFamily="monospace">{svgDistance}</text>
     <polyline points="180,120 170,120 170,130" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2" opacity="0.7"/>
   </svg>
-);
+  );
+};
 
 const MasalahKontekstualPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language as Lang];
   const [open, setOpen] = useState<string[]>(["intro","strategi","contoh1","contoh2","contoh3","rangkuman"]);
 
@@ -269,7 +274,7 @@ const MasalahKontekstualPage = () => {
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
+        <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</span>
       </div>
       {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary"/> : <ChevronDown className="w-5 h-5 text-primary"/>}
     </button>
@@ -295,12 +300,12 @@ const MasalahKontekstualPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-1">{t.intisari}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">{t.introDesc}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>{t.introDesc}</p>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-body">
                   {t.fields.map((item,i)=>(
-                    <div key={i} className="bg-slate-800/60 border border-slate-600 rounded-lg p-2 text-center">
-                      <p className="text-white/80">{item}</p>
+                    <div key={i} className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-lg p-2 text-center" : "bg-gray-100 border border-gray-200 rounded-lg p-2 text-center"}>
+                      <p className={isDark ? "text-white/80" : "text-gray-700"}>{item}</p>
                     </div>
                   ))}
                 </div>
@@ -313,14 +318,14 @@ const MasalahKontekstualPage = () => {
             <SectionHeader id="strategi" icon={<Target className="w-5 h-5"/>} iconColor="text-cyan-400" title={t.sec_strategi}/>
             {open.includes("strategi") && (
               <div className="px-5 pb-5 space-y-4">
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.stepsHeader}</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.stepsHeader}</p>
                   {t.steps.map(({ step, title, desc, color }) => (
                     <div key={step} className={`flex gap-3 border rounded-lg px-3 py-2 ${color}`}>
                       <span className="bg-slate-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">{step}</span>
                       <div>
                         <p className="font-body text-sm font-bold text-white">{title}</p>
-                        <p className="font-body text-xs text-white/60">{desc}</p>
+                        <p className={isDark ? "font-body text-xs text-white/60" : "font-body text-xs text-gray-500"}>{desc}</p>
                       </div>
                     </div>
                   ))}
@@ -336,12 +341,12 @@ const MasalahKontekstualPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.easy}</p>
-                  <p className="font-body text-sm text-white/90">{t.c1Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c1Problem}</p>
                 </div>
                 <TanggaSVG svgLadder={t.svgLadder} svgWall={t.svgWall} svgHeight={t.svgHeight}/>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>
                     {t.c1Sol} <InlineMath math="c = 10"/> {t.c1Sol2} <InlineMath math="b = 6"/> {t.c1Sol3} <InlineMath math="a"/>.
                   </p>
                   <BlockMath math="a = \sqrt{c^2 - b^2} = \sqrt{10^2 - 6^2}"/>
@@ -362,12 +367,12 @@ const MasalahKontekstualPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.medium}</p>
-                  <p className="font-body text-sm text-white/90">{t.c2Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c2Problem}</p>
                 </div>
                 <DiagonalSVG svgLength={t.svgLength} svgWidth={t.svgWidth}/>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>
                     {t.c2Sol} <InlineMath math="d"/> {t.c2Sol2} <InlineMath math="p = 13{,}4"/> {t.c2Sol3} <InlineMath math="l = 6{,}1"/> m.
                   </p>
                   <BlockMath math="d = \sqrt{p^2 + l^2} = \sqrt{13{,}4^2 + 6{,}1^2}"/>
@@ -388,28 +393,28 @@ const MasalahKontekstualPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                   <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.hard}</p>
-                  <p className="font-body text-sm text-white/90">{t.c3Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c3Problem}</p>
                 </div>
-                <JarakTitikSVG svgVertical={t.svgVertical} svgDistance={t.svgDistance}/>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80"><strong>{t.c3Step1}</strong></p>
+                <JarakTitikSVG svgVertical={t.svgVertical} svgDistance={t.svgDistance} isDark={isDark}/>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-4"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}><strong>{t.c3Step1}</strong></p>
                   <div className="grid grid-cols-2 gap-2 text-xs font-body">
-                    <div className="bg-slate-700/50 rounded-lg p-2">
+                    <div className={isDark ? "bg-slate-700/50 rounded-lg p-2" : "bg-gray-50 rounded-lg p-2"}>
                       <p className="text-cyan-300 font-bold">{t.c3ShipP}</p>
-                      <p className="text-white/70">{t.c3ShipPDesc}</p>
+                      <p className={isDark ? "text-white/70" : "text-gray-600"}>{t.c3ShipPDesc}</p>
                       <p className="text-white font-bold mt-1">B = (36, 15)</p>
                     </div>
-                    <div className="bg-slate-700/50 rounded-lg p-2">
+                    <div className={isDark ? "bg-slate-700/50 rounded-lg p-2" : "bg-gray-50 rounded-lg p-2"}>
                       <p className="text-orange-300 font-bold">{t.c3ShipQ}</p>
-                      <p className="text-white/70">{t.c3ShipQDesc}</p>
+                      <p className={isDark ? "text-white/70" : "text-gray-600"}>{t.c3ShipQDesc}</p>
                       <p className="text-white font-bold mt-1">C = (20, 0)</p>
                     </div>
                   </div>
-                  <p className="font-body text-sm text-white/80"><strong>{t.c3Step2}</strong></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}><strong>{t.c3Step2}</strong></p>
                   <BlockMath math="\Delta x = 36 - 20 = 16 \text{ km}"/>
                   <BlockMath math="\Delta y = 15 - 0 = 15 \text{ km}"/>
-                  <p className="font-body text-sm text-white/80"><strong>{t.c3Step3}</strong></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}><strong>{t.c3Step3}</strong></p>
                   <BlockMath math="BC = \sqrt{(\Delta x)^2 + (\Delta y)^2} = \sqrt{16^2 + 15^2}"/>
                   <BlockMath math="BC = \sqrt{256 + 225} = \sqrt{481}"/>
                   <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
@@ -427,11 +432,11 @@ const MasalahKontekstualPage = () => {
             {open.includes("rangkuman") && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm text-white/80">• {t.r1} <strong className="text-cyan-300">{t.r1b}</strong></p>
-                  <p className="font-body text-sm text-white/80">• {t.r2}</p>
-                  <p className="font-body text-sm text-white/80">• {t.r3} <InlineMath math="d = \sqrt{(\Delta x)^2 + (\Delta y)^2}"/>.</p>
-                  <p className="font-body text-sm text-white/80">• {t.r4} <InlineMath math="d = \sqrt{p^2 + l^2}"/>.</p>
-                  <p className="font-body text-sm text-white/80">• {t.r5} <strong className="text-yellow-300">{t.r5b}</strong> {t.r5c}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r1} <strong className="text-cyan-300">{t.r1b}</strong></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r2}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r3} <InlineMath math="d = \sqrt{(\Delta x)^2 + (\Delta y)^2}"/>.</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r4} <InlineMath math="d = \sqrt{p^2 + l^2}"/>.</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• {t.r5} <strong className="text-yellow-300">{t.r5b}</strong> {t.r5c}</p>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">

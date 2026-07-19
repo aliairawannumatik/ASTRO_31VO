@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -291,6 +292,7 @@ type Lang = keyof typeof translations;
 const SudutKhususPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language as Lang];
   const [open, setOpen] = useState<string[]>(["intro","interaktif","sudut45","sudut30","perbandingan","contoh1","contoh2","contoh3","rangkuman"]);
 
@@ -303,7 +305,7 @@ const SudutKhususPage = () => {
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
+        <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</span>
       </div>
       {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary"/> : <ChevronDown className="w-5 h-5 text-primary"/>}
     </button>
@@ -408,9 +410,9 @@ const SudutKhususPage = () => {
     const groupTransform = `translate(${offset.x.toFixed(1)},${offset.y.toFixed(1)}) rotate(${rotation},${centX.toFixed(1)},${centY.toFixed(1)})`;
 
     return (
-      <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
+      <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-4`}>
         <div className="flex items-center justify-between flex-wrap gap-2">
-          <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.interLabel}</p>
+          <p className={`font-body text-xs font-bold ${isDark ? "text-slate-300" : "text-gray-600"} uppercase tracking-wide`}>{t.interLabel}</p>
           <span className={`text-xs font-bold px-2 py-1 rounded-full border ${mode==='45' ? 'bg-purple-900/50 text-purple-200 border-purple-500/40' : 'bg-green-900/50 text-green-200 border-green-500/40'}`}>
             {t.interRatio} {ratioStr}
           </span>
@@ -421,7 +423,7 @@ const SudutKhususPage = () => {
               className={`py-2 rounded-lg text-xs font-bold transition-all duration-200 border ${
                 mode === m
                   ? m === '45' ? 'bg-purple-600 text-white border-purple-500' : 'bg-green-700 text-white border-green-600'
-                  : 'bg-slate-700/50 text-slate-400 border-slate-600 hover:border-slate-500'
+                  : isDark ? 'bg-slate-700/50 text-slate-400 border-slate-600 hover:border-slate-500' : 'bg-gray-200 text-gray-500 border-gray-300 hover:border-gray-400'
               }`}>
               {m === '45' ? '▪ 45°–45°–90°' : '▲ 30°–60°–90°'}
             </button>
@@ -477,7 +479,7 @@ const SudutKhususPage = () => {
         </div>
         <div className="space-y-1 px-1">
           <div className="flex justify-between items-center">
-            <label className="font-body text-xs text-white/70">{t.rotateLabel}</label>
+            <label className={isDark ? "font-body text-xs text-white/70" : "font-body text-xs text-gray-600"}>{t.rotateLabel}</label>
             <div className="flex items-center gap-2">
               <span className={`text-sm font-bold px-2 py-0.5 rounded font-mono ${mode==='45' ? 'bg-purple-900/60 text-purple-200' : 'bg-green-900/60 text-green-200'}`}>{rotation}°</span>
               <button onClick={reset} className="text-xs px-2 py-1 rounded border border-slate-500 text-slate-400 hover:text-white hover:border-slate-300 transition-colors cursor-pointer">{t.resetBtn}</button>
@@ -487,7 +489,7 @@ const SudutKhususPage = () => {
         </div>
         <div className="space-y-2 px-1">
           <div className="flex justify-between items-center">
-            <label className="font-body text-xs text-white/70">{t.sizeLabel}</label>
+            <label className={isDark ? "font-body text-xs text-white/70" : "font-body text-xs text-gray-600"}>{t.sizeLabel}</label>
             <span className={`text-sm font-bold px-2 py-0.5 rounded font-mono ${mode==='45' ? 'bg-purple-900/60 text-purple-200' : 'bg-green-900/60 text-green-200'}`}>a = {a}</span>
           </div>
           <input type="range" min="1" max="10" step="1" value={a} onChange={e => setA(+e.target.value)} className="w-full h-2 rounded-full cursor-pointer" style={{ accentColor: accentHex }}/>
@@ -528,19 +530,19 @@ const SudutKhususPage = () => {
     title: string; ratio: string; color: string; sides: string[]; example: { angles: string; vals: string[] };
     shortLabel: string; longLabel: string; hypLabel: string; exampleLabel: string;
   }) => (
-    <div className={`bg-slate-800/60 border ${color} rounded-xl p-4 space-y-3`}>
+    <div className={`${isDark ? "bg-slate-800/60" : "bg-gray-100"} border ${color} rounded-xl p-4 space-y-3`}>
       <p className={`font-body text-sm font-bold ${color.replace("border-","text-").replace("/40","")}`}>{title}</p>
-      <p className="font-body text-xs text-white/60">{t.compareRatio} <span className="text-yellow-300 font-bold">{ratio}</span></p>
+      <p className={`font-body text-xs ${isDark ? "text-white/60" : "text-gray-600"}`}>{t.compareRatio} <span className="text-yellow-300 font-bold">{ratio}</span></p>
       <div className="grid grid-cols-3 gap-2">
         {sides.map((s,i)=>(
-          <div key={i} className="bg-slate-900/50 rounded-lg p-2 text-center">
-            <p className="font-body text-xs text-white/50">{[shortLabel, longLabel, hypLabel][i]}</p>
-            <p className="font-body text-sm font-bold text-white">{s}</p>
+          <div key={i} className={`${isDark ? "bg-slate-900/50" : "bg-white/80"} rounded-lg p-2 text-center`}>
+            <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-500"}`}>{[shortLabel, longLabel, hypLabel][i]}</p>
+            <p className={`font-body text-sm font-bold ${isDark ? "text-white" : "text-gray-800"}`}>{s}</p>
           </div>
         ))}
       </div>
-      <div className="bg-slate-700/50 rounded-lg p-2">
-        <p className="font-body text-xs text-white/50">{exampleLabel} ({example.angles}):</p>
+      <div className={`${isDark ? "bg-slate-700/50" : "bg-gray-50"} rounded-lg p-2`}>
+        <p className={`font-body text-xs ${isDark ? "text-white/50" : "text-gray-500"}`}>{exampleLabel} ({example.angles}):</p>
         <p className="font-body text-xs text-cyan-300 font-bold">{example.vals.join(" : ")}</p>
       </div>
     </div>
@@ -566,7 +568,7 @@ const SudutKhususPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-1">{t.intisari}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                  <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                     {t.introDesc} <strong className="text-purple-300">45°-45°-90°</strong> {t.introAnd} <strong className="text-green-300">30°-60°-90°</strong>{t.introEnd}
                   </p>
                 </div>
@@ -604,15 +606,15 @@ const SudutKhususPage = () => {
             <SectionHeader id="sudut45" icon={<Target className="w-5 h-5"/>} iconColor="text-purple-400" title={t.sec_45}/>
             {open.includes("sudut45") && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">
+                <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                   {t.s45Desc} <strong className="text-purple-300">45°-45°-90°</strong> {t.s45Desc2} <InlineMath math="a"/>{t.s45Desc3} <InlineMath math="a\sqrt{2}"/>.
                 </p>
                 <Sudut4545SVG/>
                 <div className="bg-purple-900/30 border border-purple-500/30 rounded-xl p-4 space-y-3">
                   <p className="text-purple-300 font-semibold text-sm">{t.s45Formula}</p>
-                  <p className="font-body text-sm text-white/80">{t.s45FormulaDesc} <InlineMath math="a"/>. {t.s45FormulaDesc2}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.s45FormulaDesc} <InlineMath math="a"/>. {t.s45FormulaDesc2}</p>
                   <BlockMath math="c = \sqrt{a^2 + a^2} = \sqrt{2a^2} = a\sqrt{2}"/>
-                  <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+                  <div className={isDark ? "bg-slate-900/60 rounded-lg p-3 text-center" : "bg-gray-50 rounded-lg p-3 text-center"}>
                     <p className="font-body text-xs text-white/50 mb-1">{t.s45RatioLabel}</p>
                     <p className="font-body text-xs text-white/60 mb-1">{t.s45RatioDesc}</p>
                     <BlockMath math="a : a : a\sqrt{2} = 1 : 1 : \sqrt{2}"/>
@@ -632,13 +634,13 @@ const SudutKhususPage = () => {
             <SectionHeader id="sudut30" icon={<Target className="w-5 h-5"/>} iconColor="text-green-400" title={t.sec_30}/>
             {open.includes("sudut30") && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">{t.s30Desc}</p>
+                <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>{t.s30Desc}</p>
                 <Sudut3060SVG/>
                 <div className="bg-green-900/30 border border-green-500/30 rounded-xl p-4 space-y-3">
                   <p className="text-green-300 font-semibold text-sm">{t.s30Formula}</p>
-                  <p className="font-body text-sm text-white/80">{t.s30FormulaDesc} <InlineMath math="a"/>. {t.s30FormulaDesc2} <InlineMath math="2a"/>. {t.s30FormulaDesc3}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.s30FormulaDesc} <InlineMath math="a"/>. {t.s30FormulaDesc2} <InlineMath math="2a"/>. {t.s30FormulaDesc3}</p>
                   <BlockMath math="b = \sqrt{(2a)^2 - a^2} = \sqrt{4a^2 - a^2} = \sqrt{3a^2} = a\sqrt{3}"/>
-                  <div className="bg-slate-900/60 rounded-lg p-3 text-center">
+                  <div className={isDark ? "bg-slate-900/60 rounded-lg p-3 text-center" : "bg-gray-50 rounded-lg p-3 text-center"}>
                     <p className="font-body text-xs text-white/60 mb-1">{t.s30RatioDesc}</p>
                     <BlockMath math="a : a\sqrt{3} : 2a = 1 : \sqrt{3} : 2"/>
                   </div>
@@ -692,11 +694,11 @@ const SudutKhususPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.easy}</p>
-                  <p className="font-body text-sm text-white/90">{t.c1Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c1Problem}</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">{t.c1Sol} <InlineMath math="a = 10"/> {t.c1Sol2} <InlineMath math="1:1:\sqrt{2}"/>:</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.c1Sol} <InlineMath math="a = 10"/> {t.c1Sol2} <InlineMath math="1:1:\sqrt{2}"/>:</p>
                   <BlockMath math="c = a\sqrt{2} = 10\sqrt{2} \approx 14{,}14 \text{ cm}"/>
                   <div className="bg-green-900/30 border border-green-500/40 rounded-lg p-3">
                     <p className="font-body text-sm text-green-300 text-center">{t.c1Ans} <strong><InlineMath math="10\sqrt{2}"/> {t.c1Ans2}</strong>.</p>
@@ -713,15 +715,15 @@ const SudutKhususPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.medium}</p>
-                  <p className="font-body text-sm text-white/90">
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>
                     {t.c2Problem} <InlineMath math="6\sqrt{3}"/> {t.c2Problem2}
                   </p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">{t.c2Sol} <InlineMath math="6\sqrt{3}"/> {t.c2Sol2} <InlineMath math="a\sqrt{3}"/>.</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.c2Sol} <InlineMath math="6\sqrt{3}"/> {t.c2Sol2} <InlineMath math="a\sqrt{3}"/>.</p>
                   <BlockMath math="a\sqrt{3} = 6\sqrt{3} \Rightarrow a = 6 \text{ m}"/>
-                  <p className="font-body text-sm text-white/80">{t.c2Sol3} <InlineMath math="a"/>:</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.c2Sol3} <InlineMath math="a"/>:</p>
                   <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-lg p-3">
                     <BlockMath math="= 6 \text{ m}"/>
                     <p className="font-body text-sm text-yellow-200 text-center mt-1">{t.c2Ans}</p>
@@ -738,14 +740,14 @@ const SudutKhususPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                   <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.hard}</p>
-                  <p className="font-body text-sm text-white/90">{t.c3Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c3Problem}</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80"><strong>{t.c3Step1}</strong></p>
-                  <p className="font-body text-sm text-white/80">{t.c3Step1b}</p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}><strong>{t.c3Step1}</strong></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.c3Step1b}</p>
                   <BlockMath math="AD = BD \times \sqrt{3} = 6\sqrt{3} \text{ cm}"/>
-                  <p className="font-body text-sm text-white/80"><strong>{t.c3Step2} <InlineMath math="6\sqrt{3}"/> {t.c3Step2b}</strong></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}><strong>{t.c3Step2} <InlineMath math="6\sqrt{3}"/> {t.c3Step2b}</strong></p>
                   <BlockMath math="c = AD \times \sqrt{2} = 6\sqrt{3} \times \sqrt{2} = 6\sqrt{6} \text{ cm}"/>
                   <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
                     <BlockMath math="c = 6\sqrt{6} \approx 14{,}70 \text{ cm}"/>

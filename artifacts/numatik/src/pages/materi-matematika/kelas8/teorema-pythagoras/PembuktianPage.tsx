@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Lightbulb, Target, FlaskConical, Ruler } from "lucide-react";
@@ -382,13 +383,14 @@ const HitungSVG = ({ a, b, c, cari }: { a: number; b: number; c: number; cari: "
 const PembuktianPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const ppt = PP_TRANSLATIONS[language as keyof typeof PP_TRANSLATIONS] ?? PP_TRANSLATIONS.id;
 
   const SectionHeader = ({ icon, iconColor, title }: { id?: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
     <div className="w-full flex items-center px-5 py-4">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
+        <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</span>
       </div>
     </div>
   );
@@ -410,13 +412,13 @@ const PembuktianPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title={ppt.secIntro}/>
             <div className="px-5 pb-5 space-y-4">
-              <p className="font-body text-sm text-white/80 leading-relaxed">
+              <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                 {ppt.introPart1}<strong className="text-cyan-300">Pythagoras</strong>{ppt.introPart2}<strong className="text-yellow-300">{ppt.termPythagoras}</strong>{ppt.introPart3}
               </p>
 
-              <div className="bg-slate-800/70 border border-slate-600/50 rounded-xl p-4 space-y-3">
+              <div className={`${isDark ? "bg-slate-800/70 border-slate-600/50" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-3`}>
                 <p className="text-yellow-300 font-semibold text-sm">{ppt.realWorldTitle}</p>
-                <p className="font-body text-sm text-white/80 leading-relaxed">
+                <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                   {ppt.realWorldDesc}
                 </p>
                 <ul className="space-y-2 font-body text-sm text-white/75">
@@ -499,7 +501,7 @@ const PembuktianPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-slate-700/40 border border-slate-600/40 rounded-lg p-2 mt-1">
+                  <div className={isDark ? "bg-slate-700/40 border border-slate-600/40 rounded-lg p-2 mt-1" : "bg-gray-50 border border-gray-200 rounded-lg p-2 mt-1"}>
                     <p className="text-white/50 text-xs font-body text-center">
                       💡 Ketiga rumus ini berasal dari <strong className="text-yellow-300">persamaan yang sama</strong> — hanya dipindah-pindah ruas saja!
                     </p>
@@ -589,7 +591,7 @@ const PembuktianPage = () => {
 
               <div className="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-4">
                 <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ide Utama Pembuktian</p>
-                <p className="font-body text-sm text-white/80 leading-relaxed">
+                <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                   Susun <strong className="text-cyan-300">4 segitiga siku-siku identik</strong> di dalam persegi besar bersisi (a+b).
                   Hitung luasnya dengan <strong className="text-yellow-300">dua cara berbeda</strong> — karena hasilnya harus sama,
                   kita buktikan bahwa <InlineMath math="a^2 + b^2 = c^2"/>.
@@ -610,7 +612,7 @@ const PembuktianPage = () => {
                   <div className="bg-yellow-900/25 border border-yellow-500/40 rounded-xl p-4 space-y-2">
                     <p className="text-yellow-300 text-xs font-bold uppercase tracking-wide">🟡 Cara 1 — Rumus Ekspansi</p>
                     <p className="text-white/60 text-xs font-body">Persegi besar bersisi (a+b):</p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="(a+b)^2 = a^2 + 2ab + b^2"/>
                     </div>
                   </div>
@@ -620,7 +622,7 @@ const PembuktianPage = () => {
                   <div className="bg-blue-900/25 border border-blue-500/40 rounded-xl p-4 space-y-2">
                     <p className="text-blue-300 text-xs font-bold uppercase tracking-wide">🔵 Cara 2 — Komponen Dalam</p>
                     <p className="text-white/60 text-xs font-body">4 segitiga + persegi merah c²:</p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="4 \cdot \tfrac{1}{2}ab + c^2 = 2ab + c^2"/>
                     </div>
                   </div>
@@ -634,9 +636,9 @@ const PembuktianPage = () => {
                   <div className="flex-1 h-px bg-slate-700/70"/>
                 </div>
 
-                <div className="bg-slate-800/60 border border-slate-600/50 rounded-xl p-4">
+                <div className={`${isDark ? "bg-slate-800/60 border-slate-600/50" : "bg-gray-100 border-gray-200"} border rounded-xl p-4`}>
                   <p className="text-slate-400 text-xs font-body mb-2">Dari persamaan kedua cara:</p>
-                  <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                  <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                     <BlockMath math="a^2 + \cancel{2ab} + b^2 = \cancel{2ab} + c^2"/>
                   </div>
                 </div>
@@ -673,7 +675,7 @@ const PembuktianPage = () => {
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionHeader id="mhg_intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title="🌟 Tiga Skenario Berbeda"/>
             <div className="px-5 pb-5 space-y-4">
-              <p className="font-body text-sm text-white/80 leading-relaxed">
+              <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                 Dalam sebuah segitiga siku-siku, ada <strong className="text-cyan-300">tiga sisi</strong>: dua kaki (<InlineMath math="a"/> dan <InlineMath math="b"/>) dan satu hipotenusa (<InlineMath math="c"/>). Menggunakan Teorema Pythagoras, kita bisa mencari salah satu sisi <em>jika dua sisi lainnya diketahui</em>. Ada tiga skenario berbeda yang perlu kamu kuasai!
               </p>
               <RumusVariasiSVG lang={language}/>
@@ -691,18 +693,18 @@ const PembuktianPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                 <p className="font-body text-sm font-semibold text-cyan-300 mb-1">🎯 Ringkasan Intisari</p>
-                <p className="font-body text-sm text-white/80 leading-relaxed">
+                <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                   Kunci menghitung panjang sisi adalah: <strong className="text-cyan-300">(1)</strong> identifikasi mana hipotenusa, <strong className="text-cyan-300">(2)</strong> pilih rumus yang tepat, <strong className="text-cyan-300">(3)</strong> substitusikan nilai, <strong className="text-cyan-300">(4)</strong> sederhanakan hasilnya.
                 </p>
               </div>
               {/* ── CARA MENYEDERHANAKAN AKAR ── */}
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-4">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Cara Menyederhanakan Akar</p>
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600" : "bg-gray-100 border-gray-200"} border rounded-xl p-4 space-y-4`}>
+                <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>📋 Cara Menyederhanakan Akar</p>
 
                 {/* KUNCI UTAMA */}
                 <div className="bg-gradient-to-r from-yellow-900/40 to-amber-900/30 border-2 border-yellow-500/50 rounded-xl p-4 space-y-2">
                   <p className="font-body text-sm font-bold text-yellow-300">🔑 Kunci Utama — Aturan Perkalian Akar</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                  <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                     Untuk menyederhanakan <InlineMath math="\sqrt{n}"/>, kamu harus mengubahnya menjadi perkalian <strong className="text-cyan-300">di mana salah satu faktornya adalah bilangan kuadrat sempurna</strong> (seperti 4, 9, 16, 25, 36, ...).
                   </p>
                   <div className="bg-black/40 rounded-xl px-3 py-2 mt-2 text-center">
@@ -732,9 +734,9 @@ const PembuktianPage = () => {
 
                 {/* CONTOH */}
                 <div className="space-y-2">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">💡 Contoh Penyederhanaan</p>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>💡 Contoh Penyederhanaan</p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    <div className="bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1">
+                    <div className={isDark ? "bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1" : "bg-gray-50 border border-gray-200 rounded-lg p-2.5 space-y-1"}>
                       <p className="text-amber-300 font-bold text-xs text-center">√72</p>
                       <div className="text-center text-xs">
                         <InlineMath math="\sqrt{72} = \sqrt{36 \times 2}"/>
@@ -745,7 +747,7 @@ const PembuktianPage = () => {
                       <p className="text-center text-green-300 font-bold text-sm"><InlineMath math="= 6\sqrt{2}"/></p>
                       <p className="text-center text-white/40 text-xs">36 = 6² ✓ kuadrat sempurna</p>
                     </div>
-                    <div className="bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1">
+                    <div className={isDark ? "bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1" : "bg-gray-50 border border-gray-200 rounded-lg p-2.5 space-y-1"}>
                       <p className="text-amber-300 font-bold text-xs text-center">√50</p>
                       <div className="text-center text-xs">
                         <InlineMath math="\sqrt{50} = \sqrt{25 \times 2}"/>
@@ -756,7 +758,7 @@ const PembuktianPage = () => {
                       <p className="text-center text-green-300 font-bold text-sm"><InlineMath math="= 5\sqrt{2}"/></p>
                       <p className="text-center text-white/40 text-xs">25 = 5² ✓ kuadrat sempurna</p>
                     </div>
-                    <div className="bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1">
+                    <div className={isDark ? "bg-slate-700/50 border border-slate-600/50 rounded-lg p-2.5 space-y-1" : "bg-gray-50 border border-gray-200 rounded-lg p-2.5 space-y-1"}>
                       <p className="text-amber-300 font-bold text-xs text-center">√48</p>
                       <div className="text-center text-xs">
                         <InlineMath math="\sqrt{48} = \sqrt{16 \times 3}"/>
@@ -795,10 +797,10 @@ const PembuktianPage = () => {
               </div>
 
               {/* Sub-soal (a) — Mencari hipotenusa, 3-4-5 */}
-              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600/60" : "bg-gray-100 border-gray-200"} border rounded-xl overflow-hidden`}>
                 <div className="bg-green-900/40 px-4 py-2 flex items-center gap-2">
                   <span className="bg-green-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">a</span>
-                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai dua sisi siku-siku masing-masing <strong className="text-yellow-300">3 cm</strong> dan <strong className="text-yellow-300">4 cm</strong>. Tentukan panjang sisi miringnya!</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>Sebuah segitiga siku-siku mempunyai dua sisi siku-siku masing-masing <strong className="text-yellow-300">3 cm</strong> dan <strong className="text-yellow-300">4 cm</strong>. Tentukan panjang sisi miringnya!</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                   {/* Triangle SVG */}
@@ -818,10 +820,10 @@ const PembuktianPage = () => {
                   {/* Solution */}
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=3"/> cm, <InlineMath math="b=4"/> cm &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="c^2 = a^2 + b^2 = 3^2 + 4^2"/>
                     </div>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="c^2 = 9 + 16 = 25"/>
                     </div>
                     <div className="bg-green-900/40 border border-green-500/40 rounded-lg px-2 py-1">
@@ -833,10 +835,10 @@ const PembuktianPage = () => {
               </div>
 
               {/* Sub-soal (b) — Mencari hipotenusa, 5-12-13 */}
-              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600/60" : "bg-gray-100 border-gray-200"} border rounded-xl overflow-hidden`}>
                 <div className="bg-sky-900/40 px-4 py-2 flex items-center gap-2">
                   <span className="bg-sky-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">b</span>
-                  <p className="font-body text-sm text-white/90">Sebuah layar kapal berbentuk segitiga siku-siku dengan dua kaki masing-masing <strong className="text-yellow-300">5 cm</strong> dan <strong className="text-yellow-300">12 cm</strong>. Berapa panjang tali layar (sisi miring) tersebut?</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>Sebuah layar kapal berbentuk segitiga siku-siku dengan dua kaki masing-masing <strong className="text-yellow-300">5 cm</strong> dan <strong className="text-yellow-300">12 cm</strong>. Berapa panjang tali layar (sisi miring) tersebut?</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                   {/* Rotated 90° CW — right angle at top-left */}
@@ -855,10 +857,10 @@ const PembuktianPage = () => {
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=5"/> cm, <InlineMath math="b=12"/> cm &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="c^2 = 5^2 + 12^2 = 25 + 144"/>
                     </div>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="c^2 = 169"/>
                     </div>
                     <div className="bg-sky-900/40 border border-sky-500/40 rounded-lg px-2 py-1">
@@ -870,10 +872,10 @@ const PembuktianPage = () => {
               </div>
 
               {/* Sub-soal (c) — Mencari salah satu kaki, 6-8-10 */}
-              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600/60" : "bg-gray-100 border-gray-200"} border rounded-xl overflow-hidden`}>
                 <div className="bg-violet-900/40 px-4 py-2 flex items-center gap-2">
                   <span className="bg-violet-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">c</span>
-                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai sisi miring <strong className="text-yellow-300">10 cm</strong> dan salah satu kaki <strong className="text-yellow-300">6 cm</strong>. Tentukan panjang kaki lainnya!</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>Sebuah segitiga siku-siku mempunyai sisi miring <strong className="text-yellow-300">10 cm</strong> dan salah satu kaki <strong className="text-yellow-300">6 cm</strong>. Tentukan panjang kaki lainnya!</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                   {/* Rotated 180° — right angle at top-right */}
@@ -892,10 +894,10 @@ const PembuktianPage = () => {
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="c=10"/> cm, <InlineMath math="b=6"/> cm &nbsp;|&nbsp; Dicari: <InlineMath math="a"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="a^2 = c^2 - b^2 = 10^2 - 6^2"/>
                     </div>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="a^2 = 100 - 36 = 64"/>
                     </div>
                     <div className="bg-violet-900/40 border border-violet-500/40 rounded-lg px-2 py-1">
@@ -918,10 +920,10 @@ const PembuktianPage = () => {
               </div>
 
               {/* Sub-soal (a) — a=4, b=6 → c²=52=4×13 → c=2√13 */}
-              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600/60" : "bg-gray-100 border-gray-200"} border rounded-xl overflow-hidden`}>
                 <div className="bg-yellow-900/40 px-4 py-2 flex items-center gap-2">
                   <span className="bg-yellow-500 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">a</span>
-                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai dua kaki <strong className="text-yellow-300">4 cm</strong> dan <strong className="text-yellow-300">6 cm</strong>. Tentukan panjang sisi miringnya dalam bentuk akar paling sederhana!</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>Sebuah segitiga siku-siku mempunyai dua kaki <strong className="text-yellow-300">4 cm</strong> dan <strong className="text-yellow-300">6 cm</strong>. Tentukan panjang sisi miringnya dalam bentuk akar paling sederhana!</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                   {/* Mirrored about Y-axis — right angle at bottom-right */}
@@ -937,11 +939,11 @@ const PembuktianPage = () => {
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=4"/>, <InlineMath math="b=6"/> &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="c^2 = 4^2 + 6^2 = 16 + 36 = 52"/>
                     </div>
-                    <p className="font-body text-xs text-white/60">Sederhanakan <InlineMath math="\sqrt{52}"/>: faktorkan → <InlineMath math="52 = 4 \times 13"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <p className={isDark ? "font-body text-xs text-white/60" : "font-body text-xs text-gray-500"}>Sederhanakan <InlineMath math="\sqrt{52}"/>: faktorkan → <InlineMath math="52 = 4 \times 13"/></p>
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="\sqrt{52} = \sqrt{4 \times 13} = \sqrt{4}\cdot\sqrt{13} = 2\sqrt{13}"/>
                     </div>
                     <div className="bg-yellow-900/40 border border-yellow-500/40 rounded-lg px-2 py-1">
@@ -953,10 +955,10 @@ const PembuktianPage = () => {
               </div>
 
               {/* Sub-soal (b) — a=3, b=3 → c²=18=9×2 → c=3√2 */}
-              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600/60" : "bg-gray-100 border-gray-200"} border rounded-xl overflow-hidden`}>
                 <div className="bg-orange-900/40 px-4 py-2 flex items-center gap-2">
                   <span className="bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">b</span>
-                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku sama kaki dengan kedua kaki masing-masing <strong className="text-yellow-300">3 cm</strong>. Berapa panjang sisi miringnya?</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>Sebuah segitiga siku-siku sama kaki dengan kedua kaki masing-masing <strong className="text-yellow-300">3 cm</strong>. Berapa panjang sisi miringnya?</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                   {/* Tilted — right angle at interior point */}
@@ -972,11 +974,11 @@ const PembuktianPage = () => {
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="a=3"/>, <InlineMath math="b=3"/> &nbsp;|&nbsp; Dicari: <InlineMath math="c"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="c^2 = 3^2 + 3^2 = 9 + 9 = 18"/>
                     </div>
-                    <p className="font-body text-xs text-white/60">Sederhanakan <InlineMath math="\sqrt{18}"/>: faktorkan → <InlineMath math="18 = 9 \times 2"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <p className={isDark ? "font-body text-xs text-white/60" : "font-body text-xs text-gray-500"}>Sederhanakan <InlineMath math="\sqrt{18}"/>: faktorkan → <InlineMath math="18 = 9 \times 2"/></p>
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="\sqrt{18} = \sqrt{9 \times 2} = \sqrt{9}\cdot\sqrt{2} = 3\sqrt{2}"/>
                     </div>
                     <div className="bg-orange-900/40 border border-orange-500/40 rounded-lg px-2 py-1">
@@ -988,10 +990,10 @@ const PembuktianPage = () => {
               </div>
 
               {/* Sub-soal (c) — c=6, b=2 → a²=32=16×2 → a=4√2 */}
-              <div className="bg-slate-800/60 border border-slate-600/60 rounded-xl overflow-hidden">
+              <div className={`${isDark ? "bg-slate-800/60 border-slate-600/60" : "bg-gray-100 border-gray-200"} border rounded-xl overflow-hidden`}>
                 <div className="bg-rose-900/40 px-4 py-2 flex items-center gap-2">
                   <span className="bg-rose-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">c</span>
-                  <p className="font-body text-sm text-white/90">Sebuah segitiga siku-siku mempunyai sisi miring <strong className="text-yellow-300">6 cm</strong> dan salah satu kaki <strong className="text-yellow-300">2 cm</strong>. Tentukan kaki lainnya!</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>Sebuah segitiga siku-siku mempunyai sisi miring <strong className="text-yellow-300">6 cm</strong> dan salah satu kaki <strong className="text-yellow-300">2 cm</strong>. Tentukan kaki lainnya!</p>
                 </div>
                 <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                   {/* Rotated 270° CW — right angle at bottom-right */}
@@ -1007,11 +1009,11 @@ const PembuktianPage = () => {
                   </svg>
                   <div className="space-y-2">
                     <p className="font-body text-xs text-slate-400">Diketahui: <InlineMath math="c=6"/>, <InlineMath math="b=2"/> &nbsp;|&nbsp; Dicari: <InlineMath math="a"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="a^2 = c^2 - b^2 = 6^2 - 2^2 = 36 - 4 = 32"/>
                     </div>
-                    <p className="font-body text-xs text-white/60">Sederhanakan <InlineMath math="\sqrt{32}"/>: faktorkan → <InlineMath math="32 = 16 \times 2"/></p>
-                    <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                    <p className={isDark ? "font-body text-xs text-white/60" : "font-body text-xs text-gray-500"}>Sederhanakan <InlineMath math="\sqrt{32}"/>: faktorkan → <InlineMath math="32 = 16 \times 2"/></p>
+                    <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                       <BlockMath math="\sqrt{32} = \sqrt{16 \times 2} = \sqrt{16}\cdot\sqrt{2} = 4\sqrt{2}"/>
                     </div>
                     <div className="bg-rose-900/40 border border-rose-500/40 rounded-lg px-2 py-1">
@@ -1041,7 +1043,7 @@ const PembuktianPage = () => {
               </div>
 
               {/* Diagram kapal */}
-              <div className="bg-slate-900/60 border border-slate-700/50 rounded-xl p-3">
+              <div className={`${isDark ? "bg-slate-900/60 border-slate-700/50" : "bg-gray-50 border-gray-200"} border rounded-xl p-3`}>
                 <p className="font-body text-xs text-slate-400 text-center mb-2">📍 Diagram Rute Kapal</p>
                 <svg viewBox="0 0 340 240" className="w-full max-w-md mx-auto">
                   {/* Background ocean */}
@@ -1112,10 +1114,10 @@ const PembuktianPage = () => {
               </div>
 
               {/* Pembahasan */}
-              <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">📋 Pembahasan</p>
+              <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>📋 Pembahasan</p>
 
-                <div className="bg-slate-700/40 rounded-lg p-3 space-y-1">
+                <div className={`${isDark ? "bg-slate-700/40" : "bg-gray-50"} rounded-lg p-3 space-y-1`}>
                   <p className="font-body text-xs text-cyan-300 font-bold">Identifikasi Segitiga:</p>
                   <p className="font-body text-xs text-white/75">• AB = 8 km (kaki — arah Utara)</p>
                   <p className="font-body text-xs text-white/75">• BC = 15 km (kaki — arah Timur)</p>
@@ -1124,10 +1126,10 @@ const PembuktianPage = () => {
                 </div>
 
                 <p className="font-body text-xs text-slate-400">Gunakan rumus hipotenusa: <InlineMath math="c^2 = a^2 + b^2"/></p>
-                <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                   <BlockMath math="AC^2 = AB^2 + BC^2 = 8^2 + 15^2"/>
                 </div>
-                <div className="bg-slate-900/60 rounded-lg px-2 py-0.5">
+                <div className={isDark ? "bg-slate-900/60 rounded-lg px-2 py-0.5" : "bg-gray-50 rounded-lg px-2 py-0.5"}>
                   <BlockMath math="AC^2 = 64 + 225 = 289"/>
                 </div>
                 <div className="bg-gradient-to-r from-red-900/40 to-orange-900/30 border border-red-500/40 rounded-xl px-3 py-3 text-center space-y-1">
@@ -1145,15 +1147,15 @@ const PembuktianPage = () => {
             <div className="px-5 pb-5 space-y-3">
               <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
                 <p className="font-body text-xs font-bold text-violet-300 uppercase mb-1">📐 Pembuktian</p>
-                <p className="font-body text-sm text-white/80">• Teorema Pythagoras berlaku di <strong className="text-cyan-300">setiap segitiga siku-siku</strong>.</p>
-                <p className="font-body text-sm text-white/80">• Rumus dasar: <InlineMath math="a^2 + b^2 = c^2"/> di mana <InlineMath math="c"/> adalah hipotenusa.</p>
-                <p className="font-body text-sm text-white/80">• Dibuktikan secara visual dengan <strong className="text-yellow-300">metode susunan persegi</strong> (4 segitiga identik dalam persegi besar).</p>
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• Teorema Pythagoras berlaku di <strong className="text-cyan-300">setiap segitiga siku-siku</strong>.</p>
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• Rumus dasar: <InlineMath math="a^2 + b^2 = c^2"/> di mana <InlineMath math="c"/> adalah hipotenusa.</p>
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• Dibuktikan secara visual dengan <strong className="text-yellow-300">metode susunan persegi</strong> (4 segitiga identik dalam persegi besar).</p>
                 <div className="border-t border-violet-500/20 pt-2 mt-2"/>
                 <p className="font-body text-xs font-bold text-cyan-300 uppercase mb-1">📏 Menghitung Panjang Sisi</p>
-                <p className="font-body text-sm text-white/80">• <strong className="text-orange-300">Mencari c²:</strong> <InlineMath math="c^2 = a^2 + b^2"/></p>
-                <p className="font-body text-sm text-white/80">• <strong className="text-blue-300">Mencari a²:</strong> <InlineMath math="a^2 = c^2 - b^2"/></p>
-                <p className="font-body text-sm text-white/80">• <strong className="text-green-300">Mencari b²:</strong> <InlineMath math="b^2 = c^2 - a^2"/></p>
-                <p className="font-body text-sm text-white/80">• Jawaban bisa berupa <strong className="text-cyan-300">bilangan bulat</strong> atau <strong className="text-yellow-300">bentuk akar</strong> — sederhanakan dengan mencari faktor kuadrat sempurna terbesar.</p>
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• <strong className="text-orange-300">Mencari c²:</strong> <InlineMath math="c^2 = a^2 + b^2"/></p>
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• <strong className="text-blue-300">Mencari a²:</strong> <InlineMath math="a^2 = c^2 - b^2"/></p>
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• <strong className="text-green-300">Mencari b²:</strong> <InlineMath math="b^2 = c^2 - a^2"/></p>
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• Jawaban bisa berupa <strong className="text-cyan-300">bilangan bulat</strong> atau <strong className="text-yellow-300">bentuk akar</strong> — sederhanakan dengan mencari faktor kuadrat sempurna terbesar.</p>
               </div>
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                 <p className="font-body text-sm text-yellow-200">
@@ -1169,14 +1171,14 @@ const PembuktianPage = () => {
             <div className="px-5 pb-5 space-y-4">
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 space-y-2">
                 <p className="font-body text-sm font-bold text-yellow-300">🎯 Mengapa Harus Dihafal?</p>
-                <p className="font-body text-sm text-white/80">
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>
                   Dalam soal Teorema Pythagoras, kita sering harus <strong className="text-cyan-300">mencari sisi yang tidak diketahui</strong> dengan cara mengakarkan bilangan.
                   Jika kamu hafal bilangan kuadrat 1–30, kamu bisa langsung tahu hasil akarnya <strong className="text-yellow-300">tanpa kalkulator</strong>!
                 </p>
-                <p className="font-body text-sm text-white/80">
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>
                   Contoh: jika <InlineMath math="c^2 = 169"/>, kamu langsung tahu <InlineMath math="c = 13"/> karena hafal <InlineMath math="13^2 = 169"/>. ✅
                 </p>
-                <p className="font-body text-sm text-white/80">
+                <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>
                   Manfaat lain: mempercepat perhitungan <strong className="text-pink-300">Triple Pythagoras</strong>, soal ANBK, UN, dan olimpiade matematika.
                 </p>
               </div>

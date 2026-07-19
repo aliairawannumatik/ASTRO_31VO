@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const translations = {
   id: {
@@ -165,7 +166,7 @@ const translations = {
 } as const;
 type Lang = keyof typeof translations;
 
-const RumusVariasiSVG = ({ texts }: { texts: { findC: string; findA: string; findB: string; title: string } }) => (
+const RumusVariasiSVG = ({ texts, isDark }: { texts: { findC: string; findA: string; findB: string; title: string }; isDark?: boolean }) => (
   <svg viewBox="0 0 340 230" className="w-full max-w-sm mx-auto my-2" aria-label="Pythagorean formula variations">
     <defs>
       <style>{`
@@ -184,7 +185,7 @@ const RumusVariasiSVG = ({ texts }: { texts: { findC: string; findA: string; fin
       <text x="5" y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">{texts.findC}</text>
       <text x="5" y="135" fill="#eab308" fontSize="8" fontFamily="monospace">c=√(a²+b²)</text>
     </g>
-    <line x1="115" y1="10" x2="115" y2="160" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
+    <line x1="115" y1="10" x2="115" y2="160" stroke={isDark ? "#334155" : "#e2e8f0"} strokeWidth="1" strokeDasharray="3 2"/>
     <g transform="translate(125,10)">
       <polygon points="10,100 90,100 10,20" fill="rgba(34,197,94,0.2)" stroke="#22c55e" strokeWidth="1.5"/>
       <polyline points="10,82 28,82 28,100" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2" opacity="0.6"/>
@@ -194,7 +195,7 @@ const RumusVariasiSVG = ({ texts }: { texts: { findC: string; findA: string; fin
       <text x="5" y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">{texts.findA}</text>
       <text x="5" y="135" fill="#eab308" fontSize="8" fontFamily="monospace">a=√(c²-b²)</text>
     </g>
-    <line x1="230" y1="10" x2="230" y2="160" stroke="#334155" strokeWidth="1" strokeDasharray="3 2"/>
+    <line x1="230" y1="10" x2="230" y2="160" stroke={isDark ? "#334155" : "#e2e8f0"} strokeWidth="1" strokeDasharray="3 2"/>
     <g transform="translate(240,10)">
       <polygon points="10,100 90,100 10,20" fill="rgba(249,115,22,0.2)" stroke="#f97316" strokeWidth="1.5"/>
       <polyline points="10,82 28,82 28,100" fill="none" stroke="var(--icon-stroke)" strokeWidth="1.2" opacity="0.6"/>
@@ -204,7 +205,7 @@ const RumusVariasiSVG = ({ texts }: { texts: { findC: string; findA: string; fin
       <text x="5" y="125" fill="#94a3b8" fontSize="8" fontFamily="monospace">{texts.findB}</text>
       <text x="5" y="135" fill="#eab308" fontSize="8" fontFamily="monospace">b=√(c²-a²)</text>
     </g>
-    <rect x="10" y="170" width="320" height="50" rx="8" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1"/>
+    <rect x="10" y="170" width="320" height="50" rx="8" fill={isDark ? "rgba(30,41,59,0.8)" : "rgba(241,245,249,0.95)"} stroke={isDark ? "#334155" : "#e2e8f0"} strokeWidth="1"/>
     <text x="170" y="187" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="monospace">{texts.title}</text>
     <text x="60" y="205" fill="#fb923c" fontSize="8" textAnchor="middle" fontFamily="monospace">c = √(a²+b²)</text>
     <text x="170" y="205" fill="#60a5fa" fontSize="8" textAnchor="middle" fontFamily="monospace">a = √(c²-b²)</text>
@@ -231,6 +232,7 @@ const HitungSVG = ({ a, b, c, cari }: { a: number; b: number; c: number; cari: "
 const MenghitungPanjangPage = () => {
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const { isDark } = useTheme();
   const t = translations[language as Lang];
   const [open, setOpen] = useState<string[]>(["intro","rumus","contoh1","contoh2","contoh3","rangkuman"]);
 
@@ -243,7 +245,7 @@ const MenghitungPanjangPage = () => {
     <button onClick={() => toggle(id)} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
       <div className="flex items-center gap-3">
         <span className={iconColor}>{icon}</span>
-        <span className="font-body font-semibold text-white">{title}</span>
+        <span className={`font-body font-semibold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</span>
       </div>
       {open.includes(id) ? <ChevronUp className="w-5 h-5 text-primary"/> : <ChevronDown className="w-5 h-5 text-primary"/>}
     </button>
@@ -269,15 +271,15 @@ const MenghitungPanjangPage = () => {
             <SectionHeader id="intro" icon={<Lightbulb className="w-5 h-5"/>} iconColor="text-yellow-400" title={t.sec_intro}/>
             {open.includes("intro") && (
               <div className="px-5 pb-5 space-y-4">
-                <p className="font-body text-sm text-white/80 leading-relaxed">
+                <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>
                   {language === 'id' && <>Dalam sebuah segitiga siku-siku, ada <strong className="text-cyan-300">tiga sisi</strong>: dua kaki (<InlineMath math="a"/> dan <InlineMath math="b"/>) dan satu hipotenusa (<InlineMath math="c"/>). Menggunakan Teorema Pythagoras, kita bisa mencari salah satu sisi <em>jika dua sisi lainnya diketahui</em>. Ada tiga skenario berbeda yang perlu kamu kuasai!</>}
                   {language === 'en' && <>In a right triangle, there are <strong className="text-cyan-300">three sides</strong>: two legs (<InlineMath math="a"/> and <InlineMath math="b"/>) and one hypotenuse (<InlineMath math="c"/>). Using the Pythagorean Theorem, we can find one side <em>if the other two are known</em>. There are three scenarios you need to master!</>}
                   {language === 'ja' && <>直角三角形には<strong className="text-cyan-300">3辺</strong>があります：2つの直角辺（<InlineMath math="a"/>と<InlineMath math="b"/>）と1つの斜辺（<InlineMath math="c"/>）。ピタゴラスの定理を使えば、他の2辺がわかれば1辺を求められます。3つのシナリオをマスターしましょう！</>}
                 </p>
-                <RumusVariasiSVG texts={svgTexts}/>
+                <RumusVariasiSVG texts={svgTexts} isDark={isDark}/>
                 <div className="bg-cyan-900/30 border border-cyan-500/30 rounded-xl p-4 space-y-2">
                   <p className="text-cyan-300 font-semibold text-sm">{t.threeVariants}</p>
-                  <div className="bg-slate-900/60 rounded-lg p-3 space-y-2">
+                  <div className={`${isDark ? "bg-slate-900/60" : "bg-gray-50"} rounded-lg p-3 space-y-2`}>
                     <div>
                       <BlockMath math="c = \sqrt{a^2 + b^2}"/>
                       <p className="text-center text-xs text-orange-300 -mt-2 mb-1">{t.findHyp}</p>
@@ -306,22 +308,22 @@ const MenghitungPanjangPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-cyan-300 mb-1">{t.rumusSummary}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">{t.rumusSummaryDesc}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80 leading-relaxed" : "font-body text-sm text-gray-700 leading-relaxed"}>{t.rumusSummaryDesc}</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.simplifyRoot}</p>
-                  <p className="font-body text-sm text-white/80">{t.simplifyRootDesc} <InlineMath math="\sqrt{72}"/></p>
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.simplifyRoot}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.simplifyRootDesc} <InlineMath math="\sqrt{72}"/></p>
                   <BlockMath math="\sqrt{72} = \sqrt{36 \times 2} = \sqrt{36} \times \sqrt{2} = 6\sqrt{2}"/>
-                  <p className="font-body text-sm text-white/80">{t.simplifyStep}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.simplifyStep}</p>
                   <div className="grid grid-cols-2 gap-2 text-xs font-body">
-                    <div className="bg-slate-700/50 rounded-lg p-2">
+                    <div className={isDark ? "bg-slate-700/50 rounded-lg p-2" : "bg-gray-50 rounded-lg p-2"}>
                       <p className="text-cyan-300 font-bold mb-1">{t.perfectSquares}</p>
-                      <p className="text-white/60"><InlineMath math="\sqrt{4}=2,\ \sqrt{9}=3,\ \sqrt{16}=4"/></p>
-                      <p className="text-white/60"><InlineMath math="\sqrt{25}=5,\ \sqrt{36}=6,\ \sqrt{49}=7"/></p>
+                      <p className={isDark ? "text-white/60" : "text-gray-500"}><InlineMath math="\sqrt{4}=2,\ \sqrt{9}=3,\ \sqrt{16}=4"/></p>
+                      <p className={isDark ? "text-white/60" : "text-gray-500"}><InlineMath math="\sqrt{25}=5,\ \sqrt{36}=6,\ \sqrt{49}=7"/></p>
                     </div>
-                    <div className="bg-slate-700/50 rounded-lg p-2">
+                    <div className={isDark ? "bg-slate-700/50 rounded-lg p-2" : "bg-gray-50 rounded-lg p-2"}>
                       <p className="text-yellow-300 font-bold mb-1">{t.tips}</p>
-                      <p className="text-white/60">{t.tipDesc} <InlineMath math="n\sqrt{k}"/>.</p>
+                      <p className={isDark ? "text-white/60" : "text-gray-500"}>{t.tipDesc} <InlineMath math="n\sqrt{k}"/>.</p>
                     </div>
                   </div>
                 </div>
@@ -336,11 +338,11 @@ const MenghitungPanjangPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-4">
                   <p className="text-green-300 font-bold text-xs uppercase tracking-wide mb-2">{t.easy}</p>
-                  <p className="font-body text-sm text-white/90">{t.c1Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c1Problem}</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>
                     {language === 'id' && <>Diketahui: <InlineMath math="a = 6"/> m (jarak kaki tangga), <InlineMath math="b = 8"/> m (tinggi tembok). Dicari: <InlineMath math="c"/> (panjang tangga).</>}
                     {language === 'en' && <>Given: <InlineMath math="a = 6"/> m (distance of ladder foot), <InlineMath math="b = 8"/> m (wall height). Find: <InlineMath math="c"/> (ladder length).</>}
                     {language === 'ja' && <>与えられた値：<InlineMath math="a = 6"/> m（はしごの足の距離）、<InlineMath math="b = 8"/> m（壁の高さ）。求めるもの：<InlineMath math="c"/>（はしごの長さ）。</>}
@@ -364,11 +366,11 @@ const MenghitungPanjangPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-yellow-900/30 border border-yellow-500/40 rounded-xl p-4">
                   <p className="text-yellow-300 font-bold text-xs uppercase tracking-wide mb-2">{t.medium}</p>
-                  <p className="font-body text-sm text-white/90">{t.c2Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c2Problem}</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>
                     {language === 'id' && <>Diketahui: <InlineMath math="c = 13"/> m, <InlineMath math="b = 5"/> m. Dicari: <InlineMath math="a"/> (tinggi layar).</>}
                     {language === 'en' && <>Given: <InlineMath math="c = 13"/> m, <InlineMath math="b = 5"/> m. Find: <InlineMath math="a"/> (height of the sail).</>}
                     {language === 'ja' && <>与えられた値：<InlineMath math="c = 13"/> m、<InlineMath math="b = 5"/> m。求めるもの：<InlineMath math="a"/>（帆の高さ）。</>}
@@ -391,16 +393,16 @@ const MenghitungPanjangPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-4">
                   <p className="text-red-300 font-bold text-xs uppercase tracking-wide mb-2">{t.hard}</p>
-                  <p className="font-body text-sm text-white/90">{t.c3Problem}</p>
+                  <p className={isDark ? "font-body text-sm text-white/90" : "font-body text-sm text-gray-800"}>{t.c3Problem}</p>
                 </div>
-                <div className="bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3">
-                  <p className="font-body text-xs font-bold text-slate-300 uppercase tracking-wide">{t.discussion}</p>
-                  <p className="font-body text-sm text-white/80">
+                <div className={isDark ? "bg-slate-800/60 border border-slate-600 rounded-xl p-4 space-y-3" : "bg-gray-100 border border-gray-200 rounded-xl p-4 space-y-3"}>
+                  <p className={isDark ? "font-body text-xs font-bold text-slate-300 uppercase tracking-wide" : "font-body text-xs font-bold text-gray-600 uppercase tracking-wide"}>{t.discussion}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>
                     {t.c3Desc} <InlineMath math="a = 7"/> m {language === 'id' ? 'dan' : language === 'ja' ? 'と' : 'and'} <InlineMath math="b = 9"/> m.
                   </p>
                   <BlockMath math="c = \sqrt{a^2 + b^2} = \sqrt{7^2 + 9^2}"/>
                   <BlockMath math="c = \sqrt{49 + 81} = \sqrt{130}"/>
-                  <p className="font-body text-sm text-white/80">{t.c3Factor}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.c3Factor}</p>
                   <div className="bg-red-900/30 border border-red-500/40 rounded-lg p-3">
                     <BlockMath math="c = \sqrt{130} \approx 11{,}40 \text{ m}"/>
                     <p className="font-body text-sm text-red-200 text-center mt-1">
@@ -418,11 +420,11 @@ const MenghitungPanjangPage = () => {
             {open.includes("rangkuman") && (
               <div className="px-5 pb-5 space-y-3">
                 <div className="bg-violet-900/30 border border-violet-500/30 rounded-xl p-4 space-y-2">
-                  <p className="font-body text-sm text-white/80">• <strong className="text-orange-300">{t.r1}</strong> <InlineMath math="c = \sqrt{a^2 + b^2}"/></p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-blue-300">{t.r2}</strong> <InlineMath math="a = \sqrt{c^2 - b^2}"/></p>
-                  <p className="font-body text-sm text-white/80">• <strong className="text-green-300">{t.r3}</strong> <InlineMath math="b = \sqrt{c^2 - a^2}"/></p>
-                  <p className="font-body text-sm text-white/80">{t.r4}</p>
-                  <p className="font-body text-sm text-white/80">{t.r5}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• <strong className="text-orange-300">{t.r1}</strong> <InlineMath math="c = \sqrt{a^2 + b^2}"/></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• <strong className="text-blue-300">{t.r2}</strong> <InlineMath math="a = \sqrt{c^2 - b^2}"/></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>• <strong className="text-green-300">{t.r3}</strong> <InlineMath math="b = \sqrt{c^2 - a^2}"/></p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.r4}</p>
+                  <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{t.r5}</p>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
                   <p className="font-body text-sm text-yellow-200">
