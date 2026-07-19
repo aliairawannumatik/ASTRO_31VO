@@ -1898,7 +1898,7 @@ const LimasPage = () => {
   const luasExamples: Ex[] = [
     {
       level: t.easy,
-      color:"text-green-400", bg:"bg-green-950/30", border:"border-green-700/50", badgeBg:"bg-green-900/60",
+      color:"text-green-400", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100",
       question: (
         <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
@@ -1918,7 +1918,7 @@ const LimasPage = () => {
             <BlockMath math="L = 100 + 260 = 360\text{ cm}^2"/>
           </div>
           <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-3" : "bg-green-50 border border-green-300/60 rounded p-3"}>
-            <p className="text-green-300 font-semibold">✅ {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"} = <InlineMath math="360\text{ cm}^2"/></p>
+            <p className={isDark ? "text-green-300 font-semibold" : "text-green-700 font-semibold"}>✅ {lang === "en" ? "Surface area" : lang === "ja" ? "表面積" : "Luas permukaan"} = <InlineMath math="360\text{ cm}^2"/></p>
           </div>
         </div>
       ),
@@ -1950,14 +1950,14 @@ const LimasPage = () => {
             <BlockMath math="L = 144 + 240 = 384\text{ cm}^2"/>
           </div>
           <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-3" : "bg-yellow-50 border border-yellow-300/60 rounded p-3"}>
-            <p className="text-yellow-300 font-semibold text-sm">✅ <InlineMath math="l = 10\text{ cm}"/>, <InlineMath math="L = 384\text{ cm}^2"/></p>
+            <p className={isDark ? "text-yellow-300 font-semibold text-sm" : "text-yellow-700 font-semibold text-sm"}>✅ <InlineMath math="l = 10\text{ cm}"/>, <InlineMath math="L = 384\text{ cm}^2"/></p>
           </div>
         </div>
       ),
     },
     {
       level: t.hard,
-      color:"text-red-400", bg:"bg-red-950/30", border:"border-red-700/50", badgeBg:"bg-red-900/60",
+      color:"text-red-400", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100",
       question: (
         <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
@@ -1986,7 +1986,7 @@ const LimasPage = () => {
               : <BlockMath math="\text{Biaya} = 15 \times 85.000 = Rp\,1.275.000"/>}
           </div>
           <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300/60 rounded p-3 text-xs space-y-0.5"}>
-            <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
+            <p className={isDark ? "text-red-300 font-semibold" : "text-red-700 font-semibold"}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Apothem" : lang === "ja" ? "斜高" : "Apotema"} = 2,5 m</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Fabric area" : lang === "ja" ? "布の面積" : "Luas kain"} = 15 m²</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Total cost" : lang === "ja" ? "合計費用" : "Total biaya"} = <strong className="text-yellow-300">{lang === "en" || lang === "ja" ? "$1,275,000" : "Rp 1.275.000"}</strong></p>
@@ -1999,7 +1999,7 @@ const LimasPage = () => {
   const volExamples: Ex[] = [
     {
       level: t.easy,
-      color:"text-green-400", bg:"bg-green-950/30", border:"border-green-700/50", badgeBg:"bg-green-900/60",
+      color:"text-green-400", bg: isDark ? "bg-green-950/30" : "bg-green-50", border: isDark ? "border-green-700/50" : "border-green-300", badgeBg: isDark ? "bg-green-900/60" : "bg-green-100",
       question: (
         <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
@@ -2017,7 +2017,7 @@ const LimasPage = () => {
             <BlockMath math="V = \frac{1}{3} \times s^2 \times t = \frac{1}{3} \times 6^2 \times 8 = \frac{1}{3} \times 36 \times 8 = 96\text{ cm}^3"/>
           </div>
           <div className={isDark ? "bg-green-950/60 border border-green-700/40 rounded p-2" : "bg-green-50 border border-green-300/60 rounded p-2"}>
-            <p className="text-green-300 font-semibold text-xs">✅ {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} = <InlineMath math="96\text{ cm}^3"/></p>
+            <p className={isDark ? "text-green-300 font-semibold text-xs" : "text-green-700 font-semibold text-xs"}>✅ {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} = <InlineMath math="96\text{ cm}^3"/></p>
           </div>
         </div>
       ),
@@ -2050,14 +2050,14 @@ const LimasPage = () => {
             <BlockMath math="L = 48 + 80\sqrt{3} \approx 186{,}6\text{ cm}^2"/>
           </div>
           <div className={isDark ? "bg-yellow-950/60 border border-yellow-700/40 rounded p-2" : "bg-yellow-50 border border-yellow-300/60 rounded p-2"}>
-            <p className="text-yellow-300 font-semibold text-xs">✅ <InlineMath math="s = 4\sqrt{3}\text{ cm}"/>, <InlineMath math="L \approx 186{,}6\text{ cm}^2"/></p>
+            <p className={isDark ? "text-yellow-300 font-semibold text-xs" : "text-yellow-700 font-semibold text-xs"}>✅ <InlineMath math="s = 4\sqrt{3}\text{ cm}"/>, <InlineMath math="L \approx 186{,}6\text{ cm}^2"/></p>
           </div>
         </div>
       ),
     },
     {
       level: t.hard,
-      color:"text-red-400", bg:"bg-red-950/30", border:"border-red-700/50", badgeBg:"bg-red-900/60",
+      color:"text-red-400", bg: isDark ? "bg-red-950/30" : "bg-red-50", border: isDark ? "border-red-700/50" : "border-red-300", badgeBg: isDark ? "bg-red-900/60" : "bg-red-100",
       question: (
         <div className={isDark ? "text-sm text-white/85 font-body space-y-1" : "text-sm text-slate-800 font-body space-y-1"}>
           <p>
@@ -2085,7 +2085,7 @@ const LimasPage = () => {
             <BlockMath math="m = 274{,}6 \times 2{,}5 \approx 686{,}5\text{ gram}"/>
           </div>
           <div className={isDark ? "bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5" : "bg-red-50 border border-red-300/60 rounded p-3 text-xs space-y-0.5"}>
-            <p className="text-red-300 font-semibold">✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
+            <p className={isDark ? "text-red-300 font-semibold" : "text-red-700 font-semibold"}>✅ {lang === "en" ? "Answer:" : lang === "ja" ? "答え:" : "Jawaban:"}</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Height" : lang === "ja" ? "高さ" : "Tinggi"} ≈ 10,17 cm</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Volume" : lang === "ja" ? "体積" : "Volume"} ≈ 274,6 cm³</p>
             <p className={isDark ? "text-white/80" : "text-slate-700"}>• {lang === "en" ? "Weight" : lang === "ja" ? "重さ" : "Berat"} ≈ <strong className="text-yellow-300">686,5 gram</strong></p>
