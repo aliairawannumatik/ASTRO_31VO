@@ -155,13 +155,9 @@ const UrutanOperasi = () => {
 
 const materiSections: MateriSection[] = [
   {
-    heading: "A. Ragam Jenis Bilangan",
-    content: `Dalam matematika, bilangan dikelompokkan menjadi beberapa jenis berikut:\n- **Bilangan cacah** — ditulis sebagai himpunan $\\{0, 1, 2, 3, 4, 5, ...\\}$\n- **Bilangan asli** — ditulis sebagai himpunan $\\{1, 2, 3, 4, 5, ...\\}$\n- **Bilangan bulat negatif** — ditulis sebagai himpunan $\\{..., -4, -3, -2, -1\\}$\n- **Bilangan bulat** — mencakup semua bilangan bulat negatif, nol, dan positif: $\\{..., -4, -3, -2, -1, 0, 1, 2, 3, 4, ...\\}$\n- **Bilangan rasional** — setiap bilangan yang dapat dinyatakan dalam bentuk $\\frac{a}{b}$, di mana $a$ dan $b$ adalah bilangan bulat serta $b \\neq 0$\n- **Bilangan irasional** — bilangan yang tidak bisa dinyatakan dalam bentuk $\\frac{a}{b}$ dengan $b \\neq 0$ (contoh: $\\sqrt{2}$, $\\pi$)`
-  },
-  {
-    heading: "B. Bilangan Bulat dan Garis Bilangan",
-    content: `Bilangan bulat adalah gabungan dari bilangan bulat positif, nol, dan bilangan bulat negatif. Ketiga kelompok ini dapat digambarkan pada sebuah garis bilangan.\n\n- **Bilangan bulat positif** — nilainya lebih dari 0; terletak di sisi kanan angka 0 pada garis bilangan\n- **Bilangan bulat negatif** — nilainya kurang dari 0; terletak di sisi kiri angka 0 pada garis bilangan\n- **Nol (0)** — disebut bilangan netral karena bukan positif maupun negatif\n\n> Bilangan asli = bilangan bulat positif. Bilangan cacah = bilangan bulat positif + nol.`,
-    jsx: <GarisBilangan />,
+    heading: "A. Ragam Jenis Bilangan & Garis Bilangan",
+    content: `Dalam matematika, bilangan dikelompokkan menjadi beberapa jenis berikut:\n- **Bilangan cacah** — ditulis sebagai himpunan $\\{0, 1, 2, 3, 4, 5, ...\\}$\n- **Bilangan asli** — ditulis sebagai himpunan $\\{1, 2, 3, 4, 5, ...\\}$\n- **Bilangan bulat negatif** — ditulis sebagai himpunan $\\{..., -4, -3, -2, -1\\}$\n- **Bilangan bulat** — mencakup semua bilangan bulat negatif, nol, dan positif: $\\{..., -4, -3, -2, -1, 0, 1, 2, 3, 4, ...\\}$\n- **Bilangan rasional** — setiap bilangan yang dapat dinyatakan dalam bentuk $\\frac{a}{b}$, di mana $a$ dan $b$ adalah bilangan bulat serta $b \\neq 0$\n- **Bilangan irasional** — bilangan yang tidak bisa dinyatakan dalam bentuk $\\frac{a}{b}$ dengan $b \\neq 0$ (contoh: $\\sqrt{2}$, $\\pi$)\n\nBilangan bulat dapat divisualisasikan pada garis bilangan berikut:`,
+    jsxAfter: <GarisBilangan />,
   },
   {
     heading: "C. Membandingkan Bilangan Bulat",
