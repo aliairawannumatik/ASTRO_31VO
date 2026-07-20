@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -95,7 +96,7 @@ const SoalQ3 = () => {
 };
 
 const SoalQ4 = () => (
-  <svg viewBox="0 0 370 275" className="w-full max-w-sm mx-auto lm-kkg-svg" style={{background:"rgba(15,23,42,0.5)", borderRadius:8}}>
+  <svg viewBox="0 0 370 275" className="w-full max-w-sm mx-auto lm-kkg-svg" style={{background:"var(--card)", borderRadius:8}}>
     <defs>
       <linearGradient id="q4WaterGrad" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.75"/>
@@ -349,22 +350,22 @@ const SoalQ8 = () => {
       <polygon points={arrowDiag(gfAx,gfAy,ux,uy)} fill="#fde68a"/>
 
       {/* Dots — all same color */}
-      <circle cx={A.x} cy={A.y} r="3.5" fill="#e2e8f0"/>
-      <circle cx={B.x} cy={B.y} r="3.5" fill="#e2e8f0"/>
-      <circle cx={D.x} cy={D.y} r="3.5" fill="#e2e8f0"/>
-      <circle cx={F.x} cy={F.y} r="3.5" fill="#e2e8f0"/>
-      <circle cx={G.x} cy={G.y} r="3.5" fill="#e2e8f0"/>
-      <circle cx={E.x} cy={E.y} r="3"   fill="#e2e8f0"/>
-      <circle cx={C.x} cy={C.y} r="3.5" fill="#e2e8f0"/>
+      <circle cx={A.x} cy={A.y} r="3.5" fill="var(--card-foreground)"/>
+      <circle cx={B.x} cy={B.y} r="3.5" fill="var(--card-foreground)"/>
+      <circle cx={D.x} cy={D.y} r="3.5" fill="var(--card-foreground)"/>
+      <circle cx={F.x} cy={F.y} r="3.5" fill="var(--card-foreground)"/>
+      <circle cx={G.x} cy={G.y} r="3.5" fill="var(--card-foreground)"/>
+      <circle cx={E.x} cy={E.y} r="3"   fill="var(--card-foreground)"/>
+      <circle cx={C.x} cy={C.y} r="3.5" fill="var(--card-foreground)"/>
 
       {/* Point labels — all same color */}
-      <text x={A.x-16} y={A.y+5}  fontSize="13" fill="#e2e8f0" fontWeight="bold">A</text>
-      <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="#e2e8f0" fontWeight="bold">B</text>
-      <text x={D.x-5}  y={D.y-8}  fontSize="13" fill="#e2e8f0" fontWeight="bold">D</text>
-      <text x={F.x+4}  y={F.y+5}  fontSize="13" fill="#e2e8f0" fontWeight="bold">F</text>
-      <text x={G.x+4}  y={G.y-4}  fontSize="13" fill="#e2e8f0" fontWeight="bold">G</text>
-      <text x={E.x+4}  y={E.y-6}  fontSize="11" fill="#e2e8f0" fontWeight="bold">E</text>
-      <text x={C.x-18} y={C.y+5}  fontSize="13" fill="#e2e8f0" fontWeight="bold">C</text>
+      <text x={A.x-16} y={A.y+5}  fontSize="13" fill="var(--card-foreground)" fontWeight="bold">A</text>
+      <text x={B.x+4}  y={B.y+5}  fontSize="13" fill="var(--card-foreground)" fontWeight="bold">B</text>
+      <text x={D.x-5}  y={D.y-8}  fontSize="13" fill="var(--card-foreground)" fontWeight="bold">D</text>
+      <text x={F.x+4}  y={F.y+5}  fontSize="13" fill="var(--card-foreground)" fontWeight="bold">F</text>
+      <text x={G.x+4}  y={G.y-4}  fontSize="13" fill="var(--card-foreground)" fontWeight="bold">G</text>
+      <text x={E.x+4}  y={E.y-6}  fontSize="11" fill="var(--card-foreground)" fontWeight="bold">E</text>
+      <text x={C.x-18} y={C.y+5}  fontSize="13" fill="var(--card-foreground)" fontWeight="bold">C</text>
     </svg>
   );
 };
@@ -470,7 +471,7 @@ const SoalQ7New = () => {
   const midBE = { x: Math.round((B.x+E.x)/2), y: Math.round((B.y+E.y)/2) };
 
   return (
-    <svg viewBox="0 0 320 225" className="w-full max-w-sm mx-auto lm-kkg-svg" style={{ background:"rgba(15,23,42,0.6)", borderRadius:8 }}>
+    <svg viewBox="0 0 320 225" className="w-full max-w-sm mx-auto lm-kkg-svg" style={{ background:"var(--card)", borderRadius:8 }}>
       {/* Main triangle ABC */}
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
         fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1.8"/>
@@ -509,14 +510,14 @@ const SoalQ7New = () => {
 };
 
 const Q1TriSTSVG = () => (
-  <svg viewBox="0 0 320 140" width="310" height="135" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 320 140" width="310" height="135" className="lm-kkg-svg" style={{ background: "var(--card)", borderRadius: 8 }}>
     <polygon points="160,15 20,115 300,115" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
     <line x1="104" y1="55" x2="216" y2="55" stroke="#c084fc" strokeWidth="1.8"/>
-    <text x="155" y="11" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">R</text>
-    <text x="6" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">P</text>
-    <text x="302" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">Q</text>
-    <text x="88" y="53" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">S</text>
-    <text x="219" y="53" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">T</text>
+    <text x="155" y="11" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">R</text>
+    <text x="6" y="122" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">P</text>
+    <text x="302" y="122" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">Q</text>
+    <text x="88" y="53" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">S</text>
+    <text x="219" y="53" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">T</text>
     <text x="78" y="32" fill="#c084fc" fontSize="10" fontWeight="bold">RS = 4 cm</text>
     <text x="10" y="82" fill="#c084fc" fontSize="10" fontWeight="bold">SP = 6 cm</text>
     <text x="143" y="131" fill="#fbbf24" fontSize="10" fontWeight="bold">PQ = 20 cm</text>
@@ -525,14 +526,14 @@ const Q1TriSTSVG = () => (
 );
 
 const Q2TriDESVG = () => (
-  <svg viewBox="0 0 320 140" width="310" height="135" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 320 140" width="310" height="135" className="lm-kkg-svg" style={{ background: "var(--card)", borderRadius: 8 }}>
     <polygon points="160,15 20,120 300,120" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
     <line x1="113" y1="50" x2="207" y2="50" stroke="#c084fc" strokeWidth="1.8"/>
-    <text x="155" y="11" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
-    <text x="6" y="127" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
-    <text x="302" y="127" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
-    <text x="96" y="48" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
-    <text x="210" y="48" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">E</text>
+    <text x="155" y="11" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
+    <text x="6" y="127" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
+    <text x="302" y="127" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
+    <text x="96" y="48" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
+    <text x="210" y="48" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">E</text>
     <text x="102" y="28" fill="#c084fc" fontSize="10" fontWeight="bold">AD = 5 cm</text>
     <text x="10" y="80" fill="#c084fc" fontSize="10" fontWeight="bold">DB = 10 cm</text>
     <text x="136" y="44" fill="#fbbf24" fontSize="10" fontWeight="bold">DE = 7 cm</text>
@@ -541,18 +542,18 @@ const Q2TriDESVG = () => (
 );
 
 const Q3CrossLinesSVG = () => (
-  <svg viewBox="0 0 270 160" width="265" height="155" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 270 160" width="265" height="155" className="lm-kkg-svg" style={{ background: "var(--card)", borderRadius: 8 }}>
     <polygon points="136,21 215,10 170,55" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" strokeWidth="1.2"/>
     <polygon points="221,106 170,55 102,123" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" strokeWidth="1.2"/>
     <line x1="136" y1="21" x2="221" y2="106" stroke="#a78bfa" strokeWidth="1.5"/>
     <line x1="215" y1="10" x2="102" y2="123" stroke="#7c3aed" strokeWidth="1.5"/>
     <line x1="136" y1="21" x2="215" y2="10" stroke="#c084fc" strokeWidth="1.3"/>
     <line x1="221" y1="106" x2="102" y2="123" stroke="#c084fc" strokeWidth="1.3"/>
-    <text x="122" y="18" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
-    <text x="218" y="8" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
-    <text x="173" y="68" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">O</text>
-    <text x="225" y="112" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
-    <text x="88" y="128" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
+    <text x="122" y="18" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
+    <text x="218" y="8" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
+    <text x="173" y="68" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">O</text>
+    <text x="225" y="112" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
+    <text x="88" y="128" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
     <text x="98" y="38" fill="#c084fc" fontSize="10" fontWeight="bold">OA = 6 cm</text>
     <text x="198" y="28" fill="#fbbf24" fontSize="10" fontWeight="bold">OB = x</text>
     <text x="215" y="86" fill="#c084fc" fontSize="10" fontWeight="bold">OC = 9 cm</text>
@@ -561,14 +562,14 @@ const Q3CrossLinesSVG = () => (
 );
 
 const Q4TriRTSVG = () => (
-  <svg viewBox="0 0 320 140" width="310" height="135" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 320 140" width="310" height="135" className="lm-kkg-svg" style={{ background: "var(--card)", borderRadius: 8 }}>
     <polygon points="160,15 20,120 300,120" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
     <line x1="113" y1="50" x2="207" y2="50" stroke="#c084fc" strokeWidth="1.8"/>
-    <text x="155" y="11" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">P</text>
-    <text x="6" y="127" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">Q</text>
-    <text x="302" y="127" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">S</text>
-    <text x="96" y="48" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">R</text>
-    <text x="210" y="48" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">T</text>
+    <text x="155" y="11" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">P</text>
+    <text x="6" y="127" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">Q</text>
+    <text x="302" y="127" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">S</text>
+    <text x="96" y="48" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">R</text>
+    <text x="210" y="48" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">T</text>
     <text x="103" y="28" fill="#c084fc" fontSize="10" fontWeight="bold">PR = 5 cm</text>
     <text x="10" y="80" fill="#c084fc" fontSize="10" fontWeight="bold">RQ = 10 cm</text>
     <text x="136" y="44" fill="#fb923c" fontSize="10" fontWeight="bold">RT = ?</text>
@@ -577,14 +578,14 @@ const Q4TriRTSVG = () => (
 );
 
 const Q6TriDE2SVG = () => (
-  <svg viewBox="0 0 320 140" width="310" height="135" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 320 140" width="310" height="135" className="lm-kkg-svg" style={{ background: "var(--card)", borderRadius: 8 }}>
     <polygon points="160,15 20,115 300,115" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
     <line x1="104" y1="57" x2="216" y2="57" stroke="#c084fc" strokeWidth="1.8"/>
-    <text x="155" y="11" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
-    <text x="6" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
-    <text x="302" y="122" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
-    <text x="87" y="55" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
-    <text x="219" y="55" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">E</text>
+    <text x="155" y="11" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">A</text>
+    <text x="6" y="122" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">B</text>
+    <text x="302" y="122" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">C</text>
+    <text x="87" y="55" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">D</text>
+    <text x="219" y="55" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">E</text>
     <text x="85" y="33" fill="#c084fc" fontSize="10" fontWeight="bold">AD = 16 cm</text>
     <text x="10" y="85" fill="#c084fc" fontSize="10" fontWeight="bold">DB = 24 cm</text>
     <text x="133" y="51" fill="#fbbf24" fontSize="10" fontWeight="bold">DE = 18 cm</text>
@@ -606,7 +607,7 @@ const SoalQ11Parallel = () => {
   const midBC = { x: (B.x+C.x)/2,  y: B.y  };
   const arrow = 5;
   return (
-    <svg viewBox="0 0 310 215" className="w-full max-w-sm mx-auto lm-kkg-svg" style={{ background:"rgba(15,23,42,0.6)", borderRadius:8 }}>
+    <svg viewBox="0 0 310 215" className="w-full max-w-sm mx-auto lm-kkg-svg" style={{ background:"var(--card)", borderRadius:8 }}>
       <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`}
         fill="#3b82f6" fillOpacity="0.08" stroke="#60a5fa" strokeWidth="1.8"/>
       {/* PQ line */}
@@ -641,15 +642,15 @@ const SoalQ11Parallel = () => {
 };
 
 const Q10TrapSVG = () => (
-  <svg viewBox="0 0 265 140" width="258" height="135" className="lm-kkg-svg" style={{ background: "rgba(15,23,42,0.6)", borderRadius: 8 }}>
+  <svg viewBox="0 0 265 140" width="258" height="135" className="lm-kkg-svg" style={{ background: "var(--card)", borderRadius: 8 }}>
     <polygon points="60,20 200,20 240,120 20,120" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" strokeWidth="1.5"/>
     <line x1="36" y1="80" x2="224" y2="80" stroke="#c084fc" strokeWidth="1.8"/>
-    <text x="48" y="16" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">P</text>
-    <text x="202" y="16" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">Q</text>
-    <text x="242" y="125" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">S</text>
-    <text x="5" y="125" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">R</text>
-    <text x="22" y="78" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">E</text>
-    <text x="228" y="78" fill="#e2e8f0" fontSize="11" fontStyle="italic" fontFamily="serif">F</text>
+    <text x="48" y="16" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">P</text>
+    <text x="202" y="16" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">Q</text>
+    <text x="242" y="125" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">S</text>
+    <text x="5" y="125" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">R</text>
+    <text x="22" y="78" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">E</text>
+    <text x="228" y="78" fill="var(--card-foreground)" fontSize="11" fontStyle="italic" fontFamily="serif">F</text>
     <text x="105" y="14" fill="#fbbf24" fontSize="10" fontWeight="bold">PQ = 8 cm</text>
     <text x="105" y="135" fill="#fbbf24" fontSize="10" fontWeight="bold">RS = 18 cm</text>
     <text x="108" y="74" fill="#fb923c" fontSize="11" fontWeight="bold">EF = ?</text>
@@ -806,6 +807,7 @@ const questions: Q[] = [
 const SegitigaSebangunPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -819,14 +821,14 @@ const SegitigaSebangunPage = () => {
             style={{ textShadow: '0 0 20px rgba(167,139,250,0.7)' }}>
             SEGITIGA-SEGITIGA YANG SEBANGUN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 9 · Kesebangunan & Kekongruenan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
             <span className="text-violet-400 text-xs font-bold">📋 14 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
-        <div className="mb-5 bg-violet-900/20 border border-violet-500/20 rounded-xl p-4 lm-kkg-hint">
+        <div className={`mb-5 ${isDark ? "bg-violet-900/20" : "bg-violet-50"} border border-violet-500/20 rounded-xl p-4 lm-kkg-hint`}>
           <p className="text-violet-300 text-xs font-bold mb-2">📌 Tiga Syarat Kesebangunan Segitiga</p>
           <div className="grid grid-cols-3 gap-2 text-xs">
             {[
@@ -834,9 +836,9 @@ const SegitigaSebangunPage = () => {
               { name: "SAS", desc: "Dua sisi sebanding & sudut apitnya sama" },
               { name: "SSS", desc: "Tiga pasang sisi sebanding" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-2 py-2 text-center">
+              <div key={r.name} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-2 py-2 text-center`}>
                 <p className="text-violet-300 font-bold text-sm mb-1">{r.name}</p>
-                <p className="text-white/50 text-[9px]">{r.desc}</p>
+                <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-[9px]`}>{r.desc}</p>
               </div>
             ))}
           </div>
@@ -845,7 +847,7 @@ const SegitigaSebangunPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-slate-900/80 to-purple-900/30 backdrop-blur lm-kkg-overlay" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-violet-900/30 via-slate-900/80 to-purple-900/30" : "from-violet-50/60 via-white/80 to-purple-50/40"} backdrop-blur lm-kkg-overlay`} />
               <div className="absolute inset-0 border border-violet-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-violet-400 to-purple-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -855,23 +857,23 @@ const SegitigaSebangunPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-violet-400 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.contentNode && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.contentNode}</p>}
-                    {!q.contentNode && q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                    {q.contentNode && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-3`}>{q.contentNode}</p>}
+                    {!q.contentNode && q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-3`}>{q.content}</p>}
                     {q.diagram && <div className="mb-3 flex justify-center rounded-xl overflow-hidden">{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? (isDark ? 'bg-white/5' : 'bg-gray-50') : 'bg-transparent px-0'}`}>
                             {p.label && <span className="text-violet-400 text-xs font-bold shrink-0 mt-0.5">{p.label}</span>}
                             <div className="flex-1">
-                              {p.text && <p className="font-body text-sm text-white/80 leading-relaxed">{p.text}</p>}
-                              {p.math && <div className="text-white/80 text-sm mt-0.5"><InlineMath math={p.math} /></div>}
+                              {p.text && <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} leading-relaxed`}>{p.text}</p>}
+                              {p.math && <div className={`${isDark ? "text-white/80" : "text-gray-700"} text-sm mt-0.5`}><InlineMath math={p.math} /></div>}
                             </div>
                           </div>
                         ))}
                       </div>
                     )}
-                    {q.math && !q.parts && <div className="mt-2 bg-white/5 rounded-lg px-3 py-2"><BlockMath math={q.math} /></div>}
+                    {q.math && !q.parts && <div className={`mt-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}><BlockMath math={q.math} /></div>}
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -11,7 +12,7 @@ const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, 
 
 const TabelSkorSeni = () => (
   <svg width="340" height="158" viewBox="0 0 280 130" className="mx-auto">
-    <rect x="4" y="4" width="272" height="122" rx="10" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5" />
+    <rect x="4" y="4" width="272" height="122" rx="10" fill="var(--card)" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5" />
     <text x="140" y="18" fill="#93c5fd" fontSize="10" textAnchor="middle" fontWeight="bold">Tabel Skor Karya Seni</text>
     <rect x="10" y="23" width="260" height="16" rx="3" fill="#1d4ed8" fillOpacity="0.35" />
     <text x="80" y="34" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Skor (xᵢ)</text>
@@ -19,7 +20,7 @@ const TabelSkorSeni = () => (
     {[["5","2"],["6","5"],["7","8"],["8","9"],["9","5"],["10","1"]].map(([x,f],i) => (
       <g key={i}>
         <rect x="10" y={40+i*14} width="260" height="13" fill={i%2===0?"#1e3a5f":"transparent"} fillOpacity="0.3"/>
-        <text x="80" y={50+i*14} fill="#bfdbfe" fontSize="9" textAnchor="middle">{x}</text>
+        <text x="80" y={50+i*14} fill="var(--card-foreground)" fontSize="9" textAnchor="middle">{x}</text>
         <text x="200" y={50+i*14} fill="#60a5fa" fontSize="9" textAnchor="middle">{f}</text>
       </g>
     ))}
@@ -28,7 +29,7 @@ const TabelSkorSeni = () => (
 
 const TabelKuis = () => (
   <svg width="340" height="140" viewBox="0 0 280 115" className="mx-auto">
-    <rect x="4" y="4" width="272" height="107" rx="10" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5" />
+    <rect x="4" y="4" width="272" height="107" rx="10" fill="var(--card)" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5" />
     <text x="140" y="18" fill="#93c5fd" fontSize="10" textAnchor="middle" fontWeight="bold">Tabel Nilai Kuis Matematika</text>
     <rect x="10" y="23" width="260" height="16" rx="3" fill="#1d4ed8" fillOpacity="0.35" />
     <text x="80" y="34" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Nilai (xᵢ)</text>
@@ -36,7 +37,7 @@ const TabelKuis = () => (
     {[["6","x"],["7","8"],["8","5"],["9","4"],["10","3"]].map(([x,f],i) => (
       <g key={i}>
         <rect x="10" y={40+i*14} width="260" height="13" fill={i%2===0?"#1e3a5f":"transparent"} fillOpacity="0.3"/>
-        <text x="80" y={50+i*14} fill="#bfdbfe" fontSize="9" textAnchor="middle">{x}</text>
+        <text x="80" y={50+i*14} fill="var(--card-foreground)" fontSize="9" textAnchor="middle">{x}</text>
         <text x="200" y={50+i*14} fill={f==="x"?"#fbbf24":"#60a5fa"} fontSize="9" textAnchor="middle" fontWeight={f==="x"?"bold":"normal"}>{f}</text>
       </g>
     ))}
@@ -50,15 +51,15 @@ const questions: Q[] = [
   Qn(2, "Banyak Siswa di Atas Rata-Rata – UN", {
     diagram: (() => (
       <svg width="360" height="76" viewBox="0 0 360 76" className="mx-auto">
-        <rect x="4" y="4" width="352" height="68" rx="10" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
+        <rect x="4" y="4" width="352" height="68" rx="10" fill="var(--card)" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
         <text x="180" y="17" fill="#93c5fd" fontSize="10" textAnchor="middle" fontWeight="bold">Tabel Nilai Ulangan Harian</text>
         <rect x="10" y="22" width="340" height="17" rx="3" fill="#1d4ed8" fillOpacity="0.35"/>
         <text x="65" y="34" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Nilai</text>
         {[["137","3"],["172","4"],["207","5"],["242","6"],["277","7"],["312","8"],["347","9"]].map(([cx,v],i) => (
           <text key={i} x={Number(cx)} y="34" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">{v}</text>
         ))}
-        <rect x="10" y="39" width="340" height="17" fill="#1e3a5f" fillOpacity="0.25"/>
-        <text x="65" y="51" fill="#bfdbfe" fontSize="9" textAnchor="middle">Frekuensi</text>
+        <rect x="10" y="39" width="340" height="17" fill="var(--card)" fillOpacity="0.25"/>
+        <text x="65" y="51" fill="var(--card-foreground)" fontSize="9" textAnchor="middle">Frekuensi</text>
         {[["137","2"],["172","3"],["207","4"],["242","5"],["277","3"],["312","2"],["347","1"]].map(([cx,f],i) => (
           <text key={i} x={Number(cx)} y="51" fill="#60a5fa" fontSize="9" textAnchor="middle">{f}</text>
         ))}
@@ -73,7 +74,7 @@ const questions: Q[] = [
   Qn(4, "Mean dari Diagram Batang – UN", {
     diagram: (() => (
       <svg width="360" height="210" viewBox="0 0 300 175" className="mx-auto">
-        <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
+        <rect x="4" y="4" width="292" height="167" rx="10" fill="var(--card)" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
         <text x="150" y="18" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Nilai Ulangan IPA – 20 Siswa</text>
         {[0,15,30,45,60,75,90].map((h,i) => (
           <g key={i}>
@@ -101,7 +102,7 @@ const questions: Q[] = [
   Qn(6, "Mean dan Data Tidak Diketahui – ANBK", {
     diagram: (() => (
       <svg width="360" height="210" viewBox="0 0 300 175" className="mx-auto">
-        <rect x="4" y="4" width="292" height="167" rx="10" fill="#1e3a5f" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
+        <rect x="4" y="4" width="292" height="167" rx="10" fill="var(--card)" fillOpacity="0.35" stroke="#3b82f6" strokeWidth="1.5"/>
         <text x="150" y="18" fill="#93c5fd" fontSize="9" textAnchor="middle" fontWeight="bold">Pengunjung Perpustakaan (5 Hari)</text>
         {[0,10,20,30,40,50].map((h,i) => (
           <g key={i}>
@@ -161,7 +162,7 @@ const questions: Q[] = [
   Qn(17, "Rata-Rata Umur Keluarga – UN", {
     diagram: (() => (
       <svg width="360" height="90" viewBox="0 0 360 90" className="mx-auto">
-        <rect x="2" y="2" width="356" height="86" rx="8" fill="#1e3a5f" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
+        <rect x="2" y="2" width="356" height="86" rx="8" fill="var(--card)" fillOpacity="0.4" stroke="#3b82f6" strokeWidth="1.5"/>
         <rect x="8" y="8" width="344" height="36" rx="0" fill="#1d4ed8" fillOpacity="0.25"/>
         <rect x="8" y="8" width="112" height="74" rx="0" fill="#1d4ed8" fillOpacity="0.2"/>
         <text x="64" y="23" fill="#93c5fd" fontSize="8" textAnchor="middle" fontWeight="bold">Anggota</text>
@@ -172,7 +173,7 @@ const questions: Q[] = [
         {[["Ayah","40",168],["Ibu","36",216],["Anak I","8",264],["Anak II","6",312],["Anak III","2",354]].map(([name,age,cx]) => (
           <g key={name}>
             <line x1={Number(cx)-24} y1="8" x2={Number(cx)-24} y2="82" stroke="#3b82f6" strokeWidth="0.5" strokeOpacity="0.35"/>
-            <text x={Number(cx)-12} y="30" fill="#bfdbfe" fontSize="9" textAnchor="middle">{name}</text>
+            <text x={Number(cx)-12} y="30" fill="var(--card-foreground)" fontSize="9" textAnchor="middle">{name}</text>
             <text x={Number(cx)-12} y="67" fill="#60a5fa" fontSize="11" textAnchor="middle" fontWeight="bold">{age}</text>
           </g>
         ))}
@@ -188,6 +189,7 @@ const questions: Q[] = [
 const RataRataPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -201,16 +203,16 @@ const RataRataPage = () => {
             style={{ textShadow: '0 0 20px rgba(96,165,250,0.7)' }}>
             UKURAN PEMUSATAN DATA
           </h1>
-          <p className="text-blue-200/70 text-sm text-center font-body mb-1">Rata-Rata dan Rata-Rata Gabungan</p>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-blue-200/70" : "text-blue-500/80"} text-sm text-center font-body mb-1`}>Rata-Rata dan Rata-Rata Gabungan</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-2">
             <span className="text-blue-400 text-xs font-bold">📋 18 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-blue-900/20 border border-blue-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-blue-900/20" : "bg-blue-50"} border border-blue-500/20 rounded-xl p-4`}>
           <p className="text-blue-300 text-xs font-bold mb-3">{t('practice.keyFormula')}</p>
           <div className="grid grid-cols-1 gap-2">
             {[
@@ -218,7 +220,7 @@ const RataRataPage = () => {
               { name: "Rata-Rata Berbobot", math: "\\bar{x} = \\frac{\\sum f_i x_i}{\\sum f_i}" },
               { name: "Rata-Rata Gabungan", math: "\\bar{x}_{gab} = \\frac{n_1\\bar{x}_1 + n_2\\bar{x}_2}{n_1+n_2}" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2 flex items-center gap-3">
+              <div key={r.name} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2 flex items-center gap-3`}>
                 <div className="text-blue-400 text-[9px] uppercase font-bold min-w-[100px]">{r.name}</div>
                 <div className="text-blue-200 text-xs overflow-x-auto"><InlineMath math={r.math} /></div>
               </div>
@@ -229,7 +231,7 @@ const RataRataPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-slate-900/80 to-indigo-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-blue-900/30 via-slate-900/80 to-indigo-900/30" : "from-blue-50/60 via-white/80 to-indigo-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-blue-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-400 to-indigo-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -239,13 +241,13 @@ const RataRataPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-blue-400 text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3 overflow-x-auto">{q.diagram}</div>}
+                    {q.diagram && <div className={`mb-3 flex justify-center ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-xl p-3 overflow-x-auto`}>{q.diagram}</div>}
                     {q.mathContent && (
-                      <div className="mb-3 bg-blue-900/20 border border-blue-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto">
+                      <div className={`mb-3 ${isDark ? "bg-blue-900/20" : "bg-blue-50"} border border-blue-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto`}>
                         <InlineMath math={q.mathContent} />
                       </div>
                     )}
-                    <p className="font-body text-sm text-white/90 leading-relaxed whitespace-pre-line">{q.content}</p>
+                    <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} leading-relaxed whitespace-pre-line`}>{q.content}</p>
                   </div>
                 </div>
               </div>

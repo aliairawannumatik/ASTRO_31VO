@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -17,7 +18,7 @@ const TabelHorizontalGanjil = () => {
   const tableW = hdrW + nilai.length * colW;
   return (
     <svg width="320" height="110" viewBox="0 0 320 110" className="mx-auto">
-      <rect x="4" y="4" width="312" height="102" rx="10" fill="#14532d" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.5"/>
+      <rect x="4" y="4" width="312" height="102" rx="10" fill="var(--card)" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.5"/>
       <text x="160" y="18" fill="#4ade80" fontSize="10" textAnchor="middle" fontWeight="bold">Distribusi Nilai Ulangan Matematika</text>
       {/* header row */}
       <rect x={x0} y="24" width={hdrW} height={rowH} fill="#166534" fillOpacity="0.5" rx="3"/>
@@ -29,12 +30,12 @@ const TabelHorizontalGanjil = () => {
         </g>
       ))}
       {/* frekuensi row */}
-      <rect x={x0} y="46" width={hdrW} height={rowH} fill="#14532d" fillOpacity="0.4" rx="3"/>
+      <rect x={x0} y="46" width={hdrW} height={rowH} fill="var(--card)" fillOpacity="0.4" rx="3"/>
       <text x={x0+hdrW/2} y="61" fill="#86efac" fontSize="9" textAnchor="middle" fontWeight="bold">Frekuensi</text>
       {frek.map((f,i)=>(
         <g key={i}>
           <rect x={x0+hdrW+i*colW} y="46" width={colW} height={rowH} fill={i%2===0?"#1a3a1a":"transparent"} fillOpacity="0.3" rx="2"/>
-          <text x={x0+hdrW+i*colW+colW/2} y="61" fill="#d1fae5" fontSize="9" textAnchor="middle">{f}</text>
+          <text x={x0+hdrW+i*colW+colW/2} y="61" fill="var(--card-foreground)" fontSize="9" textAnchor="middle">{f}</text>
         </g>
       ))}
       {/* total row */}
@@ -50,7 +51,7 @@ const TabelVertikalGenap = () => {
   const rows = [["60","4"],["65","6"],["70","8"],["75","6"],["80","4"]];
   return (
     <svg width="260" height="170" viewBox="0 0 260 170" className="mx-auto">
-      <rect x="4" y="4" width="252" height="162" rx="10" fill="#14532d" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.5"/>
+      <rect x="4" y="4" width="252" height="162" rx="10" fill="var(--card)" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.5"/>
       <text x="130" y="18" fill="#4ade80" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai Ujian Akhir Semester</text>
       <rect x="10" y="24" width="232" height="18" rx="3" fill="#166534" fillOpacity="0.5"/>
       <text x="80" y="36" fill="#86efac" fontSize="9" textAnchor="middle" fontWeight="bold">Nilai</text>
@@ -58,7 +59,7 @@ const TabelVertikalGenap = () => {
       {rows.map(([v,f],i)=>(
         <g key={i}>
           <rect x="10" y={43+i*18} width="232" height="17" fill={i%2===0?"#14532d":"transparent"} fillOpacity="0.3" rx="2"/>
-          <text x="80" y={55+i*18} fill="#d1fae5" fontSize="9" textAnchor="middle">{v}</text>
+          <text x="80" y={55+i*18} fill="var(--card-foreground)" fontSize="9" textAnchor="middle">{v}</text>
           <text x="180" y={55+i*18} fill="#86efac" fontSize="9" textAnchor="middle">{f}</text>
         </g>
       ))}
@@ -81,7 +82,7 @@ const DiagramBatangGanjil = () => {
   const maxVal = 8, chartH = 100, x0 = 50, y0 = 30, y1 = y0 + chartH, barW = 34, gap = 18;
   return (
     <svg width="320" height="178" viewBox="0 0 320 178" className="mx-auto">
-      <rect x="2" y="2" width="316" height="174" rx="10" fill="#14532d" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.5"/>
+      <rect x="2" y="2" width="316" height="174" rx="10" fill="var(--card)" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.5"/>
       <text x="160" y="16" fill="#4ade80" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai Ulangan Harian (n = 23 siswa)</text>
       <line x1={x0} y1={y0} x2={x0} y2={y1} stroke="#4ade80" strokeWidth="1.5"/>
       <line x1={x0} y1={y1} x2="315" y2={y1} stroke="#4ade80" strokeWidth="1.5"/>
@@ -102,7 +103,7 @@ const DiagramBatangGanjil = () => {
         return (
           <g key={i}>
             <rect x={bx} y={by} width={barW} height={bh} fill={b.color} fillOpacity="0.85" rx="3"/>
-            <text x={bx+barW/2} y={by-4} fill="#d1fae5" fontSize="8" textAnchor="middle">{b.value}</text>
+            <text x={bx+barW/2} y={by-4} fill="var(--card-foreground)" fontSize="8" textAnchor="middle">{b.value}</text>
             <text x={bx+barW/2} y={y1+13} fill="#86efac" fontSize="9" textAnchor="middle">{b.label}</text>
           </g>
         );
@@ -124,7 +125,7 @@ const DiagramBatangGenap = () => {
   const maxVal = 10, chartH = 100, x0 = 50, y0 = 30, y1 = y0 + chartH, barW = 34, gap = 18;
   return (
     <svg width="320" height="178" viewBox="0 0 320 178" className="mx-auto">
-      <rect x="2" y="2" width="316" height="174" rx="10" fill="#14532d" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.5"/>
+      <rect x="2" y="2" width="316" height="174" rx="10" fill="var(--card)" fillOpacity="0.2" stroke="#4ade80" strokeWidth="1.5"/>
       <text x="160" y="16" fill="#4ade80" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai Ujian Semester (n = 28 siswa)</text>
       <line x1={x0} y1={y0} x2={x0} y2={y1} stroke="#4ade80" strokeWidth="1.5"/>
       <line x1={x0} y1={y1} x2="315" y2={y1} stroke="#4ade80" strokeWidth="1.5"/>
@@ -145,7 +146,7 @@ const DiagramBatangGenap = () => {
         return (
           <g key={i}>
             <rect x={bx} y={by} width={barW} height={bh} fill={b.color} fillOpacity="0.85" rx="3"/>
-            <text x={bx+barW/2} y={by-4} fill="#d1fae5" fontSize="8" textAnchor="middle">{b.value}</text>
+            <text x={bx+barW/2} y={by-4} fill="var(--card-foreground)" fontSize="8" textAnchor="middle">{b.value}</text>
             <text x={bx+barW/2} y={y1+13} fill="#86efac" fontSize="9" textAnchor="middle">{b.label}</text>
           </g>
         );
@@ -195,6 +196,7 @@ const questions: Q[] = [
 const KuartilPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -208,22 +210,22 @@ const KuartilPage = () => {
             style={{ textShadow: '0 0 20px rgba(74,222,128,0.7)' }}>
             UKURAN LETAK DATA
           </h1>
-          <p className="text-green-200/70 text-sm text-center font-body mb-1">Kuartil</p>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-green-200/70" : "text-green-600/80"} text-sm text-center font-body mb-1`}>Kuartil</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-lg px-4 py-2">
             <span className="text-green-400 text-xs font-bold">📋 10 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-green-900/20 border border-green-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-green-900/20" : "bg-green-50"} border border-green-500/20 rounded-xl p-4`}>
           <p className="text-green-300 text-xs font-bold mb-3">{t('practice.keyFormula')}</p>
           <div className="grid grid-cols-1 gap-2">
             {[
               { name: "Kuartil Data Tunggal", math: "Q_i = x_{\\frac{i(n+1)}{4}}" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2 flex items-center gap-3">
+              <div key={r.name} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2 flex items-center gap-3`}>
                 <div className="text-green-400 text-[9px] uppercase font-bold min-w-[120px]">{r.name}</div>
                 <div className="text-green-200 text-xs overflow-x-auto"><InlineMath math={r.math} /></div>
               </div>
@@ -234,7 +236,7 @@ const KuartilPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-green-900/30 via-slate-900/80 to-emerald-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-green-900/30 via-slate-900/80 to-emerald-900/30" : "from-green-50/60 via-white/80 to-emerald-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-green-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-green-400 to-emerald-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -244,8 +246,8 @@ const KuartilPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-green-400 text-[10px] font-bold uppercase tracking-wider bg-green-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3 overflow-x-auto">{q.diagram}</div>}
-                    <p className="font-body text-sm text-white/90 leading-relaxed whitespace-pre-line">{q.content}</p>
+                    {q.diagram && <div className={`mb-3 flex justify-center ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-xl p-3 overflow-x-auto`}>{q.diagram}</div>}
+                    <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} leading-relaxed whitespace-pre-line`}>{q.content}</p>
                   </div>
                 </div>
               </div>
