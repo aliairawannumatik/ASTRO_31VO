@@ -213,6 +213,7 @@ const TKAPage = () => {
   const isWhite = theme === "white";
   const [infoOpen, setInfoOpen] = useState<string[]>([]);
   const [showTentang, setShowTentang] = useState(false);
+  const [showModul, setShowModul] = useState(false);
   const [showPaket, setShowPaket] = useState(false);
   const [showTips, setShowTips] = useState(false);
 
@@ -266,12 +267,25 @@ const TKAPage = () => {
 
         {/* ── TENTANG TKA (toggle) ── */}
         <div className="mb-6 animate-slide-up">
-          <SectionToggleHeader
-            label="Tentang TKA"
-            color="text-cyan-400/60"
-            open={showTentang}
-            onToggle={() => setShowTentang(v => !v)}
-          />
+          <button
+            onClick={() => { playPopSound(); setShowTentang(v => !v); }}
+            className={`w-full flex items-center justify-between gap-3 px-5 py-3.5 rounded-xl border transition-all duration-200 cursor-pointer mb-3
+              ${showTentang
+                ? "bg-violet-500/20 border-violet-400/60 shadow-md shadow-violet-500/10"
+                : "bg-violet-500/10 border-violet-400/30 hover:bg-violet-500/15 hover:border-violet-400/50"
+              }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-violet-500/20 border border-violet-400/40 flex items-center justify-center shrink-0">
+                <Info className="w-4 h-4 text-violet-300" />
+              </div>
+              <span className="font-display text-sm font-bold text-violet-200 tracking-wide uppercase">Tentang TKA</span>
+              <span className="text-[10px] font-body text-violet-400/70 bg-violet-500/10 border border-violet-400/20 px-2 py-0.5 rounded-full">4 Subtopik</span>
+            </div>
+            {showTentang
+              ? <ChevronUp className="w-4 h-4 text-violet-300" />
+              : <ChevronDown className="w-4 h-4 text-violet-300/60" />}
+          </button>
 
           {showTentang && (
             <div className="flex flex-col gap-2.5">
@@ -430,15 +444,29 @@ const TKAPage = () => {
           )}
         </div>
 
-        {/* ── Modul Pemantapan (langsung tampil) ── */}
+        {/* ── Modul Pemantapan (toggle) ── */}
         <div className="mb-6 animate-slide-up" style={{ animationDelay: "0.10s" }}>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="animate-pulse text-cyan-400/60 text-xs font-body font-semibold tracking-widest uppercase">Modul Pemantapan</span>
-            <div className="h-px flex-1 bg-white/10" />
-          </div>
+          <button
+            onClick={() => { playPopSound(); setShowModul(v => !v); }}
+            className={`w-full flex items-center justify-between gap-3 px-5 py-3.5 rounded-xl border transition-all duration-200 cursor-pointer mb-3
+              ${showModul
+                ? "bg-emerald-500/20 border-emerald-400/60 shadow-md shadow-emerald-500/10"
+                : "bg-emerald-500/10 border-emerald-400/30 hover:bg-emerald-500/15 hover:border-emerald-400/50"
+              }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center shrink-0">
+                <Layers className="w-4 h-4 text-emerald-300" />
+              </div>
+              <span className="font-display text-sm font-bold text-emerald-200 tracking-wide uppercase">Modul Pemantapan</span>
+              <span className="text-[10px] font-body text-emerald-400/70 bg-emerald-500/10 border border-emerald-400/20 px-2 py-0.5 rounded-full">28 Topik</span>
+            </div>
+            {showModul
+              ? <ChevronUp className="w-4 h-4 text-emerald-300" />
+              : <ChevronDown className="w-4 h-4 text-emerald-300/60" />}
+          </button>
 
-          <div className="flex flex-col gap-4">
+          {showModul && <div className="flex flex-col gap-4">
             {kelasList.map((kelas) => (
               <div key={kelas.label} className="rounded-2xl overflow-hidden"
                 style={{
@@ -521,7 +549,7 @@ const TKAPage = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div>}
         </div>
 
         {/* ── Paket Latihan (toggle) ── */}
