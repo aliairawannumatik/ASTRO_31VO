@@ -156,7 +156,7 @@ const UrutanOperasi = () => {
 const materiSections: MateriSection[] = [
   {
     heading: "A. Ragam Jenis Bilangan",
-    content: `Dalam matematika, bilangan dikelompokkan menjadi beberapa jenis berikut:\n- **Bilangan asli** — ditulis sebagai himpunan $\\{1, 2, 3, 4, 5, ...\\}$\n- **Bilangan cacah** — ditulis sebagai himpunan $\\{0, 1, 2, 3, 4, 5, ...\\}$\n- **Bilangan bulat** — mencakup semua bilangan bulat negatif, nol, dan positif: $\\{..., -4, -3, -2, -1, 0, 1, 2, 3, 4, ...\\}$\n- **Bilangan rasional** — setiap bilangan yang dapat dinyatakan dalam bentuk $\\frac{a}{b}$, di mana $a$ dan $b$ adalah bilangan bulat serta $b \\neq 0$\n- **Bilangan irasional** — bilangan yang tidak bisa dinyatakan dalam bentuk $\\frac{a}{b}$ dengan $b \\neq 0$ (contoh: $\\sqrt{2}$, $\\pi$)`
+    content: `Dalam matematika, bilangan dikelompokkan menjadi beberapa jenis berikut:\n- **Bilangan cacah** — ditulis sebagai himpunan $\\{0, 1, 2, 3, 4, 5, ...\\}$\n- **Bilangan asli** — ditulis sebagai himpunan $\\{1, 2, 3, 4, 5, ...\\}$\n- **Bilangan bulat negatif** — ditulis sebagai himpunan $\\{..., -4, -3, -2, -1\\}$\n- **Bilangan bulat** — mencakup semua bilangan bulat negatif, nol, dan positif: $\\{..., -4, -3, -2, -1, 0, 1, 2, 3, 4, ...\\}$\n- **Bilangan rasional** — setiap bilangan yang dapat dinyatakan dalam bentuk $\\frac{a}{b}$, di mana $a$ dan $b$ adalah bilangan bulat serta $b \\neq 0$\n- **Bilangan irasional** — bilangan yang tidak bisa dinyatakan dalam bentuk $\\frac{a}{b}$ dengan $b \\neq 0$ (contoh: $\\sqrt{2}$, $\\pi$)`
   },
   {
     heading: "B. Bilangan Bulat dan Garis Bilangan",
