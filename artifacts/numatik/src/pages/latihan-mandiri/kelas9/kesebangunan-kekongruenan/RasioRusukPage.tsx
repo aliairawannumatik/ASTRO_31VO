@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Percent } from "lucide-react";
@@ -14,7 +15,7 @@ const Qn = (n: number, title: string, rest: Omit<Q,"n"|"title">): Q => ({ n, tit
 
 const SvgQ1 = () => (
   <svg width={270} height={185} viewBox="0 0 270 185" className="lm-kkg-svg" style={{display:'block'}}>
-    <rect width="270" height="185" fill="#0b1733" rx="14"/>
+    <rect width="270" height="185" fill="var(--card)" rx="14"/>
     <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
     <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
     <line x1="52" y1="157" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
@@ -22,20 +23,20 @@ const SvgQ1 = () => (
     <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
     <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="120,78 116,84 111,80" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
-    <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="38" cy="12" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="36" cy="170" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="36" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="232" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="232" cy="170" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="232" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="128" cy="61" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
+    <circle cx="128" cy="61" r="12" fill="var(--card)" stroke="#e879f9" strokeWidth="2"/>
     <text x="128" y="66" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
   </svg>
 );
 
 const SvgQ2 = () => (
   <svg width={270} height={185} viewBox="0 0 270 185" className="lm-kkg-svg" style={{display:'block'}}>
-    <rect width="270" height="185" fill="#0b1733" rx="14"/>
+    <rect width="270" height="185" fill="var(--card)" rx="14"/>
     <polygon points="42,30 208,30 42,155" fill="rgba(34,211,238,0.08)"/>
     <line x1="42" y1="30" x2="208" y2="30" stroke="#22d3ee" strokeWidth="2.5"/>
     <line x1="42" y1="30" x2="42" y2="155" stroke="#22d3ee" strokeWidth="2.5"/>
@@ -43,20 +44,20 @@ const SvgQ2 = () => (
     <rect x="42" y="30" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
     <line x1="42" y1="30" x2="102" y2="106" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="97,99 103,94 108,100" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
-    <circle cx="28" cy="18" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="28" cy="18" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="28" y="23" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="222" cy="18" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="222" cy="18" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="222" y="23" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="28" cy="167" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="28" cy="167" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="28" y="172" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <circle cx="116" cy="119" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
+    <circle cx="116" cy="119" r="12" fill="var(--card)" stroke="#e879f9" strokeWidth="2"/>
     <text x="116" y="124" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
   </svg>
 );
 
 const SvgQ3 = () => (
   <svg width={270} height={185} viewBox="0 0 270 185" className="lm-kkg-svg" style={{display:'block'}}>
-    <rect width="270" height="185" fill="#0b1733" rx="14"/>
+    <rect width="270" height="185" fill="var(--card)" rx="14"/>
     <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
     <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
     <line x1="52" y1="157" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
@@ -64,20 +65,20 @@ const SvgQ3 = () => (
     <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
     <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="120,78 116,84 111,80" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
-    <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="38" cy="12" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="36" cy="170" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="36" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="232" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="232" cy="170" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="232" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="128" cy="61" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
+    <circle cx="128" cy="61" r="12" fill="var(--card)" stroke="#e879f9" strokeWidth="2"/>
     <text x="128" y="66" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
   </svg>
 );
 
 const SvgQ4 = () => (
   <svg width={270} height={185} viewBox="0 0 270 185" className="lm-kkg-svg" style={{display:'block'}}>
-    <rect width="270" height="185" fill="#0b1733" rx="14"/>
+    <rect width="270" height="185" fill="var(--card)" rx="14"/>
     <polygon points="52,22 52,157 218,157" fill="rgba(34,211,238,0.08)"/>
     <line x1="52" y1="22" x2="52" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
     <line x1="52" y1="157" x2="218" y2="157" stroke="#22d3ee" strokeWidth="2.5"/>
@@ -85,17 +86,17 @@ const SvgQ4 = () => (
     <rect x="52" y="148" width="9" height="9" fill="rgba(232,121,249,0.2)" stroke="#e879f9" strokeWidth="1.5"/>
     <line x1="52" y1="157" x2="115" y2="74" stroke="#e879f9" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="120,78 116,84 111,80" fill="none" stroke="#e879f9" strokeWidth="1.5"/>
-    <circle cx="38" cy="12" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="38" cy="12" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="38" y="17" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <circle cx="36" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="36" cy="170" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="36" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="232" cy="170" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="232" cy="170" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="232" y="175" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="128" cy="61" r="12" fill="#0b1733" stroke="#e879f9" strokeWidth="2"/>
+    <circle cx="128" cy="61" r="12" fill="var(--card)" stroke="#e879f9" strokeWidth="2"/>
     <text x="128" y="66" fill="#e879f9" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
-    <rect x="62" y="32" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <rect x="62" y="32" width="62" height="16" rx="6" fill="var(--card)"/>
     <text x="93" y="44" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">5 cm</text>
-    <rect x="142" y="105" width="62" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <rect x="142" y="105" width="62" height="16" rx="6" fill="var(--card)"/>
     <text x="173" y="117" fill="#fb923c" fontSize="10" fontWeight="bold" textAnchor="middle">4 cm</text>
 
   </svg>
@@ -103,7 +104,7 @@ const SvgQ4 = () => (
 
 const SvgQ5a = () => (
   <svg width={255} height={185} viewBox="0 0 255 185" className="lm-kkg-svg" style={{display:'block'}}>
-    <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    <rect width="255" height="185" fill="var(--card)" rx="14"/>
     {/* Triangle: C at top-centre, A bottom-left, B bottom-right, right-angle at C */}
     <polygon points="127,18 22,150 215,150" fill="rgba(16,185,129,0.08)"/>
     <line x1="127" y1="18" x2="22" y2="150" stroke="#10b981" strokeWidth="2.5"/>
@@ -116,19 +117,19 @@ const SvgQ5a = () => (
     {/* Right-angle mark at C: angle ACB = 90° */}
     <polyline points="123,23 127,29 131,24" fill="none" stroke="#10b981" strokeWidth="1.5"/>
     {/* Vertex labels */}
-    <circle cx="127" cy="6" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
+    <circle cx="127" cy="6" r="12" fill="var(--card)" stroke="#10b981" strokeWidth="2"/>
     <text x="127" y="11" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">C</text>
-    <circle cx="8" cy="164" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
+    <circle cx="8" cy="164" r="12" fill="var(--card)" stroke="#10b981" strokeWidth="2"/>
     <text x="8" y="169" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">A</text>
-    <circle cx="228" cy="164" r="12" fill="#0b1733" stroke="#10b981" strokeWidth="2"/>
+    <circle cx="228" cy="164" r="12" fill="var(--card)" stroke="#10b981" strokeWidth="2"/>
     <text x="228" y="169" fill="#10b981" fontSize="13" fontWeight="bold" textAnchor="middle">B</text>
-    <circle cx="127" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
+    <circle cx="127" cy="164" r="12" fill="var(--card)" stroke="#f472b6" strokeWidth="2"/>
     <text x="127" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">D</text>
     {/* CD = 18 cm label, to the right of the vertical altitude */}
-    <rect x="132" y="72" width="34" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <rect x="132" y="72" width="34" height="16" rx="6" fill="var(--card)"/>
     <text x="149" y="84" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">18 cm</text>
     {/* DB = 6 cm label, above the DB segment */}
-    <rect x="153" y="130" width="34" height="16" rx="6" fill="rgba(0,0,0,0.65)"/>
+    <rect x="153" y="130" width="34" height="16" rx="6" fill="var(--card)"/>
     <text x="170" y="142" fill="#fde68a" fontSize="10" fontWeight="bold" textAnchor="middle">6 cm</text>
     {/* 'a' = AD label, above the AD segment */}
     <rect x="55" y="130" width="34" height="18" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
@@ -138,7 +139,7 @@ const SvgQ5a = () => (
 
 const SvgQ5b = () => (
   <svg width={255} height={185} viewBox="0 0 255 185" className="lm-kkg-svg" style={{display:'block'}}>
-    <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    <rect width="255" height="185" fill="var(--card)" rx="14"/>
     <polygon points="100,18 20,150 215,150" fill="rgba(129,140,248,0.08)"/>
     <line x1="100" y1="18" x2="20" y2="150" stroke="#818cf8" strokeWidth="2.5"/>
     <line x1="20" y1="150" x2="215" y2="150" stroke="#818cf8" strokeWidth="2.5"/>
@@ -146,13 +147,13 @@ const SvgQ5b = () => (
     <line x1="100" y1="18" x2="107" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="98,150 98,141 107,141" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
     <polyline points="96,24 101,29 105,23" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
-    <circle cx="100" cy="6" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
+    <circle cx="100" cy="6" r="12" fill="var(--card)" stroke="#818cf8" strokeWidth="2"/>
     <text x="100" y="11" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">G</text>
-    <circle cx="6" cy="164" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
+    <circle cx="6" cy="164" r="12" fill="var(--card)" stroke="#818cf8" strokeWidth="2"/>
     <text x="6" y="169" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">E</text>
-    <circle cx="228" cy="164" r="12" fill="#0b1733" stroke="#818cf8" strokeWidth="2"/>
+    <circle cx="228" cy="164" r="12" fill="var(--card)" stroke="#818cf8" strokeWidth="2"/>
     <text x="228" y="169" fill="#818cf8" fontSize="13" fontWeight="bold" textAnchor="middle">F</text>
-    <circle cx="107" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
+    <circle cx="107" cy="164" r="12" fill="var(--card)" stroke="#f472b6" strokeWidth="2"/>
     <text x="107" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">H</text>
     <rect x="113" y="76" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
     <text x="128" y="91" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">b</text>
@@ -161,7 +162,7 @@ const SvgQ5b = () => (
 
 const SvgQ5c = () => (
   <svg width={255} height={185} viewBox="0 0 255 185" className="lm-kkg-svg" style={{display:'block'}}>
-    <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    <rect width="255" height="185" fill="var(--card)" rx="14"/>
     <polygon points="55,18 20,150 215,150" fill="rgba(168,85,247,0.08)"/>
     <line x1="55" y1="18" x2="20" y2="150" stroke="#a855f7" strokeWidth="2.5"/>
     <line x1="20" y1="150" x2="215" y2="150" stroke="#a855f7" strokeWidth="2.5"/>
@@ -169,13 +170,13 @@ const SvgQ5c = () => (
     <line x1="55" y1="18" x2="59" y2="150" stroke="#f472b6" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="50,150 50,141 59,141" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
     <polyline points="53,25 59,30 61,23" fill="none" stroke="#f472b6" strokeWidth="1.5"/>
-    <circle cx="55" cy="6" r="12" fill="#0b1733" stroke="#a855f7" strokeWidth="2"/>
+    <circle cx="55" cy="6" r="12" fill="var(--card)" stroke="#a855f7" strokeWidth="2"/>
     <text x="55" y="11" fill="#a855f7" fontSize="13" fontWeight="bold" textAnchor="middle">L</text>
-    <circle cx="6" cy="164" r="12" fill="#0b1733" stroke="#a855f7" strokeWidth="2"/>
+    <circle cx="6" cy="164" r="12" fill="var(--card)" stroke="#a855f7" strokeWidth="2"/>
     <text x="6" y="169" fill="#a855f7" fontSize="13" fontWeight="bold" textAnchor="middle">K</text>
-    <circle cx="228" cy="164" r="12" fill="#0b1733" stroke="#a855f7" strokeWidth="2"/>
+    <circle cx="228" cy="164" r="12" fill="var(--card)" stroke="#a855f7" strokeWidth="2"/>
     <text x="228" y="169" fill="#a855f7" fontSize="13" fontWeight="bold" textAnchor="middle">M</text>
-    <circle cx="59" cy="164" r="12" fill="#0b1733" stroke="#f472b6" strokeWidth="2"/>
+    <circle cx="59" cy="164" r="12" fill="var(--card)" stroke="#f472b6" strokeWidth="2"/>
     <text x="59" y="169" fill="#f472b6" fontSize="13" fontWeight="bold" textAnchor="middle">N</text>
     <rect x="64" y="76" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
     <text x="79" y="91" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">c</text>
@@ -184,7 +185,7 @@ const SvgQ5c = () => (
 
 const SvgQ5d = () => (
   <svg width={255} height={185} viewBox="0 0 255 185" className="lm-kkg-svg" style={{display:'block'}}>
-    <rect width="255" height="185" fill="#0b1733" rx="14"/>
+    <rect width="255" height="185" fill="var(--card)" rx="14"/>
     <polygon points="52,22 52,158 210,158" fill="rgba(248,113,113,0.08)"/>
     <line x1="52" y1="22" x2="52" y2="158" stroke="#f87171" strokeWidth="2.5"/>
     <line x1="52" y1="158" x2="210" y2="158" stroke="#f87171" strokeWidth="2.5"/>
@@ -192,13 +193,13 @@ const SvgQ5d = () => (
     <rect x="52" y="149" width="9" height="9" fill="rgba(248,113,113,0.2)" stroke="#f87171" strokeWidth="1.5"/>
     <line x1="52" y1="158" x2="109" y2="71" stroke="#22d3ee" strokeWidth="2" strokeDasharray="6,4"/>
     <polyline points="114,76 110,81 105,77" fill="none" stroke="#22d3ee" strokeWidth="1.5"/>
-    <circle cx="38" cy="10" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
+    <circle cx="38" cy="10" r="12" fill="var(--card)" stroke="#f87171" strokeWidth="2"/>
     <text x="38" y="15" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">T</text>
-    <circle cx="36" cy="172" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
+    <circle cx="36" cy="172" r="12" fill="var(--card)" stroke="#f87171" strokeWidth="2"/>
     <text x="36" y="177" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">R</text>
-    <circle cx="222" cy="172" r="12" fill="#0b1733" stroke="#f87171" strokeWidth="2"/>
+    <circle cx="222" cy="172" r="12" fill="var(--card)" stroke="#f87171" strokeWidth="2"/>
     <text x="222" y="177" fill="#f87171" fontSize="13" fontWeight="bold" textAnchor="middle">S</text>
-    <circle cx="122" cy="59" r="12" fill="#0b1733" stroke="#22d3ee" strokeWidth="2"/>
+    <circle cx="122" cy="59" r="12" fill="var(--card)" stroke="#22d3ee" strokeWidth="2"/>
     <text x="122" y="64" fill="#22d3ee" fontSize="13" fontWeight="bold" textAnchor="middle">U</text>
     <rect x="157" y="98" width="30" height="20" rx="7" fill="rgba(251,191,36,0.18)" stroke="#fbbf24" strokeWidth="1.5"/>
     <text x="172" y="113" fill="#fbbf24" fontSize="14" fontWeight="bold" textAnchor="middle">d</text>
@@ -315,6 +316,7 @@ const questions: Q[] = [
 const RasioRusukPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -328,14 +330,14 @@ const RasioRusukPage = () => {
             style={{ textShadow: '0 0 20px rgba(52,211,153,0.7)' }}>
             RASIO RUSUK SEGITIGA SIKU-SIKU DENGAN KESEBANGUNAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Kesebangunan & Kekongruenan · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 9 · Kesebangunan & Kekongruenan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
             <span className="text-emerald-400 text-xs font-bold">📋 9 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
-        <div className="mb-5 bg-emerald-900/20 border border-emerald-500/20 rounded-xl p-4 lm-kkg-hint">
+        <div className={`mb-5 ${isDark ? "bg-emerald-900/20" : "bg-emerald-50"} border border-emerald-500/20 rounded-xl p-4 lm-kkg-hint`}>
           <p className="text-emerald-300 text-xs font-bold mb-2">{t('practice.keyFormula')} – Garis Tinggi Siku-Siku</p>
           <div className="grid grid-cols-3 gap-2">
             {[
@@ -343,9 +345,9 @@ const RasioRusukPage = () => {
               { label: "Kaki-1", math: "a^2 = p \\cdot c" },
               { label: "Kaki-2", math: "b^2 = q \\cdot c" },
             ].map(r => (
-              <div key={r.label} className="bg-white/5 rounded-lg px-2 py-2 text-center">
+              <div key={r.label} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-2 py-2 text-center`}>
                 <p className="text-emerald-300 text-[10px] font-bold mb-1">{r.label}</p>
-                <div className="text-white/80 text-xs"><InlineMath math={r.math} /></div>
+                <div className={`${isDark ? "text-white/80" : "text-gray-700"} text-xs`}><InlineMath math={r.math} /></div>
               </div>
             ))}
           </div>
@@ -354,7 +356,7 @@ const RasioRusukPage = () => {
           {questions.map((q, i) => (
             <div key={i} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur lm-kkg-overlay" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-emerald-900/30 via-slate-900/80 to-teal-900/30" : "from-emerald-50/60 via-white/80 to-teal-50/40"} backdrop-blur lm-kkg-overlay`} />
               <div className="absolute inset-0 border border-emerald-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-teal-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -364,17 +366,17 @@ const RasioRusukPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-3">{q.content}</p>}
+                    {q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-3`}>{q.content}</p>}
                     {q.diagram && <div className="mb-3 flex justify-center rounded-xl overflow-hidden">{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex flex-col gap-1 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
+                          <div key={pi} className={`flex flex-col gap-1 rounded-lg px-3 py-2 ${p.label ? (isDark ? 'bg-white/5' : 'bg-gray-50') : 'bg-transparent px-0'}`}>
                             <div className="flex items-start gap-2">
                               {p.label && <span className="text-emerald-400 text-xs font-bold shrink-0 mt-0.5">{p.label}</span>}
                               <div className="flex-1">
-                                {p.text && <p className="font-body text-sm text-white/80 leading-relaxed">{p.text}</p>}
-                                {p.math && <div className="text-white/80 text-sm mt-0.5"><InlineMath math={p.math} /></div>}
+                                {p.text && <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} leading-relaxed`}>{p.text}</p>}
+                                {p.math && <div className={`${isDark ? "text-white/80" : "text-gray-700"} text-sm mt-0.5`}><InlineMath math={p.math} /></div>}
                               </div>
                             </div>
                             {p.diagram && <div className="mt-2 flex justify-center rounded-xl overflow-hidden">{p.diagram}</div>}
@@ -385,14 +387,14 @@ const RasioRusukPage = () => {
                     {q.options && (
                       <div className="mt-3 grid grid-cols-2 gap-2">
                         {q.options.map((opt, oi) => (
-                          <div key={oi} className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                          <div key={oi} className={`flex items-center gap-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
                             <span className="text-amber-400 text-xs font-bold shrink-0">{opt.label}</span>
-                            <span className="font-body text-sm text-white/80">{opt.text}</span>
+                            <span className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{opt.text}</span>
                           </div>
                         ))}
                       </div>
                     )}
-                    {q.math && !q.parts && <div className="mt-2 bg-white/5 rounded-lg px-3 py-2"><BlockMath math={q.math} /></div>}
+                    {q.math && !q.parts && <div className={`mt-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}><BlockMath math={q.math} /></div>}
                   </div>
                 </div>
               </div>
