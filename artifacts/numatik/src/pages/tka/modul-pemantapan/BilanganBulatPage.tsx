@@ -1,6 +1,75 @@
 import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 
+const GarisBilangan = () => {
+  const Y = 82;
+  const step = 45;
+  const x0 = 270;
+  const x = (n: number) => x0 + n * step;
+  const nums = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
+
+  return (
+    <div className="my-3 overflow-x-auto">
+      <svg
+        viewBox="0 0 540 172"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full min-w-[320px] max-w-[540px] mx-auto block"
+      >
+        {/* ── Axis ── */}
+        <line x1="22" y1={Y} x2="518" y2={Y} stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" />
+        {/* Arrow left */}
+        <polygon points={`17,${Y} 28,${Y - 5} 28,${Y + 5}`} fill="rgba(255,255,255,0.55)" />
+        {/* Arrow right */}
+        <polygon points={`523,${Y} 512,${Y - 5} 512,${Y + 5}`} fill="rgba(255,255,255,0.55)" />
+
+        {/* ── Label: Bilangan bulat negatif ── */}
+        <text x={(x(-5) + x(-1)) / 2} y="14" textAnchor="middle" fontSize="9.5" fill="#67e8f9" fontWeight="600">Bilangan bulat negatif</text>
+        <line x1={x(-5)} y1="18" x2={x(-1)} y2="18" stroke="#67e8f9" strokeWidth="1" />
+        <line x1={x(-5)} y1="14" x2={x(-5)} y2="22" stroke="#67e8f9" strokeWidth="1" />
+        <line x1={x(-1)} y1="14" x2={x(-1)} y2="22" stroke="#67e8f9" strokeWidth="1" />
+        <line x1={(x(-5) + x(-1)) / 2} y1="22" x2={(x(-5) + x(-1)) / 2} y2={Y - 7} stroke="#67e8f9" strokeWidth="0.8" strokeDasharray="3,2" opacity="0.35" />
+
+        {/* ── Label: Nol ── */}
+        <text x={x(0)} y="50" textAnchor="middle" fontSize="9.5" fill="rgba(255,255,255,0.5)">Nol</text>
+        <line x1={x(0)} y1="53" x2={x(0)} y2={Y - 7} stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" strokeDasharray="3,2" />
+
+        {/* ── Label: Bilangan bulat positif ── */}
+        <text x={(x(1) + x(5)) / 2} y="14" textAnchor="middle" fontSize="9.5" fill="#86efac" fontWeight="600">Bilangan bulat positif</text>
+        <line x1={x(1)} y1="18" x2={x(5)} y2="18" stroke="#86efac" strokeWidth="1" />
+        <line x1={x(1)} y1="14" x2={x(1)} y2="22" stroke="#86efac" strokeWidth="1" />
+        <line x1={x(5)} y1="14" x2={x(5)} y2="22" stroke="#86efac" strokeWidth="1" />
+        <line x1={(x(1) + x(5)) / 2} y1="22" x2={(x(1) + x(5)) / 2} y2={Y - 7} stroke="#86efac" strokeWidth="0.8" strokeDasharray="3,2" opacity="0.35" />
+
+        {/* ── Tick marks & numbers ── */}
+        {nums.map(n => (
+          <g key={n}>
+            <line x1={x(n)} y1={Y - 6} x2={x(n)} y2={Y + 6}
+              stroke={n === 0 ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.5)"}
+              strokeWidth={n === 0 ? 2 : 1.5} />
+            <text x={x(n)} y={Y + 20} textAnchor="middle" fontSize="11"
+              fill={n < 0 ? "#93c5fd" : n === 0 ? "rgba(255,255,255,0.85)" : "#86efac"}
+              fontWeight={n === 0 ? "700" : "400"}>
+              {n}
+            </text>
+          </g>
+        ))}
+
+        {/* ── Bilangan asli: 1 to 5 ── */}
+        <line x1={x(1)} y1="118" x2={x(5)} y2="118" stroke="#fcd34d" strokeWidth="1" />
+        <line x1={x(1)} y1="113" x2={x(1)} y2="123" stroke="#fcd34d" strokeWidth="1" />
+        <line x1={x(5)} y1="113" x2={x(5)} y2="123" stroke="#fcd34d" strokeWidth="1" />
+        <text x={(x(1) + x(5)) / 2} y="134" textAnchor="middle" fontSize="9" fill="#fcd34d">Bilangan asli</text>
+
+        {/* ── Bilangan cacah: 0 to 5 ── */}
+        <line x1={x(0)} y1="147" x2={x(5)} y2="147" stroke="#c4b5fd" strokeWidth="1" />
+        <line x1={x(0)} y1="142" x2={x(0)} y2="152" stroke="#c4b5fd" strokeWidth="1" />
+        <line x1={x(5)} y1="142" x2={x(5)} y2="152" stroke="#c4b5fd" strokeWidth="1" />
+        <text x={(x(0) + x(5)) / 2} y="163" textAnchor="middle" fontSize="9" fill="#c4b5fd">Bilangan cacah</text>
+      </svg>
+    </div>
+  );
+};
+
 const materiSections: MateriSection[] = [
   {
     heading: "A. Ragam Jenis Bilangan",
@@ -8,7 +77,8 @@ const materiSections: MateriSection[] = [
   },
   {
     heading: "B. Bilangan Bulat dan Garis Bilangan",
-    content: `Bilangan bulat adalah gabungan dari bilangan bulat positif, nol, dan bilangan bulat negatif. Ketiga kelompok ini dapat digambarkan pada sebuah garis bilangan.\n\n$\\longleftarrow \\cdots \\;-3\\;-2\\;-1\\;\\underset{\\uparrow}{0}\\;1\\;2\\;3\\; \\cdots \\longrightarrow$\n\n- **Bilangan bulat positif** — nilainya lebih dari 0; terletak di sisi kanan angka 0 pada garis bilangan\n- **Bilangan bulat negatif** — nilainya kurang dari 0; terletak di sisi kiri angka 0 pada garis bilangan\n- **Nol (0)** — disebut bilangan netral karena bukan positif maupun negatif\n\n> Bilangan asli = bilangan bulat positif. Bilangan cacah = bilangan bulat positif + nol.`
+    content: `Bilangan bulat adalah gabungan dari bilangan bulat positif, nol, dan bilangan bulat negatif. Ketiga kelompok ini dapat digambarkan pada sebuah garis bilangan.\n\n- **Bilangan bulat positif** — nilainya lebih dari 0; terletak di sisi kanan angka 0 pada garis bilangan\n- **Bilangan bulat negatif** — nilainya kurang dari 0; terletak di sisi kiri angka 0 pada garis bilangan\n- **Nol (0)** — disebut bilangan netral karena bukan positif maupun negatif\n\n> Bilangan asli = bilangan bulat positif. Bilangan cacah = bilangan bulat positif + nol.`,
+    jsx: <GarisBilangan />,
   },
   {
     heading: "C. Membandingkan Bilangan Bulat",

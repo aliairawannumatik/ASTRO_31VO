@@ -11,6 +11,7 @@ import { InlineMath } from 'react-katex';
 export interface MateriSection {
   heading: string;
   content: string;
+  jsx?: React.ReactNode;
 }
 
 export interface LatihanSoal {
@@ -226,6 +227,7 @@ const TKAPemantapanLayout = ({ title, backPath = "/tka/modul-pemantapan", materi
 
                   {isOpen && (
                     <div className="px-6 pb-5 pt-1 border-t border-white/5 animate-slide-up">
+                      {section.jsx && <div className="mb-3">{section.jsx}</div>}
                       <div className="font-body text-sm text-white/80 leading-relaxed space-y-0.5">
                         {section.content.split('\n').map((line, i) => {
                           const trimmed = line.trim();
