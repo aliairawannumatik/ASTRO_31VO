@@ -1,0 +1,45 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/). 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+Sudah diperbaiki sebelumnya dengan pola conditional isDark yang konsisten 
+di banyak file, termasuk RasioRusukPage.tsx di latihan-mandiri/kelas9/ 
+(baru saja). Buka file tersebut sebagai REFERENSI pola warna yang benar 
+— jangan bikin skema warna baru.
+
+CATATAN PENTING dari pengalaman sesi-sesi sebelumnya:
+1. Untuk komponen dengan akses hook: pakai useTheme() dan 
+   isDark ? "..." : "...".
+2. Untuk SVG di level MODULE (tidak bisa akses hook, misal komponen 
+   diagram/grafik statistika): pakai CSS custom property — 
+   style={{ fill: "var(--card)" }} untuk background, 
+   style={{ fill: "var(--card-foreground)" }} untuk teks/stroke.
+3. "Answer result boxes" dan teks bersarang dalam <strong> tag sering 
+   terlewat — cari SECARA EKSPLISIT dan lakukan scan ulang kedua.
+4. Cek SEMUA className termasuk yang opacity rendah (bg-white/5, 
+   bg-black/X) — jangan dilewat.
+5. Halaman statistika kemungkinan berisi grafik/diagram batang, 
+   pie chart, atau tabel data — pastikan warna grid/axis/bar chart 
+   tetap kontras baik di kedua tema.
+
+TUGAS: Perbaiki SEMUA hardcoded background gelap di 2 file berikut 
+di folder src/pages/latihan-mandiri/kelas9/statistika/ (sesuaikan 
+path persis):
+- PenyajianDataPage.tsx (27 baris bermasalah)
+- PengantarStatistikaPage.tsx (19 baris bermasalah)
+
+ATURAN:
+1. JANGAN ubah logika interaktif (kalkulasi statistika, rendering 
+   data) — HANYA warna.
+2. JANGAN sentuh file lain.
+
+Setelah selesai:
+3. Verifikasi TypeScript check per-file (0 error) untuk kedua file.
+4. Lakukan scan ulang untuk elemen bersarang dan SVG yang mungkin 
+   terlewat.
+5. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya per file (ringkas).
