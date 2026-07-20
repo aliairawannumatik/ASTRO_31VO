@@ -1,0 +1,45 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/). 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+Sudah diperbaiki sebelumnya dengan pola conditional isDark yang konsisten 
+di banyak file, termasuk seluruh latihan-mandiri Kelas 7 dan Kelas 8 
+(14 file). Buka salah satu file Kelas 8 yang baru diperbaiki (misal 
+BalokPage.tsx atau KubusPage.tsx di latihan-mandiri/kelas8/) sebagai 
+REFERENSI pola warna yang benar — jangan bikin skema warna baru.
+
+CATATAN PENTING dari pengalaman sesi-sesi sebelumnya:
+1. Untuk komponen dengan akses hook: pakai useTheme() dan 
+   isDark ? "..." : "...".
+2. Untuk SVG di level MODULE (tidak bisa akses hook): pakai CSS custom 
+   property — style={{ fill: "var(--card)" }} untuk background, 
+   style={{ fill: "var(--card-foreground)" }} untuk teks/stroke.
+3. "Answer result boxes" level Mudah/Sedang/Sulit dan teks bersarang 
+   dalam <strong> tag sering terlewat — cari SECARA EKSPLISIT dan 
+   lakukan scan ulang kedua.
+4. Cek SEMUA className termasuk yang opacity rendah (bg-white/5, 
+   bg-black/X) — jangan dilewat.
+5. Kalau ada komponen shorthand arrow-function (const XSVG = () => 
+   <svg>...) yang butuh akses isDark, konversi ke block-body function.
+
+TUGAS: Perbaiki SEMUA hardcoded background gelap (56 baris bermasalah — 
+file besar, kerjakan sistematis per section) di file:
+src/pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/RasioRusukPage.tsx
+(sesuaikan path persis dengan struktur project — kemungkinan berisi 
+banyak SVG diagram kesebangunan/segitiga)
+
+ATURAN:
+1. JANGAN ubah logika interaktif (kalkulasi rasio, kesebangunan) — 
+   HANYA warna.
+2. JANGAN sentuh file lain.
+
+Setelah selesai:
+3. Verifikasi TypeScript check per-file (0 error).
+4. Lakukan scan ulang untuk elemen bersarang dan SVG yang mungkin 
+   terlewat.
+5. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya (ringkas, jumlah fix per section).
