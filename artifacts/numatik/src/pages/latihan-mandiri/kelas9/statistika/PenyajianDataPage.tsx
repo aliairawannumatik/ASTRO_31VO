@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -28,7 +29,7 @@ const DiagramBatang = () => (
         <g key={i}>
           <rect x={Number(x)} y={155 - h} width="28" height={h}
             fill={["#0e7490","#0891b2","#06b6d4","#22d3ee","#67e8f9"][i]} fillOpacity="0.85" rx="3" />
-          <text x={Number(x) + 14} y={152 - h} fill="#e0f2fe" fontSize="8" textAnchor="middle">{f}</text>
+          <text x={Number(x) + 14} y={152 - h} fill="var(--card-foreground)" fontSize="8" textAnchor="middle">{f}</text>
           <text x={Number(x) + 14} y="167" fill="#94a3b8" fontSize="8" textAnchor="middle">{label}</text>
         </g>
       );
@@ -97,7 +98,7 @@ const Histogram = () => (
         <g key={i}>
           <rect x={Number(x)} y={155 - h} width="44" height={h}
             fill={["#0e7490","#0891b2","#06b6d4","#22d3ee","#67e8f9"][i]} fillOpacity="0.85" />
-          <text x={Number(x) + 22} y={150 - h} fill="#e0f2fe" fontSize="8" textAnchor="middle">{f}</text>
+          <text x={Number(x) + 22} y={150 - h} fill="var(--card-foreground)" fontSize="8" textAnchor="middle">{f}</text>
           <text x={Number(x) + 22} y="168" fill="#94a3b8" fontSize="7" textAnchor="middle">{String(label)}</text>
         </g>
       );
@@ -349,8 +350,8 @@ const DiagramBatangDaun = () => {
       <rect x="2" y="2" width="276" height="191" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
       <text x="140" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai Ulangan 20 Siswa</text>
       <rect x="10" y="22" width="260" height="22" rx="4" fill="#0d9488" fillOpacity="0.35" />
-      <text x={divX / 2 + 10} y="37" fill="#e0f2fe" fontSize="9" textAnchor="middle" fontWeight="bold">Batang</text>
-      <text x={divX + 20} y="37" fill="#e0f2fe" fontSize="9" textAnchor="start" fontWeight="bold">Daun</text>
+      <text x={divX / 2 + 10} y="37" fill="var(--card-foreground)" fontSize="9" textAnchor="middle" fontWeight="bold">Batang</text>
+      <text x={divX + 20} y="37" fill="var(--card-foreground)" fontSize="9" textAnchor="start" fontWeight="bold">Daun</text>
       <line x1={divX} y1="22" x2={divX} y2={startY + stems.length * rowH - 2} stroke="#2dd4bf" strokeWidth="1" />
       {stems.map((row, i) => {
         const y = startY + i * rowH;
@@ -359,7 +360,7 @@ const DiagramBatangDaun = () => {
             <rect x="10" y={y - rowH + 4} width="260" height={rowH} fill={i % 2 === 0 ? "#ffffff08" : "transparent"} />
             <text x={divX - 10} y={y} fill="#22d3ee" fontSize="11" textAnchor="middle" fontWeight="bold">{row.stem}</text>
             {row.leaves.map((leaf, j) => (
-              <text key={j} x={divX + 14 + j * 20} y={y} fill="#e0f2fe" fontSize="11">{leaf}</text>
+              <text key={j} x={divX + 14 + j * 20} y={y} fill="var(--card-foreground)" fontSize="11">{leaf}</text>
             ))}
           </g>
         );
@@ -468,6 +469,7 @@ const questions: Q[] = [
 const PenyajianDataPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -481,15 +483,15 @@ const PenyajianDataPage = () => {
             style={{ textShadow: '0 0 20px rgba(45,212,191,0.7)' }}>
             PENYAJIAN DATA
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-lg px-4 py-2">
             <span className="text-teal-400 text-xs font-bold">📋 10 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-teal-900/20 border border-teal-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-teal-900/20" : "bg-teal-50"} border border-teal-500/20 rounded-xl p-4`}>
           <p className="text-teal-300 text-xs font-bold mb-3">📌 Jenis-Jenis Diagram</p>
           <div className="grid grid-cols-2 gap-2">
             {[
@@ -499,9 +501,9 @@ const PenyajianDataPage = () => {
               { name: "Tabel Frekuensi", desc: "Menyajikan data dalam bentuk tabel" },
               { name: "Diagram Batang Daun", desc: "Menampilkan data asli secara terurut" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2">
+              <div key={r.name} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
                 <div className="text-teal-400 text-[9px] uppercase font-bold mb-0.5">{r.name}</div>
-                <div className="text-white/60 text-[9px]">{r.desc}</div>
+                <div className={`${isDark ? "text-white/60" : "text-gray-500"} text-[9px]`}>{r.desc}</div>
               </div>
             ))}
           </div>
@@ -510,7 +512,7 @@ const PenyajianDataPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-900/30 via-slate-900/80 to-cyan-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-teal-900/30 via-slate-900/80 to-cyan-900/30" : "from-teal-50/60 via-white/80 to-cyan-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-teal-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-teal-400 to-cyan-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -520,16 +522,16 @@ const PenyajianDataPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-teal-400 text-[10px] font-bold uppercase tracking-wider bg-teal-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3 whitespace-pre-line">{q.content}</p>}
-                    {q.mathContent && <div className="mb-3 bg-teal-900/20 border border-teal-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto"><BlockMath math={q.mathContent} /></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3 overflow-x-auto">{q.diagram}</div>}
+                    {q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} leading-relaxed mb-3 whitespace-pre-line`}>{q.content}</p>}
+                    {q.mathContent && <div className={`mb-3 ${isDark ? "bg-teal-900/20" : "bg-teal-50"} border border-teal-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto`}><BlockMath math={q.mathContent} /></div>}
+                    {q.diagram && <div className={`mb-3 flex justify-center ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-xl p-3 overflow-x-auto`}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${isDark ? "bg-white/5" : "bg-gray-50"}`}>
                             <span className="text-teal-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
+                            {p.math ? <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}><InlineMath math={p.math} /></div>
+                              : <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{p.text}</p>}
                           </div>
                         ))}
                       </div>

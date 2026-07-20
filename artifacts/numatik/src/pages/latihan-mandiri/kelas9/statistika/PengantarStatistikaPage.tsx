@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -30,7 +31,7 @@ const DiagramBatang = () => (
         <g key={i}>
           <rect x={Number(x)} y={155 - h} width="28" height={h}
             fill={["#0e7490","#0891b2","#06b6d4","#22d3ee","#67e8f9"][i]} fillOpacity="0.85" rx="3" />
-          <text x={Number(x) + 14} y={152 - h} fill="#e0f2fe" fontSize="8" textAnchor="middle">{f}</text>
+          <text x={Number(x) + 14} y={152 - h} fill="var(--card-foreground)" fontSize="8" textAnchor="middle">{f}</text>
           <text x={Number(x) + 14} y="167" fill="#94a3b8" fontSize="8" textAnchor="middle">{label}</text>
         </g>
       );
@@ -72,8 +73,8 @@ const DiagramLingkaran = () => {
           <g key={i}>
             <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
               fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
-            <text x={lx} y={ly - 3} fill="#ffffff" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
-            <text x={lx} y={ly + 8} fill="#ffffff" fontSize="8" textAnchor="middle">{seg.line2}</text>
+            <text x={lx} y={ly - 3} fill="var(--card-foreground)" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="var(--card-foreground)" fontSize="8" textAnchor="middle">{seg.line2}</text>
           </g>
         );
       })}
@@ -133,19 +134,19 @@ const TabelDistribusiIPA = () => {
       <rect x="2" y="2" width={totalW - 4} height={totalH - 4} rx="8" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
       <rect x="2" y="2" width={totalW - 4} height={headerH} rx="8" fill="#0d9488" fillOpacity="0.4" />
       <rect x="2" y="2" width={totalW - 4} height={headerH - 4} fill="#0d9488" fillOpacity="0.4" />
-      <text x={padX + col1W / 2} y={headerH / 2 + 5} fill="#e0f2fe" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai</text>
+      <text x={padX + col1W / 2} y={headerH / 2 + 5} fill="var(--card-foreground)" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai</text>
       <line x1={padX + col1W} y1="2" x2={padX + col1W} y2={totalH - 2} stroke="#2dd4bf" strokeWidth="1" />
-      <text x={padX + col1W + col2W / 2} y={headerH / 2 + 5} fill="#e0f2fe" fontSize="10" textAnchor="middle" fontWeight="bold">Frekuensi</text>
+      <text x={padX + col1W + col2W / 2} y={headerH / 2 + 5} fill="var(--card-foreground)" fontSize="10" textAnchor="middle" fontWeight="bold">Frekuensi</text>
       <line x1="2" y1={headerH} x2={totalW - 2} y2={headerH} stroke="#2dd4bf" strokeWidth="1" />
       {rows.map(([val, freq], i) => {
         const y = headerH + i * rowH;
         const isEven = i % 2 === 0;
         return (
           <g key={i}>
-            {isEven && <rect x="3" y={y} width={totalW - 6} height={rowH} fill="#ffffff" fillOpacity="0.03" />}
+            {isEven && <rect x="3" y={y} width={totalW - 6} height={rowH} fill="var(--card-foreground)" fillOpacity="0.03" />}
             <line x1="2" y1={y + rowH} x2={totalW - 2} y2={y + rowH} stroke="#2dd4bf" strokeWidth="0.5" opacity="0.4" />
-            <text x={padX + col1W / 2} y={y + rowH / 2 + 4} fill="#e0f2fe" fontSize="10" textAnchor="middle">{val}</text>
-            <text x={padX + col1W + col2W / 2} y={y + rowH / 2 + 4} fill="#e0f2fe" fontSize="10" textAnchor="middle">{freq}</text>
+            <text x={padX + col1W / 2} y={y + rowH / 2 + 4} fill="var(--card-foreground)" fontSize="10" textAnchor="middle">{val}</text>
+            <text x={padX + col1W + col2W / 2} y={y + rowH / 2 + 4} fill="var(--card-foreground)" fontSize="10" textAnchor="middle">{freq}</text>
           </g>
         );
       })}
@@ -228,8 +229,8 @@ const DiagramLingkaranPersen = () => {
           <g key={i}>
             <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
               fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
-            <text x={lx} y={ly - 3} fill="#ffffff" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
-            <text x={lx} y={ly + 8} fill="#ffffff" fontSize="8" textAnchor="middle">{seg.line2}</text>
+            <text x={lx} y={ly - 3} fill="var(--card-foreground)" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="var(--card-foreground)" fontSize="8" textAnchor="middle">{seg.line2}</text>
           </g>
         );
       })}
@@ -264,8 +265,8 @@ const DiagramLingkaranDerajat = () => {
           <g key={i}>
             <path d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z`}
               fill={seg.color} fillOpacity="0.85" stroke="#0f172a" strokeWidth="1" />
-            <text x={lx} y={ly - 3} fill="#ffffff" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
-            <text x={lx} y={ly + 8} fill="#ffffff" fontSize="8" textAnchor="middle">{seg.line2}</text>
+            <text x={lx} y={ly - 3} fill="var(--card-foreground)" fontSize="8" textAnchor="middle" fontWeight="bold">{seg.line1}</text>
+            <text x={lx} y={ly + 8} fill="var(--card-foreground)" fontSize="8" textAnchor="middle">{seg.line2}</text>
           </g>
         );
       })}
@@ -287,8 +288,8 @@ const DiagramBatangDaun = () => {
       <rect x="2" y="2" width="276" height="191" rx="10" fill="#0d9488" fillOpacity="0.1" stroke="#2dd4bf" strokeWidth="1.5" />
       <text x="140" y="16" fill="#2dd4bf" fontSize="10" textAnchor="middle" fontWeight="bold">Nilai Ulangan 20 Siswa</text>
       <rect x="10" y="22" width="260" height="22" rx="4" fill="#0d9488" fillOpacity="0.35" />
-      <text x={divX / 2 + 10} y="37" fill="#e0f2fe" fontSize="9" textAnchor="middle" fontWeight="bold">Batang</text>
-      <text x={divX + 20} y="37" fill="#e0f2fe" fontSize="9" textAnchor="start" fontWeight="bold">Daun</text>
+      <text x={divX / 2 + 10} y="37" fill="var(--card-foreground)" fontSize="9" textAnchor="middle" fontWeight="bold">Batang</text>
+      <text x={divX + 20} y="37" fill="var(--card-foreground)" fontSize="9" textAnchor="start" fontWeight="bold">Daun</text>
       <line x1={divX} y1="22" x2={divX} y2={startY + stems.length * rowH - 2} stroke="#2dd4bf" strokeWidth="1" />
       {stems.map((row, i) => {
         const y = startY + i * rowH;
@@ -297,7 +298,7 @@ const DiagramBatangDaun = () => {
             <rect x="10" y={y - rowH + 4} width="260" height={rowH} fill={i % 2 === 0 ? "#ffffff08" : "transparent"} />
             <text x={divX - 10} y={y} fill="#22d3ee" fontSize="11" textAnchor="middle" fontWeight="bold">{row.stem}</text>
             {row.leaves.map((leaf, j) => (
-              <text key={j} x={divX + 14 + j * 20} y={y} fill="#e0f2fe" fontSize="11">{leaf}</text>
+              <text key={j} x={divX + 14 + j * 20} y={y} fill="var(--card-foreground)" fontSize="11">{leaf}</text>
             ))}
           </g>
         );
@@ -408,6 +409,7 @@ const questions: Q[] = [
 const PengantarStatistikaPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -421,15 +423,15 @@ const PengantarStatistikaPage = () => {
             style={{ textShadow: '0 0 20px rgba(34,211,238,0.7)' }}>
             PENGANTAR STATISTIKA & PENYAJIAN DATA
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 9 · Statistika · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
             <span className="text-cyan-400 text-xs font-bold">📋 10 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-cyan-900/20" : "bg-cyan-50"} border border-cyan-500/20 rounded-xl p-4`}>
           <p className="text-cyan-300 text-xs font-bold mb-3">📌 Jenis-Jenis Diagram</p>
           <div className="grid grid-cols-2 gap-2">
             {[
@@ -439,9 +441,9 @@ const PengantarStatistikaPage = () => {
               { name: "Tabel Frekuensi", desc: "Menyajikan data dalam bentuk tabel" },
               { name: "Diagram Batang Daun", desc: "Menampilkan data asli secara terurut" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2">
+              <div key={r.name} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
                 <div className="text-cyan-400 text-[9px] uppercase font-bold mb-0.5">{r.name}</div>
-                <div className="text-white/60 text-[9px]">{r.desc}</div>
+                <div className={`${isDark ? "text-white/60" : "text-gray-500"} text-[9px]`}>{r.desc}</div>
               </div>
             ))}
           </div>
@@ -450,7 +452,7 @@ const PengantarStatistikaPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-cyan-900/30 via-slate-900/80 to-teal-900/30" : "from-cyan-50/60 via-white/80 to-teal-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-teal-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -460,16 +462,16 @@ const PengantarStatistikaPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-cyan-400 text-[10px] font-bold uppercase tracking-wider bg-cyan-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3 whitespace-pre-line">{q.content}</p>}
-                    {q.mathContent && <div className="mb-3 bg-cyan-900/20 border border-cyan-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto"><BlockMath math={q.mathContent} /></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3 overflow-x-auto">{q.diagram}</div>}
+                    {q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} leading-relaxed mb-3 whitespace-pre-line`}>{q.content}</p>}
+                    {q.mathContent && <div className={`mb-3 ${isDark ? "bg-cyan-900/20" : "bg-cyan-50"} border border-cyan-500/20 rounded-lg px-4 py-3 flex justify-center overflow-x-auto`}><BlockMath math={q.mathContent} /></div>}
+                    {q.diagram && <div className={`mb-3 flex justify-center ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-xl p-3 overflow-x-auto`}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${isDark ? "bg-white/5" : "bg-gray-50"}`}>
                             <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
+                            {p.math ? <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}><InlineMath math={p.math} /></div>
+                              : <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{p.text}</p>}
                           </div>
                         ))}
                       </div>
