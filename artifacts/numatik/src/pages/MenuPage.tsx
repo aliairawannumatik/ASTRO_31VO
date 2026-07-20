@@ -39,6 +39,7 @@ const MenuPage = () => {
     { key: "teacherRoom", icon: GraduationCap,  path: "/ruang-untuk-guru" },
     { key: "animatedBook",icon: BookOpen,        path: "/materi-matematika" },
     { key: "practice",    icon: ClipboardList,  path: "/latihan-mandiri" },
+    { key: "lkpd",        icon: ClipboardCheck, path: "/lkpd" },
     { key: "gameArena",   icon: Gamepad2,       path: "/math-game-arena" },
     { key: "ai",          icon: Bot,            path: "/chat-ai" },
     { key: "academic",    icon: Brain,          path: "/tka" },
