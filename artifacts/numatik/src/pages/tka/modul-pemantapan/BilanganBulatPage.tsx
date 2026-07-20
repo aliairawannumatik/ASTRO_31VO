@@ -2,11 +2,38 @@ import TKAPemantapanLayout from "@/components/tka/TKAPemantapanLayout";
 import type { MateriSection, LatihanSoal } from "@/components/tka/TKAPemantapanLayout";
 
 const materiSections: MateriSection[] = [
-  { heading: "A. Pengertian Bilangan Bulat", content: `Bilangan bulat terdiri dari:\n- Bilangan bulat negatif: ..., -3, -2, -1\n- Nol: 0\n- Bilangan bulat positif: 1, 2, 3, ...\n\nDinotasikan: $\\mathbb{Z} = \\{..., -3, -2, -1, 0, 1, 2, 3, ...\\}$` },
-  { heading: "B. Operasi Bilangan Bulat", content: `1. Penjumlahan:\n   - (+) + (+) = (+)\n   - (−) + (−) = (−)\n   - (+) + (−) = nilai mutlak yang lebih besar, tanda ikut yang lebih besar\n\n2. Pengurangan: $a - b = a + (-b)$\n\n3. Perkalian dan Pembagian:\n   - (+) × (+) = (+)\n   - (−) × (−) = (+)\n   - (+) × (−) = (−)\n   - (−) × (+) = (−)` },
-  { heading: "C. Nilai Mutlak", content: `$|a| = a$ jika $a \\geq 0$\n$|a| = -a$ jika $a < 0$\n\nSifat:\n- $|a| \\geq 0$\n- $|a| = |-a|$\n- $|ab| = |a| \\cdot |b|$\n- $|a + b| \\leq |a| + |b|$ (ketidaksamaan segitiga)` },
-  { heading: "D. Sifat-sifat Operasi", content: `1. Komutatif: $a + b = b + a$; $a \\times b = b \\times a$\n2. Asosiatif: $(a+b)+c = a+(b+c)$; $(a \\times b) \\times c = a \\times (b \\times c)$\n3. Distributif: $a \\times (b+c) = a \\times b + a \\times c$` },
-  { heading: "E. Pemangkatan Bilangan Bulat", content: `$a^n = a \\times a \\times ... \\times a$ (sebanyak n faktor)\n\nSifat:\n$a^m \\times a^n = a^{m+n}$\n$a^m \\div a^n = a^{m-n}$\n$(a^m)^n = a^{mn}$\n$(ab)^n = a^n b^n$\n$a^0 = 1$ (untuk $a \\neq 0$)` },
+  {
+    heading: "A. Ragam Jenis Bilangan",
+    content: `Dalam matematika, bilangan dikelompokkan menjadi beberapa jenis berikut:\n- **Bilangan asli** — ditulis sebagai himpunan $\\{1, 2, 3, 4, 5, ...\\}$\n- **Bilangan cacah** — ditulis sebagai himpunan $\\{0, 1, 2, 3, 4, 5, ...\\}$\n- **Bilangan bulat** — mencakup semua bilangan bulat negatif, nol, dan positif: $\\{..., -4, -3, -2, -1, 0, 1, 2, 3, 4, ...\\}$\n- **Bilangan rasional** — setiap bilangan yang dapat dinyatakan dalam bentuk $\\frac{a}{b}$, di mana $a$ dan $b$ adalah bilangan bulat serta $b \\neq 0$\n- **Bilangan irasional** — bilangan yang tidak bisa dinyatakan dalam bentuk $\\frac{a}{b}$ dengan $b \\neq 0$ (contoh: $\\sqrt{2}$, $\\pi$)`
+  },
+  {
+    heading: "B. Bilangan Bulat dan Garis Bilangan",
+    content: `Bilangan bulat adalah gabungan dari bilangan bulat positif, nol, dan bilangan bulat negatif. Ketiga kelompok ini dapat digambarkan pada sebuah garis bilangan.\n\n$\\longleftarrow \\cdots \\;-3\\;-2\\;-1\\;\\underset{\\uparrow}{0}\\;1\\;2\\;3\\; \\cdots \\longrightarrow$\n\n- **Bilangan bulat positif** — nilainya lebih dari 0; terletak di sisi kanan angka 0 pada garis bilangan\n- **Bilangan bulat negatif** — nilainya kurang dari 0; terletak di sisi kiri angka 0 pada garis bilangan\n- **Nol (0)** — disebut bilangan netral karena bukan positif maupun negatif\n\n> Bilangan asli = bilangan bulat positif. Bilangan cacah = bilangan bulat positif + nol.`
+  },
+  {
+    heading: "C. Membandingkan Bilangan Bulat",
+    content: `Membandingkan dua bilangan bulat berarti menentukan hubungan besarnya — apakah lebih besar, lebih kecil, atau sama besar.\n\nSimbol yang digunakan:\n- Lebih dari: $>$\n- Kurang dari: $<$\n- Sama dengan: $=$\n\nCara membandingkan menggunakan garis bilangan:\n- Posisi bilangan yang lebih jauh ke **kanan** menunjukkan nilai yang **lebih besar**\n- Posisi bilangan yang lebih jauh ke **kiri** menunjukkan nilai yang **lebih kecil**\n\n**Contoh:**\nBandingkan $-5$ dengan $1$.\n\n*Penyelesaian:*\nPada garis bilangan, $-5$ terletak di sebelah kiri $1$.\nKesimpulan: $-5 < 1$ (−5 kurang dari 1).`
+  },
+  {
+    heading: "D. Sifat-Sifat Operasi Hitung Bilangan Bulat",
+    content: `Misalkan $a$, $b$, dan $c$ adalah bilangan bulat sebarang. Operasi hitung pada bilangan bulat memiliki sifat-sifat berikut:\n\n**a. Tertutup** — hasil penjumlahan, pengurangan, maupun perkalian dua bilangan bulat selalu merupakan bilangan bulat.\n\n**b. Komutatif** — urutan operasi tidak mempengaruhi hasil:\n$a + b = b + a \\quad \\text{dan} \\quad a \\times b = b \\times a$\n\n**c. Unsur Identitas** — terdapat elemen yang tidak mengubah nilai bilangan:\n$a + 0 = 0 + a = a \\quad \\text{dan} \\quad a \\times 1 = 1 \\times a = a$\n\n**d. Asosiatif** — pengelompokan operasi tidak mempengaruhi hasil:\n$(a + b) + c = a + (b + c) \\quad \\text{dan} \\quad (a \\times b) \\times c = a \\times (b \\times c)$\n\n**e. Distributif** — perkalian terhadap penjumlahan dan pengurangan:\n$a \\times (b + c) = (a \\times b) + (a \\times c)$\n$a \\times (b - c) = (a \\times b) - (a \\times c)$`
+  },
+  {
+    heading: "E. Urutan Operasi Hitung Campuran",
+    content: `Saat menyelesaikan ekspresi dengan lebih dari satu jenis operasi, gunakan urutan pengerjaan berikut:\n\n1. **Tanda kurung** — selesaikan operasi di dalam kurung terlebih dahulu\n2. **Perkalian dan pembagian** — jika berdampingan dengan penjumlahan atau pengurangan, kerjakan lebih dulu\n3. **Penjumlahan dan pengurangan** — jika hanya ada operasi ini saja, kerjakan secara berurutan dari kiri ke kanan\n4. **Perkalian dan pembagian** yang setara — kerjakan secara berurutan dari kiri ke kanan\n\n> Singkatan mudah: **Ku-Ka-Ta** (Kurung → Kali/bagi → Tambah/kurang)`
+  },
+  {
+    heading: "F. Strategi Menyelesaikan Soal Cerita",
+    content: `Permasalahan kontekstual yang melibatkan bilangan bulat dapat diselesaikan secara sistematis melalui langkah-langkah berikut:\n\n1. **Cermati soal** — baca dengan teliti untuk memahami apa yang diketahui dan apa yang ditanyakan\n2. **Susun model matematika** — ubah informasi dari soal ke dalam kalimat atau persamaan matematika\n3. **Selesaikan perhitungan** — kerjakan model matematika yang telah dibuat\n4. **Tuliskan jawaban** — nyatakan hasil sesuai dengan pertanyaan di soal`
+  },
+  {
+    heading: "G. Faktorisasi Prima",
+    content: `Faktorisasi prima adalah proses menguraikan suatu bilangan menjadi perkalian dari faktor-faktor prima penyusunnya.\n\n**Contoh:**\nTentukan faktorisasi prima dari 12.\n\n*Penyelesaian:*\nFaktor-faktor dari 12 adalah 1, 2, 3, 4, 6, dan 12.\nDi antara faktor-faktor tersebut, yang merupakan bilangan prima adalah 2 dan 3.\n\nDengan pohon faktor:\n$12 = 2 \\times 6 = 2 \\times 2 \\times 3 = 2^2 \\times 3$\n\nJadi, faktorisasi prima dari $12$ adalah $2^2 \\times 3$.`
+  },
+  {
+    heading: "H. Estimasi Hasil Perhitungan",
+    content: `Estimasi adalah cara memperkirakan hasil operasi hitung bilangan bulat secara cepat dan masuk akal, tanpa harus menghitung secara tepat satu per satu.\n\nEstimasi berguna untuk:\n- Mengecek kewajaran jawaban sebelum menghitung rinci\n- Mempercepat pengerjaan soal pada kondisi waktu terbatas\n\n**Teknik umum estimasi:**\n- **Pembulatan** — bulatkan setiap bilangan ke puluhan atau ratusan terdekat sebelum dihitung\n- **Estimasi batas atas/bawah** — tentukan nilai terkecil dan terbesar yang mungkin untuk memperkirakan kisaran jawaban\n\n**Contoh:**\nEstimasi dari $49 \\times 21$:\n- Bulatkan: $50 \\times 20 = 1.000$\n- Nilai sesungguhnya: $49 \\times 21 = 1.029$ (perkiraan cukup dekat ✓)`
+  },
 ];
 
 const latihanDasar: LatihanSoal[] = [
