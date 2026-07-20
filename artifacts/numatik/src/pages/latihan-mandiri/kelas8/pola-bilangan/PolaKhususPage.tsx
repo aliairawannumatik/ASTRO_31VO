@@ -3,11 +3,13 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Star } from "lucide-react";
 
 const PolaKhususPage = () => {
+  const { isDark } = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -164,15 +166,15 @@ const PolaKhususPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-purple-300 text-center mb-1" style={{ textShadow: '0 0 20px rgba(168,85,247,0.7)' }}>
             POLA-POLA KHUSUS
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-purple-500/10 border border-purple-500/30 rounded-lg px-4 py-2">
             <span className="text-purple-400 text-xs font-bold">📋 13 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>Tingkat: UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-purple-900/20 border border-purple-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-purple-900/20" : "bg-purple-50"} border border-purple-500/20 rounded-xl p-4`}>
           <p className="text-purple-300 text-xs font-bold mb-2">📌 Rumus Referensi Cepat</p>
           <div className="grid grid-cols-2 gap-2">
             {[
@@ -181,8 +183,8 @@ const PolaKhususPage = () => {
               { label: "Persegi Panjang ke-n", math: "PP_n = n(n+1)" },
               { label: "Kubik ke-n", math: "K_n = n^3" },
             ].map((r, i) => (
-              <div key={i} className="bg-white/5 rounded-lg px-3 py-2 text-center">
-                <p className="text-white/40 text-[10px] mb-1">{r.label}</p>
+              <div key={i} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2 text-center`}>
+                <p className={`${isDark ? "text-white/40" : "text-gray-500"} text-[10px] mb-1`}>{r.label}</p>
                 <div className="text-purple-200 text-sm">
                   <InlineMath math={r.math} />
                 </div>
@@ -198,7 +200,7 @@ const PolaKhususPage = () => {
               className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.04}s` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-slate-900/80 to-violet-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-purple-900/30 via-slate-900/80 to-violet-900/30" : "from-purple-50/60 via-white/80 to-violet-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-purple-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-400 to-violet-500 rounded-l-2xl" />
 
@@ -216,19 +218,19 @@ const PolaKhususPage = () => {
                       </span>
                     )}
                     {q.content && (
-                      <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.content}</p>
+                      <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>{q.content}</p>
                     )}
                     {q.type === "mixed" && q.parts && (
                       <div className="flex flex-col gap-2 mt-2">
                         {q.parts.map((part, pi) => (
-                          <div key={pi} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2">
+                          <div key={pi} className={`flex items-start gap-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
                             <span className="text-purple-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{part.label}</span>
                             {part.math ? (
-                              <div className="text-white text-sm overflow-x-auto">
+                              <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}>
                                 <InlineMath math={part.math} />
                               </div>
                             ) : (
-                              <p className="font-body text-sm text-white/80 whitespace-pre-line">{part.text}</p>
+                              <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} whitespace-pre-line`}>{part.text}</p>
                             )}
                           </div>
                         ))}

@@ -5,6 +5,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
+import { useTheme } from "@/contexts/ThemeContext";
 
 type Part = { label: string; math?: string; text?: string };
 type Q = {
@@ -932,6 +933,7 @@ const questions: Q[] = [
 const GabunganPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -945,15 +947,15 @@ const GabunganPage = () => {
             style={{ textShadow: '0 0 20px rgba(129,140,248,0.7)' }}>
             BANGUN RUANG SISI DATAR GABUNGAN
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/30 rounded-lg px-4 py-2">
             <span className="text-indigo-400 text-xs font-bold">📋 21 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-indigo-900/20 border border-indigo-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-indigo-900/20" : "bg-indigo-50"} border border-indigo-500/20 rounded-xl p-4`}>
           <p className="text-indigo-300 text-xs font-bold mb-3">📐 Prinsip Bangun Gabungan</p>
           <div className="grid grid-cols-2 gap-2 text-xs font-body">
             {[
@@ -962,15 +964,15 @@ const GabunganPage = () => {
               { name: "Luas Permukaan", math: "L = L_{terlihat,1} + L_{terlihat,2}" },
               { name: "Catatan Penting", math: "\\text{Bidang sambungan} \\Rightarrow \\text{tidak dihitung}" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2">
-                <div className="text-white/40 text-[9px] uppercase mb-1">{r.name}</div>
+              <div key={r.name} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
+                <div className={`${isDark ? "text-white/40" : "text-gray-500"} text-[9px] uppercase mb-1`}>{r.name}</div>
                 <div className="text-indigo-300 overflow-x-auto text-xs"><InlineMath math={r.math} /></div>
               </div>
             ))}
           </div>
-          <div className="mt-2 bg-white/5 rounded-lg px-3 py-2">
-            <div className="text-white/40 text-[9px] uppercase mb-1">Contoh Bentuk Gabungan</div>
-            <p className="text-white/70 text-xs">Balok+Limas · Kubus+Prisma · Dua Balok (L-shape) · Limas Terpancung · Benda Berlubang</p>
+          <div className={`mt-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
+            <div className={`${isDark ? "text-white/40" : "text-gray-500"} text-[9px] uppercase mb-1`}>Contoh Bentuk Gabungan</div>
+            <p className={`${isDark ? "text-white/70" : "text-gray-600"} text-xs`}>Balok+Limas · Kubus+Prisma · Dua Balok (L-shape) · Limas Terpancung · Benda Berlubang</p>
           </div>
         </div>
 
@@ -978,7 +980,7 @@ const GabunganPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-indigo-900/30 via-slate-900/80 to-blue-900/30" : "from-indigo-50/60 via-white/80 to-blue-50/40"} backdrop-blur`} />
               <div className="absolute inset-0 border border-indigo-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-400 to-blue-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -990,21 +992,21 @@ const GabunganPage = () => {
                     <span className="text-indigo-400 text-[10px] font-bold uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded inline-block mb-2">
                       {q.title}
                     </span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3 whitespace-pre-line">{q.content}</p>}
+                    {q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} leading-relaxed mb-3 whitespace-pre-line`}>{q.content}</p>}
                     {q.mathContent && (
-                      <div className="mb-3 bg-indigo-900/20 border border-indigo-500/20 rounded-lg px-4 py-3 flex justify-center">
+                      <div className={`mb-3 ${isDark ? "bg-indigo-900/20" : "bg-indigo-50"} border border-indigo-500/20 rounded-lg px-4 py-3 flex justify-center`}>
                         <BlockMath math={q.mathContent} />
                       </div>
                     )}
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3">{q.diagram}</div>}
+                    {q.diagram && <div className={`mb-3 flex justify-center ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-xl p-3`}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? 'bg-white/5' : 'bg-transparent px-0'}`}>
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${p.label ? (isDark ? 'bg-white/5' : 'bg-gray-50') : 'bg-transparent px-0'}`}>
                             {p.label && <span className="text-indigo-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>}
                             {p.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>
+                              ? <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}><InlineMath math={p.math} /></div>
+                              : <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{p.text}</p>
                             }
                           </div>
                         ))}

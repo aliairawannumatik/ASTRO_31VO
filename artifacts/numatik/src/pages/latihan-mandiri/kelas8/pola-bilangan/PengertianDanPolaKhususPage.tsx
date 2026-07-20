@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 import { Sigma, Star } from "lucide-react";
@@ -395,12 +396,14 @@ const questions: QuestionItem[] = [
 
 // ─── Card Component ────────────────────────────────────────────────────────────
 
-const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => (
+const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => {
+  const { isDark } = useTheme();
+  return (
   <div
     className="relative rounded-2xl overflow-hidden animate-slide-up"
     style={{ animationDelay: `${i * 0.03}s` }}
   >
-    <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-purple-900/30 backdrop-blur" />
+    <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-cyan-900/30 via-slate-900/80 to-purple-900/30" : "from-cyan-50/60 via-white/80 to-purple-50/40"} backdrop-blur`} />
     <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
     <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-purple-500 rounded-l-2xl" />
     <div className="relative px-5 py-4">
@@ -417,10 +420,10 @@ const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => (
             </span>
           )}
           {q.content && (
-            <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.content}</p>
+            <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>{q.content}</p>
           )}
           {q.svgNode && (
-            <div className="my-3 rounded-xl overflow-hidden bg-black/25 border border-white/5 px-2 py-3">
+            <div className={`my-3 rounded-xl overflow-hidden ${isDark ? "bg-black/25 border-white/5" : "bg-gray-100 border-gray-200"} border px-2 py-3`}>
               {q.svgNode}
             </div>
           )}
@@ -430,19 +433,19 @@ const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => (
             </div>
           )}
           {q.contentAfterSvg && (
-            <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.contentAfterSvg}</p>
+            <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>{q.contentAfterSvg}</p>
           )}
           {q.type === "mixed" && q.parts && (
             <div className="flex flex-col gap-2 mt-2">
               {q.parts.map((part, pi) => (
-                <div key={pi} className="flex items-start gap-2 bg-white/5 rounded-lg px-3 py-2">
+                <div key={pi} className={`flex items-start gap-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
                   <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{part.label}</span>
                   {part.math ? (
-                    <div className="text-white text-sm overflow-x-auto">
+                    <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}>
                       <InlineMath math={part.math} />
                     </div>
                   ) : (
-                    <p className="font-body text-sm text-white/80 whitespace-pre-line">{part.text}</p>
+                    <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} whitespace-pre-line`}>{part.text}</p>
                   )}
                 </div>
               ))}
@@ -452,13 +455,15 @@ const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 const PengertianDanPolaKhususPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -475,17 +480,17 @@ const PengertianDanPolaKhususPage = () => {
               <Star className="w-6 h-6 text-purple-400" />
             </div>
           </div>
-          <h1 className="font-display text-lg md:text-xl font-bold text-white text-center mb-1 leading-tight px-2"
-            style={{ textShadow: '0 0 20px rgba(255,255,255,0.3)' }}>
+          <h1 className={`font-display text-lg md:text-xl font-bold ${isDark ? "text-white" : "text-gray-900"} text-center mb-1 leading-tight px-2`}
+            style={{ textShadow: isDark ? '0 0 20px rgba(255,255,255,0.3)' : 'none' }}>
             PENGERTIAN POLA, BARISAN BILANGAN
             <br />
             <span className="text-purple-300">DAN POLA-POLA KHUSUS</span>
           </h1>
-          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
-          <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body mb-3`}>Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
+          <div className={`flex items-center gap-3 ${isDark ? "bg-white/5 border-white/10" : "bg-gray-50 border-gray-200"} border rounded-xl px-5 py-2`}>
             <span className="text-cyan-400 text-xs font-bold">📋 {questions.length} {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
