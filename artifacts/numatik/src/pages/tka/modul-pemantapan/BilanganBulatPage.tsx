@@ -70,6 +70,89 @@ const GarisBilangan = () => {
   );
 };
 
+const UrutanOperasi = () => {
+  const steps = [
+    {
+      no: 1,
+      symbol: "( )",
+      title: "Tanda Kurung",
+      desc: "Kerjakan yang di dalam kurung dulu",
+      bg: "linear-gradient(135deg,rgba(202,138,4,0.25),rgba(161,98,7,0.12))",
+      border: "rgba(234,179,8,0.4)",
+      numBg: "rgba(234,179,8,0.3)",
+      numColor: "#fde047",
+      textColor: "#fef08a",
+    },
+    {
+      no: 2,
+      symbol: "xⁿ √",
+      title: "Pangkat / Akar",
+      desc: "Operasi pangkat atau akar",
+      bg: "linear-gradient(135deg,rgba(3,105,161,0.25),rgba(2,132,199,0.12))",
+      border: "rgba(56,189,248,0.4)",
+      numBg: "rgba(14,165,233,0.3)",
+      numColor: "#7dd3fc",
+      textColor: "#bae6fd",
+    },
+    {
+      no: 3,
+      symbol: "× ÷",
+      title: "Kali / Bagi",
+      desc: "Kerjakan dari kiri ke kanan",
+      bg: "linear-gradient(135deg,rgba(6,78,59,0.25),rgba(5,150,105,0.12))",
+      border: "rgba(52,211,153,0.4)",
+      numBg: "rgba(16,185,129,0.3)",
+      numColor: "#6ee7b7",
+      textColor: "#a7f3d0",
+    },
+    {
+      no: 4,
+      symbol: "+ −",
+      title: "Tambah / Kurang",
+      desc: "Kerjakan dari kiri ke kanan",
+      bg: "linear-gradient(135deg,rgba(88,28,135,0.25),rgba(126,34,206,0.12))",
+      border: "rgba(167,139,250,0.4)",
+      numBg: "rgba(139,92,246,0.3)",
+      numColor: "#c4b5fd",
+      textColor: "#ddd6fe",
+    },
+  ] as const;
+
+  return (
+    <div className="my-1">
+      <p className="text-center text-xs text-white/45 mb-3 italic font-body">
+        Ingat singkatan: <span className="text-white/70 not-italic font-semibold">Ka – Pa – Ka – Ta</span>
+      </p>
+      <div className="flex flex-col gap-2">
+        {steps.map(s => (
+          <div
+            key={s.no}
+            className="flex items-center gap-3 rounded-xl px-4 py-3"
+            style={{ background: s.bg, border: `1px solid ${s.border}` }}
+          >
+            <div
+              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold font-display"
+              style={{ background: s.numBg, color: s.numColor }}
+            >
+              {s.no}
+            </div>
+            <div
+              className="shrink-0 w-12 text-center font-display text-sm font-bold"
+              style={{ color: s.numColor }}
+            >
+              {s.symbol}
+            </div>
+            <div className="flex-1">
+              <p className="font-display text-sm font-bold" style={{ color: s.textColor }}>{s.title}</p>
+              <p className="font-body text-xs text-white/55 mt-0.5">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const materiSections: MateriSection[] = [
   {
     heading: "A. Ragam Jenis Bilangan",
@@ -90,7 +173,8 @@ const materiSections: MateriSection[] = [
   },
   {
     heading: "E. Urutan Operasi Hitung Campuran",
-    content: `Saat menyelesaikan ekspresi dengan lebih dari satu jenis operasi, gunakan urutan pengerjaan berikut:\n\n1. **Tanda kurung** — selesaikan operasi di dalam kurung terlebih dahulu\n2. **Perkalian dan pembagian** — jika berdampingan dengan penjumlahan atau pengurangan, kerjakan lebih dulu\n3. **Penjumlahan dan pengurangan** — jika hanya ada operasi ini saja, kerjakan secara berurutan dari kiri ke kanan\n4. **Perkalian dan pembagian** yang setara — kerjakan secara berurutan dari kiri ke kanan\n\n> Singkatan mudah: **Ku-Ka-Ta** (Kurung → Kali/bagi → Tambah/kurang)`
+    content: `Ketika sebuah ekspresi memuat lebih dari satu jenis operasi, selesaikan selalu mengikuti urutan Ka–Pa–Ka–Ta berikut.`,
+    jsx: <UrutanOperasi />,
   },
   {
     heading: "F. Strategi Menyelesaikan Soal Cerita",
