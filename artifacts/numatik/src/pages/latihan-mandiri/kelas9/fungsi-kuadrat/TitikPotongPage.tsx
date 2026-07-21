@@ -373,15 +373,15 @@ const TitikPotongPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-emerald-300 text-center mb-1" style={{textShadow:'0 0 20px rgba(52,211,153,0.7)'}}>
             TITIK POTONG TERHADAP SUMBU-SUMBU
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Fungsi Kuadrat · {t('practice.breadcrumb')}</p>
+          <p className={isDark ? "text-white/50 text-xs text-center font-body" : "text-gray-500 text-xs text-center font-body"}>Kelas 9 · Fungsi Kuadrat · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
             <span className="text-emerald-400 text-xs font-bold">📋 40 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={isDark ? "text-white/30 text-xs" : "text-gray-400 text-xs"}>·</span>
+            <span className={isDark ? "text-white/50 text-xs" : "text-gray-500 text-xs"}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-emerald-900/20 border border-emerald-500/20 rounded-xl p-4">
+        <div className={isDark ? "mb-5 bg-emerald-900/20 border border-emerald-500/20 rounded-xl p-4" : "mb-5 bg-emerald-50 border border-emerald-500/20 rounded-xl p-4"}>
           <p className="text-emerald-300 text-xs font-bold mb-3">📐 Konsep Penting</p>
           <div className="grid grid-cols-2 gap-2">
             {[
@@ -412,7 +412,7 @@ const TitikPotongPage = () => {
                   <div className="flex-1 min-w-0">
                     <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
                     {q.content && <p className={isDark ? "font-body text-sm text-white/90 leading-relaxed mb-3" : "font-body text-sm text-gray-800 leading-relaxed mb-3"}>{q.content}</p>}
-                    {q.mathContent && <div className="mb-3 bg-emerald-900/20 border border-emerald-500/20 rounded-lg px-4 py-3 flex justify-center"><BlockMath math={q.mathContent}/></div>}
+                    {q.mathContent && <div className={isDark ? "mb-3 bg-emerald-900/20 border border-emerald-500/20 rounded-lg px-4 py-3 flex justify-center" : "mb-3 bg-emerald-50 border border-emerald-500/20 rounded-lg px-4 py-3 flex justify-center"}><BlockMath math={q.mathContent}/></div>}
                     {q.diagram && <div className={isDark ? "mb-3 flex justify-center bg-white/5 rounded-xl p-3" : "mb-3 flex justify-center bg-gray-50 rounded-xl p-3"}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
