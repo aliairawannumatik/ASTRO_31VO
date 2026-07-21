@@ -446,7 +446,7 @@ const PelengkapKuadratPage = () => {
                         {q.parts.map((p, pi) => (
                           <div key={pi} className={isDark ? "flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5" : "flex items-start gap-2 rounded-lg px-3 py-2 bg-gray-50"}>
                             <span className="text-sky-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
+                            {p.math ? <div className={isDark ? "text-white text-sm overflow-x-auto" : "text-foreground text-sm overflow-x-auto"}><InlineMath math={p.math} /></div>
                               : <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{p.text}</p>}
                           </div>
                         ))}
