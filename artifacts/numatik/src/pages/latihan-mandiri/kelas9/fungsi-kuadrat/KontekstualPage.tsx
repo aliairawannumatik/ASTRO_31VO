@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -46,13 +47,13 @@ const RectangleFence = () => (
 
 const SalesFunctionSVG = () => (
   <svg width="300" height="155" viewBox="0 0 300 155" className="mx-auto">
-    <rect x="5" y="5" width="290" height="145" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
+    <rect x="5" y="5" width="290" height="145" rx="8" fill="var(--card)" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
     <text x="150" y="24" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">Model Keuntungan Penjualan</text>
     <text x="150" y="44" fill="#94a3b8" fontSize="9" textAnchor="middle">Harga (p), Permintaan (q), Pendapatan (R)</text>
-    <rect x="20" y="52" width="120" height="40" rx="5" fill="#1e3a5f" stroke="#38bdf8" strokeWidth="1"/>
+    <rect x="20" y="52" width="120" height="40" rx="5" fill="var(--muted)" stroke="#38bdf8" strokeWidth="1"/>
     <text x="80" y="68" fill="#38bdf8" fontSize="8" textAnchor="middle">q = a − bp</text>
     <text x="80" y="82" fill="#94a3b8" fontSize="7" textAnchor="middle">(permintaan turun jika harga naik)</text>
-    <rect x="160" y="52" width="120" height="40" rx="5" fill="#1e3a5f" stroke="#86efac" strokeWidth="1"/>
+    <rect x="160" y="52" width="120" height="40" rx="5" fill="var(--muted)" stroke="#86efac" strokeWidth="1"/>
     <text x="220" y="68" fill="#86efac" fontSize="8" textAnchor="middle">R = p × q = p(a−bp)</text>
     <text x="220" y="82" fill="#94a3b8" fontSize="7" textAnchor="middle">(pendapatan adalah kuadrat)</text>
     <line x1="10" y1="102" x2="290" y2="102" stroke="#334155" strokeWidth="1"/>
@@ -132,14 +133,14 @@ const questions: Q[] = [
   ]}),
   Qn(7,"Produksi dan Biaya – UN",{type:"mixed",diagram:(
     <svg width="300" height="130" viewBox="0 0 300 130" className="mx-auto">
-      <rect x="5" y="5" width="290" height="120" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
+      <rect x="5" y="5" width="290" height="120" rx="8" fill="var(--card)" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
       <text x="150" y="24" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">Biaya Produksi vs Jumlah Unit</text>
       {['x (unit)','0','2','4','6','8','10'].map((v,i)=>(
         <text key={i} x={25+i*45} y={44} fill={i===0?"#fbbf24":"#94a3b8"} fontSize="9" textAnchor="middle">{v}</text>
       ))}
       <line x1="7" y1="49" x2="293" y2="49" stroke="#334155" strokeWidth="1"/>
       {['C(juta)','50','26','10','2','2','10'].map((v,i)=>(
-        <text key={i} x={25+i*45} y={70} fill={i===0?"#fbbf24":v==='2'?"#86efac":"#e2e8f0"} fontSize="9" textAnchor="middle">{v}</text>
+        <text key={i} x={25+i*45} y={70} fill={i===0?"#fbbf24":v==='2'?"#86efac":"var(--card-foreground)"} fontSize="9" textAnchor="middle">{v}</text>
       ))}
       <line x1="7" y1="75" x2="293" y2="75" stroke="#334155" strokeWidth="1"/>
       <text x="150" y="95" fill="#86efac" fontSize="8" textAnchor="middle">Biaya minimum = 2 juta saat x = 6 atau x = 8</text>
@@ -245,7 +246,7 @@ const questions: Q[] = [
   Qn(22,"Kolam Renang Optimal – UN",{type:"mixed",diagram:(
     <svg width="300" height="155" viewBox="0 0 300 155" className="mx-auto">
       <rect x="20" y="15" width="260" height="125" rx="6" fill="none" stroke="#94a3b8" strokeWidth="2"/>
-      <rect x="40" y="35" width="220" height="85" rx="4" fill="#1e3a5f" stroke="#38bdf8" strokeWidth="2"/>
+      <rect x="40" y="35" width="220" height="85" rx="4" fill="var(--muted)" stroke="#38bdf8" strokeWidth="2"/>
       <text x="150" y="82" fill="#38bdf8" fontSize="9" textAnchor="middle">Kolam (panjang × lebar)</text>
       <text x="150" y="130" fill="#94a3b8" fontSize="8" textAnchor="middle">Tepi jalan = 10 m di kiri-kanan, 10 m atas-bawah</text>
     </svg>
@@ -259,6 +260,7 @@ const questions: Q[] = [
 const KontekstualPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -271,18 +273,18 @@ const KontekstualPage = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-violet-300 text-center mb-1" style={{textShadow:'0 0 20px rgba(167,139,250,0.7)'}}>
             SOAL KONTEKSTUAL FUNGSI KUADRAT
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Fungsi Kuadrat · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-muted-foreground"} text-xs text-center font-body`}>Kelas 9 · Fungsi Kuadrat · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-violet-500/10 border border-violet-500/30 rounded-lg px-4 py-2">
             <span className="text-violet-400 text-xs font-bold">📋 22 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-muted-foreground"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-muted-foreground"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q,i)=>(
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{animationDelay:`${i*0.02}s`}}>
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-slate-900/80 to-purple-900/30 backdrop-blur"/>
+              <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-violet-900/30 via-slate-900/80 to-purple-900/30" : "from-violet-50/60 via-white/80 to-purple-50/40"} backdrop-blur`}/>
               <div className="absolute inset-0 border border-violet-500/20 rounded-2xl"/>
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-violet-400 to-purple-500 rounded-l-2xl"/>
               <div className="relative px-5 py-4">
@@ -292,16 +294,16 @@ const KontekstualPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-violet-400 text-[10px] font-bold uppercase tracking-wider bg-violet-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
-                    {q.mathContent && <div className="mb-3 bg-violet-900/20 border border-violet-500/20 rounded-lg px-4 py-3 flex justify-center"><BlockMath math={q.mathContent}/></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3">{q.diagram}</div>}
+                    {q.content && <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-foreground"} leading-relaxed mb-3`}>{q.content}</p>}
+                    {q.mathContent && <div className={`mb-3 ${isDark ? "bg-violet-900/20" : "bg-violet-50"} border border-violet-500/20 rounded-lg px-4 py-3 flex justify-center`}><BlockMath math={q.mathContent}/></div>}
+                    {q.diagram && <div className={`mb-3 flex justify-center ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-xl p-3`}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p,pi)=>(
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                          <div key={pi} className={`flex items-start gap-2 rounded-lg px-3 py-2 ${isDark ? "bg-white/5" : "bg-gray-50"}`}>
                             <span className="text-violet-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
-                            {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math}/></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
+                            {p.math ? <div className={`${isDark ? "text-white" : "text-foreground"} text-sm overflow-x-auto`}><InlineMath math={p.math}/></div>
+                              : <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-foreground"}`}>{p.text}</p>}
                           </div>
                         ))}
                       </div>
