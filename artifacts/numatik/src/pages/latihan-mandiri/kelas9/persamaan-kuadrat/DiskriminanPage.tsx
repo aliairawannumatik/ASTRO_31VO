@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
@@ -12,17 +13,17 @@ const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, 
 
 const DiskriminanSVG = () => (
   <svg width="300" height="120" viewBox="0 0 300 120" className="mx-auto">
-    <rect x="5" y="5" width="290" height="110" rx="12" fill="#4c0519" fillOpacity="0.25" stroke="#f43f5e" strokeWidth="1.5"/>
+    <rect x="5" y="5" width="290" height="110" rx="12" fill="var(--card)" fillOpacity="0.25" stroke="#f43f5e" strokeWidth="1.5"/>
     <text x="150" y="30" fill="#fda4af" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">D = b² − 4ac</text>
-    <rect x="20" y="45" width="80" height="60" rx="8" fill="#166534" fillOpacity="0.3" stroke="#4ade80" strokeWidth="1"/>
+    <rect x="20" y="45" width="80" height="60" rx="8" fill="var(--card)" fillOpacity="0.3" stroke="#4ade80" strokeWidth="1"/>
     <text x="60" y="68" fill="#4ade80" fontSize="11" textAnchor="middle" fontFamily="monospace">D {">"} 0</text>
     <text x="60" y="86" fill="#86efac" fontSize="9" textAnchor="middle">2 akar real</text>
     <text x="60" y="100" fill="#86efac" fontSize="9" textAnchor="middle">berbeda</text>
-    <rect x="110" y="45" width="80" height="60" rx="8" fill="#1e3a5f" fillOpacity="0.3" stroke="#60a5fa" strokeWidth="1"/>
+    <rect x="110" y="45" width="80" height="60" rx="8" fill="var(--card)" fillOpacity="0.3" stroke="#60a5fa" strokeWidth="1"/>
     <text x="150" y="68" fill="#60a5fa" fontSize="11" textAnchor="middle" fontFamily="monospace">D = 0</text>
     <text x="150" y="86" fill="#93c5fd" fontSize="9" textAnchor="middle">akar kembar</text>
     <text x="150" y="100" fill="#93c5fd" fontSize="9" textAnchor="middle">x₁ = x₂</text>
-    <rect x="200" y="45" width="80" height="60" rx="8" fill="#500724" fillOpacity="0.3" stroke="#fb7185" strokeWidth="1"/>
+    <rect x="200" y="45" width="80" height="60" rx="8" fill="var(--card)" fillOpacity="0.3" stroke="#fb7185" strokeWidth="1"/>
     <text x="240" y="68" fill="#fb7185" fontSize="11" textAnchor="middle" fontFamily="monospace">D {"<"} 0</text>
     <text x="240" y="86" fill="#fda4af" fontSize="9" textAnchor="middle">tidak ada</text>
     <text x="240" y="100" fill="#fda4af" fontSize="9" textAnchor="middle">akar real</text>
@@ -389,6 +390,7 @@ const questions: Q[] = [
 const DiskriminanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -412,7 +414,7 @@ const DiskriminanPage = () => {
 
         <div className="mb-5 bg-rose-900/20 border border-rose-500/20 rounded-xl p-4">
           <p className="text-rose-300 text-xs font-bold mb-3">📐 Rumus Diskriminan</p>
-          <div className="bg-white/5 rounded-lg px-3 py-3 mb-2 flex justify-center">
+          <div className={isDark ? "bg-white/5 rounded-lg px-3 py-3 mb-2 flex justify-center" : "bg-gray-50 rounded-lg px-3 py-3 mb-2 flex justify-center"}>
             <BlockMath math="D = b^2 - 4ac" />
           </div>
           <div className="grid grid-cols-3 gap-2 mt-2">
@@ -421,7 +423,7 @@ const DiskriminanPage = () => {
               { name: "D = 0", math: "\\text{akar kembar}", color: "text-blue-400" },
               { name: "D < 0", math: "\\text{tidak real}", color: "text-red-400" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-2 py-2 text-center">
+              <div key={r.name} className={isDark ? "bg-white/5 rounded-lg px-2 py-2 text-center" : "bg-gray-50 rounded-lg px-2 py-2 text-center"}>
                 <div className={`text-xs font-bold mb-1 ${r.color}`}>{r.name}</div>
                 <div className={`text-[10px] overflow-x-auto ${r.color}`}><InlineMath math={r.math} /></div>
               </div>
@@ -432,7 +434,7 @@ const DiskriminanPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" />
+              <div className={isDark ? "absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" : "absolute inset-0 bg-gradient-to-br from-rose-50/60 via-white/80 to-pink-50/40 backdrop-blur"} />
               <div className="absolute inset-0 border border-rose-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -442,16 +444,16 @@ const DiskriminanPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
+                    {q.content && <p className={isDark ? "font-body text-sm text-white/90 leading-relaxed mb-3" : "font-body text-sm text-gray-800 leading-relaxed mb-3"}>{q.content}</p>}
                     {q.mathContent && <div className="mb-3 bg-rose-900/20 border border-rose-500/20 rounded-lg px-4 py-3 flex justify-center"><BlockMath math={q.mathContent} /></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3">{q.diagram}</div>}
+                    {q.diagram && <div className={isDark ? "mb-3 flex justify-center bg-white/5 rounded-xl p-3" : "mb-3 flex justify-center bg-gray-50 rounded-xl p-3"}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                          <div key={pi} className={isDark ? "flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5" : "flex items-start gap-2 rounded-lg px-3 py-2 bg-gray-50"}>
                             <span className="text-rose-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
                             {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
+                              : <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{p.text}</p>}
                           </div>
                         ))}
                       </div>

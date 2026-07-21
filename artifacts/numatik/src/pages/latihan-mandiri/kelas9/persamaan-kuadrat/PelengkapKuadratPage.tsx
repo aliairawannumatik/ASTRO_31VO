@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
@@ -12,7 +13,7 @@ const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, 
 
 const PelengkapStepSVG = () => (
   <svg width="300" height="130" viewBox="0 0 300 130" className="mx-auto">
-    <rect x="5" y="5" width="290" height="120" rx="12" fill="#0c4a6e" fillOpacity="0.25" stroke="#38bdf8" strokeWidth="1.5"/>
+    <rect x="5" y="5" width="290" height="120" rx="12" fill="var(--card)" fillOpacity="0.25" stroke="#38bdf8" strokeWidth="1.5"/>
     <text x="150" y="32" fill="#7dd3fc" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">x² + 6x + 5 = 0</text>
     <text x="150" y="52" fill="#38bdf8" fontSize="11" fontFamily="monospace" textAnchor="middle">x² + 6x = −5</text>
     <text x="150" y="72" fill="#38bdf8" fontSize="11" fontFamily="monospace" textAnchor="middle">x² + 6x + 9 = −5 + 9</text>
@@ -23,7 +24,7 @@ const PelengkapStepSVG = () => (
 
 const KuadratSempurnaSVG = () => (
   <svg width="300" height="100" viewBox="0 0 300 100" className="mx-auto">
-    <rect x="5" y="5" width="290" height="90" rx="10" fill="#0c4a6e" fillOpacity="0.2" stroke="#0ea5e9" strokeWidth="1.5"/>
+    <rect x="5" y="5" width="290" height="90" rx="10" fill="var(--card)" fillOpacity="0.2" stroke="#0ea5e9" strokeWidth="1.5"/>
     <text x="150" y="30" fill="#7dd3fc" fontSize="12" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Melengkapi Kuadrat</text>
     <text x="150" y="52" fill="#38bdf8" fontSize="12" fontFamily="monospace" textAnchor="middle">x² + bx → x² + bx + (b/2)² = (x + b/2)²</text>
     <text x="100" y="78" fill="#f59e0b" fontSize="11" fontFamily="monospace" textAnchor="middle">Tambahkan (b/2)²</text>
@@ -385,6 +386,7 @@ const questions: Q[] = [
 const PelengkapKuadratPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -415,8 +417,8 @@ const PelengkapKuadratPage = () => {
               { name: "Langkah 3", math: "+\\left(\\tfrac{b}{2a}\\right)^2 \\text{ ke dua ruas}" },
               { name: "Langkah 4", math: "\\left(x+\\tfrac{b}{2a}\\right)^2 = \\tfrac{D}{4a^2}" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2">
-                <div className="text-white/40 text-[9px] uppercase mb-1">{r.name}</div>
+              <div key={r.name} className={isDark ? "bg-white/5 rounded-lg px-3 py-2" : "bg-gray-50 rounded-lg px-3 py-2"}>
+                <div className={isDark ? "text-white/40 text-[9px] uppercase mb-1" : "text-gray-500 text-[9px] uppercase mb-1"}>{r.name}</div>
                 <div className="text-sky-300 text-xs overflow-x-auto"><InlineMath math={r.math} /></div>
               </div>
             ))}
@@ -426,7 +428,7 @@ const PelengkapKuadratPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" />
+              <div className={isDark ? "absolute inset-0 bg-gradient-to-br from-sky-900/30 via-slate-900/80 to-blue-900/30 backdrop-blur" : "absolute inset-0 bg-gradient-to-br from-sky-50/60 via-white/80 to-blue-50/40 backdrop-blur"} />
               <div className="absolute inset-0 border border-sky-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-sky-400 to-blue-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
@@ -436,16 +438,16 @@ const PelengkapKuadratPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-sky-400 text-[10px] font-bold uppercase tracking-wider bg-sky-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
+                    {q.content && <p className={isDark ? "font-body text-sm text-white/90 leading-relaxed mb-3" : "font-body text-sm text-gray-800 leading-relaxed mb-3"}>{q.content}</p>}
                     {q.mathContent && <div className="mb-3 bg-sky-900/20 border border-sky-500/20 rounded-lg px-4 py-3 flex justify-center"><BlockMath math={q.mathContent} /></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3">{q.diagram}</div>}
+                    {q.diagram && <div className={isDark ? "mb-3 flex justify-center bg-white/5 rounded-xl p-3" : "mb-3 flex justify-center bg-gray-50 rounded-xl p-3"}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p, pi) => (
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                          <div key={pi} className={isDark ? "flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5" : "flex items-start gap-2 rounded-lg px-3 py-2 bg-gray-50"}>
                             <span className="text-sky-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
                             {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math} /></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
+                              : <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{p.text}</p>}
                           </div>
                         ))}
                       </div>

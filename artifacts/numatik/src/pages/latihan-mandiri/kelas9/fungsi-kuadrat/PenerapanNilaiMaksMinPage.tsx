@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
@@ -14,22 +15,22 @@ const MaxMinSVG = () => (
   <svg width="300" height="210" viewBox="0 0 300 210" className="mx-auto">
     <text x="150" y="16" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">Nilai Maksimum dan Minimum</text>
     <g>
-      <rect x="10" y="22" width="130" height="90" rx="8" fill="#1e293b" stroke="#86efac" strokeWidth="1" strokeOpacity="0.5"/>
+      <rect x="10" y="22" width="130" height="90" rx="8" fill="var(--card)" stroke="#86efac" strokeWidth="1" strokeOpacity="0.5"/>
       <text x="75" y="38" fill="#86efac" fontSize="9" textAnchor="middle" fontWeight="bold">a &gt; 0 → MINIMUM</text>
       <path d="M 25,80 Q 75,105 125,80" stroke="#86efac" fill="none" strokeWidth="2"/>
       <circle cx="75" cy="103" r="4" fill="#86efac"/>
-      <line x1="25" y1="85" x2="125" y2="85" stroke="#334155" strokeWidth="1"/>
+      <line x1="25" y1="85" x2="125" y2="85" stroke="var(--border)" strokeWidth="1"/>
       <text x="75" y="115" fill="#86efac" fontSize="8" textAnchor="middle">Nilai Min = k</text>
     </g>
     <g>
-      <rect x="160" y="22" width="130" height="90" rx="8" fill="#1e293b" stroke="#f472b6" strokeWidth="1" strokeOpacity="0.5"/>
+      <rect x="160" y="22" width="130" height="90" rx="8" fill="var(--card)" stroke="#f472b6" strokeWidth="1" strokeOpacity="0.5"/>
       <text x="225" y="38" fill="#f472b6" fontSize="9" textAnchor="middle" fontWeight="bold">a &lt; 0 → MAKSIMUM</text>
       <path d="M 175,90 Q 225,55 275,90" stroke="#f472b6" fill="none" strokeWidth="2"/>
       <circle cx="225" cy="57" r="4" fill="#f472b6"/>
-      <line x1="175" y1="85" x2="275" y2="85" stroke="#334155" strokeWidth="1"/>
+      <line x1="175" y1="85" x2="275" y2="85" stroke="var(--border)" strokeWidth="1"/>
       <text x="225" y="115" fill="#f472b6" fontSize="8" textAnchor="middle">Nilai Maks = k</text>
     </g>
-    <rect x="5" y="125" width="290" height="80" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.3"/>
+    <rect x="5" y="125" width="290" height="80" rx="8" fill="var(--card)" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.3"/>
     <text x="150" y="143" fill="#fbbf24" fontSize="9" fontWeight="bold" textAnchor="middle">Rumus Nilai Ekstrem</text>
     <text x="90" y="162" fill="#94a3b8" fontSize="8" textAnchor="middle">Sumbu simetri:</text>
     <text x="210" y="162" fill="#f59e0b" fontSize="8" textAnchor="middle">x = −b/(2a)</text>
@@ -79,16 +80,16 @@ const TrajectoryArc = () => (
 
 const ProfitTableSVG = () => (
   <svg width="300" height="155" viewBox="0 0 300 155" className="mx-auto">
-    <rect x="5" y="5" width="290" height="145" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
+    <rect x="5" y="5" width="290" height="145" rx="8" fill="var(--card)" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
     <text x="150" y="24" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">Tabel Keuntungan P(x) = −x² + 10x − 16</text>
     {['x (unit)','1','2','3','4','5','6','7'].map((v,i)=>(
       <text key={i} x={22+i*37} y={44} fill={i===0?"#fbbf24":"#94a3b8"} fontSize="8.5" textAnchor="middle">{v}</text>
     ))}
-    <line x1="7" y1="49" x2="293" y2="49" stroke="#334155" strokeWidth="1"/>
+    <line x1="7" y1="49" x2="293" y2="49" stroke="var(--border)" strokeWidth="1"/>
     {['P(x)','−7','0','5','8','9','8','5'].map((v,i)=>(
       <text key={i} x={22+i*37} y={70} fill={i===0?"#fbbf24":v==='0'?"#86efac":v.startsWith('−')?"#f472b6":v==='9'?"#fcd34d":"#e2e8f0"} fontSize="8.5" textAnchor="middle">{v}</text>
     ))}
-    <line x1="7" y1="75" x2="293" y2="75" stroke="#334155" strokeWidth="1"/>
+    <line x1="7" y1="75" x2="293" y2="75" stroke="var(--border)" strokeWidth="1"/>
     <text x="150" y="95" fill="#86efac" fontSize="8" textAnchor="middle">Nilai max P = 9 saat x = 5</text>
     <text x="150" y="112" fill="#94a3b8" fontSize="8" textAnchor="middle">P(x) = −x² + 10x − 16</text>
     <text x="150" y="128" fill="#94a3b8" fontSize="8" textAnchor="middle">a = −1 &lt; 0 → ada nilai maksimum</text>
@@ -165,7 +166,7 @@ const questions: Q[] = [
   Qn(12,"Luas Kolam Optimal – UN",{type:"mixed",diagram:(
     <svg width="300" height="160" viewBox="0 0 300 160" className="mx-auto">
       <rect x="40" y="25" width="220" height="110" rx="4" fill="none" stroke="#38bdf8" strokeWidth="2"/>
-      <rect x="60" y="45" width="180" height="70" rx="4" fill="#1e3a5f" stroke="#38bdf8" strokeWidth="1.5"/>
+      <rect x="60" y="45" width="180" height="70" rx="4" fill="var(--card)" stroke="#38bdf8" strokeWidth="1.5"/>
       <text x="150" y="85" fill="#38bdf8" fontSize="9" textAnchor="middle">Air/Kolam</text>
       <text x="150" y="20" fill="#fcd34d" fontSize="9" textAnchor="middle">Lebar total = x + 2×tepi</text>
       <text x="150" y="150" fill="#94a3b8" fontSize="8" textAnchor="middle">Area total tertentu, maksimalkan kolam</text>
@@ -322,16 +323,16 @@ const questions: Q[] = [
   ]}),
   Qn(36,"Analisis Penjualan – ANBK",{type:"mixed",diagram:(
     <svg width="300" height="130" viewBox="0 0 300 130" className="mx-auto">
-      <rect x="5" y="5" width="290" height="120" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
+      <rect x="5" y="5" width="290" height="120" rx="8" fill="var(--card)" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
       <text x="150" y="24" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">Penjualan vs Keuntungan</text>
       {['Unit (x)','10','20','30','40','50','60'].map((v,i)=>(
         <text key={i} x={25+i*45} y={44} fill={i===0?"#fbbf24":"#94a3b8"} fontSize="8.5" textAnchor="middle">{v}</text>
       ))}
-      <line x1="7" y1="49" x2="293" y2="49" stroke="#334155" strokeWidth="1"/>
+      <line x1="7" y1="49" x2="293" y2="49" stroke="var(--border)" strokeWidth="1"/>
       {['K(ribu)','−50','0','30','40','30','0'].map((v,i)=>(
         <text key={i} x={25+i*45} y={70} fill={i===0?"#fbbf24":v==='0'?"#86efac":v==='40'?"#fcd34d":v.startsWith('−')?"#f472b6":"#e2e8f0"} fontSize="8.5" textAnchor="middle">{v}</text>
       ))}
-      <line x1="7" y1="75" x2="293" y2="75" stroke="#334155" strokeWidth="1"/>
+      <line x1="7" y1="75" x2="293" y2="75" stroke="var(--border)" strokeWidth="1"/>
       <text x="150" y="95" fill="#86efac" fontSize="8" textAnchor="middle">Impas saat x = 20 dan x = 60</text>
       <text x="150" y="113" fill="#fcd34d" fontSize="8" textAnchor="middle">Keuntungan maks = 40 ribu saat x = 40 unit</text>
     </svg>
@@ -374,6 +375,7 @@ const questions: Q[] = [
 const PenerapanNilaiMaksMinPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -403,8 +405,8 @@ const PenerapanNilaiMaksMinPage = () => {
               {name:"③ Cari puncak", math:"x_{opt} = -\\frac{b}{2a}"},
               {name:"④ Nilai ekstrem", math:"f(x_{opt}) = c - \\frac{b^2}{4a}"},
             ].map(r=>(
-              <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2">
-                <div className="text-white/40 text-[9px] uppercase mb-1">{r.name}</div>
+              <div key={r.name} className={isDark ? "bg-white/5 rounded-lg px-3 py-2" : "bg-gray-50 rounded-lg px-3 py-2"}>
+                <div className={isDark ? "text-white/40 text-[9px] uppercase mb-1" : "text-gray-500 text-[9px] uppercase mb-1"}>{r.name}</div>
                 <div className="text-rose-300 text-xs overflow-x-auto"><InlineMath math={r.math}/></div>
               </div>
             ))}
@@ -414,7 +416,7 @@ const PenerapanNilaiMaksMinPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q,i)=>(
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{animationDelay:`${i*0.02}s`}}>
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur"/>
+              <div className={isDark ? "absolute inset-0 bg-gradient-to-br from-rose-900/30 via-slate-900/80 to-pink-900/30 backdrop-blur" : "absolute inset-0 bg-gradient-to-br from-rose-50/60 via-white/80 to-pink-50/40 backdrop-blur"}/>
               <div className="absolute inset-0 border border-rose-500/20 rounded-2xl"/>
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-rose-400 to-pink-500 rounded-l-2xl"/>
               <div className="relative px-5 py-4">
@@ -424,16 +426,16 @@ const PenerapanNilaiMaksMinPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-rose-400 text-[10px] font-bold uppercase tracking-wider bg-rose-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
+                    {q.content && <p className={isDark ? "font-body text-sm text-white/90 leading-relaxed mb-3" : "font-body text-sm text-gray-800 leading-relaxed mb-3"}>{q.content}</p>}
                     {q.mathContent && <div className="mb-3 bg-rose-900/20 border border-rose-500/20 rounded-lg px-4 py-3 flex justify-center"><BlockMath math={q.mathContent}/></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3">{q.diagram}</div>}
+                    {q.diagram && <div className={isDark ? "mb-3 flex justify-center bg-white/5 rounded-xl p-3" : "mb-3 flex justify-center bg-gray-50 rounded-xl p-3"}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p,pi)=>(
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                          <div key={pi} className={isDark ? "flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5" : "flex items-start gap-2 rounded-lg px-3 py-2 bg-gray-50"}>
                             <span className="text-rose-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
                             {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math}/></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
+                              : <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{p.text}</p>}
                           </div>
                         ))}
                       </div>

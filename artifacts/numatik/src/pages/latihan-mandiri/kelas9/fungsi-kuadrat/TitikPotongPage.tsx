@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
@@ -66,16 +67,16 @@ const NoXIntercept = () => (
 
 const DiscriminantTable = () => (
   <svg width="300" height="150" viewBox="0 0 300 150" className="mx-auto">
-    <rect x="5" y="5" width="290" height="140" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.5"/>
+    <rect x="5" y="5" width="290" height="140" rx="8" fill="var(--card)" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.5"/>
     <text x="150" y="25" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">Diskriminan dan Titik Potong Sumbu-x</text>
     {['Kondisi D','D &gt; 0','D = 0','D &lt; 0'].map((v,i)=>(
       <text key={i} x={25+i*90} y={45} fill={i===0?"#fbbf24":i===1?"#86efac":i===2?"#f59e0b":"#f472b6"} fontSize="9" textAnchor="middle" fontWeight={i===0?"bold":"normal"}>{v}</text>
     ))}
-    <line x1="7" y1="50" x2="293" y2="50" stroke="#334155" strokeWidth="1"/>
+    <line x1="7" y1="50" x2="293" y2="50" stroke="var(--border)" strokeWidth="1"/>
     {['Jenis Akar','2 akar real berbeda','1 akar real kembar','Tidak ada akar real'].map((v,i)=>(
       <text key={i} x={25+i*90} y={72} fill={i===0?"#fbbf24":i===1?"#86efac":i===2?"#f59e0b":"#f472b6"} fontSize="8" textAnchor="middle">{v}</text>
     ))}
-    <line x1="7" y1="78" x2="293" y2="78" stroke="#334155" strokeWidth="1"/>
+    <line x1="7" y1="78" x2="293" y2="78" stroke="var(--border)" strokeWidth="1"/>
     {['Potong sb-x','2 titik','1 titik (singgung)','Tidak ada'].map((v,i)=>(
       <text key={i} x={25+i*90} y={100} fill={i===0?"#fbbf24":i===1?"#86efac":i===2?"#f59e0b":"#f472b6"} fontSize="8" textAnchor="middle">{v}</text>
     ))}
@@ -230,15 +231,15 @@ const questions: Q[] = [
   ]}),
   Qn(22,"Titik Potong dari Tabel Nilai – ANBK",{type:"mixed",diagram:(
     <svg width="300" height="110" viewBox="0 0 300 110" className="mx-auto">
-      <rect x="5" y="5" width="290" height="100" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
+      <rect x="5" y="5" width="290" height="100" rx="8" fill="var(--card)" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.4"/>
       {['x','−3','−2','−1','0','1','2','3'].map((v,i)=>(
         <text key={i} x={22+i*38} y={28} fill={i===0?"#fbbf24":"#94a3b8"} fontSize="9" textAnchor="middle">{v}</text>
       ))}
-      <line x1="7" y1="33" x2="293" y2="33" stroke="#334155" strokeWidth="1"/>
+      <line x1="7" y1="33" x2="293" y2="33" stroke="var(--border)" strokeWidth="1"/>
       {['f(x)','−4','0','2','2','0','−4','−10'].map((v,i)=>(
         <text key={i} x={22+i*38} y={55} fill={i===0?"#fbbf24":v==='0'?"#86efac":v.includes('−')?"#f472b6":"#e2e8f0"} fontSize="9" textAnchor="middle">{v}</text>
       ))}
-      <line x1="7" y1="60" x2="293" y2="60" stroke="#334155" strokeWidth="1"/>
+      <line x1="7" y1="60" x2="293" y2="60" stroke="var(--border)" strokeWidth="1"/>
       <text x="150" y="80" fill="#94a3b8" fontSize="8" textAnchor="middle">Nilai f(x)=0 menunjukkan titik potong sumbu-x</text>
       <text x="150" y="95" fill="#64748b" fontSize="8" textAnchor="middle">Titik hijau = akar / titik potong sumbu-x</text>
     </svg>
@@ -279,7 +280,7 @@ const questions: Q[] = [
   ]}),
   Qn(29,"Hubungan Titik Potong dengan Diskriminan – ANBK",{type:"mixed",diagram:(
     <svg width="300" height="190" viewBox="0 0 300 190" className="mx-auto">
-      <rect x="5" y="5" width="290" height="180" rx="8" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.3"/>
+      <rect x="5" y="5" width="290" height="180" rx="8" fill="var(--card)" stroke="#f59e0b" strokeWidth="1" strokeOpacity="0.3"/>
       <text x="150" y="22" fill="#fbbf24" fontSize="10" fontWeight="bold" textAnchor="middle">D &gt; 0 : 2 potong sumbu-x</text>
       <path d="M 50,55 Q 100,95 150,55" stroke="#86efac" fill="none" strokeWidth="2"/>
       <circle cx="50" cy="75" r="3" fill="#86efac"/>
@@ -359,6 +360,7 @@ const questions: Q[] = [
 const TitikPotongPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -388,8 +390,8 @@ const TitikPotongPage = () => {
               {name:"Diskriminan", math:"D = b^2-4ac"},
               {name:"D > 0", math:"\\text{2 titik potong sb-x}"},
             ].map(r=>(
-              <div key={r.name} className="bg-white/5 rounded-lg px-3 py-2">
-                <div className="text-white/40 text-[9px] uppercase mb-1">{r.name}</div>
+              <div key={r.name} className={isDark ? "bg-white/5 rounded-lg px-3 py-2" : "bg-gray-50 rounded-lg px-3 py-2"}>
+                <div className={isDark ? "text-white/40 text-[9px] uppercase mb-1" : "text-gray-500 text-[9px] uppercase mb-1"}>{r.name}</div>
                 <div className="text-emerald-300 text-xs overflow-x-auto"><InlineMath math={r.math}/></div>
               </div>
             ))}
@@ -399,7 +401,7 @@ const TitikPotongPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q,i)=>(
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up" style={{animationDelay:`${i*0.02}s`}}>
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur"/>
+              <div className={isDark ? "absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" : "absolute inset-0 bg-gradient-to-br from-emerald-50/60 via-white/80 to-teal-50/40 backdrop-blur"}/>
               <div className="absolute inset-0 border border-emerald-500/20 rounded-2xl"/>
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-emerald-400 to-teal-500 rounded-l-2xl"/>
               <div className="relative px-5 py-4">
@@ -409,16 +411,16 @@ const TitikPotongPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded inline-block mb-2">{q.title}</span>
-                    {q.content && <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>}
+                    {q.content && <p className={isDark ? "font-body text-sm text-white/90 leading-relaxed mb-3" : "font-body text-sm text-gray-800 leading-relaxed mb-3"}>{q.content}</p>}
                     {q.mathContent && <div className="mb-3 bg-emerald-900/20 border border-emerald-500/20 rounded-lg px-4 py-3 flex justify-center"><BlockMath math={q.mathContent}/></div>}
-                    {q.diagram && <div className="mb-3 flex justify-center bg-white/5 rounded-xl p-3">{q.diagram}</div>}
+                    {q.diagram && <div className={isDark ? "mb-3 flex justify-center bg-white/5 rounded-xl p-3" : "mb-3 flex justify-center bg-gray-50 rounded-xl p-3"}>{q.diagram}</div>}
                     {q.parts && (
                       <div className="flex flex-col gap-2">
                         {q.parts.map((p,pi)=>(
-                          <div key={pi} className="flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5">
+                          <div key={pi} className={isDark ? "flex items-start gap-2 rounded-lg px-3 py-2 bg-white/5" : "flex items-start gap-2 rounded-lg px-3 py-2 bg-gray-50"}>
                             <span className="text-emerald-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{p.label}</span>
                             {p.math ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={p.math}/></div>
-                              : <p className="font-body text-sm text-white/80">{p.text}</p>}
+                              : <p className={isDark ? "font-body text-sm text-white/80" : "font-body text-sm text-gray-700"}>{p.text}</p>}
                           </div>
                         ))}
                       </div>
