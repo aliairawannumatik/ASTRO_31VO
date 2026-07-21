@@ -1,0 +1,59 @@
+KONTEKS PROJECT:
+Ini project Numatik, aplikasi edukasi matematika untuk siswa SMP, 
+menggunakan pnpm workspace. Source code aktif ada di artifacts/numatik/src/ 
+(pastikan Anda mengedit file di sini, BUKAN di .migration-backup/). 
+Sistem tema pakai useTheme() dari ThemeContext (isDark boolean), dengan 
+tema dark/luar-angkasa dan 5 tema terang lainnya.
+
+Sudah diperbaiki sebelumnya dengan pola conditional isDark yang konsisten 
+di banyak file di latihan-mandiri/kelas9/, termasuk sesi terakhir untuk 
+8 file di folder fungsi-kuadrat/ dan persamaan-kuadrat/. Buka salah satu 
+file yang sudah diperbaiki sebagai REFERENSI pola warna yang benar — 
+jangan bikin skema warna baru.
+
+POLA PERBAIKAN YANG SUDAH TERBUKTI:
+1. Untuk komponen dengan akses hook: useTheme() + isDark ? "..." : "...".
+2. Untuk SVG di level MODULE (tidak bisa akses hook): fill="var(--card)" 
+   untuk background, fill="var(--card-foreground)" untuk teks, 
+   stroke="var(--border)" untuk garis grid.
+3. Arrow-function shorthand SVG component yang butuh isDark → konversi 
+   ke block-body function.
+4. "Answer result boxes" dan teks bersarang dalam <strong> tag sering 
+   terlewat — cari SECARA EKSPLISIT dan scan ulang kedua.
+5. Cek SEMUA className termasuk opacity rendah.
+6. Tint sangat rendah (~0.03) yang invisible di kedua tema boleh 
+   dibiarkan — jelaskan di laporan.
+7. Warna representasional (objek fisik dalam ilustrasi) BOLEH dibiarkan 
+   — jelaskan alasannya kalau ditemukan.
+
+TUGAS: File-file ini sangat kecil (1-2 baris masing-masing), kerjakan 
+SEMUA dalam 1 sesi ini secara sistematis satu per satu. Perbaiki SEMUA 
+hardcoded background gelap di folder src/pages/latihan-mandiri/kelas9/ 
+(sesuaikan path persis, cari file yang cocok kalau lokasi berbeda sedikit):
+
+peluang/:
+- PeluangTeoretikPage.tsx (2 baris)
+
+transformasi-geometri/:
+- RotasiPage.tsx (2 baris)
+- Dilatasi, Refleksi, dan Translasi (cari 3 file yang namanya mengandung 
+  kata-kata ini di folder transformasi-geometri/) — masing-masing 1 baris
+
+Ini adalah kelompok TERAKHIR dari seluruh rangkaian perbaikan theming 
+Kategori "Tugas-Latihan Mandiri" — setelah ini selesai, seluruh kategori 
+tuntas.
+
+ATURAN:
+1. JANGAN ubah logika interaktif — HANYA warna.
+2. JANGAN sentuh file lain di luar 5 file di atas.
+
+Setelah selesai:
+3. Verifikasi TypeScript check per-file (0 error, atau kalau timeout, 
+   verifikasi brace balance + dev server render + HTTP response 
+   seperti sesi sebelumnya).
+4. Lakukan scan ulang untuk elemen bersarang dan SVG yang mungkin 
+   terlewat.
+5. Commit ke branch main (TIDAK PERLU push, saya push manual sendiri).
+
+Laporkan hasilnya per file (ringkas), dan konfirmasi berapa total file 
+yang berhasil diperbaiki dari 5 file yang diminta.
