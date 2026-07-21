@@ -41,6 +41,20 @@ const translations = {
     intro_funfact_bold: "Tahukah kamu?",
     intro_funfact: "Pembelahan sel bakteri nyata di alam mengikuti pola",
     intro_funfact2: "ini — itulah mengapa infeksi bakteri bisa menyebar sangat cepat jika tidak ditangani! Notasi pangkat membantu para ilmuwan menghitung dan memprediksinya.",
+    // Manfaat bilangan berpangkat
+    sec_manfaat: "📌 Manfaat Bilangan Berpangkat",
+    manfaat_intro: "Salah satu kegunaan utama notasi pangkat adalah menuliskan bilangan yang sangat besar maupun sangat kecil secara ringkas — tanpa harus menulis puluhan angka nol!",
+    manfaat_besar_label: "📏 Bilangan Sangat Besar",
+    manfaat_besar_ex1_label: "Kecepatan cahaya",
+    manfaat_besar_ex1_unit: "m/s",
+    manfaat_besar_ex2_label: "Harta orang terkaya di dunia (est.)",
+    manfaat_besar_ex2_unit: "dolar",
+    manfaat_kecil_label: "🔬 Bilangan Sangat Kecil",
+    manfaat_kecil_ex1_label: "Ukuran bakteri (E. coli)",
+    manfaat_kecil_ex1_unit: "meter",
+    manfaat_kecil_ex2_label: "Ukuran virus corona",
+    manfaat_kecil_ex2_unit: "meter",
+    manfaat_close: "Tanpa notasi pangkat, menulis angka-angka ini secara lengkap sangat merepotkan. Itulah mengapa para ilmuwan, ekonom, dan insinyur selalu menggunakan notasi pangkat! 💪",
     // Sub-bab 1
     sec_konsep1: "📘 Sub-Bab 1: Pengertian Bilangan Berpangkat",
     badge_intisari: "🎯 Ringkasan Intisari",
@@ -97,18 +111,14 @@ const translations = {
     ex1_h_s3: "Untuk",
     ex1_h_ans: "Setelah 8 jam, terdapat 256 bakteri.",
     // Sub-bab 2
-    sec_konsep2: "📘 Sub-Bab 2: Bilangan Bulat dan Pecahan Berpangkat",
-    konsep2_intro: "Notasi pangkat tidak hanya berlaku untuk bilangan bulat positif. Basis",
-    konsep2_intro2: "bisa berupa bilangan bulat apa pun (termasuk nol dan negatif) maupun bilangan pecahan.",
-    konsep2_int_label: "Bilangan Bulat Berpangkat:",
-    konsep2_int_note: "Berlaku untuk semua bilangan bulat",
-    konsep2_int_note2: "dan",
+    sec_konsep2: "📘 Sub-Bab 2: Bilangan Pecahan Berpangkat",
     konsep2_frac_label: "Pecahan Berpangkat:",
+    konsep2_frac_expand_note: "sebanyak n kali",
     konsep2_frac_note: "Basis berupa pecahan → pembilang dan penyebut masing-masing dipangkatkan!",
     tip_frac: "Tips:",
     tip_frac_text: "Pecahan berpangkat caranya mudah — pangkatkan pembilang dan penyebutnya secara terpisah! Misalnya:",
     // Contoh 2
-    sec_contoh2: "📝 Contoh Soal — Bilangan Bulat & Pecahan Berpangkat",
+    sec_contoh2: "📝 Contoh Soal — Pecahan Berpangkat",
     ex2_easy_q: "Hitunglah:",
     ex2_med_q: "Hitunglah:",
     ex2_hard_q: "Sederhanakan:",
@@ -118,8 +128,32 @@ const translations = {
     ex2_hard_s1: "Tulis sebagai perkalian berulang:",
     ex2_hard_s2: "Ubah ke pecahan pangkat:",
     ex2_hard_ans: "Hasil:",
-    // Sub-bab 3: pangkat 0
-    sec_konsep3: "📘 Sub-Bab 3: Pangkat Nol dan Pangkat Negatif",
+    // Sub-bab 3 baru: Bilangan Negatif Berpangkat
+    sec_konsep3_neg: "📘 Sub-Bab 3: Bilangan Negatif Berpangkat",
+    neg_perbedaan_title: "⚠️ Perbedaan (-a)ⁿ dan -aⁿ",
+    neg_perbedaan_intro: "Dua ekspresi ini terlihat mirip, tetapi memiliki makna yang BERBEDA:",
+    neg_minus_a_n_label: "(-a)ⁿ — tanda kurung",
+    neg_minus_a_n_desc: "Tanda minus TERMASUK dalam basis. Seluruh bilangan negatif (-a) dipangkatkan sebanyak n kali.",
+    neg_a_n_label: "-aⁿ — tanpa tanda kurung",
+    neg_a_n_desc: "Tanda minus TIDAK termasuk dalam basis. Hanya a yang dipangkatkan, lalu hasilnya dikalikan -1.",
+    neg_genap_title: "(-a)ⁿ dengan n GENAP → Hasil POSITIF ✅",
+    neg_genap_desc: "Dua tanda negatif saling menghilangkan. Semua pasangan (negatif × negatif = positif) sehingga hasil akhir selalu positif.",
+    neg_ganjil_title: "(-a)ⁿ dengan n GANJIL → Hasil NEGATIF ❌",
+    neg_ganjil_desc: "Selalu ada satu tanda negatif yang tersisa tanpa pasangan, sehingga hasil akhir selalu negatif.",
+    neg_ingat: "📌 Ingat:",
+    neg_ingat_text: "Tanda kurung menentukan apakah tanda minus ikut dipangkatkan atau tidak!",
+    sec_contoh3_neg: "📝 Contoh Soal — Bilangan Negatif Berpangkat",
+    ex_neg_easy_q: "Tentukan nilai dari (-4)² dan -4². Jelaskan perbedaannya!",
+    ex_neg_easy_s1: "(-4)² → tanda minus DALAM tanda kurung, ikut dipangkatkan:",
+    ex_neg_easy_s2: "-4² → tanda minus DI LUAR, hanya 4 yang dipangkatkan:",
+    ex_neg_easy_note: "Hasilnya BERBEDA! (-4)² = 16 (positif), sedangkan -4² = -16 (negatif).",
+    ex_neg_med_q: "Tentukan nilai dari: (a) (-3)⁴  (b) (-3)³  (c) -3⁴",
+    ex_neg_med_s_a: "n = 4 (GENAP) → hasil positif:",
+    ex_neg_med_s_b: "n = 3 (GANJIL) → hasil negatif:",
+    ex_neg_med_s_c: "tanda minus di luar → selalu negatif:",
+    ex_neg_med_note: "Perhatikan: -3⁴ selalu negatif tidak peduli n ganjil atau genap, karena tanda minus bukan bagian dari basis.",
+    // Sub-bab 4: pangkat 0 (sebelumnya Sub-bab 3)
+    sec_konsep3: "📘 Sub-Bab 4: Pangkat Nol dan Pangkat Negatif",
     konsep3_intro: "adalah suatu bilangan yang dipangkatkan dengan",
     pangkatNol: "Pangkat nol",
     konsep3_def_zero: "Bilangan apa pun (kecuali nol) yang dipangkatkan nol hasilnya adalah 1:",
@@ -146,7 +180,7 @@ const translations = {
     ex3_note_negative: "pangkat ganjil → negatif",
     ex3_note_not: "bukan",
     // Sub-bab 4: pangkat campuran
-    sec_konsep4: "📘 Sub-Bab 4: Sifat Dasar Pangkat — Ringkasan",
+    sec_konsep4: "📘 Sub-Bab 5: Sifat Dasar Pangkat — Ringkasan",
     konsep4_intro: "Sebelum masuk ke operasi pangkat yang lebih kompleks, mari kita ringkas sifat-sifat dasar yang telah kita pelajari:",
     rangkuman_label: "📊 RANGKUMAN SIFAT DASAR:",
     col_sifat: "Sifat",
@@ -204,6 +238,20 @@ const translations = {
     intro_funfact_bold: "Did you know?",
     intro_funfact: "Real bacterial cell division in nature follows the pattern",
     intro_funfact2: "— that's why bacterial infections can spread incredibly fast if untreated! Exponential notation helps scientists calculate and predict it.",
+    // Benefits
+    sec_manfaat: "📌 Benefits of Exponential Notation",
+    manfaat_intro: "One of the main uses of exponential notation is writing very large or very small numbers compactly — without writing dozens of zeros!",
+    manfaat_besar_label: "📏 Very Large Numbers",
+    manfaat_besar_ex1_label: "Speed of light",
+    manfaat_besar_ex1_unit: "m/s",
+    manfaat_besar_ex2_label: "Wealth of the richest person (est.)",
+    manfaat_besar_ex2_unit: "dollars",
+    manfaat_kecil_label: "🔬 Very Small Numbers",
+    manfaat_kecil_ex1_label: "Size of a bacterium (E. coli)",
+    manfaat_kecil_ex1_unit: "metres",
+    manfaat_kecil_ex2_label: "Size of a coronavirus",
+    manfaat_kecil_ex2_unit: "metres",
+    manfaat_close: "Without exponential notation, writing these numbers out in full would be extremely tedious. That's why scientists, economists, and engineers always use it! 💪",
     sec_konsep1: "📘 Section 1: What Are Exponents?",
     badge_intisari: "🎯 Key Summary",
     konsep1_def: "is a shorthand way to write repeated multiplication of the same number. The general form is:",
@@ -257,17 +305,13 @@ const translations = {
     ex1_h_s2b: "hours, number of bacteria =",
     ex1_h_s3: "For",
     ex1_h_ans: "After 8 hours, there are 256 bacteria.",
-    sec_konsep2: "📘 Section 2: Integer & Fraction Bases",
-    konsep2_intro: "Exponential notation applies beyond positive integers. Base",
-    konsep2_intro2: "can be any integer (including zero and negatives) or a fraction.",
-    konsep2_int_label: "Integer Base:",
-    konsep2_int_note: "Valid for all integers",
-    konsep2_int_note2: "and",
+    sec_konsep2: "📘 Section 2: Fraction Bases",
     konsep2_frac_label: "Fraction Base:",
+    konsep2_frac_expand_note: "n times",
     konsep2_frac_note: "Fraction base → raise numerator and denominator separately!",
     tip_frac: "Tip:",
     tip_frac_text: "Fraction powers are easy — raise the numerator and denominator separately! For example:",
-    sec_contoh2: "📝 Practice Problems — Integer & Fraction Bases",
+    sec_contoh2: "📝 Practice Problems — Fraction Bases",
     ex2_easy_q: "Calculate:",
     ex2_med_q: "Calculate:",
     ex2_hard_q: "Simplify:",
@@ -277,7 +321,32 @@ const translations = {
     ex2_hard_s1: "Write as repeated multiplication:",
     ex2_hard_s2: "Convert to fraction power:",
     ex2_hard_ans: "Result:",
-    sec_konsep3: "📘 Section 3: Zero & Negative Exponents",
+    // Section 3: Negative Bases with Exponents (new)
+    sec_konsep3_neg: "📘 Section 3: Negative Bases with Exponents",
+    neg_perbedaan_title: "⚠️ Difference Between (-a)ⁿ and -aⁿ",
+    neg_perbedaan_intro: "These two expressions look similar but have DIFFERENT meanings:",
+    neg_minus_a_n_label: "(-a)ⁿ — with brackets",
+    neg_minus_a_n_desc: "The minus sign IS PART of the base. The entire negative number (-a) is raised to the power n.",
+    neg_a_n_label: "-aⁿ — without brackets",
+    neg_a_n_desc: "The minus sign is NOT part of the base. Only a is raised to the power, then the result is multiplied by -1.",
+    neg_genap_title: "(-a)ⁿ with EVEN n → POSITIVE result ✅",
+    neg_genap_desc: "Two negatives cancel each other. Every pair (negative × negative = positive) makes the final result always positive.",
+    neg_ganjil_title: "(-a)ⁿ with ODD n → NEGATIVE result ❌",
+    neg_ganjil_desc: "There is always one unpaired negative sign, making the final result always negative.",
+    neg_ingat: "📌 Remember:",
+    neg_ingat_text: "Brackets determine whether the minus sign is raised to the power or not!",
+    sec_contoh3_neg: "📝 Practice Problems — Negative Bases",
+    ex_neg_easy_q: "Find the value of (-4)² and -4². Explain the difference!",
+    ex_neg_easy_s1: "(-4)² → minus sign INSIDE brackets, raised to the power:",
+    ex_neg_easy_s2: "-4² → minus sign OUTSIDE, only 4 is squared:",
+    ex_neg_easy_note: "The results are DIFFERENT! (-4)² = 16 (positive), while -4² = −16 (negative).",
+    ex_neg_med_q: "Find the value of: (a) (-3)⁴  (b) (-3)³  (c) -3⁴",
+    ex_neg_med_s_a: "n = 4 (EVEN) → positive result:",
+    ex_neg_med_s_b: "n = 3 (ODD) → negative result:",
+    ex_neg_med_s_c: "minus sign outside → always negative:",
+    ex_neg_med_note: "Note: -3⁴ is always negative regardless of n being odd or even, because the minus sign is not part of the base.",
+    // Section 4: Zero & Negative Exponents (was Section 3)
+    sec_konsep3: "📘 Section 4: Zero & Negative Exponents",
     konsep3_intro: "is a number raised to the power of",
     pangkatNol: "A zero exponent",
     konsep3_def_zero: "Any non-zero number raised to the power of zero equals 1:",
@@ -301,7 +370,7 @@ const translations = {
     ex3_note_positive: "even exponent → positive",
     ex3_note_negative: "odd exponent → negative",
     ex3_note_not: "not",
-    sec_konsep4: "📘 Section 4: Basic Exponent Properties — Summary",
+    sec_konsep4: "📘 Section 5: Basic Exponent Properties — Summary",
     konsep4_intro: "Before moving to more complex operations, let's summarise the basic properties we've learned:",
     rangkuman_label: "📊 SUMMARY OF BASIC PROPERTIES:",
     col_sifat: "Property",
@@ -357,6 +426,20 @@ const translations = {
     intro_funfact_bold: "知ってた？",
     intro_funfact: "自然界の細菌の細胞分裂は",
     intro_funfact2: "のパターンに従う — だから細菌感染は放置するとあっという間に広がる！指数表記で科学者が計算・予測できる。",
+    // 指数表記の利点
+    sec_manfaat: "📌 指数表記の利点",
+    manfaat_intro: "指数表記の主な用途の一つは、非常に大きな数や非常に小さな数を簡潔に書くことです — 何十個もゼロを書かなくて済む！",
+    manfaat_besar_label: "📏 非常に大きな数",
+    manfaat_besar_ex1_label: "光速",
+    manfaat_besar_ex1_unit: "m/s",
+    manfaat_besar_ex2_label: "世界一の富豪の資産（推定）",
+    manfaat_besar_ex2_unit: "ドル",
+    manfaat_kecil_label: "🔬 非常に小さな数",
+    manfaat_kecil_ex1_label: "細菌（大腸菌）のサイズ",
+    manfaat_kecil_ex1_unit: "メートル",
+    manfaat_kecil_ex2_label: "コロナウイルスのサイズ",
+    manfaat_kecil_ex2_unit: "メートル",
+    manfaat_close: "指数表記なしにこれらの数を完全に書き出すのは非常に大変です。だから科学者・経済学者・エンジニアは常にこれを使うのです！ 💪",
     sec_konsep1: "📘 第1節：累乗とは何か？",
     badge_intisari: "🎯 要点まとめ",
     konsep1_def: "は同じ数を繰り返し掛け合わせる省略記法です。一般的な形：",
@@ -410,17 +493,13 @@ const translations = {
     ex1_h_s2b: "時間後の細菌数 =",
     ex1_h_s3: "",
     ex1_h_ans: "8時間後、細菌は256個になる。",
-    sec_konsep2: "📘 第2節：整数・分数の底",
-    konsep2_intro: "指数表記は正の整数だけではない。底",
-    konsep2_intro2: "は整数（負数・ゼロを含む）や分数でもよい。",
-    konsep2_int_label: "整数の累乗：",
-    konsep2_int_note: "すべての整数",
-    konsep2_int_note2: "と",
+    sec_konsep2: "📘 第2節：分数の累乗",
     konsep2_frac_label: "分数の累乗：",
+    konsep2_frac_expand_note: "n 回",
     konsep2_frac_note: "分数の底 → 分子と分母にそれぞれべきをかける！",
     tip_frac: "ヒント：",
     tip_frac_text: "分数の累乗は簡単 — 分子と分母を別々に累乗する！例：",
-    sec_contoh2: "📝 練習問題 — 整数・分数の底",
+    sec_contoh2: "📝 練習問題 — 分数の累乗",
     ex2_easy_q: "計算せよ：",
     ex2_med_q: "計算せよ：",
     ex2_hard_q: "簡略化せよ：",
@@ -430,7 +509,32 @@ const translations = {
     ex2_hard_s1: "繰り返しの掛け算として書く：",
     ex2_hard_s2: "分数指数に変換：",
     ex2_hard_ans: "結果：",
-    sec_konsep3: "📘 第3節：零乗と負の指数",
+    // 第3節: 負の底の累乗 (新)
+    sec_konsep3_neg: "📘 第3節：負の底の累乗",
+    neg_perbedaan_title: "⚠️ (-a)ⁿ と -aⁿ の違い",
+    neg_perbedaan_intro: "この二つの式は似ているが、意味が全く異なる：",
+    neg_minus_a_n_label: "(-a)ⁿ — かっこあり",
+    neg_minus_a_n_desc: "マイナス符号が底に含まれる。負の数全体 (-a) を n 乗する。",
+    neg_a_n_label: "-aⁿ — かっこなし",
+    neg_a_n_desc: "マイナス符号は底に含まれない。a だけを累乗し、結果に -1 をかける。",
+    neg_genap_title: "(-a)ⁿ で n が偶数 → 結果は正 ✅",
+    neg_genap_desc: "二つの負の符号が打ち消し合う。すべてのペア（負×負＝正）により結果は常に正。",
+    neg_ganjil_title: "(-a)ⁿ で n が奇数 → 結果は負 ❌",
+    neg_ganjil_desc: "ペアのない負の符号が必ず一つ残り、結果は常に負になる。",
+    neg_ingat: "📌 覚えよう：",
+    neg_ingat_text: "かっこがマイナス符号を累乗に含めるかどうかを決める！",
+    sec_contoh3_neg: "📝 練習問題 — 負の底の累乗",
+    ex_neg_easy_q: "(-4)² と -4² の値を求め、違いを説明せよ！",
+    ex_neg_easy_s1: "(-4)² → マイナス符号がかっこ内（底に含まれる）：",
+    ex_neg_easy_s2: "-4² → マイナス符号が外（4 だけ累乗）：",
+    ex_neg_easy_note: "結果が異なる！(-4)² = 16（正）、-4² = −16（負）。",
+    ex_neg_med_q: "次の値を求めよ：(a) (-3)⁴  (b) (-3)³  (c) -3⁴",
+    ex_neg_med_s_a: "n = 4（偶数）→ 正の結果：",
+    ex_neg_med_s_b: "n = 3（奇数）→ 負の結果：",
+    ex_neg_med_s_c: "マイナス符号が外 → 常に負：",
+    ex_neg_med_note: "注：-3⁴ は n が奇数か偶数かに関わらず常に負。マイナス符号が底でないため。",
+    // 第4節：零乗と負の指数（旧第3節）
+    sec_konsep3: "📘 第4節：零乗と負の指数",
     konsep3_intro: "とは",
     pangkatNol: "零乗",
     konsep3_def_zero: "ゼロでない数を0乗すると常に1になる：",
@@ -454,7 +558,7 @@ const translations = {
     ex3_note_positive: "偶数乗 → 正",
     ex3_note_negative: "奇数乗 → 負",
     ex3_note_not: "ではない",
-    sec_konsep4: "📘 第4節：基本的な指数の性質 — まとめ",
+    sec_konsep4: "📘 第5節：基本的な指数の性質 — まとめ",
     konsep4_intro: "より複雑な操作に入る前に、学んだ基本的な性質をまとめよう：",
     rangkuman_label: "📊 基本的な性質のまとめ：",
     col_sifat: "性質",
@@ -634,7 +738,7 @@ const PengertianNotasiPangkatPage = () => {
   const t = translations[language as keyof typeof translations] ?? translations.id;
 
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3", "contoh3", "konsep4", "contoh4",
+    "intro", "konsep1", "contoh1", "konsep2", "contoh2", "konsep3neg", "contoh3neg", "konsep3", "contoh3", "konsep4", "contoh4",
   ]);
   const toggleSection = (section: string) => {
     playPopSound();
@@ -716,6 +820,40 @@ const PengertianNotasiPangkatPage = () => {
                     <strong>{t.intro_funfact_bold}</strong>{" "}{t.intro_funfact}{" "}
                     <InlineMath math="2^n" />{" "}{t.intro_funfact2}
                   </p>
+                </div>
+                {/* Manfaat bilangan berpangkat */}
+                <div className="bg-teal-500/10 border border-teal-500/30 rounded-lg p-4 space-y-3">
+                  <p className="font-body text-sm font-semibold text-teal-300">{t.sec_manfaat}</p>
+                  <p className="font-body text-sm text-white/80">{t.manfaat_intro}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="bg-slate-900/50 rounded-lg p-3">
+                      <p className="font-body text-xs font-semibold text-blue-300 mb-2">{t.manfaat_besar_label}</p>
+                      <div className="space-y-2 text-xs font-body text-white/70">
+                        <div>
+                          <p className="text-white/50">{t.manfaat_besar_ex1_label}</p>
+                          <p><InlineMath math="3 \times 10^8" /> {t.manfaat_besar_ex1_unit}</p>
+                        </div>
+                        <div>
+                          <p className="text-white/50">{t.manfaat_besar_ex2_label}</p>
+                          <p><InlineMath math="\approx 2 \times 10^{11}" /> {t.manfaat_besar_ex2_unit}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-lg p-3">
+                      <p className="font-body text-xs font-semibold text-green-300 mb-2">{t.manfaat_kecil_label}</p>
+                      <div className="space-y-2 text-xs font-body text-white/70">
+                        <div>
+                          <p className="text-white/50">{t.manfaat_kecil_ex1_label}</p>
+                          <p><InlineMath math="\approx 2 \times 10^{-6}" /> {t.manfaat_kecil_ex1_unit}</p>
+                        </div>
+                        <div>
+                          <p className="text-white/50">{t.manfaat_kecil_ex2_label}</p>
+                          <p><InlineMath math="\approx 1 \times 10^{-7}" /> {t.manfaat_kecil_ex2_unit}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="font-body text-xs text-teal-200/70 italic">{t.manfaat_close}</p>
                 </div>
               </div>
             )}
@@ -880,26 +1018,17 @@ const PengertianNotasiPangkatPage = () => {
               <div className="px-5 pb-5 space-y-4">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm font-semibold text-purple-300">{t.badge_intisari}</p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
-                    {t.konsep2_intro} <InlineMath math="a" /> {t.konsep2_intro2}
-                  </p>
-                  <div className="space-y-3">
-                    <div className="bg-slate-900/50 rounded-lg p-3">
-                      <p className="font-body text-xs font-semibold text-purple-300 mb-2">{t.konsep2_int_label}</p>
-                      <BlockMath math="a^n = \underbrace{a \times a \times \cdots \times a}_{n}" />
-                      <p className="font-body text-xs text-white/60 mt-1">{t.konsep2_int_note} <InlineMath math="a" /> {t.konsep2_int_note2} <InlineMath math="n \in \mathbb{Z}^+" /></p>
-                    </div>
-                    <div className="bg-slate-900/50 rounded-lg p-3">
-                      <p className="font-body text-xs font-semibold text-purple-300 mb-2">{t.konsep2_frac_label}</p>
-                      <BlockMath math="\left(\frac{p}{q}\right)^n = \frac{p^n}{q^n}, \quad q \neq 0" />
-                      <p className="font-body text-xs text-white/60 mt-1">{t.konsep2_frac_note}</p>
-                    </div>
+                  <div className="bg-slate-900/50 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-purple-300 mb-2">{t.konsep2_frac_label}</p>
+                    <BlockMath math="\left(\frac{p}{q}\right)^n = \frac{p}{q} \times \frac{p}{q} \times \cdots \times \frac{p}{q}" />
+                    <p className="font-body text-xs text-white/60 mt-1">({t.konsep2_frac_expand_note})</p>
+                    <p className="font-body text-xs text-white/60 mt-1">{t.konsep2_frac_note}</p>
                   </div>
                 </div>
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <p className="font-body text-sm text-yellow-200">
                     <strong>{t.tip_frac}</strong> {t.tip_frac_text}{" "}
-                    <InlineMath math="\left(\frac{2}{3}\right)^4 = \frac{2^4}{3^4} = \frac{16}{81}" />
+                    <InlineMath math="\left(\frac{2}{3}\right)^4 = \frac{2}{3} \times \frac{2}{3} \times \frac{2}{3} \times \frac{2}{3} = \frac{2^4}{3^4} = \frac{16}{81}" />
                   </p>
                 </div>
               </div>
@@ -911,6 +1040,106 @@ const PengertianNotasiPangkatPage = () => {
             <SectionBtn id="contoh2" icon={<Calculator className="w-5 h-5" />} iconCls="text-purple-400" title={t.sec_contoh2} />
             {isOpen("contoh2") && (
               <div className="px-5 pb-5 space-y-6">
+                {(() => { const dc = diffColor(t.diff_easy); return (
+                  <div className={`${dc.bar} pl-4 space-y-3`}>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-xs font-bold px-2 py-1 rounded ${dc.badge}`}>{t.diff_easy}</span>
+                      <span className="font-body font-semibold text-white">{t.example} 1</span>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-4">
+                      <p className="font-body text-sm text-white">{t.ex2_med_q} <InlineMath math="\left(\dfrac{3}{5}\right)^3" /></p>
+                    </div>
+                    <div className={`${dc.bg} rounded-lg p-4`}>
+                      <p className={`font-body text-xs font-semibold mb-3 ${dc.hdr}`}>{t.pembahasan}</p>
+                      <div className="space-y-2 font-body text-sm text-white/80">
+                        <p><strong>{t.step} 1:</strong> {t.ex2_s_expand}</p>
+                        <div className="bg-slate-900/50 rounded p-3">
+                          <BlockMath math="\left(\frac{3}{5}\right)^3 = \frac{3}{5} \times \frac{3}{5} \times \frac{3}{5}" />
+                        </div>
+                        <p><strong>{t.step} 2:</strong> {t.ex2_s_frac}</p>
+                        <div className="bg-slate-900/50 rounded p-3">
+                          <BlockMath math="\left(\frac{3}{5}\right)^3 = \frac{3^3}{5^3} = \frac{27}{125}" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ); })()}
+              </div>
+            )}
+          </div>
+
+          {/* ── SUB-BAB 3: BILANGAN NEGATIF BERPANGKAT ─────────────────────── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionBtn id="konsep3neg" icon={<AlertTriangle className="w-5 h-5" />} iconCls="text-orange-400" title={t.sec_konsep3_neg} />
+            {isOpen("konsep3neg") && (
+              <div className="px-5 pb-5 space-y-4">
+                {/* Perbedaan (-a)^n vs -a^n */}
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-4">
+                  <p className="font-body text-sm font-semibold text-orange-300">{t.neg_perbedaan_title}</p>
+                  <p className="font-body text-sm text-white/80">{t.neg_perbedaan_intro}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="bg-slate-900/60 border border-cyan-500/30 rounded-lg p-3 space-y-2">
+                      <p className="font-body text-xs font-bold text-cyan-300">{t.neg_minus_a_n_label}</p>
+                      <div className="text-center py-1">
+                        <BlockMath math="(-a)^n = \underbrace{(-a) \times (-a) \times \cdots \times (-a)}_{n}" />
+                      </div>
+                      <p className="font-body text-xs text-white/70">{t.neg_minus_a_n_desc}</p>
+                    </div>
+                    <div className="bg-slate-900/60 border border-red-500/30 rounded-lg p-3 space-y-2">
+                      <p className="font-body text-xs font-bold text-red-300">{t.neg_a_n_label}</p>
+                      <div className="text-center py-1">
+                        <BlockMath math="-a^n = -(a \times a \times \cdots \times a) = -(a^n)" />
+                      </div>
+                      <p className="font-body text-xs text-white/70">{t.neg_a_n_desc}</p>
+                    </div>
+                  </div>
+                  {/* Contoh perbandingan */}
+                  <div className="bg-slate-900/50 rounded-lg p-3 text-center">
+                    <BlockMath math="(-3)^2 = (-3) \times (-3) = 9" />
+                    <BlockMath math="-3^2 = -(3 \times 3) = -9" />
+                  </div>
+                </div>
+                {/* Aturan genap/ganjil */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-xs font-bold text-green-300">{t.neg_genap_title}</p>
+                    <div className="bg-slate-900/50 rounded p-2 text-center">
+                      <BlockMath math="(-a)^{2k} > 0 \quad (k \in \mathbb{Z}^+)" />
+                    </div>
+                    <p className="font-body text-xs text-white/70">{t.neg_genap_desc}</p>
+                    <div className="bg-slate-900/50 rounded p-2 text-xs font-body text-white/60 space-y-1">
+                      <p><InlineMath math="(-2)^2 = 4" /> ✅</p>
+                      <p><InlineMath math="(-2)^4 = 16" /> ✅</p>
+                      <p><InlineMath math="(-2)^6 = 64" /> ✅</p>
+                    </div>
+                  </div>
+                  <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 space-y-2">
+                    <p className="font-body text-xs font-bold text-red-300">{t.neg_ganjil_title}</p>
+                    <div className="bg-slate-900/50 rounded p-2 text-center">
+                      <BlockMath math="(-a)^{2k-1} < 0 \quad (k \in \mathbb{Z}^+)" />
+                    </div>
+                    <p className="font-body text-xs text-white/70">{t.neg_ganjil_desc}</p>
+                    <div className="bg-slate-900/50 rounded p-2 text-xs font-body text-white/60 space-y-1">
+                      <p><InlineMath math="(-2)^1 = -2" /> ❌</p>
+                      <p><InlineMath math="(-2)^3 = -8" /> ❌</p>
+                      <p><InlineMath math="(-2)^5 = -32" /> ❌</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-yellow-200">
+                    <strong>{t.neg_ingat}</strong> {t.neg_ingat_text}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── CONTOH SUB-BAB 3: BILANGAN NEGATIF BERPANGKAT ──────────────── */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionBtn id="contoh3neg" icon={<Calculator className="w-5 h-5" />} iconCls="text-orange-400" title={t.sec_contoh3_neg} />
+            {isOpen("contoh3neg") && (
+              <div className="px-5 pb-5 space-y-6">
                 {/* Easy */}
                 {(() => { const dc = diffColor(t.diff_easy); return (
                   <div className={`${dc.bar} pl-4 space-y-3`}>
@@ -919,13 +1148,22 @@ const PengertianNotasiPangkatPage = () => {
                       <span className="font-body font-semibold text-white">{t.example} 1</span>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-4">
-                      <p className="font-body text-sm text-white">{t.ex2_easy_q} <InlineMath math="(-3)^4" /></p>
+                      <p className="font-body text-sm text-white">{t.ex_neg_easy_q}</p>
                     </div>
                     <div className={`${dc.bg} rounded-lg p-4`}>
                       <p className={`font-body text-xs font-semibold mb-3 ${dc.hdr}`}>{t.pembahasan}</p>
-                      <div className="space-y-2 font-body text-sm text-white/80">
-                        <p>{t.ex2_s_expand}</p>
-                        <div className="bg-slate-900/50 rounded p-3"><BlockMath math="(-3)^4 = (-3) \times (-3) \times (-3) \times (-3) = 81" /></div>
+                      <div className="space-y-3 font-body text-sm text-white/80">
+                        <p><strong>{t.step} 1:</strong> {t.ex_neg_easy_s1}</p>
+                        <div className="bg-slate-900/50 rounded p-3">
+                          <BlockMath math="(-4)^2 = (-4) \times (-4) = +16" />
+                        </div>
+                        <p><strong>{t.step} 2:</strong> {t.ex_neg_easy_s2}</p>
+                        <div className="bg-slate-900/50 rounded p-3">
+                          <BlockMath math="-4^2 = -(4 \times 4) = -16" />
+                        </div>
+                        <div className="bg-orange-500/10 border border-orange-500/30 rounded p-3">
+                          <p className="text-sm text-orange-200">{t.ex_neg_easy_note}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -938,35 +1176,29 @@ const PengertianNotasiPangkatPage = () => {
                       <span className="font-body font-semibold text-white">{t.example} 2</span>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-4">
-                      <p className="font-body text-sm text-white">{t.ex2_med_q} <InlineMath math="\left(\dfrac{3}{5}\right)^3" /></p>
+                      <p className="font-body text-sm text-white">{t.ex_neg_med_q}</p>
                     </div>
                     <div className={`${dc.bg} rounded-lg p-4`}>
                       <p className={`font-body text-xs font-semibold mb-3 ${dc.hdr}`}>{t.pembahasan}</p>
-                      <div className="space-y-2 font-body text-sm text-white/80">
-                        <p>{t.ex2_s_frac}</p>
-                        <div className="bg-slate-900/50 rounded p-3"><BlockMath math="\left(\frac{3}{5}\right)^3 = \frac{3^3}{5^3} = \frac{27}{125}" /></div>
-                      </div>
-                    </div>
-                  </div>
-                ); })()}
-                {/* Hard */}
-                {(() => { const dc = diffColor(t.diff_hard); return (
-                  <div className={`${dc.bar} pl-4 space-y-3`}>
-                    <div className="flex items-center gap-2">
-                      <span className={`text-xs font-bold px-2 py-1 rounded ${dc.badge}`}>{t.diff_hard}</span>
-                      <span className="font-body font-semibold text-white">{t.example} 3</span>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-4">
-                      <p className="font-body text-sm text-white">{t.ex2_hard_q} <InlineMath math="\left(-\dfrac{2}{3}\right)^5" /></p>
-                    </div>
-                    <div className={`${dc.bg} rounded-lg p-4`}>
-                      <p className={`font-body text-xs font-semibold mb-3 ${dc.hdr}`}>{t.pembahasan}</p>
-                      <div className="space-y-2 font-body text-sm text-white/80">
-                        <p><strong>{t.step} 1:</strong> {t.ex2_hard_s1}</p>
-                        <div className="bg-slate-900/50 rounded p-3"><BlockMath math="\left(-\frac{2}{3}\right)^5 = \frac{(-2)^5}{3^5}" /></div>
-                        <p><strong>{t.step} 2:</strong> {t.ex2_s_separate}</p>
-                        <div className="bg-slate-900/50 rounded p-3"><BlockMath math="(-2)^5 = -32, \quad 3^5 = 243" /></div>
-                        <p><strong>{t.ex2_hard_ans}</strong> <InlineMath math="-\dfrac{32}{243}" /></p>
+                      <div className="space-y-3 font-body text-sm text-white/80">
+                        <p><strong>(a)</strong> {t.ex_neg_med_s_a}</p>
+                        <div className="bg-slate-900/50 rounded p-3">
+                          <BlockMath math="(-3)^4 = (-3)\times(-3)\times(-3)\times(-3) = 81" />
+                          <p className="text-xs text-green-300 mt-1">↑ n = 4 (genap) → +81 ✅</p>
+                        </div>
+                        <p><strong>(b)</strong> {t.ex_neg_med_s_b}</p>
+                        <div className="bg-slate-900/50 rounded p-3">
+                          <BlockMath math="(-3)^3 = (-3)\times(-3)\times(-3) = -27" />
+                          <p className="text-xs text-red-300 mt-1">↑ n = 3 (ganjil) → -27 ❌</p>
+                        </div>
+                        <p><strong>(c)</strong> {t.ex_neg_med_s_c}</p>
+                        <div className="bg-slate-900/50 rounded p-3">
+                          <BlockMath math="-3^4 = -(3^4) = -(81) = -81" />
+                          <p className="text-xs text-orange-300 mt-1">↑ tanda minus di luar → selalu negatif</p>
+                        </div>
+                        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded p-3">
+                          <p className="text-xs text-yellow-200">{t.ex_neg_med_note}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -975,7 +1207,7 @@ const PengertianNotasiPangkatPage = () => {
             )}
           </div>
 
-          {/* ── SUB-BAB 3: PANGKAT NOL & NEGATIF ──────────────────────────── */}
+          {/* ── SUB-BAB 4: PANGKAT NOL & NEGATIF ──────────────────────────── */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <SectionBtn id="konsep3" icon={<Target className="w-5 h-5" />} iconCls="text-cyan-400" title={t.sec_konsep3} />
             {isOpen("konsep3") && (
