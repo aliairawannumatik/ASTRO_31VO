@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { RotateCcw } from "lucide-react";
@@ -253,6 +254,7 @@ const questions: Q[] = [
 const RotasiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -274,7 +276,7 @@ const RotasiPage = () => {
           </div>
         </div>
 
-        <div className="mb-5 bg-orange-900/20 border border-orange-500/20 rounded-xl p-4">
+        <div className={isDark ? "mb-5 bg-orange-900/20 border border-orange-500/20 rounded-xl p-4" : "mb-5 bg-orange-50 border border-orange-500/20 rounded-xl p-4"}>
           <p className="text-orange-300 text-xs font-bold mb-2">{t('practice.keyFormula')} — Rotasi terhadap Titik Asal O(0,0)</p>
           <div className="grid grid-cols-2 gap-2 text-[10px]">
             {[
@@ -295,7 +297,7 @@ const RotasiPage = () => {
           {questions.map((q, i) => (
             <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
               style={{ animationDelay: `${i * 0.02}s` }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-slate-900/80 to-amber-900/30 backdrop-blur" />
+              <div className={isDark ? "absolute inset-0 bg-gradient-to-br from-orange-900/30 via-slate-900/80 to-amber-900/30 backdrop-blur" : "absolute inset-0 bg-gradient-to-br from-orange-50/60 via-white/80 to-amber-50/40 backdrop-blur"} />
               <div className="absolute inset-0 border border-orange-500/20 rounded-2xl" />
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-orange-400 to-amber-500 rounded-l-2xl" />
               <div className="relative px-5 py-4">
