@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/contexts/ThemeContext";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -10,47 +11,52 @@ import { Dices } from "lucide-react";
 const accentColor = "cyan";
 const accentHex = "#22d3ee";
 
-const FreqTable = ({ headers, rows, caption }: { headers: string[]; rows: (string | number)[][]; caption?: string }) => (
+const FreqTable = ({ headers, rows, caption }: { headers: string[]; rows: (string | number)[][]; caption?: string }) => {
+  const { isDark } = useTheme();
+  return (
   <div className="overflow-x-auto rounded-xl border border-cyan-500/30 my-2">
     {caption && <div className="text-[10px] text-cyan-300/70 font-bold text-center pt-2 px-2">{caption}</div>}
     <table className="min-w-full text-xs font-body">
       <thead>
-        <tr className="bg-cyan-900/40">
+        <tr className={isDark ? "bg-cyan-900/40" : "bg-cyan-100/60"}>
           {headers.map((h, i) => (
-            <th key={i} className="px-3 py-2 text-cyan-200 font-bold text-center border-b border-cyan-500/30">{h}</th>
+            <th key={i} className="px-3 py-2 text-cyan-600 font-bold text-center border-b border-cyan-500/30">{h}</th>
           ))}
         </tr>
       </thead>
       <tbody>
         {rows.map((row, ri) => (
-          <tr key={ri} className={ri % 2 === 0 ? "bg-white/3" : "bg-cyan-900/10"}>
+          <tr key={ri} className={ri % 2 === 0 ? (isDark ? "bg-white/3" : "bg-blue-50/50") : (isDark ? "bg-cyan-900/10" : "bg-gray-50")}>
             {row.map((cell, ci) => (
-              <td key={ci} className="px-3 py-2 text-center text-white/80 border-b border-white/5">{cell}</td>
+              <td key={ci} className={`px-3 py-2 text-center ${isDark ? "text-white/80" : "text-gray-700"} border-b border-white/5`}>{cell}</td>
             ))}
           </tr>
         ))}
       </tbody>
     </table>
   </div>
-);
+  );
+};
 
-const DiceGrid = ({ highlight }: { highlight?: (i: number, j: number) => boolean }) => (
+const DiceGrid = ({ highlight }: { highlight?: (i: number, j: number) => boolean }) => {
+  const { isDark } = useTheme();
+  return (
   <div className="overflow-x-auto rounded-xl border border-cyan-500/30 my-2">
     <table className="text-[10px] font-body">
       <thead>
-        <tr className="bg-cyan-900/50">
-          <th className="px-2 py-1 text-cyan-300 border border-cyan-500/20 w-10">🎲₁\🎲₂</th>
+        <tr className={isDark ? "bg-cyan-900/50" : "bg-cyan-100/60"}>
+          <th className="px-2 py-1 text-cyan-600 border border-cyan-500/20 w-10">🎲₁\🎲₂</th>
           {[1,2,3,4,5,6].map(n => (
-            <th key={n} className="px-2 py-1 text-cyan-300 border border-cyan-500/20 w-10">{n}</th>
+            <th key={n} className="px-2 py-1 text-cyan-600 border border-cyan-500/20 w-10">{n}</th>
           ))}
         </tr>
       </thead>
       <tbody>
         {[1,2,3,4,5,6].map(i => (
           <tr key={i}>
-            <td className="px-2 py-1 text-cyan-300 font-bold bg-cyan-900/40 border border-cyan-500/20 text-center">{i}</td>
+            <td className={`px-2 py-1 text-cyan-600 font-bold ${isDark ? "bg-cyan-900/40" : "bg-cyan-100/60"} border border-cyan-500/20 text-center`}>{i}</td>
             {[1,2,3,4,5,6].map(j => (
-              <td key={j} className={`px-1 py-1 border border-cyan-500/10 text-center transition-colors ${highlight && highlight(i,j) ? 'bg-cyan-400/30 text-cyan-200 font-bold' : 'text-white/60'}`}>
+              <td key={j} className={`px-1 py-1 border border-cyan-500/10 text-center transition-colors ${highlight && highlight(i,j) ? 'bg-cyan-400/30 text-cyan-600 font-bold' : (isDark ? 'text-white/60' : 'text-gray-600')}`}>
                 ({i},{j})
               </td>
             ))}
@@ -59,7 +65,8 @@ const DiceGrid = ({ highlight }: { highlight?: (i: number, j: number) => boolean
       </tbody>
     </table>
   </div>
-);
+  );
+};
 
 const TreeDiagram = ({ title, branches }: { title: string; branches: { label: string; children: string[] }[] }) => (
   <svg viewBox={`0 0 320 ${branches.reduce((s,b) => s + b.children.length * 30, 0) + 40}`} className="w-full max-w-xs mx-auto" style={{maxHeight:220}}>
@@ -123,8 +130,10 @@ const SpinnerDiagram = ({ sectors }: { sectors: { label: string; color: string; 
 
 type PGOpt = { key: string; text: string; math?: boolean };
 type PGQ = { n: number; content: string; options: PGOpt[]; diagram?: React.ReactNode };
-const OutfitDiagram = () => (
-  <div className="bg-slate-800/70 border border-cyan-500/30 rounded-xl p-4 mb-2">
+const OutfitDiagram = () => {
+  const { isDark } = useTheme();
+  return (
+  <div className={`${isDark ? "bg-slate-800/70" : "bg-gray-100"} border border-cyan-500/30 rounded-xl p-4 mb-2`}>
     <p className="text-[11px] font-bold text-center text-cyan-300 mb-4 tracking-wide">🎽 Ilustrasi Pilihan Busana Reza</p>
     <div className="flex flex-col gap-4">
       {/* Kaos */}
@@ -146,8 +155,8 @@ const OutfitDiagram = () => (
                   fill={item.dot} stroke="rgba(255,255,255,0.25)" strokeWidth="1" strokeLinejoin="round"/>
                 <path d="M14,2 Q20,6 26,2" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1"/>
               </svg>
-              <span className="text-[10px] font-bold text-white/80">{item.label}</span>
-              <span className="text-[9px] text-white/40">{item.warna}</span>
+              <span className={`text-[10px] font-bold ${isDark ? "text-white/80" : "text-gray-700"}`}>{item.label}</span>
+              <span className={`text-[9px] ${isDark ? "text-white/40" : "text-gray-500"}`}>{item.warna}</span>
             </div>
           ))}
         </div>
@@ -166,15 +175,15 @@ const OutfitDiagram = () => (
             { label: "C₃", warna: "Coklat", color: "#92400e", border: "#d97706" },
             { label: "C₄", warna: "Navy",   color: "#1e3a5f", border: "#3b82f6" },
           ].map(item => (
-            <div key={item.label} className="flex flex-col items-center gap-1.5 rounded-xl px-2 py-2 bg-white/5 border border-white/10">
+            <div key={item.label} className={`flex flex-col items-center gap-1.5 rounded-xl px-2 py-2 ${isDark ? "bg-white/5 border border-white/10" : "bg-gray-50 border border-gray-200"}`}>
               <svg viewBox="0 0 36 40" width="36" height="40">
                 <rect x="2" y="2" width="32" height="12" rx="2" fill={item.color} stroke={item.border} strokeWidth="1.2"/>
                 <rect x="2" y="13" width="14" height="25" rx="2" fill={item.color} stroke={item.border} strokeWidth="1.2"/>
                 <rect x="20" y="13" width="14" height="25" rx="2" fill={item.color} stroke={item.border} strokeWidth="1.2"/>
                 <line x1="18" y1="13" x2="18" y2="38" stroke={item.border} strokeWidth="1" strokeDasharray="2,2"/>
               </svg>
-              <span className="text-[10px] font-bold text-white/80">{item.label}</span>
-              <span className="text-[9px] text-white/40">{item.warna}</span>
+              <span className={`text-[10px] font-bold ${isDark ? "text-white/80" : "text-gray-700"}`}>{item.label}</span>
+              <span className={`text-[9px] ${isDark ? "text-white/40" : "text-gray-500"}`}>{item.warna}</span>
             </div>
           ))}
         </div>
@@ -221,8 +230,8 @@ const OutfitDiagram = () => (
                 {/* Side stripe */}
                 <path d="M24,15 Q44,11 63,19" fill="none" stroke={item.stripe} strokeWidth="1.8" strokeLinecap="round"/>
               </svg>
-              <span className="text-[10px] font-bold text-white/80">{item.label}</span>
-              <span className="text-[9px] text-white/40">{item.warna}</span>
+              <span className={`text-[10px] font-bold ${isDark ? "text-white/80" : "text-gray-700"}`}>{item.label}</span>
+              <span className={`text-[9px] ${isDark ? "text-white/40" : "text-gray-500"}`}>{item.warna}</span>
             </div>
           ))}
         </div>
@@ -232,7 +241,8 @@ const OutfitDiagram = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 const pgQuestions: PGQ[] = [
   /* ── 1 ── */
@@ -267,7 +277,7 @@ const pgQuestions: PGQ[] = [
           <span className="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-400/50 text-amber-300 text-[11px] font-extrabold tracking-widest uppercase rounded-lg px-3 py-1">
             💡 Trik
           </span>
-          <span className="text-white/50 text-[10px] font-body">Gunakan diagram pohon untuk menghitung semua kemungkinan</span>
+          <span className="text-muted-foreground text-[10px] font-body">Gunakan diagram pohon untuk menghitung semua kemungkinan</span>
         </div>
         <TreeDiagram
           title="Percobaan 3 Koin"
@@ -456,9 +466,9 @@ const pgQuestions: PGQ[] = [
           <span className="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-400/50 text-amber-300 text-[11px] font-extrabold tracking-widest uppercase rounded-lg px-3 py-1">
             💡 Trik
           </span>
-          <span className="text-white/50 text-[10px] font-body">Daftarkan semua pasangan yang memenuhi kondisi DAN</span>
+          <span className="text-muted-foreground text-[10px] font-body">Daftarkan semua pasangan yang memenuhi kondisi DAN</span>
         </div>
-        <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-3 mb-1">
+        <div className="bg-card border border-cyan-500/20 rounded-xl p-3 mb-1">
           <p className="text-[10px] text-cyan-300 font-bold mb-2 text-center">🎲 Jumlah yang memenuhi: lebih dari 3 DAN kurang dari 7</p>
           <div className="flex gap-2 flex-wrap justify-center">
             {[
@@ -491,6 +501,7 @@ const pgQuestions: PGQ[] = [
 const RuangSampelPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -504,15 +515,15 @@ const RuangSampelPage = () => {
             style={{ textShadow: `0 0 20px rgba(34,211,238,0.7)` }}>
             RUANG SAMPEL DAN TITIK SAMPEL
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 9 · Peluang · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 9 · Peluang · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg px-4 py-2">
             <span className="text-cyan-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
-            <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>UN / ANBK / TKA</span>
           </div>
         </div>
 
-        <div className="mb-5 bg-cyan-900/20 border border-cyan-500/20 rounded-xl p-4">
+        <div className={`mb-5 ${isDark ? "bg-cyan-900/20" : "bg-cyan-50"} border border-cyan-500/20 rounded-xl p-4`}>
           <p className="text-cyan-300 text-xs font-bold mb-2">📌 Ingat — Konsep Utama</p>
           <div className="grid grid-cols-3 gap-2 text-xs font-body">
             {[
@@ -520,9 +531,9 @@ const RuangSampelPage = () => {
               { name: "Titik Sampel", emoji: "🔵" },
               { name: "n(S) = Banyak Sampel", emoji: "🔢" },
             ].map(r => (
-              <div key={r.name} className="bg-white/5 rounded-lg px-2 py-2 text-center">
+              <div key={r.name} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-2 py-2 text-center`}>
                 <div className="text-lg mb-1">{r.emoji}</div>
-                <span className="text-white/60 text-[10px]">{r.name}</span>
+                <span className={`${isDark ? "text-white/60" : "text-gray-600"} text-[10px]`}>{r.name}</span>
               </div>
             ))}
           </div>
@@ -535,12 +546,12 @@ const RuangSampelPage = () => {
             <span className="text-cyan-300 text-xs font-bold uppercase tracking-widest px-2">A. {t('practice.multipleChoice')}</span>
             <div className="h-px flex-1 bg-cyan-500/20" />
           </div>
-          <p className="text-white/40 text-[11px] font-body mb-4 text-center">Pilihlah satu jawaban yang paling tepat.</p>
+          <p className={`${isDark ? "text-white/40" : "text-gray-500"} text-[11px] font-body mb-4 text-center`}>Pilihlah satu jawaban yang paling tepat.</p>
           <div className="flex flex-col gap-3">
             {pgQuestions.map((q, i) => (
               <div key={q.n} className="relative rounded-2xl overflow-hidden animate-slide-up"
                 style={{ animationDelay: `${i * 0.02}s` }}>
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-slate-900/80 to-teal-900/30 backdrop-blur" />
+                <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-cyan-900/30 via-slate-900/80 to-teal-900/30" : "from-cyan-50/60 via-white/80 to-teal-50/40"} backdrop-blur`} />
                 <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
                 <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-teal-500 rounded-l-2xl" />
                 <div className="relative px-5 py-4">
@@ -549,15 +560,15 @@ const RuangSampelPage = () => {
                       <span className="text-cyan-300 text-xs font-bold">{q.n}</span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-body text-sm text-white/90 leading-relaxed mb-3">{q.content}</p>
+                      <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} leading-relaxed mb-3`}>{q.content}</p>
                       {q.diagram && <div className="mb-3 flex justify-center">{q.diagram}</div>}
                       <div className="grid grid-cols-1 gap-1.5">
                         {q.options.map(opt => (
-                          <div key={opt.key} className="flex items-center gap-2 bg-white/5 rounded-lg px-3 py-2">
+                          <div key={opt.key} className={`flex items-center gap-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
                             <span className="text-cyan-300 text-xs font-bold shrink-0 min-w-[18px]">{opt.key}.</span>
                             {opt.math
-                              ? <div className="text-white text-sm overflow-x-auto"><InlineMath math={opt.text} /></div>
-                              : <span className="font-body text-sm text-white/80">{opt.text}</span>
+                              ? <div className={`${isDark ? "text-white" : "text-foreground"} text-sm overflow-x-auto`}><InlineMath math={opt.text} /></div>
+                              : <span className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"}`}>{opt.text}</span>
                             }
                           </div>
                         ))}
