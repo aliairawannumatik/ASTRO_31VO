@@ -13,7 +13,7 @@ const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, 
 
 const PersegiBercelah = () => (
   <svg width="240" height="160" viewBox="0 0 240 160" className="mx-auto">
-    <rect x="20" y="20" width="200" height="120" rx="4" fill="#134e4a" fillOpacity="0.2" stroke="#2dd4bf" strokeWidth="1.5" strokeDasharray="6,3"/>
+    <rect x="20" y="20" width="200" height="120" rx="4" fill="var(--card)" stroke="#2dd4bf" strokeWidth="1.5" strokeDasharray="6,3"/>
     <rect x="20" y="20" width="30" height="30" rx="3" fill="#0d9488" fillOpacity="0.4" stroke="#2dd4bf" strokeWidth="1"/>
     <rect x="190" y="20" width="30" height="30" rx="3" fill="#0d9488" fillOpacity="0.4" stroke="#2dd4bf" strokeWidth="1"/>
     <rect x="20" y="110" width="30" height="30" rx="3" fill="#0d9488" fillOpacity="0.4" stroke="#2dd4bf" strokeWidth="1"/>
@@ -31,7 +31,7 @@ const PersegiBercelah = () => (
 
 const TrapesiumSVG = () => (
   <svg width="240" height="130" viewBox="0 0 240 130" className="mx-auto">
-    <polygon points="60,20 180,20 210,110 30,110" fill="#134e4a" fillOpacity="0.2" stroke="#2dd4bf" strokeWidth="1.5"/>
+    <polygon points="60,20 180,20 210,110 30,110" fill="var(--card)" stroke="#2dd4bf" strokeWidth="1.5"/>
     <text x="120" y="14" fill="var(--card-foreground)" fontSize="10" textAnchor="middle">sisi atas = a</text>
     <text x="120" y="120" fill="var(--card-foreground)" fontSize="10" textAnchor="middle">sisi bawah = b</text>
     <line x1="30" y1="110" x2="30" y2="20" stroke="#2dd4bf" strokeWidth="1" strokeDasharray="4,2"/>

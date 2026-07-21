@@ -86,7 +86,7 @@ const TreeDiagram = ({ title, branches }: { title: string; branches: { label: st
           const cy = branchStart + ci * 30 + 10;
           items.push(
             <line key={`l${bi}${ci}`} x1={165} y1={mid} x2={195} y2={cy} stroke="#0e7490" strokeWidth={1} opacity={0.8} />,
-            <text key={`t${bi}${ci}`} x={200} y={cy+4} fill="#e2e8f0" fontSize={9}>{c}</text>
+            <text key={`t${bi}${ci}`} x={200} y={cy+4} fill="var(--card-foreground)" fontSize={9}>{c}</text>
           );
         });
         branchStart += b.children.length * 30;
@@ -115,7 +115,7 @@ const SpinnerDiagram = ({ sectors }: { sectors: { label: string; color: string; 
     const tx = cx + (r * 0.62) * Math.cos(midRad);
     const ty = cy + (r * 0.62) * Math.sin(midRad);
     paths.push(
-      <path key={i} d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${largeArc},1 ${x2},${y2} Z`} fill={s.color} stroke="#0f172a" strokeWidth={2} />,
+      <path key={i} d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${largeArc},1 ${x2},${y2} Z`} fill={s.color} stroke="var(--background)" strokeWidth={2} />,
       <text key={`t${i}`} x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fill="var(--icon-color)" fontSize={10} fontWeight="bold">{s.label}</text>
     );
     currentAngle = end;
@@ -358,11 +358,11 @@ const pgQuestions: PGQ[] = [
         <path d="M 192,87 Q 247,60  278,87" fill="none" stroke="#c084fc" strokeWidth="2" strokeDasharray="5,3"/>
         <path d="M 192,93 Q 247,120 278,93" fill="none" stroke="#d946ef" strokeWidth="2" strokeDasharray="5,3"/>
         <path d="M 192,98 Q 247,158 278,98" fill="none" stroke="#e879f9" strokeWidth="2" strokeDasharray="5,3"/>
-        <circle cx="40" cy="90" r="22" fill="#0f2a3a" stroke="#22d3ee" strokeWidth="2.5"/>
+        <circle cx="40" cy="90" r="22" fill="var(--card)" stroke="#22d3ee" strokeWidth="2.5"/>
         <text x="40" y="95" textAnchor="middle" fill="#22d3ee" fontSize="16" fontWeight="bold">A</text>
-        <circle cx="170" cy="90" r="22" fill="#1a0f3a" stroke="#a855f7" strokeWidth="2.5"/>
+        <circle cx="170" cy="90" r="22" fill="var(--card)" stroke="#a855f7" strokeWidth="2.5"/>
         <text x="170" y="95" textAnchor="middle" fill="#c084fc" fontSize="16" fontWeight="bold">B</text>
-        <circle cx="300" cy="90" r="22" fill="#2a0f1a" stroke="#e879f9" strokeWidth="2.5"/>
+        <circle cx="300" cy="90" r="22" fill="var(--card)" stroke="#e879f9" strokeWidth="2.5"/>
         <text x="300" y="95" textAnchor="middle" fill="#e879f9" fontSize="16" fontWeight="bold">C</text>
         <polygon points="148,90 138,86 138,94" fill="#06b6d4"/>
         <polygon points="278,90 268,86 268,94" fill="#c084fc"/>
