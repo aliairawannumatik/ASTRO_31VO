@@ -1,4 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
+import { Analytics } from '@vercel/analytics/react';
+import { Capacitor } from '@capacitor/core';
+import { initGA, trackPageView } from '@/lib/analytics';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -911,6 +914,17 @@ const AppInner = () => {
     return () => window.removeEventListener("click", handleInteraction);
   }, []);
 
+  // GA4: init once on mount
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  // GA4: track route changes
+  const { pathname } = useLocation();
+  useEffect(() => {
+    trackPageView(pathname);
+  }, [pathname]);
+
   return (
     <>
       <ScrollToTop />
@@ -1742,6 +1756,7 @@ const App = () => (
             <TooltipProvider>
               <Toaster />
               <Sonner />
+              {!Capacitor.isNativePlatform() && <Analytics />}
               <BrowserRouter>
                 <AppInner />
               </BrowserRouter>
