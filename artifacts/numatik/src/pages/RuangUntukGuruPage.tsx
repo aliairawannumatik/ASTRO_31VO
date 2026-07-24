@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   GraduationCap,
+  Monitor,
   ListChecks,
   ShieldCheck,
   MessageSquareHeart,
@@ -148,6 +149,52 @@ const RuangUntukGuruPage = () => {
           <p className="mt-4 text-sm md:text-base text-white/70 max-w-3xl mx-auto font-body">
             Wadah khusus bagi pendidik yang menyediakan berbagai perangkat bantu untuk optimalisasi kegiatan belajar mengajar.
           </p>
+        </div>
+
+        {/* ── Desktop info banner ─────────────────────────────────────── */}
+        <div
+          className="relative flex items-center gap-4 rounded-2xl border px-5 py-4 mb-8 overflow-hidden animate-slide-up"
+          style={{
+            background: "linear-gradient(120deg, rgba(6,182,212,0.13) 0%, rgba(59,130,246,0.10) 60%, rgba(139,92,246,0.08) 100%)",
+            borderColor: "rgba(6,182,212,0.35)",
+            boxShadow: "0 0 24px rgba(6,182,212,0.08), inset 0 1px 0 rgba(255,255,255,0.06)",
+          }}
+        >
+          {/* subtle glow blob */}
+          <div
+            className="absolute -left-6 -top-6 w-28 h-28 rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(6,182,212,0.25) 0%, transparent 70%)", filter: "blur(12px)" }}
+          />
+
+          {/* monitor icon */}
+          <div
+            className="relative shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border"
+            style={{
+              background: "linear-gradient(135deg, rgba(6,182,212,0.25), rgba(59,130,246,0.20))",
+              borderColor: "rgba(6,182,212,0.45)",
+              boxShadow: "0 0 14px rgba(6,182,212,0.25)",
+            }}
+          >
+            <Monitor className="w-6 h-6 text-cyan-300" strokeWidth={1.75} />
+          </div>
+
+          {/* text */}
+          <div className="relative flex-1 min-w-0">
+            <p className="font-display text-sm font-bold text-cyan-200 leading-snug mb-0.5">
+              🚀 Lebih Nyaman di Laptop atau PC!
+            </p>
+            <p className="font-body text-xs text-white/65 leading-relaxed">
+              Ruang Guru punya banyak tabel & fitur lengkap — buka di desktop biar makin leluasa.{" "}
+              <a
+                href="https://www.numatik.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors"
+              >
+                www.numatik.app
+              </a>
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
