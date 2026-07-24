@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Monitor } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { useNavigate } from "react-router-dom";
@@ -93,6 +94,35 @@ const TentangAplikasiPage = () => {
           </div>
         </div>
 
+
+        {/* ── Desktop access info ─────────────────────────────────── */}
+        <div className="animate-slide-up mb-6" style={{ animationDelay: '0.38s' }}>
+          <div className="relative rounded-2xl p-[1.5px] bg-gradient-to-br from-cyan-400 via-teal-500 to-blue-500 shadow-[0_0_24px_rgba(6,182,212,0.18)]">
+            <div className={`rounded-2xl px-6 py-5 flex items-center gap-4 ${isDark ? "bg-[#0a1f2e]" : "bg-white/90"}`}>
+              <div
+                className="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl border"
+                style={{
+                  background: "linear-gradient(135deg, rgba(6,182,212,0.25), rgba(59,130,246,0.20))",
+                  borderColor: "rgba(6,182,212,0.45)",
+                  boxShadow: "0 0 14px rgba(6,182,212,0.25)",
+                }}
+              >
+                <Monitor className="w-6 h-6 text-cyan-300" strokeWidth={1.75} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-display text-xs font-bold tracking-widest uppercase text-cyan-400 mb-0.5">
+                  Versi Desktop
+                </p>
+                <p className="font-display text-base font-black text-white leading-snug">
+                  Juga Tersedia di Browser! 🌐
+                </p>
+                <p className="font-body text-xs text-white/60 mt-1 leading-relaxed">
+                  Buka <a href="https://www.numatik.app" target="_blank" rel="noopener noreferrer" className="text-cyan-300 font-semibold underline underline-offset-2 hover:text-cyan-200 transition-colors">www.numatik.app</a> di laptop atau PC untuk tampilan yang lebih luas dan pengalaman belajar yang lebih maksimal.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="text-center space-y-2 animate-slide-up" style={{ animationDelay: '0.40s' }}>
           <p className="text-white/40 font-body text-xs">
