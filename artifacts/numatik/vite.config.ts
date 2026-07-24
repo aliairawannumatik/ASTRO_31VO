@@ -28,6 +28,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
     },
+    dedupe: ["react", "react-dom"],
   },
 
   root: path.resolve(import.meta.dirname),
@@ -93,6 +94,9 @@ export default defineConfig({
       "react-dom",
       "react-router-dom",
       "@tanstack/react-query",
+      "react-ga4",
+      "@vercel/analytics/react",
+      "@capacitor/core",
     ],
   },
 
