@@ -2,7 +2,7 @@ import ReactGA from 'react-ga4';
 import { Capacitor } from '@capacitor/core';
 
 export const initGA = () => {
-  ReactGA.initialize('GA_MEASUREMENT_ID');
+  ReactGA.initialize('G-QV3WDY3EF9');
   const platform = Capacitor.isNativePlatform() ? 'android_app' : 'web';
   ReactGA.set({ platform });
 };
