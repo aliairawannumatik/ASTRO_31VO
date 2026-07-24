@@ -1693,7 +1693,6 @@ const PetunjukPage = () => {
       <div className="relative z-10 flex flex-col items-center justify-start pt-16 pb-6 px-4 min-h-screen">
         {/* Header */}
         <div className="text-center mb-4">
-          <img src="/logo-numatik.png" alt="NUMATIK" className="w-14 h-14 object-contain mx-auto mb-2 drop-shadow-[0_0_12px_rgba(234,179,8,0.4)]" />
           <h1 className={`font-display text-2xl md:text-3xl font-bold text-glow-cyan ${isDark ? "text-primary" : "text-blue-800"}`}>
             {uiT.pageTitle}
           </h1>
