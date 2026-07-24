@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { Monitor } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -10,6 +11,7 @@ const TentangAplikasiPage = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const { isDark } = useTheme();
+  const { t } = useTranslation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -54,20 +56,33 @@ const TentangAplikasiPage = () => {
             NUMATIK
           </h1>
           <p className="text-accent font-body text-sm">
-            Numerasi Aktif dengan Teknologi Informasi dan Komunikasi
+            {t("tentang.subtitle")}
           </p>
         </div>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 md:p-8 mb-6 animate-slide-up">
           <div className="space-y-4">
             <p className="text-white font-body text-sm md:text-base leading-relaxed text-justify">
-              <strong className="text-primary">NUMATIK</strong> merupakan singkatan dari <strong className="text-accent">Nu</strong>merasi <strong className="text-accent">A</strong>ktif dengan <strong className="text-accent">T</strong>eknologi <strong className="text-accent">I</strong>nformasi dan <strong className="text-accent">K</strong>omunikasi — sebuah aplikasi edukasi matematika yang dirancang khusus untuk menjembatani tantangan belajar di era digital. Lahir dari semangat untuk menghadirkan pembelajaran yang tidak hanya informatif, tetapi juga <strong className="text-accent">bermakna dan menyenangkan</strong>.
+              <Trans
+                i18nKey="tentang.desc1"
+                components={{
+                  boldPrimary: <strong className="text-primary" />,
+                  boldAccent: <strong className="text-accent" />,
+                }}
+              />
             </p>
             <p className="text-white/90 font-body text-sm md:text-base leading-relaxed text-justify">
-              Diluncurkan pertama kali pada tahun <strong className="text-primary">2026</strong>, Numatik dikembangkan sepenuhnya selaras dengan <strong className="text-accent">Kurikulum Merdeka</strong>. Aplikasi ini mengintegrasikan pendekatan <strong className="text-secondary">Deep Learning</strong> untuk memastikan siswa tidak sekadar menghafal rumus, melainkan memahami konsep secara mendalam, kritis, dan kontekstual.
+              <Trans
+                i18nKey="tentang.desc2"
+                components={{
+                  boldPrimary: <strong className="text-primary" />,
+                  boldAccent: <strong className="text-accent" />,
+                  boldSecondary: <strong className="text-secondary" />,
+                }}
+              />
             </p>
             <p className="text-white/80 font-body text-sm md:text-base leading-relaxed text-justify">
-              Numatik dipersiapkan untuk menjadi sahabat belajar bagi seluruh siswa SMP di seluruh dunia.
+              {t("tentang.desc3")}
             </p>
           </div>
         </div>
@@ -79,15 +94,15 @@ const TentangAplikasiPage = () => {
                 <img src="/logo-numatik-pi.jpeg" alt="NUMATIK" className="w-full h-full object-contain" />
               </div>
               <div className="flex-1">
-                <p className="font-display text-xs font-bold tracking-widest uppercase text-cyan-400 mb-0.5">Versi Aplikasi</p>
+                <p className="font-display text-xs font-bold tracking-widest uppercase text-cyan-400 mb-0.5">{t("tentang.versionLabel")}</p>
                 <p className="font-display text-lg font-black text-white">
                   NUMATIK <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">v1.5</span>
                 </p>
-                <p className="text-white/50 font-body text-xs mt-0.5">Pembaruan konten, fitur, dan tampilan antarmuka</p>
+                <p className="text-white/50 font-body text-xs mt-0.5">{t("tentang.versionUpdateNote")}</p>
               </div>
               <div className="shrink-0">
                 <span className="text-[10px] font-bold px-3 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 font-display tracking-wide">
-                  TERBARU
+                  {t("tentang.versionBadge")}
                 </span>
               </div>
             </div>
@@ -111,13 +126,18 @@ const TentangAplikasiPage = () => {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-display text-xs font-bold tracking-widest uppercase text-cyan-400 mb-0.5">
-                  Versi Desktop
+                  {t("tentang.desktopLabel")}
                 </p>
                 <p className="font-display text-base font-black text-white leading-snug">
-                  Juga Tersedia di Browser! 🌐
+                  {t("tentang.desktopTitle")}
                 </p>
                 <p className="font-body text-xs text-white/60 mt-1 leading-relaxed">
-                  Buka <a href="https://www.numatik.app" target="_blank" rel="noopener noreferrer" className="text-cyan-300 font-semibold underline underline-offset-2 hover:text-cyan-200 transition-colors">www.numatik.app</a> di laptop atau PC untuk tampilan yang lebih luas dan pengalaman belajar yang lebih maksimal.
+                  <Trans
+                    i18nKey="tentang.desktopDesc"
+                    components={{
+                      link: <a href="https://www.numatik.app" target="_blank" rel="noopener noreferrer" className="text-cyan-300 font-semibold underline underline-offset-2 hover:text-cyan-200 transition-colors" />,
+                    }}
+                  />
                 </p>
               </div>
             </div>
@@ -126,7 +146,7 @@ const TentangAplikasiPage = () => {
 
         <div className="text-center space-y-2 animate-slide-up" style={{ animationDelay: '0.40s' }}>
           <p className="text-white/40 font-body text-xs">
-            Edisi Keenam · © 2026 NUMATIK. All rights reserved.
+            {t("tentang.copyright")}
           </p>
         </div>
 
@@ -134,7 +154,7 @@ const TentangAplikasiPage = () => {
           onClick={() => { playPopSound(); navigate("/menu"); }}
           className="mt-6 block mx-auto text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
         >
-          ← Kembali ke Menu
+          {t("tentang.backToMenu")}
         </button>
       </div>
     </div>

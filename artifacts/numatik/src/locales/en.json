@@ -462,5 +462,19 @@
     "variant_zumDesc": "Click correct answer bubbles before they fall! Subject questions appear every 25 seconds.",
     "variant_pac": "Pac Math",
     "variant_pacDesc": "Eat all dots and avoid ghosts! Answer subject questions every 25 seconds for bonus points."
+  },
+  "tentang": {
+    "subtitle": "Active Numeracy with Information and Communication Technology",
+    "desc1": "<boldPrimary>NUMATIK</boldPrimary> stands for <boldAccent>Nu</boldAccent>meracy <boldAccent>A</boldAccent>ctively with <boldAccent>T</boldAccent>echnology of <boldAccent>I</boldAccent>nformation and <boldAccent>K</boldAccent>nowledge — a mathematics education application specifically designed to bridge learning challenges in the digital era. Born from a passion for delivering learning that is not only informative, but also <boldAccent>meaningful and enjoyable</boldAccent>.",
+    "desc2": "First launched in <boldPrimary>2026</boldPrimary>, Numatik was developed fully aligned with the <boldAccent>Merdeka Curriculum</boldAccent>. The app integrates a <boldSecondary>Deep Learning</boldSecondary> approach to ensure students don't merely memorize formulas, but understand concepts deeply, critically, and contextually.",
+    "desc3": "Numatik is prepared to be a learning companion for all junior high school students around the world.",
+    "versionLabel": "App Version",
+    "versionUpdateNote": "Content, feature, and interface updates",
+    "versionBadge": "LATEST",
+    "desktopLabel": "Desktop Version",
+    "desktopTitle": "Also Available in Browser! 🌐",
+    "desktopDesc": "Open <link>www.numatik.app</link> on your laptop or PC for a wider display and a better learning experience.",
+    "copyright": "Sixth Edition · © 2026 NUMATIK. All rights reserved.",
+    "backToMenu": "← Back to Menu"
   }
 }

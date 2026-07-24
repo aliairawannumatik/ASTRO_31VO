@@ -462,5 +462,19 @@
     "variant_zumDesc": "落ちる前に正解バブルをクリック！",
     "variant_pac": "パック数学",
     "variant_pacDesc": "全ドットを食べてゴーストを避けよう！"
+  },
+  "tentang": {
+    "subtitle": "情報通信技術を活用したアクティブ数的思考",
+    "desc1": "<boldPrimary>NUMATIK</boldPrimary>は<boldAccent>Nu</boldAccent>meracy（数的思考）、<boldAccent>A</boldAccent>ctively（主体的に）、<boldAccent>T</boldAccent>echnology（技術）、<boldAccent>I</boldAccent>nformation（情報）、<boldAccent>K</boldAccent>nowledge（知識）の頭文字を組み合わせた造語です。デジタル時代の学習課題に橋渡しをするために設計された数学教育アプリです。ただ情報を伝えるだけでなく、<boldAccent>意義深く楽しい</boldAccent>学びを提供することへの情熱から生まれました。",
+    "desc2": "<boldPrimary>2026</boldPrimary>年に初リリースされたNumatikは、<boldAccent>メルデカカリキュラム</boldAccent>に完全準拠して開発されました。<boldSecondary>ディープラーニング</boldSecondary>的なアプローチを取り入れ、生徒が公式を丸暗記するだけでなく、深く・批判的・文脈的に概念を理解できるよう設計されています。",
+    "desc3": "Numatikは世界中の中学生の学習パートナーとなることを目指しています。",
+    "versionLabel": "アプリバージョン",
+    "versionUpdateNote": "コンテンツ・機能・インターフェースの更新",
+    "versionBadge": "最新",
+    "desktopLabel": "デスクトップ版",
+    "desktopTitle": "ブラウザでも利用可能！🌐",
+    "desktopDesc": "ノートパソコンまたはPCで<link>www.numatik.app</link>を開くと、より広い画面でより充実した学習体験ができます。",
+    "copyright": "第6版 · © 2026 NUMATIK. All rights reserved.",
+    "backToMenu": "← メニューに戻る"
   }
 }

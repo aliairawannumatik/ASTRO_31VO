@@ -462,5 +462,19 @@
     "variant_zumDesc": "Klik gelembung jawaban yang benar sebelum jatuh! Soal materi muncul setiap 25 detik.",
     "variant_pac": "Pac Math",
     "variant_pacDesc": "Makan semua titik dan hindari hantu! Jawab soal materi setiap 25 detik untuk poin bonus."
+  },
+  "tentang": {
+    "subtitle": "Numerasi Aktif dengan Teknologi Informasi dan Komunikasi",
+    "desc1": "<boldPrimary>NUMATIK</boldPrimary> merupakan singkatan dari <boldAccent>Nu</boldAccent>merasi <boldAccent>A</boldAccent>ktif dengan <boldAccent>T</boldAccent>eknologi <boldAccent>I</boldAccent>nformasi dan <boldAccent>K</boldAccent>omunikasi — sebuah aplikasi edukasi matematika yang dirancang khusus untuk menjembatani tantangan belajar di era digital. Lahir dari semangat untuk menghadirkan pembelajaran yang tidak hanya informatif, tetapi juga <boldAccent>bermakna dan menyenangkan</boldAccent>.",
+    "desc2": "Diluncurkan pertama kali pada tahun <boldPrimary>2026</boldPrimary>, Numatik dikembangkan sepenuhnya selaras dengan <boldAccent>Kurikulum Merdeka</boldAccent>. Aplikasi ini mengintegrasikan pendekatan <boldSecondary>Deep Learning</boldSecondary> untuk memastikan siswa tidak sekadar menghafal rumus, melainkan memahami konsep secara mendalam, kritis, dan kontekstual.",
+    "desc3": "Numatik dipersiapkan untuk menjadi sahabat belajar bagi seluruh siswa SMP di seluruh dunia.",
+    "versionLabel": "Versi Aplikasi",
+    "versionUpdateNote": "Pembaruan konten, fitur, dan tampilan antarmuka",
+    "versionBadge": "TERBARU",
+    "desktopLabel": "Versi Desktop",
+    "desktopTitle": "Juga Tersedia di Browser! 🌐",
+    "desktopDesc": "Buka <link>www.numatik.app</link> di laptop atau PC untuk tampilan yang lebih luas dan pengalaman belajar yang lebih maksimal.",
+    "copyright": "Edisi Keenam · © 2026 NUMATIK. All rights reserved.",
+    "backToMenu": "← Kembali ke Menu"
   }
 }
