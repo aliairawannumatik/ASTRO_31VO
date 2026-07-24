@@ -146,19 +146,34 @@ const WelcomePage = () => {
           </button>
         </div>
 
-        <p className={`text-xs font-body -mt-10 mb-10 opacity-50 tracking-wide ${
-          isLight ? "text-indigo-400" : "text-cyan-300"
-        }`}>
-          Also available on desktop at{" "}
-          <a
-            href="https://www.numatik.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline underline-offset-2 hover:opacity-80 transition-opacity"
-          >
-            www.numatik.app
-          </a>
-        </p>
+        <a
+          href="https://www.numatik.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full font-body text-xs font-semibold tracking-wide transition-all duration-200 -mt-10 mb-10 border active:scale-95"
+          style={{
+            background: isSunset
+              ? "linear-gradient(90deg, rgba(245,158,11,0.18), rgba(239,68,68,0.18))"
+              : isLight
+              ? "linear-gradient(90deg, rgba(99,102,241,0.15), rgba(6,182,212,0.15))"
+              : "linear-gradient(90deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15))",
+            borderColor: isSunset
+              ? "rgba(245,158,11,0.5)"
+              : isLight
+              ? "rgba(99,102,241,0.45)"
+              : "rgba(6,182,212,0.4)",
+            color: isSunset ? "#fde68a" : isLight ? "#4f46e5" : "#67e8f9",
+            boxShadow: isSunset
+              ? "0 0 12px rgba(245,158,11,0.15)"
+              : isLight
+              ? "0 0 12px rgba(99,102,241,0.12)"
+              : "0 0 12px rgba(6,182,212,0.15)",
+          }}
+        >
+          <span>🖥️</span>
+          <span>Also available on desktop at <span className="underline underline-offset-2">www.numatik.app</span></span>
+          <span className="opacity-60">↗</span>
+        </a>
 
         <div className="mt-8 mb-12">
           <div className="relative w-28 h-28 mx-auto" style={{ overflow: "visible" }}>
