@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
@@ -23,6 +24,7 @@ import {
   Rocket,
   Zap,
   GraduationCap,
+  Monitor,
 } from "lucide-react";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -57,7 +59,16 @@ const MenuPage = () => {
     { key: "about",       icon: Rocket,         path: "/tentang-aplikasi" },
   ];
 
+  const [showDesktopModal, setShowDesktopModal] = useState(false);
+  const [pendingPath, setPendingPath] = useState("");
+
   const handleClick = (path: string) => {
+    if (path === "/ruang-untuk-guru") {
+      playPopSound();
+      setPendingPath(path);
+      setShowDesktopModal(true);
+      return;
+    }
     playPopSound();
     navigate(path);
   };
@@ -113,6 +124,87 @@ const MenuPage = () => {
           {t("nav.backToHome")}
         </button>
       </div>
+
+      {/* ── Desktop Recommendation Modal ──────────────────────────────── */}
+      {showDesktopModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(6px)" }}
+          onClick={() => setShowDesktopModal(false)}
+        >
+          <div
+            className="relative w-full max-w-sm rounded-2xl border p-8 flex flex-col items-center text-center shadow-2xl animate-slide-up"
+            style={{
+              background: "linear-gradient(160deg, rgba(6,182,212,0.12) 0%, rgba(59,130,246,0.10) 50%, rgba(139,92,246,0.08) 100%)",
+              borderColor: "rgba(6,182,212,0.4)",
+              boxShadow: "0 0 40px rgba(6,182,212,0.15), 0 0 80px rgba(59,130,246,0.08), inset 0 1px 0 rgba(255,255,255,0.08)",
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Glow ring behind icon */}
+            <div className="relative mb-6">
+              <div
+                className="absolute inset-0 rounded-full blur-2xl"
+                style={{ background: "radial-gradient(circle, rgba(6,182,212,0.5) 0%, rgba(59,130,246,0.3) 50%, transparent 75%)", transform: "scale(2)" }}
+              />
+              <div
+                className="relative flex items-center justify-center w-20 h-20 rounded-full border"
+                style={{
+                  background: "linear-gradient(135deg, rgba(6,182,212,0.25), rgba(59,130,246,0.25))",
+                  borderColor: "rgba(6,182,212,0.5)",
+                  boxShadow: "0 0 20px rgba(6,182,212,0.3)",
+                }}
+              >
+                <Monitor className="w-10 h-10 text-cyan-300" strokeWidth={1.5} />
+              </div>
+            </div>
+
+            {/* Title */}
+            <h2
+              className="font-display text-xl font-bold mb-2 text-cyan-300"
+              style={{ textShadow: "0 0 16px rgba(6,182,212,0.6)" }}
+            >
+              Tampilan Terbaik di Desktop
+            </h2>
+
+            {/* Divider */}
+            <div
+              className="w-16 h-px mb-4"
+              style={{ background: "linear-gradient(90deg, transparent, rgba(6,182,212,0.6), transparent)" }}
+            />
+
+            {/* Body */}
+            <p className="font-body text-sm text-slate-300 leading-relaxed mb-1">
+              Menu <span className="font-semibold text-cyan-200">Ruang untuk Guru</span> dirancang khusus untuk layar yang lebih lebar.
+            </p>
+            <p className="font-body text-xs text-slate-400 leading-relaxed mb-8">
+              Untuk pengalaman maksimal, buka di <span className="text-cyan-300 font-medium">laptop atau desktop</span> melalui{" "}
+              <span className="text-cyan-300 font-medium">www.numatik.app</span>
+            </p>
+
+            {/* CTA button */}
+            <div className="relative w-full">
+              <div
+                className="absolute inset-0 rounded-xl blur-lg opacity-50"
+                style={{ background: "linear-gradient(90deg, #06b6d4, #3b82f6)" }}
+              />
+              <button
+                onClick={() => {
+                  setShowDesktopModal(false);
+                  navigate(pendingPath);
+                }}
+                className="relative w-full py-3 rounded-xl font-display font-bold text-sm tracking-widest text-white border transition-all duration-200 active:scale-95 hover:opacity-90"
+                style={{
+                  background: "linear-gradient(90deg, #0891b2, #2563eb)",
+                  borderColor: "rgba(6,182,212,0.5)",
+                }}
+              >
+                Mengerti, Lanjutkan →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
