@@ -244,8 +244,11 @@ const OlimpiadeMockup = () => {
     en: { frameTitle: "MATH OLYMPIAD",          sectionTitle: "MATH OLYMPIAD",          action: "OPEN" },
     ja: { frameTitle: "数学オリンピック",         sectionTitle: "数学オリンピック",         action: "開く" },
   }[language];
-  /* Math topic names kept as-is per convention */
-  const topics = ["Bilangan Bulat","Bilangan Rasional","Bilangan Berpangkat","KPK dan FPB","Himpunan"];
+  const topics = {
+    id: ["Bilangan Bulat","Bilangan Rasional","Bilangan Berpangkat","KPK dan FPB","Himpunan"],
+    en: ["Integers","Rational Numbers","Exponents","LCM & GCF","Sets"],
+    ja: ["整数","有理数","累乗","最小公倍数・最大公約数","集合"],
+  }[language];
   return (
     <MockupFrame title={m.frameTitle} accentColor="text-yellow-400">
       <div className="p-3 space-y-1.5">
@@ -272,8 +275,11 @@ const RumusMockup = () => {
     en: { frameTitle: "FORMULA COLLECTION", sectionTitle: "FORMULA COLLECTION" },
     ja: { frameTitle: "数式集",              sectionTitle: "数式集" },
   }[language];
-  /* Math category names kept as-is per convention */
-  const categories = ["Aljabar","Geometri","Statistika","Trigonometri"];
+  const categories = {
+    id: ["Aljabar","Geometri","Statistika","Trigonometri"],
+    en: ["Algebra","Geometry","Statistics","Trigonometry"],
+    ja: ["代数","図形","統計","三角法"],
+  }[language];
   return (
     <MockupFrame title={m.frameTitle} accentColor="text-green-400">
       <div className="p-3 space-y-1.5">
@@ -358,21 +364,29 @@ const PerigkatMockup = () => (
   </MockupFrame>
 );
 
-const BankSoalMockup = () => (
-  <MockupFrame title="BANK SOAL" accentColor="text-cyan-400">
-    <div className="p-2">
-      <p className="text-[9px] text-cyan-300 font-bold text-center mb-2">BANK SOAL</p>
-      <div className="grid grid-cols-2 gap-1">
-        {["Bilangan Bulat","Aljabar","Geometri","Perbandingan","Statistika","Himpunan","Persamaan","Fungsi"].map((t) => (
-          <div key={t} className="bg-white/5 border border-cyan-400/20 rounded p-1 text-center">
-            <div className="w-3 h-3 rounded-sm bg-cyan-400/30 mx-auto mb-0.5" />
-            <p className="text-[5.5px] text-white/60">{t}</p>
-          </div>
-        ))}
+const BankSoalMockup = () => {
+  const { language } = useLanguage();
+  const m = {
+    id: { frameTitle: "BANK SOAL",     topics: ["Bilangan Bulat","Aljabar","Geometri","Perbandingan","Statistika","Himpunan","Persamaan","Fungsi"] },
+    en: { frameTitle: "QUESTION BANK", topics: ["Integers","Algebra","Geometry","Ratios","Statistics","Sets","Equations","Functions"] },
+    ja: { frameTitle: "問題バンク",      topics: ["整数","代数","図形","比","統計","集合","方程式","関数"] },
+  }[language];
+  return (
+    <MockupFrame title={m.frameTitle} accentColor="text-cyan-400">
+      <div className="p-2">
+        <p className="text-[9px] text-cyan-300 font-bold text-center mb-2">{m.frameTitle}</p>
+        <div className="grid grid-cols-2 gap-1">
+          {m.topics.map((t) => (
+            <div key={t} className="bg-white/5 border border-cyan-400/20 rounded p-1 text-center">
+              <div className="w-3 h-3 rounded-sm bg-cyan-400/30 mx-auto mb-0.5" />
+              <p className="text-[5.5px] text-white/60">{t}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </MockupFrame>
-);
+    </MockupFrame>
+  );
+};
 
 const ChatMockup = () => {
   const { language } = useLanguage();
@@ -847,9 +861,9 @@ function getSlides(language: Language): Slide[] {
         "Read the material carefully and study the example problems",
       ],
       submenus: [
-        "Grade 7: Bilangan bulat, Pecahan, Aljabar, Persamaan dan Pertidaksamaan Linear Satu Variabel, Perbandingan, Aritmetika Sosial, Garis dan Sudut, Segitiga dan Segiempat, Himpunan",
-        "Grade 8: Pola Bilangan, Koordinat Kartesius, Relasi dan Fungsi, Sistem Persamaan Linear Dua Variabel, Persamaan Garis Lurus, Teorema Pythagoras, Lingkaran, Garis Singgung Lingkaran, Bangun Ruang Sisi Datar",
-        "Grade 9: Bilangan Berpangkat, Kesebangunan dan Kekongruenan, Transformasi Geometri, Bangun Ruang Sisi Lengkung, Statistika, Peluang, Persamaan Kuadrat (enrichment), Fungsi Kuadrat (enrichment)",
+        "Grade 7: Integers, Fractions, Algebra, Linear Equations and Inequalities in One Variable, Ratios and Proportions, Social Arithmetic, Lines and Angles, Triangles and Quadrilaterals, Sets (Enrichment)",
+        "Grade 8: Number Patterns, Cartesian Coordinates, Relations and Functions, System of Linear Equations in Two Variables, Linear Equations (Graphs), Pythagorean Theorem, Circles, Tangent Lines to a Circle (Enrichment), Flat-Sided 3D Shapes",
+        "Grade 9: Exponents and Radicals, Similarity and Congruence, Geometric Transformations, Curved-Sided 3D Shapes, Statistics, Probability, Quadratic Equations (Enrichment), Quadratic Functions (Enrichment)",
       ],
     },
     ja: {
@@ -862,9 +876,9 @@ function getSlides(language: Language): Slide[] {
         "教材をよく読み、例題を解いてみよう",
       ],
       submenus: [
-        "中学1年: Bilangan bulat, Pecahan, Aljabar, Persamaan dan Pertidaksamaan Linear Satu Variabel, Perbandingan, Aritmetika Sosial, Garis dan Sudut, Segitiga dan Segiempat, Himpunan",
-        "中学2年: Pola Bilangan, Koordinat Kartesius, Relasi dan Fungsi, Sistem Persamaan Linear Dua Variabel, Persamaan Garis Lurus, Teorema Pythagoras, Lingkaran, Garis Singgung Lingkaran, Bangun Ruang Sisi Datar",
-        "中学3年: Bilangan Berpangkat, Kesebangunan dan Kekongruenan, Transformasi Geometri, Bangun Ruang Sisi Lengkung, Statistika, Peluang, Persamaan Kuadrat（発展）, Fungsi Kuadrat（発展）",
+        "中学1年: 整数, 分数, 代数, 一次方程式と一次不等式, 比と割合, 生活算数, 直線と角度, 三角形と四角形, 集合（発展）",
+        "中学2年: 数列, 座標平面, 関係と関数, 二元一次連立方程式, 一次関数, ピタゴラスの定理, 円, 円の接線（発展）, 平面で囲まれた立体",
+        "中学3年: 累乗と根, 相似と合同, 図形の変換, 曲面を含む立体, 統計, 確率, 二次方程式（発展）, 二次関数（発展）",
       ],
     },
   }[language];
@@ -1149,7 +1163,7 @@ function getSlides(language: Language): Slide[] {
             "Work through the problems carefully — the difficulty level is higher",
             "Study the solutions to improve your skills",
           ],
-          submenus: ["Bilangan Bulat & Rasional", "Bilangan Berpangkat & Irasional", "KPK, FPB & Modulo", "Himpunan & Relasi Fungsi", "And many more topics"],
+          submenus: ["Integers & Rationals", "Exponents & Irrationals", "LCM, GCF & Modulo", "Sets & Relations/Functions", "And many more topics"],
         },
         ja: {
           title: "数学オリンピック",
@@ -1160,7 +1174,7 @@ function getSlides(language: Language): Slide[] {
             "問題を丁寧に解こう — 難易度は高め",
             "解説を読んで実力アップを図ろう",
           ],
-          submenus: ["Bilangan Bulat & Rasional", "Bilangan Berpangkat & Irasional", "KPK, FPB & Modulo", "Himpunan & Relasi Fungsi", "その他多数のトピック"],
+          submenus: ["整数と有理数", "累乗と無理数", "最小公倍数・最大公約数・モジュロ", "集合と関係・関数", "その他多数のトピック"],
         },
       }[language];
       return {
