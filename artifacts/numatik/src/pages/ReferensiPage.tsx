@@ -55,7 +55,7 @@ const ReferensiPage = () => {
         <div className="mb-5">
           <div className="flex items-center gap-2 mb-3">
             <BookOpen className="w-5 h-5 text-accent" />
-            <h2 className="font-display text-base font-bold text-accent">Buku</h2>
+            <h2 className="font-display text-base font-bold text-accent">{t("referensiPage.sectionBooks")}</h2>
           </div>
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-5 space-y-4">
             {bukuRefs.map((r, i) => (
@@ -71,7 +71,7 @@ const ReferensiPage = () => {
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-3">
             <Globe className="w-5 h-5 text-accent" />
-            <h2 className="font-display text-base font-bold text-accent">Internet</h2>
+            <h2 className="font-display text-base font-bold text-accent">{t("referensiPage.sectionInternet")}</h2>
           </div>
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-5 space-y-4">
             {internetRefs.map((r, i) => (
