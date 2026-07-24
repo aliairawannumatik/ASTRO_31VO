@@ -48,6 +48,17 @@ const BiografiPage = () => {
               <p className="text-white font-body text-sm">Indonesia</p>
             </div>
             <div>
+              <p className="text-primary font-display text-xs mb-1">WEBSITE</p>
+              <a
+                href="https://www.numatik.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-300 font-body text-sm underline underline-offset-2 hover:text-cyan-200 transition-colors"
+              >
+                www.numatik.app
+              </a>
+            </div>
+            <div>
               <p className="text-primary font-display text-xs mb-1">Follow My Medsos :</p>
               <div className="space-y-2 mt-2">
                 <p className="font-body text-sm text-white">Instagram : @irawansutiawan.one</p>
