@@ -155,9 +155,9 @@ const RuangUntukGuruPage = () => {
         <div
           className="relative flex items-center gap-4 rounded-2xl border px-5 py-4 mb-8 overflow-hidden animate-slide-up"
           style={{
-            background: "linear-gradient(120deg, rgba(6,182,212,0.13) 0%, rgba(59,130,246,0.10) 60%, rgba(139,92,246,0.08) 100%)",
-            borderColor: "rgba(6,182,212,0.35)",
-            boxShadow: "0 0 24px rgba(6,182,212,0.08), inset 0 1px 0 rgba(255,255,255,0.06)",
+            background: "linear-gradient(120deg, #0c3a4a 0%, #0f2d4a 60%, #151a3a 100%)",
+            borderColor: "rgba(6,182,212,0.55)",
+            boxShadow: "0 0 28px rgba(6,182,212,0.18), inset 0 1px 0 rgba(255,255,255,0.08)",
           }}
         >
           {/* subtle glow blob */}
