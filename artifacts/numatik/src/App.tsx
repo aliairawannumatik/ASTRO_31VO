@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { startGlobalAmbient } from "@/hooks/useAudio";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -1560,7 +1560,8 @@ const AppInner = () => {
           <Route path="/math-game-arena/kelas-9/:parentSlug/:slug/:variant" element={<SubmaterialGameDispatcherK9 />} />
 
           {/* Materi Matematika Routes */}
-          <Route path="/materi-matematika" element={<MateriMatematikaPage />} />
+          <Route path="/materi-matematika" element={<Navigate to="/buku-animasi-matematika" replace />} />
+          <Route path="/buku-animasi-matematika" element={<MateriMatematikaPage />} />
           <Route path="/materi-matematika/kelas-7" element={<MateriMatematikaKelas7Page />} />
           <Route path="/materi-matematika/kelas-8" element={<MateriMatematikaKelas8Page />} />
           <Route path="/materi-matematika/kelas-9" element={<MateriMatematikaKelas9Page />} />
