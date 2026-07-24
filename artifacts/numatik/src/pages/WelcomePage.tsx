@@ -146,6 +146,20 @@ const WelcomePage = () => {
           </button>
         </div>
 
+        <p className={`text-xs font-body -mt-10 mb-10 opacity-50 tracking-wide ${
+          isLight ? "text-indigo-400" : "text-cyan-300"
+        }`}>
+          Also available on desktop at{" "}
+          <a
+            href="https://www.numatik.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:opacity-80 transition-opacity"
+          >
+            www.numatik.app
+          </a>
+        </p>
+
         <div className="mt-8 mb-12">
           <div className="relative w-28 h-28 mx-auto" style={{ overflow: "visible" }}>
             {isSunset ? (
