@@ -7,9 +7,9 @@ import ja from "./locales/ja.json";
 
 const STORAGE_KEY = "numatik_language";
 
-const savedLang = localStorage.getItem(STORAGE_KEY) || "id";
+const savedLang = localStorage.getItem(STORAGE_KEY) || "en";
 const validLangs = ["id", "en", "ja"];
-const resolvedLang = validLangs.includes(savedLang) ? savedLang : "id";
+const resolvedLang = validLangs.includes(savedLang) ? savedLang : "en";
 
 i18n
   .use(initReactI18next)
@@ -20,7 +20,7 @@ i18n
       ja: { translation: ja },
     },
     lng: resolvedLang,
-    fallbackLng: "id",
+    fallbackLng: "en",
     interpolation: {
       escapeValue: false,
     },
