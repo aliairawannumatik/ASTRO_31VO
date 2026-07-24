@@ -148,7 +148,46 @@
     "grade8desc": "Animated Math Book for Grade 8 Junior High",
     "grade9desc": "Animated Math Book for Grade 9 Junior High",
     "study": "STUDY",
-    "backToMenu": "Back to Menu"
+    "backToMenu": "Back to Menu",
+    "kelas7Title": "ANIMATED MATH BOOK - GRADE 7",
+    "kelas8Title": "ANIMATED MATH BOOK - GRADE 8",
+    "kelas9Title": "ANIMATED MATH BOOK - GRADE 9",
+    "topicSubtitle": "Choose a topic to learn the material",
+    "backToAnimatedBook": "Back to Animated Math Book",
+    "topics": {
+      "kelas7": {
+        "bilanganBulat": "INTEGERS",
+        "pecahan": "FRACTIONS",
+        "aljabar": "ALGEBRA",
+        "plsvPtlsv": "LINEAR EQUATIONS AND INEQUALITIES IN ONE VARIABLE",
+        "perbandingan": "RATIOS AND PROPORTIONS",
+        "aritmetikaSosial": "SOCIAL ARITHMETIC",
+        "garisDanSudut": "LINES AND ANGLES",
+        "segitigaDanSegiempat": "TRIANGLES AND QUADRILATERALS",
+        "himpunan": "SETS (ENRICHMENT)"
+      },
+      "kelas8": {
+        "polaBilangan": "NUMBER PATTERNS",
+        "koordinatKartesius": "CARTESIAN COORDINATES",
+        "relasiFungsi": "RELATIONS AND FUNCTIONS",
+        "spldv": "SYSTEM OF LINEAR EQUATIONS IN TWO VARIABLES",
+        "persamaanGarisLurus": "LINEAR EQUATIONS (GRAPHS)",
+        "teoremaPythagoras": "PYTHAGOREAN THEOREM",
+        "lingkaran": "CIRCLES",
+        "garisSinggungLingkaran": "TANGENT LINES TO A CIRCLE (ENRICHMENT)",
+        "bangunRuangSisiDatar": "FLAT-SIDED 3D SHAPES"
+      },
+      "kelas9": {
+        "bilanganBerpangkat": "EXPONENTS AND RADICALS",
+        "kesebangunan": "SIMILARITY AND CONGRUENCE",
+        "transformasiGeometri": "GEOMETRIC TRANSFORMATIONS",
+        "bangunRuangSisiLengkung": "CURVED-SIDED 3D SHAPES",
+        "statistika": "STATISTICS",
+        "peluang": "PROBABILITY",
+        "persamaanKuadrat": "QUADRATIC EQUATIONS (ENRICHMENT)",
+        "fungsiKuadrat": "QUADRATIC FUNCTIONS (ENRICHMENT)"
+      }
+    }
   },
   "unitConverter": {
     "title": "UNIT CONVERTER",

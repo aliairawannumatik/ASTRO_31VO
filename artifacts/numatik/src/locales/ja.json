@@ -148,7 +148,46 @@
     "grade8desc": "中学2年生向けアニメ数学書",
     "grade9desc": "中学3年生向けアニメ数学書",
     "study": "学ぶ",
-    "backToMenu": "メニューに戻る"
+    "backToMenu": "メニューに戻る",
+    "kelas7Title": "アニメ数学書 - 中学1年",
+    "kelas8Title": "アニメ数学書 - 中学2年",
+    "kelas9Title": "アニメ数学書 - 中学3年",
+    "topicSubtitle": "学ぶトピックを選んでください",
+    "backToAnimatedBook": "アニメ数学書に戻る",
+    "topics": {
+      "kelas7": {
+        "bilanganBulat": "整数",
+        "pecahan": "分数",
+        "aljabar": "代数",
+        "plsvPtlsv": "一次方程式と一次不等式",
+        "perbandingan": "比と割合",
+        "aritmetikaSosial": "生活算数",
+        "garisDanSudut": "直線と角度",
+        "segitigaDanSegiempat": "三角形と四角形",
+        "himpunan": "集合（発展）"
+      },
+      "kelas8": {
+        "polaBilangan": "数列",
+        "koordinatKartesius": "座標平面",
+        "relasiFungsi": "関係と関数",
+        "spldv": "二元一次連立方程式",
+        "persamaanGarisLurus": "一次関数",
+        "teoremaPythagoras": "ピタゴラスの定理",
+        "lingkaran": "円",
+        "garisSinggungLingkaran": "円の接線（発展）",
+        "bangunRuangSisiDatar": "平面で囲まれた立体"
+      },
+      "kelas9": {
+        "bilanganBerpangkat": "累乗と根",
+        "kesebangunan": "相似と合同",
+        "transformasiGeometri": "図形の変換",
+        "bangunRuangSisiLengkung": "曲面を含む立体",
+        "statistika": "統計",
+        "peluang": "確率",
+        "persamaanKuadrat": "二次方程式（発展）",
+        "fungsiKuadrat": "二次関数（発展）"
+      }
+    }
   },
   "unitConverter": {
     "title": "単位変換",

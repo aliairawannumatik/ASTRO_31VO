@@ -148,7 +148,46 @@
     "grade8desc": "Buku Animasi Matematika kelas 8 SMP",
     "grade9desc": "Buku Animasi Matematika kelas 9 SMP",
     "study": "BELAJAR",
-    "backToMenu": "Kembali ke Menu"
+    "backToMenu": "Kembali ke Menu",
+    "kelas7Title": "BUKU ANIMASI MATEMATIKA - KELAS 7",
+    "kelas8Title": "BUKU ANIMASI MATEMATIKA - KELAS 8",
+    "kelas9Title": "BUKU ANIMASI MATEMATIKA - KELAS 9",
+    "topicSubtitle": "Pilih topik untuk mempelajari materi",
+    "backToAnimatedBook": "Kembali ke Buku Animasi Matematika",
+    "topics": {
+      "kelas7": {
+        "bilanganBulat": "BILANGAN BULAT",
+        "pecahan": "PECAHAN",
+        "aljabar": "ALJABAR",
+        "plsvPtlsv": "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL",
+        "perbandingan": "PERBANDINGAN",
+        "aritmetikaSosial": "ARITMETIKA SOSIAL",
+        "garisDanSudut": "GARIS DAN SUDUT",
+        "segitigaDanSegiempat": "SEGITIGA DAN SEGIEMPAT",
+        "himpunan": "HIMPUNAN (PENGAYAAN)"
+      },
+      "kelas8": {
+        "polaBilangan": "POLA BILANGAN",
+        "koordinatKartesius": "KOORDINAT KARTESIUS",
+        "relasiFungsi": "RELASI DAN FUNGSI",
+        "spldv": "SISTEM PERSAMAAN LINEAR DUA VARIABEL",
+        "persamaanGarisLurus": "PERSAMAAN GARIS LURUS",
+        "teoremaPythagoras": "TEOREMA PYTHAGORAS",
+        "lingkaran": "LINGKARAN",
+        "garisSinggungLingkaran": "GARIS SINGGUNG LINGKARAN (PENGAYAAN)",
+        "bangunRuangSisiDatar": "BANGUN RUANG SISI DATAR"
+      },
+      "kelas9": {
+        "bilanganBerpangkat": "BILANGAN BERPANGKAT",
+        "kesebangunan": "KESEBANGUNAN DAN KEKONGRUENAN",
+        "transformasiGeometri": "TRANSFORMASI GEOMETRI",
+        "bangunRuangSisiLengkung": "BANGUN RUANG SISI LENGKUNG",
+        "statistika": "STATISTIKA",
+        "peluang": "PELUANG",
+        "persamaanKuadrat": "PERSAMAAN KUADRAT (PENGAYAAN)",
+        "fungsiKuadrat": "FUNGSI KUADRAT (PENGAYAAN)"
+      }
+    }
   },
   "unitConverter": {
     "title": "KONVERSI SATUAN",
