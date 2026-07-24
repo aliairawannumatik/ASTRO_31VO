@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, Globe, Youtube } from "lucide-react";
@@ -35,6 +36,7 @@ const internetRefs = [
 
 const ReferensiPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -46,7 +48,7 @@ const ReferensiPage = () => {
       <PageNavigation prevPath="/menu" />
       <div className="relative z-10 max-w-2xl w-full px-4 py-10">
         <h1 className="font-display text-3xl font-bold text-primary text-glow-cyan mb-8 text-center">
-          SUMBER REFERENSI
+          {t("referensiPage.title")}
         </h1>
 
         {/* Buku */}
@@ -94,7 +96,7 @@ const ReferensiPage = () => {
                   >
                     {r.label}
                   </a>
-                  <span className="text-white ml-1">(diakses {r.akses})</span>
+                  <span className="text-white ml-1">({t("referensiPage.accessedOn")} {r.akses})</span>
                 </div>
               </div>
             ))}

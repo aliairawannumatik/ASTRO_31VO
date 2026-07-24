@@ -463,6 +463,10 @@
     "variant_pac": "Pac Math",
     "variant_pacDesc": "Makan semua titik dan hindari hantu! Jawab soal materi setiap 25 detik untuk poin bonus."
   },
+  "referensiPage": {
+    "title": "SUMBER REFERENSI",
+    "accessedOn": "diakses pada"
+  },
   "tentang": {
     "subtitle": "Numerasi Aktif dengan Teknologi Informasi dan Komunikasi",
     "desc1": "<boldPrimary>NUMATIK</boldPrimary> merupakan singkatan dari <boldAccent>Nu</boldAccent>merasi <boldAccent>A</boldAccent>ktif dengan <boldAccent>T</boldAccent>eknologi <boldAccent>I</boldAccent>nformasi dan <boldAccent>K</boldAccent>omunikasi — sebuah aplikasi edukasi matematika yang dirancang khusus untuk menjembatani tantangan belajar di era digital. Lahir dari semangat untuk menghadirkan pembelajaran yang tidak hanya informatif, tetapi juga <boldAccent>bermakna dan menyenangkan</boldAccent>.",

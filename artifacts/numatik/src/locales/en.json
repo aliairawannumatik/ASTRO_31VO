@@ -463,6 +463,10 @@
     "variant_pac": "Pac Math",
     "variant_pacDesc": "Eat all dots and avoid ghosts! Answer subject questions every 25 seconds for bonus points."
   },
+  "referensiPage": {
+    "title": "REFERENCES",
+    "accessedOn": "Accessed on"
+  },
   "tentang": {
     "subtitle": "Active Numeracy with Information and Communication Technology",
     "desc1": "<boldPrimary>NUMATIK</boldPrimary> stands for <boldAccent>Nu</boldAccent>meracy <boldAccent>A</boldAccent>ctively with <boldAccent>T</boldAccent>echnology of <boldAccent>I</boldAccent>nformation and <boldAccent>K</boldAccent>nowledge — a mathematics education application specifically designed to bridge learning challenges in the digital era. Born from a passion for delivering learning that is not only informative, but also <boldAccent>meaningful and enjoyable</boldAccent>.",
