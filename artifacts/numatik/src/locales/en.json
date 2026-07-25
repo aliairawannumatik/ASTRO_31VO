@@ -2036,6 +2036,82 @@
           "optC": "C. Rp240,000",
           "optD": "D. Rp440,000"
         }
+      },
+      "pph": {
+        "title": "INCOME TAX (PPh)",
+        "pageSubtitle": "Grade 7 · Social Arithmetic · Self-Practice",
+        "instruction": "Solve the following problems showing your complete working",
+        "backTo": "Back to Social Arithmetic",
+        "q1": {
+          "stem": "Father receives a salary of Rp5,000,000. If the salary is subject to 5% Income Tax (PPh), what is the tax deduction?",
+          "optA": "A. Rp50,000",
+          "optB": "B. Rp200,000",
+          "optC": "C. Rp250,000",
+          "optD": "D. Rp500,000"
+        },
+        "q2": {
+          "stem": "Pak Rahmat won a quiz prize of Rp10,000,000. The prize is subject to a final PPh of 20%. How much cash does Pak Rahmat receive?",
+          "optA": "A. Rp2,000,000",
+          "optB": "B. Rp8,000,000",
+          "optC": "C. Rp9,800,000",
+          "optD": "D. Rp12,000,000"
+        },
+        "q3": {
+          "stem": "If the PPh deduction from an employee’s salary is Rp150,000 and the net salary received is Rp2,850,000, what is the employee’s gross salary?",
+          "optA": "A. Rp2,700,000",
+          "optB": "B. Rp3,000,000",
+          "optC": "C. Rp3,150,000",
+          "optD": "D. Rp3,300,000"
+        },
+        "q4": {
+          "stem": "An employee receives a net salary of Rp4,750,000 after a 5% PPh deduction. What is the employee’s gross salary (salary before tax)?",
+          "optA": "A. Rp4,500,000",
+          "optB": "B. Rp4,987,500",
+          "optC": "C. Rp5,000,000",
+          "optD": "D. Rp5,250,000"
+        },
+        "q5": {
+          "stem": "An older sibling’s initial salary is Rp8,000,000. However, the government grants a non-taxable income allowance (PTKP) for the first Rp3,000,000. If the remaining salary is subject to 5% PPh, how much tax must the sibling pay?",
+          "optA": "A. Rp150,000",
+          "optB": "B. Rp250,000",
+          "optC": "C. Rp400,000",
+          "optD": "D. Rp550,000"
+        },
+        "q6": {
+          "stem": "A company employee’s PPh salary deduction is Rp400,000, which represents 10% of the total salary. What is the net salary the employee takes home?",
+          "optA": "A. Rp3,600,000",
+          "optB": "B. Rp4,000,000",
+          "optC": "C. Rp4,400,000",
+          "optD": "D. Rp4,600,000"
+        },
+        "q7": {
+          "stem": "Anton receives an annual bonus of Rp2,500,000 with 15% PPh deducted. What is the total net bonus Anton receives?",
+          "optA": "A. Rp375,000",
+          "optB": "B. Rp2,125,000",
+          "optC": "C. Rp2,350,000",
+          "optD": "D. Rp2,875,000"
+        },
+        "q8": {
+          "stem": "Pak Anton’s gross salary is Rp7,000,000 per month. The non-taxable income (PTKP) is Rp4,000,000. If the taxable income is subject to a 5% PPh rate, what is Pak Anton’s total net salary in 1 year?",
+          "optA": "A. Rp81,600,000",
+          "optB": "B. Rp82,200,000",
+          "optC": "C. Rp83,800,000",
+          "optD": "D. Rp84,000,000"
+        },
+        "q9": {
+          "stem": "Aunt Siska receives a net salary of Rp6,650,000. If this salary has been deducted by 5% PPh on taxable income, and Aunt Siska’s non-taxable income (PTKP) is Rp3,000,000, what is her gross salary?",
+          "optA": "A. Rp6,800,000",
+          "optB": "B. Rp6,900,000",
+          "optC": "C. Rp7,000,000",
+          "optD": "D. Rp7,150,000"
+        },
+        "q10": {
+          "stem": "Fajar is offered two jobs. Company A offers a salary of Rp8,000,000 with 5% PPh. Company B offers a salary of Rp8,500,000 with 10% PPh. Which company offers a higher net salary and what is the difference?",
+          "optA": "A. Company A is higher by Rp50,000",
+          "optB": "B. Company B is higher by Rp50,000",
+          "optC": "C. Company A is higher by Rp100,000",
+          "optD": "D. Company B is higher by Rp100,000"
+        }
       }
     }
   },
