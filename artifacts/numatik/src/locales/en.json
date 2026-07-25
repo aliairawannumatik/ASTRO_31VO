@@ -1548,6 +1548,37 @@
           "descSedang": "Q 6–9: substitution, solution set, math model",
           "descSulit": "Q 10: inequalities with fractions"
         }
+      },
+      "penyelesaianPtLSV": {
+        "title1": "SOLVING LINEAR INEQUALITIES",
+        "title2": "IN ONE VARIABLE",
+        "badge": "75 Questions",
+        "kelasLabel": "✦ Grade 7",
+        "tags": {
+          "q1": "Simple Inequalities",
+          "q2": "Mixed & Distributive Inequalities",
+          "q3": "Double Inequalities",
+          "q4": "Fractional Inequalities",
+          "q5": "Solution Sets (B / C / Q)"
+        },
+        "q1": {
+          "instruction": "Find the solution set of each inequality below with the <a>variable over integers</a>!"
+        },
+        "q2": {
+          "instruction": "Find the solution set of each inequality below with the <a>variable over integers</a>!"
+        },
+        "q3": {
+          "instruction": "Find the solution set of each <a>double inequality</a> below with the variable over integers!"
+        },
+        "q4": {
+          "instruction": "Find the solution set of each inequality below with the <a>variable over integers</a>!"
+        },
+        "q5": {
+          "instruction": "For <cacah/>, <bulat/>, and <rasional/>, find the solution set of each inequality below!",
+          "cacah": "natural numbers",
+          "bulat": "integers",
+          "rasional": "rational numbers"
+        }
       }
     }
   },

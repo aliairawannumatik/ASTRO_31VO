@@ -1548,6 +1548,37 @@
           "descSedang": "Soal 6–9: substitusi, HP, model matematika",
           "descSulit": "Soal 10: PtLSV dengan pecahan"
         }
+      },
+      "penyelesaianPtLSV": {
+        "title1": "PENYELESAIAN PERTIDAKSAMAAN",
+        "title2": "LINEAR SATU VARIABEL",
+        "badge": "75 Soal",
+        "kelasLabel": "✦ Kelas 7",
+        "tags": {
+          "q1": "Pertidaksamaan Sederhana",
+          "q2": "Pertidaksamaan Campuran & Distributif",
+          "q3": "Pertidaksamaan Ganda",
+          "q4": "Pertidaksamaan Pecahan",
+          "q5": "Himpunan Penyelesaian (B / C / Q)"
+        },
+        "q1": {
+          "instruction": "Tentukan himpunan penyelesaian dari setiap pertidaksamaan berikut dengan <a>variabel pada bilangan bulat</a>!"
+        },
+        "q2": {
+          "instruction": "Tentukan himpunan penyelesaian dari setiap pertidaksamaan berikut dengan <a>variabel pada bilangan bulat</a>!"
+        },
+        "q3": {
+          "instruction": "Tentukan himpunan penyelesaian dari setiap <a>pertidaksamaan ganda</a> berikut dengan variabel pada bilangan bulat!"
+        },
+        "q4": {
+          "instruction": "Tentukan himpunan penyelesaian dari setiap pertidaksamaan berikut dengan <a>variabel pada bilangan bulat</a>!"
+        },
+        "q5": {
+          "instruction": "Untuk <cacah/>, <bulat/>, dan <rasional/>, tentukan himpunan penyelesaian dari setiap pertidaksamaan berikut!",
+          "cacah": "bilangan cacah",
+          "bulat": "bilangan bulat",
+          "rasional": "bilangan rasional"
+        }
       }
     }
   },
