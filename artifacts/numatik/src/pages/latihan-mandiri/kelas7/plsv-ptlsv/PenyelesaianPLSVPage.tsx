@@ -124,264 +124,279 @@ const SoalTiga = () => {
 };
 
 /* ── Soal 4 ── Persamaan Lanjutan + Uji Nilai ─────────── */
-const SoalEmpat = () => (
-  <div className="space-y-4">
-    <div className="space-y-3">
-      <p className="font-body text-sm text-white/90 leading-relaxed">
-        Tentukan penyelesaian dari persamaan-persamaan berikut!
-      </p>
-      <div className="space-y-2 pl-1">
-        {[
-          { n: "29", expr: "15x - 10 + 5x = 17x + 8" },
-          { n: "30", expr: "26x + 18 - 4x = 23x - 15" },
-          { n: "31", expr: "4(2x + 7) = 5(x - 3)" },
-          { n: "32", expr: "3(5x - 6) = 2(7x - 8) + 2x" },
-          { n: "33", expr: "9\\!\\left(\\dfrac{x}{3} + \\dfrac{3}{4}\\right) = 6\\!\\left(x + \\dfrac{4}{5}\\right)" },
-          { n: "34", expr: "7\\!\\left(\\dfrac{x}{2} - \\dfrac{2}{3}\\right) = 9\\!\\left(\\dfrac{x}{4} + \\dfrac{1}{2}\\right) + 2x" },
-          { n: "35", expr: "6(y - 3) + 3y = 7(y - 4)" },
-          { n: "36", expr: "8(2y + 4) - 6y = 5 + 5(2y + 7)" },
-        ].map(({ n, expr }) => (
-          <div key={n} className="flex items-center gap-2.5 bg-green-500/5 border border-green-500/10 rounded-lg px-3 py-2.5">
-            <SubLabel letter={n} color="bg-green-500/20 text-green-300 border border-green-400/30" />
-            <span className="overflow-x-auto"><M math={expr} /></span>
-          </div>
-        ))}
+const SoalEmpat = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-4">
+      <div className="space-y-3">
+        <p className="font-body text-sm text-white/90 leading-relaxed">
+          {t('practice.plsvPtlsv.penyelesaianPLSV.q3.instruction')}
+        </p>
+        <div className="space-y-2 pl-1">
+          {[
+            { n: "29", expr: "15x - 10 + 5x = 17x + 8" },
+            { n: "30", expr: "26x + 18 - 4x = 23x - 15" },
+            { n: "31", expr: "4(2x + 7) = 5(x - 3)" },
+            { n: "32", expr: "3(5x - 6) = 2(7x - 8) + 2x" },
+            { n: "33", expr: "9\\!\\left(\\dfrac{x}{3} + \\dfrac{3}{4}\\right) = 6\\!\\left(x + \\dfrac{4}{5}\\right)" },
+            { n: "34", expr: "7\\!\\left(\\dfrac{x}{2} - \\dfrac{2}{3}\\right) = 9\\!\\left(\\dfrac{x}{4} + \\dfrac{1}{2}\\right) + 2x" },
+            { n: "35", expr: "6(y - 3) + 3y = 7(y - 4)" },
+            { n: "36", expr: "8(2y + 4) - 6y = 5 + 5(2y + 7)" },
+          ].map(({ n, expr }) => (
+            <div key={n} className="flex items-center gap-2.5 bg-green-500/5 border border-green-500/10 rounded-lg px-3 py-2.5">
+              <SubLabel letter={n} color="bg-green-500/20 text-green-300 border border-green-400/30" />
+              <span className="overflow-x-auto"><M math={expr} /></span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
 
-    {/* Sub-soal khusus: uji nilai */}
-    <div className="bg-teal-500/5 border border-teal-500/15 rounded-xl px-4 py-3 space-y-2.5">
-      <p className="font-body text-sm text-white/90 leading-relaxed">
-        <span className="text-teal-300 font-semibold">37.</span>{" "}
-        Untuk persamaan{" "}
-        <M math="9x + 6 = 10x + 14" />, tentukan nilai-nilai berikut!
-      </p>
-      <div className="flex flex-wrap gap-2 pl-4">
-        {[
-          { l: "a", expr: "x + 3" },
-          { l: "b", expr: "4x - 5" },
-        ].map(({ l, expr }) => (
-          <div key={l} className="flex items-center gap-2 bg-teal-500/10 border border-teal-400/20 rounded-lg px-3 py-2">
-            <SubLabel letter={l} color="bg-teal-500/20 text-teal-300 border border-teal-400/30" />
-            <M math={expr} />
-          </div>
-        ))}
+      {/* Sub-soal khusus: uji nilai */}
+      <div className="bg-teal-500/5 border border-teal-500/15 rounded-xl px-4 py-3 space-y-2.5">
+        <p className="font-body text-sm text-white/90 leading-relaxed">
+          <span className="text-teal-300 font-semibold">37.</span>{" "}
+          {t('practice.plsvPtlsv.penyelesaianPLSV.q4.q37.introPre')}<M math="9x + 6 = 10x + 14" />{t('practice.plsvPtlsv.penyelesaianPLSV.q4.q37.introPost')}
+        </p>
+        <div className="flex flex-wrap gap-2 pl-4">
+          {[
+            { l: "a", expr: "x + 3" },
+            { l: "b", expr: "4x - 5" },
+          ].map(({ l, expr }) => (
+            <div key={l} className="flex items-center gap-2 bg-teal-500/10 border border-teal-400/20 rounded-lg px-3 py-2">
+              <SubLabel letter={l} color="bg-teal-500/20 text-teal-300 border border-teal-400/30" />
+              <M math={expr} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* ── Soal 5 ── Perkalian/Pembagian + Distribusi + Cerita ─ */
-const SoalLima = () => (
-  <div className="space-y-5">
+const SoalLima = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-5">
 
-    {/* A — cara perkalian/pembagian kedua ruas */}
-    <div className="space-y-3">
-      <p className="font-body text-sm text-white/90 leading-relaxed">
-        Tentukan penyelesaian setiap persamaan berikut! Kerjakan dengan cara{" "}
-        <span className="text-sky-300 font-semibold">mengali atau membagi kedua ruas</span> persamaan
-        dengan bilangan yang sama!
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-1">
-        {[
-          { n: "38", expr: "3x = 18" },
-          { n: "39", expr: "5y = -25" },
-          { n: "40", expr: "-4z = -20" },
-          { n: "41", expr: "-\\dfrac{2}{3}m = -\\dfrac{4}{9}" },
-          { n: "42", expr: "-3b = -\\dfrac{1}{4}" },
-          { n: "43", expr: "\\dfrac{1}{3}c = \\dfrac{3}{4}" },
-          { n: "44", expr: "\\dfrac{q}{5} = -2" },
-          { n: "45", expr: "-\\dfrac{q}{5} = 3" },
-        ].map(({ n, expr }) => (
-          <div key={n} className="flex items-center gap-2.5 bg-sky-500/5 border border-sky-500/10 rounded-lg px-3 py-2.5">
-            <SubLabel letter={n} color="bg-sky-500/25 text-sky-300 border border-sky-400/35" />
-            <M math={expr} />
-          </div>
-        ))}
-      </div>
-    </div>
-
-    {/* B — penyelesaian campuran */}
-    <div className="space-y-3">
-      <p className="font-body text-sm text-white/90 leading-relaxed">
-        Tentukan penyelesaian persamaan berikut!
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-1">
-        {[
-          { n: "46", expr: "5a + 4 = 39" },
-          { n: "47", expr: "4a - 7 = 13" },
-          { n: "48", expr: "9x - 9 = -27" },
-          { n: "49", expr: "7x + 5 = -30" },
-          { n: "50", expr: "3x - \\dfrac{1}{3} = \\dfrac{3}{4}" },
-          { n: "51", expr: "4p = 18 + 7p" },
-          { n: "52", expr: "6p - 9 = 8p + 15" },
-          { n: "53", expr: "10 - 3y = 5y - 6" },
-          { n: "54", expr: "5(y - 4) = 13y + 8" },
-          { n: "55", expr: "6(y + 3) = 10y - 14" },
-        ].map(({ n, expr }) => (
-          <div key={n} className="flex items-center gap-2.5 bg-sky-500/5 border border-sky-500/10 rounded-lg px-3 py-2.5">
-            <SubLabel letter={n} color="bg-sky-500/25 text-sky-300 border border-sky-400/35" />
-            <span className="overflow-x-auto"><M math={expr} /></span>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    {/* C — uji nilai */}
-    <div className="space-y-2.5">
-      <div className="bg-indigo-500/5 border border-indigo-500/15 rounded-xl px-4 py-3 space-y-2">
+      {/* A — cara perkalian/pembagian kedua ruas */}
+      <div className="space-y-3">
         <p className="font-body text-sm text-white/90 leading-relaxed">
-          <span className="text-indigo-300 font-semibold">56.</span>{" "}
-          Untuk persamaan <M math="8x + 4 = 10x + 12" />, tentukan nilai-nilai berikut!
+          <Trans
+            i18nKey="practice.plsvPtlsv.penyelesaianPLSV.q5.qA.instruction"
+            components={{ a: <span className="text-sky-300 font-semibold" /> }}
+          />
         </p>
-        <div className="flex flex-wrap gap-2 pl-4">
-          {[{ l: "a", expr: "x + 6" }, { l: "b", expr: "3x - 7" }].map(({ l, expr }) => (
-            <div key={l} className="flex items-center gap-2 bg-indigo-500/10 border border-indigo-400/20 rounded-lg px-3 py-2">
-              <SubLabel letter={l} color="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-1">
+          {[
+            { n: "38", expr: "3x = 18" },
+            { n: "39", expr: "5y = -25" },
+            { n: "40", expr: "-4z = -20" },
+            { n: "41", expr: "-\\dfrac{2}{3}m = -\\dfrac{4}{9}" },
+            { n: "42", expr: "-3b = -\\dfrac{1}{4}" },
+            { n: "43", expr: "\\dfrac{1}{3}c = \\dfrac{3}{4}" },
+            { n: "44", expr: "\\dfrac{q}{5} = -2" },
+            { n: "45", expr: "-\\dfrac{q}{5} = 3" },
+          ].map(({ n, expr }) => (
+            <div key={n} className="flex items-center gap-2.5 bg-sky-500/5 border border-sky-500/10 rounded-lg px-3 py-2.5">
+              <SubLabel letter={n} color="bg-sky-500/25 text-sky-300 border border-sky-400/35" />
               <M math={expr} />
             </div>
           ))}
         </div>
       </div>
-      <div className="bg-indigo-500/5 border border-indigo-500/15 rounded-xl px-4 py-3 space-y-2">
+
+      {/* B — penyelesaian campuran */}
+      <div className="space-y-3">
         <p className="font-body text-sm text-white/90 leading-relaxed">
-          <span className="text-indigo-300 font-semibold">57.</span>{" "}
-          Untuk persamaan <M math="3(3y + 4) = 6y - 9" />, tentukan nilai-nilai berikut!
+          {t('practice.plsvPtlsv.penyelesaianPLSV.q5.qB.instruction')}
         </p>
-        <div className="flex flex-wrap gap-2 pl-4">
-          {[{ l: "a", expr: "3y - 5" }, { l: "b", expr: "y^2 + 2" }].map(({ l, expr }) => (
-            <div key={l} className="flex items-center gap-2 bg-indigo-500/10 border border-indigo-400/20 rounded-lg px-3 py-2">
-              <SubLabel letter={l} color="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30" />
-              <M math={expr} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-1">
+          {[
+            { n: "46", expr: "5a + 4 = 39" },
+            { n: "47", expr: "4a - 7 = 13" },
+            { n: "48", expr: "9x - 9 = -27" },
+            { n: "49", expr: "7x + 5 = -30" },
+            { n: "50", expr: "3x - \\dfrac{1}{3} = \\dfrac{3}{4}" },
+            { n: "51", expr: "4p = 18 + 7p" },
+            { n: "52", expr: "6p - 9 = 8p + 15" },
+            { n: "53", expr: "10 - 3y = 5y - 6" },
+            { n: "54", expr: "5(y - 4) = 13y + 8" },
+            { n: "55", expr: "6(y + 3) = 10y - 14" },
+          ].map(({ n, expr }) => (
+            <div key={n} className="flex items-center gap-2.5 bg-sky-500/5 border border-sky-500/10 rounded-lg px-3 py-2.5">
+              <SubLabel letter={n} color="bg-sky-500/25 text-sky-300 border border-sky-400/35" />
+              <span className="overflow-x-auto"><M math={expr} /></span>
             </div>
           ))}
         </div>
       </div>
-    </div>
 
-    {/* D — persamaan distributif */}
-    <div className="space-y-3">
-      <p className="font-body text-sm text-white/90 leading-relaxed">
-        Tentukan penyelesaian setiap persamaan berikut!
-      </p>
-      <div className="space-y-2 pl-1">
-        {[
-          { n: "58", expr: "3(p + 4) + (2p - 5) = 10" },
-          { n: "59", expr: "4(1 - p) + 5(p - 3) = -6" },
-          { n: "60", expr: "5(x - 2) - 3(x - 2) = 10" },
-          { n: "61", expr: "5x + 2(x - 3) - (4 - 3x) = 0" },
-          { n: "62", expr: "7p - 5(2p - 4) = 4(3p - 2)" },
-          { n: "63", expr: "4(3p + 2) - 9p + 8 = 2(4p - 6)" },
-          { n: "64", expr: "4(3x - 2) - 3(x + 2) = x - 4" },
-          { n: "65", expr: "9y - 4(3y - 2) = 5(y - 2) + 16" },
-          { n: "66", expr: "6(2y + 3) - (12y - 14) = 8 - 5y" },
-          { n: "67", expr: "7x - 5(3x - 2) = 4(3x - 2)" },
-        ].map(({ n, expr }) => (
-          <div key={n} className="flex items-center gap-2.5 bg-sky-500/5 border border-sky-500/10 rounded-lg px-3 py-2.5">
-            <SubLabel letter={n} color="bg-sky-500/25 text-sky-300 border border-sky-400/35" />
-            <span className="overflow-x-auto"><M math={expr} /></span>
+      {/* C — uji nilai */}
+      <div className="space-y-2.5">
+        <div className="bg-indigo-500/5 border border-indigo-500/15 rounded-xl px-4 py-3 space-y-2">
+          <p className="font-body text-sm text-white/90 leading-relaxed">
+            <span className="text-indigo-300 font-semibold">56.</span>{" "}
+            {t('practice.plsvPtlsv.penyelesaianPLSV.q5.ujiNilai.introPre')}<M math="8x + 4 = 10x + 12" />{t('practice.plsvPtlsv.penyelesaianPLSV.q5.ujiNilai.introPost')}
+          </p>
+          <div className="flex flex-wrap gap-2 pl-4">
+            {[{ l: "a", expr: "x + 6" }, { l: "b", expr: "3x - 7" }].map(({ l, expr }) => (
+              <div key={l} className="flex items-center gap-2 bg-indigo-500/10 border border-indigo-400/20 rounded-lg px-3 py-2">
+                <SubLabel letter={l} color="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30" />
+                <M math={expr} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-
-    {/* E — soal cerita */}
-    <div className="bg-violet-500/5 border border-violet-500/15 rounded-xl px-4 py-4 space-y-3">
-      <p className="font-body text-sm text-white/90 leading-relaxed">
-        <span className="text-violet-300 font-semibold">68.</span>{" "}
-        Dua buah persegi panjang pada gambar di bawah memiliki luas yang sama. Tentukan luas masing-masing
-        persegi panjang tersebut!
-      </p>
-      {/* diagram dua persegi panjang */}
-      <div className="flex flex-wrap items-end gap-4 justify-center py-2">
-        {/* Persegi panjang 1 */}
-        <div className="flex flex-col items-center gap-1">
-          <div className="relative border-2 border-violet-400/50 rounded bg-violet-500/10 flex items-center justify-center"
-            style={{ width: 96, height: 72 }}>
-            <span className="font-body text-xs text-violet-300"><M math="(x+3)" /> cm</span>
-          </div>
-          <span className="font-body text-xs text-violet-300/70 mt-0.5">12 cm</span>
         </div>
-        <span className="text-white/40 font-body text-lg self-center">=</span>
-        {/* Persegi panjang 2 */}
-        <div className="flex flex-col items-center gap-1">
-          <div className="relative border-2 border-violet-400/50 rounded bg-violet-500/10 flex items-center justify-center"
-            style={{ width: 80, height: 88 }}>
-            <span className="font-body text-xs text-violet-300"><M math="(x+1)" /> cm</span>
+        <div className="bg-indigo-500/5 border border-indigo-500/15 rounded-xl px-4 py-3 space-y-2">
+          <p className="font-body text-sm text-white/90 leading-relaxed">
+            <span className="text-indigo-300 font-semibold">57.</span>{" "}
+            {t('practice.plsvPtlsv.penyelesaianPLSV.q5.ujiNilai.introPre')}<M math="3(3y + 4) = 6y - 9" />{t('practice.plsvPtlsv.penyelesaianPLSV.q5.ujiNilai.introPost')}
+          </p>
+          <div className="flex flex-wrap gap-2 pl-4">
+            {[{ l: "a", expr: "3y - 5" }, { l: "b", expr: "y^2 + 2" }].map(({ l, expr }) => (
+              <div key={l} className="flex items-center gap-2 bg-indigo-500/10 border border-indigo-400/20 rounded-lg px-3 py-2">
+                <SubLabel letter={l} color="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30" />
+                <M math={expr} />
+              </div>
+            ))}
           </div>
-          <span className="font-body text-xs text-violet-300/70 mt-0.5">16 cm</span>
         </div>
       </div>
-      <p className="font-body text-xs text-white/50 text-center leading-relaxed">
-        Persegi panjang pertama: panjang <M math="(x+3)" /> cm, lebar 12 cm.<br />
-        Persegi panjang kedua: panjang 16 cm, lebar <M math="(x+1)" /> cm.
-      </p>
-    </div>
 
-  </div>
-);
+      {/* D — persamaan distributif */}
+      <div className="space-y-3">
+        <p className="font-body text-sm text-white/90 leading-relaxed">
+          {t('practice.plsvPtlsv.penyelesaianPLSV.q5.qD.instruction')}
+        </p>
+        <div className="space-y-2 pl-1">
+          {[
+            { n: "58", expr: "3(p + 4) + (2p - 5) = 10" },
+            { n: "59", expr: "4(1 - p) + 5(p - 3) = -6" },
+            { n: "60", expr: "5(x - 2) - 3(x - 2) = 10" },
+            { n: "61", expr: "5x + 2(x - 3) - (4 - 3x) = 0" },
+            { n: "62", expr: "7p - 5(2p - 4) = 4(3p - 2)" },
+            { n: "63", expr: "4(3p + 2) - 9p + 8 = 2(4p - 6)" },
+            { n: "64", expr: "4(3x - 2) - 3(x + 2) = x - 4" },
+            { n: "65", expr: "9y - 4(3y - 2) = 5(y - 2) + 16" },
+            { n: "66", expr: "6(2y + 3) - (12y - 14) = 8 - 5y" },
+            { n: "67", expr: "7x - 5(3x - 2) = 4(3x - 2)" },
+          ].map(({ n, expr }) => (
+            <div key={n} className="flex items-center gap-2.5 bg-sky-500/5 border border-sky-500/10 rounded-lg px-3 py-2.5">
+              <SubLabel letter={n} color="bg-sky-500/25 text-sky-300 border border-sky-400/35" />
+              <span className="overflow-x-auto"><M math={expr} /></span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* E — soal cerita */}
+      <div className="bg-violet-500/5 border border-violet-500/15 rounded-xl px-4 py-4 space-y-3">
+        <p className="font-body text-sm text-white/90 leading-relaxed">
+          <span className="text-violet-300 font-semibold">68.</span>{" "}
+          {t('practice.plsvPtlsv.penyelesaianPLSV.q5.q68.text')}
+        </p>
+        {/* diagram dua persegi panjang */}
+        <div className="flex flex-wrap items-end gap-4 justify-center py-2">
+          {/* Persegi panjang 1 */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="relative border-2 border-violet-400/50 rounded bg-violet-500/10 flex items-center justify-center"
+              style={{ width: 96, height: 72 }}>
+              <span className="font-body text-xs text-violet-300"><M math="(x+3)" /> cm</span>
+            </div>
+            <span className="font-body text-xs text-violet-300/70 mt-0.5">12 cm</span>
+          </div>
+          <span className="text-white/40 font-body text-lg self-center">=</span>
+          {/* Persegi panjang 2 */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="relative border-2 border-violet-400/50 rounded bg-violet-500/10 flex items-center justify-center"
+              style={{ width: 80, height: 88 }}>
+              <span className="font-body text-xs text-violet-300"><M math="(x+1)" /> cm</span>
+            </div>
+            <span className="font-body text-xs text-violet-300/70 mt-0.5">16 cm</span>
+          </div>
+        </div>
+        <p className="font-body text-xs text-white/50 text-center leading-relaxed">
+          <Trans
+            i18nKey="practice.plsvPtlsv.penyelesaianPLSV.q5.q68.captionLine1"
+            components={{ m: <M math="(x+3)" /> }}
+          /><br />
+          <Trans
+            i18nKey="practice.plsvPtlsv.penyelesaianPLSV.q5.q68.captionLine2"
+            components={{ m: <M math="(x+1)" /> }}
+          />
+        </p>
+      </div>
+
+    </div>
+  );
+};
 
 /* ── Soal 6 ── Persamaan Pecahan dengan KPK ───────────── */
-const SoalEnam = () => (
-  <div className="space-y-5">
+const SoalEnam = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-5">
 
-    {/* A — KPK sederhana */}
-    <div className="space-y-3">
-      <p className="font-body text-sm text-white/90 leading-relaxed">
-        Gunakan cara{" "}
-        <span className="text-fuchsia-300 font-semibold">mengalikan kedua ruas dengan KPK</span>{" "}
-        dari penyebut-penyebutnya untuk menentukan penyelesaian setiap persamaan berikut!
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-1">
-        {[
-          { n: "69", expr: "\\tfrac{1}{3}m + 5 = 11" },
-          { n: "70", expr: "\\tfrac{1}{4}n - 3 = 7" },
-          { n: "71", expr: "\\tfrac{1}{5}p + \\tfrac{3}{4} = 8" },
-          { n: "72", expr: "\\tfrac{5}{6}a - \\tfrac{1}{3}a = 3" },
-          { n: "73", expr: "\\dfrac{z}{3} = \\dfrac{z}{5} - 8" },
-          { n: "74", expr: "\\dfrac{2}{k} - \\dfrac{1}{3} = \\dfrac{1}{4},\\; k \\ne 0" },
-          { n: "75", expr: "\\dfrac{5}{k} + 3 = \\dfrac{11}{3},\\; k \\ne 0" },
-          { n: "76", expr: "\\dfrac{9}{q} - \\dfrac{5}{3q} = \\dfrac{17}{9},\\; q \\ne 0" },
-          { n: "77", expr: "\\dfrac{r}{3} - \\dfrac{r}{4} = \\dfrac{2 - r}{12}" },
-          { n: "78", expr: "4{,}5s - 2{,}8 = 8{,}2" },
-        ].map(({ n, expr }) => (
-          <div key={n} className="flex items-center gap-2.5 bg-fuchsia-500/5 border border-fuchsia-500/10 rounded-lg px-3 py-2.5">
-            <SubLabel letter={n} color="bg-fuchsia-500/25 text-fuchsia-300 border border-fuchsia-400/35" />
-            <span className="overflow-x-auto"><M math={expr} /></span>
-          </div>
-        ))}
+      {/* A — KPK sederhana */}
+      <div className="space-y-3">
+        <p className="font-body text-sm text-white/90 leading-relaxed">
+          <Trans
+            i18nKey="practice.plsvPtlsv.penyelesaianPLSV.q6.qA.instruction"
+            components={{ a: <span className="text-fuchsia-300 font-semibold" /> }}
+          />
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-1">
+          {[
+            { n: "69", expr: "\\tfrac{1}{3}m + 5 = 11" },
+            { n: "70", expr: "\\tfrac{1}{4}n - 3 = 7" },
+            { n: "71", expr: "\\tfrac{1}{5}p + \\tfrac{3}{4} = 8" },
+            { n: "72", expr: "\\tfrac{5}{6}a - \\tfrac{1}{3}a = 3" },
+            { n: "73", expr: "\\dfrac{z}{3} = \\dfrac{z}{5} - 8" },
+            { n: "74", expr: "\\dfrac{2}{k} - \\dfrac{1}{3} = \\dfrac{1}{4},\\; k \\ne 0" },
+            { n: "75", expr: "\\dfrac{5}{k} + 3 = \\dfrac{11}{3},\\; k \\ne 0" },
+            { n: "76", expr: "\\dfrac{9}{q} - \\dfrac{5}{3q} = \\dfrac{17}{9},\\; q \\ne 0" },
+            { n: "77", expr: "\\dfrac{r}{3} - \\dfrac{r}{4} = \\dfrac{2 - r}{12}" },
+            { n: "78", expr: "4{,}5s - 2{,}8 = 8{,}2" },
+          ].map(({ n, expr }) => (
+            <div key={n} className="flex items-center gap-2.5 bg-fuchsia-500/5 border border-fuchsia-500/10 rounded-lg px-3 py-2.5">
+              <SubLabel letter={n} color="bg-fuchsia-500/25 text-fuchsia-300 border border-fuchsia-400/35" />
+              <span className="overflow-x-auto"><M math={expr} /></span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
 
-    {/* B — persamaan pecahan kompleks */}
-    <div className="space-y-3">
-      <p className="font-body text-sm text-white/90 leading-relaxed">
-        Tentukan penyelesaian dari persamaan-persamaan berikut!
-      </p>
-      <div className="space-y-2 pl-1">
-        {[
-          { n: "79", expr: "\\tfrac{1}{3}(6x - 9) = \\tfrac{1}{2}x + 4\\tfrac{1}{2}" },
-          { n: "80", expr: "\\tfrac{1}{4}(4x + 8) + \\tfrac{1}{2}(x - 3) = 3\\tfrac{1}{4}" },
-          { n: "81", expr: "\\tfrac{2}{3}(x + 9) - \\tfrac{3}{4}\\!\\left(\\tfrac{8}{3} - x\\right) = \\tfrac{3}{4}" },
-          { n: "82", expr: "\\tfrac{1}{3}(6x - 4) + \\tfrac{2}{3}(3 - x) = \\tfrac{2}{3}x" },
-          { n: "83", expr: "\\dfrac{p + 5}{3} - \\dfrac{3p - 12}{6} = \\dfrac{1}{2}" },
-          { n: "84", expr: "\\dfrac{6 - p}{2} - \\dfrac{p + 2}{4} = \\dfrac{5}{8}" },
-          { n: "85", expr: "\\dfrac{p + 6}{3} + \\dfrac{3 - 4p}{5} = \\dfrac{p - 4}{15}" },
-          { n: "86", expr: "\\dfrac{5p + 1}{3} + \\dfrac{3p + 2}{4} = \\dfrac{6p + 3}{4}" },
-          { n: "87", expr: "\\dfrac{3p - 2}{4} - \\dfrac{5p + 4}{6} = \\dfrac{4p + 1}{12}" },
-          { n: "88", expr: "\\dfrac{3x}{x + 5} + \\dfrac{2}{3} = \\dfrac{8}{x + 5},\\; x \\ne -5" },
-          { n: "89", expr: "\\dfrac{5x}{x - 4} - \\dfrac{3}{4} = \\dfrac{4x}{x - 4} - \\dfrac{1}{3},\\; x \\ne 4" },
-        ].map(({ n, expr }) => (
-          <div key={n} className="flex items-center gap-2.5 bg-fuchsia-500/5 border border-fuchsia-500/10 rounded-lg px-3 py-2.5">
-            <SubLabel letter={n} color="bg-fuchsia-500/25 text-fuchsia-300 border border-fuchsia-400/35" />
-            <span className="overflow-x-auto"><M math={expr} /></span>
-          </div>
-        ))}
+      {/* B — persamaan pecahan kompleks */}
+      <div className="space-y-3">
+        <p className="font-body text-sm text-white/90 leading-relaxed">
+          {t('practice.plsvPtlsv.penyelesaianPLSV.q3.instruction')}
+        </p>
+        <div className="space-y-2 pl-1">
+          {[
+            { n: "79", expr: "\\tfrac{1}{3}(6x - 9) = \\tfrac{1}{2}x + 4\\tfrac{1}{2}" },
+            { n: "80", expr: "\\tfrac{1}{4}(4x + 8) + \\tfrac{1}{2}(x - 3) = 3\\tfrac{1}{4}" },
+            { n: "81", expr: "\\tfrac{2}{3}(x + 9) - \\tfrac{3}{4}\\!\\left(\\tfrac{8}{3} - x\\right) = \\tfrac{3}{4}" },
+            { n: "82", expr: "\\tfrac{1}{3}(6x - 4) + \\tfrac{2}{3}(3 - x) = \\tfrac{2}{3}x" },
+            { n: "83", expr: "\\dfrac{p + 5}{3} - \\dfrac{3p - 12}{6} = \\dfrac{1}{2}" },
+            { n: "84", expr: "\\dfrac{6 - p}{2} - \\dfrac{p + 2}{4} = \\dfrac{5}{8}" },
+            { n: "85", expr: "\\dfrac{p + 6}{3} + \\dfrac{3 - 4p}{5} = \\dfrac{p - 4}{15}" },
+            { n: "86", expr: "\\dfrac{5p + 1}{3} + \\dfrac{3p + 2}{4} = \\dfrac{6p + 3}{4}" },
+            { n: "87", expr: "\\dfrac{3p - 2}{4} - \\dfrac{5p + 4}{6} = \\dfrac{4p + 1}{12}" },
+            { n: "88", expr: "\\dfrac{3x}{x + 5} + \\dfrac{2}{3} = \\dfrac{8}{x + 5},\\; x \\ne -5" },
+            { n: "89", expr: "\\dfrac{5x}{x - 4} - \\dfrac{3}{4} = \\dfrac{4x}{x - 4} - \\dfrac{1}{3},\\; x \\ne 4" },
+          ].map(({ n, expr }) => (
+            <div key={n} className="flex items-center gap-2.5 bg-fuchsia-500/5 border border-fuchsia-500/10 rounded-lg px-3 py-2.5">
+              <SubLabel letter={n} color="bg-fuchsia-500/25 text-fuchsia-300 border border-fuchsia-400/35" />
+              <span className="overflow-x-auto"><M math={expr} /></span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
 
-  </div>
-);
+    </div>
+  );
+};
 
 /* ── Page ─────────────────────────────────────────────── */
 const PenyelesaianPLSVPage = () => {

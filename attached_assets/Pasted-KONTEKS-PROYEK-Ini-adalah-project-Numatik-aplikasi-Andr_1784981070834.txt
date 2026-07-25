@@ -1,0 +1,49 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia, 
+English, Japanese) pakai react-i18next dengan useTranslation() dan 
+file locale (id.json, en.json, ja.json). Topik "Bilangan Bulat", 
+"Pecahan", "Aljabar" di Kelas 7 Tugas-Latihan Mandiri sudah selesai. 
+Sedang mengerjakan topik "Persamaan dan Pertidaksamaan Linear Satu 
+Variabel" (PLSV & PtLSV). Sub-halaman 1-2 selesai. Sub-halaman 3 
+(PenyelesaianPLSVPage.tsx) Bagian 1 sudah selesai: cards, header, 
+6 tag, dan SoalSatu/SoalDua/SoalTiga sudah trilingual.
+
+ATURAN PENTING:
+- Soal ditulis sebagai komponen JSX inline per soal, BUKAN array data 
+  — terjemahkan pakai t() atau <Trans>
+- Reuse translation key yang sudah ada untuk teks identik
+- Rumus KaTeX dengan \text{} berisi bahasa natural WAJIB diganti ke 
+  JSX terpisah atau \mathrm{}
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- cards, header, dan tag SUDAH selesai — jangan diubah lagi
+
+TUGAS SEKARANG — BAGIAN 2 dari 2 (TERAKHIR untuk file ini):
+Di PenyelesaianPLSVPage.tsx, fokus HANYA ke SoalEmpat, SoalLima, dan 
+SoalEnam.
+
+PENTING: SoalLima diketahui punya 5 sub-bagian (A-E) — cek strukturnya 
+dengan teliti sebelum menerjemahkan, karena kemungkinan lebih kompleks 
+dari SoalSatu-Tiga yang sudah dikerjakan di Bagian 1.
+
+1. Konversi SoalEmpat, SoalLima, SoalEnam dari arrow shorthand ke 
+   function body dengan useTranslation()
+2. Terjemahkan SEMUA teks: instruksi, teks soal, pilihan jawaban, 
+   pembahasan, termasuk semua 5 sub-bagian di SoalLima
+3. Tambahkan translation key ke ketiga file locale (id, en, ja) di 
+   bawah practice.plsvPtlsv.penyelesaianPLSV.* (reuse struktur yang 
+   sudah ada di Bagian 1)
+4. Setelah ini selesai, konfirmasi bahwa SELURUH file 
+   PenyelesaianPLSVPage.tsx (89 soal, 6 komponen) sudah 100% trilingual
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat 
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan 
+  (brace/paren balance, dll)

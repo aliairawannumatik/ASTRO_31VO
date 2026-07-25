@@ -1361,6 +1361,37 @@
         },
         "q3": {
           "instruction": "Find the solution to each equation below!"
+        },
+        "q4": {
+          "q37": {
+            "introPre": "For the equation ",
+            "introPost": ", find the values below!"
+          }
+        },
+        "q5": {
+          "qA": {
+            "instruction": "Find the solution to each equation below! Work by <a>multiplying or dividing both sides</a> of the equation by the same number!"
+          },
+          "qB": {
+            "instruction": "Find the solution to each equation below!"
+          },
+          "ujiNilai": {
+            "introPre": "For the equation ",
+            "introPost": ", find the values below!"
+          },
+          "qD": {
+            "instruction": "Find the solution to each equation below!"
+          },
+          "q68": {
+            "text": "Two rectangles in the figure below have the same area. Determine the area of each rectangle!",
+            "captionLine1": "First rectangle: length <m/> cm, width 12 cm.",
+            "captionLine2": "Second rectangle: length 16 cm, width <m/> cm."
+          }
+        },
+        "q6": {
+          "qA": {
+            "instruction": "Use the method of <a>multiplying both sides by the LCM</a> of the denominators to find the solution to each equation below!"
+          }
         }
       }
     }
