@@ -2207,6 +2207,120 @@
           "optC": "C. Rp375,000.00",
           "optD": "D. Rp421,675.00"
         }
+      },
+      "brutoNettoTara": {
+        "title": "GROSS WEIGHT, NET WEIGHT AND TARE",
+        "pageSubtitle": "Grade 7 - Self-Practice - Social Arithmetic",
+        "instruction": "Solve the following problems showing your complete working",
+        "backTo": "Back to Social Arithmetic",
+        "q1": {
+          "stem": "What is meant by Netto (net weight) in trading terms?",
+          "optA": "A. A price discount on an item.",
+          "optB": "B. The weight of an item’s packaging.",
+          "optC": "C. The gross weight of an item including its packaging.",
+          "optD": "D. The net weight of an item without its packaging."
+        },
+        "q2": {
+          "stem": "A sack of rice has a Bruto (gross weight) of 50 kg and a Tara (tare) of 1 kg. What is the Netto (net weight) of the rice?",
+          "optA": "A. 50 kg",
+          "optB": "B. 51 kg",
+          "optC": "C. 48 kg",
+          "optD": "D. 49 kg"
+        },
+        "q3": {
+          "stem": "A box of oranges has a Bruto of 25 kg and a Netto of 24 kg. What is the Tara percentage of that orange box?",
+          "optA": "A. 10%",
+          "optB": "B. 2%",
+          "optC": "C. 5%",
+          "optD": "D. 4%"
+        },
+        "q4": {
+          "stem": "A crate of eggs has a Bruto of 20 kg with a Tara of 5%. What is the Netto of the eggs?",
+          "optA": "A. 21 kg",
+          "optB": "B. 15 kg",
+          "optC": "C. 19 kg",
+          "optD": "D. 18 kg"
+        },
+        "q5": {
+          "stem": "A drum of cooking oil has a Netto of 95 litres. If the Tara of the drum is 5%, what is the Bruto of the drum including its contents?",
+          "optA": "A. 110 litres",
+          "optB": "B. 105 litres",
+          "optC": "C. 90 litres",
+          "optD": "D. 100 litres"
+        },
+        "q6": {
+          "stem": "Mother buys a sack of granulated sugar with a Bruto of 50 kg and a Tara of 2%. If the price of granulated sugar is Rp12,000.00 per kg, how much must Mother pay for the sugar?",
+          "optA": "A. Rp588,000.00",
+          "optB": "B. Rp500,000.00",
+          "optC": "C. Rp600,000.00",
+          "optD": "D. Rp576,000.00"
+        },
+        "q7": {
+          "stem": "A store gives a 10% discount for the purchase of 1 crate of mangoes. The crate has a Bruto of 40 kg and a Tara of 5%. The price of mangoes (based on Netto) before discount is Rp15,000.00/kg. How much must the buyer pay for 1 crate of mangoes?",
+          "optA": "A. Rp570,000.00",
+          "optB": "B. Rp513,000.00",
+          "optC": "C. Rp486,000.00",
+          "optD": "D. Rp540,000.00"
+        },
+        "q8": {
+          "stem": "Pak Budi buys 2 sacks of soybeans with a Bruto of 100 kg each and a Tara of 2%. The total purchase price is Rp1,960,000.00. If he resells the soybeans at Rp12,000.00 per kg netto, what is his total profit?",
+          "optA": "A. Rp292,000.00",
+          "optB": "B. Rp400,000.00",
+          "optC": "C. Rp440,000.00",
+          "optD": "D. Rp392,000.00"
+        },
+        "q9": {
+          "stem": "There are two brands of wheat flour. Brand A: Bruto 25 kg, Tara 2%, sold for Rp245,000.00. Brand B: Netto 24 kg sold for Rp235,200.00. Which statement best describes how to find the cheapest price per kilogram of netto?",
+          "optA": "A. Brand A is cheaper because its price per kilogram is Rp10,000.00.",
+          "optB": "B. Brand B is cheaper because its price per kilogram is Rp9,800.00.",
+          "optC": "C. Brand A and Brand B are equally cheap because the price per kilogram is Rp10,000.00.",
+          "optD": "D. Brand A is cheaper because its price per kilogram is Rp9,800.00."
+        },
+        "q10": {
+          "stem": "Pak Ali buys 5 cans of paint at a total price of Rp2,500,000.00. Each can has a Bruto of 26 kg and a Netto of 25 kg. After the paint is used up, the empty cans (Tara) are sold for Rp2,000.00/kg to a collector. What is the actual cost of paint per kilogram (netto) borne by Pak Ali?",
+          "optA": "A. Rp20,000.00",
+          "optB": "B. Rp19,800.00",
+          "optC": "C. Rp19,920.00",
+          "optD": "D. Rp20,080.00"
+        },
+        "q11": {
+          "stem": "A trader buys one sack of rice with a Bruto of 50 kg and a Tara of 2%. The purchase price of the sack of rice is Rp5,000.00. The trader then sells the rice retail at Rp12,000.00 per kg (netto). What is the total money the trader earns from selling one sack of rice?",
+          "optA": "A. Rp600,000.00",
+          "optB": "B. Rp588,000.00",
+          "optC": "C. Rp583,000.00",
+          "optD": "D. Rp88,000.00"
+        },
+        "q12": {
+          "stem": "A buyer wants to find the cheapest price for rice (per kg netto). He compares two offers:",
+          "itemA": "Store A: Sells 1 sack with a Bruto of 100 kg, Tara 2%, for Rp1,000,000.00.",
+          "itemB": "Store B: Sells 1 sack with a Bruto of 100 kg, Tara 3%, for Rp990,000.00.",
+          "question": "At which store should the buyer shop to get the cheapest price per kg netto?",
+          "optA": "a. Store A, because the price per kg netto is approximately Rp10,204.",
+          "optB": "b. Store B, because the price per kg netto is approximately Rp10,206",
+          "optC": "c. Store B, because the sack price is cheaper (Rp990,000)",
+          "optD": "d. Both are the same, because the gross weight is both 100 kg"
+        },
+        "q13": {
+          "stem": "A seller earns a total profit of Rp100,000.00 after successfully selling all the fruit in one crate. He sells the fruit at Rp15,000.00 per kg (netto). The crate he bought has a Bruto of 60 kg and a Tara (crate weight) of 2 kg. What was the original purchase price (capital) of that crate of fruit?",
+          "optA": "A. Rp900,000.00",
+          "optB": "B. Rp870,000.00",
+          "optC": "C. Rp800,000.00",
+          "optD": "D. Rp770,000.00"
+        },
+        "q14": {
+          "stem": "A cargo containing 20 identical biscuit tins is weighed and the total gross weight (Bruto) is 25 kg. The weight of the cardboard cargo box (cargo Tara) is 1 kg. If the netto weight (biscuits) in each tin is 900 grams, what is the tare weight (tin packaging) of one biscuit tin?",
+          "optA": "A. 300 grams",
+          "optB": "B. 500 grams",
+          "optC": "C. 1,200 grams",
+          "optD": "D. 1,150 grams"
+        },
+        "q15": {
+          "stem": "A store buys one drum of cooking oil with a tare discount (weight deduction) of 3%. After weighing, the net weight (Netto) of the oil received by the store is 97 kg. What was the Bruto of the drum of oil before the tare discount was calculated?",
+          "optA": "A. 99.91 kg",
+          "optB": "B. 94.09 kg",
+          "optC": "C. 100 kg",
+          "optD": "D. 103 kg"
+        }
       }
     }
   },

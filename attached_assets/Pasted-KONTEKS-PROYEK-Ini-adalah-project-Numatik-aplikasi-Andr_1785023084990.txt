@@ -1,0 +1,53 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia, 
+English, Japanese) pakai react-i18next dengan useTranslation() dan 
+file locale (id.json, en.json, ja.json). Topik "Bilangan Bulat", 
+"Pecahan", "Aljabar", "PLSV & PtLSV", "Perbandingan" di Kelas 7 sudah 
+selesai. Topik "Aritmetika Sosial" — index dan sub-halaman 1-4 
+(JualBeliUntungRugi, PPN, PPh, Diskon) sudah selesai.
+
+ATURAN PENTING:
+- Soal ditulis sebagai komponen JSX inline — terjemahkan pakai t() 
+  atau <Trans>
+- TIDAK ADA sistem cards/tag/isDark di topik ini
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Format mata uang Rp: ikuti pola yang sama seperti Diskon (Rp 
+  dipertahankan di semua bahasa, hanya pemisah desimal yang beda: 
+  . untuk ID, , untuk EN/JA)
+- Format desimal: kalau ada persentase/angka desimal, ikuti pola 
+  Diskon Soal 8 (koma untuk ID, titik untuk EN/JA)
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman ke-5: BrutoNettoTaraPage.tsx (15 soal, 
+format pilihan ganda A/B/C/D).
+
+PERHATIAN KHUSUS:
+- Soal 12: ada <ul><li> dengan 2 item (Toko A dan Toko B, masing-
+  masing dengan Bruto, Tara, dan harga) — terjemahkan sebagai itemA 
+  dan itemB, ikuti pola format Rp yang sama seperti sub-halaman lain
+
+1. Cek dulu struktur lengkap file ini — laporkan kalau ada pola lain 
+   yang belum disebutkan di atas (seperti yang ditemukan di Diskon: 
+   string literal JSX, format desimal khusus, dll)
+2. Konversi semua komponen soal ke useTranslation()
+3. Terjemahkan SEMUA teks: instruksi, teks soal (stem), 4 opsi jawaban 
+   di setiap soal, termasuk Soal 12 (list 2 item)
+4. Terjemahkan h1 title dan badge jumlah soal
+5. Tambahkan translation key ke ketiga file locale (id, en, ja) di 
+   bawah practice.aritmetikaSosial.brutoNettoTara.*
+6. JANGAN sentuh sub-halaman terakhir (BungaTunggal)
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat 
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan, dan 
+  konfirmasi eksplisit bahwa SEMUA 15 soal × 4 opsi (60 opsi total) 
+  sudah diterjemahkan, plus konfirmasi khusus untuk Soal 12 (list 
+  2 item)

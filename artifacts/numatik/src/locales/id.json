@@ -2207,6 +2207,120 @@
           "optC": "C. Rp375.000,00",
           "optD": "D. Rp421.675,00"
         }
+      },
+      "brutoNettoTara": {
+        "title": "BRUTO, NETTO DAN TARA",
+        "pageSubtitle": "Kelas 7 - Latihan Mandiri - Aritmetika Sosial",
+        "instruction": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Aritmetika Sosial",
+        "q1": {
+          "stem": "Apa yang dimaksud dengan Netto dalam istilah perdagangan?",
+          "optA": "A. Potongan harga dari suatu barang.",
+          "optB": "B. Berat kemasan suatu barang.",
+          "optC": "C. Berat kotor barang beserta kemasannya.",
+          "optD": "D. Berat bersih barang tanpa kemasannya."
+        },
+        "q2": {
+          "stem": "Sekarung beras memiliki Bruto 50 kg dan Tara 1 kg. Berapakah Netto beras tersebut?",
+          "optA": "A. 50 kg",
+          "optB": "B. 51 kg",
+          "optC": "C. 48 kg",
+          "optD": "D. 49 kg"
+        },
+        "q3": {
+          "stem": "Sekotak buah jeruk memiliki Bruto 25 kg dan Netto 24 kg. Berapa persentase Tara kotak jeruk tersebut?",
+          "optA": "A. 10%",
+          "optB": "B. 2%",
+          "optC": "C. 5%",
+          "optD": "D. 4%"
+        },
+        "q4": {
+          "stem": "Sebuah peti telur memiliki Bruto 20 kg dengan Tara 5%. Berapakah Netto telur tersebut?",
+          "optA": "A. 21 kg",
+          "optB": "B. 15 kg",
+          "optC": "C. 19 kg",
+          "optD": "D. 18 kg"
+        },
+        "q5": {
+          "stem": "Sebuah drum berisi minyak goreng memiliki Netto 95 liter. Jika diketahui Tara drum tersebut adalah 5%, berapakah Bruto drum beserta isinya?",
+          "optA": "A. 110 liter",
+          "optB": "B. 105 liter",
+          "optC": "C. 90 liter",
+          "optD": "D. 100 liter"
+        },
+        "q6": {
+          "stem": "Ibu membeli sekarung gula pasir dengan Bruto 50 kg dan Tara 2%. Jika harga gula pasir Rp12.000,00 per kg, berapa uang yang harus dibayarkan Ibu untuk gula tersebut?",
+          "optA": "A. Rp588.000,00",
+          "optB": "B. Rp500.000,00",
+          "optC": "C. Rp600.000,00",
+          "optD": "D. Rp576.000,00"
+        },
+        "q7": {
+          "stem": "Sebuah toko memberi diskon 10% untuk pembelian 1 peti mangga. Peti memiliki Bruto 40 kg dan Tara 5%. Harga mangga (berdasarkan Netto) sebelum diskon adalah Rp15.000,00/kg. Berapa yang harus dibayar pembeli untuk 1 peti mangga?",
+          "optA": "A. Rp570.000,00",
+          "optB": "B. Rp513.000,00",
+          "optC": "C. Rp486.000,00",
+          "optD": "D. Rp540.000,00"
+        },
+        "q8": {
+          "stem": "Pak Budi membeli 2 karung kedelai dengan Bruto masing-masing 100 kg dan Tara 2%. Harga beli keseluruhan adalah Rp1.960.000,00. Jika ia menjual kembali kedelai tersebut dengan harga Rp12.000,00 per kg netto, berapakah keuntungan totalnya?",
+          "optA": "A. Rp292.000,00",
+          "optB": "B. Rp400.000,00",
+          "optC": "C. Rp440.000,00",
+          "optD": "D. Rp392.000,00"
+        },
+        "q9": {
+          "stem": "Terdapat dua merek tepung terigu. Merek A: Bruto 25 kg, Tara 2%, dijual Rp245.000,00. Merek B: Netto 24 kg dijual Rp235.200,00. Pernyataan mana yang paling tepat untuk mencari harga termurah per kilogram netto?",
+          "optA": "A. Merek A lebih murah karena harga per kilogramnya Rp10.000,00.",
+          "optB": "B. Merek B lebih murah karena harga per kilogramnya Rp9.800,00.",
+          "optC": "C. Merek A dan Merek B sama murahnya karena harga per kilogramnya Rp10.000,00.",
+          "optD": "D. Merek A lebih murah karena harga per kilogramnya Rp9.800,00."
+        },
+        "q10": {
+          "stem": "Pak Ali membeli 5 kaleng cat dengan harga total Rp2.500.000,00. Tiap kaleng memiliki Bruto 26 kg dan Netto 25 kg. Setelah cat habis, kaleng kosong (Tara) laku dijual Rp2.000,00/kg ke pengepul. Berapakah harga pokok cat per kilogram (netto) yang sebenarnya ditanggung Pak Ali?",
+          "optA": "A. Rp20.000,00",
+          "optB": "B. Rp19.800,00",
+          "optC": "C. Rp19.920,00",
+          "optD": "D. Rp20.080,00"
+        },
+        "q11": {
+          "stem": "Seorang pedagang membeli satu karung beras dengan Bruto 50 kg dan Tara 2%. Harga pembelian karung beras tersebut adalah Rp5.000,00. Pedagang itu kemudian menjual beras tersebut secara eceran dengan harga Rp12.000,00 per kg (netto). Berapakah total uang yang diperoleh pedagang tersebut dari penjualan satu karung beras?",
+          "optA": "A. Rp600.000,00",
+          "optB": "B. Rp588.000,00",
+          "optC": "C. Rp583.000,00",
+          "optD": "D. Rp88.000,00"
+        },
+        "q12": {
+          "stem": "Seorang pembeli ingin mendapatkan harga beras (netto) yang paling murah. Ia membandingkan dua penawaran:",
+          "itemA": "Toko A: Menjual 1 karung dengan Bruto 100 kg, Tara 2%, seharga Rp1.000.000,00.",
+          "itemB": "Toko B: Menjual 1 karung dengan Bruto 100 kg, Tara 3%, seharga Rp990.000,00.",
+          "question": "Di toko manakah pembeli tersebut seharusnya berbelanja untuk mendapatkan harga per kg netto termurah?",
+          "optA": "a. Toko A, karena harga per kg netto sekitar Rp10.204 B.",
+          "optB": "b. Toko B, karena harga per kg netto sekitar Rp10.206",
+          "optC": "c. Toko B, karena harga karungnya lebih murah (Rp990.000)",
+          "optD": "d. Sama saja, karena brutonya sama-nama 100 kg"
+        },
+        "q13": {
+          "stem": "Seorang penjual mendapat keuntungan total Rp100.000,00 setelah berhasil menjual habis satu peti buah. Ia menjual buah tersebut dengan harga Rp15.000,00 per kg (netto). Peti buah yang ia beli memiliki Bruto 60 kg dan Tara (berat peti) 2 kg. Berapakah harga beli (modal) peti buah tersebut pada awalnya?",
+          "optA": "A. Rp900.000,00",
+          "optB": "B. Rp870.000,00",
+          "optC": "C. Rp800.000,00",
+          "optD": "D. Rp770.000,00"
+        },
+        "q14": {
+          "stem": "Sebuah kargo berisi 20 kaleng biskuit identik ditimbang dan berat kotor (Bruto) totalnya adalah 25 kg. Diketahui berat kardus kargo (Tara kargo) adalah 1 kg. Jika berat netto (biskuit) di setiap kaleng adalah 900 gram, berapakah berat tara (kemasan kaleng) dari satu kaleng biskuit?",
+          "optA": "A. 300 gram",
+          "optB": "B. 500 gram",
+          "optC": "C. 1.200 gram",
+          "optD": "D. 1.150 gram"
+        },
+        "q15": {
+          "stem": "Sebuah toko membeli satu drum minyak goreng dengan diskon tara (potongan berat) 3%. Setelah ditimbang, berat bersih (Netto) minyak yang diterima toko adalah 97 kg. Berapakah Bruto drum minyak tersebut sebelum dihitung diskon taranya?",
+          "optA": "A. 99,91 kg",
+          "optB": "B. 94,09 kg",
+          "optC": "C. 100 kg",
+          "optD": "D. 103 kg"
+        }
       }
     }
   },
