@@ -1113,6 +1113,72 @@
           "itemC": "If k = 4, calculate the volume and surface area of the aquarium in cm³ and cm²!",
           "tag": "Contextual"
         }
+      },
+      "substitusi": {
+        "pageTitle": "SUBSTITUTION IN ALGEBRAIC EXPRESSIONS",
+        "badgeSoal": "8 Essay Questions",
+        "q1": {
+          "introPre": "Find the value of each algebraic expression below if ",
+          "introEnd": "!"
+        },
+        "q2": {
+          "instruction": "Determine the value of the following algebraic expressions!",
+          "k1": "for p = -4",
+          "k2": "for m = 5 and q = -2",
+          "k3": "for r = -3 and s = 2",
+          "k4": "for x = 2 and y = -3"
+        },
+        "q3": {
+          "introPre": "If ",
+          "introSep": ", ",
+          "introAnd": ", and ",
+          "introEnd": ", calculate the values of the following algebraic expressions!"
+        },
+        "q4": {
+          "instruction": "Observe the following rectangle!",
+          "a": "Determine the perimeter and area of the rectangle above expressed in x and y!",
+          "b": "Calculate the perimeter and area of the rectangle if x = 3 and y = 4!"
+        },
+        "q5": {
+          "introPre": "If ",
+          "introSep": ", ",
+          "introAnd": ", and ",
+          "introEnd": ", determine the value of the following algebraic expressions!"
+        },
+        "q6": {
+          "introPre": "A ball is thrown upward from a building and reaches a height of ",
+          "introMid1": " meters after ",
+          "introMid2": " seconds. If the ball's height is given by the formula ",
+          "introMid3": ", determine the height of the ball after ",
+          "bold": "5 seconds",
+          "introEnd": " of being thrown!",
+          "svgLabel": "building"
+        },
+        "q7": {
+          "introPre": "A cargo ship carries ",
+          "introMid1": " tons of rice and ",
+          "introMid2": " tons of sugar, making the total cargo weight ",
+          "introEnd": " tons.",
+          "a": "Express W in terms of x, then simplify!",
+          "b": "If x = 8, calculate the value of W!",
+          "svgLabel": "CARGO"
+        },
+        "q8": {
+          "introPre": "The ",
+          "introMid": "-th term of a number pattern is expressed by the formula ",
+          "introEnd": ".",
+          "a": "Determine the 4th term of the number pattern!",
+          "b": "Determine the 7th term of the number pattern!",
+          "c": "If the value of a term is 128, find n!"
+        },
+        "tag1": "One Variable",
+        "tag2": "Two Variables",
+        "tag3": "Three Variables",
+        "tag4": "Plane Figures",
+        "tag5": "Multi Variables",
+        "tag6": "Contextual",
+        "tag7": "Word Problem",
+        "tag8": "Number Pattern"
       }
     }
   },

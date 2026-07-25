@@ -1113,6 +1113,72 @@
           "itemC": "Jika k = 4, hitunglah volume dan luas permukaan akuarium dalam cm³ dan cm²!",
           "tag": "Kontekstual"
         }
+      },
+      "substitusi": {
+        "pageTitle": "SUBSTITUSI BILANGAN PADA BENTUK ALJABAR",
+        "badgeSoal": "8 Soal Essay",
+        "q1": {
+          "introPre": "Tentukan nilai masing-masing bentuk aljabar berikut jika ",
+          "introEnd": "!"
+        },
+        "q2": {
+          "instruction": "Tentukan nilai bentuk aljabar berikut!",
+          "k1": "untuk p = -4",
+          "k2": "untuk m = 5 dan q = -2",
+          "k3": "untuk r = -3 dan s = 2",
+          "k4": "untuk x = 2 dan y = -3"
+        },
+        "q3": {
+          "introPre": "Jika ",
+          "introSep": ", ",
+          "introAnd": ", dan ",
+          "introEnd": ", hitunglah nilai dari bentuk-bentuk aljabar berikut!"
+        },
+        "q4": {
+          "instruction": "Perhatikan persegi panjang berikut!",
+          "a": "Tentukan keliling dan luas persegi panjang di atas dinyatakan dalam x dan y!",
+          "b": "Hitunglah keliling dan luas persegi panjang tersebut jika x = 3 dan y = 4!"
+        },
+        "q5": {
+          "introPre": "Jika ",
+          "introSep": ", ",
+          "introAnd": ", dan ",
+          "introEnd": ", tentukan nilai dari bentuk aljabar berikut!"
+        },
+        "q6": {
+          "introPre": "Sebuah bola dilontarkan ke atas dari sebuah gedung dan mencapai ketinggian ",
+          "introMid1": " meter setelah ",
+          "introMid2": " detik. Jika ketinggian bola dirumuskan dengan ",
+          "introMid3": ", tentukan ketinggian bola setelah ",
+          "bold": "5 detik",
+          "introEnd": " dilontarkan!",
+          "svgLabel": "gedung"
+        },
+        "q7": {
+          "introPre": "Sebuah kapal kargo mengangkut ",
+          "introMid1": " ton beras dan ",
+          "introMid2": " ton gula sehingga berat muatan seluruhnya ",
+          "introEnd": " ton.",
+          "a": "Nyatakan W dalam x, kemudian sederhanakanlah!",
+          "b": "Jika x = 8, hitunglah nilai W!",
+          "svgLabel": "KARGO"
+        },
+        "q8": {
+          "introPre": "Suatu pola bilangan ke-",
+          "introMid": " dinyatakan dengan rumus ",
+          "introEnd": ".",
+          "a": "Tentukan suku ke-4 dari pola bilangan tersebut!",
+          "b": "Tentukan suku ke-7 dari pola bilangan tersebut!",
+          "c": "Jika nilai suatu suku adalah 128, tentukan n-nya!"
+        },
+        "tag1": "Satu Variabel",
+        "tag2": "Dua Variabel",
+        "tag3": "Tiga Variabel",
+        "tag4": "Bangun Datar",
+        "tag5": "Multi Variabel",
+        "tag6": "Kontekstual",
+        "tag7": "Soal Cerita",
+        "tag8": "Pola Bilangan"
       }
     }
   },
