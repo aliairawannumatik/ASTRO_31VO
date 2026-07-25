@@ -1024,6 +1024,52 @@
           "itemC": "If n = 5, calculate the area and perimeter of the garden!",
           "tag": "Contextual"
         }
+      },
+      "pembagian": {
+        "pageTitle": "DIVISION OF ALGEBRAIC EXPRESSIONS",
+        "q1": {
+          "instruction": "Determine the result of dividing the following terms!",
+          "tag": "Monomial ÷ Monomial"
+        },
+        "q2": {
+          "instruction": "Determine the result of the following chained divisions!",
+          "tag": "Chained Division"
+        },
+        "q3": {
+          "instruction": "Determine the result of the following mixed operations!",
+          "tag": "Mixed Operations"
+        },
+        "q4": {
+          "instruction": "Determine the result of dividing the following polynomials!",
+          "tag": "Polynomial ÷ Binomial"
+        },
+        "q5": {
+          "tag": "Advanced Polynomials"
+        },
+        "q6": {
+          "instruction": "The area of a rectangle is expressed as an algebraic expression. Find the length!",
+          "itemA": "Write the division operation to find the length of the rectangle!",
+          "itemB": "Determine the length in simplified algebraic form!",
+          "itemC": "If x = 3, calculate the length and area of the rectangle in cm!",
+          "tag": "Side Length"
+        },
+        "q7": {
+          "instruction": "Simplify the following algebraic fractions!",
+          "hintA": "divide coefficients & exponents",
+          "hintB": "factor the numerator",
+          "hintC": "factor difference of squares",
+          "hintD": "factor out GCF",
+          "tag": "Algebraic Fractions"
+        },
+        "q8": {
+          "introPre": "The area of a rectangular garden plot is ",
+          "introMid": " square metres. If the width is ",
+          "introEnd": " metres, determine:",
+          "itemA": "The length of the garden plot in algebraic form!",
+          "itemB": "The perimeter of the garden plot in simplified algebraic form!",
+          "itemC": "The area and perimeter of the garden if n = 6!",
+          "tag": "Contextual"
+        }
       }
     }
   },

@@ -1024,6 +1024,52 @@
           "itemC": "Jika n = 5, hitunglah luas dan keliling kebun tersebut!",
           "tag": "Kontekstual"
         }
+      },
+      "pembagian": {
+        "pageTitle": "PEMBAGIAN BENTUK ALJABAR",
+        "q1": {
+          "instruction": "Tentukan hasil pembagian suku-suku berikut!",
+          "tag": "Monomial ÷ Monomial"
+        },
+        "q2": {
+          "instruction": "Tentukan hasil pembagian bertingkat berikut!",
+          "tag": "Pembagian Bertingkat"
+        },
+        "q3": {
+          "instruction": "Tentukan hasil operasi campuran berikut!",
+          "tag": "Operasi Campuran"
+        },
+        "q4": {
+          "instruction": "Tentukan hasil pembagian suku banyak berikut!",
+          "tag": "Polinomial ÷ Binomial"
+        },
+        "q5": {
+          "tag": "Suku Banyak Lanjutan"
+        },
+        "q6": {
+          "instruction": "Luas sebuah persegi panjang dinyatakan dalam bentuk aljabar. Tentukan panjangnya!",
+          "itemA": "Tuliskan operasi pembagian untuk mencari panjang persegi panjang tersebut!",
+          "itemB": "Tentukan panjangnya dalam bentuk aljabar yang sudah disederhanakan!",
+          "itemC": "Jika x = 3, hitunglah panjang dan luas persegi panjang dalam satuan cm!",
+          "tag": "Panjang Sisi"
+        },
+        "q7": {
+          "instruction": "Sederhanakanlah pecahan-pecahan aljabar berikut!",
+          "hintA": "bagi koefisien & eksponen",
+          "hintB": "faktorkan pembilang",
+          "hintC": "faktorkan selisih kuadrat",
+          "hintD": "faktorkan GCF",
+          "tag": "Pecahan Aljabar"
+        },
+        "q8": {
+          "introPre": "Luas sebuah petak kebun berbentuk persegi panjang adalah ",
+          "introMid": " meter persegi. Jika lebarnya ",
+          "introEnd": " meter, tentukan:",
+          "itemA": "Panjang petak kebun dalam bentuk aljabar!",
+          "itemB": "Keliling petak kebun dalam bentuk aljabar yang telah disederhanakan!",
+          "itemC": "Luas dan keliling kebun jika n = 6!",
+          "tag": "Kontekstual"
+        }
       }
     }
   },
