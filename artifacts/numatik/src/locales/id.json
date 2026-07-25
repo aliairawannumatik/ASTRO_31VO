@@ -2112,6 +2112,101 @@
           "optC": "C. Perusahaan A lebih besar Rp100.000",
           "optD": "D. Perusahaan B lebih besar Rp100.000"
         }
+      },
+      "diskon": {
+        "title": "DISKON",
+        "pageSubtitle": "Kelas 7 - Latihan Mandiri - Aritmetika Sosial",
+        "instruction": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Aritmetika Sosial",
+        "q1": {
+          "stem": "Sebuah toko sepatu memberikan diskon 15% untuk semua produk. Jika harga awal sepasang sepatu adalah Rp200.000, berapa besar potongan harga yang didapatkan pembeli?",
+          "optA": "A. Rp30.000",
+          "optB": "B. Rp170.000",
+          "optC": "C. Rp20.000",
+          "optD": "D. Rp15.000"
+        },
+        "q2": {
+          "stem": "Sebuah buku seharga Rp80.000 sedang didiskon sebesar 25%. Berapakah harga akhir yang harus dibayar oleh pembeli?",
+          "optA": "A. Rp55.000",
+          "optB": "B. Rp20.000",
+          "optC": "C. Rp60.000",
+          "optD": "D. Rp75.000"
+        },
+        "q3": {
+          "stem": "Kemeja yang awalnya berharga Rp150.000 dijual dengan harga Rp120.000. Berapa persentase diskon yang diberikan untuk kemeja tersebut?",
+          "optA": "A. 15%",
+          "optB": "B. 20%",
+          "optC": "C. 25%",
+          "optD": "D. 30%"
+        },
+        "q4": {
+          "stem": "Setelah mendapat diskon 20%, Andi membayar sebuah tas seharga Rp160.000. Berapa harga awal tas tersebut sebelum diberi diskon?",
+          "optA": "A. Rp240.000",
+          "optB": "B. Rp192.000",
+          "optC": "C. Rp220.000",
+          "optD": "D. Rp200.000"
+        },
+        "q5": {
+          "stem": "Data harga dan diskon sepatu dan kaos dari ke-empat toko sebagai berikut:",
+          "colStore": "Toko",
+          "colShoes": "Sepatu",
+          "colTshirt": "Kaos",
+          "question": "Jika Febian akan membeli sepatu dan kaos, maka toko yang dipilihnya adalah",
+          "optA": "A. Toko Damai",
+          "optB": "B. Toko Tentram",
+          "optC": "C. Toko Rukun",
+          "optD": "D. Toko Sentosa"
+        },
+        "q6": {
+          "stem": "Untuk barang seharga Rp250.000, Toko A memberikan potongan langsung sebesar Rp50.000, sedangkan Toko B memberikan diskon 25%. Manakah pernyataan yang benar?",
+          "optA": "A. Harga di Toko B lebih murah.",
+          "optB": "B. Diskon Toko A setara dengan 25%.",
+          "optC": "C. Toko A dan Toko B memberikan potongan yang sama.",
+          "optD": "D. Harga di Toko A lebih murah."
+        },
+        "q7": {
+          "stem": "Sebuah toko pakaian memasang plang promo 'Diskon 50% + 20%'. Jika harga awal jaket adalah Rp400.000, berapakah harga yang harus dibayar di kasir?",
+          "optA": "A. Rp140.000",
+          "optB": "B. Rp280.000",
+          "optC": "C. Rp160.000",
+          "optD": "D. Rp120.000"
+        },
+        "q8": {
+          "stem": "Sebuah minimarket mengadakan promo 'Beli 2 Gratis 1' untuk produk sabun mandi. Jika dilihat secara matematis, promo ini setara dengan diskon per item sebesar...",
+          "optA": "A. 33,33%",
+          "optB": "B. 25%",
+          "optC": "C. 66,67%",
+          "optD": "D. 50%"
+        },
+        "q9": {
+          "stem": "Seorang pedagang membeli suatu barang dengan modal Rp100.000. Ia ingin memberikan diskon 20% pada pelanggannya, namun tetap ingin mendapat keuntungan bersih 20% dari modal awalnya. Berapa harga label yang harus dipasang pedagang tersebut?",
+          "optA": "A. Rp150.000",
+          "optB": "B. Rp140.000",
+          "optC": "C. Rp120.000",
+          "optD": "D. Rp144.000"
+        },
+        "q10": {
+          "stem": "Sebuah barang dinaikkan harganya sebesar 25% dari harga normal. Seminggu kemudian, toko tersebut mengadakan 'Sale' dan memberikan diskon 20% pada barang tersebut. Bagaimana perbandingan harga akhir barang tersebut terhadap harga normalnya (harga awal)?",
+          "optA": "A. Lebih mahal 5%",
+          "optB": "B. Lebih murah 5%",
+          "optC": "C. Lebih mahal 10%",
+          "optD": "D. Harganya tetap sama dengan harga awal"
+        },
+        "q11": {
+          "stem": "Untuk barang elektronik dengan harga awal yang sama, Toko X menawarkan diskon bertingkat '30% + 10%', sedangkan Toko Y menawarkan diskon '20% + 20%'. Manakah pilihan yang memberikan harga paling murah bagi pembeli?",
+          "optA": "A. Toko Y lebih murah",
+          "optB": "B. Keduanya sama murah",
+          "optC": "C. Toko X lebih murah",
+          "optD": "D. Tidak dapat ditentukan"
+        },
+        "q12": {
+          "stem": "Menjelang tahun baru, harga sebuah kacamata dipotong (didiskon) dua kali seperti dinyatakan pada tanda berikut. Seorang pembeli membayar Rp168.750,00 untuk kacamata tersebut. Berapa harga kacamata tersebut sebelum dipotong harganya?",
+          "highlightBox": "Diskon 50% + 10%",
+          "optA": "A. Rp262.500,00",
+          "optB": "B. Rp281.250,00",
+          "optC": "C. Rp375.000,00",
+          "optD": "D. Rp421.675,00"
+        }
       }
     }
   },

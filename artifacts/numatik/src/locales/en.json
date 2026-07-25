@@ -2112,6 +2112,101 @@
           "optC": "C. Company A is higher by Rp100,000",
           "optD": "D. Company B is higher by Rp100,000"
         }
+      },
+      "diskon": {
+        "title": "DISCOUNT",
+        "pageSubtitle": "Grade 7 - Self-Practice - Social Arithmetic",
+        "instruction": "Solve the following problems showing your complete working",
+        "backTo": "Back to Social Arithmetic",
+        "q1": {
+          "stem": "A shoe store gives a 15% discount on all products. If the original price of a pair of shoes is Rp200,000, what is the discount amount the buyer receives?",
+          "optA": "A. Rp30,000",
+          "optB": "B. Rp170,000",
+          "optC": "C. Rp20,000",
+          "optD": "D. Rp15,000"
+        },
+        "q2": {
+          "stem": "A book priced at Rp80,000 is on sale with a 25% discount. What is the final price the buyer must pay?",
+          "optA": "A. Rp55,000",
+          "optB": "B. Rp20,000",
+          "optC": "C. Rp60,000",
+          "optD": "D. Rp75,000"
+        },
+        "q3": {
+          "stem": "A shirt originally priced at Rp150,000 is sold for Rp120,000. What is the discount percentage given for that shirt?",
+          "optA": "A. 15%",
+          "optB": "B. 20%",
+          "optC": "C. 25%",
+          "optD": "D. 30%"
+        },
+        "q4": {
+          "stem": "After receiving a 20% discount, Andi paid Rp160,000 for a bag. What was the original price of the bag before the discount?",
+          "optA": "A. Rp240,000",
+          "optB": "B. Rp192,000",
+          "optC": "C. Rp220,000",
+          "optD": "D. Rp200,000"
+        },
+        "q5": {
+          "stem": "The following table shows the price and discount data for shoes and t-shirts from four stores:",
+          "colStore": "Store",
+          "colShoes": "Shoes",
+          "colTshirt": "T-Shirt",
+          "question": "If Febian wants to buy both shoes and a t-shirt, which store should he choose?",
+          "optA": "A. Toko Damai",
+          "optB": "B. Toko Tentram",
+          "optC": "C. Toko Rukun",
+          "optD": "D. Toko Sentosa"
+        },
+        "q6": {
+          "stem": "For an item priced at Rp250,000, Store A gives a direct discount of Rp50,000, while Store B gives a 25% discount. Which statement is correct?",
+          "optA": "A. Store B’s price is cheaper.",
+          "optB": "B. Store A’s discount is equivalent to 25%.",
+          "optC": "C. Store A and Store B give the same discount.",
+          "optD": "D. Store A’s price is cheaper."
+        },
+        "q7": {
+          "stem": "A clothing store puts up a promo sign 'Discount 50% + 20%'. If the original price of a jacket is Rp400,000, how much must be paid at the cashier?",
+          "optA": "A. Rp140,000",
+          "optB": "B. Rp280,000",
+          "optC": "C. Rp160,000",
+          "optD": "D. Rp120,000"
+        },
+        "q8": {
+          "stem": "A minimarket holds a 'Buy 2 Get 1 Free' promo for bath soap. Mathematically, this promo is equivalent to a per-item discount of...",
+          "optA": "A. 33.33%",
+          "optB": "B. 25%",
+          "optC": "C. 66.67%",
+          "optD": "D. 50%"
+        },
+        "q9": {
+          "stem": "A trader buys a product at a cost of Rp100,000. He wants to give his customers a 20% discount while still earning a net profit of 20% from the original capital. What label price should the trader set?",
+          "optA": "A. Rp150,000",
+          "optB": "B. Rp140,000",
+          "optC": "C. Rp120,000",
+          "optD": "D. Rp144,000"
+        },
+        "q10": {
+          "stem": "A product's price is raised by 25% from its normal price. A week later, the store holds a 'Sale' and gives a 20% discount on that product. How does the final price compare to the original normal price?",
+          "optA": "A. 5% more expensive",
+          "optB": "B. 5% cheaper",
+          "optC": "C. 10% more expensive",
+          "optD": "D. The price is the same as the original price"
+        },
+        "q11": {
+          "stem": "For electronics with the same original price, Store X offers a tiered discount of '30% + 10%', while Store Y offers a discount of '20% + 20%'. Which option gives the buyer the cheapest price?",
+          "optA": "A. Store Y is cheaper",
+          "optB": "B. Both are equally cheap",
+          "optC": "C. Store X is cheaper",
+          "optD": "D. Cannot be determined"
+        },
+        "q12": {
+          "stem": "Near the new year, the price of a pair of glasses is discounted twice as shown on the following sign. A buyer paid Rp168,750.00 for the glasses. What was the price of the glasses before the discount?",
+          "highlightBox": "Discount 50% + 10%",
+          "optA": "A. Rp262,500.00",
+          "optB": "B. Rp281,250.00",
+          "optC": "C. Rp375,000.00",
+          "optD": "D. Rp421,675.00"
+        }
       }
     }
   },
