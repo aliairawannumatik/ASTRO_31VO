@@ -1944,6 +1944,22 @@
           "label": "INCOME TAX (PPh)",
           "desc": "Understanding income tax, calculating tax deductions, taxable income"
         }
+      },
+      "jualBeliUntungRugi": {
+        "title": "BUYING, SELLING, PROFIT & LOSS",
+        "pageSubtitle": "Grade 7 · Social Arithmetic · Self-Practice",
+        "instruction": "Solve the following problems showing your complete working",
+        "backTo": "Back to Social Arithmetic",
+        "q1": "A bag seller bought a backpack for Rp150,000.00. He then sold it to a customer for Rp180,000.00. Calculate the profit in rupiah. Also express the profit as a percentage.",
+        "q2": "An electronics store owner sold a second-hand smartwatch for Rp900,000.00. From the sale, he claims to have made a 20% profit. What was the original cost price when he purchased the smartwatch?",
+        "q3": "Mrs. Darni bought 30 kg of chicken eggs directly from a farm at a total price of Rp750,000.00. She then sold them retail at her stall for Rp28,000.00 per kilogram. Analyse whether Mrs. Darni made a profit or a loss. Express the profit or loss in rupiah and as a percentage.",
+        "q4": "Mr. Anton bought 20 plain t-shirts for Rp600,000.00. He then sold them retail. 10 shirts sold at Rp45,000.00 each, 8 shirts sold during a promotion at Rp35,000.00 each, and the rest he kept for personal use. Determine whether Mr. Anton made a profit or a loss, and express it in rupiah and as a percentage!",
+        "q5": "A café bought 50 cups of premium pudding for a total cost of Rp750,000.00. 20 cups were bulk-purchased by an event committee at a 10% profit margin (based on the cost price per cup), while the remainder was displayed and sold retail at Rp18,000.00 per cup. Calculate the total profit earned by the café in rupiah and as a percentage!",
+        "q6": "Kak Rina bought a folding table for Rp350,000.00 when she first started college. After graduating and having to move cities, she was forced to sell the second-hand folding table for Rp245,000.00. How much depreciation (loss) in rupiah did Kak Rina experience? Also express the loss as a percentage!",
+        "q7": "Pak Rendi was forced to sell his smartphone because he urgently needed funds. He sold the phone for Rp1,600,000.00. From the sale, Pak Rendi had to absorb a loss of 20% of his original cost. What was the original purchase price of the phone?",
+        "q8": "Deni bought a second-hand mountain bike at a flea market for Rp450,000.00. Because its condition was not ideal, Deni took it to a repair shop and spent Rp150,000.00 replacing the worn chain and tyres. After the bike was back in good shape, Deni sold it to a classmate and managed to make a 25% profit. What was the selling price of the bicycle in rupiah?",
+        "q9": "Mrs. Tari bought 100 kg of mangoes from a farmer for a total price of Rp1,500,000.00. After sorting, 10 kg of mangoes were found to be rotten and completely unsellable. If Mrs. Tari still wants to make a total profit of 20% on her original cost, what price per kilogram must she set for the remaining good-quality mangoes?",
+        "q10": "Pak Johan wants to buy an electric motorcycle. The cash price is Rp20,000,000.00. However, the dealer offers a credit option with the following terms: a Down Payment (DP) of Rp5,000,000.00 and monthly instalments of Rp700,000.00 for 3 years. What is the percentage of total additional cost that Pak Johan must bear if he chooses the credit option compared to buying it in cash?"
       }
     }
   },
