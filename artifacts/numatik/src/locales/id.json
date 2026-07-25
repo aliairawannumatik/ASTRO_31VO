@@ -1463,6 +1463,91 @@
         "q13": {
           "text": "Seorang pedagang memiliki <a>24 keping</a> uang logam yang terdiri dari koin <a>Rp1.000</a> dan koin <a>Rp2.000</a>. Nilai total seluruh uang logam tersebut adalah <a>Rp37.000</a>. Tentukan banyak masing-masing koin!"
         }
+      },
+      "pengertianPtLSV": {
+        "title1": "PENGERTIAN KETIDAKSAMAAN,",
+        "title2": "PERTIDAKSAMAAN DAN PtLSV",
+        "badge": "13 Soal",
+        "tags": {
+          "mudah": "Mudah",
+          "sedang": "Sedang",
+          "sulit": "Sulit",
+          "c1": "Baca & Tulis Simbol Ketidaksamaan",
+          "c2": "Ketidaksamaan Benar atau Salah",
+          "c3": "Isi Simbol yang Tepat",
+          "c4": "Identifikasi PtLSV",
+          "c5": "Ubah Kalimat ke Simbol",
+          "c6": "Uji Penyelesaian PtLSV",
+          "c7": "Himpunan Penyelesaian & Garis Bilangan",
+          "c8": "Buat Model Matematika PtLSV",
+          "c9": "Pasangkan PtLSV dengan Deskripsi",
+          "c10": "PtLSV dengan Pecahan"
+        },
+        "q1": {
+          "instruction": "Tuliskan dalam kalimat (kata-kata) arti dari setiap simbol ketidaksamaan berikut, kemudian berikan <a>satu contoh bilangan</a> yang memenuhinya!",
+          "thSimbol": "Simbol",
+          "thDibaca": "Dibaca",
+          "thContoh": "Contoh (x = …)"
+        },
+        "q2": {
+          "instruction": "Tentukan apakah kalimat ketidaksamaan berikut <b>BENAR</b> atau <s>SALAH</s>!",
+          "benarSalah": "Benar / Salah?"
+        },
+        "q3": {
+          "instruction": "Isilah kotak <box>□</box> dengan simbol yang tepat: <m1/> atau <m2/>!"
+        },
+        "q4": {
+          "instruction": "Di antara kalimat-kalimat berikut, manakah yang merupakan <a>Pertidaksamaan Linear Satu Variabel (PtLSV)</a>? Jelaskan alasanmu!",
+          "hint": "PtLSV yang sah: a, b, e, f, j"
+        },
+        "q5": {
+          "instruction": "Tulis kalimat-kalimat berikut menggunakan <a>simbol ketidaksamaan</a>!",
+          "a": "x lebih dari 10",
+          "b": "y kurang dari atau sama dengan −4",
+          "c": "n tidak kurang dari 7",
+          "d": "2 kali suatu bilangan m tidak melebihi 14",
+          "e": "Selisih p dan 3 lebih dari 8",
+          "f": "Bilangan bulat k terletak antara −2 dan 5 (tidak termasuk)"
+        },
+        "q6": {
+          "instruction": "Selidiki apakah nilai variabel yang diberikan <a>memenuhi</a> atau <b>tidak memenuhi</b> setiap pertidaksamaan berikut!",
+          "thPtLSV": "PtLSV",
+          "thNilai": "Nilai",
+          "thMemenuhi": "Memenuhi?"
+        },
+        "q7": {
+          "instruction": "Diberikan <z/> (bilangan bulat). Tentukan <hp>Himpunan Penyelesaian (HP)</hp> dari setiap pertidaksamaan berikut, kemudian gambarkan pada garis bilangan!",
+          "hp": "HP =",
+          "garisLabel": "Garis bilangan:"
+        },
+        "q8": {
+          "instruction": "Ubah setiap pernyataan berikut menjadi <a>model matematika PtLSV</a>, lalu sebutkan variabelnya!",
+          "modelLabel": "Model:",
+          "a": "Tiga kali suatu bilangan dikurangi 4 hasilnya kurang dari 11.",
+          "b": "Dua lebihnya dari setengah suatu bilangan tidak melebihi 9.",
+          "c": "Lima kali suatu bilangan ditambah 6 lebih dari 21.",
+          "d": "Suatu bilangan jika dikurangi 8, hasilnya tidak kurang dari −3.",
+          "e": "Empat kali setengah suatu bilangan hasilnya paling banyak 10."
+        },
+        "q9": {
+          "instruction": "Pasangkan setiap <a>PtLSV</a> (kolom kiri) dengan <a>deskripsi yang tepat</a> (kolom kanan)!",
+          "colPtLSV": "PtLSV",
+          "colDesc": "Deskripsi",
+          "descP": "x lebih dari 3",
+          "descQ": "x paling sedikit 3",
+          "descR": "x kurang dari −2",
+          "descS": "x tidak lebih dari −2",
+          "descT": "x tidak kurang dari 2",
+          "jawabanLabel": "Jawaban:"
+        },
+        "q13": {
+          "instruction": "Selidiki apakah nilai berikut merupakan <a>penyelesaian</a> dari masing-masing PtLSV! Tunjukkan langkah substitusinya secara lengkap."
+        },
+        "legend": {
+          "descMudah": "Soal 1–5: konsep dasar simbol & identifikasi",
+          "descSedang": "Soal 6–9: substitusi, HP, model matematika",
+          "descSulit": "Soal 10: PtLSV dengan pecahan"
+        }
       }
     }
   },

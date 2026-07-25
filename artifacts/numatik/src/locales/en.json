@@ -1463,6 +1463,91 @@
         "q13": {
           "text": "A merchant has <a>24 coins</a> consisting of <a>Rp1,000</a> and <a>Rp2,000</a> coins. The total value of all coins is <a>Rp37,000</a>. Find the number of each type of coin!"
         }
+      },
+      "pengertianPtLSV": {
+        "title1": "UNDERSTANDING INEQUALITIES,",
+        "title2": "LIN. INEQUALITY IN ONE VARIABLE",
+        "badge": "13 Questions",
+        "tags": {
+          "mudah": "Easy",
+          "sedang": "Medium",
+          "sulit": "Hard",
+          "c1": "Read & Write Inequality Symbols",
+          "c2": "True or False Inequalities",
+          "c3": "Fill in the Correct Symbol",
+          "c4": "Identify Linear Inequalities (LIV)",
+          "c5": "Convert Sentences to Symbols",
+          "c6": "Test Solutions of Inequalities",
+          "c7": "Solution Set & Number Line",
+          "c8": "Create Math Model (LIV)",
+          "c9": "Match Inequality with Description",
+          "c10": "Inequalities with Fractions"
+        },
+        "q1": {
+          "instruction": "Write in words the meaning of each inequality symbol below, then give <a>one example number</a> that satisfies it!",
+          "thSimbol": "Symbol",
+          "thDibaca": "Meaning",
+          "thContoh": "Example (x = …)"
+        },
+        "q2": {
+          "instruction": "Determine whether each inequality below is <b>TRUE</b> or <s>FALSE</s>!",
+          "benarSalah": "True / False?"
+        },
+        "q3": {
+          "instruction": "Fill in the <box>□</box> box with the correct symbol: <m1/> or <m2/>!"
+        },
+        "q4": {
+          "instruction": "Among the expressions below, which ones are <a>Linear Inequalities in One Variable (LIV)</a>? Explain your reasoning!",
+          "hint": "Valid LIVs: a, b, e, f, j"
+        },
+        "q5": {
+          "instruction": "Write the following sentences using <a>inequality symbols</a>!",
+          "a": "x is greater than 10",
+          "b": "y is less than or equal to −4",
+          "c": "n is not less than 7",
+          "d": "2 times a number m does not exceed 14",
+          "e": "The difference of p and 3 is greater than 8",
+          "f": "Integer k lies between −2 and 5 (exclusive)"
+        },
+        "q6": {
+          "instruction": "Investigate whether the given variable value <a>satisfies</a> or <b>does not satisfy</b> each inequality below!",
+          "thPtLSV": "Inequality",
+          "thNilai": "Value",
+          "thMemenuhi": "Satisfies?"
+        },
+        "q7": {
+          "instruction": "Given <z/> (integers). Find the <hp>Solution Set (SS)</hp> of each inequality below, then draw it on a number line!",
+          "hp": "SS =",
+          "garisLabel": "Number line:"
+        },
+        "q8": {
+          "instruction": "Convert each statement below into a <a>mathematical model (LIV)</a>, then state the variable!",
+          "modelLabel": "Model:",
+          "a": "Three times a number reduced by 4 is less than 11.",
+          "b": "Two more than half of a number does not exceed 9.",
+          "c": "Five times a number plus 6 is greater than 21.",
+          "d": "A number decreased by 8 is not less than −3.",
+          "e": "Four times half of a number is at most 10."
+        },
+        "q9": {
+          "instruction": "Match each <a>inequality</a> (left column) with the <a>correct description</a> (right column)!",
+          "colPtLSV": "Inequality",
+          "colDesc": "Description",
+          "descP": "x is greater than 3",
+          "descQ": "x is at least 3",
+          "descR": "x is less than −2",
+          "descS": "x is no more than −2",
+          "descT": "x is no less than 2",
+          "jawabanLabel": "Answer:"
+        },
+        "q13": {
+          "instruction": "Investigate whether the following values are <a>solutions</a> to each inequality! Show the substitution steps completely."
+        },
+        "legend": {
+          "descMudah": "Q 1–5: basic symbol concepts & identification",
+          "descSedang": "Q 6–9: substitution, solution set, math model",
+          "descSulit": "Q 10: inequalities with fractions"
+        }
       }
     }
   },
