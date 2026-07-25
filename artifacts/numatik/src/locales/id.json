@@ -978,6 +978,52 @@
           "itemA": "Nyatakan total berat muatan angkot seluruhnya (penumpang + bagasi) dalam bentuk aljabar yang sederhana!",
           "itemB": "Jika k = 55, berapa kg total berat muatan angkot tersebut?"
         }
+      },
+      "perkalian": {
+        "pageTitle": "PERKALIAN BENTUK ALJABAR",
+        "q1": {
+          "instruction": "Tentukan hasil perkalian suku-suku berikut!",
+          "tag": "Monomial × Monomial"
+        },
+        "q2": {
+          "instruction": "Tentukan hasil perkalian bentuk-bentuk aljabar berikut!",
+          "tag": "Monomial × Polynomial"
+        },
+        "q3": {
+          "instruction": "Tentukan keliling bangun-bangun berikut!",
+          "shapeA": "persegi panjang",
+          "shapeB": "trapesium sama kaki",
+          "tag": "Keliling Bangun"
+        },
+        "q4": {
+          "instruction": "Jabarkanlah bentuk perkalian berikut menggunakan hukum distributif!",
+          "tag": "Binomial × Binomial"
+        },
+        "q5": {
+          "instruction": "Sederhanakanlah hasil perkalian berikut!",
+          "tag": "Sederhanakan"
+        },
+        "q6": {
+          "instruction": "Tentukan luas persegi panjang berikut dalam bentuk aljabar yang sudah disederhanakan!",
+          "itemA": "Tuliskan luas persegi panjang tersebut sebagai perkalian dua binomial!",
+          "itemB": "Jabarkan dan sederhanakan hasil perkaliannya!",
+          "itemC": "Jika x = 4, hitunglah luas persegi panjang itu dalam satuan cm²!",
+          "tag": "Luas Bangun"
+        },
+        "q7": {
+          "instruction": "Gunakan pola perkalian khusus untuk menjabarkan!",
+          "patternWord": "pola",
+          "tag": "Pola Khusus"
+        },
+        "q8": {
+          "introPre": "Sebuah kebun berbentuk persegi panjang. Panjangnya ",
+          "introBetween": " meter dan lebarnya ",
+          "introEnd": " meter.",
+          "itemA": "Nyatakan luas kebun dalam bentuk aljabar yang telah disederhanakan!",
+          "itemB": "Nyatakan keliling kebun dalam bentuk aljabar yang telah disederhanakan!",
+          "itemC": "Jika n = 5, hitunglah luas dan keliling kebun tersebut!",
+          "tag": "Kontekstual"
+        }
       }
     }
   },

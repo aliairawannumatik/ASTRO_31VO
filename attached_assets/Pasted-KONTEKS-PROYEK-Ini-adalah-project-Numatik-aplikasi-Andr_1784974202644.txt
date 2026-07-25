@@ -1,0 +1,57 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi ini sedang dalam migrasi besar ke sistem trilingual (Bahasa 
+Indonesia, English, Japanese) menggunakan react-i18next dengan 
+useTranslation() dan file locale (id.json, en.json, ja.json). Konten 
+utama "Buku Animasi Matematika" (semua Kelas 7-9) sudah selesai 
+trilingual. Sekarang sedang mengerjakan menu "Tugas-Latihan Mandiri" 
+(practice/assignments) secara bertahap per topik dan sub-halaman.
+
+Progress Tugas-Latihan Mandiri Kelas 7 sejauh ini:
+- Topik "Bilangan Bulat" — selesai (6 sub-halaman)
+- Topik "Pecahan" (Bilangan Rasional) — selesai (10 sub-halaman)
+- Topik "Aljabar" — index page selesai, sub-halaman 1 
+  (PengertianUnsurAljabarPage.tsx) dan 2 
+  (PenjumlahanPenguranganAljabarPage.tsx) selesai
+
+ATURAN PENTING yang harus diikuti:
+- Soal-soal ditulis sebagai komponen JSX inline per soal (const 
+  SoalSatu = () => (...)), BUKAN array data — terjemahkan pakai t() 
+  per bagian teks, atau <Trans> kalau teksnya campur dengan elemen 
+  JSX/rumus di tengah kalimat
+- Reuse translation key yang sudah ada kalau ada teks identik dengan 
+  sub-halaman sebelumnya, jangan duplikat
+- Kalau ada rumus KaTeX dengan \text{} berisi bahasa natural, WAJIB 
+  ganti ke JSX terpisah atau \mathrm{}
+- TypeScript harus tetap 0 error baru (boleh ada error pre-existing 
+  di file lain yang tidak disentuh)
+- Struktur, layout, dan logic lain yang sudah ada JANGAN diubah
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman ke-3 dari topik Aljabar Kelas 7: 
+PerkalianAljabarPage.tsx (8 soal). Halaman ini termasuk kategori 
+"cards di dalam page" (sudah pakai isDark), jadi tinggal langsung 
+tambah useTranslation() ke komponen soal — tidak perlu restrukturisasi 
+seperti sub-halaman 1.
+
+1. Buka file PerkalianAljabarPage.tsx
+2. Ikuti pola yang sudah dipakai di 
+   PenjumlahanPenguranganAljabarPage.tsx untuk menerjemahkan konten 
+   JSX inline
+3. Terjemahkan SEMUA teks di 8 komponen soal: instruksi, teks soal, 
+   pilihan jawaban, pembahasan, dan label tag di cards
+4. Tambahkan translation key yang dibutuhkan ke ketiga file locale 
+   (id, en, ja) di bawah practice.aljabar.perkalian.*
+5. JANGAN sentuh sub-halaman Aljabar lainnya (5 sisanya: 
+   PembagianAljabar, PemangkatanAljabar, SubstitusiBilanganAljabar, 
+   FaktorisasiAljabar, MenyederhanakanPecahanAljabar)
+
+VERIFIKASI:
+- Ambil screenshot halaman ini minimal dalam Bahasa Indonesia
+- Kalau screenshot tool gagal, laporkan dengan jujur validasi teknis 
+  apa saja yang sudah dilakukan

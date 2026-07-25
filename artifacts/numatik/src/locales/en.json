@@ -978,6 +978,52 @@
           "itemA": "Express the total weight of the minibus load (passengers + baggage) in simplified algebraic form!",
           "itemB": "If k = 55, what is the total weight of the minibus load in kg?"
         }
+      },
+      "perkalian": {
+        "pageTitle": "MULTIPLICATION OF ALGEBRAIC EXPRESSIONS",
+        "q1": {
+          "instruction": "Determine the result of multiplying the following terms!",
+          "tag": "Monomial × Monomial"
+        },
+        "q2": {
+          "instruction": "Determine the result of multiplying the following algebraic expressions!",
+          "tag": "Monomial × Polynomial"
+        },
+        "q3": {
+          "instruction": "Determine the perimeter of the following shapes!",
+          "shapeA": "rectangle",
+          "shapeB": "isosceles trapezoid",
+          "tag": "Perimeter"
+        },
+        "q4": {
+          "instruction": "Expand the following products using the distributive law!",
+          "tag": "Binomial × Binomial"
+        },
+        "q5": {
+          "instruction": "Simplify the following products!",
+          "tag": "Simplify"
+        },
+        "q6": {
+          "instruction": "Determine the area of the following rectangle in simplified algebraic form!",
+          "itemA": "Write the area of the rectangle as a product of two binomials!",
+          "itemB": "Expand and simplify the product!",
+          "itemC": "If x = 4, calculate the area of the rectangle in cm²!",
+          "tag": "Area"
+        },
+        "q7": {
+          "instruction": "Use special multiplication patterns to expand!",
+          "patternWord": "pattern",
+          "tag": "Special Patterns"
+        },
+        "q8": {
+          "introPre": "A rectangular garden has a length of ",
+          "introBetween": " metres and a width of ",
+          "introEnd": " metres.",
+          "itemA": "Express the area of the garden in simplified algebraic form!",
+          "itemB": "Express the perimeter of the garden in simplified algebraic form!",
+          "itemC": "If n = 5, calculate the area and perimeter of the garden!",
+          "tag": "Contextual"
+        }
       }
     }
   },
