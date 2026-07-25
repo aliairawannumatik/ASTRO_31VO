@@ -124,6 +124,9 @@ Replace `\text{}` with `\mathrm{}` for units; use interpolated `formulaVar` key 
 - Locale keys under `practice.perbandingan.<subtopicKey>.*`; inject via node script reading/writing JSON.
 - Reference: `PerbandinganUmumPage.tsx` (done July 2026).
 
+## Perbandingan topic — FULLY TRILINGUAL (July 2026)
+All 5 sub-pages + index complete: perbandinganUmum, perbandinganBertingkat, perbandinganSenilai, perbandinganSkala, perbandinganCampuran. All locale keys live under `practice.perbandingan.<subKey>.*` in all 3 files. PerbandinganCampuranPage is the simplest pattern: pure t() only, no InlineMath/Trans/isDark.
+
 ## Translation progress
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.
