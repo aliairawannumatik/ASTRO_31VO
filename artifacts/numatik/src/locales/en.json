@@ -1393,6 +1393,76 @@
             "instruction": "Use the method of <a>multiplying both sides by the LCM</a> of the denominators to find the solution to each equation below!"
           }
         }
+      },
+      "modelMatematikaPLSV": {
+        "title1": "MATHEMATICAL MODELS AND",
+        "title2": "EQUATION APPLICATIONS",
+        "title3": "IN WORD PROBLEMS",
+        "badge": "13 Questions",
+        "tags": {
+          "soalA": "Building a Mathematical Model",
+          "soalB": "Applying Equations to Word Problems"
+        },
+        "qA": {
+          "instruction": "For questions 1 through 4, write the <a>mathematical model</a>!"
+        },
+        "qB": {
+          "instruction": "For the following questions, provide a <a>complete solution</a>!"
+        },
+        "q1": {
+          "text": "The sum of three consecutive <a>even</a> integers is <a>72</a>.",
+          "hintPre": "(Let the first even integer be ",
+          "hintPost": ")."
+        },
+        "q2": {
+          "text": "A <a>ruler</a> costs <a>Rp3,000</a> less than a <a>drawing book</a>. The total price of 5 rulers and 2 drawing books is <a>Rp33,000</a>.",
+          "hintPre": "(Let the price of one drawing book = ",
+          "hintPost": " rupiah)."
+        },
+        "q3": {
+          "text": "<a>Kakak</a> (Elder Sibling) has <a>5 times</a> as much money as <a>Adik</a> (Younger Sibling). Their combined money is <a>Rp180,000</a>.",
+          "hintPre": "(Let Adik's money = ",
+          "hintPost": " rupiah)."
+        },
+        "q4": {
+          "text": "The length of a <a>rectangle</a> is <a>8 cm</a> more than three times its width. The perimeter of the rectangle is <a>64 cm</a>.",
+          "hintPre": "(Let the width of the rectangle = ",
+          "hintPost": " cm)."
+        },
+        "q5": {
+          "text": "The sum of three consecutive <a>odd</a> integers is <a>99</a>.",
+          "subA": "If the first number is n, express the second and third numbers in terms of n!",
+          "subB": "Find all three numbers!"
+        },
+        "q6": {
+          "text": "A <a>tablet</a> costs <a>4 times</a> as much as a <a>speaker</a>. The total price of 3 speakers and 2 tablets is <a>Rp6,600,000</a>.",
+          "hintPre": "(Let the price of one speaker = ",
+          "hintPost": " rupiah.)",
+          "question": "What is the price of one tablet?"
+        },
+        "q7": {
+          "text": "The sum of three integers is <a>84</a>. The first number is <a>twice</a> the second, and the second is <a>5 more than</a> the third. Find each of the three numbers!"
+        },
+        "q8": {
+          "text": "A <a>marker</a> costs <a>Rp4,000</a> more than a <a>ballpoint pen</a>. The total price of 3 markers and 5 ballpoint pens is <a>Rp48,000</a>. What is the price of 2 markers?"
+        },
+        "q9": {
+          "text": "A <a>rectangular</a> board measures <a>40 cm × 25 cm</a>. A strip of width <m/> cm is cut from each side. If the perimeter of the trimmed board is <a>88 cm</a>, find the width of the strip cut off!"
+        },
+        "q10": {
+          "text": "<a>Dani</a>, <a>Eka</a>, and <a>Fani</a> are collecting marbles. Eka collects <a>3 times</a> as many as Fani. The combined total of Dani and Eka equals <a>5 times</a> Fani's marbles. Among the three, who collected the most marbles?"
+        },
+        "q11": {
+          "text": "A <a>swimming pool</a> is rectangular in shape, with its width <a>8 m less</a> than its length. The perimeter of the pool is <a>48 m</a>.",
+          "subA": "Find the length and width of the swimming pool!",
+          "subB": "Find the area of the swimming pool!"
+        },
+        "q12": {
+          "text": "<a>Rian</a>'s current age is <a>25 years younger</a> than his <a>Uncle</a>'s. Ten years from now, the sum of their ages will be <a>65 years</a>. How old are Rian and his Uncle now?"
+        },
+        "q13": {
+          "text": "A merchant has <a>24 coins</a> consisting of <a>Rp1,000</a> and <a>Rp2,000</a> coins. The total value of all coins is <a>Rp37,000</a>. Find the number of each type of coin!"
+        }
       }
     }
   },

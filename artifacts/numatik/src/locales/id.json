@@ -1393,6 +1393,76 @@
             "instruction": "Gunakan cara <a>mengalikan kedua ruas dengan KPK</a> dari penyebut-penyebutnya untuk menentukan penyelesaian setiap persamaan berikut!"
           }
         }
+      },
+      "modelMatematikaPLSV": {
+        "title1": "MODEL MATEMATIKA DAN",
+        "title2": "PENERAPAN PERSAMAAN",
+        "title3": "PADA SOAL CERITA",
+        "badge": "13 Soal",
+        "tags": {
+          "soalA": "Membuat Model Matematika",
+          "soalB": "Penerapan Persamaan pada Soal Cerita"
+        },
+        "qA": {
+          "instruction": "Untuk soal nomor 1 sampai dengan nomor 4, buatlah <a>model matematikanya</a>!"
+        },
+        "qB": {
+          "instruction": "Untuk soal-soal berikut, jawablah dengan <a>selengkapnya</a>!"
+        },
+        "q1": {
+          "text": "Jumlah tiga bilangan bulat <a>genap</a> yang berurutan adalah <a>72</a>.",
+          "hintPre": "(Misalkan bilangan genap pertama adalah ",
+          "hintPost": ")."
+        },
+        "q2": {
+          "text": "Harga sebuah <a>penggaris</a> lebih murah <a>Rp3.000</a> dari harga sebuah <a>buku gambar</a>. Harga 5 penggaris dan 2 buku gambar seluruhnya adalah <a>Rp33.000</a>.",
+          "hintPre": "(Misalkan harga sebuah buku gambar = ",
+          "hintPost": " rupiah)."
+        },
+        "q3": {
+          "text": "Uang <a>Kakak</a> adalah <a>5 kali</a> uang <a>Adik</a>. Jumlah uang Kakak dan Adik adalah <a>Rp180.000</a>.",
+          "hintPre": "(Misalkan uang Adik = ",
+          "hintPost": " rupiah)."
+        },
+        "q4": {
+          "text": "Panjang sebuah <a>persegi panjang</a> lebih <a>8 cm</a> dari tiga kali lebarnya. Keliling persegi panjang tersebut adalah <a>64 cm</a>.",
+          "hintPre": "(Misalkan lebar persegi panjang = ",
+          "hintPost": " cm)."
+        },
+        "q5": {
+          "text": "Jumlah tiga bilangan <a>ganjil</a> yang berurutan adalah <a>99</a>.",
+          "subA": "Jika bilangan pertama adalah n, nyatakan bilangan kedua dan ketiga dalam n!",
+          "subB": "Tentukan bilangan-bilangan tersebut!"
+        },
+        "q6": {
+          "text": "Harga sebuah <a>tablet</a> adalah <a>4 kali</a> harga sebuah <a>speaker</a>. Harga 3 buah speaker dan 2 buah tablet seluruhnya adalah <a>Rp6.600.000</a>.",
+          "hintPre": "(Misalkan harga sebuah speaker = ",
+          "hintPost": " rupiah.)",
+          "question": "Berapakah harga sebuah tablet?"
+        },
+        "q7": {
+          "text": "Jumlah tiga buah bilangan bulat adalah <a>84</a>. Bilangan pertama adalah <a>2 kali</a> bilangan kedua, dan bilangan kedua <a>5 lebihnya</a> dari bilangan ketiga. Tentukan ketiga bilangan tersebut masing-masing!"
+        },
+        "q8": {
+          "text": "Harga sebuah <a>spidol</a> lebih mahal <a>Rp4.000</a> dari harga sebuah <a>pulpen</a>. Harga 3 spidol dan 5 pulpen seluruhnya adalah <a>Rp48.000</a>. Berapakah harga 2 buah spidol?"
+        },
+        "q9": {
+          "text": "Selembar papan berbentuk <a>persegi panjang</a> dengan ukuran <a>40 cm × 25 cm</a>. Bagian tepi papan dipotong selebar <m/> cm dari masing-masing sisi. Jika keliling papan yang sudah dipotong adalah <a>88 cm</a>, tentukan lebar pemotongan yang dilakukan!"
+        },
+        "q10": {
+          "text": "<a>Dani</a>, <a>Eka</a>, dan <a>Fani</a> mengumpulkan kelereng. Eka mengumpulkan <a>3 kali</a> kelereng Fani. Jumlah kelereng Dani dan Eka adalah <a>5 kali</a> kelereng Fani. Di antara mereka bertiga, siapakah yang mengumpulkan kelereng paling banyak?"
+        },
+        "q11": {
+          "text": "Sebuah <a>kolam renang</a> berbentuk persegi panjang dengan ukuran lebarnya <a>8 m kurang</a> dari panjangnya. Keliling kolam tersebut adalah <a>48 m</a>.",
+          "subA": "Tentukan panjang dan lebar kolam renang tersebut!",
+          "subB": "Tentukan luas kolam renang tersebut!"
+        },
+        "q12": {
+          "text": "Umur <a>Rian</a> sekarang <a>25 tahun lebih muda</a> dari umur <a>Pamannya</a>. Sepuluh tahun yang akan datang, jumlah umur keduanya adalah <a>65 tahun</a>. Berapa umur Paman dan Rian sekarang?"
+        },
+        "q13": {
+          "text": "Seorang pedagang memiliki <a>24 keping</a> uang logam yang terdiri dari koin <a>Rp1.000</a> dan koin <a>Rp2.000</a>. Nilai total seluruh uang logam tersebut adalah <a>Rp37.000</a>. Tentukan banyak masing-masing koin!"
+        }
       }
     }
   },
