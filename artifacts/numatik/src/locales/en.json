@@ -482,5 +482,47 @@
     "desktopDesc": "Open <link>www.numatik.app</link> on your laptop or PC for a wider display and a better learning experience.",
     "copyright": "Eighth Edition · © 2026 NUMATIK. All rights reserved.",
     "backToMenu": "← Back to Menu"
+  },
+  "biografi": {
+    "pageTitle": "DEVELOPER BIOGRAPHY",
+    "labelNama": "NAME",
+    "labelNegara": "COUNTRY",
+    "labelWebsite": "WEBSITE",
+    "labelSosmed": "Follow Me on Social Media:",
+    "labelPesan": "MESSAGE FROM THE DEVELOPER",
+    "pesanSubtitle": "🌍 To All Students Around the World",
+    "pesanIsi": "\"Hello, amazing students around the world! I designed this app especially to make mathematics feel more approachable and friendly for all of you. Remember — no one is ever 'bad' at math; there are only those who haven't practiced enough yet. Happy exploring, and don't be afraid to make mistakes — because mistakes are how we truly learn!\"",
+    "labelKritikSaran": "FEEDBACK",
+    "kritikPlaceholder": "Write your feedback here...",
+    "kirimEmail": "📨 Send via Email",
+    "kirimKe": "Will be sent to: numatik.app@gmail.com",
+    "ucapanTerimakasih": "Acknowledgements",
+    "kembali": "← Back to Menu",
+    "kelompokA2": {
+      "badge": "First Inspiration · Guru Penggerak Cohort 10",
+      "fasilitator": "Facilitator",
+      "pembimbing": "Mentor (Teaching Practitioner)",
+      "anggota": "Members & Colleagues",
+      "paragraf1": "My deepest gratitude goes to <orange>Kelompok A2 Guru Penggerak Angkatan 10</orange> — an extraordinary group that became the <amber>very first spark of inspiration</amber> behind the creation of NUMATIK.",
+      "kutipan": "\"From one small group brimming with passion and purpose, an app was born — with the hope of inspiring thousands of learners.\"",
+      "motto": "\"Moved, Moving, and Moving Others\"",
+      "tag1": "🌱 First Inspiration",
+      "tag2": "🔥 Drive & Spirit",
+      "tag3": "🤝 Togetherness",
+      "tag4": "🏆 Guru Penggerak",
+      "footer": "THANK YOU, KELOMPOK A2 GURU PENGGERAK ANGKATAN 10"
+    },
+    "wandri": {
+      "badge": "Inspiring Teacher · ICT Mentor",
+      "paragraf1": "My sincerest gratitude goes to <cyan>Bapak Wandri, S.Pd., Gr.</cyan> — a colleague and mentor who, with wholehearted dedication, patience, and generosity, opened up a whole new world of knowledge in <accent>Information and Communication Technology</accent>.",
+      "paragraf2": "He patiently taught me <cyan>coding</cyan> from scratch, and played a pivotal role in laying down and building the <accent>initial framework of NUMATIK</accent> — the very foundation that still supports this app today.",
+      "paragraf3": "The knowledge, insights, and spirit he shared are the very pillars upon which <primary>NUMATIK</primary> was built.",
+      "kutipan": "\"A true teacher is not only one who imparts knowledge, but one who ignites the flame of passion within their students.\"",
+      "tag1": "💡 Inspiration",
+      "tag2": "🤝 Collaboration",
+      "tag3": "📚 ICT Knowledge",
+      "tag4": "🌟 Dedication",
+      "footer": "THANK YOU SO MUCH, PAK WANDRI"
+    }
   }
 }

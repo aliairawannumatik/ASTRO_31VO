@@ -482,5 +482,47 @@
     "desktopDesc": "ノートパソコンまたはPCで<link>www.numatik.app</link>を開くと、より広い画面でより充実した学習体験ができます。",
     "copyright": "第8版 · © 2026 NUMATIK. All rights reserved.",
     "backToMenu": "← メニューに戻る"
+  },
+  "biografi": {
+    "pageTitle": "開発者プロフィール",
+    "labelNama": "氏名",
+    "labelNegara": "国",
+    "labelWebsite": "ウェブサイト",
+    "labelSosmed": "SNSをフォロー：",
+    "labelPesan": "開発者からのメッセージ",
+    "pesanSubtitle": "🌍 世界中の生徒たちへ",
+    "pesanIsi": "「世界中の素晴らしい生徒たちへ。このアプリは、数学がもっと身近で親しみやすいものに感じられるよう、特別に設計しました。覚えておいてください——数学が『苦手』な人など、いません。まだ十分に練習していないだけです。さあ、探索を楽しんで、間違いを恐れないで。なぜなら、間違いこそが本当の学びの始まりだから！」",
+    "labelKritikSaran": "ご意見・ご感想",
+    "kritikPlaceholder": "こちらにご意見をお書きください...",
+    "kirimEmail": "📨 メールで送信",
+    "kirimKe": "送信先：numatik.app@gmail.com",
+    "ucapanTerimakasih": "謝辞",
+    "kembali": "← メニューに戻る",
+    "kelompokA2": {
+      "badge": "最初のインスピレーション · Guru Penggerak 第10期",
+      "fasilitator": "ファシリテーター",
+      "pembimbing": "指導者（実践教師）",
+      "anggota": "メンバー・同僚",
+      "paragraf1": "<orange>Kelompok A2 Guru Penggerak Angkatan 10</orange> の皆さんに、心より感謝申し上げます。このグループは、NUMATIKが誕生するきっかけとなった<amber>最初のインスピレーション</amber>を与えてくれた、素晴らしい仲間たちです。",
+      "kutipan": "「情熱に満ちたひとつの小さなグループから、何千もの学習者を励ますことを願って、このアプリは生まれました。」",
+      "motto": "「動かされ、動き、そして動かす」",
+      "tag1": "🌱 最初のインスピレーション",
+      "tag2": "🔥 情熱と活力",
+      "tag3": "🤝 絆と協力",
+      "tag4": "🏆 Guru Penggerak",
+      "footer": "ありがとう、KELOMPOK A2 GURU PENGGERAK ANGKATAN 10"
+    },
+    "wandri": {
+      "badge": "心の師 · ICTメンター",
+      "paragraf1": "<cyan>Bapak Wandri, S.Pd., Gr.</cyan> 先生に、心より感謝申し上げます。先生は同僚でありながら真の師として、惜しみない献身・忍耐・誠実さをもって、<accent>情報通信技術</accent>という新しい知識の世界への扉を開いてくださいました。",
+      "paragraf2": "先生はゼロから<cyan>コーディング</cyan>を辛抱強く教えてくださり、<accent>NUMATIKの初期フレームワーク</accent>の設計と構築においても大きな力を貸してくださいました。その基盤は、今もこのアプリを支え続けています。",
+      "paragraf3": "先生が分かち合ってくださった知識・洞察・情熱が、<primary>NUMATIK</primary>を生み出す確かな礎となりました。",
+      "kutipan": "「真の教師とは、知識を教えるだけでなく、弟子の心の中に情熱の炎を灯す人のことである。」",
+      "tag1": "💡 インスピレーション",
+      "tag2": "🤝 コラボレーション",
+      "tag3": "📚 ICT知識",
+      "tag4": "🌟 献身",
+      "footer": "本当にありがとうございます、PAK WANDRI"
+    }
   }
 }

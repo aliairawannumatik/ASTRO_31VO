@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { User } from "lucide-react";
@@ -8,6 +9,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 const BiografiPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { theme } = useTheme();
   const isWhite = theme === "white";
   const [pesan, setPesan] = useState("");
@@ -23,7 +25,7 @@ const BiografiPage = () => {
       <div className="relative z-10 max-w-2xl w-full px-4 py-10 text-center">
         <User className="w-12 h-12 text-primary mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-6">
-          BIOGRAFI PEMBUAT
+          {t("biografi.pageTitle")}
         </h1>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-8 space-y-4 mb-8">
@@ -36,19 +38,15 @@ const BiografiPage = () => {
 
           <div className="space-y-3 text-left">
             <div>
-              <p className="text-primary font-display text-xs mb-1">NAMA</p>
+              <p className="text-primary font-display text-xs mb-1">{t("biografi.labelNama")}</p>
               <p className="text-white font-body text-sm">Irawan Sutiawan, M.Pd</p>
             </div>
             <div>
-              <p className="text-primary font-display text-xs mb-1">MATA PELAJARAN</p>
-              <p className="text-white font-body text-sm">Matematika</p>
-            </div>
-            <div>
-              <p className="text-primary font-display text-xs mb-1">NEGARA</p>
+              <p className="text-primary font-display text-xs mb-1">{t("biografi.labelNegara")}</p>
               <p className="text-white font-body text-sm">Indonesia</p>
             </div>
             <div>
-              <p className="text-primary font-display text-xs mb-1">WEBSITE</p>
+              <p className="text-primary font-display text-xs mb-1">{t("biografi.labelWebsite")}</p>
               <a
                 href="https://www.numatik.app"
                 target="_blank"
@@ -59,31 +57,33 @@ const BiografiPage = () => {
               </a>
             </div>
             <div>
-              <p className="text-primary font-display text-xs mb-1">Follow My Medsos :</p>
+              <p className="text-primary font-display text-xs mb-1">{t("biografi.labelSosmed")}</p>
               <div className="space-y-2 mt-2">
                 <p className="font-body text-sm text-white">Instagram : @irawansutiawan.one</p>
                 <p className="font-body text-sm text-white">Instagram : @numatik_official</p>
-                <p className="font-body text-sm text-white">Youtube : @Pojok_Matematika</p>
+                <p className="font-body text-sm text-white">Youtube : @numatik_official</p>
                 <p className="font-body text-sm text-white">Tiktok : Pojok_Matematika</p>
               </div>
             </div>
             <div>
-              <p className="text-primary font-display text-xs mb-2">PESAN DARI PEMBUAT</p>
+              <p className="text-primary font-display text-xs mb-2">{t("biografi.labelPesan")}</p>
               <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-400/30 rounded-xl p-4 space-y-2">
-                <p className="text-cyan-300 font-display text-xs font-bold tracking-widest uppercase mb-2">🌍 Untuk Seluruh Siswa di Pelosok Dunia</p>
+                <p className="text-cyan-300 font-display text-xs font-bold tracking-widest uppercase mb-2">
+                  {t("biografi.pesanSubtitle")}
+                </p>
                 <p className="text-white/85 font-body text-sm leading-relaxed text-justify italic">
-                  "Halo Siswa-siswi hebat di seluruh dunia, Aplikasi ini Bapak rancang khusus agar matematika terasa lebih dekat dan bersahabat dengan kalian. Ingat, tidak ada orang yang 'bodoh' dalam matematika, yang ada hanyalah orang yang belum cukup berlatih. Selamat menjelajah, jangan takut salah, karena dari salahlah kita belajar!"
+                  {t("biografi.pesanIsi")}
                 </p>
                 <p className="text-cyan-400/70 font-display text-xs font-bold text-right">— Irawan Sutiawan, M.Pd</p>
               </div>
             </div>
             <div>
-              <p className="text-primary font-display text-xs mb-2">KRITIK &amp; SARAN</p>
+              <p className="text-primary font-display text-xs mb-2">{t("biografi.labelKritikSaran")}</p>
               <div className="space-y-2">
                 <textarea
                   className="w-full bg-white/5 border border-border rounded-lg p-3 text-white/90 font-body text-sm resize-none focus:outline-none focus:border-primary/60 placeholder:text-white/30"
                   rows={4}
-                  placeholder="Tulis kritik atau saranmu di sini..."
+                  placeholder={t("biografi.kritikPlaceholder")}
                   value={pesan}
                   onChange={(e) => setPesan(e.target.value)}
                 />
@@ -95,9 +95,9 @@ const BiografiPage = () => {
                   disabled={!pesan.trim()}
                   className="w-full py-2 rounded-lg bg-primary/80 hover:bg-primary disabled:opacity-40 disabled:cursor-not-allowed text-white font-display text-sm font-bold transition-colors"
                 >
-                  📨 Kirim via Email
+                  {t("biografi.kirimEmail")}
                 </button>
-                <p className="text-white/40 font-body text-[11px] text-center">Akan dikirim ke: numatik.app@gmail.com</p>
+                <p className="text-white/40 font-body text-[11px] text-center">{t("biografi.kirimKe")}</p>
               </div>
             </div>
           </div>
@@ -107,7 +107,9 @@ const BiografiPage = () => {
         <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500/10 via-amber-400/10 to-yellow-500/10 border border-yellow-400/30 rounded-full px-5 py-1.5">
             <span className="text-yellow-300 text-sm">✦</span>
-            <p className="text-yellow-300 font-display text-xs font-bold tracking-widest uppercase">Ucapan Terima Kasih</p>
+            <p className="text-yellow-300 font-display text-xs font-bold tracking-widest uppercase">
+              {t("biografi.ucapanTerimakasih")}
+            </p>
             <span className="text-yellow-300 text-sm">✦</span>
           </div>
         </div>
@@ -128,13 +130,17 @@ const BiografiPage = () => {
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-400/40 rounded-full px-4 py-0.5 mb-2">
-                  <p className="text-orange-300 font-body text-[10px] font-bold tracking-widest uppercase">Inspirasi Pertama · Guru Penggerak Angkatan 10</p>
+                  <p className="text-orange-300 font-body text-[10px] font-bold tracking-widest uppercase">
+                    {t("biografi.kelompokA2.badge")}
+                  </p>
                 </div>
                 <h3 className="font-display text-xl font-black text-white text-center drop-shadow-[0_0_10px_rgba(251,146,60,0.6)]">Kelompok A2 Guru Penggerak</h3>
                 <p className="text-white/50 font-body text-xs mt-0.5 text-center">Angkatan 10 · Kota Bandung</p>
 
                 <div className="w-full mt-4 mb-2">
-                  <p className="text-orange-300/70 font-display text-[10px] font-bold tracking-widest uppercase text-center mb-2">Fasilitator</p>
+                  <p className="text-orange-300/70 font-display text-[10px] font-bold tracking-widest uppercase text-center mb-2">
+                    {t("biografi.kelompokA2.fasilitator")}
+                  </p>
                   <div className="flex justify-center">
                     <div className="flex items-center gap-2.5 bg-orange-500/10 border border-orange-400/25 rounded-xl px-4 py-2">
                       <span className="text-orange-400 text-base shrink-0">⭐</span>
@@ -144,7 +150,9 @@ const BiografiPage = () => {
                 </div>
 
                 <div className="w-full mt-4 mb-2">
-                  <p className="text-orange-300/70 font-display text-[10px] font-bold tracking-widest uppercase text-center mb-2">Pembimbing (Pengajar Praktik)</p>
+                  <p className="text-orange-300/70 font-display text-[10px] font-bold tracking-widest uppercase text-center mb-2">
+                    {t("biografi.kelompokA2.pembimbing")}
+                  </p>
                   <div className="flex justify-center">
                     <div className="flex items-center gap-2.5 bg-orange-500/10 border border-orange-400/25 rounded-xl px-4 py-2">
                       <span className="text-orange-400 text-base shrink-0">⭐</span>
@@ -154,7 +162,9 @@ const BiografiPage = () => {
                 </div>
 
                 <div className="w-full mt-3">
-                  <p className="text-orange-300/70 font-display text-[10px] font-bold tracking-widest uppercase text-center mb-2">Anggota &amp; Rekan</p>
+                  <p className="text-orange-300/70 font-display text-[10px] font-bold tracking-widest uppercase text-center mb-2">
+                    {t("biografi.kelompokA2.anggota")}
+                  </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {["Deni Nugraha, S.Pd","Cheri Indrayana, S.Pd","Nurhayanti Retnamasari, S.Pd","Erlita Fujiawati Akbari, S.Pd","Sri Aryati Handayani, S.Pd"].map((nama) => (
                       <div key={nama} className="flex items-center gap-2.5 bg-amber-500/8 border border-amber-400/20 rounded-xl px-3 py-2">
@@ -170,10 +180,16 @@ const BiografiPage = () => {
 
               <div className="relative z-10 space-y-3 text-center px-2">
                 <p className="text-white/90 font-body text-sm leading-relaxed text-justify">
-                  Terima kasih yang sebesar-besarnya kepada <strong className="text-orange-300">Kelompok A2 Guru Penggerak Angkatan 10</strong> — kelompok luar biasa yang menjadi <strong className="text-amber-300">inspirasi pertama</strong> lahirnya aplikasi NUMATIK.
+                  <Trans
+                    i18nKey="biografi.kelompokA2.paragraf1"
+                    components={{
+                      orange: <strong className="text-orange-300" />,
+                      amber: <strong className="text-amber-300" />,
+                    }}
+                  />
                 </p>
                 <p className="text-white/70 font-body text-sm leading-relaxed text-justify italic">
-                  "Dari satu kelompok kecil yang penuh semangat bergerak, lahirlah sebuah aplikasi yang berharap bisa menggerakkan ribuan pelajar."
+                  {t("biografi.kelompokA2.kutipan")}
                 </p>
                 <div className="relative py-4">
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -191,16 +207,20 @@ const BiografiPage = () => {
                       filter: "drop-shadow(0 0 12px rgba(251,146,60,0.9)) drop-shadow(0 0 28px rgba(251,191,36,0.6))",
                       letterSpacing: "0.12em",
                     }}>
-                    "Tergerak, Bergerak, dan Menggerakkan"
+                    {t("biografi.kelompokA2.motto")}
                   </p>
                 </div>
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
-                  {["🌱 Inspirasi Pertama", "🔥 Semangat Bergerak", "🤝 Kebersamaan", "🏆 Guru Penggerak"].map((item) => (
-                    <span key={item} className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-white/60 font-body text-[11px]">{item}</span>
+                  {(["tag1", "tag2", "tag3", "tag4"] as const).map((key) => (
+                    <span key={key} className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-white/60 font-body text-[11px]">
+                      {t(`biografi.kelompokA2.${key}`)}
+                    </span>
                   ))}
                 </div>
                 <div className="pt-3">
-                  <p className="text-orange-300/80 font-display text-xs font-bold tracking-widest">✦ &nbsp; TERIMA KASIH, KELOMPOK A2 GURU PENGGERAK ANGKATAN 10 &nbsp; ✦</p>
+                  <p className="text-orange-300/80 font-display text-xs font-bold tracking-widest">
+                    ✦ &nbsp; {t("biografi.kelompokA2.footer")} &nbsp; ✦
+                  </p>
                 </div>
               </div>
             </div>
@@ -223,7 +243,9 @@ const BiografiPage = () => {
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-400/40 rounded-full px-4 py-0.5 mb-2">
-                  <p className="text-cyan-300 font-body text-[10px] font-bold tracking-widest uppercase">Guru Inspiratif · Mentor IT</p>
+                  <p className="text-cyan-300 font-body text-[10px] font-bold tracking-widest uppercase">
+                    {t("biografi.wandri.badge")}
+                  </p>
                 </div>
                 <h3 className="font-display text-xl font-black text-white text-center drop-shadow-[0_0_10px_rgba(139,92,246,0.6)]">Bapak Wandri, S.Pd., Gr.</h3>
                 <p className="text-white/50 font-body text-xs mt-0.5 text-center">SMP Santa Maria · Kota Bandung</p>
@@ -233,24 +255,45 @@ const BiografiPage = () => {
 
               <div className="relative z-10 space-y-3 text-center px-2">
                 <p className="text-white/90 font-body text-sm leading-relaxed text-justify">
-                  Terima kasih yang sebesar-besarnya saya haturkan kepada <strong className="text-cyan-300">Bapak Wandri, S.Pd., Gr.</strong> — sosok rekan sekaligus guru yang dengan penuh dedikasi, kesabaran, dan keikhlasan telah membuka cakrawala pengetahuan di bidang <strong className="text-accent">Teknologi Informasi dan Komunikasi</strong>.
+                  <Trans
+                    i18nKey="biografi.wandri.paragraf1"
+                    components={{
+                      cyan: <strong className="text-cyan-300" />,
+                      accent: <strong className="text-accent" />,
+                    }}
+                  />
                 </p>
                 <p className="text-white/80 font-body text-sm leading-relaxed text-justify">
-                  Beliau adalah sosok yang dengan sabar mengajarkan <strong className="text-cyan-300">coding</strong> dari nol, sekaligus membantu dalam menyusun dan membangun <strong className="text-accent">kerangka awal aplikasi NUMATIK</strong> — fondasi yang hingga kini menjadi tulang punggung aplikasi ini.
+                  <Trans
+                    i18nKey="biografi.wandri.paragraf2"
+                    components={{
+                      cyan: <strong className="text-cyan-300" />,
+                      accent: <strong className="text-accent" />,
+                    }}
+                  />
                 </p>
                 <p className="text-white/80 font-body text-sm leading-relaxed text-justify">
-                  Ilmu, wawasan, dan semangat yang Bapak bagikan menjadi fondasi nyata lahirnya aplikasi <strong className="text-primary">NUMATIK</strong> ini.
+                  <Trans
+                    i18nKey="biografi.wandri.paragraf3"
+                    components={{
+                      primary: <strong className="text-primary" />,
+                    }}
+                  />
                 </p>
                 <p className="text-white/70 font-body text-sm leading-relaxed text-justify italic">
-                  "Guru sejati bukan hanya yang mengajarkan ilmu, melainkan yang menyalakan cahaya semangat di dalam diri muridnya."
+                  {t("biografi.wandri.kutipan")}
                 </p>
                 <div className="flex flex-wrap justify-center gap-2 pt-2">
-                  {["💡 Inspirasi", "🤝 Kolaborasi", "📚 Ilmu TIK", "🌟 Dedikasi"].map((item) => (
-                    <span key={item} className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-white/60 font-body text-[11px]">{item}</span>
+                  {(["tag1", "tag2", "tag3", "tag4"] as const).map((key) => (
+                    <span key={key} className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-white/60 font-body text-[11px]">
+                      {t(`biografi.wandri.${key}`)}
+                    </span>
                   ))}
                 </div>
                 <div className="pt-3">
-                  <p className="text-yellow-300/80 font-display text-xs font-bold tracking-widest">✦ &nbsp; TERIMA KASIH SEBESAR-BESARNYA, PAK WANDRI &nbsp; ✦</p>
+                  <p className="text-yellow-300/80 font-display text-xs font-bold tracking-widest">
+                    ✦ &nbsp; {t("biografi.wandri.footer")} &nbsp; ✦
+                  </p>
                 </div>
               </div>
             </div>
@@ -260,7 +303,7 @@ const BiografiPage = () => {
         <button
           onClick={() => { playPopSound(); navigate("/menu"); }}
           className="mt-2 mb-8 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
-          ← Kembali ke Menu
+          {t("biografi.kembali")}
         </button>
       </div>
     </div>
