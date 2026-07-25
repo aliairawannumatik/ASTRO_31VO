@@ -472,6 +472,41 @@
           "instruction": "A tanker truck carries enough petrol to fill 36 large canisters and 48 small canisters. Each large canister holds <f1/> litres and each small canister holds <f2/> litres. How many litres of petrol are in the tanker truck?"
         }
       },
+      "pembagianPecahan": {
+        "pageTitle1": "DIVISION OF FRACTIONS",
+        "pageTitle2": "AND THEIR PROPERTIES",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "8 Essay Questions",
+        "calcInstruction": "Calculate the result of the following fraction operations!",
+        "tags": {
+          "q1": "Simplification",
+          "q2": "Mixed Operations",
+          "q3": "Contextual",
+          "q4": "Contextual",
+          "q5": "Contextual",
+          "q6": "Contextual",
+          "q7": "Multiplication & Division",
+          "q8": "Complex Operations"
+        },
+        "q1": {
+          "instruction": "Simplify the following fraction divisions!"
+        },
+        "q3": {
+          "instruction": "The product of two numbers is 15. If one of the numbers is <f1/>, find the other number!"
+        },
+        "q4": {
+          "instruction": "A rectangular garden plot has an area of <f1/> m². If the length of the garden is <f2/> m, find the width!"
+        },
+        "q5": {
+          "instruction": "A warehouse stores 72 kg of rice to be distributed to several families. Each family receives <f1/> kg of rice. How many families can receive a share of the rice?"
+        },
+        "q6": {
+          "instruction": "Fence posts are to be placed along a 360-metre riverbank. The distance between two fence posts is <f1/> metres. How many fence posts are needed?"
+        },
+        "q7": {
+          "instruction": "Simplify the following fraction multiplications and divisions!"
+        }
+      },
       "pecahanCampuran": {
         "pageTitle1": "MIXED FRACTIONS AND PERCENTAGES",
         "pageTitle2": "AND DECIMAL FORM",

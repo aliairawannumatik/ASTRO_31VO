@@ -472,6 +472,41 @@
           "instruction": "Sebuah truk tangki berisi bensin yang cukup untuk mengisi 36 jeriken besar dan 48 jeriken kecil. Setiap jeriken besar memuat <f1/> liter dan setiap jeriken kecil memuat <f2/> liter. Berapa liter banyak bensin yang terdapat dalam truk tangki tersebut?"
         }
       },
+      "pembagianPecahan": {
+        "pageTitle1": "PEMBAGIAN PECAHAN",
+        "pageTitle2": "DAN SIFAT OPERASINYA",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "8 Soal Essay",
+        "calcInstruction": "Hitunglah hasil operasi pecahan berikut!",
+        "tags": {
+          "q1": "Penyederhanaan",
+          "q2": "Operasi Campuran",
+          "q3": "Kontekstual",
+          "q4": "Kontekstual",
+          "q5": "Kontekstual",
+          "q6": "Kontekstual",
+          "q7": "Perkalian & Pembagian",
+          "q8": "Operasi Kompleks"
+        },
+        "q1": {
+          "instruction": "Sederhanakan pembagian pecahan berikut!"
+        },
+        "q3": {
+          "instruction": "Hasil kali dua bilangan adalah 15. Jika salah satu bilangannya adalah <f1/>, tentukan bilangan yang lain!"
+        },
+        "q4": {
+          "instruction": "Diketahui luas sebidang kebun berbentuk persegi panjang adalah <f1/> m². Jika panjang kebun tersebut <f2/> m, tentukan lebarnya!"
+        },
+        "q5": {
+          "instruction": "Sebuah gudang menyimpan 72 kg beras untuk didistribusikan ke beberapa keluarga. Setiap keluarga mendapat <f1/> kg beras. Berapa keluarga yang dapat menerima jatah beras tersebut?"
+        },
+        "q6": {
+          "instruction": "Di sepanjang tepi sungai yang panjangnya 360 meter akan dipasangi tiang pagar. Jarak antara dua buah tiang pagar adalah <f1/> meter. Berapa banyak tiang pagar yang diperlukan untuk kebutuhan tersebut?"
+        },
+        "q7": {
+          "instruction": "Sederhanakan perkalian dan pembagian pecahan-pecahan berikut!"
+        }
+      },
       "pecahanCampuran": {
         "pageTitle1": "PECAHAN CAMPURAN DAN PERSEN",
         "pageTitle2": "SERTA BENTUK DESIMAL",
