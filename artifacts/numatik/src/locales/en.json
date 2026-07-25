@@ -785,6 +785,55 @@
           "instruction": "Observe the decimal multiplication pattern below, then complete the missing rows!",
           "patternNote": "What pattern do you notice from the decimal point shift in each row?"
         }
+      },
+      "pembagianDesimal": {
+        "pageTitle": "DECIMAL DIVISION",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "8 Essay Questions",
+        "tags": {
+          "q1": "Powers of 10",
+          "q2": "Divide & Pattern",
+          "q3": "Mixed Operations",
+          "q4": "Find the Number",
+          "q5": "Geometry",
+          "q6": "Word Problem",
+          "q7": "Contextual",
+          "q8": "Pattern"
+        },
+        "q1": {
+          "instructionPre": "Divide each decimal number below by",
+          "instructionMid": "and",
+          "instructionPost": "!"
+        },
+        "q2": {
+          "instructionPre": "Divide each number below by",
+          "instructionMid": ", then also determine its quotient when divided by",
+          "instructionMid2": "and",
+          "instructionPost": "!"
+        },
+        "q3": {
+          "instruction": "Find the result of each mixed operation below!"
+        },
+        "q4": {
+          "instruction": "The product of two decimal numbers is <s>32.856</s>. If the first number is <m/>, what is the second number?"
+        },
+        "q5": {
+          "instructionPre": "The area of a rectangle is",
+          "instructionMid": "and its length is",
+          "instructionPost": ". Find the width of the rectangle!"
+        },
+        "q6": {
+          "instruction": "A ribbon roll is <s>2.16 m</s> long. It is cut into equal-length pieces with a remainder of <s>6 cm</s>. How many pieces can be cut if each piece is longer than <m/>?",
+          "svgRemainder": "rem."
+        },
+        "q7": {
+          "instruction": "A truck uses <s>0.085 litres</s> of fuel for every kilometre travelled. If the truck has a fuel reserve of <s>6.375 litres</s>, how many kilometres can it travel?",
+          "formulaVar": "dist"
+        },
+        "q8": {
+          "instruction": "Observe the decimal division pattern below, then complete the missing rows!",
+          "patternNote": "What pattern do you notice from the decimal point shift in each row?"
+        }
       }
     }
   },

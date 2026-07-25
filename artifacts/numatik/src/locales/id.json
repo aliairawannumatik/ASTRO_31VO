@@ -785,6 +785,55 @@
           "instruction": "Perhatikan pola perkalian desimal berikut, lalu lengkapi baris yang kosong!",
           "patternNote": "Apa pola yang kamu temukan dari geser titik desimal di setiap baris?"
         }
+      },
+      "pembagianDesimal": {
+        "pageTitle": "PEMBAGIAN DESIMAL",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "8 Soal Essay",
+        "tags": {
+          "q1": "Pangkat 10",
+          "q2": "Bagi & Pola",
+          "q3": "Operasi Campuran",
+          "q4": "Mencari Bilangan",
+          "q5": "Geometri",
+          "q6": "Soal Cerita",
+          "q7": "Kontekstual",
+          "q8": "Pola"
+        },
+        "q1": {
+          "instructionPre": "Bagilah setiap bilangan desimal berikut dengan",
+          "instructionMid": "dan",
+          "instructionPost": "!"
+        },
+        "q2": {
+          "instructionPre": "Bagilah setiap bilangan berikut dengan",
+          "instructionMid": ", kemudian tentukan juga hasil baginya dengan",
+          "instructionMid2": "dan",
+          "instructionPost": "!"
+        },
+        "q3": {
+          "instruction": "Tentukan hasil operasi campuran berikut!"
+        },
+        "q4": {
+          "instruction": "Hasil kali dua bilangan desimal adalah <s>32,856</s>. Jika bilangan yang pertama adalah <m/>, berapakah bilangan yang kedua?"
+        },
+        "q5": {
+          "instructionPre": "Luas sebuah persegi panjang adalah",
+          "instructionMid": "dan panjangnya",
+          "instructionPost": ". Tentukanlah lebar persegi panjang tersebut!"
+        },
+        "q6": {
+          "instruction": "Sebuah rol pita memiliki panjang <s>2,16 m</s>. Pita tersebut dipotong menjadi beberapa bagian yang sama panjang sehingga masih tersisa <s>6 cm</s>. Berapa banyak potongan pita yang dapat dibuat jika setiap potongan lebih dari <m/>?",
+          "svgRemainder": "sisa"
+        },
+        "q7": {
+          "instruction": "Sebuah truk menghabiskan <s>0,085 liter</s> bensin untuk setiap kilometer perjalanan. Jika truk tersebut memiliki cadangan bensin <s>6,375 liter</s>, berapa kilometer jarak yang dapat ditempuh truk itu?",
+          "formulaVar": "jarak"
+        },
+        "q8": {
+          "instruction": "Perhatikan pola pembagian desimal berikut, lalu lengkapi baris yang kosong!",
+          "patternNote": "Apa pola yang kamu temukan dari pergeseran titik desimal pada setiap baris?"
+        }
       }
     }
   },

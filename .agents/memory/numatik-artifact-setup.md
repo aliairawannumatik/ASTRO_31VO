@@ -79,6 +79,13 @@ Add under `practice.<topicKey>` in all 3 locale files:
 - Bright face-color fills (#ef4444, #eab308, #3b82f6, etc.) are fine on both themes.
 - `stroke="rgba(255,255,255,0.5)"` on bright-colored rotating 3D polygons is intentional (BalokPage same pattern).
 
+## Soal 7 formula var pattern
+When a KaTeX formula contains a language-specific word (e.g. `\text{jarak}`), use a locale key for the word and interpolate it into the math string:
+```tsx
+<InlineMath math={`\\mathrm{${t('...q7.formulaVar')}} = ...`} />
+```
+Replace `\text{}` with `\mathrm{}` for units; use interpolated `formulaVar` key for natural-language variable names.
+
 ## Translation progress
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.
