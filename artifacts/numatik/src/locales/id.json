@@ -524,5 +524,14 @@
       "tag4": "🌟 Dedikasi",
       "footer": "TERIMA KASIH SEBESAR-BESARNYA, PAK WANDRI"
     }
+  },
+  "donasi": {
+    "pageTitle": "DONASI",
+    "subtitle": "Ayo dukung agar aplikasinya lebih berkembang",
+    "desc": "Dukungan Anda sangat berarti untuk pengembangan aplikasi NUMATIK agar semakin bermanfaat bagi siswa-siswi di seluruh Dunia. 💙",
+    "bankNotice": "Rekening Bank dari Negara Indonesia",
+    "rekeningLabel": "REKENING DONASI",
+    "thankyou": "Terima kasih atas dukungannya! 🙏",
+    "kembali": "← Kembali ke Menu"
   }
 }

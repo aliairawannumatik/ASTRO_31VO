@@ -524,5 +524,14 @@
       "tag4": "🌟 献身",
       "footer": "本当にありがとうございます、PAK WANDRI"
     }
+  },
+  "donasi": {
+    "pageTitle": "寄付",
+    "subtitle": "アプリの成長を応援してください",
+    "desc": "皆さまのご支援は、NUMATIKのさらなる発展と、世界中の生徒たちへの貢献に、大きな力となります。💙",
+    "bankNotice": "インドネシアの銀行口座",
+    "rekeningLabel": "寄付口座",
+    "thankyou": "ご支援、誠にありがとうございます！🙏",
+    "kembali": "← メニューに戻る"
   }
 }
