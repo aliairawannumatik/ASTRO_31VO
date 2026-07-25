@@ -1231,6 +1231,28 @@
           "itemCMid": "と",
           "itemCEnd": "を使いなさい）"
         }
+      },
+      "menyederhanakanPecahan": {
+        "pageTitle": "代数分数の簡略化",
+        "soalTotal": "記述式20問",
+        "tags": {
+          "monomial": "単項式 & GCF  (1–6)",
+          "binomial": "二項式 & 2乗  (7–12)",
+          "duaVar1": "2変数  (13–16)",
+          "duaVar2": "2変数  (17–20)"
+        },
+        "q1": {
+          "instruction": "次の代数分数を簡略化しなさい！"
+        },
+        "q2": {
+          "instruction": "まず因数分解してから次の分数を簡略化しなさい！"
+        },
+        "q3": {
+          "instruction": "次の代数分数を簡略化しなさい！"
+        },
+        "q4": {
+          "instruction": "次の2変数分数の簡略化を続けなさい！"
+        }
       }
     }
   },

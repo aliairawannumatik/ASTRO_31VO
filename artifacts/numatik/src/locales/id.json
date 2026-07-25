@@ -1231,6 +1231,28 @@
           "itemCMid": "dan",
           "itemCEnd": ")"
         }
+      },
+      "menyederhanakanPecahan": {
+        "pageTitle": "MENYEDERHANAKAN PECAHAN ALJABAR",
+        "soalTotal": "20 Soal Essay",
+        "tags": {
+          "monomial": "Monomial & GCF  (1–6)",
+          "binomial": "Binomial & Kuadrat  (7–12)",
+          "duaVar1": "Dua Variabel  (13–16)",
+          "duaVar2": "Dua Variabel  (17–20)"
+        },
+        "q1": {
+          "instruction": "Sederhanakan pecahan-pecahan aljabar berikut!"
+        },
+        "q2": {
+          "instruction": "Sederhanakan pecahan berikut dengan memfaktorkan terlebih dahulu!"
+        },
+        "q3": {
+          "instruction": "Sederhanakanlah pecahan-pecahan aljabar berikut!"
+        },
+        "q4": {
+          "instruction": "Lanjutkan penyederhanaan pecahan dua variabel berikut!"
+        }
       }
     }
   },

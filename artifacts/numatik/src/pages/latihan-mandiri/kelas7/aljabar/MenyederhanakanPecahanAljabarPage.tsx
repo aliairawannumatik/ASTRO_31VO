@@ -26,133 +26,149 @@ const Frac = ({ math }: { math: string }) => (
 );
 
 /* ── Soal 1 ── Monomial & GCF (1–6) ──────────────────── */
-const SoalSatu = () => (
-  <div className="space-y-3">
-    <p className="font-body text-sm text-white/90 leading-relaxed">
-      Sederhanakan pecahan-pecahan aljabar berikut!
-    </p>
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pl-1">
-      {[
-        { l: "1",  expr: "\\dfrac{c^3}{pc^2}" },
-        { l: "2",  expr: "\\dfrac{xy + xz}{x}" },
-        { l: "3",  expr: "\\dfrac{8m^2 - 4mn}{4m}" },
-        { l: "4",  expr: "\\dfrac{18a^3 - 12a}{6a}" },
-        { l: "5",  expr: "\\dfrac{-6p}{9p^2 + 3pq}" },
-        { l: "6",  expr: "\\dfrac{3xy}{6x^2y - 9xy^2}" },
-      ].map(({ l, expr }) => (
-        <div key={l} className="flex flex-col items-center gap-1.5 bg-orange-500/5 border border-orange-500/10 rounded-xl px-3 py-3">
-          <SubLabel letter={l} color="bg-orange-500/30 text-orange-300 border border-orange-400/40" />
-          <Frac math={expr} />
-          <span className="text-white/20 text-xs font-body">= …</span>
-        </div>
-      ))}
+const SoalSatu = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-3">
+      <p className="font-body text-sm text-white/90 leading-relaxed">
+        {t('practice.aljabar.menyederhanakanPecahan.q1.instruction')}
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pl-1">
+        {[
+          { l: "1",  expr: "\\dfrac{c^3}{pc^2}" },
+          { l: "2",  expr: "\\dfrac{xy + xz}{x}" },
+          { l: "3",  expr: "\\dfrac{8m^2 - 4mn}{4m}" },
+          { l: "4",  expr: "\\dfrac{18a^3 - 12a}{6a}" },
+          { l: "5",  expr: "\\dfrac{-6p}{9p^2 + 3pq}" },
+          { l: "6",  expr: "\\dfrac{3xy}{6x^2y - 9xy^2}" },
+        ].map(({ l, expr }) => (
+          <div key={l} className="flex flex-col items-center gap-1.5 bg-orange-500/5 border border-orange-500/10 rounded-xl px-3 py-3">
+            <SubLabel letter={l} color="bg-orange-500/30 text-orange-300 border border-orange-400/40" />
+            <Frac math={expr} />
+            <span className="text-white/20 text-xs font-body">= …</span>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* ── Soal 2 ── Binomial & Selisih Kuadrat (7–12) ─────── */
-const SoalDua = () => (
-  <div className="space-y-3">
-    <p className="font-body text-sm text-white/90 leading-relaxed">
-      Sederhanakan pecahan berikut dengan memfaktorkan terlebih dahulu!
-    </p>
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pl-1">
-      {[
-        { l: "7",  expr: "\\dfrac{6p - 6q}{p^2 - pq}" },
-        { l: "8",  expr: "\\dfrac{m^2 + mn}{mp + np}" },
-        { l: "9",  expr: "\\dfrac{x - y}{x^2 - y^2}" },
-        { l: "10", expr: "\\dfrac{9x^2 - 4}{3x + 2}" },
-        { l: "11", expr: "\\dfrac{x + 5}{x^2 + 7x + 10}" },
-        { l: "12", expr: "\\dfrac{x^2 + x - 30}{x - 5}" },
-      ].map(({ l, expr }) => (
-        <div key={l} className="flex flex-col items-center gap-1.5 bg-amber-500/5 border border-amber-500/10 rounded-xl px-3 py-3">
-          <SubLabel letter={l} color="bg-amber-500/20 text-amber-300 border border-amber-400/30" />
-          <Frac math={expr} />
-          <span className="text-white/20 text-xs font-body">= …</span>
-        </div>
-      ))}
+const SoalDua = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-3">
+      <p className="font-body text-sm text-white/90 leading-relaxed">
+        {t('practice.aljabar.menyederhanakanPecahan.q2.instruction')}
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pl-1">
+        {[
+          { l: "7",  expr: "\\dfrac{6p - 6q}{p^2 - pq}" },
+          { l: "8",  expr: "\\dfrac{m^2 + mn}{mp + np}" },
+          { l: "9",  expr: "\\dfrac{x - y}{x^2 - y^2}" },
+          { l: "10", expr: "\\dfrac{9x^2 - 4}{3x + 2}" },
+          { l: "11", expr: "\\dfrac{x + 5}{x^2 + 7x + 10}" },
+          { l: "12", expr: "\\dfrac{x^2 + x - 30}{x - 5}" },
+        ].map(({ l, expr }) => (
+          <div key={l} className="flex flex-col items-center gap-1.5 bg-amber-500/5 border border-amber-500/10 rounded-xl px-3 py-3">
+            <SubLabel letter={l} color="bg-amber-500/20 text-amber-300 border border-amber-400/30" />
+            <Frac math={expr} />
+            <span className="text-white/20 text-xs font-body">= …</span>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* ── Soal 3 ── Dua Variabel Bagian 1 (13–16) ─────────── */
-const SoalTiga = () => (
-  <div className="space-y-3">
-    <p className="font-body text-sm text-white/90 leading-relaxed">
-      Sederhanakanlah pecahan-pecahan aljabar berikut!
-    </p>
-    <div className="grid grid-cols-2 gap-3 pl-1">
-      {[
-        { l: "13", expr: "\\dfrac{m^2 - 9n^2}{m - 3n}" },
-        { l: "14", expr: "\\dfrac{a^2 - ab}{a^2 - b^2}" },
-        { l: "15", expr: "\\dfrac{x^2 + 2xy}{x^2 + 3xy + 2y^2}" },
-        { l: "16", expr: "\\dfrac{x^2 - 7xy + 12y^2}{x^2 - 9y^2}" },
-      ].map(({ l, expr }) => (
-        <div key={l} className="flex flex-col items-center gap-1.5 bg-violet-500/5 border border-violet-500/10 rounded-xl px-3 py-3">
-          <SubLabel letter={l} color="bg-violet-500/20 text-violet-300 border border-violet-400/30" />
-          <Frac math={expr} />
-          <span className="text-white/20 text-xs font-body">= …</span>
-        </div>
-      ))}
+const SoalTiga = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-3">
+      <p className="font-body text-sm text-white/90 leading-relaxed">
+        {t('practice.aljabar.menyederhanakanPecahan.q3.instruction')}
+      </p>
+      <div className="grid grid-cols-2 gap-3 pl-1">
+        {[
+          { l: "13", expr: "\\dfrac{m^2 - 9n^2}{m - 3n}" },
+          { l: "14", expr: "\\dfrac{a^2 - ab}{a^2 - b^2}" },
+          { l: "15", expr: "\\dfrac{x^2 + 2xy}{x^2 + 3xy + 2y^2}" },
+          { l: "16", expr: "\\dfrac{x^2 - 7xy + 12y^2}{x^2 - 9y^2}" },
+        ].map(({ l, expr }) => (
+          <div key={l} className="flex flex-col items-center gap-1.5 bg-violet-500/5 border border-violet-500/10 rounded-xl px-3 py-3">
+            <SubLabel letter={l} color="bg-violet-500/20 text-violet-300 border border-violet-400/30" />
+            <Frac math={expr} />
+            <span className="text-white/20 text-xs font-body">= …</span>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /* ── Soal 4 ── Dua Variabel Bagian 2 (17–20) ─────────── */
-const SoalEmpat = () => (
-  <div className="space-y-3">
-    <p className="font-body text-sm text-white/90 leading-relaxed">
-      Lanjutkan penyederhanaan pecahan dua variabel berikut!
-    </p>
-    <div className="grid grid-cols-2 gap-3 pl-1">
-      {[
-        { l: "17", expr: "\\dfrac{x^2 - 4y^2}{x^2 + 3xy - 10y^2}" },
-        { l: "18", expr: "\\dfrac{3x^2 + 5xy - 2y^2}{x^2 - 4y^2}" },
-        { l: "19", expr: "\\dfrac{2x^2 + 3xy - 2y^2}{4x^2 - y^2}" },
-        { l: "20", expr: "\\dfrac{4x^2 - 9y^2}{2x^2 - xy - 6y^2}" },
-      ].map(({ l, expr }) => (
-        <div key={l} className="flex flex-col items-center gap-1.5 bg-rose-500/5 border border-rose-500/10 rounded-xl px-3 py-3">
-          <SubLabel letter={l} color="bg-rose-500/20 text-rose-300 border border-rose-400/30" />
-          <Frac math={expr} />
-          <span className="text-white/20 text-xs font-body">= …</span>
-        </div>
-      ))}
+const SoalEmpat = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-3">
+      <p className="font-body text-sm text-white/90 leading-relaxed">
+        {t('practice.aljabar.menyederhanakanPecahan.q4.instruction')}
+      </p>
+      <div className="grid grid-cols-2 gap-3 pl-1">
+        {[
+          { l: "17", expr: "\\dfrac{x^2 - 4y^2}{x^2 + 3xy - 10y^2}" },
+          { l: "18", expr: "\\dfrac{3x^2 + 5xy - 2y^2}{x^2 - 4y^2}" },
+          { l: "19", expr: "\\dfrac{2x^2 + 3xy - 2y^2}{4x^2 - y^2}" },
+          { l: "20", expr: "\\dfrac{4x^2 - 9y^2}{2x^2 - xy - 6y^2}" },
+        ].map(({ l, expr }) => (
+          <div key={l} className="flex flex-col items-center gap-1.5 bg-rose-500/5 border border-rose-500/10 rounded-xl px-3 py-3">
+            <SubLabel letter={l} color="bg-rose-500/20 text-rose-300 border border-rose-400/30" />
+            <Frac math={expr} />
+            <span className="text-white/20 text-xs font-body">= …</span>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
-
-/* ── Card config ──────────────────────────────────────── */
-const cards = [
-  {
-    num: 1, tag: "Monomial & GCF  (1–6)", tagColor: "bg-orange-500/20 text-orange-300 border-orange-400/40",
-    gradient: "from-orange-900/50 to-amber-900/30", border: "border-orange-500/25",
-    bar: "from-orange-400 to-amber-500", numBg: "bg-orange-500/30 text-orange-200",
-    custom: <SoalSatu />,
-  },
-  {
-    num: 2, tag: "Binomial & Kuadrat  (7–12)", tagColor: "bg-amber-500/20 text-amber-300 border-amber-400/40",
-    gradient: "from-amber-900/40 to-yellow-900/25", border: "border-amber-500/25",
-    bar: "from-amber-400 to-yellow-500", numBg: "bg-amber-500/30 text-amber-200",
-    custom: <SoalDua />,
-  },
-  {
-    num: 3, tag: "Dua Variabel  (13–16)", tagColor: "bg-violet-500/20 text-violet-300 border-violet-400/40",
-    gradient: "from-violet-900/40 to-purple-900/25", border: "border-violet-500/25",
-    bar: "from-violet-400 to-purple-500", numBg: "bg-violet-500/30 text-violet-200",
-    custom: <SoalTiga />,
-  },
-  {
-    num: 4, tag: "Dua Variabel  (17–20)", tagColor: "bg-rose-500/20 text-rose-300 border-rose-400/40",
-    gradient: "from-rose-900/40 to-pink-900/25", border: "border-rose-500/25",
-    bar: "from-rose-400 to-pink-500", numBg: "bg-rose-500/30 text-rose-200",
-    custom: <SoalEmpat />,
-  },
-];
+  );
+};
 
 /* ── Page ─────────────────────────────────────────────── */
 const MenyederhanakanPecahanAljabarPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  /* ── Card config (inside component so t() is available) ── */
+  const cards = [
+    {
+      num: 1, tag: t('practice.aljabar.menyederhanakanPecahan.tags.monomial'),
+      tagColor: "bg-orange-500/20 text-orange-300 border-orange-400/40",
+      gradient: "from-orange-900/50 to-amber-900/30", border: "border-orange-500/25",
+      bar: "from-orange-400 to-amber-500", numBg: "bg-orange-500/30 text-orange-200",
+      custom: <SoalSatu />,
+    },
+    {
+      num: 2, tag: t('practice.aljabar.menyederhanakanPecahan.tags.binomial'),
+      tagColor: "bg-amber-500/20 text-amber-300 border-amber-400/40",
+      gradient: "from-amber-900/40 to-yellow-900/25", border: "border-amber-500/25",
+      bar: "from-amber-400 to-yellow-500", numBg: "bg-amber-500/30 text-amber-200",
+      custom: <SoalDua />,
+    },
+    {
+      num: 3, tag: t('practice.aljabar.menyederhanakanPecahan.tags.duaVar1'),
+      tagColor: "bg-violet-500/20 text-violet-300 border-violet-400/40",
+      gradient: "from-violet-900/40 to-purple-900/25", border: "border-violet-500/25",
+      bar: "from-violet-400 to-purple-500", numBg: "bg-violet-500/30 text-violet-200",
+      custom: <SoalTiga />,
+    },
+    {
+      num: 4, tag: t('practice.aljabar.menyederhanakanPecahan.tags.duaVar2'),
+      tagColor: "bg-rose-500/20 text-rose-300 border-rose-400/40",
+      gradient: "from-rose-900/40 to-pink-900/25", border: "border-rose-500/25",
+      bar: "from-rose-400 to-pink-500", numBg: "bg-rose-500/30 text-rose-200",
+      custom: <SoalEmpat />,
+    },
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -170,11 +186,13 @@ const MenyederhanakanPecahanAljabarPage = () => {
             className="font-display text-xl md:text-2xl font-bold text-white text-center mb-1 leading-tight"
             style={{ textShadow: '0 0 32px rgba(251,146,60,0.5)' }}
           >
-            MENYEDERHANAKAN PECAHAN ALJABAR
+            {t('practice.aljabar.menyederhanakanPecahan.pageTitle')}
           </h1>
           <p className="text-white/40 text-xs text-center font-body mt-2">Kelas 7 · Aljabar · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-2 mt-3">
-            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">20 Soal Essay</span>
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 font-body">
+              {t('practice.aljabar.menyederhanakanPecahan.soalTotal')}
+            </span>
             <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-orange-500/10 border border-orange-400/20 text-orange-400 font-body">✦ Kelas 7</span>
           </div>
         </div>

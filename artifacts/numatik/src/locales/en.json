@@ -1231,6 +1231,28 @@
           "itemCMid": "and",
           "itemCEnd": ")"
         }
+      },
+      "menyederhanakanPecahan": {
+        "pageTitle": "SIMPLIFYING ALGEBRAIC FRACTIONS",
+        "soalTotal": "20 Essay Problems",
+        "tags": {
+          "monomial": "Monomial & GCF  (1–6)",
+          "binomial": "Binomial & Squares  (7–12)",
+          "duaVar1": "Two Variables  (13–16)",
+          "duaVar2": "Two Variables  (17–20)"
+        },
+        "q1": {
+          "instruction": "Simplify the following algebraic fractions!"
+        },
+        "q2": {
+          "instruction": "Simplify the following fractions by factoring first!"
+        },
+        "q3": {
+          "instruction": "Simplify the following algebraic fractions!"
+        },
+        "q4": {
+          "instruction": "Continue simplifying the following two-variable fractions!"
+        }
       }
     }
   },
