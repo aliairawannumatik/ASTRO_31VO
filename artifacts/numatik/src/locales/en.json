@@ -664,6 +664,74 @@
           "itemB": "The length of Java's coastline compared to the total coastline length of all of Indonesia.",
           "itemC": "The land area of Kalimantan Island compared to the total land area of all of Indonesia."
         }
+      },
+      "penjumlahanDesimal": {
+        "pageTitle1": "ADDITION AND SUBTRACTION OF",
+        "pageTitle2": "DECIMAL NUMBERS",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "8 Essay Questions",
+        "tags": {
+          "q1": "Addition",
+          "q2": "Subtraction",
+          "q3": "Mixed Operations",
+          "q4": "Exploration",
+          "q5": "Fill in the Blanks",
+          "q6": "Find n",
+          "q7": "Contextual",
+          "q8": "Investigation"
+        },
+        "q1": {
+          "instruction": "Calculate the sum of the following decimal numbers!",
+          "items": {
+            "a": "7.43 and 15.6",
+            "b": "124.8 and 53.07",
+            "c": "2.34; 11.9; and 5.08",
+            "d": "62.5; 14.37; and 3.208"
+          }
+        },
+        "q2": {
+          "instruction": "Calculate the difference of the following decimal numbers!",
+          "items": {
+            "a": "27.54 minus 13.8",
+            "b": "8.005 minus 3.47",
+            "c": "50.3 minus 22.68",
+            "d": "100 minus 34.275"
+          }
+        },
+        "q3": {
+          "instruction": "Solve the following mixed addition and subtraction of decimals!"
+        },
+        "q4": {
+          "instruction": "Using the digits <strong>2, 5, 7, 4,</strong> and <strong>9</strong>, form a decimal number with two decimal places where each digit is used exactly once.",
+          "items": {
+            "a": "Find the largest decimal number that can be formed!",
+            "b": "Find the smallest decimal number that can be formed!",
+            "c": "Calculate the difference between the largest and smallest decimal numbers!"
+          }
+        },
+        "q5": {
+          "instruction": "Fill in the blanks with the correct decimal number!"
+        },
+        "q6": {
+          "instructionPre": "Find the value of",
+          "instructionPost": "that satisfies the following equation!"
+        },
+        "q7": {
+          "instruction": "Solve the following word problems!",
+          "items": {
+            "a": "A rope is 8.5 metres long. It is cut by 3.75 metres to make a net. Then a new piece of rope 2.4 metres long is attached. How long is the rope now?",
+            "b": "The temperature at a mountain peak in the morning is −2.8°C. Towards noon the temperature rises by 7.35°C, but at night it drops by 5.6°C. What is the temperature at night?",
+            "c": "A bucket contains 15.6 litres of water. 4.75 litres are taken out for washing, then 3.2 litres are added. How many litres of water are in the bucket now?"
+          }
+        },
+        "q8": {
+          "instruction": "Take measurements or collect data, then solve using addition and subtraction of decimals!",
+          "items": {
+            "a": "Measure the length of your study desk, the width of your bedroom window, and the height of your chair (in metres). Calculate the sum and difference of any two measurements!",
+            "b": "Record the prices of three foods you buy today (in tens of thousands of rupiah). Express them as decimals, then calculate the total spending and the change from Rp50,000!",
+            "c": "Look at the weather report for your city over the last 3 days. Record the highest and lowest temperature each day. Calculate the average difference between the highest and lowest temperatures!"
+          }
+        }
       }
     }
   },

@@ -664,6 +664,74 @@
           "itemB": "Panjang garis pantai Pulau Jawa terhadap total panjang garis pantai seluruh Indonesia.",
           "itemC": "Luas daratan Pulau Kalimantan terhadap total luas daratan seluruh wilayah Indonesia."
         }
+      },
+      "penjumlahanDesimal": {
+        "pageTitle1": "PENJUMLAHAN DAN PENGURANGAN",
+        "pageTitle2": "BENTUK DESIMAL",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "8 Soal Essay",
+        "tags": {
+          "q1": "Penjumlahan",
+          "q2": "Pengurangan",
+          "q3": "Operasi Campuran",
+          "q4": "Eksplorasi",
+          "q5": "Melengkapi",
+          "q6": "Nilai n",
+          "q7": "Kontekstual",
+          "q8": "Investigasi"
+        },
+        "q1": {
+          "instruction": "Hitunglah jumlah bilangan-bilangan desimal berikut!",
+          "items": {
+            "a": "7,43 dan 15,6",
+            "b": "124,8 dan 53,07",
+            "c": "2,34; 11,9; dan 5,08",
+            "d": "62,5; 14,37; dan 3,208"
+          }
+        },
+        "q2": {
+          "instruction": "Hitunglah selisih bilangan-bilangan desimal berikut!",
+          "items": {
+            "a": "27,54 dikurangi 13,8",
+            "b": "8,005 dikurangi 3,47",
+            "c": "50,3 dikurangi 22,68",
+            "d": "100 dikurangi 34,275"
+          }
+        },
+        "q3": {
+          "instruction": "Selesaikan operasi campuran penjumlahan dan pengurangan desimal berikut!"
+        },
+        "q4": {
+          "instruction": "Dari angka-angka <strong>2, 5, 7, 4,</strong> dan <strong>9</strong> dibuat bilangan desimal dua angka di belakang koma dengan setiap angka digunakan tepat satu kali.",
+          "items": {
+            "a": "Tentukan bilangan desimal terbesar yang dapat dibentuk!",
+            "b": "Tentukan bilangan desimal terkecil yang dapat dibentuk!",
+            "c": "Hitunglah selisih antara bilangan desimal terbesar dan terkecil tersebut!"
+          }
+        },
+        "q5": {
+          "instruction": "Isilah titik-titik berikut dengan bilangan desimal yang tepat!"
+        },
+        "q6": {
+          "instructionPre": "Tentukan nilai",
+          "instructionPost": "yang memenuhi persamaan berikut!"
+        },
+        "q7": {
+          "instruction": "Selesaikan soal cerita berikut!",
+          "items": {
+            "a": "Sebuah tali memiliki panjang 8,5 meter. Tali itu dipotong sepanjang 3,75 meter untuk membuat jaring. Kemudian disambung lagi tali baru sepanjang 2,4 meter. Berapa meter panjang tali sekarang?",
+            "b": "Suhu di puncak gunung pada pagi hari adalah −2,8°C. Menjelang siang suhu naik 7,35°C, namun pada malam hari turun kembali 5,6°C. Berapakah suhu pada malam hari?",
+            "c": "Sebuah ember berisi 15,6 liter air. Diambil 4,75 liter untuk mencuci, lalu diisi lagi 3,2 liter. Berapa liter air yang ada di dalam ember sekarang?"
+          }
+        },
+        "q8": {
+          "instruction": "Lakukan pengukuran atau pencarian data, lalu selesaikan dengan operasi penjumlahan dan pengurangan desimal!",
+          "items": {
+            "a": "Ukurlah panjang meja belajarmu, lebar jendela kamarmu, dan tinggi kursimu (dalam meter). Hitunglah jumlah dan selisih dari dua pengukuran mana saja!",
+            "b": "Catat harga tiga makanan yang kamu beli hari ini (dalam puluhan ribu rupiah). Nyatakan dalam desimal, lalu hitung total pengeluaran dan kembaliannya dari uang Rp50.000!",
+            "c": "Lihat laporan cuaca di kotamu selama 3 hari terakhir. Catat suhu tertinggi dan terendah setiap hari. Hitunglah selisih suhu tertinggi dan terendah rata-ratanya!"
+          }
+        }
       }
     }
   },
