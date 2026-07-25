@@ -834,6 +834,56 @@
           "instruction": "Perhatikan pola pembagian desimal berikut, lalu lengkapi baris yang kosong!",
           "patternNote": "Apa pola yang kamu temukan dari pergeseran titik desimal pada setiap baris?"
         }
+      },
+      "pembulatanDesimal": {
+        "pageTitle": "PEMBULATAN DESIMAL",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "8 Soal Essay",
+        "tags": {
+          "q1": "1 Desimal",
+          "q2": "2 Desimal",
+          "q3": "Berbagai Tempat",
+          "q4": "Pecahan → Desimal",
+          "q5": "Satuan Terdekat",
+          "q6": "Taksiran Kali",
+          "q7": "Taksiran Bagi",
+          "q8": "Taksiran Luas"
+        },
+        "q1": {
+          "instruction": "Bulatkanlah setiap bilangan berikut sampai <s>satu desimal</s>!"
+        },
+        "q2": {
+          "instruction": "Bulatkanlah setiap bilangan berikut sampai <s>dua desimal</s>!"
+        },
+        "q3": {
+          "instructionPre": "Bulatkanlah bilangan",
+          "instructionPost": "sampai:",
+          "items": {
+            "three": "tiga desimal",
+            "two": "dua desimal",
+            "one": "satu desimal"
+          }
+        },
+        "q4": {
+          "instructionPre": "Nyatakan",
+          "instructionPost": "sebagai pecahan desimal sampai:",
+          "items": {
+            "two": "dua desimal",
+            "three": "tiga desimal"
+          }
+        },
+        "q5": {
+          "instruction": "Bulatkanlah bilangan-bilangan berikut ke <s>satuan terdekat</s>!"
+        },
+        "q6": {
+          "instruction": "Tentukan <s>taksiran</s> hasil perkalian bilangan-bilangan berikut (bulatkan setiap faktor ke satuan terdekat terlebih dahulu)!"
+        },
+        "q7": {
+          "instruction": "Tentukan <s>taksiran</s> hasil pembagian berikut!"
+        },
+        "q8": {
+          "instruction": "Sebuah lapangan berbentuk persegi panjang berukuran panjang <m1/> dan lebar <m2/>. Tentukan <s>taksiran luas</s> lapangan tersebut dengan cara membulatkan panjang dan lebar ke satuan terdekat!"
+        }
       }
     }
   },

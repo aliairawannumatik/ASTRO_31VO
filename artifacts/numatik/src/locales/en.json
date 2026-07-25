@@ -834,6 +834,56 @@
           "instruction": "Observe the decimal division pattern below, then complete the missing rows!",
           "patternNote": "What pattern do you notice from the decimal point shift in each row?"
         }
+      },
+      "pembulatanDesimal": {
+        "pageTitle": "ROUNDING DECIMALS",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "8 Essay Questions",
+        "tags": {
+          "q1": "1 Decimal Place",
+          "q2": "2 Decimal Places",
+          "q3": "Multiple Places",
+          "q4": "Fraction → Decimal",
+          "q5": "Nearest Whole",
+          "q6": "Estimated Product",
+          "q7": "Estimated Quotient",
+          "q8": "Estimated Area"
+        },
+        "q1": {
+          "instruction": "Round each number below to <s>one decimal place</s>!"
+        },
+        "q2": {
+          "instruction": "Round each number below to <s>two decimal places</s>!"
+        },
+        "q3": {
+          "instructionPre": "Round",
+          "instructionPost": "to:",
+          "items": {
+            "three": "three decimal places",
+            "two": "two decimal places",
+            "one": "one decimal place"
+          }
+        },
+        "q4": {
+          "instructionPre": "Express",
+          "instructionPost": "as a decimal, rounded to:",
+          "items": {
+            "two": "two decimal places",
+            "three": "three decimal places"
+          }
+        },
+        "q5": {
+          "instruction": "Round each number below to the <s>nearest whole number</s>!"
+        },
+        "q6": {
+          "instruction": "Find the <s>estimated product</s> for each pair of numbers below (round each factor to the nearest whole number first)!"
+        },
+        "q7": {
+          "instruction": "Find the <s>estimated quotient</s> for each of the following!"
+        },
+        "q8": {
+          "instruction": "A rectangular field measures <m1/> long and <m2/> wide. Find the <s>estimated area</s> of the field by rounding the length and width to the nearest whole number!"
+        }
       }
     }
   },
