@@ -413,6 +413,63 @@
         "pembagianDesimal": "PEMBAGIAN BENTUK DESIMAL",
         "pembulatanDesimal": "PEMBULATAN BENTUK DESIMAL"
       },
+      "pecahanCampuran": {
+        "pageTitle1": "PECAHAN CAMPURAN DAN PERSEN",
+        "pageTitle2": "SERTA BENTUK DESIMAL",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "10 Soal Essay",
+        "tags": {
+          "q1": "Pecahan Campuran",
+          "q2": "Pecahan Biasa",
+          "q3": "Nilai Pecahan",
+          "q4": "Membandingkan",
+          "q5": "Kontekstual",
+          "q6": "Persen → Pecahan",
+          "q7": "Pecahan → Persen",
+          "q8": "Nilai Persen",
+          "q9": "Kontekstual",
+          "q10": "Kontekstual"
+        },
+        "q1": {
+          "instruction": "Nyatakan bilangan-bilangan berikut sebagai pecahan campuran!"
+        },
+        "q2": {
+          "instruction": "Nyatakan bilangan-bilangan berikut sebagai pecahan biasa!"
+        },
+        "q3": {
+          "instruction": "Tentukan nilai-nilai berikut!",
+          "itemA": "dari Rp4.800",
+          "itemB": "dari 1 jam (dalam menit)",
+          "itemC": "dari 1 kg (dalam ons)",
+          "itemD": "dari 16 liter (dalam mL)"
+        },
+        "q4": {
+          "itemA": "Manakah yang lebih berat, <frac1/> dari 24 kg atau <frac2/> dari 32 kg?",
+          "itemB": "Berapa kg perbedaannya?"
+        },
+        "q5": {
+          "instruction": "Susu full cream mengandung <frac/> bagian lemak susu murni. Tentukan banyak lemak susu murni yang terdapat dalam kadar berikut!",
+          "itemA": "480 gram susu full cream",
+          "itemB": "720 gram susu full cream"
+        },
+        "q6": {
+          "instruction": "Nyatakan persen berikut sebagai pecahan biasa dalam bentuk yang paling sederhana!"
+        },
+        "q7": {
+          "instruction": "Nyatakan bilangan-bilangan berikut dalam bentuk persen!"
+        },
+        "q8": {
+          "instruction": "Tentukan nilai-nilai berikut!",
+          "itemA": "8% dari Rp75.000",
+          "itemBSuffix": "dari 60 kg"
+        },
+        "q9": {
+          "instruction": "Banyak siswa dalam suatu kelas adalah 50 orang, dengan 36%-nya adalah siswa laki-laki. Berapa banyak siswa perempuan di kelas itu?"
+        },
+        "q10": {
+          "instruction": "Harga sebuah tas sekolah 35% lebih mahal dari harga kotak pensil seharga Rp60.000. Hitunglah harga tas sekolah tersebut!"
+        }
+      },
       "artiSenilai": {
         "pageTitle1": "ARTI PECAHAN, PECAHAN SENILAI",
         "pageTitle2": "DAN MEMBANDINGKAN PECAHAN",

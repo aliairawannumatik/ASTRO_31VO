@@ -413,6 +413,63 @@
         "pembagianDesimal": "DIVISION OF DECIMALS",
         "pembulatanDesimal": "ROUNDING DECIMALS"
       },
+      "pecahanCampuran": {
+        "pageTitle1": "MIXED FRACTIONS AND PERCENTAGES",
+        "pageTitle2": "AND DECIMAL FORM",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "10 Essay Questions",
+        "tags": {
+          "q1": "Mixed Fractions",
+          "q2": "Improper Fractions",
+          "q3": "Fraction of a Quantity",
+          "q4": "Comparing",
+          "q5": "Contextual",
+          "q6": "Percent → Fraction",
+          "q7": "Fraction → Percent",
+          "q8": "Percentage Value",
+          "q9": "Contextual",
+          "q10": "Contextual"
+        },
+        "q1": {
+          "instruction": "Express each of the following as a mixed fraction!"
+        },
+        "q2": {
+          "instruction": "Express each of the following as an improper fraction!"
+        },
+        "q3": {
+          "instruction": "Find each of the following values!",
+          "itemA": "of Rp4,800",
+          "itemB": "of 1 hour (in minutes)",
+          "itemC": "of 1 kg (in ounces)",
+          "itemD": "of 16 litres (in mL)"
+        },
+        "q4": {
+          "itemA": "Which is heavier, <frac1/> of 24 kg or <frac2/> of 32 kg?",
+          "itemB": "What is the difference in kg?"
+        },
+        "q5": {
+          "instruction": "Full cream milk contains <frac/> of pure milk fat. Find the amount of pure milk fat in each of the following!",
+          "itemA": "480 grams of full cream milk",
+          "itemB": "720 grams of full cream milk"
+        },
+        "q6": {
+          "instruction": "Express each percentage below as a fraction in its simplest form!"
+        },
+        "q7": {
+          "instruction": "Express each of the following numbers as a percentage!"
+        },
+        "q8": {
+          "instruction": "Find each of the following values!",
+          "itemA": "8% of Rp75,000",
+          "itemBSuffix": "of 60 kg"
+        },
+        "q9": {
+          "instruction": "A class has 50 students, 36% of whom are male. How many female students are in the class?"
+        },
+        "q10": {
+          "instruction": "The price of a school bag is 35% more expensive than a pencil case priced at Rp60,000. Calculate the price of the school bag!"
+        }
+      },
       "artiSenilai": {
         "pageTitle1": "FRACTIONS: MEANING & EQUIVALENT",
         "pageTitle2": "AND COMPARING FRACTIONS",
