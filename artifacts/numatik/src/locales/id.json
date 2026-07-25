@@ -1747,6 +1747,56 @@
           "pre": "Hasil panen buah mangga, jeruk, dan apel di sebuah perkebunan memiliki perbandingan ",
           "post": ". Jika diketahui selisih berat panen buah apel dan buah mangga adalah 450 kg, tentukanlah total keseluruhan berat hasil panen ketiga buah tersebut!"
         }
+      },
+      "perbandinganBertingkat": {
+        "title": "PERBANDINGAN BERTINGKAT",
+        "pageSubtitle": "Kelas 7 · Perbandingan · Latihan Mandiri",
+        "instruction": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Perbandingan",
+        "q1": {
+          "pre": "Perbandingan uang Rian dan Sandi adalah ",
+          "mid": ", sedangkan perbandingan uang Sandi dan Tedi adalah ",
+          "post": ". Jika jumlah uang ketiganya adalah Rp200.000, tentukan uang masing-masing!"
+        },
+        "q2": {
+          "pre": "Perbandingan bola merah : bola biru = ",
+          "mid": ", dan perbandingan bola biru : bola hijau = ",
+          "post": ". Jika selisih bola merah dan bola hijau adalah 14 butir, tentukan banyak bola biru!"
+        },
+        "q3": {
+          "pre": "Tabungan Pita : Qiran = ",
+          "mid": " dan tabungan Qiran : Rina = ",
+          "post": ". Jika tabungan Pita adalah Rp30.000, berapa tabungan Rina?"
+        },
+        "q4": {
+          "pre": "Perbandingan tinggi badan Aldi : Bima = ",
+          "mid": " dan Bima : Ciko = ",
+          "post": ". Jika jumlah tinggi badan Aldi dan Ciko adalah 150 cm, tentukan tinggi badan Bima!"
+        },
+        "q5": {
+          "pre": "Perbandingan nilai ujian Rara : Sita = ",
+          "mid": " dan Sita : Tara = ",
+          "intro": ". Diketahui jumlah nilai ketiganya adalah 310. Tentukan:",
+          "a": "a. Nilai masing-masing",
+          "b": "b. Selisih nilai Tara dan Rara"
+        },
+        "q6": {
+          "pre": "Modal usaha Ari : Bowo = ",
+          "mid": " dan Bowo : Candra = ",
+          "post": ". Jika selisih modal Ari dan Candra adalah Rp49.000, tentukan total modal ketiganya!"
+        },
+        "q7": {
+          "pre": "Perbandingan panjang tiga buah tongkat A, B, dan C diketahui sebagai berikut: A : B = ",
+          "mid": " dan B : C = ",
+          "post": ". Jika total panjang ketiga tongkat tersebut adalah 70 cm, berapa panjang tongkat A dan C masing-masing?"
+        },
+        "q8": {
+          "pre": "Perbandingan kelereng Fani : Gita = ",
+          "mid": " dan kelereng Gita : Hana = ",
+          "intro": ". Jika kelereng Gita berjumlah 21 butir, tentukan:",
+          "a": "a. Kelereng Fani dan Hana masing-masing",
+          "b": "b. Jumlah kelereng ketiganya"
+        }
       }
     }
   },

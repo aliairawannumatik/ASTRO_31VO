@@ -1747,6 +1747,56 @@
           "pre": "The harvest of mangoes, oranges, and apples in an orchard is in the ratio ",
           "post": ". If the difference in weight between the apple harvest and the mango harvest is 450 kg, find the total weight of all three fruit harvests!"
         }
+      },
+      "perbandinganBertingkat": {
+        "title": "COMPOUND RATIOS",
+        "pageSubtitle": "Grade 7 · Ratios · Self-Practice",
+        "instruction": "Solve the following problems, showing all your work",
+        "backTo": "Back to Ratios",
+        "q1": {
+          "pre": "The ratio of Rian's money to Sandi's is ",
+          "mid": ", while the ratio of Sandi's money to Tedi's is ",
+          "post": ". If their total money is Rp200,000, find each person's amount!"
+        },
+        "q2": {
+          "pre": "The ratio of red balls to blue balls is ",
+          "mid": ", and the ratio of blue balls to green balls is ",
+          "post": ". If the difference between red and green balls is 14, find the number of blue balls!"
+        },
+        "q3": {
+          "pre": "Pita's savings : Qiran's savings = ",
+          "mid": " and Qiran's savings : Rina's savings = ",
+          "post": ". If Pita's savings is Rp30,000, how much are Rina's savings?"
+        },
+        "q4": {
+          "pre": "The ratio of Aldi's height to Bima's is ",
+          "mid": " and Bima's height to Ciko's is ",
+          "post": ". If the total height of Aldi and Ciko is 150 cm, find Bima's height!"
+        },
+        "q5": {
+          "pre": "The ratio of exam scores Rara : Sita = ",
+          "mid": " and Sita : Tara = ",
+          "intro": ". Given that their total score is 310, find:",
+          "a": "a. Each person's score",
+          "b": "b. The difference between Tara's and Rara's scores"
+        },
+        "q6": {
+          "pre": "Business capital Ari : Bowo = ",
+          "mid": " and Bowo : Candra = ",
+          "post": ". If the difference between Ari's and Candra's capital is Rp49,000, find their total capital!"
+        },
+        "q7": {
+          "pre": "The lengths of three sticks A, B, and C are in the following ratios: A : B = ",
+          "mid": " and B : C = ",
+          "post": ". If the total length of all three sticks is 70 cm, find the length of stick A and stick C each."
+        },
+        "q8": {
+          "pre": "The ratio of marbles owned by Fani : Gita = ",
+          "mid": " and Gita : Hana = ",
+          "intro": ". If Gita has 21 marbles, find:",
+          "a": "a. The number of marbles Fani and Hana each have",
+          "b": "b. The total number of marbles all three have"
+        }
       }
     }
   },
