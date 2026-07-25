@@ -448,6 +448,30 @@
           "itemB": "Hitunglah luas tanah yang dijadikan kebun sayur tersebut!"
         }
       },
+      "perkalianPecahan": {
+        "pageTitle1": "PERKALIAN PECAHAN",
+        "pageTitle2": "DAN SIFAT OPERASINYA",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "6 Soal Essay",
+        "banner": "📌 Untuk soal nomor <strong>1 sampai dengan 3</strong>, sederhanakan bentuk-bentuk perkalian pecahan berikut!",
+        "tags": {
+          "q1": "Penyederhanaan Silang",
+          "q2": "Tiga Faktor",
+          "q3": "Operasi Campuran",
+          "q4": "Sifat Distributif",
+          "q5": "Kontekstual",
+          "q6": "Kontekstual"
+        },
+        "q4": {
+          "instruction": "Selesaikan soal-soal berikut dengan menggunakan sifat distributif!"
+        },
+        "q5": {
+          "instruction": "Harga 1 kg beras adalah <f1/> dari harga 1 kg daging ayam. Harga 1 kg daging ayam adalah <f2/> dari harga 1 kg ikan laut. Jika harga 1 kg ikan laut adalah Rp40.000, berapa rupiah harga 1 kg beras tersebut?"
+        },
+        "q6": {
+          "instruction": "Sebuah truk tangki berisi bensin yang cukup untuk mengisi 36 jeriken besar dan 48 jeriken kecil. Setiap jeriken besar memuat <f1/> liter dan setiap jeriken kecil memuat <f2/> liter. Berapa liter banyak bensin yang terdapat dalam truk tangki tersebut?"
+        }
+      },
       "pecahanCampuran": {
         "pageTitle1": "PECAHAN CAMPURAN DAN PERSEN",
         "pageTitle2": "SERTA BENTUK DESIMAL",

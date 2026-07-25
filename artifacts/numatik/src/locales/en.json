@@ -448,6 +448,30 @@
           "itemB": "Calculate the area of land used as a vegetable garden!"
         }
       },
+      "perkalianPecahan": {
+        "pageTitle1": "MULTIPLICATION OF FRACTIONS",
+        "pageTitle2": "AND THEIR PROPERTIES",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "6 Essay Questions",
+        "banner": "📌 For questions <strong>1 through 3</strong>, simplify the following fraction multiplications.",
+        "tags": {
+          "q1": "Cross-Simplification",
+          "q2": "Three Factors",
+          "q3": "Mixed Operations",
+          "q4": "Distributive Property",
+          "q5": "Contextual",
+          "q6": "Contextual"
+        },
+        "q4": {
+          "instruction": "Solve the following problems using the distributive property!"
+        },
+        "q5": {
+          "instruction": "The price of 1 kg of rice is <f1/> of the price of 1 kg of chicken. The price of 1 kg of chicken is <f2/> of the price of 1 kg of sea fish. If the price of 1 kg of sea fish is Rp40,000, how much does 1 kg of rice cost?"
+        },
+        "q6": {
+          "instruction": "A tanker truck carries enough petrol to fill 36 large canisters and 48 small canisters. Each large canister holds <f1/> litres and each small canister holds <f2/> litres. How many litres of petrol are in the tanker truck?"
+        }
+      },
       "pecahanCampuran": {
         "pageTitle1": "MIXED FRACTIONS AND PERCENTAGES",
         "pageTitle2": "AND DECIMAL FORM",
