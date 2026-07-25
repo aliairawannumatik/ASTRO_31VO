@@ -1070,6 +1070,49 @@
           "itemC": "Luas dan keliling kebun jika n = 6!",
           "tag": "Kontekstual"
         }
+      },
+      "pemangkatan": {
+        "pageTitle": "PEMANGKATAN BENTUK ALJABAR",
+        "q1": {
+          "instruction": "Tentukan hasil pemangkatan suku-suku berikut!",
+          "tag": "Monomial Berpangkat"
+        },
+        "q2": {
+          "instruction": "Sederhanakanlah menggunakan sifat-sifat pangkat!",
+          "tag": "Sifat Pangkat"
+        },
+        "q3": {
+          "instruction": "Perhatikan pola koefisien Segitiga Pascal, lalu gunakan untuk menjabarkan bentuk berikut!",
+          "tag": "Segitiga Pascal"
+        },
+        "q4": {
+          "instruction": "Jabarkanlah bentuk kuadrat binomial berikut!",
+          "tag": "Kuadrat Binomial"
+        },
+        "q5": {
+          "instruction": "Jabarkanlah bentuk-bentuk berikut!",
+          "tag": "Suku Berpangkat"
+        },
+        "q6": {
+          "instruction": "Jabarkanlah bentuk kuadrat binomial berikut yang memuat pecahan!",
+          "tag": "Binomial Pecahan"
+        },
+        "q7": {
+          "instruction": "Tentukan luas persegi berikut dalam bentuk aljabar yang sudah disederhanakan!",
+          "shapeLabel": "Persegi",
+          "itemA": "Tuliskan luas persegi tersebut sebagai kuadrat binomial!",
+          "itemB": "Jabarkan dan sederhanakan bentuk kuadratnya!",
+          "itemC": "Jika x = 5, hitunglah luas persegi dalam satuan cm²!",
+          "tag": "Luas Bangun"
+        },
+        "q8": {
+          "introPre": "Sebuah akuarium berbentuk kubus memiliki panjang rusuk ",
+          "introEnd": " cm.",
+          "itemA": "Nyatakan volume akuarium tersebut dalam bentuk aljabar (petunjuk: gunakan (a+b)³)!",
+          "itemB": "Nyatakan luas permukaan akuarium dalam bentuk aljabar yang disederhanakan!",
+          "itemC": "Jika k = 4, hitunglah volume dan luas permukaan akuarium dalam cm³ dan cm²!",
+          "tag": "Kontekstual"
+        }
       }
     }
   },

@@ -1070,6 +1070,49 @@
           "itemC": "The area and perimeter of the garden if n = 6!",
           "tag": "Contextual"
         }
+      },
+      "pemangkatan": {
+        "pageTitle": "POWERS OF ALGEBRAIC EXPRESSIONS",
+        "q1": {
+          "instruction": "Determine the result of raising the following monomials to a power!",
+          "tag": "Monomial Powers"
+        },
+        "q2": {
+          "instruction": "Simplify using the laws of exponents!",
+          "tag": "Exponent Laws"
+        },
+        "q3": {
+          "instruction": "Observe the coefficient pattern of Pascal's Triangle, then use it to expand the following!",
+          "tag": "Pascal's Triangle"
+        },
+        "q4": {
+          "instruction": "Expand the following binomial squares!",
+          "tag": "Binomial Square"
+        },
+        "q5": {
+          "instruction": "Expand the following expressions!",
+          "tag": "Power Terms"
+        },
+        "q6": {
+          "instruction": "Expand the following binomial squares containing fractions!",
+          "tag": "Fraction Binomial"
+        },
+        "q7": {
+          "instruction": "Determine the area of the following square in simplified algebraic form!",
+          "shapeLabel": "Square",
+          "itemA": "Write the area of the square as a binomial square!",
+          "itemB": "Expand and simplify the square form!",
+          "itemC": "If x = 5, calculate the area of the square in cm²!",
+          "tag": "Shape Area"
+        },
+        "q8": {
+          "introPre": "A cube-shaped aquarium has an edge length of ",
+          "introEnd": " cm.",
+          "itemA": "Express the volume of the aquarium in algebraic form (hint: use (a+b)³)!",
+          "itemB": "Express the surface area of the aquarium in simplified algebraic form!",
+          "itemC": "If k = 4, calculate the volume and surface area of the aquarium in cm³ and cm²!",
+          "tag": "Contextual"
+        }
       }
     }
   },
