@@ -942,6 +942,42 @@
           "itemB": "さらに2箱加えた場合の新しい代数式を書きなさい。",
           "itemC": "n = 12 のとき、(a)と(b)のビー玉の総数をそれぞれ求めなさい。"
         }
+      },
+      "penjumlahanPengurangan": {
+        "pageTitle1": "代数式の加法と",
+        "pageTitle2": "減法",
+        "q1": {
+          "tag": "式の整理",
+          "instruction": "次の代数式を整理しなさい！"
+        },
+        "q2": {
+          "tag": "図形の周長",
+          "instruction": "次の各図形の周の長さを代数式で表しなさい！",
+          "shapeA": "二等辺三角形",
+          "shapeB": "長方形"
+        },
+        "q3": {
+          "tag": "加法",
+          "instruction": "次の和を求めなさい：",
+          "and": "と"
+        },
+        "q4": {
+          "tag": "P と Q の演算",
+          "introPre": "",
+          "introBetween": "、",
+          "introMid": " のとき、",
+          "introAnd": " と ",
+          "introEnd": " を用いて次の値を求めなさい！"
+        },
+        "q5": {
+          "tag": "文章題",
+          "sentence1": "ある乗り合いバスには<pass>乗客12人</pass>、運転手1人、車掌1人が乗車でき、平均体重は<weight>k kg</weight>です。",
+          "sentence2Pre": "バスにはさらに重さ ",
+          "sentence2Post": " kg の荷物も積まれています。",
+          "svgLabel": "乗客12人 + 運転手 + 車掌",
+          "itemA": "バスの積載物全体（乗客＋荷物）の合計重量を、簡略化した代数式で表しなさい！",
+          "itemB": "k = 55 のとき、バスの積載物の合計重量は何 kg ですか？"
+        }
       }
     }
   },

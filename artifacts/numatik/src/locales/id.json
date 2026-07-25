@@ -942,6 +942,42 @@
           "itemB": "Jika 2 kotak lagi ditambahkan, tuliskan bentuk aljabar barunya!",
           "itemC": "Jika n = 12, berapa total kelereng pada keadaan (a) dan (b)?"
         }
+      },
+      "penjumlahanPengurangan": {
+        "pageTitle1": "PENJUMLAHAN DAN PENGURANGAN",
+        "pageTitle2": "BENTUK ALJABAR",
+        "q1": {
+          "tag": "Sederhanakan",
+          "instruction": "Sederhanakanlah bentuk-bentuk aljabar berikut!"
+        },
+        "q2": {
+          "tag": "Keliling Bangun",
+          "instruction": "Tentukan keliling setiap bangun berikut dalam bentuk aljabar!",
+          "shapeA": "segitiga sama kaki",
+          "shapeB": "persegi panjang"
+        },
+        "q3": {
+          "tag": "Penjumlahan",
+          "instruction": "Tentukan jumlah dari:",
+          "and": "dan"
+        },
+        "q4": {
+          "tag": "Operasi P & Q",
+          "introPre": "Diketahui ",
+          "introBetween": " dan ",
+          "introMid": ". Tentukan nilai-nilai berikut yang dinyatakan dalam ",
+          "introAnd": " dan ",
+          "introEnd": "!"
+        },
+        "q5": {
+          "tag": "Kontekstual",
+          "sentence1": "Sebuah angkot dapat mengangkut <pass>12 penumpang</pass>, 1 sopir, dan 1 kenek dengan berat rata-rata <weight>k kg</weight>.",
+          "sentence2Pre": "Angkot itu juga memuat bagasi seberat ",
+          "sentence2Post": " kg.",
+          "svgLabel": "12 penumpang + sopir + kenek",
+          "itemA": "Nyatakan total berat muatan angkot seluruhnya (penumpang + bagasi) dalam bentuk aljabar yang sederhana!",
+          "itemB": "Jika k = 55, berapa kg total berat muatan angkot tersebut?"
+        }
       }
     }
   },

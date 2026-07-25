@@ -942,6 +942,42 @@
           "itemB": "If 2 more boxes are added, write the new algebraic expression!",
           "itemC": "If n = 12, how many total marbles are there in situations (a) and (b)?"
         }
+      },
+      "penjumlahanPengurangan": {
+        "pageTitle1": "ADDITION AND SUBTRACTION",
+        "pageTitle2": "OF ALGEBRAIC EXPRESSIONS",
+        "q1": {
+          "tag": "Simplify",
+          "instruction": "Simplify the following algebraic expressions!"
+        },
+        "q2": {
+          "tag": "Perimeter",
+          "instruction": "Determine the perimeter of each shape below in algebraic form!",
+          "shapeA": "isosceles triangle",
+          "shapeB": "rectangle"
+        },
+        "q3": {
+          "tag": "Addition",
+          "instruction": "Find the sum of:",
+          "and": "and"
+        },
+        "q4": {
+          "tag": "P & Q Operations",
+          "introPre": "Given ",
+          "introBetween": " and ",
+          "introMid": ". Find the following values expressed in ",
+          "introAnd": " and ",
+          "introEnd": "!"
+        },
+        "q5": {
+          "tag": "Contextual",
+          "sentence1": "A minibus can carry <pass>12 passengers</pass>, 1 driver, and 1 conductor with an average weight of <weight>k kg</weight>.",
+          "sentence2Pre": "The minibus also carries baggage weighing ",
+          "sentence2Post": " kg.",
+          "svgLabel": "12 passengers + driver + conductor",
+          "itemA": "Express the total weight of the minibus load (passengers + baggage) in simplified algebraic form!",
+          "itemB": "If k = 55, what is the total weight of the minibus load in kg?"
+        }
       }
     }
   },

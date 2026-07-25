@@ -101,6 +101,14 @@ Replace `\text{}` with `\mathrm{}` for units; use interpolated `formulaVar` key 
 - SoalDua uses split `introPre` / `introPost` keys flanking an inline `<InlineMath>` (math formula stays hardcoded, only surrounding prose translated).
 - Locale key prefix: `practice.aljabar.pengertianUnsur.q{1|2|3}.*`.
 
+## Aljabar sub-page 2 trilingual pattern (PenjumlahanPenguranganAljabarPage — "cards di dalam" variant)
+- Cards sudah di dalam page & `isDark` sudah ada — tidak perlu restrukturisasi.
+- Pattern SoalEmpat (multi-InlineMath dalam satu kalimat): split ke 5 key: `introPre`, `introBetween`, `introMid`, `introAnd`, `introEnd`; tiap key mengelilingi satu `<InlineMath>`.
+- Pattern SoalLima (kalimat 1 = Trans dengan `<pass>` + `<weight>`, kalimat 2 = split biasa + `<InlineMath>`): gunakan `{' '}` spacer antara Trans dan teks lanjutan.
+- SVG `<text>` yang berisi label bahasa alami (bukan rumus): gunakan `{t(...)}` sebagai child langsung — valid di SVG.
+- `q4.introPre` untuk bahasa Jepang = `""` (string kosong) karena struktur kalimat JA menempatkan formula lebih dulu.
+- Locale keys ditambahkan ke `practice.aljabar.penjumlahanPengurangan.*` di ketiga file locale.
+
 ## Translation progress
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.
