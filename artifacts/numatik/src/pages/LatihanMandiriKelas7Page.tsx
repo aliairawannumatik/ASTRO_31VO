@@ -6,15 +6,15 @@ import { BookOpen, GraduationCap } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const topicsKelas7 = [
-  { label: "BILANGAN BULAT", path: "/latihan-mandiri/kelas-7/bilangan-bulat" },
-  { label: "PECAHAN", path: "/latihan-mandiri/kelas-7/bilangan-rasional" },
-  { label: "ALJABAR", path: "/latihan-mandiri/kelas-7/aljabar" },
-  { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", path: "/latihan-mandiri/kelas-7/plsv-ptlsv" },
-  { label: "PERBANDINGAN", path: "/latihan-mandiri/kelas-7/perbandingan" },
-  { label: "ARITMETIKA SOSIAL", path: "/latihan-mandiri/kelas-7/aritmetika-sosial" },
-  { label: "GARIS DAN SUDUT", path: "/latihan-mandiri/kelas-7/garis-dan-sudut" },
-  { label: "SEGITIGA DAN SEGIEMPAT", path: "/latihan-mandiri/kelas-7/segitiga-dan-segiempat" },
-  { label: "HIMPUNAN (PENGAYAAN)", path: "/latihan-mandiri/kelas-7/himpunan" },
+  { labelKey: "materiMatematika.topics.kelas7.bilanganBulat", path: "/latihan-mandiri/kelas-7/bilangan-bulat" },
+  { labelKey: "materiMatematika.topics.kelas7.pecahan", path: "/latihan-mandiri/kelas-7/bilangan-rasional" },
+  { labelKey: "materiMatematika.topics.kelas7.aljabar", path: "/latihan-mandiri/kelas-7/aljabar" },
+  { labelKey: "materiMatematika.topics.kelas7.plsvPtlsv", path: "/latihan-mandiri/kelas-7/plsv-ptlsv" },
+  { labelKey: "materiMatematika.topics.kelas7.perbandingan", path: "/latihan-mandiri/kelas-7/perbandingan" },
+  { labelKey: "materiMatematika.topics.kelas7.aritmetikaSosial", path: "/latihan-mandiri/kelas-7/aritmetika-sosial" },
+  { labelKey: "materiMatematika.topics.kelas7.garisDanSudut", path: "/latihan-mandiri/kelas-7/garis-dan-sudut" },
+  { labelKey: "materiMatematika.topics.kelas7.segitigaDanSegiempat", path: "/latihan-mandiri/kelas-7/segitiga-dan-segiempat" },
+  { labelKey: "materiMatematika.topics.kelas7.himpunan", path: "/latihan-mandiri/kelas-7/himpunan" },
 ];
 
 const LatihanMandiriKelas7Page = () => {
@@ -37,7 +37,7 @@ const LatihanMandiriKelas7Page = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {topicsKelas7.map((topic, i) => (
             <button
-              key={topic.label}
+              key={topic.path}
               onClick={() => {
                 playPopSound();
                 navigate(topic.path);
@@ -48,7 +48,7 @@ const LatihanMandiriKelas7Page = () => {
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <BookOpen className="w-5 h-5 text-accent shrink-0 group-hover:scale-110 transition-transform" />
-              <span className="font-body text-sm text-white">{topic.label}</span>
+              <span className="font-body text-sm text-white">{t(topic.labelKey)}</span>
               <span className="ml-auto text-xs text-accent font-display">{t('practice.openButton')}</span>
             </button>
           ))}
