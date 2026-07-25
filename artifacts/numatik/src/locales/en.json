@@ -1340,6 +1340,28 @@
           "instruction": "State whether each pair of equations is <a>“equivalent”</a> or <b>“not equivalent”</b>!",
           "connector": "and"
         }
+      },
+      "penyelesaianPLSV": {
+        "title1": "SOLVING LINEAR EQUATIONS",
+        "title2": "IN ONE VARIABLE",
+        "badge": "89 Questions",
+        "tags": {
+          "q1": "Substitution Method",
+          "q2": "Addition / Subtraction of Both Sides",
+          "q3": "Equation Solutions",
+          "q4": "Advanced Equations & Value Testing",
+          "q5": "Multiplication/Division, Distribution & Word Problems",
+          "q6": "Fractional Equations Using LCM"
+        },
+        "q1": {
+          "instruction": "Taking the variable from integers, find the solution to each equation below using the <a>substitution method</a>!"
+        },
+        "q2": {
+          "instruction": "By <a>adding or subtracting both sides</a> of the equation by the same number, find the solution to each equation below!"
+        },
+        "q3": {
+          "instruction": "Find the solution to each equation below!"
+        }
       }
     }
   },

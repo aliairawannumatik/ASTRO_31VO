@@ -1340,6 +1340,28 @@
           "instruction": "Nyatakan pasangan-pasangan persamaan berikut <a>“ekuivalen”</a> atau <b>“tidak ekuivalen”</b>!",
           "connector": "dan"
         }
+      },
+      "penyelesaianPLSV": {
+        "title1": "PENYELESAIAN PERSAMAAN",
+        "title2": "LINEAR SATU VARIABEL",
+        "badge": "89 Soal",
+        "tags": {
+          "q1": "Cara Substitusi",
+          "q2": "Penjumlahan / Pengurangan Kedua Ruas",
+          "q3": "Penyelesaian Persamaan",
+          "q4": "Persamaan Lanjutan & Uji Nilai",
+          "q5": "Perkalian/Pembagian, Distribusi & Soal Cerita",
+          "q6": "Persamaan Pecahan dengan KPK"
+        },
+        "q1": {
+          "instruction": "Dengan mengambil variabel pada bilangan bulat, tentukan penyelesaian persamaan berikut dengan <a>cara substitusi</a>!"
+        },
+        "q2": {
+          "instruction": "Dengan cara <a>menambah atau mengurangi kedua ruas</a> persamaan dengan bilangan yang sama, tentukan penyelesaian dari persamaan-persamaan berikut!"
+        },
+        "q3": {
+          "instruction": "Tentukan penyelesaian dari persamaan-persamaan berikut!"
+        }
       }
     }
   },
