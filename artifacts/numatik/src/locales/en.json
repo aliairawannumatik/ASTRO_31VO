@@ -1694,6 +1694,30 @@
           "rasional": "rational numbers"
         }
       }
+    },
+    "perbandingan": {
+      "subtopics": {
+        "umum": {
+          "label": "RATIOS, UNITS OF COMPARISON AND RATIO NOTATION",
+          "desc": "Concept of ratios, units of comparison, ratio a:b, simplifying ratios"
+        },
+        "bertingkat": {
+          "label": "COMPOUND RATIOS",
+          "desc": "Linking two ratios through an intermediate variable using LCM"
+        },
+        "senilai": {
+          "label": "DIRECT AND INVERSE PROPORTION",
+          "desc": "Direct proportion (same direction) and inverse proportion, contextual problems"
+        },
+        "skala": {
+          "label": "SCALE",
+          "desc": "Map scale, calculating actual distances & map distances, floor plan problems"
+        },
+        "campuran": {
+          "label": "COMPOUND PROPORTION",
+          "desc": "Distributing values in ratio a:b:c, applied to inheritance and mixture problems"
+        }
+      }
     }
   },
   "settings": {

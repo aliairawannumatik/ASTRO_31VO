@@ -5,17 +5,25 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { Scale, ArrowRightLeft, Layers, GitMerge, Map, ChevronRight } from "lucide-react";
 
-const subtopics = [
-  { label: "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO", path: "/latihan-mandiri/kelas-7/perbandingan/umum", soal: 10, icon: Scale, gradient: "from-sky-900/40 to-blue-900/30", border: "border-sky-500/30", badge: "bg-sky-500/20 text-sky-300 border-sky-400/40", iconBg: "bg-sky-500/20", iconColor: "text-sky-400", leftBar: "from-sky-400 to-blue-500", desc: "Pengertian perbandingan, satuan pembanding, rasio a:b, menyederhanakan rasio" },
-  { label: "PERBANDINGAN BERTINGKAT", path: "/latihan-mandiri/kelas-7/perbandingan/bertingkat", soal: 8, icon: GitMerge, gradient: "from-cyan-900/40 to-teal-900/30", border: "border-cyan-500/30", badge: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40", iconBg: "bg-cyan-500/20", iconColor: "text-cyan-400", leftBar: "from-cyan-400 to-teal-500", desc: "Menghubungkan dua perbandingan lewat variabel perantara menggunakan KPK" },
-  { label: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/latihan-mandiri/kelas-7/perbandingan/senilai", soal: 10, icon: ArrowRightLeft, gradient: "from-blue-900/40 to-indigo-900/30", border: "border-blue-500/30", badge: "bg-blue-500/20 text-blue-300 border-blue-400/40", iconBg: "bg-blue-500/20", iconColor: "text-blue-400", leftBar: "from-blue-400 to-indigo-500", desc: "Perbandingan senilai (searah) dan berbalik nilai (berbalik), soal kontekstual" },
-  { label: "SKALA", path: "/latihan-mandiri/kelas-7/perbandingan/skala", soal: 10, icon: Map, gradient: "from-violet-900/40 to-purple-900/30", border: "border-violet-500/30", badge: "bg-violet-500/20 text-violet-300 border-violet-400/40", iconBg: "bg-violet-500/20", iconColor: "text-violet-400", leftBar: "from-violet-400 to-purple-500", desc: "Skala peta, menghitung jarak sebenarnya & jarak pada gambar, soal denah" },
-  { label: "PERBANDINGAN CAMPURAN", path: "/latihan-mandiri/kelas-7/perbandingan/campuran", soal: 6, icon: Layers, gradient: "from-indigo-900/40 to-violet-900/30", border: "border-indigo-500/30", badge: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40", iconBg: "bg-indigo-500/20", iconColor: "text-indigo-400", leftBar: "from-indigo-400 to-violet-500", desc: "Membagi nilai dalam perbandingan a:b:c, aplikasi pembagian warisan & campuran" },
+/* ── Visual config (non-translatable) ──────────────────── */
+const subtopicsConfig = [
+  { key: "umum",       path: "/latihan-mandiri/kelas-7/perbandingan/umum",       soal: 10, icon: Scale,         gradient: "from-sky-900/40 to-blue-900/30",    border: "border-sky-500/30",    badge: "bg-sky-500/20 text-sky-300 border-sky-400/40",    iconBg: "bg-sky-500/20",    iconColor: "text-sky-400",    leftBar: "from-sky-400 to-blue-500" },
+  { key: "bertingkat", path: "/latihan-mandiri/kelas-7/perbandingan/bertingkat",  soal: 8,  icon: GitMerge,      gradient: "from-cyan-900/40 to-teal-900/30",   border: "border-cyan-500/30",   badge: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",  iconBg: "bg-cyan-500/20",   iconColor: "text-cyan-400",   leftBar: "from-cyan-400 to-teal-500" },
+  { key: "senilai",    path: "/latihan-mandiri/kelas-7/perbandingan/senilai",     soal: 10, icon: ArrowRightLeft, gradient: "from-blue-900/40 to-indigo-900/30", border: "border-blue-500/30",   badge: "bg-blue-500/20 text-blue-300 border-blue-400/40",  iconBg: "bg-blue-500/20",   iconColor: "text-blue-400",   leftBar: "from-blue-400 to-indigo-500" },
+  { key: "skala",      path: "/latihan-mandiri/kelas-7/perbandingan/skala",       soal: 10, icon: Map,            gradient: "from-violet-900/40 to-purple-900/30",border: "border-violet-500/30", badge: "bg-violet-500/20 text-violet-300 border-violet-400/40",iconBg: "bg-violet-500/20", iconColor: "text-violet-400", leftBar: "from-violet-400 to-purple-500" },
+  { key: "campuran",   path: "/latihan-mandiri/kelas-7/perbandingan/campuran",    soal: 6,  icon: Layers,         gradient: "from-indigo-900/40 to-violet-900/30",border: "border-indigo-500/30", badge: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40",iconBg: "bg-indigo-500/20", iconColor: "text-indigo-400", leftBar: "from-indigo-400 to-violet-500" },
 ];
 
 const PerbandinganPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const subtopics = subtopicsConfig.map(s => ({
+    ...s,
+    label: t(`practice.perbandingan.subtopics.${s.key}.label`),
+    desc:  t(`practice.perbandingan.subtopics.${s.key}.desc`),
+  }));
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -37,7 +45,7 @@ const PerbandinganPage = () => {
           {subtopics.map((s, i) => {
             const Icon = s.icon;
             return (
-              <button key={s.label} onClick={() => { playPopSound(); navigate(s.path); }}
+              <button key={s.key} onClick={() => { playPopSound(); navigate(s.path); }}
                 className="group relative rounded-2xl overflow-hidden text-left transition-all duration-300 hover:scale-[1.01] animate-slide-up"
                 style={{ animationDelay: `${i * 0.07}s` }}>
                 <div className={`absolute inset-0 bg-gradient-to-br ${s.gradient} backdrop-blur`} />

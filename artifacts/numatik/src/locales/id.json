@@ -1694,6 +1694,30 @@
           "rasional": "bilangan rasional"
         }
       }
+    },
+    "perbandingan": {
+      "subtopics": {
+        "umum": {
+          "label": "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO",
+          "desc": "Pengertian perbandingan, satuan pembanding, rasio a:b, menyederhanakan rasio"
+        },
+        "bertingkat": {
+          "label": "PERBANDINGAN BERTINGKAT",
+          "desc": "Menghubungkan dua perbandingan lewat variabel perantara menggunakan KPK"
+        },
+        "senilai": {
+          "label": "PERBANDINGAN SENILAI DAN BERBALIK NILAI",
+          "desc": "Perbandingan senilai (searah) dan berbalik nilai (berbalik), soal kontekstual"
+        },
+        "skala": {
+          "label": "SKALA",
+          "desc": "Skala peta, menghitung jarak sebenarnya & jarak pada gambar, soal denah"
+        },
+        "campuran": {
+          "label": "PERBANDINGAN CAMPURAN",
+          "desc": "Membagi nilai dalam perbandingan a:b:c, aplikasi pembagian warisan & campuran"
+        }
+      }
     }
   },
   "settings": {
