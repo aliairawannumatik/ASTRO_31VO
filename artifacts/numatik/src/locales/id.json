@@ -1915,6 +1915,36 @@
         "q5": "Tiga mesin cetak tipe A dapat mencetak 3.000 buku dalam 5 jam. Empat mesin cetak tipe B dapat mencetak 4.800 buku dalam 6 jam. Jika perusahaan menggunakan 2 mesin tipe A dan 3 mesin tipe B secara bersamaan, berapa jam waktu yang dibutuhkan untuk mencetak 8.000 buku?",
         "q6": "Sebuah pabrik kain jika memproduksi pesanannya menggunakan 2 mesin tenun modern (kapasitas besar) akan selesai dalam waktu 12 hari, sedangkan jika dikerjakan menggunakan 4 mesin tenun tradisional (kapasitas kecil) selesai dalam waktu 18 hari. Jika pabrik tersebut mengoperasikan 3 mesin tenun modern dan 3 mesin tenun tradisional secara bersamaan, dalam waktu berapa hari pesanan kain tersebut dapat diselesaikan?"
       }
+    },
+    "aritmetikaSosial": {
+      "title": "ARITMETIKA SOSIAL",
+      "enrichmentNoteDesc": "Soal aritmetika sosial berbasis kehidupan nyata: perdagangan, perbankan, dan perpajakan. Dirancang sesuai kisi-kisi UN, TKA, dan ANBK.",
+      "subtopics": {
+        "jualBeli": {
+          "label": "JUAL BELI, UNTUNG DAN RUGI",
+          "desc": "Harga beli, harga jual, persentase untung/rugi, soal cerita perdagangan"
+        },
+        "diskon": {
+          "label": "DISKON",
+          "desc": "Pengertian diskon, harga setelah diskon, diskon bertingkat, soal belanja"
+        },
+        "brutoNetto": {
+          "label": "BRUTO, NETTO DAN TARA",
+          "desc": "Hubungan bruto = netto + tara, persentase tara, soal kemasan produk"
+        },
+        "bungaTunggal": {
+          "label": "BUNGA TUNGGAL",
+          "desc": "Rumus bunga tunggal, menghitung bunga tabungan & pinjaman, soal bank"
+        },
+        "ppn": {
+          "label": "PAJAK PERTAMBAHAN NILAI (PPN)",
+          "desc": "Pengertian PPN, menghitung nilai PPN 10%, harga sebelum & sesudah PPN"
+        },
+        "pph": {
+          "label": "PAJAK PENGHASILAN (PPH)",
+          "desc": "Pengertian PPh, menghitung pajak penghasilan, penghasilan kena pajak"
+        }
+      }
     }
   },
   "settings": {

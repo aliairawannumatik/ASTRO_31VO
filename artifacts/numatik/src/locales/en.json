@@ -1915,6 +1915,36 @@
         "q5": "Three type-A printing machines can print 3,000 books in 5 hours. Four type-B printing machines can print 4,800 books in 6 hours. If the company runs 2 type-A machines and 3 type-B machines simultaneously, how many hours are needed to print 8,000 books?",
         "q6": "A textile factory can complete an order using 2 modern looms (large capacity) in 12 days, or using 4 traditional looms (small capacity) in 18 days. If the factory operates 3 modern looms and 3 traditional looms simultaneously, in how many days can the order be completed?"
       }
+    },
+    "aritmetikaSosial": {
+      "title": "SOCIAL ARITHMETIC",
+      "enrichmentNoteDesc": "Real-life social arithmetic problems covering trade, banking, and taxation. Aligned with UN, TKA, and ANBK exam frameworks.",
+      "subtopics": {
+        "jualBeli": {
+          "label": "BUYING, SELLING, PROFIT & LOSS",
+          "desc": "Buying price, selling price, profit/loss percentage, trade word problems"
+        },
+        "diskon": {
+          "label": "DISCOUNT",
+          "desc": "Understanding discounts, price after discount, tiered discounts, shopping problems"
+        },
+        "brutoNetto": {
+          "label": "GROSS, NET & TARE",
+          "desc": "Gross = net + tare relationship, tare percentage, product packaging problems"
+        },
+        "bungaTunggal": {
+          "label": "SIMPLE INTEREST",
+          "desc": "Simple interest formula, calculating savings & loan interest, banking problems"
+        },
+        "ppn": {
+          "label": "VALUE ADDED TAX (VAT)",
+          "desc": "Understanding VAT, calculating 10% VAT, prices before & after VAT"
+        },
+        "pph": {
+          "label": "INCOME TAX (PPh)",
+          "desc": "Understanding income tax, calculating tax deductions, taxable income"
+        }
+      }
     }
   },
   "settings": {
