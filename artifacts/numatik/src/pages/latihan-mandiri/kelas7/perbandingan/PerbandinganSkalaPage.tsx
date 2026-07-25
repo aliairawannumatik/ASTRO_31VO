@@ -16,24 +16,28 @@ const PerbandinganSkalaPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          SKALA
+          {t('practice.perbandingan.perbandinganSkala.title')}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 7 - Latihan Mandiri - Perbandingan</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">
+          {t('practice.perbandingan.perbandinganSkala.pageSubtitle')}
+        </p>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
-          <p className="text-yellow-400 text-sm mb-6 font-body">Kerjakan soal-soal berikut lengkap dengan caranya</p>
+          <p className="text-yellow-400 text-sm mb-6 font-body">
+            {t('practice.perbandingan.perbandinganSkala.instruction')}
+          </p>
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
             {/* Soal 1 */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">1.</span>
               <div>
-                <p className="mb-3">Arti dari skala peta 1 : 500.000 adalah...</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q1.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 1 cm pada peta mewakili 500.000 cm jarak sebenarnya.</p>
-                  <p>B. 1 cm pada peta mewakili 500.000 km jarak sebenarnya.</p>
-                  <p>C. 1 km pada peta mewakili 500.000 cm jarak sebenarnya.</p>
-                  <p>D. 500.000 cm pada peta mewakili 1 cm jarak sebenarnya.</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q1.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q1.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q1.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q1.optD')}</p>
                 </div>
               </div>
             </div>
@@ -42,12 +46,12 @@ const PerbandinganSkalaPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">2.</span>
               <div>
-                <p className="mb-3">Peta wilayah X memiliki skala 1 : 50.000. Peta wilayah Y memiliki skala 1 : 250.000. Pernyataan yang benar mengenai kedua peta tersebut adalah...</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q2.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. Peta X menunjukkan wilayah yang lebih luas dengan detail yang lebih sedikit daripada peta Y.</p>
-                  <p>B. Satu sentimeter pada peta X mewakili jarak yang lebih jauh di lapangan dibandingkan peta Y.</p>
-                  <p>C. Kedua peta memiliki tingkat kedetailan yang sama.</p>
-                  <p>D. Peta X lebih detail daripada peta Y untuk ukuran kertas yang sama.</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q2.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q2.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q2.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q2.optD')}</p>
                 </div>
               </div>
             </div>
@@ -56,12 +60,12 @@ const PerbandinganSkalaPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">3.</span>
               <div>
-                <p className="mb-3">Jarak dua kota pada peta adalah 20 cm. Jika skala peta 1 : 600.000, jarak dua kota sebenarnya adalah...</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q3.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 1.200 km</p>
-                  <p>B. 120 km</p>
-                  <p>C. 30 km</p>
-                  <p>D. 12 km</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q3.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q3.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q3.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q3.optD')}</p>
                 </div>
               </div>
             </div>
@@ -70,12 +74,12 @@ const PerbandinganSkalaPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">4.</span>
               <div>
-                <p className="mb-3">Jarak antara kota A dan kota B sebenarnya adalah 120 km. Jika jarak kedua kota tersebut pada peta adalah 6 cm, berapakah skala peta tersebut?</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q4.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 1 : 2.000.000</p>
-                  <p>B. 1 : 200.000</p>
-                  <p>C. 1 : 20.000.000</p>
-                  <p>D. 1 : 720.000</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q4.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q4.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q4.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q4.optD')}</p>
                 </div>
               </div>
             </div>
@@ -84,12 +88,12 @@ const PerbandinganSkalaPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">5.</span>
               <div>
-                <p className="mb-3">Sebuah kebun pada denah berukuran 12 cm x 15 cm. Jika ukuran kebun yang sebenarnya 50 m x 40 m, maka skala yang digunakan adalah....</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q5.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 3 : 100</p>
-                  <p>B. 3 : 800</p>
-                  <p>C. 3 : 1.250</p>
-                  <p>D. 3 : 1.000</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q5.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q5.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q5.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q5.optD')}</p>
                 </div>
               </div>
             </div>
@@ -98,48 +102,51 @@ const PerbandinganSkalaPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">6.</span>
               <div>
-                <p className="mb-3">Jarak sebenarnya antara dua gedung adalah 4,5 km. Jika gedung tersebut digambar pada denah dengan skala 1 : 15.000, maka jarak pada denah adalah...</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q6.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 3 cm</p>
-                  <p>B. 30 cm</p>
-                  <p>C. 300 cm</p>
-                  <p>D. 0,3 cm</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q6.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q6.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q6.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q6.optD')}</p>
                 </div>
               </div>
             </div>
 
-            {/* Soal 7 */}
+            {/* Soal 7 — static image, two text paragraphs, options with m² */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">7.</span>
               <div>
-                <p className="mb-3">Perhatikan denah sebuah rumah berikut!</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q7.stemIntro')}</p>
                 <div className="mb-3 flex justify-center">
                   <img
                     src={"/images/image_1777478280088.png"}
-                    alt="Denah rumah"
+                    alt={t('practice.perbandingan.perbandinganSkala.q7.imgAlt')}
                     className="max-w-full md:max-w-md rounded-lg border border-border shadow-lg"
                   />
                 </div>
-                <p className="mb-3">Jika skala denah rumah adalah 1 : 200, maka luas bangunan rumah sebenarnya adalah ...</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q7.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 252 m<sup>2</sup></p>
-                  <p>B. 342 m<sup>2</sup></p>
-                  <p>C. 352 m<sup>2</sup></p>
-                  <p>D. 368 m<sup>2</sup></p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q7.optA')}<sup>2</sup></p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q7.optB')}<sup>2</sup></p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q7.optC')}<sup>2</sup></p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q7.optD')}<sup>2</sup></p>
                 </div>
               </div>
             </div>
 
-            {/* Soal 8 */}
+            {/* Soal 8 — stem with cm², options with m² */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">8.</span>
               <div>
-                <p className="mb-3">Denah sebuah gedung berskala 1 : 300. Jika luas denah 125 cm<sup>2</sup>, maka luas gedung sebenarnya adalah ...</p>
+                <p className="mb-3">
+                  {t('practice.perbandingan.perbandinganSkala.q8.stemPre')}<sup>2</sup>
+                  {t('practice.perbandingan.perbandinganSkala.q8.stemPost')}
+                </p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 375 m<sup>2</sup></p>
-                  <p>B. 1.125 m<sup>2</sup></p>
-                  <p>C. 3.750 m<sup>2</sup></p>
-                  <p>D. 11.250 m<sup>2</sup></p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q8.optA')}<sup>2</sup></p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q8.optB')}<sup>2</sup></p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q8.optC')}<sup>2</sup></p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q8.optD')}<sup>2</sup></p>
                 </div>
               </div>
             </div>
@@ -148,12 +155,12 @@ const PerbandinganSkalaPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">9.</span>
               <div>
-                <p className="mb-3">Jarak dua kota pada peta berskala 1 : 1.200.000 adalah 5 cm. Andi berangkat dari kota A ke kota B mengendarai motor dengan kecepatan rata-rata 40 km/jam. Jika ia berangkat pukul 07.15 dan beristirahat selama 30 menit di perjalanan, pada pukul berapa ia akan tiba di kota B?</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q9.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 09.45</p>
-                  <p>B. 08.45</p>
-                  <p>C. 09.15</p>
-                  <p>D. 10.15</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q9.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q9.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q9.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q9.optD')}</p>
                 </div>
               </div>
             </div>
@@ -162,12 +169,12 @@ const PerbandinganSkalaPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">10.</span>
               <div>
-                <p className="mb-3">Sebuah perusahaan properti membuat maket (model miniatur 3D) apartemen dengan skala 1 : 100. Jika kolam renang pada maket tersebut bervolume 2 liter air saat penuh, berapakah kapasitas air kolam renang tersebut di dunia nyata?</p>
+                <p className="mb-3">{t('practice.perbandingan.perbandinganSkala.q10.stem')}</p>
                 <div className="space-y-1 ml-4">
-                  <p>A. 2.000 liter</p>
-                  <p>B. 20.000 liter</p>
-                  <p>C. 200 liter</p>
-                  <p>D. 2.000.000 liter</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q10.optA')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q10.optB')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q10.optC')}</p>
+                  <p>{t('practice.perbandingan.perbandinganSkala.q10.optD')}</p>
                 </div>
               </div>
             </div>
@@ -180,7 +187,7 @@ const PerbandinganSkalaPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Perbandingan
+            {t('practice.perbandingan.perbandinganSkala.backTo')}
           </button>
         </div>
       </div>

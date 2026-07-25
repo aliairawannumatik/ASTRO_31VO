@@ -1823,6 +1823,85 @@
         "q8": "Persiapan sebuah panggung festival budaya diperkirakan selesai dalam waktu 24 hari jika dikerjakan oleh 6 orang teknisi. Setelah dikerjakan selama 4 hari, pekerjaan terpaksa dihentikan selama 8 hari karena badai. Agar persiapan panggung selesai tepat waktu sesuai rencana awal, berapa banyak tambahan teknisi yang diperlukan?",
         "q9": "Sebuah pesanan seragam sekolah dapat diselesaikan oleh 4 orang penjahit dalam waktu 20 hari. Setelah mereka bekerja selama 4 hari, pasokan listrik terputus sehingga pekerjaan terhenti total selama 12 hari. Berapa banyak tambahan penjahit yang dibutuhkan agar pesanan seragam tersebut dapat diselesaikan tepat waktu?",
         "q10": "Sebuah pesanan katering pernikahan raksasa jika dikerjakan oleh 3 orang Chef utama akan selesai dalam waktu 10 hari, sedangkan jika dikerjakan oleh 8 orang asisten dapur akan selesai dalam waktu 9 hari. Jika pesanan tersebut dikerjakan secara bersama-sama oleh 5 Chef utama dan 6 asisten dapur, dalam waktu berapa hari pesanan katering itu akan selesai?"
+      },
+      "perbandinganSkala": {
+        "title": "SKALA",
+        "pageSubtitle": "Kelas 7 · Perbandingan · Latihan Mandiri",
+        "instruction": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Perbandingan",
+        "q1": {
+          "stem": "Arti dari skala peta 1 : 500.000 adalah...",
+          "optA": "A. 1 cm pada peta mewakili 500.000 cm jarak sebenarnya.",
+          "optB": "B. 1 cm pada peta mewakili 500.000 km jarak sebenarnya.",
+          "optC": "C. 1 km pada peta mewakili 500.000 cm jarak sebenarnya.",
+          "optD": "D. 500.000 cm pada peta mewakili 1 cm jarak sebenarnya."
+        },
+        "q2": {
+          "stem": "Peta wilayah X memiliki skala 1 : 50.000. Peta wilayah Y memiliki skala 1 : 250.000. Pernyataan yang benar mengenai kedua peta tersebut adalah...",
+          "optA": "A. Peta X menunjukkan wilayah yang lebih luas dengan detail yang lebih sedikit daripada peta Y.",
+          "optB": "B. Satu sentimeter pada peta X mewakili jarak yang lebih jauh di lapangan dibandingkan peta Y.",
+          "optC": "C. Kedua peta memiliki tingkat kedetailan yang sama.",
+          "optD": "D. Peta X lebih detail daripada peta Y untuk ukuran kertas yang sama."
+        },
+        "q3": {
+          "stem": "Jarak dua kota pada peta adalah 20 cm. Jika skala peta 1 : 600.000, jarak dua kota sebenarnya adalah...",
+          "optA": "A. 1.200 km",
+          "optB": "B. 120 km",
+          "optC": "C. 30 km",
+          "optD": "D. 12 km"
+        },
+        "q4": {
+          "stem": "Jarak antara kota A dan kota B sebenarnya adalah 120 km. Jika jarak kedua kota tersebut pada peta adalah 6 cm, berapakah skala peta tersebut?",
+          "optA": "A. 1 : 2.000.000",
+          "optB": "B. 1 : 200.000",
+          "optC": "C. 1 : 20.000.000",
+          "optD": "D. 1 : 720.000"
+        },
+        "q5": {
+          "stem": "Sebuah kebun pada denah berukuran 12 cm x 15 cm. Jika ukuran kebun yang sebenarnya 50 m x 40 m, maka skala yang digunakan adalah....",
+          "optA": "A. 3 : 100",
+          "optB": "B. 3 : 800",
+          "optC": "C. 3 : 1.250",
+          "optD": "D. 3 : 1.000"
+        },
+        "q6": {
+          "stem": "Jarak sebenarnya antara dua gedung adalah 4,5 km. Jika gedung tersebut digambar pada denah dengan skala 1 : 15.000, maka jarak pada denah adalah...",
+          "optA": "A. 3 cm",
+          "optB": "B. 30 cm",
+          "optC": "C. 300 cm",
+          "optD": "D. 0,3 cm"
+        },
+        "q7": {
+          "stemIntro": "Perhatikan denah sebuah rumah berikut!",
+          "imgAlt": "Denah rumah",
+          "stem": "Jika skala denah rumah adalah 1 : 200, maka luas bangunan rumah sebenarnya adalah ...",
+          "optA": "A. 252 m",
+          "optB": "B. 342 m",
+          "optC": "C. 352 m",
+          "optD": "D. 368 m"
+        },
+        "q8": {
+          "stemPre": "Denah sebuah gedung berskala 1 : 300. Jika luas denah 125 cm",
+          "stemPost": ", maka luas gedung sebenarnya adalah ...",
+          "optA": "A. 375 m",
+          "optB": "B. 1.125 m",
+          "optC": "C. 3.750 m",
+          "optD": "D. 11.250 m"
+        },
+        "q9": {
+          "stem": "Jarak dua kota pada peta berskala 1 : 1.200.000 adalah 5 cm. Andi berangkat dari kota A ke kota B mengendarai motor dengan kecepatan rata-rata 40 km/jam. Jika ia berangkat pukul 07.15 dan beristirahat selama 30 menit di perjalanan, pada pukul berapa ia akan tiba di kota B?",
+          "optA": "A. 09.45",
+          "optB": "B. 08.45",
+          "optC": "C. 09.15",
+          "optD": "D. 10.15"
+        },
+        "q10": {
+          "stem": "Sebuah perusahaan properti membuat maket (model miniatur 3D) apartemen dengan skala 1 : 100. Jika kolam renang pada maket tersebut bervolume 2 liter air saat penuh, berapakah kapasitas air kolam renang tersebut di dunia nyata?",
+          "optA": "A. 2.000 liter",
+          "optB": "B. 20.000 liter",
+          "optC": "C. 200 liter",
+          "optD": "D. 2.000.000 liter"
+        }
       }
     }
   },

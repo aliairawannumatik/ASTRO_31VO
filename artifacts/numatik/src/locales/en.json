@@ -1823,6 +1823,85 @@
         "q8": "Setting up a cultural festival stage is estimated to take 24 days if done by 6 technicians. After 4 days of work, operations were halted for 8 days due to a storm. How many additional technicians are needed so the stage is ready on the original schedule?",
         "q9": "A school uniform order can be completed by 4 tailors in 20 days. After they worked for 4 days, a power outage stopped all work for 12 days. How many additional tailors are needed to complete the order on time?",
         "q10": "A large wedding catering order would take 3 head chefs 10 days, or 8 kitchen assistants 9 days to complete. If the order is worked on together by 5 head chefs and 6 kitchen assistants, how many days will it take to complete?"
+      },
+      "perbandinganSkala": {
+        "title": "SCALE",
+        "pageSubtitle": "Grade 7 · Ratios · Self-Practice",
+        "instruction": "Solve the following problems, showing all your work",
+        "backTo": "Back to Ratios",
+        "q1": {
+          "stem": "The meaning of a map scale of 1 : 500,000 is...",
+          "optA": "A. 1 cm on the map represents 500,000 cm of actual distance.",
+          "optB": "B. 1 cm on the map represents 500,000 km of actual distance.",
+          "optC": "C. 1 km on the map represents 500,000 cm of actual distance.",
+          "optD": "D. 500,000 cm on the map represents 1 cm of actual distance."
+        },
+        "q2": {
+          "stem": "Map of region X has a scale of 1 : 50,000. Map of region Y has a scale of 1 : 250,000. The correct statement about these two maps is...",
+          "optA": "A. Map X shows a larger area with less detail than map Y.",
+          "optB": "B. One centimeter on map X represents a greater real distance than on map Y.",
+          "optC": "C. Both maps have the same level of detail.",
+          "optD": "D. Map X is more detailed than map Y for the same paper size."
+        },
+        "q3": {
+          "stem": "The distance between two cities on a map is 20 cm. If the map scale is 1 : 600,000, the actual distance between the two cities is...",
+          "optA": "A. 1,200 km",
+          "optB": "B. 120 km",
+          "optC": "C. 30 km",
+          "optD": "D. 12 km"
+        },
+        "q4": {
+          "stem": "The actual distance between city A and city B is 120 km. If the distance on the map is 6 cm, what is the map's scale?",
+          "optA": "A. 1 : 2,000,000",
+          "optB": "B. 1 : 200,000",
+          "optC": "C. 1 : 20,000,000",
+          "optD": "D. 1 : 720,000"
+        },
+        "q5": {
+          "stem": "A garden on a floor plan measures 12 cm × 15 cm. If the actual size of the garden is 50 m × 40 m, the scale used is....",
+          "optA": "A. 3 : 100",
+          "optB": "B. 3 : 800",
+          "optC": "C. 3 : 1,250",
+          "optD": "D. 3 : 1,000"
+        },
+        "q6": {
+          "stem": "The actual distance between two buildings is 4.5 km. If the buildings are drawn on a floor plan using a scale of 1 : 15,000, the distance on the floor plan is...",
+          "optA": "A. 3 cm",
+          "optB": "B. 30 cm",
+          "optC": "C. 300 cm",
+          "optD": "D. 0.3 cm"
+        },
+        "q7": {
+          "stemIntro": "Look at the following house floor plan!",
+          "imgAlt": "House floor plan",
+          "stem": "If the floor plan scale is 1 : 200, the actual area of the house is ...",
+          "optA": "A. 252 m",
+          "optB": "B. 342 m",
+          "optC": "C. 352 m",
+          "optD": "D. 368 m"
+        },
+        "q8": {
+          "stemPre": "A building floor plan has a scale of 1 : 300. If the floor plan area is 125 cm",
+          "stemPost": ", the actual area of the building is ...",
+          "optA": "A. 375 m",
+          "optB": "B. 1,125 m",
+          "optC": "C. 3,750 m",
+          "optD": "D. 11,250 m"
+        },
+        "q9": {
+          "stem": "The distance between two cities on a map with a scale of 1 : 1,200,000 is 5 cm. Andi travels from city A to city B by motorbike at an average speed of 40 km/h. If he departs at 07:15 and rests for 30 minutes along the way, what time will he arrive at city B?",
+          "optA": "A. 09:45",
+          "optB": "B. 08:45",
+          "optC": "C. 09:15",
+          "optD": "D. 10:15"
+        },
+        "q10": {
+          "stem": "A property company builds a scale model (3D miniature) of an apartment building at a scale of 1 : 100. If the swimming pool in the model holds 2 liters of water when full, what is the actual water capacity of the swimming pool?",
+          "optA": "A. 2,000 liters",
+          "optB": "B. 20,000 liters",
+          "optC": "C. 200 liters",
+          "optD": "D. 2,000,000 liters"
+        }
       }
     }
   },

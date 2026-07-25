@@ -1,0 +1,48 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia, 
+English, Japanese) pakai react-i18next dengan useTranslation() dan 
+file locale (id.json, en.json, ja.json). Topik "Bilangan Bulat", 
+"Pecahan", "Aljabar", "PLSV & PtLSV" di Kelas 7 sudah selesai. Topik 
+"Perbandingan" — index dan sub-halaman 1-3 sudah selesai.
+
+ATURAN PENTING:
+- Soal ditulis sebagai komponen JSX inline — terjemahkan pakai t() 
+  atau <Trans>
+- TIDAK ADA sistem cards/tag/isDark di topik ini
+- Rumus KaTeX dengan \text{} berisi bahasa natural WAJIB diganti ke 
+  JSX terpisah atau \mathrm{}
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman ke-4: PerbandinganSkalaPage.tsx (10 soal). 
+PENTING — pola baru yang belum pernah dikerjakan di sub-halaman lain: 
+halaman ini format pilihan ganda (A/B/C/D), semua opsi jawaban hardcode 
+sebagai <p>A. ..., <p>B. ... dll. Gunakan pola key seperti 
+q1.stem (teks soal) + q1.optA/optB/optC/optD (masing-masing opsi).
+
+PERHATIAN KHUSUS: Soal 7 punya gambar denah 
+(/images/image_1777478280088.png) yang TIDAK BISA/TIDAK PERLU 
+diterjemahkan (gambar statis) — tapi teks deskripsi soal dan 4 opsi 
+jawaban di sekitarnya WAJIB tetap diterjemahkan seperti soal lain.
+
+1. Konversi semua komponen soal ke useTranslation()
+2. Terjemahkan SEMUA teks: instruksi, teks soal (stem), 4 opsi jawaban 
+   A/B/C/D di setiap soal, pembahasan
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di 
+   bawah practice.perbandingan.perbandinganSkala.*
+5. JANGAN sentuh sub-halaman lain (1 sisanya: PerbandinganCampuran)
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat 
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan, dan 
+  konfirmasi eksplisit bahwa SEMUA 10 soal × 4 opsi (40 opsi total) 
+  sudah diterjemahkan
