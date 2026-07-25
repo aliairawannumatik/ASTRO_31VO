@@ -1179,6 +1179,58 @@
         "tag6": "Kontekstual",
         "tag7": "Soal Cerita",
         "tag8": "Pola Bilangan"
+      },
+      "faktorisasi": {
+        "pageTitle": "FAKTORISASI BENTUK ALJABAR",
+        "soalTotal": "8 Soal Essay",
+        "tags": {
+          "gcf": "GCF / Distributif",
+          "grouping": "Pengelompokan",
+          "selisihKuadrat": "Selisih Dua Kuadrat",
+          "trinomial1a": "Trinomial  a = 1  (1–10)",
+          "trinomial1b": "Trinomial  a = 1  (11–20)",
+          "trinomialNa": "Trinomial  a ≠ 1  (1–10)",
+          "trinomialNb": "Trinomial  a ≠ 1  (11–20)",
+          "kontekstual": "Kontekstual"
+        },
+        "q1": {
+          "instruction": "Faktorkan bentuk-bentuk aljabar berikut menggunakan faktor persekutuan terbesar (GCF)!"
+        },
+        "q2": {
+          "instruction": "Faktorkan bentuk-bentuk aljabar berikut menggunakan metode pengelompokan (grouping)!"
+        },
+        "q3": {
+          "instruction": "Faktorkan bentuk selisih dua kuadrat berikut!"
+        },
+        "q4": {
+          "introPre": "Faktorkan trinomial",
+          "introMid": "berikut, dengan",
+          "introEnd": "!"
+        },
+        "q5": {
+          "introPre": "Lanjutkan faktorisasi trinomial",
+          "introMid": "berikut, termasuk yang melibatkan dua variabel!"
+        },
+        "q6": {
+          "introPre": "Faktorkan trinomial",
+          "introMid": "berikut, dengan",
+          "introEnd": "!"
+        },
+        "q7": {
+          "introPre": "Lanjutkan faktorisasi trinomial dengan",
+          "introMid": "berikut, termasuk yang berkoefisien negatif dan bervariabel dua!"
+        },
+        "q8": {
+          "instruction": "Gunakan konsep faktorisasi untuk menyelesaikan soal-soal berikut!",
+          "itemAPre": "Luas sebuah taman berbentuk persegi panjang dinyatakan oleh",
+          "itemAPost": ". Tentukan kemungkinan ekspresi panjang dan lebar taman tersebut!",
+          "itemBPre": "Sebuah kolam renang berbentuk persegi panjang memiliki luas",
+          "itemBMid": "m². Jika panjangnya",
+          "itemBEnd": "m, tentukan lebar kolam tersebut dalam bentuk aljabar!",
+          "itemCPre": "Buktikan bahwa selisih kuadrat dua bilangan bulat berurutan selalu sama dengan jumlah kedua bilangan tersebut! (Petunjuk: gunakan",
+          "itemCMid": "dan",
+          "itemCEnd": ")"
+        }
       }
     }
   },

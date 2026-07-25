@@ -1179,6 +1179,58 @@
         "tag6": "文脈的",
         "tag7": "文章題",
         "tag8": "数列"
+      },
+      "faktorisasi": {
+        "pageTitle": "代数式の因数分解",
+        "soalTotal": "記述式8問",
+        "tags": {
+          "gcf": "GCF・分配法則",
+          "grouping": "グルーピング法",
+          "selisihKuadrat": "2乗の差",
+          "trinomial1a": "三項式  a = 1  (1–10)",
+          "trinomial1b": "三項式  a = 1  (11–20)",
+          "trinomialNa": "三項式  a ≠ 1  (1–10)",
+          "trinomialNb": "三項式  a ≠ 1  (11–20)",
+          "kontekstual": "文章題"
+        },
+        "q1": {
+          "instruction": "最大公約数（GCF）を使って次の代数式を因数分解しなさい！"
+        },
+        "q2": {
+          "instruction": "グルーピング法を使って次の代数式を因数分解しなさい！"
+        },
+        "q3": {
+          "instruction": "次の2乗の差を因数分解しなさい！"
+        },
+        "q4": {
+          "introPre": "次の",
+          "introMid": "の三項式を因数分解しなさい（",
+          "introEnd": "）！"
+        },
+        "q5": {
+          "introPre": "次の三項式（",
+          "introMid": "）を因数分解しなさ、2変数も含む！"
+        },
+        "q6": {
+          "introPre": "次の",
+          "introMid": "の三項式を因数分解しなさい（",
+          "introEnd": "）！"
+        },
+        "q7": {
+          "introPre": "次の",
+          "introMid": "の三項式を因数分解しなさい（負の係数・2変数を含む）！"
+        },
+        "q8": {
+          "instruction": "因数分解の概念を使って次の問題を解きなさい！",
+          "itemAPre": "長方形の庭の面積が",
+          "itemAPost": "で表されています。庭の縦と横の可能な式を求めなさい！",
+          "itemBPre": "長方形のプールの面積が",
+          "itemBMid": "m²です。横の長さが",
+          "itemBEnd": "m のとき、縦の長さを代数式で求めなさい！",
+          "itemCPre": "連続す2整数の平方の差は常にそれらの和に等しいことを証明しなさい！（ヒント：",
+          "itemCMid": "と",
+          "itemCEnd": "を使いなさい）"
+        }
       }
     }
   },

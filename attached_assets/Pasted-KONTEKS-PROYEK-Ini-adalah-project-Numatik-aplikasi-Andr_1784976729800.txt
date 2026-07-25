@@ -1,0 +1,55 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia, 
+English, Japanese) pakai react-i18next dengan useTranslation() dan 
+file locale (id.json, en.json, ja.json). Konten "Buku Animasi 
+Matematika" sudah selesai trilingual. Sekarang sedang mengerjakan 
+menu "Tugas-Latihan Mandiri" per topik dan sub-halaman.
+
+Progress Kelas 7 Tugas-Latihan Mandiri:
+- Topik "Bilangan Bulat" — selesai (6 sub-halaman)
+- Topik "Pecahan" — selesai (10 sub-halaman)
+- Topik "Aljabar" — index selesai, sub-halaman 1-6 selesai 
+  (PengertianUnsurAljabarPage.tsx, 
+  PenjumlahanPenguranganAljabarPage.tsx, PerkalianAljabarPage.tsx, 
+  PembagianAljabarPage.tsx, PemangkatanAljabarPage.tsx, 
+  SubstitusiBilanganAljabarPage.tsx)
+
+ATURAN PENTING:
+- Soal ditulis sebagai komponen JSX inline per soal (const SoalSatu 
+  = () => (...)), BUKAN array data — terjemahkan pakai t() atau 
+  <Trans> untuk teks campur JSX/rumus
+- Reuse translation key yang sudah ada untuk teks identik
+- Rumus KaTeX dengan \text{} berisi bahasa natural WAJIB diganti ke 
+  JSX terpisah atau \mathrm{}
+- TypeScript harus 0 error baru (boleh ada error pre-existing di 
+  file lain)
+- Struktur, layout, logic lain JANGAN diubah
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman ke-7 dari topik Aljabar Kelas 7: 
+FaktorisasiAljabarPage.tsx (8 soal). PENTING: cek dulu apakah halaman 
+ini termasuk kategori "cards di luar page" (perlu dipindah ke dalam + 
+tambah isDark) atau "cards di dalam page" (tinggal langsung tambah 
+useTranslation()).
+
+1. Buka file FaktorisasiAljabarPage.tsx, cek dulu kategorinya dan 
+   laporkan
+2. Kalau perlu restrukturisasi cards, lakukan seperti di 
+   PengertianUnsurAljabarPage.tsx / PembagianAljabarPage.tsx
+3. Terjemahkan SEMUA teks di 8 komponen soal: instruksi, teks soal, 
+   pilihan jawaban, pembahasan, label tag di cards
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di 
+   bawah practice.aljabar.faktorisasi.*
+5. JANGAN sentuh sub-halaman terakhir (MenyederhanakanPecahanAljabar)
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat 
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan 
+  (HTTP 200, brace balance, dll)

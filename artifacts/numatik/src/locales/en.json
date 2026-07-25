@@ -1179,6 +1179,58 @@
         "tag6": "Contextual",
         "tag7": "Word Problem",
         "tag8": "Number Pattern"
+      },
+      "faktorisasi": {
+        "pageTitle": "ALGEBRAIC FACTORIZATION",
+        "soalTotal": "8 Essay Problems",
+        "tags": {
+          "gcf": "GCF / Distributive",
+          "grouping": "Grouping",
+          "selisihKuadrat": "Difference of Two Squares",
+          "trinomial1a": "Trinomial  a = 1  (1–10)",
+          "trinomial1b": "Trinomial  a = 1  (11–20)",
+          "trinomialNa": "Trinomial  a ≠ 1  (1–10)",
+          "trinomialNb": "Trinomial  a ≠ 1  (11–20)",
+          "kontekstual": "Contextual"
+        },
+        "q1": {
+          "instruction": "Factor the following algebraic expressions using the greatest common factor (GCF)!"
+        },
+        "q2": {
+          "instruction": "Factor the following algebraic expressions using the grouping method!"
+        },
+        "q3": {
+          "instruction": "Factor the following differences of two squares!"
+        },
+        "q4": {
+          "introPre": "Factor the following trinomials",
+          "introMid": "where",
+          "introEnd": "!"
+        },
+        "q5": {
+          "introPre": "Continue factoring trinomials where",
+          "introMid": ", including those with two variables!"
+        },
+        "q6": {
+          "introPre": "Factor the following trinomials",
+          "introMid": "where",
+          "introEnd": "!"
+        },
+        "q7": {
+          "introPre": "Continue factoring trinomials where",
+          "introMid": ", including those with negative coefficients and two variables!"
+        },
+        "q8": {
+          "instruction": "Use the concept of factorization to solve the following problems!",
+          "itemAPre": "The area of a rectangular garden is expressed by",
+          "itemAPost": ". Determine possible expressions for the length and width of the garden!",
+          "itemBPre": "A rectangular swimming pool has an area of",
+          "itemBMid": "m². If its length is",
+          "itemBEnd": "m, determine the width of the pool in algebraic form!",
+          "itemCPre": "Prove that the difference of squares of two consecutive integers is always equal to their sum! (Hint: use",
+          "itemCMid": "and",
+          "itemCEnd": ")"
+        }
       }
     }
   },
