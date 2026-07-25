@@ -84,3 +84,13 @@ Add under `practice.<topicKey>` in all 3 locale files:
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.
 - Kelas 9 Kesebangunan: trilingual support incomplete (task proposed).
 - **Kelas 7 Bilangan Bulat (all 6 exercise sub-pages + index)**: Fully trilingual (id/en/ja) as of July 2026. Pattern is proven and ready to replicate to other Kelas 7 topics.
+- **Kelas 7 Pecahan — ArtiPecahanSenilaiMembandingkanPage.tsx + BilanganRasionalPage.tsx (index)**: Fully trilingual (id/en/ja) as of July 2026. New JSX-soal pattern documented below.
+
+## JSX-soal trilingual pattern (Pecahan pages — different from Bilangan Bulat)
+Pecahan soal components are JSX components (not data arrays). Key differences:
+- Change each `SoalX` from arrow shorthand `() => (...)` to function body `() => { const { t } = useTranslation(); return (...); }` — hooks can't be called in shorthand bodies.
+- Move the `cards` array (which contains tag labels) **inside** the page component so it can call `t()` for tag strings.
+- For inline math symbols inside prose text (e.g. `<InlineMath math=">" /> atau <InlineMath math="<" />`), use `<Trans i18nKey="..." components={{ gt: <InlineMath math=">" />, lt: <InlineMath math="<" /> }} />` — import `Trans` from `react-i18next`.
+- Locale keys live under `practice.pecahan.<pageKey>.*` (e.g. `practice.pecahan.artiSenilai.q5.instruction`).
+- Index page (BilanganRasionalPage): rename `subtopics` const to `subtopicsConfig` (remove `label`/`desc`, add `key`), then derive `subtopics` inside component with `subtopicsConfig.map(s => ({ ...s, label: t(...), desc: t(...) }))`.
+- Reference file: `artifacts/numatik/src/pages/latihan-mandiri/kelas7/pecahan/ArtiPecahanSenilaiMembandingkanPage.tsx`

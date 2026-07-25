@@ -352,6 +352,115 @@
         "operasiCampuran": "OPERASI HITUNG CAMPURAN BILANGAN BULAT",
         "kpkFpb": "KPK DAN FPB"
       }
+    },
+    "pecahan": {
+      "title": "PECAHAN",
+      "soalTotal": "480 Soal Total · UN / TKA / ANBK",
+      "enrichmentNoteDesc": "Soal-soal dirancang berdasarkan kisi-kisi UN, TKA, dan ANBK, mencakup pecahan dan bilangan desimal dari konsep dasar hingga penalaran tinggi (HOTS).",
+      "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+      "backTo": "← Kembali ke Pecahan",
+      "subtopics": {
+        "artiPecahan": {
+          "label": "ARTI PECAHAN, PECAHAN SENILAI DAN MEMBANDINGKAN PECAHAN",
+          "desc": "Pengertian pecahan, pecahan senilai, membandingkan & mengurutkan pecahan"
+        },
+        "pecahanCampuran": {
+          "label": "PECAHAN CAMPURAN DAN PERSEN",
+          "desc": "Konversi pecahan campuran, pecahan biasa, persen, dan desimal"
+        },
+        "penjumlahanPecahan": {
+          "label": "PENJUMLAHAN DAN PENGURANGAN PECAHAN",
+          "desc": "Penjumlahan dan pengurangan pecahan berpenyebut sama dan berbeda, soal kontekstual"
+        },
+        "perkalianPecahan": {
+          "label": "PERKALIAN PECAHAN",
+          "desc": "Perkalian pecahan biasa dan campuran, penyederhanaan silang"
+        },
+        "pembagianPecahan": {
+          "label": "PEMBAGIAN PECAHAN",
+          "desc": "Pembagian pecahan, konsep membalik pembagi, aplikasi nyata"
+        },
+        "bentukDesimal": {
+          "label": "BENTUK DESIMAL",
+          "desc": "Pengertian desimal, nilai tempat, konversi pecahan ke desimal dan sebaliknya"
+        },
+        "penjumlahanDesimal": {
+          "label": "PENJUMLAHAN DAN PENGURANGAN BENTUK DESIMAL",
+          "desc": "Penjumlahan bilangan desimal, menyamakan nilai tempat"
+        },
+        "perkalianDesimal": {
+          "label": "PERKALIAN BENTUK DESIMAL",
+          "desc": "Perkalian desimal, menentukan letak koma pada hasil kali"
+        },
+        "pembagianDesimal": {
+          "label": "PEMBAGIAN BENTUK DESIMAL",
+          "desc": "Pembagian bilangan desimal, pembagi desimal, pola bagi"
+        },
+        "pembulatanDesimal": {
+          "label": "PEMBULATAN BENTUK DESIMAL",
+          "desc": "Pembulatan ke satuan, puluhan, desimal tertentu, aturan pembulatan"
+        }
+      },
+      "pageTitles": {
+        "artiPecahan": "ARTI PECAHAN, PECAHAN SENILAI DAN MEMBANDINGKAN PECAHAN",
+        "pecahanCampuran": "PECAHAN CAMPURAN DAN PERSEN",
+        "penjumlahanPecahan": "PENJUMLAHAN DAN PENGURANGAN PECAHAN",
+        "perkalianPecahan": "PERKALIAN PECAHAN",
+        "pembagianPecahan": "PEMBAGIAN PECAHAN",
+        "bentukDesimal": "BENTUK DESIMAL",
+        "penjumlahanDesimal": "PENJUMLAHAN DAN PENGURANGAN BENTUK DESIMAL",
+        "perkalianDesimal": "PERKALIAN BENTUK DESIMAL",
+        "pembagianDesimal": "PEMBAGIAN BENTUK DESIMAL",
+        "pembulatanDesimal": "PEMBULATAN BENTUK DESIMAL"
+      },
+      "artiSenilai": {
+        "pageTitle1": "ARTI PECAHAN, PECAHAN SENILAI",
+        "pageTitle2": "DAN MEMBANDINGKAN PECAHAN",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "8 Soal Essay",
+        "tags": {
+          "q1": "Gambar",
+          "q2": "Kreativitas",
+          "q3": "Pecahan Senilai",
+          "q4": "Penyederhanaan",
+          "q5": "Membandingkan",
+          "q6": "Mengurutkan",
+          "q7": "Kontekstual",
+          "q8": "Riset"
+        },
+        "q1": {
+          "instruction": "Tentukan pecahan yang ditunjukkan oleh bagian yang diarsir pada gambar berikut!"
+        },
+        "q2": {
+          "instruction": "Gambarlah bangun datar dan arsir bagian yang ditunjukkan!",
+          "itemA": "Buatlah sebuah lingkaran, bagilah menjadi enam bagian sama besar, kemudian arsir dua bagian!",
+          "itemB": "Ulangi langkah pada poin a dengan menggunakan tiga bentuk bangun datar yang berbeda!"
+        },
+        "q3": {
+          "instruction": "Isilah titik-titik berikut untuk menyatakan pecahan-pecahan yang sama nilainya!"
+        },
+        "q4": {
+          "instruction": "Tulislah pecahan-pecahan berikut dalam bentuk yang paling sederhana!"
+        },
+        "q5": {
+          "instruction": "Gunakan lambang <gt/> atau <lt/> untuk menyatakan hubungan setiap pasangan pecahan berikut!"
+        },
+        "q6": {
+          "instruction": "Susunlah deretan pecahan berikut dalam urutan naik (dari terkecil ke terbesar)!",
+          "hint": "urutan naik →"
+        },
+        "q7": {
+          "instruction": "Nyatakan bagian berikut sebagai pecahan!",
+          "itemA": "Banyaknya hari sekolah dalam satu minggu (Senin–Jumat) sebagai bagian dari banyaknya hari dalam satu minggu penuh.",
+          "itemB": "Banyak siswa perempuan di kelasmu sebagai bagian dari seluruh siswa yang ada di kelasmu."
+        },
+        "q8": {
+          "instruction": "Carilah informasi melalui internet, lalu nyatakan hasilnya dalam bentuk pecahan!",
+          "itemA": "Banyak penduduk usia sekolah (7–15 tahun) di Indonesia terhadap total seluruh penduduk Indonesia.",
+          "itemB": "Panjang garis pantai Pulau Jawa terhadap total panjang garis pantai seluruh Indonesia.",
+          "itemC": "Luas daratan Pulau Kalimantan terhadap total luas daratan seluruh wilayah Indonesia."
+        }
+      }
     }
   },
   "settings": {

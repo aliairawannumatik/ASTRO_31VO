@@ -352,6 +352,115 @@
         "operasiCampuran": "整数の四則混合計算",
         "kpkFpb": "最小公倍数と最大公約数"
       }
+    },
+    "pecahan": {
+      "title": "分数",
+      "soalTotal": "全480問 · UN / TKA / ANBK",
+      "enrichmentNoteDesc": "問題はUN・TKA・ANBKの出題基準に基づき、分数と小数を基礎概念から高次思考（HOTS）まで網羅しています。",
+      "pageSubtitle": "7年生 · 分数 · 自習",
+      "backTo": "← 分数に戻る",
+      "subtopics": {
+        "artiPecahan": {
+          "label": "分数の意味・等しい分数・大小比較",
+          "desc": "分数の定義、等しい分数、大小比較・整序"
+        },
+        "pecahanCampuran": {
+          "label": "帯分数と百分率",
+          "desc": "帯分数・仮分数・百分率・小数の変換"
+        },
+        "penjumlahanPecahan": {
+          "label": "分数の加法と減法",
+          "desc": "同分母・異分母の分数の加減算、文脈問題"
+        },
+        "perkalianPecahan": {
+          "label": "分数の乗法",
+          "desc": "真分数・帯分数の乗法、約分"
+        },
+        "pembagianPecahan": {
+          "label": "分数の除法",
+          "desc": "分数の割り算、逆数の概念、実際の応用"
+        },
+        "bentukDesimal": {
+          "label": "小数",
+          "desc": "小数の理解、位、分数と小数の変換"
+        },
+        "penjumlahanDesimal": {
+          "label": "小数の加法と減法",
+          "desc": "小数の加算、位揃え"
+        },
+        "perkalianDesimal": {
+          "label": "小数の乗法",
+          "desc": "小数の乗法、積の小数点の位置"
+        },
+        "pembagianDesimal": {
+          "label": "小数の除法",
+          "desc": "小数の除法、小数の除数、割り算のパターン"
+        },
+        "pembulatanDesimal": {
+          "label": "小数の四捨五入",
+          "desc": "一の位・十の位・指定小数位への四捨五入の規則"
+        }
+      },
+      "pageTitles": {
+        "artiPecahan": "分数の意味・等しい分数・大小比較",
+        "pecahanCampuran": "帯分数と百分率",
+        "penjumlahanPecahan": "分数の加法と減法",
+        "perkalianPecahan": "分数の乗法",
+        "pembagianPecahan": "分数の除法",
+        "bentukDesimal": "小数",
+        "penjumlahanDesimal": "小数の加法と減法",
+        "perkalianDesimal": "小数の乗法",
+        "pembagianDesimal": "小数の除法",
+        "pembulatanDesimal": "小数の四捨五入"
+      },
+      "artiSenilai": {
+        "pageTitle1": "分数の意味・等しい分数",
+        "pageTitle2": "と分数の大小比較",
+        "pageSubtitle": "7年生 · 分数 · 自習",
+        "badgeSoal": "8問 記述式",
+        "tags": {
+          "q1": "図",
+          "q2": "創造",
+          "q3": "等しい分数",
+          "q4": "約分",
+          "q5": "大小比較",
+          "q6": "整序",
+          "q7": "文脈問題",
+          "q8": "調査"
+        },
+        "q1": {
+          "instruction": "次の図で色のついた部分が表す分数を答えなさい！"
+        },
+        "q2": {
+          "instruction": "平面図形を描いて、指定された部分を色で塗りなさい！",
+          "itemA": "円を描き、6等分して、そのうち2つを塗りなさい！",
+          "itemB": "aの手順を、異なる3種類の平面図形で繰り返しなさい！"
+        },
+        "q3": {
+          "instruction": "等しい分数を表すように□に当てはまる数を書きなさい！"
+        },
+        "q4": {
+          "instruction": "次の分数をそれぞれ最も簡単な形（既約分数）にしなさい！"
+        },
+        "q5": {
+          "instruction": "<gt/>または<lt/>の記号を使って、次の各分数ペアの大小関係を表しなさい！"
+        },
+        "q6": {
+          "instruction": "次の分数を小さい順（昇順）に並べなさい！",
+          "hint": "昇順 →"
+        },
+        "q7": {
+          "instruction": "次のそれぞれを分数で表しなさい！",
+          "itemA": "1週間（月曜〜金曜）の登校日数を、1週間全体の日数に対する分数で表しなさい。",
+          "itemB": "あなたのクラスの女子生徒数を、クラス全体の生徒数に対する分数で表しなさい。"
+        },
+        "q8": {
+          "instruction": "インターネットで調べて、結果を分数で表しなさい！",
+          "itemA": "インドネシアの就学年齢人口（7〜15歳）の、総人口に対する割合。",
+          "itemB": "ジャワ島の海岸線の長さの、インドネシア全体の海岸線の総延長に対する割合。",
+          "itemC": "カリマンタン島の陸地面積の、インドネシア全体の総陸地面積に対する割合。"
+        }
+      }
     }
   },
   "settings": {

@@ -352,6 +352,115 @@
         "operasiCampuran": "MIXED ARITHMETIC OPERATIONS ON INTEGERS",
         "kpkFpb": "LCM AND GCF"
       }
+    },
+    "pecahan": {
+      "title": "FRACTIONS",
+      "soalTotal": "480 Questions Total · UN / TKA / ANBK",
+      "enrichmentNoteDesc": "Questions are designed based on UN, TKA, and ANBK exam grids, covering fractions and decimals from foundational concepts to higher-order thinking (HOTS).",
+      "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+      "backTo": "← Back to Fractions",
+      "subtopics": {
+        "artiPecahan": {
+          "label": "MEANING OF FRACTIONS, EQUIVALENT FRACTIONS & COMPARING",
+          "desc": "Definition of fractions, equivalent fractions, comparing & ordering fractions"
+        },
+        "pecahanCampuran": {
+          "label": "MIXED FRACTIONS AND PERCENTAGES",
+          "desc": "Converting mixed fractions, improper fractions, percentages, and decimals"
+        },
+        "penjumlahanPecahan": {
+          "label": "ADDITION AND SUBTRACTION OF FRACTIONS",
+          "desc": "Adding and subtracting fractions with like and unlike denominators, contextual problems"
+        },
+        "perkalianPecahan": {
+          "label": "MULTIPLICATION OF FRACTIONS",
+          "desc": "Multiplying proper and mixed fractions, cross-simplification"
+        },
+        "pembagianPecahan": {
+          "label": "DIVISION OF FRACTIONS",
+          "desc": "Dividing fractions, concept of inverting the divisor, real applications"
+        },
+        "bentukDesimal": {
+          "label": "DECIMAL FORM",
+          "desc": "Understanding decimals, place values, converting fractions to decimals and vice versa"
+        },
+        "penjumlahanDesimal": {
+          "label": "ADDITION AND SUBTRACTION OF DECIMALS",
+          "desc": "Adding decimal numbers, aligning decimal places"
+        },
+        "perkalianDesimal": {
+          "label": "MULTIPLICATION OF DECIMALS",
+          "desc": "Multiplying decimals, determining decimal point placement in products"
+        },
+        "pembagianDesimal": {
+          "label": "DIVISION OF DECIMALS",
+          "desc": "Dividing decimal numbers, decimal divisors, division patterns"
+        },
+        "pembulatanDesimal": {
+          "label": "ROUNDING DECIMALS",
+          "desc": "Rounding to units, tens, specific decimal places, rounding rules"
+        }
+      },
+      "pageTitles": {
+        "artiPecahan": "FRACTIONS: MEANING, EQUIVALENT & COMPARING",
+        "pecahanCampuran": "MIXED FRACTIONS AND PERCENTAGES",
+        "penjumlahanPecahan": "ADDITION AND SUBTRACTION OF FRACTIONS",
+        "perkalianPecahan": "MULTIPLICATION OF FRACTIONS",
+        "pembagianPecahan": "DIVISION OF FRACTIONS",
+        "bentukDesimal": "DECIMAL FORM",
+        "penjumlahanDesimal": "ADDITION AND SUBTRACTION OF DECIMALS",
+        "perkalianDesimal": "MULTIPLICATION OF DECIMALS",
+        "pembagianDesimal": "DIVISION OF DECIMALS",
+        "pembulatanDesimal": "ROUNDING DECIMALS"
+      },
+      "artiSenilai": {
+        "pageTitle1": "FRACTIONS: MEANING & EQUIVALENT",
+        "pageTitle2": "AND COMPARING FRACTIONS",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "8 Essay Questions",
+        "tags": {
+          "q1": "Diagram",
+          "q2": "Creativity",
+          "q3": "Equivalent Fractions",
+          "q4": "Simplification",
+          "q5": "Comparing",
+          "q6": "Ordering",
+          "q7": "Contextual",
+          "q8": "Research"
+        },
+        "q1": {
+          "instruction": "Determine the fraction represented by the shaded region in each figure below!"
+        },
+        "q2": {
+          "instruction": "Draw a flat shape and shade the indicated part!",
+          "itemA": "Draw a circle, divide it into six equal parts, then shade two parts!",
+          "itemB": "Repeat the steps in part a using three different flat shapes!"
+        },
+        "q3": {
+          "instruction": "Fill in the blanks to express equivalent fractions!"
+        },
+        "q4": {
+          "instruction": "Write each fraction below in its simplest form!"
+        },
+        "q5": {
+          "instruction": "Use the symbol <gt/> or <lt/> to express the relationship between each pair of fractions below!"
+        },
+        "q6": {
+          "instruction": "Arrange each set of fractions in ascending order (from smallest to largest)!",
+          "hint": "ascending order →"
+        },
+        "q7": {
+          "instruction": "Express each of the following as a fraction!",
+          "itemA": "The number of school days in one week (Monday–Friday) as a fraction of the total days in a full week.",
+          "itemB": "The number of female students in your class as a fraction of the total number of students in your class."
+        },
+        "q8": {
+          "instruction": "Research online, then express the result as a fraction!",
+          "itemA": "The number of school-age residents (ages 7–15) in Indonesia compared to the total population of Indonesia.",
+          "itemB": "The length of Java's coastline compared to the total coastline length of all of Indonesia.",
+          "itemC": "The land area of Kalimantan Island compared to the total land area of all of Indonesia."
+        }
+      }
     }
   },
   "settings": {
