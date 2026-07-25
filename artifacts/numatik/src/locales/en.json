@@ -1319,6 +1319,27 @@
           "itemAMid": ", ",
           "itemASuffix": " is a factor of 20."
         }
+      },
+      "pengertianPLSV": {
+        "title1": "DEFINITION OF LEOV, IDENTITY,",
+        "title2": "AND EQUIVALENT EQUATIONS",
+        "badge": "3 Essay Questions",
+        "tags": {
+          "q1": "Identify LEOV",
+          "q2": "Equation or Identity",
+          "q3": "Equivalent or Not"
+        },
+        "q1": {
+          "instruction": "Among the following open sentences, which ones are a <a>linear equation in one variable (LEOV)</a>?"
+        },
+        "q2": {
+          "instruction": "Among the following sentences, which ones are an <a>equation</a> and which ones are an <b>identity</b>?",
+          "itemHint": "equation / identity?"
+        },
+        "q3": {
+          "instruction": "State whether each pair of equations is <a>“equivalent”</a> or <b>“not equivalent”</b>!",
+          "connector": "and"
+        }
       }
     }
   },

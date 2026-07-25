@@ -1319,6 +1319,27 @@
           "itemAMid": ", ",
           "itemASuffix": " faktor dari 20."
         }
+      },
+      "pengertianPLSV": {
+        "title1": "PENGERTIAN PLSV, KESAMAAN,",
+        "title2": "DAN PERNYATAAN EKUIVALEN",
+        "badge": "3 Soal Essay",
+        "tags": {
+          "q1": "Identifikasi PLSV",
+          "q2": "Persamaan atau Kesamaan",
+          "q3": "Ekuivalen atau Tidak"
+        },
+        "q1": {
+          "instruction": "Di antara kalimat-kalimat terbuka berikut, manakah yang merupakan <a>persamaan linear satu variabel (PLSV)</a>?"
+        },
+        "q2": {
+          "instruction": "Di antara kalimat-kalimat berikut, manakah yang merupakan <a>persamaan</a> dan manakah yang merupakan <b>kesamaan</b>?",
+          "itemHint": "persamaan / kesamaan?"
+        },
+        "q3": {
+          "instruction": "Nyatakan pasangan-pasangan persamaan berikut <a>“ekuivalen”</a> atau <b>“tidak ekuivalen”</b>!",
+          "connector": "dan"
+        }
       }
     }
   },
