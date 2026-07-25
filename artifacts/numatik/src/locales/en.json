@@ -1797,6 +1797,32 @@
           "a": "a. The number of marbles Fani and Hana each have",
           "b": "b. The total number of marbles all three have"
         }
+      },
+      "perbandinganSenilai": {
+        "title": "DIRECT AND INVERSE PROPORTION",
+        "pageSubtitle": "Grade 7 · Ratios · Self-Practice",
+        "instruction": "Solve the following problems, showing all your work",
+        "backTo": "Back to Ratios",
+        "q1": {
+          "intro": "For each of the following statements, determine whether it represents a direct proportion, an inverse proportion, or neither!",
+          "a": "The average speed of a car and the travel time needed to reach the destination city.",
+          "b": "The number of servings in a cake recipe and the amount of flour (in grams) required.",
+          "c": "A person's age and their shoe size.",
+          "d": "The distance traveled by a taxi and the total fare the passenger must pay.",
+          "e": "The number of pages in a novel and the time needed to read it from start to finish.",
+          "f": "The number of water pumps running and the time needed to empty a swimming pool.",
+          "g": "The number of siblings a student has and their mathematics exam score.",
+          "h": "The flow rate of water from a tap and the volume of water collected in a bucket over a given time."
+        },
+        "q2": "A car needs 4 liters of gasoline to travel 60 km. If the car is filled with 10 liters of gasoline, find the maximum distance the car can travel!",
+        "q3": "A farmer has enough livestock feed for 30 cows for 15 days. If the farmer just bought 15 more cows, how many days will the feed supply last?",
+        "q4": "A digital photo printing machine needs 5 minutes to print 60 high-resolution photos. How many minutes will the machine need to print an order of 84 photos?",
+        "q5": "An animal shelter has enough dry food for 20 cats for 25 days. How many days will the food supply last if the shelter receives 5 more cats?",
+        "q6": "Adi can finish a certain job in 4 hours. Budi can finish the same job in 6 hours. If Adi and Budi work on the job together, how long will it take them to finish?",
+        "q7": "Machine P can fill a tank completely in 2 hours, machine Q in 5 hours, and machine R in 10 hours. If all three machines are turned on at the same time, how long will it take to fill the tank completely?",
+        "q8": "Setting up a cultural festival stage is estimated to take 24 days if done by 6 technicians. After 4 days of work, operations were halted for 8 days due to a storm. How many additional technicians are needed so the stage is ready on the original schedule?",
+        "q9": "A school uniform order can be completed by 4 tailors in 20 days. After they worked for 4 days, a power outage stopped all work for 12 days. How many additional tailors are needed to complete the order on time?",
+        "q10": "A large wedding catering order would take 3 head chefs 10 days, or 8 kitchen assistants 9 days to complete. If the order is worked on together by 5 head chefs and 6 kitchen assistants, how many days will it take to complete?"
       }
     }
   },

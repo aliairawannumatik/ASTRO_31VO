@@ -1797,6 +1797,32 @@
           "a": "a. Kelereng Fani dan Hana masing-masing",
           "b": "b. Jumlah kelereng ketiganya"
         }
+      },
+      "perbandinganSenilai": {
+        "title": "PERBANDINGAN SENILAI DAN BERBALIK NILAI",
+        "pageSubtitle": "Kelas 7 · Perbandingan · Latihan Mandiri",
+        "instruction": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Perbandingan",
+        "q1": {
+          "intro": "Di antara pernyataan-pernyataan berikut, tentukan mana yang merupakan perbandingan senilai, perbandingan berbalik nilai, atau bukan keduanya!",
+          "a": "Kecepatan rata-rata sebuah mobil dengan waktu tempuh untuk mencapai kota tujuan.",
+          "b": "Jumlah porsi resep kue dengan takaran gram tepung terigu yang dibutuhkan.",
+          "c": "Usia seseorang dengan ukuran sepatu yang dipakainya.",
+          "d": "Jarak tempuh sebuah taksi dengan total argo yang harus dibayar penumpang.",
+          "e": "Jumlah halaman sebuah buku novel dengan waktu yang dibutuhkan untuk membacanya sampai tamat.",
+          "f": "Banyaknya pompa air yang dihidupkan dengan waktu yang dibutuhkan untuk mengosongkan kolam renang.",
+          "g": "Jumlah saudara kandung yang dimiliki seorang siswa dengan nilai ujian matematikanya.",
+          "h": "Debit air yang keluar dari keran dengan volume air yang tertampung di dalam ember pada waktu tertentu."
+        },
+        "q2": "Sebuah mobil membutuhkan 4 liter bensin untuk menempuh jarak sejauh 60 km. Jika mobil tersebut diisi dengan 10 liter bensin, tentukan jarak maksimal yang dapat ditempuh oleh mobil tersebut!",
+        "q3": "Seorang peternak memiliki persediaan makanan ternak yang cukup untuk memberi makan 30 ekor sapi selama 15 hari. Jika peternak tersebut baru saja membeli 15 ekor sapi lagi, berapa hari persediaan makanan tersebut akan habis?",
+        "q4": "Sebuah mesin cetak foto digital membutuhkan waktu 5 menit untuk mencetak 60 lembar foto beresolusi tinggi. Berapa menit waktu yang diperlukan mesin tersebut jika harus mencetak pesanan sebanyak 84 lembar foto?",
+        "q5": "Sebuah tempat penampungan hewan (shelter) memiliki persediaan makanan (dry food) yang cukup untuk 20 ekor kucing peliharaan selama 25 hari. Berapa hari persediaan makanan tersebut akan habis jika shelter tersebut menerima tambahan penghuni sebanyak 5 ekor kucing lagi?",
+        "q6": "Adi dapat menyelesaikan suatu pekerjaan selama 4 jam. Budi dapat menyelesaikan pekerjaan yang sama dalam waktu 6 jam. Jika pekerjaan tersebut dikerjakan adi dan budi bersama sama, maka pekerjaan tersebut akan selesai dalam waktu ...",
+        "q7": "Mesin P dapat mengisi tangki sampai penuh dalam 2 jam, mesin Q dalam 5 jam, dan mesin R dalam 10 jam. Jika ketiga mesin dinyalakan secara bersamaan, berapa waktu yang diperlukan hingga tangki terisi penuh?",
+        "q8": "Persiapan sebuah panggung festival budaya diperkirakan selesai dalam waktu 24 hari jika dikerjakan oleh 6 orang teknisi. Setelah dikerjakan selama 4 hari, pekerjaan terpaksa dihentikan selama 8 hari karena badai. Agar persiapan panggung selesai tepat waktu sesuai rencana awal, berapa banyak tambahan teknisi yang diperlukan?",
+        "q9": "Sebuah pesanan seragam sekolah dapat diselesaikan oleh 4 orang penjahit dalam waktu 20 hari. Setelah mereka bekerja selama 4 hari, pasokan listrik terputus sehingga pekerjaan terhenti total selama 12 hari. Berapa banyak tambahan penjahit yang dibutuhkan agar pesanan seragam tersebut dapat diselesaikan tepat waktu?",
+        "q10": "Sebuah pesanan katering pernikahan raksasa jika dikerjakan oleh 3 orang Chef utama akan selesai dalam waktu 10 hari, sedangkan jika dikerjakan oleh 8 orang asisten dapur akan selesai dalam waktu 9 hari. Jika pesanan tersebut dikerjakan secara bersama-sama oleh 5 Chef utama dan 6 asisten dapur, dalam waktu berapa hari pesanan katering itu akan selesai?"
       }
     }
   },
