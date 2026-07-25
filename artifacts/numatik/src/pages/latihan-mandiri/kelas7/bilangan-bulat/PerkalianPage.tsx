@@ -7,53 +7,157 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
-const questions = [
-  {
-    number: 1,
-    content: `Hitunglah perkalian bilangan berikut!`,
-    subItems: [
-      { label: "a.", math: "7 \\times (-9)" },
-      { label: "b.", math: "-6 \\times (-11)" },
-      { label: "c.", math: "-4 \\times 0 \\times (-25)" },
-    ],
-    type: "essay"
-  },
-  {
-    number: 2,
-    content: `Tentukan angka pengganti huruf-huruf berikut sehingga menjadi persamaan matematika yang benar!`,
-    subItems: [
-      { label: "a.", math: "p \\times (-7) = -63" },
-      { label: "b.", math: "q \\times (-12) = 96" },
-      { label: "c.", math: "20 \\times (-4) \\times r = 160" },
-      { label: "d.", math: "-6 \\times 15 \\times s = 270" },
-    ],
-    type: "essay"
-  },
-  {
-    number: 3,
-    content: `Hitunglah hasil dari operasi bilangan campuran berikut!`,
-    subItems: [
-      { label: "a.", math: "-7 \\times (-25 + 14)" },
-      { label: "b.", math: "[-15 - (-40)] \\times (-12)" },
-      { label: "c.", math: "[18 \\times (-6)] + [-22 \\times (-5)]" },
-    ],
-    type: "essay"
-  },
-  {
-    number: 4,
-    content: `Suhu di dalam sebuah lemari pendingin daging adalah -6°C. Ketika terjadi pemadaman listrik, suhu di dalam lemari pendingin tersebut naik sebesar 2°C setiap 5 menit. Tentukan suhu akhir di dalam lemari pendingin tersebut jika listrik mati selama 30 menit!`,
-    type: "essay"
-  },
-  {
-    number: 5,
-    content: `Dalam sebuah olimpiade matematika tingkat daerah yang terdiri dari 40 soal, peserta akan mendapat nilai 4 untuk setiap jawaban yang benar, nilai -2 untuk setiap jawaban yang salah, dan nilai -1 untuk soal yang dibiarkan kosong (tidak dijawab). Jika seorang peserta berhasil menjawab 31 soal dengan benar dan ada 3 soal yang tidak dijawab, berapakah total nilai akhir yang diperoleh peserta tersebut?`,
-    type: "essay"
-  },
-];
+type Lang = "id" | "en" | "ja";
+
+interface SubItem {
+  label: string;
+  math: string;
+}
+
+interface Question {
+  number: number;
+  content: string;
+  subItems?: SubItem[];
+  type: string;
+}
+
+const QUESTIONS_BY_LANG: Record<Lang, Question[]> = {
+  id: [
+    {
+      number: 1,
+      content: `Hitunglah perkalian bilangan berikut!`,
+      subItems: [
+        { label: "a.", math: "7 \\times (-9)" },
+        { label: "b.", math: "-6 \\times (-11)" },
+        { label: "c.", math: "-4 \\times 0 \\times (-25)" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 2,
+      content: `Tentukan angka pengganti huruf-huruf berikut sehingga menjadi persamaan matematika yang benar!`,
+      subItems: [
+        { label: "a.", math: "p \\times (-7) = -63" },
+        { label: "b.", math: "q \\times (-12) = 96" },
+        { label: "c.", math: "20 \\times (-4) \\times r = 160" },
+        { label: "d.", math: "-6 \\times 15 \\times s = 270" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 3,
+      content: `Hitunglah hasil dari operasi bilangan campuran berikut!`,
+      subItems: [
+        { label: "a.", math: "-7 \\times (-25 + 14)" },
+        { label: "b.", math: "[-15 - (-40)] \\times (-12)" },
+        { label: "c.", math: "[18 \\times (-6)] + [-22 \\times (-5)]" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 4,
+      content: `Suhu di dalam sebuah lemari pendingin daging adalah -6°C. Ketika terjadi pemadaman listrik, suhu di dalam lemari pendingin tersebut naik sebesar 2°C setiap 5 menit. Tentukan suhu akhir di dalam lemari pendingin tersebut jika listrik mati selama 30 menit!`,
+      type: "essay",
+    },
+    {
+      number: 5,
+      content: `Dalam sebuah olimpiade matematika tingkat daerah yang terdiri dari 40 soal, peserta akan mendapat nilai 4 untuk setiap jawaban yang benar, nilai -2 untuk setiap jawaban yang salah, dan nilai -1 untuk soal yang dibiarkan kosong (tidak dijawab). Jika seorang peserta berhasil menjawab 31 soal dengan benar dan ada 3 soal yang tidak dijawab, berapakah total nilai akhir yang diperoleh peserta tersebut?`,
+      type: "essay",
+    },
+  ],
+  en: [
+    {
+      number: 1,
+      content: `Calculate the following multiplications!`,
+      subItems: [
+        { label: "a.", math: "7 \\times (-9)" },
+        { label: "b.", math: "-6 \\times (-11)" },
+        { label: "c.", math: "-4 \\times 0 \\times (-25)" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 2,
+      content: `Find the numbers to replace the letters below to make the mathematical equations correct!`,
+      subItems: [
+        { label: "a.", math: "p \\times (-7) = -63" },
+        { label: "b.", math: "q \\times (-12) = 96" },
+        { label: "c.", math: "20 \\times (-4) \\times r = 160" },
+        { label: "d.", math: "-6 \\times 15 \\times s = 270" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 3,
+      content: `Calculate the result of the following mixed operations!`,
+      subItems: [
+        { label: "a.", math: "-7 \\times (-25 + 14)" },
+        { label: "b.", math: "[-15 - (-40)] \\times (-12)" },
+        { label: "c.", math: "[18 \\times (-6)] + [-22 \\times (-5)]" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 4,
+      content: `The temperature inside a meat refrigerator is −6°C. During a power outage, the temperature inside the refrigerator rises by 2°C every 5 minutes. Find the final temperature inside the refrigerator if the power is out for 30 minutes!`,
+      type: "essay",
+    },
+    {
+      number: 5,
+      content: `In a regional mathematics olympiad consisting of 40 problems, a participant gets 4 points for each correct answer, −2 points for each wrong answer, and −1 point for each unanswered question. If a participant answers 31 questions correctly and leaves 3 questions unanswered, what is the total final score obtained?`,
+      type: "essay",
+    },
+  ],
+  ja: [
+    {
+      number: 1,
+      content: `次の掛け算を計算しなさい！`,
+      subItems: [
+        { label: "a.", math: "7 \\times (-9)" },
+        { label: "b.", math: "-6 \\times (-11)" },
+        { label: "c.", math: "-4 \\times 0 \\times (-25)" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 2,
+      content: `次の数式が正しくなるよう、文字に当てはまる数を求めなさい！`,
+      subItems: [
+        { label: "a.", math: "p \\times (-7) = -63" },
+        { label: "b.", math: "q \\times (-12) = 96" },
+        { label: "c.", math: "20 \\times (-4) \\times r = 160" },
+        { label: "d.", math: "-6 \\times 15 \\times s = 270" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 3,
+      content: `次の混合演算を計算しなさい！`,
+      subItems: [
+        { label: "a.", math: "-7 \\times (-25 + 14)" },
+        { label: "b.", math: "[-15 - (-40)] \\times (-12)" },
+        { label: "c.", math: "[18 \\times (-6)] + [-22 \\times (-5)]" },
+      ],
+      type: "essay",
+    },
+    {
+      number: 4,
+      content: `肉の冷蔵庫の中の温度は −6℃ です。停電中、冷蔵庫内の温度は5分ごとに2℃上がります。停電が30分続いた場合の冷蔵庫内の最終温度を求めなさい！`,
+      type: "essay",
+    },
+    {
+      number: 5,
+      content: `40問で構成される地区数学オリンピックで、正解1問につき4点、不正解1問につき −2点、未回答1問につき −1点が与えられます。ある参加者が31問を正解し、3問を未回答にした場合、合計得点は何点ですか？`,
+      type: "essay",
+    },
+  ],
+};
 
 const PerkalianPage = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = (["id", "en", "ja"].includes(i18n.language) ? i18n.language : "en") as Lang;
+  const questions = QUESTIONS_BY_LANG[lang];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -62,9 +166,11 @@ const PerkalianPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          PERKALIAN BILANGAN BULAT
+          {t('practice.bilanganBulat.pageTitles.perkalian')}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 7 - Bilangan Bulat - Latihan Mandiri</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">
+          {t('practice.bilanganBulat.pageSubtitle')}
+        </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
@@ -100,7 +206,7 @@ const PerkalianPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-7/bilangan-bulat"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            Kembali ke Bilangan Bulat
+            {t('practice.bilanganBulat.backTo')}
           </button>
         </div>
       </div>

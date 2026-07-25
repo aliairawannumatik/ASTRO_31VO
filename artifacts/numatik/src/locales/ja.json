@@ -311,7 +311,48 @@
     "visualFeature": "🖼️ ビジュアル機能",
     "keyFormula": "📌 重要公式",
     "enrichmentNote": "📝 発展ノート",
-    "levelGuide": "📖 難易度ガイド"
+    "levelGuide": "📖 難易度ガイド",
+    "bilanganBulat": {
+      "title": "整数",
+      "soalTotal": "全48問 · UN / TKA / ANBK",
+      "enrichmentNoteDesc": "問題はUN・TKA・ANBKの出題基準に基づき、基本演算からHOTS（高次思考スキル）問題まで含みます。各サブトピックには文脈問題と数直線の視覚化が含まれます。",
+      "pageSubtitle": "7年生 · 整数 · 自習",
+      "backTo": "← 整数に戻る",
+      "subtopics": {
+        "penjumlahan": {
+          "label": "整数の加法",
+          "desc": "正・負の整数の加法、交換法則と結合法則"
+        },
+        "pengurangan": {
+          "label": "整数の減法",
+          "desc": "整数の減法、逆数、数直線"
+        },
+        "perkalian": {
+          "label": "整数の乗法",
+          "desc": "整数の乗法、符号の規則（+×+、+×−、−×−）、法則"
+        },
+        "pembagian": {
+          "label": "整数の除法",
+          "desc": "整数の除法、乗法との関係、符号の規則"
+        },
+        "operasiCampuran": {
+          "label": "整数の四則混合計算",
+          "desc": "計算の優先順位、括弧、文脈混合問題"
+        },
+        "kpkFpb": {
+          "label": "最小公倍数と最大公約数",
+          "desc": "因数、倍数、素因数分解、因数ツリー、最小公倍数・最大公約数の応用"
+        }
+      },
+      "pageTitles": {
+        "penjumlahan": "整数の加法",
+        "pengurangan": "整数の減法",
+        "perkalian": "整数の乗法",
+        "pembagian": "整数の除法",
+        "operasiCampuran": "整数の四則混合計算",
+        "kpkFpb": "最小公倍数と最大公約数"
+      }
+    }
   },
   "settings": {
     "title": "設定",

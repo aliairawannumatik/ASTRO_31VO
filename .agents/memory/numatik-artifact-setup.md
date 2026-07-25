@@ -9,6 +9,13 @@ description: Key wiring details, port quirks, and coding patterns for the Numati
 - First-time setup: `pnpm install` at workspace root (not `npm install` in `.migration-backup/`).
 - `.migration-backup/` is gitignored but its files are **already tracked** in git (committed before gitignore rule). Do not treat it as the active source; it is dead code.
 - `listArtifacts()` returns empty after GitHub import — artifact registration is not preserved. Workflow is manually configured via `configureWorkflow` to match `artifact.toml` intent.
+- **Artifact.toml** at `artifacts/numatik/.replit-artifact/artifact.toml` has `id = "artifacts/numatik"`, kind = "web", previewPath = "/", PORT=5000. This is correct — do not modify.
+
+## Languages
+- App uses **i18n (react-i18next)** with 3 locales: `id` (Indonesian), `en` (English), `ja` (Japanese).
+- Locale files: `artifacts/numatik/src/locales/{id,en,ja}.json`
+- Language key stored in localStorage as `numatik_language`.
+- **NOT Malay** — earlier memory note was wrong. Third language is Japanese (`ja`).
 
 ## Theme system
 - Hook: `import { useTheme } from "@/contexts/ThemeContext"` → `const { isDark } = useTheme()`
@@ -39,8 +46,22 @@ description: Key wiring details, port quirks, and coding patterns for the Numati
 ## Known scope gotcha
 When using replaceAll on SVG stroke patterns, the same pattern string can appear in both a sub-component scope AND the main page component. Verify with grep after replacement that ISG-local variables (e.g. `isgGridMain`, `isgAxisS`) are NOT referenced outside InteractiveStepGraph. Fix: replace those occurrences with direct `isDark ? "..." : "..."` expressions.
 
-## Trilingual page pattern
-Each page exports a `T_PAGENAME` translation object keyed by `"id" | "en" | "ms"`. Pages access it with `const t = T_PAGENAME[language]` where `language` comes from `useLanguage()`.
+## Trilingual exercise page pattern (Latihan Mandiri)
+For exercise pages under `src/pages/latihan-mandiri/`:
+- Define `QUESTIONS_BY_LANG: Record<"id"|"en"|"ja", Question[]>` **outside** the component (safe as a constant, no hooks).
+- Inside component: `const { t, i18n } = useTranslation(); const lang = (["id","en","ja"].includes(i18n.language) ? i18n.language : "en") as "id"|"en"|"ja"; const questions = QUESTIONS_BY_LANG[lang];`
+- UI strings (page title, subtitle, back button) go in locale JSON under `practice.<topicKey>.*`.
+- Reference: all 6 Bilangan Bulat pages are done and can be used as templates.
+
+## Locale key pattern for topic exercise pages
+Add under `practice.<topicKey>` in all 3 locale files:
+- `title` — topic page heading
+- `soalTotal` — "48 Questions Total · UN / TKA / ANBK"
+- `enrichmentNoteDesc` — enrichment note body text
+- `pageSubtitle` — "Grade 7 · Integers · Self-Practice"
+- `backTo` — back button text
+- `subtopics.<subtopicKey>.label` / `.desc` — subtopic cards
+- `pageTitles.<subtopicKey>` — exercise page h1
 
 ## SVG color mapping (PrismaPage / water-animation pattern)
 | Dark SVG value | Light SVG value |
@@ -62,3 +83,4 @@ Each page exports a `T_PAGENAME` translation object keyed by `"id" | "en" | "ms"
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.
 - Kelas 9 Kesebangunan: trilingual support incomplete (task proposed).
+- **Kelas 7 Bilangan Bulat (all 6 exercise sub-pages + index)**: Fully trilingual (id/en/ja) as of July 2026. Pattern is proven and ready to replicate to other Kelas 7 topics.

@@ -311,7 +311,48 @@
     "visualFeature": "🖼️ Fitur Visual",
     "keyFormula": "📌 Rumus Kunci",
     "enrichmentNote": "📝 Catatan Pengayaan",
-    "levelGuide": "📖 Panduan Tingkat Soal"
+    "levelGuide": "📖 Panduan Tingkat Soal",
+    "bilanganBulat": {
+      "title": "BILANGAN BULAT",
+      "soalTotal": "48 Soal Total · UN / TKA / ANBK",
+      "enrichmentNoteDesc": "Soal mencakup operasi dasar hingga HOTS berbasis kisi-kisi UN, TKA, dan ANBK. Setiap subtopik dilengkapi soal kontekstual dan visualisasi garis bilangan.",
+      "pageSubtitle": "Kelas 7 · Bilangan Bulat · Latihan Mandiri",
+      "backTo": "← Kembali ke Bilangan Bulat",
+      "subtopics": {
+        "penjumlahan": {
+          "label": "PENJUMLAHAN BILANGAN BULAT",
+          "desc": "Menjumlahkan bilangan bulat positif & negatif, sifat komutatif & asosiatif"
+        },
+        "pengurangan": {
+          "label": "PENGURANGAN BILANGAN BULAT",
+          "desc": "Pengurangan bilangan bulat, lawan suatu bilangan, garis bilangan"
+        },
+        "perkalian": {
+          "label": "PERKALIAN BILANGAN BULAT",
+          "desc": "Perkalian bilangan bulat, aturan tanda (+×+, +×−, −×−), sifat-sifatnya"
+        },
+        "pembagian": {
+          "label": "PEMBAGIAN BILANGAN BULAT",
+          "desc": "Pembagian bilangan bulat, hubungan perkalian dan pembagian, aturan tanda"
+        },
+        "operasiCampuran": {
+          "label": "OPERASI HITUNG CAMPURAN BILANGAN BULAT",
+          "desc": "Hierarki operasi hitung, tanda kurung, soal kontekstual campuran"
+        },
+        "kpkFpb": {
+          "label": "KPK DAN FPB",
+          "desc": "Faktor, kelipatan, faktorisasi prima, pohon faktor, aplikasi KPK & FPB"
+        }
+      },
+      "pageTitles": {
+        "penjumlahan": "PENJUMLAHAN BILANGAN BULAT",
+        "pengurangan": "PENGURANGAN BILANGAN BULAT",
+        "perkalian": "PERKALIAN BILANGAN BULAT",
+        "pembagian": "PEMBAGIAN BILANGAN BULAT",
+        "operasiCampuran": "OPERASI HITUNG CAMPURAN BILANGAN BULAT",
+        "kpkFpb": "KPK DAN FPB"
+      }
+    }
   },
   "settings": {
     "title": "Pengaturan",

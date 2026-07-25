@@ -311,7 +311,48 @@
     "visualFeature": "🖼️ Visual Feature",
     "keyFormula": "📌 Key Formula",
     "enrichmentNote": "📝 Enrichment Notes",
-    "levelGuide": "📖 Level Guide"
+    "levelGuide": "📖 Level Guide",
+    "bilanganBulat": {
+      "title": "INTEGERS",
+      "soalTotal": "48 Questions Total · UN / TKA / ANBK",
+      "enrichmentNoteDesc": "Questions range from basic to HOTS, based on UN, TKA, and ANBK item grids. Each sub-topic includes contextual problems and number line visualizations.",
+      "pageSubtitle": "Grade 7 · Integers · Self-Practice",
+      "backTo": "← Back to Integers",
+      "subtopics": {
+        "penjumlahan": {
+          "label": "ADDITION OF INTEGERS",
+          "desc": "Adding positive & negative integers, commutative & associative properties"
+        },
+        "pengurangan": {
+          "label": "SUBTRACTION OF INTEGERS",
+          "desc": "Subtraction of integers, opposite of a number, number line"
+        },
+        "perkalian": {
+          "label": "MULTIPLICATION OF INTEGERS",
+          "desc": "Multiplication of integers, sign rules (+×+, +×−, −×−), properties"
+        },
+        "pembagian": {
+          "label": "DIVISION OF INTEGERS",
+          "desc": "Division of integers, relationship with multiplication, sign rules"
+        },
+        "operasiCampuran": {
+          "label": "MIXED ARITHMETIC OPERATIONS ON INTEGERS",
+          "desc": "Order of operations, parentheses, contextual mixed problems"
+        },
+        "kpkFpb": {
+          "label": "LCM AND GCF",
+          "desc": "Factors, multiples, prime factorization, factor trees, LCM & GCF applications"
+        }
+      },
+      "pageTitles": {
+        "penjumlahan": "ADDITION OF INTEGERS",
+        "pengurangan": "SUBTRACTION OF INTEGERS",
+        "perkalian": "MULTIPLICATION OF INTEGERS",
+        "pembagian": "DIVISION OF INTEGERS",
+        "operasiCampuran": "MIXED ARITHMETIC OPERATIONS ON INTEGERS",
+        "kpkFpb": "LCM AND GCF"
+      }
+    }
   },
   "settings": {
     "title": "Settings",
