@@ -1717,6 +1717,36 @@
           "label": "COMPOUND PROPORTION",
           "desc": "Distributing values in ratio a:b:c, applied to inheritance and mixture problems"
         }
+      },
+      "perbandinganUmum": {
+        "title": "GENERAL RATIOS, UNITS OF COMPARISON AND RATIO NOTATION",
+        "pageSubtitle": "Grade 7 · Ratios · Self-Practice",
+        "instruction": "Solve the following problems, showing all your work",
+        "backTo": "Back to Ratios",
+        "q1": "Building A is 120 meters tall and Building B is 150 meters tall. Find the ratio of Building B's height to Building A's height in its simplest form!",
+        "q2": "A fruit basket contains 24 red apples and 16 green apples. What is the ratio of red apples to the total number of apples in the basket (express in simplest form)?",
+        "q3": "Father's current age is 45 years old and Budi's age is 15 years old. Find the ratio of Father's age to Budi's age 5 years ago!",
+        "q4": "The distance from Ali's house to school is 2.5 km, while the distance from Cici's house to school is only 500 meters. What is the ratio of the distance from Ali's house to Cici's house to school in its simplest form?",
+        "q5": "Dika spends 2 hours studying in the evening and 45 minutes playing games. Find the ratio of Dika's study time to his play time!",
+        "q6": "A large water bottle contains 1.5 liters of water. The water is poured into a glass with a capacity of 300 ml. What is the ratio of the volume of water in the large bottle to the glass?",
+        "q7": {
+          "pre": "A chicken farm has an area of 2.5 hectares and houses 75,000 chickens. Determine the ratio of chicken density to farm land area in units of chickens/m",
+          "mid": ". (Note: 1 hectare = 10,000 m",
+          "end": ")"
+        },
+        "q8": {
+          "pre": "The ratio of the length to the width of a rectangle is ",
+          "post": ". If the perimeter of the rectangle is 96 cm, find the area of the rectangle!"
+        },
+        "q9": {
+          "pre": "The ratio of the length, width, and height of a rectangular box is ",
+          "mid": ". If the volume of the box is 192 cm",
+          "end": ", find the surface area of the box."
+        },
+        "q10": {
+          "pre": "The harvest of mangoes, oranges, and apples in an orchard is in the ratio ",
+          "post": ". If the difference in weight between the apple harvest and the mango harvest is 450 kg, find the total weight of all three fruit harvests!"
+        }
       }
     }
   },

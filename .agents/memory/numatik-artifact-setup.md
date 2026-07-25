@@ -115,6 +115,15 @@ Replace `\text{}` with `\mathrm{}` for units; use interpolated `formulaVar` key 
 - **PengertianPLSVPage.tsx (sub-page 2)**: Fully trilingual (id/en/ja) as of July 2026. Locale key prefix: `practice.plsvPtlsv.pengertianPLSV`. 3 essay questions. "cards di luar" restructured. All 3 SoalX items are pure math grids (no item-level text keys needed). Trans used for all 3 instructions (q1: 1 component `a`=amber; q2: 2 components `a`=yellow/`b`=lime; q3: 2 components `a`=green/`b`=rose). q2 itemHint ("persamaan / kesamaan?") uses plain t(). q3 connector ("dan") uses plain t(). h1 split across title1+title2 keys. EN uses "LEOV" (Linear Equation in One Variable) abbreviation.
 - **KalimatTerbukaTertutupPage.tsx (sub-page 1)**: Fully trilingual (id/en/ja) as of July 2026. Locale key prefix: `practice.plsvPtlsv.kalimatTerbukaTertutup`. 5 essay questions. "cards di luar" restructured: cards moved inside page component, all SoalX converted from arrow shorthand to function bodies. Trans used for q2.instruction (3 styled spans: a=amber terbuka, b=emerald benar, c=rose salah). Split-key patterns: q2 items d,e,h,i use Pre/Mid/End flanking InlineMath; q3 item a uses Pre/Suffix flanking n; q5 item a uses Mid/Suffix flanking two math expressions. q4/q5 instrPre/instrSuffix wrap a hardcoded bold number-set span. JA q4/q5 instrPre="変数が ", instrSuffix=" の中から選ぶとき、各開いた文の解を求めなさい！". No useTheme needed (no SVG color switching). 6 sub-pages remaining.
 
+## Perbandingan sub-page pattern (flat soal, no cards/tags/isDark)
+- Structure: single card, dividers per soal, no cards/tags arrays, no useTheme needed.
+- Soals 1–6: plain `t('practice.perbandingan.perbandinganUmum.qN')` strings.
+- Soal 7: two `m<sup>2</sup>` — split into `q7.pre` / `<sup>2</sup>` / `q7.mid` / `<sup>2</sup>` / `q7.end`.
+- Soal 8, 10: InlineMath in middle — split `qN.pre` + `<InlineMath>` + `qN.post`.
+- Soal 9: InlineMath + `cm<sup>3</sup>` — split `q9.pre` + `<InlineMath>` + `q9.mid` + `<sup>3</sup>` + `q9.end`.
+- Locale keys under `practice.perbandingan.<subtopicKey>.*`; inject via node script reading/writing JSON.
+- Reference: `PerbandinganUmumPage.tsx` (done July 2026).
+
 ## Translation progress
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.

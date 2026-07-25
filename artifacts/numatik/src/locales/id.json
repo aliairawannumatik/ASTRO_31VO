@@ -1717,6 +1717,36 @@
           "label": "PERBANDINGAN CAMPURAN",
           "desc": "Membagi nilai dalam perbandingan a:b:c, aplikasi pembagian warisan & campuran"
         }
+      },
+      "perbandinganUmum": {
+        "title": "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO",
+        "pageSubtitle": "Kelas 7 · Perbandingan · Latihan Mandiri",
+        "instruction": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Perbandingan",
+        "q1": "Tinggi Gedung A adalah 120 meter dan tinggi Gedung B adalah 150 meter. Tentukan rasio tinggi Gedung B terhadap Gedung A dalam bentuk paling sederhana!",
+        "q2": "Dalam sebuah keranjang buah terdapat 24 buah apel merah dan 16 buah apel hijau. Berapakah perbandingan antara jumlah apel merah terhadap total keseluruhan apel di dalam keranjang tersebut (sajikan dalam bentuk yang paling sederhana)?",
+        "q3": "Umur Ayah saat ini adalah 45 tahun, sedangkan umur Budi adalah 15 tahun. Tentukan perbandingan umur Ayah dan Budi pada 5 tahun yang lalu!",
+        "q4": "Jarak rumah Ali ke sekolah adalah 2,5 km, sedangkan jarak rumah Cici ke sekolah hanya 500 meter. Berapakah perbandingan jarak rumah Ali dan rumah Cici ke sekolah dalam bentuk paling sederhana?",
+        "q5": "Waktu yang dihabiskan Dika untuk belajar di malam hari adalah 2 jam, sedangkan waktu untuk bermain game adalah 45 menit. Tentukan rasio waktu belajar Dika terhadap waktu bermainnya!",
+        "q6": "Sebuah botol minum besar berisi 1,5 liter air. Air tersebut dituangkan ke dalam sebuah gelas yang memiliki kapasitas 300 ml. Berapa rasio volume air di botol besar terhadap gelas tersebut?",
+        "q7": {
+          "pre": "Sebuah peternakan ayam petelur memiliki lahan seluas 2,5 hektar yang menampung 75.000 ekor ayam. Tentukan rasio kepadatan ayam terhadap luas lahan peternakan tersebut dalam satuan ekor/m",
+          "mid": ". (Catatan: 1 hektar = 10.000 m",
+          "end": ")"
+        },
+        "q8": {
+          "pre": "Perbandingan panjang dan lebar sebuah persegi panjang adalah ",
+          "post": ". Jika keliling persegi panjang tersebut adalah 96 cm, tentukan luas persegi panjang itu!"
+        },
+        "q9": {
+          "pre": "Perbandingan panjang, lebar, dan tinggi sebuah balok adalah ",
+          "mid": ". Jika volume balok itu adalah 192 cm",
+          "end": ", tentukan luas permukaan balok tersebut."
+        },
+        "q10": {
+          "pre": "Hasil panen buah mangga, jeruk, dan apel di sebuah perkebunan memiliki perbandingan ",
+          "post": ". Jika diketahui selisih berat panen buah apel dan buah mangga adalah 450 kg, tentukanlah total keseluruhan berat hasil panen ketiga buah tersebut!"
+        }
       }
     }
   },
