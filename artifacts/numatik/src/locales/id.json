@@ -732,6 +732,59 @@
             "c": "Lihat laporan cuaca di kotamu selama 3 hari terakhir. Catat suhu tertinggi dan terendah setiap hari. Hitunglah selisih suhu tertinggi dan terendah rata-ratanya!"
           }
         }
+      },
+      "perkalianDesimal": {
+        "pageTitle": "PERKALIAN DESIMAL",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "8 Soal Essay",
+        "tags": {
+          "q1": "Pangkat 10",
+          "q2": "Perkalian Dasar",
+          "q3": "Campuran",
+          "q4": "Luas Persegi",
+          "q5": "Luas Persegi Panjang",
+          "q6": "Kontekstual",
+          "q7": "Soal Cerita",
+          "q8": "Pola"
+        },
+        "q1": {
+          "instructionPre": "Kalikanlah setiap bilangan desimal berikut dengan",
+          "instructionMid": "dan",
+          "instructionPost": "!"
+        },
+        "q2": {
+          "instruction": "Hitunglah hasil perkalian bilangan-bilangan desimal berikut!"
+        },
+        "q3": {
+          "instruction": "Tentukan hasil perkalian bilangan-bilangan campuran berikut!"
+        },
+        "q4": {
+          "instruction": "Hitunglah luas setiap persegi dengan panjang sisi berikut!",
+          "sideLabel": "sisi ="
+        },
+        "q5": {
+          "instructionPre": "Hitunglah luas persegi panjang yang panjangnya",
+          "instructionMid": "dan lebarnya",
+          "instructionPost": "!"
+        },
+        "q6": {
+          "context": "Seorang pedagang membeli <s>12,5 kg</s> tepung terigu seharga <m1/> per kg, dan <s>3,75 liter</s> minyak goreng seharga <m2/> per liter.",
+          "items": {
+            "a": "Berapa total biaya pembelian tepung terigu?",
+            "b": "Berapa total biaya pembelian minyak goreng?",
+            "c": "Berapa total seluruh pengeluaran pedagang tersebut?"
+          }
+        },
+        "q7": {
+          "instruction": "Sebuah tumpukan terdiri atas <s>24 keping ubin keramik</s>. Tebal setiap ubin adalah <m/>. Tentukan tinggi total tumpukan ubin tersebut dalam satuan cm dan mm!",
+          "svgLabel": "× 24 keping",
+          "thicknessLabel": "tebal tiap ubin =",
+          "heightLabel": "tinggi tumpukan = ?"
+        },
+        "q8": {
+          "instruction": "Perhatikan pola perkalian desimal berikut, lalu lengkapi baris yang kosong!",
+          "patternNote": "Apa pola yang kamu temukan dari geser titik desimal di setiap baris?"
+        }
       }
     }
   },

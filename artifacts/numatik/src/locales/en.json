@@ -732,6 +732,59 @@
             "c": "Look at the weather report for your city over the last 3 days. Record the highest and lowest temperature each day. Calculate the average difference between the highest and lowest temperatures!"
           }
         }
+      },
+      "perkalianDesimal": {
+        "pageTitle": "DECIMAL MULTIPLICATION",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "8 Essay Questions",
+        "tags": {
+          "q1": "Powers of 10",
+          "q2": "Basic Multiplication",
+          "q3": "Mixed Types",
+          "q4": "Square Area",
+          "q5": "Rectangle Area",
+          "q6": "Contextual",
+          "q7": "Word Problem",
+          "q8": "Pattern"
+        },
+        "q1": {
+          "instructionPre": "Multiply each decimal number below by",
+          "instructionMid": "and",
+          "instructionPost": "!"
+        },
+        "q2": {
+          "instruction": "Calculate the product of the following decimal numbers!"
+        },
+        "q3": {
+          "instruction": "Find the product of the following mixed numbers!"
+        },
+        "q4": {
+          "instruction": "Calculate the area of each square with the following side lengths!",
+          "sideLabel": "side ="
+        },
+        "q5": {
+          "instructionPre": "Calculate the area of a rectangle with length",
+          "instructionMid": "and width",
+          "instructionPost": "!"
+        },
+        "q6": {
+          "context": "A trader buys <s>12.5 kg</s> of flour for <m1/> per kg, and <s>3.75 litres</s> of cooking oil for <m2/> per litre.",
+          "items": {
+            "a": "What is the total cost of the flour?",
+            "b": "What is the total cost of the cooking oil?",
+            "c": "What is the total expenditure of the trader?"
+          }
+        },
+        "q7": {
+          "instruction": "A stack consists of <s>24 ceramic tiles</s>. Each tile is <m/> thick. Find the total height of the stack in cm and mm!",
+          "svgLabel": "× 24 tiles",
+          "thicknessLabel": "thickness per tile =",
+          "heightLabel": "total height = ?"
+        },
+        "q8": {
+          "instruction": "Observe the decimal multiplication pattern below, then complete the missing rows!",
+          "patternNote": "What pattern do you notice from the decimal point shift in each row?"
+        }
       }
     }
   },
