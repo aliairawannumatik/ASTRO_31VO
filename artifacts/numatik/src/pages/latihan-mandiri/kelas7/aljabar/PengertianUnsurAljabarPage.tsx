@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
@@ -24,114 +25,135 @@ const AlgExpr = ({ math }: { math: string }) => (
 );
 
 /* ── Soal 1 ── Suku-suku dan suku sejenis ────────────── */
-const SoalSatu = () => (
-  <div className="space-y-3">
-    <p className="font-body text-sm text-white/90 leading-relaxed">
-      Tentukan banyak suku dan kelompok suku-suku yang sejenis dari bentuk aljabar berikut!
-    </p>
-    <div className="space-y-2 pl-1">
-      {[
-        { l: "a", expr: "3x + 7y - 5x + 2y + 9" },
-        { l: "b", expr: "4p^2 - 3pq + 6p - 8p^2 + 5pq" },
-        { l: "c", expr: "6m^2 - 2mn + 9n^2 + 3mn - m^2 + 4n" },
-        { l: "d", expr: "2a^2b - 5ab + 3b^2 - 4a^2b + 7ab - b^2" },
-      ].map(({ l, expr }) => (
-        <div key={l} className="flex items-start gap-2.5 bg-violet-500/5 border border-violet-500/10 rounded-lg px-3 py-2">
-          <SubLabel letter={l} color="bg-violet-500/30 text-violet-300 border border-violet-400/40" />
-          <AlgExpr math={expr} />
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-/* ── Soal 2 ── Koefisien, variabel, konstanta ─────────── */
-const SoalDua = () => (
-  <div className="space-y-3">
-    <p className="font-body text-sm text-white/90 leading-relaxed">
-      Dari bentuk aljabar <InlineMath math="5x^2 - 3xy + 8y - 12" />,
-      tentukan:
-    </p>
-    <div className="space-y-2 pl-1">
-      {[
-        { l: "a", text: "Semua variabel yang ada" },
-        { l: "b", text: "Koefisien dari setiap suku yang memuat variabel" },
-        { l: "c", text: "Nilai konstantanya" },
-        { l: "d", text: "Banyaknya suku seluruhnya" },
-      ].map(({ l, text }) => (
-        <div key={l} className="flex items-start gap-2.5 bg-orange-500/5 border border-orange-500/10 rounded-lg px-3 py-2">
-          <SubLabel letter={l} color="bg-orange-500/20 text-orange-300 border border-orange-400/30" />
-          <p className="font-body text-sm text-white/80 leading-relaxed pt-0.5">{text}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-/* ── Soal 3 ── Soal cerita: kantong kelereng ─────────── */
-const SoalTiga = () => (
-  <div className="space-y-3">
-    <p className="font-body text-sm text-white/90 leading-relaxed">
-      Dari gambar berikut, setiap kotak berisi <strong className="text-cyan-300">n</strong> buah
-      kelereng. Di atas meja terdapat <strong className="text-cyan-300">3 kotak penuh</strong> dan{" "}
-      <strong className="text-cyan-300">5 kelereng lepas</strong>.
-    </p>
-    <div className="pl-1 flex items-center gap-3 flex-wrap">
-      <div className="flex gap-2">
-        {[0, 1, 2].map((i) => (
-          <div key={i} className="w-12 h-10 rounded-lg bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center">
-            <span className="text-cyan-300 font-bold text-sm font-body">n</span>
+const SoalSatu = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-3">
+      <p className="font-body text-sm text-white/90 leading-relaxed">
+        {t('practice.aljabar.pengertianUnsur.q1.instruction')}
+      </p>
+      <div className="space-y-2 pl-1">
+        {[
+          { l: "a", expr: "3x + 7y - 5x + 2y + 9" },
+          { l: "b", expr: "4p^2 - 3pq + 6p - 8p^2 + 5pq" },
+          { l: "c", expr: "6m^2 - 2mn + 9n^2 + 3mn - m^2 + 4n" },
+          { l: "d", expr: "2a^2b - 5ab + 3b^2 - 4a^2b + 7ab - b^2" },
+        ].map(({ l, expr }) => (
+          <div key={l} className="flex items-start gap-2.5 bg-violet-500/5 border border-violet-500/10 rounded-lg px-3 py-2">
+            <SubLabel letter={l} color="bg-violet-500/30 text-violet-300 border border-violet-400/40" />
+            <AlgExpr math={expr} />
           </div>
         ))}
       </div>
-      <span className="text-white/40 text-sm">+</span>
-      <div className="flex gap-1 flex-wrap">
-        {[0, 1, 2, 3, 4].map((i) => (
-          <div key={i} className="w-5 h-5 rounded-full bg-cyan-400/25 border border-cyan-300/30" />
+    </div>
+  );
+};
+
+/* ── Soal 2 ── Koefisien, variabel, konstanta ─────────── */
+const SoalDua = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-3">
+      <p className="font-body text-sm text-white/90 leading-relaxed">
+        {t('practice.aljabar.pengertianUnsur.q2.introPre')}{" "}
+        <InlineMath math="5x^2 - 3xy + 8y - 12" />
+        {t('practice.aljabar.pengertianUnsur.q2.introPost')}
+      </p>
+      <div className="space-y-2 pl-1">
+        {[
+          { l: "a", text: t('practice.aljabar.pengertianUnsur.q2.itemA') },
+          { l: "b", text: t('practice.aljabar.pengertianUnsur.q2.itemB') },
+          { l: "c", text: t('practice.aljabar.pengertianUnsur.q2.itemC') },
+          { l: "d", text: t('practice.aljabar.pengertianUnsur.q2.itemD') },
+        ].map(({ l, text }) => (
+          <div key={l} className="flex items-start gap-2.5 bg-orange-500/5 border border-orange-500/10 rounded-lg px-3 py-2">
+            <SubLabel letter={l} color="bg-orange-500/20 text-orange-300 border border-orange-400/30" />
+            <p className="font-body text-sm text-white/80 leading-relaxed pt-0.5">{text}</p>
+          </div>
         ))}
       </div>
     </div>
-    <div className="space-y-1.5 pl-1">
-      {[
-        { l: "a", text: "Nyatakan total kelereng di atas meja dalam bentuk aljabar!" },
-        { l: "b", text: "Jika 2 kotak lagi ditambahkan, tuliskan bentuk aljabar barunya!" },
-        { l: "c", text: "Jika n = 12, berapa total kelereng pada keadaan (a) dan (b)?" },
-      ].map(({ l, text }) => (
-        <div key={l} className="flex items-start gap-2.5">
-          <SubLabel letter={l} color="bg-cyan-500/20 text-cyan-300 border border-cyan-400/30" />
-          <p className="font-body text-sm text-white/80 leading-relaxed pt-0.5">{text}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-);
+  );
+};
 
-/* ── Card config ──────────────────────────────────────── */
-const cards = [
-  {
-    num: 1, tag: "Suku Sejenis", tagColor: "bg-violet-500/20 text-violet-300 border-violet-400/40",
-    gradient: "from-violet-900/50 to-purple-900/30", border: "border-violet-500/25",
-    bar: "from-violet-400 to-purple-500", numBg: "bg-violet-500/30 text-violet-200",
-    custom: <SoalSatu />,
-  },
-  {
-    num: 2, tag: "Unsur Aljabar", tagColor: "bg-orange-500/20 text-orange-300 border-orange-400/40",
-    gradient: "from-orange-900/40 to-amber-900/25", border: "border-orange-500/25",
-    bar: "from-orange-400 to-amber-500", numBg: "bg-orange-500/30 text-orange-200",
-    custom: <SoalDua />,
-  },
-  {
-    num: 3, tag: "Soal Cerita", tagColor: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",
-    gradient: "from-cyan-900/40 to-sky-900/25", border: "border-cyan-500/25",
-    bar: "from-cyan-400 to-sky-500", numBg: "bg-cyan-500/30 text-cyan-200",
-    custom: <SoalTiga />,
-  },
-];
+/* ── Soal 3 ── Soal cerita: kantong kelereng ─────────── */
+const SoalTiga = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="space-y-3">
+      <p className="font-body text-sm text-white/90 leading-relaxed">
+        <Trans
+          i18nKey="practice.aljabar.pengertianUnsur.q3.desc"
+          components={{
+            n:      <strong className="text-cyan-300" />,
+            boxes:  <strong className="text-cyan-300" />,
+            marbles: <strong className="text-cyan-300" />,
+          }}
+        />
+      </p>
+      <div className="pl-1 flex items-center gap-3 flex-wrap">
+        <div className="flex gap-2">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="w-12 h-10 rounded-lg bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center">
+              <span className="text-cyan-300 font-bold text-sm font-body">n</span>
+            </div>
+          ))}
+        </div>
+        <span className="text-white/40 text-sm">+</span>
+        <div className="flex gap-1 flex-wrap">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <div key={i} className="w-5 h-5 rounded-full bg-cyan-400/25 border border-cyan-300/30" />
+          ))}
+        </div>
+      </div>
+      <div className="space-y-1.5 pl-1">
+        {[
+          { l: "a", text: t('practice.aljabar.pengertianUnsur.q3.itemA') },
+          { l: "b", text: t('practice.aljabar.pengertianUnsur.q3.itemB') },
+          { l: "c", text: t('practice.aljabar.pengertianUnsur.q3.itemC') },
+        ].map(({ l, text }) => (
+          <div key={l} className="flex items-start gap-2.5">
+            <SubLabel letter={l} color="bg-cyan-500/20 text-cyan-300 border border-cyan-400/30" />
+            <p className="font-body text-sm text-white/80 leading-relaxed pt-0.5">{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 /* ── Page ─────────────────────────────────────────────── */
 const PengertianUnsurAljabarPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isDark } = useTheme();
+
+  const cards = [
+    {
+      num: 1, tag: t('practice.aljabar.pengertianUnsur.q1.tag'),
+      tagColor: "bg-violet-500/20 text-violet-300 border-violet-400/40",
+      gradient: isDark ? "from-violet-900/50 to-purple-900/30" : "from-violet-50/80 to-purple-50/60",
+      border: "border-violet-500/25",
+      bar: "from-violet-400 to-purple-500", numBg: "bg-violet-500/30 text-violet-200",
+      custom: <SoalSatu />,
+    },
+    {
+      num: 2, tag: t('practice.aljabar.pengertianUnsur.q2.tag'),
+      tagColor: "bg-orange-500/20 text-orange-300 border-orange-400/40",
+      gradient: isDark ? "from-orange-900/40 to-amber-900/25" : "from-orange-50/80 to-amber-50/60",
+      border: "border-orange-500/25",
+      bar: "from-orange-400 to-amber-500", numBg: "bg-orange-500/30 text-orange-200",
+      custom: <SoalDua />,
+    },
+    {
+      num: 3, tag: t('practice.aljabar.pengertianUnsur.q3.tag'),
+      tagColor: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",
+      gradient: isDark ? "from-cyan-900/40 to-sky-900/25" : "from-cyan-50/80 to-sky-50/60",
+      border: "border-cyan-500/25",
+      bar: "from-cyan-400 to-sky-500", numBg: "bg-cyan-500/30 text-cyan-200",
+      custom: <SoalTiga />,
+    },
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">

@@ -885,6 +885,64 @@
           "instruction": "Sebuah lapangan berbentuk persegi panjang berukuran panjang <m1/> dan lebar <m2/>. Tentukan <s>taksiran luas</s> lapangan tersebut dengan cara membulatkan panjang dan lebar ke satuan terdekat!"
         }
       }
+    },
+    "aljabar": {
+      "subtopics": {
+        "pengertianUnsur": {
+          "label": "PENGERTIAN DAN UNSUR-UNSUR BENTUK ALJABAR",
+          "desc": "Variabel, koefisien, konstanta, suku, suku sejenis & tidak sejenis"
+        },
+        "penjumlahanPengurangan": {
+          "label": "PENJUMLAHAN DAN PENGURANGAN BENTUK ALJABAR",
+          "desc": "Menjumlahkan dan mengurangkan suku-suku sejenis, penyederhanaan"
+        },
+        "perkalian": {
+          "label": "PERKALIAN BENTUK ALJABAR",
+          "desc": "Monomial×monomial, monomial×polinomial, binomial×binomial"
+        },
+        "pembagian": {
+          "label": "PEMBAGIAN BENTUK ALJABAR",
+          "desc": "Pembagian monomial, penyederhanaan pecahan aljabar"
+        },
+        "pemangkatan": {
+          "label": "PEMANGKATAN BENTUK ALJABAR",
+          "desc": "Pemangkatan monomial, (a+b)², (a-b)², pola segitiga Pascal"
+        },
+        "substitusi": {
+          "label": "SUBSTITUSI BILANGAN PADA BENTUK ALJABAR",
+          "desc": "Menghitung nilai ekspresi aljabar dengan substitusi nilai variabel"
+        },
+        "faktorisasi": {
+          "label": "FAKTORISASI BENTUK ALJABAR",
+          "desc": "Faktor GCF, selisih kuadrat, trinomial sempurna, pemfaktoran aljabar"
+        },
+        "pecahanAljabar": {
+          "label": "MENYEDERHANAKAN PECAHAN ALJABAR",
+          "desc": "Sederhanakan pecahan aljabar: GCF, selisih kuadrat, trinomial, dua variabel"
+        }
+      },
+      "pengertianUnsur": {
+        "q1": {
+          "tag": "Suku Sejenis",
+          "instruction": "Tentukan banyak suku dan kelompok suku-suku yang sejenis dari bentuk aljabar berikut!"
+        },
+        "q2": {
+          "tag": "Unsur Aljabar",
+          "introPre": "Dari bentuk aljabar",
+          "introPost": ", tentukan:",
+          "itemA": "Semua variabel yang ada",
+          "itemB": "Koefisien dari setiap suku yang memuat variabel",
+          "itemC": "Nilai konstantanya",
+          "itemD": "Banyaknya suku seluruhnya"
+        },
+        "q3": {
+          "tag": "Soal Cerita",
+          "desc": "Dari gambar berikut, setiap kotak berisi <n>n</n> buah kelereng. Di atas meja terdapat <boxes>3 kotak penuh</boxes> dan <marbles>5 kelereng lepas</marbles>.",
+          "itemA": "Nyatakan total kelereng di atas meja dalam bentuk aljabar!",
+          "itemB": "Jika 2 kotak lagi ditambahkan, tuliskan bentuk aljabar barunya!",
+          "itemC": "Jika n = 12, berapa total kelereng pada keadaan (a) dan (b)?"
+        }
+      }
     }
   },
   "settings": {

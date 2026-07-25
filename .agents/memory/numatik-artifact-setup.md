@@ -86,6 +86,21 @@ When a KaTeX formula contains a language-specific word (e.g. `\text{jarak}`), us
 ```
 Replace `\text{}` with `\mathrm{}` for units; use interpolated `formulaVar` key for natural-language variable names.
 
+## Aljabar index page pattern (AljabarPage.tsx)
+- Uses `subtopicsConfig` (outside component) with `key`, visual props only — no `label`/`desc`.
+- Inside component: `subtopics = subtopicsConfig.map(s => ({ ...s, label: t(\`practice.aljabar.subtopics.${s.key}.label\`), desc: t(...) }))`.
+- Locale keys: `practice.aljabar.subtopics.<key>.label` / `.desc` for 8 keys: `pengertianUnsur`, `penjumlahanPengurangan`, `perkalian`, `pembagian`, `pemangkatan`, `substitusi`, `faktorisasi`, `pecahanAljabar`.
+- All 3 locale files now have `practice.aljabar` section; `pengertianUnsur` soal keys also added.
+- `enrichmentNoteDesc` in AljabarPage footer is still hardcoded Indonesian — intentionally deferred.
+
+## Aljabar sub-page trilingual pattern (PengertianUnsurAljabarPage — "cards di luar" variant)
+- Converted `cards` array from outside-component (dark-only hardcode) to inside page component with `isDark` ternary.
+- Added `import { useTheme }` and `const { isDark } = useTheme()` to page.
+- Each `SoalX` converted from arrow shorthand `() => (...)` to function body `() => { const { t } = useTranslation(); return (...); }`.
+- `Trans` used for SoalTiga (q3.desc) with named components `n`, `boxes`, `marbles` → `<strong className="text-cyan-300" />`.
+- SoalDua uses split `introPre` / `introPost` keys flanking an inline `<InlineMath>` (math formula stays hardcoded, only surrounding prose translated).
+- Locale key prefix: `practice.aljabar.pengertianUnsur.q{1|2|3}.*`.
+
 ## Translation progress
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.

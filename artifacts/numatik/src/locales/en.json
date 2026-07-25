@@ -885,6 +885,64 @@
           "instruction": "A rectangular field measures <m1/> long and <m2/> wide. Find the <s>estimated area</s> of the field by rounding the length and width to the nearest whole number!"
         }
       }
+    },
+    "aljabar": {
+      "subtopics": {
+        "pengertianUnsur": {
+          "label": "CONCEPTS AND ELEMENTS OF ALGEBRAIC EXPRESSIONS",
+          "desc": "Variables, coefficients, constants, terms, like & unlike terms"
+        },
+        "penjumlahanPengurangan": {
+          "label": "ADDITION AND SUBTRACTION OF ALGEBRAIC EXPRESSIONS",
+          "desc": "Adding and subtracting like terms, simplification"
+        },
+        "perkalian": {
+          "label": "MULTIPLICATION OF ALGEBRAIC EXPRESSIONS",
+          "desc": "Monomial×monomial, monomial×polynomial, binomial×binomial"
+        },
+        "pembagian": {
+          "label": "DIVISION OF ALGEBRAIC EXPRESSIONS",
+          "desc": "Division of monomials, simplifying algebraic fractions"
+        },
+        "pemangkatan": {
+          "label": "POWERS OF ALGEBRAIC EXPRESSIONS",
+          "desc": "Powers of monomials, (a+b)², (a-b)², Pascal's triangle pattern"
+        },
+        "substitusi": {
+          "label": "SUBSTITUTION IN ALGEBRAIC EXPRESSIONS",
+          "desc": "Evaluating algebraic expressions by substituting variable values"
+        },
+        "faktorisasi": {
+          "label": "FACTORISATION OF ALGEBRAIC EXPRESSIONS",
+          "desc": "GCF factoring, difference of squares, perfect trinomial, factoring"
+        },
+        "pecahanAljabar": {
+          "label": "SIMPLIFYING ALGEBRAIC FRACTIONS",
+          "desc": "Simplify algebraic fractions: GCF, difference of squares, trinomial, two variables"
+        }
+      },
+      "pengertianUnsur": {
+        "q1": {
+          "tag": "Like Terms",
+          "instruction": "Determine the number of terms and group the like terms in the following algebraic expressions!"
+        },
+        "q2": {
+          "tag": "Algebraic Elements",
+          "introPre": "From the algebraic expression",
+          "introPost": ", determine:",
+          "itemA": "All the variables present",
+          "itemB": "The coefficient of each term containing a variable",
+          "itemC": "The value of the constant term",
+          "itemD": "The total number of terms"
+        },
+        "q3": {
+          "tag": "Word Problem",
+          "desc": "In the figure below, each box contains <n>n</n> marbles. On the table there are <boxes>3 full boxes</boxes> and <marbles>5 loose marbles</marbles>.",
+          "itemA": "Express the total number of marbles on the table as an algebraic expression!",
+          "itemB": "If 2 more boxes are added, write the new algebraic expression!",
+          "itemC": "If n = 12, how many total marbles are there in situations (a) and (b)?"
+        }
+      }
     }
   },
   "settings": {
