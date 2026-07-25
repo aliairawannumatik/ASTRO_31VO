@@ -507,6 +507,59 @@
           "instruction": "Sederhanakan perkalian dan pembagian pecahan-pecahan berikut!"
         }
       },
+      "bentukDesimal": {
+        "pageTitle1": "BENTUK DESIMAL",
+        "pageTitle2": "PECAHAN & BILANGAN DESIMAL",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "8 Soal Essay",
+        "tags": {
+          "q1": "Konversi Dasar",
+          "q2": "Sederhanakan",
+          "q3": "Pembagian Bersusun",
+          "q4": "Pembulatan",
+          "q5": "Desimal → Pecahan",
+          "q6": "Nilai Tempat",
+          "q7": "Kontekstual",
+          "q8": "Investigasi"
+        },
+        "q1": {
+          "instruction": "Nyatakan bilangan-bilangan berikut sebagai bilangan desimal!"
+        },
+        "q2": {
+          "instruction": "Sederhanakan pecahan-pecahan berikut, kemudian nyatakan sebagai bilangan desimal!",
+          "hint": "→ sederhana → desimal"
+        },
+        "q3": {
+          "instruction": "Nyatakan pecahan-pecahan berikut sebagai pecahan desimal dengan cara pembagian bersusun!"
+        },
+        "q4": {
+          "instruction": "Nyatakan pecahan-pecahan berikut ini sebagai bilangan desimal dengan pembulatan sampai tiga tempat desimal!",
+          "hint": "≈ … (3 tempat)"
+        },
+        "q5": {
+          "instruction": "Nyatakan bilangan desimal berikut dalam bentuk pecahan paling sederhana!"
+        },
+        "q6": {
+          "instruction": "Tentukan nilai tempat dari setiap angka yang bergaris bawah pada bilangan desimal berikut!",
+          "digitHint": "angka {{digit}}"
+        },
+        "q7": {
+          "instruction": "Selesaikan soal cerita berikut!",
+          "items": {
+            "a": "Sebuah pita sepanjang 3 meter dipotong menjadi 8 bagian sama panjang. Berapa meter panjang setiap potongan pita? Nyatakan jawabanmu dalam bentuk desimal!",
+            "b": "Nilai ulangan harian Budi adalah 17 dari 20 soal yang dijawab benar. Nyatakan nilai Budi tersebut dalam bentuk desimal!",
+            "c": "Seorang pedagang memiliki 5 kg gula yang akan dibagi rata ke dalam 8 kantong plastik. Berapa kilogram isi setiap kantong? Nyatakan dalam desimal!"
+          }
+        },
+        "q8": {
+          "instruction": "Carilah informasi atau lakukan pengukuran sederhana, lalu nyatakan hasilnya dalam bentuk desimal!",
+          "items": {
+            "a": "Ukurlah tinggi badan 5 teman sekelasmu (dalam meter). Hitung rata-ratanya dan nyatakan dalam bentuk desimal!",
+            "b": "Carilah harga 3 jenis makanan di kantin sekolah. Nyatakan harga masing-masing sebagai pecahan dari Rp10.000, lalu ubah ke desimal!",
+            "c": "Dari hasil ulangan matematika terakhir, berapa bagian (dalam desimal) teman-temanmu yang mendapat nilai di atas 70?"
+          }
+        }
+      },
       "pecahanCampuran": {
         "pageTitle1": "PECAHAN CAMPURAN DAN PERSEN",
         "pageTitle2": "SERTA BENTUK DESIMAL",

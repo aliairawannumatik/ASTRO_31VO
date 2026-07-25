@@ -507,6 +507,59 @@
           "instruction": "Simplify the following fraction multiplications and divisions!"
         }
       },
+      "bentukDesimal": {
+        "pageTitle1": "DECIMAL FORM",
+        "pageTitle2": "FRACTIONS & DECIMAL NUMBERS",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "8 Essay Questions",
+        "tags": {
+          "q1": "Basic Conversion",
+          "q2": "Simplify First",
+          "q3": "Long Division",
+          "q4": "Rounding",
+          "q5": "Decimal → Fraction",
+          "q6": "Place Value",
+          "q7": "Contextual",
+          "q8": "Investigation"
+        },
+        "q1": {
+          "instruction": "Express the following numbers as decimals!"
+        },
+        "q2": {
+          "instruction": "Simplify the following fractions, then express them as decimals!",
+          "hint": "→ simplify → decimal"
+        },
+        "q3": {
+          "instruction": "Express the following fractions as decimals using long division!"
+        },
+        "q4": {
+          "instruction": "Express the following fractions as decimals, rounded to three decimal places!",
+          "hint": "≈ … (3 dp)"
+        },
+        "q5": {
+          "instruction": "Express the following decimals as fractions in their simplest form!"
+        },
+        "q6": {
+          "instruction": "Find the place value of each underlined digit in the following decimals!",
+          "digitHint": "digit {{digit}}"
+        },
+        "q7": {
+          "instruction": "Solve the following word problems!",
+          "items": {
+            "a": "A ribbon 3 metres long is cut into 8 equal pieces. How long is each piece? Express your answer as a decimal!",
+            "b": "Budi's daily quiz score is 17 out of 20 questions answered correctly. Express Budi's score as a decimal!",
+            "c": "A trader has 5 kg of sugar to be distributed equally into 8 plastic bags. How many kilograms are in each bag? Express as a decimal!"
+          }
+        },
+        "q8": {
+          "instruction": "Find information or do a simple measurement, then express the result as a decimal!",
+          "items": {
+            "a": "Measure the height of 5 classmates (in metres). Calculate the average and express it as a decimal!",
+            "b": "Find the price of 3 types of food at the school canteen. Express each price as a fraction of Rp10,000, then convert to a decimal!",
+            "c": "From the last maths test results, what fraction (as a decimal) of your classmates scored above 70?"
+          }
+        }
+      },
       "pecahanCampuran": {
         "pageTitle1": "MIXED FRACTIONS AND PERCENTAGES",
         "pageTitle2": "AND DECIMAL FORM",
