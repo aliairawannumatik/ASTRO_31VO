@@ -1960,6 +1960,82 @@
         "q8": "Deni membeli sebuah sepeda gunung bekas di pasar loak seharga Rp450.000,00. Karena kondisinya kurang prima, Deni membawa sepeda tersebut ke bengkel dan menghabiskan biaya Rp150.000,00 untuk mengganti rantai dan ban yang aus. Setelah sepeda kembali bagus, Deni menjualnya ke teman sekolahnya dan berhasil meraup keuntungan sebesar 25%. Berapa rupiahkah harga jual sepeda tersebut?",
         "q9": "Bu Tari memborong 100 kg buah mangga dari petani dengan total harga Rp1.500.000,00. Setelah disortir, ternyata ada 10 kg mangga yang busuk dan tidak bisa dijual sama sekali. Jika Bu Tari ingin tetap mendapatkan keuntungan total sebesar 20% dari modal awalnya, berapakah harga jual per kilogram yang harus ia tetapkan untuk sisa mangga yang kondisinya masih bagus?",
         "q10": "Pak Johan ingin membeli sebuah sepeda motor listrik. Harga tunai motor tersebut adalah Rp20.000.000,00. Namun, dealer menawarkan opsi kredit dengan syarat: Uang Muka (DP) sebesar Rp5.000.000,00 dan cicilan per bulan sebesar Rp700.000,00 selama 3 tahun. Berapa persentase total biaya tambahan yang harus ditanggung Pak Johan jika ia memilih opsi kredit dibandingkan dengan jika ia membelinya secara tunai?"
+      },
+      "ppn": {
+        "title": "PAJAK PERTAMBAHAN NILAI (PPN)",
+        "pageSubtitle": "Kelas 7 · Aritmetika Sosial · Latihan Mandiri",
+        "instruction": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Aritmetika Sosial",
+        "q1": {
+          "stem": "Sebuah televisi dijual dengan harga Rp2.000.000. Jika pembeli dikenakan PPN sebesar 11%, berapakah nominal PPN yang harus dibayar?",
+          "optA": "A. Rp200.000",
+          "optB": "B. Rp211.000",
+          "optC": "C. Rp220.000",
+          "optD": "D. Rp2.220.000"
+        },
+        "q2": {
+          "stem": "Ayah membeli kulkas seharga Rp3.000.000. Karena dikenakan PPN 10%, berapakah total uang yang harus dibayarkan ayah?",
+          "optA": "A. Rp3.000.000",
+          "optB": "B. Rp3.100.000",
+          "optC": "C. Rp3.300.000",
+          "optD": "D. Rp3.500.000"
+        },
+        "q3": {
+          "stem": "PPN sebesar 11% dari sebuah barang adalah Rp55.000. Berapakah harga awal barang tersebut sebelum dikenakan PPN?",
+          "optA": "A. Rp500.000",
+          "optB": "B. Rp550.000",
+          "optC": "C. Rp600.000",
+          "optD": "D. Rp605.000"
+        },
+        "q4": {
+          "stem": "Andi membeli laptop dan membayar total sebesar Rp4.440.000. Jika harga tersebut sudah termasuk PPN 11%, berapakah harga laptop sebelum PPN?",
+          "optA": "A. Rp3.900.000",
+          "optB": "B. Rp4.000.000",
+          "optC": "C. Rp4.100.000",
+          "optD": "D. Rp4.400.000"
+        },
+        "q5": {
+          "stem": "Rina membeli sepatu seharga Rp250.000. Saat di kasir, ia harus membayar Rp275.000. Berapa persentase PPN yang dibebankan kepada Rina?",
+          "optA": "A. 5%",
+          "optB": "B. 10%",
+          "optC": "C. 11%",
+          "optD": "D. 12%"
+        },
+        "q6": {
+          "stem": "Budi membeli buku dengan harga Rp100.000 dan dikenakan PPN 11%. Jika ia membayar dengan uang selembar Rp150.000, berapakah uang kembaliannya?",
+          "optA": "A. Rp39.000",
+          "optB": "B. Rp40.000",
+          "optC": "C. Rp45.000",
+          "optD": "D. Rp50.000"
+        },
+        "q7": {
+          "stem": "Sebuah jaket harganya Rp500.000. Toko memberikan diskon 20%, namun setelah diskon dikenakan PPN 10%. Berapakah harga akhir yang harus dibayar?",
+          "optA": "A. Rp350.000",
+          "optB": "B. Rp400.000",
+          "optC": "C. Rp440.000",
+          "optD": "D. Rp450.000"
+        },
+        "q8": {
+          "stem": "Pak Rahmat memborong 5 lusin buku tulis. Harga 1 lusin adalah Rp30.000 belum termasuk PPN 11%. Jika Pak Rahmat mendapat potongan harga total Rp15.000 sebelum pajak, berapakah yang harus ia bayar?",
+          "optA": "A. Rp145.000",
+          "optB": "B. Rp149.850",
+          "optC": "C. Rp151.500",
+          "optD": "D. Rp166.500"
+        },
+        "q9": {
+          "stem": "Toko A menjual sepeda seharga Rp1.000.000 dengan diskon 20% (tanpa PPN). Toko B menjual sepeda yang sama seharga Rp900.000 dengan diskon 10% namun dikenakan PPN 11% setelah diskon. Jika kamu ingin membeli sepeda yang paling murah, selisih harga dari kedua toko tersebut adalah...",
+          "optA": "A. Toko A lebih murah Rp99.100",
+          "optB": "B. Toko A lebih murah Rp89.100",
+          "optC": "C. Toko B lebih murah Rp10.000",
+          "optD": "D. Toko B lebih murah Rp11.100"
+        },
+        "q10": {
+          "stem": "Pemerintah mengumumkan kenaikan tarif PPN dari 10% menjadi 11%. Jika Dimas rutin berbelanja bulanan dengan nilai Rp2.000.000 (sebelum PPN), berapa tambahan pengeluaran ekstra yang harus ditanggung Dimas dalam setahun hanya karena kenaikan tarif PPN tersebut?",
+          "optA": "A. Rp20.000",
+          "optB": "B. Rp120.000",
+          "optC": "C. Rp240.000",
+          "optD": "D. Rp440.000"
+        }
       }
     }
   },

@@ -1960,6 +1960,82 @@
         "q8": "Deni bought a second-hand mountain bike at a flea market for Rp450,000.00. Because its condition was not ideal, Deni took it to a repair shop and spent Rp150,000.00 replacing the worn chain and tyres. After the bike was back in good shape, Deni sold it to a classmate and managed to make a 25% profit. What was the selling price of the bicycle in rupiah?",
         "q9": "Mrs. Tari bought 100 kg of mangoes from a farmer for a total price of Rp1,500,000.00. After sorting, 10 kg of mangoes were found to be rotten and completely unsellable. If Mrs. Tari still wants to make a total profit of 20% on her original cost, what price per kilogram must she set for the remaining good-quality mangoes?",
         "q10": "Pak Johan wants to buy an electric motorcycle. The cash price is Rp20,000,000.00. However, the dealer offers a credit option with the following terms: a Down Payment (DP) of Rp5,000,000.00 and monthly instalments of Rp700,000.00 for 3 years. What is the percentage of total additional cost that Pak Johan must bear if he chooses the credit option compared to buying it in cash?"
+      },
+      "ppn": {
+        "title": "VALUE ADDED TAX (VAT)",
+        "pageSubtitle": "Grade 7 · Social Arithmetic · Self-Practice",
+        "instruction": "Solve the following problems showing your complete working",
+        "backTo": "Back to Social Arithmetic",
+        "q1": {
+          "stem": "A television is sold for Rp2,000,000. If the buyer is charged 11% VAT, what is the amount of VAT to be paid?",
+          "optA": "A. Rp200,000",
+          "optB": "B. Rp211,000",
+          "optC": "C. Rp220,000",
+          "optD": "D. Rp2,220,000"
+        },
+        "q2": {
+          "stem": "Dad bought a refrigerator for Rp3,000,000. With 10% VAT applied, what is the total amount Dad must pay?",
+          "optA": "A. Rp3,000,000",
+          "optB": "B. Rp3,100,000",
+          "optC": "C. Rp3,300,000",
+          "optD": "D. Rp3,500,000"
+        },
+        "q3": {
+          "stem": "The 11% VAT on an item amounts to Rp55,000. What is the original price of the item before VAT?",
+          "optA": "A. Rp500,000",
+          "optB": "B. Rp550,000",
+          "optC": "C. Rp600,000",
+          "optD": "D. Rp605,000"
+        },
+        "q4": {
+          "stem": "Andi bought a laptop and paid a total of Rp4,440,000. If this price already includes 11% VAT, what was the price of the laptop before VAT?",
+          "optA": "A. Rp3,900,000",
+          "optB": "B. Rp4,000,000",
+          "optC": "C. Rp4,100,000",
+          "optD": "D. Rp4,400,000"
+        },
+        "q5": {
+          "stem": "Rina bought a pair of shoes priced at Rp250,000. At the cashier, she had to pay Rp275,000. What percentage of VAT was charged to Rina?",
+          "optA": "A. 5%",
+          "optB": "B. 10%",
+          "optC": "C. 11%",
+          "optD": "D. 12%"
+        },
+        "q6": {
+          "stem": "Budi bought a book for Rp100,000 with 11% VAT applied. If he paid with a Rp150,000 bill, how much change did he receive?",
+          "optA": "A. Rp39,000",
+          "optB": "B. Rp40,000",
+          "optC": "C. Rp45,000",
+          "optD": "D. Rp50,000"
+        },
+        "q7": {
+          "stem": "A jacket is priced at Rp500,000. The store gives a 20% discount, but after the discount, a 10% VAT is applied. What is the final price to be paid?",
+          "optA": "A. Rp350,000",
+          "optB": "B. Rp400,000",
+          "optC": "C. Rp440,000",
+          "optD": "D. Rp450,000"
+        },
+        "q8": {
+          "stem": "Pak Rahmat bought 5 dozens of notebooks. The price of 1 dozen is Rp30,000 excluding 11% VAT. If Pak Rahmat receives a total discount of Rp15,000 before tax, how much must he pay?",
+          "optA": "A. Rp145,000",
+          "optB": "B. Rp149,850",
+          "optC": "C. Rp151,500",
+          "optD": "D. Rp166,500"
+        },
+        "q9": {
+          "stem": "Store A sells a bicycle for Rp1,000,000 with a 20% discount (VAT-free). Store B sells the same bicycle for Rp900,000 with a 10% discount but with 11% VAT applied after the discount. If you want to buy the cheapest bicycle, the price difference between the two stores is...",
+          "optA": "A. Store A is cheaper by Rp99,100",
+          "optB": "B. Store A is cheaper by Rp89,100",
+          "optC": "C. Store B is cheaper by Rp10,000",
+          "optD": "D. Store B is cheaper by Rp11,100"
+        },
+        "q10": {
+          "stem": "The government announced an increase in the VAT rate from 10% to 11%. If Dimas routinely shops monthly for Rp2,000,000 (before VAT), how much extra annual expenditure must Dimas bear solely because of this VAT rate increase?",
+          "optA": "A. Rp20,000",
+          "optB": "B. Rp120,000",
+          "optC": "C. Rp240,000",
+          "optD": "D. Rp440,000"
+        }
       }
     }
   },
