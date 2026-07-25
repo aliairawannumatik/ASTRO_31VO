@@ -1254,6 +1254,72 @@
           "instruction": "次の2変数分数の簡略化を続けなさい！"
         }
       }
+    },
+    "plsvPtlsv": {
+      "kalimatTerbukaTertutup": {
+        "title": "開いた文と閉じた文",
+        "subtitle": "（命題）",
+        "badge": "記述問題 5問",
+        "tags": {
+          "q1": "文の表",
+          "q2": "文の分類",
+          "q3": "変数の値",
+          "q4": "集合 {3, 4, 9, 15, 20}",
+          "q5": "集合 {1, 2, …, 12}"
+        },
+        "q1": {
+          "instruction": "次の表を写し、内容を完成させなさい！",
+          "colOpen": "開いた文",
+          "colTrue": "真の文",
+          "colFalse": "偽の文",
+          "colVar": "変数の値",
+          "rowDSuffix": "は24の約数"
+        },
+        "q2": {
+          "instruction": "次の文のうち、<a>開いた文</a>、<b>真の文</b>、<c>偽の文</c>はどれですか？",
+          "itemA": "は15と30の間の素数である。",
+          "itemB": "11月の日数は30日である。",
+          "itemC": "2つの正の数の積は常に正である。",
+          "itemDPre": "ある店が1日 ",
+          "itemDMid": " 時間営業する場合、1週間の営業時間の合計は ",
+          "itemDEnd": " である。",
+          "itemEPre": "一辺が ",
+          "itemEMid": " の正方形の面積は ",
+          "itemEEnd": " である。",
+          "itemG": "は40未満の6の倍数である。",
+          "itemHPre": "もし ",
+          "itemHMid": " ならば、 ",
+          "itemHEnd": " である。",
+          "itemIPre": "もし ",
+          "itemIMid": " ならば、 ",
+          "itemISuffix": " は奇数である。"
+        },
+        "q3": {
+          "instruction": "次の文が真になるよう、各変数の値を求めなさい！",
+          "itemAPre": "1年は ",
+          "itemASuffix": " か月である。",
+          "itemBSuffix": "は30未満の5の奇数倍である。",
+          "itemCSuffix": "は18と32の間で5で割り切れる整数である。",
+          "itemDSuffix": "は18の約数である。",
+          "itemEMid": "、",
+          "itemESuffix": " は整数である。",
+          "itemFSuffix": "は偶数の素数である。"
+        },
+        "q4": {
+          "instrPre": "変数が ",
+          "instrSuffix": " の中から選ぶとき、各開いた文の解を求めなさい！",
+          "itemASuffix": " が12より大きい。",
+          "itemBSuffix": " が8以下である。",
+          "itemCSuffix": " が2より大きい。",
+          "itemDSuffix": " は完全平方数である。"
+        },
+        "q5": {
+          "instrPre": "変数が ",
+          "instrSuffix": " の中から選ぶとき、各開いた文の解を求めなさい！",
+          "itemAMid": "、",
+          "itemASuffix": " は20の約数である。"
+        }
+      }
     }
   },
   "settings": {

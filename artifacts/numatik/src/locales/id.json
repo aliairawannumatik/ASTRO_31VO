@@ -1254,6 +1254,72 @@
           "instruction": "Lanjutkan penyederhanaan pecahan dua variabel berikut!"
         }
       }
+    },
+    "plsvPtlsv": {
+      "kalimatTerbukaTertutup": {
+        "title": "KALIMAT TERBUKA DAN TERTUTUP",
+        "subtitle": "(Pernyataan)",
+        "badge": "5 Soal Essay",
+        "tags": {
+          "q1": "Tabel Kalimat",
+          "q2": "Identifikasi Kalimat",
+          "q3": "Pengganti Variabel",
+          "q4": "Himpunan {3, 4, 9, 15, 20}",
+          "q5": "Himpunan {1, 2, …, 12}"
+        },
+        "q1": {
+          "instruction": "Salinlah tabel berikut, kemudian lengkapilah isinya!",
+          "colOpen": "Kalimat terbuka",
+          "colTrue": "Kalimat benar",
+          "colFalse": "Kalimat salah",
+          "colVar": "Pengganti variabel",
+          "rowDSuffix": "faktor dari 24"
+        },
+        "q2": {
+          "instruction": "Di antara kalimat-kalimat berikut, manakah yang merupakan <a>kalimat terbuka</a>, <b>kalimat benar</b>, dan <c>kalimat salah</c>?",
+          "itemA": "adalah bilangan prima antara 15 dan 30.",
+          "itemB": "Jumlah hari dalam bulan November adalah 30 hari.",
+          "itemC": "Hasil kali dua bilangan positif selalu positif.",
+          "itemDPre": "Jika sebuah toko buka selama ",
+          "itemDMid": " jam sehari, total jam buka dalam seminggu adalah ",
+          "itemDEnd": ".",
+          "itemEPre": "Luas persegi dengan sisi ",
+          "itemEMid": " adalah ",
+          "itemEEnd": ".",
+          "itemG": "adalah kelipatan 6 yang kurang dari 40.",
+          "itemHPre": "Jika ",
+          "itemHMid": ", maka nilai ",
+          "itemHEnd": ".",
+          "itemIPre": "Jika ",
+          "itemIMid": ", maka ",
+          "itemISuffix": " adalah bilangan ganjil."
+        },
+        "q3": {
+          "instruction": "Tentukan pengganti dari variabel berikut sehingga menjadi kalimat benar!",
+          "itemAPre": "Satu tahun ada ",
+          "itemASuffix": " bulan.",
+          "itemBSuffix": "adalah bilangan ganjil, kelipatan 5, yang kurang dari 30.",
+          "itemCSuffix": "adalah bilangan bulat antara 18 dan 32 yang habis dibagi 5.",
+          "itemDSuffix": "adalah faktor dari 18.",
+          "itemEMid": ", ",
+          "itemESuffix": " adalah bilangan bulat.",
+          "itemFSuffix": "adalah bilangan prima genap."
+        },
+        "q4": {
+          "instrPre": "Tentukan penyelesaian dari setiap kalimat terbuka berikut dengan variabel pada bilangan ",
+          "instrSuffix": "!",
+          "itemASuffix": " lebih dari 12.",
+          "itemBSuffix": " tidak lebih dari 8.",
+          "itemCSuffix": " lebih dari 2.",
+          "itemDSuffix": " adalah bilangan kuadrat sempurna."
+        },
+        "q5": {
+          "instrPre": "Tentukan penyelesaian dari setiap kalimat terbuka berikut dengan variabel pada bilangan ",
+          "instrSuffix": "!",
+          "itemAMid": ", ",
+          "itemASuffix": " faktor dari 20."
+        }
+      }
     }
   },
   "settings": {

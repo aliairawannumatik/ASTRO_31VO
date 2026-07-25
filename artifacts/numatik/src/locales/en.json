@@ -1254,6 +1254,72 @@
           "instruction": "Continue simplifying the following two-variable fractions!"
         }
       }
+    },
+    "plsvPtlsv": {
+      "kalimatTerbukaTertutup": {
+        "title": "OPEN AND CLOSED SENTENCES",
+        "subtitle": "(Statements)",
+        "badge": "5 Essay Questions",
+        "tags": {
+          "q1": "Sentence Table",
+          "q2": "Sentence Classification",
+          "q3": "Variable Replacement",
+          "q4": "Set {3, 4, 9, 15, 20}",
+          "q5": "Set {1, 2, …, 12}"
+        },
+        "q1": {
+          "instruction": "Copy the table below, then complete its contents!",
+          "colOpen": "Open sentence",
+          "colTrue": "True sentence",
+          "colFalse": "False sentence",
+          "colVar": "Variable replacement",
+          "rowDSuffix": "is a factor of 24"
+        },
+        "q2": {
+          "instruction": "Among the following sentences, which ones are an <a>open sentence</a>, a <b>true sentence</b>, and a <c>false sentence</c>?",
+          "itemA": "is a prime number between 15 and 30.",
+          "itemB": "The number of days in November is 30 days.",
+          "itemC": "The product of two positive numbers is always positive.",
+          "itemDPre": "If a store opens for ",
+          "itemDMid": " hours a day, the total hours open in a week is ",
+          "itemDEnd": ".",
+          "itemEPre": "The area of a square with side ",
+          "itemEMid": " is ",
+          "itemEEnd": ".",
+          "itemG": "is a multiple of 6 that is less than 40.",
+          "itemHPre": "If ",
+          "itemHMid": ", then the value of ",
+          "itemHEnd": ".",
+          "itemIPre": "If ",
+          "itemIMid": ", then ",
+          "itemISuffix": " is an odd number."
+        },
+        "q3": {
+          "instruction": "Determine the replacement for each variable so that the sentence becomes true!",
+          "itemAPre": "There are ",
+          "itemASuffix": " months in a year.",
+          "itemBSuffix": "is an odd multiple of 5 that is less than 30.",
+          "itemCSuffix": "is an integer between 18 and 32 that is divisible by 5.",
+          "itemDSuffix": "is a factor of 18.",
+          "itemEMid": ", ",
+          "itemESuffix": " is an integer.",
+          "itemFSuffix": "is an even prime number."
+        },
+        "q4": {
+          "instrPre": "Find the solution to each open sentence below with the variable from the numbers ",
+          "instrSuffix": "!",
+          "itemASuffix": " is greater than 12.",
+          "itemBSuffix": " is not more than 8.",
+          "itemCSuffix": " is greater than 2.",
+          "itemDSuffix": " is a perfect square."
+        },
+        "q5": {
+          "instrPre": "Find the solution to each open sentence below with the variable from the numbers ",
+          "instrSuffix": "!",
+          "itemAMid": ", ",
+          "itemASuffix": " is a factor of 20."
+        }
+      }
     }
   },
   "settings": {

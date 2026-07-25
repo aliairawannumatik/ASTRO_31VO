@@ -109,6 +109,10 @@ Replace `\text{}` with `\mathrm{}` for units; use interpolated `formulaVar` key 
 - `q4.introPre` untuk bahasa Jepang = `""` (string kosong) karena struktur kalimat JA menempatkan formula lebih dulu.
 - Locale keys ditambahkan ke `practice.aljabar.penjumlahanPengurangan.*` di ketiga file locale.
 
+## PLSV & PtLSV topic — cards di luar pattern
+- Index + 7 sub-pages all have "cards di luar" structure needing refactor.
+- **KalimatTerbukaTertutupPage.tsx (sub-page 1)**: Fully trilingual (id/en/ja) as of July 2026. Locale key prefix: `practice.plsvPtlsv.kalimatTerbukaTertutup`. 5 essay questions. "cards di luar" restructured: cards moved inside page component, all SoalX converted from arrow shorthand to function bodies. Trans used for q2.instruction (3 styled spans: a=amber terbuka, b=emerald benar, c=rose salah). Split-key patterns: q2 items d,e,h,i use Pre/Mid/End flanking InlineMath; q3 item a uses Pre/Suffix flanking n; q5 item a uses Mid/Suffix flanking two math expressions. q4/q5 instrPre/instrSuffix wrap a hardcoded bold number-set span. JA q4/q5 instrPre="変数が ", instrSuffix=" の中から選ぶとき、各開いた文の解を求めなさい！". No useTheme needed (no SVG color switching). 6 sub-pages remaining.
+
 ## Translation progress
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.
