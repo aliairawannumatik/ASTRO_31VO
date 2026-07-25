@@ -1464,6 +1464,120 @@
           "text": "A merchant has <a>24 coins</a> consisting of <a>Rp1,000</a> and <a>Rp2,000</a> coins. The total value of all coins is <a>Rp37,000</a>. Find the number of each type of coin!"
         }
       },
+      "modelMatematikaPtLSV": {
+        "title1": "MATHEMATICAL MODELS AND",
+        "title2": "INEQUALITY APPLICATIONS",
+        "title3": "IN WORD PROBLEMS",
+        "badge": "22 Questions",
+        "tags": {
+          "soalA": "Building an Inequality Model",
+          "soalB": "Applying Inequalities to Word Problems",
+          "soalC": "Models & Advanced Applications"
+        },
+        "qA": {
+          "instruction": "For questions 1 through 5, write the <a>inequality model</a>!"
+        },
+        "qB": {
+          "instruction": "For the following questions, solve and <a>interpret the result</a>!"
+        },
+        "qC": {
+          "instruction1": "For questions 13 through 17, write the <a>inequality model</a>!",
+          "instruction2": "For the following questions, provide a <a>complete solution</a>!"
+        },
+        "q1": {
+          "text": "Twice a number minus <a>7</a> is less than <a>13</a>.",
+          "hintPre": "(Let the number be ",
+          "hintPost": ")."
+        },
+        "q2": {
+          "text": "Five times a number plus <a>9</a> is not less than <a>44</a>.",
+          "hintPre": "(Let the number be ",
+          "hintPost": ")."
+        },
+        "q3": {
+          "text": "<a>Dino</a>'s current age is at most <a>6 years more</a> than three times his younger sibling's age. His sibling is currently <a>4 years old</a>.",
+          "hintPre": "(Let Dino's current age = ",
+          "hintPost": " years)."
+        },
+        "q4": {
+          "text": "The perimeter of an <a>isosceles triangle</a> does not exceed <a>54 cm</a>. Each leg of the triangle is <a>5 cm longer</a> than the base.",
+          "hintPre": "(Let the base length = ",
+          "hintPost": " cm)."
+        },
+        "q5": {
+          "text": "A student's scores on four consecutive tests are <a>70, 75, 80, and 72</a>. The student wants an average of <a>at least 75</a> after the fifth test.",
+          "hintPre": "(Let the fifth test score = ",
+          "hintPost": ")."
+        },
+        "q6": {
+          "text": "A runner wants to complete training of <a>at least 40 km</a> in 4 days. On the first day he ran <a>9 km</a>, the second day <a>11 km</a>, and the third day <a>8 km</a>. What is the minimum distance he must run on the fourth day?"
+        },
+        "q7": {
+          "text": "The price of one <a>notebook is Rp6,000</a>. Andi wants to buy some notebooks with <a>Rp50,000</a> and wants to keep <a>at least Rp8,000</a>. What is the maximum number of notebooks Andi can buy?"
+        },
+        "q8": {
+          "text": "A store gives a discount if the total purchase <a>exceeds Rp250,000</a>. Hera has already chosen items worth <a>Rp95,000</a> and <a>Rp72,000</a>. What is the minimum additional amount Hera must spend to receive the discount?"
+        },
+        "q9": {
+          "text": "A mother's current age is <a>45 years</a>. Her daughter is currently <a>15 years old</a>. What is the earliest number of years from now when the daughter's age will <a>exceed half</a> of her mother's age?"
+        },
+        "q10": {
+          "text": "Rini buys <a>3 notebooks</a> at Rp8,000 each and several <a>pencils</a> at Rp3,500 each. She only has <a>Rp50,000</a>. What is the maximum number of pencils Rini can buy?"
+        },
+        "q11": {
+          "text": "A <a>rectangular garden</a> has length <m1/> m and width <m2/> m. The garden's perimeter <a>does not exceed 64 m</a>.",
+          "subA": "Find the possible values of x!",
+          "subB": "Find the maximum area of the garden!"
+        },
+        "q12": {
+          "text": "Father buys <a>5 printer cartridges</a> and <a>3 reams of paper</a>. One cartridge costs <a>Rp6,000</a> more than one ream of paper. If the total Father pays is <a>not more than Rp246,000</a>, find the possible price of 1 ream of paper!"
+        },
+        "q13": {
+          "text": "A <a>bag</a> costs <a>Rp8,000</a> more than a <a>wallet</a>. The total price of 2 bags and 4 wallets is <a>not more than Rp80,000</a>.",
+          "hintPre": "(Let the price of one wallet = ",
+          "hintPost": " rupiah)."
+        },
+        "q14": {
+          "text": "<a>Bagas</a>'s money is <a>5 times</a> <a>Rio</a>'s money. The combined money of Bagas and Rio is <a>less than Rp180,000</a>.",
+          "hintPre": "(Let Rio's money = ",
+          "hintPost": " rupiah)."
+        },
+        "q15": {
+          "text": "The sum of three consecutive <a>multiples of three</a> is <a>not more than 81</a>.",
+          "hintPre": "(Let the smallest number be ",
+          "hintPost": ")."
+        },
+        "q16": {
+          "text": "<a>Store P</a>'s profit is <a>Rp20,000</a> more than three times <a>Store Q</a>'s profit. The combined profit of both stores is <a>not less than Rp160,000</a>.",
+          "hintPre": "(Let Store Q's profit = ",
+          "hintPost": " rupiah)."
+        },
+        "q17": {
+          "text": "The length of a <a>rectangle</a> is <a>5 cm</a> more than twice its width. The perimeter of the rectangle is <a>not more than 46 cm</a>.",
+          "hintPre": "(Let the width = ",
+          "hintPost": " cm)."
+        },
+        "q18": {
+          "text": "A <a>square</a> has a side length of <m/> cm.",
+          "subA": "Express the perimeter of the square in terms of m!",
+          "subB": "If the perimeter is not more than 72 cm, write an inequality in m, then solve it!",
+          "subC": "Find the possible values of m if m is a variable in the set {1, 2, 3, 4, 5, 6}!"
+        },
+        "q19": {
+          "text": "A <a>rectangle</a> has length <m1/> cm and width <m2/> cm. Its perimeter is <a>not more than 54 cm</a>.",
+          "subA": "Write an inequality expressing the perimeter, then solve it!",
+          "subB": "Find the length, width, and maximum area of the rectangle where x ∈ whole numbers!"
+        },
+        "q20": {
+          "text": "In a circle, the length of <a1>arc PQ</a1> = <m1/> cm and the length of <a2>chord PQ</a2> = <m2/> cm. Since an arc is always longer than its chord, write an inequality in <m3/>, then solve it!"
+        },
+        "q21": {
+          "text": "The sum of two positive integers is <a>not less than 85</a>. The larger number is <a>4 times</a> the smaller number minus <a>5</a>. Find the bounds of each number!"
+        },
+        "q22": {
+          "text": "A <a>rectangular park</a> has a length <a>3 m more</a> than twice its width. If the park's width is <m1/> m and its perimeter <a>does not exceed 48 m</a>, write an inequality in <m2/>, then solve it and find the maximum area of the park!"
+        }
+      },
       "pengertianPtLSV": {
         "title1": "UNDERSTANDING INEQUALITIES,",
         "title2": "LIN. INEQUALITY IN ONE VARIABLE",

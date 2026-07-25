@@ -1464,6 +1464,120 @@
           "text": "Seorang pedagang memiliki <a>24 keping</a> uang logam yang terdiri dari koin <a>Rp1.000</a> dan koin <a>Rp2.000</a>. Nilai total seluruh uang logam tersebut adalah <a>Rp37.000</a>. Tentukan banyak masing-masing koin!"
         }
       },
+      "modelMatematikaPtLSV": {
+        "title1": "MODEL MATEMATIKA DAN",
+        "title2": "PENERAPAN PERTIDAKSAMAAN",
+        "title3": "PADA SOAL CERITA",
+        "badge": "22 Soal",
+        "tags": {
+          "soalA": "Membuat Model Pertidaksamaan",
+          "soalB": "Penerapan Pertidaksamaan pada Soal Cerita",
+          "soalC": "Model & Penerapan Lanjutan"
+        },
+        "qA": {
+          "instruction": "Untuk soal nomor 1 sampai dengan nomor 5, buatlah <a>model pertidaksamaannya</a>!"
+        },
+        "qB": {
+          "instruction": "Untuk soal-soal berikut, selesaikan dan <a>tafsirkan hasilnya</a>!"
+        },
+        "qC": {
+          "instruction1": "Untuk soal nomor 13 sampai dengan nomor 17, buatlah <a>model pertidaksamaannya</a>!",
+          "instruction2": "Untuk soal-soal berikut, jawablah dengan <a>selengkapnya</a>!"
+        },
+        "q1": {
+          "text": "Dua kali suatu bilangan dikurangi <a>7</a> hasilnya kurang dari <a>13</a>.",
+          "hintPre": "(Misalkan bilangan tersebut adalah ",
+          "hintPost": ")."
+        },
+        "q2": {
+          "text": "Lima kali suatu bilangan ditambah <a>9</a> hasilnya tidak kurang dari <a>44</a>.",
+          "hintPre": "(Misalkan bilangan tersebut adalah ",
+          "hintPost": ")."
+        },
+        "q3": {
+          "text": "Usia <a>Dino</a> saat ini paling banyak <a>6 tahun lebih</a> dari tiga kali usia adiknya. Adik Dino saat ini berusia <a>4 tahun</a>.",
+          "hintPre": "(Misalkan usia Dino saat ini = ",
+          "hintPost": " tahun)."
+        },
+        "q4": {
+          "text": "Keliling sebuah <a>segitiga sama kaki</a> tidak melebihi <a>54 cm</a>. Panjang setiap kaki segitiga adalah <a>5 cm lebihnya</a> dari panjang alasnya.",
+          "hintPre": "(Misalkan panjang alas = ",
+          "hintPost": " cm)."
+        },
+        "q5": {
+          "text": "Nilai seorang siswa pada empat ulangan berturut-turut adalah <a>70, 75, 80, dan 72</a>. Siswa tersebut ingin mendapatkan rata-rata <a>tidak kurang dari 75</a> setelah ulangan kelima.",
+          "hintPre": "(Misalkan nilai ulangan kelima = ",
+          "hintPost": ")."
+        },
+        "q6": {
+          "text": "Seorang pelari ingin menyelesaikan latihan <a>minimal 40 km</a> dalam 4 hari. Pada hari pertama ia berlari <a>9 km</a>, hari kedua <a>11 km</a>, dan hari ketiga <a>8 km</a>. Paling sedikit berapa km yang harus ditempuh pada hari keempat?"
+        },
+        "q7": {
+          "text": "Harga satu buah <a>buku tulis Rp6.000</a>. Andi ingin membeli beberapa buku dengan uang <a>Rp50.000</a> dan ingin menyisakan <a>paling sedikit Rp8.000</a>. Paling banyak berapa buku yang dapat Andi beli?"
+        },
+        "q8": {
+          "text": "Sebuah toko memberikan diskon jika total belanja <a>melebihi Rp250.000</a>. Hera sudah memilih barang seharga <a>Rp95.000</a> dan <a>Rp72.000</a>. Paling sedikit berapa rupiah lagi yang harus Hera belanjakan agar mendapat diskon?"
+        },
+        "q9": {
+          "text": "Umur seorang ibu saat ini <a>45 tahun</a>. Anak perempuannya saat ini berusia <a>15 tahun</a>. Paling cepat berapa tahun lagi umur anak tersebut akan <a>melebihi setengah</a> umur ibunya?"
+        },
+        "q10": {
+          "text": "Rini membeli <a>3 buku tulis</a> seharga Rp8.000 per buku dan sejumlah <a>pensil</a> seharga Rp3.500 per batang. Ia hanya memiliki uang <a>Rp50.000</a>. Paling banyak berapa batang pensil yang dapat Rini beli?"
+        },
+        "q11": {
+          "text": "Sebuah <a>kebun berbentuk persegi panjang</a> dengan panjang <m1/> m dan lebar <m2/> m. Keliling kebun tersebut <a>tidak lebih dari 64 m</a>.",
+          "subA": "Tentukan nilai x yang mungkin!",
+          "subB": "Tentukan luas maksimum kebun tersebut!"
+        },
+        "q12": {
+          "text": "Ayah membeli <a>5 buah tinta printer</a> dan <a>3 rim kertas</a>. Harga sebuah tinta printer lebih mahal <a>Rp6.000</a> dari harga 1 rim kertas. Jika total yang harus dibayar Ayah <a>tidak lebih dari Rp246.000</a>, tentukan harga 1 rim kertas yang mungkin!"
+        },
+        "q13": {
+          "text": "Harga sebuah <a>tas</a> lebih mahal <a>Rp8.000</a> dari harga sebuah <a>dompet</a>. Harga 2 tas dan 4 dompet seluruhnya <a>tidak lebih dari Rp80.000</a>.",
+          "hintPre": "(Misalkan harga sebuah dompet = ",
+          "hintPost": " rupiah)."
+        },
+        "q14": {
+          "text": "Uang yang dimiliki <a>Bagas</a> adalah <a>5 kali</a> uang yang dimiliki <a>Rio</a>. Jumlah uang Bagas dan Rio <a>kurang dari Rp180.000</a>.",
+          "hintPre": "(Misalkan banyak uang Rio = ",
+          "hintPost": " rupiah)."
+        },
+        "q15": {
+          "text": "Jumlah tiga bilangan <a>kelipatan tiga</a> yang berurutan <a>tidak lebih dari 81</a>.",
+          "hintPre": "(Bilangan terkecil dimisalkan dengan ",
+          "hintPost": ")."
+        },
+        "q16": {
+          "text": "Keuntungan <a>Toko P</a> lebih <a>Rp20.000</a> dari tiga kali keuntungan <a>Toko Q</a>. Jumlah keuntungan kedua toko tersebut <a>tidak kurang dari Rp160.000</a>.",
+          "hintPre": "(Misalkan keuntungan Toko Q = ",
+          "hintPost": " rupiah)."
+        },
+        "q17": {
+          "text": "Panjang sebuah <a>persegi panjang</a> lebih <a>5 cm</a> dari dua kali lebarnya. Keliling persegi panjang tersebut <a>tidak lebih dari 46 cm</a>.",
+          "hintPre": "(Misalkan lebar = ",
+          "hintPost": " cm)."
+        },
+        "q18": {
+          "text": "Sebuah <a>persegi</a> memiliki panjang sisi <m/> cm.",
+          "subA": "Nyatakan keliling persegi tersebut dalam m!",
+          "subB": "Jika kelilingnya tidak lebih dari 72 cm, susunlah pertidaksamaan dalam m, kemudian selesaikanlah!",
+          "subC": "Tentukan nilai m yang mungkin jika m variabel pada bilangan {1, 2, 3, 4, 5, 6}!"
+        },
+        "q19": {
+          "text": "Sebuah <a>persegi panjang</a> berukuran panjang <m1/> cm dan lebar <m2/> cm. Kelilingnya <a>tidak lebih dari 54 cm</a>.",
+          "subA": "Susunlah pertidaksamaan yang menyatakan keliling tersebut, kemudian selesaikanlah!",
+          "subB": "Tentukan ukuran panjang, lebar, dan luas maksimum persegi panjang tersebut dengan x ∈ bilangan cacah!"
+        },
+        "q20": {
+          "text": "Pada suatu lingkaran, panjang <a1>busur PQ</a1> = <m1/> cm dan panjang <a2>tali busur PQ</a2> = <m2/> cm. Karena panjang busur selalu lebih besar dari panjang tali busurnya, susunlah pertidaksamaan dalam <m3/>, kemudian selesaikanlah!"
+        },
+        "q21": {
+          "text": "Jumlah dua bilangan bulat positif <a>tidak kurang dari 85</a>. Bilangan yang lebih besar adalah <a>4 kali</a> bilangan yang lebih kecil dikurangi <a>5</a>. Tentukan batas-batas dari masing-masing bilangan tersebut!"
+        },
+        "q22": {
+          "text": "Sebuah <a>taman berbentuk persegi panjang</a> dengan panjang <a>3 m lebih</a> dari dua kali lebarnya. Jika lebar taman adalah <m1/> m dan kelilingnya <a>tidak melebihi 48 m</a>, susunlah pertidaksamaan dalam <m2/>, kemudian selesaikanlah dan tentukan luas maksimum taman!"
+        }
+      },
       "pengertianPtLSV": {
         "title1": "PENGERTIAN KETIDAKSAMAAN,",
         "title2": "PERTIDAKSAMAAN DAN PtLSV",

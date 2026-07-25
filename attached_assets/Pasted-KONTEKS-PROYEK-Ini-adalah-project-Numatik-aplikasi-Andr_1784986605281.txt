@@ -1,0 +1,47 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia, 
+English, Japanese) pakai react-i18next dengan useTranslation() dan 
+file locale (id.json, en.json, ja.json). Topik "Bilangan Bulat", 
+"Pecahan", "Aljabar" di Kelas 7 Tugas-Latihan Mandiri sudah selesai. 
+Topik "PLSV & PtLSV" sub-halaman 1-6 sudah selesai. Ini adalah 
+SUB-HALAMAN TERAKHIR dari topik ini.
+
+ATURAN PENTING:
+- Soal ditulis sebagai komponen JSX inline per soal, BUKAN array data 
+  — terjemahkan pakai t() atau <Trans>
+- Cards di luar component perlu dipindah ke dalam + tambah isDark
+- Reuse translation key yang sudah ada untuk teks identik
+- Rumus KaTeX dengan \text{} berisi bahasa natural WAJIB diganti ke 
+  JSX terpisah atau \mathrm{}
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+
+TUGAS SEKARANG:
+Fokus ke ModelMatematikaPtLSVPage.tsx (22 soal, 3 komponen SoalA-SoalC, 
+soal cerita/word problems — mirip ModelMatematikaPLSVPage yang sudah 
+selesai sebelumnya, gunakan itu sebagai referensi pola).
+
+1. Cek dulu apakah ada teks tersembunyi di dalam data array soal 
+   (bukan cuma instruksi) seperti yang ditemukan di PengertianPtLSVPage 
+   — laporkan sebelum eksekusi besar
+2. Pindahkan array `cards` ke dalam component (kalau di luar), tambah 
+   isDark support
+3. Terjemahkan SEMUA teks: narasi soal cerita (jaga makna & alur 
+   cerita tetap natural di EN/JA, bukan terjemahan kaku kata-per-kata), 
+   instruksi, pilihan jawaban, pembahasan
+4. Terjemahkan label tag di cards, h1 title, badge jumlah soal
+5. Tambahkan translation key ke ketiga file locale (id, en, ja) di 
+   bawah practice.plsvPtlsv.modelMatematikaPtLSV.*
+6. Setelah selesai, konfirmasi bahwa SELURUH topik "PLSV & PtLSV" 
+   (index + 7 sub-halaman) sekarang 100% trilingual
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat 
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan
