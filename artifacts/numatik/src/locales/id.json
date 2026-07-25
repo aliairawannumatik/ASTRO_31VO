@@ -413,6 +413,41 @@
         "pembagianDesimal": "PEMBAGIAN BENTUK DESIMAL",
         "pembulatanDesimal": "PEMBULATAN BENTUK DESIMAL"
       },
+      "penjumlahanPecahan": {
+        "pageTitle1": "PENJUMLAHAN PECAHAN",
+        "pageTitle2": "DAN PENGURANGAN PECAHAN",
+        "pageSubtitle": "Kelas 7 · Pecahan · Latihan Mandiri",
+        "badgeSoal": "9 Soal Essay",
+        "banner": "📌 Untuk soal nomor <strong>1 sampai dengan 6</strong>, tentukan hasil penjumlahan atau pengurangannya.",
+        "calcInstruction": "Tentukan hasil penjumlahan atau pengurangannya!",
+        "tags": {
+          "q1": "Penyebut Sama",
+          "q2": "Penyebut Berbeda",
+          "q3": "Sifat Asosiatif",
+          "q4": "Tiga Suku",
+          "q5": "Bilangan Negatif",
+          "q6": "Negatif & Persen",
+          "q7": "Kontekstual",
+          "q8": "Kontekstual",
+          "q9": "Kontekstual"
+        },
+        "q3": {
+          "conclusion": "Bagaimanakah hasil jawaban <a>a</a> dan <b>b</b>? Sifat apakah yang ditunjukkan di atas?"
+        },
+        "q7": {
+          "context": "Tiga perlima bagian dari sebuah pulau adalah kawasan hutan lindung.",
+          "itemA": "Berapa bagian dari pulau tersebut yang bukan kawasan hutan lindung?",
+          "itemB": "Jika luas pulau tersebut adalah 24.000 hektar, hitunglah luas kawasan hutan lindungnya!"
+        },
+        "q8": {
+          "instruction": "Sebuah truk mengangkut <f1/> ton beras dari gudang A, <f2/> ton dari gudang B, dan <f3/> ton dari gudang C. Berapa ton beras yang diangkut truk tersebut seluruhnya?"
+        },
+        "q9": {
+          "context": "Bu Sari memiliki sebidang tanah seluas 480 m². Dari tanah tersebut, <f1/> bagian dibangun rumah, <f2/> bagian dibuat taman bunga, dan sisanya dijadikan kebun sayur.",
+          "itemA": "Berapa bagian tanah yang dijadikan kebun sayur?",
+          "itemB": "Hitunglah luas tanah yang dijadikan kebun sayur tersebut!"
+        }
+      },
       "pecahanCampuran": {
         "pageTitle1": "PECAHAN CAMPURAN DAN PERSEN",
         "pageTitle2": "SERTA BENTUK DESIMAL",

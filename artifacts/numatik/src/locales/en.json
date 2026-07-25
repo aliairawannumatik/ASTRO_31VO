@@ -413,6 +413,41 @@
         "pembagianDesimal": "DIVISION OF DECIMALS",
         "pembulatanDesimal": "ROUNDING DECIMALS"
       },
+      "penjumlahanPecahan": {
+        "pageTitle1": "ADDITION OF FRACTIONS",
+        "pageTitle2": "AND SUBTRACTION OF FRACTIONS",
+        "pageSubtitle": "Grade 7 · Fractions · Self-Practice",
+        "badgeSoal": "9 Essay Questions",
+        "banner": "📌 For questions <strong>1 through 6</strong>, find the result of the addition or subtraction.",
+        "calcInstruction": "Find the result of the addition or subtraction!",
+        "tags": {
+          "q1": "Like Denominators",
+          "q2": "Unlike Denominators",
+          "q3": "Associative Property",
+          "q4": "Three Terms",
+          "q5": "Negative Fractions",
+          "q6": "Negative & Percent",
+          "q7": "Contextual",
+          "q8": "Contextual",
+          "q9": "Contextual"
+        },
+        "q3": {
+          "conclusion": "How do the answers to <a>a</a> and <b>b</b> compare? What property is shown above?"
+        },
+        "q7": {
+          "context": "Three-fifths of an island is a protected forest area.",
+          "itemA": "What fraction of the island is not a protected forest area?",
+          "itemB": "If the area of the island is 24,000 hectares, calculate the area of the protected forest!"
+        },
+        "q8": {
+          "instruction": "A truck carries <f1/> tonnes of rice from warehouse A, <f2/> tonnes from warehouse B, and <f3/> tonnes from warehouse C. How many tonnes of rice does the truck carry in total?"
+        },
+        "q9": {
+          "context": "Mrs Sari has a plot of land of 480 m². From this land, <f1/> is used for a house, <f2/> is made into a flower garden, and the rest is used as a vegetable garden.",
+          "itemA": "What fraction of the land is used as a vegetable garden?",
+          "itemB": "Calculate the area of land used as a vegetable garden!"
+        }
+      },
       "pecahanCampuran": {
         "pageTitle1": "MIXED FRACTIONS AND PERCENTAGES",
         "pageTitle2": "AND DECIMAL FORM",
