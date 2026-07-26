@@ -16,21 +16,27 @@ const SudutPelurusPenyikuBertolakPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          SUDUT PELURUS, SUDUT PENYIKU DAN SUDUT BERTOLAK BELAKANG
+          {t('practice.garisDanSudut.sudutPelurus.title')}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 7 - Latihan Mandiri - Garis dan Sudut</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">
+          {t('practice.garisDanSudut.sudutPelurus.pageSubtitle')}
+        </p>
 
         {/* Bagian I */}
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
-          <p className="text-accent text-sm font-bold mb-2 font-display">Bagian I — Isian Pendek</p>
-          <p className="text-yellow-400 text-sm mb-6 font-body">Tentukan nilai sudut yang belum diketahui. Kerjakan lengkap dengan caranya!</p>
+          <p className="text-accent text-sm font-bold mb-2 font-display">
+            {t('practice.garisDanSudut.sudutPelurus.sectionI')}
+          </p>
+          <p className="text-yellow-400 text-sm mb-6 font-body">
+            {t('practice.garisDanSudut.sudutPelurus.instructionI')}
+          </p>
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
             {/* Soal a */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">a)</span>
               <div>
-                <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 37°. Tentukan nilai x!</p>
+                <p>{t('practice.garisDanSudut.sudutPelurus.qa.text')}</p>
                 <img src={"/images/a_1774838179561.png"} alt="Soal a" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
@@ -39,7 +45,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">b)</span>
               <div>
-                <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 127°. Tentukan nilai y!</p>
+                <p>{t('practice.garisDanSudut.sudutPelurus.qb.text')}</p>
                 <img src={"/images/b_1774838179562.png"} alt="Soal b" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
@@ -48,7 +54,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">c)</span>
               <div>
-                <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 140°. Tentukan nilai z!</p>
+                <p>{t('practice.garisDanSudut.sudutPelurus.qc.text')}</p>
                 <img src={"/images/c_1774838179562.png"} alt="Soal c" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
@@ -57,7 +63,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">d)</span>
               <div>
-                <p>Sudut a°, 50°, dan 20° terletak pada satu garis lurus. Tentukan nilai a!</p>
+                <p>{t('practice.garisDanSudut.sudutPelurus.qd.text')}</p>
                 <img src={"/images/d_1774838179563.png"} alt="Soal d" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
@@ -66,7 +72,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">e)</span>
               <div>
-                <p>Sudut 50° dan sudut b° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai b!</p>
+                <p>{t('practice.garisDanSudut.sudutPelurus.qe.text')}</p>
                 <img src={"/images/e_1774838179563.png"} alt="Soal e" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
@@ -75,7 +81,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">f)</span>
               <div>
-                <p>Sudut c° dan sudut 80° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai c!</p>
+                <p>{t('practice.garisDanSudut.sudutPelurus.qf.text')}</p>
                 <img src={"/images/f_1774838179564.png"} alt="Soal f" className="mt-3 w-full max-w-xs block" />
               </div>
             </div>
@@ -85,19 +91,21 @@ const SudutPelurusPenyikuBertolakPage = () => {
         {/* Bagian II */}
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <p className="text-accent text-sm font-bold mb-2 font-display">Bagian II — {t('practice.multipleChoice')}</p>
-          <p className="text-yellow-400 text-sm mb-6 font-body">Kerjakan soal-soal berikut lengkap dengan caranya</p>
+          <p className="text-yellow-400 text-sm mb-6 font-body">
+            {t('practice.garisDanSudut.sudutPelurus.instructionII')}
+          </p>
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
             {/* Soal 1 */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">1.</span>
               <div>
-                <p className="mb-2">Sudut 7/12 putaran adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q1.stem')}</p>
                 <div className="ml-4 space-y-1">
-                  <p>A. 280°</p>
-                  <p>B. 210°</p>
-                  <p>C. 120°</p>
-                  <p>D. 30°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q1.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q1.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q1.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q1.optD')}</p>
                 </div>
               </div>
             </div>
@@ -106,13 +114,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">2.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Titik D adalah titik tengah. Garis-garis dari titik D menuju A, B, C, dan F membentuk sudut-sudut di sekitar titik D. Diketahui besar ∠ADB = ∠BDC. Jika besar ∠ADB = besar ∠BDC = 40°, besar ∠CDF adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q2.stem')}</p>
                 <img src={"/images/no_2_1774838544613.png"} alt="Soal 2" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 40°</p>
-                  <p>B. 80°</p>
-                  <p>C. 100°</p>
-                  <p>D. 120°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q2.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q2.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q2.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q2.optD')}</p>
                 </div>
               </div>
             </div>
@@ -121,13 +129,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">3.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Titik A, B, C, D, E membentuk konfigurasi sudut di mana ∠CAE adalah sudut siku-siku dan besar ∠BAC = 40°. Besar ∠DAE = (4x + 10)°. Nilai x adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q3.stem')}</p>
                 <img src={"/images/no_3_1774838544614.png"} alt="Soal 3" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 7,5</p>
-                  <p>B. 10</p>
-                  <p>C. 12,5</p>
-                  <p>D. 40</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q3.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q3.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q3.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q3.optD')}</p>
                 </div>
               </div>
             </div>
@@ -136,13 +144,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">4.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Pada gambar terdapat sudut x° dan sudut 20° yang terbentuk di antara dua garis. Sudut siku-siku (90°) terdapat pada gambar tersebut. Nilai x adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q4.stem')}</p>
                 <img src={"/images/no_4_1774838544614.png"} alt="Soal 4" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 70°</p>
-                  <p>B. 80°</p>
-                  <p>C. 90°</p>
-                  <p>D. 110°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q4.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q4.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q4.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q4.optD')}</p>
                 </div>
               </div>
             </div>
@@ -151,13 +159,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">5.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut! Dari gambar diketahui besar ∠SQR = 32°. Besar penyiku ∠SQR adalah ...</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q5.stem')}</p>
                 <img src={"/images/no_5_1774838544615.png"} alt="Soal 5" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 90°</p>
-                  <p>B. 32°</p>
-                  <p>C. 48°</p>
-                  <p>D. 58°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q5.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q5.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q5.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q5.optD')}</p>
                 </div>
               </div>
             </div>
@@ -166,13 +174,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">6.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar. Diketahui besar ∠CBD = (2x + 5)° dan ∠ABD = (3x – 25)°. Sudut CBD dan ABD saling berpelurus. Besar pelurus sudut CBD adalah ...</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q6.stem')}</p>
                 <img src={"/images/no_6_1774838544615.png"} alt="Soal 6" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 82°</p>
-                  <p>B. 85°</p>
-                  <p>C. 95°</p>
-                  <p>D. 104°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q6.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q6.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q6.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q6.optD')}</p>
                 </div>
               </div>
             </div>
@@ -181,12 +189,12 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">7.</span>
               <div>
-                <p className="mb-2">Diketahui besar ∠A = (2x + 3)° dan ∠B = (3x – 8)° saling berpelurus. Maka penyiku sudut A adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q7.stem')}</p>
                 <div className="ml-4 space-y-1">
-                  <p>A. 13°</p>
-                  <p>B. 37°</p>
-                  <p>C. 77°</p>
-                  <p>D. 103°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q7.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q7.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q7.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q7.optD')}</p>
                 </div>
               </div>
             </div>
@@ -195,13 +203,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">8.</span>
               <div>
-                <p className="mb-2">Dari gambar berikut, diketahui sudut x dan sudut y saling berpelurus dengan perbandingan x : y = 2 : 7. Besar sudut x adalah ...</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q8.stem')}</p>
                 <img src={"/images/no_8_1774838544616.png"} alt="Soal 8" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 120°</p>
-                  <p>B. 60°</p>
-                  <p>C. 40°</p>
-                  <p>D. 20°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q8.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q8.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q8.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q8.optD')}</p>
                 </div>
               </div>
             </div>
@@ -210,12 +218,12 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">9.</span>
               <div>
-                <p className="mb-2">Pelurusnya suatu sudut besarnya 3 kali sudut tersebut, maka sudut tersebut adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q9.stem')}</p>
                 <div className="ml-4 space-y-1">
-                  <p>A. 15°</p>
-                  <p>B. 30°</p>
-                  <p>C. 45°</p>
-                  <p>D. 60°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q9.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q9.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q9.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q9.optD')}</p>
                 </div>
               </div>
             </div>
@@ -224,13 +232,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">10.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar. Titik O adalah titik potong dua garis. Sudut-sudut yang terbentuk di sekitar O diketahui nilainya. Besar sudut AOB adalah ...</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q10.stem')}</p>
                 <img src={"/images/no_10_1774838544616.png"} alt="Soal 10" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 70°</p>
-                  <p>B. 120°</p>
-                  <p>C. 140°</p>
-                  <p>D. 160°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q10.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q10.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q10.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q10.optD')}</p>
                 </div>
               </div>
             </div>
@@ -239,13 +247,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">11.</span>
               <div>
-                <p className="mb-2">Empat sudut terbentuk oleh dua garis berpotongan dan diberi nama p°, q°, r°, s° (berurutan). Bila diketahui q° = 45°, maka nilai p, s, dan r berturut-turut adalah ...</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q11.stem')}</p>
                 <img src={"/images/no_11_1774838544616.png"} alt="Soal 11" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. p = 135° ; s = 45° ; r = 135°</p>
-                  <p>B. p = 130° ; s = 45° ; r = 130°</p>
-                  <p>C. p = 135° ; s = 40° ; r = 135°</p>
-                  <p>D. p = 130° ; s = 40° ; r = 130°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q11.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q11.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q11.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q11.optD')}</p>
                 </div>
               </div>
             </div>
@@ -254,13 +262,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">12.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar di bawah ini. Dari gambar diketahui dua garis berpotongan membentuk sudut-sudut yang dinyatakan dalam variabel a. Tentukan nilai a!</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q12.stem')}</p>
                 <img src={"/images/no_12_1774838544617.png"} alt="Soal 12" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 45</p>
-                  <p>B. 49</p>
-                  <p>C. 55</p>
-                  <p>D. 105</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q12.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q12.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q12.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q12.optD')}</p>
                 </div>
               </div>
             </div>
@@ -269,13 +277,13 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">13.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar di bawah ini. Dua garis berpotongan di titik E membentuk sudut-sudut C, E, D dengan nilai tertentu yang diketahui dari gambar. Berapakah besar sudut CED?</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q13.stem')}</p>
                 <img src={"/images/no_13_1774838544618.png"} alt="Soal 13" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 73°</p>
-                  <p>B. 107°</p>
-                  <p>C. 117°</p>
-                  <p>D. 127°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q13.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q13.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q13.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q13.optD')}</p>
                 </div>
               </div>
             </div>
@@ -284,12 +292,12 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">14.</span>
               <div>
-                <p className="mb-2">Besar sudut terkecil yang dibentuk oleh dua jarum jam pada pukul 07.20 adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q14.stem')}</p>
                 <div className="ml-4 space-y-1">
-                  <p>A. 90°</p>
-                  <p>B. 100°</p>
-                  <p>C. 105°</p>
-                  <p>D. 110°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q14.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q14.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q14.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q14.optD')}</p>
                 </div>
               </div>
             </div>
@@ -298,12 +306,12 @@ const SudutPelurusPenyikuBertolakPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">15.</span>
               <div>
-                <p className="mb-2">Besar sudut terkecil yang dibentuk oleh dua jarum jam pada pukul 22.10 adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sudutPelurus.q15.stem')}</p>
                 <div className="ml-4 space-y-1">
-                  <p>A. 145°</p>
-                  <p>B. 125°</p>
-                  <p>C. 115°</p>
-                  <p>D. 95°</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q15.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q15.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q15.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sudutPelurus.q15.optD')}</p>
                 </div>
               </div>
             </div>
@@ -316,7 +324,7 @@ const SudutPelurusPenyikuBertolakPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Garis dan Sudut
+            {t('practice.garisDanSudut.sudutPelurus.backTo')}
           </button>
         </div>
       </div>

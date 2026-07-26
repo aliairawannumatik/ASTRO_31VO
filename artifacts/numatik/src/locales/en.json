@@ -2650,6 +2650,137 @@
           "optC": "C. 50°",
           "optD": "D. 35°"
         }
+      },
+      "sudutPelurus": {
+        "title": "SUPPLEMENTARY, COMPLEMENTARY AND VERTICALLY OPPOSITE ANGLES",
+        "pageSubtitle": "Grade 7 - Self-Practice - Lines and Angles",
+        "sectionI": "Part I — Short Answer",
+        "instructionI": "Find the unknown angle. Show your complete working!",
+        "instructionII": "Solve the following problems showing your complete working",
+        "backTo": "Back to Lines and Angles",
+        "qa": {
+          "text": "Two angles lie on a straight line (supplementary). One of the angles is 37°. Find the value of x!"
+        },
+        "qb": {
+          "text": "Two angles lie on a straight line (supplementary). One of the angles is 127°. Find the value of y!"
+        },
+        "qc": {
+          "text": "Two angles lie on a straight line (supplementary). One of the angles is 140°. Find the value of z!"
+        },
+        "qd": {
+          "text": "Angles a°, 50°, and 20° lie on a straight line. Find the value of a!"
+        },
+        "qe": {
+          "text": "Angle 50° and angle b° are complementary (form a right angle). Find the value of b!"
+        },
+        "qf": {
+          "text": "Angle c° and angle 80° are complementary (form a right angle). Find the value of c!"
+        },
+        "q1": {
+          "stem": "An angle of 7/12 of a full rotation equals …",
+          "optA": "A. 280°",
+          "optB": "B. 210°",
+          "optC": "C. 120°",
+          "optD": "D. 30°"
+        },
+        "q2": {
+          "stem": "Observe the figure. Point D is the centre. Lines from D to A, B, C, and F form angles around D. Given ∠ADB = ∠BDC = 40°, the measure of ∠CDF is …",
+          "optA": "A. 40°",
+          "optB": "B. 80°",
+          "optC": "C. 100°",
+          "optD": "D. 120°"
+        },
+        "q3": {
+          "stem": "Observe the figure. Points A, B, C, D, E form an angle configuration where ∠CAE is a right angle and ∠BAC = 40°. Given ∠DAE = (4x + 10)°, the value of x is …",
+          "optA": "A. 7.5",
+          "optB": "B. 10",
+          "optC": "C. 12.5",
+          "optD": "D. 40"
+        },
+        "q4": {
+          "stem": "Observe the figure. Angle x° and angle 20° are formed between two lines, with a right angle (90°) also present. The value of x is …",
+          "optA": "A. 70°",
+          "optB": "B. 80°",
+          "optC": "C. 90°",
+          "optD": "D. 110°"
+        },
+        "q5": {
+          "stem": "Observe the figure. Given ∠SQR = 32°, the complement of ∠SQR is ...",
+          "optA": "A. 90°",
+          "optB": "B. 32°",
+          "optC": "C. 48°",
+          "optD": "D. 58°"
+        },
+        "q6": {
+          "stem": "Observe the figure. Given ∠CBD = (2x + 5)° and ∠ABD = (3x – 25)°, and angles CBD and ABD are supplementary. The supplement of ∠CBD is ...",
+          "optA": "A. 82°",
+          "optB": "B. 85°",
+          "optC": "C. 95°",
+          "optD": "D. 104°"
+        },
+        "q7": {
+          "stem": "Given ∠A = (2x + 3)° and ∠B = (3x – 8)° are supplementary. The complement of angle A is …",
+          "optA": "A. 13°",
+          "optB": "B. 37°",
+          "optC": "C. 77°",
+          "optD": "D. 103°"
+        },
+        "q8": {
+          "stem": "From the figure, angles x and y are supplementary with ratio x : y = 2 : 7. The measure of angle x is ...",
+          "optA": "A. 120°",
+          "optB": "B. 60°",
+          "optC": "C. 40°",
+          "optD": "D. 20°"
+        },
+        "q9": {
+          "stem": "The supplement of an angle is 3 times the angle itself. The angle measures …",
+          "optA": "A. 15°",
+          "optB": "B. 30°",
+          "optC": "C. 45°",
+          "optD": "D. 60°"
+        },
+        "q10": {
+          "stem": "Observe the figure. Point O is the intersection of two lines. The angles formed around O are given. The measure of angle AOB is ...",
+          "optA": "A. 70°",
+          "optB": "B. 120°",
+          "optC": "C. 140°",
+          "optD": "D. 160°"
+        },
+        "q11": {
+          "stem": "Four angles formed by two intersecting lines are named p°, q°, r°, s° (in order). Given q° = 45°, the values of p, s, and r respectively are ...",
+          "optA": "A. p = 135° ; s = 45° ; r = 135°",
+          "optB": "B. p = 130° ; s = 45° ; r = 130°",
+          "optC": "C. p = 135° ; s = 40° ; r = 135°",
+          "optD": "D. p = 130° ; s = 40° ; r = 130°"
+        },
+        "q12": {
+          "stem": "Observe the figure. Two intersecting lines form angles expressed in variable a. Find the value of a!",
+          "optA": "A. 45",
+          "optB": "B. 49",
+          "optC": "C. 55",
+          "optD": "D. 105"
+        },
+        "q13": {
+          "stem": "Observe the figure. Two lines intersect at point E, forming angles C, E, D with values given in the figure. What is the measure of angle CED?",
+          "optA": "A. 73°",
+          "optB": "B. 107°",
+          "optC": "C. 117°",
+          "optD": "D. 127°"
+        },
+        "q14": {
+          "stem": "The smallest angle formed by the two hands of a clock at 07:20 is …",
+          "optA": "A. 90°",
+          "optB": "B. 100°",
+          "optC": "C. 105°",
+          "optD": "D. 110°"
+        },
+        "q15": {
+          "stem": "The smallest angle formed by the two hands of a clock at 22:10 is …",
+          "optA": "A. 145°",
+          "optB": "B. 125°",
+          "optC": "C. 115°",
+          "optD": "D. 95°"
+        }
       }
     }
   },

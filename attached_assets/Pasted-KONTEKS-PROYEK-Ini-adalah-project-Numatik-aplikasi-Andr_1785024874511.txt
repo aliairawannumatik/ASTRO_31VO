@@ -1,0 +1,56 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia, 
+English, Japanese) pakai react-i18next dengan useTranslation() dan 
+file locale (id.json, en.json, ja.json). Topik-topik sebelumnya di 
+Kelas 7 sudah selesai. Topik "Garis dan Sudut" — index, 
+SifatSudutDuaGarisSejajarPage.tsx, dan JumlahSudutPadaSegiBanyakPage.tsx 
+sudah selesai.
+
+ATURAN PENTING:
+- Soal ditulis sebagai komponen JSX inline — terjemahkan pakai t() 
+  atau <Trans>
+- TIDAK ADA sistem cards/tag/isDark di topik ini
+- Gambar diagram <img> TIDAK diterjemahkan (biarkan src-nya)
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+
+TUGAS SEKARANG:
+Fokus HANYA ke SudutPelurusPenyikuBertolakPage.tsx (15 soal, 2 bagian):
+- Bagian I: 6 soal isian pendek (a-f), masing-masing punya <img> diagram 
+  — terjemahkan teks instruksi/pertanyaan tiap soal (meski ada gambar, 
+  biasanya tetap ada teks singkat yang menyertai, misal "Tentukan 
+  nilai x" atau serupa)
+- Bagian II: 9 soal pilihan ganda (soal 7-15), sebagian ada <img> 
+  sebagian tidak (7, 9, 14, 15 tanpa gambar) — terjemahkan stem + 
+  4 opsi tiap soal
+
+PERHATIAN KHUSUS:
+- Soal 11 (atau nomor sejenis): ada opsi dengan format titik koma 
+  seperti "p = 135° ; s = 45° ; r = 135°" — pertahankan struktur 
+  ini, cukup terjemahkan kalau ada kata di dalamnya (biasanya cuma 
+  simbol jadi mungkin tidak perlu diubah, cek dulu)
+- Label section "Bagian I" dan "Bagian II" — cek dulu apakah sudah 
+  ada key global (practice.multipleChoice dst dari sub-halaman 
+  sebelumnya), reuse kalau ada
+
+1. Konversi semua komponen soal (Bagian I dan II) ke useTranslation()
+2. Terjemahkan SEMUA teks: instruksi tiap soal Bagian I, stem + opsi 
+   tiap soal Bagian II
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di 
+   bawah practice.garisDanSudut.sudutPelurus.*
+5. JANGAN sentuh sub-halaman terakhir (HubunganDuaGaris) atau halaman 
+   index
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat 
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan, dan 
+  konfirmasi eksplisit bahwa Bagian I (6 soal) dan Bagian II (9 soal 
+  × 4 opsi = 36 opsi) sudah diterjemahkan

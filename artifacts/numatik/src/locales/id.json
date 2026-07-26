@@ -2650,6 +2650,137 @@
           "optC": "C. 50°",
           "optD": "D. 35°"
         }
+      },
+      "sudutPelurus": {
+        "title": "SUDUT PELURUS, SUDUT PENYIKU DAN SUDUT BERTOLAK BELAKANG",
+        "pageSubtitle": "Kelas 7 - Latihan Mandiri - Garis dan Sudut",
+        "sectionI": "Bagian I — Isian Pendek",
+        "instructionI": "Tentukan nilai sudut yang belum diketahui. Kerjakan lengkap dengan caranya!",
+        "instructionII": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Garis dan Sudut",
+        "qa": {
+          "text": "Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 37°. Tentukan nilai x!"
+        },
+        "qb": {
+          "text": "Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 127°. Tentukan nilai y!"
+        },
+        "qc": {
+          "text": "Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 140°. Tentukan nilai z!"
+        },
+        "qd": {
+          "text": "Sudut a°, 50°, dan 20° terletak pada satu garis lurus. Tentukan nilai a!"
+        },
+        "qe": {
+          "text": "Sudut 50° dan sudut b° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai b!"
+        },
+        "qf": {
+          "text": "Sudut c° dan sudut 80° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai c!"
+        },
+        "q1": {
+          "stem": "Sudut 7/12 putaran adalah …",
+          "optA": "A. 280°",
+          "optB": "B. 210°",
+          "optC": "C. 120°",
+          "optD": "D. 30°"
+        },
+        "q2": {
+          "stem": "Perhatikan gambar berikut. Titik D adalah titik tengah. Garis-garis dari titik D menuju A, B, C, dan F membentuk sudut-sudut di sekitar titik D. Diketahui besar ∠ADB = ∠BDC. Jika besar ∠ADB = besar ∠BDC = 40°, besar ∠CDF adalah …",
+          "optA": "A. 40°",
+          "optB": "B. 80°",
+          "optC": "C. 100°",
+          "optD": "D. 120°"
+        },
+        "q3": {
+          "stem": "Perhatikan gambar berikut. Titik A, B, C, D, E membentuk konfigurasi sudut di mana ∠CAE adalah sudut siku-siku dan besar ∠BAC = 40°. Besar ∠DAE = (4x + 10)°. Nilai x adalah …",
+          "optA": "A. 7,5",
+          "optB": "B. 10",
+          "optC": "C. 12,5",
+          "optD": "D. 40"
+        },
+        "q4": {
+          "stem": "Perhatikan gambar berikut. Pada gambar terdapat sudut x° dan sudut 20° yang terbentuk di antara dua garis. Sudut siku-siku (90°) terdapat pada gambar tersebut. Nilai x adalah …",
+          "optA": "A. 70°",
+          "optB": "B. 80°",
+          "optC": "C. 90°",
+          "optD": "D. 110°"
+        },
+        "q5": {
+          "stem": "Perhatikan gambar berikut! Dari gambar diketahui besar ∠SQR = 32°. Besar penyiku ∠SQR adalah ...",
+          "optA": "A. 90°",
+          "optB": "B. 32°",
+          "optC": "C. 48°",
+          "optD": "D. 58°"
+        },
+        "q6": {
+          "stem": "Perhatikan gambar. Diketahui besar ∠CBD = (2x + 5)° dan ∠ABD = (3x – 25)°. Sudut CBD dan ABD saling berpelurus. Besar pelurus sudut CBD adalah ...",
+          "optA": "A. 82°",
+          "optB": "B. 85°",
+          "optC": "C. 95°",
+          "optD": "D. 104°"
+        },
+        "q7": {
+          "stem": "Diketahui besar ∠A = (2x + 3)° dan ∠B = (3x – 8)° saling berpelurus. Maka penyiku sudut A adalah …",
+          "optA": "A. 13°",
+          "optB": "B. 37°",
+          "optC": "C. 77°",
+          "optD": "D. 103°"
+        },
+        "q8": {
+          "stem": "Dari gambar berikut, diketahui sudut x dan sudut y saling berpelurus dengan perbandingan x : y = 2 : 7. Besar sudut x adalah ...",
+          "optA": "A. 120°",
+          "optB": "B. 60°",
+          "optC": "C. 40°",
+          "optD": "D. 20°"
+        },
+        "q9": {
+          "stem": "Pelurusnya suatu sudut besarnya 3 kali sudut tersebut, maka sudut tersebut adalah …",
+          "optA": "A. 15°",
+          "optB": "B. 30°",
+          "optC": "C. 45°",
+          "optD": "D. 60°"
+        },
+        "q10": {
+          "stem": "Perhatikan gambar. Titik O adalah titik potong dua garis. Sudut-sudut yang terbentuk di sekitar O diketahui nilainya. Besar sudut AOB adalah ...",
+          "optA": "A. 70°",
+          "optB": "B. 120°",
+          "optC": "C. 140°",
+          "optD": "D. 160°"
+        },
+        "q11": {
+          "stem": "Empat sudut terbentuk oleh dua garis berpotongan dan diberi nama p°, q°, r°, s° (berurutan). Bila diketahui q° = 45°, maka nilai p, s, dan r berturut-turut adalah ...",
+          "optA": "A. p = 135° ; s = 45° ; r = 135°",
+          "optB": "B. p = 130° ; s = 45° ; r = 130°",
+          "optC": "C. p = 135° ; s = 40° ; r = 135°",
+          "optD": "D. p = 130° ; s = 40° ; r = 130°"
+        },
+        "q12": {
+          "stem": "Perhatikan gambar di bawah ini. Dari gambar diketahui dua garis berpotongan membentuk sudut-sudut yang dinyatakan dalam variabel a. Tentukan nilai a!",
+          "optA": "A. 45",
+          "optB": "B. 49",
+          "optC": "C. 55",
+          "optD": "D. 105"
+        },
+        "q13": {
+          "stem": "Perhatikan gambar di bawah ini. Dua garis berpotongan di titik E membentuk sudut-sudut C, E, D dengan nilai tertentu yang diketahui dari gambar. Berapakah besar sudut CED?",
+          "optA": "A. 73°",
+          "optB": "B. 107°",
+          "optC": "C. 117°",
+          "optD": "D. 127°"
+        },
+        "q14": {
+          "stem": "Besar sudut terkecil yang dibentuk oleh dua jarum jam pada pukul 07.20 adalah …",
+          "optA": "A. 90°",
+          "optB": "B. 100°",
+          "optC": "C. 105°",
+          "optD": "D. 110°"
+        },
+        "q15": {
+          "stem": "Besar sudut terkecil yang dibentuk oleh dua jarum jam pada pukul 22.10 adalah …",
+          "optA": "A. 145°",
+          "optB": "B. 125°",
+          "optC": "C. 115°",
+          "optD": "D. 95°"
+        }
       }
     }
   },
