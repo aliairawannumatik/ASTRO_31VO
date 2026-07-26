@@ -18,71 +18,85 @@ type Q = {
 };
 const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const questions: Q[] = [
-  Qn(1, "Menghitung Banyak Fungsi – Dasar", {
-    type: "mixed",
-    content: "Diketahui A = {a, b} dan B = {1, 2, 3}.",
-    parts: [
-      { label: "a.", math: "\\text{Banyak fungsi dari A ke B} = \\ldots" },
-      { label: "b.", text: "Gambarlah semua fungsi yang mungkin dari A ke B menggunakan diagram panah." },
-      { label: "c.", math: "\\text{Banyak fungsi dari B ke A} = \\ldots" },
-      { label: "d.", text: "Gambarlah semua fungsi yang mungkin dari B ke A menggunakan diagram panah." },
-      { label: "e.", text: "Menurut kamu apakah banyak fungsi dari A ke B dengan B ke A sama atau berbeda? Mengapa?" },
-    ],
-  }),
-  Qn(2, "Banyak Fungsi – Bilangan Asli dan Ganjil", {
-    type: "mixed",
-    content: "Dari himpunan A = {x | x < 4, x ∈ bilangan asli} dan B = {y | 1 ≤ y < 9, y ∈ bilangan ganjil}:",
-    parts: [
-      { label: "a.", text: "Tentukan n(A) dan n(B)." },
-      { label: "b.", math: "\\text{Banyak fungsi dari A ke B} = \\ldots" },
-      { label: "c.", math: "\\text{Banyak fungsi dari B ke A} = \\ldots" },
-      { label: "d.", text: "Apakah bisa dibentuk korespondensi satu-satu antara A dan B? Jelaskan." },
-    ],
-  }),
-  Qn(3, "Korespondensi Satu-Satu – A = {p, q, r, s}, B = {2, 4, 6, 8}", {
-    type: "mixed",
-    content: "Diketahui A = {p, q, r, s} dan B = {2, 4, 6, 8}.",
-    parts: [
-      { label: "a.", math: "\\text{Banyak korespondensi satu-satu dari A ke B} = \\ldots" },
-      { label: "b.", text: "Gambarlah semua korespondensi satu-satu yang mungkin dari A ke B menggunakan diagram panah." },
-      { label: "c.", text: "Menurut kamu apakah banyak korespondensi satu-satu dari A ke B dengan B ke A sama atau berbeda? Mengapa?" },
-    ],
-  }),
-  Qn(4, "Soal UN – Menentukan Banyak Pemetaan", {
-    type: "mixed",
-    content: "Dari himpunan P = {x | 1 ≤ x ≤ 4, x ∈ bilangan bulat} dan Q = {y | 1 ≤ y ≤ 3, y ∈ bilangan bulat}:",
-    parts: [
-      { label: "a.", text: "Tentukan n(P) dan n(Q)." },
-      { label: "b.", math: "\\text{Banyak fungsi dari P ke Q} = \\ldots" },
-      { label: "c.", math: "\\text{Banyak fungsi dari Q ke P} = \\ldots" },
-      { label: "d.", text: "Apakah bisa dibentuk korespondensi satu-satu antara P dan Q? Jelaskan." },
-    ],
-  }),
-  Qn(5, "Korespondensi Satu-Satu – Bilangan Prima dan Genap", {
-    type: "mixed",
-    content: "Dari himpunan P = {x | 1 ≤ x < 13, x ∈ bilangan prima} dan Q = {y | 2 ≤ y < 12, y ∈ bilangan genap}:",
-    parts: [
-      { label: "a.", text: "Tentukan n(P) dan n(Q)." },
-      { label: "b.", text: "Apakah syarat korespondensi satu-satu terpenuhi antara P dan Q? Jelaskan." },
-      { label: "c.", math: "\\text{Banyak korespondensi satu-satu yang dapat dibuat} = \\ldots" },
-      { label: "d.", text: "Apakah banyak korespondensi satu-satu dari P ke Q sama dengan dari Q ke P? Mengapa?" },
-    ],
-  }),
-  Qn(6, "Korespondensi – Analogi Nyata", {
-    type: "mixed",
-    content: "Sebuah hotel memiliki 10 kamar dan 10 tamu. Setiap tamu menempati tepat satu kamar dan setiap kamar dihuni tepat satu tamu.",
-    parts: [
-      { label: "a.", text: "Nyatakan situasi ini dalam bentuk fungsi matematika." },
-      { label: "b.", text: "Apakah ini merupakan korespondensi satu-satu? Jelaskan." },
-      { label: "c.", math: "\\text{Banyak cara menempati kamar} = \\ldots \\text{ (tulis jawaban dalam bentuk faktorial)}" },
-    ],
-  }),
-];
-
 const BanyakFungsiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = 'practice.relasiDanFungsi.banyakFungsi';
+
+  // textKey variables for all 9 \text{} cases
+  const q1textA = t(`${p}.q1.textA`);
+  const q1textC = t(`${p}.q1.textC`);
+  const q2textB = t(`${p}.q2.textB`);
+  const q2textC = t(`${p}.q2.textC`);
+  const q3textA = t(`${p}.q3.textA`);
+  const q4textB = t(`${p}.q4.textB`);
+  const q4textC = t(`${p}.q4.textC`);
+  const q5textC = t(`${p}.q5.textC`);
+  const q6textC1 = t(`${p}.q6.textC1`);
+  const q6textC2 = t(`${p}.q6.textC2`);
+
+  const questions: Q[] = [
+    Qn(1, t(`${p}.q1.title`), {
+      type: "mixed",
+      content: t(`${p}.q1.content`),
+      parts: [
+        { label: "a.", math: `\\text{${q1textA}} = \\ldots` },
+        { label: "b.", text: t(`${p}.q1.partBText`) },
+        { label: "c.", math: `\\text{${q1textC}} = \\ldots` },
+        { label: "d.", text: t(`${p}.q1.partDText`) },
+        { label: "e.", text: t(`${p}.q1.partEText`) },
+      ],
+    }),
+    Qn(2, t(`${p}.q2.title`), {
+      type: "mixed",
+      content: t(`${p}.q2.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q2.partAText`) },
+        { label: "b.", math: `\\text{${q2textB}} = \\ldots` },
+        { label: "c.", math: `\\text{${q2textC}} = \\ldots` },
+        { label: "d.", text: t(`${p}.q2.partDText`) },
+      ],
+    }),
+    Qn(3, t(`${p}.q3.title`), {
+      type: "mixed",
+      content: t(`${p}.q3.content`),
+      parts: [
+        { label: "a.", math: `\\text{${q3textA}} = \\ldots` },
+        { label: "b.", text: t(`${p}.q3.partBText`) },
+        { label: "c.", text: t(`${p}.q3.partCText`) },
+      ],
+    }),
+    Qn(4, t(`${p}.q4.title`), {
+      type: "mixed",
+      content: t(`${p}.q4.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q4.partAText`) },
+        { label: "b.", math: `\\text{${q4textB}} = \\ldots` },
+        { label: "c.", math: `\\text{${q4textC}} = \\ldots` },
+        { label: "d.", text: t(`${p}.q4.partDText`) },
+      ],
+    }),
+    Qn(5, t(`${p}.q5.title`), {
+      type: "mixed",
+      content: t(`${p}.q5.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q5.partAText`) },
+        { label: "b.", text: t(`${p}.q5.partBText`) },
+        { label: "c.", math: `\\text{${q5textC}} = \\ldots` },
+        { label: "d.", text: t(`${p}.q5.partDText`) },
+      ],
+    }),
+    Qn(6, t(`${p}.q6.title`), {
+      type: "mixed",
+      content: t(`${p}.q6.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q6.partAText`) },
+        { label: "b.", text: t(`${p}.q6.partBText`) },
+        { label: "c.", math: `\\text{${q6textC1}} = \\ldots \\text{ ${q6textC2}}` },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -94,9 +108,9 @@ const BanyakFungsiPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-orange-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(251,146,60,0.7)' }}>
-            BANYAK FUNGSI DAN KORESPONDENSI SATU-SATU
+            {t(`${p}.h1`)}
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
+          <p className="text-white/50 text-xs text-center font-body">{t(`${p}.grade`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
             <span className="text-orange-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
@@ -105,14 +119,14 @@ const BanyakFungsiPage = () => {
         </div>
 
         <div className="mb-5 bg-orange-900/20 border border-orange-500/20 rounded-xl p-4">
-          <p className="text-orange-300 text-xs font-bold mb-2">📌 Rumus Penting</p>
+          <p className="text-orange-300 text-xs font-bold mb-2">{t(`${p}.tipTitle`)}</p>
           <div className="grid grid-cols-2 gap-2 text-xs font-body">
             <div className="bg-white/5 rounded-lg px-3 py-2">
-              <span className="font-bold text-orange-400">Banyak Fungsi</span>
+              <span className="font-bold text-orange-400">{t(`${p}.tipFungsiLabel`)}</span>
               <div className="text-white/60 mt-1"><InlineMath math="n(B)^{n(A)}" /></div>
             </div>
             <div className="bg-white/5 rounded-lg px-3 py-2">
-              <span className="font-bold text-orange-400">Banyak Korespondensi</span>
+              <span className="font-bold text-orange-400">{t(`${p}.tipKorLabel`)}</span>
               <div className="text-white/60 mt-1"><InlineMath math="n! \quad (n(A) = n(B) = n)" /></div>
             </div>
           </div>
@@ -159,7 +173,7 @@ const BanyakFungsiPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/relasi-dan-fungsi"); }}
             className="text-sm text-muted-foreground hover:text-orange-400 transition-colors cursor-pointer font-body">
-            {t('practice.backTo')} Relasi dan Fungsi
+            {t('practice.backTo')} {t(`${p}.backToTopic`)}
           </button>
         </div>
       </div>

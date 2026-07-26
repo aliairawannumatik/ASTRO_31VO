@@ -4567,6 +4567,62 @@
           "optionC": "Rp 60.000,00",
           "optionD": "Rp 66.000,00"
         }
+      },
+      "banyakFungsi": {
+        "h1": "NUMBER OF FUNCTIONS AND ONE-TO-ONE CORRESPONDENCE",
+        "tipTitle": "📌 Key Formulas",
+        "tipFungsiLabel": "Number of Functions",
+        "tipKorLabel": "Number of Correspondences",
+        "q1": {
+          "title": "Counting Functions – Basics",
+          "content": "Given A = {a, b} and B = {1, 2, 3}.",
+          "textA": "Number of functions from A to B",
+          "partBText": "Draw all possible functions from A to B using an arrow diagram.",
+          "textC": "Number of functions from B to A",
+          "partDText": "Draw all possible functions from B to A using an arrow diagram.",
+          "partEText": "In your opinion, is the number of functions from A to B the same as from B to A? Why?"
+        },
+        "q2": {
+          "title": "Number of Functions – Natural and Odd Numbers",
+          "content": "From set A = {x | x < 4, x ∈ natural numbers} and B = {y | 1 ≤ y < 9, y ∈ odd numbers}:",
+          "partAText": "Determine n(A) and n(B).",
+          "textB": "Number of functions from A to B",
+          "textC": "Number of functions from B to A",
+          "partDText": "Can a one-to-one correspondence be formed between A and B? Explain."
+        },
+        "q3": {
+          "title": "One-to-One Correspondence – A = {p, q, r, s}, B = {2, 4, 6, 8}",
+          "content": "Given A = {p, q, r, s} and B = {2, 4, 6, 8}.",
+          "textA": "Number of one-to-one correspondences from A to B",
+          "partBText": "Draw all possible one-to-one correspondences from A to B using an arrow diagram.",
+          "partCText": "In your opinion, is the number of one-to-one correspondences from A to B the same as from B to A? Why?"
+        },
+        "q4": {
+          "title": "National Exam – Determining Number of Mappings",
+          "content": "From set P = {x | 1 ≤ x ≤ 4, x ∈ integers} and Q = {y | 1 ≤ y ≤ 3, y ∈ integers}:",
+          "partAText": "Determine n(P) and n(Q).",
+          "textB": "Number of functions from P to Q",
+          "textC": "Number of functions from Q to P",
+          "partDText": "Can a one-to-one correspondence be formed between P and Q? Explain."
+        },
+        "q5": {
+          "title": "One-to-One Correspondence – Prime and Even Numbers",
+          "content": "From set P = {x | 1 ≤ x < 13, x ∈ prime numbers} and Q = {y | 2 ≤ y < 12, y ∈ even numbers}:",
+          "partAText": "Determine n(P) and n(Q).",
+          "partBText": "Is the condition for one-to-one correspondence satisfied between P and Q? Explain.",
+          "textC": "Number of one-to-one correspondences that can be formed",
+          "partDText": "Is the number of one-to-one correspondences from P to Q the same as from Q to P? Why?"
+        },
+        "q6": {
+          "title": "Correspondence – Real-World Analogy",
+          "content": "A hotel has 10 rooms and 10 guests. Each guest occupies exactly one room and each room is occupied by exactly one guest.",
+          "partAText": "Express this situation in the form of a mathematical function.",
+          "partBText": "Is this a one-to-one correspondence? Explain.",
+          "textC1": "Number of ways to occupy the rooms",
+          "textC2": "(write the answer in factorial form)"
+        },
+        "grade": "Grade 8 · Relations and Functions",
+        "backToTopic": "Relations and Functions"
       }
     }
   },
