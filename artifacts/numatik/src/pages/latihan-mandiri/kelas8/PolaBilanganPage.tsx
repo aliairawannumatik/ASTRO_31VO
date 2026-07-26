@@ -3,56 +3,57 @@ import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { Sigma, Star, TrendingUp, Zap, ChevronRight } from "lucide-react";
+import { Sigma, TrendingUp, Zap, ChevronRight } from "lucide-react";
 
-const subtopics = [
+/* ── Visual config (non-translatable) ────────────────────── */
+const subtopicsConfig = [
   {
-    label: "PENGERTIAN POLA, BARISAN BILANGAN DAN POLA-POLA KHUSUS",
+    key: "pengertianDanPolaKhusus",
     path: "/latihan-mandiri/kelas-8/pola-bilangan/pengertian-dan-pola-khusus",
-    soal: 11,
+    soal: 10,
     icon: Sigma,
-    color: "cyan",
     gradient: "from-cyan-900/40 via-purple-900/20 to-violet-900/30",
     border: "border-cyan-500/30",
     badge: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",
     iconBg: "bg-cyan-500/20",
     iconColor: "text-cyan-400",
     leftBar: "from-cyan-400 to-purple-500",
-    desc: "Pola, barisan bilangan, suku ke-n, bertingkat, Segitiga Pascal, bilangan segitiga, persegi, kubik",
   },
   {
-    label: "BARISAN DAN DERET ARITMETIKA",
+    key: "polaAritmetika",
     path: "/latihan-mandiri/kelas-8/pola-bilangan/pola-aritmetika",
-    soal: 13,
+    soal: 15,
     icon: TrendingUp,
-    color: "emerald",
     gradient: "from-emerald-900/40 to-green-900/30",
     border: "border-emerald-500/30",
     badge: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
     iconBg: "bg-emerald-500/20",
     iconColor: "text-emerald-400",
     leftBar: "from-emerald-400 to-green-500",
-    desc: "Un = a+(n-1)b, jumlah deret, aplikasi kontekstual",
   },
   {
-    label: "BARISAN DAN DERET GEOMETRI",
+    key: "polaGeometri",
     path: "/latihan-mandiri/kelas-8/pola-bilangan/pola-geometri",
-    soal: 12,
+    soal: 10,
     icon: Zap,
-    color: "orange",
     gradient: "from-orange-900/40 to-amber-900/30",
     border: "border-orange-500/30",
     badge: "bg-orange-500/20 text-orange-300 border-orange-400/40",
     iconBg: "bg-orange-500/20",
     iconColor: "text-orange-400",
     leftBar: "from-orange-400 to-amber-500",
-    desc: "Un = a·rⁿ⁻¹, deret geometri, rasio, tak hingga",
   },
 ];
 
 const PolaBilanganPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const subtopics = subtopicsConfig.map((s) => ({
+    ...s,
+    label: t(`practice.polaBilangan.subtopics.${s.key}.label`),
+    desc:  t(`practice.polaBilangan.subtopics.${s.key}.desc`),
+  }));
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -65,7 +66,7 @@ const PolaBilanganPage = () => {
             <span className="text-3xl">🔢</span>
           </div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center">
-            POLA BILANGAN
+            {t('practice.polaBilangan.title')}
           </h1>
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
@@ -80,7 +81,7 @@ const PolaBilanganPage = () => {
             const Icon = s.icon;
             return (
               <button
-                key={s.label}
+                key={s.key}
                 onClick={() => { playPopSound(); navigate(s.path); }}
                 className={`group relative rounded-2xl overflow-hidden text-left transition-all duration-300 hover:scale-[1.01] animate-slide-up`}
                 style={{ animationDelay: `${i * 0.07}s` }}
@@ -96,7 +97,7 @@ const PolaBilanganPage = () => {
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className={`font-display text-sm font-bold text-white`}>{s.label}</span>
+                      <span className="font-display text-sm font-bold text-white">{s.label}</span>
                     </div>
                     <p className="text-white/40 text-xs font-body">{s.desc}</p>
                   </div>
@@ -114,9 +115,9 @@ const PolaBilanganPage = () => {
         </div>
 
         <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">💡 Info Latihan</p>
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">{t('practice.enrichmentNote')}</p>
           <p className="text-white/60 text-xs font-body leading-relaxed">
-            Soal-soal ini disusun sesuai dengan kisi-kisi UN, TKA, dan ANBK. Setiap sub-topik dilengkapi dengan LaTeX, rumus referensi, dan soal aplikasi kontekstual. Kerjakan secara urut untuk hasil terbaik!
+            {t('practice.polaBilangan.enrichmentNoteDesc')}
           </p>
         </div>
 

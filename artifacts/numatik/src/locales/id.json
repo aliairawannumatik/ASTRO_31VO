@@ -3826,6 +3826,24 @@
           "textGanjilGenap": "ganjil dan genap sekaligus"
         }
       }
+    },
+    "polaBilangan": {
+      "title": "POLA BILANGAN",
+      "enrichmentNoteDesc": "Soal-soal pola bilangan mencakup barisan & deret aritmetika, geometri, dan pola-pola khusus. Dirancang sesuai kisi-kisi UN, TKA, dan ANBK Kelas 8.",
+      "subtopics": {
+        "pengertianDanPolaKhusus": {
+          "label": "PENGERTIAN POLA, BARISAN BILANGAN DAN POLA-POLA KHUSUS",
+          "desc": "Pola, barisan bilangan, suku ke-n, bertingkat, Segitiga Pascal, bilangan segitiga, persegi, kubik"
+        },
+        "polaAritmetika": {
+          "label": "BARISAN DAN DERET ARITMETIKA",
+          "desc": "Un = a+(n-1)b, jumlah deret, aplikasi kontekstual"
+        },
+        "polaGeometri": {
+          "label": "BARISAN DAN DERET GEOMETRI",
+          "desc": "Un = a·rⁿ⁻¹, deret geometri, rasio, tak hingga"
+        }
+      }
     }
   },
   "settings": {

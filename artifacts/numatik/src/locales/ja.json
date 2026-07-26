@@ -3826,6 +3826,24 @@
           "textGanjilGenap": "奇数かつ偶数"
         }
       }
+    },
+    "polaBilangan": {
+      "title": "数列",
+      "enrichmentNoteDesc": "等差数列・等比数列・特別な数列パターンを扱う問題です。中学2年生の国家試験（UN・TKA・ANBK）の出題範囲に対応しています。",
+      "subtopics": {
+        "pengertianDanPolaKhusus": {
+          "label": "数列のパターンと特別な数列",
+          "desc": "数列・第n項・階差数列・パスカルの三角形・三角数・平方数・立方数"
+        },
+        "polaAritmetika": {
+          "label": "等差数列と等差級数",
+          "desc": "Un = a+(n-1)d、級数の和、文章題への応用"
+        },
+        "polaGeometri": {
+          "label": "等比数列と等比級数",
+          "desc": "Un = a·rⁿ⁻¹、等比級数・公比・無限級数"
+        }
+      }
     }
   },
   "settings": {

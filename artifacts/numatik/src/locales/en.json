@@ -3826,6 +3826,24 @@
           "textGanjilGenap": "both odd and even simultaneously"
         }
       }
+    },
+    "polaBilangan": {
+      "title": "NUMBER PATTERNS",
+      "enrichmentNoteDesc": "Problems cover arithmetic & geometric sequences and series, and special number patterns. Aligned with Grade 8 UN, TKA, and ANBK exam frameworks.",
+      "subtopics": {
+        "pengertianDanPolaKhusus": {
+          "label": "NUMBER PATTERNS, SEQUENCES, AND SPECIAL PATTERNS",
+          "desc": "Patterns, number sequences, nth term, layered sequences, Pascal's Triangle, triangular, square, and cubic numbers"
+        },
+        "polaAritmetika": {
+          "label": "ARITHMETIC SEQUENCES AND SERIES",
+          "desc": "Un = a+(n-1)d, sum of series, contextual application"
+        },
+        "polaGeometri": {
+          "label": "GEOMETRIC SEQUENCES AND SERIES",
+          "desc": "Un = a·rⁿ⁻¹, geometric series, ratio, infinite series"
+        }
+      }
     }
   },
   "settings": {
