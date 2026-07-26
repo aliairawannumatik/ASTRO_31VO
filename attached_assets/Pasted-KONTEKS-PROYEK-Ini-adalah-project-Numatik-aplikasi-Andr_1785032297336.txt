@@ -1,0 +1,60 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik-topik sebelumnya di
+Kelas 7 sudah selesai. Topik "Segitiga dan Segiempat" — index dan
+sub-halaman 1-3 (GarisBeratBagiTinggiPage.tsx,
+KelilingSegitigaSegiempatPage.tsx, LuasSegitigaPage.tsx) sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Gambar diagram (SVG/img) TIDAK diterjemahkan
+- Rumus KaTeX (InlineMath maupun BlockMath) dengan \text{} berisi
+  bahasa natural WAJIB diganti ke JSX terpisah atau \mathrm{}
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman ke-4: LuasSegiempatPage.tsx (15 soal, 3 Bagian).
+
+KONTEKS KHUSUS FILE INI:
+- 3 Bagian: A (Persegi & Persegi Panjang, Q1–5), B (Jajargenjang/
+  Trapesium/Belah Ketupat, Q6–10), C (Aplikasi, Q11–15)
+- Format essay semua (tidak ada opsi A/B/C/D)
+- Komponen Section, Q dengan prop badge (label kategori seperti
+  "Mencari Sisi", "Perbandingan", "Kontekstual") — badge-badge ini
+  WAJIB diterjemahkan juga
+- InlineMath sangat banyak di semua soal — pecah jadi segmen t() di
+  sekitar tiap InlineMath, ikuti pola yang sudah terbukti di
+  sub-halaman sebelumnya
+- PERHATIAN KHUSUS: Q15 pakai BlockMath (react-katex) — array LaTeX
+  multi-baris. Kalau BlockMath berisi teks natural (bukan cuma simbol
+  matematika), pisahkan teks itu ke t() dan biarkan notasi murni di
+  BlockMath tetap hardcode. Kalau BlockMath isinya murni notasi/angka,
+  tidak perlu disentuh — cukup terjemahkan teks di luar BlockMath
+- Ada formula summary box dengan 6 formula InlineMath — teks natural
+  di sekitarnya (label rumus, judul box) diterjemahkan, notasi
+  matematikanya sendiri jangan disentuh
+- Cek juga apakah ada pola bug serupa yang ditemukan di
+  LuasSegitigaPage (t() dipanggil di dalam string literal biasa,
+  bukan template literal) — kalau ada, perbaiki sekalian
+
+1. Terjemahkan SEMUA teks: instruksi per Bagian (A/B/C), teks 15 soal,
+   badge kategori tiap soal, teks di formula summary box
+2. Terjemahkan h1 title dan badge jumlah soal
+3. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.segitigaSegiempat.luasSegiempat.*
+4. JANGAN sentuh sub-halaman lain (KelilingLuasBangunTakBeraturan)
+   atau halaman index
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan, dan
+  konfirmasi eksplisit bahwa SEMUA 15 soal (3 Bagian, termasuk semua
+  badge kategori dan BlockMath di Q15) sudah diterjemahkan dengan benar

@@ -116,6 +116,14 @@ const Q = ({ no, children, diagram, badge, badgeColor = "#60a5fa" }: QProps) => 
 const LuasSegiempatLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.segitigaSegiempat.luasSegiempat";
+
+  // Pre-compute BlockMath Q15 text fragments to avoid nested template literals
+  const q15l1 = t(`${p}.q15line1`);
+  const q15l2 = t(`${p}.q15line2`);
+  const q15l3 = t(`${p}.q15line3`);
+  const q15l4 = t(`${p}.q15line4`);
+  const q15h  = t(`${p}.q15tinggi`);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -129,9 +137,9 @@ const LuasSegiempatLatihanPage = () => {
             <BookOpen className="w-7 h-7 text-violet-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            LUAS SEGIEMPAT
+            {t(`${p}.title`)}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Segitiga dan Segiempat</p>
+          <p className="text-white/50 text-xs font-body">{t(`${p}.subtitle`)}</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>
@@ -139,140 +147,138 @@ const LuasSegiempatLatihanPage = () => {
           </div>
         </div>
 
-        {/* Rumus ringkas */}
+        {/* Formula summary box */}
         <div className="rounded-xl bg-violet-500/10 border border-violet-500/30 px-5 py-4 mb-6 text-sm font-body space-y-1">
-          <p className="font-bold text-violet-300 mb-2">Rumus Luas Segiempat</p>
+          <p className="font-bold text-violet-300 mb-2">{t(`${p}.formulaTitle`)}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-white/80 text-xs">
-            <span>• Persegi: <InlineMath math="s^2" /></span>
-            <span>• Persegi panjang: <InlineMath math="p \times l" /></span>
-            <span>• Jajargenjang: <InlineMath math="a \times t" /></span>
-            <span>• Trapesium: <InlineMath math="\frac{1}{2}(a+b) \times t" /></span>
-            <span>• Layang-layang: <InlineMath math="\frac{1}{2} \times d_1 \times d_2" /></span>
-            <span>• Belah ketupat: <InlineMath math="\frac{1}{2} \times d_1 \times d_2" /></span>
+            <span>{t(`${p}.formulaSquare`)} <InlineMath math="s^2" /></span>
+            <span>{t(`${p}.formulaRect`)} <InlineMath math="p \times l" /></span>
+            <span>{t(`${p}.formulaParallel`)} <InlineMath math="a \times t" /></span>
+            <span>{t(`${p}.formulaTrap`)} <InlineMath math="\frac{1}{2}(a+b) \times t" /></span>
+            <span>{t(`${p}.formulaKite`)} <InlineMath math="\frac{1}{2} \times d_1 \times d_2" /></span>
+            <span>{t(`${p}.formulaRhombus`)} <InlineMath math="\frac{1}{2} \times d_1 \times d_2" /></span>
           </div>
         </div>
 
         <div className="space-y-5 animate-slide-up">
 
           {/* BAGIAN A */}
-          <Section title="Bagian A · Persegi & Persegi Panjang" color="#60a5fa">
+          <Section title={t(`${p}.sectionA`)} color="#60a5fa">
 
-            <Q no={1} badge="Persegi" badgeColor="#60a5fa" diagram={<DiagramPersegi />}>
-              <p>Hitunglah luas persegi dengan sisi <InlineMath math="15 \text{ cm}" /> pada gambar di atas!</p>
+            <Q no={1} badge={t(`${p}.badgePersegi`)} badgeColor="#60a5fa" diagram={<DiagramPersegi />}>
+              <p>{t(`${p}.q1pre`)} <InlineMath math="15 \text{ cm}" /> {t(`${p}.q1end`)}</p>
             </Q>
 
-            <Q no={2} badge="Persegi Panjang" badgeColor="#60a5fa" diagram={<DiagramPersegipanjang />}>
-              <p>Hitunglah luas persegi panjang pada gambar di atas!</p>
+            <Q no={2} badge={t(`${p}.badgePersegiPanjang`)} badgeColor="#60a5fa" diagram={<DiagramPersegipanjang />}>
+              <p>{t(`${p}.q2`)}</p>
             </Q>
 
-            <Q no={3} badge="Mencari Sisi" badgeColor="#60a5fa">
+            <Q no={3} badge={t(`${p}.badgeMencariSisi`)} badgeColor="#60a5fa">
               <p>
-                Luas sebuah persegi adalah <InlineMath math="484 \text{ cm}^2" />.
-                Berapakah keliling persegi tersebut?
+                {t(`${p}.q3pre`)} <InlineMath math="484 \text{ cm}^2" />{t(`${p}.q3end`)}
               </p>
             </Q>
 
-            <Q no={4} badge="UN Style" badgeColor="#60a5fa">
+            <Q no={4} badge={t(`${p}.badgeUNStyle`)} badgeColor="#60a5fa">
               <p>
-                Sebuah lantai persegi panjang berukuran panjang <InlineMath math="8 \text{ m}" /> dan lebar{" "}
-                <InlineMath math="6 \text{ m}" />. Lantai tersebut akan dipasangi ubin persegi berukuran{" "}
-                <InlineMath math="40 \text{ cm} \times 40 \text{ cm}" />.
-                Berapa banyak ubin yang dibutuhkan?
+                {t(`${p}.q4pre`)} <InlineMath math="8 \text{ m}" /> {t(`${p}.q4mid`)}{" "}
+                <InlineMath math="6 \text{ m}" />{t(`${p}.q4mid2`)}{" "}
+                <InlineMath math="40 \text{ cm} \times 40 \text{ cm}" />{t(`${p}.q4end`)}
               </p>
             </Q>
 
-            <Q no={5} badge="Perbandingan" badgeColor="#60a5fa">
+            <Q no={5} badge={t(`${p}.badgePerbandingan`)} badgeColor="#60a5fa">
               <p>
-                Panjang sebuah persegi panjang adalah <InlineMath math="3" /> kali lebarnya.
-                Jika luasnya <InlineMath math="147 \text{ cm}^2" />, tentukan panjang dan lebarnya!
+                {t(`${p}.q5pre`)} <InlineMath math="3" /> {t(`${p}.q5mid`)}{" "}
+                <InlineMath math="147 \text{ cm}^2" />{t(`${p}.q5end`)}
               </p>
             </Q>
           </Section>
 
           {/* BAGIAN B */}
-          <Section title="Bagian B · Jajargenjang, Trapesium & Belah Ketupat" color="#4ade80">
+          <Section title={t(`${p}.sectionB`)} color="#4ade80">
 
-            <Q no={6} badge="Jajargenjang" badgeColor="#4ade80" diagram={<DiagramJajargenjang />}>
-              <p>Hitunglah luas jajargenjang pada gambar dengan alas <InlineMath math="24 \text{ cm}" /> dan tinggi <InlineMath math="10 \text{ cm}" />!</p>
-            </Q>
-
-            <Q no={7} badge="Trapesium" badgeColor="#4ade80" diagram={<DiagramTrapesium />}>
+            <Q no={6} badge={t(`${p}.badgeJajargenjang`)} badgeColor="#4ade80" diagram={<DiagramJajargenjang />}>
               <p>
-                Hitunglah luas trapesium siku-siku dengan sisi sejajar <InlineMath math="14 \text{ cm}" /> dan{" "}
-                <InlineMath math="22 \text{ cm}" />, serta tinggi <InlineMath math="12 \text{ cm}" />!
+                {t(`${p}.q6pre`)} <InlineMath math="24 \text{ cm}" /> {t(`${p}.q6mid`)}{" "}
+                <InlineMath math="10 \text{ cm}" />{t(`${p}.q6end`)}
               </p>
             </Q>
 
-            <Q no={8} badge="Belah Ketupat" badgeColor="#4ade80" diagram={<DiagramBelaKetupat />}>
+            <Q no={7} badge={t(`${p}.badgeTrapesium`)} badgeColor="#4ade80" diagram={<DiagramTrapesium />}>
               <p>
-                Belah ketupat <InlineMath math="ABCD" /> memiliki diagonal <InlineMath math="d_1 = 18 \text{ cm}" /> dan{" "}
-                <InlineMath math="d_2 = 24 \text{ cm}" />. Tentukan luasnya!
+                {t(`${p}.q7pre`)} <InlineMath math="14 \text{ cm}" /> {t(`${p}.q7andWord`)}{" "}
+                <InlineMath math="22 \text{ cm}" />{t(`${p}.q7mid`)} <InlineMath math="12 \text{ cm}" />{t(`${p}.q7end`)}
               </p>
             </Q>
 
-            <Q no={9} badge="Layang-layang" badgeColor="#4ade80" diagram={<DiagramLayangLayang />}>
+            <Q no={8} badge={t(`${p}.badgeBelahKetupat`)} badgeColor="#4ade80" diagram={<DiagramBelaKetupat />}>
               <p>
-                Layang-layang <InlineMath math="ABCD" /> memiliki diagonal <InlineMath math="AC = 30 \text{ cm}" /> dan{" "}
-                <InlineMath math="BD = 30 \text{ cm}" />. Tentukan luasnya!
+                {t(`${p}.q8pre`)} <InlineMath math="ABCD" /> {t(`${p}.q8mid`)} <InlineMath math="d_1 = 18 \text{ cm}" />{" "}
+                {t(`${p}.q8andWord`)} <InlineMath math="d_2 = 24 \text{ cm}" />{t(`${p}.q8end`)}
               </p>
             </Q>
 
-            <Q no={10} badge="Mencari Diagonal" badgeColor="#4ade80">
+            <Q no={9} badge={t(`${p}.badgeLayangLayang`)} badgeColor="#4ade80" diagram={<DiagramLayangLayang />}>
               <p>
-                Luas belah ketupat adalah <InlineMath math="240 \text{ cm}^2" />. Jika salah satu diagonalnya{" "}
-                <InlineMath math="20 \text{ cm}" />, berapakah panjang diagonal lainnya?
+                {t(`${p}.q9pre`)} <InlineMath math="ABCD" /> {t(`${p}.q9mid`)} <InlineMath math="AC = 30 \text{ cm}" />{" "}
+                {t(`${p}.q9andWord`)} <InlineMath math="BD = 30 \text{ cm}" />{t(`${p}.q9end`)}
+              </p>
+            </Q>
+
+            <Q no={10} badge={t(`${p}.badgeMencariDiagonal`)} badgeColor="#4ade80">
+              <p>
+                {t(`${p}.q10pre`)} <InlineMath math="240 \text{ cm}^2" />{t(`${p}.q10mid`)}{" "}
+                <InlineMath math="20 \text{ cm}" />{t(`${p}.q10end`)}
               </p>
             </Q>
           </Section>
 
           {/* BAGIAN C */}
-          <Section title="Bagian C · Aplikasi & Pemecahan Masalah" color="#fb923c">
+          <Section title={t(`${p}.sectionC`)} color="#fb923c">
 
-            <Q no={11} badge="Kontekstual" badgeColor="#fb923c">
+            <Q no={11} badge={t(`${p}.badgeKontekstual`)} badgeColor="#fb923c">
               <p>
-                Sebuah kebun berbentuk trapesium memiliki dua sisi sejajar <InlineMath math="30 \text{ m}" /> dan{" "}
-                <InlineMath math="50 \text{ m}" />, serta tinggi <InlineMath math="20 \text{ m}" />.
-                Kebun tersebut akan ditanami rumput dengan biaya <InlineMath math="Rp\,25.000" /> per{" "}
-                <InlineMath math="\text{m}^2" />. Berapa total biayanya?
+                {t(`${p}.q11pre`)} <InlineMath math="30 \text{ m}" /> {t(`${p}.q11andWord`)}{" "}
+                <InlineMath math="50 \text{ m}" />{t(`${p}.q11mid`)} <InlineMath math="20 \text{ m}" />{t(`${p}.q11mid2`)}{" "}
+                <InlineMath math="Rp\,25.000" /> {t(`${p}.q11per`)}{" "}
+                <InlineMath math="\text{m}^2" />{t(`${p}.q11end`)}
               </p>
             </Q>
 
-            <Q no={12} badge="ANBK" badgeColor="#fb923c">
+            <Q no={12} badge={t(`${p}.badgeANBK`)} badgeColor="#fb923c">
               <p>
-                Sepetak tanah berbentuk jajargenjang dengan luas <InlineMath math="600 \text{ m}^2" /> dan
-                alas <InlineMath math="30 \text{ m}" />. Tanah tersebut akan dipagari di sekeliling sisi pendeknya (tingginya)
-                dengan biaya <InlineMath math="Rp\,50.000" /> per meter. Berapa biaya pagar yang dibutuhkan?
+                {t(`${p}.q12pre`)} <InlineMath math="600 \text{ m}^2" /> {t(`${p}.q12mid`)}{" "}
+                <InlineMath math="30 \text{ m}" />{t(`${p}.q12mid2`)}{" "}
+                <InlineMath math="Rp\,50.000" /> {t(`${p}.q12end`)}
               </p>
             </Q>
 
-            <Q no={13} badge="TKA" badgeColor="#fb923c">
+            <Q no={13} badge={t(`${p}.badgeTKA`)} badgeColor="#fb923c">
               <p>
-                Sebuah hiasan dinding berbentuk layang-layang dengan keliling <InlineMath math="52 \text{ cm}" />.
-                Perbandingan sisi panjang dan sisi pendek adalah <InlineMath math="4:9" /> dan
-                salah satu diagonalnya <InlineMath math="24 \text{ cm}" />.
-                Diagonal lainnya sama dengan sisi pendek. Tentukan luas hiasan tersebut!
+                {t(`${p}.q13pre`)} <InlineMath math="52 \text{ cm}" />{t(`${p}.q13mid`)} <InlineMath math="4:9" />{" "}
+                {t(`${p}.q13mid2`)} <InlineMath math="24 \text{ cm}" />{t(`${p}.q13end`)}
               </p>
             </Q>
 
-            <Q no={14} badge="Gabungan" badgeColor="#fb923c">
+            <Q no={14} badge={t(`${p}.badgeGabungan`)} badgeColor="#fb923c">
               <p>
-                Sebuah logo sekolah terdiri dari sebuah persegi panjang berukuran{" "}
-                <InlineMath math="12 \text{ cm} \times 8 \text{ cm}" /> yang di dalamnya terdapat persegi{" "}
-                berukuran <InlineMath math="4 \text{ cm} \times 4 \text{ cm}" />. Tentukan luas daerah yang diarsir
-                (persegi panjang di luar persegi kecil)!
+                {t(`${p}.q14pre`)}{" "}
+                <InlineMath math="12 \text{ cm} \times 8 \text{ cm}" /> {t(`${p}.q14mid`)}{" "}
+                <InlineMath math="4 \text{ cm} \times 4 \text{ cm}" />{t(`${p}.q14end`)}
               </p>
             </Q>
 
-            <Q no={15} badge="UN Style" badgeColor="#fb923c">
-              <p>Perhatikan pernyataan luas segiempat berikut.</p>
+            <Q no={15} badge={t(`${p}.badgeUNStyle`)} badgeColor="#fb923c">
+              <p>{t(`${p}.q15intro`)}</p>
               <BlockMath math={`\\begin{array}{l}
-(1)\\text{ Persegi sisi }12\\text{ cm} \\Rightarrow L = 144\\text{ cm}^2\\\\
-(2)\\text{ Persegi panjang }15\\text{ cm}\\times 7\\text{ cm} \\Rightarrow L = 115\\text{ cm}^2\\\\
-(3)\\text{ Jajargenjang alas }18\\text{ cm, tinggi }9\\text{ cm} \\Rightarrow L = 162\\text{ cm}^2\\\\
-(4)\\text{ Trapesium sisi sejajar }10,16\\text{ cm, tinggi }8\\text{ cm} \\Rightarrow L = 104\\text{ cm}^2
+(1)\\text{ ${q15l1} }12\\text{ cm} \\Rightarrow L = 144\\text{ cm}^2\\\\
+(2)\\text{ ${q15l2} }15\\text{ cm}\\times 7\\text{ cm} \\Rightarrow L = 115\\text{ cm}^2\\\\
+(3)\\text{ ${q15l3} }18\\text{ cm,\\ }\\text{${q15h}\\ }9\\text{ cm} \\Rightarrow L = 162\\text{ cm}^2\\\\
+(4)\\text{ ${q15l4} }10{,}16\\text{ cm,\\ }\\text{${q15h}\\ }8\\text{ cm} \\Rightarrow L = 104\\text{ cm}^2
 \\end{array}`} />
               <p className="mt-2">
-                Pernyataan yang <span className="text-green-400 font-bold">BENAR</span> adalah nomor ...
+                {t(`${p}.q15pre`)} <span className="text-green-400 font-bold">{t(`${p}.q15correctWord`)}</span> {t(`${p}.q15end`)}
               </p>
             </Q>
           </Section>
@@ -284,7 +290,7 @@ const LuasSegiempatLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Segitiga dan Segiempat
+            {t(`${p}.back`)}
           </button>
         </div>
       </div>
