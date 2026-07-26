@@ -6,13 +6,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Layers } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const pageUi = {
-  id: { title: "DEFINISI DAN BENTUK UMUM SPLDV" },
-  en: { title: "DEFINITION & STANDARD FORM OF SLETV" },
-  ja: { title: "連立方程式の定義と標準形" },
-};
 
 const accentColor = "#a78bfa";
 const accentDim = "rgba(167,139,250,0.13)";
@@ -35,109 +28,109 @@ const badgeStyle: Record<Badge, string> = {
   AKM: "bg-green-500/20 text-green-300 border-green-400/40",
 };
 
-const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
-
-const questions: Q[] = [
-  Q(1, "Mengenal PLDV", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Perhatikan persamaan-persamaan berikut. Tentukan mana yang merupakan Persamaan Linear Dua Variabel (PLDV).",
-    parts: [
-      { label: "a.", math: "2x + 3y = 7" },
-      { label: "b.", math: "x^2 + y = 5" },
-      { label: "c.", math: "4x - 2y = 10" },
-      { label: "d.", math: "x + y^2 = 9" },
-      { label: "e.", math: "3x - 5y = 0" },
-    ],
-  }),
-  Q(2, "Identifikasi SPLDV", {
-    badge: "TKA",
-    type: "mixed",
-    content: "Dari sistem persamaan berikut, manakah yang merupakan SPLDV? Berikan alasanmu!",
-    parts: [
-      { label: "a.", math: "\\begin{cases} x + y = 10 \\\\ x - y = 4 \\end{cases}" },
-      { label: "b.", math: "\\begin{cases} x^2 + y = 6 \\\\ x + y = 3 \\end{cases}" },
-      { label: "c.", math: "\\begin{cases} 2x + 3y = 12 \\\\ x = 4 \\end{cases}" },
-      { label: "d.", math: "\\begin{cases} xy = 6 \\\\ x + y = 5 \\end{cases}" },
-    ],
-  }),
-  Q(3, "Verifikasi Solusi", {
-    badge: "UN",
-    type: "mixed",
-    content: "Periksa apakah setiap pasangan berurutan berikut merupakan penyelesaian SPLDV:",
-    blockMath: "\\begin{cases} 2x + y = 8 \\\\ x - y = 1 \\end{cases}",
-    parts: [
-      { label: "a.", math: "(3, 2)" },
-      { label: "b.", math: "(4, 0)" },
-      { label: "c.", math: "(2, 4)" },
-      { label: "d.", math: "(5, -2)" },
-    ],
-  }),
-  Q(4, "Soal UN Style", {
-    badge: "UN",
-    type: "mixed",
-    content: "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:",
-    blockMath: "\\begin{cases} 2x + 3y = 16 \\\\ x - y = 1 \\end{cases}",
-    parts: [
-      { label: "A.", math: "(1, 4)" },
-      { label: "B.", math: "(5, 2)" },
-      { label: "C.", math: "(4, 3)" },
-      { label: "D.", math: "(3, 4)" },
-    ],
-  }),
-  Q(5, "Himpunan Penyelesaian — Identifikasi", {
-    badge: "UN",
-    type: "mixed",
-    content: "Tanpa mencari solusinya, tentukan jenis penyelesaian (ada solusi, tidak ada solusi, atau tak hingga solusi) dari setiap SPLDV berikut. Untuk soal (d)–(g), gunakan cara melihat perbandingan koefisiennya:",
-    parts: [
-      { label: "a.", math: "\\begin{cases} 2x + 4y = 8 \\\\ x + 2y = 4 \\end{cases}" },
-      { label: "b.", math: "\\begin{cases} x + y = 5 \\\\ x + y = 7 \\end{cases}" },
-      { label: "c.", math: "\\begin{cases} 3x - y = 4 \\\\ 6x - 2y = 8 \\end{cases}" },
-      { label: "d.", math: "\\begin{cases} x + 2y = 6 \\\\ 2x + 4y = 12 \\end{cases}" },
-      { label: "e.", math: "\\begin{cases} 3x - y = 4 \\\\ x + 2y = 5 \\end{cases}" },
-      { label: "f.", math: "\\begin{cases} 2x + 6y = 10 \\\\ x + 3y = 8 \\end{cases}" },
-      { label: "g.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
-    ],
-  }),
-  Q(6, "Mengubah ke Bentuk Standar", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Ubah setiap persamaan berikut ke bentuk standar ax + by = c, dengan a, b, dan c berupa bilangan bulat:",
-    parts: [
-      { label: "a.", math: "y = 3x - 5" },
-      { label: "b.", math: "\\frac{x}{2} + \\frac{y}{3} = 1" },
-      { label: "c.", math: "2(x+1) = 3(y-2) + 4" },
-      { label: "d.", math: "0.5x - 1.5y = 6" },
-    ],
-  }),
-  Q(7, "SPLDV dari Konteks", {
-    badge: "UN",
-    type: "mixed",
-    content: "Theo membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Remy membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
-    parts: [
-      { label: "a.", text: "Misal harga mangga = x dan harga jeruk = y. Tuliskan SPLDV-nya." },
-      { label: "b.", text: "Periksa apakah harga 1 kg mangga adalah Rp10.000 dan harga 1 kg jeruk Rp12.000 merupakan penyelesaian dari permasalahan pada soal." },
-      { label: "c.", text: "Periksa apakah harga 1 kg mangga adalah Rp12.000 dan harga 1 kg jeruk Rp9.000 merupakan penyelesaian dari permasalahan pada soal." },
-    ],
-  }),
-  Q(8, "ANBK — Benar atau Salah", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Tentukan pernyataan BENAR (B) atau SALAH (S):",
-    parts: [
-      { label: "(1)", text: "SPLDV selalu memiliki tepat satu penyelesaian." },
-      { label: "(2)", text: "Jika koefisien x dan y pada dua persamaan sebanding tapi konstantanya tidak, maka tidak ada penyelesaian." },
-      { label: "(3)", text: "Setiap PLDV dapat dijadikan bagian dari suatu SPLDV." },
-      { label: "(4)", text: "Penyelesaian SPLDV berupa pasangan bilangan (x, y) yang memenuhi kedua persamaan." },
-    ],
-  }),
-];
+const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const DefinisiSPLDVPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { language } = useLanguage();
-  const pu = pageUi[language as keyof typeof pageUi] ?? pageUi.id;
+  const p = 'practice.spldv.definisiSpldv';
+
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), {
+      badge: "ANBK",
+      type: "mixed",
+      content: t(`${p}.q1.content`),
+      parts: [
+        { label: "a.", math: "2x + 3y = 7" },
+        { label: "b.", math: "x^2 + y = 5" },
+        { label: "c.", math: "4x - 2y = 10" },
+        { label: "d.", math: "x + y^2 = 9" },
+        { label: "e.", math: "3x - 5y = 0" },
+      ],
+    }),
+    Qf(2, t(`${p}.q2.title`), {
+      badge: "TKA",
+      type: "mixed",
+      content: t(`${p}.q2.content`),
+      parts: [
+        { label: "a.", math: "\\begin{cases} x + y = 10 \\\\ x - y = 4 \\end{cases}" },
+        { label: "b.", math: "\\begin{cases} x^2 + y = 6 \\\\ x + y = 3 \\end{cases}" },
+        { label: "c.", math: "\\begin{cases} 2x + 3y = 12 \\\\ x = 4 \\end{cases}" },
+        { label: "d.", math: "\\begin{cases} xy = 6 \\\\ x + y = 5 \\end{cases}" },
+      ],
+    }),
+    Qf(3, t(`${p}.q3.title`), {
+      badge: "UN",
+      type: "mixed",
+      content: t(`${p}.q3.content`),
+      blockMath: "\\begin{cases} 2x + y = 8 \\\\ x - y = 1 \\end{cases}",
+      parts: [
+        { label: "a.", math: "(3, 2)" },
+        { label: "b.", math: "(4, 0)" },
+        { label: "c.", math: "(2, 4)" },
+        { label: "d.", math: "(5, -2)" },
+      ],
+    }),
+    Qf(4, t(`${p}.q4.title`), {
+      badge: "UN",
+      type: "mixed",
+      content: t(`${p}.q4.content`),
+      blockMath: "\\begin{cases} 2x + 3y = 16 \\\\ x - y = 1 \\end{cases}",
+      parts: [
+        { label: "A.", math: "(1, 4)" },
+        { label: "B.", math: "(5, 2)" },
+        { label: "C.", math: "(4, 3)" },
+        { label: "D.", math: "(3, 4)" },
+      ],
+    }),
+    Qf(5, t(`${p}.q5.title`), {
+      badge: "UN",
+      type: "mixed",
+      content: t(`${p}.q5.content`),
+      parts: [
+        { label: "a.", math: "\\begin{cases} 2x + 4y = 8 \\\\ x + 2y = 4 \\end{cases}" },
+        { label: "b.", math: "\\begin{cases} x + y = 5 \\\\ x + y = 7 \\end{cases}" },
+        { label: "c.", math: "\\begin{cases} 3x - y = 4 \\\\ 6x - 2y = 8 \\end{cases}" },
+        { label: "d.", math: "\\begin{cases} x + 2y = 6 \\\\ 2x + 4y = 12 \\end{cases}" },
+        { label: "e.", math: "\\begin{cases} 3x - y = 4 \\\\ x + 2y = 5 \\end{cases}" },
+        { label: "f.", math: "\\begin{cases} 2x + 6y = 10 \\\\ x + 3y = 8 \\end{cases}" },
+        { label: "g.", math: "\\begin{cases} 4x - 2y = 8 \\\\ -2x + y = -4 \\end{cases}" },
+      ],
+    }),
+    Qf(6, t(`${p}.q6.title`), {
+      badge: "ANBK",
+      type: "mixed",
+      content: t(`${p}.q6.content`),
+      parts: [
+        { label: "a.", math: "y = 3x - 5" },
+        { label: "b.", math: "\\frac{x}{2} + \\frac{y}{3} = 1" },
+        { label: "c.", math: "2(x+1) = 3(y-2) + 4" },
+        { label: "d.", math: "0.5x - 1.5y = 6" },
+      ],
+    }),
+    Qf(7, t(`${p}.q7.title`), {
+      badge: "UN",
+      type: "mixed",
+      content: t(`${p}.q7.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q7.partA`) },
+        { label: "b.", text: t(`${p}.q7.partB`) },
+        { label: "c.", text: t(`${p}.q7.partC`) },
+      ],
+    }),
+    Qf(8, t(`${p}.q8.title`), {
+      badge: "ANBK",
+      type: "mixed",
+      content: t(`${p}.q8.content`),
+      parts: [
+        { label: "(1)", text: t(`${p}.q8.part1`) },
+        { label: "(2)", text: t(`${p}.q8.part2`) },
+        { label: "(3)", text: t(`${p}.q8.part3`) },
+        { label: "(4)", text: t(`${p}.q8.part4`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -150,9 +143,11 @@ const DefinisiSPLDVPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
-            {pu.title}
+            {t(`${p}.pageTitle`)}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">
+            {t(`${p}.grade`)} · {t('practice.breadcrumb')} · {t(`${p}.soalCount`)}
+          </p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
@@ -188,12 +183,12 @@ const DefinisiSPLDVPage = () => {
                 )}
                 {q.parts && (
                   <div className="flex flex-col gap-2 mt-1">
-                    {q.parts.map((p, pi) => (
+                    {q.parts.map((part, pi) => (
                       <div key={pi} className="flex items-start gap-2">
-                        <span className="font-bold text-xs shrink-0 mt-0.5" style={{ color: accentColor }}>{p.label}</span>
+                        <span className="font-bold text-xs shrink-0 mt-0.5" style={{ color: accentColor }}>{part.label}</span>
                         <span className="font-body text-sm text-white/80 leading-relaxed">
-                          {p.text && p.text}
-                          {p.math && <InlineMath math={p.math} />}
+                          {part.text && part.text}
+                          {part.math && <InlineMath math={part.math} />}
                         </span>
                       </div>
                     ))}
@@ -207,7 +202,7 @@ const DefinisiSPLDVPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/spldv"); }}
             className="text-sm text-white/40 hover:text-white/80 transition-colors cursor-pointer font-body">
-            ← {t('practice.backToMenu')} SPLDV
+            ← {t('practice.backToMenu')} {t(`${p}.backSuffix`)}
           </button>
         </div>
       </div>

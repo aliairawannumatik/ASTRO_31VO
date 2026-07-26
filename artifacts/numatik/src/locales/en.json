@@ -4717,6 +4717,53 @@
           "q14cMid": " if "
         }
       }
+    },
+    "spldv": {
+      "definisiSpldv": {
+        "pageTitle": "DEFINITION & STANDARD FORM OF SLETV",
+        "grade": "Grade 8",
+        "soalCount": "8 Questions",
+        "backSuffix": "SLETV",
+        "q1": {
+          "title": "Identifying LETV",
+          "content": "Observe the following equations. Determine which ones are Linear Equations in Two Variables (LETV)."
+        },
+        "q2": {
+          "title": "Identifying a SLETV",
+          "content": "From the following systems of equations, which ones are a System of Linear Equations in Two Variables (SLETV)? Give your reasoning!"
+        },
+        "q3": {
+          "title": "Verifying Solutions",
+          "content": "Check whether each ordered pair below is a solution to the SLETV:"
+        },
+        "q4": {
+          "title": "National Exam Style",
+          "content": "The number pair that is a solution to the SLETV:"
+        },
+        "q5": {
+          "title": "Solution Sets — Identification",
+          "content": "Without solving, determine the type of solution (one solution, no solution, or infinitely many solutions) for each SLETV below. For parts (d)–(g), use the coefficient comparison method:"
+        },
+        "q6": {
+          "title": "Converting to Standard Form",
+          "content": "Convert each equation below to standard form ax + by = c, where a, b, and c are integers:"
+        },
+        "q7": {
+          "title": "SLETV from Context",
+          "content": "Theo buys 3 kg of mangoes and 2 kg of oranges for Rp 54,000. Remy buys 1 kg of mangoes and 4 kg of oranges for Rp 42,000.",
+          "partA": "Let the price of mango = x and the price of orange = y. Write the SLETV.",
+          "partB": "Check whether the price of 1 kg mango being Rp 10,000 and 1 kg orange being Rp 12,000 is a solution to the problem.",
+          "partC": "Check whether the price of 1 kg mango being Rp 12,000 and 1 kg orange being Rp 9,000 is a solution to the problem."
+        },
+        "q8": {
+          "title": "ANBK — True or False",
+          "content": "Determine whether each statement is TRUE (T) or FALSE (F):",
+          "part1": "A SLETV always has exactly one solution.",
+          "part2": "If the x and y coefficients of two equations are proportional but the constants are not, then there is no solution.",
+          "part3": "Every LETV can be made part of a SLETV.",
+          "part4": "A solution to a SLETV is a number pair (x, y) that satisfies both equations."
+        }
+      }
     }
   },
   "settings": {

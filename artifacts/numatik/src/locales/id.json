@@ -4717,6 +4717,53 @@
           "q14cMid": " jika "
         }
       }
+    },
+    "spldv": {
+      "definisiSpldv": {
+        "pageTitle": "DEFINISI DAN BENTUK UMUM SPLDV",
+        "grade": "Kelas 8",
+        "soalCount": "8 Soal",
+        "backSuffix": "SPLDV",
+        "q1": {
+          "title": "Mengenal PLDV",
+          "content": "Perhatikan persamaan-persamaan berikut. Tentukan mana yang merupakan Persamaan Linear Dua Variabel (PLDV)."
+        },
+        "q2": {
+          "title": "Identifikasi SPLDV",
+          "content": "Dari sistem persamaan berikut, manakah yang merupakan SPLDV? Berikan alasanmu!"
+        },
+        "q3": {
+          "title": "Verifikasi Solusi",
+          "content": "Periksa apakah setiap pasangan berurutan berikut merupakan penyelesaian SPLDV:"
+        },
+        "q4": {
+          "title": "Soal UN Style",
+          "content": "Pasangan bilangan yang merupakan penyelesaian dari SPLDV:"
+        },
+        "q5": {
+          "title": "Himpunan Penyelesaian — Identifikasi",
+          "content": "Tanpa mencari solusinya, tentukan jenis penyelesaian (ada solusi, tidak ada solusi, atau tak hingga solusi) dari setiap SPLDV berikut. Untuk soal (d)–(g), gunakan cara melihat perbandingan koefisiennya:"
+        },
+        "q6": {
+          "title": "Mengubah ke Bentuk Standar",
+          "content": "Ubah setiap persamaan berikut ke bentuk standar ax + by = c, dengan a, b, dan c berupa bilangan bulat:"
+        },
+        "q7": {
+          "title": "SPLDV dari Konteks",
+          "content": "Theo membeli 3 kg mangga dan 2 kg jeruk seharga Rp 54.000. Remy membeli 1 kg mangga dan 4 kg jeruk seharga Rp 42.000.",
+          "partA": "Misal harga mangga = x dan harga jeruk = y. Tuliskan SPLDV-nya.",
+          "partB": "Periksa apakah harga 1 kg mangga adalah Rp10.000 dan harga 1 kg jeruk Rp12.000 merupakan penyelesaian dari permasalahan pada soal.",
+          "partC": "Periksa apakah harga 1 kg mangga adalah Rp12.000 dan harga 1 kg jeruk Rp9.000 merupakan penyelesaian dari permasalahan pada soal."
+        },
+        "q8": {
+          "title": "ANBK — Benar atau Salah",
+          "content": "Tentukan pernyataan BENAR (B) atau SALAH (S):",
+          "part1": "SPLDV selalu memiliki tepat satu penyelesaian.",
+          "part2": "Jika koefisien x dan y pada dua persamaan sebanding tapi konstantanya tidak, maka tidak ada penyelesaian.",
+          "part3": "Setiap PLDV dapat dijadikan bagian dari suatu SPLDV.",
+          "part4": "Penyelesaian SPLDV berupa pasangan bilangan (x, y) yang memenuhi kedua persamaan."
+        }
+      }
     }
   },
   "settings": {
