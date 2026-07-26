@@ -4178,6 +4178,85 @@
           "title": "ANBK Problem — Evaluate Statements",
           "content": "Determine whether each statement is TRUE (T) or FALSE (F) about coordinates:"
         }
+      },
+      "posisiRelatifTitikAcuan": {
+        "pageTitle": "RELATIVE POSITION OF EACH POINT WITH RESPECT TO AN ARBITRARY REFERENCE POINT AND A LINE",
+        "badgeText": "10 Problems · Relative Position of Points & Lines",
+        "refBox1Title": "📌 Relative Position with Respect to a Reference Point",
+        "refBox1Body": "Position of point B(x₂,y₂) relative to reference point A(x₁,y₁): Δx = x₂−x₁ (positive = right, negative = left) · Δy = y₂−y₁ (positive = up, negative = down)",
+        "refBox2Title": "📌 Relative Position with Respect to a Line",
+        "rule1": "Above the line y = k",
+        "rule2": "Below the line y = k",
+        "rule3": "Right of the line x = k",
+        "rule4": "Left of the line x = k",
+        "rule5": "Above the line y = mx + c",
+        "rule6": "Below the line y = mx + c",
+        "q1": {
+          "title": "Position of a Point Relative to Reference O(0,0)",
+          "a": "State the position of point A relative to the reference point O(0,0)! (how many units right/left and up/down)",
+          "b": "State the position of point B relative to the reference point O(0,0)!",
+          "c": "If the reference point O moves to (1,1), what is the relative position of A with respect to the new reference point?"
+        },
+        "q2": {
+          "title": "Position of Point P Relative to Reference Point A",
+          "a": "Point A(2,1) is the reference point. State the position of point P relative to A!",
+          "b": "State the position of point Q relative to A(2,1)!",
+          "c": "State the position of point R relative to A(2,1)!",
+          "d": "Which point is directly above point A? (give your reason)"
+        },
+        "q3": {
+          "title": "Relative Position on a Simple Map",
+          "content": "A map uses a coordinate system. The library is at point P(3, 5), the canteen at K(7, 2), and the classroom at C(1, 8).",
+          "a": "Using library P(3,5) as the reference, state the position of canteen K(7,2) relative to P!",
+          "b": "Using library P(3,5) as the reference, state the position of classroom C(1,8) relative to P!",
+          "c": "If you are at the canteen K(7,2) and want to go to classroom C(1,8), how many units do you need to move and in which direction?"
+        },
+        "q4": {
+          "title": "Relative Position in a Simple Navigation System",
+          "content": "A ship is at position K(2, 3). Lighthouse A is at (5, 7), lighthouse B at (−1, 6), island C at (4, −2).",
+          "a": "Using the ship's position K(2,3) as the reference, state the position of lighthouse A!",
+          "b": "State the position of lighthouse B relative to the ship K(2,3)!",
+          "c": "State the position of island C relative to the ship K(2,3) and determine which direction the ship must move to reach island C!"
+        },
+        "q5": {
+          "title": "Position of a Point Relative to the x-axis",
+          "a": "Which point is ABOVE the x-axis?",
+          "b": "Which point is BELOW the x-axis?",
+          "c": "Which point lies ON the x-axis?",
+          "d": "What is the coordinate condition for a point above the x-axis?"
+        },
+        "q6": {
+          "title": "Position of a Point Relative to the y-axis",
+          "a": "Which point is to the RIGHT of the y-axis?",
+          "b": "Which point is to the LEFT of the y-axis?",
+          "c": "Which point lies ON the y-axis?",
+          "d": "What is the coordinate condition for a point to the left of the y-axis?"
+        },
+        "q7": {
+          "title": "Position Relative to the Line y = 3",
+          "a": "Which point is ABOVE the line y = 3?",
+          "b": "Which point is BELOW the line y = 3?",
+          "c": "Which point lies ON the line y = 3?",
+          "d": "What is the ordinate condition for a point above the line y = 3?"
+        },
+        "q8": {
+          "title": "Position Relative to the Line x = −2",
+          "a": "Which point is to the RIGHT of the line x = −2?",
+          "b": "Which point is to the LEFT of the line x = −2?",
+          "c": "Which point lies ON the line x = −2?",
+          "d": "What is the abscissa condition for a point to the right of the line x = −2?"
+        },
+        "q9": {
+          "title": "Point on a Line — Linear Equation",
+          "lineLabel": "Line:",
+          "a": "Check whether point A(0, 2) lies on the line y = 2x + 2.",
+          "b": "Check whether point B(1, 4) lies on the line y = 2x + 2.",
+          "c": "Check whether point C(2, 5) lies on the line y = 2x + 2."
+        },
+        "q10": {
+          "title": "Does the Point Satisfy the Line Equation?",
+          "content": "Check whether each of the following points lies on the line y = 3x − 1:"
+        }
       }
     }
   },

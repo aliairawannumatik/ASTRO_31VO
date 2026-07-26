@@ -8,191 +8,210 @@ import { InlineMath, BlockMath } from 'react-katex';
 import { Crosshair } from "lucide-react";
 import CoordPlane from "./CoordPlane";
 
-type Part = { label: string; math?: string; text?: string };
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type Part = { label: string; math?: string; textKey?: string };
 type Diagram = Parameters<typeof CoordPlane>[0];
-type Q = {
-  n: number; title: string;
-  content?: string; math?: string;
+type QuestionItem = {
+  n: number; titleKey: string;
+  contentKey?: string; math?: string;
   parts?: Part[]; diagram?: Diagram;
   type: "essay" | "mixed" | "diagram-only";
 };
-const Qn = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const questions: Q[] = [
-  // ── Bagian 1: Posisi Relatif terhadap Titik Acuan ──────────────────────
-  Qn(1, "Posisi Titik terhadap Titik Acuan O(0,0)", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 0, y: 0, label: "O(0,0)", color: "#facc15", labelPos: "tr" },
-        { x: 3, y: 4, label: "A(3,4)", color: "#f472b6", labelPos: "tr" },
-        { x: -2, y: 3, label: "B(−2,3)", color: "#60a5fa", labelPos: "tl" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Nyatakan posisi titik A terhadap titik acuan O(0,0)! (berapa satuan ke kanan/kiri dan ke atas/bawah)" },
-      { label: "b.", text: "Nyatakan posisi titik B terhadap titik acuan O(0,0)!" },
-      { label: "c.", text: "Jika titik acuan O bergeser ke (1,1), bagaimana posisi relatif A terhadap titik acuan baru itu?" },
-    ],
-  }),
+// ─── Locale base path ─────────────────────────────────────────────────────────
 
-  Qn(2, "Posisi Titik P terhadap Titik Acuan A", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      pts: [
-        { x: 2, y: 1, label: "A(2,1)", color: "#facc15", labelPos: "tr" },
-        { x: 5, y: 4, label: "P(5,4)", color: "#f472b6", labelPos: "tr" },
-        { x: -1, y: 3, label: "Q(−1,3)", color: "#34d399", labelPos: "tl" },
-        { x: 2, y: -2, label: "R(2,−2)", color: "#fb923c", labelPos: "br" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Titik A(2,1) sebagai titik acuan. Nyatakan posisi titik P terhadap A!" },
-      { label: "b.", text: "Nyatakan posisi titik Q terhadap A(2,1)!" },
-      { label: "c.", text: "Nyatakan posisi titik R terhadap A(2,1)!" },
-      { label: "d.", text: "Titik mana yang berada tepat di atas titik A? (sebutkan alasannya)" },
-    ],
-  }),
+const BASE = "practice.koordinatCartesius.posisiRelatifTitikAcuan";
 
-  Qn(3, "Posisi Relatif pada Peta Sederhana", {
-    type: "essay",
-    content: "Sebuah peta menggunakan sistem koordinat. Perpustakaan berada di titik P(3, 5), kantin di K(7, 2), kelas di C(1, 8).",
-    parts: [
-      { label: "a.", text: "Dengan perpustakaan P(3,5) sebagai acuan, nyatakan posisi kantin K(7,2) terhadap P!" },
-      { label: "b.", text: "Dengan perpustakaan P(3,5) sebagai acuan, nyatakan posisi kelas C(1,8) terhadap P!" },
-      { label: "c.", text: "Jika kamu berada di kantin K(7,2) dan ingin ke kelas C(1,8), berapa satuan kamu harus bergerak dan ke arah mana?" },
-    ],
-  }),
-
-  Qn(4, "Posisi Relatif dalam Sistem Navigasi Sederhana", {
-    type: "essay",
-    content: "Sebuah kapal berada di posisi K(2, 3). Mercusuar A berada di (5, 7), mercusuar B di (−1, 6), pulau C di (4, −2).",
-    parts: [
-      { label: "a.", text: "Dengan posisi kapal K(2,3) sebagai acuan, nyatakan posisi mercusuar A!" },
-      { label: "b.", text: "Nyatakan posisi mercusuar B terhadap kapal K(2,3)!" },
-      { label: "c.", text: "Nyatakan posisi pulau C terhadap kapal K(2,3) dan tentukan ke arah mana kapal harus bergerak untuk menuju pulau C!" },
-    ],
-  }),
-
-  // ── Bagian 2: Posisi Relatif terhadap Suatu Garis ─────────────────────
-  Qn(5, "Posisi Titik terhadap Sumbu-x", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 3, y: 4, label: "A(3,4)", color: "#f472b6", labelPos: "tr" },
-        { x: -2, y: -3, label: "B(−2,−3)", color: "#60a5fa", labelPos: "bl" },
-        { x: 5, y: 0, label: "C(5,0)", color: "#facc15", labelPos: "top" },
-        { x: -4, y: 2, label: "D(−4,2)", color: "#34d399", labelPos: "tl" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Titik mana yang berada DI ATAS sumbu-x?" },
-      { label: "b.", text: "Titik mana yang berada DI BAWAH sumbu-x?" },
-      { label: "c.", text: "Titik mana yang berada PADA sumbu-x?" },
-      { label: "d.", text: "Apa syarat koordinat untuk titik di atas sumbu-x?" },
-    ],
-  }),
-
-  Qn(6, "Posisi Titik terhadap Sumbu-y", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 4, y: 2, label: "P(4,2)", color: "#f472b6", labelPos: "tr" },
-        { x: -3, y: 5, label: "Q(−3,5)", color: "#fb923c", labelPos: "tl" },
-        { x: 0, y: -4, label: "R(0,−4)", color: "#facc15", labelPos: "tr" },
-        { x: -2, y: -2, label: "S(−2,−2)", color: "#a78bfa", labelPos: "bl" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Titik mana yang berada di sebelah KANAN sumbu-y?" },
-      { label: "b.", text: "Titik mana yang berada di sebelah KIRI sumbu-y?" },
-      { label: "c.", text: "Titik mana yang berada PADA sumbu-y?" },
-      { label: "d.", text: "Apa syarat koordinat untuk titik di sebelah kiri sumbu-y?" },
-    ],
-  }),
-
-  Qn(7, "Posisi terhadap Garis y = 3", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      segs: [{ x1: -6.5, y1: 3, x2: 6.5, y2: 3, color: "#facc15", label: "y = 3" }],
-      pts: [
-        { x: 4, y: 5, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: -3, y: 1, label: "B", color: "#60a5fa", labelPos: "tl" },
-        { x: 2, y: 3, label: "C", color: "#34d399", labelPos: "top" },
-        { x: -5, y: 6, label: "D", color: "#fb923c", labelPos: "tl" },
-        { x: 1, y: -2, label: "E", color: "#a78bfa", labelPos: "br" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Titik mana yang berada di ATAS garis y = 3?" },
-      { label: "b.", text: "Titik mana yang berada di BAWAH garis y = 3?" },
-      { label: "c.", text: "Titik mana yang berada PADA garis y = 3?" },
-      { label: "d.", text: "Apa syarat ordinat untuk titik di atas garis y = 3?" },
-    ],
-  }),
-
-  Qn(8, "Posisi terhadap Garis x = −2", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 7,
-      segs: [{ x1: -2, y1: -6.5, x2: -2, y2: 6.5, color: "#a78bfa", label: "x=−2" }],
-      pts: [
-        { x: 3, y: 4, label: "A", color: "#f472b6", labelPos: "tr" },
-        { x: -5, y: 2, label: "B", color: "#60a5fa", labelPos: "tl" },
-        { x: -2, y: -3, label: "C", color: "#34d399", labelPos: "tr" },
-        { x: 1, y: -4, label: "D", color: "#facc15", labelPos: "br" },
-      ],
-    },
-    parts: [
-      { label: "a.", text: "Titik mana yang berada di KANAN garis x = −2?" },
-      { label: "b.", text: "Titik mana yang berada di KIRI garis x = −2?" },
-      { label: "c.", text: "Titik mana yang berada PADA garis x = −2?" },
-      { label: "d.", text: "Apa syarat absis untuk titik di kanan garis x = −2?" },
-    ],
-  }),
-
-  Qn(9, "Titik pada Garis — Persamaan Garis Lurus", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -3, y1: -4, x2: 4, y2: 10, color: "#facc15" }],
-      pts: [
-        { x: 0, y: 2, label: "A(0,2)", color: "#f472b6", labelPos: "tl" },
-        { x: 1, y: 4, label: "B(1,4)", color: "#60a5fa", labelPos: "tr" },
-        { x: 2, y: 5, label: "C(2,5)", color: "#34d399", labelPos: "tr" },
-      ],
-      extraTexts: [{ x: 3.5, y: 9, text: "y=2x+2", color: "#facc15", size: 10 }],
-    },
-    parts: [
-      { label: "Garis:", math: "y = 2x + 2" },
-      { label: "a.", text: "Periksa apakah titik A(0, 2) terletak pada garis y = 2x + 2." },
-      { label: "b.", text: "Periksa apakah titik B(1, 4) terletak pada garis y = 2x + 2." },
-      { label: "c.", text: "Periksa apakah titik C(2, 5) terletak pada garis y = 2x + 2." },
-    ],
-  }),
-
-  Qn(10, "Apakah Titik Memenuhi Persamaan Garis?", {
-    type: "mixed",
-    content: "Periksa apakah setiap titik berikut terletak pada garis y = 3x − 1:",
-    parts: [
-      { label: "a.", math: "P(1,\\ 2)" },
-      { label: "b.", math: "Q(2,\\ 5)" },
-      { label: "c.", math: "R(-1,\\ -4)" },
-      { label: "d.", math: "S(0,\\ -1)" },
-      { label: "e.", math: "T(3,\\ 7)" },
-    ],
-  }),
-
-];
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 const PosisiRelatifTitikAcuanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  // ── Questions array (key references only — no hardcoded Indonesian text) ──
+  const questions: QuestionItem[] = [
+    // ── Bagian 1: Posisi Relatif terhadap Titik Acuan ─────────────────────
+    {
+      n: 1, titleKey: "q1.title", type: "mixed",
+      diagram: {
+        size: 260, range: 6,
+        pts: [
+          { x: 0, y: 0, label: "O(0,0)", color: "#facc15", labelPos: "tr" },
+          { x: 3, y: 4, label: "A(3,4)", color: "#f472b6", labelPos: "tr" },
+          { x: -2, y: 3, label: "B(−2,3)", color: "#60a5fa", labelPos: "tl" },
+        ],
+      },
+      parts: [
+        { label: "a.", textKey: "q1.a" },
+        { label: "b.", textKey: "q1.b" },
+        { label: "c.", textKey: "q1.c" },
+      ],
+    },
+
+    {
+      n: 2, titleKey: "q2.title", type: "mixed",
+      diagram: {
+        size: 260, range: 7,
+        pts: [
+          { x: 2, y: 1, label: "A(2,1)", color: "#facc15", labelPos: "tr" },
+          { x: 5, y: 4, label: "P(5,4)", color: "#f472b6", labelPos: "tr" },
+          { x: -1, y: 3, label: "Q(−1,3)", color: "#34d399", labelPos: "tl" },
+          { x: 2, y: -2, label: "R(2,−2)", color: "#fb923c", labelPos: "br" },
+        ],
+      },
+      parts: [
+        { label: "a.", textKey: "q2.a" },
+        { label: "b.", textKey: "q2.b" },
+        { label: "c.", textKey: "q2.c" },
+        { label: "d.", textKey: "q2.d" },
+      ],
+    },
+
+    {
+      n: 3, titleKey: "q3.title", type: "essay",
+      contentKey: "q3.content",
+      parts: [
+        { label: "a.", textKey: "q3.a" },
+        { label: "b.", textKey: "q3.b" },
+        { label: "c.", textKey: "q3.c" },
+      ],
+    },
+
+    {
+      n: 4, titleKey: "q4.title", type: "essay",
+      contentKey: "q4.content",
+      parts: [
+        { label: "a.", textKey: "q4.a" },
+        { label: "b.", textKey: "q4.b" },
+        { label: "c.", textKey: "q4.c" },
+      ],
+    },
+
+    // ── Bagian 2: Posisi Relatif terhadap Suatu Garis ─────────────────────
+    {
+      n: 5, titleKey: "q5.title", type: "mixed",
+      diagram: {
+        size: 260, range: 6,
+        pts: [
+          { x: 3, y: 4, label: "A(3,4)", color: "#f472b6", labelPos: "tr" },
+          { x: -2, y: -3, label: "B(−2,−3)", color: "#60a5fa", labelPos: "bl" },
+          { x: 5, y: 0, label: "C(5,0)", color: "#facc15", labelPos: "top" },
+          { x: -4, y: 2, label: "D(−4,2)", color: "#34d399", labelPos: "tl" },
+        ],
+      },
+      parts: [
+        { label: "a.", textKey: "q5.a" },
+        { label: "b.", textKey: "q5.b" },
+        { label: "c.", textKey: "q5.c" },
+        { label: "d.", textKey: "q5.d" },
+      ],
+    },
+
+    {
+      n: 6, titleKey: "q6.title", type: "mixed",
+      diagram: {
+        size: 260, range: 6,
+        pts: [
+          { x: 4, y: 2, label: "P(4,2)", color: "#f472b6", labelPos: "tr" },
+          { x: -3, y: 5, label: "Q(−3,5)", color: "#fb923c", labelPos: "tl" },
+          { x: 0, y: -4, label: "R(0,−4)", color: "#facc15", labelPos: "tr" },
+          { x: -2, y: -2, label: "S(−2,−2)", color: "#a78bfa", labelPos: "bl" },
+        ],
+      },
+      parts: [
+        { label: "a.", textKey: "q6.a" },
+        { label: "b.", textKey: "q6.b" },
+        { label: "c.", textKey: "q6.c" },
+        { label: "d.", textKey: "q6.d" },
+      ],
+    },
+
+    {
+      n: 7, titleKey: "q7.title", type: "mixed",
+      diagram: {
+        size: 260, range: 7,
+        segs: [{ x1: -6.5, y1: 3, x2: 6.5, y2: 3, color: "#facc15", label: "y = 3" }],
+        pts: [
+          { x: 4, y: 5, label: "A", color: "#f472b6", labelPos: "tr" },
+          { x: -3, y: 1, label: "B", color: "#60a5fa", labelPos: "tl" },
+          { x: 2, y: 3, label: "C", color: "#34d399", labelPos: "top" },
+          { x: -5, y: 6, label: "D", color: "#fb923c", labelPos: "tl" },
+          { x: 1, y: -2, label: "E", color: "#a78bfa", labelPos: "br" },
+        ],
+      },
+      parts: [
+        { label: "a.", textKey: "q7.a" },
+        { label: "b.", textKey: "q7.b" },
+        { label: "c.", textKey: "q7.c" },
+        { label: "d.", textKey: "q7.d" },
+      ],
+    },
+
+    {
+      n: 8, titleKey: "q8.title", type: "mixed",
+      diagram: {
+        size: 260, range: 7,
+        segs: [{ x1: -2, y1: -6.5, x2: -2, y2: 6.5, color: "#a78bfa", label: "x=−2" }],
+        pts: [
+          { x: 3, y: 4, label: "A", color: "#f472b6", labelPos: "tr" },
+          { x: -5, y: 2, label: "B", color: "#60a5fa", labelPos: "tl" },
+          { x: -2, y: -3, label: "C", color: "#34d399", labelPos: "tr" },
+          { x: 1, y: -4, label: "D", color: "#facc15", labelPos: "br" },
+        ],
+      },
+      parts: [
+        { label: "a.", textKey: "q8.a" },
+        { label: "b.", textKey: "q8.b" },
+        { label: "c.", textKey: "q8.c" },
+        { label: "d.", textKey: "q8.d" },
+      ],
+    },
+
+    {
+      n: 9, titleKey: "q9.title", type: "mixed",
+      diagram: {
+        size: 260, range: 6,
+        segs: [{ x1: -3, y1: -4, x2: 4, y2: 10, color: "#facc15" }],
+        pts: [
+          { x: 0, y: 2, label: "A(0,2)", color: "#f472b6", labelPos: "tl" },
+          { x: 1, y: 4, label: "B(1,4)", color: "#60a5fa", labelPos: "tr" },
+          { x: 2, y: 5, label: "C(2,5)", color: "#34d399", labelPos: "tr" },
+        ],
+        extraTexts: [{ x: 3.5, y: 9, text: "y=2x+2", color: "#facc15", size: 10 }],
+      },
+      parts: [
+        // "Garis:" label is natural language — translated via locale key
+        { label: t(`${BASE}.q9.lineLabel`), math: "y = 2x + 2" },
+        { label: "a.", textKey: "q9.a" },
+        { label: "b.", textKey: "q9.b" },
+        { label: "c.", textKey: "q9.c" },
+      ],
+    },
+
+    {
+      n: 10, titleKey: "q10.title", type: "mixed",
+      contentKey: "q10.content",
+      parts: [
+        // Pure math coords — no translation needed
+        { label: "a.", math: "P(1,\\ 2)" },
+        { label: "b.", math: "Q(2,\\ 5)" },
+        { label: "c.", math: "R(-1,\\ -4)" },
+        { label: "d.", math: "S(0,\\ -1)" },
+        { label: "e.", math: "T(3,\\ 7)" },
+      ],
+    },
+  ];
+
+  // ── Reference box 2 rule rows ──────────────────────────────────────────────
+  const ruleRows = [
+    { ruleKey: "rule1", cond: "y₀ > k" },
+    { ruleKey: "rule2", cond: "y₀ < k" },
+    { ruleKey: "rule3", cond: "x₀ > k" },
+    { ruleKey: "rule4", cond: "x₀ < k" },
+    { ruleKey: "rule5", cond: "y₀ > mx₀ + c" },
+    { ruleKey: "rule6", cond: "y₀ < mx₀ + c" },
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -205,38 +224,31 @@ const PosisiRelatifTitikAcuanPage = () => {
             <Crosshair className="w-8 h-8 text-violet-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-violet-300 text-center mb-1">
-            POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN DAN TERHADAP SUATU GARIS
+            {t(`${BASE}.pageTitle`)}
           </h1>
           <p className="text-white/50 text-xs text-center font-body mb-3">Koordinat Kartesius · Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-violet-400 text-sm">🎯</span>
-            <span className="text-white/70 text-xs font-body">10 Soal · Posisi Relatif Titik &amp; Garis</span>
+            <span className="text-white/70 text-xs font-body">{t(`${BASE}.badgeText`)}</span>
             <span className="text-violet-400 text-sm">🎯</span>
           </div>
         </div>
 
         {/* Referensi: Titik Acuan */}
         <div className="mb-4 bg-violet-900/20 border border-violet-500/20 rounded-xl p-4">
-          <p className="text-violet-300 text-xs font-bold mb-2">📌 Posisi Relatif terhadap Titik Acuan</p>
+          <p className="text-violet-300 text-xs font-bold mb-2">{t(`${BASE}.refBox1Title`)}</p>
           <p className="text-white/60 text-xs font-body leading-relaxed">
-            Posisi titik B(x₂,y₂) terhadap titik acuan A(x₁,y₁): <span className="text-violet-300 font-bold">Δx = x₂−x₁</span> (positif = kanan, negatif = kiri) · <span className="text-violet-300 font-bold">Δy = y₂−y₁</span> (positif = atas, negatif = bawah)
+            {t(`${BASE}.refBox1Body`)}
           </p>
         </div>
 
         {/* Referensi: Posisi terhadap Garis */}
         <div className="mb-6 bg-rose-900/20 border border-rose-500/20 rounded-xl p-4">
-          <p className="text-rose-300 text-xs font-bold mb-3">📌 Posisi Relatif terhadap Suatu Garis</p>
+          <p className="text-rose-300 text-xs font-bold mb-3">{t(`${BASE}.refBox2Title`)}</p>
           <div className="flex flex-col gap-2 text-xs font-body">
-            {[
-              { rule: "Di atas garis y = k", cond: "y₀ > k" },
-              { rule: "Di bawah garis y = k", cond: "y₀ < k" },
-              { rule: "Di kanan garis x = k", cond: "x₀ > k" },
-              { rule: "Di kiri garis x = k", cond: "x₀ < k" },
-              { rule: "Di atas garis y = mx + c", cond: "y₀ > mx₀ + c" },
-              { rule: "Di bawah garis y = mx + c", cond: "y₀ < mx₀ + c" },
-            ].map(r => (
-              <div key={r.rule} className="bg-white/5 rounded-lg px-3 py-2 flex gap-3">
-                <span className="text-rose-300 font-bold w-44 shrink-0">{r.rule}:</span>
+            {ruleRows.map(r => (
+              <div key={r.ruleKey} className="bg-white/5 rounded-lg px-3 py-2 flex gap-3">
+                <span className="text-rose-300 font-bold w-44 shrink-0">{t(`${BASE}.${r.ruleKey}`)}:</span>
                 <span className="text-white/60">{r.cond}</span>
               </div>
             ))}
@@ -253,7 +265,7 @@ const PosisiRelatifTitikAcuanPage = () => {
                 <span className="w-8 h-8 rounded-full bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-violet-300 font-bold text-sm shrink-0">
                   {q.n}
                 </span>
-                <span className="font-display text-sm font-bold text-violet-200">{q.title}</span>
+                <span className="font-display text-sm font-bold text-violet-200">{t(`${BASE}.${q.titleKey}`)}</span>
               </div>
 
               <div className="px-5 py-4 space-y-3">
@@ -263,8 +275,8 @@ const PosisiRelatifTitikAcuanPage = () => {
                   </div>
                 )}
 
-                {q.content && (
-                  <p className="text-white/80 text-sm font-body leading-relaxed">{q.content}</p>
+                {q.contentKey && (
+                  <p className="text-white/80 text-sm font-body leading-relaxed">{t(`${BASE}.${q.contentKey}`)}</p>
                 )}
 
                 {q.math && (
@@ -279,7 +291,7 @@ const PosisiRelatifTitikAcuanPage = () => {
                       <div key={i} className="flex gap-2">
                         <span className="text-violet-400 font-bold text-sm shrink-0 mt-0.5">{p.label}</span>
                         <div className="flex-1">
-                          {p.text && <p className="text-white/75 text-sm font-body">{p.text}</p>}
+                          {p.textKey && <p className="text-white/75 text-sm font-body">{t(`${BASE}.${p.textKey}`)}</p>}
                           {p.math && (
                             <div className="mt-1 overflow-x-auto">
                               <InlineMath math={p.math} />

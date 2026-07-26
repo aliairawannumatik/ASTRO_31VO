@@ -1,0 +1,55 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Koordinat Kartesius"
+— index dan UnsurUnsurPage.tsx (15 soal) sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- JANGAN sentuh file orphan (PosisiRelatifPage.tsx) atau
+  CoordPlane.tsx
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: PosisiRelatifTitikAcuanPage.tsx (10 soal).
+
+KONTEKS KHUSUS FILE INI:
+- Format data: array questions: Q[] via .map() — ikuti pola yang
+  sudah terbukti di UnsurUnsurPage.tsx (title/content/parts via t(),
+  array tidak berisi teks hardcode, hanya referensi key)
+- 9 dari 10 soal pakai diagram CoordPlane (semua kecuali Q10) —
+  komponen ini TIDAK perlu diterjemahkan
+- Berdasarkan investigasi awal, halaman ini TIDAK punya kasus \text{}
+  bahasa Indonesia — tapi tetap WAJIB cek ulang menyeluruh (grep
+  "\\text{" di file) untuk memastikan tidak ada yang terlewat,
+  seperti pengalaman di topik-topik sebelumnya
+- Ada pembagian "Bagian 1 / Bagian 2" secara komentar di kode
+  (comment, bukan heading yang di-render) — kalau memang tidak
+  di-render sebagai teks UI, tidak perlu diterjemahkan; kalau
+  ternyata ada elemen heading tersembunyi yang dirender, terjemahkan
+
+1. Terjemahkan SEMUA teks: instruksi umum (kalau ada), teks 10 soal
+   (title, content, parts[].text)
+2. Kalau ditemukan kasus \text{} yang belum terdeteksi di investigasi
+   awal, tangani dengan pola danWord/textKey yang sudah terbukti di
+   UnsurUnsurPage.tsx
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.koordinatCartesius.posisiRelatifTitikAcuan.*
+5. JANGAN sentuh sub-halaman lain, halaman index, file orphan, atau
+   CoordPlane.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q10)
+- Jalankan grep "\\text{" untuk konfirmasi memang 0 kasus (atau
+  laporkan kalau ternyata ada yang ditemukan dan bagaimana ditangani)
+- Konfirmasi eksplisit: SEMUA 10 soal sudah diterjemahkan, diagram
+  CoordPlane tidak disentuh

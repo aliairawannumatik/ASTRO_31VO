@@ -4178,6 +4178,85 @@
           "title": "Soal ANBK — Evaluasi Pernyataan",
           "content": "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang koordinat:"
         }
+      },
+      "posisiRelatifTitikAcuan": {
+        "pageTitle": "POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN DAN TERHADAP SUATU GARIS",
+        "badgeText": "10 Soal · Posisi Relatif Titik & Garis",
+        "refBox1Title": "📌 Posisi Relatif terhadap Titik Acuan",
+        "refBox1Body": "Posisi titik B(x₂,y₂) terhadap titik acuan A(x₁,y₁): Δx = x₂−x₁ (positif = kanan, negatif = kiri) · Δy = y₂−y₁ (positif = atas, negatif = bawah)",
+        "refBox2Title": "📌 Posisi Relatif terhadap Suatu Garis",
+        "rule1": "Di atas garis y = k",
+        "rule2": "Di bawah garis y = k",
+        "rule3": "Di kanan garis x = k",
+        "rule4": "Di kiri garis x = k",
+        "rule5": "Di atas garis y = mx + c",
+        "rule6": "Di bawah garis y = mx + c",
+        "q1": {
+          "title": "Posisi Titik terhadap Titik Acuan O(0,0)",
+          "a": "Nyatakan posisi titik A terhadap titik acuan O(0,0)! (berapa satuan ke kanan/kiri dan ke atas/bawah)",
+          "b": "Nyatakan posisi titik B terhadap titik acuan O(0,0)!",
+          "c": "Jika titik acuan O bergeser ke (1,1), bagaimana posisi relatif A terhadap titik acuan baru itu?"
+        },
+        "q2": {
+          "title": "Posisi Titik P terhadap Titik Acuan A",
+          "a": "Titik A(2,1) sebagai titik acuan. Nyatakan posisi titik P terhadap A!",
+          "b": "Nyatakan posisi titik Q terhadap A(2,1)!",
+          "c": "Nyatakan posisi titik R terhadap A(2,1)!",
+          "d": "Titik mana yang berada tepat di atas titik A? (sebutkan alasannya)"
+        },
+        "q3": {
+          "title": "Posisi Relatif pada Peta Sederhana",
+          "content": "Sebuah peta menggunakan sistem koordinat. Perpustakaan berada di titik P(3, 5), kantin di K(7, 2), kelas di C(1, 8).",
+          "a": "Dengan perpustakaan P(3,5) sebagai acuan, nyatakan posisi kantin K(7,2) terhadap P!",
+          "b": "Dengan perpustakaan P(3,5) sebagai acuan, nyatakan posisi kelas C(1,8) terhadap P!",
+          "c": "Jika kamu berada di kantin K(7,2) dan ingin ke kelas C(1,8), berapa satuan kamu harus bergerak dan ke arah mana?"
+        },
+        "q4": {
+          "title": "Posisi Relatif dalam Sistem Navigasi Sederhana",
+          "content": "Sebuah kapal berada di posisi K(2, 3). Mercusuar A berada di (5, 7), mercusuar B di (−1, 6), pulau C di (4, −2).",
+          "a": "Dengan posisi kapal K(2,3) sebagai acuan, nyatakan posisi mercusuar A!",
+          "b": "Nyatakan posisi mercusuar B terhadap kapal K(2,3)!",
+          "c": "Nyatakan posisi pulau C terhadap kapal K(2,3) dan tentukan ke arah mana kapal harus bergerak untuk menuju pulau C!"
+        },
+        "q5": {
+          "title": "Posisi Titik terhadap Sumbu-x",
+          "a": "Titik mana yang berada DI ATAS sumbu-x?",
+          "b": "Titik mana yang berada DI BAWAH sumbu-x?",
+          "c": "Titik mana yang berada PADA sumbu-x?",
+          "d": "Apa syarat koordinat untuk titik di atas sumbu-x?"
+        },
+        "q6": {
+          "title": "Posisi Titik terhadap Sumbu-y",
+          "a": "Titik mana yang berada di sebelah KANAN sumbu-y?",
+          "b": "Titik mana yang berada di sebelah KIRI sumbu-y?",
+          "c": "Titik mana yang berada PADA sumbu-y?",
+          "d": "Apa syarat koordinat untuk titik di sebelah kiri sumbu-y?"
+        },
+        "q7": {
+          "title": "Posisi terhadap Garis y = 3",
+          "a": "Titik mana yang berada di ATAS garis y = 3?",
+          "b": "Titik mana yang berada di BAWAH garis y = 3?",
+          "c": "Titik mana yang berada PADA garis y = 3?",
+          "d": "Apa syarat ordinat untuk titik di atas garis y = 3?"
+        },
+        "q8": {
+          "title": "Posisi terhadap Garis x = −2",
+          "a": "Titik mana yang berada di KANAN garis x = −2?",
+          "b": "Titik mana yang berada di KIRI garis x = −2?",
+          "c": "Titik mana yang berada PADA garis x = −2?",
+          "d": "Apa syarat absis untuk titik di kanan garis x = −2?"
+        },
+        "q9": {
+          "title": "Titik pada Garis — Persamaan Garis Lurus",
+          "lineLabel": "Garis:",
+          "a": "Periksa apakah titik A(0, 2) terletak pada garis y = 2x + 2.",
+          "b": "Periksa apakah titik B(1, 4) terletak pada garis y = 2x + 2.",
+          "c": "Periksa apakah titik C(2, 5) terletak pada garis y = 2x + 2."
+        },
+        "q10": {
+          "title": "Apakah Titik Memenuhi Persamaan Garis?",
+          "content": "Periksa apakah setiap titik berikut terletak pada garis y = 3x − 1:"
+        }
       }
     }
   },
