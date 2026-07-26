@@ -3699,6 +3699,98 @@
           "itemB": "(b) Berapa warga yang tidak makan satu pun buah?",
           "itemC": "(c) Berapa warga yang hanya makan apel saja?"
         }
+      },
+      "menyatakanHimpunan": {
+        "sectionA": "Bagian A · Cara Menyatakan Himpunan",
+        "sectionB": "Bagian B · Himpunan Kosong & Himpunan Semesta",
+        "tipTitle": "Cara Menyatakan Himpunan",
+        "tipM1": "1. Mendaftar Anggota",
+        "tipM2": "2. Notasi Pembentuk",
+        "tipM3": "3. Kata-kata",
+        "tipM3Desc": "A = himpunan bilangan asli 1–5",
+        "tipOr": "atau",
+        "tipEmpty": "= Himpunan kosong (tidak ada anggota)",
+        "q1": {
+          "badge": "3 Cara",
+          "introPre": "Nyatakan himpunan",
+          "introMid": "= bilangan bulat antara",
+          "introMid2": "dan",
+          "introMid3": "dengan",
+          "bold": "tiga cara",
+          "introEnd": "(mendaftar, notasi pembentuk, dan kata-kata)!"
+        },
+        "q2": {
+          "badge": "Mendaftar",
+          "instrPre": "Ubah himpunan berikut ke bentuk",
+          "bold": "daftar anggota",
+          "instrEnd": "!",
+          "textA": "adalah bilangan prima antara 10 dan 30",
+          "textB": "adalah kuadrat sempurna",
+          "textC": "habis dibagi 6"
+        },
+        "q3": {
+          "badge": "Notasi Pembentuk",
+          "instrPre": "Ubah himpunan berikut ke bentuk",
+          "bold": "notasi pembentuk himpunan",
+          "instrEnd": "!"
+        },
+        "q4": {
+          "badge": "UN Style",
+          "instrPre": "Himpunan",
+          "instrMid": "Pernyataan berikut yang",
+          "bold": "benar",
+          "instrEnd": "adalah …"
+        },
+        "q5": {
+          "badge": "Kata-kata",
+          "instrPre": "Nyatakan himpunan",
+          "instrMid": "dengan notasi pembentuk himpunan dan tentukan",
+          "instrEnd": "!",
+          "days": "Senin, Selasa, Rabu, Kamis, Jumat, Sabtu, Minggu"
+        },
+        "q6": {
+          "badge": "Himpunan Kosong",
+          "instrPre": "Tentukan manakah dari berikut yang merupakan",
+          "bold": "himpunan kosong",
+          "instrEnd": "!",
+          "textA": "bilangan prima genap yang lebih dari 5",
+          "textD": "adalah bulan yang memiliki 32 hari"
+        },
+        "q7": {
+          "badge": "Semesta",
+          "instruction": "Tuliskan satu contoh himpunan semesta yang tepat untuk himpunan berikut!",
+          "itemBColors": "merah, kuning, biru",
+          "itemCAnimals": "anjing, kucing, sapi, kambing"
+        },
+        "q8": {
+          "badge": "ANBK",
+          "instrPre": "Diketahui semesta",
+          "instrMid": "dan himpunan",
+          "instrMid2": "Tentukan komplemen dari",
+          "instrMid3": "terhadap",
+          "instrEnd": "!"
+        },
+        "q9": {
+          "badge": "Benar/Salah",
+          "instrPre": "Tentukan apakah pernyataan berikut",
+          "boldA": "BENAR",
+          "instrMid": "atau",
+          "boldB": "SALAH",
+          "instrEnd": "!",
+          "itemAPre": "Himpunan kosong adalah",
+          "itemC": "Himpunan semesta adalah himpunan yang memuat semua himpunan yang sedang dibicarakan",
+          "itemDPost": "adalah himpunan kosong"
+        },
+        "q10": {
+          "badge": "TKA",
+          "pre": "Dari semesta",
+          "diketahui": ", diketahui",
+          "aDef": "= himpunan bilangan prima,",
+          "dan": "dan",
+          "bDef": "= himpunan kelipatan 3.",
+          "post": "Tentukan:",
+          "komplemen": "komplemen"
+        }
       }
     }
   },

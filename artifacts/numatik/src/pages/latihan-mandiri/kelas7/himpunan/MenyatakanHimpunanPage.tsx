@@ -50,12 +50,25 @@ const EmptySetDiagram = () => (
 const MenyatakanHimpunanLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.himpunan.menyatakanHimpunan";
+
+  /* \text{} interpolation vars — computed once, used inside InlineMath template literals */
+  const q2textA  = t(`${p}.q2.textA`);
+  const q2textB  = t(`${p}.q2.textB`);
+  const q2textC  = t(`${p}.q2.textC`);
+  const q5days   = t(`${p}.q5.days`);
+  const q6textA  = t(`${p}.q6.textA`);
+  const q6textD  = t(`${p}.q6.textD`);
+  const q7colors  = t(`${p}.q7.itemBColors`);
+  const q7animals = t(`${p}.q7.itemCAnimals`);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
 
+        {/* ── header (Tahap 2) ── */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
             style={{ background: "rgba(167,139,250,0.15)", border: "1px solid rgba(167,139,250,0.4)" }}>
@@ -72,53 +85,60 @@ const MenyatakanHimpunanLatihanPage = () => {
           </div>
         </div>
 
+        {/* ── tip box ── */}
         <div className="rounded-xl bg-violet-500/10 border border-violet-500/30 px-5 py-4 mb-6 text-sm text-white/80 font-body">
-          <p className="font-bold text-violet-300 mb-2">Cara Menyatakan Himpunan</p>
+          <p className="font-bold text-violet-300 mb-2">{t(`${p}.tipTitle`)}</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-white/70">
             <div className="bg-white/5 rounded-lg p-3">
-              <p className="font-semibold text-violet-200 mb-1">1. Mendaftar Anggota</p>
+              <p className="font-semibold text-violet-200 mb-1">{t(`${p}.tipM1`)}</p>
               <InlineMath math="A = \{1, 2, 3, 4, 5\}" />
             </div>
             <div className="bg-white/5 rounded-lg p-3">
-              <p className="font-semibold text-violet-200 mb-1">2. Notasi Pembentuk</p>
+              <p className="font-semibold text-violet-200 mb-1">{t(`${p}.tipM2`)}</p>
               <InlineMath math="A = \{x \mid 1 \leq x \leq 5\}" />
             </div>
             <div className="bg-white/5 rounded-lg p-3">
-              <p className="font-semibold text-violet-200 mb-1">3. Kata-kata</p>
-              <p>A = himpunan bilangan asli 1–5</p>
+              <p className="font-semibold text-violet-200 mb-1">{t(`${p}.tipM3`)}</p>
+              <p>{t(`${p}.tipM3Desc`)}</p>
             </div>
           </div>
           <div className="mt-3 flex gap-4 text-xs text-white/70">
-            <span><InlineMath math="\emptyset" /> atau <InlineMath math="\{\}" /> = Himpunan kosong (tidak ada anggota)</span>
+            <span>
+              <InlineMath math="\emptyset" /> {t(`${p}.tipOr`)} <InlineMath math="\{\}" /> {t(`${p}.tipEmpty`)}
+            </span>
           </div>
         </div>
 
         <EmptySetDiagram />
 
         <div className="space-y-5 animate-slide-up">
-          <Section title="Bagian A · Cara Menyatakan Himpunan" color="#a78bfa">
+          {/* ══ BAGIAN A ══ */}
+          <Section title={t(`${p}.sectionA`)} color="#a78bfa">
 
-            <Q no={1} badge="3 Cara" badgeColor="#a78bfa">
+            {/* Q1 */}
+            <Q no={1} badge={t(`${p}.q1.badge`)} badgeColor="#a78bfa">
               <p>
-                Nyatakan himpunan <InlineMath math="A" /> = bilangan bulat antara <InlineMath math="-3" /> dan <InlineMath math="4" />
-                dengan <strong className="text-violet-300">tiga cara</strong> (mendaftar, notasi pembentuk, dan kata-kata)!
+                {t(`${p}.q1.introPre`)} <InlineMath math="A" /> {t(`${p}.q1.introMid`)} <InlineMath math="-3" /> {t(`${p}.q1.introMid2`)} <InlineMath math="4" />{" "}
+                {t(`${p}.q1.introMid3`)} <strong className="text-violet-300">{t(`${p}.q1.bold`)}</strong> {t(`${p}.q1.introEnd`)}
               </p>
             </Q>
 
-            <Q no={2} badge="Mendaftar" badgeColor="#a78bfa">
+            {/* Q2 */}
+            <Q no={2} badge={t(`${p}.q2.badge`)} badgeColor="#a78bfa">
               <p>
-                Ubah himpunan berikut ke bentuk <strong className="text-violet-300">daftar anggota</strong>!
+                {t(`${p}.q2.instrPre`)} <strong className="text-violet-300">{t(`${p}.q2.bold`)}</strong>{t(`${p}.q2.instrEnd`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) <InlineMath math="P = \{x \mid x \text{ adalah bilangan prima antara 10 dan 30}\}" /></li>
-                <li>(b) <InlineMath math="Q = \{x \mid x \text{ adalah kuadrat sempurna}, x \leq 50\}" /></li>
-                <li>(c) <InlineMath math="R = \{x \mid x \text{ habis dibagi 6}, 6 \leq x \leq 36\}" /></li>
+                <li>(a) <InlineMath math={`P = \\{x \\mid x \\text{ ${q2textA}}\\}`} /></li>
+                <li>(b) <InlineMath math={`Q = \\{x \\mid x \\text{ ${q2textB}},\\, x \\leq 50\\}`} /></li>
+                <li>(c) <InlineMath math={`R = \\{x \\mid x \\text{ ${q2textC}},\\, 6 \\leq x \\leq 36\\}`} /></li>
               </ul>
             </Q>
 
-            <Q no={3} badge="Notasi Pembentuk" badgeColor="#a78bfa">
+            {/* Q3 */}
+            <Q no={3} badge={t(`${p}.q3.badge`)} badgeColor="#a78bfa">
               <p>
-                Ubah himpunan berikut ke bentuk <strong className="text-violet-300">notasi pembentuk himpunan</strong>!
+                {t(`${p}.q3.instrPre`)} <strong className="text-violet-300">{t(`${p}.q3.bold`)}</strong>{t(`${p}.q3.instrEnd`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="A = \{5, 10, 15, 20, 25\}" /></li>
@@ -127,10 +147,11 @@ const MenyatakanHimpunanLatihanPage = () => {
               </ul>
             </Q>
 
-            <Q no={4} badge="UN Style" badgeColor="#a78bfa">
+            {/* Q4 — BlockMath TIDAK disentuh */}
+            <Q no={4} badge={t(`${p}.q4.badge`)} badgeColor="#a78bfa">
               <p>
-                Himpunan <InlineMath math="K = \{x \mid 2 \leq x \leq 8,\; x \in \mathbb{Z}\}" />.
-                Pernyataan berikut yang <strong className="text-green-300">benar</strong> adalah …
+                {t(`${p}.q4.instrPre`)} <InlineMath math="K = \{x \mid 2 \leq x \leq 8,\; x \in \mathbb{Z}\}" />.{" "}
+                {t(`${p}.q4.instrMid`)} <strong className="text-green-300">{t(`${p}.q4.bold`)}</strong> {t(`${p}.q4.instrEnd`)}
               </p>
               <BlockMath math={`\\begin{array}{ll}
 (A)\\; n(K) = 6 & (B)\\; n(K) = 7 \\\\
@@ -138,72 +159,78 @@ const MenyatakanHimpunanLatihanPage = () => {
 \\end{array}`} />
             </Q>
 
-            <Q no={5} badge="Kata-kata" badgeColor="#a78bfa">
+            {/* Q5 */}
+            <Q no={5} badge={t(`${p}.q5.badge`)} badgeColor="#a78bfa">
               <p>
-                Nyatakan himpunan <InlineMath math="S = \{Senin, Selasa, Rabu, Kamis, Jumat, Sabtu, Minggu\}" /> dengan
-                notasi pembentuk himpunan dan tentukan <InlineMath math="n(S)" />!
+                {t(`${p}.q5.instrPre`)} <InlineMath math={`S = \\{${q5days}\\}`} /> {t(`${p}.q5.instrMid`)} <InlineMath math="n(S)" />{t(`${p}.q5.instrEnd`)}
               </p>
             </Q>
           </Section>
 
-          <Section title="Bagian B · Himpunan Kosong & Himpunan Semesta" color="#4ade80">
+          {/* ══ BAGIAN B ══ */}
+          <Section title={t(`${p}.sectionB`)} color="#4ade80">
 
-            <Q no={6} badge="Himpunan Kosong" badgeColor="#4ade80">
+            {/* Q6 */}
+            <Q no={6} badge={t(`${p}.q6.badge`)} badgeColor="#4ade80">
               <p>
-                Tentukan manakah dari berikut yang merupakan <strong className="text-green-300">himpunan kosong</strong>!
+                {t(`${p}.q6.instrPre`)} <strong className="text-green-300">{t(`${p}.q6.bold`)}</strong>{t(`${p}.q6.instrEnd`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) <InlineMath math="A = \{x \mid x \text{ bilangan prima genap yang lebih dari 5}\}" /></li>
+                <li>(a) <InlineMath math={`A = \\{x \\mid x \\text{ ${q6textA}}\\}`} /></li>
                 <li>(b) <InlineMath math="B = \{x \mid x^2 = -4,\; x \in \mathbb{R}\}" /></li>
                 <li>(c) <InlineMath math="C = \{x \mid x + 5 = 5,\; x \in \mathbb{Z}\}" /></li>
-                <li>(d) <InlineMath math="D = \{x \mid x \text{ adalah bulan yang memiliki 32 hari}\}" /></li>
+                <li>(d) <InlineMath math={`D = \\{x \\mid x \\text{ ${q6textD}}\\}`} /></li>
               </ul>
             </Q>
 
-            <Q no={7} badge="Semesta" badgeColor="#4ade80">
-              <p>
-                Tuliskan satu contoh himpunan semesta yang tepat untuk himpunan berikut!
-              </p>
+            {/* Q7 */}
+            <Q no={7} badge={t(`${p}.q7.badge`)} badgeColor="#4ade80">
+              <p>{t(`${p}.q7.instruction`)}</p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="A = \{2, 4, 6, 8, 10\}" /></li>
-                <li>(b) <InlineMath math="B = \{merah, kuning, biru\}" /></li>
-                <li>(c) <InlineMath math="C = \{anjing, kucing, sapi, kambing\}" /></li>
+                <li>(b) <InlineMath math={`B = \\{${q7colors}\\}`} /></li>
+                <li>(c) <InlineMath math={`C = \\{${q7animals}\\}`} /></li>
               </ul>
             </Q>
 
-            <Q no={8} badge="ANBK" badgeColor="#4ade80">
+            {/* Q8 */}
+            <Q no={8} badge={t(`${p}.q8.badge`)} badgeColor="#4ade80">
               <p>
-                Diketahui semesta <InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" /> dan
-                himpunan <InlineMath math="A = \{1, 3, 5, 7, 9\}" />.
-                Tentukan komplemen dari <InlineMath math="A" /> terhadap <InlineMath math="S" />!
+                {t(`${p}.q8.instrPre`)} <InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />{" "}
+                {t(`${p}.q8.instrMid`)} <InlineMath math="A = \{1, 3, 5, 7, 9\}" />.{" "}
+                {t(`${p}.q8.instrMid2`)} <InlineMath math="A" /> {t(`${p}.q8.instrMid3`)} <InlineMath math="S" />{t(`${p}.q8.instrEnd`)}
               </p>
             </Q>
 
-            <Q no={9} badge="Benar/Salah" badgeColor="#4ade80">
-              <p>Tentukan apakah pernyataan berikut <strong className="text-green-300">BENAR</strong> atau <strong className="text-red-400">SALAH</strong>!</p>
+            {/* Q9 */}
+            <Q no={9} badge={t(`${p}.q9.badge`)} badgeColor="#4ade80">
+              <p>
+                {t(`${p}.q9.instrPre`)} <strong className="text-green-300">{t(`${p}.q9.boldA`)}</strong> {t(`${p}.q9.instrMid`)} <strong className="text-red-400">{t(`${p}.q9.boldB`)}</strong>{t(`${p}.q9.instrEnd`)}
+              </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) Himpunan kosong adalah <InlineMath math="\emptyset = \{0\}" /></li>
+                <li>(a) {t(`${p}.q9.itemAPre`)} <InlineMath math="\emptyset = \{0\}" /></li>
                 <li>(b) <InlineMath math="n(\emptyset) = 0" /></li>
-                <li>(c) Himpunan semesta adalah himpunan yang memuat semua himpunan yang sedang dibicarakan</li>
-                <li>(d) <InlineMath math="\{0\}" /> adalah himpunan kosong</li>
+                <li>(c) {t(`${p}.q9.itemC`)}</li>
+                <li>(d) <InlineMath math="\{0\}" /> {t(`${p}.q9.itemDPost`)}</li>
               </ul>
             </Q>
 
-            <Q no={10} badge="TKA" badgeColor="#4ade80">
+            {/* Q10 */}
+            <Q no={10} badge={t(`${p}.q10.badge`)} badgeColor="#4ade80">
               <p>
-                Dari semesta <InlineMath math="S = \{x \mid x \leq 15,\; x \in \mathbb{N}\}" />,
-                diketahui <InlineMath math="A" /> = himpunan bilangan prima,
-                dan <InlineMath math="B" /> = himpunan kelipatan 3.
+                {t(`${p}.q10.pre`)} <InlineMath math="S = \{x \mid x \leq 15,\; x \in \mathbb{N}\}" />{t(`${p}.q10.diketahui`)} <InlineMath math="A" /> {t(`${p}.q10.aDef`)}{" "}
+                {t(`${p}.q10.dan`)} <InlineMath math="B" /> {t(`${p}.q10.bDef`)}
               </p>
               <p className="mt-1">
-                Tentukan: (a) <InlineMath math="A" />,&nbsp;
+                {t(`${p}.q10.post`)} (a) <InlineMath math="A" />,&nbsp;
                 (b) <InlineMath math="B" />,&nbsp;
-                (c) <InlineMath math="A^c" /> (komplemen <InlineMath math="A" />),&nbsp;
+                (c) <InlineMath math="A^c" /> ({t(`${p}.q10.komplemen`)} <InlineMath math="A" />),&nbsp;
                 (d) <InlineMath math="n(A^c)" />
               </p>
             </Q>
           </Section>
 
+          {/* ══ BAGIAN C — tidak disentuh (Tahap 2) ══ */}
           <Section title="Bagian C · Aplikasi & Pemecahan Masalah" color="#fb923c">
 
             <Q no={11} badge="Kontekstual" badgeColor="#fb923c">

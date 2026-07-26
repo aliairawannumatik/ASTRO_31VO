@@ -3699,6 +3699,98 @@
           "itemB": "(b) 果物を1種類も食べない住民は何人か？",
           "itemC": "(c) リンゴだけを食べる住民は何人か？"
         }
+      },
+      "menyatakanHimpunan": {
+        "sectionA": "A部 · 集合の表し方",
+        "sectionB": "B部 · 空集合と全体集合",
+        "tipTitle": "集合の表し方",
+        "tipM1": "1. 要素を列挙する",
+        "tipM2": "2. 集合の内包表記",
+        "tipM3": "3. 言葉で表す",
+        "tipM3Desc": "A = 1から5の自然数の集合",
+        "tipOr": "または",
+        "tipEmpty": "= 空集合（要素なし）",
+        "q1": {
+          "badge": "3つの方法",
+          "introPre": "集合",
+          "introMid": "（",
+          "introMid2": "から",
+          "introMid3": "の間の整数）を",
+          "bold": "3つの方法",
+          "introEnd": "（列挙、内包表記、言葉）で表しなさい！"
+        },
+        "q2": {
+          "badge": "列挙形式",
+          "instrPre": "次の集合を",
+          "bold": "列挙形式",
+          "instrEnd": "に変換しなさい！",
+          "textA": "10から30の間の素数",
+          "textB": "完全平方数",
+          "textC": "6で割り切れる数"
+        },
+        "q3": {
+          "badge": "内包表記",
+          "instrPre": "次の集合を",
+          "bold": "集合の内包表記",
+          "instrEnd": "に変換しなさい！"
+        },
+        "q4": {
+          "badge": "試験形式",
+          "instrPre": "集合",
+          "instrMid": "について、次のうち",
+          "bold": "正しい",
+          "instrEnd": "ものはどれですか？"
+        },
+        "q5": {
+          "badge": "言葉で表す",
+          "instrPre": "集合",
+          "instrMid": "を内包表記で表し、",
+          "instrEnd": "を求めなさい！",
+          "days": "月曜日, 火曜日, 水曜日, 木曜日, 金曜日, 土曜日, 日曜日"
+        },
+        "q6": {
+          "badge": "空集合",
+          "instrPre": "次のうち",
+          "bold": "空集合",
+          "instrEnd": "はどれか答えなさい！",
+          "textA": "5より大きい偶数の素数",
+          "textD": "32日ある月"
+        },
+        "q7": {
+          "badge": "全体集合",
+          "instruction": "次の各集合に対して、適切な全体集合の例を1つ書きなさい！",
+          "itemBColors": "赤, 黄色, 青",
+          "itemCAnimals": "犬, 猫, 牛, ヤギ"
+        },
+        "q8": {
+          "badge": "ANBK",
+          "instrPre": "全体集合",
+          "instrMid": "において、集合",
+          "instrMid2": "が与えられているとき、",
+          "instrMid3": "の",
+          "instrEnd": "に関する補集合を求めなさい！"
+        },
+        "q9": {
+          "badge": "正誤判定",
+          "instrPre": "次の文が",
+          "boldA": "正しい",
+          "instrMid": "か",
+          "boldB": "間違い",
+          "instrEnd": "かを答えなさい！",
+          "itemAPre": "空集合は",
+          "itemC": "全体集合とは、現在話し合われているすべての集合を含む集合である",
+          "itemDPost": "は空集合である"
+        },
+        "q10": {
+          "badge": "TKA",
+          "pre": "全体集合",
+          "diketahui": "において、",
+          "aDef": "= 素数の集合、",
+          "dan": "また",
+          "bDef": "= 3の倍数の集合。",
+          "post": "次を求めなさい：",
+          "komplemen": "補集合"
+        }
       }
     }
   },

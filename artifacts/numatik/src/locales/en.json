@@ -3699,6 +3699,98 @@
           "itemB": "(b) How many residents eat no fruit at all?",
           "itemC": "(c) How many residents eat apples only?"
         }
+      },
+      "menyatakanHimpunan": {
+        "sectionA": "Part A · Ways to Express a Set",
+        "sectionB": "Part B · Empty Set & Universal Set",
+        "tipTitle": "Ways to Express a Set",
+        "tipM1": "1. Roster Method",
+        "tipM2": "2. Set-Builder Notation",
+        "tipM3": "3. Words",
+        "tipM3Desc": "A = the set of natural numbers 1–5",
+        "tipOr": "or",
+        "tipEmpty": "= Empty set (no members)",
+        "q1": {
+          "badge": "3 Ways",
+          "introPre": "Express set",
+          "introMid": "= integers between",
+          "introMid2": "and",
+          "introMid3": "in",
+          "bold": "three ways",
+          "introEnd": "(roster, set-builder notation, and words)!"
+        },
+        "q2": {
+          "badge": "Roster",
+          "instrPre": "Convert the following sets to",
+          "bold": "roster form",
+          "instrEnd": "!",
+          "textA": "is a prime number between 10 and 30",
+          "textB": "is a perfect square",
+          "textC": "is divisible by 6"
+        },
+        "q3": {
+          "badge": "Set-Builder",
+          "instrPre": "Convert the following sets to",
+          "bold": "set-builder notation",
+          "instrEnd": "!"
+        },
+        "q4": {
+          "badge": "Exam Style",
+          "instrPre": "Set",
+          "instrMid": "Which of the following statements is",
+          "bold": "true",
+          "instrEnd": "?"
+        },
+        "q5": {
+          "badge": "Words",
+          "instrPre": "Express set",
+          "instrMid": "using set-builder notation and find",
+          "instrEnd": "!",
+          "days": "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday"
+        },
+        "q6": {
+          "badge": "Empty Set",
+          "instrPre": "Identify which of the following is an",
+          "bold": "empty set",
+          "instrEnd": "!",
+          "textA": "even prime number greater than 5",
+          "textD": "is a month with 32 days"
+        },
+        "q7": {
+          "badge": "Universal Set",
+          "instruction": "Write one appropriate universal set for each of the following sets!",
+          "itemBColors": "red, yellow, blue",
+          "itemCAnimals": "dog, cat, cow, goat"
+        },
+        "q8": {
+          "badge": "ANBK",
+          "instrPre": "Given the universal set",
+          "instrMid": "and the set",
+          "instrMid2": "Find the complement of",
+          "instrMid3": "with respect to",
+          "instrEnd": "!"
+        },
+        "q9": {
+          "badge": "True/False",
+          "instrPre": "Determine whether each statement is",
+          "boldA": "TRUE",
+          "instrMid": "or",
+          "boldB": "FALSE",
+          "instrEnd": "!",
+          "itemAPre": "The empty set is",
+          "itemC": "The universal set is the set that contains all sets currently under discussion",
+          "itemDPost": "is an empty set"
+        },
+        "q10": {
+          "badge": "TKA",
+          "pre": "Given the universal set",
+          "diketahui": ", let",
+          "aDef": "= the set of prime numbers,",
+          "dan": "and",
+          "bDef": "= the set of multiples of 3.",
+          "post": "Find:",
+          "komplemen": "complement of"
+        }
       }
     }
   },

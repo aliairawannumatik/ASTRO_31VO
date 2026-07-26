@@ -1,0 +1,62 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Himpunan" — index,
+PengertianKeanggotaanPage.tsx, DiagramVennPage.tsx,
+HimpunanBagianPage.tsx, OperasiHimpunanPage.tsx sudah selesai. Ini
+SUB-HALAMAN TERAKHIR yang tersisa: MenyatakanHimpunanPage.tsx —
+BELUM PERNAH DIKERJAKAN SAMA SEKALI (hanya pakai
+t('practice.breadcrumb'), semua konten soal masih hardcode Indonesia).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- EmptySetDiagram (SVG): teks di dalamnya ("Himpunan Kosong",
+  "Himpunan Semesta", "S = {bilangan asli ≤ 10}") TIDAK diterjemahkan
+  sama sekali — biarkan hardcode
+- Q4: BlockMath \begin{array} pilihan A-D — PURE MATH, JANGAN disentuh
+
+TUGAS SEKARANG — TAHAP 1 dari 2:
+Fokus HANYA ke Bagian A dan Bagian B (Q1-10) di
+MenyatakanHimpunanPage.tsx. JANGAN kerjakan Bagian C (Q11-15), h1
+title, badge jumlah soal, atau back button dulu — itu untuk Tahap 2.
+
+KONTEKS KHUSUS — 5 kasus \text{} bahasa Indonesia di rentang Q1-10
+(WAJIB dipecah dengan pola interpolasi variabel — hitung t() di JS
+dulu, interpolasikan ke template literal, persis pola yang sudah
+terbukti di sub-halaman sebelumnya seperti tip box OperasiHimpunan):
+
+- Q2(a): P = \{x \mid x \text{ adalah bilangan prima antara 10 dan 30}\}
+- Q2(b): Q = \{x \mid x \text{ adalah kuadrat sempurna}, x \leq 50\}
+- Q2(c): R = \{x \mid x \text{ habis dibagi 6}, 6 \leq x \leq 36\}
+- Q6(a): A = \{x \mid x \text{ bilangan prima genap yang lebih dari 5}\}
+- Q6(d): D = \{x \mid x \text{ adalah bulan yang memiliki 32 hari}\}
+
+Catatan tambahan:
+- Q4: BlockMath pilihan A-D adalah pure math, JANGAN disentuh
+- Sub-pertanyaan (a)/(b)/(c)/(d) — pecah jadi key terpisah per item
+- Kalau ada \text{} lain di Q1-10 yang belum terdeteksi di investigasi
+  awal, tangani dengan pola interpolasi yang sama
+
+1. Terjemahkan SEMUA teks Bagian A (Q1-5) dan Bagian B (Q6-10):
+   instruksi, teks soal, semua sub-pertanyaan sebagai key terpisah
+2. Tangani 5 kasus \text{} (Q2a/b/c, Q6a, Q6d) dengan pola interpolasi
+3. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.himpunan.menyatakanHimpunan.* — HANYA untuk Q1-Q10
+   dan sectionA/sectionB
+4. JANGAN sentuh Bagian C (Q11-15), h1 title, badge jumlah soal, back
+   button, EmptySetDiagram SVG, atau sub-halaman lain
+
+VERIFIKASI:
+- Laporkan validasi teknis (esbuild/grep manual kalau tsc timeout,
+  skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q10)
+- Konfirmasi eksplisit: kelima \text{} (Q2a/b/c, Q6a, Q6d) ditangani
+  dengan pola interpolasi yang benar (tunjukkan contoh kode), Q4
+  BlockMath tidak disentuh, EmptySetDiagram SVG tidak disentuh
