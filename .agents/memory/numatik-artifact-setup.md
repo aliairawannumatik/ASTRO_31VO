@@ -127,14 +127,13 @@ Replace `\text{}` with `\mathrm{}` for units; use interpolated `formulaVar` key 
 ## Perbandingan topic — FULLY TRILINGUAL (July 2026)
 All 5 sub-pages + index complete: perbandinganUmum, perbandinganBertingkat, perbandinganSenilai, perbandinganSkala, perbandinganCampuran. All locale keys live under `practice.perbandingan.<subKey>.*` in all 3 files. PerbandinganCampuranPage is the simplest pattern: pure t() only, no InlineMath/Trans/isDark.
 
-## MenyatakanHimpunanPage trilingual progress (Tahap 1 DONE)
-- Bagian A (Q1–5) + Bagian B (Q6–10) + tip box fully trilingual (id/en/ja) as of July 2026.
-- Locale key prefix: `practice.himpunan.menyatakanHimpunan`. **70 leaf keys per locale.**
-- 5 \text{} cases: q2textA/q2textB/q2textC (Q2 items a/b/c) + q6textA/q6textD (Q6 items a/d) — all use interpolation vars declared at top of component.
-- Q5 days: `q5days` var → `S = \\{${q5days}\\}` (day names differ by lang).
-- Q7 items (b)(c): `q7colors`/`q7animals` → interpolated directly into math string (no \text{} wrapper).
-- BlockMath (Q4) and EmptySetDiagram SVG texts left untouched (hardcoded ID).
-- Bagian C (Q11–15), h1, badge count, back button still hardcoded — Tahap 2 task #2.
+## MenyatakanHimpunanPage — LENGKAP (Tahap 1 + Tahap 2, July 2026)
+- **100% trilingual** (id/en/ja). Locale key prefix: `practice.himpunan.menyatakanHimpunan`. **94 leaf keys per locale.**
+- Tahap 1 (70 keys): tip box + sectionA/B + Q1–10. 5 \text{} interpolation vars (q2textA/B/C, q6textA/D).
+- Tahap 2 (24 keys): h1 title, grade, topicName, backBtn, sectionC + Q11–15. 4 new \text{} vars (q12textA/B, q15textBulat, q15textGanjil).
+- All 9 interpolation vars declared at top of component; template literals for \text{} content.
+- BlockMath (Q4) and EmptySetDiagram SVG texts: untouched/hardcoded by design.
+- **Topik Himpunan Kelas 7 LENGKAP** (index + 5 sub-halaman = 74 soal, semua trilingual).
 
 ## Himpunan sub-page trilingual pattern (PengertianKeanggotaanPage)
 - **Kelas 7 Himpunan — PengertianKeanggotaanPage.tsx (sub-page 1)**: Fully trilingual (id/en/ja) as of July 2026. Locale key prefix: `practice.himpunan.pengertianKeanggotaan`. 15 essay questions, 3 sections (A/B/C). Pattern: `const p = "practice.himpunan.pengertianKeanggotaan"`. Q2 BlockMath pure math — left untouched. Q5 `\text{}` interpolation: `const q5desc = t(\`\${p}.q5.textDesc\`)` then used in template literal `\`K = \\{x \\mid x \\text{ \${q5desc}}\\}\``. Trans used for Q1.instruction (strong=blue-300) and Q13.instruction (strong=green-300). Sub-question items (a)/(b)/(c)/(d) each have separate locale keys. 66 t() calls, 79 keys per locale.

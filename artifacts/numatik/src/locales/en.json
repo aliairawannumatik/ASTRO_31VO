@@ -3790,6 +3790,40 @@
           "bDef": "= the set of multiples of 3.",
           "post": "Find:",
           "komplemen": "complement of"
+        },
+        "title": "EXPRESSING SETS, EMPTY SET & UNIVERSAL SET",
+        "grade": "Grade 7",
+        "topicName": "Sets",
+        "backBtn": "Back to Sets",
+        "sectionC": "Part C · Application & Problem Solving",
+        "q11": {
+          "badge": "Contextual",
+          "instruction": "In a class, the teacher asks students to name their birth months. State an appropriate universal set and identify the empty set from this context (example: the set of students born in the 13th month)!"
+        },
+        "q12": {
+          "badge": "Exam 2019",
+          "diketahui": "Given",
+          "textA": "is a factor of 12",
+          "textB": "is even",
+          "tentukan": "Find:"
+        },
+        "q13": {
+          "badge": "Equivalent",
+          "introPre": "Set",
+          "dan": "and",
+          "instrMid": "Are",
+          "instrEnd": "equivalent? Explain your reasoning! Are they equal (the same set)?"
+        },
+        "q14": {
+          "badge": "Create Sets",
+          "instruction": "Budi is given a task to create 3 different sets from school subject topics. Create 3 example sets using set-builder notation, and state the universal set for each!"
+        },
+        "q15": {
+          "badge": "HOTS",
+          "instrPre": "Given the universal set",
+          "instrMid": "Find the following sets and identify which are empty sets!",
+          "textBulat": "is an integer",
+          "textGanjilGenap": "both odd and even simultaneously"
         }
       }
     }

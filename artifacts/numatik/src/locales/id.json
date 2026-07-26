@@ -3790,6 +3790,40 @@
           "bDef": "= himpunan kelipatan 3.",
           "post": "Tentukan:",
           "komplemen": "komplemen"
+        },
+        "title": "MENYATAKAN HIMPUNAN, HIMPUNAN KOSONG & SEMESTA",
+        "grade": "Kelas 7",
+        "topicName": "Himpunan",
+        "backBtn": "Kembali ke Himpunan",
+        "sectionC": "Bagian C · Aplikasi & Pemecahan Masalah",
+        "q11": {
+          "badge": "Kontekstual",
+          "instruction": "Dalam sebuah kelas, guru meminta siswa menyebutkan bulan kelahiran mereka. Nyatakan himpunan semesta yang tepat dan tentukan himpunan kosong dari konteks ini (contoh: himpunan siswa yang lahir di bulan ke-13)!"
+        },
+        "q12": {
+          "badge": "UN 2019",
+          "diketahui": "Diketahui",
+          "textA": "faktor dari 12",
+          "textB": "bilangan genap",
+          "tentukan": "Tentukan:"
+        },
+        "q13": {
+          "badge": "Ekuivalen",
+          "introPre": "Himpunan",
+          "dan": "dan",
+          "instrMid": "Apakah",
+          "instrEnd": "ekuivalen? Jelaskan alasannya! Apakah keduanya sama (equal)?"
+        },
+        "q14": {
+          "badge": "Membuat Himpunan",
+          "instruction": "Budi mendapat tugas membuat 3 himpunan berbeda dari topik mata pelajaran di sekolah. Buatlah 3 contoh himpunan tersebut menggunakan notasi pembentuk himpunan, dan nyatakan himpunan semestanya!"
+        },
+        "q15": {
+          "badge": "HOTS",
+          "instrPre": "Diketahui semesta",
+          "instrMid": "Tentukan himpunan-himpunan berikut dan sebutkan mana yang merupakan himpunan kosong!",
+          "textBulat": "bilangan bulat",
+          "textGanjilGenap": "ganjil dan genap sekaligus"
         }
       }
     }

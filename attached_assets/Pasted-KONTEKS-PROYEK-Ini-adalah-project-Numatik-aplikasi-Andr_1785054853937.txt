@@ -1,0 +1,66 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Himpunan" — index,
+PengertianKeanggotaanPage.tsx, DiagramVennPage.tsx,
+HimpunanBagianPage.tsx, OperasiHimpunanPage.tsx sudah selesai.
+MenyatakanHimpunanPage.tsx Tahap 1 (tip box, sectionA/B, Q1-10, 70
+key di bawah practice.himpunan.menyatakanHimpunan.*) sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- EmptySetDiagram SVG TIDAK diterjemahkan (sudah selesai di Tahap 1,
+  tidak relevan lagi di Bagian C kecuali dipakai ulang)
+
+TUGAS SEKARANG — TAHAP 2 dari 2 (PENUTUP TOPIK "HIMPUNAN"):
+Fokus ke Bagian C (Q11-15) di MenyatakanHimpunanPage.tsx, PLUS elemen
+halaman yang belum disentuh di Tahap 1:
+- h1 title
+- Subtitle breadcrumb
+- Back button
+- Badge jumlah soal
+- sectionC (judul Bagian C, kalau ada)
+
+KONTEKS KHUSUS — 2 kasus \text{} bahasa Indonesia di Bagian C (WAJIB
+dipecah dengan pola interpolasi variabel — persis pola yang sudah
+dipakai di Tahap 1 untuk Q2 dan Q6):
+- Q12: A = \{x \mid x \text{ faktor dari } 12\}
+- Q15(c): C = \{x \mid x \text{ ganjil dan genap sekaligus}\}
+
+Catatan tambahan:
+- Sub-pertanyaan (a)/(b)/(c)/(d) — pecah jadi key terpisah per item
+  seperti pola Tahap 1
+- Kalau ada \text{} lain di Q11-15 yang belum terdeteksi sebelumnya,
+  tangani dengan pola interpolasi yang sama
+
+1. Terjemahkan SEMUA teks Bagian C (Q11-15): instruksi, teks soal,
+   semua sub-pertanyaan sebagai key terpisah
+2. Tangani \text{} di Q12 dan Q15(c) dengan pola interpolasi
+3. Terjemahkan h1 title, subtitle breadcrumb, back button, badge
+   jumlah soal, sectionC
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.himpunan.menyatakanHimpunan.* (lanjutan Tahap 1)
+5. JANGAN sentuh sub-halaman lain atau halaman index
+
+VERIFIKASI:
+- Laporkan validasi teknis (esbuild/grep manual kalau tsc timeout,
+  skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q11-Q15)
+- Konfirmasi + tunjukkan kode: bagaimana \text{} di Q12 dan Q15(c)
+  ditangani dengan pola interpolasi?
+- Konfirmasi FINAL: SELURUH MenyatakanHimpunanPage.tsx (15 soal,
+  Tahap 1 + Tahap 2 gabungan) sekarang 100% trilingual, 0 teks
+  Indonesia hardcode tersisa
+- Total key gabungan Tahap 1 + Tahap 2 per locale file
+- KONFIRMASI PALING PENTING DAN TERAKHIR: setelah ini selesai, apakah
+  SELURUH topik "Himpunan" (index + 5 sub-halaman:
+  PengertianKeanggotaan, MenyatakanHimpunan, DiagramVenn,
+  HimpunanBagian, OperasiHimpunan — total 74 soal) sekarang 100%
+  trilingual tanpa ada yang terlewat?

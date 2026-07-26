@@ -53,14 +53,18 @@ const MenyatakanHimpunanLatihanPage = () => {
   const p = "practice.himpunan.menyatakanHimpunan";
 
   /* \text{} interpolation vars — computed once, used inside InlineMath template literals */
-  const q2textA  = t(`${p}.q2.textA`);
-  const q2textB  = t(`${p}.q2.textB`);
-  const q2textC  = t(`${p}.q2.textC`);
-  const q5days   = t(`${p}.q5.days`);
-  const q6textA  = t(`${p}.q6.textA`);
-  const q6textD  = t(`${p}.q6.textD`);
-  const q7colors  = t(`${p}.q7.itemBColors`);
-  const q7animals = t(`${p}.q7.itemCAnimals`);
+  const q2textA       = t(`${p}.q2.textA`);
+  const q2textB       = t(`${p}.q2.textB`);
+  const q2textC       = t(`${p}.q2.textC`);
+  const q5days        = t(`${p}.q5.days`);
+  const q6textA       = t(`${p}.q6.textA`);
+  const q6textD       = t(`${p}.q6.textD`);
+  const q7colors      = t(`${p}.q7.itemBColors`);
+  const q7animals     = t(`${p}.q7.itemCAnimals`);
+  const q12textA      = t(`${p}.q12.textA`);
+  const q12textB      = t(`${p}.q12.textB`);
+  const q15textBulat  = t(`${p}.q15.textBulat`);
+  const q15textGanjil = t(`${p}.q15.textGanjilGenap`);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -68,16 +72,16 @@ const MenyatakanHimpunanLatihanPage = () => {
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
 
-        {/* ── header (Tahap 2) ── */}
+        {/* ── header ── */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
             style={{ background: "rgba(167,139,250,0.15)", border: "1px solid rgba(167,139,250,0.4)" }}>
             <BookOpen className="w-7 h-7 text-violet-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            MENYATAKAN HIMPUNAN, HIMPUNAN KOSONG &amp; SEMESTA
+            {t(`${p}.title`)}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Himpunan</p>
+          <p className="text-white/50 text-xs font-body">{t(`${p}.grade`)} · {t('practice.breadcrumb')} · {t(`${p}.topicName`)}</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>
@@ -230,51 +234,47 @@ const MenyatakanHimpunanLatihanPage = () => {
             </Q>
           </Section>
 
-          {/* ══ BAGIAN C — tidak disentuh (Tahap 2) ══ */}
-          <Section title="Bagian C · Aplikasi & Pemecahan Masalah" color="#fb923c">
+          {/* ══ BAGIAN C ══ */}
+          <Section title={t(`${p}.sectionC`)} color="#fb923c">
 
-            <Q no={11} badge="Kontekstual" badgeColor="#fb923c">
+            {/* Q11 */}
+            <Q no={11} badge={t(`${p}.q11.badge`)} badgeColor="#fb923c">
+              <p>{t(`${p}.q11.instruction`)}</p>
+            </Q>
+
+            {/* Q12 — \text{} interpolation: q12textA, q12textB */}
+            <Q no={12} badge={t(`${p}.q12.badge`)} badgeColor="#fb923c">
               <p>
-                Dalam sebuah kelas, guru meminta siswa menyebutkan bulan kelahiran mereka.
-                Nyatakan himpunan semesta yang tepat dan tentukan himpunan kosong dari konteks ini
-                (contoh: himpunan siswa yang lahir di bulan ke-13)!
+                {t(`${p}.q12.diketahui`)} <InlineMath math="S = \{1, 2, 3, \ldots, 12\}" />,{" "}
+                <InlineMath math={`\\; A = \\{x \\mid x \\text{ ${q12textA}}\\}`} />,{" "}
+                <InlineMath math={`\\; B = \\{x \\mid x \\text{ ${q12textB}}\\}`} />.{" "}
+                {t(`${p}.q12.tentukan`)} (a) <InlineMath math="A" />, (b) <InlineMath math="B" />, (c) <InlineMath math="A^c" />
               </p>
             </Q>
 
-            <Q no={12} badge="UN 2019" badgeColor="#fb923c">
+            {/* Q13 */}
+            <Q no={13} badge={t(`${p}.q13.badge`)} badgeColor="#fb923c">
               <p>
-                Diketahui <InlineMath math="S = \{1, 2, 3, \ldots, 12\}" />,
-                <InlineMath math="\; A = \{x \mid x \text{ faktor dari } 12\}" />,
-                <InlineMath math="\; B = \{x \mid x \text{ bilangan genap}\}" />.
-                Tentukan: (a) <InlineMath math="A" />, (b) <InlineMath math="B" />, (c) <InlineMath math="A^c" />
+                {t(`${p}.q13.introPre`)} <InlineMath math="P = \{a, b, c, d\}" /> {t(`${p}.q13.dan`)} <InlineMath math="Q = \{1, 2, 3, 4\}" />.{" "}
+                {t(`${p}.q13.instrMid`)} <InlineMath math="P" /> {t(`${p}.q13.dan`)} <InlineMath math="Q" /> {t(`${p}.q13.instrEnd`)}
               </p>
             </Q>
 
-            <Q no={13} badge="Ekuivalen" badgeColor="#fb923c">
-              <p>
-                Himpunan <InlineMath math="P = \{a, b, c, d\}" /> dan <InlineMath math="Q = \{1, 2, 3, 4\}" />.
-                Apakah <InlineMath math="P" /> dan <InlineMath math="Q" /> ekuivalen? Jelaskan alasannya!
-                Apakah keduanya sama (equal)?
-              </p>
+            {/* Q14 */}
+            <Q no={14} badge={t(`${p}.q14.badge`)} badgeColor="#fb923c">
+              <p>{t(`${p}.q14.instruction`)}</p>
             </Q>
 
-            <Q no={14} badge="Membuat Himpunan" badgeColor="#fb923c">
+            {/* Q15 — \text{} interpolation: q15textBulat, q15textGanjil */}
+            <Q no={15} badge={t(`${p}.q15.badge`)} badgeColor="#fb923c">
               <p>
-                Budi mendapat tugas membuat 3 himpunan berbeda dari topik mata pelajaran di sekolah.
-                Buatlah 3 contoh himpunan tersebut menggunakan notasi pembentuk himpunan,
-                dan nyatakan himpunan semestanya!
-              </p>
-            </Q>
-
-            <Q no={15} badge="HOTS" badgeColor="#fb923c">
-              <p>
-                Diketahui semesta <InlineMath math="S = \{x \mid x \text{ bilangan bulat}, -5 \leq x \leq 5\}" />.
-                Tentukan himpunan-himpunan berikut dan sebutkan mana yang merupakan himpunan kosong!
+                {t(`${p}.q15.instrPre`)} <InlineMath math={`S = \\{x \\mid x \\text{ ${q15textBulat}}, -5 \\leq x \\leq 5\\}`} />.{" "}
+                {t(`${p}.q15.instrMid`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="A = \{x \mid x^2 = 4\}" /></li>
                 <li>(b) <InlineMath math="B = \{x \mid x < -5\}" /></li>
-                <li>(c) <InlineMath math="C = \{x \mid x \text{ ganjil dan genap sekaligus}\}" /></li>
+                <li>(c) <InlineMath math={`C = \\{x \\mid x \\text{ ${q15textGanjil}}\\}`} /></li>
                 <li>(d) <InlineMath math="D = \{x \mid |x| \leq 2\}" /></li>
               </ul>
             </Q>
@@ -287,7 +287,7 @@ const MenyatakanHimpunanLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Himpunan
+            {t(`${p}.backBtn`)}
           </button>
         </div>
       </div>
