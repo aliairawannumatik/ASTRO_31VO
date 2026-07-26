@@ -2565,6 +2565,91 @@
           "optC": "C. 40°",
           "optD": "D. 10°"
         }
+      },
+      "jumlahSudutSegiBanyak": {
+        "title": "JUMLAH SUDUT PADA SEGI BANYAK",
+        "pageSubtitle": "Kelas 7 - Latihan Mandiri - Garis dan Sudut",
+        "sectionI": "Bagian I — Isian Pendek",
+        "instructionI": "Tentukan nilai sudut yang belum diketahui pada bangun datar berikut.",
+        "instructionII": "Kerjakan soal-soal berikut lengkap dengan caranya",
+        "backTo": "Kembali ke Garis dan Sudut",
+        "q1": {
+          "stem": "Perhatikan gambar. Besar sudut yang ditanyakan adalah …",
+          "optA": "A. 15°",
+          "optB": "B. 30°",
+          "optC": "C. 42°",
+          "optD": "D. 60°"
+        },
+        "q2": {
+          "stem": "Perhatikan gambar berikut. Dari gambar di atas besar ∠QPR adalah …",
+          "optA": "A. 18°",
+          "optB": "B. 36°",
+          "optC": "C. 45°",
+          "optD": "D. 54°"
+        },
+        "q3": {
+          "stem": "Perhatikan gambar berikut. Besar ∠BAC adalah …",
+          "optA": "A. 80°",
+          "optB": "B. 70°",
+          "optC": "C. 60°",
+          "optD": "D. 50°"
+        },
+        "q4": {
+          "stem": "Perhatikan gambar berikut! Besar sudut ∠ACB adalah …",
+          "optA": "A. 55°",
+          "optB": "B. 85°",
+          "optC": "C. 95°",
+          "optD": "D. 125°"
+        },
+        "q5": {
+          "stem": "Perhatikan gambar berikut. Jika besar a = 95° dan b = 70°, maka selisih besar sudut x dan y adalah …",
+          "optA": "A. 25°",
+          "optB": "B. 45°",
+          "optC": "C. 65°",
+          "optD": "D. 85°"
+        },
+        "q6": {
+          "stem": "Perhatikan gambar berikut! Jika besar ∠a = 35° dan ∠b = 45°, maka jumlah besar sudut x dan y adalah …",
+          "optA": "A. 285°",
+          "optB": "B. 300°",
+          "optC": "C. 315°",
+          "optD": "D. 330°"
+        },
+        "q7": {
+          "stem": "Perhatikan gambar berikut! Jika diketahui AB sejajar CD, maka nilai x adalah …",
+          "optA": "A. 15°",
+          "optB": "B. 30°",
+          "optC": "C. 40°",
+          "optD": "D. 45°"
+        },
+        "q8": {
+          "stem": "Perhatikan gambar berikut! Besar sudut nomor 1 adalah 95°, dan sudut nomor 2 adalah 110°. Besar sudut nomor 3 adalah …",
+          "optA": "A. 5°",
+          "optB": "B. 15°",
+          "optC": "C. 25°",
+          "optD": "D. 35°"
+        },
+        "q9": {
+          "stem": "Perhatikan gambar berikut. Besar ∠BAC adalah …",
+          "optA": "A. 24°",
+          "optB": "B. 48°",
+          "optC": "C. 72°",
+          "optD": "D. 98°"
+        },
+        "q10": {
+          "stem": "Perhatikan gambar di bawah ini. Diketahui sudut ∠SPT = 83° dan sudut ∠PQT = 41°. Garis PQ dan RS sejajar, demikian juga garis PS dan QT sejajar. Maka besar x = …",
+          "optA": "A. 41°",
+          "optB": "B. 82°",
+          "optC": "C. 124°",
+          "optD": "D. 139°"
+        },
+        "q11": {
+          "stem": "Perhatikan gambar. Jika ∠EFB = 65° dan ∠FCD = 120°, maka besar ∠BFC adalah …",
+          "optA": "A. 55°",
+          "optB": "B. 45°",
+          "optC": "C. 50°",
+          "optD": "D. 35°"
+        }
       }
     }
   },

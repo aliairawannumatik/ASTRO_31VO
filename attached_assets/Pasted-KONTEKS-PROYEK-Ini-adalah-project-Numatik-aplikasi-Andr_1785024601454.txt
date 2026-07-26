@@ -1,0 +1,49 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia, 
+English, Japanese) pakai react-i18next dengan useTranslation() dan 
+file locale (id.json, en.json, ja.json). Topik-topik sebelumnya di 
+Kelas 7 sudah selesai. Topik "Garis dan Sudut" — index dan sub-halaman 
+SifatSudutDuaGarisSejajarPage.tsx sudah selesai.
+
+ATURAN PENTING:
+- Soal ditulis sebagai komponen JSX inline — terjemahkan pakai t() 
+  atau <Trans>
+- TIDAK ADA sistem cards/tag/isDark di topik ini
+- Gambar diagram <img> TIDAK diterjemahkan (biarkan src-nya)
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+
+TUGAS SEKARANG:
+Fokus HANYA ke JumlahSudutPadaSegiBanyakPage.tsx — halaman ini punya 
+2 bagian:
+- Bagian I: array 8 item (const isianPendek = [{label, img}, ...]) — 
+  soal HANYA berupa gambar diagram, TIDAK ADA teks soal untuk 
+  diterjemahkan (semua informasi ada di dalam gambar). Cukup 
+  terjemahkan label section "Bagian I" (isian pendek) dan instruksi 
+  umum di atasnya kalau ada
+- Bagian II: 11 soal pilihan ganda JSX inline, semua punya <img> — 
+  terjemahkan stem + 4 opsi tiap soal seperti biasa
+
+1. Konversi ke useTranslation() (Bagian II terutama, karena soalnya 
+   ada teks)
+2. Terjemahkan instruksi/label Bagian I (tanpa perlu terjemahkan 
+   konten soal karena cuma gambar)
+3. Terjemahkan SEMUA teks di Bagian II: instruksi, stem, 4 opsi tiap 
+   dari 11 soal
+4. Terjemahkan h1 title dan badge jumlah soal
+5. Tambahkan translation key ke ketiga file locale (id, en, ja) di 
+   bawah practice.garisDanSudut.jumlahSudutSegiBanyak.*
+6. JANGAN sentuh sub-halaman lain (2 sisanya) atau halaman index
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat 
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan, dan 
+  konfirmasi eksplisit bahwa 11 soal Bagian II × 4 opsi (44 opsi 
+  total) sudah diterjemahkan
