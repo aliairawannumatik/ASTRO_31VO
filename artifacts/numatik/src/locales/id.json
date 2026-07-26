@@ -3425,6 +3425,56 @@
           "midPre": "Berapa banyak himpunan bagian",
           "midPost": "yang <strong>bukan himpunan kosong</strong> dan <strong>bukan</strong>",
           "end": "itu sendiri?"
+        },
+        "title": "HIMPUNAN BAGIAN",
+        "topic": "Himpunan",
+        "backBtn": "Kembali ke Himpunan",
+        "infoTitle": "Konsep Penting Himpunan Bagian",
+        "infoB1a": "→ setiap anggota",
+        "infoB1b": "juga anggota",
+        "infoB2": "→ himpunan bagian sejati",
+        "infoB3": "untuk setiap",
+        "infoB4a": "Banyak himpunan bagian dari",
+        "infoB4b": "dengan",
+        "infoB4c": "adalah",
+        "sectionC": "Bagian C · Aplikasi & HOTS",
+        "q11": {
+          "badge": "Kontekstual",
+          "part1Pre": "Diketahui",
+          "part1Post": "= himpunan makanan bergizi = {nasi, sayur, buah, ikan, telur}.",
+          "part2": "Seorang anak makan nasi, sayur, dan buah hari ini.",
+          "part3Pre": "Nyatakan makanan yang dimakan sebagai himpunan",
+          "part3Post": "dan tunjukkan bahwa",
+          "end": "!"
+        },
+        "q12": {
+          "badge": "UN 2020",
+          "pre": "Himpunan",
+          "post": "Tentukan banyaknya himpunan bagian",
+          "end": "yang memiliki anggota lebih dari 2!"
+        },
+        "q13": {
+          "badge": "Menyimpulkan",
+          "instruction": "Perhatikan pernyataan berikut. Tentukan mana yang BENAR!",
+          "itemA": "Setiap himpunan adalah himpunan bagian dari dirinya sendiri",
+          "itemB": "Himpunan kosong bukan himpunan bagian dari semua himpunan",
+          "itemCPre": "Jika",
+          "itemCMid": ", banyak himpunan bagian",
+          "itemCEnd": "adalah 6",
+          "itemD": "Himpunan kosong tidak memiliki himpunan bagian"
+        },
+        "q14": {
+          "badge": "HOTS",
+          "pre": "Diketahui",
+          "and": "dan",
+          "s2Pre": "Berapa banyak kemungkinan himpunan",
+          "s2Post": "(anggota B yang bukan anggota A)?",
+          "s3Pre": "Jika",
+          "s3Post": "sebutkan anggota"
+        },
+        "q15": {
+          "badge": "UN Style",
+          "instruction": "Dari pernyataan berikut, tentukan yang <strong>BENAR</strong>!"
         }
       }
     }

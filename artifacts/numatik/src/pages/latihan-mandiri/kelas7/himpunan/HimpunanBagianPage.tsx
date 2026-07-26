@@ -67,9 +67,9 @@ const HimpunanBagianLatihanPage = () => {
             <BookOpen className="w-7 h-7 text-orange-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            HIMPUNAN BAGIAN
+            {t(`${p}.title`)}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Himpunan</p>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · {t(`${p}.topic`)}</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>
@@ -78,12 +78,12 @@ const HimpunanBagianLatihanPage = () => {
         </div>
 
         <div className="rounded-xl bg-orange-500/10 border border-orange-500/30 px-5 py-4 mb-4 text-sm text-white/80 font-body">
-          <p className="font-bold text-orange-300 mb-2">Konsep Penting Himpunan Bagian</p>
+          <p className="font-bold text-orange-300 mb-2">{t(`${p}.infoTitle`)}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-white/70">
-            <span>• <InlineMath math="B \subseteq A" /> → setiap anggota <InlineMath math="B" /> juga anggota <InlineMath math="A" /></span>
-            <span>• <InlineMath math="B \subsetneq A" /> → himpunan bagian sejati</span>
-            <span>• <InlineMath math="\emptyset \subseteq A" /> untuk setiap <InlineMath math="A" /></span>
-            <span>• Banyak himpunan bagian dari <InlineMath math="A" /> dengan <InlineMath math="n(A)=n" /> adalah <InlineMath math="2^n" /></span>
+            <span>• <InlineMath math="B \subseteq A" />{' '}{t(`${p}.infoB1a`)}{' '}<InlineMath math="B" />{' '}{t(`${p}.infoB1b`)}{' '}<InlineMath math="A" /></span>
+            <span>• <InlineMath math="B \subsetneq A" />{' '}{t(`${p}.infoB2`)}</span>
+            <span>• <InlineMath math="\emptyset \subseteq A" />{' '}{t(`${p}.infoB3`)}{' '}<InlineMath math="A" /></span>
+            <span>• {t(`${p}.infoB4a`)}{' '}<InlineMath math="A" />{' '}{t(`${p}.infoB4b`)}{' '}<InlineMath math="n(A)=n" />{' '}{t(`${p}.infoB4c`)}{' '}<InlineMath math="2^n" /></span>
           </div>
         </div>
 
@@ -196,46 +196,44 @@ const HimpunanBagianLatihanPage = () => {
             </Q>
           </Section>
 
-          <Section title="Bagian C · Aplikasi & HOTS" color="#4ade80">
+          <Section title={t(`${p}.sectionC`)} color="#4ade80">
 
-            <Q no={11} badge="Kontekstual" badgeColor="#4ade80">
+            <Q no={11} badge={t(`${p}.q11.badge`)} badgeColor="#4ade80">
               <p>
-                Diketahui <InlineMath math="M" /> = himpunan makanan bergizi = {"{nasi, sayur, buah, ikan, telur}"}.
-                Seorang anak makan nasi, sayur, dan buah hari ini.
-                Nyatakan makanan yang dimakan sebagai himpunan <InlineMath math="D" /> dan tunjukkan bahwa <InlineMath math="D \subseteq M" />!
+                {t(`${p}.q11.part1Pre`)}{' '}<InlineMath math="M" />{' '}{t(`${p}.q11.part1Post`)}{' '}
+                {t(`${p}.q11.part2`)}{' '}
+                {t(`${p}.q11.part3Pre`)}{' '}<InlineMath math="D" />{' '}{t(`${p}.q11.part3Post`)}{' '}<InlineMath math="D \subseteq M" />{t(`${p}.q11.end`)}
               </p>
             </Q>
 
-            <Q no={12} badge="UN 2020" badgeColor="#4ade80">
+            <Q no={12} badge={t(`${p}.q12.badge`)} badgeColor="#4ade80">
               <p>
-                Himpunan <InlineMath math="Q = \{x \mid 1 \leq x \leq 4,\; x \in \mathbb{N}\}" />.
-                Tentukan banyaknya himpunan bagian <InlineMath math="Q" /> yang memiliki anggota lebih dari 2!
+                {t(`${p}.q12.pre`)}{' '}<InlineMath math="Q = \{x \mid 1 \leq x \leq 4,\; x \in \mathbb{N}\}" />.{' '}
+                {t(`${p}.q12.post`)}{' '}<InlineMath math="Q" />{' '}{t(`${p}.q12.end`)}
               </p>
             </Q>
 
-            <Q no={13} badge="Menyimpulkan" badgeColor="#4ade80">
-              <p>
-                Perhatikan pernyataan berikut. Tentukan mana yang BENAR!
-              </p>
+            <Q no={13} badge={t(`${p}.q13.badge`)} badgeColor="#4ade80">
+              <p>{t(`${p}.q13.instruction`)}</p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(A) Setiap himpunan adalah himpunan bagian dari dirinya sendiri</li>
-                <li>(B) Himpunan kosong bukan himpunan bagian dari semua himpunan</li>
-                <li>(C) Jika <InlineMath math="n(A) = 3" />, banyak himpunan bagian <InlineMath math="A" /> adalah 6</li>
-                <li>(D) Himpunan kosong tidak memiliki himpunan bagian</li>
+                <li>(A) {t(`${p}.q13.itemA`)}</li>
+                <li>(B) {t(`${p}.q13.itemB`)}</li>
+                <li>(C) {t(`${p}.q13.itemCPre`)}{' '}<InlineMath math="n(A) = 3" />{t(`${p}.q13.itemCMid`)}{' '}<InlineMath math="A" />{' '}{t(`${p}.q13.itemCEnd`)}</li>
+                <li>(D) {t(`${p}.q13.itemD`)}</li>
               </ul>
             </Q>
 
-            <Q no={14} badge="HOTS" badgeColor="#4ade80">
+            <Q no={14} badge={t(`${p}.q14.badge`)} badgeColor="#4ade80">
               <p>
-                Diketahui <InlineMath math="A \subseteq B" />, <InlineMath math="n(A) = 3" />, dan <InlineMath math="n(B) = 5" />.
-                Berapa banyak kemungkinan himpunan <InlineMath math="B \setminus A" /> (anggota B yang bukan anggota A)?
-                Jika <InlineMath math="A = \{1,2,3\}" /> dan <InlineMath math="B = \{1,2,3,4,5\}" />, sebutkan anggota <InlineMath math="B \setminus A" />!
+                {t(`${p}.q14.pre`)}{' '}<InlineMath math="A \subseteq B" />, <InlineMath math="n(A) = 3" />,{' '}{t(`${p}.q14.and`)}{' '}<InlineMath math="n(B) = 5" />.{' '}
+                {t(`${p}.q14.s2Pre`)}{' '}<InlineMath math="B \setminus A" />{' '}{t(`${p}.q14.s2Post`)}{' '}
+                {t(`${p}.q14.s3Pre`)}{' '}<InlineMath math="A = \{1,2,3\}" />{' '}{t(`${p}.q14.and`)}{' '}<InlineMath math="B = \{1,2,3,4,5\}" />,{' '}{t(`${p}.q14.s3Post`)}{' '}<InlineMath math="B \setminus A" />!
               </p>
             </Q>
 
-            <Q no={15} badge="UN Style" badgeColor="#4ade80">
+            <Q no={15} badge={t(`${p}.q15.badge`)} badgeColor="#4ade80">
               <p>
-                Dari pernyataan berikut, tentukan yang <strong className="text-green-300">BENAR</strong>!
+                <Trans i18nKey={`${p}.q15.instruction`} components={{ strong: <strong className="text-green-300" /> }} />
               </p>
               <BlockMath math={`\\begin{array}{l}
 (1)\\; \\{0\\} \\subseteq \\{0, 1, 2\\}\\\\
@@ -253,7 +251,7 @@ const HimpunanBagianLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Himpunan
+            {t(`${p}.backBtn`)}
           </button>
         </div>
       </div>

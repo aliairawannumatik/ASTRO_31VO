@@ -3425,6 +3425,56 @@
           "midPre": "How many subsets of",
           "midPost": "are <strong>not the empty set</strong> and <strong>not</strong>",
           "end": "itself?"
+        },
+        "title": "SUBSETS",
+        "topic": "Sets",
+        "backBtn": "Back to Sets",
+        "infoTitle": "Key Concepts: Subsets",
+        "infoB1a": "→ every member of",
+        "infoB1b": "is also a member of",
+        "infoB2": "→ proper subset",
+        "infoB3": "for every",
+        "infoB4a": "The number of subsets of",
+        "infoB4b": "where",
+        "infoB4c": "is",
+        "sectionC": "Part C · Applications & HOTS",
+        "q11": {
+          "badge": "Contextual",
+          "part1Pre": "Given",
+          "part1Post": "= the set of nutritious foods = {rice, vegetables, fruit, fish, eggs}.",
+          "part2": "A child ate rice, vegetables, and fruit today.",
+          "part3Pre": "Express the food eaten as set",
+          "part3Post": "and show that",
+          "end": "!"
+        },
+        "q12": {
+          "badge": "UN 2020",
+          "pre": "Set",
+          "post": "Find the number of subsets of",
+          "end": "that have more than 2 members!"
+        },
+        "q13": {
+          "badge": "Concluding",
+          "instruction": "Consider the following statements. Determine which one is TRUE!",
+          "itemA": "Every set is a subset of itself",
+          "itemB": "The empty set is not a subset of every set",
+          "itemCPre": "If",
+          "itemCMid": ", the number of subsets of",
+          "itemCEnd": "is 6",
+          "itemD": "The empty set has no subsets"
+        },
+        "q14": {
+          "badge": "HOTS",
+          "pre": "Given",
+          "and": "and",
+          "s2Pre": "How many possible sets",
+          "s2Post": "(members of B that are not in A) are there?",
+          "s3Pre": "If",
+          "s3Post": "list the members of"
+        },
+        "q15": {
+          "badge": "UN Style",
+          "instruction": "From the following statements, determine which are <strong>TRUE</strong>!"
         }
       }
     }
