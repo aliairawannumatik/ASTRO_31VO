@@ -2781,6 +2781,120 @@
           "optC": "C. 115°",
           "optD": "D. 95°"
         }
+      },
+      "hubunganDuaGaris": {
+        "title": "HUBUNGAN 2 GARIS",
+        "pageSubtitle": "Kelas 7 - Latihan Mandiri - Garis dan Sudut",
+        "sectionTitle": "Latihan Mandiri",
+        "instruction": "Pilihlah jawaban yang benar.",
+        "backTo": "Kembali ke Garis dan Sudut",
+        "q1": {
+          "intro": "Diketahui pernyataan berikut.",
+          "itemI": "Titik D dan E merupakan bagian garis DE",
+          "itemII": "FB adalah ruas garis",
+          "itemIII": "AB dan AC adalah ruas garis yang sama",
+          "itemIV": "Potongan ruas garis AC berupa ruas garis",
+          "question": "Pernyataan yang benar adalah …",
+          "optA": "(i), (ii) dan (iii)",
+          "optB": "(i), (ii) dan (iv)",
+          "optC": "(i), (iii) dan (iv)",
+          "optD": "(ii), (iii), (iv)"
+        },
+        "q2": {
+          "intro": "Perhatikan pernyataan-pernyataan berikut.",
+          "itemI": "Dua buah garis dikatakan sejajar jika keduanya tidak akan pernah berpotongan meskipun diperpanjang.",
+          "itemIIPre": "Jika garis ",
+          "itemIIMid1": " sejajar dengan ",
+          "itemIIMid2": " dan garis ",
+          "itemIIMid3": " sejajar dengan ",
+          "itemIIMid4": ", maka garis ",
+          "itemIIMid5": " sejajar dengan ",
+          "itemIIEnd": ".",
+          "itemIII": "Dua garis yang berimpit tidak memiliki titik potong.",
+          "itemIV": "Dua garis yang tidak sejajar pasti berpotongan.",
+          "question": "Pernyataan yang benar ditunjukkan oleh nomor …",
+          "optA": "(i) dan (iii)",
+          "optB": "(i), (ii) dan (iv)",
+          "optC": "(ii) dan (iii)",
+          "optD": "(ii), (iii) dan (iv)"
+        },
+        "q3": {
+          "stem": "Diketahui lima buah titik A, B, C, D, dan E terletak pada satu garis yang sama (kolinear). Banyaknya garis berbeda yang dapat dibuat dari kelima titik tersebut adalah ....",
+          "optA": "1 buah",
+          "optB": "5 buah",
+          "optC": "10 buah",
+          "optD": "20 buah"
+        },
+        "q4": {
+          "stem": "Terdapat 5 titik di sebuah bidang datar di mana tidak ada tiga titik yang letaknya segaris (non-kolinear). Banyak garis lurus yang dapat dibuat dengan menghubungkan setiap dua titik adalah ....",
+          "optA": "5 buah",
+          "optB": "8 buah",
+          "optC": "10 buah",
+          "optD": "15 buah"
+        },
+        "q5": {
+          "pre": "Dalam ilmu navigasi atau konstruksi, garis yang tegak lurus (membentuk sudut ",
+          "post": ") terhadap permukaan air yang tenang disebut sebagai ....",
+          "optA": "Garis horizontal",
+          "optB": "Garis vertikal",
+          "optC": "Garis sejajar",
+          "optD": "Garis berhimpit"
+        },
+        "q6": {
+          "stem": "Pada sebuah garis bilangan, terdapat titik K, L, dan M. Jika jarak K ke L adalah 3 satuan, dan jarak L ke M adalah 4 kali jarak K ke L, maka panjang ruas garis KM jika L berada di antara K dan M adalah ....",
+          "optA": "7 satuan",
+          "optB": "12 satuan",
+          "optC": "15 satuan",
+          "optD": "18 satuan"
+        },
+        "q7": {
+          "pre": "Dua buah garis, garis ",
+          "mid1": " dan garis ",
+          "mid2": ", berada pada bidang yang sama. Jika garis ",
+          "mid3": " tidak akan pernah memotong garis ",
+          "end": " meskipun diperpanjang ke kedua arah, maka hubungan kedua garis tersebut adalah ....",
+          "optA": "Berpotongan",
+          "optB": "Berhimpit",
+          "optC": "Sejajar",
+          "optD": "Bersilangan"
+        },
+        "q8": {
+          "pre": "Jika garis ",
+          "mid1": " melalui titik ",
+          "mid2": " dan ",
+          "mid3": ", sementara garis ",
+          "mid4": " juga melalui titik ",
+          "mid5": " dan ",
+          "mid6": ", maka kedudukan garis ",
+          "mid7": " terhadap garis ",
+          "end": " adalah ....",
+          "optA": "Sejajar",
+          "optB": "Tegak lurus",
+          "optC": "Berhimpit",
+          "optD": "Berpotongan di satu titik"
+        },
+        "q9": {
+          "stem": "Garis AB dan garis PQ terpisah sejauh 10 cm. Jika setiap titik pada garis AB memiliki jarak yang selalu tetap (10 cm) terhadap garis PQ, maka dapat disimpulkan bahwa garis AB dan PQ adalah ....",
+          "optA": "Berpotongan",
+          "optB": "Bersilangan",
+          "optC": "Sejajar",
+          "optD": "Tegak lurus"
+        },
+        "q10": {
+          "pre": "Ruas garis AB tegak lurus dengan garis ",
+          "mid1": " pada ",
+          "mid2": " sejajar dengan ",
+          "mid3": ". Jika garis ",
+          "mid4": " sejajar dengan garis ",
+          "mid5": ", panjang ",
+          "mid6": " satuan, ",
+          "mid7": " satuan, dan ",
+          "end": " satuan, panjang ruas garis PQ adalah …",
+          "optA": "8 satuan",
+          "optB": "10 satuan",
+          "optC": "12 satuan",
+          "optD": "15 satuan"
+        }
       }
     }
   },

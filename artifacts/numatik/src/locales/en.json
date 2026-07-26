@@ -2781,6 +2781,120 @@
           "optC": "C. 115°",
           "optD": "D. 95°"
         }
+      },
+      "hubunganDuaGaris": {
+        "title": "RELATIONSHIP OF 2 LINES",
+        "pageSubtitle": "Grade 7 · Lines & Angles · Self-Practice",
+        "sectionTitle": "Self-Practice",
+        "instruction": "Choose the correct answer.",
+        "backTo": "Back to Lines & Angles",
+        "q1": {
+          "intro": "Consider the following statements.",
+          "itemI": "Points D and E are part of line DE",
+          "itemII": "FB is a line segment",
+          "itemIII": "AB and AC are the same line segment",
+          "itemIV": "A subset of line segment AC is a line segment",
+          "question": "The correct statement(s) are …",
+          "optA": "(i), (ii) and (iii)",
+          "optB": "(i), (ii) and (iv)",
+          "optC": "(i), (iii) and (iv)",
+          "optD": "(ii), (iii), (iv)"
+        },
+        "q2": {
+          "intro": "Consider the following statements.",
+          "itemI": "Two lines are said to be parallel if they will never intersect even when extended.",
+          "itemIIPre": "If line ",
+          "itemIIMid1": " is parallel to ",
+          "itemIIMid2": " and line ",
+          "itemIIMid3": " is parallel to ",
+          "itemIIMid4": ", then line ",
+          "itemIIMid5": " is parallel to ",
+          "itemIIEnd": ".",
+          "itemIII": "Two coincident lines do not have an intersection point.",
+          "itemIV": "Two lines that are not parallel must intersect.",
+          "question": "The correct statement(s) are indicated by number …",
+          "optA": "(i) and (iii)",
+          "optB": "(i), (ii) and (iv)",
+          "optC": "(ii) and (iii)",
+          "optD": "(ii), (iii) and (iv)"
+        },
+        "q3": {
+          "stem": "Five points A, B, C, D, and E are known to lie on the same line (collinear). The number of different lines that can be drawn from these five points is ....",
+          "optA": "1 line",
+          "optB": "5 lines",
+          "optC": "10 lines",
+          "optD": "20 lines"
+        },
+        "q4": {
+          "stem": "There are 5 points on a flat plane where no three points are collinear (non-collinear). The number of straight lines that can be drawn by connecting every two points is ....",
+          "optA": "5 lines",
+          "optB": "8 lines",
+          "optC": "10 lines",
+          "optD": "15 lines"
+        },
+        "q5": {
+          "pre": "In navigation or construction, a line that is perpendicular (forming an angle of ",
+          "post": ") to the surface of still water is called ....",
+          "optA": "Horizontal line",
+          "optB": "Vertical line",
+          "optC": "Parallel lines",
+          "optD": "Coincident lines"
+        },
+        "q6": {
+          "stem": "On a number line, there are points K, L, and M. If the distance from K to L is 3 units, and the distance from L to M is 4 times the distance from K to L, then the length of line segment KM when L is between K and M is ....",
+          "optA": "7 units",
+          "optB": "12 units",
+          "optC": "15 units",
+          "optD": "18 units"
+        },
+        "q7": {
+          "pre": "Two lines, line ",
+          "mid1": " and line ",
+          "mid2": ", lie in the same plane. If line ",
+          "mid3": " never intersects line ",
+          "end": " no matter how far they are extended in both directions, the relationship between the two lines is ....",
+          "optA": "Intersecting",
+          "optB": "Coincident",
+          "optC": "Parallel",
+          "optD": "Skew"
+        },
+        "q8": {
+          "pre": "If line ",
+          "mid1": " passes through points ",
+          "mid2": " and ",
+          "mid3": ", and line ",
+          "mid4": " also passes through points ",
+          "mid5": " and ",
+          "mid6": ", then the position of line ",
+          "mid7": " with respect to line ",
+          "end": " is ....",
+          "optA": "Parallel",
+          "optB": "Perpendicular",
+          "optC": "Coincident",
+          "optD": "Intersecting at one point"
+        },
+        "q9": {
+          "stem": "Lines AB and PQ are separated by 10 cm. If every point on line AB always maintains a constant distance (10 cm) from line PQ, it can be concluded that lines AB and PQ are ....",
+          "optA": "Intersecting",
+          "optB": "Skew",
+          "optC": "Parallel",
+          "optD": "Perpendicular"
+        },
+        "q10": {
+          "pre": "Line segment AB is perpendicular to line ",
+          "mid1": " where ",
+          "mid2": " is parallel to ",
+          "mid3": ". If line ",
+          "mid4": " is parallel to line ",
+          "mid5": ", the length ",
+          "mid6": " units, ",
+          "mid7": " units, and ",
+          "end": " units, find the length of line segment PQ …",
+          "optA": "8 units",
+          "optB": "10 units",
+          "optC": "12 units",
+          "optD": "15 units"
+        }
       }
     }
   },
