@@ -2321,6 +2321,166 @@
           "optC": "C. 100 kg",
           "optD": "D. 103 kg"
         }
+      },
+      "bungaTunggal": {
+        "title": "SIMPLE INTEREST",
+        "pageSubtitle": "Grade 7 - Self-Practice - Social Arithmetic",
+        "instruction": "Solve the following problems showing your complete working",
+        "backTo": "Back to Social Arithmetic",
+        "q1": {
+          "stem": "Siska deposits Rp3,000,000.00 in a bank that offers a simple interest rate of 12% per year. The amount of interest Siska receives if she saves for 6 months is ...",
+          "optA": "A. Rp120,000.00",
+          "optB": "B. Rp150,000.00",
+          "optC": "C. Rp360,000.00",
+          "optD": "D. Rp180,000.00"
+        },
+        "q2": {
+          "stem": "Andi borrows Rp2,000,000.00 from a cooperative with a simple interest rate of 8% per year. The total amount Andi must repay after 1 year is ...",
+          "optA": "A. Rp2,800,000.00",
+          "optB": "B. Rp2,008,000.00",
+          "optC": "C. Rp2,080,000.00",
+          "optD": "D. Rp2,160,000.00"
+        },
+        "q3": {
+          "stem": "Dina deposits Rp4,000,000.00. After some months, her savings become Rp4,320,000.00. If the bank offers a simple interest rate of 12% per year, how long has Dina been saving?",
+          "optA": "A. 9 months",
+          "optB": "B. 10 months",
+          "optC": "C. 8 months",
+          "optD": "D. 6 months"
+        },
+        "q4": {
+          "stem": "A principal of Rp5,000,000.00 is deposited in a bank. After 8 months, it becomes Rp5,400,000.00. The simple interest rate per year offered by the bank is ...",
+          "optA": "A. 12%",
+          "optB": "B. 14%",
+          "optC": "C. 10%",
+          "optD": "D. 15%"
+        },
+        "q5": {
+          "stem": "After saving for 1 year at a bank offering 10% simple interest per year, Anton’s savings become Rp2,200,000.00. Anton’s initial savings were ...",
+          "optA": "A. Rp1,900,000.00",
+          "optB": "B. Rp2,100,000.00",
+          "optC": "C. Rp1,800,000.00",
+          "optD": "D. Rp2,000,000.00"
+        },
+        "q6": {
+          "stem": "A financial institution offers a simple interest rate of 1.5% per month. If someone deposits Rp2,000,000.00 for 10 months, the final total savings amount is ...",
+          "optA": "A. Rp2,600,000.00",
+          "optB": "B. Rp2,150,000.00",
+          "optC": "C. Rp2,030,000.00",
+          "optD": "D. Rp2,300,000.00"
+        },
+        "q7": {
+          "stem": "Pak Rudi borrows Rp6,000,000.00 from a bank with a simple interest rate of 10% per year. The loan will be repaid in 10 monthly instalments. The monthly instalment Pak Rudi must pay is ...",
+          "optA": "A. Rp650,000.00",
+          "optB": "B. Rp700,000.00",
+          "optC": "C. Rp600,000.00",
+          "optD": "D. Rp660,000.00"
+        },
+        "q8": {
+          "stem": "Bank A offers 10% simple interest per year, while Bank B offers 12% per year. If Rio deposits Rp5,000,000.00 in Bank A and Rian deposits the same amount in Bank B, the difference in interest they each earn after 9 months is ...",
+          "optA": "A. Rp50,000.00",
+          "optB": "B. Rp100,000.00",
+          "optC": "C. Rp150,000.00",
+          "optD": "D. Rp75,000.00"
+        },
+        "q9": {
+          "stem": "Someone borrows Rp10,000,000.00 with a simple interest rate of 9% per year. If the loan is repaid after 120 days, the interest that must be paid is ... (Assume 1 year = 360 days)",
+          "optA": "A. Rp400,000.00",
+          "optB": "B. Rp350,000.00",
+          "optC": "C. Rp250,000.00",
+          "optD": "D. Rp300,000.00"
+        },
+        "q10": {
+          "stem": "Deni saves in a bank with a simple interest rate of 5% per year. The time needed for Deni’s money to become double his initial savings is ...",
+          "optA": "A. 20 years",
+          "optB": "B. 15 years",
+          "optC": "C. 25 years",
+          "optD": "D. 10 years"
+        },
+        "q11": {
+          "stem": "An investment offers simple interest such that the invested principal doubles in 8 years. The annual interest rate percentage of that investment is ...",
+          "optA": "A. 12.5%",
+          "optB": "B. 18%",
+          "optC": "C. 15%",
+          "optD": "D. 12%"
+        },
+        "q12": {
+          "stem": "Pak Ali has Rp10,000,000.00. He splits it into two parts to deposit in Bank A at 10% simple interest per year and Bank B at 12% simple interest per year. If the total interest Pak Ali receives from both banks after 1 year is Rp1,160,000.00, the amount deposited in Bank A is ...",
+          "optA": "A. Rp2,000,000.00",
+          "optB": "B. Rp8,000,000.00",
+          "optC": "C. Rp6,000,000.00",
+          "optD": "D. Rp4,000,000.00"
+        },
+        "q13": {
+          "stem": "Tia saves Rp2,000,000.00 at 12% simple interest per year, while Mia saves Rp2,500,000.00 at 8% simple interest per year. After how many years will the total savings (principal plus interest) of both be equal?",
+          "optA": "A. 10 years",
+          "optB": "B. 17.5 years",
+          "optC": "C. 15 years",
+          "optD": "D. 12.5 years"
+        },
+        "q14": {
+          "stem": "The cash price of a motorcycle is Rp10,000,000.00. The motorcycle can be purchased on credit with a down payment of Rp2,000,000.00 and the remainder paid in 10 monthly instalments of Rp900,000.00 each. The simple interest rate per year charged on the credit purchase is ...",
+          "optA": "A. 10%",
+          "optB": "B. 15%",
+          "optC": "C. 18%",
+          "optD": "D. 12%"
+        },
+        "q15": {
+          "stem": "Arman deposits Rp5,000,000.00. For the first 6 months, the bank gives 10% simple interest per year. For the next 6 months, the rate rises to 12% per year. The total interest Arman receives at the end of the first year is ...",
+          "optA": "A. Rp600,000.00",
+          "optB": "B. Rp650,000.00",
+          "optC": "C. Rp550,000.00",
+          "optD": "D. Rp500,000.00"
+        },
+        "q16": {
+          "stem": "Due to a system error, a customer’s deposit interest was calculated using a simple interest rate of 12% per year instead of the correct 10% per year. If the difference in interest for an 8-month period due to this error is Rp80,000.00, the value of the customer’s deposit is ...",
+          "optA": "A. Rp8,000,000.00",
+          "optB": "B. Rp6,000,000.00",
+          "optC": "C. Rp4,000,000.00",
+          "optD": "D. Rp5,000,000.00"
+        },
+        "q17": {
+          "stem": "The ratio of Tono’s money to Tini’s money is 2:3. Tono invests his money at 15% simple interest per year, while Tini invests at 10% per year. If the total interest they both receive after 1 year is Rp1,200,000.00, Tono’s initial amount is ...",
+          "optA": "A. Rp2,000,000.00",
+          "optB": "B. Rp6,000,000.00",
+          "optC": "C. Rp4,000,000.00",
+          "optD": "D. Rp3,000,000.00"
+        },
+        "q18": {
+          "stem": "Faraz deposits Rp. 1,200,000.00 in a bank at 15% simple interest per year. After some months he withdraws all his savings and the total amount becomes Rp. 1,260,000.00. How long did Faraz save?",
+          "optA": "A. 3 months",
+          "optB": "B. 4 months",
+          "optC": "C. 5 months",
+          "optD": "D. 6 months"
+        },
+        "q19": {
+          "stem": "Hasan deposits Rp. 800,000.00 in a bank at 12% simple interest per year. For the total savings to become Rp. 872,000.00, Hasan must save for ...",
+          "optA": "A. 9 months",
+          "optB": "B. 7 months",
+          "optC": "C. 6 months",
+          "optD": "D. 4 months"
+        },
+        "q20": {
+          "stem": "Kaliluna deposits Rp. 600,000.00 in a bank. After 10 months, Kaliluna’s savings become Rp. 640,000.00. The annual interest rate at that bank is ...",
+          "optA": "A. 6%",
+          "optB": "B. 6.7%",
+          "optC": "C. 8%",
+          "optD": "D. 8.5%"
+        },
+        "q21": {
+          "stem": "Rafa saves in a bank at 16% simple interest per year. After 9 months, his money becomes Rp. 2,240,000.00. Rafa’s initial savings were ...",
+          "optA": "A. Rp. 1,800,000.00",
+          "optB": "B. Rp. 1,900,000.00",
+          "optC": "C. Rp. 2,000,000.00",
+          "optD": "D. Rp. 2,100,000.00"
+        },
+        "q22": {
+          "stem": "Pak Dindin borrows Rp. 4,800,000.00 from a cooperative. He is charged 24% interest per year and plans to repay it over 2 years. The monthly instalment he must pay is ...",
+          "optA": "A. Rp296,000.00",
+          "optB": "B. Rp269,000.00",
+          "optC": "C. Rp260,000.00",
+          "optD": "D. Rp209,000.00"
+        }
       }
     }
   },
