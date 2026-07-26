@@ -3360,6 +3360,72 @@
           "subCPre": "If two additional visitors bought only science books, what is",
           "subCSuffix": "now?"
         }
+      },
+      "himpunanBagian": {
+        "sectionA": "Part A · Identifying Subsets",
+        "sectionB": "Part B · Relations Between Sets",
+        "q1": {
+          "badge": "True/False",
+          "instruction": "Determine whether each of the following statements is <true>TRUE</true> or <false>FALSE</false>!"
+        },
+        "q2": {
+          "badge": "Listing Subsets",
+          "instruction": "List all subsets of each of the following sets!"
+        },
+        "q3": {
+          "badge": "Counting",
+          "instruction": "Find the number of subsets of:",
+          "itemB": "with",
+          "itemCDesc": "is a factor of 6"
+        },
+        "q4": {
+          "badge": "UN Style",
+          "pre": "Given",
+          "midPre": "How many subsets of",
+          "midPost": "have exactly <strong>3 members</strong>?"
+        },
+        "q5": {
+          "badge": "Power Set",
+          "pre": "The power set of",
+          "mid": "is the collection of all subsets of",
+          "post1": "List all elements of the power set",
+          "post2": "and find"
+        },
+        "q6": {
+          "badge": "Subset or Not",
+          "pre": "Given",
+          "post": "Determine whether"
+        },
+        "q7": {
+          "badge": "ANBK",
+          "pre": "Given",
+          "and": "and",
+          "midPre": "What can you conclude about the relationship between",
+          "midPost": "? Give an example!"
+        },
+        "q8": {
+          "badge": "Fill in the Blanks",
+          "pre": "Fill in the blanks with",
+          "or": "or",
+          "end": "!"
+        },
+        "q9": {
+          "badge": "TKA",
+          "pre": "If",
+          "mid": ", how many subsets of",
+          "end": "have:",
+          "itemA": "Exactly 0 members",
+          "itemB": "Exactly 1 member",
+          "itemC": "Exactly 2 members",
+          "itemD": "Exactly 4 members"
+        },
+        "q10": {
+          "badge": "Reasoning",
+          "pre": "Given set",
+          "midPre": "How many subsets of",
+          "midPost": "are <strong>not the empty set</strong> and <strong>not</strong>",
+          "end": "itself?"
+        }
       }
     }
   },

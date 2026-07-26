@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
@@ -51,6 +51,10 @@ const Q = ({ no, children, diagram, badge, badgeColor = "#60a5fa" }: QProps) => 
 const HimpunanBagianLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.himpunan.himpunanBagian";
+
+  const q3cDesc = t(`${p}.q3.itemCDesc`);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -86,11 +90,17 @@ const HimpunanBagianLatihanPage = () => {
         <SubsetDiagram />
 
         <div className="space-y-5 animate-slide-up">
-          <Section title="Bagian A · Menentukan Himpunan Bagian" color="#fb923c">
+          <Section title={t(`${p}.sectionA`)} color="#fb923c">
 
-            <Q no={1} badge="Benar/Salah" badgeColor="#fb923c">
+            <Q no={1} badge={t(`${p}.q1.badge`)} badgeColor="#fb923c">
               <p>
-                Tentukan apakah pernyataan berikut <strong className="text-green-300">BENAR</strong> atau <strong className="text-red-400">SALAH</strong>!
+                <Trans
+                  i18nKey={`${p}.q1.instruction`}
+                  components={{
+                    true: <strong className="text-green-300" />,
+                    false: <strong className="text-red-400" />,
+                  }}
+                />
               </p>
               <BlockMath math={`\\begin{array}{l}
 (a)\\; \\{1,2\\} \\subseteq \\{1,2,3,4\\}\\\\
@@ -100,10 +110,8 @@ const HimpunanBagianLatihanPage = () => {
 \\end{array}`} />
             </Q>
 
-            <Q no={2} badge="Mendaftar Subset" badgeColor="#fb923c">
-              <p>
-                Daftarkan semua himpunan bagian dari himpunan-himpunan berikut!
-              </p>
+            <Q no={2} badge={t(`${p}.q2.badge`)} badgeColor="#fb923c">
+              <p>{t(`${p}.q2.instruction`)}</p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="A = \{p, q\}" /></li>
                 <li>(b) <InlineMath math="B = \{1, 2, 3\}" /></li>
@@ -111,38 +119,35 @@ const HimpunanBagianLatihanPage = () => {
               </ul>
             </Q>
 
-            <Q no={3} badge="Menghitung" badgeColor="#fb923c">
-              <p>
-                Tentukan banyak himpunan bagian dari:
-              </p>
+            <Q no={3} badge={t(`${p}.q3.badge`)} badgeColor="#fb923c">
+              <p>{t(`${p}.q3.instruction`)}</p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="A = \{a, b, c, d\}" /></li>
-                <li>(b) <InlineMath math="B" /> dengan <InlineMath math="n(B) = 5" /></li>
-                <li>(c) <InlineMath math="C = \{x \mid x \text{ faktor dari 6}\}" /></li>
+                <li>(b) <InlineMath math="B" /> {t(`${p}.q3.itemB`)} <InlineMath math="n(B) = 5" /></li>
+                <li>(c) <InlineMath math={`C = \\{x \\mid x \\text{ ${q3cDesc}}\\}`} /></li>
               </ul>
             </Q>
 
-            <Q no={4} badge="UN Style" badgeColor="#fb923c">
+            <Q no={4} badge={t(`${p}.q4.badge`)} badgeColor="#fb923c">
               <p>
-                Diketahui <InlineMath math="P = \{1, 2, 3, 4, 5\}" />. Banyak himpunan bagian <InlineMath math="P" /> yang
-                memiliki tepat <strong className="text-orange-300">3 anggota</strong> adalah …
+                {t(`${p}.q4.pre`)}{' '}<InlineMath math="P = \{1, 2, 3, 4, 5\}" />. {t(`${p}.q4.midPre`)}{' '}<InlineMath math="P" />{' '}
+                <Trans i18nKey={`${p}.q4.midPost`} components={{ strong: <strong className="text-orange-300" /> }} />
               </p>
             </Q>
 
-            <Q no={5} badge="Himpunan Kuasa" badgeColor="#fb923c">
+            <Q no={5} badge={t(`${p}.q5.badge`)} badgeColor="#fb923c">
               <p>
-                Himpunan kuasa (power set) dari <InlineMath math="A = \{x, y, z\}" /> adalah kumpulan
-                semua himpunan bagian dari <InlineMath math="A" />.
-                Tuliskan semua anggota himpunan kuasa <InlineMath math="\mathcal{P}(A)" /> dan tentukan <InlineMath math="n(\mathcal{P}(A))" />!
+                {t(`${p}.q5.pre`)}{' '}<InlineMath math="A = \{x, y, z\}" />{' '}{t(`${p}.q5.mid`)}{' '}<InlineMath math="A" />.{' '}
+                {t(`${p}.q5.post1`)}{' '}<InlineMath math="\mathcal{P}(A)" />{' '}{t(`${p}.q5.post2`)}{' '}<InlineMath math="n(\mathcal{P}(A))" />!
               </p>
             </Q>
           </Section>
 
-          <Section title="Bagian B · Relasi Antar Himpunan" color="#a78bfa">
+          <Section title={t(`${p}.sectionB`)} color="#a78bfa">
 
-            <Q no={6} badge="Subset atau Bukan" badgeColor="#a78bfa">
+            <Q no={6} badge={t(`${p}.q6.badge`)} badgeColor="#a78bfa">
               <p>
-                Diketahui <InlineMath math="S = \{1,2,3,\ldots,10\}" />. Tentukan apakah <InlineMath math="A \subseteq B" />!
+                {t(`${p}.q6.pre`)}{' '}<InlineMath math="S = \{1,2,3,\ldots,10\}" />. {t(`${p}.q6.post`)}{' '}<InlineMath math="A \subseteq B" />!
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="A = \{2,4,6\}" />, <InlineMath math="B = \{2,4,6,8,10\}" /></li>
@@ -151,16 +156,16 @@ const HimpunanBagianLatihanPage = () => {
               </ul>
             </Q>
 
-            <Q no={7} badge="ANBK" badgeColor="#a78bfa">
+            <Q no={7} badge={t(`${p}.q7.badge`)} badgeColor="#a78bfa">
               <p>
-                Diketahui <InlineMath math="A \subseteq B" /> dan <InlineMath math="B \subseteq A" />.
-                Apa yang dapat disimpulkan tentang hubungan <InlineMath math="A" /> dan <InlineMath math="B" />? Berikan contoh!
+                {t(`${p}.q7.pre`)}{' '}<InlineMath math="A \subseteq B" />{' '}{t(`${p}.q7.and`)}{' '}<InlineMath math="B \subseteq A" />.{' '}
+                {t(`${p}.q7.midPre`)}{' '}<InlineMath math="A" />{' '}{t(`${p}.q7.and`)}{' '}<InlineMath math="B" />{t(`${p}.q7.midPost`)}
               </p>
             </Q>
 
-            <Q no={8} badge="Melengkapi" badgeColor="#a78bfa">
+            <Q no={8} badge={t(`${p}.q8.badge`)} badgeColor="#a78bfa">
               <p>
-                Lengkapi titik-titik dengan <InlineMath math="\subseteq" /> atau <InlineMath math="\not\subseteq" />!
+                {t(`${p}.q8.pre`)}{' '}<InlineMath math="\subseteq" />{' '}{t(`${p}.q8.or`)}{' '}<InlineMath math="\not\subseteq" />{t(`${p}.q8.end`)}
               </p>
               <BlockMath math={`\\begin{array}{l}
 (a)\\; \\{a,e,i\\} \\;\\_\\_\\_\\; \\{a,b,c,d,e,f,i\\}\\\\
@@ -169,23 +174,24 @@ const HimpunanBagianLatihanPage = () => {
 \\end{array}`} />
             </Q>
 
-            <Q no={9} badge="TKA" badgeColor="#a78bfa">
+            <Q no={9} badge={t(`${p}.q9.badge`)} badgeColor="#a78bfa">
               <p>
-                Jika <InlineMath math="n(A) = 4" />, berapakah banyak himpunan bagian <InlineMath math="A" /> yang:
+                {t(`${p}.q9.pre`)}{' '}<InlineMath math="n(A) = 4" />{t(`${p}.q9.mid`)}{' '}<InlineMath math="A" />{' '}{t(`${p}.q9.end`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) Memiliki 0 anggota</li>
-                <li>(b) Memiliki 1 anggota</li>
-                <li>(c) Memiliki 2 anggota</li>
-                <li>(d) Memiliki tepat 4 anggota</li>
+                <li>(a) {t(`${p}.q9.itemA`)}</li>
+                <li>(b) {t(`${p}.q9.itemB`)}</li>
+                <li>(c) {t(`${p}.q9.itemC`)}</li>
+                <li>(d) {t(`${p}.q9.itemD`)}</li>
               </ul>
             </Q>
 
-            <Q no={10} badge="Penalaran" badgeColor="#a78bfa">
+            <Q no={10} badge={t(`${p}.q10.badge`)} badgeColor="#a78bfa">
               <p>
-                Diketahui himpunan <InlineMath math="A = \{1, 2, 3\}" />.
-                Berapa banyak himpunan bagian <InlineMath math="A" /> yang <strong className="text-violet-300">bukan himpunan kosong</strong> dan
-                <strong className="text-violet-300"> bukan</strong> <InlineMath math="A" /> itu sendiri?
+                {t(`${p}.q10.pre`)}{' '}<InlineMath math="A = \{1, 2, 3\}" />.{' '}
+                {t(`${p}.q10.midPre`)}{' '}<InlineMath math="A" />{' '}
+                <Trans i18nKey={`${p}.q10.midPost`} components={{ strong: <strong className="text-violet-300" /> }} />{' '}
+                <InlineMath math="A" />{' '}{t(`${p}.q10.end`)}
               </p>
             </Q>
           </Section>

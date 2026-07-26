@@ -3360,6 +3360,72 @@
           "subCPre": "Jika dua pengunjung tambahan membeli hanya buku IPA, berapakah",
           "subCSuffix": "sekarang?"
         }
+      },
+      "himpunanBagian": {
+        "sectionA": "Bagian A · Menentukan Himpunan Bagian",
+        "sectionB": "Bagian B · Relasi Antar Himpunan",
+        "q1": {
+          "badge": "Benar/Salah",
+          "instruction": "Tentukan apakah pernyataan berikut <true>BENAR</true> atau <false>SALAH</false>!"
+        },
+        "q2": {
+          "badge": "Mendaftar Subset",
+          "instruction": "Daftarkan semua himpunan bagian dari himpunan-himpunan berikut!"
+        },
+        "q3": {
+          "badge": "Menghitung",
+          "instruction": "Tentukan banyak himpunan bagian dari:",
+          "itemB": "dengan",
+          "itemCDesc": "faktor dari 6"
+        },
+        "q4": {
+          "badge": "UN Style",
+          "pre": "Diketahui",
+          "midPre": "Banyak himpunan bagian",
+          "midPost": "yang memiliki tepat <strong>3 anggota</strong> adalah …"
+        },
+        "q5": {
+          "badge": "Himpunan Kuasa",
+          "pre": "Himpunan kuasa (power set) dari",
+          "mid": "adalah kumpulan semua himpunan bagian dari",
+          "post1": "Tuliskan semua anggota himpunan kuasa",
+          "post2": "dan tentukan"
+        },
+        "q6": {
+          "badge": "Subset atau Bukan",
+          "pre": "Diketahui",
+          "post": "Tentukan apakah"
+        },
+        "q7": {
+          "badge": "ANBK",
+          "pre": "Diketahui",
+          "and": "dan",
+          "midPre": "Apa yang dapat disimpulkan tentang hubungan",
+          "midPost": "? Berikan contoh!"
+        },
+        "q8": {
+          "badge": "Melengkapi",
+          "pre": "Lengkapi titik-titik dengan",
+          "or": "atau",
+          "end": "!"
+        },
+        "q9": {
+          "badge": "TKA",
+          "pre": "Jika",
+          "mid": ", berapakah banyak himpunan bagian",
+          "end": "yang:",
+          "itemA": "Memiliki 0 anggota",
+          "itemB": "Memiliki 1 anggota",
+          "itemC": "Memiliki 2 anggota",
+          "itemD": "Memiliki tepat 4 anggota"
+        },
+        "q10": {
+          "badge": "Penalaran",
+          "pre": "Diketahui himpunan",
+          "midPre": "Berapa banyak himpunan bagian",
+          "midPost": "yang <strong>bukan himpunan kosong</strong> dan <strong>bukan</strong>",
+          "end": "itu sendiri?"
+        }
       }
     }
   },

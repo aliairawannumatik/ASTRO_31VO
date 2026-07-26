@@ -1,0 +1,55 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Himpunan" — index dan
+sub-halaman 1 (PengertianKeanggotaanPage.tsx) sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Komponen Section dan Q (JSX inline flat) — ikuti pola persis seperti
+  PengertianKeanggotaanPage.tsx yang baru selesai
+- BlockMath dengan \begin{array} yang pure math (tidak ada \text{}
+  bahasa natural) JANGAN disentuh sama sekali, biarkan hardcode
+
+TUGAS SEKARANG — TAHAP 1 dari 2:
+Fokus HANYA ke Bagian A dan Bagian B di HimpunanBagianPage.tsx
+(Q1–Q10 dari total 15 soal). JANGAN kerjakan Bagian C (Q11-15), h1
+title, atau badge jumlah soal dulu — itu untuk Tahap 2.
+
+KONTEKS KHUSUS FILE INI:
+- Q1: BlockMath \begin{array} pernyataan benar/salah — PURE MATH,
+  JANGAN disentuh
+- Q3(c) PERHATIAN KHUSUS: ada \text{} berisi bahasa Indonesia:
+  C = \{x \mid x \text{ faktor dari 6}\}
+  WAJIB dipecah dengan pola interpolasi variabel — hitung teks
+  terjemahan lewat t() di JS dulu, baru interpolasikan ke string math
+  via template literal, persis pola q5.textDesc di
+  PengertianKeanggotaanPage
+- Q8: BlockMath \begin{array} isi titik-titik (dengan \_\_\_) — PURE
+  MATH, JANGAN disentuh
+- Diagram SubsetDiagram (SVG): teks di dalamnya ("S", "A", "B",
+  "B⊆A") adalah notasi murni — JANGAN diterjemahkan, biarkan hardcode
+- Sub-pertanyaan (a)/(b)/(c)/(d) — pecah jadi key terpisah per item,
+  ikuti pola itemA/itemB/itemC/itemD seperti sub-halaman sebelumnya
+
+1. Terjemahkan SEMUA teks Bagian A (Q1-5) dan Bagian B (Q6-10):
+   instruksi, teks soal, semua sub-pertanyaan sebagai key terpisah
+2. Tangani \text{} di Q3(c) dengan pola interpolasi
+3. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.himpunan.himpunanBagian.* — HANYA untuk Q1-Q10 dan
+   sectionA/sectionB (kalau ada judul bagian)
+4. JANGAN sentuh Bagian C (Q11-15), h1 title, badge jumlah soal, atau
+   sub-halaman lain
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc/skrip Node.js pengecek key, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q10)
+- Konfirmasi eksplisit: Q1/Q8 BlockMath pure math tidak disentuh,
+  Q3(c) \text{} ditangani dengan benar
