@@ -7,97 +7,147 @@ import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Zap } from "lucide-react";
 
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type PartItem = { label: string; math?: string; textKey?: string };
+
+type QuestionItem = {
+  number: number;
+  titleKey: string;
+  contentKey: string;
+  type: "essay" | "mixed";
+  parts?: PartItem[];
+};
+
+// ─── Locale base path ─────────────────────────────────────────────────────────
+
+const BASE = "practice.polaBilangan.polaGeometri";
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 const PolaGeometriPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const questions = [
+  // ── \text{} interpolation variables ──────────────────────────────────────
+  // For Japanese, pre-variables are empty ("") and post-variables carry the verb.
+  const hitungNilaiPre    = t(`${BASE}.hitungNilaiPre`);    // "Hitung nilai" / "Calculate the value of" / ""
+  const hitungNilaiPost   = t(`${BASE}.hitungNilaiPost`);   // ""             / ""                        / "の値を求めよ"
+  const tentukanNilaiPre  = t(`${BASE}.tentukanNilaiPre`);  // "Tentukan nilai" / "Determine the value of" / ""
+  const tentukanNilaiPost = t(`${BASE}.tentukanNilaiPost`); // ""               / ""                       / "の値を求めよ"
+  const hitungPre         = t(`${BASE}.hitungPre`);         // "Hitung" / "Calculate" / ""
+  const hitungPost        = t(`${BASE}.hitungPost`);        // ""       / ""          / "を計算せよ"
+  const tentukanRasioPre  = t(`${BASE}.tentukanRasioPre`);  // "Tentukan rasio" / "Determine the ratio" / "公比 "
+  const tentukanRasioPost = t(`${BASE}.tentukanRasioPost`); // ""               / ""                    / "を求めよ"
+  const danWord           = t(`${BASE}.danWord`);           // "dan"   / "and"   / "と"
+  const labelInfo         = t(`${BASE}.labelInfo`);         // "Info:" / "Info:" / "情報："
+  const labelSoal         = t(`${BASE}.labelSoal`);         // "Soal:" / "Problem:" / "問題："
+  const labelRGt1         = t(`${BASE}.labelRGt1`);         // "r > 1:" / "r > 1:" / "r > 1："
+  const labelRLt1         = t(`${BASE}.labelRLt1`);         // "r < 1:" / "r < 1:" / "r < 1："
+
+  // ── Questions array (key references only — no hardcoded Indonesian text) ──
+  const questions: QuestionItem[] = [
     {
       number: 1,
-      title: "Menentukan Rasio Barisan Geometri",
-      content: "Diketahui barisan geometri: 2, 6, 18, 54, ...",
+      titleKey: "q1.title",
+      contentKey: "q1.content",
       type: "mixed",
       parts: [
-        { label: "a.", text: "Tentukan suku pertama (a) dan rasio (r) barisan tersebut." },
-        { label: "b.", math: "\\text{Tuliskan rumus } U_n \\text{ dari barisan tersebut.}" },
-        { label: "c.", math: "\\text{Hitung nilai } U_8." },
+        { label: "a.", textKey: "q1.a" },
+        // Full sentence with Uₙ in the middle → textKey (plain text, like Case 1 in PolaAritmetika)
+        { label: "b.", textKey: "q1.b" },
+        // "Hitung nilai U_8." → interpolation pre/post
+        { label: "c.", math: `\\text{${hitungNilaiPre}} U_8\\text{${hitungNilaiPost}}.` },
       ],
     },
     {
       number: 2,
-      title: "Barisan Geometri Menurun",
-      content: "Diketahui barisan geometri: 192, 96, 48, 24, ...",
+      titleKey: "q2.title",
+      contentKey: "q2.content",
       type: "mixed",
       parts: [
-        { label: "a.", math: "\\text{Tentukan rasio } r." },
-        { label: "b.", math: "\\text{Hitung } U_8." },
-        { label: "c.", text: "Suku ke berapa yang bernilai 3/4?" },
+        // "Tentukan rasio r." → tentukanRasioPre/Post interpolation
+        { label: "a.", math: `\\text{${tentukanRasioPre}} r\\text{${tentukanRasioPost}}.` },
+        // "Hitung U_8." → hitungPre/Post interpolation
+        { label: "b.", math: `\\text{${hitungPre}} U_8\\text{${hitungPost}}.` },
+        { label: "c.", textKey: "q2.c" },
       ],
     },
     {
       number: 3,
-      title: "Soal UN - Barisan Geometri",
-      content: "Suku pertama barisan geometri adalah 3 dan suku ke-5 adalah 48.",
+      titleKey: "q3.title",
+      contentKey: "q3.content",
       type: "mixed",
       parts: [
-        { label: "a.", text: "Tentukan rasio barisan tersebut." },
-        { label: "b.", math: "\\text{Hitung } U_{10}." },
-        { label: "c.", math: "\\text{Hitung } S_8." },
+        { label: "a.", textKey: "q3.a" },
+        // "Hitung U_{10}." → hitungPre/Post
+        { label: "b.", math: `\\text{${hitungPre}} U_{10}\\text{${hitungPost}}.` },
+        // "Hitung S_8." → hitungPre/Post
+        { label: "c.", math: `\\text{${hitungPre}} S_8\\text{${hitungPost}}.` },
       ],
     },
     {
       number: 4,
-      title: "Menentukan Rasio dari Dua Suku",
-      content: "Dalam suatu barisan geometri diketahui:",
+      titleKey: "q4.title",
+      contentKey: "q4.content",
       type: "mixed",
       parts: [
-        { label: "Info:", math: "U_2 = 6 \\quad \\text{dan} \\quad U_5 = 162" },
-        { label: "a.", text: "Tentukan rasio (r) barisan tersebut." },
-        { label: "b.", text: "Tentukan suku pertama (a)." },
-        { label: "c.", math: "\\text{Tentukan nilai } U_7." },
+        // "dan" connector in math string
+        { label: labelInfo, math: `U_2 = 6 \\quad \\text{${danWord}} \\quad U_5 = 162` },
+        { label: "a.", textKey: "q4.a" },
+        { label: "b.", textKey: "q4.b" },
+        // "Tentukan nilai U_7." → tentukanNilaiPre/Post
+        { label: "c.", math: `\\text{${tentukanNilaiPre}} U_7\\text{${tentukanNilaiPost}}.` },
       ],
     },
     {
       number: 5,
-      title: "Jumlah n Suku Pertama Deret Geometri",
-      content: "Rumus jumlah n suku pertama deret geometri:",
+      titleKey: "q5.title",
+      contentKey: "q5.content",
       type: "mixed",
       parts: [
-        { label: "r > 1:", math: "S_n = \\frac{a(r^n - 1)}{r - 1}" },
-        { label: "r < 1:", math: "S_n = \\frac{a(1 - r^n)}{1 - r}" },
-        { label: "Soal:", text: "Hitung jumlah 6 suku pertama dari deret: 1 + 3 + 9 + 27 + ..." },
+        { label: labelRGt1, math: "S_n = \\frac{a(r^n - 1)}{r - 1}" },
+        { label: labelRLt1, math: "S_n = \\frac{a(1 - r^n)}{1 - r}" },
+        { label: labelSoal, textKey: "q5.soal" },
       ],
     },
     {
       number: 6,
-      title: "Deret Geometri - Jumlah Suku",
-      content: "Suku ke-1 dan suku ke-4 barisan geometri adalah 5 dan 40. Jumlah 6 suku pertama dari barisan tersebut adalah ….",
+      titleKey: "q6.title",
+      contentKey: "q6.content",
       type: "essay",
     },
     {
       number: 7,
-      title: "Menyisipkan Bilangan dalam Barisan Geometri",
-      content: "Di antara bilangan 2 dan 162, disisipkan 3 buah bilangan sehingga terbentuk barisan geometri.\n\na. Tentukan rasio barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Hitung jumlah semua bilangan dalam barisan tersebut.",
+      titleKey: "q7.title",
+      contentKey: "q7.content",
       type: "essay",
     },
     {
       number: 8,
-      title: "Aplikasi Geometri - Pertumbuhan Bakteri",
-      content: "Sebuah koloni bakteri berkembang biak dengan cara membelah diri menjadi 2 setiap 30 menit. Jumlah awal bakteri adalah 1.\n\na. Tuliskan barisan jumlah bakteri dari menit ke-0 hingga menit ke-150.\nb. Berapa jumlah bakteri setelah 5 jam?\nc. Tuliskan rumus jumlah bakteri setelah t menit.",
+      titleKey: "q8.title",
+      contentKey: "q8.content",
       type: "essay",
     },
     {
       number: 9,
-      title: "Aplikasi Deret Geometri - Panjang Tali",
-      content: "Seutas tali dibagi menjadi enam bagian sehingga bagian-bagiannya membentuk barisan geometri. Jika panjang tali terpendek 9 cm dan panjang tali terpanjang 288 cm, maka panjang tali mula-mula adalah ….",
+      titleKey: "q9.title",
+      contentKey: "q9.content",
       type: "essay",
     },
     {
       number: 10,
-      title: "Aplikasi Barisan Geometri - Melipat Kertas",
-      content: "Celin melipat-lipat kertas berkali-kali. Jika ketebalan kertas mula-mula 2 mm, maka butuh berapa kali lipatan sehingga ketebalan kertas menjadi 256 mm?",
+      titleKey: "q10.title",
+      contentKey: "q10.content",
       type: "essay",
     },
+  ];
+
+  // ── Formula reference box rows ─────────────────────────────────────────────
+  const formulaRows = [
+    { labelKey: `${BASE}.formula.sukuKeN`,         math: "U_n = a \\cdot r^{n-1}" },
+    { labelKey: `${BASE}.formula.jumlahNSukuRBesar`, math: "S_n = \\frac{a(r^n - 1)}{r - 1}" },
+    { labelKey: `${BASE}.formula.jumlahNSukuRKecil`, math: "S_n = \\frac{a(1 - r^n)}{1 - r}" },
   ];
 
   return (
@@ -111,26 +161,23 @@ const PolaGeometriPage = () => {
             <Zap className="w-7 h-7 text-orange-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-orange-300 text-center mb-1" style={{ textShadow: '0 0 20px rgba(251,146,60,0.7)' }}>
-            BARISAN DAN DERET GEOMETRI
+            {t(`${BASE}.pageTitle`)}
           </h1>
           <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-lg px-4 py-2">
-            <span className="text-orange-400 text-xs font-bold">📋 10 {t('practice.suffixSoal')}</span>
+            <span className="text-orange-400 text-xs font-bold">📋 {questions.length} {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>
-            <span className="text-white/50 text-xs">Tingkat: UN / ANBK / TKA</span>
+            <span className="text-white/50 text-xs">{t(`${BASE}.tingkatLabel`)} UN / ANBK / TKA</span>
           </div>
         </div>
 
+        {/* ── Formula reference box ── */}
         <div className="mb-5 bg-orange-900/20 border border-orange-500/20 rounded-xl p-4">
-          <p className="text-orange-300 text-xs font-bold mb-3">📌 Rumus Barisan Geometri</p>
+          <p className="text-orange-300 text-xs font-bold mb-3">{t(`${BASE}.formulaBoxTitle`)}</p>
           <div className="flex flex-col gap-3">
-            {[
-              { label: "Suku ke-n", math: "U_n = a \\cdot r^{n-1}" },
-              { label: "Jumlah n suku (r > 1)", math: "S_n = \\frac{a(r^n - 1)}{r - 1}" },
-              { label: "Jumlah n suku (r < 1)", math: "S_n = \\frac{a(1 - r^n)}{1 - r}" },
-            ].map((r, i) => (
+            {formulaRows.map((r, i) => (
               <div key={i} className="bg-white/5 rounded-lg px-4 py-2">
-                <p className="text-white/40 text-[10px] mb-1">{r.label}</p>
+                <p className="text-white/40 text-[10px] mb-1">{t(r.labelKey)}</p>
                 <div className="text-orange-200">
                   <BlockMath math={r.math} />
                 </div>
@@ -139,6 +186,7 @@ const PolaGeometriPage = () => {
           </div>
         </div>
 
+        {/* ── Questions ── */}
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div
@@ -158,14 +206,12 @@ const PolaGeometriPage = () => {
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    {q.title && (
-                      <span className="text-orange-400 text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                        {q.title}
-                      </span>
-                    )}
-                    {q.content && (
-                      <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">{q.content}</p>
-                    )}
+                    <span className="text-orange-400 text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                      {t(`${BASE}.${q.titleKey}`)}
+                    </span>
+                    <p className="font-body text-sm text-white/90 whitespace-pre-line leading-relaxed mb-2">
+                      {t(`${BASE}.${q.contentKey}`)}
+                    </p>
                     {q.type === "mixed" && q.parts && (
                       <div className="flex flex-col gap-2 mt-2">
                         {q.parts.map((part, pi) => (
@@ -176,7 +222,9 @@ const PolaGeometriPage = () => {
                                 <InlineMath math={part.math} />
                               </div>
                             ) : (
-                              <p className="font-body text-sm text-white/80 whitespace-pre-line">{part.text}</p>
+                              <p className="font-body text-sm text-white/80 whitespace-pre-line">
+                                {part.textKey ? t(`${BASE}.${part.textKey}`) : ''}
+                              </p>
                             )}
                           </div>
                         ))}

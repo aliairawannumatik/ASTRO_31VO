@@ -3995,6 +3995,76 @@
           "title": "Jumlah Kelipatan 6",
           "content": "Tentukan jumlah semua bilangan yang merupakan kelipatan 6 yang berada di antara 120 dan 300."
         }
+      },
+      "polaGeometri": {
+        "pageTitle": "BARISAN DAN DERET GEOMETRI",
+        "formulaBoxTitle": "📌 Rumus Barisan Geometri",
+        "tingkatLabel": "Tingkat:",
+        "formula": {
+          "sukuKeN": "Suku ke-n",
+          "jumlahNSukuRBesar": "Jumlah n suku (r > 1)",
+          "jumlahNSukuRKecil": "Jumlah n suku (r < 1)"
+        },
+        "hitungNilaiPre": "Hitung nilai",
+        "hitungNilaiPost": "",
+        "tentukanNilaiPre": "Tentukan nilai",
+        "tentukanNilaiPost": "",
+        "hitungPre": "Hitung",
+        "hitungPost": "",
+        "tentukanRasioPre": "Tentukan rasio",
+        "tentukanRasioPost": "",
+        "danWord": "dan",
+        "labelInfo": "Info:",
+        "labelSoal": "Soal:",
+        "labelRGt1": "r > 1:",
+        "labelRLt1": "r < 1:",
+        "q1": {
+          "title": "Menentukan Rasio Barisan Geometri",
+          "content": "Diketahui barisan geometri: 2, 6, 18, 54, ...",
+          "a": "Tentukan suku pertama (a) dan rasio (r) barisan tersebut.",
+          "b": "Tuliskan rumus Uₙ dari barisan tersebut."
+        },
+        "q2": {
+          "title": "Barisan Geometri Menurun",
+          "content": "Diketahui barisan geometri: 192, 96, 48, 24, ...",
+          "c": "Suku ke berapa yang bernilai 3/4?"
+        },
+        "q3": {
+          "title": "Soal UN – Barisan Geometri",
+          "content": "Suku pertama barisan geometri adalah 3 dan suku ke-5 adalah 48.",
+          "a": "Tentukan rasio barisan tersebut."
+        },
+        "q4": {
+          "title": "Menentukan Rasio dari Dua Suku",
+          "content": "Dalam suatu barisan geometri diketahui:",
+          "a": "Tentukan rasio (r) barisan tersebut.",
+          "b": "Tentukan suku pertama (a)."
+        },
+        "q5": {
+          "title": "Jumlah n Suku Pertama Deret Geometri",
+          "content": "Rumus jumlah n suku pertama deret geometri:",
+          "soal": "Hitung jumlah 6 suku pertama dari deret: 1 + 3 + 9 + 27 + ..."
+        },
+        "q6": {
+          "title": "Deret Geometri – Jumlah Suku",
+          "content": "Suku ke-1 dan suku ke-4 barisan geometri adalah 5 dan 40. Jumlah 6 suku pertama dari barisan tersebut adalah …."
+        },
+        "q7": {
+          "title": "Menyisipkan Bilangan dalam Barisan Geometri",
+          "content": "Di antara bilangan 2 dan 162, disisipkan 3 buah bilangan sehingga terbentuk barisan geometri.\n\na. Tentukan rasio barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Hitung jumlah semua bilangan dalam barisan tersebut."
+        },
+        "q8": {
+          "title": "Aplikasi Geometri – Pertumbuhan Bakteri",
+          "content": "Sebuah koloni bakteri berkembang biak dengan cara membelah diri menjadi 2 setiap 30 menit. Jumlah awal bakteri adalah 1.\n\na. Tuliskan barisan jumlah bakteri dari menit ke-0 hingga menit ke-150.\nb. Berapa jumlah bakteri setelah 5 jam?\nc. Tuliskan rumus jumlah bakteri setelah t menit."
+        },
+        "q9": {
+          "title": "Aplikasi Deret Geometri – Panjang Tali",
+          "content": "Seutas tali dibagi menjadi enam bagian sehingga bagian-bagiannya membentuk barisan geometri. Jika panjang tali terpendek 9 cm dan panjang tali terpanjang 288 cm, maka panjang tali mula-mula adalah …."
+        },
+        "q10": {
+          "title": "Aplikasi Barisan Geometri – Melipat Kertas",
+          "content": "Celin melipat-lipat kertas berkali-kali. Jika ketebalan kertas mula-mula 2 mm, maka butuh berapa kali lipatan sehingga ketebalan kertas menjadi 256 mm?"
+        }
       }
     }
   },
