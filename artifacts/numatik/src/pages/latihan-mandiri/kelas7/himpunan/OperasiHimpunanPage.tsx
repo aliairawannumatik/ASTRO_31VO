@@ -93,6 +93,15 @@ const Q = ({ no, children, diagram, badge, badgeColor = "#60a5fa" }: QProps) => 
 const OperasiHimpunanLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.himpunan.operasiHimpunan";
+
+  /* ── Interpolation vars for \text{} inside InlineMath ── */
+  const tipIrisanText   = t(`${p}.tipIrisanText`);   // "dan" / "and" / "かつ"
+  const tipGabunganText = t(`${p}.tipGabunganText`); // "atau" / "or" / "または"
+  const tipSelisihText  = t(`${p}.tipSelisihText`);  // "dan" / "and" / "かつ"
+  const q2Prima  = t(`${p}.q2.primaDef`);  // "bilangan prima" / "prime number" / "素数"
+  const q2Ganjil = t(`${p}.q2.ganjilDef`); // "bilangan ganjil" / "odd number" / "奇数"
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -115,65 +124,78 @@ const OperasiHimpunanLatihanPage = () => {
           </div>
         </div>
 
-        {/* Operasi ringkas */}
+        {/* Tip box – operasi ringkas */}
         <div className="rounded-xl bg-red-500/10 border border-red-500/30 px-5 py-4 mb-4 text-sm text-white/80 font-body">
-          <p className="font-bold text-red-300 mb-2">Jenis Operasi Himpunan</p>
+          <p className="font-bold text-red-300 mb-2">{t(`${p}.tipTitle`)}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-white/70">
-            <div><span className="text-yellow-300 font-bold">Irisan (∩)</span><br/><InlineMath math="A \cap B = \{x \mid x \in A \text{ dan } x \in B\}" /></div>
-            <div><span className="text-yellow-300 font-bold">Gabungan (∪)</span><br/><InlineMath math="A \cup B = \{x \mid x \in A \text{ atau } x \in B\}" /></div>
-            <div><span className="text-yellow-300 font-bold">Selisih (\)</span><br/><InlineMath math="A \setminus B = \{x \mid x \in A \text{ dan } x \notin B\}" /></div>
-            <div><span className="text-yellow-300 font-bold">Komplemen (ᶜ)</span><br/><InlineMath math="A^c = \{x \mid x \in S, x \notin A\}" /></div>
+            <div>
+              <span className="text-yellow-300 font-bold">{t(`${p}.tipIrisan`)}</span><br/>
+              <InlineMath math={`A \\cap B = \\{x \\mid x \\in A \\text{ ${tipIrisanText} } x \\in B\\}`} />
+            </div>
+            <div>
+              <span className="text-yellow-300 font-bold">{t(`${p}.tipGabungan`)}</span><br/>
+              <InlineMath math={`A \\cup B = \\{x \\mid x \\in A \\text{ ${tipGabunganText} } x \\in B\\}`} />
+            </div>
+            <div>
+              <span className="text-yellow-300 font-bold">{t(`${p}.tipSelisih`)}</span><br/>
+              <InlineMath math={`A \\setminus B = \\{x \\mid x \\in A \\text{ ${tipSelisihText} } x \\notin B\\}`} />
+            </div>
+            <div>
+              <span className="text-yellow-300 font-bold">{t(`${p}.tipKomplemen`)}</span><br/>
+              <InlineMath math="A^c = \{x \mid x \in S, x \notin A\}" />
+            </div>
           </div>
         </div>
 
         {/* 4 operasi mini diagrams */}
         <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="rounded-xl bg-white/5 p-2"><VennUnion /><p className="text-center text-xs text-blue-300 font-mono mt-1">Gabungan A∪B</p></div>
-          <div className="rounded-xl bg-white/5 p-2"><VennIntersection /><p className="text-center text-xs text-yellow-300 font-mono mt-1">Irisan A∩B</p></div>
-          <div className="rounded-xl bg-white/5 p-2"><VennDifference /><p className="text-center text-xs text-orange-300 font-mono mt-1">Selisih A\B</p></div>
-          <div className="rounded-xl bg-white/5 p-2"><VennComplement /><p className="text-center text-xs text-green-300 font-mono mt-1">Komplemen Aᶜ</p></div>
+          <div className="rounded-xl bg-white/5 p-2"><VennUnion /><p className="text-center text-xs text-blue-300 font-mono mt-1">{t(`${p}.captionGabungan`)}</p></div>
+          <div className="rounded-xl bg-white/5 p-2"><VennIntersection /><p className="text-center text-xs text-yellow-300 font-mono mt-1">{t(`${p}.captionIrisan`)}</p></div>
+          <div className="rounded-xl bg-white/5 p-2"><VennDifference /><p className="text-center text-xs text-orange-300 font-mono mt-1">{t(`${p}.captionSelisih`)}</p></div>
+          <div className="rounded-xl bg-white/5 p-2"><VennComplement /><p className="text-center text-xs text-green-300 font-mono mt-1">{t(`${p}.captionKomplemen`)}</p></div>
         </div>
 
         <div className="space-y-5 animate-slide-up">
-          <Section title="Bagian A · Irisan (∩) dan Gabungan (∪)" color="#60a5fa">
+          <Section title={t(`${p}.sectionA`)} color="#60a5fa">
 
-            <Q no={1} badge="Dasar" badgeColor="#60a5fa">
+            <Q no={1} badge={t(`${p}.q1.badge`)} badgeColor="#60a5fa">
               <p>
-                Diketahui <InlineMath math="A = \{1,2,3,4,5,6\}" /> dan <InlineMath math="B = \{2,4,6,8,10\}" />.
-                Tentukan:
-                (a) <InlineMath math="A \cap B" />,&nbsp;
-                (b) <InlineMath math="A \cup B" />,&nbsp;
-                (c) <InlineMath math="n(A \cap B)" />,&nbsp;
-                (d) <InlineMath math="n(A \cup B)" />
+                {t(`${p}.q1.pre`)}{' '}<InlineMath math="A = \{1,2,3,4,5,6\}" />{' '}{t(`${p}.q1.dan`)}{' '}<InlineMath math="B = \{2,4,6,8,10\}" />.{' '}
+                {t(`${p}.q1.instruction`)}{' '}
+                (a){' '}<InlineMath math="A \cap B" />,&nbsp;
+                (b){' '}<InlineMath math="A \cup B" />,&nbsp;
+                (c){' '}<InlineMath math="n(A \cap B)" />,&nbsp;
+                (d){' '}<InlineMath math="n(A \cup B)" />
               </p>
             </Q>
 
-            <Q no={2} badge="Notasi Pembentuk" badgeColor="#60a5fa">
+            <Q no={2} badge={t(`${p}.q2.badge`)} badgeColor="#60a5fa">
               <p>
-                Diketahui <InlineMath math="P = \{x \mid x \text{ bilangan prima} \leq 15\}" /> dan
-                <InlineMath math="\; Q = \{x \mid x \text{ bilangan ganjil} \leq 10\}" />.
-                Tentukan <InlineMath math="P \cap Q" /> dan <InlineMath math="P \cup Q" />!
+                {t(`${p}.q2.pre`)}{' '}<InlineMath math={`P = \\{x \\mid x \\text{ ${q2Prima}} \\leq 15\\}`} />{' '}{t(`${p}.q2.dan`)}{' '}
+                <InlineMath math={`Q = \\{x \\mid x \\text{ ${q2Ganjil}} \\leq 10\\}`} />.{' '}
+                {t(`${p}.q2.instrPre`)}{' '}<InlineMath math="P \cap Q" />{' '}{t(`${p}.q2.instrDan`)}{' '}<InlineMath math="P \cup Q" />!
               </p>
             </Q>
 
-            <Q no={3} badge="Rumus" badgeColor="#60a5fa">
+            <Q no={3} badge={t(`${p}.q3.badge`)} badgeColor="#60a5fa">
               <p>
-                Diketahui <InlineMath math="n(A) = 20" />, <InlineMath math="n(B) = 15" />,
-                <InlineMath math="\; n(A \cap B) = 7" />.
-                Gunakan rumus <InlineMath math="n(A \cup B) = n(A) + n(B) - n(A \cap B)" /> untuk mencari <InlineMath math="n(A \cup B)" />!
+                {t(`${p}.q3.pre`)}{' '}<InlineMath math="n(A) = 20" />,{' '}<InlineMath math="n(B) = 15" />,{' '}
+                <InlineMath math="\; n(A \cap B) = 7" />.{' '}
+                {t(`${p}.q3.instrPre`)}{' '}<InlineMath math="n(A \cup B) = n(A) + n(B) - n(A \cap B)" />{' '}{t(`${p}.q3.instrMid`)}{' '}<InlineMath math="n(A \cup B)" />!
               </p>
             </Q>
 
             <Q no={4} badge="UN Style" badgeColor="#60a5fa">
               <p>
-                Diketahui <InlineMath math="n(A \cup B) = 40" />, <InlineMath math="n(A) = 25" />,
-                <InlineMath math="\; n(A \cap B) = 10" />. Nilai <InlineMath math="n(B)" /> adalah …
+                {t(`${p}.q4.pre`)}{' '}<InlineMath math="n(A \cup B) = 40" />,{' '}<InlineMath math="n(A) = 25" />,{' '}
+                <InlineMath math="\; n(A \cap B) = 10" />.{' '}
+                {t(`${p}.q4.instrPre`)}<InlineMath math="n(B)" />{t(`${p}.q4.instrPost`)}
               </p>
             </Q>
 
-            <Q no={5} badge="Sifat" badgeColor="#60a5fa">
+            <Q no={5} badge={t(`${p}.q5.badge`)} badgeColor="#60a5fa">
               <p>
-                Tentukan mana yang benar berdasarkan sifat operasi irisan dan gabungan!
+                {t(`${p}.q5.instruction`)}
               </p>
               <BlockMath math={`\\begin{array}{l}
 (a)\\; A \\cap B = B \\cap A\\\\
@@ -184,26 +206,26 @@ const OperasiHimpunanLatihanPage = () => {
             </Q>
           </Section>
 
-          <Section title="Bagian B · Selisih (\\) dan Komplemen (ᶜ)" color="#f87171">
+          <Section title={t(`${p}.sectionB`)} color="#f87171">
 
-            <Q no={6} badge="Selisih" badgeColor="#f87171">
+            <Q no={6} badge={t(`${p}.q6.badge`)} badgeColor="#f87171">
               <p>
-                Diketahui <InlineMath math="A = \{1,2,3,4,5,6,7,8\}" /> dan <InlineMath math="B = \{2,4,6,8,10,12\}" />.
-                Tentukan: (a) <InlineMath math="A \setminus B" />, (b) <InlineMath math="B \setminus A" />
+                {t(`${p}.q6.pre`)}{' '}<InlineMath math="A = \{1,2,3,4,5,6,7,8\}" />{' '}{t(`${p}.q6.dan`)}{' '}<InlineMath math="B = \{2,4,6,8,10,12\}" />.{' '}
+                {t(`${p}.q6.instruction`)}{' '}(a){' '}<InlineMath math="A \setminus B" />, (b){' '}<InlineMath math="B \setminus A" />
               </p>
             </Q>
 
-            <Q no={7} badge="Komplemen" badgeColor="#f87171">
+            <Q no={7} badge={t(`${p}.q7.badge`)} badgeColor="#f87171">
               <p>
-                Diketahui <InlineMath math="S = \{1,2,3,4,5,6,7,8,9,10\}" /> dan <InlineMath math="A = \{1,3,5,7,9\}" />.
-                Tentukan: (a) <InlineMath math="A^c" />, (b) <InlineMath math="n(A^c)" />, (c) <InlineMath math="A \cup A^c" />, (d) <InlineMath math="A \cap A^c" />
+                {t(`${p}.q7.pre`)}{' '}<InlineMath math="S = \{1,2,3,4,5,6,7,8,9,10\}" />{' '}{t(`${p}.q7.dan`)}{' '}<InlineMath math="A = \{1,3,5,7,9\}" />.{' '}
+                {t(`${p}.q7.instruction`)}{' '}(a){' '}<InlineMath math="A^c" />, (b){' '}<InlineMath math="n(A^c)" />, (c){' '}<InlineMath math="A \cup A^c" />, (d){' '}<InlineMath math="A \cap A^c" />
               </p>
             </Q>
 
             <Q no={8} badge="ANBK" badgeColor="#f87171">
               <p>
-                Diketahui <InlineMath math="S = \{a,b,c,d,e,f,g,h\}" />, <InlineMath math="A = \{a,c,e,g\}" />, <InlineMath math="B = \{b,c,d,e\}" />.
-                Tentukan:
+                {t(`${p}.q8.pre`)}{' '}<InlineMath math="S = \{a,b,c,d,e,f,g,h\}" />,{' '}<InlineMath math="A = \{a,c,e,g\}" />,{' '}<InlineMath math="B = \{b,c,d,e\}" />.{' '}
+                {t(`${p}.q8.instruction`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="A^c" /></li>
@@ -215,16 +237,16 @@ const OperasiHimpunanLatihanPage = () => {
 
             <Q no={9} badge="TKA" badgeColor="#f87171">
               <p>
-                Diketahui <InlineMath math="n(S) = 50" />, <InlineMath math="n(A) = 30" />.
-                Tentukan <InlineMath math="n(A^c)" /> dan verifikasi bahwa <InlineMath math="n(A) + n(A^c) = n(S)" />!
+                {t(`${p}.q9.pre`)}{' '}<InlineMath math="n(S) = 50" />,{' '}<InlineMath math="n(A) = 30" />.{' '}
+                {t(`${p}.q9.instrPre`)}{' '}<InlineMath math="n(A^c)" />{' '}{t(`${p}.q9.instrMid`)}{' '}<InlineMath math="n(A) + n(A^c) = n(S)" />{t(`${p}.q9.instrPost`)}!
               </p>
             </Q>
 
-            <Q no={10} badge="Hukum De Morgan" badgeColor="#f87171">
+            <Q no={10} badge={t(`${p}.q10.badge`)} badgeColor="#f87171">
               <p>
-                Diketahui <InlineMath math="S = \{1,2,3,4,5,6,7,8,9,10\}" />,
-                <InlineMath math="\; A = \{1,2,3,4,5\}" />, <InlineMath math="\; B = \{4,5,6,7,8\}" />.
-                Verifikasi Hukum De Morgan: <InlineMath math="(A \cup B)^c = A^c \cap B^c" />
+                {t(`${p}.q10.pre`)}{' '}<InlineMath math="S = \{1,2,3,4,5,6,7,8,9,10\}" />,{' '}
+                <InlineMath math="\; A = \{1,2,3,4,5\}" />,{' '}<InlineMath math="\; B = \{4,5,6,7,8\}" />.{' '}
+                {t(`${p}.q10.instruction`)}{' '}<InlineMath math="(A \cup B)^c = A^c \cap B^c" />
               </p>
             </Q>
           </Section>

@@ -3584,6 +3584,79 @@
           "subA": "ベン図を描きなさい！",
           "subB": "3つの活動のどれも好きでない生徒は何人いるか？"
         }
+      },
+      "operasiHimpunan": {
+        "tipTitle": "集合の演算の種類",
+        "tipIrisan": "積集合 (∩)",
+        "tipGabungan": "和集合 (∪)",
+        "tipSelisih": "差集合 (\\)",
+        "tipKomplemen": "補集合 (ᶜ)",
+        "tipIrisanText": "かつ",
+        "tipGabunganText": "または",
+        "tipSelisihText": "かつ",
+        "captionGabungan": "和集合 A∪B",
+        "captionIrisan": "積集合 A∩B",
+        "captionSelisih": "差集合 A\\B",
+        "captionKomplemen": "補集合 Aᶜ",
+        "sectionA": "A部 · 積集合 (∩) と和集合 (∪)",
+        "sectionB": "B部 · 差集合 (\\) と補集合 (ᶜ)",
+        "q1": {
+          "badge": "基礎",
+          "pre": "次の集合について",
+          "dan": "と",
+          "instruction": "求めなさい："
+        },
+        "q2": {
+          "badge": "内包的記法",
+          "pre": "次の集合について",
+          "dan": "と",
+          "primaDef": "素数",
+          "ganjilDef": "奇数",
+          "instrPre": "次を求めなさい：",
+          "instrDan": "と"
+        },
+        "q3": {
+          "badge": "公式",
+          "pre": "次の集合について",
+          "instrPre": "公式",
+          "instrMid": "を使って，次を求めなさい："
+        },
+        "q4": {
+          "pre": "次の集合について",
+          "instrPre": "",
+          "instrPost": " の値は …"
+        },
+        "q5": {
+          "badge": "性質",
+          "instruction": "積集合と和集合の性質に基づいて，正しいものを判別しなさい！"
+        },
+        "q6": {
+          "badge": "差集合",
+          "pre": "次の集合について",
+          "dan": "と",
+          "instruction": "求めなさい："
+        },
+        "q7": {
+          "badge": "補集合",
+          "pre": "次の集合について",
+          "dan": "と",
+          "instruction": "求めなさい："
+        },
+        "q8": {
+          "pre": "次の集合について",
+          "instruction": "求めなさい："
+        },
+        "q9": {
+          "pre": "次の集合について",
+          "instrPre": "求め，",
+          "instrMid": "について，",
+          "instrPost": "が成立することを確認しなさい"
+        },
+        "q10": {
+          "badge": "ド・モルガンの法則",
+          "pre": "次の集合について",
+          "instruction": "ド・モルガンの法則を確認しなさい："
+        }
       }
     }
   },

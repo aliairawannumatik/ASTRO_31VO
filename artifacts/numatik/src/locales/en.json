@@ -3584,6 +3584,79 @@
           "subA": "Draw the Venn diagram!",
           "subB": "How many students don't like any of the three activities?"
         }
+      },
+      "operasiHimpunan": {
+        "tipTitle": "Types of Set Operations",
+        "tipIrisan": "Intersection (∩)",
+        "tipGabungan": "Union (∪)",
+        "tipSelisih": "Difference (\\)",
+        "tipKomplemen": "Complement (ᶜ)",
+        "tipIrisanText": "and",
+        "tipGabunganText": "or",
+        "tipSelisihText": "and",
+        "captionGabungan": "Union A∪B",
+        "captionIrisan": "Intersection A∩B",
+        "captionSelisih": "Difference A\\B",
+        "captionKomplemen": "Complement Aᶜ",
+        "sectionA": "Part A · Intersection (∩) and Union (∪)",
+        "sectionB": "Part B · Difference (\\) and Complement (ᶜ)",
+        "q1": {
+          "badge": "Basic",
+          "pre": "Given",
+          "dan": "and",
+          "instruction": "Determine:"
+        },
+        "q2": {
+          "badge": "Set-Builder Notation",
+          "pre": "Given",
+          "dan": "and",
+          "primaDef": "prime number",
+          "ganjilDef": "odd number",
+          "instrPre": "Determine",
+          "instrDan": "and"
+        },
+        "q3": {
+          "badge": "Formula",
+          "pre": "Given",
+          "instrPre": "Use the formula",
+          "instrMid": "to find"
+        },
+        "q4": {
+          "pre": "Given",
+          "instrPre": "The value of ",
+          "instrPost": " is …"
+        },
+        "q5": {
+          "badge": "Properties",
+          "instruction": "Determine which are true based on the properties of intersection and union operations!"
+        },
+        "q6": {
+          "badge": "Difference",
+          "pre": "Given",
+          "dan": "and",
+          "instruction": "Determine:"
+        },
+        "q7": {
+          "badge": "Complement",
+          "pre": "Given",
+          "dan": "and",
+          "instruction": "Determine:"
+        },
+        "q8": {
+          "pre": "Given",
+          "instruction": "Determine:"
+        },
+        "q9": {
+          "pre": "Given",
+          "instrPre": "Determine",
+          "instrMid": "and verify that",
+          "instrPost": ""
+        },
+        "q10": {
+          "badge": "De Morgan's Law",
+          "pre": "Given",
+          "instruction": "Verify De Morgan's Law:"
+        }
       }
     }
   },

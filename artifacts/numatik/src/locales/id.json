@@ -3584,6 +3584,79 @@
           "subA": "Gambarkan diagram Venn-nya!",
           "subB": "Berapa siswa yang tidak menyukai satupun dari ketiga kegiatan tersebut?"
         }
+      },
+      "operasiHimpunan": {
+        "tipTitle": "Jenis Operasi Himpunan",
+        "tipIrisan": "Irisan (∩)",
+        "tipGabungan": "Gabungan (∪)",
+        "tipSelisih": "Selisih (\\)",
+        "tipKomplemen": "Komplemen (ᶜ)",
+        "tipIrisanText": "dan",
+        "tipGabunganText": "atau",
+        "tipSelisihText": "dan",
+        "captionGabungan": "Gabungan A∪B",
+        "captionIrisan": "Irisan A∩B",
+        "captionSelisih": "Selisih A\\B",
+        "captionKomplemen": "Komplemen Aᶜ",
+        "sectionA": "Bagian A · Irisan (∩) dan Gabungan (∪)",
+        "sectionB": "Bagian B · Selisih (\\) dan Komplemen (ᶜ)",
+        "q1": {
+          "badge": "Dasar",
+          "pre": "Diketahui",
+          "dan": "dan",
+          "instruction": "Tentukan:"
+        },
+        "q2": {
+          "badge": "Notasi Pembentuk",
+          "pre": "Diketahui",
+          "dan": "dan",
+          "primaDef": "bilangan prima",
+          "ganjilDef": "bilangan ganjil",
+          "instrPre": "Tentukan",
+          "instrDan": "dan"
+        },
+        "q3": {
+          "badge": "Rumus",
+          "pre": "Diketahui",
+          "instrPre": "Gunakan rumus",
+          "instrMid": "untuk mencari"
+        },
+        "q4": {
+          "pre": "Diketahui",
+          "instrPre": "Nilai ",
+          "instrPost": " adalah …"
+        },
+        "q5": {
+          "badge": "Sifat",
+          "instruction": "Tentukan mana yang benar berdasarkan sifat operasi irisan dan gabungan!"
+        },
+        "q6": {
+          "badge": "Selisih",
+          "pre": "Diketahui",
+          "dan": "dan",
+          "instruction": "Tentukan:"
+        },
+        "q7": {
+          "badge": "Komplemen",
+          "pre": "Diketahui",
+          "dan": "dan",
+          "instruction": "Tentukan:"
+        },
+        "q8": {
+          "pre": "Diketahui",
+          "instruction": "Tentukan:"
+        },
+        "q9": {
+          "pre": "Diketahui",
+          "instrPre": "Tentukan",
+          "instrMid": "dan verifikasi bahwa",
+          "instrPost": ""
+        },
+        "q10": {
+          "badge": "Hukum De Morgan",
+          "pre": "Diketahui",
+          "instruction": "Verifikasi Hukum De Morgan:"
+        }
       }
     }
   },
