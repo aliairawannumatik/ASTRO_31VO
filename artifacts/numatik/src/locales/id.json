@@ -4952,6 +4952,79 @@
           "partB": "Selesaikan dengan metode eliminasi.",
           "partC": "Tentukan harga 1 kemeja dan 1 celana."
         }
+      },
+      "modelSpldv": {
+        "pageTitle": "MEMBUAT MODEL SPLDV",
+        "grade": "Kelas 8",
+        "soalCount": "10 Soal",
+        "backSuffix": "SPLDV",
+        "q1": {
+          "title": "Membuat Model dari Belanja",
+          "content": "Ibu membeli 3 kg beras dan 2 kg gula seharga Rp 47.000. Ayah membeli 5 kg beras dan 1 kg gula seharga Rp 61.000.",
+          "partA": "Tentukan variabel yang tepat (misalnya beras = x, gula = y).",
+          "partB": "Tuliskan dua persamaan linearnya.",
+          "partC": "Tuliskan dalam bentuk SPLDV."
+        },
+        "q2": {
+          "title": "Model dari Umur",
+          "content": "Umur Bapak 3 kali umur Anak. Lima tahun lagi, umur Bapak 2 kali umur Anak.",
+          "partA": "Misal umur Bapak sekarang = x dan umur Anak = y. Tuliskan persamaan pertama.",
+          "partB": "Lima tahun lagi: umur Bapak = x + 5, umur Anak = y + 5. Tuliskan persamaan kedua.",
+          "partC": "Gabungkan menjadi SPLDV."
+        },
+        "q3": {
+          "title": "Model dari Keliling",
+          "content": "Sebuah persegi panjang memiliki keliling 60 cm. Panjangnya 6 cm lebih dari lebarnya.",
+          "partA": "Misal panjang = p dan lebar = l. Tuliskan persamaan dari keliling.",
+          "partB": "Tuliskan persamaan dari hubungan panjang dan lebar.",
+          "partC": "Tuliskan SPLDV."
+        },
+        "q4": {
+          "title": "Model dari Koin",
+          "content": "Dompet Rani berisi 25 keping uang logam Rp 500 dan Rp 1.000. Total nilai = Rp 16.000.",
+          "partA": "Misal banyak koin Rp 500 = x dan Rp 1.000 = y.",
+          "partB": "Tuliskan persamaan jumlah koin dan persamaan nilai total.",
+          "partC": "Tuliskan SPLDV."
+        },
+        "q5": {
+          "title": "Model dari Tiket",
+          "content": "Harga tiket bioskop dewasa Rp 50.000 dan anak-anak Rp 30.000. Sebanyak 200 tiket terjual dengan total pemasukan Rp 8.400.000.",
+          "partA": "Misal tiket dewasa = x dan anak = y. Tuliskan dua persamaan.",
+          "partB": "Tuliskan sebagai SPLDV."
+        },
+        "q6": {
+          "title": "Model dari Kecepatan",
+          "content": "Dua mobil melaju dari kota A ke kota B (240 km). Mobil pertama (kecepatan x km/jam) tiba 1 jam lebih cepat dari mobil kedua (kecepatan y km/jam). Kecepatan mobil kedua 20 km/jam lebih lambat.",
+          "partA": "Tuliskan persamaan dari selisih kecepatan.",
+          "partB": "Tuliskan persamaan dari selisih waktu, gunakan:",
+          "partC": "Susun SPLDV."
+        },
+        "q7": {
+          "title": "Model dari Penjualan",
+          "content": "Toko menjual dua jenis barang. Harga barang A = Rp 12.000 dan barang B = Rp 8.000. Dalam satu hari terjual 150 barang dengan pendapatan Rp 1.560.000.",
+          "partA": "Misal barang A = x dan barang B = y. Tuliskan SPLDV.",
+          "partB": "Tuliskan setiap persamaan secara jelas."
+        },
+        "q8": {
+          "title": "Model dari Campuran Larutan",
+          "content": "Larutan A mengandung 20% garam dan larutan B mengandung 50% garam. Dicampurkan x liter A dan y liter B untuk menghasilkan 30 liter larutan 35% garam.",
+          "partA": "Tuliskan persamaan total volume.",
+          "partB": "Tuliskan persamaan kandungan garam.",
+          "partC": "Tuliskan SPLDV."
+        },
+        "q9": {
+          "title": "Model dari Pekerjaan",
+          "content": "Tukang A dapat menyelesaikan pekerjaan dalam x hari. Tukang B dalam y hari. Bersama dapat selesai dalam 4 hari. Tukang A bekerja 6 hari lebih cepat dari Tukang B.",
+          "partA": "Kecepatan bersama:",
+          "partB": "Tuliskan persamaan kedua dari selisih waktu.",
+          "partC": "Tuliskan SPLDV (dalam bentuk x dan y)."
+        },
+        "q10": {
+          "title": "Model Geometri — Sudut",
+          "content": "Dua sudut saling berpelurus (jumlah = 180°). Sudut pertama = 3 kali sudut kedua dikurangi 20°.",
+          "partA": "Misal sudut pertama = x° dan sudut kedua = y°. Tuliskan dua persamaan.",
+          "partB": "Susun SPLDV."
+        }
       }
     }
   },

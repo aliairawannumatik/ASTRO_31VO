@@ -4952,6 +4952,79 @@
           "partB": "Solve using the elimination method.",
           "partC": "Find the price of 1 shirt and 1 pair of trousers."
         }
+      },
+      "modelSpldv": {
+        "pageTitle": "BUILDING MODELS FROM SLETV WORD PROBLEMS",
+        "grade": "Grade 8",
+        "soalCount": "10 Questions",
+        "backSuffix": "SLETV",
+        "q1": {
+          "title": "Building a Model from Shopping",
+          "content": "A mother buys 3 kg of rice and 2 kg of sugar for Rp 47,000. A father buys 5 kg of rice and 1 kg of sugar for Rp 61,000.",
+          "partA": "Define the appropriate variables (e.g. rice = x, sugar = y).",
+          "partB": "Write the two linear equations.",
+          "partC": "Write it as a SLETV."
+        },
+        "q2": {
+          "title": "Model from Ages",
+          "content": "A father's age is 3 times his child's age. In five years, the father will be 2 times the child's age.",
+          "partA": "Let the father's current age = x and the child's age = y. Write the first equation.",
+          "partB": "In five years: father's age = x + 5, child's age = y + 5. Write the second equation.",
+          "partC": "Combine them into a SLETV."
+        },
+        "q3": {
+          "title": "Model from Perimeter",
+          "content": "A rectangle has a perimeter of 60 cm. Its length is 6 cm more than its width.",
+          "partA": "Let length = p and width = l. Write the equation from the perimeter.",
+          "partB": "Write the equation from the relationship between length and width.",
+          "partC": "Write the SLETV."
+        },
+        "q4": {
+          "title": "Model from Coins",
+          "content": "Rani's wallet contains 25 coins of Rp 500 and Rp 1,000. Total value = Rp 16,000.",
+          "partA": "Let the number of Rp 500 coins = x and Rp 1,000 coins = y.",
+          "partB": "Write the equation for the number of coins and the equation for the total value.",
+          "partC": "Write the SLETV."
+        },
+        "q5": {
+          "title": "Model from Tickets",
+          "content": "A movie ticket for adults costs Rp 50,000 and for children Rp 30,000. A total of 200 tickets were sold with total revenue of Rp 8,400,000.",
+          "partA": "Let adult tickets = x and children's tickets = y. Write the two equations.",
+          "partB": "Write it as a SLETV."
+        },
+        "q6": {
+          "title": "Model from Speed",
+          "content": "Two cars travel from city A to city B (240 km). The first car (speed x km/h) arrives 1 hour earlier than the second car (speed y km/h). The second car's speed is 20 km/h slower.",
+          "partA": "Write the equation from the speed difference.",
+          "partB": "Write the equation from the time difference, use:",
+          "partC": "Form the SLETV."
+        },
+        "q7": {
+          "title": "Model from Sales",
+          "content": "A shop sells two types of items. Item A = Rp 12,000 and Item B = Rp 8,000. In one day, 150 items were sold with revenue of Rp 1,560,000.",
+          "partA": "Let Item A = x and Item B = y. Write the SLETV.",
+          "partB": "Write each equation clearly."
+        },
+        "q8": {
+          "title": "Model from Solution Mixture",
+          "content": "Solution A contains 20% salt and solution B contains 50% salt. x liters of A and y liters of B are mixed to produce 30 liters of a 35% salt solution.",
+          "partA": "Write the equation for the total volume.",
+          "partB": "Write the equation for the salt content.",
+          "partC": "Write the SLETV."
+        },
+        "q9": {
+          "title": "Model from Work Rate",
+          "content": "Worker A can complete a job in x days. Worker B in y days. Together they can finish in 4 days. Worker A works 6 days faster than Worker B.",
+          "partA": "Combined work rate:",
+          "partB": "Write the second equation from the time difference.",
+          "partC": "Write the SLETV (in terms of x and y)."
+        },
+        "q10": {
+          "title": "Geometry Model — Angles",
+          "content": "Two angles are supplementary (sum = 180°). The first angle = 3 times the second angle minus 20°.",
+          "partA": "Let the first angle = x° and the second angle = y°. Write the two equations.",
+          "partB": "Form the SLETV."
+        }
       }
     }
   },

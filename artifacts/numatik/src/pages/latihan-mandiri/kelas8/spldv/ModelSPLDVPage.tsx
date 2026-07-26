@@ -6,13 +6,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { FileText } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const pageUi = {
-  id: { title: "MEMBUAT MODEL SPLDV" },
-  en: { title: "BUILDING MODELS FROM SLETV WORD PROBLEMS" },
-  ja: { title: "連立方程式の立式" },
-};
 
 const accentColor = "#facc15";
 const accentDim = "rgba(250,204,21,0.10)";
@@ -29,101 +22,101 @@ const badgeStyle: Record<Badge, string> = {
 };
 const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const questions: Q[] = [
-  Qf(1, "Membuat Model dari Belanja", {
-    badge: "UN", type: "mixed",
-    content: "Ibu membeli 3 kg beras dan 2 kg gula seharga Rp 47.000. Ayah membeli 5 kg beras dan 1 kg gula seharga Rp 61.000.",
-    parts: [
-      { label: "a.", text: "Tentukan variabel yang tepat (misalnya beras = x, gula = y)." },
-      { label: "b.", text: "Tuliskan dua persamaan linearnya." },
-      { label: "c.", text: "Tuliskan dalam bentuk SPLDV." },
-    ],
-  }),
-  Qf(2, "Model dari Umur", {
-    badge: "UN", type: "mixed",
-    content: "Umur Bapak 3 kali umur Anak. Lima tahun lagi, umur Bapak 2 kali umur Anak.",
-    parts: [
-      { label: "a.", text: "Misal umur Bapak sekarang = x dan umur Anak = y. Tuliskan persamaan pertama." },
-      { label: "b.", text: "Lima tahun lagi: umur Bapak = x + 5, umur Anak = y + 5. Tuliskan persamaan kedua." },
-      { label: "c.", text: "Gabungkan menjadi SPLDV." },
-    ],
-  }),
-  Qf(3, "Model dari Keliling", {
-    badge: "ANBK", type: "mixed",
-    content: "Sebuah persegi panjang memiliki keliling 60 cm. Panjangnya 6 cm lebih dari lebarnya.",
-    parts: [
-      { label: "a.", text: "Misal panjang = p dan lebar = l. Tuliskan persamaan dari keliling." },
-      { label: "b.", text: "Tuliskan persamaan dari hubungan panjang dan lebar." },
-      { label: "c.", text: "Tuliskan SPLDV." },
-    ],
-  }),
-  Qf(4, "Model dari Koin", {
-    badge: "TKA", type: "mixed",
-    content: "Dompet Rani berisi 25 keping uang logam Rp 500 dan Rp 1.000. Total nilai = Rp 16.000.",
-    parts: [
-      { label: "a.", text: "Misal banyak koin Rp 500 = x dan Rp 1.000 = y." },
-      { label: "b.", text: "Tuliskan persamaan jumlah koin dan persamaan nilai total." },
-      { label: "c.", text: "Tuliskan SPLDV." },
-    ],
-  }),
-  Qf(5, "Model dari Tiket", {
-    badge: "UN", type: "mixed",
-    content: "Harga tiket bioskop dewasa Rp 50.000 dan anak-anak Rp 30.000. Sebanyak 200 tiket terjual dengan total pemasukan Rp 8.400.000.",
-    parts: [
-      { label: "a.", text: "Misal tiket dewasa = x dan anak = y. Tuliskan dua persamaan." },
-      { label: "b.", text: "Tuliskan sebagai SPLDV." },
-    ],
-  }),
-  Qf(6, "Model dari Kecepatan", {
-    badge: "AKM", type: "mixed",
-    content: "Dua mobil melaju dari kota A ke kota B (240 km). Mobil pertama (kecepatan x km/jam) tiba 1 jam lebih cepat dari mobil kedua (kecepatan y km/jam). Kecepatan mobil kedua 20 km/jam lebih lambat.",
-    parts: [
-      { label: "a.", text: "Tuliskan persamaan dari selisih kecepatan." },
-      { label: "b.", text: "Tuliskan persamaan dari selisih waktu, gunakan:", math: "t = \\dfrac{d}{v}" },
-      { label: "c.", text: "Susun SPLDV." },
-    ],
-  }),
-  Qf(7, "Model dari Penjualan", {
-    badge: "UN", type: "mixed",
-    content: "Toko menjual dua jenis barang. Harga barang A = Rp 12.000 dan barang B = Rp 8.000. Dalam satu hari terjual 150 barang dengan pendapatan Rp 1.560.000.",
-    parts: [
-      { label: "a.", text: "Misal barang A = x dan barang B = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Tuliskan setiap persamaan secara jelas." },
-    ],
-  }),
-  Qf(8, "Model dari Campuran Larutan", {
-    badge: "TKA", type: "mixed",
-    content: "Larutan A mengandung 20% garam dan larutan B mengandung 50% garam. Dicampurkan x liter A dan y liter B untuk menghasilkan 30 liter larutan 35% garam.",
-    parts: [
-      { label: "a.", text: "Tuliskan persamaan total volume." },
-      { label: "b.", text: "Tuliskan persamaan kandungan garam." },
-      { label: "c.", text: "Tuliskan SPLDV." },
-    ],
-  }),
-  Qf(9, "Model dari Pekerjaan", {
-    badge: "TKA", type: "mixed",
-    content: "Tukang A dapat menyelesaikan pekerjaan dalam x hari. Tukang B dalam y hari. Bersama dapat selesai dalam 4 hari. Tukang A bekerja 6 hari lebih cepat dari Tukang B.",
-    parts: [
-      { label: "a.", text: "Kecepatan bersama:", math: "\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{4}" },
-      { label: "b.", text: "Tuliskan persamaan kedua dari selisih waktu." },
-      { label: "c.", text: "Tuliskan SPLDV (dalam bentuk x dan y)." },
-    ],
-  }),
-  Qf(10, "Model Geometri — Sudut", {
-    badge: "ANBK", type: "mixed",
-    content: "Dua sudut saling berpelurus (jumlah = 180°). Sudut pertama = 3 kali sudut kedua dikurangi 20°.",
-    parts: [
-      { label: "a.", text: "Misal sudut pertama = x° dan sudut kedua = y°. Tuliskan dua persamaan." },
-      { label: "b.", text: "Susun SPLDV." },
-    ],
-  }),
-];
-
 const ModelSPLDVPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { language } = useLanguage();
-  const pu = pageUi[language as keyof typeof pageUi] ?? pageUi.id;
+  const p = 'practice.spldv.modelSpldv';
+
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q1.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q1.partA`) },
+        { label: "b.", text: t(`${p}.q1.partB`) },
+        { label: "c.", text: t(`${p}.q1.partC`) },
+      ],
+    }),
+    Qf(2, t(`${p}.q2.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q2.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q2.partA`) },
+        { label: "b.", text: t(`${p}.q2.partB`) },
+        { label: "c.", text: t(`${p}.q2.partC`) },
+      ],
+    }),
+    Qf(3, t(`${p}.q3.title`), {
+      badge: "ANBK", type: "mixed",
+      content: t(`${p}.q3.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q3.partA`) },
+        { label: "b.", text: t(`${p}.q3.partB`) },
+        { label: "c.", text: t(`${p}.q3.partC`) },
+      ],
+    }),
+    Qf(4, t(`${p}.q4.title`), {
+      badge: "TKA", type: "mixed",
+      content: t(`${p}.q4.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q4.partA`) },
+        { label: "b.", text: t(`${p}.q4.partB`) },
+        { label: "c.", text: t(`${p}.q4.partC`) },
+      ],
+    }),
+    Qf(5, t(`${p}.q5.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q5.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q5.partA`) },
+        { label: "b.", text: t(`${p}.q5.partB`) },
+      ],
+    }),
+    Qf(6, t(`${p}.q6.title`), {
+      badge: "AKM", type: "mixed",
+      content: t(`${p}.q6.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q6.partA`) },
+        { label: "b.", text: t(`${p}.q6.partB`), math: "t = \\dfrac{d}{v}" },
+        { label: "c.", text: t(`${p}.q6.partC`) },
+      ],
+    }),
+    Qf(7, t(`${p}.q7.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q7.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q7.partA`) },
+        { label: "b.", text: t(`${p}.q7.partB`) },
+      ],
+    }),
+    Qf(8, t(`${p}.q8.title`), {
+      badge: "TKA", type: "mixed",
+      content: t(`${p}.q8.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q8.partA`) },
+        { label: "b.", text: t(`${p}.q8.partB`) },
+        { label: "c.", text: t(`${p}.q8.partC`) },
+      ],
+    }),
+    Qf(9, t(`${p}.q9.title`), {
+      badge: "TKA", type: "mixed",
+      content: t(`${p}.q9.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q9.partA`), math: "\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{4}" },
+        { label: "b.", text: t(`${p}.q9.partB`) },
+        { label: "c.", text: t(`${p}.q9.partC`) },
+      ],
+    }),
+    Qf(10, t(`${p}.q10.title`), {
+      badge: "ANBK", type: "mixed",
+      content: t(`${p}.q10.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q10.partA`) },
+        { label: "b.", text: t(`${p}.q10.partB`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -136,9 +129,11 @@ const ModelSPLDVPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
-            {pu.title}
+            {t(`${p}.pageTitle`)}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 10 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">
+            {t(`${p}.grade`)} · {t('practice.breadcrumb')} · {t(`${p}.soalCount`)}
+          </p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
@@ -182,7 +177,7 @@ const ModelSPLDVPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/spldv"); }}
             className="text-sm text-white/40 hover:text-white/80 transition-colors cursor-pointer font-body">
-            ← {t('practice.backToMenu')} SPLDV
+            ← {t('practice.backToMenu')} {t(`${p}.backSuffix`)}
           </button>
         </div>
       </div>
