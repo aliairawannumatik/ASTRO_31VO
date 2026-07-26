@@ -4623,6 +4623,99 @@
         },
         "grade": "Grade 8 · Relations and Functions",
         "backToTopic": "Relations and Functions"
+      },
+      "notasiFungsi": {
+        "h1": "FUNCTION NOTATION AND FORMULAS",
+        "grade": "Grade 8 · Relations and Functions",
+        "tipTitle": "📌 Function Notation",
+        "tipLabelNotation": "Notation:",
+        "tipLabelValue": "Finding a value:",
+        "tipDescValue": "Substitute the value of x into the formula f(x)",
+        "tipLabelFormula": "Finding the formula:",
+        "tipDescFormula": "Use f(x) = ax + b and two given conditions",
+        "backToTopic": "Relations and Functions",
+        "q1": {
+          "title": "Linear Function Formula – Basic Evaluation",
+          "content": "A function f is defined by f: x → 5x − 3, where x is a member of the set of real numbers.",
+          "partAText": "Write the function formula f in the form f(x).",
+          "q1bPre": "Calculate the value of function ",
+          "q1bMid": " for "
+        },
+        "q2": {
+          "title": "National Exam – Function Notation and Formula",
+          "content": "Function f is expressed as f: x ↦ 3x − 7 with domain {−1, 0, 1, 2, 3}.",
+          "partAText": "Determine the range of function f."
+        },
+        "q3": {
+          "title": "Substitution into Functions – ANBK Style",
+          "content": "Given f(x) = 5x − 2 and g(x) = x + 8."
+        },
+        "q4": {
+          "title": "Evaluating a Quadratic Function"
+        },
+        "q5": {
+          "title": "Function with a Parameter",
+          "content": "Function f(x) = kx − 4. Given f(3) = 11.",
+          "q5aPre": "Find the value of ",
+          "q5bPre": "Calculate "
+        },
+        "q6": {
+          "title": "Function Image and Inverse Value",
+          "content": "Function f is defined as f(x) = 4x − 5.",
+          "q6Pre": "Find the value of ",
+          "q6Mid": " if "
+        },
+        "q7": {
+          "title": "Finding the Domain from a Known Range",
+          "content": "Given f(x) = x − 2 with range = {1, 2, 3, 4, 5}.",
+          "partAText": "Determine the domain of function f."
+        },
+        "q8": {
+          "title": "Function f(x) = ax + b – Finding a and b",
+          "content": "Given f: x → ax + b with f(2) = 7 and f(5) = 13.",
+          "partAText": "Set up a system of equations from the given conditions.",
+          "partBText": "Solve the system of equations to find a and b.",
+          "q8cPre": "Write the complete formula for function "
+        },
+        "q9": {
+          "title": "Finding Function Constants from Two Conditions",
+          "content": "Function f is defined as f: x → ax + b, where a and b are integers. Given f(2) = 7 and f(−3) = −8.",
+          "partAText": "Find the values of a and b.",
+          "partBText": "Write the formula for function f.",
+          "q9cPre": "Calculate the value of function ",
+          "q9cMid": " for "
+        },
+        "q10": {
+          "title": "Applied Function – Temperature",
+          "content": "Celsius to Fahrenheit conversion:"
+        },
+        "q11": {
+          "title": "Worker Wage Function – Word Problem",
+          "content": "Mr. Rudi works as a daily laborer at a factory. His daily wage is calculated using the function f(h) = 25,000h + 50,000, where h is the number of hours worked per day. The value 25,000 represents the hourly wage, while 50,000 is a fixed daily allowance he always receives.",
+          "partAText": "If Mr. Rudi works for 8 hours, find his total wage for that day.",
+          "partBText": "If on a certain day Mr. Rudi receives a wage of Rp250,000, how many hours did he work that day?",
+          "partCText": "Explain the meaning of the values 25,000 and 50,000 in the function f(h) = 25,000h + 50,000 in the context of Mr. Rudi's daily work."
+        },
+        "q12": {
+          "title": "Applied Function – Word Problem",
+          "content": "A tour bus carries 12 adult passengers with an average weight of x kg and 1 additional piece of luggage weighing (5x + 300) kg. The function for the total load of the bus is expressed as T(x) = 12x + (5x + 300).",
+          "q12aPre": "Simplify the formula ",
+          "q12bPre": "Calculate ",
+          "q12bMid": " (in kg)",
+          "partCText": "If the maximum capacity of the bus is 1,600 kg, is the bus overloaded? Explain."
+        },
+        "q13": {
+          "title": "Function Formula – National Exam",
+          "content": "Function f is defined as f(2x − 1) = 4x + 5.",
+          "q13aPre": "Determine "
+        },
+        "q14": {
+          "title": "Function Formula from Composite Notation",
+          "content": "Given f(3x − 2) = 9x + 1.",
+          "q14aPre": "Determine ",
+          "q14cPre": "Find the value of ",
+          "q14cMid": " if "
+        }
       }
     }
   },

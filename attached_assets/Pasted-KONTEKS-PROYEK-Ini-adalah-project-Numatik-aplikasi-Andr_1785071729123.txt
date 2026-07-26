@@ -1,0 +1,100 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Relasi dan Fungsi" —
+index, PengertianRelasiPage.tsx, PengertianFungsiPage.tsx,
+GrafikFungsiPage.tsx, dan BanyakFungsiPage.tsx sudah selesai. Ini
+SUB-HALAMAN TERAKHIR dari topik ini: NotasiFungsiPage.tsx (14 soal,
+paling banyak kasus \text{} di seluruh topik).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- NotasiFungsiPage.tsx TIDAK pakai isDark (styling hardcode dark-only)
+  — jangan tambahkan useTheme() atau conditional className
+- BlockMath dipakai untuk field mathContent — cek apakah pure math
+  atau ada label bahasa Indonesia yang perlu ditangani dengan pola
+  interpolasi/textKey
+- Hindari heredoc dengan karakter emoji langsung di bash — pakai
+  Python script dengan encoding eksplisit UTF-8 atau str_replace
+  (ini pernah menyebabkan file korup di sub-halaman sebelumnya)
+- PENTING: pastikan TIDAK ADA hardcoded string yang tersisa di
+  elemen non-soal (misal grade/topic subtitle, back button suffix)
+  — di BanyakFungsiPage kemarin, 2 elemen ini sempat terlewat dan
+  ditemukan reviewer setelah task pertama kali ditandai selesai. Cek
+  dengan teliti SEMUA teks di header, breadcrumb, dan tombol navigasi
+  sebelum menganggap selesai
+- JANGAN ubah .replit atau file konfigurasi lain di luar scope
+  terjemahan
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: NotasiFungsiPage.tsx (14 soal, 0 diagram).
+
+WAJIB — 12 kasus \text{} bahasa Indonesia (tangani dengan pola textKey
+yang sudah terbukti di BanyakFungsiPage.tsx — variabel dihitung t()
+dulu di awal komponen, lalu diinterpolasi ke template literal; buat
+key TERPISAH per soal kalau ada label yang mirip di soal berbeda,
+JANGAN reuse key lintas soal kecuali memang identik dalam soal yang
+sama):
+
+1. "\text{Hitung nilai fungsi } f \text{ untuk } x = -4." — kalimat
+   dengan 2 \text{} terpisah mengapit "f" dan "x = -4"
+2. "\text{Tentukan nilai } k" — label pendek
+3. "\text{Hitung } f(6)" — label pendek
+4. "\text{Tentukan nilai } n \text{ jika } f(n) = 7." — 2 \text{}
+   terpisah
+5. "\text{Tentukan nilai } m \text{ jika } f(m) = -7." — 2 \text{}
+   terpisah (mirip kasus 4 tapi variabel beda — key terpisah)
+6. "\text{Tuliskan rumus lengkap fungsi } f(x) = \ldots" — label
+   sebelum "="
+7. "\text{Hitung nilai fungsi } f \text{ untuk } x = 5." — mirip
+   kasus 1 tapi soal berbeda — key terpisah
+8. "\text{Sederhanakan rumus } T(x)." — label pendek
+9. "\text{Hitung } T(65) \text{ (dalam kg)}." — 2 \text{} dalam satu
+   baris (label + keterangan dalam kurung, mirip pola kasus 9
+   BanyakFungsi)
+10. "\text{Tentukan } f(x)." — label pendek (muncul di 2 soal beda
+    — key terpisah per soal)
+11. "\text{Tentukan } f(x)." — soal berbeda dari kasus 10
+12. "\text{Tentukan nilai } p \text{ jika } f(p) = 34." — 2 \text{}
+    terpisah
+
+PENTING: cek ulang SELURUH file dengan grep "\\text{" untuk
+memastikan tidak ada kasus lain yang terlewat dari 12 yang sudah
+terdeteksi. Untuk kalimat yang mengapit 2 simbol matematika berbeda
+(seperti kasus 1, 4, 5, 12), pertimbangkan apakah lebih aman jadi
+textKey utuh (kalimat lengkap sebagai satu string) atau pre/mid/post
+interpolasi — pilih yang lebih rapi dan tidak rawan salah urutan kata
+di Jepang.
+
+1. Terjemahkan SEMUA teks: instruksi umum (kalau ada), teks 14 soal
+   (title, content, parts[].text/math, mathContent BlockMath kalau
+   ada label bahasa Indonesia)
+2. Tangani SEMUA 12 kasus \text{} dengan pola yang sesuai
+3. Terjemahkan h1 title, badge jumlah soal, grade/topic subtitle,
+   back button — SEMUA elemen non-soal, jangan sampai ada yang
+   terlewat seperti kasus BanyakFungsiPage kemarin
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.relasiDanFungsi.notasiFungsi.*
+5. JANGAN sentuh sub-halaman lain, halaman index, atau ArrowDiagram.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q14)
+- Konfirmasi + tunjukkan kode: bagaimana SEMUA 12 kasus \text{}
+  ditangani, termasuk yang punya label mirip di soal berbeda?
+- Jalankan grep "\\text{" untuk verifikasi 0 hardcode tersisa
+- Konfirmasi eksplisit: SEMUA elemen non-soal (h1, grade/topic
+  subtitle, back button) sudah diterjemahkan tanpa ada yang terlewat
+- Konfirmasi: TIDAK ada isDark/useTheme yang ditambahkan, .replit
+  tidak berubah
+- KONFIRMASI PALING PENTING DAN TERAKHIR: setelah ini selesai, apakah
+  SELURUH topik "Relasi dan Fungsi" (index + 5 sub-halaman: 8+7+6+14+7
+  = 42 soal) sekarang 100% trilingual tanpa ada yang terlewat?
