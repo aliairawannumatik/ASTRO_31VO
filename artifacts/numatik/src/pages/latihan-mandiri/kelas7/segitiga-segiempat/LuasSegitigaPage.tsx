@@ -97,6 +97,7 @@ const Q = ({ no, children, diagram, badgeColor = "#60a5fa" }: QProps) => (
 const LuasSegitigaLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.segitigaSegiempat.luasSegitiga";
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -110,25 +111,25 @@ const LuasSegitigaLatihanPage = () => {
             <BookOpen className="w-7 h-7 text-blue-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            LUAS SEGITIGA
+            {t(`${p}.title`)}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Segitiga dan Segiempat</p>
+          <p className="text-white/50 text-xs font-body">{t(`${p}.subtitle`)}</p>
         </div>
 
-        {/* Info box */}
+        {/* Formula reminder box */}
         <div className="rounded-xl bg-blue-500/10 border border-blue-500/30 px-5 py-4 mb-6 text-sm text-white/80 font-body leading-relaxed">
-          <span className="font-bold text-blue-300">Ingat! </span>
-          Rumus luas segitiga:{" "}
+          <span className="font-bold text-blue-300">{t(`${p}.formulaReminder`)}{" "}</span>
+          {t(`${p}.formulaLabel`)}{" "}
           <InlineMath math="L = \dfrac{1}{2} \times alas \times tinggi" />
         </div>
 
         <div className="space-y-5 animate-slide-up">
 
           {/* ── BAGIAN I: Soal Isian Pendek ── */}
-          <Section title="Bagian I · Soal Isian Pendek" color="#60a5fa">
+          <Section title={t(`${p}.sectionI`)} color="#60a5fa">
 
             <div>
-              <p className="text-white/80 text-sm font-body mb-4">Tentukan luas dari masing-masing segitiga berikut.</p>
+              <p className="text-white/80 text-sm font-body mb-4">{t(`${p}.instrI`)}</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex flex-col items-center gap-1">
                   <span className="text-blue-300 font-semibold text-sm">a.</span>
@@ -146,7 +147,7 @@ const LuasSegitigaLatihanPage = () => {
             </div>
 
             <div>
-              <p className="text-white/80 text-sm font-body mb-4">Tentukan luas dari masing-masing segitiga berikut.</p>
+              <p className="text-white/80 text-sm font-body mb-4">{t(`${p}.instrI`)}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col items-center gap-1">
                   <span className="text-blue-300 font-semibold text-sm">a.</span>
@@ -161,13 +162,13 @@ const LuasSegitigaLatihanPage = () => {
 
           </Section>
 
-          {/* ── BAGIAN II: Soal {t('practice.multipleChoice')} ── */}
-          <Section title="Bagian II · Soal {t('practice.multipleChoice')}" color="#a78bfa">
+          {/* ── BAGIAN II: Pilihan Ganda ── */}
+          <Section title={t(`${p}.sectionII`)} color="#a78bfa">
 
             <Q no={1} badgeColor="#a78bfa">
               <p className="mb-3">
-                Sebuah segitiga memiliki perbandingan alas dan tinggi <InlineMath math="3:4" />. Jika luas segitiga
-                tersebut adalah <InlineMath math="96 \text{ cm}^2" />, berapakah panjang alasnya?
+                {t(`${p}.q1pre`)} <InlineMath math="3:4" />. {t(`${p}.q1mid`)}{" "}
+                <InlineMath math="96 \text{ cm}^2" />, {t(`${p}.q1end`)}
               </p>
               <div className="space-y-2">
                 <Opt label="A">12 cm</Opt>
@@ -179,36 +180,34 @@ const LuasSegitigaLatihanPage = () => {
 
             <Q no={2} badgeColor="#a78bfa">
               <p className="mb-3">
-                Sebuah atap rumah berbentuk segitiga dengan alas <InlineMath math="6 \text{ m}" /> dan tinggi{" "}
-                <InlineMath math="2{,}5 \text{ m}" />. Jika atap tersebut akan dicat dan setiap kaleng cat bisa
-                menutupi <InlineMath math="3 \text{ m}^2" />, berapa kaleng cat yang dibutuhkan?
+                {t(`${p}.q2pre`)} <InlineMath math="6 \text{ m}" /> {t(`${p}.q2mid`)}{" "}
+                <InlineMath math="2{,}5 \text{ m}" />. {t(`${p}.q2mid2`)}{" "}
+                <InlineMath math="3 \text{ m}^2" />, {t(`${p}.q2end`)}
               </p>
               <div className="space-y-2">
-                <Opt label="A">4 kaleng</Opt>
-                <Opt label="B">5 kaleng</Opt>
-                <Opt label="C">2 kaleng</Opt>
-                <Opt label="D">3 kaleng</Opt>
+                <Opt label="A">{t(`${p}.q2optA`)}</Opt>
+                <Opt label="B">{t(`${p}.q2optB`)}</Opt>
+                <Opt label="C">{t(`${p}.q2optC`)}</Opt>
+                <Opt label="D">{t(`${p}.q2optD`)}</Opt>
               </div>
             </Q>
 
             <Q no={3} badgeColor="#a78bfa">
               <p className="mb-3">
-                Jika alas suatu segitiga bertambah 20% dan tingginya berkurang 10%, maka luas segitiga
-                tersebut akan...
+                {t(`${p}.q3`)}
               </p>
               <div className="space-y-2">
-                <Opt label="A">Tetap</Opt>
-                <Opt label="B">Bertambah 8%</Opt>
-                <Opt label="C">Bertambah 10%</Opt>
-                <Opt label="D">Berkurang 2%</Opt>
+                <Opt label="A">{t(`${p}.q3optA`)}</Opt>
+                <Opt label="B">{t(`${p}.q3optB`)}</Opt>
+                <Opt label="C">{t(`${p}.q3optC`)}</Opt>
+                <Opt label="D">{t(`${p}.q3optD`)}</Opt>
               </div>
             </Q>
 
             <Q no={4} badgeColor="#a78bfa">
               <p className="mb-3">
-                Sebuah segitiga memiliki luas <InlineMath math="x \text{ cm}^2" />. Jika alasnya dijadikan 3 kali
-                semula dan tingginya dijadikan <InlineMath math="\tfrac{1}{2}" /> kali semula, berapakah luasnya
-                yang baru?
+                {t(`${p}.q4pre`)} <InlineMath math="x \text{ cm}^2" />. {t(`${p}.q4mid`)}{" "}
+                <InlineMath math="\tfrac{1}{2}" /> {t(`${p}.q4end`)}
               </p>
               <div className="space-y-2">
                 <Opt label="A"><InlineMath math="3x \text{ cm}^2" /></Opt>
@@ -220,9 +219,12 @@ const LuasSegitigaLatihanPage = () => {
 
             <Q no={5} badgeColor="#a78bfa">
               <p className="mb-3">
-                Segitiga <InlineMath math="ABC" /> memiliki luas <InlineMath math="40 \text{ cm}^2" />. Titik{" "}
-                <InlineMath math="D" /> terletak pada <InlineMath math="BC" /> sehingga{" "}
-                <InlineMath math="BD : DC = 1 : 3" />. Berapakah luas segitiga <InlineMath math="ABD" />?
+                {t(`${p}.q5pre`)} <InlineMath math="ABC" /> {t(`${p}.q5mid`)}{" "}
+                <InlineMath math="40 \text{ cm}^2" />{t(`${p}.q5mid2`)}{" "}
+                <InlineMath math="D" /> {t(`${p}.q5mid3`)}{" "}
+                <InlineMath math="BC" /> {t(`${p}.q5mid4`)}{" "}
+                <InlineMath math="BD : DC = 1 : 3" />{t(`${p}.q5mid5`)}{" "}
+                <InlineMath math="ABD" />{t(`${p}.q5end`)}
               </p>
               <div className="space-y-2">
                 <Opt label="A"><InlineMath math="20 \text{ cm}^2" /></Opt>
@@ -234,9 +236,11 @@ const LuasSegitigaLatihanPage = () => {
 
             <Q no={6} badgeColor="#a78bfa">
               <p className="mb-3">
-                Sebuah taman berbentuk segitiga siku-siku dengan panjang sisi-sisi tegaknya{" "}
-                <InlineMath math="(x+2) \text{ m}" /> dan <InlineMath math="(x+5) \text{ m}" />. Jika luas
-                taman tersebut <InlineMath math="27 \text{ m}^2" />, berapakah nilai <InlineMath math="x" />?
+                {t(`${p}.q6pre`)}{" "}
+                <InlineMath math="(x+2) \text{ m}" /> {t(`${p}.q6mid`)}{" "}
+                <InlineMath math="(x+5) \text{ m}" />. {t(`${p}.q6mid2`)}{" "}
+                <InlineMath math="27 \text{ m}^2" />, {t(`${p}.q6end`)}{" "}
+                <InlineMath math="x" />{t(`${p}.q6suffix`)}
               </p>
               <div className="space-y-2">
                 <Opt label="A">2</Opt>
@@ -248,9 +252,10 @@ const LuasSegitigaLatihanPage = () => {
 
             <Q no={7} badgeColor="#a78bfa">
               <p className="mb-3">
-                Sebuah papan reklame berbentuk segitiga dengan alas <InlineMath math="4 \text{ m}" /> dan tinggi{" "}
-                <InlineMath math="3 \text{ m}" />. Jika biaya pembuatan adalah{" "}
-                <InlineMath math="Rp\,50.000" /> per <InlineMath math="\text{m}^2" />, berapakah total biayanya?
+                {t(`${p}.q7pre`)} <InlineMath math="4 \text{ m}" /> {t(`${p}.q7mid`)}{" "}
+                <InlineMath math="3 \text{ m}" />. {t(`${p}.q7mid2`)}{" "}
+                <InlineMath math="Rp\,50.000" /> {t(`${p}.q7mid3`)}{" "}
+                <InlineMath math="\text{m}^2" />, {t(`${p}.q7end`)}
               </p>
               <div className="space-y-2">
                 <Opt label="A">Rp 450.000</Opt>
@@ -262,8 +267,8 @@ const LuasSegitigaLatihanPage = () => {
 
             <Q no={8} badgeColor="#a78bfa">
               <p className="mb-3">
-                Sebuah segitiga memiliki luas <InlineMath math="120 \text{ cm}^2" /> dan perbandingan{" "}
-                alas : tinggi <InlineMath math="= 3 : 5" />. Berapakah panjang alasnya?
+                {t(`${p}.q8pre`)} <InlineMath math="120 \text{ cm}^2" /> {t(`${p}.q8mid`)}{" "}
+                <InlineMath math="= 3 : 5" />. {t(`${p}.q8end`)}
               </p>
               <div className="space-y-2">
                 <Opt label="A">15 cm</Opt>
@@ -282,7 +287,7 @@ const LuasSegitigaLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Segitiga dan Segiempat
+            {t(`${p}.back`)}
           </button>
         </div>
       </div>
