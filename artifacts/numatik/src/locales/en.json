@@ -4898,6 +4898,60 @@
           "partB": "Solve using the substitution method.",
           "partC": "What is the price of the fried rice and the drink individually?"
         }
+      },
+      "metodeEliminasi": {
+        "pageTitle": "SOLVING SLETV — ELIMINATION METHOD",
+        "grade": "Grade 8",
+        "soalCount": "8 Questions",
+        "backSuffix": "SLETV",
+        "q1": {
+          "title": "Direct Elimination — Same Coefficient",
+          "partA": "Add both equations to eliminate y.",
+          "partB": "Subtract the second equation from the first to eliminate x.",
+          "partC": "Write the solution set HP = {(x, y)}."
+        },
+        "q2": {
+          "title": "Elimination — Removing x",
+          "partA": "Subtract the second equation from the first to eliminate x.",
+          "partB": "Find the value of y.",
+          "partC": "Back-substitute to find x."
+        },
+        "q3": {
+          "title": "Multiply First",
+          "partA": "Multiply the second equation by 2 to make the x coefficients equal.",
+          "partB": "Subtract to eliminate x and find y.",
+          "partC": "Back-substitute to find x."
+        },
+        "q4": {
+          "title": "Elimination — Negative Coefficient",
+          "partA": "Multiply the first equation by 3 so the y coefficients are opposite.",
+          "partB": "Add both equations to eliminate y, then find x.",
+          "partC": "Substitute the value of x to find y, then verify."
+        },
+        "q5": {
+          "title": "Elimination — Double Multiplication",
+          "partA": "Multiply the first equation by 2 and the second equation by 3.",
+          "partB": "Eliminate x, find y.",
+          "partC": "Find x."
+        },
+        "q6": {
+          "title": "Different Multipliers — Eliminate y",
+          "partA": "Multiply equation 1 × 4 and equation 2 × 3.",
+          "partB": "Subtract to eliminate y.",
+          "partC": "Find x, then y."
+        },
+        "q7": {
+          "title": "Elimination — Fractions",
+          "partA": "Multiply the first equation by 6 and the second equation by 12.",
+          "partB": "Solve using elimination."
+        },
+        "q8": {
+          "title": "National Exam — Item Prices",
+          "content": "The price of 2 shirts and 3 trousers = Rp 340,000. The price of 3 shirts and 2 trousers = Rp 360,000.",
+          "partA": "Let the price of a shirt = x and trousers = y. Write the SLETV.",
+          "partB": "Solve using the elimination method.",
+          "partC": "Find the price of 1 shirt and 1 pair of trousers."
+        }
       }
     }
   },

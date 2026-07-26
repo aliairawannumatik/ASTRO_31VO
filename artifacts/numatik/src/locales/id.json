@@ -4898,6 +4898,60 @@
           "partB": "Selesaikan dengan metode substitusi.",
           "partC": "Berapa harga nasi goreng dan minuman masing-masing?"
         }
+      },
+      "metodeEliminasi": {
+        "pageTitle": "PENYELESAIAN SPLDV — METODE ELIMINASI",
+        "grade": "Kelas 8",
+        "soalCount": "8 Soal",
+        "backSuffix": "SPLDV",
+        "q1": {
+          "title": "Eliminasi Langsung — Koefisien Sama",
+          "partA": "Jumlahkan kedua persamaan untuk menghilangkan y.",
+          "partB": "Kurangkan persamaan kedua dari pertama untuk menghilangkan x.",
+          "partC": "Tentukan HP = {(x, y)}."
+        },
+        "q2": {
+          "title": "Eliminasi — Menghilangkan x",
+          "partA": "Kurangkan persamaan kedua dari pertama untuk menghilangkan x.",
+          "partB": "Tentukan nilai y.",
+          "partC": "Substitusikan kembali untuk mencari x."
+        },
+        "q3": {
+          "title": "Perkalian Dulu",
+          "partA": "Kalikan persamaan kedua dengan 2 agar koefisien x sama.",
+          "partB": "Kurangkan untuk menghilangkan x dan cari y.",
+          "partC": "Substitusikan kembali untuk mencari x."
+        },
+        "q4": {
+          "title": "Eliminasi — Koefisien Negatif",
+          "partA": "Kalikan persamaan pertama dengan 3 agar koefisien y berlawanan.",
+          "partB": "Jumlahkan kedua persamaan untuk menghilangkan y, lalu cari x.",
+          "partC": "Substitusikan nilai x untuk mencari y, kemudian verifikasi."
+        },
+        "q5": {
+          "title": "Eliminasi — Dua Kali Perkalian",
+          "partA": "Kalikan persamaan pertama dengan 2 dan persamaan kedua dengan 3.",
+          "partB": "Eliminasi x, tentukan y.",
+          "partC": "Tentukan x."
+        },
+        "q6": {
+          "title": "Perkalian Berbeda — Eliminasi y",
+          "partA": "Kalikan pers. pertama × 4 dan pers. kedua × 3.",
+          "partB": "Kurangkan untuk menghilangkan y.",
+          "partC": "Tentukan x, lalu y."
+        },
+        "q7": {
+          "title": "Eliminasi — Pecahan",
+          "partA": "Kalikan persamaan pertama dengan 6 dan persamaan kedua dengan 12.",
+          "partB": "Selesaikan dengan eliminasi."
+        },
+        "q8": {
+          "title": "Soal UN — Harga Barang",
+          "content": "Harga 2 kemeja dan 3 celana = Rp 340.000. Harga 3 kemeja dan 2 celana = Rp 360.000.",
+          "partA": "Misal harga kemeja = x dan celana = y. Tuliskan SPLDV.",
+          "partB": "Selesaikan dengan metode eliminasi.",
+          "partC": "Tentukan harga 1 kemeja dan 1 celana."
+        }
       }
     }
   },

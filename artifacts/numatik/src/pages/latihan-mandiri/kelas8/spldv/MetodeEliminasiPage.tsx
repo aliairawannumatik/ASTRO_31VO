@@ -6,13 +6,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Minus } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const pageUi = {
-  id: { title: "PENYELESAIAN SPLDV — METODE ELIMINASI" },
-  en: { title: "SOLVING SLETV — ELIMINATION METHOD" },
-  ja: { title: "連立方程式 — 加減法" },
-};
 
 const accentColor = "#fb923c";
 const accentDim = "rgba(251,146,60,0.12)";
@@ -29,85 +22,85 @@ const badgeStyle: Record<Badge, string> = {
 };
 const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const questions: Q[] = [
-  Qf(1, "Eliminasi Langsung — Koefisien Sama", {
-    badge: "ANBK", type: "mixed",
-    blockMath: "\\begin{cases} x + y = 9 \\\\ x - y = 3 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Jumlahkan kedua persamaan untuk menghilangkan y." },
-      { label: "b.", text: "Kurangkan persamaan kedua dari pertama untuk menghilangkan x." },
-      { label: "c.", text: "Tentukan HP = {(x, y)}." },
-    ],
-  }),
-  Qf(2, "Eliminasi — Menghilangkan x", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 3x + 2y = 16 \\\\ 3x - y = 10 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kurangkan persamaan kedua dari pertama untuk menghilangkan x." },
-      { label: "b.", text: "Tentukan nilai y." },
-      { label: "c.", text: "Substitusikan kembali untuk mencari x." },
-    ],
-  }),
-  Qf(3, "Perkalian Dulu", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} 2x + 3y = 13 \\\\ x + 2y = 8 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan persamaan kedua dengan 2 agar koefisien x sama." },
-      { label: "b.", text: "Kurangkan untuk menghilangkan x dan cari y." },
-      { label: "c.", text: "Substitusikan kembali untuk mencari x." },
-    ],
-  }),
-  Qf(4, "Eliminasi — Koefisien Negatif", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 4x - y = 10 \\\\ 2x + 3y = 12 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan persamaan pertama dengan 3 agar koefisien y berlawanan." },
-      { label: "b.", text: "Jumlahkan kedua persamaan untuk menghilangkan y, lalu cari x." },
-      { label: "c.", text: "Substitusikan nilai x untuk mencari y, kemudian verifikasi." },
-    ],
-  }),
-  Qf(5, "Eliminasi — Dua Kali Perkalian", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} 3x + 4y = 25 \\\\ 2x + 3y = 18 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan persamaan pertama dengan 2 dan persamaan kedua dengan 3." },
-      { label: "b.", text: "Eliminasi x, tentukan y." },
-      { label: "c.", text: "Tentukan x." },
-    ],
-  }),
-  Qf(6, "Perkalian Berbeda — Eliminasi y", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} 2x + 3y = 20 \\\\ 5x + 4y = 35 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan pers. pertama × 4 dan pers. kedua × 3." },
-      { label: "b.", text: "Kurangkan untuk menghilangkan y." },
-      { label: "c.", text: "Tentukan x, lalu y." },
-    ],
-  }),
-  Qf(7, "Eliminasi — Pecahan", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 2 \\\\ \\frac{x}{3} - \\frac{y}{4} = 1 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Kalikan persamaan pertama dengan 6 dan persamaan kedua dengan 12." },
-      { label: "b.", text: "Selesaikan dengan eliminasi." },
-    ],
-  }),
-  Qf(8, "Soal UN — Harga Barang", {
-    badge: "UN", type: "mixed",
-    content: "Harga 2 kemeja dan 3 celana = Rp 340.000. Harga 3 kemeja dan 2 celana = Rp 360.000.",
-    parts: [
-      { label: "a.", text: "Misal harga kemeja = x dan celana = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan metode eliminasi." },
-      { label: "c.", text: "Tentukan harga 1 kemeja dan 1 celana." },
-    ],
-  }),
-];
-
 const MetodeEliminasiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { language } = useLanguage();
-  const pu = pageUi[language as keyof typeof pageUi] ?? pageUi.id;
+  const p = 'practice.spldv.metodeEliminasi';
+
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), {
+      badge: "ANBK", type: "mixed",
+      blockMath: "\\begin{cases} x + y = 9 \\\\ x - y = 3 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q1.partA`) },
+        { label: "b.", text: t(`${p}.q1.partB`) },
+        { label: "c.", text: t(`${p}.q1.partC`) },
+      ],
+    }),
+    Qf(2, t(`${p}.q2.title`), {
+      badge: "UN", type: "mixed",
+      blockMath: "\\begin{cases} 3x + 2y = 16 \\\\ 3x - y = 10 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q2.partA`) },
+        { label: "b.", text: t(`${p}.q2.partB`) },
+        { label: "c.", text: t(`${p}.q2.partC`) },
+      ],
+    }),
+    Qf(3, t(`${p}.q3.title`), {
+      badge: "TKA", type: "mixed",
+      blockMath: "\\begin{cases} 2x + 3y = 13 \\\\ x + 2y = 8 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q3.partA`) },
+        { label: "b.", text: t(`${p}.q3.partB`) },
+        { label: "c.", text: t(`${p}.q3.partC`) },
+      ],
+    }),
+    Qf(4, t(`${p}.q4.title`), {
+      badge: "UN", type: "mixed",
+      blockMath: "\\begin{cases} 4x - y = 10 \\\\ 2x + 3y = 12 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q4.partA`) },
+        { label: "b.", text: t(`${p}.q4.partB`) },
+        { label: "c.", text: t(`${p}.q4.partC`) },
+      ],
+    }),
+    Qf(5, t(`${p}.q5.title`), {
+      badge: "TKA", type: "mixed",
+      blockMath: "\\begin{cases} 3x + 4y = 25 \\\\ 2x + 3y = 18 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q5.partA`) },
+        { label: "b.", text: t(`${p}.q5.partB`) },
+        { label: "c.", text: t(`${p}.q5.partC`) },
+      ],
+    }),
+    Qf(6, t(`${p}.q6.title`), {
+      badge: "TKA", type: "mixed",
+      blockMath: "\\begin{cases} 2x + 3y = 20 \\\\ 5x + 4y = 35 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q6.partA`) },
+        { label: "b.", text: t(`${p}.q6.partB`) },
+        { label: "c.", text: t(`${p}.q6.partC`) },
+      ],
+    }),
+    Qf(7, t(`${p}.q7.title`), {
+      badge: "TKA", type: "mixed",
+      blockMath: "\\begin{cases} \\frac{x}{2} + \\frac{y}{3} = 2 \\\\ \\frac{x}{3} - \\frac{y}{4} = 1 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q7.partA`) },
+        { label: "b.", text: t(`${p}.q7.partB`) },
+      ],
+    }),
+    Qf(8, t(`${p}.q8.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q8.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q8.partA`) },
+        { label: "b.", text: t(`${p}.q8.partB`) },
+        { label: "c.", text: t(`${p}.q8.partC`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -120,9 +113,11 @@ const MetodeEliminasiPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
-            {pu.title}
+            {t(`${p}.pageTitle`)}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">
+            {t(`${p}.grade`)} · {t('practice.breadcrumb')} · {t(`${p}.soalCount`)}
+          </p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
@@ -149,11 +144,11 @@ const MetodeEliminasiPage = () => {
                 )}
                 {q.parts && (
                   <div className="flex flex-col gap-2 mt-1">
-                    {q.parts.map((p, pi) => (
+                    {q.parts.map((part, pi) => (
                       <div key={pi} className="flex items-start gap-2">
-                        <span className="font-bold text-xs shrink-0 mt-0.5" style={{ color: accentColor }}>{p.label}</span>
+                        <span className="font-bold text-xs shrink-0 mt-0.5" style={{ color: accentColor }}>{part.label}</span>
                         <span className="font-body text-sm text-white/80 leading-relaxed">
-                          {p.text && p.text}{p.math && <InlineMath math={p.math} />}
+                          {part.text && part.text}{part.math && <InlineMath math={part.math} />}
                         </span>
                       </div>
                     ))}
@@ -166,7 +161,7 @@ const MetodeEliminasiPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/spldv"); }}
             className="text-sm text-white/40 hover:text-white/80 transition-colors cursor-pointer font-body">
-            ← {t('practice.backToMenu')} SPLDV
+            ← {t('practice.backToMenu')} {t(`${p}.backSuffix`)}
           </button>
         </div>
       </div>
