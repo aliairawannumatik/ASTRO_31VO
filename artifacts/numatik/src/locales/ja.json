@@ -3224,6 +3224,32 @@
         "q15cend": "のとき、合計費用はいくらですか？",
         "back": "三角形と四角形へ戻る"
       }
+    },
+    "himpunan": {
+      "title": "集合",
+      "enrichmentNoteDesc": "集合の概念・要素、ベン図から集合演算とHOTS文章題まで、UN・TKA・ANBKの出題範囲に対応した問題集。",
+      "subtopics": {
+        "pengertianKeanggotaan": {
+          "label": "集合の定義と要素",
+          "desc": "集合の定義、要素（∈）、非要素（∉）、要素数 n(A)"
+        },
+        "menyatakanHimpunan": {
+          "label": "集合の表し方・空集合・全体集合",
+          "desc": "集合の内包表記、要素の列挙、空集合（∅）、全体集合（S）"
+        },
+        "diagramVenn": {
+          "label": "ベン図",
+          "desc": "ベン図の読み方と書き方、ベン図から要素を求める"
+        },
+        "himpunanBagian": {
+          "label": "部分集合",
+          "desc": "部分集合の記号 ⊂ と ⊄、部分集合の個数 = 2ⁿ"
+        },
+        "operasiHimpunan": {
+          "label": "集合の演算",
+          "desc": "共通部分（∩）、和集合（∪）、差集合（−）、補集合（Aᶜ）、文章題"
+        }
+      }
     }
   },
   "settings": {

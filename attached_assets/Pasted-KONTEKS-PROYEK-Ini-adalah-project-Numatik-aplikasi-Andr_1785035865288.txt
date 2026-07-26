@@ -1,0 +1,50 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik-topik sebelumnya di
+Kelas 7 sudah selesai. Mulai topik "Himpunan" — punya index + 5
+sub-halaman (PengertianKeanggotaanPage, MenyatakanHimpunanPage,
+DiagramVennPage, HimpunanBagianPage, OperasiHimpunanPage).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- practice.himpunan.* belum ada sama sekali di ketiga locale file —
+  ini fondasi baru
+
+TUGAS SEKARANG:
+Fokus HANYA ke halaman index: HimpunanPage.tsx
+
+1. Ubah array subtopics (hardcode label & desc di luar component)
+   menjadi pola subtopicsConfig — derive label & desc di dalam
+   komponen pakai t(), IDENTIK dengan pola yang dipakai di
+   SegitigaSegiempatPage.tsx (index topik sebelumnya)
+2. Terjemahkan h1 title index
+3. Terjemahkan teks body enrichment note (footer)
+4. PERHATIAN: beberapa desc subtopik mengandung notasi himpunan
+   Unicode langsung di dalam teks (bukan InlineMath), misal:
+   - "anggota (∈), bukan anggota (∉)"
+   - "himpunan kosong (∅)"
+   - "Notasi ⊂ dan ⊄"
+   - "Irisan (∩), gabungan (∪), selisih (−), komplemen (Aᶜ)"
+   Notasi Unicode ini boleh langsung ikut diterjemahkan sebagai bagian
+   dari string t() — tidak perlu dipisah dari teksnya, karena bukan
+   KaTeX/InlineMath, cukup string biasa
+5. Tambahkan translation key untuk 5 label & deskripsi sub-topik + h1
+   + enrichment note ke ketiga file locale (id, en, ja) di bawah
+   practice.himpunan.*
+6. Key global yang sudah ada (breadcrumb, suffixSoal, dst) JANGAN diubah
+7. JANGAN sentuh 5 sub-halaman — itu untuk tahap berikutnya
+
+VERIFIKASI:
+- Ambil screenshot halaman index ini dalam ketiga bahasa kalau alat
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis yang dilakukan
+  (tsc, HMR log, atau skrip Node.js pengecek key) DAN konfirmasi
+  eksplisit jumlah key yang ditambahkan per bahasa

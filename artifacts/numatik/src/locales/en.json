@@ -3224,6 +3224,32 @@
         "q15cend": ", what is the total cost?",
         "back": "Back to Triangles & Quadrilaterals"
       }
+    },
+    "himpunan": {
+      "title": "SETS",
+      "enrichmentNoteDesc": "Problems on sets covering membership, Venn diagrams, set operations, and HOTS word problems aligned with UN, TKA, and ANBK.",
+      "subtopics": {
+        "pengertianKeanggotaan": {
+          "label": "DEFINITION AND MEMBERSHIP OF SETS",
+          "desc": "Definition of sets, member (∈), non-member (∉), cardinality n(A)"
+        },
+        "menyatakanHimpunan": {
+          "label": "REPRESENTING SETS, EMPTY SET AND UNIVERSAL SET",
+          "desc": "Set-builder notation, listing members, empty set (∅), universal set (S)"
+        },
+        "diagramVenn": {
+          "label": "VENN DIAGRAMS",
+          "desc": "Reading and drawing Venn diagrams, finding members from a Venn diagram"
+        },
+        "himpunanBagian": {
+          "label": "SUBSETS",
+          "desc": "Subset notation ⊂ and ⊄, finding subsets, number of subsets = 2ⁿ"
+        },
+        "operasiHimpunan": {
+          "label": "SET OPERATIONS",
+          "desc": "Intersection (∩), union (∪), difference (−), complement (Aᶜ), set word problems"
+        }
+      }
     }
   },
   "settings": {

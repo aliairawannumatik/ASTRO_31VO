@@ -3224,6 +3224,32 @@
         "q15cend": ", berapa total biayanya?",
         "back": "Kembali ke Segitiga dan Segiempat"
       }
+    },
+    "himpunan": {
+      "title": "HIMPUNAN",
+      "enrichmentNoteDesc": "Soal himpunan dari konsep keanggotaan, diagram Venn, hingga operasi himpunan dan soal cerita HOTS sesuai kisi-kisi UN, TKA, dan ANBK.",
+      "subtopics": {
+        "pengertianKeanggotaan": {
+          "label": "PENGERTIAN DAN KEANGGOTAAAN SUATU HIMPUNAN",
+          "desc": "Definisi himpunan, anggota (∈), bukan anggota (∉), kardinalitas n(A)"
+        },
+        "menyatakanHimpunan": {
+          "label": "MENYATAKAN SUATU HIMPUNAN, HIMPUNAN KOSONG DAN HIMPUNAN SEMESTA",
+          "desc": "Notasi pembentuk himpunan, mendaftar anggota, himpunan kosong (∅), semesta (S)"
+        },
+        "diagramVenn": {
+          "label": "DIAGRAM VENN",
+          "desc": "Membaca dan membuat diagram Venn, menentukan anggota dari diagram Venn"
+        },
+        "himpunanBagian": {
+          "label": "HIMPUNAN BAGIAN",
+          "desc": "Notasi ⊂ dan ⊄, menentukan himpunan bagian, banyak himpunan bagian = 2ⁿ"
+        },
+        "operasiHimpunan": {
+          "label": "OPERASI HIMPUNAN",
+          "desc": "Irisan (∩), gabungan (∪), selisih (−), komplemen (Aᶜ), soal cerita himpunan"
+        }
+      }
     }
   },
   "settings": {
