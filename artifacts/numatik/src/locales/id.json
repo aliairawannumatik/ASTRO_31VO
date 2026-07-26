@@ -2482,6 +2482,90 @@
           "optD": "D. Rp209.000,00"
         }
       }
+    },
+    "garisDanSudut": {
+      "sifatSudutSejajar": {
+        "title1": "SIFAT SUDUT DUA GARIS SEJAJAR",
+        "title2": "JIKA DIPOTONG GARIS LAIN",
+        "pageSubtitle": "Kelas 7 - Latihan Mandiri - Garis dan Sudut",
+        "instruction": "Kerjakan soal-soal berikut lengkap dengan caranya!",
+        "backTo": "Kembali ke Garis dan Sudut",
+        "q1": {
+          "stem": "Perhatikan gambar berikut. Garis a // b dipotong oleh garis c. Pada titik A dan B terbentuk sudut-sudut bernomor 1, 2, 3, 4. Pernyataan berikut yang benar adalah …",
+          "optA": "A. ∠A₁ sehadap dengan ∠B₃",
+          "optB": "B. ∠A₂ berseberangan luar dengan ∠B₃",
+          "optC": "C. ∠A₁ luar sepihak dengan ∠B₄",
+          "optD": "D. ∠A₄ berseberangan dalam dengan ∠B₂"
+        },
+        "q2": {
+          "stem": "Perhatikan gambar berikut! Dua garis sejajar dipotong oleh dua garis transversal sehingga terbentuk sudut 1 sampai 8. Perhatikan pernyataan berikut!",
+          "item1": "(i) Sudut 1 dan sudut 7, sudut luar berseberangan",
+          "item2": "(ii) Sudut 1 dan sudut 6, sudut luar sepihak",
+          "item3": "(iii) Sudut 4 dan sudut 6, sudut bertolak belakang",
+          "item4": "(iv) Sudut 3 dan sudut 7, sudut sehadap",
+          "question": "Pernyataan yang benar adalah ….",
+          "optA": "A. (i) dan (ii) saja",
+          "optB": "B. (ii) dan (iv) saja",
+          "optC": "C. (i), (ii) dan (iii)",
+          "optD": "D. (i), (ii) dan (iv)"
+        },
+        "q3": {
+          "stem": "Perhatikan gambar. Diketahui ∠A₁ = 103°, maka besar ∠B₄ dan ∠A₃ berturut-turut adalah …",
+          "optA": "A. 130° dan 90°",
+          "optB": "B. 90° dan 130°",
+          "optC": "C. 77° dan 103°",
+          "optD": "D. 103° dan 77°"
+        },
+        "q4": {
+          "stem": "Pada gambar berikut, garis p // q dipotong garis r secara transversal. Perbandingan sudut P₁ : Q₄ adalah 4 : 5. Besar sudut Q₁ adalah …",
+          "optA": "A. 40°",
+          "optB": "B. 80°",
+          "optC": "C. 100°",
+          "optD": "D. 120°"
+        },
+        "q5": {
+          "stem": "Perhatikan gambar berikut. Garis AB // CD dan besar ∠DAB dan ∠BCD diketahui dari gambar. Besar ∠ABC adalah …",
+          "optA": "A. 16°",
+          "optB": "B. 26°",
+          "optC": "C. 32°",
+          "optD": "D. 36°"
+        },
+        "q6": {
+          "stem": "Perhatikan gambar. Besar ∠BCF adalah ….",
+          "optA": "A. 35°",
+          "optB": "B. 45°",
+          "optC": "C. 60°",
+          "optD": "D. 75°"
+        },
+        "q7": {
+          "stem": "Perhatikan gambar berikut. Jika garis l₁ dan l₂ adalah dua garis yang sejajar, maka nilai x adalah ...",
+          "optA": "A. 13°",
+          "optB": "B. 39°",
+          "optC": "C. 47°",
+          "optD": "D. 55°"
+        },
+        "q8": {
+          "stem": "Perhatikan gambar berikut. Besar sudut a adalah ...",
+          "optA": "A. 30°",
+          "optB": "B. 50°",
+          "optC": "C. 80°",
+          "optD": "D. 100°"
+        },
+        "q9": {
+          "stem": "Perhatikan gambar berikut. Diketahui garis EG // AC, besar ∠FEG = 50° dan besar ∠EDB = 108°. Besar ∠DBC adalah …",
+          "optA": "A. 58°",
+          "optB": "B. 61°",
+          "optC": "C. 100°",
+          "optD": "D. 122°"
+        },
+        "q10": {
+          "stem": "Perhatikan gambar berikut. Sebuah tangga rumah terbuat dari kayu dan pagar pengaman dari besi. Besar sudut antara tiang besi dan pagar dengan pegangan tangan terdapat pada gambar. Besar sudut kemiringan tangga adalah …",
+          "optA": "A. 60°",
+          "optB": "B. 50°",
+          "optC": "C. 40°",
+          "optD": "D. 10°"
+        }
+      }
     }
   },
   "settings": {

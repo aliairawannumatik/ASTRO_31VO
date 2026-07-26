@@ -2482,6 +2482,90 @@
           "optD": "D. Rp209,000.00"
         }
       }
+    },
+    "garisDanSudut": {
+      "sifatSudutSejajar": {
+        "title1": "PROPERTIES OF ANGLES",
+        "title2": "FORMED BY PARALLEL LINES CUT BY A TRANSVERSAL",
+        "pageSubtitle": "Grade 7 - Self-Practice - Lines and Angles",
+        "instruction": "Solve the following problems showing your complete working!",
+        "backTo": "Back to Lines and Angles",
+        "q1": {
+          "stem": "Observe the figure. Lines a // b are cut by line c. Angles numbered 1, 2, 3, 4 are formed at points A and B. Which of the following statements is correct?",
+          "optA": "A. ∠A₁ is corresponding to ∠B₃",
+          "optB": "B. ∠A₂ is an alternate exterior angle with ∠B₃",
+          "optC": "C. ∠A₁ is a co-interior exterior angle with ∠B₄",
+          "optD": "D. ∠A₄ is an alternate interior angle with ∠B₂"
+        },
+        "q2": {
+          "stem": "Observe the figure! Two parallel lines are cut by two transversals, forming angles 1 through 8. Consider the following statements!",
+          "item1": "(i) Angle 1 and angle 7 are alternate exterior angles",
+          "item2": "(ii) Angle 1 and angle 6 are co-interior exterior angles",
+          "item3": "(iii) Angle 4 and angle 6 are vertically opposite angles",
+          "item4": "(iv) Angle 3 and angle 7 are corresponding angles",
+          "question": "The correct statements are ….",
+          "optA": "A. (i) and (ii) only",
+          "optB": "B. (ii) and (iv) only",
+          "optC": "C. (i), (ii) and (iii)",
+          "optD": "D. (i), (ii) and (iv)"
+        },
+        "q3": {
+          "stem": "Observe the figure. Given ∠A₁ = 103°, the measures of ∠B₄ and ∠A₃ respectively are …",
+          "optA": "A. 130° and 90°",
+          "optB": "B. 90° and 130°",
+          "optC": "C. 77° and 103°",
+          "optD": "D. 103° and 77°"
+        },
+        "q4": {
+          "stem": "In the figure, lines p // q are cut by transversal r. The ratio of angle P₁ : Q₄ is 4 : 5. The measure of angle Q₁ is …",
+          "optA": "A. 40°",
+          "optB": "B. 80°",
+          "optC": "C. 100°",
+          "optD": "D. 120°"
+        },
+        "q5": {
+          "stem": "Observe the figure. Lines AB // CD and the measures of ∠DAB and ∠BCD are given in the figure. The measure of ∠ABC is …",
+          "optA": "A. 16°",
+          "optB": "B. 26°",
+          "optC": "C. 32°",
+          "optD": "D. 36°"
+        },
+        "q6": {
+          "stem": "Observe the figure. The measure of ∠BCF is ….",
+          "optA": "A. 35°",
+          "optB": "B. 45°",
+          "optC": "C. 60°",
+          "optD": "D. 75°"
+        },
+        "q7": {
+          "stem": "Observe the figure. If lines l₁ and l₂ are parallel, the value of x is ...",
+          "optA": "A. 13°",
+          "optB": "B. 39°",
+          "optC": "C. 47°",
+          "optD": "D. 55°"
+        },
+        "q8": {
+          "stem": "Observe the figure. The measure of angle a is ...",
+          "optA": "A. 30°",
+          "optB": "B. 50°",
+          "optC": "C. 80°",
+          "optD": "D. 100°"
+        },
+        "q9": {
+          "stem": "Observe the figure. Given that line EG // AC, ∠FEG = 50° and ∠EDB = 108°. The measure of ∠DBC is …",
+          "optA": "A. 58°",
+          "optB": "B. 61°",
+          "optC": "C. 100°",
+          "optD": "D. 122°"
+        },
+        "q10": {
+          "stem": "Observe the figure. A wooden staircase has an iron safety railing. The angle between the iron post and the railing with the handrail is shown in the figure. The angle of inclination of the staircase is …",
+          "optA": "A. 60°",
+          "optB": "B. 50°",
+          "optC": "C. 40°",
+          "optD": "D. 10°"
+        }
+      }
     }
   },
   "settings": {

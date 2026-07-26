@@ -16,14 +16,19 @@ const SifatSudutDuaGarisSejajarPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          SIFAT SUDUT DUA GARIS SEJAJAR<br />JIKA DIPOTONG GARIS LAIN
+          {t('practice.garisDanSudut.sifatSudutSejajar.title1')}<br />
+          {t('practice.garisDanSudut.sifatSudutSejajar.title2')}
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 7 - Latihan Mandiri - Garis dan Sudut</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">
+          {t('practice.garisDanSudut.sifatSudutSejajar.pageSubtitle')}
+        </p>
 
-        {/* Bagian I — {t('practice.multipleChoice')} */}
+        {/* Bagian I */}
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
           <p className="text-accent text-sm font-bold mb-2 font-display">Bagian I — {t('practice.multipleChoice')}</p>
-          <p className="text-yellow-400 text-sm mb-6 font-body">Kerjakan soal-soal berikut lengkap dengan caranya!</p>
+          <p className="text-yellow-400 text-sm mb-6 font-body">
+            {t('practice.garisDanSudut.sifatSudutSejajar.instruction')}
+          </p>
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
 
@@ -31,13 +36,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">1.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Garis a // b dipotong oleh garis c. Pada titik A dan B terbentuk sudut-sudut bernomor 1, 2, 3, 4. Pernyataan berikut yang benar adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q1.stem')}</p>
                 <img src={"/images/NO_1_1774842809807.png"} alt="Soal 1" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. ∠A₁ sehadap dengan ∠B₃</p>
-                  <p>B. ∠A₂ berseberangan luar dengan ∠B₃</p>
-                  <p>C. ∠A₁ luar sepihak dengan ∠B₄</p>
-                  <p>D. ∠A₄ berseberangan dalam dengan ∠B₂</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q1.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q1.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q1.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q1.optD')}</p>
                 </div>
               </div>
             </div>
@@ -46,20 +51,20 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">2.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut! Dua garis sejajar dipotong oleh dua garis transversal sehingga terbentuk sudut 1 sampai 8. Perhatikan pernyataan berikut!</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q2.stem')}</p>
                 <img src={"/images/NO_2_1774842809808.png"} alt="Soal 2" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 mb-2 space-y-1 text-white/70">
-                  <p>(i) Sudut 1 dan sudut 7, sudut luar berseberangan</p>
-                  <p>(ii) Sudut 1 dan sudut 6, sudut luar sepihak</p>
-                  <p>(iii) Sudut 4 dan sudut 6, sudut bertolak belakang</p>
-                  <p>(iv) Sudut 3 dan sudut 7, sudut sehadap</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q2.item1')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q2.item2')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q2.item3')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q2.item4')}</p>
                 </div>
-                <p className="mb-2">Pernyataan yang benar adalah ….</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q2.question')}</p>
                 <div className="ml-4 space-y-1">
-                  <p>A. (i) dan (ii) saja</p>
-                  <p>B. (ii) dan (iv) saja</p>
-                  <p>C. (i), (ii) dan (iii)</p>
-                  <p>D. (i), (ii) dan (iv)</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q2.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q2.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q2.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q2.optD')}</p>
                 </div>
               </div>
             </div>
@@ -68,13 +73,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">3.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar. Diketahui ∠A₁ = 103°, maka besar ∠B₄ dan ∠A₃ berturut-turut adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q3.stem')}</p>
                 <img src={"/images/NO_3_1774842809808.png"} alt="Soal 3" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 130° dan 90°</p>
-                  <p>B. 90° dan 130°</p>
-                  <p>C. 77° dan 103°</p>
-                  <p>D. 103° dan 77°</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q3.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q3.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q3.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q3.optD')}</p>
                 </div>
               </div>
             </div>
@@ -83,13 +88,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">4.</span>
               <div>
-                <p className="mb-2">Pada gambar berikut, garis p // q dipotong garis r secara transversal. Perbandingan sudut P₁ : Q₄ adalah 4 : 5. Besar sudut Q₁ adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q4.stem')}</p>
                 <img src={"/images/NO_4_1774842809809.png"} alt="Soal 4" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 40°</p>
-                  <p>B. 80°</p>
-                  <p>C. 100°</p>
-                  <p>D. 120°</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q4.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q4.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q4.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q4.optD')}</p>
                 </div>
               </div>
             </div>
@@ -98,13 +103,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">5.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Garis AB // CD dan besar ∠DAB dan ∠BCD diketahui dari gambar. Besar ∠ABC adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q5.stem')}</p>
                 <img src={"/images/NO_5_1774842809809.png"} alt="Soal 5" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 16°</p>
-                  <p>B. 26°</p>
-                  <p>C. 32°</p>
-                  <p>D. 36°</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q5.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q5.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q5.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q5.optD')}</p>
                 </div>
               </div>
             </div>
@@ -113,13 +118,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">6.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar. Besar ∠BCF adalah ….</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q6.stem')}</p>
                 <img src={"/images/NO_6_1774842809810.png"} alt="Soal 6" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 35°</p>
-                  <p>B. 45°</p>
-                  <p>C. 60°</p>
-                  <p>D. 75°</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q6.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q6.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q6.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q6.optD')}</p>
                 </div>
               </div>
             </div>
@@ -128,13 +133,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">7.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Jika garis l₁ dan l₂ adalah dua garis yang sejajar, maka nilai x adalah ...</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q7.stem')}</p>
                 <img src={"/images/NO_7_1774842809810.png"} alt="Soal 7" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 13°</p>
-                  <p>B. 39°</p>
-                  <p>C. 47°</p>
-                  <p>D. 55°</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q7.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q7.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q7.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q7.optD')}</p>
                 </div>
               </div>
             </div>
@@ -143,13 +148,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">8.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Besar sudut a adalah ...</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q8.stem')}</p>
                 <img src={"/images/NO_8_1774842809810.png"} alt="Soal 8" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 30°</p>
-                  <p>B. 50°</p>
-                  <p>C. 80°</p>
-                  <p>D. 100°</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q8.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q8.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q8.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q8.optD')}</p>
                 </div>
               </div>
             </div>
@@ -158,13 +163,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">9.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Diketahui garis EG // AC, besar ∠FEG = 50° dan besar ∠EDB = 108°. Besar ∠DBC adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q9.stem')}</p>
                 <img src={"/images/NO_9_1774842809811.png"} alt="Soal 9" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 58°</p>
-                  <p>B. 61°</p>
-                  <p>C. 100°</p>
-                  <p>D. 122°</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q9.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q9.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q9.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q9.optD')}</p>
                 </div>
               </div>
             </div>
@@ -173,13 +178,13 @@ const SifatSudutDuaGarisSejajarPage = () => {
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">10.</span>
               <div>
-                <p className="mb-2">Perhatikan gambar berikut. Sebuah tangga rumah terbuat dari kayu dan pagar pengaman dari besi. Besar sudut antara tiang besi dan pagar dengan pegangan tangan terdapat pada gambar. Besar sudut kemiringan tangga adalah …</p>
+                <p className="mb-2">{t('practice.garisDanSudut.sifatSudutSejajar.q10.stem')}</p>
                 <img src={"/images/NO_10_1774842809811.png"} alt="Soal 10" className="my-3 w-full max-w-xs block" />
                 <div className="ml-4 space-y-1">
-                  <p>A. 60°</p>
-                  <p>B. 50°</p>
-                  <p>C. 40°</p>
-                  <p>D. 10°</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q10.optA')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q10.optB')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q10.optC')}</p>
+                  <p>{t('practice.garisDanSudut.sifatSudutSejajar.q10.optD')}</p>
                 </div>
               </div>
             </div>
@@ -193,7 +198,7 @@ const SifatSudutDuaGarisSejajarPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Garis dan Sudut
+            {t('practice.garisDanSudut.sifatSudutSejajar.backTo')}
           </button>
         </div>
       </div>
