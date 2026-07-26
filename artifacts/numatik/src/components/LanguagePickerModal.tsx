@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Globe, Settings } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useLanguage, Language } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { playPopSound } from "@/hooks/useAudio";
@@ -213,6 +214,7 @@ const LanguagePickerModal = ({ open, onClose }: Props) => {
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
   const { theme } = useTheme();
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<Language>(language);
   const [confirming, setConfirming] = useState(false);
 
@@ -299,7 +301,7 @@ const LanguagePickerModal = ({ open, onClose }: Props) => {
                 transition={{ delay: 0.3 }}
                 className={`font-display font-black text-lg tracking-widest ${s.topTextTitle}`}
               >
-                PILIH BAHASA
+                {t("selectLanguage").toUpperCase()}
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 6 }}
@@ -357,10 +359,10 @@ const LanguagePickerModal = ({ open, onClose }: Props) => {
                 </div>
                 <div>
                   <p className={`font-display text-[13px] font-black leading-tight ${s.headerTitle}`}>
-                    Pilih Bahasa
+                    {t("selectLanguage")}
                   </p>
                   <p className={`font-body text-[10px] ${s.headerSub}`}>
-                    Pilih bahasa yang ingin kamu gunakan
+                    {t("languageSubtitle")}
                   </p>
                 </div>
               </div>
@@ -409,15 +411,15 @@ const LanguagePickerModal = ({ open, onClose }: Props) => {
                 disabled={confirming}
                 className="w-full py-3.5 rounded-2xl font-display font-black text-[15px] text-white tracking-wide bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/30 cursor-pointer disabled:opacity-70"
               >
-                {confirming ? "⏳ Memuat..." : `${activeDef.flag} Lanjut ke Menu Utama`}
+                {confirming ? t("loading") : `${activeDef.flag} ${t("languageContinueText")}`}
               </motion.button>
 
               {/* Info note */}
               <div className="flex items-center gap-2 mt-2.5">
                 <Settings className={`w-3 h-3 flex-shrink-0 ${s.infoIcon}`} />
                 <p className={`font-body text-[10px] leading-snug ${s.infoText}`}>
-                  Bisa ganti bahasa kapan saja di{" "}
-                  <span className={`font-semibold ${s.infoHighlight}`}>Pengaturan → Bahasa</span>
+                  {t("changeLanguageHint")}{" "}
+                  <span className={`font-semibold ${s.infoHighlight}`}>{t("settingsLanguage")}</span>
                 </p>
               </div>
             </div>

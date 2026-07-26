@@ -7,6 +7,7 @@ import {
   ArrowLeftRight, Sigma, Brain, PlayCircle, FileQuestion,
   Rocket, User, Heart, Info,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useTheme, Theme } from "@/contexts/ThemeContext";
 import { playPopSound } from "@/hooks/useAudio";
 
@@ -85,29 +86,30 @@ const SUBTITLE_COLOR: Record<Theme, string> = {
 
 /* ── Menu items to show in preview ──────────────────────────── */
 const PREVIEW_ITEMS = [
-  { icon: GraduationCap, label: "RUANG GURU" },
-  { icon: BookOpen,      label: "BUKU ANIMASI" },
-  { icon: Gamepad2,      label: "GAME ARENA" },
-  { icon: Bot,           label: "NUMATIK AI" },
-  { icon: ClipboardCheck,label: "LKPD" },
-  { icon: Trophy,        label: "OLIMPIADE" },
-  { icon: Calculator,    label: "KALKULATOR" },
-  { icon: Zap,           label: "HITUNG CEPAT" },
-  { icon: Brain,         label: "TES AKADEMIK" },
-  { icon: ArrowLeftRight,label: "KONVERSI" },
-  { icon: Sigma,         label: "RUMUS" },
-  { icon: PlayCircle,    label: "VIDEO" },
-  { icon: FileText,      label: "BANK SOAL" },
-  { icon: FileQuestion,  label: "LATIHAN" },
-  { icon: Rocket,        label: "TENTANG" },
-  { icon: User,          label: "BIOGRAFI" },
-  { icon: Heart,         label: "DONASI" },
-  { icon: Info,          label: "PETUNJUK" },
+  { icon: GraduationCap, menuKey: "menu.teacherRoom" },
+  { icon: BookOpen,      menuKey: "menu.animatedBook" },
+  { icon: Gamepad2,      menuKey: "menu.gameArena" },
+  { icon: Bot,           menuKey: "menu.ai" },
+  { icon: ClipboardCheck,menuKey: "menu.lkpd" },
+  { icon: Trophy,        menuKey: "menu.olympiad" },
+  { icon: Calculator,    menuKey: "menu.calculator" },
+  { icon: Zap,           menuKey: "menu.fastCalc" },
+  { icon: Brain,         menuKey: "menu.academic" },
+  { icon: ArrowLeftRight,menuKey: "menu.conversion" },
+  { icon: Sigma,         menuKey: "menu.formula" },
+  { icon: PlayCircle,    menuKey: "menu.video" },
+  { icon: FileText,      menuKey: "menu.questionBank" },
+  { icon: FileQuestion,  menuKey: "menu.practice" },
+  { icon: Rocket,        menuKey: "menu.about" },
+  { icon: User,          menuKey: "menu.biography" },
+  { icon: Heart,         menuKey: "menu.donate" },
+  { icon: Info,          menuKey: "menu.guide" },
 ];
 
 /* ── Full-screen menu preview ────────────────────────────────── */
 const FullMenuPreview = ({ theme }: { theme: Theme }) => {
   const c = CARD[theme];
+  const { t } = useTranslation();
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ background: PREVIEW_BG[theme] }}>
       {/* Star pattern overlay for dark/ocean */}
@@ -141,17 +143,17 @@ const FullMenuPreview = ({ theme }: { theme: Theme }) => {
           className="font-display font-black text-2xl tracking-widest mb-1"
           style={{ color: TITLE_COLOR[theme] }}
         >
-          MENU UTAMA
+          {t("menu.title")}
         </h1>
         <p className="font-body text-xs mb-5" style={{ color: SUBTITLE_COLOR[theme] }}>
-          Pilih menu yang ingin kamu jelajahi
+          {t("menu.subtitle")}
         </p>
 
         {/* Grid */}
         <div className="grid grid-cols-3 gap-2.5 w-full max-w-xs">
-          {PREVIEW_ITEMS.map(({ icon: Icon, label }) => (
+          {PREVIEW_ITEMS.map(({ icon: Icon, menuKey }) => (
             <div
-              key={label}
+              key={menuKey}
               className="rounded-xl flex flex-col items-center gap-1.5 py-3 px-2"
               style={{
                 background: c.bg,
@@ -163,7 +165,7 @@ const FullMenuPreview = ({ theme }: { theme: Theme }) => {
                 className="font-display font-bold text-center leading-tight"
                 style={{ color: c.text, fontSize: "9px" }}
               >
-                {label}
+                {t(menuKey)}
               </span>
             </div>
           ))}
@@ -183,6 +185,7 @@ interface Props {
 const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<Theme>(theme);
   const [confirming, setConfirming] = useState(false);
 
@@ -213,7 +216,7 @@ const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
     }
   };
 
-  const activeDef = THEMES.find((t) => t.id === selected)!;
+  const activeDef = THEMES.find((thm) => thm.id === selected)!;
 
   return (
     <AnimatePresence>
@@ -244,7 +247,7 @@ const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
             {/* Preview label */}
             <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/30 backdrop-blur-sm border border-white/15">
               <span className="text-[10px] font-body text-white/60 font-semibold uppercase tracking-widest">
-                Preview Menu Utama
+                {t("previewMenu")}
               </span>
             </div>
 
@@ -257,7 +260,7 @@ const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
             >
               <span className="text-sm">{activeDef.emoji}</span>
               <span className="font-display text-[11px] font-bold text-white/85">
-                {activeDef.name}
+                {t(`themeNames.${activeDef.id}`)}
               </span>
             </motion.div>
 
@@ -288,10 +291,10 @@ const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
                   </div>
                   <div>
                     <p className="font-display text-[13px] font-black text-white leading-tight">
-                      Pilih Tema
+                      {t("selectTheme")}
                     </p>
                     <p className="font-body text-[10px] text-white/40">
-                      Ketuk untuk preview langsung
+                      {t("themeSubtitle")}
                     </p>
                   </div>
                 </div>
@@ -305,29 +308,29 @@ const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
 
               {/* Theme selector strip */}
               <div className="grid grid-cols-6 gap-2 mb-3">
-                {THEMES.map((t) => {
-                  const isActive = selected === t.id;
+                {THEMES.map((thm) => {
+                  const isActive = selected === thm.id;
                   return (
                     <button
-                      key={t.id}
-                      onClick={() => handleSelect(t.id)}
-                      title={t.name}
+                      key={thm.id}
+                      onClick={() => handleSelect(thm.id)}
+                      title={t(`themeNames.${thm.id}`)}
                       className={`relative rounded-xl flex flex-col items-center gap-1 py-2 px-1 border-2 transition-all duration-200 cursor-pointer ${
                         isActive
-                          ? `border-transparent ring-2 ${t.ring}`
+                          ? `border-transparent ring-2 ${thm.ring}`
                           : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/25 ring-0"
                       }`}
                     >
                       <div
                         className="w-full h-7 rounded-lg border border-black/10"
-                        style={{ background: t.swatch }}
+                        style={{ background: thm.swatch }}
                       />
-                      <span className="text-[13px] leading-none">{t.emoji}</span>
+                      <span className="text-[13px] leading-none">{thm.emoji}</span>
 
                       {isActive && (
                         <motion.div
                           layoutId="active-theme-dot"
-                          className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full ${t.dot}`}
+                          className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full ${thm.dot}`}
                         />
                       )}
                     </button>
@@ -342,15 +345,15 @@ const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
                 disabled={confirming}
                 className="w-full py-3.5 rounded-2xl font-display font-black text-[15px] text-white tracking-wide bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/30 cursor-pointer disabled:opacity-70"
               >
-                {confirming ? "⏳ Memuat..." : `🚀 Mulai dengan ${activeDef.name}!`}
+                {confirming ? t("loading") : t("continueWithTheme", { name: t(`themeNames.${selected}`) })}
               </motion.button>
 
               {/* Info note */}
               <div className="flex items-center gap-2 mt-2.5">
                 <Settings className="w-3 h-3 text-white/30 flex-shrink-0" />
                 <p className="font-body text-[10px] text-white/35 leading-snug">
-                  Bisa ganti tema kapan saja di{" "}
-                  <span className="text-white/55 font-semibold">Pengaturan → Tema Tampilan</span>
+                  {t("changeThemeHint")}{" "}
+                  <span className="text-white/55 font-semibold">{t("settingsTheme")}</span>
                 </p>
               </div>
             </div>

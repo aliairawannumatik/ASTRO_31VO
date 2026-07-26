@@ -3583,5 +3583,14 @@
     "rekeningLabel": "DONATION ACCOUNT",
     "thankyou": "Thank you so much for your support! 🙏",
     "kembali": "← Back to Menu"
-  }
+  },
+  "themeNames": {
+    "dark": "Outer Space",
+    "white": "Pure White",
+    "sunset": "Clear Sky",
+    "ocean": "Blue Ocean",
+    "light": "Snowy Bright",
+    "forest": "Green Forest"
+  },
+  "languageContinueText": "Continue to Main Menu"
 }

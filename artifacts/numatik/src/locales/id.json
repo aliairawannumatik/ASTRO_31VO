@@ -3583,5 +3583,14 @@
     "rekeningLabel": "REKENING DONASI",
     "thankyou": "Terima kasih atas dukungannya! 🙏",
     "kembali": "← Kembali ke Menu"
-  }
+  },
+  "themeNames": {
+    "dark": "Luar Angkasa",
+    "white": "Putih Bersih",
+    "sunset": "Langit Cerah",
+    "ocean": "Lautan Biru",
+    "light": "Salju Cerah",
+    "forest": "Hutan Hijau"
+  },
+  "languageContinueText": "Lanjut ke Menu Utama"
 }

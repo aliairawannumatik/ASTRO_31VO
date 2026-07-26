@@ -3583,5 +3583,14 @@
     "rekeningLabel": "寄付口座",
     "thankyou": "ご支援、誠にありがとうございます！🙏",
     "kembali": "← メニューに戻る"
-  }
+  },
+  "themeNames": {
+    "dark": "宇宙",
+    "white": "ピュアホワイト",
+    "sunset": "晴れた空",
+    "ocean": "青い海",
+    "light": "雪の白",
+    "forest": "緑の森"
+  },
+  "languageContinueText": "メインメニューへ"
 }
