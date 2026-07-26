@@ -1,0 +1,69 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Pola Bilangan" —
+index sudah selesai (practice.polaBilangan.* sudah ada strukturnya
+untuk title, enrichmentNoteDesc, dan subtopics).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- SVG <text> elements TIDAK diterjemahkan sama sekali — biarkan
+  hardcode Indonesia (misal "Pola ke-1", "Baris 2", "U1", "U2")
+- JANGAN sentuh file orphan (PengertianPolaPage.tsx, PolaKhususPage.tsx)
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman pertama: PengertianDanPolaKhususPage.tsx
+(10 soal).
+
+KONTEKS KHUSUS FILE INI:
+- Format data: array questions: QuestionItem[] yang di-render via
+  .map() — BUKAN JSX inline per soal seperti topik Himpunan. Setiap
+  item punya type: "essay" (content string dengan \n untuk line
+  break) atau type: "mixed" (content + parts: {label, math?, text?}[])
+- QuestionCard didefinisikan SEBAGAI KOMPONEN TERPISAH di luar page
+  component — WAJIB tambahkan useTranslation() di dalam QuestionCard
+  itu sendiri juga (bukan cuma di komponen page), supaya QuestionCard
+  bisa akses t()
+- Karena data soal berbentuk array (bukan JSX literal), source teks
+  Indonesia ada di dalam string array — pindahkan konten teks ke
+  locale key, lalu render via t() di dalam .map() atau QuestionCard,
+  BUKAN diterjemahkan langsung di dalam array (array tetap berisi
+  referensi/id, bukan teks hardcode)
+- 7 SVG dipakai di soal 1, 2, 4, 5, 6, 7, 8 (SvgPolaGambar1,
+  SvgPolaGambar2, SvgQ3, SvgQ5Lingkaran, SvgQ7, SvgQ8, SvgQ9) — SEMUA
+  teks di dalam SVG <text> JANGAN diterjemahkan, biarkan hardcode
+  Indonesia
+- Untuk type "mixed" dengan parts[].text — ini teks natural, WAJIB
+  diterjemahkan. parts[].math adalah KaTeX murni — investigasi awal
+  bilang halaman ini TIDAK ada kasus \text{} bahasa Indonesia (beda
+  dari PolaAritmetikaPage), tapi tetap cek ulang untuk memastikan;
+  kalau ternyata ada, tangani dengan pola interpolasi variabel yang
+  sudah terbukti di topik-topik sebelumnya
+- content string dengan \n multiline — pecah per baris jadi key
+  terpisah kalau perlu, atau pertahankan \n di dalam satu key kalau
+  strukturnya tetap satu kalimat utuh (gunakan penilaian terbaik
+  sesuai konteks tiap soal)
+
+1. Terjemahkan SEMUA teks: instruksi umum (kalau ada), teks 10 soal
+   (content dan/atau parts[].text tergantung type), label kunci
+   jawaban (kalau ada UI terkait)
+2. Terjemahkan h1 title dan badge jumlah soal
+3. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.polaBilangan.pengertianDanPolaKhusus.*
+4. JANGAN sentuh sub-halaman lain, halaman index, atau file orphan
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q10)
+- Konfirmasi eksplisit: SEMUA 7 SVG teksnya tidak disentuh, QuestionCard
+  sudah punya useTranslation() sendiri, dan SEMUA 10 soal (termasuk
+  type essay dan mixed) sudah diterjemahkan tanpa ada \text{} bahasa
+  Indonesia tersisa di dalam InlineMath/parts[].math

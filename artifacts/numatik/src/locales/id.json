@@ -3843,6 +3843,62 @@
           "label": "BARISAN DAN DERET GEOMETRI",
           "desc": "Un = a·rⁿ⁻¹, deret geometri, rasio, tak hingga"
         }
+      },
+      "pengertianDanPolaKhusus": {
+        "titleLine1": "PENGERTIAN POLA, BARISAN BILANGAN",
+        "titleLine2": "DAN POLA-POLA KHUSUS",
+        "perhatikanPola": "Perhatikan pola berikut.",
+        "aturanPola": "Tuliskan aturan pembentukan pola bilangan di atas.",
+        "q1": {
+          "title": "Pola Gambar Persegi",
+          "a": "Tuliskan banyaknya persegi pada setiap pola di atas.",
+          "c": "Tentukan banyak persegi pada pola ke-20 dan pola ke-45."
+        },
+        "q2": {
+          "title": "Pola Gambar Segitiga Korek Api",
+          "contentAfterSvg": "Yeni menyusun segitiga-segitiga seperti gambar di atas menggunakan batang-batang korek api. Tentukan banyaknya batang korek api untuk menyusun segitiga pada pola ke-15 dan pola ke-30."
+        },
+        "q3": {
+          "title": "Suku yang Hilang",
+          "content": "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:"
+        },
+        "q4": {
+          "title": "Pola Gambar Susunan Batu Bata",
+          "content": "Seorang tukang batu menyusun batu bata membentuk pola seperti gambar berikut.",
+          "a": "Tentukan pola yang terbentuk.",
+          "b": "Berapa banyak batu bata pada baris ke-10?"
+        },
+        "q5": {
+          "title": "Pola Gambar Lingkaran",
+          "a": "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan.",
+          "c": "Tentukan banyak lingkaran pada pola ke-20."
+        },
+        "q6": {
+          "title": "Bilangan Persegi",
+          "content": "Perhatikan bilangan persegi berikut:",
+          "a": "Nyatakan rumus bilangan persegi ke-n.",
+          "b": "Bilangan persegi ke-15 adalah ...."
+        },
+        "q7": {
+          "title": "Bilangan Segitiga",
+          "content": "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
+          "a": "Tuliskan rumus bilangan segitiga ke-n.",
+          "b": "Tentukan bilangan segitiga ke-10."
+        },
+        "q8": {
+          "title": "Bilangan Persegi Panjang",
+          "content": "Bilangan persegi panjang dibentuk dari susunan titik berbentuk persegi panjang:",
+          "a": "Tuliskan rumus bilangan persegi panjang ke-n.",
+          "b": "Hitung bilangan persegi panjang ke-8."
+        },
+        "q9": {
+          "title": "Menghitung Suku dengan Rumus Umum",
+          "content": "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-15 dan suku ke-50 untuk masing-masing barisan berikut:"
+        },
+        "q10": {
+          "title": "Rumus Suku ke-n dan Suku ke-100",
+          "content": "Tentukan rumus suku ke-n dan hitunglah suku ke-50 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})"
+        }
       }
     }
   },

@@ -3843,6 +3843,62 @@
           "label": "GEOMETRIC SEQUENCES AND SERIES",
           "desc": "Un = a·rⁿ⁻¹, geometric series, ratio, infinite series"
         }
+      },
+      "pengertianDanPolaKhusus": {
+        "titleLine1": "NUMBER PATTERNS & SEQUENCES,",
+        "titleLine2": "AND SPECIAL PATTERNS",
+        "perhatikanPola": "Observe the following pattern.",
+        "aturanPola": "Write the rule for forming the number pattern above.",
+        "q1": {
+          "title": "Square Grid Pattern",
+          "a": "Write the number of squares in each pattern above.",
+          "c": "Find the number of squares in the 20th and 45th pattern."
+        },
+        "q2": {
+          "title": "Matchstick Triangle Pattern",
+          "contentAfterSvg": "Yeni arranges triangles as shown above using matchsticks. Find the number of matchsticks needed to build the triangles in the 15th and 30th pattern."
+        },
+        "q3": {
+          "title": "Missing Terms",
+          "content": "Find the correct value to replace the question mark (?) in the following patterns:"
+        },
+        "q4": {
+          "title": "Brick Stack Pattern",
+          "content": "A bricklayer stacks bricks forming the pattern shown below.",
+          "a": "Identify the pattern formed.",
+          "b": "How many bricks are in the 10th row?"
+        },
+        "q5": {
+          "title": "Circle Dot Pattern",
+          "a": "Write the number of circles in each pattern above as a number sequence.",
+          "c": "Find the number of circles in the 20th pattern."
+        },
+        "q6": {
+          "title": "Square Numbers",
+          "content": "Observe the following square numbers:",
+          "a": "State the formula for the nth square number.",
+          "b": "The 15th square number is ...."
+        },
+        "q7": {
+          "title": "Triangular Numbers",
+          "content": "Triangular numbers are formed from dot arrangements in triangular shapes:",
+          "a": "Write the formula for the nth triangular number.",
+          "b": "Find the 10th triangular number."
+        },
+        "q8": {
+          "title": "Rectangular Numbers",
+          "content": "Rectangular numbers are formed from dot arrangements in rectangular shapes:",
+          "a": "Write the formula for the nth rectangular number.",
+          "b": "Calculate the 8th rectangular number."
+        },
+        "q9": {
+          "title": "Calculating Terms Using the General Formula",
+          "content": "Given the formula for the nth term of a number sequence, calculate the values of the 15th and 50th terms for each sequence below:"
+        },
+        "q10": {
+          "title": "Formula for the nth Term",
+          "content": "Find the formula for the nth term and calculate the 50th term for each number sequence below.\n(n ∈ {1, 2, 3, 4, 5, . . .})"
+        }
       }
     }
   },

@@ -263,44 +263,48 @@ const SvgQ9 = () => {
   );
 };
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type PartItem = { label: string; math?: string; textKey?: string };
 
 type QuestionItem = {
   number: number;
-  title: string;
-  content: string;
-  contentAfterSvg?: string;
+  titleKey: string;
+  contentKey?: string;
+  contentAfterSvgKey?: string;
   type: "essay" | "mixed";
-  parts?: { label: string; math?: string; text?: string }[];
+  parts?: PartItem[];
   svgNode?: React.ReactNode;
   imgSrc?: string;
 };
 
+// ─── Data (key references — no hardcoded Indonesian text) ─────────────────────
+
 const questions: QuestionItem[] = [
   {
     number: 1,
-    title: "Pola Gambar Persegi",
-    content: "Perhatikan pola berikut.",
+    titleKey: "q1.title",
+    contentKey: "perhatikanPola",
     type: "mixed",
     svgNode: <SvgPolaGambar1 />,
     parts: [
-      { label: "a.", text: "Tuliskan banyaknya persegi pada setiap pola di atas." },
-      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
-      { label: "c.", text: "Tentukan banyak persegi pada pola ke-20 dan pola ke-45." },
+      { label: "a.", textKey: "q1.a" },
+      { label: "b.", textKey: "aturanPola" },
+      { label: "c.", textKey: "q1.c" },
     ],
   },
   {
     number: 2,
-    title: "Pola Gambar Segitiga Korek Api",
-    content: "Perhatikan pola berikut.",
-    contentAfterSvg: "Yeni menyusun segitiga-segitiga seperti gambar di atas menggunakan batang-batang korek api. Tentukan banyaknya batang korek api untuk menyusun segitiga pada pola ke-15 dan pola ke-30.",
+    titleKey: "q2.title",
+    contentKey: "perhatikanPola",
+    contentAfterSvgKey: "q2.contentAfterSvg",
     type: "essay",
     svgNode: <SvgPolaGambar2 />,
   },
   {
     number: 3,
-    title: "Suku yang Hilang",
-    content: "Temukan nilai yang tepat untuk menggantikan tanda tanya (?) dalam pola berikut:",
+    titleKey: "q3.title",
+    contentKey: "q3.content",
     type: "mixed",
     parts: [
       { label: "a.", math: "3,\\ 7,\\ 11,\\ ?,\\ 19,\\ 23" },
@@ -311,67 +315,67 @@ const questions: QuestionItem[] = [
   },
   {
     number: 4,
-    title: "Pola Gambar Susunan Batu Bata",
-    content: "Seorang tukang batu menyusun batu bata membentuk pola seperti gambar berikut.",
+    titleKey: "q4.title",
+    contentKey: "q4.content",
     type: "mixed",
     svgNode: <SvgQ3 />,
     parts: [
-      { label: "a.", text: "Tentukan pola yang terbentuk." },
-      { label: "b.", text: "Berapa banyak batu bata pada baris ke-10?" },
+      { label: "a.", textKey: "q4.a" },
+      { label: "b.", textKey: "q4.b" },
     ],
   },
   {
     number: 5,
-    title: "Pola Gambar Lingkaran",
-    content: "Perhatikan pola berikut.",
+    titleKey: "q5.title",
+    contentKey: "perhatikanPola",
     type: "mixed",
     svgNode: <SvgQ5Lingkaran />,
     parts: [
-      { label: "a.", text: "Tuliskan banyaknya lingkaran pada setiap pola di atas dalam bentuk barisan bilangan." },
-      { label: "b.", text: "Tuliskan aturan pembentukan pola bilangan di atas." },
-      { label: "c.", text: "Tentukan banyak lingkaran pada pola ke-20." },
+      { label: "a.", textKey: "q5.a" },
+      { label: "b.", textKey: "aturanPola" },
+      { label: "c.", textKey: "q5.c" },
     ],
   },
   {
     number: 6,
-    title: "Bilangan Persegi",
-    content: "Perhatikan bilangan persegi berikut:",
+    titleKey: "q6.title",
+    contentKey: "q6.content",
     type: "mixed",
     svgNode: <SvgQ8 />,
     parts: [
       { label: "Pola:", math: "1,\\ 4,\\ 9,\\ 16,\\ 25,\\ ..." },
-      { label: "a.", text: "Nyatakan rumus bilangan persegi ke-n." },
-      { label: "b.", text: "Bilangan persegi ke-15 adalah ...." },
+      { label: "a.", textKey: "q6.a" },
+      { label: "b.", textKey: "q6.b" },
     ],
   },
   {
     number: 7,
-    title: "Bilangan Segitiga",
-    content: "Bilangan segitiga dibentuk dari susunan titik berbentuk segitiga:",
+    titleKey: "q7.title",
+    contentKey: "q7.content",
     type: "mixed",
     svgNode: <SvgQ7 />,
     parts: [
       { label: "Pola:", math: "1,\\ 3,\\ 6,\\ 10,\\ 15,\\ ..." },
-      { label: "a.", text: "Tuliskan rumus bilangan segitiga ke-n." },
-      { label: "b.", text: "Tentukan bilangan segitiga ke-10." },
+      { label: "a.", textKey: "q7.a" },
+      { label: "b.", textKey: "q7.b" },
     ],
   },
   {
     number: 8,
-    title: "Bilangan Persegi Panjang",
-    content: "Bilangan persegi panjang dibentuk dari susunan titik berbentuk persegi panjang:",
+    titleKey: "q8.title",
+    contentKey: "q8.content",
     type: "mixed",
     svgNode: <SvgQ9 />,
     parts: [
       { label: "Pola:", math: "2,\\ 6,\\ 12,\\ 20,\\ 30,\\ ..." },
-      { label: "a.", text: "Tuliskan rumus bilangan persegi panjang ke-n." },
-      { label: "b.", text: "Hitung bilangan persegi panjang ke-8." },
+      { label: "a.", textKey: "q8.a" },
+      { label: "b.", textKey: "q8.b" },
     ],
   },
   {
     number: 9,
-    title: "Menghitung Suku dengan Rumus Umum",
-    content: "Diketahui rumus suku ke-n dari suatu barisan bilangan. Hitunglah nilai suku ke-15 dan suku ke-50 untuk masing-masing barisan berikut:",
+    titleKey: "q9.title",
+    contentKey: "q9.content",
     type: "mixed",
     parts: [
       { label: "a.", math: "U_n = n(n + 2)" },
@@ -381,8 +385,8 @@ const questions: QuestionItem[] = [
   },
   {
     number: 10,
-    title: "Rumus Suku ke-n dan Suku ke-100",
-    content: "Tentukan rumus suku ke-n dan hitunglah suku ke-50 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})",
+    titleKey: "q10.title",
+    contentKey: "q10.content",
     type: "mixed",
     parts: [
       { label: "a.", math: "0,\\ 3,\\ 8,\\ 15,\\ 24,\\ \\ldots" },
@@ -394,67 +398,77 @@ const questions: QuestionItem[] = [
   },
 ];
 
+// ─── Locale base path ─────────────────────────────────────────────────────────
+
+const BASE = "practice.polaBilangan.pengertianDanPolaKhusus";
+
 // ─── Card Component ────────────────────────────────────────────────────────────
 
 const QuestionCard = ({ q, i }: { q: QuestionItem; i: number }) => {
   const { isDark } = useTheme();
+  const { t } = useTranslation();
+
+  const title = t(`${BASE}.${q.titleKey}`);
+  const content = q.contentKey ? t(`${BASE}.${q.contentKey}`) : undefined;
+  const contentAfterSvg = q.contentAfterSvgKey ? t(`${BASE}.${q.contentAfterSvgKey}`) : undefined;
+
   return (
-  <div
-    className="relative rounded-2xl overflow-hidden animate-slide-up"
-    style={{ animationDelay: `${i * 0.03}s` }}
-  >
-    <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-cyan-900/30 via-slate-900/80 to-purple-900/30" : "from-cyan-50/60 via-white/80 to-purple-50/40"} backdrop-blur`} />
-    <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
-    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-purple-500 rounded-l-2xl" />
-    <div className="relative px-5 py-4">
-      <div className="flex items-start gap-3">
-        <div className="shrink-0">
-          <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center">
-            <span className="text-cyan-300 text-xs font-bold">{q.number}</span>
+    <div
+      className="relative rounded-2xl overflow-hidden animate-slide-up"
+      style={{ animationDelay: `${i * 0.03}s` }}
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${isDark ? "from-cyan-900/30 via-slate-900/80 to-purple-900/30" : "from-cyan-50/60 via-white/80 to-purple-50/40"} backdrop-blur`} />
+      <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
+      <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-purple-500 rounded-l-2xl" />
+      <div className="relative px-5 py-4">
+        <div className="flex items-start gap-3">
+          <div className="shrink-0">
+            <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center">
+              <span className="text-cyan-300 text-xs font-bold">{q.number}</span>
+            </div>
           </div>
-        </div>
-        <div className="flex-1 min-w-0">
-          {q.title && (
+          <div className="flex-1 min-w-0">
             <span className="text-cyan-400 bg-cyan-500/10 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded inline-block mb-2">
-              {q.title}
+              {title}
             </span>
-          )}
-          {q.content && (
-            <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>{q.content}</p>
-          )}
-          {q.svgNode && (
-            <div className={`my-3 rounded-xl overflow-hidden ${isDark ? "bg-black/25 border-white/5" : "bg-gray-100 border-gray-200"} border px-2 py-3`}>
-              {q.svgNode}
-            </div>
-          )}
-          {q.imgSrc && (
-            <div className="my-3 rounded-xl overflow-hidden bg-white border border-white/20 flex items-center justify-center p-3">
-              <img src={q.imgSrc} alt="Pola gambar" className="max-w-full h-auto" />
-            </div>
-          )}
-          {q.contentAfterSvg && (
-            <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>{q.contentAfterSvg}</p>
-          )}
-          {q.type === "mixed" && q.parts && (
-            <div className="flex flex-col gap-2 mt-2">
-              {q.parts.map((part, pi) => (
-                <div key={pi} className={`flex items-start gap-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
-                  <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{part.label}</span>
-                  {part.math ? (
-                    <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}>
-                      <InlineMath math={part.math} />
-                    </div>
-                  ) : (
-                    <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} whitespace-pre-line`}>{part.text}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+            {content && (
+              <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>{content}</p>
+            )}
+            {q.svgNode && (
+              <div className={`my-3 rounded-xl overflow-hidden ${isDark ? "bg-black/25 border-white/5" : "bg-gray-100 border-gray-200"} border px-2 py-3`}>
+                {q.svgNode}
+              </div>
+            )}
+            {q.imgSrc && (
+              <div className="my-3 rounded-xl overflow-hidden bg-white border border-white/20 flex items-center justify-center p-3">
+                <img src={q.imgSrc} alt="Pola gambar" className="max-w-full h-auto" />
+              </div>
+            )}
+            {contentAfterSvg && (
+              <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>{contentAfterSvg}</p>
+            )}
+            {q.type === "mixed" && q.parts && (
+              <div className="flex flex-col gap-2 mt-2">
+                {q.parts.map((part, pi) => (
+                  <div key={pi} className={`flex items-start gap-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-3 py-2`}>
+                    <span className="text-cyan-300 text-xs font-bold shrink-0 mt-0.5 min-w-[28px]">{part.label}</span>
+                    {part.math ? (
+                      <div className={`${isDark ? "text-white" : "text-gray-900"} text-sm overflow-x-auto`}>
+                        <InlineMath math={part.math} />
+                      </div>
+                    ) : (
+                      <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} whitespace-pre-line`}>
+                        {part.textKey ? t(`${BASE}.${part.textKey}`) : ''}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 };
 
@@ -482,9 +496,9 @@ const PengertianDanPolaKhususPage = () => {
           </div>
           <h1 className={`font-display text-lg md:text-xl font-bold ${isDark ? "text-white" : "text-gray-900"} text-center mb-1 leading-tight px-2`}
             style={{ textShadow: isDark ? '0 0 20px rgba(255,255,255,0.3)' : 'none' }}>
-            PENGERTIAN POLA, BARISAN BILANGAN
+            {t(`${BASE}.titleLine1`)}
             <br />
-            <span className="text-purple-300">DAN POLA-POLA KHUSUS</span>
+            <span className="text-purple-300">{t(`${BASE}.titleLine2`)}</span>
           </h1>
           <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body mb-3`}>Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className={`flex items-center gap-3 ${isDark ? "bg-white/5 border-white/10" : "bg-gray-50 border-gray-200"} border rounded-xl px-5 py-2`}>
