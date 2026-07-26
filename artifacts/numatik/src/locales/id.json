@@ -2921,6 +2921,35 @@
           "label": "KELILING DAN LUAS BANGUN TAK BERATURAN",
           "desc": "Menghitung keliling & luas bangun gabungan, metode dekomposisi, soal denah"
         }
+      },
+      "garisBeratBagiTinggi": {
+        "title": "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA",
+        "subtitle": "Kelas 7 – Latihan Mandiri – Segitiga dan Segiempat",
+        "sectionTitle": "Latihan Mandiri",
+        "instruction": "Pilihlah jawaban yang benar.",
+        "back": "Kembali ke Segitiga dan Segiempat",
+        "q1": "Diketahui segitiga KLM. Titik O berada pada sisi KL. Jika O dihubungkan dengan titik M dengan sebuah garis, maka garis MO tegak lurus dengan sisi KL. Garis MO disebut ...",
+        "q2pre": "Diketahui segitiga PQR tumpul di P. Garis",
+        "q2mid": "tegak lurus dan memotong titik tengah QR. Garis",
+        "q2end": "dinamakan ...",
+        "q3": "Yang merupakan garis berat adalah …",
+        "q4": "Yang merupakan garis bagi adalah …",
+        "q5": "Yang merupakan garis tinggi adalah …",
+        "q6": "Garis yang membagi sebuah sudut segitiga menjadi dua sama besar dinamakan ...",
+        "q7": "Garis sumbu adalah ....",
+        "q7optA": "Garis yang ditarik dari sebuah sudut dalam segitiga yang tegak lurus pada sisi yang berada di hadapannya",
+        "q7optB": "Garis yang ditarik dari sebuah sudut dalam segitiga dan membagi sisi di hadapan sudut itu menjadi dua bagian yang sama panjang",
+        "q7optC": "Garis yang membagi sebuah sudut segitiga menjadi dua sama besar",
+        "q7optD": "Garis yang melalui pertengahan sisi dan tegak lurus pada sisi tersebut",
+        "q8": "Garis yang ditarik dari sebuah sudut dalam segitiga dan membagi sisi di hadapan sudut itu menjadi dua bagian yang sama panjang dinamakan ...",
+        "q9": "garis PQ adalah garis …",
+        "q10": "Garis istimewa pada segitiga yang melalui salah satu titik sudut dan membagi sisi di hadapan sudut tersebut menjadi dua sama panjang adalah garis....",
+        "q11": "yang merupakan garis bagi pada segitiga ABC adalah",
+        "q12": "yang merupakan garis berat pada segitiga ABC adalah ...",
+        "optGarisBerat": "Garis berat",
+        "optGarisBagi": "Garis bagi",
+        "optGarisTinggi": "Garis tinggi",
+        "optGarisSumbu": "Garis sumbu"
       }
     }
   },

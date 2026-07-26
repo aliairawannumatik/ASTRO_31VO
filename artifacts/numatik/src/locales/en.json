@@ -2921,6 +2921,35 @@
           "label": "PERIMETER AND AREA OF IRREGULAR SHAPES",
           "desc": "Computing perimeter & area of composite shapes, decomposition method, floor plan problems"
         }
+      },
+      "garisBeratBagiTinggi": {
+        "title": "MEDIANS, ANGLE BISECTORS & ALTITUDES OF A TRIANGLE",
+        "subtitle": "Grade 7 – Self-Practice – Triangles and Quadrilaterals",
+        "sectionTitle": "Self-Practice",
+        "instruction": "Choose the correct answer.",
+        "back": "Back to Triangles and Quadrilaterals",
+        "q1": "In triangle KLM, point O lies on side KL. A line is drawn from O to vertex M such that MO is perpendicular to KL. Line MO is called ...",
+        "q2pre": "In obtuse triangle PQR with the obtuse angle at P. Line",
+        "q2mid": "is perpendicular to and bisects QR. Line",
+        "q2end": "is called ...",
+        "q3": "Which line is the median?",
+        "q4": "Which line is the angle bisector?",
+        "q5": "Which line is the altitude?",
+        "q6": "A line that divides an interior angle of a triangle into two equal parts is called ...",
+        "q7": "A perpendicular bisector is ....",
+        "q7optA": "A line drawn from a vertex of the triangle perpendicular to the opposite side",
+        "q7optB": "A line drawn from a vertex of the triangle that bisects the opposite side into two equal parts",
+        "q7optC": "A line that divides an interior angle of the triangle into two equal parts",
+        "q7optD": "A line that passes through the midpoint of a side and is perpendicular to that side",
+        "q8": "A line drawn from a vertex of the triangle that bisects the opposite side into two equal parts is called ...",
+        "q9": "Line PQ is a ...",
+        "q10": "The special line in a triangle that passes through a vertex and bisects the opposite side into two equal parts is called ....",
+        "q11": "Which line is the angle bisector of triangle ABC?",
+        "q12": "Which line is the median of triangle ABC?",
+        "optGarisBerat": "Median",
+        "optGarisBagi": "Angle bisector",
+        "optGarisTinggi": "Altitude",
+        "optGarisSumbu": "Perpendicular bisector"
       }
     }
   },

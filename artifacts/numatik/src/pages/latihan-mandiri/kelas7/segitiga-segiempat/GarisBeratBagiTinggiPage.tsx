@@ -210,115 +210,6 @@ type Question = {
   options: React.ReactNode[];
 };
 
-const questions: Question[] = [
-  {
-    id: 1,
-    content: (
-      <p>
-        Diketahui segitiga KLM. Titik O berada pada sisi KL. Jika O dihubungkan
-        dengan titik M dengan sebuah garis, maka garis MO tegak lurus dengan
-        sisi KL. Garis MO disebut ...
-      </p>
-    ),
-    options: ["Garis berat", "Garis bagi", "Garis tinggi", "Garis sumbu"],
-  },
-  {
-    id: 2,
-    content: (
-      <p>
-        Diketahui segitiga PQR tumpul di P. Garis <em>k</em> tegak lurus dan
-        memotong titik tengah QR. Garis <em>k</em> dinamakan ...
-      </p>
-    ),
-    options: ["Garis berat", "Garis bagi", "Garis tinggi", "Garis sumbu"],
-  },
-  {
-    id: 3,
-    svgDiagram: <img src={"/images/segitiga_1774935300727.png"} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
-    content: <p>Yang merupakan garis berat adalah …</p>,
-    options: ["AD", "CF", "EB", "AB"],
-  },
-  {
-    id: 4,
-    svgDiagram: <img src={"/images/segitiga_1774935300727.png"} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
-    content: <p>Yang merupakan garis bagi adalah …</p>,
-    options: ["AD", "CF", "EB", "AB"],
-  },
-  {
-    id: 5,
-    svgDiagram: <img src={"/images/segitiga_1774935300727.png"} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
-    content: <p>Yang merupakan garis tinggi adalah …</p>,
-    options: ["AD", "CF", "EB", "AB"],
-  },
-  {
-    id: 6,
-    content: (
-      <p>
-        Garis yang membagi sebuah sudut segitiga menjadi dua sama besar
-        dinamakan ...
-      </p>
-    ),
-    options: ["Garis berat", "Garis bagi", "Garis tinggi", "Garis sumbu"],
-  },
-  {
-    id: 7,
-    content: <p>Garis sumbu adalah ....</p>,
-    options: [
-      "Garis yang ditarik dari sebuah sudut dalam segitiga yang tegak lurus pada sisi yang berada di hadapannya",
-      "Garis yang ditarik dari sebuah sudut dalam segitiga dan membagi sisi di hadapan sudut itu menjadi dua bagian yang sama panjang",
-      "Garis yang membagi sebuah sudut segitiga menjadi dua sama besar",
-      "Garis yang melalui pertengahan sisi dan tegak lurus pada sisi tersebut",
-    ],
-  },
-  {
-    id: 8,
-    content: (
-      <p>
-        Garis yang ditarik dari sebuah sudut dalam segitiga dan membagi sisi di
-        hadapan sudut itu menjadi dua bagian yang sama panjang dinamakan ...
-      </p>
-    ),
-    options: ["Garis berat", "Garis bagi", "Garis tinggi", "Garis sumbu"],
-  },
-  {
-    id: 9,
-    svgDiagram: <DiagramQ9 />,
-    content: <p>garis PQ adalah garis …</p>,
-    options: ["garis berat", "garis bagi", "garis tinggi", "garis sumbu"],
-  },
-  {
-    id: 10,
-    content: (
-      <p>
-        Garis istimewa pada segitiga yang melalui salah satu titik sudut dan
-        membagi sisi di hadapan sudut tersebut menjadi dua sama panjang adalah
-        garis....
-      </p>
-    ),
-    options: ["garis berat", "garis sumbu", "garis bagi", "garis tinggi"],
-  },
-  {
-    id: 11,
-    content: <p>yang merupakan garis bagi pada segitiga ABC adalah</p>,
-    options: [
-      <img key="11a" src={"/images/a_1774935527164.png"} alt="Opsi A soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
-      <img key="11b" src={"/images/b_1774935527165.png"} alt="Opsi B soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
-      <img key="11c" src={"/images/c_1774935527166.png"} alt="Opsi C soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
-      <img key="11d" src={"/images/d_1774935527166.png"} alt="Opsi D soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
-    ],
-  },
-  {
-    id: 12,
-    content: <p>yang merupakan garis berat pada segitiga ABC adalah ...</p>,
-    options: [
-      <img key="12a" src={"/images/a_1774935527164.png"} alt="Opsi A soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
-      <img key="12b" src={"/images/b_1774935527165.png"} alt="Opsi B soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
-      <img key="12c" src={"/images/c_1774935527166.png"} alt="Opsi C soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
-      <img key="12d" src={"/images/d_1774935527166.png"} alt="Opsi D soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
-    ],
-  },
-];
-
 /* ─────────────────────────────────────────────
    PAGE COMPONENT
 ───────────────────────────────────────────── */
@@ -328,6 +219,124 @@ const GarisBeratBagiTinggiLatihanPage = () => {
   const { t } = useTranslation();
   const { isDark } = useTheme();
 
+  const K = "practice.segitigaSegiempat.garisBeratBagiTinggi";
+
+  const questions: Question[] = [
+    {
+      id: 1,
+      content: <p>{t(`${K}.q1`)}</p>,
+      options: [
+        t(`${K}.optGarisBerat`),
+        t(`${K}.optGarisBagi`),
+        t(`${K}.optGarisTinggi`),
+        t(`${K}.optGarisSumbu`),
+      ],
+    },
+    {
+      id: 2,
+      content: (
+        <p>
+          {t(`${K}.q2pre`)} <em>k</em> {t(`${K}.q2mid`)} <em>k</em> {t(`${K}.q2end`)}
+        </p>
+      ),
+      options: [
+        t(`${K}.optGarisBerat`),
+        t(`${K}.optGarisBagi`),
+        t(`${K}.optGarisTinggi`),
+        t(`${K}.optGarisSumbu`),
+      ],
+    },
+    {
+      id: 3,
+      svgDiagram: <img src={"/images/segitiga_1774935300727.png"} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
+      content: <p>{t(`${K}.q3`)}</p>,
+      options: ["AD", "CF", "EB", "AB"],
+    },
+    {
+      id: 4,
+      svgDiagram: <img src={"/images/segitiga_1774935300727.png"} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
+      content: <p>{t(`${K}.q4`)}</p>,
+      options: ["AD", "CF", "EB", "AB"],
+    },
+    {
+      id: 5,
+      svgDiagram: <img src={"/images/segitiga_1774935300727.png"} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
+      content: <p>{t(`${K}.q5`)}</p>,
+      options: ["AD", "CF", "EB", "AB"],
+    },
+    {
+      id: 6,
+      content: <p>{t(`${K}.q6`)}</p>,
+      options: [
+        t(`${K}.optGarisBerat`),
+        t(`${K}.optGarisBagi`),
+        t(`${K}.optGarisTinggi`),
+        t(`${K}.optGarisSumbu`),
+      ],
+    },
+    {
+      id: 7,
+      content: <p>{t(`${K}.q7`)}</p>,
+      options: [
+        t(`${K}.q7optA`),
+        t(`${K}.q7optB`),
+        t(`${K}.q7optC`),
+        t(`${K}.q7optD`),
+      ],
+    },
+    {
+      id: 8,
+      content: <p>{t(`${K}.q8`)}</p>,
+      options: [
+        t(`${K}.optGarisBerat`),
+        t(`${K}.optGarisBagi`),
+        t(`${K}.optGarisTinggi`),
+        t(`${K}.optGarisSumbu`),
+      ],
+    },
+    {
+      id: 9,
+      svgDiagram: <DiagramQ9 />,
+      content: <p>{t(`${K}.q9`)}</p>,
+      options: [
+        t(`${K}.optGarisBerat`),
+        t(`${K}.optGarisBagi`),
+        t(`${K}.optGarisTinggi`),
+        t(`${K}.optGarisSumbu`),
+      ],
+    },
+    {
+      id: 10,
+      content: <p>{t(`${K}.q10`)}</p>,
+      options: [
+        t(`${K}.optGarisBerat`),
+        t(`${K}.optGarisSumbu`),
+        t(`${K}.optGarisBagi`),
+        t(`${K}.optGarisTinggi`),
+      ],
+    },
+    {
+      id: 11,
+      content: <p>{t(`${K}.q11`)}</p>,
+      options: [
+        <img key="11a" src={"/images/a_1774935527164.png"} alt="Opsi A soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
+        <img key="11b" src={"/images/b_1774935527165.png"} alt="Opsi B soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
+        <img key="11c" src={"/images/c_1774935527166.png"} alt="Opsi C soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
+        <img key="11d" src={"/images/d_1774935527166.png"} alt="Opsi D soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
+      ],
+    },
+    {
+      id: 12,
+      content: <p>{t(`${K}.q12`)}</p>,
+      options: [
+        <img key="12a" src={"/images/a_1774935527164.png"} alt="Opsi A soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
+        <img key="12b" src={"/images/b_1774935527165.png"} alt="Opsi B soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
+        <img key="12c" src={"/images/c_1774935527166.png"} alt="Opsi C soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
+        <img key="12d" src={"/images/d_1774935527166.png"} alt="Opsi D soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
+      ],
+    },
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -335,18 +344,18 @@ const GarisBeratBagiTinggiLatihanPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA
+          {t(`${K}.title`)}
         </h1>
         <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center mb-6 font-body`}>
-          Kelas 7 – Latihan Mandiri – Segitiga dan Segiempat
+          {t(`${K}.subtitle`)}
         </p>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
           <h2 className="text-lg font-bold text-accent mb-4 font-display">
-            Latihan Mandiri
+            {t(`${K}.sectionTitle`)}
           </h2>
           <p className={`${isDark ? "text-white/70" : "text-gray-600"} text-sm mb-6 font-body`}>
-            Pilihlah jawaban yang benar.
+            {t(`${K}.instruction`)}
           </p>
 
           <div className={`space-y-8 ${isDark ? "text-white/90" : "text-gray-800"} font-body text-sm leading-relaxed`}>
@@ -385,7 +394,7 @@ const GarisBeratBagiTinggiLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Segitiga dan Segiempat
+            {t(`${K}.back`)}
           </button>
         </div>
       </div>
