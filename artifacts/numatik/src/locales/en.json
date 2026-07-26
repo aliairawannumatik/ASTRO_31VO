@@ -4377,6 +4377,67 @@
           "label": "FUNCTION GRAPHS (ENRICHMENT)",
           "desc": "Value tables, intercepts, gradient, sketching graphs, vertical line test"
         }
+      },
+      "pengertianRelasi": {
+        "h1": "UNDERSTANDING RELATIONS AND THEIR REPRESENTATIONS",
+        "grade": "Grade 8 · Relations and Functions",
+        "tipTitle": "📌 Remember — Three Ways to Represent Relations",
+        "tipArrow": "Arrow Diagram",
+        "tipPairs": "Ordered Pairs",
+        "tipCartesian": "Cartesian Diagram",
+        "backToTopic": "Relations and Functions",
+        "q1": {
+          "title": "Domain, Codomain, and Range",
+          "a": "Determine the domain, codomain, and range of the relation above.",
+          "b": "Which codomain members are not in the range? Name them.",
+          "c": "What is the name of the relation rule shown in that diagram?"
+        },
+        "q2": {
+          "title": "Relation of Children and Their Favourite Fruits",
+          "content": "The following data shows the favourite fruits of three children:\n• Andi likes: Apple and Mango\n• Budi likes: Orange and Banana\n• Citra likes: Apple, Mango, and Grape\n\nThe relation is ‘likes’ from the set of children to the set of fruits.",
+          "a": "Draw an arrow diagram for the ‘likes’ relation above.",
+          "b": "Express the relation as a set of ordered pairs.",
+          "c": "Draw a Cartesian diagram for this relation. (Horizontal axis = children’s names, vertical axis = fruit names)"
+        },
+        "q3": {
+          "title": "Relation ‘Half of’",
+          "content": "Given set A = {2, 4, 6, 8, 10} and B = {1, 2, 3, 4, 5, 6, 7, 8}. The relation connecting A to B is ‘half of’.",
+          "a": "Draw an arrow diagram for this relation.",
+          "b": "Write the ordered pairs.",
+          "c": "Draw it as a Cartesian diagram."
+        },
+        "q4": {
+          "title": "Relation ‘Greater than’",
+          "content": "Given P = {2, 4, 6} and Q = {1, 3, 5, 7}. The relation in effect is ‘greater than’.",
+          "a": "Draw an arrow diagram for the ‘greater than’ relation from P to Q.",
+          "b": "Write the set of ordered pairs.",
+          "c": "Determine the range of the relation."
+        },
+        "q5": {
+          "title": "Relation ‘Factor of’",
+          "content": "Given A = {2, 3, 4, 6} and B = {6, 8, 12, 18, 24}. The relation connecting A to B is ‘factor of’.",
+          "a": "Draw an arrow diagram for the ‘factor of’ relation.",
+          "b": "Write the set of ordered pairs.",
+          "c": "Determine the range of the relation."
+        },
+        "q6": {
+          "title": "Relation from Cartesian Diagram – Find the Rule",
+          "a": "Write the set of ordered pairs.",
+          "b": "Determine the relation rule."
+        },
+        "q7": {
+          "title": "Relation from Ordered Pairs",
+          "content": "Relation R from set A to set B is expressed by the following set of ordered pairs:",
+          "a": "Draw relation R as an arrow diagram.",
+          "b": "Determine the relation rule."
+        },
+        "q8": {
+          "title": "Relation ‘Multiple of’ — Arrow Diagram",
+          "content": "Given set A = {1, 2, 3, 4, 5, 6, 7, 8, 9} as the domain and set B = {1, 2, 3, 4, 5} as the codomain, with the relation “multiple of”.",
+          "diagramCaption": "Relation: “multiple of” (A → B)",
+          "a": "Write the relation above as a set of ordered pairs.",
+          "b": "Determine the relation rule connecting set A to set B."
+        }
       }
     }
   },

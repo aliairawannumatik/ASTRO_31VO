@@ -1,0 +1,57 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Relasi dan Fungsi" —
+index sudah selesai (practice.relasiDanFungsi.* sudah ada strukturnya
+untuk title, subtopics, dll).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- SVG <text> elements TIDAK diterjemahkan sama sekali — biarkan
+  hardcode Indonesia
+- JANGAN sentuh ArrowDiagram.tsx (komponen helper)
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: PengertianRelasiPage.tsx (8 soal).
+
+KONTEKS KHUSUS FILE INI:
+- Format data: array questions: Q[] via .map() — ikuti pola yang
+  sudah terbukti di sub-halaman topik-topik sebelumnya (title/content/
+  parts via t(), array tidak berisi teks hardcode, hanya referensi key)
+- Halaman ini pakai isDark (useTheme) untuk conditional className —
+  WAJIB dipertahankan persis seperti semula
+- 3 dari 8 soal pakai SVG inline besar:
+  * Soal 1: diagram panah domain-range
+  * Soal 6: diagram Kartesius + titik
+  * Soal 8: diagram panah kelipatan 9×5
+  SEMUA teks di dalam SVG <text> JANGAN diterjemahkan, biarkan
+  hardcode Indonesia
+- Berdasarkan investigasi awal, halaman ini TIDAK punya kasus \text{}
+  bahasa Indonesia — tapi tetap WAJIB grep "\\text{" untuk memastikan
+  tidak ada yang terlewat
+
+1. Terjemahkan SEMUA teks: instruksi umum (kalau ada), teks 8 soal
+   (title, content, parts[].text)
+2. Kalau ditemukan kasus \text{} yang belum terdeteksi, tangani
+   dengan pola textKey/danWord yang sudah terbukti di topik-topik
+   sebelumnya
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.relasiDanFungsi.pengertianRelasi.*
+5. JANGAN sentuh sub-halaman lain, halaman index, atau ArrowDiagram.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q8)
+- Jalankan grep "\\text{" untuk konfirmasi memang 0 kasus (atau
+  laporkan kalau ternyata ada yang ditemukan dan bagaimana ditangani)
+- Konfirmasi eksplisit: SEMUA 8 soal sudah diterjemahkan, ketiga SVG
+  (soal 1, 6, 8) teksnya tidak disentuh, isDark tetap terjaga

@@ -4377,6 +4377,67 @@
           "label": "GRAFIK FUNGSI (PENGAYAAN)",
           "desc": "Tabel nilai, titik potong, gradien, sketsa grafik, uji garis vertikal"
         }
+      },
+      "pengertianRelasi": {
+        "h1": "PENGERTIAN RELASI DAN PENYAJIANNYA",
+        "grade": "Kelas 8 · Relasi dan Fungsi",
+        "tipTitle": "📌 Ingat — Tiga Cara Menyatakan Relasi",
+        "tipArrow": "Diagram Panah",
+        "tipPairs": "Pasangan Berurutan",
+        "tipCartesian": "Diagram Kartesius",
+        "backToTopic": "Relasi dan Fungsi",
+        "q1": {
+          "title": "Domain, Kodomain, dan Range",
+          "a": "Tentukan domain, kodomain, dan range dari relasi di atas.",
+          "b": "Anggota kodomain mana yang tidak menjadi range? Sebutkan.",
+          "c": "Apa nama aturan relasi pada diagram tersebut?"
+        },
+        "q2": {
+          "title": "Relasi Anak-anak dan Buah Kesukaan",
+          "content": "Diketahui data kesukaan buah tiga anak sebagai berikut:\n• Andi menyukai: Apel dan Mangga\n• Budi menyukai: Jeruk dan Pisang\n• Citra menyukai: Apel, Mangga, dan Anggur\n\nRelasi yang berlaku adalah ‘menyukai’ dari himpunan anak ke himpunan buah.",
+          "a": "Buatlah diagram panah untuk relasi ‘menyukai’ di atas.",
+          "b": "Nyatakan relasi tersebut dalam bentuk himpunan pasangan berurutan.",
+          "c": "Gambarlah diagram Kartesius untuk relasi tersebut. (Sumbu mendatar = nama anak, sumbu tegak = nama buah)"
+        },
+        "q3": {
+          "title": "Relasi ‘Setengah dari’",
+          "content": "Diketahui himpunan A = {2, 4, 6, 8, 10} dan B = {1, 2, 3, 4, 5, 6, 7, 8}. Relasi yang menghubungkan A ke B adalah ‘setengah dari’.",
+          "a": "Gambarlah diagram panah untuk relasi ini.",
+          "b": "Tuliskan pasangan berurutannya.",
+          "c": "Gambarlah dalam diagram Kartesius."
+        },
+        "q4": {
+          "title": "Relasi ‘Lebih dari’",
+          "content": "Diketahui P = {2, 4, 6} dan Q = {1, 3, 5, 7}. Relasi yang berlaku adalah ‘lebih dari’.",
+          "a": "Gambarlah diagram panah untuk relasi ‘lebih dari’ dari P ke Q.",
+          "b": "Tuliskan himpunan pasangan berurutannya.",
+          "c": "Tentukan range relasi tersebut."
+        },
+        "q5": {
+          "title": "Relasi ‘Faktor dari’",
+          "content": "Diketahui A = {2, 3, 4, 6} dan B = {6, 8, 12, 18, 24}. Relasi yang menghubungkan A ke B adalah ‘faktor dari’.",
+          "a": "Gambarlah diagram panah untuk relasi ‘faktor dari’ ini.",
+          "b": "Tuliskan himpunan pasangan berurutannya.",
+          "c": "Tentukan range relasi tersebut."
+        },
+        "q6": {
+          "title": "Relasi dari Diagram Kartesius – Tentukan Aturan",
+          "a": "Tuliskan himpunan pasangan berurutannya.",
+          "b": "Tentukan aturan relasinya."
+        },
+        "q7": {
+          "title": "Relasi dari Pasangan Berurutan",
+          "content": "Diketahui relasi R dari himpunan A ke himpunan B dinyatakan dengan himpunan pasangan berurutan berikut:",
+          "a": "Gambarlah relasi R dalam bentuk diagram panah.",
+          "b": "Tentukan aturan relasinya."
+        },
+        "q8": {
+          "title": "Relasi ‘Kelipatan dari’ — Diagram Panah",
+          "content": "Diketahui himpunan A = {1, 2, 3, 4, 5, 6, 7, 8, 9} sebagai domain dan himpunan B = {1, 2, 3, 4, 5} sebagai kodomain dengan relasi “kelipatan dari”.",
+          "diagramCaption": "Relasi: “kelipatan dari” (A → B)",
+          "a": "Tuliskan relasi di atas dalam bentuk himpunan pasangan berurutan.",
+          "b": "Tentukan aturan relasi yang menghubungkan himpunan A ke himpunan B."
+        }
       }
     }
   },
