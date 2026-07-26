@@ -1,0 +1,63 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Himpunan" — index,
+PengertianKeanggotaanPage.tsx, HimpunanBagianPage.tsx,
+DiagramVennPage.tsx sudah selesai. OperasiHimpunanPage.tsx Tahap 1
+(tip box, 4 caption, sectionA/B, Q1-10, 51 key di bawah
+practice.himpunan.operasiHimpunan.*) sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- SVG <text> elements TIDAK diterjemahkan sama sekali — biarkan
+  hardcode
+
+TUGAS SEKARANG — TAHAP 2 dari 2 (PENUTUP TOPIK "HIMPUNAN"):
+Fokus ke Bagian C (Q11-15) di OperasiHimpunanPage.tsx, PLUS elemen
+halaman yang belum disentuh di Tahap 1:
+- h1 title
+- Subtitle breadcrumb
+- Back button
+- Badge jumlah soal
+- sectionC (judul Bagian C, kalau ada)
+
+KONTEKS KHUSUS:
+- Sub-pertanyaan (a)/(b)/(c)/(d) di Q11-15 — pecah jadi key terpisah
+  per item, ikuti pola dari Tahap 1
+- Kalau ada \text{} bahasa Indonesia lain di Q11-15 yang belum
+  terdeteksi sebelumnya, tangani dengan pola interpolasi yang sama
+  seperti tip box dan Q2 di Tahap 1 (hitung t() dulu di JS,
+  interpolasikan ke template literal) — ikuti persis pola kode yang
+  sudah dipakai di Tahap 1
+- Kalau ada diagram/SVG lain di Q11-15, teks di dalamnya JANGAN
+  disentuh
+
+1. Terjemahkan SEMUA teks Bagian C (Q11-15): instruksi, teks soal,
+   semua sub-pertanyaan sebagai key terpisah
+2. Terjemahkan h1 title, subtitle breadcrumb, back button, badge
+   jumlah soal, sectionC
+3. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.himpunan.operasiHimpunan.* (lanjutan dari Tahap 1)
+4. JANGAN sentuh sub-halaman lain atau halaman index
+
+VERIFIKASI:
+- Laporkan validasi teknis (esbuild parse check / skrip Node.js
+  pengecek key coverage, HMR log — tsc kalau timeout, pakai
+  alternatif yang sama seperti Tahap 1)
+- Berikan tabel rincian key per soal (Q11-Q15)
+- Konfirmasi FINAL: SELURUH OperasiHimpunanPage.tsx (15 soal, Tahap 1
+  + Tahap 2 gabungan) sekarang 100% trilingual, SVG text tidak
+  disentuh, 0 teks Indonesia hardcode tersisa
+- Total key gabungan Tahap 1 + Tahap 2 per locale file
+- KONFIRMASI PALING PENTING: setelah ini selesai, apakah SELURUH
+  topik "Himpunan" (index + 5 sub-halaman: PengertianKeanggotaan,
+  MenyatakanHimpunan — CATATAN: cek apakah MenyatakanHimpunanPage
+  sudah pernah dikerjakan sebelumnya atau belum, DiagramVenn,
+  HimpunanBagian, OperasiHimpunan) sekarang 100% trilingual?

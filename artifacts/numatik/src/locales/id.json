@@ -3656,6 +3656,48 @@
           "badge": "Hukum De Morgan",
           "pre": "Diketahui",
           "instruction": "Verifikasi Hukum De Morgan:"
+        },
+        "title": "OPERASI HIMPUNAN",
+        "topicName": "Himpunan",
+        "backBtn": "Kembali ke Himpunan",
+        "sectionC": "Bagian C · Soal Cerita & HOTS",
+        "q11": {
+          "badge": "Kontekstual",
+          "intro": "Di sebuah kelas terdapat 35 siswa. Setelah didata ekstrakurikuler: 17 ikut Pramuka, 20 ikut Seni, dan 8 ikut keduanya.",
+          "itemA": "(a) Berapa yang hanya ikut Pramuka?",
+          "itemB": "(b) Berapa yang hanya ikut Seni?",
+          "itemC": "(c) Berapa yang tidak ikut keduanya?",
+          "itemD": "(d) Buat diagram Venn situasi ini!"
+        },
+        "q12": {
+          "intro": "Dari 50 orang penduduk, 30 punya motor, 28 punya mobil, 12 punya keduanya.",
+          "question": "Berapa orang yang <a>tidak punya motor maupun mobil</a>?"
+        },
+        "q13": {
+          "badge": "Mencari x",
+          "pre": "Diketahui",
+          "dan": "dan",
+          "midPre": "banyaknya yang tidak ada di",
+          "midPost": "adalah 7.",
+          "instruction": "Tentukan"
+        },
+        "q14": {
+          "badge": "Gabungan Operasi",
+          "pre": "Diketahui",
+          "instruction": "Tentukan:"
+        },
+        "q15": {
+          "intro": "Dalam sebuah kota, 1000 warga disurvei tentang konsumsi buah:",
+          "b1": "600 makan apel",
+          "b2": "500 makan jeruk",
+          "b3": "400 makan mangga",
+          "b4": "250 makan apel dan jeruk",
+          "b5": "200 makan apel dan mangga",
+          "b6": "150 makan jeruk dan mangga",
+          "b7": "100 makan ketiganya",
+          "itemA": "(a) Berapa warga yang makan setidaknya satu buah?",
+          "itemB": "(b) Berapa warga yang tidak makan satu pun buah?",
+          "itemC": "(c) Berapa warga yang hanya makan apel saja?"
         }
       }
     }

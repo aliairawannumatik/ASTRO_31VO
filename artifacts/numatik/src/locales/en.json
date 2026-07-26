@@ -3656,6 +3656,48 @@
           "badge": "De Morgan's Law",
           "pre": "Given",
           "instruction": "Verify De Morgan's Law:"
+        },
+        "title": "SET OPERATIONS",
+        "topicName": "Sets",
+        "backBtn": "Back to Sets",
+        "sectionC": "Part C · Word Problems & HOTS",
+        "q11": {
+          "badge": "Contextual",
+          "intro": "In a class of 35 students, extracurricular data was collected: 17 joined Scouts, 20 joined Arts, and 8 joined both.",
+          "itemA": "(a) How many joined Scouts only?",
+          "itemB": "(b) How many joined Arts only?",
+          "itemC": "(c) How many joined neither?",
+          "itemD": "(d) Draw a Venn diagram for this situation!"
+        },
+        "q12": {
+          "intro": "From 50 residents, 30 own a motorcycle, 28 own a car, 12 own both.",
+          "question": "How many people <a>do not own a motorcycle or a car</a>?"
+        },
+        "q13": {
+          "badge": "Find x",
+          "pre": "Given",
+          "dan": "and",
+          "midPre": "the number of elements not in",
+          "midPost": "is 7.",
+          "instruction": "Determine"
+        },
+        "q14": {
+          "badge": "Combined Operations",
+          "pre": "Given",
+          "instruction": "Determine:"
+        },
+        "q15": {
+          "intro": "In a city, 1000 residents were surveyed about fruit consumption:",
+          "b1": "600 eat apples",
+          "b2": "500 eat oranges",
+          "b3": "400 eat mangoes",
+          "b4": "250 eat apples and oranges",
+          "b5": "200 eat apples and mangoes",
+          "b6": "150 eat oranges and mangoes",
+          "b7": "100 eat all three",
+          "itemA": "(a) How many residents eat at least one fruit?",
+          "itemB": "(b) How many residents eat no fruit at all?",
+          "itemC": "(c) How many residents eat apples only?"
         }
       }
     }

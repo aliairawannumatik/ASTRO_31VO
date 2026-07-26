@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
@@ -114,9 +114,9 @@ const OperasiHimpunanLatihanPage = () => {
             <BookOpen className="w-7 h-7 text-red-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            OPERASI HIMPUNAN
+            {t(`${p}.title`)}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Himpunan</p>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · {t(`${p}.topicName`)}</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>
@@ -251,66 +251,60 @@ const OperasiHimpunanLatihanPage = () => {
             </Q>
           </Section>
 
-          <Section title="Bagian C · Soal Cerita & HOTS" color="#4ade80">
+          <Section title={t(`${p}.sectionC`)} color="#4ade80">
 
-            <Q no={11} badge="Kontekstual" badgeColor="#4ade80">
-              <p>
-                Di sebuah kelas terdapat 35 siswa. Setelah didata ekstrakurikuler:
-                17 ikut Pramuka, 20 ikut Seni, dan 8 ikut keduanya.
-              </p>
+            <Q no={11} badge={t(`${p}.q11.badge`)} badgeColor="#4ade80">
+              <p>{t(`${p}.q11.intro`)}</p>
               <p className="mt-1">
-                (a) Berapa yang hanya ikut Pramuka?<br/>
-                (b) Berapa yang hanya ikut Seni?<br/>
-                (c) Berapa yang tidak ikut keduanya?<br/>
-                (d) Buat diagram Venn situasi ini!
+                {t(`${p}.q11.itemA`)}<br/>
+                {t(`${p}.q11.itemB`)}<br/>
+                {t(`${p}.q11.itemC`)}<br/>
+                {t(`${p}.q11.itemD`)}
               </p>
             </Q>
 
             <Q no={12} badge="UN 2021" badgeColor="#4ade80">
               <p>
-                Dari 50 orang penduduk, 30 punya motor, 28 punya mobil, 12 punya keduanya.
-                Berapa orang yang <strong className="text-green-300">tidak punya motor maupun mobil</strong>?
+                {t(`${p}.q12.intro`)}{' '}
+                <Trans i18nKey={`${p}.q12.question`} components={{ a: <strong className="text-green-300" /> }} />
               </p>
             </Q>
 
-            <Q no={13} badge="Mencari x" badgeColor="#4ade80">
+            <Q no={13} badge={t(`${p}.q13.badge`)} badgeColor="#4ade80">
               <p>
-                Diketahui <InlineMath math="n(S) = 60" />, <InlineMath math="n(A) = 35" />,
-                <InlineMath math="\; n(B) = 28" />, dan banyaknya yang tidak ada di <InlineMath math="A \cup B" /> adalah 7.
-                Tentukan <InlineMath math="n(A \cap B)" />!
+                {t(`${p}.q13.pre`)}{' '}<InlineMath math="n(S) = 60" />,{' '}<InlineMath math="n(A) = 35" />,{' '}
+                <InlineMath math="\; n(B) = 28" />,{' '}{t(`${p}.q13.dan`)}{' '}{t(`${p}.q13.midPre`)}{' '}<InlineMath math="A \cup B" />{' '}{t(`${p}.q13.midPost`)}{' '}
+                {t(`${p}.q13.instruction`)}{' '}<InlineMath math="n(A \cap B)" />!
               </p>
             </Q>
 
-            <Q no={14} badge="Gabungan Operasi" badgeColor="#4ade80">
+            <Q no={14} badge={t(`${p}.q14.badge`)} badgeColor="#4ade80">
               <p>
-                Diketahui <InlineMath math="S = \{1,2,3,\ldots,12\}" />,
-                <InlineMath math="\; A = \{2,4,6,8,10,12\}" />,
-                <InlineMath math="\; B = \{3,6,9,12\}" />.
-                Tentukan:
-                (a) <InlineMath math="A \cap B" />,
-                (b) <InlineMath math="A \cup B" />,
-                (c) <InlineMath math="A \setminus B" />,
-                (d) <InlineMath math="(A \cap B)^c" />
+                {t(`${p}.q14.pre`)}{' '}<InlineMath math="S = \{1,2,3,\ldots,12\}" />,{' '}
+                <InlineMath math="\; A = \{2,4,6,8,10,12\}" />,{' '}<InlineMath math="\; B = \{3,6,9,12\}" />.{' '}
+                {t(`${p}.q14.instruction`)}{' '}
+                (a){' '}<InlineMath math="A \cap B" />,{' '}
+                (b){' '}<InlineMath math="A \cup B" />,{' '}
+                (c){' '}<InlineMath math="A \setminus B" />,{' '}
+                (d){' '}<InlineMath math="(A \cap B)^c" />
               </p>
             </Q>
 
             <Q no={15} badge="HOTS" badgeColor="#4ade80">
-              <p>
-                Dalam sebuah kota, 1000 warga disurvei tentang konsumsi buah:
-              </p>
+              <p>{t(`${p}.q15.intro`)}</p>
               <ul className="list-none mt-1 space-y-0.5 text-white/75 text-xs">
-                <li>• 600 makan apel</li>
-                <li>• 500 makan jeruk</li>
-                <li>• 400 makan mangga</li>
-                <li>• 250 makan apel dan jeruk</li>
-                <li>• 200 makan apel dan mangga</li>
-                <li>• 150 makan jeruk dan mangga</li>
-                <li>• 100 makan ketiganya</li>
+                <li>• {t(`${p}.q15.b1`)}</li>
+                <li>• {t(`${p}.q15.b2`)}</li>
+                <li>• {t(`${p}.q15.b3`)}</li>
+                <li>• {t(`${p}.q15.b4`)}</li>
+                <li>• {t(`${p}.q15.b5`)}</li>
+                <li>• {t(`${p}.q15.b6`)}</li>
+                <li>• {t(`${p}.q15.b7`)}</li>
               </ul>
               <p className="mt-2">
-                (a) Berapa warga yang makan setidaknya satu buah?<br/>
-                (b) Berapa warga yang tidak makan satu pun buah?<br/>
-                (c) Berapa warga yang hanya makan apel saja?
+                {t(`${p}.q15.itemA`)}<br/>
+                {t(`${p}.q15.itemB`)}<br/>
+                {t(`${p}.q15.itemC`)}
               </p>
             </Q>
           </Section>
@@ -322,7 +316,7 @@ const OperasiHimpunanLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Himpunan
+            {t(`${p}.backBtn`)}
           </button>
         </div>
       </div>
