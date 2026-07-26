@@ -3899,6 +3899,102 @@
           "title": "Rumus Suku ke-n dan Suku ke-100",
           "content": "Tentukan rumus suku ke-n dan hitunglah suku ke-50 dari barisan bilangan berikut.\n(n ∈ {1, 2, 3, 4, 5, . . .})"
         }
+      },
+      "polaAritmetika": {
+        "pageTitle": "BARISAN DAN DERET ARITMETIKA",
+        "formulaBoxTitle": "📌 Rumus Barisan Aritmetika",
+        "tingkatLabel": "Tingkat:",
+        "formula": {
+          "sukuKeN": "Suku ke-n",
+          "jumlahNSuku": "Jumlah n suku pertama",
+          "alternatifSn": "Alternatif Sn"
+        },
+        "hitungNilaiPre": "Hitung nilai",
+        "hitungNilaiPost": "",
+        "tentukanNilaiPre": "Tentukan nilai",
+        "tentukanNilaiPost": "",
+        "hitungPre": "Hitung",
+        "hitungPost": "",
+        "danWord": "dan",
+        "atauWord": "atau",
+        "labelInfo": "Info:",
+        "labelRumus": "Rumus:",
+        "labelSoal": "Soal:",
+        "q1": {
+          "title": "Menentukan Suku ke-n Barisan Aritmetika",
+          "content": "Perhatikan barisan benda berikut yang membentuk barisan aritmetika:",
+          "a": "Tentukan suku pertama (a) dan beda (b) dari barisan tersebut.",
+          "b": "Tuliskan rumus Uⁿ dari barisan tersebut."
+        },
+        "q2": {
+          "title": "Barisan Aritmetika Sederhana",
+          "content": "Diketahui barisan aritmetika: 3, 7, 11, 15, …",
+          "a": "Tentukan suku pertama (a) barisan tersebut.",
+          "b": "Tentukan beda (b) barisan tersebut."
+        },
+        "q3": {
+          "title": "Barisan Aritmetika Turun",
+          "content": "Diketahui barisan aritmetika: 10, 7, 4, 1, −2, …",
+          "a": "Tentukan suku pertama (a) barisan tersebut.",
+          "b": "Tentukan beda (b) barisan tersebut."
+        },
+        "q4": {
+          "title": "Menentukan Beda (b) Barisan Aritmetika",
+          "content": "Dalam suatu barisan aritmetika, diketahui:",
+          "a": "Tentukan nilai beda (b) dari barisan tersebut.",
+          "b": "Tentukan nilai suku pertama (a)."
+        },
+        "q5": {
+          "title": "Barisan Aritmetika ‒ Soal UN",
+          "content": "Suku ke-5 suatu barisan aritmetika adalah 17 dan suku ke-9 adalah 33.",
+          "a": "Tentukan beda dan suku pertama barisan tersebut.",
+          "b": "Tentukan U₃₀ dari barisan tersebut.",
+          "c": "Suku ke berapa yang bernilai 81?"
+        },
+        "q6": {
+          "title": "Deret Aritmetika ‒ Mencari Jumlah Suku",
+          "content": "Dalam suatu barisan aritmetika, diketahui suku ke-4 adalah 11 dan suku ke-10 adalah 35.",
+          "a": "Tentukan suku pertama (a) dan beda (b)."
+        },
+        "q7": {
+          "title": "Jumlah n Suku Pertama Barisan Aritmetika",
+          "content": "Rumus jumlah n suku pertama barisan aritmetika:",
+          "soal": "Hitung jumlah 20 suku pertama dari deret: 3 + 7 + 11 + 15 + …"
+        },
+        "q8": {
+          "title": "Aplikasi Barisan Aritmetika ‒ Gaji Karyawan",
+          "content": "Seorang karyawan mendapatkan gaji bulan pertama sebesar Rp2.500.000. Setiap bulan gajinya naik Rp150.000.\n\na. Berapa gaji karyawan tersebut pada bulan ke-12?\nb. Berapa total gaji yang diterima selama 1 tahun (12 bulan)?\nc. Pada bulan ke berapa karyawan mendapatkan gaji Rp4.150.000?"
+        },
+        "q9": {
+          "title": "Soal Kontekstual ‒ Kursi Gedung Pertunjukan",
+          "content": "Sebuah gedung pertunjukan memiliki 20 baris kursi. Baris pertama berisi 15 kursi, baris kedua 18 kursi, baris ketiga 21 kursi, dan seterusnya membentuk barisan aritmetika.\n\na. Berapa banyak kursi pada baris ke-20?\nb. Berapa total kursi di seluruh gedung pertunjukan?"
+        },
+        "q10": {
+          "title": "Soal ANBK ‒ Deret Aritmetika Terapan",
+          "content": "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp5.000, hari kedua Rp7.000, hari ketiga Rp9.000, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp192.000?"
+        },
+        "q11": {
+          "title": "Soal Kontekstual ‒ Tumpukan Batu Bata",
+          "content": "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya.\n\nJika ada 15 tumpukan batu bata (dari atas sampai bawah), tentukan banyak batu bata pada tumpukan paling bawah (U₁₅) = ?"
+        },
+        "q12": {
+          "title": "Menyisipkan Bilangan dalam Barisan Aritmetika",
+          "content": "Di antara bilangan 4 dan 28, disisipkan 5 bilangan sehingga membentuk barisan aritmetika.\n\na. Tentukan beda barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Berapakah jumlah semua bilangan dalam barisan itu?"
+        },
+        "q13": {
+          "title": "Soal TKA ‒ Barisan Aritmetika",
+          "content": "Jumlah 10 suku pertama suatu barisan aritmetika adalah 155 dan suku ke-10 adalah 28.",
+          "a": "Tentukan suku pertama barisan tersebut.",
+          "b": "Tentukan beda barisan tersebut."
+        },
+        "q14": {
+          "title": "Jumlah Kelipatan 3",
+          "content": "Tentukan jumlah semua bilangan kelipatan 3 yang berada di antara 1 dan 100."
+        },
+        "q15": {
+          "title": "Jumlah Kelipatan 6",
+          "content": "Tentukan jumlah semua bilangan yang merupakan kelipatan 6 yang berada di antara 120 dan 300."
+        }
       }
     }
   },

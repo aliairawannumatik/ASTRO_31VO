@@ -3899,6 +3899,102 @@
           "title": "Formula for the nth Term",
           "content": "Find the formula for the nth term and calculate the 50th term for each number sequence below.\n(n ∈ {1, 2, 3, 4, 5, . . .})"
         }
+      },
+      "polaAritmetika": {
+        "pageTitle": "ARITHMETIC SEQUENCES AND SERIES",
+        "formulaBoxTitle": "📌 Arithmetic Sequence Formulas",
+        "tingkatLabel": "Level:",
+        "formula": {
+          "sukuKeN": "n-th term",
+          "jumlahNSuku": "Sum of first n terms",
+          "alternatifSn": "Alternative Sn"
+        },
+        "hitungNilaiPre": "Calculate the value of",
+        "hitungNilaiPost": "",
+        "tentukanNilaiPre": "Determine the value of",
+        "tentukanNilaiPost": "",
+        "hitungPre": "Calculate",
+        "hitungPost": "",
+        "danWord": "and",
+        "atauWord": "or",
+        "labelInfo": "Info:",
+        "labelRumus": "Formula:",
+        "labelSoal": "Problem:",
+        "q1": {
+          "title": "Finding the n-th Term of an Arithmetic Sequence",
+          "content": "Observe the following sequence of objects forming an arithmetic sequence:",
+          "a": "Determine the first term (a) and common difference (b) of the sequence.",
+          "b": "Write the formula for Uⁿ of the sequence."
+        },
+        "q2": {
+          "title": "Simple Arithmetic Sequence",
+          "content": "Given the arithmetic sequence: 3, 7, 11, 15, …",
+          "a": "Determine the first term (a) of the sequence.",
+          "b": "Determine the common difference (b) of the sequence."
+        },
+        "q3": {
+          "title": "Decreasing Arithmetic Sequence",
+          "content": "Given the arithmetic sequence: 10, 7, 4, 1, −2, …",
+          "a": "Determine the first term (a) of the sequence.",
+          "b": "Determine the common difference (b) of the sequence."
+        },
+        "q4": {
+          "title": "Finding the Common Difference (b)",
+          "content": "In an arithmetic sequence, it is known that:",
+          "a": "Determine the value of the common difference (b) of the sequence.",
+          "b": "Determine the value of the first term (a)."
+        },
+        "q5": {
+          "title": "Arithmetic Sequence – National Exam",
+          "content": "The 5th term of an arithmetic sequence is 17 and the 9th term is 33.",
+          "a": "Determine the common difference and first term of the sequence.",
+          "b": "Determine U₃₀ of the sequence.",
+          "c": "Which term has the value 81?"
+        },
+        "q6": {
+          "title": "Arithmetic Series – Finding the Sum",
+          "content": "In an arithmetic sequence, the 4th term is 11 and the 10th term is 35.",
+          "a": "Determine the first term (a) and common difference (b)."
+        },
+        "q7": {
+          "title": "Sum of First n Terms of an Arithmetic Sequence",
+          "content": "Formula for the sum of the first n terms of an arithmetic sequence:",
+          "soal": "Calculate the sum of the first 20 terms of the series: 3 + 7 + 11 + 15 + …"
+        },
+        "q8": {
+          "title": "Application – Employee Salary",
+          "content": "An employee receives a first-month salary of Rp2,500,000. Each month the salary increases by Rp150,000.\n\na. What is the salary in the 12th month?\nb. What is the total salary received over 1 year (12 months)?\nc. In which month does the employee receive a salary of Rp4,150,000?"
+        },
+        "q9": {
+          "title": "Contextual Problem – Theater Seats",
+          "content": "A theater has 20 rows of seats. The first row has 15 seats, the second row has 18, the third has 21, and so on forming an arithmetic sequence.\n\na. How many seats are in the 20th row?\nb. What is the total number of seats in the theater?"
+        },
+        "q10": {
+          "title": "ANBK Problem – Applied Arithmetic Series",
+          "content": "A student saves money every day. On day 1 they save Rp5,000, day 2 Rp7,000, day 3 Rp9,000, and so on.\n\na. How much is saved on day 30?\nb. What is the total savings over 30 days?\nc. On which day does the total savings reach Rp192,000?"
+        },
+        "q11": {
+          "title": "Contextual Problem – Brick Stack",
+          "content": "In a stack of bricks, the top row has 8 bricks, the next row has 10, and each row below always has 2 more bricks than the row above.\n\nIf there are 15 rows (from top to bottom), find the number of bricks in the bottom row (U₁₅) = ?"
+        },
+        "q12": {
+          "title": "Inserting Numbers into an Arithmetic Sequence",
+          "content": "Between the numbers 4 and 28, five numbers are inserted to form an arithmetic sequence.\n\na. Determine the common difference of the resulting sequence.\nb. Write the complete sequence.\nc. What is the sum of all numbers in the sequence?"
+        },
+        "q13": {
+          "title": "TKA Problem – Arithmetic Sequence",
+          "content": "The sum of the first 10 terms of an arithmetic sequence is 155 and the 10th term is 28.",
+          "a": "Determine the first term of the sequence.",
+          "b": "Determine the common difference of the sequence."
+        },
+        "q14": {
+          "title": "Sum of Multiples of 3",
+          "content": "Find the sum of all multiples of 3 between 1 and 100."
+        },
+        "q15": {
+          "title": "Sum of Multiples of 6",
+          "content": "Find the sum of all multiples of 6 between 120 and 300."
+        }
       }
     }
   },

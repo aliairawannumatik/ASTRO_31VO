@@ -8,6 +8,10 @@ import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { TrendingUp } from "lucide-react";
 
+// ─── SVG Illustrations ────────────────────────────────────────────────────────
+// NOTE: All <text> elements inside SVGs are intentionally left hardcoded in
+// Indonesian and must NOT be translated (per project rules).
+
 const SvgBarisanObjek = () => {
   const terms = [7, 11, 15, 19];
   const dotsPerRow = 5;
@@ -92,144 +96,198 @@ const SvgBatuBata = () => {
   );
 };
 
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type PartItem = { label: string; math?: string; textKey?: string };
+
+type QuestionItem = {
+  number: number;
+  titleKey: string;
+  contentKey: string;
+  type: "essay" | "mixed";
+  parts?: PartItem[];
+  svgNode?: React.ReactNode;
+};
+
+// ─── Locale base path ─────────────────────────────────────────────────────────
+
+const BASE = "practice.polaBilangan.polaAritmetika";
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 const PolaAritmetikaPage = () => {
   const { isDark } = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const questions = [
+  // ── \text{} interpolation variables ──────────────────────────────────────
+  // Computed here (inside the component) so t() hook is in scope.
+  // Each variable holds the locale-appropriate word/phrase for its position.
+  // For Japanese, pre-variables are empty ("") and post-variables carry the verb.
+  const hitungNilaiPre    = t(`${BASE}.hitungNilaiPre`);   // "Hitung nilai" / "Calculate the value of" / ""
+  const hitungNilaiPost   = t(`${BASE}.hitungNilaiPost`);  // ""             / ""                        / "の値を求めよ"
+  const tentukanNilaiPre  = t(`${BASE}.tentukanNilaiPre`); // "Tentukan nilai" / "Determine the value of" / ""
+  const tentukanNilaiPost = t(`${BASE}.tentukanNilaiPost`);// ""               / ""                       / "の値を求めよ"
+  const hitungPre         = t(`${BASE}.hitungPre`);        // "Hitung" / "Calculate" / ""
+  const hitungPost        = t(`${BASE}.hitungPost`);       // ""       / ""          / "を計算せよ"
+  const danWord           = t(`${BASE}.danWord`);          // "dan"    / "and"        / "と"
+  const atauWord          = t(`${BASE}.atauWord`);         // "atau"   / "or"         / "または"
+  const labelInfo         = t(`${BASE}.labelInfo`);        // "Info:"  / "Info:"      / "情報："
+  const labelRumus        = t(`${BASE}.labelRumus`);       // "Rumus:" / "Formula:"   / "公式："
+  const labelSoal         = t(`${BASE}.labelSoal`);        // "Soal:"  / "Problem:"   / "問題："
+
+  // ── Questions array (key references only — no hardcoded Indonesian text) ──
+  const questions: QuestionItem[] = [
     {
       number: 1,
-      title: "Menentukan Suku ke-n Barisan Aritmetika",
-      content: "Perhatikan barisan benda berikut yang membentuk barisan aritmetika:",
+      titleKey: "q1.title",
+      contentKey: "q1.content",
       type: "mixed",
-      svg: <SvgBarisanObjek />,
+      svgNode: <SvgBarisanObjek />,
       parts: [
-        { label: "a.", text: "Tentukan suku pertama (a) dan beda (b) dari barisan tersebut." },
-        { label: "b.", math: "\\text{Tuliskan rumus } U_n \\text{ dari barisan tersebut.}" },
-        { label: "c.", math: "\\text{Hitung nilai } U_{20}." },
+        { label: "a.", textKey: "q1.a" },
+        // Case 1: full sentence with U_n in the middle → moved to textKey (plain text)
+        { label: "b.", textKey: "q1.b" },
+        // Case 2: "Hitung nilai U_{20}." → interpolation pre/post
+        { label: "c.", math: `\\text{${hitungNilaiPre}} U_{20}\\text{${hitungNilaiPost}}.` },
       ],
     },
     {
       number: 2,
-      title: "Barisan Aritmetika Sederhana",
-      content: "Diketahui barisan aritmetika: 3, 7, 11, 15, ...",
+      titleKey: "q2.title",
+      contentKey: "q2.content",
       type: "mixed",
       parts: [
-        { label: "a.", text: "Tentukan suku pertama (a) barisan tersebut." },
-        { label: "b.", text: "Tentukan beda (b) barisan tersebut." },
-        { label: "c.", math: "\\text{Hitung nilai } U_{25}." },
+        { label: "a.", textKey: "q2.a" },
+        { label: "b.", textKey: "q2.b" },
+        // Case 3: "Hitung nilai U_{25}."
+        { label: "c.", math: `\\text{${hitungNilaiPre}} U_{25}\\text{${hitungNilaiPost}}.` },
       ],
     },
     {
       number: 3,
-      title: "Barisan Aritmetika Turun",
-      content: "Diketahui barisan aritmetika: 10, 7, 4, 1, −2, ...",
+      titleKey: "q3.title",
+      contentKey: "q3.content",
       type: "mixed",
       parts: [
-        { label: "a.", text: "Tentukan suku pertama (a) barisan tersebut." },
-        { label: "b.", text: "Tentukan beda (b) barisan tersebut." },
-        { label: "c.", math: "\\text{Hitung nilai } U_{40}." },
+        { label: "a.", textKey: "q3.a" },
+        { label: "b.", textKey: "q3.b" },
+        // Case 4: "Hitung nilai U_{40}."
+        { label: "c.", math: `\\text{${hitungNilaiPre}} U_{40}\\text{${hitungNilaiPost}}.` },
       ],
     },
     {
       number: 4,
-      title: "Menentukan Beda (b) Barisan Aritmetika",
-      content: "Dalam suatu barisan aritmetika, diketahui:",
+      titleKey: "q4.title",
+      contentKey: "q4.content",
       type: "mixed",
       parts: [
-        { label: "Info:", math: "U_3 = 15 \\quad \\text{dan} \\quad U_8 = 35" },
-        { label: "a.", text: "Tentukan nilai beda (b) dari barisan tersebut." },
-        { label: "b.", text: "Tentukan nilai suku pertama (a)." },
-        { label: "c.", math: "\\text{Tentukan nilai } U_{15}." },
+        // "dan" connector: "U_3 = 15 \quad \text{dan} \quad U_8 = 35"
+        { label: labelInfo, math: `U_3 = 15 \\quad \\text{${danWord}} \\quad U_8 = 35` },
+        { label: "a.", textKey: "q4.a" },
+        { label: "b.", textKey: "q4.b" },
+        // Case 5: "Tentukan nilai U_{15}."
+        { label: "c.", math: `\\text{${tentukanNilaiPre}} U_{15}\\text{${tentukanNilaiPost}}.` },
       ],
     },
     {
       number: 5,
-      title: "Barisan Aritmetika - Soal UN",
-      content: "Suku ke-5 suatu barisan aritmetika adalah 17 dan suku ke-9 adalah 33.",
+      titleKey: "q5.title",
+      contentKey: "q5.content",
       type: "mixed",
       parts: [
-        { label: "a.", text: "Tentukan beda dan suku pertama barisan tersebut." },
-        { label: "b.", math: "\\text{Tentukan } U_{30} \\text{ dari barisan tersebut.}" },
-        { label: "c.", text: "Suku ke berapa yang bernilai 81?" },
+        { label: "a.", textKey: "q5.a" },
+        // Case 6: "Tentukan U_{30} dari barisan tersebut." → moved to textKey (full sentence surrounds symbol)
+        { label: "b.", textKey: "q5.b" },
+        { label: "c.", textKey: "q5.c" },
       ],
     },
     {
       number: 6,
-      title: "Deret Aritmetika - Mencari Jumlah Suku",
-      content: "Dalam suatu barisan aritmetika, diketahui suku ke-4 adalah 11 dan suku ke-10 adalah 35.",
+      titleKey: "q6.title",
+      contentKey: "q6.content",
       type: "mixed",
       parts: [
-        { label: "a.", text: "Tentukan suku pertama (a) dan beda (b)." },
-        { label: "b.", math: "\\text{Tentukan nilai } S_{20}." },
+        { label: "a.", textKey: "q6.a" },
+        // "Tentukan nilai S_{20}." → interpolation pre/post
+        { label: "b.", math: `\\text{${tentukanNilaiPre}} S_{20}\\text{${tentukanNilaiPost}}.` },
       ],
     },
     {
       number: 7,
-      title: "Jumlah n Suku Pertama Barisan Aritmetika",
-      content: "Rumus jumlah n suku pertama barisan aritmetika:",
+      titleKey: "q7.title",
+      contentKey: "q7.content",
       type: "mixed",
       parts: [
-        { label: "Rumus:", math: "S_n = \\frac{n}{2}(2a + (n-1)b)" },
-        { label: "", math: "\\text{atau} \\quad S_n = \\frac{n}{2}(U_1 + U_n)" },
-        { label: "Soal:", text: "Hitung jumlah 20 suku pertama dari deret: 3 + 7 + 11 + 15 + ..." },
+        // Pure math — untouched
+        { label: labelRumus, math: "S_n = \\frac{n}{2}(2a + (n-1)b)" },
+        // "atau" connector: "\text{atau} \quad S_n = ..."
+        { label: "", math: `\\text{${atauWord}} \\quad S_n = \\frac{n}{2}(U_1 + U_n)` },
+        { label: labelSoal, textKey: "q7.soal" },
       ],
     },
     {
       number: 8,
-      title: "Aplikasi Barisan Aritmetika - Gaji Karyawan",
-      content: "Seorang karyawan mendapatkan gaji bulan pertama sebesar Rp2.500.000. Setiap bulan gajinya naik Rp150.000.\n\na. Berapa gaji karyawan tersebut pada bulan ke-12?\nb. Berapa total gaji yang diterima selama 1 tahun (12 bulan)?\nc. Pada bulan ke berapa karyawan mendapatkan gaji Rp4.150.000?",
+      titleKey: "q8.title",
+      contentKey: "q8.content",
       type: "essay",
     },
     {
       number: 9,
-      title: "Soal Kontekstual - Kursi Gedung Pertunjukan",
-      content: "Sebuah gedung pertunjukan memiliki 20 baris kursi. Baris pertama berisi 15 kursi, baris kedua 18 kursi, baris ketiga 21 kursi, dan seterusnya membentuk barisan aritmetika.\n\na. Berapa banyak kursi pada baris ke-20?\nb. Berapa total kursi di seluruh gedung pertunjukan?",
+      titleKey: "q9.title",
+      contentKey: "q9.content",
       type: "essay",
     },
     {
       number: 10,
-      title: "Soal ANBK - Deret Aritmetika Terapan",
-      content: "Seorang siswa menabung setiap hari. Hari pertama ia menabung Rp5.000, hari kedua Rp7.000, hari ketiga Rp9.000, dan seterusnya.\n\na. Berapa banyak uang yang ditabung pada hari ke-30?\nb. Berapa total tabungan selama 30 hari?\nc. Pada hari ke berapa total tabungannya mencapai Rp192.000?",
+      titleKey: "q10.title",
+      contentKey: "q10.content",
       type: "essay",
     },
     {
       number: 11,
-      title: "Soal Kontekstual - Tumpukan Batu Bata",
-      content: "Pada tumpukan batu bata, banyak batu bata paling atas ada 8 buah, tepat di bawahnya ada 10 buah, dan seterusnya setiap tumpukan di bawahnya selalu lebih banyak 2 buah dari tumpukan di atasnya.\n\nJika ada 15 tumpukan batu bata (dari atas sampai bawah), tentukan banyak batu bata pada tumpukan paling bawah (U₁₅) = ?",
+      titleKey: "q11.title",
+      contentKey: "q11.content",
       type: "essay",
-      svg: <SvgBatuBata />,
+      svgNode: <SvgBatuBata />,
     },
     {
       number: 12,
-      title: "Menyisipkan Bilangan dalam Barisan Aritmetika",
-      content: "Di antara bilangan 4 dan 28, disisipkan 5 bilangan sehingga membentuk barisan aritmetika.\n\na. Tentukan beda barisan yang terbentuk.\nb. Tuliskan barisan lengkapnya.\nc. Berapakah jumlah semua bilangan dalam barisan itu?",
+      titleKey: "q12.title",
+      contentKey: "q12.content",
       type: "essay",
     },
     {
       number: 13,
-      title: "Soal TKA - Barisan Aritmetika",
-      content: "Jumlah 10 suku pertama suatu barisan aritmetika adalah 155 dan suku ke-10 adalah 28.",
+      titleKey: "q13.title",
+      contentKey: "q13.content",
       type: "mixed",
       parts: [
-        { label: "a.", text: "Tentukan suku pertama barisan tersebut." },
-        { label: "b.", text: "Tentukan beda barisan tersebut." },
-        { label: "c.", math: "\\text{Hitung } U_{25}." },
+        { label: "a.", textKey: "q13.a" },
+        { label: "b.", textKey: "q13.b" },
+        // Case 7: "Hitung U_{25}."
+        { label: "c.", math: `\\text{${hitungPre}} U_{25}\\text{${hitungPost}}.` },
       ],
     },
     {
       number: 14,
-      title: "Jumlah Kelipatan 3",
-      content: "Tentukan jumlah semua bilangan kelipatan 3 yang berada di antara 1 dan 100.",
+      titleKey: "q14.title",
+      contentKey: "q14.content",
       type: "essay",
     },
     {
       number: 15,
-      title: "Jumlah Kelipatan 6",
-      content: "Tentukan jumlah semua bilangan yang merupakan kelipatan 6 yang berada di antara 120 dan 300.",
+      titleKey: "q15.title",
+      contentKey: "q15.content",
       type: "essay",
     },
+  ];
+
+  // ── Formula reference box rows ─────────────────────────────────────────────
+  const formulaRows = [
+    { labelKey: `${BASE}.formula.sukuKeN`,    math: "U_n = a + (n-1)b" },
+    { labelKey: `${BASE}.formula.jumlahNSuku`, math: "S_n = \\frac{n}{2}(2a + (n-1)b)" },
+    { labelKey: `${BASE}.formula.alternatifSn`, math: "S_n = \\frac{n}{2}(U_1 + U_n)" },
   ];
 
   return (
@@ -243,26 +301,23 @@ const PolaAritmetikaPage = () => {
             <TrendingUp className="w-7 h-7 text-emerald-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-emerald-300 text-center mb-1" style={{ textShadow: '0 0 20px rgba(52,211,153,0.7)' }}>
-            BARISAN DAN DERET ARITMETIKA
+            {t(`${BASE}.pageTitle`)}
           </h1>
           <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Pola Bilangan · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
-            <span className="text-emerald-400 text-xs font-bold">📋 15 {t('practice.suffixSoal')}</span>
+            <span className="text-emerald-400 text-xs font-bold">📋 {questions.length} {t('practice.suffixSoal')}</span>
             <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
-            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>Tingkat: UN / ANBK / TKA</span>
+            <span className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs`}>{t(`${BASE}.tingkatLabel`)} UN / ANBK / TKA</span>
           </div>
         </div>
 
+        {/* ── Formula reference box ── */}
         <div className={`mb-5 ${isDark ? "bg-emerald-900/20" : "bg-emerald-50"} border border-emerald-500/20 rounded-xl p-4`}>
-          <p className="text-emerald-300 text-xs font-bold mb-3">📌 Rumus Barisan Aritmetika</p>
+          <p className="text-emerald-300 text-xs font-bold mb-3">{t(`${BASE}.formulaBoxTitle`)}</p>
           <div className="flex flex-col gap-3">
-            {[
-              { label: "Suku ke-n", math: "U_n = a + (n-1)b" },
-              { label: "Jumlah n suku pertama", math: "S_n = \\frac{n}{2}(2a + (n-1)b)" },
-              { label: "Alternatif Sn", math: "S_n = \\frac{n}{2}(U_1 + U_n)" },
-            ].map((r, i) => (
+            {formulaRows.map((r, i) => (
               <div key={i} className={`${isDark ? "bg-white/5" : "bg-gray-50"} rounded-lg px-4 py-3`}>
-                <p className={`${isDark ? "text-white/40" : "text-gray-500"} text-[10px] mb-1`}>{r.label}</p>
+                <p className={`${isDark ? "text-white/40" : "text-gray-500"} text-[10px] mb-1`}>{t(r.labelKey)}</p>
                 <div className="text-emerald-200">
                   <BlockMath math={r.math} />
                 </div>
@@ -271,6 +326,7 @@ const PolaAritmetikaPage = () => {
           </div>
         </div>
 
+        {/* ── Questions ── */}
         <div className="flex flex-col gap-4 animate-slide-up">
           {questions.map((q, i) => (
             <div
@@ -290,17 +346,15 @@ const PolaAritmetikaPage = () => {
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    {q.title && (
-                      <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded inline-block mb-2">
-                        {q.title}
-                      </span>
-                    )}
-                    {q.content && (
-                      <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>{q.content}</p>
-                    )}
-                    {'svg' in q && q.svg && (
+                    <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded inline-block mb-2">
+                      {t(`${BASE}.${q.titleKey}`)}
+                    </span>
+                    <p className={`font-body text-sm ${isDark ? "text-white/90" : "text-gray-800"} whitespace-pre-line leading-relaxed mb-2`}>
+                      {t(`${BASE}.${q.contentKey}`)}
+                    </p>
+                    {q.svgNode && (
                       <div className={`my-2 ${isDark ? "bg-white/5" : "bg-gray-50"} rounded-xl p-3 border border-emerald-500/20`}>
-                        {q.svg}
+                        {q.svgNode}
                       </div>
                     )}
                     {q.type === "mixed" && q.parts && (
@@ -313,7 +367,9 @@ const PolaAritmetikaPage = () => {
                                 <InlineMath math={part.math} />
                               </div>
                             ) : (
-                              <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} whitespace-pre-line`}>{part.text}</p>
+                              <p className={`font-body text-sm ${isDark ? "text-white/80" : "text-gray-700"} whitespace-pre-line`}>
+                                {part.textKey ? t(`${BASE}.${part.textKey}`) : ''}
+                              </p>
                             )}
                           </div>
                         ))}
