@@ -1,0 +1,70 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Relasi dan Fungsi" —
+index, PengertianRelasiPage.tsx (8 soal), PengertianFungsiPage.tsx (7
+soal) sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- SVG <text> elements TIDAK diterjemahkan sama sekali
+- JANGAN sentuh ArrowDiagram.tsx atau CoordPlane.tsx (komponen
+  reusable dari topik lain)
+- Hindari heredoc dengan karakter emoji langsung di bash — pakai
+  Python script dengan encoding eksplisit UTF-8 atau str_replace
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: GrafikFungsiPage.tsx (7 soal, semua pakai
+diagram — halaman paling kompleks di topik ini).
+
+KONTEKS KHUSUS FILE INI:
+- Format data: array questions: Q[] via .map()
+- Halaman ini pakai isDark (useTheme) — WAJIB dipertahankan persis
+- SEMUA 7 soal pakai diagram:
+  * Soal 1-3: <CoordPlane /> (reuse dari topik Koordinat Kartesius) —
+    JANGAN disentuh komponennya, hanya panggilan/props
+  * Soal 4: SvgProfitGraph — SVG custom
+  * Soal 5: SvgTaxiLinear — SVG custom
+  * Soal 6: SvgTaxiTable — INI TABEL HTML (bukan SVG murni), dengan
+    label hardcode seperti "Jarak (km)", "Taksi Sinar", "Taksi
+    Bintang" — WAJIB diterjemahkan karena ini elemen HTML biasa,
+    BUKAN <text> di dalam SVG
+  * Soal 7: SvgStepFunction — SVG custom
+  SEMUA teks di dalam <text> SVG (Soal 4, 5, 7, dan bagian SVG di
+  Soal 1-3 dari CoordPlane) JANGAN diterjemahkan
+- SEMUA 7 soal punya options pilihan ganda A/B/C/D hardcode Bahasa
+  Indonesia — ini WAJIB diterjemahkan, pecah jadi key terpisah per
+  opsi (optionA, optionB, optionC, optionD) seperti pola pilihan
+  ganda di topik-topik Kelas 7 sebelumnya
+- Berdasarkan investigasi awal, halaman ini TIDAK punya kasus \text{}
+  bahasa Indonesia — tapi tetap WAJIB grep "\\text{" untuk memastikan
+
+1. Terjemahkan SEMUA teks: instruksi umum (kalau ada), teks 7 soal
+   (title, content, parts[].text), SEMUA 4 opsi pilihan ganda per
+   soal (7 soal × 4 opsi = 28 opsi), tabel HTML SvgTaxiTable (label
+   kolom/baris, nama taksi, dll — bukan angka)
+2. Kalau ditemukan kasus \text{} yang belum terdeteksi, tangani
+   dengan pola yang sudah terbukti
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.relasiDanFungsi.grafikFungsi.*
+5. JANGAN sentuh sub-halaman lain, halaman index, ArrowDiagram.tsx,
+   atau CoordPlane.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q7), termasuk breakdown opsi
+  pilihan ganda
+- Jalankan grep "\\text{" untuk konfirmasi
+- Konfirmasi eksplisit: SEMUA 7 soal + 28 opsi pilihan ganda sudah
+  diterjemahkan, tabel SvgTaxiTable diterjemahkan (label, bukan
+  angka), SEMUA SVG <text> (termasuk CoordPlane, SvgProfitGraph,
+  SvgTaxiLinear, SvgStepFunction) tidak disentuh, isDark tetap terjaga

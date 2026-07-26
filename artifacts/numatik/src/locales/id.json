@@ -4494,6 +4494,79 @@
           "c": "R adalah relasi antara setiap siswa dengan tinggi badan mereka (diukur satu kali pada waktu yang sama).",
           "d": "R adalah relasi antara setiap siswa dengan mata pelajaran yang mereka sukai."
         }
+      },
+      "grafikFungsi": {
+        "h1": "GRAFIK FUNGSI (PENGAYAAN)",
+        "tipTitle": "📌 Tips Membaca Grafik Fungsi",
+        "tip1": "Grafik naik ke kanan → gradien m > 0 | turun ke kanan → m < 0",
+        "tip2": "Titik potong sumbu-y: set x = 0 → f(0) = b",
+        "tip3": "Titik potong sumbu-x: set f(x) = 0 → x = −b/m",
+        "tip4": "Baca grafik kontekstual: perhatikan satuan dan skala pada setiap sumbu",
+        "q1": {
+          "title": "Rumus Fungsi dari Diagram Panah",
+          "content": "Perhatikan gambar diagram panah berikut. Rumus fungsi diagram tersebut adalah ...",
+          "optionA": "f(x) = x + 1",
+          "optionB": "f(x) = 2x + 1",
+          "optionC": "f(x) = 3x + 1",
+          "optionD": "f(x) = 4x − 1"
+        },
+        "q2": {
+          "title": "Menentukan Rumus Fungsi dari Grafik",
+          "content": "Grafik fungsi di bawah ini rumus fungsinya adalah ...",
+          "optionA": "f(x) = x − 2",
+          "optionB": "f(x) = x + 2",
+          "optionC": "f(x) = 2x − 2",
+          "optionD": "f(x) = 2x + 2"
+        },
+        "q3": {
+          "title": "Rumus Fungsi dari Grafik Bergradien Negatif",
+          "content": "Perhatikan grafik berikut. Rumus fungsi dari grafik di atas adalah ...",
+          "optionA": "f(x) = 2x − 4",
+          "optionB": "f(x) = 2x + 4",
+          "optionC": "f(x) = −2x − 4",
+          "optionD": "f(x) = −2x + 4"
+        },
+        "q4": {
+          "title": "Membaca Grafik Untung dan Modal",
+          "content": "Perhatikan grafik berikut!",
+          "part1": "Dengan modal Rp 30.000,00, berapakah untung yang diperoleh?",
+          "optionA": "Rp 1.200,00",
+          "optionB": "Rp 1.350,00",
+          "optionC": "Rp 1.500,00",
+          "optionD": "Rp 1.800,00"
+        },
+        "q5": {
+          "title": "Membaca Grafik Tarif Ojek Online",
+          "content": "Suatu perusahaan ojek online memasang tarif seperti grafik berikut.",
+          "part1": "Dito pergi ke sekolah yang berjarak 10 km menggunakan ojek online tersebut. Berapa tarif yang harus dibayar Dito?",
+          "optionA": "Rp 30.000,00",
+          "optionB": "Rp 33.000,00",
+          "optionC": "Rp 36.000,00",
+          "optionD": "Rp 39.000,00"
+        },
+        "q6": {
+          "title": "Memilih Taksi Paling Hemat",
+          "content": "Sebuah kota terdapat dua perusahaan taksi, Taksi Sinar dan Taksi Bintang. Perusahaan tersebut menawarkan tarif taksi seperti tabel berikut.",
+          "part1": "Rima ingin pergi ke perpustakaan yang berjarak 9 km dari rumahnya. Agar diperoleh biaya yang lebih hemat, taksi manakah yang sebaiknya digunakan Rima?",
+          "optionA": "Taksi Sinar, karena tarif awalnya lebih kecil sehingga akan terus lebih murah.",
+          "optionB": "Taksi Bintang, karena tarif per km lebih murah.",
+          "optionC": "Taksi Sinar, karena lebih hemat Rp 1.500,00.",
+          "optionD": "Taksi Bintang, karena lebih hemat Rp 1.500,00.",
+          "tableTitle": "Tarif Taksi",
+          "tableColKm": "Jarak (km)",
+          "tableColStart": "Awal (0)",
+          "tableSinar": "Taksi Sinar",
+          "tableBintang": "Taksi Bintang"
+        },
+        "q7": {
+          "title": "Membaca Grafik Tarif Bertangga",
+          "content": "Suatu perusahaan taksi memasang tarif seperti grafik berikut.",
+          "part1": "Jika Sari naik taksi tersebut sejauh 16 km, ia harus membayar tarif sebesar ...",
+          "optionA": "Rp 48.000,00",
+          "optionB": "Rp 54.000,00",
+          "optionC": "Rp 60.000,00",
+          "optionD": "Rp 66.000,00"
+        }
       }
     }
   },

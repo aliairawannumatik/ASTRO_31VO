@@ -4494,6 +4494,79 @@
           "c": "R is the relation between every student and their height (measured once at the same time).",
           "d": "R is the relation between every student and the subject they like."
         }
+      },
+      "grafikFungsi": {
+        "h1": "FUNCTION GRAPHS (ENRICHMENT)",
+        "tipTitle": "📌 Tips for Reading Function Graphs",
+        "tip1": "Graph rises to the right → gradient m > 0 | falls to the right → m < 0",
+        "tip2": "y-intercept: set x = 0 → f(0) = b",
+        "tip3": "x-intercept: set f(x) = 0 → x = −b/m",
+        "tip4": "Read contextual graphs: note the units and scale on each axis",
+        "q1": {
+          "title": "Function Formula from Arrow Diagram",
+          "content": "Look at the following arrow diagram. The function formula for this diagram is ...",
+          "optionA": "f(x) = x + 1",
+          "optionB": "f(x) = 2x + 1",
+          "optionC": "f(x) = 3x + 1",
+          "optionD": "f(x) = 4x − 1"
+        },
+        "q2": {
+          "title": "Determining Function Formula from Graph",
+          "content": "The function formula for the graph below is ...",
+          "optionA": "f(x) = x − 2",
+          "optionB": "f(x) = x + 2",
+          "optionC": "f(x) = 2x − 2",
+          "optionD": "f(x) = 2x + 2"
+        },
+        "q3": {
+          "title": "Function Formula from Negative Gradient Graph",
+          "content": "Look at the following graph. The function formula for the graph above is ...",
+          "optionA": "f(x) = 2x − 4",
+          "optionB": "f(x) = 2x + 4",
+          "optionC": "f(x) = −2x − 4",
+          "optionD": "f(x) = −2x + 4"
+        },
+        "q4": {
+          "title": "Reading Profit and Capital Graph",
+          "content": "Look at the following graph!",
+          "part1": "With a capital of Rp 30,000, what profit is obtained?",
+          "optionA": "Rp 1.200,00",
+          "optionB": "Rp 1.350,00",
+          "optionC": "Rp 1.500,00",
+          "optionD": "Rp 1.800,00"
+        },
+        "q5": {
+          "title": "Reading Ride-Hailing Fare Graph",
+          "content": "A ride-hailing company sets fares as shown in the following graph.",
+          "part1": "Dito goes to school 10 km away using this ride-hailing service. How much does Dito have to pay?",
+          "optionA": "Rp 30.000,00",
+          "optionB": "Rp 33.000,00",
+          "optionC": "Rp 36.000,00",
+          "optionD": "Rp 39.000,00"
+        },
+        "q6": {
+          "title": "Choosing the Most Economical Taxi",
+          "content": "A city has two taxi companies, Taksi Sinar and Taksi Bintang. They offer taxi fares as shown in the following table.",
+          "part1": "Rima wants to go to the library 9 km from her house. Which taxi should Rima use to get the cheaper fare?",
+          "optionA": "Taksi Sinar, because its initial fare is lower so it will continue to be cheaper.",
+          "optionB": "Taksi Bintang, because the fare per km is cheaper.",
+          "optionC": "Taksi Sinar, because it is Rp 1,500 cheaper.",
+          "optionD": "Taksi Bintang, because it is Rp 1,500 cheaper.",
+          "tableTitle": "Taxi Fare",
+          "tableColKm": "Distance (km)",
+          "tableColStart": "Initial (0)",
+          "tableSinar": "Taksi Sinar",
+          "tableBintang": "Taksi Bintang"
+        },
+        "q7": {
+          "title": "Reading Step Fare Graph",
+          "content": "A taxi company sets fares as shown in the following graph.",
+          "part1": "If Sari takes a taxi 16 km, she has to pay a fare of ...",
+          "optionA": "Rp 48.000,00",
+          "optionB": "Rp 54.000,00",
+          "optionC": "Rp 60.000,00",
+          "optionD": "Rp 66.000,00"
+        }
       }
     }
   },

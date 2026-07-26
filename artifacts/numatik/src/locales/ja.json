@@ -4494,6 +4494,79 @@
           "c": "R はすべての生徒とその身長（同時刻に1回測定）の間の関係である。",
           "d": "R はすべての生徒と好きな教科の間の関係である。"
         }
+      },
+      "grafikFungsi": {
+        "h1": "関数のグラフ（発展）",
+        "tipTitle": "📌 関数のグラフの読み方のヒント",
+        "tip1": "グラフが右上がり → 傍き m > 0 ｜ 右下がり → m < 0",
+        "tip2": "y 切片：x = 0 を代入 → f(0) = b",
+        "tip3": "x 切片：f(x) = 0 として解く → x = −b/m",
+        "tip4": "文脈グラフを読む：各軸の単位とスケールに注意する",
+        "q1": {
+          "title": "矢印図から関数の式を求める",
+          "content": "次の矢印図を見なさい。この図の関数の式は…です。",
+          "optionA": "f(x) = x + 1",
+          "optionB": "f(x) = 2x + 1",
+          "optionC": "f(x) = 3x + 1",
+          "optionD": "f(x) = 4x − 1"
+        },
+        "q2": {
+          "title": "グラフから関数の式を求める",
+          "content": "下のグラフの関数の式は…です。",
+          "optionA": "f(x) = x − 2",
+          "optionB": "f(x) = x + 2",
+          "optionC": "f(x) = 2x − 2",
+          "optionD": "f(x) = 2x + 2"
+        },
+        "q3": {
+          "title": "負の傍きを持つグラフから関数の式を求める",
+          "content": "次のグラフを見なさい。上のグラフの関数の式は…です。",
+          "optionA": "f(x) = 2x − 4",
+          "optionB": "f(x) = 2x + 4",
+          "optionC": "f(x) = −2x − 4",
+          "optionD": "f(x) = −2x + 4"
+        },
+        "q4": {
+          "title": "利益と元手のグラフを読む",
+          "content": "次のグラフを見なさい！",
+          "part1": "元手 Rp 30.000,00 のとき、得られる利益はいくらですか？",
+          "optionA": "Rp 1.200,00",
+          "optionB": "Rp 1.350,00",
+          "optionC": "Rp 1.500,00",
+          "optionD": "Rp 1.800,00"
+        },
+        "q5": {
+          "title": "ライドシェアの料金グラフを読む",
+          "content": "あるライドシェア会社が次のグラフのような料金を設定しています。",
+          "part1": "Dito は学校まで 10 km の距離をこのライドシェアで通学します。Dito が支払う料金はいくらですか？",
+          "optionA": "Rp 30.000,00",
+          "optionB": "Rp 33.000,00",
+          "optionC": "Rp 36.000,00",
+          "optionD": "Rp 39.000,00"
+        },
+        "q6": {
+          "title": "最も安いタクシーを選ぶ",
+          "content": "ある市に Taksi Sinar と Taksi Bintang の 2 社のタクシー会社があります。それぞれ次の表のような料金を提供しています。",
+          "part1": "Rima は自宅から 9 km 離れた図書館へ行きたいと思っています。より安く行くにはどちらのタクシーを使えばよいですか？",
+          "optionA": "Taksi Sinar。初乗り料金が低いため、ずっと安くなるから。",
+          "optionB": "Taksi Bintang。km 当たりの料金が安いから。",
+          "optionC": "Taksi Sinar。Rp 1.500,00 安くなるから。",
+          "optionD": "Taksi Bintang。Rp 1.500,00 安くなるから。",
+          "tableTitle": "タクシー料金",
+          "tableColKm": "距離 (km)",
+          "tableColStart": "初期 (0)",
+          "tableSinar": "Taksi Sinar",
+          "tableBintang": "Taksi Bintang"
+        },
+        "q7": {
+          "title": "段階式料金グラフを読む",
+          "content": "あるタクシー会社が次のグラフのような料金を設定しています。",
+          "part1": "Sari がそのタクシーに 16 km 乗った場合、支払う料金は…です。",
+          "optionA": "Rp 48.000,00",
+          "optionB": "Rp 54.000,00",
+          "optionC": "Rp 60.000,00",
+          "optionD": "Rp 66.000,00"
+        }
       }
     }
   },

@@ -83,18 +83,20 @@ const SvgTaxiLinear = () => (
 
 const SvgTaxiTable = () => {
   const { isDark } = useTheme();
+  const { t } = useTranslation();
+  const p = 'practice.relasiDanFungsi.grafikFungsi';
   const bdr = isDark ? "border-white/10" : "border-gray-200";
   const cell = `border ${bdr} px-2 py-1.5 text-[10px]`;
   const cellVal = `${cell} ${isDark ? "text-white/80" : "text-gray-700"}`;
   const cellHdr = `${cell} ${isDark ? "text-white/60" : "text-gray-500"} font-semibold`;
   return (
     <div className="w-full text-xs border border-white/20 rounded-lg overflow-hidden">
-      <div className={`${isDark ? "bg-white/10" : "bg-gray-100"} px-3 py-1.5 text-center ${isDark ? "text-white/70" : "text-gray-600"} font-bold text-[10px] tracking-wider`}>&ldquo;Tarif Taksi&rdquo;</div>
+      <div className={`${isDark ? "bg-white/10" : "bg-gray-100"} px-3 py-1.5 text-center ${isDark ? "text-white/70" : "text-gray-600"} font-bold text-[10px] tracking-wider`}>&ldquo;{t(`${p}.q6.tableTitle`)}&rdquo;</div>
       <table className="w-full border-collapse">
         <thead>
           <tr className={isDark ? "bg-white/5" : "bg-gray-50"}>
-            <th className={`${cellHdr} text-left`}>Jarak (km)</th>
-            <th className={`${cellHdr} text-center`}>Awal (0)</th>
+            <th className={`${cellHdr} text-left`}>{t(`${p}.q6.tableColKm`)}</th>
+            <th className={`${cellHdr} text-center`}>{t(`${p}.q6.tableColStart`)}</th>
             <th className={`${cellHdr} text-center`}>2</th>
             <th className={`${cellHdr} text-center`}>4</th>
             <th className={`${cellHdr} text-center`}>...</th>
@@ -102,14 +104,14 @@ const SvgTaxiTable = () => {
         </thead>
         <tbody>
           <tr>
-            <td className={cellVal}>Taksi Sinar</td>
+            <td className={cellVal}>{t(`${p}.q6.tableSinar`)}</td>
             <td className={`${cellVal} text-center`}>10.000</td>
             <td className={`${cellVal} text-center`}>13.000</td>
             <td className={`${cellVal} text-center`}>16.000</td>
             <td className={`${cellVal} text-center`}>...</td>
           </tr>
           <tr>
-            <td className={cellVal}>Taksi Bintang</td>
+            <td className={cellVal}>{t(`${p}.q6.tableBintang`)}</td>
             <td className={`${cellVal} text-center`}>4.000</td>
             <td className={`${cellVal} text-center`}>8.000</td>
             <td className={`${cellVal} text-center`}>12.000</td>
@@ -151,90 +153,87 @@ const SvgStepFunction = () => (
   </svg>
 );
 
-const questions: Q[] = [
-  Qn(1, "Rumus Fungsi dari Diagram Panah", {
-    type: "pilgan",
-    content: "Perhatikan gambar diagram panah berikut. Rumus fungsi diagram tersebut adalah ...",
-    diagram: (
-      <CoordPlane size={240} range={4}
-        segs={[{ x1: -2, y1: -3, x2: 2, y2: 5, color: "#60a5fa" }]}
-        pts={[
-          { x: 0, y: 1, label: "(0, 1)", color: "#f472b6", labelPos: "tl" },
-          { x: 1, y: 3, label: "(1, 3)", color: "#facc15", labelPos: "tr" },
-        ]}
-      />
-    ),
-    options: ["f(x) = x + 1", "f(x) = 2x + 1", "f(x) = 3x + 1", "f(x) = 4x − 1"],
-  }),
-  Qn(2, "Menentukan Rumus Fungsi dari Grafik", {
-    type: "pilgan",
-    content: "Grafik fungsi di bawah ini rumus fungsinya adalah ...",
-    diagram: (
-      <CoordPlane size={240} range={5}
-        segs={[{ x1: -5, y1: -3, x2: 4, y2: 6, color: "#60a5fa" }]}
-        pts={[
-          { x: -2, y: 0, label: "(−2, 0)", color: "#34d399", labelPos: "top" },
-          { x: 0, y: 2, label: "(0, 2)", color: "#f472b6", labelPos: "tl" },
-        ]}
-      />
-    ),
-    options: ["f(x) = x − 2", "f(x) = x + 2", "f(x) = 2x − 2", "f(x) = 2x + 2"],
-  }),
-  Qn(3, "Rumus Fungsi dari Grafik Bergradien Negatif", {
-    type: "pilgan",
-    content: "Perhatikan grafik berikut. Rumus fungsi dari grafik di atas adalah ...",
-    diagram: (
-      <CoordPlane size={240} range={6}
-        segs={[{ x1: -3, y1: 2, x2: 2, y2: -8, color: "#f87171" }]}
-        pts={[
-          { x: -2, y: 0, label: "(−2, 0)", color: "#fb923c", labelPos: "top" },
-          { x: 0, y: -4, label: "(0, −4)", color: "#fb923c", labelPos: "bl" },
-        ]}
-      />
-    ),
-    options: ["f(x) = 2x − 4", "f(x) = 2x + 4", "f(x) = −2x − 4", "f(x) = −2x + 4"],
-  }),
-  Qn(4, "Membaca Grafik Untung dan Modal", {
-    type: "pilgan",
-    content: "Perhatikan grafik berikut!",
-    diagram: <SvgProfitGraph />,
-    parts: [{ label: "", text: "Dengan modal Rp 30.000,00, berapakah untung yang diperoleh?" }],
-    options: ["Rp 1.200,00", "Rp 1.350,00", "Rp 1.500,00", "Rp 1.800,00"],
-  }),
-  Qn(5, "Membaca Grafik Tarif Ojek Online", {
-    type: "pilgan",
-    content: "Suatu perusahaan ojek online memasang tarif seperti grafik berikut.",
-    diagram: <SvgTaxiLinear />,
-    parts: [{ label: "", text: "Dito pergi ke sekolah yang berjarak 10 km menggunakan ojek online tersebut. Berapa tarif yang harus dibayar Dito?" }],
-    options: ["Rp 30.000,00", "Rp 33.000,00", "Rp 36.000,00", "Rp 39.000,00"],
-  }),
-  Qn(6, "Memilih Taksi Paling Hemat", {
-    type: "pilgan",
-    content: "Sebuah kota terdapat dua perusahaan taksi, Taksi Sinar dan Taksi Bintang. Perusahaan tersebut menawarkan tarif taksi seperti tabel berikut.",
-    diagram: <SvgTaxiTable />,
-    parts: [{ label: "", text: "Rima ingin pergi ke perpustakaan yang berjarak 9 km dari rumahnya. Agar diperoleh biaya yang lebih hemat, taksi manakah yang sebaiknya digunakan Rima?" }],
-    options: [
-      "Taksi Sinar, karena tarif awalnya lebih kecil sehingga akan terus lebih murah.",
-      "Taksi Bintang, karena tarif per km lebih murah.",
-      "Taksi Sinar, karena lebih hemat Rp 1.500,00.",
-      "Taksi Bintang, karena lebih hemat Rp 1.500,00.",
-    ],
-  }),
-  Qn(7, "Membaca Grafik Tarif Bertangga", {
-    type: "pilgan",
-    content: "Suatu perusahaan taksi memasang tarif seperti grafik berikut.",
-    diagram: <SvgStepFunction />,
-    parts: [{ label: "", text: "Jika Sari naik taksi tersebut sejauh 16 km, ia harus membayar tarif sebesar ..." }],
-    options: ["Rp 48.000,00", "Rp 54.000,00", "Rp 60.000,00", "Rp 66.000,00"],
-  }),
-];
-
 const optionLabels = ["A", "B", "C", "D"];
 
 const GrafikFungsiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { isDark } = useTheme();
+  const p = 'practice.relasiDanFungsi.grafikFungsi';
+
+  const questions: Q[] = [
+    Qn(1, t(`${p}.q1.title`), {
+      type: "pilgan",
+      content: t(`${p}.q1.content`),
+      diagram: (
+        <CoordPlane size={240} range={4}
+          segs={[{ x1: -2, y1: -3, x2: 2, y2: 5, color: "#60a5fa" }]}
+          pts={[
+            { x: 0, y: 1, label: "(0, 1)", color: "#f472b6", labelPos: "tl" },
+            { x: 1, y: 3, label: "(1, 3)", color: "#facc15", labelPos: "tr" },
+          ]}
+        />
+      ),
+      options: [t(`${p}.q1.optionA`), t(`${p}.q1.optionB`), t(`${p}.q1.optionC`), t(`${p}.q1.optionD`)],
+    }),
+    Qn(2, t(`${p}.q2.title`), {
+      type: "pilgan",
+      content: t(`${p}.q2.content`),
+      diagram: (
+        <CoordPlane size={240} range={5}
+          segs={[{ x1: -5, y1: -3, x2: 4, y2: 6, color: "#60a5fa" }]}
+          pts={[
+            { x: -2, y: 0, label: "(\u22122, 0)", color: "#34d399", labelPos: "top" },
+            { x: 0, y: 2, label: "(0, 2)", color: "#f472b6", labelPos: "tl" },
+          ]}
+        />
+      ),
+      options: [t(`${p}.q2.optionA`), t(`${p}.q2.optionB`), t(`${p}.q2.optionC`), t(`${p}.q2.optionD`)],
+    }),
+    Qn(3, t(`${p}.q3.title`), {
+      type: "pilgan",
+      content: t(`${p}.q3.content`),
+      diagram: (
+        <CoordPlane size={240} range={6}
+          segs={[{ x1: -3, y1: 2, x2: 2, y2: -8, color: "#f87171" }]}
+          pts={[
+            { x: -2, y: 0, label: "(\u22122, 0)", color: "#fb923c", labelPos: "top" },
+            { x: 0, y: -4, label: "(0, \u22124)", color: "#fb923c", labelPos: "bl" },
+          ]}
+        />
+      ),
+      options: [t(`${p}.q3.optionA`), t(`${p}.q3.optionB`), t(`${p}.q3.optionC`), t(`${p}.q3.optionD`)],
+    }),
+    Qn(4, t(`${p}.q4.title`), {
+      type: "pilgan",
+      content: t(`${p}.q4.content`),
+      diagram: <SvgProfitGraph />,
+      parts: [{ label: "", text: t(`${p}.q4.part1`) }],
+      options: [t(`${p}.q4.optionA`), t(`${p}.q4.optionB`), t(`${p}.q4.optionC`), t(`${p}.q4.optionD`)],
+    }),
+    Qn(5, t(`${p}.q5.title`), {
+      type: "pilgan",
+      content: t(`${p}.q5.content`),
+      diagram: <SvgTaxiLinear />,
+      parts: [{ label: "", text: t(`${p}.q5.part1`) }],
+      options: [t(`${p}.q5.optionA`), t(`${p}.q5.optionB`), t(`${p}.q5.optionC`), t(`${p}.q5.optionD`)],
+    }),
+    Qn(6, t(`${p}.q6.title`), {
+      type: "pilgan",
+      content: t(`${p}.q6.content`),
+      diagram: <SvgTaxiTable />,
+      parts: [{ label: "", text: t(`${p}.q6.part1`) }],
+      options: [t(`${p}.q6.optionA`), t(`${p}.q6.optionB`), t(`${p}.q6.optionC`), t(`${p}.q6.optionD`)],
+    }),
+    Qn(7, t(`${p}.q7.title`), {
+      type: "pilgan",
+      content: t(`${p}.q7.content`),
+      diagram: <SvgStepFunction />,
+      parts: [{ label: "", text: t(`${p}.q7.part1`) }],
+      options: [t(`${p}.q7.optionA`), t(`${p}.q7.optionB`), t(`${p}.q7.optionC`), t(`${p}.q7.optionD`)],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -246,7 +245,7 @@ const GrafikFungsiPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-rose-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(251,113,133,0.7)' }}>
-            GRAFIK FUNGSI (PENGAYAAN)
+            {t(`${p}.h1`)}
           </h1>
           <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-rose-500/10 border border-rose-500/30 rounded-lg px-4 py-2">
@@ -257,13 +256,13 @@ const GrafikFungsiPage = () => {
         </div>
 
         <div className={`mb-5 ${isDark ? "bg-rose-900/20" : "bg-rose-50"} border border-rose-500/20 rounded-xl p-4`}>
-          <p className="text-rose-300 text-xs font-bold mb-2">📌 Tips Membaca Grafik Fungsi</p>
+          <p className="text-rose-300 text-xs font-bold mb-2">{t(`${p}.tipTitle`)}</p>
           <div className="grid grid-cols-1 gap-2 text-xs font-body">
             {[
-              "Grafik naik ke kanan → gradien m > 0 | turun ke kanan → m < 0",
-              "Titik potong sumbu-y: set x = 0 → f(0) = b",
-              "Titik potong sumbu-x: set f(x) = 0 → x = −b/m",
-              "Baca grafik kontekstual: perhatikan satuan dan skala pada setiap sumbu",
+              t(`${p}.tip1`),
+              t(`${p}.tip2`),
+              t(`${p}.tip3`),
+              t(`${p}.tip4`),
             ].map((s, i) => (
               <div key={i} className="bg-white/5 rounded-lg px-3 py-2 flex gap-2">
                 <span className="text-rose-400 font-bold shrink-0">•</span>
