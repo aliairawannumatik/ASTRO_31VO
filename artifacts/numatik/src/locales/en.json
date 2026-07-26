@@ -2896,6 +2896,32 @@
           "optD": "15 units"
         }
       }
+    },
+    "segitigaSegiempat": {
+      "title": "TRIANGLES AND QUADRILATERALS",
+      "enrichmentNoteDesc": "Questions cover properties, perimeter, area, and composite shapes of triangles and quadrilaterals. Aligned with Grade 7 UN, TKA, and ANBK exam formats.",
+      "subtopics": {
+        "garisBeratBagiTinggi": {
+          "label": "MEDIANS, ANGLE BISECTORS & ALTITUDES OF A TRIANGLE",
+          "desc": "Median, angle bisector, altitude, centroid, and orthocenter"
+        },
+        "kelilingSegitigaSegiempat": {
+          "label": "PERIMETER OF TRIANGLES AND QUADRILATERALS",
+          "desc": "Perimeter of triangles, squares, rectangles, parallelograms, rhombuses, trapezoids"
+        },
+        "luasSegitiga": {
+          "label": "AREA OF A TRIANGLE",
+          "desc": "Formula A = ½×b×h, various triangle types, contextual area problems"
+        },
+        "luasSegiempat": {
+          "label": "AREA OF QUADRILATERALS",
+          "desc": "Area of squares, rectangles, parallelograms, trapezoids, rhombuses, and kites"
+        },
+        "kelilingLuasBangunTakBeraturan": {
+          "label": "PERIMETER AND AREA OF IRREGULAR SHAPES",
+          "desc": "Computing perimeter & area of composite shapes, decomposition method, floor plan problems"
+        }
+      }
     }
   },
   "settings": {

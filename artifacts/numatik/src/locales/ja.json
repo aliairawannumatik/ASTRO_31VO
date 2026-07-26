@@ -2896,6 +2896,32 @@
           "optD": "15単位"
         }
       }
+    },
+    "segitigaSegiempat": {
+      "title": "三角形と四角形",
+      "enrichmentNoteDesc": "三角形と四角形の性質・周の長さ・面積・複合図形を扱う問題です。中学1年生の国家試験（UN・TKA・ANBK）の出題範囲に対応しています。",
+      "subtopics": {
+        "garisBeratBagiTinggi": {
+          "label": "三角形の中線・角の二等分線・高さ",
+          "desc": "中線（重線）、角の二等分線、高さ、重心、垂心"
+        },
+        "kelilingSegitigaSegiempat": {
+          "label": "三角形と四角形の周の長さ",
+          "desc": "三角形、正方形、長方形、平行四辺形、ひし形、台形の周の長さ"
+        },
+        "luasSegitiga": {
+          "label": "三角形の面積",
+          "desc": "公式 A = ½×底辺×高さ、さまざまな三角形の種類、文章題"
+        },
+        "luasSegiempat": {
+          "label": "四角形の面積",
+          "desc": "正方形、長方形、平行四辺形、台形、ひし形、凧形の面積"
+        },
+        "kelilingLuasBangunTakBeraturan": {
+          "label": "不規則な図形の周の長さと面積",
+          "desc": "複合図形の周の長さと面積の計算、分割法、見取り図の問題"
+        }
+      }
     }
   },
   "settings": {
