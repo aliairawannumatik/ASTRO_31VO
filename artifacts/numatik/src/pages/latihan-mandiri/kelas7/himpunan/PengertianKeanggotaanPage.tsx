@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
@@ -37,6 +37,10 @@ const Q = ({ no, children, badge, badgeColor = "#60a5fa" }: QProps) => (
 const PengertianKeanggotaanLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.himpunan.pengertianKeanggotaan";
+
+  const q5desc = t(`${p}.q5.textDesc`);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -49,9 +53,9 @@ const PengertianKeanggotaanLatihanPage = () => {
             <BookOpen className="w-7 h-7 text-blue-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            PENGERTIAN DAN KEANGGOTAAN HIMPUNAN
+            {t(`${p}.title`)}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Himpunan</p>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · {t(`${p}.topic`)}</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>
@@ -60,30 +64,30 @@ const PengertianKeanggotaanLatihanPage = () => {
         </div>
 
         <div className="rounded-xl bg-blue-500/10 border border-blue-500/30 px-5 py-4 mb-6 text-sm text-white/80 font-body leading-relaxed">
-          <p className="font-bold text-blue-300 mb-1">Notasi Penting</p>
+          <p className="font-bold text-blue-300 mb-1">{t(`${p}.notasiTitle`)}</p>
           <ul className="text-xs text-white/70 space-y-1">
-            <li><InlineMath math="a \in A" /> → <em>a</em> adalah anggota himpunan <em>A</em></li>
-            <li><InlineMath math="a \notin A" /> → <em>a</em> bukan anggota himpunan <em>A</em></li>
-            <li><InlineMath math="n(A)" /> → banyak anggota himpunan <em>A</em></li>
+            <li><InlineMath math="a \in A" /> → {t(`${p}.notasi1`)}</li>
+            <li><InlineMath math="a \notin A" /> → {t(`${p}.notasi2`)}</li>
+            <li><InlineMath math="n(A)" /> → {t(`${p}.notasi3`)}</li>
           </ul>
         </div>
 
         <div className="space-y-5 animate-slide-up">
-          <Section title="Bagian A · Menentukan Anggota Himpunan" color="#60a5fa">
+          <Section title={t(`${p}.sectionA`)} color="#60a5fa">
 
-            <Q no={1} badge="Definisi" badgeColor="#60a5fa">
-              <p>Dari kumpulan berikut, manakah yang termasuk <strong className="text-blue-300">himpunan</strong> dan mana yang bukan himpunan? Jelaskan alasanmu!</p>
+            <Q no={1} badge={t(`${p}.q1.badge`)} badgeColor="#60a5fa">
+              <p><Trans i18nKey={`${p}.q1.instruction`} components={{ strong: <strong className="text-blue-300" /> }} /></p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) Kumpulan siswa yang tinggi di kelas 7A</li>
-                <li>(b) Kumpulan bilangan prima kurang dari 10</li>
-                <li>(c) Kumpulan makanan enak</li>
-                <li>(d) Kumpulan huruf vokal dalam alfabet</li>
+                <li>(a) {t(`${p}.q1.itemA`)}</li>
+                <li>(b) {t(`${p}.q1.itemB`)}</li>
+                <li>(c) {t(`${p}.q1.itemC`)}</li>
+                <li>(d) {t(`${p}.q1.itemD`)}</li>
               </ul>
             </Q>
 
-            <Q no={2} badge="Notasi Anggota" badgeColor="#60a5fa">
+            <Q no={2} badge={t(`${p}.q2.badge`)} badgeColor="#60a5fa">
               <p>
-                Diketahui <InlineMath math="A = \{2, 4, 6, 8, 10\}" />. Tentukan apakah pernyataan berikut benar atau salah!
+                {t(`${p}.q2.pre`)}{' '}<InlineMath math="A = \{2, 4, 6, 8, 10\}" />. {t(`${p}.q2.post`)}
               </p>
               <BlockMath math={`\\begin{array}{ll}
 (a)\\; 4 \\in A & (b)\\; 5 \\in A \\\\
@@ -91,55 +95,54 @@ const PengertianKeanggotaanLatihanPage = () => {
 \\end{array}`} />
             </Q>
 
-            <Q no={3} badge="Mendaftar Anggota" badgeColor="#60a5fa">
+            <Q no={3} badge={t(`${p}.q3.badge`)} badgeColor="#60a5fa">
               <p>
-                Nyatakan himpunan berikut dengan mendaftar anggota-anggotanya!
+                {t(`${p}.q3.instruction`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) <InlineMath math="P" /> = himpunan bilangan genap antara 1 dan 15</li>
-                <li>(b) <InlineMath math="Q" /> = himpunan faktor dari 24</li>
-                <li>(c) <InlineMath math="R" /> = himpunan huruf pada kata "MATEMATIKA"</li>
+                <li>(a) <InlineMath math="P" /> {t(`${p}.q3.itemA`)}</li>
+                <li>(b) <InlineMath math="Q" /> {t(`${p}.q3.itemB`)}</li>
+                <li>(c) <InlineMath math="R" /> {t(`${p}.q3.itemC`)}</li>
               </ul>
             </Q>
 
-            <Q no={4} badge="Banyak Anggota" badgeColor="#60a5fa">
+            <Q no={4} badge={t(`${p}.q4.badge`)} badgeColor="#60a5fa">
               <p>
-                Tentukan <InlineMath math="n(A)" /> dari himpunan-himpunan berikut!
+                {t(`${p}.q4.instruction`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="A = \{1, 3, 5, 7, 9, 11\}" /></li>
-                <li>(b) <InlineMath math="B" /> = himpunan bilangan prima kurang dari 20</li>
-                <li>(c) <InlineMath math="C" /> = himpunan huruf konsonan pada kata "HIMPUNAN"</li>
+                <li>(b) <InlineMath math="B" /> {t(`${p}.q4.itemB`)}</li>
+                <li>(c) <InlineMath math="C" /> {t(`${p}.q4.itemC`)}</li>
               </ul>
             </Q>
 
-            <Q no={5} badge="UN Style" badgeColor="#60a5fa">
+            <Q no={5} badge={t(`${p}.q5.badge`)} badgeColor="#60a5fa">
               <p>
-                Diketahui <InlineMath math="K = \{x \mid x \text{ adalah bilangan asli kelipatan 3 yang kurang dari 20}\}" />.
-                Anggota himpunan <InlineMath math="K" /> adalah …
+                {t(`${p}.q5.pre`)}{' '}<InlineMath math={`K = \\{x \\mid x \\text{ ${q5desc}}\\}`} />.{' '}
+                {t(`${p}.q5.midPre`)}{' '}<InlineMath math="K" />{' '}{t(`${p}.q5.midPost`)}
               </p>
             </Q>
           </Section>
 
-          <Section title="Bagian B · Menyatakan Keanggotaan" color="#a78bfa">
+          <Section title={t(`${p}.sectionB`)} color="#a78bfa">
 
-            <Q no={6} badge="Deskripsi → Daftar" badgeColor="#a78bfa">
+            <Q no={6} badge={t(`${p}.q6.badge`)} badgeColor="#a78bfa">
               <p>
-                Himpunan <InlineMath math="B = \{x \mid 3 \leq x \leq 12,\; x \in \mathbb{N}\}" />.
-                Daftarkan semua anggota <InlineMath math="B" /> dan tentukan <InlineMath math="n(B)" />!
+                {t(`${p}.q6.pre`)}{' '}<InlineMath math="B = \{x \mid 3 \leq x \leq 12,\; x \in \mathbb{N}\}" />.{' '}
+                {t(`${p}.q6.mid`)}{' '}<InlineMath math="B" />{' '}{t(`${p}.q6.and`)}{' '}<InlineMath math="n(B)" />!
               </p>
             </Q>
 
-            <Q no={7} badge="Daftar → Notasi" badgeColor="#a78bfa">
+            <Q no={7} badge={t(`${p}.q7.badge`)} badgeColor="#a78bfa">
               <p>
-                Ubah himpunan <InlineMath math="A = \{1, 4, 9, 16, 25, 36\}" /> ke bentuk notasi pembentuk himpunan!
+                {t(`${p}.q7.pre`)}{' '}<InlineMath math="A = \{1, 4, 9, 16, 25, 36\}" />{' '}{t(`${p}.q7.post`)}
               </p>
             </Q>
 
-            <Q no={8} badge="ANBK" badgeColor="#a78bfa">
+            <Q no={8} badge={t(`${p}.q8.badge`)} badgeColor="#a78bfa">
               <p>
-                Perhatikan himpunan <InlineMath math="P = \{p, e, l, a, j, r\}" /> (huruf penyusun kata "PELAJAR" tanpa pengulangan).
-                Manakah pernyataan yang BENAR?
+                {t(`${p}.q8.pre`)}{' '}<InlineMath math="P = \{p, e, l, a, j, r\}" />{' '}{t(`${p}.q8.mid`)}{' '}{t(`${p}.q8.post`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(A) <InlineMath math="n(P) = 7" /></li>
@@ -149,74 +152,72 @@ const PengertianKeanggotaanLatihanPage = () => {
               </ul>
             </Q>
 
-            <Q no={9} badge="Kelipatan & Faktor" badgeColor="#a78bfa">
+            <Q no={9} badge={t(`${p}.q9.badge`)} badgeColor="#a78bfa">
               <p>
-                Tentukan anggota himpunan berikut dan hitung jumlah seluruh anggotanya!
+                {t(`${p}.q9.instruction`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) <InlineMath math="A" /> = himpunan kelipatan 4 antara 10 dan 40</li>
-                <li>(b) <InlineMath math="B" /> = himpunan faktor persekutuan dari 24 dan 36</li>
+                <li>(a) <InlineMath math="A" /> {t(`${p}.q9.itemA`)}</li>
+                <li>(b) <InlineMath math="B" /> {t(`${p}.q9.itemB`)}</li>
               </ul>
             </Q>
 
-            <Q no={10} badge="TKA" badgeColor="#a78bfa">
+            <Q no={10} badge={t(`${p}.q10.badge`)} badgeColor="#a78bfa">
               <p>
-                Diketahui <InlineMath math="A = \{x \mid x^2 - 5x + 6 = 0,\; x \in \mathbb{Z}\}" />.
-                Tentukan anggota himpunan <InlineMath math="A" /> dan nilai <InlineMath math="n(A)" />!
+                {t(`${p}.q10.pre`)}{' '}<InlineMath math="A = \{x \mid x^2 - 5x + 6 = 0,\; x \in \mathbb{Z}\}" />.{' '}
+                {t(`${p}.q10.post1`)}{' '}<InlineMath math="A" />{' '}{t(`${p}.q10.post2`)}{' '}<InlineMath math="n(A)" />!
               </p>
             </Q>
           </Section>
 
-          <Section title="Bagian C · Aplikasi & Penalaran" color="#4ade80">
+          <Section title={t(`${p}.sectionC`)} color="#4ade80">
 
-            <Q no={11} badge="Kontekstual" badgeColor="#4ade80">
+            <Q no={11} badge={t(`${p}.q11.badge`)} badgeColor="#4ade80">
               <p>
-                Di kelas 7B terdapat 32 siswa. Diketahui bahwa siswa yang menyukai olahraga bola basket
-                adalah mereka yang bernomor absen 3, 6, 9, 12, 15, 18, 21, 24, 27, dan 30.
-                Nyatakan himpunan siswa pecinta basket dengan notasi pembentuk himpunan dan tentukan <InlineMath math="n" />-nya!
+                {t(`${p}.q11.part1`)}{' '}
+                {t(`${p}.q11.part2Pre`)}{' '}<InlineMath math="n" />{t(`${p}.q11.part2Post`)}
               </p>
             </Q>
 
-            <Q no={12} badge="Bilangan" badgeColor="#4ade80">
+            <Q no={12} badge={t(`${p}.q12.badge`)} badgeColor="#4ade80">
               <p>
-                Diketahui himpunan <InlineMath math="M = \{1, 2, 3, \ldots, 10\}" />.
-                Tentukan himpunan bagian <InlineMath math="M" /> yang memuat bilangan-bilangan:
+                {t(`${p}.q12.pre`)}{' '}<InlineMath math="M = \{1, 2, 3, \ldots, 10\}" />.{' '}
+                {t(`${p}.q12.mid`)}{' '}<InlineMath math="M" />{' '}{t(`${p}.q12.post`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>(a) Bilangan ganjil</li>
-                <li>(b) Bilangan prima</li>
-                <li>(c) Kelipatan 2 sekaligus kelipatan 3</li>
+                <li>(a) {t(`${p}.q12.itemA`)}</li>
+                <li>(b) {t(`${p}.q12.itemB`)}</li>
+                <li>(c) {t(`${p}.q12.itemC`)}</li>
               </ul>
             </Q>
 
-            <Q no={13} badge="UN 2020" badgeColor="#4ade80">
+            <Q no={13} badge={t(`${p}.q13.badge`)} badgeColor="#4ade80">
               <p>
-                Dari 40 siswa, diketahui 25 siswa suka matematika, 20 siswa suka IPA, dan 10 siswa suka keduanya.
-                Berapa banyak siswa yang <strong className="text-green-300">tidak suka keduanya</strong>?
+                <Trans i18nKey={`${p}.q13.instruction`} components={{ strong: <strong className="text-green-300" /> }} />
               </p>
             </Q>
 
-            <Q no={14} badge="Penalaran" badgeColor="#4ade80">
+            <Q no={14} badge={t(`${p}.q14.badge`)} badgeColor="#4ade80">
               <p>
-                Himpunan <InlineMath math="A" /> memiliki <InlineMath math="n(A) = 4" />.
-                Himpunan <InlineMath math="B" /> memiliki <InlineMath math="n(B) = 3" />.
-                Jika <InlineMath math="A \cap B = \{2, 5\}" />, berapakah kemungkinan nilai <InlineMath math="n(A \cup B)" />?
+                {t(`${p}.q14.set`)}{' '}<InlineMath math="A" />{' '}{t(`${p}.q14.has`)}{' '}<InlineMath math="n(A) = 4" />.{' '}
+                {t(`${p}.q14.set`)}{' '}<InlineMath math="B" />{' '}{t(`${p}.q14.has`)}{' '}<InlineMath math="n(B) = 3" />.{' '}
+                {t(`${p}.q14.jika`)}{' '}<InlineMath math="A \cap B = \{2, 5\}" />, {t(`${p}.q14.berapakah`)}{' '}<InlineMath math="n(A \cup B)" />?
               </p>
             </Q>
 
-            <Q no={15} badge="HOTS" badgeColor="#4ade80">
+            <Q no={15} badge={t(`${p}.q15.badge`)} badgeColor="#4ade80">
               <p>
-                Dalam sebuah survei terhadap 50 pengunjung toko buku, diperoleh data:
+                {t(`${p}.q15.intro`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
-                <li>• 30 orang membeli buku matematika</li>
-                <li>• 25 orang membeli buku IPA</li>
-                <li>• 12 orang membeli keduanya</li>
+                <li>• {t(`${p}.q15.bullet1`)}</li>
+                <li>• {t(`${p}.q15.bullet2`)}</li>
+                <li>• {t(`${p}.q15.bullet3`)}</li>
               </ul>
               <p className="mt-2">
-                (a) Berapa orang yang hanya membeli buku matematika?<br/>
-                (b) Berapa orang yang tidak membeli keduanya?<br/>
-                (c) Jika dua pengunjung tambahan membeli hanya buku IPA, berapakah <InlineMath math="n(A \cup B)" /> sekarang?
+                (a) {t(`${p}.q15.subA`)}<br/>
+                (b) {t(`${p}.q15.subB`)}<br/>
+                (c) {t(`${p}.q15.subCPre`)}{' '}<InlineMath math="n(A \cup B)" />{' '}{t(`${p}.q15.subCSuffix`)}
               </p>
             </Q>
           </Section>
@@ -228,7 +229,7 @@ const PengertianKeanggotaanLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Himpunan
+            {t(`${p}.backBtn`)}
           </button>
         </div>
       </div>

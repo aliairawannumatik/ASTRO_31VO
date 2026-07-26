@@ -3249,6 +3249,117 @@
           "label": "OPERASI HIMPUNAN",
           "desc": "Irisan (∩), gabungan (∪), selisih (−), komplemen (Aᶜ), soal cerita himpunan"
         }
+      },
+      "pengertianKeanggotaan": {
+        "title": "PENGERTIAN DAN KEANGGOTAAN HIMPUNAN",
+        "topic": "Himpunan",
+        "backBtn": "Kembali ke Himpunan",
+        "notasiTitle": "Notasi Penting",
+        "notasi1": "a adalah anggota himpunan A",
+        "notasi2": "a bukan anggota himpunan A",
+        "notasi3": "banyak anggota himpunan A",
+        "sectionA": "Bagian A · Menentukan Anggota Himpunan",
+        "sectionB": "Bagian B · Menyatakan Keanggotaan",
+        "sectionC": "Bagian C · Aplikasi & Penalaran",
+        "q1": {
+          "badge": "Definisi",
+          "instruction": "Dari kumpulan berikut, manakah yang termasuk <strong>himpunan</strong> dan mana yang bukan himpunan? Jelaskan alasanmu!",
+          "itemA": "Kumpulan siswa yang tinggi di kelas 7A",
+          "itemB": "Kumpulan bilangan prima kurang dari 10",
+          "itemC": "Kumpulan makanan enak",
+          "itemD": "Kumpulan huruf vokal dalam alfabet"
+        },
+        "q2": {
+          "badge": "Notasi Anggota",
+          "pre": "Diketahui",
+          "post": "Tentukan apakah pernyataan berikut benar atau salah!"
+        },
+        "q3": {
+          "badge": "Mendaftar Anggota",
+          "instruction": "Nyatakan himpunan berikut dengan mendaftar anggota-anggotanya!",
+          "itemA": "= himpunan bilangan genap antara 1 dan 15",
+          "itemB": "= himpunan faktor dari 24",
+          "itemC": "= himpunan huruf pada kata “MATEMATIKA”"
+        },
+        "q4": {
+          "badge": "Banyak Anggota",
+          "instruction": "Tentukan n(A) dari himpunan-himpunan berikut!",
+          "itemB": "= himpunan bilangan prima kurang dari 20",
+          "itemC": "= himpunan huruf konsonan pada kata “HIMPUNAN”"
+        },
+        "q5": {
+          "badge": "UN Style",
+          "pre": "Diketahui",
+          "textDesc": "adalah bilangan asli kelipatan 3 yang kurang dari 20",
+          "midPre": "Anggota himpunan",
+          "midPost": "adalah …"
+        },
+        "q6": {
+          "badge": "Deskripsi → Daftar",
+          "pre": "Himpunan",
+          "mid": "Daftarkan semua anggota",
+          "and": "dan tentukan"
+        },
+        "q7": {
+          "badge": "Daftar → Notasi",
+          "pre": "Ubah himpunan",
+          "post": "ke bentuk notasi pembentuk himpunan!"
+        },
+        "q8": {
+          "badge": "ANBK",
+          "pre": "Perhatikan himpunan",
+          "mid": "(huruf penyusun kata “PELAJAR” tanpa pengulangan).",
+          "post": "Manakah pernyataan yang BENAR?"
+        },
+        "q9": {
+          "badge": "Kelipatan & Faktor",
+          "instruction": "Tentukan anggota himpunan berikut dan hitung jumlah seluruh anggotanya!",
+          "itemA": "= himpunan kelipatan 4 antara 10 dan 40",
+          "itemB": "= himpunan faktor persekutuan dari 24 dan 36"
+        },
+        "q10": {
+          "badge": "TKA",
+          "pre": "Diketahui",
+          "post1": "Tentukan anggota himpunan",
+          "post2": "dan nilai"
+        },
+        "q11": {
+          "badge": "Kontekstual",
+          "part1": "Di kelas 7B terdapat 32 siswa. Diketahui bahwa siswa yang menyukai olahraga bola basket adalah mereka yang bernomor absen 3, 6, 9, 12, 15, 18, 21, 24, 27, dan 30.",
+          "part2Pre": "Nyatakan himpunan siswa pecinta basket dengan notasi pembentuk himpunan dan tentukan",
+          "part2Post": "-nya!"
+        },
+        "q12": {
+          "badge": "Bilangan",
+          "pre": "Diketahui himpunan",
+          "mid": "Tentukan himpunan bagian",
+          "post": "yang memuat bilangan-bilangan:",
+          "itemA": "Bilangan ganjil",
+          "itemB": "Bilangan prima",
+          "itemC": "Kelipatan 2 sekaligus kelipatan 3"
+        },
+        "q13": {
+          "badge": "UN 2020",
+          "instruction": "Dari 40 siswa, diketahui 25 siswa suka matematika, 20 siswa suka IPA, dan 10 siswa suka keduanya. Berapa banyak siswa yang <strong>tidak suka keduanya</strong>?"
+        },
+        "q14": {
+          "badge": "Penalaran",
+          "set": "Himpunan",
+          "has": "memiliki",
+          "jika": "Jika",
+          "berapakah": "berapakah kemungkinan nilai"
+        },
+        "q15": {
+          "badge": "HOTS",
+          "intro": "Dalam sebuah survei terhadap 50 pengunjung toko buku, diperoleh data:",
+          "bullet1": "30 orang membeli buku matematika",
+          "bullet2": "25 orang membeli buku IPA",
+          "bullet3": "12 orang membeli keduanya",
+          "subA": "Berapa orang yang hanya membeli buku matematika?",
+          "subB": "Berapa orang yang tidak membeli keduanya?",
+          "subCPre": "Jika dua pengunjung tambahan membeli hanya buku IPA, berapakah",
+          "subCSuffix": "sekarang?"
+        }
       }
     }
   },

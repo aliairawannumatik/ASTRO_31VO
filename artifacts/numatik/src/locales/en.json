@@ -3249,6 +3249,117 @@
           "label": "SET OPERATIONS",
           "desc": "Intersection (∩), union (∪), difference (−), complement (Aᶜ), set word problems"
         }
+      },
+      "pengertianKeanggotaan": {
+        "title": "DEFINITION AND MEMBERSHIP OF SETS",
+        "topic": "Sets",
+        "backBtn": "Back to Sets",
+        "notasiTitle": "Key Notation",
+        "notasi1": "a is a member of set A",
+        "notasi2": "a is not a member of set A",
+        "notasi3": "number of members of set A",
+        "sectionA": "Part A · Identifying Set Members",
+        "sectionB": "Part B · Expressing Membership",
+        "sectionC": "Part C · Applications & Reasoning",
+        "q1": {
+          "badge": "Definition",
+          "instruction": "From the following collections, which ones are a <strong>set</strong> and which are not? Explain your reasoning!",
+          "itemA": "The collection of tall students in class 7A",
+          "itemB": "The collection of prime numbers less than 10",
+          "itemC": "The collection of delicious foods",
+          "itemD": "The collection of vowels in the alphabet"
+        },
+        "q2": {
+          "badge": "Set Membership",
+          "pre": "Given",
+          "post": "Determine whether each statement is true or false!"
+        },
+        "q3": {
+          "badge": "Listing Members",
+          "instruction": "Express each set by listing its members!",
+          "itemA": "= the set of even numbers between 1 and 15",
+          "itemB": "= the set of factors of 24",
+          "itemC": "= the set of letters in the word “MATEMATIKA”"
+        },
+        "q4": {
+          "badge": "Cardinality",
+          "instruction": "Find n(A) for each of the following sets!",
+          "itemB": "= the set of prime numbers less than 20",
+          "itemC": "= the set of consonants in the word “HIMPUNAN”"
+        },
+        "q5": {
+          "badge": "UN Style",
+          "pre": "Given",
+          "textDesc": "is a natural number that is a multiple of 3 less than 20",
+          "midPre": "The members of set",
+          "midPost": "are …"
+        },
+        "q6": {
+          "badge": "Description → List",
+          "pre": "Set",
+          "mid": "List all members of",
+          "and": "and find"
+        },
+        "q7": {
+          "badge": "List → Notation",
+          "pre": "Convert the set",
+          "post": "to set-builder notation!"
+        },
+        "q8": {
+          "badge": "ANBK",
+          "pre": "Consider the set",
+          "mid": "(letters in the word “PELAJAR” without repetition).",
+          "post": "Which statement is CORRECT?"
+        },
+        "q9": {
+          "badge": "Multiples & Factors",
+          "instruction": "Find the members of each set and calculate the sum of all its members!",
+          "itemA": "= the set of multiples of 4 between 10 and 40",
+          "itemB": "= the set of common factors of 24 and 36"
+        },
+        "q10": {
+          "badge": "TKA",
+          "pre": "Given",
+          "post1": "Find the members of set",
+          "post2": "and the value of"
+        },
+        "q11": {
+          "badge": "Contextual",
+          "part1": "In class 7B there are 32 students. Students who like basketball are those with attendance numbers 3, 6, 9, 12, 15, 18, 21, 24, 27, and 30.",
+          "part2Pre": "Express the set of basketball fans using set-builder notation and find its",
+          "part2Post": "!"
+        },
+        "q12": {
+          "badge": "Numbers",
+          "pre": "Given the set",
+          "mid": "Find the subset of",
+          "post": "that contains:",
+          "itemA": "Odd numbers",
+          "itemB": "Prime numbers",
+          "itemC": "Multiples of both 2 and 3"
+        },
+        "q13": {
+          "badge": "UN 2020",
+          "instruction": "Of 40 students, 25 like mathematics, 20 like science, and 10 like both. How many students <strong>like neither</strong>?"
+        },
+        "q14": {
+          "badge": "Reasoning",
+          "set": "Set",
+          "has": "has",
+          "jika": "If",
+          "berapakah": "what are the possible values of"
+        },
+        "q15": {
+          "badge": "HOTS",
+          "intro": "In a survey of 50 visitors to a bookstore, the following data was collected:",
+          "bullet1": "30 people bought mathematics books",
+          "bullet2": "25 people bought science books",
+          "bullet3": "12 people bought both",
+          "subA": "How many people bought only mathematics books?",
+          "subB": "How many people bought neither?",
+          "subCPre": "If two additional visitors bought only science books, what is",
+          "subCSuffix": "now?"
+        }
       }
     }
   },

@@ -1,0 +1,62 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Himpunan" — index
+sudah selesai (practice.himpunan.* sudah ada strukturnya di ketiga
+locale file untuk title, enrichmentNoteDesc, dan subtopics.*).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Komponen Section dan Q (JSX inline flat, bukan array data) — ikuti
+  pola persis seperti KelilingLuasBangunTakBeraturanPage.tsx
+- SVG <text> elements TIDAK diterjemahkan (aturan ini belum relevan
+  di file ini karena PengertianKeanggotaanPage tidak punya SVG
+  diagram sesuai laporan investigasi, tapi tetap waspada kalau ada
+  yang terlewat)
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman pertama: PengertianKeanggotaanPage.tsx
+(15 soal, 3 Bagian A/B/C).
+
+KONTEKS KHUSUS FILE INI:
+- Sub-pertanyaan ditulis sebagai <ul className="list-none"> dengan
+  <li> — perlu per-item key terpisah untuk setiap (a)/(b)/(c)/(d)
+- Q2 pakai <BlockMath> dengan \begin{array} untuk pilihan a-d — ini
+  PURE MATH (tidak ada \text{} bahasa natural di dalamnya), JANGAN
+  disentuh sama sekali, biarkan hardcode
+- Q5 PERHATIAN KHUSUS: ada \text{} berisi bahasa Indonesia di dalam
+  InlineMath:
+  K = \{x \mid x \text{ adalah bilangan asli kelipatan 3 yang kurang dari 20}\}
+  WAJIB dipecah dengan pola interpolasi variabel — hitung teks
+  terjemahan lewat t() di JS dulu, baru interpolasikan ke string math
+  via template literal, persis pola Q15 LuasSegiempatPage /
+  Q15denahLine1-2 KelilingLuasBangunTakBeraturanPage
+- InlineMath lain di luar Q5 kemungkinan besar notasi murni (∈, ⊂,
+  dll) — JANGAN disentuh kecuali ditemukan \text{} bahasa Indonesia
+  lain yang belum terdeteksi di investigasi awal (kalau nemu, tangani
+  dengan pola yang sama seperti Q5)
+
+1. Terjemahkan SEMUA teks: instruksi per Bagian (A/B/C), teks 15
+   soal, semua sub-pertanyaan (a)/(b)/(c)/(d) sebagai key terpisah
+2. Tangani \text{} di Q5 dengan pola interpolasi
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.himpunan.pengertianKeanggotaan.*
+5. JANGAN sentuh sub-halaman lain atau halaman index
+
+VERIFIKASI:
+- Ambil screenshot halaman ini dalam Bahasa Indonesia kalau alat
+  screenshot tersedia
+- Kalau tidak tersedia, laporkan validasi teknis (tsc atau skrip
+  Node.js pengecek key, HMR log) DAN berikan tabel rincian key per
+  soal seperti pola laporan sebelumnya
+- Konfirmasi eksplisit: SEMUA 15 soal (3 Bagian, semua sub-pertanyaan)
+  sudah diterjemahkan, dan Q5 \text{} sudah ditangani dengan benar
+  (tidak ada bahasa Indonesia hardcode tersisa di dalam KaTeX)
