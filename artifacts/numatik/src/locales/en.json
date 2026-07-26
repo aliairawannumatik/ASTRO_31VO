@@ -4085,6 +4085,99 @@
           "label": "DISTANCE BETWEEN TWO POINTS AND FROM A POINT TO A LINE",
           "desc": "Distance formula, distance to axes & lines, perimeter, area"
         }
+      },
+      "unsurUnsur": {
+        "pageTitle": "ELEMENTS OF THE CARTESIAN DIAGRAM",
+        "infoBoxTitle": "📌 Axes & Quadrant Reference",
+        "quadrantI": "Quadrant I",
+        "quadrantII": "Quadrant II",
+        "quadrantIII": "Quadrant III",
+        "quadrantIV": "Quadrant IV",
+        "danWord": "and",
+        "q1": {
+          "title": "Reading Point Coordinates",
+          "a": "State the coordinates of points A, B, C, D, E, and F from the diagram above.",
+          "b": "Which point lies on the x-axis? Which point lies on the y-axis?",
+          "c": "Which point has a negative x-coordinate (abscissa)?"
+        },
+        "q2": {
+          "title": "Determining the Quadrant",
+          "a": "Determine the quadrant of points P, Q, R, and S.",
+          "b": "Explain the sign of coordinates (positive/negative) for each quadrant."
+        },
+        "q3": {
+          "title": "Identifying Quadrant from Coordinates",
+          "content": "Determine which quadrant or axis each of the following points lies on:"
+        },
+        "q4": {
+          "title": "Points on the Coordinate Axes",
+          "a": "Write the coordinates of points K, L, M, N, and P.",
+          "b": "Which points lie on the x-axis? On the y-axis?",
+          "c": "Which point does NOT lie in any quadrant? Why?"
+        },
+        "q5": {
+          "title": "Coordinates on the x-axis",
+          "content": "If point P(-3, y) lies on the x-axis:",
+          "a": "Find the value of y.",
+          "b": "Write the complete coordinates of point P.",
+          "c": "Where is point P relative to the origin?"
+        },
+        "q6": {
+          "title": "Midpoint of a Segment",
+          "content": "Find the coordinates of the midpoint of each segment:"
+        },
+        "q7": {
+          "title": "Finding an Endpoint from the Midpoint",
+          "content": "Point M is the midpoint of segment PQ. Find the coordinates of Q if:"
+        },
+        "q8": {
+          "title": "Distance from a Point to the x-axis",
+          "a": "What is the distance from point A(4, 3) to the x-axis? Explain your method.",
+          "b": "If P(x, y), the formula for the distance to the x-axis is |y|.",
+          "c": "Find the distance from point B(−5, 7) to the x-axis."
+        },
+        "q9": {
+          "title": "Distance from a Point to the y-axis",
+          "a": "What is the distance from point B(−4, 3) to the y-axis?",
+          "b": "If P(x, y), the formula for the distance to the y-axis is |x|.",
+          "c": "Find the distance from point C(3, −6) to the y-axis."
+        },
+        "q10": {
+          "title": "Fourth Vertex of a Rectangle",
+          "a": "Find the coordinates of point D.",
+          "b": "Calculate the perimeter of rectangle ABCD.",
+          "c": "Calculate the area of rectangle ABCD."
+        },
+        "q11": {
+          "title": "Triangle from Coordinates",
+          "a": "Write the coordinates of all points in the diagram.",
+          "b": "Is triangle ABC a right triangle? Explain based on the positions of points A and B.",
+          "c": "Which point is at the highest position?"
+        },
+        "q12": {
+          "title": "Points in Quadrant IV",
+          "content": "Consider the following points:\nA(5, −3),  B(−2, −4),  C(4, −1),  D(−3, 6),  E(7, −5),  F(0, −2)",
+          "a": "Which points lie in Quadrant IV? State the x-coordinate (abscissa) and y-coordinate (ordinate) of each!",
+          "b": "Why doesn't point F(0, −2) belong to Quadrant IV even though its y-value is negative?"
+        },
+        "q13": {
+          "title": "Coordinates Above the x-axis",
+          "content": "From the following list of coordinates, determine which ones are above the x-axis:\nP(−3, 5),  Q(4, −2),  R(0, 7),  S(−1, −6),  T(6, 3),  U(2, 0)",
+          "a": "List all points above the x-axis with their reasons.",
+          "b": "Is a point exactly on the x-axis (y = 0) considered 'above the x-axis'? Explain!"
+        },
+        "q14": {
+          "title": "Distance from a Point to a Vertical Line",
+          "content": "Calculate the distance from point A(−1, 2) to the line passing through (3, 4) and (3, −5) in units."
+        },
+        "q15": {
+          "1": "The point (0, 0) lies in Quadrant I.",
+          "2": "A point in Quadrant II has x < 0 and y > 0.",
+          "3": "The point (5, 0) lies on the x-axis.",
+          "4": "If x = 0 and y ≠ 0, the point lies on the y-axis.",
+          "title": "ANBK Problem — Evaluate Statements",
+          "content": "Determine whether each statement is TRUE (T) or FALSE (F) about coordinates:"
+        }
       }
     }
   },

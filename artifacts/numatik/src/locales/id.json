@@ -4085,6 +4085,99 @@
           "label": "JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS",
           "desc": "Rumus jarak, jarak ke sumbu & garis, keliling, luas"
         }
+      },
+      "unsurUnsur": {
+        "pageTitle": "UNSUR-UNSUR DIAGRAM KARTESIUS",
+        "infoBoxTitle": "📌 Keterangan Sumbu & Kuadran",
+        "quadrantI": "Kuadran I",
+        "quadrantII": "Kuadran II",
+        "quadrantIII": "Kuadran III",
+        "quadrantIV": "Kuadran IV",
+        "danWord": "dan",
+        "q1": {
+          "title": "Membaca Koordinat Titik",
+          "a": "Nyatakan koordinat titik A, B, C, D, E, dan F dari diagram di atas.",
+          "b": "Titik mana yang terletak pada sumbu-x? Titik mana yang pada sumbu-y?",
+          "c": "Titik mana yang memiliki nilai absis (x) negatif?"
+        },
+        "q2": {
+          "title": "Menentukan Kuadran",
+          "a": "Tentukan kuadran dari titik P, Q, R, dan S.",
+          "b": "Jelaskan tanda koordinat (positif/negatif) untuk setiap kuadran."
+        },
+        "q3": {
+          "title": "Identifikasi Kuadran dari Koordinat",
+          "content": "Tentukan di kuadran mana atau pada sumbu mana setiap titik berikut berada:"
+        },
+        "q4": {
+          "title": "Titik pada Sumbu Koordinat",
+          "a": "Tuliskan koordinat titik K, L, M, N, dan P.",
+          "b": "Titik mana yang terletak pada sumbu-x? Sumbu-y?",
+          "c": "Titik mana yang TIDAK berada pada kuadran manapun? Mengapa?"
+        },
+        "q5": {
+          "title": "Koordinat pada Sumbu-x",
+          "content": "Jika titik P(-3, y) terletak pada sumbu-x:",
+          "a": "Tentukan nilai y.",
+          "b": "Tuliskan koordinat lengkap titik P.",
+          "c": "Di mana posisi titik P relatif terhadap titik asal?"
+        },
+        "q6": {
+          "title": "Titik Tengah Segmen",
+          "content": "Tentukan koordinat titik tengah dari setiap segmen berikut:"
+        },
+        "q7": {
+          "title": "Mencari Ujung Segmen dari Titik Tengah",
+          "content": "Titik M adalah titik tengah segmen PQ. Tentukan koordinat Q jika:"
+        },
+        "q8": {
+          "title": "Jarak Titik ke Sumbu-x",
+          "a": "Berapa jarak titik A(4, 3) ke sumbu-x? Jelaskan caramu.",
+          "b": "Jika P(x, y), rumus jarak ke sumbu-x adalah |y|.",
+          "c": "Tentukan jarak titik B(−5, 7) ke sumbu-x."
+        },
+        "q9": {
+          "title": "Jarak Titik ke Sumbu-y",
+          "a": "Berapa jarak titik B(−4, 3) ke sumbu-y?",
+          "b": "Jika P(x, y), rumus jarak ke sumbu-y adalah |x|.",
+          "c": "Tentukan jarak titik C(3, −6) ke sumbu-y."
+        },
+        "q10": {
+          "title": "Titik ke-4 Persegi Panjang",
+          "a": "Tentukan koordinat titik D.",
+          "b": "Hitung keliling persegi panjang ABCD.",
+          "c": "Hitung luas persegi panjang ABCD."
+        },
+        "q11": {
+          "title": "Segitiga dari Koordinat",
+          "a": "Tuliskan koordinat semua titik dari diagram.",
+          "b": "Apakah segitiga ABC siku-siku? Jelaskan berdasarkan posisi titik A dan B.",
+          "c": "Titik manakah yang paling tinggi posisinya?"
+        },
+        "q12": {
+          "title": "Titik di Kuadran IV",
+          "content": "Perhatikan titik-titik berikut:\nA(5, −3),  B(−2, −4),  C(4, −1),  D(−3, 6),  E(7, −5),  F(0, −2)",
+          "a": "Titik mana saja yang berada di Kuadran IV? Sebutkan absisnya (nilai x) dan ordinatnya (nilai y) masing-masing!",
+          "b": "Mengapa titik F(0, −2) tidak termasuk Kuadran IV meskipun nilai y-nya negatif?"
+        },
+        "q13": {
+          "title": "Koordinat di Atas Sumbu-x",
+          "content": "Dari daftar koordinat berikut, tentukan manakah yang berada di atas sumbu-x:\nP(−3, 5),  Q(4, −2),  R(0, 7),  S(−1, −6),  T(6, 3),  U(2, 0)",
+          "a": "Tuliskan semua titik yang berada di atas sumbu-x beserta alasannya.",
+          "b": "Apakah titik yang tepat berada pada sumbu-x (y = 0) dianggap 'di atas sumbu-x'? Jelaskan!"
+        },
+        "q14": {
+          "title": "Jarak Titik ke Garis Vertikal",
+          "content": "Hitung jarak titik A(−1, 2) terhadap garis yang melalui titik (3, 4) dan (3, −5) dalam satuan."
+        },
+        "q15": {
+          "1": "Titik (0, 0) berada di Kuadran I.",
+          "2": "Titik yang berada di Kuadran II memiliki x < 0 dan y > 0.",
+          "3": "Titik (5, 0) terletak pada sumbu-x.",
+          "4": "Jika x = 0 dan y ≠ 0, titik tersebut terletak pada sumbu-y.",
+          "title": "Soal ANBK — Evaluasi Pernyataan",
+          "content": "Tentukan pernyataan BENAR (B) atau SALAH (S) tentang koordinat:"
+        }
       }
     }
   },
