@@ -1,0 +1,52 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Pola Bilangan" dan
+"Koordinat Kartesius" di Kelas 8 sudah selesai 100% trilingual.
+Sekarang lanjut topik berikutnya di Kelas 8: "Relasi dan Fungsi".
+
+TUGAS SEKARANG — investigasi saja, JANGAN ubah kode apa pun:
+Topik "Relasi dan Fungsi" di Kelas 8 Tugas-Latihan Mandiri.
+
+1. Cari halaman/komponen untuk topik ini
+2. Laporkan:
+   - Apakah topik ini punya beberapa sub-halaman, atau cuma satu
+     halaman?
+   - Kalau ada beberapa sub-halaman, sebutkan nama file dan nama
+     masing-masing sub-topiknya, plus jumlah soal tiap halaman
+   - Cek juga apakah ada file "orphan" (ada di folder tapi tidak
+     di-route dari index), seperti yang ditemukan di 2 topik
+     sebelumnya (Pola Bilangan, Koordinat Kartesius)
+   - Cek apakah index page menampilkan jumlah soal yang benar
+     (cocok dengan isi file aktual) — laporkan kalau ada mismatch
+   - Apakah soal-soalnya berbentuk array data (dengan JSX/string
+     sebagai value, di-render via .map()) atau komponen JSX inline
+     biasa (misal <Section>/<Q> atau <QuestionCard>)?
+   - Apakah ada sistem cards (di dalam/di luar component), atau
+     format flat (tanpa cards/tag/isDark)?
+   - Apakah ada pola khusus:
+     * Diagram (SVG atau <img>) — untuk visualisasi relasi (diagram
+       panah/mapping antar himpunan), grafik fungsi, tabel pasangan
+       berurutan, dll — berapa banyak soal yang pakai?
+     * Notasi matematika (f(x), domain, kodomain, range, pemetaan
+       A→B, pasangan berurutan (x,y)) — apakah ditulis pakai
+       InlineMath/KaTeX atau campur teks biasa?
+     * Tabel (untuk menampilkan pasangan domain-range)?
+     * Nested list, format pilihan ganda A/B/C/D, sub-bagian, dll?
+   - Apakah komponennya sudah pakai useTranslation() (walau minimal)
+     atau full hardcode?
+   - Kalau ada notasi matematika yang tercampur dengan teks natural
+     Indonesia dalam satu kalimat/InlineMath (pola \text{} berisi
+     bahasa Indonesia), CEK MENYELURUH dengan grep "\\text{" di
+     setiap file — jangan cuma sekilas, karena di topik-topik
+     sebelumnya beberapa kasus sering terlewat kalau tidak di-grep
+     secara eksplisit
+
+JANGAN edit file apa pun, JANGAN install package, JANGAN jalankan build.
+Ini murni laporan/assessment saja.
