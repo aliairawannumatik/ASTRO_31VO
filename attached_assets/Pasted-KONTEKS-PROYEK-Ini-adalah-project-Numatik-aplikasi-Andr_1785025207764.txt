@@ -1,0 +1,42 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk 
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor + 
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai 
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia, 
+English, Japanese) pakai react-i18next dengan useTranslation() dan 
+file locale (id.json, en.json, ja.json). Topik "Garis dan Sudut" — 
+index dan 3 sub-halaman lain sudah selesai. Ini SUB-HALAMAN TERAKHIR 
+dari topik ini: HubunganDuaGarisPage.tsx.
+
+Dari investigasi sebelumnya, halaman ini punya pola BERBEDA dari 
+semua sub-halaman lain: soal disimpan sebagai array 
+`const questions = [...]`, di mana setiap objek punya field `content: 
+JSX.Element` (bukan string!) yang berisi campuran teks dan 
+<InlineMath> dari react-katex untuk notasi matematika (garis a/b/c, 
+koordinat, simbol vektor seperti \overrightarrow{BQ}). Opsi disimpan 
+di `options: string[]` dan dirender otomatis dengan label A/B/C/D. 
+Beberapa soal juga punya field `image`.
+
+TUGAS SEKARANG — investigasi dulu, JANGAN edit file dulu:
+
+1. Baca ulang file lengkap HubunganDuaGarisPage.tsx
+2. Untuk SETIAP soal di array `questions`, laporkan:
+   - Apakah `content`-nya cuma teks biasa yang dibungkus <>, atau 
+     benar-benar campur dengan <InlineMath>? Kalau campur, tunjukkan 
+     contoh strukturnya
+   - Apakah ada teks di dalam string LaTeX <InlineMath math="..."> 
+     yang mengandung bahasa natural (misal \text{cm}) yang perlu 
+     diganti ke \mathrm{}?
+3. Usulkan strategi konversi yang paling aman: apakah `content` diubah 
+   jadi function yang return JSX (biar bisa pakai useTranslation() di 
+   dalamnya), atau pendekatan lain? Pertimbangkan bahwa array ini di-
+   render dengan .map(), jadi tiap `content` perlu tetap valid sebagai 
+   JSX.Element atau diubah semua sekaligus jadi function
+4. Cek field `options: string[]` — apakah semua opsi teks biasa atau 
+   ada juga yang campur notasi matematika?
+
+JANGAN edit file apa pun, JANGAN install package, JANGAN jalankan build. 
+Ini murni laporan/assessment saja.
