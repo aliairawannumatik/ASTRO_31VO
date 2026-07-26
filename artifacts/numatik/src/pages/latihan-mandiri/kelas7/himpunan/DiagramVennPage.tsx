@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
@@ -37,7 +37,7 @@ const VennTiga = () => (
     <text x="110" y="65"  fill="#60a5fa"  fontSize="14" fontFamily="monospace" fontWeight="bold">A</text>
     <text x="270" y="65"  fill="#a78bfa"  fontSize="14" fontFamily="monospace" fontWeight="bold">B</text>
     <text x="190" y="260" fill="#4ade80"  fontSize="14" fontFamily="monospace" textAnchor="middle" fontWeight="bold">C</text>
-    {/* region labels */}
+    {/* region labels — SVG text intentionally kept as hardcoded Indonesian per project rules */}
     <text x="115" y="105"  fill="#e2e8f0" fontSize="12" fontFamily="monospace" textAnchor="middle">hanya A</text>
     <text x="268" y="105"  fill="#e2e8f0" fontSize="12" fontFamily="monospace" textAnchor="middle">hanya B</text>
     <text x="190" y="235"  fill="#e2e8f0" fontSize="12" fontFamily="monospace" textAnchor="middle">hanya C</text>
@@ -95,6 +95,8 @@ const Q = ({ no, children, diagram, badge, badgeColor = "#60a5fa" }: QProps) => 
 const DiagramVennLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.himpunan.diagramVenn";
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -107,9 +109,9 @@ const DiagramVennLatihanPage = () => {
             <BookOpen className="w-7 h-7 text-green-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            DIAGRAM VENN
+            {t(`${p}.title`)}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Himpunan</p>
+          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · {t(`${p}.topic`)}</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>
@@ -118,25 +120,25 @@ const DiagramVennLatihanPage = () => {
         </div>
 
         <div className="rounded-xl bg-green-500/10 border border-green-500/30 px-5 py-4 mb-4 text-sm text-white/80 font-body">
-          <p className="font-bold text-green-300 mb-2">Cara Membaca Diagram Venn</p>
+          <p className="font-bold text-green-300 mb-2">{t(`${p}.tipTitle`)}</p>
           <div className="grid grid-cols-2 gap-2 text-xs text-white/70">
-            <span>• Persegi = himpunan semesta (S)</span>
-            <span>• Lingkaran = satu himpunan</span>
-            <span>• Irisan = <InlineMath math="A \cap B" /></span>
-            <span>• Di luar lingkaran tapi dalam S = di luar <InlineMath math="A \cup B" /></span>
+            <span>• {t(`${p}.tipItem1`)}</span>
+            <span>• {t(`${p}.tipItem2`)}</span>
+            <span>• {t(`${p}.tipIrisan`)}<InlineMath math="A \cap B" /></span>
+            <span>• {t(`${p}.tipLuar`)}{' '}<InlineMath math="A \cup B" /></span>
           </div>
         </div>
 
         <div className="space-y-5 animate-slide-up">
-          <Section title="Bagian A · Membaca Diagram Venn" color="#60a5fa">
+          <Section title={t(`${p}.sectionA`)} color="#60a5fa">
 
-            <Q no={1} badge="Melengkapi" badgeColor="#60a5fa">
+            <Q no={1} badge={t(`${p}.q1.badge`)} badgeColor="#60a5fa">
               <p>
-                Lengkapi diagram Venn dengan data berikut:<br/>
+                {t(`${p}.q1.pre`)}<br/>
                 <InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />,<br/>
                 <InlineMath math="A = \{1, 2, 3, 4, 5\}" />,<br/>
                 <InlineMath math="B = \{3, 4, 5, 6, 7\}" /><br/>
-                Lalu tentukan:
+                {t(`${p}.q1.lalu`)}
                 (a) <InlineMath math="A \cap B" />,&nbsp;
                 (b) <InlineMath math="A \cup B" />,&nbsp;
                 (c) <InlineMath math="A - B" />,&nbsp;
@@ -146,143 +148,142 @@ const DiagramVennLatihanPage = () => {
               </p>
             </Q>
 
-            <Q no={2} badge="Membaca" badgeColor="#60a5fa"
+            <Q no={2} badge={t(`${p}.q2.badge`)} badgeColor="#60a5fa"
               diagram={<VennDua labelA="A" labelB="B" colorA="#60a5fa" colorB="#a78bfa"
                 itemsLeft={["2","4","8"]} itemsMiddle={["6","12"]} itemsRight={["3","9","15"]} sLabel="S" />}>
               <p>
-                Dari diagram Venn di atas, tentukan:
-                (a) anggota <InlineMath math="A" />,&nbsp;
-                (b) anggota <InlineMath math="B" />,&nbsp;
+                {t(`${p}.q2.pre`)}
+                (a) <InlineMath math="A" />,&nbsp;
+                (b) <InlineMath math="B" />,&nbsp;
                 (c) <InlineMath math="A \cap B" />,&nbsp;
                 (d) <InlineMath math="A \cup B" />,&nbsp;
                 (e) <InlineMath math="A - B" />,&nbsp;
                 (f) <InlineMath math="B - A" />,&nbsp;
-                (g) anggota <InlineMath math="S" /> yang tidak ada di <InlineMath math="A" /> maupun <InlineMath math="B" />
+                (g) {t(`${p}.q2.itemG`)}
               </p>
             </Q>
 
-            <Q no={3} badge="UN Style" badgeColor="#60a5fa">
+            <Q no={3} badge={t(`${p}.q3.badge`)} badgeColor="#60a5fa">
               <p>
-                Diketahui <InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />,
+                {t(`${p}.q3.diketahui`)}{' '}<InlineMath math="S = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}" />,
                 <InlineMath math="\; A = \{2, 4, 6, 8, 10\}" />,
-                <InlineMath math="\; B = \{1, 2, 3, 4, 5\}" />.
-                Gambarkan diagram Venn-nya dan tentukan <InlineMath math="A^c" />!
+                <InlineMath math="\; B = \{1, 2, 3, 4, 5\}" />.{' '}
+                {t(`${p}.q3.post`)}{' '}<InlineMath math="A^c" />!
               </p>
             </Q>
 
-            <Q no={4} badge="Menghitung" badgeColor="#60a5fa">
+            <Q no={4} badge={t(`${p}.q4.badge`)} badgeColor="#60a5fa">
               <p>
-                Diketahui dari diagram Venn: <InlineMath math="n(S) = 30" />, <InlineMath math="n(A) = 18" />,
-                <InlineMath math="\; n(B) = 14" />, <InlineMath math="\; n(A \cap B) = 6" />.
-                Tentukan:
+                {t(`${p}.q4.pre`)}{' '}<InlineMath math="n(S) = 30" />, <InlineMath math="n(A) = 18" />,
+                <InlineMath math="\; n(B) = 14" />, <InlineMath math="\; n(A \cap B) = 6" />.{' '}
+                {t(`${p}.q4.tentukan`)}
               </p>
               <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
                 <li>(a) <InlineMath math="n(A \cup B)" /></li>
-                <li>(b) Banyak anggota yang hanya ada di <InlineMath math="A" /></li>
-                <li>(c) Banyak anggota yang hanya ada di <InlineMath math="B" /></li>
-                <li>(d) Banyak anggota yang tidak ada di <InlineMath math="A" /> maupun <InlineMath math="B" /></li>
+                <li>(b) {t(`${p}.q4.itemBPre`)}<InlineMath math="A" />{t(`${p}.q4.itemBPost`)}</li>
+                <li>(c) {t(`${p}.q4.itemBPre`)}<InlineMath math="B" />{t(`${p}.q4.itemBPost`)}</li>
+                <li>(d) {t(`${p}.q4.itemDPre`)}<InlineMath math="A" />{t(`${p}.q4.itemDMid`)}<InlineMath math="B" />{t(`${p}.q4.itemDPost`)}</li>
+              </ul>
+            </Q>
+
+            {/* Q5 — restored: soal Menentukan anggota operasi himpunan dari deskripsi */}
+            <Q no={5} badge={t(`${p}.q5.badge`)} badgeColor="#60a5fa">
+              <p>
+                {t(`${p}.q5.pre`)}{' '}<InlineMath math="S = \{1, 2, 3, \ldots, 20\}" />,{' '}
+                <InlineMath math="A" />{' '}{t(`${p}.q5.setA`)},{' '}
+                <InlineMath math="B" />{' '}{t(`${p}.q5.setB`)}.{' '}
+                {t(`${p}.q5.tentukan`)}
+              </p>
+              <ul className="list-none mt-2 space-y-1 text-white/75 text-xs">
+                <li>(a) <InlineMath math="A \cap B" /></li>
+                <li>(b) <InlineMath math="A \cup B" /></li>
+                <li>(c) <InlineMath math="A - B" /></li>
+                <li>(d) {t(`${p}.q5.itemD`)}{' '}<InlineMath math="A \cup B" /></li>
               </ul>
             </Q>
           </Section>
 
-          <Section title="Bagian B · Soal Cerita Diagram Venn" color="#4ade80">
+          <Section title={t(`${p}.sectionB`)} color="#4ade80">
 
-            <Q no={6} badge="Survei" badgeColor="#4ade80" diagram={<VennSurvei />}>
+            <Q no={6} badge={t(`${p}.q6.badge`)} badgeColor="#4ade80" diagram={<VennSurvei />}>
               <p>
-                Dari 40 siswa, 25 suka Matematika, 20 suka IPA, dan 8 suka keduanya.
-                Lengkapi diagram Venn di atas dan tentukan berapa siswa yang <strong className="text-green-300">tidak suka keduanya</strong>!
+                <Trans i18nKey={`${p}.q6.instruction`} components={{ strong: <strong className="text-green-300" /> }} />
               </p>
             </Q>
 
-            <Q no={7} badge="ANBK" badgeColor="#4ade80">
+            <Q no={7} badge={t(`${p}.q7.badge`)} badgeColor="#4ade80">
               <p>
-                Dalam satu keluarga terdapat 50 orang. Dari mereka 30 orang punya HP Android, 25 orang
-                punya HP iPhone, dan 10 orang punya keduanya.
-                Buat diagram Venn dan tentukan:<br/>
-                (a) Berapa orang yang hanya punya Android?<br/>
-                (b) Berapa orang yang tidak punya HP sama sekali?
+                {t(`${p}.q7.pre`)}<br/>
+                (a) {t(`${p}.q7.subA`)}<br/>
+                (b) {t(`${p}.q7.subB`)}
               </p>
             </Q>
 
-            <Q no={8} badge="Tiga Kelompok" badgeColor="#4ade80">
-              <p>
-                Dari 60 peserta lomba: 30 ikut lomba lari, 25 ikut renang, 20 ikut bersepeda.
-                10 ikut lari dan renang, 8 ikut renang dan bersepeda, 7 ikut lari dan bersepeda,
-                dan 4 orang ikut ketiganya.
-              </p>
+            <Q no={8} badge={t(`${p}.q8.badge`)} badgeColor="#4ade80">
+              <p>{t(`${p}.q8.data`)}</p>
               <p className="mt-1">
-                Tentukan berapa peserta yang:
-                (a) hanya ikut 1 lomba, (b) ikut tepat 2 lomba, (c) tidak ikut satupun lomba
+                {t(`${p}.q8.tentukan`)}
+                (a) {t(`${p}.q8.itemA`)}, (b) {t(`${p}.q8.itemB`)}, (c) {t(`${p}.q8.itemC`)}
               </p>
             </Q>
 
-            <Q no={9} badge="UN 2021" badgeColor="#4ade80">
+            <Q no={9} badge={t(`${p}.q9.badge`)} badgeColor="#4ade80">
               <p>
-                Dari diagram Venn diketahui <InlineMath math="n(A \cup B) = 35" />,
-                <InlineMath math="\; n(A) = 20" />, <InlineMath math="\; n(A \cap B) = 7" />.
-                Tentukan <InlineMath math="n(B)" />!
+                {t(`${p}.q9.pre`)}{' '}<InlineMath math="n(A \cup B) = 35" />,
+                <InlineMath math="\; n(A) = 20" />, <InlineMath math="\; n(A \cap B) = 7" />.{' '}
+                {t(`${p}.q9.post`)}{' '}<InlineMath math="n(B)" />!
               </p>
             </Q>
 
-            <Q no={10} badge="TKA" badgeColor="#4ade80">
-              <p>
-                Diketahui dari survei 100 responden: 60 suka kopi, 50 suka teh, dan 20 suka keduanya.
-                Berapa persen responden yang tidak suka kopi maupun teh?
-              </p>
+            <Q no={10} badge={t(`${p}.q10.badge`)} badgeColor="#4ade80">
+              <p>{t(`${p}.q10.instruction`)}</p>
             </Q>
           </Section>
 
-          <Section title="Bagian C · Aplikasi Kompleks" color="#fb923c">
+          <Section title={t(`${p}.sectionC`)} color="#fb923c">
 
-            <Q no={11} badge="Kontekstual" badgeColor="#fb923c">
+            <Q no={11} badge={t(`${p}.q11.badge`)} badgeColor="#fb923c">
               <p>
-                Nilai ujian 30 siswa diperiksa. Hasilnya: 18 lulus Matematika, 22 lulus Bahasa Indonesia,
-                dan 12 lulus keduanya. Gambarlah diagram Venn situasi ini dan tentukan:<br/>
-                (a) Berapa yang hanya lulus Matematika?<br/>
-                (b) Berapa yang tidak lulus keduanya?
+                {t(`${p}.q11.pre`)}<br/>
+                (a) {t(`${p}.q11.subA`)}<br/>
+                (b) {t(`${p}.q11.subB`)}
               </p>
             </Q>
 
-            <Q no={12} badge="HOTS" badgeColor="#fb923c">
+            <Q no={12} badge={t(`${p}.q12.badge`)} badgeColor="#fb923c">
               <p>
-                Dari 80 pengunjung pameran: 45 melihat lukisan, 40 melihat patung, dan 25 melihat keduanya.
-                Seorang pengunjung dipilih secara acak. Berapa persen kemungkinan pengunjung tersebut
-                <strong className="text-orange-300"> hanya melihat patung</strong>?
+                <Trans i18nKey={`${p}.q12.instruction`} components={{ strong: <strong className="text-orange-300" /> }} />
               </p>
             </Q>
 
-            <Q no={13} badge="Mencari Anggota" badgeColor="#fb923c">
+            <Q no={13} badge={t(`${p}.q13.badge`)} badgeColor="#fb923c">
               <p>
-                Diketahui <InlineMath math="n(S) = 50" />, <InlineMath math="n(A \cup B) = 42" />,
-                <InlineMath math="\; n(A) = 2 \cdot n(B)" />, dan <InlineMath math="\; n(A \cap B) = 8" />.
-                Tentukan <InlineMath math="n(A)" /> dan <InlineMath math="n(B)" />!
+                {t(`${p}.q13.pre`)}{' '}<InlineMath math="n(S) = 50" />, <InlineMath math="n(A \cup B) = 42" />,
+                <InlineMath math="\; n(A) = 2 \cdot n(B)" />,{' '}{t(`${p}.q13.dan`)}{' '}<InlineMath math="\; n(A \cap B) = 8" />.{' '}
+                {t(`${p}.q13.post`)}{' '}<InlineMath math="n(A)" />{' '}{t(`${p}.q13.dan`)}{' '}<InlineMath math="n(B)" />!
               </p>
             </Q>
 
-            <Q no={14} badge="UN 2022" badgeColor="#fb923c">
+            <Q no={14} badge={t(`${p}.q14.badge`)} badgeColor="#fb923c">
               <p>
-                Terdapat 45 siswa di kelas 7C. Setelah didata: 30 suka olahraga, 28 suka seni,
-                dan <InlineMath math="x" /> orang suka keduanya. Jika ada 5 siswa yang tidak menyukai
-                keduanya, tentukan nilai <InlineMath math="x" />!
+                {t(`${p}.q14.pre`)}{' '}<InlineMath math="x" />{' '}{t(`${p}.q14.mid`)}{' '}<InlineMath math="x" />{t(`${p}.q14.end`)}
               </p>
             </Q>
 
-            <Q no={15} badge="HOTS 3 Himpunan" badgeColor="#fb923c">
-              <p>
-                Dari 100 siswa SMP:
-              </p>
+            <Q no={15} badge={t(`${p}.q15.badge`)} badgeColor="#fb923c">
+              <p>{t(`${p}.q15.intro`)}</p>
               <ul className="list-none mt-1 space-y-0.5 text-white/75 text-xs">
-                <li>• 55 suka musik</li>
-                <li>• 48 suka olahraga</li>
-                <li>• 42 suka membaca</li>
-                <li>• 22 suka musik dan olahraga</li>
-                <li>• 20 suka olahraga dan membaca</li>
-                <li>• 18 suka musik dan membaca</li>
-                <li>• 10 suka ketiganya</li>
+                <li>• {t(`${p}.q15.b1`)}</li>
+                <li>• {t(`${p}.q15.b2`)}</li>
+                <li>• {t(`${p}.q15.b3`)}</li>
+                <li>• {t(`${p}.q15.b4`)}</li>
+                <li>• {t(`${p}.q15.b5`)}</li>
+                <li>• {t(`${p}.q15.b6`)}</li>
+                <li>• {t(`${p}.q15.b7`)}</li>
               </ul>
               <p className="mt-2">
-                (a) Gambarkan diagram Venn-nya!<br/>
-                (b) Berapa siswa yang tidak menyukai satupun dari ketiga kegiatan tersebut?
+                (a) {t(`${p}.q15.subA`)}<br/>
+                (b) {t(`${p}.q15.subB`)}
               </p>
             </Q>
           </Section>
@@ -294,7 +295,7 @@ const DiagramVennLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Himpunan
+            {t(`${p}.backBtn`)}
           </button>
         </div>
       </div>

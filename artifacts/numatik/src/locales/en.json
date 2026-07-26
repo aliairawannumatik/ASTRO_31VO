@@ -3476,6 +3476,114 @@
           "badge": "UN Style",
           "instruction": "From the following statements, determine which are <strong>TRUE</strong>!"
         }
+      },
+      "diagramVenn": {
+        "title": "VENN DIAGRAM",
+        "topic": "Sets",
+        "backBtn": "Back to Sets",
+        "tipTitle": "How to Read a Venn Diagram",
+        "tipItem1": "Rectangle = universal set (S)",
+        "tipItem2": "Circle = one set",
+        "tipIrisan": "Intersection = ",
+        "tipLuar": "Outside circles but inside S = outside",
+        "sectionA": "Part A · Reading Venn Diagrams",
+        "sectionB": "Part B · Word Problems",
+        "sectionC": "Part C · Complex Applications",
+        "q1": {
+          "badge": "Completing",
+          "pre": "Complete the Venn diagram with the following data:",
+          "lalu": "Then find:"
+        },
+        "q2": {
+          "badge": "Reading",
+          "pre": "From the Venn diagram above, find:",
+          "itemG": "members of S not in A or B"
+        },
+        "q3": {
+          "badge": "UN Style",
+          "diketahui": "Given",
+          "post": "Draw the Venn diagram and find"
+        },
+        "q4": {
+          "badge": "Calculating",
+          "pre": "From the Venn diagram:",
+          "tentukan": "Find:",
+          "itemBPre": "Members only in ",
+          "itemBPost": "",
+          "itemDPre": "Members not in ",
+          "itemDMid": " or ",
+          "itemDPost": ""
+        },
+        "q5": {
+          "badge": "Finding",
+          "pre": "Given",
+          "setA": "= set of prime numbers less than 15",
+          "setB": "= set of odd numbers less than 12",
+          "tentukan": "Find:",
+          "itemD": "members of S not in"
+        },
+        "q6": {
+          "badge": "Survey",
+          "instruction": "Out of 40 students, 25 like Math, 20 like Science, and 8 like both. Complete the Venn diagram above and find how many students <strong>don't like either</strong>!"
+        },
+        "q7": {
+          "badge": "ANBK",
+          "pre": "In a family of 50 people: 30 have an Android phone, 25 have an iPhone, and 10 have both. Draw the Venn diagram and find:",
+          "subA": "How many people only have Android?",
+          "subB": "How many people have no phone at all?"
+        },
+        "q8": {
+          "badge": "Three Groups",
+          "data": "Of 60 competition participants: 30 joined running, 25 joined swimming, 20 joined cycling. 10 joined running and swimming, 8 joined swimming and cycling, 7 joined running and cycling, and 4 joined all three.",
+          "tentukan": "Find how many participants: ",
+          "itemA": "only joined 1 competition",
+          "itemB": "joined exactly 2 competitions",
+          "itemC": "joined none of the competitions"
+        },
+        "q9": {
+          "badge": "UN 2021",
+          "pre": "From a Venn diagram, given",
+          "post": "Find"
+        },
+        "q10": {
+          "badge": "TKA",
+          "instruction": "From a survey of 100 respondents: 60 like coffee, 50 like tea, and 20 like both. What percentage of respondents like neither coffee nor tea?"
+        },
+        "q11": {
+          "badge": "Contextual",
+          "pre": "Exam scores of 30 students were checked. Results: 18 passed Math, 22 passed Indonesian Language, and 12 passed both. Draw the Venn diagram and find:",
+          "subA": "How many passed Math only?",
+          "subB": "How many failed both?"
+        },
+        "q12": {
+          "badge": "HOTS",
+          "instruction": "Of 80 exhibition visitors: 45 viewed paintings, 40 viewed sculptures, and 25 viewed both. A visitor is chosen at random. What percentage chance is there that the visitor <strong>only viewed sculptures</strong>?"
+        },
+        "q13": {
+          "badge": "Finding Members",
+          "pre": "Given",
+          "dan": "and",
+          "post": "Find"
+        },
+        "q14": {
+          "badge": "UN 2022",
+          "pre": "There are 45 students in class 7C. After a survey: 30 like sports, 28 like arts, and",
+          "mid": "students like both. If 5 students like neither, find the value of",
+          "end": "!"
+        },
+        "q15": {
+          "badge": "HOTS 3 Sets",
+          "intro": "From 100 junior high students:",
+          "b1": "55 like music",
+          "b2": "48 like sports",
+          "b3": "42 like reading",
+          "b4": "22 like music and sports",
+          "b5": "20 like sports and reading",
+          "b6": "18 like music and reading",
+          "b7": "10 like all three",
+          "subA": "Draw the Venn diagram!",
+          "subB": "How many students don't like any of the three activities?"
+        }
       }
     }
   },

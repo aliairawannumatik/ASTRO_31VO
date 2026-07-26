@@ -3476,6 +3476,114 @@
           "badge": "UN Style",
           "instruction": "Dari pernyataan berikut, tentukan yang <strong>BENAR</strong>!"
         }
+      },
+      "diagramVenn": {
+        "title": "DIAGRAM VENN",
+        "topic": "Himpunan",
+        "backBtn": "Kembali ke Himpunan",
+        "tipTitle": "Cara Membaca Diagram Venn",
+        "tipItem1": "Persegi = himpunan semesta (S)",
+        "tipItem2": "Lingkaran = satu himpunan",
+        "tipIrisan": "Irisan = ",
+        "tipLuar": "Di luar lingkaran tapi dalam S = di luar",
+        "sectionA": "Bagian A · Membaca Diagram Venn",
+        "sectionB": "Bagian B · Soal Cerita Diagram Venn",
+        "sectionC": "Bagian C · Aplikasi Kompleks",
+        "q1": {
+          "badge": "Melengkapi",
+          "pre": "Lengkapi diagram Venn dengan data berikut:",
+          "lalu": "Lalu tentukan:"
+        },
+        "q2": {
+          "badge": "Membaca",
+          "pre": "Dari diagram Venn di atas, tentukan:",
+          "itemG": "anggota S yang tidak ada di A maupun B"
+        },
+        "q3": {
+          "badge": "UN Style",
+          "diketahui": "Diketahui",
+          "post": "Gambarkan diagram Venn-nya dan tentukan"
+        },
+        "q4": {
+          "badge": "Menghitung",
+          "pre": "Diketahui dari diagram Venn:",
+          "tentukan": "Tentukan:",
+          "itemBPre": "Banyak anggota yang hanya ada di ",
+          "itemBPost": "",
+          "itemDPre": "Banyak anggota yang tidak ada di ",
+          "itemDMid": " maupun ",
+          "itemDPost": ""
+        },
+        "q5": {
+          "badge": "Menentukan",
+          "pre": "Diketahui",
+          "setA": "= himpunan bilangan prima kurang dari 15",
+          "setB": "= himpunan bilangan ganjil kurang dari 12",
+          "tentukan": "Tentukan:",
+          "itemD": "banyak anggota S yang tidak masuk"
+        },
+        "q6": {
+          "badge": "Survei",
+          "instruction": "Dari 40 siswa, 25 suka Matematika, 20 suka IPA, dan 8 suka keduanya. Lengkapi diagram Venn di atas dan tentukan berapa siswa yang <strong>tidak suka keduanya</strong>!"
+        },
+        "q7": {
+          "badge": "ANBK",
+          "pre": "Dalam satu keluarga terdapat 50 orang. Dari mereka 30 orang punya HP Android, 25 orang punya HP iPhone, dan 10 orang punya keduanya. Buat diagram Venn dan tentukan:",
+          "subA": "Berapa orang yang hanya punya Android?",
+          "subB": "Berapa orang yang tidak punya HP sama sekali?"
+        },
+        "q8": {
+          "badge": "Tiga Kelompok",
+          "data": "Dari 60 peserta lomba: 30 ikut lomba lari, 25 ikut renang, 20 ikut bersepeda. 10 ikut lari dan renang, 8 ikut renang dan bersepeda, 7 ikut lari dan bersepeda, dan 4 orang ikut ketiganya.",
+          "tentukan": "Tentukan berapa peserta yang: ",
+          "itemA": "hanya ikut 1 lomba",
+          "itemB": "ikut tepat 2 lomba",
+          "itemC": "tidak ikut satupun lomba"
+        },
+        "q9": {
+          "badge": "UN 2021",
+          "pre": "Dari diagram Venn diketahui",
+          "post": "Tentukan"
+        },
+        "q10": {
+          "badge": "TKA",
+          "instruction": "Diketahui dari survei 100 responden: 60 suka kopi, 50 suka teh, dan 20 suka keduanya. Berapa persen responden yang tidak suka kopi maupun teh?"
+        },
+        "q11": {
+          "badge": "Kontekstual",
+          "pre": "Nilai ujian 30 siswa diperiksa. Hasilnya: 18 lulus Matematika, 22 lulus Bahasa Indonesia, dan 12 lulus keduanya. Gambarlah diagram Venn situasi ini dan tentukan:",
+          "subA": "Berapa yang hanya lulus Matematika?",
+          "subB": "Berapa yang tidak lulus keduanya?"
+        },
+        "q12": {
+          "badge": "HOTS",
+          "instruction": "Dari 80 pengunjung pameran: 45 melihat lukisan, 40 melihat patung, dan 25 melihat keduanya. Seorang pengunjung dipilih secara acak. Berapa persen kemungkinan pengunjung tersebut <strong>hanya melihat patung</strong>?"
+        },
+        "q13": {
+          "badge": "Mencari Anggota",
+          "pre": "Diketahui",
+          "dan": "dan",
+          "post": "Tentukan"
+        },
+        "q14": {
+          "badge": "UN 2022",
+          "pre": "Terdapat 45 siswa di kelas 7C. Setelah didata: 30 suka olahraga, 28 suka seni, dan",
+          "mid": "orang suka keduanya. Jika ada 5 siswa yang tidak menyukai keduanya, tentukan nilai",
+          "end": "!"
+        },
+        "q15": {
+          "badge": "HOTS 3 Himpunan",
+          "intro": "Dari 100 siswa SMP:",
+          "b1": "55 suka musik",
+          "b2": "48 suka olahraga",
+          "b3": "42 suka membaca",
+          "b4": "22 suka musik dan olahraga",
+          "b5": "20 suka olahraga dan membaca",
+          "b6": "18 suka musik dan membaca",
+          "b7": "10 suka ketiganya",
+          "subA": "Gambarkan diagram Venn-nya!",
+          "subB": "Berapa siswa yang tidak menyukai satupun dari ketiga kegiatan tersebut?"
+        }
       }
     }
   },
