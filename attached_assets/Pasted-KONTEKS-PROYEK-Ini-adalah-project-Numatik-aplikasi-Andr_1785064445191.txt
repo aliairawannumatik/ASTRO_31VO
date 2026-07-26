@@ -1,0 +1,65 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Relasi dan Fungsi" —
+index dan PengertianRelasiPage.tsx (8 soal) sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- SVG <text> elements TIDAK diterjemahkan sama sekali — biarkan
+  hardcode Indonesia
+- JANGAN sentuh ArrowDiagram.tsx (komponen helper, dipakai di halaman
+  ini) — hanya panggil komponennya, jangan ubah isinya
+- Hindari heredoc dengan karakter emoji langsung di bash (ini pernah
+  menyebabkan file korup sebelumnya) — kalau perlu menyisipkan emoji
+  di locale JSON, gunakan pendekatan yang aman (misal Python script
+  dengan encoding eksplisit UTF-8, atau str_replace langsung), BUKAN
+  bash heredoc biasa
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: PengertianFungsiPage.tsx (7 soal).
+
+KONTEKS KHUSUS FILE INI:
+- Format data: array questions: Q[] via .map() — ikuti pola yang
+  sudah terbukti di PengertianRelasiPage.tsx
+- Halaman ini pakai isDark (useTheme) untuk conditional className —
+  WAJIB dipertahankan persis seperti semula
+- 4 dari 7 soal pakai diagram:
+  * Soal 1-3: <ArrowDiagram /> komponen (JANGAN ubah komponennya,
+    hanya panggilan/props-nya kalau ada teks yang perlu diteruskan)
+  * Soal 4: grid 6 <SmallArrow /> (2×3)
+  * Soal 6: grid 6 <CoordGraph /> (2×3)
+  SEMUA teks di dalam SVG <text> (termasuk di dalam ArrowDiagram,
+  SmallArrow, CoordGraph) JANGAN diterjemahkan, biarkan hardcode
+  Indonesia
+- Kalau ada caption/label HTML biasa di luar SVG (bukan <text> SVG)
+  terkait diagram-diagram ini, itu WAJIB diterjemahkan — ikuti pola
+  q8.diagramCaption dari PengertianRelasiPage
+- Berdasarkan investigasi awal, halaman ini TIDAK punya kasus \text{}
+  bahasa Indonesia — tapi tetap WAJIB grep "\\text{" untuk memastikan
+
+1. Terjemahkan SEMUA teks: instruksi umum (kalau ada), teks 7 soal
+   (title, content, parts[].text), caption diagram HTML (kalau ada)
+2. Kalau ditemukan kasus \text{} yang belum terdeteksi, tangani
+   dengan pola textKey/danWord yang sudah terbukti
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.relasiDanFungsi.pengertianFungsi.*
+5. JANGAN sentuh sub-halaman lain, halaman index, atau ArrowDiagram.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q7)
+- Jalankan grep "\\text{" untuk konfirmasi memang 0 kasus (atau
+  laporkan kalau ternyata ada)
+- Konfirmasi eksplisit: SEMUA 7 soal sudah diterjemahkan, semua SVG/
+  komponen diagram (ArrowDiagram, SmallArrow, CoordGraph) teksnya
+  tidak disentuh, isDark tetap terjaga

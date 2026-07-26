@@ -63,8 +63,8 @@ const SmallArrow = ({
 const domABCDE = ['a','b','c','d','e'];
 const cod12345 = ['1','2','3','4','5'];
 
-/* ── Q1 diagrams ── */
-const diagramsQ1: { label: string; arrows: [number,number][] }[] = [
+/* ── Q4 diagrams ── */
+const diagramsQ4: { label: string; arrows: [number,number][] }[] = [
   { label: 'a.', arrows: [[0,0],[1,1],[2,2],[3,3]] },           // e not mapped → NOT fn
   { label: 'b.', arrows: [[0,0],[1,0],[2,1],[3,2],[4,3]] },     // many-to-one → FUNCTION
   { label: 'c.', arrows: [[0,0],[1,1],[1,2],[2,3],[3,4],[4,0]] },// b→two → NOT fn
@@ -73,7 +73,7 @@ const diagramsQ1: { label: string; arrows: [number,number][] }[] = [
   { label: 'f.', arrows: [[0,0],[1,1],[2,2],[2,3],[3,4],[4,4]] },// c→two → NOT fn
 ];
 
-/* ── Q4 mini coordinate SVGs ── */
+/* ── Q6 mini coordinate SVGs ── */
 const CoordGraph = ({ id, children }: { id: string; children: React.ReactNode }) => {
   const { isDark } = useTheme();
   const svgBg = isDark ? "#1e293b" : "white";
@@ -105,152 +105,152 @@ const CoordGraph = ({ id, children }: { id: string; children: React.ReactNode })
   );
 };
 
-const questions: Q[] = [
-  /* ── Q1 (was Q6) ── */
-  Qn(1, "Fungsi dari Diagram Panah Tunggal", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c','d','e']} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#34d399" colorB="#f472b6" arrowColor="#facc15" />,
-    parts: [
-      { label: "a.", text: "Apakah diagram panah di atas menyatakan fungsi? Jelaskan alasanmu." },
-      { label: "b.", text: "Apakah ini fungsi surjektif (onto)? Mengapa?" },
-      { label: "c.", text: "Tentukan domain, kodomain, dan range." },
-    ],
-  }),
-  /* ── Q2 (was Q7) ── */
-  Qn(2, "Bukan Fungsi – Satu ke Banyak", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3]} setB={['p','q','r','s']} arrows={[[0,0],[0,1],[1,2],[2,3]]} labelA="A" labelB="B" colorA="#f87171" colorB="#60a5fa" arrowColor="#fb923c" />,
-    parts: [
-      { label: "a.", text: "Apakah diagram di atas merupakan fungsi? Berikan alasanmu." },
-      { label: "b.", text: "Anggota A mana yang melanggar syarat fungsi?" },
-      { label: "c.", text: "Ubah diagram agar menjadi fungsi (hapus minimal satu panah). Pilih mana yang dihapus." },
-    ],
-  }),
-  /* ── Q3 (was Q8) ── */
-  Qn(3, "Bukan Fungsi – Ada yang Tidak Dipetakan", {
-    type: "mixed",
-    diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c']} arrows={[[0,0],[1,1],[2,2]]} labelA="A" labelB="B" colorA="#f87171" colorB="#a78bfa" arrowColor="#f472b6" />,
-    parts: [
-      { label: "a.", text: "Apakah diagram di atas merupakan fungsi? Jelaskan." },
-      { label: "b.", text: "Anggota A mana yang tidak memiliki pasangan?" },
-      { label: "c.", text: "Apa yang perlu diperbaiki agar relasi ini menjadi fungsi?" },
-    ],
-  }),
-  /* ── Q4 (was Q1) ── */
-  Qn(4, "Manakah Diagram Panah yang Merupakan Fungsi?", {
-    type: "mixed",
-    content: "Perhatikan keenam diagram panah berikut. Himpunan A = {a, b, c, d, e} sebagai domain dan himpunan B = {1, 2, 3, 4, 5} sebagai kodomain.",
-    diagram: (
-      <div className="grid grid-cols-2 gap-3 w-full">
-        {diagramsQ1.map(({ label, arrows }) => (
-          <div key={label} className="flex flex-col items-center">
-            <span className="text-xs font-bold text-muted-foreground mb-1">{label}</span>
-            <SmallArrow id={`f1${label.replace('.','')}`} domainLabels={domABCDE} codomainLabels={cod12345} arrows={arrows} />
-          </div>
-        ))}
-      </div>
-    ),
-    parts: [
-      { label: "a.", text: "Sebutkan huruf-huruf diagram yang merupakan fungsi." },
-      { label: "b.", text: "Untuk setiap diagram yang bukan fungsi, jelaskan alasannya." },
-    ],
-  }),
-
-  /* ── Q5 (was Q2) ── */
-  Qn(5, "Diagram Panah dari Himpunan Pasangan Berurutan", {
-    type: "mixed",
-    content: "Gambarlah diagram panah untuk setiap relasi berikut, kemudian tentukan manakah yang merupakan fungsi. Berikan alasanmu!",
-    parts: [
-      { label: "a.", text: "R = {(Aldo, Merah), (Bella, Biru), (Candra, Merah), (Dita, Hijau), (Eka, Kuning)}" },
-      { label: "b.", text: "R = {(Rio, Basket), (Rio, Renang), (Sari, Voli), (Tono, Basket), (Uni, Badminton)}" },
-      { label: "c.", text: "R = {(2, 1), (4, 2), (6, 3), (8, 4), (10, 5)}" },
-      { label: "d.", text: "R = {(Senin, Matematika), (Selasa, IPA), (Rabu, Matematika), (Kamis, IPS), (Jumat, Seni)}" },
-      { label: "e.", text: "R = {(1, 2), (2, 4), (3, 2), (4, 4), (5, 2)}" },
-    ],
-  }),
-  /* ── Q6 ── */
-  Qn(6, "Grafik Fungsi dalam Koordinat Kartesius", {
-    type: "mixed",
-    content: "Di antara keenam grafik berikut, manakah yang merupakan grafik fungsi y terhadap x? Jelaskan!",
-    diagram: (
-      <div className="grid grid-cols-2 gap-3 w-full">
-        {/* a. Garis lurus menurun → FUNGSI */}
-        <div className="flex flex-col items-center">
-          <span className="text-xs font-bold text-muted-foreground mb-1">a.</span>
-          <CoordGraph id="gax">
-            {/* y = -0.7x + 4.2 : (0,4.2)→(5,0.7) */}
-            <line x1="22" y1={118-4.2*20} x2="122" y2={118-0.7*20} stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" />
-          </CoordGraph>
-        </div>
-        {/* b. Parabola miring ke kanan (x=y²/5) → BUKAN FUNGSI */}
-        <div className="flex flex-col items-center">
-          <span className="text-xs font-bold text-muted-foreground mb-1">b.</span>
-          <CoordGraph id="gbx">
-            {/* C-shape: x=(y-2.5)²/3.5+0.3, y=0..5 */}
-            <polyline points="67,118 54,105 44,95 37,85 32,75 31,65 32,55 37,45 44,35 54,25 67,15"
-              fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </CoordGraph>
-        </div>
-        {/* c. Parabola terbuka ke atas → FUNGSI */}
-        <div className="flex flex-col items-center">
-          <span className="text-xs font-bold text-muted-foreground mb-1">c.</span>
-          <CoordGraph id="gcx">
-            {/* y=x²/5: (0,0),(1,0.2),(2,0.8),(3,1.8),(4,3.2),(5,5) */}
-            <polyline points="22,118 42,114 62,102 82,82 102,54 122,18"
-              fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </CoordGraph>
-        </div>
-        {/* d. Lingkaran → BUKAN FUNGSI */}
-        <div className="flex flex-col items-center">
-          <span className="text-xs font-bold text-muted-foreground mb-1">d.</span>
-          <CoordGraph id="gdx">
-            {/* circle center (2.5,2.5) r=2 → SVG (72,68) r=40 */}
-            <circle cx="72" cy="68" r="40" fill="none" stroke="#3b82f6" strokeWidth="2" />
-          </CoordGraph>
-        </div>
-        {/* e. Kurva S (kubik) → FUNGSI */}
-        <div className="flex flex-col items-center">
-          <span className="text-xs font-bold text-muted-foreground mb-1">e.</span>
-          <CoordGraph id="gex">
-            {/* S-curve cubic y=(x-2.5)³/3.5+2.5 */}
-            <polyline points="34,118 44,90 55,73 65,67 72,65 82,64 95,59 105,46 116,20"
-              fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </CoordGraph>
-        </div>
-        {/* f. Parabola terbuka ke bawah → FUNGSI */}
-        <div className="flex flex-col items-center">
-          <span className="text-xs font-bold text-muted-foreground mb-1">f.</span>
-          <CoordGraph id="gfx">
-            {/* arc: y=-(x-2.5)²/5+4.5 */}
-            <polyline points="22,52 42,35 62,28 72,25 82,28 102,35 122,52"
-              fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </CoordGraph>
-        </div>
-      </div>
-    ),
-    parts: [
-      { label: "a.", text: "Sebutkan grafik mana saja yang merupakan grafik fungsi y terhadap x." },
-      { label: "b.", text: "Berdasarkan pengamatanmu, apa ciri-ciri yang harus dipenuhi agar sebuah grafik merupakan grafik fungsi dalam x? (Petunjuk: gunakan uji garis tegak lurus / vertical line test)" },
-    ],
-  }),
-
-  /* ── Q7 ── */
-  Qn(7, "Relasi yang Pasti Merupakan Fungsi", {
-    type: "mixed",
-    content: "Manakah di antara relasi-relasi berikut yang pasti merupakan suatu fungsi? Jelaskan alasanmu untuk setiap pilihan.",
-    parts: [
-      { label: "a.", text: "R adalah relasi antara setiap siswa di suatu kelas dengan nomor absen mereka." },
-      { label: "b.", text: "R adalah relasi antara setiap orang tua dengan anak-anak kandung mereka." },
-      { label: "c.", text: "R adalah relasi antara setiap siswa dengan tinggi badan mereka (diukur satu kali pada waktu yang sama)." },
-      { label: "d.", text: "R adalah relasi antara setiap siswa dengan mata pelajaran yang mereka sukai." },
-    ],
-  }),
-];
-
 const PengertianFungsiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { isDark } = useTheme();
+  const p = "practice.relasiDanFungsi.pengertianFungsi";
+
+  const questions: Q[] = [
+    /* ── Q1 ── */
+    Qn(1, t(`${p}.q1.title`), {
+      type: "mixed",
+      diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c','d','e']} arrows={[[0,0],[1,1],[2,2],[3,3]]} labelA="A" labelB="B" colorA="#34d399" colorB="#f472b6" arrowColor="#facc15" />,
+      parts: [
+        { label: "a.", text: t(`${p}.q1.a`) },
+        { label: "b.", text: t(`${p}.q1.b`) },
+        { label: "c.", text: t(`${p}.q1.c`) },
+      ],
+    }),
+    /* ── Q2 ── */
+    Qn(2, t(`${p}.q2.title`), {
+      type: "mixed",
+      diagram: <ArrowDiagram setA={[1,2,3]} setB={['p','q','r','s']} arrows={[[0,0],[0,1],[1,2],[2,3]]} labelA="A" labelB="B" colorA="#f87171" colorB="#60a5fa" arrowColor="#fb923c" />,
+      parts: [
+        { label: "a.", text: t(`${p}.q2.a`) },
+        { label: "b.", text: t(`${p}.q2.b`) },
+        { label: "c.", text: t(`${p}.q2.c`) },
+      ],
+    }),
+    /* ── Q3 ── */
+    Qn(3, t(`${p}.q3.title`), {
+      type: "mixed",
+      diagram: <ArrowDiagram setA={[1,2,3,4]} setB={['a','b','c']} arrows={[[0,0],[1,1],[2,2]]} labelA="A" labelB="B" colorA="#f87171" colorB="#a78bfa" arrowColor="#f472b6" />,
+      parts: [
+        { label: "a.", text: t(`${p}.q3.a`) },
+        { label: "b.", text: t(`${p}.q3.b`) },
+        { label: "c.", text: t(`${p}.q3.c`) },
+      ],
+    }),
+    /* ── Q4 ── */
+    Qn(4, t(`${p}.q4.title`), {
+      type: "mixed",
+      content: t(`${p}.q4.content`),
+      diagram: (
+        <div className="grid grid-cols-2 gap-3 w-full">
+          {diagramsQ4.map(({ label, arrows }) => (
+            <div key={label} className="flex flex-col items-center">
+              <span className="text-xs font-bold text-muted-foreground mb-1">{label}</span>
+              <SmallArrow id={`f1${label.replace('.','')}`} domainLabels={domABCDE} codomainLabels={cod12345} arrows={arrows} />
+            </div>
+          ))}
+        </div>
+      ),
+      parts: [
+        { label: "a.", text: t(`${p}.q4.a`) },
+        { label: "b.", text: t(`${p}.q4.b`) },
+      ],
+    }),
+    /* ── Q5 ── */
+    Qn(5, t(`${p}.q5.title`), {
+      type: "mixed",
+      content: t(`${p}.q5.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q5.a`) },
+        { label: "b.", text: t(`${p}.q5.b`) },
+        { label: "c.", text: t(`${p}.q5.c`) },
+        { label: "d.", text: t(`${p}.q5.d`) },
+        { label: "e.", text: t(`${p}.q5.e`) },
+      ],
+    }),
+    /* ── Q6 ── */
+    Qn(6, t(`${p}.q6.title`), {
+      type: "mixed",
+      content: t(`${p}.q6.content`),
+      diagram: (
+        <div className="grid grid-cols-2 gap-3 w-full">
+          {/* a. Garis lurus menurun → FUNGSI */}
+          <div className="flex flex-col items-center">
+            <span className="text-xs font-bold text-muted-foreground mb-1">a.</span>
+            <CoordGraph id="gax">
+              {/* y = -0.7x + 4.2 : (0,4.2)→(5,0.7) */}
+              <line x1="22" y1={118-4.2*20} x2="122" y2={118-0.7*20} stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" />
+            </CoordGraph>
+          </div>
+          {/* b. Parabola miring ke kanan (x=y²/5) → BUKAN FUNGSI */}
+          <div className="flex flex-col items-center">
+            <span className="text-xs font-bold text-muted-foreground mb-1">b.</span>
+            <CoordGraph id="gbx">
+              {/* C-shape: x=(y-2.5)²/3.5+0.3, y=0..5 */}
+              <polyline points="67,118 54,105 44,95 37,85 32,75 31,65 32,55 37,45 44,35 54,25 67,15"
+                fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </CoordGraph>
+          </div>
+          {/* c. Parabola terbuka ke atas → FUNGSI */}
+          <div className="flex flex-col items-center">
+            <span className="text-xs font-bold text-muted-foreground mb-1">c.</span>
+            <CoordGraph id="gcx">
+              {/* y=x²/5: (0,0),(1,0.2),(2,0.8),(3,1.8),(4,3.2),(5,5) */}
+              <polyline points="22,118 42,114 62,102 82,82 102,54 122,18"
+                fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </CoordGraph>
+          </div>
+          {/* d. Lingkaran → BUKAN FUNGSI */}
+          <div className="flex flex-col items-center">
+            <span className="text-xs font-bold text-muted-foreground mb-1">d.</span>
+            <CoordGraph id="gdx">
+              {/* circle center (2.5,2.5) r=2 → SVG (72,68) r=40 */}
+              <circle cx="72" cy="68" r="40" fill="none" stroke="#3b82f6" strokeWidth="2" />
+            </CoordGraph>
+          </div>
+          {/* e. Kurva S (kubik) → FUNGSI */}
+          <div className="flex flex-col items-center">
+            <span className="text-xs font-bold text-muted-foreground mb-1">e.</span>
+            <CoordGraph id="gex">
+              {/* S-curve cubic y=(x-2.5)³/3.5+2.5 */}
+              <polyline points="34,118 44,90 55,73 65,67 72,65 82,64 95,59 105,46 116,20"
+                fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </CoordGraph>
+          </div>
+          {/* f. Parabola terbuka ke bawah → FUNGSI */}
+          <div className="flex flex-col items-center">
+            <span className="text-xs font-bold text-muted-foreground mb-1">f.</span>
+            <CoordGraph id="gfx">
+              {/* arc: y=-(x-2.5)²/5+4.5 */}
+              <polyline points="22,52 42,35 62,28 72,25 82,28 102,35 122,52"
+                fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </CoordGraph>
+          </div>
+        </div>
+      ),
+      parts: [
+        { label: "a.", text: t(`${p}.q6.a`) },
+        { label: "b.", text: t(`${p}.q6.b`) },
+      ],
+    }),
+    /* ── Q7 ── */
+    Qn(7, t(`${p}.q7.title`), {
+      type: "mixed",
+      content: t(`${p}.q7.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q7.a`) },
+        { label: "b.", text: t(`${p}.q7.b`) },
+        { label: "c.", text: t(`${p}.q7.c`) },
+        { label: "d.", text: t(`${p}.q7.d`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -262,9 +262,9 @@ const PengertianFungsiPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-emerald-300 text-center mb-1"
             style={{ textShadow: '0 0 20px rgba(52,211,153,0.7)' }}>
-            PENGERTIAN FUNGSI DAN PENYAJIANNYA
+            {t(`${p}.h1`)}
           </h1>
-          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>Kelas 8 · Relasi dan Fungsi · {t('practice.breadcrumb')}</p>
+          <p className={`${isDark ? "text-white/50" : "text-gray-500"} text-xs text-center font-body`}>{t(`${p}.grade`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-4 py-2">
             <span className="text-emerald-400 text-xs font-bold">📋 7 {t('practice.suffixSoal')}</span>
             <span className={`${isDark ? "text-white/30" : "text-gray-400"} text-xs`}>·</span>
@@ -273,13 +273,9 @@ const PengertianFungsiPage = () => {
         </div>
 
         <div className={`mb-5 ${isDark ? "bg-emerald-900/20" : "bg-emerald-50"} border border-emerald-500/20 rounded-xl p-4`}>
-          <p className="text-emerald-300 text-xs font-bold mb-2">📌 Syarat Fungsi</p>
+          <p className="text-emerald-300 text-xs font-bold mb-2">{t(`${p}.tipTitle`)}</p>
           <div className="grid grid-cols-1 gap-2 text-xs font-body">
-            {[
-              "Setiap anggota domain dipasangkan ke TEPAT SATU anggota kodomain",
-              "Tidak boleh ada anggota domain yang tidak memiliki pasangan",
-              "Boleh ada anggota kodomain yang tidak dipasangkan (bukan range)",
-            ].map((s, i) => (
+            {[t(`${p}.tip1`), t(`${p}.tip2`), t(`${p}.tip3`)].map((s, i) => (
               <div key={i} className="bg-white/5 rounded-lg px-3 py-2 flex gap-2">
                 <span className="text-emerald-400 font-bold shrink-0">{i+1}.</span>
                 <span className={isDark ? "text-white/60" : "text-gray-600"}>{s}</span>
@@ -329,7 +325,7 @@ const PengertianFungsiPage = () => {
         <div className="mt-8 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/relasi-dan-fungsi"); }}
             className="text-sm text-muted-foreground hover:text-emerald-400 transition-colors cursor-pointer font-body">
-            {t('practice.backTo')} Relasi dan Fungsi
+            {t('practice.backTo')} {t(`${p}.backToTopic`)}
           </button>
         </div>
       </div>

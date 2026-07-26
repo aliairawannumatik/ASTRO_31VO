@@ -4438,6 +4438,62 @@
           "a": "Tuliskan relasi di atas dalam bentuk himpunan pasangan berurutan.",
           "b": "Tentukan aturan relasi yang menghubungkan himpunan A ke himpunan B."
         }
+      },
+      "pengertianFungsi": {
+        "h1": "PENGERTIAN FUNGSI DAN PENYAJIANNYA",
+        "grade": "Kelas 8 · Relasi dan Fungsi",
+        "tipTitle": "📌 Syarat Fungsi",
+        "tip1": "Setiap anggota domain dipasangkan ke TEPAT SATU anggota kodomain",
+        "tip2": "Tidak boleh ada anggota domain yang tidak memiliki pasangan",
+        "tip3": "Boleh ada anggota kodomain yang tidak dipasangkan (bukan range)",
+        "backToTopic": "Relasi dan Fungsi",
+        "q1": {
+          "title": "Fungsi dari Diagram Panah Tunggal",
+          "a": "Apakah diagram panah di atas menyatakan fungsi? Jelaskan alasanmu.",
+          "b": "Apakah ini fungsi surjektif (onto)? Mengapa?",
+          "c": "Tentukan domain, kodomain, dan range."
+        },
+        "q2": {
+          "title": "Bukan Fungsi – Satu ke Banyak",
+          "a": "Apakah diagram di atas merupakan fungsi? Berikan alasanmu.",
+          "b": "Anggota A mana yang melanggar syarat fungsi?",
+          "c": "Ubah diagram agar menjadi fungsi (hapus minimal satu panah). Pilih mana yang dihapus."
+        },
+        "q3": {
+          "title": "Bukan Fungsi – Ada yang Tidak Dipetakan",
+          "a": "Apakah diagram di atas merupakan fungsi? Jelaskan.",
+          "b": "Anggota A mana yang tidak memiliki pasangan?",
+          "c": "Apa yang perlu diperbaiki agar relasi ini menjadi fungsi?"
+        },
+        "q4": {
+          "title": "Manakah Diagram Panah yang Merupakan Fungsi?",
+          "content": "Perhatikan keenam diagram panah berikut. Himpunan A = {a, b, c, d, e} sebagai domain dan himpunan B = {1, 2, 3, 4, 5} sebagai kodomain.",
+          "a": "Sebutkan huruf-huruf diagram yang merupakan fungsi.",
+          "b": "Untuk setiap diagram yang bukan fungsi, jelaskan alasannya."
+        },
+        "q5": {
+          "title": "Diagram Panah dari Himpunan Pasangan Berurutan",
+          "content": "Gambarlah diagram panah untuk setiap relasi berikut, kemudian tentukan manakah yang merupakan fungsi. Berikan alasanmu!",
+          "a": "R = {(Aldo, Merah), (Bella, Biru), (Candra, Merah), (Dita, Hijau), (Eka, Kuning)}",
+          "b": "R = {(Rio, Basket), (Rio, Renang), (Sari, Voli), (Tono, Basket), (Uni, Badminton)}",
+          "c": "R = {(2, 1), (4, 2), (6, 3), (8, 4), (10, 5)}",
+          "d": "R = {(Senin, Matematika), (Selasa, IPA), (Rabu, Matematika), (Kamis, IPS), (Jumat, Seni)}",
+          "e": "R = {(1, 2), (2, 4), (3, 2), (4, 4), (5, 2)}"
+        },
+        "q6": {
+          "title": "Grafik Fungsi dalam Koordinat Kartesius",
+          "content": "Di antara keenam grafik berikut, manakah yang merupakan grafik fungsi y terhadap x? Jelaskan!",
+          "a": "Sebutkan grafik mana saja yang merupakan grafik fungsi y terhadap x.",
+          "b": "Berdasarkan pengamatanmu, apa ciri-ciri yang harus dipenuhi agar sebuah grafik merupakan grafik fungsi dalam x? (Petunjuk: gunakan uji garis tegak lurus / vertical line test)"
+        },
+        "q7": {
+          "title": "Relasi yang Pasti Merupakan Fungsi",
+          "content": "Manakah di antara relasi-relasi berikut yang pasti merupakan suatu fungsi? Jelaskan alasanmu untuk setiap pilihan.",
+          "a": "R adalah relasi antara setiap siswa di suatu kelas dengan nomor absen mereka.",
+          "b": "R adalah relasi antara setiap orang tua dengan anak-anak kandung mereka.",
+          "c": "R adalah relasi antara setiap siswa dengan tinggi badan mereka (diukur satu kali pada waktu yang sama).",
+          "d": "R adalah relasi antara setiap siswa dengan mata pelajaran yang mereka sukai."
+        }
       }
     }
   },

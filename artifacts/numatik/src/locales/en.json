@@ -4438,6 +4438,62 @@
           "a": "Write the relation above as a set of ordered pairs.",
           "b": "Determine the relation rule connecting set A to set B."
         }
+      },
+      "pengertianFungsi": {
+        "h1": "UNDERSTANDING FUNCTIONS AND THEIR REPRESENTATIONS",
+        "grade": "Grade 8 · Relations and Functions",
+        "tipTitle": "📌 Function Conditions",
+        "tip1": "Every domain member must be paired with EXACTLY ONE codomain member",
+        "tip2": "No domain member may be left without a pair",
+        "tip3": "Codomain members may be left unpaired (they are not in the range)",
+        "backToTopic": "Relations and Functions",
+        "q1": {
+          "title": "Function from a Single Arrow Diagram",
+          "a": "Does the arrow diagram above represent a function? Explain your reasoning.",
+          "b": "Is this a surjective (onto) function? Why?",
+          "c": "Determine the domain, codomain, and range."
+        },
+        "q2": {
+          "title": "Not a Function – One to Many",
+          "a": "Does the diagram above represent a function? Give your reason.",
+          "b": "Which member of A violates the function condition?",
+          "c": "Modify the diagram to make it a function (remove at least one arrow). Choose which one to remove."
+        },
+        "q3": {
+          "title": "Not a Function – An Element Left Unmapped",
+          "a": "Does the diagram above represent a function? Explain.",
+          "b": "Which member of A has no partner?",
+          "c": "What needs to be fixed so that this relation becomes a function?"
+        },
+        "q4": {
+          "title": "Which Arrow Diagrams Represent a Function?",
+          "content": "Study the six arrow diagrams below. Set A = {a, b, c, d, e} is the domain and set B = {1, 2, 3, 4, 5} is the codomain.",
+          "a": "Name the diagrams that represent a function.",
+          "b": "For each diagram that is not a function, explain why."
+        },
+        "q5": {
+          "title": "Arrow Diagrams from Sets of Ordered Pairs",
+          "content": "Draw an arrow diagram for each relation below, then determine which ones are functions. Give your reasons!",
+          "a": "R = {(Aldo, Red), (Bella, Blue), (Candra, Red), (Dita, Green), (Eka, Yellow)}",
+          "b": "R = {(Rio, Basketball), (Rio, Swimming), (Sari, Volleyball), (Tono, Basketball), (Uni, Badminton)}",
+          "c": "R = {(2, 1), (4, 2), (6, 3), (8, 4), (10, 5)}",
+          "d": "R = {(Monday, Math), (Tuesday, Science), (Wednesday, Math), (Thursday, Social Studies), (Friday, Arts)}",
+          "e": "R = {(1, 2), (2, 4), (3, 2), (4, 4), (5, 2)}"
+        },
+        "q6": {
+          "title": "Function Graphs in the Cartesian Coordinate System",
+          "content": "Among the six graphs below, which represent a function of y with respect to x? Explain!",
+          "a": "Name all graphs that represent a function of y with respect to x.",
+          "b": "Based on your observation, what condition must a graph satisfy to be a function in x? (Hint: use the vertical line test)"
+        },
+        "q7": {
+          "title": "Relations That Are Definitely Functions",
+          "content": "Which of the following relations are definitely a function? Explain your reasoning for each.",
+          "a": "R is the relation between every student in a class and their attendance number.",
+          "b": "R is the relation between every parent and their biological children.",
+          "c": "R is the relation between every student and their height (measured once at the same time).",
+          "d": "R is the relation between every student and the subject they like."
+        }
       }
     }
   },
