@@ -111,6 +111,8 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const K = "practice.segitigaSegiempat.kelilingSegitigaSegiempat";
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -118,172 +120,160 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          KELILING SEGITIGA DAN SEGIEMPAT
+          {t(`${K}.title`)}
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">
-          Kelas 7 – Latihan Mandiri – Segitiga dan Segiempat
+          {t(`${K}.subtitle`)}
         </p>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
-          <h2 className="text-lg font-bold text-accent mb-4 font-display">Latihan Mandiri</h2>
+          <h2 className="text-lg font-bold text-accent mb-4 font-display">{t(`${K}.sectionTitle`)}</h2>
           <p className="text-white/70 text-sm mb-6 font-body">
-            Kerjakan soal-soal berikut dengan teliti.
+            {t(`${K}.instruction`)}
           </p>
 
           <div className="space-y-8 font-body">
 
+            {/* Q1 — no InlineMath */}
             <QuestionCard
               no={1}
               diagram={<DiagramQ1 />}
-              question={<p>Tentukan keliling bangun segitiga berikut.</p>}
+              question={<p>{t(`${K}.q1`)}</p>}
             />
 
+            {/* Q2 — 2 InlineMath: [70 cm] [LM] */}
             <QuestionCard
               no={2}
               diagram={<DiagramQ2 />}
               question={
                 <p>
-                  Jika diketahui keliling segitiga sama kaki berikut masing-masing adalah{" "}
-                  <InlineMath math="70 \text{ cm}" />, berapakah panjang sisi <InlineMath math="LM" />?
+                  {t(`${K}.q2pre`)} <InlineMath math="70 \text{ cm}" />{t(`${K}.q2mid`)} <InlineMath math="LM" />{t(`${K}.q2end`)}
                 </p>
               }
             />
 
+            {/* Q3 — 4 InlineMath: [18 cm] [AB] [AC] [BC] */}
             <QuestionCard
               no={3}
               diagram={<DiagramQ3 />}
               question={
                 <p>
-                  Jika diketahui keliling segitiga sama sisi berikut adalah{" "}
-                  <InlineMath math="18 \text{ cm}" />, tentukan panjang sisi{" "}
-                  <InlineMath math="AB" />, <InlineMath math="AC" />, dan <InlineMath math="BC" />.
+                  {t(`${K}.q3pre`)} <InlineMath math="18 \text{ cm}" />{t(`${K}.q3mid`)} <InlineMath math="AB" />, <InlineMath math="AC" />, {t(`${K}.q3andWord`)} <InlineMath math="BC" />{t(`${K}.q3end`)}
                 </p>
               }
             />
 
+            {/* Q4 — no InlineMath */}
             <QuestionCard
               no={4}
               diagram={<DiagramQ4 />}
-              question={<p>Tentukan keliling bangun segiempat berikut.</p>}
+              question={<p>{t(`${K}.q4`)}</p>}
             />
 
+            {/* Q5 — 1 InlineMath: [AB = 8 cm] */}
             <QuestionCard
               no={5}
               diagram={<DiagramQ5 />}
               question={
                 <p>
-                  Tentukan keliling bangun belah ketupat berikut jika diketahui panjang{" "}
-                  <InlineMath math="AB = 8 \text{ cm}" />.
+                  {t(`${K}.q5pre`)} <InlineMath math="AB = 8 \text{ cm}" />{t(`${K}.q5end`)}
                 </p>
               }
             />
 
+            {/* Q6 — no InlineMath */}
             <QuestionCard
               no={6}
               diagram={<DiagramQ6 />}
-              question={<p>Tentukan keliling trapesium berikut.</p>}
+              question={<p>{t(`${K}.q6`)}</p>}
             />
 
+            {/* Q7 — 1 InlineMath: [100] */}
             <QuestionCard
               no={7}
               question={
                 <p>
-                  Sebuah taman rekreasi berbentuk persegi. Jika kelilingnya <InlineMath math="100" /> meter,
-                  berapakah ukuran sisinya taman tersebut?
+                  {t(`${K}.q7pre`)} <InlineMath math="100" /> {t(`${K}.q7end`)}
                 </p>
               }
             />
 
+            {/* Q8 — 2 InlineMath: [2:1] [15] */}
             <QuestionCard
               no={8}
               question={
                 <p>
-                  Sepetak sawah berbentuk persegi panjang. Perbandingan ukuran panjang dan lebarnya
-                  adalah <InlineMath math="2 : 1" />. Jika lebarnya <InlineMath math="15" /> meter,
-                  berapakah kelilingnya?
+                  {t(`${K}.q8pre`)} <InlineMath math="2 : 1" />{t(`${K}.q8mid`)} <InlineMath math="15" /> {t(`${K}.q8end`)}
                 </p>
               }
             />
 
+            {/* Q9 — 2 InlineMath: [3:2] [24 cm] */}
             <QuestionCard
               no={9}
               question={
                 <p>
-                  Sebuah layang-layang memiliki perbandingan ukuran antara sisi yang panjang dengan
-                  sisi yang pendek sebesar <InlineMath math="3 : 2" />. Jika ukuran sisi yang pendek{" "}
-                  <InlineMath math="24 \text{ cm}" />, tentukan ukuran sisi yang panjang dan keliling
-                  layang-layang itu.
+                  {t(`${K}.q9pre`)} <InlineMath math="3 : 2" />{t(`${K}.q9mid`)} <InlineMath math="24 \text{ cm}" />{t(`${K}.q9end`)}
                 </p>
               }
             />
 
+            {/* Q10 — 3 InlineMath: [2:1] [2:3] [55 cm] */}
             <QuestionCard
               no={10}
               question={
                 <p>
-                  Sebuah trapesium siku-siku perbandingan panjang dari sisi-sisi sejajarnya{" "}
-                  <InlineMath math="2 : 1" />, sedangkan perbandingan panjang sisi tegak dan sisi
-                  miringnya <InlineMath math="2 : 3" />. Jika panjang sisi sejajarnya yang pendek sama
-                  panjang dengan panjang sisi tegaknya dan kelilingnya <InlineMath math="55 \text{ cm}" />,
-                  tentukan panjang masing-masing dari keempat sisinya.
+                  {t(`${K}.q10pre`)} <InlineMath math="2 : 1" />{t(`${K}.q10mid`)} <InlineMath math="2 : 3" />{t(`${K}.q10mid2`)} <InlineMath math="55 \text{ cm}" />{t(`${K}.q10end`)}
                 </p>
               }
             />
 
+            {/* Q11 — 5 InlineMath: [x] [x+2] [x+4] [24 cm] [x] */}
             <QuestionCard
               no={11}
               question={
                 <p>
-                  Segitiga memiliki sisi <InlineMath math="x" />,{" "}
-                  <InlineMath math="x+2" />, dan <InlineMath math="x+4" />. Jika kelilingnya{" "}
-                  <InlineMath math="24 \text{ cm}" />, berapakah nilai <InlineMath math="x" />?
+                  {t(`${K}.q11pre`)} <InlineMath math="x" />, <InlineMath math="x+2" />, {t(`${K}.q11andWord`)} <InlineMath math="x+4" />{t(`${K}.q11mid`)} <InlineMath math="24 \text{ cm}" />{t(`${K}.q11end`)} <InlineMath math="x" />{t(`${K}.q11suffix`)}
                 </p>
               }
             />
 
+            {/* Q12 — 4 InlineMath: [y] [2y] [36 cm] [y] */}
             <QuestionCard
               no={12}
               question={
                 <p>
-                  Persegi panjang memiliki lebar <InlineMath math="y" /> dan panjang{" "}
-                  <InlineMath math="2y" />. Jika kelilingnya <InlineMath math="36 \text{ cm}" />,
-                  berapakah nilai <InlineMath math="y" />?
+                  {t(`${K}.q12pre`)} <InlineMath math="y" /> {t(`${K}.q12mid`)} <InlineMath math="2y" />{t(`${K}.q12mid2`)} <InlineMath math="36 \text{ cm}" />{t(`${K}.q12end`)} <InlineMath math="y" />{t(`${K}.q12suffix`)}
                 </p>
               }
             />
 
+            {/* Q13 — 3 InlineMath: [(2x-1) cm] [44 cm] [x] */}
             <QuestionCard
               no={13}
               question={
                 <p>
-                  Sebuah belah ketupat memiliki sisi <InlineMath math="(2x-1) \text{ cm}" />. Jika
-                  kelilingnya <InlineMath math="44 \text{ cm}" />, berapakah nilai{" "}
-                  <InlineMath math="x" />?
+                  {t(`${K}.q13pre`)} <InlineMath math="(2x-1) \text{ cm}" />{t(`${K}.q13mid`)} <InlineMath math="44 \text{ cm}" />{t(`${K}.q13end`)} <InlineMath math="x" />{t(`${K}.q13suffix`)}
                 </p>
               }
             />
 
+            {/* Q14 — 3 InlineMath: [20 m] [10 m] [5 m] */}
             <QuestionCard
               no={14}
               question={
                 <p>
-                  Sebuah kebun berbentuk persegi panjang memiliki panjang <InlineMath math="20 \text{ m}" />{" "}
-                  dan lebar <InlineMath math="10 \text{ m}" />. Di sekeliling kebun tersebut akan ditanami
-                  pohon dengan jarak antar pohon <InlineMath math="5 \text{ m}" />. Tentukanlah banyak
-                  pohon yang dibutuhkan.
+                  {t(`${K}.q14pre`)} <InlineMath math="20 \text{ m}" /> {t(`${K}.q14mid`)} <InlineMath math="10 \text{ m}" />{t(`${K}.q14mid2`)} <InlineMath math="5 \text{ m}" />{t(`${K}.q14end`)}
                 </p>
               }
             />
 
+            {/* Q15 — 4 InlineMath: [40 m] [16 m] [15 m] [4 m] */}
             <QuestionCard
               no={15}
               question={
                 <p>
-                  Sebuah taman berbentuk trapesium sama kaki dengan panjang sisi-sisi sejajar
-                  masing-masing <InlineMath math="40 \text{ m}" /> dan <InlineMath math="16 \text{ m}" />.
-                  Jika panjang sisi miring taman tersebut adalah <InlineMath math="15 \text{ m}" />, dan
-                  di sekeliling taman akan dipasang lampu dengan jarak antar tiang adalah{" "}
-                  <InlineMath math="4 \text{ m}" />. Tentukanlah banyak tiang lampu yang dibutuhkan.
+                  {t(`${K}.q15pre`)} <InlineMath math="40 \text{ m}" /> {t(`${K}.q15mid`)} <InlineMath math="16 \text{ m}" />{t(`${K}.q15mid2`)} <InlineMath math="15 \text{ m}" />{t(`${K}.q15mid3`)} <InlineMath math="4 \text{ m}" />{t(`${K}.q15end`)}
                 </p>
               }
             />
@@ -300,7 +290,7 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Segitiga dan Segiempat
+            {t(`${K}.back`)}
           </button>
         </div>
       </div>
