@@ -1,0 +1,62 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Pola Bilangan" di
+Kelas 8 sudah selesai. Mulai topik berikutnya: "Koordinat Kartesius"
+— index + 3 sub-halaman aktif (UnsurUnsurPage.tsx 15 soal,
+PosisiRelatifTitikAcuanPage.tsx 10 soal, JarakTitikGarisPage.tsx 13
+soal). ADA 1 FILE ORPHAN (PosisiRelatifPage.tsx, 10 soal) yang TIDAK
+di-route dari index — JANGAN disentuh sama sekali. Ada juga file
+komponen CoordPlane.tsx (bukan halaman soal, komponen SVG reusable) —
+tidak perlu disentuh untuk terjemahan.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah (kecuali perbaikan bug
+  jumlah soal yang diminta khusus di bawah)
+- practice.koordinatCartesius.* belum ada sama sekali di ketiga
+  locale file — ini fondasi baru
+
+TUGAS SEKARANG:
+Fokus HANYA ke halaman index: KoordinatCartesiusPage.tsx
+
+BAGIAN 1 — PERBAIKI BUG JUMLAH SOAL:
+Index saat ini menampilkan angka soal yang salah:
+- "Unsur-Unsur pada Diagram Kartesius" ditampilkan 12 soal, padahal
+  UnsurUnsurPage.tsx aktual berisi 15 soal — perbaiki jadi 15
+- "Posisi Relatif Titik terhadap Titik Acuan dan Garis" ditampilkan
+  11 soal, padahal PosisiRelatifTitikAcuanPage.tsx aktual berisi 10
+  soal — perbaiki jadi 10
+- "Jarak Antar Dua Titik dan Titik ke Garis" — cek apakah sudah benar
+  (seharusnya 13, sesuai laporan investigasi sudah cocok)
+- Badge total soal di halaman index — perbaiki dari 36 jadi 38
+  (15+10+13)
+
+BAGIAN 2 — TERJEMAHKAN INDEX:
+1. Ubah array subtopics (hardcode label & desc di luar component)
+   menjadi pola subtopicsConfig — derive label & desc di dalam
+   komponen pakai t(), IDENTIK dengan pola yang dipakai di
+   PolaBilanganPage.tsx / HimpunanPage.tsx (index topik-topik
+   sebelumnya)
+2. Terjemahkan h1 title index
+3. Terjemahkan teks body enrichment note (footer), kalau ada
+4. Tambahkan translation key untuk 3 label & deskripsi sub-topik + h1
+   + enrichment note (kalau ada) ke ketiga file locale (id, en, ja)
+   di bawah practice.koordinatCartesius.*
+5. Key global yang sudah ada (breadcrumb, suffixSoal, backToGrade8,
+   dst) JANGAN diubah
+6. JANGAN sentuh 3 sub-halaman aktif — itu untuk tahap berikutnya
+7. JANGAN sentuh file orphan (PosisiRelatifPage.tsx) atau
+   CoordPlane.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Konfirmasi eksplisit: jumlah soal di index sekarang benar (15, 10,
+  13, total 38), dan file orphan tidak tersentuh

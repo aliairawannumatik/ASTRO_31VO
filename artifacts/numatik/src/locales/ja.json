@@ -4066,6 +4066,26 @@
           "content": "セリンは紙を何度も折ります。最初の紙の厚さが2mmのとき、厚さが256mmになるには何回折る必要がありますか？"
         }
       }
+    },
+    "koordinatCartesius": {
+      "title": "座標平面",
+      "diagramBadge": "座標図付き",
+      "featureDiagramTitle": "🖼️ 図の機能",
+      "featureDiagramDesc": "各問題にはデカルト座標図が付いています。点は色で区別され、直線は視覚的に描かれ、領域は塗りつぶされています。図は各問題のコンテキストに応じて自動生成され、視覚的な理解をサポートします。",
+      "subtopics": {
+        "unsurUnsur": {
+          "label": "座標平面の要素",
+          "desc": "点の座標・象限・軸・対称移動・平行移動"
+        },
+        "posisiRelatifTitikAcuan": {
+          "label": "基準点および直線に対する点の相対的位置",
+          "desc": "基準点・軸・直線の方程式に対する相対的位置"
+        },
+        "jarakTitikGaris": {
+          "label": "2点間の距離と点から直線までの距離",
+          "desc": "距離の公式・軸や直線への距離・周長・面積"
+        }
+      }
     }
   },
   "settings": {

@@ -4066,6 +4066,26 @@
           "content": "Celin melipat-lipat kertas berkali-kali. Jika ketebalan kertas mula-mula 2 mm, maka butuh berapa kali lipatan sehingga ketebalan kertas menjadi 256 mm?"
         }
       }
+    },
+    "koordinatCartesius": {
+      "title": "KOORDINAT KARTESIUS",
+      "diagramBadge": "Dilengkapi Diagram Koordinat",
+      "featureDiagramTitle": "🖼️ Fitur Diagram",
+      "featureDiagramDesc": "Setiap soal dilengkapi dengan diagram koordinat kartesius bergambar. Titik-titik ditampilkan dengan warna berbeda, garis digambar secara visual, dan daerah/wilayah diarsir. Diagram dibuat otomatis sesuai konteks soal untuk membantu pemahaman visual.",
+      "subtopics": {
+        "unsurUnsur": {
+          "label": "UNSUR-UNSUR PADA DIAGRAM KARTESIUS",
+          "desc": "Koordinat titik, kuadran, sumbu, pencerminan, translasi"
+        },
+        "posisiRelatifTitikAcuan": {
+          "label": "POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN DAN TERHADAP SUATU GARIS",
+          "desc": "Posisi relatif terhadap titik acuan, sumbu, dan persamaan garis"
+        },
+        "jarakTitikGaris": {
+          "label": "JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS",
+          "desc": "Rumus jarak, jarak ke sumbu & garis, keliling, luas"
+        }
+      }
     }
   },
   "settings": {

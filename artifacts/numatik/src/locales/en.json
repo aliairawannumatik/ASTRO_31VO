@@ -4066,6 +4066,26 @@
           "content": "Celin folds a piece of paper repeatedly. If the initial thickness is 2 mm, how many folds are needed for the thickness to reach 256 mm?"
         }
       }
+    },
+    "koordinatCartesius": {
+      "title": "CARTESIAN COORDINATES",
+      "diagramBadge": "Includes Coordinate Diagrams",
+      "featureDiagramTitle": "🖼️ Diagram Feature",
+      "featureDiagramDesc": "Each problem includes a Cartesian coordinate diagram. Points are displayed in different colors, lines are drawn visually, and regions are shaded. Diagrams are generated automatically based on each problem context to support visual understanding.",
+      "subtopics": {
+        "unsurUnsur": {
+          "label": "ELEMENTS OF THE CARTESIAN DIAGRAM",
+          "desc": "Point coordinates, quadrants, axes, reflection, translation"
+        },
+        "posisiRelatifTitikAcuan": {
+          "label": "RELATIVE POSITION OF A POINT WITH RESPECT TO A REFERENCE POINT AND A LINE",
+          "desc": "Relative position with respect to a reference point, axes, and line equations"
+        },
+        "jarakTitikGaris": {
+          "label": "DISTANCE BETWEEN TWO POINTS AND FROM A POINT TO A LINE",
+          "desc": "Distance formula, distance to axes & lines, perimeter, area"
+        }
+      }
     }
   },
   "settings": {
