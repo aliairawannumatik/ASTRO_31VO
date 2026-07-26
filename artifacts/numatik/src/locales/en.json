@@ -4763,6 +4763,85 @@
           "part3": "Every LETV can be made part of a SLETV.",
           "part4": "A solution to a SLETV is a number pair (x, y) that satisfies both equations."
         }
+      },
+      "metodeGrafik": {
+        "pageTitle": "SOLVING SLETV — GRAPHICAL METHOD",
+        "grade": "Grade 8",
+        "soalCount": "11 Questions",
+        "backSuffix": "SLETV",
+        "q1": {
+          "title": "Creating a Value Table — First Line",
+          "content": "Given the first line equation:",
+          "partA": "Create a value table: choose x = 0, 2, 6 then calculate each y.",
+          "partB": "Find the x-intercept (y = 0) and y-intercept (x = 0).",
+          "partC": "Draw the line on the coordinate plane."
+        },
+        "q2": {
+          "title": "Value Table for the Second Line",
+          "content": "Given the second line equation:",
+          "partA": "Create a value table for x = 0, 2, 4.",
+          "partB": "Find two points on the line and draw it.",
+          "partC": "Does the point (3, 1) lie on this line? Verify!"
+        },
+        "q3": {
+          "title": "Graphical Method — Step by Step",
+          "step1label": "Step 1:",
+          "step2label": "Step 2:",
+          "step3label": "Step 3:",
+          "step4label": "Step 4:",
+          "step1": "Find two points on the first line.",
+          "step2": "Find two points on the second line.",
+          "step3": "Draw both lines and find their intersection point.",
+          "step4": "Verify the intersection point in both equations."
+        },
+        "q4": {
+          "title": "Axis Intercepts",
+          "content": "For each line below, find the x-intercept and y-intercept:"
+        },
+        "q5": {
+          "title": "Finding the Solution Set — Graphical",
+          "partA": "Find the axis intercepts for each line.",
+          "partB": "Draw the lines and find the intersection point graphically.",
+          "partC": "Verify the intersection point by substituting into both equations."
+        },
+        "q6": {
+          "title": "Vertical Equation in a Graph",
+          "partA": "What does the graph of x = 3 look like?",
+          "partB": "Substitute x = 3 into the second equation to find y.",
+          "partC": "Write the solution set HP = {(x, y)}."
+        },
+        "q7": {
+          "title": "Finding the Complete Graphical Solution",
+          "partA": "Find two points for each line.",
+          "partB": "Draw both lines.",
+          "partC": "Read the coordinates of the intersection point from the graph.",
+          "partD": "Verify the solution algebraically."
+        },
+        "q8": {
+          "title": "SLETV with Lines Intersecting at the Origin",
+          "partA": "Create a value table for y = 2x (x = 0, 1, 2).",
+          "partB": "Create a value table for y = -x + 6 (x = 0, 3, 6).",
+          "partC": "Find the intersection point."
+        },
+        "q9": {
+          "title": "Special Case — Coincident Lines",
+          "content": "Consider the SLETV:",
+          "partA": "Show that the second equation is a multiple of the first equation.",
+          "partB": "What happens when both are drawn on a graph?",
+          "partC": "How many solutions are there? Explain!"
+        },
+        "q10": {
+          "title": "Determining the Graphical Solution",
+          "partA": "Find the axis intercepts for each line.",
+          "partB": "Draw the lines and read the intersection point.",
+          "partC": "Solve algebraically and compare the result."
+        },
+        "q11": {
+          "title": "Intersection Coordinates",
+          "partA": "Find two points on each line.",
+          "partB": "Sketch the graph and read the intersection point.",
+          "partC": "Verify by substitution."
+        }
       }
     }
   },

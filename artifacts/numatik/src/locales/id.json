@@ -4763,6 +4763,85 @@
           "part3": "Setiap PLDV dapat dijadikan bagian dari suatu SPLDV.",
           "part4": "Penyelesaian SPLDV berupa pasangan bilangan (x, y) yang memenuhi kedua persamaan."
         }
+      },
+      "metodeGrafik": {
+        "pageTitle": "PENYELESAIAN SPLDV — METODE GRAFIK",
+        "grade": "Kelas 8",
+        "soalCount": "11 Soal",
+        "backSuffix": "SPLDV",
+        "q1": {
+          "title": "Membuat Tabel Nilai — Garis Pertama",
+          "content": "Diketahui persamaan garis pertama:",
+          "partA": "Buat tabel nilai: pilih x = 0, 2, 6 lalu hitung y masing-masing.",
+          "partB": "Tentukan titik potong dengan sumbu-x (y = 0) dan sumbu-y (x = 0).",
+          "partC": "Gambarkan garis tersebut pada bidang koordinat."
+        },
+        "q2": {
+          "title": "Tabel Nilai Garis Kedua",
+          "content": "Diketahui persamaan garis kedua:",
+          "partA": "Buat tabel nilai untuk x = 0, 2, 4.",
+          "partB": "Tentukan dua titik pada garis dan gambarkan.",
+          "partC": "Apakah titik (3, 1) terletak pada garis ini? Verifikasi!"
+        },
+        "q3": {
+          "title": "Metode Grafik — Langkah Demi Langkah",
+          "step1label": "Langkah 1:",
+          "step2label": "Langkah 2:",
+          "step3label": "Langkah 3:",
+          "step4label": "Langkah 4:",
+          "step1": "Tentukan dua titik pada garis pertama.",
+          "step2": "Tentukan dua titik pada garis kedua.",
+          "step3": "Gambarkan kedua garis dan tentukan titik perpotongannya.",
+          "step4": "Verifikasi titik perpotongan di kedua persamaan."
+        },
+        "q4": {
+          "title": "Titik Potong Sumbu",
+          "content": "Untuk setiap garis berikut, tentukan titik potong dengan sumbu-x dan sumbu-y:"
+        },
+        "q5": {
+          "title": "Mencari Himpunan Penyelesaian — Grafik",
+          "partA": "Tentukan titik potong sumbu masing-masing garis.",
+          "partB": "Gambarkan dan tentukan titik perpotongan secara grafis.",
+          "partC": "Verifikasi titik potong dengan substitusi ke kedua persamaan."
+        },
+        "q6": {
+          "title": "Persamaan Vertikal dalam Grafik",
+          "partA": "Apa bentuk grafik dari persamaan x = 3?",
+          "partB": "Substitusikan x = 3 ke persamaan kedua untuk mencari y.",
+          "partC": "Tuliskan HP = {(x, y)}."
+        },
+        "q7": {
+          "title": "Mencari Solusi Grafik Lengkap",
+          "partA": "Tentukan dua titik untuk setiap garis.",
+          "partB": "Gambarkan kedua garis.",
+          "partC": "Baca koordinat titik perpotongan dari grafik.",
+          "partD": "Verifikasi solusi secara aljabar."
+        },
+        "q8": {
+          "title": "SPLDV Garis Berpotongan di Asal",
+          "partA": "Buat tabel nilai untuk y = 2x (x = 0, 1, 2).",
+          "partB": "Buat tabel nilai untuk y = -x + 6 (x = 0, 3, 6).",
+          "partC": "Tentukan titik perpotongan."
+        },
+        "q9": {
+          "title": "Kasus Khusus — Garis Berimpit",
+          "content": "Perhatikan SPLDV:",
+          "partA": "Tunjukkan bahwa persamaan kedua adalah kelipatan dari persamaan pertama.",
+          "partB": "Apa yang terjadi jika digambar pada grafik?",
+          "partC": "Berapa banyak solusinya? Jelaskan!"
+        },
+        "q10": {
+          "title": "Menentukan Solusi Grafik",
+          "partA": "Tentukan titik potong sumbu untuk setiap garis.",
+          "partB": "Gambarkan dan baca titik potongnya.",
+          "partC": "Selesaikan secara aljabar dan bandingkan hasilnya."
+        },
+        "q11": {
+          "title": "Koordinat Perpotongan",
+          "partA": "Tentukan dua titik pada setiap garis.",
+          "partB": "Sketsa grafik dan baca titik perpotongan.",
+          "partC": "Verifikasi dengan substitusi."
+        }
       }
     }
   },

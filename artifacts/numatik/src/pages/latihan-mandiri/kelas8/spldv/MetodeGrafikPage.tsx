@@ -6,13 +6,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { LineChart } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const pageUi = {
-  id: { title: "PENYELESAIAN SPLDV — METODE GRAFIK" },
-  en: { title: "SOLVING SLETV — GRAPHICAL METHOD" },
-  ja: { title: "連立方程式 — グラフ法" },
-};
 
 const accentColor = "#34d399";
 const accentDim = "rgba(52,211,153,0.12)";
@@ -35,121 +28,121 @@ const badgeStyle: Record<Badge, string> = {
   AKM: "bg-green-500/20 text-green-300 border-green-400/40",
 };
 
-const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
-
-const questions: Q[] = [
-  Q(1, "Membuat Tabel Nilai — Garis Pertama", {
-    badge: "ANBK", type: "mixed",
-    content: "Diketahui persamaan garis pertama:",
-    blockMath: "x + y = 6",
-    parts: [
-      { label: "a.", text: "Buat tabel nilai: pilih x = 0, 2, 6 lalu hitung y masing-masing." },
-      { label: "b.", text: "Tentukan titik potong dengan sumbu-x (y = 0) dan sumbu-y (x = 0)." },
-      { label: "c.", text: "Gambarkan garis tersebut pada bidang koordinat." },
-    ],
-  }),
-  Q(2, "Tabel Nilai Garis Kedua", {
-    badge: "UN", type: "mixed",
-    content: "Diketahui persamaan garis kedua:",
-    blockMath: "x - y = 2",
-    parts: [
-      { label: "a.", text: "Buat tabel nilai untuk x = 0, 2, 4." },
-      { label: "b.", text: "Tentukan dua titik pada garis dan gambarkan." },
-      { label: "c.", text: "Apakah titik (3, 1) terletak pada garis ini? Verifikasi!" },
-    ],
-  }),
-  Q(3, "Metode Grafik — Langkah Demi Langkah", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} x + y = 5 \\\\ x - y = 1 \\end{cases}",
-    parts: [
-      { label: "Langkah 1:", text: "Tentukan dua titik pada garis pertama." },
-      { label: "Langkah 2:", text: "Tentukan dua titik pada garis kedua." },
-      { label: "Langkah 3:", text: "Gambarkan kedua garis dan tentukan titik perpotongannya." },
-      { label: "Langkah 4:", text: "Verifikasi titik perpotongan di kedua persamaan." },
-    ],
-  }),
-  Q(4, "Titik Potong Sumbu", {
-    badge: "TKA", type: "mixed",
-    content: "Untuk setiap garis berikut, tentukan titik potong dengan sumbu-x dan sumbu-y:",
-    parts: [
-      { label: "a.", math: "2x + 3y = 12" },
-      { label: "b.", math: "4x - 2y = 8" },
-      { label: "c.", math: "x + 5y = 10" },
-      { label: "d.", math: "3x - y = 9" },
-    ],
-  }),
-  Q(5, "Mencari Himpunan Penyelesaian — Grafik", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 2x + y = 7 \\\\ x + 2y = 8 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Tentukan titik potong sumbu masing-masing garis." },
-      { label: "b.", text: "Gambarkan dan tentukan titik perpotongan secara grafis." },
-      { label: "c.", text: "Verifikasi titik potong dengan substitusi ke kedua persamaan." },
-    ],
-  }),
-  Q(6, "Persamaan Vertikal dalam Grafik", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} x = 3 \\\\ 2x + y = 10 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Apa bentuk grafik dari persamaan x = 3?" },
-      { label: "b.", text: "Substitusikan x = 3 ke persamaan kedua untuk mencari y." },
-      { label: "c.", text: "Tuliskan HP = {(x, y)}." },
-    ],
-  }),
-  Q(7, "Mencari Solusi Grafik Lengkap", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 3x - y = 5 \\\\ x + y = 7 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Tentukan dua titik untuk setiap garis." },
-      { label: "b.", text: "Gambarkan kedua garis." },
-      { label: "c.", text: "Baca koordinat titik perpotongan dari grafik." },
-      { label: "d.", text: "Verifikasi solusi secara aljabar." },
-    ],
-  }),
-  Q(8, "SPLDV Garis Berpotongan di Asal", {
-    badge: "ANBK", type: "mixed",
-    blockMath: "\\begin{cases} y = 2x \\\\ y = -x + 6 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Buat tabel nilai untuk y = 2x (x = 0, 1, 2)." },
-      { label: "b.", text: "Buat tabel nilai untuk y = -x + 6 (x = 0, 3, 6)." },
-      { label: "c.", text: "Tentukan titik perpotongan." },
-    ],
-  }),
-  Q(9, "Kasus Khusus — Garis Berimpit", {
-    badge: "AKM", type: "mixed",
-    content: "Perhatikan SPLDV:",
-    blockMath: "\\begin{cases} 3x - y = 4 \\\\ 6x - 2y = 8 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Tunjukkan bahwa persamaan kedua adalah kelipatan dari persamaan pertama." },
-      { label: "b.", text: "Apa yang terjadi jika digambar pada grafik?" },
-      { label: "c.", text: "Berapa banyak solusinya? Jelaskan!" },
-    ],
-  }),
-  Q(10, "Menentukan Solusi Grafik", {
-    badge: "UN", type: "mixed",
-    blockMath: "\\begin{cases} 4x + 2y = 16 \\\\ x - y = -1 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Tentukan titik potong sumbu untuk setiap garis." },
-      { label: "b.", text: "Gambarkan dan baca titik potongnya." },
-      { label: "c.", text: "Selesaikan secara aljabar dan bandingkan hasilnya." },
-    ],
-  }),
-  Q(11, "Koordinat Perpotongan", {
-    badge: "TKA", type: "mixed",
-    blockMath: "\\begin{cases} 5x - 3y = 1 \\\\ 2x + y = 8 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Tentukan dua titik pada setiap garis." },
-      { label: "b.", text: "Sketsa grafik dan baca titik perpotongan." },
-      { label: "c.", text: "Verifikasi dengan substitusi." },
-    ],
-  }),
-];
+const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const MetodeGrafikPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { language } = useLanguage();
-  const pu = pageUi[language as keyof typeof pageUi] ?? pageUi.id;
+  const p = 'practice.spldv.metodeGrafik';
+
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), {
+      badge: "ANBK", type: "mixed",
+      content: t(`${p}.q1.content`),
+      blockMath: "x + y = 6",
+      parts: [
+        { label: "a.", text: t(`${p}.q1.partA`) },
+        { label: "b.", text: t(`${p}.q1.partB`) },
+        { label: "c.", text: t(`${p}.q1.partC`) },
+      ],
+    }),
+    Qf(2, t(`${p}.q2.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q2.content`),
+      blockMath: "x - y = 2",
+      parts: [
+        { label: "a.", text: t(`${p}.q2.partA`) },
+        { label: "b.", text: t(`${p}.q2.partB`) },
+        { label: "c.", text: t(`${p}.q2.partC`) },
+      ],
+    }),
+    Qf(3, t(`${p}.q3.title`), {
+      badge: "UN", type: "mixed",
+      blockMath: "\\begin{cases} x + y = 5 \\\\ x - y = 1 \\end{cases}",
+      parts: [
+        { label: t(`${p}.q3.step1label`), text: t(`${p}.q3.step1`) },
+        { label: t(`${p}.q3.step2label`), text: t(`${p}.q3.step2`) },
+        { label: t(`${p}.q3.step3label`), text: t(`${p}.q3.step3`) },
+        { label: t(`${p}.q3.step4label`), text: t(`${p}.q3.step4`) },
+      ],
+    }),
+    Qf(4, t(`${p}.q4.title`), {
+      badge: "TKA", type: "mixed",
+      content: t(`${p}.q4.content`),
+      parts: [
+        { label: "a.", math: "2x + 3y = 12" },
+        { label: "b.", math: "4x - 2y = 8" },
+        { label: "c.", math: "x + 5y = 10" },
+        { label: "d.", math: "3x - y = 9" },
+      ],
+    }),
+    Qf(5, t(`${p}.q5.title`), {
+      badge: "UN", type: "mixed",
+      blockMath: "\\begin{cases} 2x + y = 7 \\\\ x + 2y = 8 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q5.partA`) },
+        { label: "b.", text: t(`${p}.q5.partB`) },
+        { label: "c.", text: t(`${p}.q5.partC`) },
+      ],
+    }),
+    Qf(6, t(`${p}.q6.title`), {
+      badge: "TKA", type: "mixed",
+      blockMath: "\\begin{cases} x = 3 \\\\ 2x + y = 10 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q6.partA`) },
+        { label: "b.", text: t(`${p}.q6.partB`) },
+        { label: "c.", text: t(`${p}.q6.partC`) },
+      ],
+    }),
+    Qf(7, t(`${p}.q7.title`), {
+      badge: "UN", type: "mixed",
+      blockMath: "\\begin{cases} 3x - y = 5 \\\\ x + y = 7 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q7.partA`) },
+        { label: "b.", text: t(`${p}.q7.partB`) },
+        { label: "c.", text: t(`${p}.q7.partC`) },
+        { label: "d.", text: t(`${p}.q7.partD`) },
+      ],
+    }),
+    Qf(8, t(`${p}.q8.title`), {
+      badge: "ANBK", type: "mixed",
+      blockMath: "\\begin{cases} y = 2x \\\\ y = -x + 6 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q8.partA`) },
+        { label: "b.", text: t(`${p}.q8.partB`) },
+        { label: "c.", text: t(`${p}.q8.partC`) },
+      ],
+    }),
+    Qf(9, t(`${p}.q9.title`), {
+      badge: "AKM", type: "mixed",
+      content: t(`${p}.q9.content`),
+      blockMath: "\\begin{cases} 3x - y = 4 \\\\ 6x - 2y = 8 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q9.partA`) },
+        { label: "b.", text: t(`${p}.q9.partB`) },
+        { label: "c.", text: t(`${p}.q9.partC`) },
+      ],
+    }),
+    Qf(10, t(`${p}.q10.title`), {
+      badge: "UN", type: "mixed",
+      blockMath: "\\begin{cases} 4x + 2y = 16 \\\\ x - y = -1 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q10.partA`) },
+        { label: "b.", text: t(`${p}.q10.partB`) },
+        { label: "c.", text: t(`${p}.q10.partC`) },
+      ],
+    }),
+    Qf(11, t(`${p}.q11.title`), {
+      badge: "TKA", type: "mixed",
+      blockMath: "\\begin{cases} 5x - 3y = 1 \\\\ 2x + y = 8 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q11.partA`) },
+        { label: "b.", text: t(`${p}.q11.partB`) },
+        { label: "c.", text: t(`${p}.q11.partC`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -162,9 +155,11 @@ const MetodeGrafikPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
-            {pu.title}
+            {t(`${p}.pageTitle`)}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 11 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">
+            {t(`${p}.grade`)} · {t('practice.breadcrumb')} · {t(`${p}.soalCount`)}
+          </p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
@@ -200,12 +195,12 @@ const MetodeGrafikPage = () => {
                 )}
                 {q.parts && (
                   <div className="flex flex-col gap-2 mt-1">
-                    {q.parts.map((p, pi) => (
+                    {q.parts.map((part, pi) => (
                       <div key={pi} className="flex items-start gap-2">
-                        <span className="font-bold text-xs shrink-0 mt-0.5" style={{ color: accentColor }}>{p.label}</span>
+                        <span className="font-bold text-xs shrink-0 mt-0.5" style={{ color: accentColor }}>{part.label}</span>
                         <span className="font-body text-sm text-white/80 leading-relaxed">
-                          {p.text && p.text}
-                          {p.math && <InlineMath math={p.math} />}
+                          {part.text && part.text}
+                          {part.math && <InlineMath math={part.math} />}
                         </span>
                       </div>
                     ))}
@@ -219,7 +214,7 @@ const MetodeGrafikPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/spldv"); }}
             className="text-sm text-white/40 hover:text-white/80 transition-colors cursor-pointer font-body">
-            ← {t('practice.backToMenu')} SPLDV
+            ← {t('practice.backToMenu')} {t(`${p}.backSuffix`)}
           </button>
         </div>
       </div>
