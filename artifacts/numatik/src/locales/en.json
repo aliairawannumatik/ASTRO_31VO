@@ -4842,6 +4842,62 @@
           "partB": "Sketch the graph and read the intersection point.",
           "partC": "Verify by substitution."
         }
+      },
+      "metodeSubstitusi": {
+        "pageTitle": "SOLVING SLETV — SUBSTITUTION METHOD",
+        "grade": "Grade 8",
+        "soalCount": "8 Questions",
+        "backSuffix": "SLETV",
+        "q1": {
+          "title": "SLETV with Large Numbers",
+          "partA": "Substitute x = 4 into the first equation.",
+          "partB": "Find the value of y.",
+          "partC": "Write the solution set HP = {(x, y)}."
+        },
+        "q2": {
+          "title": "Substitution — Case y = c",
+          "partA": "Substitute y = 5 into the second equation.",
+          "partB": "Solve for x.",
+          "partC": "Write the solution set."
+        },
+        "q3": {
+          "title": "Substitution from the 2nd Equation",
+          "partA": "Directly substitute y = 5 − x into the first equation.",
+          "partB": "Solve for x.",
+          "partC": "Find y, then write the solution set."
+        },
+        "q4": {
+          "title": "Basic Substitution Steps",
+          "partA": "Substitute x = 2y − 1 into the equation x + y = 8.",
+          "partB": "Solve for x.",
+          "partC": "Find the value of y, then write the solution set."
+        },
+        "q5": {
+          "title": "Isolate a Variable First",
+          "partA": "From the first equation, express x in terms of y.",
+          "partB": "Substitute into the second equation.",
+          "partC": "Solve for y, then find x."
+        },
+        "q6": {
+          "title": "Substitution — No Unit Coefficient",
+          "partA": "From the first equation, express x in terms of y.",
+          "partB": "Substitute into the second equation.",
+          "partC": "Find the values of x and y."
+        },
+        "q7": {
+          "title": "Item Price Problem",
+          "content": "The price of 3 books and 4 pencils = Rp 29,000. The price of 1 book and 2 pencils = Rp 11,000.",
+          "partA": "Let the price of a book = x and a pencil = y. Write the SLETV.",
+          "partB": "Solve using the substitution method.",
+          "partC": "What is the price of 5 books and 3 pencils?"
+        },
+        "q8": {
+          "title": "Food Problem — ANBK",
+          "content": "At the cafeteria, 2 portions of fried rice and 1 drink = Rp 25,000. 1 portion of fried rice and 3 drinks = Rp 23,000.",
+          "partA": "Write the SLETV.",
+          "partB": "Solve using the substitution method.",
+          "partC": "What is the price of the fried rice and the drink individually?"
+        }
       }
     }
   },

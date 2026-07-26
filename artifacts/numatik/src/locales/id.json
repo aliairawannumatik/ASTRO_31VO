@@ -4842,6 +4842,62 @@
           "partB": "Sketsa grafik dan baca titik perpotongan.",
           "partC": "Verifikasi dengan substitusi."
         }
+      },
+      "metodeSubstitusi": {
+        "pageTitle": "PENYELESAIAN SPLDV — METODE SUBSTITUSI",
+        "grade": "Kelas 8",
+        "soalCount": "8 Soal",
+        "backSuffix": "SPLDV",
+        "q1": {
+          "title": "SPLDV dengan Bilangan Besar",
+          "partA": "Substitusikan x = 4 ke persamaan pertama.",
+          "partB": "Tentukan nilai y.",
+          "partC": "Tuliskan HP = {(x, y)}."
+        },
+        "q2": {
+          "title": "Substitusi — Kasus y = c",
+          "partA": "Substitusikan y = 5 ke persamaan kedua.",
+          "partB": "Selesaikan untuk x.",
+          "partC": "Tulis HP."
+        },
+        "q3": {
+          "title": "Substitusi dari Persamaan Ke-2",
+          "partA": "Substitusikan langsung y = 5 − x ke persamaan pertama.",
+          "partB": "Selesaikan untuk x.",
+          "partC": "Tentukan y, lalu tulis HP."
+        },
+        "q4": {
+          "title": "Langkah Substitusi Dasar",
+          "partA": "Substitusikan x = 2y − 1 ke persamaan x + y = 8.",
+          "partB": "Selesaikan untuk x.",
+          "partC": "Tentukan nilai y, lalu tulis HP."
+        },
+        "q5": {
+          "title": "Ubah Variabel Dulu",
+          "partA": "Dari persamaan pertama, nyatakan x dalam y.",
+          "partB": "Substitusikan ke persamaan kedua.",
+          "partC": "Selesaikan untuk y, lalu cari x."
+        },
+        "q6": {
+          "title": "Substitusi — Tanpa Koefisien 1",
+          "partA": "Dari persamaan pertama, nyatakan x dalam y.",
+          "partB": "Substitusikan ke persamaan kedua.",
+          "partC": "Tentukan nilai x dan y."
+        },
+        "q7": {
+          "title": "Soal Harga Barang",
+          "content": "Harga 3 buku dan 4 pensil = Rp 29.000. Harga 1 buku dan 2 pensil = Rp 11.000.",
+          "partA": "Misal harga buku = x dan pensil = y. Tuliskan SPLDV.",
+          "partB": "Selesaikan dengan metode substitusi.",
+          "partC": "Berapa harga 5 buku dan 3 pensil?"
+        },
+        "q8": {
+          "title": "Soal Makanan — ANBK",
+          "content": "Di kantin, 2 porsi nasi goreng dan 1 minuman = Rp 25.000. 1 porsi nasi goreng dan 3 minuman = Rp 23.000.",
+          "partA": "Tuliskan SPLDV.",
+          "partB": "Selesaikan dengan metode substitusi.",
+          "partC": "Berapa harga nasi goreng dan minuman masing-masing?"
+        }
       }
     }
   },

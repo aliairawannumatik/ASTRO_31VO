@@ -6,13 +6,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Replace } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const pageUi = {
-  id: { title: "PENYELESAIAN SPLDV — METODE SUBSTITUSI" },
-  en: { title: "SOLVING SLETV — SUBSTITUTION METHOD" },
-  ja: { title: "連立方程式 — 代入法" },
-};
 
 const accentColor = "#60a5fa";
 const accentDim = "rgba(96,165,250,0.12)";
@@ -35,96 +28,96 @@ const badgeStyle: Record<Badge, string> = {
   AKM: "bg-green-500/20 text-green-300 border-green-400/40",
 };
 
-const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
-
-const questions: Q[] = [
-  Q(1, "SPLDV dengan Bilangan Besar", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} 5x + 2y = 36 \\\\ x = 4 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Substitusikan x = 4 ke persamaan pertama." },
-      { label: "b.", text: "Tentukan nilai y." },
-      { label: "c.", text: "Tuliskan HP = {(x, y)}." },
-    ],
-  }),
-  Q(2, "Substitusi — Kasus y = c", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} y = 5 \\\\ 3x + 2y = 26 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Substitusikan y = 5 ke persamaan kedua." },
-      { label: "b.", text: "Selesaikan untuk x." },
-      { label: "c.", text: "Tulis HP." },
-    ],
-  }),
-  Q(3, "Substitusi dari Persamaan Ke-2", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} 4x + 3y = 23 \\\\ y = 5 - x \\end{cases}",
-    parts: [
-      { label: "a.", text: "Substitusikan langsung y = 5 − x ke persamaan pertama." },
-      { label: "b.", text: "Selesaikan untuk x." },
-      { label: "c.", text: "Tentukan y, lalu tulis HP." },
-    ],
-  }),
-  Q(4, "Langkah Substitusi Dasar", {
-    badge: "ANBK",
-    type: "mixed",
-    blockMath: "\\begin{cases} x = 2y - 1 \\\\ x + y = 8 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Substitusikan x = 2y − 1 ke persamaan x + y = 8." },
-      { label: "b.", text: "Selesaikan untuk x." },
-      { label: "c.", text: "Tentukan nilai y, lalu tulis HP." },
-    ],
-  }),
-  Q(5, "Ubah Variabel Dulu", {
-    badge: "UN",
-    type: "mixed",
-    blockMath: "\\begin{cases} x + y = 10 \\\\ 2x + 3y = 24 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Dari persamaan pertama, nyatakan x dalam y." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua." },
-      { label: "c.", text: "Selesaikan untuk y, lalu cari x." },
-    ],
-  }),
-  Q(6, "Substitusi — Tanpa Koefisien 1", {
-    badge: "TKA",
-    type: "mixed",
-    blockMath: "\\begin{cases} 2x + 3y = 19 \\\\ 3x - 2y = -4 \\end{cases}",
-    parts: [
-      { label: "a.", text: "Dari persamaan pertama, nyatakan x dalam y." },
-      { label: "b.", text: "Substitusikan ke persamaan kedua." },
-      { label: "c.", text: "Tentukan nilai x dan y." },
-    ],
-  }),
-  Q(7, "Soal Harga Barang", {
-    badge: "UN",
-    type: "mixed",
-    content: "Harga 3 buku dan 4 pensil = Rp 29.000. Harga 1 buku dan 2 pensil = Rp 11.000.",
-    parts: [
-      { label: "a.", text: "Misal harga buku = x dan pensil = y. Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan metode substitusi." },
-      { label: "c.", text: "Berapa harga 5 buku dan 3 pensil?" },
-    ],
-  }),
-  Q(8, "Soal Makanan — ANBK", {
-    badge: "ANBK",
-    type: "mixed",
-    content: "Di kantin, 2 porsi nasi goreng dan 1 minuman = Rp 25.000. 1 porsi nasi goreng dan 3 minuman = Rp 23.000.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV." },
-      { label: "b.", text: "Selesaikan dengan metode substitusi." },
-      { label: "c.", text: "Berapa harga nasi goreng dan minuman masing-masing?" },
-    ],
-  }),
-];
+const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const MetodeSubstitusiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { language } = useLanguage();
-  const pu = pageUi[language as keyof typeof pageUi] ?? pageUi.id;
+  const p = 'practice.spldv.metodeSubstitusi';
+
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), {
+      badge: "ANBK",
+      type: "mixed",
+      blockMath: "\\begin{cases} 5x + 2y = 36 \\\\ x = 4 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q1.partA`) },
+        { label: "b.", text: t(`${p}.q1.partB`) },
+        { label: "c.", text: t(`${p}.q1.partC`) },
+      ],
+    }),
+    Qf(2, t(`${p}.q2.title`), {
+      badge: "ANBK",
+      type: "mixed",
+      blockMath: "\\begin{cases} y = 5 \\\\ 3x + 2y = 26 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q2.partA`) },
+        { label: "b.", text: t(`${p}.q2.partB`) },
+        { label: "c.", text: t(`${p}.q2.partC`) },
+      ],
+    }),
+    Qf(3, t(`${p}.q3.title`), {
+      badge: "UN",
+      type: "mixed",
+      blockMath: "\\begin{cases} 4x + 3y = 23 \\\\ y = 5 - x \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q3.partA`) },
+        { label: "b.", text: t(`${p}.q3.partB`) },
+        { label: "c.", text: t(`${p}.q3.partC`) },
+      ],
+    }),
+    Qf(4, t(`${p}.q4.title`), {
+      badge: "ANBK",
+      type: "mixed",
+      blockMath: "\\begin{cases} x = 2y - 1 \\\\ x + y = 8 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q4.partA`) },
+        { label: "b.", text: t(`${p}.q4.partB`) },
+        { label: "c.", text: t(`${p}.q4.partC`) },
+      ],
+    }),
+    Qf(5, t(`${p}.q5.title`), {
+      badge: "UN",
+      type: "mixed",
+      blockMath: "\\begin{cases} x + y = 10 \\\\ 2x + 3y = 24 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q5.partA`) },
+        { label: "b.", text: t(`${p}.q5.partB`) },
+        { label: "c.", text: t(`${p}.q5.partC`) },
+      ],
+    }),
+    Qf(6, t(`${p}.q6.title`), {
+      badge: "TKA",
+      type: "mixed",
+      blockMath: "\\begin{cases} 2x + 3y = 19 \\\\ 3x - 2y = -4 \\end{cases}",
+      parts: [
+        { label: "a.", text: t(`${p}.q6.partA`) },
+        { label: "b.", text: t(`${p}.q6.partB`) },
+        { label: "c.", text: t(`${p}.q6.partC`) },
+      ],
+    }),
+    Qf(7, t(`${p}.q7.title`), {
+      badge: "UN",
+      type: "mixed",
+      content: t(`${p}.q7.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q7.partA`) },
+        { label: "b.", text: t(`${p}.q7.partB`) },
+        { label: "c.", text: t(`${p}.q7.partC`) },
+      ],
+    }),
+    Qf(8, t(`${p}.q8.title`), {
+      badge: "ANBK",
+      type: "mixed",
+      content: t(`${p}.q8.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q8.partA`) },
+        { label: "b.", text: t(`${p}.q8.partB`) },
+        { label: "c.", text: t(`${p}.q8.partC`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -137,9 +130,11 @@ const MetodeSubstitusiPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
-            {pu.title}
+            {t(`${p}.pageTitle`)}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">
+            {t(`${p}.grade`)} · {t('practice.breadcrumb')} · {t(`${p}.soalCount`)}
+          </p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
@@ -175,12 +170,12 @@ const MetodeSubstitusiPage = () => {
                 )}
                 {q.parts && (
                   <div className="flex flex-col gap-2 mt-1">
-                    {q.parts.map((p, pi) => (
+                    {q.parts.map((part, pi) => (
                       <div key={pi} className="flex items-start gap-2">
-                        <span className="font-bold text-xs shrink-0 mt-0.5" style={{ color: accentColor }}>{p.label}</span>
+                        <span className="font-bold text-xs shrink-0 mt-0.5" style={{ color: accentColor }}>{part.label}</span>
                         <span className="font-body text-sm text-white/80 leading-relaxed">
-                          {p.text && p.text}
-                          {p.math && <InlineMath math={p.math} />}
+                          {part.text && part.text}
+                          {part.math && <InlineMath math={part.math} />}
                         </span>
                       </div>
                     ))}
@@ -194,7 +189,7 @@ const MetodeSubstitusiPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/spldv"); }}
             className="text-sm text-white/40 hover:text-white/80 transition-colors cursor-pointer font-body">
-            ← {t('practice.backToMenu')} SPLDV
+            ← {t('practice.backToMenu')} {t(`${p}.backSuffix`)}
           </button>
         </div>
       </div>
