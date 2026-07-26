@@ -4350,6 +4350,34 @@
           "c": "Is point C(4, −2) inside, outside, or exactly on the circle? Explain!"
         }
       }
+    },
+    "relasiDanFungsi": {
+      "title": "RELATIONS AND FUNCTIONS",
+      "diagramBadge": "Arrow Diagrams & Function Graphs",
+      "featureDiagramTitle": "🖼️ Visual Feature",
+      "featureDiagramDesc": "Each problem includes interactive arrow diagrams for relations and functions, as well as Cartesian coordinate graphs for function graph problems. Problems are selected from UN, ANBK, and TKA syllabi to prepare students for official exams.",
+      "subtopics": {
+        "pengertianRelasi": {
+          "label": "UNDERSTANDING RELATIONS AND THEIR REPRESENTATIONS",
+          "desc": "Arrow diagrams, ordered pairs, Cartesian diagrams, domain & range"
+        },
+        "pengertianFungsi": {
+          "label": "UNDERSTANDING FUNCTIONS AND THEIR REPRESENTATIONS",
+          "desc": "Function conditions, injective, surjective, vertical line test"
+        },
+        "banyakFungsi": {
+          "label": "COUNTING FUNCTIONS AND ONE-TO-ONE CORRESPONDENCE",
+          "desc": "Formula nᵐ, one-to-one correspondence, n factorial, bijection"
+        },
+        "notasiFungsi": {
+          "label": "FUNCTION NOTATION AND FORMULA",
+          "desc": "Notation f(x), evaluating functions, finding the rule, determining parameters"
+        },
+        "grafikFungsi": {
+          "label": "FUNCTION GRAPHS (ENRICHMENT)",
+          "desc": "Value tables, intercepts, gradient, sketching graphs, vertical line test"
+        }
+      }
     }
   },
   "settings": {

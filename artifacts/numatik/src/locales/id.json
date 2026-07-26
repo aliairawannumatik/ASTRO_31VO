@@ -4350,6 +4350,34 @@
           "c": "Apakah titik C(4, −2) berada di dalam, di luar, atau tepat pada lingkaran? Jelaskan!"
         }
       }
+    },
+    "relasiDanFungsi": {
+      "title": "RELASI DAN FUNGSI",
+      "diagramBadge": "Diagram Panah & Grafik Fungsi",
+      "featureDiagramTitle": "🖼️ Fitur Visual",
+      "featureDiagramDesc": "Setiap soal dilengkapi dengan diagram panah interaktif untuk relasi dan fungsi, serta grafik koordinat Kartesius untuk soal grafik fungsi. Soal-soal dipilih dari kisi-kisi UN, ANBK, dan TKA untuk mempersiapkan siswa menghadapi ujian resmi.",
+      "subtopics": {
+        "pengertianRelasi": {
+          "label": "PENGERTIAN RELASI DAN PENYAJIANNYA",
+          "desc": "Diagram panah, pasangan berurutan, diagram kartesius, domain & range"
+        },
+        "pengertianFungsi": {
+          "label": "PENGERTIAN FUNGSI DAN PENYAJIANNYA",
+          "desc": "Syarat fungsi, injektif, surjektif, uji garis vertikal"
+        },
+        "banyakFungsi": {
+          "label": "MENENTUKAN BANYAK FUNGSI DAN KORESPONDENSI SATU-SATU",
+          "desc": "Rumus nᵐ, korespondensi satu-satu, n faktorial, bijeksi"
+        },
+        "notasiFungsi": {
+          "label": "NOTASI DAN RUMUS FUNGSI",
+          "desc": "Notasi f(x), menghitung nilai fungsi, menentukan rumus, mencari parameter"
+        },
+        "grafikFungsi": {
+          "label": "GRAFIK FUNGSI (PENGAYAAN)",
+          "desc": "Tabel nilai, titik potong, gradien, sketsa grafik, uji garis vertikal"
+        }
+      }
     }
   },
   "settings": {

@@ -4350,6 +4350,34 @@
           "c": "点C(4, −2)は円の内部、外部、または円周上のどこにありますか？説明しなさい！"
         }
       }
+    },
+    "relasiDanFungsi": {
+      "title": "関係と関数",
+      "diagramBadge": "矢印図・関数グラフ付き",
+      "featureDiagramTitle": "🖼️ 図の機能",
+      "featureDiagramDesc": "各問題には関係と関数の矢印図、および関数グラフの問題には座標平面グラフが付いています。問題はUN・ANBK・TKAの出題範囲から厳選され、公式試験に備えることができます。",
+      "subtopics": {
+        "pengertianRelasi": {
+          "label": "関係の定義と表し方",
+          "desc": "矢印図・順序対・デカルト図・定義域と値域"
+        },
+        "pengertianFungsi": {
+          "label": "関数の定義と表し方",
+          "desc": "関数の条件・単射・全射・垂直線テスト"
+        },
+        "banyakFungsi": {
+          "label": "関数の個数と全単射",
+          "desc": "公式 nᵐ・全単射・n 階乗・bijection"
+        },
+        "notasiFungsi": {
+          "label": "関数の記法と式",
+          "desc": "記法 f(x)・値の計算・式の決定・パラメータの求め方"
+        },
+        "grafikFungsi": {
+          "label": "関数のグラフ（発展）",
+          "desc": "値表・切片・傾き・グラフの概形・垂直線テスト"
+        }
+      }
     }
   },
   "settings": {
