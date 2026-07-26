@@ -127,6 +127,9 @@ Replace `\text{}` with `\mathrm{}` for units; use interpolated `formulaVar` key 
 ## Perbandingan topic — FULLY TRILINGUAL (July 2026)
 All 5 sub-pages + index complete: perbandinganUmum, perbandinganBertingkat, perbandinganSenilai, perbandinganSkala, perbandinganCampuran. All locale keys live under `practice.perbandingan.<subKey>.*` in all 3 files. PerbandinganCampuranPage is the simplest pattern: pure t() only, no InlineMath/Trans/isDark.
 
+## Translation progress — Segitiga dan Segiempat LENGKAP
+- **Kelas 7 Segitiga dan Segiempat — KelilingLuasBangunTakBeraturanPage.tsx (sub-page 5, TERAKHIR)**: Fully trilingual (id/en/ja) as of July 2026. Locale key prefix: `practice.segitigaSegiempat.kelilingLuasBangunTakBeraturan`. 15 essay questions, 3 sections (A=Keliling Q1–5, B=Luas Q6–10, C=Aplikasi Q11–15). Pattern: `const p = "practice.segitigaSegiempat.kelilingLuasBangunTakBeraturan"`. SVG diagrams left untranslated (per rule). All 15 soal, 15 badges, tip box (3 bullets), section titles, h1, subtitle, and Q15 denah lines (q15denahLine1/q15denahLine2) translated. q1bold/q2bold pattern for styled `<span>`. `Rp\,45.000/\text{m}^2` and `Rp\,180.000/\text{m}^2` kept in InlineMath (Rp not inside `\text{}`). **Kelas 7 Segitiga dan Segiempat LENGKAP (index + 5 sub-halaman semua trilingual, total 70 soal).**
+
 ## Translation progress
 - Kelas 8 PGL pages (GrafikPGLPage, MenentukanPGLPage): dark-mode color fixes applied July 2026.
 - PrismaPage.tsx: Pass 1 (JSX classNames) + Pass 2 (all SVG colors) complete — fully theme-clean.

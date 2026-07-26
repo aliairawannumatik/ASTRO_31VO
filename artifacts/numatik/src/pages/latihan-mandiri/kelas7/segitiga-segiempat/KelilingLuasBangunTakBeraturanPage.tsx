@@ -129,6 +129,7 @@ const Q = ({ no, children, diagram, badge, badgeColor = "#60a5fa" }: QProps) => 
 const KelilingLuasBangunTakBeraturanLatihanPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.segitigaSegiempat.kelilingLuasBangunTakBeraturan";
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -143,9 +144,9 @@ const KelilingLuasBangunTakBeraturanLatihanPage = () => {
             <BookOpen className="w-7 h-7 text-orange-400" />
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1">
-            KELILING &amp; LUAS BANGUN TAK BERATURAN
+            {t(`${p}.title`)}
           </h1>
-          <p className="text-white/50 text-xs font-body">Kelas 7 · {t('practice.breadcrumb')} · Segitiga dan Segiempat</p>
+          <p className="text-white/50 text-xs font-body">{t(`${p}.subtitle`)}</p>
           <div className="mt-3 flex justify-center gap-2 flex-wrap">
             {["UN", "TKA", "ANBK"].map(tag => (
               <span key={tag} className="text-xs font-bold px-3 py-1 rounded-full bg-yellow-400/15 text-yellow-300 border border-yellow-400/30">{tag}</span>
@@ -155,165 +156,177 @@ const KelilingLuasBangunTakBeraturanLatihanPage = () => {
 
         {/* Tip Box */}
         <div className="rounded-xl bg-orange-500/10 border border-orange-500/30 px-5 py-4 mb-6 text-sm text-white/80 font-body leading-relaxed">
-          <p className="font-bold text-orange-300 mb-1">Strategi Menyelesaikan Bangun Tak Beraturan</p>
+          <p className="font-bold text-orange-300 mb-1">{t(`${p}.tipTitle`)}</p>
           <ul className="list-disc list-inside space-y-1 text-xs text-white/70">
-            <li>Urai bangun menjadi bangun-bangun sederhana (persegi, segitiga, dll.)</li>
-            <li>Hitung luas masing-masing bagian lalu jumlahkan (atau kurangkan).</li>
-            <li>Untuk keliling, jumlahkan semua sisi terluar saja.</li>
+            <li>{t(`${p}.tip1`)}</li>
+            <li>{t(`${p}.tip2`)}</li>
+            <li>{t(`${p}.tip3`)}</li>
           </ul>
         </div>
 
         <div className="space-y-5 animate-slide-up">
 
           {/* ── BAGIAN A: Keliling ── */}
-          <Section title="Bagian A · Keliling Bangun Tak Beraturan" color="#60a5fa">
+          <Section title={t(`${p}.sectionA`)} color="#60a5fa">
 
-            <Q no={1} badge="Bangun L" badgeColor="#60a5fa" diagram={<DiagramQ1 />}>
+            <Q no={1} badge={t(`${p}.badgeBangunL`)} badgeColor="#60a5fa" diagram={<DiagramQ1 />}>
               <p>
-                Bangun di atas berbentuk huruf L dengan ukuran seperti pada gambar.
-                Sisi yang belum diketahui dapat dihitung dari sisi yang ada.
-                Tentukan <span className="text-blue-300 font-semibold">keliling</span> bangun tersebut!
+                {t(`${p}.q1pre`)}{" "}
+                <span className="text-blue-300 font-semibold">{t(`${p}.q1bold`)}</span>{" "}
+                {t(`${p}.q1end`)}
               </p>
             </Q>
 
-            <Q no={2} badge="Bangun Bertingkat" badgeColor="#60a5fa" diagram={<DiagramQ2 />}>
+            <Q no={2} badge={t(`${p}.badgeBertingkat`)} badgeColor="#60a5fa" diagram={<DiagramQ2 />}>
               <p>
-                Bangun berbentuk tangga memiliki ukuran seperti gambar.
-                Tentukan <span className="text-blue-300 font-semibold">keliling</span> bangun tersebut!
+                {t(`${p}.q2pre`)}{" "}
+                <span className="text-blue-300 font-semibold">{t(`${p}.q2bold`)}</span>{" "}
+                {t(`${p}.q2end`)}
               </p>
             </Q>
 
-            <Q no={3} badge="Kontekstual" badgeColor="#60a5fa">
+            <Q no={3} badge={t(`${p}.badgeKontekstual`)} badgeColor="#60a5fa">
               <p>
-                Sebuah taman kota berbentuk huruf U dengan ukuran: lebar luar <InlineMath math="20 \text{ m}" />,
-                panjang luar <InlineMath math="30 \text{ m}" />, lebar dalam <InlineMath math="10 \text{ m}" />,
-                dan kedalaman dalam <InlineMath math="15 \text{ m}" />.
-                Taman akan dipagari di sekeliling <em>tepi terluar</em> saja.
-                Tentukan keliling taman!
+                {t(`${p}.q3pre`)} <InlineMath math="20 \text{ m}" />
+                {t(`${p}.q3m1`)} <InlineMath math="30 \text{ m}" />
+                {t(`${p}.q3m2`)} <InlineMath math="10 \text{ m}" />
+                {t(`${p}.q3m3`)} <InlineMath math="15 \text{ m}" />
+                {t(`${p}.q3end`)}
               </p>
             </Q>
 
-            <Q no={4} badge="UN Style" badgeColor="#60a5fa">
+            <Q no={4} badge={t(`${p}.badgeUNStyle`)} badgeColor="#60a5fa">
               <p>
-                Sebuah denah lapangan berbentuk huruf T dengan ukuran:
-                lebar atas <InlineMath math="18 \text{ m}" />, tinggi batang <InlineMath math="12 \text{ m}" />,
-                lebar batang <InlineMath math="6 \text{ m}" />, dan tinggi kepala <InlineMath math="8 \text{ m}" />.
-                Tentukan keliling lapangan!
+                {t(`${p}.q4pre`)} <InlineMath math="18 \text{ m}" />
+                {t(`${p}.q4m1`)} <InlineMath math="12 \text{ m}" />
+                {t(`${p}.q4m2`)} <InlineMath math="6 \text{ m}" />
+                {t(`${p}.q4m3`)} <InlineMath math="8 \text{ m}" />
+                {t(`${p}.q4end`)}
               </p>
             </Q>
 
-            <Q no={5} badge="Gabungan Bangun" badgeColor="#60a5fa">
+            <Q no={5} badge={t(`${p}.badgeGabungan`)} badgeColor="#60a5fa">
               <p>
-                Sebuah bangun terdiri dari persegi panjang berukuran{" "}
-                <InlineMath math="16 \text{ cm} \times 10 \text{ cm}" /> dengan segitiga siku-siku yang ditempel di
-                sisi kanan (alas <InlineMath math="6 \text{ cm}" />, tinggi <InlineMath math="10 \text{ cm}" />).
-                Tentukan keliling bangun gabungan tersebut!
-                <span className="block mt-1 text-white/50 text-xs">(Petunjuk: hitung sisi miring segitiga dengan Pythagoras)</span>
+                {t(`${p}.q5pre`)}{" "}
+                <InlineMath math="16 \text{ cm} \times 10 \text{ cm}" />{" "}
+                {t(`${p}.q5mid`)} <InlineMath math="6 \text{ cm}" />
+                {t(`${p}.q5mid2`)} <InlineMath math="10 \text{ cm}" />
+                {t(`${p}.q5end`)}
+                <span className="block mt-1 text-white/50 text-xs">{t(`${p}.q5hint`)}</span>
               </p>
             </Q>
           </Section>
 
           {/* ── BAGIAN B: Luas ── */}
-          <Section title="Bagian B · Luas Bangun Tak Beraturan" color="#4ade80">
+          <Section title={t(`${p}.sectionB`)} color="#4ade80">
 
-            <Q no={6} badge="Bangun Rumah" badgeColor="#4ade80" diagram={<DiagramQ3 />}>
+            <Q no={6} badge={t(`${p}.badgeBangunRumah`)} badgeColor="#4ade80" diagram={<DiagramQ3 />}>
               <p>
-                Tampak depan sebuah rumah terdiri dari persegi panjang berukuran{" "}
-                <InlineMath math="21 \text{ cm} \times 14 \text{ cm}" /> (badan) dan segitiga sama kaki di atasnya
-                dengan alas <InlineMath math="21 \text{ cm}" /> dan tinggi <InlineMath math="8 \text{ cm}" />.
-                Hitung total luas tampak depan rumah!
+                {t(`${p}.q6pre`)}{" "}
+                <InlineMath math="21 \text{ cm} \times 14 \text{ cm}" />{" "}
+                {t(`${p}.q6mid`)} <InlineMath math="21 \text{ cm}" />{" "}
+                {t(`${p}.q6mid2`)} <InlineMath math="8 \text{ cm}" />
+                {t(`${p}.q6end`)}
               </p>
             </Q>
 
-            <Q no={7} badge="Bangun Plus" badgeColor="#4ade80" diagram={<DiagramQ4 />}>
+            <Q no={7} badge={t(`${p}.badgeBangunPlus`)} badgeColor="#4ade80" diagram={<DiagramQ4 />}>
               <p>
-                Bangun berbentuk tanda plus (+) terdiri dari gabungan 5 persegi kecil yang masing-masing berukuran{" "}
-                <InlineMath math="6 \text{ cm} \times 6 \text{ cm}" />.
-                Tentukan luas bangun tersebut!
+                {t(`${p}.q7pre`)}{" "}
+                <InlineMath math="6 \text{ cm} \times 6 \text{ cm}" />
+                {t(`${p}.q7end`)}
               </p>
             </Q>
 
-            <Q no={8} badge="Pengurangan" badgeColor="#4ade80">
+            <Q no={8} badge={t(`${p}.badgePengurangan`)} badgeColor="#4ade80">
               <p>
-                Sebuah persegi besar berukuran <InlineMath math="20 \text{ cm} \times 20 \text{ cm}" />.
-                Di dalam persegi tersebut dipotong sebuah persegi panjang berukuran{" "}
-                <InlineMath math="8 \text{ cm} \times 5 \text{ cm}" /> di pojok kanan atas.
-                Tentukan luas bangun yang tersisa!
+                {t(`${p}.q8pre`)} <InlineMath math="20 \text{ cm} \times 20 \text{ cm}" />
+                {t(`${p}.q8mid`)}{" "}
+                <InlineMath math="8 \text{ cm} \times 5 \text{ cm}" />{" "}
+                {t(`${p}.q8end`)}
               </p>
             </Q>
 
-            <Q no={9} badge="Grid" badgeColor="#4ade80" diagram={<DiagramQ5 />}>
+            <Q no={9} badge={t(`${p}.badgeGrid`)} badgeColor="#4ade80" diagram={<DiagramQ5 />}>
               <p>
-                Gambar di atas menunjukkan bangun pada kertas berpetak. Setiap kotak berukuran{" "}
-                <InlineMath math="1 \text{ cm} \times 1 \text{ cm}" />.
-                Tentukan luas bangun tersebut!
+                {t(`${p}.q9pre`)}{" "}
+                <InlineMath math="1 \text{ cm} \times 1 \text{ cm}" />
+                {t(`${p}.q9end`)}
               </p>
             </Q>
 
-            <Q no={10} badge="Penyesuaian" badgeColor="#4ade80">
+            <Q no={10} badge={t(`${p}.badgePenyesuaian`)} badgeColor="#4ade80">
               <p>
-                Sebuah kolam renang berbentuk L memiliki bagian pertama berukuran{" "}
-                <InlineMath math="12 \text{ m} \times 8 \text{ m}" /> dan bagian kedua berukuran{" "}
-                <InlineMath math="6 \text{ m} \times 4 \text{ m}" />.
-                Tentukan luas permukaan kolam!
+                {t(`${p}.q10pre`)}{" "}
+                <InlineMath math="12 \text{ m} \times 8 \text{ m}" />{" "}
+                {t(`${p}.q10mid`)}{" "}
+                <InlineMath math="6 \text{ m} \times 4 \text{ m}" />
+                {t(`${p}.q10end`)}
               </p>
             </Q>
           </Section>
 
           {/* ── BAGIAN C: Aplikasi ── */}
-          <Section title="Bagian C · Aplikasi & Pemecahan Masalah" color="#f87171">
+          <Section title={t(`${p}.sectionC`)} color="#f87171">
 
-            <Q no={11} badge="Biaya Cat" badgeColor="#f87171">
+            <Q no={11} badge={t(`${p}.badgeBiayaCat`)} badgeColor="#f87171">
               <p>
-                Dinding luar sebuah gudang berbentuk persegi panjang berukuran{" "}
-                <InlineMath math="15 \text{ m} \times 8 \text{ m}" />. Di dinding tersebut terdapat 3 jendela
-                masing-masing berukuran <InlineMath math="1{,}2 \text{ m} \times 1 \text{ m}" /> dan 1 pintu
-                berukuran <InlineMath math="2 \text{ m} \times 1{,}5 \text{ m}" />.
-                Jika biaya cat <InlineMath math="Rp\,45.000/\text{m}^2" />, berapakah total biaya mengecat dinding?
+                {t(`${p}.q11pre`)}{" "}
+                <InlineMath math="15 \text{ m} \times 8 \text{ m}" />
+                {t(`${p}.q11mid`)}{" "}
+                <InlineMath math="1{,}2 \text{ m} \times 1 \text{ m}" />{" "}
+                {t(`${p}.q11mid2`)}{" "}
+                <InlineMath math="2 \text{ m} \times 1{,}5 \text{ m}" />
+                {t(`${p}.q11mid3`)}{" "}
+                <InlineMath math="Rp\,45.000/\text{m}^2" />
+                {t(`${p}.q11end`)}
               </p>
             </Q>
 
-            <Q no={12} badge="ANBK" badgeColor="#f87171">
+            <Q no={12} badge={t(`${p}.badgeANBK`)} badgeColor="#f87171">
               <p>
-                Lantai aula sekolah berbentuk huruf L dengan ukuran: bagian panjang{" "}
-                <InlineMath math="20 \text{ m} \times 6 \text{ m}" /> dan bagian lebar{" "}
-                <InlineMath math="12 \text{ m} \times 8 \text{ m}" />. Lantai akan dipasangi keramik berukuran{" "}
-                <InlineMath math="60 \text{ cm} \times 60 \text{ cm}" />.
-                Berapa banyak keramik yang dibutuhkan?
+                {t(`${p}.q12pre`)}{" "}
+                <InlineMath math="20 \text{ m} \times 6 \text{ m}" />{" "}
+                {t(`${p}.q12mid`)}{" "}
+                <InlineMath math="12 \text{ m} \times 8 \text{ m}" />
+                {t(`${p}.q12mid2`)}{" "}
+                <InlineMath math="60 \text{ cm} \times 60 \text{ cm}" />
+                {t(`${p}.q12end`)}
               </p>
             </Q>
 
-            <Q no={13} badge="TKA" badgeColor="#f87171">
+            <Q no={13} badge={t(`${p}.badgeTKA`)} badgeColor="#f87171">
               <p>
-                Sebuah kebun sayur berbentuk persegi panjang berukuran{" "}
-                <InlineMath math="24 \text{ m} \times 16 \text{ m}" />.
-                Di sudut kanan atas kebun, terdapat kolam ikan berbentuk segitiga siku-siku dengan
-                sisi siku-siku masing-masing <InlineMath math="6 \text{ m}" /> dan <InlineMath math="8 \text{ m}" />.
-                Tentukan luas kebun sayur yang bisa ditanami (di luar kolam)!
+                {t(`${p}.q13pre`)}{" "}
+                <InlineMath math="24 \text{ m} \times 16 \text{ m}" />
+                {t(`${p}.q13mid`)}{" "}
+                <InlineMath math="6 \text{ m}" />{" "}
+                {t(`${p}.q13andWord`)}{" "}
+                <InlineMath math="8 \text{ m}" />
+                {t(`${p}.q13end`)}
               </p>
             </Q>
 
-            <Q no={14} badge="UN 2018" badgeColor="#f87171">
+            <Q no={14} badge={t(`${p}.badgeUN2018`)} badgeColor="#f87171">
               <p>
-                Sebuah taman berbentuk persegi panjang berukuran <InlineMath math="40 \text{ m} \times 25 \text{ m}" />.
-                Di dalam taman terdapat jalan setapak selebar <InlineMath math="2 \text{ m}" /> yang memotong
-                taman secara horizontal dan vertikal tepat di tengah.
-                Tentukan luas daerah hijau (taman di luar jalan setapak)!
+                {t(`${p}.q14pre`)}{" "}
+                <InlineMath math="40 \text{ m} \times 25 \text{ m}" />
+                {t(`${p}.q14mid`)}{" "}
+                <InlineMath math="2 \text{ m}" />{" "}
+                {t(`${p}.q14end`)}
               </p>
             </Q>
 
-            <Q no={15} badge="HOTS" badgeColor="#f87171">
-              <p>
-                Perhatikan gambar denah ruangan berbentuk huruf C berikut (ukuran dalam meter):
-              </p>
+            <Q no={15} badge={t(`${p}.badgeHOTS`)} badgeColor="#f87171">
+              <p>{t(`${p}.q15intro`)}</p>
               <div className="bg-white/5 rounded-lg p-4 my-2 text-xs font-mono text-white/80 leading-loose">
-                <span className="block">Sisi luar: panjang 18 m, tinggi 14 m</span>
-                <span className="block">Cerukan dalam: lebar 10 m, tinggi 6 m (di bagian tengah kanan)</span>
+                <span className="block">{t(`${p}.q15denahLine1`)}</span>
+                <span className="block">{t(`${p}.q15denahLine2`)}</span>
               </div>
               <p>
-                a) Tentukan keliling ruangan (jumlah semua sisi terluar)!<br/>
-                b) Tentukan luas ruangan!<br/>
-                c) Jika biaya pemasangan karpet <InlineMath math="Rp\,180.000/\text{m}^2" />, berapa total biayanya?
+                {t(`${p}.q15a`)}<br/>
+                {t(`${p}.q15b`)}<br/>
+                {t(`${p}.q15cpre`)} <InlineMath math="Rp\,180.000/\text{m}^2" /> {t(`${p}.q15cend`)}
               </p>
             </Q>
           </Section>
@@ -325,7 +338,7 @@ const KelilingLuasBangunTakBeraturanLatihanPage = () => {
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
             <ChevronLeft className="w-4 h-4" />
-            Kembali ke Segitiga dan Segiempat
+            {t(`${p}.back`)}
           </button>
         </div>
       </div>
