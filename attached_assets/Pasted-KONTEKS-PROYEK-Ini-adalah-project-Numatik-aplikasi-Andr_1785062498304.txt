@@ -1,0 +1,90 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Koordinat Kartesius"
+— index, UnsurUnsurPage.tsx (15 soal), dan
+PosisiRelatifTitikAcuanPage.tsx (10 soal) sudah selesai. Ini
+SUB-HALAMAN TERAKHIR dari topik ini: JarakTitikGarisPage.tsx (13
+soal, semua soal pakai diagram CoordPlane — paling diagram-heavy di
+topik ini).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- JANGAN sentuh file orphan (PosisiRelatifPage.tsx) atau
+  CoordPlane.tsx
+- Kalau array questions perlu dipindah ke dalam komponen (supaya bisa
+  akses t()), ikuti pola yang sudah terbukti di
+  PosisiRelatifTitikAcuanPage.tsx — data diagram (pts, segs,
+  extraTexts, size, range) disalin persis sama, hanya lokasinya yang
+  berubah
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: JarakTitikGarisPage.tsx (13 soal).
+
+KONTEKS KHUSUS FILE INI:
+- Format data: array questions: Q[] via .map() — ikuti pola yang
+  sudah terbukti di 2 sub-halaman sebelumnya
+- SEMUA 13 soal pakai diagram CoordPlane — komponen ini TIDAK perlu
+  diterjemahkan, koordinat titik sudah berupa data numerik di props
+
+WAJIB — 6 kasus \text{} bahasa Indonesia (tangani dengan pola yang
+SAMA PERSIS seperti yang sudah terbukti di UnsurUnsurPage.tsx —
+danWord/label connector untuk kata pendek, textKey untuk kalimat
+kompleks yang mengapit banyak simbol matematika):
+
+1. "\text{Hitung } PQ \text{ (jarak P ke Q)}" — kalimat mengapit PQ
+   → textKey (JANGAN dipaksa jadi pre/post karena ada anak kalimat
+   dalam kurung)
+2. "\text{Apakah } PQ = 10 \text{ satuan? Verifikasi!}" — kalimat
+   dengan pertanyaan → textKey
+3. "\text{Rumus: jarak ke sumbu-x} = |y|" — label sebelum tanda "="
+   → textKey (supaya seluruh string termasuk "= |y|" diganti dengan
+   representasi yang tepat, math murni |y| bisa tetap InlineMath
+   terpisah kalau strukturnya memungkinkan, atau seluruhnya textKey
+   kalau lebih simpel)
+4. "\text{Rumus: jarak ke sumbu-y} = |x|" — sama seperti kasus 3
+5. "\text{Rumus: jarak titik } (x_0,y_0) \text{ ke garis } y = k
+   \text{ adalah } |y_0 - k|" — kalimat kompleks mengapit beberapa
+   simbol matematika berbeda → WAJIB textKey, JANGAN coba pecah jadi
+   banyak variabel pre/mid/post karena terlalu rumit dan rawan salah
+   render antar bahasa (terutama urutan kata Jepang)
+6. "\text{Rumus: jarak titik } (x_0,y_0) \text{ ke garis } x = k
+   \text{ adalah } |x_0 - k|" — sama seperti kasus 5
+
+PENTING: cek ulang SELURUH file dengan grep "\\text{" untuk
+memastikan tidak ada kasus lain yang terlewat dari investigasi awal.
+
+1. Terjemahkan SEMUA teks: instruksi umum (kalau ada), teks 13 soal
+   (title, content, parts[].text), formula/rumus reference box (kalau
+   ada, label-labelnya bukan isi math)
+2. Tangani SEMUA 6 kasus \text{} dengan pola textKey/danWord yang
+   sesuai (untuk kasus 5 & 6 yang paling kompleks, prioritaskan
+   textKey daripada interpolasi pre/mid/post)
+3. Terjemahkan h1 title dan badge jumlah soal
+4. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.koordinatCartesius.jarakTitikGaris.*
+5. JANGAN sentuh sub-halaman lain, halaman index, file orphan, atau
+   CoordPlane.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc, grep manual, skrip Node.js/Python
+  pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q13)
+- Konfirmasi + tunjukkan kode: bagaimana SEMUA 6 kasus \text{}
+  ditangani, terutama kasus 5 dan 6 yang paling kompleks?
+- Jalankan grep "\\text{" untuk verifikasi 0 hardcode tersisa,
+  laporkan hasil lengkapnya
+- Konfirmasi eksplisit: SEMUA 13 soal sudah diterjemahkan, diagram
+  CoordPlane tidak disentuh
+- KONFIRMASI PALING PENTING DAN TERAKHIR: setelah ini selesai, apakah
+  SELURUH topik "Koordinat Kartesius" (index + 3 sub-halaman aktif:
+  15+10+13 = 38 soal) sekarang 100% trilingual tanpa ada yang
+  terlewat? Konfirmasi juga file orphan (PosisiRelatifPage.tsx) dan
+  CoordPlane.tsx tetap tidak tersentuh.

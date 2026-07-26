@@ -4257,6 +4257,98 @@
           "title": "Apakah Titik Memenuhi Persamaan Garis?",
           "content": "Periksa apakah setiap titik berikut terletak pada garis y = 3x − 1:"
         }
+      },
+      "jarakTitikGaris": {
+        "pageTitle": "JARAK TITIK DAN JARAK TITIK KE GARIS",
+        "infoBoxTitle": "📌 Rumus Jarak",
+        "rumusLabel": "Rumus:",
+        "diketLabel": "Diket:",
+        "refRow1": "Jarak 2 titik",
+        "refRow2": "Titik ke sumbu-x",
+        "refRow3": "Titik ke sumbu-y",
+        "refRow4": "Titik (x₀,y₀) ke garis y=k",
+        "refRow5": "Titik (x₀,y₀) ke garis x=k",
+        "refRow6": "Titik tengah (x₁,y₁) & (x₂,y₂)",
+        "q1": {
+          "title": "Jarak Dua Titik — Pengenalan Rumus",
+          "a": "Hitung jarak A(1, 2) ke B(5, 5) menggunakan rumus jarak.",
+          "b": "Apakah jarak dari A ke B sama dengan jarak dari B ke A? Jelaskan!"
+        },
+        "q2": {
+          "title": "Jarak Dua Titik Berbeda Kuadran",
+          "a": "Hitung PQ (jarak P ke Q).",
+          "b": "Apakah PQ = 10 satuan? Verifikasi!"
+        },
+        "q3": {
+          "title": "Jarak Titik ke Sumbu-x",
+          "a": "Berapakah jarak titik A(3, 5) ke sumbu-x?",
+          "b": "Berapakah jarak titik B(−4, −3) ke sumbu-x?",
+          "c": "Rumus: jarak ke sumbu-x = |y|",
+          "d": "Hitung jarak titik C(−7, −9) ke sumbu-x."
+        },
+        "q4": {
+          "title": "Jarak Titik ke Sumbu-y",
+          "a": "Berapakah jarak titik P(4, 2) ke sumbu-y?",
+          "b": "Berapakah jarak titik Q(−5, −3) ke sumbu-y?",
+          "c": "Rumus: jarak ke sumbu-y = |x|",
+          "d": "Hitung jarak titik R(−8, 6) ke sumbu-y."
+        },
+        "q5": {
+          "title": "Perbandingan Jarak ke Sumbu",
+          "content": "Koordinat: A(2,5), B(−4,1), C(3,−3), D(−1,−4)",
+          "a": "Tentukan jarak setiap titik ke sumbu-x.",
+          "b": "Tentukan jarak setiap titik ke sumbu-y.",
+          "c": "Titik mana yang paling dekat ke sumbu-x?",
+          "d": "Titik mana yang paling jauh ke sumbu-y?"
+        },
+        "q6": {
+          "title": "Jarak Titik ke Garis Horizontal",
+          "a": "Hitung jarak titik A(3, 6) ke garis y = 2.",
+          "b": "Hitung jarak titik B(−2, −1) ke garis y = 2.",
+          "c": "Rumus: jarak titik (x₀,y₀) ke garis y = k adalah |y₀ − k|"
+        },
+        "q7": {
+          "title": "Jarak Titik ke Garis Vertikal",
+          "a": "Hitung jarak titik P(−2, 4) ke garis x = 3.",
+          "b": "Hitung jarak titik Q(6, −3) ke garis x = 3.",
+          "c": "Rumus: jarak titik (x₀,y₀) ke garis x = k adalah |x₀ − k|"
+        },
+        "q8": {
+          "title": "Keliling Segitiga — Koordinat Negatif",
+          "a": "Hitung panjang PQ, QR, dan PR.",
+          "b": "Hitung keliling segitiga PQR."
+        },
+        "q9": {
+          "title": "Jarak dalam Konteks Nyata",
+          "content": "Sebuah peta kota menggunakan koordinat kartesius (dalam km).\nRumah Andi: A(2, 3), Sekolah: B(8, 11)",
+          "a": "Hitung jarak lurus (garis lurus) dari Rumah ke Sekolah.",
+          "b": "Jika Andi berjalan mengikuti jalan (horisontal lalu vertikal), berapa jauhnya?"
+        },
+        "q10": {
+          "title": "Persegi Panjang — Diagonal",
+          "a": "Hitung panjang diagonal AC (d₁).",
+          "b": "Hitung panjang diagonal BD (d₂).",
+          "c": "Apakah kedua diagonal sama panjang? Apa kesimpulanmu?"
+        },
+        "q11": {
+          "title": "Luas Segitiga dari Koordinat",
+          "a": "Hitung panjang sisi OA dan OB.",
+          "b": "Apakah segitiga OAB siku-siku? Di mana sudut siku-sikunya?",
+          "c": "Hitung luas segitiga OAB."
+        },
+        "q12": {
+          "title": "Titik Tengah di Antara Dua Titik",
+          "a": "Tentukan koordinat titik tengah M dari A(−4, 2) dan B(6, 8).",
+          "b": "Jika titik tengah M dari P(1, 3) dan Q adalah M(4, 7), tentukan koordinat Q.",
+          "c": "Titik K(−2, 5) dan L(8, −3). Tentukan koordinat titik tengah KL, lalu hitung jarak titik tengah tersebut ke titik asal O(0, 0)."
+        },
+        "q13": {
+          "title": "Titik Pusat Lingkaran dari Diameter",
+          "diket": "AB adalah diameter lingkaran, dengan A(−3, −1) dan B(5, 5) adalah ujung-ujung diameter tersebut.",
+          "a": "Tentukan koordinat titik pusat P (titik tengah AB).",
+          "b": "Hitung jari-jari lingkaran tersebut (jarak dari P ke A).",
+          "c": "Apakah titik C(4, −2) berada di dalam, di luar, atau tepat pada lingkaran? Jelaskan!"
+        }
       }
     }
   },
