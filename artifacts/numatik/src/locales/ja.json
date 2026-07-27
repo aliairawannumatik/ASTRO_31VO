@@ -5087,6 +5087,31 @@
           "partC": "大人と学生のチケットはそれぞれ何枚売れましたか？"
         }
       }
+    },
+    "persamaanGarisLurus": {
+      "title": "一次関数（直線の方程式）",
+      "subtopics": {
+        "grafikPGL": {
+          "label": "一次関数のグラフ",
+          "desc": "軸との交点、値表、グラフの描き方"
+        },
+        "gradien": {
+          "label": "傾き（グラジエント）",
+          "desc": "2点からの傾き、方程式とグラフ"
+        },
+        "hubungan2Garis": {
+          "label": "2直線の関係",
+          "desc": "平行、垂直、交わる直線"
+        },
+        "menentukanPGL": {
+          "label": "直線の方程式の求め方",
+          "desc": "y = mx + c の形、点と傾きから"
+        },
+        "aplikasiKontekstual": {
+          "label": "直線の方程式の応用問題",
+          "desc": "費用、速度、実生活のグラフ"
+        }
+      }
     }
   },
   "settings": {

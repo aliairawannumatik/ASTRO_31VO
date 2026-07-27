@@ -5087,6 +5087,31 @@
           "partC": "Berapa tiket dewasa dan pelajar yang terjual?"
         }
       }
+    },
+    "persamaanGarisLurus": {
+      "title": "PERSAMAAN GARIS LURUS",
+      "subtopics": {
+        "grafikPGL": {
+          "label": "GRAFIK PERSAMAAN GARIS LURUS",
+          "desc": "Titik potong sumbu, tabel nilai, sketsa grafik"
+        },
+        "gradien": {
+          "label": "GRADIEN (KEMIRINGAN GARIS)",
+          "desc": "Gradien dari 2 titik, persamaan, dan grafik"
+        },
+        "hubungan2Garis": {
+          "label": "HUBUNGAN 2 GARIS",
+          "desc": "Sejajar, tegak lurus, dan berpotongan"
+        },
+        "menentukanPGL": {
+          "label": "MENENTUKAN PERSAMAAN GARIS LURUS",
+          "desc": "Bentuk y = mx + c, melalui titik dan gradien"
+        },
+        "aplikasiKontekstual": {
+          "label": "APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL",
+          "desc": "Biaya, kecepatan, grafik kehidupan nyata"
+        }
+      }
     }
   },
   "settings": {

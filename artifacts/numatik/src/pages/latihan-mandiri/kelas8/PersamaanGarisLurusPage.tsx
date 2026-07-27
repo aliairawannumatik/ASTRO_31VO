@@ -5,45 +5,42 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronRight, BarChart2, TrendingUp, PenLine, GitBranch, Globe } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
-const subtopics = [
+const BASE = "practice.persamaanGarisLurus";
+
+const subtopicsConfig = [
   {
-    label: "GRAFIK PERSAMAAN GARIS LURUS",
+    key: "grafikPGL",
     path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus/grafik",
     icon: BarChart2,
     color: "#f472b6",
-    desc: "Titik potong sumbu, tabel nilai, sketsa grafik",
     soal: 10,
   },
   {
-    label: "GRADIEN (KEMIRINGAN GARIS)",
+    key: "gradien",
     path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus/gradien",
     icon: TrendingUp,
     color: "#60a5fa",
-    desc: "Gradien dari 2 titik, persamaan, dan grafik",
     soal: 10,
   },
   {
-    label: "HUBUNGAN 2 GARIS",
+    key: "hubungan2Garis",
     path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus/hubungan-2-garis",
     icon: GitBranch,
     color: "#fb923c",
-    desc: "Sejajar, tegak lurus, dan berpotongan",
     soal: 8,
   },
   {
-    label: "MENENTUKAN PERSAMAAN GARIS LURUS",
+    key: "menentukanPGL",
     path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus/menentukan-pgl",
     icon: PenLine,
     color: "#34d399",
-    desc: "Bentuk y = mx + c, melalui titik dan gradien",
     soal: 10,
   },
   {
-    label: "APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL",
+    key: "aplikasiKontekstual",
     path: "/latihan-mandiri/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual",
     icon: Globe,
     color: "#a78bfa",
-    desc: "Biaya, kecepatan, grafik kehidupan nyata",
     soal: 14,
   },
 ];
@@ -52,6 +49,12 @@ const PersamaanGarisLurusPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const subtopics = subtopicsConfig.map((s) => ({
+    ...s,
+    label: t(`${BASE}.subtopics.${s.key}.label`),
+    desc:  t(`${BASE}.subtopics.${s.key}.desc`),
+  }));
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -59,7 +62,7 @@ const PersamaanGarisLurusPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <BookOpen className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          PERSAMAAN GARIS LURUS
+          {t(`${BASE}.title`)}
         </h1>
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · {t('practice.breadcrumb')} · 5 {t('practice.suffixSubTopik')} · 52 {t('practice.suffixSoalTotal')}</p>
 
@@ -68,7 +71,7 @@ const PersamaanGarisLurusPage = () => {
             const Icon = sub.icon;
             return (
               <button
-                key={sub.label}
+                key={sub.key}
                 onClick={() => { playPopSound(); navigate(sub.path); }}
                 className="group flex items-center gap-4 backdrop-blur border rounded-xl px-5 py-4
                   transition-all duration-300 cursor-pointer text-left animate-slide-up"

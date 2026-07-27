@@ -5087,6 +5087,31 @@
           "partC": "How many adult and student tickets were sold?"
         }
       }
+    },
+    "persamaanGarisLurus": {
+      "title": "EQUATION OF A STRAIGHT LINE",
+      "subtopics": {
+        "grafikPGL": {
+          "label": "GRAPH OF A LINEAR EQUATION",
+          "desc": "Axis intercepts, value tables, graph sketching"
+        },
+        "gradien": {
+          "label": "GRADIENT (SLOPE)",
+          "desc": "Gradient from 2 points, equation, and graph"
+        },
+        "hubungan2Garis": {
+          "label": "RELATIONSHIP BETWEEN 2 LINES",
+          "desc": "Parallel, perpendicular, and intersecting"
+        },
+        "menentukanPGL": {
+          "label": "FINDING THE EQUATION OF A LINE",
+          "desc": "Form y = mx + c, through a point and gradient"
+        },
+        "aplikasiKontekstual": {
+          "label": "CONTEXTUAL APPLICATIONS OF LINE EQUATIONS",
+          "desc": "Cost, speed, real-life graphs"
+        }
+      }
     }
   },
   "settings": {
