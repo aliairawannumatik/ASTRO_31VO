@@ -6,13 +6,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { Rocket } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const pageUi = {
-  id: { title: "PENYELESAIAN MASALAH SPLDV" },
-  en: { title: "SOLVING REAL-WORLD SLETV PROBLEMS" },
-  ja: { title: "連立方程式の応用問題" },
-};
 
 const accentColor = "#a78bfa";
 const accentDim = "rgba(167,139,250,0.12)";
@@ -29,86 +22,86 @@ const badgeStyle: Record<Badge, string> = {
 };
 const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
-const questions: Q[] = [
-  Qf(1, "Soal Harga — UN Klasik", {
-    badge: "UN", type: "mixed",
-    content: "Harga 5 jeruk dan 3 apel = Rp 31.000. Harga 3 jeruk dan 7 apel = Rp 29.000.",
-    parts: [
-      { label: "a.", text: "Tuliskan SPLDV." },
-      { label: "b.", text: "Tentukan harga 1 jeruk dan 1 apel." },
-      { label: "c.", text: "Berapa harga 4 jeruk dan 4 apel?" },
-    ],
-  }),
-  Qf(2, "Soal Usia", {
-    badge: "UN", type: "mixed",
-    content: "Jumlah umur Ayah dan Anak sekarang adalah 50 tahun. Lima tahun yang lalu, umur Ayah empat kali umur Anak.",
-    parts: [
-      { label: "a.", text: "Misal umur Ayah = x dan umur Anak = y. Susun SPLDV." },
-      { label: "b.", text: "Selesaikan SPLDV tersebut." },
-      { label: "c.", text: "Tentukan umur Ayah dan Anak sekarang." },
-    ],
-  }),
-  Qf(3, "Soal Keliling dan Luas", {
-    badge: "ANBK", type: "mixed",
-    content: "Keliling sebuah persegi panjang = 70 m. Panjangnya 5 m lebih dari lebarnya.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV." },
-      { label: "b.", text: "Tentukan panjang dan lebar." },
-      { label: "c.", text: "Hitung luas persegi panjang tersebut." },
-    ],
-  }),
-  Qf(4, "Soal Ayam dan Kelinci", {
-    badge: "UN", type: "mixed",
-    content: "Dalam sebuah kandang terdapat ayam dan kelinci. Jumlah kepala = 50 dan jumlah kaki = 160.",
-    parts: [
-      { label: "a.", text: "Misal ayam = x dan kelinci = y. Susun SPLDV." },
-      { label: "b.", text: "Selesaikan SPLDV." },
-      { label: "c.", text: "Berapa ekor ayam dan kelinci?" },
-    ],
-  }),
-  Qf(5, "Soal Pipa Air", {
-    badge: "TKA", type: "mixed",
-    content: "Pipa A dapat mengisi tangki dalam x jam dan pipa B dalam y jam. Bersama-sama mengisi dalam 4 jam. Pipa B membutuhkan waktu 6 jam lebih lama dari pipa A.",
-    parts: [
-      { label: "a.", math: "\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{4}, \\quad y = x + 6" },
-      { label: "b.", text: "Selesaikan sistem tersebut." },
-      { label: "c.", text: "Berapa jam pipa A dan B masing-masing mengisi tangki?" },
-    ],
-  }),
-  Qf(6, "Soal Uang — UN", {
-    badge: "UN", type: "mixed",
-    content: "Rudi memiliki lembaran uang Rp 50.000 dan Rp 100.000 sebanyak 30 lembar dengan nilai total Rp 2.100.000.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa lembar uang Rp 50.000 dan Rp 100.000?" },
-    ],
-  }),
-  Qf(7, "Soal Ujian Sekolah", {
-    badge: "ANBK", type: "mixed",
-    content: "Skor benar = 5 dan skor salah = −2. Dino mengerjakan 50 soal. Skor total Dino = 162.",
-    parts: [
-      { label: "a.", text: "Misal soal benar = x dan salah = y. Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa soal yang dijawab benar dan salah?" },
-    ],
-  }),
-  Qf(8, "Soal Pariwisata — ANBK", {
-    badge: "ANBK", type: "mixed",
-    content: "Tiket masuk museum: dewasa Rp 25.000 dan pelajar Rp 15.000. Pada Sabtu terjual 250 tiket dengan total Rp 5.250.000.",
-    parts: [
-      { label: "a.", text: "Susun SPLDV." },
-      { label: "b.", text: "Selesaikan." },
-      { label: "c.", text: "Berapa tiket dewasa dan pelajar yang terjual?" },
-    ],
-  }),
-];
-
 const PenyelesaianMasalahPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { language } = useLanguage();
-  const pu = pageUi[language as keyof typeof pageUi] ?? pageUi.id;
+  const p = 'practice.spldv.penyelesaianMasalah';
+
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q1.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q1.partA`) },
+        { label: "b.", text: t(`${p}.q1.partB`) },
+        { label: "c.", text: t(`${p}.q1.partC`) },
+      ],
+    }),
+    Qf(2, t(`${p}.q2.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q2.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q2.partA`) },
+        { label: "b.", text: t(`${p}.q2.partB`) },
+        { label: "c.", text: t(`${p}.q2.partC`) },
+      ],
+    }),
+    Qf(3, t(`${p}.q3.title`), {
+      badge: "ANBK", type: "mixed",
+      content: t(`${p}.q3.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q3.partA`) },
+        { label: "b.", text: t(`${p}.q3.partB`) },
+        { label: "c.", text: t(`${p}.q3.partC`) },
+      ],
+    }),
+    Qf(4, t(`${p}.q4.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q4.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q4.partA`) },
+        { label: "b.", text: t(`${p}.q4.partB`) },
+        { label: "c.", text: t(`${p}.q4.partC`) },
+      ],
+    }),
+    Qf(5, t(`${p}.q5.title`), {
+      badge: "TKA", type: "mixed",
+      content: t(`${p}.q5.content`),
+      parts: [
+        { label: "a.", math: "\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{4}, \\quad y = x + 6" },
+        { label: "b.", text: t(`${p}.q5.partB`) },
+        { label: "c.", text: t(`${p}.q5.partC`) },
+      ],
+    }),
+    Qf(6, t(`${p}.q6.title`), {
+      badge: "UN", type: "mixed",
+      content: t(`${p}.q6.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q6.partA`) },
+        { label: "b.", text: t(`${p}.q6.partB`) },
+        { label: "c.", text: t(`${p}.q6.partC`) },
+      ],
+    }),
+    Qf(7, t(`${p}.q7.title`), {
+      badge: "ANBK", type: "mixed",
+      content: t(`${p}.q7.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q7.partA`) },
+        { label: "b.", text: t(`${p}.q7.partB`) },
+        { label: "c.", text: t(`${p}.q7.partC`) },
+      ],
+    }),
+    Qf(8, t(`${p}.q8.title`), {
+      badge: "ANBK", type: "mixed",
+      content: t(`${p}.q8.content`),
+      parts: [
+        { label: "a.", text: t(`${p}.q8.partA`) },
+        { label: "b.", text: t(`${p}.q8.partB`) },
+        { label: "c.", text: t(`${p}.q8.partC`) },
+      ],
+    }),
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -121,9 +114,11 @@ const PenyelesaianMasalahPage = () => {
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-center mb-1"
             style={{ color: accentColor, textShadow: `0 0 24px ${accentColor}88` }}>
-            {pu.title}
+            {t(`${p}.pageTitle`)}
           </h1>
-          <p className="text-white/40 text-xs font-body text-center">Kelas 8 · {t('practice.breadcrumb')} · 8 Soal</p>
+          <p className="text-white/40 text-xs font-body text-center">
+            {t(`${p}.grade`)} · {t('practice.breadcrumb')} · {t(`${p}.soalCount`)}
+          </p>
           <div className="flex gap-2 mt-3 flex-wrap justify-center">
             {(["UN","ANBK","TKA","AKM"] as Badge[]).map(b => (
               <span key={b} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle[b]}`}>{b}</span>
@@ -167,7 +162,7 @@ const PenyelesaianMasalahPage = () => {
         <div className="mt-10 text-center">
           <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/spldv"); }}
             className="text-sm text-white/40 hover:text-white/80 transition-colors cursor-pointer font-body">
-            ← {t('practice.backToMenu')} SPLDV
+            ← {t('practice.backToMenu')} {t(`${p}.backSuffix`)}
           </button>
         </div>
       </div>

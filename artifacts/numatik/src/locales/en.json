@@ -5025,6 +5025,67 @@
           "partA": "Let the first angle = x° and the second angle = y°. Write the two equations.",
           "partB": "Form the SLETV."
         }
+      },
+      "penyelesaianMasalah": {
+        "pageTitle": "SOLVING REAL-WORLD SLETV PROBLEMS",
+        "grade": "Grade 8",
+        "soalCount": "8 Questions",
+        "backSuffix": "SLETV",
+        "q1": {
+          "title": "Price Problem — Classic National Exam",
+          "content": "5 oranges and 3 apples cost Rp 31,000. 3 oranges and 7 apples cost Rp 29,000.",
+          "partA": "Write the SLETV.",
+          "partB": "Find the price of 1 orange and 1 apple.",
+          "partC": "What is the price of 4 oranges and 4 apples?"
+        },
+        "q2": {
+          "title": "Age Problem",
+          "content": "The sum of a father's and child's current ages is 50 years. Five years ago, the father's age was four times the child's age.",
+          "partA": "Let the father's age = x and the child's age = y. Form the SLETV.",
+          "partB": "Solve the SLETV.",
+          "partC": "Find the current ages of the father and child."
+        },
+        "q3": {
+          "title": "Perimeter and Area Problem",
+          "content": "The perimeter of a rectangle is 70 m. Its length is 5 m more than its width.",
+          "partA": "Form the SLETV.",
+          "partB": "Find the length and width.",
+          "partC": "Calculate the area of the rectangle."
+        },
+        "q4": {
+          "title": "Chicken and Rabbit Problem",
+          "content": "In a cage, there are chickens and rabbits. The total number of heads is 50 and the total number of legs is 160.",
+          "partA": "Let chickens = x and rabbits = y. Form the SLETV.",
+          "partB": "Solve the SLETV.",
+          "partC": "How many chickens and rabbits are there?"
+        },
+        "q5": {
+          "title": "Water Pipe Problem",
+          "content": "Pipe A can fill a tank in x hours and pipe B in y hours. Together they fill it in 4 hours. Pipe B takes 6 hours longer than pipe A.",
+          "partB": "Solve the system.",
+          "partC": "How many hours does it take each pipe to fill the tank?"
+        },
+        "q6": {
+          "title": "Money Problem — National Exam",
+          "content": "Rudi has 30 banknotes of Rp 50,000 and Rp 100,000 with a total value of Rp 2,100,000.",
+          "partA": "Form the SLETV.",
+          "partB": "Solve it.",
+          "partC": "How many banknotes of Rp 50,000 and Rp 100,000 are there?"
+        },
+        "q7": {
+          "title": "School Exam Scoring Problem",
+          "content": "A correct answer scores 5 and a wrong answer scores −2. Dino answered 50 questions. Dino's total score is 162.",
+          "partA": "Let correct answers = x and wrong answers = y. Form the SLETV.",
+          "partB": "Solve it.",
+          "partC": "How many questions were answered correctly and incorrectly?"
+        },
+        "q8": {
+          "title": "Tourism Problem — ANBK",
+          "content": "Museum entrance tickets: adult Rp 25,000 and student Rp 15,000. On Saturday, 250 tickets were sold with a total of Rp 5,250,000.",
+          "partA": "Form the SLETV.",
+          "partB": "Solve it.",
+          "partC": "How many adult and student tickets were sold?"
+        }
       }
     }
   },

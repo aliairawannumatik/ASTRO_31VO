@@ -5025,6 +5025,67 @@
           "partA": "Misal sudut pertama = x° dan sudut kedua = y°. Tuliskan dua persamaan.",
           "partB": "Susun SPLDV."
         }
+      },
+      "penyelesaianMasalah": {
+        "pageTitle": "PENYELESAIAN MASALAH SPLDV",
+        "grade": "Kelas 8",
+        "soalCount": "8 Soal",
+        "backSuffix": "SPLDV",
+        "q1": {
+          "title": "Soal Harga — UN Klasik",
+          "content": "Harga 5 jeruk dan 3 apel = Rp 31.000. Harga 3 jeruk dan 7 apel = Rp 29.000.",
+          "partA": "Tuliskan SPLDV.",
+          "partB": "Tentukan harga 1 jeruk dan 1 apel.",
+          "partC": "Berapa harga 4 jeruk dan 4 apel?"
+        },
+        "q2": {
+          "title": "Soal Usia",
+          "content": "Jumlah umur Ayah dan Anak sekarang adalah 50 tahun. Lima tahun yang lalu, umur Ayah empat kali umur Anak.",
+          "partA": "Misal umur Ayah = x dan umur Anak = y. Susun SPLDV.",
+          "partB": "Selesaikan SPLDV tersebut.",
+          "partC": "Tentukan umur Ayah dan Anak sekarang."
+        },
+        "q3": {
+          "title": "Soal Keliling dan Luas",
+          "content": "Keliling sebuah persegi panjang = 70 m. Panjangnya 5 m lebih dari lebarnya.",
+          "partA": "Susun SPLDV.",
+          "partB": "Tentukan panjang dan lebar.",
+          "partC": "Hitung luas persegi panjang tersebut."
+        },
+        "q4": {
+          "title": "Soal Ayam dan Kelinci",
+          "content": "Dalam sebuah kandang terdapat ayam dan kelinci. Jumlah kepala = 50 dan jumlah kaki = 160.",
+          "partA": "Misal ayam = x dan kelinci = y. Susun SPLDV.",
+          "partB": "Selesaikan SPLDV.",
+          "partC": "Berapa ekor ayam dan kelinci?"
+        },
+        "q5": {
+          "title": "Soal Pipa Air",
+          "content": "Pipa A dapat mengisi tangki dalam x jam dan pipa B dalam y jam. Bersama-sama mengisi dalam 4 jam. Pipa B membutuhkan waktu 6 jam lebih lama dari pipa A.",
+          "partB": "Selesaikan sistem tersebut.",
+          "partC": "Berapa jam pipa A dan B masing-masing mengisi tangki?"
+        },
+        "q6": {
+          "title": "Soal Uang — UN",
+          "content": "Rudi memiliki lembaran uang Rp 50.000 dan Rp 100.000 sebanyak 30 lembar dengan nilai total Rp 2.100.000.",
+          "partA": "Susun SPLDV.",
+          "partB": "Selesaikan.",
+          "partC": "Berapa lembar uang Rp 50.000 dan Rp 100.000?"
+        },
+        "q7": {
+          "title": "Soal Ujian Sekolah",
+          "content": "Skor benar = 5 dan skor salah = −2. Dino mengerjakan 50 soal. Skor total Dino = 162.",
+          "partA": "Misal soal benar = x dan salah = y. Susun SPLDV.",
+          "partB": "Selesaikan.",
+          "partC": "Berapa soal yang dijawab benar dan salah?"
+        },
+        "q8": {
+          "title": "Soal Pariwisata — ANBK",
+          "content": "Tiket masuk museum: dewasa Rp 25.000 dan pelajar Rp 15.000. Pada Sabtu terjual 250 tiket dengan total Rp 5.250.000.",
+          "partA": "Susun SPLDV.",
+          "partB": "Selesaikan.",
+          "partC": "Berapa tiket dewasa dan pelajar yang terjual?"
+        }
       }
     }
   },
