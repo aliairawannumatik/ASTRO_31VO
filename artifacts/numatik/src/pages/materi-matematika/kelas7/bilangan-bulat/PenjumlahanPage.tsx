@@ -1487,6 +1487,21 @@ const PenjumlahanBilanganBulatPage = () => {
           {c.subtitle}
         </p>
 
+        {/* Buku Animasi shortcut */}
+        <button
+          onClick={() => navigate("/materi-matematika/kelas-7/bilangan-bulat/penjumlahan/buku-animasi")}
+          className="w-full mb-6 flex items-center justify-between gap-3 px-5 py-3.5 rounded-2xl border border-cyan-500/40 bg-gradient-to-r from-cyan-900/40 via-blue-900/30 to-indigo-900/40 hover:from-cyan-800/50 hover:via-blue-800/40 hover:to-indigo-800/40 active:scale-[0.98] transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">🎬</span>
+            <div className="text-left">
+              <p className="font-display font-bold text-sm text-cyan-200 leading-tight">BUKU ANIMASI MATEMATIKA</p>
+              <p className="font-body text-xs text-cyan-300/60 mt-0.5">Lihat busur animasi interaktif di garis bilangan</p>
+            </div>
+          </div>
+          <span className="text-cyan-400/60 group-hover:text-cyan-300 transition-colors text-lg">→</span>
+        </button>
+
         <div className="flex flex-col gap-4 animate-slide-up">
           {/* Section: Pengantar */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">

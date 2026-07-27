@@ -710,6 +710,7 @@ const MateriMatematikaKelas8Page = lazy(() => import("./pages/MateriMatematikaKe
 const MateriMatematikaKelas9Page = lazy(() => import("./pages/MateriMatematikaKelas9Page"));
 const BilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/BilanganBulatPage"));
 const PenjumlahanBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/PenjumlahanPage"));
+const BukuAnimasiPenjumlahanBilanganBulatPage = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/BukuAnimasiPenjumlahanPage"));
 const PenguranganBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/PenguranganPage"));
 const PerkalianBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/PerkalianPage"));
 const PembagianBilanganBulatMMK7Page = lazy(() => import("./pages/materi-matematika/kelas7/bilangan-bulat/PembagianPage"));
@@ -1567,6 +1568,7 @@ const AppInner = () => {
           <Route path="/materi-matematika/kelas-9" element={<MateriMatematikaKelas9Page />} />
           <Route path="/materi-matematika/kelas-7/bilangan-bulat" element={<BilanganBulatMMK7Page />} />
           <Route path="/materi-matematika/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanBilanganBulatMMK7Page />} />
+          <Route path="/materi-matematika/kelas-7/bilangan-bulat/penjumlahan/buku-animasi" element={<BukuAnimasiPenjumlahanBilanganBulatPage />} />
           <Route path="/materi-matematika/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatMMK7Page />} />
           <Route path="/materi-matematika/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatMMK7Page />} />
           <Route path="/materi-matematika/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatMMK7Page />} />
