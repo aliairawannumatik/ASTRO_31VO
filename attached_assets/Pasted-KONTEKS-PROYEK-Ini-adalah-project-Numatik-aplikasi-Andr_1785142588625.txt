@@ -1,0 +1,51 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "SPLDV" di Kelas 8
+sudah selesai. Mulai topik berikutnya: "Persamaan Garis Lurus" —
+index + 5 sub-halaman aktif (GrafikPGLPage.tsx, GradienPage.tsx,
+Hubungan2GarisPage.tsx, MenentukanPGLPage.tsx,
+AplikasiKontekstualPage.tsx).
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah — HANYA perbaiki angka
+  jumlah soal yang ditampilkan
+- JANGAN terjemahkan apapun dulu — itu untuk Tahap 2
+
+TUGAS SEKARANG — TAHAP 1 dari 2:
+Fokus HANYA ke halaman index: PersamaanGarisLurusPage.tsx
+
+PERBAIKI BUG JUMLAH SOAL DI INDEX (index saat ini menampilkan angka
+yang salah untuk hampir semua sub-topik):
+- "Grafik Persamaan Garis Lurus" ditampilkan 15 soal, padahal
+  GrafikPGLPage.tsx aktual berisi 10 soal — perbaiki jadi 10
+- "Gradien (Kemiringan Garis)" ditampilkan 23 soal, padahal
+  GradienPage.tsx aktual berisi 10 soal — perbaiki jadi 10
+- "Hubungan 2 Garis" ditampilkan 8 soal — sudah benar, biarkan
+- "Menentukan Persamaan Garis Lurus" ditampilkan 15 soal, padahal
+  MenentukanPGLPage.tsx aktual berisi 10 soal — perbaiki jadi 10
+- "Aplikasi Persamaan Garis pada Soal Kontekstual" ditampilkan 15
+  soal — perbaiki jadi 14 (CATATAN: AplikasiKontekstualPage.tsx
+  sebenarnya punya bug Q3 hilang total dengan array loncat Q2→Q4;
+  nanti saat mengerjakan sub-halaman itu di task terpisah, Q4-Q15
+  akan di-renumber jadi Q3-Q14 supaya urutan rapi 1-14. TIDAK PERLU
+  disentuh sekarang, index cukup pakai angka final 14)
+- Badge total soal di halaman index — perbaiki dari 76 jadi 52
+  (10+10+8+10+14)
+
+JANGAN sentuh 5 sub-halaman aktif, JANGAN sentuh
+ContextualIllustrations.tsx, JANGAN terjemahkan apapun (subtopics
+array, h1, footer, dll tetap hardcode dulu — itu Tahap 2).
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual, HMR log)
+- Konfirmasi eksplisit: jumlah soal di index sekarang benar untuk
+  SEMUA 5 sub-topik (10, 10, 8, 10, 14 — total 52)

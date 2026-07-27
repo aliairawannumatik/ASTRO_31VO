@@ -12,7 +12,7 @@ const subtopics = [
     icon: BarChart2,
     color: "#f472b6",
     desc: "Titik potong sumbu, tabel nilai, sketsa grafik",
-    soal: 15,
+    soal: 10,
   },
   {
     label: "GRADIEN (KEMIRINGAN GARIS)",
@@ -20,7 +20,7 @@ const subtopics = [
     icon: TrendingUp,
     color: "#60a5fa",
     desc: "Gradien dari 2 titik, persamaan, dan grafik",
-    soal: 23,
+    soal: 10,
   },
   {
     label: "HUBUNGAN 2 GARIS",
@@ -36,7 +36,7 @@ const subtopics = [
     icon: PenLine,
     color: "#34d399",
     desc: "Bentuk y = mx + c, melalui titik dan gradien",
-    soal: 15,
+    soal: 10,
   },
   {
     label: "APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL",
@@ -44,7 +44,7 @@ const subtopics = [
     icon: Globe,
     color: "#a78bfa",
     desc: "Biaya, kecepatan, grafik kehidupan nyata",
-    soal: 15,
+    soal: 14,
   },
 ];
 
@@ -61,7 +61,7 @@ const PersamaanGarisLurusPage = () => {
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
           PERSAMAAN GARIS LURUS
         </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · {t('practice.breadcrumb')} · 5 {t('practice.suffixSubTopik')} · 76 {t('practice.suffixSoalTotal')}</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · {t('practice.breadcrumb')} · 5 {t('practice.suffixSubTopik')} · 52 {t('practice.suffixSoalTotal')}</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((sub, i) => {
