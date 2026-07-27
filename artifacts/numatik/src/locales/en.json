@@ -5231,6 +5231,65 @@
           "title": "",
           "content": "Draw the graph of each line equation using two points:"
         }
+      },
+      "gradien": {
+        "h1": "GRADIENT (SLOPE OF A LINE)",
+        "grade": "Grade 8 · Equation of a Straight Line · National Exam",
+        "badgeSuffix": "Practice",
+        "backTo": "Equation of a Straight Line",
+        "dan": "and",
+        "petunjuk": "Hint:",
+        "q1": {
+          "title": "Gradient from Grid Paper",
+          "content": "Determine the gradient of each line segment a, b, c, d, e, f, and g drawn on the grid paper below (each square = 1 unit)!"
+        },
+        "q2": {
+          "title": "Gradient from Two Points",
+          "content": "Calculate the gradient of the line passing through each pair of points:"
+        },
+        "q3": {
+          "title": "Gradient from y = mx + c",
+          "content": "Find the gradient of each line equation below:"
+        },
+        "q4": {
+          "title": "Gradient from General Form ax + by = c",
+          "content": "Rearrange to the form y = mx + c, then determine the gradient:"
+        },
+        "q5": {
+          "title": "Gradient from a Graph Using the Triangle Method",
+          "calcText": "Calculate",
+          "pCText": "Calculate the gradient"
+        },
+        "q6": {
+          "title": "Gradient of Vertical and Horizontal Lines",
+          "pA": "What is the gradient of the line y = 3? Why?",
+          "pB": "What is the gradient of the line x = 2? Why?",
+          "pC": "What happens when we compute Δy/Δx for a vertical line?"
+        },
+        "q7": {
+          "title": "Gradient of Parallel Lines",
+          "pA": "Do the two lines appear parallel? What are their characteristics?",
+          "pB": "Calculate the gradient of each line.",
+          "pC": "What is the relationship between the gradients of two parallel lines?"
+        },
+        "q8": {
+          "title": "Gradient of Perpendicular Lines",
+          "pA": "Calculate the gradient of ℓ₁ and ℓ₂.",
+          "pBText1": "Calculate",
+          "pBText2": "What is the result?",
+          "pC": "What is the condition for two lines to be perpendicular in terms of their gradients?"
+        },
+        "q9": {
+          "title": "Proving Points are Collinear",
+          "content": "Prove whether the following three points lie on a single straight line (are collinear):",
+          "pHint": "Calculate the gradient of AB and BC. If they are equal, the three points are collinear."
+        },
+        "q10": {
+          "title": "Finding Variable Values from Collinear Points",
+          "content": "In each problem below, three points are known to be collinear (lying on a single straight line). Find the value of the unknown variable.",
+          "collinear": "are collinear. Find the value of",
+          "pHint": "Since the three points are collinear, the gradient between any two pairs of points on the line must be equal. Use the two fully known points to find the gradient, then use that gradient to find the variable at the third point."
+        }
       }
     }
   },

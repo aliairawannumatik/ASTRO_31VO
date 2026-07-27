@@ -5231,6 +5231,65 @@
           "title": "",
           "content": "Gambar grafik persamaan garis berikut menggunakan dua titik:"
         }
+      },
+      "gradien": {
+        "h1": "GRADIEN (KEMIRINGAN GARIS)",
+        "grade": "Kelas 8 · Persamaan Garis Lurus · UN / TKA / ANBK",
+        "badgeSuffix": "Latihan",
+        "backTo": "Persamaan Garis Lurus",
+        "dan": "dan",
+        "petunjuk": "Petunjuk:",
+        "q1": {
+          "title": "Gradien dari Kertas Berpetak",
+          "content": "Tentukan nilai gradien dari setiap ruas garis a, b, c, d, e, f, dan g yang digambarkan pada kertas berpetak berikut (setiap kotak = 1 satuan)!"
+        },
+        "q2": {
+          "title": "Gradien dari Dua Titik",
+          "content": "Hitung gradien garis yang melalui pasangan titik berikut:"
+        },
+        "q3": {
+          "title": "Gradien dari Persamaan y = mx + c",
+          "content": "Tentukan gradien dari setiap persamaan garis berikut:"
+        },
+        "q4": {
+          "title": "Gradien dari Bentuk Umum ax + by = c",
+          "content": "Ubah ke bentuk y = mx + c lalu tentukan gradiennya:"
+        },
+        "q5": {
+          "title": "Gradien dari Grafik Menggunakan Segitiga",
+          "calcText": "Hitung",
+          "pCText": "Hitung gradien"
+        },
+        "q6": {
+          "title": "Gradien Garis Tegak dan Datar",
+          "pA": "Berapa gradien garis y = 3? Mengapa?",
+          "pB": "Berapa gradien garis x = 2? Mengapa?",
+          "pC": "Apa yang terjadi saat kita membagi Δy/Δx untuk garis vertikal?"
+        },
+        "q7": {
+          "title": "Gradien Garis Paralel",
+          "pA": "Apakah kedua garis tampak sejajar? Apa cirinya?",
+          "pB": "Hitung gradien masing-masing garis.",
+          "pC": "Apa hubungan gradien dua garis yang sejajar?"
+        },
+        "q8": {
+          "title": "Gradien Garis Tegak Lurus",
+          "pA": "Hitung gradien ℓ₁ dan ℓ₂.",
+          "pBText1": "Hitung",
+          "pBText2": "Berapa hasilnya?",
+          "pC": "Apa syarat dua garis saling tegak lurus dalam hal gradien?"
+        },
+        "q9": {
+          "title": "Membuktikan Titik Segaris",
+          "content": "Buktikan apakah tiga titik berikut terletak pada satu garis lurus (segaris):",
+          "pHint": "Hitung gradien AB dan BC. Jika sama, ketiga titik segaris."
+        },
+        "q10": {
+          "title": "Menentukan Nilai Variabel dari Titik Segaris",
+          "content": "Pada setiap soal berikut, tiga titik diketahui segaris (terletak pada satu garis lurus). Tentukan nilai variabel yang belum diketahui.",
+          "collinear": "segaris. Tentukan nilai",
+          "pHint": "Karena ketiga titik segaris, gradien antara dua pasang titik mana pun pada garis tersebut harus sama. Gunakan dua titik yang diketahui lengkap untuk mencari gradien, lalu gunakan gradien itu untuk mencari variabel pada titik ketiga."
+        }
       }
     }
   },
