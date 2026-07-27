@@ -5111,6 +5111,65 @@
           "label": "APLIKASI PERSAMAAN GARIS PADA SOAL KONTEKSTUAL",
           "desc": "Biaya, kecepatan, grafik kehidupan nyata"
         }
+      },
+      "menentukanPgl": {
+        "h1": "MENENTUKAN PERSAMAAN GARIS LURUS",
+        "grade": "Kelas 8 · Persamaan Garis Lurus · UN / TKA / ANBK",
+        "badgeSuffix": "Latihan",
+        "backTo": "Persamaan Garis Lurus",
+        "sec1": "Soal 1–4: Uraian dasar",
+        "sec2": "Soal 5: Garis sejajar (titik + garis)",
+        "sec3": "Soal 6: Garis tegak lurus (titik + garis)",
+        "sec4": "Soal 7–10: Pilihan ganda berbasis grafik",
+        "parallel": "sejajar",
+        "perpendicular": "tegak lurus",
+        "and": "dan",
+        "q1": {
+          "title": "Persamaan dari Gradien dan Satu Titik",
+          "content": "Tentukan persamaan garis yang melalui titik P dan memiliki gradien m:"
+        },
+        "q2": {
+          "title": "Persamaan dari Dua Titik",
+          "content": "Tentukan persamaan garis yang melalui pasangan titik berikut:"
+        },
+        "q3": {
+          "title": "Persamaan Garis dari Titik Potong Sumbu",
+          "content": "Perhatikan grafik garis berikut. Garis tersebut melalui titik potong sumbu-x dan titik potong sumbu-y.",
+          "pA": "Tentukan koordinat titik potong garis dengan sumbu-x dan sumbu-y berdasarkan grafik.",
+          "pB": "Hitung gradien garis tersebut menggunakan kedua titik potong sumbu.",
+          "pC": "Tuliskan persamaan garis tersebut."
+        },
+        "q4": {
+          "title": "Persamaan Garis Melalui Titik Pangkal",
+          "content": "Perhatikan grafik garis berikut. Garis tersebut melalui titik pangkal O(0, 0) dan satu titik lainnya.",
+          "pA": "Tentukan koordinat titik yang dilalui garis selain titik pangkal O.",
+          "pB": "Hitung gradien garis tersebut.",
+          "pC": "Tuliskan persamaan garis tersebut."
+        },
+        "q5": {
+          "title": "Garis Melalui Titik dan Sejajar Garis yang Diketahui",
+          "content": "Tentukan persamaan garis yang melalui titik P dan sejajar dengan garis yang diberikan:"
+        },
+        "q6": {
+          "title": "Garis Melalui Titik dan Tegak Lurus Garis yang Diketahui",
+          "content": "Tentukan persamaan garis yang melalui titik P dan tegak lurus dengan garis yang diberikan:"
+        },
+        "q7": {
+          "title": "Pilihan Ganda — Garis Sejajar (Grafik)",
+          "content": "Perhatikan gambar berikut! Persamaan garis h adalah …."
+        },
+        "q8": {
+          "title": "Pilihan Ganda — Garis Tegak Lurus (Grafik)",
+          "content": "Perhatikan gambar berikut! Persamaan garis b adalah …."
+        },
+        "q9": {
+          "title": "Pilihan Ganda — Garis Sejajar & Tegak Lurus (Grafik)",
+          "content": "Perhatikan gambar berikut! Persamaan garis lurus b adalah …."
+        },
+        "q10": {
+          "title": "Pilihan Ganda — Tiga Garis (Grafik)",
+          "content": "Perhatikan gambar di bawah ini! Persamaan garis ℓ adalah …."
+        }
       }
     }
   },

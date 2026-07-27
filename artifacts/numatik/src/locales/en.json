@@ -5111,6 +5111,65 @@
           "label": "CONTEXTUAL APPLICATIONS OF LINE EQUATIONS",
           "desc": "Cost, speed, real-life graphs"
         }
+      },
+      "menentukanPgl": {
+        "h1": "DETERMINING THE EQUATION OF A LINE",
+        "grade": "Grade 8 · Equation of a Straight Line · National Exam",
+        "badgeSuffix": "Practice",
+        "backTo": "Equation of a Straight Line",
+        "sec1": "Q1–4: Basic essay questions",
+        "sec2": "Q5: Parallel lines (point + line)",
+        "sec3": "Q6: Perpendicular lines (point + line)",
+        "sec4": "Q7–10: Multiple choice — graph-based",
+        "parallel": "parallel to",
+        "perpendicular": "perpendicular to",
+        "and": "and",
+        "q1": {
+          "title": "Equation from Gradient and One Point",
+          "content": "Find the equation of the line passing through point P with gradient m:"
+        },
+        "q2": {
+          "title": "Equation from Two Points",
+          "content": "Find the equation of the line passing through each pair of points:"
+        },
+        "q3": {
+          "title": "Equation of a Line from Axis Intercepts",
+          "content": "Observe the line graph below. The line passes through the x-axis intercept and y-axis intercept.",
+          "pA": "Determine the coordinates of the line's intercepts with the x-axis and y-axis from the graph.",
+          "pB": "Calculate the gradient of the line using both axis intercepts.",
+          "pC": "Write the equation of the line."
+        },
+        "q4": {
+          "title": "Equation of a Line Through the Origin",
+          "content": "Observe the line graph below. The line passes through the origin O(0, 0) and one other point.",
+          "pA": "Identify the coordinates of the other point on the line besides the origin O.",
+          "pB": "Calculate the gradient of the line.",
+          "pC": "Write the equation of the line."
+        },
+        "q5": {
+          "title": "Line Through a Point, Parallel to a Given Line",
+          "content": "Find the equation of the line passing through point P and parallel to the given line:"
+        },
+        "q6": {
+          "title": "Line Through a Point, Perpendicular to a Given Line",
+          "content": "Find the equation of the line passing through point P and perpendicular to the given line:"
+        },
+        "q7": {
+          "title": "Multiple Choice — Parallel Lines (Graph)",
+          "content": "Observe the figure below! The equation of line h is …."
+        },
+        "q8": {
+          "title": "Multiple Choice — Perpendicular Lines (Graph)",
+          "content": "Observe the figure below! The equation of line b is …."
+        },
+        "q9": {
+          "title": "Multiple Choice — Parallel & Perpendicular Lines (Graph)",
+          "content": "Observe the figure below! The equation of straight line b is …."
+        },
+        "q10": {
+          "title": "Multiple Choice — Three Lines (Graph)",
+          "content": "Observe the figure below! The equation of line ℓ is …."
+        }
       }
     }
   },
