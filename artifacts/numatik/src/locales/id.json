@@ -5170,6 +5170,67 @@
           "title": "Pilihan Ganda — Tiga Garis (Grafik)",
           "content": "Perhatikan gambar di bawah ini! Persamaan garis ℓ adalah …."
         }
+      },
+      "grafikPgl": {
+        "h1": "GRAFIK PERSAMAAN GARIS LURUS",
+        "grade": "Kelas 8 · Persamaan Garis Lurus · UN / TKA / ANBK",
+        "badgeSuffix": "Latihan",
+        "backTo": "Persamaan Garis Lurus",
+        "hint": "Petunjuk:",
+        "tablePartA": "Lengkapi nilai y pada tabel dengan mensubstitusikan setiap nilai x ke persamaan.",
+        "tablePartB": "Gambarkan titik-titik (x, y) hasil tabel pada bidang kartesius di atas.",
+        "tablePartC": "Hubungkan titik-titik tersebut menjadi sebuah garis lurus.",
+        "axisPartA": "Substitusikan x = 0 ke persamaan untuk mencari nilai y (titik potong sumbu-y).",
+        "axisPartB": "Substitusikan y = 0 ke persamaan untuk mencari nilai x (titik potong sumbu-x).",
+        "axisPartC": "Gambarkan kedua titik tersebut lalu hubungkan menjadi sebuah garis lurus.",
+        "q1": {
+          "title": "Grafik y = x + 2",
+          "pAPre": "Tentukan titik potong garis",
+          "pAPost": "dengan sumbu-x dan sumbu-y.",
+          "pB": "Sketsa grafik garis tersebut.",
+          "pC": "Apakah titik (3, 5) terletak pada garis ini? Buktikan!"
+        },
+        "q2": {
+          "title": "Grafik y = −3x + 6",
+          "pA": "Tentukan titik potong garis dengan sumbu-x.",
+          "pB": "Tentukan titik potong garis dengan sumbu-y.",
+          "pC": "Ke arah mana garis bergerak? Naik atau turun dari kiri ke kanan?"
+        },
+        "q3": {
+          "title": "Grafik dari Tabel Nilai x — y = 2x − 1",
+          "content": "Lengkapi tabel nilai y berikut untuk persamaan garis y = 2x − 1, lalu gambarlah grafiknya pada bidang kartesius di bawah."
+        },
+        "q4": {
+          "title": "Grafik dari Tabel Nilai x — y = −x + 3",
+          "content": "Lengkapi tabel nilai y berikut untuk persamaan garis y = −x + 3, lalu gambarlah grafiknya pada bidang kartesius di bawah."
+        },
+        "q5": {
+          "title": "Menggambar Garis dengan Titik Potong Sumbu — 2x + y = 4",
+          "content": "Lengkapi tabel berikut dengan mencari titik potong sumbu-y (saat x = 0) dan titik potong sumbu-x (saat y = 0) dari persamaan 2x + y = 4, lalu gambarlah garisnya."
+        },
+        "q6": {
+          "title": "Menggambar Garis dengan Titik Potong Sumbu — 3x − 2y = 12",
+          "content": "Lengkapi tabel berikut dengan mencari titik potong sumbu-y (saat x = 0) dan titik potong sumbu-x (saat y = 0) dari persamaan 3x − 2y = 12, lalu gambarlah garisnya."
+        },
+        "q7": {
+          "title": "Pilih Persamaan yang Sesuai dengan Grafik",
+          "content": "Perhatikan grafik garis berikut. Manakah persamaan garis yang tepat menggambarkan grafik tersebut?",
+          "pHint": "Hitung gradien garis menggunakan kedua titik pada grafik, lalu cocokkan dengan titik potong sumbu-y untuk menentukan persamaan yang tepat."
+        },
+        "q8": {
+          "title": "Diketahui Persamaan Garis, Pilih Grafik yang Tepat",
+          "content": "Diketahui persamaan garis y = 2x − 4. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
+          "pHint": "Substitusikan x = 0 dan y = 0 ke persamaan y = 2x − 4 untuk menemukan titik potong sumbu-y dan sumbu-x, lalu cocokkan dengan grafik yang benar."
+        },
+        "q9": {
+          "title": "Diketahui Persamaan Garis, Pilih Grafik yang Tepat",
+          "content": "Diketahui persamaan garis 2x + y − 4 = 0. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
+          "pHint": "Ubah persamaan 2x + y − 4 = 0 menjadi bentuk y = −2x + 4, lalu substitusikan x = 0 dan y = 0 untuk menemukan titik potong sumbu-y dan sumbu-x, kemudian cocokkan dengan grafik yang benar."
+        },
+        "q10": {
+          "title": "",
+          "content": "Gambar grafik persamaan garis berikut menggunakan dua titik:"
+        }
       }
     }
   },

@@ -4,7 +4,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 import CoordPlane from "../koordinat-cartesius/CoordPlane";
 
 type Part = { label: string; math?: string; text?: string };
@@ -21,265 +21,266 @@ type Q = {
   diagramChoices?: DiagramChoice[];
   type: "essay" | "mixed" | "diagram-only";
 };
-const Q = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
-
-const questions: Q[] = [
-  Q(1, "Grafik y = x + 2", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 0, y: 2, label: "(0,2)", color: "#f472b6", labelPos: "tr" },
-        { x: -2, y: 0, label: "(-2,0)", color: "#f472b6", labelPos: "tl" },
-      ],
-      segs: [{ x1: -5, y1: -3, x2: 4, y2: 6, color: "#f472b6", label: "y=x+2" }],
-    },
-    parts: [
-      { label: "a.", math: "\\text{Tentukan titik potong garis } y = x + 2 \\text{ dengan sumbu-x dan sumbu-y.}" },
-      { label: "b.", text: "Sketsa grafik garis tersebut." },
-      { label: "c.", text: "Apakah titik (3, 5) terletak pada garis ini? Buktikan!" },
-    ],
-  }),
-
-  Q(2, "Grafik y = −3x + 6", {
-    type: "mixed",
-    diagram: {
-      size: 260, range: 6,
-      pts: [
-        { x: 0, y: 6, label: "(0,6)", color: "#34d399", labelPos: "tr" },
-        { x: 2, y: 0, label: "(2,0)", color: "#34d399", labelPos: "top" },
-      ],
-      segs: [{ x1: -0.5, y1: 7.5, x2: 4, y2: -6, color: "#34d399", label: "y=−3x+6" }],
-    },
-    parts: [
-      { label: "a.", text: "Tentukan titik potong garis dengan sumbu-x." },
-      { label: "b.", text: "Tentukan titik potong garis dengan sumbu-y." },
-      { label: "c.", text: "Ke arah mana garis bergerak? Naik atau turun dari kiri ke kanan?" },
-    ],
-  }),
-
-  Q(3, "Grafik dari Tabel Nilai x — y = 2x − 1", {
-    type: "mixed",
-    content: "Lengkapi tabel nilai y berikut untuk persamaan garis y = 2x − 1, lalu gambarlah grafiknya pada bidang kartesius di bawah.",
-    table: {
-      equation: "y = 2x - 1",
-      cols: [
-        { x: -2, y: "…" },
-        { x: -1, y: "…" },
-        { x: 0,  y: "…" },
-        { x: 1,  y: "…" },
-        { x: 2,  y: "…" },
-      ],
-    },
-    diagram: { size: 220, range: 6 },
-    parts: [
-      { label: "a.", text: "Lengkapi nilai y pada tabel dengan mensubstitusikan setiap nilai x ke persamaan." },
-      { label: "b.", text: "Gambarkan titik-titik (x, y) hasil tabel pada bidang kartesius di atas." },
-      { label: "c.", text: "Hubungkan titik-titik tersebut menjadi sebuah garis lurus." },
-    ],
-  }),
-
-  Q(4, "Grafik dari Tabel Nilai x — y = −x + 3", {
-    type: "mixed",
-    content: "Lengkapi tabel nilai y berikut untuk persamaan garis y = −x + 3, lalu gambarlah grafiknya pada bidang kartesius di bawah.",
-    table: {
-      equation: "y = -x + 3",
-      cols: [
-        { x: -1, y: "…" },
-        { x: 0,  y: "…" },
-        { x: 1,  y: "…" },
-        { x: 2,  y: "…" },
-        { x: 3,  y: "…" },
-      ],
-    },
-    diagram: { size: 220, range: 6 },
-    parts: [
-      { label: "a.", text: "Lengkapi nilai y pada tabel dengan mensubstitusikan setiap nilai x ke persamaan." },
-      { label: "b.", text: "Gambarkan titik-titik (x, y) hasil tabel pada bidang kartesius di atas." },
-      { label: "c.", text: "Hubungkan titik-titik tersebut menjadi sebuah garis lurus." },
-    ],
-  }),
-
-  Q(5, "Menggambar Garis dengan Titik Potong Sumbu — 2x + y = 4", {
-    type: "mixed",
-    content: "Lengkapi tabel berikut dengan mencari titik potong sumbu-y (saat x = 0) dan titik potong sumbu-x (saat y = 0) dari persamaan 2x + y = 4, lalu gambarlah garisnya.",
-    table: {
-      equation: "2x + y = 4",
-      cols: [
-        { x: 0,   y: "…" },
-        { x: "…", y: 0   },
-      ],
-    },
-    diagram: { size: 220, range: 6 },
-    parts: [
-      { label: "a.", text: "Substitusikan x = 0 ke persamaan untuk mencari nilai y (titik potong sumbu-y)." },
-      { label: "b.", text: "Substitusikan y = 0 ke persamaan untuk mencari nilai x (titik potong sumbu-x)." },
-      { label: "c.", text: "Gambarkan kedua titik tersebut lalu hubungkan menjadi sebuah garis lurus." },
-    ],
-  }),
-
-  Q(6, "Menggambar Garis dengan Titik Potong Sumbu — 3x − 2y = 12", {
-    type: "mixed",
-    content: "Lengkapi tabel berikut dengan mencari titik potong sumbu-y (saat x = 0) dan titik potong sumbu-x (saat y = 0) dari persamaan 3x − 2y = 12, lalu gambarlah garisnya.",
-    table: {
-      equation: "3x - 2y = 12",
-      cols: [
-        { x: 0,   y: "…" },
-        { x: "…", y: 0   },
-      ],
-    },
-    diagram: { size: 220, range: 6 },
-    parts: [
-      { label: "a.", text: "Substitusikan x = 0 ke persamaan untuk mencari nilai y (titik potong sumbu-y)." },
-      { label: "b.", text: "Substitusikan y = 0 ke persamaan untuk mencari nilai x (titik potong sumbu-x)." },
-      { label: "c.", text: "Gambarkan kedua titik tersebut lalu hubungkan menjadi sebuah garis lurus." },
-    ],
-  }),
-
-  Q(7, "Pilih Persamaan yang Sesuai dengan Grafik", {
-    type: "mixed",
-    content: "Perhatikan grafik garis berikut. Manakah persamaan garis yang tepat menggambarkan grafik tersebut?",
-    diagram: {
-      size: 260, range: 6,
-      segs: [{ x1: -5, y1: -3, x2: 3, y2: 5, color: "#818cf8" }],
-      pts: [
-        { x: 0, y: 2, label: "(0,2)", color: "#818cf8", labelPos: "tr" },
-        { x: 2, y: 4, label: "(2,4)", color: "#818cf8", labelPos: "top" },
-      ],
-    },
-    choices: [
-      { label: "A.", math: "y = x + 2" },
-      { label: "B.", math: "y = 2x + 1" },
-      { label: "C.", math: "y = -x + 2" },
-      { label: "D.", math: "y = x - 2" },
-    ],
-    parts: [
-      { label: "Petunjuk:", text: "Hitung gradien garis menggunakan kedua titik pada grafik, lalu cocokkan dengan titik potong sumbu-y untuk menentukan persamaan yang tepat." },
-    ],
-  }),
-
-  Q(8, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
-    type: "mixed",
-    content: "Diketahui persamaan garis y = 2x − 4. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
-    diagramChoices: [
-      {
-        label: "A.",
-        diagram: {
-          size: 150, range: 5,
-          segs: [{ x1: -1, y1: -6, x2: 4, y2: 4, color: "#4ade80" }],
-          pts: [
-            { x: 0, y: -4, label: "(0,-4)", color: "#4ade80", labelPos: "bot" },
-            { x: 2, y: 0, label: "(2,0)", color: "#4ade80", labelPos: "top" },
-          ],
-        },
-      },
-      {
-        label: "B.",
-        diagram: {
-          size: 150, range: 5,
-          segs: [{ x1: -4, y1: 4, x2: 4, y2: -4, color: "#f87171" }],
-          pts: [
-            { x: 0, y: 0, label: "(0,0)", color: "#f87171", labelPos: "top" },
-          ],
-        },
-      },
-      {
-        label: "C.",
-        diagram: {
-          size: 150, range: 5,
-          segs: [{ x1: -3, y1: -1, x2: 3, y2: 3, color: "#f87171" }],
-          pts: [
-            { x: 0, y: 1, label: "(0,1)", color: "#f87171", labelPos: "top" },
-            { x: -2, y: -3, label: "(-2,-3)", color: "#f87171", labelPos: "bl" },
-          ],
-        },
-      },
-      {
-        label: "D.",
-        diagram: {
-          size: 150, range: 5,
-          segs: [{ x1: -2, y1: 4, x2: 4, y2: -4, color: "#f87171" }],
-          pts: [
-            { x: 0, y: 4, label: "(0,4)", color: "#f87171", labelPos: "top" },
-            { x: 2, y: 0, label: "(2,0)", color: "#f87171", labelPos: "bot" },
-          ],
-        },
-      },
-    ],
-    parts: [
-      { label: "Petunjuk:", text: "Substitusikan x = 0 dan y = 0 ke persamaan y = 2x − 4 untuk menemukan titik potong sumbu-y dan sumbu-x, lalu cocokkan dengan grafik yang benar." },
-    ],
-  }),
-
-  Q(9, "Diketahui Persamaan Garis, Pilih Grafik yang Tepat", {
-    type: "mixed",
-    content: "Diketahui persamaan garis 2x + y − 4 = 0. Manakah grafik di bawah ini yang tepat menggambarkan persamaan garis tersebut?",
-    diagramChoices: [
-      {
-        label: "A.",
-        diagram: {
-          size: 150, range: 5,
-          segs: [{ x1: -1, y1: 6, x2: 3, y2: -2, color: "#4ade80" }],
-          pts: [
-            { x: 0, y: 4, label: "(0,4)", color: "#4ade80", labelPos: "top" },
-            { x: 2, y: 0, label: "(2,0)", color: "#4ade80", labelPos: "bot" },
-          ],
-        },
-      },
-      {
-        label: "B.",
-        diagram: {
-          size: 150, range: 5,
-          segs: [{ x1: -2, y1: 0, x2: 2, y2: 8, color: "#f87171" }],
-          pts: [
-            { x: 0, y: 4, label: "(0,4)", color: "#f87171", labelPos: "top" },
-            { x: 1, y: 6, label: "(1,6)", color: "#f87171", labelPos: "tr" },
-          ],
-        },
-      },
-      {
-        label: "C.",
-        diagram: {
-          size: 150, range: 5,
-          segs: [{ x1: -3, y1: 2, x2: 3, y2: -10, color: "#f87171" }],
-          pts: [
-            { x: 0, y: -4, label: "(0,-4)", color: "#f87171", labelPos: "bot" },
-            { x: -2, y: 0, label: "(-2,0)", color: "#f87171", labelPos: "top" },
-          ],
-        },
-      },
-      {
-        label: "D.",
-        diagram: {
-          size: 150, range: 5,
-          segs: [{ x1: -1, y1: -5, x2: 5, y2: 1, color: "#f87171" }],
-          pts: [
-            { x: 0, y: -4, label: "(0,-4)", color: "#f87171", labelPos: "bot" },
-            { x: 4, y: 0, label: "(4,0)", color: "#f87171", labelPos: "top" },
-          ],
-        },
-      },
-    ],
-    parts: [
-      { label: "Petunjuk:", text: "Ubah persamaan 2x + y − 4 = 0 menjadi bentuk y = −2x + 4, lalu substitusikan x = 0 dan y = 0 untuk menemukan titik potong sumbu-y dan sumbu-x, kemudian cocokkan dengan grafik yang benar." },
-    ],
-  }),
-
-  Q(10, "", {
-    type: "mixed",
-    content: "Gambar grafik persamaan garis berikut menggunakan dua titik:",
-    parts: [
-      { label: "a.", math: "y = 2x + 3" },
-      { label: "b.", math: "y = -3x + 5" },
-      { label: "c.", math: "3x + 2y = 12" },
-      { label: "d.", math: "x - 4y = 8" },
-    ],
-  }),
-];
+const Qf = (n: number, title: string, rest: Omit<Q, "n" | "title">): Q => ({ n, title, ...rest });
 
 const GrafikPGLPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = 'practice.persamaanGarisLurus.grafikPgl';
+
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), {
+      type: "mixed",
+      diagram: {
+        size: 260, range: 6,
+        pts: [
+          { x: 0, y: 2, label: "(0,2)", color: "#f472b6", labelPos: "tr" },
+          { x: -2, y: 0, label: "(-2,0)", color: "#f472b6", labelPos: "tl" },
+        ],
+        segs: [{ x1: -5, y1: -3, x2: 4, y2: 6, color: "#f472b6", label: "y=x+2" }],
+      },
+      parts: [
+        { label: "a.", math: `\\text{${t(`${p}.q1.pAPre`)}} y = x + 2 \\text{ ${t(`${p}.q1.pAPost`)}}` },
+        { label: "b.", text: t(`${p}.q1.pB`) },
+        { label: "c.", text: t(`${p}.q1.pC`) },
+      ],
+    }),
+
+    Qf(2, t(`${p}.q2.title`), {
+      type: "mixed",
+      diagram: {
+        size: 260, range: 6,
+        pts: [
+          { x: 0, y: 6, label: "(0,6)", color: "#34d399", labelPos: "tr" },
+          { x: 2, y: 0, label: "(2,0)", color: "#34d399", labelPos: "top" },
+        ],
+        segs: [{ x1: -0.5, y1: 7.5, x2: 4, y2: -6, color: "#34d399", label: "y=−3x+6" }],
+      },
+      parts: [
+        { label: "a.", text: t(`${p}.q2.pA`) },
+        { label: "b.", text: t(`${p}.q2.pB`) },
+        { label: "c.", text: t(`${p}.q2.pC`) },
+      ],
+    }),
+
+    Qf(3, t(`${p}.q3.title`), {
+      type: "mixed",
+      content: t(`${p}.q3.content`),
+      table: {
+        equation: "y = 2x - 1",
+        cols: [
+          { x: -2, y: "…" },
+          { x: -1, y: "…" },
+          { x: 0,  y: "…" },
+          { x: 1,  y: "…" },
+          { x: 2,  y: "…" },
+        ],
+      },
+      diagram: { size: 220, range: 6 },
+      parts: [
+        { label: "a.", text: t(`${p}.tablePartA`) },
+        { label: "b.", text: t(`${p}.tablePartB`) },
+        { label: "c.", text: t(`${p}.tablePartC`) },
+      ],
+    }),
+
+    Qf(4, t(`${p}.q4.title`), {
+      type: "mixed",
+      content: t(`${p}.q4.content`),
+      table: {
+        equation: "y = -x + 3",
+        cols: [
+          { x: -1, y: "…" },
+          { x: 0,  y: "…" },
+          { x: 1,  y: "…" },
+          { x: 2,  y: "…" },
+          { x: 3,  y: "…" },
+        ],
+      },
+      diagram: { size: 220, range: 6 },
+      parts: [
+        { label: "a.", text: t(`${p}.tablePartA`) },
+        { label: "b.", text: t(`${p}.tablePartB`) },
+        { label: "c.", text: t(`${p}.tablePartC`) },
+      ],
+    }),
+
+    Qf(5, t(`${p}.q5.title`), {
+      type: "mixed",
+      content: t(`${p}.q5.content`),
+      table: {
+        equation: "2x + y = 4",
+        cols: [
+          { x: 0,   y: "…" },
+          { x: "…", y: 0   },
+        ],
+      },
+      diagram: { size: 220, range: 6 },
+      parts: [
+        { label: "a.", text: t(`${p}.axisPartA`) },
+        { label: "b.", text: t(`${p}.axisPartB`) },
+        { label: "c.", text: t(`${p}.axisPartC`) },
+      ],
+    }),
+
+    Qf(6, t(`${p}.q6.title`), {
+      type: "mixed",
+      content: t(`${p}.q6.content`),
+      table: {
+        equation: "3x - 2y = 12",
+        cols: [
+          { x: 0,   y: "…" },
+          { x: "…", y: 0   },
+        ],
+      },
+      diagram: { size: 220, range: 6 },
+      parts: [
+        { label: "a.", text: t(`${p}.axisPartA`) },
+        { label: "b.", text: t(`${p}.axisPartB`) },
+        { label: "c.", text: t(`${p}.axisPartC`) },
+      ],
+    }),
+
+    Qf(7, t(`${p}.q7.title`), {
+      type: "mixed",
+      content: t(`${p}.q7.content`),
+      diagram: {
+        size: 260, range: 6,
+        segs: [{ x1: -5, y1: -3, x2: 3, y2: 5, color: "#818cf8" }],
+        pts: [
+          { x: 0, y: 2, label: "(0,2)", color: "#818cf8", labelPos: "tr" },
+          { x: 2, y: 4, label: "(2,4)", color: "#818cf8", labelPos: "top" },
+        ],
+      },
+      choices: [
+        { label: "A.", math: "y = x + 2" },
+        { label: "B.", math: "y = 2x + 1" },
+        { label: "C.", math: "y = -x + 2" },
+        { label: "D.", math: "y = x - 2" },
+      ],
+      parts: [
+        { label: t(`${p}.hint`), text: t(`${p}.q7.pHint`) },
+      ],
+    }),
+
+    Qf(8, t(`${p}.q8.title`), {
+      type: "mixed",
+      content: t(`${p}.q8.content`),
+      diagramChoices: [
+        {
+          label: "A.",
+          diagram: {
+            size: 150, range: 5,
+            segs: [{ x1: -1, y1: -6, x2: 4, y2: 4, color: "#4ade80" }],
+            pts: [
+              { x: 0, y: -4, label: "(0,-4)", color: "#4ade80", labelPos: "bot" },
+              { x: 2, y: 0, label: "(2,0)", color: "#4ade80", labelPos: "top" },
+            ],
+          },
+        },
+        {
+          label: "B.",
+          diagram: {
+            size: 150, range: 5,
+            segs: [{ x1: -4, y1: 4, x2: 4, y2: -4, color: "#f87171" }],
+            pts: [
+              { x: 0, y: 0, label: "(0,0)", color: "#f87171", labelPos: "top" },
+            ],
+          },
+        },
+        {
+          label: "C.",
+          diagram: {
+            size: 150, range: 5,
+            segs: [{ x1: -3, y1: -1, x2: 3, y2: 3, color: "#f87171" }],
+            pts: [
+              { x: 0, y: 1, label: "(0,1)", color: "#f87171", labelPos: "top" },
+              { x: -2, y: -3, label: "(-2,-3)", color: "#f87171", labelPos: "bl" },
+            ],
+          },
+        },
+        {
+          label: "D.",
+          diagram: {
+            size: 150, range: 5,
+            segs: [{ x1: -2, y1: 4, x2: 4, y2: -4, color: "#f87171" }],
+            pts: [
+              { x: 0, y: 4, label: "(0,4)", color: "#f87171", labelPos: "top" },
+              { x: 2, y: 0, label: "(2,0)", color: "#f87171", labelPos: "bot" },
+            ],
+          },
+        },
+      ],
+      parts: [
+        { label: t(`${p}.hint`), text: t(`${p}.q8.pHint`) },
+      ],
+    }),
+
+    Qf(9, t(`${p}.q9.title`), {
+      type: "mixed",
+      content: t(`${p}.q9.content`),
+      diagramChoices: [
+        {
+          label: "A.",
+          diagram: {
+            size: 150, range: 5,
+            segs: [{ x1: -1, y1: 6, x2: 3, y2: -2, color: "#4ade80" }],
+            pts: [
+              { x: 0, y: 4, label: "(0,4)", color: "#4ade80", labelPos: "top" },
+              { x: 2, y: 0, label: "(2,0)", color: "#4ade80", labelPos: "bot" },
+            ],
+          },
+        },
+        {
+          label: "B.",
+          diagram: {
+            size: 150, range: 5,
+            segs: [{ x1: -2, y1: 0, x2: 2, y2: 8, color: "#f87171" }],
+            pts: [
+              { x: 0, y: 4, label: "(0,4)", color: "#f87171", labelPos: "top" },
+              { x: 1, y: 6, label: "(1,6)", color: "#f87171", labelPos: "tr" },
+            ],
+          },
+        },
+        {
+          label: "C.",
+          diagram: {
+            size: 150, range: 5,
+            segs: [{ x1: -3, y1: 2, x2: 3, y2: -10, color: "#f87171" }],
+            pts: [
+              { x: 0, y: -4, label: "(0,-4)", color: "#f87171", labelPos: "bot" },
+              { x: -2, y: 0, label: "(-2,0)", color: "#f87171", labelPos: "top" },
+            ],
+          },
+        },
+        {
+          label: "D.",
+          diagram: {
+            size: 150, range: 5,
+            segs: [{ x1: -1, y1: -5, x2: 5, y2: 1, color: "#f87171" }],
+            pts: [
+              { x: 0, y: -4, label: "(0,-4)", color: "#f87171", labelPos: "bot" },
+              { x: 4, y: 0, label: "(4,0)", color: "#f87171", labelPos: "top" },
+            ],
+          },
+        },
+      ],
+      parts: [
+        { label: t(`${p}.hint`), text: t(`${p}.q9.pHint`) },
+      ],
+    }),
+
+    Qf(10, t(`${p}.q10.title`), {
+      type: "mixed",
+      content: t(`${p}.q10.content`),
+      parts: [
+        { label: "a.", math: "y = 2x + 3" },
+        { label: "b.", math: "y = -3x + 5" },
+        { label: "c.", math: "3x + 2y = 12" },
+        { label: "d.", math: "x - 4y = 8" },
+      ],
+    }),
+  ];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -288,12 +289,12 @@ const GrafikPGLPage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/30 rounded-full px-4 py-1 mb-3">
-            <span className="text-pink-400 text-xs font-body">{questions.length} {t('practice.suffixSoal')} Latihan</span>
+            <span className="text-pink-400 text-xs font-body">{questions.length} {t('practice.suffixSoal')} {t(`${p}.badgeSuffix`)}</span>
           </div>
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
-            GRAFIK PERSAMAAN GARIS LURUS
+            {t(`${p}.h1`)}
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Persamaan Garis Lurus · UN / TKA / ANBK</p>
+          <p className="text-white/50 text-xs text-center font-body">{t(`${p}.grade`)}</p>
         </div>
 
         <div className="flex flex-col gap-6">
@@ -326,14 +327,14 @@ const GrafikPGLPage = () => {
                     <tbody>
                       <tr>
                         <td className="border border-slate-300 bg-pink-50 text-slate-700 font-bold px-3 py-1.5 text-center">x</td>
-                        {q.table.cols.map((c, i) => (
-                          <td key={i} className="border border-slate-300 text-slate-800 px-3 py-1.5 text-center min-w-[36px]">{c.x}</td>
+                        {q.table.cols.map((c, ci) => (
+                          <td key={ci} className="border border-slate-300 text-slate-800 px-3 py-1.5 text-center min-w-[36px]">{c.x}</td>
                         ))}
                       </tr>
                       <tr>
                         <td className="border border-slate-300 bg-pink-50 text-slate-700 font-bold px-3 py-1.5 text-center">y</td>
-                        {q.table.cols.map((c, i) => (
-                          <td key={i} className="border border-slate-300 text-slate-800 px-3 py-1.5 text-center min-w-[36px]">{c.y}</td>
+                        {q.table.cols.map((c, ci) => (
+                          <td key={ci} className="border border-slate-300 text-slate-800 px-3 py-1.5 text-center min-w-[36px]">{c.y}</td>
                         ))}
                       </tr>
                     </tbody>
@@ -375,11 +376,11 @@ const GrafikPGLPage = () => {
 
               {q.parts && (
                 <div className="flex flex-col gap-2 mt-2 pl-2">
-                  {q.parts.map((p, pi) => (
+                  {q.parts.map((pt, pi) => (
                     <div key={pi} className="flex items-start gap-2">
-                      <span className="text-pink-400 text-xs font-body font-bold shrink-0 mt-0.5 min-w-[60px]">{p.label}</span>
+                      <span className="text-pink-400 text-xs font-body font-bold shrink-0 mt-0.5 min-w-[60px]">{pt.label}</span>
                       <div className="text-white/75 text-sm font-body leading-relaxed">
-                        {p.math ? <InlineMath math={p.math} /> : <span>{p.text}</span>}
+                        {pt.math ? <InlineMath math={pt.math} /> : <span>{pt.text}</span>}
                       </div>
                     </div>
                   ))}
@@ -394,7 +395,7 @@ const GrafikPGLPage = () => {
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/persamaan-garis-lurus"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            {t('practice.backTo')} Persamaan Garis Lurus
+            {t('practice.backTo')} {t(`${p}.backTo`)}
           </button>
         </div>
       </div>

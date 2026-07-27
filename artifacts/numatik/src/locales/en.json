@@ -5170,6 +5170,67 @@
           "title": "Multiple Choice — Three Lines (Graph)",
           "content": "Observe the figure below! The equation of line ℓ is …."
         }
+      },
+      "grafikPgl": {
+        "h1": "GRAPH OF A LINEAR EQUATION",
+        "grade": "Grade 8 · Equation of a Straight Line · National Exam",
+        "badgeSuffix": "Practice",
+        "backTo": "Equation of a Straight Line",
+        "hint": "Hint:",
+        "tablePartA": "Complete the y values in the table by substituting each x value into the equation.",
+        "tablePartB": "Plot the (x, y) points from the table on the coordinate plane above.",
+        "tablePartC": "Connect the points to form a straight line.",
+        "axisPartA": "Substitute x = 0 into the equation to find y (the y-intercept).",
+        "axisPartB": "Substitute y = 0 into the equation to find x (the x-intercept).",
+        "axisPartC": "Plot both points and connect them to form a straight line.",
+        "q1": {
+          "title": "Graph of y = x + 2",
+          "pAPre": "Find the intercepts of the line",
+          "pAPost": "with the x-axis and y-axis.",
+          "pB": "Sketch the graph of the line.",
+          "pC": "Does the point (3, 5) lie on this line? Prove it!"
+        },
+        "q2": {
+          "title": "Graph of y = −3x + 6",
+          "pA": "Find the x-intercept of the line.",
+          "pB": "Find the y-intercept of the line.",
+          "pC": "Which direction does the line go? Does it rise or fall from left to right?"
+        },
+        "q3": {
+          "title": "Graph from a Value Table — y = 2x − 1",
+          "content": "Complete the y value table below for the line y = 2x − 1, then draw its graph on the coordinate plane below."
+        },
+        "q4": {
+          "title": "Graph from a Value Table — y = −x + 3",
+          "content": "Complete the y value table below for the line y = −x + 3, then draw its graph on the coordinate plane below."
+        },
+        "q5": {
+          "title": "Drawing a Line Using Axis Intercepts — 2x + y = 4",
+          "content": "Complete the table by finding the y-intercept (when x = 0) and the x-intercept (when y = 0) of the equation 2x + y = 4, then draw the line."
+        },
+        "q6": {
+          "title": "Drawing a Line Using Axis Intercepts — 3x − 2y = 12",
+          "content": "Complete the table by finding the y-intercept (when x = 0) and the x-intercept (when y = 0) of the equation 3x − 2y = 12, then draw the line."
+        },
+        "q7": {
+          "title": "Choose the Equation That Matches the Graph",
+          "content": "Observe the line graph below. Which equation correctly describes the graph?",
+          "pHint": "Calculate the gradient using the two points on the graph, then match it with the y-intercept to determine the correct equation."
+        },
+        "q8": {
+          "title": "Given a Line Equation, Choose the Correct Graph",
+          "content": "Given the line equation y = 2x − 4. Which graph below correctly represents this equation?",
+          "pHint": "Substitute x = 0 and y = 0 into y = 2x − 4 to find the y-intercept and x-intercept, then match with the correct graph."
+        },
+        "q9": {
+          "title": "Given a Line Equation, Choose the Correct Graph",
+          "content": "Given the line equation 2x + y − 4 = 0. Which graph below correctly represents this equation?",
+          "pHint": "Rewrite 2x + y − 4 = 0 as y = −2x + 4, then substitute x = 0 and y = 0 to find the y-intercept and x-intercept, and match with the correct graph."
+        },
+        "q10": {
+          "title": "",
+          "content": "Draw the graph of each line equation using two points:"
+        }
       }
     }
   },

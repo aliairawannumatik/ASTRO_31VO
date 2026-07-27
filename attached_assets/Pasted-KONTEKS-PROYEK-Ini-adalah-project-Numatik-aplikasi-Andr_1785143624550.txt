@@ -1,0 +1,75 @@
+KONTEKS PROYEK:
+Ini adalah project Numatik — aplikasi Android edukasi matematika untuk
+siswa SMP (Kelas 7-9), dibangun dengan Vite + React + Capacitor +
+TypeScript. Package ID: com.numatik.official. Juga di-deploy sebagai
+web di numatik.app lewat Vercel.
+
+KONTEKS SISTEM TRILINGUAL:
+Aplikasi sedang migrasi ke sistem trilingual (Bahasa Indonesia,
+English, Japanese) pakai react-i18next dengan useTranslation() dan
+file locale (id.json, en.json, ja.json). Topik "Persamaan Garis
+Lurus" — index dan MenentukanPGLPage.tsx (10 soal) sudah selesai.
+
+ATURAN PENTING:
+- TypeScript harus 0 error baru
+- Struktur, layout, logic lain JANGAN diubah
+- Tidak ada isDark/useTheme — hardcode dark-only
+- CoordPlane — JANGAN disentuh komponennya, hanya panggilan/props
+- PENTING: investigasi awal bilang "1 kasus \text{}" di halaman ini,
+  tapi di MenentukanPGLPage kemarin investigasi awal bilang "0 kasus"
+  padahal aktualnya ada 10 — JANGAN percaya angka investigasi awal
+  begitu saja, WAJIB grep "\\text{" secara menyeluruh dan tangani
+  SEMUA yang ditemukan
+
+TUGAS SEKARANG:
+Fokus HANYA ke sub-halaman: GrafikPGLPage.tsx (10 soal).
+
+KONTEKS KHUSUS:
+- questions: Q[] saat ini di LUAR komponen — WAJIB dipindahkan ke
+  DALAM komponen, ikuti pola yang sudah terbukti (rename Q ke Qf
+  kalau perlu):
+
+  const { t } = useTranslation();
+  const p = 'practice.persamaanGarisLurus.grafikPgl';
+  const questions: Q[] = [
+    Qf(1, t(`${p}.q1.title`), { ... }),
+  ];
+
+- title, content, parts[].text — SEMUA WAJIB diterjemahkan via t()
+- Kasus \text{} yang sudah terdeteksi di investigasi awal (Q1a):
+  "\text{Tentukan titik potong garis } y = x + 2 \text{ dengan
+  sumbu-x dan sumbu-y.}" — tangani dengan pola interpolasi yang
+  sudah terbukti (t() dulu di JS, interpolasi ke template literal)
+- CEK ULANG MENYELURUH dengan grep "\\text{" untuk kasus lain yang
+  mungkin terlewat di investigasi awal
+- Semua 10 soal pakai CoordPlane, beberapa dengan 4 CoordPlane
+  sekaligus untuk pilihan A/B/C/D — JANGAN disentuh komponennya
+- Q3, Q4, Q5, Q6 punya table: { equation, cols[] } yang di-render
+  sebagai HTML table — kalau ada label kolom/header berbahasa
+  Indonesia, WAJIB diterjemahkan; kalau isinya cuma angka/ekspresi
+  matematika, JANGAN disentuh
+- Q7 punya choices[] (teks math) — kalau prosa, terjemahkan; kalau
+  math murni, jangan disentuh
+- Q8, Q9 punya diagramChoices[] (4 CoordPlane kecil dalam grid) —
+  komponennya jangan disentuh, tapi kalau ada caption/label teks di
+  luar diagram, WAJIB diterjemahkan
+
+1. Pindahkan array questions ke dalam komponen
+2. Terjemahkan SEMUA teks: title, content, parts[].text, label tabel
+   (kalau ada teks Indonesia), choices (yang prosa)
+3. Tangani kasus \text{} Q1a + kasus lain yang ditemukan dari grep
+   ulang
+4. Terjemahkan h1 title dan badge jumlah soal
+5. Tambahkan translation key ke ketiga file locale (id, en, ja) di
+   bawah practice.persamaanGarisLurus.grafikPgl.*
+6. JANGAN sentuh sub-halaman lain, halaman index, atau CoordPlane.tsx
+
+VERIFIKASI:
+- Laporkan validasi teknis (tsc kalau tidak timeout, atau esbuild/
+  grep manual + skrip Node.js pengecek key coverage, HMR log)
+- Berikan tabel rincian key per soal (Q1-Q10)
+- Jalankan grep "\\text{" untuk verifikasi 0 hardcode tersisa,
+  laporkan JUMLAH TOTAL kasus yang ditemukan (bandingkan dengan
+  investigasi awal yang cuma bilang 1)
+- Konfirmasi eksplisit: SEMUA 10 soal sudah diterjemahkan, CoordPlane
+  tidak disentuh, tabel HTML (Q3-Q6) ditangani dengan benar
