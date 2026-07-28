@@ -35,8 +35,8 @@ const translations = {
     arcDiff2: "Beda tetap = −2 (setiap suku berkurang 2)",
     formulaBoxLabel: "Rumus Suku ke-n Barisan Aritmetika:",
     aLabel: "a = suku pertama", bLabel: "b = beda", nLabel: "n = nomor suku",
-    derivationTitle: "💡 Dari mana rumus",
-    derivationSuffix: "berasal?",
+    derivationTitle: "💡 Perhatikan uraian pada tabel berikut",
+    derivationSuffix: "",
     tableCol1: "Suku ke-", tableCol2: "Nilai Suku", tableCol3: "Berapa kali tambah",
     timesWord: "kali",
     patternTitle: "🔍 Perhatikan polanya:",
@@ -166,8 +166,8 @@ const translations = {
     arcDiff2: "Constant difference = −2 (each term decreases by 2)",
     formulaBoxLabel: "Formula for the nth term of an Arithmetic Sequence:",
     aLabel: "a = first term", bLabel: "b = common difference", nLabel: "n = term number",
-    derivationTitle: "💡 Where does the formula",
-    derivationSuffix: "come from?",
+    derivationTitle: "💡 Observe the breakdown in the table below",
+    derivationSuffix: "",
     tableCol1: "Term No.", tableCol2: "Term Value", tableCol3: "How many times add",
     timesWord: "times",
     patternTitle: "🔍 Observe the pattern:",
@@ -594,7 +594,7 @@ const PolaAritmetikaPage = () => {
 
               {/* Derivation */}
               <div className="bg-slate-800/40 border border-white/10 rounded-xl p-4 space-y-4 text-sm font-body">
-                <p className="text-white/80 font-semibold">{t.derivationTitle} <InlineMath math="U_n = a + (n-1)b" /> {t.derivationSuffix}</p>
+                <p className="text-white/80 font-semibold">{t.derivationTitle}</p>
 
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs border-collapse">
