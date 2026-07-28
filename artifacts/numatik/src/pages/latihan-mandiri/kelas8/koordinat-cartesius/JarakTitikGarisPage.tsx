@@ -210,8 +210,8 @@ const JarakTitikGarisPage = () => {
       diagram: {
         size: 260, range: 13,
         pts: [
-          { x: 2, y: 3, label: "Rumah", color: "#f472b6", labelPos: "bl" },
-          { x: 8, y: 11, label: "Sekolah", color: "#60a5fa", labelPos: "tr" },
+          { x: 2, y: 3, label: t(`${BASE}.q9.labelRumah`), color: "#f472b6", labelPos: "bl" },
+          { x: 8, y: 11, label: t(`${BASE}.q9.labelSekolah`), color: "#60a5fa", labelPos: "tr" },
         ],
         segs: [{ x1: 2, y1: 3, x2: 8, y2: 11, color: "#facc15", dashed: true }],
       },

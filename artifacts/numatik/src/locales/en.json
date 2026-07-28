@@ -4322,7 +4322,9 @@
           "title": "Distance in a Real-World Context",
           "content": "A city map uses Cartesian coordinates (in km).\nAndi's house: A(2, 3), School: B(8, 11)",
           "a": "Calculate the straight-line distance from the house to the school.",
-          "b": "If Andi walks along the roads (horizontal then vertical), how far is it?"
+          "b": "If Andi walks along the roads (horizontal then vertical), how far is it?",
+          "labelRumah": "Home",
+          "labelSekolah": "School"
         },
         "q10": {
           "title": "Rectangle — Diagonals",

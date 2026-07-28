@@ -4322,7 +4322,9 @@
           "title": "Jarak dalam Konteks Nyata",
           "content": "Sebuah peta kota menggunakan koordinat kartesius (dalam km).\nRumah Andi: A(2, 3), Sekolah: B(8, 11)",
           "a": "Hitung jarak lurus (garis lurus) dari Rumah ke Sekolah.",
-          "b": "Jika Andi berjalan mengikuti jalan (horisontal lalu vertikal), berapa jauhnya?"
+          "b": "Jika Andi berjalan mengikuti jalan (horisontal lalu vertikal), berapa jauhnya?",
+          "labelRumah": "Rumah",
+          "labelSekolah": "Sekolah"
         },
         "q10": {
           "title": "Persegi Panjang — Diagonal",
