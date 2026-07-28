@@ -5303,7 +5303,10 @@
           "content": "Tarif taksi online: Rp10.000 biaya awal ditambah Rp10.000 per km.",
           "pA": "Tuliskan persamaan tarif T = f(x) dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa tarif untuk perjalanan 8 km?",
-          "pC": "Berapa km jika tarif Rp65.000?"
+          "pC": "Berapa km jika tarif Rp65.000?",
+          "segTarif": "Tarif",
+          "extX": "sumbu-x: jarak (km)",
+          "extY": "sumbu-y: tarif (×10rb)"
         },
         "q2": {
           "title": "Harga Paket Data",
@@ -5311,7 +5314,10 @@
           "pA": "Tulis persamaan harga H untuk g GB dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa harga untuk 10 GB?",
           "pC": "Berapa GB yang didapat dengan Rp28.000?",
-          "pD": "Gambarkan grafik hubungan jumlah GB dan harga."
+          "pD": "Gambarkan grafik hubungan jumlah GB dan harga.",
+          "segHarga": "Harga",
+          "extX": "sumbu-x: jumlah GB",
+          "extY": "sumbu-y: harga (×5rb)"
         },
         "q3": {
           "title": "UN 2019 — Biaya Produksi",
@@ -5319,14 +5325,18 @@
           "pA": "Persamaan B(x) = 5000x + 200.000 sudah dalam bentuk y = mx + c. Apa yang dimaksud dengan 5000x?",
           "pB": "Apa yang dimaksud dengan 200.000 dalam konteks ini?",
           "pC": "Berapa biaya produksi 100 barang?",
-          "pD": "Berapa barang yang bisa diproduksi dengan anggaran Rp950.000?"
+          "pD": "Berapa barang yang bisa diproduksi dengan anggaran Rp950.000?",
+          "segBiaya": "Biaya",
+          "extX": "sumbu-x: jumlah barang (×20)",
+          "extY": "sumbu-y: biaya (×100rb)"
         },
         "q4": {
           "title": "Tabungan Bertambah Rutin",
           "content": "Riko menabung Rp50.000/bulan. Tabungan awal Rp50.000.",
           "pA": "Tulis persamaan tabungan T setelah n bulan dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa tabungan setelah 1 tahun?",
-          "pC": "Kapan tabungan mencapai Rp500.000?"
+          "pC": "Kapan tabungan mencapai Rp500.000?",
+          "segTabungan": "Tabungan"
         },
         "q5": {
           "title": "Penurunan Nilai Barang",
@@ -5334,28 +5344,38 @@
           "pA": "Tulis persamaan nilai V setelah t tahun dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa nilai laptop setelah 3 tahun?",
           "pC": "Kapan nilai laptop menjadi Rp2.000.000?",
-          "pD": "Apakah nilai laptop bisa menjadi negatif? Jelaskan batasan modelnya!"
+          "pD": "Apakah nilai laptop bisa menjadi negatif? Jelaskan batasan modelnya!",
+          "segNilai": "Nilai",
+          "extX": "sumbu-x: tahun",
+          "extY": "sumbu-y: nilai (×1jt)"
         },
         "q6": {
           "title": "Isi Bahan Bakar",
           "content": "Tangki sepeda motor berisi 60 liter. Konsumsi BBM 10 km per liter.",
           "pA": "Tulis persamaan sisa BBM S setelah menempuh d km dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa sisa BBM setelah 250 km?",
-          "pC": "Kapan tangki habis (S = 0)?"
+          "pC": "Kapan tangki habis (S = 0)?",
+          "segBBM": "BBM"
         },
         "q7": {
           "title": "Grafik Populasi Linier",
           "content": "Populasi desa pada tahun 2020 adalah 5.000 jiwa. Bertambah 200 jiwa per tahun.",
           "pA": "Tulis persamaan populasi P pada tahun ke-t sejak 2020 dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa populasi pada tahun 2030?",
-          "pC": "Kapan populasi mencapai 8.000 jiwa?"
+          "pC": "Kapan populasi mencapai 8.000 jiwa?",
+          "segPopulasi": "Populasi",
+          "extX": "sumbu-x: tahun sejak 2020",
+          "extY": "sumbu-y: populasi (×1000)"
         },
         "q8": {
           "title": "Harga Tiket Masuk",
           "content": "Harga tiket masuk taman: Rp5.000 per orang + biaya parkir Rp10.000.",
           "pA": "Tulis total biaya C untuk n orang dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa total biaya untuk keluarga 5 orang?",
-          "pC": "Jika anggaran keluarga Rp60.000, berapa banyak orang yang bisa masuk?"
+          "pC": "Jika anggaran keluarga Rp60.000, berapa banyak orang yang bisa masuk?",
+          "segBiaya": "Biaya",
+          "extX": "sumbu-x: jumlah orang",
+          "extY": "sumbu-y: biaya (×5rb)"
         },
         "q9": {
           "title": "Debit Air — Volume dan Waktu",
@@ -5363,35 +5383,50 @@
           "pA": "Tulis persamaan volume V setelah t menit dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa volume setelah 10 menit?",
           "pC": "Kapan bak kosong?",
-          "pD": "Gambarkan grafik volume vs waktu. Apa jenis gradiennya?"
+          "pD": "Gambarkan grafik volume vs waktu. Apa jenis gradiennya?",
+          "extX": "sumbu-x: waktu (menit)",
+          "extY": "sumbu-y: volume (×50L)"
         },
         "q10": {
           "title": "Grafik Dua Tarif — Titik Kesamaan",
           "content": "Tarif A: Rp20.000 awal + Rp10.000/km. Tarif B: Rp40.000 awal + Rp5.000/km.",
           "pA": "Tulis persamaan tarif A dan tarif B dalam bentuk persamaan garis y = mx + c.",
           "pB": "Pada jarak berapa km kedua tarif sama?",
-          "pC": "Untuk jarak lebih dari titik kesamaan, tarif mana yang lebih murah?"
+          "pC": "Untuk jarak lebih dari titik kesamaan, tarif mana yang lebih murah?",
+          "segTarifA": "Tarif A",
+          "segTarifB": "Tarif B",
+          "ptTitikSama": "Titik sama"
         },
         "q11": {
           "title": "TKA — Gaji dan Bonus",
           "content": "Gaji seorang karyawan: Rp2.000.000 per bulan + bonus Rp50.000 per unit terjual.",
           "pA": "Tulis persamaan total penghasilan G untuk u unit dalam bentuk persamaan garis y = mx + c",
           "pB": "Berapa penghasilan jika menjual 30 unit?",
-          "pC": "Berapa unit harus dijual agar penghasilan Rp4.500.000?"
+          "pC": "Berapa unit harus dijual agar penghasilan Rp4.500.000?",
+          "segGaji": "Gaji",
+          "extX": "sumbu-x: unit terjual (×5)",
+          "extY": "sumbu-y: gaji (×500rb)"
         },
         "q12": {
           "title": "ANBK — Soal Kontekstual Pilih Garis",
           "content": "Dinas pertanian mencatat luas panen jagung (hektar) setiap tahun: 2019: 400, 2020: 450, 2021: 500, 2022: 550.",
           "pA": "Apakah data ini membentuk pola linier? Jelaskan!",
           "pB": "Tuliskan persamaan garis (tahun sebagai x, luas sebagai y) dalam bentuk y = mx + c",
-          "pC": "Prediksi luas panen tahun 2025."
+          "pC": "Prediksi luas panen tahun 2025.",
+          "segLuasPanen": "Luas Panen",
+          "extX": "sumbu-x: tahun sejak 2019",
+          "extY": "sumbu-y: luas panen (×50ha)"
         },
         "q13": {
           "title": "Tarif Telepon",
           "content": "Tarif telepon: Rp500/menit untuk 10 menit pertama, kemudian Rp300/menit.",
           "pA": "Berapa biaya untuk percakapan 10 menit?",
           "pB": "Tulis persamaan biaya B untuk t > 10 menit dalam bentuk persamaan garis y = mx + c",
-          "pC": "Berapa biaya untuk percakapan 25 menit?"
+          "pC": "Berapa biaya untuk percakapan 25 menit?",
+          "seg010mnt": "0–10mnt",
+          "segGt10mnt": ">10mnt",
+          "extX": "sumbu-x: menit (×5)",
+          "extY": "sumbu-y: biaya (×1rb)"
         },
         "q14": {
           "title": "Tantangan — Model Matematika Dunia Nyata",
@@ -5399,7 +5434,10 @@
           "pA": "Tulis persamaan biaya Toko A dan Toko B dalam bentuk persamaan garis y = mx + c.",
           "pB": "Pada berapa kg pembelian biaya kedua toko sama?",
           "pC": "Jika membeli 2 kg, mana yang lebih murah? Dan jika 4 kg?",
-          "pD": "Gambarkan grafik kedua toko dan beri kesimpulan strategi pembelian."
+          "pD": "Gambarkan grafik kedua toko dan beri kesimpulan strategi pembelian.",
+          "segTokoA": "Toko A",
+          "segTokoB": "Toko B",
+          "ptSama": "Sama"
         }
       },
       "hubungan2Garis": {

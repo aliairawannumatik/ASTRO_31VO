@@ -5303,7 +5303,10 @@
           "content": "Online taxi fare: Rp10,000 base fee plus Rp10,000 per km.",
           "pA": "Write the fare equation T = f(x) in the form y = mx + c",
           "pB": "What is the fare for an 8 km trip?",
-          "pC": "How many km if the fare is Rp65,000?"
+          "pC": "How many km if the fare is Rp65,000?",
+          "segTarif": "Rate",
+          "extX": "x-axis: distance (km)",
+          "extY": "y-axis: rate (×10K)"
         },
         "q2": {
           "title": "Mobile Data Package Price",
@@ -5311,7 +5314,10 @@
           "pA": "Write the price equation H for g GB in the form y = mx + c",
           "pB": "What is the price for 10 GB?",
           "pC": "How many GB can you get for Rp28,000?",
-          "pD": "Draw a graph showing the relationship between GB and price."
+          "pD": "Draw a graph showing the relationship between GB and price.",
+          "segHarga": "Price",
+          "extX": "x-axis: data (GB)",
+          "extY": "y-axis: price (×5K)"
         },
         "q3": {
           "title": "National Exam 2019 — Production Cost",
@@ -5319,14 +5325,18 @@
           "pA": "The equation B(x) = 5000x + 200,000 is already in the form y = mx + c. What does 5000x represent?",
           "pB": "What does 200,000 represent in this context?",
           "pC": "What is the production cost for 100 items?",
-          "pD": "How many items can be produced with a budget of Rp950,000?"
+          "pD": "How many items can be produced with a budget of Rp950,000?",
+          "segBiaya": "Cost",
+          "extX": "x-axis: items (×20)",
+          "extY": "y-axis: cost (×100K)"
         },
         "q4": {
           "title": "Regular Savings Growth",
           "content": "Riko saves Rp50,000/month. Initial savings: Rp50,000.",
           "pA": "Write the savings equation T after n months in the form y = mx + c",
           "pB": "How much is saved after 1 year?",
-          "pC": "When will savings reach Rp500,000?"
+          "pC": "When will savings reach Rp500,000?",
+          "segTabungan": "Savings"
         },
         "q5": {
           "title": "Depreciation of an Asset",
@@ -5334,28 +5344,38 @@
           "pA": "Write the value equation V after t years in the form y = mx + c",
           "pB": "What is the laptop's value after 3 years?",
           "pC": "When will the laptop's value reach Rp2,000,000?",
-          "pD": "Can the laptop's value become negative? Explain the model's limitations!"
+          "pD": "Can the laptop's value become negative? Explain the model's limitations!",
+          "segNilai": "Value",
+          "extX": "x-axis: year",
+          "extY": "y-axis: value (×1M)"
         },
         "q6": {
           "title": "Fuel Consumption",
           "content": "A motorcycle tank holds 60 litres. Fuel consumption: 10 km per litre.",
           "pA": "Write the remaining fuel equation S after travelling d km in the form y = mx + c",
           "pB": "How much fuel remains after 250 km?",
-          "pC": "When does the tank run empty (S = 0)?"
+          "pC": "When does the tank run empty (S = 0)?",
+          "segBBM": "Fuel"
         },
         "q7": {
           "title": "Linear Population Graph",
           "content": "A village's population in 2020 was 5,000. It grows by 200 people per year.",
           "pA": "Write the population equation P in year t since 2020 in the form y = mx + c",
           "pB": "What is the population in 2030?",
-          "pC": "When will the population reach 8,000?"
+          "pC": "When will the population reach 8,000?",
+          "segPopulasi": "Population",
+          "extX": "x-axis: years since 2020",
+          "extY": "y-axis: population (×1000)"
         },
         "q8": {
           "title": "Admission Ticket Price",
           "content": "Park admission fee: Rp5,000 per person + Rp10,000 parking fee.",
           "pA": "Write the total cost equation C for n people in the form y = mx + c",
           "pB": "What is the total cost for a family of 5?",
-          "pC": "If the family budget is Rp60,000, how many people can enter?"
+          "pC": "If the family budget is Rp60,000, how many people can enter?",
+          "segBiaya": "Cost",
+          "extX": "x-axis: no. of people",
+          "extY": "y-axis: cost (×5K)"
         },
         "q9": {
           "title": "Water Flow — Volume and Time",
@@ -5363,35 +5383,50 @@
           "pA": "Write the volume equation V after t minutes in the form y = mx + c",
           "pB": "What is the volume after 10 minutes?",
           "pC": "When will the tank be empty?",
-          "pD": "Draw the volume vs time graph. What type of gradient is it?"
+          "pD": "Draw the volume vs time graph. What type of gradient is it?",
+          "extX": "x-axis: time (min)",
+          "extY": "y-axis: volume (×50L)"
         },
         "q10": {
           "title": "Two-Fare Graph — Break-Even Point",
           "content": "Fare A: Rp20,000 base + Rp10,000/km. Fare B: Rp40,000 base + Rp5,000/km.",
           "pA": "Write the equations for Fare A and Fare B in the form y = mx + c.",
           "pB": "At what distance (km) are both fares equal?",
-          "pC": "Beyond the break-even point, which fare is cheaper?"
+          "pC": "Beyond the break-even point, which fare is cheaper?",
+          "segTarifA": "Rate A",
+          "segTarifB": "Rate B",
+          "ptTitikSama": "Same point"
         },
         "q11": {
           "title": "TKA — Salary and Bonus",
           "content": "An employee's salary: Rp2,000,000/month + Rp50,000 bonus per unit sold.",
           "pA": "Write the total income equation G for u units in the form y = mx + c",
           "pB": "What is the income from selling 30 units?",
-          "pC": "How many units must be sold to earn Rp4,500,000?"
+          "pC": "How many units must be sold to earn Rp4,500,000?",
+          "segGaji": "Salary",
+          "extX": "x-axis: units sold (×5)",
+          "extY": "y-axis: salary (×500K)"
         },
         "q12": {
           "title": "ANBK — Contextual Line-Selection Problem",
           "content": "An agricultural agency records corn harvest area (hectares) per year: 2019: 400, 2020: 450, 2021: 500, 2022: 550.",
           "pA": "Does this data form a linear pattern? Explain!",
           "pB": "Write the line equation (year as x, area as y) in the form y = mx + c",
-          "pC": "Predict the harvest area in 2025."
+          "pC": "Predict the harvest area in 2025.",
+          "segLuasPanen": "Harvest Area",
+          "extX": "x-axis: years since 2019",
+          "extY": "y-axis: harvest area (×50ha)"
         },
         "q13": {
           "title": "Phone Tariff",
           "content": "Phone tariff: Rp500/minute for the first 10 minutes, then Rp300/minute.",
           "pA": "What is the cost for a 10-minute call?",
           "pB": "Write the cost equation B for t > 10 minutes in the form y = mx + c",
-          "pC": "What is the cost for a 25-minute call?"
+          "pC": "What is the cost for a 25-minute call?",
+          "seg010mnt": "0–10min",
+          "segGt10mnt": ">10min",
+          "extX": "x-axis: min (×5)",
+          "extY": "y-axis: cost (×1K)"
         },
         "q14": {
           "title": "Challenge — Real-World Mathematical Modelling",
@@ -5399,7 +5434,10 @@
           "pA": "Write the cost equations for Store A and Store B in the form y = mx + c.",
           "pB": "At how many kg do both stores cost the same?",
           "pC": "If buying 2 kg, which is cheaper? And if buying 4 kg?",
-          "pD": "Draw a graph for both stores and summarise your purchasing strategy."
+          "pD": "Draw a graph for both stores and summarise your purchasing strategy.",
+          "segTokoA": "Store A",
+          "segTokoB": "Store B",
+          "ptSama": "Equal"
         }
       },
       "hubungan2Garis": {

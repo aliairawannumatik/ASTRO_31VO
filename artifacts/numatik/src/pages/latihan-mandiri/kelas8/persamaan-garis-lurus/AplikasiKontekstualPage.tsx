@@ -29,14 +29,14 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 6, lightBg: true,
-        segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#2563eb", label: "Tarif" }],
+        segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#2563eb", label: t(`${p}.q1.segTarif`) }],
         pts: [
           { x: 0, y: 1, label: "(0,10rb)", color: "#2563eb", labelPos: "tr" },
           { x: 5, y: 6, label: "(5km,60rb)", color: "#2563eb", labelPos: "tr" },
         ],
         extraTexts: [
-          { x: 1, y: 5, text: "sumbu-x: jarak (km)", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -2, y: 3, text: "sumbu-y: tarif (×10rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 1, y: 5, text: t(`${p}.q1.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -2, y: 3, text: t(`${p}.q1.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q1.content`),
@@ -52,14 +52,14 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 6, lightBg: true,
-        segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#0ea5e9", label: "Harga" }],
+        segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#0ea5e9", label: t(`${p}.q2.segHarga`) }],
         pts: [
           { x: 0, y: 1, label: "(0GB,3rb)", color: "#0ea5e9", labelPos: "tl" },
           { x: 5, y: 6, label: "(5GB,28rb)", color: "#0ea5e9", labelPos: "tr" },
         ],
         extraTexts: [
-          { x: 1, y: 5, text: "sumbu-x: jumlah GB", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -2, y: 3, text: "sumbu-y: harga (×5rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 1, y: 5, text: t(`${p}.q2.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -2, y: 3, text: t(`${p}.q2.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q2.content`),
@@ -76,14 +76,14 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 6, lightBg: true,
-        segs: [{ x1: 0, y1: 1, x2: 5, y2: 5.5, color: "#64748b", label: "Biaya" }],
+        segs: [{ x1: 0, y1: 1, x2: 5, y2: 5.5, color: "#64748b", label: t(`${p}.q3.segBiaya`) }],
         pts: [
           { x: 0, y: 1, label: "(0,200rb)", color: "#64748b", labelPos: "tl" },
           { x: 5, y: 5.5, label: "(100,700rb)", color: "#64748b", labelPos: "tr" },
         ],
         extraTexts: [
-          { x: 1, y: 5, text: "sumbu-x: jumlah barang (×20)", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -2, y: 3, text: "sumbu-y: biaya (×100rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 1, y: 5, text: t(`${p}.q3.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -2, y: 3, text: t(`${p}.q3.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q3.content`),
@@ -100,7 +100,7 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 6, lightBg: true,
-        segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#ca8a04", label: "Tabungan" }],
+        segs: [{ x1: 0, y1: 1, x2: 5, y2: 6, color: "#ca8a04", label: t(`${p}.q4.segTabungan`) }],
         pts: [
           { x: 0, y: 1, label: "(0, 50rb)", color: "#ca8a04", labelPos: "tr" },
           { x: 4, y: 5, label: "(4bln, 250rb)", color: "#ca8a04", labelPos: "tr" },
@@ -119,14 +119,14 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 8, lightBg: true,
-        segs: [{ x1: 0, y1: 8, x2: 6, y2: 2, color: "#dc2626", label: "Nilai" }],
+        segs: [{ x1: 0, y1: 8, x2: 6, y2: 2, color: "#dc2626", label: t(`${p}.q5.segNilai`) }],
         pts: [
           { x: 0, y: 8, label: "(0,8jt)", color: "#dc2626", labelPos: "tl" },
           { x: 6, y: 2, label: "(6th,2jt)", color: "#dc2626", labelPos: "br" },
         ],
         extraTexts: [
-          { x: 2, y: -6, text: "sumbu-x: tahun", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -3, y: 4, text: "sumbu-y: nilai (×1jt)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 2, y: -6, text: t(`${p}.q5.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -3, y: 4, text: t(`${p}.q5.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q5.content`),
@@ -143,7 +143,7 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 6, lightBg: true,
-        segs: [{ x1: 0, y1: 6, x2: 6, y2: 0, color: "#db2777", label: "BBM" }],
+        segs: [{ x1: 0, y1: 6, x2: 6, y2: 0, color: "#db2777", label: t(`${p}.q6.segBBM`) }],
         pts: [
           { x: 0, y: 6, label: "(0, 60L)", color: "#db2777", labelPos: "tr" },
           { x: 6, y: 0, label: "(600km, 0)", color: "#db2777", labelPos: "top" },
@@ -162,14 +162,14 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 8, lightBg: true,
-        segs: [{ x1: 0, y1: 5, x2: 6, y2: 6.2, color: "#16a34a", label: "Populasi" }],
+        segs: [{ x1: 0, y1: 5, x2: 6, y2: 6.2, color: "#16a34a", label: t(`${p}.q7.segPopulasi`) }],
         pts: [
           { x: 0, y: 5, label: "(2020,5000)", color: "#16a34a", labelPos: "tl" },
           { x: 6, y: 6.2, label: "(2026,6200)", color: "#16a34a", labelPos: "tr" },
         ],
         extraTexts: [
-          { x: 2, y: -6, text: "sumbu-x: tahun sejak 2020", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -3, y: 3, text: "sumbu-y: populasi (×1000)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 2, y: -6, text: t(`${p}.q7.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -3, y: 3, text: t(`${p}.q7.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q7.content`),
@@ -185,14 +185,14 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 8, lightBg: true,
-        segs: [{ x1: 0, y1: 2, x2: 5, y2: 7, color: "#d97706", label: "Biaya" }],
+        segs: [{ x1: 0, y1: 2, x2: 5, y2: 7, color: "#d97706", label: t(`${p}.q8.segBiaya`) }],
         pts: [
           { x: 0, y: 2, label: "(0,10rb)", color: "#d97706", labelPos: "tl" },
           { x: 5, y: 7, label: "(5org,35rb)", color: "#d97706", labelPos: "tr" },
         ],
         extraTexts: [
-          { x: 1, y: -6, text: "sumbu-x: jumlah orang", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -3, y: 4, text: "sumbu-y: biaya (×5rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 1, y: -6, text: t(`${p}.q8.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -3, y: 4, text: t(`${p}.q8.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q8.content`),
@@ -214,8 +214,8 @@ const AplikasiKontekstualPage = () => {
           { x: 10, y: 5, label: "(10mnt,250L)", color: "#0284c7", labelPos: "br" },
         ],
         extraTexts: [
-          { x: 3, y: -9, text: "sumbu-x: waktu (menit)", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -6, y: 6, text: "sumbu-y: volume (×50L)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 3, y: -9, text: t(`${p}.q9.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -6, y: 6, text: t(`${p}.q9.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q9.content`),
@@ -233,10 +233,10 @@ const AplikasiKontekstualPage = () => {
       diagram: {
         size: 260, range: 6, lightBg: true,
         segs: [
-          { x1: 0, y1: 2, x2: 5, y2: 7, color: "#db2777", label: "Tarif A" },
-          { x1: 0, y1: 4, x2: 5, y2: 5.5, color: "#2563eb", label: "Tarif B" },
+          { x1: 0, y1: 2, x2: 5, y2: 7, color: "#db2777", label: t(`${p}.q10.segTarifA`) },
+          { x1: 0, y1: 4, x2: 5, y2: 5.5, color: "#2563eb", label: t(`${p}.q10.segTarifB`) },
         ],
-        pts: [{ x: 4, y: 6, label: "Titik sama", color: "#ca8a04", labelPos: "tl" }],
+        pts: [{ x: 4, y: 6, label: t(`${p}.q10.ptTitikSama`), color: "#ca8a04", labelPos: "tl" }],
       },
       content: t(`${p}.q10.content`),
       parts: [
@@ -251,14 +251,14 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 8, lightBg: true,
-        segs: [{ x1: 0, y1: 4, x2: 6, y2: 7, color: "#059669", label: "Gaji" }],
+        segs: [{ x1: 0, y1: 4, x2: 6, y2: 7, color: "#059669", label: t(`${p}.q11.segGaji`) }],
         pts: [
           { x: 0, y: 4, label: "(0,2jt)", color: "#059669", labelPos: "tl" },
           { x: 6, y: 7, label: "(30unit,3.5jt)", color: "#059669", labelPos: "tr" },
         ],
         extraTexts: [
-          { x: 1, y: -6, text: "sumbu-x: unit terjual (×5)", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -3, y: 5, text: "sumbu-y: gaji (×500rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 1, y: -6, text: t(`${p}.q11.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -3, y: 5, text: t(`${p}.q11.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q11.content`),
@@ -274,14 +274,14 @@ const AplikasiKontekstualPage = () => {
       type: "mixed",
       diagram: {
         size: 260, range: 12, lightBg: true,
-        segs: [{ x1: 0, y1: 8, x2: 3, y2: 11, color: "#65a30d", label: "Luas Panen" }],
+        segs: [{ x1: 0, y1: 8, x2: 3, y2: 11, color: "#65a30d", label: t(`${p}.q12.segLuasPanen`) }],
         pts: [
           { x: 0, y: 8, label: "(2019,400ha)", color: "#65a30d", labelPos: "tl" },
           { x: 3, y: 11, label: "(2022,550ha)", color: "#65a30d", labelPos: "tr" },
         ],
         extraTexts: [
-          { x: 1, y: -9, text: "sumbu-x: tahun sejak 2019", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -6, y: 3, text: "sumbu-y: luas panen (×50ha)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 1, y: -9, text: t(`${p}.q12.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -6, y: 3, text: t(`${p}.q12.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q12.content`),
@@ -298,16 +298,16 @@ const AplikasiKontekstualPage = () => {
       diagram: {
         size: 260, range: 10, lightBg: true,
         segs: [
-          { x1: 0, y1: 0, x2: 2, y2: 5, color: "#7c3aed", label: "0–10mnt" },
-          { x1: 2, y1: 5, x2: 5, y2: 9.5, color: "#f97316", label: ">10mnt" },
+          { x1: 0, y1: 0, x2: 2, y2: 5, color: "#7c3aed", label: t(`${p}.q13.seg010mnt`) },
+          { x1: 2, y1: 5, x2: 5, y2: 9.5, color: "#f97316", label: t(`${p}.q13.segGt10mnt`) },
         ],
         pts: [
           { x: 2, y: 5, label: "(10mnt,5rb)", color: "#7c3aed", labelPos: "tl" },
           { x: 5, y: 9.5, label: "(25mnt,9.5rb)", color: "#f97316", labelPos: "tr" },
         ],
         extraTexts: [
-          { x: 1, y: -8, text: "sumbu-x: menit (×5)", color: "rgba(0,0,0,0.45)", size: 8 },
-          { x: -5, y: 5, text: "sumbu-y: biaya (×1rb)", color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: 1, y: -8, text: t(`${p}.q13.extX`), color: "rgba(0,0,0,0.45)", size: 8 },
+          { x: -5, y: 5, text: t(`${p}.q13.extY`), color: "rgba(0,0,0,0.45)", size: 8 },
         ],
       },
       content: t(`${p}.q13.content`),
@@ -324,11 +324,11 @@ const AplikasiKontekstualPage = () => {
       diagram: {
         size: 260, range: 6, lightBg: true,
         segs: [
-          { x1: 0, y1: 2, x2: 4, y2: 6, color: "#059669", label: "Toko A" },
-          { x1: 0, y1: 5, x2: 4, y2: 5, color: "#db2777", label: "Toko B" },
+          { x1: 0, y1: 2, x2: 4, y2: 6, color: "#059669", label: t(`${p}.q14.segTokoA`) },
+          { x1: 0, y1: 5, x2: 4, y2: 5, color: "#db2777", label: t(`${p}.q14.segTokoB`) },
         ],
         pts: [
-          { x: 3, y: 5, label: "Sama", color: "#ca8a04", labelPos: "tl" },
+          { x: 3, y: 5, label: t(`${p}.q14.ptSama`), color: "#ca8a04", labelPos: "tl" },
         ],
       },
       content: t(`${p}.q14.content`),
