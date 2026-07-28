@@ -5602,6 +5602,33 @@
         "j": "Dua setengah lingkaran, diameter 26 cm dan 14 cm",
         "k": "Lingkaran dengan jari-jari 10 cm dan tembereng yang diarsir"
       },
+      "busurJuring": {
+        "h1": "PANJANG BUSUR DAN LUAS JURING",
+        "subtitle": "Kelas 8 · Lingkaran",
+        "q1": {
+          "question": "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah...",
+          "imgAlt": "Lingkaran dengan juring sudut 60°, titik O dan P"
+        },
+        "q2": {
+          "question": "Perhatikan gambar! Jika O adalah pusat lingkaran, r = 21 cm dan π = 22/7, maka luas daerah yang diarsir adalah...",
+          "imgAlt": "Lingkaran dengan juring sudut 40° yang diarsir"
+        },
+        "q3": {
+          "question": "Luas juring dengan sudut pusat 120° dan panjang jari-jari 7 cm adalah..."
+        },
+        "q4": {
+          "question": "Perhatikan gambar! Jika luas juring ORS = 60 cm², luas juring OPQ adalah...",
+          "imgAlt": "Lingkaran dengan juring ORS dan OPQ, sudut POQ = 135°"
+        },
+        "q5": {
+          "question": "Perhatikanlah gambar berikut! Diketahui O adalah titik pusat lingkaran. Jika panjang busur QR = 60 cm, panjang busur PQ adalah...",
+          "imgAlt": "Lingkaran dengan juring OPQ sudut 50° dan juring OQR sudut 75°"
+        },
+        "q6": {
+          "question": "Perhatikan gambar! Pada suatu lingkaran dengan pusat O, diketahui ∠AOB = 35° dan ∠COD = 140°. Jika panjang busur AB = 14 cm, panjang busur CD adalah...",
+          "imgAlt": "Lingkaran dengan titik A, B, C, D; sudut AOB=35°, COD=140°, busur AB=14cm"
+        }
+      },
       "sudutPusatKeliling": {
         "h1": "SUDUT PUSAT DAN SUDUT KELILING",
         "shared": {

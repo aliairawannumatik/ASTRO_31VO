@@ -15,84 +15,86 @@ type Soal = {
   choices?: Choice[];
 };
 
-const soalList: Soal[] = [
-  {
-    n: 1,
-    question: "Perhatikan gambar lingkaran di samping! Jika O pusat lingkaran dan panjang OP = 21 cm, maka panjang busur kecil PQ adalah...",
-    note: "(π = 22/7)",
-    img: "/soal-busur-5.png",
-    imgAlt: "Lingkaran dengan juring sudut 60°, titik O dan P",
-    choices: [
-      { label: "A.", text: "11 cm" },
-      { label: "B.", text: "22 cm" },
-      { label: "C.", text: "33 cm" },
-      { label: "D.", text: "44 cm" },
-    ],
-  },
-  {
-    n: 2,
-    question: "Perhatikan gambar! Jika O adalah pusat lingkaran, r = 21 cm dan π = 22/7, maka luas daerah yang diarsir adalah...",
-    img: "/soal-busur-2.png",
-    imgAlt: "Lingkaran dengan juring sudut 40° yang diarsir",
-    choices: [
-      { label: "A.", text: "77 cm²" },
-      { label: "B.", text: "154 cm²" },
-      { label: "C.", text: "231 cm²" },
-      { label: "D.", text: "308 cm²" },
-    ],
-  },
-  {
-    n: 3,
-    question: "Luas juring dengan sudut pusat 120° dan panjang jari-jari 7 cm adalah...",
-    note: "(π = 22/7)",
-    choices: [
-      { label: "A.", text: "77 cm²" },
-      { label: "B.", text: "51,33 cm²" },
-      { label: "C.", text: "38,50 cm²" },
-      { label: "D.", text: "14,67 cm²" },
-    ],
-  },
-  {
-    n: 4,
-    question: "Perhatikan gambar! Jika luas juring ORS = 60 cm², luas juring OPQ adalah...",
-    img: "/soal-busur-1.png",
-    imgAlt: "Lingkaran dengan juring ORS dan OPQ, sudut POQ = 135°",
-    choices: [
-      { label: "A.", text: "40 cm²" },
-      { label: "B.", text: "75 cm²" },
-      { label: "C.", text: "90 cm²" },
-      { label: "D.", text: "105 cm²" },
-    ],
-  },
-  {
-    n: 5,
-    question: "Perhatikanlah gambar berikut! Diketahui O adalah titik pusat lingkaran. Jika panjang busur QR = 60 cm, panjang busur PQ adalah...",
-    img: "/soal-busur-3.png",
-    imgAlt: "Lingkaran dengan juring OPQ sudut 50° dan juring OQR sudut 75°",
-    choices: [
-      { label: "A.", text: "30 cm" },
-      { label: "B.", text: "40 cm" },
-      { label: "C.", text: "45 cm" },
-      { label: "D.", text: "80 cm" },
-    ],
-  },
-  {
-    n: 6,
-    question: "Perhatikan gambar! Pada suatu lingkaran dengan pusat O, diketahui ∠AOB = 35° dan ∠COD = 140°. Jika panjang busur AB = 14 cm, panjang busur CD adalah...",
-    img: "/soal-busur-6.png",
-    imgAlt: "Lingkaran dengan titik A, B, C, D; sudut AOB=35°, COD=140°, busur AB=14cm",
-    choices: [
-      { label: "A.", text: "28 cm" },
-      { label: "B.", text: "42 cm" },
-      { label: "C.", text: "56 cm" },
-      { label: "D.", text: "70 cm" },
-    ],
-  },
-];
-
 const BusurJuringPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const p = "practice.lingkaran.busurJuring";
+
+  const soalList: Soal[] = [
+    {
+      n: 1,
+      question: t(`${p}.q1.question`),
+      note: "(π = 22/7)",
+      img: "/soal-busur-5.png",
+      imgAlt: t(`${p}.q1.imgAlt`),
+      choices: [
+        { label: "A.", text: "11 cm" },
+        { label: "B.", text: "22 cm" },
+        { label: "C.", text: "33 cm" },
+        { label: "D.", text: "44 cm" },
+      ],
+    },
+    {
+      n: 2,
+      question: t(`${p}.q2.question`),
+      img: "/soal-busur-2.png",
+      imgAlt: t(`${p}.q2.imgAlt`),
+      choices: [
+        { label: "A.", text: "77 cm²" },
+        { label: "B.", text: "154 cm²" },
+        { label: "C.", text: "231 cm²" },
+        { label: "D.", text: "308 cm²" },
+      ],
+    },
+    {
+      n: 3,
+      question: t(`${p}.q3.question`),
+      note: "(π = 22/7)",
+      choices: [
+        { label: "A.", text: "77 cm²" },
+        { label: "B.", text: "51,33 cm²" },
+        { label: "C.", text: "38,50 cm²" },
+        { label: "D.", text: "14,67 cm²" },
+      ],
+    },
+    {
+      n: 4,
+      question: t(`${p}.q4.question`),
+      img: "/soal-busur-1.png",
+      imgAlt: t(`${p}.q4.imgAlt`),
+      choices: [
+        { label: "A.", text: "40 cm²" },
+        { label: "B.", text: "75 cm²" },
+        { label: "C.", text: "90 cm²" },
+        { label: "D.", text: "105 cm²" },
+      ],
+    },
+    {
+      n: 5,
+      question: t(`${p}.q5.question`),
+      img: "/soal-busur-3.png",
+      imgAlt: t(`${p}.q5.imgAlt`),
+      choices: [
+        { label: "A.", text: "30 cm" },
+        { label: "B.", text: "40 cm" },
+        { label: "C.", text: "45 cm" },
+        { label: "D.", text: "80 cm" },
+      ],
+    },
+    {
+      n: 6,
+      question: t(`${p}.q6.question`),
+      img: "/soal-busur-6.png",
+      imgAlt: t(`${p}.q6.imgAlt`),
+      choices: [
+        { label: "A.", text: "28 cm" },
+        { label: "B.", text: "42 cm" },
+        { label: "C.", text: "56 cm" },
+        { label: "D.", text: "70 cm" },
+      ],
+    },
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -106,9 +108,9 @@ const BusurJuringPage = () => {
             className="font-display text-xl md:text-2xl font-bold text-yellow-300 text-center mb-1"
             style={{ textShadow: "0 0 20px rgba(250,204,21,0.7)" }}
           >
-            PANJANG BUSUR DAN LUAS JURING
+            {t(`${p}.h1`)}
           </h1>
-          <p className="text-white/50 text-xs text-center font-body">Kelas 8 · Lingkaran · {t('practice.breadcrumb')}</p>
+          <p className="text-white/50 text-xs text-center font-body">{t(`${p}.subtitle`)} · {t('practice.breadcrumb')}</p>
           <div className="mt-3 flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 rounded-lg px-4 py-2">
             <span className="text-yellow-400 text-xs font-bold">📋 6 {t('practice.suffixSoal')}</span>
             <span className="text-white/30 text-xs">·</span>

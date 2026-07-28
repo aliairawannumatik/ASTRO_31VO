@@ -5602,6 +5602,33 @@
         "j": "Two semicircles with diameters 26 cm and 14 cm",
         "k": "Circle with radius 10 cm and a shaded segment"
       },
+      "busurJuring": {
+        "h1": "ARC LENGTH AND SECTOR AREA",
+        "subtitle": "Grade 8 · Circles",
+        "q1": {
+          "question": "Look at the circle diagram! If O is the centre of the circle and OP = 21 cm, find the length of minor arc PQ...",
+          "imgAlt": "Circle with a 60° sector, points O and P"
+        },
+        "q2": {
+          "question": "Look at the diagram! If O is the centre of the circle, r = 21 cm and π = 22/7, find the area of the shaded region...",
+          "imgAlt": "Circle with a shaded 40° sector"
+        },
+        "q3": {
+          "question": "The area of a sector with central angle 120° and radius 7 cm is..."
+        },
+        "q4": {
+          "question": "Look at the diagram! If the area of sector ORS = 60 cm², find the area of sector OPQ...",
+          "imgAlt": "Circle with sectors ORS and OPQ, angle POQ = 135°"
+        },
+        "q5": {
+          "question": "Look at the diagram. O is the centre of the circle. If arc QR = 60 cm, find the length of arc PQ...",
+          "imgAlt": "Circle with sector OPQ of 50° and sector OQR of 75°"
+        },
+        "q6": {
+          "question": "Look at the diagram! In a circle with centre O, ∠AOB = 35° and ∠COD = 140°. If arc AB = 14 cm, find the length of arc CD...",
+          "imgAlt": "Circle with points A, B, C, D; angle AOB=35°, COD=140°, arc AB=14cm"
+        }
+      },
       "sudutPusatKeliling": {
         "h1": "CENTRAL ANGLE AND INSCRIBED ANGLE",
         "shared": {
