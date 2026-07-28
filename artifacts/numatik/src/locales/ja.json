@@ -5486,6 +5486,38 @@
           "content": "次の各直線の組が垂直になるようにkの値を求めよ："
         }
       }
+    },
+    "lingkaran": {
+      "title": "円",
+      "enrichmentBadge": "インタラクティブSVG図付き",
+      "featureBoxTitle": "🎯 円の練習機能",
+      "featureBoxBody": "各問題にはカラフルなSVG円図が付属しています：円の各部、弧、扇形、中心角、円周角がインタラクティブに可視化されています。全国学力テスト・模擬試験形式の問題を段階的な難易度で収録。",
+      "subtopics": {
+        "unsurUnsur": {
+          "label": "円の各部名称",
+          "desc": "半径、直径、弧、弦、アポテム、扇形、弓形"
+        },
+        "kelilingLuas": {
+          "label": "円周と円の面積",
+          "desc": "C = 2πr、A = πr²、複合図形、CまたはAからrを求める"
+        },
+        "kaitanBangunDatar": {
+          "label": "円と平面図形のつながり",
+          "desc": "正方形・三角形・台形の内接円と外接円、面積"
+        },
+        "busurJuring": {
+          "label": "弧の長さと扇形の面積",
+          "desc": "弧 = (α/360°)×2πr、扇形 = (α/360°)×πr²、弓形"
+        },
+        "sudutPusatKeliling": {
+          "label": "中心角と円周角",
+          "desc": "∠中心角 = 2×∠円周角、円に内接する四角形、直径の角度 = 90°"
+        },
+        "penerapanKontekstual": {
+          "label": "円の概念を現実問題に応用する",
+          "desc": "車輪、プール、グラウンド、時計、ピザ、衛星、ドローン、公園"
+        }
+      }
     }
   },
   "settings": {

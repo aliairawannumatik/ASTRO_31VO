@@ -5486,6 +5486,38 @@
           "content": "Tentukan nilai k agar setiap pasang garis berikut tegak lurus:"
         }
       }
+    },
+    "lingkaran": {
+      "title": "LINGKARAN",
+      "enrichmentBadge": "Dilengkapi Diagram SVG Interaktif",
+      "featureBoxTitle": "🎯 Fitur Latihan Lingkaran",
+      "featureBoxBody": "Setiap soal dilengkapi diagram SVG lingkaran berwarna-warni: unsur-unsur, busur, juring, sudut pusat, dan sudut keliling divisualisasikan secara interaktif. Format soal UN, ANBK, dan TKA dengan tingkat kesulitan bertahap.",
+      "subtopics": {
+        "unsurUnsur": {
+          "label": "UNSUR-UNSUR LINGKARAN",
+          "desc": "Jari-jari, diameter, busur, tali busur, apotema, juring, tembereng"
+        },
+        "kelilingLuas": {
+          "label": "KELILING DAN LUAS LINGKARAN",
+          "desc": "K = 2πr, L = πr², bangun gabungan, mencari r dari K atau L"
+        },
+        "kaitanBangunDatar": {
+          "label": "KAITAN LINGKARAN DENGAN BANGUN DATAR LAINNYA",
+          "desc": "Lingkaran dalam/luar persegi, segitiga, trapesium, luas daerah"
+        },
+        "busurJuring": {
+          "label": "PANJANG BUSUR DAN LUAS JURING",
+          "desc": "Busur = (α/360°)×2πr, Juring = (α/360°)×πr², tembereng"
+        },
+        "sudutPusatKeliling": {
+          "label": "SUDUT PUSAT DAN SUDUT KELILING",
+          "desc": "∠pusat = 2×∠keliling, segi-4 tali busur, sudut diameter = 90°"
+        },
+        "penerapanKontekstual": {
+          "label": "PENERAPAN KONSEP LINGKARAN PADA PERMASALAHAN KONTEKSTUAL",
+          "desc": "Roda, kolam, lapangan, jam, pizza, satelit, drone, taman"
+        }
+      }
     }
   },
   "settings": {

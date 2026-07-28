@@ -5486,6 +5486,38 @@
           "content": "Find the value of k so that each pair of lines is perpendicular:"
         }
       }
+    },
+    "lingkaran": {
+      "title": "CIRCLE",
+      "enrichmentBadge": "With Interactive SVG Diagrams",
+      "featureBoxTitle": "🎯 Circle Practice Features",
+      "featureBoxBody": "Every problem includes a colorful SVG circle diagram: elements, arc, sector, central angle, and inscribed angle are visualized interactively. Problems in national exam and aptitude test formats with progressive difficulty.",
+      "subtopics": {
+        "unsurUnsur": {
+          "label": "PARTS OF A CIRCLE",
+          "desc": "Radius, diameter, arc, chord, apothem, sector, segment"
+        },
+        "kelilingLuas": {
+          "label": "CIRCUMFERENCE & AREA OF A CIRCLE",
+          "desc": "C = 2πr, A = πr², composite shapes, finding r from C or A"
+        },
+        "kaitanBangunDatar": {
+          "label": "CIRCLES & OTHER PLANE FIGURES",
+          "desc": "Inscribed/circumscribed circles of square, triangle, trapezoid, area"
+        },
+        "busurJuring": {
+          "label": "ARC LENGTH & SECTOR AREA",
+          "desc": "Arc = (α/360°)×2πr, Sector = (α/360°)×πr², segment"
+        },
+        "sudutPusatKeliling": {
+          "label": "CENTRAL ANGLE & INSCRIBED ANGLE",
+          "desc": "∠central = 2×∠inscribed, cyclic quadrilateral, diameter angle = 90°"
+        },
+        "penerapanKontekstual": {
+          "label": "APPLYING CIRCLE CONCEPTS TO REAL-WORLD PROBLEMS",
+          "desc": "Wheels, pools, fields, clocks, pizza, satellites, drones, parks"
+        }
+      }
     }
   },
   "settings": {

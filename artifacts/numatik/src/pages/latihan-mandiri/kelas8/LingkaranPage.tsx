@@ -5,9 +5,11 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { Circle, ChevronRight } from "lucide-react";
 
-const subtopics = [
+const BASE = "practice.lingkaran";
+
+const subtopicsConfig = [
   {
-    label: "UNSUR-UNSUR LINGKARAN",
+    key: "unsurUnsur",
     path: "/latihan-mandiri/kelas-8/lingkaran/unsur-unsur",
     soal: 2,
     gradient: "from-cyan-900/40 to-blue-900/30",
@@ -16,10 +18,9 @@ const subtopics = [
     iconBg: "bg-cyan-500/20",
     iconColor: "text-cyan-400",
     leftBar: "from-cyan-400 to-blue-500",
-    desc: "Jari-jari, diameter, busur, tali busur, apotema, juring, tembereng",
   },
   {
-    label: "KELILING DAN LUAS LINGKARAN",
+    key: "kelilingLuas",
     path: "/latihan-mandiri/kelas-8/lingkaran/keliling-luas",
     soal: 13,
     gradient: "from-emerald-900/40 to-teal-900/30",
@@ -28,10 +29,9 @@ const subtopics = [
     iconBg: "bg-emerald-500/20",
     iconColor: "text-emerald-400",
     leftBar: "from-emerald-400 to-teal-500",
-    desc: "K = 2πr, L = πr², bangun gabungan, mencari r dari K atau L",
   },
   {
-    label: "KAITAN LINGKARAN DENGAN BANGUN DATAR LAINNYA",
+    key: "kaitanBangunDatar",
     path: "/latihan-mandiri/kelas-8/lingkaran/kaitan-bangun-datar",
     soal: 1,
     gradient: "from-orange-900/40 to-amber-900/30",
@@ -40,10 +40,9 @@ const subtopics = [
     iconBg: "bg-orange-500/20",
     iconColor: "text-orange-400",
     leftBar: "from-orange-400 to-amber-500",
-    desc: "Lingkaran dalam/luar persegi, segitiga, trapesium, luas daerah",
   },
   {
-    label: "PANJANG BUSUR DAN LUAS JURING",
+    key: "busurJuring",
     path: "/latihan-mandiri/kelas-8/lingkaran/busur-juring",
     soal: 6,
     gradient: "from-yellow-900/40 to-amber-900/30",
@@ -52,10 +51,9 @@ const subtopics = [
     iconBg: "bg-yellow-500/20",
     iconColor: "text-yellow-400",
     leftBar: "from-yellow-400 to-amber-500",
-    desc: "Busur = (α/360°)×2πr, Juring = (α/360°)×πr², tembereng",
   },
   {
-    label: "SUDUT PUSAT DAN SUDUT KELILING",
+    key: "sudutPusatKeliling",
     path: "/latihan-mandiri/kelas-8/lingkaran/sudut-pusat-keliling",
     soal: 15,
     gradient: "from-violet-900/40 to-purple-900/30",
@@ -64,10 +62,9 @@ const subtopics = [
     iconBg: "bg-violet-500/20",
     iconColor: "text-violet-400",
     leftBar: "from-violet-400 to-purple-500",
-    desc: "∠pusat = 2×∠keliling, segi-4 tali busur, sudut diameter = 90°",
   },
   {
-    label: "PENERAPAN KONSEP LINGKARAN PADA PERMASALAHAN KONTEKSTUAL",
+    key: "penerapanKontekstual",
     path: "/latihan-mandiri/kelas-8/lingkaran/penerapan-kontekstual",
     soal: 12,
     gradient: "from-rose-900/40 to-pink-900/30",
@@ -76,13 +73,18 @@ const subtopics = [
     iconBg: "bg-rose-500/20",
     iconColor: "text-rose-400",
     leftBar: "from-rose-400 to-pink-500",
-    desc: "Roda, kolam, lapangan, jam, pizza, satelit, drone, taman",
   },
 ];
 
 const LingkaranPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const subtopics = subtopicsConfig.map((s) => ({
+    ...s,
+    label: t(`${BASE}.subtopics.${s.key}.label`),
+    desc:  t(`${BASE}.subtopics.${s.key}.desc`),
+  }));
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
@@ -95,12 +97,12 @@ const LingkaranPage = () => {
             <span className="text-3xl">⭕</span>
           </div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-1 text-center">
-            LINGKARAN
+            {t(`${BASE}.title`)}
           </h1>
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · {t('practice.breadcrumb')}</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">76 {t('practice.suffixSoalTotal')} · Dilengkapi Diagram SVG Interaktif</span>
+            <span className="text-white/70 text-xs font-body">49 {t('practice.suffixSoalTotal')} · {t(`${BASE}.enrichmentBadge`)}</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
@@ -108,7 +110,7 @@ const LingkaranPage = () => {
         <div className="flex flex-col gap-4 animate-slide-up">
           {subtopics.map((s, i) => (
             <button
-              key={s.label}
+              key={s.key}
               onClick={() => { playPopSound(); navigate(s.path); }}
               className="group relative rounded-2xl overflow-hidden text-left transition-all duration-300 hover:scale-[1.01] animate-slide-up"
               style={{ animationDelay: `${i * 0.07}s` }}
@@ -138,9 +140,9 @@ const LingkaranPage = () => {
         </div>
 
         <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">🎯 Fitur Latihan Lingkaran</p>
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">{t(`${BASE}.featureBoxTitle`)}</p>
           <p className="text-white/60 text-xs font-body leading-relaxed">
-            Setiap soal dilengkapi diagram SVG lingkaran berwarna-warni: unsur-unsur, busur, juring, sudut pusat, dan sudut keliling divisualisasikan secara interaktif. Format soal UN, ANBK, dan TKA dengan tingkat kesulitan bertahap.
+            {t(`${BASE}.featureBoxBody`)}
           </p>
         </div>
 
